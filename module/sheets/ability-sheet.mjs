@@ -1,47 +1,44 @@
-import { openWikiPage } from "../helpers/wiki.mjs";
+const { api } = foundry.applications
 import { contextMenus } from "./context-menus/ability-context-menus.mjs";
-import { TeriockItemSheet } from './item-sheet.mjs';
+import { TeriockItemSheet } from "./teriock-item-sheet.mjs";
 
-/**
- * Extend the basic ItemSheet with some very simple modifications
- * @extends {TeriockItemSheet}
- */
-export class AbilitySheet extends TeriockItemSheet {
+export class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(TeriockItemSheet) {
+    static DEFAULT_OPTIONS = {
+        classes: ['teriock', 'ability'],
+        actions: {
+            onEditImage: this._onEditImage,
+        },
+        form: {
+            submitOnChange: true,
+        }
+    }
+    static PARTS = {
+        header: {
+            template: 'systems/teriock/templates/parts/header.hbs',
+        },
+        all: {
+            template: 'systems/teriock/templates/ability-template.hbs',
+        },
+    }
+
     /** @override */
     constructor(...args) {
         super(...args);
         this._menuOpen = false;
     }
 
-    /** @override */
-    static get defaultOptions() {
-        return foundry.utils.mergeObject(super.defaultOptions, {
-            classes: ['teriock', 'sheet', 'item'],
-            width: 520,
-            height: 480,
-            tabs: [
-                {
-                    navSelector: '.sheet-tabs',
-                    contentSelector: '.sheet-body',
-                    initial: 'description',
-                },
-            ],
+    /* -------------------------------------------- */
+
+    async _editor(parameter) {
+        return await foundry.applications.ux.TextEditor.enrichHTML(parameter, {
+            relativeTo: this.item,
         });
     }
 
-    /* -------------------------------------------- */
-
     /** @override */
-    async getData() {
-        // Retrieve base data structure.
-        const context = super.getData();
+    async _prepareContext() {
+        const context = {}
         const system = this.item.system
-
-        // Use a safe clone of the item data for further operations.
-        const itemData = this.document.toObject(false);
-
-
-        // Enrich description info for display
 
         // Before Overview
         context.manaCost = await this._editor(system.costs.manaCost);
@@ -74,61 +71,83 @@ export class AbilitySheet extends TeriockItemSheet {
         context.requirements = await this._editor(system.requirements);
 
         // Add the item's data to context.data for easier access, as well as flags.
-        context.system = itemData.system;
-        context.flags = itemData.flags;
+        // context.item = this.item;
+        context.system = this.item.system;
+        context.flags = this.item.flags;
 
         // Adding a pointer to CONFIG.TERIOCK
         context.config = CONFIG.TERIOCK;
+        context.item = this.item;
+
+        context.editable = this.isEditable;
+        context.owner = this.document.isOwner;
+        context.limited = this.document.limited;
+
+        console.log(context);
 
         return context;
     }
 
     /* -------------------------------------------- */
 
+    _connect(cssClass, listener, callback) {
+        const elements = this.element.querySelectorAll(cssClass);
+        elements.forEach((element) => {
+            element.addEventListener(listener, (event) => {
+                event.preventDefault();
+                callback(event);
+            });
+        });
+    }
 
     /** @override */
-    activateListeners(html) {
-        super.activateListeners(html);
+    _onRender(context, options) {
+        super._onRender(context, options);
 
         // Everything below here is only needed if the sheet is editable
         if (!this.isEditable) return;
+
+        const html = $(this.element);
+        console.log(html);
 
         // Attach listeners to HTML elements
         this._activateContextMenus(html);
         this._activateTags(html);
         this._activateMenu(html);
-
-        html.on('click', '.reload-button', async (event) => {
-            event.preventDefault();
-            await this.item._wikiPull();
-        });
-        html.on('contextmenu', '.reload-button', async (event) => {
-            event.preventDefault();
-            console.log(this.item);
-        });
-
-        html.on('click', '.open-button', (event) => {
-            event.preventDefault();
-            console.log('Opening wiki page');
-            openWikiPage('Ability:' + this.item.name);
-        });
-        html.on('click', '.chat-button', (event) => {
-            event.preventDefault();
-            this.item.share();
-        });
     }
 
     /* Helpers */
     /* -------------------------------------------- */
 
+    static async _onEditImage(event, target) {
+        const attr = target.dataset.edit;
+        const current = foundry.utils.getProperty(this.document, attr);
+        const { img } =
+            this.document.constructor.getDefaultArtwork?.(this.document.toObject()) ??
+            {};
+        const fp = new FilePicker({
+            current,
+            type: 'image',
+            redirectToRoot: img ? [img] : [],
+            callback: (path) => {
+                this.document.update({ [attr]: path });
+            },
+            top: this.position.top + 40,
+            left: this.position.left + 10,
+        });
+        return fp.browse();
+    }
+
     _activateContextMenus(html) {
         function _connectContextMenu(cssClass, options, eventName) {
             new foundry.applications.ux.ContextMenu(html[0], cssClass, options, {
                 eventName: eventName,
+                jQuery: false,
+                fixed: true,
             });
         }
         const cm = contextMenus(this.item);
-        console.log(cm);
+        // console.log(cm);
         _connectContextMenu('.delivery-box', cm.delivery, 'click');
         _connectContextMenu('.delivery-box', cm.piercing, 'contextmenu');
         _connectContextMenu('.execution-box', cm.maneuver, 'contextmenu');
@@ -167,50 +186,39 @@ export class AbilitySheet extends TeriockItemSheet {
         _connectTag('.flag-tag-invoked', 'system.costs.invoked');
         _connectTag('.flag-tag-verbal', 'system.costs.verbal');
         _connectTag('.flag-tag-somatic', 'system.costs.somatic');
-        html.on('click', '.element-tag', (event) => {
-            event.preventDefault();
+        this._connect('.element-tag', 'click', (event) => {
             const element = event.currentTarget.getAttribute('value');
             const elements = this.item.system.elements.filter(e => e !== element);
             this.item.update({ 'system.elements': elements });
         });
-        html.on('click', '.power-tag', (event) => {
-            event.preventDefault();
+        this._connect('.power-tag', 'click', (event) => {
             const power = event.currentTarget.getAttribute('value');
             const powers = this.item.system.powerSources.filter(e => e !== power);
             this.item.update({ 'system.powerSources': powers });
         });
-        html.on('click', '.effect-tag', (event) => {
-            event.preventDefault();
+        this._connect('.effect-tag', 'click', (event) => {
             const effect = event.currentTarget.getAttribute('value');
             const effects = this.item.system.effects.filter(e => e !== effect);
             this.item.update({ 'system.effects': effects });
         });
-
-        html.on('click', '.ab-expansion-button', (event) => {
-            event.preventDefault();
+        this._connect('.ab-expansion-button', 'click', (event) => {
             this.item.update({ 'system.expansion': 'detonate' });
         });
-        html.on('click', '.ab-mana-cost-button', (event) => {
-            event.preventDefault();
+        this._connect('.ab-mana-cost-button', 'click', (event) => {
             this.item.update({ 'system.costs.mp': 1 });
         });
-        html.on('click', '.ab-hit-cost-button', (event) => {
-            event.preventDefault();
+        this._connect('.ab-hit-cost-button', 'click', (event) => {
             this.item.update({ 'system.costs.hp': 1 });
         });
-        html.on('click', '.ab-break-cost-button', (event) => {
-            event.preventDefault();
+        this._connect('.ab-break-cost-button', 'click', (event) => {
             this.item.update({ 'system.costs.break': 'shatter' });
         });
-        html.on('click', '.ab-attribute-improvement-button', (event) => {
-            event.preventDefault();
+        this._connect('.ab-attribute-improvement-button', 'click', (event) => {
             this.item.update({ 'system.improvements.attributeImprovement.attribute': 'int' });
         });
-        html.on('click', '.ab-feat-save-improvement-button', (event) => {
-            event.preventDefault();
+        this._connect('.ab-feat-save-improvement-button', 'click', (event) => {
             this.item.update({ 'system.improvements.featSaveImprovement.attribute': 'int' });
         });
-
     }
 
     _activateMenu(html) {
@@ -224,8 +232,9 @@ export class AbilitySheet extends TeriockItemSheet {
                 ability.update(update);
             });
         }
-        const menu = html.find('.ab-menu')[0];
-        const menuToggle = html.find('.ab-menu-toggle')[0];
+
+        const menu = this.element.querySelector('.ab-menu');
+        const menuToggle = this.element.querySelector('.ab-menu-toggle');
         if (menu && this._menuOpen) {
             menu.classList.add('no-transition');
             menu.classList.add('ab-menu-open');
@@ -233,24 +242,15 @@ export class AbilitySheet extends TeriockItemSheet {
             menu.classList.remove('no-transition');
             menuToggle.classList.add('ab-menu-toggle-open');
         }
-        html.on('click', '.ab-menu-toggle', (event) => {
+        this.element.querySelector('.ab-menu-toggle').addEventListener('click', (event) => {
             event.preventDefault();
+            console.log('Menu toggle clicked');
+            console.log(this._menuOpen);
             this._menuOpen = !this._menuOpen;
             if (menu) {
+                console.log('Menu open:', this._menuOpen);
                 menu.classList.toggle('ab-menu-open', this._menuOpen);
                 menuToggle.classList.toggle('ab-menu-toggle-open', this._menuOpen);
-                if (this._menuOpen) {
-                    html.on('click', '.ab-main', (event) => {
-                        event.preventDefault();
-                        this._menuOpen = false;
-                        menu.classList.remove('ab-menu-open');
-                        menuToggle.classList.remove('ab-menu-toggle-open');
-                        html.off('click', '.ab-main');
-
-                    });
-                } else {
-                    html.off('click', '.ab-main');
-                }
             }
         });
 

@@ -1,6 +1,5 @@
 import { fetchWikiPageHTML } from "../helpers/wiki.mjs";
-import { parseAbility } from "./parsers/parse-ability.mjs";
-
+import { parse } from "../documents/parsers/parse.mjs";
 /**
  * Extend the basic Item with some very simple modifications.
  * @extends {Item}
@@ -25,15 +24,16 @@ export class TeriockItem extends Item {
   }
 
   async _wikiPull() {
-    let title = this.name;
-    if (this.type === 'ability') {
-      title = 'Ability:' + this.name;
+    if (['ability', 'equipment'].includes(this.type)) {
+      const title = this.system.wikiNamespace + ':' + this.name;
+      console.log('Fetching wiki page', title);
       const wikiContent = await fetchWikiPageHTML(title);
       if (!wikiContent) {
         return;
       }
-      const parameters = parseAbility(wikiContent);
-      this.update({ 'system': parameters });
+      const changes = parse(this.type, wikiContent);
+      this.update(changes);
+      return;
     }
   }
 
@@ -44,7 +44,7 @@ export class TeriockItem extends Item {
   async _onCreate(data, options, userId) {
     super._onCreate(data, options, userId);
     console.log(this);
-    if (this.type === 'ability') {
+    if (['ability', 'equipment'].includes(this.type)) {
       await this._wikiPull();
     }
   }
@@ -238,7 +238,7 @@ export class TeriockItem extends Item {
         if (systemClone.costs.mp == 'x') {
           wrap(bar4, 'Variable MP');
         } else {
-          wrap(bar4, `${systemClone.costs.mp} MP`);
+          wrap(bar4, `${systemClone.costs.mp}`);
         }
       }
       if (systemClone.costs.hp) {
@@ -248,7 +248,7 @@ export class TeriockItem extends Item {
         } else if (systemClone.costs.hp == 'hack') {
           wrap(bar4, 'Hack');
         } else {
-          wrap(bar4, `${systemClone.costs.hp} HP`);
+          wrap(bar4, `${systemClone.costs.hp}`);
         }
       }
       if (systemClone.costs.break) {

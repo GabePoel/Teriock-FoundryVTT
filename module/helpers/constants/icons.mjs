@@ -72,4 +72,9 @@ export const icons = {
     chat: '<i class="fa-solid fa-comment"></i>',
     edit: '<i class="fa-solid fa-edit"></i>',
     delete: '<i class="fa-solid fa-trash"></i>',
+    weight: '<i class="fa-light fa-weight-hanging"></i>',
+    minStr: '<i class="fa-light fa-dumbbell"></i>',
+    av: '<i class="fa-light fa-helmet-battle"></i>',
+    bv: '<i class="fa-light fa-shield"></i>',
+    sb: '<i class="fa-light fa-hand-fist"></i>',
 }

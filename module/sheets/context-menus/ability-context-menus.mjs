@@ -135,7 +135,7 @@ export function contextMenus(ability) {
                 name: 'Numerical Cost',
                 icon: CONFIG.TERIOCK.icons.numerical,
                 callback: () => ability.update({
-                    'system.costs.mp': 1,
+                    'system.costs.mp': '1 MP',
                     'system.costs.manaCost': null,
                 }),
             },
@@ -161,7 +161,7 @@ export function contextMenus(ability) {
                 name: 'Numerical Cost',
                 icon: CONFIG.TERIOCK.icons.numerical,
                 callback: () => ability.update({
-                    'system.costs.hp': 1,
+                    'system.costs.hp': '1 HP',
                     'system.costs.hitCost': null,
                 }),
             },

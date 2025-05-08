@@ -1,10 +1,8 @@
 import { TeriockActor } from './documents/actor.mjs';
 import { TeriockItem } from './documents/item.mjs';
 import { TeriockActorSheet } from './sheets/actor-sheet.mjs';
-import { TeriockItemSheet } from './sheets/item-sheet.mjs';
-import { AbilitySheet } from './sheets/ability-sheet.mjs';
-import { AbilitySheetV2 } from './sheets/ability-sheet-v2.mjs';
-import { EquipmentItemSheet } from './sheets/equipment-sheet.mjs';
+import { TeriockAbilitySheet } from './sheets/ability-sheet.mjs';
+import { TeriockEquipmentSheet } from './sheets/equipment-sheet.mjs';
 import { preloadHandlebarsTemplates } from './helpers/templates.mjs';
 import { TERIOCK } from './helpers/config.mjs';
 const { Actors, Items } = foundry.documents.collections;
@@ -25,12 +23,15 @@ Hooks.once('init', function () {
     makeDefault: true,
   });
   Items.unregisterSheet('core', ItemSheet);
-  Items.registerSheet('teriock', AbilitySheet, {
-    label: 'Ability V1',
-  });
-  Items.registerSheet('teriock', AbilitySheetV2, {
+  Items.registerSheet('teriock', TeriockAbilitySheet, {
     makeDefault: true,
-    label: 'Ability V2',
+    label: 'Ability',
+    types: ['ability'],
+  });
+  Items.registerSheet('teriock', TeriockEquipmentSheet, {
+    makeDefault: true,
+    label: 'Equipment',
+    types: ['equipment'],
   });
 
 
@@ -80,5 +81,31 @@ Handlebars.registerHelper('exists', function (str) {
   if (typeof str === 'string' && str.trim() === '') {
     return false;
   }
+  if (typeof str === 'string' && str === '0') {
+    return false;
+  }
+  if (typeof str === 'string' && str === '+0') {
+    return false;
+  }
+  if (typeof str === 'number') {
+    return str > 0;
+  }
   return true;
+});
+
+Handlebars.registerHelper('firstDie', function (str) {
+  const validDice = ['d4', 'd6', 'd8', 'd10', 'd12', 'd20'];
+  for (const die of validDice) {
+    if (str.includes(die)) {
+      return 'dice-' + die;
+    }
+  }
+  const validInts = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+  for (const int of validInts) {
+    const full = int + ' Damage'
+    if (str.includes(full)) {
+      return int;
+    }
+  }
+  return 'dice';
 });

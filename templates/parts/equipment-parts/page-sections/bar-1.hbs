@@ -1,0 +1,61 @@
+{{#if
+  (or
+    (exists system.damage)
+    (exists system.shortRange)
+    (exists system.longRange)
+    (exists system.normalRange)
+    (exists system.sb)
+  )
+}}
+  <div class="ab-bar ab-bar-1">
+    {{#if (exists system.damage)}}
+      <div class="ab-box-container">
+        <div class="ab-box">
+          <div class="ab-box-icon">
+            <i class="fa-light fa-{{firstDie system.damage}}"></i>
+          </div>
+          <div class="ab-box-content">
+            <input
+              class="ability-bar-input damage-input"
+              name="system.damage"
+              type="text"
+              value="{{system.damage}}"
+              data-edit="system.damage"
+            />
+            {{!-- {{{system.damage}}} --}}
+          </div>
+        </div>
+      </div>
+    {{/if}}
+    {{#if (exists system.range)}}
+      <div class="ab-box-container">
+        <div class="ab-box">
+          <div class="ab-box-icon">
+            {{{config.icons.range}}}
+          </div>
+          <div class="ab-box-content">
+            <input
+              class="ability-bar-input range-input"
+              name="system.range"
+              type="text"
+              value="{{system.range}}"
+              data-edit="system.range"
+            />
+          </div>
+        </div>
+      </div>
+    {{/if}}
+    {{#if (exists system.sb)}}
+      <div class="ab-box-container">
+        <div class="ab-box">
+          <div class="ab-box-icon">
+            {{{config.icons.sb}}}
+          </div>
+          <div class="ab-box-content">
+            {{{system.sb}}}
+          </div>
+        </div>
+      </div>
+    {{/if}}
+  </div>
+{{/if}}
