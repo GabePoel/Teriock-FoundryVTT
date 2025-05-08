@@ -1,0 +1,57 @@
+<div class="ab-bar ab-bar-2">
+  {{#if
+    (or
+      (eq system.delivery.base "area")
+      (eq system.delivery.base "missile")
+      (eq system.delivery.base "aura")
+      (eq system.delivery.base "cone")
+      (eq system.delivery.base "sight")
+    )
+  }}
+    <div class="ab-box-container">
+      <div class="ab-box ab-input-box range-box">
+        <div class="ab-box-icon">
+          {{{config.icons.range}}}
+        </div>
+        <div class="ab-box-content">
+          <input
+            class="ability-bar-input"
+            name="system.range"
+            type="text"
+            value="{{system.range}}"
+            data-edit="system.range"
+          />
+        </div>
+      </div>
+    </div>
+  {{/if}}
+
+  {{#if (not (eq system.delivery.base "self"))}}
+    <div class="ab-box-container">
+      <div class="ab-box target-box">
+        <div class="ab-box-icon">
+          {{{config.icons.target}}}
+        </div>
+        <div class="ab-box-content">{{#each system.targets as |key index|}}{{#if index}}, {{/if}}{{lookup ../config.abilityOptions.targets key}}{{/each}}
+        </div>
+      </div>
+    </div>
+  {{/if}}
+
+  <div class="ab-box-container">
+    <div class="ab-box ab-input-box duration-box">
+      <div class="ab-box-icon">
+        {{{config.icons.duration}}}
+      </div>
+      <div class="ab-box-content">
+        <input
+          class="ability-bar-input"
+          name="system.duration"
+          type="text"
+          value="{{system.duration}}"
+          data-edit="system.duration"
+        />
+      </div>
+    </div>
+  </div>
+</div>

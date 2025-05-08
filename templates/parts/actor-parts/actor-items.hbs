@@ -1,0 +1,29 @@
+<div class="ac-abilities">
+  {{#each abilities as |item id|}}
+    <div class="ac-ability-bar" data-id="{{id}}">
+      <div class="ac-ability-bar-pre">
+        <div class="ac-ability-bar-icon">
+          <img
+            src="{{item.img}}"
+            title="{{item.name}}"
+          />
+        </div>
+      </div>
+      <div class="ac-ability-bar-name">
+        {{item.name}}
+      </div>
+      <div class="ac-ability-bar-controls">
+        <div class="ac-button ac-button-ability-edit">
+          {{!-- {{{config.icons.edit}}} --}}
+          <i class="fa-solid fa-edit"></i>
+        </div>
+        <div class="ac-button ac-button-ability-delete">
+          {{{config.icons.delete}}}
+        </div>
+        <div class="ac-button ac-button-ability-chat">
+          {{{config.icons.chat}}}
+        </div>
+      </div>
+    </div>
+  {{/each}}
+</div>

@@ -1,0 +1,47 @@
+<div class="ab-tags-container">
+  <div class="ab-tags">
+    {{#if system.basic}}
+      <span class="ab-tag flag-tag flag-tag-basic">Basic</span>
+    {{/if}}
+    {{#if system.sustained}}
+      <span class="ab-tag flag-tag flag-tag-sustained">Sustained</span>
+    {{/if}}
+    {{#if (and system.standard system.skill)}}
+      <span class="ab-tag flag-tag flag-tag-standard">Semblant</span>
+    {{/if}}
+    {{#if (and system.standard system.spell)}}
+      <span class="ab-tag flag-tag flag-tag-standard">Conjured</span>
+    {{/if}}
+    {{#each system.powerSources as |key index|}}<span class='ab-tag power-tag power-tag' value="{{key}}">{{lookup ../config.abilityOptions.powerSources key}}</span>{{/each}}
+    {{#each system.elements as |key index|}}<span class='ab-tag element-tag' value="{{key}}">{{lookup ../config.abilityOptions.elements key}}</span>{{/each}}
+    {{#if system.costs.invoked}}
+      <span class="ab-tag flag-tag flag-tag-invoked">Invoked</span>
+    {{/if}}
+    {{#if system.costs.verbal}}
+      <span class="ab-tag flag-tag flag-tag-verbal">Verbal</span>
+    {{/if}}
+    {{#if system.costs.somatic}}
+      <span class="ab-tag flag-tag flag-tag-somatic">Somatic</span>
+    {{/if}}
+    {{#if system.ritual}}
+      <span class="ab-tag flag-tag flag-tag-ritual">Ritual</span>
+    {{/if}}
+    {{#if system.rotator}}
+      <span class="ab-tag flag-tag flag-tag-rotator">Rotator</span>
+    {{/if}}
+    {{#if system.skill}}
+      <span class="ab-tag flag-tag flag-tag-skill">Skill</span>
+    {{/if}}
+    {{#if system.spell}}
+      <span class="ab-tag flag-tag flag-tag-spell">Spell</span>
+    {{/if}}
+  </div>
+  <div class="ab-icon ab-menu-toggle">
+    <div class="ab-menu-closed-container">
+      {{{config.icons.menuOpen}}}
+    </div>
+    <div class="ab-menu-open-container">
+      {{{config.icons.menuClose}}}
+    </div>
+  </div>
+</div>

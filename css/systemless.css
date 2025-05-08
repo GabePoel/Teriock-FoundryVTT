@@ -1,0 +1,834 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+/* Global styles */
+.window-app {
+  font-family: "Roboto", sans-serif;
+}
+
+.rollable:hover, .rollable:focus {
+  color: #000;
+  text-shadow: 0 0 10px red;
+  cursor: pointer;
+}
+
+.grid,
+.grid-2col {
+  display: grid;
+  grid-column: span 2 / span 2;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 10px 0;
+  padding: 0;
+}
+
+.grid-3col {
+  grid-column: span 3 / span 3;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.grid-4col {
+  grid-column: span 4 / span 4;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.grid-5col {
+  grid-column: span 5 / span 5;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.grid-6col {
+  grid-column: span 6 / span 6;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+}
+
+.grid-7col {
+  grid-column: span 7 / span 7;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+}
+
+.grid-8col {
+  grid-column: span 8 / span 8;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+}
+
+.grid-9col {
+  grid-column: span 9 / span 9;
+  grid-template-columns: repeat(9, minmax(0, 1fr));
+}
+
+.grid-10col {
+  grid-column: span 10 / span 10;
+  grid-template-columns: repeat(10, minmax(0, 1fr));
+}
+
+.grid-11col {
+  grid-column: span 11 / span 11;
+  grid-template-columns: repeat(11, minmax(0, 1fr));
+}
+
+.grid-12col {
+  grid-column: span 12 / span 12;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+}
+
+.grid-start-2 {
+  grid-column-start: 2;
+}
+
+.grid-start-3 {
+  grid-column-start: 3;
+}
+
+.grid-start-4 {
+  grid-column-start: 4;
+}
+
+.grid-start-5 {
+  grid-column-start: 5;
+}
+
+.grid-start-6 {
+  grid-column-start: 6;
+}
+
+.grid-start-7 {
+  grid-column-start: 7;
+}
+
+.grid-start-8 {
+  grid-column-start: 8;
+}
+
+.grid-start-9 {
+  grid-column-start: 9;
+}
+
+.grid-start-10 {
+  grid-column-start: 10;
+}
+
+.grid-start-11 {
+  grid-column-start: 11;
+}
+
+.grid-start-12 {
+  grid-column-start: 12;
+}
+
+.grid-span-2 {
+  grid-column-end: span 2;
+}
+
+.grid-span-3 {
+  grid-column-end: span 3;
+}
+
+.grid-span-4 {
+  grid-column-end: span 4;
+}
+
+.grid-span-5 {
+  grid-column-end: span 5;
+}
+
+.grid-span-6 {
+  grid-column-end: span 6;
+}
+
+.grid-span-7 {
+  grid-column-end: span 7;
+}
+
+.grid-span-8 {
+  grid-column-end: span 8;
+}
+
+.grid-span-9 {
+  grid-column-end: span 9;
+}
+
+.grid-span-10 {
+  grid-column-end: span 10;
+}
+
+.grid-span-11 {
+  grid-column-end: span 11;
+}
+
+.grid-span-12 {
+  grid-column-end: span 12;
+}
+
+.flex-group-center,
+.flex-group-left,
+.flex-group-right {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.flex-group-left {
+  justify-content: flex-start;
+  text-align: left;
+}
+
+.flex-group-right {
+  justify-content: flex-end;
+  text-align: right;
+}
+
+.flexshrink {
+  flex: 0;
+}
+
+.flex-between {
+  justify-content: space-between;
+}
+
+.flexlarge {
+  flex: 2;
+}
+
+.align-left {
+  justify-content: flex-start;
+  text-align: left;
+}
+
+.align-right {
+  justify-content: flex-end;
+  text-align: right;
+}
+
+.align-center {
+  justify-content: center;
+  text-align: center;
+}
+
+/* Styles limited to teriock sheets */
+.teriock .ab-sheet-sidebar {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(4px);
+}
+.teriock .ab-sheet-top {
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
+}
+.teriock .ab-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  position: relative;
+}
+.teriock .ab-header .ab-profile-img {
+  top: 0;
+  left: 0;
+  display: block;
+  height: 4em;
+  width: 4em;
+  padding: 1em;
+  position: relative;
+  flex: 0 0 auto;
+}
+.teriock .ab-header .ab-profile-img img {
+  border: none;
+}
+.teriock .ab-header .ab-profile-img::after {
+  content: "";
+  display: block;
+  top: 0.5em;
+  right: 0;
+  height: calc(100% - 1em);
+  width: 1px;
+  position: absolute;
+  background-color: var(--color-border);
+  opacity: 0.5;
+  transform: translateX(50%);
+}
+.teriock .ab-header .ab-title {
+  padding-inline: 0.5em;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.teriock .ab-header .ab-title input,
+.teriock .ab-header .ab-title .ab-title-text {
+  font-size: clamp(1rem, 4vw, 2rem);
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  border: none;
+  background: none;
+  font-family: "Cinzel", serif;
+  text-align: center;
+  font-weight: lighter;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.teriock .ab-header .ab-title input:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+.teriock .ab-header .ab-title input:active {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.teriock .ab-header .ab-top-buttons-container {
+  height: 4em;
+  width: 4em;
+  flex: 0 0 auto;
+}
+.teriock .ab-header .ab-top-buttons-container .ab-top-buttons {
+  display: flex;
+  flex-direction: row-reverse;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: 0.5em;
+}
+.teriock .ab-bars .ab-bar {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  border-top: 1px solid var(--color-border);
+}
+.teriock .ab-bars .ab-bar .ab-box-container {
+  position: relative;
+  flex: 1;
+}
+.teriock .ab-bars .ab-bar .ab-box-container:not(:last-child)::after {
+  content: "";
+  display: block;
+  top: 0.5em;
+  right: 0;
+  height: calc(100% - 1em);
+  width: 1px;
+  position: absolute;
+  background-color: var(--color-border);
+  opacity: 0.5;
+  transform: translateX(50%);
+}
+.teriock .ab-bars .ab-bar .ab-box-container .ab-box {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  align-items: center;
+  padding: 0.25em;
+  margin: 0.25em;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  height: calc(100% - 0.5em);
+  position: relative;
+}
+.teriock .ab-bars .ab-bar .ab-box-container .ab-box .ab-box-icon {
+  width: 1em;
+  height: 1em;
+  margin-right: 0.25em;
+  position: absolute;
+  display: block;
+  top: calc(50% - 0.5em);
+  left: 0.25em;
+  text-align: center;
+  opacity: 0.5;
+}
+.teriock .ab-bars .ab-bar .ab-box-container .ab-box .ab-box-icon i {
+  font-size: 1em;
+}
+.teriock .ab-bars .ab-bar .ab-box-container .ab-box:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+.teriock .ab-bars .ab-bar .ab-box-container .ab-box:hover .ab-box-icon {
+  opacity: 0.8;
+}
+.teriock .ab-bars .ab-bar .ab-box-container .ab-box:active {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.teriock .ab-bars .ab-bar .ab-box-container .ab-box:active .ab-box-icon {
+  opacity: 1;
+}
+.teriock .ab-bars .ab-bar .ab-box-container .ab-box:focus-within, .teriock .ab-bars .ab-bar .ab-box-container .ab-box.context {
+  box-shadow: 0 0 5px var(--color-shadow-primary);
+}
+.teriock .ab-bars .ab-bar .ab-box-container .ab-box .ab-box-content {
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  width: 100%;
+  padding-inline: 1.5em;
+}
+.teriock .ab-bars .ab-bar input {
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  height: fit-content;
+  box-shadow: none;
+  text-overflow: ellipsis;
+}
+.teriock .ab-menu {
+  max-height: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  transition: max-height 0.2s ease-in-out;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+  flex-wrap: wrap;
+}
+.teriock .ab-menu.no-transition {
+  transition: none;
+}
+.teriock .ab-menu.ab-menu-open {
+  max-height: 1000px;
+}
+.teriock .ab-menu .ab-menu-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 0.5em;
+  margin-bottom: 0.5em;
+}
+.teriock .ab-menu .ab-menu-header .ab-menu-title {
+  flex: 1;
+  text-align: center;
+  font-size: larger;
+  font-weight: bold;
+}
+.teriock .ab-menu .ab-menu-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  padding-top: 0.5em;
+}
+.teriock .ab-menu .ab-menu-content .ab-menu-bar {
+  flex-wrap: wrap;
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+  width: 100%;
+  margin-block: 0.25em;
+  gap: 0.5em;
+}
+.teriock .ab-menu .ab-menu-content .ab-menu-bar select {
+  width: 100%;
+}
+.teriock .ab-menu .ab-menu-content .ab-menu-bar .ab-menu-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.teriock .ab-menu .ab-menu-content .ab-menu-bar .ab-menu-item input {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.teriock .ab-menu .ab-menu-content .ab-menu-bar .ab-menu-item .ab-menu-button {
+  line-height: unset;
+  text-align: center;
+  align-content: center;
+  height: 2em;
+  margin: 0;
+  font-size: unset;
+}
+.teriock .ab-menu .ab-menu-content .ab-menu-bar .ab-multi-select-label {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+.teriock .ab-menu .ab-menu-content .ab-menu-bar .ab-multi-select-label ::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  margin-left: 0.5em;
+  pointer-events: none;
+}
+.teriock .ab-menu .ab-menu-content .ab-menu-bar .ab-multi-select-label.ab-multi-select-power ::after {
+  content: "Power Sources";
+}
+.teriock .ab-menu .ab-menu-content .ab-menu-bar .ab-multi-select-label.ab-multi-select-element ::after {
+  content: "Elements";
+}
+.teriock .ab-menu .ab-menu-content .ab-menu-bar .ab-multi-select-label.ab-multi-select-effects ::after {
+  content: "Effects";
+}
+.teriock .ab-menu .ab-menu-content .ab-menu-bar .ab-multi-select-label multi-select {
+  width: 100%;
+  position: relative;
+}
+.teriock .ab-menu .ab-menu-content .ab-menu-bar .ab-multi-select-label multi-select .tags {
+  display: none;
+}
+.teriock .ab-main {
+  display: flex;
+  flex-direction: column;
+  width: calc(100% - 1em);
+  margin: 0.5em;
+  padding: 0.75em;
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 9px;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+  gap: 1.25em;
+}
+.teriock .ab-main .ab-tags-all {
+  gap: 0.25em;
+  display: grid;
+}
+.teriock .ab-main .ab-tags-all .ab-tags-container {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+.teriock .ab-main .ab-tags-all .ab-tags-container .ab-tags {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+  flex-wrap: wrap;
+  flex: content;
+  gap: 0.25em;
+  justify-content: start;
+  width: 100%;
+}
+.teriock .ab-main .ab-tags-all .ab-tags-container .ab-tags .ab-tag {
+  border-radius: 3px;
+  margin: 0;
+  padding-block: 0.125em;
+  padding-inline: 0.25em;
+  border: 1px solid var(--color-border);
+  background-color: rgba(255, 255, 255, 0.3);
+  font-size: small;
+  height: 1.5em;
+  text-align: center;
+}
+.teriock .ab-main .ab-tags-all .ab-tags-container .ab-tags .ab-tag:hover {
+  text-decoration: line-through;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.teriock .ab-main .ab-tags-all .ab-tags-container .ab-tags .ab-tag.flag-tag-basic {
+  font-style: italic;
+}
+.teriock .ab-main .ab-tags-all .ab-tags-container .ab-menu-toggle {
+  top: 0;
+  right: 0;
+  border: none;
+}
+.teriock .ab-main .ab-tags-all .ab-tags-container .ab-menu-toggle .ab-menu-closed-container {
+  display: flex;
+}
+.teriock .ab-main .ab-tags-all .ab-tags-container .ab-menu-toggle .ab-menu-open-container {
+  display: none;
+}
+.teriock .ab-main .ab-tags-all .ab-tags-container .ab-menu-toggle.ab-menu-toggle-open .ab-menu-closed-container {
+  display: none;
+}
+.teriock .ab-main .ab-tags-all .ab-tags-container .ab-menu-toggle.ab-menu-toggle-open .ab-menu-open-container {
+  display: flex;
+}
+.teriock .ab-main .ab-tags-all .ab-tags-container .ab-menu-toggle:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.teriock .ab-main .ab-tags-all .ab-tags-container .ab-menu-toggle:active {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+.teriock .ab-main .ab-tags-all .ab-tags-container .ab-menu-toggle i {
+  opacity: 0.8;
+}
+.teriock .ab-main .ab-section-container p {
+  margin: 0;
+  padding: 0;
+}
+.teriock .ab-main .ab-section-container .ab-section {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  margin-bottom: 0.25em;
+}
+.teriock .ab-main .ab-section-container .ab-section::before,
+.teriock .ab-main .ab-section-container .ab-section::after {
+  content: "";
+  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+}
+.teriock .ab-main .ab-section-container .ab-section::before {
+  width: 1em;
+}
+.teriock .ab-main .ab-section-container .ab-section::after {
+  flex: 1;
+}
+.teriock .ab-main .ab-section-container .ab-section-title {
+  margin-inline: 0.5em;
+  color: rgba(0, 0, 0, 0.4);
+  text-transform: uppercase;
+  font-size: smaller;
+  text-align: left;
+}
+.teriock .editor-content {
+  padding-block: 0.25em;
+}
+.teriock .ab-icon {
+  display: grid;
+  place-items: center;
+  width: 1.5em;
+  height: 1.5em;
+  border-radius: 6px;
+}
+.teriock .ab-icon i {
+  font-size: 1em;
+  opacity: 0.8;
+}
+.teriock .ab-icon:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.teriock .ab-icon:hover i {
+  opacity: 0.9;
+}
+.teriock .ab-icon:active {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+.teriock .ab-icon:active i {
+  opacity: 1;
+}
+.teriock .ab-improvement-bar {
+  font-style: italic;
+  width: 100%;
+}
+@container (max-width: 349px) {
+  .teriock .ab-header .ab-profile-img {
+    display: none;
+  }
+  .teriock .ab-header .ab-title {
+    padding: 0.25em;
+    height: 2.5em;
+  }
+  .teriock .ab-header .ab-title .ab-title-text,
+  .teriock .ab-header .ab-title input {
+    font-size: 1em;
+    font-weight: bold;
+  }
+  .teriock .ab-header .ab-top-buttons-container {
+    display: none;
+  }
+  .teriock .ab-bars .ab-bar {
+    flex-direction: column;
+  }
+  .teriock .ab-bars .ab-bar .ab-box-container:not(:last-child)::after {
+    height: 1px;
+    top: unset;
+    right: unset;
+    left: 1em;
+    bottom: 0;
+    width: calc(100% - 2em);
+    transform: translateY(50%);
+  }
+}
+@container (max-width: 249px) {
+  .teriock .ab-main .ab-section-container .ab-section-title.ab-section-title-dynamic {
+    width: min-content;
+  }
+}
+.teriock .ability-bar {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  padding: 3px;
+}
+.teriock .ability-bar .ability-bar-label {
+  margin-right: 0.5em;
+  font-weight: bold;
+  flex: 0 0 auto;
+}
+.teriock .ability-bar .ability-bar-label .ability-bar-label-text {
+  display: flex;
+  flex-direction: row;
+  width: max-content;
+}
+.teriock .ability-bar .ability-bar-content {
+  display: flex;
+  flex-direction: row;
+  gap: 0.25rem;
+}
+.teriock .ability-bar .ability-bar-content .ability-bar-select-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.teriock .ability-bar .ability-bar-content .ability-bar-input,
+.teriock .ability-bar .ability-bar-content .ability-bar-select,
+.teriock .ability-bar .ability-bar-content .ability-bar-multi-select {
+  height: unset;
+  width: unset;
+}
+.teriock .ability-bar .ability-bar-content .ability-bar-select {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  padding: 0;
+}
+.teriock .ability-bar .ability-bar-content .ability-bar-select-measure {
+  font-size: var(--font-size-12);
+  padding: 1px 0.25rem;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+}
+.teriock .ability-bar .ability-bar-content .ability-bar-multi-select {
+  flex-direction: row;
+}
+.teriock .ability-bar .ability-bar-content .ability-bar-multi-select select {
+  height: 18px;
+  width: 18px;
+}
+.teriock .ability-bar .ability-bar-content .ability-bar-multi-select .tags {
+  justify-content: flex-start;
+}
+.teriock .ability-bar .ability-bar-content .ability-bar-editable {
+  min-height: 1em;
+}
+.teriock .ability-bar .ability-bar-content .ability-bar-editable .editor {
+  min-height: 1em;
+  padding: 0;
+  margin: 0;
+}
+.teriock .ability-bar .ability-bar-content .ability-bar-editable .editor .editor-content {
+  padding: 0;
+  margin: 0;
+  min-width: 16px;
+  max-width: max-content;
+}
+.teriock .ability-bar p,
+.teriock .ability-bar a {
+  margin: 0;
+  padding: 0;
+}
+.teriock .ability-bar:nth-child(odd) {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+.teriock .editor {
+  overflow: unset;
+}
+.teriock .prosemirror .editor-container {
+  flex: unset;
+  position: unset;
+  margin: 0;
+}
+.teriock .prosemirror .editor-container .editor-content {
+  position: unset;
+  padding-right: 0;
+}
+.teriock .prosemirror menu {
+  position: absolute;
+  bottom: 100%;
+  backdrop-filter: blur(8px);
+}
+.teriock .editor-edit {
+  top: 0;
+  right: 0;
+  font-size: 0.75em;
+}
+.teriock .ac-abilities {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.teriock .ac-abilities .ac-ability-bar {
+  display: flex;
+  flex-direction: row;
+  height: 2em;
+  align-items: center;
+}
+.teriock .ac-abilities .ac-ability-bar .ac-ability-bar-pre {
+  flex: 0 0 auto;
+}
+.teriock .ac-abilities .ac-ability-bar .ac-ability-bar-pre .ac-ability-bar-icon {
+  width: 2em;
+  height: 2em;
+}
+.teriock .ac-abilities .ac-ability-bar .ac-ability-bar-name {
+  flex: 1 1 auto;
+  text-align: left;
+}
+.teriock .ac-abilities .ac-ability-bar .ac-ability-bar-controls {
+  flex: 0 0 auto;
+  display: flex;
+  gap: 0.5rem;
+}
+.teriock .ac-button {
+  width: 1em;
+  height: 1em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.teriock .ac-button i {
+  font-size: 1em;
+  height: 1em;
+  width: 1em;
+}
+.teriock .ter-card {
+  position: relative;
+}
+.teriock .ter-card .ter-card-border {
+  position: relative;
+  border: 1px solid #767270;
+  border-radius: 0.5em;
+  margin: 1em;
+  -webkit-mask-image: linear-gradient(black, black), linear-gradient(to right, transparent 0, transparent 1em, black 1em, black calc(100% - 0.5em), transparent calc(100% - 0.5em), transparent 100%);
+  -webkit-mask-size: 100% 100%, 100% 0.8em;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: top, top;
+  -webkit-mask-composite: destination-out;
+  mask-composite: exclude;
+}
+.teriock .ter-card .ter-card-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  margin-inline: 2em;
+}
+.teriock .ter-card .ter-card-header .ter-card-title {
+  font-size: 1em;
+  text-transform: uppercase;
+  color: #767270;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  text-align: left;
+  margin-inline: 0.5em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.teriock .ter-card .ter-card-header .ter-card-title::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #767270;
+  margin-left: 0.5em;
+}
+.teriock .ter-card .ter-card-content {
+  margin: 1em;
+}
+
+[id^="AbilitySheetV2-Item"] .window-content {
+  padding: 0 !important;
+  display: relative;
+  container-type: inline-size;
+}
+
+/*# sourceMappingURL=teriock.css.map */

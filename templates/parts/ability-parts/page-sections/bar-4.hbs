@@ -1,0 +1,62 @@
+{{#if (or (exists system.costs.mp) (exists system.costs.hp) (exists system.costs.break))}}
+  <div class="ab-bar ab-bar-3">
+    {{#if (exists system.costs.mp)}}
+      <div class="ab-box-container">
+        <div class="ab-box mana-cost-box">
+          <div class="ab-box-icon">
+            {{{config.icons.mp}}}
+          </div>
+          <div class="ab-box-content">
+            {{#if (eq system.costs.mp "x")}}
+              {{lookup config.abilityOptions.manaCost system.costs.mp}}
+            {{else}}
+              <input
+                class="ability-bar-input"
+                name="system.costs.mp"
+                type="number"
+                value="{{system.costs.mp}}"
+                data-edit="system.costs.mp"
+                min="1"
+              />
+            {{/if}}
+          </div>
+        </div>
+      </div>
+    {{/if}}
+    {{#if (exists system.costs.hp)}}
+      <div class="ab-box-container">
+        <div class="ab-box hit-cost-box">
+          <div class="ab-box-icon">
+            {{{config.icons.hp}}}
+          </div>
+          <div class="ab-box-content">
+            {{#if (or (eq system.costs.hp "x") (eq system.costs.hp "hack"))}}
+              {{lookup config.abilityOptions.hitCost system.costs.hp}}
+            {{else}}
+              <input
+                class="ability-bar-input"
+                name="system.costs.hp"
+                type="number"
+                value="{{system.costs.hp}}"
+                data-edit="system.costs.hp"
+                min="1"
+              />
+            {{/if}}
+          </div>
+        </div>
+      </div>
+    {{/if}}
+    {{#if (exists system.costs.break)}}
+      <div class="ab-box-container">
+        <div class="ab-box break-cost-box">
+          <div class="ab-box-icon">
+            {{{config.icons.break}}}
+          </div>
+          <div class="ab-box-content">
+            {{lookup config.abilityOptions.breakCost system.costs.break}}
+          </div>
+        </div>
+      </div>
+    {{/if}}
+  </div>
+{{/if}}

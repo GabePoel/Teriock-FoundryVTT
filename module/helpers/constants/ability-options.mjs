@@ -1,0 +1,187 @@
+export const abilityOptions = {
+    maneuver: {
+        active: "Active",
+        reactive: "Reactive",
+        passive: "Passive",
+        slow: "Slow"
+    },
+    interaction: {
+        attack: "Attack",
+        block: "Block",
+        feat: "Feat",
+        manifest: "Manifest"
+    },
+    attribute: {
+        int: "INT",
+        mov: "MOV",
+        per: "PER",
+        snk: "SNK",
+        str: "STR"
+    },
+    featSaveAttribute: {
+        int: "INT",
+        mov: "MOV",
+        per: "PER",
+        snk: "SNK",
+        str: "STR",
+        unp: "UNP",
+    },
+    executionTime: {
+        active: {
+            a0: "Free Action",
+            a1: "Single Action",
+            a2: "Double Action",
+            a3: "Triple Action"
+        },
+        reactive: {
+            r0: "Free Reaction",
+            r1: "Reaction"
+        },
+        passive: {
+            passive: "Passive"
+        },
+        slow: {
+            longRest: "Long rest",
+            shortRest: "Short rest",
+            custom: "Custom"
+        },
+    },
+    effects: {
+        control: "Control",
+        damaging: "Damaging",
+        displacement: "Displacement",
+        duelMod: "Duel modifying",
+        healing: "Healing",
+        immunity: "Immunity",
+        killing: "Killing",
+        knockout: "Knockout",
+        longRange: "Long range",
+        loud: "Loud",
+        mental: "Mental",
+        movement: "Movement",
+        poison: "Poison",
+        reanimation: "Reanimation",
+        regeneration: "Regeneration",
+        resistance: "Resistance",
+        revitalization: "Revitalization",
+        revival: "Revival",
+        sensory: "Sensory",
+        stealing: "Stealing",
+        summoning: "Summoning",
+        temporal: "Temporal",
+        transformation: "Transformation",
+        truth: "Truth detecting",
+    },
+    piercing: {
+        normal: '',
+        av0: 'AV0',
+        ub: 'UB',
+    },
+    targets: {
+        ability: 'Ability',
+        area: 'Area',
+        arm: 'Arm',
+        armor: 'Armor',
+        attack: 'Attack',
+        creature: 'Creature',
+        item: 'Item',
+        leg: 'Leg',
+        other: 'Other',
+        self: 'Self',
+        ship: 'Ship',
+        skill: 'Skill',
+        spell: 'Spell',
+        vitals: 'Vitals',
+        weapon: 'Weapon',
+    },
+    targetParent: {
+        ability: 'Ability',
+        item: 'Item'
+    },
+    delivery: {
+        armor: 'Armor',
+        aura: 'Aura',
+        bite: 'Bite',
+        cone: 'Cone',
+        hand: 'Hand',
+        item: 'Item',
+        missile: 'Missile',
+        self: 'Self',
+        sight: 'Sight',
+        shield: 'Shield',
+        weapon: 'Weapon',
+    },
+    deliveryPackage: {
+        ball: 'Ball',
+        ray: 'Ray',
+        ritual: 'Ritual',
+        strike: 'Strike',
+        touch: 'Touch'
+    },
+    deliveryParent: {
+        item: 'Item'
+    },
+    class: {
+        flameMage: 'Flame Mage',
+        lifeMage: 'Life Mage',
+        natureMage: 'Nature Mage',
+        necromancer: 'Necromancer',
+        stormMage: 'Storm Mage',
+        archer: 'Archer',
+        assassin: 'Assassin',
+        corsair: 'Corsair',
+        ranger: 'Ranger',
+        thief: 'Thief',
+        berserker: 'Berserker',
+        duelist: 'Duelist',
+        knight: 'Knight',
+        paladin: 'Paladin',
+        veteran: 'Veteran'
+    },
+    elements: {
+        life: 'Life',
+        storm: 'Storm',
+        necromancy: 'Necromancy',
+        flame: 'Flame',
+        nature: 'Nature'
+    },
+    powerSources: {
+        alchemical: "Alchemical",
+        divine: "Divine",
+        financial: "Financial",
+        magical: "Magical",
+        martial: "Martial",
+        primal: "Primal",
+        psionic: "Psionic",
+        spiritual: "Spiritual",
+        technological: "Technological",
+        unknown: "Unknown",
+    },
+    expansion: {
+        cascade: "Cascade",
+        detonate: "Detonate",
+        fork: "Fork",
+        ripple: "Ripple",
+    },
+    manaCost: {
+        x: "Variable",
+    },
+    hitCost: {
+        x: "Variable",
+        hack: "Hack",
+    },
+    breakCost: {
+        shatter: "Shatter",
+        destroy: "Destroy",
+    },
+    featSaveImprovementAmount: {
+        proficiency: "Proficiency",
+        fluency: "Fluency",
+    },
+    costs: {
+        verbal: "Verbal",
+        somatic: "Somatic",
+        material: "Material",
+        invoked: "Invoked",
+    }
+}

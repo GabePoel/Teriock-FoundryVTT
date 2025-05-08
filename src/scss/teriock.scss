@@ -1,0 +1,47 @@
+// Add custom fonts by visiting and search https://fonts.google.com
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+
+// Import utilities.
+@import "utils/typography";
+@import "utils/colors";
+@import "utils/mixins";
+@import "utils/variables";
+
+/* Global styles */
+@import "global/window";
+@import "global/grid";
+@import "global/flex";
+
+/* Styles limited to teriock sheets */
+.teriock {
+  @import "components/ability";
+  @import "components/actor";
+  @import "components/common";
+}
+
+[id^="AbilitySheetV2-Item"] {
+  .window-content {
+    padding: 0 !important;
+    display: relative;
+    container-type: inline-size;
+  }
+}
+
+.prosemirror {
+  min-height: unset;
+  display: block;
+}
+
+.prosemirror.inactive .editor-content {
+  display: contents;
+}
+.prosemirror.active .editor-content {
+  display: block;
+}
+
+.ab-section-container:not(:hover) .prosemirror button.toggle, .ab-section-container:not(:hover) prose-mirror button.toggle {
+  display: none;
+}
+.prosemirror button.toggle, prose-mirror button.toggle {
+  font-size: xx-small;
+}

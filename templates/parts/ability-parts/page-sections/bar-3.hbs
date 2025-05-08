@@ -1,0 +1,38 @@
+{{#if system.expansion}}
+  <div class="ab-bar ab-bar-4">
+    <div class="ab-box-container">
+      <div class="ab-box expansion-box expansion-box-{{system.expansion}}">
+        <div class="ab-box-icon">
+          {{{config.icons.expansion}}}
+        </div>
+        <div class="ab-box-content">
+          {{#if
+            (or (eq system.expansion "detonate") (eq system.expansion "ripple"))
+          }}
+            {{lookup
+              config.abilityOptions.featSaveAttribute
+              system.expansionSaveAttribute
+            }}
+          {{/if}}
+          {{lookup config.abilityOptions.expansion system.expansion}}
+        </div>
+      </div>
+    </div>
+    <div class="ab-box-container">
+      <div class="ab-box ab-input-box expansion-range-box">
+        <div class="ab-box-icon">
+          {{{config.icons.expansionRange}}}
+        </div>
+        <div class="ab-box-content">
+          <input
+            class="ability-bar-input"
+            name="system.expansionRange"
+            type="text"
+            value="{{system.expansionRange}}"
+            data-edit="system.expansionRange"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+{{/if}}

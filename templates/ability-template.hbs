@@ -1,0 +1,46 @@
+<div class="{{cssClass}}" autocomplete="off">
+  {{!-- <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&display=swap" rel="stylesheet"> --}}
+
+  <div class="ab-sheet-top">
+    {{> "systems/teriock/templates/parts/ability-parts/page-sections/header.hbs"}}
+    <div class="ab-bars">
+      {{> "systems/teriock/templates/parts/ability-parts/page-sections/bar-1.hbs"}}
+      {{> "systems/teriock/templates/parts/ability-parts/page-sections/bar-2.hbs"}}
+      {{> "systems/teriock/templates/parts/ability-parts/page-sections/bar-3.hbs"}}
+      {{> "systems/teriock/templates/parts/ability-parts/page-sections/bar-4.hbs"}}
+    </div>
+  </div>
+  {{> "systems/teriock/templates/parts/ability-parts/page-sections/menu.hbs"}}
+  <div class="ab-main">
+    <div class="ab-tags-all">
+      {{> "systems/teriock/templates/parts/ability-parts/page-sections/tags-1.hbs"}}
+      {{> "systems/teriock/templates/parts/ability-parts/page-sections/tags-2.hbs"}}
+    </div>
+    {{> "systems/teriock/templates/parts/ability-parts/main-entries/costs.hbs"}}
+    {{#if (exists system.requirements)}}
+      {{> "systems/teriock/templates/parts/ability-parts/main-entries/requirements.hbs"}}
+    {{/if}}
+    {{#if (exists system.trigger)}}
+      {{> "systems/teriock/templates/parts/ability-parts/main-entries/trigger.hbs"}}
+    {{/if}}
+    {{> "systems/teriock/templates/parts/ability-parts/main-entries/overview.hbs"}}
+    {{#if (eq system.interaction "attack")}}
+      {{> "systems/teriock/templates/parts/ability-parts/main-entries/attack.hbs"}}
+    {{/if}}
+    {{#if (eq system.interaction "feat")}}
+      {{> "systems/teriock/templates/parts/ability-parts/main-entries/feat.hbs"}}
+    {{/if}}
+    {{#if (eq system.interaction "block")}}
+      {{> "systems/teriock/templates/parts/ability-parts/main-entries/block.hbs"}}
+    {{/if}}
+    {{#if (exists system.heightened)}}
+      {{> "systems/teriock/templates/parts/ability-parts/main-entries/heightened.hbs"}}
+    {{/if}}
+    {{#if (exists system.endCondition)}}
+      {{> "systems/teriock/templates/parts/ability-parts/main-entries/end-condition.hbs"}}
+    {{/if}}
+    {{> "systems/teriock/templates/parts/ability-parts/page-sections/improvements.hbs"}}
+  </div>
+</div>
