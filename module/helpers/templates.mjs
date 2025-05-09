@@ -32,6 +32,7 @@ export const preloadHandlebarsTemplates = async function () {
     'systems/teriock/templates/parts/character-parts/character-equipment.hbs',
     'systems/teriock/templates/parts/character-parts/character-fluencies.hbs',
     'systems/teriock/templates/parts/character-parts/character-ranks.hbs',
+    'systems/teriock/templates/parts/character-parts/character-sidebar.hbs',
     'systems/teriock/templates/parts/equipment-parts/main-entries/special-rules.hbs',
     'systems/teriock/templates/parts/equipment-parts/page-sections/bar-1.hbs',
     'systems/teriock/templates/parts/equipment-parts/page-sections/bar-2.hbs',

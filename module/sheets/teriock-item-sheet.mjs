@@ -33,6 +33,8 @@ export class TeriockItemSheet extends sheets.ItemSheet {
             limited: this.document.limited,
             owner: this.document.isOwner,
             system: this.item.system,
+            name: this.item.name,
+            img: this.item.img,
         };
     }
 

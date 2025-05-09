@@ -124,3 +124,56 @@ Handlebars.registerHelper('firstDie', function (str) {
   }
   return 'dice';
 });
+
+Handlebars.registerHelper('barLeft', function (value, max, temp = 0) {
+  if (value === undefined || max === undefined) {
+    return 0;
+  }
+  if (value < 0) {
+    value = 0;
+  }
+  if (max < 0) {
+    max = 0;
+  }
+  if (temp < 0) {
+    temp = 0;
+  }
+  const percentLeft = Math.floor((value / (max + temp)) * 100);
+  return percentLeft;
+});
+
+Handlebars.registerHelper('barTemp', function (value, max, temp = 0) {
+  if (value === undefined || max === undefined) {
+    return 0;
+  }
+  if (value < 0) {
+    value = 0;
+  }
+  if (max < 0) {
+    max = 0;
+  }
+  if (temp < 0) {
+    temp = 0;
+  }
+  const percentTemp = Math.ceil((temp / (max + temp)) * 100);
+  return percentTemp;
+});
+
+Handlebars.registerHelper('barLost', function (value, max, temp = 0) {
+  console.log('barLost', value, max, temp);
+  if (value === undefined || max === undefined) {
+    return 0;
+  }
+  if (value < 0) {
+    value = 0;
+  }
+  if (max < 0) {
+    max = 0;
+  }
+  if (temp < 0) {
+    temp = 0;
+  }
+  const percentLeft = Math.floor((value / (max + temp)) * 100);
+  const percentTemp = Math.ceil((temp / (max + temp)) * 100);
+  return 100 - percentLeft - percentTemp;
+});

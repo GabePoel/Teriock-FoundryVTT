@@ -3,7 +3,7 @@ import { openWikiPage } from "../helpers/wiki.mjs";
 
 export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(sheets.ActorSheet) {
     static DEFAULT_OPTIONS = {
-        classes: ['teriock', 'character'],
+        classes: ['teriock', 'character', 'ability'],
         actions: {
             onEditImage: this._onEditImage,
         },
@@ -12,6 +12,9 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(sheets
         }
     }
     static PARTS = {
+        header: {
+            template: 'systems/teriock/templates/parts/header.hbs',
+        },
         tabs: {
             template: 'templates/generic/tab-navigation.hbs',
         },
@@ -34,6 +37,8 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(sheets
             equipment: allItems.equipment,
             fluencies: allItems.fluency,
             ranks: allItems.rank,
+            name: this.actor.name,
+            img: this.actor.img,
         };
     }
 }
