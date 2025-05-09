@@ -1,4 +1,4 @@
-const { HandlebarsApplicationMixin } = foundry.applications.api;
+const { HandlebarsApplicationMixin, DialogV2 } = foundry.applications.api;
 import { TeriockItemSheet } from './teriock-item-sheet.mjs';
 import { rankContextMenu, classContextMenu, archetypeContextMenu } from './context-menus/rank-context-menus.mjs';
 
@@ -40,6 +40,32 @@ export class TeriockRankSheet extends HandlebarsApplicationMixin(TeriockItemShee
         this._connectContextMenu('.class-box', classContextMenuOptions, 'click');
         const archetypeContextMenuOptions = archetypeContextMenu(this.item);
         this._connectContextMenu('.archetype-box', archetypeContextMenuOptions, 'click');
+        this.element.querySelector('.hit-die-box').addEventListener('click', async (event) => {
+            const proceed = await DialogV2.confirm({
+                content: 'Are you sure you want to reroll how much HP you gain from this rank?',
+                rejectClose: false,
+                modal: true,
+            });
+            if (proceed) {
+                const hitDie = this.item.system.hitDie;
+                const maxRoll = parseInt(hitDie.slice(1), 10);
+                const newHp = Math.floor(Math.random() * maxRoll) + 1;
+                this.item.update({ 'system.hp': newHp });
+            }
+        });
+        this.element.querySelector('.mana-die-box').addEventListener('click', async (event) => {
+            const proceed = await DialogV2.confirm({
+                content: 'Are you sure you want to reroll how much mana you gain from this rank?',
+                rejectClose: false,
+                modal: true,
+            });
+            if (proceed) {
+                const manaDie = this.item.system.manaDie;
+                const maxRoll = parseInt(manaDie.slice(1), 10);
+                const newMana = Math.floor(Math.random() * maxRoll) + 1;
+                this.item.update({ 'system.mana': newMana });
+            }
+        });
     }
 
     static async _viewDoc(event, target) {

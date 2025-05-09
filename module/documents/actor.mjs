@@ -41,10 +41,19 @@ export class TeriockActor extends Actor {
    * Prepare Character type specific data
    */
   _prepareActorData(actorData) {
-    if (actorData.type !== 'actor') return;
-
-    // Make modifications to data here. For example:
-    const systemData = actorData.system;
+    let hpMax = 0;
+    let mpMax = 0;
+    const allItems = this.itemTypes;
+    for (const rank of allItems.rank) {
+      if (rank.system.hp) {
+        hpMax += rank.system.hp;
+      }
+      if (rank.system.mp) {
+        mpMax += rank.system.mp;
+      }
+    }
+    this.system.hpMax = hpMax;
+    this.system.mpMax = mpMax;
   }
 
 

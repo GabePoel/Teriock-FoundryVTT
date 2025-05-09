@@ -39,6 +39,8 @@ export const preloadHandlebarsTemplates = async function () {
     'systems/teriock/templates/parts/equipment-parts/page-sections/tags-2.hbs',
     'systems/teriock/templates/parts/header.hbs',
     'systems/teriock/templates/parts/rank-parts/rank-abilities.hbs',
+    'systems/teriock/templates/parts/rank-parts/rank-bar-class.hbs',
+    'systems/teriock/templates/parts/rank-parts/rank-bar-stats.hbs',
     'systems/teriock/templates/rank-template.hbs',
     'systems/teriock/templates/test-template.hbs'
   ]);

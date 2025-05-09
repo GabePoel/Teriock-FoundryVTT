@@ -1,6 +1,7 @@
 import { TeriockActor } from './documents/actor.mjs';
 import { TeriockItem } from './documents/item.mjs';
-import { TeriockActorSheet } from './sheets/actor-sheet.mjs';
+// import { TeriockActorSheet } from './sheets/actor-sheet.mjs';
+import { TeriockCharacterSheet } from './sheets/character-sheet.mjs';
 import { TeriockAbilitySheet } from './sheets/ability-sheet.mjs';
 import { TeriockEquipmentSheet } from './sheets/equipment-sheet.mjs';
 import { TeriockRankSheet } from './sheets/rank-sheet.mjs';
@@ -21,8 +22,10 @@ Hooks.once('init', function () {
   CONFIG.Item.documentClass = TeriockItem;
 
   Actors.unregisterSheet('core', ActorSheet);
-  Actors.registerSheet('teriock', TeriockActorSheet, {
+  Actors.registerSheet('teriock', TeriockCharacterSheet, {
     makeDefault: true,
+    label: 'Character',
+    types: ['character'],
   });
   Items.unregisterSheet('core', ItemSheet);
   Items.registerSheet('teriock', TeriockAbilitySheet, {

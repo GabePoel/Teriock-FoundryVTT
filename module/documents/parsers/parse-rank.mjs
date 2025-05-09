@@ -308,13 +308,19 @@ export async function parseRank(rawHTML, item) {
     }
     let hitDie = 'd10';
     let manaDie = 'd10';
+    let hp = 6;
+    let mp = 6;
     if (archetype == 'mage') {
         hitDie = 'd8';
         manaDie = 'd12';
+        hp = 5;
+        mp = 7;
     }
     if (archetype == 'warrior') {
         hitDie = 'd12';
         manaDie = 'd8';
+        hp = 7;
+        mp = 5;
     }
     const parameters = {
         possibleAbilities: possibleAbilities,
@@ -323,6 +329,8 @@ export async function parseRank(rawHTML, item) {
         hitDie: hitDie,
         manaDie: manaDie,
         gainedAbilities: [],
+        hp: hp,
+        mp: mp,
     }
     if (getText('.class-flaws')) {
         parameters.flaws = getHTML('.class-flaws');

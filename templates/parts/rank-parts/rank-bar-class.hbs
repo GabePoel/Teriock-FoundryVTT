@@ -1,0 +1,52 @@
+<div class="ab-bar ab-bar-1">
+  <div class="ab-box-container">
+    <div class="ab-box archetype-box">
+      <div class="ab-box-icon">
+        <i
+          class="fa-light fa-{{lookup
+              (lookup config.rankOptions system.archetype)
+              'icon'
+            }}"
+        ></i>
+      </div>
+      <div class="ab-box-content">
+        {{lookup (lookup config.rankOptions system.archetype) "name"}}
+      </div>
+    </div>
+  </div>
+  <div class="ab-box-container">
+    <div class="ab-box class-box">
+      <div class="ab-box-icon">
+        <i
+          class="fa-light fa-{{lookup
+              (lookup
+                (lookup (lookup config.rankOptions system.archetype) 'classes')
+                system.className
+              )
+              'icon'
+            }}"
+        ></i>
+      </div>
+      <div class="ab-box-content">
+        {{lookup
+          (lookup
+            (lookup (lookup config.rankOptions system.archetype) "classes")
+            system.className
+          )
+          "name"
+        }}
+      </div>
+    </div>
+  </div>
+  <div class="ab-box-container">
+    <div class="ab-box rank-box">
+      <div class="ab-box-icon">
+        <i class="fa-light fa-{{system.classRank}}"></i>
+      </div>
+      <div class="ab-box-content">
+        Rank
+        {{system.classRank}}
+      </div>
+    </div>
+  </div>
+</div>
