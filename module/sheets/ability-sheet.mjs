@@ -138,34 +138,27 @@ export class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(TeriockI
         return fp.browse();
     }
 
-    _activateContextMenus(html) {
-        function _connectContextMenu(cssClass, options, eventName) {
-            new foundry.applications.ux.ContextMenu(html[0], cssClass, options, {
-                eventName: eventName,
-                jQuery: false,
-                fixed: true,
-            });
-        }
+    _activateContextMenus() {
         const cm = contextMenus(this.item);
         // console.log(cm);
-        _connectContextMenu('.delivery-box', cm.delivery, 'click');
-        _connectContextMenu('.delivery-box', cm.piercing, 'contextmenu');
-        _connectContextMenu('.execution-box', cm.maneuver, 'contextmenu');
-        _connectContextMenu('.execution-box[maneuver="Active"]', cm.active, 'click');
-        _connectContextMenu('.execution-box[maneuver="Reactive"]', cm.reactive, 'click');
-        _connectContextMenu('.interaction-box', cm.interaction, 'click');
-        _connectContextMenu('.interaction-box-feat', cm.featSaveAttribute, 'contextmenu');
-        _connectContextMenu('.target-box', cm.targets, 'click');
-        _connectContextMenu('.mana-cost-box', cm.manaCost, 'contextmenu');
-        _connectContextMenu('.hit-cost-box', cm.hitCost, 'contextmenu');
-        _connectContextMenu('.break-cost-box', cm.breakCost, 'contextmenu');
-        _connectContextMenu('.expansion-box', cm.expansion, 'click');
-        _connectContextMenu('.expansion-box-detonate', cm.expansionSaveAttribute, 'contextmenu');
-        _connectContextMenu('.expansion-box-ripple', cm.expansionSaveAttribute, 'contextmenu');
-        _connectContextMenu('.ab-improvement-attribute', cm.attributeImprovement, 'click');
-        _connectContextMenu('.ab-improvement-attribute', cm.attributeImprovementMinVal, 'contextmenu');
-        _connectContextMenu('.ab-improvement-feat-save', cm.featSaveImprovement, 'click');
-        _connectContextMenu('.ab-improvement-feat-save', cm.featSaveImprovementAmount, 'contextmenu');
+        this._connectContextMenu('.delivery-box', cm.delivery, 'click');
+        this._connectContextMenu('.delivery-box', cm.piercing, 'contextmenu');
+        this._connectContextMenu('.execution-box', cm.maneuver, 'contextmenu');
+        this._connectContextMenu('.execution-box[maneuver="Active"]', cm.active, 'click');
+        this._connectContextMenu('.execution-box[maneuver="Reactive"]', cm.reactive, 'click');
+        this._connectContextMenu('.interaction-box', cm.interaction, 'click');
+        this._connectContextMenu('.interaction-box-feat', cm.featSaveAttribute, 'contextmenu');
+        this._connectContextMenu('.target-box', cm.targets, 'click');
+        this._connectContextMenu('.mana-cost-box', cm.manaCost, 'contextmenu');
+        this._connectContextMenu('.hit-cost-box', cm.hitCost, 'contextmenu');
+        this._connectContextMenu('.break-cost-box', cm.breakCost, 'contextmenu');
+        this._connectContextMenu('.expansion-box', cm.expansion, 'click');
+        this._connectContextMenu('.expansion-box-detonate', cm.expansionSaveAttribute, 'contextmenu');
+        this._connectContextMenu('.expansion-box-ripple', cm.expansionSaveAttribute, 'contextmenu');
+        this._connectContextMenu('.ab-improvement-attribute', cm.attributeImprovement, 'click');
+        this._connectContextMenu('.ab-improvement-attribute', cm.attributeImprovementMinVal, 'contextmenu');
+        this._connectContextMenu('.ab-improvement-feat-save', cm.featSaveImprovement, 'click');
+        this._connectContextMenu('.ab-improvement-feat-save', cm.featSaveImprovementAmount, 'contextmenu');
     }
 
     _activateTags(html) {

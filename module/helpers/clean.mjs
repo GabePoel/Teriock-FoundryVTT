@@ -109,7 +109,7 @@ export function cleanStr(value) {
 }
 
 export function cleanDamage(value) {
-    const synonyms = ['damage', 'dam', 'dmg']
+    const synonyms = ['dmg']
     synonyms.forEach(synonym => {
         const regex = new RegExp(synonym, 'gi');
         value = value.replace(regex, 'damage');

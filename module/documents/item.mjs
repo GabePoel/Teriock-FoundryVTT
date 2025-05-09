@@ -24,14 +24,19 @@ export class TeriockItem extends Item {
   }
 
   async _wikiPull() {
-    if (['ability', 'equipment'].includes(this.type)) {
-      const title = this.system.wikiNamespace + ':' + this.name;
-      console.log('Fetching wiki page', title);
-      const wikiContent = await fetchWikiPageHTML(title);
+    if (['ability', 'equipment', 'rank'].includes(this.type)) {
+      let pageTitle = this.system.wikiNamespace + ':'
+      if (this.type === 'rank') {
+        pageTitle = pageTitle + CONFIG.TERIOCK.rankOptions[this.system.archetype].classes[this.system.className].name;
+      } else {
+        pageTitle = pageTitle + this.name;
+      }
+      console.log('Fetching wiki page', pageTitle);
+      const wikiContent = await fetchWikiPageHTML(pageTitle);
       if (!wikiContent) {
         return;
       }
-      const changes = parse(this.type, wikiContent);
+      const changes = await parse(this, wikiContent);
       this.update(changes);
       return;
     }
@@ -41,13 +46,17 @@ export class TeriockItem extends Item {
    * Override the default update method to include additional logic.
    * @override
    */
-  async _onCreate(data, options, userId) {
-    super._onCreate(data, options, userId);
-    console.log(this);
-    if (['ability', 'equipment'].includes(this.type)) {
-      await this._wikiPull();
-    }
-  }
+  // async _onCreate(data, options, userId) {
+  //   super._onCreate(data, options, userId);
+  //   console.log(this);
+  //   const img = 'systems/teriock/assets/' + this.type + '.svg';
+  //   this.update({
+  //     img: img,
+  //   });
+  //   if (['ability', 'equipment'].includes(this.type)) {
+  //     await this._wikiPull();
+  //   }
+  // }
 
   _messageLabel(text, icon = null, classes = []) {
     const label = document.createElement('div');

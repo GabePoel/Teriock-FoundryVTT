@@ -8,6 +8,7 @@ export const preloadHandlebarsTemplates = async function () {
     'systems/teriock/templates/actor-template.hbs',
     'systems/teriock/templates/character-template.hbs',
     'systems/teriock/templates/equipment-template.hbs',
+    'systems/teriock/templates/fluency-template.hbs',
     'systems/teriock/templates/item-template.hbs',
     'systems/teriock/templates/parts/ability-parts/main-entries/attack.hbs',
     'systems/teriock/templates/parts/ability-parts/main-entries/block.hbs',
@@ -27,12 +28,18 @@ export const preloadHandlebarsTemplates = async function () {
     'systems/teriock/templates/parts/ability-parts/page-sections/tags-1.hbs',
     'systems/teriock/templates/parts/ability-parts/page-sections/tags-2.hbs',
     'systems/teriock/templates/parts/actor-parts/actor-items.hbs',
+    'systems/teriock/templates/parts/character-parts/character-abilities.hbs',
+    'systems/teriock/templates/parts/character-parts/character-equipment.hbs',
+    'systems/teriock/templates/parts/character-parts/character-fluencies.hbs',
+    'systems/teriock/templates/parts/character-parts/character-ranks.hbs',
     'systems/teriock/templates/parts/equipment-parts/main-entries/special-rules.hbs',
     'systems/teriock/templates/parts/equipment-parts/page-sections/bar-1.hbs',
     'systems/teriock/templates/parts/equipment-parts/page-sections/bar-2.hbs',
     'systems/teriock/templates/parts/equipment-parts/page-sections/tags-1.hbs',
     'systems/teriock/templates/parts/equipment-parts/page-sections/tags-2.hbs',
     'systems/teriock/templates/parts/header.hbs',
+    'systems/teriock/templates/parts/rank-parts/rank-abilities.hbs',
+    'systems/teriock/templates/rank-template.hbs',
     'systems/teriock/templates/test-template.hbs'
   ]);
 };

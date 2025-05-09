@@ -1,4 +1,3 @@
-
 export function contextMenus(ability) {
     function fetch(keyChain) {
         let keys = CONFIG.TERIOCK.abilityOptions
@@ -24,19 +23,6 @@ export function contextMenus(ability) {
         }
         return out;
     }
-    // const expansionOptions = quickMenu('expansion', 'system.expansion');
-    // expansionOptions.unshift({
-    //     name: 'No Expansion',
-    //     icon: CONFIG.TERIOCK.icons.remove,
-    //     callback: () => ability.update({ 'system.expansion': null }),
-    // });
-    // const attributeImprovementOptions = quickMenu('attribute', 'system.improvements.attributeImprovement.attribute');
-    // attributeImprovementOptions.unshift({
-    //     name: 'No Attribute Improvement',
-    //     icon: CONFIG.TERIOCK.icons.remove,
-    //     callback: () => ability.update({ 'system.improvements.attributeImprovement.attribute': null }),
-    // });
-
     return {
         delivery: quickMenu('delivery', 'system.delivery.base'),
         piercing: [
@@ -97,7 +83,7 @@ export function contextMenus(ability) {
         targets: Object.entries(fetch('targets')).flatMap(([key, value]) => ([
             {
                 name: value,
-                icon: '<i class="fa-solid fa-plus"></i>',
+                icon: CONFIG.TERIOCK.icons.unchecked,
                 callback: async () => {
                     const currentTargets = foundry.utils.getProperty(ability.system, 'targets') || [];
                     const newTargets = [...currentTargets, key];
@@ -110,7 +96,7 @@ export function contextMenus(ability) {
             },
             {
                 name: value,
-                icon: '<i class="fa-solid fa-minus"></i>',
+                icon: CONFIG.TERIOCK.icons.checked,
                 callback: async () => {
                     const currentTargets = foundry.utils.getProperty(ability.system, 'targets') || [];
                     const newTargets = currentTargets.filter(t => t !== key);

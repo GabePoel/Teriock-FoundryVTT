@@ -1,4 +1,4 @@
-const { sheets, ux } = foundry.applications
+const { sheets, ux } = foundry.applications;
 import { openWikiPage } from "../helpers/wiki.mjs";
 import { cleanFeet, cleanPounds, cleanPlusMinus, cleanMp, cleanHp } from "../helpers/clean.mjs";
 
@@ -69,6 +69,11 @@ export class TeriockItemSheet extends sheets.ItemSheet {
             console.log('Sharing wiki page');
             this.item.share();
         });
+        this.element.querySelector('.chat-button').addEventListener('contextmenu', (event) => {
+            event.preventDefault();
+            console.log('Debugging');
+            console.log(this.item);
+        });
         this.element.querySelectorAll('.range-input').forEach((element) => {
             this._connectInput(element, element.getAttribute('name'), cleanFeet);
         });
@@ -83,6 +88,15 @@ export class TeriockItemSheet extends sheets.ItemSheet {
         });
         this.element.querySelectorAll('.hp-input').forEach((element) => {
             this._connectInput(element, element.getAttribute('name'), cleanHp);
+        });
+    }
+
+    _connectContextMenu(cssClass, options, eventName) {
+        const container = this.element;
+        new foundry.applications.ux.ContextMenu(container, cssClass, options, {
+            eventName: eventName,
+            jQuery: false,
+            fixed: false,
         });
     }
 }

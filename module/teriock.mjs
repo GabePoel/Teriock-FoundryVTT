@@ -3,6 +3,8 @@ import { TeriockItem } from './documents/item.mjs';
 import { TeriockActorSheet } from './sheets/actor-sheet.mjs';
 import { TeriockAbilitySheet } from './sheets/ability-sheet.mjs';
 import { TeriockEquipmentSheet } from './sheets/equipment-sheet.mjs';
+import { TeriockRankSheet } from './sheets/rank-sheet.mjs';
+import { TeriockFluencySheet } from './sheets/fluency-sheet.mjs';
 import { preloadHandlebarsTemplates } from './helpers/templates.mjs';
 import { TERIOCK } from './helpers/config.mjs';
 const { Actors, Items } = foundry.documents.collections;
@@ -32,6 +34,16 @@ Hooks.once('init', function () {
     makeDefault: true,
     label: 'Equipment',
     types: ['equipment'],
+  });
+  Items.registerSheet('teriock', TeriockFluencySheet, {
+    makeDefault: true,
+    label: 'Fluency',
+    types: ['fluency'],
+  });
+  Items.registerSheet('teriock', TeriockRankSheet, {
+    makeDefault: true,
+    label: 'Rank',
+    types: ['rank'],
   });
 
 
