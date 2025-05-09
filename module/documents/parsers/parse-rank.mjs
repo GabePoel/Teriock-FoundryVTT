@@ -1,6 +1,87 @@
 import { TeriockItem } from "../item.mjs";
 
-export async function parseRank(rawHTML, className, classRank) {
+async function getFolders(pack, path) {
+    let children = null;
+    const levels = path.split('/');
+    let targetFolderName = levels.shift();
+    let folder = null;
+    let found = false;
+    const folders = [];
+    for (const f of game.packs.get(pack).folders) {
+        if (f.name === targetFolderName) {
+            folder = f;
+            found = true;
+            break;
+        }
+    }
+    if (!found) {
+        folder = await foundry.documents.Folder.implementation.create({
+            name: targetFolderName,
+            type: 'Item',
+        }, {
+            pack: pack,
+        })
+    }
+    folders.push(folder);
+    children = folder.children;
+    while (levels.length > 0) {
+        found = false;
+        targetFolderName = levels.shift();
+        for (const f of children) {
+            if (f.folder.name === targetFolderName) {
+                folder = f;
+                found = true;
+                break;
+            }
+        }
+        if (!found) {
+            const newFolder = await foundry.documents.Folder.implementation.create({
+                name: targetFolderName,
+                folder: folder._id,
+                type: folder.type,
+            }, {
+                pack: pack,
+            })
+            folder = newFolder;
+        }
+        if (folder.folder) {
+            folder = folder.folder;
+        }
+        folders.push(folder);
+        children = folder.children;
+    }
+    return folders;
+}
+
+async function checkContents(folder, name) {
+    for (const item of folder.contents) {
+        if (item.name === name) {
+            return item;
+        }
+    }
+    return null;
+}
+
+export async function parseRank(rawHTML, item) {
+    const className = item.system.className;
+    const classRank = item.system.classRank;
+    const archetype = item.system.archetype;
+    const classValue = CONFIG.TERIOCK.rankOptions[archetype].classes[className].name;
+    const archetypeValue = CONFIG.TERIOCK.rankOptions[archetype].name;
+    let pack = null;
+    if (item.inCompendium) {
+        pack = game.packs.get(item.pack);
+    }
+    let folders = null;
+    if (pack) {
+        let path = 'Abilities/';
+        path += archetypeValue + '/';
+        path += classValue;
+        folders = await getFolders(item.pack, path);
+        console.log(folders);
+    }
+
+
     const parser = new DOMParser();
     const doc = parser.parseFromString(rawHTML, 'text/html');
     const metaData = doc.querySelector('.class-metadata');
@@ -32,73 +113,182 @@ export async function parseRank(rawHTML, className, classRank) {
     let rank3CombatAbilities = [];
     let rank3SupportNames = [];
     let rank3SupportAbilities = [];
+    let rotatorNames = [];
+    let rotatorAbilities = [];
+    if (classRank >= 2) {
+        const rotatorElements = doc.querySelectorAll('.rotator');
+        for (const element of rotatorElements) {
+            const abilityName = element.textContent
+            console.log(abilityName)
+            if (abilityName && abilityName.length > 0) {
+                rotatorNames.push(abilityName.trim());
+            }
+        }
+    }
     if (classRank < 2) {
         const rank0Temp = metaData.getAttribute('data-r0').split(',');
         for (const ability of rank0Temp) {
-            rank0Names.push(ability.trim());
+            if (ability.length > 0) {
+                rank0Names.push(ability.trim());
+            }
         }
     }
     if (classRank === 1) {
         const rank1Temp = metaData.getAttribute('data-r1').split(',');
         for (const ability of rank1Temp) {
-            rank1Names.push(ability.trim());
+            if (ability.length > 0) {
+                rank1Names.push(ability.trim());
+            }
         }
     }
     if (classRank === 2) {
         const rank2Temp = metaData.getAttribute('data-r2').split(',');
         for (const ability of rank2Temp) {
-            rank2Names.push(ability.trim());
+            if (ability.length > 0) {
+                rank2Names.push(ability.trim());
+            }
         }
     }
     if (classRank >= 3) {
         const rank3CombatTemp = metaData.getAttribute('data-r3c').split(',');
         for (const ability of rank3CombatTemp) {
-            rank3CombatNames.push(ability.trim());
+            if (ability.length > 0) {
+                rank3CombatNames.push(ability.trim());
+            }
         }
         const rank3SupportAbilities = metaData.getAttribute('data-r3s').split(',');
         for (const ability of rank3SupportAbilities) {
-            rank3SupportNames.push(ability.trim());
+            if (ability.length > 0) {
+                rank3SupportNames.push(ability.trim());
+            }
         }
     }
+    console.log('Rank 0', rank0Names);
     for (const name of rank0Names) {
-        const ability = await TeriockItem.implementation.create({
-            name: name,
-            type: 'ability',
-        });
-        await ability._wikiPull();
-        rank0Abilities.push(ability._id);
+        if (folders) {
+            const folder = folders[folders.length - 2];
+            let ability = await checkContents(folder, name);
+            if (!ability) {
+                ability = await TeriockItem.implementation.create({
+                    name: name,
+                    type: 'ability',
+                }, {
+                    pack: item.pack,
+                });
+                await ability._wikiPull();
+                await ability.update({ folder: folder._id });
+            }
+            const abilitySummary = {
+                _id: ability._id,
+                name: ability.name,
+            }
+            rank0Abilities.push(abilitySummary);
+        }
     }
     for (const name of rank1Names) {
-        const ability = await TeriockItem.implementation.create({
-            name: name,
-            type: 'ability',
-        });
-        await ability._wikiPull();
-        rank1Abilities.push(ability._id);
+        if (folders) {
+            const folder = folders[folders.length - 1];
+            let ability = await checkContents(folder, name);
+            if (!ability) {
+                ability = await TeriockItem.implementation.create({
+                    name: name,
+                    type: 'ability',
+                }, {
+                    pack: item.pack,
+                });
+                await ability._wikiPull();
+                await ability.update({ folder: folder._id });
+            }
+            const abilitySummary = {
+                _id: ability._id,
+                name: ability.name,
+            }
+            rank1Abilities.push(abilitySummary);
+        }
     }
     for (const name of rank2Names) {
-        const ability = await TeriockItem.implementation.create({
-            name: name,
-            type: 'ability',
-        });
-        await ability._wikiPull();
-        rank2Abilities.push(ability._id);
+        if (folders) {
+            const folder = folders[folders.length - 1];
+            let ability = await checkContents(folder, name);
+            if (!ability) {
+                ability = await TeriockItem.implementation.create({
+                    name: name,
+                    type: 'ability',
+                }, {
+                    pack: item.pack,
+                });
+                await ability._wikiPull();
+                await ability.update({ folder: folder._id });
+            }
+            const abilitySummary = {
+                _id: ability._id,
+                name: ability.name,
+            }
+            rank2Abilities.push(abilitySummary);
+        }
     }
     for (const name of rank3CombatNames) {
-        const ability = await TeriockItem.implementation.create({
-            name: name,
-            type: 'ability',
-        });
-        await ability._wikiPull();
-        rank3CombatAbilities.push(ability._id);
+        if (folders) {
+            const folder = folders[folders.length - 1];
+            let ability = await checkContents(folder, name);
+            if (!ability) {
+                ability = await TeriockItem.implementation.create({
+                    name: name,
+                    type: 'ability',
+                }, {
+                    pack: item.pack,
+                });
+                await ability._wikiPull();
+                await ability.update({ folder: folder._id });
+            }
+            const abilitySummary = {
+                _id: ability._id,
+                name: ability.name,
+            }
+            rank3CombatAbilities.push(abilitySummary);
+        }
     }
     for (const name of rank3SupportNames) {
-        const ability = await TeriockItem.implementation.create({
-            name: name,
-            type: 'ability',
-        });
-        await ability._wikiPull();
-        rank3SupportAbilities.push(ability._id);
+        if (folders) {
+            const folder = folders[folders.length - 1];
+            let ability = await checkContents(folder, name);
+            if (!ability) {
+                ability = await TeriockItem.implementation.create({
+                    name: name,
+                    type: 'ability',
+                }, {
+                    pack: item.pack,
+                });
+                await ability._wikiPull();
+                await ability.update({ folder: folder._id });
+            }
+            const abilitySummary = {
+                _id: ability._id,
+                name: ability.name,
+            }
+            rank3SupportAbilities.push(abilitySummary);
+        }
+    }
+    for (const name of rotatorNames) {
+        if (folders) {
+            const folder = folders[folders.length - 1];
+            let ability = await checkContents(folder, name);
+            if (!ability) {
+                ability = await TeriockItem.implementation.create({
+                    name: name,
+                    type: 'ability',
+                }, {
+                    pack: item.pack,
+                });
+                await ability._wikiPull();
+                await ability.update({ folder: folder._id });
+            }
+            const abilitySummary = {
+                _id: ability._id,
+                name: ability.name,
+            }
+            rotatorAbilities.push(abilitySummary);
+        }
     }
     if (classRank < 2) {
         possibleAbilities.archetype = rank0Abilities;
@@ -113,7 +303,9 @@ export async function parseRank(rawHTML, className, classRank) {
         possibleAbilities.combat = rank3CombatAbilities;
         possibleAbilities.support = rank3SupportAbilities;
     }
-    const archetype = metaData.getAttribute('data-archetype');
+    if (classRank >= 2) {
+        possibleAbilities.rotator = rotatorAbilities;
+    }
     let hitDie = 'd10';
     let manaDie = 'd10';
     if (archetype == 'mage') {
@@ -140,13 +332,13 @@ export async function parseRank(rawHTML, className, classRank) {
     if (getText('.class-description')) {
         parameters.description = getHTML('.class-description');
     }
-    const toTitleCase = (str) => {
-        return str.replace(/\w\S*/g, (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
-    };
+    if (pack) {
+        parameters.sourcePack = item.pack;
+    }
     const out = {
         'system': parameters,
         'img': 'systems/teriock/assets/classes/' + className + '.svg',
-        'name': 'Rank ' + classRank + ' ' + toTitleCase(className)
+        'name': 'Rank ' + classRank + ' ' + classValue,
     }
     return out;
 }

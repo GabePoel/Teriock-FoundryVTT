@@ -10,7 +10,7 @@ export async function parse(item, rawHTML) {
         return parseEquipment(rawHTML);
     }
     if (item.type === 'rank') {
-        return await parseRank(rawHTML, item.system.className, item.system.classRank);
+        return await parseRank(rawHTML, item);
     }
     throw new Error(`Unknown type: ${item.type}`);
 }

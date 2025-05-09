@@ -8,6 +8,7 @@ export class TeriockRankSheet extends HandlebarsApplicationMixin(TeriockItemShee
         actions: {
             onEditImage: this._onEditImage,
             onChat: this._onChat,
+            viewDoc: this._viewDoc,
         },
         form: {
             submitOnChange: true,
@@ -39,5 +40,11 @@ export class TeriockRankSheet extends HandlebarsApplicationMixin(TeriockItemShee
         this._connectContextMenu('.class-box', classContextMenuOptions, 'click');
         const archetypeContextMenuOptions = archetypeContextMenu(this.item);
         this._connectContextMenu('.archetype-box', archetypeContextMenuOptions, 'click');
+    }
+
+    static async _viewDoc(event, target) {
+        const id = target.parentElement.getAttribute('data-item-id');
+        const ability = await game.packs.get(this.item.system.sourcePack).getDocument(id);
+        ability.sheet.render(true);
     }
 }

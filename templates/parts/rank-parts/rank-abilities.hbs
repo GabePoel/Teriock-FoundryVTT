@@ -7,8 +7,8 @@
           </div>
           <ol class="rank-ability-list">
             {{#each system.possibleAbilities.archetype}}
-              <li class="rank-ability-item">
-                {{this}}
+              <li class="rank-ability-item" data-item-id="{{{this._id}}}">
+                <a data-action='viewDoc'>{{this.name}}</a>
               </li>
             {{/each}}
           </ol>
@@ -21,8 +21,8 @@
           </div>
           <ol class="rank-ability-list">
             {{#each system.possibleAbilities.normal}}
-              <li class="rank-ability-item">
-                {{this}}
+              <li class="rank-ability-item" data-item-id="{{{this._id}}}">
+                <a data-action='viewDoc'>{{this.name}}</a>
               </li>
             {{/each}}
           </ol>
@@ -36,8 +36,8 @@
           Pick one.
           <ol class="rank-ability-list">
             {{#each system.possibleAbilities.combat}}
-              <li class="rank-ability-item">
-                {{this}}
+              <li class="rank-ability-item" data-item-id="{{{this._id}}}">
+                <a data-action='viewDoc'>{{this.name}}</a>
               </li>
             {{/each}}
           </ol>
@@ -51,8 +51,22 @@
           Pick one.
           <ol class="rank-ability-list">
             {{#each system.possibleAbilities.support}}
-              <li class="rank-ability-item">
-                {{this}}
+              <li class="rank-ability-item" data-item-id="{{{this._id}}}">
+                <a data-action='viewDoc'>{{this.name}}</a>
+              </li>
+            {{/each}}
+          </ol>
+        </div>
+      {{/if}}
+      {{#if (exists system.possibleAbilities.rotator)}}
+        <div class="ab-section-container">
+          <div class="ab-section">
+            <span class="ab-section-title">Rotator abilities</span>
+          </div>
+          <ol class="rank-ability-list">
+            {{#each system.possibleAbilities.rotator}}
+              <li class="rank-ability-item" data-item-id="{{{this._id}}}">
+                <a data-action='viewDoc'>{{this.name}}</a>
               </li>
             {{/each}}
           </ol>
