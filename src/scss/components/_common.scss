@@ -82,3 +82,154 @@ table {
 .tb {
   justify-content: space-between;
 }
+
+.tcard-container {
+  width: 420px;
+  gap: 8px;
+  --tcard-height: 56px;
+  --tcard-outer-border-radius: 8px;
+  --tcard-inner-border-width: 1px;
+  --tcard-title-font-size: 1em;
+  --tcard-subtitle-font-size: 0.8em;
+  --tcard-image-padding: 8px;
+  --tcard-titles-padding-left: 0;
+  --tcard-titles-flex-direction: column;
+  --tcard-titles-align-items: flex-start;
+  --tcard-titles-gap: 0;
+  --tcard-content-padding: 10px;
+  --tcard-content-flex-direction: column;
+  --tcard-content-align-items: end;
+  --tcard-content-gap: 0;
+  --tcard-content-font-size: 0.8em;
+  --tcard-icons-gap: 6px;
+  &.large {
+    --tcard-height: 84px;
+    --tcard-title-font-size: 1.5em;
+    --tcard-subtitle-font-size: 1em;
+    --tcard-content-padding: 14px;
+    --tcard-content-font-size: 0.9em;
+  }
+  &.small {
+    --tcard-height: 42px;
+    --tcard-outer-border-radius: 6px;
+    --tcard-image-padding: 6px;
+    --tcard-titles-padding-left: 2px;
+    --tcard-titles-flex-direction: row;
+    --tcard-titles-align-items: center;
+    --tcard-titles-gap: 8px;
+    --tcard-content-padding: 8px;
+    --tcard-content-flex-direction: row;
+    --tcard-content-align-items: center;
+    --tcard-content-gap: 8px;
+    --tcard-icons-gap: 8px;
+  }
+  &.tiny {
+    --tcard-height: 28px;
+    --tcard-outer-border-radius: 4px;
+    --tcard-image-padding: 4px;
+    --tcard-titles-padding-left: 2px;
+    --tcard-titles-flex-direction: row;
+    --tcard-titles-align-items: center;
+    --tcard-titles-gap: 8px;
+    --tcard-content-padding: 8px;
+    --tcard-content-flex-direction: row;
+    --tcard-content-align-items: center;
+    --tcard-content-gap: 8px;
+    --tcard-icons-gap: 8px;
+  }
+  --tcard-border-radius: var(--tcard-outer-border-radius);
+  &.gapless {
+    --tcard-inner-border-width: 0;
+    --tcard-border-radius: 0;
+    gap: 0;
+  }
+  display: flex;
+  flex-direction: column;
+  .tcard {
+    height: var(--tcard-height);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    border: 1px solid var(--color-border);
+    border-radius: var(--tcard-border-radius);
+    transition: all 0.15s ease-in-out;
+    &:first-child {
+      border-top-left-radius: var(--tcard-outer-border-radius);
+      border-top-right-radius: var(--tcard-outer-border-radius);
+    }
+    &:last-child {
+      border-bottom-left-radius: var(--tcard-outer-border-radius);
+      border-bottom-right-radius: var(--tcard-outer-border-radius);
+    }
+    &:not(:first-child) {
+      border-top-width: var(--tcard-inner-border-width);
+    }
+    &:hover {
+      box-shadow: 0 0 8px var(--color-shadow-primary);
+    }
+    .tcard-image {
+      width: var(--tcard-height);
+      height: var(--tcard-height);
+      border-radius: var(--tcard-border-radius);
+      padding: var(--tcard-image-padding);
+      overflow: hidden;
+    }
+    .tcard-body {
+      display: flex;
+      flex-direction: row;
+      flex: 1;
+      height: 100%;
+      justify-content: space-between;
+      align-items: center;
+      .tcard-titles {
+        display: flex;
+        flex-direction: var(--tcard-titles-flex-direction);
+        align-items: var(--tcard-titles-align-items);
+        gap: var(--tcard-titles-gap);
+        flex-shrink: 0;
+        padding-left: var(--tcard-titles-padding-left);
+        .tcard-title {
+          font-size: var(--tcard-title-font-size);
+          color: var(--color-text);
+        }
+        .tcard-subtitle {
+          font-size: var(--tcard-subtitle-font-size);
+          color: var(--color-text-subtle);
+          text-transform: uppercase;
+        }
+      }
+    }
+    .tcard-content {
+      display: flex;
+      flex-direction: var(--tcard-content-flex-direction);
+      justify-content: space-between;
+      align-items: var(--tcard-content-align-items);
+      height: 100%;
+      padding: var(--tcard-content-padding);
+      gap: var(--tcard-content-gap);
+      .tcard-text {
+        font-size: 0.8em;
+        color: var(--color-text-subtle);
+        text-transform: uppercase;
+      }
+      .tcard-icons {
+        font-size: 0.8em;
+        color: var(--color-text-subtle);
+        text-transform: uppercase;
+        display: flex;
+        flex: row;
+        gap: var(--tcard-icons-gap);
+        i {
+          &:hover {
+            color: var(--color-text-emphatic);
+          }
+          &:active {
+            color: var(--color-text-accent);
+          }
+        }
+      }
+    }
+  }
+}

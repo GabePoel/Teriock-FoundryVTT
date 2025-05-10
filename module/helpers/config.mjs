@@ -3,6 +3,7 @@ import { iconStyles } from "./constants/icon-styles.mjs";
 import { abilityOptions } from "./constants/ability-options.mjs";
 import { tradecraftOptions } from "./constants/tradecraft-options.mjs";
 import { rankOptions } from "./constants/rank-options.mjs";
+import { displayOptions } from "./constants/display-options.mjs";
 
 export const TERIOCK = {
   icons: icons,
@@ -10,4 +11,5 @@ export const TERIOCK = {
   abilityOptions: abilityOptions,
   tradecraftOptions: tradecraftOptions,
   rankOptions: rankOptions,
+  displayOptions: displayOptions,
 }

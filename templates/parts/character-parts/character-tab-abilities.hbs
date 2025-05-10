@@ -1,3 +1,25 @@
 <div class="character-tab abilities">
   <h1>Abilities</h1>
+  <div class="display-options">
+    <label for="display-size">Size:</label>
+    <select name="system.display.abilities.size" id="abilities-size">
+      {{selectOptions config.displayOptions.sizes selected=system.display.abilities.size}}
+    </select>
+    <label for="display-gapless">Gapless:</label>
+    <input type="checkbox" name="system.display.abilities.gapless" id="gapless" {{checked system.display.abilities.gapless}}>
+  </div>
+  <div class="tcard-container {{#if system.display.abilities.gapless}}gapless{{/if}} {{system.display.abilities.size}}">
+    {{#each abilities as |ability|}}
+      {{tcard
+        img=ability.img
+        title=ability.name
+        subtitle=ability.system.interaction
+        text=(executionTime ability.system.maneuver ability.system.executionTime)
+        id=ability._id
+        icons=(concat
+          (ticon "comment" cssClass="share" action="share" id=ability._id)
+          (ticon "dice-d20" cssClass="roll" action="useAbility" id=ability._id)
+        )
+      }}
+    {{/each}}
 </div>

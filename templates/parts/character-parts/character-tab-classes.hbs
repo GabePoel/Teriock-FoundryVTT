@@ -1,3 +1,26 @@
 <div class="character-tab classes">
   <h1>Classes</h1>
+  <div class="display-options">
+    <label for="display-size">Size:</label>
+    <select name="system.display.ranks.size" id="ranks-size">
+      {{selectOptions config.displayOptions.sizes selected=system.display.ranks.size}}
+    </select>
+    <label for="display-gapless">Gapless:</label>
+    <input type="checkbox" name="system.display.ranks.gapless" id="gapless" {{checked system.display.ranks.gapless}}>
+  </div>
+  <div class="tcard-container {{#if system.display.ranks.gapless}}gapless{{/if}} {{system.display.ranks.size}}">
+    {{#each ranks as |rank|}}
+      {{tcard
+        img=rank.img
+        title=(className rank.system.archetype rank.system.className)
+        subtitle=(concat "Rank " rank.system.classRank)
+        text=(classArchetype rank.system.archetype)
+        id=rank._id
+        icons=(concat
+          (ticon "comment" cssClass="share" action="share" id=rank._id)
+          (ticon (firstDie rank.system.hitDie) cssClass="roll" action="useHitDie" id=rank._id)
+          (ticon (firstDie rank.system.manaDie) cssClass="roll" action="useManaDie" id=rank._id)
+        )
+      }}
+    {{/each}}
 </div>

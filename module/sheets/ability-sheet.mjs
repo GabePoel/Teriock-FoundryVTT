@@ -4,9 +4,10 @@ import { TeriockItemSheet } from "./teriock-item-sheet.mjs";
 
 export class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(TeriockItemSheet) {
     static DEFAULT_OPTIONS = {
-        classes: ['teriock', 'ability'],
+        classes: ['teriock', 'equipment', 'ability'],
         actions: {
             onEditImage: this._onEditImage,
+            onChat: this._onChat,
         },
         form: {
             submitOnChange: true,
@@ -35,9 +36,13 @@ export class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(TeriockI
         });
     }
 
+    static async _onChat(event, target) {
+        this.item.share();
+    }
+
     /** @override */
     async _prepareContext() {
-        const context = {}
+        const context = await super._prepareContext();
         const system = this.item.system
 
         // Before Overview
@@ -69,21 +74,6 @@ export class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(TeriockI
         // Other
         context.endCondition = await this._editor(system.endCondition);
         context.requirements = await this._editor(system.requirements);
-
-        // Add the item's data to context.data for easier access, as well as flags.
-        // context.item = this.item;
-        context.system = this.item.system;
-        context.flags = this.item.flags;
-
-        // Adding a pointer to CONFIG.TERIOCK
-        context.config = CONFIG.TERIOCK;
-        context.item = this.item;
-
-        context.editable = this.isEditable;
-        context.owner = this.document.isOwner;
-        context.limited = this.document.limited;
-
-        console.log(context);
 
         return context;
     }
@@ -118,25 +108,6 @@ export class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(TeriockI
 
     /* Helpers */
     /* -------------------------------------------- */
-
-    static async _onEditImage(event, target) {
-        const attr = target.dataset.edit;
-        const current = foundry.utils.getProperty(this.document, attr);
-        const { img } =
-            this.document.constructor.getDefaultArtwork?.(this.document.toObject()) ??
-            {};
-        const fp = new FilePicker({
-            current,
-            type: 'image',
-            redirectToRoot: img ? [img] : [],
-            callback: (path) => {
-                this.document.update({ [attr]: path });
-            },
-            top: this.position.top + 40,
-            left: this.position.left + 10,
-        });
-        return fp.browse();
-    }
 
     _activateContextMenus() {
         const cm = contextMenus(this.item);

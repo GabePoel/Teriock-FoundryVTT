@@ -1,25 +1,31 @@
 <div class="{{cssClass}} character-page" autocomplete="off">
     {{> 'systems/teriock/templates/parts/character-parts/character-sidebar.hbs' }}
-    <div class="character-tabs">
-        <div class="character-tab ui-controls {{tabActive system.activeTab "overview"}}" tab="overview">
+    <div class="character-tabbers">
+        <div class="character-tabber ui-controls {{tabActive system.activeTab "overview"}}" tab="overview">
             <i class="fa-solid fa-person"></i>
         </div>
-        <div class="character-tab ui-controls {{tabActive system.activeTab "abilities"}}" tab="abilities">
+        <div class="character-tabber ui-controls {{tabActive system.activeTab "tradecrafts"}}" tab="tradecrafts">
+            <i class="fa-solid fa-compass-drafting"></i>
+        </div>
+        <div class="character-tabber ui-controls {{tabActive system.activeTab "abilities"}}" tab="abilities">
             <i class="fa-solid fa-hand-sparkles"></i>
         </div>
-        <div class="character-tab ui-controls {{tabActive system.activeTab "classes"}}" tab="classes">
+        <div class="character-tabber ui-controls {{tabActive system.activeTab "classes"}}" tab="classes">
             <i class="fa-solid fa-hat-wizard"></i>
         </div>
-        <div class="character-tab ui-controls {{tabActive system.activeTab "inventory"}}" tab="inventory">
+        <div class="character-tabber ui-controls {{tabActive system.activeTab "inventory"}}" tab="inventory">
             <i class="fa-solid fa-treasure-chest"></i>
         </div>
-        <div class="character-tab ui-controls {{tabActive system.activeTab "notes"}}" tab="notes">
+        <div class="character-tabber ui-controls {{tabActive system.activeTab "notes"}}" tab="notes">
             <i class="fa-solid fa-pen-fancy"></i>
         </div>
     </div>
     <div class="character-tab-content">
         {{#if (eq system.activeTab "overview")}}
             {{> 'systems/teriock/templates/parts/character-parts/character-tab-overview.hbs' }}
+        {{/if}}
+        {{#if (eq system.activeTab "tradecrafts")}}
+            {{> 'systems/teriock/templates/parts/character-parts/character-tab-tradecrafts.hbs' }}
         {{/if}}
         {{#if (eq system.activeTab "abilities")}}
             {{> 'systems/teriock/templates/parts/character-parts/character-tab-abilities.hbs' }}

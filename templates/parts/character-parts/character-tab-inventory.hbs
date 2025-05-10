@@ -1,3 +1,25 @@
 <div class="character-tab inventory">
   <h1>Inventory</h1>
+  <div class="display-options">
+    <label for="display-size">Size:</label>
+    <select name="system.display.inventory.size" id="inventory-size">
+      {{selectOptions config.displayOptions.sizes selected=system.display.inventory.size}}
+    </select>
+    <label for="display-gapless">Gapless:</label>
+    <input type="checkbox" name="system.display.inventory.gapless" id="gapless" {{checked system.display.inventory.gapless}}>
+  </div>
+  <div class="tcard-container {{#if system.display.inventory.gapless}}gapless{{/if}} {{system.display.inventory.size}}">
+    {{#each equipment as |equipment|}}
+      {{tcard
+        img=equipment.img
+        title=equipment.name
+        subtitle=equipment.system.sb
+        text=equipment.system.damage
+        id=equipment._id
+        icons=(concat
+          (ticon "comment" cssClass="share" action="share" id=equipment._id)
+          (ticon (firstDie equipment.system.damage) cssClass="rollDamage" action="damage" id=equipment._id)
+        )
+      }}
+    {{/each}}
 </div>

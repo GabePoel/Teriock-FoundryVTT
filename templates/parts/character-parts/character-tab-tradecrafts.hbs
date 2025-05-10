@@ -1,3 +1,25 @@
 <div class="character-tab tradecrafts">
   <h1>Tradecrafts</h1>
+  <div class="display-options">
+    <label for="display-size">Size:</label>
+    <select name="system.display.tradecrafts.size" id="tradecrafts-size">
+      {{selectOptions config.displayOptions.sizes selected=system.display.tradecrafts.size}}
+    </select>
+    <label for="display-gapless">Gapless:</label>
+    <input type="checkbox" name="system.display.tradecrafts.gapless" id="gapless" {{checked system.display.tradecrafts.gapless}}>
+  </div>
+  <div class="tcard-container {{#if system.display.tradecrafts.gapless}}gapless{{/if}} {{system.display.tradecrafts.size}}">
+    {{#each fluencies as |fluency|}}
+      {{tcard
+        img=fluency.img
+        title=fluency.name
+        subtitle=(tradecraft fluency.system.field fluency.system.tradecraft)
+        text=(field fluency.system.field)
+        id=fluency._id
+        icons=(concat
+          (ticon "comment" cssClass="share" action="share" id=fluency._id)
+          (ticon "dice-d20" cssClass="roll" action="usefluency" id=fluency._id)
+        )
+      }}
+    {{/each}}
 </div>

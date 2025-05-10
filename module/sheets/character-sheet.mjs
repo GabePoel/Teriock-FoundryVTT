@@ -59,16 +59,63 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(sheets
         return context
     }
 
+    _rankContextMenuOptions(id) {
+        return [
+            {
+                name: 'Edit',
+                icon: '<i class="fas fa-edit"></i>',
+                callback: () => {
+                    const item = this.actor.items.get(id);
+                    if (item) {
+                        item.sheet.render(true);
+                    }
+                },
+            },
+            {
+                name: 'Delete',
+                icon: '<i class="fas fa-trash"></i>',
+                callback: () => {
+                    const item = this.actor.items.get(id);
+                    if (item) {
+                        item.delete();
+                    }
+                },
+            },
+        ]
+    }
+
     /** @override */
     _onRender(context, options) {
         super._onRender(context, options);
-        this.element.querySelectorAll('.character-tab').forEach((element) => {
+        this.element.querySelectorAll('.character-tabber').forEach((element) => {
             element.addEventListener('click', (event) => {
                 event.preventDefault();
                 const tab = event.currentTarget.getAttribute('tab');
                 this.document.update({
                     'system.activeTab': tab,
                 })
+            });
+        });
+        this.element.querySelectorAll('.tcard').forEach((element) => {
+            new ux.ContextMenu(
+                element,
+                '.tcard',
+                this._rankContextMenuOptions(
+                    element.getAttribute('data-id')
+                ),
+                {
+                    eventName: 'contextmenu',
+                    jQuery: false,
+                    fixed: true,
+                }
+            );
+            element.addEventListener('click', (event) => {
+                event.preventDefault();
+                const id = element.getAttribute('data-id');
+                const item = this.actor.items.get(id);
+                if (item) {
+                    item.sheet.render(true);
+                }
             });
         });
     }

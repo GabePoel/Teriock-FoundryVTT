@@ -184,3 +184,64 @@ Handlebars.registerHelper('tabActive', function (active, tab) {
   }
   return 'inactive';
 });
+
+Handlebars.registerHelper('className', function (classArchetype, className) {
+  return CONFIG.TERIOCK.rankOptions[classArchetype].classes[className].name;
+});
+
+Handlebars.registerHelper('classArchetype', function (classArchetype) {
+  return CONFIG.TERIOCK.rankOptions[classArchetype].name;
+});
+
+Handlebars.registerHelper('executionTime', function (maneuver, executionTime) {
+  const time = CONFIG.TERIOCK.abilityOptions.executionTime[maneuver]?.[executionTime] ?? null;
+  if (time) {
+    return time;
+  }
+  return executionTime;
+});
+
+Handlebars.registerHelper('tradecraft', function (field, tradecraft) {
+  return CONFIG.TERIOCK.tradecraftOptions[field].tradecrafts[tradecraft].name;
+});
+
+Handlebars.registerHelper('field', function (field) {
+  return CONFIG.TERIOCK.tradecraftOptions[field].name;
+});
+
+Handlebars.registerHelper('ticon', function (icon, options) {
+  const { cssClass = '', id, action } = options.hash;
+
+  const idAttr = id ? `data-id="${id}"` : '';
+  const actionAttr = action ? `data-action="${action}"` : '';
+
+  return new Handlebars.SafeString(`
+    <i class="${cssClass} fa-light fa-${icon}" ${idAttr} ${actionAttr}></i>
+  `);
+});
+
+Handlebars.registerHelper('tcard', function (options) {
+  const { img, title, subtitle, text, icons, id } = options.hash;
+
+  return new Handlebars.SafeString(`
+    <div class="tcard" data-id="${id}">
+      <div class="tcard-image">
+        <img src="${img}" alt="${title}" />
+      </div>
+      <div class="tcard-body">
+        <div class="tcard-titles">
+          <div class="tcard-title">${title}</div>
+          <div class="tcard-subtitle">${subtitle}</div>
+        </div>
+        <div class="tcard-content">
+          <div class="tcard-text">
+            ${text}
+          </div>
+          <div class="tcard-icons">
+            ${icons || ''}
+          </div>
+        </div>
+      </div>
+    </div>
+  `);
+});

@@ -203,6 +203,14 @@
   text-align: center;
 }
 
+.themed.theme-light {
+  --tbg: url("../assets/parchment.jpg") repeat;
+}
+
+.themed.theme-dark {
+  --tbg: var(--color-bg);
+}
+
 /* Styles limited to teriock sheets */
 .teriock .ab-sheet-sidebar {
   display: none;
@@ -853,26 +861,169 @@
 .teriock .tb {
   justify-content: space-between;
 }
+.teriock .tcard-container {
+  width: 420px;
+  gap: 8px;
+  --tcard-height: 56px;
+  --tcard-outer-border-radius: 8px;
+  --tcard-inner-border-width: 1px;
+  --tcard-title-font-size: 1em;
+  --tcard-subtitle-font-size: 0.8em;
+  --tcard-image-padding: 8px;
+  --tcard-titles-padding-left: 0;
+  --tcard-titles-flex-direction: column;
+  --tcard-titles-align-items: flex-start;
+  --tcard-titles-gap: 0;
+  --tcard-content-padding: 10px;
+  --tcard-content-flex-direction: column;
+  --tcard-content-align-items: end;
+  --tcard-content-gap: 0;
+  --tcard-content-font-size: 0.8em;
+  --tcard-icons-gap: 6px;
+  --tcard-border-radius: var(--tcard-outer-border-radius);
+  display: flex;
+  flex-direction: column;
+}
+.teriock .tcard-container.large {
+  --tcard-height: 84px;
+  --tcard-title-font-size: 1.5em;
+  --tcard-subtitle-font-size: 1em;
+  --tcard-content-padding: 14px;
+  --tcard-content-font-size: 0.9em;
+}
+.teriock .tcard-container.small {
+  --tcard-height: 42px;
+  --tcard-outer-border-radius: 6px;
+  --tcard-image-padding: 6px;
+  --tcard-titles-padding-left: 2px;
+  --tcard-titles-flex-direction: row;
+  --tcard-titles-align-items: center;
+  --tcard-titles-gap: 8px;
+  --tcard-content-padding: 8px;
+  --tcard-content-flex-direction: row;
+  --tcard-content-align-items: center;
+  --tcard-content-gap: 8px;
+  --tcard-icons-gap: 8px;
+}
+.teriock .tcard-container.tiny {
+  --tcard-height: 28px;
+  --tcard-outer-border-radius: 4px;
+  --tcard-image-padding: 4px;
+  --tcard-titles-padding-left: 2px;
+  --tcard-titles-flex-direction: row;
+  --tcard-titles-align-items: center;
+  --tcard-titles-gap: 8px;
+  --tcard-content-padding: 8px;
+  --tcard-content-flex-direction: row;
+  --tcard-content-align-items: center;
+  --tcard-content-gap: 8px;
+  --tcard-icons-gap: 8px;
+}
+.teriock .tcard-container.gapless {
+  --tcard-inner-border-width: 0;
+  --tcard-border-radius: 0;
+  gap: 0;
+}
+.teriock .tcard-container .tcard {
+  height: var(--tcard-height);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  border: 1px solid var(--color-border);
+  border-radius: var(--tcard-border-radius);
+  transition: all 0.15s ease-in-out;
+}
+.teriock .tcard-container .tcard:first-child {
+  border-top-left-radius: var(--tcard-outer-border-radius);
+  border-top-right-radius: var(--tcard-outer-border-radius);
+}
+.teriock .tcard-container .tcard:last-child {
+  border-bottom-left-radius: var(--tcard-outer-border-radius);
+  border-bottom-right-radius: var(--tcard-outer-border-radius);
+}
+.teriock .tcard-container .tcard:not(:first-child) {
+  border-top-width: var(--tcard-inner-border-width);
+}
+.teriock .tcard-container .tcard:hover {
+  box-shadow: 0 0 8px var(--color-shadow-primary);
+}
+.teriock .tcard-container .tcard .tcard-image {
+  width: var(--tcard-height);
+  height: var(--tcard-height);
+  border-radius: var(--tcard-border-radius);
+  padding: var(--tcard-image-padding);
+  overflow: hidden;
+}
+.teriock .tcard-container .tcard .tcard-body {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  height: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+.teriock .tcard-container .tcard .tcard-body .tcard-titles {
+  display: flex;
+  flex-direction: var(--tcard-titles-flex-direction);
+  align-items: var(--tcard-titles-align-items);
+  gap: var(--tcard-titles-gap);
+  flex-shrink: 0;
+  padding-left: var(--tcard-titles-padding-left);
+}
+.teriock .tcard-container .tcard .tcard-body .tcard-titles .tcard-title {
+  font-size: var(--tcard-title-font-size);
+  color: var(--color-text);
+}
+.teriock .tcard-container .tcard .tcard-body .tcard-titles .tcard-subtitle {
+  font-size: var(--tcard-subtitle-font-size);
+  color: var(--color-text-subtle);
+  text-transform: uppercase;
+}
+.teriock .tcard-container .tcard .tcard-content {
+  display: flex;
+  flex-direction: var(--tcard-content-flex-direction);
+  justify-content: space-between;
+  align-items: var(--tcard-content-align-items);
+  height: 100%;
+  padding: var(--tcard-content-padding);
+  gap: var(--tcard-content-gap);
+}
+.teriock .tcard-container .tcard .tcard-content .tcard-text {
+  font-size: 0.8em;
+  color: var(--color-text-subtle);
+  text-transform: uppercase;
+}
+.teriock .tcard-container .tcard .tcard-content .tcard-icons {
+  font-size: 0.8em;
+  color: var(--color-text-subtle);
+  text-transform: uppercase;
+  display: flex;
+  flex: row;
+  gap: var(--tcard-icons-gap);
+}
+.teriock .tcard-container .tcard .tcard-content .tcard-icons i:hover {
+  color: var(--color-text-emphatic);
+}
+.teriock .tcard-container .tcard .tcard-content .tcard-icons i:active {
+  color: var(--color-text-accent);
+}
 .teriock .character-page {
   display: flex;
   flex-direction: row;
+  max-height: calc(100% - 36px);
 }
-.teriock .character-page .character-tabs {
+.teriock .character-page .character-tabbers {
   position: absolute;
   left: 100%;
 }
-.teriock .character-page .character-tabs .character-tab {
-  --control-bg-color: var(--background);
-  --control-border-color: var(--color-border);
-  --control-hover-border-color: var(--table-row-color-highlight);
-  --control-active-border-color: var(--color-shadow-highlight);
+.teriock .character-page .character-tabbers .character-tabber {
   display: flex;
   width: 2em;
   height: 3em;
-  background-color: var(--control-bg-color);
-  border-top: 1px solid var(--control-border-color);
-  border-bottom: 1px solid var(--control-border-color);
-  border-right: 1px solid var(--control-border-color);
+  background: var(--tbg);
+  border: 1px solid var(--color-border);
   border-top-right-radius: 6px;
   border-bottom-right-radius: 6px;
   color: var(--color-icon-color);
@@ -880,22 +1031,18 @@
   justify-content: center;
   align-items: center;
   transition: all 0.2s ease-in-out;
+  margin-block: 0.25em;
 }
-.teriock .character-page .character-tabs .character-tab:hover {
+.teriock .character-page .character-tabbers .character-tabber:hover {
   width: 2.5em;
-  background-color: var(--color-hover-bg-color);
   color: var(--color-hover-icon-color);
-  border-top-color: var(--control-hover-border-color);
-  border-bottom-color: var(--control-hover-border-color);
-  border-right-color: var(--control-hover-border-color);
+  border: 1px solid var(--table-row-color-highlight);
   cursor: pointer;
 }
-.teriock .character-page .character-tabs .character-tab.active {
+.teriock .character-page .character-tabbers .character-tabber.active {
   width: 2.5em;
-  border-top-color: var(--control-active-border-color);
-  border-bottom-color: var(--control-active-border-color);
-  border-right-color: var(--control-active-border-color);
-  background-color: var(--control-active-bg-color);
+  border: 1px solid var(--color-shadow-highlight);
+  border-left: none;
   color: var(--control-icon-text-color);
 }
 .teriock .character-page .character-shortbox {
@@ -1038,13 +1185,111 @@
   display: flex;
   flex-direction: column;
 }
+.teriock .character-page .display-options {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5em;
+  margin-bottom: 1em;
+}
+.teriock .character-page .character-tab-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 2em;
+  max-height: 100%;
+  overflow-y: auto;
+}
+.teriock .character-page .character-tab-content .character-tab {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.teriock .ranks-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  margin: 0.5em;
+  gap: 0.5em;
+  width: 420px;
+}
+.teriock .ranks-list .rank-item {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  height: 84px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  transition: all 0.15s ease-in-out;
+}
+.teriock .ranks-list .rank-item:hover {
+  box-shadow: 0 0 8px var(--color-shadow-primary);
+}
+.teriock .ranks-list .rank-item .rank-more {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 1.5em;
+  height: 1.5em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0.5em;
+  border-radius: 4px;
+  border: 1px solid transparent;
+  transition: all 0.2s ease-in-out;
+}
+.teriock .ranks-list .rank-item .rank-more:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+.teriock .ranks-list .rank-item .rank-more:active {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+.teriock .ranks-list .rank-item .rank-img {
+  width: 84px;
+  height: 84px;
+  padding: 14px;
+}
+.teriock .ranks-list .rank-item .rank-info {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: center;
+  height: 100%;
+}
+.teriock .ranks-list .rank-item .rank-info .rank-header {
+  font-size: 1em;
+  text-transform: uppercase;
+  color: var(--color-text-subtle);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: start;
+}
+.teriock .ranks-list .rank-item .rank-info .rank-header .rank-header-left {
+  text-align: left;
+}
+.teriock .ranks-list .rank-item .rank-info .rank-header .rank-header-right {
+  text-align: right;
+}
+.teriock .ranks-list .rank-item .rank-info .rank-class {
+  font-size: 1.5em;
+  color: var(--color-text);
+  margin-bottom: 2px;
+}
 
 [id^="Teriock"] {
   overflow: unset;
 }
 [id^="Teriock"] .window-content {
   padding: 0 !important;
-  display: relative;
+  display: contents;
   container-type: inline-size;
   overflow: unset;
 }
