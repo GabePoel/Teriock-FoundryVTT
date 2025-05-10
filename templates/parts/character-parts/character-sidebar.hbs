@@ -1,20 +1,116 @@
 <div class="character-sidebar">
-    <div class="character-intro-box"></div>
-    <div class="character-status-box">
-        <div class="character-status-bars">
-            <div class="character-hit-bar-container character-bar-container">
-                <div class="character-hit-bar character-bar">
-                    <div class="character-bar-left" style="width: {{barLeft system.hp system.hpMax system.hpTemp}}%;"></div>
-                    <div class="character-bar-temp" style="width: {{barTemp system.hp system.hpMax system.hpTemp}}%;"></div>
-                    <div class="character-bar-lost" style="width: {{barLost system.hp system.hpMax system.hpTemp}}%;"></div>
-                </div>
-                <div class="character-hit-bar-label">
-                    <input type="number" name="system.hp" value="{{system.hp}}">
-                    <input type="number" name="system.hpMax" value="{{system.hpMax}}">
-                    <input type="number" name="system.hpTemp" value="{{system.hpTemp}}">
-                </div>
-            </div>
-            <div class="character-mana-bar-container"></div>
-        </div>
+  <div class="character-intro-box">
+    <div class="character-avatar">
+      <img src="{{img}}" alt="Avatar" class="character-avatar-image" />
     </div>
+    <div class="character-name">
+      <h4 class="character-name-text">{{name}}</h4>
+    </div>
+    <div class="character-basics">
+      <div class="character-shortbox character-level-box">
+        <input
+          type="number"
+          name="system.lvl"
+          value="{{system.lvl}}"
+          class="character-level-input character-shortbox-value"
+        />
+        <div class="character-level-label character-shortbox-label">LVL</div>
+      </div>
+      <div class="character-shortbox character-proficiency-box">
+        <input
+          type="number"
+          name="system.p"
+          value="{{system.p}}"
+          class="character-proficiency-input character-shortbox-value"
+        />
+        <div class="character-level-label character-shortbox-label">PRO</div>
+      </div>
+      <div class="character-shortbox character-fluency-box">
+        <input
+          type="number"
+          name="system.f"
+          value="{{system.f}}"
+          class="character-fluency-input character-shortbox-value"
+        />
+        <div class="character-fluency-label character-shortbox-label">FLU</div>
+      </div>
+    </div>
+  </div>
+  <div class="character-status-box">
+    <div class="character-status-bars">
+      <div class="character-hit-bar-container character-bar-container">
+        <div class="character-hit-bar character-bar">
+          <div
+            class="character-bar-left"
+            style="width: {{barLeft system.hp system.hpMax system.hpTemp}}%;"
+          ></div>
+          <div
+            class="character-bar-temp"
+            style="width: {{barTemp system.hp system.hpMax system.hpTemp}}%;"
+          ></div>
+          <div
+            class="character-bar-lost"
+            style="width: {{barLost system.hp system.hpMax system.hpTemp}}%;"
+          ></div>
+        </div>
+        <div class="character-bar-overlay">
+          <div class="character-bar-overlay-row">
+            <input
+              type="number"
+              name="system.hp"
+              value="{{system.hp}}"
+              class="character-bar-overlay-left character-bar-overlay-label"
+            />
+            <div class="character-bar-overlay-max character-bar-overlay-label">
+              <span>/ {{system.hpMax}} +</span>
+            </div>
+            <input
+              type="number"
+              name="system.hpTemp"
+              value="{{system.hpTemp}}"
+              class="character-bar-overlay-temp character-bar-overlay-label"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="character-mana-bar-container character-bar-container">
+        <div class="character-mana-bar character-bar">
+          <div
+            class="character-bar-left"
+            style="width: {{barLeft system.mp system.mpMax system.mpTemp}}%;"
+          ></div>
+          <div
+            class="character-bar-temp"
+            style="width: {{barTemp system.mp system.mpMax system.mpTemp}}%;"
+          ></div>
+          <div
+            class="character-bar-lost"
+            style="width: {{barLost system.mp system.mpMax system.mpTemp}}%;"
+          ></div>
+        </div>
+        <div class="character-bar-overlay">
+          <div class="character-bar-overlay-row">
+            <input
+              type="number"
+              name="system.mp"
+              value="{{system.mp}}"
+              class="character-bar-overlay-left character-bar-overlay-label"
+            />
+            <div class="character-bar-overlay-max character-bar-overlay-label">
+              <span>/ {{system.mpMax}} +</span>
+            </div>
+            <input
+              type="number"
+              name="system.mpTemp"
+              value="{{system.mpTemp}}"
+              class="character-bar-overlay-temp character-bar-overlay-label"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="character-mana-bar-label">
+      </div>
+      <div class="character-mana-bar-container"></div>
+    </div>
+  </div>
 </div>

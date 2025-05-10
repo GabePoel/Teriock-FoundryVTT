@@ -177,3 +177,10 @@ Handlebars.registerHelper('barLost', function (value, max, temp = 0) {
   const percentTemp = Math.ceil((temp / (max + temp)) * 100);
   return 100 - percentLeft - percentTemp;
 });
+
+Handlebars.registerHelper('tabActive', function (active, tab) {
+  if (active === tab) {
+    return 'active';
+  }
+  return 'inactive';
+});

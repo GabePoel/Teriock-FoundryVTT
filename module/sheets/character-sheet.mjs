@@ -9,24 +9,30 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(sheets
         },
         form: {
             submitOnChange: true,
-        }
+        },
+        position: {
+            width: 800,
+            height: 600,
+        },
     }
     static PARTS = {
-        header: {
-            template: 'systems/teriock/templates/parts/header.hbs',
-        },
-        tabs: {
-            template: 'templates/generic/tab-navigation.hbs',
-        },
         all: {
             template: 'systems/teriock/templates/character-template.hbs',
         },
+        // classes: {
+        //     template: 'systems/teriock/templates/parts/character-parts/character-tab-classes.hbs',
+        //     scrollable: [''],
+        // },
+        // abilities: {
+        //     template: 'systems/teriock/templates/parts/character-parts/character-tab-abilities.hbs',
+        //     scrollable: [''],
+        // },
     };
 
     /** @override */
     async _prepareContext() {
         const allItems = this.actor.itemTypes
-        return {
+        const context = {
             config: CONFIG.TERIOCK,
             editable: this.isEditable,
             actor: this.actor,
@@ -40,5 +46,30 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(sheets
             name: this.actor.name,
             img: this.actor.img,
         };
+        // if (!this.tabGroups.primary) this.tabGroups.primary = 'classes';
+        context.tabs = {
+            classes: {
+                cssClass: this.tabGroups.primary === 'classes' ? 'active' : '',
+                group: 'primary',
+                id: 'classes',
+                icon: '',
+                label: 'Classes',
+            }
+        }
+        return context
+    }
+
+    /** @override */
+    _onRender(context, options) {
+        super._onRender(context, options);
+        this.element.querySelectorAll('.character-tab').forEach((element) => {
+            element.addEventListener('click', (event) => {
+                event.preventDefault();
+                const tab = event.currentTarget.getAttribute('tab');
+                this.document.update({
+                    'system.activeTab': tab,
+                })
+            });
+        });
     }
 }
