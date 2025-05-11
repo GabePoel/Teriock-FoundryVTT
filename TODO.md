@@ -3,6 +3,7 @@
   - [ ] Able to set properties
   - [ ] Able to add descriptions
   - [ ] Able to make consumable (and adjust from character sheet)
+  - [ ] Able to easily set as flaw/ES/ECHO/physical/gifted (and styling to match)
 - [ ] Ability improvements
   - [ ] Able to make as flaw
   - [ ] Improved dice rolling
@@ -26,6 +27,10 @@
 - [ ] Quality of life improvements
   - [ ] Rolling implementation for items
   - [ ] Handlebars consolidation across item and character sheets
+  - [ ] Drag/drop implementations
   - [ ] Styling improvements in lots of places
 - [ ] Bug fixes
   - [ ] Ability sheet prematurely closes when making any edit that's not handled by external code
+- [ ] Decisions
+  - [ ] Should ES by an item or effect/ability?
+  - [ ] Should items enter equipped?
