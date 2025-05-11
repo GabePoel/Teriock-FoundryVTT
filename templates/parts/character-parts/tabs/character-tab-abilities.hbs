@@ -1,28 +1,32 @@
 <div class="character-tab abilities">
   <h1>Abilities</h1>
-  <div class="display-options">
-    <label for="display-size">Size:</label>
-    <select name="system.sheet.display.abilities.size" id="abilities-size">
-      {{selectOptions config.displayOptions.sizes selected=system.sheet.display.abilities.size}}
-    </select>
-    <label for="display-gapless">Gapless:</label>
-    <input type="checkbox" name="system.sheet.display.abilities.gapless" id="gapless" {{checked system.sheet.display.abilities.gapless}}>
+  <div class="tcard-display">
+    <div class="tcard-options">
+      <div class="tcard-options-header">
+        <button class="ability-options-menu-toggle {{ttoggle system.sheet.menus.abilityOptions}}">
+          <i class="fa-solid fa-sliders"></i>
+        </button>
+        <button class="ability-filter-menu-toggle {{ttoggle system.sheet.menus.abilityFilters}}">
+          <i class="fa-solid fa-filter"></i>
+        </button>
+        <input type="text" name="system.sheet.abilityFilters.search" placeholder="Search" value={{system.sheet.abilityFilters.search}}>
+      </div>
+      {{#if system.sheet.menus.abilityOptions}}
+        <div class="tcard-options-content">
+          {{> 'systems/teriock/templates/parts/character-parts/character-ability-options.hbs'}}
+        </div>
+      {{/if}}
+      {{#if system.sheet.menus.abilityFilters}}
+        <div class="tcard-options-content">
+          {{> 'systems/teriock/templates/parts/character-parts/character-ability-filter.hbs'}}
+        </div>
+      {{/if}}
+    </div>
+    {{abilityCards abilities system}}
+    {{#if (not (exists abilities))}}
+      <div class="no-abilities">
+        <p>No abilities found.</p>
+      </div>
+    {{/if}}
   </div>
-  <div class="filter">
-    {{> 'systems/teriock/templates/parts/character-parts/character-ability-filter.hbs'}}
-  </div>
-  <div class="tcard-container {{#if system.sheet.display.abilities.gapless}}gapless{{/if}} {{system.sheet.display.abilities.size}}">
-    {{#each abilities as |ability|}}
-      {{tcard
-        img=ability.img
-        title=ability.name
-        subtitle=(executionTime ability.system.maneuver ability.system.executionTime)
-        text=ability.parent.name
-        id=ability._id
-        parentId=ability.parent._id
-        icons=(concat
-          (ticon "comment" cssClass="shareAbility" action="share" id=ability._id parentId=ability.parent._id)
-        )
-      }}
-    {{/each}}
 </div>

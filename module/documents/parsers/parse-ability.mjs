@@ -91,6 +91,9 @@ export function parseAbility(rawHTML) {
 
     if (tagTree.power) {
         parameters.powerSources = tagTree.power;
+        if ((parameters.powerSources.includes('unknown')) || (parameters.powerSources.includes('psionic'))) {
+            parameters.abilityType = 'special';
+        }
     }
     if (tagTree.interaction) {
         parameters.interaction = tagTree.interaction[0];
@@ -201,6 +204,7 @@ export function parseAbility(rawHTML) {
     }
     if (tagTree.rotator) {
         parameters.rotator = true;
+        parameters.abilityType = 'special';
     }
     if (tagTree.deliveryPackage?.includes("ritual")) {
         parameters.ritual = true;
@@ -266,9 +270,13 @@ export function parseAbility(rawHTML) {
     if (tagTree.class) {
         parameters.class = tagTree.class[0];
     }
+    if (tagTree.flaw) {
+        parameters.abilityType = 'flaw';
+    }
     const abilityBasicElement = doc.querySelector('.ability-basic');
     if (abilityBasicElement) {
         parameters.basic = true;
+        parameters.abilityType = 'intrinsic';
     }
     const out = {
         'system': parameters,

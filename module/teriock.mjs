@@ -242,11 +242,26 @@ Handlebars.registerHelper('ticonToggle', function (iconTrue, iconFalse, bool, op
   `);
 });
 
+Handlebars.registerHelper('ttoggle', function (bool) {
+  if (bool) {
+    return 'ttoggle-button toggled';
+  } else {
+    return 'ttoggle-button';
+  }
+});
+
 Handlebars.registerHelper('tcard', function (options) {
-  const { img, title, subtitle, text, icons, id, parentId } = options.hash;
+  const { img, title, subtitle, text, icons, id, parentId, active=true, marker=null, shattered=false } = options.hash;
+
+  const idAttr = id ? `data-id="${id}"` : '';
+  const parentIdAttr = parentId ? `data-parent-id="${parentId}"` : '';
+  const activeClass = active ? 'active' : 'inactive';
+  const markerStyle = marker ? `style="background-color: ${marker}; width: 4px;"` : '';
+  const shatteredClass = shattered ? 'shattered' : '';
 
   return new Handlebars.SafeString(`
-    <div class="tcard" data-id="${id}" data-parent-id="${parentId}">
+    <div class="tcard ${activeClass} ${shatteredClass}" ${idAttr} ${parentIdAttr}>
+      <div class="tcard-marker" ${markerStyle}></div>
       <div class="tcard-image">
         <img src="${img}" alt="${title}" />
       </div>
@@ -264,6 +279,64 @@ Handlebars.registerHelper('tcard', function (options) {
           </div>
         </div>
       </div>
+      <div class="tcard-background"></div>
     </div>
   `);
+});
+
+Handlebars.registerHelper('abilityCards', function (abilities, system, options) {
+  const isGapless = system?.sheet?.display?.abilities?.gapless;
+  const sizeClass = system?.sheet?.display?.abilities?.size || '';
+
+  const containerClass = `tcard-container ${isGapless ? 'gapless' : ''} ${sizeClass}`.trim();
+
+  const renderedCards = abilities.map(ability => {
+    const subtitle = Handlebars.helpers.executionTime(
+      ability.system?.maneuver,
+      ability.system?.executionTime
+    );
+
+    const marker = Handlebars.helpers.abilityMarker(ability);
+
+    const icons = Handlebars.helpers.concat(
+      Handlebars.helpers.ticon("comment", {
+        hash: {
+          cssClass: "shareAbility",
+          action: "share",
+          id: ability._id,
+          parentId: ability.parent?._id
+        }
+      })
+    );
+
+    return Handlebars.helpers.tcard({
+      hash: {
+        img: ability.img,
+        title: ability.name,
+        subtitle,
+        text: ability.parent?.name,
+        id: ability._id,
+        parentId: ability.parent?._id,
+        marker,
+        icons
+      }
+    });
+  }).join('\n');
+
+  return new Handlebars.SafeString(`
+    <div class="${containerClass}">
+      ${renderedCards}
+    </div>
+  `);
+});
+
+
+Handlebars.registerHelper('equipmentMarker', function (item) {
+  const powerLevel = item.system.powerLevel;
+  return CONFIG.TERIOCK.equipmentOptions.powerLevel[powerLevel]?.color;
+});
+
+Handlebars.registerHelper('abilityMarker', function (effect) {
+  const abilityType = effect.system.abilityType;
+  return CONFIG.TERIOCK.abilityOptions.abilityType[abilityType]?.color;
 });

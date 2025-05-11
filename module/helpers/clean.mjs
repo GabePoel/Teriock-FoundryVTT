@@ -134,3 +134,15 @@ export function cleanSuffix(value, suffix, synonyms) {
     }
     return value;
 }
+
+export function cleanCapitalization(value) {
+    const words = value.split(' ');
+    const filteredWords = words.filter(word => word.length > 0);
+    const capitalizedWords = filteredWords.map(word => {
+        if (word.length > 2) {
+            return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+        }
+        return word.toLowerCase();
+    });
+    return capitalizedWords.join(' ');
+}

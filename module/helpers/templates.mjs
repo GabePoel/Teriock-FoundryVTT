@@ -5,7 +5,6 @@
 export const preloadHandlebarsTemplates = async function () {
   return foundry.applications.handlebars.loadTemplates([
     'systems/teriock/templates/ability-template.hbs',
-    'systems/teriock/templates/actor-template.hbs',
     'systems/teriock/templates/character-template.hbs',
     'systems/teriock/templates/equipment-template.hbs',
     'systems/teriock/templates/fluency-template.hbs',
@@ -24,10 +23,12 @@ export const preloadHandlebarsTemplates = async function () {
     'systems/teriock/templates/parts/ability-parts/page-sections/bar-4.hbs',
     'systems/teriock/templates/parts/ability-parts/page-sections/improvements.hbs',
     'systems/teriock/templates/parts/ability-parts/page-sections/menu.hbs',
+    'systems/teriock/templates/parts/ability-parts/page-sections/status-bar.hbs',
     'systems/teriock/templates/parts/ability-parts/page-sections/tags-1.hbs',
     'systems/teriock/templates/parts/ability-parts/page-sections/tags-2.hbs',
     'systems/teriock/templates/parts/actor-parts/actor-items.hbs',
     'systems/teriock/templates/parts/character-parts/character-ability-filter.hbs',
+    'systems/teriock/templates/parts/character-parts/character-ability-options.hbs',
     'systems/teriock/templates/parts/character-parts/character-equipment-filter.hbs',
     'systems/teriock/templates/parts/character-parts/character-sidebar.hbs',
     'systems/teriock/templates/parts/character-parts/tabs/character-tab-abilities.hbs',
@@ -38,8 +39,10 @@ export const preloadHandlebarsTemplates = async function () {
     'systems/teriock/templates/parts/character-parts/tabs/character-tab-powers.hbs',
     'systems/teriock/templates/parts/character-parts/tabs/character-tab-tradecrafts.hbs',
     'systems/teriock/templates/parts/equipment-parts/main-entries/special-rules.hbs',
-    'systems/teriock/templates/parts/equipment-parts/page-sections/bar-1.hbs',
-    'systems/teriock/templates/parts/equipment-parts/page-sections/bar-2.hbs',
+    'systems/teriock/templates/parts/equipment-parts/page-sections/attack-bar.hbs',
+    'systems/teriock/templates/parts/equipment-parts/page-sections/load-bar.hbs',
+    'systems/teriock/templates/parts/equipment-parts/page-sections/menu.hbs',
+    'systems/teriock/templates/parts/equipment-parts/page-sections/status-bar.hbs',
     'systems/teriock/templates/parts/equipment-parts/page-sections/tags-1.hbs',
     'systems/teriock/templates/parts/equipment-parts/page-sections/tags-2.hbs',
     'systems/teriock/templates/parts/header.hbs',
@@ -48,7 +51,6 @@ export const preloadHandlebarsTemplates = async function () {
     'systems/teriock/templates/parts/rank-parts/rank-bar-class.hbs',
     'systems/teriock/templates/parts/rank-parts/rank-bar-stats.hbs',
     'systems/teriock/templates/power-template.hbs',
-    'systems/teriock/templates/rank-template.hbs',
-    'systems/teriock/templates/test-template.hbs'
+    'systems/teriock/templates/rank-template.hbs'
   ]);
 };

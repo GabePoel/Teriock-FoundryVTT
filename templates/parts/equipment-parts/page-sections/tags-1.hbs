@@ -1,7 +1,16 @@
-{{#if (exists system.equipmentClasses)}}
-    <div class="ab-tags-container">
-        <div class="ab-tags">
-            {{#each system.equipmentClasses as |key index|}}<span class="ab-tag equipment-class-tag" value="{{key}}">{{{key}}}</span>{{/each}}
-        </div>
+<div class="ab-tags-container">
+  <div class="ab-tags">
+    {{#each system.equipmentClasses as |key index|}}<span
+        class="ab-tag equipment-class-tag"
+        value="{{key}}"
+      >{{{key}}}</span>{{/each}}
+  </div>
+  <div class="ab-icon ab-menu-toggle">
+    <div class="ab-menu-closed-container">
+      {{{config.icons.menuOpen}}}
     </div>
-{{/if}}
+    <div class="ab-menu-open-container">
+      {{{config.icons.menuClose}}}
+    </div>
+  </div>
+</div>

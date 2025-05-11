@@ -1,10 +1,12 @@
 <div class="{{cssClass}}" autocomplete="off">
   <div class="ab-sheet-top">
     <div class="ab-bars">
-      {{> "systems/teriock/templates/parts/equipment-parts/page-sections/bar-1.hbs"}}
-      {{> "systems/teriock/templates/parts/equipment-parts/page-sections/bar-2.hbs"}}
+      {{> "systems/teriock/templates/parts/equipment-parts/page-sections/status-bar.hbs"}}
+      {{> "systems/teriock/templates/parts/equipment-parts/page-sections/attack-bar.hbs"}}
+      {{> "systems/teriock/templates/parts/equipment-parts/page-sections/load-bar.hbs"}}
     </div>
   </div>
+  {{> "systems/teriock/templates/parts/equipment-parts/page-sections/menu.hbs"}}
   <div class="ab-main">
     <div class="ab-tags-all">
       {{> "systems/teriock/templates/parts/equipment-parts/page-sections/tags-1.hbs"}}
@@ -16,19 +18,6 @@
   </div>
   <div class="ab-main">
     <button class="createAbility" data-action='createAbility'>Add Ability</button>
-    <div class="tcard-container">
-      {{#each abilities as |ability|}}
-        {{tcard
-          img=ability.img
-          title=ability.name
-          subtitle=ability.system.interaction
-          text=(executionTime ability.system.maneuver ability.system.executionTime)
-          id=ability._id
-          icons=(concat
-            (ticon "comment" cssClass="share" action="shareAbility" id=ability._id)
-          )
-        }}
-      {{/each}}
-    </div>
+    {{abilityCards abilities system}}
   </div>
 </div>

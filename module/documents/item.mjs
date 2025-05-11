@@ -28,7 +28,10 @@ export class TeriockItem extends Item {
       let pageTitle = this.system.wikiNamespace + ':'
       if (this.type === 'rank') {
         pageTitle = pageTitle + CONFIG.TERIOCK.rankOptions[this.system.archetype].classes[this.system.className].name;
-      } else {
+      } else if (this.type === 'equipment') {
+        pageTitle = pageTitle + this.system.equipmentType;
+      }
+      else {
         pageTitle = pageTitle + this.name;
       }
       console.log('Fetching wiki page', pageTitle);

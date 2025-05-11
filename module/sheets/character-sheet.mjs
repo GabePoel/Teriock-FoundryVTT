@@ -17,147 +17,57 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(sheets
             width: 800,
             height: 600,
         },
+        window: {
+            resizable: true,
+            icon: "fa-solid fa-user",
+        }
     }
     static PARTS = {
         all: {
             template: 'systems/teriock/templates/character-template.hbs',
         },
-        // classes: {
-        //     template: 'systems/teriock/templates/parts/character-parts/character-tab-classes.hbs',
-        //     scrollable: [''],
-        // },
-        // abilities: {
-        //     template: 'systems/teriock/templates/parts/character-parts/character-tab-abilities.hbs',
-        //     scrollable: [''],
-        // },
     };
 
-    _getFilteredAbilities() {
-        let abilities = [...this.actor.appliedEffects];
-        const filters = this.actor.system.sheet.abilityFilters;
-        const abilitySearch = filters.search;
-        if ((abilitySearch) && (abilitySearch.length > 0)) {
-            abilities = abilities.filter((item) => {
-                return item.name.toLowerCase().includes(abilitySearch.toLowerCase());
-            });
-        }
-        if (filters.basic) {
-            abilities = abilities.filter((item) => {
-                return item.system.basic;
-            });
-        }
-        if (filters.standard) {
-            abilities = abilities.filter((item) => {
-                return item.system.standard;
-            });
-        }
-        if (filters.skill) {
-            abilities = abilities.filter((item) => {
-                return item.system.skill;
-            });
-        }
-        if (filters.spell) {
-            abilities = abilities.filter((item) => {
-                return item.system.spell;
-            });
-        }
-        if (filters.ritual) {
-            abilities = abilities.filter((item) => {
-                return item.system.ritual;
-            });
-        }
-        if (filters.rotator) {
-            abilities = abilities.filter((item) => {
-                return item.system.rotator;
-            });
-        }
-        if (filters.verbal) {
-            abilities = abilities.filter((item) => {
-                return item.system.costs.verbal;
-            });
-        }
-        if (filters.somatic) {
-            abilities = abilities.filter((item) => {
-                return item.system.costs.somatic;
-            });
-        }
-        if (filters.material) {
-            abilities = abilities.filter((item) => {
-                return item.system.costs.material;
-            });
-        }
-        if (filters.invoked) {
-            abilities = abilities.filter((item) => {
-                return item.system.costs.invoked;
-            });
-        }
-        if (filters.sustained) {
-            abilities = abilities.filter((item) => {
-                return item.system.sustained;
-            });
-        }
-        if (filters.broken) {
-            abilities = abilities.filter((item) => {
-                return item.system.break;
-            });
-        }
-        if (filters.hp) {
-            abilities = abilities.filter((item) => {
-                return item.system.costs.hp;
-            });
-        }
-        if (filters.mp) {
-            abilities = abilities.filter((item) => {
-                return item.system.costs.mp;
-            });
-        }
-        if (filters.heightened) {
-            abilities = abilities.filter((item) => {
-                return item.system.heightened;
-            });
-        }
-        if (filters.expansion) {
-            abilities = abilities.filter((item) => {
-                return item.system.expansion;
-            });
-        }
-        if (filters.maneuver) {
-            abilities = abilities.filter((item) => {
-                return item.system.maneuver == filters.maneuver;
-            });
-        }
-        if (filters.interaction) {
-            abilities = abilities.filter((item) => {
-                return item.system.interaction == filters.interaction;
-            });
-        }
-        if (filters.delivery) {
-            abilities = abilities.filter((item) => {
-                return item.system.delivery.base == filters.delivery;
-            });
-        }
-        if (filters.target) {
-            abilities = abilities.filter((item) => {
-                return item.system.targets.includes(filters.target);
-            });
-        }
-        if (filters.powerSource) {
-            abilities = abilities.filter((item) => {
-                return item.system.powerSources.includes(filters.powerSource);
-            });
-        }
-        if (filters.element) {
-            abilities = abilities.filter((item) => {
-                return item.system.elements.includes(filters.element);
-            });
-        }
-        if (filters.effects) {
-            abilities = abilities.filter((item) => {
-                return filters.effects.every(effect => item.system.effects.includes(effect));
-            });
-        }
-        return abilities;
+    /** @override */
+    constructor(...args) {
+        super(...args);
+        this._filterMenuOpen = false;
+        this._displayMenuOpen = false;
     }
+
+    _getFilteredAbilities() {
+        const filters = this.actor.system.sheet.abilityFilters;
+        const abilitySearch = filters.search?.toLowerCase();
+        
+        return [...this.actor.appliedEffects].filter(item => {
+            if (abilitySearch && !item.name.toLowerCase().includes(abilitySearch)) return false;
+            if (filters.basic && !item.system.basic) return false;
+            if (filters.standard && !item.system.standard) return false;
+            if (filters.skill && !item.system.skill) return false;
+            if (filters.spell && !item.system.spell) return false;
+            if (filters.ritual && !item.system.ritual) return false;
+            if (filters.rotator && !item.system.rotator) return false;
+            if (filters.verbal && !item.system.costs.verbal) return false;
+            if (filters.somatic && !item.system.costs.somatic) return false;
+            if (filters.material && !item.system.costs.material) return false;
+            if (filters.invoked && !item.system.costs.invoked) return false;
+            if (filters.sustained && !item.system.sustained) return false;
+            if (filters.broken && !item.system.break) return false;
+            if (filters.hp && !item.system.costs.hp) return false;
+            if (filters.mp && !item.system.costs.mp) return false;
+            if (filters.heightened && !item.system.heightened) return false;
+            if (filters.expansion && !item.system.expansion) return false;
+            if (filters.maneuver && item.system.maneuver !== filters.maneuver) return false;
+            if (filters.interaction && item.system.interaction !== filters.interaction) return false;
+            if (filters.delivery && item.system.delivery.base !== filters.delivery) return false;
+            if (filters.target && !item.system.targets.includes(filters.target)) return false;
+            if (filters.powerSource && !item.system.powerSources.includes(filters.powerSource)) return false;
+            if (filters.element && !item.system.elements.includes(filters.element)) return false;
+            if (filters.effects && !filters.effects.every(effect => item.system.effects.includes(effect))) return false;
+            return true;
+        });
+    }
+    
 
     /** @override */
     async _prepareContext() {
@@ -282,6 +192,20 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(sheets
                     ability.share();
                 }
                 event.stopPropagation();
+            });
+        });
+        this.element.querySelectorAll('.ability-filter-menu-toggle').forEach((element) => {
+            console.log(element);
+            element.addEventListener('click', (event) => {
+                event.preventDefault();
+                this.document.update({ 'system.sheet.menus.abilityFilters': !this.document.system?.sheet?.menus?.abilityFilters });
+            });
+        });
+        this.element.querySelectorAll('.ability-options-menu-toggle').forEach((element) => {
+            console.log(element);
+            element.addEventListener('click', (event) => {
+                event.preventDefault();
+                this.document.update({ 'system.sheet.menus.abilityOptions': !this.document.system?.sheet?.menus?.abilityOptions });
             });
         });
     }

@@ -6,19 +6,6 @@
     </div>
     <div class="ab-main">
         <button class="createAbility" data-action='createAbility'>Add Ability</button>
-        <div class="tcard-container">
-            {{#each abilities as |ability|}}
-                {{tcard
-                    img=ability.img
-                    title=ability.name
-                    subtitle=ability.system.interaction
-                    text=(executionTime ability.system.maneuver ability.system.executionTime)
-                    id=ability._id
-                    icons=(concat
-                        (ticon "comment" cssClass="shareAbility" action="share" id=ability._id)
-                    )
-                }}
-            {{/each}}
-        </div>
+        {{abilityCards abilities system}}
     </div>
 </div>

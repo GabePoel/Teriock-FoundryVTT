@@ -4,7 +4,7 @@
   - [ ] Able to add descriptions
   - [ ] Able to make consumable (and adjust from character sheet)
 - [ ] Ability improvements
-  - [ ] Able to make as flaw
+  - [x] Able to make as flaw
   - [ ] Improved dice rolling
 - [ ] Character improvements
   - [ ] Basic abilities auto-import
@@ -20,12 +20,15 @@
     - [ ] Fluency bonus
   - [ ] Adding items directly within character sheet
   - [ ] Equipment filters
-  - [ ] Filters and display settings collapsible
-  - [ ] Able to resize sheet
+  - [x] Filters and display settings collapsible
+  - [x] Able to resize sheet
   - [ ] Able to change name and icon
 - [ ] Quality of life improvements
   - [ ] Rolling implementation for items
-  - [ ] Handlebars consolidation across item and character sheets
+  - [x] Handlebars consolidation across item and character sheets
   - [ ] Styling improvements in lots of places
-- [ ] Bug fixes
-  - [ ] Ability sheet prematurely closes when making any edit that's not handled by external code
+- [x] Bug fixes
+  - [x] Ability sheet prematurely closes when making any edit that's not handled by external code
+  - [x] Any HP/MP value can be entered on character sheet
+  - [ ] Temp HP not automatically displayed on character sheet
+  - [ ] Material cost not appearing when opened

@@ -82,6 +82,13 @@ export function parseEquipment(rawHTML) {
     }
     parameters.properties.sort((a, b) => a.localeCompare(b));
     parameters.equipmentClasses.sort((a, b) => a.localeCompare(b));
+    delete parameters.equipmentType;
+    delete parameters.powerLevel;
+    delete parameters.equipped;
+    delete parameters.description;
+    delete parameters.flaws;
+    delete parameters.tier;
+    delete parameters.effectiveTier;
     const out = {
         'system': parameters,
         'img': 'systems/teriock/assets/searchable.svg',

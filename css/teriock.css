@@ -231,6 +231,10 @@
   align-items: center;
   position: relative;
 }
+.teriock .ab-header.shattered {
+  background: url("../assets/shattered.png") no-repeat center center;
+  background-size: cover;
+}
 .teriock .ab-header .ab-profile-img {
   top: 0;
   left: 0;
@@ -869,7 +873,7 @@
   max-width: 560px;
   gap: 8px;
   --tcard-height: 56px;
-  --tcard-outer-border-radius: 8px;
+  --tcard-outer-border-radius: 4px;
   --tcard-inner-border-width: 1px;
   --tcard-title-font-size: 1em;
   --tcard-subtitle-font-size: 0.8em;
@@ -884,9 +888,12 @@
   --tcard-content-gap: 0;
   --tcard-content-font-size: 0.8em;
   --tcard-icons-gap: 6px;
+  --tcard-box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+  --tcard-container-box-shadow: none;
   --tcard-border-radius: var(--tcard-outer-border-radius);
   display: flex;
   flex-direction: column;
+  box-shadow: var(--tcard-container-box-shadow);
 }
 .teriock .tcard-container.large {
   --tcard-height: 84px;
@@ -897,7 +904,7 @@
 }
 .teriock .tcard-container.small {
   --tcard-height: 42px;
-  --tcard-outer-border-radius: 6px;
+  --tcard-outer-border-radius: 3px;
   --tcard-image-padding: 6px;
   --tcard-titles-padding-left: 2px;
   --tcard-titles-flex-direction: row;
@@ -926,9 +933,13 @@
 .teriock .tcard-container.gapless {
   --tcard-inner-border-width: 0;
   --tcard-border-radius: 0;
+  --tcard-box-shadow: none;
+  --tcard-container-box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
   gap: 0;
 }
 .teriock .tcard-container .tcard {
+  --tcard-opacity: 1;
+  background-color: rgba(255, 255, 255, 0.1);
   height: var(--tcard-height);
   display: flex;
   flex-direction: row;
@@ -938,6 +949,27 @@
   border: 1px solid var(--color-border);
   border-radius: var(--tcard-border-radius);
   transition: all 0.15s ease-in-out;
+  overflow: hidden;
+  position: relative;
+  box-shadow: var(--tcard-box-shadow);
+}
+.teriock .tcard-container .tcard.inactive {
+  --tcard-opacity: 0.5;
+  background-color: rgba(255, 255, 255, 0.05);
+}
+.teriock .tcard-container .tcard .tcard-background {
+  background-size: cover;
+  opacity: var(--tcard-opacity);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+}
+.teriock .tcard-container .tcard.shattered .tcard-background {
+  background: url("../assets/shattered.png") no-repeat top center;
+  background-size: cover;
 }
 .teriock .tcard-container .tcard:first-child {
   border-top-left-radius: var(--tcard-outer-border-radius);
@@ -952,6 +984,15 @@
 }
 .teriock .tcard-container .tcard:hover {
   box-shadow: 0 0 8px var(--color-shadow-primary);
+  background-color: rgba(255, 255, 255, 0.15);
+}
+.teriock .tcard-container .tcard:hover.inactive {
+  background-color: rgba(255, 255, 255, 0.075);
+}
+.teriock .tcard-container .tcard .tcard-marker {
+  width: 0;
+  height: 100%;
+  opacity: var(--tcard-opacity);
 }
 .teriock .tcard-container .tcard .tcard-image {
   width: var(--tcard-height);
@@ -959,6 +1000,7 @@
   border-radius: var(--tcard-border-radius);
   padding: var(--tcard-image-padding);
   overflow: hidden;
+  opacity: var(--tcard-opacity);
 }
 .teriock .tcard-container .tcard .tcard-body {
   display: flex;
@@ -967,6 +1009,7 @@
   height: 100%;
   justify-content: space-between;
   align-items: center;
+  opacity: var(--tcard-opacity);
 }
 .teriock .tcard-container .tcard .tcard-body .tcard-titles {
   display: flex;
@@ -985,7 +1028,7 @@
   color: var(--color-text-subtle);
   text-transform: uppercase;
 }
-.teriock .tcard-container .tcard .tcard-content {
+.teriock .tcard-container .tcard .tcard-body .tcard-content {
   display: flex;
   flex-direction: var(--tcard-content-flex-direction);
   justify-content: space-between;
@@ -994,12 +1037,12 @@
   padding: var(--tcard-content-padding);
   gap: var(--tcard-content-gap);
 }
-.teriock .tcard-container .tcard .tcard-content .tcard-text {
+.teriock .tcard-container .tcard .tcard-body .tcard-content .tcard-text {
   font-size: 0.8em;
   color: var(--color-text-subtle);
   text-transform: uppercase;
 }
-.teriock .tcard-container .tcard .tcard-content .tcard-icons {
+.teriock .tcard-container .tcard .tcard-body .tcard-content .tcard-icons {
   font-size: 0.8em;
   color: var(--color-text-subtle);
   text-transform: uppercase;
@@ -1007,36 +1050,84 @@
   flex: row;
   gap: var(--tcard-icons-gap);
 }
-.teriock .tcard-container .tcard .tcard-content .tcard-icons i:hover {
+.teriock .tcard-container .tcard .tcard-body .tcard-content .tcard-icons i:hover {
   color: var(--color-text-emphatic);
 }
-.teriock .tcard-container .tcard .tcard-content .tcard-icons i:active {
+.teriock .tcard-container .tcard .tcard-body .tcard-content .tcard-icons i:active {
   color: var(--color-text-accent);
 }
-.teriock .filter-grid {
+.teriock .tgrid {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
   width: 100%;
   gap: 0.5em;
 }
-.teriock .filter-grid .filter-grid-item {
+.teriock .tgrid.g1 {
+  grid-template-columns: 1fr;
+}
+.teriock .tgrid.g2 {
+  grid-template-columns: 1fr 1fr;
+}
+.teriock .tgrid.g3 {
+  grid-template-columns: 1fr 1fr 1fr;
+}
+.teriock .tgrid.g4 {
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+.teriock .tgrid.g5 {
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+}
+.teriock .tgrid.g6 {
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+.teriock .tgrid.g7 {
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+.teriock .tgrid.g8 {
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+.teriock .tgrid .tgrid-item {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: right;
 }
-.teriock .filter-grid .filter-grid-item input[type="checkbox"] {
+.teriock .tgrid .tgrid-item input[type="checkbox"] {
   margin-right: 2em;
 }
-.teriock .filter-grid .filter-grid-item multi-select {
+.teriock .tgrid .tgrid-item multi-select {
   width: 100%;
   flex-direction: column-reverse;
 }
-.teriock .filter-grid .grid-item-2 {
+.teriock .tgrid .tgrid-item button {
+  width: 100%;
+}
+.teriock .tgrid .gi1 {
+  grid-column: span 1;
+}
+.teriock .tgrid .gi2 {
   grid-column: span 2;
 }
-.teriock .filter-grid .grid-item-4 {
+.teriock .tgrid .gi3 {
+  grid-column: span 3;
+}
+.teriock .tgrid .gi4 {
   grid-column: span 4;
+}
+.teriock .tgrid .gi5 {
+  grid-column: span 5;
+}
+.teriock .tgrid .gi6 {
+  grid-column: span 6;
+}
+.teriock .tgrid .gi7 {
+  grid-column: span 7;
+}
+.teriock .tgrid .gi8 {
+  grid-column: span 8;
+}
+.teriock .ttoggle-button.toggled {
+  background-color: var(--button-hover-background-color);
+  color: var(--button-hover-text-color);
 }
 .teriock .character-page {
   display: flex;
@@ -1234,7 +1325,6 @@
   flex-direction: column;
   align-items: center;
   padding: 1em;
-  gap: 1em;
 }
 .teriock .ranks-list {
   display: flex;
@@ -1312,11 +1402,61 @@
   color: var(--color-text);
   margin-bottom: 2px;
 }
+.teriock .tcard-display {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 0.5em;
+}
+.teriock .tcard-display .tcard-options {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 0.5em;
+  margin-bottom: 0.5em;
+  padding-bottom: 0.5em;
+  border-bottom: 1px dashed var(--color-border);
+  gap: 0.5em;
+}
+.teriock .tcard-display .tcard-options .tcard-options-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: start;
+  width: 100%;
+  gap: 0.5em;
+}
+.teriock .tcard-display .tcard-options .tcard-options-header input {
+  width: 100%;
+}
+.teriock .tcard-display .tcard-options .tcard-options-content {
+  padding-top: 0.5em;
+  border-top: 1px dotted var(--color-form-hint);
+}
+.teriock .tcard-display .tcard-container {
+  width: 100%;
+  max-width: unset;
+}
+.teriock .tcard-display .no-abilities {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 84px;
+}
 
-[id^="Teriock"] {
+.application.sheet.teriock:not(.minimized) {
   overflow: unset;
 }
-[id^="Teriock"] .window-content {
+.application.sheet.teriock:not(.minimized) .window-content {
   padding: 0 !important;
   display: contents;
   container-type: inline-size;
@@ -1342,6 +1482,11 @@
 
 .prosemirror button.toggle, prose-mirror button.toggle {
   font-size: xx-small;
+  padding: 0.5em;
+  height: unset;
+  width: unset;
+  min-height: unset;
+  min-width: unset;
 }
 
 /*# sourceMappingURL=teriock.css.map */

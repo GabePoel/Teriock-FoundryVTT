@@ -1,363 +1,359 @@
 <div class="ab-menu">
-  {{! <div class="ab-menu-header">
-      <div class="ab-menu-title">Options</div>
-    </div> }}
   <div class="ab-menu-content">
     <div class="ab-menu-bar">
-      {{!-- <div class="ab-menu-item">
-        <label>Editable</label>
-        <input
-          type="checkbox"
-          name="editable"
-          data-edit="editable"
-          {{checked editable}}
-        />
-      </div> --}}
-      <div class="ab-menu-item">
-        <label>Basic</label>
-        <input
-          type="checkbox"
-          name="system.basic"
-          data-edit="system.basic"
-          {{checked system.basic}}
-        />
-      </div>
-      <div class="ab-menu-item">
-        <label>Standard</label>
-        <input
-          type="checkbox"
-          name="system.standard"
-          data-edit="system.standard"
-          {{checked system.standard}}
-        />
-      </div>
-      <div class="ab-menu-item">
-        <label>Skill</label>
-        <input
-          type="checkbox"
-          name="system.skill"
-          data-edit="system.skill"
-          {{checked system.skill}}
-        />
-      </div>
-      <div class="ab-menu-item">
-        <label>Spell</label>
-        <input
-          type="checkbox"
-          name="system.spell"
-          data-edit="system.spell"
-          {{checked system.spell}}
-        />
-      </div>
-      <div class="ab-menu-item">
-        <label>Ritual</label>
-        <input
-          type="checkbox"
-          name="system.ritual"
-          data-edit="system.ritual"
-          {{checked system.ritual}}
-        />
-      </div>
-      <div class="ab-menu-item">
-        <label>Rotator</label>
-        <input
-          type="checkbox"
-          name="system.rotator"
-          data-edit="system.rotator"
-          {{checked system.rotator}}
-        />
-      </div>
-      <div class="ab-menu-item">
-        <label>Sustained</label>
-        <input
-          type="checkbox"
-          name="system.sustained"
-          data-edit="system.sustained"
-          {{checked system.sustained}}
-        />
-      </div>
-      <div class="ab-menu-item">
-        <label>Invoked</label>
-        <input
-          type="checkbox"
-          name="system.costs.invoked"
-          data-edit="system.costs.invoked"
-          {{checked system.costs.invoked}}
-        />
-      </div>
-      <div class="ab-menu-item">
-        <label>Verbal</label>
-        <input
-          type="checkbox"
-          name="system.costs.verbal"
-          data-edit="system.costs.verbal"
-          {{checked system.costs.verbal}}
-        />
-      </div>
-      <div class="ab-menu-item">
-        <label>Somatic</label>
-        <input
-          type="checkbox"
-          name="system.costs.somatic"
-          data-edit="system.costs.somatic"
-          {{checked system.costs.somatic}}
-        />
+      <div class="tgrid g5">
+        <div class="tgrid-item">
+          <label>Basic</label>
+          <input
+            type="checkbox"
+            name="system.basic"
+            data-edit="system.basic"
+            {{checked system.basic}}
+          />
+        </div>
+        <div class="tgrid-item">
+          <label>Standard</label>
+          <input
+            type="checkbox"
+            name="system.standard"
+            data-edit="system.standard"
+            {{checked system.standard}}
+          />
+        </div>
+        <div class="tgrid-item">
+          <label>Skill</label>
+          <input
+            type="checkbox"
+            name="system.skill"
+            data-edit="system.skill"
+            {{checked system.skill}}
+          />
+        </div>
+        <div class="tgrid-item">
+          <label>Spell</label>
+          <input
+            type="checkbox"
+            name="system.spell"
+            data-edit="system.spell"
+            {{checked system.spell}}
+          />
+        </div>
+        <div class="tgrid-item">
+          <label>Ritual</label>
+          <input
+            type="checkbox"
+            name="system.ritual"
+            data-edit="system.ritual"
+            {{checked system.ritual}}
+          />
+        </div>
+        <div class="tgrid-item">
+          <label>Rotator</label>
+          <input
+            type="checkbox"
+            name="system.rotator"
+            data-edit="system.rotator"
+            {{checked system.rotator}}
+          />
+        </div>
+        <div class="tgrid-item">
+          <label>Sustained</label>
+          <input
+            type="checkbox"
+            name="system.sustained"
+            data-edit="system.sustained"
+            {{checked system.sustained}}
+          />
+        </div>
+        <div class="tgrid-item">
+          <label>Invoked</label>
+          <input
+            type="checkbox"
+            name="system.costs.invoked"
+            data-edit="system.costs.invoked"
+            {{checked system.costs.invoked}}
+          />
+        </div>
+        <div class="tgrid-item">
+          <label>Verbal</label>
+          <input
+            type="checkbox"
+            name="system.costs.verbal"
+            data-edit="system.costs.verbal"
+            {{checked system.costs.verbal}}
+          />
+        </div>
+        <div class="tgrid-item">
+          <label>Somatic</label>
+          <input
+            type="checkbox"
+            name="system.costs.somatic"
+            data-edit="system.costs.somatic"
+            {{checked system.costs.somatic}}
+          />
+        </div>
       </div>
     </div>
     <div class="ab-menu-bar">
-      <div class="ab-multi-select-label ab-multi-select-power">
-        <multi-select
-          name="system.powerSources"
-          data-edit="system.powerSources"
-        >
-          {{selectOptions
-            config.abilityOptions.powerSources
-            selected=system.powerSources
-          }}
-        </multi-select>
+      <div class="tgrid g4">
+        <div class="tgrid-item">
+          <div class="ab-multi-select-label ab-multi-select-power">
+            <multi-select
+              name="system.powerSources"
+              data-edit="system.powerSources"
+            >
+              {{selectOptions
+                config.abilityOptions.powerSources
+                selected=system.powerSources
+              }}
+            </multi-select>
+          </div>
+        </div>
+        <div class="tgrid-item">
+          <div class="ab-multi-select-label ab-multi-select-element">
+            <multi-select name="system.elements" data-edit="system.elements">
+              {{selectOptions
+                config.abilityOptions.elements
+                selected=system.elements
+              }}
+            </multi-select>
+          </div>
+        </div>
+        <div class="tgrid-item">
+          <div class="ab-multi-select-label ab-multi-select-effects">
+            <multi-select name="system.effects" data-edit="system.effects">
+              {{selectOptions
+                config.abilityOptions.effects
+                selected=system.effects
+              }}
+            </multi-select>
+          </div>
+        </div>
+        <div class="tgrid-item">
+          <select name="system.class" data-edit="system.class">
+            <option value="" selected>Class</option>
+            {{selectOptions config.abilityOptions.class selected=system.class}}
+          </select>
+        </div>
       </div>
     </div>
     <div class="ab-menu-bar">
-      <div class="ab-multi-select-label ab-multi-select-element">
-        <multi-select name="system.elements" data-edit="system.elements">
-          {{selectOptions
-            config.abilityOptions.elements
-            selected=system.elements
-          }}
-        </multi-select>
+      <div class="tgrid g3">
+        {{#if (not (exists system.expansion))}}
+          <div class="tgrid-item">
+            <button class="ab-menu-button ab-expansion-button">
+              {{{config.icons.add}}}
+              Expansion
+            </button>
+          </div>
+        {{/if}}
+
+        {{! Before Overview }}
+        {{#if (not (exists system.costs.mp))}}
+          <div class="tgrid-item">
+            <button class="ab-menu-button ab-mana-cost-button">
+              {{{config.icons.add}}}
+              Mana Cost
+            </button>
+          </div>
+        {{/if}}
+        {{#if (not (exists system.costs.hp))}}
+          <div class="tgrid-item">
+            <button class="ab-menu-button ab-hit-cost-button">
+              {{{config.icons.add}}}
+              Hit Cost
+            </button>
+          </div>
+        {{/if}}
+        {{#if (not (exists system.costs.break))}}
+          <div class="tgrid-item">
+            <button class="ab-menu-button ab-break-cost-button">
+              {{{config.icons.add}}}
+              Break Cost
+            </button>
+          </div>
+        {{/if}}
+        {{#if (not (exists system.costs.materialCost))}}
+          <div class="tgrid-item">
+            <button class="ab-menu-button ab-material-cost-button">
+              {{{config.icons.add}}}
+              Material Cost
+            </button>
+          </div>
+        {{/if}}
+        {{#if (not (exists system.trigger))}}
+          <div class="tgrid-item">
+            <button class="ab-menu-button ab-trigger-button">
+              {{{config.icons.add}}}
+              Trigger
+            </button>
+          </div>
+        {{/if}}
+
+        {{! Overview }}
+        {{#if (not (exists system.overview.base))}}
+          <div class="tgrid-item">
+            <button class="ab-menu-button ab-base-button">
+              {{{config.icons.add}}}
+              Description
+            </button>
+          </div>
+        {{/if}}
+
+        {{! After Overview }}
+        {{#if (not (exists system.overview.proficient))}}
+          <div class="tgrid-item">
+            <button class="ab-menu-button ab-proficient-button">
+              {{{config.icons.add}}}
+              If Proficient
+            </button>
+          </div>
+        {{/if}}
+        {{#if (not (exists system.overview.fluent))}}
+          <div class="tgrid-item">
+            <button class="ab-menu-button ab-fluent-button">
+              {{{config.icons.add}}}
+              If Fluent
+            </button>
+          </div>
+        {{/if}}
+        {{#if (not (exists system.heightened))}}
+          <div class="tgrid-item">
+            <button class="ab-menu-button ab-heightened-button">
+              {{{config.icons.add}}}
+              Heightened
+            </button>
+          </div>
+        {{/if}}
+
+        {{! Attack }}
+        {{#if (eq system.interaction "attack")}}
+          {{#if (not (exists system.results.critHit))}}
+            <div class="tgrid-item">
+              <button class="ab-menu-button ab-crit-hit-button">
+                {{{config.icons.add}}}
+                On Critical Hit
+              </button>
+            </div>
+          {{/if}}
+          {{#if (not (exists system.results.hit))}}
+            <div class="tgrid-item">
+              <button class="ab-menu-button ab-hit-button">
+                {{{config.icons.add}}}
+                On Hit
+              </button>
+            </div>
+          {{/if}}
+          {{#if (not (exists system.results.miss))}}
+            <div class="tgrid-item">
+              <button class="ab-menu-button ab-miss-button">
+                {{{config.icons.add}}}
+                On Miss
+              </button>
+            </div>
+          {{/if}}
+          {{#if (not (exists system.results.critMiss))}}
+            <div class="tgrid-item">
+              <button class="ab-menu-button ab-crit-miss-button">
+                {{{config.icons.add}}}
+                On Critical Miss
+              </button>
+            </div>
+          {{/if}}
+        {{/if}}
+
+        {{! Feat }}
+        {{#if (eq system.interaction "feat")}}
+          {{#if (not (exists system.results.critFail))}}
+            <div class="tgrid-item">
+              <button class="ab-menu-button ab-crit-fail-button">
+                {{{config.icons.add}}}
+                On Critical Fail
+              </button>
+            </div>
+          {{/if}}
+          {{#if (not (exists system.results.fail))}}
+            <div class="tgrid-item">
+              <button class="ab-menu-button ab-fail-button">
+                {{{config.icons.add}}}
+                On Fail
+              </button>
+            </div>
+          {{/if}}
+          {{#if (not (exists system.results.save))}}
+            <div class="tgrid-item">
+              <button class="ab-menu-button ab-save-button">
+                {{{config.icons.add}}}
+                On Save
+              </button>
+            </div>
+          {{/if}}
+          {{#if (not (exists system.results.critSave))}}
+            <div class="tgrid-item">
+              <button class="ab-menu-button ab-crit-save-button">
+                {{{config.icons.add}}}
+                On Critical Save
+              </button>
+            </div>
+          {{/if}}
+        {{/if}}
+
+        {{! Block }}
+        {{#if (eq system.interaction "block")}}
+          {{#if (not (exists system.results.save))}}
+            <div class="tgrid-item">
+              <button class="ab-menu-button ab-save-button">
+                {{{config.icons.add}}}
+                On Save
+              </button>
+            </div>
+          {{/if}}
+          {{#if (not (exists system.results.fail))}}
+            <div class="tgrid-item">
+              <button class="ab-menu-button ab-fail-button">
+                {{{config.icons.add}}}
+                On Fail
+              </button>
+            </div>
+          {{/if}}
+        {{/if}}
+
+        {{! Other }}
+        {{#if (not (exists system.endCondition))}}
+          <div class="tgrid-item">
+            <button class="ab-menu-button ab-end-condition-button">
+              {{{config.icons.add}}}
+              End Condition
+            </button>
+          </div>
+        {{/if}}
+        {{#if (not (exists system.requirements))}}
+          <div class="tgrid-item">
+            <button class="ab-menu-button ab-requirements-button">
+              {{{config.icons.add}}}
+              Requirements
+            </button>
+          </div>
+        {{/if}}
+
+        {{! Improvements }}
+        {{#if (not (exists system.improvements.attributeImprovement.attribute))}}
+          <div class="tgrid-item">
+            <button class="ab-menu-button ab-attribute-improvement-button">
+              {{{config.icons.add}}}
+              Attribute Improvement
+            </button>
+          </div>
+        {{/if}}
+        {{#if (not (exists system.improvements.featSaveImprovement.attribute))}}
+          <div class="tgrid-item">
+            <button class="ab-menu-button ab-feat-save-improvement-button">
+              {{{config.icons.add}}}
+              Feat Save Improvement
+            </button>
+          </div>
+        {{/if}}
       </div>
-    </div>
-    <div class="ab-menu-bar">
-      <div class="ab-multi-select-label ab-multi-select-effects">
-        <multi-select name="system.effects" data-edit="system.effects">
-          {{selectOptions
-            config.abilityOptions.effects
-            selected=system.effects
-          }}
-        </multi-select>
-      </div>
-    </div>
-    <div class="ab-menu-bar">
-      <select name="system.class" data-edit="system.class">
-        <option value="" selected>Class</option>
-        {{selectOptions config.abilityOptions.class selected=system.class}}
-      </select>
-    </div>
-    <div class="ab-menu-bar">
-      {{#if (not (exists system.expansion))}}
-        <div class="ab-menu-item">
-          <button class="ab-menu-button ab-expansion-button">
-            {{{config.icons.add}}}
-            Expansion
-          </button>
-        </div>
-      {{/if}}
-
-      {{! Before Overview }}
-      {{#if (not (exists system.costs.mp))}}
-        <div class="ab-menu-item">
-          <button class="ab-menu-button ab-mana-cost-button">
-            {{{config.icons.add}}}
-            Mana Cost
-          </button>
-        </div>
-      {{/if}}
-      {{#if (not (exists system.costs.hp))}}
-        <div class="ab-menu-item">
-          <button class="ab-menu-button ab-hit-cost-button">
-            {{{config.icons.add}}}
-            Hit Cost
-          </button>
-        </div>
-      {{/if}}
-      {{#if (not (exists system.costs.break))}}
-        <div class="ab-menu-item">
-          <button class="ab-menu-button ab-break-cost-button">
-            {{{config.icons.add}}}
-            Break Cost
-          </button>
-        </div>
-      {{/if}}
-      {{#if (not (exists system.costs.materialCost))}}
-        <div class="ab-menu-item">
-          <button class="ab-menu-button ab-material-cost-button">
-            {{{config.icons.add}}}
-            Material Cost
-          </button>
-        </div>
-      {{/if}}
-      {{#if (not (exists system.trigger))}}
-        <div class="ab-menu-item">
-          <button class="ab-menu-button ab-trigger-button">
-            {{{config.icons.add}}}
-            Trigger
-          </button>
-        </div>
-      {{/if}}
-
-      {{! Overview }}
-      {{#if (not (exists system.overview.base))}}
-        <div class="ab-menu-item">
-          <button class="ab-menu-button ab-base-button">
-            {{{config.icons.add}}}
-            Description
-          </button>
-        </div>
-      {{/if}}
-
-      {{! After Overview }}
-      {{#if (not (exists system.overview.proficient))}}
-        <div class="ab-menu-item">
-          <button class="ab-menu-button ab-proficient-button">
-            {{{config.icons.add}}}
-            If Proficient
-          </button>
-        </div>
-      {{/if}}
-      {{#if (not (exists system.overview.fluent))}}
-        <div class="ab-menu-item">
-          <button class="ab-menu-button ab-fluent-button">
-            {{{config.icons.add}}}
-            If Fluent
-          </button>
-        </div>
-      {{/if}}
-      {{#if (not (exists system.heightened))}}
-        <div class="ab-menu-item">
-          <button class="ab-menu-button ab-heightened-button">
-            {{{config.icons.add}}}
-            Heightened
-          </button>
-        </div>
-      {{/if}}
-
-      {{! Attack }}
-      {{#if (eq system.interaction "attack")}}
-        {{#if (not (exists system.results.critHit))}}
-          <div class="ab-menu-item">
-            <button class="ab-menu-button ab-crit-hit-button">
-              {{{config.icons.add}}}
-              On Critical Hit
-            </button>
-          </div>
-        {{/if}}
-        {{#if (not (exists system.results.hit))}}
-          <div class="ab-menu-item">
-            <button class="ab-menu-button ab-hit-button">
-              {{{config.icons.add}}}
-              On Hit
-            </button>
-          </div>
-        {{/if}}
-        {{#if (not (exists system.results.miss))}}
-          <div class="ab-menu-item">
-            <button class="ab-menu-button ab-miss-button">
-              {{{config.icons.add}}}
-              On Miss
-            </button>
-          </div>
-        {{/if}}
-        {{#if (not (exists system.results.critMiss))}}
-          <div class="ab-menu-item">
-            <button class="ab-menu-button ab-crit-miss-button">
-              {{{config.icons.add}}}
-              On Critical Miss
-            </button>
-          </div>
-        {{/if}}
-      {{/if}}
-
-      {{! Feat }}
-      {{#if (eq system.interaction "feat")}}
-        {{#if (not (exists system.results.critFail))}}
-          <div class="ab-menu-item">
-            <button class="ab-menu-button ab-crit-fail-button">
-              {{{config.icons.add}}}
-              On Critical Fail
-            </button>
-          </div>
-        {{/if}}
-        {{#if (not (exists system.results.fail))}}
-          <div class="ab-menu-item">
-            <button class="ab-menu-button ab-fail-button">
-              {{{config.icons.add}}}
-              On Fail
-            </button>
-          </div>
-        {{/if}}
-        {{#if (not (exists system.results.save))}}
-          <div class="ab-menu-item">
-            <button class="ab-menu-button ab-save-button">
-              {{{config.icons.add}}}
-              On Save
-            </button>
-          </div>
-        {{/if}}
-        {{#if (not (exists system.results.critSave))}}
-          <div class="ab-menu-item">
-            <button class="ab-menu-button ab-crit-save-button">
-              {{{config.icons.add}}}
-              On Critical Save
-            </button>
-          </div>
-        {{/if}}
-      {{/if}}
-
-      {{! Block }}
-      {{#if (eq system.interaction "block")}}
-        {{#if (not (exists system.results.save))}}
-          <div class="ab-menu-item">
-            <button class="ab-menu-button ab-save-button">
-              {{{config.icons.add}}}
-              On Save
-            </button>
-          </div>
-        {{/if}}
-        {{#if (not (exists system.results.fail))}}
-          <div class="ab-menu-item">
-            <button class="ab-menu-button ab-fail-button">
-              {{{config.icons.add}}}
-              On Fail
-            </button>
-          </div>
-        {{/if}}
-      {{/if}}
-
-      {{! Other }}
-      {{#if (not (exists system.endCondition))}}
-        <div class="ab-menu-item">
-          <button class="ab-menu-button ab-end-condition-button">
-            {{{config.icons.add}}}
-            End Condition
-          </button>
-        </div>
-      {{/if}}
-      {{#if (not (exists system.requirements))}}
-        <div class="ab-menu-item">
-          <button class="ab-menu-button ab-requirements-button">
-            {{{config.icons.add}}}
-            Requirements
-          </button>
-        </div>
-      {{/if}}
-
-      {{! Improvements }}
-      {{#if (not (exists system.improvements.attributeImprovement.attribute))}}
-        <div class="ab-menu-item">
-          <button class="ab-menu-button ab-attribute-improvement-button">
-            {{{config.icons.add}}}
-            Attribute Improvement
-          </button>
-        </div>
-      {{/if}}
-      {{#if (not (exists system.improvements.featSaveImprovement.attribute))}}
-        <div class="ab-menu-item">
-          <button class="ab-menu-button ab-feat-save-improvement-button">
-            {{{config.icons.add}}}
-            Feat Save Improvement
-          </button>
-        </div>
-      {{/if}}
     </div>
   </div>
 </div>

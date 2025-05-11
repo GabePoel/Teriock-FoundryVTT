@@ -12,6 +12,7 @@ export class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(sheets.A
         },
         form: {
             submitOnChange: true,
+            closeOnSubmit: false,
         }
     }
     static PARTS = {
@@ -56,6 +57,7 @@ export class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(sheets.A
             name: this.document.name,
             img: this.document.img,
             flags: this.document.flags,
+            disabled: this.document.disabled,
         };
         const system = this.document.system
 
@@ -145,6 +147,10 @@ export class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(sheets.A
             console.log('Debugging');
             console.log(this.document);
         });
+        this.element.querySelector('.disabled-box').addEventListener('click', (event) => {
+            event.preventDefault();
+            this.document.update({ disabled: !this.document.disabled });
+        });
         this.element.querySelectorAll('.range-input').forEach((element) => {
             this._connectInput(element, element.getAttribute('name'), cleanFeet);
         });
@@ -160,7 +166,7 @@ export class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(sheets.A
         this.element.querySelectorAll('.hp-input').forEach((element) => {
             this._connectInput(element, element.getAttribute('name'), cleanHp);
         });
-
+        
         // Everything below here is only needed if the sheet is editable
         if (!this.isEditable) return;
 
@@ -225,6 +231,7 @@ export class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(sheets.A
         this._connectContextMenu('.ab-improvement-attribute', cm.attributeImprovementMinVal, 'contextmenu');
         this._connectContextMenu('.ab-improvement-feat-save', cm.featSaveImprovement, 'click');
         this._connectContextMenu('.ab-improvement-feat-save', cm.featSaveImprovementAmount, 'contextmenu');
+        this._connectContextMenu('.ability-type-box', cm.abilityType, 'click');
     }
 
     _activateTags(html) {

@@ -1,3 +1,5 @@
+import { makeIcon } from "../../helpers/utils.mjs";
+
 export function contextMenus(ability) {
     function fetch(keyChain) {
         let keys = CONFIG.TERIOCK.abilityOptions
@@ -202,6 +204,13 @@ export function contextMenus(ability) {
             }),
         })),
         featSaveImprovement: quickMenu('attribute', 'system.improvements.featSaveImprovement.attribute', true),
-        featSaveImprovementAmount: quickMenu('featSaveImprovementAmount', 'system.improvements.featSaveImprovement.amount')
+        featSaveImprovementAmount: quickMenu('featSaveImprovementAmount', 'system.improvements.featSaveImprovement.amount'),
+        abilityType: Object.entries(fetch('abilityType')).map(([key, value]) => ({
+            name: value.name,
+            icon: makeIcon(value.icon, CONFIG.TERIOCK.iconStyles.contextMenu),
+            callback: () => ability.update({
+                'system.abilityType': key,
+            }),
+        })),
     }
 }
