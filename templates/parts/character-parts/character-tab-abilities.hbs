@@ -7,18 +7,23 @@
     </select>
     <label for="display-gapless">Gapless:</label>
     <input type="checkbox" name="system.display.abilities.gapless" id="gapless" {{checked system.display.abilities.gapless}}>
+    <a
+      class="createAbility"
+      data-action='createAbility'
+    >Create Ability</a>
   </div>
   <div class="tcard-container {{#if system.display.abilities.gapless}}gapless{{/if}} {{system.display.abilities.size}}">
     {{#each abilities as |ability|}}
       {{tcard
         img=ability.img
         title=ability.name
-        subtitle=ability.system.interaction
-        text=(executionTime ability.system.maneuver ability.system.executionTime)
+        subtitle=(executionTime ability.system.maneuver ability.system.executionTime)
+        text=ability.parent.name
         id=ability._id
+        parentId=ability.parent._id
         icons=(concat
-          (ticon "comment" cssClass="share" action="share" id=ability._id)
-          (ticon "dice-d20" cssClass="roll" action="useAbility" id=ability._id)
+          (ticon "dice-d20" cssClass="roll" action="useAbility" id=ability._id parentId=ability.parent._id)
+          (ticon "comment" cssClass="share" action="share" id=ability._id parentId=ability.parent._id)
         )
       }}
     {{/each}}

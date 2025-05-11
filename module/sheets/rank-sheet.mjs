@@ -9,6 +9,7 @@ export class TeriockRankSheet extends HandlebarsApplicationMixin(TeriockItemShee
             onEditImage: this._onEditImage,
             onChat: this._onChat,
             viewDoc: this._viewDoc,
+            createAbility: this._createAbility,
         },
         form: {
             submitOnChange: true,
@@ -68,9 +69,9 @@ export class TeriockRankSheet extends HandlebarsApplicationMixin(TeriockItemShee
         });
     }
 
-    static async _viewDoc(event, target) {
-        const id = target.parentElement.getAttribute('data-item-id');
-        const ability = await game.packs.get(this.item.system.sourcePack).getDocument(id);
-        ability.sheet.render(true);
-    }
+    // static async _viewDoc(event, target) {
+    //     const id = target.parentElement.getAttribute('data-item-id');
+    //     const ability = await game.packs.get(this.item.system.sourcePack).getDocument(id);
+    //     ability.sheet.render(true);
+    // }
 }

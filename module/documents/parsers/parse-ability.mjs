@@ -83,7 +83,7 @@ export function parseAbility(rawHTML) {
 
     // console.log(parameters);
 
-    const referenceAbility = new Item({
+    const referenceAbility = new ActiveEffect({
         name: 'Reference Ability',
         type: 'ability',
     })

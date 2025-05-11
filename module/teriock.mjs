@@ -1,6 +1,6 @@
 import { TeriockActor } from './documents/actor.mjs';
 import { TeriockItem } from './documents/item.mjs';
-// import { TeriockActorSheet } from './sheets/actor-sheet.mjs';
+import { TeriockEffect } from './documents/effect.mjs';
 import { TeriockCharacterSheet } from './sheets/character-sheet.mjs';
 import { TeriockAbilitySheet } from './sheets/ability-sheet.mjs';
 import { TeriockEquipmentSheet } from './sheets/equipment-sheet.mjs';
@@ -10,6 +10,7 @@ import { preloadHandlebarsTemplates } from './helpers/templates.mjs';
 import { TERIOCK } from './helpers/config.mjs';
 const { Actors, Items } = foundry.documents.collections;
 const { ActorSheet, ItemSheet } = foundry.appv1.sheets;
+const { DocumentSheetConfig } = foundry.applications.apps;
 
 Hooks.once('init', function () {
   CONFIG.TERIOCK = TERIOCK;
@@ -20,19 +21,21 @@ Hooks.once('init', function () {
 
   CONFIG.Actor.documentClass = TeriockActor;
   CONFIG.Item.documentClass = TeriockItem;
+  // CONFIG.ActiveEffect.documentClass =
+  CONFIG.ActiveEffect.documentClass = TeriockEffect;
 
-  Actors.unregisterSheet('core', ActorSheet);
+    Actors.unregisterSheet('core', ActorSheet);
   Actors.registerSheet('teriock', TeriockCharacterSheet, {
     makeDefault: true,
     label: 'Character',
     types: ['character'],
   });
   Items.unregisterSheet('core', ItemSheet);
-  Items.registerSheet('teriock', TeriockAbilitySheet, {
-    makeDefault: true,
-    label: 'Ability',
-    types: ['ability'],
-  });
+  // ActiveEffects.registerSheet('teriock', TeriockAbilitySheet, {
+  //   makeDefault: true,
+  //   label: 'Ability',
+  //   types: ['ability'],
+  // });
   Items.registerSheet('teriock', TeriockEquipmentSheet, {
     makeDefault: true,
     label: 'Equipment',
@@ -49,13 +52,16 @@ Hooks.once('init', function () {
     types: ['rank'],
   });
 
+  DocumentSheetConfig.registerSheet(TeriockEffect, 'teriock', TeriockAbilitySheet, {makeDefault: true});
+
 
   game.teriock = {
     TeriockActor,
     TeriockItem,
+    TeriockEffect,
   };
 
-
+  console.log(game)
 
   // Define custom Document classes
   CONFIG.Actor.documentClass = TeriockActor;
@@ -210,21 +216,36 @@ Handlebars.registerHelper('field', function (field) {
 });
 
 Handlebars.registerHelper('ticon', function (icon, options) {
-  const { cssClass = '', id, action } = options.hash;
+  const { cssClass = '', id, parentId, action } = options.hash;
 
   const idAttr = id ? `data-id="${id}"` : '';
+  const parentIdAttr = parentId ? `data-parent-id="${parentId}"` : '';
   const actionAttr = action ? `data-action="${action}"` : '';
 
   return new Handlebars.SafeString(`
-    <i class="${cssClass} fa-light fa-${icon}" ${idAttr} ${actionAttr}></i>
+    <i class="${cssClass} fa-light fa-${icon}" ${idAttr} ${parentIdAttr} ${actionAttr}></i>
+  `);
+});
+
+Handlebars.registerHelper('ticonToggle', function (iconTrue, iconFalse, bool, options) {
+  const { cssClass = '', id, parentId, action } = options.hash;
+
+  const idAttr = id ? `data-id="${id}"` : '';
+  const parentIdAttr = parentId ? `data-parent-id="${parentId}"` : '';
+  const actionAttr = action ? `data-action="${action}"` : '';
+
+  const icon = bool ? iconTrue : iconFalse;
+
+  return new Handlebars.SafeString(`
+    <i class="${cssClass} fa-light fa-${icon}" ${idAttr} ${parentIdAttr} ${actionAttr}></i>
   `);
 });
 
 Handlebars.registerHelper('tcard', function (options) {
-  const { img, title, subtitle, text, icons, id } = options.hash;
+  const { img, title, subtitle, text, icons, id, parentId } = options.hash;
 
   return new Handlebars.SafeString(`
-    <div class="tcard" data-id="${id}">
+    <div class="tcard" data-id="${id}" data-parent-id="${parentId}">
       <div class="tcard-image">
         <img src="${img}" alt="${title}" />
       </div>

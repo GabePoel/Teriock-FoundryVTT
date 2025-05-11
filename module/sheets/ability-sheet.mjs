@@ -1,8 +1,9 @@
-const { api } = foundry.applications
+const { api, sheets, ux } = foundry.applications
+import { openWikiPage } from "../helpers/wiki.mjs";
+import { cleanFeet, cleanPounds, cleanPlusMinus, cleanMp, cleanHp } from "../helpers/clean.mjs";
 import { contextMenus } from "./context-menus/ability-context-menus.mjs";
-import { TeriockItemSheet } from "./teriock-item-sheet.mjs";
 
-export class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(TeriockItemSheet) {
+export class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(sheets.ActiveEffectConfig) {
     static DEFAULT_OPTIONS = {
         classes: ['teriock', 'equipment', 'ability'],
         actions: {
@@ -31,21 +32,35 @@ export class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(TeriockI
     /* -------------------------------------------- */
 
     async _editor(parameter) {
-        return await foundry.applications.ux.TextEditor.enrichHTML(parameter, {
-            relativeTo: this.item,
+        console.log('editor');
+        console.log(parameter);
+        return await ux.TextEditor.enrichHTML(parameter, {
+            relativeTo: this.document,
         });
     }
 
     static async _onChat(event, target) {
-        this.item.share();
+        this.document.share();
     }
 
     /** @override */
     async _prepareContext() {
-        const context = await super._prepareContext();
-        const system = this.item.system
+        // const context = await super._prepareContext();
+        const context = {
+            config: CONFIG.TERIOCK,
+            editable: this.isEditable,
+            document: this.document,
+            limited: this.document.limited,
+            owner: this.document.isOwner,
+            system: this.document.system,
+            name: this.document.name,
+            img: this.document.img,
+            flags: this.document.flags,
+        };
+        const system = this.document.system
 
         // Before Overview
+        console.log('making mana cost');
         context.manaCost = await this._editor(system.costs.manaCost);
         context.hitCost = await this._editor(system.costs.hitCost);
         context.materialCost = await this._editor(system.costs.materialCost);
@@ -90,9 +105,61 @@ export class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(TeriockI
         });
     }
 
+    _connectInput(element, attribute, callback) {
+        const updateAttribute = (event) => {
+            const target = event.currentTarget;
+            const value = target.value;
+            const newValue = callback(value);
+            this.document.update({ [attribute]: newValue });
+        };
+        element.addEventListener('focusout', updateAttribute);
+        element.addEventListener('change', updateAttribute);
+        element.addEventListener('keyup', (event) => {
+            if (event.key === 'Enter') {
+                updateAttribute(event);
+            }
+        });
+    }
+
     /** @override */
     _onRender(context, options) {
         super._onRender(context, options);
+
+        this.element.querySelector('.reload-button').addEventListener('click', (event) => {
+            event.preventDefault();
+            console.log('Reloading wiki page');
+            this.document._wikiPull();
+        });
+        this.element.querySelector('.open-button').addEventListener('click', (event) => {
+            event.preventDefault();
+            console.log('Opening wiki page');
+            openWikiPage(this.document.system.wikiNamespace + ':' + this.document.name);
+        });
+        this.element.querySelector('.chat-button').addEventListener('click', (event) => {
+            event.preventDefault();
+            console.log('Sharing wiki page');
+            this.document.share();
+        });
+        this.element.querySelector('.chat-button').addEventListener('contextmenu', (event) => {
+            event.preventDefault();
+            console.log('Debugging');
+            console.log(this.document);
+        });
+        this.element.querySelectorAll('.range-input').forEach((element) => {
+            this._connectInput(element, element.getAttribute('name'), cleanFeet);
+        });
+        this.element.querySelectorAll('.weight-input').forEach((element) => {
+            this._connectInput(element, element.getAttribute('name'), cleanPounds);
+        });
+        this.element.querySelectorAll('.plus-minus-input').forEach((element) => {
+            this._connectInput(element, element.getAttribute('name'), cleanPlusMinus);
+        });
+        this.element.querySelectorAll('.mp-input').forEach((element) => {
+            this._connectInput(element, element.getAttribute('name'), cleanMp);
+        });
+        this.element.querySelectorAll('.hp-input').forEach((element) => {
+            this._connectInput(element, element.getAttribute('name'), cleanHp);
+        });
 
         // Everything below here is only needed if the sheet is editable
         if (!this.isEditable) return;
@@ -106,11 +173,39 @@ export class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(TeriockI
         this._activateMenu(html);
     }
 
+    _connectContextMenu(cssClass, options, eventName) {
+        const container = this.element;
+        new foundry.applications.ux.ContextMenu(container, cssClass, options, {
+            eventName: eventName,
+            jQuery: false,
+            fixed: false,
+        });
+    }
+
+    static async _onEditImage(event, target) {
+        const attr = target.dataset.edit;
+        const current = foundry.utils.getProperty(this.document, attr);
+        const { img } =
+            this.document.constructor.getDefaultArtwork?.(this.document.toObject()) ??
+            {};
+        const fp = new FilePicker({
+            current,
+            type: 'image',
+            redirectToRoot: img ? [img] : [],
+            callback: (path) => {
+                this.document.update({ [attr]: path });
+            },
+            top: this.position.top + 40,
+            left: this.position.left + 10,
+        });
+        return fp.browse();
+    }
+
     /* Helpers */
     /* -------------------------------------------- */
 
     _activateContextMenus() {
-        const cm = contextMenus(this.item);
+        const cm = contextMenus(this.document);
         // console.log(cm);
         this._connectContextMenu('.delivery-box', cm.delivery, 'click');
         this._connectContextMenu('.delivery-box', cm.piercing, 'contextmenu');
@@ -133,7 +228,7 @@ export class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(TeriockI
     }
 
     _activateTags(html) {
-        const ability = this.item;
+        const ability = this.document;
         function _connectTag(cssClass, parameter) {
             html.on('click', cssClass, (event) => {
                 event.preventDefault();
@@ -152,41 +247,41 @@ export class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(TeriockI
         _connectTag('.flag-tag-somatic', 'system.costs.somatic');
         this._connect('.element-tag', 'click', (event) => {
             const element = event.currentTarget.getAttribute('value');
-            const elements = this.item.system.elements.filter(e => e !== element);
-            this.item.update({ 'system.elements': elements });
+            const elements = this.document.system.elements.filter(e => e !== element);
+            this.document.update({ 'system.elements': elements });
         });
         this._connect('.power-tag', 'click', (event) => {
             const power = event.currentTarget.getAttribute('value');
-            const powers = this.item.system.powerSources.filter(e => e !== power);
-            this.item.update({ 'system.powerSources': powers });
+            const powers = this.document.system.powerSources.filter(e => e !== power);
+            this.document.update({ 'system.powerSources': powers });
         });
         this._connect('.effect-tag', 'click', (event) => {
             const effect = event.currentTarget.getAttribute('value');
-            const effects = this.item.system.effects.filter(e => e !== effect);
-            this.item.update({ 'system.effects': effects });
+            const effects = this.document.system.effects.filter(e => e !== effect);
+            this.document.update({ 'system.effects': effects });
         });
         this._connect('.ab-expansion-button', 'click', (event) => {
-            this.item.update({ 'system.expansion': 'detonate' });
+            this.document.update({ 'system.expansion': 'detonate' });
         });
         this._connect('.ab-mana-cost-button', 'click', (event) => {
-            this.item.update({ 'system.costs.mp': 1 });
+            this.document.update({ 'system.costs.mp': 1 });
         });
         this._connect('.ab-hit-cost-button', 'click', (event) => {
-            this.item.update({ 'system.costs.hp': 1 });
+            this.document.update({ 'system.costs.hp': 1 });
         });
         this._connect('.ab-break-cost-button', 'click', (event) => {
-            this.item.update({ 'system.costs.break': 'shatter' });
+            this.document.update({ 'system.costs.break': 'shatter' });
         });
         this._connect('.ab-attribute-improvement-button', 'click', (event) => {
-            this.item.update({ 'system.improvements.attributeImprovement.attribute': 'int' });
+            this.document.update({ 'system.improvements.attributeImprovement.attribute': 'int' });
         });
         this._connect('.ab-feat-save-improvement-button', 'click', (event) => {
-            this.item.update({ 'system.improvements.featSaveImprovement.attribute': 'int' });
+            this.document.update({ 'system.improvements.featSaveImprovement.attribute': 'int' });
         });
     }
 
     _activateMenu(html) {
-        const ability = this.item;
+        const ability = this.document;
         function _connectButton(cssClass, parameter) {
             html.on('click', cssClass, (event) => {
                 event.preventDefault();

@@ -8,6 +8,7 @@ export class TeriockEquipmentSheet extends api.HandlebarsApplicationMixin(Terioc
         actions: {
             onEditImage: this._onEditImage,
             onChat: this._onChat,
+            createAbility: this._createAbility,
         },
         form: {
             submitOnChange: true,

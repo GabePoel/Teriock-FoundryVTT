@@ -1,11 +1,15 @@
-const { sheets, ux, api } = foundry.applications
+const { sheets, ux, api } = foundry.applications;
+const { ActiveEffect } = foundry.documents;
 import { openWikiPage } from "../helpers/wiki.mjs";
+import { TeriockEffect } from "../documents/effect.mjs";
+import { createAbility, connectEmbedded } from "../helpers/sheet-helpers.mjs";
 
 export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(sheets.ActorSheet) {
     static DEFAULT_OPTIONS = {
         classes: ['teriock', 'character', 'ability'],
         actions: {
             onEditImage: this._onEditImage,
+            createAbility: this._createEffect,
         },
         form: {
             submitOnChange: true,
@@ -39,7 +43,7 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(sheets
             limited: this.document.limited,
             owner: this.document.isOwner,
             system: this.actor.system,
-            abilities: allItems.ability,
+            abilities: this.actor.appliedEffects,
             equipment: allItems.equipment,
             fluencies: allItems.fluency,
             ranks: allItems.rank,
@@ -84,6 +88,37 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(sheets
         ]
     }
 
+    static async _createEffect(event, target) {
+        console.log('Creating effect');
+        // await foundry.documents.ActiveEffect.implementation.createDocument({ name: "Ability", type: 'ability' }, { parent: this.actor });
+        // const aeCls = getDocumentClass('ActiveEffect');
+        TeriockEffect.implementation.create({
+            name: "Ability",
+            type: 'ability',
+        }, {
+            parent: this.actor,
+        });
+        // const effectData = {
+        //     name: aeCls.defaultName({
+        //         parent: this.actor,
+        //         type: 'ability',
+        //     })
+        // }
+        // // foundry.utils.setProperty()
+        // await aeCls.create(effectData, {
+        //     parent: this.actor,
+        // });
+        // console.log(this.actor);
+    }
+
+    _getAbility(id, parentId) {
+        if (parentId) {
+            return this.document.items.get(parentId)?.effects.get(id);
+        } else {
+            return this.document.effects.get(id);
+        }
+    }
+
     /** @override */
     _onRender(context, options) {
         super._onRender(context, options);
@@ -94,28 +129,19 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(sheets
                 this.document.update({
                     'system.activeTab': tab,
                 })
+                event.stopPropagation();
             });
         });
-        this.element.querySelectorAll('.tcard').forEach((element) => {
-            new ux.ContextMenu(
-                element,
-                '.tcard',
-                this._rankContextMenuOptions(
-                    element.getAttribute('data-id')
-                ),
-                {
-                    eventName: 'contextmenu',
-                    jQuery: false,
-                    fixed: true,
-                }
-            );
-            element.addEventListener('click', (event) => {
+        connectEmbedded(this.actor, this.element);
+        this.element.querySelectorAll('.equipToggle').forEach((el) => {
+            el.addEventListener('click', (event) => {
                 event.preventDefault();
-                const id = element.getAttribute('data-id');
-                const item = this.actor.items.get(id);
-                if (item) {
-                    item.sheet.render(true);
-                }
+                const id = el.getAttribute('data-id');
+                console.log(id);
+                const embedded = this.document.items.get(id);
+                console.log(embedded);
+                embedded._toggleEquip();
+                event.stopPropagation();
             });
         });
     }

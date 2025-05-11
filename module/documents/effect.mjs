@@ -2,9 +2,9 @@ import { fetchWikiPageHTML } from "../helpers/wiki.mjs";
 import { parse } from "../documents/parsers/parse.mjs";
 /**
  * Extend the basic Item with some very simple modifications.
- * @extends {Item}
+ * @extends {ActiveEffect}
  */
-export class TeriockItem extends Item {
+export class TeriockEffect extends ActiveEffect {
   /**
    * Augment the basic Item data model with additional dynamic data.
    */
@@ -68,57 +68,6 @@ export class TeriockItem extends Item {
     }
     label.innerHTML += text;
     return label;
-  }
-
-  async _enable() {
-    for (const effect of this.transferredEffects) {
-      if (effect.type === 'ability') {
-        await effect.update({
-          'disabled': false
-        })
-      }
-    }
-  }
-
-  _disable() {
-    for (const effect of this.transferredEffects) {
-      if (effect.type === 'ability') {
-        effect.update({
-          'disabled': true
-        })
-      }
-    }
-  }
-
-  _equip() {
-    if (this.type === 'equipment') {
-      console.log('Unequipping');
-      this.update({
-        'system.equipped': true,
-      });
-    }
-    this._enable();
-  }
-
-  _unequip() {
-    if (this.type === 'equipment') {
-      console.log('Equipping');
-      this.update({
-        'system.equipped': false,
-      });
-    }
-    this._disable();
-  }
-
-  _toggleEquip() {
-    if (this.type === 'equipment') {
-      console.log('Toggling equipment');
-      if (this.system.equipped) {
-        this._unequip();
-      } else {
-        this._equip();
-      }
-    }
   }
 
   async share() {

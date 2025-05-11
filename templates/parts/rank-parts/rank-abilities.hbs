@@ -1,82 +1,18 @@
-  <div class="ab-main">
-    <div class="rank-abilities-container">
-      {{#if (exists system.possibleAbilities.archetype)}}
-        <div class="ab-section-container">
-          <div class="ab-section">
-            <span class="ab-section-title">Archetype abilities</span>
-          </div>
-          <ol class="rank-ability-list">
-            {{#each system.possibleAbilities.archetype}}
-              <li class="rank-ability-item" data-item-id="{{{this._id}}}">
-                <a data-action='viewDoc'>{{this.name}}</a>
-              </li>
-            {{/each}}
-          </ol>
-        </div>
-      {{/if}}
-      {{#if (exists system.possibleAbilities.normal)}}
-        <div class="ab-section-container">
-          <div class="ab-section">
-            <span class="ab-section-title">Abilities</span>
-          </div>
-          <ol class="rank-ability-list">
-            {{#each system.possibleAbilities.normal}}
-              <li class="rank-ability-item" data-item-id="{{{this._id}}}">
-                <a data-action='viewDoc'>{{this.name}}</a>
-              </li>
-            {{/each}}
-          </ol>
-        </div>
-      {{/if}}
-      {{#if (exists system.possibleAbilities.combat)}}
-        <div class="ab-section-container">
-          <div class="ab-section">
-            <span class="ab-section-title">Combat abilities</span>
-          </div>
-          Pick one.
-          <ol class="rank-ability-list">
-            {{#each system.possibleAbilities.combat}}
-              <li class="rank-ability-item" data-item-id="{{{this._id}}}">
-                <a data-action='viewDoc'>{{this.name}}</a>
-              </li>
-            {{/each}}
-          </ol>
-        </div>
-      {{/if}}
-      {{#if (exists system.possibleAbilities.support)}}
-        <div class="ab-section-container">
-          <div class="ab-section">
-            <span class="ab-section-title">Support abilities</span>
-          </div>
-          Pick one.
-          <ol class="rank-ability-list">
-            {{#each system.possibleAbilities.support}}
-              <li class="rank-ability-item" data-item-id="{{{this._id}}}">
-                <a data-action='viewDoc'>{{this.name}}</a>
-              </li>
-            {{/each}}
-          </ol>
-        </div>
-      {{/if}}
-      {{#if (exists system.possibleAbilities.rotator)}}
-        <div class="ab-section-container">
-          <div class="ab-section">
-            <span class="ab-section-title">Rotator abilities</span>
-          </div>
-          <ol class="rank-ability-list">
-            {{#each system.possibleAbilities.rotator}}
-              <li class="rank-ability-item" data-item-id="{{{this._id}}}">
-                <a data-action='viewDoc'>{{this.name}}</a>
-              </li>
-            {{/each}}
-          </ol>
-        </div>
-      {{/if}}
-    </div>
+<div class="ab-main">
+  <button class="createAbility" data-action='createAbility'>Add Ability</button>
+  <div class="tcard-container">
+    {{#each abilities as |ability|}}
+      {{tcard
+        img=ability.img
+        title=ability.name
+        subtitle=ability.system.interaction
+        text=(executionTime ability.system.maneuver ability.system.executionTime)
+        id=ability._id
+        icons=(concat
+          (ticon "comment" cssClass="share" action="share" id=ability._id)
+          (ticon "dice-d20" cssClass="roll" action="useAbility" id=ability._id)
+        )
+      }}
+    {{/each}}
   </div>
-  {{!-- Uncomment below when willing to make parent implementation --}}
-  {{!-- {{#each system.possibleAbilities.normal as |item id|}}
-    <li class="rank-ability-item" data-item-id="{{item._id}}">
-      {{item.name}}
-    </li>
-  {{/each}} --}}
+</div>

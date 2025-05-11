@@ -1,6 +1,8 @@
 {
   "Actor": {
-    "types": ["character"],
+    "types": [
+      "character"
+    ],
     "templates": {
       "base": {
         "lvl": 1,
@@ -16,10 +18,14 @@
       }
     },
     "actor": {
-      "templates": ["base"]
+      "templates": [
+        "base"
+      ]
     },
     "character": {
-      "templates": ["base"],
+      "templates": [
+        "base"
+      ],
       "lvl": 1,
       "attributes": {
         "int": -3,
@@ -33,17 +39,111 @@
     }
   },
   "Item": {
-    "types": ["ability", "equipment", "fluency", "rank"],
+    "types": [
+      "equipment",
+      "fluency",
+      "rank"
+    ],
     "templates": {
       "base": {
         "description": null
       }
     },
     "item": {
-      "templates": ["base"]
+      "templates": [
+        "base"
+      ]
+    },
+    "equipment": {
+      "templates": [
+        "base"
+      ],
+      "wikiNamespace": "Equipment",
+      "damage": "0",
+      "weight": 1,
+      "shortRange": "",
+      "longRange": "",
+      "normalRange": "",
+      "range": "",
+      "equipmentClasses": [],
+      "minStr": -3,
+      "properties": [],
+      "sb": "",
+      "av": "",
+      "bv": "",
+      "specialRules": "",
+      "equipped": true
+    },
+    "fluency": {
+      "templates": [
+        "base"
+      ],
+      "field": "artisan",
+      "tradecraft": "chef",
+      "description": ""
+    },
+    "rank": {
+      "templates": [
+        "base"
+      ],
+      "wikiNamespace": "Class",
+      "archetype": "semi",
+      "className": "archer",
+      "classRank": 1,
+      "hitDie": "d10",
+      "manaDie": "d10",
+      "hitDieSpent": false,
+      "manaDieSpent": false,
+      "hp": 6,
+      "mp": 6,
+      "hpTemp": 0,
+      "mpTemp": 0,
+      "maxAv": 2,
+      "description": "",
+      "flaws": "None.",
+      "possibleAbilities": {
+        "normal": [],
+        "archetype": [],
+        "combat": [],
+        "support": [],
+        "rotator": []
+      },
+      "gainedAbilities": [],
+      "sourcePack": null,
+      "activeTab": "abilities",
+      "display": {
+        "abilities": {
+          "size": "small",
+          "gapless": false
+        },
+        "tradecrafts": {
+          "size": "medium",
+          "gapless": false
+        },
+        "ranks": {
+          "size": "medium",
+          "gapless": false
+        },
+        "equipment": {
+          "size": "tiny",
+          "gapless": true
+        }
+      }
+    }
+  },
+  "ActiveEffect": {
+    "types": [
+      "ability"
+    ],
+    "templates": {
+      "base": {
+        "description": null
+      }
     },
     "ability": {
-      "templates": ["base"],
+      "templates": [
+        "base"
+      ],
       "wikiNamespace": "Ability",
       "powerSources": [],
       "interaction": "attack",
@@ -55,7 +155,9 @@
         "parent": null,
         "package": null
       },
-      "targets": ["creature"],
+      "targets": [
+        "creature"
+      ],
       "elements": [],
       "duration": "Instant",
       "sustained": false,
@@ -114,75 +216,6 @@
       "expansionSaveAttribute": "mov",
       "trigger": null,
       "basic": false
-    },
-    "equipment": {
-      "templates": ["base"],
-      "wikiNamespace": "Equipment",
-      "damage": "0",
-      "weight": 1,
-      "shortRange": "",
-      "longRange": "",
-      "normalRange": "",
-      "range": "",
-      "equipmentClasses": [],
-      "minStr": -3,
-      "properties": [],
-      "sb": "",
-      "av": "",
-      "bv": "",
-      "specialRules": ""
-    },
-    "fluency": {
-      "templates": ["base"],
-      "field": "artisan",
-      "tradecraft": "chef",
-      "description": ""
-    },
-    "rank": {
-      "templates": ["base"],
-      "wikiNamespace": "Class",
-      "archetype": "semi",
-      "className": "archer",
-      "classRank": 1,
-      "hitDie": "d10",
-      "manaDie": "d10",
-      "hitDieSpent": false,
-      "manaDieSpent": false,
-      "hp": 6,
-      "mp": 6,
-      "hpTemp": 0,
-      "mpTemp": 0,
-      "maxAv": 2,
-      "description": "",
-      "flaws": "None.",
-      "possibleAbilities": {
-        "normal": [],
-        "archetype": [],
-        "combat": [],
-        "support": [],
-        "rotator": []
-      },
-      "gainedAbilities": [],
-      "sourcePack": null,
-      "activeTab": "abilities",
-      "display": {
-        "abilities": {
-          "size": "small",
-          "gapless": false
-        },
-        "tradecrafts": {
-          "size": "medium",
-          "gapless": false
-        },
-        "ranks": {
-          "size": "medium",
-          "gapless": false
-        },
-        "equipment": {
-          "size": "tiny",
-          "gapless": true
-        }
-      }
     }
   }
 }

@@ -1,6 +1,7 @@
 const { sheets, ux } = foundry.applications;
 import { openWikiPage } from "../helpers/wiki.mjs";
 import { cleanFeet, cleanPounds, cleanPlusMinus, cleanMp, cleanHp } from "../helpers/clean.mjs";
+import { createAbility, connectEmbedded } from '../helpers/sheet-helpers.mjs';
 
 export class TeriockItemSheet extends sheets.ItemSheet {
     static DEFAULT_OPTIONS = {
@@ -36,6 +37,7 @@ export class TeriockItemSheet extends sheets.ItemSheet {
             name: this.item.name,
             img: this.item.img,
             flags: this.item.flags,
+            abilities : this.item.transferredEffects.filter((effect) => effect.type === 'ability'),
         };
     }
 
@@ -92,6 +94,7 @@ export class TeriockItemSheet extends sheets.ItemSheet {
         this.element.querySelectorAll('.hp-input').forEach((element) => {
             this._connectInput(element, element.getAttribute('name'), cleanHp);
         });
+        connectEmbedded(this.item, this.element);
     }
 
     _connectContextMenu(cssClass, options, eventName) {
@@ -120,5 +123,10 @@ export class TeriockItemSheet extends sheets.ItemSheet {
             left: this.position.left + 10,
         });
         return fp.browse();
+    }
+
+    static async _createAbility(event, target) {
+        await createAbility(this.item, null);
+        console.log(this.item);
     }
 }
