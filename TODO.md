@@ -1,0 +1,31 @@
+- [ ] Equipment improvements
+  - [ ] Able to set tier
+  - [ ] Able to set properties
+  - [ ] Able to add descriptions
+  - [ ] Able to make consumable (and adjust from character sheet)
+- [ ] Ability improvements
+  - [ ] Able to make as flaw
+  - [ ] Improved dice rolling
+- [ ] Character improvements
+  - [ ] Basic abilities auto-import
+  - [ ] Notes page
+  - [ ] Automatic computations
+    - [ ] Attributes
+    - [ ] Hit and mana dice
+    - [ ] Carrying capacity
+    - [ ] Speed
+    - [ ] Weight carried and limits
+    - [ ] Rank
+    - [ ] Proficiency bonus
+    - [ ] Fluency bonus
+  - [ ] Adding items directly within character sheet
+  - [ ] Equipment filters
+  - [ ] Filters and display settings collapsible
+  - [ ] Able to resize sheet
+  - [ ] Able to change name and icon
+- [ ] Quality of life improvements
+  - [ ] Rolling implementation for items
+  - [ ] Handlebars consolidation across item and character sheets
+  - [ ] Styling improvements in lots of places
+- [ ] Bug fixes
+  - [ ] Ability sheet prematurely closes when making any edit that's not handled by external code
