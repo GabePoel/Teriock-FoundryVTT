@@ -1,0 +1,28 @@
+<div class="character-tab abilities">
+  <h1>Abilities</h1>
+  <div class="display-options">
+    <label for="display-size">Size:</label>
+    <select name="system.sheet.display.abilities.size" id="abilities-size">
+      {{selectOptions config.displayOptions.sizes selected=system.sheet.display.abilities.size}}
+    </select>
+    <label for="display-gapless">Gapless:</label>
+    <input type="checkbox" name="system.sheet.display.abilities.gapless" id="gapless" {{checked system.sheet.display.abilities.gapless}}>
+  </div>
+  <div class="filter">
+    {{> 'systems/teriock/templates/parts/character-parts/character-ability-filter.hbs'}}
+  </div>
+  <div class="tcard-container {{#if system.sheet.display.abilities.gapless}}gapless{{/if}} {{system.sheet.display.abilities.size}}">
+    {{#each abilities as |ability|}}
+      {{tcard
+        img=ability.img
+        title=ability.name
+        subtitle=(executionTime ability.system.maneuver ability.system.executionTime)
+        text=ability.parent.name
+        id=ability._id
+        parentId=ability.parent._id
+        icons=(concat
+          (ticon "comment" cssClass="shareAbility" action="share" id=ability._id parentId=ability.parent._id)
+        )
+      }}
+    {{/each}}
+</div>

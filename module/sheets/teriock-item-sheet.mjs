@@ -94,6 +94,17 @@ export class TeriockItemSheet extends sheets.ItemSheet {
         this.element.querySelectorAll('.hp-input').forEach((element) => {
             this._connectInput(element, element.getAttribute('name'), cleanHp);
         });
+        this.element.querySelectorAll('.shareAbility').forEach((el) => {
+            el.addEventListener('click', (event) => {
+                event.preventDefault();
+                const id = el.getAttribute('data-id');
+                const ability = this.item.effects.get(id);
+                if (ability) {
+                    ability.share();
+                }
+                event.stopPropagation();
+            });
+        });
         connectEmbedded(this.item, this.element);
     }
 

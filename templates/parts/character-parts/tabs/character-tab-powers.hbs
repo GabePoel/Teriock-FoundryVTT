@@ -1,0 +1,21 @@
+<div class="character-tab classes">
+  <h1>Powers</h1>
+  <div class="display-options">
+    <label for="display-size">Size:</label>
+    <select name="system.sheet.display.powers.size" id="powers-size">
+      {{selectOptions config.displayOptions.sizes selected=system.sheet.display.powers.size}}
+    </select>
+    <label for="display-gapless">Gapless:</label>
+    <input type="checkbox" name="system.sheet.display.powers.gapless" id="gapless" {{checked system.sheet.display.powers.gapless}}>
+  </div>
+  <div class="tcard-container {{#if system.sheet.display.powers.gapless}}gapless{{/if}} {{system.sheet.display.powers.size}}">
+    {{#each powers as |power|}}
+      {{tcard
+        img=power.img
+        title=power.name
+        subtitle=power.system.type
+        id=power._id
+        text=""
+      }}
+    {{/each}}
+</div>

@@ -6,6 +6,7 @@ import { TeriockAbilitySheet } from './sheets/ability-sheet.mjs';
 import { TeriockEquipmentSheet } from './sheets/equipment-sheet.mjs';
 import { TeriockRankSheet } from './sheets/rank-sheet.mjs';
 import { TeriockFluencySheet } from './sheets/fluency-sheet.mjs';
+import { TeriockPowerSheet } from './sheets/power-sheet.mjs';
 import { preloadHandlebarsTemplates } from './helpers/templates.mjs';
 import { TERIOCK } from './helpers/config.mjs';
 const { Actors, Items } = foundry.documents.collections;
@@ -21,21 +22,16 @@ Hooks.once('init', function () {
 
   CONFIG.Actor.documentClass = TeriockActor;
   CONFIG.Item.documentClass = TeriockItem;
-  // CONFIG.ActiveEffect.documentClass =
   CONFIG.ActiveEffect.documentClass = TeriockEffect;
 
-    Actors.unregisterSheet('core', ActorSheet);
+  Actors.unregisterSheet('core', ActorSheet);
   Actors.registerSheet('teriock', TeriockCharacterSheet, {
     makeDefault: true,
     label: 'Character',
     types: ['character'],
   });
+
   Items.unregisterSheet('core', ItemSheet);
-  // ActiveEffects.registerSheet('teriock', TeriockAbilitySheet, {
-  //   makeDefault: true,
-  //   label: 'Ability',
-  //   types: ['ability'],
-  // });
   Items.registerSheet('teriock', TeriockEquipmentSheet, {
     makeDefault: true,
     label: 'Equipment',
@@ -50,6 +46,11 @@ Hooks.once('init', function () {
     makeDefault: true,
     label: 'Rank',
     types: ['rank'],
+  });
+  Items.registerSheet('teriock', TeriockPowerSheet, {
+    makeDefault: true,
+    label: 'Power',
+    types: ['power'],
   });
 
   DocumentSheetConfig.registerSheet(TeriockEffect, 'teriock', TeriockAbilitySheet, {makeDefault: true});

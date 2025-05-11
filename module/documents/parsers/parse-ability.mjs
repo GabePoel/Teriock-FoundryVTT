@@ -202,7 +202,7 @@ export function parseAbility(rawHTML) {
     if (tagTree.rotator) {
         parameters.rotator = true;
     }
-    if (tagTree.ritual) {
+    if (tagTree.deliveryPackage?.includes("ritual")) {
         parameters.ritual = true;
     }
     if (tagTree.cost) {
@@ -229,13 +229,13 @@ export function parseAbility(rawHTML) {
             if (c == "destroy") {
                 parameters.costs.break = 'destroy';
             }
-            if (c == "invoked") {
-                parameters.costs.invoked = true;
-            }
         }
     }
     if (tagTree.component) {
         for (const c of tagTree.component) {
+            if (c == "invoked") {
+                parameters.costs.invoked = true;
+            }
             if (c == "verbal") {
                 parameters.costs.verbal = true;
             }

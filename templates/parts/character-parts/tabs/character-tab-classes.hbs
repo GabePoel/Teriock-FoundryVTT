@@ -2,13 +2,13 @@
   <h1>Classes</h1>
   <div class="display-options">
     <label for="display-size">Size:</label>
-    <select name="system.display.ranks.size" id="ranks-size">
-      {{selectOptions config.displayOptions.sizes selected=system.display.ranks.size}}
+    <select name="system.sheet.display.ranks.size" id="ranks-size">
+      {{selectOptions config.displayOptions.sizes selected=system.sheet.display.ranks.size}}
     </select>
     <label for="display-gapless">Gapless:</label>
-    <input type="checkbox" name="system.display.ranks.gapless" id="gapless" {{checked system.display.ranks.gapless}}>
+    <input type="checkbox" name="system.sheet.display.ranks.gapless" id="gapless" {{checked system.sheet.display.ranks.gapless}}>
   </div>
-  <div class="tcard-container {{#if system.display.ranks.gapless}}gapless{{/if}} {{system.display.ranks.size}}">
+  <div class="tcard-container {{#if system.sheet.display.ranks.gapless}}gapless{{/if}} {{system.sheet.display.ranks.size}}">
     {{#each ranks as |rank|}}
       {{tcard
         img=rank.img

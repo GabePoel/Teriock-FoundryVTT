@@ -1,5 +1,4 @@
 const { sheets, ux, api } = foundry.applications;
-const { ActiveEffect } = foundry.documents;
 import { openWikiPage } from "../helpers/wiki.mjs";
 import { TeriockEffect } from "../documents/effect.mjs";
 import { createAbility, connectEmbedded } from "../helpers/sheet-helpers.mjs";
@@ -33,9 +32,137 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(sheets
         // },
     };
 
+    _getFilteredAbilities() {
+        let abilities = [...this.actor.appliedEffects];
+        const filters = this.actor.system.sheet.abilityFilters;
+        const abilitySearch = filters.search;
+        if ((abilitySearch) && (abilitySearch.length > 0)) {
+            abilities = abilities.filter((item) => {
+                return item.name.toLowerCase().includes(abilitySearch.toLowerCase());
+            });
+        }
+        if (filters.basic) {
+            abilities = abilities.filter((item) => {
+                return item.system.basic;
+            });
+        }
+        if (filters.standard) {
+            abilities = abilities.filter((item) => {
+                return item.system.standard;
+            });
+        }
+        if (filters.skill) {
+            abilities = abilities.filter((item) => {
+                return item.system.skill;
+            });
+        }
+        if (filters.spell) {
+            abilities = abilities.filter((item) => {
+                return item.system.spell;
+            });
+        }
+        if (filters.ritual) {
+            abilities = abilities.filter((item) => {
+                return item.system.ritual;
+            });
+        }
+        if (filters.rotator) {
+            abilities = abilities.filter((item) => {
+                return item.system.rotator;
+            });
+        }
+        if (filters.verbal) {
+            abilities = abilities.filter((item) => {
+                return item.system.costs.verbal;
+            });
+        }
+        if (filters.somatic) {
+            abilities = abilities.filter((item) => {
+                return item.system.costs.somatic;
+            });
+        }
+        if (filters.material) {
+            abilities = abilities.filter((item) => {
+                return item.system.costs.material;
+            });
+        }
+        if (filters.invoked) {
+            abilities = abilities.filter((item) => {
+                return item.system.costs.invoked;
+            });
+        }
+        if (filters.sustained) {
+            abilities = abilities.filter((item) => {
+                return item.system.sustained;
+            });
+        }
+        if (filters.broken) {
+            abilities = abilities.filter((item) => {
+                return item.system.break;
+            });
+        }
+        if (filters.hp) {
+            abilities = abilities.filter((item) => {
+                return item.system.costs.hp;
+            });
+        }
+        if (filters.mp) {
+            abilities = abilities.filter((item) => {
+                return item.system.costs.mp;
+            });
+        }
+        if (filters.heightened) {
+            abilities = abilities.filter((item) => {
+                return item.system.heightened;
+            });
+        }
+        if (filters.expansion) {
+            abilities = abilities.filter((item) => {
+                return item.system.expansion;
+            });
+        }
+        if (filters.maneuver) {
+            abilities = abilities.filter((item) => {
+                return item.system.maneuver == filters.maneuver;
+            });
+        }
+        if (filters.interaction) {
+            abilities = abilities.filter((item) => {
+                return item.system.interaction == filters.interaction;
+            });
+        }
+        if (filters.delivery) {
+            abilities = abilities.filter((item) => {
+                return item.system.delivery.base == filters.delivery;
+            });
+        }
+        if (filters.target) {
+            abilities = abilities.filter((item) => {
+                return item.system.targets.includes(filters.target);
+            });
+        }
+        if (filters.powerSource) {
+            abilities = abilities.filter((item) => {
+                return item.system.powerSources.includes(filters.powerSource);
+            });
+        }
+        if (filters.element) {
+            abilities = abilities.filter((item) => {
+                return item.system.elements.includes(filters.element);
+            });
+        }
+        if (filters.effects) {
+            abilities = abilities.filter((item) => {
+                return filters.effects.every(effect => item.system.effects.includes(effect));
+            });
+        }
+        return abilities;
+    }
+
     /** @override */
     async _prepareContext() {
-        const allItems = this.actor.itemTypes
+        const allItems = this.actor.itemTypes;
+        const abilities = this._getFilteredAbilities();
         const context = {
             config: CONFIG.TERIOCK,
             editable: this.isEditable,
@@ -43,9 +170,10 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(sheets
             limited: this.document.limited,
             owner: this.document.isOwner,
             system: this.actor.system,
-            abilities: this.actor.appliedEffects,
+            abilities: abilities,
             equipment: allItems.equipment,
             fluencies: allItems.fluency,
+            powers: allItems.power,
             ranks: allItems.rank,
             name: this.actor.name,
             img: this.actor.img,
@@ -127,7 +255,7 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(sheets
                 event.preventDefault();
                 const tab = event.currentTarget.getAttribute('tab');
                 this.document.update({
-                    'system.activeTab': tab,
+                    'system.sheet.activeTab': tab,
                 })
                 event.stopPropagation();
             });
@@ -141,6 +269,18 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(sheets
                 const embedded = this.document.items.get(id);
                 console.log(embedded);
                 embedded._toggleEquip();
+                event.stopPropagation();
+            });
+        });
+        this.element.querySelectorAll('.shareAbility').forEach((el) => {
+            el.addEventListener('click', (event) => {
+                event.preventDefault();
+                const id = el.getAttribute('data-id');
+                const parentId = el.getAttribute('data-parent-id');
+                const ability = this._getAbility(id, parentId);
+                if (ability) {
+                    ability.share();
+                }
                 event.stopPropagation();
             });
         });

@@ -1,8 +1,8 @@
-const { api } = foundry.applications
-import { TeriockItemSheet } from "./teriock-item-sheet.mjs"
-import { cleanAv, cleanBv, cleanStr, cleanDamage } from "../helpers/clean.mjs"
+const { HandlebarsApplicationMixin } = foundry.applications.api;
+import { TeriockItemSheet } from "./teriock-item-sheet.mjs";
+import { cleanAv, cleanBv, cleanStr, cleanDamage } from "../helpers/clean.mjs";
 
-export class TeriockEquipmentSheet extends api.HandlebarsApplicationMixin(TeriockItemSheet) {
+export class TeriockEquipmentSheet extends HandlebarsApplicationMixin(TeriockItemSheet) {
     static DEFAULT_OPTIONS = {
         classes: ['teriock', 'equipment', 'ability'],
         actions: {
@@ -26,32 +26,12 @@ export class TeriockEquipmentSheet extends api.HandlebarsApplicationMixin(Terioc
     /** @override */
     async _prepareContext() {
         const context = await super._prepareContext();
-        // context.enrichedDamage = await this._editor(this.item.system.damage);
         context.enrichedSpecialRules = await this._editor(this.item.system.specialRules);
         return context;
     }
 
     static async _onChat(event, target) {
         this.item.share();
-    }
-
-    static async _onEditImage(event, target) {
-        const attr = target.dataset.edit;
-        const current = foundry.utils.getProperty(this.document, attr);
-        const { img } =
-            this.document.constructor.getDefaultArtwork?.(this.document.toObject()) ??
-            {};
-        const fp = new FilePicker({
-            current,
-            type: 'image',
-            redirectToRoot: img ? [img] : [],
-            callback: (path) => {
-                this.document.update({ [attr]: path });
-            },
-            top: this.position.top + 40,
-            left: this.position.left + 10,
-        });
-        return fp.browse();
     }
 
     /** @override */
