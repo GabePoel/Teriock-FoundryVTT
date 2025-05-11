@@ -25,10 +25,7 @@
   - [ ] Able to change name and icon
 - [ ] Quality of life improvements
   - [ ] Rolling implementation for items
-  - [x] Handlebars consolidation across item and character sheets
+  - [ ] Handlebars consolidation across item and character sheets
   - [ ] Styling improvements in lots of places
-- [x] Bug fixes
-  - [x] Ability sheet prematurely closes when making any edit that's not handled by external code
-  - [x] Any HP/MP value can be entered on character sheet
-  - [ ] Temp HP not automatically displayed on character sheet
-  - [ ] Material cost not appearing when opened
+- [ ] Bug fixes
+  - [ ] Ability sheet prematurely closes when making any edit that's not handled by external code
