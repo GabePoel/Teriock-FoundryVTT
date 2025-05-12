@@ -285,8 +285,8 @@ Handlebars.registerHelper('tcard', function (options) {
 });
 
 Handlebars.registerHelper('abilityCards', function (abilities, system, options) {
-  const isGapless = system?.sheet?.display?.abilities?.gapless;
-  const sizeClass = system?.sheet?.display?.abilities?.size || '';
+  const isGapless = system?.sheet?.display?.ability?.gapless;
+  const sizeClass = system?.sheet?.display?.ability?.size || '';
 
   const containerClass = `tcard-container ${isGapless ? 'gapless' : ''} ${sizeClass}`.trim();
 
@@ -339,4 +339,82 @@ Handlebars.registerHelper('equipmentMarker', function (item) {
 Handlebars.registerHelper('abilityMarker', function (effect) {
   const abilityType = effect.system.abilityType;
   return CONFIG.TERIOCK.abilityOptions.abilityType[abilityType]?.color;
+});
+
+Handlebars.registerHelper('tcardOptions', function(optionsToggle, filterToggle, searchValue, tab, options) {
+  const escape = Handlebars.Utils.escapeExpression;
+  const toggleHelper = Handlebars.helpers.ttoggle;
+  const checkedHelper = Handlebars.helpers.checked;
+  const selectOptionsHelper = Handlebars.helpers.selectOptions;
+
+  const context = options.data.root;
+
+  const inputName = `system.sheet.${tab}Filters.search`;
+  const inputValue = escape(searchValue);
+
+  const optionsPath = `system.sheet.menus.${tab}Options`;
+  const filterPath = `system.sheet.menus.${tab}Filters`;
+
+  const optionsClass = `${tab}-options-menu-toggle options-menu-toggle ${toggleHelper(optionsToggle)}`;
+  const filterClass = `${tab}-filter-menu-toggle filter-menu-toggle ${toggleHelper(filterToggle)}`;
+
+  const showFilterButton = filterToggle !== null && filterToggle !== undefined;
+
+  const optionsButtonHTML = `
+    <button class="${optionsClass}" data-bool="${optionsToggle}" data-path="${optionsPath}">
+      <i class="fa-solid fa-sliders"></i>
+    </button>
+  `;
+
+  const filterButtonHTML = showFilterButton ? `
+    <button class="${filterClass}" data-bool="${filterToggle}" data-path="${filterPath}">
+      <i class="fa-solid fa-filter"></i>
+    </button>
+  ` : '';
+
+  // Paths to dynamic config values
+  const gaplessPath = `system.sheet.display.${tab}.gapless`;
+  const sizePath = `system.sheet.display.${tab}.size`;
+
+  // Resolve dynamic values from context
+  const gaplessValue = gaplessPath.split('.').reduce((obj, key) => obj?.[key], context);
+  const sizeValue = sizePath.split('.').reduce((obj, key) => obj?.[key], context);
+  const sizeOptions = context.config?.displayOptions?.sizes ?? {};
+
+  const gaplessChecked = checkedHelper(gaplessValue);
+  const sizeSelectHTML = selectOptionsHelper(sizeOptions, { hash: { selected: sizeValue } });
+
+  return new Handlebars.SafeString(`
+    <div class="tcard-options-header">
+      ${optionsButtonHTML}
+      ${filterButtonHTML}
+      <input type="text" name="${inputName}" placeholder="Search" value="${inputValue}">
+    </div>
+
+    ${optionsToggle ? `
+      <div class="tcard-options-content">
+        <div class="tgrid g4">
+          <div class="tgrid-item">
+            <label for="${tab}-gapless">Gapless</label>
+            <input type="checkbox" name="system.sheet.display.${tab}.gapless" id="${tab}-gapless" ${gaplessChecked}>
+          </div>
+          <div class="tgrid-item gi3">
+            <select name="system.sheet.display.${tab}.size" id="${tab}-size">
+              <option value="">Card Size</option>
+              ${sizeSelectHTML}
+            </select>
+          </div>
+        </div>
+      </div>
+    ` : ''}
+  `);
+});
+
+Handlebars.registerHelper('dotJoin', function(...args) {
+  const options = args.pop();
+  const separator = '&nbsp;&nbsp;·&nbsp;&nbsp;';
+  const result = args
+    .filter(arg => typeof arg === 'string' && arg.length > 0)
+    .join(separator);
+  return new Handlebars.SafeString(result);
 });

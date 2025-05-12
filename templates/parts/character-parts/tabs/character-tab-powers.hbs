@@ -1,21 +1,29 @@
-<div class="character-tab classes">
+<div class="character-tab powers">
   <h1>Powers</h1>
-  <div class="display-options">
-    <label for="display-size">Size:</label>
-    <select name="system.sheet.display.powers.size" id="powers-size">
-      {{selectOptions config.displayOptions.sizes selected=system.sheet.display.powers.size}}
-    </select>
-    <label for="display-gapless">Gapless:</label>
-    <input type="checkbox" name="system.sheet.display.powers.gapless" id="gapless" {{checked system.sheet.display.powers.gapless}}>
+  <div class="tcard-display">
+    <div class="tcard-options">
+      {{tcardOptions system.sheet.menus.powerOptions null system.sheet.powerFilters.search "power"}}
+      {{#if system.sheet.menus.powerFilters}}
+        <div class="tcard-options-content">
+          {{> 'systems/teriock/templates/parts/character-parts/character-power-filter.hbs'}}
+        </div>
+      {{/if}}
+    </div>
+    <div class="tcard-container {{#if system.sheet.display.power.gapless}}gapless{{/if}} {{system.sheet.display.power.size}}">
+      {{#each powers as |power|}}
+        {{tcard
+          img=power.img
+          title=power.name
+          subtitle=power.system.type
+          id=power._id
+          text=""
+        }}
+      {{/each}}
+    </div>
+    {{#if (not (exists powers))}}
+      <div class="no-results">
+        <p>No powers found.</p>
+      </div>
+    {{/if}}
   </div>
-  <div class="tcard-container {{#if system.sheet.display.powers.gapless}}gapless{{/if}} {{system.sheet.display.powers.size}}">
-    {{#each powers as |power|}}
-      {{tcard
-        img=power.img
-        title=power.name
-        subtitle=power.system.type
-        id=power._id
-        text=""
-      }}
-    {{/each}}
 </div>

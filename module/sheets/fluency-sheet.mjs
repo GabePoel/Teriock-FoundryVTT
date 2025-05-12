@@ -12,6 +12,10 @@ export class TeriockFluencySheet extends HandlebarsApplicationMixin(TeriockItemS
         form: {
             submitOnChange: true,
         },
+        window: {
+            // resizable: true,
+            icon: "fa-solid fa-compass-drafting",
+        }
     };
     static PARTS = {
         header: {

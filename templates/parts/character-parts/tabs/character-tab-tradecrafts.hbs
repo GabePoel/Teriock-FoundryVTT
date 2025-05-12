@@ -1,25 +1,55 @@
 <div class="character-tab tradecrafts">
   <h1>Tradecrafts</h1>
-  <div class="display-options">
-    <label for="display-size">Size:</label>
-    <select name="system.sheet.display.tradecrafts.size" id="tradecrafts-size">
-      {{selectOptions config.displayOptions.sizes selected=system.sheet.display.tradecrafts.size}}
-    </select>
-    <label for="display-gapless">Gapless:</label>
-    <input type="checkbox" name="system.sheet.display.tradecrafts.gapless" id="gapless" {{checked system.sheet.display.tradecrafts.gapless}}>
+
+  <div class="character-tab-page">
+
+    <div class="tcard-display">
+      <div class="tradecraft-panels tgrid g2">
+        {{#each config.tradecraftOptions as |field|}}
+          <div class="tgrid-item">
+            {{field.name}}
+            <div class="field-panel tgrid g1">
+              {{#each field.tradecrafts as |tradecraft|}}
+                <div class="tradecraft-panel">
+                  {{tradecraft.name}}
+                </div>
+              {{/each}}
+            </div>
+          </div>
+        {{/each}}
+      </div>
+    </div>
+
+    <div class="tcard-display">
+      <div class="tcard-options">
+        {{tcardOptions system.sheet.menus.fluencyOptions null system.sheet.fluencyFilters.search "fluency"}}
+        {{#if system.sheet.menus.fluencyFilters}}
+          <div class="tcard-options-content">
+            {{> 'systems/teriock/templates/parts/character-parts/character-fluency-filter.hbs'}}
+          </div>
+        {{/if}}
+      </div>
+    <div class="tcard-container {{#if system.sheet.display.fluency.gapless}}gapless{{/if}} {{system.sheet.display.fluency.size}}">
+      {{#each fluencies as |fluency|}}
+        {{tcard
+          img=fluency.img
+          title=fluency.name
+          subtitle=(tradecraft fluency.system.field fluency.system.tradecraft)
+          text=(field fluency.system.field)
+          id=fluency._id
+          icons=(concat
+            (ticon "comment" cssClass="share" action="share" id=fluency._id)
+            (ticon "dice-d20" cssClass="roll" action="usefluency" id=fluency._id)
+          )
+        }}
+      {{/each}}
+      </div>
+      {{#if (not (exists fluencies))}}
+        <div class="no-results">
+          <p>No fluencies found.</p>
+        </div>
+      {{/if}}
+    </div>
+  
   </div>
-  <div class="tcard-container {{#if system.sheet.display.tradecrafts.gapless}}gapless{{/if}} {{system.sheet.display.tradecrafts.size}}">
-    {{#each fluencies as |fluency|}}
-      {{tcard
-        img=fluency.img
-        title=fluency.name
-        subtitle=(tradecraft fluency.system.field fluency.system.tradecraft)
-        text=(field fluency.system.field)
-        id=fluency._id
-        icons=(concat
-          (ticon "comment" cssClass="share" action="share" id=fluency._id)
-          (ticon "dice-d20" cssClass="roll" action="usefluency" id=fluency._id)
-        )
-      }}
-    {{/each}}
 </div>

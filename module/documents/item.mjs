@@ -45,22 +45,6 @@ export class TeriockItem extends Item {
     }
   }
 
-  /**
-   * Override the default update method to include additional logic.
-   * @override
-   */
-  // async _onCreate(data, options, userId) {
-  //   super._onCreate(data, options, userId);
-  //   console.log(this);
-  //   const img = 'systems/teriock/assets/' + this.type + '.svg';
-  //   this.update({
-  //     img: img,
-  //   });
-  //   if (['ability', 'equipment'].includes(this.type)) {
-  //     await this._wikiPull();
-  //   }
-  // }
-
   _messageLabel(text, icon = null, classes = []) {
     const label = document.createElement('div');
     label.classList.add('abm-label', ...classes);

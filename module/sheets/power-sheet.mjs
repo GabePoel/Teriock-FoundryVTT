@@ -13,6 +13,10 @@ export class TeriockPowerSheet extends HandlebarsApplicationMixin(TeriockItemShe
         form: {
             submitOnChange: true,
         },
+        window: {
+            // resizable: true,
+            icon: "fa-solid fa-award",
+        }
     };
     static PARTS = {
         header: {

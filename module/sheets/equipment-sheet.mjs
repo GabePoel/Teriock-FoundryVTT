@@ -13,6 +13,10 @@ export class TeriockEquipmentSheet extends HandlebarsApplicationMixin(TeriockIte
         },
         form: {
             submitOnChange: true,
+        },
+        window: {
+            // resizable: true,
+            icon: "fa-solid fa-treasure-chest",
         }
     }
     static PARTS = {

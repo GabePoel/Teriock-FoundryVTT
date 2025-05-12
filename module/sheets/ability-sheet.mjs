@@ -13,6 +13,10 @@ export class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(sheets.A
         form: {
             submitOnChange: true,
             closeOnSubmit: false,
+        },
+        window: {
+            // resizable: true,
+            icon: "fa-solid fa-hand-sparkles",
         }
     }
     static PARTS = {

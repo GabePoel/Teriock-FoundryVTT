@@ -2,20 +2,7 @@
   <h1>Abilities</h1>
   <div class="tcard-display">
     <div class="tcard-options">
-      <div class="tcard-options-header">
-        <button class="ability-options-menu-toggle {{ttoggle system.sheet.menus.abilityOptions}}">
-          <i class="fa-solid fa-sliders"></i>
-        </button>
-        <button class="ability-filter-menu-toggle {{ttoggle system.sheet.menus.abilityFilters}}">
-          <i class="fa-solid fa-filter"></i>
-        </button>
-        <input type="text" name="system.sheet.abilityFilters.search" placeholder="Search" value={{system.sheet.abilityFilters.search}}>
-      </div>
-      {{#if system.sheet.menus.abilityOptions}}
-        <div class="tcard-options-content">
-          {{> 'systems/teriock/templates/parts/character-parts/character-ability-options.hbs'}}
-        </div>
-      {{/if}}
+      {{tcardOptions system.sheet.menus.abilityOptions system.sheet.menus.abilityFilters system.sheet.abilityFilters.search "ability"}}
       {{#if system.sheet.menus.abilityFilters}}
         <div class="tcard-options-content">
           {{> 'systems/teriock/templates/parts/character-parts/character-ability-filter.hbs'}}
@@ -24,7 +11,7 @@
     </div>
     {{abilityCards abilities system}}
     {{#if (not (exists abilities))}}
-      <div class="no-abilities">
+      <div class="no-results">
         <p>No abilities found.</p>
       </div>
     {{/if}}

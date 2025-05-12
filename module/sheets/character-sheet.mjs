@@ -194,19 +194,21 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(sheets
                 event.stopPropagation();
             });
         });
-        this.element.querySelectorAll('.ability-filter-menu-toggle').forEach((element) => {
-            console.log(element);
+        this.element.querySelectorAll('.options-menu-toggle, .filter-menu-toggle').forEach((element) => {
             element.addEventListener('click', (event) => {
-                event.preventDefault();
-                this.document.update({ 'system.sheet.menus.abilityFilters': !this.document.system?.sheet?.menus?.abilityFilters });
+              event.preventDefault();
+              const path = element.dataset.path;
+              const currentValue = element.dataset.bool;
+          
+              if (!path) return;
+          
+              const currentBool = currentValue === "true";
+              const update = {};
+              update[path] = !currentBool;
+          
+              this.document.update(update);
             });
-        });
-        this.element.querySelectorAll('.ability-options-menu-toggle').forEach((element) => {
-            console.log(element);
-            element.addEventListener('click', (event) => {
-                event.preventDefault();
-                this.document.update({ 'system.sheet.menus.abilityOptions': !this.document.system?.sheet?.menus?.abilityOptions });
-            });
-        });
+          });
+          
     }
 }

@@ -1,29 +1,37 @@
 <div class="character-tab inventory">
   <h1>Inventory</h1>
-  <div class="display-options">
-    <label for="display-size">Size:</label>
-    <select name="system.sheet.display.inventory.size" id="inventory-size">
-      {{selectOptions config.displayOptions.sizes selected=system.sheet.display.inventory.size}}
-    </select>
-    <label for="display-gapless">Gapless:</label>
-    <input type="checkbox" name="system.sheet.display.inventory.gapless" id="gapless" {{checked system.sheet.display.inventory.gapless}}>
+  <div class="tcard-display">
+    <div class="tcard-options">
+      {{tcardOptions system.sheet.menus.equipmentOptions system.sheet.menus.equipmentFilters system.sheet.equipmentFilters.search "equipment"}}
+      {{#if system.sheet.menus.equipmentFilters}}
+        <div class="tcard-options-content">
+          {{> 'systems/teriock/templates/parts/character-parts/character-equipment-filter.hbs'}}
+        </div>
+      {{/if}}
+    </div>
+    <div class="tcard-container {{#if system.sheet.display.equipment.gapless}}gapless{{/if}} {{system.sheet.display.equipment.size}}">
+      {{#each equipment as |equipment|}}
+        {{tcard
+          img=equipment.img
+          title=equipment.name
+          subtitle=(dotJoin equipment.system.equipmentType equipment.system.sb)
+          text=(dotJoin equipment.system.damage equipment.system.bv equipment.system.av equipment.system.weight)
+          id=equipment._id
+          active=equipment.system.equipped
+          marker=(equipmentMarker equipment)
+          shattered=equipment.system.shattered
+          icons=(concat
+            (ticon "comment" cssClass="share" action="share" id=equipment._id)
+            (ticon (firstDie equipment.system.damage) cssClass="rollDamage" action="damage" id=equipment._id)
+            (ticonToggle "circle-check" "circle" equipment.system.equipped cssClass="equipToggle" action="toggleEquip" id=equipment._id parentId=equipment.parent._id)
+          )
+        }}
+      {{/each}}
+    </div>
+    {{#if (not (exists equipment))}}
+      <div class="no-results">
+        <p>No equipment found.</p>
+      </div>
+    {{/if}}
   </div>
-  <div class="tcard-container {{#if system.sheet.display.inventory.gapless}}gapless{{/if}} {{system.sheet.display.inventory.size}}">
-    {{#each equipment as |equipment|}}
-      {{tcard
-        img=equipment.img
-        title=equipment.name
-        subtitle=equipment.system.sb
-        text=equipment.system.damage
-        id=equipment._id
-        active=equipment.system.equipped
-        marker=(equipmentMarker equipment)
-        shattered=equipment.system.shattered
-        icons=(concat
-          (ticon "comment" cssClass="share" action="share" id=equipment._id)
-          (ticon (firstDie equipment.system.damage) cssClass="rollDamage" action="damage" id=equipment._id)
-          (ticonToggle "circle-check" "circle" equipment.system.equipped cssClass="equipToggle" action="toggleEquip" id=equipment._id parentId=equipment.parent._id)
-        )
-      }}
-    {{/each}}
 </div>
