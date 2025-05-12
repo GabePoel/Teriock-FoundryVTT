@@ -3,10 +3,16 @@
   - [ ] Able to set properties
   - [ ] Able to add descriptions
   - [ ] Able to make consumable (and adjust from character sheet)
-  - [ ] Able to easily set as flaw/ES/ECHO/physical/gifted (and styling to match)
+  - [x] Able to easily set as flaw/ES/ECHO/physical/gifted (and styling to match)
+  - [x] Ability disabling synchronization
+  - [x] Shattering
+  - [ ] Dampening
 - [ ] Ability improvements
   - [x] Able to make as flaw
   - [ ] Improved dice rolling
+- [ ] Power improvements
+  - [ ] Import abilities from wiki category
+  - [ ] Get confirmation before doing it
 - [ ] Character improvements
   - [ ] Basic abilities auto-import
   - [ ] Notes page
@@ -16,21 +22,38 @@
     - [ ] Carrying capacity
     - [ ] Speed
     - [ ] Weight carried and limits
-    - [ ] Rank
-    - [ ] Proficiency bonus
-    - [ ] Fluency bonus
+    - [x] Rank
+    - [x] Proficiency bonus
+    - [x] Fluency bonus
   - [ ] Adding items directly within character sheet
+  - [x] Ability filters
   - [ ] Equipment filters
+  - [ ] Power filters
+  - [ ] Fluency filters
   - [x] Filters and display settings collapsible
   - [x] Able to resize sheet
   - [ ] Able to change name and icon
 - [ ] Quality of life improvements
   - [ ] Rolling implementation for items
-  - [ ] Handlebars consolidation across item and character sheets
+  - [x] Handlebars consolidation across item and character sheets
   - [ ] Drag/drop implementations
   - [ ] Styling improvements in lots of places
+    - [x] Embedded cards
+    - [x] Filter menus
+    - [x] Option menus
+    - [x] Box units
+    - [ ] HP/MP bars
 - [ ] Bug fixes
-  - [ ] Ability sheet prematurely closes when making any edit that's not handled by external code
+  - [x] Ability sheet prematurely closes when making any edit that's not handled by external code
+  - [x] Slow loading of ability sheet entries
+  - [x] Material cost button not working
 - [ ] Decisions
-  - [ ] Should ES by an item or effect/ability?
-  - [ ] Should items enter equipped?
+  - [ ] Should ES bw an item or effect/ability?
+  - [x] Should items enter equipped?
+- [ ] Scripts
+  - [ ] Consolidate SCSS and template registration
+- [ ] Organization
+  - [ ] Reorganize templates folder
+  - [ ] Separate our handlebars registration
+  - [ ] Consistent config icon handling
+  - [ ] Sheet helpers, utilities, wiki, and parsing consistency
