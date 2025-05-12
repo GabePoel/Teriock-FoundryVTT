@@ -50,16 +50,16 @@
         {{/if}}
       </div>
     <div class="tcard-container {{#if system.sheet.display.fluency.gapless}}gapless{{/if}} {{system.sheet.display.fluency.size}}">
-      {{#each fluencies as |fluency|}}
+      {{#each fluencies as |item|}}
         {{tcard
-          img=fluency.img
-          title=fluency.name
-          subtitle=(tradecraft fluency.system.field fluency.system.tradecraft)
-          text=(field fluency.system.field)
-          id=fluency._id
+          img=item.img
+          title=item.name
+          subtitle=(tradecraft item.system.field item.system.tradecraft)
+          text=(field item.system.field)
+          id=item._id
           icons=(concat
-            (ticon "comment" cssClass="share" action="share" id=fluency._id)
-            (ticon "dice-d20" cssClass="roll" action="usefluency" id=fluency._id)
+            (ticon "comment" cssClass="share" action="share" id=item._id)
+            (ticon "dice-d20" cssClass="roll" action="usefluency" id=item._id)
           )
         }}
       {{/each}}

@@ -10,13 +10,18 @@
       {{/if}}
     </div>
     <div class="tcard-container {{#if system.sheet.display.power.gapless}}gapless{{/if}} {{system.sheet.display.power.size}}">
-      {{#each powers as |power|}}
+      {{#each powers as |item|}}
         {{tcard
-          img=power.img
-          title=power.name
-          subtitle=power.system.type
-          id=power._id
+          img=item.img
+          title=item.name
+          subtitle=item.system.type
+          id=item._id
+          active=(not item.system.disabled)
           text=""
+          icons=(concat
+            (ticon "comment" cssClass="share" action="share" id=rank._id)
+            (ticonToggle "circle-check" "circle" (not item.system.disabled) cssClass="toggleDisabled" action="toggleDisabled" id=item._id)
+          )
         }}
       {{/each}}
     </div>

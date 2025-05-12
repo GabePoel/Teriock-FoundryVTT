@@ -23,8 +23,46 @@ export class TeriockEffect extends ActiveEffect {
     return rollData;
   }
 
+  async softEnable() {
+    if (!this.system.forceDisabled) {
+      await this.update({ disabled: false });
+    }
+  }
+
+  async softDisable() {
+    await this.update({ disabled: true });
+  }
+
+  async setSoftDisabled(bool) {
+    if (bool) {
+      await this.softDisable();
+    } else {
+      await this.softEnable();
+    }
+  }
+
+  async toggleSoftDisabled() {
+    await this.setSoftDisabled(!this.disabled);
+  }
+
+  async setForceDisabled(bool) {
+    if (bool) {
+      await this.update({ disabled: true, 'system.forceDisabled': true });
+    } else {
+      if (this.parent.system.disabled) {
+        await this.update({ disabled: true, 'system.forceDisabled': false });
+      } else {
+        await this.update({ disabled: false, 'system.forceDisabled': false });
+      }
+    }
+  }
+
+  async toggleForceDisabled() {
+    await this.setForceDisabled(!this.system.forceDisabled);
+  }
+
   async _wikiPull() {
-    if (['ability', 'equipment', 'rank'].includes(this.type)) {
+    if (['ability'].includes(this.type)) {
       let pageTitle = this.system.wikiNamespace + ':'
       if (this.type === 'rank') {
         pageTitle = pageTitle + CONFIG.TERIOCK.rankOptions[this.system.archetype].classes[this.system.className].name;

@@ -2,6 +2,7 @@ const { HandlebarsApplicationMixin } = foundry.applications.api;
 import { TeriockItemSheet } from "./teriock-item-sheet.mjs";
 import { cleanAv, cleanBv, cleanStr, cleanDamage, cleanCapitalization } from "../helpers/clean.mjs";
 import { powerLevelContextMenu } from "./context-menus/equipment-context-menus.mjs";
+import { documentOptions } from "../helpers/constants/document-options.mjs";
 
 export class TeriockEquipmentSheet extends HandlebarsApplicationMixin(TeriockItemSheet) {
     static DEFAULT_OPTIONS = {
@@ -16,7 +17,7 @@ export class TeriockEquipmentSheet extends HandlebarsApplicationMixin(TeriockIte
         },
         window: {
             // resizable: true,
-            icon: "fa-solid fa-treasure-chest",
+            icon: "fa-solid fa-" + documentOptions.equipment.icon,
         }
     }
     static PARTS = {
@@ -53,7 +54,7 @@ export class TeriockEquipmentSheet extends HandlebarsApplicationMixin(TeriockIte
         this._connectContextMenu('.power-level-box', powerLevelContextMenuOptions, 'click');
         this.element.querySelector('.equipped-box').addEventListener('click', (event) => {
             event.preventDefault();
-            this.item._toggleEquip();
+            this.item.toggleDisabled();
         });
         this.element.querySelectorAll('.av-input').forEach((element) => {
             this._connectInput(element, element.getAttribute('name'), cleanAv);
@@ -104,6 +105,12 @@ export class TeriockEquipmentSheet extends HandlebarsApplicationMixin(TeriockIte
                 menu.classList.toggle('ab-menu-open', this._menuOpen);
                 menuToggle.classList.toggle('ab-menu-toggle-open', this._menuOpen);
             }
+        });
+        this.element.querySelector('.shatter-checkbox').addEventListener('click', (event) => {
+            event.preventDefault();
+            const checkbox = event.currentTarget;
+            const value = checkbox.checked;
+            this.item.setShattered(value);
         });
     }
 }

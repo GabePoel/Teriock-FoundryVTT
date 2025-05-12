@@ -5,17 +5,19 @@
       {{tcardOptions system.sheet.menus.rankOptions null system.sheet.rankFilters.search "rank"}}
     </div>
     <div class="tcard-container {{#if system.sheet.display.rank.gapless}}gapless{{/if}} {{system.sheet.display.rank.size}}">
-      {{#each ranks as |rank|}}
+      {{#each ranks as |item|}}
         {{tcard
-          img=rank.img
-          title=(className rank.system.archetype rank.system.className)
-          subtitle=(concat "Rank " rank.system.classRank)
-          text=(classArchetype rank.system.archetype)
-          id=rank._id
+          img=item.img
+          title=(className item.system.archetype item.system.className)
+          subtitle=(concat "Rank " item.system.classitem)
+          text=(classArchetype item.system.archetype)
+          id=item._id
+          active=(not item.system.disabled)
           icons=(concat
-            (ticon "comment" cssClass="share" action="share" id=rank._id)
-            (ticon (firstDie rank.system.hitDie) cssClass="roll" action="useHitDie" id=rank._id)
-            (ticon (firstDie rank.system.manaDie) cssClass="roll" action="useManaDie" id=rank._id)
+            (ticon (firstDie item.system.hitDie) cssClass="roll" action="useHitDie" id=item._id)
+            (ticon (firstDie item.system.manaDie) cssClass="roll" action="useManaDie" id=item._id)
+            (ticon "comment" cssClass="share" action="share" id=item._id)
+            (ticonToggle "circle-check" "circle" (not item.system.disabled) cssClass="toggleDisabled" action="toggleDisabled" id=item._id)
           )
         }}
       {{/each}}

@@ -84,7 +84,7 @@ export function parseEquipment(rawHTML) {
     parameters.equipmentClasses.sort((a, b) => a.localeCompare(b));
     delete parameters.equipmentType;
     delete parameters.powerLevel;
-    delete parameters.equipped;
+    delete parameters.disabled;
     delete parameters.description;
     delete parameters.flaws;
     delete parameters.tier;

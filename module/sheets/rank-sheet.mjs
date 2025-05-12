@@ -1,6 +1,7 @@
 const { HandlebarsApplicationMixin, DialogV2 } = foundry.applications.api;
 import { TeriockItemSheet } from './teriock-item-sheet.mjs';
 import { rankContextMenu, classContextMenu, archetypeContextMenu } from './context-menus/rank-context-menus.mjs';
+import { documentOptions } from "../helpers/constants/document-options.mjs";
 
 export class TeriockRankSheet extends HandlebarsApplicationMixin(TeriockItemSheet) {
     static DEFAULT_OPTIONS = {
@@ -16,7 +17,7 @@ export class TeriockRankSheet extends HandlebarsApplicationMixin(TeriockItemShee
         },
         window: {
             // resizable: true,
-            icon: "fa-solid fa-hat-wizard",
+            icon: "fa-solid fa-" + documentOptions.rank.icon,
         }
     };
     static PARTS = {

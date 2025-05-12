@@ -2,6 +2,7 @@ const { sheets, ux, api } = foundry.applications;
 import { openWikiPage } from "../helpers/wiki.mjs";
 import { TeriockEffect } from "../documents/effect.mjs";
 import { createAbility, connectEmbedded } from "../helpers/sheet-helpers.mjs";
+import { documentOptions } from "../helpers/constants/document-options.mjs";
 
 export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(sheets.ActorSheet) {
     static DEFAULT_OPTIONS = {
@@ -19,7 +20,7 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(sheets
         },
         window: {
             resizable: true,
-            icon: "fa-solid fa-user",
+            icon: "fa-solid fa-" + documentOptions.character.icon,
         }
     }
     static PARTS = {
@@ -178,7 +179,7 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(sheets
                 console.log(id);
                 const embedded = this.document.items.get(id);
                 console.log(embedded);
-                embedded._toggleEquip();
+                embedded.toggleEquipped();
                 event.stopPropagation();
             });
         });
@@ -190,6 +191,29 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(sheets
                 const ability = this._getAbility(id, parentId);
                 if (ability) {
                     ability.share();
+                }
+                event.stopPropagation();
+            });
+        });
+        this.element.querySelectorAll('.enableAbility').forEach((el) => {
+            el.addEventListener('click', (event) => {
+                event.preventDefault();
+                const id = el.getAttribute('data-id');
+                const parentId = el.getAttribute('data-parent-id');
+                const ability = this._getAbility(id, parentId);
+                if (ability) {
+                    ability.toggleForceDisabled();
+                }
+                event.stopPropagation();
+            });
+        });
+        this.element.querySelectorAll('.toggleDisabled').forEach((el) => {
+            el.addEventListener('click', (event) => {
+                event.preventDefault();
+                const id = el.getAttribute('data-id');                
+                const embedded = this.document.items.get(id);
+                if (embedded) {
+                    embedded.toggleDisabled();
                 }
                 event.stopPropagation();
             });

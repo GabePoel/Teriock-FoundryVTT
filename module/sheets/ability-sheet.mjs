@@ -2,6 +2,7 @@ const { api, sheets, ux } = foundry.applications
 import { openWikiPage } from "../helpers/wiki.mjs";
 import { cleanFeet, cleanPounds, cleanPlusMinus, cleanMp, cleanHp } from "../helpers/clean.mjs";
 import { contextMenus } from "./context-menus/ability-context-menus.mjs";
+import { documentOptions } from "../helpers/constants/document-options.mjs";
 
 export class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(sheets.ActiveEffectConfig) {
     static DEFAULT_OPTIONS = {
@@ -16,7 +17,7 @@ export class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(sheets.A
         },
         window: {
             // resizable: true,
-            icon: "fa-solid fa-hand-sparkles",
+            icon: "fa-solid fa-" + documentOptions.ability.icon,
         }
     }
     static PARTS = {
@@ -153,7 +154,7 @@ export class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(sheets.A
         });
         this.element.querySelector('.disabled-box').addEventListener('click', (event) => {
             event.preventDefault();
-            this.document.update({ disabled: !this.document.disabled });
+            this.document.toggleForceDisabled();
         });
         this.element.querySelectorAll('.range-input').forEach((element) => {
             this._connectInput(element, element.getAttribute('name'), cleanFeet);

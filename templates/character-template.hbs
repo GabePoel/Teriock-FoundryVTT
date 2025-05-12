@@ -1,26 +1,26 @@
 <div class="{{cssClass}} character-page" autocomplete="off">
     {{> 'systems/teriock/templates/parts/character-parts/character-sidebar.hbs' }}
     <div class="character-tabbers">
-        <div class="character-tabber ui-controls {{tabActive system.sheet.activeTab "overview"}}" tab="overview">
+        {{!-- <div class="character-tabber ui-controls {{tabActive system.sheet.activeTab "overview"}}" tab="overview">
             <i class="fa-solid fa-person"></i>
-        </div>
+        </div> --}}
         <div class="character-tabber ui-controls {{tabActive system.sheet.activeTab "tradecrafts"}}" tab="tradecrafts">
-            <i class="fa-solid fa-compass-drafting"></i>
+            {{ticon (lookup config.documentOptions.fluency 'icon') style="solid"}}
         </div>
         <div class="character-tabber ui-controls {{tabActive system.sheet.activeTab "abilities"}}" tab="abilities">
-            <i class="fa-solid fa-hand-sparkles"></i>
+            {{ticon (lookup config.documentOptions.ability 'icon') style="solid"}}
         </div>
         <div class="character-tabber ui-controls {{tabActive system.sheet.activeTab "classes"}}" tab="classes">
-            <i class="fa-solid fa-hat-wizard"></i>
+            {{ticon (lookup config.documentOptions.rank 'icon') style="solid"}}
         </div>
         <div class="character-tabber ui-controls {{tabActive system.sheet.activeTab "powers"}}" tab="powers">
-            <i class="fa-solid fa-award"></i>
+            {{ticon (lookup config.documentOptions.power 'icon') style="solid"}}
         </div>
         <div class="character-tabber ui-controls {{tabActive system.sheet.activeTab "inventory"}}" tab="inventory">
-            <i class="fa-solid fa-treasure-chest"></i>
+            {{ticon (lookup config.documentOptions.equipment 'icon') style="solid"}}
         </div>
         <div class="character-tabber ui-controls {{tabActive system.sheet.activeTab "notes"}}" tab="notes">
-            <i class="fa-solid fa-pen-fancy"></i>
+            <i class="fa-solid fa-notes"></i>
         </div>
     </div>
     <div class="character-tab-content">

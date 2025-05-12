@@ -105,6 +105,17 @@ export class TeriockItemSheet extends sheets.ItemSheet {
                 event.stopPropagation();
             });
         });
+        this.element.querySelectorAll('.enableAbility').forEach((el) => {
+            el.addEventListener('click', (event) => {
+                event.preventDefault();
+                const id = el.getAttribute('data-id');
+                const ability = this.item.effects.get(id);
+                if (ability) {
+                    ability.toggleForceDisabled();
+                }
+                event.stopPropagation();
+            });
+        });
         connectEmbedded(this.item, this.element);
     }
 

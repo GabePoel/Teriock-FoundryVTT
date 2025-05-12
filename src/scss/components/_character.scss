@@ -13,17 +13,20 @@ $mp-blue-darkest: darken($mp-blue, 20%);
   max-height: calc(100% - 36px);
   .character-tabbers {
     position: absolute;
-    left: 100%;
+    left: calc(100% + 1px);
     // top: 0;
     .character-tabber {
       display: flex;
       width: 2em;
       height: 3em;
-      background: var(--tbg);
-      border: 1px solid var(--color-border);
+      // background: var(--tbg);
+      background: var(--color-cool-5);
+      border: 1px solid var(--color-cool-4);
+      border-left: none;
       border-top-right-radius: 6px;
       border-bottom-right-radius: 6px;
-      color: var(--color-icon-color);
+      // color: var(--color-icon-color);
+      color: var(--color-text-selection);
       text-align: center;
       justify-content: center;
       align-items: center;
@@ -31,15 +34,20 @@ $mp-blue-darkest: darken($mp-blue, 20%);
       margin-block: 0.25em;
       &:hover {
         width: 2.5em;
-        color: var(--color-hover-icon-color);
-        border: 1px solid var(--table-row-color-highlight);
+        // color: var(--color-hover-icon-color);
+        background-color: var(--color-cool-4);
+        color: white;
+        border: 1px solid var(--color-cool-3);
+        border-left: none;
         cursor: pointer;
       }
       &.active {
         width: 2.5em;
+        background-color: var(--color-cool-4);
         border: 1px solid var(--color-shadow-highlight);
         border-left: none;
-        color: var(--control-icon-text-color);
+        // color: var(--control-icon-text-color);
+        color: white;
       }
     }
   }

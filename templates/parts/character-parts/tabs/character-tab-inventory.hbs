@@ -10,20 +10,20 @@
       {{/if}}
     </div>
     <div class="tcard-container {{#if system.sheet.display.equipment.gapless}}gapless{{/if}} {{system.sheet.display.equipment.size}}">
-      {{#each equipment as |equipment|}}
+      {{#each equipment as |item|}}
         {{tcard
-          img=equipment.img
-          title=equipment.name
-          subtitle=(dotJoin equipment.system.equipmentType equipment.system.sb)
-          text=(dotJoin equipment.system.damage equipment.system.bv equipment.system.av equipment.system.weight)
-          id=equipment._id
-          active=equipment.system.equipped
-          marker=(equipmentMarker equipment)
-          shattered=equipment.system.shattered
+          img=item.img
+          title=item.name
+          subtitle=(dotJoin item.system.itemType item.system.sb)
+          text=(dotJoin item.system.damage item.system.bv item.system.av item.system.weight)
+          id=item._id
+          active=item.system.equipped
+          marker=(equipmentMarker item)
+          shattered=item.system.shattered
           icons=(concat
-            (ticon "comment" cssClass="share" action="share" id=equipment._id)
-            (ticon (firstDie equipment.system.damage) cssClass="rollDamage" action="damage" id=equipment._id)
-            (ticonToggle "circle-check" "circle" equipment.system.equipped cssClass="equipToggle" action="toggleEquip" id=equipment._id parentId=equipment.parent._id)
+            (ticon (firstDie item.system.damage) cssClass="rollDamage" action="damage" id=item._id)
+            (ticon "comment" cssClass="share" action="share" id=item._id)
+            (ticonToggle "circle-check" "circle" item.system.equipped cssClass="equipToggle" action="toggleEquip" id=item._id parentId=item.parent._id)
           )
         }}
       {{/each}}

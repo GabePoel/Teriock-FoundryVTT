@@ -23,6 +23,98 @@ export class TeriockItem extends Item {
     return rollData;
   }
 
+  async disable() {
+    if (!this.system.disabled) {
+      this.update({ 'system.disabled': true });
+      for (const effect of this.effects) {
+        await effect.softDisable();
+      }
+    }
+  }
+
+  async enable() {
+    if (this.system.disabled) {
+      this.update({ 'system.disabled': false });
+      for (const effect of this.effects) {
+        await effect.softEnable();
+      }
+    }
+  }
+
+  async setDisabled(bool) {
+    if (bool) {
+      await this.disable();
+    } else {
+      await this.enable();
+    }
+  }
+
+  async toggleDisabled() {
+    await this.setDisabled(!this.system.disabled);
+  }
+
+  async shatter() {
+    if (this.type === 'equipment') {
+      await this.update({ 'system.shattered': true });
+      await this.disable();
+    }
+  }
+
+  async repair() {
+    if (this.type === 'equipment') {
+      await this.update({ 'system.shattered': false });
+      if (this.system.equipped) {
+        await this.enable();
+      }
+    }
+  }
+
+  async setShattered(bool) {
+    if (bool) {
+      await this.shatter();
+    } else {
+      await this.repair();
+    }
+  }
+
+  async toggleShattered() {
+    await this.setShattered(!this.system.shattered);
+  }
+
+  async unequip() {
+    if (this.type === 'equipment') {
+      await this.update({ 'system.equipped': false });
+      await this.disable();
+    }
+  }
+
+  async equip() {
+    if (this.type === 'equipment') {
+      await this.update({ 'system.equipped': true });
+      if (!this.system.shattered) {
+        await this.enable();
+      }
+    }
+  }
+
+  async setEquipped(bool) {
+    if (bool) {
+      await this.equip();
+    } else {
+      await this.unequip();
+    }
+  }
+
+  async toggleEquipped() {
+    if (this.type === 'equipment') {
+      if (this.system.equipped) {
+        await this.unequip();
+      } else {
+        await this.equip();
+      }
+    }
+  }
+
   async _wikiPull() {
     if (['ability', 'equipment', 'rank'].includes(this.type)) {
       let pageTitle = this.system.wikiNamespace + ':'
@@ -55,57 +147,6 @@ export class TeriockItem extends Item {
     }
     label.innerHTML += text;
     return label;
-  }
-
-  async _enable() {
-    for (const effect of this.transferredEffects) {
-      if (effect.type === 'ability') {
-        await effect.update({
-          'disabled': false
-        })
-      }
-    }
-  }
-
-  _disable() {
-    for (const effect of this.transferredEffects) {
-      if (effect.type === 'ability') {
-        effect.update({
-          'disabled': true
-        })
-      }
-    }
-  }
-
-  _equip() {
-    if (this.type === 'equipment') {
-      console.log('Unequipping');
-      this.update({
-        'system.equipped': true,
-      });
-    }
-    this._enable();
-  }
-
-  _unequip() {
-    if (this.type === 'equipment') {
-      console.log('Equipping');
-      this.update({
-        'system.equipped': false,
-      });
-    }
-    this._disable();
-  }
-
-  _toggleEquip() {
-    if (this.type === 'equipment') {
-      console.log('Toggling equipment');
-      if (this.system.equipped) {
-        this._unequip();
-      } else {
-        this._equip();
-      }
-    }
   }
 
   async share() {

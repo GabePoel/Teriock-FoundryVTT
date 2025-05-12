@@ -1,6 +1,7 @@
 const { HandlebarsApplicationMixin } = foundry.applications.api;
 import { TeriockItemSheet } from './teriock-item-sheet.mjs';
 import { fieldContextMenu, tradecraftContextMenu } from './context-menus/fluency-context-menus.mjs';
+import { documentOptions } from "../helpers/constants/document-options.mjs";
 
 export class TeriockFluencySheet extends HandlebarsApplicationMixin(TeriockItemSheet) {
     static DEFAULT_OPTIONS = {
@@ -14,7 +15,7 @@ export class TeriockFluencySheet extends HandlebarsApplicationMixin(TeriockItemS
         },
         window: {
             // resizable: true,
-            icon: "fa-solid fa-compass-drafting",
+            icon: "fa-solid fa-" + documentOptions.fluency.icon,
         }
     };
     static PARTS = {

@@ -217,15 +217,14 @@ Handlebars.registerHelper('field', function (field) {
 });
 
 Handlebars.registerHelper('ticon', function (icon, options) {
-  const { cssClass = '', id, parentId, action } = options.hash;
+  const { cssClass = '', id, parentId, action, style='light' } = options.hash;
 
   const idAttr = id ? `data-id="${id}"` : '';
   const parentIdAttr = parentId ? `data-parent-id="${parentId}"` : '';
   const actionAttr = action ? `data-action="${action}"` : '';
 
-  return new Handlebars.SafeString(`
-    <i class="${cssClass} fa-light fa-${icon}" ${idAttr} ${parentIdAttr} ${actionAttr}></i>
-  `);
+  return new Handlebars.SafeString(
+    `<i class="${cssClass} fa-${style} fa-${icon}" ${idAttr} ${parentIdAttr} ${actionAttr}></i>`);
 });
 
 Handlebars.registerHelper('ticonToggle', function (iconTrue, iconFalse, bool, options) {
@@ -298,27 +297,37 @@ Handlebars.registerHelper('abilityCards', function (abilities, system, options) 
 
     const marker = Handlebars.helpers.abilityMarker(ability);
 
-    const icons = Handlebars.helpers.concat(
-      Handlebars.helpers.ticon("comment", {
-        hash: {
-          cssClass: "shareAbility",
-          action: "share",
-          id: ability._id,
-          parentId: ability.parent?._id
-        }
-      })
-    );
+    const shareIcon = Handlebars.helpers.ticon("comment", {
+      hash: {
+        cssClass: "shareAbility",
+        action: "share",
+        id: ability._id,
+        parentId: ability.parent?._id
+      }
+    })
+    const enableIcon = Handlebars.helpers.ticonToggle("circle", "circle-check", ability.disabled, {
+      hash: {
+        cssClass: "enableAbility",
+        action: "enable",
+        id: ability._id,
+        parentId: ability.parent?._id
+      }
+    })
+
+    const icons = shareIcon + enableIcon;
 
     return Handlebars.helpers.tcard({
       hash: {
         img: ability.img,
         title: ability.name,
-        subtitle,
+        subtitle: subtitle,
         text: ability.parent?.name,
+        icons: icons,
         id: ability._id,
         parentId: ability.parent?._id,
-        marker,
-        icons
+        active: !ability.disabled,
+        marker: marker,
+        shattered: false,
       }
     });
   }).join('\n');
