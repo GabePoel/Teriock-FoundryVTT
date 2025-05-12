@@ -9,6 +9,16 @@ export function archetypeContextMenu(rank) {
         const archetypeIcon = archetypes[archetype].icon;
         const icon = makeIcon(archetypeIcon, iconStyle);
         const firstClass = Object.keys(archetypes[archetype].classes)[0];
+        let hitDie = 'd10';
+        let manaDie = 'd10';
+        if (archetype === 'warrior') {
+            hitDie = 'd12';
+            manaDie = 'd8';
+        }
+        if (archetype === 'mage') {
+            hitDie = 'd8';
+            manaDie = 'd12';
+        }
         const option = {
             name: archetypeName,
             icon: icon,
@@ -17,6 +27,8 @@ export function archetypeContextMenu(rank) {
                     'system': {
                         'archetype': archetype,
                         'className': firstClass,
+                        'hitDie': hitDie,
+                        'manaDie': manaDie,
                     }
                 });
             }

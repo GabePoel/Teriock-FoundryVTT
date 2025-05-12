@@ -57,10 +57,10 @@ export class TeriockActor extends Actor {
   _prepareBonuses(actorData) {
     // const lvl = this.system.level;
     const lvl = this.system.lvl;
-    const pres = Math.floor( 1 + (lvl + 1) / 5 );
-    const rank = Math.floor( (lvl - 1) / 5 );
-    const p = Math.floor( 1 + (lvl - 7) / 10 );
-    const f = Math.floor( (lvl - 2) / 5 );
+    const pres = Math.max(Math.floor( 1 + (lvl + 1) / 5 ));
+    const rank = Math.max(Math.floor( (lvl - 1) / 5 ));
+    const p = Math.max(0, Math.floor(1 + (lvl - 7) / 10));
+    const f = Math.max(Math.floor( (lvl - 2) / 5 ));
     this.system.pres = pres;
     this.system.rank = rank;
     this.system.p = p;

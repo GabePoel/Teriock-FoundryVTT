@@ -70,6 +70,8 @@ export function parseAbility(rawHTML) {
             tempDiv.innerHTML = tempDiv.innerHTML.replace(/\./g, ',');
             tempDiv.innerHTML = tempDiv.innerHTML.replace(/\b\w/g, char => char.toUpperCase());
             tempDiv.innerHTML = cleanFeet(tempDiv.innerHTML);
+            // tempDiv.innerHTML = tempDiv.innerHTML.replace('.ft', '').trim();
+            // tempDiv.innerHTML = parseInt(tempDiv.innerHTML, 10);
             return tempDiv.innerHTML.trim();
         }
         return text;
@@ -216,7 +218,8 @@ export function parseAbility(rawHTML) {
                 if (parameters.costs.mp == "x") {
                     parameters.costs.manaCost = getBarText('mana-cost');
                 } else {
-                    parameters.costs.mp = cleanMp(parameters.costs.mp);
+                    // parameters.costs.mp = cleanMp(parameters.costs.mp);
+                    parameters.costs.mp = parseInt(parameters.costs.mp, 10);
                 }
             }
             if (c.startsWith("hp")) {
@@ -224,7 +227,8 @@ export function parseAbility(rawHTML) {
                 if (parameters.costs.hp == "x") {
                     parameters.costs.hitCost = getBarText('hit-cost');
                 } else if (parameters.costs.hp != "hack") {
-                    parameters.costs.hp = cleanHp(parameters.costs.hp);
+                    // parameters.costs.hp = cleanHp(parameters.costs.hp);
+                    parameters.costs.hp = parseInt(parameters.costs.hp, 10);
                 }
             }
             if (c == "shatter") {

@@ -1,3 +1,8 @@
+export function cleanValue(value) {
+    value = value.replace('+', '').trim();
+    return parseInt(value, 10);
+}
+
 export function cleanFeet(feet) {
     const synonyms = ['foot', 'feet']
     synonyms.forEach(synonym => {

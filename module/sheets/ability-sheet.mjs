@@ -156,21 +156,21 @@ export class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(sheets.A
             event.preventDefault();
             this.document.toggleForceDisabled();
         });
-        this.element.querySelectorAll('.range-input').forEach((element) => {
-            this._connectInput(element, element.getAttribute('name'), cleanFeet);
-        });
-        this.element.querySelectorAll('.weight-input').forEach((element) => {
-            this._connectInput(element, element.getAttribute('name'), cleanPounds);
-        });
-        this.element.querySelectorAll('.plus-minus-input').forEach((element) => {
-            this._connectInput(element, element.getAttribute('name'), cleanPlusMinus);
-        });
-        this.element.querySelectorAll('.mp-input').forEach((element) => {
-            this._connectInput(element, element.getAttribute('name'), cleanMp);
-        });
-        this.element.querySelectorAll('.hp-input').forEach((element) => {
-            this._connectInput(element, element.getAttribute('name'), cleanHp);
-        });
+        // this.element.querySelectorAll('.range-input').forEach((element) => {
+        //     this._connectInput(element, element.getAttribute('name'), cleanFeet);
+        // });
+        // this.element.querySelectorAll('.weight-input').forEach((element) => {
+        //     this._connectInput(element, element.getAttribute('name'), cleanPounds);
+        // });
+        // this.element.querySelectorAll('.plus-minus-input').forEach((element) => {
+        //     this._connectInput(element, element.getAttribute('name'), cleanPlusMinus);
+        // });
+        // this.element.querySelectorAll('.mp-input').forEach((element) => {
+        //     this._connectInput(element, element.getAttribute('name'), cleanMp);
+        // });
+        // this.element.querySelectorAll('.hp-input').forEach((element) => {
+        //     this._connectInput(element, element.getAttribute('name'), cleanHp);
+        // });
         
         // Everything below here is only needed if the sheet is editable
         if (!this.isEditable) return;

@@ -56,18 +56,18 @@ export class TeriockEquipmentSheet extends HandlebarsApplicationMixin(TeriockIte
             event.preventDefault();
             this.item.toggleDisabled();
         });
-        this.element.querySelectorAll('.av-input').forEach((element) => {
-            this._connectInput(element, element.getAttribute('name'), cleanAv);
-        });
-        this.element.querySelectorAll('.bv-input').forEach((element) => {
-            this._connectInput(element, element.getAttribute('name'), cleanBv);
-        });
-        this.element.querySelectorAll('.str-input').forEach((element) => {
-            this._connectInput(element, element.getAttribute('name'), cleanStr);
-        });
-        this.element.querySelectorAll('.damage-input').forEach((element) => {
-            this._connectInput(element, element.getAttribute('name'), cleanDamage);
-        });
+        // this.element.querySelectorAll('.av-input').forEach((element) => {
+        //     this._connectInput(element, element.getAttribute('name'), cleanAv);
+        // });
+        // this.element.querySelectorAll('.bv-input').forEach((element) => {
+        //     this._connectInput(element, element.getAttribute('name'), cleanBv);
+        // });
+        // this.element.querySelectorAll('.str-input').forEach((element) => {
+        //     this._connectInput(element, element.getAttribute('name'), cleanStr);
+        // });
+        // this.element.querySelectorAll('.damage-input').forEach((element) => {
+        //     this._connectInput(element, element.getAttribute('name'), cleanDamage);
+        // });
         this.element.querySelectorAll('.capitalization-input').forEach((element) => {
             this._connectInput(element, element.getAttribute('name'), cleanCapitalization);
         });

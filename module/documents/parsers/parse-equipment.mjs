@@ -1,4 +1,4 @@
-import { cleanFeet, cleanPounds, cleanDamage, cleanAv, cleanBv, cleanStr } from "../../helpers/clean.mjs";
+import { cleanFeet, cleanPounds, cleanValue, cleanDamage, cleanAv, cleanBv, cleanStr } from "../../helpers/clean.mjs";
 
 export function parseEquipment(rawHTML) {
     const parser = new DOMParser();
@@ -34,25 +34,26 @@ export function parseEquipment(rawHTML) {
     console.log('parameters', parameters);
 
     if (getText('.damage')) {
-        parameters.damage = cleanDamage(getText('.damage'));
+        // parameters.damage = cleanDamage(getText('.damage'));
+        parameters.damage = getText('.damage');
     }
     if (getValue('.weight')) {
-        parameters.weight = cleanPounds(getValue('.weight'));
+        parameters.weight = cleanValue(getValue('.weight'));
     }
     if (getText('.short-range')) {
-        parameters.shortRange = getText('.short-range');
+        parameters.shortRange = cleanValue(getText('.short-range'));
     }
     if (getText('.long-range')) {
-        parameters.longRange = getText('.long-range');
+        parameters.longRange = cleanValue(getText('.long-range'));
     }
     if (getText('.normal-range')) {
-        parameters.normalRange = getText('.normal-range');
+        parameters.normalRange = cleanValue(getText('.normal-range'));
     }
     if (getTextAll('.equipment-class')) {
         parameters.equipmentClasses = getTextAll('.equipment-class');
     }
     if (getValue('.min-str')) {
-        parameters.minStr = cleanStr(getValue('.min-str'));
+        parameters.minStr = cleanValue(getValue('.min-str'));
     }
     if (getTextAll('.property')) {
         parameters.properties = getTextAll('.property');
@@ -72,10 +73,12 @@ export function parseEquipment(rawHTML) {
         parameters.sb = getValue('.sb');
     }
     if (getValue('.av')) {
-        parameters.av = cleanAv(getValue('.av'));
+        // parameters.av = cleanAv(getValue('.av'));
+        parameters.av = cleanValue(getValue('.av'));
     }
     if (getValue('.bv')) {
-        parameters.bv = cleanBv(getValue('.bv'));
+        // parameters.bv = cleanBv(getValue('.bv'));
+        parameters.bv = cleanValue(getValue('.bv'));
     }
     if (getText('.special-rules')) {
         parameters.specialRules = getHTML('.special-rules');
