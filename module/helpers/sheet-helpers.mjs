@@ -125,7 +125,7 @@ export function connectEmbedded(document, element) {
                     {
                         // name: 'Open ' + embedded.parent?.name,
                         // icon: makeIcon(CONFIG.TERIOCK.documentOptions[embedded.parent?.type].icon, CONFIG.TERIOCK.iconStyles.contextMenu),
-                        name: 'Open Parent',
+                        name: 'Open Source',
                         icon: '<i class="fa-solid fa-arrow-up-right-from-square"></i>',
                         callback: () => {
                             const parent = embedded.parent;
