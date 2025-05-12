@@ -22,10 +22,10 @@ export class TeriockRankSheet extends HandlebarsApplicationMixin(TeriockItemShee
     };
     static PARTS = {
         header: {
-            template: 'systems/teriock/templates/parts/header.hbs',
+            template: 'systems/teriock/templates/common/header.hbs',
         },
         all: {
-            template: 'systems/teriock/templates/rank-template.hbs',
+            template: 'systems/teriock/templates/sheets/rank-template/rank-template.hbs',
         },
     };
 

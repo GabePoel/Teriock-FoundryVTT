@@ -1,0 +1,42 @@
+<div class="{{cssClass}}" autocomplete="off">
+  <div class="ab-sheet-top">
+    <div class="ab-bars">
+      {{> "systems/teriock/templates/sheets/ability-template/bars/ab-status-bar.hbs"}}
+      {{> "systems/teriock/templates/sheets/ability-template/bars/ab-delivery-bar.hbs"}}
+      {{> "systems/teriock/templates/sheets/ability-template/bars/ab-targeting-bar.hbs"}}
+      {{> "systems/teriock/templates/sheets/ability-template/bars/ab-expansion-bar.hbs"}}
+      {{> "systems/teriock/templates/sheets/ability-template/bars/ab-costs-bar.hbs"}}
+    </div>
+  </div>
+  {{> "systems/teriock/templates/sheets/ability-template/parts/ab-menu.hbs"}}
+  <div class="ab-main">
+    <div class="ab-tags-all">
+      {{> "systems/teriock/templates/sheets/ability-template/tags/ab-summary-tags.hbs"}}
+      {{> "systems/teriock/templates/sheets/ability-template/tags/ab-effects-tags.hbs"}}
+    </div>
+    {{> "systems/teriock/templates/sheets/ability-template/entries/ab-costs-entries.hbs"}}
+    {{#if (exists system.requirements)}}
+      {{> "systems/teriock/templates/sheets/ability-template/entries/ab-requirements-entries.hbs"}}
+    {{/if}}
+    {{#if (exists system.trigger)}}
+      {{> "systems/teriock/templates/sheets/ability-template/entries/ab-trigger-entries.hbs"}}
+    {{/if}}
+    {{> "systems/teriock/templates/sheets/ability-template/entries/ab-overview-entries.hbs"}}
+    {{#if (eq system.interaction "attack")}}
+      {{> "systems/teriock/templates/sheets/ability-template/entries/ab-attack-entries.hbs"}}
+    {{/if}}
+    {{#if (eq system.interaction "feat")}}
+      {{> "systems/teriock/templates/sheets/ability-template/entries/ab-feat-entries.hbs"}}
+    {{/if}}
+    {{#if (eq system.interaction "block")}}
+      {{> "systems/teriock/templates/sheets/ability-template/entries/ab-block-entries.hbs"}}
+    {{/if}}
+    {{#if (exists system.heightened)}}
+      {{> "systems/teriock/templates/sheets/ability-template/entries/ab-heightened-entries.hbs"}}
+    {{/if}}
+    {{#if (exists system.endCondition)}}
+      {{> "systems/teriock/templates/sheets/ability-template/entries/ab-end-condition-entries.hbs"}}
+    {{/if}}
+    {{> "systems/teriock/templates/sheets/ability-template/entries/ab-improvements-entries.hbs"}}
+  </div>
+</div>

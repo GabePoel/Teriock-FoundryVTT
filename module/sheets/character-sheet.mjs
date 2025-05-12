@@ -25,7 +25,7 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(sheets
     }
     static PARTS = {
         all: {
-            template: 'systems/teriock/templates/character-template.hbs',
+            template: 'systems/teriock/templates/sheets/character-template/character-template.hbs',
         },
     };
 

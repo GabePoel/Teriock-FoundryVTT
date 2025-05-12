@@ -22,10 +22,10 @@ export class TeriockEquipmentSheet extends HandlebarsApplicationMixin(TeriockIte
     }
     static PARTS = {
         header: {
-            template: 'systems/teriock/templates/parts/header.hbs',
+            template: 'systems/teriock/templates/common/header.hbs',
         },
         all: {
-            template: 'systems/teriock/templates/equipment-template.hbs',
+            template: 'systems/teriock/templates/sheets/equipment-template/equipment-template.hbs',
         }
     }
 
@@ -50,24 +50,15 @@ export class TeriockEquipmentSheet extends HandlebarsApplicationMixin(TeriockIte
     /** @override */
     _onRender(context, options) {
         super._onRender(context, options);
+
+        if (!this.isEditable) return;
+
         const powerLevelContextMenuOptions = powerLevelContextMenu(this.item);
         this._connectContextMenu('.power-level-box', powerLevelContextMenuOptions, 'click');
         this.element.querySelector('.equipped-box').addEventListener('click', (event) => {
             event.preventDefault();
             this.item.toggleDisabled();
         });
-        // this.element.querySelectorAll('.av-input').forEach((element) => {
-        //     this._connectInput(element, element.getAttribute('name'), cleanAv);
-        // });
-        // this.element.querySelectorAll('.bv-input').forEach((element) => {
-        //     this._connectInput(element, element.getAttribute('name'), cleanBv);
-        // });
-        // this.element.querySelectorAll('.str-input').forEach((element) => {
-        //     this._connectInput(element, element.getAttribute('name'), cleanStr);
-        // });
-        // this.element.querySelectorAll('.damage-input').forEach((element) => {
-        //     this._connectInput(element, element.getAttribute('name'), cleanDamage);
-        // });
         this.element.querySelectorAll('.capitalization-input').forEach((element) => {
             this._connectInput(element, element.getAttribute('name'), cleanCapitalization);
         });

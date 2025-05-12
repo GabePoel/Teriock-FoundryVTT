@@ -22,10 +22,10 @@ export class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(sheets.A
     }
     static PARTS = {
         header: {
-            template: 'systems/teriock/templates/parts/header.hbs',
+            template: 'systems/teriock/templates/common/header.hbs',
         },
         all: {
-            template: 'systems/teriock/templates/ability-template.hbs',
+            template: 'systems/teriock/templates/sheets/ability-template/ability-template.hbs',
         },
     }
 
@@ -38,11 +38,13 @@ export class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(sheets.A
     /* -------------------------------------------- */
 
     async _editor(parameter) {
-        console.log('editor');
-        console.log(parameter);
-        return await ux.TextEditor.enrichHTML(parameter, {
-            relativeTo: this.document,
-        });
+        if (parameter && parameter.length > 0) {
+            console.log('editor');
+            console.log(parameter);
+            return await ux.TextEditor.enrichHTML(parameter, {
+                relativeTo: this.document,
+            });
+        }
     }
 
     static async _onChat(event, target) {
@@ -132,6 +134,8 @@ export class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(sheets.A
     _onRender(context, options) {
         super._onRender(context, options);
 
+        if (!this.isEditable) return;
+
         this.element.querySelector('.reload-button').addEventListener('click', (event) => {
             event.preventDefault();
             console.log('Reloading wiki page');
@@ -156,24 +160,6 @@ export class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(sheets.A
             event.preventDefault();
             this.document.toggleForceDisabled();
         });
-        // this.element.querySelectorAll('.range-input').forEach((element) => {
-        //     this._connectInput(element, element.getAttribute('name'), cleanFeet);
-        // });
-        // this.element.querySelectorAll('.weight-input').forEach((element) => {
-        //     this._connectInput(element, element.getAttribute('name'), cleanPounds);
-        // });
-        // this.element.querySelectorAll('.plus-minus-input').forEach((element) => {
-        //     this._connectInput(element, element.getAttribute('name'), cleanPlusMinus);
-        // });
-        // this.element.querySelectorAll('.mp-input').forEach((element) => {
-        //     this._connectInput(element, element.getAttribute('name'), cleanMp);
-        // });
-        // this.element.querySelectorAll('.hp-input').forEach((element) => {
-        //     this._connectInput(element, element.getAttribute('name'), cleanHp);
-        // });
-        
-        // Everything below here is only needed if the sheet is editable
-        if (!this.isEditable) return;
 
         const html = $(this.element);
         console.log(html);
@@ -325,6 +311,7 @@ export class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(sheets.A
             }
         });
 
+        _connectButton('.ab-material-cost-button', 'system.costs.materialCost');
         _connectButton('.ab-trigger-button', 'system.trigger');
 
         // Overview

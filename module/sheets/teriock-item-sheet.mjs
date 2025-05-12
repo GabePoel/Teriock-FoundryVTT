@@ -15,7 +15,7 @@ export class TeriockItemSheet extends sheets.ItemSheet {
     }
     static PARTS = {
         all: {
-            template: 'systems/teriock/templates/parts/header.hbs',
+            template: 'systems/teriock/templates/common/header.hbs',
         },
     }
 

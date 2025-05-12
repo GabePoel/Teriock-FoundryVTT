@@ -1,0 +1,23 @@
+<div class="{{cssClass}}" autocomplete="off">
+  <div class="ab-sheet-top">
+    <div class="ab-bars">
+      {{> "systems/teriock/templates/sheets/equipment-template/bars/eq-status-bar.hbs"}}
+      {{> "systems/teriock/templates/sheets/equipment-template/bars/eq-attack-bar.hbs"}}
+      {{> "systems/teriock/templates/sheets/equipment-template/bars/eq-load-bar.hbs"}}
+    </div>
+  </div>
+  {{> "systems/teriock/templates/sheets/equipment-template/parts/eq-menu.hbs"}}
+  <div class="ab-main">
+    <div class="ab-tags-all">
+      {{> "systems/teriock/templates/sheets/equipment-template/tags/eq-classes-tags.hbs"}}
+      {{> "systems/teriock/templates/sheets/equipment-template/tags/eq-properties-tags.hbs"}}
+    </div>
+    {{#if (exists system.specialRules)}}
+      {{> "systems/teriock/templates/sheets/equipment-template/entries/eq-special-rules.hbs"}}
+    {{/if}}
+  </div>
+  <div class="ab-main">
+    <button class="createAbility" data-action='createAbility'>Add Ability</button>
+    {{abilityCards abilities system}}
+  </div>
+</div>
