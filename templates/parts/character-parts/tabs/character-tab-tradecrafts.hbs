@@ -5,18 +5,38 @@
 
     <div class="tcard-display">
       <div class="tradecraft-panels tgrid g2">
-        {{#each config.tradecraftOptions as |field|}}
-          <div class="tgrid-item">
-            {{field.name}}
-            <div class="field-panel tgrid g1">
+        {{#each config.tradecraftOptionsMain as |field|}}
+          <div class="field-panel">
+            <div class="tradecraft-panel tgrid g7">
+              <div class="tradecraft-panel-symbol field-panel-header">
+                PRO
+              </div>
+              <div class="tradecraft-panel-symbol field-panel-header">
+                Extra
+              </div>
+              <div class="tradecraft-panel-name field-panel-header gi4">
+                {{field.name}}
+              </div>
+              <div class="tradecraft-panel-symbol field-panel-header">
+                Bonus
+              </div>
               {{#each field.tradecrafts as |tradecraft|}}
-                <div class="tradecraft-panel">
+                <div class="tradecraft-panel-symbol">
+                  <i class="fa-regular fa-circle"></i>
+                </div>
+                <div class="tradecraft-panel-symbol">
+                  T
+                </div>
+                <div class="tradecraft-panel-name gi4">
                   {{tradecraft.name}}
+                </div>
+                <div class="tradecraft-panel-symbol">
+                  +1
                 </div>
               {{/each}}
             </div>
           </div>
-        {{/each}}
+       {{/each}}
       </div>
     </div>
 

@@ -31,18 +31,16 @@ export class TeriockActor extends Actor {
     const actorData = this;
     const systemData = actorData.system;
     const flags = actorData.flags.teriock || {};
-
-    // Make separate methods for each Actor type (character, npc, etc.) to keep
-    // things organized.
-    this._prepareActorData(actorData);
+    this._prepareHpMp(actorData);
+    this._prepareBonuses(actorData);
   }
 
   /**
    * Prepare Character type specific data
    */
-  _prepareActorData(actorData) {
-    let hpMax = 0;
-    let mpMax = 0;
+  _prepareHpMp(actorData) {
+    let hpMax = 1;
+    let mpMax = 1;
     const allItems = this.itemTypes;
     for (const rank of allItems.rank) {
       if (rank.system.hp) {
@@ -56,5 +54,21 @@ export class TeriockActor extends Actor {
     this.system.mpMax = mpMax;
   }
 
-
+  _prepareBonuses(actorData) {
+    // const lvl = this.system.level;
+    const lvl = this.system.lvl;
+    const pres = Math.floor( 1 + (lvl + 1) / 5 );
+    const rank = Math.floor( (lvl - 1) / 5 );
+    const p = Math.floor( 1 + (lvl - 7) / 10 );
+    const f = Math.floor( (lvl - 2) / 5 );
+    this.system.pres = pres;
+    this.system.rank = rank;
+    this.system.p = p;
+    this.system.f = f;
+    console.log('lvl', lvl);
+    console.log('pres', pres);
+    console.log('rank', rank);
+    console.log('p', p);
+    console.log('f', f);
+  }
 }

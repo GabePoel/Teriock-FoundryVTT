@@ -12,6 +12,12 @@ export const TERIOCK = {
   iconStyles: iconStyles,
   abilityOptions: abilityOptions,
   tradecraftOptions: tradecraftOptions,
+  tradecraftOptionsMain: {
+    artisan: tradecraftOptions.artisan,
+    mediator: tradecraftOptions.mediator,
+    scholar: tradecraftOptions.scholar,
+    survivalist: tradecraftOptions.survivalist,
+  },
   rankOptions: rankOptions,
   displayOptions: displayOptions,
   powerOptions: powerOptions,

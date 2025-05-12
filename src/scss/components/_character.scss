@@ -312,7 +312,7 @@ $mp-blue-darkest: darken($mp-blue, 20%);
     gap: 0.5em;
     margin-bottom: 0.5em;
     padding-bottom: 0.5em;
-    border-bottom: 1px dashed var(--color-border);
+    border-bottom: 1px dashed var(--color-form-hint);
     gap: 0.5em;
     .tcard-options-header {
       display: flex;
@@ -327,7 +327,7 @@ $mp-blue-darkest: darken($mp-blue, 20%);
     }
     .tcard-options-content {
       padding-top: 0.5em;
-      border-top: 1px dotted var(--color-form-hint);
+      border-top: 1px dotted var(--color-border);
     }
   }
   .tcard-container {
@@ -351,4 +351,48 @@ $mp-blue-darkest: darken($mp-blue, 20%);
   gap: 1em;
   align-items: center;
   justify-content: center;
+}
+
+.tradecraft-panels {
+  width: 100%;
+  padding: 0.5em;
+  display: grid;
+  grid-template-columns: 1fr 1fr; // two columns
+  gap: 0;
+
+  .field-panel {
+    padding: 0.5em;
+    margin: 0;
+    border: none;
+
+    // Add internal borders only
+    &:nth-child(1),
+    &:nth-child(3) {
+      border-right: 1px dashed var(--color-border); // right side of left panels
+    }
+
+    &:nth-child(1),
+    &:nth-child(2) {
+      border-bottom: 1px dashed var(--color-border); // bottom of top panels
+    }
+  }
+
+  .field-panel-header {
+    width: 100%;
+    color: var(--color-text-subtle);
+    text-transform: uppercase;
+    font-size: 0.8em;
+  }
+
+  .tradecraft-panel {
+    width: 100%;
+
+    .tradecraft-panel-symbol {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-text-subtle);
+    }
+  }
 }

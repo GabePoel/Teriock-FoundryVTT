@@ -53,7 +53,7 @@ Hooks.once('init', function () {
     types: ['power'],
   });
 
-  DocumentSheetConfig.registerSheet(TeriockEffect, 'teriock', TeriockAbilitySheet, {makeDefault: true});
+  DocumentSheetConfig.registerSheet(TeriockEffect, 'teriock', TeriockAbilitySheet, { makeDefault: true });
 
 
   game.teriock = {
@@ -251,7 +251,7 @@ Handlebars.registerHelper('ttoggle', function (bool) {
 });
 
 Handlebars.registerHelper('tcard', function (options) {
-  const { img, title, subtitle, text, icons, id, parentId, active=true, marker=null, shattered=false } = options.hash;
+  const { img, title, subtitle, text, icons, id, parentId, active = true, marker = null, shattered = false } = options.hash;
 
   const idAttr = id ? `data-id="${id}"` : '';
   const parentIdAttr = parentId ? `data-parent-id="${parentId}"` : '';
@@ -341,7 +341,7 @@ Handlebars.registerHelper('abilityMarker', function (effect) {
   return CONFIG.TERIOCK.abilityOptions.abilityType[abilityType]?.color;
 });
 
-Handlebars.registerHelper('tcardOptions', function(optionsToggle, filterToggle, searchValue, tab, options) {
+Handlebars.registerHelper('tcardOptions', function (optionsToggle, filterToggle, searchValue, tab, options) {
   const escape = Handlebars.Utils.escapeExpression;
   const toggleHelper = Handlebars.helpers.ttoggle;
   const checkedHelper = Handlebars.helpers.checked;
@@ -410,11 +410,19 @@ Handlebars.registerHelper('tcardOptions', function(optionsToggle, filterToggle, 
   `);
 });
 
-Handlebars.registerHelper('dotJoin', function(...args) {
+Handlebars.registerHelper('dotJoin', function (...args) {
   const options = args.pop();
   const separator = '&nbsp;&nbsp;·&nbsp;&nbsp;';
   const result = args
     .filter(arg => typeof arg === 'string' && arg.length > 0)
     .join(separator);
   return new Handlebars.SafeString(result);
+});
+
+Handlebars.registerHelper('eachExceptLast', function (context, options) {
+  let out = '';
+  for (let i = 0; i < context.length - 1; i++) {
+    out += options.fn(context[i]);
+  }
+  return out;
 });
