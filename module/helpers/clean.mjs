@@ -9,10 +9,10 @@ export function cleanFeet(feet) {
         const regex = new RegExp(synonym, 'gi');
         feet = feet.replace(regex, 'ft');
     });
-    feet = feet.replace(/\bft(?!\.)\b/gi, 'ft.');
+    feet = feet.replace(/\bft\.\b/gi, 'ft');
     feet = feet.trim();
-    if (/\d$/.test(feet) && !feet.endsWith('ft.')) {
-        feet += ' ft.';
+    if (/\d$/.test(feet) && !feet.endsWith('ft')) {
+        feet += ' ft';
     }
     return feet;
 }
@@ -23,10 +23,10 @@ export function cleanPounds(pounds) {
         const regex = new RegExp(synonym, 'gi');
         pounds = pounds.replace(regex, 'lb');
     });
-    pounds = pounds.replace(/\blb(?!\.)\b/gi, 'lb.');
+    pounds = pounds.replace(/\blb\.\b/gi, 'lb');
     pounds = pounds.trim();
-    if (/\d$/.test(pounds) && !pounds.endsWith('lb.')) {
-        pounds += ' lb.';
+    if (/\d$/.test(pounds) && !pounds.endsWith('lb')) {
+        pounds += ' lb';
     }
     return pounds;
 }

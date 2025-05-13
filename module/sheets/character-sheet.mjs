@@ -195,6 +195,17 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(sheets
                 event.stopPropagation();
             });
         });
+        this.element.querySelectorAll('.share').forEach((el) => {
+            el.addEventListener('click', (event) => {
+                event.preventDefault();
+                const id = el.getAttribute('data-id');
+                const item = this.document.items.get(id);
+                if (item) {
+                    item.share();
+                }
+                event.stopPropagation();
+            });
+        });
         this.element.querySelectorAll('.enableAbility').forEach((el) => {
             el.addEventListener('click', (event) => {
                 event.preventDefault();
