@@ -1,12 +1,12 @@
-- [ ] Equipment improvements
-  - [ ] Able to set tier
-  - [ ] Able to set properties
-  - [ ] Able to add descriptions
-  - [ ] Able to make consumable (and adjust from character sheet)
+- [x] Equipment improvements
+  - [x] Able to set tier
+  - [x] Able to set properties
+  - [x] Able to add descriptions
+  - [x] Able to make consumable (and adjust from character sheet)
   - [x] Able to easily set as flaw/ES/ECHO/physical/gifted (and styling to match)
   - [x] Ability disabling synchronization
   - [x] Shattering
-  - [ ] Dampening
+  - [x] Dampening
 - [ ] Ability improvements
   - [x] Able to make as flaw
   - [ ] Improved dice rolling
@@ -18,7 +18,7 @@
   - [ ] Notes page
   - [ ] Automatic computations
     - [ ] Attributes
-    - [ ] Hit and mana dice
+    - [x] Hit and mana dice
     - [ ] Carrying capacity
     - [ ] Speed
     - [ ] Weight carried and limits
@@ -37,23 +37,26 @@
   - [ ] Rolling implementation for items
   - [x] Handlebars consolidation across item and character sheets
   - [ ] Drag/drop implementations
-  - [ ] Styling improvements in lots of places
+  - [x] Styling improvements in lots of places
     - [x] Embedded cards
     - [x] Filter menus
     - [x] Option menus
     - [x] Box units
-    - [ ] HP/MP bars
+    - [x] HP/MP bars
 - [ ] Bug fixes
   - [x] Ability sheet prematurely closes when making any edit that's not handled by external code
   - [x] Slow loading of ability sheet entries
   - [x] Material cost button not working
+  - [ ] Rank number not appearing
+  - [ ] HP/MP costs in ability chat messages
 - [ ] Decisions
   - [ ] Should ES bw an item or effect/ability?
   - [x] Should items enter equipped?
 - [ ] Scripts
   - [ ] Consolidate SCSS and template registration
+  - [s] Property/effect/etc. imports scripts
 - [ ] Organization
-  - [ ] Reorganize templates folder
-  - [ ] Separate our handlebars registration
+  - [x] Reorganize templates folder
+  - [ ] Separate out handlebars registration
   - [ ] Consistent config icon handling
   - [ ] Sheet helpers, utilities, wiki, and parsing consistency
