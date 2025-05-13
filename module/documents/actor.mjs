@@ -33,6 +33,12 @@ export class TeriockActor extends Actor {
     const flags = actorData.flags.teriock || {};
     this._prepareHpMp(actorData);
     this._prepareBonuses(actorData);
+    const usp = this.itemTypes.equipment.reduce((total, item) => {
+      return total + (item.system.tier || 0);
+    }, 0);
+    const unp = this.system.pres - usp;
+    this.system.unp = unp;
+    this.system.usp = usp;
   }
 
   /**
