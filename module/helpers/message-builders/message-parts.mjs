@@ -162,3 +162,18 @@ function barIcon(parent, iconClass, first = true) {
     }
     return container;
 }
+
+export function addAbilitiesBlock(abilities, blocks, name = 'Abilities') {
+    if (abilities.length > 0) {
+        let abilitiesText = '<ul>';
+        for (const ability of abilities) {
+            const name = ability.name;
+            abilitiesText += `<li>${name}</li>`;
+        }
+        abilitiesText += '</ul>';
+        blocks.push({
+            title: name,
+            text: abilitiesText,
+        });
+    }
+}

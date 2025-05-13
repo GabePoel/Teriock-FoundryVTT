@@ -1,3 +1,5 @@
+import { addAbilitiesBlock } from "./message-parts.mjs";
+
 export function buildEquipmentMessage(equipment) {
     const ref = CONFIG.TERIOCK.equipmentOptions;
     const src = equipment.system;
@@ -79,18 +81,7 @@ export function buildEquipmentMessage(equipment) {
             text: src.fllTier,
         }
     ]
-    if (equipment.transferredEffects.length > 0) {
-        let abilitiesText = '<ul>';
-        for (const effect of equipment.transferredEffects) {
-            const name = effect.name;
-            abilitiesText += `<li>${name}</li>`;
-        }
-        abilitiesText += '</ul>';
-        blocks.push({
-            title: 'Abilities',
-            text: abilitiesText,
-        })
-    }
+    addAbilitiesBlock(equipment.transferredEffects, blocks);
     return {
         bars: bars,
         blocks: blocks,

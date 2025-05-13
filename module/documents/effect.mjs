@@ -13,6 +13,15 @@ export class TeriockEffect extends ActiveEffect {
     super.prepareData();
   }
 
+  /** @override */
+  prepareDerivedData() {
+    if (this.system.forceProficient) {
+      this.system.proficient = true;
+    } else {
+      this.system.proficient = this.parent.system.proficient;
+    }
+  }
+
   /**
    * Prepare a data object which defines the data schema used by dice roll commands against this Item
    * @override

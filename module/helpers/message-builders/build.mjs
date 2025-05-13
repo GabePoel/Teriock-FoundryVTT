@@ -1,6 +1,9 @@
 import { messageBlock, messageBar, messageBox, messageWrapper, messageHeader } from "./message-parts.mjs";
 import { buildAbilityMessage } from "./build-ability-message.mjs";
 import { buildEquipmentMessage } from "./build-equipment-message.mjs";
+import { buildPowerMessage } from "./build-power-message.mjs";
+import { buildRankMessage } from "./build-rank-message.mjs";
+import { buildFluencyMessage } from "./build-fluency-message.mjs";
 
 export function buildMessage(document) {
     let content = {
@@ -12,6 +15,15 @@ export function buildMessage(document) {
     }
     if (document.type == 'equipment') {
         content = buildEquipmentMessage(document);
+    }
+    if (document.type == 'power') {
+        content = buildPowerMessage(document);
+    }
+    if (document.type == 'rank') {
+        content = buildRankMessage(document);
+    }
+    if (document.type == 'fluency') {
+        content = buildFluencyMessage(document);
     }
     return buildMessageHelper(document.img, document.name, content.bars, content.blocks);
 }
