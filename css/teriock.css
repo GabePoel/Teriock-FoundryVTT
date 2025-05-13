@@ -1270,32 +1270,32 @@
   overflow: hidden;
 }
 .teriock .character-page .character-sidebar .character-status-box .character-status-bars .character-bar-container .character-bar.character-hit-bar {
-  border: 2px solid #641010;
+  border: 2px solid var(--color-level-error);
 }
 .teriock .character-page .character-sidebar .character-status-box .character-status-bars .character-bar-container .character-bar.character-hit-bar .character-bar-left {
-  background-color: #641010;
+  background-color: var(--color-level-error);
 }
 .teriock .character-page .character-sidebar .character-status-box .character-status-bars .character-bar-container .character-bar.character-hit-bar .character-bar-temp {
-  background-image: repeating-linear-gradient(135deg, #641010 0px, #641010 2px, #380909 2px, #380909 8px);
-  border-left: 2px solid #641010;
-  border-right: 2px solid #641010;
+  background-image: repeating-linear-gradient(135deg, var(--color-level-error) 0px, var(--color-level-error) 2px, var(--color-level-error-border) 2px, var(--color-level-error-border) 8px);
+  border-left: 2px solid var(--color-level-error);
+  border-right: 2px solid var(--color-level-error);
 }
 .teriock .character-page .character-sidebar .character-status-box .character-status-bars .character-bar-container .character-bar.character-hit-bar .character-bar-lost {
-  background-color: #0c0202;
+  background-color: var(--color-level-error-bg);
 }
 .teriock .character-page .character-sidebar .character-status-box .character-status-bars .character-bar-container .character-bar.character-mana-bar {
-  border: 2px solid #101064;
+  border: 2px solid var(--color-level-info);
 }
 .teriock .character-page .character-sidebar .character-status-box .character-status-bars .character-bar-container .character-bar.character-mana-bar .character-bar-left {
-  background-color: #101064;
+  background-color: var(--color-level-info);
 }
 .teriock .character-page .character-sidebar .character-status-box .character-status-bars .character-bar-container .character-bar.character-mana-bar .character-bar-temp {
-  background-image: repeating-linear-gradient(135deg, #101064 0px, #101064 2px, #090938 2px, #090938 8px);
-  border-left: 2px solid #101064;
-  border-right: 2px solid #101064;
+  background-image: repeating-linear-gradient(135deg, var(--color-level-info) 0px, var(--color-level-info) 2px, var(--color-level-info-border) 2px, var(--color-level-info-border) 8px);
+  border-left: 2px solid var(--color-level-info);
+  border-right: 2px solid var(--color-level-info);
 }
 .teriock .character-page .character-sidebar .character-status-box .character-status-bars .character-bar-container .character-bar.character-mana-bar .character-bar-lost {
-  background-color: #02020c;
+  background-color: var(--color-level-info-bg);
 }
 .teriock .character-page .character-sidebar .character-status-box .character-status-bars .character-bar-container .character-bar .character-bar-left {
   height: 3em;
@@ -1326,6 +1326,7 @@
 .teriock .character-page .character-sidebar .character-status-box .character-status-bars .character-bar-container .character-bar-overlay .character-bar-overlay-row input {
   margin-inline: 2px;
   padding-inline: 2px;
+  border: none;
 }
 .teriock .character-page .character-sidebar .character-status-box .character-status-bars .character-bar-container .character-bar-overlay .character-bar-overlay-row .character-bar-overlay-label {
   background-color: transparent;
@@ -1500,6 +1501,39 @@
   gap: 1em;
   align-items: center;
   justify-content: center;
+}
+.teriock .character-presence-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 3em;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 2px solid var(--color-level-warning);
+}
+.teriock .character-presence-container .character-presence-bar {
+  display: grid;
+  width: 100%;
+  height: 100%;
+}
+.teriock .character-presence-container .character-presence-bar .presence-indicator {
+  width: 100%;
+  height: 100%;
+  background-color: black;
+}
+.teriock .character-presence-container .character-presence-bar .presence-indicator:not(:first-child) {
+  border-left: 1px solid var(--color-level-warning);
+}
+.teriock .character-presence-container .character-presence-bar .presence-indicator:not(:last-child) {
+  border-right: 1px solid var(--color-level-warning);
+}
+.teriock .character-presence-container .character-presence-bar .presence-indicator.used {
+  background-image: repeating-linear-gradient(135deg, var(--color-level-warning) 0px, var(--color-level-warning) 2px, var(--color-level-warning-bg) 2px, var(--color-level-warning-bg) 8px);
+}
+.teriock .character-presence-container .character-presence-bar .presence-indicator.unused {
+  background-color: var(--color-level-warning-bg);
 }
 .teriock .tradecraft-panels {
   width: 100%;

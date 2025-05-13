@@ -438,3 +438,12 @@ Handlebars.registerHelper('eachExceptLast', function (context, options) {
   }
   return out;
 });
+
+Handlebars.registerHelper('repeat', function (n, block) {
+  let accum = '';
+  for (let i = 0; i < n; ++i) {
+    accum += block;
+  }
+  console.log('repeat', n, block, accum);
+  return new Handlebars.SafeString(accum);
+});
