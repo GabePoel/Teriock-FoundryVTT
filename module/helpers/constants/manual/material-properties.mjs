@@ -1,5 +1,6 @@
 export const materialProperties = {
     agantine: 'Agantine',
+    amonum: 'Amonum',
     astemori: 'Astemori',
     bejeweled: 'Bejeweled',
     darksteel: 'Dark Steel',
@@ -13,5 +14,6 @@ export const materialProperties = {
     rastarwa: 'Rastarwa',
     saliburn: 'Saliburn',
     spiritQuartz: 'Spirit Quartz',
+    other: 'Other',
     unknown: 'Unknown',
 }
