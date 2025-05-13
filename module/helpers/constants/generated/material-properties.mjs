@@ -11,6 +11,7 @@ export const materialProperties = {
     "dirtyDark": "Dirty Dark",
     "glimmerbright": "Glimmerbright",
     "heartstone": "Heartstone",
+    "jade": "Jade",
     "mithril": "Mithril",
     "morganti": "Morganti",
     "obsidian": "Obsidian",
