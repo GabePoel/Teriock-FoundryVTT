@@ -1,7 +1,9 @@
-{{#if (exists system.properties)}}
+{{#if (or (exists system.properties) (exists system.materialProperties) (exists system.magicalProperties))}}
     <div class="ab-tags-container">
         <div class="ab-tags">
-            {{#each system.properties as |key index|}}<span class="ab-tag property-tag" value="{{key}}">{{{key}}}</span>{{/each}}
+            {{#each system.properties as |key index|}}<span class="ab-tag property-tag" value="{{key}}">{{lookup ../config.equipmentOptions.properties key}}</span>{{/each}}
+            {{#each system.magicalProperties as |key index|}}<span class="ab-tag magical-property-tag" value="{{key}}">{{lookup ../config.equipmentOptions.magicalProperties key}}</span>{{/each}}
+            {{#each system.materialProperties as |key index|}}<span class="ab-tag material-property-tag" value="{{key}}">{{lookup ../config.equipmentOptions.materialProperties key}}</span>{{/each}}
         </div>
     </div>
 {{/if}}

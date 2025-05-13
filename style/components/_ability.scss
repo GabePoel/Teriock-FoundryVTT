@@ -26,11 +26,16 @@
     display: block;
     height: 4em;
     width: 4em;
-    padding: 1em;
+    // padding: 1em;
     position: relative;
     flex: 0 0 auto;
     img {
       border: none;
+      max-width: 100%;
+      object-fit: cover;
+      object-position: 50% 0;
+      height: inherit;
+      width: inherit;
     }
     &::after {
       content: "";
@@ -288,6 +293,26 @@
         &.ab-multi-select-effects {
           ::after {
             content: "Effects";
+          }
+        }
+        &.ab-multi-select-properties {
+          ::after {
+            content: "Properties";
+          }
+        }
+        &.ab-multi-select-equipment-classes {
+          ::after {
+            content: "Classes";
+          }
+        }
+        &.ab-multi-select-material-properties {
+          ::after {
+            content: "Material";
+          }
+        }
+        &.ab-multi-select-magical-properties {
+          ::after {
+            content: "Magic";
           }
         }
         multi-select {

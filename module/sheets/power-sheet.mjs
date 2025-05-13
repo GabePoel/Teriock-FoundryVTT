@@ -17,7 +17,10 @@ export class TeriockPowerSheet extends HandlebarsApplicationMixin(TeriockItemShe
         window: {
             // resizable: true,
             icon: "fa-solid fa-" + documentOptions.power.icon,
-        }
+        },
+        position: {
+            width: 560,
+        },
     };
     static PARTS = {
         header: {

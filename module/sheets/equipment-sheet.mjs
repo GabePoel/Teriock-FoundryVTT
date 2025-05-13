@@ -18,7 +18,10 @@ export class TeriockEquipmentSheet extends HandlebarsApplicationMixin(TeriockIte
         window: {
             // resizable: true,
             icon: "fa-solid fa-" + documentOptions.equipment.icon,
-        }
+        },
+        position: {
+            width: 560,
+        },
     }
     static PARTS = {
         header: {
@@ -40,6 +43,10 @@ export class TeriockEquipmentSheet extends HandlebarsApplicationMixin(TeriockIte
         const context = await super._prepareContext();
         context.enrichedSpecialRules = await this._editor(this.item.system.specialRules);
         context.enrichedDescription = await this._editor(this.item.system.description);
+        context.enrichedFlaws = await this._editor(this.item.system.flaws);
+        context.enrichedNotes = await this._editor(this.item.system.notes);
+        context.enrichedTier = await this._editor(this.item.system.fullTier);
+        context.enrichedManaStoring = await this._editor(this.item.system.manaStoring);
         return context;
     }
 
@@ -57,23 +64,73 @@ export class TeriockEquipmentSheet extends HandlebarsApplicationMixin(TeriockIte
         this._connectContextMenu('.power-level-box', powerLevelContextMenuOptions, 'click');
         this.element.querySelector('.equipped-box').addEventListener('click', (event) => {
             event.preventDefault();
-            this.item.toggleDisabled();
+            this.item.toggleEquipped();
         });
         this.element.querySelectorAll('.capitalization-input').forEach((element) => {
             this._connectInput(element, element.getAttribute('name'), cleanCapitalization);
         });
-        this._activateMenu(this.element);
+
+        const html = $(this.element);
+        this._activateTags(html);
+        this._activateMenu(html);
+    }
+
+    _connect(cssClass, listener, callback) {
+        const elements = this.element.querySelectorAll(cssClass);
+        elements.forEach((element) => {
+            element.addEventListener(listener, (event) => {
+                event.preventDefault();
+                callback(event);
+            });
+        });
+    }
+
+    _activateTags(html) {
+        const equipment = this.document;
+        function _connectTag(cssClass, parameter) {
+            html.on('click', cssClass, (event) => {
+                event.preventDefault();
+                equipment.update({ [parameter]: false });
+            });
+        }
+        this._connect('.flag-tag-dampened', 'click', (event) => {
+            this.document.undampen();
+        });
+        this._connect('.flag-tag-shattered', 'click', (event) => {
+            this.document.repair();
+        });
+        _connectTag('.flag-tag-glued', 'system.glued');
+        this._connect('.equipment-class-tag', 'click', (event) => {
+            const element = event.currentTarget.getAttribute('value');
+            const equipmentClasses = this.document.system.equipmentClasses.filter(e => e !== element);
+            this.document.update({ 'system.equipmentClasses': equipmentClasses });
+        });
+        this._connect('.property-tag', 'click', (event) => {
+            const element = event.currentTarget.getAttribute('value');
+            const properties = this.document.system.properties.filter(e => e !== element);
+            this.document.update({ 'system.properties': properties });
+        });
+        this._connect('.magical-property-tag', 'click', (event) => {
+            const element = event.currentTarget.getAttribute('value');
+            const magicalProperties = this.document.system.magicalProperties.filter(e => e !== element);
+            this.document.update({ 'system.magicalProperties': magicalProperties });
+        });
+        this._connect('.material-property-tag', 'click', (event) => {
+            const element = event.currentTarget.getAttribute('value');
+            const materialProperties = this.document.system.materialProperties.filter(e => e !== element);
+            this.document.update({ 'system.materialProperties': materialProperties });
+        });
     }
 
     _activateMenu(html) {
-        const ability = this.document;
+        const equipment = this.document;
         function _connectButton(cssClass, parameter) {
             html.on('click', cssClass, (event) => {
                 event.preventDefault();
                 const text = 'Insert effect here.';
                 const update = {};
                 update[parameter] = text;
-                ability.update(update);
+                equipment.update(update);
             });
         }
 
@@ -103,5 +160,18 @@ export class TeriockEquipmentSheet extends HandlebarsApplicationMixin(TeriockIte
             const value = checkbox.checked;
             this.item.setShattered(value);
         });
+        this.element.querySelector('.dampen-checkbox').addEventListener('click', (event) => {
+            event.preventDefault();
+            const checkbox = event.currentTarget;
+            const value = checkbox.checked;
+            this.item.setDampened(value);
+        });
+
+        _connectButton('.ab-special-rules-button', 'system.specialRules');
+        _connectButton('.ab-description-button', 'system.description');
+        _connectButton('.ab-flaws-button', 'system.flaws');
+        _connectButton('.ab-notes-button', 'system.notes');
+        _connectButton('.ab-tier-button', 'system.fullTier');
+        _connectButton('.ab-mana-storing-button', 'system.manaStoring');
     }
 }

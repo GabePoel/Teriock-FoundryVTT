@@ -1,3 +1,5 @@
+import { effects } from "./generated/effects.mjs";
+
 export const abilityOptions = {
     maneuver: {
         active: "Active",
@@ -46,32 +48,7 @@ export const abilityOptions = {
             custom: "Custom"
         },
     },
-    effects: {
-        control: "Control",
-        damaging: "Damaging",
-        displacement: "Displacement",
-        duelMod: "Duel modifying",
-        healing: "Healing",
-        immunity: "Immunity",
-        killing: "Killing",
-        knockout: "Knockout",
-        longRange: "Long range",
-        loud: "Loud",
-        mental: "Mental",
-        movement: "Movement",
-        poison: "Poison",
-        reanimation: "Reanimation",
-        regeneration: "Regeneration",
-        resistance: "Resistance",
-        revitalization: "Revitalization",
-        revival: "Revival",
-        sensory: "Sensory",
-        stealing: "Stealing",
-        summoning: "Summoning",
-        temporal: "Temporal",
-        transformation: "Transformation",
-        truth: "Truth detecting",
-    },
+    effects: effects,
     piercing: {
         normal: '',
         av0: 'AV0',

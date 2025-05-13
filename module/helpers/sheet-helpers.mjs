@@ -93,6 +93,30 @@ export function connectEmbedded(document, element) {
                         }
                     },
                     {
+                        name: 'Glue',
+                        icon: '<i class="fa-solid fa-link"></i>',
+                        callback: () => {
+                            embedded.update({
+                                'system.glued': !embedded.system.glued,
+                            });
+                        },
+                        condition: () => {
+                            return embedded.type === 'equipment' && !embedded.system.glued;
+                        }
+                    },
+                    {
+                        name: 'Unglue',
+                        icon: '<i class="fa-solid fa-link-slash"></i>',
+                        callback: () => {
+                            embedded.update({
+                                'system.glued': !embedded.system.glued,
+                            });
+                        },
+                        condition: () => {
+                            return embedded.type === 'equipment' && embedded.system.glued;
+                        }
+                    },
+                    {
                         name: 'Shatter',
                         icon: '<i class="fa-solid fa-wine-glass-crack"></i>',
                         callback: () => {
@@ -110,6 +134,26 @@ export function connectEmbedded(document, element) {
                         },
                         condition: () => {
                             return embedded.type === 'equipment' && embedded.system.shattered;
+                        }
+                    },
+                    {
+                        name: 'Dampen',
+                        icon: '<i class="fa-solid fa-bell-slash"></i>',
+                        callback: () => {
+                            embedded.dampen();
+                        },
+                        condition: () => {
+                            return embedded.type === 'equipment' && !embedded.system.dampened;
+                        }
+                    },
+                    {
+                        name: 'Undampen',
+                        icon: '<i class="fa-solid fa-bell"></i>',
+                        callback: () => {
+                            embedded.undampen();
+                        },
+                        condition: () => {
+                            return embedded.type === 'equipment' && embedded.system.dampened;
                         }
                     },
                     // General Entries

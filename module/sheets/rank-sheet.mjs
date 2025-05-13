@@ -18,7 +18,10 @@ export class TeriockRankSheet extends HandlebarsApplicationMixin(TeriockItemShee
         window: {
             // resizable: true,
             icon: "fa-solid fa-" + documentOptions.rank.icon,
-        }
+        },
+        position: {
+            width: 560,
+        },
     };
     static PARTS = {
         header: {

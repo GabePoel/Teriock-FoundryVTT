@@ -79,4 +79,5 @@ export const icons = {
     sb: '<i class="fa-light fa-hand-fist"></i>',
     checked: '<i class="fa-solid fa-square-check"></i>',
     unchecked: '<i class="fa-regular fa-square"></i>',
+    tier: '<i class="fa-light fa-trophy"></i>',
 }

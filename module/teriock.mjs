@@ -284,6 +284,9 @@ Handlebars.registerHelper('tcard', function (options) {
 });
 
 Handlebars.registerHelper('abilityCards', function (abilities, system, options) {
+  if (!Array.isArray(abilities) || abilities.length === 0) {
+    return '';
+  }
   const isGapless = system?.sheet?.display?.ability?.gapless;
   const sizeClass = system?.sheet?.display?.ability?.size || '';
 

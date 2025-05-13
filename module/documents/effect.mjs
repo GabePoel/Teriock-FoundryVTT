@@ -1,5 +1,5 @@
 import { fetchWikiPageHTML } from "../helpers/wiki.mjs";
-import { parse } from "../documents/parsers/parse.mjs";
+import { parse } from "../helpers/parsers/parse.mjs";
 /**
  * Extend the basic Item with some very simple modifications.
  * @extends {ActiveEffect}

@@ -1,4 +1,4 @@
-import { TeriockItem } from "../item.mjs";
+import { TeriockItem } from "../../documents/item.mjs";
 import { createAbility } from "../../helpers/sheet-helpers.mjs";
 
 // async function getFolders(pack, path) {

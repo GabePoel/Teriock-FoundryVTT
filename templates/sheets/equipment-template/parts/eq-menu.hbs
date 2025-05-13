@@ -1,26 +1,185 @@
 <div class="ab-menu">
   <div class="ab-menu-content">
     <div class="ab-menu-bar">
-      <div class="tgrid g2">
+      <div class="tgrid g5">
+        {{!-- <div class="tgrid-item">
+          <label for="attuned">Attuned</label>
+          <input
+            type="checkbox"
+            id="attuned"
+            class="attune-checkbox"
+            name="system.attuned"
+            {{checked system.attuned}}
+          />
+        </div> --}}
+        <div class="tgrid-item">
+          <label for="glued">Glued</label>
+          <input
+            type="checkbox"
+            id="glued"
+            class="glue-checkbox"
+            name="system.glued"
+            {{checked system.glued}}
+          />
+        </div>
         <div class="tgrid-item">
           <label for="shattered">Shattered</label>
           <input
-            type="checkbox" 
+            type="checkbox"
             id="shattered"
             class="shatter-checkbox"
             {{checked system.shattered}}
           />
         </div>
         <div class="tgrid-item">
-          <label for="sentient">Sentient</label>
+          <label for="dampened">Dampened</label>
           <input
-            type="checkbox" 
-            id="sentient"
-            name="system.sentient"
-            data-edit="system.sentient"
-            {{checked system.sentient}}
+            type="checkbox"
+            id="dampened"
+            class="dampen-checkbox"
+            {{checked system.dampened}}
           />
         </div>
+        <div class="tgrid-item">
+          <label for="consumable">Consumable</label>
+          <input
+            type="checkbox"
+            id="consumable"
+            class="consumable-checkbox"
+            name="system.consumable"
+            {{checked system.consumable}}
+          />
+        </div>
+        <div class="tgrid-item">
+          <label for="equipped">Equipped</label>
+          <input
+            type="checkbox"
+            id="equipped"
+            class="equipped-checkbox"
+            name="system.equipped"
+            {{checked system.equipped}}
+          />
+        </div>
+        {{!-- <div class="tgrid-item">
+          <label for="ranged">Ranged</label>
+          <input
+            type="checkbox"
+            id="ranged"
+            class="ranged-checkbox"
+            name="system.ranged"
+            {{checked system.ranged}}
+          />
+        </div> --}}
+      </div>
+    </div>
+    <div class="ab-menu-bar">
+      <div class="tgrid g4">
+        <div class="tgrid-item">
+          <div class="ab-multi-select-label ab-multi-select-equipment-classes">
+            <multi-select
+              name="system.equipmentClasses"
+              data-edit="system.equipmentClasses"
+            >
+              {{selectOptions
+                config.equipmentOptions.equipmentClasses
+                selected=system.equipmentClasses
+              }}
+            </multi-select>
+          </div>
+        </div>
+        <div class="tgrid-item">
+          <div class="ab-multi-select-label ab-multi-select-properties">
+            <multi-select
+              name="system.properties"
+              data-edit="system.properties"
+            >
+              {{selectOptions
+                config.equipmentOptions.properties
+                selected=system.properties
+              }}
+            </multi-select>
+          </div>
+        </div>
+        <div class="tgrid-item">
+          <div class="ab-multi-select-label ab-multi-select-magical-properties">
+            <multi-select
+              name="system.magicalProperties"
+              data-edit="system.magicalProperties"
+            >
+              {{selectOptions
+                config.equipmentOptions.magicalProperties
+                selected=system.magicalProperties
+              }}
+            </multi-select>
+          </div>
+        </div>
+        <div class="tgrid-item">
+          <div
+            class="ab-multi-select-label ab-multi-select-material-properties"
+          >
+            <multi-select
+              name="system.materialProperties"
+              data-edit="system.materialProperties"
+            >
+              {{selectOptions
+                config.equipmentOptions.materialProperties
+                selected=system.materialProperties
+              }}
+            </multi-select>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ab-menu-bar">
+      <div class="tgrid g3">
+        {{#if (not (exists system.description))}}
+          <div class="tgrid-item">
+            <button class="ab-menu-button ab-description-button">
+              {{{config.icons.add}}}
+              Description
+            </button>
+          </div>
+        {{/if}}
+        {{#if (not (exists system.notes))}}
+          <div class="tgrid-item">
+            <button class="ab-menu-button ab-notes-button">
+              {{{config.icons.add}}}
+              Notes
+            </button>
+          </div>
+        {{/if}}
+        {{#if (not (exists system.specialRules))}}
+          <div class="tgrid-item">
+            <button class="ab-menu-button ab-equipment-type-rules-button">
+              {{{config.icons.add}}}
+              Equipment Type Rules
+            </button>
+          </div>
+        {{/if}}
+        {{#if (not (exists system.manaStoring))}}
+          <div class="tgrid-item">
+            <button class="ab-menu-button ab-mana-storing-button">
+              {{{config.icons.add}}}
+              Mana Storing
+            </button>
+          </div>
+        {{/if}}
+        {{#if (not (exists system.flaws))}}
+          <div class="tgrid-item">
+            <button class="ab-menu-button ab-flaws-button">
+              {{{config.icons.add}}}
+              Flaws
+            </button>
+          </div>
+        {{/if}}
+        {{#if (not (exists system.fullTier))}}
+          <div class="tgrid-item">
+            <button class="ab-menu-button ab-tier-button">
+              {{{config.icons.add}}}
+              Full Tier
+            </button>
+          </div>
+        {{/if}}
       </div>
     </div>
   </div>

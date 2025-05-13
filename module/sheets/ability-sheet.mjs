@@ -18,7 +18,10 @@ export class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(sheets.A
         window: {
             // resizable: true,
             icon: "fa-solid fa-" + documentOptions.ability.icon,
-        }
+        },
+        position: {
+            width: 560,
+        },
     }
     static PARTS = {
         header: {
@@ -162,9 +165,7 @@ export class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(sheets.A
         });
 
         const html = $(this.element);
-        console.log(html);
 
-        // Attach listeners to HTML elements
         this._activateContextMenus(html);
         this._activateTags(html);
         this._activateMenu(html);

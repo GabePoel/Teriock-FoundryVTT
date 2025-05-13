@@ -241,12 +241,16 @@
   display: block;
   height: 4em;
   width: 4em;
-  padding: 1em;
   position: relative;
   flex: 0 0 auto;
 }
 .teriock .ab-header .ab-profile-img img {
   border: none;
+  max-width: 100%;
+  object-fit: cover;
+  object-position: 50% 0;
+  height: inherit;
+  width: inherit;
 }
 .teriock .ab-header .ab-profile-img::after {
   content: "";
@@ -494,6 +498,18 @@
 }
 .teriock .ab-menu .ab-menu-content .ab-menu-bar .ab-multi-select-label.ab-multi-select-effects ::after {
   content: "Effects";
+}
+.teriock .ab-menu .ab-menu-content .ab-menu-bar .ab-multi-select-label.ab-multi-select-properties ::after {
+  content: "Properties";
+}
+.teriock .ab-menu .ab-menu-content .ab-menu-bar .ab-multi-select-label.ab-multi-select-equipment-classes ::after {
+  content: "Classes";
+}
+.teriock .ab-menu .ab-menu-content .ab-menu-bar .ab-multi-select-label.ab-multi-select-material-properties ::after {
+  content: "Material";
+}
+.teriock .ab-menu .ab-menu-content .ab-menu-bar .ab-multi-select-label.ab-multi-select-magical-properties ::after {
+  content: "Magic";
 }
 .teriock .ab-menu .ab-menu-content .ab-menu-bar .ab-multi-select-label multi-select {
   width: 100%;
@@ -1006,13 +1022,18 @@
   width: var(--tcard-height);
   height: var(--tcard-height);
   border-radius: var(--tcard-border-radius);
-  padding: var(--tcard-image-padding);
+  margin-right: var(--tcard-image-padding);
   overflow: hidden;
   opacity: var(--tcard-opacity);
 }
 .teriock .tcard-container .tcard .tcard-image img {
   max-width: 100%;
   max-height: 100%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  border: none;
 }
 .teriock .tcard-container .tcard .tcard-body {
   display: flex;
@@ -1104,7 +1125,7 @@
   justify-content: right;
 }
 .teriock .tgrid .tgrid-item input[type="checkbox"] {
-  margin-right: 2em;
+  margin-right: 1.5em;
 }
 .teriock .tgrid .tgrid-item multi-select {
   width: 100%;

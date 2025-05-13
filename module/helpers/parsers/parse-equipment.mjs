@@ -1,4 +1,5 @@
 import { cleanFeet, cleanPounds, cleanValue, cleanDamage, cleanAv, cleanBv, cleanStr } from "../../helpers/clean.mjs";
+import { toCamelCaseList } from "../../helpers/utils.mjs";
 
 export function parseEquipment(rawHTML) {
     const parser = new DOMParser();
@@ -69,6 +70,9 @@ export function parseEquipment(rawHTML) {
             parameters.properties.push(rangeProperty);
         }
     }
+    if (getValue('.piercing')) {
+        parameters.properties.push(getValue('.piercing'));
+    }
     if (getValue('.sb')) {
         parameters.sb = getValue('.sb');
     }
@@ -83,8 +87,22 @@ export function parseEquipment(rawHTML) {
     if (getText('.special-rules')) {
         parameters.specialRules = getHTML('.special-rules');
     }
+    
     parameters.properties.sort((a, b) => a.localeCompare(b));
     parameters.equipmentClasses.sort((a, b) => a.localeCompare(b));
+    const candidateProperties = toCamelCaseList(parameters.properties);
+
+    parameters.properties = candidateProperties.filter(property =>
+        Object.keys(CONFIG.TERIOCK.equipmentOptions.properties).includes(property)
+    );
+    parameters.magicalProperties = candidateProperties.filter(property =>
+        Object.keys(CONFIG.TERIOCK.equipmentOptions.magicalProperties).includes(property)
+    );
+    parameters.materialProperties = candidateProperties.filter(property =>
+        Object.keys(CONFIG.TERIOCK.equipmentOptions.materialProperties).includes(property)
+    );
+    parameters.equipmentClasses = toCamelCaseList(parameters.equipmentClasses);
+    
     delete parameters.equipmentType;
     delete parameters.powerLevel;
     delete parameters.disabled;
@@ -92,6 +110,12 @@ export function parseEquipment(rawHTML) {
     delete parameters.flaws;
     delete parameters.tier;
     delete parameters.effectiveTier;
+    delete parameters.notes;
+    delete parameters.shattered;
+    delete parameters.dampened;
+    delete parameters.materialProperties;
+    delete parameters.disabled;
+    delete parameters.glued;
     const out = {
         'system': parameters,
         'img': 'systems/teriock/assets/searchable.svg',

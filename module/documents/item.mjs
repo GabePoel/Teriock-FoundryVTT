@@ -1,5 +1,5 @@
 import { fetchWikiPageHTML } from "../helpers/wiki.mjs";
-import { parse } from "../documents/parsers/parse.mjs";
+import { parse } from "../helpers/parsers/parse.mjs";
 /**
  * Extend the basic Item with some very simple modifications.
  * @extends {Item}
@@ -55,7 +55,7 @@ export class TeriockItem extends Item {
 
   async shatter() {
     if (this.type === 'equipment') {
-      await this.update({ 'system.shattered': true });
+      await this.update({ 'system.shattered': true });      
       await this.disable();
     }
   }
@@ -79,6 +79,34 @@ export class TeriockItem extends Item {
 
   async toggleShattered() {
     await this.setShattered(!this.system.shattered);
+  }
+
+  async dampen() {
+    if (this.type === 'equipment') {
+      await this.update({ 'system.dampened': true });
+      await this.disable();
+    }
+  }
+
+  async undampen() {
+    if (this.type === 'equipment') {
+      await this.update({ 'system.dampened': false });
+      if (this.system.equipped) {
+        await this.enable();
+      }
+    }
+  }
+
+  async setDampened(bool) {
+    if (bool) {
+      await this.dampen();
+    } else {
+      await this.undampen();
+    }
+  }
+
+  async toggleDampened() {
+    await this.setDampened(!this.system.dampened);
   }
 
   async unequip() {

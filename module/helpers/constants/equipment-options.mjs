@@ -1,3 +1,9 @@
+import { equipmentclasses } from './generated/equipment-classes.mjs';
+import { properties } from './generated/properties.mjs';
+import { magicalProperties } from './generated/magical-properties.mjs';
+import { materialProperties } from './generated/material-properties.mjs';
+import { weaponFightingStyles } from './generated/weapon-fighting-styles.mjs';
+
 export const equipmentOptions = {
     powerLevel: {
         mundane: {
@@ -15,5 +21,10 @@ export const equipmentOptions = {
             icon: 'sparkles',
             color: '#9141ac',
         }
-    }
+    },
+    equipmentClasses: equipmentclasses,
+    properties: properties,
+    magicalProperties: magicalProperties,
+    materialProperties: materialProperties,
+    weaponFightingStyles: weaponFightingStyles,
 }

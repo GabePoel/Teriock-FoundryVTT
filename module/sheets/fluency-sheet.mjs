@@ -16,7 +16,10 @@ export class TeriockFluencySheet extends HandlebarsApplicationMixin(TeriockItemS
         window: {
             // resizable: true,
             icon: "fa-solid fa-" + documentOptions.fluency.icon,
-        }
+        },
+        position: {
+            width: 560,
+        },
     };
     static PARTS = {
         header: {

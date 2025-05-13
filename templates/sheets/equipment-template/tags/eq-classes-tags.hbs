@@ -1,9 +1,18 @@
 <div class="ab-tags-container">
   <div class="ab-tags">
+    {{#if system.shattered}}
+      <span class="ab-tag flag-tag-shattered">Shattered</span>
+    {{/if}}
+    {{#if system.dampened}}
+      <span class="ab-tag flag-tag-dampened">Dampened</span>
+    {{/if}}
+    {{#if system.glued}}
+      <span class="ab-tag flag-tag-glued">Glued</span>
+    {{/if}}
     {{#each system.equipmentClasses as |key index|}}<span
         class="ab-tag equipment-class-tag"
         value="{{key}}"
-      >{{{key}}}</span>{{/each}}
+      >{{lookup ../config.equipmentOptions.equipmentClasses key}}</span>{{/each}}
   </div>
   <div class="ab-icon ab-menu-toggle">
     <div class="ab-menu-closed-container">

@@ -1,0 +1,16 @@
+export const materialProperties = {
+    agantine: 'Agantine',
+    astemori: 'Astemori',
+    bejeweled: 'Bejeweled',
+    darksteel: 'Dark Steel',
+    dirtyDark: 'Dirty Dark',
+    glimmerbright: 'Glimmerbright',
+    heartstone: 'Heartstone',
+    mithril: 'Mithril',
+    morganti: 'Morganti',
+    obsidian: 'Obsidian',
+    rastarwa: 'Rastarwa',
+    saliburn: 'Saliburn',
+    spiritQuartz: 'Spirit Quartz',
+    unknown: 'Unknown',
+}
