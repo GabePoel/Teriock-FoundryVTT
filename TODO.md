@@ -9,7 +9,8 @@
   - [x] Dampening
 - [ ] Ability improvements
   - [x] Able to make as flaw
-  - [ ] Improved dice rolling
+  - [x] Improved dice rolling
+  - [ ] Separate chart and dice rolling messages
 - [ ] Power improvements
   - [ ] Import abilities from wiki category
   - [ ] Get confirmation before doing it
@@ -17,7 +18,7 @@
   - [ ] Basic abilities auto-import
   - [ ] Notes page
   - [ ] Automatic computations
-    - [ ] Attributes
+    - [x] Attributes
     - [x] Hit and mana dice
     - [ ] Carrying capacity
     - [ ] Speed
@@ -34,7 +35,7 @@
   - [x] Able to resize sheet
   - [ ] Able to change name and icon
 - [ ] Quality of life improvements
-  - [ ] Rolling implementation for items
+  - [x] Rolling implementation for items
   - [x] Handlebars consolidation across item and character sheets
   - [ ] Drag/drop implementations
   - [x] Styling improvements in lots of places
@@ -48,7 +49,7 @@
   - [x] Slow loading of ability sheet entries
   - [x] Material cost button not working
   - [ ] Rank number not appearing
-  - [ ] HP/MP costs in ability chat messages
+  - [x] HP/MP costs in ability chat messages
 - [ ] Decisions
   - [ ] Should ES bw an item or effect/ability?
   - [x] Should items enter equipped?
