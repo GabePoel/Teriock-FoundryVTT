@@ -12,7 +12,7 @@ export async function fetchWikiPageContent(title) {
     prop: 'revisions',
     rvprop: 'content',
     format: 'json',
-    origin: '*', // Needed for CORS
+    origin: '*',
     titles: title,
   });
 
@@ -85,7 +85,7 @@ export async function fetchWikiPageHTML(title) {
 
 export async function fetchCategoryMembers(category) {
   const endpoint = 'https://wiki.teriock.com/api.php';
-  const LIMIT = 500; // MediaWiki API limit
+  const LIMIT = 500;
   let members = [];
   let cmcontinue = null;
 
@@ -97,7 +97,7 @@ export async function fetchCategoryMembers(category) {
         cmtitle: `Category:${category}`,
         cmlimit: LIMIT,
         format: 'json',
-        origin: '*', // Needed for CORS
+        origin: '*',
       });
 
       if (cmcontinue) {

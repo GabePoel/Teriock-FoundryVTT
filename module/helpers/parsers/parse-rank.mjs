@@ -1,59 +1,6 @@
 import { TeriockItem } from "../../documents/item.mjs";
 import { createAbility } from "../../helpers/sheet-helpers.mjs";
 
-// async function getFolders(pack, path) {
-//     let children = null;
-//     const levels = path.split('/');
-//     let targetFolderName = levels.shift();
-//     let folder = null;
-//     let found = false;
-//     const folders = [];
-//     for (const f of game.packs.get(pack).folders) {
-//         if (f.name === targetFolderName) {
-//             folder = f;
-//             found = true;
-//             break;
-//         }
-//     }
-//     if (!found) {
-//         folder = await foundry.documents.Folder.implementation.create({
-//             name: targetFolderName,
-//             type: 'Item',
-//         }, {
-//             pack: pack,
-//         })
-//     }
-//     folders.push(folder);
-//     children = folder.children;
-//     while (levels.length > 0) {
-//         found = false;
-//         targetFolderName = levels.shift();
-//         for (const f of children) {
-//             if (f.folder.name === targetFolderName) {
-//                 folder = f;
-//                 found = true;
-//                 break;
-//             }
-//         }
-//         if (!found) {
-//             const newFolder = await foundry.documents.Folder.implementation.create({
-//                 name: targetFolderName,
-//                 folder: folder._id,
-//                 type: folder.type,
-//             }, {
-//                 pack: pack,
-//             })
-//             folder = newFolder;
-//         }
-//         if (folder.folder) {
-//             folder = folder.folder;
-//         }
-//         folders.push(folder);
-//         children = folder.children;
-//     }
-//     return folders;
-// }
-
 async function checkContents(folder, name) {
     for (const item of folder.contents) {
         if (item.name === name) {
@@ -72,20 +19,6 @@ export async function parseRank(rawHTML, item) {
     for (const ability of abilities) {
         ability.delete();
     }
-    // const archetypeValue = CONFIG.TERIOCK.rankOptions[archetype].name;
-    // let pack = null;
-    // if (item.inCompendium) {
-    //     pack = game.packs.get(item.pack);
-    // }
-    // let folders = null;
-    // if (pack) {
-    //     let path = 'Abilities/';
-    //     path += archetypeValue + '/';
-    //     path += classValue;
-    //     folders = await getFolders(item.pack, path);
-    //     console.log(folders);
-    // }
-
 
     const parser = new DOMParser();
     const doc = parser.parseFromString(rawHTML, 'text/html');
@@ -170,135 +103,21 @@ export async function parseRank(rawHTML, item) {
     }
     console.log('Rank 0', rank0Names);
     for (const name of rank0Names) {
-        // if (folders) {
-        //     const folder = folders[folders.length - 2];
-        //     let ability = await checkContents(folder, name);
-        //     if (!ability) {
-        //         ability = await TeriockItem.implementation.create({
-        //             name: name,
-        //             type: 'ability',
-        //         }, {
-        //             pack: item.pack,
-        //         });
-        //         await ability._wikiPull();
-        //         await ability.update({ folder: folder._id });
-        //     }
-        //     const abilitySummary = {
-        //         _id: ability._id,
-        //         name: ability.name,
-        //     }
-        //     rank0Abilities.push(abilitySummary);
-        // }
         await createAbility(item, name);
     }
     for (const name of rank1Names) {
-        // if (folders) {
-        //     const folder = folders[folders.length - 1];
-        //     let ability = await checkContents(folder, name);
-        //     if (!ability) {
-        //         ability = await TeriockItem.implementation.create({
-        //             name: name,
-        //             type: 'ability',
-        //         }, {
-        //             pack: item.pack,
-        //         });
-        //         await ability._wikiPull();
-        //         await ability.update({ folder: folder._id });
-        //     }
-        //     const abilitySummary = {
-        //         _id: ability._id,
-        //         name: ability.name,
-        //     }
-        //     rank1Abilities.push(abilitySummary);
-        // }
         await createAbility(item, name);
     }
     for (const name of rank2Names) {
-        // if (folders) {
-        //     const folder = folders[folders.length - 1];
-        //     let ability = await checkContents(folder, name);
-        //     if (!ability) {
-        //         ability = await TeriockItem.implementation.create({
-        //             name: name,
-        //             type: 'ability',
-        //         }, {
-        //             pack: item.pack,
-        //         });
-        //         await ability._wikiPull();
-        //         await ability.update({ folder: folder._id });
-        //     }
-        //     const abilitySummary = {
-        //         _id: ability._id,
-        //         name: ability.name,
-        //     }
-        //     rank2Abilities.push(abilitySummary);
-        // }
         await createAbility(item, name);
     }
     for (const name of rank3CombatNames) {
-        // if (folders) {
-        //     const folder = folders[folders.length - 1];
-        //     let ability = await checkContents(folder, name);
-        //     if (!ability) {
-        //         ability = await TeriockItem.implementation.create({
-        //             name: name,
-        //             type: 'ability',
-        //         }, {
-        //             pack: item.pack,
-        //         });
-        //         await ability._wikiPull();
-        //         await ability.update({ folder: folder._id });
-        //     }
-        //     const abilitySummary = {
-        //         _id: ability._id,
-        //         name: ability.name,
-        //     }
-        //     rank3CombatAbilities.push(abilitySummary);
-        // }
         await createAbility(item, name);
     }
     for (const name of rank3SupportNames) {
-        // if (folders) {
-        //     const folder = folders[folders.length - 1];
-        //     let ability = await checkContents(folder, name);
-        //     if (!ability) {
-        //         ability = await TeriockItem.implementation.create({
-        //             name: name,
-        //             type: 'ability',
-        //         }, {
-        //             pack: item.pack,
-        //         });
-        //         await ability._wikiPull();
-        //         await ability.update({ folder: folder._id });
-        //     }
-        //     const abilitySummary = {
-        //         _id: ability._id,
-        //         name: ability.name,
-        //     }
-        //     rank3SupportAbilities.push(abilitySummary);
-        // }
         await createAbility(item, name);
     }
     for (const name of rotatorNames) {
-        // if (folders) {
-        //     const folder = folders[folders.length - 1];
-        //     let ability = await checkContents(folder, name);
-        //     if (!ability) {
-        //         ability = await TeriockItem.implementation.create({
-        //             name: name,
-        //             type: 'ability',
-        //         }, {
-        //             pack: item.pack,
-        //         });
-        //         await ability._wikiPull();
-        //         await ability.update({ folder: folder._id });
-        //     }
-        //     const abilitySummary = {
-        //         _id: ability._id,
-        //         name: ability.name,
-        //     }
-        //     rotatorAbilities.push(abilitySummary);
-        // }
         await createAbility(item, name);
     }
     if (classRank < 2) {
@@ -351,9 +170,6 @@ export async function parseRank(rawHTML, item) {
     if (getText('.class-description')) {
         parameters.description = getHTML('.class-description');
     }
-    // if (pack) {
-    //     parameters.sourcePack = item.pack;
-    // }
     const out = {
         'system': parameters,
         'img': 'systems/teriock/assets/classes/' + className + '.svg',

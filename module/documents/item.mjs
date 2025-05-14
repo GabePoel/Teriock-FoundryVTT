@@ -1,6 +1,9 @@
-import { fetchWikiPageHTML } from "../helpers/wiki.mjs";
+import { fetchWikiPageHTML, fetchCategoryMembers } from "../helpers/wiki.mjs";
 import { parse } from "../helpers/parsers/parse.mjs";
 import { buildMessage } from "../helpers/message-builders/build.mjs";
+import { createAbility } from "../helpers/sheet-helpers.mjs";
+const { DialogV2 } = foundry.applications.api;
+
 /**
  * @extends {Item}
  */
@@ -162,6 +165,51 @@ export class TeriockItem extends Item {
       const changes = await parse(this, wikiContent);
       this.update(changes);
       return;
+    }
+  }
+
+  async _bulkWikiPullHelper(pullType) {
+    const pullTypeName = pullType === 'pages' ? 'Ability' : 'Category';
+    let toPull;
+    await DialogV2.prompt({
+      window: { title: 'Pulling ' + pullTypeName },
+      content: `<input type="text" name="pullInput" placeholder="${pullTypeName} Name" />`,
+      ok: {
+        label: "Pull",
+        callback: (event, button, dialog) => {
+          let input = button.form.elements.pullInput.value
+          if (input.startsWith(`${pullTypeName}:`)) {
+            input = input.slice(`${pullTypeName}:`.length);
+          }
+          toPull = input;
+        }
+      }
+    })
+    const pages = await fetchCategoryMembers(toPull);
+    for (const page of pages) {
+      if (page.title.startsWith('Ability:')) {
+        createAbility(this, page.title.replace(/^Ability:/, ''));
+      }
+    }
+  }
+
+  async _bulkWikiPull() {
+    if (['ability', 'equipment', 'rank', 'power'].includes(this.type)) {
+      const dialog = new DialogV2({
+        window: { title: 'Bulk Wiki Pull' },
+        content: 'What would you like to pull?',
+        buttons: [{
+          action: 'pages',
+          label: 'Page',
+          default: true,
+        }, {
+          action: 'categories',
+          label: 'Category',
+          default: false,
+        }],
+        submit: async (result) => this._bulkWikiPullHelper(result),
+      });
+      await dialog.render(true);
     }
   }
 

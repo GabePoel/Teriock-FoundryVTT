@@ -263,27 +263,6 @@
   margin: 0;
   margin-top: 1em;
 }
-.teriock .tc,
-.teriock .tl,
-.teriock .tr {
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-.teriock .tl {
-  justify-content: flex-start;
-  text-align: left;
-}
-.teriock .tr {
-  justify-content: flex-end;
-  text-align: right;
-}
-.teriock .ts {
-  flex: 0;
-}
-.teriock .tb {
-  justify-content: space-between;
-}
 .teriock .tcard-container {
   width: 100%;
   max-width: 560px;
@@ -1615,13 +1594,17 @@
   color: var(--color-text-subtle);
 }
 
-.application.sheet.teriock:not(.minimized) {
-  overflow: unset;
-}
 .application.sheet.teriock:not(.minimized) .window-content {
   padding: 0 !important;
-  display: contents;
   container-type: inline-size;
+  overflow: auto;
+}
+
+[id^="TeriockCharacterSheet"] {
+  overflow: unset;
+}
+[id^="TeriockCharacterSheet"] .window-content {
+  display: contents;
   overflow: unset;
 }
 

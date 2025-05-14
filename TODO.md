@@ -12,10 +12,10 @@
   - [x] Improved dice rolling
   - [ ] Separate chart and dice rolling messages
 - [ ] Power improvements
-  - [ ] Import abilities from wiki category
+  - [x] Import abilities from wiki category
   - [ ] Get confirmation before doing it
 - [ ] Character improvements
-  - [ ] Basic abilities auto-import
+  - [x] Basic abilities auto-import
   - [ ] Notes page
   - [ ] Automatic computations
     - [x] Attributes

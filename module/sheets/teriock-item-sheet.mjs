@@ -11,6 +11,12 @@ export class TeriockItemSheet extends sheets.ItemSheet {
         },
         form: {
             submitOnChange: true,
+        },
+        position: {
+            height: 600,
+        },
+        window: {
+            resizable: true,
         }
     }
     static PARTS = {
@@ -63,6 +69,11 @@ export class TeriockItemSheet extends sheets.ItemSheet {
             event.preventDefault();
             console.log('Reloading wiki page');
             this.item._wikiPull();
+        });
+        this.element.querySelector('.reload-button').addEventListener('contextmenu', (event) => {
+            event.preventDefault();
+            console.log('Reloading wiki page');
+            this.item._bulkWikiPull();
         });
         this.element.querySelector('.open-button').addEventListener('click', (event) => {
             event.preventDefault();
