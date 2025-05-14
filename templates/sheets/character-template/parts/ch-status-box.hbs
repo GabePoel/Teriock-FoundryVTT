@@ -1,0 +1,87 @@
+<div class="character-status-box">
+  <div class="character-status-bars">
+    <div class="character-hit-bar-container character-bar-container">
+      <div class="character-hit-bar character-bar toutline">
+        <div
+          class="character-bar-left"
+          style="width: {{barLeft system.hp system.hpMax system.hpTemp}}%;"
+        ></div>
+        <div
+          class="character-bar-temp"
+          style="width: {{barTemp system.hp system.hpMax system.hpTemp}}%;"
+        ></div>
+        <div
+          class="character-bar-lost"
+          style="width: {{barLost system.hp system.hpMax system.hpTemp}}%;"
+        ></div>
+      </div>
+      <div class="character-bar-overlay">
+        <div class="character-bar-overlay-row">
+          <input
+            type="number"
+            name="system.hp"
+            value="{{system.hp}}"
+            class="character-bar-overlay-left character-bar-overlay-label"
+            max="{{system.hpMax}}"
+          />
+          <div class="character-bar-overlay-max character-bar-overlay-label">
+            <span>/ {{system.hpMax}} +</span>
+          </div>
+          <input
+            type="number"
+            name="system.hpTemp"
+            value="{{system.hpTemp}}"
+            class="character-bar-overlay-temp character-bar-overlay-label"
+            placeholder="0"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="character-mana-bar-container character-bar-container">
+      <div class="character-mana-bar character-bar toutline">
+        <div
+          class="character-bar-left"
+          style="width: {{barLeft system.mp system.mpMax system.mpTemp}}%;"
+        ></div>
+        <div
+          class="character-bar-temp"
+          style="width: {{barTemp system.mp system.mpMax system.mpTemp}}%;"
+        ></div>
+        <div
+          class="character-bar-lost"
+          style="width: {{barLost system.mp system.mpMax system.mpTemp}}%;"
+        ></div>
+      </div>
+      <div class="character-bar-overlay">
+        <div class="character-bar-overlay-row">
+          <input
+            type="number"
+            name="system.mp"
+            value="{{system.mp}}"
+            class="character-bar-overlay-left character-bar-overlay-label"
+            max="{{system.mpMax}}"
+          />
+          <div class="character-bar-overlay-max character-bar-overlay-label">
+            <span>/ {{system.mpMax}} +</span>
+          </div>
+          <input
+            type="number"
+            name="system.mpTemp"
+            value="{{system.mpTemp}}"
+            class="character-bar-overlay-temp character-bar-overlay-label"
+            placeholder="0"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="character-presence-container character-bar-container toutline">
+      <div
+        class="character-presence-bar"
+        style="grid-template-columns:{{repeat system.pres ' 1fr'}};"
+      >
+        {{repeat system.usp '<div class="presence-indicator used"></div>'}}
+        {{repeat system.unp '<div class="presence-indicator unused"></div>'}}
+      </div>
+    </div>
+  </div>
+</div>

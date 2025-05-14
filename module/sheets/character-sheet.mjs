@@ -26,6 +26,10 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(sheets
     static PARTS = {
         all: {
             template: 'systems/teriock/templates/sheets/character-template/character-template.hbs',
+            scrollable: [
+                '.character-sidebar',
+                '.character-tab-content',
+            ]
         },
     };
 
@@ -39,7 +43,7 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(sheets
     _getFilteredAbilities() {
         const filters = this.actor.system.sheet.abilityFilters;
         const abilitySearch = filters.search?.toLowerCase();
-        
+
         return [...this.actor.appliedEffects].filter(item => {
             if (abilitySearch && !item.name.toLowerCase().includes(abilitySearch)) return false;
             if (filters.basic && !item.system.basic) return false;
@@ -68,7 +72,7 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(sheets
             return true;
         });
     }
-    
+
 
     /** @override */
     async _prepareContext() {
@@ -221,7 +225,7 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(sheets
         this.element.querySelectorAll('.toggleDisabled').forEach((el) => {
             el.addEventListener('click', (event) => {
                 event.preventDefault();
-                const id = el.getAttribute('data-id');                
+                const id = el.getAttribute('data-id');
                 const embedded = this.document.items.get(id);
                 if (embedded) {
                     embedded.toggleDisabled();
@@ -231,19 +235,48 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(sheets
         });
         this.element.querySelectorAll('.options-menu-toggle, .filter-menu-toggle').forEach((element) => {
             element.addEventListener('click', (event) => {
-              event.preventDefault();
-              const path = element.dataset.path;
-              const currentValue = element.dataset.bool;
-          
-              if (!path) return;
-          
-              const currentBool = currentValue === "true";
-              const update = {};
-              update[path] = !currentBool;
-          
-              this.document.update(update);
+                event.preventDefault();
+                const path = element.dataset.path;
+                const currentValue = element.dataset.bool;
+
+                if (!path) return;
+
+                const currentBool = currentValue === "true";
+                const update = {};
+                update[path] = !currentBool;
+
+                this.document.update(update);
             });
-          });
-          
+        });
+        this.element.querySelectorAll('.ch-attribute-save-box').forEach((element) => {
+            element.addEventListener('click', (event) => {
+                event.preventDefault();
+                const attribute = element.dataset.attribute;
+                this.document.update({
+                    [`system.attributes.${attribute}.saveProficient`]: !this.document.system.attributes[attribute].saveProficient,
+                });
+                event.stopPropagation();
+            });
+        });
+        this.element.querySelectorAll('.ch-attribute-save-box').forEach((element) => {
+            element.addEventListener('contextmenu', (event) => {
+                event.preventDefault();
+                const attribute = element.dataset.attribute;
+                this.document.update({
+                    [`system.attributes.${attribute}.saveFluent`]: !this.document.system.attributes[attribute].saveFluent,
+                });
+                event.stopPropagation();
+            });
+        });
+        this.element.querySelectorAll('.ch-tradecraft-pro-box').forEach((element) => {
+            element.addEventListener('click', (event) => {
+                event.preventDefault();
+                const tradecraft = element.dataset.tradecraft;
+                this.document.update({
+                    [`system.tradecrafts.${tradecraft}.proficient`]: !this.document.system.tradecrafts[tradecraft].proficient,
+                });
+                event.stopPropagation();
+            });
+        });
     }
 }

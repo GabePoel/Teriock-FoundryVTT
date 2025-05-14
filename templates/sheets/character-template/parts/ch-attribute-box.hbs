@@ -1,0 +1,43 @@
+<div class="ch-attribute-box tbox toutline">
+  <div class="tgrid g4">
+    <div class="tsubtle tcenter">
+      Feat
+    </div>
+    <div class="tsubtle tcenter">
+      Attribute
+    </div>
+    <div class="tsubtle tcenter">
+      Score
+    </div>
+    <div class="tsubtle tcenter">
+      Save
+    </div>
+    {{#each system.attributes as |attribute name|}}
+      <div class="tcolored tcenter ch-attribute-save-box" data-attribute="{{name}}">
+        {{{ifThen
+          attribute.saveFluent
+          '<i class="fa-solid fa-circle-dot"></i>'
+          (ifThen
+            attribute.saveProficient
+            '<i class="fa-regular fa-circle-dot"></i>'
+            '<i class="fa-regular fa-circle"></i>'
+          )
+        }}}
+      </div>
+      <div class="tcenter" style="text-transform: uppercase;">
+        {{name}}
+      </div>
+      <div class="tcenter">
+        <input
+          type="number"
+          name="system.attributes.{{name}}.value"
+          value="{{attribute.value}}"
+          class="ch-attribute-input tcolored tcenter ttransparent"
+        />
+      </div>
+      <div class="tcolored tcenter">
+        {{lookup ../system (concat name 'Save')}}
+      </div>
+    {{/each}}
+  </div>
+</div>

@@ -20,9 +20,9 @@
               <div class="tradecraft-panel-symbol field-panel-header">
                 Bonus
               </div>
-              {{#each field.tradecrafts as |tradecraft|}}
-                <div class="tradecraft-panel-symbol">
-                  <i class="fa-regular fa-circle"></i>
+              {{#each field.tradecrafts as |tradecraft name|}}
+                <div class="tradecraft-panel-symbol ch-tradecraft-pro-box" data-tradecraft="{{name}}">
+                  {{{ifThen (lookup (lookup ../../system.tradecrafts name) 'proficient') '<i class="fa-regular fa-circle-dot"></i>' '<i class="fa-regular fa-circle"></i>'}}}
                 </div>
                 <div class="tradecraft-panel-symbol">
                   T
@@ -31,7 +31,7 @@
                   {{tradecraft.name}}
                 </div>
                 <div class="tradecraft-panel-symbol">
-                  +1
+                  {{lookup (lookup ../../system.tradecrafts name) 'bonus'}}
                 </div>
               {{/each}}
             </div>
