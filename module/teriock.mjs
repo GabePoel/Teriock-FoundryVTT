@@ -7,6 +7,7 @@ import { TeriockEquipmentSheet } from './sheets/equipment-sheet.mjs';
 import { TeriockRankSheet } from './sheets/rank-sheet.mjs';
 import { TeriockFluencySheet } from './sheets/fluency-sheet.mjs';
 import { TeriockPowerSheet } from './sheets/power-sheet.mjs';
+import { TeriockRoll } from './dice/roll.mjs'
 import { preloadHandlebarsTemplates } from './helpers/templates.mjs';
 import { TERIOCK } from './helpers/config.mjs';
 const { Actors, Items } = foundry.documents.collections;
@@ -20,6 +21,7 @@ Hooks.once('init', function () {
     decimals: 2,
   };
 
+  CONFIG.Dice.rolls.push(TeriockRoll);
   CONFIG.Actor.documentClass = TeriockActor;
   CONFIG.Item.documentClass = TeriockItem;
   CONFIG.ActiveEffect.documentClass = TeriockEffect;

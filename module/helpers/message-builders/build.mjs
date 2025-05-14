@@ -25,10 +25,14 @@ export function buildMessage(document) {
     if (document.type == 'fluency') {
         content = buildFluencyMessage(document);
     }
-    return buildMessageHelper(document.img, document.name, content.bars, content.blocks);
+    let fontClass = 'tfont';
+    if (document.system.font) {
+        fontClass = 'tfont-' + document.system.font;
+    }
+    return buildMessageHelper(document.img, document.name, content.bars, content.blocks, fontClass);
 }
 
-function buildMessageHelper(image, name, bars, blocks) {
+function buildMessageHelper(image, name, bars, blocks, fontClass) {
     const message = document.createElement('div');
     message.classList.add('tmessage');
     message.style.display = 'flex';
@@ -37,7 +41,7 @@ function buildMessageHelper(image, name, bars, blocks) {
     const headerBox = messageBox();
     headerBox.classList.add('tmes-header-box');
     message.appendChild(headerBox);
-    messageHeader(headerBox, image, name);
+    messageHeader(headerBox, image, name, fontClass);
     const barBox = messageBox();
     barBox.classList.add('tmes-bar-box');
     message.appendChild(barBox);

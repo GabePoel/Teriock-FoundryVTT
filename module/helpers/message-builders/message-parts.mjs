@@ -101,7 +101,7 @@ export function messageBlock(parent, title, text, italic = false) {
     return block;
 }
 
-export function messageHeader(parent, image, text) {
+export function messageHeader(parent, image, text, fontClass = 'tfont') {
     const header = document.createElement('div');
     header.classList.add('tmessage-header');
     header.style.width = '100%';
@@ -128,6 +128,7 @@ export function messageHeader(parent, image, text) {
     header.appendChild(headerImageContainer);
     const headerText = document.createElement('div');
     headerText.classList.add('tmessage-header-text');
+    headerText.classList.add(fontClass);
     headerText.innerHTML = text;
     headerText.style.fontSize = '1.25em';
     headerText.style.lineHeight = '1.25em';
@@ -141,7 +142,7 @@ export function messageHeader(parent, image, text) {
 function barIcon(parent, iconClass, first = true) {
     const container = document.createElement('div');
     container.classList.add('abm-icon-wrapper');
-    container.style.width = '1.5em';
+    container.style.width = '2em';
     container.style.height = '1em';
     container.style.display = 'flex';
     container.style.alignItems = 'center';
@@ -165,10 +166,12 @@ function barIcon(parent, iconClass, first = true) {
 
 export function addAbilitiesBlock(abilities, blocks, name = 'Abilities') {
     if (abilities.length > 0) {
-        let abilitiesText = '<ul>';
+        let abilitiesText = '<ul style="padding: 0; margin: 0;">';
         for (const ability of abilities) {
             const name = ability.name;
-            abilitiesText += `<li>${name}</li>`;
+            const color = CONFIG.TERIOCK.abilityOptions.abilityType[ability.system.abilityType].color;
+            const icon = CONFIG.TERIOCK.abilityOptions.abilityType[ability.system.abilityType].icon;
+            abilitiesText += `<li style="list-style: none; display: flex; flex-direction: row; align-items: center;"><span style="margin-inline: 1em; font-size: 0.5em; color: ${color};"><i class="fa-solid fa-${icon} fa-fw"></i></span>${name}</li>`;
         }
         abilitiesText += '</ul>';
         blocks.push({

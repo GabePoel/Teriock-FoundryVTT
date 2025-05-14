@@ -1,7 +1,7 @@
 const { HandlebarsApplicationMixin } = foundry.applications.api;
 import { TeriockItemSheet } from "./teriock-item-sheet.mjs";
 import { cleanAv, cleanBv, cleanStr, cleanDamage, cleanCapitalization } from "../helpers/clean.mjs";
-import { powerLevelContextMenu } from "./context-menus/equipment-context-menus.mjs";
+import { powerLevelContextMenu, fontContextMenu } from "./context-menus/equipment-context-menus.mjs";
 import { documentOptions } from "../helpers/constants/document-options.mjs";
 
 export class TeriockEquipmentSheet extends HandlebarsApplicationMixin(TeriockItemSheet) {
@@ -62,6 +62,8 @@ export class TeriockEquipmentSheet extends HandlebarsApplicationMixin(TeriockIte
 
         const powerLevelContextMenuOptions = powerLevelContextMenu(this.item);
         this._connectContextMenu('.power-level-box', powerLevelContextMenuOptions, 'click');
+        const fontContextMenuOptions = fontContextMenu(this.item);
+        this._connectContextMenu('.ab-title', fontContextMenuOptions, 'contextmenu');
         this.element.querySelector('.equipped-box').addEventListener('click', (event) => {
             event.preventDefault();
             this.item.toggleEquipped();

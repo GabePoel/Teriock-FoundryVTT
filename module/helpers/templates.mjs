@@ -2,6 +2,7 @@
 
 export const preloadHandlebarsTemplates = async function () {
   return foundry.applications.handlebars.loadTemplates([
+    'systems/teriock/templates/chat/roll.hbs',
     'systems/teriock/templates/common/header.hbs',
     'systems/teriock/templates/sheets/ability-template/ability-template.hbs',
     'systems/teriock/templates/sheets/ability-template/bars/ab-costs-bar.hbs',
