@@ -257,7 +257,7 @@ Handlebars.registerHelper('tcard', function (options) {
   const idAttr = id ? `data-id="${id}"` : '';
   const parentIdAttr = parentId ? `data-parent-id="${parentId}"` : '';
   const activeClass = active ? 'active' : 'inactive';
-  const markerStyle = marker ? `style="background-color: ${marker}; width: 4px;"` : '';
+  const markerStyle = marker ? `style="background-color: ${marker}; width: 4px; min-width: 4px;"` : '';
   const shatteredClass = shattered ? 'shattered' : '';
 
   return new Handlebars.SafeString(`

@@ -50,12 +50,13 @@
   - [x] Material cost button not working
   - [ ] Rank number not appearing
   - [x] HP/MP costs in ability chat messages
+  - [x] Window sizing limitations
 - [ ] Decisions
-  - [ ] Should ES bw an item or effect/ability?
+  - [ ] Should ES be an item or effect/ability?
   - [x] Should items enter equipped?
 - [ ] Scripts
   - [ ] Consolidate SCSS and template registration
-  - [s] Property/effect/etc. imports scripts
+  - [x] Property/effect/etc. imports scripts
 - [ ] Organization
   - [x] Reorganize templates folder
   - [ ] Separate out handlebars registration

@@ -1,5 +1,4 @@
-<div class="{{cssClass}} character-page" autocomplete="off">
-    {{> 'systems/teriock/templates/sheets/character-template/parts/ch-sidebar.hbs' }}
+<div class="{{cssClass}} character-window" autocomplete="off">
     <div class="character-tabbers">
         {{!-- <div class="character-tabber ui-controls {{tabActive system.sheet.activeTab "overview"}}" tab="overview">
             <i class="fa-solid fa-person"></i>
@@ -23,26 +22,36 @@
             <i class="fa-solid fa-notes"></i>
         </div>
     </div>
-    <div class="character-tab-content">
-        {{#if (eq system.sheet.activeTab "overview")}}
-            {{> 'systems/teriock/templates/sheets/character-template/tabs/ch-tab-overview.hbs' }}
-        {{/if}}
-        {{#if (eq system.sheet.activeTab "tradecrafts")}}
-            {{> 'systems/teriock/templates/sheets/character-template/tabs/ch-tab-tradecrafts.hbs' }}
-        {{/if}}
-        {{#if (eq system.sheet.activeTab "abilities")}}
-            {{> 'systems/teriock/templates/sheets/character-template/tabs/ch-tab-abilities.hbs' }}
-        {{/if}}
-        {{#if (eq system.sheet.activeTab "classes")}}
-            {{> 'systems/teriock/templates/sheets/character-template/tabs/ch-tab-classes.hbs' }}
-        {{/if}}
-        {{#if (eq system.sheet.activeTab "powers")}}
-            {{> 'systems/teriock/templates/sheets/character-template/tabs/ch-tab-powers.hbs' }}
-        {{/if}}
-        {{#if (eq system.sheet.activeTab "inventory")}}
-            {{> 'systems/teriock/templates/sheets/character-template/tabs/ch-tab-inventory.hbs' }}
-        {{/if}}
-        {{#if (eq system.sheet.activeTab "notes")}}
-            {{> 'systems/teriock/templates/sheets/character-template/tabs/ch-tab-notes.hbs' }}
-        {{/if}}
+    <div class="character-page">
+        {{> 'systems/teriock/templates/sheets/character-template/parts/ch-sidebar.hbs' }}
+        <div class="character-sidebar-tabber-container">
+            <div class="character-tabber character-sidebar-tabber ui-controls" tab="sidebar">
+                <i class="fa-solid fa-chevrons-left expanded-icon"></i>
+                <i class="fa-solid fa-chevrons-right collapsed-icon"></i>
+            </div>
+        </div>
+        <div class="character-tab-content">
+            {{#if (eq system.sheet.activeTab "overview")}}
+                {{> 'systems/teriock/templates/sheets/character-template/tabs/ch-tab-overview.hbs' }}
+            {{/if}}
+            {{#if (eq system.sheet.activeTab "tradecrafts")}}
+                {{> 'systems/teriock/templates/sheets/character-template/tabs/ch-tab-tradecrafts.hbs' }}
+            {{/if}}
+            {{#if (eq system.sheet.activeTab "abilities")}}
+                {{> 'systems/teriock/templates/sheets/character-template/tabs/ch-tab-abilities.hbs' }}
+            {{/if}}
+            {{#if (eq system.sheet.activeTab "classes")}}
+                {{> 'systems/teriock/templates/sheets/character-template/tabs/ch-tab-classes.hbs' }}
+            {{/if}}
+            {{#if (eq system.sheet.activeTab "powers")}}
+                {{> 'systems/teriock/templates/sheets/character-template/tabs/ch-tab-powers.hbs' }}
+            {{/if}}
+            {{#if (eq system.sheet.activeTab "inventory")}}
+                {{> 'systems/teriock/templates/sheets/character-template/tabs/ch-tab-inventory.hbs' }}
+            {{/if}}
+            {{#if (eq system.sheet.activeTab "notes")}}
+                {{> 'systems/teriock/templates/sheets/character-template/tabs/ch-tab-notes.hbs' }}
+            {{/if}}
+        </div>
+    </div>
 </div>

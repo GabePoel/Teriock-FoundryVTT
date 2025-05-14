@@ -38,6 +38,7 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(sheets
         super(...args);
         this._filterMenuOpen = false;
         this._displayMenuOpen = false;
+        this._sidebarOpen = true;
     }
 
     _getFilteredAbilities() {
@@ -165,16 +166,47 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(sheets
     /** @override */
     _onRender(context, options) {
         super._onRender(context, options);
+
+        const sidebar = this.element.querySelector('.character-sidebar');
+        const sidebarTabber = this.element.querySelector('.character-sidebar-tabber-container');
+
+        sidebar.classList.add('no-transition');
+        sidebarTabber.classList.add('no-transition');
+        if (this._sidebarOpen) {
+            sidebar.classList.remove('collapsed');
+            sidebarTabber.classList.remove('collapsed');
+
+        } else {
+            sidebar.classList.add('collapsed');
+            sidebarTabber.classList.add('collapsed');
+        }
+        sidebar.offsetHeight;
+        sidebarTabber.offsetHeight;
+
+        sidebar.classList.remove('no-transition');
+        sidebarTabber.classList.remove('no-transition');
+
         this.element.querySelectorAll('.character-tabber').forEach((element) => {
             element.addEventListener('click', (event) => {
                 event.preventDefault();
                 const tab = event.currentTarget.getAttribute('tab');
-                this.document.update({
-                    'system.sheet.activeTab': tab,
-                })
+                if (tab !== 'sidebar') {
+                    this.document.update({
+                        'system.sheet.activeTab': tab,
+                    });
+                } else {
+                    const sidebar = this.element.querySelector('.character-sidebar');
+                    const sidebarTabber = this.element.querySelector('.character-sidebar-tabber-container');
+                    if (sidebar && sidebarTabber) {
+                        sidebar.classList.toggle('collapsed');
+                        sidebarTabber.classList.toggle('collapsed');
+                    }
+                    this._sidebarOpen = !this._sidebarOpen;
+                }
                 event.stopPropagation();
             });
         });
+
         connectEmbedded(this.actor, this.element);
         this.element.querySelectorAll('.equipToggle').forEach((el) => {
             el.addEventListener('click', (event) => {
@@ -278,5 +310,24 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(sheets
                 event.stopPropagation();
             });
         });
+    }
+
+    static async _onEditImage(event, target) {
+        const attr = target.dataset.edit;
+        const current = foundry.utils.getProperty(this.document, attr);
+        const { img } =
+            this.document.constructor.getDefaultArtwork?.(this.document.toObject()) ??
+            {};
+        const fp = new FilePicker({
+            current,
+            type: 'image',
+            redirectToRoot: img ? [img] : [],
+            callback: (path) => {
+                this.document.update({ [attr]: path });
+            },
+            top: this.position.top + 40,
+            left: this.position.left + 10,
+        });
+        return fp.browse();
     }
 }
