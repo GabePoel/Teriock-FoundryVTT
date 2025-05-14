@@ -11,9 +11,9 @@
   - [x] Able to make as flaw
   - [x] Improved dice rolling
   - [ ] Separate chart and dice rolling messages
-- [ ] Power improvements
+- [x] Power improvements
   - [x] Import abilities from wiki category
-  - [ ] Get confirmation before doing it
+  - [x] Get confirmation before doing it
 - [ ] Character improvements
   - [x] Basic abilities auto-import
   - [ ] Notes page
@@ -44,6 +44,7 @@
     - [x] Option menus
     - [x] Box units
     - [x] HP/MP bars
+    - [ ] Equipment text
 - [ ] Bug fixes
   - [x] Ability sheet prematurely closes when making any edit that's not handled by external code
   - [x] Slow loading of ability sheet entries
@@ -54,6 +55,7 @@
 - [ ] Decisions
   - [ ] Should ES be an item or effect/ability?
   - [x] Should items enter equipped?
+  - [ ] Traits?
 - [ ] Scripts
   - [ ] Consolidate SCSS and template registration
   - [x] Property/effect/etc. imports scripts

@@ -1,6 +1,7 @@
 import { fetchWikiPageHTML, fetchCategoryMembers } from "../helpers/wiki.mjs";
 import { parse } from "../helpers/parsers/parse.mjs";
 import { buildMessage } from "../helpers/message-builders/build.mjs";
+import { makeRoll } from "../helpers/rollers/rolling.mjs";
 import { createAbility } from "../helpers/sheet-helpers.mjs";
 const { DialogV2 } = foundry.applications.api;
 
@@ -213,32 +214,23 @@ export class TeriockItem extends Item {
     }
   }
 
-  _messageLabel(text, icon = null, classes = []) {
-    const label = document.createElement('div');
-    label.classList.add('abm-label', ...classes);
-    if (icon) {
-      const iconElement = document.createElement('i');
-      iconElement.classList.add('fa-solid', icon);
-      label.appendChild(iconElement);
-    }
-    label.innerHTML += text;
-    return label;
+  _buildMessage() {
+    const abilityMessage = buildMessage(this);
+    return abilityMessage.outerHTML;
   }
-
 
   async share() {
-    const abilityMessage = buildMessage(this);
+    if (this.type === 'equipment') {
+      makeRoll(this);
+    } else {
+      const abilityMessage = buildMessage(this);
 
-    ChatMessage.create({
-      speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-      flavor: document.name,
-      content: abilityMessage.outerHTML,
-    });
-    return;
+      ChatMessage.create({
+        speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+        flavor: document.name,
+        content: abilityMessage.outerHTML,
+      });
+      return;
+    }
   }
-
-  // async roll() {
-  //   const speaker = ChatMessage.getSpeaker({ actor: this.parent });
-  //   const rollMode = game.settings.get('core', 'rollMode');
-  // }
 }
