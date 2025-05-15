@@ -10,6 +10,7 @@ export const TeriockSheet = (Base) => class TeriockSheet extends Base {
             chatDoc: this._chatDoc,
             chatThis: this._chatThis,
             toggleForceDisabledDoc: this._toggleForceDisabledDoc,
+            quickToggle: this._quickToggle,
         }
     }
 
@@ -66,6 +67,12 @@ export const TeriockSheet = (Base) => class TeriockSheet extends Base {
     static async _toggleForceDisabledDoc(event, target) {
         const doc = this._embeddedFromCard(target);
         doc.toggleForceDisabled();
+    }
+
+    static async _quickToggle(event, target) {
+        const path = target.dataset.path;
+        const boolValue = target.dataset.bool === "true";
+        this.document.update({ [path]: !boolValue });
     }
 
     async _editor(parameter) {

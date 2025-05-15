@@ -28,11 +28,12 @@
     - [x] Proficiency bonus
     - [x] Fluency bonus
   - [ ] Adding items directly within character sheet
-  - [x] Ability filters
-  - [ ] Equipment filters
-  - [ ] Power filters
-  - [ ] Fluency filters
-  - [x] Filters and display settings collapsible
+  - [x] Filters
+    - [x] Ability filters
+    - [x] Equipment filters
+    - [x] Power filters
+    - [x] Fluency filters
+    - [x] Filters and display settings collapsible
   - [x] Able to resize sheet
   - [x] Able to change name and icon
 - [ ] Quality of life improvements

@@ -22,6 +22,11 @@ export const equipmentOptions = {
             color: '#9141ac',
         }
     },
+    powerLevelShort: {
+        mundane: "Mundane",
+        enchanted: "Enchanted",
+        magic: "Magic",
+    },
     equipmentClasses: equipmentclasses,
     properties: properties,
     magicalProperties: magicalProperties,

@@ -49,11 +49,114 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(Terioc
         doc.toggleDisabled();
     }
 
+    _getFilteredEquipment() {
+        const filters = this.actor.system.sheet.equipmentFilters || {};
+        const equipmentSearch = filters.search?.toLowerCase();
+        const sortKey = this.actor.system.sheet.equipmentSortOption;
+        const ascending = this.actor.system.sheet.equipmentSortAscending;
+        let equipment = this.actor.itemTypes.equipment;
+
+        switch (sortKey) {
+            case 'name':
+                equipment.sort((a, b) => a.name.localeCompare(b.name));
+                break;
+            case 'av':
+                equipment.sort((a, b) => (a.system.av ?? 0) - (b.system.av ?? 0));
+                break;
+            case 'bv':
+                equipment.sort((a, b) => (a.system.bv ?? 0) - (b.system.bv ?? 0));
+                break;
+            case 'consumable':
+                equipment.sort((a, b) => Number(b.system.consumable) - Number(a.system.consumable));
+                break;
+            case 'damage':
+                equipment.sort((a, b) => (a.system.damage ?? 0) - (b.system.damage ?? 0));
+                break;
+            case 'dampened':
+                equipment.sort((a, b) => Number(b.system.dampened) - Number(a.system.dampened));
+                break;
+            case 'equipmentType':
+                equipment.sort((a, b) => (a.system.equipmentType || '').localeCompare(b.system.equipmentType || ''));
+                break;
+            case 'equipped':
+                equipment.sort((a, b) => Number(b.system.equipped) - Number(a.system.equipped));
+                break;
+            case 'minStr':
+                equipment.sort((a, b) => (a.system.minStr ?? 0) - (b.system.minStr ?? 0));
+                break;
+            case 'powerLevel':
+                equipment.sort((a, b) => (a.system.powerLevel ?? 0) - (b.system.powerLevel ?? 0));
+                break;
+            case 'shattered':
+                equipment.sort((a, b) => Number(b.system.shattered) - Number(a.system.shattered));
+                break;
+            case 'tier':
+                equipment.sort((a, b) => (a.system.tier ?? 0) - (b.system.tier ?? 0));
+                break;
+            case 'weight':
+                equipment.sort((a, b) => (a.system.weight ?? 0) - (b.system.weight ?? 0));
+                break;
+        }
+
+        if (!ascending) equipment.reverse();
+
+        return equipment.filter(item => {
+            if (equipmentSearch && !item.name.toLowerCase().includes(equipmentSearch)) return false;
+            if (filters.equipmentClasses && item.system.equipmentClass !== filters.equipmentClasses) return false;
+            if (filters.properties && !(item.system.properties || []).includes(filters.properties)) return false;
+            if (filters.materialProperties && !(item.system.materialProperties || []).includes(filters.materialProperties)) return false;
+            if (filters.magicalProperties && !(item.system.magicalProperties || []).includes(filters.magicalProperties)) return false;
+            if (filters.weaponFightingStyles && !(item.system.weaponFightingStyles || []).includes(filters.weaponFightingStyles)) return false;
+            if (filters.powerLevel && item.system.powerLevel !== filters.powerLevel) return false;
+            if (filters.equipped && !item.system.equipped) return false;
+            if (filters.shattered && !item.system.shattered) return false;
+            if (filters.dampened && !item.system.dampened) return false;
+            if (filters.consumable && !item.system.consumable) return false;
+            return true;
+        });
+    }
+
     _getFilteredAbilities() {
         const filters = this.actor.system.sheet.abilityFilters;
         const abilitySearch = filters.search?.toLowerCase();
+        const sortKey = this.actor.system.sheet.abilitySortOption;
+        const ascending = this.actor.system.sheet.abilitySortAscending;
+        let abilities = Array.from(this.actor.allApplicableEffects())
+            .filter(item => item.type === 'ability');
 
-        return [...this.actor.appliedEffects].filter(item => {
+        switch (sortKey) {
+            case 'name':
+                abilities.sort((a, b) => a.name.localeCompare(b.name));
+                break;
+            case 'sourceName':
+                abilities.sort((a, b) => {
+                    const aSource = a.parent?.name || '';
+                    const bSource = b.parent?.name || '';
+                    return aSource.localeCompare(bSource);
+                });
+                break;
+            case 'sourceType':
+                abilities.sort((a, b) => {
+                    const aSource = a.parent?.type || '';
+                    const bSource = b.parent?.type || '';
+                    return aSource.localeCompare(bSource);
+                });
+                break;
+            case 'enabled':
+                abilities.sort((a, b) => Number(a.disabled) - Number(b.disabled));
+                break;
+            case 'type':
+                abilities.sort((a, b) => {
+                    const aType = a.system.abilityType || '';
+                    const bType = b.system.abilityType || '';
+                    return aType.localeCompare(bType);
+                });
+                break;
+        }
+
+        if (!ascending) abilities.reverse();
+
+        return abilities.filter(item => {
             if (abilitySearch && !item.name.toLowerCase().includes(abilitySearch)) return false;
             if (filters.basic && !item.system.basic) return false;
             if (filters.standard && !item.system.standard) return false;
@@ -82,11 +185,47 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(Terioc
         });
     }
 
+    _getFilteredPowers() {
+        const filters = this.actor.system.sheet.powerFilters || {};
+        const powerSearch = filters.search?.toLowerCase();
+        let powers = this.actor.itemTypes.power;
+
+        return powers.filter(item => {
+            if (powerSearch && !item.name.toLowerCase().includes(powerSearch)) return false;
+            return true;
+        });
+    }
+
+    _getFilteredFluencies() {
+        const filters = this.actor.system.sheet.tradecraftFilters || {};
+        const fluencySearch = filters.search?.toLowerCase();
+        let fluencies = this.actor.itemTypes.fluency;
+
+        return fluencies.filter(item => {
+            if (fluencySearch && !item.name.toLowerCase().includes(fluencySearch)) return false;
+            return true;
+        });
+    }
+
+    _getFilteredRanks() {
+        const filters = this.actor.system.sheet.rankFilters || {};
+        const rankSearch = filters.search?.toLowerCase();
+        let ranks = this.actor.itemTypes.rank;
+
+        return ranks.filter(item => {
+            if (rankSearch && !item.name.toLowerCase().includes(rankSearch)) return false;
+            return true;
+        });
+    }
 
     /** @override */
     async _prepareContext() {
         const allItems = this.actor.itemTypes;
         const abilities = this._getFilteredAbilities();
+        const equipment = this._getFilteredEquipment();
+        const powers = this._getFilteredPowers();
+        const fluencies = this._getFilteredFluencies();
+        const ranks = this._getFilteredRanks();
         const context = {
             config: CONFIG.TERIOCK,
             editable: this.isEditable,
@@ -95,10 +234,10 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(Terioc
             owner: this.document.isOwner,
             system: this.actor.system,
             abilities: abilities,
-            equipment: allItems.equipment,
-            fluencies: allItems.fluency,
-            powers: allItems.power,
-            ranks: allItems.rank,
+            equipment: equipment,
+            fluencies: fluencies,
+            powers: powers,
+            ranks: ranks,
             name: this.actor.name,
             img: this.actor.img,
         };
@@ -192,47 +331,12 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(Terioc
             });
         });
 
-        this.element.querySelectorAll('.options-menu-toggle, .filter-menu-toggle').forEach((element) => {
-            element.addEventListener('click', (event) => {
-                event.preventDefault();
-                const path = element.dataset.path;
-                const currentValue = element.dataset.bool;
-
-                if (!path) return;
-
-                const currentBool = currentValue === "true";
-                const update = {};
-                update[path] = !currentBool;
-
-                this.document.update(update);
-            });
-        });
-        this.element.querySelectorAll('.ch-attribute-save-box').forEach((element) => {
-            element.addEventListener('click', (event) => {
-                event.preventDefault();
-                const attribute = element.dataset.attribute;
-                this.document.update({
-                    [`system.attributes.${attribute}.saveProficient`]: !this.document.system.attributes[attribute].saveProficient,
-                });
-                event.stopPropagation();
-            });
-        });
         this.element.querySelectorAll('.ch-attribute-save-box').forEach((element) => {
             element.addEventListener('contextmenu', (event) => {
                 event.preventDefault();
                 const attribute = element.dataset.attribute;
                 this.document.update({
                     [`system.attributes.${attribute}.saveFluent`]: !this.document.system.attributes[attribute].saveFluent,
-                });
-                event.stopPropagation();
-            });
-        });
-        this.element.querySelectorAll('.ch-tradecraft-pro-box').forEach((element) => {
-            element.addEventListener('click', (event) => {
-                event.preventDefault();
-                const tradecraft = element.dataset.tradecraft;
-                this.document.update({
-                    [`system.tradecrafts.${tradecraft}.proficient`]: !this.document.system.tradecrafts[tradecraft].proficient,
                 });
                 event.stopPropagation();
             });

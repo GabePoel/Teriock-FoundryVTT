@@ -279,6 +279,7 @@
   --tcard-titles-align-items: flex-start;
   --tcard-titles-gap: 0;
   --tcard-content-padding: 10px;
+  --tcard-content-right-padding: 10px;
   --tcard-content-flex-direction: column;
   --tcard-content-align-items: end;
   --tcard-content-gap: 0;
@@ -304,6 +305,7 @@
   --tcard-title-font-size: 1.5em;
   --tcard-subtitle-font-size: 1em;
   --tcard-content-padding: 14px;
+  --tcard-content-right-padding: 14px;
   --tcard-content-font-size: 0.9em;
 }
 @container (max-width: 299px) {
@@ -323,6 +325,7 @@
   --tcard-titles-align-items: center;
   --tcard-titles-gap: 8px;
   --tcard-content-padding: 8px;
+  --tcard-content-right-padding: 8px;
   --tcard-content-flex-direction: row;
   --tcard-content-align-items: center;
   --tcard-content-gap: 8px;
@@ -341,7 +344,8 @@
   --tcard-titles-flex-direction: row;
   --tcard-titles-align-items: center;
   --tcard-titles-gap: 8px;
-  --tcard-content-padding: 8px;
+  --tcard-content-padding: 0;
+  --tcard-content-right-padding: 8px;
   --tcard-content-flex-direction: row;
   --tcard-content-align-items: center;
   --tcard-content-gap: 8px;
@@ -467,6 +471,7 @@
   align-items: var(--tcard-content-align-items);
   height: 100%;
   padding: var(--tcard-content-padding);
+  padding-right: var(--tcard-content-right-padding);
   gap: var(--tcard-content-gap);
   overflow: auto;
 }
@@ -1336,7 +1341,7 @@
 .teriock .character-window .character-page .character-sidebar input {
   color: var(--color-light-3);
 }
-@container (max-width: 674px) {
+@container (max-width: 750px) {
   .teriock .character-window .character-page .character-sidebar {
     height: 100%;
     position: absolute;
@@ -1651,7 +1656,7 @@
 }
 .teriock .tcard-display .tcard-options .tcard-options-content {
   padding-top: 0.5em;
-  border-top: 1px dotted var(--color-border);
+  border-top: 1px dotted var(--color-form-hint);
 }
 .teriock .tcard-display .tcard-container {
   width: 100%;
@@ -1757,7 +1762,7 @@
 .application.sheet.teriock.character:not(.minimized) {
   overflow: unset;
   min-height: 350px;
-  min-width: 450px;
+  min-width: 500px;
 }
 .application.sheet.teriock.character:not(.minimized) .window-content {
   display: contents;

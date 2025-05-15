@@ -21,7 +21,7 @@
                 Bonus
               </div>
               {{#each field.tradecrafts as |tradecraft name|}}
-                <div class="tradecraft-panel-symbol ch-tradecraft-pro-box" data-tradecraft="{{name}}">
+                <div class="tradecraft-panel-symbol ch-tradecraft-pro-box" data-action="quickToggle" data-path="system.tradecrafts.{{name}}.proficient" data-bool="{{lookup (lookup ../../system.tradecrafts name) 'proficient'}}">
                   {{{ifThen (lookup (lookup ../../system.tradecrafts name) 'proficient') '<i class="fa-regular fa-circle-dot"></i>' '<i class="fa-regular fa-circle"></i>'}}}
                 </div>
                 <div class="tradecraft-panel-symbol">
@@ -42,7 +42,7 @@
 
     <div class="tcard-display">
       <div class="tcard-options">
-        {{tcardOptions system.sheet.menus.fluencyOptions null system.sheet.fluencyFilters.search "fluency"}}
+        {{tcardOptions system.sheet.menus.fluencyOptions null null system.sheet.fluencyFilters.search "fluency"}}
         {{#if system.sheet.menus.fluencyFilters}}
           <div class="tcard-options-content">
             {{> 'systems/teriock/templates/sheets/character-template/filters/ch-fluency-filter.hbs'}}

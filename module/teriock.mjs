@@ -219,7 +219,7 @@ Handlebars.registerHelper('field', function (field) {
 });
 
 Handlebars.registerHelper('ticon', function (icon, options) {
-  const { cssClass = '', id, parentId, action, style='light' } = options.hash;
+  const { cssClass = '', id, parentId, action, style = 'light' } = options.hash;
 
   const idAttr = id ? `data-id="${id}"` : '';
   const parentIdAttr = parentId ? `data-parent-id="${parentId}"` : '';
@@ -355,7 +355,15 @@ Handlebars.registerHelper('abilityMarker', function (effect) {
   return CONFIG.TERIOCK.abilityOptions.abilityType[abilityType]?.color;
 });
 
-Handlebars.registerHelper('tcardOptions', function (optionsToggle, filterToggle, searchValue, tab, options) {
+Handlebars.registerHelper('tcardOptions', function (
+  optionsToggle,
+  filterToggle,
+  sortToggle,
+  searchValue,
+  tab,
+  options
+) {
+  const { showAddButton = false, sortOptions = {}, sortValue = '' } = options.hash;
   const escape = Handlebars.Utils.escapeExpression;
   const toggleHelper = Handlebars.helpers.ttoggle;
   const checkedHelper = Handlebars.helpers.checked;
@@ -368,29 +376,43 @@ Handlebars.registerHelper('tcardOptions', function (optionsToggle, filterToggle,
 
   const optionsPath = `system.sheet.menus.${tab}Options`;
   const filterPath = `system.sheet.menus.${tab}Filters`;
+  const sortPath = `system.sheet.menus.${tab}Sort`;
 
   const optionsClass = `${tab}-options-menu-toggle options-menu-toggle ${toggleHelper(optionsToggle)}`;
   const filterClass = `${tab}-filter-menu-toggle filter-menu-toggle ${toggleHelper(filterToggle)}`;
+  const sortClass = `${tab}-sort-menu-toggle sort-menu-toggle ${toggleHelper(sortToggle)}`;
 
   const showFilterButton = filterToggle !== null && filterToggle !== undefined;
+  const showSortButton = sortToggle !== null && sortToggle !== undefined;
 
   const optionsButtonHTML = `
-    <button class="${optionsClass}" data-bool="${optionsToggle}" data-path="${optionsPath}">
+    <button class="${optionsClass}" data-bool="${optionsToggle}" data-path="${optionsPath}" data-action="quickToggle">
       <i class="fa-solid fa-sliders"></i>
     </button>
   `;
 
   const filterButtonHTML = showFilterButton ? `
-    <button class="${filterClass}" data-bool="${filterToggle}" data-path="${filterPath}">
+    <button class="${filterClass}" data-bool="${filterToggle}" data-path="${filterPath}" data-action="quickToggle">
       <i class="fa-solid fa-filter"></i>
     </button>
   ` : '';
 
-  // Paths to dynamic config values
+  const sortButtonHTML = showSortButton ? `
+    <button class="${sortClass}" data-bool="${sortToggle}" data-path="${sortPath}" data-action="quickToggle">
+      <i class="fa-solid fa-bars-sort"></i>
+    </button>
+  ` : '';
+
+  const addButtonHTML = showAddButton ? `
+    <button class="${tab}-add-button add-button" data-tab="${tab}">
+      <i class="fa-solid fa-plus"></i>
+    </button>
+  ` : '';
+
+  // Get dynamic values
   const gaplessPath = `system.sheet.display.${tab}.gapless`;
   const sizePath = `system.sheet.display.${tab}.size`;
 
-  // Resolve dynamic values from context
   const gaplessValue = gaplessPath.split('.').reduce((obj, key) => obj?.[key], context);
   const sizeValue = sizePath.split('.').reduce((obj, key) => obj?.[key], context);
   const sizeOptions = context.config?.displayOptions?.sizes ?? {};
@@ -398,10 +420,19 @@ Handlebars.registerHelper('tcardOptions', function (optionsToggle, filterToggle,
   const gaplessChecked = checkedHelper(gaplessValue);
   const sizeSelectHTML = selectOptionsHelper(sizeOptions, { hash: { selected: sizeValue } });
 
+  const ascendingValue = `system.sheet.${tab}SortAscending`.split('.').reduce((obj, key) => obj?.[key], context);
+  
+  const ascendingChecked = checkedHelper(ascendingValue);
+  const sortOptionsHTML = selectOptionsHelper(sortOptions, { hash: { selected: sortValue } });
+
+  const sortSelectHTML = sortOptionsHTML?.toHTML?.() ?? sortOptionsHTML?.toString?.() ?? '';
+
   return new Handlebars.SafeString(`
     <div class="tcard-options-header">
       ${optionsButtonHTML}
       ${filterButtonHTML}
+      ${sortButtonHTML}
+      ${addButtonHTML}
       <input type="text" name="${inputName}" placeholder="Search" value="${inputValue}">
     </div>
 
@@ -421,8 +452,26 @@ Handlebars.registerHelper('tcardOptions', function (optionsToggle, filterToggle,
         </div>
       </div>
     ` : ''}
+
+    ${sortToggle ? `
+      <div class="tcard-options-content">
+        <div class="tgrid g4">
+          <div class="tgrid-item">
+            <label for="${tab}-ascending">Ascending</label>
+            <input type="checkbox" name="system.sheet.${tab}SortAscending" id="${tab}-ascending" ${ascendingChecked}>
+          </div>
+          <div class="tgrid-item gi3">
+            <select name="system.sheet.${tab}SortOption" id="${tab}-sort">
+              ${sortSelectHTML}
+            </select>
+          </div>
+        </div>
+      </div>
+    ` : ''}
   `);
 });
+
+
 
 Handlebars.registerHelper('dotJoin', function (...args) {
   const options = args.pop();
