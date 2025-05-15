@@ -1,4 +1,3 @@
-import { TeriockItem } from "../../documents/item.mjs";
 import { createAbility } from "../../helpers/sheet-helpers.mjs";
 
 async function checkContents(folder, name) {

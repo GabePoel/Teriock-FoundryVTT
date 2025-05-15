@@ -1,10 +1,10 @@
 const { api, sheets, ux } = foundry.applications
+import { TeriockSheet } from "../mixins/sheet-mixin.mjs";
 import { openWikiPage } from "../helpers/wiki.mjs";
-import { cleanFeet, cleanPounds, cleanPlusMinus, cleanMp, cleanHp } from "../helpers/clean.mjs";
 import { contextMenus } from "./context-menus/ability-context-menus.mjs";
 import { documentOptions } from "../helpers/constants/document-options.mjs";
 
-export class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(sheets.ActiveEffectConfig) {
+export class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(TeriockSheet(sheets.ActiveEffectConfig)) {
     static DEFAULT_OPTIONS = {
         classes: ['teriock', 'equipment', 'ability'],
         actions: {
@@ -30,28 +30,6 @@ export class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(sheets.A
         all: {
             template: 'systems/teriock/templates/sheets/ability-template/ability-template.hbs',
         },
-    }
-
-    /** @override */
-    constructor(...args) {
-        super(...args);
-        this._menuOpen = false;
-    }
-
-    /* -------------------------------------------- */
-
-    async _editor(parameter) {
-        if (parameter && parameter.length > 0) {
-            console.log('editor');
-            console.log(parameter);
-            return await ux.TextEditor.enrichHTML(parameter, {
-                relativeTo: this.document,
-            });
-        }
-    }
-
-    static async _onChat(event, target) {
-        this.document.share();
     }
 
     /** @override */
@@ -142,22 +120,12 @@ export class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(sheets.A
         this.element.querySelector('.reload-button').addEventListener('click', (event) => {
             event.preventDefault();
             console.log('Reloading wiki page');
-            this.document._wikiPull();
+            this.document.wikiPull();
         });
         this.element.querySelector('.open-button').addEventListener('click', (event) => {
             event.preventDefault();
             console.log('Opening wiki page');
             openWikiPage(this.document.system.wikiNamespace + ':' + this.document.name);
-        });
-        this.element.querySelector('.chat-button').addEventListener('click', (event) => {
-            event.preventDefault();
-            console.log('Sharing wiki page');
-            this.document.share();
-        });
-        this.element.querySelector('.chat-button').addEventListener('contextmenu', (event) => {
-            event.preventDefault();
-            console.log('Debugging');
-            console.log(this.document);
         });
         this.element.querySelector('.disabled-box').addEventListener('click', (event) => {
             event.preventDefault();
@@ -178,25 +146,6 @@ export class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(sheets.A
             jQuery: false,
             fixed: false,
         });
-    }
-
-    static async _onEditImage(event, target) {
-        const attr = target.dataset.edit;
-        const current = foundry.utils.getProperty(this.document, attr);
-        const { img } =
-            this.document.constructor.getDefaultArtwork?.(this.document.toObject()) ??
-            {};
-        const fp = new FilePicker({
-            current,
-            type: 'image',
-            redirectToRoot: img ? [img] : [],
-            callback: (path) => {
-                this.document.update({ [attr]: path });
-            },
-            top: this.position.top + 40,
-            left: this.position.left + 10,
-        });
-        return fp.browse();
     }
 
     /* Helpers */

@@ -26,9 +26,10 @@ async function stageUse(ability, advantage, disadvantage) {
         } else if (disadvantage) {
             rollFormula += 'kl1';
         }
-    };
-    if (ability.system.interaction == 'feat') {
-        rollFormula = '10'
+    } else if (ability.system.interaction == 'feat') {
+        rollFormula = '10';
+    } else {
+        rollFormula = '0';
     }
     if (ability.system.forceProficient) {
         ability.system.proficient = true;
@@ -94,27 +95,20 @@ async function stageUse(ability, advantage, disadvantage) {
 }
 
 async function use(ability) {
-    let message = ability._buildMessage();
+    let message = await ability.buildMessage();
     const rollData = {
         p: ability.parent.parent.system.p,
         h: ability.system.heightenedAmount,
     }
-    if ((!ability.system.formula) || !ability.parent?.parent) {
-        ChatMessage.create({
-            speaker: ChatMessage.getSpeaker({ actor: ability.actor }),
-            content: message,
-        });
-    } else {
-        message = await foundry.applications.ux.TextEditor.enrichHTML(message);
-        const roll = new TeriockRoll(ability.system.formula, rollData, {
-            flavor: message,
-        });
-        roll.toMessage({
-            speaker: ChatMessage.getSpeaker({
-                actor: ability.actor,
-            }),
-        })
-    }
+    message = await foundry.applications.ux.TextEditor.enrichHTML(message);
+    const roll = new TeriockRoll(ability.system.formula, rollData, {
+        flavor: message,
+    });
+    roll.toMessage({
+        speaker: ChatMessage.getSpeaker({
+            actor: ability.getActor(),
+        }),
+    });
     ability.parent.parent.update({
         'system.mp': ability.parent.parent.system.mp - ability.system.mpCost - ability.system.heightenedAmount,
         'system.hp': ability.parent.parent.system.hp - ability.system.hpCost,

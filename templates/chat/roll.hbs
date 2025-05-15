@@ -2,9 +2,12 @@
   {{#if flavor}}
     <div class="teriock-dice-flavor" style="padding-bottom: 0.5em;">{{{flavor}}}</div>
   {{/if}}
-  <div class="dice-result">
-    <div class="dice-formula">{{formula}}</div>
-    {{{tooltip}}}
-    <h4 class="dice-total">{{total}}</h4>
-  </div>
+  {{#if (eq formula "0")}}
+  {{else}}
+    <div class="dice-result">
+      <div class="dice-formula">{{formula}}</div>
+      {{{tooltip}}}
+      <h4 class="dice-total">{{total}}</h4>
+    </div>
+  {{/if}}
 </div>

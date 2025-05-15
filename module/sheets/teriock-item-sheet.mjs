@@ -1,14 +1,12 @@
 const { sheets, ux } = foundry.applications;
+import { TeriockSheet } from "../mixins/sheet-mixin.mjs";
 import { openWikiPage } from "../helpers/wiki.mjs";
 import { cleanFeet, cleanPounds, cleanPlusMinus, cleanMp, cleanHp } from "../helpers/clean.mjs";
-import { createAbility, connectEmbedded } from '../helpers/sheet-helpers.mjs';
+import { createAbility } from '../helpers/sheet-helpers.mjs';
 
-export class TeriockItemSheet extends sheets.ItemSheet {
+export class TeriockItemSheet extends TeriockSheet(sheets.ItemSheet) {
     static DEFAULT_OPTIONS = {
         classes: ['teriock'],
-        actions: {
-            onEditImage: this._onEditImage,
-        },
         form: {
             submitOnChange: true,
         },
@@ -25,12 +23,6 @@ export class TeriockItemSheet extends sheets.ItemSheet {
         },
     }
 
-    async _editor(parameter) {
-        return await ux.TextEditor.enrichHTML(parameter, {
-            relativeTo: this.item,
-        });
-    }
-
     /** @override */
     async _prepareContext() {
         return {
@@ -43,24 +35,8 @@ export class TeriockItemSheet extends sheets.ItemSheet {
             name: this.item.name,
             img: this.item.img,
             flags: this.item.flags,
-            abilities : this.item.transferredEffects.filter((effect) => effect.type === 'ability'),
+            abilities: this.item.transferredEffects.filter((effect) => effect.type === 'ability'),
         };
-    }
-
-    _connectInput(element, attribute, callback) {
-        const updateAttribute = (event) => {
-            const target = event.currentTarget;
-            const value = target.value;
-            const newValue = callback(value);
-            this.item.update({ [attribute]: newValue });
-        };
-        element.addEventListener('focusout', updateAttribute);
-        element.addEventListener('change', updateAttribute);
-        element.addEventListener('keyup', (event) => {
-            if (event.key === 'Enter') {
-                updateAttribute(event);
-            }
-        });
     }
 
     /** @override */
@@ -68,22 +44,12 @@ export class TeriockItemSheet extends sheets.ItemSheet {
         this.element.querySelector('.reload-button').addEventListener('click', (event) => {
             event.preventDefault();
             console.log('Reloading wiki page');
-            this.item._wikiPull();
+            this.item.wikiPull();
         });
         this.element.querySelector('.reload-button').addEventListener('contextmenu', (event) => {
             event.preventDefault();
             console.log('Reloading wiki page');
             this.item._bulkWikiPull();
-        });
-        this.element.querySelector('.open-button').addEventListener('click', (event) => {
-            event.preventDefault();
-            console.log('Opening wiki page');
-            openWikiPage(this.item.system.wikiNamespace + ':' + this.item.name);
-        });
-        this.element.querySelector('.chat-button').addEventListener('click', (event) => {
-            event.preventDefault();
-            console.log('Sharing wiki page');
-            this.item.share();
         });
         this.element.querySelector('.chat-button').addEventListener('contextmenu', (event) => {
             event.preventDefault();
@@ -105,29 +71,6 @@ export class TeriockItemSheet extends sheets.ItemSheet {
         this.element.querySelectorAll('.hp-input').forEach((element) => {
             this._connectInput(element, element.getAttribute('name'), cleanHp);
         });
-        this.element.querySelectorAll('.shareAbility').forEach((el) => {
-            el.addEventListener('click', (event) => {
-                event.preventDefault();
-                const id = el.getAttribute('data-id');
-                const ability = this.item.effects.get(id);
-                if (ability) {
-                    ability.share();
-                }
-                event.stopPropagation();
-            });
-        });
-        this.element.querySelectorAll('.enableAbility').forEach((el) => {
-            el.addEventListener('click', (event) => {
-                event.preventDefault();
-                const id = el.getAttribute('data-id');
-                const ability = this.item.effects.get(id);
-                if (ability) {
-                    ability.toggleForceDisabled();
-                }
-                event.stopPropagation();
-            });
-        });
-        connectEmbedded(this.item, this.element);
     }
 
     _connectContextMenu(cssClass, options, eventName) {
@@ -137,25 +80,6 @@ export class TeriockItemSheet extends sheets.ItemSheet {
             jQuery: false,
             fixed: false,
         });
-    }
-
-    static async _onEditImage(event, target) {
-        const attr = target.dataset.edit;
-        const current = foundry.utils.getProperty(this.document, attr);
-        const { img } =
-            this.document.constructor.getDefaultArtwork?.(this.document.toObject()) ??
-            {};
-        const fp = new FilePicker({
-            current,
-            type: 'image',
-            redirectToRoot: img ? [img] : [],
-            callback: (path) => {
-                this.document.update({ [attr]: path });
-            },
-            top: this.position.top + 40,
-            left: this.position.left + 10,
-        });
-        return fp.browse();
     }
 
     static async _createAbility(event, target) {

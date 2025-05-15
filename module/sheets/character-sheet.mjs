@@ -1,15 +1,13 @@
 const { sheets, ux, api } = foundry.applications;
-import { openWikiPage } from "../helpers/wiki.mjs";
-import { TeriockEffect } from "../documents/effect.mjs";
-import { createAbility, connectEmbedded } from "../helpers/sheet-helpers.mjs";
+import { TeriockSheet } from "../mixins/sheet-mixin.mjs";
 import { documentOptions } from "../helpers/constants/document-options.mjs";
 
-export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(sheets.ActorSheet) {
+export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(TeriockSheet(sheets.ActorSheet)) {
     static DEFAULT_OPTIONS = {
         classes: ['teriock', 'character', 'ability'],
         actions: {
-            onEditImage: this._onEditImage,
-            createAbility: this._createEffect,
+            toggleEquippedDoc: this._toggleEquippedDoc,
+            toggleDisabledDoc: this._toggleDisabledDoc,
         },
         form: {
             submitOnChange: true,
@@ -39,6 +37,16 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(sheets
         this._filterMenuOpen = false;
         this._displayMenuOpen = false;
         this._sidebarOpen = true;
+    }
+
+    static async _toggleEquippedDoc(event, target) {
+        const doc = this._embeddedFromCard(target);
+        doc.toggleEquipped();
+    }
+
+    static async _toggleDisabledDoc(event, target) {
+        const doc = this._embeddedFromCard(target);
+        doc.toggleDisabled();
     }
 
     _getFilteredAbilities() {
@@ -132,29 +140,6 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(sheets
         ]
     }
 
-    static async _createEffect(event, target) {
-        console.log('Creating effect');
-        // await foundry.documents.ActiveEffect.implementation.createDocument({ name: "Ability", type: 'ability' }, { parent: this.actor });
-        // const aeCls = getDocumentClass('ActiveEffect');
-        TeriockEffect.implementation.create({
-            name: "Ability",
-            type: 'ability',
-        }, {
-            parent: this.actor,
-        });
-        // const effectData = {
-        //     name: aeCls.defaultName({
-        //         parent: this.actor,
-        //         type: 'ability',
-        //     })
-        // }
-        // // foundry.utils.setProperty()
-        // await aeCls.create(effectData, {
-        //     parent: this.actor,
-        // });
-        // console.log(this.actor);
-    }
-
     _getAbility(id, parentId) {
         if (parentId) {
             return this.document.items.get(parentId)?.effects.get(id);
@@ -189,7 +174,7 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(sheets
         this.element.querySelectorAll('.character-tabber').forEach((element) => {
             element.addEventListener('click', (event) => {
                 event.preventDefault();
-                const tab = event.currentTarget.getAttribute('tab');
+                const tab = event.currentTarget.dataset.tab;
                 if (tab !== 'sidebar') {
                     this.document.update({
                         'system.sheet.activeTab': tab,
@@ -207,64 +192,6 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(sheets
             });
         });
 
-        connectEmbedded(this.actor, this.element);
-        this.element.querySelectorAll('.equipToggle').forEach((el) => {
-            el.addEventListener('click', (event) => {
-                event.preventDefault();
-                const id = el.getAttribute('data-id');
-                console.log(id);
-                const embedded = this.document.items.get(id);
-                console.log(embedded);
-                embedded.toggleEquipped();
-                event.stopPropagation();
-            });
-        });
-        this.element.querySelectorAll('.shareAbility').forEach((el) => {
-            el.addEventListener('click', (event) => {
-                event.preventDefault();
-                const id = el.getAttribute('data-id');
-                const parentId = el.getAttribute('data-parent-id');
-                const ability = this._getAbility(id, parentId);
-                if (ability) {
-                    ability.share();
-                }
-                event.stopPropagation();
-            });
-        });
-        this.element.querySelectorAll('.share').forEach((el) => {
-            el.addEventListener('click', (event) => {
-                event.preventDefault();
-                const id = el.getAttribute('data-id');
-                const item = this.document.items.get(id);
-                if (item) {
-                    item.share();
-                }
-                event.stopPropagation();
-            });
-        });
-        this.element.querySelectorAll('.enableAbility').forEach((el) => {
-            el.addEventListener('click', (event) => {
-                event.preventDefault();
-                const id = el.getAttribute('data-id');
-                const parentId = el.getAttribute('data-parent-id');
-                const ability = this._getAbility(id, parentId);
-                if (ability) {
-                    ability.toggleForceDisabled();
-                }
-                event.stopPropagation();
-            });
-        });
-        this.element.querySelectorAll('.toggleDisabled').forEach((el) => {
-            el.addEventListener('click', (event) => {
-                event.preventDefault();
-                const id = el.getAttribute('data-id');
-                const embedded = this.document.items.get(id);
-                if (embedded) {
-                    embedded.toggleDisabled();
-                }
-                event.stopPropagation();
-            });
-        });
         this.element.querySelectorAll('.options-menu-toggle, .filter-menu-toggle').forEach((element) => {
             element.addEventListener('click', (event) => {
                 event.preventDefault();
@@ -310,24 +237,5 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(sheets
                 event.stopPropagation();
             });
         });
-    }
-
-    static async _onEditImage(event, target) {
-        const attr = target.dataset.edit;
-        const current = foundry.utils.getProperty(this.document, attr);
-        const { img } =
-            this.document.constructor.getDefaultArtwork?.(this.document.toObject()) ??
-            {};
-        const fp = new FilePicker({
-            current,
-            type: 'image',
-            redirectToRoot: img ? [img] : [],
-            callback: (path) => {
-                this.document.update({ [attr]: path });
-            },
-            top: this.position.top + 40,
-            left: this.position.left + 10,
-        });
-        return fp.browse();
     }
 }

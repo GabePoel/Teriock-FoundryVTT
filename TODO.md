@@ -10,7 +10,8 @@
 - [ ] Ability improvements
   - [x] Able to make as flaw
   - [x] Improved dice rolling
-  - [ ] Separate chart and dice rolling messages
+  - [x] Separate chart and dice rolling messages
+  - [ ] Force proficiency
 - [x] Power improvements
   - [x] Import abilities from wiki category
   - [x] Get confirmation before doing it
@@ -33,7 +34,7 @@
   - [ ] Fluency filters
   - [x] Filters and display settings collapsible
   - [x] Able to resize sheet
-  - [ ] Able to change name and icon
+  - [x] Able to change name and icon
 - [ ] Quality of life improvements
   - [x] Rolling implementation for items
   - [x] Handlebars consolidation across item and character sheets
@@ -64,3 +65,6 @@
   - [ ] Separate out handlebars registration
   - [ ] Consistent config icon handling
   - [ ] Sheet helpers, utilities, wiki, and parsing consistency
+  - [ ] Remove all redundant click event handlers
+- [ ] Resource implementation
+- [ ] Effect separation

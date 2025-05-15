@@ -252,18 +252,19 @@ Handlebars.registerHelper('ttoggle', function (bool) {
 });
 
 Handlebars.registerHelper('tcard', function (options) {
-  const { img, title, subtitle, text, icons, id, parentId, active = true, marker = null, shattered = false } = options.hash;
+  const { img, title, subtitle, text, icons, id, parentId, active = true, marker = null, shattered = false, type = 'item' } = options.hash;
 
   const idAttr = id ? `data-id="${id}"` : '';
   const parentIdAttr = parentId ? `data-parent-id="${parentId}"` : '';
+  const typeAttr = type ? `data-type="${type}"` : '';
   const activeClass = active ? 'active' : 'inactive';
   const markerStyle = marker ? `style="background-color: ${marker}; width: 4px; min-width: 4px;"` : '';
   const shatteredClass = shattered ? 'shattered' : '';
 
   return new Handlebars.SafeString(`
-    <div class="tcard ${activeClass} ${shatteredClass}" ${idAttr} ${parentIdAttr}>
+    <div class="tcard ${activeClass} ${shatteredClass}" ${idAttr} ${parentIdAttr} ${typeAttr} data-action="openDoc">
       <div class="tcard-marker" ${markerStyle}></div>
-      <div class="tcard-image">
+      <div class="tcard-image" data-action="rollDoc">
         <img src="${img}" alt="${title}" />
       </div>
       <div class="tcard-body">
@@ -302,24 +303,22 @@ Handlebars.registerHelper('abilityCards', function (abilities, system, options) 
 
     const marker = Handlebars.helpers.abilityMarker(ability);
 
-    const shareIcon = Handlebars.helpers.ticon("comment", {
+    const chatIcon = Handlebars.helpers.ticon("comment", {
       hash: {
-        cssClass: "shareAbility",
-        action: "share",
+        action: "chatDoc",
         id: ability._id,
         parentId: ability.parent?._id
       }
     })
     const enableIcon = Handlebars.helpers.ticonToggle("circle", "circle-check", ability.disabled, {
       hash: {
-        cssClass: "enableAbility",
-        action: "enable",
+        action: "toggleForceDisabledDoc",
         id: ability._id,
         parentId: ability.parent?._id
       }
     })
 
-    const icons = shareIcon + enableIcon;
+    const icons = chatIcon + enableIcon;
 
     return Handlebars.helpers.tcard({
       hash: {
@@ -333,6 +332,7 @@ Handlebars.registerHelper('abilityCards', function (abilities, system, options) 
         active: !ability.disabled,
         marker: marker,
         shattered: false,
+        type: 'effect'
       }
     });
   }).join('\n');
@@ -446,6 +446,5 @@ Handlebars.registerHelper('repeat', function (n, block) {
   for (let i = 0; i < n; ++i) {
     accum += block;
   }
-  console.log('repeat', n, block, accum);
   return new Handlebars.SafeString(accum);
 });

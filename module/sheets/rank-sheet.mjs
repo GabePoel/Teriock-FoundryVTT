@@ -76,10 +76,4 @@ export class TeriockRankSheet extends HandlebarsApplicationMixin(TeriockItemShee
             }
         });
     }
-
-    // static async _viewDoc(event, target) {
-    //     const id = target.parentElement.getAttribute('data-item-id');
-    //     const ability = await game.packs.get(this.item.system.sourcePack).getDocument(id);
-    //     ability.sheet.render(true);
-    // }
 }

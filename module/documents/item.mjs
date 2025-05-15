@@ -1,47 +1,43 @@
-import { fetchWikiPageHTML, fetchCategoryMembers } from "../helpers/wiki.mjs";
-import { parse } from "../helpers/parsers/parse.mjs";
-import { buildMessage } from "../helpers/message-builders/build.mjs";
-import { makeRoll } from "../helpers/rollers/rolling.mjs";
+import { TeriockDocument } from "../mixins/document-mixin.mjs";
+import { fetchCategoryMembers } from "../helpers/wiki.mjs";
 import { createAbility } from "../helpers/sheet-helpers.mjs";
+import { parseEquipment } from "../helpers/parsers/parse-equipment.mjs";
+import { parseRank } from "../helpers/parsers/parse-rank.mjs";
 const { DialogV2 } = foundry.applications.api;
 
 /**
  * @extends {Item}
  */
-export class TeriockItem extends Item {
-  /**
-   * Augment the basic Item data model with additional dynamic data.
-   */
-  prepareData() {
-    super.prepareData();
-  }
+export class TeriockItem extends TeriockDocument(Item) {
 
-  /**
-   * Prepare a data object which defines the data schema used by dice roll commands against this Item
-   * @override
-   */
-  getRollData() {
-    const rollData = { ...this.system };
-    if (!this.actor) return rollData;
-    rollData.actor = this.actor.getRollData();
-    return rollData;
+  async parse(rawHTML) {
+    if (this.type === 'equipment') {
+      return parseEquipment(rawHTML);
+    } else if (this.type === 'rank') {
+      return await parseRank(rawHTML, this);
+    } else {
+      return {};
+    }
   }
 
   async disable() {
     if (!this.system.disabled) {
       this.update({ 'system.disabled': true });
-      for (const effect of this.effects) {
-        await effect.softDisable();
-      }
+      const updates = this.effects.map((effect) => {
+        return { _id: effect._id, disabled: true };
+      });
+      this.updateEmbeddedDocuments('ActiveEffect', updates);
     }
   }
 
   async enable() {
     if (this.system.disabled) {
       this.update({ 'system.disabled': false });
-      for (const effect of this.effects) {
-        await effect.softEnable();
-      }
+      const toUpdate = this.effects.filter((effect) => !effect.system.forceDisabled);
+      const updates = toUpdate.map((effect) => {
+        return { _id: effect._id, disabled: false };
+      });
+      this.updateEmbeddedDocuments('ActiveEffect', updates);
     }
   }
 
@@ -147,28 +143,6 @@ export class TeriockItem extends Item {
     }
   }
 
-  async _wikiPull() {
-    if (['ability', 'equipment', 'rank'].includes(this.type)) {
-      let pageTitle = this.system.wikiNamespace + ':'
-      if (this.type === 'rank') {
-        pageTitle = pageTitle + CONFIG.TERIOCK.rankOptions[this.system.archetype].classes[this.system.className].name;
-      } else if (this.type === 'equipment') {
-        pageTitle = pageTitle + this.system.equipmentType;
-      }
-      else {
-        pageTitle = pageTitle + this.name;
-      }
-      console.log('Fetching wiki page', pageTitle);
-      const wikiContent = await fetchWikiPageHTML(pageTitle);
-      if (!wikiContent) {
-        return;
-      }
-      const changes = await parse(this, wikiContent);
-      this.update(changes);
-      return;
-    }
-  }
-
   async _bulkWikiPullHelper(pullType) {
     const pullTypeName = pullType === 'pages' ? 'Ability' : 'Category';
     let toPull;
@@ -211,26 +185,6 @@ export class TeriockItem extends Item {
         submit: async (result) => this._bulkWikiPullHelper(result),
       });
       await dialog.render(true);
-    }
-  }
-
-  _buildMessage() {
-    const abilityMessage = buildMessage(this);
-    return abilityMessage.outerHTML;
-  }
-
-  async share() {
-    if (this.type === 'equipment') {
-      makeRoll(this);
-    } else {
-      const abilityMessage = buildMessage(this);
-
-      ChatMessage.create({
-        speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-        flavor: document.name,
-        content: abilityMessage.outerHTML,
-      });
-      return;
     }
   }
 }

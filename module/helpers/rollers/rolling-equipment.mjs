@@ -4,23 +4,18 @@ export async function rollEquipment(equipment, options) {
     await use(equipment);
 }
 
-
-
 async function use(equipment) {
-    let message = equipment._buildMessage();
+    let message = await equipment.buildMessage();
     if (equipment.system.damage) {
         const rollFormula = equipment.system.damage;
         message = await foundry.applications.ux.TextEditor.enrichHTML(message);
         const roll = new TeriockRoll(rollFormula, {}, { flavor: message });
         roll.toMessage({
             speaker: ChatMessage.getSpeaker({
-                actor: equipment.actor,
+                actor: equipment.getActor(),
             }),
         });
     } else {
-        ChatMessage.create({
-            speaker: ChatMessage.getSpeaker({ actor: equipment.actor }),
-            content: message,
-        });
+        equipment.chat();
     }
 }

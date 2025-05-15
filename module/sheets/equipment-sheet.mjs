@@ -1,6 +1,6 @@
 const { HandlebarsApplicationMixin } = foundry.applications.api;
 import { TeriockItemSheet } from "./teriock-item-sheet.mjs";
-import { cleanAv, cleanBv, cleanStr, cleanDamage, cleanCapitalization } from "../helpers/clean.mjs";
+import { cleanCapitalization } from "../helpers/clean.mjs";
 import { powerLevelContextMenu, fontContextMenu } from "./context-menus/equipment-context-menus.mjs";
 import { documentOptions } from "../helpers/constants/document-options.mjs";
 
@@ -33,12 +33,6 @@ export class TeriockEquipmentSheet extends HandlebarsApplicationMixin(TeriockIte
     }
 
     /** @override */
-    constructor(...args) {
-        super(...args);
-        this._menuOpen = false;
-    }
-
-    /** @override */
     async _prepareContext() {
         const context = await super._prepareContext();
         context.enrichedSpecialRules = await this._editor(this.item.system.specialRules);
@@ -48,10 +42,6 @@ export class TeriockEquipmentSheet extends HandlebarsApplicationMixin(TeriockIte
         context.enrichedTier = await this._editor(this.item.system.fullTier);
         context.enrichedManaStoring = await this._editor(this.item.system.manaStoring);
         return context;
-    }
-
-    static async _onChat(event, target) {
-        this.item.share();
     }
 
     /** @override */
@@ -75,16 +65,6 @@ export class TeriockEquipmentSheet extends HandlebarsApplicationMixin(TeriockIte
         const html = $(this.element);
         this._activateTags(html);
         this._activateMenu(html);
-    }
-
-    _connect(cssClass, listener, callback) {
-        const elements = this.element.querySelectorAll(cssClass);
-        elements.forEach((element) => {
-            element.addEventListener(listener, (event) => {
-                event.preventDefault();
-                callback(event);
-            });
-        });
     }
 
     _activateTags(html) {

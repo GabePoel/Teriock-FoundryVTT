@@ -16,7 +16,7 @@ export async function createAbility(document, name) {
     });
     console.log(ability);
     if (name) {
-        ability._wikiPull();
+        ability.wikiPull();
     }
 }
 
@@ -157,18 +157,7 @@ export function connectEmbedded(document, element) {
                         }
                     },
                     // General Entries
-                    // {
-                    //     // name: 'Open ' + embedded.name,
-                    //     // icon: makeIcon(CONFIG.TERIOCK.documentOptions[embedded.type].icon, CONFIG.TERIOCK.iconStyles.contextMenu),
-                    //     name: 'Open',
-                    //     icon: '<i class="fa-solid fa-arrow-up-right-from-square"></i>',
-                    //     callback: () => {
-                    //         embedded.sheet.render(true);
-                    //     }
-                    // },
                     {
-                        // name: 'Open ' + embedded.parent?.name,
-                        // icon: makeIcon(CONFIG.TERIOCK.documentOptions[embedded.parent?.type].icon, CONFIG.TERIOCK.iconStyles.contextMenu),
                         name: 'Open Source',
                         icon: '<i class="fa-solid fa-arrow-up-right-from-square"></i>',
                         callback: () => {
@@ -204,10 +193,6 @@ export function connectEmbedded(document, element) {
                     fixed: true,
                 }
             );
-            el.addEventListener('click', (event) => {
-                event.preventDefault();
-                embedded.sheet.render(true);
-            });
         }
     });
 }
