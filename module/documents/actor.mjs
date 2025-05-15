@@ -34,6 +34,11 @@ export class TeriockActor extends Actor {
     this.system.attributes.unp.value = unp;
     this.system.unp = unp;
     this.system.usp = usp;
+    this.system.presence = {
+      max: this.system.pres,
+      min: 0,
+      value: this.system.usp,
+    }
     this._prepareAttributes();
     this._prepareTradecrafts();
   }
@@ -50,8 +55,10 @@ export class TeriockActor extends Actor {
         mpMax += rank.system.mp;
       }
     }
-    this.system.hpMax = hpMax;
-    this.system.mpMax = mpMax;
+    this.system.hp.max = hpMax;
+    this.system.hp.min = -hpMax / 2;
+    this.system.mp.max = mpMax;
+    this.system.mp.min = -mpMax / 2;
   }
 
   _prepareBonuses() {

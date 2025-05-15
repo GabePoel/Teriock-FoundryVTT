@@ -4,33 +4,34 @@
       <div class="character-hit-bar character-bar toutline">
         <div
           class="character-bar-left"
-          style="width: {{barLeft system.hp system.hpMax system.hpTemp}}%;"
+          style="width: {{barLeft system.hp.value system.hp.max system.hp.temp}}%;"
         ></div>
         <div
           class="character-bar-temp"
-          style="width: {{barTemp system.hp system.hpMax system.hpTemp}}%;"
+          style="width: {{barTemp system.hp.value system.hp.max system.hp.temp}}%;"
         ></div>
         <div
           class="character-bar-lost"
-          style="width: {{barLost system.hp system.hpMax system.hpTemp}}%;"
+          style="width: {{barLost system.hp.value system.hp.max system.hp.temp}}%;"
         ></div>
       </div>
       <div class="character-bar-overlay">
         <div class="character-bar-overlay-row">
           <input
             type="number"
-            name="system.hp"
-            value="{{system.hp}}"
+            name="system.hp.value"
+            value="{{system.hp.value}}"
             class="character-bar-overlay-left character-bar-overlay-label"
-            max="{{system.hpMax}}"
+            max="{{system.hp.max}}"
+            min="{{system.hp.min}}"
           />
           <div class="character-bar-overlay-max character-bar-overlay-label">
-            <span>/ {{system.hpMax}} +</span>
+            <span>/ {{system.hp.max}} +</span>
           </div>
             <input
             type="number"
-            name="system.hpTemp"
-            value="{{system.hpTemp}}"
+            name="system.hp.temp"
+            value="{{system.hp.temp}}"
             class="character-bar-overlay-temp character-bar-overlay-label"
             placeholder="0"
             min="0"
@@ -42,33 +43,34 @@
       <div class="character-mana-bar character-bar toutline">
         <div
           class="character-bar-left"
-          style="width: {{barLeft system.mp system.mpMax system.mpTemp}}%;"
+          style="width: {{barLeft system.mp.value system.mp.max system.mp.temp}}%;"
         ></div>
         <div
           class="character-bar-temp"
-          style="width: {{barTemp system.mp system.mpMax system.mpTemp}}%;"
+          style="width: {{barTemp system.mp.value system.mp.max system.mp.temp}}%;"
         ></div>
         <div
           class="character-bar-lost"
-          style="width: {{barLost system.mp system.mpMax system.mpTemp}}%;"
+          style="width: {{barLost system.mp.value system.mp.max system.mp.temp}}%;"
         ></div>
       </div>
       <div class="character-bar-overlay">
         <div class="character-bar-overlay-row">
           <input
             type="number"
-            name="system.mp"
-            value="{{system.mp}}"
+            name="system.mp.value"
+            value="{{system.mp.value}}"
             class="character-bar-overlay-left character-bar-overlay-label"
-            max="{{system.mpMax}}"
+            max="{{system.mp.max}}"
+            min="{{system.mp.min}}"
           />
           <div class="character-bar-overlay-max character-bar-overlay-label">
-            <span>/ {{system.mpMax}} +</span>
+            <span>/ {{system.mp.max}} +</span>
           </div>
           <input
             type="number"
-            name="system.mpTemp"
-            value="{{system.mpTemp}}"
+            name="system.mp.temp"
+            value="{{system.mp.temp}}"
             class="character-bar-overlay-temp character-bar-overlay-label"
             placeholder="0"
             min="0"
