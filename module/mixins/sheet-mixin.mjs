@@ -1,4 +1,5 @@
 const { ux } = foundry.applications;
+const { utils } = foundry;
 import { connectEmbedded } from "../helpers/sheet-helpers.mjs";
 
 export const TeriockSheet = (Base) => class TeriockSheet extends Base {
@@ -11,7 +12,7 @@ export const TeriockSheet = (Base) => class TeriockSheet extends Base {
             chatThis: this._chatThis,
             toggleForceDisabledDoc: this._toggleForceDisabledDoc,
             quickToggle: this._quickToggle,
-        }
+        },
     }
 
     /** @override */
@@ -23,7 +24,7 @@ export const TeriockSheet = (Base) => class TeriockSheet extends Base {
     /** @override */
     _onRender(context, options) {
         super._onRender(context, options);
-        connectEmbedded(this.actor, this.element);
+        connectEmbedded(this.document, this.element);
     }
 
     static async _editImage(event, target) {
@@ -118,11 +119,62 @@ export const TeriockSheet = (Base) => class TeriockSheet extends Base {
         if (type === 'item') {
             return this.document.items.get(id);
         } else if (type === 'effect') {
-            if (this.document.documentName === 'Actor' && parentId) {
+            if (this.document.documentName === 'Actor' && this.document._id !== parentId) {
                 return this.document.items.get(parentId)?.effects.get(id);
             } else {
                 return this.document.effects.get(id);
             }
         }
+    }
+
+
+    // Drag and Drop
+    // ------------------------------------------------------------------------
+
+    _onDragStart(event) {
+        console.log('Drag start', event);
+        const embedded = this._embeddedFromCard(event.currentTarget);
+        let dragData = embedded?.toDragData();
+        if (!dragData) {
+            return;
+        }
+        event.dataTransfer.setData('text/plain', JSON.stringify(dragData));
+    }
+
+    _onDragOver(event) {
+        console.log('Drag over', event);
+    }
+
+    async _onDrop(event) {
+        const data = ux.TextEditor.getDragEventData(event);
+        console.log('Drop', event, data);
+        switch (data.type) {
+            case 'ActiveEffect':
+                return this._onDropActiveEffect(event, data);
+            case 'Item':
+                return this._onDropItem(event, data);
+        }
+    }
+
+    async _onDropActiveEffect(event, data) {
+        const effect = await getDocumentClass('ActiveEffect').fromDropData(data);
+        if (!this.document.isOwner || !effect) return false;
+        if (effect.target === this.document) return false;
+        if (effect.parent === this.document) return false;
+        if (!['Actor', 'Item'].includes(this.document.documentName)) return false;
+        return this.document.createEmbeddedDocuments('ActiveEffect', [effect]);
+    }
+
+    async _onDropItem(event, data) {
+        const item = await getDocumentClass('Item').fromDropData(data);
+        if (item.parent === this.document) return false;
+        if (!this.document.isOwner || !item) return false;
+        if (!this.document.documentName === 'Actor') return false;
+
+        const document = await utils.fromUuid(data.uuid);
+        if (item.parent?.documentName === 'Actor' && item.type === 'equipment') {
+            document.delete();
+        }
+        return this.document.createEmbeddedDocuments('Item', [item]);
     }
 }

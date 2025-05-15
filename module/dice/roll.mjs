@@ -12,7 +12,7 @@ export class TeriockRoll extends Roll {
         const defaultOptions = {
             enrich: false,
         }
-        options = mergeObject(defaultOptions, options);
+        options = foundry.utils.mergeObject(defaultOptions, options);
         if (options.enrich && options.flavor) {
             foundry.applications.ux.TextEditor.enrichHTML(options.flavor).then(html => {
                 options.flavor = html;

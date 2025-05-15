@@ -24,7 +24,6 @@ export async function fetchWikiPageContent(title) {
     const pages = data.query.pages;
     const page = Object.values(pages)[0];
 
-    // Depending on the MediaWiki version, you might need to adapt this:
     const content = page.revisions?.[0]?.slots?.main['*'] || page.revisions?.[0]['*'];
 
     console.log(content);
@@ -36,7 +35,7 @@ export async function fetchWikiPageContent(title) {
 
 export async function fetchWikiPageHTML(title) {
   const endpoint = 'https://wiki.teriock.com/api.php';
-  const baseWikiUrl = 'https://wiki.teriock.com'; // base URL for fixing links
+  const baseWikiUrl = 'https://wiki.teriock.com';
 
   const params = new URLSearchParams({
     action: 'parse',
@@ -53,23 +52,20 @@ export async function fetchWikiPageHTML(title) {
     const data = await response.json();
 
     if (data.parse && data.parse.text) {
-      let html = data.parse.text['*']; // HTML string
+      let html = data.parse.text['*'];
 
-      // Now fix internal links
       const parser = new DOMParser();
       const doc = parser.parseFromString(html, 'text/html');
 
-      // Find all <a> tags
       const links = doc.querySelectorAll('a');
       links.forEach(link => {
         const href = link.getAttribute('href');
         if (href && href.startsWith('/index.php/')) {
           link.setAttribute('href', baseWikiUrl + href);
-          link.setAttribute('target', '_blank'); // optional: open in new tab
+          link.setAttribute('target', '_blank');
         }
       });
 
-      // Serialize the fixed HTML back to a string
       const fixedHtml = doc.body.innerHTML;
 
       return fixedHtml;
@@ -122,4 +118,3 @@ export async function fetchCategoryMembers(category) {
     return [];
   }
 }
-

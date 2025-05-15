@@ -127,11 +127,9 @@ export class TeriockEquipmentSheet extends HandlebarsApplicationMixin(TeriockIte
         }
         this.element.querySelector('.ab-menu-toggle').addEventListener('click', (event) => {
             event.preventDefault();
-            console.log('Menu toggle clicked');
             console.log(this._menuOpen);
             this._menuOpen = !this._menuOpen;
             if (menu) {
-                console.log('Menu open:', this._menuOpen);
                 menu.classList.toggle('ab-menu-open', this._menuOpen);
                 menuToggle.classList.toggle('ab-menu-toggle-open', this._menuOpen);
             }

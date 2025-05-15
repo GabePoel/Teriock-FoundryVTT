@@ -229,6 +229,7 @@ export class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(TeriockS
     }
 
     _activateMenu(html) {
+        // TODO: Move this to a mixin and run it with data-action
         const ability = this.document;
         function _connectButton(cssClass, parameter) {
             html.on('click', cssClass, (event) => {
@@ -240,6 +241,7 @@ export class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(TeriockS
             });
         }
 
+        // TODO: Move this to a mixin and run it with data-action
         const menu = this.element.querySelector('.ab-menu');
         const menuToggle = this.element.querySelector('.ab-menu-toggle');
         if (menu && this._menuOpen) {
@@ -251,11 +253,9 @@ export class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(TeriockS
         }
         this.element.querySelector('.ab-menu-toggle').addEventListener('click', (event) => {
             event.preventDefault();
-            console.log('Menu toggle clicked');
             console.log(this._menuOpen);
             this._menuOpen = !this._menuOpen;
             if (menu) {
-                console.log('Menu open:', this._menuOpen);
                 menu.classList.toggle('ab-menu-open', this._menuOpen);
                 menuToggle.classList.toggle('ab-menu-toggle-open', this._menuOpen);
             }

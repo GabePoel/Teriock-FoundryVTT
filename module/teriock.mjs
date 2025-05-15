@@ -226,7 +226,7 @@ Handlebars.registerHelper('ticon', function (icon, options) {
   const actionAttr = action ? `data-action="${action}"` : '';
 
   return new Handlebars.SafeString(
-    `<i class="${cssClass} fa-${style} fa-${icon}" ${idAttr} ${parentIdAttr} ${actionAttr}></i>`);
+    `<i class="ticon ${cssClass} fa-${style} fa-${icon}" ${idAttr} ${parentIdAttr} ${actionAttr}></i>`);
 });
 
 Handlebars.registerHelper('ticonToggle', function (iconTrue, iconFalse, bool, options) {
@@ -239,7 +239,7 @@ Handlebars.registerHelper('ticonToggle', function (iconTrue, iconFalse, bool, op
   const icon = bool ? iconTrue : iconFalse;
 
   return new Handlebars.SafeString(`
-    <i class="${cssClass} fa-light fa-${icon}" ${idAttr} ${parentIdAttr} ${actionAttr}></i>
+    <i class="ticon ${cssClass} fa-light fa-${icon}" ${idAttr} ${parentIdAttr} ${actionAttr}></i>
   `);
 });
 
@@ -252,17 +252,18 @@ Handlebars.registerHelper('ttoggle', function (bool) {
 });
 
 Handlebars.registerHelper('tcard', function (options) {
-  const { img, title, subtitle, text, icons, id, parentId, active = true, marker = null, shattered = false, type = 'item' } = options.hash;
+  const { img, title, subtitle, text, icons, id, parentId, active = true, marker = null, shattered = false, type = 'item', draggable = true } = options.hash;
 
   const idAttr = id ? `data-id="${id}"` : '';
   const parentIdAttr = parentId ? `data-parent-id="${parentId}"` : '';
   const typeAttr = type ? `data-type="${type}"` : '';
   const activeClass = active ? 'active' : 'inactive';
+  const dragClass = draggable ? 'draggable' : '';
   const markerStyle = marker ? `style="background-color: ${marker}; width: 4px; min-width: 4px;"` : '';
   const shatteredClass = shattered ? 'shattered' : '';
 
   return new Handlebars.SafeString(`
-    <div class="tcard ${activeClass} ${shatteredClass}" ${idAttr} ${parentIdAttr} ${typeAttr} data-action="openDoc">
+    <div class="tcard ${dragClass} ${activeClass} ${shatteredClass}" ${idAttr} ${parentIdAttr} ${typeAttr} data-action="openDoc">
       <div class="tcard-marker" ${markerStyle}></div>
       <div class="tcard-image" data-action="rollDoc">
         <img src="${img}" alt="${title}" />
@@ -421,7 +422,7 @@ Handlebars.registerHelper('tcardOptions', function (
   const sizeSelectHTML = selectOptionsHelper(sizeOptions, { hash: { selected: sizeValue } });
 
   const ascendingValue = `system.sheet.${tab}SortAscending`.split('.').reduce((obj, key) => obj?.[key], context);
-  
+
   const ascendingChecked = checkedHelper(ascendingValue);
   const sortOptionsHTML = selectOptionsHelper(sortOptions, { hash: { selected: sortValue } });
 

@@ -28,18 +28,21 @@
     - [x] Proficiency bonus
     - [x] Fluency bonus
   - [ ] Adding items directly within character sheet
-  - [x] Filters
+  - [ ] Filters
     - [x] Ability filters
     - [x] Equipment filters
     - [x] Power filters
     - [x] Fluency filters
     - [x] Filters and display settings collapsible
+    - [ ] Transfer search filters to Foundry's built in implementation
   - [x] Able to resize sheet
   - [x] Able to change name and icon
 - [ ] Quality of life improvements
   - [x] Rolling implementation for items
   - [x] Handlebars consolidation across item and character sheets
   - [ ] Drag/drop implementations
+    - [x] Drag/drop between sheets
+    - [ ] Drag/drop as macros onto hot bar
   - [x] Styling improvements in lots of places
     - [x] Embedded cards
     - [x] Filter menus
@@ -54,6 +57,7 @@
   - [ ] Rank number not appearing
   - [x] HP/MP costs in ability chat messages
   - [x] Window sizing limitations
+  - [ ] No context menu on embedded sheets
 - [ ] Decisions
   - [ ] Should ES be an item or effect/ability?
   - [x] Should items enter equipped?

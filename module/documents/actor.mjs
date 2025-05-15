@@ -4,10 +4,6 @@
 export class TeriockActor extends Actor {
   /** @override */
   prepareData() {
-    // Prepare data for the actor. Calling the super version of this executes
-    // the following, in order: data reset (to clear active effects),
-    // prepareBaseData(), prepareEmbeddedDocuments() (including active effects),
-    // prepareDerivedData().
     super.prepareData();
   }
 
@@ -17,15 +13,7 @@ export class TeriockActor extends Actor {
     // documents or derived data.
   }
 
-  /**
-   * @override
-   * Augment the actor source data with additional dynamic data. Typically,
-   * you'll want to handle most of your calculated/derived data in this step.
-   * Data calculated in this step should generally not exist in template.json
-   * (such as ability modifiers rather than ability scores) and should be
-   * available both inside and outside of character sheets (such as if an actor
-   * is queried and has a roll executed directly from it).
-   */
+  /** @override */
   prepareDerivedData() {
     const actorData = this;
     const systemData = actorData.system;
@@ -33,8 +21,15 @@ export class TeriockActor extends Actor {
     this._prepareHpMp();
     this._prepareBonuses();
     const usp = this.itemTypes.equipment.reduce((total, item) => {
+      if (item.system.equipped) {
       return total + (item.system.tier || 0);
+      }
+      return total;
     }, 0);
+    const maxUsp = this.system.pres;
+    if (usp > maxUsp) {
+      usp = maxUsp;
+    }
     const unp = this.system.pres - usp;
     this.system.attributes.unp.value = unp;
     this.system.unp = unp;
@@ -43,9 +38,6 @@ export class TeriockActor extends Actor {
     this._prepareTradecrafts();
   }
 
-  /**
-   * Prepare Character type specific data
-   */
   _prepareHpMp() {
     let hpMax = 1;
     let mpMax = 1;

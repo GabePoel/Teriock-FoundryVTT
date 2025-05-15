@@ -15,12 +15,19 @@ export class TeriockItemSheet extends TeriockSheet(sheets.ItemSheet) {
         },
         window: {
             resizable: true,
-        }
+        },
+        dragDrop: [{ dragSelector: '.draggable', dropSelector: null }],
     }
     static PARTS = {
         all: {
             template: 'systems/teriock/templates/common/header.hbs',
         },
+    }
+
+    /** @override */
+    constructor(...args) {
+        super(...args);
+        this.#dragDrop = this.#createDragDropHandlers();
     }
 
     /** @override */
@@ -41,6 +48,9 @@ export class TeriockItemSheet extends TeriockSheet(sheets.ItemSheet) {
 
     /** @override */
     _onRender(context, options) {
+        super._onRender(context, options);
+        this.#dragDrop.forEach((d) => d.bind(this.element));
+
         this.element.querySelector('.reload-button').addEventListener('click', (event) => {
             event.preventDefault();
             console.log('Reloading wiki page');
@@ -84,6 +94,35 @@ export class TeriockItemSheet extends TeriockSheet(sheets.ItemSheet) {
 
     static async _createAbility(event, target) {
         await createAbility(this.item, null);
-        console.log(this.item);
+    }
+
+    // TODO: Consider moving drag/drop implementation to TeriockSheet
+    _canDragStart(selector) {
+        return this.isEditable;
+    }
+
+    _canDragDrop(selector) {
+        return this.isEditable;
+    }
+
+    get dragDrop() {
+        return this.#dragDrop;
+    }
+
+    #dragDrop;
+
+    #createDragDropHandlers() {
+        return this.options.dragDrop.map((d) => {
+            d.permissions = {
+                dragstart: this._canDragStart.bind(this),
+                drop: this._canDragDrop.bind(this),
+            };
+            d.callbacks = {
+                dragstart: this._onDragStart.bind(this),
+                dragover: this._onDragOver.bind(this),
+                drop: this._onDrop.bind(this),
+            };
+            return new ux.DragDrop(d);
+        });
     }
 }

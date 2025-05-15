@@ -21,9 +21,11 @@ export async function createAbility(document, name) {
 }
 
 export function connectEmbedded(document, element) {
+    console.log("Connecting embedded items");
     element.querySelectorAll('.tcard').forEach((el) => {
         const id = el.getAttribute('data-id');
         const parentId = el.getAttribute('data-parent-id');
+        console.log('Connecting embedded', id, parentId);
         const embedded = document.items?.get(id) || document.effects?.get(id) || document.items?.get(parentId)?.effects.get(id);
         if (embedded) {
             new ux.ContextMenu(
