@@ -3,6 +3,7 @@ import { TeriockItem } from './documents/item.mjs';
 import { TeriockEffect } from './documents/effect.mjs';
 import { TeriockCharacterSheet } from './sheets/character-sheet.mjs';
 import { TeriockAbilitySheet } from './sheets/ability-sheet.mjs';
+import { TeriockResourceSheet } from './sheets/resource-sheet.mjs';
 import { TeriockEquipmentSheet } from './sheets/equipment-sheet.mjs';
 import { TeriockRankSheet } from './sheets/rank-sheet.mjs';
 import { TeriockFluencySheet } from './sheets/fluency-sheet.mjs';
@@ -55,7 +56,17 @@ Hooks.once('init', function () {
     types: ['power'],
   });
 
-  DocumentSheetConfig.registerSheet(TeriockEffect, 'teriock', TeriockAbilitySheet, { makeDefault: true });
+  DocumentSheetConfig.registerSheet(TeriockEffect, 'teriock', TeriockAbilitySheet, {
+    makeDefault: true,
+    label: 'Ability',
+    types: ['ability']
+  });
+
+  DocumentSheetConfig.registerSheet(TeriockEffect, 'teriock', TeriockResourceSheet, {
+    makeDefault: true,
+    label: 'Resource',
+    types: ['resource']
+  });
 
 
   game.teriock = {
@@ -119,6 +130,9 @@ Handlebars.registerHelper('exists', function (str) {
 
 Handlebars.registerHelper('firstDie', function (str) {
   const validDice = ['d4', 'd6', 'd8', 'd10', 'd12', 'd20'];
+  if (typeof str !== 'string') {
+    str = '';
+  }
   for (const die of validDice) {
     if (str.includes(die)) {
       return 'dice-' + die;
@@ -226,7 +240,7 @@ Handlebars.registerHelper('ticon', function (icon, options) {
   const actionAttr = action ? `data-action="${action}"` : '';
 
   return new Handlebars.SafeString(
-    `<i class="ticon ${cssClass} fa-${style} fa-${icon}" ${idAttr} ${parentIdAttr} ${actionAttr}></i>`);
+    `<i class="ticon tcard-clickable ${cssClass} fa-${style} fa-${icon}" ${idAttr} ${parentIdAttr} ${actionAttr}></i>`);
 });
 
 Handlebars.registerHelper('ticonToggle', function (iconTrue, iconFalse, bool, options) {
@@ -239,7 +253,7 @@ Handlebars.registerHelper('ticonToggle', function (iconTrue, iconFalse, bool, op
   const icon = bool ? iconTrue : iconFalse;
 
   return new Handlebars.SafeString(`
-    <i class="ticon ${cssClass} fa-light fa-${icon}" ${idAttr} ${parentIdAttr} ${actionAttr}></i>
+    <i class="ticon tcard-clickable ${cssClass} fa-light fa-${icon}" ${idAttr} ${parentIdAttr} ${actionAttr}></i>
   `);
 });
 
@@ -252,7 +266,7 @@ Handlebars.registerHelper('ttoggle', function (bool) {
 });
 
 Handlebars.registerHelper('tcard', function (options) {
-  const { img, title, subtitle, text, icons, id, parentId, active = true, marker = null, shattered = false, type = 'item', draggable = true } = options.hash;
+  const { img, title, subtitle, text, icons, id, parentId, active = true, marker = null, shattered = false, type = 'item', draggable = true, consumable = false, amount = 1, max = null, min = 0 } = options.hash;
 
   const idAttr = id ? `data-id="${id}"` : '';
   const parentIdAttr = parentId ? `data-parent-id="${parentId}"` : '';
@@ -261,6 +275,19 @@ Handlebars.registerHelper('tcard', function (options) {
   const dragClass = draggable ? 'draggable' : '';
   const markerStyle = marker ? `style="background-color: ${marker}; width: 4px; min-width: 4px;"` : '';
   const shatteredClass = shattered ? 'shattered' : '';
+
+  let subtitleDiv = '';
+  let maxText = '';
+  if (max) {
+    maxText = ` / ${max}`;
+  } else {
+    maxText = ' remaining';
+  }
+  if (consumable) {
+    subtitleDiv = `<div class="tcard-subtitle tcard-clickable" data-action="useOneDoc">${amount}${maxText}</div>`;
+  } else {
+    subtitleDiv = `<div class="tcard-subtitle">${subtitle}</div>`;
+  }
 
   return new Handlebars.SafeString(`
     <div class="tcard ${dragClass} ${activeClass} ${shatteredClass}" ${idAttr} ${parentIdAttr} ${typeAttr} data-action="openDoc">
@@ -271,7 +298,7 @@ Handlebars.registerHelper('tcard', function (options) {
       <div class="tcard-body">
         <div class="tcard-titles">
           <div class="tcard-title">${title}</div>
-          <div class="tcard-subtitle">${subtitle}</div>
+          ${subtitleDiv}
         </div>
         <div class="tcard-content">
           <div class="tcard-text">
@@ -333,6 +360,9 @@ Handlebars.registerHelper('abilityCards', function (abilities, system, options) 
         active: !ability.disabled,
         marker: marker,
         shattered: false,
+        consumable: ability.system.consumable,
+        amount: ability.system.quantity,
+        max: ability.system.maxQuantity,
         type: 'effect'
       }
     });

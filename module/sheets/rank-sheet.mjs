@@ -6,12 +6,6 @@ import { documentOptions } from "../helpers/constants/document-options.mjs";
 export class TeriockRankSheet extends HandlebarsApplicationMixin(TeriockItemSheet) {
     static DEFAULT_OPTIONS = {
         classes: ['teriock', 'rank', 'ability'],
-        actions: {
-            onEditImage: this._onEditImage,
-            onChat: this._onChat,
-            viewDoc: this._viewDoc,
-            createAbility: this._createAbility,
-        },
         form: {
             submitOnChange: true,
         },

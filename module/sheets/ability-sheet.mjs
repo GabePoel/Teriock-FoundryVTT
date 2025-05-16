@@ -7,10 +7,6 @@ import { documentOptions } from "../helpers/constants/document-options.mjs";
 export class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(TeriockSheet(sheets.ActiveEffectConfig)) {
     static DEFAULT_OPTIONS = {
         classes: ['teriock', 'equipment', 'ability'],
-        actions: {
-            onEditImage: this._onEditImage,
-            onChat: this._onChat,
-        },
         form: {
             submitOnChange: true,
             closeOnSubmit: false,
@@ -50,7 +46,6 @@ export class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(TeriockS
         const system = this.document.system
 
         // Before Overview
-        console.log('making mana cost');
         context.manaCost = await this._editor(system.costs.manaCost);
         context.hitCost = await this._editor(system.costs.hitCost);
         context.materialCost = await this._editor(system.costs.materialCost);

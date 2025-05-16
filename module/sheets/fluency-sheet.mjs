@@ -6,10 +6,6 @@ import { documentOptions } from "../helpers/constants/document-options.mjs";
 export class TeriockFluencySheet extends HandlebarsApplicationMixin(TeriockItemSheet) {
     static DEFAULT_OPTIONS = {
         classes: ['teriock', 'fluency', 'ability'],
-        actions: {
-            onEditImage: this._onEditImage, 
-            onChat: this._onChat,
-        },
         form: {
             submitOnChange: true,
         },

@@ -185,6 +185,18 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(Terioc
         });
     }
 
+    _getFilteredResources() {
+        const filters = this.actor.system.sheet.resourceFilters || {};
+        const resourceSearch = filters.search?.toLowerCase();
+        let resources = Array.from(this.actor.allApplicableEffects())
+            .filter(item => item.type === 'resource');
+    
+        return resources.filter(item => {
+            if (resourceSearch && !item.name.toLowerCase().includes(resourceSearch)) return false;
+            return true;
+        });
+    }
+
     _getFilteredPowers() {
         const filters = this.actor.system.sheet.powerFilters || {};
         const powerSearch = filters.search?.toLowerCase();
@@ -220,8 +232,8 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(Terioc
 
     /** @override */
     async _prepareContext() {
-        const allItems = this.actor.itemTypes;
         const abilities = this._getFilteredAbilities();
+        const resources = this._getFilteredResources();
         const equipment = this._getFilteredEquipment();
         const powers = this._getFilteredPowers();
         const fluencies = this._getFilteredFluencies();
@@ -234,6 +246,7 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(Terioc
             owner: this.document.isOwner,
             system: this.actor.system,
             abilities: abilities,
+            resources: resources,
             equipment: equipment,
             fluencies: fluencies,
             powers: powers,

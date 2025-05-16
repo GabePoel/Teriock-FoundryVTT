@@ -18,10 +18,43 @@ export const TeriockDocument = (Base) => class TeriockDocument extends Base {
     }
 
     async roll() {
-        if (this.type === 'ability' || this.type === 'equipment') {
+        if (['ability', 'equipment', 'resource'].includes(this.type)) {
             await makeRoll(this);
         } else {
             await this.chat();
+        }
+        this.useOne();
+    }
+
+    async useOne() {
+        if (this.system.consumable) {
+            const quantity = this.system.quantity;
+            await this.update({
+                'system.quantity': Math.max(0, quantity - 1),
+            });
+            if (this.system.quantity <= 0 && this.type === 'equipment') {
+                await this.unequip();
+            } else if (this.system.quantity <= 0 && this.type === 'resource') {
+                await this.setForceDisabled(true);
+            }
+        }
+    }
+
+    async gainOne() {
+        if (this.system.consumable) {
+            let quantity = this.system.quantity;
+            let maxQuantity = this.system.maxQuantity;
+            if (maxQuantity) {
+                quantity = Math.min(maxQuantity, quantity + 1);
+            } else {
+                quantity = Math.max(0, quantity + 1);
+            }
+            await this.update({
+                'system.quantity': quantity,
+            });
+            if (this.type === 'resource') {
+                await this.setForceDisabled(false);
+            }
         }
     }
 

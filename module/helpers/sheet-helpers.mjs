@@ -20,6 +20,21 @@ export async function createAbility(document, name) {
     }
 }
 
+export async function createResource(document, name) {
+    let resourceName = "New Resource";
+    if (name) {
+        resourceName = name;
+    }
+    const resource = await TeriockEffect.create({
+        name: resourceName,
+        type: "resource",
+        img: "systems/teriock/assets/resource.svg",
+    }, {
+        parent: document,
+    });
+    return resource;
+}
+
 export function connectEmbedded(document, element) {
     console.log("Connecting embedded items");
     element.querySelectorAll('.tcard').forEach((el) => {
@@ -195,6 +210,12 @@ export function connectEmbedded(document, element) {
                     fixed: true,
                 }
             );
+            el.querySelectorAll('[data-action="useOneDoc"]').forEach((actionEl) => {
+                actionEl.addEventListener('contextmenu', (event) => {
+                    event.stopPropagation();
+                    embedded.gainOne();
+                });
+            });
         }
     });
 }

@@ -23,4 +23,8 @@ export const documentOptions = {
         name: 'Rank',
         icon: 'wreath-laurel',
     },
+    resource: {
+        name: 'Resource',
+        icon: 'hashtag',
+    }
 }

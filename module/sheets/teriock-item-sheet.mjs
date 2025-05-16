@@ -2,7 +2,6 @@ const { sheets, ux } = foundry.applications;
 import { TeriockSheet } from "../mixins/sheet-mixin.mjs";
 import { openWikiPage } from "../helpers/wiki.mjs";
 import { cleanFeet, cleanPounds, cleanPlusMinus, cleanMp, cleanHp } from "../helpers/clean.mjs";
-import { createAbility } from '../helpers/sheet-helpers.mjs';
 
 export class TeriockItemSheet extends TeriockSheet(sheets.ItemSheet) {
     static DEFAULT_OPTIONS = {
@@ -43,6 +42,7 @@ export class TeriockItemSheet extends TeriockSheet(sheets.ItemSheet) {
             img: this.item.img,
             flags: this.item.flags,
             abilities: this.item.transferredEffects.filter((effect) => effect.type === 'ability'),
+            resources: this.item.transferredEffects.filter((effect) => effect.type === 'resource'),
         };
     }
 
@@ -90,10 +90,6 @@ export class TeriockItemSheet extends TeriockSheet(sheets.ItemSheet) {
             jQuery: false,
             fixed: false,
         });
-    }
-
-    static async _createAbility(event, target) {
-        await createAbility(this.item, null);
     }
 
     // TODO: Consider moving drag/drop implementation to TeriockSheet

@@ -9,7 +9,7 @@ async function use(equipment) {
     if (equipment.system.damage) {
         const rollFormula = equipment.system.damage;
         message = await foundry.applications.ux.TextEditor.enrichHTML(message);
-        const roll = new TeriockRoll(rollFormula, {}, { flavor: message });
+        const roll = new TeriockRoll(rollFormula, equipment.getActor()?.rollData(), { flavor: message });
         roll.toMessage({
             speaker: ChatMessage.getSpeaker({
                 actor: equipment.getActor(),

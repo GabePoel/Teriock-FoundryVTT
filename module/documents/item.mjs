@@ -118,9 +118,11 @@ export class TeriockItem extends TeriockDocument(Item) {
 
   async equip() {
     if (this.type === 'equipment') {
-      await this.update({ 'system.equipped': true });
-      if (!this.system.shattered) {
-        await this.enable();
+      if (this.system.consumable && this.system.quantity >= 1) {
+        await this.update({ 'system.equipped': true });
+        if (!this.system.shattered) {
+          await this.enable();
+        }
       }
     }
   }

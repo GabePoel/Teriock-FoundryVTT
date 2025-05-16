@@ -1,6 +1,7 @@
 const { ux } = foundry.applications;
 const { utils } = foundry;
 import { connectEmbedded } from "../helpers/sheet-helpers.mjs";
+import { createAbility, createResource } from "../helpers/sheet-helpers.mjs";
 
 export const TeriockSheet = (Base) => class TeriockSheet extends Base {
     static DEFAULT_OPTIONS = {
@@ -12,6 +13,9 @@ export const TeriockSheet = (Base) => class TeriockSheet extends Base {
             chatThis: this._chatThis,
             toggleForceDisabledDoc: this._toggleForceDisabledDoc,
             quickToggle: this._quickToggle,
+            useOneDoc: this._useOneDoc,
+            createAbility: this._createAbility,
+            createResource: this._createResource,
         },
     }
 
@@ -61,8 +65,21 @@ export const TeriockSheet = (Base) => class TeriockSheet extends Base {
         doc.chat();
     }
 
+    static async _useOneDoc(event, target) {
+        const doc = this._embeddedFromCard(target);
+        doc.useOne();
+    }
+
     static async _chatThis(event, target) {
         this.document.chat();
+    }
+
+    static async _createAbility(event, target) {
+        await createAbility(this.item, null);
+    }
+
+    static async _createResource(event, target) {
+        await createResource(this.item, null);
     }
 
     static async _toggleForceDisabledDoc(event, target) {
@@ -141,9 +158,7 @@ export const TeriockSheet = (Base) => class TeriockSheet extends Base {
         event.dataTransfer.setData('text/plain', JSON.stringify(dragData));
     }
 
-    _onDragOver(event) {
-        console.log('Drag over', event);
-    }
+    _onDragOver(event) { }
 
     async _onDrop(event) {
         const data = ux.TextEditor.getDragEventData(event);

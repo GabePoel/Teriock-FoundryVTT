@@ -4,6 +4,7 @@ import { buildEquipmentMessage } from "./build-equipment-message.mjs";
 import { buildPowerMessage } from "./build-power-message.mjs";
 import { buildRankMessage } from "./build-rank-message.mjs";
 import { buildFluencyMessage } from "./build-fluency-message.mjs";
+import { buildResourceMessage } from "./build-resource-message.mjs";
 
 export function buildMessage(document) {
     let content = {
@@ -25,6 +26,9 @@ export function buildMessage(document) {
     if (document.type == 'fluency') {
         content = buildFluencyMessage(document);
     }
+    if (document.type == 'resource') {
+        content = buildResourceMessage(document);
+    }
     let fontClass = 'tfont';
     if (document.system.font) {
         fontClass = 'tfont-' + document.system.font;
@@ -40,14 +44,14 @@ function buildMessageHelper(image, name, bars, blocks, fontClass) {
     message.style.gap = '0.5em';
     const headerBox = messageBox();
     headerBox.classList.add('tmes-header-box');
-    message.appendChild(headerBox);
     messageHeader(headerBox, image, name, fontClass);
     const barBox = messageBox();
     barBox.classList.add('tmes-bar-box');
-    message.appendChild(barBox);
+    barBox.style.borderTop = '1px solid rgba(0, 0, 0, 0.25)';
+    barBox.style.paddingTop = '0.5em';
+    barBox.style.marginTop = '0.25em';
     const blockBox = messageBox();
     blockBox.classList.add('tmes-block-box');
-    message.appendChild(blockBox);
     for (const bar of bars) {
         if (barLength(bar) == 0) {
             continue;
@@ -62,6 +66,15 @@ function buildMessageHelper(image, name, bars, blocks, fontClass) {
             continue;
         }
         messageBlock(blockBox, block.title, block.text, block.italic);
+    }
+    if (headerBox.childNodes.length > 0) {
+        message.appendChild(headerBox);
+    }
+    if (barBox.childNodes.length > 0) {
+        message.appendChild(barBox);
+    }
+    if (blockBox.childNodes.length > 0) {
+        message.appendChild(blockBox);
     }
     return message;
 }

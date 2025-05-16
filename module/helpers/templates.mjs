@@ -37,8 +37,10 @@ export const preloadHandlebarsTemplates = async function () {
     'systems/teriock/templates/sheets/character-template/tabs/ch-tab-notes.hbs',
     'systems/teriock/templates/sheets/character-template/tabs/ch-tab-overview.hbs',
     'systems/teriock/templates/sheets/character-template/tabs/ch-tab-powers.hbs',
+    'systems/teriock/templates/sheets/character-template/tabs/ch-tab-resources.hbs',
     'systems/teriock/templates/sheets/character-template/tabs/ch-tab-tradecrafts.hbs',
     'systems/teriock/templates/sheets/equipment-template/bars/eq-attack-bar.hbs',
+    'systems/teriock/templates/sheets/equipment-template/bars/eq-consumable-bar.hbs',
     'systems/teriock/templates/sheets/equipment-template/bars/eq-load-bar.hbs',
     'systems/teriock/templates/sheets/equipment-template/bars/eq-status-bar.hbs',
     'systems/teriock/templates/sheets/equipment-template/entries/eq-description.hbs',
@@ -56,6 +58,8 @@ export const preloadHandlebarsTemplates = async function () {
     'systems/teriock/templates/sheets/power-template/power-template.hbs',
     'systems/teriock/templates/sheets/rank-template/bars/rk-bar-class.hbs',
     'systems/teriock/templates/sheets/rank-template/bars/rk-bar-stats.hbs',
-    'systems/teriock/templates/sheets/rank-template/rank-template.hbs'
+    'systems/teriock/templates/sheets/rank-template/rank-template.hbs',
+    'systems/teriock/templates/sheets/resource-template/bars/rs-consumable-bar.hbs',
+    'systems/teriock/templates/sheets/resource-template/resource-template.hbs'
   ]);
 };

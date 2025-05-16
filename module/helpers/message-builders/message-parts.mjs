@@ -108,8 +108,8 @@ export function messageHeader(parent, image, text, fontClass = 'tfont') {
     header.style.display = 'flex';
     header.style.flexDirection = 'row';
     header.style.alignItems = 'center';
-    header.style.borderBottom = '1px solid rgba(0, 0, 0, 0.25)';
-    header.style.paddingBottom = '0.5em';
+    // header.style.borderBottom = '1px solid rgba(0, 0, 0, 0.25)';
+    // header.style.paddingBottom = '0.5em';
     const headerImageContainer = document.createElement('div');
     headerImageContainer.classList.add('tmessage-header-image-container');
     headerImageContainer.style.width = '2em';

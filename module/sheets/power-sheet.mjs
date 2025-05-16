@@ -6,11 +6,6 @@ import { documentOptions } from "../helpers/constants/document-options.mjs";
 export class TeriockPowerSheet extends HandlebarsApplicationMixin(TeriockItemSheet) {
     static DEFAULT_OPTIONS = {
         classes: ['teriock', 'power', 'ability'],
-        actions: {
-            onEditImage: this._onEditImage,
-            onChat: this._onChat,
-            createAbility: this._createAbility,
-        },
         form: {
             submitOnChange: true,
         },

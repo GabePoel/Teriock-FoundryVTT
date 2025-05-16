@@ -9,6 +9,9 @@
         <div class="character-tabber ui-controls {{tabActive system.sheet.activeTab "abilities"}}" data-tab="abilities" data-action="changeTab">
             {{ticon (lookup config.documentOptions.ability 'icon') style="solid"}}
         </div>
+        <div class="character-tabber ui-controls {{tabActive system.sheet.activeTab "resources"}}" data-tab="resources" data-action="changeTab">
+            {{ticon (lookup config.documentOptions.resource 'icon') style="solid"}}
+        </div>
         <div class="character-tabber ui-controls {{tabActive system.sheet.activeTab "classes"}}" data-tab="classes" data-action="changeTab">
             {{ticon (lookup config.documentOptions.rank 'icon') style="solid"}}
         </div>
@@ -39,6 +42,9 @@
             {{/if}}
             {{#if (eq system.sheet.activeTab "abilities")}}
                 {{> 'systems/teriock/templates/sheets/character-template/tabs/ch-tab-abilities.hbs' }}
+            {{/if}}
+            {{#if (eq system.sheet.activeTab "resources")}}
+                {{> 'systems/teriock/templates/sheets/character-template/tabs/ch-tab-resources.hbs' }}
             {{/if}}
             {{#if (eq system.sheet.activeTab "classes")}}
                 {{> 'systems/teriock/templates/sheets/character-template/tabs/ch-tab-classes.hbs' }}

@@ -36,10 +36,12 @@ export class TeriockEffect extends TeriockDocument(ActiveEffect) {
     if (bool) {
       await this.update({ disabled: true, 'system.forceDisabled': true });
     } else {
-      if (this.parent.system.disabled) {
-        await this.update({ disabled: true, 'system.forceDisabled': false });
-      } else {
-        await this.update({ disabled: false, 'system.forceDisabled': false });
+      if ((!this.system.consumable) || (this.system.consumable && this.system.quantity >= 1)) {
+        if (this.parent.system.disabled) {
+          await this.update({ disabled: true, 'system.forceDisabled': false });
+        } else {
+          await this.update({ disabled: false, 'system.forceDisabled': false });
+        }
       }
     }
   }
