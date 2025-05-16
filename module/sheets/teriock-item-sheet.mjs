@@ -1,27 +1,25 @@
 const { sheets, ux } = foundry.applications;
 import { TeriockSheet } from "../mixins/sheet-mixin.mjs";
 import { openWikiPage } from "../helpers/wiki.mjs";
-import { cleanFeet, cleanPounds, cleanPlusMinus, cleanMp, cleanHp } from "../helpers/clean.mjs";
+import {
+    cleanFeet,
+    cleanPounds,
+    cleanPlusMinus,
+    cleanMp,
+    cleanHp
+} from "../helpers/clean.mjs";
 
 export class TeriockItemSheet extends TeriockSheet(sheets.ItemSheet) {
     static DEFAULT_OPTIONS = {
         classes: ['teriock'],
-        form: {
-            submitOnChange: true,
-        },
-        position: {
-            height: 600,
-        },
-        window: {
-            resizable: true,
-        },
         dragDrop: [{ dragSelector: '.draggable', dropSelector: null }],
-    }
+    };
+
     static PARTS = {
         all: {
             template: 'systems/teriock/templates/common/header.hbs',
         },
-    }
+    };
 
     /** @override */
     constructor(...args) {
@@ -31,73 +29,79 @@ export class TeriockItemSheet extends TeriockSheet(sheets.ItemSheet) {
 
     /** @override */
     async _prepareContext() {
+        const { item, document } = this;
+        const { system, name, img, flags, transferredEffects } = item;
+
         return {
             config: CONFIG.TERIOCK,
             editable: this.isEditable,
-            item: this.item,
-            limited: this.document.limited,
-            owner: this.document.isOwner,
-            system: this.item.system,
-            name: this.item.name,
-            img: this.item.img,
-            flags: this.item.flags,
-            abilities: this.item.transferredEffects.filter((effect) => effect.type === 'ability'),
-            resources: this.item.transferredEffects.filter((effect) => effect.type === 'resource'),
+            item,
+            limited: document.limited,
+            owner: document.isOwner,
+            system,
+            name,
+            img,
+            flags,
+            abilities: transferredEffects.filter(e => e.type === 'ability'),
+            resources: transferredEffects.filter(e => e.type === 'resource'),
         };
     }
 
     /** @override */
     _onRender(context, options) {
         super._onRender(context, options);
-        this.#dragDrop.forEach((d) => d.bind(this.element));
+        this.#dragDrop.forEach(d => d.bind(this.element));
 
-        this.element.querySelector('.reload-button').addEventListener('click', (event) => {
-            event.preventDefault();
-            console.log('Reloading wiki page');
-            this.item.wikiPull();
-        });
-        this.element.querySelector('.reload-button').addEventListener('contextmenu', (event) => {
+        this._bindStaticEvents();
+        this._bindCleanInputs();
+    }
+
+    _bindStaticEvents() {
+        const reloadBtn = this.element.querySelector('.reload-button');
+        const chatBtn = this.element.querySelector('.chat-button');
+
+        reloadBtn?.addEventListener('contextmenu', (event) => {
             event.preventDefault();
             console.log('Reloading wiki page');
             this.item._bulkWikiPull();
         });
-        this.element.querySelector('.chat-button').addEventListener('contextmenu', (event) => {
+
+        chatBtn?.addEventListener('contextmenu', (event) => {
             event.preventDefault();
             console.log('Debugging');
             console.log(this.item);
         });
-        this.element.querySelectorAll('.range-input').forEach((element) => {
-            this._connectInput(element, element.getAttribute('name'), cleanFeet);
-        });
-        this.element.querySelectorAll('.weight-input').forEach((element) => {
-            this._connectInput(element, element.getAttribute('name'), cleanPounds);
-        });
-        this.element.querySelectorAll('.plus-minus-input').forEach((element) => {
-            this._connectInput(element, element.getAttribute('name'), cleanPlusMinus);
-        });
-        this.element.querySelectorAll('.mp-input').forEach((element) => {
-            this._connectInput(element, element.getAttribute('name'), cleanMp);
-        });
-        this.element.querySelectorAll('.hp-input').forEach((element) => {
-            this._connectInput(element, element.getAttribute('name'), cleanHp);
-        });
+    }
+
+    _bindCleanInputs() {
+        const cleanMap = {
+            '.range-input': cleanFeet,
+            '.weight-input': cleanPounds,
+            '.plus-minus-input': cleanPlusMinus,
+            '.mp-input': cleanMp,
+            '.hp-input': cleanHp,
+        };
+
+        for (const [selector, cleaner] of Object.entries(cleanMap)) {
+            this.element.querySelectorAll(selector).forEach((el) => {
+                this._connectInput(el, el.getAttribute('name'), cleaner);
+            });
+        }
     }
 
     _connectContextMenu(cssClass, options, eventName) {
-        const container = this.element;
-        new foundry.applications.ux.ContextMenu(container, cssClass, options, {
-            eventName: eventName,
+        new ux.ContextMenu(this.element, cssClass, options, {
+            eventName,
             jQuery: false,
             fixed: false,
         });
     }
 
-    // TODO: Consider moving drag/drop implementation to TeriockSheet
-    _canDragStart(selector) {
+    _canDragStart() {
         return this.isEditable;
     }
 
-    _canDragDrop(selector) {
+    _canDragDrop() {
         return this.isEditable;
     }
 
@@ -108,17 +112,17 @@ export class TeriockItemSheet extends TeriockSheet(sheets.ItemSheet) {
     #dragDrop;
 
     #createDragDropHandlers() {
-        return this.options.dragDrop.map((d) => {
-            d.permissions = {
+        return this.options.dragDrop.map((config) => {
+            config.permissions = {
                 dragstart: this._canDragStart.bind(this),
                 drop: this._canDragDrop.bind(this),
             };
-            d.callbacks = {
+            config.callbacks = {
                 dragstart: this._onDragStart.bind(this),
                 dragover: this._onDragOver.bind(this),
                 drop: this._onDrop.bind(this),
             };
-            return new ux.DragDrop(d);
+            return new ux.DragDrop(config);
         });
     }
 }

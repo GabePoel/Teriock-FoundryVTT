@@ -1,6 +1,7 @@
 import { fetchWikiPageHTML } from "../helpers/wiki.mjs";
 import { buildMessage } from "../helpers/message-builders/build.mjs";
 import { makeRoll } from "../helpers/rollers/rolling.mjs";
+import { openWikiPage } from "../helpers/wiki.mjs";
 
 export const TeriockDocument = (Base) => class TeriockDocument extends Base {
 
@@ -62,28 +63,37 @@ export const TeriockDocument = (Base) => class TeriockDocument extends Base {
         return buildMessage(this).outerHTML;
     }
 
-    async wikiPull() {
+    getWikiPage() {
         if (this.system.wikiNamespace) {
-            let pageTitle = this.system.wikiNamespace + ':'
+            let pageTitle = this.system.wikiNamespace + ':';
             if (this.type === 'rank') {
                 pageTitle = pageTitle + CONFIG.TERIOCK.rankOptions[this.system.archetype].classes[this.system.className].name;
             } else if (this.type === 'equipment') {
                 pageTitle = pageTitle + this.system.equipmentType;
-            }
-            else {
+            } else {
                 pageTitle = pageTitle + this.name;
             }
-            console.log('Fetching wiki page', pageTitle);
-            const wikiHTML = await fetchWikiPageHTML(pageTitle);
-            if (!wikiHTML) {
-                return;
+            return pageTitle;
+        }
+        return null;
+    }
+
+    async wikiPull() {
+        if (this.system.wikiNamespace) {
+            const pageTitle = this.getWikiPage();
+            console.log('Pulling wiki page', pageTitle);
+            const wikiPage = await fetchWikiPageHTML(pageTitle);
+            if (wikiPage) {
+                const parsed = await this.parse(wikiPage);
+                await this.update(parsed);
             }
-            const changes = await this.parse(wikiHTML);
-            console.log('Parsed wiki page', changes);
-            if (changes) {
-                await this.update(changes);
-            }
-            return;
+        }
+    }
+
+    async wikiOpen() {
+        if (this.system.wikiNamespace) {
+            const pageTitle = this.getWikiPage();
+            openWikiPage(pageTitle);
         }
     }
 

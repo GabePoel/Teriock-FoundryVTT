@@ -4,17 +4,9 @@ import { documentOptions } from "../helpers/constants/document-options.mjs";
 
 export class TeriockResourceSheet extends api.HandlebarsApplicationMixin(TeriockSheet(sheets.ActiveEffectConfig)) {
     static DEFAULT_OPTIONS = {
-        classes: ['teriock', 'resource', 'ability'],
-        form: {
-            submitOnChange: true,
-            closeOnSubmit: false,
-        },
+        classes: ['resource'],
         window: {
-            // resizable: true,
             icon: "fa-solid fa-" + documentOptions.resource.icon,
-        },
-        position: {
-            width: 560,
         },
     };
     static PARTS = {

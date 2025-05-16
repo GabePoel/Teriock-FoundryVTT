@@ -314,12 +314,12 @@ Handlebars.registerHelper('tcard', function (options) {
   `);
 });
 
-Handlebars.registerHelper('abilityCards', function (abilities, system, options) {
+Handlebars.registerHelper('abilityCards', function (abilities, system, tab = 'ability', options) {
   if (!Array.isArray(abilities) || abilities.length === 0) {
     return '';
   }
-  const isGapless = system?.sheet?.display?.ability?.gapless;
-  const sizeClass = system?.sheet?.display?.ability?.size || '';
+  const isGapless = system?.sheet?.display?.[tab]?.gapless;
+  const sizeClass = system?.sheet?.display?.[tab]?.size || '';
 
   const containerClass = `tcard-container ${isGapless ? 'gapless' : ''} ${sizeClass}`.trim();
 

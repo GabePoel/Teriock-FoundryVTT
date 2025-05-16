@@ -5,16 +5,9 @@ import { documentOptions } from "../helpers/constants/document-options.mjs";
 
 export class TeriockRankSheet extends HandlebarsApplicationMixin(TeriockItemSheet) {
     static DEFAULT_OPTIONS = {
-        classes: ['teriock', 'rank', 'ability'],
-        form: {
-            submitOnChange: true,
-        },
+        classes: ['rank'],
         window: {
-            // resizable: true,
             icon: "fa-solid fa-" + documentOptions.rank.icon,
-        },
-        position: {
-            width: 560,
         },
     };
     static PARTS = {

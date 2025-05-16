@@ -5,16 +5,9 @@ import { documentOptions } from "../helpers/constants/document-options.mjs";
 
 export class TeriockPowerSheet extends HandlebarsApplicationMixin(TeriockItemSheet) {
     static DEFAULT_OPTIONS = {
-        classes: ['teriock', 'power', 'ability'],
-        form: {
-            submitOnChange: true,
-        },
+        classes: ['power'],
         window: {
-            // resizable: true,
             icon: "fa-solid fa-" + documentOptions.power.icon,
-        },
-        position: {
-            width: 560,
         },
     };
     static PARTS = {

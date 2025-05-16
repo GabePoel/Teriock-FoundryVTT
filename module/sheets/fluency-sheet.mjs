@@ -5,16 +5,8 @@ import { documentOptions } from "../helpers/constants/document-options.mjs";
 
 export class TeriockFluencySheet extends HandlebarsApplicationMixin(TeriockItemSheet) {
     static DEFAULT_OPTIONS = {
-        classes: ['teriock', 'fluency', 'ability'],
-        form: {
-            submitOnChange: true,
-        },
         window: {
-            // resizable: true,
             icon: "fa-solid fa-" + documentOptions.fluency.icon,
-        },
-        position: {
-            width: 560,
         },
     };
     static PARTS = {

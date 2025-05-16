@@ -4,7 +4,7 @@ import { documentOptions } from "../helpers/constants/document-options.mjs";
 
 export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(TeriockSheet(sheets.ActorSheet)) {
     static DEFAULT_OPTIONS = {
-        classes: ['teriock', 'character', 'ability'],
+        classes: ['character'],
         actions: {
             toggleEquippedDoc: this._toggleEquippedDoc,
             toggleDisabledDoc: this._toggleDisabledDoc,
@@ -12,26 +12,19 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(Terioc
         form: {
             submitOnChange: true,
         },
-        position: {
-            width: 800,
-            height: 600,
-        },
+        position: { width: 800, height: 600 },
         window: {
-            resizable: true,
-            icon: "fa-solid fa-" + documentOptions.character.icon,
-        }
-    }
-    static PARTS = {
-        all: {
-            template: 'systems/teriock/templates/sheets/character-template/character-template.hbs',
-            scrollable: [
-                '.character-sidebar',
-                '.character-tab-content',
-            ]
+            icon: `fa-solid fa-${documentOptions.character.icon}`,
         },
     };
 
-    /** @override */
+    static PARTS = {
+        all: {
+            template: 'systems/teriock/templates/sheets/character-template/character-template.hbs',
+            scrollable: ['.character-sidebar', '.character-tab-content'],
+        },
+    };
+
     constructor(...args) {
         super(...args);
         this._filterMenuOpen = false;
@@ -40,204 +33,132 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(Terioc
     }
 
     static async _toggleEquippedDoc(event, target) {
-        const doc = this._embeddedFromCard(target);
-        doc.toggleEquipped();
+        this._embeddedFromCard(target)?.toggleEquipped();
     }
 
     static async _toggleDisabledDoc(event, target) {
-        const doc = this._embeddedFromCard(target);
-        doc.toggleDisabled();
+        this._embeddedFromCard(target)?.toggleDisabled();
+    }
+
+    /** Generalized filtering utility */
+    _filterItems(items, filters, searchKey = 'search') {
+        const search = filters[searchKey]?.toLowerCase();
+        return items.filter(item => !search || item.name.toLowerCase().includes(search));
+    }
+
+    _sortItems(items, sortKey, ascending, accessor = (i) => i.name) {
+        items.sort((a, b) => {
+            const aVal = accessor(a) ?? '';
+            const bVal = accessor(b) ?? '';
+            return typeof aVal === 'number' ? aVal - bVal : aVal.localeCompare(bVal);
+        });
+        return ascending ? items : items.reverse();
     }
 
     _getFilteredEquipment() {
         const filters = this.actor.system.sheet.equipmentFilters || {};
-        const equipmentSearch = filters.search?.toLowerCase();
+        let equipment = this.actor.itemTypes.equipment;
         const sortKey = this.actor.system.sheet.equipmentSortOption;
         const ascending = this.actor.system.sheet.equipmentSortAscending;
-        let equipment = this.actor.itemTypes.equipment;
 
-        switch (sortKey) {
-            case 'name':
-                equipment.sort((a, b) => a.name.localeCompare(b.name));
-                break;
-            case 'av':
-                equipment.sort((a, b) => (a.system.av ?? 0) - (b.system.av ?? 0));
-                break;
-            case 'bv':
-                equipment.sort((a, b) => (a.system.bv ?? 0) - (b.system.bv ?? 0));
-                break;
-            case 'consumable':
-                equipment.sort((a, b) => Number(b.system.consumable) - Number(a.system.consumable));
-                break;
-            case 'damage':
-                equipment.sort((a, b) => (a.system.damage ?? 0) - (b.system.damage ?? 0));
-                break;
-            case 'dampened':
-                equipment.sort((a, b) => Number(b.system.dampened) - Number(a.system.dampened));
-                break;
-            case 'equipmentType':
-                equipment.sort((a, b) => (a.system.equipmentType || '').localeCompare(b.system.equipmentType || ''));
-                break;
-            case 'equipped':
-                equipment.sort((a, b) => Number(b.system.equipped) - Number(a.system.equipped));
-                break;
-            case 'minStr':
-                equipment.sort((a, b) => (a.system.minStr ?? 0) - (b.system.minStr ?? 0));
-                break;
-            case 'powerLevel':
-                equipment.sort((a, b) => (a.system.powerLevel ?? 0) - (b.system.powerLevel ?? 0));
-                break;
-            case 'shattered':
-                equipment.sort((a, b) => Number(b.system.shattered) - Number(a.system.shattered));
-                break;
-            case 'tier':
-                equipment.sort((a, b) => (a.system.tier ?? 0) - (b.system.tier ?? 0));
-                break;
-            case 'weight':
-                equipment.sort((a, b) => (a.system.weight ?? 0) - (b.system.weight ?? 0));
-                break;
-        }
+        const sortMap = {
+            name: i => i.name,
+            av: i => i.system.av ?? 0,
+            bv: i => i.system.bv ?? 0,
+            consumable: i => Number(i.system.consumable),
+            damage: i => i.system.damage ?? 0,
+            dampened: i => Number(i.system.dampened),
+            equipmentType: i => i.system.equipmentType ?? '',
+            equipped: i => Number(i.system.equipped),
+            minStr: i => i.system.minStr ?? 0,
+            powerLevel: i => i.system.powerLevel ?? 0,
+            shattered: i => Number(i.system.shattered),
+            tier: i => i.system.tier ?? 0,
+            weight: i => i.system.weight ?? 0,
+        };
 
-        if (!ascending) equipment.reverse();
+        equipment = this._sortItems(equipment, sortKey, ascending, sortMap[sortKey]);
 
-        return equipment.filter(item => {
-            if (equipmentSearch && !item.name.toLowerCase().includes(equipmentSearch)) return false;
-            if (filters.equipmentClasses && item.system.equipmentClass !== filters.equipmentClasses) return false;
-            if (filters.properties && !(item.system.properties || []).includes(filters.properties)) return false;
-            if (filters.materialProperties && !(item.system.materialProperties || []).includes(filters.materialProperties)) return false;
-            if (filters.magicalProperties && !(item.system.magicalProperties || []).includes(filters.magicalProperties)) return false;
-            if (filters.weaponFightingStyles && !(item.system.weaponFightingStyles || []).includes(filters.weaponFightingStyles)) return false;
-            if (filters.powerLevel && item.system.powerLevel !== filters.powerLevel) return false;
-            if (filters.equipped && !item.system.equipped) return false;
-            if (filters.shattered && !item.system.shattered) return false;
-            if (filters.dampened && !item.system.dampened) return false;
-            if (filters.consumable && !item.system.consumable) return false;
-            return true;
-        });
+        return equipment.filter(i =>
+            (!filters.search || i.name.toLowerCase().includes(filters.search.toLowerCase())) &&
+            (!filters.equipmentClasses || i.system.equipmentClass === filters.equipmentClasses) &&
+            (!filters.properties || (i.system.properties || []).includes(filters.properties)) &&
+            (!filters.materialProperties || (i.system.materialProperties || []).includes(filters.materialProperties)) &&
+            (!filters.magicalProperties || (i.system.magicalProperties || []).includes(filters.magicalProperties)) &&
+            (!filters.weaponFightingStyles || (i.system.weaponFightingStyles || []).includes(filters.weaponFightingStyles)) &&
+            (!filters.powerLevel || i.system.powerLevel === filters.powerLevel) &&
+            (!filters.equipped || i.system.equipped) &&
+            (!filters.shattered || i.system.shattered) &&
+            (!filters.dampened || i.system.dampened) &&
+            (!filters.consumable || i.system.consumable)
+        );
     }
 
     _getFilteredAbilities() {
-        const filters = this.actor.system.sheet.abilityFilters;
-        const abilitySearch = filters.search?.toLowerCase();
+        const filters = this.actor.system.sheet.abilityFilters || {};
+        let abilities = Array.from(this.actor.allApplicableEffects()).filter(i => i.type === 'ability');
         const sortKey = this.actor.system.sheet.abilitySortOption;
         const ascending = this.actor.system.sheet.abilitySortAscending;
-        let abilities = Array.from(this.actor.allApplicableEffects())
-            .filter(item => item.type === 'ability');
 
-        switch (sortKey) {
-            case 'name':
-                abilities.sort((a, b) => a.name.localeCompare(b.name));
-                break;
-            case 'sourceName':
-                abilities.sort((a, b) => {
-                    const aSource = a.parent?.name || '';
-                    const bSource = b.parent?.name || '';
-                    return aSource.localeCompare(bSource);
-                });
-                break;
-            case 'sourceType':
-                abilities.sort((a, b) => {
-                    const aSource = a.parent?.type || '';
-                    const bSource = b.parent?.type || '';
-                    return aSource.localeCompare(bSource);
-                });
-                break;
-            case 'enabled':
-                abilities.sort((a, b) => Number(a.disabled) - Number(b.disabled));
-                break;
-            case 'type':
-                abilities.sort((a, b) => {
-                    const aType = a.system.abilityType || '';
-                    const bType = b.system.abilityType || '';
-                    return aType.localeCompare(bType);
-                });
-                break;
-        }
+        const sortMap = {
+            name: i => i.name,
+            sourceName: i => i.parent?.name ?? '',
+            sourceType: i => i.parent?.type ?? '',
+            enabled: i => Number(i.disabled),
+            type: i => i.system.abilityType ?? '',
+        };
 
-        if (!ascending) abilities.reverse();
+        abilities = this._sortItems(abilities, sortKey, ascending, sortMap[sortKey]);
 
-        return abilities.filter(item => {
-            if (abilitySearch && !item.name.toLowerCase().includes(abilitySearch)) return false;
-            if (filters.basic && !item.system.basic) return false;
-            if (filters.standard && !item.system.standard) return false;
-            if (filters.skill && !item.system.skill) return false;
-            if (filters.spell && !item.system.spell) return false;
-            if (filters.ritual && !item.system.ritual) return false;
-            if (filters.rotator && !item.system.rotator) return false;
-            if (filters.verbal && !item.system.costs.verbal) return false;
-            if (filters.somatic && !item.system.costs.somatic) return false;
-            if (filters.material && !item.system.costs.material) return false;
-            if (filters.invoked && !item.system.costs.invoked) return false;
-            if (filters.sustained && !item.system.sustained) return false;
-            if (filters.broken && !item.system.break) return false;
-            if (filters.hp && !item.system.costs.hp) return false;
-            if (filters.mp && !item.system.costs.mp) return false;
-            if (filters.heightened && !item.system.heightened) return false;
-            if (filters.expansion && !item.system.expansion) return false;
-            if (filters.maneuver && item.system.maneuver !== filters.maneuver) return false;
-            if (filters.interaction && item.system.interaction !== filters.interaction) return false;
-            if (filters.delivery && item.system.delivery.base !== filters.delivery) return false;
-            if (filters.target && !item.system.targets.includes(filters.target)) return false;
-            if (filters.powerSource && !item.system.powerSources.includes(filters.powerSource)) return false;
-            if (filters.element && !item.system.elements.includes(filters.element)) return false;
-            if (filters.effects && !filters.effects.every(effect => item.system.effects.includes(effect))) return false;
-            return true;
-        });
+        return abilities.filter(i =>
+            (!filters.search || i.name.toLowerCase().includes(filters.search.toLowerCase())) &&
+            (!filters.basic || i.system.basic) &&
+            (!filters.standard || i.system.standard) &&
+            (!filters.skill || i.system.skill) &&
+            (!filters.spell || i.system.spell) &&
+            (!filters.ritual || i.system.ritual) &&
+            (!filters.rotator || i.system.rotator) &&
+            (!filters.sustained || i.system.sustained) &&
+            (!filters.heightened || i.system.heightened) &&
+            (!filters.expansion || i.system.expansion) &&
+            (!filters.verbal || i.system.costs.verbal) &&
+            (!filters.somatic || i.system.costs.somatic) &&
+            (!filters.material || i.system.costs.material) &&
+            (!filters.invoked || i.system.costs.invoked) &&
+            (!filters.hp || i.system.costs.hp) &&
+            (!filters.mp || i.system.costs.mp) &&
+            (!filters.broken || i.system.break) &&
+            (!filters.maneuver || i.system.maneuver === filters.maneuver) &&
+            (!filters.interaction || i.system.interaction === filters.interaction) &&
+            (!filters.delivery || i.system.delivery.base === filters.delivery) &&
+            (!filters.target || (i.system.targets || []).includes(filters.target)) &&
+            (!filters.powerSource || (i.system.powerSources || []).includes(filters.powerSource)) &&
+            (!filters.element || (i.system.elements || []).includes(filters.element)) &&
+            (!filters.effects || filters.effects.every(e => i.system.effects.includes(e)))
+        );
     }
 
     _getFilteredResources() {
-        const filters = this.actor.system.sheet.resourceFilters || {};
-        const resourceSearch = filters.search?.toLowerCase();
-        let resources = Array.from(this.actor.allApplicableEffects())
-            .filter(item => item.type === 'resource');
-    
-        return resources.filter(item => {
-            if (resourceSearch && !item.name.toLowerCase().includes(resourceSearch)) return false;
-            return true;
-        });
+        return this._filterItems(
+            Array.from(this.actor.allApplicableEffects()).filter(i => i.type === 'resource'),
+            this.actor.system.sheet.resourceFilters || {}
+        );
     }
 
     _getFilteredPowers() {
-        const filters = this.actor.system.sheet.powerFilters || {};
-        const powerSearch = filters.search?.toLowerCase();
-        let powers = this.actor.itemTypes.power;
-
-        return powers.filter(item => {
-            if (powerSearch && !item.name.toLowerCase().includes(powerSearch)) return false;
-            return true;
-        });
+        return this._filterItems(this.actor.itemTypes.power, this.actor.system.sheet.powerFilters || {});
     }
 
     _getFilteredFluencies() {
-        const filters = this.actor.system.sheet.tradecraftFilters || {};
-        const fluencySearch = filters.search?.toLowerCase();
-        let fluencies = this.actor.itemTypes.fluency;
-
-        return fluencies.filter(item => {
-            if (fluencySearch && !item.name.toLowerCase().includes(fluencySearch)) return false;
-            return true;
-        });
+        return this._filterItems(this.actor.itemTypes.fluency, this.actor.system.sheet.tradecraftFilters || {});
     }
 
     _getFilteredRanks() {
-        const filters = this.actor.system.sheet.rankFilters || {};
-        const rankSearch = filters.search?.toLowerCase();
-        let ranks = this.actor.itemTypes.rank;
-
-        return ranks.filter(item => {
-            if (rankSearch && !item.name.toLowerCase().includes(rankSearch)) return false;
-            return true;
-        });
+        return this._filterItems(this.actor.itemTypes.rank, this.actor.system.sheet.rankFilters || {});
     }
 
     /** @override */
     async _prepareContext() {
-        const abilities = this._getFilteredAbilities();
-        const resources = this._getFilteredResources();
-        const equipment = this._getFilteredEquipment();
-        const powers = this._getFilteredPowers();
-        const fluencies = this._getFilteredFluencies();
-        const ranks = this._getFilteredRanks();
         const context = {
             config: CONFIG.TERIOCK,
             editable: this.isEditable,
@@ -245,61 +166,47 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(Terioc
             limited: this.document.limited,
             owner: this.document.isOwner,
             system: this.actor.system,
-            abilities: abilities,
-            resources: resources,
-            equipment: equipment,
-            fluencies: fluencies,
-            powers: powers,
-            ranks: ranks,
+            abilities: this._getFilteredAbilities(),
+            resources: this._getFilteredResources(),
+            equipment: this._getFilteredEquipment(),
+            powers: this._getFilteredPowers(),
+            fluencies: this._getFilteredFluencies(),
+            ranks: this._getFilteredRanks(),
             name: this.actor.name,
             img: this.actor.img,
+            tabs: {
+                classes: {
+                    cssClass: this.tabGroups.primary === 'classes' ? 'active' : '',
+                    group: 'primary',
+                    id: 'classes',
+                    label: 'Classes',
+                },
+            },
+            notes: await this._editor(this.document.system.sheet.notes),
         };
-        // if (!this.tabGroups.primary) this.tabGroups.primary = 'classes';
-        context.tabs = {
-            classes: {
-                cssClass: this.tabGroups.primary === 'classes' ? 'active' : '',
-                group: 'primary',
-                id: 'classes',
-                icon: '',
-                label: 'Classes',
-            }
-        }
-        const enrichedNotes = await this._editor(this.document.system.sheet.notes);
-        context.notes = enrichedNotes;
-        return context
+        return context;
     }
 
     _rankContextMenuOptions(id) {
+        const item = this.actor.items.get(id);
         return [
             {
                 name: 'Edit',
                 icon: '<i class="fas fa-edit"></i>',
-                callback: () => {
-                    const item = this.actor.items.get(id);
-                    if (item) {
-                        item.sheet.render(true);
-                    }
-                },
+                callback: () => item?.sheet.render(true),
             },
             {
                 name: 'Delete',
                 icon: '<i class="fas fa-trash"></i>',
-                callback: () => {
-                    const item = this.actor.items.get(id);
-                    if (item) {
-                        item.delete();
-                    }
-                },
+                callback: () => item?.delete(),
             },
-        ]
+        ];
     }
 
     _getAbility(id, parentId) {
-        if (parentId) {
-            return this.document.items.get(parentId)?.effects.get(id);
-        } else {
-            return this.document.effects.get(id);
-        }
+        return parentId
+            ? this.document.items.get(parentId)?.effects.get(id)
+            : this.document.effects.get(id);
     }
 
     /** @override */
@@ -307,53 +214,42 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(Terioc
         super._onRender(context, options);
 
         const sidebar = this.element.querySelector('.character-sidebar');
-        const sidebarTabber = this.element.querySelector('.character-sidebar-tabber-container');
+        const tabber = this.element.querySelector('.character-sidebar-tabber-container');
 
         sidebar.classList.add('no-transition');
-        sidebarTabber.classList.add('no-transition');
-        if (this._sidebarOpen) {
-            sidebar.classList.remove('collapsed');
-            sidebarTabber.classList.remove('collapsed');
+        tabber.classList.add('no-transition');
 
-        } else {
-            sidebar.classList.add('collapsed');
-            sidebarTabber.classList.add('collapsed');
-        }
+        sidebar.classList.toggle('collapsed', !this._sidebarOpen);
+        tabber.classList.toggle('collapsed', !this._sidebarOpen);
+
         sidebar.offsetHeight;
-        sidebarTabber.offsetHeight;
+        tabber.offsetHeight;
 
         sidebar.classList.remove('no-transition');
-        sidebarTabber.classList.remove('no-transition');
+        tabber.classList.remove('no-transition');
 
-        this.element.querySelectorAll('.character-tabber').forEach((element) => {
-            element.addEventListener('click', (event) => {
-                event.preventDefault();
-                const tab = event.currentTarget.dataset.tab;
-                if (tab !== 'sidebar') {
-                    this.document.update({
-                        'system.sheet.activeTab': tab,
-                    });
-                } else {
-                    const sidebar = this.element.querySelector('.character-sidebar');
-                    const sidebarTabber = this.element.querySelector('.character-sidebar-tabber-container');
-                    if (sidebar && sidebarTabber) {
-                        sidebar.classList.toggle('collapsed');
-                        sidebarTabber.classList.toggle('collapsed');
-                    }
+        this.element.querySelectorAll('.character-tabber').forEach(el => {
+            el.addEventListener('click', (e) => {
+                e.preventDefault();
+                const tab = e.currentTarget.dataset.tab;
+                if (tab === 'sidebar') {
+                    sidebar.classList.toggle('collapsed');
+                    tabber.classList.toggle('collapsed');
                     this._sidebarOpen = !this._sidebarOpen;
+                } else {
+                    this.document.update({ 'system.sheet.activeTab': tab });
                 }
-                event.stopPropagation();
+                e.stopPropagation();
             });
         });
 
-        this.element.querySelectorAll('.ch-attribute-save-box').forEach((element) => {
-            element.addEventListener('contextmenu', (event) => {
-                event.preventDefault();
-                const attribute = element.dataset.attribute;
-                this.document.update({
-                    [`system.attributes.${attribute}.saveFluent`]: !this.document.system.attributes[attribute].saveFluent,
-                });
-                event.stopPropagation();
+        this.element.querySelectorAll('.ch-attribute-save-box').forEach(el => {
+            el.addEventListener('contextmenu', (e) => {
+                e.preventDefault();
+                const attr = el.dataset.attribute;
+                const current = this.document.system.attributes[attr].saveFluent;
+                this.document.update({ [`system.attributes.${attr}.saveFluent`]: !current });
+                e.stopPropagation();
             });
         });
     }
