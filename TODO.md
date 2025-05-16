@@ -71,5 +71,6 @@
   - [ ] Consistent config icon handling
   - [ ] Sheet helpers, utilities, wiki, and parsing consistency
   - [ ] Remove all redundant click event handlers
-- [ ] Resource implementation
-- [ ] Effect separation
+- [x] Resource implementation
+- [x] Effect separation
+- [ ] Import conditions from wiki and have them as default status effects
