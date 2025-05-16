@@ -264,6 +264,8 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(Terioc
                 label: 'Classes',
             }
         }
+        const enrichedNotes = await this._editor(this.document.system.sheet.notes);
+        context.notes = enrichedNotes;
         return context
     }
 

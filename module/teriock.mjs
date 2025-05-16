@@ -394,7 +394,7 @@ Handlebars.registerHelper('tcardOptions', function (
   tab,
   options
 ) {
-  const { showAddButton = false, sortOptions = {}, sortValue = '' } = options.hash;
+  const { showAddButton = true, sortOptions = {}, sortValue = '' } = options.hash;
   const escape = Handlebars.Utils.escapeExpression;
   const toggleHelper = Handlebars.helpers.ttoggle;
   const checkedHelper = Handlebars.helpers.checked;
@@ -435,7 +435,7 @@ Handlebars.registerHelper('tcardOptions', function (
   ` : '';
 
   const addButtonHTML = showAddButton ? `
-    <button class="${tab}-add-button add-button" data-tab="${tab}">
+    <button class="ttoggle-button ${tab}-add-button add-button" data-tab="${tab}">
       <i class="fa-solid fa-plus"></i>
     </button>
   ` : '';
@@ -463,8 +463,8 @@ Handlebars.registerHelper('tcardOptions', function (
       ${optionsButtonHTML}
       ${filterButtonHTML}
       ${sortButtonHTML}
-      ${addButtonHTML}
       <input type="text" name="${inputName}" placeholder="Search" value="${inputValue}">
+      ${addButtonHTML}
     </div>
 
     ${optionsToggle ? `

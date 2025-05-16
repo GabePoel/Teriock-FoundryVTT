@@ -165,12 +165,13 @@ function barIcon(parent, iconClass, first = true) {
 }
 
 export function addAbilitiesBlock(abilities, blocks, name = 'Abilities') {
+    abilities = abilities.filter(ability => ability.type !== 'passive');
     if (abilities.length > 0) {
         let abilitiesText = '<ul style="padding: 0; margin: 0;">';
         for (const ability of abilities) {
             const name = ability.name;
-            const color = CONFIG.TERIOCK.abilityOptions.abilityType[ability.system.abilityType].color;
-            const icon = CONFIG.TERIOCK.abilityOptions.abilityType[ability.system.abilityType].icon;
+            const color = CONFIG.TERIOCK.abilityOptions.abilityType[ability.system.abilityType]?.color;
+            const icon = CONFIG.TERIOCK.abilityOptions.abilityType[ability.system.abilityType]?.icon;
             abilitiesText += `<li style="list-style: none; display: flex; flex-direction: row; align-items: center;"><span style="margin-inline: 1em; font-size: 0.5em; color: ${color};"><i class="fa-solid fa-${icon} fa-fw"></i></span>${name}</li>`;
         }
         abilitiesText += '</ul>';
