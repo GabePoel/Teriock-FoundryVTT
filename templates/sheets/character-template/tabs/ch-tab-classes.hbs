@@ -9,13 +9,13 @@
         {{tcard
           img=item.img
           title=(className item.system.archetype item.system.className)
-          subtitle=(concat "Rank " item.system.classitem)
+          subtitle=(concat "Rank " item.system.classRank)
           text=(classArchetype item.system.archetype)
           id=item._id
           active=(not item.system.disabled)
           icons=(concat
-            (ticon (firstDie item.system.hitDie) cssClass="roll" action="useHitDie" id=item._id)
-            (ticon (firstDie item.system.manaDie) cssClass="roll" action="useManaDie" id=item._id)
+            (ticonToggle (firstDie item.system.hitDie) "xmark-large" (not item.system.hitDieSpent) action="rollHitDie" id=item._id falseAction=false)
+            (ticonToggle (firstDie item.system.manaDie) "xmark-large" (not item.system.manaDieSpent) action="rollManaDie" id=item._id falseAction=false)
             (ticon "comment" action="chatDoc" id=item._id)
             (ticonToggle "circle-check" "circle" (not item.system.disabled) action="toggleDisabledDoc" id=item._id)
           )

@@ -1,14 +1,25 @@
 import { makeIcon } from "../../helpers/utils.mjs";
 
+function capitalize(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
+function removeAttributeSaveChanges(changes) {
+    return changes.filter(change =>
+        !/^system\.attributes\.(int|mov|per|snk|str|unp)\.save(Proficient|Fluent)$/.test(change.key)
+    );
+}
+
 export function contextMenus(ability) {
     function fetch(keyChain) {
-        let keys = CONFIG.TERIOCK.abilityOptions
+        let keys = CONFIG.TERIOCK.abilityOptions;
         const keysArray = keyChain.split('.');
         for (const key of keysArray) {
             keys = keys[key];
         }
         return keys;
     }
+
     function quickMenu(keyChain, updateKey, nullOption = null) {
         const keys = fetch(keyChain);
         const out = Object.entries(keys).map(([key, value]) => ({
@@ -25,6 +36,7 @@ export function contextMenus(ability) {
         }
         return out;
     }
+
     return {
         delivery: quickMenu('delivery', 'system.delivery.base'),
         piercing: [
@@ -195,22 +207,103 @@ export function contextMenus(ability) {
         ],
         expansion: quickMenu('expansion', 'system.expansion', true),
         expansionSaveAttribute: quickMenu('featSaveAttribute', 'system.expansionSaveAttribute'),
-        attributeImprovement: quickMenu('attribute', 'system.improvements.attributeImprovement.attribute', true),
+
+        attributeImprovement: ["int", "mov", "per", "snk", "str", "unp"].map(attr => ({
+            name: attr.toUpperCase(),
+            icon: CONFIG.TERIOCK.icons[attr],
+            callback: () => {
+                const existingChanges = ability.changes;
+                const oldAttr = ability.system.improvements.attributeImprovement.attribute;
+                const oldKey = oldAttr ? `system.attributes.${oldAttr}.value` : null;
+                const newKey = `system.attributes.${attr}.value`;
+                const filteredChanges = oldKey
+                    ? existingChanges.filter(change => change.key !== oldKey)
+                    : [...existingChanges];
+                const minVal = ability.system.improvements.attributeImprovement.minVal ?? 0;
+                filteredChanges.push({
+                    key: newKey,
+                    mode: 2,
+                    value: minVal,
+                    priority: 20,
+                });
+                ability.update({
+                    'system.improvements.attributeImprovement.attribute': attr,
+                    'changes': filteredChanges,
+                });
+            },
+        })),
         attributeImprovementMinVal: Array.from({ length: 9 }, (_, i) => i - 3).map(i => ({
             name: i.toString(),
             icon: CONFIG.TERIOCK.icons.numerical,
-            callback: () => ability.update({
-                'system.improvements.attributeImprovement.minVal': i,
-            }),
+            callback: () => {
+                const existingChanges = ability.changes;
+                const key = `system.attributes.${ability.system.improvements.attributeImprovement.attribute}.value`;
+                const filteredChanges = existingChanges.filter(change => change.key !== key);
+                existingChanges.length = 0;
+                existingChanges.push(...filteredChanges);
+                existingChanges.push({
+                    key: key,
+                    mode: 2,
+                    value: i,
+                    priority: 20,
+                });
+                ability.update({
+                    'system.improvements.attributeImprovement.minVal': i,
+                    'changes': existingChanges,
+                });
+            },
         })),
-        featSaveImprovement: quickMenu('attribute', 'system.improvements.featSaveImprovement.attribute', true),
-        featSaveImprovementAmount: quickMenu('featSaveImprovementAmount', 'system.improvements.featSaveImprovement.amount'),
+        featSaveImprovement: ["int", "mov", "per", "snk", "str", "unp"].map(attr => ({
+            name: attr.toUpperCase(),
+            icon: CONFIG.TERIOCK.icons[attr],
+            callback: () => {
+                const existingChanges = ability.changes;
+                const amount = ability.system.improvements.featSaveImprovement.amount || "proficiency";
+                const saveKey = amount === "fluency" ? "saveFluent" : "saveProficient";
+                const newKey = `system.attributes.${attr}.${saveKey}`;
+                const filteredChanges = removeAttributeSaveChanges(existingChanges);
+                filteredChanges.push({
+                    key: newKey,
+                    mode: 2,
+                    value: true,
+                    priority: 20,
+                });
+                ability.update({
+                    'system.improvements.featSaveImprovement.attribute': attr,
+                    'changes': filteredChanges,
+                });
+            },
+        })),
+        featSaveImprovementAmount: ["proficiency", "fluency"].map(level => ({
+            name: capitalize(level),
+            icon: CONFIG.TERIOCK.icons[level],
+            callback: () => {
+                const existingChanges = ability.changes;
+                const attr = ability.system.improvements.featSaveImprovement.attribute;
+                if (!attr) return;
+                const saveKey = level === "fluency" ? "saveFluent" : "saveProficient";
+                const newKey = `system.attributes.${attr}.${saveKey}`;
+                const filteredChanges = removeAttributeSaveChanges(existingChanges);
+                filteredChanges.push({
+                    key: newKey,
+                    mode: 2,
+                    value: true,
+                    priority: 20,
+                });
+                ability.update({
+                    'system.improvements.featSaveImprovement.amount': level,
+                    'changes': filteredChanges,
+                });
+            },
+        })),
         abilityType: Object.entries(fetch('abilityType')).map(([key, value]) => ({
             name: value.name,
             icon: makeIcon(value.icon, CONFIG.TERIOCK.iconStyles.contextMenu),
-            callback: () => ability.update({
-                'system.abilityType': key,
-            }),
+            callback: () => {
+                ability.update({
+                    'system.abilityType': key,
+                });
+            },
         })),
-    }
+    };
 }

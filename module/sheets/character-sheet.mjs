@@ -8,6 +8,12 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(Terioc
         actions: {
             toggleEquippedDoc: this._toggleEquippedDoc,
             toggleDisabledDoc: this._toggleDisabledDoc,
+            addEmbedded: this._addEmbedded,
+            tradecraftExtra: this._tradecraftExtra,
+            rollHitDie: this._rollHitDie,
+            rollManaDie: this._rollManaDie,
+            rollTradecraft: this._rollTradecraft,
+            rollFeatSave: this._rollFeatSave,
         },
         form: {
             submitOnChange: true,
@@ -30,6 +36,8 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(Terioc
         this._filterMenuOpen = false;
         this._displayMenuOpen = false;
         this._sidebarOpen = true;
+        this._hitDrawerOpen = true;
+        this._manaDrawerOpen = true;
     }
 
     static async _toggleEquippedDoc(event, target) {
@@ -38,6 +46,86 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(Terioc
 
     static async _toggleDisabledDoc(event, target) {
         this._embeddedFromCard(target)?.toggleDisabled();
+    }
+
+    static async _addEmbedded(event, target) {
+        const tab = target.dataset.tab;
+        if (tab === 'ability') {
+            const effect = await this.actor.createEmbeddedDocuments('ActiveEffect', [{
+                name: 'New Ability',
+                img: 'systems/teriock/assets/ability.svg',
+                type: 'ability',
+            }]);
+            effect.sheet.render(true);
+        } else if (tab === 'resource') {
+            const effect = await this.actor.createEmbeddedDocuments('ActiveEffect', [{
+                name: 'New Resource',
+                img: 'systems/teriock/assets/resource.svg',
+                type: 'resource',
+            }]);
+            effect.sheet.render(true);
+        } else if (tab === 'equipment') {
+            const item = await this.actor.createEmbeddedDocuments('Item', [{
+                name: 'New Equipment',
+                img: 'systems/teriock/assets/equipment.svg',
+                type: 'equipment',
+            }]);
+            item.sheet.render(true);
+        } else if (tab === 'power') {
+            const item = await this.actor.createEmbeddedDocuments('Item', [{
+                name: 'New Power',
+                img: 'systems/teriock/assets/power.svg',
+                type: 'power',
+            }]);
+            item.sheet.render(true);
+        } else if (tab === 'rank') {
+            const item = await this.actor.createEmbeddedDocuments('Item', [{
+                name: 'New Rank',
+                img: 'systems/teriock/assets/rank.svg',
+                type: 'rank',
+            }]);
+            item.sheet.render(true);
+        } else if (tab === 'fluency') {
+            const item = await this.actor.createEmbeddedDocuments('Item', [{
+                name: 'New Fluency',
+                img: 'systems/teriock/assets/fluency.svg',
+                type: 'fluency',
+            }]);
+            item.sheet.render(true);
+        }
+    }
+
+    static async _tradecraftExtra(event, target) {
+        const tradecraft = target.dataset.tradecraft;
+        const extra = this.document.system.tradecrafts[tradecraft].extra;
+        const newExtra = (extra + 1) % 3;
+        await this.document.update({ [`system.tradecrafts.${tradecraft}.extra`]: newExtra });
+    }
+
+    static async _rollHitDie(event, target) {
+        const id = target.dataset.id;
+        const rank = this.actor.items.get(id);
+        if (rank) {
+            rank.rollHitDie();
+        }
+    }
+
+    static async _rollManaDie(event, target) {
+        const id = target.dataset.id;
+        const rank = this.actor.items.get(id);
+        if (rank) {
+            rank.rollManaDie();
+        }
+    }
+
+    static async _rollTradecraft(event, target) {
+        const tradecraft = target.dataset.tradecraft;
+        this.actor.rollTradecraft(tradecraft);
+    }
+
+    static async _rollFeatSave(event, target) {
+        const attribute = target.dataset.attribute;
+        this.actor.rollFeatSave(attribute);
     }
 
     /** Generalized filtering utility */
@@ -182,7 +270,7 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(Terioc
                     label: 'Classes',
                 },
             },
-            notes: await this._editor(this.document.system.sheet.notes),
+            enrichedNotes: await this._editor(this.document.system.sheet.notes),
         };
         return context;
     }
@@ -215,18 +303,28 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(Terioc
 
         const sidebar = this.element.querySelector('.character-sidebar');
         const tabber = this.element.querySelector('.character-sidebar-tabber-container');
+        const hitDrawer = this.element.querySelector('.hit-die-drawer');
+        const manaDrawer = this.element.querySelector('.mana-die-drawer');
 
         sidebar.classList.add('no-transition');
         tabber.classList.add('no-transition');
+        hitDrawer.classList.add('no-transition');
+        manaDrawer.classList.add('no-transition');
 
         sidebar.classList.toggle('collapsed', !this._sidebarOpen);
         tabber.classList.toggle('collapsed', !this._sidebarOpen);
+        hitDrawer.classList.toggle('closed', !this._hitDrawerOpen);
+        manaDrawer.classList.toggle('closed', !this._manaDrawerOpen);
 
         sidebar.offsetHeight;
         tabber.offsetHeight;
+        hitDrawer.offsetHeight;
+        manaDrawer.offsetHeight;
 
         sidebar.classList.remove('no-transition');
         tabber.classList.remove('no-transition');
+        hitDrawer.classList.remove('no-transition');
+        manaDrawer.classList.remove('no-transition');
 
         this.element.querySelectorAll('.character-tabber').forEach(el => {
             el.addEventListener('click', (e) => {
@@ -238,6 +336,40 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(Terioc
                     this._sidebarOpen = !this._sidebarOpen;
                 } else {
                     this.document.update({ 'system.sheet.activeTab': tab });
+                }
+                e.stopPropagation();
+            });
+        });
+
+        this.element.querySelectorAll('.character-hit-bar-overlay-row').forEach(el => {
+            el.addEventListener('contextmenu', (e) => {
+                console.log('Hit bar context menu');
+                e.preventDefault();
+                hitDrawer.classList.toggle('closed');
+                this._hitDrawerOpen = !this._hitDrawerOpen;
+                e.stopPropagation();
+            });
+        });
+        
+        this.element.querySelectorAll('.character-mana-bar-overlay-row').forEach(el => {
+            el.addEventListener('contextmenu', (e) => {
+                e.preventDefault();
+                manaDrawer.classList.toggle('closed');
+                this._manaDrawerOpen = !this._manaDrawerOpen;
+                e.stopPropagation();
+            });
+        });
+           
+        this.element.querySelectorAll('.die-box').forEach(el => {
+            el.addEventListener('contextmenu', (e) => {
+                e.preventDefault();
+                const id = el.dataset.id;
+                const rank = this.actor.items.get(id);
+                const die = el.dataset.die;
+                if (die === 'hit') {
+                    rank.update({ 'system.hitDieSpent': !rank.system.hitDieSpent });
+                } else if (die === 'mana') {
+                    rank.update({ 'system.manaDieSpent': !rank.system.manaDieSpent });
                 }
                 e.stopPropagation();
             });

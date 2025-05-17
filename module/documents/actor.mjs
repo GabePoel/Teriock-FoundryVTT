@@ -18,8 +18,8 @@ export class TeriockActor extends Actor {
     const actorData = this;
     const systemData = actorData.system;
     const flags = actorData.flags.teriock || {};
-    this._prepareHpMp();
     this._prepareBonuses();
+    this._prepareHpMp();
     let usp = this.itemTypes.equipment.reduce((total, item) => {
       if (item.system.equipped) {
         return total + (item.system.tier || 0);
@@ -41,6 +41,7 @@ export class TeriockActor extends Actor {
     }
     this._prepareAttributes();
     this._prepareTradecrafts();
+    this._prepareWeightCarried();
   }
 
   rollData() {
@@ -64,7 +65,8 @@ export class TeriockActor extends Actor {
       tempHp: this.system.hp.temp,
       tempMp: this.system.mp.temp,
     }
-    key = this._prepareClassRanks(key);
+    key = this._prepareClassRanksData(key);
+    key = this._prepareTradecraftsData(key);
     return key;
   }
 
@@ -92,7 +94,42 @@ export class TeriockActor extends Actor {
     });
   }
 
-  _prepareClassRanks(data) {
+  rollTradecraft(tradecraft) {
+    const bonus = this.system.tradecrafts[tradecraft].bonus;
+    let rollFormula = '1d20';
+    if (this.system.tradecrafts[tradecraft].proficient) {
+      rollFormula += ' + @p';
+    }
+    if (this.system.tradecrafts[tradecraft].extra) {
+      rollFormula += ' + @' + tradecraft;
+    }
+    const roll = new Roll(rollFormula, this.rollData());
+    roll.evaluate({ async: true }).then((result) => {
+      const message = result.toMessage({
+        speaker: ChatMessage.getSpeaker({ actor: this }),
+        flavor: `${tradecraft.charAt(0).toUpperCase() + tradecraft.slice(1)} Check`,
+        type: CONST.CHAT_MESSAGE_TYPES.ROLL,
+        rollMode: game.settings.get("core", "rollMode"),
+        create: true,
+      });
+    });
+  }
+
+  rollFeatSave(attribute) {
+    const bonus = this.system[attribute + 'Save'];
+    const roll = new Roll('1d20 + ' + bonus);
+    roll.evaluate({ async: true }).then((result) => {
+      const message = result.toMessage({
+        speaker: ChatMessage.getSpeaker({ actor: this }),
+        flavor: `${attribute.toUpperCase()} Feat Save`,
+        type: CONST.CHAT_MESSAGE_TYPES.ROLL,
+        rollMode: game.settings.get("core", "rollMode"),
+        create: true,
+      });
+    });
+  }
+
+  _prepareClassRanksData(data) {
     data.fla = 0;
     data.lif = 0;
     data.nat = 0;
@@ -124,31 +161,55 @@ export class TeriockActor extends Actor {
     return data
   }
 
+  _prepareTradecraftsData(data) {
+    for (const tradecraft of Object.keys(this.system.tradecrafts)) {
+      data[tradecraft] = this.system.tradecrafts[tradecraft].extra;
+    }
+    return data;
+  }
+
   _prepareHpMp() {
     let hpMax = 1;
     let mpMax = 1;
+    let hitDieBox = "";
+    let manaDieBox = "";
+    const numDiceRanks = Math.floor(this.system.lvl / 5);
     const allItems = this.itemTypes;
+    let rankCount = 0;
     for (const rank of allItems.rank) {
+      if (rankCount >= numDiceRanks) break;
       if (rank.system.hp) {
         hpMax += rank.system.hp;
+        const rollClass = rank.system.hitDieSpent ? "rolled" : "unrolled";
+        const iconClass = !rank.system.hitDieSpent ? "fa-solid" : "fa-light";
+        const action = !rank.system.hitDieSpent ? `data-action='rollHitDie'` : "";
+        hitDieBox += `<div class="die-box ${rollClass}" data-die="hit" data-id='${rank._id}' ${action}><i class="fa-fw ${iconClass} fa-dice-${rank.system.hitDie}"></i></div>`;
       }
       if (rank.system.mp) {
         mpMax += rank.system.mp;
+        const rollClass = rank.system.manaDieSpent ? "rolled" : "unrolled";
+        const iconClass = !rank.system.manaDieSpent ? "fa-solid" : "fa-light";
+        const action = !rank.system.manaDieSpent ? `data-action='rollManaDie'` : "";
+        manaDieBox += `<div class="die-box ${rollClass}" data-die="mana" data-id='${rank._id}' ${action}><i class="fa-fw ${iconClass} fa-dice-${rank.system.manaDie}"></i></div>`;
       }
+      rankCount++;
     }
     this.system.hp.max = hpMax;
     this.system.hp.min = -hpMax / 2;
+    this.system.hp.value = Math.min(this.system.hp.value, hpMax);
     this.system.mp.max = mpMax;
     this.system.mp.min = -mpMax / 2;
+    this.system.mp.value = Math.min(this.system.mp.value, mpMax);
+    this.system.sheet.dieBox.hitDice = hitDieBox;
+    this.system.sheet.dieBox.manaDice = manaDieBox;
   }
 
   _prepareBonuses() {
-    // const lvl = this.system.level;
     const lvl = this.system.lvl;
     const pres = Math.max(Math.floor(1 + (lvl + 1) / 5));
     const rank = Math.max(Math.floor((lvl - 1) / 5));
     const p = Math.max(0, Math.floor(1 + (lvl - 7) / 10));
-    const f = Math.max(Math.floor((lvl - 2) / 5));
+    const f = Math.max(0, Math.floor((lvl - 2) / 5));
     this.system.pres = pres;
     this.system.rank = rank;
     this.system.p = p;
@@ -173,6 +234,24 @@ export class TeriockActor extends Actor {
     for (const attribute of Object.keys(this.system.attributes)) {
       this._prepareAttribute(attribute);
     }
+    this.system.movementSpeed = 30 + (10 * this.system.attributes.mov.value);
+    if (this.system.size < 5) {
+      this.system.carryingCapacity.light = 65 + (20 * this.system.attributes.str.value);
+    } else {
+      this.system.carryingCapacity.light = 65 + (20 * (this.system.attributes.str.value + Math.pow(this.system.size - 5, 2)));
+    }
+    this.system.carryingCapacity.heavy = 2 * this.system.carryingCapacity.light;
+    this.system.carryingCapacity.max = 3 * this.system.carryingCapacity.light;
+  }
+
+  _prepareWeightCarried() {
+    let weightCarried = 0;
+    for (const item of this.itemTypes.equipment) {
+      if (item.system.equipped) {
+        weightCarried += item.system.weight;
+      }
+    }
+    this.system.weightCarried = weightCarried;
   }
 
   _prepareTradecraft(tradecraft) {
@@ -181,6 +260,7 @@ export class TeriockActor extends Actor {
     if (proficient) {
       bonus = this.system.p;
     }
+    bonus += this.system.tradecrafts[tradecraft].extra;
     this.system.tradecrafts[tradecraft].bonus = bonus;
   }
 

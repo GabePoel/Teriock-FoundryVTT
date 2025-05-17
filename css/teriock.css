@@ -291,7 +291,7 @@
   --tcard-content-align-items: end;
   --tcard-content-gap: 0;
   --tcard-content-font-size: 0.8em;
-  --tcard-icons-gap: 6px;
+  --tcard-icons-gap: 4px;
   --tcard-box-shadow: 0 0 6px rgba(0, 0, 0, 0.4);
   --tcard-container-box-shadow: none;
   --tcard-border-radius: var(--tcard-outer-border-radius);
@@ -336,7 +336,7 @@
   --tcard-content-flex-direction: row;
   --tcard-content-align-items: center;
   --tcard-content-gap: 8px;
-  --tcard-icons-gap: 8px;
+  --tcard-icons-gap: 6px;
 }
 @container (max-width: 374px) {
   .teriock .tcard-container.small .tcard-subtitle {
@@ -356,7 +356,7 @@
   --tcard-content-flex-direction: row;
   --tcard-content-align-items: center;
   --tcard-content-gap: 8px;
-  --tcard-icons-gap: 8px;
+  --tcard-icons-gap: 6px;
 }
 @container (max-width: 374px) {
   .teriock .tcard-container.tiny .tcard-subtitle {
@@ -477,10 +477,10 @@
   cursor: pointer;
 }
 .teriock .tcard-container .tcard .tcard-body .tcard-titles .tcard-subtitle.tcard-clickable:hover {
-  color: var(--color-text-emphatic);
+  color: var(--color-text-selection);
 }
 .teriock .tcard-container .tcard .tcard-body .tcard-titles .tcard-subtitle.tcard-clickable:active {
-  color: var(--color-text-accent);
+  color: var(--color-text-secondary);
 }
 .teriock .tcard-container .tcard .tcard-body .tcard-content {
   display: flex;
@@ -511,10 +511,10 @@
   gap: var(--tcard-icons-gap);
 }
 .teriock .tcard-container .tcard .tcard-body .tcard-content .tcard-icons i:hover {
-  color: var(--color-text-emphatic);
+  color: var(--color-text-selection);
 }
 .teriock .tcard-container .tcard .tcard-body .tcard-content .tcard-icons i:active {
-  color: var(--color-text-accent);
+  color: var(--color-text-secondary);
 }
 .teriock .ticon {
   cursor: pointer;
@@ -588,6 +588,12 @@
 .teriock .tgrid .gi8 {
   grid-column: span 8;
 }
+.teriock .thover:hover {
+  color: var(--color-text-selection);
+}
+.teriock .thover:active {
+  color: var(--color-text-secondary);
+}
 .teriock .ttoggle-button {
   height: var(--input-height);
   width: var(--input-height);
@@ -603,6 +609,16 @@
 }
 .teriock .tcolored {
   color: var(--color-text-subtle);
+}
+.teriock .tred {
+  color: var(--color-level-error);
+  background-color: color-mix(in srgb, var(--color-level-error-bg), transparent 70%);
+  border-color: var(--color-level-error-border);
+}
+.teriock .tround {
+  border-radius: 6px;
+  border: 1px solid transparent;
+  margin-inline: 0.25em;
 }
 .teriock .ttransparent {
   background-color: transparent;
@@ -1333,6 +1349,13 @@
   border: none;
   text-align: center;
 }
+.teriock .character-window .character-page .character-shortbox .character-smallbox-value {
+  font-size: 1.25em;
+  color: var(--color-text);
+  background-color: transparent;
+  border: none;
+  text-align: center;
+}
 .teriock .character-window .character-page .character-shortbox .character-shortbox-label {
   font-size: 1em;
   color: var(--color-text-subtle);
@@ -1348,6 +1371,7 @@
   flex-direction: column;
   padding: 1em;
   gap: 1em;
+  border-right: 1px solid var(--color-cool-4);
   overflow-y: auto;
   height: auto;
   z-index: 1;
@@ -1423,6 +1447,7 @@
 .teriock .character-window .character-page .character-sidebar .character-intro-box .character-basics {
   display: flex;
   flex-direction: row;
+  margin-top: 0.5em;
 }
 .teriock .character-window .character-page .character-sidebar .character-status-box {
   display: flex;
@@ -1512,17 +1537,44 @@
   flex: none;
 }
 .teriock .character-window .character-page .character-sidebar .character-status-box .character-status-bars .character-bar-container .character-bar-overlay .character-bar-overlay-row .character-bar-overlay-left {
-  width: 1.5em;
+  width: 2em;
   text-align: right;
   margin-left: 0.25em;
 }
 .teriock .character-window .character-page .character-sidebar .character-status-box .character-status-bars .character-bar-container .character-bar-overlay .character-bar-overlay-row .character-bar-overlay-temp {
-  width: 1.5em;
+  width: 2em;
   text-align: left;
+}
+.teriock .character-window .character-page .character-sidebar .character-size-box,
+.teriock .character-window .character-page .character-sidebar .character-weight-box,
+.teriock .character-window .character-page .character-sidebar .character-movement-box,
+.teriock .character-window .character-page .character-sidebar .character-carrying-box {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+.teriock .character-window .character-page .character-sidebar .character-movement-box {
+  border-bottom: 1px dashed var(--color-text-subtle);
+  margin-bottom: 0.75em;
+  padding-bottom: 0.25em;
+}
+.teriock .character-window .character-page .character-sidebar .carrying-box-main {
+  border-bottom: 1px dashed var(--color-text-subtle);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 0.5em;
+  padding-bottom: 0.25em;
+}
+.teriock .character-window .character-page .character-sidebar .carrying-box-main input {
+  line-height: unset;
+  height: unset;
 }
 .teriock .character-window .character-page .character-sidebar-tabber-container {
   position: absolute;
-  left: 250px;
+  left: 249px;
   z-index: 1;
   transition: all 0.2s ease-in-out;
 }
@@ -1739,7 +1791,6 @@
 }
 .teriock .tradecraft-panels {
   width: 100%;
-  padding: 0.5em;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 0;
@@ -1771,6 +1822,48 @@
   justify-content: center;
   color: var(--color-text-subtle);
 }
+.teriock .die-drawer {
+  margin-inline: 1em;
+  border: 1px solid var(--color-text-subtle);
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+  border-top: none;
+  min-height: 2.25em;
+  max-height: 100px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 0.5em;
+  overflow: hidden;
+  transition: all 0.2s ease-in-out;
+}
+.teriock .die-drawer .tgrid .die-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.teriock .die-drawer .tgrid .die-box.unrolled {
+  color: var(--color-light-3);
+}
+.teriock .die-drawer .tgrid .die-box.unrolled i:hover {
+  color: var(--color-text-selection);
+}
+.teriock .die-drawer .tgrid .die-box.unrolled i:active {
+  color: var(--color-text-secondary);
+}
+.teriock .die-drawer .tgrid .die-box.rolled {
+  color: var(--color-light-6);
+}
+.teriock .die-drawer.closed {
+  min-height: 0;
+  max-height: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+.teriock .die-drawer.no-transition {
+  transition: none;
+}
 
 .application.sheet.teriock:not(.minimized) {
   min-width: 250px;
@@ -1790,6 +1883,7 @@
   overflow: unset;
   min-height: 375px;
   min-width: 500px;
+  backdrop-filter: blur(4px);
 }
 .application.sheet.teriock.character:not(.minimized) .window-content {
   display: contents;
@@ -1809,17 +1903,46 @@
   display: block;
 }
 
-.ab-section-container:not(:hover) .prosemirror button.toggle, .ab-section-container:not(:hover) prose-mirror button.toggle {
+.ab-section-container:not(:hover) .prosemirror button.toggle,
+.ab-section-container:not(:hover) prose-mirror button.toggle {
   display: none;
 }
 
-.prosemirror button.toggle, prose-mirror button.toggle {
+.prosemirror button.toggle,
+prose-mirror button.toggle {
   font-size: xx-small;
   padding: 0.5em;
   height: unset;
   width: unset;
   min-height: unset;
   min-width: unset;
+}
+
+.prosemirror {
+  width: 100%;
+}
+
+.thover {
+  cursor: pointer;
+}
+.thover:hover {
+  color: var(--color-text-selection);
+}
+.thover:active {
+  color: var(--color-text-secondary);
+}
+
+.character-notes-content .prosemirror button.toggle,
+.character-notes-content prose-mirror button.toggle {
+  top: 0;
+  right: 0;
+  font-size: medium;
+  padding: 0.5em;
+  height: var(--input-height);
+  width: var(--input-height);
+}
+.character-notes-content .editor {
+  min-height: 2.3em;
 }
 
 /* New global styles */

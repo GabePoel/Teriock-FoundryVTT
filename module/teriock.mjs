@@ -240,20 +240,20 @@ Handlebars.registerHelper('ticon', function (icon, options) {
   const actionAttr = action ? `data-action="${action}"` : '';
 
   return new Handlebars.SafeString(
-    `<i class="ticon tcard-clickable ${cssClass} fa-${style} fa-${icon}" ${idAttr} ${parentIdAttr} ${actionAttr}></i>`);
+    `<i class="ticon tcard-clickable ${cssClass} fa-fw fa-${style} fa-${icon}" ${idAttr} ${parentIdAttr} ${actionAttr}></i>`);
 });
 
 Handlebars.registerHelper('ticonToggle', function (iconTrue, iconFalse, bool, options) {
-  const { cssClass = '', id, parentId, action } = options.hash;
+  const { cssClass = '', id, parentId, action, falseAction = true } = options.hash;
 
   const idAttr = id ? `data-id="${id}"` : '';
   const parentIdAttr = parentId ? `data-parent-id="${parentId}"` : '';
-  const actionAttr = action ? `data-action="${action}"` : '';
+  const actionAttr = (bool || falseAction) && action ? `data-action="${action}"` : '';
 
   const icon = bool ? iconTrue : iconFalse;
 
   return new Handlebars.SafeString(`
-    <i class="ticon tcard-clickable ${cssClass} fa-light fa-${icon}" ${idAttr} ${parentIdAttr} ${actionAttr}></i>
+    <i class="ticon tcard-clickable ${cssClass} fa-fw fa-light fa-${icon}" ${idAttr} ${parentIdAttr} ${actionAttr}></i>
   `);
 });
 
@@ -342,7 +342,7 @@ Handlebars.registerHelper('abilityCards', function (abilities, system, tab = 'ab
       hash: {
         action: "toggleForceDisabledDoc",
         id: ability._id,
-        parentId: ability.parent?._id
+        parentId: ability.parent?._id,
       }
     })
 
@@ -418,25 +418,25 @@ Handlebars.registerHelper('tcardOptions', function (
 
   const optionsButtonHTML = `
     <button class="${optionsClass}" data-bool="${optionsToggle}" data-path="${optionsPath}" data-action="quickToggle">
-      <i class="fa-solid fa-sliders"></i>
+      <i class="fa-fw fa-solid fa-sliders"></i>
     </button>
   `;
 
   const filterButtonHTML = showFilterButton ? `
     <button class="${filterClass}" data-bool="${filterToggle}" data-path="${filterPath}" data-action="quickToggle">
-      <i class="fa-solid fa-filter"></i>
+      <i class="fa-fw fa-solid fa-filter"></i>
     </button>
   ` : '';
 
   const sortButtonHTML = showSortButton ? `
     <button class="${sortClass}" data-bool="${sortToggle}" data-path="${sortPath}" data-action="quickToggle">
-      <i class="fa-solid fa-bars-sort"></i>
+      <i class="fa-fw fa-solid fa-bars-sort"></i>
     </button>
   ` : '';
 
   const addButtonHTML = showAddButton ? `
-    <button class="ttoggle-button ${tab}-add-button add-button" data-tab="${tab}">
-      <i class="fa-solid fa-plus"></i>
+    <button class="ttoggle-button ${tab}-add-button add-button" data-tab="${tab}" data-action="addEmbedded">
+      <i class="fa-fw fa-solid fa-plus"></i>
     </button>
   ` : '';
 
@@ -527,4 +527,44 @@ Handlebars.registerHelper('repeat', function (n, block) {
     accum += block;
   }
   return new Handlebars.SafeString(accum);
+});
+
+Handlebars.registerHelper('leq', function (a, b) {
+  if (a === undefined || b === undefined) {
+    return false;
+  }
+  if (typeof a !== 'number' || typeof b !== 'number') {
+    return false;
+  }
+  return a <= b;
+});
+
+Handlebars.registerHelper('geq', function (a, b) {
+  if (a === undefined || b === undefined) {
+    return false;
+  }
+  if (typeof a !== 'number' || typeof b !== 'number') {
+    return false;
+  }
+  return a >= b;
+});
+
+Handlebars.registerHelper('lt', function (a, b) {
+  if (a === undefined || b === undefined) {
+    return false;
+  }
+  if (typeof a !== 'number' || typeof b !== 'number') {
+    return false;
+  }
+  return a < b;
+});
+
+Handlebars.registerHelper('gt', function (a, b) {
+  if (a === undefined || b === undefined) {
+    return false;
+  }
+  if (typeof a !== 'number' || typeof b !== 'number') {
+    return false;
+  }
+  return a > b;
 });

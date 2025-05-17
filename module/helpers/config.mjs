@@ -8,6 +8,7 @@ import { displayOptions } from "./constants/display-options.mjs";
 import { powerOptions } from "./constants/power-options.mjs";
 import { equipmentOptions } from "./constants/equipment-options.mjs";
 import { documentOptions } from "./constants/document-options.mjs";
+import { characterOptions } from "./constants/character-options.mjs";
 
 export const TERIOCK = {
   icons: icons,
@@ -26,4 +27,5 @@ export const TERIOCK = {
   powerOptions: powerOptions,
   equipmentOptions: equipmentOptions,
   documentOptions: documentOptions,
+  characterOptions: characterOptions,
 }

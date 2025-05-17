@@ -26,6 +26,9 @@ async function stageUse(ability, advantage, disadvantage) {
         } else if (disadvantage) {
             rollFormula += 'kl1';
         }
+        if (['av0', 'ub'].includes(ability.system.piercing)) {
+            rollFormula += ' + @av0';
+        }
     } else if (ability.system.interaction == 'feat') {
         rollFormula = '10';
     } else {
@@ -36,23 +39,17 @@ async function stageUse(ability, advantage, disadvantage) {
     } else {
         ability.system.proficient = ability.parent.system.proficient;
     }
-    let actor = null;
-    if (ability.parent.documentName == 'actor') {
-        actor = ability.parent;
-    } else {
-        actor = ability.parent.parent;
-    }
     const dialogs = [];
     if (ability.system.costs.mp == 'x') {
-        const mpDialog = `<label>MP Cost</label><input type="number" name="mp" value="0" min="0" max="${ability.parent.parent.mp}" step="1"></input>`;
+        const mpDialog = `<label>MP Cost</label><input type="number" name="mp" value="0" min="0" max="${ability.getActor().mp}" step="1"></input>`;
         dialogs.push(mpDialog);
     }
     if (ability.system.costs.hp == 'x') {
-        const hpDialog = `<label>HP Cost</label><input type="number" name="hp" value="0" min="0" max="${ability.parent.parent.hp}" step="1"></input>`;
+        const hpDialog = `<label>HP Cost</label><input type="number" name="hp" value="0" min="0" max="${ability.getActor().hp}" step="1"></input>`;
         dialogs.push(hpDialog);
     }
     if (ability.system.proficient && ability.system.heightened) {
-        const p = ability.system.proficient ? ability.parent.parent.system.p : 0;
+        const p = ability.system.proficient ? ability.getActor().system.p : 0;
         const heightenedDialog = `<label>Heightened Amount</label><input type="number" name="heightened" value="0" min="0" max="${p}" step="1"></input>`;
         dialogs.push(heightenedDialog);
     }
@@ -95,10 +92,12 @@ async function stageUse(ability, advantage, disadvantage) {
 }
 
 async function use(ability) {
+    // TODO: We need ways to override AV0, UB, and SB.
     let message = await ability.buildMessage();
     const rollData = {
-        p: ability.parent.parent.system.p,
+        p: ability.getActor().system.p,
         h: ability.system.heightenedAmount,
+        av0: 2,
     }
     message = await foundry.applications.ux.TextEditor.enrichHTML(message);
     const roll = new TeriockRoll(ability.system.formula, rollData, {
@@ -109,9 +108,9 @@ async function use(ability) {
             actor: ability.getActor(),
         }),
     });
-    ability.parent.parent.update({
-        'system.mp': ability.parent.parent.system.mp - ability.system.mpCost - ability.system.heightenedAmount,
-        'system.hp': ability.parent.parent.system.hp - ability.system.hpCost,
+    ability.getActor().update({
+        'system.mp.value': ability.getActor().system.mp.value - ability.system.mpCost - ability.system.heightenedAmount,
+        'system.hp.value': ability.getActor().system.hp.value - ability.system.hpCost,
     })
     ability.system.mpCost = 0;
     ability.system.hpCost = 0;

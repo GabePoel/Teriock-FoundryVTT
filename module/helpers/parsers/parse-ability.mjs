@@ -1,6 +1,6 @@
 import { cleanFeet, cleanMp, cleanHp } from "../../helpers/clean.mjs";
 
-export function parseAbility(rawHTML) {
+export function parseAbility(rawHTML, ability) {
     const parser = new DOMParser();
     const doc = parser.parseFromString(rawHTML, 'text/html');
 
@@ -90,6 +90,7 @@ export function parseAbility(rawHTML) {
         type: 'ability',
     })
     const parameters = foundry.utils.deepClone(referenceAbility.system);
+    const changes = [];
 
     if (tagTree.power) {
         parameters.powerSources = tagTree.power;
@@ -182,6 +183,12 @@ export function parseAbility(rawHTML) {
         const minVal = minValFlag ? minValFlag.replace('flag-value-', '') : null;
         parameters.improvements.attributeImprovement.attribute = attribute;
         parameters.improvements.attributeImprovement.minVal = minVal ? parseInt(minVal, 10) : null;
+        changes.push({
+            key: `system.attributes.${attribute}.value`,
+            mode: 4,
+            value: minVal,
+            priority: 20,
+        });
     }
     const featSaveImprovementElement = doc.querySelector('.ability-bar-feat-save-improvement');
     if (featSaveImprovementElement) {
@@ -192,6 +199,15 @@ export function parseAbility(rawHTML) {
         const amount = amountFlag ? amountFlag.replace('flag-value-', '') : null;
         parameters.improvements.featSaveImprovement.attribute = attribute;
         parameters.improvements.featSaveImprovement.amount = amount;
+        let amountToggle = null;
+        if (amount === "fluency") amountToggle = "Fluent";
+        else if (amount === "proficiency") amountToggle = "Proficient";
+        changes.push({
+            key: `system.attributes.${attribute}.save${amountToggle}`,
+            mode: 4,
+            value: true,
+            priority: 20,
+        });
     }
 
     // parameters.attributeImprovement = Array.from(attributeImprovementElement.classList);
@@ -282,7 +298,136 @@ export function parseAbility(rawHTML) {
         parameters.basic = true;
         parameters.abilityType = 'intrinsic';
     }
+
+    console.log(ability);
+    // Special Overrides
+    if (ability.name == "Unbreachability") {
+        changes.push({
+            key: 'system.wornAc',
+            mode: 4,
+            value: 1,
+            priority: 20,
+        });
+    } else if (ability.name == "Dragon Scales") {
+        changes.push({
+            key: 'system.wornAc',
+            mode: 4,
+            value: 2,
+            priority: 20,
+        });
+    } else if (ability.name.startsWith("Talented")) {
+        const tradecraft = ability.name.split(" ")[1];
+        changes.push({
+            key: 'system.tradecrafts.' + tradecraft + '.bonus',
+            mode: 4,
+            value: 1,
+            priority: 20,
+        });
+    } else if (ability.name.startsWith("Expert")) {
+        const tradecraft = ability.name.split(" ")[1];
+        changes.push({
+            key: 'system.tradecrafts.' + tradecraft + '.bonus',
+            mode: 4,
+            value: 2,
+            priority: 20,
+        });
+    } else if (ability.name.startsWith("Agile")) {
+        changes.push({
+            key: 'system.speedAdjustments.difficultTerrain',
+            mode: 4,
+            value: 3,
+            priority: 20,
+        })
+    } else if (ability.name.startsWith("Climbing")) {
+        let amount = 2;
+        if (ability.parent?.system?.proficient) {
+            amount = 3;
+        }
+        changes.push({
+            key: 'system.speedAdjustments.climb',
+            mode: 4,
+            value: amount,
+            priority: 20,
+        })
+    } else if (ability.name.startsWith("Digging")) {
+        changes.push({
+            key: 'system.speedAdjustments.dig',
+            mode: 4,
+            value: 1,
+            priority: 20,
+        })
+    } else if (ability.name.startsWith("Flying")) {
+        let amount = 2;
+        if (ability.parent?.system?.proficient) {
+            amount = 3;
+        }
+        changes.push({
+            key: 'system.speedAdjustments.fly',
+            mode: 4,
+            value: amount,
+            priority: 20,
+        })
+    } else if (ability.name.startsWith("Gliding")) {
+        changes.push({
+            key: 'system.speedAdjustments.fly',
+            mode: 4,
+            value: 1,
+            priority: 20,
+        })
+    } else if (ability.name.startsWith("Leap")) {
+        changes.push({
+            key: 'system.speedAdjustments.leapHorizontal',
+            mode: 4,
+            value: 2,
+            priority: 20,
+        })
+        changes.push({
+            key: 'system.speedAdjustments.leapVertical',
+            mode: 4,
+            value: 1,
+            priority: 20,
+        })
+    } else if (ability.name.startsWith("Shadowcreep Acrobatics")) {
+        changes.push({
+            key: 'system.speedAdjustments.difficultTerrain',
+            mode: 2,
+            value: 1,
+            priority: 25,
+        })
+        changes.push({
+            key: 'system.speedAdjustments.crawl',
+            mode: 2,
+            value: 1,
+            priority: 25,
+        })
+        changes.push({
+            key: 'system.speedAdjustments.climb',
+            mode: 2,
+            value: 1,
+            priority: 25,
+        })
+        changes.push({
+            key: 'system.speedAdjustments.hidden',
+            mode: 2,
+            value: 1,
+            priority: 25,
+        })
+        changes.push({
+            key: 'system.speedAdjustments.leapHorizontal',
+            mode: 2,
+            value: 1,
+            priority: 25,
+        })
+        changes.push({
+            key: 'system.speedAdjustments.leapVertical',
+            mode: 2,
+            value: 1,
+            priority: 25,
+        })
+    }
+
     const out = {
+        'changes': changes,
         'system': parameters,
         'img': 'systems/teriock/assets/ability.svg',
     }

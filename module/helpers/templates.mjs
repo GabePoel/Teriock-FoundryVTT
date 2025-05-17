@@ -29,6 +29,8 @@ export const preloadHandlebarsTemplates = async function () {
     'systems/teriock/templates/sheets/character-template/filters/ch-fluency-filter.hbs',
     'systems/teriock/templates/sheets/character-template/filters/ch-power-filter.hbs',
     'systems/teriock/templates/sheets/character-template/parts/ch-attribute-box.hbs',
+    'systems/teriock/templates/sheets/character-template/parts/ch-carrying-box.hbs',
+    'systems/teriock/templates/sheets/character-template/parts/ch-movement-box.hbs',
     'systems/teriock/templates/sheets/character-template/parts/ch-sidebar.hbs',
     'systems/teriock/templates/sheets/character-template/parts/ch-status-box.hbs',
     'systems/teriock/templates/sheets/character-template/tabs/ch-tab-abilities.hbs',

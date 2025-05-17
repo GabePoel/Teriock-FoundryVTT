@@ -1,80 +1,118 @@
 <div class="character-status-box">
   <div class="character-status-bars">
-    <div class="character-hit-bar-container character-bar-container">
-      <div class="character-hit-bar character-bar toutline">
-        <div
-          class="character-bar-left"
-          style="width: {{barLeft system.hp.value system.hp.max system.hp.temp}}%;"
-        ></div>
-        <div
-          class="character-bar-temp"
-          style="width: {{barTemp system.hp.value system.hp.max system.hp.temp}}%;"
-        ></div>
-        <div
-          class="character-bar-lost"
-          style="width: {{barLost system.hp.value system.hp.max system.hp.temp}}%;"
-        ></div>
-      </div>
-      <div class="character-bar-overlay">
-        <div class="character-bar-overlay-row">
-          <input
-            type="number"
-            name="system.hp.value"
-            value="{{system.hp.value}}"
-            class="character-bar-overlay-left character-bar-overlay-label"
-            max="{{system.hp.max}}"
-            min="{{system.hp.min}}"
-          />
-          <div class="character-bar-overlay-max character-bar-overlay-label">
-            <span>/ {{system.hp.max}} +</span>
-          </div>
+    <div class="character-status-bar-box">
+      <div class="character-hit-bar-container character-bar-container">
+        <div class="character-hit-bar character-bar toutline">
+          <div
+            class="character-bar-left"
+            style="width: {{barLeft
+              system.hp.value
+              system.hp.max
+              system.hp.temp
+            }}%;"
+          ></div>
+          <div
+            class="character-bar-temp"
+            style="width: {{barTemp
+              system.hp.value
+              system.hp.max
+              system.hp.temp
+            }}%;"
+          ></div>
+          <div
+            class="character-bar-lost"
+            style="width: {{barLost
+              system.hp.value
+              system.hp.max
+              system.hp.temp
+            }}%;"
+          ></div>
+        </div>
+        <div class="character-bar-overlay">
+          <div class="character-bar-overlay-row character-hit-bar-overlay-row">
             <input
-            type="number"
-            name="system.hp.temp"
-            value="{{system.hp.temp}}"
-            class="character-bar-overlay-temp character-bar-overlay-label"
-            placeholder="0"
-            min="0"
+              type="number"
+              name="system.hp.value"
+              value="{{system.hp.value}}"
+              class="thover character-bar-overlay-left character-bar-overlay-label"
+              max="{{system.hp.max}}"
+              min="{{system.hp.min}}"
             />
+            <div class="character-bar-overlay-max character-bar-overlay-label">
+              <span>/ {{system.hp.max}} +</span>
+            </div>
+            <input
+              type="number"
+              name="system.hp.temp"
+              value="{{system.hp.temp}}"
+              class="thover character-bar-overlay-temp character-bar-overlay-label"
+              placeholder="0"
+              min="0"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="die-drawer hit-die-drawer">
+        <div class="tgrid g7">
+          {{{system.sheet.dieBox.hitDice}}}
         </div>
       </div>
     </div>
-    <div class="character-mana-bar-container character-bar-container">
-      <div class="character-mana-bar character-bar toutline">
-        <div
-          class="character-bar-left"
-          style="width: {{barLeft system.mp.value system.mp.max system.mp.temp}}%;"
-        ></div>
-        <div
-          class="character-bar-temp"
-          style="width: {{barTemp system.mp.value system.mp.max system.mp.temp}}%;"
-        ></div>
-        <div
-          class="character-bar-lost"
-          style="width: {{barLost system.mp.value system.mp.max system.mp.temp}}%;"
-        ></div>
-      </div>
-      <div class="character-bar-overlay">
-        <div class="character-bar-overlay-row">
-          <input
-            type="number"
-            name="system.mp.value"
-            value="{{system.mp.value}}"
-            class="character-bar-overlay-left character-bar-overlay-label"
-            max="{{system.mp.max}}"
-            min="{{system.mp.min}}"
-          />
-          <div class="character-bar-overlay-max character-bar-overlay-label">
-            <span>/ {{system.mp.max}} +</span>
+    <div class="character-status-bar-box">
+      <div class="character-mana-bar-container character-bar-container">
+        <div class="character-mana-bar character-bar toutline">
+          <div
+            class="character-bar-left"
+            style="width: {{barLeft
+              system.mp.value
+              system.mp.max
+              system.mp.temp
+            }}%;"
+          ></div>
+          <div
+            class="character-bar-temp"
+            style="width: {{barTemp
+              system.mp.value
+              system.mp.max
+              system.mp.temp
+            }}%;"
+          ></div>
+          <div
+            class="character-bar-lost"
+            style="width: {{barLost
+              system.mp.value
+              system.mp.max
+              system.mp.temp
+            }}%;"
+          ></div>
+        </div>
+        <div class="character-bar-overlay">
+          <div class="character-bar-overlay-row character-mana-bar-overlay-row">
+            <input
+              type="number"
+              name="system.mp.value"
+              value="{{system.mp.value}}"
+              class="character-bar-overlay-left character-bar-overlay-label"
+              max="{{system.mp.max}}"
+              min="{{system.mp.min}}"
+            />
+            <div class="character-bar-overlay-max character-bar-overlay-label">
+              <span>/ {{system.mp.max}} +</span>
+            </div>
+            <input
+              type="number"
+              name="system.mp.temp"
+              value="{{system.mp.temp}}"
+              class="character-bar-overlay-temp character-bar-overlay-label"
+              placeholder="0"
+              min="0"
+            />
           </div>
-          <input
-            type="number"
-            name="system.mp.temp"
-            value="{{system.mp.temp}}"
-            class="character-bar-overlay-temp character-bar-overlay-label"
-            placeholder="0"
-            min="0"
-          />
+        </div>
+      </div>
+      <div class="die-drawer mana-die-drawer">
+        <div class="tgrid g7">
+          {{{system.sheet.dieBox.manaDice}}}
         </div>
       </div>
     </div>

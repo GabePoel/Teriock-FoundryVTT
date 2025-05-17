@@ -12,6 +12,7 @@ export const TeriockSheet = (Base) =>
         static DEFAULT_OPTIONS = {
             classes: ['teriock', 'ability'],
             actions: {
+                debug: this._debug,
                 editImage: this._editImage,
                 openDoc: this._openDoc,
                 rollDoc: this._rollDoc,
@@ -191,6 +192,10 @@ export const TeriockSheet = (Base) =>
 
         // Static Actions
         // ------------------------------------------------------------------------
+
+        static async _debug(_, __) {
+            console.log('Debug', this.document);
+        }
 
         static async _wikiPullThis(_, __) {
             this.document.wikiPull();

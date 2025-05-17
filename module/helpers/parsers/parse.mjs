@@ -1,16 +1,12 @@
-import { parseAbility } from "./parse-ability.mjs";
 import { parseEquipment } from "./parse-equipment.mjs";
 import { parseRank } from "./parse-rank.mjs";
 
-export async function parse(item, rawHTML) {
-    if (item.type === 'ability') {
-        return parseAbility(rawHTML);
-    }
-    if (item.type === 'equipment') {
+export async function parse(document, rawHTML) {
+    if (document.type === 'equipment') {
         return parseEquipment(rawHTML);
     }
-    if (item.type === 'rank') {
-        return await parseRank(rawHTML, item);
+    if (document.type === 'rank') {
+        return await parseRank(rawHTML, document);
     }
-    throw new Error(`Unknown type: ${item.type}`);
+    throw new Error(`Unknown type: ${document.type}`);
 }

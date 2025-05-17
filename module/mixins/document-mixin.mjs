@@ -7,7 +7,7 @@ export const TeriockDocument = (Base) => class TeriockDocument extends Base {
 
     async parse(rawHTML) {
         return {
-            'system.description': rawHTML,
+            "this.system.description": "Description.",
         }
     }
 
@@ -19,7 +19,7 @@ export const TeriockDocument = (Base) => class TeriockDocument extends Base {
     }
 
     async roll() {
-        if (['ability', 'equipment', 'resource'].includes(this.type)) {
+        if (['ability', 'equipment', 'resource', 'fluency'].includes(this.type)) {
             await makeRoll(this);
         } else {
             await this.chat();
@@ -84,7 +84,7 @@ export const TeriockDocument = (Base) => class TeriockDocument extends Base {
             console.log('Pulling wiki page', pageTitle);
             const wikiPage = await fetchWikiPageHTML(pageTitle);
             if (wikiPage) {
-                const parsed = await this.parse(wikiPage);
+                const parsed = await this.parse(wikiPage, this.document);
                 await this.update(parsed);
             }
         }

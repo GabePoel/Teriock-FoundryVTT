@@ -1,0 +1,57 @@
+<div class="ch-movement-box tbox toutline">
+  <div class="carrying-box-main">
+    <div class="character-shortbox character-size-box">
+      <div class="tsubtle tcenter">
+        Size
+      </div>
+      <input
+        type="number"
+        name="system.size"
+        value="{{system.size}}"
+        class="character-size-input character-smallbox-value"
+        data-edit="system.size"
+      />
+    </div>
+    <div class="character-shortbox character-weight-box">
+      <div class="tsubtle tcenter">
+        Weight
+      </div>
+      <input
+        type="text"
+        name="system.weight"
+        value="{{system.weight}}"
+        class="character-weight-input character-smallbox-value"
+        data-edit="system.weight"
+      />
+    </div>
+    <div class="character-shortbox character-carrying-box">
+      <div class="tsubtle tcenter">
+        Carrying
+      </div>
+      <div class="character-smallbox-value">{{{system.weightCarried}}} lb</div>
+    </div>
+  </div>
+  <div class="tgrid g3" style="gap: 0;">
+    <div class="tsubtle tcenter">
+      Light
+    </div>
+    <div class="tsubtle tcenter">
+      Heavy
+    </div>
+    <div class="tsubtle tcenter">
+      Max
+    </div>
+    <div class="tcenter tround {{#if (geq system.weightCarried system.carryingCapacity.light)}}tred{{/if}}">
+      {{{system.carryingCapacity.light}}}
+      lb
+    </div>
+    <div class="tcenter tround {{#if (geq system.weightCarried system.carryingCapacity.heavy)}}tred{{/if}}">
+      {{{system.carryingCapacity.heavy}}}
+      lb
+    </div>
+    <div class="tcenter tround {{#if (geq system.weightCarried system.carryingCapacity.max)}}tred{{/if}}">
+      {{{system.carryingCapacity.max}}}
+      lb
+    </div>
+  </div>
+</div>

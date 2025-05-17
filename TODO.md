@@ -17,17 +17,22 @@
   - [x] Get confirmation before doing it
 - [ ] Character improvements
   - [x] Basic abilities auto-import
-  - [ ] Notes page
-  - [ ] Automatic computations
+  - [x] Notes page
+  - [x] Automatic computations
     - [x] Attributes
     - [x] Hit and mana dice
-    - [ ] Carrying capacity
-    - [ ] Speed
-    - [ ] Weight carried and limits
+    - [x] Carrying capacity
+    - [x] Speed
+    - [x] Weight carried and limits
     - [x] Rank
     - [x] Proficiency bonus
     - [x] Fluency bonus
-  - [ ] Adding items directly within character sheet
+  - [x] Adding items directly within character sheet
+  - [x] Connect actions
+    - [x] Hit/mana dice
+    - [x] Tradecrafts
+    - [x] Feat save
+    - [x] Talented/expertise
   - [ ] Filters
     - [x] Ability filters
     - [x] Equipment filters
@@ -54,10 +59,10 @@
   - [x] Ability sheet prematurely closes when making any edit that's not handled by external code
   - [x] Slow loading of ability sheet entries
   - [x] Material cost button not working
-  - [ ] Rank number not appearing
+  - [x] Rank number not appearing
   - [x] HP/MP costs in ability chat messages
   - [x] Window sizing limitations
-  - [ ] No context menu on embedded sheets
+  - [x] No context menu on embedded sheets
 - [ ] Decisions
   - [ ] Should ES be an item or effect/ability?
   - [x] Should items enter equipped?

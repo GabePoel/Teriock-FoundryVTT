@@ -7,7 +7,7 @@ import { parseAbility } from "../helpers/parsers/parse-ability.mjs";
 export class TeriockEffect extends TeriockDocument(ActiveEffect) {
 
   async parse(rawHTML) {
-    return parseAbility(rawHTML);
+    return parseAbility(rawHTML, this);
   }
 
   async softEnable() {

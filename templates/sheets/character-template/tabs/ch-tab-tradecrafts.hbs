@@ -7,14 +7,14 @@
       <div class="tradecraft-panels tgrid g2">
         {{#each config.tradecraftOptionsMain as |field|}}
           <div class="field-panel">
-            <div class="tradecraft-panel tgrid g7">
+            <div class="tradecraft-panel tgrid g6">
               <div class="tradecraft-panel-symbol field-panel-header">
                 PRO
               </div>
               <div class="tradecraft-panel-symbol field-panel-header">
-                Extra
+                Talent
               </div>
-              <div class="tradecraft-panel-name field-panel-header gi4">
+              <div class="tradecraft-panel-name field-panel-header gi3">
                 {{field.name}}
               </div>
               <div class="tradecraft-panel-symbol field-panel-header">
@@ -22,12 +22,20 @@
               </div>
               {{#each field.tradecrafts as |tradecraft name|}}
                 <div class="tradecraft-panel-symbol ch-tradecraft-pro-box" data-action="quickToggle" data-path="system.tradecrafts.{{name}}.proficient" data-bool="{{lookup (lookup ../../system.tradecrafts name) 'proficient'}}">
-                  {{{ifThen (lookup (lookup ../../system.tradecrafts name) 'proficient') '<i class="fa-regular fa-circle-dot"></i>' '<i class="fa-regular fa-circle"></i>'}}}
+                  {{{ifThen (lookup (lookup ../../system.tradecrafts name) 'proficient') '<i class="thover fa-regular fa-circle-dot"></i>' '<i class="thover fa-regular fa-circle"></i>'}}}
                 </div>
-                <div class="tradecraft-panel-symbol">
-                  T
+                <div class="tradecraft-panel-symbol thover" data-action="tradecraftExtra" data-tradecraft="{{name}}">
+                  {{#if (eq (lookup (lookup ../../system.tradecrafts name) 'extra') 0)}}
+                    <i class="thover fa-fw fa-regular fa-xmark"></i>
+                  {{/if}}
+                  {{#if (eq (lookup (lookup ../../system.tradecrafts name) 'extra') 1)}}
+                    <i class="thover fa-fw fa-regular fa-check"></i>
+                  {{/if}}
+                  {{#if (eq (lookup (lookup ../../system.tradecrafts name) 'extra') 2)}}
+                    <i class="thover fa-fw fa-regular fa-check-double"></i>
+                  {{/if}}
                 </div>
-                <div class="tradecraft-panel-name gi4">
+                  <div class="tradecraft-panel-name thover gi3" data-action="rollTradecraft" data-tradecraft="{{name}}">
                   {{tradecraft.name}}
                 </div>
                 <div class="tradecraft-panel-symbol">
