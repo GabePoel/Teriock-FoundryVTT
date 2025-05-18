@@ -9,12 +9,18 @@
     </div>
   </div>
   {{> "systems/teriock/templates/sheets/ability-template/parts/ab-menu.hbs"}}
-  <div class="ab-main">
+  <div class="ab-main {{#if system.elderSorcery}}es-container {{elementClass system.elements}}{{/if}}">
+    {{#if system.elderSorcery}}
+      <div class="es-mask-rotator"></div>
+    {{/if}}
     <div class="ab-tags-all">
       {{> "systems/teriock/templates/sheets/ability-template/tags/ab-summary-tags.hbs"}}
       {{> "systems/teriock/templates/sheets/ability-template/tags/ab-effects-tags.hbs"}}
     </div>
     {{> "systems/teriock/templates/sheets/ability-template/entries/ab-costs-entries.hbs"}}
+    {{#if system.elderSorcery}}
+      {{> "systems/teriock/templates/sheets/ability-template/parts/ab-elder-sorcery.hbs"}}
+    {{/if}}
     {{#if (exists system.requirements)}}
       {{> "systems/teriock/templates/sheets/ability-template/entries/ab-requirements-entries.hbs"}}
     {{/if}}

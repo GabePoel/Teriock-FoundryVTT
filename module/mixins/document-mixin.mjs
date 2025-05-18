@@ -18,9 +18,9 @@ export const TeriockDocument = (Base) => class TeriockDocument extends Base {
         });
     }
 
-    async roll() {
+    async roll(options) {
         if (['ability', 'equipment', 'resource', 'fluency'].includes(this.type)) {
-            await makeRoll(this);
+            await makeRoll(this, options);
         } else {
             await this.chat();
         }

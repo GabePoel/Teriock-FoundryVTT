@@ -20,6 +20,7 @@ export const preloadHandlebarsTemplates = async function () {
     'systems/teriock/templates/sheets/ability-template/entries/ab-overview-entries.hbs',
     'systems/teriock/templates/sheets/ability-template/entries/ab-requirements-entries.hbs',
     'systems/teriock/templates/sheets/ability-template/entries/ab-trigger-entries.hbs',
+    'systems/teriock/templates/sheets/ability-template/parts/ab-elder-sorcery.hbs',
     'systems/teriock/templates/sheets/ability-template/parts/ab-menu.hbs',
     'systems/teriock/templates/sheets/ability-template/tags/ab-effects-tags.hbs',
     'systems/teriock/templates/sheets/ability-template/tags/ab-summary-tags.hbs',

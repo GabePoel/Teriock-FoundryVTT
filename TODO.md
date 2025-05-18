@@ -1,5 +1,5 @@
 - [ ] Major functionality
-  - [ ] Archetype ability separation
+  - [x] Archetype ability separation
   - [x] Proficiency switches
   - [x] AV0/UB overrides
   - [x] Block interaction chain
@@ -7,7 +7,10 @@
   - [ ] End condition rolls
   - [ ] Image popup windows
   - [x] Attack penalties
-  - [ ] Advantage/disadvantage listeners
+  - [x] Advantage/disadvantage listeners
+  - [x] Elder Sorcery
+    - [x] Bring in stylings from wiki
+  - [x] Custom initiative
 - [x] Equipment improvements
   - [x] Able to set tier
   - [x] Able to set properties
@@ -17,11 +20,11 @@
   - [x] Ability disabling synchronization
   - [x] Shattering
   - [x] Dampening
-- [ ] Ability improvements
+- [x] Ability improvements
   - [x] Able to make as flaw
   - [x] Improved dice rolling
   - [x] Separate chart and dice rolling messages
-  - [ ] Force proficiency
+  - [x] Force proficiency
 - [x] Power improvements
   - [x] Import abilities from wiki category
   - [x] Get confirmation before doing it
@@ -55,9 +58,9 @@
 - [ ] Quality of life improvements
   - [x] Rolling implementation for items
   - [x] Handlebars consolidation across item and character sheets
-  - [ ] Drag/drop implementations
+  - [x] Drag/drop implementations
     - [x] Drag/drop between sheets
-    - [ ] Drag/drop as macros onto hot bar
+    - [x] Drag/drop as macros onto hot bar
   - [x] Styling improvements in lots of places
     - [x] Embedded cards
     - [x] Filter menus
@@ -65,7 +68,7 @@
     - [x] Box units
     - [x] HP/MP bars
     - [ ] Equipment text
-- [ ] Bug fixes
+- [x] Bug fixes
   - [x] Ability sheet prematurely closes when making any edit that's not handled by external code
   - [x] Slow loading of ability sheet entries
   - [x] Material cost button not working
@@ -73,10 +76,10 @@
   - [x] HP/MP costs in ability chat messages
   - [x] Window sizing limitations
   - [x] No context menu on embedded sheets
-- [ ] Decisions
-  - [ ] Should ES be an item or effect/ability?
+- [x] Decisions
+  - [x] Should ES be an item or effect/ability?
   - [x] Should items enter equipped?
-  - [ ] Traits?
+  - [x] Traits?
 - [ ] Scripts
   - [ ] Consolidate SCSS and template registration
   - [x] Property/effect/etc. imports scripts

@@ -1,13 +1,21 @@
 import { TeriockRoll } from "../../dice/roll.mjs";
 
 export async function rollEquipment(equipment, options) {
-    await use(equipment);
+    await use(equipment, options);
 }
 
-async function use(equipment) {
+async function use(equipment, options) {
     let message = await equipment.buildMessage();
     if (equipment.system.damage) {
-        const rollFormula = equipment.system.damage;
+        let rollFormula = equipment.system.damage;
+        // If options.advantage, double the dice rolled
+        if (options?.advantage) {
+            // Replace dice expressions like '1d6' with '2d6', '2d8' with '4d8', etc.
+            rollFormula = rollFormula.replace(/(\d*)d(\d+)/gi, (match, dice, sides) => {
+                const numDice = parseInt(dice) || 1;
+                return (numDice * 2) + 'd' + sides;
+            });
+        }
         message = await foundry.applications.ux.TextEditor.enrichHTML(message);
         const roll = new TeriockRoll(rollFormula, equipment.getActor()?.rollData(), { flavor: message });
         roll.toMessage({

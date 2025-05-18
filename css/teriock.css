@@ -1,4 +1,6 @@
+@charset "UTF-8";
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Bonheur+Royale&family=Cinzel:wght@400..900&family=Great+Vibes&family=Mea+Culpa&family=Quintessential&family=Tagesschrift&display=swap");
 /* Global styles */
 @import url("https://fonts.googleapis.com/css2?family=Bonheur+Royale&family=Cinzel:wght@400..900&family=Great+Vibes&family=Quintessential&family=Tagesschrift&display=swap");
 .window-app {
@@ -213,6 +215,10 @@
 }
 
 /* Styles limited to teriock sheets */
+.teriock {
+  /* Unified elemental coloring — good contrast for light and dark */
+  /* Optional: fallback if no theme class is present */
+}
 .teriock .ter-card {
   position: relative;
 }
@@ -1906,6 +1912,94 @@
 .teriock .die-drawer.no-transition {
   transition: none;
 }
+@keyframes spin {
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+.teriock .es-container {
+  overflow: hidden;
+  position: relative;
+  display: block;
+}
+.teriock .es-mask-rotator {
+  position: absolute;
+  top: calc(100% - 4em);
+  left: calc(100% - 4em);
+  width: 150%;
+  height: 150%;
+  transform: translate(-50%, -50%);
+  opacity: 0.35;
+  display: block;
+  background-image: url("https://548916280-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FpaqFHtSBIvRvOg8Wfmx5%2Fuploads%2FWEViu7j32vfudpdSmvEG%2FSpell%20Circle.svg?alt=media&token=e1e66eeb-da0d-47fa-b71b-d823fbfe3cd7");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: transparent;
+  filter: contrast(0);
+  pointer-events: none;
+  z-index: 0;
+  transform-origin: center;
+  animation: spin 300s linear infinite;
+}
+.teriock .es-wording-container {
+  position: relative;
+  z-index: 1;
+  display: block;
+  margin-bottom: 1.5em;
+}
+.teriock .es-wording-container,
+.teriock .es-effect-container * {
+  color: unset;
+}
+.teriock .es-intro {
+  font-family: "Mea Culpa", cursive;
+  font-weight: 400;
+  font-style: normal;
+  display: block;
+  font-size: 2em;
+  user-select: none;
+  margin-bottom: 0;
+  margin-top: 0.65em;
+}
+.teriock .es-intro a {
+  color: unset;
+}
+.teriock .es-wording {
+  display: block;
+  margin-left: 1em;
+  margin-right: 1em;
+  font-family: "Quintessential", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+.teriock .es-life {
+  color: color-mix(in srgb, #d4b63f, var(--color-text) 50%);
+  background-color: rgba(229, 165, 10, 0.07);
+}
+.teriock .es-storm {
+  color: color-mix(in srgb, #3b7dd8, var(--color-text) 50%);
+  background-color: rgba(26, 95, 180, 0.07);
+}
+.teriock .es-necro {
+  color: color-mix(in srgb, #666666, var(--color-text) 50%);
+  background-color: rgba(0, 0, 0, 0.07);
+}
+.teriock .es-flame {
+  color: color-mix(in srgb, #d1433f, var(--color-text) 50%);
+  background-color: rgba(165, 29, 45, 0.07);
+}
+.teriock .es-nature {
+  color: color-mix(in srgb, #3ba272, var(--color-text) 50%);
+  background-color: rgba(38, 162, 105, 0.07);
+}
+.teriock .es-multi {
+  color: color-mix(in srgb, #8756a3, var(--color-text) 50%);
+  background-color: rgba(97, 53, 131, 0.07);
+}
+.teriock body .es-mask-rotator {
+  filter: brightness(0) saturate(100%);
+}
 
 .application.sheet.teriock:not(.minimized) {
   min-width: 250px;
@@ -1946,7 +2040,9 @@
 }
 
 .ab-section-container:not(:hover) .prosemirror button.toggle,
-.ab-section-container:not(:hover) prose-mirror button.toggle {
+.ab-section-container:not(:hover) prose-mirror button.toggle,
+.es-wording-container:not(:hover) .prosemirror button.toggle,
+.es-wording-container:not(:hover) prose-mirror button.toggle {
   display: none;
 }
 
@@ -1958,6 +2054,11 @@ prose-mirror button.toggle {
   width: unset;
   min-height: unset;
   min-width: unset;
+}
+
+.es-wording .prosemirror button.toggle,
+.es-wording prose-mirror button.toggle {
+  right: -1.5em;
 }
 
 .prosemirror {

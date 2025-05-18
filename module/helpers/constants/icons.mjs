@@ -70,6 +70,7 @@ export const icons = {
     fluent: '<i class="fa-solid fa-f"></i>',
     fluency: '<i class="fa-solid fa-f"></i>',
     chat: '<i class="fa-solid fa-comment"></i>',
+    roll: '<i class="fa-solid fa-dice-d20"></i>',
     edit: '<i class="fa-solid fa-edit"></i>',
     delete: '<i class="fa-solid fa-trash"></i>',
     weight: '<i class="fa-light fa-weight-hanging"></i>',

@@ -103,6 +103,42 @@ export function registerHandlebarsHelpers() {
     });
 
     // =======================
+    // Elder Sorcery Helpers
+    // =======================
+    Handlebars.registerHelper('elements', (elements, options) => {
+        let out = 'Celestial';
+        if (elements && elements.length > 0) {
+            out = elements.map(e => e.charAt(0).toUpperCase() + e.slice(1)).join(elements.length > 2 ? ', ' : elements.length === 2 ? ' and ' : '');
+            if (elements.length > 1) {
+                const lastComma = out.lastIndexOf(', ');
+                if (lastComma !== -1) {
+                    out = out.substring(0, lastComma) + ' and' + out.substring(lastComma + 1);
+                }
+            }
+        }
+        return out;
+    });
+
+    Handlebars.registerHelper('elementClass', function (elements) {
+        const colorMap = {
+            life: 'es-life',
+            storm: 'es-storm',
+            necro: 'es-necro',
+            flame: 'es-flame',
+            nature: 'es-nature'
+        };
+
+        if (!Array.isArray(elements)) return 'es-multi';
+
+        const validElements = elements.filter(el => colorMap.hasOwnProperty(el));
+
+        if (validElements.length !== 1) return 'es-multi';
+
+        return colorMap[validElements[0]] || 'es-multi';
+    });
+
+
+    // =======================
     // UI Helpers
     // =======================
     Handlebars.registerHelper('tabActive', (active, tab) => active === tab ? 'active' : 'inactive');
@@ -144,13 +180,11 @@ export function registerHandlebarsHelpers() {
         const { showAddButton = true, sortOptions = {}, sortValue = '' } = options.hash;
         const context = options.data.root;
 
-        // Helper references assumed to exist
         const escape = Handlebars.Utils.escapeExpression;
         const ttoggle = Handlebars.helpers.ttoggle;
         const checked = Handlebars.helpers.checked;
         const selectOptions = Handlebars.helpers.selectOptions;
 
-        // Paths & values
         const inputName = `system.sheet.${tab}Filters.search`;
         const inputValue = escape(searchValue);
 

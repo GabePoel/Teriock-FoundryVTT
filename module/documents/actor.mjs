@@ -73,6 +73,10 @@ export class TeriockActor extends Actor {
     return data;
   }
 
+  getRollData() {
+    return this.rollData();
+  }
+
   takeDamage(damage) {
     const { hp } = this.system;
     const temp = Math.max(0, hp.temp - damage);
@@ -91,9 +95,14 @@ export class TeriockActor extends Actor {
     this.update({ 'system.mp.value': value, 'system.mp.temp': temp });
   }
 
-  rollTradecraft(tradecraft) {
+  rollTradecraft(tradecraft, options) {
     const data = this.system.tradecrafts[tradecraft];
     let formula = '1d20';
+    if (options?.advantage) {
+      formula += 'kh1';
+    } else if (options?.disadvantage) {
+      formula += 'kl1';
+    }
     if (data.proficient) formula += ' + @p';
     if (data.extra) formula += ` + @${tradecraft}`;
 
@@ -108,9 +117,16 @@ export class TeriockActor extends Actor {
     });
   }
 
-  rollFeatSave(attribute) {
+  rollFeatSave(attribute, options) {
     const bonus = this.system[`${attribute}Save`] || 0;
-    new Roll(`1d20 + ${bonus}`).evaluate({ async: true }).then(result => {
+    let formula = '1d20';
+    if (options?.advantage) {
+      formula += 'kh1';
+    } else if (options?.disadvantage) {
+      formula += 'kl1';
+    }
+    formula += ` + ${bonus}`
+    new Roll(formula).evaluate({ async: true }).then(result => {
       result.toMessage({
         speaker: ChatMessage.getSpeaker({ actor: this }),
         flavor: `${attribute.toUpperCase()} Feat Save`,

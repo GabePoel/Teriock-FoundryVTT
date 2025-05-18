@@ -18,8 +18,9 @@ const { DocumentSheetConfig } = foundry.applications.apps;
 
 Hooks.once('init', function () {
   CONFIG.TERIOCK = TERIOCK;
+
   CONFIG.Combat.initiative = {
-    formula: '1d20',
+    formula: '1d20 + @mov',
     decimals: 2,
   };
 
@@ -69,16 +70,12 @@ Hooks.once('init', function () {
     types: ['resource']
   });
 
-
   game.teriock = {
     TeriockActor,
     TeriockItem,
     TeriockEffect,
   };
 
-  console.log(game)
-
-  // Define custom Document classes
   CONFIG.Actor.documentClass = TeriockActor;
   CONFIG.Item.documentClass = TeriockItem;
 
@@ -90,6 +87,42 @@ Hooks.once('init', function () {
 
 Hooks.on('updateItem', async (item, updateData, options, userId) => {
   console.log('updateItem', item, updateData, options, userId);
+});
+
+
+Hooks.on("hotbarDrop", async (bar, data, slot) => {
+  setTimeout(async () => {
+    const item = await fromUuid(data.uuid);
+    if (!item || typeof item.roll !== "function") return;
+
+    const macroName = `Roll ${item.name}`;
+    const command = `
+const item = await fromUuid("${item.uuid}");
+if (!item) return ui.notifications.warn("Item not found: ${item.name}");
+
+const options = {
+  advantage: window.event?.altKey,
+  disadvantage: window.event?.shiftKey
+};
+
+await item.roll(options);
+`;
+
+    let macro = game.macros.find(m => m.name === macroName && m.command === command);
+    if (!macro) {
+      macro = await Macro.create({
+        name: macroName,
+        type: "script",
+        img: item.img,
+        command,
+        flags: { "teriock": { itemMacro: true } }
+      });
+    }
+
+    await game.user.assignHotbarMacro(macro, slot);
+  }, 50);
+
+  return false;
 });
 
 

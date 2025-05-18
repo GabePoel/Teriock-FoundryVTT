@@ -52,6 +52,7 @@ export class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(TeriockS
             onCriticalSave: system.results.critSave,
             endCondition: system.endCondition,
             requirements: system.requirements,
+            elderSorceryIncant: system.elderSorceryIncant,
         };
 
         for (const [key, value] of Object.entries(editors)) {

@@ -125,12 +125,18 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(Terioc
 
     static async _rollTradecraft(event, target) {
         const tradecraft = target.dataset.tradecraft;
-        this.actor.rollTradecraft(tradecraft);
+        const options = {};
+        if (event.altKey) options.advantage = true;
+        if (event.shiftKey) options.disadvantage = true;
+        this.actor.rollTradecraft(tradecraft, options);
     }
 
     static async _rollFeatSave(event, target) {
         const attribute = target.dataset.attribute;
-        this.actor.rollFeatSave(attribute);
+        const options = {};
+        if (event.altKey) options.advantage = true;
+        if (event.shiftKey) options.disadvantage = true;
+        this.actor.rollFeatSave(attribute, options);
     }
 
     static async _toggleSb(event, target) {
@@ -152,7 +158,10 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(Terioc
         const id = target.dataset.id;
         const item = this.document.items.get(id);
         if (item) {
-            item.roll();
+            const options = {};
+            if (event.altKey) options.advantage = true;
+            if (event.shiftKey) options.disadvantage = true;
+            item.roll(options);
         }
     }
 

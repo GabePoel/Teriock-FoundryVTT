@@ -18,6 +18,7 @@ export const TeriockSheet = (Base) =>
                 rollDoc: this._rollDoc,
                 chatDoc: this._chatDoc,
                 chatThis: this._chatThis,
+                rollThis: this._rollThis,
                 wikiPullThis: this._wikiPullThis,
                 wikiOpenThis: this._wikiOpenThis,
                 toggleForceDisabledDoc: this._toggleForceDisabledDoc,
@@ -217,6 +218,13 @@ export const TeriockSheet = (Base) =>
             this.document.chat();
         }
 
+        static async _rollThis(event, target) {
+            const options = {};
+            if (event?.altKey) options.advantage = true;
+            else if (event?.shiftKey) options.disadvantage = true;
+            this.document.roll(options);
+        }
+
         static async _editImage(_, target) {
             const attr = target.dataset.edit;
             const current = foundry.utils.getProperty(this.document, attr);
@@ -232,37 +240,40 @@ export const TeriockSheet = (Base) =>
             return picker.browse();
         }
 
-        static async _openDoc(_, target) {
+        static async _openDoc(event, target) {
             this._embeddedFromCard(target)?.sheet.render(true);
         }
 
-        static async _rollDoc(_, target) {
-            this._embeddedFromCard(target)?.roll();
+        static async _rollDoc(event, target) {
+            const options = {};
+            if (event?.altKey) options.advantage = true;
+            else if (event?.shiftKey) options.disadvantage = true;
+            this._embeddedFromCard(target)?.roll(options);
         }
 
-        static async _chatDoc(_, target) {
+        static async _chatDoc(event, target) {
             this._embeddedFromCard(target)?.chat();
         }
 
-        static async _useOneDoc(_, target) {
+        static async _useOneDoc(event, target) {
             this._embeddedFromCard(target)?.useOne();
         }
 
-        static async _toggleForceDisabledDoc(_, target) {
+        static async _toggleForceDisabledDoc(event, target) {
             this._embeddedFromCard(target)?.toggleForceDisabled();
         }
 
-        static async _quickToggle(_, target) {
+        static async _quickToggle(event, target) {
             const path = target.dataset.path;
             const current = target.dataset.bool === "true";
             this.document.update({ [path]: !current });
         }
 
-        static async _createAbility(_, __) {
+        static async _createAbility(event, __) {
             await createAbility(this.item, null);
         }
 
-        static async _createResource(_, __) {
+        static async _createResource(event, __) {
             await createResource(this.item, null);
         }
     };
