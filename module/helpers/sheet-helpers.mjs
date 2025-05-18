@@ -52,14 +52,14 @@ export function connectEmbedded(document, element) {
                         name: 'Enable',
                         icon: '<i class="fa-solid fa-check"></i>',
                         callback: () => {
-                            if (embedded.type === 'ability') {
+                            if (embedded.documentName === 'ActiveEffect') {
                                 embedded.setForceDisabled(false);
                             } else {
                                 embedded.enable();
                             }
                         },
                         condition: () => {
-                            if (embedded.type === 'ability') {
+                            if (embedded.documentName === 'ActiveEffect') {
                                 return embedded.system.forceDisabled;
                             } else if (embedded.type === 'equipment') {
                                 return false;
@@ -72,14 +72,14 @@ export function connectEmbedded(document, element) {
                         name: 'Disable',
                         icon: '<i class="fa-solid fa-xmark"></i>',
                         callback: () => {
-                            if (embedded.type === 'ability') {
+                            if (embedded.documentName === 'ActiveEffect') {
                                 embedded.setForceDisabled(true);
                             } else {
                                 embedded.disable();
                             }
                         },
                         condition: () => {
-                            if (embedded.type === 'ability') {
+                            if (embedded.documentName === 'ActiveEffect') {
                                 return !embedded.system.forceDisabled;
                             } else if (embedded.type === 'equipment') {
                                 return false;

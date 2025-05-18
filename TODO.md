@@ -1,13 +1,13 @@
 - [ ] Major functionality
   - [ ] Archetype ability separation
-  - [ ] Proficiency switches
-  - [ ] Universal menus
-  - [ ] AV0/UB overrides
-  - [ ] Block interaction chain (dialogs)
+  - [x] Proficiency switches
+  - [x] AV0/UB overrides
+  - [x] Block interaction chain
   - [ ] Resistance save
   - [ ] End condition rolls
   - [ ] Image popup windows
-  - [ ] Attack penalties
+  - [x] Attack penalties
+  - [ ] Advantage/disadvantage listeners
 - [x] Equipment improvements
   - [x] Able to set tier
   - [x] Able to set properties

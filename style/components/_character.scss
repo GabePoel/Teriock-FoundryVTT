@@ -105,7 +105,7 @@ $mp-yellow: var(--color-level-warning);
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      margin: 0.5em;
+      width: 100%;
       .character-shortbox-value {
         font-size: 1.5em;
         color: var(--color-text);
@@ -189,7 +189,7 @@ $mp-yellow: var(--color-level-warning);
           }
         }
         .character-name {
-          width: 150px;
+          width: calc(100% - 2em);
           margin-top: 1px;
           .character-name-text {
             font-family: var(--font-h4);
@@ -329,12 +329,14 @@ $mp-yellow: var(--color-level-warning);
         width: 100%;
       }
       .character-movement-box {
-        border-bottom: 1px dashed var(--color-text-subtle);
+        border-bottom: 1px dotted var(--color-text-subtle);
         margin-bottom: 0.75em;
         padding-bottom: 0.25em;
       }
+      .defense-box-main,
+      .attack-box-main,
       .carrying-box-main {
-        border-bottom: 1px dashed var(--color-text-subtle);
+        border-bottom: 1px dotted var(--color-text-subtle);
         display: flex;
         flex-direction: row;
         align-items: center;
@@ -346,6 +348,24 @@ $mp-yellow: var(--color-level-warning);
         }
         margin-bottom: 0.5em;
         padding-bottom: 0.25em;
+      }
+      .ch-battle-box {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        padding: 0;
+        .defense-box,
+        .attack-box {
+          display: flex;
+          flex-direction: column;
+          width: 100%;
+          padding: 0.5em;
+        }
+        .defense-box {
+          border-bottom: 1px solid var(--color-border);
+        }
       }
     }
     .character-sidebar-tabber-container {

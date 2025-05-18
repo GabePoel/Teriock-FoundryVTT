@@ -26,9 +26,7 @@ async function stageUse(ability, advantage, disadvantage) {
         } else if (disadvantage) {
             rollFormula += 'kl1';
         }
-        if (['av0', 'ub'].includes(ability.system.piercing)) {
-            rollFormula += ' + @av0';
-        }
+        rollFormula += ' + @atkPen + @av0 + @sb';
     } else if (ability.system.interaction == 'feat') {
         rollFormula = '10';
     } else {
@@ -92,12 +90,16 @@ async function stageUse(ability, advantage, disadvantage) {
 }
 
 async function use(ability) {
-    // TODO: We need ways to override AV0, UB, and SB.
     let message = await ability.buildMessage();
-    const rollData = {
-        p: ability.getActor().system.p,
-        h: ability.system.heightenedAmount,
-        av0: 2,
+    const rollData = ability.getActor().rollData();
+    if (ability.system.delivery.base == 'weapon') {
+        const properties = ability.getActor().system.primaryAttacker?.system?.properties || [];
+        if (properties.includes('av0') || properties.includes('ub')) {
+            rollData.av0 = 2;
+        }
+    }
+    if (['av0', 'ub'].includes(ability.system.piercing)) {
+        rollData.av0 = 2;
     }
     message = await foundry.applications.ux.TextEditor.enrichHTML(message);
     const roll = new TeriockRoll(ability.system.formula, rollData, {
@@ -108,9 +110,14 @@ async function use(ability) {
             actor: ability.getActor(),
         }),
     });
+    let newPenalty = ability.getActor().system.attackPenalty;
+    if (ability.system.interaction == 'attack') {
+        newPenalty -= 5;
+    }
     ability.getActor().update({
         'system.mp.value': ability.getActor().system.mp.value - ability.system.mpCost - ability.system.heightenedAmount,
         'system.hp.value': ability.getActor().system.hp.value - ability.system.hpCost,
+        'system.attackPenalty': newPenalty,
     })
     ability.system.mpCost = 0;
     ability.system.hpCost = 0;

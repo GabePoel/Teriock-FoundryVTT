@@ -1,95 +1,125 @@
 <div class="ab-menu">
   <div class="ab-menu-content">
     <div class="ab-menu-bar">
-      <div class="tgrid g5">
+      <div class="tgrid g4">
         <div class="tgrid-item">
-          <label>Basic</label>
+          <label for="basic">Basic</label>
           <input
             type="checkbox"
+            id="basic"
             name="system.basic"
             data-edit="system.basic"
             {{checked system.basic}}
           />
         </div>
         <div class="tgrid-item">
-          <label>Standard</label>
+          <label for="standard">Standard</label>
           <input
             type="checkbox"
+            id="standard"
             name="system.standard"
             data-edit="system.standard"
             {{checked system.standard}}
           />
         </div>
         <div class="tgrid-item">
-          <label>Skill</label>
+          <label for="skill">Skill</label>
           <input
             type="checkbox"
+            id="skill"
             name="system.skill"
             data-edit="system.skill"
             {{checked system.skill}}
           />
         </div>
         <div class="tgrid-item">
-          <label>Spell</label>
+          <label for="spell">Spell</label>
           <input
             type="checkbox"
+            id="spell"
             name="system.spell"
             data-edit="system.spell"
             {{checked system.spell}}
           />
         </div>
         <div class="tgrid-item">
-          <label>Ritual</label>
+          <label for="ritual">Ritual</label>
           <input
             type="checkbox"
+            id="ritual"
             name="system.ritual"
             data-edit="system.ritual"
             {{checked system.ritual}}
           />
         </div>
         <div class="tgrid-item">
-          <label>Rotator</label>
+          <label for="rotator">Rotator</label>
           <input
             type="checkbox"
+            id="rotator"
             name="system.rotator"
             data-edit="system.rotator"
             {{checked system.rotator}}
           />
         </div>
         <div class="tgrid-item">
-          <label>Sustained</label>
+          <label for="sustained">Sustained</label>
           <input
             type="checkbox"
+            id="sustained"
             name="system.sustained"
             data-edit="system.sustained"
             {{checked system.sustained}}
           />
         </div>
         <div class="tgrid-item">
-          <label>Invoked</label>
+          <label for="invoked">Invoked</label>
           <input
             type="checkbox"
+            id="invoked"
             name="system.costs.invoked"
             data-edit="system.costs.invoked"
             {{checked system.costs.invoked}}
           />
         </div>
         <div class="tgrid-item">
-          <label>Verbal</label>
+          <label for="verbal">Verbal</label>
           <input
             type="checkbox"
+            id="verbal"
             name="system.costs.verbal"
             data-edit="system.costs.verbal"
             {{checked system.costs.verbal}}
           />
         </div>
         <div class="tgrid-item">
-          <label>Somatic</label>
+          <label for="somatic">Somatic</label>
           <input
             type="checkbox"
+            id="somatic"
             name="system.costs.somatic"
             data-edit="system.costs.somatic"
             {{checked system.costs.somatic}}
+          />
+        </div>
+        <div class="tgrid-item">
+          <label for="proficient">Proficient</label>
+          <input
+            type="checkbox"
+            id="proficient"
+            name="system.forceProficient"
+            data-edit="system.forceProficient"
+            {{checked system.forceProficient}}
+          />
+        </div>
+        <div class="tgrid-item">
+          <label for="fluent">Fluent</label>
+          <input
+            type="checkbox"
+            id="fluent"
+            name="system.forceFluent"
+            data-edit="system.forceFluent"
+            {{checked system.forceFluent}}
           />
         </div>
       </div>
@@ -337,7 +367,9 @@
         {{/if}}
 
         {{! Improvements }}
-        {{#if (not (exists system.improvements.attributeImprovement.attribute))}}
+        {{#if
+          (not (exists system.improvements.attributeImprovement.attribute))
+        }}
           <div class="tgrid-item">
             <button class="ab-menu-button ab-attribute-improvement-button">
               {{{config.icons.add}}}
@@ -353,6 +385,14 @@
             </button>
           </div>
         {{/if}}
+        {{#if (not (exists system.tier))}}
+          <div class="tgrid-item">
+            <button class="ab-menu-button ab-tier-button">
+              {{{config.icons.add}}}
+              Tier
+            </button>
+          </div>
+        {{/if}} 
       </div>
     </div>
   </div>

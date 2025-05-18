@@ -76,7 +76,7 @@ export class TeriockEquipmentSheet extends HandlebarsApplicationMixin(TeriockIte
             '.ab-description-button': 'system.description',
             '.ab-flaws-button': 'system.flaws',
             '.ab-notes-button': 'system.notes',
-            '.ab-tier-button': 'system.fullTier',
+            '.ab-full-tier-button': 'system.fullTier',
             '.ab-mana-storing-button': 'system.manaStoring',
         };
         this._connectButtonMap(buttonMap);
@@ -109,6 +109,19 @@ export class TeriockEquipmentSheet extends HandlebarsApplicationMixin(TeriockIte
                 const current = doc.system[path].filter((v) => v !== val);
                 doc.update({ [`system.${path}`]: current });
             });
+        }
+
+        const staticUpdates = {
+            '.ab-damage-button': { 'system.damage': 2 },
+            '.ab-range-button': { 'system.range': 5 },
+            '.ab-av-button': { 'system.av': 1 },
+            '.ab-bv-button': { 'system.bv': 1 },
+            '.ab-weight-button': { 'system.weight': 1 },
+            '.ab-tier-utton': { 'system.tier': 1 },
+        }
+
+        for (const [selector, update] of Object.entries(staticUpdates)) {
+            this._connect(selector, 'click', () => doc.update(update));
         }
 
         this._connect('.flag-tag-dampened', 'click', () => doc.undampen());

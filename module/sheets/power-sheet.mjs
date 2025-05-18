@@ -6,6 +6,9 @@ import { documentOptions } from "../helpers/constants/document-options.mjs";
 export class TeriockPowerSheet extends HandlebarsApplicationMixin(TeriockItemSheet) {
     static DEFAULT_OPTIONS = {
         classes: ['power'],
+        actions: {
+            toggleProficient: this._toggleProficient,
+        },
         window: {
             icon: "fa-solid fa-" + documentOptions.power.icon,
         },
@@ -18,6 +21,10 @@ export class TeriockPowerSheet extends HandlebarsApplicationMixin(TeriockItemShe
             template: 'systems/teriock/templates/sheets/power-template/power-template.hbs',
         },
     };
+
+    static async _toggleProficient() {
+        await this.item.update({ 'system.proficient': !this.item.system.proficient });
+    }
 
     /** @override */
     async _prepareContext() {

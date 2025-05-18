@@ -62,7 +62,7 @@ export async function parseRank(rawHTML, item) {
             }
         }
     }
-    if (classRank < 2) {
+    if (classRank === 0) {
         const rank0Temp = metaData.getAttribute('data-r0').split(',');
         for (const ability of rank0Temp) {
             if (ability.length > 0) {
@@ -116,9 +116,9 @@ export async function parseRank(rawHTML, item) {
     for (const name of rank3SupportNames) {
         await createAbility(item, name);
     }
-    for (const name of rotatorNames) {
-        await createAbility(item, name);
-    }
+    // for (const name of rotatorNames) {
+    //     await createAbility(item, name);
+    // }
     if (classRank < 2) {
         possibleAbilities.archetype = rank0Abilities;
     }

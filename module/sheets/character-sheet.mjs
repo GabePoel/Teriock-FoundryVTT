@@ -1,6 +1,7 @@
 const { sheets, ux, api } = foundry.applications;
 import { TeriockSheet } from "../mixins/sheet-mixin.mjs";
 import { documentOptions } from "../helpers/constants/document-options.mjs";
+import { primaryBlockerContextMenu, primaryAttackContextMenu, piercingContextMenu } from "./context-menus/character-context-menus.mjs";
 
 export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(TeriockSheet(sheets.ActorSheet)) {
     static DEFAULT_OPTIONS = {
@@ -14,6 +15,10 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(Terioc
             rollManaDie: this._rollManaDie,
             rollTradecraft: this._rollTradecraft,
             rollFeatSave: this._rollFeatSave,
+            toggleSb: this._toggleSb,
+            openPrimaryAttacker: this._openPrimaryAttacker,
+            openPrimaryBlocker: this._openPrimaryBlocker,
+            quickUse: this._quickUse,
         },
         form: {
             submitOnChange: true,
@@ -126,6 +131,29 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(Terioc
     static async _rollFeatSave(event, target) {
         const attribute = target.dataset.attribute;
         this.actor.rollFeatSave(attribute);
+    }
+
+    static async _toggleSb(event, target) {
+        this.document.update({ 'system.sb': !this.document.system.sb });
+    }
+
+    static async _openPrimaryAttacker(event, target) {
+        event.stopPropagation();
+        this.document.system.primaryAttacker.sheet.render(true);
+    }
+
+    static async _openPrimaryBlocker(event, target) {
+        event.stopPropagation();
+        this.document.system.primaryBlocker.sheet.render(true);
+    }
+
+    static async _quickUse(event, target) {
+        event.stopPropagation();
+        const id = target.dataset.id;
+        const item = this.document.items.get(id);
+        if (item) {
+            item.roll();
+        }
     }
 
     /** Generalized filtering utility */
@@ -275,22 +303,6 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(Terioc
         return context;
     }
 
-    _rankContextMenuOptions(id) {
-        const item = this.actor.items.get(id);
-        return [
-            {
-                name: 'Edit',
-                icon: '<i class="fas fa-edit"></i>',
-                callback: () => item?.sheet.render(true),
-            },
-            {
-                name: 'Delete',
-                icon: '<i class="fas fa-trash"></i>',
-                callback: () => item?.delete(),
-            },
-        ];
-    }
-
     _getAbility(id, parentId) {
         return parentId
             ? this.document.items.get(parentId)?.effects.get(id)
@@ -350,7 +362,7 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(Terioc
                 e.stopPropagation();
             });
         });
-        
+
         this.element.querySelectorAll('.character-mana-bar-overlay-row').forEach(el => {
             el.addEventListener('contextmenu', (e) => {
                 e.preventDefault();
@@ -359,7 +371,7 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(Terioc
                 e.stopPropagation();
             });
         });
-           
+
         this.element.querySelectorAll('.die-box').forEach(el => {
             el.addEventListener('contextmenu', (e) => {
                 e.preventDefault();
@@ -384,5 +396,15 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(Terioc
                 e.stopPropagation();
             });
         });
+
+        this.element.querySelector('.character-penalty-box').addEventListener('contextmenu', (e) => {
+            e.preventDefault();
+            this.document.update({ 'system.attackPenalty': 0 });
+            e.stopPropagation();
+        });
+
+        this._connectContextMenu('.character-primary-blocker-select', primaryBlockerContextMenu(this.actor), 'click');
+        this._connectContextMenu('.character-primary-attacker-select', primaryAttackContextMenu(this.actor), 'click');
+        this._connectContextMenu('.character-piercing-box', piercingContextMenu(this.actor), 'click');
     }
 }

@@ -122,6 +122,14 @@ export const TeriockSheet = (Base) =>
             }
         }
 
+        _connectContextMenu(cssClass, options, eventName) {
+            new ux.ContextMenu(this.element, cssClass, options, {
+                eventName,
+                jQuery: false,
+                fixed: false,
+            });
+        }
+
         /** Embedded Helpers */
         _embeddedFromCard(target) {
             const card = target.closest('.tcard');

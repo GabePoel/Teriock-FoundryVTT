@@ -589,10 +589,10 @@
   grid-column: span 8;
 }
 .teriock .thover:hover {
-  color: var(--color-text-selection);
+  color: var(--color-text-selection) !important;
 }
 .teriock .thover:active {
-  color: var(--color-text-secondary);
+  color: var(--color-text-subtle) !important;
 }
 .teriock .ttoggle-button {
   height: var(--input-height);
@@ -651,6 +651,26 @@
 }
 .teriock .toutline {
   outline: 1px solid var(--color-border);
+}
+.teriock .little-title {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+.teriock .little-title .title-left {
+  text-align: left;
+  justify-content: flex-start;
+  display: flex;
+  flex: 1 1 0;
+}
+.teriock .little-title .title-right {
+  text-align: right;
+  justify-content: flex-end;
+  display: flex;
+  flex: 1 1 0;
+  gap: 0.5em;
 }
 .teriock .ab-sheet-sidebar {
   display: none;
@@ -1340,7 +1360,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin: 0.5em;
+  width: 100%;
 }
 .teriock .character-window .character-page .character-shortbox .character-shortbox-value {
   font-size: 1.5em;
@@ -1428,7 +1448,7 @@
   width: inherit;
 }
 .teriock .character-window .character-page .character-sidebar .character-intro-box .character-name {
-  width: 150px;
+  width: calc(100% - 2em);
   margin-top: 1px;
 }
 .teriock .character-window .character-page .character-sidebar .character-intro-box .character-name .character-name-text {
@@ -1554,12 +1574,14 @@
   width: 100%;
 }
 .teriock .character-window .character-page .character-sidebar .character-movement-box {
-  border-bottom: 1px dashed var(--color-text-subtle);
+  border-bottom: 1px dotted var(--color-text-subtle);
   margin-bottom: 0.75em;
   padding-bottom: 0.25em;
 }
+.teriock .character-window .character-page .character-sidebar .defense-box-main,
+.teriock .character-window .character-page .character-sidebar .attack-box-main,
 .teriock .character-window .character-page .character-sidebar .carrying-box-main {
-  border-bottom: 1px dashed var(--color-text-subtle);
+  border-bottom: 1px dotted var(--color-text-subtle);
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -1568,9 +1590,29 @@
   margin-bottom: 0.5em;
   padding-bottom: 0.25em;
 }
+.teriock .character-window .character-page .character-sidebar .defense-box-main input,
+.teriock .character-window .character-page .character-sidebar .attack-box-main input,
 .teriock .character-window .character-page .character-sidebar .carrying-box-main input {
   line-height: unset;
   height: unset;
+}
+.teriock .character-window .character-page .character-sidebar .ch-battle-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 0;
+}
+.teriock .character-window .character-page .character-sidebar .ch-battle-box .defense-box,
+.teriock .character-window .character-page .character-sidebar .ch-battle-box .attack-box {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 0.5em;
+}
+.teriock .character-window .character-page .character-sidebar .ch-battle-box .defense-box {
+  border-bottom: 1px solid var(--color-border);
 }
 .teriock .character-window .character-page .character-sidebar-tabber-container {
   position: absolute;

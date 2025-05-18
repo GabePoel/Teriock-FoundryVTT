@@ -1,0 +1,115 @@
+<div class="ch-battle-box tbox toutline">
+  <div class="defense-box">
+    <div class="defense-box-main">
+      <div class="character-shortbox character-ac-box">
+        <div class="tsubtle tcenter">AC</div>
+        <div class="character-smallbox-value">
+          {{{system.ac}}}
+        </div>
+      </div>
+
+      <div class="character-shortbox character-bv-box">
+        <div class="tsubtle tcenter">BV</div>
+        <div class="character-smallbox-value">
+          {{{system.bv}}}
+        </div>
+      </div>
+
+      <div class="character-shortbox character-cc-box">
+        <div class="tsubtle tcenter">AC + BV</div>
+        <div class="character-smallbox-value">
+          {{{system.cc}}}
+        </div>
+      </div>
+    </div>
+
+    <div class="character-primary-blocker" style="width: 100%;">
+      <div class="tsubtle little-title">
+        <div class="title-left">Blocking With</div>
+        <div class="title-right">
+          {{#if (exists system.sheet.primaryBlocker)}}
+            <i class="fa-regular fa-shield thover" data-action="quickUse" data-id="{{system.primaryBlocker._id}}"></i>
+            <i class="fa-regular fa-arrow-up-right-from-square thover" data-action="openPrimaryBlocker"></i>
+          {{/if}}
+        </div>
+      </div>
+      <div class="thover character-primary-blocker-select">
+        {{#if (exists system.sheet.primaryBlocker)}}
+          {{{system.primaryBlocker.name}}}
+        {{else}}
+          None
+        {{/if}}
+      </div>
+    </div>
+  </div>
+
+  <div class="attack-box">
+    <div class="attack-box-main">
+      <div class="character-shortbox character-piercing-box">
+        <div class="tsubtle tcenter" data-action="piercingChange">Piercing</div>
+        <div class="character-smallbox-value thover">
+          {{#if (or (eq system.piercing "ub") (includes system.primaryAttacker.system.properties "ub"))}}
+            UB
+            {{#if (eq system.piercing "ub")}}*{{/if}}
+          {{else}}
+            {{#if (or (eq system.piercing "av0") (includes system.primaryAttacker.system.properties "av0"))}}
+              AV0
+              {{#if (eq system.piercing "av0")}}*{{/if}}
+            {{else}}
+              <i class="fa-solid fa-xmark thover"></i>
+            {{/if}}
+          {{/if}}
+        </div>
+      </div>
+
+      <div class="character-shortbox character-sb-box" data-action="toggleSb">
+        <div class="tsubtle tcenter">SB</div>
+        <div class="character-smallbox-value">
+          {{#if system.sb}}
+            <i class="fa-solid fa-check thover"></i>
+          {{else}}
+            <i class="fa-solid fa-xmark thover"></i>
+          {{/if}}
+        </div>
+      </div>
+
+      <div class="character-shortbox character-penalty-box">
+        <div class="tsubtle tcenter">Penalty</div>
+        <input
+          type="number"
+          name="system.attackPenalty"
+          value="{{system.attackPenalty}}"
+          class="character-penalty-input character-smallbox-value"
+          max="0"
+        />
+      </div>
+    </div>
+
+    <div class="character-primary-attacker" style="width: 100%;">
+      <div class="tsubtle little-title">
+        <div class="title-left">Attacking With</div>
+        <div class="title-right">
+          {{#if (exists system.sheet.primaryAttacker)}}
+            <i class="fa-regular fa-sword thover" data-action="quickUse" data-id="{{system.primaryAttacker._id}}"></i>
+            <i class="fa-regular fa-arrow-up-right-from-square thover" data-action="openPrimaryAttacker"></i>
+          {{/if}}
+        </div>
+      </div>
+
+      <div class="thover character-primary-attacker-select">
+        {{#if (exists system.sheet.primaryAttacker)}}
+          {{{system.primaryAttacker.name}}}
+        {{else}}
+          None
+        {{/if}}
+      </div>
+
+      {{#if (exists system.primaryAttacker.system.specialRules)}}
+        <div class="tsubtle little-title" style="margin-top: 0.5em;">Special rules</div>
+        <div>
+          {{{system.primaryAttacker.system.specialRules}}}
+        </div>
+      {{/if}}
+    </div>
+  </div>
+</div>

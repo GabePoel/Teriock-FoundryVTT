@@ -89,14 +89,6 @@ export class TeriockItemSheet extends TeriockSheet(sheets.ItemSheet) {
         }
     }
 
-    _connectContextMenu(cssClass, options, eventName) {
-        new ux.ContextMenu(this.element, cssClass, options, {
-            eventName,
-            jQuery: false,
-            fixed: false,
-        });
-    }
-
     _canDragStart() {
         return this.isEditable;
     }

@@ -77,4 +77,18 @@ export const rankOptions = {
             },
         },
     },
+    'journeyman': {
+        name: 'Everyman',
+        icon: 'user',
+        classes: {
+            'tradesman': {
+                name: 'Tradesman',
+                icon: 'tools',
+            },
+            'journeyman': {
+                name: 'Journeyman',
+                icon: 'person-hiking',
+            },
+        }
+    },
 }

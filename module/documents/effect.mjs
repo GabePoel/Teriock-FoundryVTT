@@ -49,4 +49,12 @@ export class TeriockEffect extends TeriockDocument(ActiveEffect) {
   async toggleForceDisabled() {
     await this.setForceDisabled(!this.system.forceDisabled);
   }
+
+  async disable() {
+    await this.setForceDisabled(true);
+  }
+
+  async enable() {
+    await this.setForceDisabled(false);
+  }
 }
