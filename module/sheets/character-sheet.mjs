@@ -419,8 +419,8 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(Terioc
         primaryBlockerContextMenu(this.actor, this._dynamicContextMenus.blocker);
         primaryAttackContextMenu(this.actor, this._dynamicContextMenus.attacker);
 
-        this._connectContextMenu('.character-primary-blocker-select', this._dynamicContextMenus.attacker, 'click');
-        this._connectContextMenu('.character-primary-attacker-select', this._dynamicContextMenus.blocker, 'click');
+        this._connectContextMenu('.character-primary-blocker-select', this._dynamicContextMenus.blocker, 'click');
+        this._connectContextMenu('.character-primary-attacker-select', this._dynamicContextMenus.attacker, 'click');
         this._connectContextMenu('.character-piercing-box', piercingContextMenu(this.actor), 'click');
     }
 }
