@@ -7,7 +7,7 @@
   - [ ] End condition rolls
   - [ ] Image popup windows
   - [ ] Easy damage/drain application
-  - [ ] Wither display
+  - [x] Wither display
   - [x] Attack penalties
   - [x] Advantage/disadvantage listeners
   - [x] Elder Sorcery

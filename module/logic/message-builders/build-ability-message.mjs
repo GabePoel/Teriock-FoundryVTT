@@ -65,6 +65,10 @@ export function buildAbilityMessage(ability) {
     ]
     const blocks = [
         {
+            title: 'Incant',
+            text: src.elderSorceryIncant,
+        },
+        {
             title: 'Mana cost',
             text: src.costs.manaCost,
         },

@@ -19,6 +19,9 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(Terioc
             openPrimaryAttacker: this._openPrimaryAttacker,
             openPrimaryBlocker: this._openPrimaryBlocker,
             quickUse: this._quickUse,
+            takeDamage: this._takeDamage,
+            takeDrain: this._takeDrain,
+            takeWither: this._takeWither,
         },
         form: {
             submitOnChange: true,
@@ -169,6 +172,57 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(Terioc
         }
     }
 
+    static async _takeDamage(event, target) {
+        event.stopPropagation();
+        await api.DialogV2.prompt({
+            window: { title: 'Take Damage' },
+            content: '<input type="number" name="damage" placeholder="Damage Amount">',
+            ok: {
+                label: 'Confirm',
+                callback: (event, button, dialog) => {
+                    let input = button.form.elements.damage.value;
+                    if (input) {
+                        this.document.takeDamage(Number(input));
+                    }
+                }
+            }
+        })
+    }
+
+    static async _takeDrain(event, target) {
+        event.stopPropagation();
+        await api.DialogV2.prompt({
+            window: { title: 'Take Drain' },
+            content: '<input type="number" name="drain" placeholder="Drain Amount">',
+            ok: {
+                label: 'Confirm',
+                callback: (event, button, dialog) => {
+                    let input = button.form.elements.drain.value;
+                    if (input) {
+                        this.document.takeDrain(Number(input));
+                    }
+                }
+            }
+        })
+    }
+
+    static async _takeWither(event, target) {
+        event.stopPropagation();
+        await api.DialogV2.prompt({
+            window: { title: 'Take Wither' },
+            content: '<input type="number" name="wither" placeholder="Wither Amount">',
+            ok: {
+                label: 'Confirm',
+                callback: (event, button, dialog) => {
+                    let input = button.form.elements.wither.value;
+                    if (input) {
+                        this.document.takeWither(Number(input));
+                    }
+                }
+            }
+        })
+    }
+
     /** Generalized filtering utility */
     _filterItems(items, filters, searchKey = 'search') {
         const search = filters[searchKey]?.toLowerCase();
@@ -312,6 +366,7 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(Terioc
                 },
             },
             enrichedNotes: await this._editor(this.document.system.sheet.notes),
+            enrichedSpecialRules: await this._editor(this.document.system.primaryAttacker.system.specialRules),
         };
         console.log(context);
         return context;
