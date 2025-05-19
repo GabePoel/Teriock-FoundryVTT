@@ -36,6 +36,10 @@ export const TeriockSheet = (Base) =>
             },
         };
 
+        static PARTS = {
+            all: { scrollable: ['.window-content', '.tsheet-page'] },
+        }
+
         constructor(...args) {
             super(...args);
             this._menuOpen = false;
