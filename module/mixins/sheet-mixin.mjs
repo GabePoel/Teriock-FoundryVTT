@@ -39,6 +39,7 @@ export const TeriockSheet = (Base) =>
         constructor(...args) {
             super(...args);
             this._menuOpen = false;
+            this._contextMenus = [];
         }
 
         /** @override */
@@ -120,22 +121,21 @@ export const TeriockSheet = (Base) =>
         }
 
         _connectContextMenu(cssClass, options, eventName) {
-            new ux.ContextMenu(this.element, cssClass, options, {
+            const menu = new ux.ContextMenu(this.element, cssClass, options, {
                 eventName,
                 jQuery: false,
                 fixed: false,
             });
+            this._contextMenus.push(menu);
         }
 
-        /** Embedded Helpers */
+
         _embeddedFromCard(target) {
             const card = target.closest('.tcard');
             const { id, type, parentId } = card?.dataset ?? {};
-
             if (type === 'item') {
                 return this.document.items.get(id);
             }
-
             if (type === 'effect') {
                 if (this.document.documentName === 'Actor' && this.document._id !== parentId) {
                     return this.document.items.get(parentId)?.effects.get(id);

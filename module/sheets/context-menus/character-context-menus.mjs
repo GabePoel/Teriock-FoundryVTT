@@ -1,5 +1,6 @@
 export function primaryBlockerContextMenu(actor) {
     const equipped = actor.itemTypes.equipment.filter(i => i.system.equipped && i.system.bv);
+    console.log(equipped);
     equipped.sort((a, b) => (b.system.bv ?? 0) - (a.system.bv ?? 0));
     const blockerOptions = [];
     for (const item of equipped) {
@@ -15,6 +16,7 @@ export function primaryBlockerContextMenu(actor) {
             },
         });
     }
+    console.log(blockerOptions);
     return blockerOptions;
 }
 

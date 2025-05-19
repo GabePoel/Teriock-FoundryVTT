@@ -7,6 +7,8 @@ export default function prepareDerivedData(actor) {
     prepareWeightCarried(actor);
     prepareDefenses(actor);
     prepareOffenses(actor);
+    console.log('Derived data prepared for actor:', actor.name);
+    console.log('Derived data:', actor.system);
 }
 
 function prepareBonuses(actor) {
@@ -41,18 +43,37 @@ function prepareHpMp(actor) {
     Object.assign(actor.system.hp, {
         max: hpMax,
         min: -hpMax / 2,
-        value: Math.min(actor.system.hp.value, hpMax)
+        value: Math.ceil(Math.min(actor.system.hp.value, hpMax)),
     });
     Object.assign(actor.system.mp, {
         max: mpMax,
         min: -mpMax / 2,
-        value: Math.min(actor.system.mp.value, mpMax)
+        value: Math.ceil(Math.min(actor.system.mp.value, mpMax)),
     });
 
     actor.system.sheet.dieBox = { hitDice: hitDieBox, manaDice: manaDieBox };
 }
 
-function preparePresence(actor) { }
+function preparePresence(actor) {
+    const equipped = actor.itemTypes.equipment.filter(i => i.system.equipped);
+    let usp = equipped.reduce((sum, item) => sum + (item.system.tier || 0), 0);
+    usp = Math.min(usp, actor.system.pres);
+
+    const unp = actor.system.pres - usp;
+    Object.assign(actor.system, {
+        unp,
+        usp,
+        attributes: {
+            ...actor.system.attributes,
+            unp: { ...actor.system.attributes.unp, value: unp }
+        },
+        presence: {
+            max: actor.system.pres,
+            min: 0,
+            value: usp
+        }
+    });
+}
 
 function prepareAttributes(actor) {
     const attrs = actor.system.attributes;

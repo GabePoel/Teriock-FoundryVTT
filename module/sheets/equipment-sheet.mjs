@@ -117,7 +117,7 @@ export class TeriockEquipmentSheet extends HandlebarsApplicationMixin(TeriockIte
             '.ab-av-button': { 'system.av': 1 },
             '.ab-bv-button': { 'system.bv': 1 },
             '.ab-weight-button': { 'system.weight': 1 },
-            '.ab-tier-utton': { 'system.tier': 1 },
+            '.ab-tier-button': { 'system.tier': 1 },
         }
 
         for (const [selector, update] of Object.entries(staticUpdates)) {

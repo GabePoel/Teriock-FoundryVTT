@@ -1,4 +1,4 @@
-const { sheets, ux, api } = foundry.applications;
+const { sheets, api } = foundry.applications;
 import { TeriockSheet } from "../mixins/sheet-mixin.mjs";
 import { documentOptions } from "../helpers/constants/document-options.mjs";
 import { primaryBlockerContextMenu, primaryAttackContextMenu, piercingContextMenu } from "./context-menus/character-context-menus.mjs";
@@ -309,6 +309,7 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(Terioc
             },
             enrichedNotes: await this._editor(this.document.system.sheet.notes),
         };
+        console.log(context);
         return context;
     }
 
@@ -411,8 +412,11 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(Terioc
             e.stopPropagation();
         });
 
-        this._connectContextMenu('.character-primary-blocker-select', primaryBlockerContextMenu(this.actor), 'click');
-        this._connectContextMenu('.character-primary-attacker-select', primaryAttackContextMenu(this.actor), 'click');
+        const primaryBlockerContextMenuOptions = primaryBlockerContextMenu(this.actor);
+        const primaryAttackContextMenuOptions = primaryAttackContextMenu(this.actor);
+
+        this._connectContextMenu('.character-primary-blocker-select', primaryBlockerContextMenuOptions, 'click');
+        this._connectContextMenu('.character-primary-attacker-select', primaryAttackContextMenuOptions, 'click');
         this._connectContextMenu('.character-piercing-box', piercingContextMenu(this.actor), 'click');
     }
 }

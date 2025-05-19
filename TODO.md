@@ -6,6 +6,8 @@
   - [ ] Resistance save
   - [ ] End condition rolls
   - [ ] Image popup windows
+  - [ ] Easy damage/drain application
+  - [ ] Wither display
   - [x] Attack penalties
   - [x] Advantage/disadvantage listeners
   - [x] Elder Sorcery
@@ -76,6 +78,7 @@
   - [x] HP/MP costs in ability chat messages
   - [x] Window sizing limitations
   - [x] No context menu on embedded sheets
+  - [ ] **Character sheet context menus not updating**
 - [x] Decisions
   - [x] Should ES be an item or effect/ability?
   - [x] Should items enter equipped?
