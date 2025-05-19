@@ -1,11 +1,7 @@
 const { ux } = foundry.applications;
 const { utils } = foundry;
-
-import {
-    connectEmbedded,
-    createAbility,
-    createResource
-} from "../helpers/sheet-helpers.mjs";
+import { createAbility, createResource } from "../helpers/create-effects.mjs";
+import connectEmbedded from "./connect-embedded.mjs";
 
 export const TeriockSheet = (Base) =>
     class TeriockSheet extends Base {
@@ -135,7 +131,6 @@ export const TeriockSheet = (Base) =>
         _embeddedFromCard(target) {
             const card = target.closest('.tcard');
             const { id, type, parentId } = card?.dataset ?? {};
-            console.log('Embedded from card', card, id, type, parentId);
 
             if (type === 'item') {
                 return this.document.items.get(id);
@@ -160,13 +155,11 @@ export const TeriockSheet = (Base) =>
         }
 
         _onDragOver(_event) {
-            // Optional: Provide visual feedback
+            // TODO: Provide visual feedback.
         }
 
         async _onDrop(event) {
             const data = await ux.TextEditor.getDragEventData(event);
-            console.log('Drop', event, data);
-
             switch (data.type) {
                 case 'ActiveEffect':
                     return this._onDropActiveEffect(event, data);

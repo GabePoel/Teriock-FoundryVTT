@@ -1,15 +1,6 @@
-import { createAbility } from "../../helpers/sheet-helpers.mjs";
+import { createAbility } from "../../helpers/create-effects.mjs";
 
-async function checkContents(folder, name) {
-    for (const item of folder.contents) {
-        if (item.name === name) {
-            return item;
-        }
-    }
-    return null;
-}
-
-export async function parseRank(rawHTML, item) {
+export default async function parseRank(rawHTML, item) {
     const className = item.system.className;
     const classRank = item.system.classRank;
     const archetype = item.system.archetype;
@@ -56,7 +47,7 @@ export async function parseRank(rawHTML, item) {
         const rotatorElements = doc.querySelectorAll('.rotator');
         for (const element of rotatorElements) {
             const abilityName = element.textContent
-            console.log(abilityName)
+            // console.log(abilityName)
             if (abilityName && abilityName.length > 0) {
                 rotatorNames.push(abilityName.trim());
             }
@@ -100,7 +91,6 @@ export async function parseRank(rawHTML, item) {
             }
         }
     }
-    console.log('Rank 0', rank0Names);
     for (const name of rank0Names) {
         await createAbility(item, name);
     }

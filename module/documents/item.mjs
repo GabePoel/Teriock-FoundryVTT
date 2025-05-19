@@ -1,9 +1,9 @@
+const { DialogV2 } = foundry.applications.api;
 import { TeriockDocument } from "../mixins/document-mixin.mjs";
 import { fetchCategoryMembers } from "../helpers/wiki.mjs";
-import { createAbility } from "../helpers/sheet-helpers.mjs";
-import { parseEquipment } from "../helpers/parsers/parse-equipment.mjs";
-import { parseRank } from "../helpers/parsers/parse-rank.mjs";
-const { DialogV2 } = foundry.applications.api;
+import { createAbility } from "../helpers/create-effects.mjs";
+import parseEquipment from "../logic/parsers/parse-equipment.mjs";
+import parseRank from "../logic/parsers/parse-rank.mjs";
 
 /**
  * @extends {Item}
@@ -195,7 +195,7 @@ export class TeriockItem extends TeriockDocument(Item) {
       const hitDie = this.system.hitDie;
       const roll = new Roll(hitDie);
       await roll.evaluate({ async: true });
-      const result = await roll.toMessage({
+      await roll.toMessage({
         speaker: ChatMessage.getSpeaker({ actor: this.actor }),
         flavor: `Hit Die`,
         type: CONST.CHAT_MESSAGE_TYPES.ROLL,
@@ -214,7 +214,7 @@ export class TeriockItem extends TeriockDocument(Item) {
       const manaDie = this.system.manaDie;
       const roll = new Roll(manaDie);
       await roll.evaluate({ async: true });
-      const result = await roll.toMessage({
+      await roll.toMessage({
         speaker: ChatMessage.getSpeaker({ actor: this.actor }),
         flavor: `Mana Die`,
         type: CONST.CHAT_MESSAGE_TYPES.ROLL,

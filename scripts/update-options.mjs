@@ -64,7 +64,7 @@ const writeObjectToFile = async (titleList, exportVarName) => {
     const filePath = path.join(outputDir, `${kebabCase(exportVarName)}.mjs`);
     fs.writeFileSync(filePath, output, 'utf8');
 
-    console.log(`✓ Wrote ${Object.keys(merged).length} items to ${kebabCase(exportVarName)}.mjs`);
+    console.log(`Wrote ${Object.keys(merged).length} items to ${kebabCase(exportVarName)}.mjs`);
 };
 
 (async () => {
@@ -77,28 +77,21 @@ const writeObjectToFile = async (titleList, exportVarName) => {
             'Material properties',
             'Weapon fighting styles'
         ];
-
         const allPropertyMembers = await fetchCategoryMembers('Properties', {
             cmtype: 'page|subcat'
         });
-
         const directPropertyPages = allPropertyMembers
             .filter(m => !m.title.startsWith('Category:'))
             .map(m => m.title.replace(/^Property:/, ''));
-
         const subcategoryPages = new Set();
-
         for (const subcat of subcategoriesToExtract) {
             const members = await fetchCategoryMembers(subcat, { cmtype: 'page' });
-
             let pages = members
                 .filter(m => !m.title.startsWith('Category:'))
                 .map(m => m.title.replace(/^Property:/, ''));
-
             if (subcat === 'Weapon fighting styles') {
                 pages = pages.map(p => p.replace(/ fighting style$/i, ''));
             }
-
             pages.forEach(p => subcategoryPages.add(p));
             await writeObjectToFile(pages, subcat);
         }
@@ -108,26 +101,48 @@ const writeObjectToFile = async (titleList, exportVarName) => {
 
         // === EFFECTS ===
         const effectMembers = await fetchCategoryMembers('Effects', { cmtype: 'subcat' });
-
         const effectGroups = effectMembers
             .filter(m => m.title.startsWith('Category:'))
             .map(m => m.title.replace(/^Category:/, '').replace(/ effects$/i, ''));
-
         await writeObjectToFile(effectGroups, 'effects');
 
-        // === EQUIPMENT CLASSES ===
-        const equipmentMembers = await fetchCategoryMembers('Equipment classes', {
-            cmtype: 'page|subcat'
+        // === EQUIPMENT ===
+        const equipmentMembers = await fetchCategoryMembers('Equipment', {
+            cmtype: 'page'
         });
-
         const equipmentPages = equipmentMembers
             .filter(m => !m.title.startsWith('Category:'))
-            .map(m => m.title.replace(/^.*?:/, ''));
+            .map(m => m.title.replace(/^Equipment:/, ''));
+        await writeObjectToFile(equipmentPages, 'equipment');
 
-        const topSubcats = equipmentMembers
+        // === CONDITIONS ===
+        const conditionMembers = await fetchCategoryMembers('Conditions', {
+            cmtype: 'page'
+        });
+        const conditionPages = conditionMembers
+            .filter(m => !m.title.startsWith('Category:'))
+            .map(m => m.title.replace(/^Condition:/, ''));
+        await writeObjectToFile(conditionPages, 'conditions');
+
+        // === ABILITIES ===
+        const abilityMembers = await fetchCategoryMembers('Abilities', {
+            cmtype: 'page'
+        });
+        const abilityPages = abilityMembers
+            .filter(m => !m.title.startsWith('Category:'))
+            .map(m => m.title.replace(/^Ability:/, ''));
+        await writeObjectToFile(abilityPages, 'abilities');
+
+        // === EQUIPMENT CLASSES ===
+        const equipmentClassMembers = await fetchCategoryMembers('Equipment classes', {
+            cmtype: 'page|subcat'
+        });
+        const equipmentClassPages = equipmentClassMembers
+            .filter(m => !m.title.startsWith('Category:'))
+            .map(m => m.title.replace(/^.*?:/, ''));
+        const topSubcats = equipmentClassMembers
             .filter(m => m.title.startsWith('Category:'))
             .map(m => m.title.replace(/^Category:/, ''));
-
         let nestedSubcats = [];
         for (const subcat of topSubcats) {
             const nestedMembers = await fetchCategoryMembers(subcat, { cmtype: 'subcat' });
@@ -136,13 +151,11 @@ const writeObjectToFile = async (titleList, exportVarName) => {
                 .map(m => m.title.replace(/^Category:/, ''));
             nestedSubcats.push(...nested);
         }
-
         const allEquipmentItems = Array.from(new Set([
-            ...equipmentPages,
+            ...equipmentClassPages,
             ...topSubcats,
             ...nestedSubcats
         ]));
-
         await writeObjectToFile(allEquipmentItems, 'equipmentClasses');
 
     } catch (err) {

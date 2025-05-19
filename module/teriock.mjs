@@ -85,9 +85,9 @@ Hooks.once('init', function () {
 });
 
 
-Hooks.on('updateItem', async (item, updateData, options, userId) => {
-  console.log('updateItem', item, updateData, options, userId);
-});
+// Hooks.on('updateItem', async (item, updateData, options, userId) => {
+//   console.log('updateItem', item, updateData, options, userId);
+// });
 
 
 Hooks.on("hotbarDrop", async (bar, data, slot) => {

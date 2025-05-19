@@ -34,10 +34,10 @@ export const characterTerms = {
     },
     attributes: {
         int: 'INT',
-        str: 'STR',
         mov: 'MOV',
-        snk: 'SNK',
         per: 'PER',
+        snk: 'SNK',
+        str: 'STR',
         unp: 'UNP',
     },
     saves: {

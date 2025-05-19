@@ -91,18 +91,18 @@ async function stageUse(ability, advantage, disadvantage) {
 
 async function use(ability) {
     let message = await ability.buildMessage();
-    const rollData = ability.getActor().rollData();
+    const getRollData = ability.getActor().getRollData();
     if (ability.system.delivery.base == 'weapon') {
         const properties = ability.getActor().system.primaryAttacker?.system?.properties || [];
         if (properties.includes('av0') || properties.includes('ub')) {
-            rollData.av0 = 2;
+            getRollData.av0 = 2;
         }
     }
     if (['av0', 'ub'].includes(ability.system.piercing)) {
-        rollData.av0 = 2;
+        getRollData.av0 = 2;
     }
     message = await foundry.applications.ux.TextEditor.enrichHTML(message);
-    const roll = new TeriockRoll(ability.system.formula, rollData, {
+    const roll = new TeriockRoll(ability.system.formula, getRollData, {
         flavor: message,
     });
     roll.toMessage({

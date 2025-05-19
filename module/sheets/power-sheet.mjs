@@ -30,6 +30,7 @@ export class TeriockPowerSheet extends HandlebarsApplicationMixin(TeriockItemShe
     async _prepareContext() {
         const context = await super._prepareContext();
         context.enrichedDescription = await this._editor(this.item.system.description);
+        context.enrichedFlaws = await this._editor(this.item.system.flaws);
         return context;
     }
 

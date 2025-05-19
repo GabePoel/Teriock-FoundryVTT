@@ -62,24 +62,17 @@ export class TeriockItemSheet extends TeriockSheet(sheets.ItemSheet) {
 
         reloadBtn?.addEventListener('contextmenu', (event) => {
             event.preventDefault();
-            console.log('Reloading wiki page');
             this.item._bulkWikiPull();
         });
 
         chatBtn?.addEventListener('contextmenu', (event) => {
             event.preventDefault();
-            console.log('Debugging');
-            console.log(this.item);
         });
     }
 
     _bindCleanInputs() {
         const cleanMap = {
             '.range-input': cleanFeet,
-            // '.weight-input': cleanPounds,
-            // '.plus-minus-input': cleanPlusMinus,
-            // '.mp-input': cleanMp,
-            // '.hp-input': cleanHp,
         };
 
         for (const [selector, cleaner] of Object.entries(cleanMap)) {

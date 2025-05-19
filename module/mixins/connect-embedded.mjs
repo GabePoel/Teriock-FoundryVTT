@@ -1,46 +1,11 @@
-import { TeriockEffect } from "../documents/effect.mjs";
-import { makeIcon } from "./utils.mjs";
+import { makeIcon } from "../helpers/utils.mjs";
 const { ux } = foundry.applications;
 
-export async function createAbility(document, name) {
-    let abilityName = "New Ability";
-    if (name) {
-        abilityName = name;
-    }
-    const ability = await TeriockEffect.create({
-        name: abilityName,
-        type: "ability",
-        img: "systems/teriock/assets/ability.svg",
-    }, {
-        parent: document,
-    });
-    console.log(ability);
-    if (name) {
-        ability.wikiPull();
-    }
-}
-
-export async function createResource(document, name) {
-    let resourceName = "New Resource";
-    if (name) {
-        resourceName = name;
-    }
-    const resource = await TeriockEffect.create({
-        name: resourceName,
-        type: "resource",
-        img: "systems/teriock/assets/resource.svg",
-    }, {
-        parent: document,
-    });
-    return resource;
-}
-
-export function connectEmbedded(document, element) {
-    console.log("Connecting embedded items");
+export default function connectEmbedded(document, element) {
+    const iconStyle = CONFIG.TERIOCK.iconStyles.contextMenu;
     element.querySelectorAll('.tcard').forEach((el) => {
         const id = el.getAttribute('data-id');
         const parentId = el.getAttribute('data-parent-id');
-        console.log('Connecting embedded', id, parentId);
         const embedded = document.items?.get(id) || document.effects?.get(id) || document.items?.get(parentId)?.effects.get(id);
         if (embedded) {
             new ux.ContextMenu(
@@ -50,7 +15,7 @@ export function connectEmbedded(document, element) {
                     // Non-item Entries
                     {
                         name: 'Enable',
-                        icon: '<i class="fa-solid fa-check"></i>',
+                        icon: makeIcon('check', iconStyle),
                         callback: () => {
                             if (embedded.documentName === 'ActiveEffect') {
                                 embedded.setForceDisabled(false);
@@ -70,7 +35,7 @@ export function connectEmbedded(document, element) {
                     },
                     {
                         name: 'Disable',
-                        icon: '<i class="fa-solid fa-xmark"></i>',
+                        icon: makeIcon('xmark', iconStyle),
                         callback: () => {
                             if (embedded.documentName === 'ActiveEffect') {
                                 embedded.setForceDisabled(true);
@@ -91,7 +56,7 @@ export function connectEmbedded(document, element) {
                     // Item Entries
                     {
                         name: 'Equip',
-                        icon: '<i class="fa-solid fa-check"></i>',
+                        icon: makeIcon('check', iconStyle),
                         callback: () => {
                             embedded.equip();
                         },
@@ -101,7 +66,7 @@ export function connectEmbedded(document, element) {
                     },
                     {
                         name: 'Unequip',
-                        icon: '<i class="fa-solid fa-xmark"></i>',
+                        icon: makeIcon('xmark', iconStyle),
                         callback: () => {
                             embedded.unequip();
                         },
@@ -111,7 +76,7 @@ export function connectEmbedded(document, element) {
                     },
                     {
                         name: 'Glue',
-                        icon: '<i class="fa-solid fa-link"></i>',
+                        icon: makeIcon('link', iconStyle),
                         callback: () => {
                             embedded.update({
                                 'system.glued': !embedded.system.glued,
@@ -123,7 +88,7 @@ export function connectEmbedded(document, element) {
                     },
                     {
                         name: 'Unglue',
-                        icon: '<i class="fa-solid fa-link-slash"></i>',
+                        icon: makeIcon('link-slash', iconStyle),
                         callback: () => {
                             embedded.update({
                                 'system.glued': !embedded.system.glued,
@@ -135,7 +100,7 @@ export function connectEmbedded(document, element) {
                     },
                     {
                         name: 'Shatter',
-                        icon: '<i class="fa-solid fa-wine-glass-crack"></i>',
+                        icon: makeIcon('wine-glass-crack', iconStyle),
                         callback: () => {
                             embedded.shatter();
                         },
@@ -145,7 +110,7 @@ export function connectEmbedded(document, element) {
                     },
                     {
                         name: 'Repair',
-                        icon: '<i class="fa-solid fa-wine-glass"></i>',
+                        icon: makeIcon('wine-glass', iconStyle),
                         callback: () => {
                             embedded.repair();
                         },
@@ -155,7 +120,7 @@ export function connectEmbedded(document, element) {
                     },
                     {
                         name: 'Dampen',
-                        icon: '<i class="fa-solid fa-bell-slash"></i>',
+                        icon: makeIcon('bell-slash', iconStyle),
                         callback: () => {
                             embedded.dampen();
                         },
@@ -165,7 +130,7 @@ export function connectEmbedded(document, element) {
                     },
                     {
                         name: 'Undampen',
-                        icon: '<i class="fa-solid fa-bell"></i>',
+                        icon: makeIcon('bell', iconStyle),
                         callback: () => {
                             embedded.undampen();
                         },
@@ -176,7 +141,7 @@ export function connectEmbedded(document, element) {
                     // General Entries
                     {
                         name: 'Open Source',
-                        icon: '<i class="fa-solid fa-arrow-up-right-from-square"></i>',
+                        icon: makeIcon('arrow-up-right-from-square', iconStyle),
                         callback: () => {
                             const parent = embedded.parent;
                             if (parent) {
@@ -189,17 +154,16 @@ export function connectEmbedded(document, element) {
                     },
                     {
                         name: 'Delete',
-                        icon: '<i class="fas fa-trash"></i>',
+                        icon: makeIcon('trash', iconStyle),
                         callback: () => {
                             embedded.delete();
                         }
                     },
                     {
                         name: 'Duplicate',
-                        icon: '<i class="fas fa-copy"></i>',
+                        icon: makeIcon('copy', iconStyle),
                         callback: async () => {
                             const copy = await foundry.utils.duplicate(embedded)
-                            console.log(copy);
                             embedded.parent.createEmbeddedDocuments(embedded.documentName, [copy], { render: true });
                         }
                     },

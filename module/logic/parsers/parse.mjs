@@ -1,7 +1,7 @@
-import { parseEquipment } from "./parse-equipment.mjs";
-import { parseRank } from "./parse-rank.mjs";
+import parseEquipment from "./parse-equipment.mjs";
+import parseRank from "./parse-rank.mjs";
 
-export async function parse(document, rawHTML) {
+export default async function parse(document, rawHTML) {
     if (document.type === 'equipment') {
         return parseEquipment(rawHTML);
     }

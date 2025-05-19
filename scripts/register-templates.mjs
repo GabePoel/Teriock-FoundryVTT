@@ -53,7 +53,7 @@ function main() {
     const outputContent = generateTemplatePreloadFunction(templatePaths);
 
     fs.writeFileSync(outputFile, outputContent, 'utf8');
-    console.log(`✓ templates.mjs updated with ${templatePaths.length} templates.`);
+    console.log(`templates.mjs updated with ${templatePaths.length} templates.`);
 }
 
 main();

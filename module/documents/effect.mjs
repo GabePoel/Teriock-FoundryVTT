@@ -1,5 +1,5 @@
 import { TeriockDocument } from "../mixins/document-mixin.mjs";
-import { parseAbility } from "../helpers/parsers/parse-ability.mjs";
+import parseAbility from "../logic/parsers/parse-ability.mjs";
 
 /**
  * @extends {ActiveEffect}

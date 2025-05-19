@@ -1,7 +1,6 @@
-import { fetchWikiPageHTML } from "../helpers/wiki.mjs";
-import { buildMessage } from "../helpers/message-builders/build.mjs";
-import { makeRoll } from "../helpers/rollers/rolling.mjs";
-import { openWikiPage } from "../helpers/wiki.mjs";
+import { fetchWikiPageHTML, openWikiPage } from "../helpers/wiki.mjs";
+import { buildMessage } from "../logic/message-builders/build.mjs";
+import { makeRoll } from "../logic/rollers/rolling.mjs";
 
 export const TeriockDocument = (Base) => class TeriockDocument extends Base {
 
@@ -81,7 +80,6 @@ export const TeriockDocument = (Base) => class TeriockDocument extends Base {
     async wikiPull() {
         if (this.system.wikiNamespace) {
             const pageTitle = this.getWikiPage();
-            console.log('Pulling wiki page', pageTitle);
             const wikiPage = await fetchWikiPageHTML(pageTitle);
             if (wikiPage) {
                 const parsed = await this.parse(wikiPage, this.document);

@@ -9,6 +9,9 @@ import { powerOptions } from "./constants/power-options.mjs";
 import { equipmentOptions } from "./constants/equipment-options.mjs";
 import { documentOptions } from "./constants/document-options.mjs";
 import { characterOptions } from "./constants/character-options.mjs";
+import { abilities } from "./constants/generated/abilities.mjs";
+import { equipment } from "./constants/generated/equipment.mjs";
+import { conditions } from "./constants/generated/conditions.mjs";
 
 export const TERIOCK = {
   icons: icons,
@@ -28,4 +31,7 @@ export const TERIOCK = {
   equipmentOptions: equipmentOptions,
   documentOptions: documentOptions,
   characterOptions: characterOptions,
+  abilities: abilities,
+  equipment: equipment,
+  conditions: conditions,
 }

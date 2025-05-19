@@ -152,7 +152,6 @@ function barIcon(parent, iconClass, first = true) {
     icon.style.fontSize = '1em';
     container.appendChild(icon);
     if (parent.querySelector('.abm-bar-icon')) {
-        console.log(parent.querySelector('.abm-bar-icon'));
         parent.querySelector('.abm-bar-icon').appendChild(container);
     } else {
         if (first) {

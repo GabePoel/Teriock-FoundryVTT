@@ -364,7 +364,6 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(Terioc
 
         this.element.querySelectorAll('.character-hit-bar-overlay-row').forEach(el => {
             el.addEventListener('contextmenu', (e) => {
-                console.log('Hit bar context menu');
                 e.preventDefault();
                 hitDrawer.classList.toggle('closed');
                 this._hitDrawerOpen = !this._hitDrawerOpen;

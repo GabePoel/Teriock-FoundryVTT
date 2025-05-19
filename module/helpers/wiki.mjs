@@ -25,11 +25,9 @@ export async function fetchWikiPageContent(title) {
     const page = Object.values(pages)[0];
 
     const content = page.revisions?.[0]?.slots?.main['*'] || page.revisions?.[0]['*'];
-
-    console.log(content);
     return content;
   } catch (error) {
-    console.error('Error fetching page:', error);
+    console.error('Error fetching page:', title, error);
   }
 }
 
@@ -111,10 +109,9 @@ export async function fetchCategoryMembers(category) {
       cmcontinue = data.continue?.cmcontinue;
     } while (cmcontinue);
 
-    console.log(members);
     return members;
   } catch (error) {
-    console.error('Error fetching category members:', error);
+    console.error('Error fetching category members:', category, error);
     return [];
   }
 }

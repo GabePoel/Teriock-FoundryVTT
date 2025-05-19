@@ -1,6 +1,6 @@
-import { cleanFeet, cleanMp, cleanHp } from "../../helpers/clean.mjs";
+import { cleanFeet } from "../../helpers/clean.mjs";
 
-export function parseAbility(rawHTML, ability) {
+export default function parseAbility(rawHTML, ability) {
     const parser = new DOMParser();
     const doc = parser.parseFromString(rawHTML, 'text/html');
 
@@ -16,9 +16,8 @@ export function parseAbility(rawHTML, ability) {
         }
     });
 
-    // const allElements = doc.querySelectorAll('[class]');
     const allElements = doc.querySelectorAll('.tag-container');
-    console.log(allElements);
+    // console.log(allElements);
     const masterTaggedLists = [];
 
     allElements.forEach(el => {
@@ -33,8 +32,6 @@ export function parseAbility(rawHTML, ability) {
 
     const tagSubs = doc.querySelectorAll('.tag-sub');
     tagSubs.forEach(el => el.remove());
-
-    // console.log('Master list of cleaned tagged classes:', masterTaggedLists);
 
     const tagTree = {};
 
@@ -51,7 +48,7 @@ export function parseAbility(rawHTML, ability) {
         }
     });
 
-    console.log(tagTree);
+    // console.log(tagTree);
 
     function getBarText(selector, clean = false) {
         const elements = doc.querySelectorAll('.ability-bar-' + selector + ' .ability-bar-content');
@@ -79,11 +76,8 @@ export function parseAbility(rawHTML, ability) {
 
     function getText(selector) {
         const elements = doc.querySelectorAll('.' + selector);
-        // return Array.from(elements).map(el => el.textContent.trim())[0] || null;
         return Array.from(elements).map(el => el.innerHTML)[0] || null;
     }
-
-    // console.log(parameters);
 
     const referenceAbility = new ActiveEffect({
         name: 'Reference Ability',
@@ -113,7 +107,7 @@ export function parseAbility(rawHTML, ability) {
     if ((!parameters.executionTime) && tagTree.executionTime) {
         parameters.executionTime = tagTree.executionTime[0];
     }
-    console.log(parameters.executionTime);
+    // console.log(parameters.executionTime);
     if (parameters.executionTime == "passive") {
         parameters.maneuver = 'passive';
     } else if (parameters.executionTime && CONFIG.TERIOCK.abilityOptions.executionTime.active[parameters.executionTime]) {
@@ -210,7 +204,6 @@ export function parseAbility(rawHTML, ability) {
         });
     }
 
-    // parameters.attributeImprovement = Array.from(attributeImprovementElement.classList);
     if (tagTree.skill) {
         parameters.skill = true;
     }
@@ -299,8 +292,7 @@ export function parseAbility(rawHTML, ability) {
         parameters.abilityType = 'intrinsic';
     }
 
-    console.log(ability);
-    // Special Overrides
+    // console.log(ability);
     if (ability.name == "Unbreachability") {
         changes.push({
             key: 'system.wornAc',

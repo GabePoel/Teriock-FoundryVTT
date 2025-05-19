@@ -77,7 +77,7 @@ export const rankOptions = {
             },
         },
     },
-    'journeyman': {
+    'everyman': {
         name: 'Everyman',
         icon: 'user',
         classes: {

@@ -1,7 +1,7 @@
-import { cleanFeet, cleanPounds, cleanValue, cleanDamage, cleanAv, cleanBv, cleanStr } from "../../helpers/clean.mjs";
+import { cleanFeet, cleanValue } from "../../helpers/clean.mjs";
 import { toCamelCaseList } from "../../helpers/utils.mjs";
 
-export function parseEquipment(rawHTML) {
+export default function parseEquipment(rawHTML) {
     const parser = new DOMParser();
     const doc = parser.parseFromString(rawHTML, 'text/html');
     function getValue(selector) {
@@ -32,7 +32,7 @@ export function parseEquipment(rawHTML) {
         type: 'equipment',
     })
     const parameters = foundry.utils.deepClone(referenceEquipment.system);
-    console.log('parameters', parameters);
+    // console.log('parameters', parameters);
 
     if (getText('.damage')) {
         // parameters.damage = cleanDamage(getText('.damage'));
