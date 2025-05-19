@@ -12,7 +12,7 @@ async function use(fluency, options) {
     } else if (options?.disadvantage) {
         rollFormula = '2d20kl1';
     }
-    rollFormula += ' + @f + @' + fluency.tradecraft;
+    rollFormula += ' + @f + @' + fluency.system.tradecraft;
     message = await foundry.applications.ux.TextEditor.enrichHTML(message);
     const roll = new TeriockRoll(rollFormula, fluency.getActor()?.getRollData(), { flavor: message });
     roll.toMessage({

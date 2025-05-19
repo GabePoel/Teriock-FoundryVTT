@@ -366,7 +366,7 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(Terioc
                 },
             },
             enrichedNotes: await this._editor(this.document.system.sheet.notes),
-            enrichedSpecialRules: await this._editor(this.document.system.primaryAttacker.system.specialRules),
+            enrichedSpecialRules: await this._editor(this.document.system.primaryAttacker?.system?.specialRules),
         };
         console.log(context);
         return context;

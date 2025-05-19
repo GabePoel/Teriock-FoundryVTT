@@ -4,6 +4,7 @@ export default function getRollData(actor) {
     attackData(actor, data);
     classRanksData(actor, data);
     tradecraftsData(actor, data);
+    console.log('Roll Data:', data);
     return data;
 }
 

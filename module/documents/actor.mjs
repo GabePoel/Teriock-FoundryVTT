@@ -45,9 +45,9 @@ export class TeriockActor extends Actor {
     const data = this.system.tradecrafts[tradecraft];
     let formula = '1d20';
     if (options?.advantage) {
-      formula += 'kh1';
+      formula = '2d20kh1';
     } else if (options?.disadvantage) {
-      formula += 'kl1';
+      formula = '2d20kl1';
     }
     if (data.proficient) formula += ' + @p';
     if (data.extra) formula += ` + @${tradecraft}`;
