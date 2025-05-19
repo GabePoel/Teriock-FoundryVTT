@@ -1,4 +1,4 @@
-export function primaryBlockerContextMenu(actor) {
+export function primaryBlockerContextMenu(actor, options) {
     const equipped = actor.itemTypes.equipment.filter(i => i.system.equipped && i.system.bv);
     console.log(equipped);
     equipped.sort((a, b) => (b.system.bv ?? 0) - (a.system.bv ?? 0));
@@ -16,11 +16,12 @@ export function primaryBlockerContextMenu(actor) {
             },
         });
     }
-    console.log(blockerOptions);
-    return blockerOptions;
+    options.length = 0;
+    options.push(...blockerOptions);
+    return options;
 }
 
-export function primaryAttackContextMenu(actor) {
+export function primaryAttackContextMenu(actor, options) {
     const equipped = actor.itemTypes.equipment.filter(i => i.system.equipped && (i.system.properties?.includes("weapon") || i.system.properties?.includes("bashing")));
     const attackOptions = [];
     for (const item of equipped) {
@@ -40,7 +41,9 @@ export function primaryAttackContextMenu(actor) {
             },
         });
     }
-    return attackOptions;
+    options.length = 0;
+    options.push(...attackOptions);
+    return options;
 }
 
 export function piercingContextMenu(actor) {

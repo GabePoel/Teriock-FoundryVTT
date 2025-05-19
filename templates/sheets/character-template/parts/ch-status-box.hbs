@@ -116,6 +116,61 @@
         </div>
       </div>
     </div>
+    <!-- Wither Bar Start -->
+    <div class="character-status-bar-box">
+      <div class="character-wither-bar-container character-bar-container">
+        <div class="character-wither-bar character-bar toutline">
+          <div
+            class="character-bar-left"
+            style="width: {{barLeft
+              system.wither.value
+              system.wither.max
+              0
+            }}%;"
+          ></div>
+          <div
+            class="character-bar-temp"
+            style="width: {{barTemp
+              system.wither.value
+              system.wither.max
+              0
+            }}%;"
+          ></div>
+          <div
+            class="character-bar-lost"
+            style="width: {{barLost
+              system.wither.value
+              system.wither.max
+              0
+            }}%;"
+          ></div>
+        </div>
+        <div class="character-bar-overlay">
+          <div class="character-bar-overlay-row character-wither-bar-overlay-row">
+            <input
+              type="number"
+              name="system.wither.value"
+              value="{{system.wither.value}}"
+              class="character-bar-overlay-left character-bar-overlay-label"
+              max="{{system.wither.max}}"
+              min="{{system.wither.min}}"
+            />
+            <div class="character-bar-overlay-max character-bar-overlay-label">
+              <span>/ {{system.wither.max}}</span>
+            </div>
+            {{!-- <input
+              type="number"
+              name="system.wither.temp"
+              value="{{system.wither.temp}}"
+              class="character-bar-overlay-temp character-bar-overlay-label"
+              placeholder="0"
+              min="0"
+            /> --}}
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Wither Bar End -->
     <div class="character-presence-container character-bar-container toutline">
       <div
         class="character-presence-bar"

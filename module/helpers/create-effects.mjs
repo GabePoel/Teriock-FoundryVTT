@@ -1,33 +1,20 @@
 import { TeriockEffect } from "../documents/effect.mjs";
 
-export async function createAbility(document, name) {
-    let abilityName = "New Ability";
-    if (name) {
-        abilityName = name;
-    }
+export async function createAbility(document, name = "New Ability") {
     const ability = await TeriockEffect.create({
-        name: abilityName,
+        name,
         type: "ability",
         img: "systems/teriock/assets/ability.svg",
-    }, {
-        parent: document,
-    });
-    if (name) {
+    }, { parent: document });
+    if (name !== "New Ability") {
         ability.wikiPull();
     }
 }
 
-export async function createResource(document, name) {
-    let resourceName = "New Resource";
-    if (name) {
-        resourceName = name;
-    }
-    const resource = await TeriockEffect.create({
-        name: resourceName,
+export async function createResource(document, name = "New Resource") {
+    return await TeriockEffect.create({
+        name,
         type: "resource",
         img: "systems/teriock/assets/resource.svg",
-    }, {
-        parent: document,
-    });
-    return resource;
+    }, { parent: document });
 }

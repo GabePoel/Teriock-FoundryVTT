@@ -11,11 +11,25 @@ export function buildPowerMessage(power) {
             ]
         }
     ]
+    if (power.system.type == 'species') {
+        bars.push({
+            icon: 'fa-user',
+            wrappers: [
+                power.system.size ? 'Size ' + power.system.size : '',
+                power.system.adult ? 'Adult at ' + power.system.adult : '',
+                power.system.lifespan ? power.system.lifespan + ' Year Lifespan' : 'Infinite Lifespan',
+            ]
+        })
+    }
     const blocks = [
         {
             title: 'Description',
             text: src.description,
         },
+        {
+            title: 'Other Flaws',
+            text: src.flaws,
+        }
     ]
     addAbilitiesBlock(power.transferredEffects, blocks);
     return {

@@ -43,6 +43,10 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(Terioc
         this._sidebarOpen = true;
         this._hitDrawerOpen = true;
         this._manaDrawerOpen = true;
+        this._dynamicContextMenus = {
+            attacker: [],
+            blocker: [],
+        }
     }
 
     static async _toggleEquippedDoc(event, target) {
@@ -53,50 +57,50 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(Terioc
         this._embeddedFromCard(target)?.toggleDisabled();
     }
 
-    static async _addEmbedded(event, target) {
+    static async _addEmbedded(_, target) {
         const tab = target.dataset.tab;
         if (tab === 'ability') {
-            const effect = await this.actor.createEmbeddedDocuments('ActiveEffect', [{
+            const effects = await this.actor.createEmbeddedDocuments('ActiveEffect', [{
                 name: 'New Ability',
                 img: 'systems/teriock/assets/ability.svg',
                 type: 'ability',
             }]);
-            effect.sheet.render(true);
+            if (effects[0]?.sheet) effects[0].sheet.render(true);
         } else if (tab === 'resource') {
-            const effect = await this.actor.createEmbeddedDocuments('ActiveEffect', [{
+            const effects = await this.actor.createEmbeddedDocuments('ActiveEffect', [{
                 name: 'New Resource',
                 img: 'systems/teriock/assets/resource.svg',
                 type: 'resource',
             }]);
-            effect.sheet.render(true);
+            if (effects[0]?.sheet) effects[0].sheet.render(true);
         } else if (tab === 'equipment') {
-            const item = await this.actor.createEmbeddedDocuments('Item', [{
+            const items = await this.actor.createEmbeddedDocuments('Item', [{
                 name: 'New Equipment',
                 img: 'systems/teriock/assets/equipment.svg',
                 type: 'equipment',
             }]);
-            item.sheet.render(true);
+            if (items[0]?.sheet) items[0].sheet.render(true);
         } else if (tab === 'power') {
-            const item = await this.actor.createEmbeddedDocuments('Item', [{
+            const items = await this.actor.createEmbeddedDocuments('Item', [{
                 name: 'New Power',
                 img: 'systems/teriock/assets/power.svg',
                 type: 'power',
             }]);
-            item.sheet.render(true);
+            if (items[0]?.sheet) items[0].sheet.render(true);
         } else if (tab === 'rank') {
-            const item = await this.actor.createEmbeddedDocuments('Item', [{
+            const items = await this.actor.createEmbeddedDocuments('Item', [{
                 name: 'New Rank',
                 img: 'systems/teriock/assets/rank.svg',
                 type: 'rank',
             }]);
-            item.sheet.render(true);
+            if (items[0]?.sheet) items[0].sheet.render(true);
         } else if (tab === 'fluency') {
-            const item = await this.actor.createEmbeddedDocuments('Item', [{
+            const items = await this.actor.createEmbeddedDocuments('Item', [{
                 name: 'New Fluency',
                 img: 'systems/teriock/assets/fluency.svg',
                 type: 'fluency',
             }]);
-            item.sheet.render(true);
+            if (items[0]?.sheet) items[0].sheet.render(true);
         }
     }
 
@@ -412,11 +416,11 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(Terioc
             e.stopPropagation();
         });
 
-        const primaryBlockerContextMenuOptions = primaryBlockerContextMenu(this.actor);
-        const primaryAttackContextMenuOptions = primaryAttackContextMenu(this.actor);
+        primaryBlockerContextMenu(this.actor, this._dynamicContextMenus.blocker);
+        primaryAttackContextMenu(this.actor, this._dynamicContextMenus.attacker);
 
-        this._connectContextMenu('.character-primary-blocker-select', primaryBlockerContextMenuOptions, 'click');
-        this._connectContextMenu('.character-primary-attacker-select', primaryAttackContextMenuOptions, 'click');
+        this._connectContextMenu('.character-primary-blocker-select', this._dynamicContextMenus.attacker, 'click');
+        this._connectContextMenu('.character-primary-attacker-select', this._dynamicContextMenus.blocker, 'click');
         this._connectContextMenu('.character-piercing-box', piercingContextMenu(this.actor), 'click');
     }
 }

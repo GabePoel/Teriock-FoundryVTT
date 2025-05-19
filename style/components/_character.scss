@@ -18,6 +18,9 @@ $mp-green: var(--color-level-success);
 $mp-yellow-darkest: var(--color-level-warning-bg);
 $mp-yellow-dark: var(--color-level-warning-border);
 $mp-yellow: var(--color-level-warning);
+$mp-grey-darkest: var(--color-dark-2);
+$mp-grey-dark: var(--color-dark-3);
+$mp-grey: var(--color-dark-4);
 
 .character-tabber {
   position: relative;
@@ -269,6 +272,27 @@ $mp-yellow: var(--color-level-warning);
                 }
                 .character-bar-lost {
                   background-color: $mp-blue-darkest;
+                }
+              }
+              &.character-wither-bar {
+                border: 2px solid $mp-grey;
+                .character-bar-left {
+                  background-color: $mp-grey;
+                }
+                .character-bar-temp {
+                  background-image: repeating-linear-gradient(
+                    135deg,
+                    $mp-grey 0px,
+                    $mp-grey 2px,
+                    $mp-grey-dark 2px,
+                    $mp-grey-dark 8px
+                      /* gap between lines: 2px line + 6px gap */
+                  );
+                  border-left: 2px solid $mp-grey;
+                  border-right: 2px solid $mp-grey;
+                }
+                .character-bar-lost {
+                  background-color: $mp-grey-darkest;
                 }
               }
               .character-bar-left {

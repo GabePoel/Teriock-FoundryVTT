@@ -78,7 +78,7 @@
   - [x] HP/MP costs in ability chat messages
   - [x] Window sizing limitations
   - [x] No context menu on embedded sheets
-  - [ ] **Character sheet context menus not updating**
+  - [x] Character sheet context menus not updating
 - [x] Decisions
   - [x] Should ES be an item or effect/ability?
   - [x] Should items enter equipped?

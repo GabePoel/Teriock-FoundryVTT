@@ -7,8 +7,6 @@ export default function prepareDerivedData(actor) {
     prepareWeightCarried(actor);
     prepareDefenses(actor);
     prepareOffenses(actor);
-    console.log('Derived data prepared for actor:', actor.name);
-    console.log('Derived data:', actor.system);
 }
 
 function prepareBonuses(actor) {
@@ -42,13 +40,13 @@ function prepareHpMp(actor) {
 
     Object.assign(actor.system.hp, {
         max: hpMax,
-        min: -hpMax / 2,
-        value: Math.ceil(Math.min(actor.system.hp.value, hpMax)),
+        min: -Math.floor(hpMax / 2),
+        value: Math.min(actor.system.hp.value, hpMax),
     });
     Object.assign(actor.system.mp, {
         max: mpMax,
-        min: -mpMax / 2,
-        value: Math.ceil(Math.min(actor.system.mp.value, mpMax)),
+        min: -Math.floor(mpMax / 2),
+        value: Math.min(actor.system.mp.value, mpMax),
     });
 
     actor.system.sheet.dieBox = { hitDice: hitDieBox, manaDice: manaDieBox };
