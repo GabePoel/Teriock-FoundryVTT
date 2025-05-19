@@ -78,7 +78,12 @@ function prepareAttributes(actor) {
 
     for (const key of Object.keys(attrs)) {
         const attr = attrs[key];
-        const bonus = attr.fluent ? actor.system.f : attr.proficient ? actor.system.p : 0;
+        let bonus = 0;
+        if (attr.saveFluent) {
+            bonus = actor.system.f;
+        } else if (attr.saveProficient) {
+            bonus = actor.system.p;
+        }
         actor.system[`${key}Save`] = attr.value + bonus;
     }
 

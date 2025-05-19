@@ -63,9 +63,9 @@ export class TeriockActor extends Actor {
     const bonus = this.system[`${attribute}Save`] || 0;
     let formula = '1d20';
     if (options?.advantage) {
-      formula += 'kh1';
+      formula = '2d20kh1';
     } else if (options?.disadvantage) {
-      formula += 'kl1';
+      formula = '2d20kl1';
     }
     formula += ` + ${bonus}`
     new Roll(formula).evaluate({ async: true }).then(result => {

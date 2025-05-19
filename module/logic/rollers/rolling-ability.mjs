@@ -22,9 +22,9 @@ async function stageUse(ability, advantage, disadvantage) {
     if (ability.system.interaction == 'attack') {
         rollFormula += '1d20'
         if (advantage) {
-            rollFormula += 'kh1';
+            rollFormula = '2d20kh1';
         } else if (disadvantage) {
-            rollFormula += 'kl1';
+            rollFormula = '2d20kl1';
         }
         rollFormula += ' + @atkPen + @av0 + @sb';
     } else if (ability.system.interaction == 'feat') {
