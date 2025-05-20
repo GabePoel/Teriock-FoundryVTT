@@ -13,7 +13,6 @@ export class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(TeriockS
     };
 
     static PARTS = {
-        header: { template: 'systems/teriock/templates/common/header.hbs' },
         all: {
             scrollable: ['.window-content', '.tsheet-page'],
             template: 'systems/teriock/templates/sheets/ability-template/ability-template.hbs'
