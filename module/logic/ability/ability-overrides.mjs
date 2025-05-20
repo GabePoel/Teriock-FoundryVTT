@@ -150,6 +150,13 @@ export default function abilityOverrides(ability, changes) {
             value: 4,
             priority: 20,
         })
+    } else if (ability.name.startsWith("Cannot Swim")) {
+        changes.push({
+            key: 'system.speedAdjustments.swim',
+            mode: 6,
+            value: 0,
+            priority: 30,
+        })
     }
     return changes;
 }
