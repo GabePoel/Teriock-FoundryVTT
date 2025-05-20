@@ -131,7 +131,7 @@ function prepareDefenses(actor) {
     actor.system.bv = actor.system.primaryBlocker?.system.bv || 0;
     const equipped = actor.itemTypes.equipment.filter(i => i.system.equipped);
     let ac = 10;
-    actor.system.av = equipped.reduce((max, item) => Math.max(max, item.system.av || 0), 0);
+    actor.system.av = Math.max(equipped.reduce((max, item) => Math.max(max, item.system.av || 0), 0), actor.system.naturalAv || 0);
     ac += actor.system.av;
     actor.system.hasArmor = equipped.some(item =>
         Array.isArray(item.system.equipmentClasses) &&
