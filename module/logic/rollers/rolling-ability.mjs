@@ -8,6 +8,41 @@ export async function rollAbility(ability, options) {
     await use(ability);
 }
 
+async function attackMessage(ability, roll) {
+    const targets = game.user.targets;
+    let targetsHit = [];
+    let targetsMissed = [];
+    for (const target of targets) {
+        const targetActor = target.actor;
+        const ac = targetActor.system.ac;
+        const rollResult = roll.total;
+        const hit = rollResult >= ac;
+        if (hit) {
+            targetsHit.push(targetActor);
+        } else {
+            targetsMissed.push(targetActor);
+        }
+    }
+    let message = '';
+    if (targetsHit.length > 0) {
+        message += `<p><b>Targets hit</b></p>`;
+        message += `<ul>`;
+        for (const target of targetsHit) {
+            message += `<li>${target.name}</li>`;
+        }
+        message += `</ul>`;
+    }
+    if (targetsMissed.length > 0) {
+        message += `<p><b>Targets missed</b></p>`;
+        message += `<ul>`;
+        for (const target of targetsMissed) {
+            message += `<li>${target.name}</li>`;
+        }
+        message += `</ul>`;
+    }
+    return message;
+}
+
 async function stageUse(ability, advantage, disadvantage) {
     ability.system.mpCost = 0;
     ability.system.hpCost = 0;
@@ -105,6 +140,11 @@ async function use(ability) {
     const roll = new TeriockRoll(ability.system.formula, getRollData, {
         flavor: message,
     });
+    // if (ability.system.interaction == 'attack') {
+    //     await roll.evaluate({ async: true });
+    //     const attackMsg = await attackMessage(ability, roll);
+    //     roll.options.flavor += attackMsg;
+    // }
     roll.toMessage({
         speaker: ChatMessage.getSpeaker({
             actor: ability.getActor(),
@@ -123,4 +163,5 @@ async function use(ability) {
     ability.system.hpCost = 0;
     ability.system.heightenedAmount = 0;
     ability.system.formula = null;
+    return roll;
 }

@@ -89,6 +89,18 @@ Hooks.once('init', function () {
 //   console.log('updateItem', item, updateData, options, userId);
 // });
 
+Hooks.on('combatTurnChange', async (combat, prior, current) => {
+  const combatants = combat.combatants;
+  for (const combatant of combatants) {
+    const actor = combatant.actor;
+    if (actor) {
+      await actor.update({
+        'system.attackPenalty': 0,
+      });
+    }
+  }
+});
+
 
 Hooks.on("hotbarDrop", async (bar, data, slot) => {
   setTimeout(async () => {
