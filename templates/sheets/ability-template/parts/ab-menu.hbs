@@ -229,6 +229,22 @@
             </button>
           </div>
         {{/if}}
+        {{#if (not (exists system.limitation))}}
+          <div class="tgrid-item">
+            <button class="ab-menu-button ab-limitation-button">
+              {{{config.icons.add}}}
+              Limitation
+            </button>
+          </div>
+        {{/if}}
+        {{#if (not (exists system.improvement))}}
+          <div class="tgrid-item">
+            <button class="ab-menu-button ab-improvement-button">
+              {{{config.icons.add}}}
+              Improvement
+            </button>
+          </div>
+        {{/if}}
 
         {{! Overview }}
         {{#if (not (exists system.overview.base))}}
@@ -392,14 +408,6 @@
             <button class="ab-menu-button ab-feat-save-improvement-button">
               {{{config.icons.add}}}
               Feat Save Improvement
-            </button>
-          </div>
-        {{/if}}
-        {{#if (not (exists system.tier))}}
-          <div class="tgrid-item">
-            <button class="ab-menu-button ab-tier-button">
-              {{{config.icons.add}}}
-              Tier
             </button>
           </div>
         {{/if}}

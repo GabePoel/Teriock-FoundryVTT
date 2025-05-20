@@ -56,6 +56,8 @@ export class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(TeriockS
             endCondition: system.endCondition,
             requirements: system.requirements,
             elderSorceryIncant: system.elderSorceryIncant,
+            limitation: system.limitation,
+            improvement: system.improvement,
         };
 
         for (const [key, value] of Object.entries(editors)) {
@@ -100,6 +102,8 @@ export class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(TeriockS
         const buttonMap = {
             '.ab-material-cost-button': 'system.costs.materialCost',
             '.ab-trigger-button': 'system.trigger',
+            '.ab-limitation-button': 'system.limitation',
+            '.ab-improvement-button': 'system.improvement',
             '.ab-base-button': 'system.overview.base',
             '.ab-proficient-button': 'system.overview.proficient',
             '.ab-fluent-button': 'system.overview.fluent',

@@ -10,6 +10,7 @@ export const preloadHandlebarsTemplates = async function () {
     'systems/teriock/templates/sheets/ability-template/bars/ab-expansion-bar.hbs',
     'systems/teriock/templates/sheets/ability-template/bars/ab-status-bar.hbs',
     'systems/teriock/templates/sheets/ability-template/bars/ab-targeting-bar.hbs',
+    'systems/teriock/templates/sheets/ability-template/entries/ab-alteration-entries.hbs',
     'systems/teriock/templates/sheets/ability-template/entries/ab-attack-entries.hbs',
     'systems/teriock/templates/sheets/ability-template/entries/ab-block-entries.hbs',
     'systems/teriock/templates/sheets/ability-template/entries/ab-costs-entries.hbs',
