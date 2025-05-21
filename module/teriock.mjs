@@ -9,6 +9,7 @@ import { TeriockRankSheet } from './sheets/rank-sheet.mjs';
 import { TeriockFluencySheet } from './sheets/fluency-sheet.mjs';
 import { TeriockPowerSheet } from './sheets/power-sheet.mjs';
 import { TeriockRoll } from './dice/roll.mjs'
+import { TeriockHarmRoll } from './dice/harm.mjs';
 import { preloadHandlebarsTemplates } from './helpers/templates.mjs';
 import { registerHandlebarsHelpers } from './helpers/register-handlebars.mjs';
 import { TERIOCK } from './helpers/config.mjs';
@@ -25,6 +26,7 @@ Hooks.once('init', function () {
   };
 
   CONFIG.Dice.rolls.push(TeriockRoll);
+  CONFIG.Dice.rolls.push(TeriockHarmRoll);
   CONFIG.Actor.documentClass = TeriockActor;
   CONFIG.Item.documentClass = TeriockItem;
   CONFIG.ActiveEffect.documentClass = TeriockEffect;
@@ -100,6 +102,34 @@ Hooks.on('combatTurnChange', async (combat, prior, current) => {
     }
   }
 });
+
+Hooks.on('renderChatMessageHTML', (message, html, context) => {
+  console.log('renderChatMessageHTML', message, html, context);
+  const buttons = html.querySelectorAll('.harm-button');
+  buttons.forEach(button => {
+    if (button) {
+      button.addEventListener('click', async (event) => {
+        const data = event.currentTarget.dataset;
+        const amount = parseInt(data.amount);
+        const type = data.type || 'damage';
+        const targets = game.user.targets;
+
+        for (const target of targets) {
+          const actor = target.actor;
+          if (!actor) continue;
+          if (type === 'damage') {
+            await actor.takeDamage(amount);
+          } else if (type === 'drain') {
+            await actor.takeDrain(amount);
+          } else if (type === 'wither') {
+            await actor.takeWither(amount);
+          }
+        }
+      });
+    }
+  });
+});
+
 
 
 Hooks.on("hotbarDrop", async (bar, data, slot) => {

@@ -1,4 +1,4 @@
-import { TeriockRoll } from "../../dice/roll.mjs";
+import { TeriockHarmRoll } from "../../dice/harm.mjs";
 
 export async function rollEquipment(equipment, options) {
     await use(equipment, options);
@@ -15,7 +15,7 @@ async function use(equipment, options) {
             });
         }
         message = await foundry.applications.ux.TextEditor.enrichHTML(message);
-        const roll = new TeriockRoll(rollFormula, equipment.getActor()?.getRollData(), { flavor: message });
+        const roll = new TeriockHarmRoll(rollFormula, equipment.getActor()?.getRollData(), { flavor: message });
         roll.toMessage({
             speaker: ChatMessage.getSpeaker({
                 actor: equipment.getActor(),
