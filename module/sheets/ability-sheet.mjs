@@ -171,6 +171,7 @@ export class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(TeriockS
             '.flag-tag-invoked': 'system.costs.invoked',
             '.flag-tag-verbal': 'system.costs.verbal',
             '.flag-tag-somatic': 'system.costs.somatic',
+            '.flag-elder-sorcery': 'system.elderSorcery',
         };
 
         for (const [selector, param] of Object.entries(tags)) {

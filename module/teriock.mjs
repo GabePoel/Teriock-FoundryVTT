@@ -10,6 +10,7 @@ import { TeriockFluencySheet } from './sheets/fluency-sheet.mjs';
 import { TeriockPowerSheet } from './sheets/power-sheet.mjs';
 import { TeriockRoll } from './dice/roll.mjs'
 import { TeriockHarmRoll } from './dice/harm.mjs';
+import { TeriockElderSorceryRoll } from './dice/elder-sorcery.mjs';
 import { preloadHandlebarsTemplates } from './helpers/templates.mjs';
 import { registerHandlebarsHelpers } from './helpers/register-handlebars.mjs';
 import { TERIOCK } from './helpers/config.mjs';
@@ -27,6 +28,7 @@ Hooks.once('init', function () {
 
   CONFIG.Dice.rolls.push(TeriockRoll);
   CONFIG.Dice.rolls.push(TeriockHarmRoll);
+  CONFIG.Dice.rolls.push(TeriockElderSorceryRoll);
   CONFIG.Actor.documentClass = TeriockActor;
   CONFIG.Item.documentClass = TeriockItem;
   CONFIG.ActiveEffect.documentClass = TeriockEffect;

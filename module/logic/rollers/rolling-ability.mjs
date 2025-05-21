@@ -1,4 +1,5 @@
 import { TeriockRoll } from "../../dice/roll.mjs";
+import { TeriockElderSorceryRoll } from "../../dice/elder-sorcery.mjs";
 const { DialogV2 } = foundry.applications.api
 
 export async function rollAbility(ability, options) {
@@ -137,9 +138,16 @@ async function use(ability) {
         getRollData.av0 = 2;
     }
     message = await foundry.applications.ux.TextEditor.enrichHTML(message);
-    const roll = new TeriockRoll(ability.system.formula, getRollData, {
-        flavor: message,
-    });
+    let roll;
+    if (ability.system.elderSorcery) {
+        roll = new TeriockElderSorceryRoll(ability.system.formula, getRollData, {
+            flavor: message,
+        });
+    } else {
+        roll = new TeriockRoll(ability.system.formula, getRollData, {
+            flavor: message,
+        });
+    }
     // if (ability.system.interaction == 'attack') {
     //     await roll.evaluate({ async: true });
     //     const attackMsg = await attackMessage(ability, roll);

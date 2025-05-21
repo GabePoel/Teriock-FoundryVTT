@@ -59,6 +59,7 @@ export function buildAbilityMessage(ability) {
         {
             icon: 'fa-sparkle',
             wrappers: [
+                src.elderSorcery ? 'Elder Sorcery' : '',
                 ...src.effects.map(effect => ref.effects[effect])
             ]
         }
