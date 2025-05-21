@@ -293,6 +293,9 @@ export default function parseAbility(rawHTML, ability) {
         parameters.abilityType = 'intrinsic';
     }
 
+    delete parameters.improvement,
+    delete parameters.limitation,
+
     abilityOverrides(ability, changes);
     const out = {
         'changes': changes,
