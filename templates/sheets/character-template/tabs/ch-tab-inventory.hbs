@@ -4,13 +4,21 @@
     <div class="tcard-display">
       <div class="money-panels tgrid g3">
         {{#each config.currencyOptions as |currency id|}}
-          <div class="money-panel">
-            <input type="number" class="money-panel-input" data-action="updateCurrency" name="system.money.{{id}}" value="{{lookup ../system.sheet.money id}}" />
-            <div class="money-subtitle tsubtle">
-              {{currency.name}} / {{currency.value}} ₲
+          <div class="money-panel tgrid g4">
+            <input type="number" class="tgrid-item gi1 money-panel-input tgrid-item tcenter" data-action="updateCurrency" name="system.money.{{id}}" value="{{lookup ../system.money id}}" />
+            <div class="money-info tsubtle tcenter tgrid-item gi3">
+              <div class="money-name">
+                {{currency.name}}
+              </div>
+              <div class="money-value">
+                ({{currency.value}} ₲, {{currency.weight}} lb)
+              </div>
             </div>
           </div>
         {{/each}}
+      </div>
+      <div class="money-total">
+        {{system.money.total}} ₲&nbsp;&nbsp;&nbsp;&nbsp;{{system.moneyWeight}} lb
       </div>
     </div>
 

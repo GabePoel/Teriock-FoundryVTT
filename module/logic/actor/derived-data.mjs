@@ -4,6 +4,7 @@ export default function prepareDerivedData(actor) {
     preparePresence(actor);
     prepareAttributes(actor);
     prepareTradecrafts(actor);
+    prepareMoney(actor);
     prepareWeightCarried(actor);
     prepareDefenses(actor);
     prepareOffenses(actor);
@@ -114,11 +115,29 @@ function prepareTradecrafts(actor) {
     }
 }
 
+function prepareMoney(actor) {
+    const money = actor.system.money;
+    const currencyOptions = CONFIG.TERIOCK.currencyOptions;
+    const total = Object.keys(currencyOptions).reduce((sum, key) => {
+        const value = (money[key] || 0) * currencyOptions[key].value;
+        return sum + value;
+    }, 0);
+    const totalWeight = Object.keys(currencyOptions).reduce((sum, key) => {
+        const value = (money[key] || 0) * currencyOptions[key].weight;
+        return sum + value;
+    }, 0);
+    actor.system.money.total = total;
+    actor.system.moneyWeight = Math.round(totalWeight * 100) / 100 || 0;
+}
+
 function prepareWeightCarried(actor) {
     const weight = actor.itemTypes.equipment
         .filter(i => i.system.equipped)
-        .reduce((sum, i) => sum + (i.system.weight || 0), 0);
-    actor.system.weightCarried = weight;
+        .reduce((sum, i) => {
+            return sum + (i.system.weight || 0);
+        }, 0);
+    const moneyWeight = Number(actor.system.moneyWeight) || 0;
+    actor.system.weightCarried = Math.ceil(weight + moneyWeight);
 }
 
 function prepareDefenses(actor) {

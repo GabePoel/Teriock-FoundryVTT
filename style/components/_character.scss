@@ -158,7 +158,7 @@ $mp-grey: var(--color-dark-4);
       input {
         color: var(--color-light-3);
       }
-      @container (max-width: 750px) {
+      @container (max-width: 775px) {
         height: 100%;
         position: absolute;
         left: 0;
@@ -665,6 +665,48 @@ $mp-grey: var(--color-dark-4);
       color: var(--color-text-subtle);
     }
   }
+}
+
+.money-panels {
+  border-bottom: 1px dashed var(--color-form-hint);
+  margin-bottom: 0.5em;
+  padding-bottom: 0.5em;
+  column-gap: 0;
+  .money-panel {
+    align-items: center;
+    justify-content: end;
+    width: 100%;
+    gap: 0.5em;
+    outline: 2px solid transparent;
+    transition: all 0.2s ease-in-out;
+    border-radius: 2px;
+    &:focus-within {
+      outline: 2px solid var(--color-warm-2);
+    }
+    .money-info {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      width: 100%;
+      .money-name {
+        color: var(--color-text-secondary);
+      }
+    }
+    .money-panel-input {
+      background: none;
+      border: none;
+      outline: none;
+      font-size: large;
+      margin: 0;
+      padding: 0;
+    }
+  }
+}
+.money-total {
+  height: 2em;
+  display: flex;
+  align-items: center;
 }
 
 .die-drawer {
