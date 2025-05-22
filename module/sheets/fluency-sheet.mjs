@@ -10,9 +10,6 @@ export class TeriockFluencySheet extends HandlebarsApplicationMixin(TeriockItemS
         },
     };
     static PARTS = {
-        header: {
-            template: 'systems/teriock/templates/common/header.hbs',
-        },
         all: {
             template: 'systems/teriock/templates/sheets/fluency-template/fluency-template.hbs',
         },

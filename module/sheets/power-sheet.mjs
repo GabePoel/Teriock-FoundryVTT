@@ -14,9 +14,6 @@ export class TeriockPowerSheet extends HandlebarsApplicationMixin(TeriockItemShe
         },
     };
     static PARTS = {
-        header: {
-            template: 'systems/teriock/templates/common/header.hbs',
-        },
         all: {
             template: 'systems/teriock/templates/sheets/power-template/power-template.hbs',
         },

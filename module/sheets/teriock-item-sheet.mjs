@@ -15,12 +15,6 @@ export class TeriockItemSheet extends TeriockSheet(sheets.ItemSheet) {
         dragDrop: [{ dragSelector: '.draggable', dropSelector: null }],
     };
 
-    static PARTS = {
-        all: {
-            template: 'systems/teriock/templates/common/header.hbs',
-        },
-    };
-
     /** @override */
     constructor(...args) {
         super(...args);

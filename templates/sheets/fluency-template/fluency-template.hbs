@@ -1,62 +1,65 @@
 <div class="{{cssClass}} tsheet-page" autocomplete="off">
-  <div class="ab-sheet-top">
-    <div class="ab-bars">
-      <div class="ab-bar ab-bar-1">
-        <div class="ab-box-container">
-          <div class="ab-box field-box">
-            <div class="ab-box-icon">
-              <i
-                class="fa-light fa-{{lookup (lookup config.tradecraftOptions system.field) "icon"}}"
-              ></i>
-            </div>
-            <div class="ab-box-content">
-              {{lookup (lookup config.tradecraftOptions system.field) "name"}}
+    <div class="ab-sheet-everything">
+    {{> "systems/teriock/templates/common/header.hbs"}}
+    <div class="ab-sheet-top">
+      <div class="ab-bars">
+        <div class="ab-bar ab-bar-1">
+          <div class="ab-box-container">
+            <div class="ab-box field-box">
+              <div class="ab-box-icon">
+                <i
+                  class="fa-light fa-{{lookup (lookup config.tradecraftOptions system.field) "icon"}}"
+                ></i>
+              </div>
+              <div class="ab-box-content">
+                {{lookup (lookup config.tradecraftOptions system.field) "name"}}
+              </div>
             </div>
           </div>
-        </div>
-        <div class="ab-box-container">
-          <div class="ab-box tradecraft-box">
-            <div class="ab-box-icon">
-              <i
-                class="fa-light fa-{{lookup
-                    (lookup
+          <div class="ab-box-container">
+            <div class="ab-box tradecraft-box">
+              <div class="ab-box-icon">
+                <i
+                  class="fa-light fa-{{lookup
                       (lookup
-                        (lookup config.tradecraftOptions system.field)
-                        'tradecrafts'
+                        (lookup
+                          (lookup config.tradecraftOptions system.field)
+                          'tradecrafts'
+                        )
+                        system.tradecraft
                       )
-                      system.tradecraft
-                    )
-                    'icon'
-                  }}"
-              ></i>
-            </div>
-            <div class="ab-box-content">
-              {{lookup
-                (lookup
+                      'icon'
+                    }}"
+                ></i>
+              </div>
+              <div class="ab-box-content">
+                {{lookup
                   (lookup
-                    (lookup config.tradecraftOptions system.field) "tradecrafts"
+                    (lookup
+                      (lookup config.tradecraftOptions system.field) "tradecrafts"
+                    )
+                    system.tradecraft
                   )
-                  system.tradecraft
-                )
-                "name"
-              }}
+                  "name"
+                }}
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="ab-main">
-    <div class="ab-section-container">
-      <div class="ab-section">
-        <span class="ab-section-title">Description</span>
+    <div class="ab-main">
+      <div class="ab-section-container">
+        <div class="ab-section">
+          <span class="ab-section-title">Description</span>
+        </div>
+        <prose-mirror
+          name="system.description"
+          value="{{system.description}}"
+          toggled=true
+          editable=editable
+        >{{{enrichedDescription}}}</prose-mirror>
       </div>
-      <prose-mirror
-        name="system.description"
-        value="{{system.description}}"
-        toggled=true
-        editable=editable
-      >{{{enrichedDescription}}}</prose-mirror>
     </div>
   </div>
 </div>

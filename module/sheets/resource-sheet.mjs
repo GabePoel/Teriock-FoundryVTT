@@ -10,9 +10,6 @@ export class TeriockResourceSheet extends api.HandlebarsApplicationMixin(Teriock
         },
     };
     static PARTS = {
-        header: {
-            template: 'systems/teriock/templates/common/header.hbs',
-        },
         all: {
             template: 'systems/teriock/templates/sheets/resource-template/resource-template.hbs',
         },

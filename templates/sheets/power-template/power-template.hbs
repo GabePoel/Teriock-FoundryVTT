@@ -1,22 +1,25 @@
 <div class="{{cssClass}} tsheet-page" autocomplete="off">
-  <div class="ab-sheet-top">
-    <div class="ab-bars">
-      {{> "systems/teriock/templates/sheets/power-template/bars/pw-status-bar.hbs" }}
-      {{> "systems/teriock/templates/sheets/power-template/bars/pw-lifespan-bar.hbs" }}
+  <div class="ab-sheet-everything">
+    {{> "systems/teriock/templates/common/header.hbs"}}
+    <div class="ab-sheet-top">
+      <div class="ab-bars">
+        {{> "systems/teriock/templates/sheets/power-template/bars/pw-status-bar.hbs" }}
+        {{> "systems/teriock/templates/sheets/power-template/bars/pw-lifespan-bar.hbs" }}
+      </div>
     </div>
-  </div>
-  <div class="sheet-main-container">
+    <div class="sheet-main-container">
+      <div class="ab-main">
+        {{> "systems/teriock/templates/sheets/power-template/entries/pw-description.hbs" }}
+        {{> "systems/teriock/templates/sheets/power-template/entries/pw-flaws.hbs" }}
+      </div>
+      <div class="ab-main">
+        <button class="createAbility" data-action="createAbility">Add Ability</button>
+        {{abilityCards abilities system}}
+      </div>
+    </div>
     <div class="ab-main">
-      {{> "systems/teriock/templates/sheets/power-template/entries/pw-description.hbs" }}
-      {{> "systems/teriock/templates/sheets/power-template/entries/pw-flaws.hbs" }}
+      <button class="createResource" data-action="createResource">Add Resource</button>
+      {{abilityCards resources system}}
     </div>
-    <div class="ab-main">
-      <button class="createAbility" data-action="createAbility">Add Ability</button>
-      {{abilityCards abilities system}}
-    </div>
-  </div>
-  <div class="ab-main">
-    <button class="createResource" data-action="createResource">Add Resource</button>
-    {{abilityCards resources system}}
   </div>
 </div>

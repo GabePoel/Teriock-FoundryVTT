@@ -18,7 +18,6 @@ export class TeriockEquipmentSheet extends HandlebarsApplicationMixin(TeriockIte
     };
 
     static PARTS = {
-        header: { template: 'systems/teriock/templates/common/header.hbs' },
         all: { template: 'systems/teriock/templates/sheets/equipment-template/equipment-template.hbs' },
     };
 
