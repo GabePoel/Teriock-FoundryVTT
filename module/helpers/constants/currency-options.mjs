@@ -1,14 +1,14 @@
 export const currencyOptions = {
-    copper: {
-        name: 'Copper',
-        value: 0.01,
-        weight: 0.02,
-    },
-    silver: {
-        name: 'Silver',
-        value: 0.1,
-        weight: 0.02,
-    },
+    // copper: {
+    //     name: 'Copper',
+    //     value: 0.01,
+    //     weight: 0.02,
+    // },
+    // silver: {
+    //     name: 'Silver',
+    //     value: 0.1,
+    //     weight: 0.02,
+    // },
     gold: {
         name: 'Gold',
         value: 1,
@@ -43,5 +43,15 @@ export const currencyOptions = {
         name: 'Moon Opal',
         value: 500,
         weight: 0.2,
-    }
+    },
+    magusQuartz: {
+        name: 'Magus Quartz',
+        value: 1000,
+        weight: 0.2,
+    },
+    heartstoneRuby: {
+        name: 'Heartstone Ruby',
+        value: 5000,
+        weight: 0.2,
+    },
 }

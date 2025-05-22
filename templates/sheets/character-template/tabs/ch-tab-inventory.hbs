@@ -5,7 +5,7 @@
       <div class="money-panels tgrid g3">
         {{#each config.currencyOptions as |currency id|}}
           <div class="money-panel tgrid g4">
-            <input type="number" class="tgrid-item gi1 money-panel-input tgrid-item tcenter" data-action="updateCurrency" name="system.money.{{id}}" value="{{lookup ../system.money id}}" />
+            <input type="number" class="tgrid-item gi1 money-panel-input tgrid-item tcenter" data-action="updateCurrency" name="system.money.{{id}}" value="{{lookup ../system.money id}}" min="0"/>
             <div class="money-info tsubtle tcenter tgrid-item gi3">
               <div class="money-name">
                 {{currency.name}}
@@ -46,8 +46,8 @@
             amount=item.system.quantity
             max=item.system.maxQuantity
             icons=(concat
-              (ticon "comment" action="chatDoc" id=item._id)
-              (ticonToggle "circle-check" "circle" item.system.equipped action="toggleEquippedDoc" id=item._id parentId=item.parent._id)
+              (ticon "comment" action="chatDoc" id=item._id tooltip="Chat")
+              (ticonToggle "circle-check" "circle" item.system.equipped action="toggleEquippedDoc" id=item._id parentId=item.parent._id tooltipTrue="Equipped" tooltipFalse="Unequipped")
             )
           }}
         {{/each}}

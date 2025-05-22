@@ -9,39 +9,41 @@
       <h4 class="dice-total">{{total}}</h4>
     </div>
   {{/if}}
-  <div
-    class="button-box"
-    style="display: flex; gap: 6px; flex-direction: row; margin-top: 6px; order: 3;"
-  >
-    <button
-      style="flex: 1;"
-      class="harm-button"
-      data-type="damage"
-      data-action="takeDamage"
-      data-amount="{{total}}"
+  {{#if (and (exists total) (exists formula))}}
+    <div
+      class="button-box"
+      style="display: flex; gap: 6px; flex-direction: row; margin-top: 6px; order: 3;"
     >
-      <i class="fa-solid fa-heart"></i>
-      Damage
-    </button>
-    <button
-      style="flex: 1;"
-      class="harm-button"
-      data-type="drain"
-      data-action="takeDrain"
-      data-amount="{{total}}"
-    >
-      <i class="fa-solid fa-brain"></i>
-      Drain
-    </button>
-    <button
-      style="flex: 1;"
-      class="harm-button"
-      data-type="wither"
-      data-action="takeWither"
-      data-amount="{{total}}"
-    >
-      <i class="fa-solid fa-hourglass-half"></i>
-      Wither
-    </button>
-  </div>
+      <button
+        style="flex: 1;"
+        class="harm-button"
+        data-type="damage"
+        data-action="takeDamage"
+        data-amount="{{total}}"
+      >
+        <i class="fa-solid fa-heart"></i>
+        Damage
+      </button>
+      <button
+        style="flex: 1;"
+        class="harm-button"
+        data-type="drain"
+        data-action="takeDrain"
+        data-amount="{{total}}"
+      >
+        <i class="fa-solid fa-brain"></i>
+        Drain
+      </button>
+      <button
+        style="flex: 1;"
+        class="harm-button"
+        data-type="wither"
+        data-action="takeWither"
+        data-amount="{{total}}"
+      >
+        <i class="fa-solid fa-hourglass-half"></i>
+        Wither
+      </button>
+    </div>
+  {{/if}}
 </div>

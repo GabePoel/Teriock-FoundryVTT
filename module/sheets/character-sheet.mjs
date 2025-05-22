@@ -357,6 +357,7 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(Terioc
             ranks: this._getFilteredRanks(),
             name: this.actor.name,
             img: this.actor.img,
+            sidebarOpen: this._sidebarOpen,
             tabs: {
                 classes: {
                     cssClass: this.tabGroups.primary === 'classes' ? 'active' : '',

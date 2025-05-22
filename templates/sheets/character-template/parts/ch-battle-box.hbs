@@ -28,12 +28,12 @@
         <div class="title-left">Blocking With</div>
         <div class="title-right">
           {{#if (exists system.sheet.primaryBlocker)}}
-            <i class="fa-regular fa-shield thover" data-action="quickUse" data-id="{{system.primaryBlocker._id}}"></i>
-            <i class="fa-regular fa-arrow-up-right-from-square thover" data-action="openPrimaryBlocker"></i>
+            <i class="fa-regular fa-shield thover" data-action="quickUse" data-id="{{system.primaryBlocker._id}}" data-tooltip="Roll Block"></i>
+            <i class="fa-regular fa-arrow-up-right-from-square thover" data-action="openPrimaryBlocker" data-tooltip="Open"></i>
           {{/if}}
         </div>
       </div>
-      <div class="thover character-primary-blocker-select">
+      <div class="thover character-primary-blocker-select" data-tooltip="Block Item">
         {{#if (exists system.sheet.primaryBlocker)}}
           {{{system.primaryBlocker.name}}}
         {{else}}
@@ -90,13 +90,13 @@
         <div class="title-left">Attacking With</div>
         <div class="title-right">
           {{#if (exists system.sheet.primaryAttacker)}}
-            <i class="fa-regular fa-sword thover" data-action="quickUse" data-id="{{system.primaryAttacker._id}}"></i>
-            <i class="fa-regular fa-arrow-up-right-from-square thover" data-action="openPrimaryAttacker"></i>
+            <i class="fa-regular fa-sword thover" data-action="quickUse" data-id="{{system.primaryAttacker._id}}" data-tooltip="Roll Damage"></i>
+            <i class="fa-regular fa-arrow-up-right-from-square thover" data-action="openPrimaryAttacker" data-tooltip="Open"></i>
           {{/if}}
         </div>
       </div>
 
-      <div class="thover character-primary-attacker-select">
+      <div class="thover character-primary-attacker-select" data-tooltip="Attack Item">
         {{#if (exists system.sheet.primaryAttacker)}}
           {{{system.primaryAttacker.name}}}
         {{else}}

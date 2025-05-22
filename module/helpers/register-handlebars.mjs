@@ -146,11 +146,12 @@ export function registerHandlebarsHelpers() {
     Handlebars.registerHelper('ttoggle', bool => `ttoggle-button${bool ? ' toggled' : ''}`);
 
     Handlebars.registerHelper('ticon', (icon, options) => {
-        const { cssClass = '', id, parentId, action, style = 'light' } = options.hash;
+        const { cssClass = '', id, parentId, action, style = 'light', tooltip = '' } = options.hash;
         const attrs = [
             id ? `data-id="${id}"` : '',
             parentId ? `data-parent-id="${parentId}"` : '',
-            action ? `data-action="${action}"` : ''
+            action ? `data-action="${action}"` : '',
+            tooltip ? `data-tooltip="${tooltip}"` : '',
         ].join(' ');
         return new Handlebars.SafeString(
             `<i class="ticon tcard-clickable ${cssClass} fa-fw fa-${style} fa-${icon}" ${attrs}></i>`
@@ -158,14 +159,16 @@ export function registerHandlebarsHelpers() {
     });
 
     Handlebars.registerHelper('ticonToggle', (iconTrue, iconFalse, bool, options) => {
-        const { cssClass = '', id, parentId, action, falseAction = true } = options.hash;
+        const { cssClass = '', id, parentId, action, falseAction = true, tooltipTrue = '', tooltipFalse = '' } = options.hash;
         const icon = bool ? iconTrue : iconFalse;
         const actionAttr = (bool || falseAction) && action ? `data-action="${action}"` : '';
+        const tooltipAttr = (bool || falseAction) && action ? `data-tooltip="${bool ? tooltipTrue : tooltipFalse}"` : '';
         return new Handlebars.SafeString(`
             <i class="ticon tcard-clickable ${cssClass} fa-fw fa-light fa-${icon}" 
             ${id ? `data-id="${id}"` : ''} 
             ${parentId ? `data-parent-id="${parentId}"` : ''} 
-            ${actionAttr}></i>
+            ${actionAttr}
+            ${tooltipAttr}></i>
         `);
     });
 
@@ -299,13 +302,13 @@ export function registerHandlebarsHelpers() {
         const parentIdAttr = parentId ? `data-parent-id="${parentId}"` : '';
         const typeAttr = type ? `data-type="${type}"` : '';
         const subtitleDiv = consumable
-            ? `<div class="tcard-subtitle tcard-clickable" data-action="useOneDoc">${amount}${max ? ` / ${max}` : ' remaining'}</div>`
+            ? `<div class="tcard-subtitle tcard-clickable" data-action="useOneDoc" data-tooltip="Consume One">${amount}${max ? ` / ${max}` : ' remaining'}</div>`
             : `<div class="tcard-subtitle">${subtitle}</div>`;
 
         return new Handlebars.SafeString(`
             <div class="tcard ${draggable ? 'draggable' : ''} ${active ? 'active' : 'inactive'} ${shattered ? 'shattered' : ''}" ${idAttr} ${parentIdAttr} ${typeAttr} data-action="openDoc">
             <div class="tcard-marker" style="${marker ? `background-color: ${marker}; width: 4px; min-width: 4px;` : ''}"></div>
-            <div class="tcard-image" data-action="rollDoc"><img src="${img}" alt="${title}" /></div>
+            <div class="tcard-image" data-action="rollDoc" data-tooltip="Use"><img src="${img}" alt="${title}" /></div>
             <div class="tcard-body">
                 <div class="tcard-titles">
                 <div class="tcard-title">${title}</div>
@@ -332,10 +335,10 @@ export function registerHandlebarsHelpers() {
             const subtitle = Handlebars.helpers.executionTime(ability.system?.maneuver, ability.system?.executionTime);
             const marker = Handlebars.helpers.abilityMarker(ability);
             const chatIcon = Handlebars.helpers.ticon("comment", {
-                hash: { action: "chatDoc", id: ability._id, parentId: ability.parent?._id }
+                hash: { action: "chatDoc", id: ability._id, parentId: ability.parent?._id, tooltip: "Chat" }
             });
             const enableIcon = Handlebars.helpers.ticonToggle("circle", "circle-check", ability.disabled, {
-                hash: { action: "toggleForceDisabledDoc", id: ability._id, parentId: ability.parent?._id }
+                hash: { action: "toggleForceDisabledDoc", id: ability._id, parentId: ability.parent?._id, tooltipTrue: "Disabled", tooltipFalse: "Enabled" }
             });
 
             return Handlebars.helpers.tcard({
