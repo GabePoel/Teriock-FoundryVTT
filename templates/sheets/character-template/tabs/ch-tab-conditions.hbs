@@ -3,7 +3,10 @@
   <div class="character-tab-page">
     {{#each conditions as |condition|}}
       <div class="tcard-display condition-display">
-        <h4>{{{lookup (lookup ../config.content.conditions condition) 'name'}}}</h4>
+        <div class="condition-header">
+          <h4>{{{lookup (lookup ../config.content.conditions condition) 'name'}}}</h4>
+          <img src="{{{lookup (lookup ../config.content.conditions condition) 'img'}}}" alt="{{{lookup (lookup ../config.content.conditions condition) 'name'}}}" data-action="removeCondition" data-condition="{{condition}}" data-tooltip="Remove Condition"/>
+        </div>
         {{{lookup (lookup ../config.content.conditions condition) 'content'}}}
       </div>
     {{/each}}

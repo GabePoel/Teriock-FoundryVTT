@@ -22,6 +22,7 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(Terioc
             takeDamage: this._takeDamage,
             takeDrain: this._takeDrain,
             takeWither: this._takeWither,
+            removeCondition: this._removeCondition,
         },
         form: {
             submitOnChange: true,
@@ -223,6 +224,12 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(Terioc
         })
     }
 
+    static async _removeCondition(event, target) {
+        event.stopPropagation();
+        const condition = target.dataset.condition;
+        this.actor.toggleStatusEffect(condition);
+    }
+
     /** Generalized filtering utility */
     _filterItems(items, filters, searchKey = 'search') {
         const search = filters[searchKey]?.toLowerCase();
@@ -349,6 +356,24 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(Terioc
 
     /** @override */
     async _prepareContext() {
+        let conditions = Array.from(this.actor.statuses || []);
+        // Sort: 'down' first, 'dead' second, rest alphabetical
+        conditions.sort((a, b) => {
+            if (a === 'dead') return -1;
+            if (b === 'dead') return 1;
+            if (a === 'unconscious') return b === 'dead' ? 1 : -1;
+            if (b === 'unconscious') return a === 'dead' ? -1 : 1;
+            if (a === 'down') {
+                if (b === 'dead' || b === 'unconscious') return 1;
+                return -1;
+            }
+            if (b === 'down') {
+                if (a === 'dead' || a === 'unconscious') return -1;
+                return 1;
+            }
+            return a.localeCompare(b);
+        });
+
         const context = {
             config: CONFIG.TERIOCK,
             editable: this.isEditable,
@@ -375,7 +400,7 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(Terioc
             },
             enrichedNotes: await this._editor(this.document.system.sheet.notes),
             enrichedSpecialRules: await this._editor(this.document.system.primaryAttacker?.system?.specialRules),
-            conditions: this.actor.statuses,
+            conditions,
         };
         console.log('context', context);
         return context;

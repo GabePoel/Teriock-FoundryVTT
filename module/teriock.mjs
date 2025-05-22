@@ -27,10 +27,25 @@ Hooks.once('init', function () {
     decimals: 2,
   };
 
-  CONFIG.statusEffects = []
+  CONFIG.statusEffects = [];
   for (const condition of Object.values(conditions)) {
     CONFIG.statusEffects.push(condition);
   }
+  CONFIG.statusEffects.sort((a, b) => {
+    if (a.id === 'dead') return -1;
+    if (b.id === 'dead') return 1;
+    if (a.id === 'unconscious') return b.id === 'dead' ? 1 : -1;
+    if (b.id === 'unconscious') return a.id === 'dead' ? -1 : 1;
+    if (a.id === 'down') {
+      if (b.id === 'dead' || b.id === 'unconscious') return 1;
+      return -1;
+    }
+    if (b.id === 'down') {
+      if (a.id === 'dead' || a.id === 'unconscious') return -1;
+      return 1;
+    }
+    return a.id.localeCompare(b.id);
+  });
 
   CONFIG.Dice.rolls.push(TeriockRoll);
   CONFIG.Dice.rolls.push(TeriockHarmRoll);
@@ -138,6 +153,14 @@ Hooks.on('renderChatMessageHTML', (message, html, context) => {
   });
 });
 
+
+Hooks.on('applyTokenStatusEffect', async (token, statusId, active) => {
+  // TODO: Fix bug where this hook only fires for the 'dead' condition
+  const actor = token.actor;
+  if (statusId === 'dead' && active) {
+    actor.toggleStatusEffect('down', { active: true });
+  }
+});
 
 
 Hooks.on("hotbarDrop", async (bar, data, slot) => {
