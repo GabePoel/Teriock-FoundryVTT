@@ -1,12 +1,4 @@
 export const powerOptions = {
-    innate: {
-        name: 'Innate',
-        icon: "person",
-    },
-    species: {
-        name: 'Species',
-        icon: "person-fairy",
-    },
     backstory: {
         name: 'Backstory',
         icon: "book",
@@ -15,21 +7,33 @@ export const powerOptions = {
         name: 'Blessing',
         icon: "sun-bright",
     },
-    pact: {
-        name: 'Pact',
-        icon: "signature",
+    curse: {
+        name: 'Curse',
+        icon: "hand-holding-skull",
     },
     familiar: {
         name: 'Familiar',
         icon: "monkey",
     },
+    innate: {
+        name: 'Innate',
+        icon: "person",
+    },
     mount: {
         name: 'Mount',
         icon: "horse",
     },
-    curse: {
-        name: 'Curse',
-        icon: "hand-holding-skull",
+    pact: {
+        name: 'Pact',
+        icon: "signature",
+    },
+    species: {
+        name: 'Species',
+        icon: "person-fairy",
+    },
+    traits: {
+        name: 'Traits',
+        icon: "ghost",
     },
     other: {
         name: 'Other',
