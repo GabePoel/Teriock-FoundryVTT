@@ -1,1 +1,1 @@
-export const remove = ['alive'];
+export const remove = ['alive', 'conscious', 'up'];

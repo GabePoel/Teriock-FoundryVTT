@@ -2,6 +2,8 @@
 
 export const preloadHandlebarsTemplates = async function () {
   return foundry.applications.handlebars.loadTemplates([
+    'systems/teriock/templates/chat/elder-sorcery.hbs',
+    'systems/teriock/templates/chat/harm.hbs',
     'systems/teriock/templates/chat/roll.hbs',
     'systems/teriock/templates/common/header.hbs',
     'systems/teriock/templates/sheets/ability-template/ability-template.hbs',
@@ -38,9 +40,9 @@ export const preloadHandlebarsTemplates = async function () {
     'systems/teriock/templates/sheets/character-template/parts/ch-status-box.hbs',
     'systems/teriock/templates/sheets/character-template/tabs/ch-tab-abilities.hbs',
     'systems/teriock/templates/sheets/character-template/tabs/ch-tab-classes.hbs',
+    'systems/teriock/templates/sheets/character-template/tabs/ch-tab-conditions.hbs',
     'systems/teriock/templates/sheets/character-template/tabs/ch-tab-inventory.hbs',
     'systems/teriock/templates/sheets/character-template/tabs/ch-tab-notes.hbs',
-    'systems/teriock/templates/sheets/character-template/tabs/ch-tab-overview.hbs',
     'systems/teriock/templates/sheets/character-template/tabs/ch-tab-powers.hbs',
     'systems/teriock/templates/sheets/character-template/tabs/ch-tab-resources.hbs',
     'systems/teriock/templates/sheets/character-template/tabs/ch-tab-tradecrafts.hbs',

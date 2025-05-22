@@ -328,6 +328,13 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(Terioc
         );
     }
 
+    _getFilteredConditions() {
+        return this._filterItems(
+            Array.from(this.actor.allApplicableEffects()).filter(i => !(['resource', 'ability'].includes(i.type))),
+            this.actor.system.sheet.resourceFilters || {}
+        );
+    }
+
     _getFilteredPowers() {
         return this._filterItems(this.actor.itemTypes.power, this.actor.system.sheet.powerFilters || {});
     }
@@ -368,7 +375,9 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(Terioc
             },
             enrichedNotes: await this._editor(this.document.system.sheet.notes),
             enrichedSpecialRules: await this._editor(this.document.system.primaryAttacker?.system?.specialRules),
+            conditions: this.actor.statuses,
         };
+        console.log('context', context);
         return context;
     }
 

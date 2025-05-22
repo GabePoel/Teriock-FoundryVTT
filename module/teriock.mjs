@@ -14,6 +14,7 @@ import { TeriockElderSorceryRoll } from './dice/elder-sorcery.mjs';
 import { preloadHandlebarsTemplates } from './helpers/templates.mjs';
 import { registerHandlebarsHelpers } from './helpers/register-handlebars.mjs';
 import { TERIOCK } from './helpers/config.mjs';
+import { conditions } from './content/conditions.mjs'
 const { Actors, Items } = foundry.documents.collections;
 const { ActorSheet, ItemSheet } = foundry.appv1.sheets;
 const { DocumentSheetConfig } = foundry.applications.apps;
@@ -25,6 +26,11 @@ Hooks.once('init', function () {
     formula: '1d20 + @mov',
     decimals: 2,
   };
+
+  CONFIG.statusEffects = []
+  for (const condition of Object.values(conditions)) {
+    CONFIG.statusEffects.push(condition);
+  }
 
   CONFIG.Dice.rolls.push(TeriockRoll);
   CONFIG.Dice.rolls.push(TeriockHarmRoll);

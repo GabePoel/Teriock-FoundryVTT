@@ -21,6 +21,9 @@
         <div class="character-tabber ui-controls {{tabActive system.sheet.activeTab "inventory"}}" data-tab="inventory" data-action="changeTab" data-tooltip="Inventory">
             {{ticon (lookup config.documentOptions.equipment 'icon') style="solid"}}
         </div>
+        <div class="character-tabber ui-controls {{tabActive system.sheet.activeTab "conditions"}}" data-tab="conditions" data-action="changeTab" data-tooltip="Conditions">
+            {{ticon (lookup config.documentOptions.condition 'icon') style="solid"}}
+        </div>
         <div class="character-tabber ui-controls {{tabActive system.sheet.activeTab "notes"}}" data-tab="notes" data-action="changeTab" data-tooltip="Notes">
             <i class="fa-solid fa-notes"></i>
         </div>
@@ -54,6 +57,9 @@
             {{/if}}
             {{#if (eq system.sheet.activeTab "inventory")}}
                 {{> 'systems/teriock/templates/sheets/character-template/tabs/ch-tab-inventory.hbs' }}
+            {{/if}}
+            {{#if (eq system.sheet.activeTab "conditions")}}
+                {{> 'systems/teriock/templates/sheets/character-template/tabs/ch-tab-conditions.hbs' }}
             {{/if}}
             {{#if (eq system.sheet.activeTab "notes")}}
                 {{> 'systems/teriock/templates/sheets/character-template/tabs/ch-tab-notes.hbs' }}

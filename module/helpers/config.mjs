@@ -12,7 +12,8 @@ import { characterOptions } from "./constants/character-options.mjs";
 import { currencyOptions } from "./constants/currency-options.mjs";
 import { abilities } from "./constants/generated/abilities.mjs";
 import { equipment } from "./constants/generated/equipment.mjs";
-import { conditions } from "./constants/generated/conditions.mjs";
+import { conditions as conditionsList } from "./constants/generated/conditions.mjs";
+import { conditions as conditionsContent } from "../content/conditions.mjs";
 
 export const TERIOCK = {
   icons: icons,
@@ -35,5 +36,8 @@ export const TERIOCK = {
   currencyOptions: currencyOptions,
   abilities: abilities,
   equipment: equipment,
-  conditions: conditions,
+  conditions: conditionsList,
+  content: {
+    conditions: conditionsContent,
+  },
 }

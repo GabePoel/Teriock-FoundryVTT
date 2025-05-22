@@ -26,5 +26,9 @@ export const documentOptions = {
     resource: {
         name: 'Resource',
         icon: 'hashtag',
+    },
+    condition: {
+        name: 'Condition',
+        icon: 'galaxy',
     }
 }

@@ -31,6 +31,19 @@ export async function fetchWikiPageContent(title) {
   }
 }
 
+let isNode = typeof window === 'undefined';
+
+let parseHTML;
+
+if (isNode) {
+  // Node.js: Use jsdom
+  const { JSDOM } = await import('jsdom');
+  parseHTML = html => new JSDOM(html).window.document;
+} else {
+  // Browser: Use DOMParser
+  parseHTML = html => new DOMParser().parseFromString(html, 'text/html');
+}
+
 export async function fetchWikiPageHTML(title) {
   const endpoint = 'https://wiki.teriock.com/api.php';
   const baseWikiUrl = 'https://wiki.teriock.com';
@@ -49,24 +62,21 @@ export async function fetchWikiPageHTML(title) {
     const response = await fetch(url);
     const data = await response.json();
 
-    if (data.parse && data.parse.text) {
-      let html = data.parse.text['*'];
+    if (data.parse?.text) {
+      const html = data.parse.text['*'];
 
-      const parser = new DOMParser();
-      const doc = parser.parseFromString(html, 'text/html');
+      const doc = parseHTML(html);
 
       const links = doc.querySelectorAll('a');
       links.forEach(link => {
         const href = link.getAttribute('href');
-        if (href && href.startsWith('/index.php/')) {
+        if (href?.startsWith('/index.php/')) {
           link.setAttribute('href', baseWikiUrl + href);
           link.setAttribute('target', '_blank');
         }
       });
 
-      const fixedHtml = doc.body.innerHTML;
-
-      return fixedHtml;
+      return cleanWikiHTML(doc.body.innerHTML);
     } else {
       console.error('No parsed HTML found:', data);
       return null;
@@ -76,6 +86,40 @@ export async function fetchWikiPageHTML(title) {
     return null;
   }
 }
+
+
+export async function cleanWikiHTML(html) {
+    let doc;
+
+    if (typeof window === 'undefined') {
+        // Node.js
+        const { JSDOM } = await import('jsdom');
+        doc = new JSDOM(html).window.document;
+    } else {
+        // Browser
+        doc = new DOMParser().parseFromString(html, 'text/html');
+    }
+
+    const container = doc.querySelector('.mw-parser-output');
+    if (!container) return '';
+
+    // Remove all comment nodes (cross-platform safe)
+    const removeComments = (node) => {
+        for (let child of Array.from(node.childNodes)) {
+            if (child.nodeType === 8) {
+                // Comment node
+                node.removeChild(child);
+            } else if (child.nodeType === 1) {
+                // Element node: recurse
+                removeComments(child);
+            }
+        }
+    };
+
+    removeComments(container);
+    return container.innerHTML.trim();
+}
+
 
 export async function fetchCategoryMembers(category) {
   const endpoint = 'https://wiki.teriock.com/api.php';
