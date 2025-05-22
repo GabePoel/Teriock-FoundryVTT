@@ -76,7 +76,8 @@ export async function fetchWikiPageHTML(title) {
         }
       });
 
-      return cleanWikiHTML(doc.body.innerHTML);
+      // return cleanWikiHTML(doc.body.innerHTML);
+      return doc.body.innerHTML;
     } else {
       console.error('No parsed HTML found:', data);
       return null;

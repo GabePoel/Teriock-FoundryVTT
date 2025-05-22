@@ -8,6 +8,7 @@ export default function prepareDerivedData(actor) {
     prepareWeightCarried(actor);
     prepareDefenses(actor);
     prepareOffenses(actor);
+    prepareConditions(actor);
 }
 
 function prepareBonuses(actor) {
@@ -169,5 +170,24 @@ function prepareOffenses(actor) {
         if (!actor.system.primaryAttacker || !actor.system.primaryAttacker.system.equipped) {
             actor.system.sheet.primaryAttacker = null;
         }
+    }
+}
+
+function prepareConditions(actor) {
+    const overCarrying = actor.system.weightCarried >= actor.system.carryingCapacity.light;
+    const equippedItems = actor.itemTypes.equipment.filter(i => i.system.equipped);
+    const hasCumbersome = equippedItems.some(item =>
+        Array.isArray(item.system.properties) &&
+        item.system.properties.includes('cumbersome')
+    );
+    if (overCarrying || hasCumbersome) {
+        actor.toggleStatusEffect('encumbered', { active: true });
+    } else {
+        actor.toggleStatusEffect('encumbered', { active: false });
+    }
+    const hp = actor.system.hp.value;
+    const minHp = actor.system.hp.min;
+    if (hp === minHp) {
+        actor.toggleStatusEffect('dead', { active: true });
     }
 }
