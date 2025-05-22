@@ -154,13 +154,13 @@ Hooks.on('renderChatMessageHTML', (message, html, context) => {
 });
 
 
-Hooks.on('applyTokenStatusEffect', async (token, statusId, active) => {
-  // TODO: Fix bug where this hook only fires for the 'dead' condition
-  const actor = token.actor;
-  if (statusId === 'dead' && active) {
-    actor.toggleStatusEffect('down', { active: true });
-  }
-});
+// Hooks.on('applyTokenStatusEffect', async (token, statusId, active) => {
+//   // TODO: Fix bug where this hook only fires for the 'dead' condition
+//   const actor = token.actor;
+//   if (statusId === 'dead' && active) {
+//     actor.toggleStatusEffect('down', { active: true });
+//   }
+// });
 
 
 Hooks.on("hotbarDrop", async (bar, data, slot) => {
