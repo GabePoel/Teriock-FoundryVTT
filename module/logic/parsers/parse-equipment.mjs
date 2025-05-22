@@ -116,6 +116,7 @@ export default function parseEquipment(rawHTML) {
     delete parameters.materialProperties;
     delete parameters.disabled;
     delete parameters.glued;
+    delete parameters.font;
     const out = {
         'system': parameters,
         'img': 'systems/teriock/assets/searchable.svg',
