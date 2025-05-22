@@ -35,8 +35,14 @@ export default function parseEquipment(rawHTML) {
     // console.log('parameters', parameters);
 
     if (getText('.damage')) {
-        // parameters.damage = cleanDamage(getText('.damage'));
-        parameters.damage = getText('.damage');
+        const damageText = getText('.damage');
+        const match = damageText.match(/^([^\(]+)\s*\(([^)]+)\)/);
+        if (match) {
+            parameters.damage = match[1].trim();
+            parameters.twoHandedDamage = match[2].trim();
+        } else {
+            parameters.damage = damageText;
+        }
     }
     if (getValue('.weight')) {
         parameters.weight = cleanValue(getValue('.weight'));

@@ -20,8 +20,23 @@
               type="text"
               value="{{system.damage}}"
               data-edit="system.damage"
+              data-tooltip="Damage"
+              {{#if (exists system.twoHandedDamage)}}
+                style="text-align: right;"
+              {{/if}}
             />
-            {{!-- {{{system.damage}}} --}}
+            {{#if (exists system.twoHandedDamage)}}
+              &nbsp;/&nbsp;
+              <input
+                class="ability-bar-input damage-input"
+                name="system.twoHandedDamage"
+                type="text"
+                value="{{system.twoHandedDamage}}"
+                data-edit="system.twoHandedDamage"
+                data-tooltip="Two-Handed Damage"
+                style="text-align: left;"
+              />
+            {{/if}}
           </div>
           <div class="ab-box-label">
             DMG
@@ -31,7 +46,7 @@
     {{/if}}
     {{#if (exists system.range)}}
       <div class="ab-box-container">
-        <div class="ab-box">
+        <div class="ab-box" data-tooltip="Range">
           <div class="ab-box-icon">
             {{{config.icons.range}}}
           </div>
@@ -47,21 +62,9 @@
         </div>
       </div>
     {{/if}}
-    {{!-- {{#if (exists system.sb)}}
-      <div class="ab-box-container">
-        <div class="ab-box">
-          <div class="ab-box-icon">
-            {{{config.icons.sb}}}
-          </div>
-          <div class="ab-box-content">
-            {{{system.sb}}}
-          </div>
-        </div>
-      </div>
-    {{/if}} --}}
     {{#if (exists system.av)}}
         <div class="ab-box-container">
-            <div class="ab-box">
+            <div class="ab-box" data-tooltip="Armor Value">
                 <div class="ab-box-icon">
                     {{{config.icons.av}}}
                 </div>
@@ -82,7 +85,7 @@
     {{/if}}
     {{#if (exists system.bv)}}
         <div class="ab-box-container">
-            <div class="ab-box">
+            <div class="ab-box" data-tooltip="Block Value">
                 <div class="ab-box-icon">
                     {{{config.icons.bv}}}
                 </div>

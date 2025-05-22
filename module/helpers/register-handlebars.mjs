@@ -335,7 +335,7 @@ export function registerHandlebarsHelpers() {
             const subtitle = Handlebars.helpers.executionTime(ability.system?.maneuver, ability.system?.executionTime);
             const marker = Handlebars.helpers.abilityMarker(ability);
             const chatIcon = Handlebars.helpers.ticon("comment", {
-                hash: { action: "chatDoc", id: ability._id, parentId: ability.parent?._id, tooltip: "Chat" }
+                hash: { action: "chatDoc", id: ability._id, parentId: ability.parent?._id, tooltip: "Send to Chat" }
             });
             const enableIcon = Handlebars.helpers.ticonToggle("circle", "circle-check", ability.disabled, {
                 hash: { action: "toggleForceDisabledDoc", id: ability._id, parentId: ability.parent?._id, tooltipTrue: "Disabled", tooltipFalse: "Enabled" }

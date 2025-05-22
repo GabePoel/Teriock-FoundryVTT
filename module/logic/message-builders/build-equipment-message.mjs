@@ -16,6 +16,7 @@ export function buildEquipmentMessage(equipment) {
             icon: 'fa-crosshairs-simple',
             wrappers: [
                 src.damage ? src.damage + ' Damage' : '',
+                src.twoHandedDamage ? src.twoHandedDamage + ' Damage' : '',
                 src.range,
                 src.sb,
                 src.av,

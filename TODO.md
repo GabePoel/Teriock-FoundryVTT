@@ -1,19 +1,21 @@
-- [ ] Major functionality
-  - [x] Archetype ability separation
-  - [x] Proficiency switches
-  - [x] AV0/UB overrides
-  - [x] Block interaction chain
-  - [ ] Resistance save
-  - [ ] End condition rolls
-  - [ ] Image popup windows
-  - [ ] Easy damage/drain application
-  - [x] Wither display
-  - [x] Attack penalties
-  - [x] Advantage/disadvantage listeners
-  - [x] Elder Sorcery
-    - [x] Bring in stylings from wiki
-  - [x] Custom initiative
-- [x] Equipment improvements
+- [ ] **Bug fixes**
+  - [ ] Two-handed weapon damage
+  - [x] Ability sheet prematurely closes when making any edit that's not handled by external code
+  - [x] Slow loading of ability sheet entries
+  - [x] Material cost button not working
+  - [x] Rank number not appearing
+  - [x] HP/MP costs in ability chat messages
+  - [x] Window sizing limitations
+  - [x] No context menu on embedded sheets
+  - [x] Character sheet context menus not updating
+- [ ] **Ability improvements**
+  - [ ] Inherit image from parent
+  - [x] Able to make as flaw
+  - [x] Improved dice rolling
+  - [x] Separate chart and dice rolling messages
+  - [x] Force proficiency
+- [ ] **Equipment improvements**
+  - [ ] Have simple effects (custom properties?) that aren't abilities addable to items
   - [x] Able to set tier
   - [x] Able to set properties
   - [x] Able to add descriptions
@@ -22,11 +24,21 @@
   - [x] Ability disabling synchronization
   - [x] Shattering
   - [x] Dampening
-- [x] Ability improvements
-  - [x] Able to make as flaw
-  - [x] Improved dice rolling
-  - [x] Separate chart and dice rolling messages
-  - [x] Force proficiency
+- [ ] Major functionality
+  - [x] Archetype ability separation
+  - [x] Proficiency switches
+  - [x] AV0/UB overrides
+  - [x] Block interaction chain
+  - [ ] Resistance save
+  - [ ] End condition rolls
+  - [ ] Image popup windows
+  - [x] Easy damage/drain application
+  - [x] Wither display
+  - [x] Attack penalties
+  - [x] Advantage/disadvantage listeners
+  - [x] Elder Sorcery
+    - [x] Bring in stylings from wiki
+  - [x] Custom initiative
 - [x] Power improvements
   - [x] Import abilities from wiki category
   - [x] Get confirmation before doing it
@@ -70,15 +82,6 @@
     - [x] Box units
     - [x] HP/MP bars
     - [ ] Equipment text
-- [x] Bug fixes
-  - [x] Ability sheet prematurely closes when making any edit that's not handled by external code
-  - [x] Slow loading of ability sheet entries
-  - [x] Material cost button not working
-  - [x] Rank number not appearing
-  - [x] HP/MP costs in ability chat messages
-  - [x] Window sizing limitations
-  - [x] No context menu on embedded sheets
-  - [x] Character sheet context menus not updating
 - [x] Decisions
   - [x] Should ES be an item or effect/ability?
   - [x] Should items enter equipped?
@@ -88,10 +91,10 @@
   - [x] Property/effect/etc. imports scripts
 - [ ] Organization
   - [x] Reorganize templates folder
-  - [ ] Separate out handlebars registration
+  - [x] Separate out handlebars registration
   - [ ] Consistent config icon handling
-  - [ ] Sheet helpers, utilities, wiki, and parsing consistency
-  - [ ] Remove all redundant click event handlers
+  - [x] Sheet helpers, utilities, wiki, and parsing consistency
+  - [x] Remove all redundant click event handlers
 - [x] Resource implementation
 - [x] Effect separation
 - [ ] Import conditions from wiki and have them as default status effects
