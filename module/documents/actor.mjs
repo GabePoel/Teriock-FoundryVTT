@@ -41,6 +41,18 @@ export class TeriockActor extends Actor {
     this.update({ 'system.wither.value': Math.min(Math.max(0, this.system.wither.value + wither), 100) });
   }
 
+  heal(healing) {
+    const { hp } = this.system;
+    const value = Math.min(hp.max, hp.value + healing);
+    this.update({ 'system.hp.value': value });
+  }
+
+  revitalize(revitalizing) {
+    const { mp } = this.system;
+    const value = Math.min(mp.max, mp.value + revitalizing);
+    this.update({ 'system.mp.value': value });
+  }
+
   rollTradecraft(tradecraft, options) {
     const data = this.system.tradecrafts[tradecraft];
     let formula = '1d20';

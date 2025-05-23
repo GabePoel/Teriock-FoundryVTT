@@ -126,6 +126,111 @@ Hooks.on('combatTurnChange', async (combat, prior, current) => {
   }
 });
 
+Hooks.on('chatMessage', (chatLog, message, chatData) => {
+  const sender = game.users.get(chatData.user);
+  const targets = sender?.targets;
+  const actors = targets.map(target => target.actor);
+
+  if (message.startsWith('/harm')) {
+    const rollFormula = message.split('/harm')[1].trim();
+    (async () => {
+      const roll = new TeriockHarmRoll(rollFormula, { speaker: chatData.speaker });
+      await roll.toMessage({
+        user: chatData.user,
+        speaker: chatData.speaker,
+        flavor: `Harm Roll`,
+      });
+    })().catch(console.error);
+    return false;
+  }
+
+  if (message.startsWith('/damage')) {
+    const rollFormula = message.split('/damage')[1].trim();
+    (async () => {
+      const roll = new TeriockRoll(rollFormula, { speaker: chatData.speaker });
+      await roll.toMessage({
+        user: chatData.user,
+        speaker: chatData.speaker,
+        flavor: `Damage Roll`,
+      });
+      const total = roll.total;
+      for (const actor of actors) {
+        await actor.takeDamage(total);
+      }
+    })().catch(console.error);
+    return false;
+  }
+
+  if (message.startsWith('/drain')) {
+    const rollFormula = message.split('/drain')[1].trim();
+    (async () => {
+      const roll = new TeriockRoll(rollFormula, { speaker: chatData.speaker });
+      await roll.toMessage({
+        user: chatData.user,
+        speaker: chatData.speaker,
+        flavor: `Drain Roll`,
+      });
+      const total = roll.total;
+      for (const actor of actors) {
+        await actor.takeDrain(total);
+      }
+    })().catch(console.error);
+    return false;
+  }
+
+  if (message.startsWith('/wither')) {
+    const rollFormula = message.split('/wither')[1].trim();
+    (async () => {
+      const roll = new TeriockRoll(rollFormula, { speaker: chatData.speaker });
+      await roll.toMessage({
+        user: chatData.user,
+        speaker: chatData.speaker,
+        flavor: `Wither Roll`,
+      });
+      const total = roll.total;
+      for (const actor of actors) {
+        await actor.takeWither(total);
+      }
+    })().catch(console.error);
+    return false;
+  }
+
+  if (message.startsWith('/heal')) {
+    const rollFormula = message.split('/heal')[1].trim();
+    (async () => {
+      const roll = new TeriockRoll(rollFormula, { speaker: chatData.speaker });
+      await roll.toMessage({
+        user: chatData.user,
+        speaker: chatData.speaker,
+        flavor: `Heal Roll`,
+      });
+      const total = roll.total;
+      for (const actor of actors) {
+        await actor.heal(total);
+      }
+    })().catch(console.error);
+    return false;
+  }
+
+  if (message.startsWith('/revitalize')) {
+    const rollFormula = message.split('/revitalize')[1].trim();
+    (async () => {
+      const roll = new TeriockRoll(rollFormula, { speaker: chatData.speaker });
+      await roll.toMessage({
+        user: chatData.user,
+        speaker: chatData.speaker,
+        flavor: `Revitalize Roll`,
+      });
+      const total = roll.total;
+      for (const actor of actors) {
+        await actor.revitalize(total);
+      }
+    })().catch(console.error);
+    return false;
+  }
+});
+
+
 Hooks.on('renderChatMessageHTML', (message, html, context) => {
   console.log('renderChatMessageHTML', message, html, context);
   const buttons = html.querySelectorAll('.harm-button');
@@ -152,7 +257,6 @@ Hooks.on('renderChatMessageHTML', (message, html, context) => {
     }
   });
 });
-
 
 // Hooks.on('applyTokenStatusEffect', async (token, statusId, active) => {
 //   // TODO: Fix bug where this hook only fires for the 'dead' condition
