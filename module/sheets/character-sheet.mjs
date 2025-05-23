@@ -226,8 +226,12 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(Terioc
 
     static async _removeCondition(event, target) {
         event.stopPropagation();
+        const options = {};
         const condition = target.dataset.condition;
-        this.actor.toggleStatusEffect(condition);
+        if (event.altKey) options.increaseDie = true;
+        if (event.shiftKey) options.decreaseDie = true;
+        if (event.ctrlKey) options.skip = true;
+        this.actor.rollCondition(condition, options);
     }
 
     /** Generalized filtering utility */

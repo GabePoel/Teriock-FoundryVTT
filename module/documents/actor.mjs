@@ -1,5 +1,6 @@
 import prepareDerivedData from "../logic/actor/derived-data.mjs";
 import getRollData from "../logic/actor/roll-data.mjs";
+import rollCondition from "../logic/rollers/rolling-condition.mjs";
 
 /**
  * @extends {Actor}
@@ -51,6 +52,10 @@ export class TeriockActor extends Actor {
     const { mp } = this.system;
     const value = Math.min(mp.max, mp.value + revitalizing);
     this.update({ 'system.mp.value': value });
+  }
+
+  rollCondition(condition, options) {
+    rollCondition(this, condition, options);
   }
 
   rollTradecraft(tradecraft, options) {
