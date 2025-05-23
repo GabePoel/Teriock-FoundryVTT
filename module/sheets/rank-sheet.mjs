@@ -13,6 +13,11 @@ export class TeriockRankSheet extends HandlebarsApplicationMixin(TeriockItemShee
     static PARTS = {
         all: {
             template: 'systems/teriock/templates/sheets/rank-template/rank-template.hbs',
+            scrollable: [
+                '.window-content',
+                '.tsheet-page',
+                '.ab-sheet-everything',
+            ],
         },
     };
 

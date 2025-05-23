@@ -12,6 +12,11 @@ export class TeriockResourceSheet extends api.HandlebarsApplicationMixin(Teriock
     static PARTS = {
         all: {
             template: 'systems/teriock/templates/sheets/resource-template/resource-template.hbs',
+            scrollable: [
+                '.window-content',
+                '.tsheet-page',
+                '.ab-sheet-everything',
+            ],
         },
     };
 

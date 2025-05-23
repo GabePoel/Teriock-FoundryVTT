@@ -12,6 +12,11 @@ export class TeriockFluencySheet extends HandlebarsApplicationMixin(TeriockItemS
     static PARTS = {
         all: {
             template: 'systems/teriock/templates/sheets/fluency-template/fluency-template.hbs',
+            scrollable: [
+                '.window-content',
+                '.tsheet-page',
+                '.ab-sheet-everything',
+            ],
         },
     };
 

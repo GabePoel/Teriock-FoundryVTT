@@ -18,7 +18,14 @@ export class TeriockEquipmentSheet extends HandlebarsApplicationMixin(TeriockIte
     };
 
     static PARTS = {
-        all: { template: 'systems/teriock/templates/sheets/equipment-template/equipment-template.hbs' },
+        all: {
+            template: 'systems/teriock/templates/sheets/equipment-template/equipment-template.hbs',
+            scrollable: [
+                '.window-content',
+                '.tsheet-page',
+                '.ab-sheet-everything',
+            ],
+        },
     };
 
     static async _toggleEquipped() {

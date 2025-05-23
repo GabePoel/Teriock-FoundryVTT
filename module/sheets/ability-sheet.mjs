@@ -14,8 +14,12 @@ export class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(TeriockS
 
     static PARTS = {
         all: {
-            scrollable: ['.window-content', '.tsheet-page'],
-            template: 'systems/teriock/templates/sheets/ability-template/ability-template.hbs'
+            template: 'systems/teriock/templates/sheets/ability-template/ability-template.hbs',
+            scrollable: [
+                '.window-content',
+                '.tsheet-page',
+                '.ab-sheet-everything',
+            ],
         },
     };
 

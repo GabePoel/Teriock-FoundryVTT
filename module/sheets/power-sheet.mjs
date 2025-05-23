@@ -16,6 +16,11 @@ export class TeriockPowerSheet extends HandlebarsApplicationMixin(TeriockItemShe
     static PARTS = {
         all: {
             template: 'systems/teriock/templates/sheets/power-template/power-template.hbs',
+            scrollable: [
+                '.window-content',
+                '.tsheet-page',
+                '.ab-sheet-everything',
+            ],
         },
     };
 
