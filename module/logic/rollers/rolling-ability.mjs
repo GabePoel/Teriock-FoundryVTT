@@ -160,7 +160,7 @@ async function use(ability) {
     });
     let newPenalty = ability.getActor().system.attackPenalty;
     if (ability.system.interaction == 'attack') {
-        newPenalty -= 5;
+        newPenalty -= 3;
     }
     ability.getActor().update({
         'system.mp.value': ability.getActor().system.mp.value - ability.system.mpCost - ability.system.heightenedAmount,

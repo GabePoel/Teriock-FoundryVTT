@@ -174,40 +174,40 @@ function prepareOffenses(actor) {
 }
 
 function prepareConditions(actor) {
-    const equippedItems = actor.itemTypes.equipment.filter(i => i.system.equipped);
-    const hasCumbersome = equippedItems.some(item =>
-        Array.isArray(item.system.properties) &&
-        item.system.properties.includes('cumbersome')
-    );
-    const lightOverCarrying = actor.system.weightCarried >= actor.system.carryingCapacity.light;
-    const heavyOverCarrying = (actor.system.weightCarried >= actor.system.carryingCapacity.heavy) || (lightOverCarrying && hasCumbersome);
-    if (lightOverCarrying || heavyOverCarrying || hasCumbersome) {
-        actor.toggleStatusEffect('encumbered', { active: true });
-    } else {
-        actor.toggleStatusEffect('encumbered', { active: false });
-    }
-    if (heavyOverCarrying) {
-        actor.toggleStatusEffect('slowed', { active: true });
-    }
-    const hp = actor.system.hp.value;
-    const minHp = actor.system.hp.min;
-    if (hp === minHp) {
-        actor.toggleStatusEffect('dead', { active: true });
-    }
-    if (actor.statuses.has('dead')) {
-        actor.toggleStatusEffect('asleep', { active: false });
-        actor.toggleStatusEffect('unconscious', { active: false });
-    }
-    if (actor.statuses.has('dead') && !actor.statuses.has('down')) {
-        actor.toggleStatusEffect('down', { active: true });
-    }
-    if (actor.statuses.has('asleep') && !actor.statuses.has('unconscious')) {
-        actor.toggleStatusEffect('unconscious', { active: true });
-    }
-    if (actor.statuses.has('unconscious') && !actor.statuses.has('down')) {
-        actor.toggleStatusEffect('down', { active: true });
-    }
-    if (actor.statuses.has('wisping')) {
-        actor.toggleStatusEffect('ethereal', { active: true });
-    }
+    // const equippedItems = actor.itemTypes.equipment.filter(i => i.system.equipped);
+    // const hasCumbersome = equippedItems.some(item =>
+    //     Array.isArray(item.system.properties) &&
+    //     item.system.properties.includes('cumbersome')
+    // );
+    // const lightOverCarrying = actor.system.weightCarried >= actor.system.carryingCapacity.light;
+    // const heavyOverCarrying = (actor.system.weightCarried >= actor.system.carryingCapacity.heavy) || (lightOverCarrying && hasCumbersome);
+    // if (lightOverCarrying || heavyOverCarrying || hasCumbersome) {
+    //     actor.toggleStatusEffect('encumbered', { active: true });
+    // } else {
+    //     actor.toggleStatusEffect('encumbered', { active: false });
+    // }
+    // if (heavyOverCarrying) {
+    //     actor.toggleStatusEffect('slowed', { active: true });
+    // }
+    // const hp = actor.system.hp.value;
+    // const minHp = actor.system.hp.min;
+    // if (hp === minHp) {
+    //     actor.toggleStatusEffect('dead', { active: true });
+    // }
+    // if (actor.statuses.has('dead')) {
+    //     actor.toggleStatusEffect('asleep', { active: false });
+    //     actor.toggleStatusEffect('unconscious', { active: false });
+    // }
+    // if (actor.statuses.has('dead') && !actor.statuses.has('down')) {
+    //     actor.toggleStatusEffect('down', { active: true });
+    // }
+    // if (actor.statuses.has('asleep') && !actor.statuses.has('unconscious')) {
+    //     actor.toggleStatusEffect('unconscious', { active: true });
+    // }
+    // if (actor.statuses.has('unconscious') && !actor.statuses.has('down')) {
+    //     actor.toggleStatusEffect('down', { active: true });
+    // }
+    // if (actor.statuses.has('wisping')) {
+    //     actor.toggleStatusEffect('ethereal', { active: true });
+    // }
 }
