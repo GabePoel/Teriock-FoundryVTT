@@ -12,7 +12,7 @@ export class TeriockItem extends TeriockDocument(Item) {
 
   async parse(rawHTML) {
     if (this.type === 'equipment') {
-      return parseEquipment(rawHTML);
+      return parseEquipment(rawHTML, this);
     } else if (this.type === 'rank') {
       return await parseRank(rawHTML, this);
     } else {

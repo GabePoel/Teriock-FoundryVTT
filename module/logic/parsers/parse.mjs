@@ -3,7 +3,7 @@ import parseRank from "./parse-rank.mjs";
 
 export default async function parse(document, rawHTML) {
   if (document.type === 'equipment') {
-    return parseEquipment(rawHTML);
+    return parseEquipment(rawHTML, document);
   }
   if (document.type === 'rank') {
     return await parseRank(rawHTML, document);

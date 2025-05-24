@@ -1,5 +1,5 @@
-- [ ] **Bug fixes**
-  - [ ] Two-handed weapon damage
+- [x] **Bug fixes**
+  - [x] Two-handed weapon damage
   - [x] Ability sheet prematurely closes when making any edit that's not handled by external code
   - [x] Slow loading of ability sheet entries
   - [x] Material cost button not working
@@ -16,6 +16,7 @@
   - [x] Force proficiency
 - [ ] **Equipment improvements**
   - [ ] Have simple effects (custom properties?) that aren't abilities addable to items
+  - [ ] Two-handed weapon damage
   - [x] Able to set tier
   - [x] Able to set properties
   - [x] Able to add descriptions

@@ -5,9 +5,16 @@ const folder = corePack.folders.getName("Equipment");
 
 for (const [e, eo] of Object.entries(CONFIG.TERIOCK.equipment)) {
   const name = eo;
-  const matches = corePack.indexfilter(e => e.system.equipmentType === name);
-  for (const entry of matches) {
+
+  const matches = [];
+  for (const entry of corePack.index) {
     const doc = await corePack.getDocument(entry._id);
+    if (doc.system.equipmentType === name) {
+      matches.push(doc);
+    }
+  }
+
+  for (const doc of matches) {
     await doc.delete();
   }
 
@@ -25,7 +32,8 @@ for (const [e, eo] of Object.entries(CONFIG.TERIOCK.equipment)) {
     pack: "world.teriock-core"
   });
 
-  const entry = corePack.index.find(e => e.system.equipmentType === name);
+  await corePack.getIndex();  // Refresh index after creating
+  const entry = corePack.index.find(e => e.name === name);
   const rawDoc = await corePack.getDocument(entry._id);
 
   console.log(rawDoc);

@@ -1,7 +1,7 @@
 import { cleanFeet, cleanValue } from "../../helpers/clean.mjs";
 import { toCamelCaseList } from "../../helpers/utils.mjs";
 
-export default function parseEquipment(rawHTML) {
+export default function parseEquipment(rawHTML, item) {
   const doc = new DOMParser().parseFromString(rawHTML, 'text/html');
   const q = s => doc.querySelector(s);
   const getValue = s => q(s)?.getAttribute('data-val');
@@ -64,6 +64,10 @@ export default function parseEquipment(rawHTML) {
   parameters.materialProperties = filterByConfig(candidateProperties, 'materialProperties');
   parameters.equipmentClasses = toCamelCaseList(parameters.equipmentClasses);
 
+  // Set output image
+  let img = 'systems/teriock/assets/searchable.svg';
+  img = `systems/teriock/assets/equipment/${item.system.equipmentType?.toLowerCase().replace(/\s+/g, '-')}.svg`;
+
   // Remove unused properties
   [
     'equipmentType', 'powerLevel', 'disabled', 'description', 'flaws', 'tier',
@@ -71,12 +75,12 @@ export default function parseEquipment(rawHTML) {
     'disabled', 'glued', 'font'
   ].forEach(key => delete parameters[key]);
 
-  // Set output image
-  let img = 'systems/teriock/assets/searchable.svg';
-  if (parameters.equipmentClasses.length > 0) {
-    const equipmentClass = parameters.equipmentClasses[0].toLowerCase().replace(/\s+/g, '-');
-    img = `systems/teriock/assets/equipment-classes/${equipmentClass}.svg`;
-  }
+  // const equipmentClass = parameters.equipmentClasses[0].toLowerCase().replace(/\s+/g, '-');
+  // img = `systems/teriock/assets/equipment-classes/${equipmentClass}.svg`;
+  
+  // if (parameters.equipmentClasses.length > 0) {
+  //   img = `systems/teriock/assets/equipment-classes/${equipmentClass}.svg`;
+  // }
 
   return { system: parameters, img };
 }

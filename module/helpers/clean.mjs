@@ -1,4 +1,5 @@
 export function cleanValue(value) {
+  if (typeof value !== 'string') return value;
   value = value.replace('+', '').trim();
   return parseInt(value, 10);
 }
