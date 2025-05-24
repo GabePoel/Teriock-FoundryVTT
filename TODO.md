@@ -30,7 +30,7 @@
   - [x] AV0/UB overrides
   - [x] Block interaction chain
   - [ ] Resistance save
-  - [ ] End condition rolls
+  - [x] End condition rolls
   - [ ] Image popup windows
   - [x] Easy damage/drain application
   - [x] Wither display
@@ -97,4 +97,4 @@
   - [x] Remove all redundant click event handlers
 - [x] Resource implementation
 - [x] Effect separation
-- [ ] Import conditions from wiki and have them as default status effects
+- [x] Import conditions from wiki and have them as default status effects
