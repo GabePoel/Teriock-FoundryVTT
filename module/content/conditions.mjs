@@ -105,6 +105,12 @@ export const conditions = {
     img: "systems/teriock/assets/conditions/frozen.svg",
     content: "<p><span class=\"condition-box\">A creature with this condition cannot use any <a href=\"https://wiki.teriock.com/index.php/Category:Abilities\" title=\"Category:Abilities\" target=\"_blank\">abilities</a> or be affected by anything until this condition is cleared. They have no perception of the world around them or the passage of time at all. Any other ongoing <a href=\"https://wiki.teriock.com/index.php/Category:Conditions\" title=\"Category:Conditions\" target=\"_blank\">conditions</a> or other ongoing effects are paused while this condition is in place.</span>\n</p>"
   },
+  goaded: {
+    name: "Goaded",
+    id: "goaded",
+    img: "systems/teriock/assets/conditions/goaded.svg",
+    content: "<p><span class=\"condition-box\">A creature that's <b>goaded</b> has <a href=\"https://wiki.teriock.com/index.php/Core:Disadvantage\" title=\"Core:Disadvantage\" target=\"_blank\">disadvantage</a> on <a href=\"https://wiki.teriock.com/index.php/Core:Attack_Interaction\" title=\"Core:Attack Interaction\" target=\"_blank\">attacks</a> against creatures other than ones that caused it to be goaded.</span>\n</p>"
+  },
   grounded: {
     name: "Grounded",
     id: "grounded",
@@ -133,7 +139,7 @@ export const conditions = {
     name: "Immobilized",
     id: "immobilized",
     img: "systems/teriock/assets/conditions/immobilized.svg",
-    content: "<p><span class=\"condition-box\">If a creature is <b>immobilized</b> then all their <a href=\"https://wiki.teriock.com/index.php/Core:Movement_Speed\" title=\"Core:Movement Speed\" target=\"_blank\">movement speed adjustments</a> are set to \"none\" and they are <a href=\"https://wiki.teriock.com/index.php/Keyword:Incapable\" title=\"Keyword:Incapable\" target=\"_blank\">incapable</a> of <a href=\"https://wiki.teriock.com/index.php/Category:Movement_effects\" title=\"Category:Movement effects\" target=\"_blank\">moving</a> of their own volition. They also automatically fail all <a href=\"https://wiki.teriock.com/index.php/Category:MOV_save_abilities\" title=\"Category:MOV save abilities\" target=\"_blank\">MOV saves</a>.</span>\n</p>"
+    content: "<p><span class=\"condition-box\">If a creature is <b>immobilized</b> then all their <a href=\"https://wiki.teriock.com/index.php/Core:Movement_Speed\" title=\"Core:Movement Speed\" target=\"_blank\">movement speed adjustments</a> are set to \"none\" and they are <a href=\"https://wiki.teriock.com/index.php/Keyword:Incapable\" title=\"Keyword:Incapable\" target=\"_blank\">incapable</a> of using <a href=\"https://wiki.teriock.com/index.php/Category:Movement_effects\" title=\"Category:Movement effects\" target=\"_blank\">movement effects</a> or otherwise <a href=\"https://wiki.teriock.com/index.php/Ability:Move\" title=\"Ability:Move\" target=\"_blank\">moving</a> of their own volition. They also automatically fail all <a href=\"https://wiki.teriock.com/index.php/Category:MOV_save_abilities\" title=\"Category:MOV save abilities\" target=\"_blank\">MOV saves</a>.</span>\n</p>"
   },
   invisible: {
     name: "Invisible",
@@ -146,6 +152,18 @@ export const conditions = {
     id: "lighted",
     img: "systems/teriock/assets/conditions/lighted.svg",
     content: "<p><span class=\"condition-box\">A <b>lighted</b> creature cannot make <a href=\"https://wiki.teriock.com/index.php/Category:Attack_abilities\" title=\"Category:Attack abilities\" target=\"_blank\">attacks</a> against at least 1 other creature, as specified by the source of the effect.</span>\n</p>"
+  },
+  meleeDodging: {
+    name: "Melee Dodging",
+    id: "meleeDodging",
+    img: "systems/teriock/assets/conditions/meleeDodging.svg",
+    content: "<p><span class=\"condition-box\">Melee attacks have <a href=\"https://wiki.teriock.com/index.php/Core:Disadvantage\" title=\"Core:Disadvantage\" target=\"_blank\">disadvantage</a> against a creature that is <b>melee dodging</b>.</span>\n</p>"
+  },
+  missileDodging: {
+    name: "Missile Dodging",
+    id: "missileDodging",
+    img: "systems/teriock/assets/conditions/missileDodging.svg",
+    content: "<p><span class=\"condition-box\">Ranged attacks have <a href=\"https://wiki.teriock.com/index.php/Core:Disadvantage\" title=\"Core:Disadvantage\" target=\"_blank\">disadvantage</a> against a creature that is <b>missile dodging</b>.</span>\n</p>"
   },
   mute: {
     name: "Mute",

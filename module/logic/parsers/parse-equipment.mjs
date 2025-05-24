@@ -2,135 +2,81 @@ import { cleanFeet, cleanValue } from "../../helpers/clean.mjs";
 import { toCamelCaseList } from "../../helpers/utils.mjs";
 
 export default function parseEquipment(rawHTML) {
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(rawHTML, 'text/html');
-    function getValue(selector) {
-        const element = doc.querySelector(selector);
-        if (element) {
-            return element.getAttribute('data-val');
-        }
-    }
-    function getText(selector) {
-        const element = doc.querySelector(selector);
-        if (element) {
-            return element.textContent.trim();
-        }
-    }
-    function getTextAll(selector) {
-        const elements = doc.querySelectorAll(selector);
-        return Array.from(elements).map((element) => element.textContent.trim());
-    }
-    function getHTML(selector) {
-        const element = doc.querySelector(selector);
-        if (element) {
-            return element.innerHTML.trim();
-        }
-    }
+  const doc = new DOMParser().parseFromString(rawHTML, 'text/html');
+  const q = s => doc.querySelector(s);
+  const getValue = s => q(s)?.getAttribute('data-val');
+  const getText = s => q(s)?.textContent.trim();
+  const getTextAll = s => Array.from(doc.querySelectorAll(s), el => el.textContent.trim());
+  const getHTML = s => q(s)?.innerHTML.trim();
 
-    const referenceEquipment = new Item({
-        name: 'Reference Equipment',
-        type: 'equipment',
-    })
-    const parameters = foundry.utils.deepClone(referenceEquipment.system);
-    // console.log('parameters', parameters);
+  const referenceEquipment = new Item({ name: 'Reference Equipment', type: 'equipment' });
+  const parameters = foundry.utils.deepClone(referenceEquipment.system);
 
-    if (getText('.damage')) {
-        const damageText = getText('.damage');
-        const match = damageText.match(/^([^\(]+)\s*\(([^)]+)\)/);
-        if (match) {
-            parameters.damage = match[1].trim();
-            parameters.twoHandedDamage = match[2].trim();
-        } else {
-            parameters.damage = damageText;
-        }
-    }
-    if (getValue('.weight')) {
-        parameters.weight = cleanValue(getValue('.weight'));
-    }
-    if (getText('.short-range')) {
-        parameters.shortRange = cleanValue(getText('.short-range'));
-    }
-    if (getText('.long-range')) {
-        parameters.longRange = cleanValue(getText('.long-range'));
-    }
-    if (getText('.normal-range')) {
-        parameters.normalRange = cleanValue(getText('.normal-range'));
-    }
-    if (getTextAll('.equipment-class')) {
-        parameters.equipmentClasses = getTextAll('.equipment-class');
-    }
-    if (getValue('.min-str')) {
-        parameters.minStr = cleanValue(getValue('.min-str'));
-    }
-    if (getTextAll('.property')) {
-        parameters.properties = getTextAll('.property');
-    }
-    if (getText('.full-range')) {
-        let range = getText('.full-range');
-        if (range.includes('(')) {
-            const rangeProperty = range.split('(')[0].trim();
-            range = range.split('(')[1].trim();
-            range = range.split(')')[0].trim();
-            const finalRange = cleanFeet(range);
-            parameters.range = finalRange;
-            parameters.properties.push(rangeProperty);
-        }
-    }
-    if (getValue('.piercing')) {
-        parameters.properties.push(getValue('.piercing'));
-    }
-    if (getValue('.sb')) {
-        parameters.sb = getValue('.sb');
-    }
-    if (getValue('.av')) {
-        // parameters.av = cleanAv(getValue('.av'));
-        parameters.av = cleanValue(getValue('.av'));
-    }
-    if (getValue('.bv')) {
-        // parameters.bv = cleanBv(getValue('.bv'));
-        parameters.bv = cleanValue(getValue('.bv'));
-    }
-    if (getText('.special-rules')) {
-        parameters.specialRules = getHTML('.special-rules');
-    }
-    
-    parameters.properties.sort((a, b) => a.localeCompare(b));
-    parameters.equipmentClasses.sort((a, b) => a.localeCompare(b));
-    const candidateProperties = toCamelCaseList(parameters.properties);
+  // Parse damage
+  const damageText = getText('.damage');
+  if (damageText) {
+    const match = damageText.match(/^([^\(]+)\s*\(([^)]+)\)/);
+    parameters.damage = match ? match[1].trim() : damageText;
+    if (match) parameters.twoHandedDamage = match[2].trim();
+  }
 
-    parameters.properties = candidateProperties.filter(property =>
-        Object.keys(CONFIG.TERIOCK.equipmentOptions.properties).includes(property)
-    );
-    parameters.magicalProperties = candidateProperties.filter(property =>
-        Object.keys(CONFIG.TERIOCK.equipmentOptions.magicalProperties).includes(property)
-    );
-    parameters.materialProperties = candidateProperties.filter(property =>
-        Object.keys(CONFIG.TERIOCK.equipmentOptions.materialProperties).includes(property)
-    );
-    parameters.equipmentClasses = toCamelCaseList(parameters.equipmentClasses);
-    
-    delete parameters.equipmentType;
-    delete parameters.powerLevel;
-    delete parameters.disabled;
-    delete parameters.description;
-    delete parameters.flaws;
-    delete parameters.tier;
-    delete parameters.effectiveTier;
-    delete parameters.notes;
-    delete parameters.shattered;
-    delete parameters.dampened;
-    delete parameters.materialProperties;
-    delete parameters.disabled;
-    delete parameters.glued;
-    delete parameters.font;
-    const out = {
-        'system': parameters,
-        'img': 'systems/teriock/assets/searchable.svg',
-    }
-    if (parameters.equipmentClasses.length > 0) {
-        let equipmentClass = parameters.equipmentClasses[0];
-        equipmentClass = equipmentClass.toLowerCase().replace(/\s+/g, '-');
-        out.img = `systems/teriock/assets/equipment-classes/${equipmentClass}.svg`;
-    }
-    return out
+  // Parse numeric and range values
+  parameters.weight = cleanValue(getValue('.weight')) ?? parameters.weight;
+  parameters.shortRange = cleanValue(getText('.short-range')) ?? parameters.shortRange;
+  parameters.longRange = cleanValue(getText('.long-range')) ?? parameters.longRange;
+  parameters.normalRange = cleanValue(getText('.normal-range')) ?? parameters.normalRange;
+  parameters.minStr = cleanValue(getValue('.min-str')) ?? parameters.minStr;
+
+  // Parse arrays
+  parameters.equipmentClasses = getTextAll('.equipment-class');
+  parameters.properties = getTextAll('.property');
+
+  // Parse full range and add property if present
+  const fullRange = getText('.full-range');
+  if (fullRange?.includes('(')) {
+    const [rangeProperty, range] = fullRange.split('(');
+    parameters.range = cleanFeet(range.split(')')[0].trim());
+    parameters.properties.push(rangeProperty.trim());
+  }
+
+  // Add piercing property if present
+  const piercing = getValue('.piercing');
+  if (piercing) parameters.properties.push(piercing);
+
+  // Parse sb, av, bv
+  parameters.sb = getValue('.sb') ?? parameters.sb;
+  parameters.av = cleanValue(getValue('.av')) ?? parameters.av;
+  parameters.bv = cleanValue(getValue('.bv')) ?? parameters.bv;
+
+  // Special rules
+  parameters.specialRules = getHTML('.special-rules') ?? parameters.specialRules;
+
+  // Sort and filter properties/classes
+  parameters.properties = parameters.properties.filter(Boolean).sort((a, b) => a.localeCompare(b));
+  parameters.equipmentClasses = parameters.equipmentClasses.filter(Boolean).sort((a, b) => a.localeCompare(b));
+  const candidateProperties = toCamelCaseList(parameters.properties);
+
+  // Filter properties by config
+  const filterByConfig = (list, configKey) =>
+    list.filter(p => Object.keys(CONFIG.TERIOCK.equipmentOptions[configKey]).includes(p));
+  parameters.properties = filterByConfig(candidateProperties, 'properties');
+  parameters.magicalProperties = filterByConfig(candidateProperties, 'magicalProperties');
+  parameters.materialProperties = filterByConfig(candidateProperties, 'materialProperties');
+  parameters.equipmentClasses = toCamelCaseList(parameters.equipmentClasses);
+
+  // Remove unused properties
+  [
+    'equipmentType', 'powerLevel', 'disabled', 'description', 'flaws', 'tier',
+    'effectiveTier', 'notes', 'shattered', 'dampened', 'materialProperties',
+    'disabled', 'glued', 'font'
+  ].forEach(key => delete parameters[key]);
+
+  // Set output image
+  let img = 'systems/teriock/assets/searchable.svg';
+  if (parameters.equipmentClasses.length > 0) {
+    const equipmentClass = parameters.equipmentClasses[0].toLowerCase().replace(/\s+/g, '-');
+    img = `systems/teriock/assets/equipment-classes/${equipmentClass}.svg`;
+  }
+
+  return { system: parameters, img };
 }

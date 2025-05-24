@@ -1,196 +1,196 @@
 import { effects } from "./generated/effects.mjs";
 
 export const abilityOptions = {
-    maneuver: {
-        active: "Active",
-        reactive: "Reactive",
-        passive: "Passive",
-        slow: "Slow"
+  maneuver: {
+    active: "Active",
+    reactive: "Reactive",
+    passive: "Passive",
+    slow: "Slow"
+  },
+  interaction: {
+    attack: "Attack",
+    block: "Block",
+    feat: "Feat",
+    manifest: "Manifest"
+  },
+  attribute: {
+    int: "INT",
+    mov: "MOV",
+    per: "PER",
+    snk: "SNK",
+    str: "STR"
+  },
+  featSaveAttribute: {
+    int: "INT",
+    mov: "MOV",
+    per: "PER",
+    snk: "SNK",
+    str: "STR",
+    unp: "UNP",
+  },
+  executionTime: {
+    active: {
+      a0: "Free Action",
+      a1: "Single Action",
+      a2: "Double Action",
+      a3: "Triple Action"
     },
-    interaction: {
-        attack: "Attack",
-        block: "Block",
-        feat: "Feat",
-        manifest: "Manifest"
+    reactive: {
+      r0: "Free Reaction",
+      r1: "Reaction"
     },
-    attribute: {
-        int: "INT",
-        mov: "MOV",
-        per: "PER",
-        snk: "SNK",
-        str: "STR"
+    passive: {
+      passive: "Passive"
     },
-    featSaveAttribute: {
-        int: "INT",
-        mov: "MOV",
-        per: "PER",
-        snk: "SNK",
-        str: "STR",
-        unp: "UNP",
+    slow: {
+      longRest: "Long rest",
+      shortRest: "Short rest",
+      custom: "Custom"
     },
-    executionTime: {
-        active: {
-            a0: "Free Action",
-            a1: "Single Action",
-            a2: "Double Action",
-            a3: "Triple Action"
-        },
-        reactive: {
-            r0: "Free Reaction",
-            r1: "Reaction"
-        },
-        passive: {
-            passive: "Passive"
-        },
-        slow: {
-            longRest: "Long rest",
-            shortRest: "Short rest",
-            custom: "Custom"
-        },
+  },
+  effects: effects,
+  piercing: {
+    normal: '',
+    av0: 'AV0',
+    ub: 'UB',
+  },
+  targets: {
+    ability: 'Ability',
+    area: 'Area',
+    arm: 'Arm',
+    armor: 'Armor',
+    attack: 'Attack',
+    creature: 'Creature',
+    item: 'Item',
+    leg: 'Leg',
+    other: 'Other',
+    self: 'Self',
+    ship: 'Ship',
+    skill: 'Skill',
+    spell: 'Spell',
+    vitals: 'Vitals',
+    weapon: 'Weapon',
+  },
+  targetParent: {
+    ability: 'Ability',
+    item: 'Item'
+  },
+  delivery: {
+    armor: 'Armor',
+    aura: 'Aura',
+    bite: 'Bite',
+    cone: 'Cone',
+    hand: 'Hand',
+    item: 'Item',
+    missile: 'Missile',
+    self: 'Self',
+    sight: 'Sight',
+    shield: 'Shield',
+    weapon: 'Weapon',
+  },
+  deliveryPackage: {
+    ball: 'Ball',
+    ray: 'Ray',
+    ritual: 'Ritual',
+    strike: 'Strike',
+    touch: 'Touch'
+  },
+  deliveryParent: {
+    item: 'Item'
+  },
+  class: {
+    flameMage: 'Flame Mage',
+    lifeMage: 'Life Mage',
+    natureMage: 'Nature Mage',
+    necromancer: 'Necromancer',
+    stormMage: 'Storm Mage',
+    archer: 'Archer',
+    assassin: 'Assassin',
+    corsair: 'Corsair',
+    ranger: 'Ranger',
+    thief: 'Thief',
+    berserker: 'Berserker',
+    duelist: 'Duelist',
+    knight: 'Knight',
+    paladin: 'Paladin',
+    veteran: 'Veteran'
+  },
+  elements: {
+    life: 'Life',
+    storm: 'Storm',
+    necromancy: 'Necromancy',
+    flame: 'Flame',
+    nature: 'Nature'
+  },
+  powerSources: {
+    alchemical: "Alchemical",
+    divine: "Divine",
+    financial: "Financial",
+    magical: "Magical",
+    martial: "Martial",
+    primal: "Primal",
+    psionic: "Psionic",
+    spiritual: "Spiritual",
+    technological: "Technological",
+    unknown: "Unknown",
+  },
+  expansion: {
+    cascade: "Cascade",
+    detonate: "Detonate",
+    fork: "Fork",
+    ripple: "Ripple",
+  },
+  manaCost: {
+    x: "Variable",
+  },
+  hitCost: {
+    x: "Variable",
+    hack: "Hack",
+  },
+  breakCost: {
+    shatter: "Shatter",
+    destroy: "Destroy",
+  },
+  featSaveImprovementAmount: {
+    proficiency: "Proficiency",
+    fluency: "Fluency",
+  },
+  costs: {
+    verbal: "Verbal",
+    somatic: "Somatic",
+    material: "Material",
+    invoked: "Invoked",
+  },
+  abilityType: {
+    special: {
+      name: 'Special',
+      icon: 'star',
+      color: '#9141ac',
     },
-    effects: effects,
-    piercing: {
-        normal: '',
-        av0: 'AV0',
-        ub: 'UB',
+    normal: {
+      name: 'Normal',
+      icon: 'diamond',
+      color: '#33d17a',
     },
-    targets: {
-        ability: 'Ability',
-        area: 'Area',
-        arm: 'Arm',
-        armor: 'Armor',
-        attack: 'Attack',
-        creature: 'Creature',
-        item: 'Item',
-        leg: 'Leg',
-        other: 'Other',
-        self: 'Self',
-        ship: 'Ship',
-        skill: 'Skill',
-        spell: 'Spell',
-        vitals: 'Vitals',
-        weapon: 'Weapon',
+    gifted: {
+      name: 'Gifted',
+      icon: 'square',
+      color: '#3584e4',
     },
-    targetParent: {
-        ability: 'Ability',
-        item: 'Item'
+    echo: {
+      name: 'Echo',
+      icon: 'circles-overlap',
+      color: '#ff7800',
     },
-    delivery: {
-        armor: 'Armor',
-        aura: 'Aura',
-        bite: 'Bite',
-        cone: 'Cone',
-        hand: 'Hand',
-        item: 'Item',
-        missile: 'Missile',
-        self: 'Self',
-        sight: 'Sight',
-        shield: 'Shield',
-        weapon: 'Weapon',
+    intrinsic: {
+      name: 'Intrinsic',
+      icon: 'cube',
+      color: '#77767b',
     },
-    deliveryPackage: {
-        ball: 'Ball',
-        ray: 'Ray',
-        ritual: 'Ritual',
-        strike: 'Strike',
-        touch: 'Touch'
+    flaw: {
+      name: 'Flaw',
+      icon: 'ban',
+      color: '#e01b24',
     },
-    deliveryParent: {
-        item: 'Item'
-    },
-    class: {
-        flameMage: 'Flame Mage',
-        lifeMage: 'Life Mage',
-        natureMage: 'Nature Mage',
-        necromancer: 'Necromancer',
-        stormMage: 'Storm Mage',
-        archer: 'Archer',
-        assassin: 'Assassin',
-        corsair: 'Corsair',
-        ranger: 'Ranger',
-        thief: 'Thief',
-        berserker: 'Berserker',
-        duelist: 'Duelist',
-        knight: 'Knight',
-        paladin: 'Paladin',
-        veteran: 'Veteran'
-    },
-    elements: {
-        life: 'Life',
-        storm: 'Storm',
-        necromancy: 'Necromancy',
-        flame: 'Flame',
-        nature: 'Nature'
-    },
-    powerSources: {
-        alchemical: "Alchemical",
-        divine: "Divine",
-        financial: "Financial",
-        magical: "Magical",
-        martial: "Martial",
-        primal: "Primal",
-        psionic: "Psionic",
-        spiritual: "Spiritual",
-        technological: "Technological",
-        unknown: "Unknown",
-    },
-    expansion: {
-        cascade: "Cascade",
-        detonate: "Detonate",
-        fork: "Fork",
-        ripple: "Ripple",
-    },
-    manaCost: {
-        x: "Variable",
-    },
-    hitCost: {
-        x: "Variable",
-        hack: "Hack",
-    },
-    breakCost: {
-        shatter: "Shatter",
-        destroy: "Destroy",
-    },
-    featSaveImprovementAmount: {
-        proficiency: "Proficiency",
-        fluency: "Fluency",
-    },
-    costs: {
-        verbal: "Verbal",
-        somatic: "Somatic",
-        material: "Material",
-        invoked: "Invoked",
-    },
-    abilityType: {
-        special: {
-            name: 'Special',
-            icon: 'star',
-            color: '#9141ac',
-        },
-        normal: {
-            name: 'Normal',
-            icon: 'diamond',
-            color: '#33d17a',
-        },
-        gifted: {
-            name: 'Gifted',
-            icon: 'square',
-            color: '#3584e4',
-        },
-        echo: {
-            name: 'Echo',
-            icon: 'circles-overlap',
-            color: '#ff7800',
-        },
-        intrinsic: {
-            name: 'Intrinsic',
-            icon: 'cube',
-            color: '#77767b',
-        },
-        flaw: {
-            name: 'Flaw',
-            icon: 'ban',
-            color: '#e01b24',
-        },
-    }
+  }
 }

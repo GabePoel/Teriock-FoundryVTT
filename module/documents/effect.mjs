@@ -35,14 +35,22 @@ export class TeriockEffect extends TeriockDocument(ActiveEffect) {
   async setForceDisabled(bool) {
     if (bool) {
       await this.update({ disabled: true, 'system.forceDisabled': true });
-    } else {
-      if ((!this.system.consumable) || (this.system.consumable && this.system.quantity >= 1)) {
-        if (this.parent.system.disabled) {
-          await this.update({ disabled: true, 'system.forceDisabled': false });
-        } else {
-          await this.update({ disabled: false, 'system.forceDisabled': false });
-        }
-      }
+      return;
+    }
+
+    const shouldEnable =
+      (!this.system.consumable) ||
+      (this.system.consumable && this.system.quantity >= 1);
+
+    const disabled = this.parent?.system?.disabled ?? false;
+
+    await this.update({
+      disabled: disabled,
+      'system.forceDisabled': false
+    });
+
+    if (shouldEnable && !disabled) {
+      await this.update({ disabled: false, 'system.forceDisabled': false });
     }
   }
 

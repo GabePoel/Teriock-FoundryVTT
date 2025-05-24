@@ -1,4 +1,4 @@
-// This file was auto-generated on 2025-05-22 by scripts/update-options.mjs.
+// This file was auto-generated on 2025-05-23 by scripts/update-options.mjs.
 // Do not edit manually.
 
 export const abilities = {
@@ -60,6 +60,7 @@ export const abilities = {
     blizzardAura: "Blizzard Aura",
     blockAlly: "Block Ally",
     blockCone: "Block Cone",
+    bodyguardTraining: "Bodyguard Training",
     bombasticCasting: "Bombastic Casting",
     boulderThrowing: "Boulder Throwing",
     bouncyCasting: "Bouncy Casting",

@@ -103,14 +103,11 @@ export async function cleanWikiHTML(html) {
     const container = doc.querySelector('.mw-parser-output');
     if (!container) return '';
 
-    // Remove all comment nodes (cross-platform safe)
     const removeComments = (node) => {
         for (let child of Array.from(node.childNodes)) {
             if (child.nodeType === 8) {
-                // Comment node
                 node.removeChild(child);
             } else if (child.nodeType === 1) {
-                // Element node: recurse
                 removeComments(child);
             }
         }

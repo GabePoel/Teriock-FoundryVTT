@@ -190,41 +190,37 @@ export class TeriockItem extends TeriockDocument(Item) {
     }
   }
 
+  async rollResourceDie(type) {
+    if (this.type !== 'rank') return;
+    const dieKey = type === 'hit' ? 'hitDie' : 'manaDie';
+    const spentKey = type === 'hit' ? 'hitDieSpent' : 'manaDieSpent';
+    const resourceKey = type === 'hit' ? 'hp' : 'mp';
+    if (this.system[spentKey]) return;
+
+    const die = this.system[dieKey];
+    const roll = new Roll(die);
+    await roll.evaluate({ async: true });
+    await roll.toMessage({
+      speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+      flavor: `${type === 'hit' ? 'Hit' : 'Mana'} Die`,
+      type: CONST.CHAT_MESSAGE_TYPES.ROLL,
+      rollMode: game.settings.get("core", "rollMode"),
+      create: true,
+    });
+    await this.update({ [`system.${spentKey}`]: true });
+    await this.actor.update({
+      [`system.${resourceKey}.value`]: Math.min(
+        this.actor.system[resourceKey].max,
+        this.actor.system[resourceKey].value + roll.total
+      ),
+    });
+  }
+
   async rollHitDie() {
-    if (this.type === 'rank' && !this.system.hitDieSpent) {
-      const hitDie = this.system.hitDie;
-      const roll = new Roll(hitDie);
-      await roll.evaluate({ async: true });
-      await roll.toMessage({
-        speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-        flavor: `Hit Die`,
-        type: CONST.CHAT_MESSAGE_TYPES.ROLL,
-        rollMode: game.settings.get("core", "rollMode"),
-        create: true,
-      });
-      await this.update({ 'system.hitDieSpent': true });
-      await this.actor.update({
-        'system.hp.value': Math.min(this.actor.system.hp.max, this.actor.system.hp.value + roll.total),
-      });
-    }
+    return this.rollResourceDie('hit');
   }
 
   async rollManaDie() {
-    if (this.type === 'rank' && !this.system.manaDieSpent) {
-      const manaDie = this.system.manaDie;
-      const roll = new Roll(manaDie);
-      await roll.evaluate({ async: true });
-      await roll.toMessage({
-        speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-        flavor: `Mana Die`,
-        type: CONST.CHAT_MESSAGE_TYPES.ROLL,
-        rollMode: game.settings.get("core", "rollMode"),
-        create: true,
-      });
-      await this.update({ 'system.manaDieSpent': true });
-      await this.actor.update({
-        'system.mp.value': Math.min(this.actor.system.mp.max, this.actor.system.mp.value + roll.total),
-      });
-    }
+    return this.rollResourceDie('mana');
   }
 }

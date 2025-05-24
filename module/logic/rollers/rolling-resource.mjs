@@ -1,29 +1,29 @@
 import { TeriockRoll } from "../../dice/roll.mjs";
 
 export async function rollResource(resource, options) {
-    await use(resource, options);
+  await use(resource, options);
 }
 
 async function use(resource, options) {
-    let message = await resource.buildMessage();
-    if (resource.system.rollFormula) {
-        let rollFormula = resource.system.rollFormula;
+  let message = await resource.buildMessage();
+  if (resource.system.rollFormula) {
+    let rollFormula = resource.system.rollFormula;
 
-        if (options?.advantage) {
-            rollFormula = rollFormula.replace(/(\d*)d(\d+)/gi, (match, dice, sides) => {
-                const num = parseInt(dice) || 1;
-                return (num * 2) + 'd' + sides;
-            });
-        }
-
-        message = await foundry.applications.ux.TextEditor.enrichHTML(message);
-        const roll = new TeriockRoll(rollFormula, resource.getActor()?.getRollData(), { flavor: message });
-        roll.toMessage({
-            speaker: ChatMessage.getSpeaker({
-                actor: resource.getActor(),
-            }),
-        });
-    } else {
-        resource.chat();
+    if (options?.advantage) {
+      rollFormula = rollFormula.replace(/(\d*)d(\d+)/gi, (match, dice, sides) => {
+        const num = parseInt(dice) || 1;
+        return (num * 2) + 'd' + sides;
+      });
     }
+
+    message = await foundry.applications.ux.TextEditor.enrichHTML(message);
+    const roll = new TeriockRoll(rollFormula, resource.getActor()?.getRollData(), { flavor: message });
+    roll.toMessage({
+      speaker: ChatMessage.getSpeaker({
+        actor: resource.getActor(),
+      }),
+    });
+  } else {
+    resource.chat();
+  }
 }

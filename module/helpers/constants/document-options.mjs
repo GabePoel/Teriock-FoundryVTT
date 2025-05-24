@@ -1,34 +1,34 @@
 export const documentOptions = {
-    ability: {
-        name: 'Ability',
-        icon: 'hand-sparkles',
-    },
-    character: {
-        name: 'Character',
-        icon: 'user',
-    },
-    equipment: {
-        name: 'Equipment',
-        icon: 'treasure-chest',
-    },
-    fluency: {
-        name: 'Fluency',
-        icon: 'compass-drafting',
-    },
-    power: {
-        name: 'Power',
-        icon: 'person-rays',
-    },
-    rank: {
-        name: 'Rank',
-        icon: 'wreath-laurel',
-    },
-    resource: {
-        name: 'Resource',
-        icon: 'hashtag',
-    },
-    condition: {
-        name: 'Condition',
-        icon: 'galaxy',
-    }
+  ability: {
+    name: 'Ability',
+    icon: 'hand-sparkles',
+  },
+  character: {
+    name: 'Character',
+    icon: 'user',
+  },
+  equipment: {
+    name: 'Equipment',
+    icon: 'treasure-chest',
+  },
+  fluency: {
+    name: 'Fluency',
+    icon: 'compass-drafting',
+  },
+  power: {
+    name: 'Power',
+    icon: 'person-rays',
+  },
+  rank: {
+    name: 'Rank',
+    icon: 'wreath-laurel',
+  },
+  resource: {
+    name: 'Resource',
+    icon: 'hashtag',
+  },
+  condition: {
+    name: 'Condition',
+    icon: 'galaxy',
+  }
 }

@@ -1,4 +1,4 @@
-// This file was auto-generated on 2025-05-22 by scripts/update-options.mjs.
+// This file was auto-generated on 2025-05-23 by scripts/update-options.mjs.
 // Do not edit manually.
 
 export const conditions = {
@@ -19,6 +19,7 @@ export const conditions = {
     frenzied: "Frenzied",
     frightened: "Frightened",
     frozen: "Frozen",
+    goaded: "Goaded",
     grounded: "Grounded",
     hacked: "Hacked",
     hidden: "Hidden",
@@ -26,6 +27,8 @@ export const conditions = {
     immobilized: "Immobilized",
     invisible: "Invisible",
     lighted: "Lighted",
+    meleeDodging: "Melee Dodging",
+    missileDodging: "Missile Dodging",
     mute: "Mute",
     paralyzed: "Paralyzed",
     poisoned: "Poisoned",

@@ -58,21 +58,15 @@ export class TeriockActor extends Actor {
     rollCondition(this, condition, options);
   }
 
-  rollTradecraft(tradecraft, options) {
-    const data = this.system.tradecrafts[tradecraft];
-    let formula = '1d20';
-    if (options?.advantage) {
-      formula = '2d20kh1';
-    } else if (options?.disadvantage) {
-      formula = '2d20kl1';
-    }
-    if (data.proficient) formula += ' + @p';
-    if (data.extra) formula += ` + @${tradecraft}`;
-
+  rollTradecraft(tradecraft, options = {}) {
+    const { proficient, extra } = this.system.tradecrafts[tradecraft] || {};
+    let formula = options.advantage ? '2d20kh1' : options.disadvantage ? '2d20kl1' : '1d20';
+    if (proficient) formula += ' + @p';
+    if (extra) formula += ` + @${tradecraft}`;
     new Roll(formula, this.getRollData()).evaluate({ async: true }).then(result => {
       result.toMessage({
         speaker: ChatMessage.getSpeaker({ actor: this }),
-        flavor: `${tradecraft[0].toUpperCase() + tradecraft.slice(1)} Check`,
+        flavor: `${tradecraft.charAt(0).toUpperCase() + tradecraft.slice(1)} Check`,
         type: CONST.CHAT_MESSAGE_TYPES.ROLL,
         rollMode: game.settings.get("core", "rollMode"),
         create: true
@@ -80,15 +74,10 @@ export class TeriockActor extends Actor {
     });
   }
 
-  rollFeatSave(attribute, options) {
+  rollFeatSave(attribute, options = {}) {
     const bonus = this.system[`${attribute}Save`] || 0;
-    let formula = '1d20';
-    if (options?.advantage) {
-      formula = '2d20kh1';
-    } else if (options?.disadvantage) {
-      formula = '2d20kl1';
-    }
-    formula += ` + ${bonus}`
+    const adv = options.advantage ? "kh1" : options.disadvantage ? "kl1" : "";
+    const formula = `2d20${adv || ""}`.replace(/^2d20$/, "1d20") + ` + ${bonus}`;
     new Roll(formula).evaluate({ async: true }).then(result => {
       result.toMessage({
         speaker: ChatMessage.getSpeaker({ actor: this }),
