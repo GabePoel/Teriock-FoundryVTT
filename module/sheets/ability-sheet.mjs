@@ -25,8 +25,9 @@ export class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(TeriockS
 
   /** @override */
   async _prepareContext() {
+    const context = await super._prepareContext();
     const { system, name, img, flags, disabled, limited, isOwner } = this.document;
-    const context = {
+    Object.assign(context, {
       config: CONFIG.TERIOCK,
       editable: this.isEditable,
       document: this.document,
@@ -37,7 +38,7 @@ export class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(TeriockS
       img,
       flags,
       disabled,
-    };
+    });
 
     const editors = {
       manaCost: system.costs.manaCost,
