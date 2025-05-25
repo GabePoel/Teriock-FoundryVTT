@@ -1,4 +1,6 @@
 - [x] **Bug fixes**
+  - [x] Automatic condition application and inheritance
+  - [x] Player ActiveEffect warnings
   - [x] Two-handed weapon damage
   - [x] Ability sheet prematurely closes when making any edit that's not handled by external code
   - [x] Slow loading of ability sheet entries
@@ -26,13 +28,15 @@
   - [x] Shattering
   - [x] Dampening
 - [ ] Major functionality
+  - [ ] Resistance save
+  - [ ] Image popup windows
+  - [ ] Awaken and resurrection
+  - [ ] Hack tracking
   - [x] Archetype ability separation
   - [x] Proficiency switches
   - [x] AV0/UB overrides
   - [x] Block interaction chain
-  - [ ] Resistance save
   - [x] End condition rolls
-  - [ ] Image popup windows
   - [x] Easy damage/drain application
   - [x] Wither display
   - [x] Attack penalties
@@ -61,13 +65,12 @@
     - [x] Tradecrafts
     - [x] Feat save
     - [x] Talented/expertise
-  - [ ] Filters
+  - [x] Filters
     - [x] Ability filters
     - [x] Equipment filters
     - [x] Power filters
     - [x] Fluency filters
     - [x] Filters and display settings collapsible
-    - [ ] Transfer search filters to Foundry's built in implementation
   - [x] Able to resize sheet
   - [x] Able to change name and icon
 - [ ] Quality of life improvements
@@ -76,7 +79,7 @@
   - [x] Drag/drop implementations
     - [x] Drag/drop between sheets
     - [x] Drag/drop as macros onto hot bar
-  - [x] Styling improvements in lots of places
+  - [ ] Styling improvements in lots of places
     - [x] Embedded cards
     - [x] Filter menus
     - [x] Option menus
@@ -91,11 +94,12 @@
   - [ ] Consolidate SCSS and template registration
   - [x] Property/effect/etc. imports scripts
 - [ ] Organization
+  - [ ] Consistent config icon handling
   - [x] Reorganize templates folder
   - [x] Separate out handlebars registration
-  - [ ] Consistent config icon handling
   - [x] Sheet helpers, utilities, wiki, and parsing consistency
   - [x] Remove all redundant click event handlers
+- [ ] More complete macro testing
 - [x] Resource implementation
 - [x] Effect separation
 - [x] Import conditions from wiki and have them as default status effects
