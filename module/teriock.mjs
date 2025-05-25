@@ -232,7 +232,6 @@ Hooks.on('chatMessage', (chatLog, message, chatData) => {
 
 
 Hooks.on('renderChatMessageHTML', (message, html, context) => {
-  console.log('renderChatMessageHTML', message, html, context);
   const buttons = html.querySelectorAll('.harm-button');
   buttons.forEach(button => {
     if (button) {

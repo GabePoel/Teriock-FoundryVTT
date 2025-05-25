@@ -228,7 +228,7 @@ export function registerHandlebarsHelpers() {
           </button>` : ''
         }
 
-        <input type="text" name="${inputName}" placeholder="Search" value="${inputValue}">
+        <input class="${tab}-search" type="text" name="${inputName}" placeholder="Search" value="${inputValue}">
 
         ${showAddButton ? `
           <button class="ttoggle-button ${tab}-add-button add-button" data-tab="${tab}" data-action="addEmbedded">

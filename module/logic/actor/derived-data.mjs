@@ -171,41 +171,102 @@ function prepareOffenses(actor) {
   }
 }
 
-function prepareConditions(actor) {
-  // const equippedItems = actor.itemTypes.equipment.filter(i => i.system.equipped);
-  // const hasCumbersome = equippedItems.some(item =>
-  //     Array.isArray(item.system.properties) &&
-  //     item.system.properties.includes('cumbersome')
-  // );
-  // const lightOverCarrying = actor.system.weightCarried >= actor.system.carryingCapacity.light;
-  // const heavyOverCarrying = (actor.system.weightCarried >= actor.system.carryingCapacity.heavy) || (lightOverCarrying && hasCumbersome);
-  // if (lightOverCarrying || heavyOverCarrying || hasCumbersome) {
-  //     actor.toggleStatusEffect('encumbered', { active: true });
-  // } else {
-  //     actor.toggleStatusEffect('encumbered', { active: false });
-  // }
-  // if (heavyOverCarrying) {
-  //     actor.toggleStatusEffect('slowed', { active: true });
-  // }
-  // const hp = actor.system.hp.value;
-  // const minHp = actor.system.hp.min;
-  // if (hp === minHp) {
-  //     actor.toggleStatusEffect('dead', { active: true });
-  // }
-  // if (actor.statuses.has('dead')) {
-  //     actor.toggleStatusEffect('asleep', { active: false });
-  //     actor.toggleStatusEffect('unconscious', { active: false });
-  // }
-  // if (actor.statuses.has('dead') && !actor.statuses.has('down')) {
-  //     actor.toggleStatusEffect('down', { active: true });
-  // }
-  // if (actor.statuses.has('asleep') && !actor.statuses.has('unconscious')) {
-  //     actor.toggleStatusEffect('unconscious', { active: true });
-  // }
-  // if (actor.statuses.has('unconscious') && !actor.statuses.has('down')) {
-  //     actor.toggleStatusEffect('down', { active: true });
-  // }
-  // if (actor.statuses.has('wisping')) {
-  //     actor.toggleStatusEffect('ethereal', { active: true });
-  // }
+// TODO: Make less messy.
+async function prepareConditions(actor) {
+  // Prevent recursion
+  if (actor._isProcessingConditions) return;
+  actor._isProcessingConditions = true;
+
+  try {
+    const toggle = async (condition, active) => {
+      if (actor.statuses.has(condition) !== active) {
+        await actor.toggleStatusEffect(condition, { active });
+      }
+    };
+
+    let encumberanceLevel = 0;
+    if (actor.system.weightCarried >= actor.system.carryingCapacity.light) {
+      encumberanceLevel = 1;
+    }
+    if (actor.system.weightCarried >= actor.system.carryingCapacity.heavy) {
+      encumberanceLevel = 2;
+    }
+    if (actor.system.weightCarried >= actor.system.carryingCapacity.max) {
+      encumberanceLevel = 3;
+    }
+    const hasCumbersome = actor.itemTypes.equipment
+      .some(item => item.system.equipped && Array.isArray(item.system.properties) && item.system.properties.includes("cumbersome"));
+    if (hasCumbersome) {
+      encumberanceLevel += 1;
+    }
+    encumberanceLevel = Math.min(encumberanceLevel, 3);
+
+    if (encumberanceLevel === 0) {
+      await toggle('encumbered', false);
+    } else if (encumberanceLevel === 1) {
+      await toggle('encumbered', true);
+    } else if (encumberanceLevel === 2) {
+      await toggle('encumbered', true);
+      await toggle('slowed', true);
+    } else if (encumberanceLevel === 3) {
+      await toggle('encumbered', true);
+      await toggle('slowed', true);
+      await toggle('immobilized', true);
+    }
+
+    if (actor.system.hp.value <= actor.system.hp.min) {
+      await toggle('dead', true);
+    }
+
+    if (actor.statuses.has('down') && !(actor.statuses.has('unconscious') || actor.statuses.has('dead'))) {
+      await toggle('down', false);
+    }
+
+    if (actor.statuses.has('ethereal') && (actor.statuses.has('unconscious') || actor.statuses.has('asleep'))) {
+      await toggle('asleep', false);
+      await toggle('unconscious', false);
+      await toggle('dead', true);
+    }
+
+    if (actor.statuses.has('prone')) {
+      await toggle('meleeDodging', false);
+      await toggle('missileDodging', false);
+    }
+
+    if (actor.statuses.has('down') && actor.statuses.has('dueling')) {
+      await toggle('dueling', false);
+    }
+
+    if (actor.statuses.has('wisping') && !actor.statuses.has('ethereal')) {
+      await toggle('ethereal', true);
+    }
+
+    if (actor.statuses.has('ruined') && !actor.statuses.has('dead')) {
+      await toggle('dead', true);
+    }
+
+    if (actor.statuses.has('dead')) {
+      await toggle('asleep', false);
+      await toggle('unconscious', false);
+    }
+
+    if (actor.statuses.has('dead') && !actor.statuses.has('down')) {
+      await toggle('down', true);
+    }
+
+    if (actor.statuses.has('asleep') && !actor.statuses.has('unconscious')) {
+      await toggle('unconscious', true);
+    }
+
+    if (actor.statuses.has('unconscious') && !actor.statuses.has('down')) {
+      await toggle('down', true);
+    }
+
+    if (actor.statuses.has('down') && !actor.statuses.has('prone')) {
+      await toggle('prone', true);
+    }
+
+  } finally {
+    actor._isProcessingConditions = false;
+  }
 }
