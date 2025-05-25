@@ -253,6 +253,10 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(Terioc
     this.actor.rollCondition(condition, options);
   }
 
+  _forceRemoveCondition(condition) {
+    this.actor.rollCondition(condition, { skip: true });
+  }
+
   /** Generalized filtering utility */
   _filterItems(items, filters, searchKey = 'search') {
     const search = filters[searchKey]?.toLowerCase();
@@ -526,6 +530,15 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(Terioc
       e.preventDefault();
       this.document.update({ 'system.attackPenalty': 0 });
       e.stopPropagation();
+    });
+
+    this.element.querySelectorAll('.condition-toggle').forEach(el => {
+      el.addEventListener('contextmenu', (e) => {
+        e.preventDefault();
+        const condition = el.dataset.condition;
+        this._forceRemoveCondition(condition);
+        e.stopPropagation();
+      });
     });
 
     primaryBlockerContextMenu(this.actor, this._dynamicContextMenus.blocker);

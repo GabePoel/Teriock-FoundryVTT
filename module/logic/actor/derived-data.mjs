@@ -176,6 +176,7 @@ async function prepareConditions(actor) {
   // Prevent recursion
   if (actor._isProcessingConditions) return;
   actor._isProcessingConditions = true;
+  if (!actor.isOwner) return;
 
   try {
     const toggle = async (condition, active) => {
