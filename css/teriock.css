@@ -448,6 +448,15 @@
   object-fit: cover;
   object-position: center;
   border: none;
+  transition: filter 0.15s ease-in-out;
+  -webkit-user-drag: none;
+  filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.4));
+}
+.teriock .tcard-container .tcard .tcard-image img:hover {
+  filter: drop-shadow(0 0 2px rgba(125, 0, 0, 0.4));
+}
+.teriock .tcard-container .tcard .tcard-image img:active {
+  filter: drop-shadow(0 0 1.5px rgba(0, 0, 0, 0.3));
 }
 .teriock .tcard-container .tcard .tcard-body {
   display: flex;
@@ -716,6 +725,7 @@
   height: inherit;
   width: inherit;
   cursor: pointer;
+  filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.4));
 }
 .teriock .ab-header .ab-profile-img::after {
   content: "";
@@ -2301,6 +2311,14 @@ dl dt {
 
 dl dd {
   margin-bottom: 0.5em;
+}
+
+dl:not(:last-child) {
+  margin-bottom: 0.5em;
+}
+
+dl:not(:first-child) {
+  margin-top: 0.5em;
 }
 
 /* New global styles */
