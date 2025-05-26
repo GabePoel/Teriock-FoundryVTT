@@ -1,4 +1,5 @@
 import { makeIcon } from "../helpers/utils.mjs";
+import { TeriockImage } from "../helpers/image.mjs";
 const { ux } = foundry.applications;
 
 export default function connectEmbedded(document, element) {
@@ -151,6 +152,24 @@ export default function connectEmbedded(document, element) {
             condition: () => {
               return embedded.documentName === 'ActiveEffect' && embedded.parent;
             }
+          },
+          {
+            name: 'Open Image',
+            icon: makeIcon('image', iconStyle),
+            callback: async (target) => {
+              const img = target.getAttribute('data-img');
+              if (img && img.length > 0) {
+                const image = new TeriockImage(img);
+                image.render(true);
+              }
+            },
+          },
+          {
+            name: 'Share Image',
+            icon: makeIcon('share', iconStyle),
+            callback: async (target) => {
+              await embedded.chatImage();
+            },
           },
           {
             name: 'Delete',

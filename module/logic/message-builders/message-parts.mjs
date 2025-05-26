@@ -122,7 +122,7 @@ export function messageHeader(parent, image, text, fontClass = 'tfont') {
   });
 
   const headerImageContainer = Object.assign(document.createElement('div'), {
-    className: 'tmessage-header-image-container',
+    className: 'tmessage-header-image-container timage',
     style: `
       width: 2em;
       height: 2em;
@@ -131,6 +131,7 @@ export function messageHeader(parent, image, text, fontClass = 'tfont') {
       justify-content: center;
     `
   });
+  headerImageContainer.setAttribute('data-src', image);
 
   const headerImage = Object.assign(document.createElement('img'), {
     className: 'tmessage-header-image',

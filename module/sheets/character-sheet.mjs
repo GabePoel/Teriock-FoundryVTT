@@ -436,7 +436,6 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(Terioc
       enrichedSpecialRules: await this._editor(this.document.system.primaryAttacker?.system?.specialRules),
       conditions,
     };
-    console.log('context', context);
     return context;
   }
 

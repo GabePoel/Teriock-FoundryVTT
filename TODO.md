@@ -29,9 +29,12 @@
   - [x] Dampening
 - [ ] Major functionality
   - [ ] Resistance save
-  - [ ] Image popup windows
   - [ ] Awaken and resurrection
+    - [ ] Death bag
   - [ ] Hack tracking
+    - [x] Limbs
+    - [ ] Not limbs
+  - [x] Image popup windows
   - [x] Archetype ability separation
   - [x] Proficiency switches
   - [x] AV0/UB overrides

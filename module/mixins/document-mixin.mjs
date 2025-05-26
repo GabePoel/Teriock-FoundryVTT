@@ -11,10 +11,20 @@ export const TeriockDocument = (Base) => class TeriockDocument extends Base {
   }
 
   async chat() {
-    ChatMessage.create({
+    await ChatMessage.create({
       content: await this.buildMessage(),
       speaker: ChatMessage.getSpeaker({ actor: this.getActor() }),
     });
+  }
+
+  async chatImage() {
+    const img = this.img;
+    if (img) {
+      await ChatMessage.create({
+        content: `<div class="timage" data-src="${img}" style="display: flex; justify-content: center;"><img src="${img}" alt="${this.name}" class="teriock-image"></div>`,
+        speaker: ChatMessage.getSpeaker({ actor: this.getActor() }),
+      });
+    }
   }
 
   async roll(options) {

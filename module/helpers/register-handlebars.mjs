@@ -303,7 +303,7 @@ export function registerHandlebarsHelpers() {
       : `<div class="tcard-subtitle">${subtitle}</div>`;
 
     return new Handlebars.SafeString(`
-      <div class="tcard ${draggable ? 'draggable' : ''} ${active ? 'active' : 'inactive'} ${shattered ? 'shattered' : ''}" ${idAttr} ${parentIdAttr} ${typeAttr} data-action="openDoc">
+      <div class="tcard ${draggable ? 'draggable' : ''} ${active ? 'active' : 'inactive'} ${shattered ? 'shattered' : ''}" ${idAttr} ${parentIdAttr} ${typeAttr} data-action="openDoc" data-img="${img}">
         <div class="tcard-marker" style="${marker ? `background-color: ${marker}; width: 4px; min-width: 4px;` : ''}"></div>
         <div class="tcard-image" data-action="rollDoc" data-tooltip="Use"><img src="${img}" alt="${title}" /></div>
         <div class="tcard-body">

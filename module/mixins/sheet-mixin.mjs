@@ -2,6 +2,7 @@ const { ux } = foundry.applications;
 const { utils } = foundry;
 import { createAbility, createResource } from "../helpers/create-effects.mjs";
 import connectEmbedded from "./connect-embedded.mjs";
+import { TeriockImage } from "../helpers/image.mjs";
 
 export const TeriockSheet = (Base) =>
   class TeriockSheet extends Base {
@@ -46,7 +47,46 @@ export const TeriockSheet = (Base) =>
     _onRender(context, options) {
       super._onRender(context, options);
       connectEmbedded(this.document, this.element);
+      const imageContextMenuOptions = [
+        {
+          name: 'Open Image',
+          icon: '<i class="fa-solid fa-image"></i>',
+          callback: async (target) => {
+            const img = target.getAttribute('data-src');
+            const image = new TeriockImage(img);
+            image.render(true);
+          },
+          condition: (target) => {
+            const img = target.getAttribute('data-src');
+            return img && img.length > 0;
+          }
+        },
+        {
+          name: 'Share Image',
+          icon: '<i class="fa-solid fa-share"></i>',
+          callback: async (target) => {
+            const img = target.getAttribute('data-src');
+            if (img && img.length > 0) {
+              await this._chatImage(img);
+            }
+          },
+        }
+      ]
+      new ux.ContextMenu(this.element, '.timage', imageContextMenuOptions, {
+        eventName: 'contextmenu',
+        jQuery: false,
+        fixed: true,
+      });
       this._activateMenu();
+    }
+
+    async _chatImage(img) {
+      if (img) {
+        await ChatMessage.create({
+          content: `<div class="timage" data-src="${img}" style="display: flex; justify-content: center;"><img src="${img}" alt="${this.name}" class="teriock-image"></div>`,
+          speaker: ChatMessage.getSpeaker({ actor: this.document }),
+        })
+      }
     }
 
     /** Editor */
@@ -126,7 +166,7 @@ export const TeriockSheet = (Base) =>
         jQuery: false,
         fixed: false,
       });
-      this._contextMenus.push(menu);
+      return menu;
     }
 
 

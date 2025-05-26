@@ -126,14 +126,6 @@ export class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(TeriockS
     this._connectButtonMap(buttonMap);
   }
 
-  _connectContextMenu(cssClass, options, eventName) {
-    new ux.ContextMenu(this.element, cssClass, options, {
-      eventName,
-      jQuery: false,
-      fixed: false,
-    });
-  }
-
   _activateContextMenus() {
     const cm = contextMenus(this.document);
     const contextMap = [

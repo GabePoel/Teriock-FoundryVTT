@@ -6,6 +6,7 @@ export const preloadHandlebarsTemplates = async function () {
     'systems/teriock/templates/chat/harm.hbs',
     'systems/teriock/templates/chat/roll.hbs',
     'systems/teriock/templates/common/header.hbs',
+    'systems/teriock/templates/common/image.hbs',
     'systems/teriock/templates/sheets/ability-template/ability-template.hbs',
     'systems/teriock/templates/sheets/ability-template/bars/ab-costs-bar.hbs',
     'systems/teriock/templates/sheets/ability-template/bars/ab-delivery-bar.hbs',

@@ -11,10 +11,12 @@ import { TeriockPowerSheet } from './sheets/power-sheet.mjs';
 import { TeriockRoll } from './dice/roll.mjs'
 import { TeriockHarmRoll } from './dice/harm.mjs';
 import { TeriockElderSorceryRoll } from './dice/elder-sorcery.mjs';
+import { TeriockImage } from './helpers/image.mjs';
 import { preloadHandlebarsTemplates } from './helpers/templates.mjs';
 import { registerHandlebarsHelpers } from './helpers/register-handlebars.mjs';
 import { TERIOCK } from './helpers/config.mjs';
 import { conditions } from './content/conditions.mjs'
+const { ux } = foundry.applications;
 const { Actors, Items } = foundry.documents.collections;
 const { ActorSheet, ItemSheet } = foundry.appv1.sheets;
 const { DocumentSheetConfig } = foundry.applications.apps;
@@ -232,6 +234,27 @@ Hooks.on('chatMessage', (chatLog, message, chatData) => {
 
 
 Hooks.on('renderChatMessageHTML', (message, html, context) => {
+  const images = html.querySelectorAll('.timage');
+  const imageContextMenuOptions = [
+    {
+      name: 'Open Image',
+      icon: '<i class="fa-solid fa-image"></i>',
+      callback: async (target) => {
+        const img = target.getAttribute('data-src');
+        const image = new TeriockImage(img);
+        image.render(true);
+      },
+      condition: (target) => {
+        const img = target.getAttribute('data-src');
+        return img && img.length > 0;
+      }
+    }
+  ]
+  new ux.ContextMenu(html, '.timage', imageContextMenuOptions, {
+    eventName: 'contextmenu',
+    jQuery: false,
+    fixed: true,
+  });
   const buttons = html.querySelectorAll('.harm-button');
   buttons.forEach(button => {
     if (button) {
