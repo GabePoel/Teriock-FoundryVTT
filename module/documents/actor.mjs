@@ -54,6 +54,14 @@ export class TeriockActor extends Actor {
     this.update({ 'system.mp.value': value });
   }
 
+  hackLimb(limb) {
+    this.update({ [`system.hacks.${limb}.value`]: Math.min(2, this.system.hacks[limb].value + 1) });
+  }
+
+  healLimb(limb) {
+    this.update({ [`system.hacks.${limb}.value`]: Math.max(0, this.system.hacks[limb].value - 1) });
+  }
+
   rollCondition(condition, options) {
     rollCondition(this, condition, options);
   }

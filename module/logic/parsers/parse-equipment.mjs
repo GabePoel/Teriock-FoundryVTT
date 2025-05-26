@@ -23,8 +23,8 @@ export default function parseEquipment(rawHTML, item) {
   // Parse numeric and range values
   parameters.weight = cleanValue(getValue('.weight')) ?? parameters.weight;
   parameters.shortRange = cleanValue(getText('.short-range')) ?? parameters.shortRange;
-  parameters.longRange = cleanValue(getText('.long-range')) ?? parameters.longRange;
-  parameters.normalRange = cleanValue(getText('.normal-range')) ?? parameters.normalRange;
+  parameters.range = cleanValue(getText('.normal-range')) ?? parameters.range;
+  parameters.range = cleanValue(getText('.long-range')) ?? parameters.range;
   parameters.minStr = cleanValue(getValue('.min-str')) ?? parameters.minStr;
 
   // Parse arrays
@@ -32,12 +32,12 @@ export default function parseEquipment(rawHTML, item) {
   parameters.properties = getTextAll('.property');
 
   // Parse full range and add property if present
-  const fullRange = getText('.full-range');
-  if (fullRange?.includes('(')) {
-    const [rangeProperty, range] = fullRange.split('(');
-    parameters.range = cleanFeet(range.split(')')[0].trim());
-    parameters.properties.push(rangeProperty.trim());
-  }
+  // const fullRange = getText('.full-range');
+  // if (fullRange?.includes('(')) {
+  //   const [rangeProperty, range] = fullRange.split('(');
+  //   parameters.range = cleanFeet(range.split(')')[0].trim());
+  //   parameters.properties.push(rangeProperty.trim());
+  // }
 
   // Add piercing property if present
   const piercing = getValue('.piercing');

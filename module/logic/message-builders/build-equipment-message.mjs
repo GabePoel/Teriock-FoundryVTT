@@ -3,6 +3,22 @@ import { addAbilitiesBlock } from "./message-parts.mjs";
 export function buildEquipmentMessage(equipment) {
   const ref = CONFIG.TERIOCK.equipmentOptions;
   const src = equipment.system;
+  let damageString = '';
+  if (src.damage) {
+    damageString += src.damage;
+    if (src.twoHandedDamage != 0) {
+      damageString += ' / ' + src.twoHandedDamage;
+    }
+    damageString += ' damage';
+  }
+  let rangeString = '';
+  if (src.range) {
+    rangeString += src.range;
+    if (src.shortRange) {
+      rangeString = src.shortRange + ' / ' + rangeString;
+    }
+    rangeString += ' ft';
+  }
   const bars = [
     {
       icon: 'fa-' + ref.powerLevel[src.powerLevel].icon,
@@ -15,9 +31,8 @@ export function buildEquipmentMessage(equipment) {
     {
       icon: 'fa-crosshairs-simple',
       wrappers: [
-        src.damage ? src.damage + ' Damage' : '',
-        src.twoHandedDamage ? src.twoHandedDamage + ' Damage' : '',
-        src.range,
+        damageString,
+        rangeString,
         src.sb,
         src.av,
         src.bv

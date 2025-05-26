@@ -218,6 +218,11 @@ async function prepareConditions(actor) {
     if (actor.system.hp.value <= actor.system.hp.min) {
       await toggle('dead', true);
     }
+    if (actor.system.hacks.arm.value + actor.system.hacks.leg.value > 0) {
+      await toggle('hacked', true);
+    } else {
+      await toggle('hacked', false);
+    }
 
     if (actor.statuses.has('down') && !(actor.statuses.has('unconscious') || actor.statuses.has('dead'))) {
       await toggle('down', false);

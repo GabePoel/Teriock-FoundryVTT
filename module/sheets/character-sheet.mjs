@@ -23,6 +23,7 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(Terioc
       takeDrain: this._takeDrain,
       takeWither: this._takeWither,
       removeCondition: this._removeCondition,
+      hack: this._hack,
     },
     form: {
       submitOnChange: true,
@@ -255,6 +256,12 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(Terioc
 
   _forceRemoveCondition(condition) {
     this.actor.rollCondition(condition, { skip: true });
+  }
+
+  static async _hack(event, target) {
+    event.stopPropagation();
+    const limb = target.dataset.limb;
+    this.actor.hackLimb(limb);
   }
 
   /** Generalized filtering utility */
@@ -537,6 +544,15 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(Terioc
         e.preventDefault();
         const condition = el.dataset.condition;
         this._forceRemoveCondition(condition);
+        e.stopPropagation();
+      });
+    });
+
+    this.element.querySelectorAll('.hack-part').forEach(el => {
+      el.addEventListener('contextmenu', (e) => {
+        e.preventDefault();
+        const limb = el.dataset.limb;
+        this.actor.healLimb(limb);
         e.stopPropagation();
       });
     });

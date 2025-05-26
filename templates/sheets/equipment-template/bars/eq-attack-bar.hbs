@@ -46,18 +46,37 @@
     {{/if}}
     {{#if (exists system.range)}}
       <div class="ab-box-container">
-        <div class="ab-box" data-tooltip="Range">
+        <div class="ab-box">
           <div class="ab-box-icon">
             {{{config.icons.range}}}
           </div>
           <div class="ab-box-content">
+            {{#if (exists system.shortRange)}}
+              <input
+                class="ability-bar-input range-input"
+                name="system.shortRange"
+                type="number"
+                value="{{system.shortRange}}"
+                data-edit="system.shortRange"
+                data-tooltip="Short Range"
+                style="text-align: right;"
+              />
+              &nbsp;/&nbsp;
+            {{/if}}
             <input
               class="ability-bar-input range-input"
               name="system.range"
-              type="text"
+              type="number"
               value="{{system.range}}"
               data-edit="system.range"
+              data-tooltip="Range"
+              {{#if (exists system.shortRange)}}
+                style="text-align: left;"
+              {{/if}}
             />
+          </div>
+          <div class="ab-box-label" style="text-transform: none;">
+            ft
           </div>
         </div>
       </div>

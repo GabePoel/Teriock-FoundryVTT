@@ -5,16 +5,12 @@ export function cleanValue(value) {
 }
 
 export function cleanFeet(feet) {
-  const synonyms = ['foot', 'feet']
+  const synonyms = ['foot', 'feet', 'ft', 'ft.']
   synonyms.forEach(synonym => {
     const regex = new RegExp(synonym, 'gi');
-    feet = feet.replace(regex, 'ft');
+    feet = feet.replace(regex, '');
   });
-  feet = feet.replace(/\bft\.\b/gi, 'ft');
   feet = feet.trim();
-  if (/\d$/.test(feet) && !feet.endsWith('ft')) {
-    feet += ' ft';
-  }
   return feet;
 }
 
