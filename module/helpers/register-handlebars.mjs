@@ -102,6 +102,12 @@ export function registerHandlebarsHelpers() {
     return 100 - left - tempP;
   });
 
+  Handlebars.registerHelper('barTempHide', (value, max, temp = 0) => {
+    if (temp === 0) return 'display: none;';
+    if (max === value) return 'border-right: none;';
+    return '';
+  });
+
 
   // Elder Sorcery Helpers
 
@@ -359,5 +365,18 @@ export function registerHandlebarsHelpers() {
     }).join('\n');
 
     return new Handlebars.SafeString(`<div class="${containerClass}">${renderedCards}</div>`);
+  });
+
+  Handlebars.registerHelper('hackFill', function (stat) {
+    const min = stat?.min || 0;
+    const max = stat?.max || 0;
+    const value = stat?.value || 0;
+    if (value === min) {
+      return 'solid';
+    } else if (value === max) {
+      return 'regular';
+    } else {
+      return 'duotone fa-regular';
+    }
   });
 }

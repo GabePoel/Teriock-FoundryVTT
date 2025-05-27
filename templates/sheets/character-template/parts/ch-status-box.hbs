@@ -1,42 +1,7 @@
 <div class="character-status-box">
   <div class="character-status-bars">
     <div class="character-status-bar-box">
-      <div class="die-drawer top-drawer hack-drawer">
-        <div class="tsubtle hack-part thover" data-action="hack" data-limb="arm" data-tooltip="Arm Hacks">
-          <div class="hack-button tgrid-item">Arm</div>
-          <div class="hack-button tgrid-item">
-            {{#if (geq system.hacks.arm.value 1)}}
-              <i class="fa-solid fa-bone-break"></i>
-            {{else}}
-              <i class="fa-solid fa-bone"></i>
-            {{/if}}
-          </div>
-          <div class="hack-button tgrid-item">
-            {{#if (geq system.hacks.arm.value 2)}}
-              <i class="fa-solid fa-bone-break"></i>
-            {{else}}
-              <i class="fa-solid fa-bone"></i>
-            {{/if}}
-          </div>
-        </div>
-        <div class="tsubtle hack-part thover" data-action="hack" data-limb="leg" data-tooltip="Leg Hacks">
-          <div class="hack-button tgrid-item">Leg</div>
-          <div class="hack-button tgrid-item">
-            {{#if (geq system.hacks.leg.value 1)}}
-              <i class="fa-solid fa-bone-break"></i>
-            {{else}}
-              <i class="fa-solid fa-bone"></i>
-            {{/if}}
-          </div>
-          <div class="hack-button tgrid-item">
-            {{#if (geq system.hacks.leg.value 2)}}
-              <i class="fa-solid fa-bone-break"></i>
-            {{else}}
-              <i class="fa-solid fa-bone"></i>
-            {{/if}}
-          </div>
-        </div>
-      </div>
+      {{> 'systems/teriock/templates/sheets/character-template/parts/ch-hack-box.hbs' }}
       <div class="character-hit-bar-container character-bar-container">
         <div class="character-hit-bar character-bar toutline">
           <div
@@ -53,7 +18,11 @@
               system.hp.value
               system.hp.max
               system.hp.temp
-            }}%;"
+            }}%; {{barTempHide
+              system.hp.value
+              system.hp.max
+              system.hp.temp
+            }}"
           ></div>
           <div
             class="character-bar-lost"
@@ -97,7 +66,7 @@
           </div>
         </div>
       </div>
-      <div class="die-drawer hit-die-drawer">
+      <div class="die-drawer hit-die-drawer hp-drawer">
         <div class="tgrid g7">
           {{{system.sheet.dieBox.hitDice}}}
         </div>
@@ -120,7 +89,11 @@
               system.mp.value
               system.mp.max
               system.mp.temp
-            }}%;"
+            }}%; {{barTempHide
+              system.mp.value
+              system.mp.max
+              system.mp.temp
+            }}"
           ></div>
           <div
             class="character-bar-lost"
@@ -164,7 +137,7 @@
           </div>
         </div>
       </div>
-      <div class="die-drawer mana-die-drawer">
+      <div class="die-drawer mana-die-drawer mp-drawer">
         <div class="tgrid g7">
           {{{system.sheet.dieBox.manaDice}}}
         </div>
@@ -180,7 +153,13 @@
           ></div>
           <div
             class="character-bar-temp"
-            style="width: {{barTemp system.wither.value system.wither.max 0}}%;"
+            style="width: {{barTemp
+                system.wither.value
+                system.wither.max
+                0
+              }}%; {{barTempHide
+                system.wither.value
+              }}"
           ></div>
           <div
             class="character-bar-lost"
@@ -228,7 +207,7 @@
         class="character-presence-bar"
         style="grid-template-columns:{{repeat system.pres ' 1fr'}};"
       >
-        {{repeat system.usp '<div class="presence-indicator used"></div>'}}
+        {{#if (geq system.usp 1)}}<div class="presence-indicator used" style="grid-column: span {{{system.usp}}}; grid-template-columns:{{repeat system.usp ' 1fr'}}; display: grid;">{{repeat system.usp '<div class="presence-indicator empty" style="background: transparent;"></div>'}}</div>{{/if}}
         {{repeat system.unp '<div class="presence-indicator unused"></div>'}}
       </div>
     </div>

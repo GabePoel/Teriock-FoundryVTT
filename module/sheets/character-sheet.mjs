@@ -260,8 +260,8 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(Terioc
 
   static async _hack(event, target) {
     event.stopPropagation();
-    const limb = target.dataset.limb;
-    this.actor.hackLimb(limb);
+    const part = target.dataset.part;
+    await this.actor.hack(part);
   }
 
   /** Generalized filtering utility */
@@ -547,11 +547,11 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(Terioc
       });
     });
 
-    this.element.querySelectorAll('.hack-part').forEach(el => {
-      el.addEventListener('contextmenu', (e) => {
+    this.element.querySelectorAll('.hack-marker-box').forEach(el => {
+      el.addEventListener('contextmenu', async (e) => {
         e.preventDefault();
-        const limb = el.dataset.limb;
-        this.actor.healLimb(limb);
+        const part = el.dataset.part;
+        await this.actor.healHack(part);
         e.stopPropagation();
       });
     });

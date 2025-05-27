@@ -54,12 +54,28 @@ export class TeriockActor extends Actor {
     this.update({ 'system.mp.value': value });
   }
 
-  hackLimb(limb) {
-    this.update({ [`system.hacks.${limb}.value`]: Math.min(2, this.system.hacks[limb].value + 1) });
+  async hack(part) {
+    const stat = this.system.hacks[part];
+    const min = stat.min || 0;
+    const max = stat.max || 2;
+    const value = Math.min(max, Math.max(min, stat.value + 1));
+    await this.update({ [`system.hacks.${part}.value`]: value });
+    const hacksTotal = Object.values(this.system.hacks).reduce((sum, hack) => sum + (hack.value || 0), 0);
+    if (hacksTotal > 0) {
+      await this.toggleStatusEffect('hacked', { active: true });
+    }
   }
 
-  healLimb(limb) {
-    this.update({ [`system.hacks.${limb}.value`]: Math.max(0, this.system.hacks[limb].value - 1) });
+  async healHack(part) {
+    const stat = this.system.hacks[part];
+    const min = stat.min || 0;
+    const max = stat.max || 2;
+    const value = Math.min(max, Math.max(min, stat.value - 1));
+    await this.update({ [`system.hacks.${part}.value`]: value });
+    const hacksTotal = Object.values(this.system.hacks).reduce((sum, hack) => sum + (hack.value || 0), 0);
+    if (hacksTotal === 0) {
+      await this.toggleStatusEffect('hacked', { active: false });
+    }
   }
 
   rollCondition(condition, options) {

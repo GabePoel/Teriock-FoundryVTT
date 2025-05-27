@@ -31,9 +31,9 @@
   - [ ] Resistance save
   - [ ] Awaken and resurrection
     - [ ] Death bag
-  - [ ] Hack tracking
+  - [x] Hack tracking
     - [x] Limbs
-    - [ ] Not limbs
+    - [x] Not limbs
   - [x] Image popup windows
   - [x] Archetype ability separation
   - [x] Proficiency switches
