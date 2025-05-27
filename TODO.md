@@ -50,7 +50,7 @@
 - [x] Power improvements
   - [x] Import abilities from wiki category
   - [x] Get confirmation before doing it
-- [ ] Character improvements
+- [x] Character improvements
   - [x] Basic abilities auto-import
   - [x] Notes page
   - [x] Automatic computations
@@ -82,13 +82,13 @@
   - [x] Drag/drop implementations
     - [x] Drag/drop between sheets
     - [x] Drag/drop as macros onto hot bar
-  - [ ] Styling improvements in lots of places
+  - [x] Styling improvements in lots of places
     - [x] Embedded cards
     - [x] Filter menus
     - [x] Option menus
     - [x] Box units
     - [x] HP/MP bars
-    - [ ] Equipment text
+    - [x] Equipment text
 - [x] Decisions
   - [x] Should ES be an item or effect/ability?
   - [x] Should items enter equipped?

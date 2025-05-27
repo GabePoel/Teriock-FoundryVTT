@@ -36,8 +36,17 @@
           {{tcard
             img=item.img
             title=item.name
-            subtitle=(dotJoin item.system.itemType item.system.sb)
-            text=(dotJoin item.system.damage item.system.bv item.system.av item.system.weight)
+            subtitle=(dotJoin
+              item.system.itemType
+              item.system.sb
+            )
+            text=(dotJoin
+              (suffix item.system.damage 'Damage')
+              (suffix item.system.bv 'BV')
+              (suffix item.system.av 'AV')
+              (prefix item.system.tier 'Tier')
+              (suffix item.system.weight 'lb')
+            )
             id=item._id
             active=item.system.equipped
             marker=(equipmentMarker item)

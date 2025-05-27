@@ -29,6 +29,6 @@ export const documentOptions = {
   },
   condition: {
     name: 'Condition',
-    icon: 'galaxy',
+    icon: 'skull-crossbones',
   }
 }

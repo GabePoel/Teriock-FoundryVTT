@@ -6,11 +6,28 @@ export function registerHandlebarsHelpers() {
   Handlebars.registerHelper('lc', str => typeof str === 'string' ? str.toLowerCase() : '');
   Handlebars.registerHelper('uc', str => typeof str === 'string' ? str.toUpperCase() : '');
   Handlebars.registerHelper('length', str => typeof str === 'string' ? str.length : 0);
+  Handlebars.registerHelper('prefix', (str, prefix) => {
+    if (str && str !== '0' && str !== '+0') {
+      return prefix + ' ' + str;
+    }
+    return '';
+  });
+  Handlebars.registerHelper('suffix', (str, suffix) => {
+    if (str && str !== '0' && str !== '+0') {
+      return str + ' ' + suffix;
+    }
+    return '';
+  });
   Handlebars.registerHelper('dotJoin', (...args) => {
     const options = args.pop();
-    return new Handlebars.SafeString(
-      args.filter(arg => typeof arg === 'string' && arg.length > 0).join('&nbsp;&nbsp;·&nbsp;&nbsp;')
-    );
+    let out = '';
+    for (const arg of args) {
+      if (arg && arg !== '0') {
+        if (out.length > 0) out += ' · ';
+        out += arg;
+      }
+    }
+    return out;
   });
 
 
@@ -225,14 +242,14 @@ export function registerHandlebarsHelpers() {
                   data-bool="${filterToggle}" data-path="${filterPath}" data-action="quickToggle">
             <i class="fa-fw fa-solid fa-filter"></i>
           </button>` : ''
-        }
+      }
 
         ${sortToggle !== null && sortToggle !== undefined ? `
           <button class="${tab}-sort-menu-toggle sort-menu-toggle ${ttoggle(sortToggle)}"
                   data-bool="${sortToggle}" data-path="${sortPath}" data-action="quickToggle">
             <i class="fa-fw fa-solid fa-bars-sort"></i>
           </button>` : ''
-        }
+      }
 
         <input class="${tab}-search" type="text" name="${inputName}" placeholder="Search" value="${inputValue}">
 
@@ -240,7 +257,7 @@ export function registerHandlebarsHelpers() {
           <button class="ttoggle-button ${tab}-add-button add-button" data-tab="${tab}" data-action="addEmbedded">
             <i class="fa-fw fa-solid fa-plus"></i>
           </button>` : ''
-        }
+      }
       </div>
 
       ${optionsToggle ? `
@@ -280,7 +297,7 @@ export function registerHandlebarsHelpers() {
 
 
   // Game Config Lookup Helpers
-  
+
   Handlebars.registerHelper('className', (arch, name) => CONFIG.TERIOCK.rankOptions[arch].classes[name].name);
   Handlebars.registerHelper('classArchetype', arch => CONFIG.TERIOCK.rankOptions[arch].name);
   Handlebars.registerHelper('executionTime', (maneuver, execTime) =>
@@ -293,7 +310,7 @@ export function registerHandlebarsHelpers() {
 
 
   // TCard & AbilityCards Helpers
-  
+
   Handlebars.registerHelper('tcard', function (options) {
     const {
       img, title, subtitle, text, icons, id, parentId,
