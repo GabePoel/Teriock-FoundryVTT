@@ -63,6 +63,24 @@ export class TeriockActor extends Actor {
     const hacksTotal = Object.values(this.system.hacks).reduce((sum, hack) => sum + (hack.value || 0), 0);
     if (hacksTotal > 0) {
       await this.toggleStatusEffect('hacked', { active: true });
+      if (part === 'ear') {
+        await this.toggleStatusEffect('deaf', { active: true });
+      } else if (part === 'eye') {
+        await this.toggleStatusEffect('blind', { active: true });
+      } else if (part === 'nose') {
+        await this.toggleStatusEffect('anosmatic', { active: true });
+      } else if (part === 'mouth') {
+        await this.toggleStatusEffect('mute', { active: true });
+      } else if (part === 'body') {
+        await this.toggleStatusEffect('immobilized', { active: true });
+      } else if (part === 'leg') {
+        if (value >= 1) {
+          await this.toggleStatusEffect('slowed', { active: true });
+        }
+        if (value >= 2) {
+          await this.toggleStatusEffect('immobilized', { active: true });
+        }
+      }
     }
   }
 
