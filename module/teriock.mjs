@@ -231,6 +231,49 @@ Hooks.on('chatMessage', (chatLog, message, chatData) => {
     return false;
   }
 
+  if (message.startsWith('/attack')) {
+    const chatOptionsRaw = message.split('/attack')[1].trim();
+    let advantage = false;
+    let disadvantage = false;
+    if (chatOptionsRaw.length > 0) {
+      const chatOptions = chatOptionsRaw.split(' ');
+      advantage = chatOptions.includes('advantage');
+      disadvantage = chatOptions.includes('disadvantage');
+    }
+    const options = {
+      advantage: advantage,
+      disadvantage: disadvantage,
+    }
+    for (const actor of actors) {
+      actor.useAbility('Basic Attack', options);
+    }
+    return false;
+  }
+
+  if (message.startsWith('/use')) {
+    const abilityName = message.split('/use')[1].trim();
+    if (!abilityName) {
+      ui.notifications.warn('Please specify an ability to use.');
+      return false;
+    }
+    const chatOptionsRaw = message.split('/use')[2]?.trim() || '';
+    let advantage = false;
+    let disadvantage = false;
+    if (chatOptionsRaw.length > 0) {
+      const chatOptions = chatOptionsRaw.split(' ');
+      advantage = chatOptions.includes('advantage');
+      disadvantage = chatOptions.includes('disadvantage');
+    }
+    const options = {
+      advantage: advantage,
+      disadvantage: disadvantage,
+    }
+    for (const actor of actors) {
+      actor.useAbility(abilityName, options);
+    }
+    return false;
+  }
+
   if (message.startsWith('/help')) {
     const helpText = `
       <ul>
@@ -257,6 +300,14 @@ Hooks.on('chatMessage', (chatLog, message, chatData) => {
         <li>
           <code>/revitalize [formula]</code>
           <div>Roll an amount of revitalization. Automatically applies to targeted tokens.</div>
+        </li>
+        <li>
+          <code>/attack [options]</code>
+          <div>All targeted tokens use the Basic Attack ability. Options: <code>advantage</code>, <code>disadvantage</code>.</div>
+        </li>
+        <li>
+          <code>/use [ability name] [options]</code>
+          <div>All targeted tokens use an ability by name. Options: <code>advantage</code>, <code>disadvantage</code>.</div>
         </li>
       </ul>
     `;
@@ -330,7 +381,7 @@ Hooks.on('renderChatMessageHTML', (message, html, context) => {
 
 Hooks.on("hotbarDrop", (bar, data, slot) => {
   fromUuid(data.uuid).then(async item => {
-    // if (!item || typeof item.roll !== "function") return;
+    if (!item || typeof item.roll !== "function") return;
     const id = item._id;
 
     const macroName = `Roll ${item.name}`;
@@ -340,7 +391,8 @@ if (!item) return ui.notifications.warn("Item not found: ${item.name}");
 
 const options = {
   advantage: window.event?.altKey,
-  disadvantage: window.event?.shiftKey
+  disadvantage: window.event?.shiftKey,
+  twoHanded: window.event?.ctrlKey,
 };
 
 await item.roll(options);

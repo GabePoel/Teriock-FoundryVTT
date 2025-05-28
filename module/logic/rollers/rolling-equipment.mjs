@@ -5,11 +5,16 @@ export async function rollEquipment(equipment, options) {
 }
 
 async function use(equipment, options) {
+  console.log(options);
   let message = await equipment.buildMessage();
   if (equipment.system.damage) {
     let rollFormula = equipment.system.damage;
+    
     if (options?.twoHanded && equipment.system.twoHandedDamage) {
       rollFormula = equipment.system.twoHandedDamage || rollFormula;
+    }
+    if (options?.bonusDamage) {
+      rollFormula = rollFormula + ' + ' + options.bonusDamage;
     }
     if (options?.advantage) {
       rollFormula = rollFormula.replace(/(\d*)d(\d+)/gi, (match, dice, sides) => {

@@ -131,6 +131,16 @@ export class TeriockActor extends Actor {
     });
   }
 
+  useAbility(abilityName, options = {}) {
+    const abilities = Array.from(this.allApplicableEffects()).filter(i => i.type === 'ability');
+    const ability = abilities.find(i => i.name === abilityName);
+    if (ability) {
+      ability.roll(options);
+    } else {
+      ui.notifications.warn(`${this.name} does not have ${abilityName}.`);
+    }
+  }
+
   _renderDieBox(rank, type, dieProp, spent) {
     const iconClass = spent ? "fa-light" : "fa-solid";
     const rollClass = spent ? "rolled" : "unrolled";

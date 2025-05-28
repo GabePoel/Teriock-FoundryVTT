@@ -270,14 +270,15 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(Terioc
 
   static async _attack(event, target) {
     event.stopPropagation();
-    const abilities = Array.from(this.actor.allApplicableEffects()).filter(i => i.type === 'ability');
-    const basicAttack = abilities.find(a => a.system.basic && a.name === 'Basic Attack');
-    if (basicAttack) {
-      await basicAttack.roll({
-        advantage: event.altKey,
-        disadvantage: event.shiftKey,
-      });
-    }
+    // const abilities = Array.from(this.actor.allApplicableEffects()).filter(i => i.type === 'ability');
+    // const basicAttack = abilities.find(a => a.system.basic && a.name === 'Basic Attack');
+    // if (basicAttack) {
+    //   await basicAttack.roll({
+    //     advantage: event.altKey,
+    //     disadvantage: event.shiftKey,
+    //   });
+    // }
+    this.actor.useAbility('Basic Attack');
   }
 
   /** Generalized filtering utility */
