@@ -98,7 +98,6 @@ export default function parseAbility(rawHTML, ability) {
   parameters.results.fail = getBarText('on-fail');
   parameters.results.critFail = getBarText('on-critical-fail');
   if (tagTree.piercing) parameters.piercing = tagTree.piercing[0];
-  console.log(tagTree);
 
   // Attribute improvement
   const attrImp = doc.querySelector('.ability-bar-attribute-improvement');
