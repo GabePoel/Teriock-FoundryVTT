@@ -1,12 +1,13 @@
 import { messageBlock, messageBar, messageBox, messageWrapper, messageHeader } from "./message-parts.mjs";
 import { buildAbilityMessage } from "./build-ability-message.mjs";
-import { buildEquipmentMessage } from "./build-equipment-message.mjs";
+import { buildEquipmentMessage, buildSecretEquipmentMessage } from "./build-equipment-message.mjs";
 import { buildPowerMessage } from "./build-power-message.mjs";
 import { buildRankMessage } from "./build-rank-message.mjs";
 import { buildFluencyMessage } from "./build-fluency-message.mjs";
 import { buildResourceMessage } from "./build-resource-message.mjs";
 
-export function buildMessage(document) {
+export function buildMessage(document, options = {}) {
+  const secret = options.secret || false;
   let content = {
     bars: [],
     blocks: []
@@ -15,7 +16,12 @@ export function buildMessage(document) {
     content = buildAbilityMessage(document);
   }
   if (document.type == 'equipment') {
-    content = buildEquipmentMessage(document);
+    if (secret) {
+      content = buildSecretEquipmentMessage(document);
+    }
+    else {
+      content = buildEquipmentMessage(document);
+    }
   }
   if (document.type == 'power') {
     content = buildPowerMessage(document);
@@ -32,6 +38,9 @@ export function buildMessage(document) {
   let fontClass = 'tfont';
   if (document.system.font) {
     fontClass = 'tfont-' + document.system.font;
+  }
+  if (secret) {
+    return buildMessageHelper("systems/teriock/assets/uncertainty.svg", document.system.equipmentType, content.bars, content.blocks, 'tfont');
   }
   return buildMessageHelper(document.img, document.name, content.bars, content.blocks, fontClass);
 }

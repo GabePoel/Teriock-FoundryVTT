@@ -103,3 +103,34 @@ export function buildEquipmentMessage(equipment) {
     blocks: blocks,
   }
 }
+
+export function buildSecretEquipmentMessage(equipment) {
+  const ref = CONFIG.TERIOCK.equipmentOptions;
+  const src = equipment.system;
+  let damageString = '';
+  if (src.damage) {
+    damageString += src.damage;
+    if (src.twoHandedDamage != 0) {
+      damageString += ' / ' + src.twoHandedDamage;
+    }
+    damageString += ' damage';
+  }
+  const bars = [
+    {
+      icon: 'fa-cube',
+      wrappers: [
+        ...src.materialProperties.map(prop => ref.materialProperties[prop]),
+      ]
+    }
+  ]
+  const blocks = [
+    {
+      title: 'Noticeable properties',
+      text: src.noticeableProperties,
+    }
+  ]
+  return {
+    bars: bars,
+    blocks: blocks,
+  }
+}

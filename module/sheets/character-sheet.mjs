@@ -24,6 +24,7 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(Terioc
       takeWither: this._takeWither,
       removeCondition: this._removeCondition,
       hack: this._hack,
+      attack: this._attack,
     },
     form: {
       submitOnChange: true,
@@ -186,9 +187,12 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(Terioc
     const id = target.dataset.id;
     const item = this.document.items.get(id);
     if (item) {
-      const options = {};
+      const options = {
+        secret: true,
+      };
       if (event.altKey) options.advantage = true;
       if (event.shiftKey) options.disadvantage = true;
+      if (event.ctrlKey) options.twoHanded = true;
       item.roll(options);
     }
   }
@@ -262,6 +266,18 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(Terioc
     event.stopPropagation();
     const part = target.dataset.part;
     await this.actor.hack(part);
+  }
+
+  static async _attack(event, target) {
+    event.stopPropagation();
+    const abilities = Array.from(this.actor.allApplicableEffects()).filter(i => i.type === 'ability');
+    const basicAttack = abilities.find(a => a.system.basic && a.name === 'Basic Attack');
+    if (basicAttack) {
+      await basicAttack.roll({
+        advantage: event.altKey,
+        disadvantage: event.shiftKey,
+      });
+    }
   }
 
   /** Generalized filtering utility */

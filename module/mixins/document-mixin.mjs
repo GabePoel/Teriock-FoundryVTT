@@ -36,6 +36,15 @@ export const TeriockDocument = (Base) => class TeriockDocument extends Base {
     this.useOne();
   }
 
+  async secretRoll(options) {
+    if (['ability', 'equipment', 'resource', 'fluency'].includes(this.type)) {
+      await secretRoll(this, options);
+    } else {
+      await this.chat();
+    }
+    this.useOne();
+  }
+
   async useOne() {
     if (this.system.consumable) {
       const quantity = this.system.quantity;
@@ -68,8 +77,8 @@ export const TeriockDocument = (Base) => class TeriockDocument extends Base {
     }
   }
 
-  async buildMessage() {
-    return buildMessage(this).outerHTML;
+  async buildMessage(options = {}) {
+    return buildMessage(this, options).outerHTML;
   }
 
   getWikiPage() {

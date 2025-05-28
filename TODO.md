@@ -10,15 +10,14 @@
   - [x] Window sizing limitations
   - [x] No context menu on embedded sheets
   - [x] Character sheet context menus not updating
-- [ ] **Ability improvements**
-  - [ ] Inherit image from parent
+- [x] **Ability improvements**
   - [x] Able to make as flaw
   - [x] Improved dice rolling
   - [x] Separate chart and dice rolling messages
   - [x] Force proficiency
 - [ ] **Equipment improvements**
   - [ ] Have simple effects (custom properties?) that aren't abilities addable to items
-  - [ ] Two-handed weapon damage
+  - [x] Two-handed weapon damage
   - [x] Able to set tier
   - [x] Able to set properties
   - [x] Able to add descriptions
@@ -76,7 +75,7 @@
     - [x] Filters and display settings collapsible
   - [x] Able to resize sheet
   - [x] Able to change name and icon
-- [ ] Quality of life improvements
+- [x] Quality of life improvements
   - [x] Rolling implementation for items
   - [x] Handlebars consolidation across item and character sheets
   - [x] Drag/drop implementations

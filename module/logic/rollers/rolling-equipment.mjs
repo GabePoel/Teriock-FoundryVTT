@@ -8,13 +8,20 @@ async function use(equipment, options) {
   let message = await equipment.buildMessage();
   if (equipment.system.damage) {
     let rollFormula = equipment.system.damage;
+    if (options?.twoHanded && equipment.system.twoHandedDamage) {
+      rollFormula = equipment.system.twoHandedDamage || rollFormula;
+    }
     if (options?.advantage) {
       rollFormula = rollFormula.replace(/(\d*)d(\d+)/gi, (match, dice, sides) => {
         const numDice = parseInt(dice) || 1;
         return (numDice * 2) + 'd' + sides;
       });
     }
-    message = await foundry.applications.ux.TextEditor.enrichHTML(message);
+    if (options?.secret) {
+      message = await equipment.buildMessage({ secret: true });
+    } else {
+      message = await equipment.buildMessage({ secret: false });
+    }
     const roll = new TeriockHarmRoll(rollFormula, equipment.getActor()?.getRollData(), { flavor: message });
     roll.toMessage({
       speaker: ChatMessage.getSpeaker({

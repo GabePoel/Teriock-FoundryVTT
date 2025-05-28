@@ -203,7 +203,7 @@ Hooks.on('chatMessage', (chatLog, message, chatData) => {
       const roll = new TeriockRoll(rollFormula, { speaker: chatData.speaker });
       await roll.toMessage({
         user: chatData.user,
-        speaker: chatData.speaker,
+        speaker: DamagechatData.speaker,
         flavor: `Heal Roll`,
       });
       const total = roll.total;
@@ -228,6 +228,45 @@ Hooks.on('chatMessage', (chatLog, message, chatData) => {
         await actor.revitalize(total);
       }
     })().catch(console.error);
+    return false;
+  }
+
+  if (message.startsWith('/help')) {
+    const helpText = `
+      <ul>
+        <li>
+          <code>/harm [formula]</code>
+          <div>Roll an amount of damage, drain, or wither. Makes buttons that anyone can use to apply to targeted tokens.</div>
+        </li>
+        <li>
+          <code>/damage [formula]</code>
+          <div>Roll an amount of damage. Automatically applies to targeted tokens.</div>
+        </li>
+        <li>
+          <code>/drain [formula]</code>
+          <div>Roll an amount of drain. Automatically applies to targeted tokens.</div>
+        </li>
+        <li>
+          <code>/wither [formula]</code>
+          <div>Roll an amount of wither. Automatically applies to targeted tokens.</div>
+        </li>
+        <li>
+          <code>/heal [formula]</code>
+          <div>Roll an amount of healing. Automatically applies to targeted tokens.</div>
+        </li>
+        <li>
+          <code>/revitalize [formula]</code>
+          <div>Roll an amount of revitalization. Automatically applies to targeted tokens.</div>
+        </li>
+      </ul>
+    `;
+    ChatMessage.create({
+      content: helpText,
+      speaker: ChatMessage.getSpeaker({ user: chatData.user }),
+      whisper: [chatData.user],
+      title: 'Teriock Chat Commands',
+      flavor: 'Teriock Chat Commands',
+    });
     return false;
   }
 });
@@ -289,13 +328,13 @@ Hooks.on('renderChatMessageHTML', (message, html, context) => {
 // });
 
 
-Hooks.on("hotbarDrop", async (bar, data, slot) => {
-  setTimeout(async () => {
-    const item = await fromUuid(data.uuid);
-    if (!item || typeof item.roll !== "function") return;
+Hooks.on("hotbarDrop", (bar, data, slot) => {
+  fromUuid(data.uuid).then(async item => {
+    // if (!item || typeof item.roll !== "function") return;
+    const id = item._id;
 
     const macroName = `Roll ${item.name}`;
-    const command = `
+    const command = `// ID: ${id}
 const item = await fromUuid("${item.uuid}");
 if (!item) return ui.notifications.warn("Item not found: ${item.name}");
 
@@ -307,19 +346,33 @@ const options = {
 await item.roll(options);
 `;
 
-    let macro = game.macros.find(m => m.name === macroName && m.command === command);
+    let macroFolder = game.folders.find(f => f.name === "Player Macros" && f.type === "Macro");
+    if (!macroFolder) {
+      macroFolder = await Folder.create({
+        name: "Player Macros",
+        type: "Macro",
+      });
+    }
+    let macro = game.macros.find(m => m.name === macroName && m.command?.startsWith(`// ID: ${id}`));
     if (!macro) {
       macro = await Macro.create({
         name: macroName,
         type: "script",
         img: item.img,
         command,
-        flags: { "teriock": { itemMacro: true } }
+        flags: { "teriock": { itemMacro: true } },
+        folder: macroFolder.id,
+      }).catch(err => {
+        console.error(`Failed to create macro: ${err}`);
+        ui.notifications.error(`Failed to create macro: ${err.message}`);
       });
+      if (macro) {
+        game.user.assignHotbarMacro(macro, slot);
+      }
+    } else {
+      game.user.assignHotbarMacro(macro, slot);
     }
-
-    await game.user.assignHotbarMacro(macro, slot);
-  }, 50);
+  });
 
   return false;
 });
