@@ -305,7 +305,6 @@ function prepareTokens(actor) {
     'Colossal': 6,
   };
   for (const token of tokens) {
-    console.log(token);
     const tokenSize = tokenSizes[actor.system?.namedSize] || 1;
     const tokenParameters = {
       'width': tokenSize,
