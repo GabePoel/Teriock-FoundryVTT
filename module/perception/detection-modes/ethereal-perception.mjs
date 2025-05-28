@@ -1,5 +1,6 @@
 import EtherealFilter from '../filters/ethereal-filter.mjs';
 const { DetectionMode } = foundry.canvas.perception;
+const { Token } = foundry.canvas.placeables;
 
 export default class DetectionModeEthereal extends DetectionMode {
   /** @override */

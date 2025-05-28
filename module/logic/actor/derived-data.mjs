@@ -294,7 +294,7 @@ async function prepareConditions(actor) {
 }
 
 function prepareTokens(actor) {
-  const tokens = actor.getDependentTokens();
+  const tokens = actor?.getDependentTokens();
   const tokenSizes = {
     'Tiny': 0.5,
     'Small': 1,
@@ -305,12 +305,13 @@ function prepareTokens(actor) {
     'Colossal': 6,
   };
   for (const token of tokens) {
-    const tokenSize = tokenSizes[actor.system?.namedSize] || 1;
+    const tokenSize = tokenSizes[actor?.system?.namedSize] || 1;
     const tokenParameters = {
       'width': tokenSize,
       'height': tokenSize,
     }
-    token.update(tokenParameters);
-    token.updateVisionMode(actor.statuses.has('ethereal') ? 'ethereal' : 'basic');
+    token?.update(tokenParameters).then(() => {
+      token?.updateVisionMode(actor?.statuses?.has('ethereal') ? 'ethereal' : 'basic');
+    });
   };
 }

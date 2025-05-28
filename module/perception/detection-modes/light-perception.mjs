@@ -1,4 +1,5 @@
 const { DetectionMode } = foundry.canvas.perception;
+const { Token } = foundry.canvas.placeables;
 
 export default class DetectionModeLightPerception extends DetectionMode {
 
