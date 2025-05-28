@@ -16,6 +16,8 @@ import { preloadHandlebarsTemplates } from './helpers/templates.mjs';
 import { registerHandlebarsHelpers } from './helpers/register-handlebars.mjs';
 import { TERIOCK } from './helpers/config.mjs';
 import { conditions } from './content/conditions.mjs'
+import { teriockVisionModes } from './perception/vision-modes.mjs';
+import { teriockDetectionModes } from './perception/detection-modes.mjs';
 const { ux } = foundry.applications;
 const { Actors, Items } = foundry.documents.collections;
 const { ActorSheet, ItemSheet } = foundry.appv1.sheets;
@@ -48,6 +50,17 @@ Hooks.once('init', function () {
     }
     return a.id.localeCompare(b.id);
   });
+
+
+  // Remove the lightPerception detection mode if it exists
+  CONFIG.Canvas.visionModes = {
+    ...CONFIG.Canvas.visionModes,
+    ...teriockVisionModes,
+  };
+  CONFIG.Canvas.detectionModes = {
+    ...CONFIG.Canvas.detectionModes,
+    ...teriockDetectionModes,
+  };
 
   CONFIG.Dice.rolls.push(TeriockRoll);
   CONFIG.Dice.rolls.push(TeriockHarmRoll);

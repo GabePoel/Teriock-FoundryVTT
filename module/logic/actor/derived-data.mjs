@@ -1,4 +1,5 @@
 export default function prepareDerivedData(actor) {
+  prepareSize(actor);
   prepareBonuses(actor);
   prepareHpMp(actor);
   preparePresence(actor);
@@ -9,6 +10,25 @@ export default function prepareDerivedData(actor) {
   prepareDefenses(actor);
   prepareOffenses(actor);
   prepareConditions(actor);
+  prepareTokens(actor);
+}
+
+function prepareSize(actor) {
+  const size = actor.system.size;
+  const namedSizes = {
+    0: 'Tiny',
+    1: 'Small',
+    3: 'Medium',
+    5: 'Large',
+    10: 'Huge',
+    15: 'Gargantuan',
+    20: 'Colossal',
+  }
+  const sizeKeys = Object.keys(namedSizes).map(Number);
+  const filteredSizeKeys = sizeKeys.filter(key => key <= size);
+  const sizeKey = Math.max(...filteredSizeKeys, 0);
+  const namedSize = namedSizes[sizeKey] || 'Medium';
+  actor.system.namedSize = namedSize;
 }
 
 function prepareBonuses(actor) {
@@ -265,9 +285,33 @@ async function prepareConditions(actor) {
 
     if (actor.statuses.has('down') && !actor.statuses.has('prone')) {
       await toggle('prone', true);
+      await toggle('blind', true);
     }
 
   } finally {
     actor._isProcessingConditions = false;
   }
+}
+
+function prepareTokens(actor) {
+  const tokens = actor.getDependentTokens();
+  const tokenSizes = {
+    'Tiny': 0.5,
+    'Small': 1,
+    'Medium': 1,
+    'Large': 2,
+    'Huge': 3,
+    'Gargantuan': 4,
+    'Colossal': 6,
+  };
+  for (const token of tokens) {
+    console.log(token);
+    const tokenSize = tokenSizes[actor.system?.namedSize] || 1;
+    const tokenParameters = {
+      'width': tokenSize,
+      'height': tokenSize,
+    }
+    token.update(tokenParameters);
+    token.updateVisionMode(actor.statuses.has('ethereal') ? 'ethereal' : 'basic');
+  };
 }
