@@ -303,11 +303,21 @@ Hooks.on('chatMessage', (chatLog, message, chatData) => {
         </li>
         <li>
           <code>/attack [options]</code>
-          <div>All targeted tokens use the Basic Attack ability. Options: <code>advantage</code>, <code>disadvantage</code>.</div>
+          <div>All targeted tokens use the Basic Attack ability.</div>
+          <div>Options:</div>
+          <ul>
+            <li><code>advantage</code> - Roll with advantage.</li>
+            <li><code>disadvantage</code> - Roll with disadvantage.</li>
+          </ul>
         </li>
         <li>
           <code>/use [ability name] [options]</code>
-          <div>All targeted tokens use an ability by name. Options: <code>advantage</code>, <code>disadvantage</code>.</div>
+          <div>All targeted tokens use an ability by name.</div>
+          <div>Options:</div>
+          <ul>
+            <li><code>advantage</code> - Roll with advantage.</li>
+            <li><code>disadvantage</code> - Roll with disadvantage.</li>
+          </ul>
         </li>
       </ul>
     `;
