@@ -6,7 +6,7 @@ export default function parseAbility(rawHTML, ability) {
   const doc = parser.parseFromString(rawHTML, 'text/html');
 
   // Remove unnecessary elements
-  doc.querySelectorAll('.ability-sub-container, .tag-sub').forEach(el => el.remove());
+  doc.querySelectorAll('.ability-sub-container').forEach(el => el.remove());
 
   // Replace dice elements with roll syntax
   doc.querySelectorAll('.dice').forEach(el => {
@@ -98,6 +98,7 @@ export default function parseAbility(rawHTML, ability) {
   parameters.results.fail = getBarText('on-fail');
   parameters.results.critFail = getBarText('on-critical-fail');
   if (tagTree.piercing) parameters.piercing = tagTree.piercing[0];
+  console.log(tagTree);
 
   // Attribute improvement
   const attrImp = doc.querySelector('.ability-bar-attribute-improvement');
