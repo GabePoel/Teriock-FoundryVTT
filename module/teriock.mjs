@@ -396,6 +396,18 @@ Hooks.on('renderChatMessageHTML', (message, html, context) => {
       });
     }
   });
+  const openTags = html.querySelectorAll('[data-action="open"]');
+  openTags.forEach(tag => {
+    tag.addEventListener('click', async (event) => {
+      event.preventDefault();
+      const uuid = tag.getAttribute('data-uuid');
+      if (!uuid) return;
+      const doc = await fromUuid(uuid);
+      if (doc && typeof doc.sheet?.render === 'function') {
+        doc.sheet.render(true);
+      }
+    });
+  });
 });
 
 // Hooks.on('applyTokenStatusEffect', async (token, statusId, active) => {

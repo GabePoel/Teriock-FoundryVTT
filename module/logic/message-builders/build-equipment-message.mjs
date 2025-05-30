@@ -1,4 +1,4 @@
-import { addAbilitiesBlock } from "./message-parts.mjs";
+import { addAbilitiesBlock, addPropertiesBlock, addResourcesBlock } from "./message-parts.mjs";
 
 export function buildEquipmentMessage(equipment) {
   const ref = CONFIG.TERIOCK.equipmentOptions;
@@ -97,7 +97,9 @@ export function buildEquipmentMessage(equipment) {
       text: src.fllTier,
     }
   ]
+  addPropertiesBlock(equipment.transferredEffects, blocks);
   addAbilitiesBlock(equipment.transferredEffects, blocks);
+  addResourcesBlock(equipment.transferredEffects, blocks);
   return {
     bars: bars,
     blocks: blocks,

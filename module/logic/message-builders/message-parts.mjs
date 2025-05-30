@@ -188,21 +188,103 @@ function barIcon(parent, iconClass, first = true) {
 }
 
 export function addAbilitiesBlock(abilities, blocks, name = 'Abilities') {
-  const filtered = abilities.filter(a => a.type !== 'passive');
+  const abilityTypeOrder = Object.keys(CONFIG.TERIOCK.abilityOptions.abilityType);
+
+  const filtered = abilities
+    .filter(a => a.type === 'ability')
+    .sort((a, b) => {
+      const typeA = a.system.abilityType || '';
+      const typeB = b.system.abilityType || '';
+      const indexA = abilityTypeOrder.indexOf(typeA);
+      const indexB = abilityTypeOrder.indexOf(typeB);
+
+      if (indexA !== indexB) return indexA - indexB;
+
+      // If types are equal or not found, sort by name
+      const nameA = a.name?.toLowerCase() || '';
+      const nameB = b.name?.toLowerCase() || '';
+      if (nameA < nameB) return -1;
+      if (nameA > nameB) return 1;
+      return 0;
+    });
+
   if (!filtered.length) return;
 
   const abilitiesText = filtered.map(ability => {
-    const { name } = ability;
+    const { name, uuid } = ability;
     const { color, icon } = CONFIG.TERIOCK.abilityOptions.abilityType[ability.system.abilityType] || {};
     return `<li style="list-style: none; display: flex; flex-direction: row; align-items: center;">
       <span style="margin-inline: 1em; font-size: 0.5em; color: ${color};">
         <i class="fa-solid fa-${icon} fa-fw"></i>
-      </span>${name}
+      </span><a data-action="open" data-uuid="${uuid}">${name}</a>
     </li>`;
   }).join('');
 
   blocks.push({
     title: name,
     text: `<ul style="padding: 0; margin: 0;">${abilitiesText}</ul>`,
+  });
+}
+
+export function addPropertiesBlock(properties, blocks, name = 'Properties') {
+  const propertyTypeOrder = Object.keys(CONFIG.TERIOCK.abilityOptions.abilityType);
+
+  const filtered = properties
+    .filter(p => p.type === 'property')
+    .sort((a, b) => {
+      const typeA = a.system.propertyType || '';
+      const typeB = b.system.propertyType || '';
+      const indexA = propertyTypeOrder.indexOf(typeA);
+      const indexB = propertyTypeOrder.indexOf(typeB);
+
+      if (indexA !== indexB) return indexA - indexB;
+
+      // If types are equal or not found, sort by name
+      const nameA = a.name?.toLowerCase() || '';
+      const nameB = b.name?.toLowerCase() || '';
+      if (nameA < nameB) return -1;
+      if (nameA > nameB) return 1;
+      return 0;
+    });
+
+  if (!filtered.length) return;
+
+  const propertiesText = filtered.map(property => {
+    const { name, uuid } = property;
+    const { color, icon } = CONFIG.TERIOCK.abilityOptions.abilityType[property.system.propertyType] || {};
+    return `<li style="list-style: none; display: flex; flex-direction: row; align-items: center;">
+      <span style="margin-inline: 1em; font-size: 0.5em; color: ${color};">
+        <i class="fa-solid fa-${icon} fa-fw"></i>
+      </span><a data-action="open" data-uuid="${uuid}">${name}</a>
+    </li>`;
+  }).join('');
+
+  blocks.push({
+    title: name,
+    text: `<ul style="padding: 0; margin: 0;">${propertiesText}</ul>`,
+  });
+}
+
+export function addResourcesBlock(resources, blocks, name = 'Resources') {
+  if (!resources || !resources.length) return;
+
+  const filtered = resources
+    .filter(r => r.type === 'resource')
+    .sort((a, b) => a.name?.localeCompare(b.name || ''));
+
+  const resourcesText = filtered.map(resource => {
+    const { name, uuid } = resource;
+    const { quantity, maxQuantity } = resource.system;
+    return `<li style="list-style: none; display: flex; flex-direction: row; align-items: center;">
+      <span style="margin-inline: 1em; font-size: 0.5em;">
+        <i class="fa-solid fa-hashtag fa-fw"></i>
+      </span><a data-action="open" data-uuid="${uuid}">${name}</a> (${quantity}${maxQuantity ? ` / ${maxQuantity}` : ''})
+    </li>`;
+  }).join('');
+  if (!filtered.length) return;
+
+  blocks.push({
+    title: name,
+    text: `<ul style="padding: 0; margin: 0;">${resourcesText}</ul>`,
   });
 }
