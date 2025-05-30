@@ -10,12 +10,16 @@
       <div class="ab-section">
         <span class="ab-section-title">Mana cost</span>
       </div>
-      <prose-mirror
-        name="system.costs.manaCost"
-        value="{{system.costs.manaCost}}"
-        toggled=true
-        editable=editable
-      >{{{manaCost}}}</prose-mirror>
+      {{#if editable}}
+        <prose-mirror
+          name="system.costs.manaCost"
+          value="{{system.costs.manaCost}}"
+          toggled=true
+          editable=editable
+        >{{{manaCost}}}</prose-mirror>
+      {{else}}
+        {{{manaCost}}}
+      {{/if}}
     </div>
   {{/if}}
   {{#if (exists system.costs.hitCost)}}
@@ -23,12 +27,16 @@
       <div class="ab-section">
         <span class="ab-section-title">Hit cost</span>
       </div>
-      <prose-mirror
-        name="system.costs.hitCost"
-        value="{{system.costs.hitCost}}"
-        toggled=true
-        editable=editable
-      >{{{hitCost}}}</prose-mirror>
+      {{#if editable}}
+        <prose-mirror
+          name="system.costs.hitCost"
+          value="{{system.costs.hitCost}}"
+          toggled=true
+          editable=editable
+        >{{{hitCost}}}</prose-mirror>
+      {{else}}
+        {{{hitCost}}}
+      {{/if}}
     </div>
   {{/if}}
   {{#if (exists system.costs.materialCost)}}
@@ -36,12 +44,16 @@
       <div class="ab-section">
         <span class="ab-section-title">Material cost</span>
       </div>
-      <prose-mirror
-        name="system.costs.materialCost"
-        value="{{system.costs.materialCost}}"
-        toggled=true
-        editable=editable
-      >{{{materialCost}}}</prose-mirror>
+      {{#if editable}}
+        <prose-mirror
+          name="system.costs.materialCost"
+          value="{{system.costs.materialCost}}"
+          toggled=true
+          editable=editable
+        >{{{materialCost}}}</prose-mirror>
+      {{else}}
+        {{{materialCost}}}
+      {{/if}}
     </div>
   {{/if}}
 {{/if}}

@@ -34,13 +34,23 @@
         {{> "systems/teriock/templates/sheets/equipment-template/entries/eq-tier.hbs"}}
       {{/if}}
     </div>
-    <div class="ab-main">
-      <button class="createAbility" data-action='createAbility'>Add Ability</button>
-      {{abilityCards abilities system}}
-    </div>
-    <div class="ab-main">
-      <button class="createResource" data-action="createResource">Add Resource</button>
-      {{abilityCards resources system}}
-    </div>
+    {{#if (or editable (exists properties))}}
+      <div class="ab-main">
+        {{#if editable}}<button class="createProperty" data-action='createProperty'>Add Property</button>{{/if}}
+        {{abilityCards properties system}}
+      </div>
+    {{/if}}
+    {{#if (or editable (exists abilities))}}
+      <div class="ab-main">
+        {{#if editable}}<button class="createAbility" data-action='createAbility'>Add Ability</button>{{/if}}
+        {{abilityCards abilities system}}
+      </div>
+    {{/if}}
+    {{#if (or editable (exists resources))}}
+      <div class="ab-main">
+        {{#if editable}}<button class="createResource" data-action="createResource">Add Resource</button>{{/if}}
+        {{abilityCards resources system}}
+      </div>
+    {{/if}}
   </div>
 </div>

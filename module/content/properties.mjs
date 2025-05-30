@@ -1,4 +1,4 @@
-// This file was auto-generated on 2025-05-26 by scripts/fetch-content.mjs.
+// This file was auto-generated on 2025-05-30 by scripts/fetch-content.mjs.
 // Do not edit manually.
 
 export const properties = {

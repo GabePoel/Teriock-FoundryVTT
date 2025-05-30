@@ -3,12 +3,16 @@
     <div class="ab-section">
       <span class="ab-section-title">Description</span>
     </div>
-    <prose-mirror
-      name="system.overview.base"
-      value="{{system.overview.base}}"
-      toggled=true
-      editable=editable
-    >{{{baseOverview}}}</prose-mirror>
+    {{#if editable}}
+      <prose-mirror
+        name="system.overview.base"
+        value="{{system.overview.base}}"
+        toggled=true
+        editable=editable
+      >{{{baseOverview}}}</prose-mirror>
+    {{else}}
+      {{{baseOverview}}}
+    {{/if}}
   </div>
 {{/if}}
 {{#if (exists system.overview.proficient)}}
@@ -16,12 +20,16 @@
     <div class="ab-section">
       <span class="ab-section-title">If proficient</span>
     </div>
-    <prose-mirror
-      name="system.overview.proficient"
-      value="{{system.overview.proficient}}"
-      toggled=true
-      editable=editable
-    >{{{proficientOverview}}}</prose-mirror>
+    {{#if editable}}
+      <prose-mirror
+        name="system.overview.proficient"
+        value="{{system.overview.proficient}}"
+        toggled=true
+        editable=editable
+      >{{{proficientOverview}}}</prose-mirror>
+    {{else}}
+      {{{proficientOverview}}}
+    {{/if}}
   </div>
 {{/if}}
 {{#if (exists system.overview.fluent)}}
@@ -29,11 +37,15 @@
     <div class="ab-section">
       <span class="ab-section-title">If fluent</span>
     </div>
-    <prose-mirror
-      name="system.overview.fluent"
-      value="{{system.overview.fluent}}"
-      toggled=true
-      editable=editable
-    >{{{fluentOverview}}}</prose-mirror>
+    {{#if editable}}
+      <prose-mirror
+        name="system.overview.fluent"
+        value="{{system.overview.fluent}}"
+        toggled=true
+        editable=editable
+      >{{{fluentOverview}}}</prose-mirror>
+    {{else}}
+      {{{fluentOverview}}}
+    {{/if}}
   </div>
 {{/if}}

@@ -1,6 +1,6 @@
 const { ux } = foundry.applications;
 const { utils } = foundry;
-import { createAbility, createResource } from "../helpers/create-effects.mjs";
+import { createAbility, createResource, createProperty } from "../helpers/create-effects.mjs";
 import connectEmbedded from "./connect-embedded.mjs";
 import { TeriockImage } from "../helpers/image.mjs";
 
@@ -23,6 +23,7 @@ export const TeriockSheet = (Base) =>
         useOneDoc: this._useOneDoc,
         createAbility: this._createAbility,
         createResource: this._createResource,
+        createProperty: this._createProperty,
       },
       form: {
         submitOnChange: true,
@@ -45,8 +46,9 @@ export const TeriockSheet = (Base) =>
 
     /** @override */
     _onRender(context, options) {
+      this.editable = this.isEditable && this.document.system.editable;
       super._onRender(context, options);
-      connectEmbedded(this.document, this.element);
+      connectEmbedded(this.document, this.element, this.editable);
       const imageContextMenuOptions = [
         {
           name: 'Open Image',
@@ -76,6 +78,9 @@ export const TeriockSheet = (Base) =>
         eventName: 'contextmenu',
         jQuery: false,
         fixed: true,
+      });
+      this._connect('.chat-button', 'contextmenu', (e) => {
+        TeriockSheet._debug.call(this, e, e.currentTarget);
       });
       this._activateMenu();
     }
@@ -308,5 +313,9 @@ export const TeriockSheet = (Base) =>
 
     static async _createResource(event, __) {
       await createResource(this.item, null);
+    }
+
+    static async _createProperty(event, __) {
+      await createProperty(this.item, null);
     }
   };

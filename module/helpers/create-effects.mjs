@@ -23,3 +23,11 @@ export async function createResource(document) {
     img: "systems/teriock/assets/resource.svg",
   }, { parent: document });
 }
+
+export async function createProperty(document) {
+  return await TeriockEffect.create({
+    name: "New Property",
+    type: "property",
+    img: "systems/teriock/assets/property.svg",
+  }, { parent: document });
+}

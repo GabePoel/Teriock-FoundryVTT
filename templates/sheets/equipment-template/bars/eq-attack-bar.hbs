@@ -15,6 +15,9 @@
           </div>
           <div class="ab-box-content">
             <input
+              {{#if (not editable)}}
+                disabled="true"
+              {{/if}}
               class="ability-bar-input damage-input"
               name="system.damage"
               type="text"
@@ -53,6 +56,9 @@
           <div class="ab-box-content">
             {{#if (exists system.shortRange)}}
               <input
+                {{#if (not editable)}}
+                  disabled="true"
+                {{/if}}
                 class="ability-bar-input range-input"
                 name="system.shortRange"
                 type="number"
@@ -64,6 +70,9 @@
               &nbsp;/&nbsp;
             {{/if}}
             <input
+              {{#if (not editable)}}
+                disabled="true"
+              {{/if}}
               class="ability-bar-input range-input"
               name="system.range"
               type="number"
@@ -89,11 +98,14 @@
                 </div>
                 <div class="ab-box-content">
                     <input
-                        class="ability-bar-input av-input"
-                        name="system.av"
-                        type="number"
-                        value="{{system.av}}"
-                        data-edit="system.av"
+                      {{#if (not editable)}}
+                        disabled="true"
+                      {{/if}}
+                      class="ability-bar-input av-input"
+                      name="system.av"
+                      type="number"
+                      value="{{system.av}}"
+                      data-edit="system.av"
                     />
                 </div>
                 <div class="ab-box-label">
@@ -110,11 +122,14 @@
                 </div>
                 <div class="ab-box-content">
                     <input
-                        class="ability-bar-input bv-input"
-                        name="system.bv"
-                        type="number"
-                        value="{{system.bv}}"
-                        data-edit="system.bv"
+                      {{#if (not editable)}}
+                        disabled="true"
+                      {{/if}}
+                      class="ability-bar-input bv-input"
+                      name="system.bv"
+                      type="number"
+                      value="{{system.bv}}"
+                      data-edit="system.bv"
                     />
                 </div>
                 <div class="ab-box-label">

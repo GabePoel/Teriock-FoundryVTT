@@ -2,10 +2,14 @@
   <div class="ab-section">
     <span class="ab-section-title">Equipment type rules</span>
   </div>
-  <prose-mirror
-    name="system.specialRules"
-    value="{{system.specialRules}}"
-    toggled=true
-    editable=editable
-  >{{{enrichedSpecialRules}}}</prose-mirror>
+  {{#if editable}}
+    <prose-mirror
+      name="system.specialRules"
+      value="{{system.specialRules}}"
+      toggled=true
+      editable=editable
+    >{{{enrichedSpecialRules}}}</prose-mirror>
+  {{else}}
+    {{{enrichedSpecialRules}}}
+  {{/if}}
 </div>

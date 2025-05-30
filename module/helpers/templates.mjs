@@ -68,6 +68,8 @@ export const preloadHandlebarsTemplates = async function () {
     'systems/teriock/templates/sheets/power-template/entries/pw-description.hbs',
     'systems/teriock/templates/sheets/power-template/entries/pw-flaws.hbs',
     'systems/teriock/templates/sheets/power-template/power-template.hbs',
+    'systems/teriock/templates/sheets/property-template/bars/pr-status-bar.hbs',
+    'systems/teriock/templates/sheets/property-template/property-template.hbs',
     'systems/teriock/templates/sheets/rank-template/bars/rk-bar-class.hbs',
     'systems/teriock/templates/sheets/rank-template/bars/rk-bar-stats.hbs',
     'systems/teriock/templates/sheets/rank-template/rank-template.hbs',

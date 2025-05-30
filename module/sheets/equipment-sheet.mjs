@@ -64,7 +64,8 @@ export class TeriockEquipmentSheet extends HandlebarsApplicationMixin(TeriockIte
   /** @override */
   _onRender(context, options) {
     super._onRender(context, options);
-    if (!this.isEditable) return;
+    this.editable = (this.isEditable && this.document.system.editable);
+    if (!this.editable) return;
 
     const item = this.item;
 

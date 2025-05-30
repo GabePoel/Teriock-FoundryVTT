@@ -2,7 +2,7 @@ import { makeIcon } from "../helpers/utils.mjs";
 import { TeriockImage } from "../helpers/image.mjs";
 const { ux } = foundry.applications;
 
-export default function connectEmbedded(document, element) {
+export default function connectEmbedded(document, element, editable = true) {
   const iconStyle = CONFIG.TERIOCK.iconStyles.contextMenu;
   element.querySelectorAll('.tcard').forEach((el) => {
     const id = el.getAttribute('data-id');
@@ -176,6 +176,9 @@ export default function connectEmbedded(document, element) {
             icon: makeIcon('trash', iconStyle),
             callback: () => {
               embedded.delete();
+            },
+            condition: () => {
+              return editable && embedded.isOwner;
             }
           },
           {
@@ -184,6 +187,9 @@ export default function connectEmbedded(document, element) {
             callback: async () => {
               const copy = await foundry.utils.duplicate(embedded)
               embedded.parent.createEmbeddedDocuments(embedded.documentName, [copy], { render: true });
+            },
+            condition: () => {
+              return editable && embedded.isOwner;
             }
           },
         ],

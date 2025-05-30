@@ -21,9 +21,34 @@ export class TeriockItemSheet extends TeriockSheet(sheets.ItemSheet) {
     const { item, document } = this;
     const { system, name, img, flags, transferredEffects } = item;
 
+    const abilityTypeOrder = Object.keys(CONFIG.TERIOCK.abilityOptions.abilityType || {});
+    const abilities = transferredEffects
+      .filter(e => e.type === 'ability')
+      .sort((a, b) => {
+        const typeA = a.system?.abilityType || '';
+        const typeB = b.system?.abilityType || '';
+        const indexA = abilityTypeOrder.indexOf(typeA);
+        const indexB = abilityTypeOrder.indexOf(typeB);
+        if (indexA !== indexB) return indexA - indexB;
+        return (a.name || '').localeCompare(b.name || '');
+      });
+
+    const propertyTypeOrder = Object.keys(CONFIG.TERIOCK.abilityOptions.abilityType || {});
+    const properties = transferredEffects
+      .filter(e => e.type === 'property')
+      .sort((a, b) => {
+        const typeA = a.system?.propertyType || '';
+        const typeB = b.system?.propertyType || '';
+        const indexA = propertyTypeOrder.indexOf(typeA);
+        const indexB = propertyTypeOrder.indexOf(typeB);
+        if (indexA !== indexB) return indexA - indexB;
+        return (a.name || '').localeCompare(b.name || '');
+      });
+
     return {
       config: CONFIG.TERIOCK,
-      editable: this.isEditable,
+      isEditable: this.isEditable,
+      editable: this.isEditable && document.system.editable,
       item,
       limited: document.limited,
       owner: document.isOwner,
@@ -31,7 +56,8 @@ export class TeriockItemSheet extends TeriockSheet(sheets.ItemSheet) {
       name,
       img,
       flags,
-      abilities: transferredEffects.filter(e => e.type === 'ability'),
+      properties,
+      abilities,
       resources: transferredEffects.filter(e => e.type === 'resource'),
     };
   }
@@ -72,11 +98,11 @@ export class TeriockItemSheet extends TeriockSheet(sheets.ItemSheet) {
   }
 
   _canDragStart() {
-    return this.isEditable;
+    return this.editable;
   }
 
   _canDragDrop() {
-    return this.isEditable;
+    return this.editable;
   }
 
   get dragDrop() {

@@ -29,6 +29,10 @@ export const documentOptions = {
   },
   condition: {
     name: 'Condition',
-    icon: 'skull-crossbones',
-  }
+    icon: 'disease',
+  },
+  property: {
+    name: 'Property',
+    icon: 'atom-simple',
+  },
 }

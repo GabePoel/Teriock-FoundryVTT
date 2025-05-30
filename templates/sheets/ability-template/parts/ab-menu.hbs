@@ -10,6 +10,9 @@
             name="system.basic"
             data-edit="system.basic"
             {{checked system.basic}}
+            {{#if (not editable)}}
+              disabled="true"
+            {{/if}}
           />
         </div>
         <div class="tgrid-item">
@@ -20,6 +23,9 @@
             name="system.standard"
             data-edit="system.standard"
             {{checked system.standard}}
+            {{#if (not editable)}}
+              disabled="true"
+            {{/if}}
           />
         </div>
         <div class="tgrid-item">
@@ -30,6 +36,9 @@
             name="system.skill"
             data-edit="system.skill"
             {{checked system.skill}}
+            {{#if (not editable)}}
+              disabled="true"
+            {{/if}}
           />
         </div>
         <div class="tgrid-item">
@@ -40,6 +49,9 @@
             name="system.spell"
             data-edit="system.spell"
             {{checked system.spell}}
+            {{#if (not editable)}}
+              disabled="true"
+            {{/if}}
           />
         </div>
         <div class="tgrid-item">
@@ -50,6 +62,9 @@
             name="system.ritual"
             data-edit="system.ritual"
             {{checked system.ritual}}
+            {{#if (not editable)}}
+              disabled="true"
+            {{/if}}
           />
         </div>
         <div class="tgrid-item">
@@ -60,6 +75,9 @@
             name="system.rotator"
             data-edit="system.rotator"
             {{checked system.rotator}}
+            {{#if (not editable)}}
+              disabled="true"
+            {{/if}}
           />
         </div>
         <div class="tgrid-item">
@@ -70,6 +88,9 @@
             name="system.sustained"
             data-edit="system.sustained"
             {{checked system.sustained}}
+            {{#if (not editable)}}
+              disabled="true"
+            {{/if}}
           />
         </div>
         <div class="tgrid-item">
@@ -80,6 +101,9 @@
             name="system.costs.invoked"
             data-edit="system.costs.invoked"
             {{checked system.costs.invoked}}
+            {{#if (not editable)}}
+              disabled="true"
+            {{/if}}
           />
         </div>
         <div class="tgrid-item">
@@ -90,6 +114,9 @@
             name="system.costs.verbal"
             data-edit="system.costs.verbal"
             {{checked system.costs.verbal}}
+            {{#if (not editable)}}
+              disabled="true"
+            {{/if}}
           />
         </div>
         <div class="tgrid-item">
@@ -100,6 +127,9 @@
             name="system.costs.somatic"
             data-edit="system.costs.somatic"
             {{checked system.costs.somatic}}
+            {{#if (not editable)}}
+              disabled="true"
+            {{/if}}
           />
         </div>
         <div class="tgrid-item">
@@ -110,6 +140,9 @@
             name="system.forceProficient"
             data-edit="system.forceProficient"
             {{checked system.forceProficient}}
+            {{#if (not editable)}}
+              disabled="true"
+            {{/if}}
           />
         </div>
         {{!-- <div class="tgrid-item">
@@ -120,6 +153,9 @@
             name="system.forceFluent"
             data-edit="system.forceFluent"
             {{checked system.forceFluent}}
+            {{#if (not editable)}}
+              disabled="true"
+            {{/if}}
           />
         </div> --}}
         <div class="tgrid-item">
@@ -130,6 +166,9 @@
             name="system.elderSorcery"
             data-edit="system.elderSorcery"
             {{checked system.elderSorcery}}
+            {{#if (not editable)}}
+              disabled="true"
+            {{/if}}
           />
         </div>
       </div>
@@ -141,6 +180,9 @@
             <multi-select
               name="system.powerSources"
               data-edit="system.powerSources"
+              {{#if (not editable)}}
+                disabled="true"
+              {{/if}}
             >
               {{selectOptions
                 config.abilityOptions.powerSources
@@ -151,7 +193,11 @@
         </div>
         <div class="tgrid-item">
           <div class="ab-multi-select-label ab-multi-select-element">
-            <multi-select name="system.elements" data-edit="system.elements">
+            <multi-select name="system.elements" data-edit="system.elements"
+              {{#if (not editable)}}
+                disabled="true"
+              {{/if}}
+            >
               {{selectOptions
                 config.abilityOptions.elements
                 selected=system.elements
@@ -161,7 +207,11 @@
         </div>
         <div class="tgrid-item">
           <div class="ab-multi-select-label ab-multi-select-effects">
-            <multi-select name="system.effects" data-edit="system.effects">
+            <multi-select name="system.effects" data-edit="system.effects"
+              {{#if (not editable)}}
+                disabled="true"
+              {{/if}}
+            >
               {{selectOptions
                 config.abilityOptions.effects
                 selected=system.effects
@@ -170,7 +220,11 @@
           </div>
         </div>
         <div class="tgrid-item">
-          <select name="system.class" data-edit="system.class">
+          <select name="system.class" data-edit="system.class"
+            {{#if (not editable)}}
+              disabled="true"
+            {{/if}}
+          >
             <option value="" selected>Class</option>
             {{selectOptions config.abilityOptions.class selected=system.class}}
           </select>
@@ -181,7 +235,11 @@
       <div class="tgrid ab-button-grid">
         {{#if (not (exists system.expansion))}}
           <div class="tgrid-item">
-            <button class="ab-menu-button ab-expansion-button">
+            <button class="ab-menu-button ab-expansion-button"
+              {{#if (not editable)}}
+                disabled="true"
+              {{/if}}
+            >
               {{{config.icons.add}}}
               Expansion
             </button>
@@ -191,7 +249,11 @@
         {{! Before Overview }}
         {{#if (not (exists system.costs.mp))}}
           <div class="tgrid-item">
-            <button class="ab-menu-button ab-mana-cost-button">
+            <button class="ab-menu-button ab-mana-cost-button"
+              {{#if (not editable)}}
+                disabled="true"
+              {{/if}}
+            >
               {{{config.icons.add}}}
               Mana Cost
             </button>
@@ -199,7 +261,11 @@
         {{/if}}
         {{#if (not (exists system.costs.hp))}}
           <div class="tgrid-item">
-            <button class="ab-menu-button ab-hit-cost-button">
+            <button class="ab-menu-button ab-hit-cost-button"
+              {{#if (not editable)}}
+                disabled="true"
+              {{/if}}
+            >
               {{{config.icons.add}}}
               Hit Cost
             </button>
@@ -207,7 +273,11 @@
         {{/if}}
         {{#if (not (exists system.costs.break))}}
           <div class="tgrid-item">
-            <button class="ab-menu-button ab-break-cost-button">
+            <button class="ab-menu-button ab-break-cost-button"
+              {{#if (not editable)}}
+                disabled="true"
+              {{/if}}
+            >
               {{{config.icons.add}}}
               Break Cost
             </button>
@@ -215,7 +285,11 @@
         {{/if}}
         {{#if (not (exists system.costs.materialCost))}}
           <div class="tgrid-item">
-            <button class="ab-menu-button ab-material-cost-button">
+            <button class="ab-menu-button ab-material-cost-button"
+              {{#if (not editable)}}
+                disabled="true"
+              {{/if}}
+            >
               {{{config.icons.add}}}
               Material Cost
             </button>
@@ -223,7 +297,11 @@
         {{/if}}
         {{#if (not (exists system.trigger))}}
           <div class="tgrid-item">
-            <button class="ab-menu-button ab-trigger-button">
+            <button class="ab-menu-button ab-trigger-button"
+              {{#if (not editable)}}
+                disabled="true"
+              {{/if}}
+            >
               {{{config.icons.add}}}
               Trigger
             </button>
@@ -231,7 +309,11 @@
         {{/if}}
         {{#if (not (exists system.limitation))}}
           <div class="tgrid-item">
-            <button class="ab-menu-button ab-limitation-button">
+            <button class="ab-menu-button ab-limitation-button"
+              {{#if (not editable)}}
+                disabled="true"
+              {{/if}}
+            >
               {{{config.icons.add}}}
               Limitation
             </button>
@@ -239,7 +321,11 @@
         {{/if}}
         {{#if (not (exists system.improvement))}}
           <div class="tgrid-item">
-            <button class="ab-menu-button ab-improvement-button">
+            <button class="ab-menu-button ab-improvement-button"
+              {{#if (not editable)}}
+                disabled="true"
+              {{/if}}
+            >
               {{{config.icons.add}}}
               Improvement
             </button>
@@ -249,7 +335,11 @@
         {{! Overview }}
         {{#if (not (exists system.overview.base))}}
           <div class="tgrid-item">
-            <button class="ab-menu-button ab-base-button">
+            <button class="ab-menu-button ab-base-button"
+              {{#if (not editable)}}
+                disabled="true"
+              {{/if}}
+            >
               {{{config.icons.add}}}
               Description
             </button>
@@ -259,7 +349,11 @@
         {{! After Overview }}
         {{#if (not (exists system.overview.proficient))}}
           <div class="tgrid-item">
-            <button class="ab-menu-button ab-proficient-button">
+            <button class="ab-menu-button ab-proficient-button"
+              {{#if (not editable)}}
+                disabled="true"
+              {{/if}}
+            >
               {{{config.icons.add}}}
               If Proficient
             </button>
@@ -267,7 +361,11 @@
         {{/if}}
         {{#if (not (exists system.overview.fluent))}}
           <div class="tgrid-item">
-            <button class="ab-menu-button ab-fluent-button">
+            <button class="ab-menu-button ab-fluent-button"
+              {{#if (not editable)}}
+                disabled="true"
+              {{/if}}
+            >
               {{{config.icons.add}}}
               If Fluent
             </button>
@@ -275,7 +373,11 @@
         {{/if}}
         {{#if (not (exists system.heightened))}}
           <div class="tgrid-item">
-            <button class="ab-menu-button ab-heightened-button">
+            <button class="ab-menu-button ab-heightened-button"
+              {{#if (not editable)}}
+                disabled="true"
+              {{/if}}
+            >
               {{{config.icons.add}}}
               Heightened
             </button>
@@ -286,7 +388,11 @@
         {{#if (eq system.interaction "attack")}}
           {{#if (not (exists system.results.critHit))}}
             <div class="tgrid-item">
-              <button class="ab-menu-button ab-crit-hit-button">
+              <button class="ab-menu-button ab-crit-hit-button"
+                {{#if (not editable)}}
+                  disabled="true"
+                {{/if}}
+              >
                 {{{config.icons.add}}}
                 On Critical Hit
               </button>
@@ -294,7 +400,11 @@
           {{/if}}
           {{#if (not (exists system.results.hit))}}
             <div class="tgrid-item">
-              <button class="ab-menu-button ab-hit-button">
+              <button class="ab-menu-button ab-hit-button"
+                {{#if (not editable)}}
+                  disabled="true"
+                {{/if}}
+              >
                 {{{config.icons.add}}}
                 On Hit
               </button>
@@ -302,7 +412,11 @@
           {{/if}}
           {{#if (not (exists system.results.miss))}}
             <div class="tgrid-item">
-              <button class="ab-menu-button ab-miss-button">
+              <button class="ab-menu-button ab-miss-button"
+                {{#if (not editable)}}
+                  disabled="true"
+                {{/if}}
+              >
                 {{{config.icons.add}}}
                 On Miss
               </button>
@@ -310,7 +424,11 @@
           {{/if}}
           {{#if (not (exists system.results.critMiss))}}
             <div class="tgrid-item">
-              <button class="ab-menu-button ab-crit-miss-button">
+              <button class="ab-menu-button ab-crit-miss-button"
+                {{#if (not editable)}}
+                  disabled="true"
+                {{/if}}
+              >
                 {{{config.icons.add}}}
                 On Critical Miss
               </button>
@@ -322,7 +440,11 @@
         {{#if (eq system.interaction "feat")}}
           {{#if (not (exists system.results.critFail))}}
             <div class="tgrid-item">
-              <button class="ab-menu-button ab-crit-fail-button">
+              <button class="ab-menu-button ab-crit-fail-button"
+                {{#if (not editable)}}
+                  disabled="true"
+                {{/if}}
+              >
                 {{{config.icons.add}}}
                 On Critical Fail
               </button>
@@ -330,7 +452,11 @@
           {{/if}}
           {{#if (not (exists system.results.fail))}}
             <div class="tgrid-item">
-              <button class="ab-menu-button ab-fail-button">
+              <button class="ab-menu-button ab-fail-button"
+                {{#if (not editable)}}
+                  disabled="true"
+                {{/if}}
+              >
                 {{{config.icons.add}}}
                 On Fail
               </button>
@@ -338,7 +464,11 @@
           {{/if}}
           {{#if (not (exists system.results.save))}}
             <div class="tgrid-item">
-              <button class="ab-menu-button ab-save-button">
+              <button class="ab-menu-button ab-save-button"
+                {{#if (not editable)}}
+                  disabled="true"
+                {{/if}}
+              >
                 {{{config.icons.add}}}
                 On Save
               </button>
@@ -346,7 +476,11 @@
           {{/if}}
           {{#if (not (exists system.results.critSave))}}
             <div class="tgrid-item">
-              <button class="ab-menu-button ab-crit-save-button">
+              <button class="ab-menu-button ab-crit-save-button"
+                {{#if (not editable)}}
+                  disabled="true"
+                {{/if}}
+              >
                 {{{config.icons.add}}}
                 On Critical Save
               </button>
@@ -358,7 +492,11 @@
         {{#if (eq system.interaction "block")}}
           {{#if (not (exists system.results.save))}}
             <div class="tgrid-item">
-              <button class="ab-menu-button ab-save-button">
+              <button class="ab-menu-button ab-save-button"
+                {{#if (not editable)}}
+                  disabled="true"
+                {{/if}}
+              >
                 {{{config.icons.add}}}
                 On Save
               </button>
@@ -366,7 +504,11 @@
           {{/if}}
           {{#if (not (exists system.results.fail))}}
             <div class="tgrid-item">
-              <button class="ab-menu-button ab-fail-button">
+              <button class="ab-menu-button ab-fail-button"
+                {{#if (not editable)}}
+                  disabled="true"
+                {{/if}}
+              >
                 {{{config.icons.add}}}
                 On Fail
               </button>
@@ -377,7 +519,11 @@
         {{! Other }}
         {{#if (not (exists system.endCondition))}}
           <div class="tgrid-item">
-            <button class="ab-menu-button ab-end-condition-button">
+            <button class="ab-menu-button ab-end-condition-button"
+              {{#if (not editable)}}
+                disabled="true"
+              {{/if}}
+            >
               {{{config.icons.add}}}
               End Condition
             </button>
@@ -385,7 +531,11 @@
         {{/if}}
         {{#if (not (exists system.requirements))}}
           <div class="tgrid-item">
-            <button class="ab-menu-button ab-requirements-button">
+            <button class="ab-menu-button ab-requirements-button"
+              {{#if (not editable)}}
+                disabled="true"
+              {{/if}}
+            >
               {{{config.icons.add}}}
               Requirements
             </button>
@@ -397,7 +547,11 @@
           (not (exists system.improvements.attributeImprovement.attribute))
         }}
           <div class="tgrid-item">
-            <button class="ab-menu-button ab-attribute-improvement-button">
+            <button class="ab-menu-button ab-attribute-improvement-button"
+              {{#if (not editable)}}
+                disabled="true"
+              {{/if}}
+            >
               {{{config.icons.add}}}
               Attribute Improvement
             </button>
@@ -405,7 +559,11 @@
         {{/if}}
         {{#if (not (exists system.improvements.featSaveImprovement.attribute))}}
           <div class="tgrid-item">
-            <button class="ab-menu-button ab-feat-save-improvement-button">
+            <button class="ab-menu-button ab-feat-save-improvement-button"
+              {{#if (not editable)}}
+                disabled="true"
+              {{/if}}
+            >
               {{{config.icons.add}}}
               Feat Save Improvement
             </button>
@@ -414,35 +572,60 @@
       </div>
     </div>
     <section class="tab changes active">
-    <header>
-      <div class="key">{{localize "EFFECT.ChangeKey"}}</div>
-      <div class="mode">{{localize "EFFECT.ChangeMode"}}</div>
-      <div class="value">{{localize "EFFECT.ChangeValue"}}</div>
-      <div class="priority">{{localize "EFFECT.ChangePriority"}}</div>
-      <div class="controls"><a data-action="addChange"><i class="fa-regular fa-square-plus"></i></a></div>
-    </header>
-    <ol class="scrollable" data-changes>
+      <header>
+        <div class="key">{{localize "EFFECT.ChangeKey"}}</div>
+        <div class="mode">{{localize "EFFECT.ChangeMode"}}</div>
+        <div class="value">{{localize "EFFECT.ChangeValue"}}</div>
+        <div class="priority">{{localize "EFFECT.ChangePriority"}}</div>
+        <div class="controls"><a data-action="addChange"><i class="fa-regular fa-square-plus"></i></a></div>
+      </header>
+      <ol class="scrollable" data-changes>
         {{#each source.changes as |change i|}}
-        {{#with ../fields.changes.element.fields as |changeFields|}}
-        <li data-index="{{i}}">
-            <div class="key">
-                {{formInput changeFields.key name=(concat "changes." i ".key") value=change.key}}
-            </div>
-            <div class="mode">
-                {{formInput changeFields.mode name=(concat "changes." i ".mode") value=change.mode choices=@root.modes}}
-            </div>
-            <div class="value">
-                {{formInput changeFields.value name=(concat "changes." i ".value") value=change.value}}
-            </div>
-            <div class="priority">
-                {{formInput changeFields.priority name=(concat "changes." i ".priority") value=change.priority
-                    placeholder=(lookup ../../priorities change.mode)}}
-            </div>
-            <div class="controls"><a data-action="deleteChange"><i class="fa-solid fa-trash"></i></a></div>
-        </li>
-        {{/with}}
+          {{#with ../fields.changes.element.fields as |changeFields|}}
+            <li data-index="{{i}}">
+              <div class="key">
+                {{formInput changeFields.key
+                  name=(concat "changes." i ".key")
+                  value=change.key
+                  disabled=(not ../editable)
+                }}
+              </div>
+              <div class="mode">
+                {{formInput changeFields.mode
+                  name=(concat "changes." i ".mode")
+                  value=change.mode
+                  choices=@root.modes
+                  disabled=(not ../editable)
+                }}
+              </div>
+              <div class="value">
+                {{formInput
+                  changeFields.value
+                  name=(concat "changes." i ".value")
+                  value=change.value
+                  disabled=(not ../editable)
+                }}
+              </div>
+              <div class="priority">
+                {{formInput
+                  changeFields.priority
+                  name=(concat "changes." i ".priority")
+                  value=change.priority
+                  placeholder=(lookup ../../priorities change.mode)
+                  disabled=(not ../editable)
+                }}
+              </div>
+              <div class="controls">
+                <a data-action="deleteChange"
+                  {{#if (not ../editable)}}
+                    disabled="true"
+                  {{/if}}
+                ><i class="fa-solid fa-trash"></i></a>
+              </div>
+            </li>
+          {{/with}}
         {{/each}}
-    </ol>
+      </ol>
     </section>
   </div>
 </div>

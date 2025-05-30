@@ -8,6 +8,7 @@ import { TeriockEquipmentSheet } from './sheets/equipment-sheet.mjs';
 import { TeriockRankSheet } from './sheets/rank-sheet.mjs';
 import { TeriockFluencySheet } from './sheets/fluency-sheet.mjs';
 import { TeriockPowerSheet } from './sheets/power-sheet.mjs';
+import { TeriockPropertySheet } from './sheets/property-sheet.mjs';
 import { TeriockRoll } from './dice/roll.mjs'
 import { TeriockHarmRoll } from './dice/harm.mjs';
 import { TeriockElderSorceryRoll } from './dice/elder-sorcery.mjs';
@@ -103,11 +104,15 @@ Hooks.once('init', function () {
     label: 'Ability',
     types: ['ability']
   });
-
   DocumentSheetConfig.registerSheet(TeriockEffect, 'teriock', TeriockResourceSheet, {
     makeDefault: true,
     label: 'Resource',
     types: ['resource']
+  });
+  DocumentSheetConfig.registerSheet(TeriockEffect, 'teriock', TeriockPropertySheet, {
+    makeDefault: true,
+    label: 'Property',
+    types: ['property']
   });
 
   game.teriock = {

@@ -2,11 +2,15 @@
   {{elements system.elements}}...</div>
 <div class="es-wording-container">
   <div class="es-wording">
-    <prose-mirror
-      name="system.elderSorceryIncant"
-      value="{{system.elderSorceryIncant}}"
-      toggled="true"
-      editable="editable"
-    >{{{elderSorceryIncant}}}</prose-mirror>
+    {{#if editable}}
+      <prose-mirror
+        name="system.elderSorceryIncant"
+        value="{{system.elderSorceryIncant}}"
+        toggled="true"
+        editable="editable"
+      >{{{elderSorceryIncant}}}</prose-mirror>
+    {{else}}
+      {{{elderSorceryIncant}}}
+    {{/if}}
   </div>
 </div>

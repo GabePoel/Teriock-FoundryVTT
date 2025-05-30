@@ -29,7 +29,7 @@ export class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(TeriockS
     const { system, name, img, flags, disabled, limited, isOwner } = this.document;
     Object.assign(context, {
       config: CONFIG.TERIOCK,
-      editable: this.isEditable,
+      editable: this.isEditable && this.document.system.editable,
       document: this.document,
       limited,
       owner: isOwner,
@@ -93,7 +93,9 @@ export class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(TeriockS
   /** @override */
   _onRender(context, options) {
     super._onRender(context, options);
-    if (!this.isEditable) return;
+    this.editable = this.isEditable && this.document.system.editable;
+    console.log('TeriockAbilitySheet._onRender', this.document.name, this.editable);
+    if (!this.editable) return;
 
     const doc = this.document;
     this._connect('.reload-button', 'click', () => doc.wikiPull());

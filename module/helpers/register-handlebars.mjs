@@ -306,7 +306,10 @@ export function registerHandlebarsHelpers() {
   Handlebars.registerHelper('tradecraft', (field, name) => CONFIG.TERIOCK.tradecraftOptions[field].tradecrafts[name].name);
   Handlebars.registerHelper('field', field => CONFIG.TERIOCK.tradecraftOptions[field].name);
   Handlebars.registerHelper('equipmentMarker', item => CONFIG.TERIOCK.equipmentOptions.powerLevel[item.system.powerLevel]?.color);
-  Handlebars.registerHelper('abilityMarker', effect => CONFIG.TERIOCK.abilityOptions.abilityType[effect.system.abilityType]?.color);
+  Handlebars.registerHelper('abilityMarker', effect => {
+    const type = effect.system.abilityType || effect.system.propertyType;
+    return CONFIG.TERIOCK.abilityOptions.abilityType[type]?.color;
+  });
 
 
   // TCard & AbilityCards Helpers
@@ -352,7 +355,9 @@ export function registerHandlebarsHelpers() {
     const containerClass = `tcard-container ${isGapless ? 'gapless' : ''} ${sizeClass}`.trim();
 
     const renderedCards = abilities.map(ability => {
-      const subtitle = Handlebars.helpers.executionTime(ability.system?.maneuver, ability.system?.executionTime);
+      const subtitle = ability.type === 'ability'
+        ? Handlebars.helpers.executionTime(ability.system?.maneuver, ability.system?.executionTime)
+        : ability.system?.propertyType;
       const marker = Handlebars.helpers.abilityMarker(ability);
       const chatIcon = Handlebars.helpers.ticon("comment", {
         hash: { action: "chatDoc", id: ability._id, parentId: ability.parent?._id, tooltip: "Send to Chat" }
