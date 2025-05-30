@@ -86,6 +86,14 @@ export function buildAbilityMessage(ability) {
       text: src.trigger,
     },
     {
+      title: 'Limitation',
+      text: src.limitation,
+    },
+    {
+      title: 'Improvement',
+      text: src.improvement,
+    },
+    {
       title: 'Requirements',
       text: src.requirements,
     },
