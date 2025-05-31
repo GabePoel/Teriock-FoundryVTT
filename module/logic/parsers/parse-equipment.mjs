@@ -1,7 +1,26 @@
 import { cleanFeet, cleanValue } from "../../helpers/clean.mjs";
 import { toCamelCaseList } from "../../helpers/utils.mjs";
+import { createProperty } from "../../helpers/create-effects.mjs";
 
 export default function parseEquipment(rawHTML, item) {
+
+  const validProperties = Object.values(CONFIG.TERIOCK.equipmentOptions.properties);
+  const validMaterialProperties = Object.values(CONFIG.TERIOCK.equipmentOptions.materialProperties);
+  const validMagicalProperties = Object.values(CONFIG.TERIOCK.equipmentOptions.magicalProperties);
+  const allValidProperties = [
+    ...validProperties,
+    ...validMaterialProperties,
+    ...validMagicalProperties,
+    "Weapon",
+  ];
+  console.log('Valid Properties:', allValidProperties);
+
+  // Remove existing properties
+  for (const effect of item.transferredEffects.filter(e => e.type === 'property')) {
+    if (allValidProperties.includes(effect.name)) {
+      effect.delete();
+    }
+  }
   const doc = new DOMParser().parseFromString(rawHTML, 'text/html');
   const q = s => doc.querySelector(s);
   const getValue = s => q(s)?.getAttribute('data-val');
@@ -30,6 +49,7 @@ export default function parseEquipment(rawHTML, item) {
   // Parse arrays
   parameters.equipmentClasses = getTextAll('.equipment-class');
   parameters.properties = getTextAll('.property');
+  // parameters.properties = [];
 
   // Parse full range and add property if present
   // const fullRange = getText('.full-range');
@@ -52,21 +72,36 @@ export default function parseEquipment(rawHTML, item) {
   parameters.specialRules = getHTML('.special-rules') ?? parameters.specialRules;
 
   // Sort and filter properties/classes
-  parameters.properties = parameters.properties.filter(Boolean).sort((a, b) => a.localeCompare(b));
+  // parameters.properties = parameters.properties.filter(Boolean).sort((a, b) => a.localeCompare(b));
   parameters.equipmentClasses = parameters.equipmentClasses.filter(Boolean).sort((a, b) => a.localeCompare(b));
+  parameters.equipmentClasses = toCamelCaseList(parameters.equipmentClasses);
+  console.log('Equipment Classes:', parameters.equipmentClasses);
   const candidateProperties = toCamelCaseList(parameters.properties);
 
   // Filter properties by config
-  const filterByConfig = (list, configKey) =>
-    list.filter(p => Object.keys(CONFIG.TERIOCK.equipmentOptions[configKey]).includes(p));
-  parameters.properties = filterByConfig(candidateProperties, 'properties');
-  parameters.magicalProperties = filterByConfig(candidateProperties, 'magicalProperties');
-  parameters.materialProperties = filterByConfig(candidateProperties, 'materialProperties');
-  parameters.equipmentClasses = toCamelCaseList(parameters.equipmentClasses);
+  const allowedProperties = [
+    ...Object.keys(CONFIG.TERIOCK.equipmentOptions.properties),
+    ...Object.keys(CONFIG.TERIOCK.equipmentOptions.materialProperties),
+    ...Object.keys(CONFIG.TERIOCK.equipmentOptions.magicalProperties)
+  ];
+  const filteredProperties = candidateProperties.filter(p => allowedProperties.includes(p));
+  candidateProperties.length = 0;
+  candidateProperties.push(...filteredProperties);
 
-  // Set output image
-  let img = 'systems/teriock/assets/searchable.svg';
-  img = `systems/teriock/assets/equipment/${item.system.equipmentType?.toLowerCase().replace(/\s+/g, '-')}.svg`;
+  console.log('Candidate Properties:', candidateProperties);
+  for (const key of candidateProperties) {
+    createProperty(item, key);
+  }
+
+  parameters.editable = false;
+
+
+  const oldImg = item.img;
+  let newImg = oldImg;
+  if (oldImg?.startsWith('systems/teriock/assets')) {
+    newImg = 'systems/teriock/assets/searchable.svg';
+    newImg = `systems/teriock/assets/equipment/${item.system.equipmentType?.toLowerCase().replace(/\s+/g, '-')}.svg`;
+  }
 
   // Remove unused properties
   [
@@ -75,12 +110,5 @@ export default function parseEquipment(rawHTML, item) {
     'disabled', 'glued', 'font'
   ].forEach(key => delete parameters[key]);
 
-  // const equipmentClass = parameters.equipmentClasses[0].toLowerCase().replace(/\s+/g, '-');
-  // img = `systems/teriock/assets/equipment-classes/${equipmentClass}.svg`;
-  
-  // if (parameters.equipmentClasses.length > 0) {
-  //   img = `systems/teriock/assets/equipment-classes/${equipmentClass}.svg`;
-  // }
-
-  return { system: parameters, img };
+  return { system: parameters, img: newImg };
 }

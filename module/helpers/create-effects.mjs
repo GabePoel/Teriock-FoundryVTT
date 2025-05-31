@@ -24,10 +24,37 @@ export async function createResource(document) {
   }, { parent: document });
 }
 
-export async function createProperty(document) {
+export async function createProperty(document, key = null) {
+  let description = "Insert description here.";
+  let propertyType = "normal";
+  let name = "New Property";
+  if (CONFIG.TERIOCK.equipmentOptions.properties[key]) {
+    name = CONFIG.TERIOCK.equipmentOptions.properties[key];
+    description = CONFIG.TERIOCK.content.properties[key].content;
+    propertyType = "intrinsic";
+  } else if (CONFIG.TERIOCK.equipmentOptions.magicalProperties[key]) {
+    name = CONFIG.TERIOCK.equipmentOptions.magicalProperties[key];
+    description = CONFIG.TERIOCK.content.magicalProperties[key].content;
+    propertyType = "normal";
+  } else if (CONFIG.TERIOCK.equipmentOptions.materialProperties[key]) {
+    name = CONFIG.TERIOCK.equipmentOptions.materialProperties[key];
+    description = CONFIG.TERIOCK.content.materialProperties[key].content;
+    propertyType = "intrinsic";
+  }
+  if (key === "legendary") {
+    propertyType = "special";
+  } else if (key === "cumbersome") {
+    propertyType = "flaw";
+  }
+  const system = {
+    propertyType: propertyType,
+    description: description,
+  };
+
   return await TeriockEffect.create({
-    name: "New Property",
+    name: name,
     type: "property",
     img: "systems/teriock/assets/property.svg",
+    system: system,
   }, { parent: document });
 }

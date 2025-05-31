@@ -14,6 +14,9 @@ import { abilities } from "./constants/generated/abilities.mjs";
 import { equipment } from "./constants/generated/equipment.mjs";
 import { conditions as conditionsList } from "./constants/generated/conditions.mjs";
 import { conditions as conditionsContent } from "../content/conditions.mjs";
+import { properties as propertiesContent } from "../content/properties.mjs";
+import { materialProperties } from "../content/material-properties.mjs";
+import { magicalProperties } from "../content/magical-properties.mjs";
 
 export const TERIOCK = {
   icons: icons,
@@ -39,5 +42,8 @@ export const TERIOCK = {
   conditions: conditionsList,
   content: {
     conditions: conditionsContent,
+    properties: propertiesContent,
+    materialProperties: materialProperties,
+    magicalProperties: magicalProperties,
   },
 }

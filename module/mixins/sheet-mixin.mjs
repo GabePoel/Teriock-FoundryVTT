@@ -1,4 +1,4 @@
-const { ux } = foundry.applications;
+const { ux, api } = foundry.applications;
 const { utils } = foundry;
 import { createAbility, createResource, createProperty } from "../helpers/create-effects.mjs";
 import connectEmbedded from "./connect-embedded.mjs";
@@ -316,6 +316,52 @@ export const TeriockSheet = (Base) =>
     }
 
     static async _createProperty(event, __) {
-      await createProperty(this.item, null);
+      const propertyKeys = Object.keys(CONFIG.TERIOCK.equipmentOptions.properties);
+      console.log(CONFIG.TERIOCK.equipmentOptions.properties);
+      console.log('Property Keys:', propertyKeys);
+      const propertyValues = propertyKeys.map(
+        (property) => `<option value="${property}">${CONFIG.TERIOCK.equipmentOptions.properties[property]}</option>`
+      ).join('');
+      const materialPropertyKeys = Object.keys(CONFIG.TERIOCK.equipmentOptions.materialProperties);
+      const materialPropertyValues = materialPropertyKeys.map(
+        (property) => `<option value="${property}">${CONFIG.TERIOCK.equipmentOptions.materialProperties[property]}</option>`
+      ).join('');
+      const magicalPropertyKeys = Object.keys(CONFIG.TERIOCK.equipmentOptions.magicalProperties);
+      const magicalPropertyValues = magicalPropertyKeys.map(
+        (property) => `<option value="${property}">${CONFIG.TERIOCK.equipmentOptions.magicalProperties[property]}</option>`
+      ).join('');
+      const propertyOptions = [
+        ...propertyValues,
+        ...materialPropertyValues,
+        ...magicalPropertyValues
+      ].join('');
+      await new api.DialogV2({
+        window: {
+          title: "Create Property",
+        },
+        content: `
+          <label for="property-select">Select Property</label>
+          <select id="property-select" name="property">
+            ${propertyOptions}
+          </select>
+        `,
+        buttons: [{
+          action: 'chosen',
+          label: 'Add Chosen Property',
+          default: true,
+          callback: async (event, button, dialog) => {
+            const value = button.form.elements.property.value;
+            await createProperty(this.item, value);
+          }
+        },
+        {
+          action: 'other',
+          label: 'Create New Property',
+          default: false,
+          callback: async (event, button, dialog) => {
+            await createProperty(this.item, null);
+          }
+        }]
+      }).render(true);
     }
   };
