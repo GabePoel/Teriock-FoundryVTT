@@ -9,6 +9,7 @@ export default class DetectionModeScentPerception extends TeriockDetectionMode {
     "unconscious",
     "dead",
     "anosmatic",
+    "ethereal",
   ];
   static BLOCKING_TGT_STATUS_EFFECTS = [
     "odorless",
