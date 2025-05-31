@@ -4,7 +4,7 @@ import parseAbility from "../logic/parsers/parse-ability.mjs";
 /**
  * @extends {ActiveEffect}
  */
-export class TeriockEffect extends TeriockDocument(ActiveEffect) {
+export default class TeriockEffect extends TeriockDocument(ActiveEffect) {
 
   async parse(rawHTML) {
     return parseAbility(rawHTML, this);

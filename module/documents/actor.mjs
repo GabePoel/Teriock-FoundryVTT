@@ -5,7 +5,7 @@ import rollCondition from "../logic/rollers/rolling-condition.mjs";
 /**
  * @extends {Actor}
  */
-export class TeriockActor extends Actor {
+export default class TeriockActor extends Actor {
   /** @override */
   prepareData() {
     super.prepareData();

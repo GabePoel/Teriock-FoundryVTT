@@ -320,6 +320,5 @@ function prepareTokens(actor) {
       token?.updateVisionMode(actor?.statuses?.has('ethereal') ? 'ethereal' : 'basic');
     });
     const detectionModes = token?.detectionModes;
-    console.log("token", token, detectionModes);
   };
 }

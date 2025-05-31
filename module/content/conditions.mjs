@@ -1,4 +1,4 @@
-// This file was auto-generated on 2025-05-30 by scripts/fetch-content.mjs.
+// This file was auto-generated on 2025-05-31 by scripts/fetch-content.mjs.
 // Do not edit manually.
 
 export const conditions = {
@@ -170,6 +170,12 @@ export const conditions = {
   id: "mute",
   img: "systems/teriock/assets/conditions/mute.svg",
   content: "<p><span class=\"condition-box\">If you are Mute then you cannot speak nor use any <a href=\"https://wiki.teriock.com/index.php/Category:Verbal_component_abilities\" title=\"Category:Verbal component abilities\" target=\"_blank\">abilities that require verbal components</a>.</span>\n</p>"
+  },
+  odorless: {
+  name: "Odorless",
+  id: "odorless",
+  img: "systems/teriock/assets/conditions/odorless.svg",
+  content: "<p><span class=\"condition-box\">An <b>odorless</b> creature cannot be detected by scent.</span>\n</p>"
   },
   paralyzed: {
   name: "Paralyzed",

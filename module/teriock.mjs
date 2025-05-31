@@ -1,6 +1,6 @@
-import { TeriockActor } from './documents/actor.mjs';
-import { TeriockItem } from './documents/item.mjs';
-import { TeriockEffect } from './documents/effect.mjs';
+import TeriockActor from './documents/actor.mjs';
+import TeriockItem from './documents/item.mjs';
+import TeriockEffect from './documents/effect.mjs';
 import TeriockTokenDocument from './documents/token.mjs';
 import { TeriockCharacterSheet } from './sheets/character-sheet.mjs';
 import { TeriockAbilitySheet } from './sheets/ability-sheet.mjs';

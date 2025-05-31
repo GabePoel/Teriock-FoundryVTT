@@ -1,4 +1,4 @@
-// This file was auto-generated on 2025-05-23 by scripts/update-options.mjs.
+// This file was auto-generated on 2025-05-31 by scripts/update-options.mjs.
 // Do not edit manually.
 
 export const conditions = {
@@ -30,6 +30,7 @@ export const conditions = {
     meleeDodging: "Melee Dodging",
     missileDodging: "Missile Dodging",
     mute: "Mute",
+    odorless: "Odorless",
     paralyzed: "Paralyzed",
     poisoned: "Poisoned",
     prone: "Prone",

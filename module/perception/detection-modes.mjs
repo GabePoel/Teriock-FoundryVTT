@@ -3,8 +3,26 @@ import DetectionModeMaterialMaterial from "./detection-modes/material-material-p
 import DetectionModeMaterialEthereal from "./detection-modes/material-ethereal-perception.mjs"
 import DetectionModeEtherealMaterial from "./detection-modes/ethereal-material-perception.mjs"
 import DetectionModeEtherealEthereal from "./detection-modes/ethereal-ethereal-perception.mjs"
+import DetectionModeInvisiblePerception from "./detection-modes/invisible-perception.mjs"
+import DetectionModeScentPerception from "./detection-modes/scent-perception.mjs"
+import DetectionModeTrueSightPerception from "./detection-modes/true-sight-perception.mjs"
 
 export const teriockDetectionModes = {
+  seeInvisible: new DetectionModeInvisiblePerception({
+    id: "seeInvisible",
+    label: "See Invisible",
+    type: DetectionMode.DETECTION_TYPES.SIGHT,
+  }),
+  scentPerception: new DetectionModeScentPerception({
+    id: "scentPerception",
+    label: "Scent Perception",
+    type: DetectionMode.DETECTION_TYPES.SIGHT,
+  }),
+  trueSight: new DetectionModeTrueSightPerception({
+    id: "trueSight",
+    label: "True Sight",
+    type: DetectionMode.DETECTION_TYPES.SIGHT,
+  }),
   lightPerception: new DetectionModeLightPerception({
     id: "lightPerception",
     label: "Light Perception",

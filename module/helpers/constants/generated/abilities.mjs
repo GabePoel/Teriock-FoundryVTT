@@ -1,4 +1,4 @@
-// This file was auto-generated on 2025-05-23 by scripts/update-options.mjs.
+// This file was auto-generated on 2025-05-31 by scripts/update-options.mjs.
 // Do not edit manually.
 
 export const abilities = {
@@ -424,6 +424,7 @@ export const abilities = {
     serratedClaws: "Serrated Claws",
     shadowcreepAcrobatics: "Shadowcreep Acrobatics",
     shatter: "Shatter",
+    shatteringArmor: "Shattering Armor",
     shatteringGrip: "Shattering Grip",
     shelteredCasting: "Sheltered Casting",
     shieldBash: "Shield Bash",
@@ -444,6 +445,7 @@ export const abilities = {
     spawnPoint: "Spawn Point",
     speciesLore: "Species Lore",
     speed: "Speed",
+    spellImmunity: "Spell Immunity",
     spellStrike: "Spell Strike",
     spellTrigger: "Spell Trigger",
     spellTurningShields: "Spell Turning Shields",
@@ -531,6 +533,7 @@ export const abilities = {
     trueSight: "True Sight",
     tumble: "Tumble",
     unbreachability: "Unbreachability",
+    unconsciousnessImmunity: "Unconsciousness Immunity",
     undeadHunter: "Undead Hunter",
     undeadMind: "Undead Mind",
     undeadReanimation: "Undead Reanimation",

@@ -1,4 +1,4 @@
-import { TeriockEffect } from "../documents/effect.mjs";
+import TeriockEffect from "../documents/effect.mjs";
 
 export async function createAbility(document, name) {
   let assignedName = "New Ability";

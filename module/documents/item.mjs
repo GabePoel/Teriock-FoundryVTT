@@ -8,7 +8,7 @@ import parseRank from "../logic/parsers/parse-rank.mjs";
 /**
  * @extends {Item}
  */
-export class TeriockItem extends TeriockDocument(Item) {
+export default class TeriockItem extends TeriockDocument(Item) {
 
   async parse(rawHTML) {
     if (this.type === 'equipment') {

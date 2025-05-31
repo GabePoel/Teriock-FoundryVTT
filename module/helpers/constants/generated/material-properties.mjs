@@ -1,8 +1,9 @@
-// This file was auto-generated on 2025-05-23 by scripts/update-options.mjs.
+// This file was auto-generated on 2025-05-31 by scripts/update-options.mjs.
 // Do not edit manually.
 
 export const materialProperties = {
     dragonScale: "Dragon Scale",
+    gornaCoral: "Gorna Coral",
     silveel: "Silveel",
     silver: "Silver",
     agantine: "Agantine",

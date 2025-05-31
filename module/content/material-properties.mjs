@@ -1,4 +1,4 @@
-// This file was auto-generated on 2025-05-30 by scripts/fetch-content.mjs.
+// This file was auto-generated on 2025-05-31 by scripts/fetch-content.mjs.
 // Do not edit manually.
 
 export const materialProperties = {
@@ -8,6 +8,12 @@ export const materialProperties = {
   id: "dragonScale",
   img: "systems/teriock/assets/materialProperties/dragonScale.svg",
   content: "<p><span class=\"property-box\">Armor that's <b>dragon scale</b> gives an <a href=\"https://wiki.teriock.com/index.php/Core:AC\" class=\"mw-redirect\" title=\"Core:AC\" target=\"_blank\">AC</a> 2 higher than it would otherwise.</span>\n</p>"
+  },
+  gornaCoral: {
+  name: "Gorna Coral",
+  id: "gornaCoral",
+  img: "systems/teriock/assets/materialProperties/gornaCoral.svg",
+  content: "<p><span class=\"property-box\"><a href=\"https://wiki.teriock.com/index.php/Core:Damage\" title=\"Core:Damage\" target=\"_blank\">Damage</a> dealt by an item made from <b>Gorna coral</b> <a href=\"https://wiki.teriock.com/index.php/Core:Healing\" title=\"Core:Healing\" target=\"_blank\">heals</a> on its own at a rate of one <a href=\"https://wiki.teriock.com/index.php/Core:Damage\" title=\"Core:Damage\" target=\"_blank\">damage</a> per minute.</span>\n</p>"
   },
   silveel: {
   name: "Silveel",
