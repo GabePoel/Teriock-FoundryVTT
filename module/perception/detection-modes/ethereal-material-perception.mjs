@@ -1,8 +1,9 @@
 import EtherealFilter from '../filters/ethereal-filter.mjs';
-const { DetectionMode } = foundry.canvas.perception;
+import TeriockDetectionMode from "./teriock-detection-mode.mjs";
 const { Token } = foundry.canvas.placeables;
 
-export default class DetectionModeEthereal extends DetectionMode {
+export default class DetectionModeEtherealMaterial extends TeriockDetectionMode {
+
   /** @override */
   static getDetectionFilter() {
     return this._detectionFilter ??= EtherealFilter.create({
@@ -12,21 +13,16 @@ export default class DetectionModeEthereal extends DetectionMode {
 
   /** @override */
   _canDetect(visionSource, target) {
-    const src = visionSource.object.document;
-    if (src.hasStatusEffect('blind') || src.hasStatusEffect('down') || src.hasStatusEffect('frozen')) {
+    if (!super._canDetect(visionSource, target)) {
       return false;
     }
-
+    const src = visionSource.object.document;
     if (target instanceof Token) {
       const tgt = target.document;
-      if (tgt.hasStatusEffect('invisible') || tgt.hasStatusEffect('hidden')) {
-        return false;
-      }
-      if (!tgt.hasStatusEffect('ethereal')) {
+      if (!(src.hasStatusEffect('ethereal') && !tgt.hasStatusEffect('ethereal'))) {
         return false;
       }
     }
-
     return true;
   }
 }

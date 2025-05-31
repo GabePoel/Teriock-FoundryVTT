@@ -1,6 +1,7 @@
 import { TeriockActor } from './documents/actor.mjs';
 import { TeriockItem } from './documents/item.mjs';
 import { TeriockEffect } from './documents/effect.mjs';
+import TeriockTokenDocument from './documents/token.mjs';
 import { TeriockCharacterSheet } from './sheets/character-sheet.mjs';
 import { TeriockAbilitySheet } from './sheets/ability-sheet.mjs';
 import { TeriockResourceSheet } from './sheets/resource-sheet.mjs';
@@ -59,6 +60,11 @@ Hooks.once('init', function () {
     ...CONFIG.Canvas.visionModes,
     ...teriockVisionModes,
   };
+  for (const key of Object.keys(CONFIG.Canvas.detectionModes)) {
+    if (CONFIG.Canvas.detectionModes[key]?.id !== 'basicSight') {
+      delete CONFIG.Canvas.detectionModes[key];
+    }
+  }
   CONFIG.Canvas.detectionModes = {
     ...CONFIG.Canvas.detectionModes,
     ...teriockDetectionModes,
@@ -70,6 +76,7 @@ Hooks.once('init', function () {
   CONFIG.Actor.documentClass = TeriockActor;
   CONFIG.Item.documentClass = TeriockItem;
   CONFIG.ActiveEffect.documentClass = TeriockEffect;
+  CONFIG.Token.documentClass = TeriockTokenDocument;
 
   Actors.unregisterSheet('core', ActorSheet);
   Actors.registerSheet('teriock', TeriockCharacterSheet, {
