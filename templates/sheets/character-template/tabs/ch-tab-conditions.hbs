@@ -10,5 +10,16 @@
         {{{lookup (lookup ../config.content.conditions condition) 'content'}}}
       </div>
     {{/each}}
+    <div class="tcard-display">
+      <div class="tcard-options">
+        {{tcardOptions system.sheet.menus.effectOptions null null system.sheet.effectFilters.search "effect"}}
+      </div>
+      {{abilityCards effects system "effect"}}
+      {{#if (not (exists effects))}}
+        <div class="no-results">
+          <p>No effects found.</p>
+        </div>
+      {{/if}}
+    </div>
   </div>
 </div>

@@ -58,3 +58,11 @@ export async function createProperty(document, key = null) {
     system: system,
   }, { parent: document });
 }
+
+export async function createEffect(document) {
+  return await TeriockEffect.create({
+    name: "New Effect",
+    type: "effect",
+    img: "systems/teriock/assets/effect.svg",
+  }, { parent: document });
+}

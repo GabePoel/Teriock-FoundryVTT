@@ -1,4 +1,4 @@
-- [x] **Bug fixes**
+- [x] Bug fixes
   - [x] Automatic condition application and inheritance
   - [x] Player ActiveEffect warnings
   - [x] Two-handed weapon damage
@@ -10,22 +10,6 @@
   - [x] Window sizing limitations
   - [x] No context menu on embedded sheets
   - [x] Character sheet context menus not updating
-- [x] **Ability improvements**
-  - [x] Able to make as flaw
-  - [x] Improved dice rolling
-  - [x] Separate chart and dice rolling messages
-  - [x] Force proficiency
-- [ ] **Equipment improvements**
-  - [ ] Have simple effects (custom properties?) that aren't abilities addable to items
-  - [x] Two-handed weapon damage
-  - [x] Able to set tier
-  - [x] Able to set properties
-  - [x] Able to add descriptions
-  - [x] Able to make consumable (and adjust from character sheet)
-  - [x] Able to easily set as flaw/ES/ECHO/physical/gifted (and styling to match)
-  - [x] Ability disabling synchronization
-  - [x] Shattering
-  - [x] Dampening
 - [ ] Major functionality
   - [ ] Resistance save
   - [ ] Awaken and resurrection
@@ -46,6 +30,23 @@
   - [x] Elder Sorcery
     - [x] Bring in stylings from wiki
   - [x] Custom initiative
+- [x] Ability improvements
+  - [x] Able to make as flaw
+  - [x] Improved dice rolling
+  - [x] Separate chart and dice rolling messages
+  - [x] Force proficiency
+- [x] Equipment improvements
+  - [x] Have simple effects (custom properties?) that aren't abilities addable to items
+  - [x] Two-handed weapon damage
+  - [x] Able to set tier
+  - [x] Able to set properties
+  - [x] Able to add descriptions
+  - [x] Able to make consumable (and adjust from character sheet)
+  - [x] Able to easily set as flaw/ES/ECHO/physical/gifted (and styling to match)
+  - [x] Ability disabling synchronization
+  - [x] Shattering
+  - [x] Dampening
+  - [x] Custom property handling
 - [x] Power improvements
   - [x] Import abilities from wiki category
   - [x] Get confirmation before doing it

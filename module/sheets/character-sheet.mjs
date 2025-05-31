@@ -320,19 +320,47 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(Terioc
 
     equipment = this._sortItems(equipment, sortKey, ascending, sortMap[sortKey]);
 
-    return equipment.filter(i =>
-      (!filters.search || i.name.toLowerCase().includes(filters.search.toLowerCase())) &&
-      (!filters.equipmentClasses || i.system.equipmentClass === filters.equipmentClasses) &&
-      (!filters.properties || (i.system.properties || []).includes(filters.properties)) &&
-      (!filters.materialProperties || (i.system.materialProperties || []).includes(filters.materialProperties)) &&
-      (!filters.magicalProperties || (i.system.magicalProperties || []).includes(filters.magicalProperties)) &&
-      (!filters.weaponFightingStyles || (i.system.weaponFightingStyles || []).includes(filters.weaponFightingStyles)) &&
-      (!filters.powerLevel || i.system.powerLevel === filters.powerLevel) &&
-      (!filters.equipped || i.system.equipped) &&
-      (!filters.shattered || i.system.shattered) &&
-      (!filters.dampened || i.system.dampened) &&
-      (!filters.consumable || i.system.consumable)
-    );
+    return equipment.filter(i => {
+      const name = i.name?.toLowerCase() ?? '';
+      const search = filters.search?.toLowerCase() ?? '';
+      const equipmentClass = (i.system.equipmentClass ?? '').toLowerCase();
+      const filterEquipmentClass = (filters.equipmentClasses ?? '').toLowerCase();
+      const properties = (i.system.properties || []).map(p => (p ?? '').toLowerCase());
+      const filterProperty = (filters.properties ?? '').toLowerCase();
+      const transferredEffects = (i.transferredEffects || []).map(eff => (eff.name ?? '').toLowerCase());
+      const materialProperties = (i.system.materialProperties || []).map(p => (p ?? '').toLowerCase());
+      const filterMaterialProperty = (filters.materialProperties ?? '').toLowerCase();
+      const magicalProperties = (i.system.magicalProperties || []).map(p => (p ?? '').toLowerCase());
+      const filterMagicalProperty = (filters.magicalProperties ?? '').toLowerCase();
+      const weaponFightingStyles = (i.system.weaponFightingStyles || []).map(p => (p ?? '').toLowerCase());
+      const filterWeaponFightingStyle = (filters.weaponFightingStyles ?? '').toLowerCase();
+
+      return (
+        (!search || name.includes(search)) &&
+        (!filterEquipmentClass || equipmentClass === filterEquipmentClass) &&
+        (
+          !filterProperty ||
+          properties.includes(filterProperty) ||
+          transferredEffects.some(eff => (eff.includes(filterProperty) && eff.type === 'property'))
+        ) &&
+        (
+          !filterMaterialProperty ||
+          materialProperties.includes(filterMaterialProperty) ||
+          transferredEffects.some(eff => (eff.includes(filterMaterialProperty) && eff.type === 'property'))
+        ) &&
+        (
+          !filterMagicalProperty ||
+          magicalProperties.includes(filterMagicalProperty) ||
+          transferredEffects.some(eff => (eff.includes(filterMagicalProperty) && eff.type === 'property'))
+        ) &&
+        (!filterWeaponFightingStyle || weaponFightingStyles.includes(filterWeaponFightingStyle)) &&
+        (!filters.powerLevel || i.system.powerLevel === filters.powerLevel) &&
+        (!filters.equipped || i.system.equipped) &&
+        (!filters.shattered || i.system.shattered) &&
+        (!filters.dampened || i.system.dampened) &&
+        (!filters.consumable || i.system.consumable)
+      );
+    });
   }
 
   _getFilteredAbilities() {
@@ -405,6 +433,13 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(Terioc
     return this._filterItems(this.actor.itemTypes.rank, this.actor.system.sheet.rankFilters || {});
   }
 
+  _getFilteredEffects() {
+    return this._filterItems(
+      Array.from(this.actor.allApplicableEffects()).filter(i => i.type === 'effect'),
+      this.actor.system.sheet.effectFilters || {}
+    );
+  }
+
   /** @override */
   async _prepareContext() {
     let conditions = Array.from(this.actor.statuses || []);
@@ -437,6 +472,7 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(Terioc
       equipment: this._getFilteredEquipment(),
       powers: this._getFilteredPowers(),
       fluencies: this._getFilteredFluencies(),
+      effects: this._getFilteredEffects(),
       ranks: this._getFilteredRanks(),
       name: this.actor.name,
       img: this.actor.img,

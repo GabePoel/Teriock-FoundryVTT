@@ -44,7 +44,7 @@ function prepareBonuses(actor) {
 function prepareHpMp(actor) {
   const items = actor.itemTypes.rank;
   const diceLimit = Math.floor(actor.system.lvl / 5);
-  let hpMax = 1, mpMax = 1;
+  let hpMax = actor.system.hp.base, mpMax = actor.system.mp.base;
   let hitDieBox = '', manaDieBox = '';
 
   items.slice(0, diceLimit).forEach(rank => {
@@ -222,72 +222,78 @@ async function prepareConditions(actor) {
     }
     encumberanceLevel = Math.min(encumberanceLevel, 3);
 
-    if (encumberanceLevel === 0) {
-      await toggle('encumbered', false);
-    } else if (encumberanceLevel === 1) {
-      await toggle('encumbered', true);
-    } else if (encumberanceLevel === 2) {
-      await toggle('encumbered', true);
-      await toggle('slowed', true);
-    } else if (encumberanceLevel === 3) {
-      await toggle('encumbered', true);
-      await toggle('slowed', true);
-      await toggle('immobilized', true);
+    try {
+      if (encumberanceLevel === 0) {
+        await toggle('encumbered', false);
+      } else if (encumberanceLevel === 1) {
+        await toggle('encumbered', true);
+      } else if (encumberanceLevel === 2) {
+        await toggle('encumbered', true);
+        await toggle('slowed', true);
+      } else if (encumberanceLevel === 3) {
+        await toggle('encumbered', true);
+        await toggle('slowed', true);
+        await toggle('immobilized', true);
+      }
+
+      if (actor.system.hp.value <= actor.system.hp.min) {
+        await toggle('dead', true);
+      }
+
+      if (actor.statuses.has('down') && !(actor.statuses.has('unconscious') || actor.statuses.has('dead'))) {
+        await toggle('down', false);
+      }
+
+      if (actor.statuses.has('ethereal') && (actor.statuses.has('unconscious') || actor.statuses.has('asleep'))) {
+        await toggle('asleep', false);
+        await toggle('unconscious', false);
+        await toggle('dead', true);
+      }
+
+      if (actor.statuses.has('prone')) {
+        await toggle('meleeDodging', false);
+        await toggle('missileDodging', false);
+      }
+
+      if (actor.statuses.has('down') && actor.statuses.has('dueling')) {
+        await toggle('dueling', false);
+      }
+
+      if (actor.statuses.has('wisping') && !actor.statuses.has('ethereal')) {
+        await toggle('ethereal', true);
+      }
+
+      if (actor.statuses.has('ruined') && !actor.statuses.has('dead')) {
+        await toggle('dead', true);
+      }
+
+      if (actor.statuses.has('dead')) {
+        await toggle('asleep', false);
+        await toggle('unconscious', false);
+      }
+
+      if (actor.statuses.has('dead') && !actor.statuses.has('down')) {
+        await toggle('down', true);
+      }
+
+      if (actor.statuses.has('asleep') && !actor.statuses.has('unconscious')) {
+        await toggle('unconscious', true);
+      }
+
+      if (actor.statuses.has('unconscious') && !actor.statuses.has('down')) {
+        await toggle('down', true);
+      }
+
+      if (actor.statuses.has('down') && !actor.statuses.has('prone')) {
+        await toggle('prone', true);
+        await toggle('blind', true);
+      }
+    } catch (err) {
+      // console.error("Error while toggling conditions:", err);
     }
 
-    if (actor.system.hp.value <= actor.system.hp.min) {
-      await toggle('dead', true);
-    }
-
-    if (actor.statuses.has('down') && !(actor.statuses.has('unconscious') || actor.statuses.has('dead'))) {
-      await toggle('down', false);
-    }
-
-    if (actor.statuses.has('ethereal') && (actor.statuses.has('unconscious') || actor.statuses.has('asleep'))) {
-      await toggle('asleep', false);
-      await toggle('unconscious', false);
-      await toggle('dead', true);
-    }
-
-    if (actor.statuses.has('prone')) {
-      await toggle('meleeDodging', false);
-      await toggle('missileDodging', false);
-    }
-
-    if (actor.statuses.has('down') && actor.statuses.has('dueling')) {
-      await toggle('dueling', false);
-    }
-
-    if (actor.statuses.has('wisping') && !actor.statuses.has('ethereal')) {
-      await toggle('ethereal', true);
-    }
-
-    if (actor.statuses.has('ruined') && !actor.statuses.has('dead')) {
-      await toggle('dead', true);
-    }
-
-    if (actor.statuses.has('dead')) {
-      await toggle('asleep', false);
-      await toggle('unconscious', false);
-    }
-
-    if (actor.statuses.has('dead') && !actor.statuses.has('down')) {
-      await toggle('down', true);
-    }
-
-    if (actor.statuses.has('asleep') && !actor.statuses.has('unconscious')) {
-      await toggle('unconscious', true);
-    }
-
-    if (actor.statuses.has('unconscious') && !actor.statuses.has('down')) {
-      await toggle('down', true);
-    }
-
-    if (actor.statuses.has('down') && !actor.statuses.has('prone')) {
-      await toggle('prone', true);
-      await toggle('blind', true);
-    }
-
+  } catch (err) {
+    // console.error("Error in prepareConditions:", err);
   } finally {
     actor._isProcessingConditions = false;
   }

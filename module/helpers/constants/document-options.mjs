@@ -35,4 +35,8 @@ export const documentOptions = {
     name: 'Property',
     icon: 'atom-simple',
   },
+  effect: {
+    name: 'Effect',
+    icon: 'disease',
+  }
 }
