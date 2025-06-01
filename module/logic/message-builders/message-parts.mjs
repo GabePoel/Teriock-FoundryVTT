@@ -168,8 +168,8 @@ export function messageHeader(parent, image, text, fontClass = 'tfont') {
     className: `tmessage-header-text ${fontClass}`,
     innerHTML: text,
     style: `
-      font-size: 1.25em;
-      line-height: 1.25em;
+      font-size: 1.5em;
+      line-height: 1.5em;
       flex: 1 1 auto;
       text-align: left;
       margin-left: 0.5em;
