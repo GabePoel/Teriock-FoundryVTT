@@ -267,7 +267,7 @@ export const TeriockSheet = (Base) =>
       const attr = target.dataset.edit;
       const current = foundry.utils.getProperty(this.document, attr);
       const defaultImg = this.document.constructor.getDefaultArtwork?.(this.document.toObject())?.img;
-      const picker = new FilePicker({
+      const picker = new foundry.applications.apps.FilePicker({
         current,
         type: 'image',
         redirectToRoot: defaultImg ? [defaultImg] : [],

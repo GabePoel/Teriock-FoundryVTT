@@ -294,8 +294,8 @@ export function addResourcesBlock(resources, blocks, name = 'Resources') {
     const { quantity, maxQuantity } = resource.system;
     return `<li style="list-style: none; display: flex; flex-direction: row; align-items: center;">
       <span style="margin-inline: 1em; font-size: 0.5em;">
-        <i class="fa-solid fa-hashtag fa-fw"></i>
-      </span><a data-action="open" data-uuid="${uuid}">${name}</a> (${quantity}${maxQuantity ? ` / ${maxQuantity}` : ''})
+      <i class="fa-solid fa-hashtag fa-fw"></i>
+      </span> <a data-action="open" data-uuid="${uuid}">${name}</a>&nbsp;(${quantity}${maxQuantity ? `&nbsp;/&nbsp;${maxQuantity}` : ''})
     </li>`;
   }).join('');
   if (!filtered.length) return;

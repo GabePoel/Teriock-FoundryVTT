@@ -6,6 +6,7 @@ import DetectionModeEtherealEthereal from "./detection-modes/ethereal-ethereal-p
 import DetectionModeInvisiblePerception from "./detection-modes/invisible-perception.mjs"
 import DetectionModeScentPerception from "./detection-modes/scent-perception.mjs"
 import DetectionModeTrueSightPerception from "./detection-modes/true-sight-perception.mjs"
+const { DetectionMode } = foundry.canvas.perception;
 
 export const teriockDetectionModes = {
   seeInvisible: new DetectionModeInvisiblePerception({

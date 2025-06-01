@@ -357,7 +357,7 @@ export function registerHandlebarsHelpers() {
     const renderedCards = abilities.map(ability => {
       const subtitle = ability.type === 'ability'
         ? Handlebars.helpers.executionTime(ability.system?.maneuver, ability.system?.executionTime)
-        : ability.system?.propertyType;
+        : ability.type === 'property' ? ability.system?.propertyType : '';
       const marker = Handlebars.helpers.abilityMarker(ability);
       const chatIcon = Handlebars.helpers.ticon("comment", {
         hash: { action: "chatDoc", id: ability._id, parentId: ability.parent?._id, tooltip: "Send to Chat" }
