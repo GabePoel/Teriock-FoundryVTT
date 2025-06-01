@@ -68,6 +68,7 @@ export function buildAbilityMessage(ability) {
     {
       title: 'Elder Sorcery incant',
       text: src.elderSorceryIncant,
+      special: "ES",
     },
     {
       title: 'Mana cost',

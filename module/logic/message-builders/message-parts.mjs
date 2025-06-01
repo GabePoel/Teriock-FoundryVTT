@@ -62,7 +62,7 @@ export function messageWrapper(parent, content) {
     paddingLeft: '0.25em',
     paddingRight: '0.25em',
     borderRadius: '0.25em',
-    border: '1px solid rgba(0, 0, 0, 0.25)',
+    border: '1px dotted var(--color-text-subtle)',
     maxWidth: 'fit-content'
   });
   wrapper.innerHTML = content;
@@ -70,7 +70,7 @@ export function messageWrapper(parent, content) {
   return wrapper;
 }
 
-export function messageBlock(parent, title, text, italic = false) {
+export function messageBlock(parent, title, text, italic = false, special = null) {
   if (!text) return;
   const block = Object.assign(document.createElement('div'), {
     className: 'abm-block',
@@ -86,13 +86,29 @@ export function messageBlock(parent, title, text, italic = false) {
   const titleElement = Object.assign(document.createElement('div'), {
     className: 'abm-block-title',
     innerHTML: title,
-    style: 'font-weight: bold;'
+    style: `
+      color: var(--color-text-subtle);
+      text-transform: uppercase;
+      font-size: 0.8em;
+      margin-bottom: 0.25em;
+    `
   });
 
   const textElement = Object.assign(document.createElement('div'), {
     className: 'abm-block-text',
     innerHTML: text
   });
+
+  if (special === 'ES') {
+    titleElement.style.display = 'none';
+    textElement.style.fontFamily = 'Quintessential';
+    textElement.style.border = '1px solid rgba(0, 0, 0, 0.2)';
+    textElement.style.borderRadius = '4px';
+    textElement.style.padding = '6px';
+    textElement.style.marginBottom = '4px';
+    textElement.style.backgroundColor = 'rgba(0, 0, 0, 0.1)';
+    textElement.style.boxShadow = '0 0 2px #FFF inset';
+  }
 
   // Remove tables from textElement
   textElement.querySelectorAll('table').forEach(table => table.remove());
@@ -129,6 +145,7 @@ export function messageHeader(parent, image, text, fontClass = 'tfont') {
       display: flex;
       align-items: center;
       justify-content: center;
+      filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.4));
     `
   });
   headerImageContainer.setAttribute('data-src', image);

@@ -70,7 +70,7 @@ function buildMessageHelper(image, name, bars, blocks, fontClass) {
   const blockBox = messageBox();
   blockBox.classList.add('tmes-block-box');
   blocks.filter(block => block.text !== '').forEach(block => {
-    messageBlock(blockBox, block.title, block.text, block.italic);
+    messageBlock(blockBox, block.title, block.text, block.italic, block.special);
   });
 
   // Append non-empty sections
