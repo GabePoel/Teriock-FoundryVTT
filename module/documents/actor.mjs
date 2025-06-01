@@ -139,6 +139,7 @@ export default class TeriockActor extends Actor {
     } else {
       ui.notifications.warn(`${this.name} does not have ${abilityName}.`);
     }
+    return;
   }
 
   _renderDieBox(rank, type, dieProp, spent) {

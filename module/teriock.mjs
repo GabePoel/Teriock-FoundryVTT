@@ -234,7 +234,7 @@ Hooks.on('chatMessage', (chatLog, message, chatData) => {
       const roll = new TeriockRoll(rollFormula, { speaker: chatData.speaker });
       await roll.toMessage({
         user: chatData.user,
-        speaker: DamagechatData.speaker,
+        speaker: chatData.speaker,
         flavor: `Heal Roll`,
       });
       const total = roll.total;
