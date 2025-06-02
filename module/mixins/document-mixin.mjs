@@ -117,10 +117,10 @@ export const TeriockDocument = (Base) => class TeriockDocument extends Base {
   getActor() {
     if (this.documentName === 'Actor') {
       return this;
-    } else if (this.parent.documentName === 'Actor') {
+    } else if (this.parent?.documentName === 'Actor') {
       return this.parent;
     } else {
-      return this.parent.parent;
+      return this.parent?.parent;
     }
   }
 };

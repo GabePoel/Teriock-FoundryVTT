@@ -1,4 +1,4 @@
-@use './colors' as *;
+@use './colors' as colors;
 @use "sidebar/hack-box";
 @use "sidebar/intro-box";
 @use "sidebar/status-box";
@@ -425,7 +425,7 @@
   height: 3em;
   border-radius: 6px;
   overflow: hidden;
-  border: 2px solid $mp-yellow;
+  border: 2px solid #{colors.$mp-yellow};
   .character-presence-bar {
     display: grid;
     width: 100%;
@@ -434,23 +434,23 @@
       width: 100%;
       height: 100%;
       &:not(:first-child) {
-        border-left: 1px solid $mp-yellow;
+        border-left: 1px solid colors.$mp-yellow;
       }
       &:not(:last-child) {
-        border-right: 1px solid $mp-yellow;
+        border-right: 1px solid colors.$mp-yellow;
       }
       background-color: black;
       &.used {
         background-image: repeating-linear-gradient(
           135deg,
-          $mp-yellow 0px,
-          $mp-yellow 2px,
-          $mp-yellow-darkest 2px,
-          $mp-yellow-darkest 8px /* gap between lines: 2px line + 6px gap */
+          #{colors.$mp-yellow} 0px,
+          #{colors.$mp-yellow} 2px,
+          #{colors.$mp-yellow-darkest} 2px,
+          #{colors.$mp-yellow-darkest} 8px /* gap between lines: 2px line + 6px gap */
         );
       }
       &.unused {
-        background-color: $mp-yellow-darkest;
+        background-color: #{colors.$mp-yellow-darkest};
       }
     }
   }
@@ -558,10 +558,10 @@
   overflow: hidden;
   transition: all 0.2s ease-in-out;
   &.hp-drawer {
-    background-color: $hp-red-drawer;
+    background-color: #{colors.$hp-red-drawer};
   }
   &.mp-drawer {
-    background-color: $mp-blue-drawer;
+    background-color: #{colors.$mp-blue-drawer};
   }
   &.top-drawer {
     border-bottom-left-radius: 0;

@@ -21,11 +21,11 @@ export function primaryBlockerContextMenu(actor, options) {
 }
 
 export function primaryAttackContextMenu(actor, options) {
-  const equipped = actor.itemTypes.equipment.filter(i => i.system.equipped && (i.system.properties?.includes("weapon") || i.system.properties?.includes("bashing")));
+  const equipped = actor.itemTypes.equipment.filter(i => i.system.damage);
   const attackOptions = [];
   for (const item of equipped) {
     let icon = "";
-    if (item.system.properties?.includes("weapon")) {
+    if (item.system.damage) {
       icon = `<i class="fa-solid fa-sword"></i>`;
     } else if (item.system.properties?.includes("bashing")) {
       icon = `<i class="fa-solid fa-staff"></i>`;
