@@ -66,3 +66,11 @@ export async function createEffect(document) {
     img: "systems/teriock/assets/effect.svg",
   }, { parent: document });
 }
+
+export async function createFluency(document) {
+  return await TeriockEffect.create({
+    name: "New Fluency",
+    type: "fluency",
+    img: "systems/teriock/assets/fluency.svg",
+  }, { parent: document });
+}

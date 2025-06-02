@@ -1,6 +1,6 @@
 const { ux, api } = foundry.applications;
 const { utils } = foundry;
-import { createAbility, createResource, createProperty } from "../helpers/create-effects.mjs";
+import { createAbility, createResource, createProperty, createFluency } from "../helpers/create-effects.mjs";
 import connectEmbedded from "./connect-embedded.mjs";
 import { TeriockImage } from "../helpers/image.mjs";
 
@@ -16,6 +16,7 @@ export const TeriockSheet = (Base) =>
         chatDoc: this._chatDoc,
         chatThis: this._chatThis,
         rollThis: this._rollThis,
+        toggleLockThis: this._toggleLockThis,
         wikiPullThis: this._wikiPullThis,
         wikiOpenThis: this._wikiOpenThis,
         toggleForceDisabledDoc: this._toggleForceDisabledDoc,
@@ -24,6 +25,7 @@ export const TeriockSheet = (Base) =>
         createAbility: this._createAbility,
         createResource: this._createResource,
         createProperty: this._createProperty,
+        createFluency: this._createFluency,
       },
       form: {
         submitOnChange: true,
@@ -245,7 +247,9 @@ export const TeriockSheet = (Base) =>
     }
 
     static async _wikiPullThis(_, __) {
-      this.document.wikiPull();
+      if (this.document.system.editable) {
+        this.document.wikiPull();
+      }
     }
 
     static async _wikiOpenThis(_, __) {
@@ -254,6 +258,10 @@ export const TeriockSheet = (Base) =>
 
     static async _chatThis(_, __) {
       this.document.chat();
+    }
+
+    static async _toggleLockThis(_, __) {
+      this.document.update({ 'system.editable': !this.document.system.editable });
     }
 
     static async _rollThis(event, target) {
@@ -313,6 +321,10 @@ export const TeriockSheet = (Base) =>
 
     static async _createResource(event, __) {
       await createResource(this.item, null);
+    }
+
+    static async _createFluency(event, __) {
+      await createFluency(this.item, null);
     }
 
     static async _createProperty(event, __) {

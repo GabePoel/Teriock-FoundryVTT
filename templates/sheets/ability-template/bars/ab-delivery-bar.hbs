@@ -1,7 +1,7 @@
 <div class="ab-bar ab-bar-1">
   <div class="ab-box-container">
     <div
-      class="ab-box execution-box ab-input-box"
+      class="ab-box {{#if editable}}execution-box{{/if}} ab-input-box"
       maneuver="{{lookup config.abilityOptions.maneuver system.maneuver}}"
       data-tooltip="Execution Time"
     >
@@ -31,6 +31,9 @@
             type="text"
             value="{{system.executionTime}}"
             data-edit="system.executionTime"
+            {{#if (not editable)}}
+              disabled="true"
+            {{/if}}
           />
         {{/if}}
       </div>
@@ -38,7 +41,7 @@
   </div>
 
   <div class="ab-box-container">
-    <div class="ab-box delivery-box" data-tooltip="Delivery">
+    <div class="ab-box {{#if editable}}delivery-box{{/if}}" data-tooltip="Delivery">
       <div class="ab-box-icon">
         {{{config.icons.delivery}}}
       </div>
@@ -51,7 +54,7 @@
 
   <div class="ab-box-container">
     <div
-      class="ab-box interaction-box interaction-box-{{system.interaction}}"
+      class="ab-box {{#if editable}}interaction-box interaction-box-{{system.interaction}}{{/if}}"
       data-tooltip="Interaction"
     >
       <div class="ab-box-icon">

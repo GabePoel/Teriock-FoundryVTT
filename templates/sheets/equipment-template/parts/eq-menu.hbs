@@ -2,7 +2,7 @@
   <div class="ab-menu-content">
     <div class="ab-menu-bar">
       <div class="tgrid g3">
-        <div class="tgrid-item">
+        {{!-- <div class="tgrid-item">
           <label for="editable">Editable</label>
           <input
             type="checkbox"
@@ -12,7 +12,7 @@
             {{#if (not isEditable)}}disabled="true"{{/if}}
             {{checked system.editable}}
           />
-        </div>
+        </div> --}}
         {{!-- <div class="tgrid-item">
           <label for="attuned">Attuned</label>
           <input
@@ -75,7 +75,7 @@
             {{checked system.consumable}}
           />
         </div>
-        {{!-- <div class="tgrid-item">
+        <div class="tgrid-item">
           <label for="equipped">Equipped</label>
           <input
             {{#if (not editable)}}
@@ -87,7 +87,7 @@
             data-action="toggleEquipped"
             {{checked system.equipped}}
           />
-        </div> --}}
+        </div>
         <div class="tgrid-item">
           <label for="wielded">Proficient</label>
           <input
@@ -240,7 +240,19 @@
               {{/if}}
             >
               {{{config.icons.add}}}
-              Range
+              Normal Range
+            </button>
+          </div>
+        {{/if}}
+        {{#if (not (exists system.shortRange))}}
+          <div class="tgrid-item">
+            <button class="ab-menu-button ab-short-range-button"
+              {{#if (not editable)}}
+                disabled="true"
+              {{/if}}
+            >
+              {{{config.icons.add}}}
+              Short Range
             </button>
           </div>
         {{/if}}

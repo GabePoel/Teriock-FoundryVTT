@@ -94,7 +94,6 @@ export class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(TeriockS
   _onRender(context, options) {
     super._onRender(context, options);
     this.editable = this.isEditable && this.document.system.editable;
-    console.log('TeriockAbilitySheet._onRender', this.document.name, this.editable);
     if (!this.editable) return;
 
     const doc = this.document;

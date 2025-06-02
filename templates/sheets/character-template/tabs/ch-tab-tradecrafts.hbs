@@ -51,22 +51,19 @@
     <div class="tcard-display">
       <div class="tcard-options">
         {{tcardOptions system.sheet.menus.fluencyOptions null null system.sheet.fluencyFilters.search "fluency"}}
-        {{#if system.sheet.menus.fluencyFilters}}
-          <div class="tcard-options-content">
-            {{> 'systems/teriock/templates/sheets/character-template/filters/ch-fluency-filter.hbs'}}
-          </div>
-        {{/if}}
       </div>
     <div class="tcard-container {{#if system.sheet.display.fluency.gapless}}gapless{{/if}} {{system.sheet.display.fluency.size}}">
-      {{#each fluencies as |item|}}
+      {{#each fluencies as |effect|}}
         {{tcard
-          img=item.img
-          title=item.name
-          subtitle=(tradecraft item.system.field item.system.tradecraft)
-          text=(field item.system.field)
-          id=item._id
+          img=effect.img
+          title=effect.name
+          subtitle=(tradecraft effect.system.field effect.system.tradecraft)
+          text=(field effect.system.field)
+          id=effect._id
+          parentId=effect.parent._id
+          type="effect"
           icons=(concat
-            (ticon "comment" cssClass="share" action="share" id=item._id tooltip="Share")
+            (ticon "comment" cssClass="share" action="share" id=effect._id tooltip="Share")
           )
         }}
       {{/each}}

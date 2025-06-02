@@ -121,6 +121,7 @@ export class TeriockEquipmentSheet extends HandlebarsApplicationMixin(TeriockIte
     const staticUpdates = {
       '.ab-damage-button': { 'system.damage': 2 },
       '.ab-two-handed-damage-button': { 'system.twoHandedDamage': this.item.system.damage },
+      '.ab-short-range-button': { 'system.shortRange': 5 },
       '.ab-range-button': { 'system.range': 5 },
       '.ab-av-button': { 'system.av': 1 },
       '.ab-bv-button': { 'system.bv': 1 },

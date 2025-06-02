@@ -40,17 +40,6 @@
         {{abilityCards properties system}}
       </div>
     {{/if}}
-    {{#if (or editable (exists abilities))}}
-      <div class="ab-main">
-        {{#if editable}}<button class="createAbility" data-action='createAbility'>Add Ability</button>{{/if}}
-        {{abilityCards abilities system}}
-      </div>
-    {{/if}}
-    {{#if (or editable (exists resources))}}
-      <div class="ab-main">
-        {{#if editable}}<button class="createResource" data-action="createResource">Add Resource</button>{{/if}}
-        {{abilityCards resources system}}
-      </div>
-    {{/if}}
+    {{> "systems/teriock/templates/common/effects.hbs"}}
   </div>
 </div>

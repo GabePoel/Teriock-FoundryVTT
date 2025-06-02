@@ -81,4 +81,6 @@ export const icons = {
   checked: '<i class="fa-solid fa-square-check"></i>',
   unchecked: '<i class="fa-regular fa-square"></i>',
   tier: '<i class="fa-light fa-trophy"></i>',
+  locked: '<i class="fa-solid fa-lock"></i>',
+  unlocked: '<i class="fa-solid fa-lock-open"></i>',
 }

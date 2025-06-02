@@ -1,6 +1,6 @@
 <div class="ab-bar">
   <div class="ab-box-container">
-    <div class="ab-box quantity-box" data-tooltip="Quantity">
+    <div class="ab-box {{#if editable}}quantity-box{{/if}}" data-tooltip="Quantity">
       <div class="ab-box-icon">
         <i class="fa-light fa-hashtag"></i>
       </div>
@@ -13,6 +13,9 @@
           data-edit="system.quantity"
           placeholder="Remaining"
           max="{{system.maxQuantity}}"
+          {{#if (not editable)}}
+            disabled="true"
+          {{/if}}
         />
       </div>
       <div class="ab-box-label">
@@ -21,7 +24,7 @@
     </div>
   </div>
   <div class="ab-box-container">
-    <div class="ab-box max-box" data-tooltip="Maximum Quantity">
+    <div class="ab-box {{#if editable}}max-box{{/if}}" data-tooltip="Maximum Quantity">
       <div class="ab-box-icon">
         <i class="fa-light fa-infinity"></i>
       </div>
@@ -33,6 +36,9 @@
           value="{{system.maxQuantity}}"
           data-edit="system.maxQuantity"
           placeholder="Infinite"
+          {{#if (not editable)}}
+            disabled="true"
+          {{/if}}
         />
       </div>
       <div class="ab-box-label">
@@ -41,7 +47,7 @@
     </div>
   </div>
   <div class="ab-box-container">
-    <div class="ab-box formula-box" data-tooltip="Roll Formula">
+    <div class="ab-box {{#if editable}}formula-box{{/if}}" data-tooltip="Roll Formula">
       <div class="ab-box-icon">
         <i class="fa-light fa-{{firstDie system.rollFormula}}"></i>
       </div>
@@ -53,6 +59,9 @@
           value="{{system.rollFormula}}"
           data-edit="system.rollFormula"
           placeholder="No Formula"
+          {{#if (not editable)}}
+            disabled="true"
+          {{/if}}
         />
       </div>
       <div class="ab-box-label">

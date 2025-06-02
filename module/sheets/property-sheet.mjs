@@ -43,6 +43,8 @@ export class TeriockPropertySheet extends api.HandlebarsApplicationMixin(Teriock
   /** @override */
   _onRender(context, options) {
     super._onRender(context, options);
+    this.editable = this.isEditable && this.document.system.editable;
+    if (!this.editable) return;
     const propertyContextMenuOptions = propertyContextMenu(this.document);
     this._connectContextMenu('.property-type-box', propertyContextMenuOptions, 'click');
   }

@@ -32,6 +32,8 @@ export class TeriockRankSheet extends HandlebarsApplicationMixin(TeriockItemShee
   /** @override */
   _onRender(context, options) {
     super._onRender(context, options);
+    this.editable = (this.isEditable && this.document.system.editable);
+    if (!this.editable) return;
     [
       { selector: '.rank-box', menu: rankContextMenu },
       { selector: '.class-box', menu: classContextMenu },

@@ -12,32 +12,33 @@
         <div class="ab-section">
           <span class="ab-section-title">Description</span>
         </div>
-        <prose-mirror
-          name="system.description"
-          value="{{system.description}}"
-          toggled=true
-          editable=editable
-        >{{{enrichedDescription}}}</prose-mirror>
+        {{#if editable}}
+          <prose-mirror
+            name="system.description"
+            value="{{system.description}}"
+            toggled=true
+            editable=editable
+          >{{{enrichedDescription}}}</prose-mirror>
+        {{else}}
+          {{{enrichedDescription}}}
+        {{/if}}
       </div>
       <div class="ab-section-container">
         <div class="ab-section">
           <span class="ab-section-title">Flaws</span>
         </div>
-        <prose-mirror
-          name="system.flaws"
-          value="{{system.flaws}}"
-          toggled=true
-          editable=editable
-        >{{{enrichedFlaws}}}</prose-mirror>
+        {{#if editable}}
+          <prose-mirror
+            name="system.flaws"
+            value="{{system.flaws}}"
+            toggled=true
+            editable=editable
+          >{{{enrichedFlaws}}}</prose-mirror>
+        {{else}}
+          {{{enrichedFlaws}}}
+        {{/if}}
       </div>
     </div>
-    <div class="ab-main">
-      <button class="createAbility" data-action='createAbility'>Add Ability</button>
-      {{abilityCards abilities system}}
-    </div>
-    <div class="ab-main">
-      <button class="createResource" data-action='createResource'>Add Resource</button>
-      {{abilityCards resources system}}
-    </div>
+    {{> "systems/teriock/templates/common/effects.hbs"}}
   </div>
 </div>

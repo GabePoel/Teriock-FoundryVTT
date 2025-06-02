@@ -115,7 +115,7 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(Terioc
         }
       },
       fluency: {
-        docType: 'Item',
+        docType: 'ActiveEffect',
         data: {
           name: 'New Fluency',
           img: 'systems/teriock/assets/fluency.svg',
@@ -426,7 +426,10 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(Terioc
   }
 
   _getFilteredFluencies() {
-    return this._filterItems(this.actor.itemTypes.fluency, this.actor.system.sheet.tradecraftFilters || {});
+    return this._filterItems(
+      Array.from(this.actor.allApplicableEffects()).filter(i => i.type === 'fluency'),
+      this.actor.system.sheet.fluencyFilters || {}
+    );
   }
 
   _getFilteredRanks() {

@@ -2,7 +2,7 @@
   <div class="ab-bar ab-bar-3">
     {{#if (exists system.costs.mp)}}
       <div class="ab-box-container">
-        <div class="ab-box mana-cost-box" data-tooltip="Mana Cost">
+        <div class="ab-box {{#if editable}}mana-cost-box{{/if}}" data-tooltip="Mana Cost">
           <div class="ab-box-icon">
             {{{config.icons.mp}}}
           </div>
@@ -16,6 +16,9 @@
                 type="number"
                 value="{{system.costs.mp}}"
                 data-edit="system.costs.mp"
+                {{#if (not editable)}}
+                  disabled="true"
+                {{/if}}
               />
             {{/if}}
             <div class="ab-box-label">
@@ -27,7 +30,7 @@
     {{/if}}
     {{#if (exists system.costs.hp)}}
       <div class="ab-box-container">
-        <div class="ab-box hit-cost-box" data-tooltip="Hit Cost">
+        <div class="ab-box {{#if editable}}hit-cost-box{{/if}}" data-tooltip="Hit Cost">
           <div class="ab-box-icon">
             {{{config.icons.hp}}}
           </div>
@@ -41,6 +44,9 @@
                 type="number"
                 value="{{system.costs.hp}}"
                 data-edit="system.costs.hp"
+                {{#if (not editable)}}
+                  disabled="true"
+                {{/if}}
               />
             {{/if}}
             <div class="ab-box-label">
@@ -52,7 +58,7 @@
     {{/if}}
     {{#if (exists system.costs.break)}}
       <div class="ab-box-container">
-        <div class="ab-box break-cost-box" data-tooltip="Break Cost">
+        <div class="ab-box {{#if editable}}break-cost-box{{/if}}" data-tooltip="Break Cost">
           <div class="ab-box-icon">
             {{{config.icons.break}}}
           </div>

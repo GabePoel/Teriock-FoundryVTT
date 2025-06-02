@@ -91,11 +91,6 @@ Hooks.once('init', function () {
     label: 'Equipment',
     types: ['equipment'],
   });
-  Items.registerSheet('teriock', TeriockFluencySheet, {
-    makeDefault: true,
-    label: 'Fluency',
-    types: ['fluency'],
-  });
   Items.registerSheet('teriock', TeriockRankSheet, {
     makeDefault: true,
     label: 'Rank',
@@ -111,6 +106,11 @@ Hooks.once('init', function () {
     makeDefault: true,
     label: 'Ability',
     types: ['ability']
+  });
+  DocumentSheetConfig.registerSheet(TeriockEffect, 'teriock', TeriockFluencySheet, {
+    makeDefault: true,
+    label: 'Fluency',
+    types: ['fluency']
   });
   DocumentSheetConfig.registerSheet(TeriockEffect, 'teriock', TeriockResourceSheet, {
     makeDefault: true,

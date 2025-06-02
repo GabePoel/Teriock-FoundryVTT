@@ -189,6 +189,8 @@ export default function parseAbility(rawHTML, ability) {
     parameters.abilityType = 'intrinsic';
   }
 
+  parameters.editable = false;
+
   delete parameters.improvement;
   delete parameters.limitation;
 

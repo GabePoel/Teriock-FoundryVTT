@@ -76,6 +76,8 @@ export default async function parseRank(rawHTML, item) {
     description: getHTML('.class-description') || ''
   };
 
+  parameters.editable = false;
+
   return {
     system: parameters,
     img: `systems/teriock/assets/classes/${className}.svg`,

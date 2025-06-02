@@ -1,12 +1,15 @@
 {{#if (eq system.type "species")}}
   <div class="ab-bar ab-lifespan-bar">
     <div class="ab-box-container">
-      <div class="ab-box ab-size-box" data-tooltip="Size">
+      <div class="ab-box {{#if editable}}ab-size-box{{/if}}" data-tooltip="Size">
         <div class="ab-box-icon">
           <i class="fa-light fa-ruler-vertical"></i>
         </div>
         <div class="ab-box-content">
           <input
+            {{#if (not editable)}}
+              disabled="true"
+            {{/if}}
             class="ability-bar-input size-input"
             name="system.size"
             type="number"
@@ -18,12 +21,15 @@
       </div>
     </div>
     <div class="ab-box-container">
-      <div class="ab-box ab-adult-box" data-tooltip="Age of Maturity">
+      <div class="ab-box {{#if editable}}ab-adult-box{{/if}}" data-tooltip="Age of Maturity">
         <div class="ab-box-icon">
           <i class="fa-light fa-person"></i>
         </div>
         <div class="ab-box-content">
           <input
+            {{#if (not editable)}}
+              disabled="true"
+            {{/if}}
             class="ability-bar-input adult-input"
             name="system.adult"
             type="number"
@@ -35,12 +41,15 @@
       </div>
     </div>
     <div class="ab-box-container">
-      <div class="ab-box ab-lifespan-box" data-tooltip="Lifespan">
+      <div class="ab-box {{#if editable}}ab-lifespan-box{{/if}}" data-tooltip="Lifespan">
         <div class="ab-box-icon">
           <i class="fa-light fa-tombstone-blank"></i>
         </div>
         <div class="ab-box-content">
           <input
+            {{#if (not editable)}}
+              disabled="true"
+            {{/if}}
             class="ability-bar-input lifespan-input"
             name="system.lifespan"
             type="number"

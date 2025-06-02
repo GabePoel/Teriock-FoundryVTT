@@ -45,6 +45,14 @@ export class TeriockItemSheet extends TeriockSheet(sheets.ItemSheet) {
         return (a.name || '').localeCompare(b.name || '');
       });
 
+    const fluencies = transferredEffects
+      .filter(e => e.type === 'fluency')
+      .sort((a, b) => (a.name || '').localeCompare(b.name || ''));
+
+    const resources = transferredEffects
+      .filter(e => e.type === 'resource')
+      .sort((a, b) => (a.name || '').localeCompare(b.name || ''));
+
     return {
       config: CONFIG.TERIOCK,
       isEditable: this.isEditable,
@@ -58,13 +66,16 @@ export class TeriockItemSheet extends TeriockSheet(sheets.ItemSheet) {
       flags,
       properties,
       abilities,
-      resources: transferredEffects.filter(e => e.type === 'resource'),
+      fluencies,
+      resources,
     };
   }
 
   /** @override */
   _onRender(context, options) {
     super._onRender(context, options);
+    this.editable = (this.isEditable && this.document.system.editable);
+    if (!this.editable) return;
     this.#dragDrop.forEach(d => d.bind(this.element));
 
     this._bindStaticEvents();
