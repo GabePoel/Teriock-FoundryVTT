@@ -1,4 +1,5 @@
 import prepareDerivedData from "../logic/actor/derived-data.mjs";
+import postUpdate from "../logic/actor/post-update.mjs";
 import getRollData from "../logic/actor/roll-data.mjs";
 import rollCondition from "../logic/rollers/rolling-condition.mjs";
 
@@ -94,6 +95,10 @@ export default class TeriockActor extends Actor {
     if (hacksTotal === 0) {
       await this.toggleStatusEffect('hacked', { active: false });
     }
+  }
+
+  async postUpdate() {
+    await postUpdate(this);
   }
 
   rollCondition(condition, options) {

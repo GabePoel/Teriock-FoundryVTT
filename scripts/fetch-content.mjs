@@ -21,10 +21,12 @@ const writeModuleFile = (fileName, exportName, entries) => {
 
   for (const [key, value] of Object.entries(entries)) {
     lines.push(`  ${key}: {\n` +
-      `  name: ${JSON.stringify(value.name)},\n` +
-      `  id: ${JSON.stringify(key)},\n` +
-      `  img: ${JSON.stringify(`systems/teriock/assets/${exportName}/${key}.svg`)},\n` +
-      `  content: ${JSON.stringify(value.content)}\n  },`);
+      `    name: ${JSON.stringify(value.name)},\n` +
+      `    id: ${JSON.stringify(key)},\n` +
+      `    img: ${JSON.stringify(`systems/teriock/assets/${exportName}/${key}.svg`)},\n` +
+      (value._id ? `    _id: ${JSON.stringify(value._id)},\n` : '') +
+      (value.statuses ? `    statuses: ${JSON.stringify(value.statuses)},\n` : '') +
+      `    content: ${JSON.stringify(value.content)}\n  },`);
   }
 
   // Remove trailing comma on the last entry
@@ -36,8 +38,11 @@ const writeModuleFile = (fileName, exportName, entries) => {
 };
 
 
-const fetchContent = async (map, namespace) => {
+const fetchContent = async (map, namespace, staticId, statuses) => {
   const results = {};
+
+  console.log(`Fetching content for namespace "${namespace}"...`);
+  console.log(`Static ID: ${staticId}, statuses: ${statuses}`);
 
   for (const [key, name] of Object.entries(map)) {
     const pageTitle = `${namespace}:${name}`;
@@ -52,11 +57,25 @@ const fetchContent = async (map, namespace) => {
         name,
         content: document.body.innerHTML.trim(),
       };
+
+      if (staticId) {
+        results[key]._id = (key + '000000000000000').slice(0, 16);
+      }
+
+      if (statuses) {
+        results[key].statuses = [];
+        const box = document.querySelector('.condition-box');
+        if (box && box.hasAttribute('data-children')) {
+          results[key].statuses = box.getAttribute('data-children').split(',').map(s => s.trim()).filter(Boolean);
+        }
+        console.log(results[key].statuses);
+      }
     } else {
       console.warn(`No HTML returned for "${pageTitle}"`);
     }
   }
 
+  console.log(results);
   return results;
 };
 
@@ -64,14 +83,14 @@ const fetchContent = async (map, namespace) => {
 const run = async () => {
   try {
     const datasets = [
-      { data: conditions, namespace: 'Condition', exportName: 'conditions', file: 'conditions.mjs' },
-      { data: magicalProperties, namespace: 'Property', exportName: 'magicalProperties', file: 'magical-properties.mjs' },
-      { data: materialProperties, namespace: 'Property', exportName: 'materialProperties', file: 'material-properties.mjs' },
-      { data: properties, namespace: 'Property', exportName: 'properties', file: 'properties.mjs' },
+      { data: conditions, namespace: 'Condition', exportName: 'conditions', file: 'conditions.mjs', staticId: true, statuses: true },
+      { data: magicalProperties, namespace: 'Property', exportName: 'magicalProperties', file: 'magical-properties.mjs', staticId: false, statuses: false },
+      { data: materialProperties, namespace: 'Property', exportName: 'materialProperties', file: 'material-properties.mjs', staticId: false, statuses: false },
+      { data: properties, namespace: 'Property', exportName: 'properties', file: 'properties.mjs', staticId: false, statuses: false },
     ];
 
-    for (const { data, namespace, exportName, file } of datasets) {
-      const content = await fetchContent(data, namespace);
+    for (const { data, namespace, exportName, file, staticId, statuses } of datasets) {
+      const content = await fetchContent(data, namespace, staticId, statuses);
       writeModuleFile(file, exportName, content);
     }
   } catch (err) {

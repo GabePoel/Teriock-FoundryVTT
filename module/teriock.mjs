@@ -147,6 +147,12 @@ Hooks.once('init', function () {
 //   console.log('updateItem', item, updateData, options, userId);
 // });
 
+Hooks.on('updateActor', async (document, changed, options, userId) => {
+  if (document instanceof TeriockActor) {
+    await document.postUpdate();
+  }
+});
+
 Hooks.on('combatTurnChange', async (combat, prior, current) => {
   const combatants = combat.combatants;
   for (const combatant of combatants) {

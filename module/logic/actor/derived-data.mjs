@@ -9,8 +9,7 @@ export default function prepareDerivedData(actor) {
   prepareWeightCarried(actor);
   prepareDefenses(actor);
   prepareOffenses(actor);
-  prepareConditions(actor);
-  prepareTokens(actor);
+  prepareEncumbrance(actor);
 }
 
 function prepareSize(actor) {
@@ -190,134 +189,22 @@ function prepareOffenses(actor) {
   }
 }
 
-// TODO: Make less messy.
-async function prepareConditions(actor) {
-  // Prevent recursion
-  if (actor._isProcessingConditions) return;
-  actor._isProcessingConditions = true;
-  if (!actor.isOwner) return;
-
-  try {
-    const toggle = async (condition, active) => {
-      if (actor.statuses.has(condition) !== active) {
-        await actor.toggleStatusEffect(condition, { active });
-      }
-    };
-
-    let encumberanceLevel = 0;
-    if (actor.system.weightCarried >= actor.system.carryingCapacity.light) {
-      encumberanceLevel = 1;
-    }
-    if (actor.system.weightCarried >= actor.system.carryingCapacity.heavy) {
-      encumberanceLevel = 2;
-    }
-    if (actor.system.weightCarried >= actor.system.carryingCapacity.max) {
-      encumberanceLevel = 3;
-    }
-    const hasCumbersome = actor.itemTypes.equipment
-      .some(item => item.system.equipped && Array.isArray(item.system.properties) && item.system.properties.includes("cumbersome"));
-    if (hasCumbersome) {
-      encumberanceLevel += 1;
-    }
-    encumberanceLevel = Math.min(encumberanceLevel, 3);
-
-    try {
-      if (encumberanceLevel === 0) {
-        await toggle('encumbered', false);
-      } else if (encumberanceLevel === 1) {
-        await toggle('encumbered', true);
-      } else if (encumberanceLevel === 2) {
-        await toggle('encumbered', true);
-        await toggle('slowed', true);
-      } else if (encumberanceLevel === 3) {
-        await toggle('encumbered', true);
-        await toggle('slowed', true);
-        await toggle('immobilized', true);
-      }
-
-      if (actor.system.hp.value <= actor.system.hp.min) {
-        await toggle('dead', true);
-      }
-
-      if (actor.statuses.has('down') && !(actor.statuses.has('unconscious') || actor.statuses.has('dead'))) {
-        await toggle('down', false);
-      }
-
-      if (actor.statuses.has('ethereal') && (actor.statuses.has('unconscious') || actor.statuses.has('asleep'))) {
-        await toggle('asleep', false);
-        await toggle('unconscious', false);
-        await toggle('dead', true);
-      }
-
-      if (actor.statuses.has('prone')) {
-        await toggle('meleeDodging', false);
-        await toggle('missileDodging', false);
-      }
-
-      if (actor.statuses.has('down') && actor.statuses.has('dueling')) {
-        await toggle('dueling', false);
-      }
-
-      if (actor.statuses.has('wisping') && !actor.statuses.has('ethereal')) {
-        await toggle('ethereal', true);
-      }
-
-      if (actor.statuses.has('ruined') && !actor.statuses.has('dead')) {
-        await toggle('dead', true);
-      }
-
-      if (actor.statuses.has('dead')) {
-        await toggle('asleep', false);
-        await toggle('unconscious', false);
-      }
-
-      if (actor.statuses.has('dead') && !actor.statuses.has('down')) {
-        await toggle('down', true);
-      }
-
-      if (actor.statuses.has('asleep') && !actor.statuses.has('unconscious')) {
-        await toggle('unconscious', true);
-      }
-
-      if (actor.statuses.has('unconscious') && !actor.statuses.has('down')) {
-        await toggle('down', true);
-      }
-
-      if (actor.statuses.has('down') && !actor.statuses.has('prone')) {
-        await toggle('prone', true);
-        await toggle('blind', true);
-      }
-    } catch (err) {
-      // console.error("Error while toggling conditions:", err);
-    }
-
-  } catch (err) {
-    // console.error("Error in prepareConditions:", err);
-  } finally {
-    actor._isProcessingConditions = false;
+async function prepareEncumbrance(actor) {
+  let encumbranceLevel = 0;
+  if (actor.system.weightCarried >= actor.system.carryingCapacity.light) {
+    encumbranceLevel = 1;
   }
-}
-
-function prepareTokens(actor) {
-  const tokens = actor?.getDependentTokens();
-  const tokenSizes = {
-    'Tiny': 0.5,
-    'Small': 1,
-    'Medium': 1,
-    'Large': 2,
-    'Huge': 3,
-    'Gargantuan': 4,
-    'Colossal': 6,
-  };
-  for (const token of tokens) {
-    const tokenSize = tokenSizes[actor?.system?.namedSize] || 1;
-    const tokenParameters = {
-      'width': tokenSize,
-      'height': tokenSize,
-    }
-    token?.update(tokenParameters).then(() => {
-      token?.updateVisionMode(actor?.statuses?.has('ethereal') ? 'ethereal' : 'basic');
-    });
-    const detectionModes = token?.detectionModes;
-  };
+  if (actor.system.weightCarried >= actor.system.carryingCapacity.heavy) {
+    encumbranceLevel = 2;
+  }
+  if (actor.system.weightCarried >= actor.system.carryingCapacity.max) {
+    encumbranceLevel = 3;
+  }
+  const hasCumbersome = actor.itemTypes.equipment
+    .some(item => item.system.equipped && Array.isArray(item.system.properties) && item.system.properties.includes("cumbersome"));
+  if (hasCumbersome) {
+    encumbranceLevel += 1;
+  }
+  encumbranceLevel = Math.min(encumbranceLevel, 3);
+  actor.system.encumbranceLevel = encumbranceLevel;
 }
