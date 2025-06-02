@@ -95,7 +95,6 @@ function preparePresence(actor) {
   });
 }
 
-// TODO: Test this before committing.
 function prepareAttributes(actor) {
   const { attributes, size, f, p } = actor.system;
 
