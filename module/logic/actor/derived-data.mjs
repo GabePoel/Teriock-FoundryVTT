@@ -10,6 +10,7 @@ export default function prepareDerivedData(actor) {
   prepareDefenses(actor);
   prepareOffenses(actor);
   prepareEncumbrance(actor);
+  prepareVision(actor);
 }
 
 function prepareSize(actor) {
@@ -207,4 +208,11 @@ async function prepareEncumbrance(actor) {
   }
   encumbranceLevel = Math.min(encumbranceLevel, 3);
   actor.system.encumbranceLevel = encumbranceLevel;
+}
+
+async function prepareVision(actor) {
+  const tokens = actor?.getDependentTokens() || [];
+  for (const token of tokens) {
+    token?.updateVisionMode(actor?.statuses?.has('ethereal') ? 'ethereal' : 'basic');
+  }
 }
