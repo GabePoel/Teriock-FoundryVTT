@@ -1,6 +1,6 @@
 const { HandlebarsApplicationMixin, DialogV2 } = foundry.applications.api;
 import { TeriockItemSheet } from './teriock-item-sheet.mjs';
-import { rankContextMenu, classContextMenu, archetypeContextMenu } from './context-menus/rank-context-menus.mjs';
+import { rankContextMenu, classContextMenu, archetypeContextMenu, hitDieContextMenu, manaDieContextMenu } from './context-menus/rank-context-menus.mjs';
 import { documentOptions } from "../helpers/constants/document-options.mjs";
 
 export class TeriockRankSheet extends HandlebarsApplicationMixin(TeriockItemSheet) {
@@ -37,7 +37,9 @@ export class TeriockRankSheet extends HandlebarsApplicationMixin(TeriockItemShee
     [
       { selector: '.rank-box', menu: rankContextMenu },
       { selector: '.class-box', menu: classContextMenu },
-      { selector: '.archetype-box', menu: archetypeContextMenu }
+      { selector: '.archetype-box', menu: archetypeContextMenu },
+      { selector: '.hit-die-box', menu: hitDieContextMenu },
+      { selector: '.mana-die-box', menu: manaDieContextMenu }
     ].forEach(({ selector, menu }) => {
       this._connectContextMenu(selector, menu(this.item), 'click');
     });
@@ -52,12 +54,12 @@ export class TeriockRankSheet extends HandlebarsApplicationMixin(TeriockItemShee
         selector: '.mana-die-box',
         confirmText: 'Are you sure you want to reroll how much mana you gain from this rank?',
         dieKey: 'manaDie',
-        updateKey: 'mana'
+        updateKey: 'mp'
       }
     ].forEach(({ selector, confirmText, dieKey, updateKey }) => {
       const el = this.element.querySelector(selector);
       if (el) {
-        el.addEventListener('click', async () => {
+        el.addEventListener('contextmenu', async () => {
           const proceed = await DialogV2.confirm({
             content: confirmText,
             rejectClose: false,
