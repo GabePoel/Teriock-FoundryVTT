@@ -98,7 +98,6 @@
   - [x] Separate out handlebars registration
   - [x] Sheet helpers, utilities, wiki, and parsing consistency
   - [x] Remove all redundant click event handlers
-- [ ] More complete macro testing
 - [x] Resource implementation
 - [x] Effect separation
 - [x] Import conditions from wiki and have them as default status effects
