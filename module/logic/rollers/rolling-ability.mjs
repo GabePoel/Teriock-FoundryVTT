@@ -173,3 +173,20 @@ async function use(ability) {
   ability.system.formula = null;
   return roll;
 }
+
+// TODO: Finish resistance rolls
+async function resist(ability, advantage, disadvantage) {
+  const rollFormula = '1d20';
+  if (advantage) {
+    rollFormula = '2d20kh1';
+  } else if (disadvantage) {
+    rollFormula = '2d20kl1';
+  }
+  rollFormula += ' + @p';
+  const roll = new TeriockRoll(rollFormula, ability.getActor().getRollData(), {
+    flavor: `Resisting ${ability.name}`,
+  });
+  await roll.evaluate({ async: true });
+  return roll;
+
+}

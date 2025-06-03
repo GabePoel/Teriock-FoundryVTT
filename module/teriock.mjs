@@ -143,14 +143,12 @@ Hooks.once('init', function () {
 });
 
 
-// Hooks.on('updateItem', async (item, updateData, options, userId) => {
-//   console.log('updateItem', item, updateData, options, userId);
-// });
+Hooks.on('updateItem', async (document, updateData, options, userId) => {
+  await document.getActor()?.postUpdate();
+});
 
 Hooks.on('updateActor', async (document, changed, options, userId) => {
-  if (document instanceof TeriockActor) {
-    await document.postUpdate();
-  }
+  await document.postUpdate();
 });
 
 Hooks.on('combatTurnChange', async (combat, prior, current) => {

@@ -1,4 +1,4 @@
-// This file was auto-generated on 2025-06-02 by scripts/fetch-content.mjs.
+// This file was auto-generated on 2025-06-03 by scripts/fetch-content.mjs.
 // Do not edit manually.
 
 export const materialProperties = {
@@ -15,6 +15,12 @@ export const materialProperties = {
     img: "systems/teriock/assets/materialProperties/gornaCoral.svg",
     content: "<p><span class=\"property-box\"><a href=\"https://wiki.teriock.com/index.php/Core:Damage\" title=\"Core:Damage\" target=\"_blank\">Damage</a> dealt by an item made from <b>Gorna coral</b> <a href=\"https://wiki.teriock.com/index.php/Core:Healing\" title=\"Core:Healing\" target=\"_blank\">heals</a> on its own at a rate of one <a href=\"https://wiki.teriock.com/index.php/Core:Damage\" title=\"Core:Damage\" target=\"_blank\">damage</a> per minute.</span>\n</p>"
   },
+  morganti: {
+    name: "Morganti",
+    id: "morganti",
+    img: "systems/teriock/assets/materialProperties/morganti.svg",
+    content: "<p><span class=\"property-box\"><b>Morganti</b> items are black in color and deal <a href=\"https://wiki.teriock.com/index.php/Damage:Morganti\" title=\"Damage:Morganti\" target=\"_blank\">morganti damage</a>. People feel when they are near a morganti item through an unnerving sense of existential fear that's beyond anything in their normal lives. People who have experienced this often say that their \"soul was afraid\". If a morganti item is encased in <a href=\"https://wiki.teriock.com/index.php/Property:Silver\" title=\"Property:Silver\" target=\"_blank\">silver</a>, then this feeling is greatly reduced.</span>\n</p>"
+  },
   silveel: {
     name: "Silveel",
     id: "silveel",
@@ -26,11 +32,5 @@ export const materialProperties = {
     id: "silver",
     img: "systems/teriock/assets/materialProperties/silver.svg",
     content: "<p><span class=\"property-box\">Items that are Silver can <a href=\"https://wiki.teriock.com/index.php/Core:Block_Interaction\" title=\"Core:Block Interaction\" target=\"_blank\">block</a> <a href=\"https://wiki.teriock.com/index.php/Drain:Mana\" title=\"Drain:Mana\" target=\"_blank\">mana draining</a> <a href=\"https://wiki.teriock.com/index.php/Category:Attack_abilities\" title=\"Category:Attack abilities\" target=\"_blank\">attacks</a> even if they are <a href=\"https://wiki.teriock.com/index.php/Keyword:UB\" title=\"Keyword:UB\" target=\"_blank\">UB</a>. If you are wearing Silver <a href=\"https://wiki.teriock.com/index.php/Category:Armor\" title=\"Category:Armor\" target=\"_blank\">armor</a>, then <a href=\"https://wiki.teriock.com/index.php/Drain:Mana\" title=\"Drain:Mana\" target=\"_blank\">mana draining</a> <a href=\"https://wiki.teriock.com/index.php/Category:Attack_abilities\" title=\"Category:Attack abilities\" target=\"_blank\">attacks</a> made against you are not <a href=\"https://wiki.teriock.com/index.php/Keyword:AV0\" title=\"Keyword:AV0\" target=\"_blank\">AV0</a>. Silver items also deal <a href=\"https://wiki.teriock.com/index.php/Damage:Silver\" title=\"Damage:Silver\" target=\"_blank\">silver damage</a>.</span>\n</p>"
-  },
-  morganti: {
-    name: "Morganti",
-    id: "morganti",
-    img: "systems/teriock/assets/materialProperties/morganti.svg",
-    content: "<p><span class=\"property-box\"><b>Morganti</b> items are black in color and deal <a href=\"https://wiki.teriock.com/index.php/Damage:Morganti\" title=\"Damage:Morganti\" target=\"_blank\">morganti damage</a>. People feel when they are near a morganti item through an unnerving sense of existential fear that's beyond anything in their normal lives. People who have experienced this often say that their \"soul was afraid\". If a morganti item is encased in <a href=\"https://wiki.teriock.com/index.php/Property:Silver\" title=\"Property:Silver\" target=\"_blank\">silver</a>, then this feeling is greatly reduced.</span>\n</p>"
   }
 };

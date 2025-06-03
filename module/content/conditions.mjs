@@ -1,4 +1,4 @@
-// This file was auto-generated on 2025-06-02 by scripts/fetch-content.mjs.
+// This file was auto-generated on 2025-06-03 by scripts/fetch-content.mjs.
 // Do not edit manually.
 
 export const conditions = {
@@ -104,8 +104,8 @@ export const conditions = {
     id: "encumbered",
     img: "systems/teriock/assets/conditions/encumbered.svg",
     _id: "encumbered000000",
-    statuses: ["slowed"],
-    content: "<p><span class=\"condition-box\" data-children=\"slowed\">An <b>encumbered</b> creature can be either <b>lightly encumbered</b> or <b>heavily encumbered</b>. The consequences are as follows.\n</span></p>\n<dl><dt>Lightly Encumbered</dt>\n<dd>The creature's <a href=\"https://wiki.teriock.com/index.php/Core:Movement_Speed\" title=\"Core:Movement Speed\" target=\"_blank\">movement speed</a> is reduced by 10.</dd>\n<dt>Heavily Encumbered</dt>\n<dd>The creature is <a href=\"https://wiki.teriock.com/index.php/Condition:Slow\" class=\"mw-redirect\" title=\"Condition:Slow\" target=\"_blank\">slow</a>. If this would not reduce their <a href=\"https://wiki.teriock.com/index.php/Core:Movement_Speed\" title=\"Core:Movement Speed\" target=\"_blank\">movement speed</a> is reduced by at least 10, it is reduced by 10 as well. The creature also has <a href=\"https://wiki.teriock.com/index.php/Core:Disadvantage\" title=\"Core:Disadvantage\" target=\"_blank\">disadvantage</a> on <a href=\"https://wiki.teriock.com/index.php/Core:Attack_Interaction\" title=\"Core:Attack Interaction\" target=\"_blank\">attacks</a> and <a href=\"https://wiki.teriock.com/index.php/Core:Movement\" title=\"Core:Movement\" target=\"_blank\">MOV</a> <a href=\"https://wiki.teriock.com/index.php/Core:Feat_Interaction\" title=\"Core:Feat Interaction\" target=\"_blank\">feat saves</a>.</dd></dl>"
+    statuses: [],
+    content: "<p><span class=\"condition-box\" data-children=\"\">An <b>encumbered</b> creature can be either <b>lightly encumbered</b> or <b>heavily encumbered</b>. The consequences are as follows.\n</span></p>\n<dl><dt>Lightly Encumbered</dt>\n<dd>The creature's <a href=\"https://wiki.teriock.com/index.php/Core:Movement_Speed\" title=\"Core:Movement Speed\" target=\"_blank\">movement speed</a> is reduced by 10.</dd>\n<dt>Heavily Encumbered</dt>\n<dd>The creature is <a href=\"https://wiki.teriock.com/index.php/Condition:Slow\" class=\"mw-redirect\" title=\"Condition:Slow\" target=\"_blank\">slow</a>. If this would not reduce their <a href=\"https://wiki.teriock.com/index.php/Core:Movement_Speed\" title=\"Core:Movement Speed\" target=\"_blank\">movement speed</a> is reduced by at least 10, it is reduced by 10 as well. The creature also has <a href=\"https://wiki.teriock.com/index.php/Core:Disadvantage\" title=\"Core:Disadvantage\" target=\"_blank\">disadvantage</a> on <a href=\"https://wiki.teriock.com/index.php/Core:Attack_Interaction\" title=\"Core:Attack Interaction\" target=\"_blank\">attacks</a> and <a href=\"https://wiki.teriock.com/index.php/Core:Movement\" title=\"Core:Movement\" target=\"_blank\">MOV</a> <a href=\"https://wiki.teriock.com/index.php/Core:Feat_Interaction\" title=\"Core:Feat Interaction\" target=\"_blank\">feat saves</a>.</dd></dl>"
   },
   ethereal: {
     name: "Ethereal",
@@ -240,8 +240,8 @@ export const conditions = {
     id: "paralyzed",
     img: "systems/teriock/assets/conditions/paralyzed.svg",
     _id: "paralyzed0000000",
-    statuses: [],
-    content: "<p><span class=\"condition-box\" data-children=\"\">A creature that is <b>paralyzed</b> is completely physically inert. They are <a href=\"https://wiki.teriock.com/index.php/Condition:Immobilized\" title=\"Condition:Immobilized\" target=\"_blank\">immobilized</a>, cannot use any <a href=\"https://wiki.teriock.com/index.php/Category:Active_abilities\" title=\"Category:Active abilities\" target=\"_blank\">active</a>, <a href=\"https://wiki.teriock.com/index.php/Category:Reactive_abilities\" title=\"Category:Reactive abilities\" target=\"_blank\">reactive</a>, or <a href=\"https://wiki.teriock.com/index.php/Category:Slow_abilities\" title=\"Category:Slow abilities\" target=\"_blank\">slow abilities</a>, and they automatically fail all <a href=\"https://wiki.teriock.com/index.php/Category:STR_save_abilities\" title=\"Category:STR save abilities\" target=\"_blank\">STR save abilities</a>.</span>\n</p>"
+    statuses: ["immobilized"],
+    content: "<p><span class=\"condition-box\" data-children=\"immobilized\">A creature that is <b>paralyzed</b> is completely physically inert. They are <a href=\"https://wiki.teriock.com/index.php/Condition:Immobilized\" title=\"Condition:Immobilized\" target=\"_blank\">immobilized</a>, cannot use any <a href=\"https://wiki.teriock.com/index.php/Category:Active_abilities\" title=\"Category:Active abilities\" target=\"_blank\">active</a>, <a href=\"https://wiki.teriock.com/index.php/Category:Reactive_abilities\" title=\"Category:Reactive abilities\" target=\"_blank\">reactive</a>, or <a href=\"https://wiki.teriock.com/index.php/Category:Slow_abilities\" title=\"Category:Slow abilities\" target=\"_blank\">slow abilities</a>, and they automatically fail all <a href=\"https://wiki.teriock.com/index.php/Category:STR_save_abilities\" title=\"Category:STR save abilities\" target=\"_blank\">STR save abilities</a>.</span>\n</p>"
   },
   poisoned: {
     name: "Poisoned",
@@ -272,8 +272,8 @@ export const conditions = {
     id: "silenced",
     img: "systems/teriock/assets/conditions/silenced.svg",
     _id: "silenced00000000",
-    statuses: [],
-    content: "<p><span class=\"condition-box\" data-children=\"\">A creature that is Silenced is <a href=\"https://wiki.teriock.com/index.php/Condition:Mute\" title=\"Condition:Mute\" target=\"_blank\">mute</a> and <a href=\"https://wiki.teriock.com/index.php/Keyword:Incapable\" title=\"Keyword:Incapable\" target=\"_blank\">incapable</a> of non-<a href=\"https://wiki.teriock.com/index.php/Category:Basic_abilities\" title=\"Category:Basic abilities\" target=\"_blank\">basic</a> <a href=\"https://wiki.teriock.com/index.php/Category:Attack_abilities\" title=\"Category:Attack abilities\" target=\"_blank\">attack</a> and <a href=\"https://wiki.teriock.com/index.php/Category:Feat_abilities\" title=\"Category:Feat abilities\" target=\"_blank\">feat</a> <a href=\"https://wiki.teriock.com/index.php/Category:Abilities\" title=\"Category:Abilities\" target=\"_blank\">abilities</a>. </span>\n</p>"
+    statuses: ["mute"],
+    content: "<p><span class=\"condition-box\" data-children=\"mute\">A creature that is Silenced is <a href=\"https://wiki.teriock.com/index.php/Condition:Mute\" title=\"Condition:Mute\" target=\"_blank\">mute</a> and <a href=\"https://wiki.teriock.com/index.php/Keyword:Incapable\" title=\"Keyword:Incapable\" target=\"_blank\">incapable</a> of non-<a href=\"https://wiki.teriock.com/index.php/Category:Basic_abilities\" title=\"Category:Basic abilities\" target=\"_blank\">basic</a> <a href=\"https://wiki.teriock.com/index.php/Category:Attack_abilities\" title=\"Category:Attack abilities\" target=\"_blank\">attack</a> and <a href=\"https://wiki.teriock.com/index.php/Category:Feat_abilities\" title=\"Category:Feat abilities\" target=\"_blank\">feat</a> <a href=\"https://wiki.teriock.com/index.php/Category:Abilities\" title=\"Category:Abilities\" target=\"_blank\">abilities</a>. </span>\n</p>"
   },
   slowed: {
     name: "Slowed",
@@ -288,8 +288,8 @@ export const conditions = {
     id: "snared",
     img: "systems/teriock/assets/conditions/snared.svg",
     _id: "snared0000000000",
-    statuses: [],
-    content: "<p><span class=\"condition-box\" data-children=\"\">If a creature is Snared then they are <a href=\"https://wiki.teriock.com/index.php/Condition:Immobile\" class=\"mw-redirect\" title=\"Condition:Immobile\" target=\"_blank\">immobile</a> and cannot be <a href=\"https://wiki.teriock.com/index.php/Category:Movement_effects\" title=\"Category:Movement effects\" target=\"_blank\">moved</a> by themself nor by others. They also have <a href=\"https://wiki.teriock.com/index.php/Core:Disadvantage\" title=\"Core:Disadvantage\" target=\"_blank\">disadvantage</a> on all <a href=\"https://wiki.teriock.com/index.php/Category:MOV_save_abilities\" title=\"Category:MOV save abilities\" target=\"_blank\">MOV saves</a>.</span>\n</p>"
+    statuses: ["immobilized"],
+    content: "<p><span class=\"condition-box\" data-children=\"immobilized\">If a creature is Snared then they are <a href=\"https://wiki.teriock.com/index.php/Condition:Immobile\" class=\"mw-redirect\" title=\"Condition:Immobile\" target=\"_blank\">immobile</a> and cannot be <a href=\"https://wiki.teriock.com/index.php/Category:Movement_effects\" title=\"Category:Movement effects\" target=\"_blank\">moved</a> by themself nor by others. They also have <a href=\"https://wiki.teriock.com/index.php/Core:Disadvantage\" title=\"Core:Disadvantage\" target=\"_blank\">disadvantage</a> on all <a href=\"https://wiki.teriock.com/index.php/Category:MOV_save_abilities\" title=\"Category:MOV save abilities\" target=\"_blank\">MOV saves</a>.</span>\n</p>"
   },
   suffocating: {
     name: "Suffocating",
@@ -328,7 +328,7 @@ export const conditions = {
     id: "wisping",
     img: "systems/teriock/assets/conditions/wisping.svg",
     _id: "wisping000000000",
-    statuses: ["ethereal"],
-    content: "<p><span class=\"condition-box\" data-children=\"ethereal\">When a creature is Wisping, their spirit has separated from their body. They have the stats of a <a href=\"/index.php?title=Creature:Wisp&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Creature:Wisp (page does not exist)\">wisp</a> and exist in a dreamlike state. They cannot interact with their surroundings and typically have no other items nor abilities. Wisps are always <a href=\"https://wiki.teriock.com/index.php/Condition:Slow\" class=\"mw-redirect\" title=\"Condition:Slow\" target=\"_blank\">slow</a> and <a href=\"https://wiki.teriock.com/index.php/Condition:Ethereal\" title=\"Condition:Ethereal\" target=\"_blank\">Ethereal</a>.</span>\n</p>"
+    statuses: ["ethereal","ruined"],
+    content: "<p><span class=\"condition-box\" data-children=\"ethereal,ruined\">When a creature is Wisping, their spirit has separated from their body. They have the stats of a <a href=\"/index.php?title=Creature:Wisp&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"Creature:Wisp (page does not exist)\">wisp</a> and exist in a dreamlike state. They cannot interact with their surroundings and typically have no other items nor abilities. Wisps are always <a href=\"https://wiki.teriock.com/index.php/Condition:Slow\" class=\"mw-redirect\" title=\"Condition:Slow\" target=\"_blank\">slow</a> and <a href=\"https://wiki.teriock.com/index.php/Condition:Ethereal\" title=\"Condition:Ethereal\" target=\"_blank\">Ethereal</a>.</span>\n</p>"
   }
 };
