@@ -1,0 +1,14 @@
+<div class="dice-roll" data-action="expandRoll">
+  {{#if flavor}}
+    <div class="teriock-dice-flavor" style="margin-top: 6px">{{{flavor}}}</div>
+  {{/if}}
+  {{#if (eq formula "0")}}
+  {{else}}
+    <div class="dice-result" style="margin-top: 0.5em;">
+      <div class="dice-formula">{{formula}}</div>
+      {{{tooltip}}}
+      {{!-- <h4 class="dice-total" style="color: {{#if (geq total 10)}}#18520b{{else}}#aa0200{{/if}};">{{#if (geq total 10)}}Resisted{{else}}Not Resisted{{/if}}</h4> --}}
+      <h4 class="dice-total" style="color: {{#if (geq total 10)}}#18520b{{else}}#aa0200{{/if}};">{{total}}</h4>
+    </div>
+  {{/if}}
+</div>

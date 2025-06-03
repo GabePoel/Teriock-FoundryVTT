@@ -14,6 +14,7 @@ import { TeriockEffectSheet } from './sheets/effect-sheet.mjs';
 import { TeriockRoll } from './dice/roll.mjs'
 import { TeriockHarmRoll } from './dice/harm.mjs';
 import { TeriockElderSorceryRoll } from './dice/elder-sorcery.mjs';
+import { TeriockResistRoll } from './dice/resist.mjs';
 import { TeriockImage } from './helpers/image.mjs';
 import { preloadHandlebarsTemplates } from './helpers/templates.mjs';
 import { registerHandlebarsHelpers } from './helpers/register-handlebars.mjs';
@@ -73,6 +74,7 @@ Hooks.once('init', function () {
   CONFIG.Dice.rolls.push(TeriockRoll);
   CONFIG.Dice.rolls.push(TeriockHarmRoll);
   CONFIG.Dice.rolls.push(TeriockElderSorceryRoll);
+  CONFIG.Dice.rolls.push(TeriockResistRoll);
   CONFIG.Actor.documentClass = TeriockActor;
   CONFIG.Item.documentClass = TeriockItem;
   CONFIG.ActiveEffect.documentClass = TeriockEffect;
@@ -309,6 +311,40 @@ Hooks.on('chatMessage', (chatLog, message, chatData) => {
     return false;
   }
 
+  if (message.startsWith('/resist')) {
+    const chatOptionsRaw = message.split('/resist')[1]?.trim() || '';
+    let advantage = false;
+    let disadvantage = false;
+    if (chatOptionsRaw.length > 0) {
+      const chatOptions = chatOptionsRaw.split(' ');
+      advantage = chatOptions.includes('advantage');
+      disadvantage = chatOptions.includes('disadvantage');
+    }
+    let rollFormula = '1d20';
+    if (advantage) {
+      rollFormula = '2d20kh1';
+    } else if (disadvantage) {
+      rollFormula = '2d20kl1';
+    }
+    rollFormula += ' + @p';
+    for (const actor of actors) {
+      (async () => {
+        const getRollData = actor?.getRollData();
+        const roll = new TeriockResistRoll(rollFormula, getRollData, {
+          speaker: ChatMessage.getSpeaker({ user: chatData.user }),
+          disadvantage: disadvantage,
+        });
+        await roll.toMessage({
+          user: chatData.user,
+          speaker: ChatMessage.getSpeaker({ user: chatData.user }),
+          flavor: `Resistance Save`,
+        });
+      })().catch(console.error);
+    }
+    return false;
+  }
+    
+
   if (message.startsWith('/help')) {
     const helpText = `
       <ul>
@@ -339,6 +375,15 @@ Hooks.on('chatMessage', (chatLog, message, chatData) => {
         <li>
           <code>/attack [options]</code>
           <div>All targeted tokens use the Basic Attack ability.</div>
+          <div>Options:</div>
+          <ul>
+            <li><code>advantage</code> - Roll with advantage.</li>
+            <li><code>disadvantage</code> - Roll with disadvantage.</li>
+          </ul>
+        </li>
+        <li>
+          <code>/resist [options]</code>
+          <div>All targeted tokens make a resistance save.</div>
           <div>Options:</div>
           <ul>
             <li><code>advantage</code> - Roll with advantage.</li>

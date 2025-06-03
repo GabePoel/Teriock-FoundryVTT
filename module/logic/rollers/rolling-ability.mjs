@@ -1,5 +1,6 @@
 import { TeriockRoll } from "../../dice/roll.mjs";
 import { TeriockElderSorceryRoll } from "../../dice/elder-sorcery.mjs";
+import { TeriockResistRoll } from "../../dice/resist.mjs";
 const { DialogV2 } = foundry.applications.api
 
 export async function rollAbility(ability, options) {
@@ -68,6 +69,14 @@ async function stageUse(ability, advantage, disadvantage) {
   } else {
     rollFormula = '0';
   }
+  if (ability.system.effects.includes('resistance')) {
+    rollFormula = '1d20';
+    if (advantage) {
+      rollFormula = '2d20kh1';
+    } else if (disadvantage) {
+      rollFormula = '2d20kl1';
+    }
+  }
   if (ability.system.forceProficient) {
     ability.system.proficient = true;
   } else {
@@ -114,7 +123,7 @@ async function stageUse(ability, advantage, disadvantage) {
       },
     });
   }
-  if (['attack', 'feat'].includes(ability.system.interaction)) {
+  if (['attack', 'feat'].includes(ability.system.interaction) || ability.system.effects.includes('resistance')) {
     if (ability.system.proficient) {
       rollFormula += ' + @p';
     }
@@ -143,16 +152,15 @@ async function use(ability) {
     roll = new TeriockElderSorceryRoll(ability.system.formula, getRollData, {
       flavor: message,
     });
+  } else if (ability.system.effects.includes('resistance')) {
+    roll = new TeriockResistRoll(ability.system.formula, getRollData, {
+      flavor: message,
+    });
   } else {
     roll = new TeriockRoll(ability.system.formula, getRollData, {
       flavor: message,
     });
   }
-  // if (ability.system.interaction == 'attack') {
-  //     await roll.evaluate({ async: true });
-  //     const attackMsg = await attackMessage(ability, roll);
-  //     roll.options.flavor += attackMsg;
-  // }
   roll.toMessage({
     speaker: ChatMessage.getSpeaker({
       actor: ability.getActor(),
@@ -172,21 +180,4 @@ async function use(ability) {
   ability.system.heightenedAmount = 0;
   ability.system.formula = null;
   return roll;
-}
-
-// TODO: Finish resistance rolls
-async function resist(ability, advantage, disadvantage) {
-  const rollFormula = '1d20';
-  if (advantage) {
-    rollFormula = '2d20kh1';
-  } else if (disadvantage) {
-    rollFormula = '2d20kl1';
-  }
-  rollFormula += ' + @p';
-  const roll = new TeriockRoll(rollFormula, ability.getActor().getRollData(), {
-    flavor: `Resisting ${ability.name}`,
-  });
-  await roll.evaluate({ async: true });
-  return roll;
-
 }

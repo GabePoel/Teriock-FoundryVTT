@@ -10,10 +10,8 @@
   - [x] Window sizing limitations
   - [x] No context menu on embedded sheets
   - [x] Character sheet context menus not updating
-- [ ] Major functionality
-  - [ ] Resistance save
-  - [ ] Awaken and resurrection
-    - [ ] Death bag
+- [x] Major functionality
+  - [x] Resistance save
   - [x] Hack tracking
     - [x] Limbs
     - [x] Not limbs
@@ -93,11 +91,9 @@
   - [x] Should ES be an item or effect/ability?
   - [x] Should items enter equipped?
   - [x] Traits?
-- [ ] Scripts
-  - [ ] Consolidate SCSS and template registration
+- [x] Scripts
   - [x] Property/effect/etc. imports scripts
-- [ ] Organization
-  - [ ] Consistent config icon handling
+- [x] Organization
   - [x] Reorganize templates folder
   - [x] Separate out handlebars registration
   - [x] Sheet helpers, utilities, wiki, and parsing consistency

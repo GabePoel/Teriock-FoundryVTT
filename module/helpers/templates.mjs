@@ -4,6 +4,7 @@ export const preloadHandlebarsTemplates = async function () {
   return foundry.applications.handlebars.loadTemplates([
     'systems/teriock/templates/chat/elder-sorcery.hbs',
     'systems/teriock/templates/chat/harm.hbs',
+    'systems/teriock/templates/chat/resist.hbs',
     'systems/teriock/templates/chat/roll.hbs',
     'systems/teriock/templates/common/effects.hbs',
     'systems/teriock/templates/common/header.hbs',
