@@ -64,11 +64,31 @@ export function buildAbilityMessage(ability) {
       ]
     }
   ]
+  let elderSorceryElementString = '';
+  if (src.elderSorcery) {
+    const elderSorceryElements = src.elements
+      .slice()
+      .sort((a, b) => a.localeCompare(b))
+      .map(e => e.charAt(0).toUpperCase() + e.slice(1));
+    if (elderSorceryElements.length === 0) {
+      elderSorceryElementString = 'Celestial';
+    } else if (elderSorceryElements.length === 1) {
+      elderSorceryElementString = elderSorceryElements[0];
+    } else if (elderSorceryElements.length === 2) {
+      elderSorceryElementString = `${elderSorceryElements[0]} and ${elderSorceryElements[1]}`;
+    } else {
+      elderSorceryElementString =
+        elderSorceryElements.slice(0, -1).join(', ') +
+        ', and ' +
+        elderSorceryElements[elderSorceryElements.length - 1];
+    }
+  }
   const blocks = [
     {
       title: 'Elder Sorcery incant',
       text: src.elderSorceryIncant,
       special: "ES",
+      elements: elderSorceryElementString,
     },
     {
       title: 'Mana cost',

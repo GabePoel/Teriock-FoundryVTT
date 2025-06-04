@@ -9,15 +9,31 @@ export class TeriockRoll extends Roll {
 
   /** @override */
   constructor(formula, data, options = {}) {
+    super(formula, data, options);
     const defaultOptions = {
       enrich: false,
     }
     options = foundry.utils.mergeObject(defaultOptions, options);
-    if (options.enrich && options.flavor) {
-      foundry.applications.ux.TextEditor.enrichHTML(options.flavor).then(html => {
-        options.flavor = html;
+    if (options.enrich && options.message) {
+      foundry.applications.ux.TextEditor.enrichHTML(options.message).then(html => {
+        options.message = html;
       });
     }
-    super(formula, data, options);
+    if (options.message) {
+      this.message = options.message;
+    }
+    if (options.context) {
+      this.context = options.context;
+    }
+  }
+
+  /** @override */
+  async _prepareChatRenderContext({flavor, isPrivate=false, ...options}={}) {
+    const context = await super._prepareChatRenderContext({flavor, isPrivate, ...options});
+    context.message = this.message;
+    if (this.context) {
+      Object.assign(context, this.context);
+    }
+    return context;
   }
 }

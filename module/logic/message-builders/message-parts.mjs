@@ -70,7 +70,7 @@ export function messageWrapper(parent, content) {
   return wrapper;
 }
 
-export function messageBlock(parent, title, text, italic = false, special = null) {
+export function messageBlock(parent, title, text, italic = false, special = null, elements = null) {
   if (!text) return;
   const block = Object.assign(document.createElement('div'), {
     className: 'abm-block',
@@ -100,14 +100,14 @@ export function messageBlock(parent, title, text, italic = false, special = null
   });
 
   if (special === 'ES') {
-    titleElement.style.display = 'none';
+    titleElement.innerHTML = 'With the Elder Sorcery of ' + elements + '...';
     textElement.style.fontFamily = 'Quintessential';
-    textElement.style.border = '1px solid rgba(0, 0, 0, 0.2)';
-    textElement.style.borderRadius = '4px';
-    textElement.style.padding = '6px';
-    textElement.style.marginBottom = '4px';
-    textElement.style.backgroundColor = 'rgba(0, 0, 0, 0.1)';
-    textElement.style.boxShadow = '0 0 2px #FFF inset';
+    block.style.border = '1px solid rgba(0, 0, 0, 0.2)';
+    block.style.borderRadius = '4px';
+    block.style.padding = '6px';
+    block.style.marginBottom = '4px';
+    block.style.backgroundColor = 'rgba(0, 0, 0, 0.1)';
+    block.style.boxShadow = '0 0 2px #FFF inset';
   }
 
   // Remove tables from textElement

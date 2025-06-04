@@ -20,8 +20,7 @@
   opacity: 0.75;
   display: block;
 
-  // TODO: Move spell circle asset into system.
-  background-image: url("https://548916280-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FpaqFHtSBIvRvOg8Wfmx5%2Fuploads%2FWEViu7j32vfudpdSmvEG%2FSpell%20Circle.svg?alt=media&token=e1e66eeb-da0d-47fa-b71b-d823fbfe3cd7");
+  background-image: url("../assets/spell-circle.svg");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
@@ -32,6 +31,17 @@
   z-index: 0;
   transform-origin: center;
   animation: spin 300s linear infinite;
+}
+
+.es-mask-overlay {
+  position: absolute;
+  top: -50px;
+  left: -50px;
+  width: calc(100% + 100px);
+  height: calc(100% + 100px);
+  position: absolute;
+  pointer-events: none;
+  z-index: 1;
 }
 
 .es-wording-container {
@@ -47,14 +57,12 @@
 }
 
 .es-intro {
-  font-family: "Mea Culpa", cursive;
-  font-weight: 400;
   font-style: normal;
   display: block;
-  font-size: 2em;
+  font-size: 0.8em;
+  text-transform: uppercase;
   user-select: none;
-  margin-bottom: 0;
-  // margin-top: 0.65em;
+  color: var(--color-text-subtle);
 }
 
 .es-intro a {
@@ -63,8 +71,6 @@
 
 .es-wording {
   display: block;
-  margin-left: 1em;
-  margin-right: 1em;
   font-family: "Quintessential", serif;
   font-weight: 400;
   font-style: normal;
@@ -105,7 +111,7 @@ body .es-mask-rotator {
 }
 
 .es-incant {
-  padding: calc(0.75em + 1px);
+  padding: calc(0.5em + 1px);
   border-radius: 4px;
   background-color: rgba(0, 0, 0, 0.1);
   border: 1px solid rgba(0, 0, 0, 0.4);

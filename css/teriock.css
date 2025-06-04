@@ -1297,6 +1297,7 @@
 .teriock .prosemirror .editor-container .editor-content {
   position: unset;
   padding-right: 0;
+  overflow: visible;
 }
 .teriock .prosemirror menu {
   margin-bottom: 0.5em;
@@ -2159,7 +2160,7 @@
   transform: translate(-50%, -50%);
   opacity: 0.75;
   display: block;
-  background-image: url("https://548916280-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FpaqFHtSBIvRvOg8Wfmx5%2Fuploads%2FWEViu7j32vfudpdSmvEG%2FSpell%20Circle.svg?alt=media&token=e1e66eeb-da0d-47fa-b71b-d823fbfe3cd7");
+  background-image: url("../assets/spell-circle.svg");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
@@ -2169,6 +2170,16 @@
   z-index: 0;
   transform-origin: center;
   animation: spin 300s linear infinite;
+}
+.teriock .es-mask-overlay {
+  position: absolute;
+  top: -50px;
+  left: -50px;
+  width: calc(100% + 100px);
+  height: calc(100% + 100px);
+  position: absolute;
+  pointer-events: none;
+  z-index: 1;
 }
 .teriock .es-wording-container {
   position: relative;
@@ -2180,21 +2191,18 @@
   color: unset;
 }
 .teriock .es-intro {
-  font-family: "Mea Culpa", cursive;
-  font-weight: 400;
   font-style: normal;
   display: block;
-  font-size: 2em;
+  font-size: 0.8em;
+  text-transform: uppercase;
   user-select: none;
-  margin-bottom: 0;
+  color: var(--color-text-subtle);
 }
 .teriock .es-intro a {
   color: unset;
 }
 .teriock .es-wording {
   display: block;
-  margin-left: 1em;
-  margin-right: 1em;
   font-family: "Quintessential", serif;
   font-weight: 400;
   font-style: normal;
@@ -2231,11 +2239,39 @@
   filter: brightness(0) saturate(100%);
 }
 .teriock .es-incant {
-  padding: calc(0.75em + 1px);
+  padding: calc(0.5em + 1px);
   border-radius: 4px;
   background-color: rgba(0, 0, 0, 0.1);
   border: 1px solid rgba(0, 0, 0, 0.4);
   box-shadow: 0 0 2px #FFF inset;
+}
+.teriock .teriock-chat-button {
+  flex: 1;
+  border-color: #999;
+  box-shadow: 0 0 2px #FFF inset;
+}
+.teriock .teriock-chat-button:not(:hover).damage-button {
+  background-color: color-mix(in srgb, #a51d2d, transparent 90%);
+}
+.teriock .teriock-chat-button:not(:hover).drain-button {
+  background-color: color-mix(in srgb, #1a5fb4, transparent 90%);
+}
+.teriock .teriock-chat-button:not(:hover).wither-button {
+  background-color: color-mix(in srgb, #613583, transparent 90%);
+}
+.teriock .teriock-flavor-text {
+  font-size: var(--font-size-12);
+  color: var(--color-dark-4);
+  line-height: 20px;
+}
+.teriock .teriock-dice-total.ub {
+  background-color: color-mix(in srgb, #613583, transparent 90%);
+}
+.teriock .teriock-dice-total.success {
+  background-color: color-mix(in srgb, #26a269, transparent 90%);
+}
+.teriock .teriock-dice-total.failure {
+  background-color: color-mix(in srgb, #a51d2d, transparent 90%);
 }
 
 .application.sheet.teriock:not(.minimized) {
@@ -2298,11 +2334,6 @@ prose-mirror button.toggle {
   width: unset;
   min-height: unset;
   min-width: unset;
-}
-
-.es-wording .prosemirror button.toggle,
-.es-wording prose-mirror button.toggle {
-  right: -1.5em;
 }
 
 .prosemirror {

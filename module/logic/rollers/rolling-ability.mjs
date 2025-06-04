@@ -1,6 +1,4 @@
 import { TeriockRoll } from "../../dice/roll.mjs";
-import { TeriockElderSorceryRoll } from "../../dice/elder-sorcery.mjs";
-import { TeriockResistRoll } from "../../dice/resist.mjs";
 const { DialogV2 } = foundry.applications.api
 
 export async function rollAbility(ability, options) {
@@ -137,8 +135,9 @@ async function stageUse(ability, advantage, disadvantage) {
 async function use(ability) {
   let message = await ability.buildMessage();
   const getRollData = ability.getActor().getRollData();
+  let properties;
   if (ability.system.delivery.base == 'weapon') {
-    const properties = ability.getActor().system.primaryAttacker?.system?.properties || [];
+    properties = ability.getActor().system.primaryAttacker?.system?.properties || [];
     if (properties.includes('av0') || properties.includes('ub')) {
       getRollData.av0 = 2;
     }
@@ -146,21 +145,32 @@ async function use(ability) {
   if (['av0', 'ub'].includes(ability.system.piercing)) {
     getRollData.av0 = 2;
   }
+  let diceClass;
+  let diceTooltip;
+  if (properties?.includes('ub') || ability.system.piercing == 'ub') {
+    diceClass = 'ub';
+    diceTooltip = 'Unblockable';
+  }
+  const context = {
+    diceClass: diceClass,
+    diceTooltip: diceTooltip,
+  }
+  if (ability.system.effects.includes('resistance')) {
+    context.diceClass = 'resist';
+    context.diceTooltip = '';
+    context.isResistance = true;
+  }
+  if (ability.system.elderSorcery) {
+    context.elderSorceryElements = ability.system.elements;
+    context.elderSorceryIncant = ability.system.elderSorceryIncant;
+    context.isElderSorcery = true;
+  }
   message = await foundry.applications.ux.TextEditor.enrichHTML(message);
   let roll;
-  if (ability.system.elderSorcery) {
-    roll = new TeriockElderSorceryRoll(ability.system.formula, getRollData, {
-      flavor: message,
-    });
-  } else if (ability.system.effects.includes('resistance')) {
-    roll = new TeriockResistRoll(ability.system.formula, getRollData, {
-      flavor: message,
-    });
-  } else {
-    roll = new TeriockRoll(ability.system.formula, getRollData, {
-      flavor: message,
-    });
-  }
+  roll = new TeriockRoll(ability.system.formula, getRollData, {
+    message: message,
+    context: context,
+  });
   roll.toMessage({
     speaker: ChatMessage.getSpeaker({
       actor: ability.getActor(),

@@ -13,8 +13,6 @@ import { TeriockPropertySheet } from './sheets/property-sheet.mjs';
 import { TeriockEffectSheet } from './sheets/effect-sheet.mjs';
 import { TeriockRoll } from './dice/roll.mjs'
 import { TeriockHarmRoll } from './dice/harm.mjs';
-import { TeriockElderSorceryRoll } from './dice/elder-sorcery.mjs';
-import { TeriockResistRoll } from './dice/resist.mjs';
 import { TeriockImage } from './helpers/image.mjs';
 import { preloadHandlebarsTemplates } from './helpers/templates.mjs';
 import { registerHandlebarsHelpers } from './helpers/register-handlebars.mjs';
@@ -73,8 +71,6 @@ Hooks.once('init', function () {
 
   CONFIG.Dice.rolls.push(TeriockRoll);
   CONFIG.Dice.rolls.push(TeriockHarmRoll);
-  CONFIG.Dice.rolls.push(TeriockElderSorceryRoll);
-  CONFIG.Dice.rolls.push(TeriockResistRoll);
   CONFIG.Actor.documentClass = TeriockActor;
   CONFIG.Item.documentClass = TeriockItem;
   CONFIG.ActiveEffect.documentClass = TeriockEffect;

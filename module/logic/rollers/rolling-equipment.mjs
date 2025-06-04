@@ -9,7 +9,7 @@ async function use(equipment, options) {
   let message = await equipment.buildMessage();
   if (equipment.system.damage) {
     let rollFormula = equipment.system.damage;
-    
+
     if (options?.twoHanded && equipment.system.twoHandedDamage) {
       rollFormula = equipment.system.twoHandedDamage || rollFormula;
     }
@@ -27,7 +27,8 @@ async function use(equipment, options) {
     } else {
       message = await equipment.buildMessage({ secret: false });
     }
-    const roll = new TeriockHarmRoll(rollFormula, equipment.getActor()?.getRollData(), { flavor: message });
+    const rollData = equipment.getActor()?.getRollData() || {};
+    const roll = new TeriockHarmRoll(rollFormula, rollData, { message: message });
     roll.toMessage({
       speaker: ChatMessage.getSpeaker({
         actor: equipment.getActor(),
