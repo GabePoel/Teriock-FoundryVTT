@@ -50,7 +50,6 @@ function buildMessageHelper(image, name, bars, blocks, fontClass) {
   message.classList.add('tmessage');
   message.style.display = 'flex';
   message.style.flexDirection = 'column';
-  message.style.gap = '0.5em';
 
   // Header
   const headerBox = messageBox();
@@ -69,6 +68,7 @@ function buildMessageHelper(image, name, bars, blocks, fontClass) {
   // Blocks
   const blockBox = messageBox();
   blockBox.classList.add('tmes-block-box');
+  blockBox.style.marginTop = '0.5em';
   blocks.filter(block => block.text !== '').forEach(block => {
     messageBlock(blockBox, block.title, block.text, block.italic, block.special, block.elements);
   });

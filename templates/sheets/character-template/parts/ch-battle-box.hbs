@@ -27,13 +27,25 @@
       <div class="tsubtle little-title">
         <div class="title-left">Blocking With</div>
         <div class="title-right">
+          <i
+            class="fa-regular fa-shield-cross thover"
+            data-action="resist"
+            data-tooltip="Roll Resistance Save"
+          ></i>
           {{#if (exists system.sheet.primaryBlocker)}}
             {{!-- <i class="fa-regular fa-shield thover" data-action="quickUse" data-id="{{system.primaryBlocker._id}}" data-tooltip="Roll Block"></i> --}}
-            <i class="fa-regular fa-arrow-up-right-from-square thover" data-action="openPrimaryBlocker" data-tooltip="Open"></i>
+            <i
+              class="fa-regular fa-arrow-up-right-from-square thover"
+              data-action="openPrimaryBlocker"
+              data-tooltip="Open"
+            ></i>
           {{/if}}
         </div>
       </div>
-      <div class="thover character-primary-blocker-select" data-tooltip="Block Item">
+      <div
+        class="thover character-primary-blocker-select"
+        data-tooltip="Block Item"
+      >
         {{#if (exists system.primaryBlocker)}}
           {{{system.primaryBlocker.name}}}
         {{else}}
@@ -48,11 +60,21 @@
       <div class="character-shortbox character-piercing-box">
         <div class="tsubtle tcenter" data-action="piercingChange">Piercing</div>
         <div class="character-smallbox-value thover">
-          {{#if (or (eq system.piercing "ub") (includes system.primaryAttacker.system.properties "ub"))}}
+          {{#if
+            (or
+              (eq system.piercing "ub")
+              (includes system.primaryAttacker.system.properties "ub")
+            )
+          }}
             UB
             {{#if (eq system.piercing "ub")}}*{{/if}}
           {{else}}
-            {{#if (or (eq system.piercing "av0") (includes system.primaryAttacker.system.properties "av0"))}}
+            {{#if
+              (or
+                (eq system.piercing "av0")
+                (includes system.primaryAttacker.system.properties "av0")
+              )
+            }}
               AV0
               {{#if (eq system.piercing "av0")}}*{{/if}}
             {{else}}
@@ -89,15 +111,32 @@
       <div class="tsubtle little-title">
         <div class="title-left">Attacking With</div>
         <div class="title-right">
-          <i class="fa-regular fa-dice-d20 thover" data-action="attack" data-id="{{system.primaryAttacker._id}}" data-tooltip="Roll Attack"></i>
+          <i
+            class="fa-regular fa-dice-d20 thover"
+            data-action="attack"
+            data-id="{{system.primaryAttacker._id}}"
+            data-tooltip="Roll Attack"
+          ></i>
           {{#if (exists system.primaryAttacker)}}
-            <i class="fa-regular fa-sword thover" data-action="quickUse" data-id="{{system.primaryAttacker._id}}" data-tooltip="Roll Damage"></i>
-            <i class="fa-regular fa-arrow-up-right-from-square thover" data-action="openPrimaryAttacker" data-tooltip="Open"></i>
+            <i
+              class="fa-regular fa-sword thover"
+              data-action="quickUse"
+              data-id="{{system.primaryAttacker._id}}"
+              data-tooltip="Roll Damage"
+            ></i>
+            <i
+              class="fa-regular fa-arrow-up-right-from-square thover"
+              data-action="openPrimaryAttacker"
+              data-tooltip="Open"
+            ></i>
           {{/if}}
         </div>
       </div>
 
-      <div class="thover character-primary-attacker-select" data-tooltip="Attack Item">
+      <div
+        class="thover character-primary-attacker-select"
+        data-tooltip="Attack Item"
+      >
         {{#if (exists system.sheet.primaryAttacker)}}
           {{{system.primaryAttacker.name}}}
         {{else}}
@@ -106,7 +145,8 @@
       </div>
 
       {{#if (exists system.primaryAttacker.system.specialRules)}}
-        <div class="tsubtle little-title" style="margin-top: 0.5em;">Special rules</div>
+        <div class="tsubtle little-title" style="margin-top: 0.5em;">Special
+          rules</div>
         <div>
           {{editor enrichedSpecialRules button=false editable=false}}
         </div>

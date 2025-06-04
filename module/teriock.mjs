@@ -53,8 +53,6 @@ Hooks.once('init', function () {
     return a.id.localeCompare(b.id);
   });
 
-
-  // Remove the lightPerception detection mode if it exists
   CONFIG.Canvas.visionModes = {
     ...CONFIG.Canvas.visionModes,
     ...teriockVisionModes,
@@ -316,31 +314,12 @@ Hooks.on('chatMessage', (chatLog, message, chatData) => {
       advantage = chatOptions.includes('advantage');
       disadvantage = chatOptions.includes('disadvantage');
     }
-    let rollFormula = '1d20';
-    if (advantage) {
-      rollFormula = '2d20kh1';
-    } else if (disadvantage) {
-      rollFormula = '2d20kl1';
+    const options = {
+      advantage: advantage,
+      disadvantage: disadvantage,
     }
-    rollFormula += ' + @p';
     for (const actor of actors) {
-      (async () => {
-        const getRollData = actor?.getRollData();
-        const roll = new TeriockRoll(rollFormula, getRollData, {
-          speaker: ChatMessage.getSpeaker({ user: chatData.user }),
-          disadvantage: disadvantage,
-          context: {
-            diceClass: 'resist',
-            diceTooltip: '',
-            isResistance: true,
-          }
-        });
-        await roll.toMessage({
-          user: chatData.user,
-          speaker: ChatMessage.getSpeaker({ user: chatData.user }),
-          flavor: `Resistance Save`,
-        });
-      })().catch(console.error);
+      actor.resist(options);
     }
     return false;
   }
@@ -416,7 +395,6 @@ Hooks.on('chatMessage', (chatLog, message, chatData) => {
 
 
 Hooks.on('renderChatMessageHTML', (message, html, context) => {
-  const images = html.querySelectorAll('.timage');
   const imageContextMenuOptions = [
     {
       name: 'Open Image',

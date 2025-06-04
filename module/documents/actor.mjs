@@ -1,3 +1,4 @@
+import { TeriockRoll } from "../dice/roll.mjs";
 import prepareDerivedData from "../logic/actor/derived-data.mjs";
 import postUpdate from "../logic/actor/post-update.mjs";
 import getRollData from "../logic/actor/roll-data.mjs";
@@ -145,6 +146,29 @@ export default class TeriockActor extends Actor {
       ui.notifications.warn(`${this.name} does not have ${abilityName}.`);
     }
     return;
+  }
+
+  resist(options = {}) {
+    let rollFormula = "1d20";
+    if (options.advantage) {
+      rollFormula = "2d20kh1";
+    } else if (options.disadvantage) {
+      rollFormula = "2d20kl1";
+    }
+    rollFormula += ' + @p';
+    const rollData = this.getRollData();
+    const roll = new TeriockRoll(rollFormula, rollData, {
+      context: {
+        isResistance: true,
+        diceClass: 'resist',
+      }
+    });
+    roll.toMessage({
+      speaker: ChatMessage.getSpeaker({ actor: this }),
+      flavor: "Resistance Roll",
+      type: CONST.CHAT_MESSAGE_TYPES.ROLL,
+      rollMode: game.settings.get("core", "rollMode"),
+    });
   }
 
   _renderDieBox(rank, type, dieProp, spent) {

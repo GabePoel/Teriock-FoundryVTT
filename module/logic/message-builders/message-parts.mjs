@@ -233,7 +233,7 @@ export function addAbilitiesBlock(abilities, blocks, name = 'Abilities') {
     return `<li style="list-style: none; display: flex; flex-direction: row; align-items: center;">
       <span style="margin-inline: 1em; font-size: 0.5em; color: ${color};">
         <i class="fa-solid fa-${icon} fa-fw"></i>
-      </span><a data-action="open" data-uuid="${uuid}">${name}</a>
+      </span><a data-action="open" data-uuid="${uuid}" data-tooltip="Open">${name}</a>
     </li>`;
   }).join('');
 
@@ -272,7 +272,7 @@ export function addPropertiesBlock(properties, blocks, name = 'Properties') {
     return `<li style="list-style: none; display: flex; flex-direction: row; align-items: center;">
       <span style="margin-inline: 1em; font-size: 0.5em; color: ${color};">
         <i class="fa-solid fa-${icon} fa-fw"></i>
-      </span><a data-action="open" data-uuid="${uuid}">${name}</a>
+      </span><a data-action="open" data-uuid="${uuid}" data-tooltip="Open">${name}</a>
     </li>`;
   }).join('');
 
@@ -295,7 +295,7 @@ export function addResourcesBlock(resources, blocks, name = 'Resources') {
     return `<li style="list-style: none; display: flex; flex-direction: row; align-items: center;">
       <span style="margin-inline: 1em; font-size: 0.5em;">
       <i class="fa-solid fa-hashtag fa-fw"></i>
-      </span> <a data-action="open" data-uuid="${uuid}">${name}</a>&nbsp;(${quantity}${maxQuantity ? `&nbsp;/&nbsp;${maxQuantity}` : ''})
+      </span> <a data-action="open" data-uuid="${uuid}" data-tooltip="Open">${name}</a>&nbsp;(${quantity}${maxQuantity ? `&nbsp;/&nbsp;${maxQuantity}` : ''})
     </li>`;
   }).join('');
   if (!filtered.length) return;
