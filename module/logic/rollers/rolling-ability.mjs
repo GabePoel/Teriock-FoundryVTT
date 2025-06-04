@@ -147,7 +147,7 @@ async function use(ability) {
   }
   let diceClass;
   let diceTooltip;
-  if (properties?.includes('ub') || ability.system.piercing == 'ub') {
+  if (properties?.includes('ub') || ability.system.piercing == 'ub' || ability.getActor()?.system.piercing == 'ub') {
     diceClass = 'ub';
     diceTooltip = 'Unblockable';
   }

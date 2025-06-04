@@ -326,9 +326,14 @@ Hooks.on('chatMessage', (chatLog, message, chatData) => {
     for (const actor of actors) {
       (async () => {
         const getRollData = actor?.getRollData();
-        const roll = new TeriockResistRoll(rollFormula, getRollData, {
+        const roll = new TeriockRoll(rollFormula, getRollData, {
           speaker: ChatMessage.getSpeaker({ user: chatData.user }),
           disadvantage: disadvantage,
+          context: {
+            diceClass: 'resist',
+            diceTooltip: '',
+            isResistance: true,
+          }
         });
         await roll.toMessage({
           user: chatData.user,
@@ -343,63 +348,64 @@ Hooks.on('chatMessage', (chatLog, message, chatData) => {
 
   if (message.startsWith('/help')) {
     const helpText = `
-      <ul>
-        <li>
-          <code>/harm [formula]</code>
-          <div>Roll an amount of damage, drain, or wither. Makes buttons that anyone can use to apply to targeted tokens.</div>
-        </li>
-        <li>
-          <code>/damage [formula]</code>
-          <div>Roll an amount of damage. Automatically applies to targeted tokens.</div>
-        </li>
-        <li>
-          <code>/drain [formula]</code>
-          <div>Roll an amount of drain. Automatically applies to targeted tokens.</div>
-        </li>
-        <li>
-          <code>/wither [formula]</code>
-          <div>Roll an amount of wither. Automatically applies to targeted tokens.</div>
-        </li>
-        <li>
-          <code>/heal [formula]</code>
-          <div>Roll an amount of healing. Automatically applies to targeted tokens.</div>
-        </li>
-        <li>
-          <code>/revitalize [formula]</code>
-          <div>Roll an amount of revitalization. Automatically applies to targeted tokens.</div>
-        </li>
-        <li>
-          <code>/attack [options]</code>
-          <div>All targeted tokens use the Basic Attack ability.</div>
-          <div>Options:</div>
-          <ul>
-            <li><code>advantage</code> - Roll with advantage.</li>
-            <li><code>disadvantage</code> - Roll with disadvantage.</li>
-          </ul>
-        </li>
-        <li>
-          <code>/resist [options]</code>
-          <div>All targeted tokens make a resistance save.</div>
-          <div>Options:</div>
-          <ul>
-            <li><code>advantage</code> - Roll with advantage.</li>
-            <li><code>disadvantage</code> - Roll with disadvantage.</li>
-          </ul>
-        </li>
-        <li>
-          <code>/use [ability name] [options]</code>
-          <div>All targeted tokens use an ability by name.</div>
-          <div>Options:</div>
-          <ul>
-            <li><code>advantage</code> - Roll with advantage.</li>
-            <li><code>disadvantage</code> - Roll with disadvantage.</li>
-          </ul>
-        </li>
-      </ul>
+      <div class="teriock">
+        <div class="teriock-chat-help-container">
+          <div class="teriock-chat-help">
+            <code>/harm [formula]</code>
+            <div>Roll an amount of damage, drain, or wither. Makes buttons that anyone can use to apply to targeted tokens.</div>
+          </div>
+          <div class="teriock-chat-help">
+            <code>/damage [formula]</code>
+            <div>Roll an amount of damage. Automatically applies to targeted tokens.</div>
+          </div>
+          <div class="teriock-chat-help">
+            <code>/drain [formula]</code>
+            <div>Roll an amount of drain. Automatically applies to targeted tokens.</div>
+          </div>
+          <div class="teriock-chat-help">
+            <code>/wither [formula]</code>
+            <div>Roll an amount of wither. Automatically applies to targeted tokens.</div>
+          </div>
+          <div class="teriock-chat-help">
+            <code>/heal [formula]</code>
+            <div>Roll an amount of healing. Automatically applies to targeted tokens.</div>
+          </div>
+          <div class="teriock-chat-help">
+            <code>/revitalize [formula]</code>
+            <div>Roll an amount of revitalization. Automatically applies to targeted tokens.</div>
+          </div>
+          <div class="teriock-chat-help">
+            <code>/attack [options]</code>
+            <div>All targeted tokens use the Basic Attack ability.</div>
+            <div class="teriock-chat-help-options">Options:</div>
+            <ul>
+              <li><code>advantage</code> - Roll with advantage.</li>
+              <li><code>disadvantage</code> - Roll with disadvantage.</li>
+            </ul>
+          </div>
+          <div class="teriock-chat-help">
+            <code>/resist [options]</code>
+            <div>All targeted tokens make a resistance save.</div>
+            <div class="teriock-chat-help-options">Options:</div>
+            <ul>
+              <li><code>advantage</code> - Roll with advantage.</li>
+              <li><code>disadvantage</code> - Roll with disadvantage.</li>
+            </ul>
+          </div>
+          <div class="teriock-chat-help">
+            <code>/use [ability name] [options]</code>
+            <div>All targeted tokens use an ability by name.</div>
+            <div class="teriock-chat-help-options">Options:</div>
+            <ul>
+              <li><code>advantage</code> - Roll with advantage.</li>
+              <li><code>disadvantage</code> - Roll with disadvantage.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
     `;
     ChatMessage.create({
       content: helpText,
-      speaker: ChatMessage.getSpeaker({ user: chatData.user }),
       whisper: [chatData.user],
       title: 'Teriock Chat Commands',
       flavor: 'Teriock Chat Commands',
