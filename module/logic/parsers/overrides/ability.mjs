@@ -51,7 +51,13 @@ const abilitiesMap = {
     { key: 'system.damage.bucklerShield', mode: 4, value: 4, priority: 20 },
     { key: 'system.damage.largeShield', mode: 4, value: 6, priority: 20 },
     { key: 'system.damage.towerShield', mode: 4, value: 8, priority: 20 }
-  ]
+  ],
+  "Might Strike": [
+    { key: 'system.damage.standard', mode: 2, value: " + 1d4[Holy]", priority: 20 }
+  ],
+  "Control and Resist Fire": [
+    { key: 'system.damage.standard', mode: 2, value: " + 1d4[Fire]", priority: 20 }
+  ],
 };
 
 // For abilities with dynamic or prefix-based changes

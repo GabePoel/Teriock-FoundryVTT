@@ -17,6 +17,10 @@ const equipmentMap = {
   'Tower Shield': {
     damage: '1d@tshield',
   },
+  'Torch': {
+    damage: '1',
+    damageTypes: ['Fire'],
+  }
 }
 
 export default function equipmentOverrides(equipment, parameters) {

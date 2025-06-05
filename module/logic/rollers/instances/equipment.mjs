@@ -9,11 +9,30 @@ async function use(equipment, options) {
   if (equipment.system.damage) {
     let rollFormula = equipment.system.damage;
 
+    // let damageTypes = equipment.system.damageTypes || [];
+    let damageTypes = [];
+    if (equipment.system.powerLevel === 'magic') {
+      damageTypes.push('Magic');
+    }
+    const effectDamageTypes = equipment.effects.filter((effect) => {
+      return effect.type === 'property' && !effect.disabled && effect.system.damageType;
+    }).map((effect) => effect.system.damageType);
+    if (equipment.effects.some(effect => effect.type === 'property' && !effect.disabled && (effect.name === 'Flaming' || effect.name === 'Burning'))) {
+      effectDamageTypes.push('Fire');
+    }
+    damageTypes = [...new Set([...damageTypes, ...effectDamageTypes])];
+    if (damageTypes.length > 0) {
+      rollFormula += '[' + damageTypes.join(', ') + ']';
+    }
+
     if (options?.twoHanded && equipment.system.twoHandedDamage) {
       rollFormula = equipment.system.twoHandedDamage || rollFormula;
     }
     if (options?.bonusDamage) {
       rollFormula = rollFormula + ' + ' + options.bonusDamage;
+    }
+    if (equipment.getActor()?.system?.damage?.standard) {
+      rollFormula += equipment.getActor().system.damage.standard;
     }
     if (options?.advantage) {
       rollFormula = rollFormula.replace(/(\d*)d(\d+)/gi, (match, dice, sides) => {

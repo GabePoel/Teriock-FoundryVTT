@@ -35,6 +35,7 @@ function basicData(actor, data) {
     bshield: system.damage.bucklerShield,
     lshield: system.damage.largeShield,
     tshield: system.damage.towerShield,
+    standard: system.damage.standard,
   });
 }
 
