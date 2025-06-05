@@ -1,6 +1,6 @@
-const { api, sheets } = foundry.applications;
-import { TeriockSheet } from "../mixins/sheet-mixin.mjs";
+const { sheets } = foundry.applications;
 import { documentOptions } from "../helpers/constants/document-options.mjs";
+import { TeriockSheet } from "./sheet-mixin.mjs";
 
 export class TeriockEffectSheet extends TeriockSheet(sheets.ActiveEffectConfig) {
   static DEFAULT_OPTIONS = {

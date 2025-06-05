@@ -1,5 +1,5 @@
-import TeriockRoll from "../../../documents/roll.mjs";
 const { DialogV2 } = foundry.applications.api
+import TeriockRoll from "../../../documents/roll.mjs";
 
 export async function rollAbility(ability, options) {
   const advantage = options?.advantage || false;

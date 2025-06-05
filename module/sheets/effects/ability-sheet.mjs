@@ -1,7 +1,7 @@
 const { api } = foundry.applications;
-import { openWikiPage } from "../../helpers/wiki.mjs";
-import { contextMenus } from "../context-menus/ability-context-menus.mjs";
+import { contextMenus } from "../../helpers/context-menus/ability-context-menus.mjs";
 import { documentOptions } from "../../helpers/constants/document-options.mjs";
+import { openWikiPage } from "../../helpers/wiki.mjs";
 import { TeriockEffectSheet } from "../teriock-effect-sheet.mjs";
 
 export class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(TeriockEffectSheet) {
@@ -27,6 +27,7 @@ export class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(TeriockE
   async _prepareContext() {
     const context = await super._prepareContext();
 
+    const system = this.document.system;
     const editors = {
       manaCost: system.costs.manaCost,
       hitCost: system.costs.hitCost,

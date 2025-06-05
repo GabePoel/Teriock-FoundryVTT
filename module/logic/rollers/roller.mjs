@@ -1,7 +1,7 @@
 import { rollAbility } from "./instances/ability.mjs";
 import { rollEquipment } from "./instances/equipment.mjs";
-import { rollResource } from "./instances/resource.mjs";
 import { rollFluency } from "./instances/fluency.mjs";
+import { rollResource } from "./instances/resource.mjs";
 
 export async function makeRoll(document, options) {
   if (document.type === 'ability') {

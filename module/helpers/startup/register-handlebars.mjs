@@ -1,6 +1,5 @@
 export default function registerHandlebarsHelpers() {
 
-
   // String Helpers
 
   Handlebars.registerHelper('lc', str => typeof str === 'string' ? str.toLowerCase() : '');

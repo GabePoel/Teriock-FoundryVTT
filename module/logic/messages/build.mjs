@@ -1,10 +1,11 @@
-import { messageBlock, messageBar, messageBox, messageWrapper, messageHeader } from "./message-parts.mjs";
 import { buildAbilityMessage } from "./message-builders/ability.mjs";
 import { buildEquipmentMessage, buildSecretEquipmentMessage } from "./message-builders/equipment.mjs";
-import { buildPowerMessage } from "./message-builders/power.mjs";
-import { buildRankMessage } from "./message-builders/rank.mjs";
 import { buildFluencyMessage } from "./message-builders/fluency.mjs";
+import { buildPowerMessage } from "./message-builders/power.mjs";
+import { buildPropertyMessage } from "./message-builders/property.mjs";
+import { buildRankMessage } from "./message-builders/rank.mjs";
 import { buildResourceMessage } from "./message-builders/resource.mjs";
+import { messageBlock, messageBar, messageBox, messageWrapper, messageHeader } from "./message-parts.mjs";
 
 export function buildMessage(document, options = {}) {
   const secret = options.secret || false;
@@ -34,6 +35,9 @@ export function buildMessage(document, options = {}) {
   }
   if (document.type == 'resource') {
     content = buildResourceMessage(document);
+  }
+  if (document.type == 'property') {
+    content = buildPropertyMessage(document);
   }
   let fontClass = 'tfont';
   if (document.system.font) {

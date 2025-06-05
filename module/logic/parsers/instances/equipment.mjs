@@ -1,6 +1,6 @@
 import { cleanValue } from "../../../helpers/clean.mjs";
-import { toCamelCaseList } from "../../../helpers/utils.mjs";
 import { createProperty } from "../../../helpers/create-effects.mjs";
+import { toCamelCaseList } from "../../../helpers/utils.mjs";
 
 export default function parseEquipment(rawHTML, item) {
 

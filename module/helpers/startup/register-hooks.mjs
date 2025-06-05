@@ -1,6 +1,6 @@
 import { TeriockImageSheet } from "../../sheets/image-sheet.mjs";
 import { dispatch } from "../../commands/dispatch.mjs";
-import { imageContextMenuOptions } from "../../sheets/context-menus/image-context-menu.mjs";
+import { imageContextMenuOptions } from "../../helpers/context-menus/image-context-menu.mjs";
 const { ux } = foundry.applications;
 
 export default function registerHooks() {

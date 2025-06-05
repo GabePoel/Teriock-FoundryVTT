@@ -1,8 +1,6 @@
 const { sheets, ux } = foundry.applications;
-import { TeriockSheet } from "../mixins/sheet-mixin.mjs";
-import {
-  cleanFeet,
-} from "../helpers/clean.mjs";
+import { cleanFeet } from "../helpers/clean.mjs";
+import { TeriockSheet } from "./sheet-mixin.mjs";
 
 export class TeriockItemSheet extends TeriockSheet(sheets.ItemSheet) {
   static DEFAULT_OPTIONS = {

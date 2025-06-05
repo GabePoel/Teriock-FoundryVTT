@@ -1,5 +1,5 @@
-import { TeriockDocument } from "../mixins/document-mixin.mjs";
-import parseAbility from "../logic/parsers/instances/ability.mjs";
+import { TeriockDocument } from "./child-mixin.mjs";
+import parse from "../logic/parsers/parse.mjs";
 
 /**
  * @extends {ActiveEffect}
@@ -7,7 +7,7 @@ import parseAbility from "../logic/parsers/instances/ability.mjs";
 export default class TeriockEffect extends TeriockDocument(ActiveEffect) {
 
   async parse(rawHTML) {
-    return parseAbility(rawHTML, this);
+    return parse(rawHTML, this);
   }
 
   async softEnable() {

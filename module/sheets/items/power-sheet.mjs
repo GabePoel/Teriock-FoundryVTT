@@ -1,7 +1,7 @@
 const { HandlebarsApplicationMixin } = foundry.applications.api;
-import { TeriockItemSheet } from '../teriock-item-sheet.mjs';
-import { powerContextMenu } from '../context-menus/power-context-menus.mjs';
 import { documentOptions } from "../../helpers/constants/document-options.mjs";
+import { powerContextMenu } from '../../helpers/context-menus/power-context-menus.mjs';
+import { TeriockItemSheet } from '../teriock-item-sheet.mjs';
 
 export class TeriockPowerSheet extends HandlebarsApplicationMixin(TeriockItemSheet) {
   static DEFAULT_OPTIONS = {

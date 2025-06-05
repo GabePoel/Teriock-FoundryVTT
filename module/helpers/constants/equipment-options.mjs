@@ -1,7 +1,7 @@
 import { equipmentclasses } from './generated/equipment-classes.mjs';
-import { properties } from './generated/properties.mjs';
 import { magicalProperties } from './generated/magical-properties.mjs';
 import { materialProperties } from './generated/material-properties.mjs';
+import { properties } from './generated/properties.mjs';
 import { weaponFightingStyles } from './generated/weapon-fighting-styles.mjs';
 
 export const equipmentOptions = {

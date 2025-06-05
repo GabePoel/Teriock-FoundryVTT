@@ -1,5 +1,5 @@
-const { VisionMode } = foundry.canvas.perception;
 const { ColorAdjustmentsSamplerShader } = foundry.canvas.rendering.shaders;
+const { VisionMode } = foundry.canvas.perception;
 
 export const teriockVisionModes = {
   ethereal: new VisionMode({

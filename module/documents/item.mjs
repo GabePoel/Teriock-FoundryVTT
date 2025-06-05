@@ -1,9 +1,8 @@
 const { DialogV2 } = foundry.applications.api;
-import { TeriockDocument } from "../mixins/document-mixin.mjs";
-import { fetchCategoryMembers } from "../helpers/wiki.mjs";
 import { createAbility } from "../helpers/create-effects.mjs";
-import parseEquipment from "../logic/parsers/instances/equipment.mjs";
-import parseRank from "../logic/parsers/instances/rank.mjs";
+import { fetchCategoryMembers } from "../helpers/wiki.mjs";
+import { TeriockDocument } from "./child-mixin.mjs";
+import parse from "../logic/parsers/parse.mjs";
 
 /**
  * @extends {Item}
@@ -11,13 +10,7 @@ import parseRank from "../logic/parsers/instances/rank.mjs";
 export default class TeriockItem extends TeriockDocument(Item) {
 
   async parse(rawHTML) {
-    if (this.type === 'equipment') {
-      return parseEquipment(rawHTML, this);
-    } else if (this.type === 'rank') {
-      return await parseRank(rawHTML, this);
-    } else {
-      return {};
-    }
+    return parse(rawHTML, this);
   }
 
   async disable() {

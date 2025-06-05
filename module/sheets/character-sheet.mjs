@@ -1,7 +1,7 @@
 const { sheets, api } = foundry.applications;
-import { TeriockSheet } from "../mixins/sheet-mixin.mjs";
 import { documentOptions } from "../helpers/constants/document-options.mjs";
-import { primaryBlockerContextMenu, primaryAttackContextMenu, piercingContextMenu } from "./context-menus/character-context-menus.mjs";
+import { primaryBlockerContextMenu, primaryAttackContextMenu, piercingContextMenu } from "../helpers/context-menus/character-context-menus.mjs";
+import { TeriockSheet } from "./sheet-mixin.mjs";
 
 export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(TeriockSheet(sheets.ActorSheet)) {
   static DEFAULT_OPTIONS = {

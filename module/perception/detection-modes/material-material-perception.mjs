@@ -1,5 +1,5 @@
-import TeriockDetectionMode from "./teriock-detection-mode.mjs";
 const { Token } = foundry.canvas.placeables;
+import TeriockDetectionMode from "./teriock-detection-mode.mjs";
 
 export default class DetectionModeMaterialMaterial extends TeriockDetectionMode {
 

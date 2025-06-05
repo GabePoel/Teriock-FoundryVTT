@@ -1,6 +1,6 @@
 const { api } = foundry.applications;
-import { fieldContextMenu, tradecraftContextMenu } from '../context-menus/fluency-context-menus.mjs';
 import { documentOptions } from "../../helpers/constants/document-options.mjs";
+import { fieldContextMenu, tradecraftContextMenu } from '../../helpers/context-menus/fluency-context-menus.mjs';
 import { TeriockEffectSheet } from "../teriock-effect-sheet.mjs";
 
 export class TeriockFluencySheet extends api.HandlebarsApplicationMixin(TeriockEffectSheet) {

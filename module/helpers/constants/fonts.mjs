@@ -15,10 +15,6 @@ export const fonts = {
     name: 'Quintessential',
     cssClass: 'quintessential',
   },
-  // tagesschrift:{
-  //   name: 'Tagesschrift',
-  //   cssClass: 'tagesschrift',
-  // },
   xmasTerpieceSwashes: {
     name: 'XmasTerpieceSwashes',
     cssClass: 'xmasterpiece',

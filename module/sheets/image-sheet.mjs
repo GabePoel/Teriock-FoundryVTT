@@ -1,5 +1,5 @@
 const { ux, api } = foundry.applications;
-import { imageContextMenuOptions } from "./context-menus/image-context-menu.mjs";
+import { imageContextMenuOptions } from "../helpers/context-menus/image-context-menu.mjs";
 
 export class TeriockImageSheet extends api.HandlebarsApplicationMixin(api.ApplicationV2) {
   static DEFAULT_OPTIONS = {

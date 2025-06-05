@@ -1,7 +1,7 @@
 const { HandlebarsApplicationMixin, DialogV2 } = foundry.applications.api;
-import { TeriockItemSheet } from '../teriock-item-sheet.mjs';
-import { rankContextMenu, classContextMenu, archetypeContextMenu, hitDieContextMenu, manaDieContextMenu } from '../context-menus/rank-context-menus.mjs';
 import { documentOptions } from "../../helpers/constants/document-options.mjs";
+import { rankContextMenu, classContextMenu, archetypeContextMenu, hitDieContextMenu, manaDieContextMenu } from '../../helpers/context-menus/rank-context-menus.mjs';
+import { TeriockItemSheet } from '../teriock-item-sheet.mjs';
 
 export class TeriockRankSheet extends HandlebarsApplicationMixin(TeriockItemSheet) {
   static DEFAULT_OPTIONS = {

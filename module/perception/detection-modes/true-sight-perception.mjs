@@ -1,5 +1,5 @@
-import TeriockDetectionMode from "./teriock-detection-mode.mjs";
 const { OutlineOverlayFilter } = foundry.canvas.rendering.filters;
+import TeriockDetectionMode from "./teriock-detection-mode.mjs";
 
 export default class DetectionModeTrueSightPerception extends TeriockDetectionMode {
   static BLOCKING_TGT_STATUS_EFFECTS = [];

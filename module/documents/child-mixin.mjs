@@ -1,5 +1,5 @@
-import { fetchWikiPageHTML, openWikiPage } from "../helpers/wiki.mjs";
 import { buildMessage } from "../logic/messages/build.mjs";
+import { fetchWikiPageHTML, openWikiPage } from "../helpers/wiki.mjs";
 import { makeRoll } from "../logic/rollers/roller.mjs";
 
 export const TeriockDocument = (Base) => class TeriockDocument extends Base {

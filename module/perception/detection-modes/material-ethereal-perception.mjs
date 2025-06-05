@@ -1,6 +1,6 @@
+const { Token } = foundry.canvas.placeables;
 import EtherealFilter from "../filters/ethereal-filter.mjs";
 import TeriockDetectionMode from "./teriock-detection-mode.mjs";
-const { Token } = foundry.canvas.placeables;
 
 export default class DetectionModeMaterialEthereal extends TeriockDetectionMode {
 

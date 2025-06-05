@@ -1,8 +1,8 @@
-import TeriockRoll from "../documents/roll.mjs";
-import prepareDerivedData from "../logic/actor/derived-data.mjs";
-import postUpdate from "../logic/actor/post-update.mjs";
 import getRollData from "../logic/actor/roll-data.mjs";
+import postUpdate from "../logic/actor/post-update.mjs";
+import prepareDerivedData from "../logic/actor/derived-data.mjs";
 import rollCondition from "../logic/rollers/instances/condition.mjs";
+import TeriockRoll from "../documents/roll.mjs";
 
 /**
  * @extends {Actor}
@@ -115,9 +115,6 @@ export default class TeriockActor extends Actor {
       result.toMessage({
         speaker: ChatMessage.getSpeaker({ actor: this }),
         flavor: `${tradecraft.charAt(0).toUpperCase() + tradecraft.slice(1)} Check`,
-        type: CONST.CHAT_MESSAGE_TYPES.ROLL,
-        rollMode: game.settings.get("core", "rollMode"),
-        create: true
       });
     });
   }
@@ -130,9 +127,6 @@ export default class TeriockActor extends Actor {
       result.toMessage({
         speaker: ChatMessage.getSpeaker({ actor: this }),
         flavor: `${attribute.toUpperCase()} Feat Save`,
-        type: CONST.CHAT_MESSAGE_TYPES.ROLL,
-        rollMode: game.settings.get("core", "rollMode"),
-        create: true
       });
     });
   }
@@ -167,8 +161,6 @@ export default class TeriockActor extends Actor {
     roll.toMessage({
       speaker: ChatMessage.getSpeaker({ actor: this }),
       flavor: "Resistance Save",
-      type: CONST.CHAT_MESSAGE_TYPES.ROLL,
-      rollMode: game.settings.get("core", "rollMode"),
     });
   }
 
@@ -190,8 +182,6 @@ export default class TeriockActor extends Actor {
     roll.toMessage({
       speaker: ChatMessage.getSpeaker({ actor: this }),
       flavor: "Condition Ending Roll",
-      type: CONST.CHAT_MESSAGE_TYPES.ROLL,
-      rollMode: game.settings.get("core", "rollMode"),
     });
   }
 

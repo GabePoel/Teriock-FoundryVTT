@@ -57,12 +57,13 @@ export function buildAbilityMessage(ability) {
       ]
     },
     {
-      icon: 'fa-sparkle',
+      icon: 'fa-' + ref.abilityType[src.abilityType].icon,
       wrappers: [
+        ref.abilityType[src.abilityType].name,
         src.elderSorcery ? 'Elder Sorcery' : '',
         ...src.effects.map(effect => ref.effects[effect])
-      ]
-    }
+      ],
+    },
   ]
   let elderSorceryElementString = '';
   if (src.elderSorcery) {

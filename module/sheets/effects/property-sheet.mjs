@@ -1,6 +1,6 @@
 const { api } = foundry.applications;
-import { propertyContextMenu } from "../context-menus/property-context-menus.mjs";
 import { documentOptions } from "../../helpers/constants/document-options.mjs";
+import { propertyContextMenu } from "../../helpers/context-menus/property-context-menus.mjs";
 import { TeriockEffectSheet } from "../teriock-effect-sheet.mjs";
 
 export class TeriockPropertySheet extends api.HandlebarsApplicationMixin(TeriockEffectSheet) {

@@ -1,4 +1,5 @@
 import { attack } from "./instances/attack.mjs";
+import { createHelpCommand } from './instances/help.mjs';
 import { damage } from "./instances/damage.mjs";
 import { drain } from "./instances/drain.mjs";
 import { endcon } from "./instances/endcon.mjs";
@@ -8,7 +9,6 @@ import { resist } from "./instances/resist.mjs";
 import { revitalize } from "./instances/revitalize.mjs";
 import { use } from "./instances/use.mjs";
 import { wither } from "./instances/wither.mjs";
-import { createHelpCommand } from './instances/help.mjs';
 
 const commandList = [
   attack,
