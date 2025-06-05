@@ -1,5 +1,6 @@
 import { TeriockImageSheet } from "../../sheets/image-sheet.mjs";
 import { dispatch } from "../../commands/dispatch.mjs";
+import { imageContextMenuOptions } from "../../sheets/context-menus/image-context-menu.mjs";
 const { ux } = foundry.applications;
 
 export default function registerHooks() {
@@ -29,25 +30,21 @@ export default function registerHooks() {
   });
 
   Hooks.on('renderChatMessageHTML', (message, html, context) => {
-    const imageContextMenuOptions = [
-      {
-        name: 'Open Image',
-        icon: '<i class="fa-solid fa-image"></i>',
-        callback: async (target) => {
-          const img = target.getAttribute('data-src');
-          const image = new TeriockImageSheet(img);
-          image.render(true);
-        },
-        condition: (target) => {
-          const img = target.getAttribute('data-src');
-          return img && img.length > 0;
-        }
-      }
-    ]
     new ux.ContextMenu(html, '.timage', imageContextMenuOptions, {
       eventName: 'contextmenu',
       jQuery: false,
       fixed: true,
+    });
+    html.querySelectorAll('.timage').forEach(imgEl => {
+      imgEl.addEventListener('click', async (event) => {
+        event.stopPropagation();
+        event.preventDefault();
+        const img = imgEl.getAttribute('data-src');
+        if (img && img.length > 0) {
+          const image = new TeriockImageSheet(img);
+          image.render(true);
+        }
+      });
     });
     const buttons = html.querySelectorAll('.harm-button');
     buttons.forEach(button => {

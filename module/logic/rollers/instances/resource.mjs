@@ -17,7 +17,7 @@ async function use(resource, options) {
     }
 
     message = await foundry.applications.ux.TextEditor.enrichHTML(message);
-    const roll = new TeriockRoll(rollFormula, resource.getActor()?.getRollData(), { flavor: message });
+    const roll = new TeriockRoll(rollFormula, resource.getActor()?.getRollData(), { message: message });
     roll.toMessage({
       speaker: ChatMessage.getSpeaker({
         actor: resource.getActor(),

@@ -11,8 +11,10 @@ export const TeriockDocument = (Base) => class TeriockDocument extends Base {
   }
 
   async chat() {
+    let content = await this.buildMessage();
+    content = `<div class="teriock">${content}</div>`;
     await ChatMessage.create({
-      content: await this.buildMessage(),
+      content: content,
       speaker: ChatMessage.getSpeaker({ actor: this.getActor() }),
     });
   }

@@ -1,8 +1,9 @@
 const { ux, api } = foundry.applications;
 const { utils } = foundry;
+import { imageContextMenuOptions } from "../sheets/context-menus/image-context-menu.mjs";
+import { chatImage } from "../helpers/utils.mjs";
 import { createAbility, createResource, createProperty, createFluency } from "../helpers/create-effects.mjs";
 import connectEmbedded from "./connect-embedded.mjs";
-import { TeriockImageSheet } from "../sheets/image-sheet.mjs";
 
 export const TeriockSheet = (Base) =>
   class TeriockSheet extends Base {
@@ -51,31 +52,6 @@ export const TeriockSheet = (Base) =>
       this.editable = this.isEditable && this.document.system.editable;
       super._onRender(context, options);
       connectEmbedded(this.document, this.element, this.editable);
-      const imageContextMenuOptions = [
-        {
-          name: 'Open Image',
-          icon: '<i class="fa-solid fa-image"></i>',
-          callback: async (target) => {
-            const img = target.getAttribute('data-src');
-            const image = new TeriockImageSheet(img);
-            image.render(true);
-          },
-          condition: (target) => {
-            const img = target.getAttribute('data-src');
-            return img && img.length > 0;
-          }
-        },
-        {
-          name: 'Share Image',
-          icon: '<i class="fa-solid fa-share"></i>',
-          callback: async (target) => {
-            const img = target.getAttribute('data-src');
-            if (img && img.length > 0) {
-              await this._chatImage(img);
-            }
-          },
-        }
-      ]
       new ux.ContextMenu(this.element, '.timage', imageContextMenuOptions, {
         eventName: 'contextmenu',
         jQuery: false,
@@ -88,12 +64,7 @@ export const TeriockSheet = (Base) =>
     }
 
     async _chatImage(img) {
-      if (img) {
-        await ChatMessage.create({
-          content: `<div class="timage" data-src="${img}" style="display: flex; justify-content: center;"><img src="${img}" alt="${this.name}" class="teriock-image"></div>`,
-          speaker: ChatMessage.getSpeaker({ actor: this.document }),
-        })
-      }
+      await chatImage(img);
     }
 
     /** Editor */
@@ -329,8 +300,6 @@ export const TeriockSheet = (Base) =>
 
     static async _createProperty(event, __) {
       const propertyKeys = Object.keys(CONFIG.TERIOCK.equipmentOptions.properties);
-      console.log(CONFIG.TERIOCK.equipmentOptions.properties);
-      console.log('Property Keys:', propertyKeys);
       const propertyValues = propertyKeys.map(
         (property) => `<option value="${property}">${CONFIG.TERIOCK.equipmentOptions.properties[property]}</option>`
       ).join('');

@@ -1,4 +1,5 @@
-const { api } = foundry.applications;
+const { ux, api } = foundry.applications;
+import { imageContextMenuOptions } from "./context-menus/image-context-menu.mjs";
 
 export class TeriockImageSheet extends api.HandlebarsApplicationMixin(api.ApplicationV2) {
   static DEFAULT_OPTIONS = {
@@ -31,5 +32,17 @@ export class TeriockImageSheet extends api.HandlebarsApplicationMixin(api.Applic
     return {
       img: this.img
     }
+  }
+
+  /** @override */
+  _onRender(context, options) {
+    super._onRender(context, options);
+    new ux.ContextMenu(this.element, '.timage', imageContextMenuOptions,
+      {
+        eventName: 'contextmenu',
+        jQuery: false,
+        fixed: true,
+      }
+    );
   }
 }

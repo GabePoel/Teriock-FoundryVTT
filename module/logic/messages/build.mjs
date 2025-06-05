@@ -48,8 +48,6 @@ export function buildMessage(document, options = {}) {
 function buildMessageHelper(image, name, bars, blocks, fontClass) {
   const message = document.createElement('div');
   message.classList.add('tmessage');
-  message.style.display = 'flex';
-  message.style.flexDirection = 'column';
 
   // Header
   const headerBox = messageBox();
@@ -59,7 +57,6 @@ function buildMessageHelper(image, name, bars, blocks, fontClass) {
   // Bars
   const barBox = messageBox();
   barBox.classList.add('tmes-bar-box');
-  barBox.style.cssText += 'border-top:1px solid rgba(0,0,0,0.25);padding-top:0.5em;margin-top:0.25em;';
   bars.filter(bar => barLength(bar) > 0).forEach(bar => {
     const barElement = messageBar(barBox, bar.icon);
     bar.wrappers.forEach(wrapper => messageWrapper(barElement, wrapper));
@@ -68,7 +65,6 @@ function buildMessageHelper(image, name, bars, blocks, fontClass) {
   // Blocks
   const blockBox = messageBox();
   blockBox.classList.add('tmes-block-box');
-  blockBox.style.marginTop = '0.5em';
   blocks.filter(block => block.text !== '').forEach(block => {
     messageBlock(blockBox, block.title, block.text, block.italic, block.special, block.elements);
   });

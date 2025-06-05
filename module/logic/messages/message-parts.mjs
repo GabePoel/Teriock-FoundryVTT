@@ -1,52 +1,19 @@
+function createElement(tag, props = {}, ...children) {
+  const el = Object.assign(document.createElement(tag), props);
+  for (const child of children) el.append(child);
+  return el;
+}
+
 export function messageBox() {
-  const box = document.createElement('div');
-  box.classList.add('abm-box');
-  box.style.width = '100%';
-  box.style.display = 'flex';
-  box.style.flexDirection = 'column';
-  box.style.gap = '0.25em';
-  return box;
+  return document.createElement('div');
 }
 
 export function messageBar(parent, icon = null) {
-  const bar = Object.assign(document.createElement('div'), {
-    className: 'abm-bar',
-    style: `
-      width: 100%;
-      display: flex;
-      flex-direction: row;
-      gap: 0.25em;
-      align-items: center;
-    `
-  });
+  const bar = createElement('div', { className: 'abm-bar' });
+  const iconContainer = createElement('div', { className: 'abm-bar-icon' });
+  const tagsContainer = createElement('div', { className: 'abm-bar-tags' });
 
-  const barIconContainer = Object.assign(document.createElement('div'), {
-    className: 'abm-bar-icon',
-    style: `
-      width: 1.5em;
-      height: 1em;
-      display: flex;
-      align-items: flex-start;
-      flex: 0 0 auto;
-      place-self: flex-start;
-      margin-top: 0.25em;
-    `
-  });
-
-  const barTags = Object.assign(document.createElement('div'), {
-    className: 'abm-bar-tags',
-    style: `
-      width: calc(100% - 1.5em);
-      display: flex;
-      flex-direction: row;
-      gap: 0.25em;
-      flex-wrap: wrap;
-      align-items: center;
-      flex: 1 1 auto;
-    `
-  });
-
-  bar.append(barIconContainer, barTags);
+  bar.append(iconContainer, tagsContainer);
   parent.appendChild(bar);
 
   if (icon) barIcon(bar, icon);
@@ -56,70 +23,32 @@ export function messageBar(parent, icon = null) {
 
 export function messageWrapper(parent, content) {
   if (!content) return;
-  const wrapper = document.createElement('div');
-  wrapper.className = 'abm-label';
-  Object.assign(wrapper.style, {
-    paddingLeft: '0.25em',
-    paddingRight: '0.25em',
-    borderRadius: '0.25em',
-    border: '1px dotted var(--color-text-subtle)',
-    maxWidth: 'fit-content'
+  const wrapper = createElement('div', {
+    className: 'abm-label',
+    innerHTML: content
   });
-  wrapper.innerHTML = content;
-  (parent.querySelector('.abm-bar-tags') || parent).appendChild(wrapper);
+  const container = parent.querySelector('.abm-bar-tags') || parent;
+  container.appendChild(wrapper);
   return wrapper;
 }
 
 export function messageBlock(parent, title, text, italic = false, special = null, elements = null) {
   if (!text) return;
-  const block = Object.assign(document.createElement('div'), {
-    className: 'abm-block',
-    style: `
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      border-top: 1px solid rgba(0, 0, 0, 0.25);
-      padding-top: 0.5em;
-    `
-  });
 
-  const titleElement = Object.assign(document.createElement('div'), {
+  const block = createElement('div', { className: 'abm-block' });
+  const titleElement = createElement('div', {
     className: 'abm-block-title',
-    innerHTML: title,
-    style: `
-      color: var(--color-text-subtle);
-      text-transform: uppercase;
-      font-size: 0.8em;
-      margin-bottom: 0.25em;
-    `
+    innerHTML: special === 'ES' ? `With the Elder Sorcery of ${elements}...` : title
   });
-
-  const textElement = Object.assign(document.createElement('div'), {
+  const textElement = createElement('div', {
     className: 'abm-block-text',
     innerHTML: text
   });
 
-  if (special === 'ES') {
-    titleElement.innerHTML = 'With the Elder Sorcery of ' + elements + '...';
-    textElement.style.fontFamily = 'Quintessential';
-    block.style.border = '1px solid rgba(0, 0, 0, 0.2)';
-    block.style.borderRadius = '4px';
-    block.style.padding = '6px';
-    block.style.marginBottom = '4px';
-    block.style.backgroundColor = 'rgba(0, 0, 0, 0.1)';
-    block.style.boxShadow = '0 0 2px #FFF inset';
-  }
+  if (special === 'ES') block.classList.add('abm-es-block');
 
-  // Remove tables from textElement
-  textElement.querySelectorAll('table').forEach(table => table.remove());
-
+  textElement.querySelectorAll('table').forEach(t => t.remove());
   if (italic) textElement.style.fontStyle = 'italic';
-
-  // Remove margin/padding from paragraphs
-  textElement.querySelectorAll('p').forEach(p => {
-    p.style.margin = '0';
-    p.style.padding = '0';
-  });
 
   block.append(titleElement, textElement);
   parent.appendChild(block);
@@ -127,181 +56,85 @@ export function messageBlock(parent, title, text, italic = false, special = null
 }
 
 export function messageHeader(parent, image, text, fontClass = 'tfont') {
-  const header = Object.assign(document.createElement('div'), {
-    className: 'tmessage-header',
-    style: `
-      width: 100%;
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-    `
-  });
-
-  const headerImageContainer = Object.assign(document.createElement('div'), {
-    className: 'tmessage-header-image-container timage',
-    style: `
-      width: 2em;
-      height: 2em;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.4));
-    `
-  });
-  headerImageContainer.setAttribute('data-src', image);
-
-  const headerImage = Object.assign(document.createElement('img'), {
+  const headerImage = createElement('img', {
     className: 'tmessage-header-image',
-    src: image,
-    style: `
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center;
-    `
+    src: image
   });
-
-  headerImageContainer.appendChild(headerImage);
-  header.appendChild(headerImageContainer);
-
-  const headerText = Object.assign(document.createElement('div'), {
+  const imageContainer = createElement('div', {
+    className: 'tmessage-header-image-container timage'
+  }, headerImage);
+  imageContainer.setAttribute('data-src', image);
+  const headerText = createElement('div', {
     className: `tmessage-header-text ${fontClass}`,
-    innerHTML: text,
-    style: `
-      font-size: 1.5em;
-      line-height: 1.5em;
-      flex: 1 1 auto;
-      text-align: left;
-      margin-left: 0.5em;
-    `
+    innerHTML: text
   });
 
-  header.appendChild(headerText);
+  const header = createElement('div', { className: 'tmessage-header' }, imageContainer, headerText);
   parent.appendChild(header);
   return header;
 }
 
 function barIcon(parent, iconClass, first = true) {
-  const icon = document.createElement('i');
-  icon.className = `fa-light ${iconClass}`;
-  icon.style.fontSize = '1em';
-
-  const container = Object.assign(document.createElement('div'), {
-    className: 'abm-icon-wrapper',
-    style: `
-      width: 2em;
-      height: 1em;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    `
+  const icon = createElement('i', {
+    className: `fa-light ${iconClass}`,
+    style: 'font-size: 1em;'
   });
-  container.appendChild(icon);
 
+  const wrapper = createElement('div', { className: 'abm-icon-wrapper' }, icon);
   const iconParent = parent.querySelector('.abm-bar-icon') || parent;
-  first ? iconParent.prepend(container) : iconParent.appendChild(container);
 
-  return container;
+  first ? iconParent.prepend(wrapper) : iconParent.appendChild(wrapper);
+  return wrapper;
+}
+
+function addEmbeddedBlock(entities, blocks, name, typeKey, iconFallback = 'hashtag') {
+  const config = CONFIG.TERIOCK.abilityOptions.abilityType;
+  const typeOrder = Object.keys(config);
+
+  const filtered = (entities || [])
+    .filter(e => e.type === typeKey)
+    .sort((a, b) => {
+      const typeA = a.system[`${typeKey}Type`] || '';
+      const typeB = b.system[`${typeKey}Type`] || '';
+      const indexA = typeOrder.indexOf(typeA);
+      const indexB = typeOrder.indexOf(typeB);
+
+      if (indexA !== indexB) return indexA - indexB;
+      return (a.name || '').localeCompare(b.name || '');
+    });
+
+  if (!filtered.length) return;
+
+  const listItems = filtered.map(e => {
+    const { name, uuid, system } = e;
+    const { color = '', icon = iconFallback } = config[system[`${typeKey}Type`]] || {};
+    const quantity = system.quantity, maxQuantity = system.maxQuantity;
+
+    const suffix = typeKey === 'resource' && quantity !== undefined
+      ? `&nbsp;(${quantity}${maxQuantity ? `/${maxQuantity}` : ''})`
+      : '';
+
+    return `<li class="tmessage-embedded-li">
+      <span class="tmes-emb-li-icon" style="color: ${color};">
+        <i class="fa-solid fa-${icon} fa-fw"></i>
+      </span><a data-action="open" data-uuid="${uuid}" data-tooltip="Open">${name}</a>${suffix}
+    </li>`;
+  }).join('');
+
+  blocks.push({
+    title: name,
+    text: `<ul class="tmessage-embedded-ul">${listItems}</ul>`,
+  });
 }
 
 export function addAbilitiesBlock(abilities, blocks, name = 'Abilities') {
-  const abilityTypeOrder = Object.keys(CONFIG.TERIOCK.abilityOptions.abilityType);
-
-  const filtered = abilities
-    .filter(a => a.type === 'ability')
-    .sort((a, b) => {
-      const typeA = a.system.abilityType || '';
-      const typeB = b.system.abilityType || '';
-      const indexA = abilityTypeOrder.indexOf(typeA);
-      const indexB = abilityTypeOrder.indexOf(typeB);
-
-      if (indexA !== indexB) return indexA - indexB;
-
-      // If types are equal or not found, sort by name
-      const nameA = a.name?.toLowerCase() || '';
-      const nameB = b.name?.toLowerCase() || '';
-      if (nameA < nameB) return -1;
-      if (nameA > nameB) return 1;
-      return 0;
-    });
-
-  if (!filtered.length) return;
-
-  const abilitiesText = filtered.map(ability => {
-    const { name, uuid } = ability;
-    const { color, icon } = CONFIG.TERIOCK.abilityOptions.abilityType[ability.system.abilityType] || {};
-    return `<li style="list-style: none; display: flex; flex-direction: row; align-items: center;">
-      <span style="margin-inline: 1em; font-size: 0.5em; color: ${color};">
-        <i class="fa-solid fa-${icon} fa-fw"></i>
-      </span><a data-action="open" data-uuid="${uuid}" data-tooltip="Open">${name}</a>
-    </li>`;
-  }).join('');
-
-  blocks.push({
-    title: name,
-    text: `<ul style="padding: 0; margin: 0;">${abilitiesText}</ul>`,
-  });
+  addEmbeddedBlock(abilities, blocks, name, 'ability');
 }
 
 export function addPropertiesBlock(properties, blocks, name = 'Properties') {
-  const propertyTypeOrder = Object.keys(CONFIG.TERIOCK.abilityOptions.abilityType);
-
-  const filtered = properties
-    .filter(p => p.type === 'property')
-    .sort((a, b) => {
-      const typeA = a.system.propertyType || '';
-      const typeB = b.system.propertyType || '';
-      const indexA = propertyTypeOrder.indexOf(typeA);
-      const indexB = propertyTypeOrder.indexOf(typeB);
-
-      if (indexA !== indexB) return indexA - indexB;
-
-      // If types are equal or not found, sort by name
-      const nameA = a.name?.toLowerCase() || '';
-      const nameB = b.name?.toLowerCase() || '';
-      if (nameA < nameB) return -1;
-      if (nameA > nameB) return 1;
-      return 0;
-    });
-
-  if (!filtered.length) return;
-
-  const propertiesText = filtered.map(property => {
-    const { name, uuid } = property;
-    const { color, icon } = CONFIG.TERIOCK.abilityOptions.abilityType[property.system.propertyType] || {};
-    return `<li style="list-style: none; display: flex; flex-direction: row; align-items: center;">
-      <span style="margin-inline: 1em; font-size: 0.5em; color: ${color};">
-        <i class="fa-solid fa-${icon} fa-fw"></i>
-      </span><a data-action="open" data-uuid="${uuid}" data-tooltip="Open">${name}</a>
-    </li>`;
-  }).join('');
-
-  blocks.push({
-    title: name,
-    text: `<ul style="padding: 0; margin: 0;">${propertiesText}</ul>`,
-  });
+  addEmbeddedBlock(properties, blocks, name, 'property');
 }
 
 export function addResourcesBlock(resources, blocks, name = 'Resources') {
-  if (!resources || !resources.length) return;
-
-  const filtered = resources
-    .filter(r => r.type === 'resource')
-    .sort((a, b) => a.name?.localeCompare(b.name || ''));
-
-  const resourcesText = filtered.map(resource => {
-    const { name, uuid } = resource;
-    const { quantity, maxQuantity } = resource.system;
-    return `<li style="list-style: none; display: flex; flex-direction: row; align-items: center;">
-      <span style="margin-inline: 1em; font-size: 0.5em;">
-      <i class="fa-solid fa-hashtag fa-fw"></i>
-      </span> <a data-action="open" data-uuid="${uuid}" data-tooltip="Open">${name}</a>&nbsp;(${quantity}${maxQuantity ? `&nbsp;/&nbsp;${maxQuantity}` : ''})
-    </li>`;
-  }).join('');
-  if (!filtered.length) return;
-
-  blocks.push({
-    title: name,
-    text: `<ul style="padding: 0; margin: 0;">${resourcesText}</ul>`,
-  });
+  addEmbeddedBlock(resources, blocks, name, 'resource');
 }

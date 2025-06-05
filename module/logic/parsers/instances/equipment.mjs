@@ -13,7 +13,6 @@ export default function parseEquipment(rawHTML, item) {
     ...validMagicalProperties,
     "Weapon",
   ];
-  console.log('Valid Properties:', allValidProperties);
 
   // Remove existing properties
   for (const effect of item.transferredEffects.filter(e => e.type === 'property')) {
@@ -66,7 +65,6 @@ export default function parseEquipment(rawHTML, item) {
   // parameters.properties = parameters.properties.filter(Boolean).sort((a, b) => a.localeCompare(b));
   parameters.equipmentClasses = parameters.equipmentClasses.filter(Boolean).sort((a, b) => a.localeCompare(b));
   parameters.equipmentClasses = toCamelCaseList(parameters.equipmentClasses);
-  console.log('Equipment Classes:', parameters.equipmentClasses);
   const candidateProperties = toCamelCaseList(parameters.properties);
 
   // Filter properties by config
@@ -79,7 +77,6 @@ export default function parseEquipment(rawHTML, item) {
   candidateProperties.length = 0;
   candidateProperties.push(...filteredProperties);
 
-  console.log('Candidate Properties:', candidateProperties);
   for (const key of candidateProperties) {
     createProperty(item, key);
   }
