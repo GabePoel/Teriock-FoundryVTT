@@ -2,21 +2,11 @@ const { api, sheets } = foundry.applications;
 import { TeriockSheet } from "../mixins/sheet-mixin.mjs";
 import { documentOptions } from "../helpers/constants/document-options.mjs";
 
-export class TeriockResourceSheet extends api.HandlebarsApplicationMixin(TeriockSheet(sheets.ActiveEffectConfig)) {
+export class TeriockEffectSheet extends TeriockSheet(sheets.ActiveEffectConfig) {
   static DEFAULT_OPTIONS = {
-    classes: ['resource'],
+    classes: ['effect'],
     window: {
-      icon: "fa-solid fa-" + documentOptions.resource.icon,
-    },
-  };
-  static PARTS = {
-    all: {
-      template: 'systems/teriock/templates/sheets/resource-template/resource-template.hbs',
-      scrollable: [
-        '.window-content',
-        '.tsheet-page',
-        '.ab-sheet-everything',
-      ],
+      icon: `fa-solid fa-${documentOptions.effect.icon}`,
     },
   };
 

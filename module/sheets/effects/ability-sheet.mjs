@@ -1,10 +1,10 @@
-const { api, sheets, ux } = foundry.applications;
-import { TeriockSheet } from "../mixins/sheet-mixin.mjs";
-import { openWikiPage } from "../helpers/wiki.mjs";
-import { contextMenus } from "./context-menus/ability-context-menus.mjs";
-import { documentOptions } from "../helpers/constants/document-options.mjs";
+const { api } = foundry.applications;
+import { openWikiPage } from "../../helpers/wiki.mjs";
+import { contextMenus } from "../context-menus/ability-context-menus.mjs";
+import { documentOptions } from "../../helpers/constants/document-options.mjs";
+import { TeriockEffectSheet } from "../teriock-effect-sheet.mjs";
 
-export class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(TeriockSheet(sheets.ActiveEffectConfig)) {
+export class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(TeriockEffectSheet) {
   static DEFAULT_OPTIONS = {
     classes: ['equipment'],
     window: {
@@ -26,19 +26,6 @@ export class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(TeriockS
   /** @override */
   async _prepareContext() {
     const context = await super._prepareContext();
-    const { system, name, img, flags, disabled, limited, isOwner } = this.document;
-    Object.assign(context, {
-      config: CONFIG.TERIOCK,
-      editable: this.isEditable && this.document.system.editable,
-      document: this.document,
-      limited,
-      owner: isOwner,
-      system,
-      name,
-      img,
-      flags,
-      disabled,
-    });
 
     const editors = {
       manaCost: system.costs.manaCost,

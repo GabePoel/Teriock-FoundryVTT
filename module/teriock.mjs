@@ -8,15 +8,15 @@ import TeriockHarmRoll from './documents/harm.mjs';
 import TeriockItem from './documents/item.mjs';
 import TeriockRoll from './documents/roll.mjs'
 import TeriockToken from './documents/token.mjs';
-import { TeriockAbilitySheet } from './sheets/ability-sheet.mjs';
+import { TeriockAbilitySheet } from './sheets/effects/ability-sheet.mjs';
+import { TeriockBaseEffectSheet } from './sheets/effects/base-sheet.mjs';
 import { TeriockCharacterSheet } from './sheets/character-sheet.mjs';
-import { TeriockEffectSheet } from './sheets/effect-sheet.mjs';
-import { TeriockEquipmentSheet } from './sheets/equipment-sheet.mjs';
-import { TeriockFluencySheet } from './sheets/fluency-sheet.mjs';
-import { TeriockPowerSheet } from './sheets/power-sheet.mjs';
-import { TeriockPropertySheet } from './sheets/property-sheet.mjs';
-import { TeriockRankSheet } from './sheets/rank-sheet.mjs';
-import { TeriockResourceSheet } from './sheets/resource-sheet.mjs';
+import { TeriockEquipmentSheet } from './sheets/items/equipment-sheet.mjs';
+import { TeriockFluencySheet } from './sheets/effects/fluency-sheet.mjs';
+import { TeriockPowerSheet } from './sheets/items/power-sheet.mjs';
+import { TeriockPropertySheet } from './sheets/effects/property-sheet.mjs';
+import { TeriockRankSheet } from './sheets/items/rank-sheet.mjs';
+import { TeriockResourceSheet } from './sheets/effects/resource-sheet.mjs';
 import { teriockVisionModes } from './perception/vision-modes.mjs';
 import { teriockDetectionModes } from './perception/detection-modes.mjs';
 import { conditions } from './content/conditions.mjs'
@@ -134,7 +134,7 @@ Hooks.once('init', function () {
       doc: TeriockEffect
     },
     {
-      cls: TeriockEffectSheet,
+      cls: TeriockBaseEffectSheet,
       label: 'Effect',
       types: ['effect'],
       doc: TeriockEffect,
