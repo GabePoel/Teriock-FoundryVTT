@@ -3,7 +3,10 @@
 
 export const equipment = {
     amulet: "Amulet",
+    barrel: "Barrel",
     battleStaff: "Battle Staff",
+    book: "Book",
+    bottle: "Bottle",
     boulder: "Boulder",
     broadsword: "Broadsword",
     bucklerShield: "Buckler Shield",
@@ -26,6 +29,7 @@ export const equipment = {
     kunai: "Kunai",
     largeShield: "Large Shield",
     leatherArmor: "Leather Armor",
+    lock: "Lock",
     longFlail: "Long Flail",
     longbow: "Longbow",
     longsword: "Longsword",
@@ -34,6 +38,7 @@ export const equipment = {
     ninjatu: "Ninjatu",
     orb: "Orb",
     paper: "Paper",
+    pen: "Pen",
     ring: "Ring",
     rod: "Rod",
     shortFlail: "Short Flail",

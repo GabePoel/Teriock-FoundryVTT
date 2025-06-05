@@ -88,7 +88,7 @@ export default function parseEquipment(rawHTML, item) {
 
   const oldImg = item.img;
   let newImg = oldImg;
-  if (oldImg?.startsWith('systems/teriock/assets')) {
+  if (oldImg?.startsWith('systems/teriock/assets') || oldImg?.startsWith('icons/svg')) {
     newImg = 'systems/teriock/assets/searchable.svg';
     newImg = `systems/teriock/assets/equipment/${item.system.equipmentType?.toLowerCase().replace(/\s+/g, '-')}.svg`;
   }
