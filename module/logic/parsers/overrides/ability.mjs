@@ -40,6 +40,17 @@ const abilitiesMap = {
   ],
   "Cannot Swim": [
     { key: 'system.speedAdjustments.swim', mode: 6, value: 0, priority: 30 }
+  ],
+  "Vicious Claws": [
+    { key: 'system.damage.hand', mode: 4, value: 8, priority: 25 }
+  ],
+  "Vicious Bite": [
+    { key: 'system.damage.mouth', mode: 4, value: 8, priority: 25 }
+  ],
+  "Shield Bash": [
+    { key: 'system.damage.bucklerShield', mode: 4, value: 4, priority: 20 },
+    { key: 'system.damage.largeShield', mode: 4, value: 6, priority: 20 },
+    { key: 'system.damage.towerShield', mode: 4, value: 8, priority: 20 }
   ]
 };
 
@@ -131,7 +142,7 @@ const dynamicAbilities = [
         priority: 20
       }];
     }
-  }
+  },
 ];
 
 export default function abilityOverrides(ability, changes) {

@@ -8,6 +8,15 @@ const equipmentMap = {
   'Mouth': {
     damage: '1d@mouth',
   },
+  'Buckler Shield': {
+    damage: '1d@bshield',
+  },
+  'Large Shield': {
+    damage: '1d@lshield',
+  },
+  'Tower Shield': {
+    damage: '1d@tshield',
+  },
 }
 
 export default function equipmentOverrides(equipment, parameters) {

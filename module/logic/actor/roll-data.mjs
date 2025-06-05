@@ -32,6 +32,9 @@ function basicData(actor, data) {
     hand: system.damage.hand,
     foot: system.damage.foot,
     mouth: system.damage.mouth,
+    bshield: system.damage.bucklerShield,
+    lshield: system.damage.largeShield,
+    tshield: system.damage.towerShield,
   });
 }
 
