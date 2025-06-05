@@ -29,6 +29,9 @@ function basicData(actor, data) {
     mpMax: system.mp.max,
     tempHp: system.hp.temp,
     tempMp: system.mp.temp,
+    hand: system.damage.hand,
+    foot: system.damage.foot,
+    mouth: system.damage.mouth,
   });
 }
 

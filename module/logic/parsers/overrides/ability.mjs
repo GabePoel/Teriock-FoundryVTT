@@ -92,6 +92,45 @@ const dynamicAbilities = [
         priority: 20
       }];
     }
+  },
+  {
+    prefix: "Offensive Martial Arts",
+    getChanges: ability => {
+      let amount = ability.parent?.system?.proficient ? 6 : 4;
+      amount = ability.parent?.system?.fluent ? 8 : amount;
+      return [{
+        key: 'system.damage.hand',
+        mode: 4,
+        value: amount,
+        priority: 20
+      }];
+    }
+  },
+  {
+    prefix: "Hind Claws",
+    getChanges: ability => {
+      let amount = ability.parent?.system?.proficient ? 6 : 4;
+      amount = ability.parent?.system?.fluent ? 8 : amount;
+      return [{
+        key: 'system.damage.hand',
+        mode: 4,
+        value: amount,
+        priority: 20
+      }];
+    }
+  },
+  {
+    prefix: "Offensive Bite",
+    getChanges: ability => {
+      let amount = ability.parent?.system?.proficient ? 6 : 4;
+      amount = ability.parent?.system?.fluent ? 8 : amount;
+      return [{
+        key: 'system.damage.mouth',
+        mode: 4,
+        value: amount,
+        priority: 20
+      }];
+    }
   }
 ];
 

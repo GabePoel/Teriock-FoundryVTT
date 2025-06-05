@@ -1,6 +1,7 @@
 import { cleanValue } from "../../../helpers/clean.mjs";
 import { createProperty } from "../../../helpers/create-effects.mjs";
 import { toCamelCaseList } from "../../../helpers/utils.mjs";
+import equipmentOverrides from "../overrides/equipment.mjs";
 
 export default function parseEquipment(rawHTML, item) {
 
@@ -83,6 +84,7 @@ export default function parseEquipment(rawHTML, item) {
 
   parameters.editable = false;
 
+  equipmentOverrides(item, parameters);
 
   const oldImg = item.img;
   let newImg = oldImg;

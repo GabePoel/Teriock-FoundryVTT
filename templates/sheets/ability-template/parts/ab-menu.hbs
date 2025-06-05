@@ -571,61 +571,53 @@
         {{/if}}
       </div>
     </div>
-    <section class="tab changes active">
-      <header>
-        <div class="key">{{localize "EFFECT.ChangeKey"}}</div>
-        <div class="mode">{{localize "EFFECT.ChangeMode"}}</div>
-        <div class="value">{{localize "EFFECT.ChangeValue"}}</div>
-        <div class="priority">{{localize "EFFECT.ChangePriority"}}</div>
-        <div class="controls"><a data-action="addChange"><i class="fa-regular fa-square-plus"></i></a></div>
-      </header>
-      <ol class="scrollable" data-changes>
-        {{#each source.changes as |change i|}}
-          {{#with ../fields.changes.element.fields as |changeFields|}}
-            <li data-index="{{i}}">
-              <div class="key">
-                {{formInput changeFields.key
-                  name=(concat "changes." i ".key")
-                  value=change.key
-                  disabled=(not ../editable)
-                }}
-              </div>
-              <div class="mode">
-                {{formInput changeFields.mode
-                  name=(concat "changes." i ".mode")
-                  value=change.mode
-                  choices=@root.modes
-                  disabled=(not ../editable)
-                }}
-              </div>
-              <div class="value">
-                {{formInput
-                  changeFields.value
-                  name=(concat "changes." i ".value")
-                  value=change.value
-                  disabled=(not ../editable)
-                }}
-              </div>
-              <div class="priority">
-                {{formInput
-                  changeFields.priority
-                  name=(concat "changes." i ".priority")
-                  value=change.priority
-                  placeholder=(lookup ../../priorities change.mode)
-                  disabled=(not ../editable)
-                }}
-              </div>
-              <div class="controls">
-                <a data-action="deleteChange"
-                  {{#if (not ../editable)}}
-                    disabled="true"
-                  {{/if}}
-                ><i class="fa-solid fa-trash"></i></a>
-              </div>
-            </li>
-          {{/with}}
-        {{/each}}
-      </ol>
-    </section>
+    {{> "systems/teriock/templates/common/changes.hbs"}}
+    {{!-- <ol class="scrollable" data-changes>
+      {{#each source.changes as |change i|}}
+        {{#with ../fields.changes.element.fields as |changeFields|}}
+          <li data-index="{{i}}">
+            <div class="key">
+              {{formInput changeFields.key
+                name=(concat "changes." i ".key")
+                value=change.key
+                disabled=(not ../editable)
+              }}
+            </div>
+            <div class="mode">
+              {{formInput changeFields.mode
+                name=(concat "changes." i ".mode")
+                value=change.mode
+                choices=@root.modes
+                disabled=(not ../editable)
+              }}
+            </div>
+            <div class="value">
+              {{formInput
+                changeFields.value
+                name=(concat "changes." i ".value")
+                value=change.value
+                disabled=(not ../editable)
+              }}
+            </div>
+            <div class="priority">
+              {{formInput
+                changeFields.priority
+                name=(concat "changes." i ".priority")
+                value=change.priority
+                placeholder=(lookup ../../priorities change.mode)
+                disabled=(not ../editable)
+              }}
+            </div>
+            <div class="controls">
+              <a data-action="deleteChange"
+                {{#if (not ../editable)}}
+                  disabled="true"
+                {{/if}}
+              ><i class="fa-solid fa-trash"></i></a>
+            </div>
+          </li>
+        {{/with}}
+      {{/each}}
+    </ol> --}}
   </div>
 </div>

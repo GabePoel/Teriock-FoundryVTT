@@ -4,6 +4,7 @@ export default async function registerTemplates () {
   return foundry.applications.handlebars.loadTemplates([
     'systems/teriock/templates/chat/harm.hbs',
     'systems/teriock/templates/chat/roll.hbs',
+    'systems/teriock/templates/common/changes.hbs',
     'systems/teriock/templates/common/effects.hbs',
     'systems/teriock/templates/common/header.hbs',
     'systems/teriock/templates/common/image.hbs',

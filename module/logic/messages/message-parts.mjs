@@ -63,6 +63,7 @@ export function messageHeader(parent, image, text, fontClass = 'tfont') {
   const imageContainer = createElement('div', {
     className: 'tmessage-header-image-container timage'
   }, headerImage);
+  imageContainer.setAttribute('data-tooltip', 'Open Image');
   imageContainer.setAttribute('data-src', image);
   const headerText = createElement('div', {
     className: `tmessage-header-text ${fontClass}`,
@@ -114,10 +115,12 @@ function addEmbeddedBlock(entities, blocks, name, typeKey, iconFallback = 'hasht
       ? `&nbsp;(${quantity}${maxQuantity ? `/${maxQuantity}` : ''})`
       : '';
 
+    const type = typeKey.charAt(0).toUpperCase() + typeKey.slice(1);
+
     return `<li class="tmessage-embedded-li">
       <span class="tmes-emb-li-icon" style="color: ${color};">
         <i class="fa-solid fa-${icon} fa-fw"></i>
-      </span><a data-action="open" data-uuid="${uuid}" data-tooltip="Open">${name}</a>${suffix}
+      </span><a data-action="open" data-uuid="${uuid}" data-tooltip="Open ${type}">${name}</a>${suffix}
     </li>`;
   }).join('');
 
