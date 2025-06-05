@@ -3,9 +3,10 @@
   "version": "2.0.0",
   "description": "CSS compiler for the Teriock system. Based on the systemless one by Asacolips.",
   "scripts": {
-    "build": "sass style/teriock.scss css/teriock.css --style=expanded",
-    "watch": "sass style/teriock.scss css/teriock.css --style=expanded --source-map --watch",
-    "createSymlinks": "node ./tools/create-symlinks.mjs"
+    "build": "sass style/teriock.scss css/teriock.css --style=expanded && node scripts/fetch-content.mjs && node scripts/update-templates.mjs && node scripts/update-options.mjs",
+    "fetch": "node scripts/fetch-content.mjs",
+    "style": "sass style/teriock.scss css/teriock.css --style=expanded",
+    "update": "node scripts/update-templates.mjs && node scripts/update-options.mjs"
   },
   "browserslist": [
     "last 3 versions"
