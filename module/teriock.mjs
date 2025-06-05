@@ -1,28 +1,25 @@
+import TERIOCK from './helpers/config.mjs';
+import registerHandlebarsHelpers from './helpers/startup/register-handlebars.mjs';
+import registerHooks from './helpers/startup/register-hooks.mjs';
+import registerTemplates from './helpers/startup/register-templates.mjs';
 import TeriockActor from './documents/actor.mjs';
-import TeriockItem from './documents/item.mjs';
 import TeriockEffect from './documents/effect.mjs';
-import TeriockTokenDocument from './documents/token.mjs';
-import { TeriockCharacterSheet } from './sheets/character-sheet.mjs';
+import TeriockHarmRoll from './documents/harm.mjs';
+import TeriockItem from './documents/item.mjs';
+import TeriockRoll from './documents/roll.mjs'
+import TeriockToken from './documents/token.mjs';
 import { TeriockAbilitySheet } from './sheets/ability-sheet.mjs';
-import { TeriockResourceSheet } from './sheets/resource-sheet.mjs';
+import { TeriockCharacterSheet } from './sheets/character-sheet.mjs';
+import { TeriockEffectSheet } from './sheets/effect-sheet.mjs';
 import { TeriockEquipmentSheet } from './sheets/equipment-sheet.mjs';
-import { TeriockRankSheet } from './sheets/rank-sheet.mjs';
 import { TeriockFluencySheet } from './sheets/fluency-sheet.mjs';
 import { TeriockPowerSheet } from './sheets/power-sheet.mjs';
 import { TeriockPropertySheet } from './sheets/property-sheet.mjs';
-import { TeriockEffectSheet } from './sheets/effect-sheet.mjs';
-import { TeriockRoll } from './dice/roll.mjs'
-import { TeriockHarmRoll } from './dice/harm.mjs';
-import { TeriockImage } from './helpers/image.mjs';
-import { preloadHandlebarsTemplates } from './helpers/templates.mjs';
-import { registerHandlebarsHelpers } from './helpers/register-handlebars.mjs';
-import { TERIOCK } from './helpers/config.mjs';
-import { conditions } from './content/conditions.mjs'
+import { TeriockRankSheet } from './sheets/rank-sheet.mjs';
+import { TeriockResourceSheet } from './sheets/resource-sheet.mjs';
 import { teriockVisionModes } from './perception/vision-modes.mjs';
 import { teriockDetectionModes } from './perception/detection-modes.mjs';
-import { dispatch } from './commands/dispatch.mjs';
-const { ux } = foundry.applications;
-const { Actors, Items } = foundry.documents.collections;
+import { conditions } from './content/conditions.mjs'
 const { ActorSheet, ItemSheet } = foundry.appv1.sheets;
 const { DocumentSheetConfig } = foundry.applications.apps;
 
@@ -68,208 +65,100 @@ Hooks.once('init', function () {
     ...teriockDetectionModes,
   };
 
+  // Register custom documents
   CONFIG.Dice.rolls.push(TeriockRoll);
   CONFIG.Dice.rolls.push(TeriockHarmRoll);
   CONFIG.Actor.documentClass = TeriockActor;
   CONFIG.Item.documentClass = TeriockItem;
   CONFIG.ActiveEffect.documentClass = TeriockEffect;
-  CONFIG.Token.documentClass = TeriockTokenDocument;
+  CONFIG.Token.documentClass = TeriockToken;
 
-  Actors.unregisterSheet('core', ActorSheet);
-  Actors.registerSheet('teriock', TeriockCharacterSheet, {
-    makeDefault: true,
-    label: 'Character',
-    types: ['character'],
-  });
+  // Legacy transferral
+  CONFIG.ActiveEffect.legacyTransferral = false;
 
-  Items.unregisterSheet('core', ItemSheet);
-  Items.registerSheet('teriock', TeriockEquipmentSheet, {
-    makeDefault: true,
-    label: 'Equipment',
-    types: ['equipment'],
-  });
-  Items.registerSheet('teriock', TeriockRankSheet, {
-    makeDefault: true,
-    label: 'Rank',
-    types: ['rank'],
-  });
-  Items.registerSheet('teriock', TeriockPowerSheet, {
-    makeDefault: true,
-    label: 'Power',
-    types: ['power'],
-  });
+  // Unregister V1 sheets
+  DocumentSheetConfig.unregisterSheet(TeriockActor, 'teriock', ActorSheet);
+  DocumentSheetConfig.unregisterSheet(TeriockItem, 'teriock', ItemSheet);
 
-  DocumentSheetConfig.registerSheet(TeriockEffect, 'teriock', TeriockAbilitySheet, {
-    makeDefault: true,
-    label: 'Ability',
-    types: ['ability']
-  });
-  DocumentSheetConfig.registerSheet(TeriockEffect, 'teriock', TeriockFluencySheet, {
-    makeDefault: true,
-    label: 'Fluency',
-    types: ['fluency']
-  });
-  DocumentSheetConfig.registerSheet(TeriockEffect, 'teriock', TeriockResourceSheet, {
-    makeDefault: true,
-    label: 'Resource',
-    types: ['resource']
-  });
-  DocumentSheetConfig.registerSheet(TeriockEffect, 'teriock', TeriockPropertySheet, {
-    makeDefault: true,
-    label: 'Property',
-    types: ['property']
-  });
-  DocumentSheetConfig.registerSheet(TeriockEffect, 'teriock', TeriockEffectSheet, {
-    makeDefault: false,
-    label: 'Effect',
-    types: ['effect']
-  });
+  // Register custom sheets
+  const sheets = [
+    // Actors
+    {
+      cls: TeriockCharacterSheet,
+      label: 'Character',
+      types: ['character'],
+      doc: TeriockActor
+    },
+    // Items
+    {
+      cls: TeriockEquipmentSheet,
+      label: 'Equipment',
+      types: ['equipment'],
+      doc: TeriockItem
+    },
+    {
+      cls: TeriockRankSheet,
+      label: 'Rank',
+      types: ['rank'],
+      doc: TeriockItem
+    },
+    {
+      cls: TeriockPowerSheet,
+      label: 'Power',
+      types: ['power'],
+      doc: TeriockItem
+    },
+    // Effects
+    {
+      cls: TeriockAbilitySheet,
+      label: 'Ability',
+      types: ['ability'],
+      doc: TeriockEffect
+    },
+    {
+      cls: TeriockFluencySheet,
+      label: 'Fluency',
+      types: ['fluency'],
+      doc: TeriockEffect
+    },
+    {
+      cls: TeriockResourceSheet,
+      label: 'Resource',
+      types: ['resource'],
+      doc: TeriockEffect
+    },
+    {
+      cls: TeriockPropertySheet,
+      label: 'Property',
+      types: ['property'],
+      doc: TeriockEffect
+    },
+    {
+      cls: TeriockEffectSheet,
+      label: 'Effect',
+      types: ['effect'],
+      doc: TeriockEffect,
+      makeDefault: false
+    }
+  ];
+  sheets.forEach(({ cls, label, types, doc, makeDefault = true }) =>
+    DocumentSheetConfig.registerSheet(doc, 'teriock', cls, {
+      makeDefault, label, types
+    })
+  );
 
   game.teriock = {
     TeriockActor,
     TeriockItem,
     TeriockEffect,
+    TeriockToken,
+    TeriockRoll,
+    TeriockHarmRoll,
   };
 
-  CONFIG.Actor.documentClass = TeriockActor;
-  CONFIG.Item.documentClass = TeriockItem;
-
-  CONFIG.ActiveEffect.legacyTransferral = false;
-
-  return preloadHandlebarsTemplates();
+  // Register custom handlebars templates
+  return registerTemplates();
 });
 
-
-Hooks.on('updateItem', async (document, updateData, options, userId) => {
-  await document.getActor()?.postUpdate();
-});
-
-Hooks.on('updateActor', async (document, changed, options, userId) => {
-  await document.postUpdate();
-});
-
-Hooks.on('combatTurnChange', async (combat, prior, current) => {
-  const combatants = combat.combatants;
-  for (const combatant of combatants) {
-    const actor = combatant.actor;
-    if (actor) {
-      await actor.update({
-        'system.attackPenalty': 0,
-      });
-    }
-  }
-});
-
-Hooks.on('chatMessage', (chatLog, message, chatData) => {
-  const sender = game.users.get(chatData.user);
-  if (message.startsWith('/')) return dispatch(message, chatData, sender);
-});
-
-Hooks.on('renderChatMessageHTML', (message, html, context) => {
-  const imageContextMenuOptions = [
-    {
-      name: 'Open Image',
-      icon: '<i class="fa-solid fa-image"></i>',
-      callback: async (target) => {
-        const img = target.getAttribute('data-src');
-        const image = new TeriockImage(img);
-        image.render(true);
-      },
-      condition: (target) => {
-        const img = target.getAttribute('data-src');
-        return img && img.length > 0;
-      }
-    }
-  ]
-  new ux.ContextMenu(html, '.timage', imageContextMenuOptions, {
-    eventName: 'contextmenu',
-    jQuery: false,
-    fixed: true,
-  });
-  const buttons = html.querySelectorAll('.harm-button');
-  buttons.forEach(button => {
-    if (button) {
-      button.addEventListener('click', async (event) => {
-        const data = event.currentTarget.dataset;
-        const amount = parseInt(data.amount);
-        const type = data.type || 'damage';
-        const targets = game.user.targets;
-
-        for (const target of targets) {
-          const actor = target.actor;
-          if (!actor) continue;
-          if (type === 'damage') {
-            await actor.takeDamage(amount);
-          } else if (type === 'drain') {
-            await actor.takeDrain(amount);
-          } else if (type === 'wither') {
-            await actor.takeWither(amount);
-          }
-        }
-      });
-    }
-  });
-  const openTags = html.querySelectorAll('[data-action="open"]');
-  openTags.forEach(tag => {
-    tag.addEventListener('click', async (event) => {
-      event.preventDefault();
-      const uuid = tag.getAttribute('data-uuid');
-      if (!uuid) return;
-      const doc = await fromUuid(uuid);
-      if (doc && typeof doc.sheet?.render === 'function') {
-        doc.sheet.render(true);
-      }
-    });
-  });
-});
-
-Hooks.on("hotbarDrop", (bar, data, slot) => {
-  fromUuid(data.uuid).then(async item => {
-    if (!item || typeof item.roll !== "function") return;
-    const id = item._id;
-
-    const macroName = `Roll ${item.name}`;
-    const command = `// ID: ${id}
-const item = await fromUuid("${item.uuid}");
-if (!item) return ui.notifications.warn("Item not found: ${item.name}");
-
-const options = {
-  advantage: window.event?.altKey,
-  disadvantage: window.event?.shiftKey,
-  twoHanded: window.event?.ctrlKey,
-};
-
-await item.roll(options);
-`;
-    let macroFolder = game.folders.find(f => f.name === "Player Macros" && f.type === "Macro");
-    if (!macroFolder) {
-      macroFolder = await Folder.create({
-        name: "Player Macros",
-        type: "Macro",
-      });
-    }
-    let macro = game.macros.find(m => m.name === macroName && m.command?.startsWith(`// ID: ${id}`));
-    if (!macro) {
-      macro = await Macro.create({
-        name: macroName,
-        type: "script",
-        img: item.img,
-        command,
-        flags: { "teriock": { itemMacro: true } },
-        folder: macroFolder.id,
-      }).catch(err => {
-        console.error(`Failed to create macro: ${err}`);
-        ui.notifications.error(`Failed to create macro: ${err.message}`);
-      });
-      if (macro) {
-        game.user.assignHotbarMacro(macro, slot);
-      }
-    } else {
-      game.user.assignHotbarMacro(macro, slot);
-    }
-  });
-
-  return false;
-});
-
+registerHooks();
 registerHandlebarsHelpers();

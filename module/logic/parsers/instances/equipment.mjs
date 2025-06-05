@@ -1,6 +1,6 @@
-import { cleanFeet, cleanValue } from "../../helpers/clean.mjs";
-import { toCamelCaseList } from "../../helpers/utils.mjs";
-import { createProperty } from "../../helpers/create-effects.mjs";
+import { cleanValue } from "../../../helpers/clean.mjs";
+import { toCamelCaseList } from "../../../helpers/utils.mjs";
+import { createProperty } from "../../../helpers/create-effects.mjs";
 
 export default function parseEquipment(rawHTML, item) {
 
@@ -49,15 +49,6 @@ export default function parseEquipment(rawHTML, item) {
   // Parse arrays
   parameters.equipmentClasses = getTextAll('.equipment-class');
   parameters.properties = getTextAll('.property');
-  // parameters.properties = [];
-
-  // Parse full range and add property if present
-  // const fullRange = getText('.full-range');
-  // if (fullRange?.includes('(')) {
-  //   const [rangeProperty, range] = fullRange.split('(');
-  //   parameters.range = cleanFeet(range.split(')')[0].trim());
-  //   parameters.properties.push(rangeProperty.trim());
-  // }
 
   // Add piercing property if present
   const piercing = getValue('.piercing');

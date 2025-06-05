@@ -2,7 +2,7 @@ const { ux, api } = foundry.applications;
 const { utils } = foundry;
 import { createAbility, createResource, createProperty, createFluency } from "../helpers/create-effects.mjs";
 import connectEmbedded from "./connect-embedded.mjs";
-import { TeriockImage } from "../helpers/image.mjs";
+import { TeriockImageSheet } from "../sheets/image-sheet.mjs";
 
 export const TeriockSheet = (Base) =>
   class TeriockSheet extends Base {
@@ -57,7 +57,7 @@ export const TeriockSheet = (Base) =>
           icon: '<i class="fa-solid fa-image"></i>',
           callback: async (target) => {
             const img = target.getAttribute('data-src');
-            const image = new TeriockImage(img);
+            const image = new TeriockImageSheet(img);
             image.render(true);
           },
           condition: (target) => {

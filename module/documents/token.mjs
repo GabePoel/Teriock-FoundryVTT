@@ -1,6 +1,6 @@
 const { TokenDocument } = foundry.documents;
 
-export default class TeriockTokenDocument extends TokenDocument {
+export default class TeriockToken extends TokenDocument {
 
   /** @override */
   _prepareDetectionModes() {

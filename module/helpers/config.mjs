@@ -18,7 +18,7 @@ import { properties as propertiesContent } from "../content/properties.mjs";
 import { materialProperties } from "../content/material-properties.mjs";
 import { magicalProperties } from "../content/magical-properties.mjs";
 
-export const TERIOCK = {
+const TERIOCK = {
   icons: icons,
   fonts: fonts,
   iconStyles: iconStyles,
@@ -47,3 +47,5 @@ export const TERIOCK = {
     magicalProperties: magicalProperties,
   },
 }
+
+export default TERIOCK;

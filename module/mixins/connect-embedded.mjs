@@ -1,5 +1,5 @@
 import { makeIcon } from "../helpers/utils.mjs";
-import { TeriockImage } from "../helpers/image.mjs";
+import { TeriockImageSheet } from "../sheets/image-sheet.mjs";
 const { ux } = foundry.applications;
 
 export default function connectEmbedded(document, element, editable = true) {
@@ -159,7 +159,7 @@ export default function connectEmbedded(document, element, editable = true) {
             callback: async (target) => {
               const img = target.getAttribute('data-img');
               if (img && img.length > 0) {
-                const image = new TeriockImage(img);
+                const image = new TeriockImageSheet(img);
                 image.render(true);
               }
             },

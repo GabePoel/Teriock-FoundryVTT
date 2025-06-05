@@ -1,5 +1,5 @@
 import TeriockCommand from "../command.mjs";
-import { TeriockRoll } from "../../dice/roll.mjs";
+import TeriockRoll from "../../documents/roll.mjs";
 
 export const wither = new TeriockCommand(
   'wither',

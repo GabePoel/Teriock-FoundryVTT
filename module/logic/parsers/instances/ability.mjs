@@ -1,5 +1,5 @@
-import abilityOverrides from "../ability/ability-overrides.mjs";
-import { cleanFeet } from "../../helpers/clean.mjs";
+import abilityOverrides from "../../ability/ability-overrides.mjs";
+import { cleanFeet } from "../../../helpers/clean.mjs";
 
 export default function parseAbility(rawHTML, ability) {
   const parser = new DOMParser();

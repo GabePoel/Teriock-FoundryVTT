@@ -1,4 +1,4 @@
-import { addAbilitiesBlock } from "./message-parts.mjs";
+import { addAbilitiesBlock } from "../message-parts.mjs";
 
 export function buildRankMessage(rank) {
   const ref = CONFIG.TERIOCK.rankOptions;

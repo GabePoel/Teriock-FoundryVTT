@@ -4,7 +4,7 @@
  * @class
  * @extends Roll
  */
-export class TeriockRoll extends Roll {
+export default class TeriockRoll extends Roll {
   static CHAT_TEMPLATE = 'systems/teriock/templates/chat/roll.hbs';
 
   /** @override */

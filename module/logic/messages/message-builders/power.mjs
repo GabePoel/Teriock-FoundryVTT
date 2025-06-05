@@ -1,4 +1,4 @@
-import { addAbilitiesBlock } from "./message-parts.mjs";
+import { addAbilitiesBlock } from "../message-parts.mjs";
 
 export function buildPowerMessage(power) {
   const ref = CONFIG.TERIOCK.powerOptions;

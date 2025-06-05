@@ -1,10 +1,10 @@
 import { messageBlock, messageBar, messageBox, messageWrapper, messageHeader } from "./message-parts.mjs";
-import { buildAbilityMessage } from "./build-ability-message.mjs";
-import { buildEquipmentMessage, buildSecretEquipmentMessage } from "./build-equipment-message.mjs";
-import { buildPowerMessage } from "./build-power-message.mjs";
-import { buildRankMessage } from "./build-rank-message.mjs";
-import { buildFluencyMessage } from "./build-fluency-message.mjs";
-import { buildResourceMessage } from "./build-resource-message.mjs";
+import { buildAbilityMessage } from "./message-builders/ability.mjs";
+import { buildEquipmentMessage, buildSecretEquipmentMessage } from "./message-builders/equipment.mjs";
+import { buildPowerMessage } from "./message-builders/power.mjs";
+import { buildRankMessage } from "./message-builders/rank.mjs";
+import { buildFluencyMessage } from "./message-builders/fluency.mjs";
+import { buildResourceMessage } from "./message-builders/resource.mjs";
 
 export function buildMessage(document, options = {}) {
   const secret = options.secret || false;

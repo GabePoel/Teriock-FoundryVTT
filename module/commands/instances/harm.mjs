@@ -1,5 +1,5 @@
 import TeriockCommand from "../command.mjs";
-import { TeriockHarmRoll } from "../../dice/harm.mjs";
+import TeriockHarmRoll from "../../documents/harm.mjs";
 
 export const harm = new TeriockCommand(
   'harm',

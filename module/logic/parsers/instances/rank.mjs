@@ -1,4 +1,4 @@
-import { createAbility } from "../../helpers/create-effects.mjs";
+import { createAbility } from "../../../helpers/create-effects.mjs";
 
 const ARCHETYPE_STATS = {
   mage:   { hitDie: 'd8',  manaDie: 'd12', hp: 5, mp: 7 },

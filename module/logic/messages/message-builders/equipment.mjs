@@ -1,4 +1,4 @@
-import { addAbilitiesBlock, addPropertiesBlock, addResourcesBlock } from "./message-parts.mjs";
+import { addAbilitiesBlock, addPropertiesBlock, addResourcesBlock } from "../message-parts.mjs";
 
 export function buildEquipmentMessage(equipment) {
   const ref = CONFIG.TERIOCK.equipmentOptions;

@@ -1,6 +1,6 @@
 const { api } = foundry.applications;
 
-export class TeriockImage extends api.HandlebarsApplicationMixin(api.ApplicationV2) {
+export class TeriockImageSheet extends api.HandlebarsApplicationMixin(api.ApplicationV2) {
   static DEFAULT_OPTIONS = {
     classes: ['teriock', 'image-preview'],
     window: {

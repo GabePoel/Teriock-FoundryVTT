@@ -1,4 +1,4 @@
-export function registerHandlebarsHelpers() {
+export default function registerHandlebarsHelpers() {
 
 
   // String Helpers

@@ -1,4 +1,4 @@
-import { TeriockHarmRoll } from "../../dice/harm.mjs";
+import TeriockHarmRoll from "../../../documents/harm.mjs";
 
 export async function rollEquipment(equipment, options) {
   await use(equipment, options);

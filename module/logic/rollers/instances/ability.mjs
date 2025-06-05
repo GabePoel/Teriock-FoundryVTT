@@ -1,4 +1,4 @@
-import { TeriockRoll } from "../../dice/roll.mjs";
+import TeriockRoll from "../../../documents/roll.mjs";
 const { DialogV2 } = foundry.applications.api
 
 export async function rollAbility(ability, options) {

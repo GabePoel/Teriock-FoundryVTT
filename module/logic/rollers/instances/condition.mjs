@@ -1,5 +1,5 @@
 const { DialogV2 } = foundry.applications.api;
-import { TeriockRoll } from "../../dice/roll.mjs";
+import TeriockRoll from "../../../documents/roll.mjs";
 
 export default async function rollCondition(actor, condition, options) {
   let skip = options?.skip || false;

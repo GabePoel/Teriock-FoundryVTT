@@ -2,8 +2,8 @@ const { DialogV2 } = foundry.applications.api;
 import { TeriockDocument } from "../mixins/document-mixin.mjs";
 import { fetchCategoryMembers } from "../helpers/wiki.mjs";
 import { createAbility } from "../helpers/create-effects.mjs";
-import parseEquipment from "../logic/parsers/parse-equipment.mjs";
-import parseRank from "../logic/parsers/parse-rank.mjs";
+import parseEquipment from "../logic/parsers/instances/equipment.mjs";
+import parseRank from "../logic/parsers/instances/rank.mjs";
 
 /**
  * @extends {Item}
