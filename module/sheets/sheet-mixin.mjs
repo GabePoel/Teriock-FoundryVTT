@@ -17,6 +17,7 @@ export const TeriockSheet = (Base) =>
         chatDoc: this._chatDoc,
         chatThis: this._chatThis,
         rollThis: this._rollThis,
+        reloadThis: this._reloadThis,
         toggleLockThis: this._toggleLockThis,
         wikiPullThis: this._wikiPullThis,
         wikiOpenThis: this._wikiOpenThis,
@@ -240,6 +241,11 @@ export const TeriockSheet = (Base) =>
       if (event?.altKey) options.advantage = true;
       else if (event?.shiftKey) options.disadvantage = true;
       this.document.roll(options);
+    }
+
+    static async _reloadThis(_, __) {
+      await this.document.update({});
+      await this.document.sheet.render();
     }
 
     static async _editImage(_, target) {

@@ -85,7 +85,7 @@ export class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(TeriockE
     if (!this.editable) return;
 
     const doc = this.document;
-    this._connect('.reload-button', 'click', () => doc.wikiPull());
+    this._connect('.import-button', 'click', () => doc.wikiPull());
     this._connect('.open-button', 'click', () => openWikiPage(`${doc.system.wikiNamespace}:${doc.name}`));
     this._connect('.disabled-box', 'click', () => doc.toggleForceDisabled());
 

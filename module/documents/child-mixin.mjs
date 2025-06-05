@@ -1,8 +1,20 @@
 import { buildMessage } from "../logic/messages/build.mjs";
+import { evaluateSync } from "../helpers/utils.mjs";
 import { fetchWikiPageHTML, openWikiPage } from "../helpers/wiki.mjs";
 import { makeRoll } from "../logic/rollers/roller.mjs";
 
 export const TeriockDocument = (Base) => class TeriockDocument extends Base {
+
+  /** @override */
+  prepareDerivedData() {
+    super.prepareDerivedData();
+    if (this.system?.consumable) {
+      if (this.system?.maxQuantityRaw) {
+        this.system.maxQuantity = evaluateSync(this.system.maxQuantityRaw, this.getActor().getRollData());
+      }
+      this.system.quantity = Math.min(this.system.maxQuantity || 0, this.system.quantity || 0);
+    }
+  }
 
   async parse(rawHTML) {
     return {

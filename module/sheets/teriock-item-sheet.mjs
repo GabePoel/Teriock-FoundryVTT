@@ -81,10 +81,10 @@ export class TeriockItemSheet extends TeriockSheet(sheets.ItemSheet) {
   }
 
   _bindStaticEvents() {
-    const reloadBtn = this.element.querySelector('.reload-button');
+    const importBtn = this.element.querySelector('.import-button');
     const chatBtn = this.element.querySelector('.chat-button');
 
-    reloadBtn?.addEventListener('contextmenu', (event) => {
+    importBtn?.addEventListener('contextmenu', (event) => {
       event.preventDefault();
       this.item._bulkWikiPull();
     });
