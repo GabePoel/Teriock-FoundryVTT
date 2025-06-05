@@ -12,19 +12,6 @@
   {{#if flavor}}
     <div class="teriock-flavor-text">{{flavor}}</div>
   {{/if}}
-  {{!-- UNCOMMENT IF MOVING INCANT HANDLING TO HANDLEBARS RATHER THAN MESSAGE BUILDER --}}
-  {{!-- {{#if isElderSorcery}}
-    <div class="es-incant">
-      <div class="es-intro">With the Elder Sorcery of
-        {{elderSorceryElements}}...
-      </div>
-      <div class="es-wording-container">
-        <div class="es-wording">
-          {{{elderSorceryIncant}}}
-        </div>
-      </div>
-    </div>
-  {{/if}} --}}
   <div class="teriock-dice-message">{{{message}}}</div>
   {{#if (eq formula "0")}}
   {{else}}
@@ -32,12 +19,12 @@
       <div class="dice-formula">{{formula}}</div>
       {{{tooltip}}}
       <h4
-        class="dice-total teriock-dice-total {{#if diceClass}}{{diceClass}}{{/if}} {{#if isResistance}}{{#if (geq total 10)}}success{{else}}failure{{/if}}{{/if}}"
-        {{#if (and diceTooltip (not isResistance))}}
+        class="dice-total teriock-dice-total {{#if diceClass}}{{diceClass}}{{/if}} {{#if (exists threshold)}}{{#if (geq total threshold)}}success{{else}}failure{{/if}}{{/if}}"
+        {{#if diceTooltip}}
           data-tooltip="{{diceTooltip}}"
         {{/if}}
-        {{#if isResistance}}
-          {{#if (geq total 10)}}
+        {{#if (exists threshold)}}
+          {{#if (geq total threshold)}}
             data-tooltip="Success"
           {{else}}
             data-tooltip="Failure"

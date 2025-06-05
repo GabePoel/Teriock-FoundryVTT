@@ -323,6 +323,25 @@ Hooks.on('chatMessage', (chatLog, message, chatData) => {
     }
     return false;
   }
+
+  if (message.startsWith('/endcon')) {
+    const chatOptionsRaw = message.split('/endcon')[1]?.trim() || '';
+    let advantage = false;
+    let disadvantage = false;
+    if (chatOptionsRaw.length > 0) {
+      const chatOptions = chatOptionsRaw.split(' ');
+      advantage = chatOptions.includes('advantage');
+      disadvantage = chatOptions.includes('disadvantage');
+    }
+    const options = {
+      advantage: advantage,
+      disadvantage: disadvantage,
+    }
+    for (const actor of actors) {
+      actor.endCondition(options);
+    }
+    return false;
+  }
     
 
   if (message.startsWith('/help')) {
@@ -369,6 +388,15 @@ Hooks.on('chatMessage', (chatLog, message, chatData) => {
             <ul>
               <li><code>advantage</code> - Roll with advantage.</li>
               <li><code>disadvantage</code> - Roll with disadvantage.</li>
+            </ul>
+          </div>
+          <div class="teriock-chat-help">
+            <code>/endcon [options]</code>
+            <div>All targeted tokens roll to end conditions.</div>
+            <div class="teriock-chat-help-options">Options:</div>
+            <ul>
+              <li><code>advantage</code> - Roll with 1d4.</li>
+              <li><code>disadvantage</code> - Roll with 2d4.</li>
             </ul>
           </div>
           <div class="teriock-chat-help">

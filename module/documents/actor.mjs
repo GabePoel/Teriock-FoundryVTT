@@ -161,11 +161,35 @@ export default class TeriockActor extends Actor {
       context: {
         isResistance: true,
         diceClass: 'resist',
+        threshold: 10,
       }
     });
     roll.toMessage({
       speaker: ChatMessage.getSpeaker({ actor: this }),
-      flavor: "Resistance Roll",
+      flavor: "Resistance Save",
+      type: CONST.CHAT_MESSAGE_TYPES.ROLL,
+      rollMode: game.settings.get("core", "rollMode"),
+    });
+  }
+
+  endCondition(options = {}) {
+    let rollFormula = "2d4";
+    if (options.advantage) {
+      rollFormula = "3d4";
+    } else if (options.disadvantage) {
+      rollFormula = "1d4";
+    }
+    rollFormula += 'kh1';
+    const rollData = this.getRollData();
+    const roll = new TeriockRoll(rollFormula, rollData, {
+      context: {
+        diceClass: 'condition',
+        threshold: 4,
+      }
+    });
+    roll.toMessage({
+      speaker: ChatMessage.getSpeaker({ actor: this }),
+      flavor: "Condition Ending Roll",
       type: CONST.CHAT_MESSAGE_TYPES.ROLL,
       rollMode: game.settings.get("core", "rollMode"),
     });

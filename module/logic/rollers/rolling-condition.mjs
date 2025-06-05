@@ -1,4 +1,5 @@
 const { DialogV2 } = foundry.applications.api;
+import { TeriockRoll } from "../../dice/roll.mjs";
 
 export default async function rollCondition(actor, condition, options) {
   let skip = options?.skip || false;
@@ -39,11 +40,16 @@ export default async function rollCondition(actor, condition, options) {
           remove = true;
         }
         if (!skip) {
-          const roll = new Roll(rollFormula, actor.getRollData(), {
-            flavor: `Rolling to Remove ${conditionName}`
+          const rollData = actor.getRollData();
+          const roll = new TeriockRoll(rollFormula, rollData, {
+            context: {
+              diceClass: 'condition',
+              threshold: 4,
+            }
           });
           await roll.toMessage({
             speaker: ChatMessage.getSpeaker({ actor }),
+            flavor: `${conditionName} Ending Roll`,
           })
           const total = roll.total;
           if (total === 4) {

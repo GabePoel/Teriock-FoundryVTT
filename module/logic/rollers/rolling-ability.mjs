@@ -159,6 +159,7 @@ async function use(ability) {
     context.diceClass = 'resist';
     context.diceTooltip = '';
     context.isResistance = true;
+    context.threshold = 10;
   }
   if (ability.system.elderSorcery) {
     context.elderSorceryElements = ability.system.elements;

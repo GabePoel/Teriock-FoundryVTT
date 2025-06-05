@@ -26,6 +26,7 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(Terioc
       hack: this._hack,
       attack: this._attack,
       resist: this._resist,
+      endCondition: this._endCondition,
     },
     form: {
       submitOnChange: true,
@@ -285,6 +286,15 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(Terioc
       disadvantage: event.shiftKey,
     }
     this.actor.resist(options);
+  }
+
+  static async _endCondition(event, target) {
+    event.stopPropagation();
+    const options = {
+      advantage: event.altKey,
+      disadvantage: event.shiftKey,
+    }
+    this.actor.endCondition(options);
   }
 
   /** Generalized filtering utility */
