@@ -16,8 +16,10 @@
   {{#if (eq formula "0")}}
   {{else}}
     <div class="dice-result" style="margin-top: 0.5em;">
-      <div class="dice-formula">{{formula}}</div>
-      {{{tooltip}}}
+      {{#if (not (eq (str formula) (str total)))}}
+        <div class="dice-formula">{{formula}}</div>
+        {{{tooltip}}}
+      {{/if}}
       <h4
         class="dice-total teriock-dice-total {{#if diceClass}}{{diceClass}}{{/if}} {{#if (exists threshold)}}{{#if (geq total threshold)}}success{{else}}failure{{/if}}{{/if}}"
         {{#if diceTooltip}}

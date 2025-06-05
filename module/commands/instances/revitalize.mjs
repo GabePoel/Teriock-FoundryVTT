@@ -1,0 +1,29 @@
+import TeriockCommand from "../command.mjs";
+import { TeriockRoll } from "../../dice/roll.mjs";
+
+export const revitalize = new TeriockCommand(
+  'revitalize',
+  'Roll revitalization and apply it to targeted tokens.',
+  async ({ args, options, chatData, actors }) => {
+    const formula = args.join(' ');
+    const roll = new TeriockRoll(formula, {
+      speaker: chatData.speaker,
+      advantage: options.advantage,
+      disadvantage: options.disadvantage,
+    });
+
+    await roll.toMessage({
+      user: chatData.user,
+      speaker: chatData.speaker,
+      flavor: 'Revitalize Roll',
+    });
+
+    for (const actor of actors) {
+      await actor.revitalize(roll.total);
+    }
+  },
+  {
+    category: 'support',
+    requiresTarget: true
+  }
+);

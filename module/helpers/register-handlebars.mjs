@@ -54,6 +54,14 @@ export function registerHandlebarsHelpers() {
     });
   });
 
+  Handlebars.registerHelper('str', val => {
+    let out = '';
+    if (!(val === undefined || val === null)) {
+      out = String(val).trim();
+    }
+    return out;
+  });
+
 
   // Existence & Array Helpers
 

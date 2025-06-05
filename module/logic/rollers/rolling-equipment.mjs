@@ -5,7 +5,6 @@ export async function rollEquipment(equipment, options) {
 }
 
 async function use(equipment, options) {
-  console.log(options);
   let message = await equipment.buildMessage();
   if (equipment.system.damage) {
     let rollFormula = equipment.system.damage;

@@ -20,6 +20,7 @@ import { TERIOCK } from './helpers/config.mjs';
 import { conditions } from './content/conditions.mjs'
 import { teriockVisionModes } from './perception/vision-modes.mjs';
 import { teriockDetectionModes } from './perception/detection-modes.mjs';
+import { dispatch } from './commands/dispatch.mjs';
 const { ux } = foundry.applications;
 const { Actors, Items } = foundry.documents.collections;
 const { ActorSheet, ItemSheet } = foundry.appv1.sheets;
@@ -161,266 +162,8 @@ Hooks.on('combatTurnChange', async (combat, prior, current) => {
 
 Hooks.on('chatMessage', (chatLog, message, chatData) => {
   const sender = game.users.get(chatData.user);
-  const targets = sender?.targets;
-  const actors = targets.map(target => target.actor);
-
-  if (message.startsWith('/harm')) {
-    const rollFormula = message.split('/harm')[1].trim();
-    (async () => {
-      const roll = new TeriockHarmRoll(rollFormula, { speaker: chatData.speaker });
-      await roll.toMessage({
-        user: chatData.user,
-        speaker: chatData.speaker,
-        flavor: `Harm Roll`,
-      });
-    })().catch(console.error);
-    return false;
-  }
-
-  if (message.startsWith('/damage')) {
-    const rollFormula = message.split('/damage')[1].trim();
-    (async () => {
-      const roll = new TeriockRoll(rollFormula, { speaker: chatData.speaker });
-      await roll.toMessage({
-        user: chatData.user,
-        speaker: chatData.speaker,
-        flavor: `Damage Roll`,
-      });
-      const total = roll.total;
-      for (const actor of actors) {
-        await actor.takeDamage(total);
-      }
-    })().catch(console.error);
-    return false;
-  }
-
-  if (message.startsWith('/drain')) {
-    const rollFormula = message.split('/drain')[1].trim();
-    (async () => {
-      const roll = new TeriockRoll(rollFormula, { speaker: chatData.speaker });
-      await roll.toMessage({
-        user: chatData.user,
-        speaker: chatData.speaker,
-        flavor: `Drain Roll`,
-      });
-      const total = roll.total;
-      for (const actor of actors) {
-        await actor.takeDrain(total);
-      }
-    })().catch(console.error);
-    return false;
-  }
-
-  if (message.startsWith('/wither')) {
-    const rollFormula = message.split('/wither')[1].trim();
-    (async () => {
-      const roll = new TeriockRoll(rollFormula, { speaker: chatData.speaker });
-      await roll.toMessage({
-        user: chatData.user,
-        speaker: chatData.speaker,
-        flavor: `Wither Roll`,
-      });
-      const total = roll.total;
-      for (const actor of actors) {
-        await actor.takeWither(total);
-      }
-    })().catch(console.error);
-    return false;
-  }
-
-  if (message.startsWith('/heal')) {
-    const rollFormula = message.split('/heal')[1].trim();
-    (async () => {
-      const roll = new TeriockRoll(rollFormula, { speaker: chatData.speaker });
-      await roll.toMessage({
-        user: chatData.user,
-        speaker: chatData.speaker,
-        flavor: `Heal Roll`,
-      });
-      const total = roll.total;
-      for (const actor of actors) {
-        await actor.heal(total);
-      }
-    })().catch(console.error);
-    return false;
-  }
-
-  if (message.startsWith('/revitalize')) {
-    const rollFormula = message.split('/revitalize')[1].trim();
-    (async () => {
-      const roll = new TeriockRoll(rollFormula, { speaker: chatData.speaker });
-      await roll.toMessage({
-        user: chatData.user,
-        speaker: chatData.speaker,
-        flavor: `Revitalize Roll`,
-      });
-      const total = roll.total;
-      for (const actor of actors) {
-        await actor.revitalize(total);
-      }
-    })().catch(console.error);
-    return false;
-  }
-
-  if (message.startsWith('/attack')) {
-    const chatOptionsRaw = message.split('/attack')[1].trim();
-    let advantage = false;
-    let disadvantage = false;
-    if (chatOptionsRaw.length > 0) {
-      const chatOptions = chatOptionsRaw.split(' ');
-      advantage = chatOptions.includes('advantage');
-      disadvantage = chatOptions.includes('disadvantage');
-    }
-    const options = {
-      advantage: advantage,
-      disadvantage: disadvantage,
-    }
-    for (const actor of actors) {
-      actor.useAbility('Basic Attack', options);
-    }
-    return false;
-  }
-
-  if (message.startsWith('/use')) {
-    const abilityName = message.split('/use')[1].trim();
-    if (!abilityName) {
-      ui.notifications.warn('Please specify an ability to use.');
-      return false;
-    }
-    const chatOptionsRaw = message.split('/use')[2]?.trim() || '';
-    let advantage = false;
-    let disadvantage = false;
-    if (chatOptionsRaw.length > 0) {
-      const chatOptions = chatOptionsRaw.split(' ');
-      advantage = chatOptions.includes('advantage');
-      disadvantage = chatOptions.includes('disadvantage');
-    }
-    const options = {
-      advantage: advantage,
-      disadvantage: disadvantage,
-    }
-    for (const actor of actors) {
-      actor.useAbility(abilityName, options);
-    }
-    return false;
-  }
-
-  if (message.startsWith('/resist')) {
-    const chatOptionsRaw = message.split('/resist')[1]?.trim() || '';
-    let advantage = false;
-    let disadvantage = false;
-    if (chatOptionsRaw.length > 0) {
-      const chatOptions = chatOptionsRaw.split(' ');
-      advantage = chatOptions.includes('advantage');
-      disadvantage = chatOptions.includes('disadvantage');
-    }
-    const options = {
-      advantage: advantage,
-      disadvantage: disadvantage,
-    }
-    for (const actor of actors) {
-      actor.resist(options);
-    }
-    return false;
-  }
-
-  if (message.startsWith('/endcon')) {
-    const chatOptionsRaw = message.split('/endcon')[1]?.trim() || '';
-    let advantage = false;
-    let disadvantage = false;
-    if (chatOptionsRaw.length > 0) {
-      const chatOptions = chatOptionsRaw.split(' ');
-      advantage = chatOptions.includes('advantage');
-      disadvantage = chatOptions.includes('disadvantage');
-    }
-    const options = {
-      advantage: advantage,
-      disadvantage: disadvantage,
-    }
-    for (const actor of actors) {
-      actor.endCondition(options);
-    }
-    return false;
-  }
-    
-
-  if (message.startsWith('/help')) {
-    const helpText = `
-      <div class="teriock">
-        <div class="teriock-chat-help-container">
-          <div class="teriock-chat-help">
-            <code>/harm [formula]</code>
-            <div>Roll an amount of damage, drain, or wither. Makes buttons that anyone can use to apply to targeted tokens.</div>
-          </div>
-          <div class="teriock-chat-help">
-            <code>/damage [formula]</code>
-            <div>Roll an amount of damage. Automatically applies to targeted tokens.</div>
-          </div>
-          <div class="teriock-chat-help">
-            <code>/drain [formula]</code>
-            <div>Roll an amount of drain. Automatically applies to targeted tokens.</div>
-          </div>
-          <div class="teriock-chat-help">
-            <code>/wither [formula]</code>
-            <div>Roll an amount of wither. Automatically applies to targeted tokens.</div>
-          </div>
-          <div class="teriock-chat-help">
-            <code>/heal [formula]</code>
-            <div>Roll an amount of healing. Automatically applies to targeted tokens.</div>
-          </div>
-          <div class="teriock-chat-help">
-            <code>/revitalize [formula]</code>
-            <div>Roll an amount of revitalization. Automatically applies to targeted tokens.</div>
-          </div>
-          <div class="teriock-chat-help">
-            <code>/attack [options]</code>
-            <div>All targeted tokens use the Basic Attack ability.</div>
-            <div class="teriock-chat-help-options">Options:</div>
-            <ul>
-              <li><code>advantage</code> - Roll with advantage.</li>
-              <li><code>disadvantage</code> - Roll with disadvantage.</li>
-            </ul>
-          </div>
-          <div class="teriock-chat-help">
-            <code>/resist [options]</code>
-            <div>All targeted tokens make a resistance save.</div>
-            <div class="teriock-chat-help-options">Options:</div>
-            <ul>
-              <li><code>advantage</code> - Roll with advantage.</li>
-              <li><code>disadvantage</code> - Roll with disadvantage.</li>
-            </ul>
-          </div>
-          <div class="teriock-chat-help">
-            <code>/endcon [options]</code>
-            <div>All targeted tokens roll to end conditions.</div>
-            <div class="teriock-chat-help-options">Options:</div>
-            <ul>
-              <li><code>advantage</code> - Roll with 1d4.</li>
-              <li><code>disadvantage</code> - Roll with 2d4.</li>
-            </ul>
-          </div>
-          <div class="teriock-chat-help">
-            <code>/use [ability name] [options]</code>
-            <div>All targeted tokens use an ability by name.</div>
-            <div class="teriock-chat-help-options">Options:</div>
-            <ul>
-              <li><code>advantage</code> - Roll with advantage.</li>
-              <li><code>disadvantage</code> - Roll with disadvantage.</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    `;
-    ChatMessage.create({
-      content: helpText,
-      whisper: [chatData.user],
-      title: 'Teriock Chat Commands',
-      flavor: 'Teriock Chat Commands',
-    });
-    return false;
-  }
+  if (message.startsWith('/')) return dispatch(message, chatData, sender);
 });
-
 
 Hooks.on('renderChatMessageHTML', (message, html, context) => {
   const imageContextMenuOptions = [
@@ -480,15 +223,6 @@ Hooks.on('renderChatMessageHTML', (message, html, context) => {
   });
 });
 
-// Hooks.on('applyTokenStatusEffect', async (token, statusId, active) => {
-//   // TODO: Fix bug where this hook only fires for the 'dead' condition
-//   const actor = token.actor;
-//   if (statusId === 'dead' && active) {
-//     actor.toggleStatusEffect('down', { active: true });
-//   }
-// });
-
-
 Hooks.on("hotbarDrop", (bar, data, slot) => {
   fromUuid(data.uuid).then(async item => {
     if (!item || typeof item.roll !== "function") return;
@@ -507,7 +241,6 @@ const options = {
 
 await item.roll(options);
 `;
-
     let macroFolder = game.folders.find(f => f.name === "Player Macros" && f.type === "Macro");
     if (!macroFolder) {
       macroFolder = await Folder.create({
@@ -538,6 +271,5 @@ await item.roll(options);
 
   return false;
 });
-
 
 registerHandlebarsHelpers();
