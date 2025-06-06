@@ -74,6 +74,7 @@ export default async function registerTemplates () {
     'systems/teriock/templates/sheets/rank-template/bars/rk-bar-stats.hbs',
     'systems/teriock/templates/sheets/rank-template/rank-template.hbs',
     'systems/teriock/templates/sheets/resource-template/bars/rs-consumable-bar.hbs',
+    'systems/teriock/templates/sheets/resource-template/bars/rs-use-bar.hbs',
     'systems/teriock/templates/sheets/resource-template/resource-template.hbs'
   ]);
 };

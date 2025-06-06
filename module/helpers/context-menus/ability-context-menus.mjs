@@ -1,4 +1,4 @@
-import { makeIcon } from "../../helpers/utils.mjs";
+import { makeIcon } from "../utils.mjs";
 
 function capitalize(str) {
   return str.charAt(0).toUpperCase() + str.slice(1);

@@ -16,6 +16,7 @@ import { materialProperties } from "../content/material-properties.mjs";
 import { powerOptions } from "./constants/power-options.mjs";
 import { properties as propertiesContent } from "../content/properties.mjs";
 import { rankOptions } from "./constants/rank-options.mjs";
+import { resourceOptions } from "./constants/resource-options.mjs";
 import { tradecraftOptions } from "./constants/tradecraft-options.mjs";
 
 const TERIOCK = {
@@ -46,6 +47,7 @@ const TERIOCK = {
     scholar: tradecraftOptions.scholar,
     survivalist: tradecraftOptions.survivalist,
   },
+  resourceOptions: resourceOptions,
 }
 
 export default TERIOCK;

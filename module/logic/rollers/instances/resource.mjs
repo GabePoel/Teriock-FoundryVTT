@@ -18,11 +18,19 @@ async function use(resource, options) {
 
     message = await foundry.applications.ux.TextEditor.enrichHTML(message);
     const roll = new TeriockRoll(rollFormula, resource.getActor()?.getRollData(), { message: message });
-    roll.toMessage({
+    await roll.toMessage({
       speaker: ChatMessage.getSpeaker({
         actor: resource.getActor(),
       }),
     });
+    const result = roll.total;
+    console.log(`Rolled ${resource.name} with result: ${result}`);
+    const functionHook = resource.system.functionHook;
+    if (functionHook) {
+      const hookFunction = CONFIG.TERIOCK.resourceOptions.functionHooks[functionHook]?.callback;
+      console.log(`Hook function: ${functionHook}`, hookFunction);
+      await hookFunction?.(resource, result);
+    }
   } else {
     resource.chat();
   }

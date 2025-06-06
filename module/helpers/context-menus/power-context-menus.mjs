@@ -1,4 +1,4 @@
-import { makeIcon } from "../../helpers/utils.mjs";
+import { makeIcon } from "../utils.mjs";
 
 export function powerContextMenu(power) {
   const iconStyle = CONFIG.TERIOCK.iconStyles.contextMenu;
