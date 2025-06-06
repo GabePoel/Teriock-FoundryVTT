@@ -5,18 +5,22 @@ const { ux } = foundry.applications;
 
 export default function registerHooks() {
   Hooks.on('updateItem', async (document, updateData, options, userId) => {
-    await document.getActor()?.postUpdate();
+    if (game.user.id === userId && document.isOwner) {
+      await document.getActor()?.postUpdate();
+    }
   });
 
   Hooks.on('updateActor', async (document, changed, options, userId) => {
-    await document.postUpdate();
+    if (game.user.id === userId && document.isOwner) {
+      await document.postUpdate();
+    }
   });
 
   Hooks.on('combatTurnChange', async (combat, prior, current) => {
     const combatants = combat.combatants;
     for (const combatant of combatants) {
       const actor = combatant.actor;
-      if (actor) {
+      if (actor?.isOwner) {
         await actor.update({
           'system.attackPenalty': 0,
         });

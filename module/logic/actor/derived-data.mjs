@@ -211,8 +211,10 @@ async function prepareEncumbrance(actor) {
 }
 
 async function prepareVision(actor) {
-  const tokens = actor?.getDependentTokens() || [];
-  for (const token of tokens) {
-    token?.updateVisionMode(actor?.statuses?.has('ethereal') ? 'ethereal' : 'basic');
+  if (actor.isOwner) {
+    const tokens = actor?.getDependentTokens() || [];
+    for (const token of tokens) {
+      token?.updateVisionMode(actor?.statuses?.has('ethereal') ? 'ethereal' : 'basic');
+    }
   }
 }
