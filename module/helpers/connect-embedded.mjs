@@ -192,6 +192,36 @@ export default function connectEmbedded(document, element, editable = true) {
               return editable && embedded.isOwner;
             }
           },
+          {
+            name: 'Make Unidentified Copy',
+            icon: makeIcon('eye-slash', iconStyle),
+            callback: async () => {
+              embedded.unidentify();
+            },
+            condition: () => {
+              return editable && embedded.isOwner && embedded.type === 'equipment' && embedded.system.identified && game.user.isGM;
+            }
+          },
+          {
+            name: 'Identify',
+            icon: makeIcon('eye', iconStyle),
+            callback: async () => {
+              embedded.identify();
+            },
+            condition: () => {
+              return editable && embedded.isOwner && embedded.type === 'equipment' && !embedded.system.identified && embedded.system.reference;
+            }
+          },
+          {
+            name: 'Read Magic',
+            icon: makeIcon('hand', iconStyle),
+            callback: async () => {
+              embedded.readMagic();
+            },
+            condition: () => {
+              return editable && embedded.isOwner && embedded.type === 'equipment' && !embedded.system.identified && embedded.system.reference && embedded.system.powerLevel === 'unknown';
+            }
+          }
         ],
         {
           eventName: 'contextmenu',

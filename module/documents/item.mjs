@@ -116,6 +116,26 @@ export default class TeriockItem extends TeriockDocument(Item) {
         if (!this.system.shattered) {
           await this.enable();
         }
+        if (this.system.reference && !this.system.identified) {
+          let doEquip = true;
+          const ref = await foundry.utils.fromUuid(this.system.reference);
+          // NOTE:Uncomment below to re-enable equip confirmation dialog for unidentified items.
+          // const users = game.users.filter(u => u.active && u.isGM);
+          // const referenceName = ref ? ref.name : 'Unknown';
+          // let doEquip = false;
+          // for (const user of users) {
+          //   doEquip = await DialogV2.query(user, 'confirm', {
+          //     title: 'Equip Item',
+          //     content: `Should ${game.user.name} equip and learn the tier of unidentified ${referenceName}?`,
+          //     modal: true,
+          //   })
+          // }
+          if (doEquip && ref) {
+            await this.update({
+              'system.tier': ref.system.tier,
+            })
+          }
+        }
       }
     }
   }
@@ -136,6 +156,114 @@ export default class TeriockItem extends TeriockDocument(Item) {
         await this.equip();
       }
     }
+  }
+
+  async duplicate() {
+    const copy = foundry.utils.duplicate(this);
+    const copyDocument = await this.parent.createEmbeddedDocuments(this.documentName, [copy]);
+    return copyDocument[0];
+  }
+
+  async unidentify() {
+    if (this.type === 'equipment' && this.system.identified) {
+      const reference = this.uuid;
+      const copy = await this.duplicate();
+      const name = 'Unidentified ' + this.system.equipmentType;
+      const description = 'This item has not been identified.';
+      const effects = copy.transferredEffects;
+      const unidentifiedProperties = CONFIG.TERIOCK.equipmentOptions.unidentifiedProperties;
+      const idsToRemove = effects.filter(e => e.type !== 'property' || !unidentifiedProperties.includes(e.name)).map(e => e._id);
+      await copy.deleteEmbeddedDocuments('ActiveEffect', idsToRemove);
+      await copy.update({
+        'name': name,
+        'system.reference': reference,
+        'system.description': description,
+        'system.powerLevel': 'unknown',
+        'system.tier': 0,
+        'system.identified': false,
+        'system.flaws': '',
+        'system.notes': '',
+        'system.fullTier': '',
+        'system.manaStoring': '',
+        'system.properties': [],
+        'system.magicalProperties': [],
+        'system.materialProperties': [],
+        'system.font': '',
+      })
+      await copy.unequip();
+    } else if (this.type === 'equipment') {
+      ui.notifications.warn("This item is already unidentified.");
+    }
+  }
+
+  async readMagic() {
+    if (this.type === 'equipment' && this.system.reference && !this.system.identified) {
+      const users = game.users.filter(u => u.active && u.isGM);
+      let doReadMagic = false;
+      const ref = await foundry.utils.fromUuid(this.system.reference);
+      const referenceName = ref ? ref.name : 'Unknown';
+      for (const user of users) {
+        doReadMagic = await DialogV2.query(user, 'confirm', {
+          title: 'Read Magic',
+          content: `Should ${game.user.name} read magic on unidentified ${referenceName}?`,
+          modal: true,
+        })
+      }
+      if (doReadMagic && ref) {
+        await this.update({
+          'system.powerLevel': ref.system.powerLevel,
+        })
+      }
+    }
+  }
+
+  async identify() {
+    if (this.type === 'equipment' && this.system.reference && !this.system.identified) {
+      const users = game.users.filter(u => u.active && u.isGM);
+      let doIdentify = false;
+      const ref = await foundry.utils.fromUuid(this.system.reference);
+      const referenceName = ref ? ref.name : 'Unknown';
+      for (const user of users) {
+        doIdentify = await DialogV2.query(user, 'confirm', {
+          title: 'Identify Item',
+          content: `Should ${game.user.name} identify ${referenceName}?`,
+          modal: true,
+        })
+      }
+      if (doIdentify) {
+        const knownEffectNames = this.transferredEffects.map(e => e.name);
+        const unknownEffects = ref.transferredEffects.filter(e => !knownEffectNames.includes(e.name));
+        const unknownEffectData = unknownEffects.map(e => foundry.utils.duplicate(e));
+        await this.createEmbeddedDocuments('ActiveEffect', unknownEffectData);
+        const equipped = this.system.equipped;
+        if (ref) {
+          await this.update({
+            'name': ref.name,
+            'system': ref.system,
+          })
+        }
+        if (equipped) {
+          await this.equip();
+        } else {
+          await this.unequip();
+        }
+      }
+    }
+  }
+
+  _buildEffectTypes() {
+    const out = {};
+    for (const effect of this.transferredEffects) {
+      const type = effect.type;
+      if (!out[type]) out[type] = [];
+      out[type].push(effect);
+    }
+    return out;
+  }
+
+  prepareDerivedData() {
+    super.prepareDerivedData();
+    this.effectTypes = this._buildEffectTypes();
   }
 
   async _bulkWikiPullHelper(pullType) {
