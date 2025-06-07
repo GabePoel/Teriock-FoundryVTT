@@ -54,7 +54,7 @@ export class TeriockItemSheet extends TeriockSheet(sheets.ItemSheet) {
     return {
       config: CONFIG.TERIOCK,
       isEditable: this.isEditable,
-      editable: this.isEditable && document.system.editable,
+      editable: this.editable,
       item,
       limited: document.limited,
       owner: document.isOwner,
@@ -72,7 +72,6 @@ export class TeriockItemSheet extends TeriockSheet(sheets.ItemSheet) {
   /** @override */
   _onRender(context, options) {
     super._onRender(context, options);
-    this.editable = (this.isEditable && this.document.system.editable);
     if (!this.editable) return;
     this.#dragDrop.forEach(d => d.bind(this.element));
 

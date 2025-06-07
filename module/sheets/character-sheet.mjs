@@ -51,6 +51,7 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(Terioc
     this._sidebarOpen = true;
     this._hitDrawerOpen = true;
     this._manaDrawerOpen = true;
+    this._locked = false;
     this._dynamicContextMenus = {
       attacker: [],
       blocker: [],

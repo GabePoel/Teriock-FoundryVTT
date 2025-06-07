@@ -1,5 +1,6 @@
 import { mergeLevel } from "../utils.mjs";
 import archetypes from "./game/classes.mjs";
+import documentTypes from "./system/document-types.mjs";
 import effectType from "./game/effect-type.mjs";
 import fields from "./game/tradecrafts.mjs";
 import hacks from "./game/hacks.mjs";
@@ -27,6 +28,7 @@ export default constants = {
     tradecrafts,
   },
   system: {
+    documentTypes,
     iconStyles,
   }
 }

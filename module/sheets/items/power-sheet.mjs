@@ -25,7 +25,7 @@ export class TeriockPowerSheet extends HandlebarsApplicationMixin(TeriockItemShe
   };
 
   static async _toggleProficient() {
-    if (this.document.system.editable) {
+    if (this.editable) {
       await this.item.update({ 'system.proficient': !this.item.system.proficient });
     }
   }
@@ -41,7 +41,6 @@ export class TeriockPowerSheet extends HandlebarsApplicationMixin(TeriockItemShe
   /** @override */
   _onRender(context, options) {
     super._onRender(context, options);
-    this.editable = (this.isEditable && this.document.system.editable);
     if (!this.editable) return;
     const powerContextMenuOptions = powerContextMenu(this.item);
     this._connectContextMenu('.power-box', powerContextMenuOptions, 'click');

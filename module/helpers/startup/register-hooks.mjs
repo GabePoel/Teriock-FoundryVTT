@@ -16,6 +16,14 @@ export default function registerHooks() {
     }
   });
 
+  Hooks.on('createItem', async (document, options, userId) => {
+    if (game.user.id === userId && document.isOwner && document.type === 'equipment') {
+      if (document.getActor()) {
+        await document.unequip();
+      }
+    }
+  });
+
   Hooks.on('combatTurnChange', async (combat, prior, current) => {
     const combatants = combat.combatants;
     for (const combatant of combatants) {

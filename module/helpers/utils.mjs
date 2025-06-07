@@ -27,6 +27,10 @@ export async function chatImage(img) {
   }
 }
 
+export function abbreviate(string, length = 3) {
+  return string.toLowerCase().slice(0, length);
+}
+
 export function evaluateSync(formula, data = {}, options = {}) {
   const roll = new TeriockRoll(formula, data);
   roll.evaluateSync(options);

@@ -46,12 +46,13 @@ export const TeriockSheet = (Base) =>
       super(...args);
       this._menuOpen = false;
       this._contextMenus = [];
+      this._locked = true;
     }
 
     /** @override */
     _onRender(context, options) {
-      this.editable = this.isEditable && this.document.system.editable;
       super._onRender(context, options);
+      this.editable = this.isEditable && !this._locked;
       connectEmbedded(this.document, this.element, this.editable);
       new ux.ContextMenu(this.element, '.timage', imageContextMenuOptions, {
         eventName: 'contextmenu',
@@ -215,11 +216,11 @@ export const TeriockSheet = (Base) =>
     // ------------------------------------------------------------------------
 
     static async _debug(_, __) {
-      console.log('Debug', this.document);
+      console.log('Debug', this.document, this);
     }
 
     static async _wikiPullThis(_, __) {
-      if (this.document.system.editable) {
+      if (this.editable) {
         this.document.wikiPull();
       }
     }
@@ -233,7 +234,9 @@ export const TeriockSheet = (Base) =>
     }
 
     static async _toggleLockThis(_, __) {
-      this.document.update({ 'system.editable': !this.document.system.editable });
+      this._locked = !this._locked;
+      this.editable = this.isEditable && !this._locked;
+      this.render();
     }
 
     static async _rollThis(event, target) {
