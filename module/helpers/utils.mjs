@@ -38,3 +38,55 @@ export async function evaluateAsync(formula, data = {}, options = {}) {
   await roll.evaluate(options);
   return roll.result;
 }
+
+export function mergeLevel(obj, path, key) {
+  const result = {};
+  
+  function getValueAtPath(object, pathArray) {
+    return pathArray.reduce((current, segment) => {
+      if (current === null || current === undefined) return undefined;
+      return current[segment];
+    }, object);
+  }
+  
+  function processPath(object, pathSegments, currentIndex = 0) {
+    if (currentIndex >= pathSegments.length) {
+      if (key) {
+        if (typeof object === 'object' && object !== null) {
+          if (key in object) {
+            Object.assign(result, object[key]);
+          } else {
+            Object.keys(object).forEach(itemKey => {
+              if (object[itemKey] && typeof object[itemKey] === 'object' && key in object[itemKey]) {
+                result[itemKey] = object[itemKey][key];
+              }
+            });
+          }
+        }
+      } else {
+        Object.assign(result, object);
+      }
+      return;
+    }
+    
+    const currentSegment = pathSegments[currentIndex];
+    
+    if (currentSegment === '*') {
+      if (typeof object === 'object' && object !== null) {
+        Object.keys(object).forEach(objKey => {
+          processPath(object[objKey], pathSegments, currentIndex + 1);
+        });
+      }
+    } else {
+      if (object && typeof object === 'object' && currentSegment in object) {
+        processPath(object[currentSegment], pathSegments, currentIndex + 1);
+      }
+    }
+  }
+  
+  const pathSegments = path.split('.');
+  
+  processPath(obj, pathSegments);
+  
+  return result;
+}
