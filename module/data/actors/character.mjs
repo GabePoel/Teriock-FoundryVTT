@@ -2,6 +2,9 @@ const { fields } = foundry.data;
 const { TypeDataModel } = foundry.abstract;
 import { mergeLevel } from "../../helpers/utils.mjs";
 import { tradecraftOptions } from "../../helpers/constants/tradecraft-options.mjs";
+import { resourceOptions } from "../../helpers/constants/resource-options.mjs";
+import { powerOptions } from "../../helpers/constants/power-options.mjs";
+import { rankOptions } from "../../helpers/constants/rank-options.mjs";
 
 function attributeField() {
   return new fields.SchemaField({
@@ -125,8 +128,14 @@ export class TeriockCharacterData extends TypeDataModel {
           equipmentFilters: new fields.BooleanField({ initial: false }),
           equipmentOptions: new fields.BooleanField({ initial: false }),
           equipmentSort: new fields.BooleanField({ initial: false }),
+          fluencyOptions: new fields.BooleanField({ initial: false }),
+          resourceOptions: new fields.BooleanField({ initial: false }),
+          rankOptions: new fields.BooleanField({ initial: false }),
+          powerOptions: new fields.BooleanField({ initial: false }),
+          effectOptions: new fields.BooleanField({ initial: false }),
         }),
         abilityFilters: new fields.SchemaField({
+          search: new fields.StringField({ initial: "" }),
           basic: new fields.BooleanField({ initial: false }),
           standard: new fields.BooleanField({ initial: false }),
           skill: new fields.BooleanField({ initial: false }),
@@ -150,6 +159,7 @@ export class TeriockCharacterData extends TypeDataModel {
           effects: new fields.ArrayField(new fields.StringField()),
         }),
         equipmentFilters: new fields.SchemaField({
+          search: new fields.StringField({ initial: "" }),
           equipped: new fields.BooleanField({ initial: false }),
           shattered: new fields.BooleanField({ initial: false }),
           consumable: new fields.BooleanField({ initial: false }),

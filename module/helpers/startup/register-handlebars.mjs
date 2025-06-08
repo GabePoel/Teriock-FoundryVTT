@@ -238,31 +238,51 @@ export default function registerHandlebarsHelpers() {
     const sizeOptions = context.config?.displayOptions?.sizes ?? {};
     const sortSelectHTML = selectOptions(sortOptions, { hash: { selected: sortValue } })?.toHTML?.() ?? '';
 
+    const tabDisplay = tab.charAt(0).toUpperCase() + tab.slice(1);
+
     return new Handlebars.SafeString(`
       <div class="tcard-options-header">
-        <button class="${tab}-options-menu-toggle options-menu-toggle ${ttoggle(optionsToggle)}" 
-                data-bool="${optionsToggle}" data-path="${optionsPath}" data-action="quickToggle">
+        <button
+          class="${tab}-options-menu-toggle options-menu-toggle ${ttoggle(optionsToggle)}" 
+          data-bool="${optionsToggle}"
+          data-path="${optionsPath}"
+          data-action="quickToggle"
+          data-tooltip="Display Options"
+        >
           <i class="fa-fw fa-solid fa-sliders"></i>
         </button>
-
-        ${filterToggle !== null && filterToggle !== undefined ? `
-          <button class="${tab}-filter-menu-toggle filter-menu-toggle ${ttoggle(filterToggle)}"
-                  data-bool="${filterToggle}" data-path="${filterPath}" data-action="quickToggle">
-            <i class="fa-fw fa-solid fa-filter"></i>
-          </button>` : ''
-      }
-
+        
         ${sortToggle !== null && sortToggle !== undefined ? `
-          <button class="${tab}-sort-menu-toggle sort-menu-toggle ${ttoggle(sortToggle)}"
-                  data-bool="${sortToggle}" data-path="${sortPath}" data-action="quickToggle">
+          <button
+            class="${tab}-sort-menu-toggle sort-menu-toggle ${ttoggle(sortToggle)}"
+            data-bool="${sortToggle}"
+            data-path="${sortPath}"
+            data-action="quickToggle"
+            data-tooltip="Sort Results"
+          >
             <i class="fa-fw fa-solid fa-bars-sort"></i>
           </button>` : ''
-      }
-
+        }
+  
+        ${filterToggle !== null && filterToggle !== undefined ? `
+          <button
+            class="${tab}-filter-menu-toggle filter-menu-toggle ${ttoggle(filterToggle)}"
+            data-bool="${filterToggle}"
+            data-path="${filterPath}"
+            data-action="quickToggle"
+            data-tooltip="Filter Results"
+          >
+            <i class="fa-fw fa-solid fa-filter"></i>
+          </button>` : ''
+        }
+        
         <input class="${tab}-search tcard-search" type="text" placeholder="Search" data-type="${tab}">
 
         ${showAddButton ? `
-          <button class="ttoggle-button ${tab}-add-button add-button" data-tab="${tab}" data-action="addEmbedded">
+          <button class="ttoggle-button ${tab}-add-button add-button" data-tab="${tab}"
+            data-action="addEmbedded"
+            data-tooltip="New ${tabDisplay}"
+          >
             <i class="fa-fw fa-solid fa-plus"></i>
           </button>` : ''
       }

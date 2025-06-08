@@ -5,7 +5,7 @@ import { conditions } from './content/conditions.mjs'
 import { TeriockAbilitySheet } from './sheets/effects/ability-sheet.mjs';
 import { TeriockBaseEffectSheet } from './sheets/effects/base-sheet.mjs';
 import { TeriockCharacterData } from './data/actors/character.mjs';
-import { TeriockCharacterSheet } from './sheets/character-sheet.mjs';
+import { TeriockCharacterSheet } from './sheets/actors/character-sheet.mjs';
 import { teriockDetectionModes } from './perception/detection-modes.mjs';
 import { TeriockEquipmentSheet } from './sheets/items/equipment-sheet.mjs';
 import { TeriockEquipmentData } from './data/items/equipment.mjs';

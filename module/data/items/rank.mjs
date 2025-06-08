@@ -7,9 +7,10 @@ export class TeriockRankData extends TeriockItemData {
     return {
       ...commonData,
       wikiNamespace: new fields.StringField({ initial: "Class" }),
-      flaws: new fields.HTMLField({ initial: "" }),
-      archetype: new fields.StringField({ initial: "semi" }),
-      className: new fields.StringField({ initial: "archer" }),
+      description: new fields.HTMLField({ initial: "<p>Every adventurer is a journeyman before they join their first class.</p>" }),
+      flaws: new fields.HTMLField({ initial: "<p>None.</p>" }),
+      archetype: new fields.StringField({ initial: "everyman" }),
+      className: new fields.StringField({ initial: "journeyman" }),
       classRank: new fields.NumberField({ initial: 0 }),
       hitDieSpent: new fields.BooleanField({ initial: false }),
       manaDieSpent: new fields.BooleanField({ initial: false }),

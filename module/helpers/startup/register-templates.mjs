@@ -32,7 +32,6 @@ export default async function registerTemplates () {
     'systems/teriock/templates/sheets/character-template/character-template.hbs',
     'systems/teriock/templates/sheets/character-template/filters/ch-ability-filter.hbs',
     'systems/teriock/templates/sheets/character-template/filters/ch-equipment-filter.hbs',
-    'systems/teriock/templates/sheets/character-template/filters/ch-power-filter.hbs',
     'systems/teriock/templates/sheets/character-template/parts/ch-attribute-box.hbs',
     'systems/teriock/templates/sheets/character-template/parts/ch-battle-box.hbs',
     'systems/teriock/templates/sheets/character-template/parts/ch-carrying-box.hbs',

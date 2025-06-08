@@ -7,7 +7,7 @@ export const displayOptions = {
   },
   abilitySortOrders: {
     name: 'Name',
-    chronological: 'Chronological',
+    // chronological: 'Chronological',
     enabled: 'Enabled',
     sourceName: 'Source Name',
     sourceType: 'Source Type',
@@ -17,7 +17,7 @@ export const displayOptions = {
     name: 'Name',
     av: 'Armor Value',
     bv: 'Block Value',
-    chronological: 'Chronological',
+    // chronological: 'Chronological',
     consumable: 'Consumable',
     damage: 'Damage',
     dampened: 'Dampened',
