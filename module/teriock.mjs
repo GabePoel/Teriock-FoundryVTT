@@ -4,6 +4,7 @@ const { DocumentSheetConfig } = foundry.applications.apps;
 import { conditions } from './content/conditions.mjs'
 import { TeriockAbilitySheet } from './sheets/effects/ability-sheet.mjs';
 import { TeriockBaseEffectSheet } from './sheets/effects/base-sheet.mjs';
+import { TeriockCharacterData } from './data/actors/character.mjs';
 import { TeriockCharacterSheet } from './sheets/character-sheet.mjs';
 import { teriockDetectionModes } from './perception/detection-modes.mjs';
 import { TeriockEquipmentSheet } from './sheets/items/equipment-sheet.mjs';
@@ -77,6 +78,9 @@ Hooks.once('init', function () {
   CONFIG.Token.documentClass = TeriockToken;
 
   // Data models
+  Object.assign(CONFIG.Actor.dataModels, {
+    character: TeriockCharacterData,
+  });
   Object.assign(CONFIG.Item.dataModels, {
     equipment: TeriockEquipmentData,
     power: TeriockPowerData,

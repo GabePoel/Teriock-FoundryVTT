@@ -2,6 +2,7 @@ const { sheets, api, ux } = foundry.applications;
 import { documentOptions } from "../helpers/constants/document-options.mjs";
 import { primaryBlockerContextMenu, primaryAttackContextMenu, piercingContextMenu } from "../helpers/context-menus/character-context-menus.mjs";
 import { TeriockSheet } from "./sheet-mixin.mjs";
+import connectEmbedded from "../helpers/connect-embedded.mjs";
 
 export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(TeriockSheet(sheets.ActorSheet)) {
   static DEFAULT_OPTIONS = {
@@ -151,6 +152,7 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(Terioc
       },
     };
     const entry = tabMap[tab];
+    console.log({ entry });
     if (!entry) return;
     const docs = await this.actor.createEmbeddedDocuments(entry.docType, [entry.data]);
     if (docs[0]?.sheet) docs[0].sheet.render(true);
@@ -329,7 +331,7 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(Terioc
   }
 
   _sortItems(items, sortKey, ascending, accessor = (i) => i.name) {
-    items.sort((a, b) => {
+    items?.sort((a, b) => {
       const aVal = accessor(a) ?? '';
       const bVal = accessor(b) ?? '';
       return typeof aVal === 'number' ? aVal - bVal : aVal.localeCompare(bVal);
@@ -358,7 +360,7 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(Terioc
       weight: i => i.system.weight ?? 0,
     };
 
-    equipment = this._sortItems(equipment, sortKey, ascending, sortMap[sortKey]);
+    equipment = this._sortItems(equipment, sortKey, ascending, sortMap[sortKey]) || [];
 
     return equipment.filter(i => {
       const equipmentClass = (i.system.equipmentClass ?? '').toLowerCase();
@@ -413,7 +415,7 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(Terioc
       type: i => i.system.abilityType ?? '',
     };
 
-    abilities = this._sortItems(abilities, sortKey, ascending, sortMap[sortKey]);
+    abilities = this._sortItems(abilities, sortKey, ascending, sortMap[sortKey]) || [];
 
     return abilities.filter(i =>
       (!filters.basic || i.system.basic) &&
@@ -638,7 +640,7 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(Terioc
       { type: 'resource', plural: 'resources', source: 'effectTypes', method: null },
       { type: 'effect', plural: 'effects', source: 'effectTypes', method: null }
     ];
-
+    
     this.#searchFilters = configs.map(({ type, plural, source, method }) => {
       const instance = new ux.SearchFilter({
         callback: (event, query, rgx, content) =>
@@ -648,6 +650,9 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(Terioc
           },
         contentSelector: `#${type}-results`,
         inputSelector: `.${type}-search`
+      });
+      instance.input?.addEventListener('blur', () => {
+        this.render();
       });
       return { type, instance };
     });
@@ -673,5 +678,6 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(Terioc
       system: this.actor.system
     });
     content.innerHTML = html;
+    connectEmbedded(this.document, this.element, this.editable);
   }
 }
