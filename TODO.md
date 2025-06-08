@@ -74,6 +74,7 @@
     - [x] Filters and display settings collapsible
   - [x] Able to resize sheet
   - [x] Able to change name and icon
+  - [x] Search migrated to Foundry search filters.
 - [x] Quality of life improvements
   - [x] Rolling implementation for items
   - [x] Handlebars consolidation across item and character sheets
