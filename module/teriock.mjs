@@ -1,4 +1,21 @@
 import TERIOCK from './helpers/config.mjs';
+const { ActorSheet, ItemSheet } = foundry.appv1.sheets;
+const { DocumentSheetConfig } = foundry.applications.apps;
+import { conditions } from './content/conditions.mjs'
+import { TeriockAbilitySheet } from './sheets/effects/ability-sheet.mjs';
+import { TeriockBaseEffectSheet } from './sheets/effects/base-sheet.mjs';
+import { TeriockCharacterSheet } from './sheets/character-sheet.mjs';
+import { teriockDetectionModes } from './perception/detection-modes.mjs';
+import { TeriockEquipmentSheet } from './sheets/items/equipment-sheet.mjs';
+import { TeriockEquipmentData } from './data/items/equipment.mjs';
+import { TeriockFluencySheet } from './sheets/effects/fluency-sheet.mjs';
+import { TeriockPowerSheet } from './sheets/items/power-sheet.mjs';
+import { TeriockPowerData } from './data/items/power.mjs';
+import { TeriockPropertySheet } from './sheets/effects/property-sheet.mjs';
+import { TeriockRankData } from './data/items/rank.mjs';
+import { TeriockRankSheet } from './sheets/items/rank-sheet.mjs';
+import { TeriockResourceSheet } from './sheets/effects/resource-sheet.mjs';
+import { teriockVisionModes } from './perception/vision-modes.mjs';
 import registerHandlebarsHelpers from './helpers/startup/register-handlebars.mjs';
 import registerHooks from './helpers/startup/register-hooks.mjs';
 import registerTemplates from './helpers/startup/register-templates.mjs';
@@ -8,20 +25,6 @@ import TeriockHarmRoll from './documents/harm.mjs';
 import TeriockItem from './documents/item.mjs';
 import TeriockRoll from './documents/roll.mjs'
 import TeriockToken from './documents/token.mjs';
-import { TeriockAbilitySheet } from './sheets/effects/ability-sheet.mjs';
-import { TeriockBaseEffectSheet } from './sheets/effects/base-sheet.mjs';
-import { TeriockCharacterSheet } from './sheets/character-sheet.mjs';
-import { TeriockEquipmentSheet } from './sheets/items/equipment-sheet.mjs';
-import { TeriockFluencySheet } from './sheets/effects/fluency-sheet.mjs';
-import { TeriockPowerSheet } from './sheets/items/power-sheet.mjs';
-import { TeriockPropertySheet } from './sheets/effects/property-sheet.mjs';
-import { TeriockRankSheet } from './sheets/items/rank-sheet.mjs';
-import { TeriockResourceSheet } from './sheets/effects/resource-sheet.mjs';
-import { teriockVisionModes } from './perception/vision-modes.mjs';
-import { teriockDetectionModes } from './perception/detection-modes.mjs';
-import { conditions } from './content/conditions.mjs'
-const { ActorSheet, ItemSheet } = foundry.appv1.sheets;
-const { DocumentSheetConfig } = foundry.applications.apps;
 
 Hooks.once('init', function () {
   CONFIG.TERIOCK = TERIOCK;
@@ -72,6 +75,13 @@ Hooks.once('init', function () {
   CONFIG.Item.documentClass = TeriockItem;
   CONFIG.ActiveEffect.documentClass = TeriockEffect;
   CONFIG.Token.documentClass = TeriockToken;
+
+  // Data models
+  Object.assign(CONFIG.Item.dataModels, {
+    equipment: TeriockEquipmentData,
+    power: TeriockPowerData,
+    rank: TeriockRankData,
+  })
 
   // Legacy transferral
   CONFIG.ActiveEffect.legacyTransferral = false;

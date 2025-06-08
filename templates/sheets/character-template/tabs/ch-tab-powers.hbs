@@ -9,26 +9,6 @@
         </div>
       {{/if}}
     </div>
-    <div class="tcard-container {{#if system.sheet.display.power.gapless}}gapless{{/if}} {{system.sheet.display.power.size}}">
-      {{#each powers as |item|}}
-        {{tcard
-          img=item.img
-          title=item.name
-          subtitle=item.system.type
-          id=item._id
-          active=(not item.system.disabled)
-          text=""
-          icons=(concat
-            (ticon "comment" action="chatDoc" id=rank._id tooltip="Send to Chat")
-            (ticonToggle "circle-check" "circle" (not item.system.disabled) action="toggleDisabledDoc" id=item._id tooltipTrue="Enabled" tooltipFalse="Disabled")
-          )
-        }}
-      {{/each}}
-    </div>
-    {{#if (not (exists powers))}}
-      <div class="no-results {{{system.sheet.display.power.size}}}">
-        <p>No powers found.</p>
-      </div>
-    {{/if}}
+    {{> 'systems/teriock/templates/sheets/character-template/results/ch-power-results.hbs'}}
   </div>
 </div>

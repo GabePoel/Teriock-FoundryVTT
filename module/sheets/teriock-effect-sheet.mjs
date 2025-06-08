@@ -18,7 +18,7 @@ export class TeriockEffectSheet extends TeriockSheet(sheets.ActiveEffectConfig) 
   async _prepareContext() {
     const context = {
       config: CONFIG.TERIOCK,
-      editable: this.isEditable && this._editable,
+      editable: this.isEditable && !this._locked,
       document: this.document,
       limited: this.document.limited,
       owner: this.document.isOwner,

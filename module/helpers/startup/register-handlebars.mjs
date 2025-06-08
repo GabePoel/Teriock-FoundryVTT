@@ -218,7 +218,8 @@ export default function registerHandlebarsHelpers() {
     const selectOptions = Handlebars.helpers.selectOptions;
 
     const inputName = `system.sheet.${tab}Filters.search`;
-    const inputValue = escape(searchValue);
+    // const inputValue = escape(searchValue);
+    // const inputValue = `${tab}SearchValue`
 
     const optionsPath = `system.sheet.menus.${tab}Options`;
     const filterPath = `system.sheet.menus.${tab}Filters`;
@@ -258,7 +259,7 @@ export default function registerHandlebarsHelpers() {
           </button>` : ''
       }
 
-        <input class="${tab}-search" type="text" name="${inputName}" placeholder="Search" value="${inputValue}">
+        <input class="${tab}-search tcard-search" type="text" placeholder="Search" data-type="${tab}">
 
         ${showAddButton ? `
           <button class="ttoggle-button ${tab}-add-button add-button" data-tab="${tab}" data-action="addEmbedded">
@@ -394,6 +395,22 @@ export default function registerHandlebarsHelpers() {
     }).join('\n');
 
     return new Handlebars.SafeString(`<div class="${containerClass}">${renderedCards}</div>`);
+  });
+
+  Handlebars.registerHelper('tcardsSearchResults', function (documents, system, tab, plural) {
+    const tcardsContainer = Handlebars.helpers.abilityCards(documents, system, tab);
+    const sizeClass = system?.sheet?.display?.[tab]?.size || "";
+    const hasResults = documents && documents.length > 0;
+    let output = `<div id="${tab}-results" class="tcard-results">`;
+    output += tcardsContainer;
+    if (!hasResults) {
+      output += `
+      <div class="no-results ${sizeClass}">
+        <p>No ${plural} found.</p>
+      </div>`;
+    }
+    output += `</div>`;
+    return new Handlebars.SafeString(output);
   });
 
   Handlebars.registerHelper('hackFill', function (stat) {

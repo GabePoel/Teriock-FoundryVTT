@@ -1,4 +1,4 @@
-const { sheets, api } = foundry.applications;
+const { sheets, api, ux } = foundry.applications;
 import { documentOptions } from "../helpers/constants/document-options.mjs";
 import { primaryBlockerContextMenu, primaryAttackContextMenu, piercingContextMenu } from "../helpers/context-menus/character-context-menus.mjs";
 import { TeriockSheet } from "./sheet-mixin.mjs";
@@ -44,6 +44,16 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(Terioc
     },
   };
 
+  static SEARCH_RESULT_PARTIALS = {
+    ability: "systems/teriock/templates/sheets/character-template/results/ch-ability-results.hbs",
+    equipment: "systems/teriock/templates/sheets/character-template/results/ch-equipment-results.hbs",
+    fluency: "systems/teriock/templates/sheets/character-template/results/ch-fluency-results.hbs",
+    power: "systems/teriock/templates/sheets/character-template/results/ch-power-results.hbs",
+    rank: "systems/teriock/templates/sheets/character-template/results/ch-rank-results.hbs",
+    resource: "systems/teriock/templates/sheets/character-template/results/ch-resource-results.hbs",
+    effect: "systems/teriock/templates/sheets/character-template/results/ch-effect-results.hbs"
+  };
+
   constructor(...args) {
     super(...args);
     this._filterMenuOpen = false;
@@ -56,6 +66,20 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(Terioc
       attacker: [],
       blocker: [],
     }
+    this._filteredAbilities = this._getFilteredAbilities(this.actor.effectTypes.ability);
+    this._filteredEquipment = this._getFilteredEquipment(this.actor.itemTypes.equipment);
+    this._filteredPowers = this.actor.itemTypes.power;
+    this._filteredFluencies = this.actor.effectTypes.fluency;
+    this._filteredEffects = this.actor.effectTypes.effect;
+    this._filteredRanks = this.actor.itemTypes.rank;
+    this._filteredResources = this.actor.effectTypes.resource;
+    this._abilitySearchValue = "";
+    this._equipmentSearchValue = "";
+    this._powerSearchValue = "";
+    this._fluencySearchValue = "";
+    this._effectSearchValue = "";
+    this._rankSearchValue = "";
+    this._resourceSearchValue = "";
   }
 
   static async _toggleEquippedDoc(event, target) {
@@ -313,9 +337,8 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(Terioc
     return ascending ? items : items.reverse();
   }
 
-  _getFilteredEquipment() {
+  _getFilteredEquipment(equipment) {
     const filters = this.actor.system.sheet.equipmentFilters || {};
-    let equipment = this.actor.itemTypes.equipment;
     const sortKey = this.actor.system.sheet.equipmentSortOption;
     const ascending = this.actor.system.sheet.equipmentSortAscending;
 
@@ -338,8 +361,6 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(Terioc
     equipment = this._sortItems(equipment, sortKey, ascending, sortMap[sortKey]);
 
     return equipment.filter(i => {
-      const name = i.name?.toLowerCase() ?? '';
-      const search = filters.search?.toLowerCase() ?? '';
       const equipmentClass = (i.system.equipmentClass ?? '').toLowerCase();
       const filterEquipmentClass = (filters.equipmentClasses ?? '').toLowerCase();
       const properties = (i.system.properties || []).map(p => (p ?? '').toLowerCase());
@@ -353,7 +374,6 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(Terioc
       const filterWeaponFightingStyle = (filters.weaponFightingStyles ?? '').toLowerCase();
 
       return (
-        (!search || name.includes(search)) &&
         (!filterEquipmentClass || equipmentClass === filterEquipmentClass) &&
         (
           !filterProperty ||
@@ -380,9 +400,8 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(Terioc
     });
   }
 
-  _getFilteredAbilities() {
+  _getFilteredAbilities(abilities) {
     const filters = this.actor.system.sheet.abilityFilters || {};
-    let abilities = Array.from(this.actor.allApplicableEffects()).filter(i => i.type === 'ability');
     const sortKey = this.actor.system.sheet.abilitySortOption;
     const ascending = this.actor.system.sheet.abilitySortAscending;
 
@@ -397,7 +416,6 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(Terioc
     abilities = this._sortItems(abilities, sortKey, ascending, sortMap[sortKey]);
 
     return abilities.filter(i =>
-      (!filters.search || i.name.toLowerCase().includes(filters.search.toLowerCase())) &&
       (!filters.basic || i.system.basic) &&
       (!filters.standard || i.system.standard) &&
       (!filters.skill || i.system.skill) &&
@@ -421,42 +439,6 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(Terioc
       (!filters.powerSource || (i.system.powerSources || []).includes(filters.powerSource)) &&
       (!filters.element || (i.system.elements || []).includes(filters.element)) &&
       (!filters.effects || filters.effects.every(e => i.system.effects.includes(e)))
-    );
-  }
-
-  _getFilteredResources() {
-    return this._filterItems(
-      Array.from(this.actor.allApplicableEffects()).filter(i => i.type === 'resource'),
-      this.actor.system.sheet.resourceFilters || {}
-    );
-  }
-
-  _getFilteredConditions() {
-    return this._filterItems(
-      Array.from(this.actor.allApplicableEffects()).filter(i => !(['resource', 'ability'].includes(i.type))),
-      this.actor.system.sheet.resourceFilters || {}
-    );
-  }
-
-  _getFilteredPowers() {
-    return this._filterItems(this.actor.itemTypes.power, this.actor.system.sheet.powerFilters || {});
-  }
-
-  _getFilteredFluencies() {
-    return this._filterItems(
-      Array.from(this.actor.allApplicableEffects()).filter(i => i.type === 'fluency'),
-      this.actor.system.sheet.fluencyFilters || {}
-    );
-  }
-
-  _getFilteredRanks() {
-    return this._filterItems(this.actor.itemTypes.rank, this.actor.system.sheet.rankFilters || {});
-  }
-
-  _getFilteredEffects() {
-    return this._filterItems(
-      Array.from(this.actor.allApplicableEffects()).filter(i => i.type === 'effect'),
-      this.actor.system.sheet.effectFilters || {}
     );
   }
 
@@ -487,13 +469,13 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(Terioc
       limited: this.document.limited,
       owner: this.document.isOwner,
       system: this.actor.system,
-      abilities: this._getFilteredAbilities(),
-      resources: this._getFilteredResources(),
-      equipment: this._getFilteredEquipment(),
-      powers: this._getFilteredPowers(),
-      fluencies: this._getFilteredFluencies(),
-      effects: this._getFilteredEffects(),
-      ranks: this._getFilteredRanks(),
+      abilities: this._filteredAbilities,
+      resources: this._filteredResources,
+      equipment: this._filteredEquipment,
+      powers: this._filteredPowers,
+      fluencies: this._filteredFluencies,
+      effects: this._filteredEffects,
+      ranks: this._filteredRanks,
       name: this.actor.name,
       img: this.actor.img,
       sidebarOpen: this._sidebarOpen,
@@ -635,5 +617,61 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(Terioc
     this._connectContextMenu('.character-primary-blocker-select', this._dynamicContextMenus.blocker, 'click');
     this._connectContextMenu('.character-primary-attacker-select', this._dynamicContextMenus.attacker, 'click');
     this._connectContextMenu('.character-piercing-box', piercingContextMenu(this.actor), 'click');
+
+    this.#initSearchFilters();
+    this.#searchFilters.forEach(filter => filter.instance.bind(this.element));
+
+    this.element.querySelectorAll('.tcard-search').forEach(input => {
+      input.value = this[`_${input.dataset.type}SearchValue`];
+    });
+  }
+
+  #searchFilters = [];
+
+  #initSearchFilters() {
+    const configs = [
+      { type: 'ability', plural: 'abilities', source: 'effectTypes', method: '_getFilteredAbilities' },
+      { type: 'equipment', plural: 'equipment', source: 'itemTypes', method: '_getFilteredEquipment' },
+      { type: 'fluency', plural: 'fluencies', source: 'effectTypes', method: null },
+      { type: 'power', plural: 'powers', source: 'itemTypes', method: null },
+      { type: 'rank', plural: 'ranks', source: 'itemTypes', method: null },
+      { type: 'resource', plural: 'resources', source: 'effectTypes', method: null },
+      { type: 'effect', plural: 'effects', source: 'effectTypes', method: null }
+    ];
+
+    this.#searchFilters = configs.map(({ type, plural, source, method }) => {
+      const instance = new ux.SearchFilter({
+        callback: (event, query, rgx, content) =>
+          {
+            const input = event.target;
+            this.#handleSearchFilter(type, plural, source, method, event, rgx, content, input)
+          },
+        contentSelector: `#${type}-results`,
+        inputSelector: `.${type}-search`
+      });
+      return { type, instance };
+    });
+  }
+
+  async #handleSearchFilter(type, plural, sourceKey, filterMethodName, event, rgx, content, input) {
+    let filtered = this.actor[sourceKey][type]?.filter(i => rgx.test(i.name));
+    if (!filtered) return;
+    if (filterMethodName) {
+      filtered = this[filterMethodName]?.(filtered) || filtered;
+    }
+    const filterPath = '_filtered' + plural.charAt(0).toUpperCase() + plural.slice(1);
+    const searchPath = `_${type}SearchValue`;
+    if (!input) {
+      return;
+    }
+    this[searchPath] = input.value;
+    this[filterPath] = filtered;
+    const templatePath = this.constructor.SEARCH_RESULT_PARTIALS[type];
+    if (!templatePath) return;
+    const html = await renderTemplate(templatePath, {
+      [plural]: filtered,
+      system: this.actor.system
+    });
+    content.innerHTML = html;
   }
 }

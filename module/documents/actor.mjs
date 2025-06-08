@@ -16,6 +16,7 @@ export default class TeriockActor extends Actor {
   /** @override */
   prepareDerivedData() {
     prepareDerivedData(this);
+    this.effectTypes = this._buildEffectTypes();
   }
 
   getRollData() {
@@ -191,5 +192,15 @@ export default class TeriockActor extends Actor {
     const action = spent ? "" : `data-action='roll${type === 'hit' ? "Hit" : "Mana"}Die'`;
     return `<div class="thover die-box ${rollClass}" data-die="${type}" data-id='${rank._id}' ${action} data-tooltip="${type === 'hit' ? "Hit" : "Mana"} Die">
       <i class="fa-fw ${iconClass} fa-dice-${rank.system[dieProp]}"></i></div>`;
+  }
+
+  _buildEffectTypes() {
+    const out = {};
+    for (const effect of Array.from(this.allApplicableEffects())) {
+      const type = effect.type;
+      if (!out[type]) out[type] = [];
+      out[type].push(effect);
+    }
+    return out;
   }
 }

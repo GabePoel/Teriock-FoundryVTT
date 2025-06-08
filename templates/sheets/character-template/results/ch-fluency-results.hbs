@@ -1,0 +1,23 @@
+<div id="fluency-results" class="tcard-results">
+  <div class="tcard-container {{#if system.sheet.display.fluency.gapless}}gapless{{/if}} {{system.sheet.display.fluency.size}}">
+  {{#each fluencies as |effect|}}
+    {{tcard
+      img=effect.img
+      title=effect.name
+      subtitle=(tradecraft effect.system.field effect.system.tradecraft)
+      text=(field effect.system.field)
+      id=effect._id
+      parentId=effect.parent._id
+      type="effect"
+      icons=(concat
+        (ticon "comment" cssClass="share" action="share" id=effect._id tooltip="Share")
+      )
+    }}
+  {{/each}}
+  </div>
+  {{#if (not (exists fluencies))}}
+    <div class="no-results {{{system.sheet.display.tradecraft.size}}}">
+      <p>No fluencies found.</p>
+    </div>
+  {{/if}}
+</div>

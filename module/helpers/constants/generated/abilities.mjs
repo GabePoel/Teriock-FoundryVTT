@@ -1,4 +1,4 @@
-// This file was auto-generated on 2025-06-06 by scripts/update-options.mjs.
+// This file was auto-generated on 2025-06-08 by scripts/update-options.mjs.
 // Do not edit manually.
 
 export const abilities = {
@@ -14,6 +14,7 @@ export const abilities = {
     additionalStormRotators: "Additional Storm Rotators",
     adrenaline: "Adrenaline",
     advancedHackHealing: "Advanced Hack Healing",
+    advancedHearing: "Advanced Hearing",
     advancedSmell: "Advanced Smell",
     agile: "Agile",
     aid: "Aid",
