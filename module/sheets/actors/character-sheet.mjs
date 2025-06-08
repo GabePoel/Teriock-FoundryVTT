@@ -494,6 +494,12 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(Terioc
       });
     });
 
+    this.element.querySelector('.character-name')?.addEventListener('contextmenu', async (e) => {
+      e.preventDefault();
+      console.log('Debug', this.document, this);
+      e.stopPropagation();
+    });
+
     primaryBlockerContextMenu(this.actor, this._dynamicContextMenus.blocker);
     primaryAttackContextMenu(this.actor, this._dynamicContextMenus.attacker);
 
@@ -511,18 +517,18 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(Terioc
   }
 
   static SEARCH_CONFIGS = [
-    { type: 'ability', plural: 'abilities', source: 'effectTypes', method: '_getFilteredAbilities' },
-    { type: 'equipment', plural: 'equipment', source: 'itemTypes', method: '_getFilteredEquipment' },
-    { type: 'fluency', plural: 'fluencies', source: 'effectTypes', method: null },
-    { type: 'power', plural: 'powers', source: 'itemTypes', method: null },
-    { type: 'rank', plural: 'ranks', source: 'itemTypes', method: null },
-    { type: 'resource', plural: 'resources', source: 'effectTypes', method: null },
-    { type: 'effect', plural: 'effects', source: 'effectTypes', method: null }
+    { type: 'ability', source: 'effectTypes', method: '_getFilteredAbilities' },
+    { type: 'equipment', source: 'itemTypes', method: '_getFilteredEquipment' },
+    { type: 'fluency', source: 'effectTypes', method: null },
+    { type: 'power', source: 'itemTypes', method: null },
+    { type: 'rank', source: 'itemTypes', method: null },
+    { type: 'resource', source: 'effectTypes', method: null },
+    { type: 'effect', source: 'effectTypes', method: null }
   ];
 
   #initSearchFilters() {
     const configs = this.constructor.SEARCH_CONFIGS;
-    configs.forEach(({ type, plural, source, method }) => {
+    configs.forEach(({ type, source, method }) => {
       const instance = new ux.SearchFilter({
         callback: (event, query, rgx, content) => {
           const input = event.target;
@@ -533,7 +539,7 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(Terioc
               rgx = new RegExp(value, 'i');
             }
           }
-          this.#handleSearchFilter(type, plural, source, method, event, rgx, content, input)
+          this.#handleSearchFilter(type, source, method, rgx, content, input)
         },
         contentSelector: `#${type}-results`,
         inputSelector: `.${type}-search`
@@ -550,16 +556,16 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(Terioc
 
   #runSearchFilters() {
     const configs = this.constructor.SEARCH_CONFIGS;
-    configs.forEach(({ type, plural, source, method }) => {
+    configs.forEach(({ type, source, method }) => {
       const inputValue = this[`_${type}SearchValue`] || '';
       const rgx = new RegExp(inputValue, 'i');
       const content = this.element.querySelector(`#${type}-results`);
-      this.#applyFilter(type, plural, source, method, rgx, content);
+      this.#applyFilter(type, source, method, rgx, content);
     });
   }
 
-  #handleSearchFilter(type, plural, sourceKey, filterMethodName, event, rgx, content, input) {
-    this.#applyFilter(type, plural, sourceKey, filterMethodName, rgx, content);
+  #handleSearchFilter(type, sourceKey, filterMethodName, rgx, content, input) {
+    this.#applyFilter(type, sourceKey, filterMethodName, rgx, content);
     const searchPath = `_${type}SearchValue`;
     if (!input) {
       return;
@@ -568,7 +574,7 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(Terioc
     this._loadingSearch = false;
   }
 
-  #applyFilter(type, plural, sourceKey, filterMethodName, rgx, content) {
+  #applyFilter(type, sourceKey, filterMethodName, rgx, content) {
     let filtered = this.actor[sourceKey][type] || [];
     if (filterMethodName) {
       filtered = this[filterMethodName]?.() || filtered;
