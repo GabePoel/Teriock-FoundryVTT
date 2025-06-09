@@ -6,16 +6,20 @@ import { TeriockAbilitySheet } from './sheets/effects/ability-sheet.mjs';
 import { TeriockBaseEffectSheet } from './sheets/effects/base-sheet.mjs';
 import { TeriockCharacterData } from './data/actors/character.mjs';
 import { TeriockCharacterSheet } from './sheets/actors/character-sheet.mjs';
-import { teriockDetectionModes } from './perception/detection-modes.mjs';
-import { TeriockEquipmentSheet } from './sheets/items/equipment-sheet.mjs';
+import { TeriockEffectData } from './data/effects/base.mjs';
 import { TeriockEquipmentData } from './data/items/equipment.mjs';
+import { TeriockEquipmentSheet } from './sheets/items/equipment-sheet.mjs';
+import { TeriockFluencyData } from './data/effects/fluency.mjs';
 import { TeriockFluencySheet } from './sheets/effects/fluency-sheet.mjs';
-import { TeriockPowerSheet } from './sheets/items/power-sheet.mjs';
 import { TeriockPowerData } from './data/items/power.mjs';
+import { TeriockPowerSheet } from './sheets/items/power-sheet.mjs';
+import { TeriockPropertyData } from './data/effects/property.mjs';
 import { TeriockPropertySheet } from './sheets/effects/property-sheet.mjs';
 import { TeriockRankData } from './data/items/rank.mjs';
 import { TeriockRankSheet } from './sheets/items/rank-sheet.mjs';
+import { TeriockResourceData } from './data/effects/resource.mjs';
 import { TeriockResourceSheet } from './sheets/effects/resource-sheet.mjs';
+import { teriockDetectionModes } from './perception/detection-modes.mjs';
 import { teriockVisionModes } from './perception/vision-modes.mjs';
 import registerHandlebarsHelpers from './helpers/startup/register-handlebars.mjs';
 import registerHooks from './helpers/startup/register-hooks.mjs';
@@ -85,6 +89,13 @@ Hooks.once('init', function () {
     equipment: TeriockEquipmentData,
     power: TeriockPowerData,
     rank: TeriockRankData,
+  })
+  console.log(TeriockResourceData);
+  Object.assign(CONFIG.ActiveEffect.dataModels, {
+    effect: TeriockEffectData,
+    fluency: TeriockFluencyData,
+    property: TeriockPropertyData,
+    resource: TeriockResourceData,
   })
 
   // Legacy transferral

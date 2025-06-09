@@ -10,11 +10,13 @@ export const TeriockDocument = (Base) => class TeriockDocument extends Base {
     super.prepareDerivedData();
     if (this.system?.consumable) {
       if (this.system?.maxQuantityRaw) {
+        console.log(this.system.maxQuantityRaw);
         if (!Number.isNaN(parseInt(this.system?.maxQuantityRaw))) {
           this.system.maxQuantity = parseInt(this.system.maxQuantityRaw);
         } else {
           this.system.maxQuantity = evaluateSync(this.system.maxQuantityRaw, this.getActor()?.getRollData());
         }
+        console.log(this.system.maxQuantity);2
       }
       this.system.quantity = Math.min(this.system.maxQuantity || 0, this.system.quantity || 0);
     }

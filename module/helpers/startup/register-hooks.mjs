@@ -16,6 +16,15 @@ export default function registerHooks() {
     }
   });
 
+  Hooks.on('updateActiveEffect', async (document, changed, options, userId) => {
+    if (game.user.id === userId && document.isOwner) {
+      if (changed?.system?.maxQuantityRaw !== undefined) {
+        console.log('Active effect updated:', document, changed);
+        document.updateMaxQuantity();
+      }
+    }
+  });
+
   Hooks.on('createItem', async (document, options, userId) => {
     if (game.user.id === userId && document.isOwner && document.type === 'equipment') {
       if (document.getActor()) {

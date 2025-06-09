@@ -1,5 +1,6 @@
 import { TeriockDocument } from "./child-mixin.mjs";
 import parse from "../logic/parsers/parse.mjs";
+import { evaluateSync } from "../helpers/utils.mjs";
 
 /**
  * @extends {ActiveEffect}
@@ -64,5 +65,29 @@ export default class TeriockEffect extends TeriockDocument(ActiveEffect) {
 
   async enable() {
     await this.setForceDisabled(false);
+  }
+
+  async updateMaxQuantity() {
+    console.log("Updating max quantity for", this.name);
+    console.log("Max quantity raw:", this.system.maxQuantityRaw);
+    console.log(this.system.consumable);
+    if (this.system?.consumable) {
+      console.log("Effect is consumable");
+      if (this.system?.maxQuantityRaw) {
+        console.log("Max quantity raw:", this.system.maxQuantityRaw);
+        let maxQuantity;
+        if (!Number.isNaN(parseInt(this.system?.maxQuantityRaw))) {
+          maxQuantity = parseInt(this.system?.maxQuantityRaw);
+        } else {
+          maxQuantity = evaluateSync(this.system.maxQuantityRaw, this.getActor()?.getRollData());
+        }
+        const quantity = Math.min(this.system.maxQuantity || 0, this.system.quantity || 0);
+        console.log(this.system?.maxQuantityRaw, maxQuantity, quantity);
+        await this.update({
+          'system.quantity': quantity,
+          'system.maxQuantity': maxQuantity
+        });
+      }
+    }
   }
 }
