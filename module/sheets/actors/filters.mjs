@@ -1,3 +1,13 @@
+function binaryFilter(filterVal, actualVal) {
+  let out = true;
+  if (typeof filterVal === "boolean") {
+    out = !filterVal || actualVal;
+  } else if (typeof filterVal === "number") {
+    out = filterVal === 1 ? actualVal : filterVal === -1 ? !actualVal : true;
+  }
+  return out;
+}
+
 export function filterAbilities(actor) {
   let abilities = actor.effectTypes.ability;
   const filters = actor.system.sheet.abilityFilters || {};
@@ -13,24 +23,23 @@ export function filterAbilities(actor) {
   };
 
   abilities = _sortItems(abilities, sortKey, ascending, sortMap[sortKey]) || [];
-
-  return abilities.filter(i =>
-    (!filters.basic || i.system.basic) &&
-    (!filters.standard || i.system.standard) &&
-    (!filters.skill || i.system.skill) &&
-    (!filters.spell || i.system.spell) &&
-    (!filters.ritual || i.system.ritual) &&
-    (!filters.rotator || i.system.rotator) &&
-    (!filters.sustained || i.system.sustained) &&
-    (!filters.heightened || i.system.heightened) &&
-    (!filters.expansion || i.system.expansion) &&
-    (!filters.verbal || i.system.costs.verbal) &&
-    (!filters.somatic || i.system.costs.somatic) &&
-    (!filters.material || i.system.costs.material) &&
-    (!filters.invoked || i.system.costs.invoked) &&
-    (!filters.hp || i.system.costs.hp) &&
-    (!filters.mp || i.system.costs.mp) &&
-    (!filters.broken || i.system.break) &&
+  abilities = abilities.filter(i =>
+    binaryFilter(filters.basic, i.system.basic) &&
+    binaryFilter(filters.standard, i.system.standard) &&
+    binaryFilter(filters.skill, i.system.skill) &&
+    binaryFilter(filters.spell, i.system.spell) &&
+    binaryFilter(filters.ritual, i.system.ritual) &&
+    binaryFilter(filters.rotator, i.system.rotator) &&
+    binaryFilter(filters.sustained, i.system.sustained) &&
+    binaryFilter(filters.heightened, i.system.heightened) &&
+    binaryFilter(filters.expansion, i.system.expansion) &&
+    binaryFilter(filters.verbal, i.system.costs.verbal) &&
+    binaryFilter(filters.somatic, i.system.costs.somatic) &&
+    binaryFilter(filters.material, i.system.costs.material) &&
+    binaryFilter(filters.invoked, i.system.costs.invoked) &&
+    binaryFilter(filters.hp, i.system.costs.hp) &&
+    binaryFilter(filters.mp, i.system.costs.mp) &&
+    binaryFilter(filters.broken, i.system.break) &&
     (!filters.maneuver || i.system.maneuver === filters.maneuver) &&
     (!filters.interaction || i.system.interaction === filters.interaction) &&
     (!filters.delivery || i.system.delivery.base === filters.delivery) &&
@@ -39,6 +48,7 @@ export function filterAbilities(actor) {
     (!filters.element || (i.system.elements || []).includes(filters.element)) &&
     (!filters.effects || filters.effects.every(e => i.system.effects.includes(e)))
   );
+  return abilities;
 }
 
 export function filterEquipment(actor) {
@@ -53,7 +63,7 @@ export function filterEquipment(actor) {
     bv: i => i.system.bv ?? 0,
     consumable: i => Number(i.system.consumable),
     damage: i => i.system.damage ?? 0,
-    dampened: i => Number(i.system.dampened),
+    identified: i => Number(i.system.identified),
     equipmentType: i => i.system.equipmentType ?? '',
     equipped: i => Number(i.system.equipped),
     minStr: i => i.system.minStr ?? 0,
@@ -97,14 +107,13 @@ export function filterEquipment(actor) {
       ) &&
       (!filterWeaponFightingStyle || weaponFightingStyles.includes(filterWeaponFightingStyle)) &&
       (!filters.powerLevel || i.system.powerLevel === filters.powerLevel) &&
-      (!filters.equipped || i.system.equipped) &&
-      (!filters.shattered || i.system.shattered) &&
-      (!filters.dampened || i.system.dampened) &&
-      (!filters.consumable || i.system.consumable)
+      binaryFilter(filters.equipped, i.system.equipped) &&
+      binaryFilter(filters.shattered, i.system.shattered) &&
+      binaryFilter(filters.identified, i.system.identified) &&
+      binaryFilter(filters.consumable, i.system.consumable)
     );
   });
 }
-
 
 function _sortItems(items, sortKey, ascending, accessor = (i) => i.name) {
   items?.sort((a, b) => {

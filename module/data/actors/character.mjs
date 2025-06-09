@@ -3,6 +3,7 @@ const { TypeDataModel } = foundry.abstract;
 import { mergeLevel } from "../../helpers/utils.mjs";
 import { tradecraftOptions } from "../../helpers/constants/tradecraft-options.mjs";
 import { attributeField, tradecraftField, hackField, sheetField } from "./actor-fields.mjs";
+import { migrate } from "./migrate.mjs";
 
 const tradecrafts = mergeLevel(tradecraftOptions, "*", "tradecrafts");
 const tradecraftData = {};
@@ -110,5 +111,10 @@ export class TeriockCharacterData extends TypeDataModel {
       }),
       moneyWeight: new fields.NumberField({ initial: 0 }),
     }
+  }
+
+  static migrateData(data) {
+    // data = migrate(data);
+    return super.migrateData(data);
   }
 }

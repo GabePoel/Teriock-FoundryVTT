@@ -172,6 +172,36 @@ export default function registerHandlebarsHelpers() {
 
   Handlebars.registerHelper('tabActive', (active, tab) => active === tab ? 'active' : 'inactive');
 
+  Handlebars.registerHelper('tswitch', (options) => {
+    const { name, disabled } = options.hash;
+    let value;
+    if (name && typeof name === "string") {
+      const keys = name.split(".");
+      value = options.data.root;
+      for (const key of keys) {
+        if (value && typeof value === "object" && key in value) {
+          value = value[key];
+        } else {
+          value = undefined;
+          break;
+        }
+      }
+    }
+    const attrs = [
+      name ? `data-name="${name}"` : '',
+      name ? `data-value="${value}"` : '',
+      disabled? '' : name ? `data-action="toggleSwitch"` : '',
+      disabled? `disabled` : '',
+    ];
+    return new Handlebars.SafeString(`
+      <div class="tswitch">
+        <div class="tswitch-bg" ${attrs.join(' ')}>
+          <div class="tcircle"></div>
+        </div>
+      </div>
+    `);
+  })
+
   Handlebars.registerHelper('ttoggle', bool => `ttoggle-button${bool ? ' toggled' : ''}`);
 
   Handlebars.registerHelper('ticon', (icon, options) => {

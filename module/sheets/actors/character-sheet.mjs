@@ -607,6 +607,18 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(Terioc
         const card = cards.find(c => c.dataset.id === item._id);
         if (card) visibleContent.appendChild(card);
       });
-    } 
+    }
+
+    if (visibleContent) {
+      const seen = new Set();
+      Array.from(visibleContent.querySelectorAll('.tcard')).forEach(card => {
+        const id = card.dataset.id;
+        if (seen.has(id)) {
+          card.remove();
+        } else {
+          seen.add(id);
+        }
+      });
+    }
   }
 }

@@ -29,7 +29,7 @@ export default function parseEquipment(rawHTML, item) {
   const getHTML = s => q(s)?.innerHTML.trim();
 
   const referenceEquipment = new Item({ name: 'Reference Equipment', type: 'equipment' });
-  const parameters = foundry.utils.deepClone(referenceEquipment.system);
+  const parameters = foundry.utils.deepClone(referenceEquipment.system).toObject();
 
   // Parse damage
   const damageText = getText('.damage');
@@ -82,6 +82,8 @@ export default function parseEquipment(rawHTML, item) {
     createProperty(item, key);
   }
 
+  parameters.properties = [];
+
   parameters.editable = false;
 
   equipmentOverrides(item, parameters);
@@ -99,6 +101,8 @@ export default function parseEquipment(rawHTML, item) {
     'effectiveTier', 'notes', 'shattered', 'dampened', 'materialProperties',
     'disabled', 'glued', 'font'
   ].forEach(key => delete parameters[key]);
+
+  console.log(parameters);
 
   return { system: parameters, img: newImg };
 }

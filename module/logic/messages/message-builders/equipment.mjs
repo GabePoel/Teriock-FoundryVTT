@@ -52,24 +52,24 @@ export function buildEquipmentMessage(equipment) {
         ...src.equipmentClasses.map(equipmentClass => ref.equipmentClasses[equipmentClass]),
       ]
     },
-    {
-      icon: 'fa-circle-info',
-      wrappers: [
-        ...src.properties.map(prop => ref.properties[prop]),
-      ]
-    },
-    {
-      icon: 'fa-sparkle',
-      wrappers: [
-        ...src.magicalProperties.map(prop => ref.magicalProperties[prop])
-      ]
-    },
-    {
-      icon: 'fa-cube',
-      wrappers: [
-        ...src.materialProperties.map(prop => ref.materialProperties[prop]),
-      ]
-    }
+    // {
+    //   icon: 'fa-circle-info',
+    //   wrappers: [
+    //     ...src.properties.map(prop => ref.properties[prop]),
+    //   ]
+    // },
+    // {
+    //   icon: 'fa-sparkle',
+    //   wrappers: [
+    //     ...src.magicalProperties.map(prop => ref.magicalProperties[prop])
+    //   ]
+    // },
+    // {
+    //   icon: 'fa-cube',
+    //   wrappers: [
+    //     ...src.materialProperties.map(prop => ref.materialProperties[prop]),
+    //   ]
+    // }
   ]
   const blocks = [
     {

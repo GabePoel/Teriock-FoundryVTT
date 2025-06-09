@@ -1,0 +1,39 @@
+.tswitch {
+  .tswitch-bg {
+    width: 36px;
+    height: 18px;
+    border-radius: 10px;
+    display: flex;
+    border: 2px solid var(--color-dark-6);
+    align-items: center;
+    justify-content: center;
+    margin: 3px;
+    &:not([disabled]) {
+      cursor: pointer;
+    }
+    .tcircle {
+      width: 14px;
+      height: 14px;
+      background-color: var(--color-dark-6);
+      border-radius: 50%;
+    }
+    &.toggled-on,
+    &[data-value="1"] {
+      background-color: var(--color-warm-1);
+      border-color: var(--color-warm-1);
+      justify-content: flex-end;
+      .tcircle {
+        background-color: var(--color-dark-1);
+      }
+    }
+    &.toggled-off,
+    &[data-value="-1"] {
+      background-color: var(--color-warm-2);
+      border-color: var(--color-warm-2);
+      justify-content: flex-start;
+      .tcircle {
+        background-color: var(--color-dark-1);
+      }
+    }
+  }
+}

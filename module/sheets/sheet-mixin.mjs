@@ -28,6 +28,7 @@ export const TeriockSheet = (Base) =>
         createResource: this._createResource,
         createProperty: this._createProperty,
         createFluency: this._createFluency,
+        toggleSwitch: this._toggleSwitch,
       },
       form: {
         submitOnChange: true,
@@ -305,6 +306,22 @@ export const TeriockSheet = (Base) =>
 
     static async _createFluency(event, __) {
       await createFluency(this.item, null);
+    }
+
+    static async _toggleSwitch(event, target) {
+      const name = target.dataset.name;
+      const value = target.dataset.value;
+      let newValue;
+      if (value == 0) {
+        newValue = 1;
+      } else if (value == 1) {
+        newValue = -1;
+      } else {
+        newValue = 0;
+      }
+      this.document.update({
+        [name]: newValue
+      });
     }
 
     static async _createProperty(event, __) {

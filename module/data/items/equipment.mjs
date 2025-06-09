@@ -35,7 +35,7 @@ export class TeriockEquipmentData extends TeriockItemData {
       tier: new fields.NumberField({ initial: 0 }),
       fullTier: new fields.StringField({ initial: "" }),
       manaStoring: new fields.StringField({ initial: "" }),
-      identified: new fields.BooleanField({ initial: false }),
+      identified: new fields.BooleanField({ initial: true }),
       reference: new fields.StringField({ initial: null, nullable: true, gmOnly: true }),
     }
   }
