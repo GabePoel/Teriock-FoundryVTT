@@ -7,7 +7,8 @@ export async function rollEquipment(equipment, options) {
 async function use(equipment, options) {
   let message = await equipment.buildMessage();
   if (equipment.system.damage) {
-    let rollFormula = equipment.system.damage;
+    let rollFormula = equipment.system.damage || '';
+    rollFormula = rollFormula.trim();
 
     // let damageTypes = equipment.system.damageTypes || [];
     let damageTypes = [];
@@ -21,7 +22,8 @@ async function use(equipment, options) {
       effectDamageTypes.push('Fire');
     }
     damageTypes = [...new Set([...damageTypes, ...effectDamageTypes])];
-    if (damageTypes.length > 0) {
+    if (damageTypes.length > 0 && rollFormula.length > 0 && rollFormula !== '0') {
+      damageTypes.sort((a, b) => a.localeCompare(b));
       rollFormula += '[' + damageTypes.join(', ') + ']';
     }
 

@@ -25,9 +25,9 @@ export function primaryAttackContextMenu(actor, options) {
   const attackOptions = [];
   for (const item of equipped) {
     let icon = "";
-    if (item.system.damage) {
+    if (item.system.damage != 1) {
       icon = `<i class="fa-solid fa-sword"></i>`;
-    } else if (item.system.properties?.includes("bashing")) {
+    } else {
       icon = `<i class="fa-solid fa-staff"></i>`;
     }
     attackOptions.push({

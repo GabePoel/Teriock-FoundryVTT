@@ -2,6 +2,7 @@ const { DialogV2 } = foundry.applications.api;
 import { createAbility } from "../helpers/create-effects.mjs";
 import { fetchCategoryMembers } from "../helpers/wiki.mjs";
 import { TeriockDocument } from "./child-mixin.mjs";
+import { toCamelCase } from "../helpers/utils.mjs";
 import parse from "../logic/parsers/parse.mjs";
 
 /**
@@ -261,18 +262,24 @@ export default class TeriockItem extends TeriockDocument(Item) {
   }
 
   _buildEffectTypes() {
-    const out = {};
+    const effectTypes = {};
+    const effectKeys = {};
     for (const effect of this.transferredEffects) {
       const type = effect.type;
-      if (!out[type]) out[type] = [];
-      out[type].push(effect);
+      if (!effectTypes[type]) effectTypes[type] = [];
+      if (!effectKeys[type]) effectKeys[type] = new Set();
+      effectTypes[type].push(effect);
+      effectKeys[type].add(toCamelCase(effect.name));
     }
-    return out;
+    return { effectTypes, effectKeys };
   }
 
+  /** @override */
   prepareDerivedData() {
     super.prepareDerivedData();
-    this.effectTypes = this._buildEffectTypes();
+    const { effectTypes, effectKeys } = this._buildEffectTypes();
+    this.effectTypes = effectTypes;
+    this.effectKeys = effectKeys;
   }
 
   async _bulkWikiPullHelper(pullType) {

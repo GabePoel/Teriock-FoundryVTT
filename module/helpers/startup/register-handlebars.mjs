@@ -53,6 +53,12 @@ export default function registerHandlebarsHelpers() {
     });
   });
 
+  Handlebars.registerHelper('has', (set, item) => {
+    if (!set || typeof set !== 'object') return false;
+    if (typeof item === 'string') item = item.toLowerCase();
+    return set.has(item);
+  });
+
   Handlebars.registerHelper('str', val => {
     let out = '';
     if (!(val === undefined || val === null)) {

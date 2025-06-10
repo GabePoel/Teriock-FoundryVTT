@@ -42,7 +42,12 @@ function basicData(actor, data) {
 function attackData(actor, data) {
   const { system } = actor;
   Object.assign(data, {
-    av0: (system.piercing === 'av0' || system.piercing === 'ub') ? 2 : 0,
+    av0: (
+      system.piercing === 'av0' ||
+      system.piercing === 'ub' ||
+      system?.primaryAttacker?.effectKeys?.property?.has("av0") ||
+      system?.primaryAttacker?.effectKeys?.property?.has("ub")
+    ) ? 2 : 0,
     sb: system.sb ? 1 : 0,
     atkPen: system.attackPenalty,
   });

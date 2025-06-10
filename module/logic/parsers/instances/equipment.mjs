@@ -55,7 +55,7 @@ export default function parseEquipment(rawHTML, item) {
   if (piercing) parameters.properties.push(piercing);
 
   // Parse sb, av, bv
-  parameters.sb = toCamelCase(getValue('.sb')) ?? parameters.sb;
+  parameters.sb = toCamelCase(getValue('.sb') || '') ?? parameters.sb;
   parameters.av = cleanValue(getValue('.av')) ?? parameters.av;
   parameters.bv = cleanValue(getValue('.bv')) ?? parameters.bv;
 

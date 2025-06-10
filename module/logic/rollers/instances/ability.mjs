@@ -137,8 +137,8 @@ async function use(ability) {
   const getRollData = ability.getActor().getRollData();
   let properties;
   if (ability.system.delivery.base == 'weapon') {
-    properties = ability.getActor().system.primaryAttacker?.system?.properties || [];
-    if (properties.includes('av0') || properties.includes('ub')) {
+    properties = ability.getActor().system.primaryAttacker?.effectKeys?.property || new Set();
+    if (properties.has('av0') || properties.has('ub')) {
       getRollData.av0 = 2;
     }
   }
@@ -147,7 +147,7 @@ async function use(ability) {
   }
   let diceClass;
   let diceTooltip;
-  if (properties?.includes('ub') || ability.system.piercing == 'ub' || ability.getActor()?.system.piercing == 'ub') {
+  if (properties?.has('ub') || ability.system.piercing == 'ub' || ability.getActor()?.system.piercing == 'ub') {
     diceClass = 'ub';
     diceTooltip = 'Unblockable';
   }

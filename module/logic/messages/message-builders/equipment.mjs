@@ -117,14 +117,7 @@ export function buildSecretEquipmentMessage(equipment) {
     }
     damageString += ' damage';
   }
-  const bars = [
-    {
-      icon: 'fa-cube',
-      wrappers: [
-        ...src.materialProperties.map(prop => ref.materialProperties[prop]),
-      ]
-    }
-  ]
+  const bars = []
   const blocks = [
     {
       title: 'Noticeable properties',
