@@ -131,6 +131,7 @@ function prepareMoney(actor) {
   const money = actor.system.money;
   const currencyOptions = CONFIG.TERIOCK.currencyOptions;
   const total = Object.keys(currencyOptions).reduce((sum, key) => {
+    money[key] = Math.max(0, money[key] || 0);
     const value = (money[key] || 0) * currencyOptions[key].value;
     return sum + value;
   }, 0);

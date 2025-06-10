@@ -82,6 +82,7 @@ export function sheetField() {
       materialProperties: new fields.StringField({ initial: "" }),
       magicalProperties: new fields.StringField({ initial: "" }),
       weaponFightingStyles: new fields.StringField({ initial: "" }),
+      equipmentClasses: new fields.StringField({ initial: "" }),
       powerLevel: new fields.StringField({ initial: "" }),
     }),
     abilitySortOption: new fields.StringField({ initial: "name" }),

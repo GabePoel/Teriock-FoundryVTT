@@ -1,5 +1,3 @@
-// const { notifications } = foundry.applications.ui;
-
 /**
  * Parse roll-related flags from the argument list.
  * Strips known option flags and returns the rest as `rawArgs`.

@@ -28,7 +28,6 @@ async function use(resource, options) {
     const functionHook = resource.system.functionHook;
     if (functionHook) {
       const hookFunction = CONFIG.TERIOCK.resourceOptions.functionHooks[functionHook]?.callback;
-      console.log(`Hook function: ${functionHook}`, hookFunction);
       await hookFunction?.(resource, result);
     }
   } else {

@@ -3,6 +3,7 @@ import { documentOptions } from "../../helpers/constants/document-options.mjs";
 import { primaryBlockerContextMenu, primaryAttackContextMenu, piercingContextMenu } from "../../helpers/context-menus/character-context-menus.mjs";
 import { TeriockSheet } from "../sheet-mixin.mjs";
 import { filterAbilities, filterEquipment } from "./filters.mjs";
+import { sortAbilities, sortEquipment } from "./sort.mjs";
 
 export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(TeriockSheet(sheets.ActorSheet)) {
   static DEFAULT_OPTIONS = {
@@ -352,9 +353,9 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(Terioc
       limited: this.document.limited,
       owner: this.document.isOwner,
       system: this.actor.system,
-      abilities: this.actor.effectTypes.ability,
+      abilities: sortAbilities(this.actor),
       resources: this.actor.effectTypes.resource,
-      equipment: this.actor.itemTypes.equipment,
+      equipment: sortEquipment(this.actor),
       powers: this.actor.itemTypes.power,
       fluencies: this.actor.effectTypes.fluency,
       effects: this.actor.effectTypes.effect,
@@ -580,45 +581,34 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(Terioc
       filtered = this[filterMethodName]?.() || filtered;
     }
     filtered = filtered.filter(i => rgx.test(i.name));
-    const hiddenContent = this.element.querySelector(`#hidden-tcards`);
-    const visibleContent = this.element.querySelector(`.tcard-container`);
-    // Hide or show cards based on filter
-    content?.querySelectorAll('.tcard')?.forEach(card => {
-      const id = card.dataset.id;
-      if (!filtered.some(i => i._id === id)) {
-        hiddenContent.appendChild(card);
-      } else {
-        visibleContent.appendChild(card);
+
+    const visibleIds = new Set(filtered.map(i => i._id));
+    const allCards = Array.from(content?.querySelectorAll('.tcard') || []);
+
+    let visibleCount = 0;
+    let firstVisibleCard = null;
+    let lastVisibleCard = null;
+    
+    const noResults = this.element.querySelector(`.no-results`);
+    if (noResults) {
+      noResults.classList.toggle('not-hidden', visibleIds.size == 0);
+    }
+
+    allCards.forEach(card => {
+      const isVisible = visibleIds.has(card.dataset.id);
+
+      card.classList.remove('visible-first', 'visible-last');
+      card.classList.toggle('hidden', !isVisible);
+
+      if (isVisible) {
+        visibleCount++;
+        if (!firstVisibleCard) firstVisibleCard = card;
+        lastVisibleCard = card;
       }
     });
 
-    const noResults = this.element.querySelector(`.no-results`);
-    const visibleCards = Array.from(visibleContent?.querySelectorAll('.tcard') || []);
-    if (visibleCards.length === 0) {
-      if (noResults) noResults.style.display = 'flex';
-    } else {
-      if (noResults) noResults.style.display = 'none';
-    }
+    if (firstVisibleCard) firstVisibleCard.classList.add('visible-first');
+    if (lastVisibleCard) lastVisibleCard.classList.add('visible-last');
 
-    // Reorder cards to match filtered order
-    if (visibleContent) {
-      const cards = Array.from(visibleContent.querySelectorAll('.tcard'));
-      filtered.forEach(item => {
-        const card = cards.find(c => c.dataset.id === item._id);
-        if (card) visibleContent.appendChild(card);
-      });
-    }
-
-    if (visibleContent) {
-      const seen = new Set();
-      Array.from(visibleContent.querySelectorAll('.tcard')).forEach(card => {
-        const id = card.dataset.id;
-        if (seen.has(id)) {
-          card.remove();
-        } else {
-          seen.add(id);
-        }
-      });
-    }
   }
 }

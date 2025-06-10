@@ -87,9 +87,11 @@
   --tcard-box-shadow: 0 0 6px rgba(0, 0, 0, 0.4);
   --tcard-container-box-shadow: none;
   --tcard-border-radius: var(--tcard-outer-border-radius);
+  --tcard-margin-top: 0;
   display: flex;
   flex-direction: column;
   box-shadow: var(--tcard-container-box-shadow);
+  border-radius: var(--tcard-outer-border-radius);
 }
 @container (max-width: 274px) {
   .teriock .tcard-container:not(.large):not(.small):not(.tiny) .tcard-image, .teriock .tcard-container.medium .tcard-image {
@@ -117,7 +119,6 @@
 }
 .teriock .tcard-container.small {
   --tcard-height: 42px;
-  --tcard-outer-border-radius: 3px;
   --tcard-image-padding: 6px;
   --tcard-titles-padding-left: 2px;
   --tcard-titles-flex-direction: row;
@@ -137,7 +138,6 @@
 }
 .teriock .tcard-container.tiny {
   --tcard-height: 28px;
-  --tcard-outer-border-radius: 4px;
   --tcard-image-padding: 4px;
   --tcard-titles-padding-left: 2px;
   --tcard-titles-flex-direction: row;
@@ -156,11 +156,12 @@
   }
 }
 .teriock .tcard-container.gapless {
-  --tcard-inner-border-width: 0;
   --tcard-border-radius: 0;
   --tcard-box-shadow: none;
   --tcard-container-box-shadow: 0 0 6px rgba(0, 0, 0, 0.4);
+  --tcard-margin-top: -1px;
   gap: 0;
+  border-bottom-width: 0;
 }
 .teriock .tcard-container .tcard {
   --tcard-opacity: 1;
@@ -174,14 +175,24 @@
   border: 1px solid var(--color-border);
   border-radius: var(--tcard-border-radius);
   transition: all 0.15s ease-in-out;
-  overflow: hidden;
   position: relative;
   box-shadow: var(--tcard-box-shadow);
+  overflow: hidden;
   cursor: default;
+  margin-top: var(--tcard-margin-top);
+  border-width: var(--tcard-inner-border-width);
 }
 .teriock .tcard-container .tcard.inactive {
   --tcard-opacity: 0.5;
   background-color: rgba(255, 255, 255, 0.05);
+}
+.teriock .tcard-container .tcard.visible-first {
+  border-top-left-radius: calc(var(--tcard-outer-border-radius) - 1px);
+  border-top-right-radius: calc(var(--tcard-outer-border-radius) - 1px);
+}
+.teriock .tcard-container .tcard.visible-last {
+  border-bottom-left-radius: calc(var(--tcard-outer-border-radius) - 1px);
+  border-bottom-right-radius: calc(var(--tcard-outer-border-radius) - 1px);
 }
 .teriock .tcard-container .tcard .tcard-background {
   background-size: cover;
@@ -196,17 +207,6 @@
 .teriock .tcard-container .tcard.shattered .tcard-background {
   background: url("../assets/shattered.png") no-repeat top center;
   background-size: cover;
-}
-.teriock .tcard-container .tcard:first-child {
-  border-top-left-radius: var(--tcard-outer-border-radius);
-  border-top-right-radius: var(--tcard-outer-border-radius);
-}
-.teriock .tcard-container .tcard:last-child {
-  border-bottom-left-radius: var(--tcard-outer-border-radius);
-  border-bottom-right-radius: var(--tcard-outer-border-radius);
-}
-.teriock .tcard-container .tcard:not(:first-child) {
-  border-top-width: var(--tcard-inner-border-width);
 }
 .teriock .tcard-container .tcard:hover {
   box-shadow: 0 0 8px var(--color-shadow-primary);
@@ -316,6 +316,9 @@
 }
 .teriock .tcard-container .tcard .tcard-body .tcard-content .tcard-icons i:active {
   color: var(--color-text-secondary);
+}
+.teriock .tcard-container .tcard.hidden {
+  display: none;
 }
 .teriock .tcard-results {
   width: 100%;
@@ -439,11 +442,13 @@
   grid-column: span 15;
 }
 .teriock .tswitch .tswitch-bg {
-  width: 36px;
+  width: 36px !important;
   height: 18px;
+  min-height: unset;
   border-radius: 10px;
-  display: flex;
-  border: 2px solid var(--color-dark-6);
+  display: block;
+  position: relative;
+  padding: 1px;
   align-items: center;
   justify-content: center;
   margin: 3px;
@@ -452,26 +457,31 @@
   cursor: pointer;
 }
 .teriock .tswitch .tswitch-bg .tcircle {
+  position: absolute;
   width: 14px;
   height: 14px;
-  background-color: var(--color-dark-6);
+  background-color: color-mix(in srgb, var(--button-text-color), transparent 35%);
   border-radius: 50%;
+  top: 1px;
+  left: 10px;
+  transition: all 0.2s ease-in-out;
 }
 .teriock .tswitch .tswitch-bg.toggled-on, .teriock .tswitch .tswitch-bg[data-value="1"] {
-  background-color: var(--color-warm-1);
-  border-color: var(--color-warm-1);
-  justify-content: flex-end;
+  background-color: var(--color-warm-2);
 }
 .teriock .tswitch .tswitch-bg.toggled-on .tcircle, .teriock .tswitch .tswitch-bg[data-value="1"] .tcircle {
-  background-color: var(--color-dark-1);
+  background-color: var(--button-hover-text-color);
+  left: 19px;
 }
 .teriock .tswitch .tswitch-bg.toggled-off, .teriock .tswitch .tswitch-bg[data-value="-1"] {
   background-color: var(--color-warm-2);
-  border-color: var(--color-warm-2);
-  justify-content: flex-start;
 }
 .teriock .tswitch .tswitch-bg.toggled-off .tcircle, .teriock .tswitch .tswitch-bg[data-value="-1"] .tcircle {
-  background-color: var(--color-dark-1);
+  background-color: var(--button-hover-text-color);
+  left: 1px;
+}
+.teriock .tswitch .tswitch-bg:hover .tcircle {
+  background-color: var(--button-hover-text-color);
 }
 .teriock .ter-card {
   position: relative;
@@ -1860,6 +1870,9 @@
 }
 .teriock .tcard-display .no-results.tiny {
   height: 28px;
+}
+.teriock .tcard-display .no-results.not-hidden {
+  display: flex;
 }
 .teriock .character-tab-page {
   display: flex;

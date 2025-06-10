@@ -8,21 +8,29 @@ function binaryFilter(filterVal, actualVal) {
   return out;
 }
 
+function propertyFilter(filterVal, document) {
+  if (!filterVal || !document) return true;
+  const effects = document.transferredEffects || [];
+  const effectNames = effects.map(eff =>
+    eff.name.toLowerCase().replace(/[\s-]/g, "")
+  );
+  if (typeof filterVal === "string") {
+    const normalizedFilterVal = filterVal.toLowerCase().replace(/[\s-]/g, "");
+    return effectNames.some(name => name.includes(normalizedFilterVal));
+  } else if (Array.isArray(filterVal)) {
+    const normalizedFilterVals = filterVal.map(fv =>
+      fv.toLowerCase().replace(/[\s-]/g, "")
+    );
+    return normalizedFilterVals.some(fv =>
+      effectNames.some(name => name.includes(fv))
+    );
+  }
+  return false;
+}
+
 export function filterAbilities(actor) {
   let abilities = actor.effectTypes.ability;
   const filters = actor.system.sheet.abilityFilters || {};
-  const sortKey = actor.system.sheet.abilitySortOption;
-  const ascending = actor.system.sheet.abilitySortAscending;
-
-  const sortMap = {
-    name: i => i.name,
-    sourceName: i => i.parent?.name ?? '',
-    sourceType: i => i.parent?.type ?? '',
-    enabled: i => Number(i.disabled),
-    type: i => i.system.abilityType ?? '',
-  };
-
-  abilities = _sortItems(abilities, sortKey, ascending, sortMap[sortKey]) || [];
   abilities = abilities.filter(i =>
     binaryFilter(filters.basic, i.system.basic) &&
     binaryFilter(filters.standard, i.system.standard) &&
@@ -54,72 +62,17 @@ export function filterAbilities(actor) {
 export function filterEquipment(actor) {
   let equipment = actor.itemTypes.equipment;
   const filters = actor.system.sheet.equipmentFilters || {};
-  const sortKey = actor.system.sheet.equipmentSortOption;
-  const ascending = actor.system.sheet.equipmentSortAscending;
-
-  const sortMap = {
-    name: i => i.name,
-    av: i => i.system.av ?? 0,
-    bv: i => i.system.bv ?? 0,
-    consumable: i => Number(i.system.consumable),
-    damage: i => i.system.damage ?? 0,
-    identified: i => Number(i.system.identified),
-    equipmentType: i => i.system.equipmentType ?? '',
-    equipped: i => Number(i.system.equipped),
-    minStr: i => i.system.minStr ?? 0,
-    powerLevel: i => i.system.powerLevel ?? 0,
-    shattered: i => Number(i.system.shattered),
-    tier: i => i.system.tier ?? 0,
-    weight: i => i.system.weight ?? 0,
-  };
-
-  equipment = _sortItems(equipment, sortKey, ascending, sortMap[sortKey]) || [];
-
-  return equipment.filter(i => {
-    const equipmentClass = (i.system.equipmentClass ?? '').toLowerCase();
-    const filterEquipmentClass = (filters.equipmentClasses ?? '').toLowerCase();
-    const properties = (i.system.properties || []).map(p => (p ?? '').toLowerCase());
-    const filterProperty = (filters.properties ?? '').toLowerCase();
-    const transferredEffects = (i.transferredEffects || []).map(eff => (eff.name ?? '').toLowerCase());
-    const materialProperties = (i.system.materialProperties || []).map(p => (p ?? '').toLowerCase());
-    const filterMaterialProperty = (filters.materialProperties ?? '').toLowerCase();
-    const magicalProperties = (i.system.magicalProperties || []).map(p => (p ?? '').toLowerCase());
-    const filterMagicalProperty = (filters.magicalProperties ?? '').toLowerCase();
-    const weaponFightingStyles = (i.system.weaponFightingStyles || []).map(p => (p ?? '').toLowerCase());
-    const filterWeaponFightingStyle = (filters.weaponFightingStyles ?? '').toLowerCase();
-
-    return (
-      (!filterEquipmentClass || equipmentClass === filterEquipmentClass) &&
-      (
-        !filterProperty ||
-        properties.includes(filterProperty) ||
-        transferredEffects.some(eff => (eff.includes(filterProperty) && eff.type === 'property'))
-      ) &&
-      (
-        !filterMaterialProperty ||
-        materialProperties.includes(filterMaterialProperty) ||
-        transferredEffects.some(eff => (eff.includes(filterMaterialProperty) && eff.type === 'property'))
-      ) &&
-      (
-        !filterMagicalProperty ||
-        magicalProperties.includes(filterMagicalProperty) ||
-        transferredEffects.some(eff => (eff.includes(filterMagicalProperty) && eff.type === 'property'))
-      ) &&
-      (!filterWeaponFightingStyle || weaponFightingStyles.includes(filterWeaponFightingStyle)) &&
-      (!filters.powerLevel || i.system.powerLevel === filters.powerLevel) &&
-      binaryFilter(filters.equipped, i.system.equipped) &&
-      binaryFilter(filters.shattered, i.system.shattered) &&
-      binaryFilter(filters.identified, i.system.identified) &&
-      binaryFilter(filters.consumable, i.system.consumable)
-    );
-  });
-}
-
-function _sortItems(items, sortKey, ascending, accessor = (i) => i.name) {
-  items?.sort((a, b) => {
-    const aVal = accessor(a) ?? '';
-    const bVal = accessor(b) ?? '';
-    return typeof aVal === 'number' ? aVal - bVal : aVal.localeCompare(bVal);
-  });
-  return ascending ? items : items.reverse();
+  equipment = equipment.filter(i =>
+    propertyFilter(filters.properties, i) &&
+    propertyFilter(filters.materialProperties, i) &&
+    propertyFilter(filters.magicalProperties, i) &&
+    binaryFilter(filters.powerLevel, i.system.powerLevel) &&
+    binaryFilter(filters.equipped, i.system.equipped) &&
+    binaryFilter(filters.shattered, i.system.shattered) &&
+    binaryFilter(filters.identified, i.system.identified) &&
+    binaryFilter(filters.consumable, i.system.consumable) &&
+    (!filters.equipmentClass || (i.system.equipmentClasses || []).includes(filters.equipmentClass)) &&
+    (!filters.weaponFightingStyles || i.system.sb === filters.weaponFightingStyle)
+  );
+  return equipment;
 }

@@ -9,14 +9,9 @@ export const TeriockDocument = (Base) => class TeriockDocument extends Base {
   prepareDerivedData() {
     super.prepareDerivedData();
     if (this.system?.consumable) {
-      if (this.system?.maxQuantityRaw) {
-        if (!Number.isNaN(parseInt(this.system?.maxQuantityRaw))) {
-          this.system.maxQuantity = parseInt(this.system.maxQuantityRaw);
-        } else {
-          this.system.maxQuantity = evaluateSync(this.system.maxQuantityRaw, this.getActor()?.getRollData());
-        }
-      }
-      this.system.quantity = Math.min(this.system.maxQuantity || 0, this.system.quantity || 0);
+      const { maxQuantity, quantity } = this.getQuantities();
+      this.system.maxQuantity = maxQuantity;
+      this.system.quantity = quantity;
     }
   }
 
@@ -139,6 +134,25 @@ export const TeriockDocument = (Base) => class TeriockDocument extends Base {
       return this.parent;
     } else {
       return this.parent?.parent;
+    }
+  }
+
+  getQuantities() {
+    let maxQuantity = null;
+    let quantity = this.system?.quantity || 0;
+    if (this.system?.consumable) {
+      if (this.system?.maxQuantityRaw) {
+        if (!Number.isNaN(parseInt(this.system?.maxQuantityRaw))) {
+          maxQuantity = parseInt(this.system?.maxQuantityRaw);
+        } else {
+          maxQuantity = evaluateSync(this.system.maxQuantityRaw, this.getActor()?.getRollData());
+        }
+        quantity = Math.min(maxQuantity || Infinity, quantity || 0);
+      }
+    }
+    return {
+      maxQuantity: maxQuantity,
+      quantity: quantity,
     }
   }
 };

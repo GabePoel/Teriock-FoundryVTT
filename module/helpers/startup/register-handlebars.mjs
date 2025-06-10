@@ -195,9 +195,9 @@ export default function registerHandlebarsHelpers() {
     ];
     return new Handlebars.SafeString(`
       <div class="tswitch">
-        <div class="tswitch-bg" ${attrs.join(' ')}>
+        <button class="tswitch-bg" ${attrs.join(' ')}>
           <div class="tcircle"></div>
-        </div>
+        </button>
       </div>
     `);
   })

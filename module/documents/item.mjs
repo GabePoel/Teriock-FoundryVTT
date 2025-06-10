@@ -173,7 +173,6 @@ export default class TeriockItem extends TeriockDocument(Item) {
       const effects = copy.transferredEffects;
       const unidentifiedProperties = CONFIG.TERIOCK.equipmentOptions.unidentifiedProperties;
       const idsToRemove = effects.filter(e => e.type !== 'property' || !unidentifiedProperties.includes(e.name)).map(e => e._id);
-      await copy.deleteEmbeddedDocuments('ActiveEffect', idsToRemove);
       await copy.update({
         'name': name,
         'system.reference': reference,
@@ -185,11 +184,9 @@ export default class TeriockItem extends TeriockDocument(Item) {
         'system.notes': '',
         'system.fullTier': '',
         'system.manaStoring': '',
-        'system.properties': [],
-        'system.magicalProperties': [],
-        'system.materialProperties': [],
         'system.font': '',
       })
+      await copy.deleteEmbeddedDocuments('ActiveEffect', idsToRemove);
       await copy.unequip();
     } else if (this.type === 'equipment') {
       ui.notifications.warn("This item is already unidentified.");
@@ -202,17 +199,24 @@ export default class TeriockItem extends TeriockDocument(Item) {
       let doReadMagic = false;
       const ref = await foundry.utils.fromUuid(this.system.reference);
       const referenceName = ref ? ref.name : 'Unknown';
+      const referenceUuid = ref ? ref.uuid : 'Unknown';
+      ui.notifications.info(`Asking GMs to approve reading magic on ${this.name}.`);
       for (const user of users) {
         doReadMagic = await DialogV2.query(user, 'confirm', {
           title: 'Read Magic',
-          content: `Should ${game.user.name} read magic on unidentified ${referenceName}?`,
-          modal: true,
+          content: `<p>Should ${game.user.name} read magic on unidentified <a data-uuid=${referenceUuid} data-action="open">${referenceName}</a>?</p>`,
+          modal: false,
         })
       }
-      if (doReadMagic && ref) {
-        await this.update({
-          'system.powerLevel': ref.system.powerLevel,
-        })
+      if (doReadMagic) {
+        if (ref) {
+          await this.update({
+            'system.powerLevel': ref.system.powerLevel,
+          })
+        }
+        ui.notifications.success(`${this.name} was successfully read.`);
+      } else {
+        ui.notifications.error(`${this.name} was not successfully read.`);
       }
     }
   }
@@ -223,11 +227,13 @@ export default class TeriockItem extends TeriockDocument(Item) {
       let doIdentify = false;
       const ref = await foundry.utils.fromUuid(this.system.reference);
       const referenceName = ref ? ref.name : 'Unknown';
+      const referenceUuid = ref ? ref.uuid : 'Unknown';
+      ui.notifications.info(`Asking GMs to approve identification of ${this.name}.`);
       for (const user of users) {
         doIdentify = await DialogV2.query(user, 'confirm', {
           title: 'Identify Item',
-          content: `Should ${game.user.name} identify ${referenceName}?`,
-          modal: true,
+          content: `<p>Should ${game.user.name} identify <a data-uuid=${referenceUuid} data-action="open">${referenceName}</a>?</p>`,
+          modal: false,
         })
       }
       if (doIdentify) {
@@ -247,6 +253,9 @@ export default class TeriockItem extends TeriockDocument(Item) {
         } else {
           await this.unequip();
         }
+        ui.notifications.success(`${this.name} was successfully identified.`);
+      } else {
+        ui.notifications.error(`${this.name} was not successfully identified.`);
       }
     }
   }
