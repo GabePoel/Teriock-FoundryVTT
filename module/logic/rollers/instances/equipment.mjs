@@ -36,24 +36,28 @@ async function use(equipment, options) {
     if (equipment.getActor()?.system?.damage?.standard) {
       rollFormula += equipment.getActor().system.damage.standard;
     }
-    if (options?.advantage) {
-      rollFormula = rollFormula.replace(/(\d*)d(\d+)/gi, (match, dice, sides) => {
-        const numDice = parseInt(dice) || 1;
-        return (numDice * 2) + 'd' + sides;
-      });
-    }
+    // if (options?.advantage) {
+    //   rollFormula = rollFormula.replace(/(\d*)d(\d+)/gi, (match, dice, sides) => {
+    //     const numDice = parseInt(dice) || 1;
+    //     return (numDice * 2) + 'd' + sides;
+    //   });
+    // }
     if (options?.secret) {
       message = await equipment.buildMessage({ secret: true });
     } else {
       message = await equipment.buildMessage({ secret: false });
     }
     const rollData = equipment.getActor()?.getRollData() || {};
-    const roll = new TeriockHarmRoll(rollFormula, rollData, { message: message });
+    let roll = new TeriockHarmRoll(rollFormula, rollData, { message: message });
+    if (options?.advantage) {
+      roll = roll.alter(2, 0);
+    }
     roll.toMessage({
       speaker: ChatMessage.getSpeaker({
         actor: equipment.getActor(),
       }),
     });
+    console.log(roll.terms);
   } else {
     equipment.chat();
   }

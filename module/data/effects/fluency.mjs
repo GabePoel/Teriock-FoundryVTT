@@ -8,6 +8,8 @@ export class TeriockFluencyData extends TeriockEffectData {
       ...commonData,
       field: new fields.StringField({ initial: "artisan" }),
       tradecraft: new fields.StringField({ initial: "artist" }),
+      proficient: new fields.BooleanField({ initial: true }),
+      fluent: new fields.BooleanField({ initial: true }),
     }
   }
 }

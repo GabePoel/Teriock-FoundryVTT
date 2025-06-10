@@ -1,11 +1,10 @@
-import { TeriockDocument } from "./child-mixin.mjs";
+import { TeriockChild } from "./child-mixin.mjs";
 import parse from "../logic/parsers/parse.mjs";
-import { evaluateSync } from "../helpers/utils.mjs";
 
 /**
  * @extends {ActiveEffect}
  */
-export default class TeriockEffect extends TeriockDocument(ActiveEffect) {
+export default class TeriockEffect extends TeriockChild(ActiveEffect) {
 
   async parse(rawHTML) {
     return parse(rawHTML, this);

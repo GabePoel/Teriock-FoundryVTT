@@ -61,7 +61,10 @@ async function stageUse(ability, advantage, disadvantage) {
     } else if (disadvantage) {
       rollFormula = '2d20kl1';
     }
-    rollFormula += ' + @atkPen + @av0 + @sb';
+    rollFormula += ' + @atkPen + @av0';
+    if (ability.system.delivery.base == 'weapon') {
+      rollFormula += ' + @sb';
+    }
   } else if (ability.system.interaction == 'feat') {
     rollFormula = '10';
   } else {
@@ -75,11 +78,6 @@ async function stageUse(ability, advantage, disadvantage) {
       rollFormula = '2d20kl1';
     }
   }
-  if (ability.system.forceProficient) {
-    ability.system.proficient = true;
-  } else {
-    ability.system.proficient = ability.parent.system.proficient;
-  }
   const dialogs = [];
   if (ability.system.costs.mp == 'x') {
     const mpDialog = `<label>MP Cost</label><input type="number" name="mp" value="0" min="0" max="${ability.getActor().mp}" step="1"></input>`;
@@ -89,8 +87,8 @@ async function stageUse(ability, advantage, disadvantage) {
     const hpDialog = `<label>HP Cost</label><input type="number" name="hp" value="0" min="0" max="${ability.getActor().hp}" step="1"></input>`;
     dialogs.push(hpDialog);
   }
-  if (ability.system.proficient && ability.system.heightened) {
-    const p = ability.system.proficient ? ability.getActor().system.p : 0;
+  if (ability.system.isProficient && ability.system.heightened) {
+    const p = ability.system.isProficient ? ability.getActor().system.p : 0;
     const heightenedDialog = `<label>Heightened Amount</label><input type="number" name="heightened" value="0" min="0" max="${p}" step="1"></input>`;
     dialogs.push(heightenedDialog);
   }
@@ -114,7 +112,7 @@ async function stageUse(ability, advantage, disadvantage) {
           if (ability.system.costs.hp == 'x') {
             ability.system.hpCost = button.form.elements.hp.valueAsNumber;
           }
-          if (ability.system.proficient && ability.system.heightened) {
+          if (ability.system.isProficient && ability.system.heightened) {
             ability.system.heightenedAmount = button.form.elements.heightened.valueAsNumber;
           }
         }
@@ -122,7 +120,9 @@ async function stageUse(ability, advantage, disadvantage) {
     });
   }
   if (['attack', 'feat'].includes(ability.system.interaction) || ability.system.effects.includes('resistance')) {
-    if (ability.system.proficient) {
+    if (ability.system.isFluent) {
+      rollFormula += ' + @f';
+    } else if (ability.system.isProficient) {
       rollFormula += ' + @p';
     }
     if (ability.system.heightenedAmount) {
@@ -135,21 +135,28 @@ async function stageUse(ability, advantage, disadvantage) {
 async function use(ability) {
   let message = await ability.buildMessage();
   const getRollData = ability.getActor().getRollData();
+  getRollData.av0 = 0;
   let properties;
+  let diceClass;
+  let diceTooltip;
   if (ability.system.delivery.base == 'weapon') {
     properties = ability.getActor().system.primaryAttacker?.effectKeys?.property || new Set();
-    if (properties.has('av0') || properties.has('ub')) {
+    if (properties.has('av0') || ability.getActor()?.system.piercing == 'av0') {
+      getRollData.av0 = 2;
+    }
+    if (properties.has('ub') || ability.getActor()?.system.piercing == 'ub') {
+      diceClass = 'ub';
+      diceTooltip = 'Unblockable';
       getRollData.av0 = 2;
     }
   }
-  if (['av0', 'ub'].includes(ability.system.piercing)) {
+  if (ability.system.piercing == 'av0') {
     getRollData.av0 = 2;
   }
-  let diceClass;
-  let diceTooltip;
-  if (properties?.has('ub') || ability.system.piercing == 'ub' || ability.getActor()?.system.piercing == 'ub') {
+  if (ability.system.piercing == 'ub') {
     diceClass = 'ub';
     diceTooltip = 'Unblockable';
+    getRollData.av0 = 2;
   }
   const context = {
     diceClass: diceClass,

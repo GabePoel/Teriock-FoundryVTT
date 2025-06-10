@@ -19,6 +19,7 @@ export class TeriockRankData extends TeriockItemData {
       hp: new fields.NumberField({ initial: 6 }),
       mp: new fields.NumberField({ initial: 6 }),
       maxAv: new fields.NumberField({ initial: 2 }),
+      proficient: new fields.BooleanField({ initial: true }),
     }
   }
 }

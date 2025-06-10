@@ -1,3 +1,5 @@
+const { DiceTerm } = foundry.dice.terms;
+
 /**
  * A custom Roll class which enriches the provided flavor and uses a custom chat template to display the flavor as enriched HTML.
  * 
@@ -35,5 +37,14 @@ export default class TeriockRoll extends Roll {
       Object.assign(context, this.context);
     }
     return context;
+  }
+
+  // TODO:Finish implementing the boost method.
+  boost(amount = 1) {
+    const terms = this.terms;
+  }
+
+  deboost(amount = 1) {
+    const terms = this.terms;
   }
 }

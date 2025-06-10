@@ -1,3 +1,4 @@
+const { ux } = foundry.applications;
 import { buildAbilityMessage } from "./message-builders/ability.mjs";
 import { buildEquipmentMessage, buildSecretEquipmentMessage } from "./message-builders/equipment.mjs";
 import { buildFluencyMessage } from "./message-builders/fluency.mjs";

@@ -120,7 +120,7 @@ function addEmbeddedBlock(entities, blocks, name, typeKey, iconFallback = 'hasht
     return `<li class="tmessage-embedded-li">
       <span class="tmes-emb-li-icon" style="color: ${color};">
         <i class="fa-solid fa-${icon} fa-fw"></i>
-      </span><a data-action="open" data-uuid="${uuid}" data-tooltip="Open ${type}">${name}</a>${suffix}
+      </span>@UUID[${uuid}]{${name}}${suffix}
     </li>`;
   }).join('');
 

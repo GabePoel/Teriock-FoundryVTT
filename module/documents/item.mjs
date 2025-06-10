@@ -1,14 +1,14 @@
-const { DialogV2 } = foundry.applications.api;
+const { api, ux } = foundry.applications;
 import { createAbility } from "../helpers/create-effects.mjs";
 import { fetchCategoryMembers } from "../helpers/wiki.mjs";
-import { TeriockDocument } from "./child-mixin.mjs";
+import { TeriockChild } from "./child-mixin.mjs";
 import { toCamelCase } from "../helpers/utils.mjs";
 import parse from "../logic/parsers/parse.mjs";
 
 /**
  * @extends {Item}
  */
-export default class TeriockItem extends TeriockDocument(Item) {
+export default class TeriockItem extends TeriockChild(Item) {
 
   async parse(rawHTML) {
     return parse(rawHTML, this);
@@ -125,7 +125,7 @@ export default class TeriockItem extends TeriockDocument(Item) {
           // const referenceName = ref ? ref.name : 'Unknown';
           // let doEquip = false;
           // for (const user of users) {
-          //   doEquip = await DialogV2.query(user, 'confirm', {
+          //   doEquip = await api.DialogV2.query(user, 'confirm', {
           //     title: 'Equip Item',
           //     content: `Should ${game.user.name} equip and learn the tier of unidentified ${referenceName}?`,
           //     modal: true,
@@ -202,10 +202,11 @@ export default class TeriockItem extends TeriockDocument(Item) {
       const referenceName = ref ? ref.name : 'Unknown';
       const referenceUuid = ref ? ref.uuid : 'Unknown';
       ui.notifications.info(`Asking GMs to approve reading magic on ${this.name}.`);
+      const content = await ux.TextEditor.enrichHTML(`<p>Should ${game.user.name} read magic on @UUID[${referenceUuid}]{${referenceName}}?</p>`);
       for (const user of users) {
-        doReadMagic = await DialogV2.query(user, 'confirm', {
+        doReadMagic = await api.DialogV2.query(user, 'confirm', {
           title: 'Read Magic',
-          content: `<p>Should ${game.user.name} read magic on unidentified <a data-uuid=${referenceUuid} data-action="open">${referenceName}</a>?</p>`,
+          content: content,
           modal: false,
         })
       }
@@ -230,10 +231,11 @@ export default class TeriockItem extends TeriockDocument(Item) {
       const referenceName = ref ? ref.name : 'Unknown';
       const referenceUuid = ref ? ref.uuid : 'Unknown';
       ui.notifications.info(`Asking GMs to approve identification of ${this.name}.`);
+      const content = await ux.TextEditor.enrichHTML(`<p>Should ${game.user.name} identify @UUID[${referenceUuid}]{${referenceName}}?</p>`);
       for (const user of users) {
-        doIdentify = await DialogV2.query(user, 'confirm', {
+        doIdentify = await api.DialogV2.query(user, 'confirm', {
           title: 'Identify Item',
-          content: `<p>Should ${game.user.name} identify <a data-uuid=${referenceUuid} data-action="open">${referenceName}</a>?</p>`,
+          content: content,
           modal: false,
         })
       }
@@ -285,7 +287,7 @@ export default class TeriockItem extends TeriockDocument(Item) {
   async _bulkWikiPullHelper(pullType) {
     const pullTypeName = pullType === 'pages' ? 'Ability' : 'Category';
     let toPull;
-    await DialogV2.prompt({
+    await api.DialogV2.prompt({
       window: { title: 'Pulling ' + pullTypeName },
       content: `<input type="text" name="pullInput" placeholder="${pullTypeName} Name" />`,
       ok: {
@@ -309,7 +311,7 @@ export default class TeriockItem extends TeriockDocument(Item) {
 
   async _bulkWikiPull() {
     if (['ability', 'equipment', 'rank', 'power'].includes(this.type)) {
-      const dialog = new DialogV2({
+      const dialog = new api.DialogV2({
         window: { title: 'Bulk Wiki Pull' },
         content: 'What would you like to pull?',
         buttons: [{

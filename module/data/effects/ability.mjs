@@ -6,7 +6,6 @@ export class TeriockAbilityData extends TeriockEffectData {
     const commonData = super.defineSchema();
     return {
       ...commonData,
-      
     }
   }
 }

@@ -1,9 +1,10 @@
+const { ux } = foundry.applications;
 import { buildMessage } from "../logic/messages/build.mjs";
 import { evaluateSync } from "../helpers/utils.mjs";
 import { fetchWikiPageHTML, openWikiPage } from "../helpers/wiki.mjs";
 import { makeRoll } from "../logic/rollers/roller.mjs";
 
-export const TeriockDocument = (Base) => class TeriockDocument extends Base {
+export const TeriockChild = (Base) => class TeriockChild extends Base {
 
   /** @override */
   prepareDerivedData() {
@@ -13,6 +14,25 @@ export const TeriockDocument = (Base) => class TeriockDocument extends Base {
       this.system.maxQuantity = maxQuantity;
       this.system.quantity = quantity;
     }
+    let fluent = false;
+    let proficient = false;
+    if (this.system?.fluent) {
+      fluent = true;
+    }
+    if (this.parent?.system?.fluent) {
+      fluent = true;
+    }
+    if (this.system?.proficient) {
+      proficient = true;
+    }
+    if (this.parent?.system?.proficient) {
+      proficient = true;
+    }
+    if (fluent) {
+      proficient = true;
+    }
+    this.system.isFluent = fluent;
+    this.system.isProficient = proficient;
   }
 
   async parse(rawHTML) {
@@ -91,7 +111,7 @@ export const TeriockDocument = (Base) => class TeriockDocument extends Base {
   }
 
   async buildMessage(options = {}) {
-    return buildMessage(this, options).outerHTML;
+    return await ux.TextEditor.enrichHTML(buildMessage(this, options).outerHTML);
   }
 
   getWikiPage() {

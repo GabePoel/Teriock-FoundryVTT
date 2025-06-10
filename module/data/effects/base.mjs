@@ -6,6 +6,8 @@ export class TeriockEffectData extends TypeDataModel {
     return {
       description: new fields.HTMLField({ initial: "<p>None.</p>" }),
       forceDisabled: new fields.BooleanField({ initial: false }),
+      proficient: new fields.BooleanField({ initial: false }),
+      fluent: new fields.BooleanField({ initial: false }),
     }
   }
 }

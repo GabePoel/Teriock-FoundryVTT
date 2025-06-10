@@ -6,8 +6,9 @@ export class TeriockItemData extends TypeDataModel {
     return {
       description: new fields.HTMLField(),
       disabled: new fields.BooleanField({ initial: false }),
-      proficient: new fields.BooleanField({ initial: false }),
       font: new fields.StringField({ initial: "" }),
+      proficient: new fields.BooleanField({ initial: false }),
+      fluent: new fields.BooleanField({ initial: false }),
     }
   }
 }
