@@ -41,19 +41,33 @@ export class TeriockEffectSheet extends TeriockSheet(sheets.ActiveEffectConfig) 
       entry.addEventListener('change', (event) => {
         const index = parseInt(entry.dataset.index, 10);
         const key = entry.dataset.key;
-        const value = entry.value;
-        const changes = this.document.changes;
+        const application = entry.dataset.application;
+        const updateString = `system.applies.${application}.changes`;
+        let value = entry.value;
+        if (!isNaN(value) && value !== '') {
+          const intValue = parseInt(value, 10);
+          if (!isNaN(intValue) && intValue.toString() === value.trim()) {
+            value = intValue;
+          }
+        }
+        if (typeof value === "string" && value.trim() !== "" && !isNaN(value)) {
+          value = Number(value);
+        }
+        const changes = this.document.system.applies[application].changes;
+        console.log(`Updating change at index ${index} for application ${application}`, changes);
         if (index >= 0 && index < changes.length) {
           changes[index][key] = value;
-          this.document.update({ changes });
+          this.document.update({ [updateString]: changes });
         }
       });
     });
   }
 
-  static async _addChange(event) {
+  static async _addChange(event, target) {
     event.preventDefault();
-    const changes = this.document.changes;
+    const application = target.dataset.application;
+    const updateString = `system.applies.${application}.changes`;
+    const changes = this.document.system.applies[application].changes;
     const newChange = {
       key: '',
       mode: 0,
@@ -61,18 +75,20 @@ export class TeriockEffectSheet extends TeriockSheet(sheets.ActiveEffectConfig) 
       priority: 0,
     };
     changes.push(newChange);
-    await this.document.update({ changes });
+    await this.document.update({ [updateString]: changes });
   }
 
   static async _deleteChange(event, target) {
     event.preventDefault();
     const index = parseInt(target.dataset.index, 10);
-    const changes = this.document.changes;
+    const application = target.dataset.application;
+    const updateString = `system.applies.${application}.changes`;
+    console.log(updateString);
+    const changes = this.document.system.applies[application].changes;
     console.log(`Deleting change at index ${index} from changes`, changes);
     if (index >= 0 && index < changes.length) {
       changes.splice(index, 1);
-      console.log(`Updated changes after deletion`, changes);
-      await this.document.update({ changes });
+      await this.document.update({ [updateString]: changes });
     }
   }
 }

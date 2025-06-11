@@ -41,45 +41,65 @@
   }
 }
 
-.prosemirror {
-  min-height: unset;
-  display: block;
-}
-
-.prosemirror.inactive .editor-content {
-  display: contents;
-}
-.prosemirror.active .editor-content {
-  display: block;
-}
-
-.editor .editor-content {
-  :first-child {
-    margin-top: 0;
+.character-window,
+.tsheet-page {
+  .prosemirror {
+    min-height: unset;
+    display: block;
   }
-  :last-child {
-    margin-bottom: 0;
+
+  .prosemirror.inactive .editor-content {
+    display: contents;
   }
-}
+  .prosemirror.active .editor-content {
+    display: block;
+  }
 
-.ab-section-container:not(:hover) .prosemirror button.toggle,
-.ab-section-container:not(:hover) prose-mirror button.toggle,
-.es-wording-container:not(:hover) .prosemirror button.toggle,
-.es-wording-container:not(:hover) prose-mirror button.toggle {
-  display: none;
-}
-.prosemirror button.toggle,
-prose-mirror button.toggle {
-  font-size: xx-small;
-  padding: 0.5em;
-  height: unset;
-  width: unset;
-  min-height: unset;
-  min-width: unset;
-}
+  .editor .editor-content {
+    :first-child {
+      margin-top: 0;
+    }
+    :last-child {
+      margin-bottom: 0;
+    }
+  }
 
-.prosemirror {
-  width: 100%;
+  .ab-section-container:not(:hover) .prosemirror button.toggle,
+  .ab-section-container:not(:hover) prose-mirror button.toggle,
+  .es-wording-container:not(:hover) .prosemirror button.toggle,
+  .es-wording-container:not(:hover) prose-mirror button.toggle {
+    display: none;
+  }
+  .prosemirror button.toggle,
+  prose-mirror button.toggle {
+    font-size: xx-small;
+    padding: 0.5em;
+    height: unset;
+    width: unset;
+    min-height: unset;
+    min-width: unset;
+  }
+
+  .prosemirror {
+    width: 100%;
+  }
+  .editor {
+    overflow: visible;
+  }
+  .character-notes-content {
+    .prosemirror button.toggle,
+    prose-mirror button.toggle {
+      top: 0;
+      right: 0;
+      font-size: medium;
+      padding: 0.5em;
+      height: var(--input-height);
+      width: var(--input-height);
+    }
+    .editor {
+      min-height: 2.3em;
+    }
+  }
 }
 
 .thover {
@@ -92,27 +112,8 @@ prose-mirror button.toggle {
   }
 }
 
-.character-notes-content {
-  .prosemirror button.toggle,
-  prose-mirror button.toggle {
-    top: 0;
-    right: 0;
-    font-size: medium;
-    padding: 0.5em;
-    height: var(--input-height);
-    width: var(--input-height);
-  }
-  .editor {
-    min-height: 2.3em;
-  }
-}
-
 .chat-message {
   overflow: hidden;
-}
-
-.editor {
-  overflow: visible;
 }
 
 dl dt {

@@ -1,9 +1,23 @@
 export default function registerHandlebarsHelpers() {
 
+  // Debugging
+
+  Handlebars.registerHelper('log', (...args) => {
+    const options = args.pop();
+    if (options) {
+      console.log(...args);
+    }
+    return '';
+  });
+
   // String Helpers
 
   Handlebars.registerHelper('lc', str => typeof str === 'string' ? str.toLowerCase() : '');
   Handlebars.registerHelper('uc', str => typeof str === 'string' ? str.toUpperCase() : '');
+  Handlebars.registerHelper('ucFirst', str => {
+    if (typeof str !== 'string') return '';
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  });
   Handlebars.registerHelper('length', str => typeof str === 'string' ? str.length : 0);
   Handlebars.registerHelper('prefix', (str, prefix) => {
     if (str && str !== '0' && str !== '+0') {

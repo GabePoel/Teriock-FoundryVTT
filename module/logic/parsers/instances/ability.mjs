@@ -1,5 +1,6 @@
 import { cleanFeet } from "../../../helpers/clean.mjs";
-import abilityOverrides from "../overrides/ability.mjs";
+// import abilityOverrides from "../overrides/ability.mjs";
+import abilityApplications from "../overrides/ability-applications.mjs";
 
 export default function parseAbility(rawHTML, ability) {
   const parser = new DOMParser();
@@ -194,7 +195,10 @@ export default function parseAbility(rawHTML, ability) {
   delete parameters.improvement;
   delete parameters.limitation;
 
-  abilityOverrides(ability, changes);
+  const applications = abilityApplications(ability.name);
+  if (applications) {
+    parameters.applies = applications;
+  }
 
   // Image selection
   let img = 'systems/teriock/assets/ability.svg';

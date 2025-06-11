@@ -1,3 +1,4 @@
+const { fields } = foundry.data;
 import { TeriockEffectData } from "./base.mjs";
 
 export class TeriockEffectData extends TeriockEffectData {
@@ -5,6 +6,7 @@ export class TeriockEffectData extends TeriockEffectData {
     const commonData = super.defineSchema();
     return {
       ...commonData,
+      source: new fields.StringField({ initial: '', nullable: true }),
     }
   }
 }

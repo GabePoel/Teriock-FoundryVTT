@@ -6,6 +6,25 @@ import parse from "../logic/parsers/parse.mjs";
  */
 export default class TeriockEffect extends TeriockChild(ActiveEffect) {
 
+  prepareDerivedData() {
+    super.prepareDerivedData();
+    if (this.type === 'ability' && this.system.maneuver === 'passive') {
+      if (this.system.applies.base.changes.length > 0) {
+        this.changes = this.system.applies.base.changes;
+      }
+      if (this.system.isProficient) {
+        if (this.system.applies.proficient.changes.length > 0) {
+          this.changes = this.system.applies.proficient.changes;
+        }
+      }
+      if (this.system.isFluent) {
+        if (this.system.applies.fluent.changes.length > 0) {
+          this.changes = this.system.applies.fluent.changes;
+        }
+      }
+    }
+  }
+
   async parse(rawHTML) {
     return parse(rawHTML, this);
   }

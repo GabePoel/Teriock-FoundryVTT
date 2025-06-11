@@ -2421,35 +2421,41 @@
   overflow: unset;
 }
 
-.prosemirror {
+.character-window .prosemirror,
+.tsheet-page .prosemirror {
   min-height: unset;
   display: block;
 }
-
-.prosemirror.inactive .editor-content {
+.character-window .prosemirror.inactive .editor-content,
+.tsheet-page .prosemirror.inactive .editor-content {
   display: contents;
 }
-
-.prosemirror.active .editor-content {
+.character-window .prosemirror.active .editor-content,
+.tsheet-page .prosemirror.active .editor-content {
   display: block;
 }
-
-.editor .editor-content :first-child {
+.character-window .editor .editor-content :first-child,
+.tsheet-page .editor .editor-content :first-child {
   margin-top: 0;
 }
-.editor .editor-content :last-child {
+.character-window .editor .editor-content :last-child,
+.tsheet-page .editor .editor-content :last-child {
   margin-bottom: 0;
 }
-
-.ab-section-container:not(:hover) .prosemirror button.toggle,
-.ab-section-container:not(:hover) prose-mirror button.toggle,
-.es-wording-container:not(:hover) .prosemirror button.toggle,
-.es-wording-container:not(:hover) prose-mirror button.toggle {
+.character-window .ab-section-container:not(:hover) .prosemirror button.toggle,
+.character-window .ab-section-container:not(:hover) prose-mirror button.toggle,
+.character-window .es-wording-container:not(:hover) .prosemirror button.toggle,
+.character-window .es-wording-container:not(:hover) prose-mirror button.toggle,
+.tsheet-page .ab-section-container:not(:hover) .prosemirror button.toggle,
+.tsheet-page .ab-section-container:not(:hover) prose-mirror button.toggle,
+.tsheet-page .es-wording-container:not(:hover) .prosemirror button.toggle,
+.tsheet-page .es-wording-container:not(:hover) prose-mirror button.toggle {
   display: none;
 }
-
-.prosemirror button.toggle,
-prose-mirror button.toggle {
+.character-window .prosemirror button.toggle,
+.character-window prose-mirror button.toggle,
+.tsheet-page .prosemirror button.toggle,
+.tsheet-page prose-mirror button.toggle {
   font-size: xx-small;
   padding: 0.5em;
   height: unset;
@@ -2457,9 +2463,28 @@ prose-mirror button.toggle {
   min-height: unset;
   min-width: unset;
 }
-
-.prosemirror {
+.character-window .prosemirror,
+.tsheet-page .prosemirror {
   width: 100%;
+}
+.character-window .editor,
+.tsheet-page .editor {
+  overflow: visible;
+}
+.character-window .character-notes-content .prosemirror button.toggle,
+.character-window .character-notes-content prose-mirror button.toggle,
+.tsheet-page .character-notes-content .prosemirror button.toggle,
+.tsheet-page .character-notes-content prose-mirror button.toggle {
+  top: 0;
+  right: 0;
+  font-size: medium;
+  padding: 0.5em;
+  height: var(--input-height);
+  width: var(--input-height);
+}
+.character-window .character-notes-content .editor,
+.tsheet-page .character-notes-content .editor {
+  min-height: 2.3em;
 }
 
 .thover {
@@ -2472,25 +2497,8 @@ prose-mirror button.toggle {
   color: var(--color-text-secondary);
 }
 
-.character-notes-content .prosemirror button.toggle,
-.character-notes-content prose-mirror button.toggle {
-  top: 0;
-  right: 0;
-  font-size: medium;
-  padding: 0.5em;
-  height: var(--input-height);
-  width: var(--input-height);
-}
-.character-notes-content .editor {
-  min-height: 2.3em;
-}
-
 .chat-message {
   overflow: hidden;
-}
-
-.editor {
-  overflow: visible;
 }
 
 dl dt {

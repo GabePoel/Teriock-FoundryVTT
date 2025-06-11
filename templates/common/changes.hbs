@@ -2,11 +2,12 @@
   class="changes-container tgrid g12"
   style="margin-top: 0.5em;"
 >
+  {{#each system.applies as |application key|}}
   <div
     class="change-box tgrid-item gi4"
     style="justify-content: start;"
   >
-    <div class="change-key">Key</div>
+    <div class="change-key">{{ucFirst key}} Key</div>
   </div>
   <div
     class="change-box tgrid-item gi3"
@@ -35,85 +36,94 @@
       style="display: flex; justify-content: center; align-items: center;"
       data-action="addChange"
       data-tooltip="Add"
-      {{#if (not editable)}}
+      data-application="{{key}}"
+      {{#if (not ../editable)}}
         disabled="true"
       {{/if}}
     >
       <i class="fa-solid fa-square-plus"></i>
     </a>
   </div>
-  {{#each changes as |change i|}}
-    <div class="change-box tgrid-item gi4">
-      <div class="change-box">
+    {{#each application.changes as |change i|}}
+      <div class="change-box tgrid-item gi4">
+        <div class="change-box">
+          <input
+            class="change-box-entry"
+            type="text"
+            data-index="{{i}}"
+            data-application="{{key}}"
+            data-key="key"
+            value="{{change.key}}"
+            {{#if (not ../../editable)}}
+              disabled="true"
+            {{/if}}
+          />
+        </div>
+      </div>
+      {{log change}}
+      {{log change.mode}}
+      <div class="change-box tgrid-item gi3">
+        <select
+          class="change-box-entry"
+          data-index="{{i}}"
+          data-application="{{key}}"
+          data-key="mode"
+          {{#if (not ../../editable)}}
+            disabled="true"
+          {{/if}}
+        >
+          <option value="0" {{#if (eq change.mode 0)}}selected{{/if}}>Custom</option>
+          <option value="1" {{#if (eq change.mode 1)}}selected{{/if}}>Multiply</option>
+          <option value="2" {{#if (eq change.mode 2)}}selected{{/if}}>Add</option>
+          <option value="3" {{#if (eq change.mode 3)}}selected{{/if}}>Downgrade</option>
+          <option value="4" {{#if (eq change.mode 4)}}selected{{/if}}>Upgrade</option>
+          <option value="5" {{#if (eq change.mode 5)}}selected{{/if}}>Override</option>
+        </select>
+      </div>
+      <div class="change-box tgrid-item gi2">
         <input
           class="change-box-entry"
           type="text"
           data-index="{{i}}"
-          data-key="key"
-          value="{{change.key}}"
-          {{#if (not ../editable)}}
+          data-application="{{key}}"
+          data-key="value"
+          value="{{change.value}}"
+          {{#if (not ../../editable)}}
             disabled="true"
           {{/if}}
         />
       </div>
-    </div>
-    <div class="change-box tgrid-item gi3">
-      <select
-        class="change-box-entry"
-        data-index="{{i}}"
-        data-key="mode"
-        {{#if (not ../editable)}}
-          disabled="true"
-        {{/if}}
+      <div class="change-box tgrid-item gi2">
+        <input
+          class="change-box-entry"
+          type="number"
+          data-index="{{i}}"
+          data-application="{{key}}"
+          data-key="priority"
+          value="{{change.priority}}"
+          {{#if (not ../../editable)}}
+            disabled="true"
+          {{/if}}
+        />
+      </div>
+      <div
+        class="change-box tgrid-item gi1"
+        style="justify-content: center;"
       >
-        <option value="0" {{#if (eq change.mode 0)}}selected{{/if}}>Custom</option>
-        <option value="1" {{#if (eq change.mode 1)}}selected{{/if}}>Multiply</option>
-        <option value="2" {{#if (eq change.mode 2)}}selected{{/if}}>Add</option>
-        <option value="3" {{#if (eq change.mode 3)}}selected{{/if}}>Downgrade</option>
-        <option value="4" {{#if (eq change.mode 4)}}selected{{/if}}>Upgrade</option>
-        <option value="5" {{#if (eq change.mode 5)}}selected{{/if}}>Override</option>
-      </select>
-    </div>
-    <div class="change-box tgrid-item gi2">
-      <input
-        class="change-box-entry"
-        type="text"
-        data-index="{{i}}"
-        data-key="value"
-        value="{{change.value}}"
-        {{#if (not ../editable)}}
-          disabled="true"
-        {{/if}}
-      />
-    </div>
-    <div class="change-box tgrid-item gi2">
-      <input
-        class="change-box-entry"
-        type="number"
-        data-index="{{i}}"
-        data-key="priority"
-        value="{{change.priority}}"
-        {{#if (not ../editable)}}
-          disabled="true"
-        {{/if}}
-      />
-    </div>
-    <div
-      class="change-box tgrid-item gi1"
-      style="justify-content: center;"
-    >
-      <a
-        class="delete-change-button"
-        style="display: flex; justify-content: center; align-items: center;"
-        data-action="deleteChange"
-        data-tooltip="Delete"
-        data-index="{{i}}"
-        {{#if (not ../editable)}}
-          disabled="true"
-        {{/if}}
-      >
-        <i class="fa-solid fa-trash"></i>
-      </a>
-    </div>
+        <a
+          class="delete-change-button"
+          style="display: flex; justify-content: center; align-items: center;"
+          data-action="deleteChange"
+          data-tooltip="Delete"
+          data-index="{{i}}"
+          data-application="{{key}}"
+          {{#if (not ../../editable)}}
+            disabled="true"
+          {{/if}}
+        >
+          <i class="fa-solid fa-trash"></i>
+        </a>
+      </div>
+    {{/each}}
   {{/each}}
 </div>

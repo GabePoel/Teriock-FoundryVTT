@@ -1,4 +1,5 @@
 const { DialogV2 } = foundry.applications.api
+import generateEffect from "../../ability/generate-effect.mjs";
 import TeriockRoll from "../../../documents/roll.mjs";
 
 export async function rollAbility(ability, options) {
@@ -6,6 +7,17 @@ export async function rollAbility(ability, options) {
   const disadvantage = options?.disadvantage || false;
   await stageUse(ability, advantage, disadvantage);
   await use(ability);
+  if (ability.system.duration && ability.system.duration !== 'Instant' && ability.system.maneuver !== 'passive') {
+    if (ability.system.targets.includes('self') || ability.system.delivery.base === 'self') {
+      await generateEffect(ability, ability.getActor());
+    }
+    if (ability.system.targets.includes('creature')) {
+      const targets = game.user.targets;
+      for (const target of targets) {
+        await generateEffect(ability, target.actor);
+      }
+    }
+  }
 }
 
 async function attackMessage(ability, roll) {
