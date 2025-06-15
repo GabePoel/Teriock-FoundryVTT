@@ -247,7 +247,7 @@ export const TeriockSheet = (Base) =>
       const options = {};
       if (event?.altKey) options.advantage = true;
       else if (event?.shiftKey) options.disadvantage = true;
-      this.document.roll(options);
+      this.document.use(options);
     }
 
     static async _reloadThis(_, __) {
@@ -278,7 +278,7 @@ export const TeriockSheet = (Base) =>
       const options = {};
       if (event?.altKey) options.advantage = true;
       else if (event?.shiftKey) options.disadvantage = true;
-      this._embeddedFromCard(target)?.roll(options);
+      this._embeddedFromCard(target)?.use(options);
     }
 
     static async _chatDoc(event, target) {

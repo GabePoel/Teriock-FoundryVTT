@@ -216,7 +216,7 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(Terioc
       if (event.altKey) options.advantage = true;
       if (event.shiftKey) options.disadvantage = true;
       if (event.ctrlKey) options.twoHanded = true;
-      item.roll(options);
+      item.use(options);
     }
   }
 

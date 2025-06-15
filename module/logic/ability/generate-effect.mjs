@@ -1,4 +1,4 @@
-import TeriockEffect from "../../documents/effect.mjs";
+import TeriockEffect from "../../documents/effects/base.mjs";
 
 export default async function generateEffect(ability, actor) {
   let changes = ability.system.applies.base.changes || [];

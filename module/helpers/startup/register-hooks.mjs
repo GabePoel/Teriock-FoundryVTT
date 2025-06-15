@@ -4,6 +4,8 @@ import { imageContextMenuOptions } from "../../helpers/context-menus/image-conte
 const { ux } = foundry.applications;
 
 export default function registerHooks() {
+
+
   Hooks.on('updateItem', async (document, updateData, options, userId) => {
     if (game.user.id === userId && document.isOwner) {
       await document.getActor()?.postUpdate();
@@ -173,7 +175,7 @@ const options = {
   twoHanded: window.event?.ctrlKey,
 };
 
-await item.roll(options);
+await item.use(options);
 `;
       let macroFolder = game.folders.find(f => f.name === "Player Macros" && f.type === "Macro");
       if (!macroFolder) {

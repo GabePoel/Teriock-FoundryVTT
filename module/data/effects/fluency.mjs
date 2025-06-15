@@ -6,6 +6,7 @@ export class TeriockFluencyData extends TeriockEffectData {
     const commonData = super.defineSchema();
     return {
       ...commonData,
+      wikiNamespace: new fields.StringField({ initial: "Tradecraft", gmOnly: true }),
       field: new fields.StringField({ initial: "artisan" }),
       tradecraft: new fields.StringField({ initial: "artist" }),
       proficient: new fields.BooleanField({ initial: true }),

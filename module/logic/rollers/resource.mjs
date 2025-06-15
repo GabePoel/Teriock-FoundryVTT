@@ -1,4 +1,4 @@
-import TeriockRoll from "../../../documents/roll.mjs";
+import TeriockRoll from "../../documents/roll.mjs";
 
 export async function rollResource(resource, options) {
   await use(resource, options);

@@ -1,6 +1,6 @@
 const { DialogV2 } = foundry.applications.api
-import generateEffect from "../../ability/generate-effect.mjs";
-import TeriockRoll from "../../../documents/roll.mjs";
+import generateEffect from "../ability/generate-effect.mjs";
+import TeriockRoll from "../../documents/roll.mjs";
 
 export async function rollAbility(ability, options) {
   const advantage = options?.advantage || false;

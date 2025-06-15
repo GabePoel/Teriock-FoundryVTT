@@ -1,7 +1,7 @@
 import getRollData from "../logic/actor/roll-data.mjs";
 import postUpdate from "../logic/actor/post-update.mjs";
 import prepareDerivedData from "../logic/actor/derived-data.mjs";
-import rollCondition from "../logic/rollers/instances/condition.mjs";
+import rollCondition from "../logic/rollers/condition.mjs";
 import TeriockRoll from "../documents/roll.mjs";
 
 /**

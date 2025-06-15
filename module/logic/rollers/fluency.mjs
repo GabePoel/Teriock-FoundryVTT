@@ -1,4 +1,4 @@
-import TeriockRoll from "../../../documents/roll.mjs";
+import TeriockRoll from "../../documents/roll.mjs";
 
 export async function rollFluency(fluency, options) {
   await use(fluency, options);

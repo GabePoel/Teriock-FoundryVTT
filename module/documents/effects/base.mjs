@@ -1,10 +1,10 @@
-import { TeriockChild } from "./child-mixin.mjs";
-import parse from "../logic/parsers/parse.mjs";
+import TeriockChildMixin from "../mixins/child-mixin.mjs";
+import parse from "../../logic/parsers/parse.mjs";
 
 /**
  * @extends {ActiveEffect}
  */
-export default class TeriockEffect extends TeriockChild(ActiveEffect) {
+export default class TeriockBaseEffect extends TeriockChildMixin(ActiveEffect) {
 
   prepareDerivedData() {
     super.prepareDerivedData();
@@ -172,7 +172,11 @@ export default class TeriockEffect extends TeriockChild(ActiveEffect) {
       (this.getParent()?.disabled ?? false) ||
       (this.getParent()?.system?.forceDisabled ?? false);
 
-    console.log(parentDisabled);
+    if (parentDisabled) {
+      ui.notifications.error(
+        `You cannot ${bool ? 'enable' : 'disable'} ${this.name} while its parent is disabled.`
+      );
+    }
 
     if (shouldEnable && !parentDisabled) {
       if (bool) {

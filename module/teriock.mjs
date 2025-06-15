@@ -25,9 +25,10 @@ import registerHandlebarsHelpers from './helpers/startup/register-handlebars.mjs
 import registerHooks from './helpers/startup/register-hooks.mjs';
 import registerTemplates from './helpers/startup/register-templates.mjs';
 import TeriockActor from './documents/actor.mjs';
-import TeriockEffect from './documents/effect.mjs';
+import TeriockEffect from './documents/effects/base.mjs';
+import TeriockEffectProxy from './documents/effect-proxy.mjs';
 import TeriockHarmRoll from './documents/harm.mjs';
-import TeriockItem from './documents/item.mjs';
+import TeriockItemProxy from './documents/item-proxy.mjs';
 import TeriockRoll from './documents/roll.mjs'
 import TeriockToken from './documents/token.mjs';
 
@@ -77,8 +78,8 @@ Hooks.once('init', function () {
   CONFIG.Dice.rolls.push(TeriockRoll);
   CONFIG.Dice.rolls.push(TeriockHarmRoll);
   CONFIG.Actor.documentClass = TeriockActor;
-  CONFIG.Item.documentClass = TeriockItem;
-  CONFIG.ActiveEffect.documentClass = TeriockEffect;
+  CONFIG.Item.documentClass = TeriockItemProxy;
+  CONFIG.ActiveEffect.documentClass = TeriockEffectProxy;
   CONFIG.Token.documentClass = TeriockToken;
 
   // Data models
@@ -103,7 +104,7 @@ Hooks.once('init', function () {
 
   // Unregister V1 sheets
   DocumentSheetConfig.unregisterSheet(TeriockActor, 'teriock', ActorSheet);
-  DocumentSheetConfig.unregisterSheet(TeriockItem, 'teriock', ItemSheet);
+  DocumentSheetConfig.unregisterSheet(TeriockItemProxy, 'teriock', ItemSheet);
 
   // Register custom sheets
   const sheets = [
@@ -119,50 +120,50 @@ Hooks.once('init', function () {
       cls: TeriockEquipmentSheet,
       label: 'Equipment',
       types: ['equipment'],
-      doc: TeriockItem
+      doc: TeriockItemProxy
     },
     {
       cls: TeriockRankSheet,
       label: 'Rank',
       types: ['rank'],
-      doc: TeriockItem
+      doc: TeriockItemProxy
     },
     {
       cls: TeriockPowerSheet,
       label: 'Power',
       types: ['power'],
-      doc: TeriockItem
+      doc: TeriockItemProxy
     },
     // Effects
     {
       cls: TeriockAbilitySheet,
       label: 'Ability',
       types: ['ability'],
-      doc: TeriockEffect
+      doc: TeriockEffectProxy
     },
     {
       cls: TeriockFluencySheet,
       label: 'Fluency',
       types: ['fluency'],
-      doc: TeriockEffect
+      doc: TeriockEffectProxy
     },
     {
       cls: TeriockResourceSheet,
       label: 'Resource',
       types: ['resource'],
-      doc: TeriockEffect
+      doc: TeriockEffectProxy
     },
     {
       cls: TeriockPropertySheet,
       label: 'Property',
       types: ['property'],
-      doc: TeriockEffect
+      doc: TeriockEffectProxy
     },
     {
       cls: TeriockBaseEffectSheet,
       label: 'Effect',
       types: ['effect'],
-      doc: TeriockEffect,
+      doc: TeriockEffectProxy,
       makeDefault: false
     }
   ];
@@ -174,8 +175,8 @@ Hooks.once('init', function () {
 
   game.teriock = {
     TeriockActor,
-    TeriockItem,
-    TeriockEffect,
+    TeriockItemProxy,
+    TeriockEffectProxy,
     TeriockToken,
     TeriockRoll,
     TeriockHarmRoll,

@@ -5,6 +5,7 @@ export class TeriockConditionData extends TeriockEffectData {
     const commonData = super.defineSchema();
     return {
       ...commonData,
+      wikiNamespace: new fields.StringField({ initial: "Condition", gmOnly: true }),
     }
   }
 }
