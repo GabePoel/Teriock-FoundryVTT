@@ -2,8 +2,14 @@ import TeriockEffect from "../documents/effect.mjs";
 
 export async function createAbility(document, name) {
   let assignedName = "New Ability";
+  let parentAbility = null;
   if (name) {
     assignedName = name;
+  }
+  console.log(`Creating ability ${assignedName} for document ${document.name}`);
+  if (document.type === "ability") {
+    parentAbility = document;
+    document = document.parent;
   }
   const ability = await TeriockEffect.create({
     name: assignedName,
@@ -12,6 +18,18 @@ export async function createAbility(document, name) {
   }, { parent: document });
   if (assignedName !== "New Ability") {
     await ability.wikiPull();
+  }
+  if (parentAbility) {
+    await parentAbility.parent.updateEmbeddedDocuments('ActiveEffect', [
+      {
+        _id: ability._id,
+        'system.parentId': parentAbility._id
+      },
+      {
+        _id: parentAbility._id,
+        'system.childIds': parentAbility.system.childIds.concat(ability._id)
+      }
+    ]);
   }
   return ability;
 }

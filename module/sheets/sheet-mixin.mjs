@@ -160,6 +160,8 @@ export const TeriockSheet = (Base) =>
       if (type === 'effect') {
         if (this.document.documentName === 'Actor' && this.document._id !== parentId) {
           return this.document.items.get(parentId)?.effects.get(id);
+        } else if (this.document.documentName === 'ActiveEffect') {
+          return this.document.parent?.effects.get(id);
         } else {
           return this.document.effects.get(id);
         }
@@ -222,6 +224,7 @@ export const TeriockSheet = (Base) =>
 
     static async _wikiPullThis(_, __) {
       if (this.editable) {
+        console.log(`Clicking wiki pull for ${this.document.name}`);
         this.document.wikiPull();
       }
     }
@@ -297,15 +300,15 @@ export const TeriockSheet = (Base) =>
     }
 
     static async _createAbility(event, __) {
-      await createAbility(this.item, null);
+      await createAbility(this.document, null);
     }
 
     static async _createResource(event, __) {
-      await createResource(this.item, null);
+      await createResource(this.document, null);
     }
 
     static async _createFluency(event, __) {
-      await createFluency(this.item, null);
+      await createFluency(this.document, null);
     }
 
     static async _toggleSwitch(event, target) {

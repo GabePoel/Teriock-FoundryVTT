@@ -60,23 +60,29 @@ export function contextMenus(ability) {
       {
         name: 'Active',
         icon: CONFIG.TERIOCK.icons.active,
-        callback: () => ability.update({
-          'system.maneuver': 'active',
-          'system.executionTime': 'a1'
-        }),
+        callback: async () => {
+          await ability.update({
+            'system.maneuver': 'active',
+            'system.executionTime': 'a1'
+          })
+          await ability.deleteChildren();
+        },
       },
       {
         name: 'Reactive',
         icon: CONFIG.TERIOCK.icons.reactive,
-        callback: () => ability.update({
-          'system.maneuver': 'reactive',
-          'system.executionTime': 'r1'
-        }),
+        callback: async () => {
+          await ability.update({
+            'system.maneuver': 'reactive',
+            'system.executionTime': 'r1'
+          })
+          await ability.deleteChildren();
+        },
       },
       {
         name: 'Passive',
         icon: CONFIG.TERIOCK.icons.passive,
-        callback: () => ability.update({
+        callback: async () => await ability.update({
           'system.maneuver': 'passive',
           'system.executionTime': 'passive'
         }),
@@ -84,10 +90,13 @@ export function contextMenus(ability) {
       {
         name: 'Slow',
         icon: CONFIG.TERIOCK.icons.slow,
-        callback: () => ability.update({
-          'system.maneuver': 'slow',
-          'system.executionTime': '10 Minutes'
-        }),
+        callback: async () => {
+          await ability.update({
+            'system.maneuver': 'slow',
+            'system.executionTime': '10 Minutes'
+          })
+          await ability.deleteChildren();
+        },
       },
     ],
     active: quickMenu('executionTime.active', 'system.executionTime'),

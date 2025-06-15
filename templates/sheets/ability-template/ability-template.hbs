@@ -50,5 +50,11 @@
       {{/if}}
       {{> "systems/teriock/templates/sheets/ability-template/entries/ab-improvements-entries.hbs"}}
     </div>
+    {{#if (or (and editable (eq system.maneuver "passive")) (exists childAbilities))}}
+      <div class="ab-main">
+        {{#if (and editable (eq system.maneuver "passive"))}}<button class="createAbility" data-action="createAbility">Add Child Ability</button>{{/if}}
+        {{abilityCards childAbilities system}}
+      </div>
+    {{/if}}
   </div>
 </div>

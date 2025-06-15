@@ -396,7 +396,7 @@ export default function registerHandlebarsHelpers() {
     const {
       img, title, subtitle, text, icons, id, parentId,
       active = true, marker = null, shattered = false, type = 'item',
-      draggable = true, consumable = false, amount = 1, max = null
+      draggable = true, consumable = false, amount = 1, max = null,
     } = options.hash;
 
     const idAttr = id ? `data-id="${id}"` : '';
@@ -425,11 +425,14 @@ export default function registerHandlebarsHelpers() {
     `);
   });
 
-  Handlebars.registerHelper('abilityCards', function (abilities, system, tab = 'ability', options) {
+  Handlebars.registerHelper('abilityCards', function (abilities, system, options) {
+    const {
+      tab = 'ability',
+      skipDescendants = false,
+    } = options.hash;
     if (!Array.isArray(abilities) || abilities.length === 0) return '';
-
-    const isGapless = system?.sheet?.display?.[tab]?.gapless;
-    const sizeClass = system?.sheet?.display?.[tab]?.size || '';
+    const isGapless = tab ? system?.sheet?.display?.[tab]?.gapless : false;
+    const sizeClass = tab ? system?.sheet?.display?.[tab]?.size || '' : '';
     const containerClass = `tcard-container ${isGapless ? 'gapless' : ''} ${sizeClass}`.trim();
 
     const renderedCards = abilities.map(ability => {
@@ -444,12 +447,21 @@ export default function registerHandlebarsHelpers() {
         hash: { action: "toggleForceDisabledDoc", id: ability._id, parentId: ability.parent?._id, tooltipTrue: "Disabled", tooltipFalse: "Enabled" }
       });
 
+      let text = ability.parent?.name;
+      const parent = ability.getParent();
+      if (parent) {
+        text = parent.name;
+      }
+
+      if (parent && skipDescendants) {
+        return '';
+      }
       return Handlebars.helpers.tcard({
         hash: {
           img: ability.img,
           title: ability.name,
           subtitle,
-          text: ability.parent?.name,
+          text: text,
           icons: chatIcon + enableIcon,
           id: ability._id,
           parentId: ability.parent?._id,

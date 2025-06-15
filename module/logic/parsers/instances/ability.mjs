@@ -1,10 +1,27 @@
 import { cleanFeet } from "../../../helpers/clean.mjs";
-// import abilityOverrides from "../overrides/ability.mjs";
+import { createAbility } from "../../../helpers/create-effects.mjs";
 import abilityApplications from "../overrides/ability-applications.mjs";
 
-export default function parseAbility(rawHTML, ability) {
+export default async function parseAbility(rawHTML, ability) {
   const parser = new DOMParser();
   const doc = parser.parseFromString(rawHTML, 'text/html');
+
+  console.log('Parsing ability:', ability.name);
+
+  // Get children
+  const oldChildren = ability.getChildren();
+  for (const child of oldChildren) {
+    if (child) {
+      await child.delete();
+    }
+  }
+
+  console.log('Getting children for ability:', ability.name);
+  const subs = Array.from(doc.querySelectorAll('.ability-sub-container')).filter(
+    el => !el.closest('.ability-sub-container:not(:scope)')
+  );
+  console.log('Subs', subs);
+  console.log('All potential subs', doc.querySelectorAll('.ability-sub-container'));
 
   // Remove unnecessary elements
   doc.querySelectorAll('.ability-sub-container').forEach(el => el.remove());
@@ -194,6 +211,8 @@ export default function parseAbility(rawHTML, ability) {
 
   delete parameters.improvement;
   delete parameters.limitation;
+  delete parameters.parentId;
+  delete parameters.childIds;
 
   const applications = abilityApplications(ability.name);
   if (applications) {
@@ -205,6 +224,45 @@ export default function parseAbility(rawHTML, ability) {
   if (parameters.spell) img = 'systems/teriock/assets/spell.svg';
   else if (parameters.skill) img = 'systems/teriock/assets/skill.svg';
   if (parameters.class) img = `systems/teriock/assets/classes/${parameters.class}.svg`;
+
+  if (parameters.maneuver === 'passive') {
+    for (const el of subs) {
+      console.log(el);
+      const subNameEl = el.querySelector('.ability-sub-name');
+      const namespace = subNameEl?.getAttribute('data-namespace');
+      if (namespace === 'Ability') {
+        const subName = subNameEl.getAttribute('data-name');
+        console.log(subName);
+        const subAbility = await createAbility(ability, subName);
+        const limitation = el.querySelector('.limited-modifier');
+        const improvement = el.querySelector('.improvement-modifier');
+        let limitationText = '';
+        let improvementText = '';
+        let newName = subName;
+        if (improvement) {
+          newName = 'Improved ' + subName;
+          const improvementSpan = improvement.querySelector('.improvement-text');
+          if (improvementSpan) {
+            improvementText = improvementSpan.textContent.trim();
+          }
+        }
+        if (limitation) {
+          newName = 'Limited ' + newName;
+          const limitationSpan = limitation.querySelector('.limitation-text');
+          if (limitationSpan) {
+            limitationText = limitationSpan.textContent.trim();
+          }
+        }
+        if (limitationText || improvementText) {
+          await subAbility.update({
+            'name': newName,
+            'system.improvement': improvementText,
+            'system.limitation': limitationText,
+          });
+        }
+      }
+    }
+  }
 
   return { changes, system: parameters, img };
 }

@@ -7,7 +7,10 @@ export default function connectEmbedded(document, element, editable = true) {
   element.querySelectorAll('.tcard').forEach((el) => {
     const id = el.getAttribute('data-id');
     const parentId = el.getAttribute('data-parent-id');
-    const embedded = document.items?.get(id) || document.effects?.get(id) || document.items?.get(parentId)?.effects.get(id);
+    const embedded = document.items?.get(id)
+      || document.effects?.get(id)
+      || document.items?.get(parentId)?.effects.get(id)
+      || document.parent.getEmbeddedDocument('ActiveEffect', id);
     if (embedded) {
       new ux.ContextMenu(
         el,
@@ -17,12 +20,16 @@ export default function connectEmbedded(document, element, editable = true) {
           {
             name: 'Enable',
             icon: makeIcon('check', iconStyle),
-            callback: () => {
+            callback: async () => {
               if (embedded.documentName === 'ActiveEffect') {
-                embedded.setForceDisabled(false);
+                await embedded.setForceDisabled(false);
               } else {
-                embedded.enable();
+                await embedded.enable();
               }
+              // if (document.documentName === 'ActiveEffect') {
+              //   await document.update({});
+              //   await document.sheet.render();
+              // }
             },
             condition: () => {
               if (embedded.documentName === 'ActiveEffect') {
@@ -37,12 +44,16 @@ export default function connectEmbedded(document, element, editable = true) {
           {
             name: 'Disable',
             icon: makeIcon('xmark', iconStyle),
-            callback: () => {
+            callback: async () => {
               if (embedded.documentName === 'ActiveEffect') {
-                embedded.setForceDisabled(true);
+                await embedded.setForceDisabled(true);
               } else {
-                embedded.disable();
+                await embedded.disable();
               }
+              // if (document.documentName === 'ActiveEffect') {
+              //   await document.update({});
+              //   await document.sheet.render();
+              // }
             },
             condition: () => {
               if (embedded.documentName === 'ActiveEffect') {
@@ -144,13 +155,13 @@ export default function connectEmbedded(document, element, editable = true) {
             name: 'Open Source',
             icon: makeIcon('arrow-up-right-from-square', iconStyle),
             callback: () => {
-              const parent = embedded.parent;
-              if (parent) {
-                parent.sheet.render(true);
+              const source = embedded.getSource();
+              if (source) {
+                source.sheet.render(true);
               }
             },
             condition: () => {
-              return embedded.documentName === 'ActiveEffect' && embedded.parent;
+              return embedded.documentName === 'ActiveEffect' && (embedded.getSource() !== document);
             }
           },
           {

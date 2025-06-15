@@ -14,6 +14,7 @@ export async function rollAbility(ability, options) {
     if (ability.system.targets.includes('creature')) {
       const targets = game.user.targets;
       for (const target of targets) {
+        console.log(target, target.actor);
         await generateEffect(ability, target.actor);
       }
     }

@@ -132,10 +132,13 @@ export const TeriockChild = (Base) => class TeriockChild extends Base {
   async wikiPull() {
     if (this.system.wikiNamespace) {
       const pageTitle = this.getWikiPage();
+      console.log(`Pulling wiki page: ${pageTitle}`);
       const wikiPage = await fetchWikiPageHTML(pageTitle);
       if (wikiPage) {
         const parsed = await this.parse(wikiPage, this.document);
+        console.log(`Parsed wiki page for ${this.name}:`, parsed);
         await this.update(parsed);
+        console.log(`Updated ${this.name} with wiki data.`);
       }
     }
   }

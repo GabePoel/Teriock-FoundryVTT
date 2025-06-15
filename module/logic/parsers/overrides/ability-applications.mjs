@@ -154,7 +154,57 @@ const abilityOverrides = {
     base: {
       statuses: ["ethereal"],
     }
-  }
+  },
+  "Treeform Ball": {
+    base: {
+      statuses: ["transformed"],
+    }
+  },
+  "Bestial Shift": {
+    base: {
+      statuses: ["transformed"],
+    }
+  },
+  "Bestial Transformation": {
+    base: {
+      statuses: ["transformed"],
+    }
+  },
+  "Polymorph": {
+    base: {
+      statuses: ["transformed"],
+    }
+  },
+  "Light Ray": {
+    base: {
+      statuses: ["lighted"],
+    }
+  },
+  "Light Touch": {
+    base: {
+      statuses: ["lighted"],
+    }
+  },
+  "Light Aura": {
+    base: {
+      statuses: ["lighted"],
+    }
+  },
+  "Ice Ball": {
+    base: {
+      statuses: ["frozen"],
+    }
+  },
+  "Shock Touch": {
+    base: {
+      statuses: ["frozen"],
+    }
+  },
+  "Blizzard Aura": {
+    base: {
+      statuses: ["frozen"],
+    }
+  },
 }
 
 const tradecrafts = mergeLevel(tradecraftOptions, "*", "tradecrafts");

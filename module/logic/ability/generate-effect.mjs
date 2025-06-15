@@ -33,7 +33,7 @@ export default async function generateEffect(ability, actor) {
       source: ability._id,
     },
   }
-  const existingEffect = actor.effectTypes.effect.find(e => e.name === effect.name);
+  const existingEffect = actor?.effectTypes?.effect?.find(e => e.name === effect.name);
   if (existingEffect) {
     await existingEffect.delete();
   }

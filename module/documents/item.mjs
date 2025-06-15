@@ -304,7 +304,7 @@ export default class TeriockItem extends TeriockChild(Item) {
     const pages = await fetchCategoryMembers(toPull);
     for (const page of pages) {
       if (page.title.startsWith('Ability:')) {
-        createAbility(this, page.title.replace(/^Ability:/, ''));
+        await createAbility(this, page.title.replace(/^Ability:/, ''));
       }
     }
   }
