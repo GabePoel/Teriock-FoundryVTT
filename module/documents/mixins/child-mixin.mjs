@@ -27,6 +27,11 @@ const TeriockChildMixin = (Base) => class TeriockChildMixin extends Base {
     this.system.isProficient = proficient;
   }
 
+  hookCall(incant, args = []) {
+    incant = 'ter.' + incant + this.type.charAt(0).toUpperCase() + this.type.slice(1);
+    Hooks.call(incant, this, ...args);
+  }
+
   async parse(rawHTML) {
     return {
       "this.system.description": "Description.",
@@ -56,17 +61,8 @@ const TeriockChildMixin = (Base) => class TeriockChildMixin extends Base {
     await this.chat();
   }
 
-  async secretRoll(options) {
-    if (['ability', 'equipment', 'resource', 'fluency'].includes(this.type)) {
-      await secretRoll(this, options);
-    } else {
-      await this.chat();
-    }
-  }
-
   async use(options) {
-    const hookCall = 'use' + this.type.charAt(0).toUpperCase() + this.type.slice(1);
-    Hooks.call(`ter.${hookCall}`, this);
+    this.hookCall('use');
     this.roll(options);
   }
 

@@ -8,6 +8,7 @@ const TeriockWikiMixin = (Base) => class TeriockWikiMixin extends Base {
 
   /** @override */
   async wikiPull() {
+    this.hookCall('wikiPull');
     const pageTitle = this.getWikiPage();
     ui.notifications.info(`Pulling ${pageTitle} from wiki.`)
     const wikiPage = await fetchWikiPageHTML(pageTitle);
@@ -23,6 +24,7 @@ const TeriockWikiMixin = (Base) => class TeriockWikiMixin extends Base {
 
   /** @override */
   async wikiOpen() {
+    this.hookCall('wikiOpen');
     const pageTitle = this.getWikiPage();
     ui.notifications.info(`Opening ${pageTitle}.`)
     openWikiPage(pageTitle);
