@@ -1,7 +1,7 @@
 const { ux } = foundry.applications;
-import { buildMessage } from "../../logic/messages/build.mjs";
+import { buildMessage } from "../../helpers/messages-builder/message-builder.mjs";
 
-const TeriockChildMixin = (Base) => class TeriockChildMixin extends Base {
+export const MixinChildDocument = (Base) => class MixinChildDocument extends Base {
 
   /** @override */
   prepareDerivedData() {
@@ -32,12 +32,6 @@ const TeriockChildMixin = (Base) => class TeriockChildMixin extends Base {
     Hooks.call(incant, this, ...args);
   }
 
-  async parse(rawHTML) {
-    return {
-      "this.system.description": "Description.",
-    }
-  }
-
   async chat() {
     let content = await this.buildMessage();
     content = `<div class="teriock">${content}</div>`;
@@ -63,11 +57,23 @@ const TeriockChildMixin = (Base) => class TeriockChildMixin extends Base {
 
   async use(options) {
     this.hookCall('use');
-    this.roll(options);
+    this.system.use(options);
+  }
+
+  buildRawMessage(options = {}) {
+    let messageParts;
+    const secret = options.secret || false;
+    if (secret) {
+      messageParts = this.system.secretMessageParts;
+    } else {
+      messageParts = this.system.messageParts;
+    }
+    return buildMessage(messageParts);
   }
 
   async buildMessage(options = {}) {
-    return await ux.TextEditor.enrichHTML(buildMessage(this, options).outerHTML);
+    const rawMessage = this.buildRawMessage(options);
+    return await ux.TextEditor.enrichHTML(rawMessage.outerHTML);
   }
 
   getActor() {
@@ -88,5 +94,3 @@ const TeriockChildMixin = (Base) => class TeriockChildMixin extends Base {
     await this.wikiPull();
   }
 };
-
-export default TeriockChildMixin;

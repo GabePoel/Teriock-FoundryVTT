@@ -29,15 +29,15 @@ export class TeriockEquipmentSheet extends HandlebarsApplicationMixin(TeriockIte
   };
 
   static async _toggleEquipped() {
-    this.document.toggleEquipped();
+    this.document.system.toggleEquipped();
   }
 
   static async _toggleShattered() {
-    this.document.toggleShattered();
+    this.document.system.toggleShattered();
   }
 
   static async _toggleDampened() {
-    this.document.toggleDampened();
+    this.document.system.toggleDampened();
   }
 
   /** @override */
@@ -132,7 +132,7 @@ export class TeriockEquipmentSheet extends HandlebarsApplicationMixin(TeriockIte
       this._connect(selector, 'click', () => doc.update(update));
     }
 
-    this._connect('.flag-tag-dampened', 'click', () => doc.undampen());
-    this._connect('.flag-tag-shattered', 'click', () => doc.repair());
+    this._connect('.flag-tag-dampened', 'click', () => doc.system.undampen());
+    this._connect('.flag-tag-shattered', 'click', () => doc.system.repair());
   }
 }

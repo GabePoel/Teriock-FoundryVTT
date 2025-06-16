@@ -1,0 +1,44 @@
+const { fields } = foundry.data;
+import { _messageParts } from "./_message-parts.mjs";
+import { _roll } from "./_rolling.mjs";
+import { MixinConsumableData } from "../../mixins/consumable.mjs";
+import { TeriockEffectData } from "../base/base.mjs";
+
+export class TeriockResourceData extends MixinConsumableData(TeriockEffectData) {
+  static defineSchema() {
+    const commonData = super.defineSchema();
+    return {
+      ...commonData,
+      consumable: new fields.BooleanField({ initial: true }),
+      quantity: new fields.NumberField({ initial: 1, nullable: true }),
+      maxQuantityRaw: new fields.StringField({ initial: null, nullable: true }),
+      maxQuantity: new fields.NumberField({ initial: null, nullable: true }),
+      rollFormula: new fields.StringField({ initial: "" }),
+      functionHook: new fields.StringField({ initial: "none" }),
+    }
+  }
+
+  /** @override */
+  async roll(options) {
+    await _roll(this.parent, options);
+  }
+
+  /** @override */
+  get messageParts() {
+    return { ...super.messageParts, ..._messageParts(this.parent) };
+  }
+
+  /** @override */
+  async useOne() {
+    await super.useOne();
+    if (this.quantity <= 0) {
+      await this.parent.setForceDisabled(true);
+    }
+  }
+
+  /** @override */
+  async gainOne() {
+    await super.gainOne();
+    await this.parent.setForceDisabled(false);
+  }
+}

@@ -70,7 +70,7 @@ export default function connectEmbedded(document, element, editable = true) {
             name: 'Equip',
             icon: makeIcon('check', iconStyle),
             callback: () => {
-              embedded.equip();
+              embedded.system.equip();
             },
             condition: () => {
               return embedded.type === 'equipment' && !embedded.system.equipped;
@@ -80,7 +80,7 @@ export default function connectEmbedded(document, element, editable = true) {
             name: 'Unequip',
             icon: makeIcon('xmark', iconStyle),
             callback: () => {
-              embedded.unequip();
+              embedded.system.unequip();
             },
             condition: () => {
               return embedded.type === 'equipment' && embedded.system.equipped;
@@ -114,7 +114,7 @@ export default function connectEmbedded(document, element, editable = true) {
             name: 'Shatter',
             icon: makeIcon('wine-glass-crack', iconStyle),
             callback: () => {
-              embedded.shatter();
+              embedded.system.shatter();
             },
             condition: () => {
               return embedded.type === 'equipment' && !embedded.system.shattered;
@@ -124,7 +124,7 @@ export default function connectEmbedded(document, element, editable = true) {
             name: 'Repair',
             icon: makeIcon('wine-glass', iconStyle),
             callback: () => {
-              embedded.repair();
+              embedded.system.repair();
             },
             condition: () => {
               return embedded.type === 'equipment' && embedded.system.shattered;
@@ -134,7 +134,7 @@ export default function connectEmbedded(document, element, editable = true) {
             name: 'Dampen',
             icon: makeIcon('bell-slash', iconStyle),
             callback: () => {
-              embedded.dampen();
+              embedded.system.dampen();
             },
             condition: () => {
               return embedded.type === 'equipment' && !embedded.system.dampened;
@@ -144,7 +144,7 @@ export default function connectEmbedded(document, element, editable = true) {
             name: 'Undampen',
             icon: makeIcon('bell', iconStyle),
             callback: () => {
-              embedded.undampen();
+              embedded.system.undampen();
             },
             condition: () => {
               return embedded.type === 'equipment' && embedded.system.dampened;
@@ -207,7 +207,7 @@ export default function connectEmbedded(document, element, editable = true) {
             name: 'Make Unidentified Copy',
             icon: makeIcon('eye-slash', iconStyle),
             callback: async () => {
-              embedded.unidentify();
+              embedded.system.unidentify();
             },
             condition: () => {
               return editable && embedded.isOwner && embedded.type === 'equipment' && embedded.system.identified && game.user.isGM;
@@ -217,7 +217,7 @@ export default function connectEmbedded(document, element, editable = true) {
             name: 'Identify',
             icon: makeIcon('eye', iconStyle),
             callback: async () => {
-              embedded.identify();
+              embedded.system.identify();
             },
             condition: () => {
               return editable && embedded.isOwner && embedded.type === 'equipment' && !embedded.system.identified && embedded.system.reference;
@@ -227,7 +227,7 @@ export default function connectEmbedded(document, element, editable = true) {
             name: 'Read Magic',
             icon: makeIcon('hand', iconStyle),
             callback: async () => {
-              embedded.readMagic();
+              embedded.system.readMagic();
             },
             condition: () => {
               return editable && embedded.isOwner && embedded.type === 'equipment' && !embedded.system.identified && embedded.system.reference && embedded.system.powerLevel === 'unknown';
@@ -243,7 +243,7 @@ export default function connectEmbedded(document, element, editable = true) {
       el.querySelectorAll('[data-action="useOneDoc"]').forEach((actionEl) => {
         actionEl.addEventListener('contextmenu', (event) => {
           event.stopPropagation();
-          embedded.gainOne();
+          embedded.system.gainOne();
         });
       });
     }

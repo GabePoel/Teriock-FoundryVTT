@@ -15,28 +15,28 @@ export const resourceOptions = {
       icon: 'xmark-large',
       callback: (resource, result) => { }
     },
-    heal: {
+    takeHeal: {
       name: "Heal",
       icon: 'hand-holding-medical',
       callback: (resource, amount) => {
         const actor = resource.getActor();
         if (actor) {
-          actor.heal(amount);
+          actor.takeHeal(amount);
         }
       }
     },
-    revitalize: {
+    takeRevitalize: {
       name: "Revitalize",
       icon: 'hand-holding-droplet',
       callback: (resource, amount) => {
         const actor = resource.getActor();
         if (actor) {
-          actor.revitalize(amount);
+          actor.takeRevitalize(amount);
         }
       }
     },
     takeDamage: {
-      name: "Take Damage",
+      name: "Damage",
       icon: 'heart',
       callback: (resource, amount) => {
         const actor = resource.getActor();
@@ -46,7 +46,7 @@ export const resourceOptions = {
       }
     },
     takeDrain: {
-      name: "Take Drain",
+      name: "Drain",
       icon: 'brain',
       callback: (resource, amount) => {
         const actor = resource.getActor();
@@ -56,7 +56,7 @@ export const resourceOptions = {
       }
     },
     takeWither: {
-      name: "Take Wither",
+      name: "Wither",
       icon: 'hourglass-half',
       callback: (resource, amount) => {
         const actor = resource.getActor();

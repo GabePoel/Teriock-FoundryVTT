@@ -25,7 +25,7 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(Terioc
       takeDrain: this._takeDrain,
       takeWither: this._takeWither,
       removeCondition: this._removeCondition,
-      hack: this._hack,
+      takeHack: this._takeHack,
       attack: this._attack,
       resist: this._resist,
       endCondition: this._endCondition,
@@ -79,11 +79,11 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(Terioc
   }
 
   static async _toggleEquippedDoc(event, target) {
-    this._embeddedFromCard(target)?.toggleEquipped();
+    this._embeddedFromCard(target)?.system.toggleEquipped();
   }
 
   static async _toggleDisabledDoc(event, target) {
-    this._embeddedFromCard(target)?.toggleDisabled();
+    this._embeddedFromCard(target)?.system.toggleDisabled();
   }
 
   static async _addEmbedded(_, target) {
@@ -163,7 +163,7 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(Terioc
     const id = target.dataset.id;
     const rank = this.actor.items.get(id);
     if (rank) {
-      rank.rollHitDie();
+      rank.system.rollHitDie();
     }
   }
 
@@ -171,7 +171,7 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(Terioc
     const id = target.dataset.id;
     const rank = this.actor.items.get(id);
     if (rank) {
-      rank.rollManaDie();
+      rank.system.rollManaDie();
     }
   }
 
@@ -285,10 +285,10 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(Terioc
     this.actor.rollCondition(condition, { skip: true });
   }
 
-  static async _hack(event, target) {
+  static async _takeHack(event, target) {
     event.stopPropagation();
     const part = target.dataset.part;
-    await this.actor.hack(part);
+    await this.actor.takeHack(part);
   }
 
   static async _attack(event, target) {
@@ -306,7 +306,7 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(Terioc
       advantage: event.altKey,
       disadvantage: event.shiftKey,
     }
-    this.actor.resist(options);
+    this.actor.rollResistance(options);
   }
 
   static async _endCondition(event, target) {
@@ -490,7 +490,7 @@ export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(Terioc
       el.addEventListener('contextmenu', async (e) => {
         e.preventDefault();
         const part = el.dataset.part;
-        await this.actor.healHack(part);
+        await this.actor.takeUnhack(part);
         e.stopPropagation();
       });
     });

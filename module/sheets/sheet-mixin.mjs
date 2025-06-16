@@ -225,12 +225,12 @@ export const TeriockSheet = (Base) =>
     static async _wikiPullThis(_, __) {
       if (this.editable) {
         console.log(`Clicking wiki pull for ${this.document.name}`);
-        this.document.wikiPull();
+        this.document.system.wikiPull();
       }
     }
 
     static async _wikiOpenThis(_, __) {
-      this.document.wikiOpen();
+      this.document.system.wikiOpen();
     }
 
     static async _chatThis(_, __) {
@@ -286,7 +286,7 @@ export const TeriockSheet = (Base) =>
     }
 
     static async _useOneDoc(event, target) {
-      this._embeddedFromCard(target)?.useOne();
+      this._embeddedFromCard(target)?.system.useOne();
     }
 
     static async _toggleForceDisabledDoc(event, target) {

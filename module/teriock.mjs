@@ -2,33 +2,33 @@ import TERIOCK from './helpers/config.mjs';
 const { ActorSheet, ItemSheet } = foundry.appv1.sheets;
 const { DocumentSheetConfig } = foundry.applications.apps;
 import { conditions } from './content/conditions.mjs'
+import { TeriockAbilityData } from './data/effects/ability/ability.mjs';
 import { TeriockAbilitySheet } from './sheets/effects/ability-sheet.mjs';
 import { TeriockBaseEffectSheet } from './sheets/effects/base-sheet.mjs';
-import { TeriockCharacterData } from './data/actors/character.mjs';
+import { TeriockCharacterData } from './data/actors/character/character.mjs';
 import { TeriockCharacterSheet } from './sheets/actors/character-sheet.mjs';
-import { TeriockEffectData } from './data/effects/base.mjs';
-import { TeriockEquipmentData } from './data/items/equipment.mjs';
-import { TeriockEquipmentSheet } from './sheets/items/equipment-sheet.mjs';
-import { TeriockFluencyData } from './data/effects/fluency.mjs';
-import { TeriockFluencySheet } from './sheets/effects/fluency-sheet.mjs';
-import { TeriockPowerData } from './data/items/power.mjs';
-import { TeriockPowerSheet } from './sheets/items/power-sheet.mjs';
-import { TeriockPropertyData } from './data/effects/property.mjs';
-import { TeriockPropertySheet } from './sheets/effects/property-sheet.mjs';
-import { TeriockRankData } from './data/items/rank.mjs';
-import { TeriockRankSheet } from './sheets/items/rank-sheet.mjs';
-import { TeriockResourceData } from './data/effects/resource.mjs';
-import { TeriockResourceSheet } from './sheets/effects/resource-sheet.mjs';
 import { teriockDetectionModes } from './perception/detection-modes.mjs';
+import { TeriockEffectData } from './data/effects/base/base.mjs';
+import { TeriockEquipmentData } from './data/items/equipment/equipment.mjs';
+import { TeriockEquipmentSheet } from './sheets/items/equipment-sheet.mjs';
+import { TeriockFluencyData } from './data/effects/fluency/fluency.mjs';
+import { TeriockFluencySheet } from './sheets/effects/fluency-sheet.mjs';
+import { TeriockPowerData } from './data/items/power/power.mjs';
+import { TeriockPowerSheet } from './sheets/items/power-sheet.mjs';
+import { TeriockPropertyData } from './data/effects/property/property.mjs';
+import { TeriockPropertySheet } from './sheets/effects/property-sheet.mjs';
+import { TeriockRankData } from './data/items/rank/rank.mjs';
+import { TeriockRankSheet } from './sheets/items/rank-sheet.mjs';
+import { TeriockResourceData } from './data/effects/resource/resource.mjs';
+import { TeriockResourceSheet } from './sheets/effects/resource-sheet.mjs';
 import { teriockVisionModes } from './perception/vision-modes.mjs';
 import registerHandlebarsHelpers from './helpers/startup/register-handlebars.mjs';
 import registerHooks from './helpers/startup/register-hooks.mjs';
 import registerTemplates from './helpers/startup/register-templates.mjs';
 import TeriockActor from './documents/actor.mjs';
-import TeriockEffect from './documents/effects/base.mjs';
-import TeriockEffectProxy from './documents/effect-proxy.mjs';
+import TeriockEffect from './documents/effect.mjs';
 import TeriockHarmRoll from './documents/harm.mjs';
-import TeriockItemProxy from './documents/item-proxy.mjs';
+import TeriockItem from './documents/item.mjs';
 import TeriockRoll from './documents/roll.mjs'
 import TeriockToken from './documents/token.mjs';
 
@@ -78,8 +78,8 @@ Hooks.once('init', function () {
   CONFIG.Dice.rolls.push(TeriockRoll);
   CONFIG.Dice.rolls.push(TeriockHarmRoll);
   CONFIG.Actor.documentClass = TeriockActor;
-  CONFIG.Item.documentClass = TeriockItemProxy;
-  CONFIG.ActiveEffect.documentClass = TeriockEffectProxy;
+  CONFIG.Item.documentClass = TeriockItem;
+  CONFIG.ActiveEffect.documentClass = TeriockEffect;
   CONFIG.Token.documentClass = TeriockToken;
 
   // Data models
@@ -93,6 +93,7 @@ Hooks.once('init', function () {
   })
   console.log(TeriockResourceData);
   Object.assign(CONFIG.ActiveEffect.dataModels, {
+    ability: TeriockAbilityData,
     effect: TeriockEffectData,
     fluency: TeriockFluencyData,
     property: TeriockPropertyData,
@@ -104,7 +105,7 @@ Hooks.once('init', function () {
 
   // Unregister V1 sheets
   DocumentSheetConfig.unregisterSheet(TeriockActor, 'teriock', ActorSheet);
-  DocumentSheetConfig.unregisterSheet(TeriockItemProxy, 'teriock', ItemSheet);
+  DocumentSheetConfig.unregisterSheet(TeriockItem, 'teriock', ItemSheet);
 
   // Register custom sheets
   const sheets = [
@@ -120,50 +121,50 @@ Hooks.once('init', function () {
       cls: TeriockEquipmentSheet,
       label: 'Equipment',
       types: ['equipment'],
-      doc: TeriockItemProxy
+      doc: TeriockItem
     },
     {
       cls: TeriockRankSheet,
       label: 'Rank',
       types: ['rank'],
-      doc: TeriockItemProxy
+      doc: TeriockItem
     },
     {
       cls: TeriockPowerSheet,
       label: 'Power',
       types: ['power'],
-      doc: TeriockItemProxy
+      doc: TeriockItem
     },
     // Effects
     {
       cls: TeriockAbilitySheet,
       label: 'Ability',
       types: ['ability'],
-      doc: TeriockEffectProxy
+      doc: TeriockEffect
     },
     {
       cls: TeriockFluencySheet,
       label: 'Fluency',
       types: ['fluency'],
-      doc: TeriockEffectProxy
+      doc: TeriockEffect
     },
     {
       cls: TeriockResourceSheet,
       label: 'Resource',
       types: ['resource'],
-      doc: TeriockEffectProxy
+      doc: TeriockEffect
     },
     {
       cls: TeriockPropertySheet,
       label: 'Property',
       types: ['property'],
-      doc: TeriockEffectProxy
+      doc: TeriockEffect
     },
     {
       cls: TeriockBaseEffectSheet,
       label: 'Effect',
       types: ['effect'],
-      doc: TeriockEffectProxy,
+      doc: TeriockEffect,
       makeDefault: false
     }
   ];
@@ -175,11 +176,11 @@ Hooks.once('init', function () {
 
   game.teriock = {
     TeriockActor,
-    TeriockItemProxy,
-    TeriockEffectProxy,
-    TeriockToken,
-    TeriockRoll,
+    TeriockEffect,
     TeriockHarmRoll,
+    TeriockItem,
+    TeriockRoll,
+    TeriockToken,
   };
 
   // Register custom handlebars templates

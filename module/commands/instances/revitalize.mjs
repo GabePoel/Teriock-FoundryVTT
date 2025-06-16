@@ -19,7 +19,7 @@ export const revitalize = new TeriockCommand(
     });
 
     for (const actor of actors) {
-      await actor.revitalize(roll.total);
+      await actor.takeRevitalize(roll.total);
     }
   },
   {

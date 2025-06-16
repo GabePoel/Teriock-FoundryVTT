@@ -1,4 +1,4 @@
-import TeriockEffect from "../documents/effects/base.mjs";
+import TeriockBaseEffect from "../documents/effect.mjs";
 
 export async function createAbility(document, name) {
   let assignedName = "New Ability";
@@ -11,13 +11,13 @@ export async function createAbility(document, name) {
     parentAbility = document;
     document = document.parent;
   }
-  const ability = await TeriockEffect.create({
+  const ability = await TeriockBaseEffect.create({
     name: assignedName,
     type: "ability",
     img: "systems/teriock/assets/ability.svg",
   }, { parent: document });
   if (assignedName !== "New Ability") {
-    await ability.wikiPull();
+    await ability.system.wikiPull();
   }
   if (parentAbility) {
     await parentAbility.parent.updateEmbeddedDocuments('ActiveEffect', [
@@ -35,7 +35,7 @@ export async function createAbility(document, name) {
 }
 
 export async function createResource(document) {
-  return await TeriockEffect.create({
+  return await TeriockBaseEffect.create({
     name: "New Resource",
     type: "resource",
     img: "systems/teriock/assets/resource.svg",
@@ -69,7 +69,7 @@ export async function createProperty(document, key = null) {
     description: description,
   };
 
-  return await TeriockEffect.create({
+  return await TeriockBaseEffect.create({
     name: name,
     type: "property",
     img: "systems/teriock/assets/property.svg",
@@ -78,7 +78,7 @@ export async function createProperty(document, key = null) {
 }
 
 export async function createEffect(document) {
-  return await TeriockEffect.create({
+  return await TeriockBaseEffect.create({
     name: "New Effect",
     type: "effect",
     img: "systems/teriock/assets/effect.svg",
@@ -86,7 +86,7 @@ export async function createEffect(document) {
 }
 
 export async function createFluency(document) {
-  return await TeriockEffect.create({
+  return await TeriockBaseEffect.create({
     name: "New Fluency",
     type: "fluency",
     img: "systems/teriock/assets/fluency.svg",
