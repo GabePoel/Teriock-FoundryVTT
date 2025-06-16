@@ -2,25 +2,25 @@ import TERIOCK from './helpers/config.mjs';
 const { ActorSheet, ItemSheet } = foundry.appv1.sheets;
 const { DocumentSheetConfig } = foundry.applications.apps;
 import { conditions } from './content/conditions.mjs'
-import { TeriockAbilityData } from './data/effects/ability/ability.mjs';
-import { TeriockAbilitySheet } from './sheets/effects/ability-sheet.mjs';
-import { TeriockBaseEffectSheet } from './sheets/effects/base-sheet.mjs';
-import { TeriockCharacterData } from './data/actors/character/character.mjs';
-import { TeriockCharacterSheet } from './sheets/actors/character-sheet.mjs';
+import { TeriockAbilityData } from './data/effect-data/ability-data/ability-data.mjs';
+import { TeriockAbilitySheet } from './sheets/effect-sheets/ability-sheet/ability-sheet.mjs';
+import { TeriockCharacterData } from './data/actor-data/character-data/character-data.mjs';
+import { TeriockCharacterSheet } from './sheets/actor-sheets/character-sheet/character-sheet.mjs';
 import { teriockDetectionModes } from './perception/detection-modes.mjs';
-import { TeriockEffectData } from './data/effects/base/base.mjs';
-import { TeriockEquipmentData } from './data/items/equipment/equipment.mjs';
-import { TeriockEquipmentSheet } from './sheets/items/equipment-sheet.mjs';
-import { TeriockFluencyData } from './data/effects/fluency/fluency.mjs';
-import { TeriockFluencySheet } from './sheets/effects/fluency-sheet.mjs';
-import { TeriockPowerData } from './data/items/power/power.mjs';
-import { TeriockPowerSheet } from './sheets/items/power-sheet.mjs';
-import { TeriockPropertyData } from './data/effects/property/property.mjs';
-import { TeriockPropertySheet } from './sheets/effects/property-sheet.mjs';
-import { TeriockRankData } from './data/items/rank/rank.mjs';
-import { TeriockRankSheet } from './sheets/items/rank-sheet.mjs';
-import { TeriockResourceData } from './data/effects/resource/resource.mjs';
-import { TeriockResourceSheet } from './sheets/effects/resource-sheet.mjs';
+import { TeriockEffectData } from './data/effect-data/effect-data/effect-data.mjs';
+import { TeriockEffectSheet } from './sheets/effect-sheets/effect-sheet/effect-sheet.mjs';
+import { TeriockEquipmentData } from './data/item-data/equipment-data/equipment-data.mjs';
+import { TeriockEquipmentSheet } from './sheets/item-sheets/equipment-sheet/equipment-sheet.mjs';
+import { TeriockFluencyData } from './data/effect-data/fluency-data/fluency-data.mjs';
+import { TeriockFluencySheet } from './sheets/effect-sheets/fluency-sheet/fluency-sheet.mjs';
+import { TeriockPowerData } from './data/item-data/power-data/power-data.mjs';
+import { TeriockPowerSheet } from './sheets/item-sheets/power-sheet/power-sheet.mjs';
+import { TeriockPropertyData } from './data/effect-data/property-data/property-data.mjs';
+import { TeriockPropertySheet } from './sheets/effect-sheets/property-sheet/property-sheet.mjs';
+import { TeriockRankData } from './data/item-data/rank-data/rank-data.mjs';
+import { TeriockRankSheet } from './sheets/item-sheets/rank-sheet/rank-sheet.mjs';
+import { TeriockResourceData } from './data/effect-data/resource-data/resource-data.mjs';
+import { TeriockResourceSheet } from './sheets/effect-sheets/resource-sheet/resource-sheet.mjs';
 import { teriockVisionModes } from './perception/vision-modes.mjs';
 import registerHandlebarsHelpers from './helpers/startup/register-handlebars.mjs';
 import registerHooks from './helpers/startup/register-hooks.mjs';
@@ -161,7 +161,7 @@ Hooks.once('init', function () {
       doc: TeriockEffect
     },
     {
-      cls: TeriockBaseEffectSheet,
+      cls: TeriockEffectSheet,
       label: 'Effect',
       types: ['effect'],
       doc: TeriockEffect,
