@@ -16,11 +16,9 @@ export class TeriockBaseItemSheet extends TeriockSheet(sheets.ItemSheet) {
 
   /** @override */
   async _prepareContext() {
-    const { item, document } = this;
-    const { system, name, img, flags, transferredEffects } = item;
 
     const abilityTypeOrder = Object.keys(CONFIG.TERIOCK.abilityOptions.abilityType || {});
-    const abilities = transferredEffects
+    const abilities = this.document.transferredEffects
       .filter(e => e.type === 'ability')
       .sort((a, b) => {
         const typeA = a.system?.abilityType || '';
@@ -32,7 +30,7 @@ export class TeriockBaseItemSheet extends TeriockSheet(sheets.ItemSheet) {
       });
 
     const propertyTypeOrder = Object.keys(CONFIG.TERIOCK.abilityOptions.abilityType || {});
-    const properties = transferredEffects
+    const properties = this.document.transferredEffects
       .filter(e => e.type === 'property')
       .sort((a, b) => {
         const typeA = a.system?.propertyType || '';
@@ -43,30 +41,22 @@ export class TeriockBaseItemSheet extends TeriockSheet(sheets.ItemSheet) {
         return (a.name || '').localeCompare(b.name || '');
       });
 
-    const fluencies = transferredEffects
+    const fluencies = this.document.transferredEffects
       .filter(e => e.type === 'fluency')
       .sort((a, b) => (a.name || '').localeCompare(b.name || ''));
 
-    const resources = transferredEffects
+    const resources = this.document.transferredEffects
       .filter(e => e.type === 'resource')
       .sort((a, b) => (a.name || '').localeCompare(b.name || ''));
 
-    return {
-      config: CONFIG.TERIOCK,
-      isEditable: this.isEditable,
-      editable: this.editable,
-      item,
-      limited: document.limited,
-      owner: document.isOwner,
-      system,
-      name,
-      img,
-      flags,
-      properties,
-      abilities,
-      fluencies,
-      resources,
-    };
+    const context = await super._prepareContext();
+    context.item = this.item;
+    context.properties = properties;
+    context.abilities = abilities;
+    context.fluencies = fluencies;
+    context.resources = resources;
+
+    return context;
   }
 
   /** @override */

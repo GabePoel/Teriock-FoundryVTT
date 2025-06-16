@@ -346,35 +346,29 @@ export class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorSheet) {
       return a.localeCompare(b);
     });
 
-    const context = {
-      config: CONFIG.TERIOCK,
-      editable: this.isEditable,
-      actor: this.actor,
-      limited: this.document.limited,
-      owner: this.document.isOwner,
-      system: this.actor.system,
-      abilities: _sortAbilities(this.actor),
-      resources: this.actor.effectTypes.resource,
-      equipment: _sortEquipment(this.actor),
-      powers: this.actor.itemTypes.power,
-      fluencies: this.actor.effectTypes.fluency,
-      effects: this.actor.effectTypes.effect,
-      ranks: this.actor.itemTypes.rank,
-      name: this.actor.name,
-      img: this.actor.img,
-      sidebarOpen: this._sidebarOpen,
-      tabs: {
-        classes: {
-          cssClass: this.tabGroups.primary === 'classes' ? 'active' : '',
-          group: 'primary',
-          id: 'classes',
-          label: 'Classes',
-        },
+    const context = await super._prepareContext();
+
+    context.editable = this.isEditable;
+    context.actor = this.actor;
+    context.abilities = _sortAbilities(this.actor);
+    context.resources = this.actor.effectTypes.resource;
+    context.equipment = _sortEquipment(this.actor);
+    context.powers = this.actor.itemTypes.power;
+    context.fluencies = this.actor.effectTypes.fluency;
+    context.effects = this.actor.effectTypes.effect;
+    context.ranks = this.actor.itemTypes.rank;
+    context.sidebarOpen = this._sidebarOpen;
+    context.tabs = {
+      classes: {
+        cssClass: this.tabGroups.primary === 'classes' ? 'active' : '',
+        group: 'primary',
+        id: 'classes',
+        label: 'Classes',
       },
-      enrichedNotes: await this._editor(this.document.system.sheet.notes),
-      enrichedSpecialRules: await this._editor(this.document.system.primaryAttacker?.system?.specialRules),
-      conditions,
     };
+    context.enrichedNotes = await this._editor(this.document.system.sheet.notes);
+    context.enrichedSpecialRules = await this._editor(this.document.system.primaryAttacker?.system?.specialRules);
+
     return context;
   }
 
@@ -588,7 +582,7 @@ export class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorSheet) {
     let visibleCount = 0;
     let firstVisibleCard = null;
     let lastVisibleCard = null;
-    
+
     const noResults = this.element.querySelector(`.no-results`);
     if (noResults) {
       noResults.classList.toggle('not-hidden', visibleIds.size == 0);

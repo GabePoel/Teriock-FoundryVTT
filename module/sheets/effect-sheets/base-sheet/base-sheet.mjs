@@ -16,19 +16,9 @@ export class TeriockBaseEffectSheet extends TeriockSheet(sheets.ActiveEffectConf
 
   /** @override */
   async _prepareContext() {
-    const context = {
-      config: CONFIG.TERIOCK,
-      editable: this.isEditable && !this._locked,
-      document: this.document,
-      limited: this.document.limited,
-      owner: this.document.isOwner,
-      system: this.document.system,
-      name: this.document.name,
-      img: this.document.img,
-      flags: this.document.flags,
-      disabled: this.document.disabled,
-      changes: this.document.changes,
-    };
+    const context = await super._prepareContext();
+    context.disabled = this.document.disabled;
+    context.changes = this.document.system.applies;
     const system = this.document.system;
     context.enrichedDescription = await this._editor(system.description);
     return context;

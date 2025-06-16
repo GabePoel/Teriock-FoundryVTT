@@ -66,6 +66,25 @@ export const TeriockSheet = (Base) =>
       this._activateMenu();
     }
 
+    /** @override */
+    async _prepareContext() {
+      const context = {
+        config: CONFIG.TERIOCK,
+        editable: this.editable,
+        isEditable: this.isEditable,
+        document: this.document,
+        limited: this.document.limited,
+        owner: this.document.isOwner,
+        fields: this.document.schema.fields,
+        system: this.document.system,
+        systemFields: this.document.system.schema.fields,
+        name: this.document.name,
+        img: this.document.img,
+        flags: this.document.flags,
+      }
+      return context;
+    }
+
     async _chatImage(img) {
       await chatImage(img);
     }
