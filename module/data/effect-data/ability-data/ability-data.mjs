@@ -2,6 +2,7 @@ const { fields } = foundry.data;
 import { _messageParts } from "./_message-parts.mjs";
 import { _parse } from "./_parsing.mjs";
 import { _roll } from "./_rolling.mjs";
+import { abilityOptions } from "../../../helpers/constants/ability-options.mjs";
 import { appliesField } from "./ability-fields.mjs";
 import { migrate } from "./migrate.mjs";
 import { TeriockBaseEffectData } from "../base-data/base-data.mjs";
@@ -20,18 +21,44 @@ export class TeriockAbilityData extends WikiDataMixin(TeriockBaseEffectData) {
       childIds: new fields.ArrayField(new fields.DocumentIdField()),
       elderSorcery: new fields.BooleanField({ initial: false }),
       elderSorceryIncant: new fields.HTMLField({ initial: "" }),
-      powerSources: new fields.ArrayField(new fields.StringField()),
-      interaction: new fields.StringField({ initial: "attack" }),
-      featSaveAttribute: new fields.StringField({ initial: "mov" }),
-      maneuver: new fields.StringField({ initial: "active" }),
+      powerSources: new fields.ArrayField(new fields.StringField({
+        choices: abilityOptions.powerSources,
+      })),
+      interaction: new fields.StringField({
+        initial: "attack",
+        choices: abilityOptions.interaction,
+      }),
+      featSaveAttribute: new fields.StringField({
+        initial: "mov",
+        choices: abilityOptions.featSaveAttribute,
+      }),
+      maneuver: new fields.StringField({
+        initial: "active",
+        choices: abilityOptions.maneuver,
+      }),
       executionTime: new fields.StringField({ initial: "1a" }),
       delivery: new fields.SchemaField({
-        base: new fields.StringField({ initial: "weapon" }),
-        parent: new fields.StringField({ initial: null, nullable: true }),
-        package: new fields.StringField({ initial: null, nullable: true }),
+        base: new fields.StringField({
+          initial: "weapon",
+          choices: abilityOptions.delivery
+        }),
+        parent: new fields.StringField({
+          initial: null,
+          nullable: true,
+          choices: abilityOptions.deliveryParent,
+        }),
+        package: new fields.StringField({
+          initial: null,
+          nullable: true,
+          choices: abilityOptions.deliveryPackage,
+        }),
       }),
-      targets: new fields.ArrayField(new fields.StringField()),
-      elements: new fields.ArrayField(new fields.StringField()),
+      targets: new fields.ArrayField(new fields.StringField({
+        choices: abilityOptions.targets,
+      })),
+      elements: new fields.ArrayField(new fields.StringField({
+        choices: abilityOptions.elements,
+      })),
       duration: new fields.ArrayField(new fields.StringField()),
       sustained: new fields.BooleanField({ initial: false }),
       range: new fields.NumberField({ initial: null, nullable: true }),
@@ -50,14 +77,23 @@ export class TeriockAbilityData extends WikiDataMixin(TeriockBaseEffectData) {
         fail: new fields.HTMLField({ initial: "" }),
         critFail: new fields.HTMLField({ initial: "" }),
       }),
-      piercing: new fields.StringField({ initial: "normal" }),
+      piercing: new fields.StringField({
+        initial: "normal",
+        choices: abilityOptions.piercing,
+      }),
       improvements: new fields.SchemaField({
         attributeImprovement: new fields.SchemaField({
-          attribute: new fields.StringField({ initial: null, nullable: true }),
+          attribute: new fields.StringField({
+            initial: null, nullable: true,
+            choices: abilityOptions.attribute,
+          }),
           minVal: new fields.NumberField({ initial: 0 }),
         }),
         featSaveImprovement: new fields.SchemaField({
-          attribute: new fields.StringField({ initial: null, nullable: true }),
+          attribute: new fields.StringField({
+            initial: null, nullable: true,
+            choices: abilityOptions.featSaveAttribute,
+          }),
           amount: new fields.StringField({ initial: "proficient" }),
         }),
       }),
@@ -82,7 +118,9 @@ export class TeriockAbilityData extends WikiDataMixin(TeriockBaseEffectData) {
       heightened: new fields.HTMLField({ initial: "" }),
       endCondition: new fields.HTMLField({ initial: "" }),
       requirements: new fields.HTMLField({ initial: "" }),
-      effects: new fields.ArrayField(new fields.StringField()),
+      effects: new fields.ArrayField(new fields.StringField({
+        choices: abilityOptions.effects,
+      })),
       expansion: new fields.StringField({ initial: null, nullable: true }),
       expansionRange: new fields.StringField({ initial: null, nullable: true }),
       expansionSaveAttribute: new fields.StringField({ initial: "mov" }),
