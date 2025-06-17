@@ -1,4 +1,4 @@
-export function migrate(data) {
+export function _migrateData(data) {
   if (data.effects) {
     data.effects.sort();
   }

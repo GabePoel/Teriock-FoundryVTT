@@ -1,38 +1,14 @@
 const { fields } = foundry.data;
 
-export function attributeField() {
-  return new fields.SchemaField({
-    saveProficient: new fields.BooleanField({ initial: false }),
-    saveFluent: new fields.BooleanField({ initial: false }),
-    value: new fields.NumberField({ initial: -3 }),
-  });
-}
-
-export function tradecraftField() {
-  return new fields.SchemaField({
-    proficient: new fields.BooleanField({ initial: false }),
-    extra: new fields.NumberField({ initial: 0 }),
-    bonus: new fields.NumberField({ initial: 0 }),
-  })
-}
-
-export function hackField(max) {
-  return new fields.SchemaField({
-    min: new fields.NumberField({ initial: 0 }),
-    max: new fields.NumberField({ initial: max }),
-    value: new fields.NumberField({ initial: 0 }),
-  })
-}
-
-export function displayField(size = "medium", gapless = false) {
+function displayField(size = "medium", gapless = false) {
   return new fields.SchemaField({
     size: new fields.StringField({ initial: size }),
     gapless: new fields.BooleanField({ initial: gapless }),
   })
 }
 
-export function sheetField() {
-  return new fields.SchemaField({
+export function _defineSheet(schema) {
+  schema.sheet = new fields.SchemaField({
     activeTab: new fields.StringField({ initial: "abilities" }),
     test: new fields.NumberField({ initial: 0 }),
     menus: new fields.SchemaField({
@@ -104,4 +80,5 @@ export function sheetField() {
     primaryBlocker: new fields.StringField({ initial: null, nullable: true }),
     primaryAttacker: new fields.StringField({ initial: null, nullable: true }),
   });
+  return schema;
 }

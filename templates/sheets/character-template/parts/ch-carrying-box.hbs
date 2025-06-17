@@ -4,27 +4,26 @@
       <div class="tsubtle tcenter">
         Size
       </div>
-      <input
-        type="number"
-        name="system.size"
-        value="{{system.size}}"
-        class="character-size-input character-smallbox-value"
-        data-edit="system.size"
-        min="0"
-        max="30"
-      />
+      {{formInput
+        systemFields.size
+        value=system.size
+        classes="character-size-input character-smallbox-value selected"
+      }}
     </div>
     <div class="character-shortbox character-weight-box">
       <div class="tsubtle tcenter">
         Weight
       </div>
-      <input
-        type="text"
-        name="system.weight"
-        value="{{system.weight}}"
-        class="character-weight-input character-smallbox-value"
-        data-edit="system.weight"
-      />
+      <div class="affix">
+        <div class="unselected">
+          <span class="character-weight-input character-smallbox-value">{{{system.weight}}} lb</span>
+        </div>
+        {{formInput
+          systemFields.weight
+          value=system.weight
+          classes="character-weight-input character-smallbox-value selected"
+        }}
+      </div>
     </div>
     <div class="character-shortbox character-carrying-box">
       <div class="tsubtle tcenter">

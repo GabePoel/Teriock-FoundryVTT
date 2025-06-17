@@ -1,6 +1,6 @@
 const { fields } = foundry.data;
 
-export function appliesField() {
+function appliesField() {
   return new fields.SchemaField({
     statuses: new fields.ArrayField(new fields.StringField()),
     damage: new fields.ArrayField(new fields.StringField()),
@@ -12,4 +12,14 @@ export function appliesField() {
       priority: new fields.NumberField({ initial: 20 }),
     }))
   });
+}
+
+export function _defineApplies(schema) {
+  schema.applies = new fields.SchemaField({
+    base: appliesField(),
+    proficient: appliesField(),
+    fluent: appliesField(),
+  });
+
+  return schema;
 }
