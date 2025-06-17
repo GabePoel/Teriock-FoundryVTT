@@ -22,8 +22,9 @@ import { _messageParts, _secretMessageParts } from "./_message-parts.mjs";
 import { _parse } from "./_parsing.mjs";
 import { _roll } from "./_rolling.mjs";
 import { ConsumableDataMixin } from "../../mixins/consumable-mixin.mjs";
-import { WikiDataMixin } from "../../mixins/wiki-mixin.mjs";
+import { equipmentOptions } from "../../../helpers/constants/equipment-options.mjs";
 import { TeriockBaseItemData } from "../base-data/base-data.mjs";
+import { WikiDataMixin } from "../../mixins/wiki-mixin.mjs";
 
 export class TeriockEquipmentData extends WikiDataMixin(ConsumableDataMixin(TeriockBaseItemData)) {
   static defineSchema() {
@@ -31,36 +32,92 @@ export class TeriockEquipmentData extends WikiDataMixin(ConsumableDataMixin(Teri
     return {
       ...commonData,
       wikiNamespace: new fields.StringField({ initial: "Equipment", gmOnly: true }),
-      equipped: new fields.BooleanField({ initial: true }),
-      glued: new fields.BooleanField({ initial: false }),
-      shattered: new fields.BooleanField({ initial: false }),
-      dampened: new fields.BooleanField({ initial: false }),
-      consumable: new fields.BooleanField({ initial: false }),
+      equipped: new fields.BooleanField({
+        initial: true,
+        label: "Equipped",
+      }),
+      glued: new fields.BooleanField({
+        initial: false,
+        label: "Glued",
+      }),
+      shattered: new fields.BooleanField({
+        initial: false,
+        label: "Shattered"
+      }),
+      dampened: new fields.BooleanField({
+        initial: false,
+        label: "Dampened"
+      }),
+      consumable: new fields.BooleanField({
+        initial: false,
+        label: "Consumable",
+      }),
       quantity: new fields.NumberField({ initial: 1 }),
       maxQuantity: new fields.NumberField({ initial: null, nullable: true }),
       maxQuantityRaw: new fields.StringField({ initial: null, nullable: true }),
-      ranged: new fields.BooleanField({ initial: false }),
+      ranged: new fields.BooleanField({
+        initial: false,
+        label: "Ranged",
+      }),
       damage: new fields.StringField({ initial: "0" }),
       twoHandedDamage: new fields.StringField({ initial: "0" }),
       damageTypes: new fields.ArrayField(new fields.StringField()),
-      weight: new fields.NumberField({ initial: 0, nullable: true }),
-      range: new fields.NumberField({ initial: 0, nullable: true }),
-      shortRange: new fields.NumberField({ initial: 0 }),
-      equipmentClasses: new fields.ArrayField(new fields.StringField()),
-      minStr: new fields.NumberField({ initial: -3 }),
+      weight: new fields.NumberField({
+        initial: 0,
+        integer: true,
+        min: 0,
+      }),
+      range: new fields.NumberField({
+        initial: 0,
+        integer: true,
+        min: 0,
+      }),
+      shortRange: new fields.NumberField({
+        initial: 0,
+        integer: true,
+        min: 0,
+      }),
+      equipmentClasses: new fields.ArrayField(new fields.StringField({
+        choices: equipmentOptions.equipmentClasses,
+
+      })),
+      minStr: new fields.NumberField({
+        initial: -3,
+        integer: true,
+        min: -3,
+      }),
       sb: new fields.StringField({ initial: null, nullable: true }),
-      av: new fields.NumberField({ initial: 0 }),
-      bv: new fields.NumberField({ initial: 0 }),
+      av: new fields.NumberField({
+        initial: 0,
+        integer: true,
+        min: 0,
+      }),
+      bv: new fields.NumberField({
+        initial: 0,
+        integer: true,
+        min: 0,
+      }),
       specialRules: new fields.HTMLField({ initial: "" }),
       equipmentType: new fields.StringField({ initial: "Equipment Type" }),
-      powerLevel: new fields.StringField({ initial: "mundane" }),
+      powerLevel: new fields.StringField({
+        initial: "mundane",
+        choices: equipmentOptions.powerLevelShort
+      }),
       flaws: new fields.HTMLField({ initial: "" }),
       notes: new fields.HTMLField({ initial: "" }),
-      tier: new fields.NumberField({ initial: 0 }),
+      tier: new fields.NumberField({
+        initial: 0,
+        integer: true,
+        min: 0,
+      }),
       fullTier: new fields.StringField({ initial: "" }),
       manaStoring: new fields.StringField({ initial: "" }),
       identified: new fields.BooleanField({ initial: true }),
-      reference: new fields.StringField({ initial: null, nullable: true, gmOnly: true }),
+      reference: new fields.DocumentUUIDField({
+        initial: null,
+        nullable: true,
+        gmOnly: true
+      }),
     }
   }
 

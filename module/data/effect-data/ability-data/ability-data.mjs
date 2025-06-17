@@ -85,7 +85,7 @@ export class TeriockAbilityData extends WikiDataMixin(TeriockBaseEffectData) {
       }),
       piercing: new fields.StringField({
         initial: "normal",
-        // choices: abilityOptions.piercing,
+        choices: abilityOptions.piercing,
       }),
       improvements: new fields.SchemaField({
         attributeImprovement: new fields.SchemaField({

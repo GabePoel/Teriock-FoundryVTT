@@ -3,13 +3,16 @@ const { TypeDataModel } = foundry.abstract;
 import { ChildDataMixin } from "../../mixins/child-mixin.mjs";
 
 export class TeriockBaseItemData extends ChildDataMixin(TypeDataModel) {
+
+  /** @override */
   static defineSchema() {
+    const commonData = super.defineSchema();
     return {
-      description: new fields.HTMLField(),
-      disabled: new fields.BooleanField({ initial: false }),
-      font: new fields.StringField({ initial: "" }),
-      proficient: new fields.BooleanField({ initial: false }),
-      fluent: new fields.BooleanField({ initial: false }),
+      ...commonData,
+      disabled: new fields.BooleanField({
+        initial: false,
+        label: "Disabled",
+      }),
     }
   }
 }

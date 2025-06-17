@@ -2,118 +2,54 @@
   <div class="ab-menu-content">
     <div class="ab-menu-bar">
       <div class="tgrid g3">
-        {{!-- <div class="tgrid-item">
-          <label for="editable">Editable</label>
-          <input
-            type="checkbox"
-            id="editable"
-            class="editable-checkbox"
-            name="system.editable"
-            {{#if (not isEditable)}}disabled="true"{{/if}}
-            {{checked system.editable}}
-          />
-        </div> --}}
-        {{!-- <div class="tgrid-item">
-          <label for="attuned">Attuned</label>
-          <input
-            type="checkbox"
-            id="attuned"
-            class="attune-checkbox"
-            name="system.attuned"
-            {{checked system.attuned}}
-          />
-        </div> --}}
-        <div class="tgrid-item">
-          <label for="glued">Glued</label>
-          <input
-            {{#if (not editable)}}
-              disabled="true"
-            {{/if}}
-            type="checkbox"
-            id="glued"
-            class="glue-checkbox"
-            name="system.glued"
-            {{checked system.glued}}
-          />
-        </div>
-        <div class="tgrid-item">
-          <label for="shattered">Shattered</label>
-          <input
-            {{#if (not editable)}}
-              disabled="true"
-            {{/if}}
-            type="checkbox"
-            id="shattered"
-            class="shatter-checkbox"
-            data-action="toggleShattered"
-            {{checked system.shattered}}
-          />
-        </div>
-        <div class="tgrid-item">
-          <label for="dampened">Dampened</label>
-          <input
-            {{#if (not isEditable)}}
-              disabled="true"
-            {{/if}}
-            type="checkbox"
-            id="dampened"
-            class="dampen-checkbox"
-            data-action="toggleDampened"
-            {{checked system.dampened}}
-          />
-        </div>
-        <div class="tgrid-item">
-          <label for="consumable">Consumable</label>
-          <input
-            {{#if (not editable)}}
-              disabled="true"
-            {{/if}}
-            type="checkbox"
-            id="consumable"
-            class="consumable-checkbox"
-            name="system.consumable"
-            {{checked system.consumable}}
-          />
-        </div>
-        <div class="tgrid-item">
-          <label for="equipped">Equipped</label>
-          <input
-            {{#if (not editable)}}
-              disabled="true"
-            {{/if}}
-            type="checkbox"
-            id="equipped"
-            class="equipped-checkbox"
-            data-action="toggleEquipped"
-            {{checked system.equipped}}
-          />
-        </div>
-        <div class="tgrid-item">
-          <label for="wielded">Proficient</label>
-          <input
-            {{#if (not editable)}}
-              disabled="true"
-            {{/if}}
-            type="checkbox"
-            id="proficient"
-            class="proficient-checkbox"
-            name="system.proficient"
-            {{checked system.proficient}}
-          />
-        </div>
-        {{!-- <div class="tgrid-item">
-          <label for="ranged">Ranged</label>
-          <input
-            {{#if (not editable)}}
-              disabled="true"
-            {{/if}}
-            type="checkbox"
-            id="ranged"
-            class="ranged-checkbox"
-            name="system.ranged"
-            {{checked system.ranged}}
-          />
-        </div> --}}
+        {{formGroup
+          systemFields.glued
+          value=system.glued
+          disabled=(not editable)
+          classes="tgrid-item"
+          rootId=(concat uuid)
+        }}
+        {{formGroup
+          systemFields.shattered
+          value=system.shattered
+          disabled=(not editable)
+          classes="tgrid-item"
+          rootId=(concat uuid)
+          dataset=(dataset action="toggleShattered")  
+        }}
+        {{formGroup
+          systemFields.dampened
+          value=system.dampened
+          disabled=(not editable)
+          classes="tgrid-item"
+          rootId=(concat uuid)
+          dataset=(dataset action="toggleDampened")
+        }}
+        {{
+          formGroup
+          systemFields.consumable
+          value=system.consumable
+          disabled=(not editable)
+          classes="tgrid-item"
+          rootId=(concat uuid)
+        }}
+        {{
+          formGroup
+          systemFields.equipped
+          value=system.equipped
+          disabled=(not editable)
+          classes="tgrid-item"
+          rootId=(concat uuid)
+          dataset=(dataset action="toggleEquipped")
+        }}
+        {{
+          formGroup
+          systemFields.proficient
+          value=system.proficient
+          disabled=(not editable)
+          classes="tgrid-item"
+          rootId=(concat uuid)
+        }}
       </div>
     </div>
     <div class="ab-menu-bar">

@@ -13,32 +13,23 @@
           <div class="ab-box-icon">
             <i class="fa-light fa-{{firstDie system.damage}}"></i>
           </div>
-          <div class="ab-box-content">
-            <input
-              {{#if (not editable)}}
-                disabled="true"
-              {{/if}}
-              class="ability-bar-input damage-input"
-              name="system.damage"
-              type="text"
-              value="{{system.damage}}"
-              data-edit="system.damage"
-              data-tooltip="Damage"
-              {{#if (exists system.twoHandedDamage)}}
-                style="text-align: right;"
-              {{/if}}
-            />
+          <div class="ab-box-content {{#if (exists system.twoHandedDamage)}}ab-split-input{{/if}}">
+            {{formInput
+              systemFields.damage
+              value=system.damage
+              disabled=(not editable)
+              classes="ability-bar-input damage-input"
+              dataset=(dataset tooltip="Damage")
+            }}
             {{#if (exists system.twoHandedDamage)}}
               &nbsp;/&nbsp;
-              <input
-                class="ability-bar-input damage-input"
-                name="system.twoHandedDamage"
-                type="text"
-                value="{{system.twoHandedDamage}}"
-                data-edit="system.twoHandedDamage"
-                data-tooltip="Two-Handed Damage"
-                style="text-align: left;"
-              />
+              {{formInput
+                systemFields.twoHandedDamage
+                value=system.twoHandedDamage
+                disabled=(not editable)
+                classes="ability-bar-input two-handed-damage-input"
+                dataset=(dataset tooltip="Two-Handed Damage")
+              }}
             {{/if}}
           </div>
           <div class="ab-box-label">
@@ -53,39 +44,24 @@
           <div class="ab-box-icon">
             {{{config.icons.range}}}
           </div>
-          <div class="ab-box-content">
+          <div class="ab-box-content {{#if (exists system.shortRange)}}ab-split-input{{/if}}">
             {{#if (exists system.shortRange)}}
-              <input
-                {{#if (not editable)}}
-                  disabled="true"
-                {{/if}}
-                class="ability-bar-input range-input"
-                name="system.shortRange"
-                type="number"
-                value="{{system.shortRange}}"
-                data-edit="system.shortRange"
-                data-tooltip="Short Range"
-                style="text-align: right;"
-                min="0"
-                max="{{system.range}}"
-              />
+              {{formInput
+                systemFields.shortRange
+                value=system.shortRange
+                disabled=(not editable)
+                classes="ability-bar-input range-input"
+                dataset=(dataset tooltip="Short Range")
+              }}
               &nbsp;/&nbsp;
             {{/if}}
-            <input
-              {{#if (not editable)}}
-                disabled="true"
-              {{/if}}
-              class="ability-bar-input range-input"
-              name="system.range"
-              type="number"
-              value="{{system.range}}"
-              data-edit="system.range"
-              data-tooltip="Range"
-              min="0"
-              {{#if (exists system.shortRange)}}
-                style="text-align: left;"
-              {{/if}}
-            />
+            {{formInput
+              systemFields.range
+              value=system.range
+              disabled=(not editable)
+              classes="ability-bar-input range-input"
+              dataset=(dataset tooltip="Range")
+            }}
           </div>
           <div class="ab-box-label" style="text-transform: none;">
             ft
@@ -94,56 +70,44 @@
       </div>
     {{/if}}
     {{#if (exists system.av)}}
-        <div class="ab-box-container">
-            <div class="ab-box" data-tooltip="Armor Value">
-                <div class="ab-box-icon">
-                    {{{config.icons.av}}}
-                </div>
-                <div class="ab-box-content">
-                    <input
-                      {{#if (not editable)}}
-                        disabled="true"
-                      {{/if}}
-                      class="ability-bar-input av-input"
-                      name="system.av"
-                      type="number"
-                      value="{{system.av}}"
-                      data-edit="system.av"
-                      min="0"
-                      max="10"
-                    />
-                </div>
-                <div class="ab-box-label">
-                    AV
-                </div>
-            </div>
+      <div class="ab-box-container">
+        <div class="ab-box" data-tooltip="Armor Value">
+          <div class="ab-box-icon">
+            {{{config.icons.av}}}
+          </div>
+          <div class="ab-box-content">
+            {{formInput
+              systemFields.av
+              value=system.av
+              disabled=(not editable)
+              classes="ability-bar-input av-input"
+            }}
+          </div>
+          <div class="ab-box-label">
+            AV
+          </div>
         </div>
+      </div>
     {{/if}}
     {{#if (exists system.bv)}}
-        <div class="ab-box-container">
-            <div class="ab-box" data-tooltip="Block Value">
-                <div class="ab-box-icon">
-                    {{{config.icons.bv}}}
-                </div>
-                <div class="ab-box-content">
-                    <input
-                      {{#if (not editable)}}
-                        disabled="true"
-                      {{/if}}
-                      class="ability-bar-input bv-input"
-                      name="system.bv"
-                      type="number"
-                      value="{{system.bv}}"
-                      data-edit="system.bv"
-                      min="0"
-                      max="10"
-                    />
-                </div>
-                <div class="ab-box-label">
-                    BV
-                </div>
-            </div>
+      <div class="ab-box-container">
+        <div class="ab-box" data-tooltip="Block Value">
+          <div class="ab-box-icon">
+              {{{config.icons.bv}}}
+          </div>
+          <div class="ab-box-content">
+            {{formInput
+              systemFields.bv
+              value=system.bv
+              disabled=(not editable)
+              classes="ability-bar-input bv-input"
+            }}
+          </div>
+          <div class="ab-box-label">
+            BV
+          </div>
         </div>
+      </div>
     {{/if}}
   </div>
 {{/if}}

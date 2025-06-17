@@ -81,6 +81,7 @@ export const TeriockSheet = (Base) =>
         name: this.document.name,
         img: this.document.img,
         flags: this.document.flags,
+        uuid: this.document.uuid,
       }
       return context;
     }

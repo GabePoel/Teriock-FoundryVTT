@@ -25,6 +25,8 @@ for (const key of Object.keys(tradecrafts)) {
 const tradecraftsField = new fields.SchemaField(tradecraftData);
 
 export class TeriockBaseActorData extends TypeDataModel {
+
+  /** @override */
   static defineSchema() {
     return {
       lvl: new fields.NumberField({ initial: 1 }),

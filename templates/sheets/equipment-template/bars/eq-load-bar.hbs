@@ -6,18 +6,12 @@
           {{{config.icons.tier}}}
         </div>
         <div class="ab-box-content">
-          <input
-            {{#if (not editable)}}
-              disabled="true"
-            {{/if}}
-            class="ability-bar-input tier-input"
-            name="system.tier"
-            type="number"
-            value="{{system.tier}}"
-            placeholder="0"
-            min="0"
-            data-edit="system.tier"
-          />
+          {{formInput
+            systemFields.tier
+            value=system.tier
+            disabled=(not editable)
+            classes="ability-bar-input tier-input"
+          }}
         </div>
         <div class="ab-box-label">
           Tier
@@ -31,17 +25,12 @@
         {{{config.icons.weight}}}
       </div>
       <div class="ab-box-content">
-        <input
-          {{#if (not editable)}}
-            disabled="true"
-          {{/if}}
-          class="ability-bar-input weight-input"
-          name="system.weight"
-          type="number"
-          value="{{system.weight}}"
-          data-edit="system.weight"
-          min="0"
-        />
+        {{formInput
+          systemFields.weight
+          value=system.weight
+          disabled=(not editable)
+          classes="ability-bar-input weight-input"
+        }}
       </div>
       <div class="ab-box-label" style="text-transform: none;">
         lb
@@ -54,18 +43,12 @@
         {{{config.icons.minStr}}}
       </div>
       <div class="ab-box-content">
-        <input
-          {{#if (not editable)}}
-            disabled="true"
-          {{/if}}
-          class="ability-bar-input str-input"
-          name="system.minStr"
-          type="number"
-          value="{{system.minStr}}"
-          data-edit="system.minStr"
-          min="-4"
-          max="5"
-        />
+        {{formInput
+          systemFields.minStr
+          value=system.minStr
+          disabled=(not editable)
+          classes="ability-bar-input str-input"
+        }}
       </div>
       <div class="ab-box-label">
         Str
