@@ -19,7 +19,10 @@ export class TeriockAbilityData extends WikiDataMixin(TeriockBaseEffectData) {
         nullable: true,
       }),
       childIds: new fields.ArrayField(new fields.DocumentIdField()),
-      elderSorcery: new fields.BooleanField({ initial: false }),
+      elderSorcery: new fields.BooleanField({
+        initial: false,
+        label: "Elder Sorcery",
+      }),
       elderSorceryIncant: new fields.HTMLField({ initial: "" }),
       powerSources: new fields.ArrayField(new fields.StringField({
         choices: abilityOptions.powerSources,
@@ -36,7 +39,7 @@ export class TeriockAbilityData extends WikiDataMixin(TeriockBaseEffectData) {
         initial: "active",
         choices: abilityOptions.maneuver,
       }),
-      executionTime: new fields.StringField({ initial: "1a" }),
+      executionTime: new fields.StringField({ initial: "a1" }),
       delivery: new fields.SchemaField({
         base: new fields.StringField({
           initial: "weapon",
@@ -59,9 +62,12 @@ export class TeriockAbilityData extends WikiDataMixin(TeriockBaseEffectData) {
       elements: new fields.ArrayField(new fields.StringField({
         choices: abilityOptions.elements,
       })),
-      duration: new fields.ArrayField(new fields.StringField()),
-      sustained: new fields.BooleanField({ initial: false }),
-      range: new fields.NumberField({ initial: null, nullable: true }),
+      duration: new fields.StringField({ initial: "Instant" }),
+      sustained: new fields.BooleanField({
+        initial: false,
+        label: "Sustained",
+      }),
+      range: new fields.StringField({ initial: null, nullable: true }),
       overview: new fields.SchemaField({
         base: new fields.HTMLField({ initial: "" }),
         proficient: new fields.HTMLField({ initial: "" }),
@@ -79,7 +85,7 @@ export class TeriockAbilityData extends WikiDataMixin(TeriockBaseEffectData) {
       }),
       piercing: new fields.StringField({
         initial: "normal",
-        choices: abilityOptions.piercing,
+        // choices: abilityOptions.piercing,
       }),
       improvements: new fields.SchemaField({
         attributeImprovement: new fields.SchemaField({
@@ -97,22 +103,86 @@ export class TeriockAbilityData extends WikiDataMixin(TeriockBaseEffectData) {
           amount: new fields.StringField({ initial: "proficient" }),
         }),
       }),
-      skill: new fields.BooleanField({ initial: false }),
-      spell: new fields.BooleanField({ initial: false }),
-      standard: new fields.BooleanField({ initial: false }),
-      ritual: new fields.BooleanField({ initial: false }),
+      skill: new fields.BooleanField({
+        initial: false,
+        label: "Skill",
+      }),
+      spell: new fields.BooleanField({
+        initial: false,
+        label: "Spell",
+      }),
+      standard: new fields.BooleanField({
+        initial: false,
+        label: "Standard"
+      }),
+      ritual: new fields.BooleanField({
+        initial: false,
+        label: "Ritual"
+      }),
       class: new fields.StringField({ initial: "" }),
-      rotator: new fields.BooleanField({ initial: false }),
-      invoked: new fields.BooleanField({ initial: false }),
+      rotator: new fields.BooleanField({
+        initial: false,
+        label: "Rotator"
+      }),
+      invoked: new fields.BooleanField({
+        initial: false,
+        label: "Invoked"
+      }),
       costs: new fields.SchemaField({
-        verbal: new fields.BooleanField({ initial: false }),
-        somatic: new fields.BooleanField({ initial: false }),
-        material: new fields.BooleanField({ initial: false }),
-        mp: new fields.AnyField({ initial: null, nullable: true }),
-        hp: new fields.AnyField({ initial: null, nullable: true }),
+        verbal: new fields.BooleanField({
+          initial: false,
+          label: "Verbal"
+        }),
+        somatic: new fields.BooleanField({
+          initial: false,
+          label: "Somatic"
+        }),
+        material: new fields.BooleanField({
+          initial: false,
+          label: "Material"
+        }),
+        mp: new fields.SchemaField({
+          type: new fields.StringField({
+            initial: "none",
+            choices: {
+              none: "None",
+              static: "Static",
+              formula: "Formula",
+              variable: "Variable",
+            }
+          }),
+          value: new fields.SchemaField({
+            static: new fields.NumberField({
+              initial: 0,
+              integer: true,
+              min: 0,
+            }),
+            formula: new fields.StringField({ initial: "" }),
+            variable: new fields.HTMLField({ initial: "" }),
+          })
+        }),
+        hp: new fields.SchemaField({
+          type: new fields.StringField({
+            initial: "none",
+            choices: {
+              none: "None",
+              static: "Static",
+              formula: "Formula",
+              variable: "Variable",
+              hack: "Hack",
+            }
+          }),
+          value: new fields.SchemaField({
+            static: new fields.NumberField({
+              initial: 0,
+              integer: true,
+              min: 0,
+            }),
+            formula: new fields.StringField({ initial: "" }),
+            variable: new fields.HTMLField({ initial: "" }),
+          })
+        }),
         break: new fields.StringField({ initial: "" }),
-        manaCost: new fields.HTMLField({ initial: "" }),
-        hitCost: new fields.HTMLField({ initial: "" }),
         materialCost: new fields.HTMLField({ initial: "" }),
       }),
       heightened: new fields.HTMLField({ initial: "" }),
@@ -125,7 +195,10 @@ export class TeriockAbilityData extends WikiDataMixin(TeriockBaseEffectData) {
       expansionRange: new fields.StringField({ initial: null, nullable: true }),
       expansionSaveAttribute: new fields.StringField({ initial: "mov" }),
       trigger: new fields.HTMLField({ initial: "" }),
-      basic: new fields.BooleanField({ initial: false }),
+      basic: new fields.BooleanField({
+        initial: false,
+        label: "Basic"
+      }),
       abilityType: new fields.StringField({ initial: "normal" }),
       limitation: new fields.HTMLField({ initial: "" }),
       improvement: new fields.HTMLField({ initial: "" }),
@@ -138,7 +211,8 @@ export class TeriockAbilityData extends WikiDataMixin(TeriockBaseEffectData) {
   }
 
   static migrateData(data) {
-    return migrate(data);
+    data = migrate(data);
+    return super.migrateData(data);
   }
 
   /** @override */

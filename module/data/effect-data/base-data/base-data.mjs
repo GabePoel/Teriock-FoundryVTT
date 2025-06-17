@@ -6,9 +6,18 @@ export class TeriockBaseEffectData extends ChildDataMixin(TypeDataModel) {
   static defineSchema() {
     return {
       description: new fields.HTMLField({ initial: "<p>None.</p>" }),
-      forceDisabled: new fields.BooleanField({ initial: false }),
-      proficient: new fields.BooleanField({ initial: false }),
-      fluent: new fields.BooleanField({ initial: false }),
+      forceDisabled: new fields.BooleanField({
+        initial: false,
+        label: "Force Disabled"
+      }),
+      proficient: new fields.BooleanField({
+        initial: false,
+        label: "Proficient",
+      }),
+      fluent: new fields.BooleanField({
+        initial: false,
+        label: "Fluent",
+      }),
     }
   }
 }

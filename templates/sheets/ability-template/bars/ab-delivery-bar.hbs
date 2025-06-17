@@ -25,16 +25,12 @@
           Passive
         {{/if}}
         {{#if (eq system.maneuver "slow")}}
-          <input
-            class="ability-bar-input"
-            name="system.executionTime"
-            type="text"
-            value="{{system.executionTime}}"
-            data-edit="system.executionTime"
-            {{#if (not editable)}}
-              disabled="true"
-            {{/if}}
-          />
+          {{formInput
+            systemFields.executionTime
+            value=system.executionTime
+            disabled=(not editable)
+            classes="ability-bar-input"
+          }}
         {{/if}}
       </div>
     </div>

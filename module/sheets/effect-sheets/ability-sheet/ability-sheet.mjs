@@ -30,8 +30,8 @@ export class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(TeriockB
     context.childAbilities = this.document.getChildren();
     context.parentAbility = this.document.getParent();
     const editors = {
-      manaCost: system.costs.manaCost,
-      hitCost: system.costs.hitCost,
+      manaCost: system.costs.mp.value.variable,
+      hitCost: system.costs.hp.value.variable,
       materialCost: system.costs.materialCost,
       trigger: system.trigger,
       baseOverview: system.overview.base,
@@ -178,8 +178,26 @@ export class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(TeriockB
 
     const staticUpdates = {
       '.ab-expansion-button': { 'system.expansion': 'detonate' },
-      '.ab-mana-cost-button': { 'system.costs.mp': 1 },
-      '.ab-hit-cost-button': { 'system.costs.hp': 1 },
+      '.ab-mana-cost-button': {
+        'system.costs.mp': {
+          type: 'static',
+          value: {
+            static: 1,
+            formula: "",
+            variable: "",
+          }
+        }
+      },
+      '.ab-hit-cost-button': {
+        'system.costs.hp': {
+          type: 'static',
+          value: {
+            static: 1,
+            formula: "",
+            variable: "",
+          }
+        }
+      },
       '.ab-break-cost-button': { 'system.costs.break': 'shatter' },
       '.ab-attribute-improvement-button': { 'system.improvements.attributeImprovement.attribute': 'int' },
       '.ab-feat-save-improvement-button': { 'system.improvements.featSaveImprovement.attribute': 'int' },

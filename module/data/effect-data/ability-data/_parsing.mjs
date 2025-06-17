@@ -48,6 +48,8 @@ export async function _parse(ability, rawHTML) {
     }
   });
 
+  console.log('Tag tree:', tagTree);
+
   // Helper functions
   function getBarText(selector, clean = false) {
     const el = doc.querySelector(`.ability-bar-${selector} .ability-bar-content`);
@@ -68,6 +70,8 @@ export async function _parse(ability, rawHTML) {
   const referenceAbility = new ActiveEffect({ name: 'Reference Ability', type: 'ability' });
   const parameters = foundry.utils.deepClone(referenceAbility.system).toObject();
   const changes = [];
+  delete parameters.executionTime;
+  delete parameters.maneuver;
 
   // Tag-driven assignments
   if (tagTree.power) {
@@ -164,14 +168,75 @@ export async function _parse(ability, rawHTML) {
   if (tagTree.cost) {
     for (const c of tagTree.cost) {
       if (c.startsWith("mp")) {
-        parameters.costs.mp = c.slice(2);
-        if (parameters.costs.mp === "x") parameters.costs.manaCost = getBarText('mana-cost');
-        else parameters.costs.mp = parseInt(parameters.costs.mp, 10);
+        const mp = c.slice(2);
+        if (mp === "x") {
+          parameters.costs.mp = {
+            type: 'variable',
+            value: {
+              variable: getBarText('mana-cost'),
+              static: 0,
+              formula: '',
+            }
+          }
+        } else if (mp && !isNaN(mp)) {
+          parameters.costs.mp = {
+            type: 'static',
+            value: {
+              static: parseInt(mp, 10),
+              formula: '',
+              variable: '',
+            }
+          }
+        } else {
+          parameters.costs.mp = {
+            type: 'formula',
+            value: {
+              static: 0,
+              formula: mp || '',
+              variable: '',
+            }
+          }
+        }
       }
       if (c.startsWith("hp")) {
-        parameters.costs.hp = c.slice(2);
-        if (parameters.costs.hp === "x") parameters.costs.hitCost = getBarText('hit-cost');
-        else if (parameters.costs.hp !== "hack") parameters.costs.hp = parseInt(parameters.costs.hp, 10);
+        const hp = c.slice(2);
+        if (hp === "x") {
+          parameters.costs.hp = {
+            type: 'variable',
+            value: {
+              variable: getBarText('hit-cost'),
+              static: 0,
+              formula: '',
+            }
+          }
+        } else if (hp === "hack") {
+          parameters.costs.hp = {
+            type: 'hack',
+            value: {
+              static: 0,
+              formula: '',
+              variable: '',
+            }
+          }
+        } else if (hp && !isNaN(hp)) {
+          parameters.costs.hp = {
+            type: 'static',
+            value: {
+              static: parseInt(hp, 10),
+              formula: '',
+              variable: '',
+            }
+          }
+        } else {
+          parameters.costs.hp = {
+            type: 'formula',
+            value: {
+              static: 0,
+              formula: hp || '',
+              variable: '',
+            }
+          }
+        }
       }
       if (c === "shatter") parameters.costs.break = 'shatter';
       if (c === "destroy") parameters.costs.break = 'destroy';
@@ -263,6 +328,8 @@ export async function _parse(ability, rawHTML) {
       }
     }
   }
+
+  console.log(parameters);
 
   return { changes, system: parameters, img };
 }

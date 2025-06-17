@@ -13,17 +13,24 @@ export const WikiDataMixin = (Base) => class WikiDataMixin extends Base {
   }
 
   /** @override */
-  async wikiPull() {
+  async wikiPull(options = {}) {
+    const notify = options.notify ?? true;
     this.parent.hookCall('wikiPull');
     const pageTitle = this.wikiPage;
-    ui.notifications.info(`Pulling ${pageTitle} from wiki.`)
+    if (notify) {
+      ui.notifications.info(`Pulling ${this.wikiPage} from wiki.`);
+    }
     const wikiPage = await fetchWikiPageHTML(pageTitle);
     if (wikiPage) {
       const parsed = await this.parse(wikiPage);
       await this.parent.update(parsed);
-      ui.notifications.success(`Updated ${this.parent.name} with ${pageTitle} wiki data.`)
+      if (notify) {
+        ui.notifications.success(`Updated ${this.parent.name} with ${pageTitle} wiki data.`)
+      }
     } else {
-      ui.notifications.error(`${pageTitle} not found on wiki.`)
+      if (notify) {
+        ui.notifications.error(`${pageTitle} not found on wiki.`)
+      }
     }
   }
 

@@ -1,6 +1,6 @@
 import TeriockBaseEffect from "../documents/effect.mjs";
 
-export async function createAbility(document, name) {
+export async function createAbility(document, name, options = {}) {
   let assignedName = "New Ability";
   let parentAbility = null;
   if (name) {
@@ -17,7 +17,7 @@ export async function createAbility(document, name) {
     img: "systems/teriock/assets/ability.svg",
   }, { parent: document });
   if (assignedName !== "New Ability") {
-    await ability.system.wikiPull();
+    await ability.system.wikiPull(options);
   }
   if (parentAbility) {
     await parentAbility.parent.updateEmbeddedDocuments('ActiveEffect', [

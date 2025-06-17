@@ -30,16 +30,12 @@
           {{{config.icons.expansionRange}}}
         </div>
         <div class="ab-box-content">
-          <input
-            class="ability-bar-input range-input"
-            name="system.expansionRange"
-            type="text"
-            value="{{system.expansionRange}}"
-            data-edit="system.expansionRange"
-            {{#if (not editable)}}
-              disabled="true"
-            {{/if}}
-          />
+          {{formInput
+            systemFields.expansionRange
+            value=system.expansionRange
+            disabled=(not editable)
+            classes="ability-bar-input range-input"
+          }}
         </div>
       </div>
     </div>

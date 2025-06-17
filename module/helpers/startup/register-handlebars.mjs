@@ -100,6 +100,10 @@ export default function registerHandlebarsHelpers() {
     return new Handlebars.SafeString(block.repeat(n));
   });
 
+  Handlebars.registerHelper('dataset', function (options) {
+    return options.hash;
+  });
+
 
   // Dice & Value Formatting Helpers
 
@@ -210,8 +214,8 @@ export default function registerHandlebarsHelpers() {
     const attrs = [
       name ? `data-name="${name}"` : '',
       name ? `data-value="${value}"` : '',
-      disabled? '' : name ? `data-action="toggleSwitch"` : '',
-      disabled? `disabled` : '',
+      disabled ? '' : name ? `data-action="toggleSwitch"` : '',
+      disabled ? `disabled` : '',
     ];
     return new Handlebars.SafeString(`
       <div class="tswitch">
@@ -312,7 +316,7 @@ export default function registerHandlebarsHelpers() {
           >
             <i class="fa-fw fa-solid fa-bars-sort"></i>
           </button>` : ''
-        }
+      }
   
         ${filterToggle !== null && filterToggle !== undefined ? `
           <button
@@ -324,7 +328,7 @@ export default function registerHandlebarsHelpers() {
           >
             <i class="fa-fw fa-solid fa-filter"></i>
           </button>` : ''
-        }
+      }
         
         <input class="${tab}-search tcard-search" type="text" placeholder="Search" data-type="${tab}">
 

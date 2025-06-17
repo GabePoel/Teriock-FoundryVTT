@@ -1,6 +1,24 @@
 export function _messageParts(ability) {
   const ref = CONFIG.TERIOCK.abilityOptions;
   const src = ability.system;
+  let mpCost = '';
+  if (src.costs.mp.type === 'variable') {
+    mpCost = 'Variable MP';
+  } else if (src.costs.mp.type === 'formula') {
+    mpCost = src.costs.mp.value.formula + ' MP';
+  } else if (src.costs.mp.type === 'static') {
+    mpCost = src.costs.mp.value.static + ' MP';
+  }
+  let hpCost = '';
+  if (src.costs.hp.type === 'variable') {
+    hpCost = 'Variable HP';
+  } else if (src.costs.hp.type === 'formula') {
+    hpCost = src.costs.hp.value.formula + ' HP';
+  } else if (src.costs.hp.type === 'static') {
+    hpCost = src.costs.hp.value.static + ' HP';
+  } else if (src.costs.hp.type === 'hack') {
+    hpCost = 'Hack';
+  }
   const bars = [
     {
       icon: 'fa-wreath-laurel',
@@ -32,8 +50,8 @@ export function _messageParts(ability) {
     {
       icon: 'fa-coins',
       wrappers: [
-        src.costs.mp == 'x' ? 'Variable MP' : src.costs.mp ? src.costs.mp + ' MP' : '',
-        src.costs.hp == 'x' ? 'Variable HP' : src.costs.hp == 'hack' ? 'Hack' : src.costs.hp ? src.costs.hp + ' HP' : '',
+        mpCost,
+        hpCost,
         ref.breakCost[src.costs.break],
         src.costs.verbal ? 'Verbal' : '',
         src.costs.somatic ? 'Somatic' : '',
@@ -93,11 +111,11 @@ export function _messageParts(ability) {
     },
     {
       title: 'Mana cost',
-      text: src.costs.manaCost,
+      text: src.costs.mp.value.variable,
     },
     {
       title: 'Hit cost',
-      text: src.costs.hitCost,
+      text: src.costs.hp.value.variable,
     },
     {
       title: 'Material cost',

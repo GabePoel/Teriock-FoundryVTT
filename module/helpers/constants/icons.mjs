@@ -83,4 +83,5 @@ export const icons = {
   tier: '<i class="fa-light fa-trophy"></i>',
   locked: '<i class="fa-solid fa-lock"></i>',
   unlocked: '<i class="fa-solid fa-lock-open"></i>',
+  formula: '<i class="fa-solid fa-function"></i>',
 }

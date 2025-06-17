@@ -1,19 +1,19 @@
 {{#if
   (or
-    (exists system.costs.manaCost)
-    (exists system.costs.hitCost)
+    (eq system.costs.mp.type "variable")
+    (eq system.costs.hp.type "variable")
     (exists system.costs.materialCost)
   )
 }}
-  {{#if (exists system.costs.manaCost)}}
+  {{#if (eq system.costs.mp.type "variable")}}
     <div class="ab-section-container">
       <div class="ab-section">
         <span class="ab-section-title">Mana cost</span>
       </div>
       {{#if editable}}
         <prose-mirror
-          name="system.costs.manaCost"
-          value="{{system.costs.manaCost}}"
+          name="system.costs.mp.value.variable"
+          value="{{system.costs.mp.value.variable}}"
           toggled=true
           editable=editable
         >{{{manaCost}}}</prose-mirror>
@@ -22,15 +22,15 @@
       {{/if}}
     </div>
   {{/if}}
-  {{#if (exists system.costs.hitCost)}}
+  {{#if (eq system.costs.hp.type "variable")}}
     <div class="ab-section-container">
       <div class="ab-section">
         <span class="ab-section-title">Hit cost</span>
       </div>
       {{#if editable}}
         <prose-mirror
-          name="system.costs.hitCost"
-          value="{{system.costs.hitCost}}"
+          name="system.costs.hp.value.variable"
+          value="{{system.costs.hp.value.variable}}"
           toggled=true
           editable=editable
         >{{{hitCost}}}</prose-mirror>

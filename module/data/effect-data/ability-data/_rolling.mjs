@@ -1,6 +1,7 @@
-const { DialogV2 } = foundry.applications.api
+const { api, ux } = foundry.applications
 import generateEffect from "./_generate-effect.mjs";
 import TeriockRoll from "../../../documents/roll.mjs";
+import { evaluateAsync } from "../../../helpers/utils.mjs";
 
 export async function _roll(ability, options) {
   const advantage = options?.advantage || false;
@@ -57,14 +58,24 @@ async function attackMessage(ability, roll) {
 }
 
 async function stageUse(ability, advantage, disadvantage) {
-  ability.system.mpCost = 0;
-  ability.system.hpCost = 0;
-  ability.system.heightenedAmount = 0;
-  if (ability.system.costs.mp && typeof ability.system.costs.mp === "number") {
-    ability.system.mpCost = ability.system.costs.mp;
+  ability.live = {
+    costs: {},
+    modifiers: {},
+    consequences: {},
+    formula: "",
+  };
+  ability.live.costs.mp = 0;
+  ability.live.costs.hp = 0;
+  ability.live.modifiers.heightened = 0;
+  if (ability.system.costs.mp.type == 'static') {
+    ability.live.costs.mp = ability.system.costs.mp.value.static;
+  } else if (ability.system.costs.mp.type === 'formula') {
+    ability.live.costs.mp = await evaluateAsync(ability.system.costs.mp.value.formula, ability.getActor().getRollData());
   }
-  if (ability.system.costs.hp && typeof ability.system.costs.hp === "number") {
-    ability.system.hpCost = ability.system.costs.hp;
+  if (ability.system.costs.hp.type == 'static') {
+    ability.live.costs.hp = ability.system.costs.hp.value.static;
+  } else if (ability.system.costs.hp.type === 'formula') {
+    ability.live.costs.hp = await evaluateAsync(ability.system.costs.hp.value.formula, ability.getActor().getRollData());
   }
   let rollFormula = '';
   if (ability.system.interaction == 'attack') {
@@ -92,17 +103,26 @@ async function stageUse(ability, advantage, disadvantage) {
     }
   }
   const dialogs = [];
-  if (ability.system.costs.mp == 'x') {
-    const mpDialog = `<label>MP Cost</label><input type="number" name="mp" value="0" min="0" max="${ability.getActor().mp}" step="1"></input>`;
+  if (ability.system.costs.mp.type === 'variable') {
+    let mpDialog = `<fieldset><legend>Variable Mana Cost</legend>`
+    const variableMpDescription = await ux.TextEditor.enrichHTML(ability.system.costs.mp.value.variable);
+    mpDialog += `<div>${variableMpDescription}</div>`;
+    mpDialog += `<input type="number" name="mp" value="0" min="0" max="${ability.getActor().system.mp.value - ability.getActor().system.mp.min}" step="1"></input></fieldset>`;
     dialogs.push(mpDialog);
   }
-  if (ability.system.costs.hp == 'x') {
-    const hpDialog = `<label>HP Cost</label><input type="number" name="hp" value="0" min="0" max="${ability.getActor().hp}" step="1"></input>`;
+  if (ability.system.costs.hp.type === 'variable') {
+    let hpDialog = `<fieldset><legend>Variable Hit Point Cost</legend>`;
+    const variableHpDescription = await ux.TextEditor.enrichHTML(ability.system.costs.hp.value.variable);
+    hpDialog += `<div>${variableHpDescription}</div>`;
+    hpDialog += `<input type="number" name="hp" value="0" min="0" max="${ability.getActor().system.hp.value - ability.getActor().system.hp.min}" step="1"></input></fieldset>`;
     dialogs.push(hpDialog);
   }
   if (ability.system.isProficient && ability.system.heightened) {
     const p = ability.system.isProficient ? ability.getActor().system.p : 0;
-    const heightenedDialog = `<label>Heightened Amount</label><input type="number" name="heightened" value="0" min="0" max="${p}" step="1"></input>`;
+    let heightenedDialog = '<fieldset><legend>Heightened Amount</legend>';
+    const heightenedDescription = await ux.TextEditor.enrichHTML(ability.system.heightened);
+    heightenedDialog += `<div>${heightenedDescription}</div>`;
+    heightenedDialog += `<input type="number" name="heightened" value="0" min="0" max="${p}" step="1"></input></fieldset>`;
     dialogs.push(heightenedDialog);
   }
   if (dialogs.length > 0) {
@@ -113,20 +133,21 @@ async function stageUse(ability, advantage, disadvantage) {
       title += 'Executing ';
     }
     title += ability.name;
-    await DialogV2.prompt({
+    await api.DialogV2.prompt({
       window: { title: title },
       content: dialogs.join(''),
       ok: {
         label: "Confirm",
         callback: (event, button, dialog) => {
-          if (ability.system.costs.mp == 'x') {
-            ability.system.mpCost = button.form.elements.mp.valueAsNumber;
+          if (ability.system.costs.mp.type == 'variable') {
+            ability.live.costs.mp = button.form.elements.mp.valueAsNumber;
           }
-          if (ability.system.costs.hp == 'x') {
-            ability.system.hpCost = button.form.elements.hp.valueAsNumber;
+          if (ability.system.costs.hp.type == 'variable') {
+            ability.live.costs.hp = button.form.elements.hp.valueAsNumber;
           }
           if (ability.system.isProficient && ability.system.heightened) {
-            ability.system.heightenedAmount = button.form.elements.heightened.valueAsNumber;
+            ability.live.modifiers.heightened = button.form.elements.heightened.valueAsNumber;
+            ability.live.costs.mp += ability.live.modifiers.heightened;
           }
         }
       },
@@ -138,17 +159,18 @@ async function stageUse(ability, advantage, disadvantage) {
     } else if (ability.system.isProficient) {
       rollFormula += ' + @p';
     }
-    if (ability.system.heightenedAmount) {
+    if (ability.live.modifiers.heightened > 0) {
       rollFormula += ' + @h';
     }
   }
-  ability.system.formula = rollFormula;
+  ability.live.formula = rollFormula;
 }
 
 async function use(ability) {
   let message = await ability.buildMessage();
   const getRollData = ability.getActor().getRollData();
   getRollData.av0 = 0;
+  getRollData.h = ability.live.modifiers.heightened || 0;
   let properties;
   let diceClass;
   let diceTooltip;
@@ -188,7 +210,7 @@ async function use(ability) {
   }
   message = await foundry.applications.ux.TextEditor.enrichHTML(message);
   let roll;
-  roll = new TeriockRoll(ability.system.formula, getRollData, {
+  roll = new TeriockRoll(ability.live.formula, getRollData, {
     message: message,
     context: context,
   });
@@ -202,8 +224,8 @@ async function use(ability) {
     newPenalty -= 3;
   }
   ability.getActor().update({
-    'system.mp.value': ability.getActor().system.mp.value - ability.system.mpCost - ability.system.heightenedAmount,
-    'system.hp.value': ability.getActor().system.hp.value - ability.system.hpCost,
+    'system.mp.value': ability.getActor().system.mp.value - ability.live.costs.mp,
+    'system.hp.value': ability.getActor().system.hp.value - ability.live.costs.hp,
     'system.attackPenalty': newPenalty,
   })
   ability.system.mpCost = 0;

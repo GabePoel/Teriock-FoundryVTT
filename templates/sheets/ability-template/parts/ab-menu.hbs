@@ -2,175 +2,78 @@
   <div class="ab-menu-content">
     <div class="ab-menu-bar">
       <div class="tgrid ab-check-grid">
-        <div class="tgrid-item">
-          <label for="basic">Basic</label>
-          <input
-            type="checkbox"
-            id="basic"
-            name="system.basic"
-            data-edit="system.basic"
-            {{checked system.basic}}
-            {{#if (not editable)}}
-              disabled="true"
-            {{/if}}
-          />
-        </div>
-        <div class="tgrid-item">
-          <label for="standard">Standard</label>
-          <input
-            type="checkbox"
-            id="standard"
-            name="system.standard"
-            data-edit="system.standard"
-            {{checked system.standard}}
-            {{#if (not editable)}}
-              disabled="true"
-            {{/if}}
-          />
-        </div>
-        <div class="tgrid-item">
-          <label for="skill">Skill</label>
-          <input
-            type="checkbox"
-            id="skill"
-            name="system.skill"
-            data-edit="system.skill"
-            {{checked system.skill}}
-            {{#if (not editable)}}
-              disabled="true"
-            {{/if}}
-          />
-        </div>
-        <div class="tgrid-item">
-          <label for="spell">Spell</label>
-          <input
-            type="checkbox"
-            id="spell"
-            name="system.spell"
-            data-edit="system.spell"
-            {{checked system.spell}}
-            {{#if (not editable)}}
-              disabled="true"
-            {{/if}}
-          />
-        </div>
-        <div class="tgrid-item">
-          <label for="ritual">Ritual</label>
-          <input
-            type="checkbox"
-            id="ritual"
-            name="system.ritual"
-            data-edit="system.ritual"
-            {{checked system.ritual}}
-            {{#if (not editable)}}
-              disabled="true"
-            {{/if}}
-          />
-        </div>
-        <div class="tgrid-item">
-          <label for="rotator">Rotator</label>
-          <input
-            type="checkbox"
-            id="rotator"
-            name="system.rotator"
-            data-edit="system.rotator"
-            {{checked system.rotator}}
-            {{#if (not editable)}}
-              disabled="true"
-            {{/if}}
-          />
-        </div>
-        <div class="tgrid-item">
-          <label for="sustained">Sustained</label>
-          <input
-            type="checkbox"
-            id="sustained"
-            name="system.sustained"
-            data-edit="system.sustained"
-            {{checked system.sustained}}
-            {{#if (not editable)}}
-              disabled="true"
-            {{/if}}
-          />
-        </div>
-        <div class="tgrid-item">
-          <label for="invoked">Invoked</label>
-          <input
-            type="checkbox"
-            id="invoked"
-            name="system.costs.invoked"
-            data-edit="system.costs.invoked"
-            {{checked system.costs.invoked}}
-            {{#if (not editable)}}
-              disabled="true"
-            {{/if}}
-          />
-        </div>
-        <div class="tgrid-item">
-          <label for="verbal">Verbal</label>
-          <input
-            type="checkbox"
-            id="verbal"
-            name="system.costs.verbal"
-            data-edit="system.costs.verbal"
-            {{checked system.costs.verbal}}
-            {{#if (not editable)}}
-              disabled="true"
-            {{/if}}
-          />
-        </div>
-        <div class="tgrid-item">
-          <label for="somatic">Somatic</label>
-          <input
-            type="checkbox"
-            id="somatic"
-            name="system.costs.somatic"
-            data-edit="system.costs.somatic"
-            {{checked system.costs.somatic}}
-            {{#if (not editable)}}
-              disabled="true"
-            {{/if}}
-          />
-        </div>
-        <div class="tgrid-item">
-          <label for="proficient">Proficient</label>
-          <input
-            type="checkbox"
-            id="proficient"
-            name="system.proficient"
-            data-edit="system.proficient"
-            {{checked system.proficient}}
-            {{#if (not editable)}}
-              disabled="true"
-            {{/if}}
-          />
-        </div>
-        {{!-- <div class="tgrid-item">
-          <label for="fluent">Fluent</label>
-          <input
-            type="checkbox"
-            id="fluent"
-            name="system.fluent"
-            data-edit="system.fluent"
-            {{checked system.fluent}}
-            {{#if (not editable)}}
-              disabled="true"
-            {{/if}}
-          />
-        </div> --}}
-        <div class="tgrid-item">
-          <label for="elderSorcery">Elder Sorcery</label>
-          <input
-            type="checkbox"
-            id="elderSorcery"
-            name="system.elderSorcery"
-            data-edit="system.elderSorcery"
-            {{checked system.elderSorcery}}
-            {{#if (not editable)}}
-              disabled="true"
-            {{/if}}
-          />
-        </div>
+        {{formGroup
+          systemFields.basic
+          value=system.basic
+          disabled=(not editable)
+          classes="tgrid-item"
+        }}
+        {{formGroup
+          systemFields.standard
+          value=system.standard
+          disabled=(not editable)
+          classes="tgrid-item"
+        }}
+        {{formGroup
+          systemFields.skill
+          value=system.skill
+          disabled=(not editable)
+          classes="tgrid-item"
+        }}
+        {{formGroup
+          systemFields.spell
+          value=system.spell
+          disabled=(not editable)
+          classes="tgrid-item"
+        }}
+        {{formGroup
+          systemFields.ritual
+          value=system.ritual
+          disabled=(not editable)
+          classes="tgrid-item"
+        }}
+        {{formGroup
+          systemFields.rotator
+          value=system.rotator
+          disabled=(not editable)
+          classes="tgrid-item"
+        }}
+        {{formGroup
+          systemFields.sustained
+          value=system.sustained
+          disabled=(not editable)
+          classes="tgrid-item"
+        }}
+        {{formGroup
+          systemFields.invoked
+          value=system.costs.invoked
+          disabled=(not editable)
+          classes="tgrid-item"
+        }}
+        {{formGroup
+          systemFields.costs.fields.verbal
+          value=system.costs.verbal
+          disabled=(not editable)
+          classes="tgrid-item"
+        }}
+        {{formGroup
+          systemFields.costs.fields.somatic
+          value=system.costs.somatic
+          disabled=(not editable)
+          classes="tgrid-item"
+        }}
+        {{formGroup
+          systemFields.proficient
+          value=system.proficient
+          disabled=(not editable)
+          classes="tgrid-item"
+        }}
+        {{formGroup
+          systemFields.elderSorcery
+          value=system.elderSorcery
+          disabled=(not editable)
+          classes="tgrid-item"
+        }}
       </div>
     </div>
     <div class="ab-menu-bar">
@@ -247,7 +150,7 @@
         {{/if}}
 
         {{! Before Overview }}
-        {{#if (not (exists system.costs.mp))}}
+        {{#if (eq system.costs.mp.type "none")}}
           <div class="tgrid-item">
             <button class="ab-menu-button ab-mana-cost-button"
               {{#if (not editable)}}
@@ -259,7 +162,7 @@
             </button>
           </div>
         {{/if}}
-        {{#if (not (exists system.costs.hp))}}
+        {{#if (eq system.costs.hp.type "none")}}
           <div class="tgrid-item">
             <button class="ab-menu-button ab-hit-cost-button"
               {{#if (not editable)}}
@@ -572,52 +475,5 @@
       </div>
     </div>
     {{> "systems/teriock/templates/common/changes.hbs"}}
-    {{!-- <ol class="scrollable" data-changes>
-      {{#each source.changes as |change i|}}
-        {{#with ../fields.changes.element.fields as |changeFields|}}
-          <li data-index="{{i}}">
-            <div class="key">
-              {{formInput changeFields.key
-                name=(concat "changes." i ".key")
-                value=change.key
-                disabled=(not ../editable)
-              }}
-            </div>
-            <div class="mode">
-              {{formInput changeFields.mode
-                name=(concat "changes." i ".mode")
-                value=change.mode
-                choices=@root.modes
-                disabled=(not ../editable)
-              }}
-            </div>
-            <div class="value">
-              {{formInput
-                changeFields.value
-                name=(concat "changes." i ".value")
-                value=change.value
-                disabled=(not ../editable)
-              }}
-            </div>
-            <div class="priority">
-              {{formInput
-                changeFields.priority
-                name=(concat "changes." i ".priority")
-                value=change.priority
-                placeholder=(lookup ../../priorities change.mode)
-                disabled=(not ../editable)
-              }}
-            </div>
-            <div class="controls">
-              <a data-action="deleteChange"
-                {{#if (not ../editable)}}
-                  disabled="true"
-                {{/if}}
-              ><i class="fa-solid fa-trash"></i></a>
-            </div>
-          </li>
-        {{/with}}
-      {{/each}}
-    </ol> --}}
   </div>
 </div>

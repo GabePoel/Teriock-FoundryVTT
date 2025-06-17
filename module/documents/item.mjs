@@ -76,9 +76,13 @@ export default class TeriockItem extends MixinParentDocument(MixinChildDocument(
       }
     })
     const pages = await fetchCategoryMembers(toPull);
+    const progress = ui.notifications.info(`Pulling Category:${toPull} from wiki.`, { progress: true });
+    let pct = 0;
     for (const page of pages) {
+      pct += 1 / pages.length;
+      progress.update({ pct: pct, message: `Pulling ${page.title} from wiki.` });
       if (page.title.startsWith('Ability:')) {
-        await createAbility(this, page.title.replace(/^Ability:/, ''));
+        await createAbility(this, page.title.replace(/^Ability:/, ''), { notify: false });
       }
     }
   }

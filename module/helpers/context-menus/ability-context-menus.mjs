@@ -136,24 +136,56 @@ export function contextMenus(ability) {
         name: 'No Mana Cost',
         icon: CONFIG.TERIOCK.icons.remove,
         callback: () => ability.update({
-          'system.costs.mp': null,
-          'system.costs.manaCost': null,
+          'system.costs.mp': {
+            type: 'none',
+            value: {
+              static: 0,
+              formula: "",
+              variable: "",
+            }
+          }
         }),
       },
       {
-        name: 'Numerical Cost',
+        name: 'Static Cost',
         icon: CONFIG.TERIOCK.icons.numerical,
         callback: () => ability.update({
-          'system.costs.mp': '1 MP',
-          'system.costs.manaCost': null,
+          'system.costs.mp': {
+            type: 'static',
+            value: {
+              static: 1,
+              formula: "",
+              variable: "",
+            }
+          }
+        }),
+      },
+      {
+        name: 'Formula Cost',
+        icon: CONFIG.TERIOCK.icons.formula,
+        callback: () => ability.update({
+          'system.costs.mp': {
+            type: 'formula',
+            value: {
+              static: 0,
+              formula: "1d4",
+              variable: "",
+            }
+          }
         }),
       },
       {
         name: 'Variable Cost',
         icon: CONFIG.TERIOCK.icons.variable,
         callback: () => ability.update({
-          'system.costs.mp': 'x',
-          'system.costs.manaCost': 'Insert text here.',
+          'system.costs.mp': {
+            type: 'variable',
+            value: {
+              static: 0,
+              formula: "",
+              variable: "<p>Enter cost here.</p>",
+            }
+          }
         }),
       }
     ],
@@ -162,32 +194,70 @@ export function contextMenus(ability) {
         name: 'No Hit Cost',
         icon: CONFIG.TERIOCK.icons.remove,
         callback: () => ability.update({
-          'system.costs.hp': null,
-          'system.costs.hitCost': null,
+          'system.costs.hp': {
+            type: 'none',
+            value: {
+              static: 0,
+              formula: "",
+              variable: "",
+            }
+          }
         }),
       },
       {
-        name: 'Numerical Cost',
+        name: 'Static Cost',
         icon: CONFIG.TERIOCK.icons.numerical,
         callback: () => ability.update({
-          'system.costs.hp': '1 HP',
-          'system.costs.hitCost': null,
+          'system.costs.hp': {
+            type: 'static',
+            value: {
+              static: 1,
+              formula: "",
+              variable: "",
+            }
+          }
         }),
       },
       {
         name: 'Hack Cost',
         icon: CONFIG.TERIOCK.icons.hack,
         callback: () => ability.update({
-          'system.costs.hp': 'hack',
-          'system.costs.hitCost': null,
+          'system.costs.hp': {
+            type: 'hack',
+            value: {
+              static: 0,
+              formula: "",
+              variable: "",
+            }
+          }
+        }),
+      },
+      {
+        name: 'Formula Cost',
+        icon: CONFIG.TERIOCK.icons.formula,
+        callback: () => ability.update({
+          'system.costs.hp': {
+            type: 'formula',
+            value: {
+              static: 0,
+              formula: "1d4",
+              variable: "",
+            }
+          }
         }),
       },
       {
         name: 'Variable Cost',
         icon: CONFIG.TERIOCK.icons.variable,
         callback: () => ability.update({
-          'system.costs.hp': 'x',
-          'system.costs.hitCost': 'Insert text here.',
+          'system.costs.hp': {
+            type: 'variable',
+            value: {
+              static: 0,
+              formula: "",
+              variable: "<p>Enter cost here.</p>",
+            }
+          }
         }),
       }
     ],
