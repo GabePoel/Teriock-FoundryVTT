@@ -298,7 +298,7 @@ export async function _parse(ability, rawHTML) {
       if (namespace === 'Ability') {
         const subName = subNameEl.getAttribute('data-name');
         console.log(subName);
-        const subAbility = await createAbility(ability, subName);
+        const subAbility = await createAbility(ability, subName, { notify: false });
         const limitation = el.querySelector('.limited-modifier');
         const improvement = el.querySelector('.improvement-modifier');
         let limitationText = '';
