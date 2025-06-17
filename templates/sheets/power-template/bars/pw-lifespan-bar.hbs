@@ -6,16 +6,12 @@
           <i class="fa-light fa-ruler-vertical"></i>
         </div>
         <div class="ab-box-content">
-          <input
-            {{#if (not editable)}}
-              disabled="true"
-            {{/if}}
-            class="ability-bar-input size-input"
-            name="system.size"
-            type="number"
-            value="{{system.size}}"
-            min="0"
-          />
+          {{formInput
+            systemFields.size
+            value=system.size
+            disabled=(not editable)
+            classes="ability-bar-input size-input"
+          }}
         </div>
         <div class="ab-box-label">Size</div>
       </div>
@@ -26,39 +22,28 @@
           <i class="fa-light fa-person"></i>
         </div>
         <div class="ab-box-content">
-          <input
-            {{#if (not editable)}}
-              disabled="true"
-            {{/if}}
-            class="ability-bar-input adult-input"
-            name="system.adult"
-            type="number"
-            value="{{system.adult}}"
-            min="0"
-            max="{{system.lifespan}}"
-            placeholder="0"
-          />
+          {{formInput
+            systemFields.adult
+            value=system.adult
+            disabled=(not editable)
+            classes="ability-bar-input adult-input"
+          }}
         </div>
         <div class="ab-box-label">yr</div>
       </div>
     </div>
     <div class="ab-box-container">
-      <div class="ab-box {{#if editable}}ab-lifespan-box{{/if}}" data-tooltip="Lifespan">
+      <div class="ab-box {{#if editable}}ab-lifespan-box{{/if}}" data-tooltip="Maximum Lifespan">
         <div class="ab-box-icon">
           <i class="fa-light fa-tombstone-blank"></i>
         </div>
         <div class="ab-box-content">
-          <input
-            {{#if (not editable)}}
-              disabled="true"
-            {{/if}}
-            class="ability-bar-input lifespan-input"
-            name="system.lifespan"
-            type="number"
-            value="{{system.lifespan}}"
-            min="0"
-            placeholder="Infinite"
-          />
+          {{formInput
+            systemFields.lifespan
+            value=system.lifespan
+            disabled=(not editable)
+            classes="ability-bar-input lifespan-input"
+          }}
         </div>
         <div class="ab-box-label">yr</div>
       </div>

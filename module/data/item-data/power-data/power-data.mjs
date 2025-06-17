@@ -7,12 +7,30 @@ export class TeriockPowerData extends TeriockBaseItemData {
     const commonData = super.defineSchema();
     return {
       ...commonData,
-      type: new fields.StringField({ initial: "other" }),
+      type: new fields.StringField({
+        initial: "other",
+        label: "Power Type",
+      }),
       flaws: new fields.HTMLField({ initial: "<p>None.</p>" }),
-      proficient: new fields.BooleanField({ initial: true }),
-      size: new fields.NumberField({ initial: 3 }),
-      lifespan: new fields.NumberField({ initial: 100 }),
-      adult: new fields.NumberField({ initial: 20 }),
+      proficient: new fields.BooleanField({
+        initial: true,
+        label: "Proficient",
+      }),
+      size: new fields.NumberField({
+        initial: 3,
+        min: 0,
+        label: "Size",
+      }),
+      lifespan: new fields.NumberField({
+        initial: 100,
+        min: 0,
+        label: "Maximum Lifespan",
+      }),
+      adult: new fields.NumberField({
+        initial: 20,
+        min: 0,
+        label: "Age of Maturity",
+      }),
     }
   }
 
