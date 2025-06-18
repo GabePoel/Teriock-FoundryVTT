@@ -33,54 +33,106 @@ export default class TeriockBaseActorData extends TypeDataModel {
     _prepareDerivedData(this.parent);
   }
 
+  /**
+   * @param {number} amount 
+   * @returns {Promise<void>}
+   */
   async takeDamage(amount) {
-    await _takeDamage(this.parent, amount);
+    await _takeDamage(this, amount);
   }
 
+  /**
+   * @param {number} amount 
+   * @returns {Promise<void>}
+   */
   async takeDrain(amount) {
-    await _takeDrain(this.parent, amount);
+    await _takeDrain(this, amount);
   }
 
+  /**
+   * @param {number} amount 
+   * @returns {Promise<void>}
+   */
   async takeWither(amount) {
-    await _takeWither(this.parent, amount);
+    await _takeWither(this, amount);
   }
 
+  /**
+   * @param {number} amount 
+   * @returns {Promise<void>}
+   */
   async takeHeal(amount) {
-    await _takeHeal(this.parent, amount);
+    await _takeHeal(this, amount);
   }
 
+  /**
+   * @param {number} amount 
+   * @returns {Promise<void>}
+   */
   async takeRevitalize(amount) {
-    await _takeRevitalize(this.parent, amount);
+    await _takeRevitalize(this, amount);
   }
 
+  /**
+   * @param {string} part 
+   * @returns {Promise<void>}
+   */
   async takeHack(part) {
-    await _takeHack(this.parent, part);
+    await _takeHack(this, part);
   }
 
+  /**
+   * @param {string} part 
+   * @returns {Promise<void>}
+   */
   async takeUnhack(part) {
-    await _takeUnhack(this.parent, part);
+    await _takeUnhack(this, part);
   }
 
+  /**
+   * @param {string} part 
+   * @returns {Promise<void>}
+   */
   async rollCondition(condition, options) {
     await _rollCondition(this.parent, condition, options);
   }
 
+  /**
+   * @returns {Promise<void>}
+   */
   async postUpdate() {
     await _postUpdate(this.parent);
   }
 
+  /**
+   * @param {string} attribute 
+   * @param {object} options 
+   * @returns {Promise<void>}
+   */
   rollFeatSave(attribute, options = {}) {
     _rollFeatSave(this.parent, attribute, options);
   }
 
+  /**
+   * @param {object} options 
+   * @returns {Promise<void>}
+   */
   rollResistance(options = {}) {
     _rollResistance(this.parent, options);
   }
 
+  /**
+   * @param {string} tradecraft 
+   * @param {object} options 
+   * @returns {Promise<void>}
+   */
   rollTradecraft(tradecraft, options = {}) {
     _rollTradecraft(this.parent, tradecraft, options);
   }
 
+  /**
+   * @returns {object}
+   */
   getRollData() {
     return _getRollData(this.parent);
   }

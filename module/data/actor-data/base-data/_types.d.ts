@@ -1,5 +1,11 @@
 import { TeriockActor } from "../../../documents/_module.mjs";
-import { AttributeData, HackData, SheetData, TradecraftData } from "./methods/schema/_types";
+import {
+  BarData,
+  AttributeData,
+  HackData,
+  SheetData,
+  TradecraftData,
+} from "./methods/schema/_types";
 
 declare module "./base-data.mjs" {
   export default interface TeriockBaseActorData {
@@ -13,7 +19,7 @@ declare module "./base-data.mjs" {
       snk: AttributeData;
       str: AttributeData;
       unp: AttributeData;
-    }
+    };
     movementSpeed: number;
     carryingCapacity: {
       light: number;
@@ -82,30 +88,16 @@ declare module "./base-data.mjs" {
       leapVertical: number;
       swim: number;
     };
-    hp: {
-      min: number;
-      max: number;
-      value: number;
+    hp: BarData & {
       base: number;
       temp: number;
     };
-    mp: {
-      min: number;
-      max: number;
-      value: number;
+    mp: BarData & {
       base: number;
       temp: number;
     };
-    wither: {
-      min: number;
-      max: number;
-      value: number;
-    };
-    presence: {
-      min: number;
-      max: number;
-      value: number;
-    }
+    wither: BarData;
+    presence: BarData;
     tradecrafts: Record<string, TradecraftData>;
   }
 }
