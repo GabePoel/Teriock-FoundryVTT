@@ -1,5 +1,5 @@
 const { api, ux } = foundry.applications
-import generateEffect from "./_generate-effect.mjs";
+import { generateEffect } from "./_generate-effect.mjs";
 import TeriockRoll from "../../../../documents/roll.mjs";
 import { evaluateAsync } from "../../../../helpers/utils.mjs";
 
@@ -10,13 +10,13 @@ export async function _roll(ability, options) {
   await use(ability);
   if (ability.system.duration && ability.system.duration !== 'Instant' && ability.system.maneuver !== 'passive') {
     if (ability.system.targets.includes('self') || ability.system.delivery.base === 'self') {
-      await generateEffect(ability, ability.getActor());
+      await generateEffect(ability.system, ability.getActor());
     }
     if (ability.system.targets.includes('creature')) {
       const targets = game.user.targets;
       for (const target of targets) {
         console.log(target, target.actor);
-        await generateEffect(ability, target.actor);
+        await generateEffect(ability.system, target.actor);
       }
     }
   }

@@ -7,19 +7,15 @@ import TeriockRankData from "../../../../item-data/rank-data/rank-data.mjs";
  * @private
  */
 export function _prepareAttributes(system) {
-  const actor = system.parent;
   const { attributes, size, f, p } = system;
-
   Object.entries(attributes).forEach(([key, attr]) => {
     const bonus = attr.saveFluent ? f : attr.saveProficient ? p : 0;
     system[`${key}Save`] = attr.value + bonus;
   });
-
   const mov = attributes.mov.value;
   const str = attributes.str.value;
   const strFactor = size < 5 ? str : str + Math.pow(size - 5, 2);
   const base = 65 + 20 * strFactor;
-
   system.movementSpeed = 30 + 10 * mov;
   system.carryingCapacity = {
     light: base,
@@ -88,7 +84,6 @@ export function _preparePresence(system) {
   const equipped = actor.itemTypes.equipment.filter(i => i.system.equipped);
   let usp = equipped.reduce((sum, item) => sum + (item.system.tier || 0), 0);
   usp = Math.min(usp, system.pres);
-
   const unp = system.pres - usp;
   Object.assign(system, {
     unp,
