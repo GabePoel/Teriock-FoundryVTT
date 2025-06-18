@@ -9,12 +9,35 @@ export default class TeriockResourceData extends ConsumableDataMixin(TeriockBase
     const commonData = super.defineSchema();
     return {
       ...commonData,
-      consumable: new fields.BooleanField({ initial: true }),
-      quantity: new fields.NumberField({ initial: 1, nullable: true }),
-      maxQuantityRaw: new fields.StringField({ initial: null, nullable: true }),
-      maxQuantity: new fields.NumberField({ initial: null, nullable: true }),
-      rollFormula: new fields.StringField({ initial: "" }),
-      functionHook: new fields.StringField({ initial: "none" }),
+      consumable: new fields.BooleanField({
+        initial: true,
+        label: "Consumable",
+      }),
+      quantity: new fields.NumberField({
+        initial: 1,
+        integer: true,
+        label: "Quantity",
+        min: 0,
+        nullable: true,
+      }),
+      maxQuantityRaw: new fields.StringField({
+        initial: null,
+        label: "Max Quantity (Raw)",
+        nullable: true,
+      }),
+      maxQuantity: new fields.NumberField({
+        initial: null,
+        label: "Max Quantity",
+        nullable: true,
+      }),
+      rollFormula: new fields.StringField({
+        initial: "",
+        label: "Roll Formula",
+      }),
+      functionHook: new fields.StringField({
+        initial: "none",
+        label: "Function Hook",
+      }),
     }
   }
 

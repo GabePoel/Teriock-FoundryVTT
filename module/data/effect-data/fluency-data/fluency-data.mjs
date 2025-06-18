@@ -9,11 +9,26 @@ export default class TeriockFluencyData extends WikiDataMixin(TeriockBaseEffectD
     const commonData = super.defineSchema();
     return {
       ...commonData,
-      wikiNamespace: new fields.StringField({ initial: "Tradecraft", gmOnly: true }),
-      field: new fields.StringField({ initial: "artisan" }),
-      tradecraft: new fields.StringField({ initial: "artist" }),
-      proficient: new fields.BooleanField({ initial: true }),
-      fluent: new fields.BooleanField({ initial: true }),
+      wikiNamespace: new fields.StringField({
+        initial: "Tradecraft",
+        gmOnly: true
+      }),
+      field: new fields.StringField({
+        initial: "artisan",
+        label: "Field",
+      }),
+      tradecraft: new fields.StringField({
+        initial: "artist",
+        label: "Tradecraft",
+      }),
+      proficient: new fields.BooleanField({
+        initial: true,
+        label: "Proficient",
+      }),
+      fluent: new fields.BooleanField({
+        initial: true,
+        label: "Fluent",
+      }),
     }
   }
 
