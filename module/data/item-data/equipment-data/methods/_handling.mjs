@@ -1,67 +1,118 @@
+/** @import TeriockEquipmentData from "../equipment-data.mjs"; */
 // const { api } = foundry.applications;
 
-export async function _shatter(equipment) {
-  await equipment.update({ 'system.shattered': true });
-  await equipment.disable();
+/**
+ * @param {TeriockEquipmentData} equipmentData 
+ * @returns {Promise<void>}
+ * @private
+ */
+export async function _shatter(equipmentData) {
+  await equipmentData.parent.update({ 'system.shattered': true });
+  await equipmentData.parent.disable();
 }
 
-export async function _repair(equipment) {
-  await equipment.update({ 'system.shattered': false });
-  if (equipment.system.equipped) {
-    await equipment.enable();
+/**
+ * @param {TeriockEquipmentData} equipmentData 
+ * @returns {Promise<void>}
+ * @private
+ */
+export async function _repair(equipmentData) {
+  await equipmentData.parent.update({ 'system.shattered': false });
+  if (equipmentData.equipped) {
+    await equipmentData.parent.enable();
   }
 }
 
-export async function _setShattered(equipment, bool) {
+/**
+ * @param {TeriockEquipmentData} equipmentData 
+ * @returns {Promise<void>}
+ * @private
+ */
+export async function _setShattered(equipmentData, bool) {
   if (bool) {
-    await _shatter(equipment);
+    await _shatter(equipmentData);
   } else {
-    await _repair(equipment);
+    await _repair(equipmentData);
   }
 }
 
-export async function _toggleShattered(equipment) {
-  await _setShattered(equipment, !equipment.system.shattered);
+/**
+ * @param {TeriockEquipmentData} equipmentData 
+ * @returns {Promise<void>}
+ * @private
+ */
+export async function _toggleShattered(equipmentData) {
+  await _setShattered(equipmentData, !equipmentData.shattered);
 }
 
-export async function _dampen(equipment) {
-  await equipment.update({ 'system.dampened': true });
-  await equipment.disable();
+/**
+ * @param {TeriockEquipmentData} equipmentData 
+ * @returns {Promise<void>}
+ * @private
+ */
+export async function _dampen(equipmentData) {
+  await equipmentData.parent.update({ 'system.dampened': true });
+  await equipmentData.parent.disable();
 }
 
-export async function _undampen(equipment) {
-  await equipment.update({ 'system.dampened': false });
-  if (equipment.system.equipped) {
-    await equipment.enable();
+/**
+ * @param {TeriockEquipmentData} equipmentData 
+ * @returns {Promise<void>}
+ * @private
+ */
+export async function _undampen(equipmentData) {
+  await equipmentData.parent.update({ 'system.dampened': false });
+  if (equipmentData.equipped) {
+    await equipmentData.parent.enable();
   }
 }
 
-export async function _setDampened(equipment, bool) {
+/**
+ * @param {TeriockEquipmentData} equipmentData 
+ * @returns {Promise<void>}
+ * @private
+ */
+export async function _setDampened(equipmentData, bool) {
   if (bool) {
-    await _dampen(equipment);
+    await _dampen(equipmentData);
   } else {
-    await _undampen(equipment);
+    await _undampen(equipmentData);
   }
 }
 
-export async function _toggleDampened(equipment) {
-  await _setDampened(equipment, !equipment.system.dampened);
+/**
+ * @param {TeriockEquipmentData} equipmentData 
+ * @returns {Promise<void>}
+ * @private
+ */
+export async function _toggleDampened(equipmentData) {
+  await _setDampened(equipmentData, !equipmentData.dampened);
 }
 
-export async function _unequip(equipment) {
-  await equipment.update({ 'system.equipped': false });
-  await equipment.disable();
+/**
+ * @param {TeriockEquipmentData} equipmentData 
+ * @returns {Promise<void>}
+ * @private
+ */
+export async function _unequip(equipmentData) {
+  await equipmentData.parent.update({ 'system.equipped': false });
+  await equipmentData.parent.disable();
 }
 
-export async function _equip(equipment) {
-  if ((!equipment.consumable) || (equipment.system.consumable && equipment.system.quantity >= 1)) {
-    await equipment.update({ 'system.equipped': true });
-    if (!equipment.system.shattered) {
-      await equipment.enable();
+/**
+ * @param {TeriockEquipmentData} equipmentData 
+ * @returns {Promise<void>}
+ * @private
+ */
+export async function _equip(equipmentData) {
+  if ((!equipmentData.parent.consumable) || (equipmentData.consumable && equipmentData.quantity >= 1)) {
+    await equipmentData.parent.update({ 'system.equipped': true });
+    if (!equipmentData.shattered) {
+      await equipmentData.parent.enable();
     }
-    if (equipment.system.reference && !equipment.system.identified) {
+    if (equipmentData.reference && !equipmentData.identified) {
       let doEquip = true;
-      const ref = await foundry.utils.fromUuid(equipment.system.reference);
+      const ref = await foundry.utils.fromUuid(equipmentData.reference);
       // NOTE:Uncomment below to re-enable equip confirmation dialog for unidentified items.
       // const users = game.users.filter(u => u.active && u.isGM);
       // const referenceName = ref ? ref.name : 'Unknown';
@@ -74,7 +125,7 @@ export async function _equip(equipment) {
       //   })
       // }
       if (doEquip && ref) {
-        await equipment.update({
+        await equipmentData.parent.update({
           'system.tier': ref.system.tier,
         })
       }
@@ -82,18 +133,28 @@ export async function _equip(equipment) {
   }
 }
 
-export async function _setEquipped(equipment, bool) {
+/**
+ * @param {TeriockEquipmentData} equipmentData 
+ * @returns {Promise<void>}
+ * @private
+ */
+export async function _setEquipped(equipmentData, bool) {
   if (bool) {
-    await _equip(equipment);
+    await _equip(equipmentData);
   } else {
-    await _unequip(equipment);
+    await _unequip(equipmentData);
   }
 }
 
-export async function _toggleEquipped(equipment) {
-  if (equipment.system.equipped) {
-    await _unequip(equipment);
+/**
+ * @param {TeriockEquipmentData} equipmentData 
+ * @returns {Promise<void>}
+ * @private
+ */
+export async function _toggleEquipped(equipmentData) {
+  if (equipmentData.equipped) {
+    await _unequip(equipmentData);
   } else {
-    await _equip(equipment);
+    await _equip(equipmentData);
   }
 }

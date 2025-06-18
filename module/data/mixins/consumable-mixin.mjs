@@ -2,7 +2,11 @@ import { evaluateSync } from "../../helpers/utils.mjs";
 
 export const ConsumableDataMixin = (Base) => class ConsumableDataMixin extends Base {
 
-  /** @override */
+  /**
+   * @param {object} options
+   * @returns {Promise<void>}
+   * @override
+   */
   async use(options) {
     await super.use(options);
     this.useOne();

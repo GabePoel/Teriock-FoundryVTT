@@ -1,6 +1,6 @@
 /** @import { MessageParts } from "../../../types/message-parts" */
 import { _defineSchema } from "./methods/schema/_schema.mjs";
-import { _messageParts } from "./methods/_message-parts.mjs";
+import { _messageParts } from "./methods/_messages.mjs";
 import { _migrateData } from "./methods/_migrate-data.mjs";
 import { _parse } from "./methods/_parsing.mjs";
 import { _roll } from "./methods/_rolling.mjs";
@@ -30,11 +30,14 @@ export default class TeriockAbilityData extends WikiDataMixin(TeriockBaseEffectD
   }
 
   /** 
-   * @returns {Partial<MessageParts>}
+   * @returns {MessageParts}
    * @override
    */
   get messageParts() {
-    return { ...super.messageParts, ..._messageParts(this) };
+    return {
+      ...super.messageParts,
+      ..._messageParts(this)
+    };
   }
 
   /** @override */

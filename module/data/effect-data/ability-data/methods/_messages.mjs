@@ -4,6 +4,7 @@
 /**
  * @param {TeriockAbilityData} abilityData 
  * @returns {Partial<MessageParts>}
+ * @private
  */
 export function _messageParts(abilityData) {
   const src = abilityData;

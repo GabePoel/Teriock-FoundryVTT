@@ -1,11 +1,12 @@
-/** @import TeriockFluencyData from "../fluency-data.mjs"; */
 /** @import { FluencyRollOptions } from "../../../../types/rolls"; */
+/** @import TeriockFluencyData from "../fluency-data.mjs"; */
 import TeriockRoll from "../../../../documents/roll.mjs";
 
 /**
  * @param {TeriockFluencyData} fluencyData 
  * @param {FluencyRollOptions} options 
  * @returns {Promise<void>}
+ * @private
  */
 export async function _roll(fluencyData, options) {
   await use(fluencyData, options);
@@ -15,6 +16,7 @@ export async function _roll(fluencyData, options) {
  * @param {TeriockFluencyData} fluencyData 
  * @param {FluencyRollOptions} options 
  * @returns {Promise<void>}
+ * @private
  */
 async function use(fluencyData, options) {
   let message = await fluencyData.parent.buildMessage();

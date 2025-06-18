@@ -3,6 +3,7 @@
 /**
  * @param {object} data
  * @returns {Partial<TeriockAbilityData>}
+ * @private
  */
 export function _migrateData(data) {
   if (data.effects) {

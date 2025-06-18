@@ -25,15 +25,15 @@ export const ChildDataMixin = (Base) => class ChildDataMixin extends Base {
   }
 
   /**
-   * @param {object} [options]
+   * @param {object} options
    * @returns {Promise<void>}
    */
   async roll(options) {
-    await this.parent.roll(options);
+    await this.parent.chat(options);
   }
 
   /**
-   * @param {object} [options]
+   * @param {object} options
    * @returns {Promise<void>}
    */
   async use(options) {

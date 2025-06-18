@@ -1,10 +1,16 @@
+/** @import TeriockEquipmentData from "../equipment-data.mjs"; */
 import { cleanValue } from "../../../../helpers/clean.mjs";
 import { createProperty } from "../../../../helpers/create-effects.mjs";
-import { toCamelCase } from "../../../../helpers/utils.mjs";
+import { toCamelCase, toCamelCaseList } from "../../../../helpers/utils.mjs";
 import { _override } from "./_overrides.mjs";
 
-export async function _parse(item, rawHTML) {
-
+/**
+ * @param {TeriockEquipmentData} equipmentData 
+ * @param {string} rawHTML 
+ * @returns {Promise<{ changes: object[], system: Partial<TeriockEquipmentData>, img: string }>}
+ * @private
+ */
+export async function _parse(equipmentData, rawHTML) {
   const validProperties = Object.values(CONFIG.TERIOCK.equipmentOptions.properties);
   const validMaterialProperties = Object.values(CONFIG.TERIOCK.equipmentOptions.materialProperties);
   const validMagicalProperties = Object.values(CONFIG.TERIOCK.equipmentOptions.magicalProperties);
@@ -16,7 +22,7 @@ export async function _parse(item, rawHTML) {
   ];
 
   // Remove existing properties
-  for (const effect of item.transferredEffects.filter(e => e.type === 'property')) {
+  for (const effect of equipmentData.parent.transferredEffects.filter(e => e.type === 'property')) {
     if (allValidProperties.includes(effect.name)) {
       effect.delete();
     }
@@ -79,20 +85,20 @@ export async function _parse(item, rawHTML) {
   candidateProperties.push(...filteredProperties);
 
   for (const key of candidateProperties) {
-    await createProperty(item, key);
+    await createProperty(equipmentData.parent, key);
   }
 
   parameters.properties = [];
 
   parameters.editable = false;
 
-  equipmentOverrides(item, parameters);
+  _override(equipmentData, parameters);
 
-  const oldImg = item.img;
+  const oldImg = equipmentData.parent.img;
   let newImg = oldImg;
   if (oldImg?.startsWith('systems/teriock/assets') || oldImg?.startsWith('icons/svg')) {
     newImg = 'systems/teriock/assets/searchable.svg';
-    newImg = `systems/teriock/assets/equipment/${item.system.equipmentType?.toLowerCase().replace(/\s+/g, '-')}.svg`;
+    newImg = `systems/teriock/assets/equipment/${equipmentData.equipmentType?.toLowerCase().replace(/\s+/g, '-')}.svg`;
   }
 
   // Remove unused properties

@@ -1,5 +1,5 @@
 const { fields } = foundry.data;
-import { _messageParts } from "./methods/_message-parts.mjs";
+import { _messageParts } from "./methods/_messages.mjs";
 import { _roll } from "./methods/_rolling.mjs";
 import { WikiDataMixin } from "../../mixins/wiki-mixin.mjs";
 import TeriockBaseEffectData from "../base-data/base-data.mjs";

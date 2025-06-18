@@ -2,16 +2,18 @@
 import TeriockRoll from "../../../../documents/roll.mjs";
 
 /**
- * @param {TeriockResourceData} resourceData 
- * @param {object} options 
+ * @param {TeriockResourceData} resourceData
+ * @param {object} options
+ * @private
  */
 export async function _roll(resourceData, options) {
   await use(resourceData, options);
 }
 
 /**
- * @param {TeriockResourceData} resourceData 
- * @param {object} options 
+ * @param {TeriockResourceData} resourceData
+ * @param {object} options
+ * @private
  */
 async function use(resourceData, options) {
   let message = await resourceData.parent.buildMessage();

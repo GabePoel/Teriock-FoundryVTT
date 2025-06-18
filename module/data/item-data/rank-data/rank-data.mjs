@@ -1,5 +1,5 @@
 const { fields } = foundry.data;
-import { _messageParts } from "./methods/_message-parts.mjs";
+import { _messageParts } from "./methods/_messages.mjs";
 import { _parse } from "./methods/_parsing.mjs";
 import { _rollHitDie, _rollManaDie } from "./methods/_rolling.mjs";
 import { WikiDataMixin } from "../../mixins/wiki-mixin.mjs";

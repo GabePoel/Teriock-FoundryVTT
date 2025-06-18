@@ -7,6 +7,7 @@ import { _override } from "./_overrides.mjs";
  * @param {TeriockAbilityData} abilityData 
  * @param {string} rawHTML 
  * @returns {Promise<{ changes: object[], system: Partial<TeriockAbilityData>, img: string }>}
+ * @private
  */
 export async function _parse(abilityData, rawHTML) {
   const parser = new DOMParser();

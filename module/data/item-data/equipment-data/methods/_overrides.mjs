@@ -1,3 +1,4 @@
+/** @import TeriockEquipmentData from "../equipment-data.mjs"; */
 const equipmentMap = {
   'Hand': {
     damage: '1d@hand',
@@ -23,6 +24,13 @@ const equipmentMap = {
   }
 }
 
+/**
+ * 
+ * @param {TeriockEquipmentData} equipmentData 
+ * @param {Partial<TeriockEquipmentData>} parameters 
+ * @returns {Partial<TeriockEquipmentData>}
+ * @private
+ */
 export function _override(equipmentData, parameters) {
   if (equipmentMap[equipmentData.equipmentType]) {
     const map = equipmentMap[equipmentData.equipmentType];

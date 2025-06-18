@@ -2,8 +2,9 @@
 /** @import TeriockFluencyData from "../fluency-data.mjs"; */
 
 /**
- * @param {TeriockFluencyData} fluencyData 
+ * @param {TeriockFluencyData} fluencyData
  * @returns {Partial<MessageParts>}
+ * @private
  */
 export function _messageParts(fluencyData) {
   const ref = CONFIG.TERIOCK.tradecraftOptions;

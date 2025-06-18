@@ -1,180 +1,22 @@
-const { fields } = foundry.data;
-import {
-  _dampen,
-  _equip,
-  _repair,
-  _setDampened,
-  _setEquipped,
-  _setShattered,
-  _shatter,
-  _toggleDampened,
-  _toggleEquipped,
-  _toggleShattered,
-  _undampen,
-  _unequip,
-} from "./methods/_handling.mjs";
-import {
-  _identify,
-  _readMagic,
-  _unidentify,
-} from "./methods/_identifying.mjs";
-import { _messageParts, _secretMessageParts } from "./methods/_message-parts.mjs";
-import { _parse } from "./methods/_parsing.mjs";
-import { _roll } from "./methods/_rolling.mjs";
+/** @import { MessageParts } from "../../../types/message-parts" */
 import { ConsumableDataMixin } from "../../mixins/consumable-mixin.mjs";
-import { equipmentOptions } from "../../../helpers/constants/equipment-options.mjs";
 import { WikiDataMixin } from "../../mixins/wiki-mixin.mjs";
+import * as handling from "./methods/_handling.mjs";
+import * as identifying from "./methods/_identifying.mjs";
+import * as messages from "./methods/_messages.mjs";
+import * as parsing from "./methods/_parsing.mjs";
+import * as rolling from "./methods/_rolling.mjs";
+import * as schema from "./methods/_schema.mjs";
 import TeriockBaseItemData from "../base-data/base-data.mjs";
 
 export default class TeriockEquipmentData extends WikiDataMixin(ConsumableDataMixin(TeriockBaseItemData)) {
+
+  /** @override */
   static defineSchema() {
     const commonData = super.defineSchema();
     return {
       ...commonData,
-      wikiNamespace: new fields.StringField({
-        initial: "Equipment",
-        gmOnly: true,
-      }),
-      equipped: new fields.BooleanField({
-        initial: true,
-        label: "Equipped",
-      }),
-      glued: new fields.BooleanField({
-        initial: false,
-        label: "Glued",
-      }),
-      shattered: new fields.BooleanField({
-        initial: false,
-        label: "Shattered"
-      }),
-      dampened: new fields.BooleanField({
-        initial: false,
-        label: "Dampened"
-      }),
-      consumable: new fields.BooleanField({
-        initial: false,
-        label: "Consumable",
-      }),
-      quantity: new fields.NumberField({
-        initial: 1,
-        integer: true,
-        label: "Quantity",
-        min: 0,
-      }),
-      maxQuantity: new fields.NumberField({
-        initial: null,
-        integer: true,
-        label: "Max Quantity",
-        min: 0,
-        nullable: true,
-      }),
-      maxQuantityRaw: new fields.StringField({
-        initial: null,
-        label: "Max Quantity (Raw)",
-        nullable: true,
-      }),
-      ranged: new fields.BooleanField({
-        initial: false,
-        label: "Ranged",
-      }),
-      damage: new fields.StringField({
-        initial: "0",
-        label: "Damage",
-      }),
-      twoHandedDamage: new fields.StringField({
-        initial: "0",
-        label: "Two-Handed Damage",
-      }),
-      damageTypes: new fields.ArrayField(new fields.StringField()),
-      weight: new fields.NumberField({
-        initial: 0,
-        integer: true,
-        label: "Weight",
-        min: 0,
-      }),
-      range: new fields.NumberField({
-        initial: 0,
-        integer: true,
-        label: "Range",
-        min: 0,
-      }),
-      shortRange: new fields.NumberField({
-        initial: 0,
-        integer: true,
-        label: "Short Range",
-        min: 0,
-      }),
-      equipmentClasses: new fields.ArrayField(new fields.StringField({
-        choices: equipmentOptions.equipmentClasses,
-      })),
-      minStr: new fields.NumberField({
-        initial: -3,
-        integer: true,
-        min: -3,
-        label: "Min Strength",
-      }),
-      sb: new fields.StringField({
-        initial: null,
-        label: "Style Bonus",
-        nullable: true,
-      }),
-      av: new fields.NumberField({
-        initial: 0,
-        integer: true,
-        label: "Armor Value",
-        min: 0,
-      }),
-      bv: new fields.NumberField({
-        initial: 0,
-        integer: true,
-        label: "Block Value",
-        min: 0,
-      }),
-      specialRules: new fields.HTMLField({
-        hint: "The conditions under which style bonus is granted.",
-        initial: "",
-        label: "Special Rules",
-      }),
-      equipmentType: new fields.StringField({
-        initial: "Equipment Type",
-        label: "Equipment Type",
-      }),
-      powerLevel: new fields.StringField({
-        choices: equipmentOptions.powerLevelShort,
-        initial: "mundane",
-        label: "Power Level",
-      }),
-      flaws: new fields.HTMLField({
-        initial: "",
-        label: "Flaws",
-      }),
-      notes: new fields.HTMLField({
-        initial: "",
-        label: "Notes",
-      }),
-      tier: new fields.NumberField({
-        initial: 0,
-        integer: true,
-        label: "Tier",
-        min: 0,
-      }),
-      fullTier: new fields.StringField({
-        initial: "",
-        label: "Full Tier",
-      }),
-      manaStoring: new fields.StringField({
-        initial: "",
-        label: "Mana Storing",
-      }),
-      identified: new fields.BooleanField({
-        initial: true,
-        label: "Identified",
-      }),
-      reference: new fields.DocumentUUIDField({
-        initial: null,
-        nullable: true,
-        gmOnly: true
-      }),
+      ...schema._defineSchema(),
     }
   }
 
@@ -193,81 +35,141 @@ export default class TeriockEquipmentData extends WikiDataMixin(ConsumableDataMi
 
   /** @override */
   async parse(rawHTML) {
-    return await _parse(this.parent, rawHTML);
+    return await parsing._parse(this, rawHTML);
   }
 
   /** @override */
   async roll(options) {
-    await _roll(this.parent, options);
+    await rolling._roll(this, options);
   }
 
-  /** @override */
+  /** 
+   * @returns {MessageParts}
+   * @override
+   */
   get messageParts() {
-    return { ...super.messageParts, ..._messageParts(this.parent) };
+    return {
+      ...super.messageParts,
+      ...messages._messageParts(this)
+    };
   }
 
-  /** @override */
+  /** 
+   * @returns {MessageParts}
+   * @override
+   */
   get secretMessageParts() {
-    return { ...super.secretMessageParts, ..._secretMessageParts(this.parent) };
+    return {
+      ...super.secretMessageParts,
+      ...messages._secretMessageParts(this)
+    };
   }
 
+  /**
+   * @returns {Promise<void>}
+   */
   async shatter() {
-    await _shatter(this.parent);
+    await handling._shatter(this);
   }
 
+  /**
+   * @returns {Promise<void>}
+   */
   async repair() {
-    await _repair(this.parent);
+    await handling._repair(this);
   }
 
+  /**
+   * @param {boolean} bool
+   * @returns {Promise<void>}
+   */
   async setShattered(bool) {
-    await _setShattered(this.parent, bool);
+    await handling._setShattered(this, bool);
   }
 
+  /**
+   * @returns {Promise<void>}
+   */
   async toggleShattered() {
-    await _toggleShattered(this.parent);
+    await handling._toggleShattered(this);
   }
 
+  /**
+   * @returns {Promise<void>}
+   */
   async dampen() {
-    await _dampen(this.parent);
+    await handling._dampen(this);
   }
 
+  /**
+   * @returns {Promise<void>}
+   */
   async undampen() {
-    await _undampen(this.parent);
+    await handling._undampen(this);
   }
 
+  /**
+   * @param {boolean} bool
+   * @returns {Promise<void>}
+   */
   async setDampened(bool) {
-    await _setDampened(this.parent, bool);
+    await handling._setDampened(this, bool);
   }
 
+  /**
+   * @returns {Promise<void>}
+   */
   async toggleDampened() {
-    await _toggleDampened(this.parent);
+    await handling._toggleDampened(this);
   }
 
+  /**
+   * @returns {Promise<void>}
+   */
   async unequip() {
-    await _unequip(this.parent);
+    await handling._unequip(this);
   }
 
+  /**
+   * @returns {Promise<void>}
+   */
   async equip() {
-    await _equip(this.parent);
+    await handling._equip(this);
   }
 
+  /**
+   * @param {boolean} bool
+   * @returns {Promise<void>}
+   */
   async setEquipped(bool) {
-    await _setEquipped(this.parent, bool);
+    await handling._setEquipped(this, bool);
   }
 
+  /**
+   * @returns {Promise<void>}
+   */
   async toggleEquipped() {
-    await _toggleEquipped(this.parent);
+    await handling._toggleEquipped(this);
   }
 
+  /**
+   * @returns {Promise<void>}
+   */
   async unidentify() {
-    await _unidentify(this.parent);
+    await identifying._unidentify(this);
   }
 
+  /**
+   * @returns {Promise<void>}
+   */
   async readMagic() {
-    await _readMagic(this.parent);
+    await identifying._readMagic(this);
   }
 
+  /**
+   * @returns {Promise<void>}
+   */
   async identify() {
-    await _identify(this.parent);
+    await identifying._identify(this);
   }
 }

@@ -1,8 +1,15 @@
+/** @import { MessageParts } from "../../../../types/message-parts" */
+/** @import TeriockEquipmentData from "../equipment-data.mjs"; */
 import { addAbilitiesBlock, addPropertiesBlock, addResourcesBlock } from "../../../../helpers/messages-builder/message-parts.mjs";
 
-export function _messageParts(equipment) {
+/**
+ * @param {TeriockEquipmentData} equipmentData 
+ * @returns {Partial<MessageParts>}
+ * @private
+ */
+export function _messageParts(equipmentData) {
   const ref = CONFIG.TERIOCK.equipmentOptions;
-  const src = equipment.system;
+  const src = equipmentData;
   let damageString = '';
   if (src.damage) {
     damageString += src.damage;
@@ -79,17 +86,22 @@ export function _messageParts(equipment) {
       text: src.fllTier,
     }
   ]
-  addPropertiesBlock(equipment.transferredEffects, blocks);
-  addAbilitiesBlock(equipment.transferredEffects, blocks);
-  addResourcesBlock(equipment.transferredEffects, blocks);
+  addPropertiesBlock(equipmentData.parent.transferredEffects, blocks);
+  addAbilitiesBlock(equipmentData.parent.transferredEffects, blocks);
+  addResourcesBlock(equipmentData.parent.transferredEffects, blocks);
   return {
     bars: bars,
     blocks: blocks,
   }
 }
 
-export function _secretMessageParts(equipment) {
-  const src = equipment.system;
+/**
+ * @param {TeriockEquipmentData} equipmentData 
+ * @returns {Partial<MessageParts>}
+ * @private
+ */
+export function _secretMessageParts(equipmentData) {
+  const src = equipmentData;
   let damageString = '';
   if (src.damage) {
     damageString += src.damage;
@@ -106,7 +118,7 @@ export function _secretMessageParts(equipment) {
     }
   ]
   return {
-    name: equipment.system.equipmentType,
+    name: equipmentData.equipmentType,
     bars: bars,
     blocks: blocks,
   }

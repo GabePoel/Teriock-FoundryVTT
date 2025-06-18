@@ -4,6 +4,7 @@
 /**
  * @param {TeriockResourceData} resourceData 
  * @returns {Partial<MessageParts>}
+ * @private
  */
 export function _messageParts(resourceData) {
   const blocks = [

@@ -4,6 +4,7 @@
 /**
  * @param {TeriockPropertyData} propertyData 
  * @returns {Partial<MessageParts>}
+ * @private
  */
 export function _messageParts(propertyData) {
   const ref = CONFIG.TERIOCK.abilityOptions;

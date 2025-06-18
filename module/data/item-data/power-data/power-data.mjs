@@ -1,5 +1,6 @@
+/** @import { MessageParts } from "../../../types/message-parts" */
 const { fields } = foundry.data;
-import { _messageParts } from "./methods/_message-parts.mjs";
+import { _messageParts } from "./methods/_messages.mjs";
 import TeriockBaseItemData from "../base-data/base-data.mjs";
 
 export default class TeriockPowerData extends TeriockBaseItemData {
@@ -34,8 +35,14 @@ export default class TeriockPowerData extends TeriockBaseItemData {
     }
   }
 
-  /** @override */
+  /** 
+   * @returns {MessageParts}
+   * @override
+   */
   get messageParts() {
-    return { ...super.messageParts, ..._messageParts(this.parent) };
+    return {
+      ...super.messageParts,
+      ..._messageParts(this)
+    };
   }
 }

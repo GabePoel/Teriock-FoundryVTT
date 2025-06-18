@@ -1,24 +1,35 @@
+/** @import TeriockEquipmentData from "../equipment-data.mjs"; */
 import TeriockHarmRoll from "../../../../documents/harm.mjs";
 
-export async function _roll(equipment, options) {
-  await use(equipment, options);
+/**
+ * @param {TeriockEquipmentData} equipmentData
+ * @param {object} options
+ * @returns {Promise<void>}
+ */
+export async function _roll(equipmentData, options) {
+  await use(equipmentData, options);
 }
 
-async function use(equipment, options) {
-  let message = await equipment.buildMessage();
-  if (equipment.system.damage) {
-    let rollFormula = equipment.system.damage || '';
+/**
+ * @param {TeriockEquipmentData} equipmentData
+ * @param {object} options
+ * @returns {Promise<void>}
+ */
+async function use(equipmentData, options) {
+  let message = await equipmentData.parent.buildMessage();
+  if (equipmentData.damage) {
+    let rollFormula = equipmentData.damage || '';
     rollFormula = rollFormula.trim();
 
-    // let damageTypes = equipment.system.damageTypes || [];
+    // let damageTypes = equipmentData.damageTypes || [];
     let damageTypes = [];
-    if (equipment.system.powerLevel === 'magic') {
+    if (equipmentData.powerLevel === 'magic') {
       damageTypes.push('Magic');
     }
-    const effectDamageTypes = equipment.effects.filter((effect) => {
+    const effectDamageTypes = equipmentData.parent.effects.filter((effect) => {
       return effect.type === 'property' && !effect.disabled && effect.system.damageType;
     }).map((effect) => effect.system.damageType);
-    if (equipment.effects.some(effect => effect.type === 'property' && !effect.disabled && (effect.name === 'Flaming' || effect.name === 'Burning'))) {
+    if (equipmentData.parent.effects.some(effect => effect.type === 'property' && !effect.disabled && (effect.name === 'Flaming' || effect.name === 'Burning'))) {
       effectDamageTypes.push('Fire');
     }
     damageTypes = [...new Set([...damageTypes, ...effectDamageTypes])];
@@ -27,14 +38,14 @@ async function use(equipment, options) {
       rollFormula += '[' + damageTypes.join(', ') + ']';
     }
 
-    if (options?.twoHanded && equipment.system.twoHandedDamage) {
-      rollFormula = equipment.system.twoHandedDamage || rollFormula;
+    if (options?.twoHanded && equipmentData.twoHandedDamage) {
+      rollFormula = equipmentData.twoHandedDamage || rollFormula;
     }
     if (options?.bonusDamage) {
       rollFormula = rollFormula + ' + ' + options.bonusDamage;
     }
-    if (equipment.getActor()?.system?.damage?.standard) {
-      rollFormula += equipment.getActor().system.damage.standard;
+    if (equipmentData.parent.getActor()?.system?.damage?.standard) {
+      rollFormula += equipmentData.parent.getActor().system.damage.standard;
     }
     // if (options?.advantage) {
     //   rollFormula = rollFormula.replace(/(\d*)d(\d+)/gi, (match, dice, sides) => {
@@ -43,22 +54,22 @@ async function use(equipment, options) {
     //   });
     // }
     if (options?.secret) {
-      message = await equipment.buildMessage({ secret: true });
+      message = await equipmentData.parent.buildMessage({ secret: true });
     } else {
-      message = await equipment.buildMessage({ secret: false });
+      message = await equipmentData.parent.buildMessage({ secret: false });
     }
-    const rollData = equipment.getActor()?.getRollData() || {};
+    const rollData = equipmentData.parent.getActor()?.getRollData() || {};
     let roll = new TeriockHarmRoll(rollFormula, rollData, { message: message });
     if (options?.advantage) {
       roll = roll.alter(2, 0);
     }
     roll.toMessage({
       speaker: ChatMessage.getSpeaker({
-        actor: equipment.getActor(),
+        actor: equipmentData.parent.getActor(),
       }),
     });
     console.log(roll.terms);
   } else {
-    equipment.chat();
+    equipmentData.parent.chat();
   }
 }

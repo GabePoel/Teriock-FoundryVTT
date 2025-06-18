@@ -1,15 +1,15 @@
-/** @import TeriockAbilityData from "../ability-data.mjs"; */
-/** @import TeriockRoll from "../../../../documents/roll.mjs"; */
 /** @import { AbilityRollOptions } from "../../../../types/rolls"; */
+/** @import TeriockAbilityData from "../ability-data.mjs"; */
 const { api, ux } = foundry.applications
-import { generateEffect } from "./_generate-effect.mjs";
-import TeriockRoll from "../../../../documents/roll.mjs";
+import { _generateEffect } from "./_generate-effect.mjs";
 import { evaluateAsync } from "../../../../helpers/utils.mjs";
+import TeriockRoll from "../../../../documents/roll.mjs";
 
 /**
  * @param {TeriockAbilityData} abilityData
  * @param {AbilityRollOptions} options
  * @returns {Promise<void>}
+ * @private
  */
 export async function _roll(abilityData, options) {
   const advantage = options?.advantage || false;
@@ -18,13 +18,13 @@ export async function _roll(abilityData, options) {
   await use(abilityData);
   if (abilityData.duration && abilityData.duration !== 'Instant' && abilityData.maneuver !== 'passive') {
     if (abilityData.targets.includes('self') || abilityData.delivery.base === 'self') {
-      await generateEffect(abilityData, abilityData.parent.getActor());
+      await _generateEffect(abilityData, abilityData.parent.getActor());
     }
     if (abilityData.targets.includes('creature')) {
       const targets = game.user.targets;
       for (const target of targets) {
         console.log(target, target.actor);
-        await generateEffect(abilityData, target.actor);
+        await _generateEffect(abilityData, target.actor);
       }
     }
   }

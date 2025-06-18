@@ -1,3 +1,4 @@
+/** @import { WikiPullOptions } from "../../types/wiki" */
 import { fetchWikiPageHTML, openWikiPage } from "../../helpers/wiki.mjs";
 
 export const WikiDataMixin = (Base) => class WikiDataMixin extends Base {
@@ -22,8 +23,7 @@ export const WikiDataMixin = (Base) => class WikiDataMixin extends Base {
   }
 
   /**
-   * @param {object} [options]
-   * @param {boolean} [options.notify=true] - Whether to show UI notifications.
+   * @param {WikiPullOptions} options
    * @returns {Promise<void>}
    */
   async wikiPull(options = {}) {

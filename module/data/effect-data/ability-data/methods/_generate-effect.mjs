@@ -6,8 +6,9 @@ import TeriockEffect from "../../../../documents/effect.mjs";
  * @param {TeriockAbilityData} abilityData 
  * @param {TeriockActor} actor 
  * @returns {Promise<TeriockEffect>}
+ * @private
  */
-export async function generateEffect(abilityData, actor) {
+export async function _generateEffect(abilityData, actor) {
   let changes = abilityData.applies.base.changes || [];
   let statuses = abilityData.applies.base.statuses || [];
   let description = abilityData.overview.base || '';
