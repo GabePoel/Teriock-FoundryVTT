@@ -180,7 +180,9 @@ export default class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(
     }
 
     const staticUpdates = {
-      '.ab-expansion-button': { 'system.expansion': 'detonate' },
+      '.ab-expansion-button': {
+        'system.expansion': 'detonate'
+      },
       '.ab-mana-cost-button': {
         'system.costs.mp': {
           type: 'static',
@@ -201,9 +203,15 @@ export default class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(
           }
         }
       },
-      '.ab-break-cost-button': { 'system.costs.break': 'shatter' },
-      '.ab-attribute-improvement-button': { 'system.improvements.attributeImprovement.attribute': 'int' },
-      '.ab-feat-save-improvement-button': { 'system.improvements.featSaveImprovement.attribute': 'int' },
+      '.ab-break-cost-button': {
+        'system.costs.break': 'shatter'
+      },
+      '.ab-attribute-improvement-button': {
+        'system.improvements.attributeImprovement.attribute': 'int'
+      },
+      '.ab-feat-save-improvement-button': {
+        'system.improvements.featSaveImprovement.attribute': 'int'
+      },
     };
 
     for (const [selector, update] of Object.entries(staticUpdates)) {
