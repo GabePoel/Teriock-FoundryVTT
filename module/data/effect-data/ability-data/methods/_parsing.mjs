@@ -1,22 +1,28 @@
+/** @import TeriockAbilityData from "../ability-data.mjs"; */
 import { cleanFeet } from "../../../../helpers/clean.mjs";
 import { createAbility } from "../../../../helpers/create-effects.mjs";
 import { _override } from "./_overrides.mjs";
 
-export async function _parse(ability, rawHTML) {
+/**
+ * @param {TeriockAbilityData} abilityData 
+ * @param {string} rawHTML 
+ * @returns {Promise<{ changes: object[], system: Partial<TeriockAbilityData>, img: string }>}
+ */
+export async function _parse(abilityData, rawHTML) {
   const parser = new DOMParser();
   const doc = parser.parseFromString(rawHTML, 'text/html');
 
-  console.log('Parsing ability:', ability.name);
+  console.log('Parsing ability:', abilityData.parent.name);
 
   // Get children
-  const oldChildren = ability.getChildren();
+  const oldChildren = abilityData.parent.getChildren();
   for (const child of oldChildren) {
     if (child) {
       await child.delete();
     }
   }
 
-  console.log('Getting children for ability:', ability.name);
+  console.log('Getting children for ability:', abilityData.parent.name);
   const subs = Array.from(doc.querySelectorAll('.ability-sub-container')).filter(
     el => !el.closest('.ability-sub-container:not(:scope)')
   );
@@ -279,7 +285,7 @@ export async function _parse(ability, rawHTML) {
   delete parameters.parentId;
   delete parameters.childIds;
 
-  const applications = _override(ability.name);
+  const applications = _override(abilityData.parent.name);
   if (applications) {
     parameters.applies = applications;
   }
@@ -298,7 +304,7 @@ export async function _parse(ability, rawHTML) {
       if (namespace === 'Ability') {
         const subName = subNameEl.getAttribute('data-name');
         console.log(subName);
-        const subAbility = await createAbility(ability, subName, { notify: false });
+        const subAbility = await createAbility(abilityData.parent, subName, { notify: false });
         const limitation = el.querySelector('.limited-modifier');
         const improvement = el.querySelector('.improvement-modifier');
         let limitationText = '';

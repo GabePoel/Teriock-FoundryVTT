@@ -10,6 +10,10 @@ import { _defineSpeed } from "./_define-speed.mjs";
 import { _defineStats } from "./_define-stats.mjs";
 import { _defineTradecrafts } from "./_define-tradecrafts.mjs";
 
+/**
+ * @returns {object}
+ * @private
+ */
 export function _defineSchema() {
   let schema = {};
   schema = _defineBasics(schema);

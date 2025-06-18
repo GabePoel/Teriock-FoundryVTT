@@ -1,3 +1,5 @@
+/** @import { AppliesData } from "./schema/_types"; */
+
 import { tradecraftOptions } from "../../../../helpers/constants/tradecraft-options.mjs";
 import { mergeLevel } from "../../../../helpers/utils.mjs";
 
@@ -222,6 +224,11 @@ for (const [key, value] of Object.entries(tradecrafts)) {
   }
 }
 
+/**
+ * @param {string} name
+ * @returns {Record<string, AppliesData>}
+ * @private
+ */
 export function _override(name) {
   return abilityMap[name];
 }

@@ -1,6 +1,13 @@
-export function _messageParts(ability) {
+/** @import { MessageParts } from "../../../../types/message-parts" */
+/** @import TeriockAbilityData from "../ability-data.mjs"; */
+
+/**
+ * @param {TeriockAbilityData} abilityData 
+ * @returns {Partial<MessageParts>}
+ */
+export function _messageParts(abilityData) {
+  const src = abilityData;
   const ref = CONFIG.TERIOCK.abilityOptions;
-  const src = ability.system;
   let mpCost = '';
   if (src.costs.mp.type === 'variable') {
     mpCost = 'Variable MP';

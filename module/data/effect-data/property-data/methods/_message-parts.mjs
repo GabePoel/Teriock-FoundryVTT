@@ -1,17 +1,24 @@
-export function _messageParts(property) {
+/** @import { MessageParts } from "../../../../types/message-parts" */
+/** @import TeriockPropertyData from "../property-data.mjs"; */
+
+/**
+ * @param {TeriockPropertyData} propertyData 
+ * @returns {Partial<MessageParts>}
+ */
+export function _messageParts(propertyData) {
   const ref = CONFIG.TERIOCK.abilityOptions;
   const blocks = [
     {
       title: 'Description',
-      text: property.system.description,
+      text: propertyData.description,
     },
   ]
   return {
     bars: [
       {
-        icon: 'fa-' + ref.abilityType[property.system.propertyType].icon,
+        icon: 'fa-' + ref.abilityType[propertyData.propertyType].icon,
         wrappers: [
-          ref.abilityType[property.system.propertyType].name,
+          ref.abilityType[propertyData.propertyType].name,
         ],
       }
     ],

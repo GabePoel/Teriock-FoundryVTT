@@ -43,12 +43,12 @@ export default class TeriockResourceData extends ConsumableDataMixin(TeriockBase
 
   /** @override */
   async roll(options) {
-    await _roll(this.parent, options);
+    await _roll(this, options);
   }
 
   /** @override */
   get messageParts() {
-    return { ...super.messageParts, ..._messageParts(this.parent) };
+    return { ...super.messageParts, ..._messageParts(this) };
   }
 
   /** @override */

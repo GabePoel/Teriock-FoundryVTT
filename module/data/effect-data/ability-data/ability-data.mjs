@@ -26,7 +26,7 @@ export default class TeriockAbilityData extends WikiDataMixin(TeriockBaseEffectD
 
   /** @override */
   async roll(options) {
-    return await _roll(this.parent, options);
+    return await _roll(this, options);
   }
 
   /** 
@@ -34,7 +34,7 @@ export default class TeriockAbilityData extends WikiDataMixin(TeriockBaseEffectD
    * @override
    */
   get messageParts() {
-    return { ...super.messageParts, ..._messageParts(this.parent) };
+    return { ...super.messageParts, ..._messageParts(this) };
   }
 
   /** @override */
@@ -44,6 +44,6 @@ export default class TeriockAbilityData extends WikiDataMixin(TeriockBaseEffectD
 
   /** @override */
   async parse(rawHTML) {
-    return await _parse(this.parent, rawHTML);
+    return await _parse(this, rawHTML);
   }
 }

@@ -1,3 +1,9 @@
+/** @import TeriockAbilityData from "../ability-data.mjs"; */
+
+/**
+ * @param {object} data
+ * @returns {Partial<TeriockAbilityData>}
+ */
 export function _migrateData(data) {
   if (data.effects) {
     data.effects.sort();

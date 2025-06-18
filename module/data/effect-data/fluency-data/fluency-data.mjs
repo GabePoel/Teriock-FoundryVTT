@@ -5,6 +5,8 @@ import { WikiDataMixin } from "../../mixins/wiki-mixin.mjs";
 import TeriockBaseEffectData from "../base-data/base-data.mjs";
 
 export default class TeriockFluencyData extends WikiDataMixin(TeriockBaseEffectData) {
+  
+  /** @override */
   static defineSchema() {
     const commonData = super.defineSchema();
     return {
@@ -34,12 +36,12 @@ export default class TeriockFluencyData extends WikiDataMixin(TeriockBaseEffectD
 
   /** @override */
   async roll(options) {
-    await _roll(this.parent, options);
+    await _roll(this, options);
   }
 
   /** @override */
   get messageParts() {
-    return { ...super.messageParts, ..._messageParts(this.parent) };
+    return { ...super.messageParts, ..._messageParts(this) };
   }
 
   /** @override */

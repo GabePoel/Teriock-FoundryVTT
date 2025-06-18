@@ -16,6 +16,6 @@ export default class TeriockPropertyData extends WikiDataMixin(TeriockBaseEffect
 
   /** @override */
   get messageParts() {
-    return { ...super.messageParts, ..._messageParts(this.parent) };
+    return { ...super.messageParts, ..._messageParts(this) };
   }
 }

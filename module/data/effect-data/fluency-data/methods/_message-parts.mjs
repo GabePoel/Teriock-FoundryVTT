@@ -1,6 +1,13 @@
-export function _messageParts(fluency) {
+/** @import { MessageParts } from "../../../../types/message-parts" */
+/** @import TeriockFluencyData from "../fluency-data.mjs"; */
+
+/**
+ * @param {TeriockFluencyData} fluencyData 
+ * @returns {Partial<MessageParts>}
+ */
+export function _messageParts(fluencyData) {
   const ref = CONFIG.TERIOCK.tradecraftOptions;
-  const src = fluency.system;
+  const src = fluencyData;
   const bars = [
     {
       icon: 'fa-' + ref[src.field].tradecrafts[src.tradecraft].icon,
