@@ -1,8 +1,8 @@
 const { api } = foundry.applications;
 import { documentOptions } from "../../../helpers/constants/document-options.mjs";
-import { TeriockBaseActorSheet } from "../base-sheet/base-sheet.mjs";
+import TeriockBaseActorSheet from "../base-sheet/base-sheet.mjs";
 
-export class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(TeriockBaseActorSheet) {
+export default class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(TeriockBaseActorSheet) {
   static DEFAULT_OPTIONS = {
     classes: ['character'],
     form: {

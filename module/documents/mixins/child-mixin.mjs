@@ -1,9 +1,17 @@
 const { ux } = foundry.applications;
 import { buildMessage } from "../../helpers/messages-builder/message-builder.mjs";
 
+/** @import Document from "@common/abstract/document.mjs"; */
+
+/**
+ * Mixin for common functions used across document classes embedded in actors.
+ * @template {import("@common/_types.mjs").Constructor<Document>} BaseDocument
+ * @param {BaseDocument} Base
+ *
+ */
 export const MixinChildDocument = (Base) => class MixinChildDocument extends Base {
 
-  /** @override */
+  /** @inheritdoc */
   prepareDerivedData() {
     super.prepareDerivedData();
     let fluent = false;

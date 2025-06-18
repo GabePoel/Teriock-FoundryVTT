@@ -12,21 +12,21 @@ import {
   _toggleShattered,
   _undampen,
   _unequip,
-} from "./_handling.mjs";
+} from "./methods/_handling.mjs";
 import {
   _identify,
   _readMagic,
   _unidentify,
-} from "./_identifying.mjs";
-import { _messageParts, _secretMessageParts } from "./_message-parts.mjs";
-import { _parse } from "./_parsing.mjs";
-import { _roll } from "./_rolling.mjs";
+} from "./methods/_identifying.mjs";
+import { _messageParts, _secretMessageParts } from "./methods/_message-parts.mjs";
+import { _parse } from "./methods/_parsing.mjs";
+import { _roll } from "./methods/_rolling.mjs";
 import { ConsumableDataMixin } from "../../mixins/consumable-mixin.mjs";
 import { equipmentOptions } from "../../../helpers/constants/equipment-options.mjs";
-import { TeriockBaseItemData } from "../base-data/base-data.mjs";
 import { WikiDataMixin } from "../../mixins/wiki-mixin.mjs";
+import TeriockBaseItemData from "../base-data/base-data.mjs";
 
-export class TeriockEquipmentData extends WikiDataMixin(ConsumableDataMixin(TeriockBaseItemData)) {
+export default class TeriockEquipmentData extends WikiDataMixin(ConsumableDataMixin(TeriockBaseItemData)) {
   static defineSchema() {
     const commonData = super.defineSchema();
     return {

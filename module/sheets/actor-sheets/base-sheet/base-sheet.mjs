@@ -1,11 +1,11 @@
 const { sheets, api, ux } = foundry.applications;
-import { _filterAbilities, _filterEquipment } from "./_filters.mjs";
-import { _sortAbilities, _sortEquipment } from "./_sort.mjs";
+import { _filterAbilities, _filterEquipment } from "./methods/_filters.mjs";
+import { _sortAbilities, _sortEquipment } from "./methods/_sort.mjs";
 import { documentOptions } from "../../../helpers/constants/document-options.mjs";
 import { primaryBlockerContextMenu, primaryAttackContextMenu, piercingContextMenu } from "../../../helpers/context-menus/character-context-menus.mjs";
 import { TeriockSheet } from "../../mixins/sheet-mixin.mjs";
 
-export class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorSheet) {
+export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorSheet) {
   static DEFAULT_OPTIONS = {
     classes: ['character'],
     actions: {

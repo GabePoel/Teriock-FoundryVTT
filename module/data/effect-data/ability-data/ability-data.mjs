@@ -1,12 +1,12 @@
-import { _defineSchema } from "./schema/_schema.mjs";
-import { _messageParts } from "./_message-parts.mjs";
-import { _parse } from "./_parsing.mjs";
-import { _roll } from "./_rolling.mjs";
-import { _migrateData } from "./_migrate-data.mjs";
-import { TeriockBaseEffectData } from "../base-data/base-data.mjs";
+import { _defineSchema } from "./methods/schema/_schema.mjs";
+import { _messageParts } from "./methods/_message-parts.mjs";
+import { _migrateData } from "./methods/_migrate-data.mjs";
+import { _parse } from "./methods/_parsing.mjs";
+import { _roll } from "./methods/_rolling.mjs";
 import { WikiDataMixin } from "../../mixins/wiki-mixin.mjs";
+import TeriockBaseEffectData from "../base-data/base-data.mjs";
 
-export class TeriockAbilityData extends WikiDataMixin(TeriockBaseEffectData) {
+export default class TeriockAbilityData extends WikiDataMixin(TeriockBaseEffectData) {
   static defineSchema() {
     const commonData = super.defineSchema();
     return {

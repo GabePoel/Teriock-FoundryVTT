@@ -1,7 +1,7 @@
 const { fields } = foundry.data;
-import { TeriockBaseEffectData } from "../base-data/base-data.mjs";
+import TeriockBaseEffectData from "../base-data/base-data.mjs";
 
-export class TeriockEffectData extends TeriockBaseEffectData {
+export default class TeriockEffectData extends TeriockBaseEffectData {
   static defineSchema() {
     const commonData = super.defineSchema();
     return {

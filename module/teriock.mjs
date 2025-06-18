@@ -2,35 +2,14 @@ import TERIOCK from './helpers/config.mjs';
 const { ActorSheet, ItemSheet } = foundry.appv1.sheets;
 const { DocumentSheetConfig } = foundry.applications.apps;
 import { conditions } from './content/conditions.mjs'
-import { TeriockAbilityData } from './data/effect-data/ability-data/ability-data.mjs';
-import { TeriockAbilitySheet } from './sheets/effect-sheets/ability-sheet/ability-sheet.mjs';
-import { TeriockCharacterData } from './data/actor-data/character-data/character-data.mjs';
-import { TeriockCharacterSheet } from './sheets/actor-sheets/character-sheet/character-sheet.mjs';
 import { teriockDetectionModes } from './perception/detection-modes.mjs';
-import { TeriockEffectData } from './data/effect-data/effect-data/effect-data.mjs';
-import { TeriockEffectSheet } from './sheets/effect-sheets/effect-sheet/effect-sheet.mjs';
-import { TeriockEquipmentData } from './data/item-data/equipment-data/equipment-data.mjs';
-import { TeriockEquipmentSheet } from './sheets/item-sheets/equipment-sheet/equipment-sheet.mjs';
-import { TeriockFluencyData } from './data/effect-data/fluency-data/fluency-data.mjs';
-import { TeriockFluencySheet } from './sheets/effect-sheets/fluency-sheet/fluency-sheet.mjs';
-import { TeriockPowerData } from './data/item-data/power-data/power-data.mjs';
-import { TeriockPowerSheet } from './sheets/item-sheets/power-sheet/power-sheet.mjs';
-import { TeriockPropertyData } from './data/effect-data/property-data/property-data.mjs';
-import { TeriockPropertySheet } from './sheets/effect-sheets/property-sheet/property-sheet.mjs';
-import { TeriockRankData } from './data/item-data/rank-data/rank-data.mjs';
-import { TeriockRankSheet } from './sheets/item-sheets/rank-sheet/rank-sheet.mjs';
-import { TeriockResourceData } from './data/effect-data/resource-data/resource-data.mjs';
-import { TeriockResourceSheet } from './sheets/effect-sheets/resource-sheet/resource-sheet.mjs';
 import { teriockVisionModes } from './perception/vision-modes.mjs';
+import * as data from './data/_module.mjs';
+import * as documents from './documents/_module.mjs';
+import * as sheets from './sheets/_module.mjs';
 import registerHandlebarsHelpers from './helpers/startup/register-handlebars.mjs';
 import registerHooks from './helpers/startup/register-hooks.mjs';
 import registerTemplates from './helpers/startup/register-templates.mjs';
-import TeriockActor from './documents/actor.mjs';
-import TeriockEffect from './documents/effect.mjs';
-import TeriockHarmRoll from './documents/harm.mjs';
-import TeriockItem from './documents/item.mjs';
-import TeriockRoll from './documents/roll.mjs'
-import TeriockToken from './documents/token.mjs';
 
 Hooks.once('init', function () {
   CONFIG.TERIOCK = TERIOCK;
@@ -75,112 +54,111 @@ Hooks.once('init', function () {
   };
 
   // Register custom documents
-  CONFIG.Dice.rolls.push(TeriockRoll);
-  CONFIG.Dice.rolls.push(TeriockHarmRoll);
-  CONFIG.Actor.documentClass = TeriockActor;
-  CONFIG.Item.documentClass = TeriockItem;
-  CONFIG.ActiveEffect.documentClass = TeriockEffect;
-  CONFIG.Token.documentClass = TeriockToken;
+  CONFIG.Dice.rolls.push(documents.TeriockRoll);
+  CONFIG.Dice.rolls.push(documents.TeriockHarmRoll);
+  CONFIG.Actor.documentClass = documents.TeriockActor;
+  CONFIG.Item.documentClass = documents.TeriockItem;
+  CONFIG.ActiveEffect.documentClass = documents.TeriockEffect;
+  CONFIG.Token.documentClass = documents.TeriockToken;
 
   // Data models
   Object.assign(CONFIG.Actor.dataModels, {
-    character: TeriockCharacterData,
+    character: data.actor.CharacterData,
   });
   Object.assign(CONFIG.Item.dataModels, {
-    equipment: TeriockEquipmentData,
-    power: TeriockPowerData,
-    rank: TeriockRankData,
+    equipment: data.item.EquipmentData,
+    power: data.item.PowerData,
+    rank: data.item.RankData,
   })
-  console.log(TeriockResourceData);
   Object.assign(CONFIG.ActiveEffect.dataModels, {
-    ability: TeriockAbilityData,
-    effect: TeriockEffectData,
-    fluency: TeriockFluencyData,
-    property: TeriockPropertyData,
-    resource: TeriockResourceData,
+    ability: data.effect.AbilityData,
+    effect: data.effect.EffectData,
+    fluency: data.effect.FluencyData,
+    property: data.effect.PropertyData,
+    resource: data.effect.ResourceData,
   })
 
   // Legacy transferral
   CONFIG.ActiveEffect.legacyTransferral = false;
 
   // Unregister V1 sheets
-  DocumentSheetConfig.unregisterSheet(TeriockActor, 'teriock', ActorSheet);
-  DocumentSheetConfig.unregisterSheet(TeriockItem, 'teriock', ItemSheet);
+  DocumentSheetConfig.unregisterSheet(documents.TeriockActor, 'teriock', ActorSheet);
+  DocumentSheetConfig.unregisterSheet(documents.TeriockItem, 'teriock', ItemSheet);
 
   // Register custom sheets
-  const sheets = [
+  const sheetMap = [
     // Actors
     {
-      cls: TeriockCharacterSheet,
+      cls: sheets.actor.CharacterSheet,
       label: 'Character',
       types: ['character'],
-      doc: TeriockActor
+      doc: documents.TeriockActor
     },
     // Items
     {
-      cls: TeriockEquipmentSheet,
+      cls: sheets.item.EquipmentSheet,
       label: 'Equipment',
       types: ['equipment'],
-      doc: TeriockItem
+      doc: documents.TeriockItem
     },
     {
-      cls: TeriockRankSheet,
+      cls: sheets.item.RankSheet,
       label: 'Rank',
       types: ['rank'],
-      doc: TeriockItem
+      doc: documents.TeriockItem
     },
     {
-      cls: TeriockPowerSheet,
+      cls: sheets.item.PowerSheet,
       label: 'Power',
       types: ['power'],
-      doc: TeriockItem
+      doc: documents.TeriockItem
     },
     // Effects
     {
-      cls: TeriockAbilitySheet,
+      cls: sheets.effect.AbilitySheet,
       label: 'Ability',
       types: ['ability'],
-      doc: TeriockEffect
+      doc: documents.TeriockEffect
     },
     {
-      cls: TeriockFluencySheet,
+      cls: sheets.effect.FluencySheet,
       label: 'Fluency',
       types: ['fluency'],
-      doc: TeriockEffect
+      doc: documents.TeriockEffect
     },
     {
-      cls: TeriockResourceSheet,
+      cls: sheets.effect.ResourceSheet,
       label: 'Resource',
       types: ['resource'],
-      doc: TeriockEffect
+      doc: documents.TeriockEffect
     },
     {
-      cls: TeriockPropertySheet,
+      cls: sheets.effect.PropertySheet,
       label: 'Property',
       types: ['property'],
-      doc: TeriockEffect
+      doc: documents.TeriockEffect
     },
     {
-      cls: TeriockEffectSheet,
+      cls: sheets.effect.EffectSheet,
       label: 'Effect',
       types: ['effect'],
-      doc: TeriockEffect,
+      doc: documents.TeriockEffect,
       makeDefault: false
     }
   ];
-  sheets.forEach(({ cls, label, types, doc, makeDefault = true }) =>
+  sheetMap.forEach(({ cls, label, types, doc, makeDefault = true }) =>
     DocumentSheetConfig.registerSheet(doc, 'teriock', cls, {
       makeDefault, label, types
     })
   );
 
   game.teriock = {
-    TeriockActor,
-    TeriockEffect,
-    TeriockHarmRoll,
-    TeriockItem,
-    TeriockRoll,
-    TeriockToken,
+    TeriockActor: documents.TeriockActor,
+    TeriockEffect: documents.TeriockEffect,
+    TeriockHarmRoll: documents.TeriockHarmRoll,
+    TeriockItem: documents.TeriockItem,
+    TeriockRoll: documents.TeriockRoll,
+    TeriockToken: documents.TeriockToken,
   };
 
   // Register custom handlebars templates

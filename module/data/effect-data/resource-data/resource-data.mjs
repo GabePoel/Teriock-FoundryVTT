@@ -1,10 +1,10 @@
 const { fields } = foundry.data;
-import { _messageParts } from "./_message-parts.mjs";
-import { _roll } from "./_rolling.mjs";
+import { _messageParts } from "./methods/_message-parts.mjs";
+import { _roll } from "./methods/_rolling.mjs";
 import { ConsumableDataMixin } from "../../mixins/consumable-mixin.mjs";
-import { TeriockBaseEffectData } from "../base-data/base-data.mjs";
+import TeriockBaseEffectData from "../base-data/base-data.mjs";
 
-export class TeriockResourceData extends ConsumableDataMixin(TeriockBaseEffectData) {
+export default class TeriockResourceData extends ConsumableDataMixin(TeriockBaseEffectData) {
   static defineSchema() {
     const commonData = super.defineSchema();
     return {

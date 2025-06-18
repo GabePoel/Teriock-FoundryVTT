@@ -1,4 +1,3 @@
-const { fields } = foundry.data;
 const { TypeDataModel } = foundry.abstract;
 import {
   _takeDamage,
@@ -6,17 +5,17 @@ import {
   _takeHeal,
   _takeRevitalize,
   _takeWither,
-} from "./consequences/_take-numericals.mjs";
-import { _defineSchema } from "./schema/_schema.mjs";
-import { _getRollData } from "./_roll-data.mjs";
-import { _postUpdate } from "./_post-update.mjs";
-import { _prepareDerivedData } from "./data-deriving/_data-deriving.mjs";
-import { _rollCondition } from "./rolling/_roll-condition.mjs";
-import { _rollFeatSave, _rollResistance, _rollTradecraft } from "./rolling/_roll-generic.mjs";
-import { _takeHack, _takeUnhack } from "./consequences/_take-hacks.mjs";
-import { _migrateData } from "./_migrate-data.mjs";
+} from "./methods/consequences/_take-numericals.mjs";
+import { _defineSchema } from "./methods/schema/_schema.mjs";
+import { _getRollData } from "./methods/_roll-data.mjs";
+import { _postUpdate } from "./methods/_post-update.mjs";
+import { _prepareDerivedData } from "./methods/data-deriving/_data-deriving.mjs";
+import { _rollCondition } from "./methods/rolling/_roll-condition.mjs";
+import { _rollFeatSave, _rollResistance, _rollTradecraft } from "./methods/rolling/_roll-generic.mjs";
+import { _takeHack, _takeUnhack } from "./methods/consequences/_take-hacks.mjs";
+import { _migrateData } from "./methods/_migrate-data.mjs";
 
-export class TeriockBaseActorData extends TypeDataModel {
+export default class TeriockBaseActorData extends TypeDataModel {
 
   /** @override */
   static defineSchema() {

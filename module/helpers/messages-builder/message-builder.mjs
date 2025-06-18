@@ -1,47 +1,5 @@
 import { messageBlock, messageBar, messageBox, messageWrapper, messageHeader } from "./message-parts.mjs";
 
-// export function buildMessage(document, options = {}) {
-//   const secret = options.secret || false;
-//   let content = {
-//     bars: [],
-//     blocks: []
-//   }
-//   if (document.type == 'ability') {
-//     content = buildAbilityMessage(document);
-//   }
-//   if (document.type == 'equipment') {
-//     if (secret) {
-//       content = buildSecretEquipmentMessage(document);
-//     }
-//     else {
-//       content = buildEquipmentMessage(document);
-//     }
-//   }
-//   if (document.type == 'power') {
-//     content = buildPowerMessage(document);
-//   }
-//   if (document.type == 'rank') {
-//     content = buildRankMessage(document);
-//   }
-//   if (document.type == 'fluency') {
-//     content = buildFluencyMessage(document);
-//   }
-//   if (document.type == 'resource') {
-//     content = buildResourceMessage(document);
-//   }
-//   if (document.type == 'property') {
-//     content = buildPropertyMessage(document);
-//   }
-//   let fontClass = 'tfont';
-//   if (document.system.font) {
-//     fontClass = 'tfont-' + document.system.font;
-//   }
-//   if (secret) {
-//     return buildMessageHelper("systems/teriock/assets/uncertainty.svg", document.system.equipmentType, content.bars, content.blocks, 'tfont');
-//   }
-//   return buildMessageHelper(document.img, document.name, content.bars, content.blocks, fontClass);
-// }
-
 export function buildMessage(messageParts) {
   const { image, name, bars, blocks, font } = messageParts;
   let fontClass = 'tfont';

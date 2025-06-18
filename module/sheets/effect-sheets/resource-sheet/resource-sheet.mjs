@@ -1,9 +1,9 @@
 const { api } = foundry.applications;
 import { callbackContextMenu } from "../../../helpers/context-menus/resource-context-menus.mjs";
 import { documentOptions } from "../../../helpers/constants/document-options.mjs";
-import { TeriockBaseEffectSheet } from "../base-sheet/base-sheet.mjs";
+import TeriockBaseEffectSheet from "../base-sheet/base-sheet.mjs";
 
-export class TeriockResourceSheet extends api.HandlebarsApplicationMixin(TeriockBaseEffectSheet) {
+export default class TeriockResourceSheet extends api.HandlebarsApplicationMixin(TeriockBaseEffectSheet) {
   static DEFAULT_OPTIONS = {
     classes: ['resource'],
     window: {

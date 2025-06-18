@@ -1,8 +1,8 @@
 const { fields } = foundry.data;
-import { _messageParts } from "./_message-parts.mjs";
-import { TeriockBaseItemData } from "../base-data/base-data.mjs";
+import { _messageParts } from "./methods/_message-parts.mjs";
+import TeriockBaseItemData from "../base-data/base-data.mjs";
 
-export class TeriockPowerData extends TeriockBaseItemData {
+export default class TeriockPowerData extends TeriockBaseItemData {
   static defineSchema() {
     const commonData = super.defineSchema();
     return {

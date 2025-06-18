@@ -1,3 +1,3 @@
-import { TeriockBaseActorData } from "../base-data/base-data.mjs";
+import TeriockBaseActorData from "../base-data/base-data.mjs";
 
-export class TeriockCharacterData extends TeriockBaseActorData { }
+export default class TeriockCharacterData extends TeriockBaseActorData { }

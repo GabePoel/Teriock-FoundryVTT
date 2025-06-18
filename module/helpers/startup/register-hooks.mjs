@@ -1,4 +1,4 @@
-import { TeriockImageSheet } from "../../sheets/image-sheet.mjs";
+import TeriockImageSheet from "../../sheets/misc-sheets/image-sheet/image-sheet.mjs";
 import { dispatch } from "../../commands/dispatch.mjs";
 import { imageContextMenuOptions } from "../../helpers/context-menus/image-context-menu.mjs";
 const { ux } = foundry.applications;

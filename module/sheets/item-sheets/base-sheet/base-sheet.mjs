@@ -2,7 +2,7 @@ const { sheets, ux } = foundry.applications;
 import { cleanFeet } from "../../../helpers/clean.mjs";
 import { TeriockSheet } from "../../mixins/sheet-mixin.mjs";
 
-export class TeriockBaseItemSheet extends TeriockSheet(sheets.ItemSheet) {
+export default class TeriockBaseItemSheet extends TeriockSheet(sheets.ItemSheet) {
   static DEFAULT_OPTIONS = {
     classes: ['teriock'],
     dragDrop: [{ dragSelector: '.draggable', dropSelector: null }],

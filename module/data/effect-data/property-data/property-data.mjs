@@ -1,9 +1,9 @@
 const { fields } = foundry.data;
-import { _messageParts } from "./_message-parts.mjs";
-import { TeriockBaseEffectData } from "../base-data/base-data.mjs";
+import { _messageParts } from "./methods/_message-parts.mjs";
 import { WikiDataMixin } from "../../mixins/wiki-mixin.mjs";
+import TeriockBaseEffectData from "../base-data/base-data.mjs";
 
-export class TeriockPropertyData extends WikiDataMixin(TeriockBaseEffectData) {
+export default class TeriockPropertyData extends WikiDataMixin(TeriockBaseEffectData) {
   static defineSchema() {
     const commonData = super.defineSchema();
     return {

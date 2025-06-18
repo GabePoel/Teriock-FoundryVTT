@@ -1,7 +1,7 @@
-import { TeriockBaseEffectData } from "../base-data/base-data.mjs";
 import { WikiDataMixin } from "../../mixins/wiki-mixin.mjs";
+import TeriockBaseEffectData from "../base-data/base-data.mjs";
 
-export class TeriockConditionData extends WikiDataMixin(TeriockBaseEffectData) {
+export default class TeriockConditionData extends WikiDataMixin(TeriockBaseEffectData) {
   static defineSchema() {
     const commonData = super.defineSchema();
     return {

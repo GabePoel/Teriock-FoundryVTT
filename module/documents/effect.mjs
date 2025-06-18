@@ -1,10 +1,15 @@
+const { ActiveEffect } = foundry.documents;
 import { MixinChildDocument } from "./mixins/child-mixin.mjs";
+
+// Allows for typing within mixin.
+/** @import ActiveEffect from "@client/documents/active-effect.mjs"; */
 
 /**
  * @extends {ActiveEffect}
  */
 export default class TeriockEffect extends MixinChildDocument(ActiveEffect) {
 
+  /** @inheritdoc */
   prepareDerivedData() {
     super.prepareDerivedData();
     if (this.type === 'ability' && this.system.maneuver === 'passive') {
@@ -26,7 +31,6 @@ export default class TeriockEffect extends MixinChildDocument(ActiveEffect) {
 
   /**
    * Gets the ability that provides this, if there is one.
-   * 
    * @returns { parent: TeriockEffect }
    */
   getParent() {
@@ -39,7 +43,6 @@ export default class TeriockEffect extends MixinChildDocument(ActiveEffect) {
   /**
    * Get whatever Document most directly applies this. If it's an ability, it
    * returns that. Otherwise, gets what Foundry considers to be the parent.
-   * 
    * @returns { source: Document }
    */
   getSource() {

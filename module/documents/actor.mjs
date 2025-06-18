@@ -1,17 +1,21 @@
+const { Actor } = foundry.documents;
 import { MixinParentDocument } from "./mixins/parent-mixin.mjs";
 import TeriockRoll from "./roll.mjs";
+
+// Allows for typing within mixin.
+/** @import Actor from "@client/documents/actor.mjs"; */
 
 /**
  * @extends {Actor}
  */
 export default class TeriockActor extends MixinParentDocument(Actor) {
 
-  /** @override */
+  /** @inheritdoc */
   get validEffects() {
     return Array.from(this.allApplicableEffects())
   }
 
-  /** @override */
+  /** @inheritdoc */
   getRollData() {
     return this.system.getRollData();
   }

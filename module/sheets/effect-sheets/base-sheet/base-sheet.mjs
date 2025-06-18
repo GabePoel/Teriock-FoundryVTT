@@ -2,7 +2,7 @@ const { sheets } = foundry.applications;
 import { documentOptions } from "../../../helpers/constants/document-options.mjs";
 import { TeriockSheet } from "../../mixins/sheet-mixin.mjs";
 
-export class TeriockBaseEffectSheet extends TeriockSheet(sheets.ActiveEffectConfig) {
+export default class TeriockBaseEffectSheet extends TeriockSheet(sheets.ActiveEffectConfig) {
   static DEFAULT_OPTIONS = {
     classes: ['effect'],
     window: {

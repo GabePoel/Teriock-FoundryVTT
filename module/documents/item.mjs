@@ -1,8 +1,12 @@
 const { api } = foundry.applications;
+const { Item } = foundry.documents;
 import { createAbility } from "../helpers/create-effects.mjs";
 import { fetchCategoryMembers } from "../helpers/wiki.mjs";
 import { MixinChildDocument } from "./mixins/child-mixin.mjs";
 import { MixinParentDocument } from "./mixins/parent-mixin.mjs";
+
+// Allows for typing within mixin.
+/** @import Item from "@client/documents/item.mjs"; */
 
 /**
  * @extends {Item}
@@ -14,7 +18,7 @@ export default class TeriockItem extends MixinParentDocument(MixinChildDocument(
     await this.system.roll(options);
   }
 
-  /** @override */
+  /** @inheritdoc */
   get validEffects() {
     return this.transferredEffects;
   }

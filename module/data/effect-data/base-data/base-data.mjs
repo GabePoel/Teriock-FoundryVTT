@@ -2,7 +2,7 @@ const { fields } = foundry.data;
 const { TypeDataModel } = foundry.abstract;
 import { ChildDataMixin } from "../../mixins/child-mixin.mjs";
 
-export class TeriockBaseEffectData extends ChildDataMixin(TypeDataModel) {
+export default class TeriockBaseEffectData extends ChildDataMixin(TypeDataModel) {
 
   /** @override */
   static defineSchema() {

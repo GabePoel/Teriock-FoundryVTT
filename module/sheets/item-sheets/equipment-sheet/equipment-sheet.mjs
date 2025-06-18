@@ -2,9 +2,9 @@ const { HandlebarsApplicationMixin } = foundry.applications.api;
 import { cleanCapitalization } from "../../../helpers/clean.mjs";
 import { documentOptions } from "../../../helpers/constants/document-options.mjs";
 import { powerLevelContextMenu, fontContextMenu } from "../../../helpers/context-menus/equipment-context-menus.mjs";
-import { TeriockBaseItemSheet } from "../base-sheet/base-sheet.mjs";
+import TeriockBaseItemSheet from "../base-sheet/base-sheet.mjs";
 
-export class TeriockEquipmentSheet extends HandlebarsApplicationMixin(TeriockBaseItemSheet) {
+export default class TeriockEquipmentSheet extends HandlebarsApplicationMixin(TeriockBaseItemSheet) {
   static DEFAULT_OPTIONS = {
     classes: ['equipment'],
     actions: {

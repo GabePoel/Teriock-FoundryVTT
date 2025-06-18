@@ -1,12 +1,9 @@
-const { DiceTerm } = foundry.dice.terms;
+// const { DiceTerm } = foundry.dice.terms;
 
 /**
  * A custom Roll class which enriches the provided flavor and uses a custom chat template to display the flavor as enriched HTML.
- * 
- * @class
- * @extends Roll
  */
-export default class TeriockRoll extends Roll {
+export default class TeriockRoll extends foundry.dice.Roll {
   static CHAT_TEMPLATE = 'systems/teriock/templates/chat/roll.hbs';
 
   /** @override */
@@ -30,8 +27,8 @@ export default class TeriockRoll extends Roll {
   }
 
   /** @override */
-  async _prepareChatRenderContext({flavor, isPrivate=false, ...options}={}) {
-    const context = await super._prepareChatRenderContext({flavor, isPrivate, ...options});
+  async _prepareChatRenderContext(options = {}) {
+    const context = await super._prepareChatRenderContext(options);
     context.message = this.message;
     if (this.context) {
       Object.assign(context, this.context);
@@ -40,11 +37,11 @@ export default class TeriockRoll extends Roll {
   }
 
   // TODO:Finish implementing the boost method.
-  boost(amount = 1) {
-    const terms = this.terms;
-  }
+  // boost(amount = 1) {
+  //   const terms = this.terms;
+  // }
 
-  deboost(amount = 1) {
-    const terms = this.terms;
-  }
+  // deboost(amount = 1) {
+  //   const terms = this.terms;
+  // }
 }

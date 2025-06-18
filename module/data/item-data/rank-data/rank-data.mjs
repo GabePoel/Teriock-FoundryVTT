@@ -1,11 +1,11 @@
 const { fields } = foundry.data;
-import { _messageParts } from "./_message-parts.mjs";
-import { _parse } from "./_parsing.mjs";
-import { _rollHitDie, _rollManaDie } from "./_rolling.mjs";
-import { TeriockBaseItemData } from "../base-data/base-data.mjs";
+import { _messageParts } from "./methods/_message-parts.mjs";
+import { _parse } from "./methods/_parsing.mjs";
+import { _rollHitDie, _rollManaDie } from "./methods/_rolling.mjs";
 import { WikiDataMixin } from "../../mixins/wiki-mixin.mjs";
+import TeriockBaseItemData from "../base-data/base-data.mjs";
 
-export class TeriockRankData extends WikiDataMixin(TeriockBaseItemData) {
+export default class TeriockRankData extends WikiDataMixin(TeriockBaseItemData) {
   static defineSchema() {
     const commonData = super.defineSchema();
     return {

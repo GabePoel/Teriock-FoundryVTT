@@ -1,6 +1,6 @@
 const { ux } = foundry.applications;
 import { makeIcon } from "./utils.mjs";
-import { TeriockImageSheet } from "../sheets/image-sheet.mjs";
+import TeriockImageSheet from "../sheets/misc-sheets/image-sheet/image-sheet.mjs";
 
 export default function connectEmbedded(document, element, editable = true) {
   const iconStyle = CONFIG.TERIOCK.iconStyles.contextMenu;
