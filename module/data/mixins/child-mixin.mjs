@@ -1,3 +1,5 @@
+/** @import { MessageParts } from "../../types/message-parts"; */
+
 const { fields } = foundry.data;
 
 export const ChildDataMixin = (Base) => class ChildDataMixin extends Base {
@@ -22,14 +24,25 @@ export const ChildDataMixin = (Base) => class ChildDataMixin extends Base {
     }
   }
 
+  /**
+   * @param {object} [options]
+   * @returns {Promise<void>}
+   */
   async roll(options) {
     await this.parent.roll(options);
   }
 
+  /**
+   * @param {object} [options]
+   * @returns {Promise<void>}
+   */
   async use(options) {
     await this.roll(options);
   }
 
+  /**
+   * @returns {MessageParts}
+   */
   get messageParts() {
     return {
       image: this.parent.img,
@@ -40,6 +53,9 @@ export const ChildDataMixin = (Base) => class ChildDataMixin extends Base {
     }
   }
 
+  /**
+   * @returns {MessageParts}
+   */
   get secretMessageParts() {
     return {
       image: "systems/teriock/assets/uncertainty.svg",

@@ -18,6 +18,9 @@ export const ConsumableDataMixin = (Base) => class ConsumableDataMixin extends B
     }
   }
 
+  /**
+   * @returns {object}
+   */
   getQuantities() {
     let maxQuantity = null;
     let quantity = this.quantity || 0;
@@ -37,6 +40,9 @@ export const ConsumableDataMixin = (Base) => class ConsumableDataMixin extends B
     }
   }
 
+  /**
+   * @returns {Promise<void>}
+   */
   async useOne() {
     if (this.consumable) {
       const quantity = this.quantity;
@@ -46,6 +52,9 @@ export const ConsumableDataMixin = (Base) => class ConsumableDataMixin extends B
     }
   }
 
+  /**
+  * @returns {Promise<void>}
+  */
   async gainOne() {
     if (this.consumable) {
       let quantity = this.quantity;

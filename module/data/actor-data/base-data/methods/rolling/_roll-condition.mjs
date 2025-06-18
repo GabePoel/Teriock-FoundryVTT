@@ -1,14 +1,17 @@
+/** @import TeriockBaseActorData from "../../base-data.mjs" */
 const { DialogV2 } = foundry.applications.api;
 import TeriockRoll from "../../../../../documents/roll.mjs";
-/** @import TeriockActor from "../../../../../documents/actor.mjs"; */
 
 /**
  * Rolls to remove a condition from an actor.
- * @param {TeriockActor} actor
+ * @param {TeriockBaseActorData} system
  * @param {string} condition - The condition to roll for.
  * @param {object} [options] - Options for the roll, such as skip, increaseDie, or decreaseDie.
+ * @returns {Promise<void>}
+ * @private
  */
-export async function _rollCondition(actor, condition, options) {
+export async function _rollCondition(system, condition, options) {
+  const actor = system.parent;
   let skip = options?.skip || false;
   const increaseDie = options?.increaseDie || false;
   const decreaseDie = options?.decreaseDie || false;

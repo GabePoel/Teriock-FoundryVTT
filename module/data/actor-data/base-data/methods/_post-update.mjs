@@ -1,19 +1,23 @@
-/** @import TeriockActor from "../../../../documents/_module.mjs"; */
+/** @import TeriockBaseActorData from "../base-data.mjs"; */
 
 /**
- * @param {TeriockActor} actor 
+ * @param {TeriockBaseActorData} system
+ * @returns {Promise<void>}
+ * @private
  */
-export async function _postUpdate(actor) {
-  await applyEncumbrance(actor);
-  await prepareTokens(actor);
-  await etherealKill(actor);
+export async function _postUpdate(system) {
+  await applyEncumbrance(system);
+  await prepareTokens(system);
+  await etherealKill(system);
 }
 
 /**
- * @param {TeriockActor} actor 
+ * @param {TeriockBaseActorData} system
+ * @returns {Promise<void>}
  */
-async function applyEncumbrance(actor) {
-  const level = actor.system.encumbranceLevel || 0;
+async function applyEncumbrance(system) {
+  const actor = system.parent;
+  const level = system.encumbranceLevel || 0;
   const statuses = ['encumbered', 'slowed', 'immobilized'];
   for (let i = 0; i < statuses.length; i++) {
     const status = statuses[i];
@@ -25,9 +29,11 @@ async function applyEncumbrance(actor) {
 }
 
 /**
- * @param {TeriockActor} actor
+ * @param {TeriockBaseActorData} system
+ * @returns {Promise<void>}
  */
-async function prepareTokens(actor) {
+async function prepareTokens(system) {
+  const actor = system.parent;
   const tokens = actor?.getDependentTokens();
   const tokenSizes = {
     'Tiny': 0.5,
@@ -37,22 +43,24 @@ async function prepareTokens(actor) {
     'Huge': 3,
     'Gargantuan': 4,
     'Colossal': 6,
-  }
+  };
   for (const token of tokens) {
-    const tokenSize = tokenSizes[actor?.system?.namedSize] || 1;
+    const tokenSize = tokenSizes[system?.namedSize] || 1;
     const tokenParameters = {
-      'width': tokenSize,
-      'height': tokenSize,
-    }
-    await token.update(tokenParameters)
+      width: tokenSize,
+      height: tokenSize,
+    };
+    await token.update(tokenParameters);
     await token.updateVisionMode(actor?.statuses?.has('ethereal') ? 'ethereal' : 'basic');
   }
 }
 
 /**
- * @param {TeriockActor} actor
+ * @param {TeriockBaseActorData} system
+ * @returns {Promise<void>}
  */
-async function etherealKill(actor) {
+async function etherealKill(system) {
+  const actor = system.parent;
   const down = actor?.statuses?.has('down');
   const ethereal = actor?.statuses?.has('ethereal');
   const dead = actor?.statuses?.has('dead');

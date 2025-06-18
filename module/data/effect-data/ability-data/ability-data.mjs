@@ -1,3 +1,4 @@
+/** @import { MessageParts } from "../../../types/message-parts" */
 import { _defineSchema } from "./methods/schema/_schema.mjs";
 import { _messageParts } from "./methods/_message-parts.mjs";
 import { _migrateData } from "./methods/_migrate-data.mjs";
@@ -7,6 +8,8 @@ import { WikiDataMixin } from "../../mixins/wiki-mixin.mjs";
 import TeriockBaseEffectData from "../base-data/base-data.mjs";
 
 export default class TeriockAbilityData extends WikiDataMixin(TeriockBaseEffectData) {
+
+  /** @override */
   static defineSchema() {
     const commonData = super.defineSchema();
     return {
@@ -15,6 +18,7 @@ export default class TeriockAbilityData extends WikiDataMixin(TeriockBaseEffectD
     }
   }
 
+  /** @override */
   static migrateData(data) {
     data = _migrateData(data);
     return super.migrateData(data);
@@ -25,7 +29,10 @@ export default class TeriockAbilityData extends WikiDataMixin(TeriockBaseEffectD
     return await _roll(this.parent, options);
   }
 
-  /** @override */
+  /** 
+   * @returns {Partial<MessageParts>}
+   * @override
+   */
   get messageParts() {
     return { ...super.messageParts, ..._messageParts(this.parent) };
   }

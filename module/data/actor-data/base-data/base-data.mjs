@@ -30,7 +30,7 @@ export default class TeriockBaseActorData extends TypeDataModel {
 
   /** @override */
   prepareDerivedData() {
-    _prepareDerivedData(this.parent);
+    _prepareDerivedData(this);
   }
 
   /**
@@ -94,14 +94,14 @@ export default class TeriockBaseActorData extends TypeDataModel {
    * @returns {Promise<void>}
    */
   async rollCondition(condition, options) {
-    await _rollCondition(this.parent, condition, options);
+    await _rollCondition(this, condition, options);
   }
 
   /**
    * @returns {Promise<void>}
    */
   async postUpdate() {
-    await _postUpdate(this.parent);
+    await _postUpdate(this);
   }
 
   /**
@@ -110,7 +110,7 @@ export default class TeriockBaseActorData extends TypeDataModel {
    * @returns {Promise<void>}
    */
   rollFeatSave(attribute, options = {}) {
-    _rollFeatSave(this.parent, attribute, options);
+    _rollFeatSave(this, attribute, options);
   }
 
   /**
@@ -118,22 +118,22 @@ export default class TeriockBaseActorData extends TypeDataModel {
    * @returns {Promise<void>}
    */
   rollResistance(options = {}) {
-    _rollResistance(this.parent, options);
+    _rollResistance(this, options);
   }
 
   /**
-   * @param {string} tradecraft 
+   * @param {string} tradecraft
    * @param {object} options 
    * @returns {Promise<void>}
    */
   rollTradecraft(tradecraft, options = {}) {
-    _rollTradecraft(this.parent, tradecraft, options);
+    _rollTradecraft(this, tradecraft, options);
   }
 
   /**
    * @returns {object}
    */
   getRollData() {
-    return _getRollData(this.parent);
+    return _getRollData(this);
   }
 }

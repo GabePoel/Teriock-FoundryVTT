@@ -1,14 +1,25 @@
-export function _getRollData(actor) {
+/** @import TeriockBaseActorData from "../base-data.mjs"; */
+
+/**
+ * @param {TeriockBaseActorData} system 
+ * @returns {object}
+ * @private
+ */
+export function _getRollData(system) {
   const data = {};
-  basicData(actor, data);
-  attackData(actor, data);
-  classRanksData(actor, data);
-  tradecraftsData(actor, data);
+  basicData(system, data);
+  attackData(system, data);
+  classRanksData(system, data);
+  tradecraftsData(system, data);
   return data;
 }
 
-function basicData(actor, data) {
-  const { system } = actor;
+/**
+ * @param {TeriockBaseActorData} system 
+ * @param {object} data 
+ * @returns {void}
+ */
+function basicData(system, data) {
   const attr = system.attributes;
   Object.assign(data, {
     lvl: system.lvl,
@@ -39,8 +50,12 @@ function basicData(actor, data) {
   });
 }
 
-function attackData(actor, data) {
-  const { system } = actor;
+/**
+ * @param {TeriockBaseActorData} system 
+ * @param {object} data 
+ * @returns {void}
+ */
+function attackData(system, data) {
   Object.assign(data, {
     av0: (
       system.piercing === 'av0' ||
@@ -53,7 +68,13 @@ function attackData(actor, data) {
   });
 }
 
-function classRanksData(actor, data) {
+/**
+ * @param {TeriockBaseActorData} system 
+ * @param {object} data 
+ * @returns {void}
+ */
+function classRanksData(system, data) {
+  const actor = system.parent;
   const rankKeys = [
     "fla", "lif", "nat", "nec", "sto", "arc", "ass", "cor", "ran", "thi",
     "ber", "due", "kni", "pal", "vet", "mag", "sem", "war"
@@ -69,8 +90,13 @@ function classRanksData(actor, data) {
   }
 }
 
-function tradecraftsData(actor, data) {
-  for (const [key, val] of Object.entries(actor.system.tradecrafts)) {
+/**
+ * @param {TeriockBaseActorData} system 
+ * @param {object} data 
+ * @returns {void}
+ */
+function tradecraftsData(system, data) {
+  for (const [key, val] of Object.entries(system.tradecrafts)) {
     data[key] = val.extra;
   }
   return data;

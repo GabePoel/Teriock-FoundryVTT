@@ -1,10 +1,10 @@
-/** @typedef {import("../../base-data.mjs").default} TeriockBaseActorData */
-/** @typedef {InstanceType<import("../../../../../documents/_module.mjs").TeriockActor>} TeriockActor */
+/** @import TeriockBaseActorData from "../../base-data.mjs" */
 
 /**
  * @param {TeriockBaseActorData} system
  * @param {string} part
  * @returns {Promise<void>}
+ * @private
  */
 export async function _takeHack(system, part) {
   const actor = system.parent;
@@ -41,6 +41,7 @@ export async function _takeHack(system, part) {
  * @param {TeriockBaseActorData} system
  * @param {string} part
  * @returns {Promise<void>}
+ * @private
  */
 export async function _takeUnhack(system, part) {
   const actor = system.parent;
