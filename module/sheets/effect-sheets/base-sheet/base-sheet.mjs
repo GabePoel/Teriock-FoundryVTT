@@ -1,7 +1,12 @@
+// Allows for typing within mixin.
+/** @import ActiveEffectConfig from "@client/applications/sheets/active-effect-config.mjs"; */
 const { sheets } = foundry.applications;
 import { documentOptions } from "../../../helpers/constants/document-options.mjs";
 import { TeriockSheet } from "../../mixins/sheet-mixin.mjs";
 
+/**
+ * @extends {ActiveEffectConfig}
+ */
 export default class TeriockBaseEffectSheet extends TeriockSheet(sheets.ActiveEffectConfig) {
   static DEFAULT_OPTIONS = {
     classes: ['effect'],

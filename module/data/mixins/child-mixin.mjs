@@ -1,4 +1,4 @@
-/** @import { MessageParts } from "../../types/message-parts"; */
+/** @import { MessageParts } from "../../types/messages"; */
 
 const { fields } = foundry.data;
 

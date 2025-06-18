@@ -1,9 +1,8 @@
+// Allows for typing within mixin.
+/** @import Actor from "@client/documents/actor.mjs"; */
 const { Actor } = foundry.documents;
 import { MixinParentDocument } from "./mixins/parent-mixin.mjs";
 import TeriockRoll from "./roll.mjs";
-
-// Allows for typing within mixin.
-/** @import Actor from "@client/documents/actor.mjs"; */
 
 /**
  * @extends {Actor}

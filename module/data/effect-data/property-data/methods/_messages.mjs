@@ -1,4 +1,4 @@
-/** @import { MessageParts } from "../../../../types/message-parts" */
+/** @import { MessageParts } from "../../../../types/messages" */
 /** @import TeriockPropertyData from "../property-data.mjs"; */
 
 /**

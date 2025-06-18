@@ -1,4 +1,4 @@
-/** @import { MessageParts } from "../../../types/message-parts" */
+/** @import { MessageParts } from "../../../types/messages" */
 const { fields } = foundry.data;
 import { _messageParts } from "./methods/_messages.mjs";
 import TeriockBaseItemData from "../base-data/base-data.mjs";

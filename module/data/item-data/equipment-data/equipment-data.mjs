@@ -1,4 +1,4 @@
-/** @import { MessageParts } from "../../../types/message-parts" */
+/** @import { MessageParts } from "../../../types/messages" */
 import { ConsumableDataMixin } from "../../mixins/consumable-mixin.mjs";
 import { WikiDataMixin } from "../../mixins/wiki-mixin.mjs";
 import * as handling from "./methods/_handling.mjs";

@@ -1,4 +1,4 @@
-/** @import { MessageParts } from "../../../../types/message-parts" */
+/** @import { MessageParts } from "../../../../types/messages" */
 /** @import TeriockPowerData from "../power-data.mjs"; */
 import { addAbilitiesBlock } from "../../../../helpers/messages-builder/message-parts.mjs";
 

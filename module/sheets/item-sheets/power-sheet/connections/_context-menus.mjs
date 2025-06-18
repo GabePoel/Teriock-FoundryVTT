@@ -1,9 +1,9 @@
-import { makeIcon } from "../../helpers/utils.mjs";
+import { makeIcon } from "../../../../helpers/utils.mjs";
 
-export function propertyContextMenu(property) {
+export function powerContextMenu(power) {
   const iconStyle = CONFIG.TERIOCK.iconStyles.contextMenu;
   const options = [];
-  let types = CONFIG.TERIOCK.abilityOptions.abilityType;
+  let types = CONFIG.TERIOCK.powerOptions;
   for (const type in types) {
     const typeName = types[type].name;
     const typeIcon = types[type].icon;
@@ -12,9 +12,9 @@ export function propertyContextMenu(property) {
       name: typeName,
       icon: icon,
       callback: () => {
-        property.update({
+        power.update({
           'system': {
-            'propertyType': type,
+            'type': type,
           }
         });
       }

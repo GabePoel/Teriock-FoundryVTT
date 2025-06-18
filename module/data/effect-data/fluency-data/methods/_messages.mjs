@@ -1,4 +1,4 @@
-/** @import { MessageParts } from "../../../../types/message-parts" */
+/** @import { MessageParts } from "../../../../types/messages" */
 /** @import TeriockFluencyData from "../fluency-data.mjs"; */
 
 /**

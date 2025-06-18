@@ -1,8 +1,11 @@
 const { api } = foundry.applications;
 import { documentOptions } from "../../../helpers/constants/document-options.mjs";
-import { propertyContextMenu } from "../../../helpers/context-menus/property-context-menus.mjs";
+import { propertyContextMenu } from "./connections/_context-menus.mjs";
 import TeriockBaseEffectSheet from "../base-sheet/base-sheet.mjs";
 
+/**
+ * @extends {TeriockBaseEffectSheet}
+ */
 export default class TeriockPropertySheet extends api.HandlebarsApplicationMixin(TeriockBaseEffectSheet) {
   static DEFAULT_OPTIONS = {
     classes: ['property'],

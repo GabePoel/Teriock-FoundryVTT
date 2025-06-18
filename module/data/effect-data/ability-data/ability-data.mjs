@@ -1,4 +1,4 @@
-/** @import { MessageParts } from "../../../types/message-parts" */
+/** @import { MessageParts } from "../../../types/messages" */
 import { _defineSchema } from "./methods/schema/_schema.mjs";
 import { _messageParts } from "./methods/_messages.mjs";
 import { _migrateData } from "./methods/_migrate-data.mjs";

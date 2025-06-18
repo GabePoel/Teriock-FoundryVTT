@@ -2,7 +2,7 @@ const { utils } = foundry;
 const { ux, api } = foundry.applications;
 import { chatImage } from "../../helpers/utils.mjs";
 import { createAbility, createResource, createProperty, createFluency } from "../../helpers/create-effects.mjs";
-import { imageContextMenuOptions } from "../../helpers/context-menus/image-context-menu.mjs";
+import { imageContextMenuOptions } from "../misc-sheets/image-sheet/connections/_context-menus.mjs";
 import connectEmbedded from "../../helpers/connect-embedded.mjs";
 
 export const TeriockSheet = (Base) =>

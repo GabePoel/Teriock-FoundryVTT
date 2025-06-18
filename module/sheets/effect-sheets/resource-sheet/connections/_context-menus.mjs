@@ -1,4 +1,4 @@
-import { makeIcon } from "../utils.mjs";
+import { makeIcon } from "../../../../helpers/utils.mjs";
 
 export function callbackContextMenu(resource) {
   const iconStyle = CONFIG.TERIOCK.iconStyles.contextMenu;

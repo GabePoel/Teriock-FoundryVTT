@@ -1,7 +1,12 @@
+// Allows for typing within mixin.
+/** @import ItemSheet from "@client/applications/sheets/item-sheet.mjs"; */
 const { sheets, ux } = foundry.applications;
 import { cleanFeet } from "../../../helpers/clean.mjs";
 import { TeriockSheet } from "../../mixins/sheet-mixin.mjs";
 
+/**
+ * @extends {ItemSheet}
+ */
 export default class TeriockBaseItemSheet extends TeriockSheet(sheets.ItemSheet) {
   static DEFAULT_OPTIONS = {
     classes: ['teriock'],

@@ -1,10 +1,15 @@
+// Allows for typing within mixin.
+/** @import ActorSheet from "@client/applications/sheets/actor-sheet.mjs"; */
 const { sheets, api, ux } = foundry.applications;
 import { _filterAbilities, _filterEquipment } from "./methods/_filters.mjs";
 import { _sortAbilities, _sortEquipment } from "./methods/_sort.mjs";
 import { documentOptions } from "../../../helpers/constants/document-options.mjs";
-import { primaryBlockerContextMenu, primaryAttackContextMenu, piercingContextMenu } from "../../../helpers/context-menus/character-context-menus.mjs";
+import { primaryBlockerContextMenu, primaryAttackContextMenu, piercingContextMenu } from "./connections/character-context-menus.mjs";
 import { TeriockSheet } from "../../mixins/sheet-mixin.mjs";
 
+/**
+ * @extends {ActorSheet}
+ */
 export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorSheet) {
   static DEFAULT_OPTIONS = {
     classes: ['character'],

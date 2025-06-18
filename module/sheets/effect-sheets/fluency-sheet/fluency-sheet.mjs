@@ -1,8 +1,11 @@
 const { api } = foundry.applications;
 import { documentOptions } from "../../../helpers/constants/document-options.mjs";
-import { fieldContextMenu, tradecraftContextMenu } from '../../../helpers/context-menus/fluency-context-menus.mjs';
+import { fieldContextMenu, tradecraftContextMenu } from "./connections/_context-menus.mjs";
 import TeriockBaseEffectSheet from "../base-sheet/base-sheet.mjs";
 
+/**
+ * @extends {TeriockBaseEffectSheet}
+ */
 export default class TeriockFluencySheet extends api.HandlebarsApplicationMixin(TeriockBaseEffectSheet) {
   static DEFAULT_OPTIONS = {
     classes: ['fluency'],

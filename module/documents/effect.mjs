@@ -1,8 +1,7 @@
-const { ActiveEffect } = foundry.documents;
-import { MixinChildDocument } from "./mixins/child-mixin.mjs";
-
 // Allows for typing within mixin.
 /** @import ActiveEffect from "@client/documents/active-effect.mjs"; */
+const { ActiveEffect } = foundry.documents;
+import { MixinChildDocument } from "./mixins/child-mixin.mjs";
 
 /**
  * @extends {ActiveEffect}

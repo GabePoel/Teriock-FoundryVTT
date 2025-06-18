@@ -1,4 +1,4 @@
-import { makeIcon } from "../utils.mjs";
+import { makeIcon } from "../../../../helpers/utils.mjs";
 
 export function tradecraftContextMenu(fluency) {
   const iconStyle = CONFIG.TERIOCK.iconStyles.contextMenu;

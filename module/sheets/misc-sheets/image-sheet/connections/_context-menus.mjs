@@ -1,5 +1,5 @@
-import { chatImage } from "../../helpers/utils.mjs";
-import TeriockImageSheet from "../../sheets/misc-sheets/image-sheet/image-sheet.mjs";
+import { chatImage } from "../../../../helpers/utils.mjs";
+import TeriockImageSheet from "../image-sheet.mjs";
 
 export const imageContextMenuOptions = [
   {
