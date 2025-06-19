@@ -9,6 +9,24 @@ import path from "path";
 
 console.log("Reforging Symlinks");
 
+// Check if foundry-config.yaml exists, if not copy from example
+if (!fs.existsSync("foundry-config.yaml")) {
+  if (fs.existsSync("example-foundry-config.yaml")) {
+    try {
+      await fs.promises.copyFile("example-foundry-config.yaml", "foundry-config.yaml");
+      console.log("Copied example-foundry-config.yaml to foundry-config.yaml");
+    } catch (err) {
+      console.error(`Error copying config file: ${err}`);
+      console.log("Please manually copy example-foundry-config.yaml to foundry-config.yaml");
+      process.exit(1);
+    }
+  } else {
+    console.log("Neither foundry-config.yaml nor example-foundry-config.yaml exist.");
+    console.log("Please create a foundry-config.yaml file with your Foundry installation path.");
+    process.exit(1);
+  }
+}
+
 if (fs.existsSync("foundry-config.yaml")) {
   let fileRoot = "";
   try {

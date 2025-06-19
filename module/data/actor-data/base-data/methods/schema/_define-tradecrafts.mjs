@@ -7,7 +7,7 @@ function tradecraftField() {
     proficient: new fields.BooleanField({ initial: false }),
     extra: new fields.NumberField({ initial: 0 }),
     bonus: new fields.NumberField({ initial: 0 }),
-  })
+  });
 }
 
 const tradecrafts = mergeLevel(tradecraftOptions, "*", "tradecrafts");

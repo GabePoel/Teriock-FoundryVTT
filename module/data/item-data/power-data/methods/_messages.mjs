@@ -12,35 +12,33 @@ export function _messageParts(powerData) {
   const src = powerData;
   const bars = [
     {
-      icon: 'fa-' + ref[src.type].icon,
-      wrappers: [
-        ref[src.type].name,
-      ]
-    }
-  ]
-  if (powerData.type == 'species') {
+      icon: "fa-" + ref[src.type].icon,
+      wrappers: [ref[src.type].name],
+    },
+  ];
+  if (powerData.type == "species") {
     bars.push({
-      icon: 'fa-user',
+      icon: "fa-user",
       wrappers: [
-        powerData.size ? 'Size ' + powerData.size : '',
-        powerData.adult ? 'Adult at ' + powerData.adult : '',
-        powerData.lifespan ? powerData.lifespan + ' Year Lifespan' : 'Infinite Lifespan',
-      ]
-    })
+        powerData.size ? "Size " + powerData.size : "",
+        powerData.adult ? "Adult at " + powerData.adult : "",
+        powerData.lifespan ? powerData.lifespan + " Year Lifespan" : "Infinite Lifespan",
+      ],
+    });
   }
   const blocks = [
     {
-      title: 'Description',
+      title: "Description",
       text: src.description,
     },
     {
-      title: 'Other Flaws',
+      title: "Other Flaws",
       text: src.flaws,
-    }
-  ]
+    },
+  ];
   addAbilitiesBlock(powerData.parent.transferredEffects, blocks);
   return {
     bars: bars,
     blocks: blocks,
-  }
+  };
 }

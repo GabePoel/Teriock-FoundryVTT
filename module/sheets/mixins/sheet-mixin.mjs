@@ -8,7 +8,7 @@ import connectEmbedded from "../../helpers/connect-embedded.mjs";
 export const TeriockSheet = (Base) =>
   class TeriockSheet extends Base {
     static DEFAULT_OPTIONS = {
-      classes: ['teriock', 'ability'],
+      classes: ["teriock", "ability"],
       actions: {
         debug: this._debug,
         editImage: this._editImage,
@@ -55,12 +55,12 @@ export const TeriockSheet = (Base) =>
       super._onRender(context, options);
       this.editable = this.isEditable && !this._locked;
       connectEmbedded(this.document, this.element, this.editable);
-      new ux.ContextMenu(this.element, '.timage', imageContextMenuOptions, {
-        eventName: 'contextmenu',
+      new ux.ContextMenu(this.element, ".timage", imageContextMenuOptions, {
+        eventName: "contextmenu",
         jQuery: false,
         fixed: true,
       });
-      this._connect('.chat-button', 'contextmenu', (e) => {
+      this._connect(".chat-button", "contextmenu", (e) => {
         TeriockSheet._debug.call(this, e, e.currentTarget);
       });
       this._activateMenu();
@@ -82,7 +82,7 @@ export const TeriockSheet = (Base) =>
         img: this.document.img,
         flags: this.document.flags,
         uuid: this.document.uuid,
-      }
+      };
       return context;
     }
 
@@ -101,20 +101,20 @@ export const TeriockSheet = (Base) =>
 
     /** Menu Toggle */
     _activateMenu() {
-      const menu = this.element.querySelector('.ab-menu');
-      const toggle = this.element.querySelector('.ab-menu-toggle');
+      const menu = this.element.querySelector(".ab-menu");
+      const toggle = this.element.querySelector(".ab-menu-toggle");
 
       if (menu && this._menuOpen) {
-        menu.classList.add('no-transition', 'ab-menu-open');
+        menu.classList.add("no-transition", "ab-menu-open");
         menu.offsetHeight;
-        menu.classList.remove('no-transition');
-        toggle?.classList.add('ab-menu-toggle-open');
+        menu.classList.remove("no-transition");
+        toggle?.classList.add("ab-menu-toggle-open");
       }
 
-      this._connect('.ab-menu-toggle', 'click', () => {
+      this._connect(".ab-menu-toggle", "click", () => {
         this._menuOpen = !this._menuOpen;
-        menu?.classList.toggle('ab-menu-open', this._menuOpen);
-        toggle?.classList.toggle('ab-menu-toggle-open', this._menuOpen);
+        menu?.classList.toggle("ab-menu-open", this._menuOpen);
+        toggle?.classList.toggle("ab-menu-toggle-open", this._menuOpen);
       });
     }
 
@@ -124,7 +124,7 @@ export const TeriockSheet = (Base) =>
         el.addEventListener(eventType, (e) => {
           e.preventDefault();
           handler(e);
-        })
+        }),
       );
     }
 
@@ -133,20 +133,18 @@ export const TeriockSheet = (Base) =>
         const newValue = transformer(e.currentTarget.value);
         this.item.update({ [attribute]: newValue });
       };
-      ['focusout', 'change'].forEach((evt) =>
-        element.addEventListener(evt, update)
-      );
-      element.addEventListener('keyup', (e) => {
-        if (e.key === 'Enter') update(e);
+      ["focusout", "change"].forEach((evt) => element.addEventListener(evt, update));
+      element.addEventListener("keyup", (e) => {
+        if (e.key === "Enter") update(e);
       });
     }
 
     _connectButtonMap(map) {
       const html = $(this.element);
       for (const [selector, path] of Object.entries(map)) {
-        html.on('click', selector, (e) => {
+        html.on("click", selector, (e) => {
           e.preventDefault();
-          this.document.update({ [path]: 'Insert effect here.' });
+          this.document.update({ [path]: "Insert effect here." });
         });
       }
     }
@@ -154,7 +152,7 @@ export const TeriockSheet = (Base) =>
     _connectCheckboxMap(map) {
       const html = $(this.element);
       for (const [selector, method] of Object.entries(map)) {
-        html.on('click', selector, (e) => {
+        html.on("click", selector, (e) => {
           e.preventDefault();
           this.document[method](e.currentTarget.checked);
         });
@@ -170,17 +168,16 @@ export const TeriockSheet = (Base) =>
       return menu;
     }
 
-
     _embeddedFromCard(target) {
-      const card = target.closest('.tcard');
+      const card = target.closest(".tcard");
       const { id, type, parentId } = card?.dataset ?? {};
-      if (type === 'item') {
+      if (type === "item") {
         return this.document.items.get(id);
       }
-      if (type === 'effect') {
-        if (this.document.documentName === 'Actor' && this.document._id !== parentId) {
+      if (type === "effect") {
+        if (this.document.documentName === "Actor" && this.document._id !== parentId) {
           return this.document.items.get(parentId)?.effects.get(id);
-        } else if (this.document.documentName === 'ActiveEffect') {
+        } else if (this.document.documentName === "ActiveEffect") {
           return this.document.parent?.effects.get(id);
         } else {
           return this.document.effects.get(id);
@@ -193,7 +190,7 @@ export const TeriockSheet = (Base) =>
       const embedded = this._embeddedFromCard(event.currentTarget);
       const dragData = embedded?.toDragData();
       if (dragData) {
-        event.dataTransfer.setData('text/plain', JSON.stringify(dragData));
+        event.dataTransfer.setData("text/plain", JSON.stringify(dragData));
       }
     }
 
@@ -204,42 +201,42 @@ export const TeriockSheet = (Base) =>
     async _onDrop(event) {
       const data = await ux.TextEditor.getDragEventData(event);
       switch (data.type) {
-        case 'ActiveEffect':
+        case "ActiveEffect":
           return this._onDropActiveEffect(event, data);
-        case 'Item':
+        case "Item":
           return this._onDropItem(event, data);
       }
     }
 
     async _onDropActiveEffect(event, data) {
-      const effect = await getDocumentClass('ActiveEffect').fromDropData(data);
+      const effect = await getDocumentClass("ActiveEffect").fromDropData(data);
       if (!this.document.isOwner || !effect || effect.parent === this.document || effect.target === this.document) {
         return false;
       }
-      if (!['Actor', 'Item'].includes(this.document.documentName)) {
+      if (!["Actor", "Item"].includes(this.document.documentName)) {
         return false;
       }
-      return this.document.createEmbeddedDocuments('ActiveEffect', [effect]);
+      return this.document.createEmbeddedDocuments("ActiveEffect", [effect]);
     }
 
     async _onDropItem(event, data) {
-      const item = await getDocumentClass('Item').fromDropData(data);
-      if (!this.document.isOwner || !item || item.parent === this.document || this.document.documentName !== 'Actor') {
+      const item = await getDocumentClass("Item").fromDropData(data);
+      if (!this.document.isOwner || !item || item.parent === this.document || this.document.documentName !== "Actor") {
         return false;
       }
 
       const source = await utils.fromUuid(data.uuid);
-      if (item.parent?.documentName === 'Actor' && item.type === 'equipment') {
+      if (item.parent?.documentName === "Actor" && item.type === "equipment") {
         await source.delete();
       }
-      return this.document.createEmbeddedDocuments('Item', [item]);
+      return this.document.createEmbeddedDocuments("Item", [item]);
     }
 
     // Static Actions
     // ------------------------------------------------------------------------
 
     static async _debug(_, __) {
-      console.log('Debug', this.document, this);
+      console.log("Debug", this.document, this);
     }
 
     static async _wikiPullThis(_, __) {
@@ -281,7 +278,7 @@ export const TeriockSheet = (Base) =>
       const defaultImg = this.document.constructor.getDefaultArtwork?.(this.document.toObject())?.img;
       const picker = new foundry.applications.apps.FilePicker({
         current,
-        type: 'image',
+        type: "image",
         redirectToRoot: defaultImg ? [defaultImg] : [],
         callback: (path) => this.document.update({ [attr]: path }),
         top: this.position.top + 40,
@@ -343,28 +340,32 @@ export const TeriockSheet = (Base) =>
         newValue = 0;
       }
       this.document.update({
-        [name]: newValue
+        [name]: newValue,
       });
     }
 
     static async _createProperty(event, __) {
       const propertyKeys = Object.keys(CONFIG.TERIOCK.equipmentOptions.properties);
-      const propertyValues = propertyKeys.map(
-        (property) => `<option value="${property}">${CONFIG.TERIOCK.equipmentOptions.properties[property]}</option>`
-      ).join('');
+      const propertyValues = propertyKeys
+        .map(
+          (property) => `<option value="${property}">${CONFIG.TERIOCK.equipmentOptions.properties[property]}</option>`,
+        )
+        .join("");
       const materialPropertyKeys = Object.keys(CONFIG.TERIOCK.equipmentOptions.materialProperties);
-      const materialPropertyValues = materialPropertyKeys.map(
-        (property) => `<option value="${property}">${CONFIG.TERIOCK.equipmentOptions.materialProperties[property]}</option>`
-      ).join('');
+      const materialPropertyValues = materialPropertyKeys
+        .map(
+          (property) =>
+            `<option value="${property}">${CONFIG.TERIOCK.equipmentOptions.materialProperties[property]}</option>`,
+        )
+        .join("");
       const magicalPropertyKeys = Object.keys(CONFIG.TERIOCK.equipmentOptions.magicalProperties);
-      const magicalPropertyValues = magicalPropertyKeys.map(
-        (property) => `<option value="${property}">${CONFIG.TERIOCK.equipmentOptions.magicalProperties[property]}</option>`
-      ).join('');
-      const propertyOptions = [
-        ...propertyValues,
-        ...materialPropertyValues,
-        ...magicalPropertyValues
-      ].join('');
+      const magicalPropertyValues = magicalPropertyKeys
+        .map(
+          (property) =>
+            `<option value="${property}">${CONFIG.TERIOCK.equipmentOptions.magicalProperties[property]}</option>`,
+        )
+        .join("");
+      const propertyOptions = [...propertyValues, ...materialPropertyValues, ...magicalPropertyValues].join("");
       await new api.DialogV2({
         window: {
           title: "Create Property",
@@ -375,23 +376,25 @@ export const TeriockSheet = (Base) =>
             ${propertyOptions}
           </select>
         `,
-        buttons: [{
-          action: 'chosen',
-          label: 'Add Chosen Property',
-          default: true,
-          callback: async (event, button, dialog) => {
-            const value = button.form.elements.property.value;
-            await createProperty(this.item, value);
-          }
-        },
-        {
-          action: 'other',
-          label: 'Create New Property',
-          default: false,
-          callback: async (event, button, dialog) => {
-            await createProperty(this.item, null);
-          }
-        }]
+        buttons: [
+          {
+            action: "chosen",
+            label: "Add Chosen Property",
+            default: true,
+            callback: async (event, button, dialog) => {
+              const value = button.form.elements.property.value;
+              await createProperty(this.item, value);
+            },
+          },
+          {
+            action: "other",
+            label: "Create New Property",
+            default: false,
+            callback: async (event, button, dialog) => {
+              await createProperty(this.item, null);
+            },
+          },
+        ],
       }).render(true);
     }
   };

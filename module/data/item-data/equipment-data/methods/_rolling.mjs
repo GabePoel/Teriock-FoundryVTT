@@ -18,31 +18,38 @@ export async function _roll(equipmentData, options) {
 async function use(equipmentData, options) {
   let message = await equipmentData.parent.buildMessage();
   if (equipmentData.damage) {
-    let rollFormula = equipmentData.damage || '';
+    let rollFormula = equipmentData.damage || "";
     rollFormula = rollFormula.trim();
 
     // let damageTypes = equipmentData.damageTypes || [];
     let damageTypes = [];
-    if (equipmentData.powerLevel === 'magic') {
-      damageTypes.push('Magic');
+    if (equipmentData.powerLevel === "magic") {
+      damageTypes.push("Magic");
     }
-    const effectDamageTypes = equipmentData.parent.effects.filter((effect) => {
-      return effect.type === 'property' && !effect.disabled && effect.system.damageType;
-    }).map((effect) => effect.system.damageType);
-    if (equipmentData.parent.effects.some(effect => effect.type === 'property' && !effect.disabled && (effect.name === 'Flaming' || effect.name === 'Burning'))) {
-      effectDamageTypes.push('Fire');
+    const effectDamageTypes = equipmentData.parent.effects
+      .filter((effect) => {
+        return effect.type === "property" && !effect.disabled && effect.system.damageType;
+      })
+      .map((effect) => effect.system.damageType);
+    if (
+      equipmentData.parent.effects.some(
+        (effect) =>
+          effect.type === "property" && !effect.disabled && (effect.name === "Flaming" || effect.name === "Burning"),
+      )
+    ) {
+      effectDamageTypes.push("Fire");
     }
     damageTypes = [...new Set([...damageTypes, ...effectDamageTypes])];
-    if (damageTypes.length > 0 && rollFormula.length > 0 && rollFormula !== '0') {
+    if (damageTypes.length > 0 && rollFormula.length > 0 && rollFormula !== "0") {
       damageTypes.sort((a, b) => a.localeCompare(b));
-      rollFormula += '[' + damageTypes.join(', ') + ']';
+      rollFormula += "[" + damageTypes.join(", ") + "]";
     }
 
     if (options?.twoHanded && equipmentData.twoHandedDamage) {
       rollFormula = equipmentData.twoHandedDamage || rollFormula;
     }
     if (options?.bonusDamage) {
-      rollFormula = rollFormula + ' + ' + options.bonusDamage;
+      rollFormula = rollFormula + " + " + options.bonusDamage;
     }
     if (equipmentData.parent.getActor()?.system?.damage?.standard) {
       rollFormula += equipmentData.parent.getActor().system.damage.standard;

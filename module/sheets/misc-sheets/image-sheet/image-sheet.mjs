@@ -3,24 +3,24 @@ import { imageContextMenuOptions } from "./connections/_context-menus.mjs";
 
 export default class TeriockImageSheet extends api.HandlebarsApplicationMixin(api.ApplicationV2) {
   static DEFAULT_OPTIONS = {
-    classes: ['teriock', 'image-preview'],
+    classes: ["teriock", "image-preview"],
     window: {
-      icon: `fa-solid fa-image`,
-      title: 'Image Preview',
+      icon: "fa-solid fa-image",
+      title: "Image Preview",
       resizable: true,
     },
     position: {
       width: 250,
       height: 250,
-    }
-  }
+    },
+  };
 
   static PARTS = {
     image: {
-      template: 'systems/teriock/templates/common/image.hbs',
-      scrollable: [''],
-    }
-  }
+      template: "systems/teriock/templates/common/image.hbs",
+      scrollable: [""],
+    },
+  };
 
   constructor(img, ...args) {
     super(...args);
@@ -30,19 +30,17 @@ export default class TeriockImageSheet extends api.HandlebarsApplicationMixin(ap
   /** @override */
   async _prepareContext() {
     return {
-      img: this.img
-    }
+      img: this.img,
+    };
   }
 
   /** @override */
   _onRender(context, options) {
     super._onRender(context, options);
-    new ux.ContextMenu(this.element, '.timage', imageContextMenuOptions,
-      {
-        eventName: 'contextmenu',
-        jQuery: false,
-        fixed: true,
-      }
-    );
+    new ux.ContextMenu(this.element, ".timage", imageContextMenuOptions, {
+      eventName: "contextmenu",
+      jQuery: false,
+      fixed: true,
+    });
   }
 }

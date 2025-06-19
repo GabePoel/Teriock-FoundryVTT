@@ -4,7 +4,17 @@ import { _roll } from "./methods/_rolling.mjs";
 import { ConsumableDataMixin } from "../../mixins/consumable-mixin.mjs";
 import TeriockBaseEffectData from "../base-data/base-data.mjs";
 
+/**
+ * @extends {TeriockBaseEffectData}
+ */
 export default class TeriockResourceData extends ConsumableDataMixin(TeriockBaseEffectData) {
+  /** @inheritdoc */
+  static get metadata() {
+    return foundry.utils.mergeObject(super.metadata, {
+      type: "resource",
+    });
+  }
+
   static defineSchema() {
     const commonData = super.defineSchema();
     return {
@@ -38,7 +48,7 @@ export default class TeriockResourceData extends ConsumableDataMixin(TeriockBase
         initial: "none",
         label: "Function Hook",
       }),
-    }
+    };
   }
 
   /** @override */

@@ -1,17 +1,19 @@
+/** @import { CommandOptions, ChatOptions } from "./_types" */
+
 /**
  * Parse roll-related flags from the argument list.
  * Strips known option flags and returns the rest as `rawArgs`.
  *
  * @param {string[]} args - Raw chat args
- * @returns {{ rawArgs: string[], advantage: boolean, disadvantage: boolean, twoHanded: boolean }}
+ * @returns {ChatOptions} - Parsed options
  */
 function parseRollOptions(args) {
-  const optionFlags = ['advantage', 'disadvantage', 'twoHanded'];
+  const optionFlags = ["advantage", "disadvantage", "twoHanded"];
   const options = {
     advantage: false,
     disadvantage: false,
     twoHanded: false,
-    rawArgs: []
+    rawArgs: [],
   };
 
   for (const arg of args) {
@@ -28,25 +30,24 @@ function parseRollOptions(args) {
 export default class TeriockCommand {
   /**
    * Create a new TeriockCommand instance.
+   *
    * @param {string} id - Unique identifier for the command (e.g., "damage").
    * @param {string} docs - Help string for the command.
    * @param {Function} callback - Async function to run the command logic.
-   * @param {Object} [options]
-   * @param {string[]} [options.aliases] - Alternative names for the command.
-   * @param {string} [options.category] - Command category for grouping (e.g., "combat").
-   * @param {boolean} [options.requiresTarget=false] - Whether tokens must be targeted.
+   * @param {CommandOptions} options - Additional options for the command.
    */
   constructor(id, docs, callback, options = {}) {
     this.id = id;
     this.docs = docs;
     this.callback = callback;
     this.aliases = options.aliases || [];
-    this.category = options.category || 'general';
+    this.category = options.category || "general";
     this.requiresTarget = options.requiresTarget ?? false;
   }
 
   /**
    * Execute the command, handling roll options and common checks.
+   *
    * @param {Object} context
    * @param {string[]} context.args - The arguments from the chat message.
    * @param {Object} context.chatData - The original chat message data.
@@ -65,7 +66,7 @@ export default class TeriockCommand {
         args: rollOptions.rawArgs,
         options: rollOptions,
         chatData,
-        actors
+        actors,
       });
     } catch (err) {
       ui.notifications.error(`Error executing "/${this.id}" command.`);

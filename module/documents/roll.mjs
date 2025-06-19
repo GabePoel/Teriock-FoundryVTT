@@ -4,17 +4,17 @@
  * A custom Roll class which enriches the provided flavor and uses a custom chat template to display the flavor as enriched HTML.
  */
 export default class TeriockRoll extends foundry.dice.Roll {
-  static CHAT_TEMPLATE = 'systems/teriock/templates/chat/roll.hbs';
+  static CHAT_TEMPLATE = "systems/teriock/templates/chat/roll.hbs";
 
   /** @override */
   constructor(formula, data, options = {}) {
     super(formula, data, options);
     const defaultOptions = {
       enrich: false,
-    }
+    };
     options = foundry.utils.mergeObject(defaultOptions, options);
     if (options.enrich && options.message) {
-      foundry.applications.ux.TextEditor.enrichHTML(options.message).then(html => {
+      foundry.applications.ux.TextEditor.enrichHTML(options.message).then((html) => {
         options.message = html;
       });
     }

@@ -7,7 +7,7 @@ import TeriockBaseActorSheet from "../base-sheet/base-sheet.mjs";
  */
 export default class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(TeriockBaseActorSheet) {
   static DEFAULT_OPTIONS = {
-    classes: ['character'],
+    classes: ["character"],
     form: {
       submitOnChange: true,
     },
@@ -19,8 +19,8 @@ export default class TeriockCharacterSheet extends api.HandlebarsApplicationMixi
 
   static PARTS = {
     all: {
-      template: 'systems/teriock/templates/sheets/character-template/character-template.hbs',
-      scrollable: ['.character-sidebar', '.character-tab-content'],
+      template: "systems/teriock/templates/sheets/character-template/character-template.hbs",
+      scrollable: [".character-sidebar", ".character-tab-content"],
     },
   };
 }

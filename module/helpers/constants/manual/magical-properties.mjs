@@ -1,1 +1,1 @@
-export const remove = ['granting', 'magic']
+export const remove = ["granting", "magic"];

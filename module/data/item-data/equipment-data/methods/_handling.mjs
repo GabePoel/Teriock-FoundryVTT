@@ -2,29 +2,29 @@
 // const { api } = foundry.applications;
 
 /**
- * @param {TeriockEquipmentData} equipmentData 
+ * @param {TeriockEquipmentData} equipmentData
  * @returns {Promise<void>}
  * @private
  */
 export async function _shatter(equipmentData) {
-  await equipmentData.parent.update({ 'system.shattered': true });
+  await equipmentData.parent.update({ "system.shattered": true });
   await equipmentData.parent.disable();
 }
 
 /**
- * @param {TeriockEquipmentData} equipmentData 
+ * @param {TeriockEquipmentData} equipmentData
  * @returns {Promise<void>}
  * @private
  */
 export async function _repair(equipmentData) {
-  await equipmentData.parent.update({ 'system.shattered': false });
+  await equipmentData.parent.update({ "system.shattered": false });
   if (equipmentData.equipped) {
     await equipmentData.parent.enable();
   }
 }
 
 /**
- * @param {TeriockEquipmentData} equipmentData 
+ * @param {TeriockEquipmentData} equipmentData
  * @returns {Promise<void>}
  * @private
  */
@@ -37,7 +37,7 @@ export async function _setShattered(equipmentData, bool) {
 }
 
 /**
- * @param {TeriockEquipmentData} equipmentData 
+ * @param {TeriockEquipmentData} equipmentData
  * @returns {Promise<void>}
  * @private
  */
@@ -46,29 +46,29 @@ export async function _toggleShattered(equipmentData) {
 }
 
 /**
- * @param {TeriockEquipmentData} equipmentData 
+ * @param {TeriockEquipmentData} equipmentData
  * @returns {Promise<void>}
  * @private
  */
 export async function _dampen(equipmentData) {
-  await equipmentData.parent.update({ 'system.dampened': true });
+  await equipmentData.parent.update({ "system.dampened": true });
   await equipmentData.parent.disable();
 }
 
 /**
- * @param {TeriockEquipmentData} equipmentData 
+ * @param {TeriockEquipmentData} equipmentData
  * @returns {Promise<void>}
  * @private
  */
 export async function _undampen(equipmentData) {
-  await equipmentData.parent.update({ 'system.dampened': false });
+  await equipmentData.parent.update({ "system.dampened": false });
   if (equipmentData.equipped) {
     await equipmentData.parent.enable();
   }
 }
 
 /**
- * @param {TeriockEquipmentData} equipmentData 
+ * @param {TeriockEquipmentData} equipmentData
  * @returns {Promise<void>}
  * @private
  */
@@ -81,7 +81,7 @@ export async function _setDampened(equipmentData, bool) {
 }
 
 /**
- * @param {TeriockEquipmentData} equipmentData 
+ * @param {TeriockEquipmentData} equipmentData
  * @returns {Promise<void>}
  * @private
  */
@@ -90,23 +90,23 @@ export async function _toggleDampened(equipmentData) {
 }
 
 /**
- * @param {TeriockEquipmentData} equipmentData 
+ * @param {TeriockEquipmentData} equipmentData
  * @returns {Promise<void>}
  * @private
  */
 export async function _unequip(equipmentData) {
-  await equipmentData.parent.update({ 'system.equipped': false });
+  await equipmentData.parent.update({ "system.equipped": false });
   await equipmentData.parent.disable();
 }
 
 /**
- * @param {TeriockEquipmentData} equipmentData 
+ * @param {TeriockEquipmentData} equipmentData
  * @returns {Promise<void>}
  * @private
  */
 export async function _equip(equipmentData) {
-  if ((!equipmentData.parent.consumable) || (equipmentData.consumable && equipmentData.quantity >= 1)) {
-    await equipmentData.parent.update({ 'system.equipped': true });
+  if (!equipmentData.parent.consumable || (equipmentData.consumable && equipmentData.quantity >= 1)) {
+    await equipmentData.parent.update({ "system.equipped": true });
     if (!equipmentData.shattered) {
       await equipmentData.parent.enable();
     }
@@ -126,15 +126,15 @@ export async function _equip(equipmentData) {
       // }
       if (doEquip && ref) {
         await equipmentData.parent.update({
-          'system.tier': ref.system.tier,
-        })
+          "system.tier": ref.system.tier,
+        });
       }
     }
   }
 }
 
 /**
- * @param {TeriockEquipmentData} equipmentData 
+ * @param {TeriockEquipmentData} equipmentData
  * @returns {Promise<void>}
  * @private
  */
@@ -147,7 +147,7 @@ export async function _setEquipped(equipmentData, bool) {
 }
 
 /**
- * @param {TeriockEquipmentData} equipmentData 
+ * @param {TeriockEquipmentData} equipmentData
  * @returns {Promise<void>}
  * @private
  */

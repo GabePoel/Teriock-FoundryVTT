@@ -9,7 +9,16 @@ import * as rolling from "./methods/_rolling.mjs";
 import * as schema from "./methods/_schema.mjs";
 import TeriockBaseItemData from "../base-data/base-data.mjs";
 
+/**
+ * @extends {TeriockBaseItemData}
+ */
 export default class TeriockEquipmentData extends WikiDataMixin(ConsumableDataMixin(TeriockBaseItemData)) {
+  /** @inheritdoc */
+  static get metadata() {
+    return foundry.utils.mergeObject(super.metadata, {
+      type: "equipment",
+    });
+  }
 
   /** @override */
   static defineSchema() {
@@ -17,7 +26,7 @@ export default class TeriockEquipmentData extends WikiDataMixin(ConsumableDataMi
     return {
       ...commonData,
       ...schema._defineSchema(),
-    }
+    };
   }
 
   /** @override */
@@ -43,25 +52,25 @@ export default class TeriockEquipmentData extends WikiDataMixin(ConsumableDataMi
     await rolling._roll(this, options);
   }
 
-  /** 
+  /**
    * @returns {MessageParts}
    * @override
    */
   get messageParts() {
     return {
       ...super.messageParts,
-      ...messages._messageParts(this)
+      ...messages._messageParts(this),
     };
   }
 
-  /** 
+  /**
    * @returns {MessageParts}
    * @override
    */
   get secretMessageParts() {
     return {
       ...super.secretMessageParts,
-      ...messages._secretMessageParts(this)
+      ...messages._secretMessageParts(this),
     };
   }
 

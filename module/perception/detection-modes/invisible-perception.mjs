@@ -2,9 +2,7 @@ const { Token } = foundry.canvas.placeables;
 import TeriockDetectionMode from "./teriock-detection-mode.mjs";
 
 export default class DetectionModeInvisiblePerception extends TeriockDetectionMode {
-  static BLOCKING_TGT_STATUS_EFFECTS = [
-    "hidden",
-  ];
+  static BLOCKING_TGT_STATUS_EFFECTS = ["hidden"];
 
   /** @override */
   _canDetect(visionSource, target) {
@@ -14,7 +12,7 @@ export default class DetectionModeInvisiblePerception extends TeriockDetectionMo
     const src = visionSource.object.document;
     if (target instanceof Token) {
       const tgt = target.document;
-      if (!src.hasStatusEffect('ethereal') && tgt.hasStatusEffect('invisible')) {
+      if (!src.hasStatusEffect("ethereal") && tgt.hasStatusEffect("invisible")) {
         return true;
       }
     }

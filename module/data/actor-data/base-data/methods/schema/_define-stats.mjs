@@ -17,22 +17,22 @@ function statField(name, options = {}) {
       integer: true,
       label: `Current ${name}`,
     }),
-  }
+  };
   if (options.base) {
     schema.base = new fields.NumberField({
       initial: options.base || 1,
       integer: true,
       label: `Base ${name}`,
-    })
+    });
   }
   if (options.temp) {
     schema.temp = new fields.NumberField({
       initial: options.temp || 0,
       integer: true,
       label: `Temporary ${name}`,
-    })
+    });
   }
-  return new fields.SchemaField(schema)
+  return new fields.SchemaField(schema);
 }
 
 export function _defineStats(schema) {

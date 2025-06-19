@@ -18,7 +18,7 @@ export async function _postUpdate(system) {
 async function applyEncumbrance(system) {
   const actor = system.parent;
   const level = system.encumbranceLevel || 0;
-  const statuses = ['encumbered', 'slowed', 'immobilized'];
+  const statuses = ["encumbered", "slowed", "immobilized"];
   for (let i = 0; i < statuses.length; i++) {
     const status = statuses[i];
     const active = level > i;
@@ -36,13 +36,13 @@ async function prepareTokens(system) {
   const actor = system.parent;
   const tokens = actor?.getDependentTokens();
   const tokenSizes = {
-    'Tiny': 0.5,
-    'Small': 1,
-    'Medium': 1,
-    'Large': 2,
-    'Huge': 3,
-    'Gargantuan': 4,
-    'Colossal': 6,
+    Tiny: 0.5,
+    Small: 1,
+    Medium: 1,
+    Large: 2,
+    Huge: 3,
+    Gargantuan: 4,
+    Colossal: 6,
   };
   for (const token of tokens) {
     const tokenSize = tokenSizes[system?.namedSize] || 1;
@@ -51,7 +51,7 @@ async function prepareTokens(system) {
       height: tokenSize,
     };
     await token.update(tokenParameters);
-    await token.updateVisionMode(actor?.statuses?.has('ethereal') ? 'ethereal' : 'basic');
+    await token.updateVisionMode(actor?.statuses?.has("ethereal") ? "ethereal" : "basic");
   }
 }
 
@@ -61,12 +61,12 @@ async function prepareTokens(system) {
  */
 async function etherealKill(system) {
   const actor = system.parent;
-  const down = actor?.statuses?.has('down');
-  const ethereal = actor?.statuses?.has('ethereal');
-  const dead = actor?.statuses?.has('dead');
+  const down = actor?.statuses?.has("down");
+  const ethereal = actor?.statuses?.has("ethereal");
+  const dead = actor?.statuses?.has("dead");
   if (down && ethereal && !dead) {
-    await actor.toggleStatusEffect('dead', { active: true });
-    await actor.toggleStatusEffect('asleep', { active: false });
-    await actor.toggleStatusEffect('unconscious', { active: false });
+    await actor.toggleStatusEffect("dead", { active: true });
+    await actor.toggleStatusEffect("asleep", { active: false });
+    await actor.toggleStatusEffect("unconscious", { active: false });
   }
 }

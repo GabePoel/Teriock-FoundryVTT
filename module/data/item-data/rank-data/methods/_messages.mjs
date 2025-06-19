@@ -5,35 +5,27 @@ export function _messageParts(rank) {
   const src = rank.system;
   const bars = [
     {
-      icon: 'fa-' + ref[src.archetype].classes[src.className].icon,
-      wrappers: [
-        ref[src.archetype].name,
-        ref[src.archetype].classes[src.className].name,
-        'Rank ' + src.classRank,
-      ],
+      icon: "fa-" + ref[src.archetype].classes[src.className].icon,
+      wrappers: [ref[src.archetype].name, ref[src.archetype].classes[src.className].name, "Rank " + src.classRank],
     },
     {
-      icon: 'fa-circle-info',
-      wrappers: [
-        src.hitDie + ' Hit Die',
-        src.manaDie + ' Mana Die',
-        src.maxAv + ' Max AV',
-      ],
+      icon: "fa-circle-info",
+      wrappers: [src.hitDie + " Hit Die", src.manaDie + " Mana Die", src.maxAv + " Max AV"],
     },
-  ]
+  ];
   const blocks = [
     {
-      title: 'Description',
+      title: "Description",
       text: src.description,
     },
     {
-      title: 'Flaws',
+      title: "Flaws",
       text: src.flaws,
-    }
-  ]
+    },
+  ];
   addAbilitiesBlock(rank.transferredEffects, blocks);
   return {
     bars: bars,
     blocks: blocks,
-  }
+  };
 }

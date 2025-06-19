@@ -9,8 +9,8 @@ import { TeriockSheet } from "../../mixins/sheet-mixin.mjs";
  */
 export default class TeriockBaseItemSheet extends TeriockSheet(sheets.ItemSheet) {
   static DEFAULT_OPTIONS = {
-    classes: ['teriock'],
-    dragDrop: [{ dragSelector: '.draggable', dropSelector: null }],
+    classes: ["teriock"],
+    dragDrop: [{ dragSelector: ".draggable", dropSelector: null }],
   };
 
   /** @override */
@@ -21,38 +21,37 @@ export default class TeriockBaseItemSheet extends TeriockSheet(sheets.ItemSheet)
 
   /** @override */
   async _prepareContext() {
-
     const abilityTypeOrder = Object.keys(CONFIG.TERIOCK.abilityOptions.abilityType || {});
     const abilities = this.document.transferredEffects
-      .filter(e => e.type === 'ability')
+      .filter((e) => e.type === "ability")
       .sort((a, b) => {
-        const typeA = a.system?.abilityType || '';
-        const typeB = b.system?.abilityType || '';
+        const typeA = a.system?.abilityType || "";
+        const typeB = b.system?.abilityType || "";
         const indexA = abilityTypeOrder.indexOf(typeA);
         const indexB = abilityTypeOrder.indexOf(typeB);
         if (indexA !== indexB) return indexA - indexB;
-        return (a.name || '').localeCompare(b.name || '');
+        return (a.name || "").localeCompare(b.name || "");
       });
 
     const propertyTypeOrder = Object.keys(CONFIG.TERIOCK.abilityOptions.abilityType || {});
     const properties = this.document.transferredEffects
-      .filter(e => e.type === 'property')
+      .filter((e) => e.type === "property")
       .sort((a, b) => {
-        const typeA = a.system?.propertyType || '';
-        const typeB = b.system?.propertyType || '';
+        const typeA = a.system?.propertyType || "";
+        const typeB = b.system?.propertyType || "";
         const indexA = propertyTypeOrder.indexOf(typeA);
         const indexB = propertyTypeOrder.indexOf(typeB);
         if (indexA !== indexB) return indexA - indexB;
-        return (a.name || '').localeCompare(b.name || '');
+        return (a.name || "").localeCompare(b.name || "");
       });
 
     const fluencies = this.document.transferredEffects
-      .filter(e => e.type === 'fluency')
-      .sort((a, b) => (a.name || '').localeCompare(b.name || ''));
+      .filter((e) => e.type === "fluency")
+      .sort((a, b) => (a.name || "").localeCompare(b.name || ""));
 
     const resources = this.document.transferredEffects
-      .filter(e => e.type === 'resource')
-      .sort((a, b) => (a.name || '').localeCompare(b.name || ''));
+      .filter((e) => e.type === "resource")
+      .sort((a, b) => (a.name || "").localeCompare(b.name || ""));
 
     const context = await super._prepareContext();
     context.item = this.item;
@@ -68,34 +67,34 @@ export default class TeriockBaseItemSheet extends TeriockSheet(sheets.ItemSheet)
   _onRender(context, options) {
     super._onRender(context, options);
     if (!this.editable) return;
-    this.#dragDrop.forEach(d => d.bind(this.element));
+    this.#dragDrop.forEach((d) => d.bind(this.element));
 
     this._bindStaticEvents();
     this._bindCleanInputs();
   }
 
   _bindStaticEvents() {
-    const importBtn = this.element.querySelector('.import-button');
-    const chatBtn = this.element.querySelector('.chat-button');
+    const importBtn = this.element.querySelector(".import-button");
+    const chatBtn = this.element.querySelector(".chat-button");
 
-    importBtn?.addEventListener('contextmenu', (event) => {
+    importBtn?.addEventListener("contextmenu", (event) => {
       event.preventDefault();
       this.item._bulkWikiPull();
     });
 
-    chatBtn?.addEventListener('contextmenu', (event) => {
+    chatBtn?.addEventListener("contextmenu", (event) => {
       event.preventDefault();
     });
   }
 
   _bindCleanInputs() {
     const cleanMap = {
-      '.range-input': cleanFeet,
+      ".range-input": cleanFeet,
     };
 
     for (const [selector, cleaner] of Object.entries(cleanMap)) {
       this.element.querySelectorAll(selector).forEach((el) => {
-        this._connectInput(el, el.getAttribute('name'), cleaner);
+        this._connectInput(el, el.getAttribute("name"), cleaner);
       });
     }
   }

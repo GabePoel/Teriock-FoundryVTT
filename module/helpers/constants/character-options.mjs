@@ -5,5 +5,5 @@ export const characterOptions = {
     2: "Half",
     3: "Normal",
     4: "Double",
-  }
-}
+  },
+};

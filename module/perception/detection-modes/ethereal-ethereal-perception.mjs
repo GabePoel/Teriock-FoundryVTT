@@ -2,7 +2,6 @@ const { Token } = foundry.canvas.placeables;
 import TeriockDetectionMode from "./teriock-detection-mode.mjs";
 
 export default class DetectionModeEtherealEthereal extends TeriockDetectionMode {
-
   /** @override */
   _canDetect(visionSource, target) {
     if (!super._canDetect(visionSource, target)) {
@@ -11,7 +10,7 @@ export default class DetectionModeEtherealEthereal extends TeriockDetectionMode 
     const src = visionSource.object.document;
     if (target instanceof Token) {
       const tgt = target.document;
-      if (!(src.hasStatusEffect('ethereal') && tgt.hasStatusEffect('ethereal'))) {
+      if (!(src.hasStatusEffect("ethereal") && tgt.hasStatusEffect("ethereal"))) {
         return false;
       }
     }

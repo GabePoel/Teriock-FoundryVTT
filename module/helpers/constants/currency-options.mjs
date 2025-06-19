@@ -10,48 +10,48 @@ export const currencyOptions = {
   //   weight: 0.02,
   // },
   gold: {
-    name: 'Gold',
+    name: "Gold",
     value: 1,
     weight: 0.02,
   },
   entTearAmber: {
-    name: 'Ent Tear Amber',
+    name: "Ent Tear Amber",
     value: 5,
     weight: 0.05,
   },
   fireEyeRuby: {
-    name: 'Fire Eye Ruby',
+    name: "Fire Eye Ruby",
     value: 10,
     weight: 0.05,
   },
   pixiePlumAmethyst: {
-    name: 'Pixie Plum Amethyst',
+    name: "Pixie Plum Amethyst",
     value: 20,
     weight: 0.1,
   },
   snowDiamond: {
-    name: 'Snow Diamond',
+    name: "Snow Diamond",
     value: 50,
     weight: 0.2,
   },
   dragonEmerald: {
-    name: 'Dragon Emerald',
+    name: "Dragon Emerald",
     value: 100,
     weight: 0.2,
   },
   moonOpal: {
-    name: 'Moon Opal',
+    name: "Moon Opal",
     value: 500,
     weight: 0.2,
   },
   magusQuartz: {
-    name: 'Magus Quartz',
+    name: "Magus Quartz",
     value: 1000,
     weight: 0.2,
   },
   heartstoneRuby: {
-    name: 'Heartstone Ruby',
+    name: "Heartstone Ruby",
     value: 5000,
     weight: 0.2,
   },
-}
+};

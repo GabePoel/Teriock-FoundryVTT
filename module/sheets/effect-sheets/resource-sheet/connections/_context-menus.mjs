@@ -13,7 +13,7 @@ export function callbackContextMenu(resource) {
       icon: icon,
       callback: () => {
         resource.update({
-          'system.functionHook': hook,
+          "system.functionHook": hook,
         });
       },
     };

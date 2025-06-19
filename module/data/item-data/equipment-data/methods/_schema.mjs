@@ -21,11 +21,11 @@ export function _defineSchema() {
     }),
     shattered: new fields.BooleanField({
       initial: false,
-      label: "Shattered"
+      label: "Shattered",
     }),
     dampened: new fields.BooleanField({
       initial: false,
-      label: "Dampened"
+      label: "Dampened",
     }),
     consumable: new fields.BooleanField({
       initial: false,
@@ -80,9 +80,11 @@ export function _defineSchema() {
       label: "Short Range",
       min: 0,
     }),
-    equipmentClasses: new fields.ArrayField(new fields.StringField({
-      choices: equipmentOptions.equipmentClasses,
-    })),
+    equipmentClasses: new fields.ArrayField(
+      new fields.StringField({
+        choices: equipmentOptions.equipmentClasses,
+      }),
+    ),
     minStr: new fields.NumberField({
       initial: -3,
       integer: true,
@@ -149,7 +151,7 @@ export function _defineSchema() {
     reference: new fields.DocumentUUIDField({
       initial: null,
       nullable: true,
-      gmOnly: true
+      gmOnly: true,
     }),
   };
 }

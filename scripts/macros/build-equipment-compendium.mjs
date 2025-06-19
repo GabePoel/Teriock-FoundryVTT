@@ -24,16 +24,16 @@ for (const [e, eo] of Object.entries(CONFIG.TERIOCK.equipment)) {
     folder: folder.id,
     system: {
       equipmentType: name,
-    }
+    },
   };
 
   const TeriockItem = CONFIG.Item.documentClass;
   await TeriockItem.create(itemData, {
-    pack: "world.teriock-core"
+    pack: "world.teriock-core",
   });
 
-  await corePack.getIndex();  // Refresh index after creating
-  const entry = corePack.index.find(e => e.name === name);
+  await corePack.getIndex(); // Refresh index after creating
+  const entry = corePack.index.find((e) => e.name === name);
   const rawDoc = await corePack.getDocument(entry._id);
 
   console.log(rawDoc);

@@ -4,7 +4,11 @@ const { sheets, api, ux } = foundry.applications;
 import { _filterAbilities, _filterEquipment } from "./methods/_filters.mjs";
 import { _sortAbilities, _sortEquipment } from "./methods/_sort.mjs";
 import { documentOptions } from "../../../helpers/constants/document-options.mjs";
-import { primaryBlockerContextMenu, primaryAttackContextMenu, piercingContextMenu } from "./connections/character-context-menus.mjs";
+import {
+  primaryBlockerContextMenu,
+  primaryAttackContextMenu,
+  piercingContextMenu,
+} from "./connections/character-context-menus.mjs";
 import { TeriockSheet } from "../../mixins/sheet-mixin.mjs";
 
 /**
@@ -12,7 +16,7 @@ import { TeriockSheet } from "../../mixins/sheet-mixin.mjs";
  */
 export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorSheet) {
   static DEFAULT_OPTIONS = {
-    classes: ['character'],
+    classes: ["character"],
     actions: {
       toggleEquippedDoc: this._toggleEquippedDoc,
       toggleDisabledDoc: this._toggleDisabledDoc,
@@ -46,8 +50,8 @@ export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorShee
 
   static PARTS = {
     all: {
-      template: 'systems/teriock/templates/sheets/character-template/character-template.hbs',
-      scrollable: ['.character-sidebar', '.character-tab-content'],
+      template: "systems/teriock/templates/sheets/character-template/character-template.hbs",
+      scrollable: [".character-sidebar", ".character-tab-content"],
     },
   };
 
@@ -58,7 +62,7 @@ export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorShee
     power: "systems/teriock/templates/sheets/character-template/results/ch-power-results.hbs",
     rank: "systems/teriock/templates/sheets/character-template/results/ch-rank-results.hbs",
     resource: "systems/teriock/templates/sheets/character-template/results/ch-resource-results.hbs",
-    effect: "systems/teriock/templates/sheets/character-template/results/ch-effect-results.hbs"
+    effect: "systems/teriock/templates/sheets/character-template/results/ch-effect-results.hbs",
   };
 
   constructor(...args) {
@@ -72,7 +76,7 @@ export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorShee
     this._dynamicContextMenus = {
       attacker: [],
       blocker: [],
-    }
+    };
     this._loadingSearch = true;
     this._abilitySearchValue = "";
     this._equipmentSearchValue = "";
@@ -95,60 +99,60 @@ export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorShee
     const tab = target.dataset.tab;
     const tabMap = {
       ability: {
-        docType: 'ActiveEffect',
+        docType: "ActiveEffect",
         data: {
-          name: 'New Ability',
-          img: 'systems/teriock/assets/ability.svg',
-          type: 'ability',
-        }
+          name: "New Ability",
+          img: "systems/teriock/assets/ability.svg",
+          type: "ability",
+        },
       },
       resource: {
-        docType: 'ActiveEffect',
+        docType: "ActiveEffect",
         data: {
-          name: 'New Resource',
-          img: 'systems/teriock/assets/resource.svg',
-          type: 'resource',
-        }
+          name: "New Resource",
+          img: "systems/teriock/assets/resource.svg",
+          type: "resource",
+        },
       },
       effect: {
-        docType: 'ActiveEffect',
+        docType: "ActiveEffect",
         data: {
-          name: 'New Effect',
-          img: 'systems/teriock/assets/effect.svg',
-          type: 'effect',
-        }
+          name: "New Effect",
+          img: "systems/teriock/assets/effect.svg",
+          type: "effect",
+        },
       },
       equipment: {
-        docType: 'Item',
+        docType: "Item",
         data: {
-          name: 'New Equipment',
-          img: 'systems/teriock/assets/equipment.svg',
-          type: 'equipment',
-        }
+          name: "New Equipment",
+          img: "systems/teriock/assets/equipment.svg",
+          type: "equipment",
+        },
       },
       power: {
-        docType: 'Item',
+        docType: "Item",
         data: {
-          name: 'New Power',
-          img: 'systems/teriock/assets/power.svg',
-          type: 'power',
-        }
+          name: "New Power",
+          img: "systems/teriock/assets/power.svg",
+          type: "power",
+        },
       },
       rank: {
-        docType: 'Item',
+        docType: "Item",
         data: {
-          name: 'New Rank',
-          img: 'systems/teriock/assets/rank.svg',
-          type: 'rank',
-        }
+          name: "New Rank",
+          img: "systems/teriock/assets/rank.svg",
+          type: "rank",
+        },
       },
       fluency: {
-        docType: 'ActiveEffect',
+        docType: "ActiveEffect",
         data: {
-          name: 'New Fluency',
-          img: 'systems/teriock/assets/fluency.svg',
-          type: 'fluency',
-        }
+          name: "New Fluency",
+          img: "systems/teriock/assets/fluency.svg",
+          type: "fluency",
+        },
       },
     };
     const entry = tabMap[tab];
@@ -197,7 +201,7 @@ export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorShee
   }
 
   static async _toggleSb(event, target) {
-    this.document.update({ 'system.sb': !this.document.system.sb });
+    this.document.update({ "system.sb": !this.document.system.sb });
   }
 
   static async _openPrimaryAttacker(event, target) {
@@ -228,52 +232,52 @@ export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorShee
   static async _takeDamage(event, target) {
     event.stopPropagation();
     await api.DialogV2.prompt({
-      window: { title: 'Take Damage' },
+      window: { title: "Take Damage" },
       content: '<input type="number" name="damage" placeholder="Damage Amount">',
       ok: {
-        label: 'Confirm',
+        label: "Confirm",
         callback: (event, button, dialog) => {
           let input = button.form.elements.damage.value;
           if (input) {
             this.document.takeDamage(Number(input));
           }
-        }
-      }
-    })
+        },
+      },
+    });
   }
 
   static async _takeDrain(event, target) {
     event.stopPropagation();
     await api.DialogV2.prompt({
-      window: { title: 'Take Drain' },
+      window: { title: "Take Drain" },
       content: '<input type="number" name="drain" placeholder="Drain Amount">',
       ok: {
-        label: 'Confirm',
+        label: "Confirm",
         callback: (event, button, dialog) => {
           let input = button.form.elements.drain.value;
           if (input) {
             this.document.takeDrain(Number(input));
           }
-        }
-      }
-    })
+        },
+      },
+    });
   }
 
   static async _takeWither(event, target) {
     event.stopPropagation();
     await api.DialogV2.prompt({
-      window: { title: 'Take Wither' },
+      window: { title: "Take Wither" },
       content: '<input type="number" name="wither" placeholder="Wither Amount">',
       ok: {
-        label: 'Confirm',
+        label: "Confirm",
         callback: (event, button, dialog) => {
           let input = button.form.elements.wither.value;
           if (input) {
             this.document.takeWither(Number(input));
           }
-        }
-      }
-    })
+        },
+      },
+    });
   }
 
   static async _removeCondition(event, target) {
@@ -301,8 +305,8 @@ export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorShee
     const options = {
       advantage: event.altKey,
       disadvantage: event.shiftKey,
-    }
-    this.actor.useAbility('Basic Attack', options);
+    };
+    this.actor.useAbility("Basic Attack", options);
   }
 
   static async _resist(event, target) {
@@ -310,7 +314,7 @@ export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorShee
     const options = {
       advantage: event.altKey,
       disadvantage: event.shiftKey,
-    }
+    };
     this.actor.rollResistance(options);
   }
 
@@ -319,7 +323,7 @@ export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorShee
     const options = {
       advantage: event.altKey,
       disadvantage: event.shiftKey,
-    }
+    };
     this.actor.endCondition(options);
   }
 
@@ -336,16 +340,16 @@ export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorShee
     let conditions = Array.from(this.actor.statuses || []);
     // Sort: 'down' first, 'dead' second, rest alphabetical
     conditions.sort((a, b) => {
-      if (a === 'dead') return -1;
-      if (b === 'dead') return 1;
-      if (a === 'unconscious') return b === 'dead' ? 1 : -1;
-      if (b === 'unconscious') return a === 'dead' ? -1 : 1;
-      if (a === 'down') {
-        if (b === 'dead' || b === 'unconscious') return 1;
+      if (a === "dead") return -1;
+      if (b === "dead") return 1;
+      if (a === "unconscious") return b === "dead" ? 1 : -1;
+      if (b === "unconscious") return a === "dead" ? -1 : 1;
+      if (a === "down") {
+        if (b === "dead" || b === "unconscious") return 1;
         return -1;
       }
-      if (b === 'down') {
-        if (a === 'dead' || a === 'unconscious') return -1;
+      if (b === "down") {
+        if (a === "dead" || a === "unconscious") return -1;
         return 1;
       }
       return a.localeCompare(b);
@@ -365,10 +369,10 @@ export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorShee
     context.sidebarOpen = this._sidebarOpen;
     context.tabs = {
       classes: {
-        cssClass: this.tabGroups.primary === 'classes' ? 'active' : '',
-        group: 'primary',
-        id: 'classes',
-        label: 'Classes',
+        cssClass: this.tabGroups.primary === "classes" ? "active" : "",
+        group: "primary",
+        id: "classes",
+        label: "Classes",
       },
     };
     context.enrichedNotes = await this._editor(this.document.system.sheet.notes);
@@ -378,90 +382,88 @@ export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorShee
   }
 
   _getAbility(id, parentId) {
-    return parentId
-      ? this.document.items.get(parentId)?.effects.get(id)
-      : this.document.effects.get(id);
+    return parentId ? this.document.items.get(parentId)?.effects.get(id) : this.document.effects.get(id);
   }
 
   /** @override */
   _onRender(context, options) {
     super._onRender(context, options);
 
-    const sidebar = this.element.querySelector('.character-sidebar');
-    const tabber = this.element.querySelector('.character-sidebar-tabber-container');
-    const hitDrawer = this.element.querySelector('.hit-die-drawer');
-    const manaDrawer = this.element.querySelector('.mana-die-drawer');
+    const sidebar = this.element.querySelector(".character-sidebar");
+    const tabber = this.element.querySelector(".character-sidebar-tabber-container");
+    const hitDrawer = this.element.querySelector(".hit-die-drawer");
+    const manaDrawer = this.element.querySelector(".mana-die-drawer");
 
-    sidebar.classList.add('no-transition');
-    tabber.classList.add('no-transition');
-    hitDrawer.classList.add('no-transition');
-    manaDrawer.classList.add('no-transition');
+    sidebar.classList.add("no-transition");
+    tabber.classList.add("no-transition");
+    hitDrawer.classList.add("no-transition");
+    manaDrawer.classList.add("no-transition");
 
-    sidebar.classList.toggle('collapsed', !this._sidebarOpen);
-    tabber.classList.toggle('collapsed', !this._sidebarOpen);
-    hitDrawer.classList.toggle('closed', !this._hitDrawerOpen);
-    manaDrawer.classList.toggle('closed', !this._manaDrawerOpen);
+    sidebar.classList.toggle("collapsed", !this._sidebarOpen);
+    tabber.classList.toggle("collapsed", !this._sidebarOpen);
+    hitDrawer.classList.toggle("closed", !this._hitDrawerOpen);
+    manaDrawer.classList.toggle("closed", !this._manaDrawerOpen);
 
     sidebar.offsetHeight;
     tabber.offsetHeight;
     hitDrawer.offsetHeight;
     manaDrawer.offsetHeight;
 
-    sidebar.classList.remove('no-transition');
-    tabber.classList.remove('no-transition');
-    hitDrawer.classList.remove('no-transition');
-    manaDrawer.classList.remove('no-transition');
+    sidebar.classList.remove("no-transition");
+    tabber.classList.remove("no-transition");
+    hitDrawer.classList.remove("no-transition");
+    manaDrawer.classList.remove("no-transition");
 
-    this.element.querySelectorAll('.character-tabber').forEach(el => {
-      el.addEventListener('click', (e) => {
+    this.element.querySelectorAll(".character-tabber").forEach((el) => {
+      el.addEventListener("click", (e) => {
         e.preventDefault();
         const tab = e.currentTarget.dataset.tab;
-        if (tab === 'sidebar') {
-          sidebar.classList.toggle('collapsed');
-          tabber.classList.toggle('collapsed');
+        if (tab === "sidebar") {
+          sidebar.classList.toggle("collapsed");
+          tabber.classList.toggle("collapsed");
           this._sidebarOpen = !this._sidebarOpen;
         } else {
-          this.document.update({ 'system.sheet.activeTab': tab });
+          this.document.update({ "system.sheet.activeTab": tab });
         }
         e.stopPropagation();
       });
     });
 
-    this.element.querySelectorAll('.character-hit-bar-overlay-row').forEach(el => {
-      el.addEventListener('contextmenu', (e) => {
+    this.element.querySelectorAll(".character-hit-bar-overlay-row").forEach((el) => {
+      el.addEventListener("contextmenu", (e) => {
         e.preventDefault();
-        hitDrawer.classList.toggle('closed');
+        hitDrawer.classList.toggle("closed");
         this._hitDrawerOpen = !this._hitDrawerOpen;
         e.stopPropagation();
       });
     });
 
-    this.element.querySelectorAll('.character-mana-bar-overlay-row').forEach(el => {
-      el.addEventListener('contextmenu', (e) => {
+    this.element.querySelectorAll(".character-mana-bar-overlay-row").forEach((el) => {
+      el.addEventListener("contextmenu", (e) => {
         e.preventDefault();
-        manaDrawer.classList.toggle('closed');
+        manaDrawer.classList.toggle("closed");
         this._manaDrawerOpen = !this._manaDrawerOpen;
         e.stopPropagation();
       });
     });
 
-    this.element.querySelectorAll('.die-box').forEach(el => {
-      el.addEventListener('contextmenu', (e) => {
+    this.element.querySelectorAll(".die-box").forEach((el) => {
+      el.addEventListener("contextmenu", (e) => {
         e.preventDefault();
         const id = el.dataset.id;
         const rank = this.actor.items.get(id);
         const die = el.dataset.die;
-        if (die === 'hit') {
-          rank.update({ 'system.hitDieSpent': !rank.system.hitDieSpent });
-        } else if (die === 'mana') {
-          rank.update({ 'system.manaDieSpent': !rank.system.manaDieSpent });
+        if (die === "hit") {
+          rank.update({ "system.hitDieSpent": !rank.system.hitDieSpent });
+        } else if (die === "mana") {
+          rank.update({ "system.manaDieSpent": !rank.system.manaDieSpent });
         }
         e.stopPropagation();
       });
     });
 
-    this.element.querySelectorAll('.ch-attribute-save-box').forEach(el => {
-      el.addEventListener('contextmenu', (e) => {
+    this.element.querySelectorAll(".ch-attribute-save-box").forEach((el) => {
+      el.addEventListener("contextmenu", (e) => {
         e.preventDefault();
         const attr = el.dataset.attribute;
         const current = this.document.system.attributes[attr].saveFluent;
@@ -470,14 +472,14 @@ export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorShee
       });
     });
 
-    this.element.querySelector('.character-penalty-box').addEventListener('contextmenu', (e) => {
+    this.element.querySelector(".character-penalty-box").addEventListener("contextmenu", (e) => {
       e.preventDefault();
-      this.document.update({ 'system.attackPenalty': 0 });
+      this.document.update({ "system.attackPenalty": 0 });
       e.stopPropagation();
     });
 
-    this.element.querySelectorAll('.condition-toggle').forEach(el => {
-      el.addEventListener('contextmenu', (e) => {
+    this.element.querySelectorAll(".condition-toggle").forEach((el) => {
+      el.addEventListener("contextmenu", (e) => {
         e.preventDefault();
         const condition = el.dataset.condition;
         this._forceRemoveCondition(condition);
@@ -485,8 +487,8 @@ export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorShee
       });
     });
 
-    this.element.querySelectorAll('.hack-marker-box').forEach(el => {
-      el.addEventListener('contextmenu', async (e) => {
+    this.element.querySelectorAll(".hack-marker-box").forEach((el) => {
+      el.addEventListener("contextmenu", async (e) => {
         e.preventDefault();
         const part = el.dataset.part;
         await this.actor.takeUnhack(part);
@@ -494,36 +496,35 @@ export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorShee
       });
     });
 
-    this.element.querySelector('.character-name')?.addEventListener('contextmenu', async (e) => {
+    this.element.querySelector(".character-name")?.addEventListener("contextmenu", async (e) => {
       e.preventDefault();
-      console.log('Debug', this.document, this);
+      console.log("Debug", this.document, this);
       e.stopPropagation();
     });
 
     primaryBlockerContextMenu(this.actor, this._dynamicContextMenus.blocker);
     primaryAttackContextMenu(this.actor, this._dynamicContextMenus.attacker);
 
-    this._connectContextMenu('.character-primary-blocker-select', this._dynamicContextMenus.blocker, 'click');
-    this._connectContextMenu('.character-primary-attacker-select', this._dynamicContextMenus.attacker, 'click');
-    this._connectContextMenu('.character-piercing-box', piercingContextMenu(this.actor), 'click');
+    this._connectContextMenu(".character-primary-blocker-select", this._dynamicContextMenus.blocker, "click");
+    this._connectContextMenu(".character-primary-attacker-select", this._dynamicContextMenus.attacker, "click");
+    this._connectContextMenu(".character-piercing-box", piercingContextMenu(this.actor), "click");
 
     this._loadingSearch = true;
     this.#runSearchFilters();
     this.#initSearchFilters();
-    this.element.querySelectorAll('.tcard-search').forEach(input => {
+    this.element.querySelectorAll(".tcard-search").forEach((input) => {
       input.value = this[`_${input.dataset.type}SearchValue`];
     });
-
   }
 
   static SEARCH_CONFIGS = [
-    { type: 'ability', source: 'effectTypes', method: '_getFilteredAbilities' },
-    { type: 'equipment', source: 'itemTypes', method: '_getFilteredEquipment' },
-    { type: 'fluency', source: 'effectTypes', method: null },
-    { type: 'power', source: 'itemTypes', method: null },
-    { type: 'rank', source: 'itemTypes', method: null },
-    { type: 'resource', source: 'effectTypes', method: null },
-    { type: 'effect', source: 'effectTypes', method: null }
+    { type: "ability", source: "effectTypes", method: "_getFilteredAbilities" },
+    { type: "equipment", source: "itemTypes", method: "_getFilteredEquipment" },
+    { type: "fluency", source: "effectTypes", method: null },
+    { type: "power", source: "itemTypes", method: null },
+    { type: "rank", source: "itemTypes", method: null },
+    { type: "resource", source: "effectTypes", method: null },
+    { type: "effect", source: "effectTypes", method: null },
   ];
 
   #initSearchFilters() {
@@ -535,19 +536,19 @@ export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorShee
           if (!query && this._loadingSearch) {
             const searchPath = `_${type}SearchValue`;
             if (searchPath) {
-              const value = this[searchPath] || '';
-              rgx = new RegExp(value, 'i');
+              const value = this[searchPath] || "";
+              rgx = new RegExp(value, "i");
             }
           }
-          this.#handleSearchFilter(type, source, method, rgx, content, input)
+          this.#handleSearchFilter(type, source, method, rgx, content, input);
         },
         contentSelector: `#${type}-results`,
-        inputSelector: `.${type}-search`
+        inputSelector: `.${type}-search`,
       });
       instance.bind(this.element);
       const input = this.element.querySelector(`.${type}-search`);
       if (input) {
-        input.addEventListener('focus', () => {
+        input.addEventListener("focus", () => {
           this._loadingSearch = false;
         });
       }
@@ -557,8 +558,8 @@ export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorShee
   #runSearchFilters() {
     const configs = this.constructor.SEARCH_CONFIGS;
     configs.forEach(({ type, source, method }) => {
-      const inputValue = this[`_${type}SearchValue`] || '';
-      const rgx = new RegExp(inputValue, 'i');
+      const inputValue = this[`_${type}SearchValue`] || "";
+      const rgx = new RegExp(inputValue, "i");
       const content = this.element.querySelector(`#${type}-results`);
       this.#applyFilter(type, source, method, rgx, content);
     });
@@ -579,25 +580,25 @@ export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorShee
     if (filterMethodName) {
       filtered = this[filterMethodName]?.() || filtered;
     }
-    filtered = filtered.filter(i => rgx.test(i.name));
+    filtered = filtered.filter((i) => rgx.test(i.name));
 
-    const visibleIds = new Set(filtered.map(i => i._id));
-    const allCards = Array.from(content?.querySelectorAll('.tcard') || []);
+    const visibleIds = new Set(filtered.map((i) => i._id));
+    const allCards = Array.from(content?.querySelectorAll(".tcard") || []);
 
     let visibleCount = 0;
     let firstVisibleCard = null;
     let lastVisibleCard = null;
 
-    const noResults = this.element.querySelector(`.no-results`);
+    const noResults = this.element.querySelector(".no-results");
     if (noResults) {
-      noResults.classList.toggle('not-hidden', visibleIds.size == 0);
+      noResults.classList.toggle("not-hidden", visibleIds.size == 0);
     }
 
-    allCards.forEach(card => {
+    allCards.forEach((card) => {
       const isVisible = visibleIds.has(card.dataset.id);
 
-      card.classList.remove('visible-first', 'visible-last');
-      card.classList.toggle('hidden', !isVisible);
+      card.classList.remove("visible-first", "visible-last");
+      card.classList.toggle("hidden", !isVisible);
 
       if (isVisible) {
         visibleCount++;
@@ -606,8 +607,7 @@ export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorShee
       }
     });
 
-    if (firstVisibleCard) firstVisibleCard.classList.add('visible-first');
-    if (lastVisibleCard) lastVisibleCard.classList.add('visible-last');
-
+    if (firstVisibleCard) firstVisibleCard.classList.add("visible-first");
+    if (lastVisibleCard) lastVisibleCard.classList.add("visible-last");
   }
 }

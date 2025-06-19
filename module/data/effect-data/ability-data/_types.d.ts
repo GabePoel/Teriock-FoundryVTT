@@ -95,6 +95,6 @@ declare module "./ability-data.mjs" {
       base: AppliesData;
       proficient: AppliesData;
       fluent: AppliesData;
-    }
+    };
   }
 }

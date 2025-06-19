@@ -2,19 +2,19 @@
 /** @import TeriockResourceData from "../resource-data.mjs"; */
 
 /**
- * @param {TeriockResourceData} resourceData 
+ * @param {TeriockResourceData} resourceData
  * @returns {Partial<MessageParts>}
  * @private
  */
 export function _messageParts(resourceData) {
   const blocks = [
     {
-      title: 'Description',
+      title: "Description",
       text: resourceData.description,
     },
-  ]
+  ];
   return {
     bars: [],
     blocks: blocks,
-  }
+  };
 }

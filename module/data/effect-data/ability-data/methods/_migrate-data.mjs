@@ -10,18 +10,18 @@ export function _migrateData(data) {
     data.effects.sort();
   }
   if (data.effects?.includes("truth")) {
-    data.effects = data.effects.map(effect => effect === "truth" ? "truthDetecting" : effect);
+    data.effects = data.effects.map((effect) => (effect === "truth" ? "truthDetecting" : effect));
   }
   if (data.effects?.includes("duelMod")) {
-    data.effects = data.effects.map(effect => effect === "duelMod" ? "duelModifying" : effect);
+    data.effects = data.effects.map((effect) => (effect === "duelMod" ? "duelModifying" : effect));
   }
   if (data.costs?.mp) {
     if (typeof data.costs?.mp === "string" || typeof data.costs?.mp === "number" || data.costs?.mp === null) {
       const mp = {
-        variable: (data.costs?.mp === 'x') ? true : false,
-        value: (data.costs?.mp === 'x') ? 0 : Number(data.costs?.mp) || 0,
+        variable: data.costs?.mp === "x" ? true : false,
+        value: data.costs?.mp === "x" ? 0 : Number(data.costs?.mp) || 0,
         description: data.costs.manaCost || "",
-      }
+      };
       data.costs.mp = mp;
       delete data.costs.manaCost;
     }
@@ -32,8 +32,8 @@ export function _migrateData(data) {
           static: 0,
           formula: "",
           variable: "",
-        }
-      }
+        },
+      };
       if (data.costs.mp.variable) {
         mp.type = "variable";
         mp.value.variable = data.costs.mp.description || "";
@@ -50,10 +50,10 @@ export function _migrateData(data) {
   if (data.costs?.hp) {
     if (typeof data.costs?.hp === "string" || typeof data.costs?.hp === "number" || data.costs?.hp === null) {
       const hp = {
-        variable: (data.costs?.hp === 'x') ? true : false,
-        value: (data.costs?.hp === 'x') ? 0 : Number(data.costs?.hp) || 0,
+        variable: data.costs?.hp === "x" ? true : false,
+        value: data.costs?.hp === "x" ? 0 : Number(data.costs?.hp) || 0,
         description: data.costs.hitCost || "",
-      }
+      };
       data.costs.hp = hp;
       delete data.costs.hitCost;
     }
@@ -64,8 +64,8 @@ export function _migrateData(data) {
           static: 0,
           formula: "",
           variable: "",
-        }
-      }
+        },
+      };
       if (data.costs.hp.variable) {
         hp.type = "variable";
         hp.value.variable = data.costs.hp.description || "";

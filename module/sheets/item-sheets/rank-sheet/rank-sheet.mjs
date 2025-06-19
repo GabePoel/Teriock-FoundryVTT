@@ -1,26 +1,28 @@
 const { HandlebarsApplicationMixin, DialogV2 } = foundry.applications.api;
 import { documentOptions } from "../../../helpers/constants/document-options.mjs";
-import { rankContextMenu, classContextMenu, archetypeContextMenu, hitDieContextMenu, manaDieContextMenu } from './connections/_context-menus.mjs';
-import TeriockBaseItemSheet from '../base-sheet/base-sheet.mjs';
+import {
+  rankContextMenu,
+  classContextMenu,
+  archetypeContextMenu,
+  hitDieContextMenu,
+  manaDieContextMenu,
+} from "./connections/_context-menus.mjs";
+import TeriockBaseItemSheet from "../base-sheet/base-sheet.mjs";
 
 /**
  * @extends {TeriockBaseItemSheet}
  */
 export default class TeriockRankSheet extends HandlebarsApplicationMixin(TeriockBaseItemSheet) {
   static DEFAULT_OPTIONS = {
-    classes: ['rank'],
+    classes: ["rank"],
     window: {
       icon: "fa-solid fa-" + documentOptions.rank.icon,
     },
   };
   static PARTS = {
     all: {
-      template: 'systems/teriock/templates/sheets/rank-template/rank-template.hbs',
-      scrollable: [
-        '.window-content',
-        '.tsheet-page',
-        '.ab-sheet-everything',
-      ],
+      template: "systems/teriock/templates/sheets/rank-template/rank-template.hbs",
+      scrollable: [".window-content", ".tsheet-page", ".ab-sheet-everything"],
     },
   };
 
@@ -37,31 +39,31 @@ export default class TeriockRankSheet extends HandlebarsApplicationMixin(Teriock
     super._onRender(context, options);
     if (!this.editable) return;
     [
-      { selector: '.rank-box', menu: rankContextMenu },
-      { selector: '.class-box', menu: classContextMenu },
-      { selector: '.archetype-box', menu: archetypeContextMenu },
-      { selector: '.hit-die-box', menu: hitDieContextMenu },
-      { selector: '.mana-die-box', menu: manaDieContextMenu }
+      { selector: ".rank-box", menu: rankContextMenu },
+      { selector: ".class-box", menu: classContextMenu },
+      { selector: ".archetype-box", menu: archetypeContextMenu },
+      { selector: ".hit-die-box", menu: hitDieContextMenu },
+      { selector: ".mana-die-box", menu: manaDieContextMenu },
     ].forEach(({ selector, menu }) => {
-      this._connectContextMenu(selector, menu(this.item), 'click');
+      this._connectContextMenu(selector, menu(this.item), "click");
     });
     [
       {
-        selector: '.hit-die-box',
-        confirmText: 'Are you sure you want to reroll how much HP you gain from this rank?',
-        dieKey: 'hitDie',
-        updateKey: 'hp'
+        selector: ".hit-die-box",
+        confirmText: "Are you sure you want to reroll how much HP you gain from this rank?",
+        dieKey: "hitDie",
+        updateKey: "hp",
       },
       {
-        selector: '.mana-die-box',
-        confirmText: 'Are you sure you want to reroll how much mana you gain from this rank?',
-        dieKey: 'manaDie',
-        updateKey: 'mp'
-      }
+        selector: ".mana-die-box",
+        confirmText: "Are you sure you want to reroll how much mana you gain from this rank?",
+        dieKey: "manaDie",
+        updateKey: "mp",
+      },
     ].forEach(({ selector, confirmText, dieKey, updateKey }) => {
       const el = this.element.querySelector(selector);
       if (el) {
-        el.addEventListener('contextmenu', async () => {
+        el.addEventListener("contextmenu", async () => {
           const proceed = await DialogV2.confirm({
             content: confirmText,
             rejectClose: false,

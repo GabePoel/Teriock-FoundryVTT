@@ -1,46 +1,46 @@
 export default speed = {
   wal: {
-    name: 'Walking',
-    icon: 'person-walking',
+    name: "Walking",
+    icon: "person-walking",
   },
   dif: {
-    name: 'Difficult Terrain',
-    icon: 'hill-rockslide',
+    name: "Difficult Terrain",
+    icon: "hill-rockslide",
   },
   cra: {
-    name: 'Crawling',
-    icon: 'worm',
+    name: "Crawling",
+    icon: "worm",
   },
   swi: {
-    name: 'Swimming',
-    icon: 'person-swimming',
+    name: "Swimming",
+    icon: "person-swimming",
   },
   cli: {
-    name: 'Climbing',
-    icon: 'mountains',
+    name: "Climbing",
+    icon: "mountains",
   },
   hid: {
-    name: 'Hidden',
-    icon: 'user-ninja',
+    name: "Hidden",
+    icon: "user-ninja",
   },
   leh: {
-    name: 'Horizontal Leap',
-    icon: 'arrows-left-right',
+    name: "Horizontal Leap",
+    icon: "arrows-left-right",
   },
   lev: {
-    name: 'Vertical Leap',
-    icon: 'arrows-up-down',
+    name: "Vertical Leap",
+    icon: "arrows-up-down",
   },
   fly: {
-    name: 'Flying',
-    icon: 'feather',
+    name: "Flying",
+    icon: "feather",
   },
   dig: {
-    name: 'Digging',
-    icon: 'person-digging',
+    name: "Digging",
+    icon: "person-digging",
   },
   div: {
-    name: 'Diving',
-    icon: 'mask-snorkel',
-  }
-}
+    name: "Diving",
+    icon: "mask-snorkel",
+  },
+};

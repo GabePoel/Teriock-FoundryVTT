@@ -4,24 +4,25 @@ import TeriockImageSheet from "../sheets/misc-sheets/image-sheet/image-sheet.mjs
 
 export default function connectEmbedded(document, element, editable = true) {
   const iconStyle = CONFIG.TERIOCK.iconStyles.contextMenu;
-  element.querySelectorAll('.tcard').forEach((el) => {
-    const id = el.getAttribute('data-id');
-    const parentId = el.getAttribute('data-parent-id');
-    const embedded = document.items?.get(id)
-      || document.effects?.get(id)
-      || document.items?.get(parentId)?.effects.get(id)
-      || document.parent.getEmbeddedDocument('ActiveEffect', id);
+  element.querySelectorAll(".tcard").forEach((el) => {
+    const id = el.getAttribute("data-id");
+    const parentId = el.getAttribute("data-parent-id");
+    const embedded =
+      document.items?.get(id) ||
+      document.effects?.get(id) ||
+      document.items?.get(parentId)?.effects.get(id) ||
+      document.parent.getEmbeddedDocument("ActiveEffect", id);
     if (embedded) {
       new ux.ContextMenu(
         el,
-        '.tcard',
+        ".tcard",
         [
           // Non-item Entries
           {
-            name: 'Enable',
-            icon: makeIcon('check', iconStyle),
+            name: "Enable",
+            icon: makeIcon("check", iconStyle),
             callback: async () => {
-              if (embedded.documentName === 'ActiveEffect') {
+              if (embedded.documentName === "ActiveEffect") {
                 await embedded.setForceDisabled(false);
               } else {
                 await embedded.enable();
@@ -32,20 +33,20 @@ export default function connectEmbedded(document, element, editable = true) {
               // }
             },
             condition: () => {
-              if (embedded.documentName === 'ActiveEffect') {
+              if (embedded.documentName === "ActiveEffect") {
                 return embedded.system.forceDisabled;
-              } else if (embedded.type === 'equipment') {
+              } else if (embedded.type === "equipment") {
                 return false;
               } else {
                 return embedded.system.disabled;
               }
-            }
+            },
           },
           {
-            name: 'Disable',
-            icon: makeIcon('xmark', iconStyle),
+            name: "Disable",
+            icon: makeIcon("xmark", iconStyle),
             callback: async () => {
-              if (embedded.documentName === 'ActiveEffect') {
+              if (embedded.documentName === "ActiveEffect") {
                 await embedded.setForceDisabled(true);
               } else {
                 await embedded.disable();
@@ -56,104 +57,104 @@ export default function connectEmbedded(document, element, editable = true) {
               // }
             },
             condition: () => {
-              if (embedded.documentName === 'ActiveEffect') {
+              if (embedded.documentName === "ActiveEffect") {
                 return !embedded.system.forceDisabled;
-              } else if (embedded.type === 'equipment') {
+              } else if (embedded.type === "equipment") {
                 return false;
               } else {
                 return !embedded.system.disabled;
               }
-            }
+            },
           },
           // Item Entries
           {
-            name: 'Equip',
-            icon: makeIcon('check', iconStyle),
+            name: "Equip",
+            icon: makeIcon("check", iconStyle),
             callback: () => {
               embedded.system.equip();
             },
             condition: () => {
-              return embedded.type === 'equipment' && !embedded.system.equipped;
-            }
+              return embedded.type === "equipment" && !embedded.system.equipped;
+            },
           },
           {
-            name: 'Unequip',
-            icon: makeIcon('xmark', iconStyle),
+            name: "Unequip",
+            icon: makeIcon("xmark", iconStyle),
             callback: () => {
               embedded.system.unequip();
             },
             condition: () => {
-              return embedded.type === 'equipment' && embedded.system.equipped;
-            }
+              return embedded.type === "equipment" && embedded.system.equipped;
+            },
           },
           {
-            name: 'Glue',
-            icon: makeIcon('link', iconStyle),
+            name: "Glue",
+            icon: makeIcon("link", iconStyle),
             callback: () => {
               embedded.update({
-                'system.glued': !embedded.system.glued,
+                "system.glued": !embedded.system.glued,
               });
             },
             condition: () => {
-              return embedded.type === 'equipment' && !embedded.system.glued;
-            }
+              return embedded.type === "equipment" && !embedded.system.glued;
+            },
           },
           {
-            name: 'Unglue',
-            icon: makeIcon('link-slash', iconStyle),
+            name: "Unglue",
+            icon: makeIcon("link-slash", iconStyle),
             callback: () => {
               embedded.update({
-                'system.glued': !embedded.system.glued,
+                "system.glued": !embedded.system.glued,
               });
             },
             condition: () => {
-              return embedded.type === 'equipment' && embedded.system.glued;
-            }
+              return embedded.type === "equipment" && embedded.system.glued;
+            },
           },
           {
-            name: 'Shatter',
-            icon: makeIcon('wine-glass-crack', iconStyle),
+            name: "Shatter",
+            icon: makeIcon("wine-glass-crack", iconStyle),
             callback: () => {
               embedded.system.shatter();
             },
             condition: () => {
-              return embedded.type === 'equipment' && !embedded.system.shattered;
-            }
+              return embedded.type === "equipment" && !embedded.system.shattered;
+            },
           },
           {
-            name: 'Repair',
-            icon: makeIcon('wine-glass', iconStyle),
+            name: "Repair",
+            icon: makeIcon("wine-glass", iconStyle),
             callback: () => {
               embedded.system.repair();
             },
             condition: () => {
-              return embedded.type === 'equipment' && embedded.system.shattered;
-            }
+              return embedded.type === "equipment" && embedded.system.shattered;
+            },
           },
           {
-            name: 'Dampen',
-            icon: makeIcon('bell-slash', iconStyle),
+            name: "Dampen",
+            icon: makeIcon("bell-slash", iconStyle),
             callback: () => {
               embedded.system.dampen();
             },
             condition: () => {
-              return embedded.type === 'equipment' && !embedded.system.dampened;
-            }
+              return embedded.type === "equipment" && !embedded.system.dampened;
+            },
           },
           {
-            name: 'Undampen',
-            icon: makeIcon('bell', iconStyle),
+            name: "Undampen",
+            icon: makeIcon("bell", iconStyle),
             callback: () => {
               embedded.system.undampen();
             },
             condition: () => {
-              return embedded.type === 'equipment' && embedded.system.dampened;
-            }
+              return embedded.type === "equipment" && embedded.system.dampened;
+            },
           },
           // General Entries
           {
-            name: 'Open Source',
-            icon: makeIcon('arrow-up-right-from-square', iconStyle),
+            name: "Open Source",
+            icon: makeIcon("arrow-up-right-from-square", iconStyle),
             callback: () => {
               const source = embedded.getSource();
               if (source) {
@@ -161,14 +162,14 @@ export default function connectEmbedded(document, element, editable = true) {
               }
             },
             condition: () => {
-              return embedded.documentName === 'ActiveEffect' && (embedded.getSource() !== document);
-            }
+              return embedded.documentName === "ActiveEffect" && embedded.getSource() !== document;
+            },
           },
           {
-            name: 'Open Image',
-            icon: makeIcon('image', iconStyle),
+            name: "Open Image",
+            icon: makeIcon("image", iconStyle),
             callback: async (target) => {
-              const img = target.getAttribute('data-img');
+              const img = target.getAttribute("data-img");
               if (img && img.length > 0) {
                 const image = new TeriockImageSheet(img);
                 image.render(true);
@@ -176,72 +177,91 @@ export default function connectEmbedded(document, element, editable = true) {
             },
           },
           {
-            name: 'Share Image',
-            icon: makeIcon('share', iconStyle),
+            name: "Share Image",
+            icon: makeIcon("share", iconStyle),
             callback: async (target) => {
               await embedded.chatImage();
             },
           },
           {
-            name: 'Delete',
-            icon: makeIcon('trash', iconStyle),
+            name: "Delete",
+            icon: makeIcon("trash", iconStyle),
             callback: () => {
               embedded.delete();
             },
             condition: () => {
               return editable && embedded.isOwner;
-            }
+            },
           },
           {
-            name: 'Duplicate',
-            icon: makeIcon('copy', iconStyle),
+            name: "Duplicate",
+            icon: makeIcon("copy", iconStyle),
             callback: async () => {
-              const copy = await foundry.utils.duplicate(embedded)
+              const copy = await foundry.utils.duplicate(embedded);
               embedded.parent.createEmbeddedDocuments(embedded.documentName, [copy], { render: true });
             },
             condition: () => {
               return editable && embedded.isOwner;
-            }
+            },
           },
           {
-            name: 'Make Unidentified Copy',
-            icon: makeIcon('eye-slash', iconStyle),
+            name: "Make Unidentified Copy",
+            icon: makeIcon("eye-slash", iconStyle),
             callback: async () => {
               embedded.system.unidentify();
             },
             condition: () => {
-              return editable && embedded.isOwner && embedded.type === 'equipment' && embedded.system.identified && game.user.isGM;
-            }
+              return (
+                editable &&
+                embedded.isOwner &&
+                embedded.type === "equipment" &&
+                embedded.system.identified &&
+                game.user.isGM
+              );
+            },
           },
           {
-            name: 'Identify',
-            icon: makeIcon('eye', iconStyle),
+            name: "Identify",
+            icon: makeIcon("eye", iconStyle),
             callback: async () => {
               embedded.system.identify();
             },
             condition: () => {
-              return editable && embedded.isOwner && embedded.type === 'equipment' && !embedded.system.identified && embedded.system.reference;
-            }
+              return (
+                editable &&
+                embedded.isOwner &&
+                embedded.type === "equipment" &&
+                !embedded.system.identified &&
+                embedded.system.reference
+              );
+            },
           },
           {
-            name: 'Read Magic',
-            icon: makeIcon('hand', iconStyle),
+            name: "Read Magic",
+            icon: makeIcon("hand", iconStyle),
             callback: async () => {
               embedded.system.readMagic();
             },
             condition: () => {
-              return editable && embedded.isOwner && embedded.type === 'equipment' && !embedded.system.identified && embedded.system.reference && embedded.system.powerLevel === 'unknown';
-            }
-          }
+              return (
+                editable &&
+                embedded.isOwner &&
+                embedded.type === "equipment" &&
+                !embedded.system.identified &&
+                embedded.system.reference &&
+                embedded.system.powerLevel === "unknown"
+              );
+            },
+          },
         ],
         {
-          eventName: 'contextmenu',
+          eventName: "contextmenu",
           jQuery: false,
           fixed: true,
-        }
+        },
       );
       el.querySelectorAll('[data-action="useOneDoc"]').forEach((actionEl) => {
-        actionEl.addEventListener('contextmenu', (event) => {
+        actionEl.addEventListener("contextmenu", (event) => {
           event.stopPropagation();
           embedded.system.gainOne();
         });

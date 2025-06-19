@@ -9,7 +9,7 @@ import { TeriockSheet } from "../../mixins/sheet-mixin.mjs";
  */
 export default class TeriockBaseEffectSheet extends TeriockSheet(sheets.ActiveEffectConfig) {
   static DEFAULT_OPTIONS = {
-    classes: ['effect'],
+    classes: ["effect"],
     window: {
       icon: `fa-solid fa-${documentOptions.effect.icon}`,
     },
@@ -32,14 +32,14 @@ export default class TeriockBaseEffectSheet extends TeriockSheet(sheets.ActiveEf
   /** @override */
   _onRender(context, options) {
     super._onRender(context, options);
-    this.element.querySelectorAll('.change-box-entry').forEach((entry) => {
-      entry.addEventListener('change', (event) => {
+    this.element.querySelectorAll(".change-box-entry").forEach((entry) => {
+      entry.addEventListener("change", (event) => {
         const index = parseInt(entry.dataset.index, 10);
         const key = entry.dataset.key;
         const application = entry.dataset.application;
         const updateString = `system.applies.${application}.changes`;
         let value = entry.value;
-        if (!isNaN(value) && value !== '') {
+        if (!isNaN(value) && value !== "") {
           const intValue = parseInt(value, 10);
           if (!isNaN(intValue) && intValue.toString() === value.trim()) {
             value = intValue;
@@ -64,9 +64,9 @@ export default class TeriockBaseEffectSheet extends TeriockSheet(sheets.ActiveEf
     const updateString = `system.applies.${application}.changes`;
     const changes = this.document.system.applies[application].changes;
     const newChange = {
-      key: '',
+      key: "",
       mode: 0,
-      value: '',
+      value: "",
       priority: 0,
     };
     changes.push(newChange);

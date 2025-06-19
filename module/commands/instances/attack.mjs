@@ -1,18 +1,18 @@
 import TeriockCommand from "../command.mjs";
 
 export const attack = new TeriockCommand(
-  'attack',
-  'Use Basic Attack for all targeted actors. Supports [advantage, disadvantage].',
+  "attack",
+  "Use Basic Attack for all targeted actors. Supports [advantage, disadvantage].",
   async ({ options, actors }) => {
     for (const actor of actors) {
-      await actor.useAbility('Basic Attack', {
+      await actor.useAbility("Basic Attack", {
         advantage: options.advantage,
-        disadvantage: options.disadvantage
+        disadvantage: options.disadvantage,
       });
     }
   },
   {
-    category: 'combat',
-    requiresTarget: true
-  }
+    category: "combat",
+    requiresTarget: true,
+  },
 );

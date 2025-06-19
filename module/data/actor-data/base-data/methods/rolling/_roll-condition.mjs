@@ -1,4 +1,5 @@
 /** @import TeriockBaseActorData from "../../base-data.mjs" */
+/** @import { ConditionRollOptions } from "../../../../../types/rolls" */
 const { DialogV2 } = foundry.applications.api;
 import TeriockRoll from "../../../../../documents/roll.mjs";
 
@@ -6,7 +7,7 @@ import TeriockRoll from "../../../../../documents/roll.mjs";
  * Rolls to remove a condition from an actor.
  * @param {TeriockBaseActorData} system
  * @param {string} condition - The condition to roll for.
- * @param {object} [options] - Options for the roll, such as skip, increaseDie, or decreaseDie.
+ * @param {ConditionRollOptions} options
  * @returns {Promise<void>}
  * @private
  */
@@ -15,7 +16,7 @@ export async function _rollCondition(system, condition, options) {
   let skip = options?.skip || false;
   const increaseDie = options?.increaseDie || false;
   const decreaseDie = options?.decreaseDie || false;
-  let conditionName = 'Condition'
+  let conditionName = "Condition";
   if (condition) {
     conditionName = CONFIG.TERIOCK.content.conditions[condition].name;
   }
@@ -34,21 +35,24 @@ export async function _rollCondition(system, condition, options) {
         title: `Remove ${conditionName}`,
       },
       content: `<label>Number of d4s</label><input type="number" name="formula" value="${numberOfDice}" />`,
-      buttons: [{
-        action: 'roll',
-        label: 'Roll',
-        default: true,
-        callback: (event, button, dialog) => {
-          numberOfDice = button.form.elements.formula.valueAsNumber;
-          rollFormula = `${numberOfDice}d4kh`;
-        }
-      }, {
-        action: 'remove',
-        label: 'Remove',
-        default: false,
-      }],
+      buttons: [
+        {
+          action: "roll",
+          label: "Roll",
+          default: true,
+          callback: (event, button, dialog) => {
+            numberOfDice = button.form.elements.formula.valueAsNumber;
+            rollFormula = `${numberOfDice}d4kh`;
+          },
+        },
+        {
+          action: "remove",
+          label: "Remove",
+          default: false,
+        },
+      ],
       submit: async (result) => {
-        if (result === 'remove') {
+        if (result === "remove") {
           skip = true;
           remove = true;
         }
@@ -56,14 +60,14 @@ export async function _rollCondition(system, condition, options) {
           const rollData = actor.getRollData();
           const roll = new TeriockRoll(rollFormula, rollData, {
             context: {
-              diceClass: 'condition',
+              diceClass: "condition",
               threshold: 4,
-            }
+            },
           });
           await roll.toMessage({
             speaker: ChatMessage.getSpeaker({ actor }),
             flavor: `${conditionName} Ending Roll`,
-          })
+          });
           const total = roll.total;
           if (total === 4) {
             remove = true;
@@ -72,10 +76,10 @@ export async function _rollCondition(system, condition, options) {
         if (remove) {
           actor.toggleStatusEffect(condition, { active: false });
         }
-      }
-    })
+      },
+    });
     await dialog.render(true);
   } else {
     actor.toggleStatusEffect(condition, { active: false });
   }
-};
+}

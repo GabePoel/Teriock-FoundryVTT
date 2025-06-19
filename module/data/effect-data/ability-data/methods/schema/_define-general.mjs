@@ -4,7 +4,7 @@ import { abilityOptions } from "../../../../../helpers/constants/ability-options
 export function _defineGeneral(schema) {
   return {
     ...schema,
-    wikiNamespace: new fields.StringField({ initial: 'Ability' }),
+    wikiNamespace: new fields.StringField({ initial: "Ability" }),
     parentId: new fields.DocumentIdField({
       initial: null,
       nullable: true,
@@ -15,9 +15,11 @@ export function _defineGeneral(schema) {
       label: "Elder Sorcery",
     }),
     elderSorceryIncant: new fields.HTMLField({ initial: "" }),
-    powerSources: new fields.ArrayField(new fields.StringField({
-      choices: abilityOptions.powerSources,
-    })),
+    powerSources: new fields.ArrayField(
+      new fields.StringField({
+        choices: abilityOptions.powerSources,
+      }),
+    ),
     interaction: new fields.StringField({
       initial: "attack",
       choices: abilityOptions.interaction,
@@ -34,7 +36,7 @@ export function _defineGeneral(schema) {
     delivery: new fields.SchemaField({
       base: new fields.StringField({
         initial: "weapon",
-        choices: abilityOptions.delivery
+        choices: abilityOptions.delivery,
       }),
       parent: new fields.StringField({
         initial: null,
@@ -47,12 +49,16 @@ export function _defineGeneral(schema) {
         choices: abilityOptions.deliveryPackage,
       }),
     }),
-    targets: new fields.ArrayField(new fields.StringField({
-      choices: abilityOptions.targets,
-    })),
-    elements: new fields.ArrayField(new fields.StringField({
-      choices: abilityOptions.elements,
-    })),
+    targets: new fields.ArrayField(
+      new fields.StringField({
+        choices: abilityOptions.targets,
+      }),
+    ),
+    elements: new fields.ArrayField(
+      new fields.StringField({
+        choices: abilityOptions.elements,
+      }),
+    ),
     duration: new fields.StringField({ initial: "Instant" }),
     sustained: new fields.BooleanField({
       initial: false,
@@ -81,14 +87,16 @@ export function _defineGeneral(schema) {
     improvements: new fields.SchemaField({
       attributeImprovement: new fields.SchemaField({
         attribute: new fields.StringField({
-          initial: null, nullable: true,
+          initial: null,
+          nullable: true,
           choices: abilityOptions.attribute,
         }),
         minVal: new fields.NumberField({ initial: 0 }),
       }),
       featSaveImprovement: new fields.SchemaField({
         attribute: new fields.StringField({
-          initial: null, nullable: true,
+          initial: null,
+          nullable: true,
           choices: abilityOptions.featSaveAttribute,
         }),
         amount: new fields.StringField({ initial: "proficient" }),
@@ -104,33 +112,33 @@ export function _defineGeneral(schema) {
     }),
     standard: new fields.BooleanField({
       initial: false,
-      label: "Standard"
+      label: "Standard",
     }),
     ritual: new fields.BooleanField({
       initial: false,
-      label: "Ritual"
+      label: "Ritual",
     }),
     class: new fields.StringField({ initial: "" }),
     rotator: new fields.BooleanField({
       initial: false,
-      label: "Rotator"
+      label: "Rotator",
     }),
     invoked: new fields.BooleanField({
       initial: false,
-      label: "Invoked"
+      label: "Invoked",
     }),
     costs: new fields.SchemaField({
       verbal: new fields.BooleanField({
         initial: false,
-        label: "Verbal"
+        label: "Verbal",
       }),
       somatic: new fields.BooleanField({
         initial: false,
-        label: "Somatic"
+        label: "Somatic",
       }),
       material: new fields.BooleanField({
         initial: false,
-        label: "Material"
+        label: "Material",
       }),
       mp: new fields.SchemaField({
         type: new fields.StringField({
@@ -140,7 +148,7 @@ export function _defineGeneral(schema) {
             static: "Static",
             formula: "Formula",
             variable: "Variable",
-          }
+          },
         }),
         value: new fields.SchemaField({
           static: new fields.NumberField({
@@ -150,7 +158,7 @@ export function _defineGeneral(schema) {
           }),
           formula: new fields.StringField({ initial: "" }),
           variable: new fields.HTMLField({ initial: "" }),
-        })
+        }),
       }),
       hp: new fields.SchemaField({
         type: new fields.StringField({
@@ -161,7 +169,7 @@ export function _defineGeneral(schema) {
             formula: "Formula",
             variable: "Variable",
             hack: "Hack",
-          }
+          },
         }),
         value: new fields.SchemaField({
           static: new fields.NumberField({
@@ -171,7 +179,7 @@ export function _defineGeneral(schema) {
           }),
           formula: new fields.StringField({ initial: "" }),
           variable: new fields.HTMLField({ initial: "" }),
-        })
+        }),
       }),
       break: new fields.StringField({ initial: "" }),
       materialCost: new fields.HTMLField({ initial: "" }),
@@ -179,19 +187,21 @@ export function _defineGeneral(schema) {
     heightened: new fields.HTMLField({ initial: "" }),
     endCondition: new fields.HTMLField({ initial: "" }),
     requirements: new fields.HTMLField({ initial: "" }),
-    effects: new fields.ArrayField(new fields.StringField({
-      choices: abilityOptions.effects,
-    })),
+    effects: new fields.ArrayField(
+      new fields.StringField({
+        choices: abilityOptions.effects,
+      }),
+    ),
     expansion: new fields.StringField({ initial: null, nullable: true }),
     expansionRange: new fields.StringField({ initial: null, nullable: true }),
     expansionSaveAttribute: new fields.StringField({ initial: "mov" }),
     trigger: new fields.HTMLField({ initial: "" }),
     basic: new fields.BooleanField({
       initial: false,
-      label: "Basic"
+      label: "Basic",
     }),
     abilityType: new fields.StringField({ initial: "normal" }),
     limitation: new fields.HTMLField({ initial: "" }),
     improvement: new fields.HTMLField({ initial: "" }),
-  }
+  };
 }

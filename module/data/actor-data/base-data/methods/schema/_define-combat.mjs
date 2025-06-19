@@ -31,7 +31,7 @@ export function _defineCombat(schema) {
       none: "None",
       av0: "AV0",
       ub: "UB",
-    }
+    },
   });
   return schema;
 }

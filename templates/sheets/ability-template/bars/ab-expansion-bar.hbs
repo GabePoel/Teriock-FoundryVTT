@@ -1,43 +1,43 @@
 {{#if system.expansion}}
-  <div class="ab-bar ab-bar-4">
-    <div class="ab-box-container">
-      <div
-        class="ab-box {{#if editable}}expansion-box expansion-box-{{system.expansion}}{{/if}}"
-        data-tooltip="Expansion Delivery"
-      >
-        <div class="ab-box-icon">
-          {{{config.icons.expansion}}}
-        </div>
-        <div class="ab-box-content">
-          {{#if
-            (or (eq system.expansion "detonate") (eq system.expansion "ripple"))
-          }}
-            {{lookup
-              config.abilityOptions.featSaveAttribute
-              system.expansionSaveAttribute
-            }}
-          {{/if}}
-          {{lookup config.abilityOptions.expansion system.expansion}}
-        </div>
+<div class="ab-bar ab-bar-4">
+  <div class="ab-box-container">
+    <div
+      class="ab-box {{#if editable}}expansion-box expansion-box-{{system.expansion}}{{/if}}"
+      data-tooltip="Expansion Delivery"
+    >
+      <div class="ab-box-icon">
+        {{{config.icons.expansion}}}
       </div>
-    </div>
-    <div class="ab-box-container">
-      <div
-        class="ab-box {{#if editable}}ab-input-box expansion-range-box{{/if}}"
-        data-tooltip="Expansion Range"
-      >
-        <div class="ab-box-icon">
-          {{{config.icons.expansionRange}}}
-        </div>
-        <div class="ab-box-content">
-          {{formInput
-            systemFields.expansionRange
-            value=system.expansionRange
-            disabled=(not editable)
-            classes="ability-bar-input range-input"
-          }}
-        </div>
+      <div class="ab-box-content">
+        {{#if
+        (or (eq system.expansion "detonate") (eq system.expansion "ripple"))
+        }}
+        {{lookup
+        config.abilityOptions.featSaveAttribute
+        system.expansionSaveAttribute
+        }}
+        {{/if}}
+        {{lookup config.abilityOptions.expansion system.expansion}}
       </div>
     </div>
   </div>
+  <div class="ab-box-container">
+    <div
+      class="ab-box {{#if editable}}ab-input-box expansion-range-box{{/if}}"
+      data-tooltip="Expansion Range"
+    >
+      <div class="ab-box-icon">
+        {{{config.icons.expansionRange}}}
+      </div>
+      <div class="ab-box-content">
+        {{formInput
+        systemFields.expansionRange
+        value=system.expansionRange
+        disabled=(not editable)
+        classes="ability-bar-input range-input"
+        }}
+      </div>
+    </div>
+  </div>
+</div>
 {{/if}}

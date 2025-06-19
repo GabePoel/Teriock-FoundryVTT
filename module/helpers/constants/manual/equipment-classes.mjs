@@ -1,1 +1,1 @@
-export const remove = ['weaponClasses']
+export const remove = ["weaponClasses"];

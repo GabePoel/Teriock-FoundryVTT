@@ -11,35 +11,41 @@ export async function createAbility(document, name, options = {}) {
     parentAbility = document;
     document = document.parent;
   }
-  const ability = await TeriockBaseEffect.create({
-    name: assignedName,
-    type: "ability",
-    img: "systems/teriock/assets/ability.svg",
-  }, { parent: document });
+  const ability = await TeriockBaseEffect.create(
+    {
+      name: assignedName,
+      type: "ability",
+      img: "systems/teriock/assets/ability.svg",
+    },
+    { parent: document },
+  );
   if (assignedName !== "New Ability") {
     await ability.system.wikiPull(options);
   }
   if (parentAbility) {
-    await parentAbility.parent.updateEmbeddedDocuments('ActiveEffect', [
+    await parentAbility.parent.updateEmbeddedDocuments("ActiveEffect", [
       {
         _id: ability._id,
-        'system.parentId': parentAbility._id
+        "system.parentId": parentAbility._id,
       },
       {
         _id: parentAbility._id,
-        'system.childIds': parentAbility.system.childIds.concat(ability._id)
-      }
+        "system.childIds": parentAbility.system.childIds.concat(ability._id),
+      },
     ]);
   }
   return ability;
 }
 
 export async function createResource(document) {
-  return await TeriockBaseEffect.create({
-    name: "New Resource",
-    type: "resource",
-    img: "systems/teriock/assets/resource.svg",
-  }, { parent: document });
+  return await TeriockBaseEffect.create(
+    {
+      name: "New Resource",
+      type: "resource",
+      img: "systems/teriock/assets/resource.svg",
+    },
+    { parent: document },
+  );
 }
 
 export async function createProperty(document, key = null) {
@@ -69,26 +75,35 @@ export async function createProperty(document, key = null) {
     description: description,
   };
 
-  return await TeriockBaseEffect.create({
-    name: name,
-    type: "property",
-    img: "systems/teriock/assets/property.svg",
-    system: system,
-  }, { parent: document });
+  return await TeriockBaseEffect.create(
+    {
+      name: name,
+      type: "property",
+      img: "systems/teriock/assets/property.svg",
+      system: system,
+    },
+    { parent: document },
+  );
 }
 
 export async function createEffect(document) {
-  return await TeriockBaseEffect.create({
-    name: "New Effect",
-    type: "effect",
-    img: "systems/teriock/assets/effect.svg",
-  }, { parent: document });
+  return await TeriockBaseEffect.create(
+    {
+      name: "New Effect",
+      type: "effect",
+      img: "systems/teriock/assets/effect.svg",
+    },
+    { parent: document },
+  );
 }
 
 export async function createFluency(document) {
-  return await TeriockBaseEffect.create({
-    name: "New Fluency",
-    type: "fluency",
-    img: "systems/teriock/assets/fluency.svg",
-  }, { parent: document });
+  return await TeriockBaseEffect.create(
+    {
+      name: "New Fluency",
+      type: "fluency",
+      img: "systems/teriock/assets/fluency.svg",
+    },
+    { parent: document },
+  );
 }

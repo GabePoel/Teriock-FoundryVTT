@@ -15,15 +15,15 @@ export function tradecraftContextMenu(fluency) {
         icon: icon,
         callback: () => {
           fluency.update({
-            'system': {
-              'field': field,
-              'tradecraft': tradecraft,
-            }
+            system: {
+              field: field,
+              tradecraft: tradecraft,
+            },
           });
         },
         condition: () => {
-          return foundry.utils.getProperty(fluency.system, 'field') === field;
-        }
+          return foundry.utils.getProperty(fluency.system, "field") === field;
+        },
       };
       options.push(option);
     }
@@ -44,10 +44,10 @@ export function fieldContextMenu(fluency) {
       icon: icon,
       callback: () => {
         fluency.update({
-          'system': {
-            'field': field,
-            'tradecraft': firstTradecraft,
-          }
+          system: {
+            field: field,
+            tradecraft: firstTradecraft,
+          },
         });
       },
     };

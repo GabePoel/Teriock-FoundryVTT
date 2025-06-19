@@ -13,31 +13,31 @@
       Save
     </div>
     {{#each system.attributes as |attribute name|}}
-      <div class="tcolored tcenter ch-attribute-save-box" data-attribute="{{name}}" data-path="system.attributes.{{name}}.saveProficient" data-bool="{{attribute.saveProficient}}" data-action="quickToggle">
-        {{{ifThen
-          attribute.saveFluent
-          '<i class="thover fa-solid fa-circle-dot" data-tooltip="Fluent"></i>'
-          (ifThen
-            attribute.saveProficient
-            '<i class="thover fa-regular fa-circle-dot" data-tooltip="Proficient"></i>'
-            '<i class="thover fa-regular fa-circle" data-tooltip="None"></i>'
-          )
-        }}}
-      </div>
-      <div class="tcenter thover" style="text-transform: uppercase;" data-action="rollFeatSave" data-attribute="{{name}}" data-tooltip="Roll {{uc (name)}} Save">
-        {{name}}
-      </div>
-      <div class="tcenter">
-        <input
-          type="number"
-          name="system.attributes.{{name}}.value"
-          value="{{attribute.value}}"
-          class="ch-attribute-input tcolored tcenter ttransparent"
-        />
-      </div>
-      <div class="tcolored tcenter">
-        {{lookup ../system (concat name 'Save')}}
-      </div>
+    <div class="tcolored tcenter ch-attribute-save-box" data-attribute="{{name}}" data-path="system.attributes.{{name}}.saveProficient" data-bool="{{attribute.saveProficient}}" data-action="quickToggle">
+      {{{ifThen
+      attribute.saveFluent
+      '<i class="thover fa-solid fa-circle-dot" data-tooltip="Fluent"></i>'
+      (ifThen
+      attribute.saveProficient
+      '<i class="thover fa-regular fa-circle-dot" data-tooltip="Proficient"></i>'
+      '<i class="thover fa-regular fa-circle" data-tooltip="None"></i>'
+      )
+      }}}
+    </div>
+    <div class="tcenter thover" style="text-transform: uppercase;" data-action="rollFeatSave" data-attribute="{{name}}" data-tooltip="Roll {{uc (name)}} Save">
+      {{name}}
+    </div>
+    <div class="tcenter">
+      <input
+        type="number"
+        name="system.attributes.{{name}}.value"
+        value="{{attribute.value}}"
+        class="ch-attribute-input tcolored tcenter ttransparent"
+      >
+    </div>
+    <div class="tcolored tcenter">
+      {{lookup ../system (concat name 'Save')}}
+    </div>
     {{/each}}
   </div>
 </div>

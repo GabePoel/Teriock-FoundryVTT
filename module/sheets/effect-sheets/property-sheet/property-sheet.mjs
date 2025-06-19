@@ -8,19 +8,15 @@ import TeriockBaseEffectSheet from "../base-sheet/base-sheet.mjs";
  */
 export default class TeriockPropertySheet extends api.HandlebarsApplicationMixin(TeriockBaseEffectSheet) {
   static DEFAULT_OPTIONS = {
-    classes: ['property'],
+    classes: ["property"],
     window: {
       icon: "fa-solid fa-" + documentOptions.property.icon,
     },
   };
   static PARTS = {
     all: {
-      template: 'systems/teriock/templates/sheets/property-template/property-template.hbs',
-      scrollable: [
-        '.window-content',
-        '.tsheet-page',
-        '.ab-sheet-everything',
-      ],
+      template: "systems/teriock/templates/sheets/property-template/property-template.hbs",
+      scrollable: [".window-content", ".tsheet-page", ".ab-sheet-everything"],
     },
   };
 
@@ -29,6 +25,6 @@ export default class TeriockPropertySheet extends api.HandlebarsApplicationMixin
     super._onRender(context, options);
     if (!this.editable) return;
     const propertyContextMenuOptions = propertyContextMenu(this.document);
-    this._connectContextMenu('.property-type-box', propertyContextMenuOptions, 'click');
+    this._connectContextMenu(".property-type-box", propertyContextMenuOptions, "click");
   }
 }

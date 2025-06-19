@@ -57,7 +57,6 @@ export const icons = {
   av0: '<i class="fa-solid fa-a"></i>',
   ub: '<i class="fa-solid fa-u"></i>',
   numerical: '<i class="fa-solid fa-hashtag"></i>',
-  hack: '<i class="fa-solid fa-axe"></i>',
   variable: '<i class="fa-solid fa-question"></i>',
   a0: '<i class="fa-solid fa-0"></i>',
   a1: '<i class="fa-solid fa-1"></i>',
@@ -84,4 +83,4 @@ export const icons = {
   locked: '<i class="fa-solid fa-lock"></i>',
   unlocked: '<i class="fa-solid fa-lock-open"></i>',
   formula: '<i class="fa-solid fa-function"></i>',
-}
+};

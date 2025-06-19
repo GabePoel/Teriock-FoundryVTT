@@ -11,21 +11,18 @@ export function _messageParts(fluencyData) {
   const src = fluencyData;
   const bars = [
     {
-      icon: 'fa-' + ref[src.field].tradecrafts[src.tradecraft].icon,
-      wrappers: [
-        ref[src.field].name,
-        ref[src.field].tradecrafts[src.tradecraft].name,
-      ],
-    }
-  ]
+      icon: "fa-" + ref[src.field].tradecrafts[src.tradecraft].icon,
+      wrappers: [ref[src.field].name, ref[src.field].tradecrafts[src.tradecraft].name],
+    },
+  ];
   const blocks = [
     {
-      title: 'Description',
+      title: "Description",
       text: src.description,
     },
-  ]
+  ];
   return {
     bars: bars,
     blocks: blocks,
-  }
+  };
 }

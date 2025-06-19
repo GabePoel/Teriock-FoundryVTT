@@ -16,8 +16,10 @@ export function _prepareEncumbrance(system) {
   if (system.weightCarried >= system.carryingCapacity.max) {
     encumbranceLevel = 3;
   }
-  const hasCumbersome = actor.itemTypes.equipment
-    .some(item => item.system.equipped && Array.isArray(item.system.properties) && item.system.properties.includes("cumbersome"));
+  const hasCumbersome = actor.itemTypes.equipment.some(
+    (item) =>
+      item.system.equipped && Array.isArray(item.system.properties) && item.system.properties.includes("cumbersome"),
+  );
   if (hasCumbersome) {
     encumbranceLevel += 1;
   }
@@ -52,7 +54,7 @@ export function _prepareMoney(system) {
 export function _prepareWeightCarried(system) {
   const actor = system.parent;
   const weight = actor.itemTypes.equipment
-    .filter(i => i.system.equipped)
+    .filter((i) => i.system.equipped)
     .reduce((sum, i) => {
       return sum + (i.system.weight || 0);
     }, 0);

@@ -1,9 +1,9 @@
 import TeriockRoll from "../../../../documents/roll.mjs";
 
 async function rollResourceDie(type, rank) {
-  const dieKey = type === 'hit' ? 'hitDie' : 'manaDie';
-  const spentKey = type === 'hit' ? 'hitDieSpent' : 'manaDieSpent';
-  const resourceKey = type === 'hit' ? 'hp' : 'mp';
+  const dieKey = type === "hit" ? "hitDie" : "manaDie";
+  const spentKey = type === "hit" ? "hitDieSpent" : "manaDieSpent";
+  const resourceKey = type === "hit" ? "hp" : "mp";
   if (rank.system[spentKey]) return;
 
   const die = rank.system[dieKey];
@@ -11,7 +11,7 @@ async function rollResourceDie(type, rank) {
   await roll.evaluate({ async: true });
   await roll.toMessage({
     speaker: ChatMessage.getSpeaker({ actor: rank.actor }),
-    flavor: `${type === 'hit' ? 'Hit' : 'Mana'} Die`,
+    flavor: `${type === "hit" ? "Hit" : "Mana"} Die`,
     type: CONST.CHAT_MESSAGE_TYPES.ROLL,
     rollMode: game.settings.get("core", "rollMode"),
     create: true,
@@ -20,15 +20,15 @@ async function rollResourceDie(type, rank) {
   await rank.actor.update({
     [`system.${resourceKey}.value`]: Math.min(
       rank.actor.system[resourceKey].max,
-      rank.actor.system[resourceKey].value + roll.total
+      rank.actor.system[resourceKey].value + roll.total,
     ),
   });
 }
 
 export async function _rollHitDie(rank) {
-  return rollResourceDie('hit', rank);
+  return rollResourceDie("hit", rank);
 }
 
 export async function _rollManaDie(rank) {
-  return rollResourceDie('mana', rank);
+  return rollResourceDie("mana", rank);
 }

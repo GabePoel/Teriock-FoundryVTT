@@ -6,10 +6,10 @@ export default class DetectionModeTrueSightPerception extends TeriockDetectionMo
 
   /** @override */
   static getDetectionFilter() {
-    return this._detectionFilter ??= OutlineOverlayFilter.create({
+    return (this._detectionFilter ??= OutlineOverlayFilter.create({
       outlineColor: [1, 1, 1, 1],
       knockout: true,
-    });
+    }));
   }
 
   /** @override */

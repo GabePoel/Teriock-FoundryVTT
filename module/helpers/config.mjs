@@ -48,6 +48,6 @@ const TERIOCK = {
     survivalist: tradecraftOptions.survivalist,
   },
   resourceOptions: resourceOptions,
-}
+};
 
 export default TERIOCK;

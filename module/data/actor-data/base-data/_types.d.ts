@@ -1,14 +1,9 @@
 import { TeriockActor } from "../../../documents/_module.mjs";
-import {
-  BarData,
-  AttributeData,
-  HackData,
-  SheetData,
-  TradecraftData,
-} from "./methods/schema/_types";
+import { BarData, AttributeData, HackData, SheetData, TradecraftData } from "./methods/schema/_types";
+import TypeDataModel from "@common/abstract/type-data.mjs";
 
 declare module "./base-data.mjs" {
-  export default interface TeriockBaseActorData {
+  export default interface TeriockBaseActorData extends TypeDataModel {
     parent: TeriockActor;
     lvl: number;
     size: number;

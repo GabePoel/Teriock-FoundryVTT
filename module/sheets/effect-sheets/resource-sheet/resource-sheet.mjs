@@ -8,7 +8,7 @@ import TeriockBaseEffectSheet from "../base-sheet/base-sheet.mjs";
  */
 export default class TeriockResourceSheet extends api.HandlebarsApplicationMixin(TeriockBaseEffectSheet) {
   static DEFAULT_OPTIONS = {
-    classes: ['resource'],
+    classes: ["resource"],
     window: {
       icon: "fa-solid fa-" + documentOptions.resource.icon,
     },
@@ -16,18 +16,14 @@ export default class TeriockResourceSheet extends api.HandlebarsApplicationMixin
 
   static PARTS = {
     all: {
-      template: 'systems/teriock/templates/sheets/resource-template/resource-template.hbs',
-      scrollable: [
-        '.window-content',
-        '.tsheet-page',
-        '.ab-sheet-everything',
-      ],
+      template: "systems/teriock/templates/sheets/resource-template/resource-template.hbs",
+      scrollable: [".window-content", ".tsheet-page", ".ab-sheet-everything"],
     },
   };
 
   /** @override */
   _onRender() {
     super._onRender();
-    this._connectContextMenu('.function-box', callbackContextMenu(this.document), 'click');
+    this._connectContextMenu(".function-box", callbackContextMenu(this.document), "click");
   }
 }

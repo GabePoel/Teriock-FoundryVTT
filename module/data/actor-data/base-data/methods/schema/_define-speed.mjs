@@ -8,7 +8,7 @@ function speedField(initial, name) {
     min: 0,
     step: 1,
     label: `${name} Speed Adjustment`,
-  })
+  });
 }
 
 export function _defineSpeed(schema) {
@@ -24,6 +24,6 @@ export function _defineSpeed(schema) {
     leapHorizontal: speedField(1, "Horizontal Leap"),
     leapVertical: speedField(0, "Vertical Leap"),
     swim: speedField(1, "Swim"),
-  })
+  });
   return schema;
 }

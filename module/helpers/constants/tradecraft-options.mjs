@@ -1,148 +1,148 @@
 export const tradecraftOptions = {
   artisan: {
-    name: 'Artisan',
-    icon: 'pen-ruler',
+    name: "Artisan",
+    icon: "pen-ruler",
     tradecrafts: {
       artist: {
-        name: 'Artist',
-        icon: 'palette',
+        name: "Artist",
+        icon: "palette",
       },
       blacksmith: {
-        name: 'Blacksmith',
-        icon: 'hammer-crash',
+        name: "Blacksmith",
+        icon: "hammer-crash",
       },
       builder: {
-        name: 'Builder',
-        icon: 'trowel-bricks',
+        name: "Builder",
+        icon: "trowel-bricks",
       },
       chef: {
-        name: 'Chef',
-        icon: 'knife-kitchen',
+        name: "Chef",
+        icon: "knife-kitchen",
       },
       locksmith: {
-        name: 'Locksmith',
-        icon: 'key-skeleton',
+        name: "Locksmith",
+        icon: "key-skeleton",
       },
       mariner: {
-        name: 'Mariner',
-        icon: 'sailboat',
+        name: "Mariner",
+        icon: "sailboat",
       },
       tailor: {
-        name: 'Tailor',
-        icon: 'reel',
+        name: "Tailor",
+        icon: "reel",
       },
-    }
+    },
   },
   mediator: {
-    name: 'Mediator',
-    icon: 'people-arrows',
+    name: "Mediator",
+    icon: "people-arrows",
     tradecrafts: {
       courtier: {
-        name: 'Courtier',
-        icon: 'comments',
+        name: "Courtier",
+        icon: "comments",
       },
       enforcer: {
-        name: 'Enforcer',
-        icon: 'badge-sheriff',
+        name: "Enforcer",
+        icon: "badge-sheriff",
       },
       gambler: {
-        name: 'Gambler',
-        icon: 'cards',
+        name: "Gambler",
+        icon: "cards",
       },
       innkeeper: {
-        name: 'Innkeeper',
-        icon: 'hotel',
+        name: "Innkeeper",
+        icon: "hotel",
       },
       peacekeeper: {
-        name: 'Peacekeeper',
-        icon: 'hand-peace',
+        name: "Peacekeeper",
+        icon: "hand-peace",
       },
       performer: {
-        name: 'Performer',
-        icon: 'masks-theater',
+        name: "Performer",
+        icon: "masks-theater",
       },
       trader: {
-        name: 'Trader',
-        icon: 'coin',
+        name: "Trader",
+        icon: "coin",
       },
-    }
+    },
   },
   scholar: {
-    name: 'Scholar',
-    icon: 'books',
+    name: "Scholar",
+    icon: "books",
     tradecrafts: {
       cartographer: {
-        name: 'Cartographer',
-        icon: 'map',
+        name: "Cartographer",
+        icon: "map",
       },
       diplomat: {
-        name: 'Diplomat',
-        icon: 'scale-balanced',
+        name: "Diplomat",
+        icon: "scale-balanced",
       },
       historian: {
-        name: 'Historian',
-        icon: 'book',
+        name: "Historian",
+        icon: "book",
       },
       messenger: {
-        name: 'Messenger',
-        icon: 'scroll',
+        name: "Messenger",
+        icon: "scroll",
       },
       priest: {
-        name: 'Priest',
-        icon: 'hands-praying',
+        name: "Priest",
+        icon: "hands-praying",
       },
       scribe: {
-        name: 'Scribe',
-        icon: 'pen-fancy',
+        name: "Scribe",
+        icon: "pen-fancy",
       },
       teacher: {
-        name: 'Teacher',
-        icon: 'person-chalkboard',
+        name: "Teacher",
+        icon: "person-chalkboard",
       },
-    }
+    },
   },
   survivalist: {
-    name: 'Survivalist',
-    icon: 'trees',
+    name: "Survivalist",
+    icon: "trees",
     tradecrafts: {
       farmer: {
-        name: 'Farmer',
-        icon: 'wheat',
+        name: "Farmer",
+        icon: "wheat",
       },
       herbalist: {
-        name: 'Herbalist',
-        icon: 'mistletoe',
+        name: "Herbalist",
+        icon: "mistletoe",
       },
       hunter: {
-        name: 'Hunter',
-        icon: 'bow-arrow',
+        name: "Hunter",
+        icon: "bow-arrow",
       },
       investigator: {
-        name: 'Investigator',
-        icon: 'magnifying-glass',
+        name: "Investigator",
+        icon: "magnifying-glass",
       },
       miner: {
-        name: 'Miner',
-        icon: 'pickaxe',
+        name: "Miner",
+        icon: "pickaxe",
       },
       tamer: {
-        name: 'Tamer',
-        icon: 'horse-saddle',
+        name: "Tamer",
+        icon: "horse-saddle",
       },
       tracker: {
-        name: 'Tracker',
-        icon: 'paw-simple',
+        name: "Tracker",
+        icon: "paw-simple",
       },
-    }
+    },
   },
   prestige: {
-    name: 'Prestige',
-    icon: 'sparkle',
+    name: "Prestige",
+    icon: "sparkle",
     tradecrafts: {
       metaphysics: {
-        name: 'Metaphysics',
-        icon: 'book-sparkles',
-      }
-    }
-  }
-}
+        name: "Metaphysics",
+        icon: "book-sparkles",
+      },
+    },
+  },
+};

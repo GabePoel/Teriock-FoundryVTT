@@ -10,7 +10,7 @@ export default class EtherealFilter extends AbstractBaseFilter {
   static defaultUniforms = {
     blur: 1.0,
     desaturate: 1.0,
-    time: 0
+    time: 0,
   };
 
   static fragmentShader = `

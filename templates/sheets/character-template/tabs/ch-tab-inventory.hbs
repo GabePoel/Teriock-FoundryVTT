@@ -4,17 +4,17 @@
     <div class="tcard-display">
       <div class="money-panels tgrid g3">
         {{#each config.currencyOptions as |currency id|}}
-          <div class="money-panel tgrid g4">
-            <input type="number" class="tgrid-item gi1 money-panel-input tgrid-item tcenter" data-action="updateCurrency" name="system.money.{{id}}" value="{{lookup ../system.money id}}" min="0"/>
-            <div class="money-info tsubtle tcenter tgrid-item gi3">
-              <div class="money-name">
-                {{currency.name}}
-              </div>
-              <div class="money-value">
-                ({{currency.value}} ₲, {{currency.weight}} lb)
-              </div>
+        <div class="money-panel tgrid g4">
+          <input type="number" class="tgrid-item gi1 money-panel-input tgrid-item tcenter" data-action="updateCurrency" name="system.money.{{id}}" value="{{lookup ../system.money id}}" min="0">
+          <div class="money-info tsubtle tcenter tgrid-item gi3">
+            <div class="money-name">
+              {{currency.name}}
+            </div>
+            <div class="money-value">
+              ({{currency.value}} ₲, {{currency.weight}} lb)
             </div>
           </div>
+        </div>
         {{/each}}
       </div>
       <div class="money-total">
@@ -26,9 +26,9 @@
       <div class="tcard-options">
         {{tcardOptions system.sheet.menus.equipmentOptions system.sheet.menus.equipmentFilters system.sheet.menus.equipmentSort system.sheet.equipmentFilters.search "equipment" sortOptions=config.displayOptions.equipmentSortOrders sortValue=system.sheet.equipmentSortOption}}
         {{#if system.sheet.menus.equipmentFilters}}
-          <div class="tcard-options-content">
-            {{> 'systems/teriock/templates/sheets/character-template/filters/ch-equipment-filter.hbs'}}
-          </div>
+        <div class="tcard-options-content">
+          {{> 'systems/teriock/templates/sheets/character-template/filters/ch-equipment-filter.hbs'}}
+        </div>
         {{/if}}
       </div>
       {{> 'systems/teriock/templates/sheets/character-template/results/ch-equipment-results.hbs'}}

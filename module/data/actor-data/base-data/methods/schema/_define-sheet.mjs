@@ -4,7 +4,7 @@ function displayField(size = "medium", gapless = false) {
   return new fields.SchemaField({
     size: new fields.StringField({ initial: size }),
     gapless: new fields.BooleanField({ initial: gapless }),
-  })
+  });
 }
 
 export function _defineSheet(schema) {

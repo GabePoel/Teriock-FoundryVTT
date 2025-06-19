@@ -1,13 +1,13 @@
-/** @import { AbilityRollOptions } from "../../../../types/rolls"; */
+/** @import { CommonRollOptions } from "../../../../types/rolls"; */
 /** @import TeriockAbilityData from "../ability-data.mjs"; */
-const { api, ux } = foundry.applications
+const { api, ux } = foundry.applications;
 import { _generateEffect } from "./_generate-effect.mjs";
 import { evaluateAsync } from "../../../../helpers/utils.mjs";
 import TeriockRoll from "../../../../documents/roll.mjs";
 
 /**
  * @param {TeriockAbilityData} abilityData
- * @param {AbilityRollOptions} options
+ * @param {CommonRollOptions} options
  * @returns {Promise<void>}
  * @private
  */
@@ -16,11 +16,11 @@ export async function _roll(abilityData, options) {
   const disadvantage = options?.disadvantage || false;
   await stageUse(abilityData, advantage, disadvantage);
   await use(abilityData);
-  if (abilityData.duration && abilityData.duration !== 'Instant' && abilityData.maneuver !== 'passive') {
-    if (abilityData.targets.includes('self') || abilityData.delivery.base === 'self') {
+  if (abilityData.duration && abilityData.duration !== "Instant" && abilityData.maneuver !== "passive") {
+    if (abilityData.targets.includes("self") || abilityData.delivery.base === "self") {
       await _generateEffect(abilityData, abilityData.parent.getActor());
     }
-    if (abilityData.targets.includes('creature')) {
+    if (abilityData.targets.includes("creature")) {
       const targets = game.user.targets;
       for (const target of targets) {
         console.log(target, target.actor);
@@ -50,22 +50,22 @@ async function attackMessage(abilityData, roll) {
       targetsMissed.push(targetActor);
     }
   }
-  let message = '';
+  let message = "";
   if (targetsHit.length > 0) {
-    message += `<p><b>Targets hit</b></p>`;
-    message += `<ul>`;
+    message += "<p><b>Targets hit</b></p>";
+    message += "<ul>";
     for (const target of targetsHit) {
       message += `<li>${target.name}</li>`;
     }
-    message += `</ul>`;
+    message += "</ul>";
   }
   if (targetsMissed.length > 0) {
-    message += `<p><b>Targets missed</b></p>`;
-    message += `<ul>`;
+    message += "<p><b>Targets missed</b></p>";
+    message += "<ul>";
     for (const target of targetsMissed) {
       message += `<li>${target.name}</li>`;
     }
-    message += `</ul>`;
+    message += "</ul>";
   }
   return message;
 }
@@ -86,107 +86,137 @@ async function stageUse(abilityData, advantage, disadvantage) {
   abilityData.live.costs.mp = 0;
   abilityData.live.costs.hp = 0;
   abilityData.live.modifiers.heightened = 0;
-  if (abilityData.costs.mp.type == 'static') {
+  if (abilityData.costs.mp.type == "static") {
     abilityData.live.costs.mp = abilityData.costs.mp.value.static;
-  } else if (abilityData.costs.mp.type === 'formula') {
-    abilityData.live.costs.mp = await evaluateAsync(abilityData.costs.mp.value.formula, abilityData.parent.getActor().getRollData());
+  } else if (abilityData.costs.mp.type === "formula") {
+    abilityData.live.costs.mp = await evaluateAsync(
+      abilityData.costs.mp.value.formula,
+      abilityData.parent.getActor().getRollData(),
+    );
   }
-  if (abilityData.costs.hp.type == 'static') {
+  if (abilityData.costs.hp.type == "static") {
     abilityData.live.costs.hp = abilityData.costs.hp.value.static;
-  } else if (abilityData.costs.hp.type === 'formula') {
-    abilityData.live.costs.hp = await evaluateAsync(abilityData.costs.hp.value.formula, abilityData.parent.getActor().getRollData());
+  } else if (abilityData.costs.hp.type === "formula") {
+    abilityData.live.costs.hp = await evaluateAsync(
+      abilityData.costs.hp.value.formula,
+      abilityData.parent.getActor().getRollData(),
+    );
   }
-  let rollFormula = '';
-  if (abilityData.interaction == 'attack') {
-    rollFormula += '1d20'
+  let rollFormula = "";
+  if (abilityData.interaction == "attack") {
+    rollFormula += "1d20";
     if (advantage) {
-      rollFormula = '2d20kh1';
+      rollFormula = "2d20kh1";
     } else if (disadvantage) {
-      rollFormula = '2d20kl1';
+      rollFormula = "2d20kl1";
     }
-    rollFormula += ' + @atkPen + @av0';
-    if (abilityData.delivery.base == 'weapon') {
-      rollFormula += ' + @sb';
+    rollFormula += " + @atkPen + @av0";
+    if (abilityData.delivery.base == "weapon") {
+      rollFormula += " + @sb";
     }
-  } else if (abilityData.interaction == 'feat') {
-    rollFormula = '10';
+  } else if (abilityData.interaction == "feat") {
+    rollFormula = "10";
   } else {
-    rollFormula = '0';
+    rollFormula = "0";
   }
-  if (abilityData.effects.includes('resistance')) {
-    rollFormula = '1d20';
+  if (abilityData.effects.includes("resistance")) {
+    rollFormula = "1d20";
     if (advantage) {
-      rollFormula = '2d20kh1';
+      rollFormula = "2d20kh1";
     } else if (disadvantage) {
-      rollFormula = '2d20kl1';
+      rollFormula = "2d20kl1";
     }
   }
   const dialogs = [];
-  if (abilityData.costs.mp.type === 'variable') {
-    let mpDialog = `<fieldset><legend>Variable Mana Cost</legend>`
+  if (abilityData.costs.mp.type === "variable") {
+    let mpDialog = "<fieldset><legend>Variable Mana Cost</legend>";
     const variableMpDescription = await ux.TextEditor.enrichHTML(abilityData.costs.mp.value.variable);
     mpDialog += `<div>${variableMpDescription}</div>`;
-    mpDialog += `<input type="number" name="mp" value="0" min="0" max="${abilityData.parent.getActor().system.mp.value - abilityData.parent.getActor().system.mp.min}" step="1"></input></fieldset>`;
+    mpDialog += `
+      <input
+        type="number"
+        name="mp"
+        value="0"
+        min="0"
+        max="${abilityData.parent.getActor().system.mp.value - abilityData.parent.getActor().system.mp.min}"
+        step="1"
+      ></input></fieldset>`;
     dialogs.push(mpDialog);
   }
-  if (abilityData.costs.hp.type === 'variable') {
-    let hpDialog = `<fieldset><legend>Variable Hit Point Cost</legend>`;
+  if (abilityData.costs.hp.type === "variable") {
+    let hpDialog = "<fieldset><legend>Variable Hit Point Cost</legend>";
     const variableHpDescription = await ux.TextEditor.enrichHTML(abilityData.costs.hp.value.variable);
     hpDialog += `<div>${variableHpDescription}</div>`;
-    hpDialog += `<input type="number" name="hp" value="0" min="0" max="${abilityData.parent.getActor().system.hp.value - abilityData.parent.getActor().system.hp.min}" step="1"></input></fieldset>`;
+    hpDialog += `
+      <input
+        type="number"
+        name="hp"
+        value="0"
+        min="0"
+        max="${abilityData.parent.getActor().system.hp.value - abilityData.parent.getActor().system.hp.min}"
+        step="1"
+      ></input></fieldset>`;
     dialogs.push(hpDialog);
   }
   if (abilityData.isProficient && abilityData.heightened) {
     const p = abilityData.isProficient ? abilityData.parent.getActor().system.p : 0;
-    let heightenedDialog = '<fieldset><legend>Heightened Amount</legend>';
+    let heightenedDialog = "<fieldset><legend>Heightened Amount</legend>";
     const heightenedDescription = await ux.TextEditor.enrichHTML(abilityData.heightened);
     heightenedDialog += `<div>${heightenedDescription}</div>`;
-    heightenedDialog += `<input type="number" name="heightened" value="0" min="0" max="${p}" step="1"></input></fieldset>`;
+    heightenedDialog += `
+      <input
+        type="number"
+        name="heightened"
+        value="0"
+        min="0"
+        max="${p}"
+        step="1"
+      ></input></fieldset>`;
     dialogs.push(heightenedDialog);
   }
   if (dialogs.length > 0) {
-    let title = '';
+    let title = "";
     if (abilityData.spell) {
-      title += 'Casting ';
+      title += "Casting ";
     } else {
-      title += 'Executing ';
+      title += "Executing ";
     }
     title += abilityData.parent.name;
     await api.DialogV2.prompt({
       window: { title: title },
-      content: dialogs.join(''),
+      content: dialogs.join(""),
       ok: {
         label: "Confirm",
         callback: (event, button, dialog) => {
-          if (abilityData.costs.mp.type == 'variable') {
+          if (abilityData.costs.mp.type == "variable") {
             abilityData.live.costs.mp = button.form.elements.mp.valueAsNumber;
           }
-          if (abilityData.costs.hp.type == 'variable') {
+          if (abilityData.costs.hp.type == "variable") {
             abilityData.live.costs.hp = button.form.elements.hp.valueAsNumber;
           }
           if (abilityData.isProficient && abilityData.heightened) {
             abilityData.live.modifiers.heightened = button.form.elements.heightened.valueAsNumber;
             abilityData.live.costs.mp += abilityData.live.modifiers.heightened;
           }
-        }
+        },
       },
     });
   }
-  if (['attack', 'feat'].includes(abilityData.interaction) || abilityData.effects.includes('resistance')) {
+  if (["attack", "feat"].includes(abilityData.interaction) || abilityData.effects.includes("resistance")) {
     if (abilityData.isFluent) {
-      rollFormula += ' + @f';
+      rollFormula += " + @f";
     } else if (abilityData.isProficient) {
-      rollFormula += ' + @p';
+      rollFormula += " + @p";
     }
     if (abilityData.live.modifiers.heightened > 0) {
-      rollFormula += ' + @h';
+      rollFormula += " + @h";
     }
   }
   abilityData.live.formula = rollFormula;
 }
 
 /**
- * @param {TeriockAbilityData} abilityData 
+ * @param {TeriockAbilityData} abilityData
  * @returns {Promise<TeriockRoll>}
  */
 async function use(abilityData) {
@@ -197,32 +227,32 @@ async function use(abilityData) {
   let properties;
   let diceClass;
   let diceTooltip;
-  if (abilityData.delivery.base == 'weapon') {
+  if (abilityData.delivery.base == "weapon") {
     properties = abilityData.parent.getActor().system.primaryAttacker?.effectKeys?.property || new Set();
-    if (properties.has('av0') || abilityData.parent.getActor()?.system.piercing == 'av0') {
+    if (properties.has("av0") || abilityData.parent.getActor()?.system.piercing == "av0") {
       getRollData.av0 = 2;
     }
-    if (properties.has('ub') || abilityData.parent.getActor()?.system.piercing == 'ub') {
-      diceClass = 'ub';
-      diceTooltip = 'Unblockable';
+    if (properties.has("ub") || abilityData.parent.getActor()?.system.piercing == "ub") {
+      diceClass = "ub";
+      diceTooltip = "Unblockable";
       getRollData.av0 = 2;
     }
   }
-  if (abilityData.piercing == 'av0') {
+  if (abilityData.piercing == "av0") {
     getRollData.av0 = 2;
   }
-  if (abilityData.piercing == 'ub') {
-    diceClass = 'ub';
-    diceTooltip = 'Unblockable';
+  if (abilityData.piercing == "ub") {
+    diceClass = "ub";
+    diceTooltip = "Unblockable";
     getRollData.av0 = 2;
   }
   const context = {
     diceClass: diceClass,
     diceTooltip: diceTooltip,
-  }
-  if (abilityData.effects.includes('resistance')) {
-    context.diceClass = 'resist';
-    context.diceTooltip = '';
+  };
+  if (abilityData.effects.includes("resistance")) {
+    context.diceClass = "resist";
+    context.diceTooltip = "";
     context.isResistance = true;
     context.threshold = 10;
   }
@@ -243,14 +273,14 @@ async function use(abilityData) {
     }),
   });
   let newPenalty = abilityData.parent.getActor().system.attackPenalty;
-  if (abilityData.interaction == 'attack') {
+  if (abilityData.interaction == "attack") {
     newPenalty -= 3;
   }
   abilityData.parent.getActor().update({
-    'system.mp.value': abilityData.parent.getActor().system.mp.value - abilityData.live.costs.mp,
-    'system.hp.value': abilityData.parent.getActor().system.hp.value - abilityData.live.costs.hp,
-    'system.attackPenalty': newPenalty,
-  })
+    "system.mp.value": abilityData.parent.getActor().system.mp.value - abilityData.live.costs.mp,
+    "system.hp.value": abilityData.parent.getActor().system.hp.value - abilityData.live.costs.hp,
+    "system.attackPenalty": newPenalty,
+  });
   abilityData.mpCost = 0;
   abilityData.hpCost = 0;
   abilityData.heightenedAmount = 0;

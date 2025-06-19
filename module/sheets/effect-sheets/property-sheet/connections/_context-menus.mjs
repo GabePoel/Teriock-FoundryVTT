@@ -13,11 +13,11 @@ export function propertyContextMenu(property) {
       icon: icon,
       callback: () => {
         property.update({
-          'system': {
-            'propertyType': type,
-          }
+          system: {
+            propertyType: type,
+          },
         });
-      }
+      },
     };
     options.push(option);
   }

@@ -17,7 +17,7 @@ function hackField(max, name) {
       integer: true,
       label: `Current ${name} Hack`,
     }),
-  })
+  });
 }
 
 export function _defineHacks(schema) {
@@ -29,6 +29,6 @@ export function _defineHacks(schema) {
     ear: hackField(1, "Ear"),
     mouth: hackField(1, "Mouth"),
     nose: hackField(1, "Nose"),
-  })
+  });
   return schema;
 }

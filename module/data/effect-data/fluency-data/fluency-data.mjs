@@ -4,8 +4,17 @@ import { _roll } from "./methods/_rolling.mjs";
 import { WikiDataMixin } from "../../mixins/wiki-mixin.mjs";
 import TeriockBaseEffectData from "../base-data/base-data.mjs";
 
+/**
+ * @extends {TeriockBaseEffectData}
+ */
 export default class TeriockFluencyData extends WikiDataMixin(TeriockBaseEffectData) {
-  
+  /** @inheritdoc */
+  static get metadata() {
+    return foundry.utils.mergeObject(super.metadata, {
+      type: "fluency",
+    });
+  }
+
   /** @override */
   static defineSchema() {
     const commonData = super.defineSchema();
@@ -13,7 +22,7 @@ export default class TeriockFluencyData extends WikiDataMixin(TeriockBaseEffectD
       ...commonData,
       wikiNamespace: new fields.StringField({
         initial: "Tradecraft",
-        gmOnly: true
+        gmOnly: true,
       }),
       field: new fields.StringField({
         initial: "artisan",
@@ -31,7 +40,7 @@ export default class TeriockFluencyData extends WikiDataMixin(TeriockBaseEffectD
         initial: true,
         label: "Fluent",
       }),
-    }
+    };
   }
 
   /** @override */

@@ -2,10 +2,10 @@ import TeriockCommand from "../command.mjs";
 import TeriockRoll from "../../documents/roll.mjs";
 
 export const drain = new TeriockCommand(
-  'drain',
-  'Roll drain and apply it to targeted tokens.',
+  "drain",
+  "Roll drain and apply it to targeted tokens.",
   async ({ args, options, chatData, actors }) => {
-    const formula = args.join(' ');
+    const formula = args.join(" ");
     const roll = new TeriockRoll(formula, {
       speaker: chatData.speaker,
       advantage: options.advantage,
@@ -15,7 +15,7 @@ export const drain = new TeriockCommand(
     await roll.toMessage({
       user: chatData.user,
       speaker: chatData.speaker,
-      flavor: 'Drain Roll',
+      flavor: "Drain Roll",
     });
 
     for (const actor of actors) {
@@ -23,7 +23,7 @@ export const drain = new TeriockCommand(
     }
   },
   {
-    category: 'combat',
-    requiresTarget: true
-  }
+    category: "combat",
+    requiresTarget: true,
+  },
 );

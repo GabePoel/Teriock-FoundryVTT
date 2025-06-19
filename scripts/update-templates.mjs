@@ -1,17 +1,17 @@
-import fs from 'fs';
-import path from 'path';
-import { fileURLToPath } from 'url';
+import fs from "fs";
+import path from "path";
+import { fileURLToPath } from "url";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // REAL file path on disk
-const actualDir = path.resolve(__dirname, '..', 'templates');
+const actualDir = path.resolve(__dirname, "..", "templates");
 
 // FOUNDY VTT virtual path (used in loadTemplates)
-const virtualBase = 'systems/teriock/templates';
+const virtualBase = "systems/teriock/templates";
 
-const outputFile = path.resolve(__dirname, '..', 'module', 'helpers', 'startup', 'register-templates.mjs');
+const outputFile = path.resolve(__dirname, "..", "module", "helpers", "startup", "register-templates.mjs");
 
 function getHandlebarsFiles(dir, fileList = []) {
   if (!fs.existsSync(dir)) {
@@ -27,8 +27,8 @@ function getHandlebarsFiles(dir, fileList = []) {
 
     if (stat.isDirectory()) {
       getHandlebarsFiles(fullPath, fileList);
-    } else if (file.endsWith('.hbs')) {
-      const relativePath = path.relative(actualDir, fullPath).replace(/\\/g, '/');
+    } else if (file.endsWith(".hbs")) {
+      const relativePath = path.relative(actualDir, fullPath).replace(/\\/g, "/");
       const virtualPath = `${virtualBase}/${relativePath}`;
       fileList.push(`'${virtualPath}'`);
     }
@@ -42,7 +42,7 @@ function generateTemplatePreloadFunction(templatePaths) {
 
 export default async function registerTemplates () {
   return foundry.applications.handlebars.loadTemplates([
-    ${templatePaths.join(',\n    ')}
+    ${templatePaths.join(",\n    ")}
   ]);
 };\n`;
 }
@@ -52,7 +52,7 @@ function main() {
   const templatePaths = getHandlebarsFiles(actualDir);
   const outputContent = generateTemplatePreloadFunction(templatePaths);
 
-  fs.writeFileSync(outputFile, outputContent, 'utf8');
+  fs.writeFileSync(outputFile, outputContent, "utf8");
   console.log(`templates.mjs updated with ${templatePaths.length} templates.`);
 }
 

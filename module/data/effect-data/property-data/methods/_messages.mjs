@@ -2,7 +2,7 @@
 /** @import TeriockPropertyData from "../property-data.mjs"; */
 
 /**
- * @param {TeriockPropertyData} propertyData 
+ * @param {TeriockPropertyData} propertyData
  * @returns {Partial<MessageParts>}
  * @private
  */
@@ -10,19 +10,17 @@ export function _messageParts(propertyData) {
   const ref = CONFIG.TERIOCK.abilityOptions;
   const blocks = [
     {
-      title: 'Description',
+      title: "Description",
       text: propertyData.description,
     },
-  ]
+  ];
   return {
     bars: [
       {
-        icon: 'fa-' + ref.abilityType[propertyData.propertyType].icon,
-        wrappers: [
-          ref.abilityType[propertyData.propertyType].name,
-        ],
-      }
+        icon: "fa-" + ref.abilityType[propertyData.propertyType].icon,
+        wrappers: [ref.abilityType[propertyData.propertyType].name],
+      },
     ],
     blocks: blocks,
-  }
+  };
 }

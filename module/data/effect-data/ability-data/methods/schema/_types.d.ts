@@ -4,8 +4,8 @@ export interface AppliesData {
   drain: string[];
   changes: {
     key: string;
-    mode: Number;
+    mode: number;
     value: string;
     priority: number;
-  }
+  };
 }

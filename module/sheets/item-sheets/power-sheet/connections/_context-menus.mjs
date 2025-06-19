@@ -13,11 +13,11 @@ export function powerContextMenu(power) {
       icon: icon,
       callback: () => {
         power.update({
-          'system': {
-            'type': type,
-          }
+          system: {
+            type: type,
+          },
         });
-      }
+      },
     };
     options.push(option);
   }

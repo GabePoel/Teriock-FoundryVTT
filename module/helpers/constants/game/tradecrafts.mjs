@@ -1,148 +1,148 @@
 export default fields = {
   art: {
-    name: 'Artisan',
-    icon: 'pen-ruler',
+    name: "Artisan",
+    icon: "pen-ruler",
     tradecrafts: {
       art: {
-        name: 'Artist',
-        icon: 'palette',
+        name: "Artist",
+        icon: "palette",
       },
       bla: {
-        name: 'Blacksmith',
-        icon: 'hammer-crash',
+        name: "Blacksmith",
+        icon: "hammer-crash",
       },
       bui: {
-        name: 'Builder',
-        icon: 'trowel-bricks',
+        name: "Builder",
+        icon: "trowel-bricks",
       },
       che: {
-        name: 'Chef',
-        icon: 'knife-kitchen',
+        name: "Chef",
+        icon: "knife-kitchen",
       },
       loc: {
-        name: 'Locksmith',
-        icon: 'key-skeleton',
+        name: "Locksmith",
+        icon: "key-skeleton",
       },
       mar: {
-        name: 'Mariner',
-        icon: 'sailboat',
+        name: "Mariner",
+        icon: "sailboat",
       },
       tai: {
-        name: 'Tailor',
-        icon: 'reel',
+        name: "Tailor",
+        icon: "reel",
       },
-    }
+    },
   },
   med: {
-    name: 'Mediator',
-    icon: 'people-arrows',
+    name: "Mediator",
+    icon: "people-arrows",
     tradecrafts: {
       cou: {
-        name: 'Courtier',
-        icon: 'comments',
+        name: "Courtier",
+        icon: "comments",
       },
       enf: {
-        name: 'Enforcer',
-        icon: 'badge-sheriff',
+        name: "Enforcer",
+        icon: "badge-sheriff",
       },
       gam: {
-        name: 'Gambler',
-        icon: 'cards',
+        name: "Gambler",
+        icon: "cards",
       },
       inn: {
-        name: 'Innkeeper',
-        icon: 'hotel',
+        name: "Innkeeper",
+        icon: "hotel",
       },
       pea: {
-        name: 'Peacekeeper',
-        icon: 'hand-peace',
+        name: "Peacekeeper",
+        icon: "hand-peace",
       },
       per: {
-        name: 'Performer',
-        icon: 'masks-theater',
+        name: "Performer",
+        icon: "masks-theater",
       },
       tra: {
-        name: 'Trader',
-        icon: 'coin',
+        name: "Trader",
+        icon: "coin",
       },
-    }
+    },
   },
   sch: {
-    name: 'Scholar',
-    icon: 'books',
+    name: "Scholar",
+    icon: "books",
     tradecrafts: {
       car: {
-        name: 'Cartographer',
-        icon: 'map',
+        name: "Cartographer",
+        icon: "map",
       },
       dip: {
-        name: 'Diplomat',
-        icon: 'scale-balanced',
+        name: "Diplomat",
+        icon: "scale-balanced",
       },
       his: {
-        name: 'Historian',
-        icon: 'book',
+        name: "Historian",
+        icon: "book",
       },
       mes: {
-        name: 'Messenger',
-        icon: 'scroll',
+        name: "Messenger",
+        icon: "scroll",
       },
       pri: {
-        name: 'Priest',
-        icon: 'hands-praying',
+        name: "Priest",
+        icon: "hands-praying",
       },
       scr: {
-        name: 'Scribe',
-        icon: 'pen-fancy',
+        name: "Scribe",
+        icon: "pen-fancy",
       },
       tea: {
-        name: 'Teacher',
-        icon: 'person-chalkboard',
+        name: "Teacher",
+        icon: "person-chalkboard",
       },
-    }
+    },
   },
   sur: {
-    name: 'Survivalist',
-    icon: 'trees',
+    name: "Survivalist",
+    icon: "trees",
     tradecrafts: {
       far: {
-        name: 'Farmer',
-        icon: 'wheat',
+        name: "Farmer",
+        icon: "wheat",
       },
       her: {
-        name: 'Herbalist',
-        icon: 'mistletoe',
+        name: "Herbalist",
+        icon: "mistletoe",
       },
       hun: {
-        name: 'Hunter',
-        icon: 'bow-arrow',
+        name: "Hunter",
+        icon: "bow-arrow",
       },
       inv: {
-        name: 'Investigator',
-        icon: 'magnifying-glass',
+        name: "Investigator",
+        icon: "magnifying-glass",
       },
       min: {
-        name: 'Miner',
-        icon: 'pickaxe',
+        name: "Miner",
+        icon: "pickaxe",
       },
       tam: {
-        name: 'Tamer',
-        icon: 'horse-saddle',
+        name: "Tamer",
+        icon: "horse-saddle",
       },
       tra: {
-        name: 'Tracker',
-        icon: 'paw-simple',
+        name: "Tracker",
+        icon: "paw-simple",
       },
-    }
+    },
   },
   pre: {
-    name: 'Prestige',
-    icon: 'sparkle',
+    name: "Prestige",
+    icon: "sparkle",
     tradecrafts: {
       met: {
-        name: 'Metaphysics',
-        icon: 'book-sparkles',
-      }
-    }
-  }
-}
+        name: "Metaphysics",
+        icon: "book-sparkles",
+      },
+    },
+  },
+};

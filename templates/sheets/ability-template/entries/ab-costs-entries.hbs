@@ -1,59 +1,59 @@
 {{#if
-  (or
-    (eq system.costs.mp.type "variable")
-    (eq system.costs.hp.type "variable")
-    (exists system.costs.materialCost)
-  )
+(or
+(eq system.costs.mp.type "variable")
+(eq system.costs.hp.type "variable")
+(exists system.costs.materialCost)
+)
 }}
-  {{#if (eq system.costs.mp.type "variable")}}
-    <div class="ab-section-container">
-      <div class="ab-section">
-        <span class="ab-section-title">Mana cost</span>
-      </div>
-      {{#if editable}}
-        <prose-mirror
-          name="system.costs.mp.value.variable"
-          value="{{system.costs.mp.value.variable}}"
-          toggled=true
-          editable=editable
-        >{{{manaCost}}}</prose-mirror>
-      {{else}}
-        {{{manaCost}}}
-      {{/if}}
-    </div>
+{{#if (eq system.costs.mp.type "variable")}}
+<div class="ab-section-container">
+  <div class="ab-section">
+    <span class="ab-section-title">Mana cost</span>
+  </div>
+  {{#if editable}}
+  <prose-mirror
+    name="system.costs.mp.value.variable"
+    value="{{system.costs.mp.value.variable}}"
+    toggled="true"
+    editable="editable"
+  >{{{manaCost}}}</prose-mirror>
+  {{else}}
+  {{{manaCost}}}
   {{/if}}
-  {{#if (eq system.costs.hp.type "variable")}}
-    <div class="ab-section-container">
-      <div class="ab-section">
-        <span class="ab-section-title">Hit cost</span>
-      </div>
-      {{#if editable}}
-        <prose-mirror
-          name="system.costs.hp.value.variable"
-          value="{{system.costs.hp.value.variable}}"
-          toggled=true
-          editable=editable
-        >{{{hitCost}}}</prose-mirror>
-      {{else}}
-        {{{hitCost}}}
-      {{/if}}
-    </div>
+</div>
+{{/if}}
+{{#if (eq system.costs.hp.type "variable")}}
+<div class="ab-section-container">
+  <div class="ab-section">
+    <span class="ab-section-title">Hit cost</span>
+  </div>
+  {{#if editable}}
+  <prose-mirror
+    name="system.costs.hp.value.variable"
+    value="{{system.costs.hp.value.variable}}"
+    toggled="true"
+    editable="editable"
+  >{{{hitCost}}}</prose-mirror>
+  {{else}}
+  {{{hitCost}}}
   {{/if}}
-  {{#if (exists system.costs.materialCost)}}
-    <div class="ab-section-container">
-      <div class="ab-section">
-        <span class="ab-section-title">Material cost</span>
-      </div>
-      {{#if editable}}
-        <prose-mirror
-          name="system.costs.materialCost"
-          value="{{system.costs.materialCost}}"
-          toggled=true
-          editable=editable
-        >{{{materialCost}}}</prose-mirror>
-      {{else}}
-        {{{materialCost}}}
-      {{/if}}
-    </div>
+</div>
+{{/if}}
+{{#if (exists system.costs.materialCost)}}
+<div class="ab-section-container">
+  <div class="ab-section">
+    <span class="ab-section-title">Material cost</span>
+  </div>
+  {{#if editable}}
+  <prose-mirror
+    name="system.costs.materialCost"
+    value="{{system.costs.materialCost}}"
+    toggled="true"
+    editable="editable"
+  >{{{materialCost}}}</prose-mirror>
+  {{else}}
+  {{{materialCost}}}
   {{/if}}
+</div>
+{{/if}}
 {{/if}}

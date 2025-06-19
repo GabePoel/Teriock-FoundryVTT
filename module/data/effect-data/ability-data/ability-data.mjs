@@ -7,7 +7,16 @@ import { _roll } from "./methods/_rolling.mjs";
 import { WikiDataMixin } from "../../mixins/wiki-mixin.mjs";
 import TeriockBaseEffectData from "../base-data/base-data.mjs";
 
+/**
+ * @extends {TeriockBaseEffectData}
+ */
 export default class TeriockAbilityData extends WikiDataMixin(TeriockBaseEffectData) {
+  /** @inheritdoc */
+  static get metadata() {
+    return foundry.utils.mergeObject(super.metadata, {
+      type: "ability",
+    });
+  }
 
   /** @override */
   static defineSchema() {
@@ -15,7 +24,7 @@ export default class TeriockAbilityData extends WikiDataMixin(TeriockBaseEffectD
     return {
       ...commonData,
       ..._defineSchema(),
-    }
+    };
   }
 
   /** @override */
@@ -29,14 +38,14 @@ export default class TeriockAbilityData extends WikiDataMixin(TeriockBaseEffectD
     return await _roll(this, options);
   }
 
-  /** 
+  /**
    * @returns {MessageParts}
    * @override
    */
   get messageParts() {
     return {
       ...super.messageParts,
-      ..._messageParts(this)
+      ..._messageParts(this),
     };
   }
 

@@ -1,14 +1,14 @@
 const { HandlebarsApplicationMixin } = foundry.applications.api;
 import { documentOptions } from "../../../helpers/constants/document-options.mjs";
-import { powerContextMenu } from './connections/_context-menus.mjs';
-import TeriockBaseItemSheet from '../base-sheet/base-sheet.mjs';
+import { powerContextMenu } from "./connections/_context-menus.mjs";
+import TeriockBaseItemSheet from "../base-sheet/base-sheet.mjs";
 
 /**
  * @extends {TeriockBaseItemSheet}
  */
 export default class TeriockPowerSheet extends HandlebarsApplicationMixin(TeriockBaseItemSheet) {
   static DEFAULT_OPTIONS = {
-    classes: ['power'],
+    classes: ["power"],
     actions: {
       toggleProficient: this._toggleProficient,
     },
@@ -18,18 +18,14 @@ export default class TeriockPowerSheet extends HandlebarsApplicationMixin(Terioc
   };
   static PARTS = {
     all: {
-      template: 'systems/teriock/templates/sheets/power-template/power-template.hbs',
-      scrollable: [
-        '.window-content',
-        '.tsheet-page',
-        '.ab-sheet-everything',
-      ],
+      template: "systems/teriock/templates/sheets/power-template/power-template.hbs",
+      scrollable: [".window-content", ".tsheet-page", ".ab-sheet-everything"],
     },
   };
 
   static async _toggleProficient() {
     if (this.editable) {
-      await this.item.update({ 'system.proficient': !this.item.system.proficient });
+      await this.item.update({ "system.proficient": !this.item.system.proficient });
     }
   }
 
@@ -46,6 +42,6 @@ export default class TeriockPowerSheet extends HandlebarsApplicationMixin(Terioc
     super._onRender(context, options);
     if (!this.editable) return;
     const powerContextMenuOptions = powerContextMenu(this.item);
-    this._connectContextMenu('.power-box', powerContextMenuOptions, 'click');
+    this._connectContextMenu(".power-box", powerContextMenuOptions, "click");
   }
 }

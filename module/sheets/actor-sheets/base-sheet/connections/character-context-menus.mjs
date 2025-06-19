@@ -1,5 +1,5 @@
 export function primaryBlockerContextMenu(actor, options) {
-  const equipped = actor.itemTypes.equipment.filter(i => i.system.equipped && i.system.bv);
+  const equipped = actor.itemTypes.equipment.filter((i) => i.system.equipped && i.system.bv);
   equipped.sort((a, b) => (b.system.bv ?? 0) - (a.system.bv ?? 0));
   const blockerOptions = [];
   for (const item of equipped) {
@@ -11,7 +11,7 @@ export function primaryBlockerContextMenu(actor, options) {
       callback: () => {
         actor.update({
           "system.sheet.primaryBlocker": item._id,
-        })
+        });
       },
     });
   }
@@ -21,14 +21,14 @@ export function primaryBlockerContextMenu(actor, options) {
 }
 
 export function primaryAttackContextMenu(actor, options) {
-  const equipped = actor.itemTypes.equipment.filter(i => i.system.damage);
+  const equipped = actor.itemTypes.equipment.filter((i) => i.system.damage);
   const attackOptions = [];
   for (const item of equipped) {
     let icon = "";
     if (item.system.damage != 1) {
-      icon = `<i class="fa-solid fa-sword"></i>`;
+      icon = '<i class="fa-solid fa-sword"></i>';
     } else {
-      icon = `<i class="fa-solid fa-staff"></i>`;
+      icon = '<i class="fa-solid fa-staff"></i>';
     }
     attackOptions.push({
       name: item.name,
@@ -36,7 +36,7 @@ export function primaryAttackContextMenu(actor, options) {
       callback: () => {
         actor.update({
           "system.sheet.primaryAttacker": item._id,
-        })
+        });
       },
     });
   }
@@ -49,30 +49,30 @@ export function piercingContextMenu(actor) {
   return [
     {
       name: "None",
-      icon: `<i class="fa-solid fa-xmark"></i>`,
+      icon: '<i class="fa-solid fa-xmark"></i>',
       callback: () => {
         actor.update({
-          "system.piercing": 'none',
-        })
-      }
+          "system.piercing": "none",
+        });
+      },
     },
     {
       name: "AV0",
-      icon: `<i class="fa-solid fa-a"></i>`,
+      icon: '<i class="fa-solid fa-a"></i>',
       callback: () => {
         actor.update({
-          "system.piercing": 'av0',
-        })
-      }
+          "system.piercing": "av0",
+        });
+      },
     },
     {
       name: "UB",
-      icon: `<i class="fa-solid fa-u"></i>`,
+      icon: '<i class="fa-solid fa-u"></i>',
       callback: () => {
         actor.update({
-          "system.piercing": 'ub',
-        })
-      }
-    }
-  ]
+          "system.piercing": "ub",
+        });
+      },
+    },
+  ];
 }

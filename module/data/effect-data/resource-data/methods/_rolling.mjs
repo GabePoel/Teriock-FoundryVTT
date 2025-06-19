@@ -23,7 +23,7 @@ async function use(resourceData, options) {
     if (options?.advantage) {
       rollFormula = rollFormula.replace(/(\d*)d(\d+)/gi, (match, dice, sides) => {
         const num = parseInt(dice) || 1;
-        return (num * 2) + 'd' + sides;
+        return num * 2 + "d" + sides;
       });
     }
 

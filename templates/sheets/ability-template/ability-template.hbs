@@ -1,6 +1,6 @@
 <div class="{{cssClass}} tsheet-page {{#if system.elderSorcery}}es-container {{elementClass system.elements}}{{/if}}" autocomplete="off">
   {{#if system.elderSorcery}}
-    <div class="es-mask-rotator"></div>
+  <div class="es-mask-rotator"></div>
   {{/if}}
   <div class="ab-sheet-everything">
     <div class="ab-sheet-top">
@@ -20,41 +20,41 @@
         {{> "systems/teriock/templates/sheets/ability-template/tags/ab-effects-tags.hbs"}}
       </div>
       {{#if system.elderSorcery}}
-        <div class="es-incant">
-          {{> "systems/teriock/templates/sheets/ability-template/parts/ab-elder-sorcery.hbs"}}
-        </div>
+      <div class="es-incant">
+        {{> "systems/teriock/templates/sheets/ability-template/parts/ab-elder-sorcery.hbs"}}
+      </div>
       {{/if}}
       {{> "systems/teriock/templates/sheets/ability-template/entries/ab-costs-entries.hbs"}}
       {{#if (exists system.requirements)}}
-        {{> "systems/teriock/templates/sheets/ability-template/entries/ab-requirements-entries.hbs"}}
+      {{> "systems/teriock/templates/sheets/ability-template/entries/ab-requirements-entries.hbs"}}
       {{/if}}
       {{#if (exists system.trigger)}}
-        {{> "systems/teriock/templates/sheets/ability-template/entries/ab-trigger-entries.hbs"}}
+      {{> "systems/teriock/templates/sheets/ability-template/entries/ab-trigger-entries.hbs"}}
       {{/if}}
       {{> "systems/teriock/templates/sheets/ability-template/entries/ab-alteration-entries.hbs"}}
       {{> "systems/teriock/templates/sheets/ability-template/entries/ab-overview-entries.hbs"}}
       {{#if (eq system.interaction "attack")}}
-        {{> "systems/teriock/templates/sheets/ability-template/entries/ab-attack-entries.hbs"}}
+      {{> "systems/teriock/templates/sheets/ability-template/entries/ab-attack-entries.hbs"}}
       {{/if}}
       {{#if (eq system.interaction "feat")}}
-        {{> "systems/teriock/templates/sheets/ability-template/entries/ab-feat-entries.hbs"}}
+      {{> "systems/teriock/templates/sheets/ability-template/entries/ab-feat-entries.hbs"}}
       {{/if}}
       {{#if (eq system.interaction "block")}}
-        {{> "systems/teriock/templates/sheets/ability-template/entries/ab-block-entries.hbs"}}
+      {{> "systems/teriock/templates/sheets/ability-template/entries/ab-block-entries.hbs"}}
       {{/if}}
       {{#if (exists system.heightened)}}
-        {{> "systems/teriock/templates/sheets/ability-template/entries/ab-heightened-entries.hbs"}}
+      {{> "systems/teriock/templates/sheets/ability-template/entries/ab-heightened-entries.hbs"}}
       {{/if}}
       {{#if (exists system.endCondition)}}
-        {{> "systems/teriock/templates/sheets/ability-template/entries/ab-end-condition-entries.hbs"}}
+      {{> "systems/teriock/templates/sheets/ability-template/entries/ab-end-condition-entries.hbs"}}
       {{/if}}
       {{> "systems/teriock/templates/sheets/ability-template/entries/ab-improvements-entries.hbs"}}
     </div>
     {{#if (or (and editable (eq system.maneuver "passive")) (exists childAbilities))}}
-      <div class="ab-main">
-        {{#if (and editable (eq system.maneuver "passive"))}}<button class="createAbility" data-action="createAbility">Add Child Ability</button>{{/if}}
-        {{abilityCards childAbilities system}}
-      </div>
+    <div class="ab-main">
+      {{#if (and editable (eq system.maneuver "passive"))}}<button class="createAbility" data-action="createAbility">Add Child Ability</button>{{/if}}
+      {{abilityCards childAbilities system}}
+    </div>
     {{/if}}
   </div>
 </div>

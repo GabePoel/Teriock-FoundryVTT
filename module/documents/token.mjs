@@ -1,34 +1,33 @@
 const { TokenDocument } = foundry.documents;
 
 export default class TeriockToken extends TokenDocument {
-
   /** @override */
   _prepareDetectionModes() {
     super._prepareDetectionModes();
     if (!this.sight.enabled) return;
-    const materialMaterialMode = this.detectionModes.find(m => m.id === "materialMaterial");
+    const materialMaterialMode = this.detectionModes.find((m) => m.id === "materialMaterial");
     if (!materialMaterialMode) {
       this.detectionModes.push({
         id: "materialMaterial",
         enabled: true,
-        range: Infinity
-      })
+        range: Infinity,
+      });
     }
-    const etherealMaterialMode = this.detectionModes.find(m => m.id === "etherealMaterial");
+    const etherealMaterialMode = this.detectionModes.find((m) => m.id === "etherealMaterial");
     if (!etherealMaterialMode) {
       this.detectionModes.push({
         id: "etherealMaterial",
         enabled: true,
-        range: Infinity
-      })
+        range: Infinity,
+      });
     }
-    const etherealEtherealMode = this.detectionModes.find(m => m.id === "etherealEthereal");
+    const etherealEtherealMode = this.detectionModes.find((m) => m.id === "etherealEthereal");
     if (!etherealEtherealMode) {
       this.detectionModes.push({
         id: "etherealEthereal",
         enabled: true,
-        range: Infinity
-      })
+        range: Infinity,
+      });
     }
   }
 }

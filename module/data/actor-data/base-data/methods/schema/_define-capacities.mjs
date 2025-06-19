@@ -11,17 +11,17 @@ export function _defineCapacities(schema) {
     light: new fields.NumberField({
       initial: 65,
       min: 0,
-      label: "Light Carrying Capacity"
+      label: "Light Carrying Capacity",
     }),
     heavy: new fields.NumberField({
       initial: 130,
       min: 0,
-      label: "Heavy Carrying Capacity"
+      label: "Heavy Carrying Capacity",
     }),
     max: new fields.NumberField({
       initial: 195,
       min: 0,
-      label: "Maximum Carrying Capacity"
+      label: "Maximum Carrying Capacity",
     }),
   });
   schema.weight = new fields.NumberField({

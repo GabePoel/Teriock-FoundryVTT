@@ -5,7 +5,6 @@ const { DetectionMode } = foundry.canvas.perception;
  * handled by the Ethereal and Material modes.
  */
 export default class DetectionModeLightPerception extends DetectionMode {
-
   /** @override */
   _canDetect(visionSource, target) {
     return false;

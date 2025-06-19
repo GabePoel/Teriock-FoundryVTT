@@ -1,7 +1,7 @@
 /** @import TeriockBaseActorData from "../../base-data.mjs"; */
 
 /**
- * @param {TeriockBaseActorData} system 
+ * @param {TeriockBaseActorData} system
  * @param {string} key
  * @returns {void}
  * @private
@@ -12,7 +12,7 @@ function _prepareTradecraft(system, key) {
 }
 
 /**
- * @param {TeriockBaseActorData} system 
+ * @param {TeriockBaseActorData} system
  * @returns {void}
  * @private
  */

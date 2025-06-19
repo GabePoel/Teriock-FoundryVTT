@@ -1,1 +1,1 @@
-export const remove = ["shattered", "glued"]
+export const remove = ["shattered", "glued"];

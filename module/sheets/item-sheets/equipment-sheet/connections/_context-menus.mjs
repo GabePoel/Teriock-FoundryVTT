@@ -5,7 +5,7 @@ export function powerLevelContextMenu(item) {
   const options = [];
   let powerLevels = CONFIG.TERIOCK.equipmentOptions.powerLevel;
   for (const powerLevel in powerLevels) {
-    if (powerLevel === 'unknown') continue;
+    if (powerLevel === "unknown") continue;
     const powerLevelName = powerLevels[powerLevel].name;
     const powerLevelIcon = powerLevels[powerLevel].icon;
     const icon = makeIcon(powerLevelIcon, iconStyle);
@@ -14,9 +14,9 @@ export function powerLevelContextMenu(item) {
       icon: icon,
       callback: () => {
         item.update({
-          'system': {
-            'powerLevel': powerLevel,
-          }
+          system: {
+            powerLevel: powerLevel,
+          },
         });
       },
     };
@@ -38,22 +38,22 @@ export function fontContextMenu(item) {
       icon: icon,
       callback: () => {
         item.update({
-          'system': {
-            'font': fonts[font].cssClass,
-          }
+          system: {
+            font: fonts[font].cssClass,
+          },
         });
       },
     };
     options.push(option);
   }
   const noneOption = {
-    name: 'None',
-    icon: makeIcon('xmark', iconStyle),
+    name: "None",
+    icon: makeIcon("xmark", iconStyle),
     callback: () => {
       item.update({
-        'system': {
-          'font': '',
-        }
+        system: {
+          font: "",
+        },
       });
     },
   };

@@ -1,94 +1,94 @@
 {{#if (or (not (eq system.costs.mp.type "none")) (not (eq system.costs.hp.type "none")) (exists system.costs.break))}}
-  <div class="ab-bar ab-bar-3">
-    {{#if (not (eq system.costs.mp.type "none"))}}
-      <div class="ab-box-container">
-        <div class="ab-box {{#if editable}}mana-cost-box{{/if}}">
-          <div class="ab-box-icon">
-            {{{config.icons.mp}}}
-          </div>
-          <div class="ab-box-content">
-            {{#if (eq system.costs.mp.type "static")}}
-              {{formInput
-                systemFields.costs.fields.mp.fields.value.fields.static
-                value=system.costs.mp.value.static
-                disabled=(not editable)
-                classes="ability-bar-input mp-input"
-                dataset=(dataset tooltip="Static MP Cost")
-              }}
-            {{else}}
-              {{#if (eq system.costs.mp.type "formula")}}
-                {{formInput
-                  systemFields.costs.fields.mp.fields.value.fields.formula
-                  value=system.costs.mp.value.formula
-                  disabled=(not editable)
-                  classes="ability-bar-input mp-input"
-                  dataset=(dataset tooltip="Formula MP Cost")
-                }}
-              {{else}}
-                {{#if (eq system.costs.mp.type "variable")}}
-                  <span data-tooltip="Variable MP Cost">Variable</span>
-                {{/if}}
-              {{/if}}
-            {{/if}}
-            <div class="ab-box-label">
-              MP
-            </div>
-          </div>
+<div class="ab-bar ab-bar-3">
+  {{#if (not (eq system.costs.mp.type "none"))}}
+  <div class="ab-box-container">
+    <div class="ab-box {{#if editable}}mana-cost-box{{/if}}">
+      <div class="ab-box-icon">
+        {{{config.icons.mp}}}
+      </div>
+      <div class="ab-box-content">
+        {{#if (eq system.costs.mp.type "static")}}
+        {{formInput
+        systemFields.costs.fields.mp.fields.value.fields.static
+        value=system.costs.mp.value.static
+        disabled=(not editable)
+        classes="ability-bar-input mp-input"
+        dataset=(dataset tooltip="Static MP Cost")
+        }}
+        {{else}}
+        {{#if (eq system.costs.mp.type "formula")}}
+        {{formInput
+        systemFields.costs.fields.mp.fields.value.fields.formula
+        value=system.costs.mp.value.formula
+        disabled=(not editable)
+        classes="ability-bar-input mp-input"
+        dataset=(dataset tooltip="Formula MP Cost")
+        }}
+        {{else}}
+        {{#if (eq system.costs.mp.type "variable")}}
+        <span data-tooltip="Variable MP Cost">Variable</span>
+        {{/if}}
+        {{/if}}
+        {{/if}}
+        <div class="ab-box-label">
+          MP
         </div>
       </div>
-    {{/if}}
-    {{#if (not (eq system.costs.hp.type "none"))}}
-      <div class="ab-box-container">
-        <div class="ab-box {{#if editable}}hit-cost-box{{/if}}" data-tooltip="Hit Cost">
-          <div class="ab-box-icon">
-            {{{config.icons.hp}}}
-          </div>
-          <div class="ab-box-content">
-            {{#if (eq system.costs.hp.type "static")}}
-              {{formInput
-                systemFields.costs.fields.hp.fields.value.fields.static
-                value=system.costs.hp.value.static
-                disabled=(not editable)
-                classes="ability-bar-input hp-input"
-                dataset=(dataset tooltip="Static HP Cost")
-              }}
-            {{else}}
-              {{#if (eq system.costs.hp.type "formula")}}
-                {{formInput
-                  systemFields.costs.fields.hp.fields.value.fields.formula
-                  value=system.costs.hp.value.formula
-                  disabled=(not editable)
-                  classes="ability-bar-input hp-input"
-                  dataset=(dataset tooltip="Formula HP Cost")
-                }}
-              {{else}}
-                {{#if (eq system.costs.hp.type "variable")}}
-                  <span data-tooltip="Variable hp Cost">Variable</span>
-                {{else}}
-                  {{#if (eq system.costs.hp.type "hack")}}
-                    <span data-tooltip="Hack HP Cost">Hack</span>
-                  {{/if}}
-                {{/if}}
-              {{/if}}
-            {{/if}}
-            <div class="ab-box-label">
-              HP
-            </div>
-          </div>
-        </div>
-      </div>
-    {{/if}}
-    {{#if (exists system.costs.break)}}
-      <div class="ab-box-container">
-        <div class="ab-box {{#if editable}}break-cost-box{{/if}}" data-tooltip="Break Cost">
-          <div class="ab-box-icon">
-            {{{config.icons.break}}}
-          </div>
-          <div class="ab-box-content">
-            {{lookup config.abilityOptions.breakCost system.costs.break}}
-          </div>
-        </div>
-      </div>
-    {{/if}}
+    </div>
   </div>
+  {{/if}}
+  {{#if (not (eq system.costs.hp.type "none"))}}
+  <div class="ab-box-container">
+    <div class="ab-box {{#if editable}}hit-cost-box{{/if}}" data-tooltip="Hit Cost">
+      <div class="ab-box-icon">
+        {{{config.icons.hp}}}
+      </div>
+      <div class="ab-box-content">
+        {{#if (eq system.costs.hp.type "static")}}
+        {{formInput
+        systemFields.costs.fields.hp.fields.value.fields.static
+        value=system.costs.hp.value.static
+        disabled=(not editable)
+        classes="ability-bar-input hp-input"
+        dataset=(dataset tooltip="Static HP Cost")
+        }}
+        {{else}}
+        {{#if (eq system.costs.hp.type "formula")}}
+        {{formInput
+        systemFields.costs.fields.hp.fields.value.fields.formula
+        value=system.costs.hp.value.formula
+        disabled=(not editable)
+        classes="ability-bar-input hp-input"
+        dataset=(dataset tooltip="Formula HP Cost")
+        }}
+        {{else}}
+        {{#if (eq system.costs.hp.type "variable")}}
+        <span data-tooltip="Variable hp Cost">Variable</span>
+        {{else}}
+        {{#if (eq system.costs.hp.type "hack")}}
+        <span data-tooltip="Hack HP Cost">Hack</span>
+        {{/if}}
+        {{/if}}
+        {{/if}}
+        {{/if}}
+        <div class="ab-box-label">
+          HP
+        </div>
+      </div>
+    </div>
+  </div>
+  {{/if}}
+  {{#if (exists system.costs.break)}}
+  <div class="ab-box-container">
+    <div class="ab-box {{#if editable}}break-cost-box{{/if}}" data-tooltip="Break Cost">
+      <div class="ab-box-icon">
+        {{{config.icons.break}}}
+      </div>
+      <div class="ab-box-content">
+        {{lookup config.abilityOptions.breakCost system.costs.break}}
+      </div>
+    </div>
+  </div>
+  {{/if}}
+</div>
 {{/if}}

@@ -1,14 +1,13 @@
 const { Token } = foundry.canvas.placeables;
-import EtherealFilter from '../filters/ethereal-filter.mjs';
+import EtherealFilter from "../filters/ethereal-filter.mjs";
 import TeriockDetectionMode from "./teriock-detection-mode.mjs";
 
 export default class DetectionModeEtherealMaterial extends TeriockDetectionMode {
-
   /** @override */
   static getDetectionFilter() {
-    return this._detectionFilter ??= EtherealFilter.create({
+    return (this._detectionFilter ??= EtherealFilter.create({
       blur: 10,
-    });
+    }));
   }
 
   /** @override */
@@ -19,7 +18,7 @@ export default class DetectionModeEtherealMaterial extends TeriockDetectionMode 
     const src = visionSource.object.document;
     if (target instanceof Token) {
       const tgt = target.document;
-      if (!(src.hasStatusEffect('ethereal') && !tgt.hasStatusEffect('ethereal'))) {
+      if (!(src.hasStatusEffect("ethereal") && !tgt.hasStatusEffect("ethereal"))) {
         return false;
       }
     }

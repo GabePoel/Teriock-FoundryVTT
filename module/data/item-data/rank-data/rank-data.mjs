@@ -5,7 +5,17 @@ import { _rollHitDie, _rollManaDie } from "./methods/_rolling.mjs";
 import { WikiDataMixin } from "../../mixins/wiki-mixin.mjs";
 import TeriockBaseItemData from "../base-data/base-data.mjs";
 
+/**
+ * @extends {TeriockBaseItemData}
+ */
 export default class TeriockRankData extends WikiDataMixin(TeriockBaseItemData) {
+  /** @inheritdoc */
+  static get metadata() {
+    return foundry.utils.mergeObject(super.metadata, {
+      type: "rank",
+    });
+  }
+
   static defineSchema() {
     const commonData = super.defineSchema();
     return {
@@ -54,7 +64,7 @@ export default class TeriockRankData extends WikiDataMixin(TeriockBaseItemData) 
           d10: "d10",
           d12: "d12",
           d20: "d20",
-        }
+        },
       }),
       manaDie: new fields.StringField({
         initial: "d10",
@@ -66,7 +76,7 @@ export default class TeriockRankData extends WikiDataMixin(TeriockBaseItemData) 
           d10: "d10",
           d12: "d12",
           d20: "d20",
-        }
+        },
       }),
       hp: new fields.NumberField({
         initial: 6,
@@ -90,7 +100,7 @@ export default class TeriockRankData extends WikiDataMixin(TeriockBaseItemData) 
         initial: true,
         label: "Proficient",
       }),
-    }
+    };
   }
 
   /** @override */
@@ -100,7 +110,7 @@ export default class TeriockRankData extends WikiDataMixin(TeriockBaseItemData) 
 
   /** @override */
   async parse(rawHTML) {
-    return await _parse(this.parent, rawHTML)
+    return await _parse(this.parent, rawHTML);
   }
 
   /** @override */

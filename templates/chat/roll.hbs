@@ -2,34 +2,34 @@
   class="teriock dice-roll {{#if isElderSorcery}}es-container{{/if}}"
   data-action="expandRoll"
   {{#if isElderSorcery}}
-    style="display: block; position: relative;"
+  style="display: block; position: relative;"
   {{/if}}
 >
   {{#if isElderSorcery}}
-    <div class="es-mask-rotator"></div>
-    <div class="es-mask-overlay {{elementClass elderSorceryElements}}"></div>
+  <div class="es-mask-rotator"></div>
+  <div class="es-mask-overlay {{elementClass elderSorceryElements}}"></div>
   {{/if}}
   {{#if flavor}}
-    <div class="teriock-flavor-text">{{flavor}}</div>
+  <div class="teriock-flavor-text">{{flavor}}</div>
   {{/if}}
   <div class="teriock-dice-message">{{{message}}}</div>
   {{#if (eq formula "0")}}
   {{else}}
-    <div class="dice-result" style="margin-top: 0.5em;">
-      {{#if (not (eq (str formula) (str total)))}}
-        <div
-          class="dice-formula"
-          style="word-break: auto-phrase;"
-        >
-          {{formula}}
-        </div>
-        {{{tooltip}}}
+  <div class="dice-result" style="margin-top: 0.5em;">
+    {{#if (not (eq (str formula) (str total)))}}
+    <div
+      class="dice-formula"
+      style="word-break: auto-phrase;"
+    >
+      {{formula}}
+    </div>
+    {{{tooltip}}}
+    {{/if}}
+    <h4
+      class="dice-total teriock-dice-total {{#if diceClass}}{{diceClass}}{{/if}} {{#if (exists threshold)}}{{#if (geq total threshold)}}success{{else}}failure{{/if}}{{/if}}"
+      {{#if diceTooltip}}
+      data-tooltip="{{diceTooltip}}"
       {{/if}}
-      <h4
-        class="dice-total teriock-dice-total {{#if diceClass}}{{diceClass}}{{/if}} {{#if (exists threshold)}}{{#if (geq total threshold)}}success{{else}}failure{{/if}}{{/if}}"
-        {{#if diceTooltip}}
-          data-tooltip="{{diceTooltip}}"
-        {{/if}}
         {{#if (exists threshold)}}
           {{#if (geq total threshold)}}
             data-tooltip="Success"
@@ -38,6 +38,6 @@
           {{/if}}
         {{/if}}
       >{{total}}</h4>
-    </div>
+  </div>
   {{/if}}
 </div>

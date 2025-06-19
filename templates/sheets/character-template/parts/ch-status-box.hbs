@@ -44,7 +44,7 @@
               min="{{system.hp.min}}"
               data-tooltip="Current HP"
               style="cursor: text;"
-            />
+            >
             <div class="character-bar-overlay-max character-bar-overlay-label">
               <span>/ {{system.hp.max}} +</span>
             </div>
@@ -57,7 +57,7 @@
               min="0"
               data-tooltip="Temporary HP"
               style="cursor: text;"
-            />
+            >
           </div>
           <div
             class="take-harm-button thover take-damage-button"
@@ -117,7 +117,7 @@
               min="{{system.mp.min}}"
               data-tooltip="Current MP"
               style="cursor: text;"
-            />
+            >
             <div class="character-bar-overlay-max character-bar-overlay-label">
               <span>/ {{system.mp.max}} +</span>
             </div>
@@ -130,7 +130,7 @@
               min="0"
               data-tooltip="Temporary MP"
               style="cursor: text;"
-            />
+            >
           </div>
           <div
             class="take-harm-button thover take-damage-button"
@@ -183,19 +183,10 @@
               min="{{system.wither.min}}"
               data-tooltip="Current Wither"
               style="cursor: text;"
-            />
+            >
             <div class="character-bar-overlay-max character-bar-overlay-label">
               <span>/ {{system.wither.max}}</span>
             </div>
-            {{!-- <input
-              type="number"
-              name="system.wither.temp"
-              value="{{system.wither.temp}}"
-              class="character-bar-overlay-temp character-bar-overlay-label"
-              placeholder="0"
-              min="0"
-              style="cursor: text;"
-            /> --}}
           </div>
           <div
             class="take-harm-button thover take-wither-button"
@@ -213,7 +204,14 @@
         class="character-presence-bar"
         style="grid-template-columns:{{repeat system.pres ' 1fr'}};"
       >
-        {{#if (geq system.usp 1)}}<div class="presence-indicator used" style="grid-column: span {{{system.usp}}}; grid-template-columns:{{repeat system.usp ' 1fr'}}; display: grid;">{{repeat system.usp '<div class="presence-indicator empty" style="background: transparent;"></div>'}}</div>{{/if}}
+        {{#if (geq system.usp 1)}}
+        <div
+          class="presence-indicator used"
+          style="grid-column: span {{{system.usp}}}; grid-template-columns:{{repeat system.usp ' 1fr'}}; display: grid;"
+        >
+          {{repeat system.usp '<div class="presence-indicator empty" style="background: transparent;"></div>'}}
+        </div>
+        {{/if}}
         {{repeat system.unp '<div class="presence-indicator unused"></div>'}}
       </div>
     </div>

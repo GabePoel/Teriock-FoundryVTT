@@ -1,3 +1,4 @@
+/** @import { CommonRollOptions, ConditionRollOptions } from "../../../types/rolls" */
 const { TypeDataModel } = foundry.abstract;
 import {
   _takeDamage,
@@ -15,8 +16,10 @@ import { _rollFeatSave, _rollResistance, _rollTradecraft } from "./methods/rolli
 import { _takeHack, _takeUnhack } from "./methods/consequences/_take-hacks.mjs";
 import { _migrateData } from "./methods/_migrate-data.mjs";
 
+/**
+ * @extends {TypeDataModel}
+ */
 export default class TeriockBaseActorData extends TypeDataModel {
-
   /** @override */
   static defineSchema() {
     return _defineSchema();
@@ -34,7 +37,7 @@ export default class TeriockBaseActorData extends TypeDataModel {
   }
 
   /**
-   * @param {number} amount 
+   * @param {number} amount
    * @returns {Promise<void>}
    */
   async takeDamage(amount) {
@@ -42,7 +45,7 @@ export default class TeriockBaseActorData extends TypeDataModel {
   }
 
   /**
-   * @param {number} amount 
+   * @param {number} amount
    * @returns {Promise<void>}
    */
   async takeDrain(amount) {
@@ -50,7 +53,7 @@ export default class TeriockBaseActorData extends TypeDataModel {
   }
 
   /**
-   * @param {number} amount 
+   * @param {number} amount
    * @returns {Promise<void>}
    */
   async takeWither(amount) {
@@ -58,7 +61,7 @@ export default class TeriockBaseActorData extends TypeDataModel {
   }
 
   /**
-   * @param {number} amount 
+   * @param {number} amount
    * @returns {Promise<void>}
    */
   async takeHeal(amount) {
@@ -66,7 +69,7 @@ export default class TeriockBaseActorData extends TypeDataModel {
   }
 
   /**
-   * @param {number} amount 
+   * @param {number} amount
    * @returns {Promise<void>}
    */
   async takeRevitalize(amount) {
@@ -74,7 +77,7 @@ export default class TeriockBaseActorData extends TypeDataModel {
   }
 
   /**
-   * @param {string} part 
+   * @param {string} part
    * @returns {Promise<void>}
    */
   async takeHack(part) {
@@ -82,7 +85,7 @@ export default class TeriockBaseActorData extends TypeDataModel {
   }
 
   /**
-   * @param {string} part 
+   * @param {string} part
    * @returns {Promise<void>}
    */
   async takeUnhack(part) {
@@ -90,7 +93,7 @@ export default class TeriockBaseActorData extends TypeDataModel {
   }
 
   /**
-   * @param {string} part 
+   * @param {ConditionRollOptions} condition
    * @returns {Promise<void>}
    */
   async rollCondition(condition, options) {
@@ -105,8 +108,8 @@ export default class TeriockBaseActorData extends TypeDataModel {
   }
 
   /**
-   * @param {string} attribute 
-   * @param {object} options 
+   * @param {string} attribute
+   * @param {CommonRollOptions} options
    * @returns {Promise<void>}
    */
   rollFeatSave(attribute, options = {}) {
@@ -114,7 +117,7 @@ export default class TeriockBaseActorData extends TypeDataModel {
   }
 
   /**
-   * @param {object} options 
+   * @param {CommonRollOptions} options
    * @returns {Promise<void>}
    */
   rollResistance(options = {}) {
@@ -123,7 +126,7 @@ export default class TeriockBaseActorData extends TypeDataModel {
 
   /**
    * @param {string} tradecraft
-   * @param {object} options 
+   * @param {CommonRollOptions} options
    * @returns {Promise<void>}
    */
   rollTradecraft(tradecraft, options = {}) {

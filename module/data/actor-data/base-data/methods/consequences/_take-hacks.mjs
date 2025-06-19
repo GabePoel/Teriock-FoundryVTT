@@ -15,23 +15,23 @@ export async function _takeHack(system, part) {
   await actor.update({ [`system.hacks.${part}.value`]: value });
   const hacksTotal = Object.values(system.hacks).reduce((sum, hack) => sum + (hack.value || 0), 0);
   if (hacksTotal > 0) {
-    await actor.toggleStatusEffect('hacked', { active: true });
-    if (part === 'ear') {
-      await actor.toggleStatusEffect('deaf', { active: true });
-    } else if (part === 'eye') {
-      await actor.toggleStatusEffect('blind', { active: true });
-    } else if (part === 'nose') {
-      await actor.toggleStatusEffect('anosmatic', { active: true });
-    } else if (part === 'mouth') {
-      await actor.toggleStatusEffect('mute', { active: true });
-    } else if (part === 'body') {
-      await actor.toggleStatusEffect('immobilized', { active: true });
-    } else if (part === 'leg') {
+    await actor.toggleStatusEffect("hacked", { active: true });
+    if (part === "ear") {
+      await actor.toggleStatusEffect("deaf", { active: true });
+    } else if (part === "eye") {
+      await actor.toggleStatusEffect("blind", { active: true });
+    } else if (part === "nose") {
+      await actor.toggleStatusEffect("anosmatic", { active: true });
+    } else if (part === "mouth") {
+      await actor.toggleStatusEffect("mute", { active: true });
+    } else if (part === "body") {
+      await actor.toggleStatusEffect("immobilized", { active: true });
+    } else if (part === "leg") {
       if (value >= 1) {
-        await actor.toggleStatusEffect('slowed', { active: true });
+        await actor.toggleStatusEffect("slowed", { active: true });
       }
       if (value >= 2) {
-        await actor.toggleStatusEffect('immobilized', { active: true });
+        await actor.toggleStatusEffect("immobilized", { active: true });
       }
     }
   }
@@ -52,6 +52,6 @@ export async function _takeUnhack(system, part) {
   await actor.update({ [`system.hacks.${part}.value`]: value });
   const hacksTotal = Object.values(system.hacks).reduce((sum, hack) => sum + (hack.value || 0), 0);
   if (hacksTotal === 0) {
-    await actor.toggleStatusEffect('hacked', { active: false });
+    await actor.toggleStatusEffect("hacked", { active: false });
   }
 }

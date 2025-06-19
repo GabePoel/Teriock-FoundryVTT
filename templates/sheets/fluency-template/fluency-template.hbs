@@ -1,5 +1,5 @@
 <div class="{{cssClass}} tsheet-page" autocomplete="off">
-    <div class="ab-sheet-everything">
+  <div class="ab-sheet-everything">
     <div class="ab-sheet-top">
       {{> "systems/teriock/templates/common/header.hbs"}}
       <div class="ab-bars">
@@ -34,13 +34,13 @@
               </div>
               <div class="ab-box-content">
                 {{lookup
-                  (lookup
-                    (lookup
-                      (lookup config.tradecraftOptions system.field) "tradecrafts"
-                    )
-                    system.tradecraft
-                  )
-                  "name"
+                (lookup
+                (lookup
+                (lookup config.tradecraftOptions system.field) "tradecrafts"
+                )
+                system.tradecraft
+                )
+                "name"
                 }}
               </div>
             </div>
@@ -54,14 +54,14 @@
           <span class="ab-section-title">Description</span>
         </div>
         {{#if editable}}
-          <prose-mirror
-            name="system.description"
-            value="{{system.description}}"
-            toggled=true
-            editable=editable
-          >{{{enrichedDescription}}}</prose-mirror>
+        <prose-mirror
+          name="system.description"
+          value="{{system.description}}"
+          toggled="true"
+          editable="editable"
+        >{{{enrichedDescription}}}</prose-mirror>
         {{else}}
-          {{{enrichedDescription}}}
+        {{{enrichedDescription}}}
         {{/if}}
       </div>
     </div>

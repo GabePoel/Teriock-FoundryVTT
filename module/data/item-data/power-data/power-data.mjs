@@ -3,7 +3,17 @@ const { fields } = foundry.data;
 import { _messageParts } from "./methods/_messages.mjs";
 import TeriockBaseItemData from "../base-data/base-data.mjs";
 
+/**
+ * @extends {TeriockBaseItemData}
+ */
 export default class TeriockPowerData extends TeriockBaseItemData {
+  /** @inheritdoc */
+  static get metadata() {
+    return foundry.utils.mergeObject(super.metadata, {
+      type: "power",
+    });
+  }
+
   static defineSchema() {
     const commonData = super.defineSchema();
     return {
@@ -32,17 +42,17 @@ export default class TeriockPowerData extends TeriockBaseItemData {
         min: 0,
         label: "Age of Maturity",
       }),
-    }
+    };
   }
 
-  /** 
+  /**
    * @returns {MessageParts}
    * @override
    */
   get messageParts() {
     return {
       ...super.messageParts,
-      ..._messageParts(this)
+      ..._messageParts(this),
     };
   }
 }

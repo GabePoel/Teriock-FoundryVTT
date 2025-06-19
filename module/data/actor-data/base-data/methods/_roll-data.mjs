@@ -1,7 +1,7 @@
 /** @import TeriockBaseActorData from "../base-data.mjs"; */
 
 /**
- * @param {TeriockBaseActorData} system 
+ * @param {TeriockBaseActorData} system
  * @returns {object}
  * @private
  */
@@ -15,8 +15,8 @@ export function _getRollData(system) {
 }
 
 /**
- * @param {TeriockBaseActorData} system 
- * @param {object} data 
+ * @param {TeriockBaseActorData} system
+ * @param {object} data
  * @returns {void}
  */
 function basicData(system, data) {
@@ -51,33 +51,50 @@ function basicData(system, data) {
 }
 
 /**
- * @param {TeriockBaseActorData} system 
- * @param {object} data 
+ * @param {TeriockBaseActorData} system
+ * @param {object} data
  * @returns {void}
  */
 function attackData(system, data) {
   Object.assign(data, {
-    av0: (
-      system.piercing === 'av0' ||
-      system.piercing === 'ub' ||
+    av0:
+      system.piercing === "av0" ||
+      system.piercing === "ub" ||
       system?.primaryAttacker?.effectKeys?.property?.has("av0") ||
       system?.primaryAttacker?.effectKeys?.property?.has("ub")
-    ) ? 2 : 0,
+        ? 2
+        : 0,
     sb: system.sb ? 1 : 0,
     atkPen: system.attackPenalty,
   });
 }
 
 /**
- * @param {TeriockBaseActorData} system 
- * @param {object} data 
+ * @param {TeriockBaseActorData} system
+ * @param {object} data
  * @returns {void}
  */
 function classRanksData(system, data) {
   const actor = system.parent;
   const rankKeys = [
-    "fla", "lif", "nat", "nec", "sto", "arc", "ass", "cor", "ran", "thi",
-    "ber", "due", "kni", "pal", "vet", "mag", "sem", "war"
+    "fla",
+    "lif",
+    "nat",
+    "nec",
+    "sto",
+    "arc",
+    "ass",
+    "cor",
+    "ran",
+    "thi",
+    "ber",
+    "due",
+    "kni",
+    "pal",
+    "vet",
+    "mag",
+    "sem",
+    "war",
   ];
   for (const key of rankKeys) data[key] = 0;
 
@@ -91,8 +108,8 @@ function classRanksData(system, data) {
 }
 
 /**
- * @param {TeriockBaseActorData} system 
- * @param {object} data 
+ * @param {TeriockBaseActorData} system
+ * @param {object} data
  * @returns {void}
  */
 function tradecraftsData(system, data) {

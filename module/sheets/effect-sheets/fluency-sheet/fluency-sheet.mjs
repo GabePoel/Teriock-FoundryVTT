@@ -8,19 +8,15 @@ import TeriockBaseEffectSheet from "../base-sheet/base-sheet.mjs";
  */
 export default class TeriockFluencySheet extends api.HandlebarsApplicationMixin(TeriockBaseEffectSheet) {
   static DEFAULT_OPTIONS = {
-    classes: ['fluency'],
+    classes: ["fluency"],
     window: {
       icon: "fa-solid fa-" + documentOptions.fluency.icon,
     },
   };
   static PARTS = {
     all: {
-      template: 'systems/teriock/templates/sheets/fluency-template/fluency-template.hbs',
-      scrollable: [
-        '.window-content',
-        '.tsheet-page',
-        '.ab-sheet-everything',
-      ],
+      template: "systems/teriock/templates/sheets/fluency-template/fluency-template.hbs",
+      scrollable: [".window-content", ".tsheet-page", ".ab-sheet-everything"],
     },
   };
 
@@ -28,10 +24,10 @@ export default class TeriockFluencySheet extends api.HandlebarsApplicationMixin(
   _onRender(context, options) {
     super._onRender(context, options);
     [
-      { selector: '.field-box', menu: fieldContextMenu },
-      { selector: '.tradecraft-box', menu: tradecraftContextMenu }
+      { selector: ".field-box", menu: fieldContextMenu },
+      { selector: ".tradecraft-box", menu: tradecraftContextMenu },
     ].forEach(({ selector, menu }) => {
-      this._connectContextMenu(selector, menu(this.document), 'click');
+      this._connectContextMenu(selector, menu(this.document), "click");
     });
   }
 }

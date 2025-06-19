@@ -30,5 +30,5 @@ export default constants = {
   system: {
     documentTypes,
     iconStyles,
-  }
-}
+  },
+};
