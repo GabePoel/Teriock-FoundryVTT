@@ -25,7 +25,7 @@ declare module "@client/documents/_module.mjs" {
     type: EffectModel["metadata"]["type"];
     system: InstanceType<EffectModel>;
   }
-  
+
   interface TeriockToken extends TokenData {
     actor: TeriockActor;
   }

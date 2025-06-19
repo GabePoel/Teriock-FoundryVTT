@@ -52,12 +52,7 @@ declare module "./command.mjs" {
     category: string;
     requiresTarget: boolean;
 
-    constructor(
-      id: string,
-      docs: string,
-      callback: CommandCallback,
-      options?: CommandOptions
-    );
+    constructor(id: string, docs: string, callback: CommandCallback, options?: CommandOptions);
 
     execute(context: ExecuteContext): Promise<void>;
   }

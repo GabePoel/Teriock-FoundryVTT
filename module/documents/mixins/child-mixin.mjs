@@ -37,8 +37,8 @@ export const ChildDocumentMixin = (Base) =>
     }
 
     /**
-     * @param {string} incant 
-     * @param {string[]} args 
+     * @param {string} incant
+     * @param {string[]} args
      */
     hookCall(incant, args = []) {
       incant = "ter." + incant + this.type.charAt(0).toUpperCase() + this.type.slice(1);
@@ -80,7 +80,7 @@ export const ChildDocumentMixin = (Base) =>
 
     /**
      * @param {object} options
-     * @returns {Promise<void>} 
+     * @returns {Promise<void>}
      */
     async use(options) {
       this.hookCall("use");

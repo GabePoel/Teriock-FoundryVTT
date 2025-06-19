@@ -41,7 +41,6 @@ export type MessageParts = {
   font: string | null;
 };
 
-
 /**
  * Options for configuring a message.
  *
@@ -49,4 +48,4 @@ export type MessageParts = {
  */
 export type MessageOptions = {
   secret?: boolean;
-}
+};
