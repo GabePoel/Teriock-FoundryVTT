@@ -113,6 +113,14 @@ function _renderDieBox(rankData, type, dieProp, spent) {
   const iconClass = spent ? "fa-light" : "fa-solid";
   const rollClass = spent ? "rolled" : "unrolled";
   const action = spent ? "" : `data-action='roll${type === "hit" ? "Hit" : "Mana"}Die'`;
-  return `<div class="thover die-box ${rollClass}" data-die="${type}" data-id='${rankData.parent._id}' ${action} data-tooltip="${type === "hit" ? "Hit" : "Mana"} Die">
-      <i class="fa-fw ${iconClass} fa-dice-${rankData[dieProp]}"></i></div>`;
+  return `
+    <div
+      class="thover die-box ${rollClass}"
+      data-die="${type}"
+      data-id='${rankData.parent._id}'
+      ${action}
+      data-tooltip="${type === "hit" ? "Hit" : "Mana"} Die"
+    >
+      <i class="fa-fw ${iconClass} fa-dice-${rankData[dieProp]}"></i>
+    </div>`;
 }

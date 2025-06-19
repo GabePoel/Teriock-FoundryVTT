@@ -1,7 +1,7 @@
 const { utils } = foundry;
 const { ux, api } = foundry.applications;
 import { chatImage } from "../../helpers/utils.mjs";
-import { createAbility, createResource, createProperty, createFluency } from "../../helpers/create-effects.mjs";
+import * as createEffects from "../../helpers/create-effects.mjs";
 import { imageContextMenuOptions } from "../misc-sheets/image-sheet/connections/_context-menus.mjs";
 import connectEmbedded from "../../helpers/connect-embedded.mjs";
 
@@ -317,15 +317,15 @@ export const TeriockSheet = (Base) =>
     }
 
     static async _createAbility(event, __) {
-      await createAbility(this.document, null);
+      await createEffects.createAbility(this.document, null);
     }
 
     static async _createResource(event, __) {
-      await createResource(this.document, null);
+      await createEffects.createResource(this.document, null);
     }
 
     static async _createFluency(event, __) {
-      await createFluency(this.document, null);
+      await createEffects.createFluency(this.document, null);
     }
 
     static async _toggleSwitch(event, target) {
@@ -383,7 +383,7 @@ export const TeriockSheet = (Base) =>
             default: true,
             callback: async (event, button, dialog) => {
               const value = button.form.elements.property.value;
-              await createProperty(this.item, value);
+              await createEffects.createProperty(this.item, value);
             },
           },
           {
@@ -391,7 +391,7 @@ export const TeriockSheet = (Base) =>
             label: "Create New Property",
             default: false,
             callback: async (event, button, dialog) => {
-              await createProperty(this.item, null);
+              await createEffects.createProperty(this.item, null);
             },
           },
         ],

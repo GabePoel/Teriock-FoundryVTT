@@ -21,7 +21,7 @@ for (const command of commandList) {
     commandMap[alias] = command;
   }
 }
-commandMap["help"] = createHelpCommand(commandMap);
+commandMap["help"] = cmd.createHelpCommand(commandMap);
 
 /**
  * Dispatches a chat command message to the appropriate TeriockCommand.
