@@ -1,9 +1,18 @@
 import TeriockRoll from "../documents/roll.mjs";
 
+/**
+ * @param {string} icon
+ * @param {string} style
+ * @returns {string}
+ */
 export function makeIcon(icon, style = "solid") {
   return `<i class="fas fa-${style} fa-${icon}"></i>`;
 }
 
+/**
+ * @param {string} str
+ * @returns {string}
+ */
 export function toCamelCase(str) {
   return str
     .toLowerCase()
@@ -11,10 +20,18 @@ export function toCamelCase(str) {
     .replace(/^[a-z]/, (c) => c.toLowerCase());
 }
 
+/**
+ * @param {string[]} names
+ * @returns {string[]}
+ */
 export function toCamelCaseList(names) {
   return names.map((str) => toCamelCase(str));
 }
 
+/**
+ * @param {string} img
+ * @returns {Promise<void>}
+ */
 export async function chatImage(img) {
   if (img) {
     await ChatMessage.create({
@@ -30,22 +47,91 @@ export async function chatImage(img) {
   }
 }
 
+/**
+ * @param {string} string
+ * @param {number} length
+ * @returns {string}
+ */
 export function abbreviate(string, length = 3) {
   return string.toLowerCase().slice(0, length);
 }
 
+/**
+ * Evaluates a dice roll formula synchronously and returns the total result.
+ *
+ * @param {string} formula - The dice roll formula to evaluate.
+ * @param {Object} data - The roll data to use for the evaluation.
+ * @param {Object} options - Options that get passed to the roll.
+ * @returns {number} The total result of the evaluated roll.
+ */
 export function evaluateSync(formula, data = {}, options = {}) {
   const roll = new TeriockRoll(formula, data);
   roll.evaluateSync(options);
   return roll.total;
 }
 
+/**
+ * Evaluates a dice roll formula asynchronously and returns the total result.
+ *
+ * @param {string} formula - The dice roll formula to evaluate.
+ * @param {Object} data - The roll data to use for the evaluation.
+ * @param {Object} options - Options that get passed to the roll.
+ * @returns {Promise<number>} The total result of the evaluated roll.
+ */
 export async function evaluateAsync(formula, data = {}, options = {}) {
   const roll = new TeriockRoll(formula, data);
   await roll.evaluate(options);
   return roll.result;
 }
 
+/**
+ * Parses a time string and returns a number of seconds.
+ *
+ * @param {string} timeString - The time string to parse.
+ * @returns {number|null} A number of seconds corresponding to the duration, or null if invalid.
+ */
+export function parseTimeString(timeString) {
+  const cleanStr = timeString.toLowerCase().trim();
+  const match = cleanStr.match(/^(\d+(?:\.\d+)?)\s*([a-z]+)$/);
+  if (!match) {
+    return null;
+  }
+  const value = parseFloat(match[1]);
+  const unit = match[2];
+  
+  const units = {
+    1: ['s', 'sec', 'secs', 'second', 'seconds'],
+    60: ['m', 'min', 'mins', 'minute', 'minutes'],
+    3600: ['h', 'hr', 'hrs', 'hour', 'hours'],
+    86400: ['d', 'day', 'days'],
+    604800: ['w', 'week', 'weeks'],
+    31557600: ['y', 'yr', 'yrs', 'year', 'years']
+  };
+  
+  const conversions = Object.fromEntries(
+    Object.entries(units).flatMap(([seconds, aliases]) =>
+      aliases.map(alias => [alias, parseInt(seconds)])
+    )
+  );
+  
+  if (!(unit in conversions)) {
+    return null;
+  }
+  return value * conversions[unit];
+}
+
+/**
+ * Merges values from a nested object structure based on a dot-separated path and an optional key.
+ *
+ * Traverses the given object (`obj`) following the specified `path`, which can include wildcards (`*`)
+ * to match any key at that level. If a `key` is provided, only values associated with that key are merged
+ * into the result. If no `key` is provided, all values at the target path are merged.
+ *
+ * @param {Object} obj - The source object to traverse and merge values from.
+ * @param {string} path - Dot-separated path string, supports wildcards (`*`) for matching any key.
+ * @param {string} [key] - Optional key to extract values from objects at the target path.
+ * @returns {Object} The merged result object containing values found at the specified path and key.
+ */
 export function mergeLevel(obj, path, key) {
   const result = {};
 

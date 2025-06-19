@@ -19,7 +19,7 @@ export default function registerHooks() {
   Hooks.on("createItem", async (document, options, userId) => {
     if (game.user.id === userId && document.isOwner && document.type === "equipment") {
       if (document.getActor()) {
-        await document.unequip();
+        await document.system.unequip();
       }
     }
   });
@@ -76,6 +76,10 @@ export default function registerHooks() {
         await actor.update({
           "system.attackPenalty": 0,
         });
+        const effects = actor.temporaryEffects;
+        for (const effect of effects) {
+          await effect.system.checkExpiration();
+        }
       }
     }
   });
@@ -201,5 +205,25 @@ await item.use(options);
     });
 
     return false;
+  });
+
+  Hooks.on("combatRound", (combat, updateData, updateOptions) => {
+    const direction = updateOptions.direction;
+    game.time.advance(5 * direction);
+  });
+
+  Hooks.on("updateWorldTime", (worldTime, dt, options, userId) => {
+    if (game.user.id === userId && game.user.isActiveGM) {
+      const sceneId = game.user.viewedScene;
+      const scene = game.scenes.get(sceneId);
+      const tokens = scene?.tokens;
+      const actors = tokens?.map((token) => token.actor);
+      for (const actor of actors) {
+        const effects = actor.temporaryEffects;
+        for (const effect of effects) {
+          effect.system.checkExpiration();
+        }
+      }
+    }
   });
 }

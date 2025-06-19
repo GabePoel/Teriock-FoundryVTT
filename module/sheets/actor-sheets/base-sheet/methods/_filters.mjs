@@ -24,6 +24,9 @@ function propertyFilter(filterVal, document) {
 
 export function _filterAbilities(actor) {
   let abilities = actor.effectTypes.ability;
+  if (!abilities || !Array.isArray(abilities) || abilities.length === 0) {
+    return [];
+  }
   const filters = actor.system.sheet.abilityFilters || {};
   abilities = abilities.filter(
     (i) =>
@@ -56,6 +59,9 @@ export function _filterAbilities(actor) {
 
 export function _filterEquipment(actor) {
   let equipment = actor.itemTypes.equipment;
+  if (!equipment || !Array.isArray(equipment) || equipment.length === 0) {
+    return [];
+  }
   const filters = actor.system.sheet.equipmentFilters || {};
   equipment = equipment.filter(
     (i) =>

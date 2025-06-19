@@ -1,6 +1,7 @@
 /** @import TeriockAbilityData from "../ability-data.mjs"; */
 /** @import TeriockActor from "../../../../documents/actor.mjs"; */
 import TeriockEffect from "../../../../documents/effect.mjs";
+import { parseTimeString } from "../../../../helpers/utils.mjs";
 
 /**
  * @param {TeriockAbilityData} abilityData
@@ -30,6 +31,7 @@ export async function _generateEffect(abilityData, actor) {
     }
     description += abilityData.overview.fluent || "";
   }
+  const seconds = parseTimeString(abilityData.duration);
   const effect = {
     name: abilityData.parent?.name,
     type: "effect",
@@ -39,6 +41,10 @@ export async function _generateEffect(abilityData, actor) {
     description: description,
     system: {
       source: abilityData.parent?._id,
+      deleteOnExpire: true,
+    },
+    duration: {
+      seconds: seconds || undefined,
     },
   };
   const existingEffect = actor?.effectTypes?.effect?.find((e) => e.name === effect.name);

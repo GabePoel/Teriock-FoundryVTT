@@ -1,11 +1,12 @@
 // Allows for typing within mixin.
-/** @import TypeDataModel from "@common/abstract/type-data.mjs" */
+/** @import { ActiveEffectData } from "@common/documents/_types.mjs"; */
 const { fields } = foundry.data;
 const { TypeDataModel } = foundry.abstract;
 import { ChildDataMixin } from "../../mixins/child-mixin.mjs";
+import { _shouldExpire, _expire } from "./methods/_expiration.mjs";
 
 /**
- * @extends {TypeDataModel}
+ * @extends {ActiveEffectData}
  */
 export default class TeriockBaseEffectData extends ChildDataMixin(TypeDataModel) {
   /** @override */
@@ -17,6 +18,33 @@ export default class TeriockBaseEffectData extends ChildDataMixin(TypeDataModel)
         initial: false,
         label: "Force Disabled",
       }),
+      deleteOnExpire: new fields.BooleanField({
+        initial: false,
+        label: "Delete On Expire",
+      }),
     };
+  }
+
+  /**
+   * @returns {boolean}
+   */
+  shouldExpire() {
+    return _shouldExpire(this);
+  }
+
+  /**
+   * @returns {Promise<void>}
+   */
+  async expire() {
+    return await _expire(this);
+  }
+
+  /**
+   * @returns {Promise<void>}
+   */
+  async checkExpiration() {
+    if (this.shouldExpire()) {
+      await this.expire();
+    }
   }
 }

@@ -1,4 +1,7 @@
 export function _sortEmbedded(items, sortKey, ascending, accessorMap = {}) {
+  if (!items || !Array.isArray(items) || items.length === 0) {
+    return [];
+  }
   const accessor = accessorMap[sortKey] ?? ((i) => i.name ?? "");
   const sorted = [...items];
   sorted.sort((a, b) => {

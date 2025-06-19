@@ -20,14 +20,14 @@ function statField(name, options = {}) {
   };
   if (options.base) {
     schema.base = new fields.NumberField({
-      initial: options.base || 1,
+      initial: 1,
       integer: true,
       label: `Base ${name}`,
     });
   }
   if (options.temp) {
     schema.temp = new fields.NumberField({
-      initial: options.temp || 0,
+      initial: 0,
       integer: true,
       label: `Temporary ${name}`,
     });
