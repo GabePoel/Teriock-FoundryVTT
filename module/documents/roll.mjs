@@ -56,7 +56,7 @@ export default class TeriockRoll extends foundry.dice.Roll {
 
   /**
    * @param {number} number - The number of boosts or deboosts to apply. Positive numbers boost, negative numbers deboost.
-   * @returns 
+   * @returns
    */
   setBoost(number) {
     if (number === 0) return;
@@ -67,14 +67,13 @@ export default class TeriockRoll extends foundry.dice.Roll {
   }
 }
 
-
 /**
- * @param {foundry.dice.terms.DiceTerm[]} diceTerms 
+ * @param {foundry.dice.terms.DiceTerm[]} diceTerms
  * @returns {foundry.dice.terms.DiceTerm}
  */
 function selectWeightedMaxFaceDie(diceTerms) {
-  const maxFaces = Math.max(...diceTerms.map(term => term.faces));
-  const maxFaceTerms = diceTerms.filter(term => term.faces === maxFaces);
+  const maxFaces = Math.max(...diceTerms.map((term) => term.faces));
+  const maxFaceTerms = diceTerms.filter((term) => term.faces === maxFaces);
   const totalWeight = maxFaceTerms.reduce((sum, term) => sum + term.number, 0);
   let r = Math.random() * totalWeight;
   for (const term of maxFaceTerms) {
