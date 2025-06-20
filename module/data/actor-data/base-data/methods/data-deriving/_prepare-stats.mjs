@@ -107,7 +107,8 @@ export function _preparePresence(system) {
  * @param {string} type
  * @param {string} dieProp
  * @param {boolean} spent
- * @returns
+ * @returns {string}
+ * @private
  */
 function _renderDieBox(rankData, type, dieProp, spent) {
   const iconClass = spent ? "fa-light" : "fa-solid";
