@@ -98,26 +98,50 @@ export function parseTimeString(timeString) {
   }
   const value = parseFloat(match[1]);
   const unit = match[2];
-  
   const units = {
-    1: ['s', 'sec', 'secs', 'second', 'seconds'],
-    60: ['m', 'min', 'mins', 'minute', 'minutes'],
-    3600: ['h', 'hr', 'hrs', 'hour', 'hours'],
-    86400: ['d', 'day', 'days'],
-    604800: ['w', 'week', 'weeks'],
-    31557600: ['y', 'yr', 'yrs', 'year', 'years']
+    1: ["s", "sec", "secs", "second", "seconds"],
+    60: ["m", "min", "mins", "minute", "minutes"],
+    3600: ["h", "hr", "hrs", "hour", "hours"],
+    86400: ["d", "day", "days"],
+    604800: ["w", "week", "weeks"],
+    31557600: ["y", "yr", "yrs", "year", "years"],
   };
-  
+
   const conversions = Object.fromEntries(
-    Object.entries(units).flatMap(([seconds, aliases]) =>
-      aliases.map(alias => [alias, parseInt(seconds)])
-    )
+    Object.entries(units).flatMap(([seconds, aliases]) => aliases.map((alias) => [alias, parseInt(seconds)])),
   );
-  
   if (!(unit in conversions)) {
     return null;
   }
   return value * conversions[unit];
+}
+
+/**
+ * @param {number} totalSeconds
+ * @returns {string}
+ */
+export function secondsToReadable(totalSeconds) {
+  if (totalSeconds < 0) {
+    return "0 seconds";
+  }
+  const units = [
+    { name: "year", seconds: 365.25 * 24 * 60 * 60 },
+    { name: "week", seconds: 7 * 24 * 60 * 60 },
+    { name: "day", seconds: 24 * 60 * 60 },
+    { name: "hour", seconds: 60 * 60 },
+    { name: "minute", seconds: 60 },
+    { name: "second", seconds: 1 },
+  ];
+  const parts = [];
+  let remaining = Math.floor(totalSeconds);
+  for (const unit of units) {
+    const count = Math.floor(remaining / unit.seconds);
+    if (count > 0) {
+      parts.push(`${count} ${unit.name}${count > 1 ? "s" : ""}`);
+      remaining -= count * unit.seconds;
+    }
+  }
+  return parts.length > 0 ? parts.join(", ") : "0 sec";
 }
 
 /**

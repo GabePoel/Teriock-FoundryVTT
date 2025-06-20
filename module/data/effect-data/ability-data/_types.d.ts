@@ -1,3 +1,4 @@
+import "./methods/resolution/_types";
 import { AppliesData } from "./methods/schema/_types";
 import type TeriockBaseEffectData from "../base-data/base-data.mjs";
 

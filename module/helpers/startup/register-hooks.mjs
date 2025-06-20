@@ -43,6 +43,7 @@ export default function registerHooks() {
   });
 
   Hooks.on("deleteActiveEffect", async (document, options, userId) => {
+    console.log("deleteActiveEffect", document, options, userId);
     if (game.user.id === userId && document.isOwner && document.type === "ability") {
       if (document.system.parentId) {
         const parent = document.parent.getEmbeddedDocument("ActiveEffect", document.system.parentId);
@@ -223,6 +224,20 @@ await item.use(options);
         for (const effect of effects) {
           effect.system.checkExpiration();
         }
+      }
+    }
+  });
+
+  Hooks.on("moveToken", async (document, movement, operation, user) => {
+    console.log("moveToken", document, movement, operation, user);
+    if (document.isOwner && document.actor && game.user.id === user._id) {
+      const actor = document.actor;
+      if (actor.effectKeys?.effect?.has("brace")) {
+        actor.update({ "system.hp.temp": 0 });
+      }
+      const effects = actor.movementExpirationEffects;
+      for (const effect of effects) {
+        await effect.system.expire();
       }
     }
   });

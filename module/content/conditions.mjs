@@ -1,4 +1,4 @@
-// This file was auto-generated on 2025-06-17 by scripts/fetch-content.mjs.
+// This file was auto-generated on 2025-06-20 by scripts/fetch-content.mjs.
 // Do not edit manually.
 
 export const conditions = {
@@ -279,7 +279,7 @@ export const conditions = {
     _id: "poisoned00000000",
     statuses: [],
     content:
-      '<p><span class="condition-box" data-children="">A creature that is <b>poisoned</b> has a recurring <a href="https://wiki.teriock.com/index.php/Category:Effects" title="Category:Effects" target="_blank">effect</a> that applies to them at the start of their turn. By default, the <a href="https://wiki.teriock.com/index.php/Category:Effects" title="Category:Effects" target="_blank">effect</a> is <span class="dice" data-full-roll="1d6" data-quick-roll="1d6"><a target="_blank" rel="nofollow noreferrer noopener" class="external text" href="https://dice.run/#/d/1d6">1d6</a></span> <a href="https://wiki.teriock.com/index.php/Damage:Toxic" title="Damage:Toxic" target="_blank">toxic damage</a>. The effect could be something else specified in the source of the poisoned condition.</span>\n</p>',
+      '<p><span class="condition-box" data-children="">A creature that is <b>poisoned</b> has a recurring <a href="https://wiki.teriock.com/index.php/Category:Effects" title="Category:Effects" target="_blank">effect</a> that applies to them at the start of their turn. By default, the <a href="https://wiki.teriock.com/index.php/Category:Effects" title="Category:Effects" target="_blank">effect</a> is <span class="dice" data-full-roll="1d6" data-quick-roll="@1d6"><a target="_blank" rel="nofollow noreferrer noopener" class="external text" href="https://dice.run/#/d/1d6">1d6</a></span> <a href="https://wiki.teriock.com/index.php/Damage:Toxic" title="Damage:Toxic" target="_blank">toxic damage</a>. The effect could be something else specified in the source of the poisoned condition.</span>\n</p>',
   },
   prone: {
     name: "Prone",

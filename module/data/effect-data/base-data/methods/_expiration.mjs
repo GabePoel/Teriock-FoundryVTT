@@ -30,6 +30,6 @@ export async function _expire(effectData) {
   if (effectData.deleteOnExpire) {
     await effectData.parent.delete();
   } else {
-    await effectData.parent.update({ 'disabled': true });
+    await effectData.parent.update({ disabled: true });
   }
 }

@@ -32,6 +32,33 @@ export async function _generateEffect(abilityData, actor) {
     description += abilityData.overview.fluent || "";
   }
   const seconds = parseTimeString(abilityData.duration);
+  const condition = {
+    value: null,
+    present: false,
+  };
+  let dawn = false;
+  let movement = false;
+  let sustained = false;
+  if (abilityData.duration.toLowerCase().includes("while dueling")) {
+    condition.value = "dueling";
+    condition.present = false;
+  } else if (abilityData.duration.toLowerCase().includes("while up")) {
+    condition.value = "down";
+    condition.present = true;
+  } else if (abilityData.duration.toLowerCase().includes("while down")) {
+    condition.value = "down";
+    condition.present = false;
+  } else if (abilityData.duration.toLowerCase().includes("while alive")) {
+    condition.value = "dead";
+    condition.present = true;
+  } else if (abilityData.duration.toLowerCase().includes("while stationary")) {
+    movement = true;
+  } else if (abilityData.duration.toLowerCase().includes("until dawn")) {
+    dawn = true;
+  }
+  if (abilityData.sustained) {
+    sustained = true;
+  }
   const effect = {
     name: abilityData.parent?.name,
     type: "effect",
@@ -42,14 +69,23 @@ export async function _generateEffect(abilityData, actor) {
     system: {
       source: abilityData.parent?._id,
       deleteOnExpire: true,
+      expirations: {
+        condition: condition,
+        movement: movement,
+        dawn: dawn,
+        sustained: sustained,
+      },
     },
     duration: {
       seconds: seconds || undefined,
     },
   };
+  console.log("Generating effect", effect);
   const existingEffect = actor?.effectTypes?.effect?.find((e) => e.name === effect.name);
   if (existingEffect) {
     await existingEffect.delete();
   }
-  return await TeriockEffect.create(effect, { parent: actor });
+  const newEffect = await TeriockEffect.create(effect, { parent: actor });
+  console.log("Effect created", newEffect);
+  return newEffect;
 }

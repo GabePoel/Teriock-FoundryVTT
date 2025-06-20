@@ -9,6 +9,7 @@ export async function _postUpdate(system) {
   await applyEncumbrance(system);
   await prepareTokens(system);
   await etherealKill(system);
+  await checkExpirations(system);
 }
 
 /**
@@ -50,8 +51,13 @@ async function prepareTokens(system) {
       width: tokenSize,
       height: tokenSize,
     };
-    await token.update(tokenParameters);
-    await token.updateVisionMode(actor?.statuses?.has("ethereal") ? "ethereal" : "basic");
+    if (token.width !== tokenSize || token.height !== tokenSize) {
+      await token.update(tokenParameters);
+    }
+    const newVisionMode = actor?.statuses?.has("ethereal") ? "ethereal" : "basic";
+    if (token.sight.visionMode !== newVisionMode) {
+      await token.updateVisionMode(newVisionMode);
+    }
   }
 }
 
@@ -64,9 +70,22 @@ async function etherealKill(system) {
   const down = actor?.statuses?.has("down");
   const ethereal = actor?.statuses?.has("ethereal");
   const dead = actor?.statuses?.has("dead");
+  console.log("Ethereal kill check", { down, ethereal, dead });
   if (down && ethereal && !dead) {
     await actor.toggleStatusEffect("dead", { active: true });
     await actor.toggleStatusEffect("asleep", { active: false });
     await actor.toggleStatusEffect("unconscious", { active: false });
   }
+}
+
+/**
+ * @param {TeriockBaseActorData} system
+ * @returns {Promise<void>}
+ */
+async function checkExpirations(system) {
+  const actor = system.parent;
+  actor.conditionExpirationEffects.forEach(async (effect) => {
+    console.log("Checking condition expiration effect", effect);
+    await effect.system.checkExpiration();
+  });
 }

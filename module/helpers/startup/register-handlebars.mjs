@@ -1,3 +1,5 @@
+import { secondsToReadable } from "../utils.mjs";
+
 export default function registerHandlebarsHelpers() {
   // Debugging
 
@@ -465,12 +467,17 @@ export default function registerHandlebarsHelpers() {
 
     const renderedCards = abilities
       .map((ability) => {
-        const subtitle =
+        let subtitle =
           ability.type === "ability"
             ? Handlebars.helpers.executionTime(ability.system?.maneuver, ability.system?.executionTime)
             : ability.type === "property"
               ? ability.system?.propertyType
               : "";
+        if (ability.isTemporary && ability.duration.seconds) {
+          subtitle =
+            secondsToReadable(ability.duration.startTime + ability.duration.seconds - ability.duration._worldTime) +
+            " remaining";
+        }
         const marker = Handlebars.helpers.abilityMarker(ability);
         const chatIcon = Handlebars.helpers.ticon("comment", {
           hash: { action: "chatDoc", id: ability._id, parentId: ability.parent?._id, tooltip: "Send to Chat" },

@@ -1,25 +1,25 @@
 import TeriockBaseEffect from "../documents/effect.mjs";
 
 export async function createAbility(document, name, options = {}) {
-  let assignedName = "New Ability";
-  let parentAbility = null;
+  const abilityData = {
+    name: "New Ability",
+    type: "ability",
+    img: "systems/teriock/assets/ability.svg",
+    system: {},
+  };
   if (name) {
-    assignedName = name;
+    abilityData.name = name;
   }
-  console.log(`Creating ability ${assignedName} for document ${document.name}`);
+  let parentAbility = null;
+  let embeddingDocument = document;
   if (document.type === "ability") {
     parentAbility = document;
-    document = document.parent;
+    embeddingDocument = document.parent;
   }
-  const ability = await TeriockBaseEffect.create(
-    {
-      name: assignedName,
-      type: "ability",
-      img: "systems/teriock/assets/ability.svg",
-    },
-    { parent: document },
-  );
-  if (assignedName !== "New Ability") {
+  const abilities = await embeddingDocument.createEmbeddedDocuments("ActiveEffect", [abilityData]);
+  const ability = abilities[0];
+  console.log("Created ability", embeddingDocument, ability);
+  if (ability.name !== "New Ability") {
     await ability.system.wikiPull(options);
   }
   if (parentAbility) {

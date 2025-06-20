@@ -220,7 +220,7 @@ export async function _parse(abilityData, rawHTML) {
               formula: "",
             },
           };
-        } else if (hp === "hack") {
+        } else if (hp.toLowerCase().includes("hack")) {
           parameters.costs.hp = {
             type: "hack",
             value: {

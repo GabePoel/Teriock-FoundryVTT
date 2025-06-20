@@ -21,6 +21,16 @@ export default class TeriockItem extends MixinParentDocument(ChildDocumentMixin(
     return this.transferredEffects;
   }
 
+  /**
+   * @returns {boolean}
+   */
+  get disabled() {
+    return this.system.disabled;
+  }
+
+  /**
+   * @returns {Promise<void>}
+   */
   async disable() {
     if (!this.system.disabled) {
       this.update({ "system.disabled": true });
@@ -31,6 +41,9 @@ export default class TeriockItem extends MixinParentDocument(ChildDocumentMixin(
     }
   }
 
+  /**
+   * @returns {Promise<void>}
+   */
   async enable() {
     if (this.system.disabled) {
       this.update({ "system.disabled": false });
@@ -42,6 +55,10 @@ export default class TeriockItem extends MixinParentDocument(ChildDocumentMixin(
     }
   }
 
+  /**
+   * @param {boolean} bool
+   * @returns {Promise<void>}
+   */
   async setDisabled(bool) {
     if (bool) {
       await this.disable();
@@ -50,16 +67,26 @@ export default class TeriockItem extends MixinParentDocument(ChildDocumentMixin(
     }
   }
 
+  /**
+   * @returns {Promise<void>}
+   */
   async toggleDisabled() {
     await this.setDisabled(!this.system.disabled);
   }
 
+  /**
+   * @returns {Promise<void>}
+   */
   async duplicate() {
     const copy = foundry.utils.duplicate(this);
     const copyDocument = await this.parent.createEmbeddedDocuments(this.documentName, [copy]);
     return copyDocument[0];
   }
 
+  /**
+   * @param {string} pullType
+   * @returns {Promise<void>}
+   */
   async _bulkWikiPullHelper(pullType) {
     const pullTypeName = pullType === "pages" ? "Ability" : "Category";
     let toPull;
@@ -89,6 +116,9 @@ export default class TeriockItem extends MixinParentDocument(ChildDocumentMixin(
     }
   }
 
+  /**
+   * @returns {Promise<void>}
+   */
   async _bulkWikiPull() {
     if (["ability", "equipment", "rank", "power"].includes(this.type)) {
       const dialog = new api.DialogV2({

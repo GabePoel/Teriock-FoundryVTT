@@ -10,13 +10,48 @@ import TeriockRoll from "./roll.mjs";
  */
 export default class TeriockActor extends MixinParentDocument(Actor) {
   /** @inheritdoc */
+  getRollData() {
+    return this.system.getRollData();
+  }
+
+  /** @inheritdoc */
   get validEffects() {
     return Array.from(this.allApplicableEffects());
   }
 
-  /** @inheritdoc */
-  getRollData() {
-    return this.system.getRollData();
+  /**
+   * @returns {ActiveEffect[]}
+   */
+  get conditionExpirationEffects() {
+    return this.effectTypes.effect.filter((effect) => effect.system.conditionExpiration);
+  }
+
+  /**
+   * @returns {ActiveEffect[]}
+   */
+  get movementExpirationEffects() {
+    return this.effectTypes.effect.filter((effect) => effect.system.movementExpiration);
+  }
+
+  /**
+   * @returns {ActiveEffect[]}
+   */
+  get dawnExpirationEffects() {
+    return this.effectTypes.effect.filter((effect) => effect.system.dawnExpiration);
+  }
+
+  /**
+   * @returns {ActiveEffect[]}
+   */
+  get sustainedExpirationEffects() {
+    return this.effectTypes.effect.filter((effect) => effect.system.sustainedExpiration);
+  }
+
+  /**
+   * @returns {boolean}
+   */
+  get disabled() {
+    return this.statuses.has("dead");
   }
 
   /**
