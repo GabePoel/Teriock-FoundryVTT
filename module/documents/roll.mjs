@@ -36,12 +36,50 @@ export default class TeriockRoll extends foundry.dice.Roll {
     return context;
   }
 
-  // TODO:Finish implementing the boost method.
-  // boost(amount = 1) {
-  //   const terms = this.terms;
-  // }
+  /**
+   * @returns {void}
+   */
+  boost() {
+    const die = selectWeightedMaxFaceDie(this.dice);
+    die._number = die._number + 1;
+    this.resetFormula();
+  }
 
-  // deboost(amount = 1) {
-  //   const terms = this.terms;
-  // }
+  /**
+   * @returns {void}
+   */
+  deboost() {
+    const die = selectWeightedMaxFaceDie(this.dice);
+    die._number = Math.max(0, die._number - 1);
+    this.resetFormula();
+  }
+
+  /**
+   * @param {number} number - The number of boosts or deboosts to apply. Positive numbers boost, negative numbers deboost.
+   * @returns 
+   */
+  setBoost(number) {
+    if (number === 0) return;
+    const method = number > 0 ? this.boost.bind(this) : this.deboost.bind(this);
+    for (let i = 0; i < Math.abs(number); i++) {
+      method();
+    }
+  }
+}
+
+
+/**
+ * @param {foundry.dice.terms.DiceTerm[]} diceTerms 
+ * @returns {foundry.dice.terms.DiceTerm}
+ */
+function selectWeightedMaxFaceDie(diceTerms) {
+  const maxFaces = Math.max(...diceTerms.map(term => term.faces));
+  const maxFaceTerms = diceTerms.filter(term => term.faces === maxFaces);
+  const totalWeight = maxFaceTerms.reduce((sum, term) => sum + term.number, 0);
+  let r = Math.random() * totalWeight;
+  for (const term of maxFaceTerms) {
+    if (r < term.number) return term;
+    r -= term.number;
+  }
+  return maxFaceTerms[maxFaceTerms.length - 1];
 }

@@ -53,9 +53,7 @@ Hooks.once("init", function () {
     ...teriockDetectionModes,
   };
 
-  // Register custom documents
-  CONFIG.Dice.rolls.push(documents.TeriockRoll);
-  CONFIG.Dice.rolls.push(documents.TeriockHarmRoll);
+  // Register custom core documents
   CONFIG.Actor.documentClass = documents.TeriockActor;
   CONFIG.Item.documentClass = documents.TeriockItem;
   CONFIG.ActiveEffect.documentClass = documents.TeriockEffect;
@@ -153,6 +151,10 @@ Hooks.once("init", function () {
       types,
     }),
   );
+
+  // Registering custom dice rolls and functions
+  CONFIG.Dice.rolls.push(documents.TeriockRoll);
+  CONFIG.Dice.rolls.push(documents.TeriockHarmRoll);
 
   game.teriock = {
     TeriockActor: documents.TeriockActor,
