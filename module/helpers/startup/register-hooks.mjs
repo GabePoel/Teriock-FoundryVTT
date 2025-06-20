@@ -17,45 +17,59 @@ export default function registerHooks() {
   });
 
   Hooks.on("createItem", async (document, options, userId) => {
-    if (game.user.id === userId && document.isOwner && document.type === "equipment") {
-      if (document.getActor()) {
-        await document.system.unequip();
+    if (game.user.id === userId && document.isOwner) {
+      if (document.type === "equipment") {
+        if (document.getActor()) {
+          await document.system.unequip();
+        }
       }
+      await document.getActor()?.postUpdate();
+    }
+  });
+
+  Hooks.on("deleteItem", async (document, options, userId) => {
+    if (game.user.id === userId && document.isOwner) {
+      await document.getActor()?.postUpdate();
     }
   });
 
   Hooks.on("createActiveEffect", async (document, options, userId) => {
-    if (game.user.id === userId && document.isOwner && document.type === "ability") {
-      if (document.system.childIds?.length > 0) {
-        const childAbilityData = [];
-        for (const childAbility of document.getChildren()) {
-          const data = foundry.utils.duplicate(childAbility);
-          data.system.parentId = document._id;
-          childAbilityData.push(data);
+    if (game.user.id === userId && document.isOwner) {
+      if (document.type === "ability") {
+        if (document.system.childIds?.length > 0) {
+          const childAbilityData = [];
+          for (const childAbility of document.getChildren()) {
+            const data = foundry.utils.duplicate(childAbility);
+            data.system.parentId = document._id;
+            childAbilityData.push(data);
+          }
+          const newChildAbilities = await document.parent.createEmbeddedDocuments("ActiveEffect", childAbilityData);
+          const newChildIds = newChildAbilities.map((ability) => ability._id);
+          document.update({
+            "system.childIds": newChildIds,
+          });
         }
-        const newChildAbilities = await document.parent.createEmbeddedDocuments("ActiveEffect", childAbilityData);
-        const newChildIds = newChildAbilities.map((ability) => ability._id);
-        document.update({
-          "system.childIds": newChildIds,
-        });
       }
+      await document.getActor()?.postUpdate();
     }
   });
 
   Hooks.on("deleteActiveEffect", async (document, options, userId) => {
-    console.log("deleteActiveEffect", document, options, userId);
-    if (game.user.id === userId && document.isOwner && document.type === "ability") {
-      if (document.system.parentId) {
-        const parent = document.parent.getEmbeddedDocument("ActiveEffect", document.system.parentId);
-        if (parent) {
-          const childIds = parent.system.childIds.filter((id) => id !== document._id);
-          await parent.update({ "system.childIds": childIds });
+    if (game.user.id === userId && document.isOwner) {
+      if (document.type === "ability") {
+        if (document.system.parentId) {
+          const parent = document.parent.getEmbeddedDocument("ActiveEffect", document.system.parentId);
+          if (parent) {
+            const childIds = parent.system.childIds.filter((id) => id !== document._id);
+            await parent.update({ "system.childIds": childIds });
+          }
+        }
+        if (document.system.childIds?.length > 0) {
+          const childIds = document.system.childIds;
+          await document.parent.deleteEmbeddedDocuments("ActiveEffect", childIds);
         }
       }
-      if (document.system.childIds?.length > 0) {
-        const childIds = document.system.childIds;
-        await document.parent.deleteEmbeddedDocuments("ActiveEffect", childIds);
-      }
+      await document.getActor()?.postUpdate();
     }
   });
 

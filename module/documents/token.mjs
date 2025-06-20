@@ -1,7 +1,20 @@
 const { TokenDocument } = foundry.documents;
 
 export default class TeriockToken extends TokenDocument {
-  /** @override */
+  /**
+   * Ensure that vision is correctly set when the token is first created.
+   * @inheritdoc
+   */
+  prepareDerivedData() {
+    super.prepareDerivedData();
+    const actor = this.actor;
+    this.sight.visionMode = actor?.statuses?.has("ethereal") ? "ethereal" : "basic";
+  }
+
+  /**
+   * Ensure that Teriock specific detection modes are added to the token.
+   * @inheritdoc
+   */
   _prepareDetectionModes() {
     super._prepareDetectionModes();
     if (!this.sight.enabled) return;

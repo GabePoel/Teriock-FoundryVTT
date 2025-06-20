@@ -26,6 +26,7 @@ const writeModuleFile = (fileName, exportName, entries) => {
         `    img: ${JSON.stringify(`systems/teriock/assets/${exportName}/${key}.svg`)},\n` +
         (value._id ? `    _id: ${JSON.stringify(value._id)},\n` : "") +
         (value.statuses ? `    statuses: ${JSON.stringify(value.statuses)},\n` : "") +
+        (value.changes ? `    changes: ${JSON.stringify(value.changes)},\n` : "") +
         `    content: ${JSON.stringify(value.content)}\n  },`,
     );
   }
@@ -55,7 +56,7 @@ const fetchContent = async (map, namespace, staticId, statuses) => {
 
       results[key] = {
         name,
-        content: document.body.innerHTML.trim(),
+        content: "",
       };
 
       if (staticId) {
@@ -64,6 +65,7 @@ const fetchContent = async (map, namespace, staticId, statuses) => {
 
       if (statuses) {
         results[key].statuses = [];
+        results[key].changes = [];
         const box = document.querySelector(".condition-box");
         if (box && box.hasAttribute("data-children")) {
           results[key].statuses = box
@@ -72,14 +74,34 @@ const fetchContent = async (map, namespace, staticId, statuses) => {
             .map((s) => s.trim())
             .filter(Boolean);
         }
+        const changesMetadata = document.querySelectorAll('.metadata[data-type="change"]');
+        console.log(changesMetadata);
+        changesMetadata.forEach((change) => {
+          const changeKey = change.getAttribute("data-key");
+          let changeValueRaw = change.getAttribute("data-value");
+          let changeValue =
+            !isNaN(changeValueRaw) && changeValueRaw.trim() !== "" ? Number(changeValueRaw) : changeValueRaw;
+          console.log(changeKey);
+          if (changeKey && changeValue) {
+            results[key].changes.push({
+              key: changeKey,
+              mode: parseInt(change.getAttribute("data-mode"), 10),
+              value: changeValue,
+              priority: parseInt(change.getAttribute("data-priority"), 10),
+            });
+          }
+        });
         console.log(results[key].statuses);
       }
+
+      document.querySelectorAll(".metadata").forEach((el) => el.remove());
+      results[key].content = document.body.innerHTML.trim();
     } else {
       console.warn(`No HTML returned for "${pageTitle}"`);
     }
   }
 
-  console.log(results);
+  // console.log(results);
   return results;
 };
 

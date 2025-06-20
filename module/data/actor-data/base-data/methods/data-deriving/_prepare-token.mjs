@@ -22,18 +22,3 @@ export function _prepareSize(system) {
   const namedSize = namedSizes[sizeKey] || "Medium";
   system.namedSize = namedSize;
 }
-
-/**
- * @param {TeriockBaseActorData} system
- * @returns {void}
- * @private
- */
-export function _prepareVision(system) {
-  const actor = system.parent;
-  if (actor.isOwner) {
-    const tokens = actor?.getDependentTokens() || [];
-    for (const token of tokens) {
-      token?.updateVisionMode(actor?.statuses?.has("ethereal") ? "ethereal" : "basic");
-    }
-  }
-}

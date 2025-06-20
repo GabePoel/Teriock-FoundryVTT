@@ -23,28 +23,28 @@ export default class TeriockActor extends MixinParentDocument(Actor) {
    * @returns {ActiveEffect[]}
    */
   get conditionExpirationEffects() {
-    return this.effectTypes.effect.filter((effect) => effect.system.conditionExpiration);
+    return this.effectTypes.effect?.filter((effect) => effect.system.conditionExpiration) || [];
   }
 
   /**
    * @returns {ActiveEffect[]}
    */
   get movementExpirationEffects() {
-    return this.effectTypes.effect.filter((effect) => effect.system.movementExpiration);
+    return this.effectTypes.effect?.filter((effect) => effect.system.movementExpiration) || [];
   }
 
   /**
    * @returns {ActiveEffect[]}
    */
   get dawnExpirationEffects() {
-    return this.effectTypes.effect.filter((effect) => effect.system.dawnExpiration);
+    return this.effectTypes.effect?.filter((effect) => effect.system.dawnExpiration) || [];
   }
 
   /**
    * @returns {ActiveEffect[]}
    */
   get sustainedExpirationEffects() {
-    return this.effectTypes.effect.filter((effect) => effect.system.sustainedExpiration);
+    return this.effectTypes.effect?.filter((effect) => effect.system.sustainedExpiration) || [];
   }
 
   /**

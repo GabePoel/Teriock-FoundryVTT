@@ -38,6 +38,7 @@ Hooks.once("init", function () {
     }
     return a.id.localeCompare(b.id);
   });
+  CONFIG.specialStatusEffects["ETHEREAL"] = "ethereal";
 
   CONFIG.Canvas.visionModes = {
     ...CONFIG.Canvas.visionModes,

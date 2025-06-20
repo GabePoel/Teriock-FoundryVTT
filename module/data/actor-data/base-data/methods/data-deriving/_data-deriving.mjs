@@ -2,7 +2,8 @@
 import { _prepareAttributes, _prepareBonuses, _prepareHpMp, _preparePresence } from "./_prepare-stats.mjs";
 import { _prepareDefenses, _prepareOffenses } from "./_prepare-combat.mjs";
 import { _prepareEncumbrance, _prepareMoney, _prepareWeightCarried } from "./_prepare-load.mjs";
-import { _prepareSize, _prepareVision } from "./_prepare-token.mjs";
+import { _prepareSize } from "./_prepare-token.mjs";
+import { _prepareSpeed } from "./_prepare-speed.mjs";
 import { _prepareTradecrafts } from "./_prepare-tradecrafts.mjs";
 
 /**
@@ -21,5 +22,5 @@ export function _prepareDerivedData(system) {
   _prepareDefenses(system);
   _prepareOffenses(system);
   _prepareEncumbrance(system);
-  _prepareVision(system);
+  _prepareSpeed(system);
 }
