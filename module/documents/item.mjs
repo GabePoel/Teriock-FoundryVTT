@@ -75,15 +75,6 @@ export default class TeriockItem extends MixinParentDocument(ChildDocumentMixin(
   }
 
   /**
-   * @returns {Promise<void>}
-   */
-  async duplicate() {
-    const copy = foundry.utils.duplicate(this);
-    const copyDocument = await this.parent.createEmbeddedDocuments(this.documentName, [copy]);
-    return copyDocument[0];
-  }
-
-  /**
    * @param {string} pullType
    * @returns {Promise<void>}
    */

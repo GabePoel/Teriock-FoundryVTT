@@ -88,6 +88,15 @@ export const ChildDocumentMixin = (Base) =>
     }
 
     /**
+     * @returns {Promise<ChildDocumentMixin>}
+     */
+    async duplicate() {
+      const copy = foundry.utils.duplicate(this);
+      const copyDocument = await this.parent.createEmbeddedDocuments(this.documentName, [copy]);
+      return copyDocument[0];
+    }
+
+    /**
      * @param {MessageOptions} options
      */
     buildRawMessage(options = {}) {

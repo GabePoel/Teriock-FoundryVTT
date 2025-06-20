@@ -197,8 +197,7 @@ export default function connectEmbedded(document, element, editable = true) {
             name: "Duplicate",
             icon: makeIcon("copy", iconStyle),
             callback: async () => {
-              const copy = await foundry.utils.duplicate(embedded);
-              embedded.parent.createEmbeddedDocuments(embedded.documentName, [copy], { render: true });
+              await embedded.duplicate();
             },
             condition: () => {
               return editable && embedded.isOwner;

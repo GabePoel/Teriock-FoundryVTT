@@ -68,6 +68,22 @@ export default class TeriockEffect extends ChildDocumentMixin(ActiveEffect) {
   }
 
   /**
+   * @todo Create addChild and setParent methods to handle this more generally.
+   * @override
+   */
+  async duplicate() {
+    const copy = await super.duplicate();
+    const parent = copy.getParent();
+    if (parent) {
+      const parentChildIds = parent.system.childIds || [];
+      parentChildIds.push(copy.id);
+      await parent.update({
+        "system.childIds": parentChildIds,
+      });
+    }
+  }
+
+  /**
    * @returns {descendants: ActiveEffect[]}
    */
   getDescendants() {
