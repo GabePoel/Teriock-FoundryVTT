@@ -83,7 +83,7 @@ export function evaluateSync(formula, data = {}, options = {}) {
 /**
  * Evaluates a dice roll formula synchronously and returns the total result.
  * Avoids having to generate roll data if it's not needed.
- * 
+ *
  * @param {string} formula - The dice roll formula to evaluate.
  * @param {Document} document - The document to get roll data from.
  * @param {Object} options - Options that get passed to the roll.
