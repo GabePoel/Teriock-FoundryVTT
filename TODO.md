@@ -1,7 +1,7 @@
 - [x] Bug fixes
-  - [ ] Drag/drop with descendent abilities
-    - [ ] The descendants themselves
-    - [ ] The parents
+  - [x] Drag/drop with descendent abilities
+    - [x] The descendants themselves
+    - [x] The parents
   - [ ] "No results found" popup appears briefly on changing tabs
   - [x] Automatic condition application and inheritance
   - [x] Player ActiveEffect warnings
