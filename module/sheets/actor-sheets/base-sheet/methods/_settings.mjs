@@ -10,7 +10,7 @@ export const _defaultSheetSettings = {
     resourceOptions: false,
     rankOptions: false,
     powerOptions: false,
-    effectOptions: false
+    effectOptions: false,
   },
   abilityFilters: {
     search: "",
@@ -34,7 +34,7 @@ export const _defaultSheetSettings = {
     interaction: null,
     powerSource: null,
     element: null,
-    effects: []
+    effects: [],
   },
   equipmentFilters: {
     search: "",
@@ -47,10 +47,10 @@ export const _defaultSheetSettings = {
     magicalProperties: "",
     weaponFightingStyles: "",
     equipmentClasses: "",
-    powerLevel: ""
+    powerLevel: "",
   },
   abilitySortOption: "name",
   abilitySortAscending: true,
   equipmentSortOption: "name",
   equipmentSortAscending: true,
-}
+};

@@ -1,3 +1,4 @@
+/** @import { Document } from "@common/abstract/_module.mjs"; */
 import TeriockRoll from "../documents/roll.mjs";
 
 /**
@@ -80,7 +81,13 @@ export function evaluateSync(formula, data = {}, options = {}) {
 }
 
 /**
+ * Evaluates a dice roll formula synchronously and returns the total result.
+ * Avoids having to generate roll data if it's not needed.
  * 
+ * @param {string} formula - The dice roll formula to evaluate.
+ * @param {Document} document - The document to get roll data from.
+ * @param {Object} options - Options that get passed to the roll.
+ * @returns {number} The total result of the evaluated roll.
  */
 export function smartEvaluateSync(formula, document, options = {}) {
   if (!formula) {

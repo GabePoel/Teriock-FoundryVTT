@@ -89,7 +89,7 @@ export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorShee
     this._embeds = {
       effectTypes: {},
       itemTypes: {},
-    }
+    };
     this._activeTab = "tradecrafts";
     this.settings = _defaultSheetSettings;
   }
@@ -353,7 +353,7 @@ export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorShee
       fluency: tab === "tradecrafts" ? this.actor.effectTypes.fluency : [],
       effect: tab === "conditions" ? this.actor.effectTypes.effect : [],
       ability: tab === "abilities" ? this.actor.effectTypes.ability : [],
-    }
+    };
     this._embeds.itemTypes = {
       equipment: tab === "inventory" ? this.actor.itemTypes.equipment : [],
       power: tab === "powers" ? this.actor.itemTypes.power : [],
@@ -556,7 +556,7 @@ export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorShee
     const configs = this.constructor.SEARCH_CONFIGS;
     configs.forEach(({ type, source, method }) => {
       const contentEl = this.element.querySelector(`#${type}-results`);
-      const inputEl   = this.element.querySelector(`.${type}-search`);
+      const inputEl = this.element.querySelector(`.${type}-search`);
       if (!(contentEl && inputEl)) return;
 
       const instance = new ux.SearchFilter({
@@ -569,7 +569,7 @@ export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorShee
           this.#handleSearchFilter(type, source, method, rgx, contentEl, inputEl);
         },
         contentSelector: `#${type}-results`,
-        inputSelector:   `.${type}-search`,
+        inputSelector: `.${type}-search`,
       });
 
       instance.bind(this.element);
@@ -588,11 +588,10 @@ export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorShee
       if (!contentEl) return;
 
       const inputValue = this[`_${type}SearchValue`] || "";
-      const rgx        = new RegExp(inputValue, "i");
+      const rgx = new RegExp(inputValue, "i");
       this.#applyFilter(type, source, method, rgx, contentEl);
     });
   }
-
 
   #handleSearchFilter(type, sourceKey, filterMethodName, rgx, content, input) {
     this.#applyFilter(type, sourceKey, filterMethodName, rgx, content);
@@ -619,7 +618,6 @@ export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorShee
     let firstVisibleCard = null;
     let lastVisibleCard = null;
 
-    
     allCards.forEach((card) => {
       const isVisible = visibleIds.has(card.dataset.id);
 
@@ -632,7 +630,7 @@ export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorShee
         lastVisibleCard = card;
       }
     });
-    
+
     if (firstVisibleCard) firstVisibleCard.classList.add("visible-first");
     if (lastVisibleCard) lastVisibleCard.classList.add("visible-last");
     if (noResults) {
