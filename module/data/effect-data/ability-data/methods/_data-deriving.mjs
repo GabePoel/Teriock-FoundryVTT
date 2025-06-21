@@ -3,6 +3,8 @@
 /**
  * Poor workaround to allow for children to be accessible for effect duplication.
  * @param {TeriockAbilityData} system
+ * @returns {void}
+ * @private
  */
 export function _prepareDerivedData(system) {
   const childUuids = [];

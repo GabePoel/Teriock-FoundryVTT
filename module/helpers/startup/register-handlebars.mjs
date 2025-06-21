@@ -414,7 +414,7 @@ export default function registerHandlebarsHelpers() {
   // TCard & AbilityCards Helpers
 
   Handlebars.registerHelper("tcard", function (options) {
-    const {
+    let {
       img,
       title,
       subtitle,
@@ -431,7 +431,7 @@ export default function registerHandlebarsHelpers() {
       amount = 1,
       max = null,
     } = options.hash;
-
+    if (max == Infinity) max = null;
     const idAttr = id ? `data-id="${id}"` : "";
     const parentIdAttr = parentId ? `data-parent-id="${parentId}"` : "";
     const typeAttr = type ? `data-type="${type}"` : "";
@@ -515,7 +515,7 @@ export default function registerHandlebarsHelpers() {
             shattered: false,
             consumable: ability.system.consumable,
             amount: ability.system.quantity,
-            max: ability.system.maxQuantity,
+            max: ability.system.maxQuantity?.derived,
             type: "effect",
           },
         });

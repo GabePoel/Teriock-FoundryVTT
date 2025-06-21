@@ -1,5 +1,6 @@
 const { fields } = foundry.data;
 import { _messageParts } from "./methods/_messages.mjs";
+import { _migrateData } from "./methods/_migrate-data.mjs";
 import { _roll } from "./methods/_rolling.mjs";
 import { ConsumableDataMixin } from "../../mixins/consumable-mixin.mjs";
 import TeriockBaseEffectData from "../base-data/base-data.mjs";
@@ -30,15 +31,17 @@ export default class TeriockResourceData extends ConsumableDataMixin(TeriockBase
         min: 0,
         nullable: true,
       }),
-      maxQuantityRaw: new fields.StringField({
-        initial: null,
-        label: "Max Quantity (Raw)",
-        nullable: true,
-      }),
-      maxQuantity: new fields.NumberField({
-        initial: null,
-        label: "Max Quantity",
-        nullable: true,
+      maxQuantity: new fields.SchemaField({
+        raw: new fields.StringField({
+          label: "Max Quantity (Raw)",
+          initial: "",
+        }),
+        derived: new fields.NumberField({
+          initial: 0,
+          integer: true,
+          label: "Max Quantity (Derived)",
+          min: 0,
+        }),
       }),
       rollFormula: new fields.StringField({
         initial: "",
@@ -49,6 +52,12 @@ export default class TeriockResourceData extends ConsumableDataMixin(TeriockBase
         label: "Function Hook",
       }),
     };
+  }
+
+  /** @override */
+  static migrateData(data) {
+    data = _migrateData(data);
+    return super.migrateData(data);
   }
 
   /** @override */

@@ -9,8 +9,10 @@ declare module "./equipment-data.mjs" {
     dampened: boolean;
     consumable: boolean;
     quantity: number;
-    maxQuantity: number;
-    maxQuantityRaw: string;
+    maxQuantity: {
+      raw: string;
+      derived: number;
+    };
     ranged: boolean;
     damage: string;
     twoHandedDamage: string;

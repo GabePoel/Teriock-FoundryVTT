@@ -12,7 +12,7 @@
     (suffix item.system.damage 'Damage')
     (suffix item.system.bv 'BV')
     (suffix item.system.av 'AV')
-    (prefix item.system.tier 'Tier')
+    (prefix item.system.tier.derived 'Tier')
     (suffix item.system.weight 'lb')
     )
     id=item._id
@@ -21,7 +21,7 @@
     shattered=item.system.shattered
     consumable=item.system.consumable
     amount=item.system.quantity
-    max=item.system.maxQuantity
+    max=item.system.maxQuantity.derived
     icons=(concat
     (ticon "comment" action="chatDoc" id=item._id tooltip="Send to Chat")
     (ticonToggle "circle-check" "circle" item.system.equipped action="toggleEquippedDoc" id=item._id parentId=item.parent._id tooltipTrue="Equipped" tooltipFalse="Unequipped")

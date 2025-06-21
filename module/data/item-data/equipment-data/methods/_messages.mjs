@@ -41,7 +41,7 @@ export function _messageParts(equipmentData) {
     },
     {
       icon: "fa-weight-hanging",
-      wrappers: [src.weight + " lb", src.minStr + " min STR", src.tier ? "Tier " + src.tier : ""],
+      wrappers: [src.weight + " lb", src.minStr + " min STR", src.tier.raw ? "Tier " + src.tier.raw : ""],
     },
     {
       icon: "fa-flag",

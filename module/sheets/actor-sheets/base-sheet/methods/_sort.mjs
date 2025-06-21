@@ -42,7 +42,7 @@ export function _sortEquipment(actor) {
     minStr: (i) => i.system.minStr ?? 0,
     powerLevel: (i) => i.system.powerLevel ?? 0,
     shattered: (i) => Number(i.system.shattered),
-    tier: (i) => i.system.tier ?? 0,
+    tier: (i) => i.system.tier.derived ?? 0,
     weight: (i) => i.system.weight ?? 0,
   };
   return _sortEmbedded(equipment, sortKey, ascending, sortMap);

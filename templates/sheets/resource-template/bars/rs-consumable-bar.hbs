@@ -24,15 +24,15 @@
       </div>
       <div class="ab-box-content">
         <div class="ability-bar-input max-input unselected">
-          {{#if system.maxQuantity}}
-          {{system.maxQuantity}}
+          {{#if system.maxQuantity.derived}}
+          {{system.maxQuantity.derived}}
           {{else}}
           Infinite
           {{/if}}
         </div>
         {{formInput
-        systemFields.maxQuantityRaw
-        value=system.maxQuantityRaw
+        systemFields.maxQuantity.fields.raw
+        value=system.maxQuantity.raw
         disabled=(not editable)
         classes="ability-bar-input max-input selected"
         }}

@@ -115,7 +115,7 @@ function addEmbeddedBlock(entities, blocks, name, typeKey, iconFallback = "hasht
       const { name, uuid, system } = e;
       const { color = "", icon = iconFallback } = config[system[`${typeKey}Type`]] || {};
       const quantity = system.quantity,
-        maxQuantity = system.maxQuantity;
+        maxQuantity = system.maxQuantity?.derived;
 
       const suffix =
         typeKey === "resource" && quantity !== undefined

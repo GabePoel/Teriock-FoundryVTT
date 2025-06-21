@@ -1,4 +1,4 @@
-import { evaluateSync } from "../../helpers/utils.mjs";
+import { smartEvaluateSync } from "../../helpers/utils.mjs";
 
 export const ConsumableDataMixin = (Base) =>
   class ConsumableDataMixin extends Base {
@@ -13,35 +13,22 @@ export const ConsumableDataMixin = (Base) =>
     }
 
     /** @override */
-    async prepareDerivedData() {
+    prepareDerivedData() {
       super.prepareDerivedData();
       if (this.consumable) {
-        const { maxQuantity, quantity } = this.getQuantities();
-        this.maxQuantity = maxQuantity;
-        this.quantity = quantity;
-      }
-    }
-
-    /**
-     * @returns {object}
-     */
-    getQuantities() {
-      let maxQuantity = null;
-      let quantity = this.quantity || 0;
-      if (this.consumable) {
-        if (this.maxQuantityRaw) {
-          if (!Number.isNaN(parseInt(this.maxQuantityRaw))) {
-            maxQuantity = parseInt(this.maxQuantityRaw);
-          } else {
-            maxQuantity = evaluateSync(this.maxQuantityRaw, this.parent.getActor()?.getRollData());
-          }
-          quantity = Math.min(maxQuantity || Infinity, quantity || 0);
+        if (!this.maxQuantity.raw) {
+          this.maxQuantity.derived = Infinity;
+        } else {
+          this.maxQuantity.derived = smartEvaluateSync(
+            this.maxQuantity.raw,
+            this.parent,
+          );
         }
+        this.quantity = Math.max(
+          Math.min(this.maxQuantity.derived, this.quantity),
+          0
+        );
       }
-      return {
-        maxQuantity: maxQuantity,
-        quantity: quantity,
-      };
     }
 
     /**

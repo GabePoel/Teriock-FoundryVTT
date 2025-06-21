@@ -1,9 +1,11 @@
 /** @import { MessageParts } from "../../../types/messages" */
 import { ConsumableDataMixin } from "../../mixins/consumable-mixin.mjs";
 import { WikiDataMixin } from "../../mixins/wiki-mixin.mjs";
+import * as deriving from "./methods/_data-deriving.mjs";
 import * as handling from "./methods/_handling.mjs";
 import * as identifying from "./methods/_identifying.mjs";
 import * as messages from "./methods/_messages.mjs";
+import * as migrate from "./methods/_migrate-data.mjs";
 import * as parsing from "./methods/_parsing.mjs";
 import * as rolling from "./methods/_rolling.mjs";
 import * as schema from "./methods/_schema.mjs";
@@ -27,6 +29,18 @@ export default class TeriockEquipmentData extends WikiDataMixin(ConsumableDataMi
       ...commonData,
       ...schema._defineSchema(),
     };
+  }
+
+  /** @override */
+  prepareDerivedData() {
+    super.prepareDerivedData();
+    deriving._prepareDerivedData(this);
+  }
+
+  /** @override */
+  static migrateData(data) {
+    data = migrate._migrateData(data);
+    return super.migrateData(data);
   }
 
   /** @override */

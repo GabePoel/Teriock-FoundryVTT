@@ -84,7 +84,7 @@ export function _prepareHpMp(system) {
 export function _preparePresence(system) {
   const actor = system.parent;
   const equipped = actor.itemTypes.equipment.filter((i) => i.system.equipped);
-  let usp = equipped.reduce((sum, item) => sum + (item.system.tier || 0), 0);
+  let usp = equipped.reduce((sum, item) => sum + (item.system.tier.derived || 0), 0);
   usp = Math.min(usp, system.pres);
   const unp = system.pres - usp;
   Object.assign(system, {

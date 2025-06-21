@@ -4,8 +4,10 @@ declare module "./resource-data.mjs" {
   export default interface TeriockResourceData extends TeriockBaseEffectData {
     consumable: boolean;
     quantity: number;
-    maxQuantityRaw: string;
-    maxQuantity: number;
+    maxQuantity: {
+      raw: string;
+      derived: number;
+    };
     rollFormula: string;
     functionHook: string;
   }

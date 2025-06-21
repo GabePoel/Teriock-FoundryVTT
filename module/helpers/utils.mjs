@@ -65,9 +65,35 @@ export function abbreviate(string, length = 3) {
  * @returns {number} The total result of the evaluated roll.
  */
 export function evaluateSync(formula, data = {}, options = {}) {
+  if (!formula) {
+    return 0;
+  }
+  if (typeof formula !== "string") {
+    return 0;
+  }
+  if (!isNaN(Number(formula))) {
+    return Number(formula);
+  }
   const roll = new TeriockRoll(formula, data);
   roll.evaluateSync(options);
   return roll.total;
+}
+
+/**
+ * 
+ */
+export function smartEvaluateSync(formula, document, options = {}) {
+  if (!formula) {
+    return 0;
+  }
+  if (typeof formula !== "string") {
+    return 0;
+  }
+  if (!isNaN(Number(formula))) {
+    return Number(formula);
+  }
+  const rollData = document.getActor()?.getRollData() || {};
+  return evaluateSync(formula, rollData, options);
 }
 
 /**
@@ -79,6 +105,15 @@ export function evaluateSync(formula, data = {}, options = {}) {
  * @returns {Promise<number>} The total result of the evaluated roll.
  */
 export async function evaluateAsync(formula, data = {}, options = {}) {
+  if (!formula) {
+    return 0;
+  }
+  if (typeof formula !== "string") {
+    return 0;
+  }
+  if (!isNaN(Number(formula))) {
+    return Number(formula);
+  }
   const roll = new TeriockRoll(formula, data);
   await roll.evaluate(options);
   return roll.result;

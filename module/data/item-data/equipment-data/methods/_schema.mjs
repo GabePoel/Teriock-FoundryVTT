@@ -37,17 +37,17 @@ export function _defineSchema() {
       label: "Quantity",
       min: 0,
     }),
-    maxQuantity: new fields.NumberField({
-      initial: null,
-      integer: true,
-      label: "Max Quantity",
-      min: 0,
-      nullable: true,
-    }),
-    maxQuantityRaw: new fields.StringField({
-      initial: null,
-      label: "Max Quantity (Raw)",
-      nullable: true,
+    maxQuantity: new fields.SchemaField({
+      raw: new fields.StringField({
+        label: "Max Quantity (Raw)",
+        initial: "",
+      }),
+      derived: new fields.NumberField({
+        initial: 0,
+        integer: true,
+        label: "Max Quantity (Derived)",
+        min: 0,
+      }),
     }),
     ranged: new fields.BooleanField({
       initial: false,
@@ -130,15 +130,25 @@ export function _defineSchema() {
       initial: "",
       label: "Notes",
     }),
-    tier: new fields.NumberField({
-      initial: 0,
-      integer: true,
-      label: "Tier",
-      min: 0,
-    }),
-    fullTier: new fields.StringField({
-      initial: "",
-      label: "Full Tier",
+    // tier: new fields.NumberField({
+    //   initial: 0,
+    //   integer: true,
+    //   label: "Tier",
+    //   min: 0,
+    // }),
+    // fullTier: new fields.StringField({
+    //   initial: "",
+    //   label: "Full Tier",
+    // }),
+    tier: new fields.SchemaField({
+      raw: new fields.StringField({
+        initial: "",
+        label: "Tier (Raw)",
+      }),
+      derived: new fields.NumberField({
+        initial: 0,
+        label: "Tier (Derived)",
+      }),
     }),
     manaStoring: new fields.StringField({
       initial: "",

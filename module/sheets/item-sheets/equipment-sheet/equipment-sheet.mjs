@@ -49,8 +49,8 @@ export default class TeriockEquipmentSheet extends HandlebarsApplicationMixin(Te
       enrichedDescription: system.description,
       enrichedFlaws: system.flaws,
       enrichedNotes: system.notes,
-      enrichedTier: system.fullTier,
-      enrichedManaStoring: system.manaStoring,
+      // enrichedTier: system.fullTier,
+      // enrichedManaStoring: system.manaStoring,
     };
 
     for (const [key, value] of Object.entries(enrichments)) {
@@ -81,8 +81,8 @@ export default class TeriockEquipmentSheet extends HandlebarsApplicationMixin(Te
       ".ab-description-button": "system.description",
       ".ab-flaws-button": "system.flaws",
       ".ab-notes-button": "system.notes",
-      ".ab-full-tier-button": "system.fullTier",
-      ".ab-mana-storing-button": "system.manaStoring",
+      // ".ab-full-tier-button": "system.fullTier",
+      // ".ab-mana-storing-button": "system.manaStoring",
     };
     this._connectButtonMap(buttonMap);
   }
@@ -124,7 +124,7 @@ export default class TeriockEquipmentSheet extends HandlebarsApplicationMixin(Te
       ".ab-av-button": { "system.av": 1 },
       ".ab-bv-button": { "system.bv": 1 },
       ".ab-weight-button": { "system.weight": 1 },
-      ".ab-tier-button": { "system.tier": 1 },
+      ".ab-tier-button": { "system.tier.raw": "1" },
     };
 
     for (const [selector, update] of Object.entries(staticUpdates)) {

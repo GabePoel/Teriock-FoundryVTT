@@ -126,7 +126,7 @@ export async function _equip(equipmentData) {
       // }
       if (doEquip && ref) {
         await equipmentData.parent.update({
-          "system.tier": ref.system.tier,
+          "system.tier.raw": ref.system.tier.raw,
         });
       }
     }
