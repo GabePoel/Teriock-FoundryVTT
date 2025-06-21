@@ -27,13 +27,20 @@ export default class TeriockBaseActorData extends TypeDataModel {
 
   /** @override */
   static migrateData(data) {
+    const start = performance.now();
     data = _migrateData(data);
-    return super.migrateData(data);
+    const result = super.migrateData(data);
+    const end = performance.now();
+    console.log(`migrateData took ${end - start} ms`);
+    return result;
   }
 
   /** @override */
   prepareDerivedData() {
+    const start = performance.now();
     _prepareDerivedData(this);
+    const end = performance.now();
+    console.log(`prepareDerivedData took ${end - start} ms`);
   }
 
   /**
@@ -104,7 +111,10 @@ export default class TeriockBaseActorData extends TypeDataModel {
    * @returns {Promise<void>}
    */
   async postUpdate() {
+    const start = performance.now();
     await _postUpdate(this);
+    const end = performance.now();
+    console.log(`postUpdate took ${end - start} ms`);
   }
 
   /**

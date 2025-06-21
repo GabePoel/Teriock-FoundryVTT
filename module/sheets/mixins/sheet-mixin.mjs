@@ -23,6 +23,7 @@ export const TeriockSheet = (Base) =>
         wikiOpenThis: this._wikiOpenThis,
         toggleForceDisabledDoc: this._toggleForceDisabledDoc,
         quickToggle: this._quickToggle,
+        sheetToggle: this._sheetToggle,
         useOneDoc: this._useOneDoc,
         createAbility: this._createAbility,
         createResource: this._createResource,
@@ -48,6 +49,7 @@ export const TeriockSheet = (Base) =>
       this._menuOpen = false;
       this._contextMenus = [];
       this._locked = true;
+      this.settings = {};
     }
 
     /** @override */
@@ -64,6 +66,15 @@ export const TeriockSheet = (Base) =>
         TeriockSheet._debug.call(this, e, e.currentTarget);
       });
       this._activateMenu();
+      this._connect('[data-action="sheetSelect"]', "change", (e) => {
+        const select = e.currentTarget;
+        const path = select.dataset.path;
+        const value = select.value;
+        if (path) {
+          foundry.utils.setProperty(this, path, value);
+        }
+        this.render();
+      });
     }
 
     /** @override */
@@ -82,6 +93,7 @@ export const TeriockSheet = (Base) =>
         img: this.document.img,
         flags: this.document.flags,
         uuid: this.document.uuid,
+        settings: this.settings,
       };
       return context;
     }
@@ -325,6 +337,13 @@ export const TeriockSheet = (Base) =>
       const path = target.dataset.path;
       const current = target.dataset.bool === "true";
       this.document.update({ [path]: !current });
+    }
+
+    static async _sheetToggle(event, target) {
+      const path = target.dataset.path;
+      const current = target.dataset.bool === "true";
+      foundry.utils.setProperty(this, path, !current);
+      this.render();
     }
 
     static async _createAbility(event, __) {

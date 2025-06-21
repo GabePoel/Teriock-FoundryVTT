@@ -22,8 +22,7 @@ function propertyFilter(filterVal, document) {
   return false;
 }
 
-export function _filterAbilities(actor) {
-  let abilities = actor.effectTypes.ability;
+export function _filterAbilities(actor, abilities) {
   if (!abilities || !Array.isArray(abilities) || abilities.length === 0) {
     return [];
   }
@@ -57,8 +56,7 @@ export function _filterAbilities(actor) {
   return abilities;
 }
 
-export function _filterEquipment(actor) {
-  let equipment = actor.itemTypes.equipment;
+export function _filterEquipment(actor, equipment) {
   if (!equipment || !Array.isArray(equipment) || equipment.length === 0) {
     return [];
   }

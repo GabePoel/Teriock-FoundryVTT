@@ -2,7 +2,7 @@
   - [x] Drag/drop with descendent abilities
     - [x] The descendants themselves
     - [x] The parents
-  - [ ] "No results found" popup appears briefly on changing tabs
+  - [x] "No results found" popup appears briefly on changing tabs
   - [x] Automatic condition application and inheritance
   - [x] Player ActiveEffect warnings
   - [x] Two-handed weapon damage

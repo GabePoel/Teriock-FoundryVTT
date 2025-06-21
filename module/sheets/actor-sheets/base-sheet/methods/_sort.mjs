@@ -14,8 +14,8 @@ export function _sortEmbedded(items, sortKey, ascending, accessorMap = {}) {
 
 export function _sortAbilities(actor) {
   const abilities = actor.effectTypes.ability;
-  const sortKey = actor.system.sheet.abilitySortOption;
-  const ascending = actor.system.sheet.abilitySortAscending;
+  const sortKey = actor.sheet.settings.abilitySortOption;
+  const ascending = actor.sheet.settings.abilitySortAscending;
   const sortMap = {
     name: (i) => i.name,
     sourceName: (i) => i.parent?.name ?? "",
@@ -28,8 +28,8 @@ export function _sortAbilities(actor) {
 
 export function _sortEquipment(actor) {
   const equipment = actor.itemTypes.equipment;
-  const sortKey = actor.system.sheet.equipmentSortOption;
-  const ascending = actor.system.sheet.equipmentSortAscending;
+  const sortKey = actor.sheet.settings.equipmentSortOption;
+  const ascending = actor.sheet.settings.equipmentSortAscending;
   const sortMap = {
     name: (i) => i.name,
     av: (i) => i.system.av ?? 0,

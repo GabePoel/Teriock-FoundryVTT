@@ -271,13 +271,13 @@ export default function registerHandlebarsHelpers() {
       // const inputValue = escape(searchValue);
       // const inputValue = `${tab}SearchValue`
 
-      const optionsPath = `system.sheet.menus.${tab}Options`;
-      const filterPath = `system.sheet.menus.${tab}Filters`;
-      const sortPath = `system.sheet.menus.${tab}Sort`;
+      const optionsPath = `settings.menus.${tab}Options`;
+      const filterPath = `settings.menus.${tab}Filters`;
+      const sortPath = `settings.menus.${tab}Sort`;
 
       const gaplessPath = `system.sheet.display.${tab}.gapless`;
       const sizePath = `system.sheet.display.${tab}.size`;
-      const ascendingPath = `system.sheet.${tab}SortAscending`;
+      const ascendingPath = `settings.${tab}SortAscending`;
 
       const get = (path) => path.split(".").reduce((obj, key) => obj?.[key], context);
 
@@ -296,7 +296,7 @@ export default function registerHandlebarsHelpers() {
           class="${tab}-options-menu-toggle options-menu-toggle ${ttoggle(optionsToggle)}" 
           data-bool="${optionsToggle}"
           data-path="${optionsPath}"
-          data-action="quickToggle"
+          data-action="sheetToggle"
           data-tooltip="Display Options"
         >
           <i class="fa-fw fa-solid fa-sliders"></i>
@@ -309,7 +309,7 @@ export default function registerHandlebarsHelpers() {
             class="${tab}-sort-menu-toggle sort-menu-toggle ${ttoggle(sortToggle)}"
             data-bool="${sortToggle}"
             data-path="${sortPath}"
-            data-action="quickToggle"
+            data-action="sheetToggle"
             data-tooltip="Sort Results"
           >
             <i class="fa-fw fa-solid fa-bars-sort"></i>
@@ -324,7 +324,7 @@ export default function registerHandlebarsHelpers() {
             class="${tab}-filter-menu-toggle filter-menu-toggle ${ttoggle(filterToggle)}"
             data-bool="${filterToggle}"
             data-path="${filterPath}"
-            data-action="quickToggle"
+            data-action="sheetToggle"
             data-tooltip="Filter Results"
           >
             <i class="fa-fw fa-solid fa-filter"></i>
@@ -374,10 +374,10 @@ export default function registerHandlebarsHelpers() {
           <div class="tgrid g4">
             <div class="tgrid-item">
               <label for="${tab}-ascending">Ascending</label>
-              <input type="checkbox" name="${ascendingPath}" id="${tab}-ascending" ${checked(ascendingValue)}>
+              <input type="checkbox" data-action="sheetToggle" data-bool="${ascendingValue}" data-path="${ascendingPath}" id="${tab}-ascending" ${checked(ascendingValue)}>
             </div>
             <div class="tgrid-item gi3">
-              <select name="system.sheet.${tab}SortOption" id="${tab}-sort">
+              <select data-action="sheetSelect" data-path="settings.${tab}SortOption" id="${tab}-sort">
                 ${sortSelectHTML}
               </select>
             </div>

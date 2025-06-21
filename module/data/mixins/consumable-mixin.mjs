@@ -9,7 +9,7 @@ export const ConsumableDataMixin = (Base) =>
      */
     async use(options) {
       await super.use(options);
-      this.useOne();
+      await this.useOne();
     }
 
     /** @override */
@@ -49,9 +49,12 @@ export const ConsumableDataMixin = (Base) =>
     async gainOne() {
       if (this.consumable) {
         let quantity = this.quantity;
-        let maxQuantity = this.maxQuantity;
-        if (maxQuantity) {
-          quantity = Math.min(maxQuantity, quantity + 1);
+        if (!quantity) {
+          quantity = 0;
+        }
+        let maxQuantity = this.maxQuantity.derived;
+        if (maxQuantity.derived) {
+          quantity = Math.min(maxQuantity.derived, quantity + 1);
         } else {
           quantity = Math.max(0, quantity + 1);
         }

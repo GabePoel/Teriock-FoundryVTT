@@ -23,12 +23,14 @@ export default function registerHooks() {
           await document.system.unequip();
         }
       }
+      document.getActor()?.buildEffectTypes();
       await document.getActor()?.postUpdate();
     }
   });
 
   Hooks.on("deleteItem", async (document, options, userId) => {
     if (game.user.id === userId && document.isOwner) {
+      document.getActor()?.buildEffectTypes();
       await document.getActor()?.postUpdate();
     }
   });
@@ -51,6 +53,7 @@ export default function registerHooks() {
           await document.unsaveFamily();
         }
       }
+      document.getActor()?.buildEffectTypes();
       await document.getActor()?.postUpdate();
     }
   });
@@ -70,6 +73,7 @@ export default function registerHooks() {
           await document.parent.deleteEmbeddedDocuments("ActiveEffect", childIds);
         }
       }
+      document.getActor()?.buildEffectTypes();
       await document.getActor()?.postUpdate();
     }
   });

@@ -259,11 +259,13 @@ export default class TeriockEffect extends ChildDocumentMixin(ActiveEffect) {
     if (parentDisabled) {
       ui.notifications.error(`You cannot ${bool ? "enable" : "disable"} ${this.name} while its parent is disabled.`);
     }
-    if (shouldEnable && !parentDisabled) {
+    if (!parentDisabled) {
       if (bool) {
         await this.hardDisable();
       } else {
-        await this.hardEnable();
+        if (shouldEnable) {
+          await this.hardEnable();
+        }
       }
     }
   }

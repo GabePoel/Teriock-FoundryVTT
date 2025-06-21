@@ -1,6 +1,7 @@
 // Allows for typing within mixin.
 /** @import ActorSheet from "@client/applications/sheets/actor-sheet.mjs"; */
 const { sheets, api, ux } = foundry.applications;
+import { _defaultSheetSettings } from "./methods/_settings.mjs";
 import { _filterAbilities, _filterEquipment } from "./methods/_filters.mjs";
 import { _sortAbilities, _sortEquipment } from "./methods/_sort.mjs";
 import { documentOptions } from "../../../helpers/constants/document-options.mjs";
@@ -85,6 +86,12 @@ export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorShee
     this._effectSearchValue = "";
     this._rankSearchValue = "";
     this._resourceSearchValue = "";
+    this._embeds = {
+      effectTypes: {},
+      itemTypes: {},
+    }
+    this._activeTab = "tradecrafts";
+    this.settings = _defaultSheetSettings;
   }
 
   static async _toggleEquippedDoc(event, target) {
@@ -327,16 +334,31 @@ export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorShee
     this.actor.endCondition(options);
   }
 
-  _getFilteredEquipment() {
-    return _filterEquipment(this.actor);
+  _getFilteredEquipment(equipment = []) {
+    return _filterEquipment(this.actor, equipment);
   }
 
-  _getFilteredAbilities() {
-    return _filterAbilities(this.actor);
+  _getFilteredAbilities(abilities = []) {
+    return _filterAbilities(this.actor, abilities);
   }
 
   /** @override */
   async _prepareContext() {
+    if (!this.actor.effectTypes) {
+      this.actor.buildEffectTypes();
+    }
+    const tab = this._activeTab || "classes";
+    this._embeds.effectTypes = {
+      resource: tab === "resources" ? this.actor.effectTypes.resource : [],
+      fluency: tab === "tradecrafts" ? this.actor.effectTypes.fluency : [],
+      effect: tab === "conditions" ? this.actor.effectTypes.effect : [],
+      ability: tab === "abilities" ? this.actor.effectTypes.ability : [],
+    }
+    this._embeds.itemTypes = {
+      equipment: tab === "inventory" ? this.actor.itemTypes.equipment : [],
+      power: tab === "powers" ? this.actor.itemTypes.power : [],
+      rank: tab === "classes" ? this.actor.itemTypes.rank : [],
+    };
     let conditions = Array.from(this.actor.statuses || []);
     // Sort: 'down' first, 'dead' second, rest alphabetical
     conditions.sort((a, b) => {
@@ -356,16 +378,16 @@ export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorShee
     });
 
     const context = await super._prepareContext();
-    const { effectTypes, effectKeys } = this.actor.buildEffectTypes();
+    context.activeTab = this._activeTab;
     context.conditions = conditions;
     context.editable = this.isEditable;
     context.actor = this.actor;
     context.abilities = _sortAbilities(this.actor) || [];
-    context.resources = effectTypes.resource || [];
+    context.resources = this.actor.effectTypes.resource || [];
     context.equipment = _sortEquipment(this.actor) || [];
     context.powers = this.actor.itemTypes.power || [];
-    context.fluencies = effectTypes.fluency || [];
-    context.effects = effectTypes.effect || [];
+    context.fluencies = this.actor.effectTypes.fluency || [];
+    context.effects = this.actor.effectTypes.effect || [];
     context.ranks = this.actor.itemTypes.rank || [];
     context.sidebarOpen = this._sidebarOpen;
     context.tabs = {
@@ -424,7 +446,8 @@ export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorShee
           tabber.classList.toggle("collapsed");
           this._sidebarOpen = !this._sidebarOpen;
         } else {
-          this.document.update({ "system.sheet.activeTab": tab });
+          this._activeTab = tab;
+          this.render();
         }
         e.stopPropagation();
       });
@@ -528,43 +551,48 @@ export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorShee
     { type: "effect", source: "effectTypes", method: null },
   ];
 
+  /** @private */
   #initSearchFilters() {
     const configs = this.constructor.SEARCH_CONFIGS;
     configs.forEach(({ type, source, method }) => {
+      const contentEl = this.element.querySelector(`#${type}-results`);
+      const inputEl   = this.element.querySelector(`.${type}-search`);
+      if (!(contentEl && inputEl)) return;
+
       const instance = new ux.SearchFilter({
         callback: (event, query, rgx, content) => {
-          const input = event.target;
           if (!query && this._loadingSearch) {
             const searchPath = `_${type}SearchValue`;
-            if (searchPath) {
-              const value = this[searchPath] || "";
-              rgx = new RegExp(value, "i");
-            }
+            const value = this[searchPath] || "";
+            rgx = new RegExp(value, "i");
           }
-          this.#handleSearchFilter(type, source, method, rgx, content, input);
+          this.#handleSearchFilter(type, source, method, rgx, contentEl, inputEl);
         },
         contentSelector: `#${type}-results`,
-        inputSelector: `.${type}-search`,
+        inputSelector:   `.${type}-search`,
       });
+
       instance.bind(this.element);
-      const input = this.element.querySelector(`.${type}-search`);
-      if (input) {
-        input.addEventListener("focus", () => {
-          this._loadingSearch = false;
-        });
-      }
+
+      inputEl.addEventListener("focus", () => {
+        this._loadingSearch = false;
+      });
     });
   }
 
+  /** @private */
   #runSearchFilters() {
     const configs = this.constructor.SEARCH_CONFIGS;
     configs.forEach(({ type, source, method }) => {
+      const contentEl = this.element.querySelector(`#${type}-results`);
+      if (!contentEl) return;
+
       const inputValue = this[`_${type}SearchValue`] || "";
-      const rgx = new RegExp(inputValue, "i");
-      const content = this.element.querySelector(`#${type}-results`);
-      this.#applyFilter(type, source, method, rgx, content);
+      const rgx        = new RegExp(inputValue, "i");
+      this.#applyFilter(type, source, method, rgx, contentEl);
     });
   }
+
 
   #handleSearchFilter(type, sourceKey, filterMethodName, rgx, content, input) {
     this.#applyFilter(type, sourceKey, filterMethodName, rgx, content);
@@ -577,9 +605,10 @@ export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorShee
   }
 
   #applyFilter(type, sourceKey, filterMethodName, rgx, content) {
-    let filtered = this.actor[sourceKey][type] || [];
+    const noResults = this.element.querySelector(".no-results");
+    let filtered = this._embeds[sourceKey][type] || [];
     if (filterMethodName) {
-      filtered = this[filterMethodName]?.() || filtered;
+      filtered = this[filterMethodName]?.(filtered) || filtered;
     }
     filtered = filtered.filter((i) => rgx.test(i.name));
 
@@ -590,11 +619,7 @@ export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorShee
     let firstVisibleCard = null;
     let lastVisibleCard = null;
 
-    const noResults = this.element.querySelector(".no-results");
-    if (noResults) {
-      noResults.classList.toggle("not-hidden", visibleIds.size == 0);
-    }
-
+    
     allCards.forEach((card) => {
       const isVisible = visibleIds.has(card.dataset.id);
 
@@ -607,8 +632,11 @@ export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorShee
         lastVisibleCard = card;
       }
     });
-
+    
     if (firstVisibleCard) firstVisibleCard.classList.add("visible-first");
     if (lastVisibleCard) lastVisibleCard.classList.add("visible-last");
+    if (noResults) {
+      noResults.classList.toggle("not-hidden", visibleCount === 0);
+    }
   }
 }
