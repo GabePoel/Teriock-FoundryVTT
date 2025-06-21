@@ -23,7 +23,6 @@ export async function _roll(abilityData, options) {
     if (abilityData.targets.includes("creature")) {
       const targets = game.user.targets;
       for (const target of targets) {
-        console.log(target, target.actor);
         await _generateEffect(abilityData, target.actor);
       }
     }

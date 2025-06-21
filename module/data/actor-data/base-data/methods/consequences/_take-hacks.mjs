@@ -13,8 +13,6 @@ export async function _takeHack(system, part) {
   const min = stat.min || 0;
   const max = stat.max || 2;
   const value = Math.min(max, Math.max(min, stat.value + 1));
-  console.log(`Taking hack on ${part}:`, value);
-  console.log(system.hacks);
   const newStats = { ...system.hacks };
   newStats[part].value = value;
   await actor.update({ [`system.hacks.${part}.value`]: value });

@@ -35,7 +35,6 @@ async function use(resourceData, options) {
       }),
     });
     const result = roll.total;
-    console.log(`Rolled ${resourceData.parent.name} with result: ${result}`);
     const functionHook = resourceData.functionHook;
     if (functionHook) {
       const hookFunction = CONFIG.TERIOCK.resourceOptions.functionHooks[functionHook]?.callback;

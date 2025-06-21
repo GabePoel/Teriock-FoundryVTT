@@ -70,7 +70,6 @@ async function etherealKill(system) {
   const down = actor?.statuses?.has("down");
   const ethereal = actor?.statuses?.has("ethereal");
   const dead = actor?.statuses?.has("dead");
-  console.log("Ethereal kill check", { down, ethereal, dead });
   if (down && ethereal && !dead) {
     await actor.toggleStatusEffect("dead", { active: true });
     await actor.toggleStatusEffect("asleep", { active: false });
@@ -85,7 +84,6 @@ async function etherealKill(system) {
 async function checkExpirations(system) {
   const actor = system.parent;
   actor.conditionExpirationEffects.forEach(async (effect) => {
-    console.log("Checking condition expiration effect", effect);
     await effect.system.checkExpiration();
   });
 }

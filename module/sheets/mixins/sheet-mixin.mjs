@@ -213,10 +213,22 @@ export const TeriockSheet = (Base) =>
       if (!this.document.isOwner || !effect || effect.parent === this.document || effect.target === this.document) {
         return false;
       }
-      if (!["Actor", "Item"].includes(this.document.documentName)) {
+      if (
+        !(
+          ["Actor", "Item"].includes(this.document.documentName) ||
+          (this.document.type === "ability" && effect.type === "ability")
+        )
+      ) {
         return false;
       }
-      return this.document.createEmbeddedDocuments("ActiveEffect", [effect]);
+      await effect.saveFamily();
+      let newEffect;
+      if (this.document.documentName === "ActiveEffect") {
+        newEffect = this.document.parent.createEmbeddedDocuments("ActiveEffect", [effect]);
+      } else {
+        newEffect = this.document.createEmbeddedDocuments("ActiveEffect", [effect]);
+      }
+      return newEffect;
     }
 
     async _onDropItem(event, data) {
@@ -241,7 +253,6 @@ export const TeriockSheet = (Base) =>
 
     static async _wikiPullThis(_, __) {
       if (this.editable) {
-        console.log(`Clicking wiki pull for ${this.document.name}`);
         this.document.system.wikiPull();
       }
     }

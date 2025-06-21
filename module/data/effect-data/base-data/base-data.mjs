@@ -44,10 +44,7 @@ export default class TeriockBaseEffectData extends ChildDataMixin(TypeDataModel)
    */
   async checkExpiration() {
     if (this.shouldExpire()) {
-      console.log(`${this.parent.name} should expire.`);
       await this.expire();
-    } else {
-      console.log(`${this.parent.name} should not expire.`);
     }
   }
 }

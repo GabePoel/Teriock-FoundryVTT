@@ -25,16 +25,26 @@ export const MixinParentDocument = (Base) =>
   class MixinParentDocument extends Base {
     /**
      * Gets the list of effects associated with this document.
+     * Helper method for `prepareDerivedData()` that can be called explicitly.
      * @type {TeriockEffect[]}
      */
     get validEffects() {
       return this.effects;
     }
 
+    /**
+     * Gets the list of all effects that apply to this document, including those
+     * that are not currently active.
+     * @returns {TeriockEffect[]}
+     */
+    buildEffectTypes() {
+      return _buildEffectTypes(this);
+    }
+
     /** @inheritdoc */
     prepareDerivedData() {
       super.prepareDerivedData();
-      const { effectTypes, effectKeys } = _buildEffectTypes(this);
+      const { effectTypes, effectKeys } = this.buildEffectTypes();
       this.effectTypes = effectTypes;
       this.effectKeys = effectKeys;
     }

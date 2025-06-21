@@ -35,8 +35,8 @@ export default class TeriockEffect extends ChildDocumentMixin(ActiveEffect) {
    * @returns {parent: TeriockEffect | null}
    */
   getParent() {
-    if (this.system.parentId) {
-      return this.parent?.getEmbeddedDocument("ActiveEffect", this.system.parentId);
+    if (this.system.parentUuid) {
+      return foundry.utils.fromUuidSync(this.system.parentUuid);
     }
     return null;
   }
@@ -60,11 +60,50 @@ export default class TeriockEffect extends ChildDocumentMixin(ActiveEffect) {
   getChildren() {
     const children = [];
     if (this.system.childIds?.length > 0) {
-      for (const id of this.system.childIds) {
-        children.push(this.parent?.getEmbeddedDocument("ActiveEffect", id));
+      for (const uuid of this.system.childUuids) {
+        const child = foundry.utils.fromUuidSync(uuid);
+        children.push(child);
       }
     }
     return children;
+  }
+
+  /**
+   * @returns {Promise<ActiveEffect[]>}
+   */
+  async getChildrenAsync() {
+    const children = [];
+    if (this.system.childUuids?.length > 0) {
+      for (const uuid of this.system.childUuids) {
+        const child = await foundry.utils.fromUuid(uuid);
+        children.push(child);
+      }
+    }
+    return children;
+  }
+
+  /**
+   * @returns {Promise<Void>}
+   */
+  async saveFamily() {
+    const children = this.getChildren();
+    const childUuids = children.map((child) => child.uuid);
+    const parent = this.getParent();
+    const parentUuid = parent ? parent.uuid : null;
+    await this.update({
+      "system.childUuids": childUuids,
+      "system.parentUuid": parentUuid,
+    });
+  }
+
+  /**
+   * @returns {Promise<Void>}
+   */
+  async unsaveFamily() {
+    await this.update({
+      "system.childUuids": [],
+      "system.parentUuid": null,
+    });
   }
 
   /**
@@ -167,7 +206,6 @@ export default class TeriockEffect extends ChildDocumentMixin(ActiveEffect) {
       disabled: false,
       "system.forceDisabled": false,
     });
-    console.log(updates);
     this.parent.updateEmbeddedDocuments("ActiveEffect", updates);
   }
 
@@ -185,7 +223,6 @@ export default class TeriockEffect extends ChildDocumentMixin(ActiveEffect) {
       disabled: true,
       "system.forceDisabled": true,
     });
-    console.log(updates);
     this.parent.updateEmbeddedDocuments("ActiveEffect", updates);
   }
 
@@ -214,7 +251,6 @@ export default class TeriockEffect extends ChildDocumentMixin(ActiveEffect) {
    * @returns {Promise<void>}
    */
   async setForceDisabled(bool) {
-    console.log("set force disabled", bool);
     const shouldEnable = !this.system.consumable || (this.system.consumable && this.system.quantity >= 1);
     const parentDisabled =
       (this.parent?.system?.disabled ?? false) ||

@@ -38,16 +38,17 @@ export default function registerHooks() {
       if (document.type === "ability") {
         if (document.system.childIds?.length > 0) {
           const childAbilityData = [];
-          for (const childAbility of document.getChildren()) {
+          for (const childAbility of await document.getChildrenAsync()) {
             const data = foundry.utils.duplicate(childAbility);
             data.system.parentId = document._id;
             childAbilityData.push(data);
           }
           const newChildAbilities = await document.parent.createEmbeddedDocuments("ActiveEffect", childAbilityData);
           const newChildIds = newChildAbilities.map((ability) => ability._id);
-          document.update({
+          await document.update({
             "system.childIds": newChildIds,
           });
+          await document.unsaveFamily();
         }
       }
       await document.getActor()?.postUpdate();
@@ -243,7 +244,6 @@ await item.use(options);
   });
 
   Hooks.on("moveToken", async (document, movement, operation, user) => {
-    console.log("moveToken", document, movement, operation, user);
     if (document.isOwner && document.actor && game.user.id === user._id) {
       const actor = document.actor;
       if (actor.effectKeys?.effect?.has("brace")) {

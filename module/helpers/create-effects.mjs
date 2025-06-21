@@ -18,7 +18,6 @@ export async function createAbility(document, name, options = {}) {
   }
   const abilities = await embeddingDocument.createEmbeddedDocuments("ActiveEffect", [abilityData]);
   const ability = abilities[0];
-  console.log("Created ability", embeddingDocument, ability);
   if (ability.name !== "New Ability") {
     await ability.system.wikiPull(options);
   }

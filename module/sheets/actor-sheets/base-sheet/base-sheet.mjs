@@ -356,16 +356,16 @@ export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorShee
     });
 
     const context = await super._prepareContext();
-
+    const { effectTypes, effectKeys } = this.actor.buildEffectTypes();
     context.conditions = conditions;
     context.editable = this.isEditable;
     context.actor = this.actor;
     context.abilities = _sortAbilities(this.actor) || [];
-    context.resources = this.actor.effectTypes.resource || [];
+    context.resources = effectTypes.resource || [];
     context.equipment = _sortEquipment(this.actor) || [];
     context.powers = this.actor.itemTypes.power || [];
-    context.fluencies = this.actor.effectTypes.fluency || [];
-    context.effects = this.actor.effectTypes.effect || [];
+    context.fluencies = effectTypes.fluency || [];
+    context.effects = effectTypes.effect || [];
     context.ranks = this.actor.itemTypes.rank || [];
     context.sidebarOpen = this._sidebarOpen;
     context.tabs = {

@@ -9,7 +9,12 @@ export function _defineGeneral(schema) {
       initial: null,
       nullable: true,
     }),
+    parentUuid: new fields.DocumentUUIDField({
+      initial: null,
+      nullable: true,
+    }),
     childIds: new fields.ArrayField(new fields.DocumentIdField()),
+    childUuids: new fields.ArrayField(new fields.DocumentUUIDField()),
     elderSorcery: new fields.BooleanField({
       initial: false,
       label: "Elder Sorcery",

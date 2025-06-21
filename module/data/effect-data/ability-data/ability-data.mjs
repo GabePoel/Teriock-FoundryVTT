@@ -3,6 +3,7 @@ import { _defineSchema } from "./methods/schema/_schema.mjs";
 import { _messageParts } from "./methods/_messages.mjs";
 import { _migrateData } from "./methods/_migrate-data.mjs";
 import { _parse } from "./methods/_parsing.mjs";
+import { _prepareDerivedData } from "./methods/_data-deriving.mjs";
 import { _roll } from "./methods/_rolling.mjs";
 import { WikiDataMixin } from "../../mixins/wiki-mixin.mjs";
 import TeriockBaseEffectData from "../base-data/base-data.mjs";
@@ -25,6 +26,12 @@ export default class TeriockAbilityData extends WikiDataMixin(TeriockBaseEffectD
       ...commonData,
       ..._defineSchema(),
     };
+  }
+
+  /** @override */
+  prepareDerivedData() {
+    super.prepareDerivedData();
+    _prepareDerivedData(this);
   }
 
   /** @override */

@@ -80,12 +80,10 @@ export async function _generateEffect(abilityData, actor) {
       seconds: seconds || undefined,
     },
   };
-  console.log("Generating effect", effect);
   const existingEffect = actor?.effectTypes?.effect?.find((e) => e.name === effect.name);
   if (existingEffect) {
     await existingEffect.delete();
   }
   const newEffect = await TeriockEffect.create(effect, { parent: actor });
-  console.log("Effect created", newEffect);
   return newEffect;
 }

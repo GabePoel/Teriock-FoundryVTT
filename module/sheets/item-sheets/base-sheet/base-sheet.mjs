@@ -22,9 +22,10 @@ export default class TeriockBaseItemSheet extends TeriockSheet(sheets.ItemSheet)
   /** @override */
   async _prepareContext() {
     const abilityTypeOrder = Object.keys(CONFIG.TERIOCK.abilityOptions.abilityType || {});
-    const abilities = this.document.transferredEffects
-      .filter((e) => e.type === "ability")
-      .sort((a, b) => {
+    const { effectTypes, effectKeys } = this.item.buildEffectTypes();
+    const abilities =
+      effectTypes.ability ||
+      [].sort((a, b) => {
         const typeA = a.system?.abilityType || "";
         const typeB = b.system?.abilityType || "";
         const indexA = abilityTypeOrder.indexOf(typeA);
@@ -34,9 +35,9 @@ export default class TeriockBaseItemSheet extends TeriockSheet(sheets.ItemSheet)
       });
 
     const propertyTypeOrder = Object.keys(CONFIG.TERIOCK.abilityOptions.abilityType || {});
-    const properties = this.document.transferredEffects
-      .filter((e) => e.type === "property")
-      .sort((a, b) => {
+    const properties =
+      effectTypes.property ||
+      [].sort((a, b) => {
         const typeA = a.system?.propertyType || "";
         const typeB = b.system?.propertyType || "";
         const indexA = propertyTypeOrder.indexOf(typeA);
@@ -45,13 +46,9 @@ export default class TeriockBaseItemSheet extends TeriockSheet(sheets.ItemSheet)
         return (a.name || "").localeCompare(b.name || "");
       });
 
-    const fluencies = this.document.transferredEffects
-      .filter((e) => e.type === "fluency")
-      .sort((a, b) => (a.name || "").localeCompare(b.name || ""));
+    const fluencies = effectTypes.fluency || [].sort((a, b) => (a.name || "").localeCompare(b.name || ""));
 
-    const resources = this.document.transferredEffects
-      .filter((e) => e.type === "resource")
-      .sort((a, b) => (a.name || "").localeCompare(b.name || ""));
+    const resources = effectTypes.resource || [].sort((a, b) => (a.name || "").localeCompare(b.name || ""));
 
     const context = await super._prepareContext();
     context.item = this.item;

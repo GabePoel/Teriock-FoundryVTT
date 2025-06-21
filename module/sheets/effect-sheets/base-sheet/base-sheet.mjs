@@ -49,7 +49,6 @@ export default class TeriockBaseEffectSheet extends TeriockSheet(sheets.ActiveEf
           value = Number(value);
         }
         const changes = this.document.system.applies[application].changes;
-        console.log(`Updating change at index ${index} for application ${application}`, changes);
         if (index >= 0 && index < changes.length) {
           changes[index][key] = value;
           this.document.update({ [updateString]: changes });
@@ -78,9 +77,7 @@ export default class TeriockBaseEffectSheet extends TeriockSheet(sheets.ActiveEf
     const index = parseInt(target.dataset.index, 10);
     const application = target.dataset.application;
     const updateString = `system.applies.${application}.changes`;
-    console.log(updateString);
     const changes = this.document.system.applies[application].changes;
-    console.log(`Deleting change at index ${index} from changes`, changes);
     if (index >= 0 && index < changes.length) {
       changes.splice(index, 1);
       await this.document.update({ [updateString]: changes });

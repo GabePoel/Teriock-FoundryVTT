@@ -75,7 +75,6 @@ async function use(equipmentData, options) {
         actor: equipmentData.parent.getActor(),
       }),
     });
-    console.log(roll.terms);
   } else {
     equipmentData.parent.chat();
   }
