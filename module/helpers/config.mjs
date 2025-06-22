@@ -3,6 +3,7 @@ import { abilityOptions } from "./constants/ability-options.mjs";
 import { characterOptions } from "./constants/character-options.mjs";
 import { conditions as conditionsContent } from "../content/conditions.mjs";
 import { conditions as conditionsList } from "./constants/generated/conditions.mjs";
+import { consequenceOptions } from "./constants/consequence-options.mjs";
 import { currencyOptions } from "./constants/currency-options.mjs";
 import { displayOptions } from "./constants/display-options.mjs";
 import { documentOptions } from "./constants/document-options.mjs";
@@ -18,6 +19,7 @@ import { properties as propertiesContent } from "../content/properties.mjs";
 import { rankOptions } from "./constants/rank-options.mjs";
 import { resourceOptions } from "./constants/resource-options.mjs";
 import { tradecraftOptions } from "./constants/tradecraft-options.mjs";
+import * as fields from "../data/effect-data/ability-data/methods/schema/_define-consequences.mjs";
 
 const TERIOCK = {
   abilities: abilities,
@@ -30,6 +32,7 @@ const TERIOCK = {
     materialProperties: materialProperties,
     magicalProperties: magicalProperties,
   },
+  consequenceOptions: consequenceOptions,
   currencyOptions: currencyOptions,
   displayOptions: displayOptions,
   documentOptions: documentOptions,
@@ -48,6 +51,7 @@ const TERIOCK = {
     survivalist: tradecraftOptions.survivalist,
   },
   resourceOptions: resourceOptions,
+  fields: fields,
 };
 
 export default TERIOCK;

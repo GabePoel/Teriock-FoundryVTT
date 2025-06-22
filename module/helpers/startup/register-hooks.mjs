@@ -79,6 +79,7 @@ export default function registerHooks() {
   });
 
   Hooks.on("updateActiveEffect", async (document, updateData, options, userId) => {
+    console.debug(`Teriock | Active Effect updated: ${document.name}`, updateData);
     if (game.user.id === userId && document.isOwner && document.type === "ability") {
       const parent = document.getParent();
       if (parent) {

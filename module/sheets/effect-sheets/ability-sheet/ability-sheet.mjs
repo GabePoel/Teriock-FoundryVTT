@@ -9,6 +9,9 @@ import TeriockBaseEffectSheet from "../base-sheet/base-sheet.mjs";
 export default class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(TeriockBaseEffectSheet) {
   static DEFAULT_OPTIONS = {
     classes: ["ability"],
+    actions: {
+      toggleConsequences: this._toggleConsequences,
+    },
     window: {
       icon: `fa-solid fa-${documentOptions.ability.icon}`,
     },
@@ -21,11 +24,17 @@ export default class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(
     },
   };
 
+  constructor(...args) {
+    super(...args);
+    this._tab = "overview";
+  }
+
   /** @override */
   async _prepareContext() {
     const context = await super._prepareContext();
 
     const system = this.document.system;
+    context.tab = this._tab;
     context.childAbilities = this.document.getChildren();
     context.parentAbility = this.document.getParent();
     const editors = {
@@ -213,5 +222,10 @@ export default class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(
     for (const [selector, update] of Object.entries(staticUpdates)) {
       this._connect(selector, "click", () => doc.update(update));
     }
+  }
+
+  static async _toggleConsequences(event) {
+    this._tab = this._tab === "consequences" ? "overview" : "consequences";
+    this.render();
   }
 }

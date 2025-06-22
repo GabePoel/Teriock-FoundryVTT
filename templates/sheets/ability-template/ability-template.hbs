@@ -1,4 +1,5 @@
 <div class="{{cssClass}} tsheet-page {{#if system.elderSorcery}}es-container {{elementClass system.elements}}{{/if}}" autocomplete="off">
+  {{#if (eq tab "overview")}}
   {{#if system.elderSorcery}}
   <div class="es-mask-rotator"></div>
   {{/if}}
@@ -57,4 +58,8 @@
     </div>
     {{/if}}
   </div>
+  {{/if}}
+  {{#if (eq tab "consequences")}}
+  {{> "systems/teriock/templates/sheets/ability-template/parts/ab-consequences.hbs"}}
+  {{/if}}
 </div>

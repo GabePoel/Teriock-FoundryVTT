@@ -1,21 +1,48 @@
+import {
+  TeriockRecordField,
+  TeriockArrayField,
+  TypedStringField,
+  ConsequenceField,
+  SimpleConsequenceField,
+  CriticalConsequenceField,
+  ModifiedConsequenceField,
+} from "./_fields.mjs";
 const { fields } = foundry.data;
+import { consequenceOptions } from "../../../../../helpers/constants/consequence-options.mjs";
 
-function consequenceRollsField() {
-  return new fields.TypedObjectField(new fields.StringField(), {
-    label: "Rolls",
-  });
+export function consequenceRollsField() {
+  return new TeriockRecordField(
+    new fields.StringField({
+      nullable: true,
+    }),
+    {
+      label: "Rolls",
+      hint: "The rolls that are made as part of the consequence.",
+    },
+  );
 }
 
-function consequenceHacksField() {
-  return new fields.TypedObjectField(new fields.StringField(), {
-    label: "Hacks",
-  });
+export function consequenceHacksField() {
+  return new TeriockRecordField(
+    new fields.StringField({
+      nullable: true,
+    }),
+    {
+      label: "Hacks",
+      hint: "The hacks that are applied as part of the consequence.",
+    },
+  );
 }
 
-function consequenceExpirationsField() {
+export function consequenceExpirationsField() {
   return new fields.SchemaField({
     turn: new fields.SchemaField(
       {
+        enabled: new fields.BooleanField({
+          initial: false,
+          label: "Turn Expiration",
+          hint: "If true, the effect expires with respect to some turn.",
+        }),
         who: new fields.StringField({
           choices: {
             target: "Target's Turn",
@@ -70,21 +97,33 @@ function consequenceExpirationsField() {
   });
 }
 
-function consequenceField() {
-  return new fields.SchemaField({
+export function consequenceField() {
+  return new ConsequenceField({
     instant: new fields.SchemaField({
       rolls: consequenceRollsField(),
       hacks: consequenceHacksField(),
     }),
     ongoing: new fields.SchemaField({
-      statuses: new fields.ArrayField(new fields.StringField()),
-      changes: new fields.ArrayField(
+      statuses: new fields.SetField(
+        new fields.StringField({
+          choices: CONFIG.TERIOCK.conditions,
+        }),
+        {
+          label: "Conditions",
+          hint: "The conditions applied as part of the ongoing effect. These are applied to the target.",
+        },
+      ),
+      changes: new TeriockArrayField(
         new fields.SchemaField({
           key: new fields.StringField({ initial: "" }),
           mode: new fields.NumberField({ initial: 4 }),
           value: new fields.StringField({ initial: "" }),
           priority: new fields.NumberField({ initial: 20 }),
         }),
+        {
+          label: "Changes",
+          hint: "The changes applied as part of the ongoing effect. These are applied to the target.",
+        },
       ),
       duration: new fields.NumberField({
         initial: null,
@@ -97,17 +136,17 @@ function consequenceField() {
   });
 }
 
-function mutationsField() {
+export function mutationsField() {
   return new fields.SchemaField({
     double: new fields.BooleanField({
       initial: false,
-      label: "Double Dice",
-      hint: "If true, double the number of dice rolled.",
+      label: "Double Dice on Crit",
+      hint: "If true, double the number of dice rolled on a crit.",
     }),
   });
 }
 
-function heightenedField() {
+export function heightenedField() {
   return new fields.SchemaField({
     overrides: consequenceField(),
     scaling: new fields.SchemaField({
@@ -128,35 +167,40 @@ function heightenedField() {
   });
 }
 
-function simpleConsequenceDataField() {
-  return new fields.SchemaField({
+export function simpleConsequenceDataField() {
+  return new SimpleConsequenceField({
     default: consequenceField(),
-    crit: new fields.SchemaField({
+    crit: new CriticalConsequenceField({
+      enabled: new fields.BooleanField({
+        initial: false,
+        label: "Critical Overrides",
+        hint: "If true, default consequences are overridden on a crit.",
+      }),
       overrides: consequenceField(),
       mutations: mutationsField(),
     }),
   });
 }
 
-function modifiedConsequenceDataField() {
-  return new fields.SchemaField({
+export function modifiedConsequenceDataField() {
+  return new ModifiedConsequenceField({
     overrides: simpleConsequenceDataField(),
     mutations: mutationsField(),
     heightened: heightenedField(),
   });
 }
 
-function consequenceDataField() {
+export function consequenceDataField() {
   return new fields.SchemaField({
-    base: new fields.TypedObjectField(simpleConsequenceDataField(), {
+    base: new TeriockRecordField(simpleConsequenceDataField(), {
       label: "Base Consequences",
       hint: "The base consequences of the ability, applied by anyone that has it.",
     }),
-    proficient: new fields.TypedObjectField(modifiedConsequenceDataField(), {
+    proficient: new TeriockRecordField(modifiedConsequenceDataField(), {
       label: "Proficient Consequences",
       hint: "The consequences of the ability when used by a proficient user.",
     }),
-    fluent: new fields.TypedObjectField(modifiedConsequenceDataField(), {
+    fluent: new TeriockRecordField(modifiedConsequenceDataField(), {
       label: "Fluent Consequences",
       hint: "The consequences of the ability when used by a fluent user.",
     }),

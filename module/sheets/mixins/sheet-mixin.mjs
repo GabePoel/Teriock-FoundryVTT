@@ -1,8 +1,8 @@
 const { utils } = foundry;
 const { ux, api } = foundry.applications;
 import { chatImage } from "../../helpers/utils.mjs";
-import * as createEffects from "../../helpers/create-effects.mjs";
 import { imageContextMenuOptions } from "../misc-sheets/image-sheet/connections/_context-menus.mjs";
+import * as createEffects from "../../helpers/create-effects.mjs";
 import connectEmbedded from "../../helpers/connect-embedded.mjs";
 
 export const TeriockSheet = (Base) =>
@@ -74,6 +74,60 @@ export const TeriockSheet = (Base) =>
           foundry.utils.setProperty(this, path, value);
         }
         this.render();
+      });
+
+      this.element.querySelectorAll(".teriock-update-input").forEach((element) => {
+        const name = element.getAttribute("name");
+        element.addEventListener("change", async (event) => {
+          let value = event.currentTarget.value;
+          if (value === null || value === undefined) {
+            value = event.currentTarget.getAttribute("data-value");
+          }
+          if (name) {
+            const updateData = {};
+            updateData[name] = value;
+            await this.document.update(updateData);
+          }
+        });
+      });
+      this.element.querySelectorAll(".teriock-update-checkbox").forEach((element) => {
+        const name = element.getAttribute("name");
+        element.addEventListener("click", async (event) => {
+          event.preventDefault();
+          let value = event.currentTarget.checked;
+          if (name) {
+            const updateData = {};
+            updateData[name] = value;
+            console.log("Updating checkbox", name, value);
+            await this.document.update(updateData);
+          }
+        });
+      });
+
+      this.element.querySelectorAll(".teriock-record-field").forEach((container) => {
+        const select = container.querySelector("select");
+        if (select) {
+          console.log("Record field select found", select);
+          const name = container.getAttribute("name");
+          const allowedKeys = Array.from(select.options)
+            .map((option) => option.value)
+            .filter((value) => value !== "");
+          select.addEventListener("input", async () => {
+            const key = select.value;
+            await this.#addToRecordField(name, key, allowedKeys);
+          });
+          container.querySelectorAll(".remove").forEach((removeBtn) => {
+            console.log("Remove button found", removeBtn);
+            removeBtn.addEventListener("click", async (event) => {
+              event.preventDefault();
+              const tag = event.currentTarget.closest(".tag");
+              const key = tag.dataset.key;
+              const filteredKeys = allowedKeys.filter((k) => k !== key);
+              await this.#cleanRecordField(name, filteredKeys);
+              event.stopPropagation();
+            });
+          });
+        }
       });
     }
 
@@ -426,5 +480,32 @@ export const TeriockSheet = (Base) =>
           },
         ],
       }).render(true);
+    }
+
+    async #addToRecordField(name, key, allowedKeys = []) {
+      const existing = foundry.utils.getProperty(this.document, name);
+      console.log(name);
+      const copy = foundry.utils.deepClone(existing) || {};
+      const updateData = {};
+      for (const k of Object.keys(copy)) {
+        if (k !== key && !allowedKeys.includes(k)) {
+          updateData[`${name}.-=${k}`] = null;
+        }
+      }
+      updateData[`${name}.${key}`] = null;
+      console.log("Update data for record field:", updateData);
+      await this.document.update(updateData);
+    }
+
+    async #cleanRecordField(name, allowedKeys = []) {
+      const existing = foundry.utils.getProperty(this.document, name);
+      const copy = foundry.utils.deepClone(existing) || {};
+      const updateData = {};
+      for (const k of Object.keys(copy)) {
+        if (!allowedKeys.includes(k)) {
+          updateData[`${name}.-=${k}`] = null;
+        }
+      }
+      await this.document.update(updateData);
     }
   };
