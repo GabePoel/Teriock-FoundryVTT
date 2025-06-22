@@ -7,10 +7,8 @@ import {
   SimpleConsequenceField,
   TeriockArrayField,
   TeriockRecordField,
-  TypedStringField,
 } from "./_fields.mjs";
 const { fields } = foundry.data;
-import { consequenceOptions } from "../../../../../helpers/constants/consequence-options.mjs";
 
 export function consequenceRollsField() {
   return new TeriockRecordField(
@@ -86,16 +84,6 @@ export function consequenceExpirationsField() {
       label: "Movement Expiration",
       hint: "If true, the effect expires when the target moves.",
     }),
-    // dawn: new fields.BooleanField({
-    //   initial: false,
-    //   label: "Dawn Expiration",
-    //   hint: "If true, the effect expires at dawn.",
-    // }),
-    // sustained: new fields.BooleanField({
-    //   initial: false,
-    //   label: "Sustained Expiration",
-    //   hint: "If true, the effect expires if the ability sustaining it is lost or disabled.",
-    // }),
   });
 }
 
@@ -118,7 +106,17 @@ export function consequenceField() {
       changes: new TeriockArrayField(
         new fields.SchemaField({
           key: new fields.StringField({ initial: "" }),
-          mode: new fields.NumberField({ initial: 4 }),
+          mode: new fields.NumberField({
+            initial: 4,
+            choices: {
+              0: "Custom",
+              1: "Multiply",
+              2: "Add",
+              3: "Downgrade",
+              4: "Upgrade",
+              5: "Override",
+            },
+          }),
           value: new fields.StringField({ initial: "" }),
           priority: new fields.NumberField({ initial: 20 }),
         }),

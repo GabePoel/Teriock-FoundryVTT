@@ -31,17 +31,9 @@ export const TeriockSheet = (Base) =>
         createFluency: this._createFluency,
         toggleSwitch: this._toggleSwitch,
       },
-      form: {
-        submitOnChange: true,
-        closeOnSubmit: false,
-      },
-      window: {
-        resizable: true,
-      },
-      position: {
-        width: 560,
-        height: 600,
-      },
+      form: { submitOnChange: true, closeOnSubmit: false },
+      window: { resizable: true },
+      position: { width: 560, height: 600 },
     };
 
     constructor(...args) {
@@ -52,88 +44,165 @@ export const TeriockSheet = (Base) =>
       this.settings = {};
     }
 
-    /** @override */
     _onRender(context, options) {
       super._onRender(context, options);
       this.editable = this.isEditable && !this._locked;
       connectEmbedded(this.document, this.element, this.editable);
+
       new ux.ContextMenu(this.element, ".timage", imageContextMenuOptions, {
         eventName: "contextmenu",
         jQuery: false,
         fixed: true,
       });
+
       this._connect(".chat-button", "contextmenu", (e) => {
         TeriockSheet._debug.call(this, e, e.currentTarget);
       });
+
       this._activateMenu();
+      this._setupEventListeners();
+    }
+
+    _setupEventListeners() {
+      // Sheet select handler
       this._connect('[data-action="sheetSelect"]', "change", (e) => {
-        const select = e.currentTarget;
-        const path = select.dataset.path;
-        const value = select.value;
+        const { path } = e.currentTarget.dataset;
         if (path) {
-          foundry.utils.setProperty(this, path, value);
+          foundry.utils.setProperty(this, path, e.currentTarget.value);
+          this.render();
         }
-        this.render();
       });
 
-      this.element.querySelectorAll(".teriock-update-input").forEach((element) => {
-        const name = element.getAttribute("name");
-        element.addEventListener("change", async (event) => {
-          let value = event.currentTarget.value;
-          if (value === null || value === undefined) {
-            value = event.currentTarget.getAttribute("data-value");
-          }
-          if (name) {
-            const updateData = {};
-            updateData[name] = value;
-            await this.document.update(updateData);
-          }
-        });
-      });
-      this.element.querySelectorAll(".teriock-update-checkbox").forEach((element) => {
-        const name = element.getAttribute("name");
-        element.addEventListener("click", async (event) => {
-          event.preventDefault();
-          let value = event.currentTarget.checked;
-          if (name) {
-            const updateData = {};
-            updateData[name] = value;
-            console.log("Updating checkbox", name, value);
-            await this.document.update(updateData);
-          }
-        });
-      });
+      // Generic update handlers
+      this._setupUpdateHandlers();
+      this._setupRecordFieldHandlers();
+      this._setupSetFieldHandlers();
+      this._setupArrayFieldHandlers();
+      this._setupChangeHandlers();
+    }
 
-      this.element.querySelectorAll(".teriock-record-field").forEach((container) => {
-        const select = container.querySelector("select");
-        if (select) {
-          console.log("Record field select found", select);
-          const name = container.getAttribute("name");
-          const allowedKeys = Array.from(select.options)
-            .map((option) => option.value)
-            .filter((value) => value !== "");
-          select.addEventListener("input", async () => {
-            const key = select.value;
-            await this.#addToRecordField(name, key, allowedKeys);
+    _setupUpdateHandlers() {
+      const handlers = [
+        { selector: ".teriock-update-input", event: "change" },
+        { selector: ".teriock-update-select", event: "change" },
+        { selector: ".teriock-update-checkbox", event: "click", getValue: (el) => el.checked },
+      ];
+
+      handlers.forEach(({ selector, event, getValue }) => {
+        this.element.querySelectorAll(selector).forEach((el) => {
+          const name = el.getAttribute("name");
+          if (!name) return;
+
+          el.addEventListener(event, async (e) => {
+            if (event === "click") e.preventDefault();
+
+            const value = getValue
+              ? getValue(e.currentTarget)
+              : (e.currentTarget.value ?? e.currentTarget.getAttribute("data-value"));
+
+            await this.document.update({ [name]: value });
           });
-          container.querySelectorAll(".remove").forEach((removeBtn) => {
-            console.log("Remove button found", removeBtn);
-            removeBtn.addEventListener("click", async (event) => {
-              event.preventDefault();
-              const tag = event.currentTarget.closest(".tag");
-              const key = tag.dataset.key;
-              const filteredKeys = allowedKeys.filter((k) => k !== key);
-              await this.#cleanRecordField(name, filteredKeys);
-              event.stopPropagation();
-            });
-          });
-        }
+        });
       });
     }
 
-    /** @override */
+    _setupRecordFieldHandlers() {
+      this.element.querySelectorAll(".teriock-record-field").forEach((container) => {
+        const select = container.querySelector("select");
+        if (!select) return;
+
+        const name = container.getAttribute("name");
+        const allowedKeys = Array.from(select.options)
+          .map((option) => option.value)
+          .filter((value) => value !== "");
+
+        select.addEventListener("input", async () => {
+          await this.#addToRecordField(name, select.value, allowedKeys);
+        });
+
+        container.querySelectorAll(".remove").forEach((btn) => {
+          btn.addEventListener("click", async (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            const key = e.currentTarget.closest(".tag").dataset.key;
+            await this.#cleanRecordField(
+              name,
+              allowedKeys.filter((k) => k !== key),
+            );
+          });
+        });
+      });
+    }
+
+    _setupSetFieldHandlers() {
+      this.element.querySelectorAll(".teriock-update-set").forEach((container) => {
+        const select = container.querySelector("select");
+        if (!select) return;
+
+        const name = container.getAttribute("name");
+        const getValues = () => Array.from(select.parentElement.querySelectorAll(".tag")).map((tag) => tag.dataset.key);
+
+        select.addEventListener("input", async () => {
+          const values = getValues();
+          const selectedValue = select.value;
+          if (selectedValue && !values.includes(selectedValue)) {
+            values.push(selectedValue);
+          }
+          await this.#updateSetField(name, values);
+        });
+
+        container.querySelectorAll(".remove").forEach((btn) => {
+          btn.addEventListener("click", async (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            const key = e.currentTarget.closest(".tag").dataset.key;
+            const values = getValues().filter((k) => k !== key);
+            await this.#updateSetField(name, values);
+          });
+        });
+      });
+    }
+
+    _setupArrayFieldHandlers() {
+      this.element.querySelectorAll(".teriock-array-field-add").forEach((button) => {
+        button.addEventListener("click", async (e) => {
+          e.preventDefault();
+          await this.#addToArrayField(button.getAttribute("name"), button.dataset.path);
+        });
+      });
+    }
+
+    _setupChangeHandlers() {
+      // Change inputs
+      this.element.querySelectorAll(".teriock-change-input").forEach((el) => {
+        const { name } = el.attributes;
+        const { index, part } = el.dataset;
+        if (!name?.value) return;
+
+        el.addEventListener("change", async (e) => {
+          const existing = foundry.utils.getProperty(this.document, name.value);
+          const copy = foundry.utils.deepClone(existing) || [];
+          copy[index][part] = e.currentTarget.value;
+          await this.document.update({ [name.value]: copy });
+        });
+      });
+
+      // Remove change buttons
+      this.element.querySelectorAll(".teriock-remove-change-button").forEach((button) => {
+        const { name } = button.attributes;
+        const { index } = button.dataset;
+
+        button.addEventListener("click", async () => {
+          const existing = foundry.utils.getProperty(this.document, name.value);
+          const copy = foundry.utils.deepClone(existing) || [];
+          copy.splice(index, 1);
+          await this.document.update({ [name.value]: copy });
+        });
+      });
+    }
+
     async _prepareContext() {
-      const context = {
+      return {
         config: CONFIG.TERIOCK,
         editable: this.editable,
         isEditable: this.isEditable,
@@ -149,23 +218,16 @@ export const TeriockSheet = (Base) =>
         uuid: this.document.uuid,
         settings: this.settings,
       };
-      return context;
     }
 
     async _chatImage(img) {
       await chatImage(img);
     }
 
-    /** Editor */
     async _editor(parameter) {
-      if (parameter?.length) {
-        return await ux.TextEditor.enrichHTML(parameter, {
-          relativeTo: this.document,
-        });
-      }
+      return parameter?.length ? await ux.TextEditor.enrichHTML(parameter, { relativeTo: this.document }) : undefined;
     }
 
-    /** Menu Toggle */
     _activateMenu() {
       const menu = this.element.querySelector(".ab-menu");
       const toggle = this.element.querySelector(".ab-menu-toggle");
@@ -184,7 +246,6 @@ export const TeriockSheet = (Base) =>
       });
     }
 
-    /** Utility: Connect DOM Events */
     _connect(selector, eventType, handler) {
       this.element.querySelectorAll(selector).forEach((el) =>
         el.addEventListener(eventType, (e) => {
@@ -237,21 +298,20 @@ export const TeriockSheet = (Base) =>
     _embeddedFromCard(target) {
       const card = target.closest(".tcard");
       const { id, type, parentId } = card?.dataset ?? {};
-      if (type === "item") {
-        return this.document.items.get(id);
-      }
+
+      if (type === "item") return this.document.items.get(id);
+
       if (type === "effect") {
         if (this.document.documentName === "Actor" && this.document._id !== parentId) {
           return this.document.items.get(parentId)?.effects.get(id);
-        } else if (this.document.documentName === "ActiveEffect") {
-          return this.document.parent?.effects.get(id);
-        } else {
-          return this.document.effects.get(id);
         }
+        if (this.document.documentName === "ActiveEffect") {
+          return this.document.parent?.effects.get(id);
+        }
+        return this.document.effects.get(id);
       }
     }
 
-    /** Drag and Drop */
     _onDragStart(event) {
       const embedded = this._embeddedFromCard(event.currentTarget);
       const dragData = embedded?.toDragData();
@@ -266,42 +326,36 @@ export const TeriockSheet = (Base) =>
 
     async _onDrop(event) {
       const data = await ux.TextEditor.getDragEventData(event);
-      switch (data.type) {
-        case "ActiveEffect":
-          return this._onDropActiveEffect(event, data);
-        case "Item":
-          return this._onDropItem(event, data);
-      }
+      return data.type === "ActiveEffect"
+        ? this._onDropActiveEffect(event, data)
+        : data.type === "Item"
+          ? this._onDropItem(event, data)
+          : false;
     }
 
     async _onDropActiveEffect(event, data) {
       const effect = await getDocumentClass("ActiveEffect").fromDropData(data);
-      if (!this.document.isOwner || !effect || effect.parent === this.document || effect.target === this.document) {
-        return false;
-      }
-      if (
-        !(
-          ["Actor", "Item"].includes(this.document.documentName) ||
-          (this.document.type === "ability" && effect.type === "ability")
-        )
-      ) {
-        return false;
-      }
+      if (!this._canDropEffect(effect)) return false;
+
       await effect.saveFamily();
-      let newEffect;
-      if (this.document.documentName === "ActiveEffect") {
-        newEffect = this.document.parent.createEmbeddedDocuments("ActiveEffect", [effect]);
-      } else {
-        newEffect = this.document.createEmbeddedDocuments("ActiveEffect", [effect]);
-      }
-      return newEffect;
+      const target = this.document.documentName === "ActiveEffect" ? this.document.parent : this.document;
+      return target.createEmbeddedDocuments("ActiveEffect", [effect]);
+    }
+
+    _canDropEffect(effect) {
+      return (
+        this.document.isOwner &&
+        effect &&
+        effect.parent !== this.document &&
+        effect.target !== this.document &&
+        (["Actor", "Item"].includes(this.document.documentName) ||
+          (this.document.type === "ability" && effect.type === "ability"))
+      );
     }
 
     async _onDropItem(event, data) {
       const item = await getDocumentClass("Item").fromDropData(data);
-      if (!this.document.isOwner || !item || item.parent === this.document || this.document.documentName !== "Actor") {
-        return false;
-      }
+      if (!this._canDropItem(item)) return false;
 
       const source = await utils.fromUuid(data.uuid);
       if (item.parent?.documentName === "Actor" && item.type === "equipment") {
@@ -310,25 +364,26 @@ export const TeriockSheet = (Base) =>
       return this.document.createEmbeddedDocuments("Item", [item]);
     }
 
-    // Static Actions
-    // ------------------------------------------------------------------------
+    _canDropItem(item) {
+      return this.document.isOwner && item && item.parent !== this.document && this.document.documentName === "Actor";
+    }
 
+    // Static Actions
     static async _debug(_, __) {
       console.log("Debug", this.document, this);
     }
-
     static async _wikiPullThis(_, __) {
-      if (this.editable) {
-        this.document.system.wikiPull();
-      }
+      if (this.editable) this.document.system.wikiPull();
     }
-
     static async _wikiOpenThis(_, __) {
       this.document.system.wikiOpen();
     }
-
     static async _chatThis(_, __) {
       this.document.chat();
+    }
+    static async _reloadThis(_, __) {
+      await this.document.update({});
+      await this.document.sheet.render();
     }
 
     static async _toggleLockThis(_, __) {
@@ -338,143 +393,104 @@ export const TeriockSheet = (Base) =>
     }
 
     static async _rollThis(event, target) {
-      const options = {};
-      if (event?.altKey) options.advantage = true;
-      else if (event?.shiftKey) options.disadvantage = true;
+      const options = event?.altKey ? { advantage: true } : event?.shiftKey ? { disadvantage: true } : {};
       this.document.use(options);
-    }
-
-    static async _reloadThis(_, __) {
-      await this.document.update({});
-      await this.document.sheet.render();
     }
 
     static async _editImage(_, target) {
       const attr = target.dataset.edit;
       const current = foundry.utils.getProperty(this.document, attr);
       const defaultImg = this.document.constructor.getDefaultArtwork?.(this.document.toObject())?.img;
-      const picker = new foundry.applications.apps.FilePicker({
+
+      return new foundry.applications.apps.FilePicker({
         current,
         type: "image",
         redirectToRoot: defaultImg ? [defaultImg] : [],
         callback: (path) => this.document.update({ [attr]: path }),
         top: this.position.top + 40,
         left: this.position.left + 10,
-      });
-      return picker.browse();
+      }).browse();
     }
 
     static async _openDoc(event, target) {
       this._embeddedFromCard(target)?.sheet.render(true);
     }
-
-    static async _rollDoc(event, target) {
-      const options = {};
-      if (event?.altKey) options.advantage = true;
-      else if (event?.shiftKey) options.disadvantage = true;
-      this._embeddedFromCard(target)?.use(options);
-    }
-
     static async _chatDoc(event, target) {
       this._embeddedFromCard(target)?.chat();
     }
-
     static async _useOneDoc(event, target) {
       this._embeddedFromCard(target)?.system.useOne();
     }
-
     static async _toggleForceDisabledDoc(event, target) {
       this._embeddedFromCard(target)?.toggleForceDisabled();
     }
 
+    static async _rollDoc(event, target) {
+      const options = event?.altKey ? { advantage: true } : event?.shiftKey ? { disadvantage: true } : {};
+      this._embeddedFromCard(target)?.use(options);
+    }
+
     static async _quickToggle(event, target) {
-      const path = target.dataset.path;
+      const { path } = target.dataset;
       const current = target.dataset.bool === "true";
       this.document.update({ [path]: !current });
     }
 
     static async _sheetToggle(event, target) {
-      const path = target.dataset.path;
+      const { path } = target.dataset;
       const current = target.dataset.bool === "true";
       foundry.utils.setProperty(this, path, !current);
       this.render();
     }
 
+    static async _toggleSwitch(event, target) {
+      const { name, value } = target.dataset;
+      const newValue = value == 0 ? 1 : value == 1 ? -1 : 0;
+      this.document.update({ [name]: newValue });
+    }
+
     static async _createAbility(event, __) {
       await createEffects.createAbility(this.document, null);
     }
-
     static async _createResource(event, __) {
       await createEffects.createResource(this.document, null);
     }
-
     static async _createFluency(event, __) {
       await createEffects.createFluency(this.document, null);
     }
 
-    static async _toggleSwitch(event, target) {
-      const name = target.dataset.name;
-      const value = target.dataset.value;
-      let newValue;
-      if (value == 0) {
-        newValue = 1;
-      } else if (value == 1) {
-        newValue = -1;
-      } else {
-        newValue = 0;
-      }
-      this.document.update({
-        [name]: newValue,
-      });
-    }
-
     static async _createProperty(event, __) {
-      const propertyKeys = Object.keys(CONFIG.TERIOCK.equipmentOptions.properties);
-      const propertyValues = propertyKeys
-        .map(
-          (property) => `<option value="${property}">${CONFIG.TERIOCK.equipmentOptions.properties[property]}</option>`,
-        )
-        .join("");
-      const materialPropertyKeys = Object.keys(CONFIG.TERIOCK.equipmentOptions.materialProperties);
-      const materialPropertyValues = materialPropertyKeys
-        .map(
-          (property) =>
-            `<option value="${property}">${CONFIG.TERIOCK.equipmentOptions.materialProperties[property]}</option>`,
-        )
-        .join("");
-      const magicalPropertyKeys = Object.keys(CONFIG.TERIOCK.equipmentOptions.magicalProperties);
-      const magicalPropertyValues = magicalPropertyKeys
-        .map(
-          (property) =>
-            `<option value="${property}">${CONFIG.TERIOCK.equipmentOptions.magicalProperties[property]}</option>`,
-        )
-        .join("");
-      const propertyOptions = [...propertyValues, ...materialPropertyValues, ...magicalPropertyValues].join("");
+      const createOptions = (obj) =>
+        Object.entries(obj)
+          .map(([key, value]) => `<option value="${key}">${value}</option>`)
+          .join("");
+
+      const { equipmentOptions } = CONFIG.TERIOCK;
+      const propertyOptions = [
+        ...createOptions(equipmentOptions.properties),
+        ...createOptions(equipmentOptions.materialProperties),
+        ...createOptions(equipmentOptions.magicalProperties),
+      ].join("");
+
       await new api.DialogV2({
-        window: {
-          title: "Create Property",
-        },
+        window: { title: "Create Property" },
         content: `
           <label for="property-select">Select Property</label>
-          <select id="property-select" name="property">
-            ${propertyOptions}
-          </select>
+          <select id="property-select" name="property">${propertyOptions}</select>
         `,
         buttons: [
           {
             action: "chosen",
             label: "Add Chosen Property",
             default: true,
-            callback: async (event, button, dialog) => {
-              const value = button.form.elements.property.value;
-              await createEffects.createProperty(this.item, value);
+            callback: async (event, button) => {
+              await createEffects.createProperty(this.item, button.form.elements.property.value);
             },
           },
           {
             action: "other",
             label: "Create New Property",
-            default: false,
-            callback: async (event, button, dialog) => {
+            callback: async () => {
               await createEffects.createProperty(this.item, null);
             },
           },
@@ -482,18 +498,20 @@ export const TeriockSheet = (Base) =>
       }).render(true);
     }
 
+    // Private helper methods
     async #addToRecordField(name, key, allowedKeys = []) {
       const existing = foundry.utils.getProperty(this.document, name);
-      console.log(name);
       const copy = foundry.utils.deepClone(existing) || {};
       const updateData = {};
-      for (const k of Object.keys(copy)) {
+
+      // Remove invalid keys
+      Object.keys(copy).forEach((k) => {
         if (k !== key && !allowedKeys.includes(k)) {
           updateData[`${name}.-=${k}`] = null;
         }
-      }
+      });
+
       updateData[`${name}.${key}`] = null;
-      console.log("Update data for record field:", updateData);
       await this.document.update(updateData);
     }
 
@@ -501,11 +519,27 @@ export const TeriockSheet = (Base) =>
       const existing = foundry.utils.getProperty(this.document, name);
       const copy = foundry.utils.deepClone(existing) || {};
       const updateData = {};
-      for (const k of Object.keys(copy)) {
+
+      Object.keys(copy).forEach((k) => {
         if (!allowedKeys.includes(k)) {
           updateData[`${name}.-=${k}`] = null;
         }
-      }
+      });
+
       await this.document.update(updateData);
+    }
+
+    async #addToArrayField(name, fieldPath) {
+      const cleanFieldPath = fieldPath.startsWith("system.") ? fieldPath.slice(7) : fieldPath;
+      const copy = foundry.utils.deepClone(foundry.utils.getProperty(this.document, name)) || [];
+      const field = this.document.system.schema.getField(cleanFieldPath).element;
+      const initial = field.getInitialValue();
+
+      copy.push(initial);
+      await this.document.update({ [name]: copy });
+    }
+
+    async #updateSetField(name, values = []) {
+      await this.document.update({ [name]: new Set(values) });
     }
   };
