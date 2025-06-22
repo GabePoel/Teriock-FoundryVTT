@@ -38,12 +38,15 @@
       <fieldset class="form-group" style="flex-direction: column; width: 100%;">
         <legend>If Proficient</legend>
         {{#each system.consequences.proficient as |consequence index|}}
-        {{formInput
-        ../systemFields.consequences.fields.proficient.element
-        value=consequence
-        label=(lookup (lookup ../config.consequenceOptions.interaction ../system.interaction) index)
-        name=(concat "system.consequences.proficient." index)
-        }}
+        <fieldset class="form-group" style="flex-direction: column; width: 100%;">
+          <legend>{{lookup (lookup ../config.consequenceOptions.interaction ../system.interaction) index}}</legend>
+          {{formInput
+          ../systemFields.consequences.fields.proficient.element
+          value=consequence
+          label=(lookup (lookup ../config.consequenceOptions.interaction ../system.interaction) index)
+          name=(concat "system.consequences.proficient." index)
+          }}
+        </fieldset>
         {{/each}}
       </fieldset>
       {{/if}}
@@ -51,12 +54,15 @@
       <fieldset class="form-group" style="flex-direction: column; width: 100%;">
         <legend>If Fluent</legend>
         {{#each system.consequences.fluent as |consequence index|}}
-        {{formInput
-        ../systemFields.consequences.fields.fluent.element
-        value=consequence
-        label=(lookup (lookup ../config.consequenceOptions.interaction ../system.interaction) index)
-        name=(concat "system.consequences.fluent." index)
-        }}
+        <fieldset class="form-group" style="flex-direction: column; width: 100%;">
+          <legend>{{lookup (lookup ../config.consequenceOptions.interaction ../system.interaction) index}}</legend>
+          {{formInput
+          ../systemFields.consequences.fields.fluent.element
+          value=consequence
+          label=(lookup (lookup ../config.consequenceOptions.interaction ../system.interaction) index)
+          name=(concat "system.consequences.fluent." index)
+          }}
+        </fieldset>
         {{/each}}
       </fieldset>
       {{/if}}

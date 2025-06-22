@@ -1,11 +1,13 @@
 import {
-  TeriockRecordField,
-  TeriockArrayField,
-  TypedStringField,
   ConsequenceField,
-  SimpleConsequenceField,
   CriticalConsequenceField,
+  HeightenedField,
   ModifiedConsequenceField,
+  MutationsField,
+  SimpleConsequenceField,
+  TeriockArrayField,
+  TeriockRecordField,
+  TypedStringField,
 } from "./_fields.mjs";
 const { fields } = foundry.data;
 import { consequenceOptions } from "../../../../../helpers/constants/consequence-options.mjs";
@@ -84,16 +86,16 @@ export function consequenceExpirationsField() {
       label: "Movement Expiration",
       hint: "If true, the effect expires when the target moves.",
     }),
-    dawn: new fields.BooleanField({
-      initial: false,
-      label: "Dawn Expiration",
-      hint: "If true, the effect expires at dawn.",
-    }),
-    sustained: new fields.BooleanField({
-      initial: false,
-      label: "Sustained Expiration",
-      hint: "If true, the effect expires if the ability sustaining it is lost or disabled.",
-    }),
+    // dawn: new fields.BooleanField({
+    //   initial: false,
+    //   label: "Dawn Expiration",
+    //   hint: "If true, the effect expires at dawn.",
+    // }),
+    // sustained: new fields.BooleanField({
+    //   initial: false,
+    //   label: "Sustained Expiration",
+    //   hint: "If true, the effect expires if the ability sustaining it is lost or disabled.",
+    // }),
   });
 }
 
@@ -137,7 +139,7 @@ export function consequenceField() {
 }
 
 export function mutationsField() {
-  return new fields.SchemaField({
+  return new MutationsField({
     double: new fields.BooleanField({
       initial: false,
       label: "Double Dice on Crit",
@@ -147,7 +149,12 @@ export function mutationsField() {
 }
 
 export function heightenedField() {
-  return new fields.SchemaField({
+  return new HeightenedField({
+    enabled: new fields.BooleanField({
+      initial: false,
+      label: "Heightened Overrides",
+      hint: "If true, the ability is heightened and has additional effects.",
+    }),
     overrides: consequenceField(),
     scaling: new fields.SchemaField({
       rolls: consequenceRollsField(),
@@ -184,8 +191,12 @@ export function simpleConsequenceDataField() {
 
 export function modifiedConsequenceDataField() {
   return new ModifiedConsequenceField({
+    enabled: new fields.BooleanField({
+      initial: false,
+      label: "Static Overrides",
+      hint: "If true, the ability has static overrides for its consequences.",
+    }),
     overrides: simpleConsequenceDataField(),
-    mutations: mutationsField(),
     heightened: heightenedField(),
   });
 }
