@@ -1,14 +1,17 @@
-// const { DiceTerm } = foundry.dice.terms;
-
 /**
- * A custom Roll class which enriches the provided flavor and uses a custom chat template to display the flavor as enriched HTML.
+ * A custom Roll class which enriches the provided flavor and uses a custom
+ * chat template to display the flavor as enriched HTML. Also allows for custom
+ * functions that Teriock requires.
+ *
+ * @extends {foundry.dice.Roll}
  */
 export default class TeriockRoll extends foundry.dice.Roll {
   static CHAT_TEMPLATE = "systems/teriock/templates/chat/roll.hbs";
 
   /** @override */
   constructor(formula, data, options = {}) {
-    super(formula, data, options);
+    const parsedFormula = TeriockRoll.parseFormula(formula);
+    super(parsedFormula, data, options);
     const defaultOptions = {
       enrich: false,
     };
@@ -26,6 +29,233 @@ export default class TeriockRoll extends foundry.dice.Roll {
     }
   }
 
+  /**
+   * Parses a roll formula and pre-evaluates boost/deboost functions.
+   * 
+   * Recursively processes the formula to find boost() and deboost() functions,
+   * evaluates the dice within those functions, applies the boost/deboost logic,
+   * and replaces the function calls with the resulting formula.
+   * 
+   * Supports both full function names (boost/deboost/setboost) and short aliases (b/db/sb).
+   * 
+   * @param {string} formula - The roll formula to parse
+   * @returns {string} The parsed formula with boost/deboost functions evaluated
+   * 
+   * @example
+   * // Simple formula remains unchanged
+   * TeriockRoll.parseFormula("2d4 + 1d6") // -> "2d4 + 1d6"
+   * 
+   * @example
+   * // Boost function gets evaluated
+   * TeriockRoll.parseFormula("boost(2d4 + 1d6)") // -> "2d4 + 2d6"
+   * TeriockRoll.parseFormula("b(2d4 + 1d6)") // -> "2d4 + 2d6"
+   * 
+   * @example
+   * // Mixed formula with boost function
+   * TeriockRoll.parseFormula("boost(2d4 + 1d6) + 1d8") // -> "2d4 + 2d6 + 1d8"
+   * TeriockRoll.parseFormula("b(2d4 + 1d6) + 1d8") // -> "2d4 + 2d6 + 1d8"
+   * 
+   * @example
+   * // Setboost function with specific number of boosts
+   * TeriockRoll.parseFormula("setboost(1d6, 1)") // -> "2d6"
+   * TeriockRoll.parseFormula("sb(1d6, 1)") // -> "2d6"
+   * TeriockRoll.parseFormula("setboost(1d6, 2)") // -> "3d6"
+   * TeriockRoll.parseFormula("setboost(1d6, -1)") // -> "0d6"
+   * 
+   * @example
+   * // Cancelling boost/deboost functions
+   * TeriockRoll.parseFormula("boost(deboost(2d4 + 1d6))") // -> "2d4 + 1d6"
+   * TeriockRoll.parseFormula("b(db(2d4 + 1d6))") // -> "2d4 + 1d6"
+   */
+  static parseFormula(formula) {
+    return TeriockRoll.parseFormulaRecursive(formula);
+  }
+
+  /**
+   * Recursively parses a formula to handle nested boost/deboost functions.
+   * 
+   * @param {string} formula - The formula to parse
+   * @returns {string} The parsed formula
+   * @private
+   */
+  static parseFormulaRecursive(formula) {
+    // Find the outermost boost, deboost, or setboost function (including aliases)
+    const boostMatch = formula.match(/(?:boost|b)\s*\(/);
+    const deboostMatch = formula.match(/(?:deboost|db)\s*\(/);
+    const setboostMatch = formula.match(/(?:setboost|sb)\s*\(/);
+    
+    if (!boostMatch && !deboostMatch && !setboostMatch) {
+      return formula; // No functions to process
+    }
+    
+    // Find the start of the first function
+    const boostIndex = boostMatch ? boostMatch.index : Infinity;
+    const deboostIndex = deboostMatch ? deboostMatch.index : Infinity;
+    const setboostIndex = setboostMatch ? setboostMatch.index : Infinity;
+    const firstFunctionIndex = Math.min(boostIndex, deboostIndex, setboostIndex);
+    
+    // Split the formula into parts
+    const beforeFunction = formula.substring(0, firstFunctionIndex);
+    const functionStart = formula.substring(firstFunctionIndex);
+    
+    // Find the matching closing parenthesis
+    const innerFormula = TeriockRoll.extractFunctionContent(functionStart);
+    const functionName = functionStart.match(/^(boost|b|deboost|db|setboost|sb)\s*\(/)[1];
+    const afterFunction = functionStart.substring(functionStart.indexOf(innerFormula) + innerFormula.length + 1);
+    
+    // Recursively parse the inner formula
+    const parsedInnerFormula = TeriockRoll.parseFormulaRecursive(innerFormula);
+    
+    // Evaluate the function (map aliases to full names)
+    let evaluatedFormula;
+    if (functionName === 'boost' || functionName === 'b') {
+      evaluatedFormula = TeriockRoll.evaluateBoostFunction(parsedInnerFormula, true);
+    } else if (functionName === 'deboost' || functionName === 'db') {
+      evaluatedFormula = TeriockRoll.evaluateBoostFunction(parsedInnerFormula, false);
+    } else if (functionName === 'setboost' || functionName === 'sb') {
+      evaluatedFormula = TeriockRoll.evaluateSetboostFunction(parsedInnerFormula);
+    }
+    
+    // Recursively parse the rest of the formula
+    const parsedAfterFunction = TeriockRoll.parseFormulaRecursive(afterFunction);
+    
+    return beforeFunction + evaluatedFormula + parsedAfterFunction;
+  }
+
+  /**
+   * Extracts the content of a function call, handling nested parentheses.
+   * 
+   * @param {string} functionCall - The function call starting with function name
+   * @returns {string} The content inside the function parentheses
+   * @private
+   */
+  static extractFunctionContent(functionCall) {
+    const openParenIndex = functionCall.indexOf('(');
+    if (openParenIndex === -1) {
+      foundry.ui.notifications.error(`Invalid function call: missing opening parenthesis`);
+    }
+    
+    let parenCount = 0;
+    let contentStart = openParenIndex + 1;
+    
+    for (let i = contentStart; i < functionCall.length; i++) {
+      const char = functionCall[i];
+      if (char === '(') {
+        parenCount++;
+      } else if (char === ')') {
+        if (parenCount === 0) {
+          return functionCall.substring(contentStart, i);
+        }
+        parenCount--;
+      }
+    }
+    
+    foundry.ui.notifications.error(`Invalid function call: missing closing parenthesis`);
+  }
+
+  /**
+   * Evaluates a boost or deboost function by creating a temporary roll,
+   * applying the boost/deboost, and returning the resulting formula.
+   * 
+   * @param {string} innerFormula - The formula inside the boost/deboost function
+   * @param {boolean} isBoost - True for boost, false for deboost
+   * @returns {string} The resulting formula after boost/deboost is applied
+   * @private
+   */
+  static evaluateBoostFunction(innerFormula, isBoost) {
+    try {
+      // Create a temporary regular Roll to avoid circular dependency
+      const tempRoll = new foundry.dice.Roll(innerFormula);
+      
+      // Apply boost or deboost logic directly
+      if (isBoost) {
+        TeriockRoll.applyBoostToRoll(tempRoll);
+      } else {
+        TeriockRoll.applyDeboostToRoll(tempRoll);
+      }
+      
+      // Return the modified formula
+      return tempRoll.formula;
+    } catch (error) {
+      console.warn(`Failed to evaluate ${isBoost ? 'boost' : 'deboost'} function:`, error);
+      return innerFormula; // Return original formula if evaluation fails
+    }
+  }
+
+  /**
+   * Evaluates a setboost function by creating a temporary roll,
+   * applying the specified number of boosts/deboosts, and returning the resulting formula.
+   * 
+   * @param {string} innerFormula - The formula inside the setboost function (e.g., "1d6, 1")
+   * @returns {string} The resulting formula after setboost is applied
+   * @private
+   */
+  static evaluateSetboostFunction(innerFormula) {
+    try {
+      // Parse the parameters: "formula, number"
+      const commaIndex = innerFormula.lastIndexOf(',');
+      if (commaIndex === -1) {
+        foundry.ui.notifications.error(`Invalid setboost function: missing comma separator`);
+        return innerFormula;
+      }
+      
+      const formulaPart = innerFormula.substring(0, commaIndex).trim();
+      const numberPart = innerFormula.substring(commaIndex + 1).trim();
+      
+      // Parse the number
+      const boostNumber = parseInt(numberPart, 10);
+      if (isNaN(boostNumber)) {
+        foundry.ui.notifications.error(`Invalid setboost function: invalid number parameter "${numberPart}"`);
+        return innerFormula;
+      }
+      
+      // Create a temporary regular Roll to avoid circular dependency
+      const tempRoll = new foundry.dice.Roll(formulaPart);
+      
+      // Apply the specified number of boosts/deboosts
+      if (boostNumber > 0) {
+        for (let i = 0; i < boostNumber; i++) {
+          TeriockRoll.applyBoostToRoll(tempRoll);
+        }
+      } else if (boostNumber < 0) {
+        for (let i = 0; i < Math.abs(boostNumber); i++) {
+          TeriockRoll.applyDeboostToRoll(tempRoll);
+        }
+      }
+      // If boostNumber is 0, no changes are made
+      
+      // Return the modified formula
+      return tempRoll.formula;
+    } catch (error) {
+      console.warn(`Failed to evaluate setboost function:`, error);
+      return innerFormula; // Return original formula if evaluation fails
+    }
+  }
+
+  /**
+   * Applies boost logic to a roll by increasing the highest face die.
+   * 
+   * @param {foundry.dice.Roll} roll - The roll to boost
+   * @private
+   */
+  static applyBoostToRoll(roll) {
+    const die = selectWeightedMaxFaceDie(roll.dice);
+    die._number = die._number + 1;
+    roll.resetFormula();
+  }
+
+  /**
+   * Applies deboost logic to a roll by decreasing the highest face die.
+   * 
+   * @param {foundry.dice.Roll} roll - The roll to deboost
+   * @private
+   */
+  static applyDeboostToRoll(roll) {
+    const die = selectWeightedMaxFaceDie(roll.dice);
+    die._number = Math.max(0, die._number - 1);
+    roll.resetFormula();
+  }
+
   /** @override */
   async _prepareChatRenderContext(options = {}) {
     const context = await super._prepareChatRenderContext(options);
@@ -40,18 +270,14 @@ export default class TeriockRoll extends foundry.dice.Roll {
    * @returns {void}
    */
   boost() {
-    const die = selectWeightedMaxFaceDie(this.dice);
-    die._number = die._number + 1;
-    this.resetFormula();
+    TeriockRoll.applyBoostToRoll(this);
   }
 
   /**
    * @returns {void}
    */
   deboost() {
-    const die = selectWeightedMaxFaceDie(this.dice);
-    die._number = Math.max(0, die._number - 1);
-    this.resetFormula();
+    TeriockRoll.applyDeboostToRoll(this);
   }
 
   /**

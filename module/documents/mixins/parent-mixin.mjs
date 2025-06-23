@@ -19,10 +19,16 @@ function _buildEffectTypes(document) {
  * Mixin for common functions used across document classes that embed children.
  * @template {import("@common/_types.mjs").Constructor<Document>} BaseDocument
  * @param {BaseDocument} Base
- *
+ * @returns {new (...args: any[]) => BaseDocument & {
+ *   validEffects: TeriockEffect[];
+ *   buildEffectTypes(): { effectTypes: any; effectKeys: any };
+ *   prepareDerivedData(): void;
+ *   effectTypes: any;
+ *   effectKeys: any;
+ * }}
  */
-export const MixinParentDocument = (Base) =>
-  class MixinParentDocument extends Base {
+export const ParentDocumentMixin = (Base) =>
+  class ParentDocumentMixin extends Base {
     /**
      * Gets the list of effects associated with this document.
      * Helper method for `prepareDerivedData()` that can be called explicitly.

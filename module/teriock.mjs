@@ -154,8 +154,10 @@ Hooks.once("init", function () {
   );
 
   // Registering custom dice rolls and functions
-  CONFIG.Dice.rolls.push(documents.TeriockRoll);
-  CONFIG.Dice.rolls.push(documents.TeriockHarmRoll);
+  CONFIG.Dice.rolls = [
+    documents.TeriockRoll,
+    documents.TeriockHarmRoll,
+  ];
 
   game.teriock = {
     TeriockActor: documents.TeriockActor,

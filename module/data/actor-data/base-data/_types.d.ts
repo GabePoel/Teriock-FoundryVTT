@@ -1,4 +1,4 @@
-import { TeriockActor } from "../../../documents/_module.mjs";
+import { TeriockActor } from "@client/documents/_module.mjs";
 import { BarData, AttributeData, HackData, TradecraftData } from "./methods/schema/_types";
 import { TeriockDerivedActorData } from "./methods/data-deriving/_types";
 import TypeDataModel from "@common/abstract/type-data.mjs";
@@ -8,6 +8,7 @@ declare module "./base-data.mjs" {
     parent: TeriockActor;
     /** Level */
     lvl: number;
+    /** Size */
     size: number;
     /** Attributes */
     attributes: {

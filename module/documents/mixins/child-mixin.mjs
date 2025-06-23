@@ -8,7 +8,19 @@ import { buildMessage } from "../../helpers/messages-builder/message-builder.mjs
  * Mixin for common functions used across document classes embedded in actors.
  * @template {import("@common/_types.mjs").Constructor<Document>} BaseDocument
  * @param {BaseDocument} Base
- *
+ * @returns {new (...args: any[]) => BaseDocument & {
+ *   hookCall(incant: string, ...args: any[]): void;
+ *   chat(): Promise<void>;
+ *   chatImage(): Promise<void>;
+ *   roll(options: object): Promise<void>;
+ *   use(options: object): Promise<void>;
+ *   duplicate(): Promise<ChildDocumentMixin>;
+ *   buildRawMessage(options: MessageOptions): string;
+ *   buildMessage(options: MessageOptions): Promise<string>;
+ *   getActor(): TeriockActor;
+ *   wikiPull(): Promise<void>;
+ *   wikiOpen(): Promise<void>;
+ * }}
  */
 export const ChildDocumentMixin = (Base) =>
   class ChildDocumentMixin extends Base {

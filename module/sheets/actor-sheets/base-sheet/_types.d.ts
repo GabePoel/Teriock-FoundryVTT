@@ -5,5 +5,6 @@ import type { TeriockSheet } from "../../mixins/_types";
 declare module "./base-sheet.mjs" {
   export default interface TeriockBaseActorSheet extends TeriockSheet, ActorSheet {
     actor: TeriockActor;
+    document: TeriockActor;
   }
 }

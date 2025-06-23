@@ -1,13 +1,8 @@
-// Allows for typing within mixin.
-/** @import { ActiveEffectData } from "@common/documents/_types.mjs"; */
 const { fields } = foundry.data;
 const { TypeDataModel } = foundry.abstract;
 import { ChildDataMixin } from "../../mixins/child-mixin.mjs";
 import { _shouldExpire, _expire } from "./methods/_expiration.mjs";
 
-/**
- * @extends {ActiveEffectData}
- */
 export default class TeriockBaseEffectData extends ChildDataMixin(TypeDataModel) {
   /** @override */
   static defineSchema() {

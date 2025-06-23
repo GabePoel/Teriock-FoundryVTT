@@ -1,16 +1,13 @@
-// Allows for typing within mixin.
-/** @import Item from "@client/documents/item.mjs"; */
 const { api } = foundry.applications;
-const { Item } = foundry.documents;
 import { createAbility } from "../helpers/create-effects.mjs";
 import { fetchCategoryMembers } from "../helpers/wiki.mjs";
 import { ChildDocumentMixin } from "./mixins/child-mixin.mjs";
-import { MixinParentDocument } from "./mixins/parent-mixin.mjs";
+import { ParentDocumentMixin } from "./mixins/parent-mixin.mjs";
 
 /**
- * @extends {Item}
+ * @extends {foundry.documents.Item}
  */
-export default class TeriockItem extends MixinParentDocument(ChildDocumentMixin(Item)) {
+export default class TeriockItem extends ParentDocumentMixin(ChildDocumentMixin(foundry.documents.Item)) {
   /** @override */
   async roll(options) {
     await this.system.roll(options);

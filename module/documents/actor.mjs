@@ -1,14 +1,12 @@
-// Allows for typing within mixin.
-/** @import Actor from "@client/documents/actor.mjs"; */
 /** @import { CommonRollOptions } from "../types/rolls" */
-const { Actor } = foundry.documents;
-import { MixinParentDocument } from "./mixins/parent-mixin.mjs";
+import { ParentDocumentMixin } from "./mixins/parent-mixin.mjs";
 import TeriockRoll from "./roll.mjs";
 
 /**
- * @extends {Actor}
+ * @extends {foundry.documents.Actor}
+ * @extends {ParentDocumentMixin}
  */
-export default class TeriockActor extends MixinParentDocument(Actor) {
+export default class TeriockActor extends ParentDocumentMixin(foundry.documents.Actor) {
   /** @inheritdoc */
   getRollData() {
     return this.system.getRollData();

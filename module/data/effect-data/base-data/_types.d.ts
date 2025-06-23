@@ -1,5 +1,5 @@
-import { TeriockEffect } from "../../../documents/effect.mjs";
 import { ChildDataMixin } from "../../mixins/_types";
+import { TeriockEffect } from "@client/documents/_module.mjs";
 
 declare module "./base-data.mjs" {
   export default interface TeriockBaseEffectData extends ChildDataMixin {
