@@ -1,4 +1,5 @@
 export { default as AbilityData } from "./ability-data/ability-data.mjs";
+export { default as BaseEffectData } from "./base-data/base-data.mjs";
 export { default as ConditionData } from "./condition-data/condition-data.mjs";
 export { default as EffectData } from "./effect-data/effect-data.mjs";
 export { default as FluencyData } from "./fluency-data/fluency-data.mjs";

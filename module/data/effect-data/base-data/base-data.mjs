@@ -4,6 +4,14 @@ import { ChildDataMixin } from "../../mixins/child-mixin.mjs";
 import { _shouldExpire, _expire } from "./methods/_expiration.mjs";
 
 export default class TeriockBaseEffectData extends ChildDataMixin(TypeDataModel) {
+  /** @inheritdoc */
+  static get metadata() {
+    return {
+      ...super.metadata,
+      type: "base",
+    };
+  }
+
   /** @override */
   static defineSchema() {
     const commonData = super.defineSchema();

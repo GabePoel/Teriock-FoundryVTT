@@ -207,6 +207,16 @@ const abilityMap = {
       statuses: ["frozen"],
     },
   },
+  "Missile Dodging": {
+    base: {
+      statuses: ["missileDodging"],
+    },
+  },
+  "Melee Dodging": {
+    base: {
+      statuses: ["meleeDodging"],
+    },
+  },
 };
 
 const tradecrafts = mergeLevel(tradecraftOptions, "*", "tradecrafts");

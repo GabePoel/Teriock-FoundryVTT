@@ -93,11 +93,13 @@ export default function registerHooks() {
     const combatants = combat.combatants;
     for (const combatant of combatants) {
       const actor = combatant.actor;
+      console.log(actor);
       if (actor?.isOwner) {
         await actor.update({
           "system.attackPenalty": 0,
         });
         const effects = actor.temporaryEffects;
+        console.log(effects);
         for (const effect of effects) {
           await effect.system.checkExpiration();
         }
