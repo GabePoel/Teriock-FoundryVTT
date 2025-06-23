@@ -1,3 +1,4 @@
+- [ ] Make encumbrance scale like hacks do
 - [x] Bug fixes
   - [x] Drag/drop with descendent abilities
     - [x] The descendants themselves

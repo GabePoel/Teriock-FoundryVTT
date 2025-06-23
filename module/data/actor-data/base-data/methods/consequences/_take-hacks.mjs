@@ -2,10 +2,22 @@
 import { hacksData } from "../../../../../content/hacks.mjs";
 
 /**
- * @param {TeriockBaseActorData} system
- * @param {string} part
- * @returns {Promise<void>}
- * @private
+ * Increases the hack level for a specific body part and applies corresponding effects.
+ * 
+ * Relevant wiki pages:
+ * - [Hacks](https://wiki.teriock.com/index.php/Condition:Hacked)
+ * 
+ * @param {TeriockBaseActorData} system - The actor's base data system object
+ * @param {HackableBodyPart} part - The body part to hack (arm, leg, body, eye, ear, mouth, nose)
+ * @returns {Promise<void>} Resolves when the hack is applied and effects are updated
+ * 
+ * @example
+ * // Hack an actor's arm
+ * await _takeHack(actor.system, "arm");
+ * 
+ * @example
+ * // Hack an actor's leg (will apply slowed status)
+ * await _takeHack(actor.system, "leg");
  */
 export async function _takeHack(system, part) {
   const actor = system.parent;
@@ -20,10 +32,22 @@ export async function _takeHack(system, part) {
 }
 
 /**
- * @param {TeriockBaseActorData} system
- * @param {string} part
- * @returns {Promise<void>}
- * @private
+ * Decreases the hack level for a specific body part and removes corresponding effects.
+ * 
+ * Relevant wiki pages:
+ * - [Hacks](https://wiki.teriock.com/index.php/Condition:Hacked)
+ * 
+ * @param {TeriockBaseActorData} system - The actor's base data system object
+ * @param {HackableBodyPart} part - The body part to unhack (arm, leg, body, eye, ear, mouth, nose)
+ * @returns {Promise<void>} Resolves when the unhack is applied and effects are updated
+ * 
+ * @example
+ * // Reduce an actor's arm hack
+ * await _takeUnhack(actor.system, "arm");
+ * 
+ * @example
+ * // Reduce an actor's leg hack (may remove slowed status)
+ * await _takeUnhack(actor.system, "leg");
  */
 export async function _takeUnhack(system, part) {
   const actor = system.parent;
@@ -38,8 +62,24 @@ export async function _takeUnhack(system, part) {
 }
 
 /**
- * @param {TeriockBaseActorData} system
- * @param {object} newStats
+ * Updates the actor's ActiveEffects based on current hack levels for all body parts.
+ * 
+ * This function analyzes the current hack values for all body parts and ensures that
+ * the appropriate ActiveEffects are applied or removed. It compares the current hack
+ * level against the maximum possible hack level for each part and manages the effects
+ * accordingly.
+ * 
+ * Relevant wiki pages:
+ * - [Hacks](https://wiki.teriock.com/index.php/Condition:Hacked)
+ * 
+ * @param {TeriockBaseActorData} system - The actor's base data system object
+ * @param {HackDataCollection} newStats - The updated hack statistics for all body parts
+ * @returns {Promise<void>} Resolves when all hack effects are updated
+ * 
+ * @example
+ * // Update hack effects after modifying hack values
+ * const updatedHacks = { ...system.hacks, arm: { ...system.hacks.arm, value: 2 } };
+ * await updateHackStatus(system, updatedHacks);
  */
 async function updateHackStatus(system, newStats) {
   const actor = system.parent;
