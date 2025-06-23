@@ -1,4 +1,3 @@
-- [ ] Make encumbrance scale like hacks do
 - [x] Bug fixes
   - [x] Drag/drop with descendent abilities
     - [x] The descendants themselves
@@ -15,6 +14,7 @@
   - [x] Window sizing limitations
   - [x] No context menu on embedded sheets
   - [x] Character sheet context menus not updating
+- [x] Make encumbrance scale like hacks do
 - [x] Major functionality
   - [x] Resistance save
   - [x] Hack tracking

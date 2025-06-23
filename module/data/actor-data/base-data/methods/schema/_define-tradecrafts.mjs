@@ -4,12 +4,12 @@ import { tradecraftOptions } from "../../../../../helpers/constants/tradecraft-o
 
 /**
  * Creates a tradecraft field definition with proficiency, extra, and bonus tracking.
- * 
+ *
  * Relevant wiki pages:
  * - [Tradecrafts](https://wiki.teriock.com/index.php/Core:Tradecrafts)
  * - [Talented](https://wiki.teriock.com/index.php/Keyword:Talented)
  * - [Expertise](https://wiki.teriock.com/index.php/Keyword:Expertise)
- * 
+ *
  * @returns {foundry.data.fields.SchemaField} A schema field containing:
  *   - proficient: Boolean indicating if proficient in this tradecraft
  *   - extra: Number of extra levels/ranks in this tradecraft
@@ -27,27 +27,27 @@ const tradecrafts = mergeLevel(tradecraftOptions, "*", "tradecrafts");
 
 /**
  * Defines the tradecrafts schema.
- * 
+ *
  * Relevant wiki pages:
  * - [Tradecrafts](https://wiki.teriock.com/index.php/Core:Tradecrafts)
  * - [Talented](https://wiki.teriock.com/index.php/Keyword:Talented)
  * - [Expertise](https://wiki.teriock.com/index.php/Keyword:Expertise)
- * 
+ *
  * @param {Object} schema - The schema object to extend with tradecraft fields
  * @returns {Object} The modified schema object with tradecraft fields added
- * 
+ *
  * @example
  * ```javascript
  * const schema = {};
  * const tradecraftsSchema = _defineTradecrafts(schema);
  * // tradecraftsSchema now contains: tradecrafts field with all available tradecrafts
  * ```
- * 
+ *
  * @typedef {Object} TradecraftField
  * @property {foundry.data.fields.BooleanField} proficient - Whether proficient in this tradecraft
  * @property {foundry.data.fields.NumberField} extra - Additional modifier for this tradecraft (≥0)
  * @property {foundry.data.fields.NumberField} bonus - Calculated bonus value for this tradecraft (≥0)
- * 
+ *
  * @typedef {Object} TradecraftsSchema
  * @property {foundry.data.fields.SchemaField} tradecrafts - Object containing all available tradecraft fields,
  *   where each key is a tradecraft name and each value is a {@link TradecraftField}

@@ -16,7 +16,7 @@ export function _prepareAttributes(system) {
   const str = attributes.str.value;
   const strFactor = size < 5 ? str : str + Math.pow(size - 5, 2);
   const base = 65 + 20 * strFactor;
-  system.movementSpeed = 30 + 10 * mov;
+  system.movementSpeed.value = 30 + 10 * mov + system.movementSpeed.base;
   system.carryingCapacity = {
     light: base,
     heavy: base * 2,

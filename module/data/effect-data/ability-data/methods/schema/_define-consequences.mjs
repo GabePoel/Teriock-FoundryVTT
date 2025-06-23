@@ -10,6 +10,26 @@ import {
 } from "./_fields.mjs";
 const { fields } = foundry.data;
 
+/**
+ * Creates a field for consequence rolls configuration.
+ *
+ * This field allows defining various roll formulas for different effect types:
+ * - Damage, drain, wither rolls
+ * - Healing and revitalization rolls
+ * - Temporary HP/MP manipulation
+ * - Sleep, kill, and other special effects
+ *
+ * Relevant wiki pages:
+ * - [Damage types](https://wiki.teriock.com/index.php/Category:Damage_types)
+ * - [Drain types](https://wiki.teriock.com/index.php/Category:Drain_types)
+ *
+ * @returns {TeriockRecordField} Field for configuring consequence rolls
+ * @private
+ *
+ * @example
+ * // Create rolls field
+ * const rollsField = consequenceRollsField();
+ */
 export function consequenceRollsField() {
   return new TeriockRecordField(
     new fields.StringField({
@@ -22,6 +42,19 @@ export function consequenceRollsField() {
   );
 }
 
+/**
+ * Creates a field for consequence hacks configuration.
+ *
+ * Relevant wiki pages:
+ * - [Hack](https://wiki.teriock.com/index.php/Damage:Hack)
+ *
+ * @returns {TeriockRecordField} Field for configuring consequence hacks
+ * @private
+ *
+ * @example
+ * // Create hacks field
+ * const hacksField = consequenceHacksField();
+ */
 export function consequenceHacksField() {
   return new TeriockRecordField(
     new fields.StringField({
@@ -34,6 +67,21 @@ export function consequenceHacksField() {
   );
 }
 
+/**
+ * Creates a field for consequence expiration configuration.
+ *
+ * This field defines when and how consequences expire:
+ * - Turn-based expiration (target, executor, every, other)
+ * - Movement-based expiration
+ * - Automatic vs. roll-based expiration
+ *
+ * @returns {SchemaField} Field for configuring consequence expirations
+ * @private
+ *
+ * @example
+ * // Create expirations field
+ * const expirationsField = consequenceExpirationsField();
+ */
 export function consequenceExpirationsField() {
   return new fields.SchemaField({
     turn: new fields.SchemaField(
@@ -87,6 +135,20 @@ export function consequenceExpirationsField() {
   });
 }
 
+/**
+ * Creates a field for a complete consequence configuration.
+ *
+ * This field combines instant and ongoing effects:
+ * - **Instant**: Rolls and hacks applied immediately
+ * - **Ongoing**: Status effects, changes, duration, and expirations
+ *
+ * @returns {ConsequenceField} Field for configuring complete consequences
+ * @private
+ *
+ * @example
+ * // Create consequence field
+ * const consequenceField = consequenceField();
+ */
 export function consequenceField() {
   return new ConsequenceField({
     instant: new fields.SchemaField({
@@ -136,6 +198,23 @@ export function consequenceField() {
   });
 }
 
+/**
+ * Creates a field for consequence mutations configuration.
+ *
+ * This field defines special modifications to consequences:
+ * - Double dice on critical hits
+ * - Other mutation effects
+ *
+ * Relevant wiki pages:
+ * - [Interactions](https://wiki.teriock.com/index.php/Core:Interactions)
+ *
+ * @returns {MutationsField} Field for configuring consequence mutations
+ * @private
+ *
+ * @example
+ * // Create mutations field
+ * const mutationsField = mutationsField();
+ */
 export function mutationsField() {
   return new MutationsField({
     double: new fields.BooleanField({
@@ -146,6 +225,24 @@ export function mutationsField() {
   });
 }
 
+/**
+ * Creates a field for heightened ability configuration.
+ *
+ * This field defines enhanced abilities with:
+ * - Override consequences for heightened state
+ * - Scaling effects (rolls and duration)
+ * - Additional complexity and power
+ *
+ * Relevant wiki pages:
+ * - [Heightening](https://wiki.teriock.com/index.php/Core:Heightening)
+ *
+ * @returns {HeightenedField} Field for configuring heightened abilities
+ * @private
+ *
+ * @example
+ * // Create heightened field
+ * const heightenedField = heightenedField();
+ */
 export function heightenedField() {
   return new HeightenedField({
     enabled: new fields.BooleanField({
@@ -172,6 +269,23 @@ export function heightenedField() {
   });
 }
 
+/**
+ * Creates a field for simple consequence data configuration.
+ *
+ * This field defines basic consequences with:
+ * - Default consequence for normal use
+ * - Critical consequence with overrides and mutations
+ *
+ * Relevant wiki pages:
+ * - [Interactions](https://wiki.teriock.com/index.php/Core:Interactions)
+ *
+ * @returns {SimpleConsequenceField} Field for configuring simple consequences
+ * @private
+ *
+ * @example
+ * // Create simple consequence field
+ * const simpleField = simpleConsequenceDataField();
+ */
 export function simpleConsequenceDataField() {
   return new SimpleConsequenceField({
     default: consequenceField(),
@@ -187,6 +301,25 @@ export function simpleConsequenceDataField() {
   });
 }
 
+/**
+ * Creates a field for modified consequence data configuration.
+ *
+ * This field defines advanced consequences with:
+ * - Static overrides for different proficiency levels
+ * - Mutations that modify the consequences
+ * - Heightened ability configuration
+ *
+ * Relevant wiki pages:
+ * - [Interactions](https://wiki.teriock.com/index.php/Core:Interactions)
+ * - [Heightening](https://wiki.teriock.com/index.php/Core:Heightening)
+ *
+ * @returns {ModifiedConsequenceField} Field for configuring modified consequences
+ * @private
+ *
+ * @example
+ * // Create modified consequence field
+ * const modifiedField = modifiedConsequenceDataField();
+ */
 export function modifiedConsequenceDataField() {
   return new ModifiedConsequenceField({
     enabled: new fields.BooleanField({

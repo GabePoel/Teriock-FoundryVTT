@@ -1,15 +1,16 @@
 /** @import TeriockBaseActorData from "../base-data.mjs"; */
+import { encumbranceData } from "../../../../content/encumbrance.mjs";
 
 /**
  * Performs post-update operations for a Teriock actor's base data.
  * This function orchestrates several important maintenance tasks that should
  * occur after the actor's data has been updated:
- * 
+ *
  * 1. **Encumbrance Management**: Applies status effects based on current encumbrance level
  * 2. **Token Preparation**: Updates token sizes and vision modes to match actor state
  * 3. **Ethereal Death Check**: Handles special death mechanics for ethereal creatures
  * 4. **Expiration Monitoring**: Checks and processes expiration effects
- * 
+ *
  * @param {TeriockBaseActorData} system - The actor's base data system object
  * @returns {Promise<void>} Resolves when all post-update operations are complete
  * @private
@@ -23,24 +24,24 @@ export async function _postUpdate(system) {
 
 /**
  * Applies encumbrance status effects based on the actor's current encumbrance level.
- * 
+ *
  * Encumbrance levels are calculated based on the actor's carried weight relative to
  * their carrying capacity. The system applies progressive status effects:
  * - Level 1: "encumbered" status
  * - Level 2: "slowed" status (in addition to encumbered)
  * - Level 3: "immobilized" status (in addition to encumbered and slowed)
- * 
+ *
  * This function ensures that the actor's status effects accurately reflect their
  * current encumbrance state by toggling the appropriate status effects.
- * 
+ *
  * Relevant wiki pages:
  * - [Encumbered](https://wiki.teriock.com/index.php/Condition:Encumbered)
  * - [Slowed](https://wiki.teriock.com/index.php/Condition:Slowed)
  * - [Immobilized](https://wiki.teriock.com/index.php/Condition:Immobilized)
- * 
+ *
  * @param {TeriockBaseActorData} system - The actor's base data system object
  * @returns {Promise<void>} Resolves when all encumbrance status effects are applied
- * 
+ *
  * @example
  * // Apply encumbrance effects for an actor carrying too much weight
  * await applyEncumbrance(actor.system);
@@ -48,35 +49,54 @@ export async function _postUpdate(system) {
 async function applyEncumbrance(system) {
   const actor = system.parent;
   const level = system.encumbranceLevel || 0;
-  const statuses = ["encumbered", "slowed", "immobilized"];
-  for (let i = 0; i < statuses.length; i++) {
-    const status = statuses[i];
-    const active = level > i;
-    if (actor.statuses.has(status) !== active) {
-      await actor.toggleStatusEffect(status, { active });
+  const maxLevel = 3;
+
+  const wantedEffects = [];
+  const unwantedEffects = [];
+
+  for (let i = 1; i <= maxLevel; i++) {
+    const effectData = encumbranceData[`level${i}`];
+    if (level >= i) {
+      wantedEffects.push(effectData);
+    } else {
+      unwantedEffects.push(effectData);
+    }
+  }
+
+  for (const wanted of wantedEffects) {
+    const effect = actor.effects.getName(wanted.name);
+    if (!effect) {
+      await actor.createEmbeddedDocuments("ActiveEffect", [wanted]);
+    }
+  }
+
+  for (const unwanted of unwantedEffects) {
+    const effect = actor.effects.getName(unwanted.name);
+    if (effect) {
+      await effect.delete();
     }
   }
 }
 
 /**
  * Prepares and updates all tokens associated with the actor.
- * 
+ *
  * This function performs two main token maintenance tasks:
- * 
+ *
  * 1. **Size Synchronization**: Updates token dimensions to match the actor's
  *    named size (Tiny, Small, Medium, Large, Huge, Gargantuan, Colossal)
  * 2. **Vision Mode Updates**: Sets the appropriate vision mode based on whether
  *    the actor has the "ethereal" status effect
- * 
+ *
  * Vision modes are set to "ethereal" for ethereal actors, "basic" for others.
- * 
+ *
  * Relevant wiki pages:
  * - [Token Sizes](https://wiki.teriock.com/index.php/Core:Size)
  * - [Vision Modes](https://wiki.teriock.com/index.php/Condition:Ethereal)
- * 
+ *
  * @param {TeriockBaseActorData} system - The actor's base data system object
  * @returns {Promise<void>} Resolves when all tokens are updated
- * 
+ *
  * @example
  * // Update all tokens for an actor that changed size or ethereal status
  * await prepareTokens(actor.system);
@@ -111,15 +131,15 @@ async function prepareTokens(system) {
 
 /**
  * If a creature is ethereal and down, it is killed.
- * 
+ *
  * Relevant wiki pages:
  * - [Ethereal](https://wiki.teriock.com/index.php/Condition:Ethereal)
  * - [Down](https://wiki.teriock.com/index.php/Condition:Down)
  * - [Dead](https://wiki.teriock.com/index.php/Condition:Dead)
- * 
+ *
  * @param {TeriockBaseActorData} system - The actor's base data system object
  * @returns {Promise<void>} Resolves when death status is applied (if applicable)
- * 
+ *
  * @example
  * // Check if an ethereal creature should be killed due to being down
  * await etherealKill(actor.system);
@@ -138,10 +158,10 @@ async function etherealKill(system) {
 
 /**
  * Checks and processes expiration for all effects on the actor.
- * 
+ *
  * @param {TeriockBaseActorData} system - The actor's base data system object
  * @returns {Promise<void>} Resolves when all expiration checks are complete
- * 
+ *
  * @example
  * // Check for expired effects on an actor
  * await checkExpirations(actor.system);

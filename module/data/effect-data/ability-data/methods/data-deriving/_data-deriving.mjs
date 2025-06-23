@@ -1,4 +1,4 @@
-/** @import TeriockAbilityData from "../ability-data.mjs" */
+/** @import TeriockAbilityData from "../../ability-data.mjs" */
 
 /**
  * Poor workaround to allow for children to be accessible for effect duplication.

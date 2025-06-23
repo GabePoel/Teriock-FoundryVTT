@@ -9,7 +9,7 @@ export interface TeriockDerivedActorData {
   encumbranceLevel: number;
   /** The named size category (Tiny, Small, Medium, Large, Huge, Gargantuan, Colossal) */
   namedSize: string;
-  
+
   // Level-based bonuses
   /** Presence bonus derived from level */
   pres: number;
@@ -19,7 +19,7 @@ export interface TeriockDerivedActorData {
   p: number;
   /** Fluency bonus derived from level */
   f: number;
-  
+
   // Attribute saves (base attribute + bonus)
   /** Intelligence save value */
   intSave: number;
@@ -33,13 +33,13 @@ export interface TeriockDerivedActorData {
   strSave: number;
   /** Unpresence save value */
   unpSave: number;
-  
+
   // Presence management
   /** Used presence points */
   usp: number;
   /** Unused presence points */
   unp: number;
-  
+
   // Combat calculations
   /** Armor value (highest of equipped armor or natural armor) */
   av: number;
@@ -55,17 +55,17 @@ export interface TeriockDerivedActorData {
   primaryBlocker: any | null;
   /** Primary attacking equipment */
   primaryAttacker: any | null;
-  
+
   // Load and weight
   /** Total weight carried by the actor */
   weightCarried: number;
   /** Weight of carried money */
   moneyWeight: number;
-  
+
   // Speed adjustments
   /** Speed adjustments object with non-negative values */
   speedAdjustments: Record<string, number>;
-  
+
   // Enhanced sheet data
   sheet: SheetData & {
     /** Die box display for hit and mana dice */

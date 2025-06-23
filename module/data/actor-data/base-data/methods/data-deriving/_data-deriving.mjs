@@ -8,11 +8,11 @@ import { _prepareTradecrafts } from "./_prepare-tradecrafts.mjs";
 
 /**
  * Prepares all derived system data from base data.
- * 
+ *
  * This function orchestrates the calculation of all derived properties that depend
  * on base data, equipment, and other factors. It ensures that all computed values
  * are up-to-date and consistent.
- * 
+ *
  * The derived data includes:
  * - Level-based bonuses (pres, rank, p, f)
  * - Attribute saves (intSave, movSave, etc.)
@@ -21,10 +21,10 @@ import { _prepareTradecrafts } from "./_prepare-tradecrafts.mjs";
  * - Token size and vision information
  * - Presence management
  * - Speed adjustments
- * 
+ *
  * @param {TeriockBaseActorData} system - The actor's base data system object
  * @returns {void} Modifies the system object in place with derived data
- * 
+ *
  * @example
  * // Calculate all derived data for an actor
  * _prepareDerivedData(actor.system);

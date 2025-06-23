@@ -25,7 +25,12 @@ declare module "./base-data.mjs" {
       unp: AttributeData;
     };
     /** Movement speed */
-    movementSpeed: number;
+    movementSpeed: {
+      /** Base movement speed */
+      base: number;
+      /** Current movement speed */
+      value: number;
+    };
     /** Carrying capacity */
     carryingCapacity: {
       /** Light carrying capacity */
