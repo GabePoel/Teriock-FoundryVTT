@@ -335,11 +335,11 @@ export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorShee
   }
 
   _getFilteredEquipment(equipment = []) {
-    return _filterEquipment(this.actor, equipment);
+    return _filterEquipment(this.actor, equipment, this.settings.equipmentFilters);
   }
 
   _getFilteredAbilities(abilities = []) {
-    return _filterAbilities(this.actor, abilities);
+    return _filterAbilities(this.actor, abilities, this.settings.abilityFilters);
   }
 
   /** @override */
@@ -538,6 +538,68 @@ export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorShee
     this.#initSearchFilters();
     this.element.querySelectorAll(".tcard-search").forEach((input) => {
       input.value = this[`_${input.dataset.type}SearchValue`];
+    });
+
+    // Add listeners for filter selects
+    this.element.querySelectorAll('select[name^="settings.abilityFilters"], select[name^="settings.equipmentFilters"]').forEach((el) => {
+      el.addEventListener("change", (e) => {
+        const name = e.target.name;
+        if (!name) return;
+        const path = name.split(".").slice(1); // remove 'settings'
+        let obj = this.settings;
+        for (let i = 0; i < path.length - 1; i++) {
+          obj = obj[path[i]];
+        }
+        obj[path[path.length - 1]] = e.target.value;
+        this.render();
+      });
+    });
+
+    // Add listeners for tswitch buttons
+    this.element.querySelectorAll('button[data-action="toggleSwitch"]').forEach((el) => {
+      // Left click: forward cycle
+      el.addEventListener("click", (e) => {
+        const name = el.getAttribute("data-name");
+        if (!name) return;
+        const path = name.split(".").slice(1); // remove 'settings'
+        let obj = this.settings;
+        for (let i = 0; i < path.length - 1; i++) {
+          obj = obj[path[i]];
+        }
+        // Three-way toggle: 0 -> 1 -> -1 -> 0
+        const key = path[path.length - 1];
+        let val = obj[key];
+        if (val == 0) {
+          obj[key] = 1;
+        } else if (val == 1) {
+          obj[key] = -1;
+        } else {
+          obj[key] = 0;
+        }
+        this.render();
+      });
+      // Right click: reverse cycle
+      el.addEventListener("contextmenu", (e) => {
+        e.preventDefault();
+        const name = el.getAttribute("data-name");
+        if (!name) return;
+        const path = name.split(".").slice(1); // remove 'settings'
+        let obj = this.settings;
+        for (let i = 0; i < path.length - 1; i++) {
+          obj = obj[path[i]];
+        }
+        // Reverse three-way toggle: 0 -> -1 -> 1 -> 0
+        const key = path[path.length - 1];
+        let val = obj[key];
+        if (val == 0) {
+          obj[key] = -1;
+        } else if (val == -1) {
+          obj[key] = 1;
+        } else {
+          obj[key] = 0;
+        }
+        this.render();
+      });
     });
   }
 

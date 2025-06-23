@@ -22,11 +22,10 @@ function propertyFilter(filterVal, document) {
   return false;
 }
 
-export function _filterAbilities(actor, abilities) {
+export function _filterAbilities(actor, abilities, filters = {}) {
   if (!abilities || !Array.isArray(abilities) || abilities.length === 0) {
     return [];
   }
-  const filters = actor.system.sheet.abilityFilters || {};
   abilities = abilities.filter(
     (i) =>
       binaryFilter(filters.basic, i.system.basic) &&
@@ -48,19 +47,19 @@ export function _filterAbilities(actor, abilities) {
       (!filters.maneuver || i.system.maneuver === filters.maneuver) &&
       (!filters.interaction || i.system.interaction === filters.interaction) &&
       (!filters.delivery || i.system.delivery.base === filters.delivery) &&
+      (!filters.piercing || i.system.piercing === filters.piercing) &&
       (!filters.target || (i.system.targets || []).includes(filters.target)) &&
       (!filters.powerSource || (i.system.powerSources || []).includes(filters.powerSource)) &&
       (!filters.element || (i.system.elements || []).includes(filters.element)) &&
-      (!filters.effects || filters.effects.every((e) => i.system.effects.includes(e))),
+      (!filters.effects || (i.system.effects || []).some((e) => filters.effects.includes(e))),
   );
   return abilities;
 }
 
-export function _filterEquipment(actor, equipment) {
+export function _filterEquipment(actor, equipment, filters = {}) {
   if (!equipment || !Array.isArray(equipment) || equipment.length === 0) {
     return [];
   }
-  const filters = actor.system.sheet.equipmentFilters || {};
   equipment = equipment.filter(
     (i) =>
       propertyFilter(filters.properties, i) &&

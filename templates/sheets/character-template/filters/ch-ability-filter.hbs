@@ -1,192 +1,203 @@
 <div class="tgrid g4">
   <div class="tgrid-item gi2">
     <select
-      name="system.sheet.abilityFilters.maneuver"
+      name="settings.abilityFilters.maneuver"
       id="{{concat uuid '.' 'maneuver'}}"
     >
       <option value="">Maneuver</option>
       {{selectOptions
       config.abilityOptions.maneuver
-      selected=system.sheet.abilityFilters.maneuver
+      selected=settings.abilityFilters.maneuver
       }}
     </select>
   </div>
   <div class="tgrid-item gi2">
     <select
-      name="system.sheet.abilityFilters.interaction"
+      name="settings.abilityFilters.interaction"
       id="{{concat uuid '.' 'interaction'}}"
     >
       <option value="">Interaction</option>
       {{selectOptions
       config.abilityOptions.interaction
-      selected=system.sheet.abilityFilters.interaction
+      selected=settings.abilityFilters.interaction
       }}
     </select>
   </div>
   <div class="tgrid-item gi2">
     <select
-      name="system.sheet.abilityFilters.delivery"
+      name="settings.abilityFilters.delivery"
       id="{{concat uuid '.' 'delivery'}}"
     >
       <option value="">Delivery</option>
       {{selectOptions
       config.abilityOptions.delivery
-      selected=system.sheet.abilityFilters.delivery
+      selected=settings.abilityFilters.delivery
       }}
     </select>
   </div>
   <div class="tgrid-item gi2">
     <select
-      name="system.sheet.abilityFilters.target"
+      name="settings.abilityFilters.target"
       id="{{concat uuid '.' 'target'}}"
     >
       <option value="">Target</option>
       {{selectOptions
       config.abilityOptions.targets
-      selected=system.sheet.abilityFilters.target
+      selected=settings.abilityFilters.target
       }}
     </select>
   </div>
   <div class="tgrid-item gi2">
     <select
-      name="system.sheet.abilityFilters.powerSource"
+      name="settings.abilityFilters.piercing"
+      id="{{concat uuid '.' 'piercing'}}"
+    >
+      <option value="" {{#unless settings.abilityFilters.piercing}}selected{{/unless}}>Piercing</option>
+      <option value="normal" {{#if (eq settings.abilityFilters.piercing "normal")}}selected{{/if}}>Normal</option>
+      <option value="av0" {{#if (eq settings.abilityFilters.piercing "av0")}}selected{{/if}}>AV0</option>
+      <option value="ub" {{#if (eq settings.abilityFilters.piercing "ub")}}selected{{/if}}>UB</option>
+    </select>
+  </div>
+  <div class="tgrid-item gi2">
+    <select
+      name="settings.abilityFilters.powerSource"
       id="{{concat uuid '.' 'powerSource'}}"
     >
       <option value="">Power Source</option>
       {{selectOptions
       config.abilityOptions.powerSources
-      selected=system.sheet.abilityFilters.powerSource
+      selected=settings.abilityFilters.powerSource
       }}
     </select>
   </div>
   <div class="tgrid-item gi2">
     <select
-      name="system.sheet.abilityFilters.element"
+      name="settings.abilityFilters.element"
       id="{{concat uuid '.' 'element'}}"
     >
       <option value="">Element</option>
       {{selectOptions
       config.abilityOptions.elements
-      selected=system.sheet.abilityFilters.element
+      selected=settings.abilityFilters.element
       }}
     </select>
   </div>
-  <div class="tgrid-item gi4">
-    <multi-select
-      name="system.sheet.abilityFilters.effects"
+  <div class="tgrid-item gi2">
+    <select
+      name="settings.abilityFilters.effects"
       id="{{concat uuid '.' 'effects'}}"
-      placeholder="Effects"
     >
+      <option value="">Effects</option>
       {{selectOptions
       config.abilityOptions.effects
-      selected=system.sheet.abilityFilters.effects
+      selected=settings.abilityFilters.effects
       }}
-    </multi-select>
+    </select>
   </div>
   <div class="tgrid-item">
     <label for="{{concat uuid '.' 'basic'}}">Basic</label>
     {{tswitch
     id=(concat uuid "." "basic")
-    name="system.sheet.abilityFilters.basic"
+    name="settings.abilityFilters.basic"
     }}
   </div>
   <div class="tgrid-item">
     <label for="{{concat uuid '.' 'standard'}}">Standard</label>
     {{tswitch
     id=(concat uuid "." "standard")
-    name="system.sheet.abilityFilters.standard"
+    name="settings.abilityFilters.standard"
     }}
   </div>
   <div class="tgrid-item">
     <label for="{{concat uuid '.' 'skill'}}">Skill</label>
     {{tswitch
     id=(concat uuid "." "skill")
-    name="system.sheet.abilityFilters.skill"
+    name="settings.abilityFilters.skill"
     }}
   </div>
   <div class="tgrid-item">
     <label for="{{concat uuid '.' 'spell'}}">Spell</label>
     {{tswitch
     id=(concat uuid "." "spell")
-    name="system.sheet.abilityFilters.spell"
+    name="settings.abilityFilters.spell"
     }}
   </div>
   <div class="tgrid-item">
     <label for="{{concat uuid '.' 'ritual'}}">Ritual</label>
     {{tswitch
     id=(concat uuid "." "ritual")
-    name="system.sheet.abilityFilters.ritual"
+    name="settings.abilityFilters.ritual"
     }}
   </div>
   <div class="tgrid-item">
     <label for="{{concat uuid '.' 'rotator'}}">Rotator</label>
     {{tswitch
     id=(concat uuid "." "rotator")
-    name="system.sheet.abilityFilters.rotator"
+    name="settings.abilityFilters.rotator"
     }}
   </div>
   <div class="tgrid-item">
     <label for="{{concat uuid '.' 'heightened'}}">Heightenable</label>
     {{tswitch
     id=(concat uuid "." "heightened")
-    name="system.sheet.abilityFilters.heightened"
+    name="settings.abilityFilters.heightened"
     }}
   </div>
   <div class="tgrid-item">
     <label for="{{concat uuid '.' 'expansion'}}">Expanding</label>
     {{tswitch
     id=(concat uuid "." "expansion")
-    name="system.sheet.abilityFilters.expansion"
+    name="settings.abilityFilters.expansion"
     }}
   </div>
   <div class="tgrid-item">
     <label for="{{concat uuid '.' 'verbal'}}">Verbal</label>
     {{tswitch
     id=(concat uuid "." "verbal")
-    name="system.sheet.abilityFilters.verbal"
+    name="settings.abilityFilters.verbal"
     }}
   </div>
   <div class="tgrid-item">
     <label for="{{concat uuid '.' 'somatic'}}">Somatic</label>
     {{tswitch
     id=(concat uuid "." "somatic")
-    name="system.sheet.abilityFilters.somatic"
+    name="settings.abilityFilters.somatic"
     }}
   </div>
   <div class="tgrid-item">
     <label for="{{concat uuid '.' 'material'}}">Material</label>
     {{tswitch
     id=(concat uuid "." "material")
-    name="system.sheet.abilityFilters.material"
+    name="settings.abilityFilters.material"
     }}
   </div>
   <div class="tgrid-item">
     <label for="{{concat uuid '.' 'invoked'}}">Invoked</label>
     {{tswitch
     id=(concat uuid "." "invoked")
-    name="system.sheet.abilityFilters.invoked"
+    name="settings.abilityFilters.invoked"
     }}
   </div>
   <div class="tgrid-item">
     <label for="{{concat uuid '.' 'hp'}}">Hit Cost</label>
-    {{tswitch id=(concat uuid "." "hp") name="system.sheet.abilityFilters.hp"}}
+    {{tswitch id=(concat uuid "." "hp") name="settings.abilityFilters.hp"}}
   </div>
   <div class="tgrid-item">
     <label for="{{concat uuid '.' 'mp'}}">Mana Cost</label>
-    {{tswitch id=(concat uuid "." "mp") name="system.sheet.abilityFilters.mp"}}
+    {{tswitch id=(concat uuid "." "mp") name="settings.abilityFilters.mp"}}
   </div>
   <div class="tgrid-item">
     <label for="{{concat uuid '.' 'broken'}}">Break Cost</label>
     {{tswitch
     id=(concat uuid "." "broken")
-    name="system.sheet.abilityFilters.broken"
+    name="settings.abilityFilters.broken"
     }}
   </div>
   <div class="tgrid-item">
     <label for="{{concat uuid '.' 'sustained'}}">Sustained</label>
     {{tswitch
     id=(concat uuid "." "sustained")
-    name="system.sheet.abilityFilters.sustained"
+    name="settings.abilityFilters.sustained"
     }}
   </div>
 </div>

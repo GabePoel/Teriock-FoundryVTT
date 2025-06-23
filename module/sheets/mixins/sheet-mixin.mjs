@@ -29,7 +29,7 @@ export const TeriockSheet = (Base) =>
         createResource: this._createResource,
         createProperty: this._createProperty,
         createFluency: this._createFluency,
-        toggleSwitch: this._toggleSwitch,
+        // toggleSwitch: this._toggleSwitch,
       },
       form: { submitOnChange: true, closeOnSubmit: false },
       window: { resizable: true },
@@ -443,11 +443,11 @@ export const TeriockSheet = (Base) =>
       this.render();
     }
 
-    static async _toggleSwitch(event, target) {
-      const { name, value } = target.dataset;
-      const newValue = value == 0 ? 1 : value == 1 ? -1 : 0;
-      this.document.update({ [name]: newValue });
-    }
+    // static async _toggleSwitch(event, target) {
+    //   const { name, value } = target.dataset;
+    //   const newValue = value == 0 ? 1 : value == 1 ? -1 : 0;
+    //   this.document.update({ [name]: newValue });
+    // }
 
     static async _createAbility(event, __) {
       await createEffects.createAbility(this.document, null);
