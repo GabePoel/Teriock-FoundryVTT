@@ -290,6 +290,78 @@ export async function _parse(abilityData, rawHTML) {
   delete parameters.parentId;
   delete parameters.childIds;
 
+  // --- Dice extraction for applies fields ---
+  // Helper to extract dice info from HTML content
+  function extractDiceFromHTML(html) {
+    const tempDiv = document.createElement("div");
+    tempDiv.innerHTML = html || "";
+    const dice = {};
+    tempDiv.querySelectorAll(".dice").forEach((el) => {
+      const type = el.dataset.type;
+      const fullRoll = el.dataset.fullRoll;
+      if (type && type !== "none" && fullRoll) {
+        dice[type] = fullRoll;
+      }
+    });
+    return dice;
+  }
+
+  // Ensure applies exists and is initialized
+  if (!parameters.applies) {
+    parameters.applies = {
+      base: { rolls: {}, statuses: [], hacks: {}, duration: 0, changes: [] },
+      proficient: { rolls: {}, statuses: [], hacks: {}, duration: 0, changes: [] },
+      fluent: { rolls: {}, statuses: [], hacks: {}, duration: 0, changes: [] },
+      heightened: { rolls: {}, statuses: [], hacks: {}, duration: 0, changes: [] },
+    };
+  }
+
+  // Extract dice from overviews
+  const overviewDiceBase = extractDiceFromHTML(parameters.overview.base);
+  const overviewDiceProficient = extractDiceFromHTML(parameters.overview.proficient);
+  const overviewDiceFluent = extractDiceFromHTML(parameters.overview.fluent);
+  const overviewDiceHeightened = extractDiceFromHTML(parameters.heightened);
+  if (Object.keys(overviewDiceBase).length) Object.assign(parameters.applies.base.rolls, overviewDiceBase);
+  if (Object.keys(overviewDiceProficient).length) {
+    Object.assign(parameters.applies.proficient.rolls, overviewDiceProficient);
+  }
+  if (Object.keys(overviewDiceFluent).length) {
+    Object.assign(parameters.applies.fluent.rolls, overviewDiceFluent);
+  }
+  if (Object.keys(overviewDiceHeightened).length) {
+    Object.assign(parameters.applies.heightened.rolls, overviewDiceHeightened);
+  }
+
+  // Extract dice from results for applies.base
+  function extractDiceFromResultBar(barText) {
+    const tempDiv = document.createElement("div");
+    tempDiv.innerHTML = barText || "";
+    const dice = {};
+    tempDiv.querySelectorAll(".dice").forEach((el) => {
+      const type = el.dataset.type;
+      const fullRoll = el.dataset.fullRoll;
+      if (type && type !== "none" && fullRoll) {
+        dice[type] = fullRoll;
+      }
+    });
+    return dice;
+  }
+
+  // Only process hit and fail/save as per instructions
+  let resultDice = {};
+  if (parameters.results.hit) {
+    Object.assign(resultDice, extractDiceFromResultBar(parameters.results.hit));
+  }
+  // For feat abilities, use fail; for block abilities, use save
+  if (parameters.interaction === "feat" && parameters.results.fail) {
+    Object.assign(resultDice, extractDiceFromResultBar(parameters.results.fail));
+  } else if (parameters.interaction === "block" && parameters.results.save) {
+    Object.assign(resultDice, extractDiceFromResultBar(parameters.results.save));
+  }
+  if (Object.keys(resultDice).length) {
+    Object.assign(parameters.applies.base.rolls, resultDice);
+  }
+
   const applications = _override(abilityData.parent.name);
   if (applications) {
     parameters.applies = applications;
@@ -301,41 +373,39 @@ export async function _parse(abilityData, rawHTML) {
   else if (parameters.skill) img = "systems/teriock/assets/skill.svg";
   if (parameters.class) img = `systems/teriock/assets/classes/${parameters.class}.svg`;
 
-  if (parameters.maneuver === "passive") {
-    for (const el of subs) {
-      console.log(el);
-      const subNameEl = el.querySelector(".ability-sub-name");
-      const namespace = subNameEl?.getAttribute("data-namespace");
-      if (namespace === "Ability") {
-        const subName = subNameEl.getAttribute("data-name");
-        console.log(subName);
-        const subAbility = await createAbility(abilityData.parent, subName, { notify: false });
-        const limitation = el.querySelector(".limited-modifier");
-        const improvement = el.querySelector(".improvement-modifier");
-        let limitationText = "";
-        let improvementText = "";
-        let newName = subName;
-        if (improvement) {
-          newName = "Improved " + subName;
-          const improvementSpan = improvement.querySelector(".improvement-text");
-          if (improvementSpan) {
-            improvementText = improvementSpan.textContent.trim();
-          }
+  for (const el of subs) {
+    console.log(el);
+    const subNameEl = el.querySelector(".ability-sub-name");
+    const namespace = subNameEl?.getAttribute("data-namespace");
+    if (namespace === "Ability") {
+      const subName = subNameEl.getAttribute("data-name");
+      console.log(subName);
+      const subAbility = await createAbility(abilityData.parent, subName, { notify: false });
+      const limitation = el.querySelector(".limited-modifier");
+      const improvement = el.querySelector(".improvement-modifier");
+      let limitationText = "";
+      let improvementText = "";
+      let newName = subName;
+      if (improvement) {
+        newName = "Improved " + subName;
+        const improvementSpan = improvement.querySelector(".improvement-text");
+        if (improvementSpan) {
+          improvementText = improvementSpan.textContent.trim();
         }
-        if (limitation) {
-          newName = "Limited " + newName;
-          const limitationSpan = limitation.querySelector(".limitation-text");
-          if (limitationSpan) {
-            limitationText = limitationSpan.textContent.trim();
-          }
+      }
+      if (limitation) {
+        newName = "Limited " + newName;
+        const limitationSpan = limitation.querySelector(".limitation-text");
+        if (limitationSpan) {
+          limitationText = limitationSpan.textContent.trim();
         }
-        if (limitationText || improvementText) {
-          await subAbility.update({
-            name: newName,
-            "system.improvement": improvementText,
-            "system.limitation": limitationText,
-          });
-        }
+      }
+      if (limitationText || improvementText) {
+        await subAbility.update({
+          name: newName,
+          "system.improvement": improvementText,
+          "system.limitation": limitationText,
+        });
       }
     }
   }

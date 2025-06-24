@@ -5,6 +5,286 @@
   <div class="ab-consequences" style="padding: 1rem; width: 100%; height: 100%;">
     <div class="ab-consequences-config" style="display: flex; flex-direction: column; gap: 1rem;">
       <fieldset class="form-group" style="flex-direction: column;">
+        <legend>Base Consequences</legend>
+        {{formGroup
+        systemFields.applies.fields.base.fields.rolls
+        value=system.applies.base.rolls
+        choices=config.consequenceOptions.rolls
+        }}
+        {{#each system.applies.base.rolls as |value key|}}
+        <div class="form-group" style="width: 100%;">
+          <label class="tsubtle">{{lookup ../config.consequenceOptions.rolls key}}</label>
+          {{formInput
+          ../systemFields.applies.fields.base.fields.rolls.element
+          value=value
+          name=(concat "system.applies.base.rolls." key)
+          classes="teriock-update-input"
+          }}
+        </div>
+        {{/each}}
+        {{formGroup
+        systemFields.applies.fields.base.fields.statuses
+        value=system.applies.base.statuses
+        choices=config.consequenceOptions.statuses
+        classes="teriock-full-width"
+        }}
+        <!-- Base Changes UI -->
+        <div class="changes-container tgrid g12" style="margin-top: 0.5em;">
+          <div class="change-box tgrid-item gi4" style="justify-content: start;">
+            <div class="change-key">Change Key</div>
+          </div>
+          <div class="change-box tgrid-item gi3" style="justify-content: start;">
+            <div class="change-mode">Mode</div>
+          </div>
+          <div class="change-box tgrid-item gi2" style="justify-content: start;">
+            <div class="change-value">Value</div>
+          </div>
+          <div class="change-box tgrid-item gi2" style="justify-content: start;">
+            <div class="change-priority">Priority</div>
+          </div>
+          <div class="change-box tgrid-item gi1" style="justify-content: center;">
+            <a class="add-change-button" style="display: flex; justify-content: center; align-items: center;" data-action="addChange" data-tooltip="Add Change" data-application="base" {{#if (not editable)}}disabled="true"{{/if}}>
+              <i class="fa-solid fa-square-plus"></i>
+            </a>
+          </div>
+          {{#each system.applies.base.changes as |change i|}}
+          <div class="change-box tgrid-item gi4">
+            <div class="change-box">
+              <input class="change-box-entry" type="text" data-index="{{i}}" data-application="base" data-key="key" value="{{change.key}}" {{#if (not ../editable)}}disabled="true"{{/if}} />
+            </div>
+          </div>
+          <div class="change-box tgrid-item gi3">
+            <select class="change-box-entry" data-index="{{i}}" data-application="base" data-key="mode" {{#if (not ../editable)}}disabled="true"{{/if}} >
+              <option value="0" {{#if (eq change.mode 0)}}selected{{/if}}>Custom</option>
+              <option value="1" {{#if (eq change.mode 1)}}selected{{/if}}>Multiply</option>
+              <option value="2" {{#if (eq change.mode 2)}}selected{{/if}}>Add</option>
+              <option value="3" {{#if (eq change.mode 3)}}selected{{/if}}>Downgrade</option>
+              <option value="4" {{#if (eq change.mode 4)}}selected{{/if}}>Upgrade</option>
+              <option value="5" {{#if (eq change.mode 5)}}selected{{/if}}>Override</option>
+            </select>
+          </div>
+          <div class="change-box tgrid-item gi2">
+            <input class="change-box-entry" type="text" data-index="{{i}}" data-application="base" data-key="value" value="{{change.value}}" {{#if (not ../editable)}}disabled="true"{{/if}} />
+          </div>
+          <div class="change-box tgrid-item gi2">
+            <input class="change-box-entry" type="number" data-index="{{i}}" data-application="base" data-key="priority" value="{{change.priority}}" {{#if (not ../editable)}}disabled="true"{{/if}} />
+          </div>
+          <div class="change-box tgrid-item gi1" style="justify-content: center;">
+            <a class="delete-change-button" style="display: flex; justify-content: center; align-items: center;" data-action="deleteChange" data-tooltip="Delete Change" data-index="{{i}}" data-application="base" {{#if (not editable)}}disabled="true"{{/if}}>
+              <i class="fa-solid fa-trash"></i>
+            </a>
+          </div>
+          {{/each}}
+        </div>
+      </fieldset>
+      <fieldset class="form-group" style="flex-direction: column;">
+        <legend>Heightened Consequences</legend>
+        {{formGroup
+        systemFields.applies.fields.heightened.fields.rolls
+        value=system.applies.heightened.rolls
+        choices=config.consequenceOptions.rolls
+        }}
+        {{#each system.applies.heightened.rolls as |value key|}}
+        <div class="form-group" style="width: 100%;">
+          <label class="tsubtle">{{lookup ../config.consequenceOptions.rolls key}}</label>
+          {{formInput
+          ../systemFields.applies.fields.heightened.fields.rolls.element
+          value=value
+          name=(concat "system.applies.heightened.rolls." key)
+          classes="teriock-update-input"
+          }}
+        </div>
+        {{/each}}
+        <!-- Heightened Changes UI -->
+        <div class="changes-container tgrid g12" style="margin-top: 0.5em;">
+          <div class="change-box tgrid-item gi4" style="justify-content: start;">
+            <div class="change-key">Change Key</div>
+          </div>
+          <div class="change-box tgrid-item gi3" style="justify-content: start;">
+            <div class="change-mode">Mode</div>
+          </div>
+          <div class="change-box tgrid-item gi2" style="justify-content: start;">
+            <div class="change-value">Value</div>
+          </div>
+          <div class="change-box tgrid-item gi2" style="justify-content: start;">
+            <div class="change-priority">Priority</div>
+          </div>
+          <div class="change-box tgrid-item gi1" style="justify-content: center;">
+            <a class="add-change-button" style="display: flex; justify-content: center; align-items: center;" data-action="addChange" data-tooltip="Add Change" data-application="heightened" {{#if (not editable)}}disabled="true"{{/if}}>
+              <i class="fa-solid fa-square-plus"></i>
+            </a>
+          </div>
+          {{#each system.applies.heightened.changes as |change i|}}
+          <div class="change-box tgrid-item gi4">
+            <div class="change-box">
+              <input class="change-box-entry" type="text" data-index="{{i}}" data-application="heightened" data-key="key" value="{{change.key}}" {{#if (not ../editable)}}disabled="true"{{/if}} />
+            </div>
+          </div>
+          <div class="change-box tgrid-item gi3">
+            <select class="change-box-entry" data-index="{{i}}" data-application="heightened" data-key="mode" {{#if (not ../editable)}}disabled="true"{{/if}} >
+              <option value="0" {{#if (eq change.mode 0)}}selected{{/if}}>Custom</option>
+              <option value="1" {{#if (eq change.mode 1)}}selected{{/if}}>Multiply</option>
+              <option value="2" {{#if (eq change.mode 2)}}selected{{/if}}>Add</option>
+              <option value="3" {{#if (eq change.mode 3)}}selected{{/if}}>Downgrade</option>
+              <option value="4" {{#if (eq change.mode 4)}}selected{{/if}}>Upgrade</option>
+              <option value="5" {{#if (eq change.mode 5)}}selected{{/if}}>Override</option>
+            </select>
+          </div>
+          <div class="change-box tgrid-item gi2">
+            <input class="change-box-entry" type="text" data-index="{{i}}" data-application="heightened" data-key="value" value="{{change.value}}" {{#if (not ../editable)}}disabled="true"{{/if}} />
+          </div>
+          <div class="change-box tgrid-item gi2">
+            <input class="change-box-entry" type="number" data-index="{{i}}" data-application="heightened" data-key="priority" value="{{change.priority}}" {{#if (not ../editable)}}disabled="true"{{/if}} />
+          </div>
+          <div class="change-box tgrid-item gi1" style="justify-content: center;">
+            <a class="delete-change-button" style="display: flex; justify-content: center; align-items: center;" data-action="deleteChange" data-tooltip="Delete Change" data-index="{{i}}" data-application="heightened" {{#if (not ../editable)}}disabled="true"{{/if}}>
+              <i class="fa-solid fa-trash"></i>
+            </a>
+          </div>
+          {{/each}}
+        </div>
+      </fieldset>
+      <fieldset class="form-group" style="flex-direction: column;">
+        <legend>Proficient Consequences</legend>
+        {{formGroup
+        systemFields.applies.fields.proficient.fields.rolls
+        value=system.applies.proficient.rolls
+        choices=config.consequenceOptions.rolls
+        }}
+        {{#each system.applies.proficient.rolls as |value key|}}
+        <div class="form-group" style="width: 100%;">
+          <label class="tsubtle">{{lookup ../config.consequenceOptions.rolls key}}</label>
+          {{formInput
+          ../systemFields.applies.fields.proficient.fields.rolls.element
+          value=value
+          name=(concat "system.applies.proficient.rolls." key)
+          classes="teriock-update-input"
+          }}
+        </div>
+        {{/each}}
+        {{formGroup
+        systemFields.applies.fields.proficient.fields.statuses
+        value=system.applies.proficient.statuses
+        choices=config.consequenceOptions.statuses
+        classes="teriock-full-width"
+        }}
+        <!-- Proficient Changes UI -->
+        <div class="changes-container tgrid g12" style="margin-top: 0.5em;">
+          <div class="change-box tgrid-item gi4" style="justify-content: start;">
+            <div class="change-key">Change Key</div>
+          </div>
+          <div class="change-box tgrid-item gi3" style="justify-content: start;">
+            <div class="change-mode">Mode</div>
+          </div>
+          <div class="change-box tgrid-item gi2" style="justify-content: start;">
+            <div class="change-value">Value</div>
+          </div>
+          <div class="change-box tgrid-item gi2" style="justify-content: start;">
+            <div class="change-priority">Priority</div>
+          </div>
+          <div class="change-box tgrid-item gi1" style="justify-content: center;">
+            <a class="add-change-button" style="display: flex; justify-content: center; align-items: center;" data-action="addChange" data-tooltip="Add Change" data-application="proficient" {{#if (not editable)}}disabled="true"{{/if}}>
+              <i class="fa-solid fa-square-plus"></i>
+            </a>
+          </div>
+          {{#each system.applies.proficient.changes as |change i|}}
+          <div class="change-box tgrid-item gi4">
+            <div class="change-box">
+              <input class="change-box-entry" type="text" data-index="{{i}}" data-application="proficient" data-key="key" value="{{change.key}}" {{#if (not ../editable)}}disabled="true"{{/if}} />
+            </div>
+          </div>
+          <div class="change-box tgrid-item gi3">
+            <select class="change-box-entry" data-index="{{i}}" data-application="proficient" data-key="mode" {{#if (not ../editable)}}disabled="true"{{/if}} >
+              <option value="0" {{#if (eq change.mode 0)}}selected{{/if}}>Custom</option>
+              <option value="1" {{#if (eq change.mode 1)}}selected{{/if}}>Multiply</option>
+              <option value="2" {{#if (eq change.mode 2)}}selected{{/if}}>Add</option>
+              <option value="3" {{#if (eq change.mode 3)}}selected{{/if}}>Downgrade</option>
+              <option value="4" {{#if (eq change.mode 4)}}selected{{/if}}>Upgrade</option>
+              <option value="5" {{#if (eq change.mode 5)}}selected{{/if}}>Override</option>
+            </select>
+          </div>
+          <div class="change-box tgrid-item gi2">
+            <input class="change-box-entry" type="text" data-index="{{i}}" data-application="proficient" data-key="value" value="{{change.value}}" {{#if (not ../editable)}}disabled="true"{{/if}} />
+          </div>
+          <div class="change-box tgrid-item gi2">
+            <input class="change-box-entry" type="number" data-index="{{i}}" data-application="proficient" data-key="priority" value="{{change.priority}}" {{#if (not ../editable)}}disabled="true"{{/if}} />
+          </div>
+          <div class="change-box tgrid-item gi1" style="justify-content: center;">
+            <a class="delete-change-button" style="display: flex; justify-content: center; align-items: center;" data-action="deleteChange" data-tooltip="Delete Change" data-index="{{i}}" data-application="proficient" {{#if (not ../editable)}}disabled="true"{{/if}}>
+              <i class="fa-solid fa-trash"></i>
+            </a>
+          </div>
+          {{/each}}
+        </div>
+      </fieldset>
+      <fieldset class="form-group" style="flex-direction: column;">
+        <legend>Fluent Consequences</legend>
+        {{formGroup
+        systemFields.applies.fields.fluent.fields.rolls
+        value=system.applies.fluent.rolls
+        choices=config.consequenceOptions.rolls
+        }}
+        {{#each system.applies.fluent.rolls as |value key|}}
+        <div class="form-group" style="width: 100%;">
+          <label class="tsubtle">{{lookup ../config.consequenceOptions.rolls key}}</label>
+          {{formInput
+          ../systemFields.applies.fields.fluent.fields.rolls.element
+          value=value
+          name=(concat "system.applies.fluent.rolls." key)
+          classes="teriock-update-input"
+          }}
+        </div>
+        {{/each}}
+        <!-- Fluent Changes UI -->
+        <div class="changes-container tgrid g12" style="margin-top: 0.5em;">
+          <div class="change-box tgrid-item gi4" style="justify-content: start;">
+            <div class="change-key">Change Key</div>
+          </div>
+          <div class="change-box tgrid-item gi3" style="justify-content: start;">
+            <div class="change-mode">Mode</div>
+          </div>
+          <div class="change-box tgrid-item gi2" style="justify-content: start;">
+            <div class="change-value">Value</div>
+          </div>
+          <div class="change-box tgrid-item gi2" style="justify-content: start;">
+            <div class="change-priority">Priority</div>
+          </div>
+          <div class="change-box tgrid-item gi1" style="justify-content: center;">
+            <a class="add-change-button" style="display: flex; justify-content: center; align-items: center;" data-action="addChange" data-tooltip="Add Change" data-application="fluent" {{#if (not editable)}}disabled="true"{{/if}}>
+              <i class="fa-solid fa-square-plus"></i>
+            </a>
+          </div>
+          {{#each system.applies.fluent.changes as |change i|}}
+          <div class="change-box tgrid-item gi4">
+            <div class="change-box">
+              <input class="change-box-entry" type="text" data-index="{{i}}" data-application="fluent" data-key="key" value="{{change.key}}" {{#if (not ../editable)}}disabled="true"{{/if}} />
+            </div>
+          </div>
+          <div class="change-box tgrid-item gi3">
+            <select class="change-box-entry" data-index="{{i}}" data-application="fluent" data-key="mode" {{#if (not ../editable)}}disabled="true"{{/if}} >
+              <option value="0" {{#if (eq change.mode 0)}}selected{{/if}}>Custom</option>
+              <option value="1" {{#if (eq change.mode 1)}}selected{{/if}}>Multiply</option>
+              <option value="2" {{#if (eq change.mode 2)}}selected{{/if}}>Add</option>
+              <option value="3" {{#if (eq change.mode 3)}}selected{{/if}}>Downgrade</option>
+              <option value="4" {{#if (eq change.mode 4)}}selected{{/if}}>Upgrade</option>
+              <option value="5" {{#if (eq change.mode 5)}}selected{{/if}}>Override</option>
+            </select>
+          </div>
+          <div class="change-box tgrid-item gi2">
+            <input class="change-box-entry" type="text" data-index="{{i}}" data-application="fluent" data-key="value" value="{{change.value}}" {{#if (not ../editable)}}disabled="true"{{/if}} />
+          </div>
+          <div class="change-box tgrid-item gi2">
+            <input class="change-box-entry" type="number" data-index="{{i}}" data-application="fluent" data-key="priority" value="{{change.priority}}" {{#if (not ../editable)}}disabled="true"{{/if}} />
+          </div>
+          <div class="change-box tgrid-item gi1" style="justify-content: center;">
+            <a class="delete-change-button" style="display: flex; justify-content: center; align-items: center;" data-action="deleteChange" data-tooltip="Delete Change" data-index="{{i}}" data-application="fluent" {{#if (not ../editable)}}disabled="true"{{/if}}>
+              <i class="fa-solid fa-trash"></i>
+            </a>
+          </div>
+          {{/each}}
+        </div>
+      </fieldset>
+      {{!-- <fieldset class="form-group" style="flex-direction: column;">
         <legend>Add or Remove Consequences</legend>
         {{formGroup
         systemFields.consequences.fields.base
@@ -65,7 +345,7 @@
         </fieldset>
         {{/each}}
       </fieldset>
-      {{/if}}
+      {{/if}} --}}
     </div>
     <button
       class="ab-consequences-close"

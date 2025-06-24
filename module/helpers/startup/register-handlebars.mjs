@@ -565,4 +565,20 @@ export default function registerHandlebarsHelpers() {
       return "duotone fa-regular";
     }
   });
+
+  // Custom Helpers for Button Grid
+  Handlebars.registerHelper("mod", (a, b) => {
+    return a % b;
+  });
+  Handlebars.registerHelper("length", (val) => {
+    if (Array.isArray(val)) return val.length;
+    if (typeof val === "string") return val.length;
+    return 0;
+  });
+  Handlebars.registerHelper("first", (arr) => {
+    return Array.isArray(arr) && arr.length > 0 ? arr[0] : null;
+  });
+  Handlebars.registerHelper("slice", (arr, start) => {
+    return Array.isArray(arr) ? arr.slice(start) : [];
+  });
 }

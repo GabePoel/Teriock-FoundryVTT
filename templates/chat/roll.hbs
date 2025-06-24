@@ -13,31 +13,89 @@
   <div class="teriock-flavor-text">{{flavor}}</div>
   {{/if}}
   <div class="teriock-dice-message">{{{message}}}</div>
-  {{#if (eq formula "0")}}
-  {{else}}
-  <div class="dice-result" style="margin-top: 0.5em;">
+  <div
+    class="dice-result"
+    {{#if (exists targetUuid)}}
+    data-uuid="{{targetUuid}}"
+    {{/if}}
+    {{#if (exists targetName)}}
+    data-name="{{targetName}}"
+    {{/if}}
+  >
     {{#if (not (eq (str formula) (str total)))}}
+    {{#if (or (exists targetImg) (exists targetName))}}
+    <div class="teriock-target-container dice-formula" data-tooltip="Target" {{#if (exists noDice)}}style="margin-bottom: 0;"{{/if}}>
+      {{#if (exists targetImg)}}
+      <div class="teriock-target-img" {{#if (exists targetUuid)}}data-uuid="{{targetUuid}}"{{/if}} data-action="selectTarget">
+        <img src="{{targetImg}}" alt="{{targetName}}"></img>
+      </div>
+      {{/if}}
+      {{#if (exists targetName)}}
+      <h6 class="teriock-target-name">{{targetName}}</h6>
+      {{/if}}
+    </div>
+    {{/if}}
+    {{#if (not (exists noDice))}}
     <div
-      class="dice-formula"
+      class="dice-formula teriock-dice-formula {{#if diceClass}}{{diceClass}}{{/if}}"
       style="word-break: auto-phrase;"
+      {{#if diceTooltip}}
+      data-tooltip="{{diceTooltip}}"
+      {{/if}}
     >
       {{formula}}
     </div>
     {{{tooltip}}}
-    {{/if}}
     <h4
-      class="dice-total teriock-dice-total {{#if diceClass}}{{diceClass}}{{/if}} {{#if (exists threshold)}}{{#if (geq total threshold)}}success{{else}}failure{{/if}}{{/if}}"
-      {{#if diceTooltip}}
-      data-tooltip="{{diceTooltip}}"
+      class="dice-total teriock-dice-total {{#if (exists threshold)}}{{#if (geq total threshold)}}success{{else}}failure{{/if}}{{/if}} {{#if totalClass}}{{totalClass}}{{/if}}"
+      {{#if (exists threshold)}}
+      data-tooltip="{{#if (geq total threshold)}}Success{{else}}Failure{{/if}}"
       {{/if}}
-        {{#if (exists threshold)}}
-          {{#if (geq total threshold)}}
-            data-tooltip="Success"
-          {{else}}
-            data-tooltip="Failure"
-          {{/if}}
-        {{/if}}
       >{{total}}</h4>
+    {{/if}}
+    {{/if}}
+  </div>
+  {{#if (exists buttons)}}
+  <div class="teriock-buttons" style="order: 3; margin-top: 5px;">
+    {{#if (eq (mod (length buttons) 2) 1)}}
+    {{#with (first buttons)}}
+    <button
+      class="teriock-chat-button full-width full-row {{classes}}"
+      data-action="{{action}}"
+      data-data="{{data}}"
+      data-tooltip="{{tooltip}}"
+      data-total="{{../total}}"
+    >
+      <i class="{{icon}}"></i>
+      {{label}}
+    </button>
+    {{/with}}
+    {{#each (slice buttons 1)}}
+    <button
+      class="teriock-chat-button full-width {{classes}}"
+      data-action="{{action}}"
+      data-data="{{data}}"
+      data-tooltip="{{tooltip}}"
+      data-total="{{../total}}"
+    >
+      <i class="{{icon}}"></i>
+      {{label}}
+    </button>
+    {{/each}}
+    {{else}}
+    {{#each buttons}}
+    <button
+      class="teriock-chat-button full-width {{classes}}"
+      data-action="{{action}}"
+      data-data="{{data}}"
+      data-tooltip="{{tooltip}}"
+      data-total="{{../total}}"
+    >
+      <i class="{{icon}}"></i>
+      {{label}}
+    </button>
+    {{/each}}
+    {{/if}}
   </div>
   {{/if}}
 </div>

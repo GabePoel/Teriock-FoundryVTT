@@ -21,15 +21,48 @@
   line-height: 20px;
 }
 
-.teriock-dice-total {
+.teriock-target-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  .teriock-target-img {
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.4));
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+  .teriock-target-name {
+    margin: 0;
+    margin-block: 2px;
+  }
+}
+
+.teriock-dice-formula {
   &.ub {
     background-color: color-mix(in srgb, #c64600, transparent 90%);
   }
+  &.feat {
+    background-color: color-mix(in srgb, #F6D32D, transparent 90%);
+  }
+}
+
+.teriock-dice-total {
   &.success {
     background-color: color-mix(in srgb, #26a269, transparent 90%);
   }
   &.failure {
     background-color: color-mix(in srgb, #a51d2d, transparent 90%);
+  }
+  &.feat {
+    background-color: color-mix(in srgb, #F6D32D, transparent 90%);
   }
 }
 
@@ -185,4 +218,13 @@
       }
     }
   }
+}
+
+.teriock-buttons {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr;
+  gap: 5px;
+}
+.teriock-chat-button.full-row {
+  grid-column: 1 / -1;
 }

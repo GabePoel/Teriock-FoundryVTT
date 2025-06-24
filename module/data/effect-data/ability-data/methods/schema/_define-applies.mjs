@@ -1,4 +1,5 @@
 const { fields } = foundry.data;
+import { consequenceRollsField, consequenceHacksField, consequenceChangesField } from "./_define-consequences.mjs";
 
 /**
  * Creates a field for applies data configuration.
@@ -10,7 +11,6 @@ const { fields } = foundry.data;
  * - **Changes**: Effect changes to target properties
  *
  * @returns {SchemaField} Field for configuring applies data
- * @deprecated This is being phased out in favor of the more robust consequences system.
  *
  * @example
  * // Create applies field
@@ -18,17 +18,19 @@ const { fields } = foundry.data;
  */
 function appliesField() {
   return new fields.SchemaField({
-    statuses: new fields.ArrayField(new fields.StringField()),
-    damage: new fields.ArrayField(new fields.StringField()),
-    drain: new fields.ArrayField(new fields.StringField()),
-    changes: new fields.ArrayField(
-      new fields.SchemaField({
-        key: new fields.StringField({ initial: "" }),
-        mode: new fields.NumberField({ initial: 4 }),
-        value: new fields.StringField({ initial: "" }),
-        priority: new fields.NumberField({ initial: 20 }),
+    statuses: new fields.SetField(
+      new fields.StringField({
+        choices: CONFIG.TERIOCK.conditions,
       }),
+      {
+        label: "Conditions",
+        hint: "The conditions applied as part of the ongoing effect. These are applied to the target.",
+      },
     ),
+    rolls: consequenceRollsField(),
+    hacks: consequenceHacksField(),
+    duration: new fields.NumberField({ initial: 0 }),
+    changes: consequenceChangesField(),
   });
 }
 
@@ -66,6 +68,7 @@ export function _defineApplies(schema) {
     base: appliesField(),
     proficient: appliesField(),
     fluent: appliesField(),
+    heightened: appliesField(),
   });
 
   return schema;

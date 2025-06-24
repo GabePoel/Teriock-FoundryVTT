@@ -18,6 +18,7 @@ import { encumbranceData } from "../../../../content/encumbrance.mjs";
 export async function _postUpdate(system) {
   await applyEncumbrance(system);
   await prepareTokens(system);
+  await checkDown(system);
   await etherealKill(system);
   await checkExpirations(system);
 }
@@ -133,6 +134,40 @@ async function prepareTokens(system) {
     if (token.sight.visionMode !== newVisionMode) {
       await token.updateVisionMode(newVisionMode);
     }
+  }
+}
+
+/**
+ * Checks if the actor should be unconscious or dead and updates the status effects accordingly.
+ *
+ * Relevant wiki pages:
+ * - [Down](https://wiki.teriock.com/index.php/Condition:Down)
+ * - [Dead](https://wiki.teriock.com/index.php/Condition:Dead)
+ * - [Unconscious](https://wiki.teriock.com/index.php/Condition:Unconscious)
+ *
+ * @param {TeriockBaseActorData} system - The actor's base data system object
+ * @returns {Promise<void>} Resolves when the status effects are updated
+ */
+async function checkDown(system) {
+  let shouldBeUnconscious = system.hp.value <= 0 || system.mp.value <= 0;
+  if (system.resistances.effects.has("unconscious")) {
+    shouldBeUnconscious = false;
+  }
+  if (system.immunities.effects.has("unconscious")) {
+    shouldBeUnconscious = false;
+  }
+  let shouldBeDead = system.hp.value <= system.hp.min && system.mp.value <= system.mp.min;
+  if (system.resistances.effects.has("dead")) {
+    shouldBeDead = false;
+  }
+  if (system.immunities.effects.has("dead")) {
+    shouldBeDead = false;
+  }
+  if (shouldBeUnconscious && !shouldBeDead && !system.parent.statuses.has("unconscious")) {
+    await system.parent.toggleStatusEffect("unconscious", { active: true });
+  }
+  if (shouldBeDead && !system.parent.statuses.has("dead")) {
+    await system.parent.toggleStatusEffect("dead", { active: true });
   }
 }
 

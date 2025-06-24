@@ -9,10 +9,12 @@ import { parseTimeString } from "../../../../helpers/utils.mjs";
  * @returns {Promise<TeriockEffect>}
  * @private
  */
-export async function _generateEffect(abilityData, actor) {
+export async function _generateEffect(abilityData, actor, heightenAmount = 0) {
   let changes = abilityData.applies.base.changes || [];
   let statuses = abilityData.applies.base.statuses || [];
   let description = abilityData.overview.base || "";
+  let seconds = parseTimeString(abilityData.duration);
+
   if (abilityData.isProficient) {
     if (abilityData.applies.proficient.changes.length > 0) {
       changes = abilityData.applies.proficient.changes;
@@ -31,7 +33,25 @@ export async function _generateEffect(abilityData, actor) {
     }
     description += abilityData.overview.fluent || "";
   }
-  const seconds = parseTimeString(abilityData.duration);
+  if (heightenAmount > 0) {
+    if (abilityData.applies.heightened.changes.length > 0) {
+      const heightenedChanges = abilityData.applies.heightened.changes;
+      for (const change of heightenedChanges) {
+        change.value = change.value * heightenAmount;
+      }
+      changes = [...changes, ...heightenedChanges];
+    }
+    if (abilityData.applies.heightened.statuses.length > 0) {
+      statuses = abilityData.applies.heightened.statuses;
+      statuses = [...statuses, ...abilityData.applies.heightened.statuses];
+    }
+    description += abilityData.overview.heightened || "";
+    if (abilityData.applies.heightened.duration > 0) {
+      seconds += abilityData.applies.heightened.duration * heightenAmount;
+      seconds = Math.round(seconds / abilityData.applies.heightened.duration) * abilityData.applies.heightened.duration;
+    }
+  }
+
   const condition = {
     value: null,
     present: false,
@@ -59,7 +79,8 @@ export async function _generateEffect(abilityData, actor) {
   if (abilityData.sustained) {
     sustained = true;
   }
-  const effect = {
+
+  const effectData = {
     name: `${abilityData.parent?.name} Effect`,
     type: "effect",
     img: abilityData.parent?.img,
@@ -77,13 +98,56 @@ export async function _generateEffect(abilityData, actor) {
       },
     },
     duration: {
-      seconds: seconds || undefined,
+      seconds: seconds || 0,
     },
   };
-  const existingEffect = actor?.effectTypes?.effect?.find((e) => e.name === effect.name);
-  if (existingEffect) {
-    await existingEffect.delete();
+  if (seconds > 0 || abilityData.duration.toLowerCase().trim() !== "instant") {
+    return effectData;
   }
-  const newEffect = await TeriockEffect.create(effect, { parent: actor });
-  return newEffect;
+  return false;
+}
+
+/**
+ * @param {TeriockAbilityData} abilityData
+ * @param {number} heightenAmount
+ * @returns {Object}
+ * @private
+ */
+export function _generateTakes(abilityData, heightenAmount = 0) {
+  let rolls = abilityData.applies.base.rolls || {};
+  let hacks = abilityData.applies.base.hacks || {};
+
+  if (abilityData.isProficient) {
+    rolls = { ...rolls, ...abilityData.applies.proficient.rolls };
+    hacks = { ...hacks, ...abilityData.applies.proficient.hacks };
+  }
+  if (abilityData.isFluent) {
+    rolls = { ...rolls, ...abilityData.applies.fluent.rolls };
+    hacks = { ...hacks, ...abilityData.applies.fluent.hacks };
+  }
+  if (heightenAmount > 0) {
+    for (const [key, value] of Object.entries(abilityData.applies.heightened.rolls)) {
+      rolls[key] = rolls[key] || "";
+      for (let i = 0; i < heightenAmount; i++) {
+        rolls[key] += `+${value}`;
+        if (rolls[key].trim().startsWith("+")) {
+          rolls[key] = rolls[key].trim().slice(1);
+        }
+      }
+    }
+    for (const [key, value] of Object.entries(abilityData.applies.heightened.hacks)) {
+      hacks[key] = hacks[key] || "";
+      for (let i = 0; i < heightenAmount; i++) {
+        hacks[key] += `+${value}`;
+        if (hacks[key].trim().startsWith("+")) {
+          hacks[key] = hacks[key].trim().slice(1);
+        }
+      }
+    }
+  }
+
+  return {
+    rolls: rolls,
+    hacks: hacks,
+  };
 }

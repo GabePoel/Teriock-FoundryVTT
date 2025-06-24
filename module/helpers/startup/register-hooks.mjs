@@ -162,6 +162,157 @@ export default function registerHooks() {
         }
       });
     });
+    // Add event listener for roll buttons in chat
+    const rollButtons = html.querySelectorAll(".teriock-chat-button");
+    rollButtons.forEach((button) => {
+      if (button) {
+        button.addEventListener("click", async (event) => {
+          const data = event.currentTarget.dataset;
+          const action = data.action;
+          const formula = data.data;
+          // Determine actors: prefer selected tokens, else character, else do nothing
+          let actors = [];
+          if (canvas.tokens?.controlled?.length > 0) {
+            actors = canvas.tokens.controlled.map((t) => t.actor).filter(Boolean);
+          } else if (game.user.character) {
+            actors = [game.user.character];
+          }
+          let double = false;
+          if (event.ctrlKey) double = true;
+          if (actors.length === 0) return;
+          // List of supported roll actions
+          const rollActions = [
+            "takeDamage",
+            "takeDrain",
+            "takeWither",
+            "takeHeal",
+            "takeRevitalize",
+            "takeSetTempHp",
+            "takeSetTempMp",
+            "takeGainTempHp",
+            "takeGainTempMp",
+            "takeSleep",
+            "takeKill",
+          ];
+          // Map action to button label
+          const actionLabels = {
+            takeDamage: "Apply Damage",
+            takeDrain: "Apply Drain",
+            takeWither: "Apply Wither",
+            takeHeal: "Apply Healing",
+            takeRevitalize: "Apply Revitalization",
+            takeSetTempHp: "Set Temp HP",
+            takeSetTempMp: "Set Temp MP",
+            takeGainTempHp: "Gain Temp HP",
+            takeGainTempMp: "Gain Temp MP",
+            takeSleep: "Sleep",
+            takeKill: "Kill",
+          };
+          if (rollActions.includes(action) && formula) {
+            // Roll the formula using TeriockRoll for each actor
+            const context = {
+              buttons: [
+                {
+                  label: actionLabels[action] || "Apply to Targets",
+                  icon: "fa-solid fa-check",
+                  action: action,
+                  classes: "apply-result",
+                },
+              ],
+            };
+            for (const actor of actors) {
+              const roll = new game.teriock.TeriockRoll(formula, actor.getRollData(), { context });
+              if (double) {
+                roll.alter(2, 0);
+              }
+              await roll.toMessage({
+                speaker: ChatMessage.getSpeaker({ actor }),
+              });
+            }
+          }
+          if (action === "rollResistance") {
+            const attr = button.getAttribute("data-data");
+            const options = {};
+            if (event.altKey) options.advantage = true;
+            if (event.shiftKey) options.disadvantage = true;
+            for (const actor of actors) {
+              if (actor && typeof actor.rollResistance === "function") {
+                actor.rollResistance(options);
+              }
+            }
+          }
+          if (action === "rollFeatSave") {
+            const attr = button.getAttribute("data-data");
+            const total = button.getAttribute("data-total");
+            const threshold = total ? Number(total) : undefined;
+            const options = threshold !== undefined ? { threshold } : {};
+            if (event.altKey) options.advantage = true;
+            if (event.shiftKey) options.disadvantage = true;
+            for (const actor of actors) {
+              if (typeof actor.rollFeatSave === "function") {
+                actor.rollFeatSave(attr, options);
+              }
+            }
+          }
+          if (action === "applyEffect") {
+            const effectData = button.getAttribute("data-data");
+            let effectObj = null;
+            try {
+              effectObj = JSON.parse(effectData);
+            } catch (e) {
+              ui.notifications.error("Failed to parse effect data.");
+              return;
+            }
+            for (const actor of actors) {
+              if (actor && typeof actor.createEmbeddedDocuments === "function") {
+                await actor.createEmbeddedDocuments("ActiveEffect", [effectObj]);
+              }
+            }
+          }
+        });
+      }
+    });
+    // Add event listener for apply-result buttons
+    html.querySelectorAll(".apply-result").forEach((button) => {
+      button.addEventListener("click", async (event) => {
+        const data = event.currentTarget.dataset;
+        const amount = parseInt(data.total);
+        let actors = [];
+        if (canvas.tokens?.controlled?.length > 0) {
+          actors = canvas.tokens.controlled.map((t) => t.actor).filter(Boolean);
+        } else if (game.user.character) {
+          actors = [game.user.character];
+        }
+        if (actors.length === 0) return;
+        const action = data.action;
+        for (const actor of actors) {
+          if (!actor) continue;
+          if (action === "takeDamage") {
+            await actor.takeDamage(amount);
+          } else if (action === "takeDrain") {
+            await actor.takeDrain(amount);
+          } else if (action === "takeWither") {
+            await actor.takeWither(amount);
+          } else if (action === "takeHeal") {
+            await actor.takeHeal(amount);
+          } else if (action === "takeRevitalize") {
+            await actor.takeRevitalize(amount);
+          } else if (action === "takeSetTempHp") {
+            await actor.takeSetTempHp(amount);
+          } else if (action === "takeSetTempMp") {
+            await actor.takeSetTempMp(amount);
+          } else if (action === "takeGainTempHp") {
+            await actor.takeGainTempHp(amount);
+          } else if (action === "takeGainTempMp") {
+            await actor.takeGainTempMp(amount);
+          } else if (action === "takeSleep") {
+            await actor.takeSleep(amount);
+          } else if (action === "takeKill") {
+            await actor.takeKill(amount);
+          }
+        }
+      });
+    });
   });
 
   Hooks.on("renderDialogV2", (application, html, context) => {

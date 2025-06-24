@@ -13,10 +13,18 @@ export function _rollFeatSave(system, attribute, options = {}) {
   const bonus = system[`${attribute}Save`] || 0;
   const adv = options.advantage ? "kh1" : options.disadvantage ? "kl1" : "";
   const formula = `2d20${adv || ""}`.replace(/^2d20$/, "1d20") + ` + ${bonus}`;
-  new TeriockRoll(formula).evaluate({ async: true }).then((result) => {
+  const context = {
+    diceClass: "feat",
+  };
+  if (typeof options.threshold === "number") {
+    context.threshold = options.threshold;
+  }
+  new TeriockRoll(formula, actor.getRollData(), { context }).evaluate({ async: true }).then((result) => {
     result.toMessage({
       speaker: ChatMessage.getSpeaker({ actor: actor }),
-      flavor: `${attribute.toUpperCase()} Feat Save`,
+      flavor:
+        (typeof options.threshold === "number" ? `DC ${options.threshold} ` : "") +
+        `${attribute.toUpperCase()} Feat Save`,
     });
   });
 }

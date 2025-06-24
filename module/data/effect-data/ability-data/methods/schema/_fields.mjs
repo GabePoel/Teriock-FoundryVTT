@@ -50,7 +50,9 @@ export class TeriockRecordField extends fields.TypedObjectField {
       config.dataset = { path: this.fieldPath };
     }
 
-    return foundry.applications.fields.createMultiSelectInput(config);
+    const out = foundry.applications.fields.createMultiSelectInput(config);
+    out.classList.add("teriock-update-input");
+    return out;
   }
 
   toFormGroup(...args) {

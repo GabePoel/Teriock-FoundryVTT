@@ -31,7 +31,8 @@ import { _defineGeneral } from "./_define-general.mjs";
 export function _defineSchema() {
   let schema = {};
   schema = _defineApplies(schema);
-  schema = _defineConsequences(schema);
+  // Consequences are disabled until the new system is fully implemented
+  // schema = _defineConsequences(schema);
   schema = _defineGeneral(schema);
   return schema;
 }
