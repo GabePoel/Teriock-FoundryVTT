@@ -11,7 +11,7 @@ export default function connectEmbedded(document, element, editable = true) {
       document.items?.get(id) ||
       document.effects?.get(id) ||
       document.items?.get(parentId)?.effects.get(id) ||
-      document.parent.getEmbeddedDocument("ActiveEffect", id);
+      document.parent?.getEmbeddedDocument("ActiveEffect", id);
     if (embedded) {
       new ux.ContextMenu(
         el,
@@ -70,8 +70,8 @@ export default function connectEmbedded(document, element, editable = true) {
           {
             name: "Equip",
             icon: makeIcon("check", iconStyle),
-            callback: () => {
-              embedded.system.equip();
+            callback: async () => {
+              await embedded.system.equip();
             },
             condition: () => {
               return embedded.type === "equipment" && !embedded.system.equipped;
@@ -80,8 +80,8 @@ export default function connectEmbedded(document, element, editable = true) {
           {
             name: "Unequip",
             icon: makeIcon("xmark", iconStyle),
-            callback: () => {
-              embedded.system.unequip();
+            callback: async () => {
+              await embedded.system.unequip();
             },
             condition: () => {
               return embedded.type === "equipment" && embedded.system.equipped;
@@ -90,8 +90,8 @@ export default function connectEmbedded(document, element, editable = true) {
           {
             name: "Glue",
             icon: makeIcon("link", iconStyle),
-            callback: () => {
-              embedded.update({
+            callback: async () => {
+              await embedded.update({
                 "system.glued": !embedded.system.glued,
               });
             },
@@ -102,8 +102,8 @@ export default function connectEmbedded(document, element, editable = true) {
           {
             name: "Unglue",
             icon: makeIcon("link-slash", iconStyle),
-            callback: () => {
-              embedded.update({
+            callback: async () => {
+              await embedded.update({
                 "system.glued": !embedded.system.glued,
               });
             },
@@ -114,8 +114,8 @@ export default function connectEmbedded(document, element, editable = true) {
           {
             name: "Shatter",
             icon: makeIcon("wine-glass-crack", iconStyle),
-            callback: () => {
-              embedded.system.shatter();
+            callback: async () => {
+              await embedded.system.shatter();
             },
             condition: () => {
               return embedded.type === "equipment" && !embedded.system.shattered;
@@ -124,8 +124,8 @@ export default function connectEmbedded(document, element, editable = true) {
           {
             name: "Repair",
             icon: makeIcon("wine-glass", iconStyle),
-            callback: () => {
-              embedded.system.repair();
+            callback: async () => {
+              await embedded.system.repair();
             },
             condition: () => {
               return embedded.type === "equipment" && embedded.system.shattered;
@@ -134,8 +134,8 @@ export default function connectEmbedded(document, element, editable = true) {
           {
             name: "Dampen",
             icon: makeIcon("bell-slash", iconStyle),
-            callback: () => {
-              embedded.system.dampen();
+            callback: async () => {
+              await embedded.system.dampen();
             },
             condition: () => {
               return embedded.type === "equipment" && !embedded.system.dampened;
@@ -144,8 +144,8 @@ export default function connectEmbedded(document, element, editable = true) {
           {
             name: "Undampen",
             icon: makeIcon("bell", iconStyle),
-            callback: () => {
-              embedded.system.undampen();
+            callback: async () => {
+              await embedded.system.undampen();
             },
             condition: () => {
               return embedded.type === "equipment" && embedded.system.dampened;
@@ -186,8 +186,10 @@ export default function connectEmbedded(document, element, editable = true) {
           {
             name: "Delete",
             icon: makeIcon("trash", iconStyle),
-            callback: () => {
-              embedded.delete();
+            callback: async () => {
+              const parent = embedded.parent;
+              await embedded.delete();
+              await parent.forceUpdate();
             },
             condition: () => {
               return editable && embedded.isOwner;
@@ -207,7 +209,7 @@ export default function connectEmbedded(document, element, editable = true) {
             name: "Make Unidentified Copy",
             icon: makeIcon("eye-slash", iconStyle),
             callback: async () => {
-              embedded.system.unidentify();
+              await embedded.system.unidentify();
             },
             condition: () => {
               return (
@@ -223,7 +225,7 @@ export default function connectEmbedded(document, element, editable = true) {
             name: "Identify",
             icon: makeIcon("eye", iconStyle),
             callback: async () => {
-              embedded.system.identify();
+              await embedded.system.identify();
             },
             condition: () => {
               return (
@@ -239,7 +241,7 @@ export default function connectEmbedded(document, element, editable = true) {
             name: "Read Magic",
             icon: makeIcon("hand", iconStyle),
             callback: async () => {
-              embedded.system.readMagic();
+              await embedded.system.readMagic();
             },
             condition: () => {
               return (

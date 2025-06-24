@@ -63,19 +63,26 @@ async function applyEncumbrance(system) {
     }
   }
 
+  const toCreate = [];
   for (const wanted of wantedEffects) {
     const effect = actor.effects.getName(wanted.name);
     if (!effect) {
-      await actor.createEmbeddedDocuments("ActiveEffect", [wanted]);
+      toCreate.push(wanted);
     }
   }
+  await actor.createEmbeddedDocuments("ActiveEffect", toCreate);
 
+  const toDelete = [];
   for (const unwanted of unwantedEffects) {
     const effect = actor.effects.getName(unwanted.name);
     if (effect) {
-      await effect.delete();
+      toDelete.push(effect);
     }
   }
+  await actor.deleteEmbeddedDocuments(
+    "ActiveEffect",
+    toDelete.map((e) => e._id),
+  );
 }
 
 /**

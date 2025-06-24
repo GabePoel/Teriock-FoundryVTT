@@ -2,7 +2,12 @@ import "./mixins/_types";
 import { ActorData, ActiveEffectData, ItemData, TokenData } from "@common/documents/_types.mjs";
 import Collection from "@common/utils/collection.mjs";
 import { actor as actorModels, effect as effectModels, item as itemModels } from "../data/_module.mjs";
-import type { TeriockActor as TeriockActorType, TeriockEffect as TeriockEffectType, TeriockItem as TeriockItemType, TeriockToken as TeriockTokenType } from "./_module.mjs";
+import type {
+  TeriockActor as TeriockActorType,
+  TeriockEffect as TeriockEffectType,
+  TeriockItem as TeriockItemType,
+  TeriockToken as TeriockTokenType,
+} from "./_module.mjs";
 
 type ActorModel = (typeof actorModels)[keyof typeof actorModels];
 type EffectModel = (typeof effectModels)[keyof typeof effectModels];

@@ -1,8 +1,13 @@
 /** @import TeriockBaseActorData from "../../base-data.mjs" */
 
 /**
+ * Applies encumbrance level.
+ *
+ * Relevant wiki pages:
+ * - [Carrying Capacity](https://wiki.teriock.com/index.php/Core:Carrying_Capacity)
+ * - [Encumbered](https://wiki.teriock.com/index.php/Condition:Encumbered)
+ *
  * @param {TeriockBaseActorData} system
- * @returns {void}
  */
 export function _prepareEncumbrance(system) {
   const actor = system.parent;
@@ -29,7 +34,6 @@ export function _prepareEncumbrance(system) {
 
 /**
  * @param {TeriockBaseActorData} system
- * @returns {void}
  */
 export function _prepareMoney(system) {
   const money = system.money;
@@ -49,14 +53,17 @@ export function _prepareMoney(system) {
 
 /**
  * @param {TeriockBaseActorData} system
- * @returns {void}
  */
 export function _prepareWeightCarried(system) {
   const actor = system.parent;
   const weight = actor.itemTypes.equipment
     .filter((i) => i.system.equipped)
     .reduce((sum, i) => {
-      return sum + (i.system.weight || 0);
+      let newWeight = i.system.weight || 0;
+      if (i.system.consumable) {
+        newWeight = newWeight * i.system.quantity;
+      }
+      return sum + newWeight;
     }, 0);
   const moneyWeight = Number(system.moneyWeight) || 0;
   system.weightCarried = Math.ceil(weight + moneyWeight);

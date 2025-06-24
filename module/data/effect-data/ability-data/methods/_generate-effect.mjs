@@ -60,7 +60,7 @@ export async function _generateEffect(abilityData, actor) {
     sustained = true;
   }
   const effect = {
-    name: abilityData.parent?.name,
+    name: `${abilityData.parent?.name} Effect`,
     type: "effect",
     img: abilityData.parent?.img,
     changes: changes,

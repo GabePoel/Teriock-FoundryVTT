@@ -430,8 +430,11 @@ export default function registerHandlebarsHelpers() {
       consumable = false,
       amount = 1,
       max = null,
+      action = "rollDoc",
+      tooltip = "Use",
     } = options.hash;
     if (max == Infinity) max = null;
+    const tooltipAttr = tooltip ? `data-tooltip="${tooltip}"` : "";
     const idAttr = id ? `data-id="${id}"` : "";
     const parentIdAttr = parentId ? `data-parent-id="${parentId}"` : "";
     const typeAttr = type ? `data-type="${type}"` : "";
@@ -442,7 +445,7 @@ export default function registerHandlebarsHelpers() {
     return new Handlebars.SafeString(`
       <div class="tcard ${draggable ? "draggable" : ""} ${active ? "active" : "inactive"} ${shattered ? "shattered" : ""}" ${idAttr} ${parentIdAttr} ${typeAttr} data-action="openDoc" data-img="${img}">
         <div class="tcard-marker" style="${marker ? `background-color: ${marker}; width: 4px; min-width: 4px;` : ""}"></div>
-        <div class="tcard-image" data-action="rollDoc" data-tooltip="Use"><img src="${img}" alt="${title}" /></div>
+        <div class="tcard-image" data-action="${action}" ${tooltipAttr}><img src="${img}" alt="${title}" /></div>
         <div class="tcard-body">
           <div class="tcard-titles">
             <div class="tcard-title">${title}</div>
@@ -459,7 +462,13 @@ export default function registerHandlebarsHelpers() {
   });
 
   Handlebars.registerHelper("abilityCards", function (abilities, system, options) {
-    const { tab = "ability", skipDescendants = false } = options.hash;
+    const {
+      tab = "ability",
+      skipDescendants = false,
+      action = "rollDoc",
+      tooltip = "Use",
+      draggable = true,
+    } = options.hash;
     if (!Array.isArray(abilities) || abilities.length === 0) return "";
     const isGapless = tab ? system?.sheet?.display?.[tab]?.gapless : false;
     const sizeClass = tab ? system?.sheet?.display?.[tab]?.size || "" : "";
@@ -517,6 +526,9 @@ export default function registerHandlebarsHelpers() {
             amount: ability.system.quantity,
             max: ability.system.maxQuantity?.derived,
             type: "effect",
+            action,
+            tooltip,
+            draggable,
           },
         });
       })

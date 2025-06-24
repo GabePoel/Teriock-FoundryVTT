@@ -39,4 +39,8 @@ export const documentOptions = {
     name: "Effect",
     icon: "disease",
   },
+  protection: {
+    name: "Protection",
+    icon: "shield-halved",
+  },
 };

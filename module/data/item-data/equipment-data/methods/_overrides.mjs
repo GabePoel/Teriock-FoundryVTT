@@ -22,6 +22,9 @@ const equipmentMap = {
     damage: "1",
     damageTypes: ["Fire"],
   },
+  Boulder: {
+    consumable: true,
+  },
 };
 
 /**

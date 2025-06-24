@@ -6,7 +6,6 @@ import TeriockRoll from "../../../../../documents/roll.mjs";
  * @param {TeriockBaseActorData} system
  * @param {string} attribute - The attribute to roll the save against (e.g., "strength", "dexterity").
  * @param {object} [options] - Options for the roll, such as advantage or disadvantage.
- * @returns {Promise<void>}
  * @private
  */
 export function _rollFeatSave(system, attribute, options = {}) {
@@ -26,11 +25,14 @@ export function _rollFeatSave(system, attribute, options = {}) {
  * Rolls a resistance save for the actor.
  * @param {TeriockBaseActorData} system
  * @param {object} [options]
- * @returns {Promise<void>}
  * @private
  */
 export function _rollResistance(system, options = {}) {
   const actor = system.parent;
+  let message = null;
+  if (options.message) {
+    message = options.message;
+  }
   let rollFormula = "1d20";
   if (options.advantage) {
     rollFormula = "2d20kh1";
@@ -40,6 +42,7 @@ export function _rollResistance(system, options = {}) {
   rollFormula += " + @p";
   const rollData = actor.getRollData();
   const roll = new TeriockRoll(rollFormula, rollData, {
+    message: message,
     context: {
       isResistance: true,
       diceClass: "resist",
@@ -53,10 +56,29 @@ export function _rollResistance(system, options = {}) {
 }
 
 /**
+ * Rolls an immunity save for the actor.
+ * @param {TeriockBaseActorData} system
+ * @param {object} [options]
+ * @private
+ */
+export function _rollImmunity(system, options = {}) {
+  let message = null;
+  if (options.message) {
+    message = options.message;
+  }
+  foundry.documents.ChatMessage.create({
+    title: "Immune",
+    flavor: "Immune",
+    content: message || "No effect.",
+  });
+}
+
+/**
  * Rolls a tradecraft check for the actor.
  * @param {TeriockBaseActorData} system
  * @param {string} tradecraft
  * @param {object} [options]
+ * @private
  */
 export function _rollTradecraft(system, tradecraft, options = {}) {
   const actor = system.parent;

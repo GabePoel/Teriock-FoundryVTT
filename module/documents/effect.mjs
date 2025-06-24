@@ -287,4 +287,11 @@ export default class TeriockEffect extends ChildDocumentMixin(foundry.documents.
   async enable() {
     await this.setForceDisabled(false);
   }
+
+  /**
+   * @returns {Promise<void>}
+   */
+  async forceUpdate() {
+    await this.update({ "system.updateCounter": !this.system.updateCounter });
+  }
 }

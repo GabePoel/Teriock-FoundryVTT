@@ -1,4 +1,5 @@
-import { SheetData } from "../../methods/schema/_types";
+import { TeriockItem } from "@client/documents/_module.mjs";
+import { SheetData } from "./sheet";
 
 /**
  * Derived data properties.
@@ -52,9 +53,9 @@ export interface TeriockDerivedActorData {
   /** Whether the actor is wearing armor */
   hasArmor: boolean;
   /** Primary blocking equipment */
-  primaryBlocker: any | null;
+  primaryBlocker: null | (TeriockItem & { system: TeriockEquipmentData });
   /** Primary attacking equipment */
-  primaryAttacker: any | null;
+  primaryAttacker: null | (TeriockItem & { system: TeriockEquipmentData });
 
   // Load and weight
   /** Total weight carried by the actor */

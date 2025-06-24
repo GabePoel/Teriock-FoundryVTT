@@ -4,6 +4,7 @@ import { _defineCombat } from "./_define-combat.mjs";
 import { _defineDamage } from "./_define-damage.mjs";
 import { _defineHacks } from "./_define-hacks.mjs";
 import { _defineMoney } from "./_define-money.mjs";
+import { _defineProtections } from "./_define-protections.mjs";
 import { _defineSenses } from "./_define-senses.mjs";
 import { _defineSheet } from "./_define-sheet.mjs";
 import { _defineSpeed } from "./_define-speed.mjs";
@@ -58,6 +59,7 @@ export function _defineSchema() {
   schema = _defineDamage(schema);
   schema = _defineHacks(schema);
   schema = _defineMoney(schema);
+  schema = _defineProtections(schema);
   schema = _defineSenses(schema);
   schema = _defineSheet(schema);
   schema = _defineSpeed(schema);

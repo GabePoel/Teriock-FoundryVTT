@@ -14,8 +14,8 @@ import TeriockRoll from "../../../../documents/roll.mjs";
 export async function _roll(abilityData, options) {
   const advantage = options?.advantage || false;
   const disadvantage = options?.disadvantage || false;
-  await stageUse(abilityData, advantage, disadvantage);
-  await use(abilityData);
+  const useData = await stageUse(abilityData, advantage, disadvantage);
+  await use(abilityData, useData);
   if (abilityData.duration && abilityData.duration !== "Instant" && abilityData.maneuver !== "passive") {
     if (abilityData.targets.includes("self") || abilityData.delivery.base === "self") {
       await _generateEffect(abilityData, abilityData.parent.getActor());
@@ -31,75 +31,30 @@ export async function _roll(abilityData, options) {
 
 /**
  * @param {TeriockAbilityData} abilityData
- * @param {TeriockRoll} roll
- * @returns {Promise<string>}
- */
-async function attackMessage(abilityData, roll) {
-  const targets = game.user.targets;
-  let targetsHit = [];
-  let targetsMissed = [];
-  for (const target of targets) {
-    const targetActor = target.actor;
-    const ac = targetActor.system.ac;
-    const rollResult = roll.total;
-    const hit = rollResult >= ac;
-    if (hit) {
-      targetsHit.push(targetActor);
-    } else {
-      targetsMissed.push(targetActor);
-    }
-  }
-  let message = "";
-  if (targetsHit.length > 0) {
-    message += "<p><b>Targets hit</b></p>";
-    message += "<ul>";
-    for (const target of targetsHit) {
-      message += `<li>${target.name}</li>`;
-    }
-    message += "</ul>";
-  }
-  if (targetsMissed.length > 0) {
-    message += "<p><b>Targets missed</b></p>";
-    message += "<ul>";
-    for (const target of targetsMissed) {
-      message += `<li>${target.name}</li>`;
-    }
-    message += "</ul>";
-  }
-  return message;
-}
-
-/**
- * @param {TeriockAbilityData} abilityData
  * @param {boolean} advantage
  * @param {boolean} disadvantage
- * @returns {Promise<void>}
+ * @returns {Promise<object>}
  */
 async function stageUse(abilityData, advantage, disadvantage) {
-  abilityData.live = {
+  const useData = {
     costs: {},
     modifiers: {},
     consequences: {},
     formula: "",
+    rollData: abilityData.parent.getActor().getRollData(),
   };
-  abilityData.live.costs.mp = 0;
-  abilityData.live.costs.hp = 0;
-  abilityData.live.modifiers.heightened = 0;
+  useData.costs.mp = 0;
+  useData.costs.hp = 0;
+  useData.modifiers.heightened = 0;
   if (abilityData.costs.mp.type == "static") {
-    abilityData.live.costs.mp = abilityData.costs.mp.value.static;
+    useData.costs.mp = abilityData.costs.mp.value.static;
   } else if (abilityData.costs.mp.type === "formula") {
-    abilityData.live.costs.mp = await evaluateAsync(
-      abilityData.costs.mp.value.formula,
-      abilityData.parent.getActor().getRollData(),
-    );
+    useData.costs.mp = await evaluateAsync(abilityData.costs.mp.value.formula, useData.rollData);
   }
   if (abilityData.costs.hp.type == "static") {
-    abilityData.live.costs.hp = abilityData.costs.hp.value.static;
+    useData.costs.hp = abilityData.costs.hp.value.static;
   } else if (abilityData.costs.hp.type === "formula") {
-    abilityData.live.costs.hp = await evaluateAsync(
-      abilityData.costs.hp.value.formula,
-      abilityData.parent.getActor().getRollData(),
-    );
+    useData.costs.hp = await evaluateAsync(abilityData.costs.hp.value.formula, useData.rollData);
   }
   let rollFormula = "";
   if (abilityData.interaction == "attack") {
@@ -188,14 +143,14 @@ async function stageUse(abilityData, advantage, disadvantage) {
         label: "Confirm",
         callback: (event, button, dialog) => {
           if (abilityData.costs.mp.type == "variable") {
-            abilityData.live.costs.mp = button.form.elements.mp.valueAsNumber;
+            useData.costs.mp = button.form.elements.mp.valueAsNumber;
           }
           if (abilityData.costs.hp.type == "variable") {
-            abilityData.live.costs.hp = button.form.elements.hp.valueAsNumber;
+            useData.costs.hp = button.form.elements.hp.valueAsNumber;
           }
           if (abilityData.isProficient && abilityData.heightened) {
-            abilityData.live.modifiers.heightened = button.form.elements.heightened.valueAsNumber;
-            abilityData.live.costs.mp += abilityData.live.modifiers.heightened;
+            useData.modifiers.heightened = button.form.elements.heightened.valueAsNumber;
+            useData.costs.mp += useData.modifiers.heightened;
           }
         },
       },
@@ -207,43 +162,45 @@ async function stageUse(abilityData, advantage, disadvantage) {
     } else if (abilityData.isProficient) {
       rollFormula += " + @p";
     }
-    if (abilityData.live.modifiers.heightened > 0) {
+    if (useData.modifiers.heightened > 0) {
       rollFormula += " + @h";
     }
   }
-  abilityData.live.formula = rollFormula;
+  useData.formula = rollFormula;
+  return useData;
 }
 
 /**
  * @param {TeriockAbilityData} abilityData
+ * @param {object} useData
  * @returns {Promise<TeriockRoll>}
  */
-async function use(abilityData) {
+async function use(abilityData, useData) {
   let message = await abilityData.parent.buildMessage();
-  const getRollData = abilityData.parent.getActor().getRollData();
-  getRollData.av0 = 0;
-  getRollData.h = abilityData.live.modifiers.heightened || 0;
+  const rollData = useData.rollData;
+  rollData.av0 = 0;
+  rollData.h = useData.modifiers.heightened || 0;
   let properties;
   let diceClass;
   let diceTooltip;
   if (abilityData.delivery.base == "weapon") {
     properties = abilityData.parent.getActor().system.primaryAttacker?.effectKeys?.property || new Set();
     if (properties.has("av0") || abilityData.parent.getActor()?.system.piercing == "av0") {
-      getRollData.av0 = 2;
+      rollData.av0 = 2;
     }
     if (properties.has("ub") || abilityData.parent.getActor()?.system.piercing == "ub") {
       diceClass = "ub";
       diceTooltip = "Unblockable";
-      getRollData.av0 = 2;
+      rollData.av0 = 2;
     }
   }
   if (abilityData.piercing == "av0") {
-    getRollData.av0 = 2;
+    rollData.av0 = 2;
   }
   if (abilityData.piercing == "ub") {
     diceClass = "ub";
     diceTooltip = "Unblockable";
-    getRollData.av0 = 2;
+    rollData.av0 = 2;
   }
   const context = {
     diceClass: diceClass,
@@ -262,7 +219,7 @@ async function use(abilityData) {
   }
   message = await foundry.applications.ux.TextEditor.enrichHTML(message);
   let roll;
-  roll = new TeriockRoll(abilityData.live.formula, getRollData, {
+  roll = new TeriockRoll(useData.formula, rollData, {
     message: message,
     context: context,
   });
@@ -275,14 +232,50 @@ async function use(abilityData) {
   if (abilityData.interaction == "attack") {
     newPenalty -= 3;
   }
-  abilityData.parent.getActor().update({
-    "system.mp.value": abilityData.parent.getActor().system.mp.value - abilityData.live.costs.mp,
-    "system.hp.value": abilityData.parent.getActor().system.hp.value - abilityData.live.costs.hp,
+  await abilityData.parent.getActor().update({
+    "system.mp.value": abilityData.parent.getActor().system.mp.value - useData.costs.mp,
+    "system.hp.value": abilityData.parent.getActor().system.hp.value - useData.costs.hp,
     "system.attackPenalty": newPenalty,
   });
-  abilityData.mpCost = 0;
-  abilityData.hpCost = 0;
-  abilityData.heightenedAmount = 0;
-  abilityData.formula = null;
   return roll;
+}
+
+/**
+ * @param {TeriockAbilityData} abilityData
+ * @param {TeriockRoll} roll
+ * @returns {Promise<string>}
+ */
+async function attackMessage(abilityData, roll) {
+  const targets = game.user.targets;
+  let targetsHit = [];
+  let targetsMissed = [];
+  for (const target of targets) {
+    const targetActor = target.actor;
+    const ac = targetActor.system.ac;
+    const rollResult = roll.total;
+    const hit = rollResult >= ac;
+    if (hit) {
+      targetsHit.push(targetActor);
+    } else {
+      targetsMissed.push(targetActor);
+    }
+  }
+  let message = "";
+  if (targetsHit.length > 0) {
+    message += "<p><b>Targets hit</b></p>";
+    message += "<ul>";
+    for (const target of targetsHit) {
+      message += `<li>${target.name}</li>`;
+    }
+    message += "</ul>";
+  }
+  if (targetsMissed.length > 0) {
+    message += "<p><b>Targets missed</b></p>";
+    message += "<ul>";
+    for (const target of targetsMissed) {
+      message += `<li>${target.name}</li>`;
+    }
+    message += "</ul>";
+  }
+  return message;
 }

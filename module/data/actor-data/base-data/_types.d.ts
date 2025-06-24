@@ -1,10 +1,13 @@
-import { TeriockActor } from "@client/documents/_module.mjs";
-import { BarData, AttributeData, HackData, TradecraftData } from "./methods/schema/_types";
-import { TeriockDerivedActorData } from "./methods/data-deriving/_types";
 import TypeDataModel from "@common/abstract/type-data.mjs";
+import { BarData, AttributeData, HackData } from "./types/stats";
+import { ProtectionData } from "./types/protections";
+import { TeriockActor } from "@client/documents/_module.mjs";
+import { TeriockDerivedActorData } from "./types/derived";
+import { TradecraftData } from "./types/tradecrafts";
 
 declare module "./base-data.mjs" {
   export default interface TeriockBaseActorData extends TypeDataModel, TeriockDerivedActorData {
+    /** Parent actor */
     parent: TeriockActor;
     /** Level */
     lvl: number;
@@ -178,5 +181,11 @@ declare module "./base-data.mjs" {
     presence: BarData;
     /** Tradecrafts */
     tradecrafts: Record<string, TradecraftData>;
+    /** Resistances */
+    resistances: ProtectionData;
+    /** Immunities */
+    immunities: ProtectionData;
+    /** Update counter - used to force an update when adding/removing effects */
+    updateCounter: boolean;
   }
 }

@@ -1,20 +1,14 @@
 /** @import { CommonRollOptions, ConditionRollOptions } from "../../../types/rolls" */
 const { TypeDataModel } = foundry.abstract;
-import {
-  _takeDamage,
-  _takeDrain,
-  _takeHeal,
-  _takeRevitalize,
-  _takeWither,
-} from "./methods/consequences/_take-numericals.mjs";
+import * as hacks from "./methods/consequences/_take-hacks.mjs";
+import * as numericals from "./methods/consequences/_take-numericals.mjs";
+import * as rollGeneric from "./methods/rolling/_roll-generic.mjs";
 import { _defineSchema } from "./methods/schema/_schema.mjs";
 import { _getRollData } from "./methods/_roll-data.mjs";
+import { _migrateData } from "./methods/_migrate-data.mjs";
 import { _postUpdate } from "./methods/_post-update.mjs";
 import { _prepareDerivedData } from "./methods/data-deriving/_data-deriving.mjs";
 import { _rollCondition } from "./methods/rolling/_roll-condition.mjs";
-import { _rollFeatSave, _rollResistance, _rollTradecraft } from "./methods/rolling/_roll-generic.mjs";
-import { _takeHack, _takeUnhack } from "./methods/consequences/_take-hacks.mjs";
-import { _migrateData } from "./methods/_migrate-data.mjs";
 
 /**
  * @extends {TypeDataModel}
@@ -48,7 +42,7 @@ export default class TeriockBaseActorData extends TypeDataModel {
    * @returns {Promise<void>}
    */
   async takeDamage(amount) {
-    await _takeDamage(this, amount);
+    await numericals._takeDamage(this, amount);
   }
 
   /**
@@ -56,7 +50,7 @@ export default class TeriockBaseActorData extends TypeDataModel {
    * @returns {Promise<void>}
    */
   async takeDrain(amount) {
-    await _takeDrain(this, amount);
+    await numericals._takeDrain(this, amount);
   }
 
   /**
@@ -64,7 +58,7 @@ export default class TeriockBaseActorData extends TypeDataModel {
    * @returns {Promise<void>}
    */
   async takeWither(amount) {
-    await _takeWither(this, amount);
+    await numericals._takeWither(this, amount);
   }
 
   /**
@@ -72,7 +66,7 @@ export default class TeriockBaseActorData extends TypeDataModel {
    * @returns {Promise<void>}
    */
   async takeHeal(amount) {
-    await _takeHeal(this, amount);
+    await numericals._takeHeal(this, amount);
   }
 
   /**
@@ -80,7 +74,55 @@ export default class TeriockBaseActorData extends TypeDataModel {
    * @returns {Promise<void>}
    */
   async takeRevitalize(amount) {
-    await _takeRevitalize(this, amount);
+    await numericals._takeRevitalize(this, amount);
+  }
+
+  /**
+   * @param {number} amount
+   * @returns {Promise<void>}
+   */
+  async takeSetTempHp(amount) {
+    await numericals._takeSetTempHp(this, amount);
+  }
+
+  /**
+   * @param {number} amount
+   * @returns {Promise<void>}
+   */
+  async takeSetTempMp(amount) {
+    await numericals._takeSetTempMp(this, amount);
+  }
+
+  /**
+   * @param {number} amount
+   * @returns {Promise<void>}
+   */
+  async takeGainTempHp(amount) {
+    await numericals._takeGainTempHp(this, amount);
+  }
+
+  /**
+   * @param {number} amount
+   * @returns {Promise<void>}
+   */
+  async takeGainTempMp(amount) {
+    await numericals._takeGainTempMp(this, amount);
+  }
+
+  /**
+   * @param {number} amount
+   * @returns {Promise<void>}
+   */
+  async takeSleep(amount) {
+    await numericals._takeSleep(this, amount);
+  }
+
+  /**
+   * @param {number} amount
+   * @returns {Promise<void>}
+   */
+  async takeKill(amount) {
+    await numericals._takeKill(this, amount);
   }
 
   /**
@@ -88,7 +130,7 @@ export default class TeriockBaseActorData extends TypeDataModel {
    * @returns {Promise<void>}
    */
   async takeHack(part) {
-    await _takeHack(this, part);
+    await hacks._takeHack(this, part);
   }
 
   /**
@@ -96,7 +138,7 @@ export default class TeriockBaseActorData extends TypeDataModel {
    * @returns {Promise<void>}
    */
   async takeUnhack(part) {
-    await _takeUnhack(this, part);
+    await hacks._takeUnhack(this, part);
   }
 
   /**
@@ -120,27 +162,31 @@ export default class TeriockBaseActorData extends TypeDataModel {
   /**
    * @param {string} attribute
    * @param {CommonRollOptions} options
-   * @returns {Promise<void>}
    */
   rollFeatSave(attribute, options = {}) {
-    _rollFeatSave(this, attribute, options);
+    rollGeneric._rollFeatSave(this, attribute, options);
   }
 
   /**
    * @param {CommonRollOptions} options
-   * @returns {Promise<void>}
    */
   rollResistance(options = {}) {
-    _rollResistance(this, options);
+    rollGeneric._rollResistance(this, options);
+  }
+
+  /**
+   * @param {CommonRollOptions} options
+   */
+  rollImmunity(options = {}) {
+    rollGeneric._rollImmunity(this, options);
   }
 
   /**
    * @param {string} tradecraft
    * @param {CommonRollOptions} options
-   * @returns {Promise<void>}
    */
   rollTradecraft(tradecraft, options = {}) {
-    _rollTradecraft(this, tradecraft, options);
+    rollGeneric._rollTradecraft(this, tradecraft, options);
   }
 
   /**

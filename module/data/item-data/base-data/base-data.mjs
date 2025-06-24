@@ -17,6 +17,10 @@ export default class TeriockBaseItemData extends ChildDataMixin(TypeDataModel) {
         initial: false,
         label: "Disabled",
       }),
+      updateCounter: new fields.BooleanField({
+        initial: false,
+        label: "Update Counter",
+      }),
     };
   }
 }

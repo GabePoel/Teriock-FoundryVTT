@@ -9,8 +9,8 @@
     <div class="character-tabber ui-controls {{tabActive activeTab "abilities"}}" data-tab="abilities" data-action="changeTab" data-tooltip="Abilities">
       {{ticon (lookup config.documentOptions.ability 'icon') style="solid"}}
     </div>
-    <div class="character-tabber ui-controls {{tabActive activeTab "resources"}}" data-tab="resources" data-action="changeTab" data-tooltip="Resources">
-      {{ticon (lookup config.documentOptions.resource 'icon') style="solid"}}
+    <div class="character-tabber ui-controls {{tabActive activeTab "inventory"}}" data-tab="inventory" data-action="changeTab" data-tooltip="Inventory">
+      {{ticon (lookup config.documentOptions.equipment 'icon') style="solid"}}
     </div>
     <div class="character-tabber ui-controls {{tabActive activeTab "classes"}}" data-tab="classes" data-action="changeTab" data-tooltip="Classes">
       {{ticon (lookup config.documentOptions.rank 'icon') style="solid"}}
@@ -18,11 +18,14 @@
     <div class="character-tabber ui-controls {{tabActive activeTab "powers"}}" data-tab="powers" data-action="changeTab" data-tooltip="Powers">
       {{ticon (lookup config.documentOptions.power 'icon') style="solid"}}
     </div>
-    <div class="character-tabber ui-controls {{tabActive activeTab "inventory"}}" data-tab="inventory" data-action="changeTab" data-tooltip="Inventory">
-      {{ticon (lookup config.documentOptions.equipment 'icon') style="solid"}}
+    <div class="character-tabber ui-controls {{tabActive activeTab "resources"}}" data-tab="resources" data-action="changeTab" data-tooltip="Resources">
+      {{ticon (lookup config.documentOptions.resource 'icon') style="solid"}}
     </div>
     <div class="character-tabber ui-controls {{tabActive activeTab "conditions"}}" data-tab="conditions" data-action="changeTab" data-tooltip="Conditions">
       {{ticon (lookup config.documentOptions.condition 'icon') style="solid"}}
+    </div>
+    <div class="character-tabber ui-controls {{tabActive activeTab "protections"}}" data-tab="protections" data-action="changeTab" data-tooltip="Protections">
+      {{ticon (lookup config.documentOptions.protection 'icon') style="solid"}}
     </div>
     <div class="character-tabber ui-controls {{tabActive activeTab "notes"}}" data-tab="notes" data-action="changeTab" data-tooltip="Notes">
       <i class="fa-solid fa-notes"></i>
@@ -46,8 +49,8 @@
       {{#if (eq activeTab "abilities")}}
       {{> 'systems/teriock/templates/sheets/character-template/tabs/ch-tab-abilities.hbs' }}
       {{/if}}
-      {{#if (eq activeTab "resources")}}
-      {{> 'systems/teriock/templates/sheets/character-template/tabs/ch-tab-resources.hbs' }}
+      {{#if (eq activeTab "inventory")}}
+      {{> 'systems/teriock/templates/sheets/character-template/tabs/ch-tab-inventory.hbs' }}
       {{/if}}
       {{#if (eq activeTab "classes")}}
       {{> 'systems/teriock/templates/sheets/character-template/tabs/ch-tab-classes.hbs' }}
@@ -55,11 +58,14 @@
       {{#if (eq activeTab "powers")}}
       {{> 'systems/teriock/templates/sheets/character-template/tabs/ch-tab-powers.hbs' }}
       {{/if}}
-      {{#if (eq activeTab "inventory")}}
-      {{> 'systems/teriock/templates/sheets/character-template/tabs/ch-tab-inventory.hbs' }}
+      {{#if (eq activeTab "resources")}}
+      {{> 'systems/teriock/templates/sheets/character-template/tabs/ch-tab-resources.hbs' }}
       {{/if}}
       {{#if (eq activeTab "conditions")}}
       {{> 'systems/teriock/templates/sheets/character-template/tabs/ch-tab-conditions.hbs' }}
+      {{/if}}
+      {{#if (eq activeTab "protections")}}
+      {{> 'systems/teriock/templates/sheets/character-template/tabs/ch-tab-protections.hbs' }}
       {{/if}}
       {{#if (eq activeTab "notes")}}
       {{> 'systems/teriock/templates/sheets/character-template/tabs/ch-tab-notes.hbs' }}

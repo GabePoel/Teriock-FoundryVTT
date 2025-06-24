@@ -100,7 +100,10 @@ const abilityMap = {
   },
   "Control and Resist Fire": {
     base: {
-      changes: [{ key: "system.damage.standard", mode: 2, value: " + 1d4[Fire]", priority: 20 }],
+      changes: [
+        { key: "system.damage.standard", mode: 2, value: " + 1d4[Fire]", priority: 20 },
+        { key: "system.resistances.damageTypes", mode: 2, value: "fire", priority: 20 },
+      ],
     },
   },
   Climbing: {
@@ -215,6 +218,173 @@ const abilityMap = {
   "Melee Dodging": {
     base: {
       statuses: ["meleeDodging"],
+    },
+  },
+  Adrenaline: {
+    base: {
+      changes: [
+        { key: "system.resistances.statuses", mode: 2, value: "unconscious", priority: 20 },
+        { key: "system.resistances.other", mode: 2, value: "Dropping From Negative HP", priority: 20 },
+      ],
+    },
+  },
+  Alert: {
+    base: {
+      changes: [{ key: "system.resistances.other", mode: 2, value: "Being Surprised", priority: 20 }],
+    },
+  },
+  "Battle Cry Resistance": {
+    base: {
+      changes: [{ key: "system.resistances.statuses", mode: 2, value: "frightened", priority: 20 }],
+    },
+  },
+  "Berserker Tracking": {
+    base: {
+      changes: [{ key: "system.resistances.other", mode: 2, value: "Being Surprised (Outside Towns)", priority: 20 }],
+    },
+  },
+  "Called Magic Resistance": {
+    base: {
+      changes: [{ key: "system.resistances.other", mode: 2, value: "Conjured Spells", priority: 20 }],
+    },
+  },
+  "Careful Planning": {
+    base: {
+      changes: [{ key: "system.resistances.other", mode: 2, value: "Being Surprised (Inside Towns)", priority: 20 }],
+    },
+  },
+  "Combat Shimmering": {
+    base: {
+      changes: [
+        { key: "system.resistances.statuses", mode: 2, value: "snared", priority: 20 },
+        { key: "system.resistances.statuses", mode: 2, value: "immobilized", priority: 20 },
+        { key: "system.resistances.damageTypes", mode: 2, value: "hack", priority: 20 },
+      ],
+    },
+  },
+  "Death Grip": {
+    base: {
+      changes: [
+        { key: "system.resistances.effects", mode: 2, value: "stealing", priority: 20 },
+        { key: "system.resistances.abilities", mode: 2, value: "Unglue", priority: 20 },
+      ],
+    },
+  },
+  Lie: {
+    base: {
+      changes: [{ key: "system.resistances.effects", mode: 2, value: "truthDetecting", priority: 20 }],
+    },
+  },
+  "Missile Magic Resistance": {
+    base: {
+      changes: [{ key: "system.resistances.other", mode: 2, value: "Conjured Missile Spells", priority: 20 }],
+    },
+  },
+  "Missile Weapon Resistance": {
+    base: {
+      changes: [{ key: "system.resistances.other", mode: 2, value: "Ranged Weapons", priority: 20 }],
+    },
+  },
+  Reflexes: {
+    base: {
+      changes: [{ key: "system.resistances.abilities", mode: 2, value: "Disarm", priority: 20 }],
+    },
+  },
+  "Resist Effects": {
+    base: {
+      changes: [{ key: "system.resistances.other", mode: 2, value: "Semblant Skills", priority: 20 }],
+    },
+  },
+  "Resist Mental Effects": {
+    base: {
+      changes: [{ key: "system.resistances.effects", mode: 2, value: "mental", priority: 20 }],
+    },
+  },
+  Sentry: {
+    base: {
+      changes: [
+        {
+          key: "system.resistances.other",
+          mode: 2,
+          value: "Being Surprised (Braced, Fortified Areas, Guard Duty)",
+          priority: 20,
+        },
+        {
+          key: "system.resistances.other",
+          mode: 2,
+          value: "Frightened (Braced, Fortified Areas, Guard Duty)",
+          priority: 20,
+        },
+        {
+          key: "system.resistances.other",
+          mode: 2,
+          value: "Mediator Tradecrafts (Braced, Fortified Areas, Guard Duty)",
+          priority: 20,
+        },
+      ],
+    },
+  },
+  Stamina: {
+    base: {
+      changes: [{ key: "system.resistances.other", mode: 2, value: "Dropping From Negative MP", priority: 20 }],
+    },
+  },
+  "Vitals Protection": {
+    base: {
+      changes: [{ key: "system.resistances.other", mode: 2, value: "Vitals Targeting Abilities", priority: 20 }],
+    },
+  },
+  "Fall Durability": {
+    base: {
+      changes: [{ key: "system.immunities.damageTypes", mode: 2, value: "Fall", priority: 20 }],
+    },
+  },
+  Glue: {
+    base: {
+      changes: [{ key: "system.immunities.other", mode: 2, value: "Stealing (Glued Items)", priority: 20 }],
+    },
+  },
+  "Impure Durability": {
+    base: {
+      changes: [{ key: "system.immunities.damageTypes", mode: 2, value: "Non-magical Non-silver", priority: 20 }],
+    },
+  },
+  "Magical Durability": {
+    base: {
+      changes: [{ key: "system.immunities.damageTypes", mode: 2, value: "Non-magical", priority: 20 }],
+    },
+  },
+  "Mental Effect Immunity": {
+    base: {
+      changes: [{ key: "system.immunities.effects", mode: 2, value: "mental", priority: 20 }],
+    },
+  },
+  "Spell Immunity": {
+    base: {
+      changes: [{ key: "system.immunities.other", mode: 2, value: "Spells", priority: 20 }],
+    },
+  },
+  "Throw the Bones": {
+    base: {
+      changes: [{ key: "system.immunities.other", mode: 2, value: "Spells (One Use)", priority: 20 }],
+    },
+  },
+  "Unconsciousness Immunity": {
+    base: {
+      changes: [{ key: "system.immunities.statuses", mode: 2, value: "unconscious", priority: 20 }],
+    },
+  },
+  "Undead Mind": {
+    base: {
+      changes: [
+        { key: "system.immunities.statuses", mode: 2, value: "frightened", priority: 20 },
+        { key: "system.immunities.statuses", mode: 2, value: "charmed", priority: 20 },
+      ],
+    },
+  },
+  "Vitals Durability": {
+    base: {
+      changes: [{ key: "system.immunities.other", mode: 2, value: "Vitals Targeting Abilities", priority: 20 }],
     },
   },
 };

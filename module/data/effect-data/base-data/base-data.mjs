@@ -25,6 +25,10 @@ export default class TeriockBaseEffectData extends ChildDataMixin(TypeDataModel)
         initial: false,
         label: "Delete On Expire",
       }),
+      updateCounter: new fields.BooleanField({
+        initial: false,
+        label: "Update Counter",
+      }),
     };
   }
 

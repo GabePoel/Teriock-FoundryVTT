@@ -54,4 +54,8 @@ export const ParentDocumentMixin = (Base) =>
       this.effectTypes = effectTypes;
       this.effectKeys = effectKeys;
     }
+
+    async forceUpdate() {
+      await this.update({ "system.updateCounter": !this.system.updateCounter });
+    }
   };

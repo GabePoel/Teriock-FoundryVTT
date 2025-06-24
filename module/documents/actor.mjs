@@ -93,6 +93,54 @@ export default class TeriockActor extends ParentDocumentMixin(foundry.documents.
   }
 
   /**
+   * @param {number} amount
+   * @returns {Promise<void>}
+   */
+  async takeSetTempHp(amount) {
+    await this.system.takeSetTempHp(amount);
+  }
+
+  /**
+   * @param {number} amount
+   * @returns {Promise<void>}
+   */
+  async takeSetTempMp(amount) {
+    await this.system.takeSetTempMp(amount);
+  }
+
+  /**
+   * @param {number} amount
+   * @returns {Promise<void>}
+   */
+  async takeGainTempHp(amount) {
+    await this.system.takeGainTempHp(amount);
+  }
+
+  /**
+   * @param {number} amount
+   * @returns {Promise<void>}
+   */
+  async takeGainTempMp(amount) {
+    await this.system.takeGainTempMp(amount);
+  }
+
+  /**
+   * @param {number} amount
+   * @returns {Promise<void>}
+   */
+  async takeSleep(amount) {
+    await this.system.takeSleep(amount);
+  }
+
+  /**
+   * @param {number} amount
+   * @returns {Promise<void>}
+   */
+  async takeKill(amount) {
+    await this.system.takeKill(amount);
+  }
+
+  /**
    * @param {string} part
    * @returns {Promise<void>}
    */
@@ -145,6 +193,14 @@ export default class TeriockActor extends ParentDocumentMixin(foundry.documents.
    * @param {CommonRollOptions} options
    * @returns {void}
    */
+  rollImmunity(options = {}) {
+    this.system.rollImmunity(options);
+  }
+
+  /**
+   * @param {CommonRollOptions} options
+   * @returns {void}
+   */
   rollTradecraft(tradecraft, options = {}) {
     this.system.rollTradecraft(tradecraft, options);
   }
@@ -171,6 +227,10 @@ export default class TeriockActor extends ParentDocumentMixin(foundry.documents.
    * @returns {void}
    */
   endCondition(options = {}) {
+    let message = null;
+    if (options.message) {
+      message = options.message;
+    }
     let rollFormula = "2d4";
     if (options.advantage) {
       rollFormula = "3d4";
@@ -180,6 +240,7 @@ export default class TeriockActor extends ParentDocumentMixin(foundry.documents.
     rollFormula += "kh1";
     const rollData = this.getRollData();
     const roll = new TeriockRoll(rollFormula, rollData, {
+      message: message,
       context: {
         diceClass: "condition",
         threshold: 4,

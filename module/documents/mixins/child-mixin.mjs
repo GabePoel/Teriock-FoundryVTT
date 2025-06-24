@@ -96,7 +96,7 @@ export const ChildDocumentMixin = (Base) =>
      */
     async use(options) {
       this.hookCall("use");
-      this.system.use(options);
+      await this.system.use(options);
     }
 
     /**
@@ -105,6 +105,7 @@ export const ChildDocumentMixin = (Base) =>
     async duplicate() {
       const copy = foundry.utils.duplicate(this);
       const copyDocument = await this.parent.createEmbeddedDocuments(this.documentName, [copy]);
+      await this.parent.forceUpdate();
       return copyDocument[0];
     }
 

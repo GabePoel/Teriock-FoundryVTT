@@ -33,11 +33,12 @@ export async function createAbility(document, name, options = {}) {
       },
     ]);
   }
+  await embeddingDocument.forceUpdate();
   return ability;
 }
 
 export async function createResource(document) {
-  return await TeriockBaseEffect.create(
+  const resource = await TeriockBaseEffect.create(
     {
       name: "New Resource",
       type: "resource",
@@ -45,6 +46,8 @@ export async function createResource(document) {
     },
     { parent: document },
   );
+  await document.forceUpdate();
+  return resource;
 }
 
 export async function createProperty(document, key = null) {
@@ -74,7 +77,7 @@ export async function createProperty(document, key = null) {
     description: description,
   };
 
-  return await TeriockBaseEffect.create(
+  const property = await TeriockBaseEffect.create(
     {
       name: name,
       type: "property",
@@ -83,10 +86,12 @@ export async function createProperty(document, key = null) {
     },
     { parent: document },
   );
+  await document.forceUpdate();
+  return property;
 }
 
 export async function createEffect(document) {
-  return await TeriockBaseEffect.create(
+  const effect = await TeriockBaseEffect.create(
     {
       name: "New Effect",
       type: "effect",
@@ -94,10 +99,12 @@ export async function createEffect(document) {
     },
     { parent: document },
   );
+  await document.forceUpdate();
+  return effect;
 }
 
 export async function createFluency(document) {
-  return await TeriockBaseEffect.create(
+  const fluency = await TeriockBaseEffect.create(
     {
       name: "New Fluency",
       type: "fluency",
@@ -105,4 +112,6 @@ export async function createFluency(document) {
     },
     { parent: document },
   );
+  await document.forceUpdate();
+  return fluency;
 }

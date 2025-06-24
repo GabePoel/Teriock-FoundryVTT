@@ -51,8 +51,8 @@ function attributeField(name) {
  * @property {foundry.data.fields.NumberField} value - Save bonus value for this attribute
  *
  * @typedef {Object} BasicActorSchema
- * @property {foundry.data.fields.NumberField} lvl - Actor level (1-∞, integer)
- * @property {foundry.data.fields.NumberField} size - Actor size rating (0-30)
+ * @property {foundry.data.fields.NumberField} lvl - Actor level (>= 1, integer)
+ * @property {foundry.data.fields.NumberField} size - Actor size (0-30)
  * @property {foundry.data.fields.SchemaField} attributes - Object containing six attribute fields:
  *   - int: {@link AttributeField} Intelligence attribute
  *   - mov: {@link AttributeField} Movement attribute
@@ -81,6 +81,10 @@ export function _defineBasics(schema) {
     snk: attributeField("SNK"),
     str: attributeField("STR"),
     unp: attributeField("UNP"),
+  });
+  schema.updateCounter = new fields.BooleanField({
+    initial: false,
+    label: "Update Counter",
   });
   return schema;
 }

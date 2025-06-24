@@ -339,7 +339,7 @@ export const TeriockSheet = (Base) =>
 
       await effect.saveFamily();
       const target = this.document.documentName === "ActiveEffect" ? this.document.parent : this.document;
-      return target.createEmbeddedDocuments("ActiveEffect", [effect]);
+      return await target.createEmbeddedDocuments("ActiveEffect", [effect]);
     }
 
     _canDropEffect(effect) {
@@ -361,7 +361,7 @@ export const TeriockSheet = (Base) =>
       if (item.parent?.documentName === "Actor" && item.type === "equipment") {
         await source.delete();
       }
-      return this.document.createEmbeddedDocuments("Item", [item]);
+      return await this.document.createEmbeddedDocuments("Item", [item]);
     }
 
     _canDropItem(item) {
@@ -419,21 +419,21 @@ export const TeriockSheet = (Base) =>
       this._embeddedFromCard(target)?.chat();
     }
     static async _useOneDoc(event, target) {
-      this._embeddedFromCard(target)?.system.useOne();
+      await this._embeddedFromCard(target)?.system.useOne();
     }
     static async _toggleForceDisabledDoc(event, target) {
-      this._embeddedFromCard(target)?.toggleForceDisabled();
+      await this._embeddedFromCard(target)?.toggleForceDisabled();
     }
 
     static async _rollDoc(event, target) {
       const options = event?.altKey ? { advantage: true } : event?.shiftKey ? { disadvantage: true } : {};
-      this._embeddedFromCard(target)?.use(options);
+      await this._embeddedFromCard(target)?.use(options);
     }
 
     static async _quickToggle(event, target) {
       const { path } = target.dataset;
       const current = target.dataset.bool === "true";
-      this.document.update({ [path]: !current });
+      await this.document.update({ [path]: !current });
     }
 
     static async _sheetToggle(event, target) {
@@ -450,13 +450,13 @@ export const TeriockSheet = (Base) =>
     // }
 
     static async _createAbility(event, __) {
-      await createEffects.createAbility(this.document, null);
+      return await createEffects.createAbility(this.document, null);
     }
     static async _createResource(event, __) {
-      await createEffects.createResource(this.document, null);
+      return await createEffects.createResource(this.document, null);
     }
     static async _createFluency(event, __) {
-      await createEffects.createFluency(this.document, null);
+      return await createEffects.createFluency(this.document, null);
     }
 
     static async _createProperty(event, __) {
@@ -484,14 +484,14 @@ export const TeriockSheet = (Base) =>
             label: "Add Chosen Property",
             default: true,
             callback: async (event, button) => {
-              await createEffects.createProperty(this.item, button.form.elements.property.value);
+              return await createEffects.createProperty(this.item, button.form.elements.property.value);
             },
           },
           {
             action: "other",
             label: "Create New Property",
             callback: async () => {
-              await createEffects.createProperty(this.item, null);
+              return await createEffects.createProperty(this.item, null);
             },
           },
         ],

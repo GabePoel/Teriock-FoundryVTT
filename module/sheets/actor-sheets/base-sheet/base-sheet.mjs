@@ -38,6 +38,7 @@ export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorShee
       takeHack: this._takeHack,
       attack: this._attack,
       resist: this._resist,
+      immune: this._immune,
       endCondition: this._endCondition,
     },
     form: {
@@ -318,18 +319,55 @@ export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorShee
 
   static async _resist(event, target) {
     event.stopPropagation();
+    let message = null;
+    if (target.classList.contains("tcard-image")) {
+      const img = target.querySelector("img");
+      if (img) {
+        message = img.alt;
+      }
+    }
+    console.log(target);
+    console.log(message);
     const options = {
       advantage: event.altKey,
       disadvantage: event.shiftKey,
+      message: message,
     };
     this.actor.rollResistance(options);
   }
 
-  static async _endCondition(event, target) {
+  static async _immune(event, target) {
     event.stopPropagation();
+    let message = null;
+    if (target.classList.contains("tcard-image")) {
+      const img = target.querySelector("img");
+      if (img) {
+        message = img.alt;
+      }
+    }
+    console.log(target);
+    console.log(message);
     const options = {
       advantage: event.altKey,
       disadvantage: event.shiftKey,
+      message: message,
+    };
+    this.actor.rollImmunity(options);
+  }
+
+  static async _endCondition(event, target) {
+    event.stopPropagation();
+    let message = null;
+    if (target.classList.contains("tcard-image")) {
+      const img = target.querySelector("img");
+      if (img) {
+        message = img.alt;
+      }
+    }
+    const options = {
+      advantage: event.altKey,
+      disadvantage: event.shiftKey,
+      message: message,
     };
     this.actor.endCondition(options);
   }
@@ -541,19 +579,21 @@ export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorShee
     });
 
     // Add listeners for filter selects
-    this.element.querySelectorAll('select[name^="settings.abilityFilters"], select[name^="settings.equipmentFilters"]').forEach((el) => {
-      el.addEventListener("change", (e) => {
-        const name = e.target.name;
-        if (!name) return;
-        const path = name.split(".").slice(1); // remove 'settings'
-        let obj = this.settings;
-        for (let i = 0; i < path.length - 1; i++) {
-          obj = obj[path[i]];
-        }
-        obj[path[path.length - 1]] = e.target.value;
-        this.render();
+    this.element
+      .querySelectorAll('select[name^="settings.abilityFilters"], select[name^="settings.equipmentFilters"]')
+      .forEach((el) => {
+        el.addEventListener("change", (e) => {
+          const name = e.target.name;
+          if (!name) return;
+          const path = name.split(".").slice(1); // remove 'settings'
+          let obj = this.settings;
+          for (let i = 0; i < path.length - 1; i++) {
+            obj = obj[path[i]];
+          }
+          obj[path[path.length - 1]] = e.target.value;
+          this.render();
+        });
       });
-    });
 
     // Add listeners for tswitch buttons
     this.element.querySelectorAll('button[data-action="toggleSwitch"]').forEach((el) => {
