@@ -101,7 +101,7 @@ export async function _generateEffect(abilityData, actor, heightenAmount = 0) {
       seconds: seconds || 0,
     },
   };
-  if (seconds > 0 || abilityData.duration.toLowerCase().trim() !== "instant") {
+  if ((seconds > 0 || abilityData.duration.toLowerCase().trim() !== "instant") && abilityData.maneuver !== "passive") {
     return effectData;
   }
   return false;
