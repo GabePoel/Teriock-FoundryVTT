@@ -1,3 +1,35 @@
+# Feature Improvements
+
+- [ ] Perception features
+  - [ ] Blind fighting/true sight/etc.
+  - [ ] Frozen and morganti vision modes
+  - [ ] Automatic perception mode inherited from actor
+  - [ ] Properties and abilities for light sources
+- [ ] Token features
+  - [ ] Better death/down displays
+  - [ ] Frozen/transformed/lighted/terrored/burned visual clues
+- [ ] Ability management
+  - [ ] Abilities letting you know when they start/end
+  - [ ] Heightened duration scaling
+  - [ ] Hack buttons
+  - [ ] Easy way to apply boosts
+  - [ ] Enricheds for different roll types 
+
+# Codebase
+
+- [ ] Consolidate applies and consequences systems
+- [ ] Clean up the CSS (as if)
+- [ ] Organize hooks (and move stuff out of hooks?)
+- [ ] Hacks and encumbrance to statuses (no HUD)
+- [ ] Better roll chat message button handling
+- [ ] Ability usage modularization
+- [ ] Take basic abilities off of each individual actors to speed up sorting and make for smaller database
+- [ ] Better compendium building automation 
+- [ ] More wiki links in documentation
+- [ ] Just some general sprucing around (as always)
+
+# Core Stuff (done?)
+
 - [x] Bug fixes
   - [x] Drag/drop with descendent abilities
     - [x] The descendants themselves
