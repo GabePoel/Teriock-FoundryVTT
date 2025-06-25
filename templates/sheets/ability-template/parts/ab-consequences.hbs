@@ -29,6 +29,18 @@
         classes="teriock-full-width"
         }}
         {{formGroup
+        systemFields.applies.fields.base.fields.startStatuses
+        value=system.applies.base.startStatuses
+        choices=config.consequenceOptions.statuses
+        classes="teriock-full-width"
+        }}
+        {{formGroup
+        systemFields.applies.fields.base.fields.endStatuses
+        value=system.applies.base.endStatuses
+        choices=config.consequenceOptions.statuses
+        classes="teriock-full-width"
+        }}
+        {{formGroup
         systemFields.applies.fields.base.fields.hacks
         value=system.applies.base.hacks
         choices=config.consequenceOptions.hacks
@@ -102,15 +114,27 @@
         </div>
         {{/each}}
         {{formGroup
-        systemFields.applies.fields.heightened.fields.hacks
-        value=system.applies.heightened.hacks
-        choices=config.consequenceOptions.hacks
-        classes="teriock-full-width"
-        }}
-        {{formGroup
         systemFields.applies.fields.heightened.fields.statuses
         value=system.applies.heightened.statuses
         choices=config.consequenceOptions.statuses
+        classes="teriock-full-width"
+        }}
+        {{formGroup
+        systemFields.applies.fields.heightened.fields.startStatuses
+        value=system.applies.heightened.startStatuses
+        choices=config.consequenceOptions.statuses
+        classes="teriock-full-width"
+        }}
+        {{formGroup
+        systemFields.applies.fields.heightened.fields.endStatuses
+        value=system.applies.heightened.endStatuses
+        choices=config.consequenceOptions.statuses
+        classes="teriock-full-width"
+        }}
+        {{formGroup
+        systemFields.applies.fields.heightened.fields.hacks
+        value=system.applies.heightened.hacks
+        choices=config.consequenceOptions.hacks
         classes="teriock-full-width"
         }}
         <!-- Heightened Changes UI -->
@@ -183,6 +207,18 @@
         {{formGroup
         systemFields.applies.fields.proficient.fields.statuses
         value=system.applies.proficient.statuses
+        choices=config.consequenceOptions.statuses
+        classes="teriock-full-width"
+        }}
+        {{formGroup
+        systemFields.applies.fields.proficient.fields.startStatuses
+        value=system.applies.proficient.startStatuses
+        choices=config.consequenceOptions.statuses
+        classes="teriock-full-width"
+        }}
+        {{formGroup
+        systemFields.applies.fields.proficient.fields.endStatuses
+        value=system.applies.proficient.endStatuses
         choices=config.consequenceOptions.statuses
         classes="teriock-full-width"
         }}
@@ -260,15 +296,27 @@
         </div>
         {{/each}}
         {{formGroup
-        systemFields.applies.fields.fluent.fields.hacks
-        value=system.applies.fluent.hacks
-        choices=config.consequenceOptions.hacks
-        classes="teriock-full-width"
-        }}
-        {{formGroup
         systemFields.applies.fields.fluent.fields.statuses
         value=system.applies.fluent.statuses
         choices=config.consequenceOptions.statuses
+        classes="teriock-full-width"
+        }}
+        {{formGroup
+        systemFields.applies.fields.fluent.fields.startStatuses
+        value=system.applies.fluent.startStatuses
+        choices=config.consequenceOptions.statuses
+        classes="teriock-full-width"
+        }}
+        {{formGroup
+        systemFields.applies.fields.fluent.fields.endStatuses
+        value=system.applies.fluent.endStatuses
+        choices=config.consequenceOptions.statuses
+        classes="teriock-full-width"
+        }}
+        {{formGroup
+        systemFields.applies.fields.fluent.fields.hacks
+        value=system.applies.fluent.hacks
+        choices=config.consequenceOptions.hacks
         classes="teriock-full-width"
         }}
         <!-- Fluent Changes UI -->
@@ -320,68 +368,6 @@
           {{/each}}
         </div>
       </fieldset>
-      {{!-- <fieldset class="form-group" style="flex-direction: column;">
-        <legend>Add or Remove Consequences</legend>
-        {{formGroup
-        systemFields.consequences.fields.base
-        value=system.consequences.base
-        choices=(lookup config.consequenceOptions.interaction system.interaction)
-        testing="Is this working?"
-        }}
-        {{formGroup
-        systemFields.consequences.fields.proficient
-        value=system.consequences.proficient
-        choices=(lookup config.consequenceOptions.interaction system.interaction)
-        }}
-        {{formGroup
-        systemFields.consequences.fields.fluent
-        value=system.consequences.fluent
-        choices=(lookup config.consequenceOptions.interaction system.interaction)
-        }}
-      </fieldset>
-      <fieldset class="form-group" style="flex-direction: column; width: 100%;">
-        <legend>Base</legend>
-        {{#each system.consequences.base as |consequence index|}}
-        {{formInput
-        ../systemFields.consequences.fields.base.element
-        value=consequence
-        label=(lookup (lookup ../config.consequenceOptions.interaction ../system.interaction) index)
-        name=(concat "system.consequences.base." index)
-        }}
-        {{/each}}
-      </fieldset>
-      {{#if (exists system.consequences.proficient)}}
-      <fieldset class="form-group" style="flex-direction: column; width: 100%;">
-        <legend>If Proficient</legend>
-        {{#each system.consequences.proficient as |consequence index|}}
-        <fieldset class="form-group" style="flex-direction: column; width: 100%;">
-          <legend>{{lookup (lookup ../config.consequenceOptions.interaction ../system.interaction) index}}</legend>
-          {{formInput
-          ../systemFields.consequences.fields.proficient.element
-          value=consequence
-          label=(lookup (lookup ../config.consequenceOptions.interaction ../system.interaction) index)
-          name=(concat "system.consequences.proficient." index)
-          }}
-        </fieldset>
-        {{/each}}
-      </fieldset>
-      {{/if}}
-      {{#if (exists system.consequences.fluent)}}
-      <fieldset class="form-group" style="flex-direction: column; width: 100%;">
-        <legend>If Fluent</legend>
-        {{#each system.consequences.fluent as |consequence index|}}
-        <fieldset class="form-group" style="flex-direction: column; width: 100%;">
-          <legend>{{lookup (lookup ../config.consequenceOptions.interaction ../system.interaction) index}}</legend>
-          {{formInput
-          ../systemFields.consequences.fields.fluent.element
-          value=consequence
-          label=(lookup (lookup ../config.consequenceOptions.interaction ../system.interaction) index)
-          name=(concat "system.consequences.fluent." index)
-          }}
-        </fieldset>
-        {{/each}}
-      </fieldset>
-      {{/if}} --}}
     </div>
     <button
       class="ab-consequences-close"

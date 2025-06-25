@@ -24,25 +24,26 @@ async function use(equipmentData, options) {
     // let damageTypes = equipmentData.damageTypes || [];
     let damageTypes = [];
     if (equipmentData.powerLevel === "magic") {
-      damageTypes.push("Magic");
+      damageTypes.push("magic");
     }
     const effectDamageTypes = equipmentData.parent.effects
       .filter((effect) => {
         return effect.type === "property" && !effect.disabled && effect.system.damageType;
       })
-      .map((effect) => effect.system.damageType);
+      .map((effect) => (effect.system.damageType ? effect.system.damageType.toLowerCase() : effect.system.damageType));
     if (
       equipmentData.parent.effects.some(
         (effect) =>
           effect.type === "property" && !effect.disabled && (effect.name === "Flaming" || effect.name === "Burning"),
       )
     ) {
-      effectDamageTypes.push("Fire");
+      effectDamageTypes.push("fire");
     }
-    damageTypes = [...new Set([...damageTypes, ...effectDamageTypes])];
+    // Ensure all damage types are lower case
+    damageTypes = [...new Set([...damageTypes, ...effectDamageTypes])].map(dt => dt && typeof dt === "string" ? dt.toLowerCase() : dt);
     if (damageTypes.length > 0 && rollFormula.length > 0 && rollFormula !== "0") {
       damageTypes.sort((a, b) => a.localeCompare(b));
-      rollFormula += "[" + damageTypes.join(", ") + "]";
+      rollFormula += "[" + damageTypes.join(" ") + "]";
     }
 
     if (options?.twoHanded && equipmentData.twoHandedDamage) {

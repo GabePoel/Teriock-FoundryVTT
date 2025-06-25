@@ -33,7 +33,12 @@ export default class TeriockEffect extends ChildDocumentMixin(foundry.documents.
    */
   getParent() {
     if (this.system.parentUuid) {
-      return foundry.utils.fromUuidSync(this.system.parentUuid);
+      try {
+        return foundry.utils.fromUuidSync(this.system.parentUuid);
+      } catch (error) {
+        // Fallback to async if sync fails
+        return foundry.utils.fromUuid(this.system.parentUuid);
+      }
     }
     return null;
   }
@@ -58,8 +63,14 @@ export default class TeriockEffect extends ChildDocumentMixin(foundry.documents.
     const children = [];
     if (this.system.childIds?.length > 0) {
       for (const uuid of this.system.childUuids) {
-        const child = foundry.utils.fromUuidSync(uuid);
-        children.push(child);
+        try {
+          const child = foundry.utils.fromUuidSync(uuid);
+          children.push(child);
+        } catch (error) {
+          // Fallback to async if sync fails
+          const child = foundry.utils.fromUuid(uuid);
+          children.push(child);
+        }
       }
     }
     return children;

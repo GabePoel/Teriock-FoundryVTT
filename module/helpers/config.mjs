@@ -19,7 +19,6 @@ import { properties as propertiesContent } from "../content/properties.mjs";
 import { rankOptions } from "./constants/rank-options.mjs";
 import { resourceOptions } from "./constants/resource-options.mjs";
 import { tradecraftOptions } from "./constants/tradecraft-options.mjs";
-import * as fields from "../data/effect-data/ability-data/methods/schema/_define-consequences.mjs";
 
 const TERIOCK = {
   abilities: abilities,
@@ -51,7 +50,6 @@ const TERIOCK = {
     survivalist: tradecraftOptions.survivalist,
   },
   resourceOptions: resourceOptions,
-  fields: fields,
 };
 
 export default TERIOCK;

@@ -57,8 +57,8 @@ export async function _parse(equipmentData, rawHTML) {
 
   // Parse sb, av, bv
   parameters.sb = toCamelCase(getValue(".sb") || "") ?? parameters.sb;
-  parameters.av = cleanValue(getValue(".av")) ?? parameters.av;
-  parameters.bv = cleanValue(getValue(".bv")) ?? parameters.bv;
+  parameters.av = parseInt(cleanValue(getValue(".av"))) || 0;
+  parameters.bv = parseInt(cleanValue(getValue(".bv"))) || 0;
 
   // Special rules
   parameters.specialRules = getHTML(".special-rules") ?? parameters.specialRules;

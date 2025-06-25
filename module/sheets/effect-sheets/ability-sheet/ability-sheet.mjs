@@ -35,7 +35,7 @@ export default class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(
 
     const system = this.document.system;
     context.tab = this._tab;
-    context.childAbilities = this.document.getChildren();
+    context.childAbilities = await this.document.getChildrenAsync();
     context.parentAbility = this.document.getParent();
     const editors = {
       manaCost: system.costs.mp.value.variable,

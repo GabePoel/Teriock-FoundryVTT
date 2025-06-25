@@ -181,7 +181,9 @@ export interface ConsequencesData {
  * Applies data for different proficiency levels
  */
 export interface AppliesData {
-  statuses: string[];
+  statuses: Set<string>;
+  startStatuses: Set<string>;
+  endStatuses: Set<string>;
   damage: string[];
   drain: string[];
   changes: EffectChangeData[];

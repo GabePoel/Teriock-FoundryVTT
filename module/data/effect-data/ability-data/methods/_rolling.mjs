@@ -8,7 +8,7 @@ import TeriockRoll from "../../../../documents/roll.mjs";
 // Button configurations for different roll types
 const BUTTON_CONFIGS = {
   feat: { label: "Roll SAVE Save", icon: "fas fa-dice-d20", action: "rollFeatSave" },
-  effect: { label: "Apply Effect", icon: "fas fa-plus", action: "applyEffect" },
+  effect: { label: "Apply Effect", icon: "fas fa-disease", action: "applyEffect" },
   resistance: { label: "Roll Resistance", icon: "fas fa-shield-alt", action: "rollResistance", data: "resistance" },
   // Roll buttons
   damage: { label: "Roll Damage", icon: "fas fa-heart", action: "takeDamage" },
@@ -29,7 +29,10 @@ const BUTTON_CONFIGS = {
   eye: { label: "Hack Eye", icon: "fas fa-eye", action: "takeHack", data: "eye" },
   ear: { label: "Hack Ear", icon: "fas fa-ear", action: "takeHack", data: "ear" },
   mouth: { label: "Hack Mouth", icon: "fas fa-lips", action: "takeHack", data: "mouth" },
-  nose: { label: "Hack Nose", icon: "fas fa-nose", action: "takeHack", data: "nose" }
+  nose: { label: "Hack Nose", icon: "fas fa-nose", action: "takeHack", data: "nose" },
+  // Status button templates
+  startStatus: { icon: "fas fa-plus", action: "applyStatus" },
+  endStatus: { icon: "fas fa-xmark", action: "removeStatus" }
 };
 
 /**
@@ -111,7 +114,7 @@ async function buildButtons(abilityData, useData) {
   const takeData = await _generateTakes(abilityData, useData.modifiers.heightened);
   Object.entries(takeData.rolls).forEach(([key, value]) => {
     if (value && BUTTON_CONFIGS[key]) {
-      buttons.push({ ...BUTTON_CONFIGS[key], data: value });
+      buttons.push({ ...BUTTON_CONFIGS[key], data: value, tooltip: value });
     }
   });
 
@@ -119,6 +122,29 @@ async function buildButtons(abilityData, useData) {
   for (const hackType of takeData.hacks) {
     if (BUTTON_CONFIGS[hackType]) {
       buttons.push({ ...BUTTON_CONFIGS[hackType] });
+    }
+  }
+
+  // Status buttons
+  if (takeData.startStatuses && takeData.startStatuses.size > 0) {
+    for (const status of takeData.startStatuses) {
+      const statusName = CONFIG.TERIOCK.conditions[status]?.name || status;
+      buttons.push({
+        ...BUTTON_CONFIGS.startStatus,
+        label: `Apply ${statusName}`,
+        data: status
+      });
+    }
+  }
+
+  if (takeData.endStatuses && takeData.endStatuses.size > 0) {
+    for (const status of takeData.endStatuses) {
+      const statusName = CONFIG.TERIOCK.conditions[status]?.name || status;
+      buttons.push({
+        ...BUTTON_CONFIGS.endStatus,
+        label: `Remove ${statusName}`,
+        data: status
+      });
     }
   }
 
@@ -186,7 +212,6 @@ async function stageUse(abilityData, advantage, disadvantage) {
   const useData = {
     costs: { mp: 0, hp: 0 },
     modifiers: { heightened: 0 },
-    consequences: {},
     formula: "",
     rollData: abilityData.parent.getActor().getRollData(),
   };

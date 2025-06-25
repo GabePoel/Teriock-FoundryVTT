@@ -43,7 +43,6 @@ import { abilityOptions } from "../../../../../helpers/constants/ability-options
  * // Use in complete schema definition
  * let schema = {};
  * schema = _defineGeneral(schema);
- * schema = _defineConsequences(schema);
  */
 export function _defineGeneral(schema) {
   return {

@@ -1,5 +1,77 @@
+import {
+  TeriockArrayField,
+  TeriockRecordField,
+} from "./_fields.mjs"
 const { fields } = foundry.data;
-import { consequenceRollsField, consequenceHacksField, consequenceChangesField } from "./_define-consequences.mjs";
+
+/**
+ * Creates a field for consequence rolls configuration.
+ *
+ * This field allows defining various roll formulas for different effect types:
+ * - Damage, drain, wither rolls
+ * - Healing and revitalization rolls
+ * - Temporary HP/MP manipulation
+ * - Sleep, kill, and other special effects
+ *
+ * Relevant wiki pages:
+ * - [Damage types](https://wiki.teriock.com/index.php/Category:Damage_types)
+ * - [Drain types](https://wiki.teriock.com/index.php/Category:Drain_types)
+ *
+ * @returns {TeriockRecordField} Field for configuring consequence rolls
+ * @private
+ *
+ * @example
+ * // Create rolls field
+ * const rollsField = consequenceRollsField();
+ */
+export function consequenceRollsField() {
+  return new TeriockRecordField(
+    new fields.StringField({
+      nullable: true,
+    }),
+    {
+      label: "Rolls",
+      hint: "The rolls that are made as part of the consequence.",
+    },
+  );
+}
+
+/**
+ * Creates a field for consequence changes configuration.
+ *
+ * This field defines changes that are applied to the target as part of the consequence.
+ *
+ * @returns {TeriockArrayField} Field for configuring consequence changes
+ * @private
+ *
+ * @example
+ * // Create changes field
+ * const changesField = consequenceChangesField();
+ */
+export function consequenceChangesField() {
+  return new TeriockArrayField(
+    new fields.SchemaField({
+      key: new fields.StringField({ initial: "" }),
+      mode: new fields.NumberField({
+        initial: 4,
+        choices: {
+          0: "Custom",
+          1: "Multiply",
+          2: "Add",
+          3: "Downgrade",
+          4: "Upgrade",
+          5: "Override",
+        },
+      }),
+      value: new fields.StringField({ initial: "" }),
+      priority: new fields.NumberField({ initial: 20 }),
+    }),
+    {
+      label: "Changes",
+      hint: "The changes applied as part of the ongoing effect. These are applied to the target.",
+    },
+  );
+}
 
 /**
  * Creates a field for applies data configuration.
@@ -24,7 +96,25 @@ function appliesField() {
       }),
       {
         label: "Conditions",
-        hint: "The conditions applied as part of the ongoing effect. These are applied to the target.",
+        hint: "The conditions applied as part of the ability's ongoing effect.",
+      },
+    ),
+    startStatuses: new fields.SetField(
+      new fields.StringField({
+        choices: CONFIG.TERIOCK.conditions,
+      }),
+      {
+        label: "Start Conditions",
+        hint: "These conditions are immediately applied when the ability is used. They exist independently of the ability.",
+      },
+    ),
+    endStatuses: new fields.SetField(
+      new fields.StringField({
+        choices: CONFIG.TERIOCK.conditions,
+      }),
+      {
+        label: "End Conditions",
+        hint: "These conditions are immediately removed when the ability is used.",
       },
     ),
     rolls: consequenceRollsField(),
@@ -65,7 +155,6 @@ function appliesField() {
  *
  * @param {object} schema - The base schema object to extend
  * @returns {object} Schema object with applies fields added
- * @deprecated This is being phased out in favor of the more robust consequences system.
  * @private
  *
  * @example
@@ -76,7 +165,6 @@ function appliesField() {
  * // Use in complete schema definition
  * let schema = {};
  * schema = _defineApplies(schema);
- * schema = _defineConsequences(schema);
  * schema = _defineGeneral(schema);
  */
 export function _defineApplies(schema) {

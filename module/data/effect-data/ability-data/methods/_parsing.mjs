@@ -14,10 +14,42 @@ const COST_TEMPLATES = {
 
 // Default applies structure
 const DEFAULT_APPLIES = {
-  base: { rolls: {}, statuses: [], hacks: {}, duration: 0, changes: [] },
-  proficient: { rolls: {}, statuses: [], hacks: {}, duration: 0, changes: [] },
-  fluent: { rolls: {}, statuses: [], hacks: {}, duration: 0, changes: [] },
-  heightened: { rolls: {}, statuses: [], hacks: {}, duration: 0, changes: [] }
+  base: { 
+    rolls: {}, 
+    statuses: new Set(), 
+    startStatuses: new Set(), 
+    endStatuses: new Set(), 
+    hacks: new Set(), 
+    duration: 0, 
+    changes: [] 
+  },
+  proficient: { 
+    rolls: {}, 
+    statuses: new Set(), 
+    startStatuses: new Set(), 
+    endStatuses: new Set(), 
+    hacks: new Set(), 
+    duration: 0, 
+    changes: [] 
+  },
+  fluent: { 
+    rolls: {}, 
+    statuses: new Set(), 
+    startStatuses: new Set(), 
+    endStatuses: new Set(), 
+    hacks: new Set(), 
+    duration: 0, 
+    changes: [] 
+  },
+  heightened: { 
+    rolls: {}, 
+    statuses: new Set(), 
+    startStatuses: new Set(), 
+    endStatuses: new Set(), 
+    hacks: new Set(), 
+    duration: 0, 
+    changes: [] 
+  }
 };
 
 /**
@@ -76,8 +108,8 @@ export async function _parse(abilityData, rawHTML) {
   delete parameters.parentId;
   delete parameters.childIds;
 
-  // Process dice and hack extraction
-  processDiceAndHackExtraction(parameters);
+  // Process dice and effect extraction
+  processDiceAndEffectExtraction(parameters);
   
   // Apply overrides
   const applications = _override(abilityData.parent.name);
@@ -216,8 +248,18 @@ function processTags(parameters, tagTree, doc, changes) {
   parameters.overview.fluent = getBarText(doc, "if-fluent");
   
   const resultBars = ["hit", "critHit", "miss", "critMiss", "save", "critSave", "fail", "critFail"];
+  const resultsBars = {
+    hit: "on-hit",
+    critHit: "on-critical-hit",
+    miss: "on-miss",
+    critMiss: "on-critical-miss",
+    save: "on-save",
+    critSave: "on-critical-save",
+    fail: "on-fail",
+    critFail: "on-critical-fail"
+  }
   resultBars.forEach(bar => {
-    parameters.results[bar] = getBarText(doc, `on-${bar}`);
+    parameters.results[bar] = getBarText(doc, resultsBars[bar]);
   });
 
   // Process improvements
@@ -377,15 +419,63 @@ function extractHacksFromHTML(html) {
 }
 
 /**
- * Process dice and hack extraction
+ * Extract conditions from HTML content
  */
-function processDiceAndHackExtraction(parameters) {
+function extractConditionsFromHTML(html) {
+  const tempDiv = document.createElement("div");
+  tempDiv.innerHTML = html || "";
+  const conditions = new Set();
+  tempDiv.querySelectorAll("span.metadata[data-type='condition']").forEach(el => {
+    const condition = el.dataset.condition;
+    if (condition) {
+      conditions.add(condition);
+    }
+  });
+  return conditions;
+}
+
+/**
+ * Extract start conditions from HTML content
+ */
+function extractStartConditionsFromHTML(html) {
+  const tempDiv = document.createElement("div");
+  tempDiv.innerHTML = html || "";
+  const startConditions = new Set();
+  tempDiv.querySelectorAll("span.metadata[data-type='start-condition']").forEach(el => {
+    const condition = el.dataset.condition;
+    if (condition) {
+      startConditions.add(condition);
+    }
+  });
+  return startConditions;
+}
+
+/**
+ * Extract end conditions from HTML content
+ */
+function extractEndConditionsFromHTML(html) {
+  const tempDiv = document.createElement("div");
+  tempDiv.innerHTML = html || "";
+  const endConditions = new Set();
+  tempDiv.querySelectorAll("span.metadata[data-type='end-condition']").forEach(el => {
+    const condition = el.dataset.condition;
+    if (condition) {
+      endConditions.add(condition);
+    }
+  });
+  return endConditions;
+}
+
+/**
+ * Process dice and effect extraction
+ */
+function processDiceAndEffectExtraction(parameters) {
   // Initialize applies if needed
   if (!parameters.applies) {
     parameters.applies = { ...DEFAULT_APPLIES };
   }
 
-  // Extract dice and hacks from overviews
+  // Extract dice and effects from overviews
   const overviewSources = [
     { source: parameters.overview.base, target: parameters.applies.base },
     { source: parameters.overview.proficient, target: parameters.applies.proficient },
@@ -403,26 +493,62 @@ function processDiceAndHackExtraction(parameters) {
     if (hacks.size > 0) {
       target.hacks = new Set([...(target.hacks || []), ...hacks]);
     }
+
+    const conditions = extractConditionsFromHTML(source);
+    if (conditions.size > 0) {
+      target.statuses = new Set([...(target.statuses || []), ...conditions]);
+    }
+
+    const startConditions = extractStartConditionsFromHTML(source);
+    if (startConditions.size > 0) {
+      target.startStatuses = new Set([...(target.startStatuses || []), ...startConditions]);
+    }
+
+    const endConditions = extractEndConditionsFromHTML(source);
+    if (endConditions.size > 0) {
+      target.endStatuses = new Set([...(target.endStatuses || []), ...endConditions]);
+    }
   });
 
-  // Extract dice and hacks from results
+  // Extract dice and effects from results
   let resultDice = {};
   let resultHacks = new Set();
+  let resultConditions = new Set();
+  let resultStartConditions = new Set();
+  let resultEndConditions = new Set();
   
   if (parameters.results.hit) {
     Object.assign(resultDice, extractDiceFromHTML(parameters.results.hit));
     const hitHacks = extractHacksFromHTML(parameters.results.hit);
+    const hitConditions = extractConditionsFromHTML(parameters.results.hit);
+    const hitStartConditions = extractStartConditionsFromHTML(parameters.results.hit);
+    const hitEndConditions = extractEndConditionsFromHTML(parameters.results.hit);
     resultHacks = new Set([...resultHacks, ...hitHacks]);
+    resultConditions = new Set([...resultConditions, ...hitConditions]);
+    resultStartConditions = new Set([...resultStartConditions, ...hitStartConditions]);
+    resultEndConditions = new Set([...resultEndConditions, ...hitEndConditions]);
   }
   
   if (parameters.interaction === "feat" && parameters.results.fail) {
     Object.assign(resultDice, extractDiceFromHTML(parameters.results.fail));
     const failHacks = extractHacksFromHTML(parameters.results.fail);
+    const failConditions = extractConditionsFromHTML(parameters.results.fail);
+    const failStartConditions = extractStartConditionsFromHTML(parameters.results.fail);
+    const failEndConditions = extractEndConditionsFromHTML(parameters.results.fail);
     resultHacks = new Set([...resultHacks, ...failHacks]);
+    resultConditions = new Set([...resultConditions, ...failConditions]);
+    resultStartConditions = new Set([...resultStartConditions, ...failStartConditions]);
+    resultEndConditions = new Set([...resultEndConditions, ...failEndConditions]);
   } else if (parameters.interaction === "block" && parameters.results.save) {
     Object.assign(resultDice, extractDiceFromHTML(parameters.results.save));
     const saveHacks = extractHacksFromHTML(parameters.results.save);
+    const saveConditions = extractConditionsFromHTML(parameters.results.save);
+    const saveStartConditions = extractStartConditionsFromHTML(parameters.results.save);
+    const saveEndConditions = extractEndConditionsFromHTML(parameters.results.save);
     resultHacks = new Set([...resultHacks, ...saveHacks]);
+    resultConditions = new Set([...resultConditions, ...saveConditions]);
+    resultStartConditions = new Set([...resultStartConditions, ...saveStartConditions]);
+    resultEndConditions = new Set([...resultEndConditions, ...saveEndConditions]);
   }
   
   if (Object.keys(resultDice).length) {
@@ -431,6 +557,24 @@ function processDiceAndHackExtraction(parameters) {
   
   if (resultHacks.size > 0) {
     parameters.applies.base.hacks = new Set([...(parameters.applies.base.hacks || []), ...resultHacks]);
+  }
+
+  if (resultConditions.size > 0) {
+    parameters.applies.base.statuses = new Set([...(parameters.applies.base.statuses || []), ...resultConditions]);
+  }
+
+  if (resultStartConditions.size > 0) {
+    parameters.applies.base.startStatuses = new Set([
+      ...(parameters.applies.base.startStatuses || []), 
+      ...resultStartConditions
+    ]);
+  }
+
+  if (resultEndConditions.size > 0) {
+    parameters.applies.base.endStatuses = new Set([
+      ...(parameters.applies.base.endStatuses || []), 
+      ...resultEndConditions
+    ]);
   }
 }
 

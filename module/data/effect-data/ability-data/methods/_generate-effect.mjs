@@ -116,14 +116,20 @@ export async function _generateEffect(abilityData, actor, heightenAmount = 0) {
 export function _generateTakes(abilityData, heightenAmount = 0) {
   let rolls = abilityData.applies.base.rolls || {};
   let hacks = abilityData.applies.base.hacks || new Set();
+  let startStatuses = abilityData.applies.base.startStatuses || new Set();
+  let endStatuses = abilityData.applies.base.endStatuses || new Set();
 
   if (abilityData.isProficient) {
     rolls = { ...rolls, ...abilityData.applies.proficient.rolls };
     hacks = new Set([...hacks, ...(abilityData.applies.proficient.hacks || [])]);
+    startStatuses = new Set([...startStatuses, ...(abilityData.applies.proficient.startStatuses || [])]);
+    endStatuses = new Set([...endStatuses, ...(abilityData.applies.proficient.endStatuses || [])]);
   }
   if (abilityData.isFluent) {
     rolls = { ...rolls, ...abilityData.applies.fluent.rolls };
     hacks = new Set([...hacks, ...(abilityData.applies.fluent.hacks || [])]);
+    startStatuses = new Set([...startStatuses, ...(abilityData.applies.fluent.startStatuses || [])]);
+    endStatuses = new Set([...endStatuses, ...(abilityData.applies.fluent.endStatuses || [])]);
   }
   if (heightenAmount > 0) {
     for (const [key, value] of Object.entries(abilityData.applies.heightened.rolls || {})) {
@@ -138,10 +144,18 @@ export function _generateTakes(abilityData, heightenAmount = 0) {
     for (const hack of abilityData.applies.heightened.hacks || []) {
       hacks.add(hack);
     }
+    for (const status of abilityData.applies.heightened.startStatuses || []) {
+      startStatuses.add(status);
+    }
+    for (const status of abilityData.applies.heightened.endStatuses || []) {
+      endStatuses.add(status);
+    }
   }
 
   return {
     rolls: rolls,
     hacks: hacks,
+    startStatuses: startStatuses,
+    endStatuses: endStatuses,
   };
 }

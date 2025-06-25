@@ -78,11 +78,12 @@ export default function registerHooks() {
     }
   });
 
+  // TODO: This might not be needed anymore.
   Hooks.on("updateActiveEffect", async (document, updateData, options, userId) => {
     console.debug(`Teriock | Active Effect updated: ${document.name}`, updateData);
     if (game.user.id === userId && document.isOwner && document.type === "ability") {
       const parent = document.getParent();
-      if (parent) {
+      if (parent && typeof parent.update === "function") {
         await parent.update({});
         await parent.sheet.render();
       }
@@ -212,15 +213,25 @@ export default function registerHooks() {
             takeSleep: "Sleep",
             takeKill: "Kill",
           };
+          const actionIcons = {
+            takeDamage: "fa-heart",
+            takeDrain: "fa-brain",
+            takeWither: "fa-hourglass-half",
+          }
+          const actionClasses = {
+            takeDamage: "damage-button",
+            takeDrain: "drain-button",
+            takeWither: "wither-button",
+          };
           if (rollActions.includes(action) && formula) {
             // Roll the formula using TeriockRoll for each actor
             const context = {
               buttons: [
                 {
                   label: actionLabels[action] || "Apply to Targets",
-                  icon: "fa-solid fa-check",
+                  icon: `fa-solid ${actionIcons[action] || "fa-plus"}`,
                   action: action,
-                  classes: "apply-result",
+                  classes: `apply-result ${actionClasses[action] || ""}`,
                 },
               ],
             };
@@ -270,6 +281,7 @@ export default function registerHooks() {
             for (const actor of actors) {
               if (actor && typeof actor.createEmbeddedDocuments === "function") {
                 await actor.createEmbeddedDocuments("ActiveEffect", [effectObj]);
+                ui.notifications.info(`Applied effect: ${effectObj.name}`);
               }
             }
           }
@@ -278,6 +290,33 @@ export default function registerHooks() {
             for (const actor of actors) {
               if (actor && typeof actor.takeHack === "function") {
                 await actor.takeHack(bodyPart);
+                ui.notifications.info(`Hacked ${bodyPart} for ${actor.name}`);
+              }
+            }
+          }
+          if (action === "applyStatus") {
+            const status = button.getAttribute("data-data");
+            if (!status) {
+              ui.notifications.error("No status specified.");
+              return;
+            }
+            for (const actor of actors) {
+              if (actor && typeof actor.toggleStatusEffect === "function") {
+                await actor.toggleStatusEffect(status, { active: true });
+                ui.notifications.info(`Applied status: ${status} to ${actor.name}`);
+              }
+            }
+          }
+          if (action === "removeStatus") {
+            const status = button.getAttribute("data-data");
+            if (!status) {
+              ui.notifications.error("No status specified.");
+              return;
+            }
+            for (const actor of actors) {
+              if (actor && typeof actor.toggleStatusEffect === "function") {
+                await actor.toggleStatusEffect(status, { active: false });
+                ui.notifications.info(`Removed status: ${status} from ${actor.name}`);
               }
             }
           }
@@ -301,29 +340,147 @@ export default function registerHooks() {
           if (!actor) continue;
           if (action === "takeDamage") {
             await actor.takeDamage(amount);
+            ui.notifications.info(`${actor.name} took ${amount} damage`);
           } else if (action === "takeDrain") {
             await actor.takeDrain(amount);
+            ui.notifications.info(`${actor.name} took ${amount} drain`);
           } else if (action === "takeWither") {
             await actor.takeWither(amount);
+            ui.notifications.info(`${actor.name} took ${amount} wither`);
           } else if (action === "takeHeal") {
             await actor.takeHeal(amount);
+            ui.notifications.info(`${actor.name} gained ${amount} HP`);
           } else if (action === "takeRevitalize") {
             await actor.takeRevitalize(amount);
+            ui.notifications.info(`${actor.name} gained ${amount} MP`);
           } else if (action === "takeSetTempHp") {
             await actor.takeSetTempHp(amount);
+            ui.notifications.info(`${actor.name} now has ${actor.system.hp.temp} temporary HP`);
           } else if (action === "takeSetTempMp") {
             await actor.takeSetTempMp(amount);
+            ui.notifications.info(`${actor.name} now has ${actor.system.mp.temp} temporary MP`);
           } else if (action === "takeGainTempHp") {
             await actor.takeGainTempHp(amount);
+            ui.notifications.info(`${actor.name} gained ${amount} temporary HP`);
           } else if (action === "takeGainTempMp") {
             await actor.takeGainTempMp(amount);
+            ui.notifications.info(`${actor.name} gained ${amount} temporary MP`);
           } else if (action === "takeSleep") {
             await actor.takeSleep(amount);
+            ui.notifications.info(`Did sleep check for ${actor.name}`);
           } else if (action === "takeKill") {
             await actor.takeKill(amount);
+            ui.notifications.info(`Did kill check for ${actor.name}`);
           } else if (action === "takeHack") {
             const bodyPart = data.data;
             await actor.takeHack(bodyPart);
+            ui.notifications.info(`Hacked ${bodyPart} for ${actor.name}`);
+          }
+        }
+      });
+    });
+
+    // Add right-click (contextmenu) handler for Apply Effect button
+    html.querySelectorAll('.teriock-chat-button[data-action="applyEffect"]').forEach((button) => {
+      button.addEventListener("contextmenu", async (event) => {
+        event.preventDefault();
+        const effectData = button.getAttribute("data-data");
+        let effectObj = null;
+        try {
+          effectObj = JSON.parse(effectData);
+        } catch (e) {
+          ui.notifications.error("Failed to parse effect data.");
+          return;
+        }
+        // Determine actors: prefer selected tokens, else character
+        let actors = [];
+        if (canvas.tokens?.controlled?.length > 0) {
+          actors = canvas.tokens.controlled.map((t) => t.actor).filter(Boolean);
+        } else if (game.user.character) {
+          actors = [game.user.character];
+        }
+        if (actors.length === 0) return;
+        for (const actor of actors) {
+          if (actor && typeof actor.deleteEmbeddedDocuments === "function") {
+            // Find the effect by name
+            const found = actor.effects.find(e => e.name === effectObj.name);
+            if (found) {
+              await actor.deleteEmbeddedDocuments("ActiveEffect", [found.id]);
+              ui.notifications.info(`Removed effect: ${effectObj.name}`);
+            } else {
+              ui.notifications.warn(`Effect not found: ${effectObj.name}`);
+            }
+          }
+        }
+      });
+    });
+
+    // Add right-click (contextmenu) handler for applyStatus: right-click removes the status
+    html.querySelectorAll('.teriock-chat-button[data-action="applyStatus"]').forEach((button) => {
+      button.addEventListener("contextmenu", async (event) => {
+        event.preventDefault();
+        const status = button.getAttribute("data-data");
+        if (!status) {
+          ui.notifications.error("No status specified.");
+          return;
+        }
+        let actors = [];
+        if (canvas.tokens?.controlled?.length > 0) {
+          actors = canvas.tokens.controlled.map((t) => t.actor).filter(Boolean);
+        } else if (game.user.character) {
+          actors = [game.user.character];
+        }
+        if (actors.length === 0) return;
+        for (const actor of actors) {
+          if (actor && typeof actor.toggleStatusEffect === "function") {
+            await actor.toggleStatusEffect(status, { active: false });
+            ui.notifications.info(`Removed status: ${status} from ${actor.name}`);
+          }
+        }
+      });
+    });
+
+    // Add right-click (contextmenu) handler for removeStatus: right-click applies the status
+    html.querySelectorAll('.teriock-chat-button[data-action="removeStatus"]').forEach((button) => {
+      button.addEventListener("contextmenu", async (event) => {
+        event.preventDefault();
+        const status = button.getAttribute("data-data");
+        if (!status) {
+          ui.notifications.error("No status specified.");
+          return;
+        }
+        let actors = [];
+        if (canvas.tokens?.controlled?.length > 0) {
+          actors = canvas.tokens.controlled.map((t) => t.actor).filter(Boolean);
+        } else if (game.user.character) {
+          actors = [game.user.character];
+        }
+        if (actors.length === 0) return;
+        for (const actor of actors) {
+          if (actor && typeof actor.toggleStatusEffect === "function") {
+            await actor.toggleStatusEffect(status, { active: true });
+            ui.notifications.info(`Applied status: ${status} to ${actor.name}`);
+          }
+        }
+      });
+    });
+
+    // Add right-click (contextmenu) handler for takeHack: right-click does unhack
+    html.querySelectorAll('.teriock-chat-button[data-action="takeHack"]').forEach((button) => {
+      button.addEventListener("contextmenu", async (event) => {
+        event.preventDefault();
+        const bodyPart = button.getAttribute("data-data");
+        let actors = [];
+        if (canvas.tokens?.controlled?.length > 0) {
+          actors = canvas.tokens.controlled.map((t) => t.actor).filter(Boolean);
+        } else if (game.user.character) {
+          actors = [game.user.character];
+        }
+        if (actors.length === 0) return;
+        for (const actor of actors) {
+          if (actor && typeof actor.takeUnhack === "function") {
+            await actor.takeUnhack(bodyPart);
+            ui.notifications.info(`Unhacked ${bodyPart} for ${actor.name}`);
           }
         }
       });
