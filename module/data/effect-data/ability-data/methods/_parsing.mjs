@@ -1,7 +1,24 @@
 /** @import TeriockAbilityData from "../ability-data.mjs"; */
+import { _override } from "./_overrides.mjs";
+import { abilityOptions } from "../../../../helpers/constants/ability-options.mjs";
 import { cleanFeet } from "../../../../helpers/clean.mjs";
 import { createAbility } from "../../../../helpers/create-effects.mjs";
-import { _override } from "./_overrides.mjs";
+
+// Cost value templates
+const COST_TEMPLATES = {
+  variable: (variable) => ({ type: "variable", value: { variable, static: 0, formula: "" } }),
+  static: (value) => ({ type: "static", value: { static: value, formula: "", variable: "" } }),
+  formula: (formula) => ({ type: "formula", value: { static: 0, formula, variable: "" } }),
+  hack: () => ({ type: "hack", value: { static: 0, formula: "", variable: "" } })
+};
+
+// Default applies structure
+const DEFAULT_APPLIES = {
+  base: { rolls: {}, statuses: [], hacks: {}, duration: 0, changes: [] },
+  proficient: { rolls: {}, statuses: [], hacks: {}, duration: 0, changes: [] },
+  fluent: { rolls: {}, statuses: [], hacks: {}, duration: 0, changes: [] },
+  heightened: { rolls: {}, statuses: [], hacks: {}, duration: 0, changes: [] }
+};
 
 /**
  * @param {TeriockAbilityData} abilityData
@@ -13,39 +30,77 @@ export async function _parse(abilityData, rawHTML) {
   const parser = new DOMParser();
   const doc = parser.parseFromString(rawHTML, "text/html");
 
-  console.log("Parsing ability:", abilityData.parent.name);
+  // Clean up old children
+  const oldDescendants = abilityData.parent.getDescendants();
+  const oldDescendantsIds = oldDescendants.map(descendant => descendant._id);
+  await abilityData.parent.parent.deleteEmbeddedDocuments("ActiveEffect", oldDescendantsIds);
 
-  // Get children
-  const oldChildren = abilityData.parent.getChildren();
-  for (const child of oldChildren) {
-    if (child) {
-      await child.delete();
-    }
-  }
-
-  console.log("Getting children for ability:", abilityData.parent.name);
-  const subs = Array.from(doc.querySelectorAll(".ability-sub-container")).filter(
-    (el) => !el.closest(".ability-sub-container:not(:scope)"),
-  );
-  console.log("Subs", subs);
-  console.log("All potential subs", doc.querySelectorAll(".ability-sub-container"));
-
-  // Remove unnecessary elements
-  doc.querySelectorAll(".ability-sub-container").forEach((el) => el.remove());
-
-  // Replace dice elements with roll syntax
-  doc.querySelectorAll(".dice").forEach((el) => {
+  // Get sub-abilities
+  const subs = Array.from(doc.querySelectorAll(".ability-sub-container"))
+    .filter(el => !el.closest(".ability-sub-container:not(:scope)"));
+  
+  // Remove sub-containers and process dice
+  doc.querySelectorAll(".ability-sub-container").forEach(el => el.remove());
+  doc.querySelectorAll(".dice").forEach(el => {
     const fullRoll = el.getAttribute("data-full-roll");
     const quickRoll = el.getAttribute("data-quick-roll");
     if (quickRoll) el.textContent = `[[/roll ${fullRoll}]]`;
   });
 
-  // Build tag tree from tag containers
+  // Build tag tree
+  const tagTree = buildTagTree(doc);
+  
+  // Initialize parameters
+  const referenceAbility = new ActiveEffect({ name: "Reference Ability", type: "ability" });
+  const parameters = foundry.utils.deepClone(referenceAbility.system).toObject();
+  const changes = [];
+  delete parameters.executionTime;
+  delete parameters.maneuver;
+
+  // Process tags and build parameters
+  processTags(parameters, tagTree, doc, changes);
+  
+  // Process costs
+  processCosts(parameters, tagTree, doc);
+  
+  // Process components
+  processComponents(parameters, tagTree, doc);
+  
+  // Set remaining parameters
+  setRemainingParameters(parameters, tagTree, doc);
+  
+  // Clean up parameters
+  parameters.editable = false;
+  delete parameters.improvement;
+  delete parameters.limitation;
+  delete parameters.parentId;
+  delete parameters.childIds;
+
+  // Process dice and hack extraction
+  processDiceAndHackExtraction(parameters);
+  
+  // Apply overrides
+  const applications = _override(abilityData.parent.name);
+  if (applications) parameters.applies = applications;
+
+  // Select image
+  const img = selectImage(parameters);
+  
+  // Process sub-abilities
+  await processSubAbilities(subs, abilityData);
+
+  return { changes, system: parameters, img };
+}
+
+/**
+ * Build tag tree from tag containers
+ */
+function buildTagTree(doc) {
   const tagTree = {};
-  doc.querySelectorAll(".tag-container").forEach((el) => {
+  doc.querySelectorAll(".tag-container").forEach(el => {
     const tags = Array.from(el.classList)
-      .filter((cls) => cls.endsWith("-tagged"))
-      .map((cls) => cls.replace("-tagged", ""));
+      .filter(cls => cls.endsWith("-tagged"))
+      .map(cls => cls.replace("-tagged", ""));
     if (tags.length) {
       if (tags.length === 1) tagTree[tags[0]] = true;
       else {
@@ -54,116 +109,119 @@ export async function _parse(abilityData, rawHTML) {
       }
     }
   });
+  return tagTree;
+}
 
-  console.log("Tag tree:", tagTree);
-
-  // Helper functions
-  function getBarText(selector, clean = false) {
-    const el = doc.querySelector(`.ability-bar-${selector} .ability-bar-content`);
-    let text = el?.innerHTML || null;
-    if (text && clean) {
-      const tempDiv = document.createElement("div");
-      tempDiv.innerHTML = text;
-      tempDiv.querySelectorAll("span").forEach((span) => span.replaceWith(document.createTextNode(" ")));
-      text = tempDiv.innerHTML
-        .trim()
-        .replace(/\.$/, "")
-        .replace(/\./g, ",")
-        .replace(/\b\w/g, (c) => c.toUpperCase());
-      text = cleanFeet(text).trim();
-    }
-    return text;
+/**
+ * Helper to get bar text
+ */
+function getBarText(doc, selector, clean = false) {
+  const el = doc.querySelector(`.ability-bar-${selector} .ability-bar-content`);
+  let text = el?.innerHTML || null;
+  if (text && clean) {
+    const tempDiv = document.createElement("div");
+    tempDiv.innerHTML = text;
+    tempDiv.querySelectorAll("span").forEach(span => span.replaceWith(document.createTextNode(" ")));
+    text = tempDiv.innerHTML
+      .trim()
+      .replace(/\.$/, "")
+      .replace(/\./g, ",")
+      .replace(/\b\w/g, c => c.toUpperCase());
+    text = cleanFeet(text).trim();
   }
-  const getText = (selector) => doc.querySelector(`.${selector}`)?.innerHTML || null;
+  return text;
+}
 
-  // Clone reference ability system
-  const referenceAbility = new ActiveEffect({ name: "Reference Ability", type: "ability" });
-  const parameters = foundry.utils.deepClone(referenceAbility.system).toObject();
-  const changes = [];
-  delete parameters.executionTime;
-  delete parameters.maneuver;
+/**
+ * Helper to get text content
+ */
+function getText(doc, selector) {
+  return doc.querySelector(`.${selector}`)?.innerHTML || null;
+}
 
-  // Tag-driven assignments
+/**
+ * Process tags and build parameters
+ */
+function processTags(parameters, tagTree, doc, changes) {
+  // Power sources
   if (tagTree.power) {
     parameters.powerSources = tagTree.power;
-    if (parameters.powerSources.includes("unknown") || parameters.powerSources.includes("psionic"))
+    if (parameters.powerSources.includes("unknown") || parameters.powerSources.includes("psionic")) {
       parameters.abilityType = "special";
+    }
   }
-  if (tagTree.interaction) parameters.interaction = tagTree.interaction[0];
-  if (tagTree.saveAttribute) parameters.featSaveAttribute = tagTree.saveAttribute[0];
+
+  // Basic tag assignments
+  const tagAssignments = {
+    interaction: tagTree.interaction?.[0],
+    featSaveAttribute: tagTree.saveAttribute?.[0],
+    "delivery.base": tagTree.delivery?.[0],
+    "delivery.package": tagTree.deliveryPackage?.[0],
+    targets: tagTree.target,
+    elements: tagTree.element,
+    piercing: tagTree.piercing?.[0],
+    expansion: tagTree.expansion?.[0],
+    expansionSaveAttribute: tagTree.expansionAttribute?.[0],
+    class: tagTree.class?.[0]
+  };
+
+  Object.entries(tagAssignments).forEach(([key, value]) => {
+    if (value) {
+      const keys = key.split('.');
+      if (keys.length === 1) {
+        parameters[key] = value;
+      } else {
+        parameters[keys[0]][keys[1]] = value;
+      }
+    }
+  });
+
+  // Maneuver and execution time
   if (tagTree.maneuver) {
     parameters.maneuver = tagTree.maneuver[0];
     if (parameters.maneuver === "passive") parameters.executionTime = "passive";
   }
-  if (!parameters.executionTime && tagTree.executionTime) parameters.executionTime = tagTree.executionTime[0];
+
+  if (tagTree.executionTime) parameters.executionTime = tagTree.executionTime[0];
 
   // Determine maneuver type
   if (parameters.executionTime === "passive") parameters.maneuver = "passive";
-  else if (parameters.executionTime && CONFIG.TERIOCK.abilityOptions.executionTime.active[parameters.executionTime])
+  else if (parameters.executionTime && abilityOptions.executionTime.active[parameters.executionTime]) {
     parameters.maneuver = "active";
-  else if (parameters.executionTime && CONFIG.TERIOCK.abilityOptions.executionTime.reactive[parameters.executionTime])
+  } else if (parameters.executionTime && abilityOptions.executionTime.reactive[parameters.executionTime]) {
     parameters.maneuver = "reactive";
-  else parameters.maneuver = "slow";
+  } else {
+    parameters.maneuver = "slow";
+  }
 
   // Normalize execution time
   if (parameters.executionTime === "shortRest") parameters.executionTime = "Short Rest";
   if (parameters.executionTime === "longRest") parameters.executionTime = "Long Rest";
-  if (!parameters.executionTime)
-    parameters.executionTime = getBarText("execution-time", true) || getBarText("casting-time", true);
+  if (!parameters.executionTime) {
+    const executionTime = getBarText(doc, "execution-time", true) || 
+                         getBarText(doc, "casting-time", true);
+    parameters.executionTime = executionTime;
+  }
 
-  if (tagTree.delivery) parameters.delivery.base = tagTree.delivery[0];
-  if (tagTree.deliveryPackage) parameters.delivery.package = tagTree.deliveryPackage[0];
-  if (tagTree.target) parameters.targets = tagTree.target;
-  if (tagTree.element) parameters.elements = tagTree.element;
-  parameters.duration = getBarText("duration", true);
-  if (tagTree.sustained) parameters.sustained = true;
-  parameters.range = getBarText("range", true);
+  // Set basic parameters
+  parameters.duration = getBarText(doc, "duration", true);
+  parameters.range = getBarText(doc, "range", true);
   if (parameters.delivery.base === "self") parameters.range = "Self.";
-  parameters.overview.base = getText("ability-overview-base");
-  parameters.overview.proficient = getBarText("if-proficient");
-  parameters.overview.fluent = getBarText("if-fluent");
-  parameters.results.hit = getBarText("on-hit");
-  parameters.results.critHit = getBarText("on-critical-hit");
-  parameters.results.miss = getBarText("on-miss");
-  parameters.results.critMiss = getBarText("on-critical-miss");
-  parameters.results.save = getBarText("on-success");
-  parameters.results.critSave = getBarText("on-critical-success");
-  parameters.results.fail = getBarText("on-fail");
-  parameters.results.critFail = getBarText("on-critical-fail");
-  if (tagTree.piercing) parameters.piercing = tagTree.piercing[0];
+  
+  if (tagTree.sustained) parameters.sustained = true;
 
-  // Attribute improvement
-  const attrImp = doc.querySelector(".ability-bar-attribute-improvement");
-  if (attrImp) {
-    const flags = Array.from(attrImp.classList).filter((cls) => cls.startsWith("flag-"));
-    const attr = flags.find((cls) => cls.startsWith("flag-attribute-"))?.replace("flag-attribute-", "");
-    const minVal = flags.find((cls) => cls.startsWith("flag-value-"))?.replace("flag-value-", "");
-    parameters.improvements.attributeImprovement.attribute = attr;
-    parameters.improvements.attributeImprovement.minVal = minVal ? parseInt(minVal, 10) : null;
-    changes.push({
-      key: `system.attributes.${attr}.value`,
-      mode: 4,
-      value: minVal,
-      priority: 20,
-    });
-  }
+  // Overview and results
+  parameters.overview.base = getText(doc, "ability-overview-base");
+  parameters.overview.proficient = getBarText(doc, "if-proficient");
+  parameters.overview.fluent = getBarText(doc, "if-fluent");
+  
+  const resultBars = ["hit", "critHit", "miss", "critMiss", "save", "critSave", "fail", "critFail"];
+  resultBars.forEach(bar => {
+    parameters.results[bar] = getBarText(doc, `on-${bar}`);
+  });
 
-  // Feat save improvement
-  const featImp = doc.querySelector(".ability-bar-feat-save-improvement");
-  if (featImp) {
-    const flags = Array.from(featImp.classList).filter((cls) => cls.startsWith("flag-"));
-    const attr = flags.find((cls) => cls.startsWith("flag-attribute-"))?.replace("flag-attribute-", "");
-    const amount = flags.find((cls) => cls.startsWith("flag-value-"))?.replace("flag-value-", "");
-    parameters.improvements.featSaveImprovement.attribute = attr;
-    parameters.improvements.featSaveImprovement.amount = amount;
-    let toggle = amount === "fluency" ? "Fluent" : amount === "proficiency" ? "Proficient" : null;
-    changes.push({
-      key: `system.attributes.${attr}.save${toggle}`,
-      mode: 4,
-      value: true,
-      priority: 20,
-    });
-  }
+  // Process improvements
+  processImprovements(parameters, doc, changes);
 
   // Other tags
   if (tagTree.skill) parameters.skill = true;
@@ -174,218 +232,236 @@ export async function _parse(abilityData, rawHTML) {
     parameters.abilityType = "special";
   }
   if (tagTree.deliveryPackage?.includes("ritual")) parameters.ritual = true;
-
-  // Costs
-  if (tagTree.cost) {
-    for (const c of tagTree.cost) {
-      if (c.startsWith("mp")) {
-        const mp = c.slice(2);
-        if (mp === "x") {
-          parameters.costs.mp = {
-            type: "variable",
-            value: {
-              variable: getBarText("mana-cost"),
-              static: 0,
-              formula: "",
-            },
-          };
-        } else if (mp && !isNaN(mp)) {
-          parameters.costs.mp = {
-            type: "static",
-            value: {
-              static: parseInt(mp, 10),
-              formula: "",
-              variable: "",
-            },
-          };
-        } else {
-          parameters.costs.mp = {
-            type: "formula",
-            value: {
-              static: 0,
-              formula: mp || "",
-              variable: "",
-            },
-          };
-        }
-      }
-      if (c.startsWith("hp")) {
-        const hp = c.slice(2);
-        if (hp === "x") {
-          parameters.costs.hp = {
-            type: "variable",
-            value: {
-              variable: getBarText("hit-cost"),
-              static: 0,
-              formula: "",
-            },
-          };
-        } else if (hp.toLowerCase().includes("hack")) {
-          parameters.costs.hp = {
-            type: "hack",
-            value: {
-              static: 0,
-              formula: "",
-              variable: "",
-            },
-          };
-        } else if (hp && !isNaN(hp)) {
-          parameters.costs.hp = {
-            type: "static",
-            value: {
-              static: parseInt(hp, 10),
-              formula: "",
-              variable: "",
-            },
-          };
-        } else {
-          parameters.costs.hp = {
-            type: "formula",
-            value: {
-              static: 0,
-              formula: hp || "",
-              variable: "",
-            },
-          };
-        }
-      }
-      if (c === "shatter") parameters.costs.break = "shatter";
-      if (c === "destroy") parameters.costs.break = "destroy";
-    }
-  }
-
-  // Components
-  if (tagTree.component) {
-    for (const c of tagTree.component) {
-      if (c === "invoked") parameters.costs.invoked = true;
-      if (c === "verbal") parameters.costs.verbal = true;
-      if (c === "somatic") parameters.costs.somatic = true;
-      if (c === "material") {
-        parameters.costs.material = true;
-        parameters.costs.materialCost = getBarText("material-cost");
-      }
-    }
-  }
-
-  parameters.endCondition = getBarText("end-condition");
-  parameters.requirements = getBarText("requirements");
-  if (tagTree.effect) parameters.effects = tagTree.effect;
-  parameters.heightened = getBarText("heightened");
-  if (tagTree.expansion) parameters.expansion = tagTree.expansion[0];
-  parameters.expansionRange = getBarText("expansion-range", true);
-  if (tagTree.expansionAttribute) parameters.expansionSaveAttribute = tagTree.expansionAttribute[0];
-  parameters.trigger = getBarText("trigger");
-  if (tagTree.class) parameters.class = tagTree.class[0];
   if (tagTree.flaw) parameters.abilityType = "flaw";
 
   if (doc.querySelector(".ability-basic")) {
     parameters.basic = true;
     parameters.abilityType = "intrinsic";
   }
+}
 
-  parameters.editable = false;
-
-  delete parameters.improvement;
-  delete parameters.limitation;
-  delete parameters.parentId;
-  delete parameters.childIds;
-
-  // --- Dice extraction for applies fields ---
-  // Helper to extract dice info from HTML content
-  function extractDiceFromHTML(html) {
-    const tempDiv = document.createElement("div");
-    tempDiv.innerHTML = html || "";
-    const dice = {};
-    tempDiv.querySelectorAll(".dice").forEach((el) => {
-      const type = el.dataset.type;
-      const fullRoll = el.dataset.fullRoll;
-      if (type && type !== "none" && fullRoll) {
-        dice[type] = fullRoll;
-      }
+/**
+ * Process improvements
+ */
+function processImprovements(parameters, doc, changes) {
+  // Attribute improvement
+  const attrImp = doc.querySelector(".ability-bar-attribute-improvement");
+  if (attrImp) {
+    const flags = Array.from(attrImp.classList).filter(cls => cls.startsWith("flag-"));
+    const attr = flags.find(cls => cls.startsWith("flag-attribute-"))?.replace("flag-attribute-", "");
+    const minVal = flags.find(cls => cls.startsWith("flag-value-"))?.replace("flag-value-", "");
+    parameters.improvements.attributeImprovement.attribute = attr;
+    parameters.improvements.attributeImprovement.minVal = minVal ? parseInt(minVal, 10) : null;
+    changes.push({
+      key: `system.attributes.${attr}.value`,
+      mode: 4,
+      value: minVal,
+      priority: 20
     });
-    return dice;
   }
 
-  // Ensure applies exists and is initialized
+  // Feat save improvement
+  const featImp = doc.querySelector(".ability-bar-feat-save-improvement");
+  if (featImp) {
+    const flags = Array.from(featImp.classList).filter(cls => cls.startsWith("flag-"));
+    const attr = flags.find(cls => cls.startsWith("flag-attribute-"))?.replace("flag-attribute-", "");
+    const amount = flags.find(cls => cls.startsWith("flag-value-"))?.replace("flag-value-", "");
+    parameters.improvements.featSaveImprovement.attribute = attr;
+    parameters.improvements.featSaveImprovement.amount = amount;
+    const toggle = amount === "fluency" ? "Fluent" : amount === "proficiency" ? "Proficient" : null;
+    changes.push({
+      key: `system.attributes.${attr}.save${toggle}`,
+      mode: 4,
+      value: true,
+      priority: 20
+    });
+  }
+}
+
+/**
+ * Process costs
+ */
+function processCosts(parameters, tagTree, doc) {
+  if (!tagTree.cost) return;
+
+  tagTree.cost.forEach(c => {
+    if (c.startsWith("mp")) {
+      const mp = c.slice(2);
+      if (mp === "x") {
+        parameters.costs.mp = COST_TEMPLATES.variable(getBarText(doc, "mana-cost"));
+      } else if (mp && !isNaN(mp)) {
+        parameters.costs.mp = COST_TEMPLATES.static(parseInt(mp, 10));
+      } else {
+        parameters.costs.mp = COST_TEMPLATES.formula(mp || "");
+      }
+    }
+    
+    if (c.startsWith("hp")) {
+      const hp = c.slice(2);
+      if (hp === "x") {
+        parameters.costs.hp = COST_TEMPLATES.variable(getBarText(doc, "hit-cost"));
+      } else if (hp.toLowerCase().includes("hack")) {
+        parameters.costs.hp = COST_TEMPLATES.hack();
+      } else if (hp && !isNaN(hp)) {
+        parameters.costs.hp = COST_TEMPLATES.static(parseInt(hp, 10));
+      } else {
+        parameters.costs.hp = COST_TEMPLATES.formula(hp || "");
+      }
+    }
+    
+    if (c === "shatter") parameters.costs.break = "shatter";
+    if (c === "destroy") parameters.costs.break = "destroy";
+  });
+}
+
+/**
+ * Process components
+ */
+function processComponents(parameters, tagTree, doc) {
+  if (!tagTree.component) return;
+
+  tagTree.component.forEach(c => {
+    if (c === "invoked") parameters.costs.invoked = true;
+    if (c === "verbal") parameters.costs.verbal = true;
+    if (c === "somatic") parameters.costs.somatic = true;
+    if (c === "material") {
+      parameters.costs.material = true;
+      parameters.costs.materialCost = getBarText(doc, "material-cost");
+    }
+  });
+}
+
+/**
+ * Set remaining parameters
+ */
+function setRemainingParameters(parameters, tagTree, doc) {
+  parameters.endCondition = getBarText(doc, "end-condition");
+  parameters.requirements = getBarText(doc, "requirements");
+  if (tagTree.effect) parameters.effects = tagTree.effect;
+  parameters.heightened = getBarText(doc, "heightened");
+  parameters.expansionRange = getBarText(doc, "expansion-range", true);
+  parameters.trigger = getBarText(doc, "trigger");
+}
+
+/**
+ * Extract dice from HTML content
+ */
+function extractDiceFromHTML(html) {
+  const tempDiv = document.createElement("div");
+  tempDiv.innerHTML = html || "";
+  const dice = {};
+  tempDiv.querySelectorAll(".dice").forEach(el => {
+    const type = el.dataset.type;
+    const fullRoll = el.dataset.fullRoll;
+    if (type && type !== "none" && fullRoll) {
+      dice[type] = fullRoll;
+    }
+  });
+  return dice;
+}
+
+/**
+ * Extract hacks from HTML content
+ */
+function extractHacksFromHTML(html) {
+  const tempDiv = document.createElement("div");
+  tempDiv.innerHTML = html || "";
+  const hacks = new Set();
+  tempDiv.querySelectorAll("span.metadata[data-type='hack']").forEach(el => {
+    const part = el.dataset.part;
+    if (part) {
+      hacks.add(part);
+    }
+  });
+  return hacks;
+}
+
+/**
+ * Process dice and hack extraction
+ */
+function processDiceAndHackExtraction(parameters) {
+  // Initialize applies if needed
   if (!parameters.applies) {
-    parameters.applies = {
-      base: { rolls: {}, statuses: [], hacks: {}, duration: 0, changes: [] },
-      proficient: { rolls: {}, statuses: [], hacks: {}, duration: 0, changes: [] },
-      fluent: { rolls: {}, statuses: [], hacks: {}, duration: 0, changes: [] },
-      heightened: { rolls: {}, statuses: [], hacks: {}, duration: 0, changes: [] },
-    };
+    parameters.applies = { ...DEFAULT_APPLIES };
   }
 
-  // Extract dice from overviews
-  const overviewDiceBase = extractDiceFromHTML(parameters.overview.base);
-  const overviewDiceProficient = extractDiceFromHTML(parameters.overview.proficient);
-  const overviewDiceFluent = extractDiceFromHTML(parameters.overview.fluent);
-  const overviewDiceHeightened = extractDiceFromHTML(parameters.heightened);
-  if (Object.keys(overviewDiceBase).length) Object.assign(parameters.applies.base.rolls, overviewDiceBase);
-  if (Object.keys(overviewDiceProficient).length) {
-    Object.assign(parameters.applies.proficient.rolls, overviewDiceProficient);
-  }
-  if (Object.keys(overviewDiceFluent).length) {
-    Object.assign(parameters.applies.fluent.rolls, overviewDiceFluent);
-  }
-  if (Object.keys(overviewDiceHeightened).length) {
-    Object.assign(parameters.applies.heightened.rolls, overviewDiceHeightened);
-  }
+  // Extract dice and hacks from overviews
+  const overviewSources = [
+    { source: parameters.overview.base, target: parameters.applies.base },
+    { source: parameters.overview.proficient, target: parameters.applies.proficient },
+    { source: parameters.overview.fluent, target: parameters.applies.fluent },
+    { source: parameters.heightened, target: parameters.applies.heightened }
+  ];
 
-  // Extract dice from results for applies.base
-  function extractDiceFromResultBar(barText) {
-    const tempDiv = document.createElement("div");
-    tempDiv.innerHTML = barText || "";
-    const dice = {};
-    tempDiv.querySelectorAll(".dice").forEach((el) => {
-      const type = el.dataset.type;
-      const fullRoll = el.dataset.fullRoll;
-      if (type && type !== "none" && fullRoll) {
-        dice[type] = fullRoll;
-      }
-    });
-    return dice;
-  }
+  overviewSources.forEach(({ source, target }) => {
+    const dice = extractDiceFromHTML(source);
+    if (Object.keys(dice).length) {
+      Object.assign(target.rolls, dice);
+    }
+    
+    const hacks = extractHacksFromHTML(source);
+    if (hacks.size > 0) {
+      target.hacks = new Set([...(target.hacks || []), ...hacks]);
+    }
+  });
 
-  // Only process hit and fail/save as per instructions
+  // Extract dice and hacks from results
   let resultDice = {};
+  let resultHacks = new Set();
+  
   if (parameters.results.hit) {
-    Object.assign(resultDice, extractDiceFromResultBar(parameters.results.hit));
+    Object.assign(resultDice, extractDiceFromHTML(parameters.results.hit));
+    const hitHacks = extractHacksFromHTML(parameters.results.hit);
+    resultHacks = new Set([...resultHacks, ...hitHacks]);
   }
-  // For feat abilities, use fail; for block abilities, use save
+  
   if (parameters.interaction === "feat" && parameters.results.fail) {
-    Object.assign(resultDice, extractDiceFromResultBar(parameters.results.fail));
+    Object.assign(resultDice, extractDiceFromHTML(parameters.results.fail));
+    const failHacks = extractHacksFromHTML(parameters.results.fail);
+    resultHacks = new Set([...resultHacks, ...failHacks]);
   } else if (parameters.interaction === "block" && parameters.results.save) {
-    Object.assign(resultDice, extractDiceFromResultBar(parameters.results.save));
+    Object.assign(resultDice, extractDiceFromHTML(parameters.results.save));
+    const saveHacks = extractHacksFromHTML(parameters.results.save);
+    resultHacks = new Set([...resultHacks, ...saveHacks]);
   }
+  
   if (Object.keys(resultDice).length) {
     Object.assign(parameters.applies.base.rolls, resultDice);
   }
-
-  const applications = _override(abilityData.parent.name);
-  if (applications) {
-    parameters.applies = applications;
+  
+  if (resultHacks.size > 0) {
+    parameters.applies.base.hacks = new Set([...(parameters.applies.base.hacks || []), ...resultHacks]);
   }
+}
 
-  // Image selection
+/**
+ * Select image based on parameters
+ */
+function selectImage(parameters) {
   let img = "systems/teriock/assets/ability.svg";
   if (parameters.spell) img = "systems/teriock/assets/spell.svg";
   else if (parameters.skill) img = "systems/teriock/assets/skill.svg";
   if (parameters.class) img = `systems/teriock/assets/classes/${parameters.class}.svg`;
+  return img;
+}
 
+/**
+ * Process sub-abilities
+ */
+async function processSubAbilities(subs, abilityData) {
   for (const el of subs) {
-    console.log(el);
     const subNameEl = el.querySelector(".ability-sub-name");
     const namespace = subNameEl?.getAttribute("data-namespace");
     if (namespace === "Ability") {
       const subName = subNameEl.getAttribute("data-name");
-      console.log(subName);
       const subAbility = await createAbility(abilityData.parent, subName, { notify: false });
+      
       const limitation = el.querySelector(".limited-modifier");
       const improvement = el.querySelector(".improvement-modifier");
       let limitationText = "";
       let improvementText = "";
       let newName = subName;
+      
       if (improvement) {
         newName = "Improved " + subName;
         const improvementSpan = improvement.querySelector(".improvement-text");
@@ -393,6 +469,7 @@ export async function _parse(abilityData, rawHTML) {
           improvementText = improvementSpan.textContent.trim();
         }
       }
+      
       if (limitation) {
         newName = "Limited " + newName;
         const limitationSpan = limitation.querySelector(".limitation-text");
@@ -400,17 +477,14 @@ export async function _parse(abilityData, rawHTML) {
           limitationText = limitationSpan.textContent.trim();
         }
       }
+      
       if (limitationText || improvementText) {
         await subAbility.update({
           name: newName,
           "system.improvement": improvementText,
-          "system.limitation": limitationText,
+          "system.limitation": limitationText
         });
       }
     }
   }
-
-  console.log(parameters);
-
-  return { changes, system: parameters, img };
 }

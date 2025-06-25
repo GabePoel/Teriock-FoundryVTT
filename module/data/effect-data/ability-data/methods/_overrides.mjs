@@ -220,6 +220,11 @@ const abilityMap = {
       statuses: ["meleeDodging"],
     },
   },
+  "Snare": {
+    base: {
+      statuses: ["snared"],
+    },
+  },
   Adrenaline: {
     base: {
       changes: [

@@ -115,18 +115,18 @@ export async function _generateEffect(abilityData, actor, heightenAmount = 0) {
  */
 export function _generateTakes(abilityData, heightenAmount = 0) {
   let rolls = abilityData.applies.base.rolls || {};
-  let hacks = abilityData.applies.base.hacks || {};
+  let hacks = abilityData.applies.base.hacks || new Set();
 
   if (abilityData.isProficient) {
     rolls = { ...rolls, ...abilityData.applies.proficient.rolls };
-    hacks = { ...hacks, ...abilityData.applies.proficient.hacks };
+    hacks = new Set([...hacks, ...(abilityData.applies.proficient.hacks || [])]);
   }
   if (abilityData.isFluent) {
     rolls = { ...rolls, ...abilityData.applies.fluent.rolls };
-    hacks = { ...hacks, ...abilityData.applies.fluent.hacks };
+    hacks = new Set([...hacks, ...(abilityData.applies.fluent.hacks || [])]);
   }
   if (heightenAmount > 0) {
-    for (const [key, value] of Object.entries(abilityData.applies.heightened.rolls)) {
+    for (const [key, value] of Object.entries(abilityData.applies.heightened.rolls || {})) {
       rolls[key] = rolls[key] || "";
       for (let i = 0; i < heightenAmount; i++) {
         rolls[key] += `+${value}`;
@@ -135,14 +135,8 @@ export function _generateTakes(abilityData, heightenAmount = 0) {
         }
       }
     }
-    for (const [key, value] of Object.entries(abilityData.applies.heightened.hacks)) {
-      hacks[key] = hacks[key] || "";
-      for (let i = 0; i < heightenAmount; i++) {
-        hacks[key] += `+${value}`;
-        if (hacks[key].trim().startsWith("+")) {
-          hacks[key] = hacks[key].trim().slice(1);
-        }
-      }
+    for (const hack of abilityData.applies.heightened.hacks || []) {
+      hacks.add(hack);
     }
   }
 

@@ -94,9 +94,13 @@ export default function registerHooks() {
     for (const combatant of combatants) {
       const actor = combatant.actor;
       if (actor?.isOwner) {
-        await actor.update({
-          "system.attackPenalty": 0,
-        });
+        if (actor.system.attackPenalty > 0) {
+          await actor.update({
+            "system.attackPenalty": 0,
+          });
+        } else {
+          await actor.forceUpdate();
+        }
         const effects = actor.temporaryEffects;
         for (const effect of effects) {
           await effect.system.checkExpiration();
@@ -269,6 +273,14 @@ export default function registerHooks() {
               }
             }
           }
+          if (action === "takeHack") {
+            const bodyPart = button.getAttribute("data-data");
+            for (const actor of actors) {
+              if (actor && typeof actor.takeHack === "function") {
+                await actor.takeHack(bodyPart);
+              }
+            }
+          }
         });
       }
     });
@@ -309,6 +321,9 @@ export default function registerHooks() {
             await actor.takeSleep(amount);
           } else if (action === "takeKill") {
             await actor.takeKill(amount);
+          } else if (action === "takeHack") {
+            const bodyPart = data.data;
+            await actor.takeHack(bodyPart);
           }
         }
       });
@@ -409,6 +424,13 @@ await item.use(options);
       for (const effect of effects) {
         await effect.system.expire();
       }
+    }
+  });
+
+  Hooks.on("applyTokenStatusEffect", (token, statusId, active) => {
+    const actor = token.actor;
+    if (actor) {
+      actor.prepareDerivedData();
     }
   });
 }

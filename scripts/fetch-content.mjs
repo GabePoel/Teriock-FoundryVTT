@@ -82,15 +82,14 @@ const fetchContent = async (map, namespace, staticId, statuses) => {
           let changeValue =
             !isNaN(changeValueRaw) && changeValueRaw.trim() !== "" ? Number(changeValueRaw) : changeValueRaw;
           console.log(changeKey);
-          if (changeKey && changeValue) {
-            results[key].changes.push({
-              key: changeKey,
-              mode: parseInt(change.getAttribute("data-mode"), 10),
-              value: changeValue,
-              priority: parseInt(change.getAttribute("data-priority"), 10),
-            });
-          }
+          results[key].changes.push({
+            key: changeKey,
+            mode: parseInt(change.getAttribute("data-mode"), 10),
+            value: changeValue,
+          priority: parseInt(change.getAttribute("data-priority"), 10),
+          });
         });
+        console.log(results[key].changes);
         console.log(results[key].statuses);
       }
 

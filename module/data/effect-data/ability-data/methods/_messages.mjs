@@ -42,7 +42,7 @@ export function _messageParts(abilityData) {
       icon: "fa-crosshairs-simple",
       wrappers: [
         ["missile", "cone", "sight", "aura"].includes(src.delivery.base) ? src.range + " ft" : "",
-        src.delivery.base != "self" ? src.targets.map((target) => ref.targets[target]).join(", ") : "",
+        src.targets.map((target) => ref.targets[target]).join(", "),
         src.duration,
       ],
     },

@@ -28,7 +28,23 @@ function appliesField() {
       },
     ),
     rolls: consequenceRollsField(),
-    hacks: consequenceHacksField(),
+    hacks: new fields.SetField(
+      new fields.StringField({
+        choices: {
+          arm: "Arm",
+          leg: "Leg",
+          body: "Body",
+          eye: "Eye",
+          ear: "Ear",
+          mouth: "Mouth",
+          nose: "Nose",
+        },
+      }),
+      {
+        label: "Hacks",
+        hint: "The types of hack damage that can be applied.",
+      },
+    ),
     duration: new fields.NumberField({ initial: 0 }),
     changes: consequenceChangesField(),
   });
