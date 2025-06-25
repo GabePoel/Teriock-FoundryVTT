@@ -11,9 +11,18 @@
 - [ ] Ability management
   - [ ] Abilities letting you know when they start/end
   - [ ] Heightened duration scaling
-  - [ ] Hack buttons
+  - [x] Hack buttons
   - [ ] Easy way to apply boosts
-  - [ ] Enricheds for different roll types 
+  - [ ] Enricheds for different roll types
+  - [ ] Bow, hand, and foot BV scaling
+  - [ ] Ability resistance fix
+  - [ ] Attribute and feat save improvement appearing in ability chat messages
+  - [ ] Icons for all the basic abilities
+  - [ ] Attack ability targeting missing icon fix
+  - [ ] Throwing weapon range multiplier (from throwing training)
+  - [ ] Check metadata
+- [ ] Rank fixes
+  - [ ] Enable/disable buttons
 
 # Codebase
 
