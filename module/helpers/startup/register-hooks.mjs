@@ -217,7 +217,7 @@ export default function registerHooks() {
             takeDamage: "fa-heart",
             takeDrain: "fa-brain",
             takeWither: "fa-hourglass-half",
-          }
+          };
           const actionClasses = {
             takeDamage: "damage-button",
             takeDrain: "drain-button",
@@ -414,7 +414,7 @@ export default function registerHooks() {
         for (const actor of actors) {
           if (actor && typeof actor.deleteEmbeddedDocuments === "function") {
             // Find the effect by name
-            const found = actor.effects.find(e => e.name === effectObj.name);
+            const found = actor.effects.find((e) => e.name === effectObj.name);
             if (found) {
               await actor.deleteEmbeddedDocuments("ActiveEffect", [found.id]);
               ui.notifications.info(`Removed effect: ${effectObj.name}`);
@@ -497,14 +497,47 @@ export default function registerHooks() {
       });
     });
 
-    // Add event listener for .teriock-target-container to open target's sheet
-    html.querySelectorAll('.teriock-target-container').forEach((container) => {
-      container.addEventListener('click', async (event) => {
-        event.preventDefault();
-        const uuid = container.getAttribute('data-uuid');
+    // Add event listeners for .teriock-target-container
+    html.querySelectorAll(".teriock-target-container").forEach((container) => {
+      let clickTimeout = null;
+
+      container.addEventListener("click", async (event) => {
+        event.stopPropagation();
+        const uuid = container.getAttribute("data-uuid");
         if (!uuid) return;
+
+        // Clear any existing timeout
+        if (clickTimeout) {
+          clearTimeout(clickTimeout);
+          clickTimeout = null;
+          return; // This was a double-click, let the dblclick handler deal with it
+        }
+
+        // Set timeout for single click
+        clickTimeout = setTimeout(async () => {
+          const doc = await foundry.utils.fromUuid(uuid);
+          if (doc.isOwner) {
+            if (doc?.token?.object) {
+              doc.token.object.control();
+            }
+          }
+          clickTimeout = null;
+        }, 200); // 200ms delay to detect double-click
+      });
+
+      container.addEventListener("dblclick", async (event) => {
+        event.stopPropagation();
+        const uuid = container.getAttribute("data-uuid");
+        if (!uuid) return;
+
+        // Clear single click timeout
+        if (clickTimeout) {
+          clearTimeout(clickTimeout);
+          clickTimeout = null;
+        }
+
         const doc = await foundry.utils.fromUuid(uuid);
-        if (doc && doc.sheet && typeof doc.sheet.render === 'function') {
+        if (doc && doc.sheet && doc.isOwner && typeof doc.sheet.render === "function") {
           doc.sheet.render(true);
         }
       });

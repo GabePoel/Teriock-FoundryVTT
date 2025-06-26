@@ -22,6 +22,23 @@ export function toCamelCase(str) {
 }
 
 /**
+ * @param {string} rollFormula
+ * @returns {string}
+ */
+export function getRollIcon(rollFormula) {
+  const validDice = [4, 6, 8, 10, 12, 20];
+  const roll = new TeriockRoll(rollFormula);
+  const dice = roll.dice;
+  dice.sort((a, b) => b.faces - a.faces);
+  for (const die of dice) {
+    if (validDice.includes(die.faces)) {
+      return `fas fa-dice-d${die.faces}`;
+    }
+  }
+  return "fas fa-dice";
+}
+
+/**
  * @param {string[]} names
  * @returns {string[]}
  */

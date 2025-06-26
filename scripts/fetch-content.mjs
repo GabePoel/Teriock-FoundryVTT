@@ -86,7 +86,7 @@ const fetchContent = async (map, namespace, staticId, statuses) => {
             key: changeKey,
             mode: parseInt(change.getAttribute("data-mode"), 10),
             value: changeValue,
-          priority: parseInt(change.getAttribute("data-priority"), 10),
+            priority: parseInt(change.getAttribute("data-priority"), 10),
           });
         });
         console.log(results[key].changes);

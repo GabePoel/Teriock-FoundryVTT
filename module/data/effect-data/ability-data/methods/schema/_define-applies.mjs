@@ -1,7 +1,4 @@
-import {
-  TeriockArrayField,
-  TeriockRecordField,
-} from "./_fields.mjs"
+import { TeriockArrayField, TeriockRecordField } from "./_fields.mjs";
 import { mergeLevel } from "../../../../../helpers/utils.mjs";
 import { tradecraftOptions } from "../../../../../helpers/constants/tradecraft-options.mjs";
 const { fields } = foundry.data;
@@ -108,7 +105,7 @@ function appliesField() {
         choices: CONFIG.TERIOCK.conditions,
       }),
       {
-        label: "Start Conditions",
+        label: "Apply Conditions",
         hint: "Conditions that may be immediately applied when the ability is used. They exist independently of the ability.",
       },
     ),
@@ -117,7 +114,7 @@ function appliesField() {
         choices: CONFIG.TERIOCK.conditions,
       }),
       {
-        label: "End Conditions",
+        label: "Remove Conditions",
         hint: "Conditions that may be immediately removed when the ability is used This only works on conditions that exist independently of the ability.",
       },
     ),

@@ -40,7 +40,9 @@ async function use(equipmentData, options) {
       effectDamageTypes.push("fire");
     }
     // Ensure all damage types are lower case
-    damageTypes = [...new Set([...damageTypes, ...effectDamageTypes])].map(dt => dt && typeof dt === "string" ? dt.toLowerCase() : dt);
+    damageTypes = [...new Set([...damageTypes, ...effectDamageTypes])].map((dt) =>
+      dt && typeof dt === "string" ? dt.toLowerCase() : dt,
+    );
     if (damageTypes.length > 0 && rollFormula.length > 0 && rollFormula !== "0") {
       damageTypes.sort((a, b) => a.localeCompare(b));
       rollFormula += "[" + damageTypes.join(" ") + "]";

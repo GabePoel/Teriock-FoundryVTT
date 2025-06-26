@@ -9,47 +9,51 @@ const COST_TEMPLATES = {
   variable: (variable) => ({ type: "variable", value: { variable, static: 0, formula: "" } }),
   static: (value) => ({ type: "static", value: { static: value, formula: "", variable: "" } }),
   formula: (formula) => ({ type: "formula", value: { static: 0, formula, variable: "" } }),
-  hack: () => ({ type: "hack", value: { static: 0, formula: "", variable: "" } })
+  hack: () => ({ type: "hack", value: { static: 0, formula: "", variable: "" } }),
 };
 
 // Default applies structure
 const DEFAULT_APPLIES = {
-  base: { 
-    rolls: {}, 
-    statuses: new Set(), 
-    startStatuses: new Set(), 
-    endStatuses: new Set(), 
-    hacks: new Set(), 
-    duration: 0, 
-    changes: [] 
+  base: {
+    rolls: {},
+    statuses: new Set(),
+    startStatuses: new Set(),
+    endStatuses: new Set(),
+    hacks: new Set(),
+    checks: new Set(),
+    duration: 0,
+    changes: [],
   },
-  proficient: { 
-    rolls: {}, 
-    statuses: new Set(), 
-    startStatuses: new Set(), 
-    endStatuses: new Set(), 
-    hacks: new Set(), 
-    duration: 0, 
-    changes: [] 
+  proficient: {
+    rolls: {},
+    statuses: new Set(),
+    startStatuses: new Set(),
+    endStatuses: new Set(),
+    hacks: new Set(),
+    checks: new Set(),
+    duration: 0,
+    changes: [],
   },
-  fluent: { 
-    rolls: {}, 
-    statuses: new Set(), 
-    startStatuses: new Set(), 
-    endStatuses: new Set(), 
-    hacks: new Set(), 
-    duration: 0, 
-    changes: [] 
+  fluent: {
+    rolls: {},
+    statuses: new Set(),
+    startStatuses: new Set(),
+    endStatuses: new Set(),
+    hacks: new Set(),
+    checks: new Set(),
+    duration: 0,
+    changes: [],
   },
-  heightened: { 
-    rolls: {}, 
-    statuses: new Set(), 
-    startStatuses: new Set(), 
-    endStatuses: new Set(), 
-    hacks: new Set(), 
-    duration: 0, 
-    changes: [] 
-  }
+  heightened: {
+    rolls: {},
+    statuses: new Set(),
+    startStatuses: new Set(),
+    endStatuses: new Set(),
+    hacks: new Set(),
+    checks: new Set(),
+    duration: 0,
+    changes: [],
+  },
 };
 
 /**
@@ -64,16 +68,17 @@ export async function _parse(abilityData, rawHTML) {
 
   // Clean up old children
   const oldDescendants = abilityData.parent.getDescendants();
-  const oldDescendantsIds = oldDescendants.map(descendant => descendant._id);
+  const oldDescendantsIds = oldDescendants.map((descendant) => descendant._id);
   await abilityData.parent.parent.deleteEmbeddedDocuments("ActiveEffect", oldDescendantsIds);
 
   // Get sub-abilities
-  const subs = Array.from(doc.querySelectorAll(".ability-sub-container"))
-    .filter(el => !el.closest(".ability-sub-container:not(:scope)"));
-  
+  const subs = Array.from(doc.querySelectorAll(".ability-sub-container")).filter(
+    (el) => !el.closest(".ability-sub-container:not(:scope)"),
+  );
+
   // Remove sub-containers and process dice
-  doc.querySelectorAll(".ability-sub-container").forEach(el => el.remove());
-  doc.querySelectorAll(".dice").forEach(el => {
+  doc.querySelectorAll(".ability-sub-container").forEach((el) => el.remove());
+  doc.querySelectorAll(".dice").forEach((el) => {
     const fullRoll = el.getAttribute("data-full-roll");
     const quickRoll = el.getAttribute("data-quick-roll");
     if (quickRoll) el.textContent = `[[/roll ${fullRoll}]]`;
@@ -81,7 +86,7 @@ export async function _parse(abilityData, rawHTML) {
 
   // Build tag tree
   const tagTree = buildTagTree(doc);
-  
+
   // Initialize parameters
   const referenceAbility = new ActiveEffect({ name: "Reference Ability", type: "ability" });
   const parameters = foundry.utils.deepClone(referenceAbility.system).toObject();
@@ -91,16 +96,16 @@ export async function _parse(abilityData, rawHTML) {
 
   // Process tags and build parameters
   processTags(parameters, tagTree, doc, changes);
-  
+
   // Process costs
   processCosts(parameters, tagTree, doc);
-  
+
   // Process components
   processComponents(parameters, tagTree, doc);
-  
+
   // Set remaining parameters
   setRemainingParameters(parameters, tagTree, doc);
-  
+
   // Clean up parameters
   parameters.editable = false;
   delete parameters.improvement;
@@ -110,14 +115,14 @@ export async function _parse(abilityData, rawHTML) {
 
   // Process dice and effect extraction
   processDiceAndEffectExtraction(parameters);
-  
+
   // Apply overrides
   const applications = _override(abilityData.parent.name);
   if (applications) parameters.applies = applications;
 
   // Select image
   const img = selectImage(parameters);
-  
+
   // Process sub-abilities
   await processSubAbilities(subs, abilityData);
 
@@ -129,10 +134,10 @@ export async function _parse(abilityData, rawHTML) {
  */
 function buildTagTree(doc) {
   const tagTree = {};
-  doc.querySelectorAll(".tag-container").forEach(el => {
+  doc.querySelectorAll(".tag-container").forEach((el) => {
     const tags = Array.from(el.classList)
-      .filter(cls => cls.endsWith("-tagged"))
-      .map(cls => cls.replace("-tagged", ""));
+      .filter((cls) => cls.endsWith("-tagged"))
+      .map((cls) => cls.replace("-tagged", ""));
     if (tags.length) {
       if (tags.length === 1) tagTree[tags[0]] = true;
       else {
@@ -153,12 +158,12 @@ function getBarText(doc, selector, clean = false) {
   if (text && clean) {
     const tempDiv = document.createElement("div");
     tempDiv.innerHTML = text;
-    tempDiv.querySelectorAll("span").forEach(span => span.replaceWith(document.createTextNode(" ")));
+    tempDiv.querySelectorAll("span").forEach((span) => span.replaceWith(document.createTextNode(" ")));
     text = tempDiv.innerHTML
       .trim()
       .replace(/\.$/, "")
       .replace(/\./g, ",")
-      .replace(/\b\w/g, c => c.toUpperCase());
+      .replace(/\b\w/g, (c) => c.toUpperCase());
     text = cleanFeet(text).trim();
   }
   return text;
@@ -194,12 +199,12 @@ function processTags(parameters, tagTree, doc, changes) {
     piercing: tagTree.piercing?.[0],
     expansion: tagTree.expansion?.[0],
     expansionSaveAttribute: tagTree.expansionAttribute?.[0],
-    class: tagTree.class?.[0]
+    class: tagTree.class?.[0],
   };
 
   Object.entries(tagAssignments).forEach(([key, value]) => {
     if (value) {
-      const keys = key.split('.');
+      const keys = key.split(".");
       if (keys.length === 1) {
         parameters[key] = value;
       } else {
@@ -230,8 +235,7 @@ function processTags(parameters, tagTree, doc, changes) {
   if (parameters.executionTime === "shortRest") parameters.executionTime = "Short Rest";
   if (parameters.executionTime === "longRest") parameters.executionTime = "Long Rest";
   if (!parameters.executionTime) {
-    const executionTime = getBarText(doc, "execution-time", true) || 
-                         getBarText(doc, "casting-time", true);
+    const executionTime = getBarText(doc, "execution-time", true) || getBarText(doc, "casting-time", true);
     parameters.executionTime = executionTime;
   }
 
@@ -239,14 +243,14 @@ function processTags(parameters, tagTree, doc, changes) {
   parameters.duration = getBarText(doc, "duration", true);
   parameters.range = getBarText(doc, "range", true);
   if (parameters.delivery.base === "self") parameters.range = "Self.";
-  
+
   if (tagTree.sustained) parameters.sustained = true;
 
   // Overview and results
   parameters.overview.base = getText(doc, "ability-overview-base");
   parameters.overview.proficient = getBarText(doc, "if-proficient");
   parameters.overview.fluent = getBarText(doc, "if-fluent");
-  
+
   const resultBars = ["hit", "critHit", "miss", "critMiss", "save", "critSave", "fail", "critFail"];
   const resultsBars = {
     hit: "on-hit",
@@ -256,9 +260,9 @@ function processTags(parameters, tagTree, doc, changes) {
     save: "on-save",
     critSave: "on-critical-save",
     fail: "on-fail",
-    critFail: "on-critical-fail"
-  }
-  resultBars.forEach(bar => {
+    critFail: "on-critical-fail",
+  };
+  resultBars.forEach((bar) => {
     parameters.results[bar] = getBarText(doc, resultsBars[bar]);
   });
 
@@ -289,25 +293,25 @@ function processImprovements(parameters, doc, changes) {
   // Attribute improvement
   const attrImp = doc.querySelector(".ability-bar-attribute-improvement");
   if (attrImp) {
-    const flags = Array.from(attrImp.classList).filter(cls => cls.startsWith("flag-"));
-    const attr = flags.find(cls => cls.startsWith("flag-attribute-"))?.replace("flag-attribute-", "");
-    const minVal = flags.find(cls => cls.startsWith("flag-value-"))?.replace("flag-value-", "");
+    const flags = Array.from(attrImp.classList).filter((cls) => cls.startsWith("flag-"));
+    const attr = flags.find((cls) => cls.startsWith("flag-attribute-"))?.replace("flag-attribute-", "");
+    const minVal = flags.find((cls) => cls.startsWith("flag-value-"))?.replace("flag-value-", "");
     parameters.improvements.attributeImprovement.attribute = attr;
     parameters.improvements.attributeImprovement.minVal = minVal ? parseInt(minVal, 10) : null;
     changes.push({
       key: `system.attributes.${attr}.value`,
       mode: 4,
       value: minVal,
-      priority: 20
+      priority: 20,
     });
   }
 
   // Feat save improvement
   const featImp = doc.querySelector(".ability-bar-feat-save-improvement");
   if (featImp) {
-    const flags = Array.from(featImp.classList).filter(cls => cls.startsWith("flag-"));
-    const attr = flags.find(cls => cls.startsWith("flag-attribute-"))?.replace("flag-attribute-", "");
-    const amount = flags.find(cls => cls.startsWith("flag-value-"))?.replace("flag-value-", "");
+    const flags = Array.from(featImp.classList).filter((cls) => cls.startsWith("flag-"));
+    const attr = flags.find((cls) => cls.startsWith("flag-attribute-"))?.replace("flag-attribute-", "");
+    const amount = flags.find((cls) => cls.startsWith("flag-value-"))?.replace("flag-value-", "");
     parameters.improvements.featSaveImprovement.attribute = attr;
     parameters.improvements.featSaveImprovement.amount = amount;
     const toggle = amount === "fluency" ? "Fluent" : amount === "proficiency" ? "Proficient" : null;
@@ -315,7 +319,7 @@ function processImprovements(parameters, doc, changes) {
       key: `system.attributes.${attr}.save${toggle}`,
       mode: 4,
       value: true,
-      priority: 20
+      priority: 20,
     });
   }
 }
@@ -326,7 +330,7 @@ function processImprovements(parameters, doc, changes) {
 function processCosts(parameters, tagTree, doc) {
   if (!tagTree.cost) return;
 
-  tagTree.cost.forEach(c => {
+  tagTree.cost.forEach((c) => {
     if (c.startsWith("mp")) {
       const mp = c.slice(2);
       if (mp === "x") {
@@ -337,7 +341,7 @@ function processCosts(parameters, tagTree, doc) {
         parameters.costs.mp = COST_TEMPLATES.formula(mp || "");
       }
     }
-    
+
     if (c.startsWith("hp")) {
       const hp = c.slice(2);
       if (hp === "x") {
@@ -350,7 +354,7 @@ function processCosts(parameters, tagTree, doc) {
         parameters.costs.hp = COST_TEMPLATES.formula(hp || "");
       }
     }
-    
+
     if (c === "shatter") parameters.costs.break = "shatter";
     if (c === "destroy") parameters.costs.break = "destroy";
   });
@@ -362,7 +366,7 @@ function processCosts(parameters, tagTree, doc) {
 function processComponents(parameters, tagTree, doc) {
   if (!tagTree.component) return;
 
-  tagTree.component.forEach(c => {
+  tagTree.component.forEach((c) => {
     if (c === "invoked") parameters.costs.invoked = true;
     if (c === "verbal") parameters.costs.verbal = true;
     if (c === "somatic") parameters.costs.somatic = true;
@@ -392,7 +396,7 @@ function extractDiceFromHTML(html) {
   const tempDiv = document.createElement("div");
   tempDiv.innerHTML = html || "";
   const dice = {};
-  tempDiv.querySelectorAll(".dice").forEach(el => {
+  tempDiv.querySelectorAll(".dice").forEach((el) => {
     const type = el.dataset.type;
     const fullRoll = el.dataset.fullRoll;
     if (type && type !== "none" && fullRoll) {
@@ -409,7 +413,7 @@ function extractHacksFromHTML(html) {
   const tempDiv = document.createElement("div");
   tempDiv.innerHTML = html || "";
   const hacks = new Set();
-  tempDiv.querySelectorAll("span.metadata[data-type='hack']").forEach(el => {
+  tempDiv.querySelectorAll("span.metadata[data-type='hack']").forEach((el) => {
     const part = el.dataset.part;
     if (part) {
       hacks.add(part);
@@ -425,7 +429,7 @@ function extractConditionsFromHTML(html) {
   const tempDiv = document.createElement("div");
   tempDiv.innerHTML = html || "";
   const conditions = new Set();
-  tempDiv.querySelectorAll("span.metadata[data-type='condition']").forEach(el => {
+  tempDiv.querySelectorAll("span.metadata[data-type='condition']").forEach((el) => {
     const condition = el.dataset.condition;
     if (condition) {
       conditions.add(condition);
@@ -441,7 +445,7 @@ function extractStartConditionsFromHTML(html) {
   const tempDiv = document.createElement("div");
   tempDiv.innerHTML = html || "";
   const startConditions = new Set();
-  tempDiv.querySelectorAll("span.metadata[data-type='start-condition']").forEach(el => {
+  tempDiv.querySelectorAll("span.metadata[data-type='start-condition']").forEach((el) => {
     const condition = el.dataset.condition;
     if (condition) {
       startConditions.add(condition);
@@ -457,13 +461,26 @@ function extractEndConditionsFromHTML(html) {
   const tempDiv = document.createElement("div");
   tempDiv.innerHTML = html || "";
   const endConditions = new Set();
-  tempDiv.querySelectorAll("span.metadata[data-type='end-condition']").forEach(el => {
+  tempDiv.querySelectorAll("span.metadata[data-type='end-condition']").forEach((el) => {
     const condition = el.dataset.condition;
     if (condition) {
       endConditions.add(condition);
     }
   });
   return endConditions;
+}
+
+function extractTradecraftChecksFromHTML(html) {
+  const tempDiv = document.createElement("div");
+  tempDiv.innerHTML = html || "";
+  const checks = new Set();
+  tempDiv.querySelectorAll("span.metadata[data-type='tradecraft-check']").forEach((el) => {
+    const tradecraft = el.dataset.tradecraft;
+    if (tradecraft) {
+      checks.add(tradecraft);
+    }
+  });
+  return checks;
 }
 
 /**
@@ -480,7 +497,7 @@ function processDiceAndEffectExtraction(parameters) {
     { source: parameters.overview.base, target: parameters.applies.base },
     { source: parameters.overview.proficient, target: parameters.applies.proficient },
     { source: parameters.overview.fluent, target: parameters.applies.fluent },
-    { source: parameters.heightened, target: parameters.applies.heightened }
+    { source: parameters.heightened, target: parameters.applies.heightened },
   ];
 
   overviewSources.forEach(({ source, target }) => {
@@ -488,7 +505,7 @@ function processDiceAndEffectExtraction(parameters) {
     if (Object.keys(dice).length) {
       Object.assign(target.rolls, dice);
     }
-    
+
     const hacks = extractHacksFromHTML(source);
     if (hacks.size > 0) {
       target.hacks = new Set([...(target.hacks || []), ...hacks]);
@@ -508,6 +525,11 @@ function processDiceAndEffectExtraction(parameters) {
     if (endConditions.size > 0) {
       target.endStatuses = new Set([...(target.endStatuses || []), ...endConditions]);
     }
+
+    const tradecraftChecks = extractTradecraftChecksFromHTML(source);
+    if (tradecraftChecks.size > 0) {
+      target.checks = new Set([...(target.checks || []), ...tradecraftChecks]);
+    }
   });
 
   // Extract dice and effects from results
@@ -516,45 +538,32 @@ function processDiceAndEffectExtraction(parameters) {
   let resultConditions = new Set();
   let resultStartConditions = new Set();
   let resultEndConditions = new Set();
-  
-  if (parameters.results.hit) {
-    Object.assign(resultDice, extractDiceFromHTML(parameters.results.hit));
-    const hitHacks = extractHacksFromHTML(parameters.results.hit);
-    const hitConditions = extractConditionsFromHTML(parameters.results.hit);
-    const hitStartConditions = extractStartConditionsFromHTML(parameters.results.hit);
-    const hitEndConditions = extractEndConditionsFromHTML(parameters.results.hit);
-    resultHacks = new Set([...resultHacks, ...hitHacks]);
-    resultConditions = new Set([...resultConditions, ...hitConditions]);
-    resultStartConditions = new Set([...resultStartConditions, ...hitStartConditions]);
-    resultEndConditions = new Set([...resultEndConditions, ...hitEndConditions]);
-  }
-  
-  if (parameters.interaction === "feat" && parameters.results.fail) {
-    Object.assign(resultDice, extractDiceFromHTML(parameters.results.fail));
-    const failHacks = extractHacksFromHTML(parameters.results.fail);
-    const failConditions = extractConditionsFromHTML(parameters.results.fail);
-    const failStartConditions = extractStartConditionsFromHTML(parameters.results.fail);
-    const failEndConditions = extractEndConditionsFromHTML(parameters.results.fail);
-    resultHacks = new Set([...resultHacks, ...failHacks]);
-    resultConditions = new Set([...resultConditions, ...failConditions]);
-    resultStartConditions = new Set([...resultStartConditions, ...failStartConditions]);
-    resultEndConditions = new Set([...resultEndConditions, ...failEndConditions]);
-  } else if (parameters.interaction === "block" && parameters.results.save) {
-    Object.assign(resultDice, extractDiceFromHTML(parameters.results.save));
-    const saveHacks = extractHacksFromHTML(parameters.results.save);
-    const saveConditions = extractConditionsFromHTML(parameters.results.save);
-    const saveStartConditions = extractStartConditionsFromHTML(parameters.results.save);
-    const saveEndConditions = extractEndConditionsFromHTML(parameters.results.save);
-    resultHacks = new Set([...resultHacks, ...saveHacks]);
-    resultConditions = new Set([...resultConditions, ...saveConditions]);
-    resultStartConditions = new Set([...resultStartConditions, ...saveStartConditions]);
-    resultEndConditions = new Set([...resultEndConditions, ...saveEndConditions]);
-  }
-  
+  let resultTradecraftChecks = new Set();
+
+  // Process all result types for tradecraft checks and other metadata
+  const resultTypes = ["hit", "critHit", "miss", "critMiss", "save", "critSave", "fail", "critFail"];
+  resultTypes.forEach((resultType) => {
+    if (parameters.results[resultType]) {
+      Object.assign(resultDice, extractDiceFromHTML(parameters.results[resultType]));
+      const currentHacks = extractHacksFromHTML(parameters.results[resultType]);
+      const currentConditions = extractConditionsFromHTML(parameters.results[resultType]);
+      const currentStartConditions = extractStartConditionsFromHTML(parameters.results[resultType]);
+      const currentEndConditions = extractEndConditionsFromHTML(parameters.results[resultType]);
+      const currentTradecraftChecks = extractTradecraftChecksFromHTML(parameters.results[resultType]);
+
+      // Merge all results
+      resultHacks = new Set([...resultHacks, ...currentHacks]);
+      resultConditions = new Set([...resultConditions, ...currentConditions]);
+      resultStartConditions = new Set([...resultStartConditions, ...currentStartConditions]);
+      resultEndConditions = new Set([...resultEndConditions, ...currentEndConditions]);
+      resultTradecraftChecks = new Set([...resultTradecraftChecks, ...currentTradecraftChecks]);
+    }
+  });
+
   if (Object.keys(resultDice).length) {
     Object.assign(parameters.applies.base.rolls, resultDice);
   }
-  
+
   if (resultHacks.size > 0) {
     parameters.applies.base.hacks = new Set([...(parameters.applies.base.hacks || []), ...resultHacks]);
   }
@@ -565,16 +574,20 @@ function processDiceAndEffectExtraction(parameters) {
 
   if (resultStartConditions.size > 0) {
     parameters.applies.base.startStatuses = new Set([
-      ...(parameters.applies.base.startStatuses || []), 
-      ...resultStartConditions
+      ...(parameters.applies.base.startStatuses || []),
+      ...resultStartConditions,
     ]);
   }
 
   if (resultEndConditions.size > 0) {
     parameters.applies.base.endStatuses = new Set([
-      ...(parameters.applies.base.endStatuses || []), 
-      ...resultEndConditions
+      ...(parameters.applies.base.endStatuses || []),
+      ...resultEndConditions,
     ]);
+  }
+
+  if (resultTradecraftChecks.size > 0) {
+    parameters.applies.base.checks = new Set([...(parameters.applies.base.checks || []), ...resultTradecraftChecks]);
   }
 }
 
@@ -599,13 +612,13 @@ async function processSubAbilities(subs, abilityData) {
     if (namespace === "Ability") {
       const subName = subNameEl.getAttribute("data-name");
       const subAbility = await createAbility(abilityData.parent, subName, { notify: false });
-      
+
       const limitation = el.querySelector(".limited-modifier");
       const improvement = el.querySelector(".improvement-modifier");
       let limitationText = "";
       let improvementText = "";
       let newName = subName;
-      
+
       if (improvement) {
         newName = "Improved " + subName;
         const improvementSpan = improvement.querySelector(".improvement-text");
@@ -613,7 +626,7 @@ async function processSubAbilities(subs, abilityData) {
           improvementText = improvementSpan.textContent.trim();
         }
       }
-      
+
       if (limitation) {
         newName = "Limited " + newName;
         const limitationSpan = limitation.querySelector(".limitation-text");
@@ -621,12 +634,12 @@ async function processSubAbilities(subs, abilityData) {
           limitationText = limitationSpan.textContent.trim();
         }
       }
-      
+
       if (limitationText || improvementText) {
         await subAbility.update({
           name: newName,
           "system.improvement": improvementText,
-          "system.limitation": limitationText
+          "system.limitation": limitationText,
         });
       }
     }

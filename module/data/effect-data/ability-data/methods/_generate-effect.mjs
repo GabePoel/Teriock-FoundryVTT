@@ -12,7 +12,7 @@ import { parseTimeString } from "../../../../helpers/utils.mjs";
 export async function _generateEffect(abilityData, actor, heightenAmount = 0) {
   let changes = abilityData.applies.base.changes || [];
   let statuses = abilityData.applies.base.statuses || [];
-  let description = abilityData.overview.base || "";
+
   let seconds = parseTimeString(abilityData.duration);
 
   if (abilityData.isProficient) {
@@ -22,7 +22,6 @@ export async function _generateEffect(abilityData, actor, heightenAmount = 0) {
     if (abilityData.applies.proficient.statuses.length > 0) {
       statuses = abilityData.applies.proficient.statuses;
     }
-    description += abilityData.overview.proficient || "";
   }
   if (abilityData.isFluent) {
     if (abilityData.applies.fluent.changes.length > 0) {
@@ -31,7 +30,6 @@ export async function _generateEffect(abilityData, actor, heightenAmount = 0) {
     if (abilityData.applies.fluent.statuses.length > 0) {
       statuses = abilityData.applies.fluent.statuses;
     }
-    description += abilityData.overview.fluent || "";
   }
   if (heightenAmount > 0) {
     if (abilityData.applies.heightened.changes.length > 0) {
@@ -45,12 +43,24 @@ export async function _generateEffect(abilityData, actor, heightenAmount = 0) {
       statuses = abilityData.applies.heightened.statuses;
       statuses = [...statuses, ...abilityData.applies.heightened.statuses];
     }
-    description += abilityData.overview.heightened || "";
     if (abilityData.applies.heightened.duration > 0) {
       seconds += abilityData.applies.heightened.duration * heightenAmount;
       seconds = Math.round(seconds / abilityData.applies.heightened.duration) * abilityData.applies.heightened.duration;
     }
   }
+
+  let description = await abilityData.parent.buildMessage();
+  const tempDiv = document.createElement("div");
+  tempDiv.innerHTML = description;
+
+  // Remove .tmes-header-box and .tmes-bar-box elements
+  const headerBoxes = tempDiv.querySelectorAll(".tmes-header-box");
+  const barBoxes = tempDiv.querySelectorAll(".tmes-bar-box");
+
+  headerBoxes.forEach((element) => element.remove());
+  barBoxes.forEach((element) => element.remove());
+
+  description = tempDiv.innerHTML;
 
   const condition = {
     value: null,

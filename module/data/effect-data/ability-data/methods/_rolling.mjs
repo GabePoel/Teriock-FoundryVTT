@@ -2,7 +2,7 @@
 /** @import TeriockAbilityData from "../ability-data.mjs"; */
 const { api, ux } = foundry.applications;
 import { _generateEffect, _generateTakes } from "./_generate-effect.mjs";
-import { evaluateAsync } from "../../../../helpers/utils.mjs";
+import { evaluateAsync, getRollIcon } from "../../../../helpers/utils.mjs";
 import TeriockRoll from "../../../../documents/roll.mjs";
 
 // Button configurations for different roll types
@@ -33,7 +33,7 @@ const BUTTON_CONFIGS = {
   nose: { label: "Hack Nose", icon: "fas fa-nose", action: "takeHack", data: "nose" },
   // Status button templates
   startStatus: { icon: "fas fa-plus", action: "applyStatus" },
-  endStatus: { icon: "fas fa-xmark", action: "removeStatus" }
+  endStatus: { icon: "fas fa-xmark", action: "removeStatus" },
 };
 
 /**
@@ -50,23 +50,23 @@ export async function _roll(abilityData, options) {
     speaker: ChatMessage.getSpeaker({ actor: abilityData.parent.getActor() }),
     rolls: [],
   };
-  
+
   const useData = await stageUse(abilityData, advantage, disadvantage);
   const buttons = await buildButtons(abilityData, useData);
   const targets = getTargets(abilityData);
-  
+
   // Generate rolls based on interaction type
   const rollGenerators = {
     attack: () => generateRolls(abilityData, useData, options, targets, message, buttons, _generateAttackRoll),
     feat: () => generateRolls(abilityData, useData, options, targets, message, buttons, _generateFeatRoll, false),
     manifest: () => generateRolls(abilityData, useData, options, targets, message, buttons, _generateFeatRoll, true),
-    block: () => generateRolls(abilityData, useData, options, targets, message, buttons, _generateFeatRoll, true)
+    block: () => generateRolls(abilityData, useData, options, targets, message, buttons, _generateFeatRoll, true),
   };
 
   const generator = rollGenerators[abilityData.interaction];
   if (generator) {
     chatMessageData.rolls = await generator();
-    
+
     // Handle attack penalty
     if (abilityData.interaction === "attack") {
       const actor = abilityData.parent.getActor();
@@ -86,7 +86,7 @@ export async function _roll(abilityData, options) {
  */
 async function buildButtons(abilityData, useData) {
   const buttons = [];
-  
+
   // Feat save button
   if (abilityData.interaction === "feat") {
     const featSaveAttr = abilityData.featSaveAttribute?.toUpperCase?.() || "SAVE";
@@ -115,7 +115,9 @@ async function buildButtons(abilityData, useData) {
   const takeData = await _generateTakes(abilityData, useData.modifiers.heightened);
   Object.entries(takeData.rolls).forEach(([key, value]) => {
     if (value && BUTTON_CONFIGS[key]) {
-      buttons.push({ ...BUTTON_CONFIGS[key], data: value, tooltip: value });
+      const buttonConfig = BUTTON_CONFIGS[key];
+      buttonConfig.icon = getRollIcon(value);
+      buttons.push({ ...buttonConfig, data: value, tooltip: value });
     }
   });
 
@@ -133,7 +135,7 @@ async function buildButtons(abilityData, useData) {
       buttons.push({
         ...BUTTON_CONFIGS.startStatus,
         label: statusName,
-        data: status
+        data: status,
       });
     }
   }
@@ -143,7 +145,7 @@ async function buildButtons(abilityData, useData) {
       buttons.push({
         ...BUTTON_CONFIGS.endStatus,
         label: statusName,
-        data: status
+        data: status,
       });
     }
   }
@@ -153,7 +155,7 @@ async function buildButtons(abilityData, useData) {
     buttons.push({
       ...BUTTON_CONFIGS.tradecraft,
       label: `${CONFIG.TERIOCK.tradecraftOptionsList[check]} Check`,
-      data: check
+      data: check,
     });
   }
 
@@ -167,18 +169,26 @@ function getTargets(abilityData) {
   let targets = Array.from(game.user.targets);
   const targetsSelf = abilityData.targets?.length === 1 && abilityData.targets[0] === "self";
   const includesSelf = abilityData.targets?.includes("self");
-  
+
   if (targetsSelf || (includesSelf && targets.length === 0)) {
     const actor = abilityData.parent.getActor();
-    const token = actor.getActiveTokens?.()?.[0] || null;
-    targets = [{
-      name: token?.name || actor.name,
-      actor: actor,
-      img: token?.texture?.src || token?.img || actor.img,
-      uuid: token?.document?.uuid || actor.uuid,
-    }];
+    const activeToken = actor.getActiveTokens?.()?.[0];
+    const tokenName = actor.token?.name || activeToken?.name || actor.prototypeToken?.name || actor.name;
+    const tokenActorSrc = actor.token?.actor?.token?.texture?.src;
+    const activeTokenSrc = activeToken?.actor?.token?.texture?.src;
+    const prototypeSrc = actor.prototypeToken?.texture?.src;
+    const tokenImg = actor.token?.texture?.src || tokenActorSrc || activeTokenSrc || prototypeSrc || actor.img;
+    const token = actor.token || activeToken || actor.prototypeToken || null;
+    targets = [
+      {
+        name: tokenName,
+        actor: actor,
+        img: tokenImg,
+        uuid: token?.document?.uuid || actor.uuid,
+      },
+    ];
   }
-  
+
   return targets;
 }
 
@@ -187,7 +197,7 @@ function getTargets(abilityData) {
  */
 async function generateRolls(abilityData, useData, options, targets, message, buttons, rollGenerator, noDice = false) {
   const rolls = [];
-  
+
   if (targets.length === 0) {
     const rollOptions = { ...options, message, buttons, noDice };
     const roll = await rollGenerator(abilityData, useData, rollOptions);
@@ -201,13 +211,13 @@ async function generateRolls(abilityData, useData, options, targets, message, bu
         target,
         message: i === 0 ? message : null,
         buttons: isLastRoll ? buttons : [],
-        noDice
+        noDice,
       };
       const roll = await rollGenerator(abilityData, useData, rollOptions);
       rolls.push(roll);
     }
   }
-  
+
   return rolls;
 }
 
@@ -228,20 +238,20 @@ async function stageUse(abilityData, advantage, disadvantage) {
   // Calculate costs
   useData.costs.mp = await calculateCost(abilityData.costs.mp, useData.rollData);
   useData.costs.hp = await calculateCost(abilityData.costs.hp, useData.rollData);
-  
+
   // Build initial formula
   useData.formula = buildInitialFormula(abilityData, advantage, disadvantage);
-  
+
   // Handle dialogs for variable costs and heightened
   await handleDialogs(abilityData, useData);
-  
+
   // Add proficiency modifiers
   if (["attack", "feat"].includes(abilityData.interaction)) {
     if (abilityData.isFluent) useData.formula += " + @f";
     else if (abilityData.isProficient) useData.formula += " + @p";
     if (useData.modifiers.heightened > 0) useData.formula += " + @h";
   }
-  
+
   return useData;
 }
 
@@ -250,11 +260,14 @@ async function stageUse(abilityData, advantage, disadvantage) {
  */
 async function calculateCost(costConfig, rollData) {
   if (!costConfig) return 0;
-  
+
   switch (costConfig.type) {
-    case "static": return costConfig.value.static;
-    case "formula": return await evaluateAsync(costConfig.value.formula, rollData);
-    default: return 0;
+    case "static":
+      return costConfig.value.static;
+    case "formula":
+      return await evaluateAsync(costConfig.value.formula, rollData);
+    default:
+      return 0;
   }
 }
 
@@ -277,30 +290,28 @@ function buildInitialFormula(abilityData, advantage, disadvantage) {
 async function handleDialogs(abilityData, useData) {
   const dialogs = [];
   const actor = abilityData.parent.getActor();
-  
+
   // Variable MP cost dialog
   if (abilityData.costs.mp?.type === "variable") {
     const mpDescription = await ux.TextEditor.enrichHTML(abilityData.costs.mp.value.variable);
     const maxMp = actor.system.mp.value - actor.system.mp.min;
     dialogs.push(createDialogFieldset("Variable Mana Cost", mpDescription, "mp", maxMp));
   }
-  
+
   // Variable HP cost dialog
   if (abilityData.costs.hp?.type === "variable") {
     const hpDescription = await ux.TextEditor.enrichHTML(abilityData.costs.hp.value.variable);
     const maxHp = actor.system.hp.value - actor.system.hp.min;
     dialogs.push(createDialogFieldset("Variable Hit Point Cost", hpDescription, "hp", maxHp));
   }
-  
+
   // Heightened dialog
   if (abilityData.isProficient && abilityData.heightened) {
     const p = actor.system.p;
     const heightenedDescription = await ux.TextEditor.enrichHTML(abilityData.heightened);
-    dialogs.push(
-      createDialogFieldset("Heightened Amount", heightenedDescription, "heightened", p)
-    );
+    dialogs.push(createDialogFieldset("Heightened Amount", heightenedDescription, "heightened", p));
   }
-  
+
   if (dialogs.length > 0) {
     const action = abilityData.spell ? "Casting" : "Executing";
     const title = `${action} ${abilityData.parent.name}`;
@@ -344,26 +355,20 @@ function createDialogFieldset(legend, description, name, max) {
  * @private
  */
 export async function _generateAttackRoll(abilityData, useData, options = {}) {
-  const { 
-    advantage = false, 
-    disadvantage = false, 
-    target = null, 
-    message = null, 
-    buttons = [] 
-  } = options;
-  
+  const { advantage = false, disadvantage = false, target = null, message = null, buttons = [] } = options;
+
   // Build roll formula
   let rollFormula = buildAttackFormula(abilityData, advantage, disadvantage, useData);
-  
+
   // Prepare roll data
   const rollData = { ...useData.rollData, av0: 0, h: useData.modifiers.heightened || 0 };
-  
+
   // Handle piercing and properties
   const { diceClass, diceTooltip, unblockable } = getPiercingInfo(abilityData, rollData);
-  
+
   // Build context
   const context = buildRollContext(abilityData, target, buttons, diceClass, diceTooltip, unblockable);
-  
+
   return new TeriockRoll(rollFormula, rollData, { context, message });
 }
 
@@ -372,7 +377,7 @@ export async function _generateAttackRoll(abilityData, useData, options = {}) {
  */
 function buildAttackFormula(abilityData, advantage, disadvantage, useData) {
   let formula = "";
-  
+
   if (abilityData.effects?.includes("resistance")) {
     formula = advantage ? "2d20kh1" : disadvantage ? "2d20kl1" : "1d20";
   } else if (abilityData.interaction === "attack") {
@@ -384,14 +389,14 @@ function buildAttackFormula(abilityData, advantage, disadvantage, useData) {
   } else {
     formula = "0";
   }
-  
+
   // Add proficiency modifiers
   if (["attack", "feat"].includes(abilityData.interaction) || abilityData.effects?.includes("resistance")) {
     if (abilityData.isFluent) formula += " + @f";
     else if (abilityData.isProficient) formula += " + @p";
     if (useData.modifiers.heightened > 0) formula += " + @h";
   }
-  
+
   return formula;
 }
 
@@ -399,8 +404,10 @@ function buildAttackFormula(abilityData, advantage, disadvantage, useData) {
  * Get piercing information
  */
 function getPiercingInfo(abilityData, rollData) {
-  let diceClass, diceTooltip, unblockable = false;
-  
+  let diceClass,
+    diceTooltip,
+    unblockable = false;
+
   if (abilityData.delivery.base === "weapon") {
     const actor = abilityData.parent.getActor();
     const properties = actor.system.primaryAttacker?.effectKeys?.property || new Set();
@@ -414,7 +421,7 @@ function getPiercingInfo(abilityData, rollData) {
       unblockable = true;
     }
   }
-  
+
   if (abilityData.piercing === "av0") rollData.av0 = 2;
   if (abilityData.piercing === "ub") {
     diceClass = "ub";
@@ -422,7 +429,7 @@ function getPiercingInfo(abilityData, rollData) {
     rollData.av0 = 2;
     unblockable = true;
   }
-  
+
   return { diceClass, diceTooltip, unblockable };
 }
 
@@ -431,33 +438,33 @@ function getPiercingInfo(abilityData, rollData) {
  */
 function buildRollContext(abilityData, target, buttons, diceClass, diceTooltip, unblockable) {
   const context = { diceClass, diceTooltip, buttons };
-  
+
   if (abilityData.effects?.includes("resistance")) {
     Object.assign(context, {
       diceClass: "resist",
       diceTooltip: "",
       isResistance: true,
-      threshold: 10
+      threshold: 10,
     });
   }
-  
+
   if (abilityData.elderSorcery) {
     Object.assign(context, {
       elderSorceryElements: abilityData.elements,
       elderSorceryIncant: abilityData.elderSorceryIncant,
-      isElderSorcery: true
+      isElderSorcery: true,
     });
   }
-  
+
   if (target) {
     Object.assign(context, {
       targetName: target.name,
-      targetImg: target.actor.img,
+      targetImg: target.actor.token?.texture?.src,
       threshold: unblockable ? target.actor.system.ac : target.actor.system.cc,
-      targetUuid: target.actor.uuid
+      targetUuid: target.actor.uuid,
     });
   }
-  
+
   return context;
 }
 
@@ -469,22 +476,25 @@ function buildRollContext(abilityData, target, buttons, diceClass, diceTooltip, 
  * @private
  */
 export async function _generateFeatRoll(abilityData, useData, options = {}) {
-  const { 
-    target = null, 
-    message = null, 
-    buttons = [], 
-    noDice = false 
-  } = options;
-  
+  const { target = null, message = null, buttons = [], noDice = false } = options;
+
   // Build roll formula
   let rollFormula = "10";
   if (abilityData.isFluent) rollFormula += " + @f";
   else if (abilityData.isProficient) rollFormula += " + @p";
   if (useData.modifiers.heightened > 0) rollFormula += " + @h";
-  
+
   // Prepare roll data
   const rollData = { ...useData.rollData, h: useData.modifiers.heightened || 0 };
-  
+
+  const actor = abilityData.parent.getActor();
+  const activeToken = actor.getActiveTokens?.()?.[0];
+  const tokenName = actor.token?.name || activeToken?.name || actor.prototypeToken?.name || actor.name;
+  const tokenActorSrc = actor.token?.actor?.token?.texture?.src;
+  const activeTokenSrc = activeToken?.actor?.token?.texture?.src;
+  const prototypeSrc = actor.prototypeToken?.texture?.src;
+  const tokenImg = actor.token?.texture?.src || tokenActorSrc || activeTokenSrc || prototypeSrc || actor.img;
+
   // Build context
   const context = {
     buttons,
@@ -494,14 +504,14 @@ export async function _generateFeatRoll(abilityData, useData, options = {}) {
     ...(abilityData.elderSorcery && {
       elderSorceryElements: abilityData.elements,
       elderSorceryIncant: abilityData.elderSorceryIncant,
-      isElderSorcery: true
+      isElderSorcery: true,
     }),
     ...(target && {
-      targetName: target.name,
-      targetImg: target.actor.img,
-      targetUuid: target.actor.uuid
-    })
+      targetName: tokenName,
+      targetImg: tokenImg,
+      targetUuid: target.actor.uuid,
+    }),
   };
-  
+
   return new TeriockRoll(rollFormula, rollData, { context, message });
 }
