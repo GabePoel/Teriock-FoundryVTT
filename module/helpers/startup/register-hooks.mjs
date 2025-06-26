@@ -519,6 +519,8 @@ export default function registerHooks() {
           if (doc.isOwner) {
             if (doc?.token?.object) {
               doc.token.object.control();
+            } else {
+              doc.getActiveTokens()[0]?.control();
             }
           }
           clickTimeout = null;
