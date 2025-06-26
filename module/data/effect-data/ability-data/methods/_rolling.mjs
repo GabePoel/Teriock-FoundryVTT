@@ -36,6 +36,21 @@ const BUTTON_CONFIGS = {
   endStatus: { icon: "fas fa-xmark", action: "removeStatus" },
 };
 
+function tokenFromTarget(target) {
+  const actor = target.actor;
+  const img = target.texture?.src
+    || actor.token?.texture?.src
+    || actor.getActiveTokens()[0]?.texture?.src
+    || actor.prototypeToken?.texture?.src
+    || actor.img;
+  const name = target.name || actor.token?.name || actor.prototypeToken?.name || actor.name;
+  return {
+    name,
+    actor,
+    img,
+  }
+}
+
 /**
  * @param {TeriockAbilityData} abilityData
  * @param {CommonRollOptions} options
@@ -161,6 +176,7 @@ async function buildButtons(abilityData, useData) {
 
   return buttons;
 }
+
 
 /**
  * Get targets, handling self-targeting logic
@@ -456,10 +472,14 @@ function buildRollContext(abilityData, target, buttons, diceClass, diceTooltip, 
     });
   }
 
+  const targetInfo = target ? tokenFromTarget(target) : null;
+  const tokenName = targetInfo?.name || "";
+  const tokenImg = targetInfo?.img || "";
+
   if (target) {
     Object.assign(context, {
-      targetName: target.name,
-      targetImg: target.actor.token?.texture?.src,
+      targetName: tokenName,
+      targetImg: tokenImg,
       threshold: unblockable ? target.actor.system.ac : target.actor.system.cc,
       targetUuid: target.actor.uuid,
     });
@@ -487,13 +507,9 @@ export async function _generateFeatRoll(abilityData, useData, options = {}) {
   // Prepare roll data
   const rollData = { ...useData.rollData, h: useData.modifiers.heightened || 0 };
 
-  const actor = abilityData.parent.getActor();
-  const activeToken = actor.getActiveTokens?.()?.[0];
-  const tokenName = actor.token?.name || activeToken?.name || actor.prototypeToken?.name || actor.name;
-  const tokenActorSrc = actor.token?.actor?.token?.texture?.src;
-  const activeTokenSrc = activeToken?.actor?.token?.texture?.src;
-  const prototypeSrc = actor.prototypeToken?.texture?.src;
-  const tokenImg = actor.token?.texture?.src || tokenActorSrc || activeTokenSrc || prototypeSrc || actor.img;
+  const targetInfo = target ? tokenFromTarget(target) : null;
+  const tokenName = targetInfo?.name || "";
+  const tokenImg = targetInfo?.img || "";
 
   // Build context
   const context = {
@@ -509,7 +525,7 @@ export async function _generateFeatRoll(abilityData, useData, options = {}) {
     ...(target && {
       targetName: tokenName,
       targetImg: tokenImg,
-      targetUuid: target.actor.uuid,
+      targetUuid: target?.actor.uuid,
     }),
   };
 
