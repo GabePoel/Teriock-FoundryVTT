@@ -10,6 +10,7 @@ const BUTTON_CONFIGS = {
   feat: { label: "Roll SAVE Save", icon: "fas fa-dice-d20", action: "rollFeatSave" },
   effect: { label: "Apply Effect", icon: "fas fa-disease", action: "applyEffect" },
   resistance: { label: "Roll Resistance", icon: "fas fa-shield-alt", action: "rollResistance", data: "resistance" },
+  tradecraft: { label: "Roll Tradecraft", icon: "fas fa-compass-drafting", action: "rollTradecraft" },
   // Roll buttons
   damage: { label: "Roll Damage", icon: "fas fa-heart", action: "takeDamage" },
   drain: { label: "Roll Drain", icon: "fas fa-brain", action: "takeDrain" },
@@ -128,24 +129,32 @@ async function buildButtons(abilityData, useData) {
   // Status buttons
   if (takeData.startStatuses && takeData.startStatuses.size > 0) {
     for (const status of takeData.startStatuses) {
-      const statusName = CONFIG.TERIOCK.conditions[status]?.name || status;
+      const statusName = CONFIG.TERIOCK.conditions[status];
       buttons.push({
         ...BUTTON_CONFIGS.startStatus,
-        label: `Apply ${statusName}`,
+        label: statusName,
+        data: status
+      });
+    }
+  }
+  if (takeData.endStatuses && takeData.endStatuses.size > 0) {
+    for (const status of takeData.endStatuses) {
+      const statusName = CONFIG.TERIOCK.conditions[status];
+      buttons.push({
+        ...BUTTON_CONFIGS.endStatus,
+        label: statusName,
         data: status
       });
     }
   }
 
-  if (takeData.endStatuses && takeData.endStatuses.size > 0) {
-    for (const status of takeData.endStatuses) {
-      const statusName = CONFIG.TERIOCK.conditions[status]?.name || status;
-      buttons.push({
-        ...BUTTON_CONFIGS.endStatus,
-        label: `Remove ${statusName}`,
-        data: status
-      });
-    }
+  // Tradecraft check buttons
+  for (const check of takeData.checks) {
+    buttons.push({
+      ...BUTTON_CONFIGS.tradecraft,
+      label: `${CONFIG.TERIOCK.tradecraftOptionsList[check]} Check`,
+      data: check
+    });
   }
 
   return buttons;

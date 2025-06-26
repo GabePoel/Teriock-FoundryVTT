@@ -2,7 +2,11 @@ import {
   TeriockArrayField,
   TeriockRecordField,
 } from "./_fields.mjs"
+import { mergeLevel } from "../../../../../helpers/utils.mjs";
+import { tradecraftOptions } from "../../../../../helpers/constants/tradecraft-options.mjs";
 const { fields } = foundry.data;
+
+const tradecrafts = mergeLevel(tradecraftOptions, "*", "tradecrafts");
 
 /**
  * Creates a field for consequence rolls configuration.
@@ -68,7 +72,7 @@ export function consequenceChangesField() {
     }),
     {
       label: "Changes",
-      hint: "The changes applied as part of the ongoing effect. These are applied to the target.",
+      hint: "Changes made to the target's attributes as part of the ability's ongoing effect.",
     },
   );
 }
@@ -96,7 +100,7 @@ function appliesField() {
       }),
       {
         label: "Conditions",
-        hint: "The conditions applied as part of the ability's ongoing effect.",
+        hint: "Conditions applied as part of the ability's ongoing effect. These are not applied as separate conditions, but merged into an ongoing effect.",
       },
     ),
     startStatuses: new fields.SetField(
@@ -105,7 +109,7 @@ function appliesField() {
       }),
       {
         label: "Start Conditions",
-        hint: "These conditions are immediately applied when the ability is used. They exist independently of the ability.",
+        hint: "Conditions that may be immediately applied when the ability is used. They exist independently of the ability.",
       },
     ),
     endStatuses: new fields.SetField(
@@ -114,7 +118,7 @@ function appliesField() {
       }),
       {
         label: "End Conditions",
-        hint: "These conditions are immediately removed when the ability is used.",
+        hint: "Conditions that may be immediately removed when the ability is used This only works on conditions that exist independently of the ability.",
       },
     ),
     rolls: consequenceRollsField(),
@@ -132,7 +136,16 @@ function appliesField() {
       }),
       {
         label: "Hacks",
-        hint: "The types of hack damage that can be applied.",
+        hint: "Types of hack damage that may be applied by the ability.",
+      },
+    ),
+    checks: new fields.SetField(
+      new fields.StringField({
+        choices: tradecrafts,
+      }),
+      {
+        label: "Tradecraft Checks",
+        hint: "Tradecraft checks that may be made as part of the ability.",
       },
     ),
     duration: new fields.NumberField({ initial: 0 }),

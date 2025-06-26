@@ -116,18 +116,21 @@ export async function _generateEffect(abilityData, actor, heightenAmount = 0) {
 export function _generateTakes(abilityData, heightenAmount = 0) {
   let rolls = abilityData.applies.base.rolls || {};
   let hacks = abilityData.applies.base.hacks || new Set();
+  let checks = abilityData.applies.base.checks || new Set();
   let startStatuses = abilityData.applies.base.startStatuses || new Set();
   let endStatuses = abilityData.applies.base.endStatuses || new Set();
 
   if (abilityData.isProficient) {
     rolls = { ...rolls, ...abilityData.applies.proficient.rolls };
     hacks = new Set([...hacks, ...(abilityData.applies.proficient.hacks || [])]);
+    checks = new Set([...checks, ...(abilityData.applies.proficient.checks || [])]);
     startStatuses = new Set([...startStatuses, ...(abilityData.applies.proficient.startStatuses || [])]);
     endStatuses = new Set([...endStatuses, ...(abilityData.applies.proficient.endStatuses || [])]);
   }
   if (abilityData.isFluent) {
     rolls = { ...rolls, ...abilityData.applies.fluent.rolls };
     hacks = new Set([...hacks, ...(abilityData.applies.fluent.hacks || [])]);
+    checks = new Set([...checks, ...(abilityData.applies.fluent.checks || [])]);
     startStatuses = new Set([...startStatuses, ...(abilityData.applies.fluent.startStatuses || [])]);
     endStatuses = new Set([...endStatuses, ...(abilityData.applies.fluent.endStatuses || [])]);
   }
@@ -144,6 +147,9 @@ export function _generateTakes(abilityData, heightenAmount = 0) {
     for (const hack of abilityData.applies.heightened.hacks || []) {
       hacks.add(hack);
     }
+    for (const check of abilityData.applies.heightened.checks || []) {
+      checks.add(check);
+    }
     for (const status of abilityData.applies.heightened.startStatuses || []) {
       startStatuses.add(status);
     }
@@ -155,6 +161,7 @@ export function _generateTakes(abilityData, heightenAmount = 0) {
   return {
     rolls: rolls,
     hacks: hacks,
+    checks: checks,
     startStatuses: startStatuses,
     endStatuses: endStatuses,
   };

@@ -19,6 +19,7 @@ import { properties as propertiesContent } from "../content/properties.mjs";
 import { rankOptions } from "./constants/rank-options.mjs";
 import { resourceOptions } from "./constants/resource-options.mjs";
 import { tradecraftOptions } from "./constants/tradecraft-options.mjs";
+import { mergeLevel } from "./utils.mjs";
 
 const TERIOCK = {
   abilities: abilities,
@@ -43,6 +44,7 @@ const TERIOCK = {
   powerOptions: powerOptions,
   rankOptions: rankOptions,
   tradecraftOptions: tradecraftOptions,
+  tradecraftOptionsList: mergeLevel(tradecraftOptions, "*.tradecrafts", "name"),
   tradecraftOptionsMain: {
     artisan: tradecraftOptions.artisan,
     mediator: tradecraftOptions.mediator,

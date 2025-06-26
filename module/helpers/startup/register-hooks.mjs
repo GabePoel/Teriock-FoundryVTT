@@ -303,7 +303,7 @@ export default function registerHooks() {
             for (const actor of actors) {
               if (actor && typeof actor.toggleStatusEffect === "function") {
                 await actor.toggleStatusEffect(status, { active: true });
-                ui.notifications.info(`Applied status: ${status} to ${actor.name}`);
+                ui.notifications.info(`${actor.name} is now ${CONFIG.TERIOCK.conditions[status].toLowerCase()}`);
               }
             }
           }
@@ -316,7 +316,18 @@ export default function registerHooks() {
             for (const actor of actors) {
               if (actor && typeof actor.toggleStatusEffect === "function") {
                 await actor.toggleStatusEffect(status, { active: false });
-                ui.notifications.info(`Removed status: ${status} from ${actor.name}`);
+                ui.notifications.info(`${actor.name} is no longer ${CONFIG.TERIOCK.conditions[status].toLowerCase()}`);
+              }
+            }
+          }
+          if (action === "rollTradecraft") {
+            const tradecraftKey = button.getAttribute("data-data");
+            const options = {};
+            if (event.altKey) options.advantage = true;
+            if (event.shiftKey) options.disadvantage = true;
+            for (const actor of actors) {
+              if (actor && typeof actor.rollTradecraft === "function") {
+                actor.rollTradecraft(tradecraftKey, options);
               }
             }
           }
@@ -434,7 +445,7 @@ export default function registerHooks() {
         for (const actor of actors) {
           if (actor && typeof actor.toggleStatusEffect === "function") {
             await actor.toggleStatusEffect(status, { active: false });
-            ui.notifications.info(`Removed status: ${status} from ${actor.name}`);
+            ui.notifications.info(`${actor.name} is no longer ${CONFIG.TERIOCK.conditions[status].toLowerCase()}`);
           }
         }
       });
@@ -459,7 +470,7 @@ export default function registerHooks() {
         for (const actor of actors) {
           if (actor && typeof actor.toggleStatusEffect === "function") {
             await actor.toggleStatusEffect(status, { active: true });
-            ui.notifications.info(`Applied status: ${status} to ${actor.name}`);
+            ui.notifications.info(`${actor.name} is now ${CONFIG.TERIOCK.conditions[status].toLowerCase()}`);
           }
         }
       });
@@ -482,6 +493,19 @@ export default function registerHooks() {
             await actor.takeUnhack(bodyPart);
             ui.notifications.info(`Unhacked ${bodyPart} for ${actor.name}`);
           }
+        }
+      });
+    });
+
+    // Add event listener for .teriock-target-container to open target's sheet
+    html.querySelectorAll('.teriock-target-container').forEach((container) => {
+      container.addEventListener('click', async (event) => {
+        event.preventDefault();
+        const uuid = container.getAttribute('data-uuid');
+        if (!uuid) return;
+        const doc = await foundry.utils.fromUuid(uuid);
+        if (doc && doc.sheet && typeof doc.sheet.render === 'function') {
+          doc.sheet.render(true);
         }
       });
     });
