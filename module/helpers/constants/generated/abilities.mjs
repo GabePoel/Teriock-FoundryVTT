@@ -1,4 +1,4 @@
-// This file was auto-generated on 2025-06-25 by scripts/update-options.mjs.
+// This file was auto-generated on 2025-06-26 by scripts/update-options.mjs.
 // Do not edit manually.
 
 export const abilities = {
@@ -12,6 +12,7 @@ export const abilities = {
   additionalNatureRotators: "Additional Nature Rotators",
   additionalNecromancyRotators: "Additional Necromancy Rotators",
   additionalStormRotators: "Additional Storm Rotators",
+  adeptSlay: "Adept Slay",
   adrenaline: "Adrenaline",
   advancedHackHealing: "Advanced Hack Healing",
   advancedHearing: "Advanced Hearing",
@@ -153,7 +154,6 @@ export const abilities = {
   energyBlastArrow: "Energy Blast Arrow",
   escape: "Escape",
   etherealDoorway: "Ethereal Doorway",
-  etherealDuel: "Ethereal Duel",
   etherealNative: "Ethereal Native",
   etherealSenses: "Ethereal Senses",
   etherealShift: "Ethereal Shift",

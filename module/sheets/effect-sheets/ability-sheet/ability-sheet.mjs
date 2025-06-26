@@ -11,6 +11,7 @@ export default class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(
     classes: ["ability"],
     actions: {
       toggleConsequences: this._toggleConsequences,
+      consequenceTab: this._consequenceTab,
     },
     window: {
       icon: `fa-solid fa-${documentOptions.ability.icon}`,
@@ -27,6 +28,7 @@ export default class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(
   constructor(...args) {
     super(...args);
     this._tab = "overview";
+    this._consequenceTab = "base";
   }
 
   /** @override */
@@ -35,6 +37,7 @@ export default class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(
 
     const system = this.document.system;
     context.tab = this._tab;
+    context.consequenceTab = this._consequenceTab;
     context.childAbilities = await this.document.getChildrenAsync();
     context.parentAbility = this.document.getParent();
     const editors = {
@@ -226,6 +229,12 @@ export default class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(
 
   static async _toggleConsequences(event) {
     this._tab = this._tab === "consequences" ? "overview" : "consequences";
+    this.render();
+  }
+
+  static async _consequenceTab(event, target) {
+    const tab = target.dataset.tab;
+    this._consequenceTab = tab;
     this.render();
   }
 }

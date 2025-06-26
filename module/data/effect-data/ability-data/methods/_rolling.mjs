@@ -38,17 +38,18 @@ const BUTTON_CONFIGS = {
 
 function tokenFromTarget(target) {
   const actor = target.actor;
-  const img = target.texture?.src
-    || actor.token?.texture?.src
-    || actor.getActiveTokens()[0]?.texture?.src
-    || actor.prototypeToken?.texture?.src
-    || actor.img;
+  const img =
+    target.texture?.src ||
+    actor.token?.texture?.src ||
+    actor.getActiveTokens()[0]?.texture?.src ||
+    actor.prototypeToken?.texture?.src ||
+    actor.img;
   const name = target.name || actor.token?.name || actor.prototypeToken?.name || actor.name;
   return {
     name,
     actor,
     img,
-  }
+  };
 }
 
 /**
@@ -176,7 +177,6 @@ async function buildButtons(abilityData, useData) {
 
   return buttons;
 }
-
 
 /**
  * Get targets, handling self-targeting logic
