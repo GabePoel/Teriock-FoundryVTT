@@ -23,6 +23,7 @@ const BUTTON_CONFIGS = {
   gainTempMp: { label: "Roll Temp MP", icon: "fas fa-brain", action: "takeGainTempMp" },
   sleep: { label: "Roll Sleep", icon: "fas fa-bed", action: "takeSleep" },
   kill: { label: "Roll Kill", icon: "fas fa-skull", action: "takeKill" },
+  awaken: { label: "Awaken", icon: "fas fa-sunrise", action: "takeAwaken" },
   // Hack buttons
   arm: { label: "Hack Arm", icon: "fas fa-hand", action: "takeHack", data: "arm" },
   leg: { label: "Hack Leg", icon: "fas fa-boot", action: "takeHack", data: "leg" },
@@ -125,6 +126,11 @@ async function buildButtons(abilityData, useData) {
   // Resistance button
   if (abilityData.effects?.includes("resistance")) {
     buttons.push(BUTTON_CONFIGS.resistance);
+  }
+
+  // Awaken button
+  if (abilityData.effects?.includes("awakening")) {
+    buttons.push(BUTTON_CONFIGS.awaken);
   }
 
   // Take buttons

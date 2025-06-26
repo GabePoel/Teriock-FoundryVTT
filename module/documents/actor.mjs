@@ -159,6 +159,13 @@ export default class TeriockActor extends ParentDocumentMixin(foundry.documents.
   /**
    * @returns {Promise<void>}
    */
+  async takeAwaken() {
+    await this.system.takeAwaken();
+  }
+
+  /**
+   * @returns {Promise<void>}
+   */
   async postUpdate() {
     await this.system.postUpdate();
   }

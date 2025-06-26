@@ -2,6 +2,7 @@
 const { TypeDataModel } = foundry.abstract;
 import * as hacks from "./methods/consequences/_take-hacks.mjs";
 import * as numericals from "./methods/consequences/_take-numericals.mjs";
+import * as oneoffs from "./methods/consequences/_take-oneoffs.mjs";
 import * as rollGeneric from "./methods/rolling/_roll-generic.mjs";
 import { _defineSchema } from "./methods/schema/_schema.mjs";
 import { _getRollData } from "./methods/_roll-data.mjs";
@@ -139,6 +140,13 @@ export default class TeriockBaseActorData extends TypeDataModel {
    */
   async takeUnhack(part) {
     await hacks._takeUnhack(this, part);
+  }
+
+  /**
+   * @returns {Promise<void>}
+   */
+  async takeAwaken() {
+    await oneoffs._takeAwaken(this);
   }
 
   /**

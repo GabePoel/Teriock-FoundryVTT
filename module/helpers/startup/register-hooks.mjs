@@ -294,6 +294,14 @@ export default function registerHooks() {
               }
             }
           }
+          if (action === "takeAwaken") {
+            for (const actor of actors) {
+              if (actor && typeof actor.takeAwaken === "function") {
+                await actor.takeAwaken();
+                ui.notifications.info(`Awakened ${actor.name}`);
+              }
+            }
+          }
           if (action === "applyStatus") {
             const status = button.getAttribute("data-data");
             if (!status) {
