@@ -48,6 +48,8 @@ export default class TeriockEffectData extends TeriockBaseEffectData {
           hint: "If true, effect expires if its source is deleted or disabled.",
         }),
       }),
+      childIds: new fields.ArrayField(new fields.DocumentIdField()),
+      childUuids: new fields.ArrayField(new fields.DocumentUUIDField()),
     };
   }
 
@@ -77,6 +79,13 @@ export default class TeriockEffectData extends TeriockBaseEffectData {
    */
   get sustainedExpiration() {
     return this.expirations.sustained;
+  }
+
+  /**
+   * @returns {string}
+   */
+  get maneuver() {
+    return "passive";
   }
 
   /** @override */

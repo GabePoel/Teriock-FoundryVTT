@@ -28,6 +28,7 @@ export function _filterAbilities(actor, abilities, filters = {}) {
   }
   abilities = abilities.filter(
     (i) =>
+      !i.isReference &&
       binaryFilter(filters.basic, i.system.basic) &&
       binaryFilter(filters.standard, i.system.standard) &&
       binaryFilter(filters.skill, i.system.skill) &&

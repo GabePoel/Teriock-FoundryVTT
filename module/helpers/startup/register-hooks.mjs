@@ -37,7 +37,7 @@ export default function registerHooks() {
 
   Hooks.on("createActiveEffect", async (document, options, userId) => {
     if (game.user.id === userId && document.isOwner) {
-      if (document.type === "ability") {
+      if (document.type === "ability" || document.type === "effect") {
         if (document.system.childIds?.length > 0) {
           const childAbilityData = [];
           for (const childAbility of await document.getChildrenAsync()) {
@@ -45,6 +45,7 @@ export default function registerHooks() {
             data.system.parentId = document._id;
             childAbilityData.push(data);
           }
+          console.log(childAbilityData);
           const newChildAbilities = await document.parent.createEmbeddedDocuments("ActiveEffect", childAbilityData);
           const newChildIds = newChildAbilities.map((ability) => ability._id);
           await document.update({
@@ -60,7 +61,7 @@ export default function registerHooks() {
 
   Hooks.on("deleteActiveEffect", async (document, options, userId) => {
     if (game.user.id === userId && document.isOwner) {
-      if (document.type === "ability") {
+      if (document.type === "ability" || document.type === "effect") {
         if (document.system.parentId) {
           const parent = document.parent.getEmbeddedDocument("ActiveEffect", document.system.parentId);
           if (parent) {
@@ -299,6 +300,14 @@ export default function registerHooks() {
               if (actor && typeof actor.takeAwaken === "function") {
                 await actor.takeAwaken();
                 ui.notifications.info(`Awakened ${actor.name}`);
+              }
+            }
+          }
+          if (action === "takeRevive") {
+            for (const actor of actors) {
+              if (actor && typeof actor.takeRevive === "function") {
+                await actor.takeRevive();
+                ui.notifications.info(`Revived ${actor.name}`);
               }
             }
           }

@@ -44,6 +44,28 @@ export default class TeriockEffect extends ChildDocumentMixin(foundry.documents.
   }
 
   /**
+   * Gets the top level ancestor ability that provides this, if there is one.
+   * @returns {ancestor: TeriockEffect | null}
+   */
+  getAncestor() {
+    let ancestor = this.getParent();
+    if (ancestor) {
+      ancestor = ancestor.getParent() || ancestor;
+    }
+    return ancestor;
+  }
+
+  getAncestors() {
+    const ancestors = [];
+    let ancestor = this.getParent();
+    if (ancestor) {
+      ancestors.push(ancestor);
+      ancestors.push(...ancestor.getAncestors());
+    }
+    return ancestors;
+  }
+
+  /**
    * Get whatever Document most directly applies this. If it's an ability, it
    * returns that. Otherwise, gets what Foundry considers to be the parent.
    * @returns {source: Document}
@@ -88,6 +110,16 @@ export default class TeriockEffect extends ChildDocumentMixin(foundry.documents.
       }
     }
     return children;
+  }
+
+  get isReference() {
+    const ancestors = this.getAncestors();
+    for (const ancestor of ancestors) {
+      if (ancestor.system.maneuver !== "passive") {
+        return true;
+      }
+    }
+    return false;
   }
 
   /**

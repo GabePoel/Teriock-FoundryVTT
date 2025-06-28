@@ -11,7 +11,7 @@ import { parseTimeString } from "../../../../helpers/utils.mjs";
  */
 export async function _generateEffect(abilityData, actor, heightenAmount = 0) {
   let changes = abilityData.applies.base.changes || [];
-  let statuses = abilityData.applies.base.statuses || [];
+  let statuses = abilityData.applies.base.statuses || new Set();
 
   let seconds = parseTimeString(abilityData.duration);
 
@@ -19,16 +19,16 @@ export async function _generateEffect(abilityData, actor, heightenAmount = 0) {
     if (abilityData.applies.proficient.changes.length > 0) {
       changes = abilityData.applies.proficient.changes;
     }
-    if (abilityData.applies.proficient.statuses.length > 0) {
-      statuses = abilityData.applies.proficient.statuses;
+    if (abilityData.applies.proficient.statuses.size > 0) {
+      statuses = new Set(abilityData.applies.proficient.statuses);
     }
   }
   if (abilityData.isFluent) {
     if (abilityData.applies.fluent.changes.length > 0) {
       changes = abilityData.applies.fluent.changes;
     }
-    if (abilityData.applies.fluent.statuses.length > 0) {
-      statuses = abilityData.applies.fluent.statuses;
+    if (abilityData.applies.fluent.statuses.size > 0) {
+      statuses = new Set(abilityData.applies.fluent.statuses);
     }
   }
   if (heightenAmount > 0) {
@@ -39,9 +39,10 @@ export async function _generateEffect(abilityData, actor, heightenAmount = 0) {
       }
       changes = [...changes, ...heightenedChanges];
     }
-    if (abilityData.applies.heightened.statuses.length > 0) {
-      statuses = abilityData.applies.heightened.statuses;
-      statuses = [...statuses, ...abilityData.applies.heightened.statuses];
+    if (abilityData.applies.heightened.statuses.size > 0) {
+      for (const status of abilityData.applies.heightened.statuses) {
+        statuses.add(status);
+      }
     }
     if (abilityData.applies.heightened.duration > 0) {
       seconds += abilityData.applies.heightened.duration * heightenAmount;
@@ -95,7 +96,7 @@ export async function _generateEffect(abilityData, actor, heightenAmount = 0) {
     type: "effect",
     img: abilityData.parent?.img,
     changes: changes,
-    statuses: statuses,
+    statuses: Array.from(statuses),
     description: description,
     system: {
       source: abilityData.parent?._id,
@@ -106,11 +107,14 @@ export async function _generateEffect(abilityData, actor, heightenAmount = 0) {
         dawn: dawn,
         sustained: sustained,
       },
+      childIds: abilityData.childIds || [],
+      childUuids: abilityData.childUuids || [],
     },
     duration: {
       seconds: seconds || 0,
     },
   };
+  console.log(effectData);
   if ((seconds > 0 || abilityData.duration.toLowerCase().trim() !== "instant") && abilityData.maneuver !== "passive") {
     return effectData;
   }

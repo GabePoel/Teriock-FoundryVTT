@@ -150,6 +150,13 @@ export default class TeriockBaseActorData extends TypeDataModel {
   }
 
   /**
+   * @returns {Promise<void>}
+   */
+  async takeRevive() {
+    await oneoffs._takeRevive(this);
+  }
+
+  /**
    * @param {ConditionRollOptions} condition
    * @returns {Promise<void>}
    */

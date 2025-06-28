@@ -13,48 +13,50 @@ const COST_TEMPLATES = {
 };
 
 // Default applies structure
-const DEFAULT_APPLIES = {
-  base: {
-    rolls: {},
-    statuses: new Set(),
-    startStatuses: new Set(),
-    endStatuses: new Set(),
-    hacks: new Set(),
-    checks: new Set(),
-    duration: 0,
-    changes: [],
-  },
-  proficient: {
-    rolls: {},
-    statuses: new Set(),
-    startStatuses: new Set(),
-    endStatuses: new Set(),
-    hacks: new Set(),
-    checks: new Set(),
-    duration: 0,
-    changes: [],
-  },
-  fluent: {
-    rolls: {},
-    statuses: new Set(),
-    startStatuses: new Set(),
-    endStatuses: new Set(),
-    hacks: new Set(),
-    checks: new Set(),
-    duration: 0,
-    changes: [],
-  },
-  heightened: {
-    rolls: {},
-    statuses: new Set(),
-    startStatuses: new Set(),
-    endStatuses: new Set(),
-    hacks: new Set(),
-    checks: new Set(),
-    duration: 0,
-    changes: [],
-  },
-};
+function defaultApplies() {
+  return {
+    base: {
+      rolls: {},
+      statuses: new Set(),
+      startStatuses: new Set(),
+      endStatuses: new Set(),
+      hacks: new Set(),
+      checks: new Set(),
+      duration: 0,
+      changes: [],
+    },
+    proficient: {
+      rolls: {},
+      statuses: new Set(),
+      startStatuses: new Set(),
+      endStatuses: new Set(),
+      hacks: new Set(),
+      checks: new Set(),
+      duration: 0,
+      changes: [],
+    },
+    fluent: {
+      rolls: {},
+      statuses: new Set(),
+      startStatuses: new Set(),
+      endStatuses: new Set(),
+      hacks: new Set(),
+      checks: new Set(),
+      duration: 0,
+      changes: [],
+    },
+    heightened: {
+      rolls: {},
+      statuses: new Set(),
+      startStatuses: new Set(),
+      endStatuses: new Set(),
+      hacks: new Set(),
+      checks: new Set(),
+      duration: 0,
+      changes: [],
+    },
+  };
+}
 
 /**
  * @param {TeriockAbilityData} abilityData
@@ -113,12 +115,14 @@ export async function _parse(abilityData, rawHTML) {
   delete parameters.parentId;
   delete parameters.childIds;
 
-  // Process dice and effect extraction
-  processDiceAndEffectExtraction(parameters);
-
   // Apply overrides
   const applications = _override(abilityData.parent.name);
   if (applications) parameters.applies = applications;
+
+  parameters.applies = defaultApplies();
+
+  // Process dice and effect extraction
+  processDiceAndEffectExtraction(parameters);
 
   // Select image
   const img = selectImage(parameters);
@@ -384,9 +388,9 @@ function setRemainingParameters(parameters, tagTree, doc) {
   parameters.endCondition = getBarText(doc, "end-condition");
   parameters.requirements = getBarText(doc, "requirements");
   if (tagTree.effect) parameters.effects = tagTree.effect;
-  parameters.heightened = getBarText(doc, "heightened");
   parameters.expansionRange = getBarText(doc, "expansion-range", true);
   parameters.trigger = getBarText(doc, "trigger");
+  parameters.heightened = getBarText(doc, "heightened");
 }
 
 /**
@@ -489,7 +493,7 @@ function extractTradecraftChecksFromHTML(html) {
 function processDiceAndEffectExtraction(parameters) {
   // Initialize applies if needed
   if (!parameters.applies) {
-    parameters.applies = { ...DEFAULT_APPLIES };
+    parameters.applies = defaultApplies();
   }
 
   // Extract dice and effects from overviews
@@ -505,7 +509,6 @@ function processDiceAndEffectExtraction(parameters) {
     if (Object.keys(dice).length) {
       Object.assign(target.rolls, dice);
     }
-
     const hacks = extractHacksFromHTML(source);
     if (hacks.size > 0) {
       target.hacks = new Set([...(target.hacks || []), ...hacks]);

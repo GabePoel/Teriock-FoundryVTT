@@ -156,7 +156,7 @@ async function checkDown(system) {
   if (system.immunities.effects.has("unconscious")) {
     shouldBeUnconscious = false;
   }
-  let shouldBeDead = system.hp.value <= system.hp.min && system.mp.value <= system.mp.min;
+  let shouldBeDead = system.hp.value <= system.hp.min || system.mp.value <= system.mp.min;
   if (system.resistances.effects.has("dead")) {
     shouldBeDead = false;
   }
@@ -164,10 +164,20 @@ async function checkDown(system) {
     shouldBeDead = false;
   }
   if (shouldBeUnconscious && !shouldBeDead && !system.parent.statuses.has("unconscious")) {
-    await system.parent.toggleStatusEffect("unconscious", { active: true });
+    if (!system.parent.statuses.has("dead")) {
+      await system.parent.toggleStatusEffect("unconscious", {
+        active: true,
+        overlay: true,
+      });
+    }
   }
   if (shouldBeDead && !system.parent.statuses.has("dead")) {
-    await system.parent.toggleStatusEffect("dead", { active: true });
+    await system.parent.toggleStatusEffect("dead", {
+      active: true,
+      overlay: true,
+    });
+    await system.parent.toggleStatusEffect("asleep", { active: false });
+    await system.parent.toggleStatusEffect("unconscious", { active: false });
   }
 }
 

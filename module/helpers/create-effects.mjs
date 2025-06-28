@@ -12,7 +12,7 @@ export async function createAbility(document, name, options = {}) {
   }
   let parentAbility = null;
   let embeddingDocument = document;
-  if (document.type === "ability") {
+  if (document.documentName === "ActiveEffect") {
     parentAbility = document;
     embeddingDocument = document.parent;
   }

@@ -24,6 +24,7 @@ const BUTTON_CONFIGS = {
   sleep: { label: "Roll Sleep", icon: "fas fa-bed", action: "takeSleep" },
   kill: { label: "Roll Kill", icon: "fas fa-skull", action: "takeKill" },
   awaken: { label: "Awaken", icon: "fas fa-sunrise", action: "takeAwaken" },
+  revive: { label: "Revive", icon: "fas fa-heart-pulse", action: "takeRevive" },
   // Hack buttons
   arm: { label: "Hack Arm", icon: "fas fa-hand", action: "takeHack", data: "arm" },
   leg: { label: "Hack Leg", icon: "fas fa-boot", action: "takeHack", data: "leg" },
@@ -131,6 +132,11 @@ async function buildButtons(abilityData, useData) {
   // Awaken button
   if (abilityData.effects?.includes("awakening")) {
     buttons.push(BUTTON_CONFIGS.awaken);
+  }
+
+  // Revive button
+  if (abilityData.effects?.includes("revival")) {
+    buttons.push(BUTTON_CONFIGS.revive);
   }
 
   // Take buttons

@@ -399,12 +399,12 @@ const tradecrafts = mergeLevel(tradecraftOptions, "*", "tradecrafts");
 for (const [key, value] of Object.entries(tradecrafts)) {
   abilityMap["Talented " + value.name] = {
     base: {
-      changes: [{ key: `system.tradecrafts.${key}.bonus`, mode: 4, value: 1, priority: 20 }],
+      changes: [{ key: `system.tradecrafts.${key}.extra`, mode: 4, value: 1, priority: 20 }],
     },
   };
   abilityMap["Expert " + value.name] = {
     base: {
-      changes: [{ key: `system.tradecrafts.${key}.bonus`, mode: 4, value: 2, priority: 20 }],
+      changes: [{ key: `system.tradecrafts.${key}.extra`, mode: 4, value: 2, priority: 20 }],
     },
   };
 }
