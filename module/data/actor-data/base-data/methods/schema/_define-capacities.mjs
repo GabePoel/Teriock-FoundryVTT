@@ -68,5 +68,9 @@ export function _defineCapacities(schema) {
     label: "Weight",
     min: 0,
   });
+  schema.attunements = new fields.SetField(new fields.DocumentIdField(), {
+    label: "Attunements",
+    hint: "The documents that the actor is attuned to.",
+  });
   return schema;
 }

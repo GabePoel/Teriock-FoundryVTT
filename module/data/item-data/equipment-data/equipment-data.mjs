@@ -1,6 +1,7 @@
 /** @import { MessageParts } from "../../../types/messages" */
 import { ConsumableDataMixin } from "../../mixins/consumable-mixin.mjs";
 import { WikiDataMixin } from "../../mixins/wiki-mixin.mjs";
+import * as attunement from "./methods/_attunement.mjs";
 import * as deriving from "./methods/_data-deriving.mjs";
 import * as handling from "./methods/_handling.mjs";
 import * as identifying from "./methods/_identifying.mjs";
@@ -194,5 +195,33 @@ export default class TeriockEquipmentData extends WikiDataMixin(ConsumableDataMi
    */
   async identify() {
     await identifying._identify(this);
+  }
+
+  /**
+   * @returns {Promise<TeriockEffect | null>}
+   */
+  async attune() {
+    return await attunement._attune(this);
+  }
+
+  /**
+   * @returns {Promise<void>}
+   */
+  async deattune() {
+    await attunement._deattune(this);
+  }
+
+  /**
+   * @returns {boolean}
+   */
+  get attuned() {
+    return attunement._attuned(this);
+  }
+
+  /**
+   * @returns {TeriockAttunementData | null}
+   */
+  get attunement() {
+    return attunement._getAttunement(this);
   }
 }

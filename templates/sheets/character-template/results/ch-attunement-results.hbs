@@ -1,0 +1,27 @@
+<div id="attunement-results" class="tcard-results">
+  <div class="tcard-container {{{system.sheet.display.effect.size}}}">
+    <div class="tcard-container-start" style="display: none;"></div>
+    {{#each attunements as |attunement|}}
+    {{tcard
+    img=attunement.img
+    title=attunement.name
+    subtitle=(concat "Tier " attunement.system.tier)
+    text=(dotJoin
+    attunement.system.type
+    attunement.system.usage
+    )
+    id=attunement._id
+    active=attunement.system.targetDocument
+    type="effect"
+    draggable=false
+    parentId=attunement.parent._id
+    icons=(concat
+    (ticon "handshake-simple-slash" action="deattuneDoc" id=attunement._id tooltip="Deattune")
+    )
+    }}
+    {{/each}}
+    <div class="no-results {{{system.sheet.display.effect.size}}}">
+      <p>No attunements found.</p>
+    </div>
+  </div>
+</div>

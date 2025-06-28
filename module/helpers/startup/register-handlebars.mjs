@@ -519,7 +519,7 @@ export default function registerHandlebarsHelpers() {
             icons: chatIcon + enableIcon,
             id: ability._id,
             parentId: ability.parent?._id,
-            active: !ability.disabled,
+            active: !ability.disabled && !ability.isSuppressed,
             marker,
             shattered: false,
             consumable: ability.system.consumable,

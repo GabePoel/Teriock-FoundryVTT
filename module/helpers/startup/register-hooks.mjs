@@ -6,6 +6,14 @@ const { ux } = foundry.applications;
 export default function registerHooks() {
   Hooks.on("updateItem", async (document, updateData, options, userId) => {
     if (game.user.id === userId && document.isOwner) {
+      if (document.type === "equipment" && document.system.attuned && updateData.system.tier) {
+        const attunement = document.system.attunement;
+        if (attunement) {
+          await attunement.update({
+            "system.tier": document.system.tier.derived,
+          });
+        }
+      }
       await document.getActor()?.postUpdate();
     }
   });

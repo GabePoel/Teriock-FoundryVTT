@@ -25,6 +25,20 @@ export default class TeriockEffect extends ChildDocumentMixin(foundry.documents.
         }
       }
     }
+    if (this.type === "attunement") {
+      this.changes = [
+        { key: "system.attunements", mode: 2, value: this.system.target, priority: 10 },
+        { key: "system.presence.value", mode: 2, value: this.system.tier, priority: 10 },
+      ];
+    }
+  }
+
+  /**
+   * @override
+   */
+  get isSuppressed() {
+    let suppressed = super.isSuppressed;
+    return this.system.suppressed || suppressed;
   }
 
   /**

@@ -88,6 +88,26 @@ export default function connectEmbedded(document, element, editable = true) {
             },
           },
           {
+            name: "Attune",
+            icon: makeIcon("handshake-simple", iconStyle),
+            callback: async () => {
+              await embedded.system.attune();
+            },
+            condition: () => {
+              return embedded.type === "equipment" && !embedded.system.attuned;
+            },
+          },
+          {
+            name: "Deattune",
+            icon: makeIcon("handshake-simple-slash", iconStyle),
+            callback: async () => {
+              await embedded.system.deattune();
+            },
+            condition: () => {
+              return embedded.type === "equipment" && embedded.system.attuned;
+            },
+          },
+          {
             name: "Glue",
             icon: makeIcon("link", iconStyle),
             callback: async () => {

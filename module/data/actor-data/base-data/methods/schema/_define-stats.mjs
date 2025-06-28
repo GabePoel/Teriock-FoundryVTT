@@ -15,17 +15,17 @@ const { fields } = foundry.data;
 function statField(name, options = {}) {
   const schema = {
     min: new fields.NumberField({
-      initial: options.min || 0,
+      initial: options.min ?? 0,
       integer: true,
       label: `Minimum ${name}`,
     }),
     max: new fields.NumberField({
-      initial: options.max || 1,
+      initial: options.max ?? 1,
       integer: true,
       label: `Maximum ${name}`,
     }),
     value: new fields.NumberField({
-      initial: options.value || 1,
+      initial: options.value ?? 1,
       integer: true,
       label: `Current ${name}`,
     }),

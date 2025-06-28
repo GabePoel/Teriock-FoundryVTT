@@ -32,6 +32,13 @@ export default class TeriockBaseEffectData extends ChildDataMixin(TypeDataModel)
     };
   }
 
+  get suppressed() {
+    if (this.parent.parent.documentName === "Item") {
+      return this.parent.parent.system.disabled;
+    }
+    return false;
+  }
+
   /**
    * @returns {boolean}
    */

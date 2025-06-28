@@ -42,6 +42,7 @@ export default async function registerTemplates() {
     "systems/teriock/templates/sheets/character-template/parts/ch-sidebar.hbs",
     "systems/teriock/templates/sheets/character-template/parts/ch-status-box.hbs",
     "systems/teriock/templates/sheets/character-template/results/ch-ability-results.hbs",
+    "systems/teriock/templates/sheets/character-template/results/ch-attunement-results.hbs",
     "systems/teriock/templates/sheets/character-template/results/ch-effect-results.hbs",
     "systems/teriock/templates/sheets/character-template/results/ch-equipment-results.hbs",
     "systems/teriock/templates/sheets/character-template/results/ch-fluency-results.hbs",

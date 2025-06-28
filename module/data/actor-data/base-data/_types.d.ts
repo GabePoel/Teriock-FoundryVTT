@@ -187,5 +187,7 @@ declare module "./base-data.mjs" {
     immunities: ProtectionData;
     /** Update counter - used to force an update when adding/removing effects */
     updateCounter: boolean;
+    /** Attunements - IDs of attuned equipment */
+    attunements: Set<string>;
   }
 }

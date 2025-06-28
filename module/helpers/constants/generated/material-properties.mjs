@@ -1,4 +1,4 @@
-// This file was auto-generated on 2025-06-26 by scripts/update-options.mjs.
+// This file was auto-generated on 2025-06-28 by scripts/update-options.mjs.
 // Do not edit manually.
 
 export const materialProperties = {

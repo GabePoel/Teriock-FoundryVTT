@@ -71,6 +71,7 @@ Hooks.once("init", function () {
   });
   Object.assign(CONFIG.ActiveEffect.dataModels, {
     ability: data.effect.AbilityData,
+    attunement: data.effect.AttunementData,
     base: data.effect.BaseEffectData,
     effect: data.effect.EffectData,
     fluency: data.effect.FluencyData,

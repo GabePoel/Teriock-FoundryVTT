@@ -5,6 +5,7 @@ import { _migrateData } from "./methods/_migrate-data.mjs";
 import { _parse } from "./methods/_parsing.mjs";
 import { _prepareDerivedData } from "./methods/data-deriving/_data-deriving.mjs";
 import { _roll } from "./methods/_rolling.mjs";
+import { _suppressed } from "./methods/_suppression.mjs";
 import { WikiDataMixin } from "../../mixins/wiki-mixin.mjs";
 import TeriockBaseEffectData from "../base-data/base-data.mjs";
 
@@ -39,6 +40,13 @@ export default class TeriockAbilityData extends WikiDataMixin(TeriockBaseEffectD
   static migrateData(data) {
     data = _migrateData(data);
     return super.migrateData(data);
+  }
+
+  /** @override */
+  get suppressed() {
+    let suppressed = super.suppressed;
+    suppressed = suppressed || _suppressed(this);
+    return suppressed;
   }
 
   /** @override */

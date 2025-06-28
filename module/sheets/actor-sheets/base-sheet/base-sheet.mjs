@@ -40,6 +40,7 @@ export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorShee
       resist: this._resist,
       immune: this._immune,
       endCondition: this._endCondition,
+      deattuneDoc: this._deattuneDoc,
     },
     form: {
       submitOnChange: true,
@@ -298,6 +299,14 @@ export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorShee
     this.actor.rollCondition(condition, options);
   }
 
+  static async _deattuneDoc(event, target) {
+    event.stopPropagation();
+    const attunement = this.actor.effects.get(target.dataset.id);
+    if (attunement) {
+      await attunement.delete();
+    }
+  }
+
   _forceRemoveCondition(condition) {
     this.actor.rollCondition(condition, { skip: true });
   }
@@ -390,6 +399,7 @@ export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorShee
       resource: tab === "resources" ? this.actor.effectTypes.resource : [],
       fluency: tab === "tradecrafts" ? this.actor.effectTypes.fluency : [],
       effect: tab === "conditions" ? this.actor.effectTypes.effect : [],
+      attunement: tab === "conditions" ? this.actor.effectTypes.attunement : [],
       ability: tab === "abilities" ? this.actor.effectTypes.ability : [],
     };
     this._embeds.itemTypes = {
@@ -426,6 +436,7 @@ export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorShee
     context.powers = this.actor.itemTypes.power || [];
     context.fluencies = this.actor.effectTypes.fluency || [];
     context.effects = this.actor.effectTypes.effect || [];
+    context.attunements = this.actor.effectTypes.attunement || [];
     context.ranks = this.actor.itemTypes.rank || [];
     context.sidebarOpen = this._sidebarOpen;
     context.tabs = {

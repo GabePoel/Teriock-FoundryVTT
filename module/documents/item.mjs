@@ -30,11 +30,11 @@ export default class TeriockItem extends ParentDocumentMixin(ChildDocumentMixin(
    */
   async disable() {
     if (!this.system.disabled) {
-      this.update({ "system.disabled": true });
-      const updates = this.effects.map((effect) => {
-        return { _id: effect._id, disabled: true };
-      });
-      this.updateEmbeddedDocuments("ActiveEffect", updates);
+      await this.update({ "system.disabled": true });
+      // const updates = this.effects.map((effect) => {
+      //   return { _id: effect._id, disabled: true };
+      // });
+      // await this.updateEmbeddedDocuments("ActiveEffect", updates);
     }
   }
 
@@ -43,12 +43,12 @@ export default class TeriockItem extends ParentDocumentMixin(ChildDocumentMixin(
    */
   async enable() {
     if (this.system.disabled) {
-      this.update({ "system.disabled": false });
-      const toUpdate = this.effects.filter((effect) => !effect.system.forceDisabled);
-      const updates = toUpdate.map((effect) => {
-        return { _id: effect._id, disabled: false };
-      });
-      this.updateEmbeddedDocuments("ActiveEffect", updates);
+      await this.update({ "system.disabled": false });
+      // const toUpdate = this.effects.filter((effect) => !effect.system.forceDisabled);
+      // const updates = toUpdate.map((effect) => {
+      //   return { _id: effect._id, disabled: false };
+      // });
+      // await this.updateEmbeddedDocuments("ActiveEffect", updates);
     }
   }
 
