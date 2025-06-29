@@ -7,17 +7,19 @@ import { _prepareDerivedData } from "./methods/data-deriving/_data-deriving.mjs"
 import { _roll } from "./methods/_rolling.mjs";
 import { _suppressed } from "./methods/_suppression.mjs";
 import { WikiDataMixin } from "../../mixins/wiki-mixin.mjs";
-import TeriockBaseEffectData from "../base-data/base-data.mjs";
+const { DataModel } = foundry.abstract;
 
 /**
  * @extends {TeriockBaseEffectData}
  * @extends {WikiDataMixin}
  */
-export default class TeriockAbilityData extends WikiDataMixin(TeriockBaseEffectData) {
+export default class TeriockPseudoAbilityData extends WikiDataMixin(DataModel) {
+  static DEPTH = 0;
+
   /** @inheritdoc */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
-      type: "ability",
+      type: "pseudo-ability",
       embedded: {
         PseudoAbility: "system.children",
       },
@@ -25,28 +27,26 @@ export default class TeriockAbilityData extends WikiDataMixin(TeriockBaseEffectD
   }
 
   /** @override */
-  static defineSchema() {
-    const commonData = super.defineSchema();
-    return {
-      ...commonData,
-      ..._defineSchema(),
-    };
+  static defineSchema(depth = this.DEPTH) {
+    return _defineSchema(depth);
   }
 
-  /** @override */
-  prepareDerivedData() {
-    super.prepareDerivedData();
-    _prepareDerivedData(this);
-    for (const ability of this.children.contents) {
-      ability.prepareDerivedData();
-    }
-  }
+  // /** @override */
+  // prepareDerivedData() {
+  //   super.prepareDerivedData();
+  //   _prepareDerivedData(this);
+  // }
 
   /** @override */
   static migrateData(data) {
     data = _migrateData(data);
     return super.migrateData(data);
   }
+
+  // /** @override */
+  // get parent() {
+  //   return this.parent;
+  // }
 
   /** @override */
   get suppressed() {
@@ -80,21 +80,4 @@ export default class TeriockAbilityData extends WikiDataMixin(TeriockBaseEffectD
   async parse(rawHTML) {
     return await _parse(this, rawHTML);
   }
-
-  getPseudoDocument(uuid) {
-    const pseudoIds = uuid.split(`PseudoAbility.`).slice(1);
-    console.log(pseudoIds);
-    let doc = this;
-    console.log(doc.children);
-    console.log(pseudoIds[0]);
-    console.log(doc.children.get(pseudoIds[0]));
-    for (const pseudoId of pseudoIds) {
-      doc = doc.children.get(pseudoId);
-    }
-    return doc;
-  }
-
-  // get parent() {
-  //   return this.parent;
-  // }
 }

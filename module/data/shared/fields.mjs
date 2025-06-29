@@ -1,4 +1,6 @@
 const { fields } = foundry.data;
+import ModelCollection from "./model-collection.mjs";
+import Pseudo from "../../documents/pseudo.mjs"
 
 // Utility functions for common DOM operations
 const createElement = (tag, className, styles = {}, content = "") => {
@@ -89,4 +91,32 @@ export function dynamicField(options = {}) {
     raw: new fields.StringField(rawOptions),
     value: new fields.NumberField(valueOptions),
   });
+}
+
+/**
+ * A collection that houses pseudo-documents.
+ */
+export class TeriockCollectionField extends fields.TypedObjectField {
+  constructor(model, options = {}, context = {}) {
+    let field = new fields.EmbeddedDataField(model);
+    options.validateKey ||= ((key) => foundry.data.validators.isValidId(key));
+    super(field, options, context);
+    console.log("TeriockCollectionField", this.fieldPath);
+  }
+
+  /* -------------------------------------------------- */
+
+  /** @inheritdoc */
+  initialize(value, model, options = {}) {
+    const init = super.initialize(value, model, options);
+    const collection = new ModelCollection();
+    for (const [id, model] of Object.entries(init)) {
+      if (model instanceof Pseudo) {
+        collection.set(id, model);
+      } else {
+        collection.setInvalid(model);
+      }
+    }
+    return collection;
+  }
 }

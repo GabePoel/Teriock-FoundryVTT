@@ -422,6 +422,7 @@ export default function registerHandlebarsHelpers() {
       icons,
       id,
       parentId,
+      uuid,
       active = true,
       marker = null,
       shattered = false,
@@ -443,7 +444,7 @@ export default function registerHandlebarsHelpers() {
       : `<div class="tcard-subtitle">${subtitle}</div>`;
 
     return new Handlebars.SafeString(`
-      <div class="tcard ${draggable ? "draggable" : ""} ${active ? "active" : "inactive"} ${shattered ? "shattered" : ""}" ${idAttr} ${parentIdAttr} ${typeAttr} data-action="openDoc" data-img="${img}">
+      <div class="tcard ${draggable ? "draggable" : ""} ${active ? "active" : "inactive"} ${shattered ? "shattered" : ""}" ${idAttr} ${parentIdAttr} ${typeAttr} data-action="openDoc" data-img="${img}" data-uuid="${uuid}">
         <div class="tcard-marker" style="${marker ? `background-color: ${marker}; width: 4px; min-width: 4px;` : ""}"></div>
         <div class="tcard-image" data-action="${action}" ${tooltipAttr}><img src="${img}" alt="${title}" /></div>
         <div class="tcard-body">
@@ -501,11 +502,18 @@ export default function registerHandlebarsHelpers() {
           },
         });
 
+        console.log("ability.parent", ability.parent);
         let text = ability.parent?.name;
-        const parent = ability.getParent();
-        if (parent) {
-          text = parent.name;
+        let parentId = ability.parent?._id;
+        if (!text) {
+          text = ability.parent?.parent?.name;
+          parentId = ability.parent?.parent?._id;
         }
+        console.log("text", text);
+        // const parent = ability.getParent();
+        // if (parent) {
+        //   text = parent.name;
+        // }
 
         if (parent && skipDescendants) {
           return "";
@@ -518,7 +526,8 @@ export default function registerHandlebarsHelpers() {
             text: text,
             icons: chatIcon + enableIcon,
             id: ability._id,
-            parentId: ability.parent?._id,
+            uuid: ability.uuid,
+            parentId: parentId,
             active: !ability.disabled && !ability.isSuppressed,
             marker,
             shattered: false,

@@ -8,6 +8,7 @@ import type {
   TeriockItem as TeriockItemType,
   TeriockToken as TeriockTokenType,
 } from "./_module.mjs";
+import { PseudoApplication } from "../sheets/pseudo-sheets/_module.mjs";
 
 type ActorModel = (typeof actorModels)[keyof typeof actorModels];
 type EffectModel = (typeof effectModels)[keyof typeof effectModels];
@@ -56,3 +57,22 @@ declare module "./token.mjs" {
   const TeriockToken: TeriockToken;
   export default TeriockToken;
 }
+
+declare module "./pseudo.mjs" {
+  export default interface Pseudo {
+    _id: string;
+  }
+}
+
+export type PseudoMetadata = {
+  /* The document name of this pseudo-document. */
+  documentName: string,
+  /** The localization string for this pseudo-document */
+  label: string;
+  /** The font-awesome icon for this pseudo-document type */
+  icon: string;
+  /* Record of document names of pseudo-documents and the path to the collection. */
+  embedded: Record<string, string>,
+  /* The class used to render this pseudo-document. */
+  sheetClass?: PseudoApplication,
+};

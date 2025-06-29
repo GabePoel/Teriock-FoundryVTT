@@ -1,4 +1,4 @@
-import "./ability-sheet/_types";
+import "../mixins/ability-mixin/_types";
 import "./base-sheet/_types";
 import "./effect-sheet/_types";
 import "./fluency-sheet/_types";

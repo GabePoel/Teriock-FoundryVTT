@@ -1,9 +1,9 @@
-import { ChildDocumentMixin } from "./mixins/child-mixin.mjs";
+import { EffectMixin } from "./mixins/effect-mixin.mjs";
 
 /**
  * @extends {foundry.documents.ActiveEffect}
  */
-export default class TeriockEffect extends ChildDocumentMixin(foundry.documents.ActiveEffect) {
+export default class TeriockEffect extends EffectMixin(foundry.documents.ActiveEffect) {
   /**
    * @todo Move this logic to TeriockAbilityData as appropriate.
    * @inheritdoc
@@ -217,37 +217,5 @@ export default class TeriockEffect extends ChildDocumentMixin(foundry.documents.
       });
       await this.parent?.deleteEmbeddedDocuments("ActiveEffect", childIds);
     }
-  }
-
-  /**
-   * Disables the effect, setting its `disabled` property to true.
-   * @returns {Promise<void>}
-   */
-  async disable() {
-    await this.update({ disabled: true });
-  }
-
-  /**
-   * Enables the effect, setting its `disabled` property to false.
-   * @returns {Promise<void>}
-   */
-  async enable() {
-    await this.update({ disabled: false });
-  }
-
-  /**
-   * Toggles the `disabled` state of the effect.
-   * If the effect is currently disabled, it will be enabled, and vice versa.
-   * @returns {Promise<void>}
-   */
-  async toggleDisabled() {
-    await this.update({ disabled: !this.disabled });
-  }
-
-  /**
-   * @returns {Promise<void>}
-   */
-  async forceUpdate() {
-    await this.update({ "system.updateCounter": !this.system.updateCounter });
   }
 }

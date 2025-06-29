@@ -10,31 +10,49 @@ export async function createAbility(document, name, options = {}) {
   if (name) {
     abilityData.name = name;
   }
-  let parentAbility = null;
-  let embeddingDocument = document;
-  if (document.documentName === "ActiveEffect") {
-    parentAbility = document;
-    embeddingDocument = document.parent;
-  }
-  const abilities = await embeddingDocument.createEmbeddedDocuments("ActiveEffect", [abilityData]);
-  const ability = abilities[0];
-  if (ability.name !== "New Ability") {
-    await ability.system.wikiPull(options);
-  }
-  if (parentAbility) {
-    await parentAbility.parent.updateEmbeddedDocuments("ActiveEffect", [
+  // let parent = null;
+  // let embeddingDocument = document;
+  // if (document.documentName === "ActiveEffect") {
+  //   parent = document;
+  //   embeddingDocument = document.parent;
+  // }
+  // const abilities = await embeddingDocument.createEmbeddedDocuments("ActiveEffect", [abilityData]);
+  // const ability = abilities[0];
+  // if (ability.name !== "New Ability") {
+  //   await ability.system.wikiPull(options);
+  // }
+  // if (parent) {
+  //   await parent.parent.updateEmbeddedDocuments("ActiveEffect", [
+  //     {
+  //       _id: ability._id,
+  //       "system.parentId": parent._id,
+  //     },
+  //     {
+  //       _id: parent._id,
+  //       "system.childIds": parent.system.childIds.concat(ability._id),
+  //     },
+  //   ]);
+  // }
+  if (document.documentName === "ActiveEffect" || document.documentName === "PseudoAbility") {
+    const { default: PseudoAbility } = await import("../documents/pseudo-ability.mjs");
+    const ability = await PseudoAbility.create(
       {
-        _id: ability._id,
-        "system.parentId": parentAbility._id,
+        name: "New Ability",
+        type: "pseudo-ability",
+        img: "systems/teriock/assets/ability.svg",
+        system: {},
       },
-      {
-        _id: parentAbility._id,
-        "system.childIds": parentAbility.system.childIds.concat(ability._id),
-      },
-    ]);
+      { parent: document },
+    );
+    await document.forceUpdate();
+    return ability;
+  } else {
+    const abilities = await document.createEmbeddedDocuments("ActiveEffect", [abilityData]);
+    const ability = abilities[0];
+    // await ability.system.wikiPull(options);
+    await document.forceUpdate();
+    return ability;
   }
-  await embeddingDocument.forceUpdate();
-  return ability;
 }
 
 export async function createResource(document) {

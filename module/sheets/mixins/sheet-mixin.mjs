@@ -295,20 +295,33 @@ export const TeriockSheet = (Base) =>
       return menu;
     }
 
-    _embeddedFromCard(target) {
-      const card = target.closest(".tcard");
-      const { id, type, parentId } = card?.dataset ?? {};
+    async _embeddedFromCard(target) {
+      // const card = target.closest(".tcard");
+      // const { id, type, parentId } = card?.dataset ?? {};
 
-      if (type === "item") return this.document.items.get(id);
+      // if (type === "item") return this.document.items.get(id);
 
-      if (type === "effect") {
-        if (this.document.documentName === "Actor" && this.document._id !== parentId) {
-          return this.document.items.get(parentId)?.effects.get(id);
-        }
-        if (this.document.documentName === "ActiveEffect") {
-          return this.document.parent?.effects.get(id);
-        }
-        return this.document.effects.get(id);
+      // if (type === "effect") {
+      //   if (this.document.documentName === "Actor" && this.document._id !== parentId) {
+      //     return this.document.items.get(parentId)?.effects.get(id);
+      //   }
+      //   if (this.document.documentName === "ActiveEffect") {
+      //     return this.document.parent?.effects.get(id);
+      //   }
+      //   return this.document.effects.get(id);
+      // }
+      const uuid = target.dataset.uuid;
+      console.log("uuid", uuid);
+      if (uuid.includes("PseudoAbility.")) {
+        const activeEffectUuid = uuid.split(".PseudoAbility")[0];
+        console.log("activeEffectUuid", activeEffectUuid);
+        const root = await foundry.utils.fromUuid(activeEffectUuid);
+        console.log("root", root);
+        return root.system.getPseudoDocument(uuid);
+      } else {
+        const document = await utils.fromUuid(uuid);
+        console.log("document", document);
+        return document;
       }
     }
 
@@ -413,21 +426,33 @@ export const TeriockSheet = (Base) =>
     }
 
     static async _openDoc(event, target) {
-      this._embeddedFromCard(target)?.sheet.render(true);
+      const document = await this._embeddedFromCard(target);
+      console.log("document", document);
+      const sheet = document?.sheet;
+      console.log("sheet", sheet);
+      await sheet?.render(true);
     }
     static async _chatDoc(event, target) {
-      this._embeddedFromCard(target)?.chat();
+      const document = await this._embeddedFromCard(target);
+      console.log("document", document);
+      await document?.chat();
     }
     static async _useOneDoc(event, target) {
-      await this._embeddedFromCard(target)?.system.useOne();
+      const document = await this._embeddedFromCard(target);
+      console.log("document", document);
+      await document?.system.useOne();
     }
     static async _toggleDisabledDoc(event, target) {
-      await this._embeddedFromCard(target)?.toggleSoftDisabled();
+      const document = await this._embeddedFromCard(target);
+      console.log("document", document);
+      await document?.toggleSoftDisabled();
     }
 
     static async _rollDoc(event, target) {
       const options = event?.altKey ? { advantage: true } : event?.shiftKey ? { disadvantage: true } : {};
-      await this._embeddedFromCard(target)?.use(options);
+      const document = await this._embeddedFromCard(target);
+      console.log("document", document);
+      await document?.use(options);
     }
 
     static async _quickToggle(event, target) {

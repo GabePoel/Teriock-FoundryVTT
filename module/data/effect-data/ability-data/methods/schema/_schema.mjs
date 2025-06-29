@@ -1,5 +1,6 @@
 import { _defineApplies } from "./_define-applies.mjs";
 import { _defineGeneral } from "./_define-general.mjs";
+import { _defineSub } from "./_define-sub.mjs";
 
 /**
  * Defines the complete schema for Teriock ability data.
@@ -25,9 +26,11 @@ import { _defineGeneral } from "./_define-general.mjs";
  * // Use schema for validation
  * const abilityData = new foundry.data.DataModel(schema, data);
  */
-export function _defineSchema() {
+export function _defineSchema(depth = 0) {
+  console.log("_defineSchema has been passed a depth of", depth);
   let schema = {};
   schema = _defineApplies(schema);
   schema = _defineGeneral(schema);
+  schema = _defineSub(schema, depth);
   return schema;
 }
