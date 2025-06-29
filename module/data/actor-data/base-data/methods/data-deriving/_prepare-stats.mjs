@@ -82,24 +82,7 @@ export function _prepareHpMp(system) {
  * @private
  */
 export function _preparePresence(system) {
-  // const actor = system.parent;
-  // const equipped = actor.itemTypes.equipment.filter((i) => i.system.equipped);
-  // let usp = equipped.reduce((sum, item) => sum + (item.system.tier.derived || 0), 0);
-  // usp = Math.min(usp, system.pres);
-  // const unp = system.pres - usp;
-  // Object.assign(system, {
-  //   unp,
-  //   usp,
-  //   attributes: {
-  //     ...system.attributes,
-  //     unp: { ...system.attributes.unp, value: unp },
-  //   },
-  //   presence: {
-  //     max: system.pres,
-  //     min: 0,
-  //     value: usp,
-  //   },
-  // });
+  system.presence.overflow = system.presence.value > system.pres;
   system.presence.max = system.pres;
   system.presence.value = Math.min(system.presence.value, system.pres);
   system.usp = system.presence.value;

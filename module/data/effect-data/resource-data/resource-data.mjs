@@ -61,6 +61,15 @@ export default class TeriockResourceData extends ConsumableDataMixin(TeriockBase
   }
 
   /** @override */
+  get suppressed() {
+    let suppressed = super.suppressed;
+    if (!suppressed && this.parent?.parent?.type === "equipment") {
+      suppressed = !this.parent.parent.system.attuned;
+    }
+    return suppressed;
+  }
+
+  /** @override */
   async roll(options) {
     await _roll(this, options);
   }

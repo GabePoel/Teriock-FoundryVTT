@@ -1929,6 +1929,9 @@
   justify-content: center;
 }
 .teriock .character-presence-container {
+  --color-presence-bar: #b48b1a;
+  --color-presence-bar-dark: #7d6114;
+  --color-presence-bar-darkest: rgb(50, 40, 0);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1937,7 +1940,12 @@
   height: 3em;
   border-radius: 6px;
   overflow: hidden;
-  border: 2px solid #b48b1a;
+  border: 2px solid var(--color-presence-bar);
+}
+.teriock .character-presence-container.overflow {
+  --color-presence-bar: var(--color-level-error);
+  --color-presence-bar-dark: var(--color-level-error-bg);
+  --color-presence-bar-darkest: var(--color-level-error-border);
 }
 .teriock .character-presence-container .character-presence-bar {
   display: grid;
@@ -1950,16 +1958,16 @@
   background-color: black;
 }
 .teriock .character-presence-container .character-presence-bar .presence-indicator:not(:first-child) {
-  border-left: 1px solid #b48b1a;
+  border-left: 1px solid var(--color-presence-bar);
 }
 .teriock .character-presence-container .character-presence-bar .presence-indicator:not(:last-child) {
-  border-right: 1px solid #b48b1a;
+  border-right: 1px solid var(--color-presence-bar);
 }
 .teriock .character-presence-container .character-presence-bar .presence-indicator.used {
-  background-image: repeating-linear-gradient(135deg, #b48b1a 0px, #b48b1a 2px, #7d6114 2px, #7d6114 8px);
+  background-image: repeating-linear-gradient(135deg, var(--color-presence-bar) 0px, var(--color-presence-bar) 2px, var(--color-presence-bar-dark) 2px, var(--color-presence-bar-dark) 8px);
 }
 .teriock .character-presence-container .character-presence-bar .presence-indicator.unused {
-  background-color: rgb(50, 40, 0);
+  background-color: var(--color-presence-bar-darkest);
 }
 .teriock .tradecraft-panels {
   width: 100%;

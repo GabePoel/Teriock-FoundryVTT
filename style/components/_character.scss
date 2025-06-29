@@ -423,6 +423,14 @@
 }
 
 .character-presence-container {
+  --color-presence-bar: #{colors.$mp-yellow};
+  --color-presence-bar-dark: #{colors.$mp-yellow-dark};
+  --color-presence-bar-darkest: #{colors.$mp-yellow-darkest};
+  &.overflow {
+    --color-presence-bar: var(--color-level-error);
+    --color-presence-bar-dark: var(--color-level-error-bg);
+    --color-presence-bar-darkest: var(--color-level-error-border);
+  }
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -431,7 +439,7 @@
   height: 3em;
   border-radius: 6px;
   overflow: hidden;
-  border: 2px solid #{colors.$mp-yellow};
+  border: 2px solid var(--color-presence-bar);
   .character-presence-bar {
     display: grid;
     width: 100%;
@@ -440,23 +448,23 @@
       width: 100%;
       height: 100%;
       &:not(:first-child) {
-        border-left: 1px solid #{colors.$mp-yellow};
+        border-left: 1px solid var(--color-presence-bar);
       }
       &:not(:last-child) {
-        border-right: 1px solid #{colors.$mp-yellow};
+        border-right: 1px solid var(--color-presence-bar);
       }
       background-color: black;
       &.used {
         background-image: repeating-linear-gradient(
           135deg,
-          #{colors.$mp-yellow} 0px,
-          #{colors.$mp-yellow} 2px,
-          #{colors.$mp-yellow-dark} 2px,
-          #{colors.$mp-yellow-dark} 8px /* gap between lines: 2px line + 6px gap */
+          var(--color-presence-bar) 0px,
+          var(--color-presence-bar) 2px,
+          var(--color-presence-bar-dark) 2px,
+          var(--color-presence-bar-dark) 8px /* gap between lines: 2px line + 6px gap */
         );
       }
       &.unused {
-        background-color: #{colors.$mp-yellow-darkest};
+        background-color: var(--color-presence-bar-darkest);
       }
     }
   }

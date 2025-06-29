@@ -101,7 +101,7 @@ export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorShee
   }
 
   static async _toggleDisabledDoc(event, target) {
-    this._embeddedFromCard(target)?.system.toggleDisabled();
+    this._embeddedFromCard(target)?.toggleDisabled();
   }
 
   static async _addEmbedded(_, target) {

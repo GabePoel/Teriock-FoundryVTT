@@ -65,17 +65,15 @@ export async function _identify(equipmentData) {
       const unknownEffects = ref.transferredEffects.filter((e) => !knownEffectNames.includes(e.name));
       const unknownEffectData = unknownEffects.map((e) => foundry.utils.duplicate(e));
       await equipmentData.parent.createEmbeddedDocuments("ActiveEffect", unknownEffectData);
-      const equipped = equipmentData.equipped;
+      const refSystem = foundry.utils.duplicate(ref.system);
+      delete refSystem.equipped;
+      delete refSystem.dampened;
+      delete refSystem.shattered;
       if (ref) {
         await equipmentData.parent.update({
           name: ref.name,
-          system: ref.system,
+          system: refSystem,
         });
-      }
-      if (equipped) {
-        await equipmentData.parent.equip();
-      } else {
-        await equipmentData.parent.unequip();
       }
       ui.notifications.success(`${equipmentData.parent.name} was successfully identified.`);
     } else {
@@ -113,9 +111,9 @@ export async function _unidentify(equipmentData) {
       "system.fullTier": "",
       "system.manaStoring": "",
       "system.font": "",
+      "system.equipped": false,
     });
     await copy.deleteEmbeddedDocuments("ActiveEffect", idsToRemove);
-    await copy.unequip();
   } else if (equipmentData.parent.type === "equipment") {
     ui.notifications.warn("This item is already unidentified.");
   }

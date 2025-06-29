@@ -1,6 +1,8 @@
 /** @import TeriockEquipmentData from "../equipment-data.mjs"; */
 /** @import TeriockEffect from "@client/documents/_module.mjs"; */
 
+import { evaluateSync } from "../../../../helpers/utils.mjs";
+
 /**
  * @param {TeriockEquipmentData} equipmentData
  * @returns {Promise<TeriockEffect | null>}
@@ -26,8 +28,19 @@ export async function _attune(equipmentData) {
       { key: "system.presence.value", mode: 2, value: equipmentData.tier.derived, priority: 10 },
     ],
   };
-  if (equipmentData.parent.actor) {
+  if (equipmentData.parent.actor && await _canAttune(equipmentData)) {
+    if (equipmentData.reference && !equipmentData.identified) {
+      const ref = await foundry.utils.fromUuid(equipmentData.reference);
+      if (ref) {
+        await equipmentData.parent.update({
+          "system.tier.raw": ref.system.tier.raw,
+        });
+      }
+    }
     attunement = await equipmentData.parent.actor.createEmbeddedDocuments("ActiveEffect", [attunementData]);
+    ui.notifications.success(`${equipmentData.parent.name} was successfully attuned.`);
+  } else {
+    ui.notifications.error(`You do not have enough unused presence to attune ${equipmentData.parent.name}.`);
   }
   return attunement;
 }
@@ -68,4 +81,23 @@ export function _getAttunement(equipmentData) {
     );
   }
   return null;
+}
+
+/**
+ * @param {TeriockEquipmentData} equipmentData
+ * @returns {boolean}
+ * @private
+ */
+export async function _canAttune(equipmentData) {
+  if (equipmentData.parent?.actor) {
+    let tierDerived = equipmentData.tier.derived;
+    if (equipmentData.reference && !equipmentData.identified) {
+      const ref = await foundry.utils.fromUuid(equipmentData.reference);
+      const tierRaw = ref.system.tier.raw;
+      tierDerived = evaluateSync(tierRaw);
+    }
+    const unp = equipmentData.parent.actor.system.presence.max - equipmentData.parent.actor.system.presence.value;
+    return tierDerived <= unp;
+  }
+  return false;
 }

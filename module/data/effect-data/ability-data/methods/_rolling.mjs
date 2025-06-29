@@ -96,6 +96,8 @@ export async function _roll(abilityData, options) {
   for (const roll of chatMessageData.rolls) {
     await roll.evaluate();
   }
+  foundry.documents.ChatMessage.applyRollMode(chatMessageData, game.settings.get("core", "rollMode"));
+  
   await foundry.documents.ChatMessage.create(chatMessageData);
 }
 

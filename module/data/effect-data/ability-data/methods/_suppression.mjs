@@ -5,7 +5,7 @@
  * @returns {boolean}
  */
 export function _suppressed(abilityData) {
-  let suppressed = false;
+  let suppressed = abilityData.forceDisabled;
   if (!suppressed && abilityData.parent.parent.type === "equipment") {
     if (!suppressed && !abilityData.parent.parent.system.equipped) {
       suppressed = true;
