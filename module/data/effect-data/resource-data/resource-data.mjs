@@ -84,13 +84,13 @@ export default class TeriockResourceData extends ConsumableDataMixin(TeriockBase
     const toDisable = this.quantity <= 1;
     await super.useOne();
     if (toDisable) {
-      await this.parent.setForceDisabled(true);
+      await this.parent.setSoftDisabled(true);
     }
   }
 
   /** @override */
   async gainOne() {
     await super.gainOne();
-    await this.parent.setForceDisabled(false);
+    await this.parent.setSoftDisabled(false);
   }
 }

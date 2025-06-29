@@ -57,6 +57,13 @@ export default class TeriockEffect extends ChildDocumentMixin(foundry.documents.
     return null;
   }
 
+  getParentSync() {
+    if (this.system.parentUuid) {
+      return this.parent.getEmbeddedDocument("ActiveEffect", this.system.parentId);
+    }
+    return null;
+  }
+
   /**
    * Gets the top level ancestor ability that provides this, if there is one.
    * @returns {ancestor: TeriockEffect | null}
@@ -75,6 +82,16 @@ export default class TeriockEffect extends ChildDocumentMixin(foundry.documents.
     if (ancestor) {
       ancestors.push(ancestor);
       ancestors.push(...ancestor.getAncestors());
+    }
+    return ancestors;
+  }
+
+  getAncestorsSync() {
+    const ancestors = [];
+    let ancestor = this.getParentSync();
+    if (ancestor) {
+      ancestors.push(ancestor);
+      ancestors.push(...ancestor.getAncestorsSync());
     }
     return ancestors;
   }
@@ -190,28 +207,6 @@ export default class TeriockEffect extends ChildDocumentMixin(foundry.documents.
   }
 
   /**
-   * @param {boolean} descendants - If true, gets only the descendants of this
-   * regardless of whether or not this is force disabled.
-   * @returns {notForceDisabled: ActiveEffect[]}
-   */
-  getNotForceDisabled(descendants = false) {
-    const notForceDisabled = [];
-    if (descendants || !this.system.forceDisabled) {
-      const children = this.getChildren();
-      for (const child of children) {
-        const toPush = child.getNotForceDisabled();
-        for (const p of toPush) {
-          notForceDisabled.push(p);
-        }
-      }
-    }
-    if (!descendants && !this.system.forceDisabled) {
-      notForceDisabled.push(this);
-    }
-    return notForceDisabled;
-  }
-
-  /**
    * @returns {Promise<void>}
    */
   async deleteChildren() {
@@ -225,124 +220,28 @@ export default class TeriockEffect extends ChildDocumentMixin(foundry.documents.
   }
 
   /**
-   * @returns {Promise<void>}
-   */
-  async softEnable() {
-    const updateCandidates = this.getNotForceDisabled();
-    const updates = updateCandidates.map((effect) => {
-      return { _id: effect.id, disabled: false };
-    });
-    this.parent.updateEmbeddedDocuments("ActiveEffect", updates);
-  }
-
-  /**
-   * @returns {Promise<void>}
-   */
-  async softDisable() {
-    const updateCandidates = this.getDescendants();
-    updateCandidates.push(this);
-    const updates = updateCandidates.map((effect) => {
-      return { _id: effect.id, disabled: true };
-    });
-    this.parent.updateEmbeddedDocuments("ActiveEffect", updates);
-  }
-
-  /**
-   * @returns {Promise<void>}
-   */
-  async hardEnable() {
-    const updateCandidates = this.getNotForceDisabled(true);
-    const updates = updateCandidates.map((effect) => {
-      return { _id: effect.id, disabled: false };
-    });
-    updates.push({
-      _id: this.id,
-      disabled: false,
-      "system.forceDisabled": false,
-    });
-    this.parent.updateEmbeddedDocuments("ActiveEffect", updates);
-  }
-
-  /**
-   * @returns {Promise<void>}
-   */
-  async hardDisable() {
-    const updateCandidates = this.getDescendants();
-    updateCandidates.push(this);
-    const updates = updateCandidates.map((effect) => {
-      return { _id: effect.id, disabled: true };
-    });
-    updates.push({
-      _id: this.id,
-      disabled: true,
-      "system.forceDisabled": true,
-    });
-    this.parent.updateEmbeddedDocuments("ActiveEffect", updates);
-  }
-
-  /**
-   * @param {boolean} bool
-   * @returns {Promise<void>}
-   */
-  async setSoftDisabled(bool) {
-    if (bool) {
-      await this.softDisable();
-    } else {
-      await this.softEnable();
-    }
-  }
-
-  /**
-   * @returns {Promise<void>}
-   */
-  async toggleSoftDisabled() {
-    await this.setSoftDisabled(!this.disabled);
-  }
-
-  /**
-   * @todo A lot of this logic should be moved to data classes.
-   * @param {boolean} bool
-   * @returns {Promise<void>}
-   */
-  async setForceDisabled(bool) {
-    const shouldEnable = !this.system.consumable || (this.system.consumable && this.system.quantity >= 1);
-    const parentDisabled =
-      (this.parent?.system?.disabled ?? false) ||
-      (this.getParent()?.disabled ?? false) ||
-      (this.getParent()?.system?.forceDisabled ?? false);
-    if (parentDisabled) {
-      ui.notifications.error(`You cannot ${bool ? "enable" : "disable"} ${this.name} while its parent is disabled.`);
-    }
-    if (!parentDisabled) {
-      if (bool) {
-        await this.hardDisable();
-      } else {
-        if (shouldEnable) {
-          await this.hardEnable();
-        }
-      }
-    }
-  }
-
-  /**
-   * @returns {Promise<void>}
-   */
-  async toggleForceDisabled() {
-    await this.setForceDisabled(!this.system.forceDisabled);
-  }
-
-  /**
+   * Disables the effect, setting its `disabled` property to true.
    * @returns {Promise<void>}
    */
   async disable() {
-    await this.setForceDisabled(true);
+    await this.update({ disabled: true });
   }
 
   /**
+   * Enables the effect, setting its `disabled` property to false.
    * @returns {Promise<void>}
    */
   async enable() {
-    await this.setForceDisabled(false);
+    await this.update({ disabled: false });
+  }
+
+  /**
+   * Toggles the `disabled` state of the effect.
+   * If the effect is currently disabled, it will be enabled, and vice versa.
+   * @returns {Promise<void>}
+   */
+  async toggleDisabled() {
+    await this.update({ disabled: !this.disabled });
   }
 
   /**

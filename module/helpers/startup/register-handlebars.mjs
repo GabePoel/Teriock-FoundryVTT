@@ -493,7 +493,7 @@ export default function registerHandlebarsHelpers() {
         });
         const enableIcon = Handlebars.helpers.ticonToggle("circle", "circle-check", ability.disabled, {
           hash: {
-            action: "toggleForceDisabledDoc",
+            action: "toggleDisabledDoc",
             id: ability._id,
             parentId: ability.parent?._id,
             tooltipTrue: "Disabled",

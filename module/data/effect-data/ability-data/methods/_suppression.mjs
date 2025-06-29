@@ -18,5 +18,11 @@ export function _suppressed(abilityData) {
       suppressed = !attuned;
     }
   }
+  if (!suppressed && abilityData.parent.getActor() && abilityData.parent.getParentSync()) {
+    const ancestors = abilityData.parent.getAncestorsSync();
+    if (ancestors.some((ancestor) => !ancestor.modifiesActor)) {
+      suppressed = true;
+    }
+  }
   return suppressed;
 }

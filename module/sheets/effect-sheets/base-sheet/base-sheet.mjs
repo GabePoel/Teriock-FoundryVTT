@@ -16,6 +16,7 @@ export default class TeriockBaseEffectSheet extends TeriockSheet(sheets.ActiveEf
     actions: {
       addChange: this._addChange,
       deleteChange: this._deleteChange,
+      toggleDisabledThis: this._toggledDisabledThis,
     },
   };
 
@@ -58,7 +59,6 @@ export default class TeriockBaseEffectSheet extends TeriockSheet(sheets.ActiveEf
   }
 
   static async _addChange(event, target) {
-    event.preventDefault();
     const application = target.dataset.application;
     const updateString = `system.applies.${application}.changes`;
     const changes = this.document.system.applies[application].changes;
@@ -73,7 +73,6 @@ export default class TeriockBaseEffectSheet extends TeriockSheet(sheets.ActiveEf
   }
 
   static async _deleteChange(event, target) {
-    event.preventDefault();
     const index = parseInt(target.dataset.index, 10);
     const application = target.dataset.application;
     const updateString = `system.applies.${application}.changes`;
@@ -82,5 +81,9 @@ export default class TeriockBaseEffectSheet extends TeriockSheet(sheets.ActiveEf
       changes.splice(index, 1);
       await this.document.update({ [updateString]: changes });
     }
+  }
+
+  static async _toggledDisabledThis(event, target) {
+    await this.document.toggleDisabled();
   }
 }

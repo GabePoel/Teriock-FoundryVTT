@@ -21,7 +21,7 @@ export const TeriockSheet = (Base) =>
         toggleLockThis: this._toggleLockThis,
         wikiPullThis: this._wikiPullThis,
         wikiOpenThis: this._wikiOpenThis,
-        toggleForceDisabledDoc: this._toggleForceDisabledDoc,
+        toggleDisabledDoc: this._toggleDisabledDoc,
         quickToggle: this._quickToggle,
         sheetToggle: this._sheetToggle,
         useOneDoc: this._useOneDoc,
@@ -421,8 +421,8 @@ export const TeriockSheet = (Base) =>
     static async _useOneDoc(event, target) {
       await this._embeddedFromCard(target)?.system.useOne();
     }
-    static async _toggleForceDisabledDoc(event, target) {
-      await this._embeddedFromCard(target)?.toggleForceDisabled();
+    static async _toggleDisabledDoc(event, target) {
+      await this._embeddedFromCard(target)?.toggleSoftDisabled();
     }
 
     static async _rollDoc(event, target) {

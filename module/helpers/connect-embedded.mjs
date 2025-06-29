@@ -22,19 +22,11 @@ export default function connectEmbedded(document, element, editable = true) {
             name: "Enable",
             icon: makeIcon("check", iconStyle),
             callback: async () => {
-              if (embedded.documentName === "ActiveEffect") {
-                await embedded.setForceDisabled(false);
-              } else {
-                await embedded.enable();
-              }
-              // if (document.documentName === 'ActiveEffect') {
-              //   await document.update({});
-              //   await document.sheet.render();
-              // }
+              embedded.enable();
             },
             condition: () => {
               if (embedded.documentName === "ActiveEffect") {
-                return embedded.system.forceDisabled;
+                return embedded.disabled;
               } else if (embedded.type === "equipment") {
                 return false;
               } else {
@@ -46,19 +38,11 @@ export default function connectEmbedded(document, element, editable = true) {
             name: "Disable",
             icon: makeIcon("xmark", iconStyle),
             callback: async () => {
-              if (embedded.documentName === "ActiveEffect") {
-                await embedded.setForceDisabled(true);
-              } else {
-                await embedded.disable();
-              }
-              // if (document.documentName === 'ActiveEffect') {
-              //   await document.update({});
-              //   await document.sheet.render();
-              // }
+              embedded.disable();
             },
             condition: () => {
               if (embedded.documentName === "ActiveEffect") {
-                return !embedded.system.forceDisabled;
+                return !embedded.disabled;
               } else if (embedded.type === "equipment") {
                 return false;
               } else {
