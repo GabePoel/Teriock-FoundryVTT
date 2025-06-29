@@ -17,10 +17,6 @@ export default class TeriockBaseEffectData extends ChildDataMixin(TypeDataModel)
     const commonData = super.defineSchema();
     return {
       ...commonData,
-      forceDisabled: new fields.BooleanField({
-        initial: false,
-        label: "Force Disabled",
-      }),
       deleteOnExpire: new fields.BooleanField({
         initial: false,
         label: "Delete On Expire",
@@ -33,8 +29,8 @@ export default class TeriockBaseEffectData extends ChildDataMixin(TypeDataModel)
   }
 
   get suppressed() {
-    if (this.parent.parent.documentName === "Item") {
-      return this.parent.parent.system.disabled;
+    if (this.parent.parent?.documentName === "Item") {
+      return this.parent.parent?.system.disabled;
     }
     return false;
   }

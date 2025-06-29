@@ -25,13 +25,7 @@ export default function connectEmbedded(document, element, editable = true) {
               embedded.enable();
             },
             condition: () => {
-              if (embedded.documentName === "ActiveEffect") {
-                return embedded.disabled;
-              } else if (embedded.type === "equipment") {
-                return false;
-              } else {
-                return embedded.system.disabled;
-              }
+              return embedded.type !== "equipment" && embedded.disabled;
             },
           },
           {
@@ -41,13 +35,7 @@ export default function connectEmbedded(document, element, editable = true) {
               embedded.disable();
             },
             condition: () => {
-              if (embedded.documentName === "ActiveEffect") {
-                return !embedded.disabled;
-              } else if (embedded.type === "equipment") {
-                return false;
-              } else {
-                return !embedded.system.disabled;
-              }
+              return embedded.type !== "equipment" && !embedded.disabled;
             },
           },
           // Item Entries

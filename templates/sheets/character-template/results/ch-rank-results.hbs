@@ -7,12 +7,12 @@
     subtitle=(concat "Rank " item.system.classRank)
     text=(classArchetype item.system.archetype)
     id=item._id
-    active=(not item.system.disabled)
+    active=(not item.disabled)
     icons=(concat
     (ticonToggle (firstDie item.system.hitDie) "xmark-large" (not item.system.hitDieSpent) action="rollHitDie" id=item._id falseAction=false tooltipTrue="Hit Die")
     (ticonToggle (firstDie item.system.manaDie) "xmark-large" (not item.system.manaDieSpent) action="rollManaDie" id=item._id falseAction=false tooltipTrue="Mana Die")
     (ticon "comment" action="chatDoc" id=item._id tooltip="Send to Chat")
-    (ticonToggle "circle-check" "circle" (not item.system.disabled) action="toggleDisabledDoc" id=item._id tooltipTrue="Enabled" tooltipFalse="Disabled")
+    (ticonToggle "circle-check" "circle" (not item.disabled) action="toggleDisabledDoc" id=item._id tooltipTrue="Enabled" tooltipFalse="Disabled")
     )
     }}
     {{/each}}

@@ -29,37 +29,21 @@ export default class TeriockItem extends ParentDocumentMixin(ChildDocumentMixin(
    * @returns {Promise<void>}
    */
   async disable() {
-    if (!this.system.disabled) {
-      await this.update({ "system.disabled": true });
-    }
+    await this.update({ "system.disabled": true });
   }
 
   /**
    * @returns {Promise<void>}
    */
   async enable() {
-    if (this.system.disabled) {
-      await this.update({ "system.disabled": false });
-    }
-  }
-
-  /**
-   * @param {boolean} bool
-   * @returns {Promise<void>}
-   */
-  async setDisabled(bool) {
-    if (bool) {
-      await this.disable();
-    } else {
-      await this.enable();
-    }
+    await this.update({ "system.disabled": false });
   }
 
   /**
    * @returns {Promise<void>}
    */
   async toggleDisabled() {
-    await this.setDisabled(!this.system.disabled);
+    await this.update({ "system.disabled": !this.system.disabled });
   }
 
   /**
