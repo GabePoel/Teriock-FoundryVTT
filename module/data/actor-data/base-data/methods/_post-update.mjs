@@ -140,15 +140,8 @@ async function prepareTokens(system) {
       visionMode = "lightAmplification";
     }
     if (actor?.system.senses.blind + actor?.system.senses.hearing + actor?.system.senses.smell > 0) {
-      const maxTremor = Math.max(
-        actor?.system.senses.blind,
-        actor?.system.senses.hearing,
-        actor?.system.senses.smell,
-      );
-      const maxDark = Math.max(
-        actor?.system.senses.dark,
-        actor?.system.senses.night,
-      );
+      const maxTremor = Math.max(actor?.system.senses.blind, actor?.system.senses.hearing, actor?.system.senses.smell);
+      const maxDark = Math.max(actor?.system.senses.dark, actor?.system.senses.night);
       if (maxTremor > maxDark) {
         visionMode = "tremorsense";
       }

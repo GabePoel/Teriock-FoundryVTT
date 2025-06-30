@@ -8,7 +8,7 @@ export function messageBox() {
   return document.createElement("div");
 }
 
-export function messageBar(parent, icon = null) {
+export function messageBar(parent, icon = null, label = null) {
   const bar = createElement("div", { className: "abm-bar" });
   const iconContainer = createElement("div", { className: "abm-bar-icon" });
   const tagsContainer = createElement("div", { className: "abm-bar-tags" });
@@ -16,7 +16,7 @@ export function messageBar(parent, icon = null) {
   bar.append(iconContainer, tagsContainer);
   parent.appendChild(bar);
 
-  if (icon) barIcon(bar, icon);
+  if (icon) barIcon(bar, icon, label);
 
   return bar;
 }
@@ -24,7 +24,7 @@ export function messageBar(parent, icon = null) {
 export function messageWrapper(parent, content) {
   if (!content) return;
   const wrapper = createElement("div", {
-    className: "abm-label",
+    className: "abm-label tsubtle",
     innerHTML: content,
   });
   const container = parent.querySelector(".abm-bar-tags") || parent;
@@ -79,13 +79,16 @@ export function messageHeader(parent, image, text, fontClass = "tfont") {
   return header;
 }
 
-function barIcon(parent, iconClass, first = true) {
+function barIcon(parent, iconClass, label, first = true) {
   const icon = createElement("i", {
     className: `fa-light ${iconClass}`,
     style: "font-size: 1em;",
   });
 
-  const wrapper = createElement("div", { className: "abm-icon-wrapper" }, icon);
+  const wrapper = createElement("div", { className: "abm-icon-wrapper tsubtle" }, icon);
+  if (label) {
+    wrapper.setAttribute("data-tooltip", label);
+  }
   const iconParent = parent.querySelector(".abm-bar-icon") || parent;
 
   first ? iconParent.prepend(wrapper) : iconParent.appendChild(wrapper);

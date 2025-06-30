@@ -30,6 +30,7 @@ export function _messageParts(abilityData) {
   const bars = [
     {
       icon: "fa-wreath-laurel",
+      label: "Execution",
       wrappers: [
         ref.executionTime[src.maneuver][src.executionTime],
         ref.piercing[src.piercing],
@@ -40,6 +41,7 @@ export function _messageParts(abilityData) {
     },
     {
       icon: "fa-crosshairs-simple",
+      label: "Targeting",
       wrappers: [
         ["missile", "cone", "sight", "aura"].includes(src.delivery.base) ? src.range + " ft" : "",
         src.targets.map((target) => ref.targets[target]).join(", "),
@@ -48,6 +50,7 @@ export function _messageParts(abilityData) {
     },
     {
       icon: "fa-expand",
+      label: "Expansion",
       wrappers: [
         ["detonate", "ripple"].includes(src.expansion) ? ref.attribute[src.expansionSaveAttribute] : "",
         ref.expansion[src.expansion],
@@ -57,6 +60,7 @@ export function _messageParts(abilityData) {
     },
     {
       icon: "fa-coins",
+      label: "Costs",
       wrappers: [
         mpCost,
         hpCost,
@@ -69,6 +73,7 @@ export function _messageParts(abilityData) {
     },
     {
       icon: "fa-bolt",
+      label: "Effects and Power Sources",
       wrappers: [
         src.basic ? "Basic" : "",
         src.sustained ? "Sustained" : "",
@@ -84,6 +89,7 @@ export function _messageParts(abilityData) {
     },
     {
       icon: "fa-" + ref.abilityType[src.abilityType].icon,
+      label: "Ability Type",
       wrappers: [
         ref.abilityType[src.abilityType].name,
         src.elderSorcery ? "Elder Sorcery" : "",

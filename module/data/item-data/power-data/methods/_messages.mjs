@@ -13,6 +13,7 @@ export function _messageParts(powerData) {
   const bars = [
     {
       icon: "fa-" + ref[src.type].icon,
+      label: "Power Type",
       wrappers: [ref[src.type].name],
     },
   ];

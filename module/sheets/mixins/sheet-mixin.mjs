@@ -314,7 +314,17 @@ export const TeriockSheet = (Base) =>
 
     _onDragStart(event) {
       const embedded = this._embeddedFromCard(event.currentTarget);
-      const dragData = embedded?.toDragData();
+      const dragList = [];
+      dragList.push(embedded);
+      // Uncomment if migrating copy implementation out of hooks
+      // if (embedded?.documentName === "ActiveEffect") {
+      //   const children = embedded.getChildren();
+      //   children.forEach((child) => {
+      //     dragList.push(child);
+      //   });
+      // }
+      const dragData = dragList.map((item) => item?.toDragData());
+      console.log("dragData", dragData);
       if (dragData) {
         event.dataTransfer.setData("text/plain", JSON.stringify(dragData));
       }
@@ -326,11 +336,14 @@ export const TeriockSheet = (Base) =>
 
     async _onDrop(event) {
       const data = await ux.TextEditor.getDragEventData(event);
-      return data.type === "ActiveEffect"
-        ? this._onDropActiveEffect(event, data)
-        : data.type === "Item"
-          ? this._onDropItem(event, data)
-          : false;
+      for (const document of data) {
+        if (document.type === "ActiveEffect") {
+          await this._onDropActiveEffect(event, document);
+        } else if (document.type === "Item") {
+          await this._onDropItem(event, document);
+        }
+      }
+      return true;
     }
 
     async _onDropActiveEffect(event, data) {

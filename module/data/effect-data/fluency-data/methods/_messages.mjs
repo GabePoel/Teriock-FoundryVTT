@@ -12,6 +12,7 @@ export function _messageParts(fluencyData) {
   const bars = [
     {
       icon: "fa-" + ref[src.field].tradecrafts[src.tradecraft].icon,
+      label: "Tradecraft",
       wrappers: [ref[src.field].name, ref[src.field].tradecrafts[src.tradecraft].name],
     },
   ];

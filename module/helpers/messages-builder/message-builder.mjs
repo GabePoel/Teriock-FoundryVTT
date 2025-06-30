@@ -13,7 +13,9 @@ export function buildMessage(messageParts) {
   // Header
   const headerBox = messageBox();
   headerBox.classList.add("tmes-header-box");
-  messageHeader(headerBox, image, name, fontClass);
+  if (name) {
+    messageHeader(headerBox, image, name, fontClass);
+  }
 
   // Bars
   const barBox = messageBox();
@@ -21,7 +23,7 @@ export function buildMessage(messageParts) {
   bars
     .filter((bar) => barLength(bar) > 0)
     .forEach((bar) => {
-      const barElement = messageBar(barBox, bar.icon);
+      const barElement = messageBar(barBox, bar.icon, bar.label);
       bar.wrappers.forEach((wrapper) => messageWrapper(barElement, wrapper));
     });
 

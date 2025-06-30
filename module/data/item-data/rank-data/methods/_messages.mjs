@@ -6,10 +6,12 @@ export function _messageParts(rank) {
   const bars = [
     {
       icon: "fa-" + ref[src.archetype].classes[src.className].icon,
+      label: "Archetype",
       wrappers: [ref[src.archetype].name, ref[src.archetype].classes[src.className].name, "Rank " + src.classRank],
     },
     {
       icon: "fa-circle-info",
+      label: "Dice",
       wrappers: [src.hitDie + " Hit Die", src.manaDie + " Mana Die", src.maxAv + " Max AV"],
     },
   ];

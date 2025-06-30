@@ -10,7 +10,7 @@ export default class DetectionModeBlindFighting extends TeriockDetectionMode {
     return (this._detectionFilter ??= OutlineOverlayFilter.create({
       outlineColor: [1, 0, 1, 1],
       knockout: true,
-      wave: true
+      wave: true,
     }));
   }
 

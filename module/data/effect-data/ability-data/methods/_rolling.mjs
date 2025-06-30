@@ -4,6 +4,7 @@ const { api, ux } = foundry.applications;
 import { _generateEffect, _generateTakes } from "./_generate-effect.mjs";
 import { evaluateAsync, getRollIcon } from "../../../../helpers/utils.mjs";
 import TeriockRoll from "../../../../documents/roll.mjs";
+import { buildMessage } from "../../../../helpers/messages-builder/message-builder.mjs";
 
 // Button configurations for different roll types
 const BUTTON_CONFIGS = {
@@ -62,16 +63,53 @@ function tokenFromTarget(target) {
  */
 export async function _roll(abilityData, options) {
   const { advantage = false, disadvantage = false } = options || {};
-  const rawMessage = await abilityData.parent.buildMessage();
+  const useData = await stageUse(abilityData, advantage, disadvantage);
+  let rawMessage = await abilityData.parent.buildMessage();
+
+  // Compute variable MP/HP spent (only if type is variable)
+  const mpSpent = useData.costs.mp;
+  const hpSpent = useData.costs.hp;
+  const heightened = useData.modifiers.heightened || 0;
+
+  // Subtract MP/HP costs from actor
+  const actor = abilityData.parent.getActor();
+  if (mpSpent > 0) {
+    const newMp = Math.max(actor.system.mp.value - mpSpent, actor.system.mp.min ?? 0);
+    await actor.update({ "system.mp.value": newMp });
+  }
+  if (hpSpent > 0) {
+    const newHp = Math.max(actor.system.hp.value - hpSpent, actor.system.hp.min ?? 0);
+    await actor.update({ "system.hp.value": newHp });
+  }
+
+  // Determine if we should add the bottom bar class
+  const buttons = await buildButtons(abilityData, useData);
+  const targets = getTargets(abilityData);
+  let shouldBottomBar = true;
+  if (
+    buttons.length === 0 &&
+    !["feat", "attack"].includes(abilityData.interaction) &&
+    (!targets || targets.length === 0)
+  ) {
+    shouldBottomBar = false;
+  }
+
+  // If heightened or variable costs, append the summary bar box
+  if (heightened > 0 || mpSpent > 0 || hpSpent > 0) {
+    const summaryBarBox = createSummaryBarBox({ heightened, mpSpent, hpSpent, shouldBottomBar });
+    if (summaryBarBox) {
+      const tempDiv = document.createElement("div");
+      tempDiv.innerHTML = rawMessage;
+      tempDiv.appendChild(summaryBarBox);
+      rawMessage = tempDiv.innerHTML;
+    }
+  }
+
   const message = `<div class="teriock">${rawMessage}</div>`;
   const chatMessageData = {
     speaker: ChatMessage.getSpeaker({ actor: abilityData.parent.getActor() }),
     rolls: [],
   };
-
-  const useData = await stageUse(abilityData, advantage, disadvantage);
-  const buttons = await buildButtons(abilityData, useData);
-  const targets = getTargets(abilityData);
 
   // Generate rolls based on interaction type
   const rollGenerators = {
@@ -277,8 +315,8 @@ async function stageUse(abilityData, advantage, disadvantage) {
 
   // Add proficiency modifiers
   if (["attack", "feat"].includes(abilityData.interaction)) {
-    if (abilityData.isFluent) useData.formula += " + @f";
-    else if (abilityData.isProficient) useData.formula += " + @p";
+    if (abilityData.parent.isFluent) useData.formula += " + @f";
+    else if (abilityData.parent.isProficient) useData.formula += " + @p";
     if (useData.modifiers.heightened > 0) useData.formula += " + @h";
   }
 
@@ -336,7 +374,7 @@ async function handleDialogs(abilityData, useData) {
   }
 
   // Heightened dialog
-  if (abilityData.isProficient && abilityData.heightened) {
+  if (abilityData.parent.isProficient && abilityData.heightened) {
     const p = actor.system.p;
     const heightenedDescription = await ux.TextEditor.enrichHTML(abilityData.heightened);
     dialogs.push(createDialogFieldset("Heightened Amount", heightenedDescription, "heightened", p));
@@ -357,7 +395,7 @@ async function handleDialogs(abilityData, useData) {
           if (abilityData.costs.hp?.type === "variable") {
             useData.costs.hp = button.form.elements.hp.valueAsNumber;
           }
-          if (abilityData.isProficient && abilityData.heightened) {
+          if (abilityData.parent.isProficient && abilityData.heightened) {
             useData.modifiers.heightened = button.form.elements.heightened.valueAsNumber;
             useData.costs.mp += useData.modifiers.heightened;
           }
@@ -422,8 +460,8 @@ function buildAttackFormula(abilityData, advantage, disadvantage, useData) {
 
   // Add proficiency modifiers
   if (["attack", "feat"].includes(abilityData.interaction) || abilityData.effects?.includes("resistance")) {
-    if (abilityData.isFluent) formula += " + @f";
-    else if (abilityData.isProficient) formula += " + @p";
+    if (abilityData.parent.isFluent) formula += " + @f";
+    else if (abilityData.parent.isProficient) formula += " + @p";
     if (useData.modifiers.heightened > 0) formula += " + @h";
   }
 
@@ -514,8 +552,8 @@ export async function _generateFeatRoll(abilityData, useData, options = {}) {
 
   // Build roll formula
   let rollFormula = "10";
-  if (abilityData.isFluent) rollFormula += " + @f";
-  else if (abilityData.isProficient) rollFormula += " + @p";
+  if (abilityData.parent.isFluent) rollFormula += " + @f";
+  else if (abilityData.parent.isProficient) rollFormula += " + @p";
   if (useData.modifiers.heightened > 0) rollFormula += " + @h";
 
   // Prepare roll data
@@ -544,4 +582,37 @@ export async function _generateFeatRoll(abilityData, useData, options = {}) {
   };
 
   return new TeriockRoll(rollFormula, rollData, { context, message });
+}
+
+/**
+ * Manually constructs a summary bar box DOM element for heightened/variable costs
+ */
+function createSummaryBarBox({ heightened, mpSpent, hpSpent, shouldBottomBar }) {
+  const labels = [];
+  if (heightened > 0) labels.push(`Heightened ${heightened} Time${heightened === 1 ? "" : "s"}`);
+  if (mpSpent > 0) labels.push(`${mpSpent} MP Spent`);
+  if (hpSpent > 0) labels.push(`${hpSpent} HP Spent`);
+  if (labels.length === 0) return null;
+
+  const tmessage = document.createElement("div");
+  tmessage.className = "tmessage" + (shouldBottomBar ? " tmessage-bottom-bar" : "");
+
+  const barBox = document.createElement("div");
+  barBox.className = "tmes-bar-box";
+  const bar = document.createElement("div");
+  bar.className = "abm-bar";
+  const tags = document.createElement("div");
+  tags.className = "abm-bar-tags";
+
+  for (const label of labels) {
+    const labelDiv = document.createElement("div");
+    labelDiv.className = "abm-label tsubtle";
+    labelDiv.textContent = label;
+    tags.appendChild(labelDiv);
+  }
+
+  bar.appendChild(tags);
+  barBox.appendChild(bar);
+  tmessage.appendChild(barBox);
+  return tmessage;
 }

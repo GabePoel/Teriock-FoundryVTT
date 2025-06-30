@@ -10,7 +10,6 @@ export default class TeriockToken extends TokenDocument {
     const actor = this.actor;
 
     if (this.sight?.enabled) {
-
       let visionMode = "basic";
 
       if (actor?.system.senses.dark > 0) {
@@ -25,10 +24,7 @@ export default class TeriockToken extends TokenDocument {
           actor?.system.senses.hearing,
           actor?.system.senses.smell,
         );
-        const maxDark = Math.max(
-          actor?.system.senses.dark,
-          actor?.system.senses.night,
-        );
+        const maxDark = Math.max(actor?.system.senses.dark, actor?.system.senses.night);
         if (maxTremor > maxDark) {
           visionMode = "tremorsense";
         }
@@ -92,7 +88,10 @@ export default class TeriockToken extends TokenDocument {
       }
       if (actor?.system.senses.night + actor?.system.senses.dark > 0) {
         this.detectionModes.find((m) => m.id === "darkVision").enabled = true;
-        this.detectionModes.find((m) => m.id === "darkVision").range = Math.max(actor?.system.senses.night, actor?.system.senses.dark);
+        this.detectionModes.find((m) => m.id === "darkVision").range = Math.max(
+          actor?.system.senses.night,
+          actor?.system.senses.dark,
+        );
       } else {
         this.detectionModes.find((m) => m.id === "darkVision").enabled = false;
         this.detectionModes.find((m) => m.id === "darkVision").range = 0;

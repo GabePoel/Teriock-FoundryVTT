@@ -33,18 +33,22 @@ export function _messageParts(equipmentData) {
   const bars = [
     {
       icon: "fa-" + ref.powerLevel[src.powerLevel].icon,
+      label: "Equipment Type",
       wrappers: [ref.powerLevel[src.powerLevel].name, src.shattered ? "Shattered" : "", src.equipmentType],
     },
     {
       icon: "fa-crosshairs-simple",
+      label: "Damage",
       wrappers: [damageString, rangeString, src.sb, src.av, src.bv],
     },
     {
       icon: "fa-weight-hanging",
+      label: "Load",
       wrappers: [src.weight + " lb", src.minStr + " min STR", src.tier.raw ? "Tier " + src.tier.raw : ""],
     },
     {
       icon: "fa-flag",
+      label: "Equipment Classes",
       wrappers: [...src.equipmentClasses.map((equipmentClass) => ref.equipmentClasses[equipmentClass])],
     },
   ];
