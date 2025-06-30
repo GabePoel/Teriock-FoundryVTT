@@ -340,4 +340,9 @@ export interface TeriockAbilitySchemaData {
     proficient: AppliesData;
     fluent: AppliesData;
   };
+
+  // Other
+  prepared: boolean;
+  warded: boolean;
+  secret: boolean;
 }
