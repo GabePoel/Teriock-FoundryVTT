@@ -1,7 +1,7 @@
 const { OutlineOverlayFilter } = foundry.canvas.rendering.filters;
 import TeriockDetectionMode from "./teriock-detection-mode.mjs";
 
-export default class DetectionModeScentPerception extends TeriockDetectionMode {
+export default class DetectionModeSoundPerception extends TeriockDetectionMode {
   static BLOCKING_SRC_STATUS_EFFECTS = ["down", "frozen", "asleep", "unconscious", "dead", "deaf", "ethereal"];
   static BLOCKING_TGT_STATUS_EFFECTS = ["silent", "ethereal"];
 

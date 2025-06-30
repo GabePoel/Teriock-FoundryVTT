@@ -130,10 +130,37 @@ async function prepareTokens(system) {
     if (token.width !== tokenSize || token.height !== tokenSize) {
       await token.update(tokenParameters);
     }
-    const newVisionMode = actor?.statuses?.has("ethereal") ? "ethereal" : "basic";
-    if (token.sight.visionMode !== newVisionMode) {
-      await token.updateVisionMode(newVisionMode);
+
+    let visionMode = "basic";
+
+    if (actor?.system.senses.dark > 0) {
+      visionMode = "darkvision";
     }
+    if (actor?.system.senses.night > 0 && actor?.system.senses.night >= actor?.system.senses.dark) {
+      visionMode = "lightAmplification";
+    }
+    if (actor?.system.senses.blind + actor?.system.senses.hearing + actor?.system.senses.smell > 0) {
+      const maxTremor = Math.max(
+        actor?.system.senses.blind,
+        actor?.system.senses.hearing,
+        actor?.system.senses.smell,
+      );
+      const maxDark = Math.max(
+        actor?.system.senses.dark,
+        actor?.system.senses.night,
+      );
+      if (maxTremor > maxDark) {
+        visionMode = "tremorsense";
+      }
+    }
+    if (actor?.statuses?.has("ethereal")) {
+      visionMode = "ethereal";
+    }
+    if (actor?.statuses?.has("ethereal") && actor?.statuses?.has("invisible")) {
+      visionMode = "invisibleEthereal";
+    }
+
+    await token.updateVisionMode(visionMode);
   }
 }
 

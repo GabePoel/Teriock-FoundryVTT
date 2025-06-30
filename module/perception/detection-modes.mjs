@@ -8,8 +8,19 @@ import DetectionModeMaterialMaterial from "./detection-modes/material-material-p
 import DetectionModeScentPerception from "./detection-modes/scent-perception.mjs";
 import DetectionModeSoundPerception from "./detection-modes/sound-perception.mjs";
 import DetectionModeTrueSightPerception from "./detection-modes/true-sight-perception.mjs";
+import DetectionModeBlindFighting from "./detection-modes/blind-fighting.mjs";
 
 export const teriockDetectionModes = {
+  lightPerception: new DetectionModeLightPerception({
+    id: "lightPerception",
+    label: "Light Perception",
+    type: DetectionMode.DETECTION_TYPES.SIGHT,
+  }),
+  trueSight: new DetectionModeTrueSightPerception({
+    id: "trueSight",
+    label: "True Sight",
+    type: DetectionMode.DETECTION_TYPES.SIGHT,
+  }),
   seeInvisible: new DetectionModeInvisiblePerception({
     id: "seeInvisible",
     label: "See Invisible",
@@ -18,22 +29,17 @@ export const teriockDetectionModes = {
   scentPerception: new DetectionModeScentPerception({
     id: "scentPerception",
     label: "Scent Perception",
-    type: DetectionMode.DETECTION_TYPES.SIGHT,
+    type: DetectionMode.DETECTION_TYPES.OTHER,
   }),
   soundPerception: new DetectionModeSoundPerception({
     id: "soundPerception",
     label: "Sound Perception",
-    type: DetectionMode.DETECTION_TYPES.SIGHT,
+    type: DetectionMode.DETECTION_TYPES.SOUND,
   }),
-  trueSight: new DetectionModeTrueSightPerception({
-    id: "trueSight",
-    label: "True Sight",
-    type: DetectionMode.DETECTION_TYPES.SIGHT,
-  }),
-  lightPerception: new DetectionModeLightPerception({
-    id: "lightPerception",
-    label: "Light Perception",
-    type: DetectionMode.DETECTION_TYPES.SIGHT,
+  blindFighting: new DetectionModeBlindFighting({
+    id: "blindFighting",
+    label: "Blind Fighting",
+    type: DetectionMode.DETECTION_TYPES.MOVE,
   }),
   materialMaterial: new DetectionModeMaterialMaterial({
     id: "materialMaterial",
@@ -53,6 +59,11 @@ export const teriockDetectionModes = {
   etherealEthereal: new DetectionModeEtherealEthereal({
     id: "etherealEthereal",
     label: "In Ethereal, See Ethereal",
+    type: DetectionMode.DETECTION_TYPES.SIGHT,
+  }),
+  darkVision: new DetectionModeMaterialEthereal({
+    id: "darkVision",
+    label: "Dark Vision",
     type: DetectionMode.DETECTION_TYPES.SIGHT,
   }),
 };
