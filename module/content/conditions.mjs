@@ -1,4 +1,4 @@
-// This file was auto-generated on 2025-06-26 by scripts/fetch-content.mjs.
+// This file was auto-generated on 2025-06-30 by scripts/fetch-content.mjs.
 // Do not edit manually.
 
 export const conditions = {
@@ -70,7 +70,7 @@ export const conditions = {
     statuses: ["down", "blind", "deaf", "mute", "anosmatic", "prone"],
     changes: [],
     content:
-      '<p><span class="condition-box" data-children="down,blind,deaf,mute,anosmatic,prone">Creatures become <b>dead</b> if they are half their maximum <a href="https://wiki.teriock.com/index.php/Core:HP" class="mw-redirect" title="Core:HP" target="_blank">HP</a> below zero <a href="https://wiki.teriock.com/index.php/Core:HP" class="mw-redirect" title="Core:HP" target="_blank">HP</a>. They cannot have their <a href="https://wiki.teriock.com/index.php/Core:HP" class="mw-redirect" title="Core:HP" target="_blank">HP</a> reduced below this value.</span>\n</p>\n<div><b>Todo:</b> Write all the death and "critically wounded" mechanics in greater detail.</div>',
+      '<p><span class="condition-box" data-children="down,blind,deaf,mute,anosmatic,prone">Creatures become <b>dead</b> if they are half their maximum <a href="https://wiki.teriock.com/index.php/Core:HP" class="mw-redirect" title="Core:HP" target="_blank">HP</a> below zero <a href="https://wiki.teriock.com/index.php/Core:HP" class="mw-redirect" title="Core:HP" target="_blank">HP</a>. They cannot have their <a href="https://wiki.teriock.com/index.php/Core:HP" class="mw-redirect" title="Core:HP" target="_blank">HP</a> reduced below this value.\n</span></p><p>When a creature <a class="mw-selflink selflink">dies</a> and is <a href="https://wiki.teriock.com/index.php/Category:Revival_effects" title="Category:Revival effects" target="_blank">revived</a>, they release control over anything that is no longer on their person, freeing up the corresponding <a href="https://wiki.teriock.com/index.php/Core:Presence" title="Core:Presence" target="_blank">presence</a> in the process. This includes <a href="https://wiki.teriock.com/index.php/Category:Equipment" title="Category:Equipment" target="_blank">equipment</a> that is no longer equipped, mounts that no longer with them, and so on. \n</p>\n<div><b>Todo:</b> Write all the death and "critically wounded" mechanics in greater detail.</div>',
   },
   deaf: {
     name: "Deaf",
@@ -341,6 +341,16 @@ export const conditions = {
     changes: [],
     content:
       '<p><span class="condition-box" data-children="mute">A creature that is Silenced is <a href="https://wiki.teriock.com/index.php/Condition:Mute" title="Condition:Mute" target="_blank">mute</a> and <a href="https://wiki.teriock.com/index.php/Keyword:Incapable" title="Keyword:Incapable" target="_blank">incapable</a> of non-<a href="https://wiki.teriock.com/index.php/Category:Basic_abilities" title="Category:Basic abilities" target="_blank">basic</a> <a href="https://wiki.teriock.com/index.php/Category:Attack_abilities" title="Category:Attack abilities" target="_blank">attack</a> and <a href="https://wiki.teriock.com/index.php/Category:Feat_abilities" title="Category:Feat abilities" target="_blank">feat</a> <a href="https://wiki.teriock.com/index.php/Category:Abilities" title="Category:Abilities" target="_blank">abilities</a>. </span>\n</p>',
+  },
+  silent: {
+    name: "Silent",
+    id: "silent",
+    img: "systems/teriock/assets/conditions/silent.svg",
+    _id: "silent0000000000",
+    statuses: [],
+    changes: [],
+    content:
+      '<p><span class="condition-box" data-children="">A <b>silent</b> creature cannot be detected by sound.</span>\n</p>',
   },
   slowed: {
     name: "Slowed",
