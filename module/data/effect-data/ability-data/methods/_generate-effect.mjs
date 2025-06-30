@@ -10,30 +10,30 @@ import { parseTimeString } from "../../../../helpers/utils.mjs";
  * @private
  */
 export async function _generateEffect(abilityData, actor, heightenAmount = 0) {
-  let changes = abilityData.applies.base.changes || [];
-  let statuses = abilityData.applies.base.statuses || new Set();
+  let changes = foundry.utils.deepClone(abilityData.applies.base.changes) || [];
+  let statuses = foundry.utils.deepClone(abilityData.applies.base.statuses) || new Set();
 
   let seconds = parseTimeString(abilityData.duration);
 
   if (abilityData.isProficient) {
     if (abilityData.applies.proficient.changes.length > 0) {
-      changes = abilityData.applies.proficient.changes;
+      changes = foundry.utils.deepClone(abilityData.applies.proficient.changes);
     }
     if (abilityData.applies.proficient.statuses.size > 0) {
-      statuses = new Set(abilityData.applies.proficient.statuses);
+      statuses = foundry.utils.deepClone(abilityData.applies.proficient.statuses);
     }
   }
   if (abilityData.isFluent) {
     if (abilityData.applies.fluent.changes.length > 0) {
-      changes = abilityData.applies.fluent.changes;
+      changes = foundry.utils.deepClone(abilityData.applies.fluent.changes);
     }
     if (abilityData.applies.fluent.statuses.size > 0) {
-      statuses = new Set(abilityData.applies.fluent.statuses);
+      statuses = foundry.utils.deepClone(abilityData.applies.fluent.statuses);
     }
   }
   if (heightenAmount > 0) {
     if (abilityData.applies.heightened.changes.length > 0) {
-      const heightenedChanges = abilityData.applies.heightened.changes;
+      const heightenedChanges = foundry.utils.deepClone(abilityData.applies.heightened.changes);
       for (const change of heightenedChanges) {
         change.value = change.value * heightenAmount;
       }
@@ -128,11 +128,11 @@ export async function _generateEffect(abilityData, actor, heightenAmount = 0) {
  * @private
  */
 export function _generateTakes(abilityData, heightenAmount = 0) {
-  let rolls = abilityData.applies.base.rolls || {};
-  let hacks = abilityData.applies.base.hacks || new Set();
-  let checks = abilityData.applies.base.checks || new Set();
-  let startStatuses = abilityData.applies.base.startStatuses || new Set();
-  let endStatuses = abilityData.applies.base.endStatuses || new Set();
+  let rolls = foundry.utils.deepClone(abilityData.applies.base.rolls) || {};
+  let hacks = foundry.utils.deepClone(abilityData.applies.base.hacks) || new Set();
+  let checks = foundry.utils.deepClone(abilityData.applies.base.checks) || new Set();
+  let startStatuses = foundry.utils.deepClone(abilityData.applies.base.startStatuses) || new Set();
+  let endStatuses = foundry.utils.deepClone(abilityData.applies.base.endStatuses) || new Set();
 
   if (abilityData.isProficient) {
     rolls = { ...rolls, ...abilityData.applies.proficient.rolls };

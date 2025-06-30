@@ -501,6 +501,18 @@ export default function registerHandlebarsHelpers() {
           },
         });
 
+        const baseIcon = Handlebars.helpers.ticon("certificate", { hash: { tooltip: "Not Proficient" } });
+        const proficientIcon = Handlebars.helpers.ticon("award-simple", { hash: { tooltip: "Proficient" } });
+        const fluentIcon = Handlebars.helpers.ticon("award", { hash: { tooltip: "Fluent" } });
+
+        let masteryIcon = baseIcon;
+        if (ability.isProficient) {
+          masteryIcon = proficientIcon;
+        }
+        if (ability.isFluent) {
+          masteryIcon = fluentIcon;
+        }
+
         let text = ability.parent?.name;
         const parent = ability.getParent();
         if (parent) {
@@ -516,7 +528,7 @@ export default function registerHandlebarsHelpers() {
             title: ability.name,
             subtitle,
             text: text,
-            icons: chatIcon + enableIcon,
+            icons: masteryIcon + chatIcon + enableIcon,
             id: ability._id,
             parentId: ability.parent?._id,
             active: !ability.disabled && !ability.isSuppressed,

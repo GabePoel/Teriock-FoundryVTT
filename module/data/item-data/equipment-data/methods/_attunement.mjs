@@ -28,7 +28,7 @@ export async function _attune(equipmentData) {
       { key: "system.presence.value", mode: 2, value: equipmentData.tier.derived, priority: 10 },
     ],
   };
-  if (equipmentData.parent.actor && await _canAttune(equipmentData)) {
+  if (equipmentData.parent.actor && (await _canAttune(equipmentData))) {
     if (equipmentData.reference && !equipmentData.identified) {
       const ref = await foundry.utils.fromUuid(equipmentData.reference);
       if (ref) {

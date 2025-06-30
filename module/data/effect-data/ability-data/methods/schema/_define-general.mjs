@@ -251,5 +251,17 @@ export function _defineGeneral(schema) {
     abilityType: new fields.StringField({ initial: "normal" }),
     limitation: new fields.HTMLField({ initial: "" }),
     improvement: new fields.HTMLField({ initial: "" }),
+    prepared: new fields.BooleanField({
+      initial: true,
+      label: "Prepared",
+    }),
+    warded: new fields.BooleanField({
+      initial: false,
+      label: "Warded",
+    }),
+    secret: new fields.BooleanField({
+      initial: false,
+      label: "Secret",
+    }),
   };
 }

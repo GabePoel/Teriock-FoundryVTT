@@ -26,6 +26,8 @@ export async function createAbility(document, name, options = {}) {
       {
         _id: ability._id,
         "system.parentId": parentAbility._id,
+        "system.proficient": parentAbility.isProficient,
+        "system.fluent": parentAbility.isFluent,
       },
       {
         _id: parentAbility._id,

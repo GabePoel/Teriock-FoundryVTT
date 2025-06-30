@@ -11,7 +11,6 @@ function senseField(initial, name) {
 
 /**
  * Defines the senses schema for an actor by adding various sense fields.
- * Currently, senses have no mechanical effect. This needs to be implemented.
  *
  * @param {Object} schema - The schema object to extend with senses.
  * @returns {Object} The updated schema object with the senses field added.
@@ -26,6 +25,7 @@ export function _defineSenses(schema) {
     smell: senseField(0, "Advanced Smell"),
     hearing: senseField(0, "Advanced Hearing"),
     sight: senseField(0, "Advanced Sight"),
+    invisible: senseField(0, "See Invisible"),
   });
   return schema;
 }

@@ -422,7 +422,7 @@ export const TeriockSheet = (Base) =>
       await this._embeddedFromCard(target)?.system.useOne();
     }
     static async _toggleDisabledDoc(event, target) {
-      await this._embeddedFromCard(target)?.toggleSoftDisabled();
+      await this._embeddedFromCard(target)?.toggleDisabled();
     }
 
     static async _rollDoc(event, target) {

@@ -1,7 +1,7 @@
 <div class="ab-menu">
   <div class="ab-menu-content">
     <div class="ab-menu-bar">
-      <div class="tgrid g3">
+      <div class="tgrid ab-check-grid">
         {{formGroup
         systemFields.glued
         value=system.glued
@@ -46,6 +46,21 @@
         formGroup
         systemFields.proficient
         value=system.proficient
+        disabled=(not editable)
+        classes="tgrid-item"
+        rootId=(concat uuid)
+        }}
+        {{formGroup
+        systemFields.fluent
+        value=system.fluent
+        disabled=(not editable)
+        classes="tgrid-item"
+        rootId=(concat uuid)
+        }}
+        {{
+        formGroup
+        systemFields.disabled
+        value=system.disabled
         disabled=(not editable)
         classes="tgrid-item"
         rootId=(concat uuid)

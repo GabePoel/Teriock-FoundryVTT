@@ -24,28 +24,26 @@ import { buildMessage } from "../../helpers/messages-builder/message-builder.mjs
  */
 export const ChildDocumentMixin = (Base) =>
   class ChildDocumentMixin extends Base {
-    /** @inheritdoc */
-    prepareDerivedData() {
-      super.prepareDerivedData();
+    get isFluent() {
       let fluent = false;
+      if (this.system.fluent) {
+        fluent = true;
+      }
+      return fluent;
+    }
+
+    get isProficient() {
       let proficient = false;
-      if (this.system?.fluent) {
-        fluent = true;
-      }
-      if (this.parent?.system?.fluent) {
-        fluent = true;
-      }
-      if (this.system?.proficient) {
+      if (this.system.proficient) {
         proficient = true;
       }
-      if (this.parent?.system?.proficient) {
+      if (this.parent?.system.proficient) {
         proficient = true;
       }
-      if (fluent) {
+      if (this.isFluent) {
         proficient = true;
       }
-      this.system.isFluent = fluent;
-      this.system.isProficient = proficient;
+      return proficient;
     }
 
     /**

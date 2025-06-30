@@ -24,9 +24,13 @@ export default class TeriockBaseEffectSheet extends TeriockSheet(sheets.ActiveEf
   async _prepareContext() {
     const context = await super._prepareContext();
     context.disabled = this.document.disabled;
+    context.isSuppressed = this.document.isSuppressed;
+    context.transfer = this.document.transfer;
     context.changes = this.document.system.applies;
     const system = this.document.system;
     context.enrichedDescription = await this._editor(system.description);
+    context.isProficient = this.document.isProficient;
+    context.isFluent = this.document.isFluent;
     return context;
   }
 

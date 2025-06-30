@@ -1,5 +1,4 @@
 /** @import TeriockAbilityData from "../ability-data.mjs"; */
-import { _override } from "./_overrides.mjs";
 import { abilityOptions } from "../../../../helpers/constants/ability-options.mjs";
 import { cleanFeet } from "../../../../helpers/clean.mjs";
 import { createAbility } from "../../../../helpers/create-effects.mjs";
@@ -115,12 +114,6 @@ export async function _parse(abilityData, rawHTML) {
   delete parameters.parentId;
   delete parameters.childIds;
 
-  // Apply overrides
-  const applications = _override(abilityData.parent.name);
-  if (applications) parameters.applies = applications;
-
-  parameters.applies = defaultApplies();
-
   // Process dice and effect extraction
   processDiceAndEffectExtraction(parameters);
 
@@ -129,6 +122,11 @@ export async function _parse(abilityData, rawHTML) {
 
   // Process sub-abilities
   await processSubAbilities(subs, abilityData);
+
+  // Check if parent name contains "warded"
+  if (abilityData.parent.name.toLowerCase().includes("warded")) {
+    parameters.warded = true;
+  }
 
   return { changes, system: parameters, img };
 }
@@ -488,6 +486,34 @@ function extractTradecraftChecksFromHTML(html) {
 }
 
 /**
+ * Extract changes from HTML content
+ */
+function extractChangesFromHTML(html) {
+  console.log(html);
+  const tempDiv = document.createElement("div");
+  tempDiv.innerHTML = html || "";
+  const changes = [];
+  tempDiv.querySelectorAll("span.metadata[data-type='change']").forEach((el) => {
+    const key = el.dataset.key;
+    const mode = el.dataset.mode;
+    const value = el.dataset.value;
+    const priority = el.dataset.priority;
+    console.log(el);
+    console.log(key, mode, value, priority);
+    if (key && mode !== undefined && value !== undefined) {
+      changes.push({
+        key,
+        mode: parseInt(mode, 10),
+        value: value === "true" ? true : value === "false" ? false : value,
+        priority: priority ? parseInt(priority, 10) : 20,
+      });
+    }
+  });
+  console.log(changes);
+  return changes;
+}
+
+/**
  * Process dice and effect extraction
  */
 function processDiceAndEffectExtraction(parameters) {
@@ -533,6 +559,11 @@ function processDiceAndEffectExtraction(parameters) {
     if (tradecraftChecks.size > 0) {
       target.checks = new Set([...(target.checks || []), ...tradecraftChecks]);
     }
+
+    const changes = extractChangesFromHTML(source);
+    if (changes.length > 0) {
+      target.changes = [...(target.changes || []), ...changes];
+    }
   });
 
   // Extract dice and effects from results
@@ -542,6 +573,7 @@ function processDiceAndEffectExtraction(parameters) {
   let resultStartConditions = new Set();
   let resultEndConditions = new Set();
   let resultTradecraftChecks = new Set();
+  let resultChanges = [];
 
   // Process all result types for tradecraft checks and other metadata
   const resultTypes = ["hit", "critHit", "miss", "critMiss", "save", "critSave", "fail", "critFail"];
@@ -553,6 +585,7 @@ function processDiceAndEffectExtraction(parameters) {
       const currentStartConditions = extractStartConditionsFromHTML(parameters.results[resultType]);
       const currentEndConditions = extractEndConditionsFromHTML(parameters.results[resultType]);
       const currentTradecraftChecks = extractTradecraftChecksFromHTML(parameters.results[resultType]);
+      const currentChanges = extractChangesFromHTML(parameters.results[resultType]);
 
       // Merge all results
       resultHacks = new Set([...resultHacks, ...currentHacks]);
@@ -560,6 +593,7 @@ function processDiceAndEffectExtraction(parameters) {
       resultStartConditions = new Set([...resultStartConditions, ...currentStartConditions]);
       resultEndConditions = new Set([...resultEndConditions, ...currentEndConditions]);
       resultTradecraftChecks = new Set([...resultTradecraftChecks, ...currentTradecraftChecks]);
+      resultChanges = [...resultChanges, ...currentChanges];
     }
   });
 
@@ -591,6 +625,10 @@ function processDiceAndEffectExtraction(parameters) {
 
   if (resultTradecraftChecks.size > 0) {
     parameters.applies.base.checks = new Set([...(parameters.applies.base.checks || []), ...resultTradecraftChecks]);
+  }
+
+  if (resultChanges.length > 0) {
+    parameters.applies.base.changes = [...(parameters.applies.base.changes || []), ...resultChanges];
   }
 }
 

@@ -6,6 +6,7 @@ import DetectionModeLightPerception from "./detection-modes/light-perception.mjs
 import DetectionModeMaterialEthereal from "./detection-modes/material-ethereal-perception.mjs";
 import DetectionModeMaterialMaterial from "./detection-modes/material-material-perception.mjs";
 import DetectionModeScentPerception from "./detection-modes/scent-perception.mjs";
+import DetectionModeSoundPerception from "./detection-modes/sound-perception.mjs";
 import DetectionModeTrueSightPerception from "./detection-modes/true-sight-perception.mjs";
 
 export const teriockDetectionModes = {
@@ -17,6 +18,11 @@ export const teriockDetectionModes = {
   scentPerception: new DetectionModeScentPerception({
     id: "scentPerception",
     label: "Scent Perception",
+    type: DetectionMode.DETECTION_TYPES.SIGHT,
+  }),
+  soundPerception: new DetectionModeSoundPerception({
+    id: "soundPerception",
+    label: "Sound Perception",
     type: DetectionMode.DETECTION_TYPES.SIGHT,
   }),
   trueSight: new DetectionModeTrueSightPerception({

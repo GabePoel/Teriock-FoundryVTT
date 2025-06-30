@@ -1,6 +1,52 @@
 import { EffectChangeData } from "@common/documents/_types.mjs";
-import { ConsequenceRolls } from "../../../../consequence-data/_types";
-import type Consequence from "../../../../consequence-data/consequence.mjs";
+
+/**
+ * Valid turn expiration targets
+ */
+export type TurnExpirationTarget = "target" | "executor" | "every" | "other";
+
+/**
+ * Valid turn expiration timing
+ */
+export type TurnExpirationTiming = "start" | "end" | "other";
+
+/**
+ * Valid turn expiration methods
+ */
+export type TurnExpirationMethod = "roll" | "auto";
+
+/**
+ * Consequence rolls for different effect types
+ */
+export interface ConsequenceRolls {
+  damage: string[];
+  drain: string[];
+  wither: string[];
+  heal: string[];
+  revitalize: string[];
+  setTempHp: string[];
+  setTempMp: string[];
+  gainTempHp: string[];
+  gainTempMp: string[];
+  sleep: string[];
+  kill: string[];
+  other: string[];
+}
+
+/**
+ * Consequence expiration conditions
+ */
+export interface ConsequenceExpirations {
+  turn: {
+    enabled: boolean;
+    who: TurnExpirationTarget;
+    when: TurnExpirationTiming;
+    how: TurnExpirationMethod;
+  };
+  movement: boolean;
+  dawn: boolean;
+  sustained: boolean;
+}
 
 /**
  * Valid interaction types for abilities
@@ -125,67 +171,14 @@ export type ChangeMode = 0 | 1 | 2 | 3 | 4 | 5;
 export type AbilityType = "special" | "normal" | "gifted" | "echo" | "intrinsic" | "flaw";
 
 /**
- * Mutations that can be applied to consequences
- */
-export interface Mutations {
-  double: boolean;
-}
-
-/**
- * Heightened ability configuration
- */
-export interface Heightened {
-  enabled: boolean;
-  overrides: Consequence;
-  scaling: {
-    rolls: Partial<ConsequenceRolls>;
-    duration: {
-      value: number;
-      rounding: number;
-    };
-  };
-}
-
-/**
- * Simple consequence data with default and critical variants
- */
-export interface SimpleConsequenceData {
-  default: Consequence;
-  crit: {
-    enabled: boolean;
-    overrides: Consequence;
-    mutations: Mutations;
-  };
-}
-
-/**
- * Modified consequence data with overrides and heightened effects
- */
-export interface ModifiedConsequenceData {
-  enabled: boolean;
-  overrides: SimpleConsequenceData;
-  mutations: Mutations;
-  heightened: Heightened;
-}
-
-/**
- * Complete consequences data structure
- */
-export interface ConsequencesData {
-  base: Record<string, SimpleConsequenceData>;
-  proficient: Record<string, ModifiedConsequenceData>;
-  fluent: Record<string, ModifiedConsequenceData>;
-}
-
-/**
  * Applies data for different proficiency levels
  */
 export interface AppliesData {
   statuses: Set<string>;
   startStatuses: Set<string>;
   endStatuses: Set<string>;
-  damage: string[];
-  drain: string[];
+  rolls: ConsequenceRolls;
+  hacks: Set<string>;
   changes: EffectChangeData[];
 }
 
@@ -342,7 +335,6 @@ export interface TeriockAbilitySchemaData {
   costs: CostsConfig;
 
   // Consequences and applies
-  consequences: ConsequencesData;
   applies: {
     base: AppliesData;
     proficient: AppliesData;

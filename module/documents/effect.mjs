@@ -14,12 +14,12 @@ export default class TeriockEffect extends ChildDocumentMixin(foundry.documents.
       if (this.system.applies.base.changes.length > 0) {
         this.changes = this.system.applies.base.changes;
       }
-      if (this.system.isProficient) {
+      if (this.isProficient) {
         if (this.system.applies.proficient.changes.length > 0) {
           this.changes = this.system.applies.proficient.changes;
         }
       }
-      if (this.system.isFluent) {
+      if (this.isFluent) {
         if (this.system.applies.fluent.changes.length > 0) {
           this.changes = this.system.applies.fluent.changes;
         }

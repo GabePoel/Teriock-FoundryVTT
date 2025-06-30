@@ -135,6 +135,8 @@ declare module "./base-data.mjs" {
       hearing: number;
       /** Advanced sight */
       sight: number;
+      /** See invisible */
+      invisible: number;
     };
     /** Speed adjustments */
     speed: {
