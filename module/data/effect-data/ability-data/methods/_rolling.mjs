@@ -1,10 +1,9 @@
 /** @import { CommonRollOptions } from "../../../../types/rolls"; */
 /** @import TeriockAbilityData from "../ability-data.mjs"; */
 const { api, ux } = foundry.applications;
+import TeriockRoll from "../../../../documents/roll.mjs";
 import { _generateEffect, _generateTakes } from "./_generate-effect.mjs";
 import { evaluateAsync, getRollIcon } from "../../../../helpers/utils.mjs";
-import TeriockRoll from "../../../../documents/roll.mjs";
-import { buildMessage } from "../../../../helpers/messages-builder/message-builder.mjs";
 
 /**
  * Button configurations for different roll types.

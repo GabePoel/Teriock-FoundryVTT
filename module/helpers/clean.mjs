@@ -1,9 +1,19 @@
+/**
+ * Cleans a value by removing plus signs and converting to integer.
+ * @param {string|number} value - The value to clean.
+ * @returns {number} The cleaned integer value.
+ */
 export function cleanValue(value) {
   if (typeof value !== "string") return value;
   value = value.replace("+", "").trim();
   return parseInt(value, 10);
 }
 
+/**
+ * Cleans a feet measurement string by removing common synonyms and standardizing format.
+ * @param {string} feet - The feet measurement string to clean.
+ * @returns {string} The cleaned feet measurement string.
+ */
 export function cleanFeet(feet) {
   const synonyms = ["foot", "feet", "ft", "ft."];
   synonyms.forEach((synonym) => {
@@ -14,6 +24,11 @@ export function cleanFeet(feet) {
   return feet;
 }
 
+/**
+ * Cleans a pounds measurement string by standardizing to "lb" format.
+ * @param {string} pounds - The pounds measurement string to clean.
+ * @returns {string} The cleaned pounds measurement string in "lb" format.
+ */
 export function cleanPounds(pounds) {
   const synonyms = ["pound", "pounds"];
   synonyms.forEach((synonym) => {
@@ -28,6 +43,11 @@ export function cleanPounds(pounds) {
   return pounds;
 }
 
+/**
+ * Cleans a plus/minus value by standardizing the format.
+ * @param {string} value - The value string to clean.
+ * @returns {string} The cleaned value with proper plus/minus formatting.
+ */
 export function cleanPlusMinus(value) {
   value = value.replace("+", "").trim();
   const number = parseFloat(value);
@@ -39,6 +59,11 @@ export function cleanPlusMinus(value) {
   return value;
 }
 
+/**
+ * Cleans a mana points (MP) value by standardizing the format.
+ * @param {string} value - The MP value string to clean.
+ * @returns {string} The cleaned MP value in "MP" format.
+ */
 export function cleanMp(value) {
   const synonyms = ["mana"];
   synonyms.forEach((synonym) => {
@@ -53,6 +78,11 @@ export function cleanMp(value) {
   return value;
 }
 
+/**
+ * Cleans a hit points (HP) value by standardizing the format.
+ * @param {string} value - The HP value string to clean.
+ * @returns {string} The cleaned HP value in "HP" format.
+ */
 export function cleanHp(value) {
   const synonyms = ["health", "hits", "hit"];
   synonyms.forEach((synonym) => {
@@ -67,6 +97,11 @@ export function cleanHp(value) {
   return value;
 }
 
+/**
+ * Cleans an armor value (AV) by standardizing the format.
+ * @param {string} value - The AV value string to clean.
+ * @returns {string} The cleaned AV value in "AV" format.
+ */
 export function cleanAv(value) {
   const synonyms = ["armor value", "armor"];
   synonyms.forEach((synonym) => {
@@ -81,6 +116,11 @@ export function cleanAv(value) {
   return value;
 }
 
+/**
+ * Cleans a block value (BV) by standardizing the format.
+ * @param {string} value - The BV value string to clean.
+ * @returns {string} The cleaned BV value in "BV" format.
+ */
 export function cleanBv(value) {
   value = cleanPlusMinus(value);
   const synonyms = ["block value", "block"];
@@ -96,6 +136,11 @@ export function cleanBv(value) {
   return value;
 }
 
+/**
+ * Cleans a strength requirement (STR) by standardizing the format.
+ * @param {string} value - The STR value string to clean.
+ * @returns {string} The cleaned STR value in "Min STR" format.
+ */
 export function cleanStr(value) {
   const synonyms = ["strength", "str"];
   synonyms.forEach((synonym) => {
@@ -110,6 +155,11 @@ export function cleanStr(value) {
   return value;
 }
 
+/**
+ * Cleans a damage value by standardizing the format.
+ * @param {string} value - The damage value string to clean.
+ * @returns {string} The cleaned damage value in "Damage" format.
+ */
 export function cleanDamage(value) {
   const synonyms = ["dmg"];
   synonyms.forEach((synonym) => {
@@ -124,6 +174,13 @@ export function cleanDamage(value) {
   return value;
 }
 
+/**
+ * Generic function to clean a value with a specific suffix and synonyms.
+ * @param {string} value - The value string to clean.
+ * @param {string} suffix - The suffix to standardize to.
+ * @param {string[]} synonyms - Array of synonyms to replace with the suffix.
+ * @returns {string} The cleaned value with the standardized suffix.
+ */
 export function cleanSuffix(value, suffix, synonyms) {
   synonyms.forEach((synonym) => {
     const regex = new RegExp(synonym, "gi");
@@ -137,6 +194,11 @@ export function cleanSuffix(value, suffix, synonyms) {
   return value;
 }
 
+/**
+ * Cleans and standardizes capitalization in a string.
+ * @param {string} value - The string to clean and capitalize.
+ * @returns {string} The cleaned string with proper capitalization.
+ */
 export function cleanCapitalization(value) {
   const words = value.split(" ");
   const filteredWords = words.filter((word) => word.length > 0);

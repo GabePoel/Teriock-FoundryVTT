@@ -2,6 +2,16 @@ const { ux } = foundry.applications;
 import { makeIcon } from "./utils.mjs";
 import TeriockImageSheet from "../sheets/misc-sheets/image-sheet/image-sheet.mjs";
 
+/**
+ * Connects embedded documents to their UI elements with context menus and event handlers.
+ *
+ * This function sets up context menus for embedded documents (items, effects, etc.) that appear
+ * in card elements. It provides various actions like enable/disable, equip/unequip, attune/deattune,
+ * and other document-specific operations based on the document type and current state.
+ * @param {Document} document - The parent document containing the embedded documents.
+ * @param {HTMLElement} element - The DOM element containing the embedded document cards.
+ * @param {boolean} editable - Whether the document is editable by the current user. Defaults to true.
+ */
 export default function connectEmbedded(document, element, editable = true) {
   const iconStyle = CONFIG.TERIOCK.iconStyles.contextMenu;
   element.querySelectorAll(".tcard").forEach((el) => {

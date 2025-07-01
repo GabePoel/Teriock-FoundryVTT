@@ -1,9 +1,18 @@
+/**
+ * Opens a wiki page in a new browser tab.
+ * @param {string} title - The title of the wiki page to open.
+ */
 export function openWikiPage(title) {
   const baseWikiUrl = "https://wiki.teriock.com";
   const pageUrl = `${baseWikiUrl}/index.php/${encodeURIComponent(title)}`;
   window.open(pageUrl, "_blank");
 }
 
+/**
+ * Fetches the raw content of a wiki page via the MediaWiki API.
+ * @param {string} title - The title of the wiki page to fetch.
+ * @returns {Promise<string|null>} The raw wiki content as a string, or null if the request fails.
+ */
 export async function fetchWikiPageContent(title) {
   const endpoint = "https://wiki.teriock.com/api.php";
 
@@ -44,6 +53,11 @@ if (isNode) {
   parseHTML = (html) => new DOMParser().parseFromString(html, "text/html");
 }
 
+/**
+ * Fetches the parsed HTML content of a wiki page via the MediaWiki API.
+ * @param {string} title - The title of the wiki page to fetch.
+ * @returns {Promise<string|null>} The cleaned HTML content as a string, or null if the request fails.
+ */
 export async function fetchWikiPageHTML(title) {
   const endpoint = "https://wiki.teriock.com/api.php";
   const baseWikiUrl = "https://wiki.teriock.com";
@@ -87,6 +101,11 @@ export async function fetchWikiPageHTML(title) {
   }
 }
 
+/**
+ * Cleans and processes HTML content from the wiki by removing comments and extracting the main content.
+ * @param {string} html - The raw HTML content to clean.
+ * @returns {Promise<string>} The cleaned HTML content.
+ */
 export async function cleanWikiHTML(html) {
   let doc;
 
@@ -116,6 +135,11 @@ export async function cleanWikiHTML(html) {
   return container.innerHTML.trim();
 }
 
+/**
+ * Fetches all members of a wiki category via the MediaWiki API.
+ * @param {string} category - The name of the category to fetch members from.
+ * @returns {Promise<Array>} An array of category member objects, or an empty array if the request fails.
+ */
 export async function fetchCategoryMembers(category) {
   const endpoint = "https://wiki.teriock.com/api.php";
   const LIMIT = 500;

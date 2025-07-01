@@ -2,17 +2,19 @@
 import TeriockRoll from "../documents/roll.mjs";
 
 /**
- * @param {string} icon
- * @param {string} style
- * @returns {string}
+ * Creates an HTML icon element using Font Awesome classes.
+ * @param {string} icon - The icon name to use.
+ * @param {string} style - The Font Awesome style (solid, light, etc.). Defaults to "solid".
+ * @returns {string} The HTML string for the icon element.
  */
 export function makeIcon(icon, style = "solid") {
   return `<i class="fas fa-${style} fa-${icon}"></i>`;
 }
 
 /**
- * @param {string} str
- * @returns {string}
+ * Converts a string to camelCase format.
+ * @param {string} str - The string to convert.
+ * @returns {string} The camelCase version of the string.
  */
 export function toCamelCase(str) {
   return str
@@ -22,8 +24,9 @@ export function toCamelCase(str) {
 }
 
 /**
- * @param {string} rollFormula
- * @returns {string}
+ * Determines the appropriate dice icon based on the roll formula.
+ * @param {string} rollFormula - The dice roll formula to analyze.
+ * @returns {string} The Font Awesome class for the appropriate dice icon.
  */
 export function getRollIcon(rollFormula) {
   const validDice = [4, 6, 8, 10, 12, 20];
@@ -39,20 +42,22 @@ export function getRollIcon(rollFormula) {
 }
 
 /**
- * @param {string[]} names
- * @returns {string[]}
+ * Converts an array of strings to camelCase format.
+ * @param {string[]} names - The array of strings to convert.
+ * @returns {string[]} An array of camelCase strings.
  */
 export function toCamelCaseList(names) {
   return names.map((str) => toCamelCase(str));
 }
 
 /**
- * @param {string} img
+ * Creates a chat message with an image.
+ * @param {string} img - The image URL to display in chat.
  * @returns {Promise<void>}
  */
 export async function chatImage(img) {
   if (img) {
-    await ChatMessage.create({
+    await foundry.documents.ChatMessage.create({
       content: `
         <div
           class="timage"
@@ -66,9 +71,10 @@ export async function chatImage(img) {
 }
 
 /**
- * @param {string} string
- * @param {number} length
- * @returns {string}
+ * Abbreviates a string to a specified length.
+ * @param {string} string - The string to abbreviate.
+ * @param {number} length - The maximum length of the abbreviation. Defaults to 3.
+ * @returns {string} The abbreviated string.
  */
 export function abbreviate(string, length = 3) {
   return string.toLowerCase().slice(0, length);
@@ -76,7 +82,6 @@ export function abbreviate(string, length = 3) {
 
 /**
  * Evaluates a dice roll formula synchronously and returns the total result.
- *
  * @param {string} formula - The dice roll formula to evaluate.
  * @param {Object} data - The roll data to use for the evaluation.
  * @param {Object} options - Options that get passed to the roll.
@@ -100,7 +105,6 @@ export function evaluateSync(formula, data = {}, options = {}) {
 /**
  * Evaluates a dice roll formula synchronously and returns the total result.
  * Avoids having to generate roll data if it's not needed.
- *
  * @param {string} formula - The dice roll formula to evaluate.
  * @param {Document} document - The document to get roll data from.
  * @param {Object} options - Options that get passed to the roll.
@@ -122,7 +126,6 @@ export function smartEvaluateSync(formula, document, options = {}) {
 
 /**
  * Evaluates a dice roll formula asynchronously and returns the total result.
- *
  * @param {string} formula - The dice roll formula to evaluate.
  * @param {Object} data - The roll data to use for the evaluation.
  * @param {Object} options - Options that get passed to the roll.
@@ -145,7 +148,6 @@ export async function evaluateAsync(formula, data = {}, options = {}) {
 
 /**
  * Parses a time string and returns a number of seconds.
- *
  * @param {string} timeString - The time string to parse.
  * @returns {number|null} A number of seconds corresponding to the duration, or null if invalid.
  */
@@ -176,8 +178,9 @@ export function parseTimeString(timeString) {
 }
 
 /**
- * @param {number} totalSeconds
- * @returns {string}
+ * Converts a number of seconds to a human-readable time string.
+ * @param {number} totalSeconds - The total number of seconds to convert.
+ * @returns {string} A human-readable time string.
  */
 export function secondsToReadable(totalSeconds) {
   if (totalSeconds < 0) {
@@ -209,7 +212,6 @@ export function secondsToReadable(totalSeconds) {
  * Traverses the given object (`obj`) following the specified `path`, which can include wildcards (`*`)
  * to match any key at that level. If a `key` is provided, only values associated with that key are merged
  * into the result. If no `key` is provided, all values at the target path are merged.
- *
  * @param {Object} obj - The source object to traverse and merge values from.
  * @param {string} path - Dot-separated path string, supports wildcards (`*`) for matching any key.
  * @param {string} [key] - Optional key to extract values from objects at the target path.
@@ -261,8 +263,6 @@ export function mergeLevel(obj, path, key) {
   }
 
   const pathSegments = path.split(".");
-
   processPath(obj, pathSegments);
-
   return result;
 }

@@ -1,5 +1,12 @@
-import TeriockBaseEffect from "../documents/effect.mjs";
+import TeriockEffect from "../documents/effect.mjs";
 
+/**
+ * Creates a new ability effect and optionally pulls content from the wiki.
+ * @param {Document} document - The document to create the ability in.
+ * @param {string} name - The name for the new ability. If not provided, defaults to "New Ability".
+ * @param {Object} options - Additional options for the ability creation.
+ * @returns {Promise<ActiveEffect>} The created ability effect.
+ */
 export async function createAbility(document, name, options = {}) {
   const abilityData = {
     name: "New Ability",
@@ -39,8 +46,13 @@ export async function createAbility(document, name, options = {}) {
   return ability;
 }
 
+/**
+ * Creates a new resource effect.
+ * @param {Document} document - The document to create the resource in.
+ * @returns {Promise<ActiveEffect>} The created resource effect.
+ */
 export async function createResource(document) {
-  const resource = await TeriockBaseEffect.create(
+  const resource = await TeriockEffect.create(
     {
       name: "New Resource",
       type: "resource",
@@ -52,6 +64,12 @@ export async function createResource(document) {
   return resource;
 }
 
+/**
+ * Creates a new property effect with optional predefined content.
+ * @param {Document} document - The document to create the property in.
+ * @param {string} key - Optional key to look up predefined property content.
+ * @returns {Promise<ActiveEffect>} The created property effect.
+ */
 export async function createProperty(document, key = null) {
   let description = "Insert description here.";
   let propertyType = "normal";
@@ -79,7 +97,7 @@ export async function createProperty(document, key = null) {
     description: description,
   };
 
-  const property = await TeriockBaseEffect.create(
+  const property = await TeriockEffect.create(
     {
       name: name,
       type: "property",
@@ -92,8 +110,13 @@ export async function createProperty(document, key = null) {
   return property;
 }
 
+/**
+ * Creates a new effect.
+ * @param {Document} document - The document to create the effect in.
+ * @returns {Promise<ActiveEffect>} The created effect.
+ */
 export async function createEffect(document) {
-  const effect = await TeriockBaseEffect.create(
+  const effect = await TeriockEffect.create(
     {
       name: "New Effect",
       type: "effect",
@@ -105,8 +128,13 @@ export async function createEffect(document) {
   return effect;
 }
 
+/**
+ * Creates a new fluency effect.
+ * @param {Document} document - The document to create the fluency in.
+ * @returns {Promise<ActiveEffect>} The created fluency effect.
+ */
 export async function createFluency(document) {
-  const fluency = await TeriockBaseEffect.create(
+  const fluency = await TeriockEffect.create(
     {
       name: "New Fluency",
       type: "fluency",
