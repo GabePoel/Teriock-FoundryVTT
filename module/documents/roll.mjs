@@ -8,7 +8,13 @@
 export default class TeriockRoll extends foundry.dice.Roll {
   static CHAT_TEMPLATE = "systems/teriock/templates/chat/roll.hbs";
 
-  /** @override */
+  /**
+   * Creates a new TeriockRoll instance with enforced parsing and enrichment options.
+   * @override
+   * @param {string} formula - The roll formula to parse.
+   * @param {object} data - Data to use for the roll.
+   * @param {object} options - Options for the roll, including enrichment settings.
+   */
   constructor(formula, data, options = {}) {
     const parsedFormula = TeriockRoll.parseFormula(formula);
     super(parsedFormula, data, options);
@@ -256,7 +262,12 @@ export default class TeriockRoll extends foundry.dice.Roll {
     roll.resetFormula();
   }
 
-  /** @override */
+  /**
+   * Prepares the chat render context with custom message and context data.
+   * @override
+   * @param {object} options - Options for preparing the context.
+   * @returns {Promise<object>} Promise that resolves to the prepared context.
+   */
   async _prepareChatRenderContext(options = {}) {
     const context = await super._prepareChatRenderContext(options);
     context.message = this.message;
@@ -267,6 +278,7 @@ export default class TeriockRoll extends foundry.dice.Roll {
   }
 
   /**
+   * Applies a boost to this roll by increasing the highest face die.
    * @returns {void}
    */
   boost() {
@@ -274,6 +286,7 @@ export default class TeriockRoll extends foundry.dice.Roll {
   }
 
   /**
+   * Applies a deboost to this roll by decreasing the highest face die.
    * @returns {void}
    */
   deboost() {
@@ -281,8 +294,10 @@ export default class TeriockRoll extends foundry.dice.Roll {
   }
 
   /**
+   * Sets the number of boosts or deboosts for this roll.
+   * Positive numbers apply boosts, negative numbers apply deboosts.
    * @param {number} number - The number of boosts or deboosts to apply. Positive numbers boost, negative numbers deboost.
-   * @returns
+   * @returns {void}
    */
   setBoost(number) {
     if (number === 0) return;
@@ -294,8 +309,9 @@ export default class TeriockRoll extends foundry.dice.Roll {
 }
 
 /**
- * @param {foundry.dice.terms.DiceTerm[]} diceTerms
- * @returns {foundry.dice.terms.DiceTerm}
+ * Selects a weighted random die from the dice terms, preferring dice with higher face counts.
+ * @param {foundry.dice.terms.DiceTerm[]} diceTerms - Array of dice terms to select from.
+ * @returns {foundry.dice.terms.DiceTerm} The selected die term.
  */
 function selectWeightedMaxFaceDie(diceTerms) {
   const maxFaces = Math.max(...diceTerms.map((term) => term.faces));

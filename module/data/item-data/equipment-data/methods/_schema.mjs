@@ -2,7 +2,9 @@ const { fields } = foundry.data;
 import { equipmentOptions } from "../../../../helpers/constants/equipment-options.mjs";
 
 /**
- * @returns {object}
+ * Defines the schema for equipment data fields.
+ * Includes all equipment-specific fields such as damage, weight, equipment classes, and status flags.
+ * @returns {object} The schema definition for equipment data fields.
  * @private
  */
 export function _defineSchema() {
@@ -130,16 +132,6 @@ export function _defineSchema() {
       initial: "",
       label: "Notes",
     }),
-    // tier: new fields.NumberField({
-    //   initial: 0,
-    //   integer: true,
-    //   label: "Tier",
-    //   min: 0,
-    // }),
-    // fullTier: new fields.StringField({
-    //   initial: "",
-    //   label: "Full Tier",
-    // }),
     tier: new fields.SchemaField({
       raw: new fields.StringField({
         initial: "",

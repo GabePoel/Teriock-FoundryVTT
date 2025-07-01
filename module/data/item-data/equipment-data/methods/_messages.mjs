@@ -7,8 +7,10 @@ import {
 } from "../../../../helpers/messages-builder/message-parts.mjs";
 
 /**
- * @param {TeriockEquipmentData} equipmentData
- * @returns {Partial<MessageParts>}
+ * Generates message parts for an equipment item, including bars and blocks for display.
+ * Creates formatted display elements for equipment type, damage, load, and equipment classes.
+ * @param {TeriockEquipmentData} equipmentData - The equipment data to generate message parts for.
+ * @returns {Partial<MessageParts>} Object containing bars and blocks for the equipment message.
  * @private
  */
 export function _messageParts(equipmentData) {
@@ -88,8 +90,10 @@ export function _messageParts(equipmentData) {
 }
 
 /**
- * @param {TeriockEquipmentData} equipmentData
- * @returns {Partial<MessageParts>}
+ * Generates secret message parts for an equipment item, showing only noticeable properties.
+ * Used when equipment is not fully identified.
+ * @param {TeriockEquipmentData} equipmentData - The equipment data to generate secret message parts for.
+ * @returns {Partial<MessageParts>} Object containing bars and blocks for the secret equipment message.
  * @private
  */
 export function _secretMessageParts(equipmentData) {

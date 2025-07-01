@@ -1,8 +1,10 @@
 /** @import TeriockBaseActorData from "../../base-data.mjs"; */
 
 /**
- * @param {TeriockBaseActorData} system
- * @returns {void}
+ * Prepares the named size for the actor based on their numerical size value.
+ * Maps numerical size values to named sizes (Tiny, Small, Medium, Large, Huge, Gargantuan, Colossal).
+ * @param {TeriockBaseActorData} system - The actor's base data system object.
+ * @returns {void} Modifies the system object in place.
  * @private
  */
 export function _prepareSize(system) {

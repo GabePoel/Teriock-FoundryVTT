@@ -1,8 +1,11 @@
 /** @import TeriockBaseActorData from "../../base-data.mjs" */
 
 /**
- * @param {TeriockBaseActorData} system
- * @returns {void}
+ * Prepares defensive combat values for the actor.
+ * Calculates block value, armor value, armor class, and combined class based on equipped equipment.
+ * @param {TeriockBaseActorData} system - The actor's base data system object.
+ * @returns {void} Modifies the system object in place.
+ * @private
  */
 export function _prepareDefenses(system) {
   const actor = system.parent;
@@ -31,8 +34,11 @@ export function _prepareDefenses(system) {
 }
 
 /**
- * @param {TeriockBaseActorData} system
- * @returns {void}
+ * Prepares offensive combat values for the actor.
+ * Validates and sets the primary attacker equipment.
+ * @param {TeriockBaseActorData} system - The actor's base data system object.
+ * @returns {void} Modifies the system object in place.
+ * @private
  */
 export function _prepareOffenses(system) {
   const actor = system.parent;

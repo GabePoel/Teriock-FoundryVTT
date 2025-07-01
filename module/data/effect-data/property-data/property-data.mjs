@@ -4,16 +4,26 @@ import { WikiDataMixin } from "../../mixins/wiki-mixin.mjs";
 import TeriockBaseEffectData from "../base-data/base-data.mjs";
 
 /**
+ * Property-specific effect data model.
+ * Handles property functionality including damage types and wiki integration.
  * @extends {TeriockBaseEffectData}
  */
 export default class TeriockPropertyData extends WikiDataMixin(TeriockBaseEffectData) {
-  /** @inheritdoc */
+  /**
+   * Gets the metadata for the property data model.
+   * @inheritdoc
+   * @returns {object} The metadata object with property type information.
+   */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
       type: "property",
     });
   }
 
+  /**
+   * Defines the schema for the property data model.
+   * @returns {object} The schema definition for the property data.
+   */
   static defineSchema() {
     const commonData = super.defineSchema();
     return {
@@ -24,7 +34,12 @@ export default class TeriockPropertyData extends WikiDataMixin(TeriockBaseEffect
     };
   }
 
-  /** @override */
+  /**
+   * Gets the message parts for the property effect.
+   * Combines base message parts with property-specific message parts.
+   * @override
+   * @returns {object} Object containing message parts for the property effect.
+   */
   get messageParts() {
     return { ...super.messageParts, ..._messageParts(this) };
   }

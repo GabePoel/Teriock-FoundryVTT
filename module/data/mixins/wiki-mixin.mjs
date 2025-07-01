@@ -1,10 +1,19 @@
 /** @import { WikiPullOptions } from "../../types/wiki" */
 import { fetchWikiPageHTML, openWikiPage } from "../../helpers/wiki.mjs";
 
+/**
+ * Mixin that provides wiki integration functionality for document data models.
+ * Adds wiki page fetching, parsing, and opening capabilities.
+ * @template {Function} Base - The base class constructor to extend.
+ * @param {Base} Base - The base class to mix in with.
+ * @returns {Base} The extended class with wiki functionality.
+ */
 export const WikiDataMixin = (Base) =>
   class WikiDataMixin extends Base {
     /**
-     * @returns {string} The full wiki page path, including namespace.
+     * Gets the full wiki page path including namespace.
+     * Constructs the wiki page identifier from namespace and parent name.
+     * @returns {string} The complete wiki page path with namespace prefix.
      */
     get wikiPage() {
       const prefix = this.wikiNamespace ? `${this.wikiNamespace}:` : "";
@@ -12,8 +21,10 @@ export const WikiDataMixin = (Base) =>
     }
 
     /**
+     * Parses raw HTML content from the wiki into document data updates.
+     * Converts wiki HTML content into structured data for document updates.
      * @param {string} rawHTML - The raw HTML content fetched from the wiki.
-     * @returns {Promise<object>} An object representing data updates.
+     * @returns {Promise<object>} Promise that resolves to an object containing data updates.
      */
     async parse(rawHTML) {
       return {
@@ -22,8 +33,10 @@ export const WikiDataMixin = (Base) =>
     }
 
     /**
-     * @param {WikiPullOptions} options
-     * @returns {Promise<void>}
+     * Pulls data from the wiki and updates the document.
+     * Fetches wiki page content, parses it, and applies updates to the document.
+     * @param {WikiPullOptions} options - Options for the wiki pull operation.
+     * @returns {Promise<void>} Promise that resolves when the wiki pull is complete.
      */
     async wikiPull(options = {}) {
       const notify = options.notify !== false;
@@ -49,6 +62,8 @@ export const WikiDataMixin = (Base) =>
     }
 
     /**
+     * Opens the wiki page in the default browser.
+     * Navigates to the wiki page URL for manual viewing and editing.
      * @returns {void}
      */
     wikiOpen() {

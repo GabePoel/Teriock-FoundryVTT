@@ -2,8 +2,10 @@
 /** @import TeriockPropertyData from "../property-data.mjs"; */
 
 /**
- * @param {TeriockPropertyData} propertyData
- * @returns {Partial<MessageParts>}
+ * Generates message parts for a property effect, including bars and blocks for display.
+ * Creates formatted display elements for property type information and description.
+ * @param {TeriockPropertyData} propertyData - The property data to generate message parts for.
+ * @returns {Partial<MessageParts>} Object containing bars and blocks for the property message.
  * @private
  */
 export function _messageParts(propertyData) {

@@ -3,9 +3,10 @@
 import TeriockRoll from "../../../../documents/roll.mjs";
 
 /**
- * @param {TeriockFluencyData} fluencyData
- * @param {CommonRollOptions} options
- * @returns {Promise<void>}
+ * Initiates a fluency roll with the specified options.
+ * @param {TeriockFluencyData} fluencyData - The fluency data to roll for.
+ * @param {CommonRollOptions} options - Options for the roll including advantage/disadvantage.
+ * @returns {Promise<void>} Promise that resolves when the roll is complete.
  * @private
  */
 export async function _roll(fluencyData, options) {
@@ -13,9 +14,11 @@ export async function _roll(fluencyData, options) {
 }
 
 /**
- * @param {TeriockFluencyData} fluencyData
- * @param {CommonRollOptions} options
- * @returns {Promise<void>}
+ * Performs the actual fluency roll, creating a message with the roll result.
+ * Handles advantage/disadvantage and applies tradecraft modifiers.
+ * @param {TeriockFluencyData} fluencyData - The fluency data to roll for.
+ * @param {CommonRollOptions} options - Options for the roll including advantage/disadvantage.
+ * @returns {Promise<void>} Promise that resolves when the roll message is sent.
  * @private
  */
 async function use(fluencyData, options) {

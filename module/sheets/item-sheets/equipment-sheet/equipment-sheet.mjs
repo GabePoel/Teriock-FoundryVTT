@@ -5,9 +5,17 @@ import { powerLevelContextMenu, fontContextMenu } from "./connections/_context-m
 import TeriockBaseItemSheet from "../base-sheet/base-sheet.mjs";
 
 /**
+ * Equipment sheet for Teriock system equipment.
+ * Provides comprehensive equipment management including state toggles, context menus,
+ * tag management, and rich text editing for equipment components.
  * @extends {TeriockBaseItemSheet}
  */
 export default class TeriockEquipmentSheet extends HandlebarsApplicationMixin(TeriockBaseItemSheet) {
+  /**
+   * Default options for the equipment sheet.
+   * @type {object}
+   * @static
+   */
   static DEFAULT_OPTIONS = {
     classes: ["equipment"],
     actions: {
@@ -20,6 +28,11 @@ export default class TeriockEquipmentSheet extends HandlebarsApplicationMixin(Te
     },
   };
 
+  /**
+   * Template parts configuration for the equipment sheet.
+   * @type {object}
+   * @static
+   */
   static PARTS = {
     all: {
       template: "systems/teriock/templates/sheets/equipment-template/equipment-template.hbs",
@@ -27,19 +40,39 @@ export default class TeriockEquipmentSheet extends HandlebarsApplicationMixin(Te
     },
   };
 
+  /**
+   * Toggles the equipped state of the equipment.
+   * @returns {Promise<void>} Promise that resolves when equipped state is toggled.
+   * @static
+   */
   static async _toggleEquipped() {
     this.document.system.toggleEquipped();
   }
 
+  /**
+   * Toggles the shattered state of the equipment.
+   * @returns {Promise<void>} Promise that resolves when shattered state is toggled.
+   * @static
+   */
   static async _toggleShattered() {
     this.document.system.toggleShattered();
   }
 
+  /**
+   * Toggles the dampened state of the equipment.
+   * @returns {Promise<void>} Promise that resolves when dampened state is toggled.
+   * @static
+   */
   static async _toggleDampened() {
     this.document.system.toggleDampened();
   }
 
-  /** @override */
+  /**
+   * Prepares the context data for template rendering.
+   * Adds enriched text fields for equipment descriptions and properties.
+   * @returns {Promise<object>} Promise that resolves to the context object.
+   * @override
+   */
   async _prepareContext() {
     const context = await super._prepareContext();
     const { system } = this.item;
@@ -60,7 +93,13 @@ export default class TeriockEquipmentSheet extends HandlebarsApplicationMixin(Te
     return context;
   }
 
-  /** @override */
+  /**
+   * Handles the render event for the equipment sheet.
+   * Sets up context menus, input cleaning, tag management, and button mappings.
+   * @param {object} context - The render context.
+   * @param {object} options - Render options.
+   * @override
+   */
   _onRender(context, options) {
     super._onRender(context, options);
     if (!this.editable) return;
@@ -87,6 +126,11 @@ export default class TeriockEquipmentSheet extends HandlebarsApplicationMixin(Te
     this._connectButtonMap(buttonMap);
   }
 
+  /**
+   * Activates tag management for equipment flags and properties.
+   * Sets up click handlers for boolean flags, array tags, and static updates.
+   * @param {jQuery} html - The jQuery element for the sheet.
+   */
   _activateTags(html) {
     const doc = this.document;
 

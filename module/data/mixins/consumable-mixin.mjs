@@ -1,10 +1,19 @@
 import { smartEvaluateSync } from "../../helpers/utils.mjs";
 
+/**
+ * Mixin that provides consumable document functionality.
+ * Adds quantity management, automatic consumption, and quantity validation capabilities.
+ * @template {Function} Base - The base class constructor to extend.
+ * @param {Base} Base - The base class to mix in with.
+ * @returns {Base} The extended class with consumable functionality.
+ */
 export const ConsumableDataMixin = (Base) =>
   class ConsumableDataMixin extends Base {
     /**
-     * @param {object} options
-     * @returns {Promise<void>}
+     * Uses the consumable item, triggering consumption logic.
+     * Calls the parent use method and then consumes one unit of the item.
+     * @param {object} options - Options for the use operation.
+     * @returns {Promise<void>} Promise that resolves when the use is complete.
      * @override
      */
     async use(options) {
@@ -12,7 +21,11 @@ export const ConsumableDataMixin = (Base) =>
       await this.useOne();
     }
 
-    /** @override */
+    /**
+     * Prepares derived data for the consumable item.
+     * Calculates maximum quantity and validates current quantity against limits.
+     * @override
+     */
     prepareDerivedData() {
       super.prepareDerivedData();
       if (this.consumable) {
@@ -26,7 +39,9 @@ export const ConsumableDataMixin = (Base) =>
     }
 
     /**
-     * @returns {Promise<void>}
+     * Consumes one unit of the consumable item.
+     * Decrements the quantity by 1, ensuring it doesn't go below 0.
+     * @returns {Promise<void>} Promise that resolves when consumption is complete.
      */
     async useOne() {
       if (this.consumable) {
@@ -38,7 +53,9 @@ export const ConsumableDataMixin = (Base) =>
     }
 
     /**
-     * @returns {Promise<void>}
+     * Adds one unit to the consumable item.
+     * Increments the quantity by 1, respecting maximum quantity limits.
+     * @returns {Promise<void>} Promise that resolves when the gain is complete.
      */
     async gainOne() {
       if (this.consumable) {

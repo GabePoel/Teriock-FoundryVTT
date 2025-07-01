@@ -13,9 +13,17 @@ import {
 import { TeriockSheet } from "../../mixins/sheet-mixin.mjs";
 
 /**
+ * Base actor sheet for actors.
+ * Provides comprehensive character management including abilities, equipment, tradecrafts,
+ * and various interactive features like rolling, damage tracking, and condition management.
  * @extends {ActorSheet}
  */
 export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorSheet) {
+  /**
+   * Default options for the base actor sheet.
+   * @type {object}
+   * @static
+   */
   static DEFAULT_OPTIONS = {
     classes: ["character"],
     actions: {
@@ -51,6 +59,11 @@ export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorShee
     },
   };
 
+  /**
+   * Template parts configuration for the sheet.
+   * @type {object}
+   * @static
+   */
   static PARTS = {
     all: {
       template: "systems/teriock/templates/sheets/character-template/character-template.hbs",
@@ -58,6 +71,11 @@ export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorShee
     },
   };
 
+  /**
+   * Search result partials for different document types.
+   * @type {object}
+   * @static
+   */
   static SEARCH_RESULT_PARTIALS = {
     ability: "systems/teriock/templates/sheets/character-template/results/ch-ability-results.hbs",
     equipment: "systems/teriock/templates/sheets/character-template/results/ch-equipment-results.hbs",
@@ -68,6 +86,26 @@ export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorShee
     effect: "systems/teriock/templates/sheets/character-template/results/ch-effect-results.hbs",
   };
 
+  /**
+   * Search configurations for different document types.
+   * @type {Array}
+   * @static
+   */
+  static SEARCH_CONFIGS = [
+    { type: "ability", source: "effectTypes", method: "_getFilteredAbilities" },
+    { type: "equipment", source: "itemTypes", method: "_getFilteredEquipment" },
+    { type: "fluency", source: "effectTypes", method: null },
+    { type: "power", source: "itemTypes", method: null },
+    { type: "rank", source: "itemTypes", method: null },
+    { type: "resource", source: "effectTypes", method: null },
+    { type: "effect", source: "effectTypes", method: null },
+  ];
+
+  /**
+   * Creates a new base actor sheet instance.
+   * Initializes sheet state including menus, drawers, search values, and settings.
+   * @param {...any} args - Arguments to pass to the parent constructor.
+   */
   constructor(...args) {
     super(...args);
     this._filterMenuOpen = false;
@@ -96,14 +134,36 @@ export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorShee
     this.settings = _defaultSheetSettings;
   }
 
+  /**
+   * Toggles the equipped state of an embedded document.
+   * @param {Event} event - The event object.
+   * @param {HTMLElement} target - The target element.
+   * @returns {Promise<void>} Promise that resolves when toggle is complete.
+   * @static
+   */
   static async _toggleEquippedDoc(event, target) {
     this._embeddedFromCard(target)?.system.toggleEquipped();
   }
 
+  /**
+   * Toggles the disabled state of an embedded document.
+   * @param {Event} event - The event object.
+   * @param {HTMLElement} target - The target element.
+   * @returns {Promise<void>} Promise that resolves when toggle is complete.
+   * @static
+   */
   static async _toggleDisabledDoc(event, target) {
     this._embeddedFromCard(target)?.toggleDisabled();
   }
 
+  /**
+   * Adds a new embedded document to the actor.
+   * Creates documents based on the specified tab type.
+   * @param {Event} _ - The event object.
+   * @param {HTMLElement} target - The target element.
+   * @returns {Promise<void>} Promise that resolves when document is created.
+   * @static
+   */
   static async _addEmbedded(_, target) {
     const tab = target.dataset.tab;
     const tabMap = {
@@ -170,6 +230,13 @@ export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorShee
     if (docs[0]?.sheet) docs[0].sheet.render(true);
   }
 
+  /**
+   * Cycles through tradecraft extra levels (0, 1, 2).
+   * @param {Event} event - The event object.
+   * @param {HTMLElement} target - The target element.
+   * @returns {Promise<void>} Promise that resolves when tradecraft extra is updated.
+   * @static
+   */
   static async _tradecraftExtra(event, target) {
     const tradecraft = target.dataset.tradecraft;
     const extra = this.document.system.tradecrafts[tradecraft].extra;
@@ -177,6 +244,13 @@ export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorShee
     await this.document.update({ [`system.tradecrafts.${tradecraft}.extra`]: newExtra });
   }
 
+  /**
+   * Rolls a hit die for a rank item.
+   * @param {Event} event - The event object.
+   * @param {HTMLElement} target - The target element.
+   * @returns {Promise<void>} Promise that resolves when hit die is rolled.
+   * @static
+   */
   static async _rollHitDie(event, target) {
     const id = target.dataset.id;
     const rank = this.actor.items.get(id);
@@ -185,6 +259,13 @@ export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorShee
     }
   }
 
+  /**
+   * Rolls a mana die for a rank item.
+   * @param {Event} event - The event object.
+   * @param {HTMLElement} target - The target element.
+   * @returns {Promise<void>} Promise that resolves when mana die is rolled.
+   * @static
+   */
   static async _rollManaDie(event, target) {
     const id = target.dataset.id;
     const rank = this.actor.items.get(id);
@@ -193,6 +274,13 @@ export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorShee
     }
   }
 
+  /**
+   * Rolls a tradecraft check with optional advantage/disadvantage.
+   * @param {Event} event - The event object.
+   * @param {HTMLElement} target - The target element.
+   * @returns {Promise<void>} Promise that resolves when tradecraft is rolled.
+   * @static
+   */
   static async _rollTradecraft(event, target) {
     const tradecraft = target.dataset.tradecraft;
     const options = {};
@@ -201,6 +289,13 @@ export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorShee
     this.actor.rollTradecraft(tradecraft, options);
   }
 
+  /**
+   * Rolls a feat save with optional advantage/disadvantage.
+   * @param {Event} event - The event object.
+   * @param {HTMLElement} target - The target element.
+   * @returns {Promise<void>} Promise that resolves when feat save is rolled.
+   * @static
+   */
   static async _rollFeatSave(event, target) {
     const attribute = target.dataset.attribute;
     const options = {};
@@ -209,20 +304,48 @@ export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorShee
     this.actor.rollFeatSave(attribute, options);
   }
 
+  /**
+   * Toggles the shield bash (sb) state.
+   * @param {Event} event - The event object.
+   * @param {HTMLElement} target - The target element.
+   * @returns {Promise<void>} Promise that resolves when sb is toggled.
+   * @static
+   */
   static async _toggleSb(event, target) {
     this.document.update({ "system.sb": !this.document.system.sb });
   }
 
+  /**
+   * Opens the primary attacker's sheet.
+   * @param {Event} event - The event object.
+   * @param {HTMLElement} target - The target element.
+   * @returns {Promise<void>} Promise that resolves when sheet is opened.
+   * @static
+   */
   static async _openPrimaryAttacker(event, target) {
     event.stopPropagation();
     this.document.system.primaryAttacker.sheet.render(true);
   }
 
+  /**
+   * Opens the primary blocker's sheet.
+   * @param {Event} event - The event object.
+   * @param {HTMLElement} target - The target element.
+   * @returns {Promise<void>} Promise that resolves when sheet is opened.
+   * @static
+   */
   static async _openPrimaryBlocker(event, target) {
     event.stopPropagation();
     this.document.system.primaryBlocker.sheet.render(true);
   }
 
+  /**
+   * Quickly uses an item with optional modifiers.
+   * @param {Event} event - The event object.
+   * @param {HTMLElement} target - The target element.
+   * @returns {Promise<void>} Promise that resolves when item is used.
+   * @static
+   */
   static async _quickUse(event, target) {
     event.stopPropagation();
     const id = target.dataset.id;
@@ -238,6 +361,13 @@ export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorShee
     }
   }
 
+  /**
+   * Prompts for damage amount and applies it to the actor.
+   * @param {Event} event - The event object.
+   * @param {HTMLElement} target - The target element.
+   * @returns {Promise<void>} Promise that resolves when damage is applied.
+   * @static
+   */
   static async _takeDamage(event, target) {
     event.stopPropagation();
     await api.DialogV2.prompt({
@@ -255,6 +385,13 @@ export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorShee
     });
   }
 
+  /**
+   * Prompts for drain amount and applies it to the actor.
+   * @param {Event} event - The event object.
+   * @param {HTMLElement} target - The target element.
+   * @returns {Promise<void>} Promise that resolves when drain is applied.
+   * @static
+   */
   static async _takeDrain(event, target) {
     event.stopPropagation();
     await api.DialogV2.prompt({
@@ -272,6 +409,13 @@ export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorShee
     });
   }
 
+  /**
+   * Prompts for wither amount and applies it to the actor.
+   * @param {Event} event - The event object.
+   * @param {HTMLElement} target - The target element.
+   * @returns {Promise<void>} Promise that resolves when wither is applied.
+   * @static
+   */
   static async _takeWither(event, target) {
     event.stopPropagation();
     await api.DialogV2.prompt({
@@ -289,6 +433,13 @@ export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorShee
     });
   }
 
+  /**
+   * Removes a condition with optional modifiers.
+   * @param {Event} event - The event object.
+   * @param {HTMLElement} target - The target element.
+   * @returns {Promise<void>} Promise that resolves when condition is removed.
+   * @static
+   */
   static async _removeCondition(event, target) {
     event.stopPropagation();
     const options = {};
@@ -299,6 +450,13 @@ export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorShee
     this.actor.rollCondition(condition, options);
   }
 
+  /**
+   * Deattunes an attunement effect.
+   * @param {Event} event - The event object.
+   * @param {HTMLElement} target - The target element.
+   * @returns {Promise<void>} Promise that resolves when attunement is removed.
+   * @static
+   */
   static async _deattuneDoc(event, target) {
     event.stopPropagation();
     const attunement = this.actor.effects.get(target.dataset.id);
@@ -307,16 +465,34 @@ export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorShee
     }
   }
 
+  /**
+   * Forces removal of a condition without rolling.
+   * @param {string} condition - The condition to remove.
+   */
   _forceRemoveCondition(condition) {
     this.actor.rollCondition(condition, { skip: true });
   }
 
+  /**
+   * Applies a hack to a specific body part.
+   * @param {Event} event - The event object.
+   * @param {HTMLElement} target - The target element.
+   * @returns {Promise<void>} Promise that resolves when hack is applied.
+   * @static
+   */
   static async _takeHack(event, target) {
     event.stopPropagation();
     const part = target.dataset.part;
     await this.actor.takeHack(part);
   }
 
+  /**
+   * Performs a basic attack with optional advantage/disadvantage.
+   * @param {Event} event - The event object.
+   * @param {HTMLElement} target - The target element.
+   * @returns {Promise<void>} Promise that resolves when attack is performed.
+   * @static
+   */
   static async _attack(event, target) {
     event.stopPropagation();
     const options = {
@@ -326,6 +502,13 @@ export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorShee
     this.actor.useAbility("Basic Attack", options);
   }
 
+  /**
+   * Rolls resistance with optional advantage/disadvantage.
+   * @param {Event} event - The event object.
+   * @param {HTMLElement} target - The target element.
+   * @returns {Promise<void>} Promise that resolves when resistance is rolled.
+   * @static
+   */
   static async _resist(event, target) {
     event.stopPropagation();
     let message = null;
@@ -345,6 +528,13 @@ export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorShee
     this.actor.rollResistance(options);
   }
 
+  /**
+   * Rolls immunity with optional advantage/disadvantage.
+   * @param {Event} event - The event object.
+   * @param {HTMLElement} target - The target element.
+   * @returns {Promise<void>} Promise that resolves when immunity is rolled.
+   * @static
+   */
   static async _immune(event, target) {
     event.stopPropagation();
     let message = null;
@@ -364,6 +554,13 @@ export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorShee
     this.actor.rollImmunity(options);
   }
 
+  /**
+   * Ends a condition with optional advantage/disadvantage.
+   * @param {Event} event - The event object.
+   * @param {HTMLElement} target - The target element.
+   * @returns {Promise<void>} Promise that resolves when condition is ended.
+   * @static
+   */
   static async _endCondition(event, target) {
     event.stopPropagation();
     let message = null;
@@ -381,15 +578,30 @@ export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorShee
     this.actor.endCondition(options);
   }
 
+  /**
+   * Gets filtered equipment based on current settings.
+   * @param {Array} equipment - Array of equipment to filter.
+   * @returns {Array} Filtered equipment array.
+   */
   _getFilteredEquipment(equipment = []) {
     return _filterEquipment(this.actor, equipment, this.settings.equipmentFilters);
   }
 
+  /**
+   * Gets filtered abilities based on current settings.
+   * @param {Array} abilities - Array of abilities to filter.
+   * @returns {Array} Filtered abilities array.
+   */
   _getFilteredAbilities(abilities = []) {
     return _filterAbilities(this.actor, abilities, this.settings.abilityFilters);
   }
 
-  /** @override */
+  /**
+   * Prepares the context data for template rendering.
+   * Builds effect types, sorts data, and prepares all necessary context information.
+   * @returns {Promise<object>} Promise that resolves to the context object.
+   * @override
+   */
   async _prepareContext() {
     if (!this.actor.effectTypes) {
       this.actor.buildEffectTypes();
@@ -453,11 +665,23 @@ export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorShee
     return context;
   }
 
+  /**
+   * Gets an ability by ID and optional parent ID.
+   * @param {string} id - The ability ID.
+   * @param {string} parentId - The optional parent ID.
+   * @returns {ActiveEffect|null} The ability effect or null if not found.
+   */
   _getAbility(id, parentId) {
     return parentId ? this.document.items.get(parentId)?.effects.get(id) : this.document.effects.get(id);
   }
 
-  /** @override */
+  /**
+   * Handles the render event for the actor sheet.
+   * Sets up UI state, event listeners, and context menus.
+   * @param {object} context - The render context.
+   * @param {object} options - Render options.
+   * @override
+   */
   _onRender(context, options) {
     super._onRender(context, options);
 
@@ -654,17 +878,10 @@ export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorShee
     });
   }
 
-  static SEARCH_CONFIGS = [
-    { type: "ability", source: "effectTypes", method: "_getFilteredAbilities" },
-    { type: "equipment", source: "itemTypes", method: "_getFilteredEquipment" },
-    { type: "fluency", source: "effectTypes", method: null },
-    { type: "power", source: "itemTypes", method: null },
-    { type: "rank", source: "itemTypes", method: null },
-    { type: "resource", source: "effectTypes", method: null },
-    { type: "effect", source: "effectTypes", method: null },
-  ];
-
-  /** @private */
+  /**
+   * Initializes search filters for all document types.
+   * @private
+   */
   #initSearchFilters() {
     const configs = this.constructor.SEARCH_CONFIGS;
     configs.forEach(({ type, source, method }) => {
@@ -693,7 +910,10 @@ export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorShee
     });
   }
 
-  /** @private */
+  /**
+   * Runs search filters for all document types.
+   * @private
+   */
   #runSearchFilters() {
     const configs = this.constructor.SEARCH_CONFIGS;
     configs.forEach(({ type, source, method }) => {
@@ -706,6 +926,16 @@ export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorShee
     });
   }
 
+  /**
+   * Handles search filter changes for a specific type.
+   * @param {string} type - The document type.
+   * @param {string} sourceKey - The source key for the data.
+   * @param {string|null} filterMethodName - The filter method name.
+   * @param {RegExp} rgx - The search regex.
+   * @param {HTMLElement} content - The content element.
+   * @param {HTMLElement} input - The input element.
+   * @private
+   */
   #handleSearchFilter(type, sourceKey, filterMethodName, rgx, content, input) {
     this.#applyFilter(type, sourceKey, filterMethodName, rgx, content);
     const searchPath = `_${type}SearchValue`;
@@ -716,6 +946,15 @@ export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorShee
     this._loadingSearch = false;
   }
 
+  /**
+   * Applies a filter to content elements.
+   * @param {string} type - The document type.
+   * @param {string} sourceKey - The source key for the data.
+   * @param {string|null} filterMethodName - The filter method name.
+   * @param {RegExp} rgx - The search regex.
+   * @param {HTMLElement} content - The content element.
+   * @private
+   */
   #applyFilter(type, sourceKey, filterMethodName, rgx, content) {
     const noResults = this.element.querySelector(".no-results");
     let filtered = this._embeds[sourceKey][type] || [];

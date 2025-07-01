@@ -5,6 +5,7 @@ import { ChildDocumentMixin } from "./mixins/child-mixin.mjs";
  */
 export default class TeriockEffect extends ChildDocumentMixin(foundry.documents.ActiveEffect) {
   /**
+   * Prepares derived data for the effect, handling ability-specific logic and attunement changes.
    * @todo Move this logic to TeriockAbilityData as appropriate.
    * @inheritdoc
    */
@@ -34,7 +35,9 @@ export default class TeriockEffect extends ChildDocumentMixin(foundry.documents.
   }
 
   /**
+   * Checks if the effect is suppressed, combining system suppression with parent suppression.
    * @override
+   * @returns {boolean} True if the effect is suppressed, false otherwise.
    */
   get isSuppressed() {
     let suppressed = super.isSuppressed;
@@ -42,8 +45,8 @@ export default class TeriockEffect extends ChildDocumentMixin(foundry.documents.
   }
 
   /**
-   * Gets the ability that provides this, if there is one.
-   * @returns {parent: TeriockEffect | null}
+   * Gets the parent effect that provides this effect, if there is one.
+   * @returns {TeriockEffect|null} The parent effect or null if no parent exists.
    */
   getParent() {
     if (this.system.parentUuid) {
@@ -57,6 +60,10 @@ export default class TeriockEffect extends ChildDocumentMixin(foundry.documents.
     return null;
   }
 
+  /**
+   * Gets the parent effect synchronously using the embedded document system.
+   * @returns {TeriockEffect|null} The parent effect or null if no parent exists.
+   */
   getParentSync() {
     if (this.system.parentUuid) {
       return this.parent.getEmbeddedDocument("ActiveEffect", this.system.parentId);
@@ -65,8 +72,8 @@ export default class TeriockEffect extends ChildDocumentMixin(foundry.documents.
   }
 
   /**
-   * Gets the top level ancestor ability that provides this, if there is one.
-   * @returns {ancestor: TeriockEffect | null}
+   * Gets the top level ancestor effect that provides this effect, if there is one.
+   * @returns {TeriockEffect|null} The top level ancestor effect or null if no ancestor exists.
    */
   getAncestor() {
     let ancestor = this.getParent();
@@ -76,6 +83,10 @@ export default class TeriockEffect extends ChildDocumentMixin(foundry.documents.
     return ancestor;
   }
 
+  /**
+   * Gets all ancestor effects in the hierarchy, starting from the immediate parent.
+   * @returns {TeriockEffect[]} Array of ancestor effects, ordered from immediate parent to top level.
+   */
   getAncestors() {
     const ancestors = [];
     let ancestor = this.getParent();
@@ -86,6 +97,10 @@ export default class TeriockEffect extends ChildDocumentMixin(foundry.documents.
     return ancestors;
   }
 
+  /**
+   * Gets all ancestor effects synchronously using the embedded document system.
+   * @returns {TeriockEffect[]} Array of ancestor effects, ordered from immediate parent to top level.
+   */
   getAncestorsSync() {
     const ancestors = [];
     let ancestor = this.getParentSync();
@@ -97,9 +112,9 @@ export default class TeriockEffect extends ChildDocumentMixin(foundry.documents.
   }
 
   /**
-   * Get whatever Document most directly applies this. If it's an ability, it
-   * returns that. Otherwise, gets what Foundry considers to be the parent.
-   * @returns {source: Document}
+   * Gets the document that most directly applies this effect. If it's an ability, returns that.
+   * Otherwise, gets what Foundry considers to be the parent.
+   * @returns {Document} The source document that applies this effect.
    */
   getSource() {
     let source = this.getParent();
@@ -110,7 +125,8 @@ export default class TeriockEffect extends ChildDocumentMixin(foundry.documents.
   }
 
   /**
-   * @returns {children: ActiveEffect[]}
+   * Gets all child effects that are derived from this effect.
+   * @returns {ActiveEffect[]} Array of child effects.
    */
   getChildren() {
     const children = [];
@@ -130,7 +146,8 @@ export default class TeriockEffect extends ChildDocumentMixin(foundry.documents.
   }
 
   /**
-   * @returns {Promise<ActiveEffect[]>}
+   * Gets all child effects asynchronously using UUID resolution.
+   * @returns {Promise<ActiveEffect[]>} Promise that resolves to an array of child effects.
    */
   async getChildrenAsync() {
     const children = [];
@@ -143,6 +160,10 @@ export default class TeriockEffect extends ChildDocumentMixin(foundry.documents.
     return children;
   }
 
+  /**
+   * Checks if this effect is a reference effect by examining its ancestors for non-passive maneuvers.
+   * @returns {boolean} True if this is a reference effect, false otherwise.
+   */
   get isReference() {
     const ancestors = this.getAncestors();
     for (const ancestor of ancestors) {
@@ -154,7 +175,8 @@ export default class TeriockEffect extends ChildDocumentMixin(foundry.documents.
   }
 
   /**
-   * @returns {Promise<Void>}
+   * Saves the family relationships by updating child UUIDs and parent UUID.
+   * @returns {Promise<void>} Promise that resolves when the family data is saved.
    */
   async saveFamily() {
     const children = this.getChildren();
@@ -168,7 +190,8 @@ export default class TeriockEffect extends ChildDocumentMixin(foundry.documents.
   }
 
   /**
-   * @returns {Promise<Void>}
+   * Removes family relationships by clearing child UUIDs and parent UUID.
+   * @returns {Promise<void>} Promise that resolves when the family data is cleared.
    */
   async unsaveFamily() {
     await this.update({
@@ -178,8 +201,10 @@ export default class TeriockEffect extends ChildDocumentMixin(foundry.documents.
   }
 
   /**
+   * Duplicates the effect and updates parent-child relationships.
    * @todo Create addChild and setParent methods to handle this more generally.
    * @override
+   * @returns {Promise<TeriockEffect>} Promise that resolves to the duplicated effect.
    */
   async duplicate() {
     const copy = await super.duplicate();
@@ -194,7 +219,8 @@ export default class TeriockEffect extends ChildDocumentMixin(foundry.documents.
   }
 
   /**
-   * @returns {descendants: ActiveEffect[]}
+   * Gets all descendant effects (children, grandchildren, etc.) in a recursive manner.
+   * @returns {ActiveEffect[]} Array of all descendant effects.
    */
   getDescendants() {
     const descendants = [];
@@ -207,7 +233,8 @@ export default class TeriockEffect extends ChildDocumentMixin(foundry.documents.
   }
 
   /**
-   * @returns {Promise<void>}
+   * Deletes all child effects and clears the child IDs from this effect.
+   * @returns {Promise<void>} Promise that resolves when all children are deleted.
    */
   async deleteChildren() {
     if (this.system?.childIds?.length > 0) {
@@ -220,16 +247,16 @@ export default class TeriockEffect extends ChildDocumentMixin(foundry.documents.
   }
 
   /**
-   * Disables the effect, setting its `disabled` property to true.
-   * @returns {Promise<void>}
+   * Disables the effect by setting its `disabled` property to true.
+   * @returns {Promise<void>} Promise that resolves when the effect is disabled.
    */
   async disable() {
     await this.update({ disabled: true });
   }
 
   /**
-   * Enables the effect, setting its `disabled` property to false.
-   * @returns {Promise<void>}
+   * Enables the effect by setting its `disabled` property to false.
+   * @returns {Promise<void>} Promise that resolves when the effect is enabled.
    */
   async enable() {
     await this.update({ disabled: false });
@@ -238,14 +265,16 @@ export default class TeriockEffect extends ChildDocumentMixin(foundry.documents.
   /**
    * Toggles the `disabled` state of the effect.
    * If the effect is currently disabled, it will be enabled, and vice versa.
-   * @returns {Promise<void>}
+   * @returns {Promise<void>} Promise that resolves when the disabled state is toggled.
    */
   async toggleDisabled() {
     await this.update({ disabled: !this.disabled });
   }
 
   /**
-   * @returns {Promise<void>}
+   * Forces an update of the effect by toggling the update counter.
+   * This is useful for triggering reactive updates in the UI.
+   * @returns {Promise<void>} Promise that resolves when the effect is updated.
    */
   async forceUpdate() {
     await this.update({ "system.updateCounter": !this.system.updateCounter });

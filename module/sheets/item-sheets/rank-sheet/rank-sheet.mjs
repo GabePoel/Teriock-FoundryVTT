@@ -10,15 +10,28 @@ import {
 import TeriockBaseItemSheet from "../base-sheet/base-sheet.mjs";
 
 /**
+ * Rank sheet for Teriock system ranks.
+ * Provides rank management with context menus for various rank components and die rerolling functionality.
  * @extends {TeriockBaseItemSheet}
  */
 export default class TeriockRankSheet extends HandlebarsApplicationMixin(TeriockBaseItemSheet) {
+  /**
+   * Default options for the rank sheet.
+   * @type {object}
+   * @static
+   */
   static DEFAULT_OPTIONS = {
     classes: ["rank"],
     window: {
       icon: "fa-solid fa-" + documentOptions.rank.icon,
     },
   };
+
+  /**
+   * Template parts configuration for the rank sheet.
+   * @type {object}
+   * @static
+   */
   static PARTS = {
     all: {
       template: "systems/teriock/templates/sheets/rank-template/rank-template.hbs",
@@ -26,7 +39,12 @@ export default class TeriockRankSheet extends HandlebarsApplicationMixin(Teriock
     },
   };
 
-  /** @override */
+  /**
+   * Prepares the context data for template rendering.
+   * Adds enriched text fields for rank descriptions and flaws.
+   * @returns {Promise<object>} Promise that resolves to the context object.
+   * @override
+   */
   async _prepareContext() {
     const context = await super._prepareContext();
     context.enrichedDescription = await this._editor(this.item.system.description);
@@ -34,7 +52,13 @@ export default class TeriockRankSheet extends HandlebarsApplicationMixin(Teriock
     return context;
   }
 
-  /** @override */
+  /**
+   * Handles the render event for the rank sheet.
+   * Sets up context menus for rank components and die rerolling functionality.
+   * @param {object} context - The render context.
+   * @param {object} options - Render options.
+   * @override
+   */
   _onRender(context, options) {
     super._onRender(context, options);
     if (!this.editable) return;

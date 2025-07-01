@@ -1,3 +1,12 @@
+/**
+ * Generic sorting function for embedded items with customizable accessors.
+ * Sorts items based on a sort key and direction, using custom accessor functions.
+ * @param {Array} items - Array of items to sort.
+ * @param {string} sortKey - The key to sort by.
+ * @param {boolean} ascending - Whether to sort in ascending order.
+ * @param {object} accessorMap - Map of sort keys to accessor functions.
+ * @returns {Array} Sorted array of items.
+ */
 export function _sortEmbedded(items, sortKey, ascending, accessorMap = {}) {
   if (!items || !Array.isArray(items) || items.length === 0) {
     return [];
@@ -12,6 +21,12 @@ export function _sortEmbedded(items, sortKey, ascending, accessorMap = {}) {
   return ascending ? sorted : sorted.reverse();
 }
 
+/**
+ * Sorts abilities based on actor sheet settings.
+ * Uses the actor's ability sort configuration to determine sort criteria.
+ * @param {Actor} actor - The actor whose abilities to sort.
+ * @returns {Array} Sorted array of abilities.
+ */
 export function _sortAbilities(actor) {
   const abilities = actor.effectTypes.ability;
   const sortKey = actor.sheet.settings.abilitySortOption;
@@ -26,6 +41,12 @@ export function _sortAbilities(actor) {
   return _sortEmbedded(abilities, sortKey, ascending, sortMap);
 }
 
+/**
+ * Sorts equipment based on actor sheet settings.
+ * Uses the actor's equipment sort configuration to determine sort criteria.
+ * @param {Actor} actor - The actor whose equipment to sort.
+ * @returns {Array} Sorted array of equipment.
+ */
 export function _sortEquipment(actor) {
   const equipment = actor.itemTypes.equipment;
   const sortKey = actor.sheet.settings.equipmentSortOption;

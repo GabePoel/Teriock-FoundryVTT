@@ -5,9 +5,17 @@ import { documentOptions } from "../../../helpers/constants/document-options.mjs
 import { TeriockSheet } from "../../mixins/sheet-mixin.mjs";
 
 /**
+ * Base effect sheet for Teriock system active effects.
+ * Provides common functionality for all effect sheets including change management,
+ * context preparation, and effect state handling.
  * @extends {ActiveEffectConfig}
  */
 export default class TeriockBaseEffectSheet extends TeriockSheet(sheets.ActiveEffectConfig) {
+  /**
+   * Default options for the base effect sheet.
+   * @type {object}
+   * @static
+   */
   static DEFAULT_OPTIONS = {
     classes: ["effect"],
     window: {
@@ -20,7 +28,12 @@ export default class TeriockBaseEffectSheet extends TeriockSheet(sheets.ActiveEf
     },
   };
 
-  /** @override */
+  /**
+   * Prepares the context data for template rendering.
+   * Adds effect-specific data including disabled state, suppression, and enriched description.
+   * @returns {Promise<object>} Promise that resolves to the context object.
+   * @override
+   */
   async _prepareContext() {
     const context = await super._prepareContext();
     context.disabled = this.document.disabled;
@@ -34,7 +47,13 @@ export default class TeriockBaseEffectSheet extends TeriockSheet(sheets.ActiveEf
     return context;
   }
 
-  /** @override */
+  /**
+   * Handles the render event for the effect sheet.
+   * Sets up change entry event listeners for dynamic updates.
+   * @param {object} context - The render context.
+   * @param {object} options - Render options.
+   * @override
+   */
   _onRender(context, options) {
     super._onRender(context, options);
     this.element.querySelectorAll(".change-box-entry").forEach((entry) => {
@@ -62,6 +81,13 @@ export default class TeriockBaseEffectSheet extends TeriockSheet(sheets.ActiveEf
     });
   }
 
+  /**
+   * Adds a new change to an effect application.
+   * @param {Event} event - The event object.
+   * @param {HTMLElement} target - The target element.
+   * @returns {Promise<void>} Promise that resolves when change is added.
+   * @static
+   */
   static async _addChange(event, target) {
     const application = target.dataset.application;
     const updateString = `system.applies.${application}.changes`;
@@ -76,6 +102,13 @@ export default class TeriockBaseEffectSheet extends TeriockSheet(sheets.ActiveEf
     await this.document.update({ [updateString]: changes });
   }
 
+  /**
+   * Deletes a change from an effect application.
+   * @param {Event} event - The event object.
+   * @param {HTMLElement} target - The target element.
+   * @returns {Promise<void>} Promise that resolves when change is deleted.
+   * @static
+   */
   static async _deleteChange(event, target) {
     const index = parseInt(target.dataset.index, 10);
     const application = target.dataset.application;
@@ -87,6 +120,13 @@ export default class TeriockBaseEffectSheet extends TeriockSheet(sheets.ActiveEf
     }
   }
 
+  /**
+   * Toggles the disabled state of the current effect.
+   * @param {Event} event - The event object.
+   * @param {HTMLElement} target - The target element.
+   * @returns {Promise<void>} Promise that resolves when disabled state is toggled.
+   * @static
+   */
   static async _toggledDisabledThis(event, target) {
     await this.document.toggleDisabled();
   }

@@ -1,8 +1,12 @@
 const { TokenDocument } = foundry.documents;
 
+/**
+ * @extends {foundry.documents.TokenDocument}
+ */
 export default class TeriockToken extends TokenDocument {
   /**
-   * Ensure that vision is correctly set when the token is first created.
+   * Ensures that vision is correctly set when the token is first created.
+   * Configures vision modes and detection ranges based on the actor's senses.
    * @inheritdoc
    */
   prepareDerivedData() {
@@ -100,7 +104,8 @@ export default class TeriockToken extends TokenDocument {
   }
 
   /**
-   * Ensure that Teriock specific detection modes are added to the token.
+   * Ensures that Teriock-specific detection modes are added to the token.
+   * Sets up various detection modes for different types of perception.
    * @inheritdoc
    */
   _prepareDetectionModes() {

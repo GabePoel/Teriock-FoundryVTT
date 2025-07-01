@@ -8,47 +8,62 @@ import { ParentDocumentMixin } from "./mixins/parent-mixin.mjs";
  * @extends {foundry.documents.Item}
  */
 export default class TeriockItem extends ParentDocumentMixin(ChildDocumentMixin(foundry.documents.Item)) {
-  /** @override */
+  /**
+   * Rolls the item, delegating to the system's roll method.
+   * @override
+   * @param {object} options - Options for the roll.
+   * @returns {Promise<void>} Promise that resolves when the roll is complete.
+   */
   async roll(options) {
     await this.system.roll(options);
   }
 
-  /** @inheritdoc */
+  /**
+   * Gets the valid effects for this item.
+   * @inheritdoc
+   * @returns {ActiveEffect[]} Array of transferred effects.
+   */
   get validEffects() {
     return this.transferredEffects;
   }
 
   /**
-   * @returns {boolean}
+   * Checks if the item is disabled.
+   * @returns {boolean} True if the item is disabled, false otherwise.
    */
   get disabled() {
     return this.system.disabled;
   }
 
   /**
-   * @returns {Promise<void>}
+   * Disables the item by setting its disabled property to true.
+   * @returns {Promise<void>} Promise that resolves when the item is disabled.
    */
   async disable() {
     await this.update({ "system.disabled": true });
   }
 
   /**
-   * @returns {Promise<void>}
+   * Enables the item by setting its disabled property to false.
+   * @returns {Promise<void>} Promise that resolves when the item is enabled.
    */
   async enable() {
     await this.update({ "system.disabled": false });
   }
 
   /**
-   * @returns {Promise<void>}
+   * Toggles the disabled state of the item.
+   * @returns {Promise<void>} Promise that resolves when the disabled state is toggled.
    */
   async toggleDisabled() {
     await this.update({ "system.disabled": !this.system.disabled });
   }
 
   /**
-   * @param {string} pullType
-   * @returns {Promise<void>}
+   * Helper method for bulk wiki pulling operations.
+   * @param {string} pullType - The type of pull operation ("pages" or "categories").
+   * @returns {Promise<void>} Promise that resolves when the bulk pull is complete.
+   * @private
    */
   async _bulkWikiPullHelper(pullType) {
     const pullTypeName = pullType === "pages" ? "Ability" : "Category";
@@ -80,7 +95,9 @@ export default class TeriockItem extends ParentDocumentMixin(ChildDocumentMixin(
   }
 
   /**
-   * @returns {Promise<void>}
+   * Initiates a bulk wiki pull operation for supported item types.
+   * @returns {Promise<void>} Promise that resolves when the bulk pull dialog is complete.
+   * @private
    */
   async _bulkWikiPull() {
     if (["ability", "equipment", "rank", "power"].includes(this.type)) {

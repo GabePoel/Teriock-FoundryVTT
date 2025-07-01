@@ -2,17 +2,27 @@ const { fields } = foundry.data;
 import TeriockBaseEffectData from "../base-data/base-data.mjs";
 
 /**
+ * Effect-specific effect data model.
+ * Handles general effect functionality including various expiration types and child relationships.
  * @extends {TeriockBaseEffectData}
  */
 export default class TeriockEffectData extends TeriockBaseEffectData {
-  /** @inheritdoc */
+  /**
+   * Gets the metadata for the effect data model.
+   * @inheritdoc
+   * @returns {object} The metadata object with effect type information.
+   */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
       type: "effect",
     });
   }
 
-  /** @override */
+  /**
+   * Defines the schema for the effect data model.
+   * @override
+   * @returns {object} The schema definition for the effect data.
+   */
   static defineSchema() {
     const commonData = super.defineSchema();
     return {
@@ -54,41 +64,52 @@ export default class TeriockEffectData extends TeriockBaseEffectData {
   }
 
   /**
-   * @returns {boolean}
+   * Checks if the effect has condition-based expiration.
+   * @returns {boolean} True if the effect expires based on a condition, false otherwise.
    */
   get conditionExpiration() {
     return this.expirations.condition.value ? true : false;
   }
 
   /**
-   * @returns {boolean}
+   * Checks if the effect expires on movement.
+   * @returns {boolean} True if the effect expires on movement, false otherwise.
    */
   get movementExpiration() {
     return this.expirations.movement;
   }
 
   /**
-   * @returns {boolean}
+   * Checks if the effect expires at dawn.
+   * @returns {boolean} True if the effect expires at dawn, false otherwise.
    */
   get dawnExpiration() {
     return this.expirations.dawn;
   }
 
   /**
-   * @returns {boolean}
+   * Checks if the effect expires when its source is deleted or disabled.
+   * @returns {boolean} True if the effect expires when sustained, false otherwise.
    */
   get sustainedExpiration() {
     return this.expirations.sustained;
   }
 
   /**
-   * @returns {string}
+   * Gets the maneuver type for this effect.
+   * Effects are always passive maneuvers.
+   * @returns {string} The maneuver type ("passive").
    */
   get maneuver() {
     return "passive";
   }
 
-  /** @override */
+  /**
+   * Checks if the effect should expire based on various conditions.
+   * Considers base expiration, condition-based expiration, and sustained expiration.
+   * @override
+   * @returns {boolean} True if the effect should expire, false otherwise.
+   */
   shouldExpire() {
     let should = super.shouldExpire();
     if (this.conditionExpiration) {

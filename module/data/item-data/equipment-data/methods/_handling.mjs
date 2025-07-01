@@ -2,8 +2,9 @@
 // const { api } = foundry.applications;
 
 /**
- * @param {TeriockEquipmentData} equipmentData
- * @returns {Promise<void>}
+ * Shatters equipment, making it unusable.
+ * @param {TeriockEquipmentData} equipmentData - The equipment data to shatter.
+ * @returns {Promise<void>} Promise that resolves when the equipment is shattered.
  * @private
  */
 export async function _shatter(equipmentData) {
@@ -11,8 +12,9 @@ export async function _shatter(equipmentData) {
 }
 
 /**
- * @param {TeriockEquipmentData} equipmentData
- * @returns {Promise<void>}
+ * Repairs equipment, making it usable again.
+ * @param {TeriockEquipmentData} equipmentData - The equipment data to repair.
+ * @returns {Promise<void>} Promise that resolves when the equipment is repaired.
  * @private
  */
 export async function _repair(equipmentData) {
@@ -20,8 +22,10 @@ export async function _repair(equipmentData) {
 }
 
 /**
- * @param {TeriockEquipmentData} equipmentData
- * @returns {Promise<void>}
+ * Sets the shattered state of equipment.
+ * @param {TeriockEquipmentData} equipmentData - The equipment data to modify.
+ * @param {boolean} bool - Whether the equipment should be shattered.
+ * @returns {Promise<void>} Promise that resolves when the shattered state is set.
  * @private
  */
 export async function _setShattered(equipmentData, bool) {
@@ -33,8 +37,9 @@ export async function _setShattered(equipmentData, bool) {
 }
 
 /**
- * @param {TeriockEquipmentData} equipmentData
- * @returns {Promise<void>}
+ * Toggles the shattered state of equipment.
+ * @param {TeriockEquipmentData} equipmentData - The equipment data to toggle.
+ * @returns {Promise<void>} Promise that resolves when the shattered state is toggled.
  * @private
  */
 export async function _toggleShattered(equipmentData) {
@@ -42,8 +47,9 @@ export async function _toggleShattered(equipmentData) {
 }
 
 /**
- * @param {TeriockEquipmentData} equipmentData
- * @returns {Promise<void>}
+ * Dampens equipment, reducing its effectiveness.
+ * @param {TeriockEquipmentData} equipmentData - The equipment data to dampen.
+ * @returns {Promise<void>} Promise that resolves when the equipment is dampened.
  * @private
  */
 export async function _dampen(equipmentData) {
@@ -51,8 +57,9 @@ export async function _dampen(equipmentData) {
 }
 
 /**
- * @param {TeriockEquipmentData} equipmentData
- * @returns {Promise<void>}
+ * Removes dampening from equipment.
+ * @param {TeriockEquipmentData} equipmentData - The equipment data to undampen.
+ * @returns {Promise<void>} Promise that resolves when the equipment is undampened.
  * @private
  */
 export async function _undampen(equipmentData) {
@@ -60,8 +67,10 @@ export async function _undampen(equipmentData) {
 }
 
 /**
- * @param {TeriockEquipmentData} equipmentData
- * @returns {Promise<void>}
+ * Sets the dampened state of equipment.
+ * @param {TeriockEquipmentData} equipmentData - The equipment data to modify.
+ * @param {boolean} bool - Whether the equipment should be dampened.
+ * @returns {Promise<void>} Promise that resolves when the dampened state is set.
  * @private
  */
 export async function _setDampened(equipmentData, bool) {
@@ -73,8 +82,9 @@ export async function _setDampened(equipmentData, bool) {
 }
 
 /**
- * @param {TeriockEquipmentData} equipmentData
- * @returns {Promise<void>}
+ * Toggles the dampened state of equipment.
+ * @param {TeriockEquipmentData} equipmentData - The equipment data to toggle.
+ * @returns {Promise<void>} Promise that resolves when the dampened state is toggled.
  * @private
  */
 export async function _toggleDampened(equipmentData) {
@@ -82,8 +92,9 @@ export async function _toggleDampened(equipmentData) {
 }
 
 /**
- * @param {TeriockEquipmentData} equipmentData
- * @returns {Promise<void>}
+ * Unequips equipment from its current slot.
+ * @param {TeriockEquipmentData} equipmentData - The equipment data to unequip.
+ * @returns {Promise<void>} Promise that resolves when the equipment is unequipped.
  * @private
  */
 export async function _unequip(equipmentData) {
@@ -91,8 +102,10 @@ export async function _unequip(equipmentData) {
 }
 
 /**
- * @param {TeriockEquipmentData} equipmentData
- * @returns {Promise<void>}
+ * Equips equipment to an appropriate slot.
+ * Only equips if the equipment is not consumable or has sufficient quantity.
+ * @param {TeriockEquipmentData} equipmentData - The equipment data to equip.
+ * @returns {Promise<void>} Promise that resolves when the equipment is equipped.
  * @private
  */
 export async function _equip(equipmentData) {
@@ -102,8 +115,10 @@ export async function _equip(equipmentData) {
 }
 
 /**
- * @param {TeriockEquipmentData} equipmentData
- * @returns {Promise<void>}
+ * Sets the equipped state of equipment.
+ * @param {TeriockEquipmentData} equipmentData - The equipment data to modify.
+ * @param {boolean} bool - Whether the equipment should be equipped.
+ * @returns {Promise<void>} Promise that resolves when the equipped state is set.
  * @private
  */
 export async function _setEquipped(equipmentData, bool) {
@@ -115,8 +130,9 @@ export async function _setEquipped(equipmentData, bool) {
 }
 
 /**
- * @param {TeriockEquipmentData} equipmentData
- * @returns {Promise<void>}
+ * Toggles the equipped state of equipment.
+ * @param {TeriockEquipmentData} equipmentData - The equipment data to toggle.
+ * @returns {Promise<void>} Promise that resolves when the equipped state is toggled.
  * @private
  */
 export async function _toggleEquipped(equipmentData) {

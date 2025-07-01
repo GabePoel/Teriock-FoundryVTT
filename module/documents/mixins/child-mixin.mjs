@@ -24,6 +24,10 @@ import { buildMessage } from "../../helpers/messages-builder/message-builder.mjs
  */
 export const ChildDocumentMixin = (Base) =>
   class ChildDocumentMixin extends Base {
+    /**
+     * Checks if the document is fluent.
+     * @returns {boolean} True if the document is fluent, false otherwise.
+     */
     get isFluent() {
       let fluent = false;
       if (this.system.fluent) {
@@ -32,6 +36,10 @@ export const ChildDocumentMixin = (Base) =>
       return fluent;
     }
 
+    /**
+     * Checks if the document is proficient.
+     * @returns {boolean} True if the document is proficient, false otherwise.
+     */
     get isProficient() {
       let proficient = false;
       if (this.system.proficient) {
@@ -47,8 +55,9 @@ export const ChildDocumentMixin = (Base) =>
     }
 
     /**
-     * @param {string} incant
-     * @param {string[]} args
+     * Calls a hook with the document as the first parameter.
+     * @param {string} incant - The hook incantation to call.
+     * @param {string[]} args - Additional arguments to pass to the hook.
      */
     hookCall(incant, args = []) {
       incant = "ter." + incant + this.type.charAt(0).toUpperCase() + this.type.slice(1);
@@ -56,7 +65,8 @@ export const ChildDocumentMixin = (Base) =>
     }
 
     /**
-     * @returns {Promise<void>}
+     * Sends a chat message with the document's content.
+     * @returns {Promise<void>} Promise that resolves when the chat message is sent.
      */
     async chat() {
       let content = await this.buildMessage();
@@ -68,7 +78,8 @@ export const ChildDocumentMixin = (Base) =>
     }
 
     /**
-     * @returns {Promise<void>}
+     * Sends a chat message with the document's image.
+     * @returns {Promise<void>} Promise that resolves when the image message is sent.
      */
     async chatImage() {
       const img = this.img;
@@ -81,16 +92,18 @@ export const ChildDocumentMixin = (Base) =>
     }
 
     /**
-     * @param {object} options
-     * @returns {Promise<void>}
+     * Rolls the document, which by default sends a chat message.
+     * @param {object} options - Options for the roll.
+     * @returns {Promise<void>} Promise that resolves when the roll is complete.
      */
     async roll(options) {
       await this.chat();
     }
 
     /**
-     * @param {object} options
-     * @returns {Promise<void>}
+     * Uses the document, calling hooks and delegating to the system's use method.
+     * @param {object} options - Options for using the document.
+     * @returns {Promise<void>} Promise that resolves when the use action is complete.
      */
     async use(options) {
       this.hookCall("use");
@@ -98,7 +111,8 @@ export const ChildDocumentMixin = (Base) =>
     }
 
     /**
-     * @returns {Promise<ChildDocumentMixin>}
+     * Duplicates the document within its parent.
+     * @returns {Promise<ChildDocumentMixin>} Promise that resolves to the duplicated document.
      */
     async duplicate() {
       const copy = foundry.utils.duplicate(this);
@@ -108,7 +122,9 @@ export const ChildDocumentMixin = (Base) =>
     }
 
     /**
-     * @param {MessageOptions} options
+     * Builds a raw message string from the document's message parts.
+     * @param {MessageOptions} options - Options for building the message.
+     * @returns {string} The raw message HTML string.
      */
     buildRawMessage(options = {}) {
       let messageParts;
@@ -122,8 +138,9 @@ export const ChildDocumentMixin = (Base) =>
     }
 
     /**
-     * @param {MessageOptions} options
-     * @returns {Promise<string>}
+     * Builds an enriched message from the document's message parts.
+     * @param {MessageOptions} options - Options for building the message.
+     * @returns {Promise<string>} Promise that resolves to the enriched message HTML.
      */
     async buildMessage(options = {}) {
       const rawMessage = this.buildRawMessage(options);
@@ -131,7 +148,8 @@ export const ChildDocumentMixin = (Base) =>
     }
 
     /**
-     * @returns {TeriockActor}
+     * Gets the actor that owns this document.
+     * @returns {TeriockActor} The owning actor.
      */
     getActor() {
       if (this.documentName === "Actor") {
@@ -144,14 +162,16 @@ export const ChildDocumentMixin = (Base) =>
     }
 
     /**
-     * @returns {Promise<void>}
+     * Attempts to pull content from the wiki (default implementation shows error).
+     * @returns {Promise<void>} Promise that resolves when the wiki pull is complete.
      */
     async wikiPull() {
       ui.notifications.error(`There are no ${this.type} pages on the wiki.`);
     }
 
     /**
-     * @returns {Promise<void>}
+     * Opens the wiki for this document (default implementation calls wikiPull).
+     * @returns {Promise<void>} Promise that resolves when the wiki is opened.
      */
     async wikiOpen() {
       await this.wikiPull();

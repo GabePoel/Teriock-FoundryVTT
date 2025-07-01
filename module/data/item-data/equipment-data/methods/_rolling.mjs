@@ -2,18 +2,23 @@
 import TeriockHarmRoll from "../../../../documents/harm.mjs";
 
 /**
- * @param {TeriockEquipmentData} equipmentData
- * @param {object} options
- * @returns {Promise<void>}
+ * Initiates an equipment roll with the specified options.
+ * @param {TeriockEquipmentData} equipmentData - The equipment data to roll for.
+ * @param {object} options - Options for the equipment roll including twoHanded, bonusDamage, advantage, and secret.
+ * @returns {Promise<void>} Promise that resolves when the roll is complete.
+ * @private
  */
 export async function _roll(equipmentData, options) {
   await use(equipmentData, options);
 }
 
 /**
- * @param {TeriockEquipmentData} equipmentData
- * @param {object} options
- * @returns {Promise<void>}
+ * Performs the actual equipment roll, creating a harm roll with damage types and modifiers.
+ * Handles damage formula construction, damage types, and roll options.
+ * @param {TeriockEquipmentData} equipmentData - The equipment data to roll for.
+ * @param {object} options - Options for the equipment roll including twoHanded, bonusDamage, advantage, and secret.
+ * @returns {Promise<void>} Promise that resolves when the roll message is sent.
+ * @private
  */
 async function use(equipmentData, options) {
   let message = await equipmentData.parent.buildMessage();

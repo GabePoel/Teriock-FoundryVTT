@@ -1,5 +1,12 @@
+/** @import TeriockEffect from "@client/applications/sheets/item-sheet.mjs"; */
 import { makeIcon } from "../../../../helpers/utils.mjs";
 
+/**
+ * Creates a context menu for selecting tradecrafts within a fluency effect.
+ * Generates options for all tradecrafts within the current field.
+ * @param {TeriockEffect} fluency - The fluency effect to create the context menu for.
+ * @returns {Array} Array of context menu options for tradecraft selection.
+ */
 export function tradecraftContextMenu(fluency) {
   const iconStyle = CONFIG.TERIOCK.iconStyles.contextMenu;
   const options = [];
@@ -31,6 +38,12 @@ export function tradecraftContextMenu(fluency) {
   return options;
 }
 
+/**
+ * Creates a context menu for selecting fields within a fluency effect.
+ * Generates options for all available fields and sets the first tradecraft as default.
+ * @param {TeriockEffect} fluency - The fluency effect to create the context menu for.
+ * @returns {Array} Array of context menu options for field selection.
+ */
 export function fieldContextMenu(fluency) {
   const iconStyle = CONFIG.TERIOCK.iconStyles.contextMenu;
   const options = [];

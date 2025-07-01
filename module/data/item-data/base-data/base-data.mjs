@@ -5,10 +5,16 @@ const { TypeDataModel } = foundry.abstract;
 import { ChildDataMixin } from "../../mixins/child-mixin.mjs";
 
 /**
+ * Base item data model for all Teriock items.
+ * Provides common functionality for disabled state and update tracking.
  * @extends {TypeDataModel}
  */
 export default class TeriockBaseItemData extends ChildDataMixin(TypeDataModel) {
-  /** @override */
+  /**
+   * Defines the schema for the base item data model.
+   * @override
+   * @returns {object} The schema definition for the base item data.
+   */
   static defineSchema() {
     const commonData = super.defineSchema();
     return {

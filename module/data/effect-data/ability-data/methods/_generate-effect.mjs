@@ -4,9 +4,12 @@ import TeriockEffect from "../../../../documents/effect.mjs";
 import { parseTimeString } from "../../../../helpers/utils.mjs";
 
 /**
- * @param {TeriockAbilityData} abilityData
- * @param {TeriockActor} actor
- * @returns {Promise<TeriockEffect>}
+ * Generates an effect from ability data based on proficiency level and heightened amount.
+ * Creates an effect with appropriate changes, statuses, and duration based on the ability's applies data.
+ * @param {TeriockAbilityData} abilityData - The ability data to generate effect from.
+ * @param {TeriockActor} actor - The actor that owns the ability.
+ * @param {number} heightenAmount - The amount of heightening applied to the ability.
+ * @returns {Promise<TeriockEffect|false>} Promise that resolves to the generated effect data or false if no effect should be created.
  * @private
  */
 export async function _generateEffect(abilityData, actor, heightenAmount = 0) {
@@ -122,9 +125,11 @@ export async function _generateEffect(abilityData, actor, heightenAmount = 0) {
 }
 
 /**
- * @param {TeriockAbilityData} abilityData
- * @param {number} heightenAmount
- * @returns {Object}
+ * Generates takes data from ability data based on proficiency level and heightened amount.
+ * Creates rolls, hacks, checks, and status changes based on the ability's applies data.
+ * @param {TeriockAbilityData} abilityData - The ability data to generate takes from.
+ * @param {number} heightenAmount - The amount of heightening applied to the ability.
+ * @returns {Object} Object containing rolls, hacks, checks, startStatuses, and endStatuses.
  * @private
  */
 export function _generateTakes(abilityData, heightenAmount = 0) {

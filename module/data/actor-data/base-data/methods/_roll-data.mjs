@@ -1,8 +1,9 @@
 /** @import TeriockBaseActorData from "../base-data.mjs"; */
 
 /**
- * @param {TeriockBaseActorData} system
- * @returns {object}
+ * Gets roll data for an actor system, including basic stats, attack data, class ranks, and tradecrafts.
+ * @param {TeriockBaseActorData} system - The actor system to get roll data for.
+ * @returns {object} Object containing all roll data for the actor.
  * @private
  */
 export function _getRollData(system) {
@@ -15,9 +16,12 @@ export function _getRollData(system) {
 }
 
 /**
- * @param {TeriockBaseActorData} system
- * @param {object} data
+ * Adds basic actor data to the roll data object.
+ * Includes attributes, health, mana, and damage values.
+ * @param {TeriockBaseActorData} system - The actor system to get data from.
+ * @param {object} data - The roll data object to populate.
  * @returns {void}
+ * @private
  */
 function basicData(system, data) {
   const attr = system.attributes;
@@ -51,9 +55,12 @@ function basicData(system, data) {
 }
 
 /**
- * @param {TeriockBaseActorData} system
- * @param {object} data
+ * Adds attack-related data to the roll data object.
+ * Includes armor value, shield bonus, and attack penalty.
+ * @param {TeriockBaseActorData} system - The actor system to get data from.
+ * @param {object} data - The roll data object to populate.
  * @returns {void}
+ * @private
  */
 function attackData(system, data) {
   Object.assign(data, {
@@ -70,9 +77,12 @@ function attackData(system, data) {
 }
 
 /**
- * @param {TeriockBaseActorData} system
- * @param {object} data
+ * Adds class rank data to the roll data object.
+ * Counts the number of ranks in each class and archetype.
+ * @param {TeriockBaseActorData} system - The actor system to get data from.
+ * @param {object} data - The roll data object to populate.
  * @returns {void}
+ * @private
  */
 function classRanksData(system, data) {
   const actor = system.parent;
@@ -108,9 +118,12 @@ function classRanksData(system, data) {
 }
 
 /**
- * @param {TeriockBaseActorData} system
- * @param {object} data
- * @returns {void}
+ * Adds tradecraft data to the roll data object.
+ * Includes extra values for each tradecraft.
+ * @param {TeriockBaseActorData} system - The actor system to get data from.
+ * @param {object} data - The roll data object to populate.
+ * @returns {object} The updated roll data object.
+ * @private
  */
 function tradecraftsData(system, data) {
   for (const [key, val] of Object.entries(system.tradecrafts)) {

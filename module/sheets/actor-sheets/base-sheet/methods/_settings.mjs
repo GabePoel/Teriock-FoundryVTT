@@ -1,4 +1,13 @@
+/**
+ * Default settings for actor sheet functionality.
+ * Contains configuration for menus, filters, and sorting options for various document types.
+ * @type {object}
+ */
 export const _defaultSheetSettings = {
+  /**
+   * Menu visibility settings for different filter and option panels.
+   * @type {object}
+   */
   menus: {
     abilityFilters: false,
     abilityOptions: false,
@@ -12,6 +21,10 @@ export const _defaultSheetSettings = {
     powerOptions: false,
     effectOptions: false,
   },
+  /**
+   * Filter settings for abilities including type, cost, and property filters.
+   * @type {object}
+   */
   abilityFilters: {
     search: "",
     basic: 0,
@@ -36,6 +49,10 @@ export const _defaultSheetSettings = {
     element: null,
     effects: null,
   },
+  /**
+   * Filter settings for equipment including state, properties, and class filters.
+   * @type {object}
+   */
   equipmentFilters: {
     search: "",
     equipped: 0,
@@ -49,8 +66,12 @@ export const _defaultSheetSettings = {
     equipmentClasses: null,
     powerLevel: null,
   },
+  /** @type {string} */
   abilitySortOption: "name",
+  /** @type {boolean} */
   abilitySortAscending: true,
+  /** @type {string} */
   equipmentSortOption: "name",
+  /** @type {boolean} */
   equipmentSortAscending: true,
 };

@@ -1,5 +1,11 @@
 import { makeIcon } from "../../../../helpers/utils.mjs";
 
+/**
+ * Creates a context menu for selecting power levels within an equipment item.
+ * Generates options for all available power levels, excluding "unknown".
+ * @param {Item} item - The equipment item to create the context menu for.
+ * @returns {Array} Array of context menu options for power level selection.
+ */
 export function powerLevelContextMenu(item) {
   const iconStyle = CONFIG.TERIOCK.iconStyles.contextMenu;
   const options = [];
@@ -25,6 +31,12 @@ export function powerLevelContextMenu(item) {
   return options;
 }
 
+/**
+ * Creates a context menu for selecting fonts within an equipment item.
+ * Generates options for all available fonts with a "None" option at the beginning.
+ * @param {Item} item - The equipment item to create the context menu for.
+ * @returns {Array} Array of context menu options for font selection.
+ */
 export function fontContextMenu(item) {
   const iconStyle = CONFIG.TERIOCK.iconStyles.contextMenu;
   const options = [];

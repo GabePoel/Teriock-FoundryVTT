@@ -1,3 +1,10 @@
+/**
+ * Applies a binary filter to a value based on filter criteria.
+ * Handles boolean and numeric filter values with different logic.
+ * @param {boolean|number} filterVal - The filter value to apply.
+ * @param {boolean} actualVal - The actual value to filter.
+ * @returns {boolean} True if the value passes the filter, false otherwise.
+ */
 function binaryFilter(filterVal, actualVal) {
   let out = true;
   if (typeof filterVal === "boolean") {
@@ -8,6 +15,13 @@ function binaryFilter(filterVal, actualVal) {
   return out;
 }
 
+/**
+ * Filters documents based on their transferred effects.
+ * Checks if any of the document's effects match the filter criteria.
+ * @param {string|Array} filterVal - The filter value(s) to match against effect names.
+ * @param {Document} document - The document to filter.
+ * @returns {boolean} True if the document passes the filter, false otherwise.
+ */
 function propertyFilter(filterVal, document) {
   if (!filterVal || !document) return true;
   const effects = document.transferredEffects || [];
@@ -22,6 +36,14 @@ function propertyFilter(filterVal, document) {
   return false;
 }
 
+/**
+ * Filters abilities based on various criteria including type, costs, and properties.
+ * Applies multiple filters to narrow down the ability list.
+ * @param {Actor} actor - The actor whose abilities to filter.
+ * @param {Array} abilities - Array of abilities to filter.
+ * @param {object} filters - Object containing filter criteria.
+ * @returns {Array} Filtered array of abilities.
+ */
 export function _filterAbilities(actor, abilities, filters = {}) {
   if (!abilities || !Array.isArray(abilities) || abilities.length === 0) {
     return [];
@@ -57,6 +79,14 @@ export function _filterAbilities(actor, abilities, filters = {}) {
   return abilities;
 }
 
+/**
+ * Filters equipment based on various criteria including properties, state, and class.
+ * Applies multiple filters to narrow down the equipment list.
+ * @param {Actor} actor - The actor whose equipment to filter.
+ * @param {Array} equipment - Array of equipment to filter.
+ * @param {object} filters - Object containing filter criteria.
+ * @returns {Array} Filtered array of equipment.
+ */
 export function _filterEquipment(actor, equipment, filters = {}) {
   if (!equipment || !Array.isArray(equipment) || equipment.length === 0) {
     return [];

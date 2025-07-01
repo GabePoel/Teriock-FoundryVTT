@@ -2,9 +2,21 @@
 
 const { fields } = foundry.data;
 
+/**
+ * Mixin that provides child document functionality for embedded documents.
+ * Adds proficiency tracking, font customization, and message generation capabilities.
+ * @template {Function} Base - The base class constructor to extend.
+ * @param {Base} Base - The base class to mix in with.
+ * @returns {Base} The extended class with child document functionality.
+ */
 export const ChildDataMixin = (Base) =>
   class ChildDataMixin extends Base {
-    /** @override */
+    /**
+     * Defines the schema for child document data fields.
+     * Includes proficiency flags, font customization, and description fields.
+     * @returns {object} The schema definition for child document fields.
+     * @override
+     */
     static defineSchema() {
       return {
         proficient: new fields.BooleanField({
@@ -25,23 +37,29 @@ export const ChildDataMixin = (Base) =>
     }
 
     /**
-     * @param {object} options
-     * @returns {Promise<void>}
+     * Initiates a roll for the child document.
+     * Delegates to the parent document's chat functionality.
+     * @param {object} options - Options for the roll operation.
+     * @returns {Promise<void>} Promise that resolves when the roll is complete.
      */
     async roll(options) {
       await this.parent.chat(options);
     }
 
     /**
-     * @param {object} options
-     * @returns {Promise<void>}
+     * Uses the child document, which triggers a roll.
+     * Alias for the roll method to provide consistent interface.
+     * @param {object} options - Options for the use operation.
+     * @returns {Promise<void>} Promise that resolves when the use is complete.
      */
     async use(options) {
       await this.roll(options);
     }
 
     /**
-     * @returns {MessageParts}
+     * Gets the message parts for displaying the child document in chat.
+     * Includes image, name, and font information from the parent document.
+     * @returns {MessageParts} Object containing message display components.
      */
     get messageParts() {
       return {
@@ -54,7 +72,9 @@ export const ChildDataMixin = (Base) =>
     }
 
     /**
-     * @returns {MessageParts}
+     * Gets the secret message parts for displaying hidden child documents.
+     * Uses generic uncertainty image and type-based name for privacy.
+     * @returns {MessageParts} Object containing secret message display components.
      */
     get secretMessageParts() {
       return {

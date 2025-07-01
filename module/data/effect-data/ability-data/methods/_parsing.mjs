@@ -3,7 +3,12 @@ import { abilityOptions } from "../../../../helpers/constants/ability-options.mj
 import { cleanFeet } from "../../../../helpers/clean.mjs";
 import { createAbility } from "../../../../helpers/create-effects.mjs";
 
-// Cost value templates
+/**
+ * Cost value templates for different cost types.
+ * Provides standardized cost structures for variable, static, formula, and hack costs.
+ * @type {object}
+ * @private
+ */
 const COST_TEMPLATES = {
   variable: (variable) => ({ type: "variable", value: { variable, static: 0, formula: "" } }),
   static: (value) => ({ type: "static", value: { static: value, formula: "", variable: "" } }),
@@ -11,56 +16,45 @@ const COST_TEMPLATES = {
   hack: () => ({ type: "hack", value: { static: 0, formula: "", variable: "" } }),
 };
 
-// Default applies structure
-function defaultApplies() {
+/**
+ * Creates the default consequence structure for ability effects.
+ * Provides empty rolls, statuses, start/end statuses, hacks, checks, and duration.
+ * @returns {object} The default consequence structure.
+ * @private
+ */
+function defaultConsequence() {
   return {
-    base: {
-      rolls: {},
-      statuses: new Set(),
-      startStatuses: new Set(),
-      endStatuses: new Set(),
-      hacks: new Set(),
-      checks: new Set(),
-      duration: 0,
-      changes: [],
-    },
-    proficient: {
-      rolls: {},
-      statuses: new Set(),
-      startStatuses: new Set(),
-      endStatuses: new Set(),
-      hacks: new Set(),
-      checks: new Set(),
-      duration: 0,
-      changes: [],
-    },
-    fluent: {
-      rolls: {},
-      statuses: new Set(),
-      startStatuses: new Set(),
-      endStatuses: new Set(),
-      hacks: new Set(),
-      checks: new Set(),
-      duration: 0,
-      changes: [],
-    },
-    heightened: {
-      rolls: {},
-      statuses: new Set(),
-      startStatuses: new Set(),
-      endStatuses: new Set(),
-      hacks: new Set(),
-      checks: new Set(),
-      duration: 0,
-      changes: [],
-    },
+    rolls: {},
+    statuses: new Set(),
+    startStatuses: new Set(),
+    endStatuses: new Set(),
+    hacks: new Set(),
+    checks: new Set(),
+    duration: 0,
   };
 }
 
 /**
- * @param {TeriockAbilityData} abilityData
- * @param {string} rawHTML
- * @returns {Promise<{ changes: object[], system: Partial<TeriockAbilityData>, img: string }>}
+ * Creates the default applies structure for ability effects.
+ * Provides base, proficient, fluent, and heightened effect containers.
+ * @returns {object} The default applies structure with empty effect containers.
+ * @private
+ */
+function defaultApplies() {
+  return {
+    base: defaultConsequence(),
+    proficient: defaultConsequence(),
+    fluent: defaultConsequence(),
+    heightened: defaultConsequence(),
+  };
+}
+
+/**
+ * Parses raw HTML content for an ability, extracting properties and creating effects.
+ * Handles tag processing, cost calculation, component parsing, and sub-ability creation.
+ * @param {TeriockAbilityData} abilityData - The ability data to parse content for.
+ * @param {string} rawHTML - The raw HTML content to parse.
+ * @returns {Promise<{ changes: object[], system: Partial<TeriockAbilityData>, img: string }>} Promise that resolves to the parsed ability data.
  * @private
  */
 export async function _parse(abilityData, rawHTML) {
@@ -132,7 +126,11 @@ export async function _parse(abilityData, rawHTML) {
 }
 
 /**
- * Build tag tree from tag containers
+ * Builds a tag tree from tag containers in the document.
+ * Extracts and organizes tags from CSS classes for processing.
+ * @param {Document} doc - The parsed HTML document.
+ * @returns {object} Object containing organized tags by type.
+ * @private
  */
 function buildTagTree(doc) {
   const tagTree = {};
@@ -152,7 +150,13 @@ function buildTagTree(doc) {
 }
 
 /**
- * Helper to get bar text
+ * Helper function to get bar text content from ability bars.
+ * Optionally cleans and formats the text for display.
+ * @param {Document} doc - The parsed HTML document.
+ * @param {string} selector - The selector for the bar content.
+ * @param {boolean} clean - Whether to clean and format the text.
+ * @returns {string|null} The bar text content or null if not found.
+ * @private
  */
 function getBarText(doc, selector, clean = false) {
   const el = doc.querySelector(`.ability-bar-${selector} .ability-bar-content`);
@@ -172,14 +176,24 @@ function getBarText(doc, selector, clean = false) {
 }
 
 /**
- * Helper to get text content
+ * Helper function to get text content from elements.
+ * @param {Document} doc - The parsed HTML document.
+ * @param {string} selector - The CSS selector for the element.
+ * @returns {string|null} The text content or null if not found.
+ * @private
  */
 function getText(doc, selector) {
   return doc.querySelector(`.${selector}`)?.innerHTML || null;
 }
 
 /**
- * Process tags and build parameters
+ * Processes tags and builds ability parameters from the tag tree.
+ * Handles power sources, basic tag assignments, maneuver types, and improvements.
+ * @param {object} parameters - The ability parameters to populate.
+ * @param {object} tagTree - The tag tree extracted from the document.
+ * @param {Document} doc - The parsed HTML document.
+ * @param {Array} changes - Array to collect changes for improvements.
+ * @private
  */
 function processTags(parameters, tagTree, doc, changes) {
   // Power sources
@@ -289,7 +303,12 @@ function processTags(parameters, tagTree, doc, changes) {
 }
 
 /**
- * Process improvements
+ * Processes improvements from the document and adds them to parameters.
+ * Handles attribute improvements and feat save improvements.
+ * @param {object} parameters - The ability parameters to populate.
+ * @param {Document} doc - The parsed HTML document.
+ * @param {Array} changes - Array to collect changes for improvements.
+ * @private
  */
 function processImprovements(parameters, doc, changes) {
   // Attribute improvement
@@ -327,7 +346,12 @@ function processImprovements(parameters, doc, changes) {
 }
 
 /**
- * Process costs
+ * Processes costs from the tag tree and document.
+ * Handles MP, HP, and break costs using cost templates.
+ * @param {object} parameters - The ability parameters to populate.
+ * @param {object} tagTree - The tag tree extracted from the document.
+ * @param {Document} doc - The parsed HTML document.
+ * @private
  */
 function processCosts(parameters, tagTree, doc) {
   if (!tagTree.cost) return;
@@ -363,7 +387,12 @@ function processCosts(parameters, tagTree, doc) {
 }
 
 /**
- * Process components
+ * Processes components from the tag tree and document.
+ * Handles invoked, verbal, somatic, and material components.
+ * @param {object} parameters - The ability parameters to populate.
+ * @param {object} tagTree - The tag tree extracted from the document.
+ * @param {Document} doc - The parsed HTML document.
+ * @private
  */
 function processComponents(parameters, tagTree, doc) {
   if (!tagTree.component) return;
@@ -380,7 +409,12 @@ function processComponents(parameters, tagTree, doc) {
 }
 
 /**
- * Set remaining parameters
+ * Sets remaining parameters from the tag tree and document.
+ * Handles end conditions, requirements, effects, expansion range, triggers, and heightened effects.
+ * @param {object} parameters - The ability parameters to populate.
+ * @param {object} tagTree - The tag tree extracted from the document.
+ * @param {Document} doc - The parsed HTML document.
+ * @private
  */
 function setRemainingParameters(parameters, tagTree, doc) {
   parameters.endCondition = getBarText(doc, "end-condition");
@@ -392,7 +426,11 @@ function setRemainingParameters(parameters, tagTree, doc) {
 }
 
 /**
- * Extract dice from HTML content
+ * Extracts dice information from HTML content.
+ * Finds dice elements and extracts their type and roll formula.
+ * @param {string} html - The HTML content to extract dice from.
+ * @returns {object} Object containing dice types and their roll formulas.
+ * @private
  */
 function extractDiceFromHTML(html) {
   const tempDiv = document.createElement("div");
@@ -409,7 +447,11 @@ function extractDiceFromHTML(html) {
 }
 
 /**
- * Extract hacks from HTML content
+ * Extracts hack information from HTML content.
+ * Finds hack metadata elements and extracts their parts.
+ * @param {string} html - The HTML content to extract hacks from.
+ * @returns {Set} Set of hack parts found in the content.
+ * @private
  */
 function extractHacksFromHTML(html) {
   const tempDiv = document.createElement("div");
@@ -425,7 +467,11 @@ function extractHacksFromHTML(html) {
 }
 
 /**
- * Extract conditions from HTML content
+ * Extracts condition information from HTML content.
+ * Finds condition metadata elements and extracts their conditions.
+ * @param {string} html - The HTML content to extract conditions from.
+ * @returns {Set} Set of conditions found in the content.
+ * @private
  */
 function extractConditionsFromHTML(html) {
   const tempDiv = document.createElement("div");
@@ -441,7 +487,11 @@ function extractConditionsFromHTML(html) {
 }
 
 /**
- * Extract start conditions from HTML content
+ * Extracts start condition information from HTML content.
+ * Finds start-condition metadata elements and extracts their conditions.
+ * @param {string} html - The HTML content to extract start conditions from.
+ * @returns {Set} Set of start conditions found in the content.
+ * @private
  */
 function extractStartConditionsFromHTML(html) {
   const tempDiv = document.createElement("div");
@@ -457,7 +507,11 @@ function extractStartConditionsFromHTML(html) {
 }
 
 /**
- * Extract end conditions from HTML content
+ * Extracts end condition information from HTML content.
+ * Finds end-condition metadata elements and extracts their conditions.
+ * @param {string} html - The HTML content to extract end conditions from.
+ * @returns {Set} Set of end conditions found in the content.
+ * @private
  */
 function extractEndConditionsFromHTML(html) {
   const tempDiv = document.createElement("div");
@@ -472,6 +526,13 @@ function extractEndConditionsFromHTML(html) {
   return endConditions;
 }
 
+/**
+ * Extracts tradecraft check information from HTML content.
+ * Finds tradecraft-check metadata elements and extracts their tradecraft types.
+ * @param {string} html - The HTML content to extract tradecraft checks from.
+ * @returns {Set} Set of tradecraft checks found in the content.
+ * @private
+ */
 function extractTradecraftChecksFromHTML(html) {
   const tempDiv = document.createElement("div");
   tempDiv.innerHTML = html || "";
@@ -486,7 +547,11 @@ function extractTradecraftChecksFromHTML(html) {
 }
 
 /**
- * Extract changes from HTML content
+ * Extracts changes from HTML content.
+ * Finds change metadata elements and extracts their key, mode, value, and priority.
+ * @param {string} html - The HTML content to extract changes from.
+ * @returns {Array} Array of change objects with key, mode, value, and priority.
+ * @private
  */
 function extractChangesFromHTML(html) {
   console.log(html);
@@ -514,7 +579,10 @@ function extractChangesFromHTML(html) {
 }
 
 /**
- * Process dice and effect extraction
+ * Processes dice and effect extraction from ability parameters.
+ * Extracts dice, hacks, conditions, and changes from overviews and results.
+ * @param {object} parameters - The ability parameters to process.
+ * @private
  */
 function processDiceAndEffectExtraction(parameters) {
   // Initialize applies if needed
@@ -633,7 +701,11 @@ function processDiceAndEffectExtraction(parameters) {
 }
 
 /**
- * Select image based on parameters
+ * Selects the appropriate image for the ability based on its parameters.
+ * Chooses between spell, skill, class-specific, or default ability icons.
+ * @param {object} parameters - The ability parameters to determine the image from.
+ * @returns {string} The path to the selected image.
+ * @private
  */
 function selectImage(parameters) {
   let img = "systems/teriock/assets/ability.svg";
@@ -644,7 +716,12 @@ function selectImage(parameters) {
 }
 
 /**
- * Process sub-abilities
+ * Processes sub-abilities from the document.
+ * Creates sub-abilities and applies limitations or improvements as needed.
+ * @param {Array} subs - Array of sub-ability container elements.
+ * @param {TeriockAbilityData} abilityData - The parent ability data.
+ * @returns {Promise<void>} Promise that resolves when all sub-abilities are processed.
+ * @private
  */
 async function processSubAbilities(subs, abilityData) {
   for (const el of subs) {

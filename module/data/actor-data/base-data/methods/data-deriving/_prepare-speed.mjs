@@ -1,8 +1,11 @@
 /** @import TeriockBaseActorData from "../../base-data.mjs"; */
 
 /**
- * Ensure all speed adjustments are non-negative.
- * @param {TeriockBaseActorData} system
+ * Ensures all speed adjustments are non-negative and applies status-based modifiers.
+ * Applies slowed and immobilized status effects to speed adjustments.
+ * @param {TeriockBaseActorData} system - The actor's base data system object.
+ * @returns {void} Modifies the system object in place.
+ * @private
  */
 export function _prepareSpeed(system) {
   if (system.speedAdjustments && typeof system.speedAdjustments === "object") {

@@ -1,6 +1,11 @@
 import { chatImage } from "../../../../helpers/utils.mjs";
 import TeriockImageSheet from "../image-sheet.mjs";
 
+/**
+ * Context menu options for image elements.
+ * Provides options to open images in a dedicated sheet or share them in chat.
+ * @type {Array}
+ */
 export const imageContextMenuOptions = [
   {
     name: "Open Image",

@@ -2,8 +2,10 @@
 const { api, ux } = foundry.applications;
 
 /**
- * @param {TeriockEquipmentData} equipmentData
- * @returns {Promise<void>}
+ * Reads magic on equipment to reveal its power level.
+ * Requires GM approval and updates the equipment with reference power level information.
+ * @param {TeriockEquipmentData} equipmentData - The equipment data to read magic on.
+ * @returns {Promise<void>} Promise that resolves when the magic reading is complete.
  * @private
  */
 export async function _readMagic(equipmentData) {
@@ -38,8 +40,10 @@ export async function _readMagic(equipmentData) {
 }
 
 /**
- * @param {TeriockEquipmentData} equipmentData
- * @returns {Promise<void>}
+ * Identifies equipment, revealing all its properties and effects.
+ * Requires GM approval and copies all data from the reference equipment.
+ * @param {TeriockEquipmentData} equipmentData - The equipment data to identify.
+ * @returns {Promise<void>} Promise that resolves when the identification is complete.
  * @private
  */
 export async function _identify(equipmentData) {
@@ -83,8 +87,10 @@ export async function _identify(equipmentData) {
 }
 
 /**
- * @param {TeriockEquipmentData} equipmentData
- * @returns {Promise<void>}
+ * Removes identification from equipment, making it unidentified again.
+ * Creates a copy with limited properties and removes most effects.
+ * @param {TeriockEquipmentData} equipmentData - The equipment data to unidentify.
+ * @returns {Promise<void>} Promise that resolves when the unidentification is complete.
  * @private
  */
 export async function _unidentify(equipmentData) {
@@ -108,8 +114,6 @@ export async function _unidentify(equipmentData) {
       "system.identified": false,
       "system.flaws": "",
       "system.notes": "",
-      "system.fullTier": "",
-      "system.manaStoring": "",
       "system.font": "",
       "system.equipped": false,
     });

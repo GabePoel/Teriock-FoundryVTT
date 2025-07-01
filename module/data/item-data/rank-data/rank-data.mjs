@@ -6,16 +6,26 @@ import { WikiDataMixin } from "../../mixins/wiki-mixin.mjs";
 import TeriockBaseItemData from "../base-data/base-data.mjs";
 
 /**
+ * Rank-specific item data model.
+ * Handles rank functionality including class progression, hit/mana dice, and wiki integration.
  * @extends {TeriockBaseItemData}
  */
 export default class TeriockRankData extends WikiDataMixin(TeriockBaseItemData) {
-  /** @inheritdoc */
+  /**
+   * Gets the metadata for the rank data model.
+   * @inheritdoc
+   * @returns {object} The metadata object with rank type information.
+   */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
       type: "rank",
     });
   }
 
+  /**
+   * Defines the schema for the rank data model.
+   * @returns {object} The schema definition for the rank data.
+   */
   static defineSchema() {
     const commonData = super.defineSchema();
     return {
@@ -103,25 +113,47 @@ export default class TeriockRankData extends WikiDataMixin(TeriockBaseItemData) 
     };
   }
 
-  /** @override */
+  /**
+   * Gets the wiki page URL for the rank.
+   * @override
+   * @returns {string} The wiki page URL for the class.
+   */
   get wikiPage() {
     return `Class:${CONFIG.TERIOCK.rankOptions[this.archetype].classes[this.className].name}`;
   }
 
-  /** @override */
+  /**
+   * Parses raw HTML content for the rank.
+   * @override
+   * @param {string} rawHTML - The raw HTML content to parse.
+   * @returns {Promise<string>} Promise that resolves to the parsed HTML content.
+   */
   async parse(rawHTML) {
     return await _parse(this.parent, rawHTML);
   }
 
-  /** @override */
+  /**
+   * Gets the message parts for the rank.
+   * Combines base message parts with rank-specific message parts.
+   * @override
+   * @returns {object} Object containing message parts for the rank.
+   */
   get messageParts() {
     return { ...super.messageParts, ..._messageParts(this.parent) };
   }
 
+  /**
+   * Rolls the hit die for the rank.
+   * @returns {Promise<object>} Promise that resolves to the hit die roll result.
+   */
   async rollHitDie() {
     return await _rollHitDie(this.parent);
   }
 
+  /**
+   * Rolls the mana die for the rank.
+   * @returns {Promise<object>} Promise that resolves to the mana die roll result.
+   */
   async rollManaDie() {
     return await _rollManaDie(this.parent);
   }

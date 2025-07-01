@@ -1,16 +1,38 @@
 import { makeIcon } from "../../../../helpers/utils.mjs";
 
+/**
+ * Capitalizes the first character of a string.
+ * @param {string} str - The string to capitalize.
+ * @returns {string} The capitalized string.
+ */
 function capitalize(str) {
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
+/**
+ * Removes attribute save changes from a changes array.
+ * Filters out changes that match attribute save patterns.
+ * @param {Array} changes - Array of changes to filter.
+ * @returns {Array} Filtered array without attribute save changes.
+ */
 function removeAttributeSaveChanges(changes) {
   return changes.filter(
     (change) => !/^system\.attributes\.(int|mov|per|snk|str|unp)\.save(Proficient|Fluent)$/.test(change.key),
   );
 }
 
+/**
+ * Creates context menus for ability configuration.
+ * Provides comprehensive menu options for all ability properties and settings.
+ * @param {ActiveEffect} ability - The ability to create context menus for.
+ * @returns {object} Object containing all context menu configurations.
+ */
 export function contextMenus(ability) {
+  /**
+   * Fetches configuration values from CONFIG.TERIOCK.abilityOptions.
+   * @param {string} keyChain - Dot-separated key chain to traverse.
+   * @returns {*} The configuration value at the specified path.
+   */
   function fetch(keyChain) {
     let keys = CONFIG.TERIOCK.abilityOptions;
     const keysArray = keyChain.split(".");
@@ -20,6 +42,13 @@ export function contextMenus(ability) {
     return keys;
   }
 
+  /**
+   * Creates a quick menu from configuration options.
+   * @param {string} keyChain - The configuration key chain to use.
+   * @param {string} updateKey - The system key to update when an option is selected.
+   * @param {boolean|null} nullOption - Whether to include a "None" option.
+   * @returns {Array} Array of menu options.
+   */
   function quickMenu(keyChain, updateKey, nullOption = null) {
     const keys = fetch(keyChain);
     const out = Object.entries(keys).map(([key, value]) => ({

@@ -3,9 +3,16 @@ import { documentOptions } from "../../../helpers/constants/document-options.mjs
 import TeriockBaseActorSheet from "../base-sheet/base-sheet.mjs";
 
 /**
+ * Character sheet for Teriock system characters.
+ * Extends the base actor sheet with character-specific functionality and Handlebars template support.
  * @extends TeriockBaseActorSheet
  */
 export default class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(TeriockBaseActorSheet) {
+  /**
+   * Default options for the character sheet.
+   * @type {object}
+   * @static
+   */
   static DEFAULT_OPTIONS = {
     classes: ["character"],
     form: {
@@ -17,6 +24,11 @@ export default class TeriockCharacterSheet extends api.HandlebarsApplicationMixi
     },
   };
 
+  /**
+   * Template parts configuration for the character sheet.
+   * @type {object}
+   * @static
+   */
   static PARTS = {
     all: {
       template: "systems/teriock/templates/sheets/character-template/character-template.hbs",

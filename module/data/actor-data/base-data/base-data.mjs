@@ -12,15 +12,26 @@ import { _prepareDerivedData } from "./methods/data-deriving/_data-deriving.mjs"
 import { _rollCondition } from "./methods/rolling/_roll-condition.mjs";
 
 /**
+ * Base actor data model for the Teriock system.
+ * Handles all core actor functionality including damage, healing, rolling, and data management.
  * @extends {TypeDataModel}
  */
 export default class TeriockBaseActorData extends TypeDataModel {
-  /** @override */
+  /**
+   * Defines the schema for the base actor data model.
+   * @override
+   * @returns {object} The schema definition for the actor data.
+   */
   static defineSchema() {
     return _defineSchema();
   }
 
-  /** @override */
+  /**
+   * Migrates actor data to the current schema version.
+   * @override
+   * @param {object} data - The data to migrate.
+   * @returns {object} The migrated data.
+   */
   static migrateData(data) {
     const start = performance.now();
     data = _migrateData(data);
@@ -30,7 +41,10 @@ export default class TeriockBaseActorData extends TypeDataModel {
     return result;
   }
 
-  /** @override */
+  /**
+   * Prepares derived data for the actor, calculating stats, speeds, and other derived values.
+   * @override
+   */
   prepareDerivedData() {
     const start = performance.now();
     _prepareDerivedData(this);
@@ -39,133 +53,151 @@ export default class TeriockBaseActorData extends TypeDataModel {
   }
 
   /**
-   * @param {number} amount
-   * @returns {Promise<void>}
+   * Applies damage to the actor's hit points.
+   * @param {number} amount - The amount of damage to apply.
+   * @returns {Promise<void>} Promise that resolves when damage is applied.
    */
   async takeDamage(amount) {
     await numericals._takeDamage(this, amount);
   }
 
   /**
-   * @param {number} amount
-   * @returns {Promise<void>}
+   * Applies drain to the actor's mana points.
+   * @param {number} amount - The amount of drain to apply.
+   * @returns {Promise<void>} Promise that resolves when drain is applied.
    */
   async takeDrain(amount) {
     await numericals._takeDrain(this, amount);
   }
 
   /**
-   * @param {number} amount
-   * @returns {Promise<void>}
+   * Applies wither to the actor's hit points.
+   * @param {number} amount - The amount of wither to apply.
+   * @returns {Promise<void>} Promise that resolves when wither is applied.
    */
   async takeWither(amount) {
     await numericals._takeWither(this, amount);
   }
 
   /**
-   * @param {number} amount
-   * @returns {Promise<void>}
+   * Applies healing to the actor's hit points.
+   * @param {number} amount - The amount of healing to apply.
+   * @returns {Promise<void>} Promise that resolves when healing is applied.
    */
   async takeHeal(amount) {
     await numericals._takeHeal(this, amount);
   }
 
   /**
-   * @param {number} amount
-   * @returns {Promise<void>}
+   * Applies revitalization to the actor's mana points.
+   * @param {number} amount - The amount of revitalization to apply.
+   * @returns {Promise<void>} Promise that resolves when revitalization is applied.
    */
   async takeRevitalize(amount) {
     await numericals._takeRevitalize(this, amount);
   }
 
   /**
-   * @param {number} amount
-   * @returns {Promise<void>}
+   * Sets the actor's temporary hit points to a specific amount.
+   * @param {number} amount - The amount to set temporary hit points to.
+   * @returns {Promise<void>} Promise that resolves when temporary hit points are set.
    */
   async takeSetTempHp(amount) {
     await numericals._takeSetTempHp(this, amount);
   }
 
   /**
-   * @param {number} amount
-   * @returns {Promise<void>}
+   * Sets the actor's temporary mana points to a specific amount.
+   * @param {number} amount - The amount to set temporary mana points to.
+   * @returns {Promise<void>} Promise that resolves when temporary mana points are set.
    */
   async takeSetTempMp(amount) {
     await numericals._takeSetTempMp(this, amount);
   }
 
   /**
-   * @param {number} amount
-   * @returns {Promise<void>}
+   * Gains temporary hit points for the actor.
+   * @param {number} amount - The amount of temporary hit points to gain.
+   * @returns {Promise<void>} Promise that resolves when temporary hit points are gained.
    */
   async takeGainTempHp(amount) {
     await numericals._takeGainTempHp(this, amount);
   }
 
   /**
-   * @param {number} amount
-   * @returns {Promise<void>}
+   * Gains temporary mana points for the actor.
+   * @param {number} amount - The amount of temporary mana points to gain.
+   * @returns {Promise<void>} Promise that resolves when temporary mana points are gained.
    */
   async takeGainTempMp(amount) {
     await numericals._takeGainTempMp(this, amount);
   }
 
   /**
-   * @param {number} amount
-   * @returns {Promise<void>}
+   * Applies sleep to the actor.
+   * @param {number} amount - The amount of sleep to apply.
+   * @returns {Promise<void>} Promise that resolves when sleep is applied.
    */
   async takeSleep(amount) {
     await numericals._takeSleep(this, amount);
   }
 
   /**
-   * @param {number} amount
-   * @returns {Promise<void>}
+   * Applies kill effect to the actor.
+   * @param {number} amount - The amount of kill effect to apply.
+   * @returns {Promise<void>} Promise that resolves when kill effect is applied.
    */
   async takeKill(amount) {
     await numericals._takeKill(this, amount);
   }
 
   /**
-   * @param {string} part
-   * @returns {Promise<void>}
+   * Applies hack effect to a specific part of the actor.
+   * @param {string} part - The part to hack.
+   * @returns {Promise<void>} Promise that resolves when hack is applied.
    */
   async takeHack(part) {
     await hacks._takeHack(this, part);
   }
 
   /**
-   * @param {string} part
-   * @returns {Promise<void>}
+   * Removes hack effect from a specific part of the actor.
+   * @param {string} part - The part to unhack.
+   * @returns {Promise<void>} Promise that resolves when unhack is applied.
    */
   async takeUnhack(part) {
     await hacks._takeUnhack(this, part);
   }
 
   /**
-   * @returns {Promise<void>}
+   * Awakens the actor from sleep.
+   * @returns {Promise<void>} Promise that resolves when the actor is awakened.
    */
   async takeAwaken() {
     await oneoffs._takeAwaken(this);
   }
 
   /**
-   * @returns {Promise<void>}
+   * Revives the actor from death.
+   * @returns {Promise<void>} Promise that resolves when the actor is revived.
    */
   async takeRevive() {
     await oneoffs._takeRevive(this);
   }
 
   /**
-   * @param {ConditionRollOptions} condition
-   * @returns {Promise<void>}
+   * Rolls a condition check for the actor.
+   * @param {string} condition - The condition to roll for.
+   * @param {ConditionRollOptions} options - Options for the condition roll.
+   * @returns {Promise<void>} Promise that resolves when the condition roll is complete.
    */
   async rollCondition(condition, options) {
     await _rollCondition(this, condition, options);
   }
 
   /**
-   * @returns {Promise<void>}
+   * Performs post-update operations for the actor.
+   * @returns {Promise<void>} Promise that resolves when post-update is complete.
    */
   async postUpdate() {
     const start = performance.now();
@@ -175,37 +207,46 @@ export default class TeriockBaseActorData extends TypeDataModel {
   }
 
   /**
-   * @param {string} attribute
-   * @param {CommonRollOptions} options
+   * Rolls a feat save for the specified attribute.
+   * @param {string} attribute - The attribute to roll a feat save for.
+   * @param {CommonRollOptions} options - Options for the roll.
+   * @returns {void}
    */
   rollFeatSave(attribute, options = {}) {
     rollGeneric._rollFeatSave(this, attribute, options);
   }
 
   /**
-   * @param {CommonRollOptions} options
+   * Rolls a resistance check.
+   * @param {CommonRollOptions} options - Options for the roll.
+   * @returns {void}
    */
   rollResistance(options = {}) {
     rollGeneric._rollResistance(this, options);
   }
 
   /**
-   * @param {CommonRollOptions} options
+   * Rolls an immunity check.
+   * @param {CommonRollOptions} options - Options for the roll.
+   * @returns {void}
    */
   rollImmunity(options = {}) {
     rollGeneric._rollImmunity(this, options);
   }
 
   /**
-   * @param {string} tradecraft
-   * @param {CommonRollOptions} options
+   * Rolls a tradecraft check.
+   * @param {string} tradecraft - The tradecraft to roll for.
+   * @param {CommonRollOptions} options - Options for the roll.
+   * @returns {void}
    */
   rollTradecraft(tradecraft, options = {}) {
     rollGeneric._rollTradecraft(this, tradecraft, options);
   }
 
   /**
-   * @returns {object}
+   * Gets roll data for this actor, including all relevant stats and modifiers.
+   * @returns {object} The roll data object containing actor stats and modifiers.
    */
   getRollData() {
     return _getRollData(this);

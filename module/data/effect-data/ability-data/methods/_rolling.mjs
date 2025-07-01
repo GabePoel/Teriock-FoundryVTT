@@ -6,7 +6,12 @@ import { evaluateAsync, getRollIcon } from "../../../../helpers/utils.mjs";
 import TeriockRoll from "../../../../documents/roll.mjs";
 import { buildMessage } from "../../../../helpers/messages-builder/message-builder.mjs";
 
-// Button configurations for different roll types
+/**
+ * Button configurations for different roll types.
+ * Defines labels, icons, and actions for various ability roll buttons.
+ * @type {object}
+ * @private
+ */
 const BUTTON_CONFIGS = {
   feat: { label: "Roll SAVE Save", icon: "fas fa-dice-d20", action: "rollFeatSave" },
   effect: { label: "Apply Effect", icon: "fas fa-disease", action: "applyEffect" },
@@ -39,6 +44,13 @@ const BUTTON_CONFIGS = {
   endStatus: { icon: "fas fa-xmark", action: "removeStatus" },
 };
 
+/**
+ * Extracts token information from a target.
+ * Gets name, actor, and image from the target's token or actor data.
+ * @param {object} target - The target to extract token information from.
+ * @returns {object} Object containing token name, actor, and image.
+ * @private
+ */
 function tokenFromTarget(target) {
   const actor = target.actor;
   const img =
@@ -56,9 +68,11 @@ function tokenFromTarget(target) {
 }
 
 /**
- * @param {TeriockAbilityData} abilityData
- * @param {CommonRollOptions} options
- * @returns {Promise<void>}
+ * Initiates an ability roll with the specified options.
+ * Handles cost calculation, resource spending, and roll generation based on interaction type.
+ * @param {TeriockAbilityData} abilityData - The ability data to roll for.
+ * @param {CommonRollOptions} options - Options for the ability roll including advantage/disadvantage.
+ * @returns {Promise<void>} Promise that resolves when the roll is complete.
  * @private
  */
 export async function _roll(abilityData, options) {
@@ -140,7 +154,12 @@ export async function _roll(abilityData, options) {
 }
 
 /**
- * Build buttons for the roll
+ * Builds buttons for the ability roll based on the ability's effects and takes.
+ * Creates buttons for feat saves, effects, resistance, and various take actions.
+ * @param {TeriockAbilityData} abilityData - The ability data to build buttons for.
+ * @param {object} useData - The use data containing costs and modifiers.
+ * @returns {Promise<Array>} Promise that resolves to an array of button configurations.
+ * @private
  */
 async function buildButtons(abilityData, useData) {
   const buttons = [];
@@ -231,7 +250,11 @@ async function buildButtons(abilityData, useData) {
 }
 
 /**
- * Get targets, handling self-targeting logic
+ * Gets targets for the ability, handling self-targeting logic.
+ * Returns array of targets or creates self-target if ability targets self.
+ * @param {TeriockAbilityData} abilityData - The ability data to get targets for.
+ * @returns {Array} Array of target objects.
+ * @private
  */
 function getTargets(abilityData) {
   let targets = Array.from(game.user.targets);
@@ -261,7 +284,18 @@ function getTargets(abilityData) {
 }
 
 /**
- * Generate rolls for multiple targets
+ * Generates rolls for multiple targets or single roll if no targets.
+ * Handles roll generation for different interaction types.
+ * @param {TeriockAbilityData} abilityData - The ability data to generate rolls for.
+ * @param {object} useData - The use data containing costs and modifiers.
+ * @param {CommonRollOptions} options - Options for the roll.
+ * @param {Array} targets - Array of targets for the roll.
+ * @param {string} message - The message to include with the roll.
+ * @param {Array} buttons - Array of buttons for the roll.
+ * @param {Function} rollGenerator - Function to generate individual rolls.
+ * @param {boolean} noDice - Whether to generate rolls without dice.
+ * @returns {Promise<Array>} Promise that resolves to an array of rolls.
+ * @private
  */
 async function generateRolls(abilityData, useData, options, targets, message, buttons, rollGenerator, noDice = false) {
   const rolls = [];
@@ -290,10 +324,13 @@ async function generateRolls(abilityData, useData, options, targets, message, bu
 }
 
 /**
- * @param {TeriockAbilityData} abilityData
- * @param {boolean} advantage
- * @param {boolean} disadvantage
- * @returns {Promise<object>}
+ * Stages the use of an ability, calculating costs and handling dialogs.
+ * Prepares use data including costs, modifiers, and roll formula.
+ * @param {TeriockAbilityData} abilityData - The ability data to stage use for.
+ * @param {boolean} advantage - Whether the roll has advantage.
+ * @param {boolean} disadvantage - Whether the roll has disadvantage.
+ * @returns {Promise<object>} Promise that resolves to the use data object.
+ * @private
  */
 async function stageUse(abilityData, advantage, disadvantage) {
   const useData = {
@@ -324,7 +361,12 @@ async function stageUse(abilityData, advantage, disadvantage) {
 }
 
 /**
- * Calculate cost based on type
+ * Calculates cost based on cost configuration type.
+ * Handles static, formula, and variable cost types.
+ * @param {object} costConfig - The cost configuration to calculate.
+ * @param {object} rollData - The roll data for formula evaluation.
+ * @returns {Promise<number>} Promise that resolves to the calculated cost.
+ * @private
  */
 async function calculateCost(costConfig, rollData) {
   if (!costConfig) return 0;
@@ -340,7 +382,12 @@ async function calculateCost(costConfig, rollData) {
 }
 
 /**
- * Build initial roll formula
+ * Builds the initial roll formula based on interaction type and advantage/disadvantage.
+ * @param {TeriockAbilityData} abilityData - The ability data to build formula for.
+ * @param {boolean} advantage - Whether the roll has advantage.
+ * @param {boolean} disadvantage - Whether the roll has disadvantage.
+ * @returns {string} The initial roll formula.
+ * @private
  */
 function buildInitialFormula(abilityData, advantage, disadvantage) {
   if (abilityData.interaction === "attack") {
@@ -353,7 +400,12 @@ function buildInitialFormula(abilityData, advantage, disadvantage) {
 }
 
 /**
- * Handle dialogs for variable costs and heightened
+ * Handles dialogs for variable costs and heightened effects.
+ * Prompts user for variable MP/HP costs and heightened amounts.
+ * @param {TeriockAbilityData} abilityData - The ability data to handle dialogs for.
+ * @param {object} useData - The use data to update with dialog results.
+ * @returns {Promise<void>} Promise that resolves when dialogs are handled.
+ * @private
  */
 async function handleDialogs(abilityData, useData) {
   const dialogs = [];
@@ -406,7 +458,13 @@ async function handleDialogs(abilityData, useData) {
 }
 
 /**
- * Create dialog fieldset
+ * Creates a dialog fieldset for user input.
+ * @param {string} legend - The legend text for the fieldset.
+ * @param {string} description - The description text for the field.
+ * @param {string} name - The name attribute for the input field.
+ * @param {number} max - The maximum value for the number input.
+ * @returns {string} HTML string for the dialog fieldset.
+ * @private
  */
 function createDialogFieldset(legend, description, name, max) {
   return `<fieldset><legend>${legend}</legend>
@@ -416,10 +474,12 @@ function createDialogFieldset(legend, description, name, max) {
 }
 
 /**
- * @param {TeriockAbilityData} abilityData
- * @param {object} useData
- * @param {CommonRollOptions} options
- * @returns {Promise<TeriockRoll>}
+ * Generates an attack roll for an ability.
+ * Handles attack formula construction, piercing, and target information.
+ * @param {TeriockAbilityData} abilityData - The ability data to generate attack roll for.
+ * @param {object} useData - The use data containing costs and modifiers.
+ * @param {CommonRollOptions} options - Options for the attack roll.
+ * @returns {Promise<TeriockRoll>} Promise that resolves to the attack roll.
  * @private
  */
 export async function _generateAttackRoll(abilityData, useData, options = {}) {
@@ -441,7 +501,13 @@ export async function _generateAttackRoll(abilityData, useData, options = {}) {
 }
 
 /**
- * Build attack roll formula
+ * Builds the attack roll formula based on ability type and effects.
+ * @param {TeriockAbilityData} abilityData - The ability data to build formula for.
+ * @param {boolean} advantage - Whether the roll has advantage.
+ * @param {boolean} disadvantage - Whether the roll has disadvantage.
+ * @param {object} useData - The use data containing modifiers.
+ * @returns {string} The attack roll formula.
+ * @private
  */
 function buildAttackFormula(abilityData, advantage, disadvantage, useData) {
   let formula = "";
@@ -469,7 +535,12 @@ function buildAttackFormula(abilityData, advantage, disadvantage, useData) {
 }
 
 /**
- * Get piercing information
+ * Gets piercing information for the ability.
+ * Determines if the ability has piercing properties and updates roll data accordingly.
+ * @param {TeriockAbilityData} abilityData - The ability data to get piercing info for.
+ * @param {object} rollData - The roll data to update with piercing information.
+ * @returns {object} Object containing dice class, tooltip, and unblockable status.
+ * @private
  */
 function getPiercingInfo(abilityData, rollData) {
   let diceClass,
@@ -502,7 +573,16 @@ function getPiercingInfo(abilityData, rollData) {
 }
 
 /**
- * Build roll context
+ * Builds the roll context for the ability roll.
+ * Includes target information, elder sorcery data, and resistance effects.
+ * @param {TeriockAbilityData} abilityData - The ability data to build context for.
+ * @param {object} target - The target for the roll.
+ * @param {Array} buttons - Array of buttons for the roll.
+ * @param {string} diceClass - The CSS class for the dice.
+ * @param {string} diceTooltip - The tooltip for the dice.
+ * @param {boolean} unblockable - Whether the roll is unblockable.
+ * @returns {object} The roll context object.
+ * @private
  */
 function buildRollContext(abilityData, target, buttons, diceClass, diceTooltip, unblockable) {
   const context = { diceClass, diceTooltip, buttons };
@@ -541,10 +621,12 @@ function buildRollContext(abilityData, target, buttons, diceClass, diceTooltip, 
 }
 
 /**
- * @param {TeriockAbilityData} abilityData
- * @param {object} useData
- * @param {CommonRollOptions} options
- * @returns {Promise<TeriockRoll>}
+ * Generates a feat roll for an ability.
+ * Creates a feat roll with proficiency modifiers and target information.
+ * @param {TeriockAbilityData} abilityData - The ability data to generate feat roll for.
+ * @param {object} useData - The use data containing costs and modifiers.
+ * @param {CommonRollOptions} options - Options for the feat roll.
+ * @returns {Promise<TeriockRoll>} Promise that resolves to the feat roll.
  * @private
  */
 export async function _generateFeatRoll(abilityData, useData, options = {}) {
@@ -585,7 +667,11 @@ export async function _generateFeatRoll(abilityData, useData, options = {}) {
 }
 
 /**
- * Manually constructs a summary bar box DOM element for heightened/variable costs
+ * Manually constructs a summary bar box DOM element for heightened/variable costs.
+ * Creates a visual summary of costs and modifiers for the ability roll.
+ * @param {object} params - Parameters containing heightened, mpSpent, hpSpent, and shouldBottomBar.
+ * @returns {HTMLElement|null} The summary bar box element or null if no summary needed.
+ * @private
  */
 function createSummaryBarBox({ heightened, mpSpent, hpSpent, shouldBottomBar }) {
   const labels = [];

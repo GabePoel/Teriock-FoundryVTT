@@ -1,5 +1,12 @@
+/** @import TeriockItem from "@client/applications/sheets/item-sheet.mjs"; */
 import { makeIcon } from "../../../../helpers/utils.mjs";
 
+/**
+ * Creates a context menu for selecting archetypes within a rank item.
+ * Generates options for all available archetypes with appropriate hit and mana dice.
+ * @param {TeriockItem} rank - The rank item to create the context menu for.
+ * @returns {Array} Array of context menu options for archetype selection.
+ */
 export function archetypeContextMenu(rank) {
   const iconStyle = CONFIG.TERIOCK.iconStyles.contextMenu;
   const options = [];
@@ -38,6 +45,12 @@ export function archetypeContextMenu(rank) {
   return options;
 }
 
+/**
+ * Creates a context menu for selecting classes within a rank item.
+ * Generates options for all classes within the current archetype.
+ * @param {TeriockItem} rank - The rank item to create the context menu for.
+ * @returns {Array} Array of context menu options for class selection.
+ */
 export function classContextMenu(rank) {
   const iconStyle = CONFIG.TERIOCK.iconStyles.contextMenu;
   const options = [];
@@ -68,6 +81,12 @@ export function classContextMenu(rank) {
   return options;
 }
 
+/**
+ * Creates a context menu for selecting ranks within a rank item.
+ * Generates options for ranks 0 through 9.
+ * @param {TeriockItem} rank - The rank item to create the context menu for.
+ * @returns {Array} Array of context menu options for rank selection.
+ */
 export function rankContextMenu(rank) {
   const iconStyle = CONFIG.TERIOCK.iconStyles.contextMenu;
   const options = [];
@@ -81,6 +100,12 @@ export function rankContextMenu(rank) {
   return options;
 }
 
+/**
+ * Creates a context menu for selecting dice types for hit points or mana points.
+ * @param {TeriockItem} rank - The rank item to create the context menu for.
+ * @param {string} stat - The stat to configure ("hp" or "mp").
+ * @returns {Array} Array of context menu options for die selection.
+ */
 function dieContextMenu(rank, stat = "hp") {
   const iconStyle = CONFIG.TERIOCK.iconStyles.contextMenu;
   const statLong = stat === "hp" ? "hit" : "mana";
@@ -142,10 +167,20 @@ function dieContextMenu(rank, stat = "hp") {
   ];
 }
 
+/**
+ * Creates a context menu for selecting hit die types within a rank item.
+ * @param {TeriockItem} rank - The rank item to create the context menu for.
+ * @returns {Array} Array of context menu options for hit die selection.
+ */
 export function hitDieContextMenu(rank) {
   return dieContextMenu(rank, "hp");
 }
 
+/**
+ * Creates a context menu for selecting mana die types within a rank item.
+ * @param {TeriockItem} rank - The rank item to create the context menu for.
+ * @returns {Array} Array of context menu options for mana die selection.
+ */
 export function manaDieContextMenu(rank) {
   return dieContextMenu(rank, "mp");
 }

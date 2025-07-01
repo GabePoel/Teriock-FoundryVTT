@@ -1,13 +1,16 @@
 /** @import TeriockBaseActorData from "../../base-data.mjs" */
 
 /**
- * Applies encumbrance level.
+ * Applies encumbrance level based on carried weight and cumbersome equipment.
+ * Calculates encumbrance level (0-3) based on weight thresholds and cumbersome properties.
  *
  * Relevant wiki pages:
  * - [Carrying Capacity](https://wiki.teriock.com/index.php/Core:Carrying_Capacity)
  * - [Encumbered](https://wiki.teriock.com/index.php/Condition:Encumbered)
  *
- * @param {TeriockBaseActorData} system
+ * @param {TeriockBaseActorData} system - The actor's base data system object.
+ * @returns {void} Modifies the system object in place.
+ * @private
  */
 export function _prepareEncumbrance(system) {
   const actor = system.parent;
@@ -33,7 +36,11 @@ export function _prepareEncumbrance(system) {
 }
 
 /**
- * @param {TeriockBaseActorData} system
+ * Prepares money-related derived data.
+ * Calculates total money value and weight based on currency amounts and configuration.
+ * @param {TeriockBaseActorData} system - The actor's base data system object.
+ * @returns {void} Modifies the system object in place.
+ * @private
  */
 export function _prepareMoney(system) {
   const money = system.money;
@@ -52,7 +59,11 @@ export function _prepareMoney(system) {
 }
 
 /**
- * @param {TeriockBaseActorData} system
+ * Calculates the total weight carried by the actor.
+ * Includes equipped equipment weight and money weight.
+ * @param {TeriockBaseActorData} system - The actor's base data system object.
+ * @returns {void} Modifies the system object in place.
+ * @private
  */
 export function _prepareWeightCarried(system) {
   const actor = system.parent;

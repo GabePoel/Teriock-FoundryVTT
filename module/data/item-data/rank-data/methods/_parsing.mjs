@@ -1,11 +1,24 @@
 import { createAbility } from "../../../../helpers/create-effects.mjs";
 
+/**
+ * Default statistics for different archetypes.
+ * @type {object}
+ * @private
+ */
 const ARCHETYPE_STATS = {
   mage: { hitDie: "d8", manaDie: "d12", hp: 5, mp: 7 },
   warrior: { hitDie: "d12", manaDie: "d8", hp: 7, mp: 5 },
   default: { hitDie: "d10", manaDie: "d10", hp: 6, mp: 6 },
 };
 
+/**
+ * Extracts ability names from metadata attributes.
+ * Splits comma-separated values and filters out empty strings.
+ * @param {Element} metaData - The metadata element to extract from.
+ * @param {string} attr - The attribute name to extract.
+ * @returns {string[]} Array of ability names.
+ * @private
+ */
 function extractAbilityNames(metaData, attr) {
   const val = metaData.getAttribute(attr);
   return val
@@ -16,6 +29,14 @@ function extractAbilityNames(metaData, attr) {
     : [];
 }
 
+/**
+ * Parses raw HTML content for a rank item, extracting class information and abilities.
+ * Creates abilities based on class rank and updates the item with parsed data.
+ * @param {TeriockRank} item - The rank item to parse content for.
+ * @param {string} rawHTML - The raw HTML content to parse.
+ * @returns {Promise<object>} Promise that resolves to the parsed item data.
+ * @private
+ */
 export async function _parse(item, rawHTML) {
   const { className, classRank, archetype } = item.system;
   const classValue = CONFIG.TERIOCK.rankOptions[archetype].classes[className].name;
