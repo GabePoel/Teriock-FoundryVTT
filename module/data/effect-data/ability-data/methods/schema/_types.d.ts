@@ -180,6 +180,7 @@ export interface AppliesData {
   rolls: ConsequenceRolls;
   hacks: Set<string>;
   changes: EffectChangeData[];
+  checks: Set<string>;
 }
 
 /**
@@ -339,6 +340,7 @@ export interface TeriockAbilitySchemaData {
     base: AppliesData;
     proficient: AppliesData;
     fluent: AppliesData;
+    heightened: AppliesData;
   };
 
   // Other

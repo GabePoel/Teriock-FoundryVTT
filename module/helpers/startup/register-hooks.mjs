@@ -20,7 +20,10 @@ export default function registerHooks() {
 
   Hooks.on("updateActor", async (document, changed, options, userId) => {
     if (game.user.id === userId && document.isOwner) {
-      await document.postUpdate();
+      const doCheckDown = (typeof changed.system?.hp?.value === "number") || (typeof changed.system?.mp?.value === "number");
+      await document.postUpdate({
+        checkDown: !doCheckDown,
+      });
     }
   });
 
@@ -53,7 +56,6 @@ export default function registerHooks() {
             data.system.parentId = document._id;
             childAbilityData.push(data);
           }
-          console.log(childAbilityData);
           const newChildAbilities = await document.parent.createEmbeddedDocuments("ActiveEffect", childAbilityData);
           const newChildIds = newChildAbilities.map((ability) => ability._id);
           await document.update({
@@ -63,7 +65,7 @@ export default function registerHooks() {
         }
       }
       document.getActor()?.buildEffectTypes();
-      await document.getActor()?.postUpdate();
+      await document.getActor()?.postUpdate({ checkDown: true });
     }
   });
 
@@ -83,7 +85,7 @@ export default function registerHooks() {
         }
       }
       document.getActor()?.buildEffectTypes();
-      await document.getActor()?.postUpdate();
+      await document.getActor()?.postUpdate({ checkDown: true });
     }
   });
 

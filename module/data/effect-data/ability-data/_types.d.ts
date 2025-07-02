@@ -2,7 +2,7 @@ import type TeriockBaseEffectData from "../base-data/base-data.mjs";
 import type { WikiDataMixin } from "../mixins/wiki-mixin.mjs";
 import { TeriockAbilitySchemaData } from "./methods/schema/_types";
 import { TeriockDerivedAbilityData } from "./methods/data-deriving/_types";
-import { TeriockEffect } from "@client/documents/_module.mjs";
+import { TeriockAbility } from "../../../types/documents";
 
 declare module "./ability-data.mjs" {
   export default interface TeriockAbilityData
@@ -10,7 +10,7 @@ declare module "./ability-data.mjs" {
       TeriockAbilitySchemaData,
       WikiDataMixin,
       TeriockBaseEffectData {
+    parent: TeriockAbility;
     wikiNamespace: "Ability";
-    parent: TeriockEffect;
   }
 }

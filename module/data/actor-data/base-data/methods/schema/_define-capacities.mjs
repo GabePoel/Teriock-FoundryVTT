@@ -19,18 +19,18 @@ const { fields } = foundry.data;
  * ```
  *
  * @typedef {Object} CarryingCapacityField
- * @property {foundry.data.fields.NumberField} light - Light carrying capacity (≥0)
- * @property {foundry.data.fields.NumberField} heavy - Heavy carrying capacity (≥0)
- * @property {foundry.data.fields.NumberField} max - Maximum carrying capacity (≥0)
+ * @property {NumberField} light - Light carrying capacity (≥0)
+ * @property {NumberField} heavy - Heavy carrying capacity (≥0)
+ * @property {NumberField} max - Maximum carrying capacity (≥0)
  *
  * @typedef {Object} MovementSpeedField
- * @property {foundry.data.fields.NumberField} base - Base movement speed in feet per round (integer)
- * @property {foundry.data.fields.NumberField} value - Current movement speed in feet per round (integer)
+ * @property {NumberField} base - Base movement speed in feet per round (integer)
+ * @property {NumberField} value - Current movement speed in feet per round (integer)
  *
  * @typedef {Object} CapacitiesSchema
- * @property {foundry.data.fields.SchemaField} movementSpeed - {@link MovementSpeedField} Object containing movement speed fields
- * @property {foundry.data.fields.SchemaField} carryingCapacity - {@link CarryingCapacityField} Object containing carrying capacity tiers
- * @property {foundry.data.fields.NumberField} weight - Current weight of the actor in pounds (≥0, integer)
+ * @property {SchemaField} movementSpeed - {@link MovementSpeedField} Object containing movement speed fields
+ * @property {SchemaField} carryingCapacity - {@link CarryingCapacityField} Object containing carrying capacity tiers
+ * @property {NumberField} weight - Current weight of the actor in pounds (≥0, integer)
  */
 export function _defineCapacities(schema) {
   schema.movementSpeed = new fields.SchemaField({

@@ -18,6 +18,14 @@ import { _rollCondition } from "./methods/rolling/_roll-condition.mjs";
  */
 export default class TeriockBaseActorData extends TypeDataModel {
   /**
+   * Blank metadata.
+   * @returns {object} The metadata object.
+   */
+  static get metadata() {
+    return {}
+  }
+
+  /**
    * Defines the schema for the base actor data model.
    * @override
    * @returns {object} The schema definition for the actor data.
@@ -197,11 +205,18 @@ export default class TeriockBaseActorData extends TypeDataModel {
 
   /**
    * Performs post-update operations for the actor.
+   * @param {Object} skipFunctions - Functions that should be skipped.
+   * @property {boolean} applyEncumbrance - Skip `applyEncumbrance`.
+   * @property {boolean} prepareTokens - Skip `prepareTokens`.
+   * @property {boolean} checkDown - Skip `checkDown`.
+   * @property {boolean} etherealKill - Skip `etherealKill`.
+   * @property {boolean} checkExpirations - Skip `checkExpirations`.
+   * @returns {Promise<void>} Resolves when all post-update operations are complete
    * @returns {Promise<void>} Promise that resolves when post-update is complete.
    */
-  async postUpdate() {
+  async postUpdate(skipFunctions) {
     const start = performance.now();
-    await _postUpdate(this);
+    await _postUpdate(this, skipFunctions);
     const end = performance.now();
     console.log(`postUpdate took ${end - start} ms`);
   }

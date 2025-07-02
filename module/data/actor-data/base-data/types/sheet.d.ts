@@ -78,7 +78,10 @@ export interface SheetData {
   equipmentSortAscending: boolean;
   display: SheetDisplay;
   notes: string;
-  dieBox: string;
+  dieBox: {
+    hitDice: string;
+    manaDice: string;
+  };
   primaryBlocker: string | null;
   primaryAttacker: string | null;
 }

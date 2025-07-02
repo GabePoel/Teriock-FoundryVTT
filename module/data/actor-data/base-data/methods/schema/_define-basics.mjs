@@ -4,7 +4,7 @@ const { fields } = foundry.data;
  * Creates a schema field definition for an attribute with save proficiency and bonus values.
  *
  * @param {string} name - The name of the attribute (e.g., "STR", "INT", "MOV")
- * @returns {foundry.data.fields.SchemaField} A schema field containing:
+ * @returns {SchemaField} A schema field containing:
  *   - saveProficient: Boolean indicating if proficient in saves for this attribute
  *   - saveFluent: Boolean indicating if fluent in saves for this attribute
  *   - value: Number representing the save bonus for this attribute
@@ -46,14 +46,14 @@ function attributeField(name) {
  * ```
  *
  * @typedef {Object} AttributeField
- * @property {foundry.data.fields.BooleanField} saveProficient - Whether proficient in saves for this attribute
- * @property {foundry.data.fields.BooleanField} saveFluent - Whether fluent in saves for this attribute
- * @property {foundry.data.fields.NumberField} value - Save bonus value for this attribute
+ * @property {BooleanField} saveProficient - Whether proficient in saves for this attribute
+ * @property {BooleanField} saveFluent - Whether fluent in saves for this attribute
+ * @property {NumberField} value - Save bonus value for this attribute
  *
  * @typedef {Object} BasicActorSchema
- * @property {foundry.data.fields.NumberField} lvl - Actor level (>= 1, integer)
- * @property {foundry.data.fields.NumberField} size - Actor size (0-30)
- * @property {foundry.data.fields.SchemaField} attributes - Object containing six attribute fields:
+ * @property {NumberField} lvl - Actor level (>= 1, integer)
+ * @property {NumberField} size - Actor size (0-30)
+ * @property {SchemaField} attributes - Object containing six attribute fields:
  *   - int: {@link AttributeField} Intelligence attribute
  *   - mov: {@link AttributeField} Movement attribute
  *   - per: {@link AttributeField} Perception attribute

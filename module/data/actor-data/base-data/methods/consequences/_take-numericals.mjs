@@ -100,7 +100,7 @@ export async function _takeGainTempMp(system, amount) {
  */
 export async function _takeSleep(system, amount) {
   if (system.hp.value <= amount) {
-    await system.parent.toggleStatusEffect("asleep");
+    await system.parent.toggleStatusEffect("asleep", { active: true, overlay: true });
   }
 }
 
@@ -111,6 +111,18 @@ export async function _takeSleep(system, amount) {
  */
 export async function _takeKill(system, amount) {
   if (system.hp.value <= amount) {
-    await system.parent.toggleStatusEffect("dead");
+    const effectData = {
+      name: "Forced Dead",
+      statuses: ["dead", "down", "blind", "unconscious", "prone", "anosmatic", "mute"],
+      type: "effect",
+      img: "systems/teriock/assets/conditions/dead.svg",
+      flags: {
+        core: {
+          overlay: true
+        }
+      }
+    }
+    await system.parent.createEmbeddedDocuments("ActiveEffect", [effectData])
+    // await system.parent.toggleStatusEffect("dead");
   }
 }

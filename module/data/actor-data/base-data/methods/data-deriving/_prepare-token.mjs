@@ -21,6 +21,5 @@ export function _prepareSize(system) {
   const sizeKeys = Object.keys(namedSizes).map(Number);
   const filteredSizeKeys = sizeKeys.filter((key) => key <= size);
   const sizeKey = Math.max(...filteredSizeKeys, 0);
-  const namedSize = namedSizes[sizeKey] || "Medium";
-  system.namedSize = namedSize;
+  system.namedSize = namedSizes[sizeKey] || "Medium";
 }

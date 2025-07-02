@@ -1,4 +1,3 @@
-/** @import { CommonRollOptions } from "../../../../types/rolls"; */
 /** @import TeriockAbilityData from "../ability-data.mjs"; */
 const { api, ux } = foundry.applications;
 import TeriockRoll from "../../../../documents/roll.mjs";
@@ -198,7 +197,7 @@ async function buildButtons(abilityData, useData) {
   }
 
   // Take buttons
-  const takeData = await _generateTakes(abilityData, useData.modifiers.heightened);
+  const takeData = _generateTakes(abilityData, useData.modifiers.heightened);
   Object.entries(takeData.rolls).forEach(([key, value]) => {
     if (value && BUTTON_CONFIGS[key]) {
       const buttonConfig = BUTTON_CONFIGS[key];
@@ -476,7 +475,7 @@ async function handleDialogs(abilityData, useData) {
 function createDialogFieldset(legend, description, name, max) {
   return `<fieldset><legend>${legend}</legend>
     <div>${description}</div>
-    <input type="number" name="${name}" value="0" min="0" max="${max}" step="1"></input>
+    <input type="number" name="${name}" value="0" min="0" max="${max}" step="1">
   </fieldset>`;
 }
 
@@ -490,10 +489,7 @@ function createDialogFieldset(legend, description, name, max) {
  * @private
  */
 export async function _generateAttackRoll(abilityData, useData, options = {}) {
-  const { advantage = false, disadvantage = false, target = null, message = null, buttons = [] } = options;
-
-  // Build roll formula
-  // let rollFormula = buildAttackFormula(abilityData, advantage, disadvantage, useData);
+  const { target = null, message = null, buttons = [] } = options;
 
   // Prepare roll data
   const rollData = { ...useData.rollData, h: useData.modifiers.heightened || 0 };
@@ -507,40 +503,6 @@ export async function _generateAttackRoll(abilityData, useData, options = {}) {
   console.log(useData.formula);
 
   return new TeriockRoll(useData.formula, rollData, { context, message });
-}
-
-/**
- * Builds the attack roll formula based on ability type and effects.
- * @param {TeriockAbilityData} abilityData - The ability data to build formula for.
- * @param {boolean} advantage - Whether the roll has advantage.
- * @param {boolean} disadvantage - Whether the roll has disadvantage.
- * @param {object} useData - The use data containing modifiers.
- * @returns {string} The attack roll formula.
- * @private
- */
-function buildAttackFormula(abilityData, advantage, disadvantage, useData) {
-  let formula = "";
-
-  if (abilityData.effects?.includes("resistance")) {
-    formula = advantage ? "2d20kh1" : disadvantage ? "2d20kl1" : "1d20";
-  } else if (abilityData.interaction === "attack") {
-    formula = advantage ? "2d20kh1" : disadvantage ? "2d20kl1" : "1d20";
-    formula += " + @atkPen + @av0";
-    if (abilityData.delivery.base === "weapon") formula += " + @sb";
-  } else if (abilityData.interaction === "feat") {
-    formula = "10";
-  } else {
-    formula = "0";
-  }
-
-  // Add proficiency modifiers
-  if (["attack", "feat"].includes(abilityData.interaction) || abilityData.effects?.includes("resistance")) {
-    if (abilityData.parent.isFluent) formula += " + @f";
-    else if (abilityData.parent.isProficient) formula += " + @p";
-    if (useData.modifiers.heightened > 0) formula += " + @h";
-  }
-
-  return formula;
 }
 
 /**

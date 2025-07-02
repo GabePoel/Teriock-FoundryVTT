@@ -75,7 +75,7 @@ export default class TeriockAbilityData extends WikiDataMixin(TeriockBaseEffectD
   /**
    * Rolls the ability with the specified options.
    * @override
-   * @param {object} options - Options for the ability roll.
+   * @param {CommonRollOptions} options - Options for the ability roll.
    * @returns {Promise<void>} Promise that resolves when the roll is complete.
    */
   async roll(options) {

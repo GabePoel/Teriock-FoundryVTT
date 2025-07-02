@@ -1,5 +1,4 @@
 /** @import TeriockBaseActorData from "../../base-data.mjs" */
-/** @import { ConditionRollOptions } from "../../../../../types/rolls" */
 const { DialogV2 } = foundry.applications.api;
 import TeriockRoll from "../../../../../documents/roll.mjs";
 
@@ -40,7 +39,7 @@ export async function _rollCondition(system, condition, options) {
           action: "roll",
           label: "Roll",
           default: true,
-          callback: (event, button, dialog) => {
+          callback: (event, button) => {
             numberOfDice = button.form.elements.formula.valueAsNumber;
             rollFormula = `${numberOfDice}d4kh`;
           },
@@ -74,12 +73,12 @@ export async function _rollCondition(system, condition, options) {
           }
         }
         if (remove) {
-          actor.toggleStatusEffect(condition, { active: false });
+          await actor.toggleStatusEffect(condition, { active: false });
         }
       },
     });
     await dialog.render(true);
   } else {
-    actor.toggleStatusEffect(condition, { active: false });
+    await actor.toggleStatusEffect(condition, { active: false });
   }
 }

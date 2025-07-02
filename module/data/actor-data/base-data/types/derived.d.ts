@@ -1,4 +1,3 @@
-import { TeriockItem } from "@client/documents/_module.mjs";
 import { SheetData } from "./sheet";
 
 /**
@@ -52,10 +51,6 @@ export interface TeriockBaseActorDerived {
   cc: number;
   /** Whether the actor is wearing armor */
   hasArmor: boolean;
-  /** Primary blocking equipment */
-  primaryBlocker: null | (TeriockItem & { system: TeriockEquipmentData });
-  /** Primary attacking equipment */
-  primaryAttacker: null | (TeriockItem & { system: TeriockEquipmentData });
 
   // Load and weight
   /** Total weight carried by the actor */

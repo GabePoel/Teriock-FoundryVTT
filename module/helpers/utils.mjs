@@ -30,7 +30,7 @@ export function toCamelCase(str) {
  */
 export function getRollIcon(rollFormula) {
   const validDice = [4, 6, 8, 10, 12, 20];
-  const roll = new TeriockRoll(rollFormula);
+  const roll = new TeriockRoll(rollFormula, {});
   const dice = roll.dice;
   dice.sort((a, b) => b.faces - a.faces);
   for (const die of dice) {
@@ -64,24 +64,14 @@ export async function chatImage(img) {
           data-src="${img}"
           style="display: flex; justify-content: center;"
         >
-          <img src="${img}" class="teriock-image">
+          <img src="${img}" class="teriock-image" alt="Image">
         </div>`,
     });
   }
 }
 
 /**
- * Abbreviates a string to a specified length.
- * @param {string} string - The string to abbreviate.
- * @param {number} length - The maximum length of the abbreviation. Defaults to 3.
- * @returns {string} The abbreviated string.
- */
-export function abbreviate(string, length = 3) {
-  return string.toLowerCase().slice(0, length);
-}
-
-/**
- * Evaluates a dice roll formula synchronously and returns the total result.
+ * Evaluates a die roll formula synchronously and returns the total result.
  * @param {string} formula - The dice roll formula to evaluate.
  * @param {Object} data - The roll data to use for the evaluation.
  * @param {Object} options - Options that get passed to the roll.
@@ -103,7 +93,7 @@ export function evaluateSync(formula, data = {}, options = {}) {
 }
 
 /**
- * Evaluates a dice roll formula synchronously and returns the total result.
+ * Evaluates a die roll formula synchronously and returns the total result.
  * Avoids having to generate roll data if it's not needed.
  * @param {string} formula - The dice roll formula to evaluate.
  * @param {Document} document - The document to get roll data from.
@@ -125,7 +115,7 @@ export function smartEvaluateSync(formula, document, options = {}) {
 }
 
 /**
- * Evaluates a dice roll formula asynchronously and returns the total result.
+ * Evaluates a die roll formula asynchronously and returns the total result.
  * @param {string} formula - The dice roll formula to evaluate.
  * @param {Object} data - The roll data to use for the evaluation.
  * @param {Object} options - Options that get passed to the roll.
@@ -219,13 +209,6 @@ export function secondsToReadable(totalSeconds) {
  */
 export function mergeLevel(obj, path, key) {
   const result = {};
-
-  function getValueAtPath(object, pathArray) {
-    return pathArray.reduce((current, segment) => {
-      if (current === null || current === undefined) return undefined;
-      return current[segment];
-    }, object);
-  }
 
   function processPath(object, pathSegments, currentIndex = 0) {
     if (currentIndex >= pathSegments.length) {

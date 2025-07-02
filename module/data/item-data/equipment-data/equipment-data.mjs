@@ -89,7 +89,7 @@ export default class TeriockEquipmentData extends WikiDataMixin(ConsumableDataMi
    * Parses raw HTML content for the equipment.
    * @override
    * @param {string} rawHTML - The raw HTML content to parse.
-   * @returns {Promise<string>} Promise that resolves to the parsed HTML content.
+   * @returns {Promise<object>} Promise that resolves to the parsed HTML content.
    */
   async parse(rawHTML) {
     return await parsing._parse(this, rawHTML);

@@ -1,7 +1,9 @@
 import type TeriockBaseItemData from "../base-data/base-data.mjs";
+import { TeriockEquipment } from "../../../types/documents";
 
 declare module "./equipment-data.mjs" {
   export default interface TeriockEquipmentData extends TeriockBaseItemData {
+    parent: TeriockEquipment;
     wikiNamespace: string;
     equipped: boolean;
     glued: boolean;

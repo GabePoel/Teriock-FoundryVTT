@@ -10,7 +10,7 @@ import { tradecraftOptions } from "../../../../../helpers/constants/tradecraft-o
  * - [Talented](https://wiki.teriock.com/index.php/Keyword:Talented)
  * - [Expertise](https://wiki.teriock.com/index.php/Keyword:Expertise)
  *
- * @returns {foundry.data.fields.SchemaField} A schema field containing:
+ * @returns {SchemaField} A schema field containing:
  *   - proficient: Boolean indicating if proficient in this tradecraft
  *   - extra: Number of extra levels/ranks in this tradecraft
  *   - bonus: Additional bonus value for this tradecraft
@@ -44,12 +44,12 @@ const tradecrafts = mergeLevel(tradecraftOptions, "*", "tradecrafts");
  * ```
  *
  * @typedef {Object} TradecraftField
- * @property {foundry.data.fields.BooleanField} proficient - Whether proficient in this tradecraft
- * @property {foundry.data.fields.NumberField} extra - Additional modifier for this tradecraft (≥0)
- * @property {foundry.data.fields.NumberField} bonus - Calculated bonus value for this tradecraft (≥0)
+ * @property {BooleanField} proficient - Whether proficient in this tradecraft
+ * @property {NumberField} extra - Additional modifier for this tradecraft (≥0)
+ * @property {NumberField} bonus - Calculated bonus value for this tradecraft (≥0)
  *
  * @typedef {Object} TradecraftsSchema
- * @property {foundry.data.fields.SchemaField} tradecrafts - Object containing all available tradecraft fields,
+ * @property {SchemaField} tradecrafts - Object containing all available tradecraft fields,
  *   where each key is a tradecraft name and each value is a {@link TradecraftField}
  */
 export function _defineTradecrafts(schema) {
@@ -57,7 +57,6 @@ export function _defineTradecrafts(schema) {
   for (const key of Object.keys(tradecrafts)) {
     tradecraftData[key] = tradecraftField();
   }
-  const tradecraftsField = new fields.SchemaField(tradecraftData);
-  schema.tradecrafts = tradecraftsField;
+  schema.tradecrafts = new fields.SchemaField(tradecraftData);
   return schema;
 }

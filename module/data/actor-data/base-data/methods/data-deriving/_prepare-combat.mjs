@@ -9,8 +9,9 @@
  */
 export function _prepareDefenses(system) {
   const actor = system.parent;
-  const sheet = system.sheet;
   const equipment = actor.itemTypes.equipment;
+  const equipped = equipment.filter((i) => i.system.equipped);
+
   // Find and validate primary blocker
   const blocker = actor.items.get(system.wielding.blocker.raw);
   if (blocker?.system.equipped) {
@@ -18,17 +19,14 @@ export function _prepareDefenses(system) {
   } else {
     system.wielding.blocker.derived = null;
   }
-  // Block value
-  system.bv = system.wielding.blocker.derived?.bv || 0;
-  // Armor value
-  const equipped = equipment.filter((i) => i.system.equipped);
+
+  // AV, BV, AC, CC
+  system.bv = system.wielding.blocker.derived?.system.bv || 0;
   const av = Math.max(...equipped.map((item) => item.system.av || 0), system.naturalAv || 0);
   system.av = av;
-  // Armor check
   system.hasArmor = equipped.some(
     (item) => Array.isArray(item.system.equipmentClasses) && item.system.equipmentClasses.includes("armor"),
   );
-  // AC calculation
   let ac = 10 + av;
   if (system.hasArmor) ac += system.wornAc || 0;
   system.ac = ac;

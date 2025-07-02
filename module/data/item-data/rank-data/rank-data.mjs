@@ -126,7 +126,7 @@ export default class TeriockRankData extends WikiDataMixin(TeriockBaseItemData) 
    * Parses raw HTML content for the rank.
    * @override
    * @param {string} rawHTML - The raw HTML content to parse.
-   * @returns {Promise<string>} Promise that resolves to the parsed HTML content.
+   * @returns {Promise<object>} Promise that resolves to the parsed HTML content.
    */
   async parse(rawHTML) {
     return await _parse(this.parent, rawHTML);

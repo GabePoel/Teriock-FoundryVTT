@@ -222,7 +222,7 @@ function hpData(system, data) {
     hp: system.hp.value,
     "hp.base": system.hp.base,
     "hp.max": system.hp.max,
-    "hp.min": 0, // Default minimum HP
+    "hp.min": system.hp.min,
     "hp.temp": system.hp.temp,
   });
 }
@@ -239,7 +239,7 @@ function mpData(system, data) {
     mp: system.mp.value,
     "mp.base": system.mp.base,
     "mp.max": system.mp.max,
-    "mp.min": 0, // Default minimum MP
+    "mp.min": system.mp.min,
     "mp.temp": system.mp.temp,
   });
 }
@@ -254,7 +254,7 @@ function mpData(system, data) {
 function witherData(system, data) {
   Object.assign(data, {
     wither: system.wither.value,
-    "wither.base": system.wither.base,
+    "wither.value": system.wither.value,
     "wither.max": system.wither.max,
   });
 }
@@ -483,8 +483,6 @@ function moneyData(system, data) {
  * @private
  */
 function equipmentData(system, data) {
-  const actor = system.parent;
-  const equipment = actor.itemTypes.equipment.filter((item) => item.system.equipped);
 
   // Primary attack weapon
   const primaryAttacker = system.wielding.attacker.derived;

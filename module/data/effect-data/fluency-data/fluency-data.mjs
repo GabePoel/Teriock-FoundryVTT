@@ -1,3 +1,4 @@
+/** @import { CommonRollOptions } from "../../../../types/rolls"; */
 const { fields } = foundry.data;
 import { _messageParts } from "./methods/_messages.mjs";
 import { _roll } from "./methods/_rolling.mjs";
@@ -70,7 +71,7 @@ export default class TeriockFluencyData extends WikiDataMixin(TeriockBaseEffectD
   /**
    * Rolls the fluency effect with the specified options.
    * @override
-   * @param {object} options - Options for the fluency roll.
+   * @param {CommonRollOptions} options - Options for the fluency roll.
    * @returns {Promise<void>} Promise that resolves when the roll is complete.
    */
   async roll(options) {

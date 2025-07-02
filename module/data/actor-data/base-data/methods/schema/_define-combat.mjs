@@ -23,11 +23,11 @@ const { fields } = foundry.data;
  * ```
  *
  * @typedef {Object} CombatSchema
- * @property {foundry.data.fields.NumberField} wornAc - Worn Armor Class value (≥0, integer)
- * @property {foundry.data.fields.NumberField} naturalAv - Natural Armor Value (≥0, integer)
- * @property {foundry.data.fields.NumberField} attackPenalty - Attack penalty value (≤0, integer, step: 3)
- * @property {foundry.data.fields.BooleanField} sb - Whether the actor has a style bonus
- * @property {foundry.data.fields.StringField} piercing - Piercing ability type with choices:
+ * @property {NumberField} wornAc - Worn Armor Class value (≥0, integer)
+ * @property {NumberField} naturalAv - Natural Armor Value (≥0, integer)
+ * @property {NumberField} attackPenalty - Attack penalty value (≤0, integer, step: 3)
+ * @property {BooleanField} sb - Whether the actor has a style bonus
+ * @property {StringField} piercing - Piercing ability type with choices:
  *   - "none": No piercing bonus
  *   - "av0": [AV0](https://wiki.teriock.com/index.php/Keyword:AV0)
  *   - "ub": [UB](https://wiki.teriock.com/index.php/Keyword:UB)

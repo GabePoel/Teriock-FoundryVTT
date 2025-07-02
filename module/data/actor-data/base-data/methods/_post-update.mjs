@@ -8,19 +8,37 @@ import { encumbranceData } from "../../../../content/encumbrance.mjs";
  *
  * 1. **Encumbrance Management**: Applies status effects based on current encumbrance level
  * 2. **Token Preparation**: Updates token sizes and vision modes to match actor state
- * 3. **Ethereal Death Check**: Handles special death mechanics for ethereal creatures
- * 4. **Expiration Monitoring**: Checks and processes expiration effects
+ * 3. **Down Checks**: Set whatever type of "down" is appropriate
+ * 4. **Ethereal Death Check**: Handles special death mechanics for ethereal creatures
+ * 5. **Expiration Monitoring**: Checks and processes expiration effects
  *
  * @param {TeriockBaseActorData} system - The actor's base data system object
+ * @param {Object} skipFunctions - Functions that should be skipped
+ * @property {boolean} applyEncumbrance - Skip `applyEncumbrance`
+ * @property {boolean} prepareTokens - Skip `prepareTokens`
+ * @property {boolean} checkDown - Skip `checkDown`
+ * @property {boolean} etherealKill - Skip `etherealKill`
+ * @property {boolean} checkExpirations - Skip `checkExpirations`
  * @returns {Promise<void>} Resolves when all post-update operations are complete
  * @private
  */
-export async function _postUpdate(system) {
-  await applyEncumbrance(system);
-  await prepareTokens(system);
-  await checkDown(system);
-  await etherealKill(system);
-  await checkExpirations(system);
+export async function _postUpdate(system, skipFunctions = {}) {
+  console.log("Skip Functions", skipFunctions);
+  if (!skipFunctions.applyEncumbrance) {
+    await applyEncumbrance(system);
+  }
+  if (!skipFunctions.prepareTokens) {
+    await prepareTokens(system);
+  }
+  if (!skipFunctions.checkDown) {
+    await checkDown(system);
+  }
+  if (!skipFunctions.etherealKill) {
+    await etherealKill(system);
+  }
+  if (!skipFunctions.checkExpirations) {
+    await checkExpirations(system);
+  }
 }
 
 /**
@@ -133,15 +151,15 @@ async function prepareTokens(system) {
 
     let visionMode = "basic";
 
-    if (actor?.system.senses.dark > 0) {
+    if (system.senses.dark > 0) {
       visionMode = "darkvision";
     }
-    if (actor?.system.senses.night > 0 && actor?.system.senses.night >= actor?.system.senses.dark) {
+    if (system.senses.night > 0 && system.senses.night >= system.senses.dark) {
       visionMode = "lightAmplification";
     }
-    if (actor?.system.senses.blind + actor?.system.senses.hearing + actor?.system.senses.smell > 0) {
-      const maxTremor = Math.max(actor?.system.senses.blind, actor?.system.senses.hearing, actor?.system.senses.smell);
-      const maxDark = Math.max(actor?.system.senses.dark, actor?.system.senses.night);
+    if (system.senses.blind + system.senses.hearing + system.senses.smell > 0) {
+      const maxTremor = Math.max(system.senses.blind, system.senses.hearing, system.senses.smell);
+      const maxDark = Math.max(system.senses.dark, system.senses.night);
       if (maxTremor > maxDark) {
         visionMode = "tremorsense";
       }
@@ -169,7 +187,8 @@ async function prepareTokens(system) {
  * @returns {Promise<void>} Resolves when the status effects are updated
  */
 async function checkDown(system) {
-  let shouldBeUnconscious = system.hp.value <= 0 || system.mp.value <= 0;
+  let shouldBeAsleep = system.parent.statuses.has("asleep");
+  let shouldBeUnconscious = system.hp.value <= 0 || system.mp.value <= 0 || shouldBeAsleep;
   if (system.resistances.effects.has("unconscious")) {
     shouldBeUnconscious = false;
   }
@@ -183,22 +202,31 @@ async function checkDown(system) {
   if (system.immunities.effects.has("dead")) {
     shouldBeDead = false;
   }
-  if (shouldBeUnconscious && !shouldBeDead && !system.parent.statuses.has("unconscious")) {
-    if (!system.parent.statuses.has("dead")) {
-      await system.parent.toggleStatusEffect("unconscious", {
-        active: true,
-        overlay: true,
-      });
-    }
+  if (system.parent.statuses.has("ethereal") && shouldBeUnconscious) {
+    shouldBeDead = true;
   }
-  if (shouldBeDead && !system.parent.statuses.has("dead")) {
+  if (shouldBeDead) {
+    shouldBeUnconscious = false;
+    shouldBeAsleep = false;
+  }
+  try {
     await system.parent.toggleStatusEffect("dead", {
-      active: true,
+      active: shouldBeDead,
       overlay: true,
-    });
-    await system.parent.toggleStatusEffect("asleep", { active: false });
-    await system.parent.toggleStatusEffect("unconscious", { active: false });
-  }
+    })
+  } catch { /* empty */ }
+  try {
+    await system.parent.toggleStatusEffect("asleep", {
+      active: shouldBeAsleep,
+      overlay: true,
+    })
+  } catch { /* empty */ }
+  try {
+    await system.parent.toggleStatusEffect("unconscious", {
+      active: shouldBeUnconscious && !system.parent.statuses.has("asleep"),
+      overlay: true,
+    })
+  } catch { /* empty */ }
 }
 
 /**
@@ -240,7 +268,7 @@ async function etherealKill(system) {
  */
 async function checkExpirations(system) {
   const actor = system.parent;
-  actor.conditionExpirationEffects.forEach(async (effect) => {
+  for (const effect of actor.conditionExpirationEffects) {
     await effect.system.checkExpiration();
-  });
+  }
 }

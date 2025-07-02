@@ -1,6 +1,5 @@
 /** @import TeriockAbilityData from "../ability-data.mjs"; */
 /** @import TeriockActor from "../../../../documents/actor.mjs"; */
-import TeriockEffect from "../../../../documents/effect.mjs";
 import { parseTimeString } from "../../../../helpers/utils.mjs";
 
 /**
@@ -9,7 +8,7 @@ import { parseTimeString } from "../../../../helpers/utils.mjs";
  * @param {TeriockAbilityData} abilityData - The ability data to generate effect from.
  * @param {TeriockActor} actor - The actor that owns the ability.
  * @param {number} heightenAmount - The amount of heightening applied to the ability.
- * @returns {Promise<TeriockEffect|false>} Promise that resolves to the generated effect data or false if no effect should be created.
+ * @returns {Promise<object|false>} Promise that resolves to the generated effect data or false if no effect should be created.
  * @private
  */
 export async function _generateEffect(abilityData, actor, heightenAmount = 0) {
@@ -18,7 +17,7 @@ export async function _generateEffect(abilityData, actor, heightenAmount = 0) {
 
   let seconds = parseTimeString(abilityData.duration);
 
-  if (abilityData.isProficient) {
+  if (abilityData.parent.isProficient) {
     if (abilityData.applies.proficient.changes.length > 0) {
       changes = foundry.utils.deepClone(abilityData.applies.proficient.changes);
     }
@@ -26,7 +25,7 @@ export async function _generateEffect(abilityData, actor, heightenAmount = 0) {
       statuses = foundry.utils.deepClone(abilityData.applies.proficient.statuses);
     }
   }
-  if (abilityData.isFluent) {
+  if (abilityData.parent.isFluent) {
     if (abilityData.applies.fluent.changes.length > 0) {
       changes = foundry.utils.deepClone(abilityData.applies.fluent.changes);
     }
@@ -47,10 +46,10 @@ export async function _generateEffect(abilityData, actor, heightenAmount = 0) {
         statuses.add(status);
       }
     }
-    if (abilityData.applies.heightened.duration > 0) {
-      seconds += abilityData.applies.heightened.duration * heightenAmount;
-      seconds = Math.round(seconds / abilityData.applies.heightened.duration) * abilityData.applies.heightened.duration;
-    }
+    // if (abilityData.applies.heightened.duration > 0) {
+    //   seconds += abilityData.applies.heightened.duration * heightenAmount;
+    //   seconds = Math.round(seconds / abilityData.applies.heightened.duration) * abilityData.applies.heightened.duration;
+    // }
   }
 
   let description = await abilityData.parent.buildMessage();
@@ -139,14 +138,14 @@ export function _generateTakes(abilityData, heightenAmount = 0) {
   let startStatuses = foundry.utils.deepClone(abilityData.applies.base.startStatuses) || new Set();
   let endStatuses = foundry.utils.deepClone(abilityData.applies.base.endStatuses) || new Set();
 
-  if (abilityData.isProficient) {
+  if (abilityData.parent.isProficient) {
     rolls = { ...rolls, ...abilityData.applies.proficient.rolls };
     hacks = new Set([...hacks, ...(abilityData.applies.proficient.hacks || [])]);
     checks = new Set([...checks, ...(abilityData.applies.proficient.checks || [])]);
     startStatuses = new Set([...startStatuses, ...(abilityData.applies.proficient.startStatuses || [])]);
     endStatuses = new Set([...endStatuses, ...(abilityData.applies.proficient.endStatuses || [])]);
   }
-  if (abilityData.isFluent) {
+  if (abilityData.parent.isFluent) {
     rolls = { ...rolls, ...abilityData.applies.fluent.rolls };
     hacks = new Set([...hacks, ...(abilityData.applies.fluent.hacks || [])]);
     checks = new Set([...checks, ...(abilityData.applies.fluent.checks || [])]);

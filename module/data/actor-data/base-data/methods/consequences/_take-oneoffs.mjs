@@ -10,10 +10,10 @@ export async function _takeAwaken(system) {
       await system.parent.update({ "system.hp.value": 1 });
     }
     if (system.parent.statuses.has("asleep")) {
-      await system.parent.toggleStatusEffect("asleep", false);
+      await system.parent.toggleStatusEffect("asleep", { active: false });
     }
     if (system.parent.statuses.has("unconscious")) {
-      await system.parent.toggleStatusEffect("unconscious", false);
+      await system.parent.toggleStatusEffect("unconscious", { active: false });
     }
   }
 }
@@ -27,6 +27,6 @@ export async function _takeRevive(system) {
     if (system.hp.value <= 0) {
       await system.parent.update({ "system.hp.value": 1 });
     }
-    await system.parent.toggleStatusEffect("dead", false);
+    await system.parent.toggleStatusEffect("dead", { active: false });
   }
 }

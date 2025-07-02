@@ -1,5 +1,12 @@
 const { fields } = foundry.data;
 
+/**
+ * Creates a number field for a specific sense.
+ *
+ * @param {number} initial
+ * @param {string} name
+ * @returns {NumberField}
+ */
 function senseField(initial, name) {
   return new fields.NumberField({
     initial: initial,
@@ -14,6 +21,9 @@ function senseField(initial, name) {
  *
  * @param {Object} schema - The schema object to extend with senses.
  * @returns {Object} The updated schema object with the senses field added.
+ *
+ * @typedef {Object} SensesSchema
+ * @property {SchemaField} senses - A schema field for actor senses.
  */
 export function _defineSenses(schema) {
   schema.senses = new fields.SchemaField({

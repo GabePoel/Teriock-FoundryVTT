@@ -21,16 +21,16 @@ const { fields } = foundry.data;
  * ```
  *
  * @typedef {Object} DamageField
- * @property {foundry.data.fields.StringField} standard - Standard damage dice/expression
- * @property {foundry.data.fields.StringField} hand - Hand-to-hand damage dice/expression
- * @property {foundry.data.fields.StringField} foot - Foot/kicking damage dice/expression
- * @property {foundry.data.fields.StringField} mouth - Biting damage dice/expression
- * @property {foundry.data.fields.StringField} bucklerShield - Buckler shield bash damage dice/expression
- * @property {foundry.data.fields.StringField} largeShield - Large shield bash damage dice/expression
- * @property {foundry.data.fields.StringField} towerShield - Tower shield bash damage dice/expression
+ * @property {StringField} standard - Standard damage dice/expression
+ * @property {StringField} hand - Hand-to-hand damage dice/expression
+ * @property {StringField} foot - Foot/kicking damage dice/expression
+ * @property {StringField} mouth - Biting damage dice/expression
+ * @property {StringField} bucklerShield - Buckler shield bash damage dice/expression
+ * @property {StringField} largeShield - Large shield bash damage dice/expression
+ * @property {StringField} towerShield - Tower shield bash damage dice/expression
  *
  * @typedef {Object} DamageSchema
- * @property {foundry.data.fields.SchemaField} damage - {@link DamageField} Object containing all damage types
+ * @property {SchemaField} damage - {@link DamageField} Object containing all damage types
  */
 export function _defineDamage(schema) {
   schema.damage = new fields.SchemaField({

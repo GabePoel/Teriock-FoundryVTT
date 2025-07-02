@@ -36,7 +36,6 @@ const createButton = (className, content, dataset = {}) => {
 /**
  * Custom array field for Teriock system with enhanced input rendering.
  * Extends Foundry's ArrayField to provide custom input elements for array data.
- * @extends {fields.ArrayField}
  */
 export class TeriockArrayField extends fields.ArrayField {
   /**
@@ -59,7 +58,6 @@ export class TeriockArrayField extends fields.ArrayField {
 /**
  * Custom record field for Teriock system with multi-select and individual item inputs.
  * Extends Foundry's TypedObjectField to provide enhanced record editing capabilities.
- * @extends {fields.TypedObjectField}
  */
 export class TeriockRecordField extends fields.TypedObjectField {
   /**
@@ -116,51 +114,4 @@ export class TeriockRecordField extends fields.TypedObjectField {
     out.appendChild(items);
     return out;
   }
-}
-
-/**
- * Custom dynamic field for Teriock system with enhanced styling.
- * Extends Foundry's SchemaField to provide dynamic field functionality.
- * @extends {fields.SchemaField}
- */
-export class TeriockDynamicField extends fields.SchemaField {
-  /**
-   * Creates the input element for the dynamic field.
-   * Renders the input with additional CSS class for styling.
-   * @param {object} config - Configuration object for the input element.
-   * @returns {HTMLElement} The rendered input element with dynamic field styling.
-   * @override
-   * @private
-   */
-  _toInput(config) {
-    const out = super._toInput(config);
-    out.classList.add("teriock-dynamic-field");
-    return out;
-  }
-}
-
-/**
- * Factory function for creating dynamic field configurations.
- * Creates a schema field with raw string and derived numeric value fields.
- * @param {object} options - Configuration options for the dynamic field.
- * @param {boolean} [options.nullable=true] - Whether the field can be null.
- * @param {string|number} [options.initial=0] - The initial value for the field.
- * @returns {fields.SchemaField} A configured schema field with raw and value subfields.
- */
-export function dynamicField(options = {}) {
-  const rawOptions = {
-    ...options,
-    nullable: true,
-  };
-  const valueOptions = {
-    ...options,
-    initial: 0,
-  };
-  if (!options.initial) {
-    rawOptions.initial = "0";
-  }
-  return new fields.SchemaField({
-    raw: new fields.StringField(rawOptions),
-    value: new fields.NumberField(valueOptions),
-  });
 }

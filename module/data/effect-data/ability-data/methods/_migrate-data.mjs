@@ -17,68 +17,60 @@ export function _migrateData(data) {
   if (data.effects?.includes("duelMod")) {
     data.effects = data.effects.map((effect) => (effect === "duelMod" ? "duelModifying" : effect));
   }
-  if (data.costs?.mp) {
-    if (typeof data.costs?.mp === "string" || typeof data.costs?.mp === "number" || data.costs?.mp === null) {
-      const mp = {
-        variable: data.costs?.mp === "x" ? true : false,
-        value: data.costs?.mp === "x" ? 0 : Number(data.costs?.mp) || 0,
-        description: data.costs.manaCost || "",
-      };
-      data.costs.mp = mp;
-      delete data.costs.manaCost;
-    }
-    if (typeof data.costs.mp.value === "number") {
-      const mp = {
-        type: "none",
-        value: {
-          static: 0,
-          formula: "",
-          variable: "",
-        },
-      };
-      if (data.costs.mp.variable) {
-        mp.type = "variable";
-        mp.value.variable = data.costs.mp.description || "";
-        mp.static = 0;
-      } else if (data.costs.mp.value > 0) {
-        mp.type = "static";
-        mp.value.static = data.costs.mp.value;
-        mp.value.formula = "";
-        mp.value.variable = "";
+
+  for (const pointCost of ["mp", "hp"]) {
+    if (data.costs) {
+      if (data.costs[pointCost] === null) {
+        data.costs[pointCost] = {
+          type: "none",
+          value: {
+            static: 0,
+            formula: "",
+            variable: "",
+          },
+        };
       }
-      data.costs.mp = mp;
-    }
-  }
-  if (data.costs?.hp) {
-    if (typeof data.costs?.hp === "string" || typeof data.costs?.hp === "number" || data.costs?.hp === null) {
-      const hp = {
-        variable: data.costs?.hp === "x" ? true : false,
-        value: data.costs?.hp === "x" ? 0 : Number(data.costs?.hp) || 0,
-        description: data.costs.hitCost || "",
-      };
-      data.costs.hp = hp;
-      delete data.costs.hitCost;
-    }
-    if (typeof data.costs.hp.value === "number") {
-      const hp = {
-        type: "none",
-        value: {
-          static: 0,
-          formula: "",
-          variable: "",
-        },
-      };
-      if (data.costs.hp.variable) {
-        hp.type = "variable";
-        hp.value.variable = data.costs.hp.description || "";
-        hp.static = 0;
-      } else if (data.costs.hp.value > 0) {
-        hp.type = "static";
-        hp.value.static = data.costs.hp.value;
-        hp.value.formula = "";
-        hp.value.variable = "";
+      if (typeof data.costs[pointCost] == "string") {
+        const variableCost = String(pointCost === "mp" ? "manaCost" : "hitCost");
+        data.costs[pointCost] = {
+          type: "variable",
+          value: {
+            static: 0,
+            formula: "",
+            variable: variableCost || "",
+          }
+        };
       }
-      data.costs.hp = hp;
+      if (typeof data.costs[pointCost] == "number") {
+        data.costs[pointCost] = {
+          type: "static",
+          value: {
+            static: Number(data.costs[pointCost]),
+            formula: "",
+            variable: "",
+          },
+        };
+      }
+      if (typeof data.costs[pointCost]?.value == "number") {
+        data.costs[pointCost] = {
+          type: "static",
+          value: {
+            static: data.costs[pointCost].value,
+            formula: "",
+            variable: "",
+          },
+        };
+      }
+      if (typeof data.costs[pointCost]?.value == "string") {
+        data.costs[pointCost] = {
+          type: "variable",
+          value: {
+            static: 0,
+            formula: "",
+            variable: String(data.costs[pointCost].value),
+          },
+        };
+      }
     }
   }
   return data;

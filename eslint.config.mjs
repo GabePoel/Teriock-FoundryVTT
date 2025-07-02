@@ -115,7 +115,7 @@ export default defineConfig([
           tabWidth: 2,
           ignoreUrls: true,
           ignoreStrings: true,
-          ignoreTemplateLiterals: true,
+          ignoreTemplateLiterals: false,
           ignoreComments: true,
         },
       ],

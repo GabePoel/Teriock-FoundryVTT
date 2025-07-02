@@ -37,7 +37,7 @@ export function _messageParts(abilityData) {
         ref.executionTime[src.maneuver][src.executionTime],
         ref.piercing[src.piercing],
         ref.delivery[src.delivery.base],
-        src.interaction == "feat" ? ref.featSaveAttribute[src.featSaveAttribute] : "",
+        src.interaction === "feat" ? ref.featSaveAttribute[src.featSaveAttribute] : "",
         ref.interaction[src.interaction],
       ],
     },
@@ -70,7 +70,7 @@ export function _messageParts(abilityData) {
         src.costs.verbal ? "Verbal" : "",
         src.costs.somatic ? "Somatic" : "",
         src.costs.material ? "Material" : "",
-        src.costs.invoked ? "Invoked" : "",
+        src.invoked ? "Invoked" : "",
       ],
     },
     {

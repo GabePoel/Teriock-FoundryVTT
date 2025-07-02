@@ -34,11 +34,11 @@ export type MessageBlock = {
  * @property font - Font used for message, or `null` for default font.
  */
 export type MessageParts = {
-  image: string;
-  name: string;
-  bars: MessageBar[];
-  blocks: MessageBlock[];
-  font: string | null;
+  image?: string;
+  name?: string;
+  bars?: MessageBar[];
+  blocks?: MessageBlock[];
+  font?: string | null;
 };
 
 /**

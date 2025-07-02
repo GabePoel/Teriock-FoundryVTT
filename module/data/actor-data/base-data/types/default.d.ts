@@ -1,9 +1,8 @@
+import type TeriockActor from "../../../../documents/actor.mjs";
 import { BarData, AttributeData, HackData } from "./stats";
 import { ProtectionData } from "./protections";
-// import { TeriockActor } from "@client/documents/_module.mjs"
-import { TeriockActor } from "../../../../documents/actor.mjs";
-import { TradecraftData } from "./tradecrafts";
 import { TeriockEquipment } from "../../../../types/documents";
+import { TradecraftData } from "./tradecrafts";
 
 export interface TeriockBaseActorDefault {
   /** Parent actor */

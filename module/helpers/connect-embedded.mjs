@@ -8,7 +8,7 @@ import TeriockImageSheet from "../sheets/misc-sheets/image-sheet/image-sheet.mjs
  * This function sets up context menus for embedded documents (items, effects, etc.) that appear
  * in card elements. It provides various actions like enable/disable, equip/unequip, attune/deattune,
  * and other document-specific operations based on the document type and current state.
- * @param {Document} document - The parent document containing the embedded documents.
+ * @param {TeriockActor|TeriockEffect|TeriockItem} document - The parent document containing the embedded documents.
  * @param {HTMLElement} element - The DOM element containing the embedded document cards.
  * @param {boolean} editable - Whether the document is editable by the current user. Defaults to true.
  */
@@ -174,14 +174,14 @@ export default function connectEmbedded(document, element, editable = true) {
               const img = target.getAttribute("data-img");
               if (img && img.length > 0) {
                 const image = new TeriockImageSheet(img);
-                image.render(true);
+                await image.render(true);
               }
             },
           },
           {
             name: "Share Image",
             icon: makeIcon("share", iconStyle),
-            callback: async (target) => {
+            callback: async () => {
               await embedded.chatImage();
             },
           },

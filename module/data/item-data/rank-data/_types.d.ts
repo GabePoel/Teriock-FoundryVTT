@@ -1,7 +1,9 @@
 import type TeriockBaseItemData from "../base-data/base-data.mjs";
+import { TeriockRank } from "../../../types/documents";
 
 declare module "./rank-data.mjs" {
   export default interface TeriockRankData extends TeriockBaseItemData {
+    parent: TeriockRank;
     wikiNamespace: string;
     description: string;
     flaws: string;

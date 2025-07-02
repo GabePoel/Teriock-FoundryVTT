@@ -15,18 +15,18 @@ import { AbilityData } from "../../../../effect-data/_module.mjs";
  * - [Powered abilities](https://wiki.teriock.com/index.php/Category:Powered_abilities)
  *
  * @param {string} name - The name of the protection type (e.g., "resist", "are immune to")
- * @returns {foundry.data.fields.SchemaField}
+ * @returns {SchemaField}
  *
  * @typedef {Object} ProtectionSchema
- * @property {foundry.data.fields.SetField} damageTypes - A list of damage types.
- * @property {foundry.data.fields.SetField} drainTypes - A list of drain types.
- * @property {foundry.data.fields.SetField} statuses - A list of conditions.
- * @property {foundry.data.fields.SetField} elements - A list of elements.
- * @property {foundry.data.fields.SetField} effects - A list of effects.
- * @property {foundry.data.fields.SetField} powerSources - A list of power sources.
- * @property {foundry.data.fields.SetField} abilities - A list of abilities.
- * @property {foundry.data.fields.SetField} other - A list of other protections.
-//  * @property {foundry.data.fields.SetField} combos - A list of key-value pairs that define specific types of abilities.
+ * @property {SetField} damageTypes - A list of damage types.
+ * @property {SetField} drainTypes - A list of drain types.
+ * @property {SetField} statuses - A list of conditions.
+ * @property {SetField} elements - A list of elements.
+ * @property {SetField} effects - A list of effects.
+ * @property {SetField} powerSources - A list of power sources.
+ * @property {SetField} abilities - A list of abilities.
+ * @property {SetField} other - A list of other protections.
+//  * @property {SetField} combos - A list of key-value pairs that define specific types of abilities.
  */
 function protectionField(name) {
   return new fields.SchemaField({
@@ -150,8 +150,8 @@ function protectionField(name) {
  * ```
  *
  * @typedef {Object} ProtectionsSchema
- * @property {foundry.data.fields.SchemaField} resistances - A schema field for actor resistances.
- * @property {foundry.data.fields.SchemaField} immunities - A schema field for actor immunities.
+ * @property {SchemaField} resistances - A schema field for actor resistances.
+ * @property {SchemaField} immunities - A schema field for actor immunities.
  */
 export function _defineProtections(schema) {
   schema.resistances = protectionField("resist");

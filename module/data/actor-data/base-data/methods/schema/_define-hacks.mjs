@@ -9,7 +9,7 @@ const { fields } = foundry.data;
  *
  * @param {number} max - The maximum number of hacks allowed for this body part
  * @param {string} name - The name of the body part (e.g., "Arm", "Leg", "Body")
- * @returns {foundry.data.fields.SchemaField} A schema field containing min, max, and current hack values
+ * @returns {SchemaField} A schema field containing min, max, and current hack values
  */
 function hackField(max, name) {
   return new fields.SchemaField({
@@ -48,12 +48,12 @@ function hackField(max, name) {
  * ```
  *
  * @typedef {Object} HackField
- * @property {foundry.data.fields.NumberField} min - Minimum hack value for this body part (≥0, integer)
- * @property {foundry.data.fields.NumberField} max - Maximum hack value for this body part (≥0, integer)
- * @property {foundry.data.fields.NumberField} value - Current hack value for this body part (≥0, integer)
+ * @property {NumberField} min - Minimum hack value for this body part (≥0, integer)
+ * @property {NumberField} max - Maximum hack value for this body part (≥0, integer)
+ * @property {NumberField} value - Current hack value for this body part (≥0, integer)
  *
  * @typedef {Object} HacksSchema
- * @property {foundry.data.fields.SchemaField} hacks - Object containing all body part hack fields:
+ * @property {SchemaField} hacks - Object containing all body part hack fields:
  *   - arm: {@link HackField} Arm hacks (max: 2)
  *   - leg: {@link HackField} Leg hacks (max: 2)
  *   - body: {@link HackField} Body hacks (max: 1)

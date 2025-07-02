@@ -4,7 +4,7 @@ const { fields } = foundry.data;
  * Creates a currency field definition for tracking different types of money.
  *
  * @param {string} label - The display label for this currency type
- * @returns {foundry.data.fields.NumberField} A number field for tracking currency amounts
+ * @returns {NumberField} A number field for tracking currency amounts
  */
 function currencyField(label) {
   return new fields.NumberField({
@@ -29,22 +29,22 @@ function currencyField(label) {
  * ```
  *
  * @typedef {Object} CurrencyField
- * @property {foundry.data.fields.NumberField} copper - Copper coins (coin)
- * @property {foundry.data.fields.NumberField} silver - Silver coins (coin)
- * @property {foundry.data.fields.NumberField} gold - Gold coins (coin)
- * @property {foundry.data.fields.NumberField} entTearAmber - Ent Tear Ambers (gem)
- * @property {foundry.data.fields.NumberField} fireEyeRuby - Fire Eye Rubies (gem)
- * @property {foundry.data.fields.NumberField} pixiePlumAmethyst - Pixie Plum Amethysts (gem)
- * @property {foundry.data.fields.NumberField} snowDiamond - Snow Diamonds (gem)
- * @property {foundry.data.fields.NumberField} dragonEmerald - Dragon Emeralds (gem)
- * @property {foundry.data.fields.NumberField} moonOpal - Moon Opals (gem)
- * @property {foundry.data.fields.NumberField} magusQuartz - Magus Quartz (gem)
- * @property {foundry.data.fields.NumberField} heartstoneRuby - Heartstone Rubies (gem)
- * @property {foundry.data.fields.NumberField} total - Total money value (calculated field)
+ * @property {NumberField} copper - Copper coins (coin)
+ * @property {NumberField} silver - Silver coins (coin)
+ * @property {NumberField} gold - Gold coins (coin)
+ * @property {NumberField} entTearAmber - Ent Tear Ambers (gem)
+ * @property {NumberField} fireEyeRuby - Fire Eye Rubies (gem)
+ * @property {NumberField} pixiePlumAmethyst - Pixie Plum Amethysts (gem)
+ * @property {NumberField} snowDiamond - Snow Diamonds (gem)
+ * @property {NumberField} dragonEmerald - Dragon Emeralds (gem)
+ * @property {NumberField} moonOpal - Moon Opals (gem)
+ * @property {NumberField} magusQuartz - Magus Quartz (gem)
+ * @property {NumberField} heartstoneRuby - Heartstone Rubies (gem)
+ * @property {NumberField} total - Total money value (calculated field)
  *
  * @typedef {Object} MoneySchema
- * @property {foundry.data.fields.SchemaField} money - {@link CurrencyField} Object containing all currency types
- * @property {foundry.data.fields.NumberField} moneyWeight - Weight of carried money (≥0)
+ * @property {SchemaField} money - {@link CurrencyField} Object containing all currency types
+ * @property {NumberField} moneyWeight - Weight of carried money (≥0)
  */
 export function _defineMoney(schema) {
   schema.money = new fields.SchemaField({

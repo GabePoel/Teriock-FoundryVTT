@@ -10,7 +10,7 @@ const { fields } = foundry.data;
  * @param {number} [options.value=1] - Initial current value for the stat
  * @param {boolean} [options.base=false] - Whether to include a base value field
  * @param {boolean} [options.temp=false] - Whether to include a temporary value field
- * @returns {foundry.data.fields.SchemaField} A schema field containing the stat's value fields
+ * @returns {SchemaField} A schema field containing the stat's value fields
  */
 function statField(name, options = {}) {
   const schema = {
@@ -66,17 +66,17 @@ function statField(name, options = {}) {
  * ```
  *
  * @typedef {Object} StatField
- * @property {foundry.data.fields.NumberField} min - Minimum value for this stat
- * @property {foundry.data.fields.NumberField} max - Maximum value for this stat
- * @property {foundry.data.fields.NumberField} value - Current value for this stat
- * @property {foundry.data.fields.NumberField} [base] - Base value for this stat (if enabled)
- * @property {foundry.data.fields.NumberField} [temp] - Temporary value for this stat (if enabled)
+ * @property {NumberField} min - Minimum value for this stat
+ * @property {NumberField} max - Maximum value for this stat
+ * @property {NumberField} value - Current value for this stat
+ * @property {NumberField} [base] - Base value for this stat (if enabled)
+ * @property {NumberField} [temp] - Temporary value for this stat (if enabled)
  *
  * @typedef {Object} StatsSchema
- * @property {foundry.data.fields.SchemaField} hp - {@link StatField} Health Points with base and temp fields
- * @property {foundry.data.fields.SchemaField} mp - {@link StatField} Mana Points with base and temp fields
- * @property {foundry.data.fields.SchemaField} wither - {@link StatField} Wither stat (max: 100, initial: 20)
- * @property {foundry.data.fields.SchemaField} presence - {@link StatField} Presence stat (max: 1, initial: 0)
+ * @property {SchemaField} hp - {@link StatField} Health Points with base and temp fields
+ * @property {SchemaField} mp - {@link StatField} Mana Points with base and temp fields
+ * @property {SchemaField} wither - {@link StatField} Wither stat (max: 100, initial: 20)
+ * @property {SchemaField} presence - {@link StatField} Presence stat (max: 1, initial: 0)
  */
 export function _defineStats(schema) {
   schema.hp = statField("HP", { base: true, temp: true });
