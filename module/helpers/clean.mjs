@@ -10,7 +10,7 @@ export function cleanValue(value) {
 }
 
 /**
- * Cleans a feet measurement string by removing common synonyms and standardizing format.
+ * Cleans a distance measurement string by removing common synonyms and standardizing format.
  * @param {string} feet - The feet measurement string to clean.
  * @returns {string} The cleaned feet measurement string.
  */
