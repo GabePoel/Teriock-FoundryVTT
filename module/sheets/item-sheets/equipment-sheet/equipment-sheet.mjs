@@ -73,8 +73,8 @@ export default class TeriockEquipmentSheet extends HandlebarsApplicationMixin(Te
    * @returns {Promise<object>} Promise that resolves to the context object.
    * @override
    */
-  async _prepareContext() {
-    const context = await super._prepareContext();
+  async _prepareContext(options) {
+    const context = await super._prepareContext(options);
     const { system } = this.item;
 
     const enrichments = {

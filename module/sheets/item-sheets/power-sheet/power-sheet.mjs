@@ -24,7 +24,7 @@ export default class TeriockPowerSheet extends HandlebarsApplicationMixin(Terioc
     },
   };
   /**
-   * Template parts configuration for the power sheet.
+   * Template rules-parts configuration for the power sheet.
    * @type {object}
    * @static
    */
@@ -52,8 +52,8 @@ export default class TeriockPowerSheet extends HandlebarsApplicationMixin(Terioc
    * @returns {Promise<object>} Promise that resolves to the context object.
    * @override
    */
-  async _prepareContext() {
-    const context = await super._prepareContext();
+  async _prepareContext(options) {
+    const context = await super._prepareContext(options);
     context.enrichedDescription = await this._editor(this.item.system.description);
     context.enrichedFlaws = await this._editor(this.item.system.flaws);
     return context;

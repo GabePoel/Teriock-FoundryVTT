@@ -53,7 +53,7 @@ export default class TeriockImageSheet extends api.HandlebarsApplicationMixin(ap
    * @returns {Promise<object>} Promise that resolves to the context object.
    * @override
    */
-  async _prepareContext() {
+  async _prepareContext(options) {
     return {
       img: this.img,
     };

@@ -594,7 +594,7 @@ export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorShee
    * @returns {Promise<object>} Promise that resolves to the context object.
    * @override
    */
-  async _prepareContext() {
+  async _prepareContext(options) {
     if (!this.actor.effectTypes) {
       this.actor.buildEffectTypes();
     }
@@ -629,7 +629,7 @@ export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorShee
       return a.localeCompare(b);
     });
 
-    const context = await super._prepareContext();
+    const context = await super._prepareContext(options);
     context.activeTab = this._activeTab;
     context.conditions = conditions;
     context.editable = this.isEditable;

@@ -38,7 +38,7 @@ export default class TeriockBaseItemSheet extends TeriockSheet(sheets.ItemSheet)
    * @returns {Promise<object>} Promise that resolves to the context object.
    * @override
    */
-  async _prepareContext() {
+  async _prepareContext(options) {
     const abilityTypeOrder = Object.keys(CONFIG.TERIOCK.abilityOptions.abilityType || {});
     const { effectTypes, effectKeys } = this.item.buildEffectTypes();
     const abilities =
@@ -68,7 +68,7 @@ export default class TeriockBaseItemSheet extends TeriockSheet(sheets.ItemSheet)
 
     const resources = effectTypes.resource || [].sort((a, b) => (a.name || "").localeCompare(b.name || ""));
 
-    const context = await super._prepareContext();
+    const context = await super._prepareContext(options);
     context.item = this.item;
     context.properties = properties;
     context.abilities = abilities;

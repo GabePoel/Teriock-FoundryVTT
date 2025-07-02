@@ -61,12 +61,10 @@ export async function _parse(abilityData, rawHTML) {
   const parser = new DOMParser();
   const doc = parser.parseFromString(rawHTML, "text/html");
 
-  // Clean up old children
-  const oldDescendants = abilityData.parent.getDescendants();
-  const oldDescendantsIds = oldDescendants.map((descendant) => descendant._id);
-  await abilityData.parent.parent.deleteEmbeddedDocuments("ActiveEffect", oldDescendantsIds);
+  // Clean up old subs
+  await abilityData.parent.deleteSubs();
 
-  // Get sub-abilities
+  // Get new subs
   const subs = Array.from(doc.querySelectorAll(".ability-sub-container")).filter(
     (el) => !el.closest(".ability-sub-container:not(:scope)"),
   );
@@ -105,8 +103,8 @@ export async function _parse(abilityData, rawHTML) {
   parameters.editable = false;
   delete parameters.improvement;
   delete parameters.limitation;
-  delete parameters.parentId;
-  delete parameters.childIds;
+  delete parameters.supId;
+  delete parameters.subIds;
 
   // Process dice and effect extraction
   processDiceAndEffectExtraction(parameters);

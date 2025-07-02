@@ -1,30 +1,30 @@
 /** @import TeriockAbilityData from "../../ability-data.mjs" */
 
 /**
- * Poor workaround to allow for children to be accessible for effect duplication.
+ * Poor workaround to allow for subs to be accessible for effect duplication.
  * @param {TeriockAbilityData} system
  * @returns {void}
  * @private
  */
 export function _prepareDerivedData(system) {
-  const childUuids = [];
-  if (system.childIds?.length > 0) {
-    for (const id of system.childIds) {
-      const child = system.parent.parent.getEmbeddedDocument("ActiveEffect", id);
-      if (child) {
-        childUuids.push(child.uuid);
+  const subUuids = [];
+  if (system.subIds?.length > 0) {
+    for (const id of system.subIds) {
+      const sub = system.parent.parent.getEmbeddedDocument("ActiveEffect", id);
+      if (sub) {
+        subUuids.push(sub.uuid);
       }
     }
   }
-  if (childUuids.length > 0) {
-    system.childUuids = childUuids;
+  if (subUuids.length > 0) {
+    system.subUuids = subUuids;
   }
-  let parentUuid = null;
-  if (system.parentId) {
-    const parent = system.parent.parent.getEmbeddedDocument("ActiveEffect", system.parentId);
+  let supUuid = null;
+  if (system.supId) {
+    const parent = system.parent.parent.getEmbeddedDocument("ActiveEffect", system.supId);
     if (parent) {
-      parentUuid = parent.uuid;
+      supUuid = parent.uuid;
     }
-    system.parentUuid = parentUuid;
+    system.supUuid = supUuid;
   }
 }

@@ -25,7 +25,7 @@ export type MessageBlock = {
 };
 
 /**
- * Represents the individual parts that make up a message.
+ * Represents the individual rules-parts that make up a message.
  *
  * @property image - The URL or path to the image associated with the message.
  * @property name - The name or title to display in the message.

@@ -514,12 +514,12 @@ export default function registerHandlebarsHelpers() {
         }
 
         let text = ability.parent?.name;
-        const parent = ability.getParent();
-        if (parent) {
-          text = parent.name;
+        const sup = ability.sup;
+        if (sup) {
+          text = sup.name;
         }
 
-        if (parent && skipDescendants) {
+        if (sup && skipDescendants) {
           return "";
         }
         return Handlebars.helpers.tcard({

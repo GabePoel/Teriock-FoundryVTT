@@ -8,9 +8,7 @@
  * @private
  */
 export function _migrateData(data) {
-  if (data.effects) {
-    data.effects.sort();
-  }
+  // Effect key migration
   if (data.effects?.includes("truth")) {
     data.effects = data.effects.map((effect) => (effect === "truth" ? "truthDetecting" : effect));
   }
@@ -18,6 +16,7 @@ export function _migrateData(data) {
     data.effects = data.effects.map((effect) => (effect === "duelMod" ? "duelModifying" : effect));
   }
 
+  // HP and MP cost migration
   for (const pointCost of ["mp", "hp"]) {
     if (data.costs) {
       if (data.costs[pointCost] === null) {
@@ -72,6 +71,24 @@ export function _migrateData(data) {
         };
       }
     }
+  }
+
+  // Hierarchy migration
+  if (typeof data.parentId === "string") {
+    data.supId = data.parentId;
+    delete data.parentId;
+  }
+  if (typeof data.parentUuid === "string") {
+    data.supUuid = data.parentUuid;
+    delete data.parentUuid;
+  }
+  if (data.childIds instanceof Array) {
+    data.subIds = data.childIds;
+    delete data.subIds;
+  }
+  if (data.childUuids instanceof Array) {
+    data.subUuids = data.childUuids;
+    delete data.subUuids;
   }
   return data;
 }

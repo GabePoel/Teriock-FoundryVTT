@@ -158,13 +158,13 @@ export default function connectEmbedded(document, element, editable = true) {
             name: "Open Source",
             icon: makeIcon("arrow-up-right-from-square", iconStyle),
             callback: () => {
-              const source = embedded.getSource();
+              const source = embedded.source;
               if (source) {
                 source.sheet.render(true);
               }
             },
             condition: () => {
-              return embedded.documentName === "ActiveEffect" && embedded.getSource() !== document;
+              return embedded.documentName === "ActiveEffect" && embedded.source !== document;
             },
           },
           {

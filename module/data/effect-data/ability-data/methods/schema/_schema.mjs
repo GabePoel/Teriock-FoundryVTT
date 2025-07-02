@@ -1,5 +1,6 @@
 import { _defineApplies } from "./_define-applies.mjs";
 import { _defineGeneral } from "./_define-general.mjs";
+import { _defineHierarchy } from "./_define-hierarchy.mjs";
 
 /**
  * Defines the complete schema for Teriock ability data.
@@ -29,5 +30,6 @@ export function _defineSchema() {
   let schema = {};
   schema = _defineApplies(schema);
   schema = _defineGeneral(schema);
+  schema = _defineHierarchy(schema);
   return schema;
 }

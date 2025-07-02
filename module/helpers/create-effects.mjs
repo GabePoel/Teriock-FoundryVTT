@@ -17,10 +17,10 @@ export async function createAbility(document, name, options = {}) {
   if (name) {
     abilityData.name = name;
   }
-  let parentAbility = null;
+  let sup = null;
   let embeddingDocument = document;
   if (document.documentName === "ActiveEffect") {
-    parentAbility = document;
+    sup = document;
     embeddingDocument = document.parent;
   }
   const abilities = await embeddingDocument.createEmbeddedDocuments("ActiveEffect", [abilityData]);
@@ -28,17 +28,17 @@ export async function createAbility(document, name, options = {}) {
   if (ability.name !== "New Ability") {
     await ability.system.wikiPull(options);
   }
-  if (parentAbility) {
-    await parentAbility.parent.updateEmbeddedDocuments("ActiveEffect", [
+  if (sup) {
+    await sup.parent.updateEmbeddedDocuments("ActiveEffect", [
       {
         _id: ability._id,
-        "system.parentId": parentAbility._id,
-        "system.proficient": parentAbility.isProficient,
-        "system.fluent": parentAbility.isFluent,
+        "system.supId": sup._id,
+        "system.proficient": sup.isProficient,
+        "system.fluent": sup.isFluent,
       },
       {
-        _id: parentAbility._id,
-        "system.childIds": parentAbility.system.childIds.concat(ability._id),
+        _id: sup._id,
+        "system.subIds": sup.system.subIds.concat(ability._id),
       },
     ]);
   }

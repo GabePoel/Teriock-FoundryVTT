@@ -2,7 +2,7 @@
 
 /**
  * Checks if an ability should be suppressed based on various conditions.
- * Considers equipment state, attunement, and ancestor effect modifications.
+ * Considers equipment state, attunement, and sup effect modifications.
  * @param {TeriockAbilityData} abilityData - The ability data to check for suppression.
  * @returns {boolean} True if the ability should be suppressed, false otherwise.
  * @private
@@ -21,9 +21,9 @@ export function _suppressed(abilityData) {
       suppressed = !attuned;
     }
   }
-  if (!suppressed && abilityData.parent.getActor() && abilityData.parent.getParentSync()) {
-    const ancestors = abilityData.parent.getAncestorsSync();
-    if (ancestors.some((ancestor) => !ancestor.modifiesActor)) {
+  if (!suppressed && abilityData.parent.getActor() && abilityData.parent.supSync) {
+    const sups = abilityData.parent.allSupsSync;
+    if (sups.some((sup) => !sup.modifiesActor)) {
       suppressed = true;
     }
   }

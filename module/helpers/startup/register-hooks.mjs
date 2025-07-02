@@ -49,19 +49,25 @@ export default function registerHooks() {
   Hooks.on("createActiveEffect", async (document, options, userId) => {
     if (game.user.id === userId && document.isOwner) {
       if (document.type === "ability" || document.type === "effect") {
-        if (document.system.childIds?.length > 0) {
-          const childAbilityData = [];
-          for (const childAbility of await document.getChildrenAsync()) {
-            const data = foundry.utils.duplicate(childAbility);
-            data.system.parentId = document._id;
-            childAbilityData.push(data);
+        console.log(document.system.subIds)
+        if (document.system.subIds?.length > 0) {
+          const subAbilityData = [];
+          let subs = document.subs;
+          if (subs[0] === null) {
+            subs = await document.subsAsync();
           }
-          const newChildAbilities = await document.parent.createEmbeddedDocuments("ActiveEffect", childAbilityData);
-          const newChildIds = newChildAbilities.map((ability) => ability._id);
+          for (const subAbility of subs) {
+            const data = foundry.utils.duplicate(subAbility);
+            console.log(data);
+            data.system.supId = document._id;
+            subAbilityData.push(data);
+          }
+          const newSubAbilities = await document.parent.createEmbeddedDocuments("ActiveEffect", subAbilityData);
+          const newSubIds = newSubAbilities.map((ability) => ability._id);
           await document.update({
-            "system.childIds": newChildIds,
+            "system.subIds": newSubIds,
           });
-          await document.unsaveFamily();
+          await document.unlockHierarchy();
         }
       }
       document.getActor()?.buildEffectTypes();
@@ -72,16 +78,16 @@ export default function registerHooks() {
   Hooks.on("deleteActiveEffect", async (document, options, userId) => {
     if (game.user.id === userId && document.isOwner) {
       if (document.type === "ability" || document.type === "effect") {
-        if (document.system.parentId) {
-          const parent = document.parent.getEmbeddedDocument("ActiveEffect", document.system.parentId);
-          if (parent) {
-            const childIds = parent.system.childIds.filter((id) => id !== document._id);
-            await parent.update({ "system.childIds": childIds });
+        if (document.system.supId) {
+          const sup = document.parent.getEmbeddedDocument("ActiveEffect", document.system.supId);
+          if (sup) {
+            const subIds = sup.system.subIds.filter((id) => id !== document._id);
+            await sup.update({ "system.subIds": subIds });
           }
         }
-        if (document.system.childIds?.length > 0) {
-          const childIds = document.system.childIds;
-          await document.parent.deleteEmbeddedDocuments("ActiveEffect", childIds);
+        if (document.system.subIds?.length > 0) {
+          const subIds = document.system.subIds;
+          await document.parent.deleteEmbeddedDocuments("ActiveEffect", subIds);
         }
       }
       document.getActor()?.buildEffectTypes();
@@ -93,10 +99,10 @@ export default function registerHooks() {
   Hooks.on("updateActiveEffect", async (document, updateData, options, userId) => {
     console.debug(`Teriock | Active Effect updated: ${document.name}`, updateData);
     if (game.user.id === userId && document.isOwner && document.type === "ability") {
-      const parent = document.getParent();
-      if (parent && typeof parent.update === "function") {
-        await parent.update({});
-        await parent.sheet.render();
+      const sup = document.sup;
+      if (sup && typeof sup.update === "function") {
+        await sup.update({});
+        await sup.sheet.render();
       }
     }
   });

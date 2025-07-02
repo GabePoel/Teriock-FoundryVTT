@@ -55,14 +55,14 @@ export default class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(
    * @returns {Promise<object>} Promise that resolves to the context object.
    * @override
    */
-  async _prepareContext() {
-    const context = await super._prepareContext();
+  async _prepareContext(options) {
+    const context = await super._prepareContext(options);
 
     const system = this.document.system;
     context.tab = this._tab;
     context.consequenceTab = this._consequenceTab;
-    context.childAbilities = await this.document.getChildrenAsync();
-    context.parentAbility = this.document.getParent();
+    context.childAbilities = await this.document.subsAsync();
+    context.parentAbility = this.document.sup;
     const editors = {
       manaCost: system.costs.mp.value.variable,
       hitCost: system.costs.hp.value.variable,

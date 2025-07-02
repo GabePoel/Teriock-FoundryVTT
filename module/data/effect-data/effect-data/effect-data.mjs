@@ -3,7 +3,7 @@ import TeriockBaseEffectData from "../base-data/base-data.mjs";
 
 /**
  * Effect-specific effect data model.
- * Handles general effect functionality including various expiration types and child relationships.
+ * Handles general effect functionality including various expiration types and sub relationships.
  * @extends {TeriockBaseEffectData}
  */
 export default class TeriockEffectData extends TeriockBaseEffectData {
@@ -58,8 +58,8 @@ export default class TeriockEffectData extends TeriockBaseEffectData {
           hint: "If true, effect expires if its source is deleted or disabled.",
         }),
       }),
-      childIds: new fields.ArrayField(new fields.DocumentIdField()),
-      childUuids: new fields.ArrayField(new fields.DocumentUUIDField()),
+      subIds: new fields.ArrayField(new fields.DocumentIdField()),
+      subUuids: new fields.ArrayField(new fields.DocumentUUIDField()),
     };
   }
 
@@ -119,7 +119,7 @@ export default class TeriockEffectData extends TeriockBaseEffectData {
       should = should || (present ? hasCondition : !hasCondition);
     }
     if (this.sustainedExpiration) {
-      const source = this.parent.getSource();
+      const source = this.parent.source;
       should = should || !source || source.disabled;
     }
     return should;

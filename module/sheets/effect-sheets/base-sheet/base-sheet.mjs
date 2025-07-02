@@ -34,8 +34,8 @@ export default class TeriockBaseEffectSheet extends TeriockSheet(sheets.ActiveEf
    * @returns {Promise<object>} Promise that resolves to the context object.
    * @override
    */
-  async _prepareContext() {
-    const context = await super._prepareContext();
+  async _prepareContext(options) {
+    const context = await super._prepareContext(options);
     context.disabled = this.document.disabled;
     context.isSuppressed = this.document.isSuppressed;
     context.transfer = this.document.transfer;

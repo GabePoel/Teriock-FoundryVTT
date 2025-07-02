@@ -45,79 +45,191 @@ export default class TeriockEffect extends ChildDocumentMixin(foundry.documents.
   }
 
   /**
-   * Gets the parent effect that provides this effect, if there is one.
-   * @returns {TeriockEffect|null} The parent effect or null if no parent exists.
+   * Gets the effect that provides this effect, if there is one.
+   * Synchronous by default. Asynchronous fallback for compendiums.
+   * @returns {TeriockEffect|null|Promise<TeriockEffect|null>}
    */
-  getParent() {
-    if (this.system.parentUuid) {
+  get sup() {
+    if (this.system.supId) {
+      const effect = this.supSync
+      if (effect) {
+        return effect;
+      }
+    }
+    if (this.system.supUuid) {
       try {
-        return foundry.utils.fromUuidSync(this.system.parentUuid);
-      } catch (error) {
+        return foundry.utils.fromUuidSync(this.system.supUuid);
+      } catch (e) {
         // Fallback to async if sync fails
-        return foundry.utils.fromUuid(this.system.parentUuid);
+        return foundry.utils.fromUuid(this.system.supUuid);
       }
     }
     return null;
   }
 
   /**
-   * Gets the parent effect synchronously using the embedded document system.
-   * @returns {TeriockEffect|null} The parent effect or null if no parent exists.
+   * Gets te effect that provides this effect, if there is one.
+   * Always synchronous.
+   * @returns {TeriockEffect|null}
    */
-  getParentSync() {
-    if (this.system.parentUuid) {
-      return this.parent.getEmbeddedDocument("ActiveEffect", this.system.parentId);
+  get supSync() {
+    if (this.system.supId) {
+      return this.parent.getEmbeddedDocument("ActiveEffect", this.system.supId);
     }
     return null;
   }
 
   /**
-   * Gets the top level ancestor effect that provides this effect, if there is one.
-   * @returns {TeriockEffect|null} The top level ancestor effect or null if no ancestor exists.
+   * Gets all effects that this effect is a sub-effect of.
+   * Synchronous by default. Asynchronous fallback for compendiums.
+   * @returns {TeriockEffect[]|Promise<TeriockEffect[]>} Array of super-effects, ordered from immediate sup to top level.
    */
-  getAncestor() {
-    let ancestor = this.getParent();
-    if (ancestor) {
-      ancestor = ancestor.getParent() || ancestor;
+  get allSups() {
+    const supEffects = [];
+    let supEffect = this.sup;
+    if (supEffect) {
+      supEffects.push(supEffect);
+      supEffects.push(...supEffect.allSups)
     }
-    return ancestor;
+    return supEffects;
   }
 
   /**
-   * Gets all ancestor effects in the hierarchy, starting from the immediate parent.
-   * @returns {TeriockAbility[]} Array of ancestor effects, ordered from immediate parent to top level.
+   * Gets all effects that this effect is a sub-effect of.
+   * Always synchronous.
+   * @returns {TeriockEffect[]} Array of super-effects, ordered from immediate sup to top level.
    */
-  getAncestors() {
-    const ancestors = [];
-    let ancestor = this.getParent();
-    if (ancestor) {
-      ancestors.push(ancestor);
-      ancestors.push(...ancestor.getAncestors());
+  get allSupsSync(){
+    const supEffects = [];
+    let supEffect = this.supSync;
+    if (supEffect) {
+      supEffects.push(supEffect);
+      supEffects.push(...supEffect.allSupsSync)
     }
-    return ancestors;
+    return supEffects;
   }
 
   /**
-   * Gets all ancestor effects synchronously using the embedded document system.
-   * @returns {TeriockAbility[]} Array of ancestor effects, ordered from immediate parent to top level.
+   * Gets all sub-effects that are derived from this effect.
+   * @returns {TeriockEffect[]|Promise<TeriockEffect>} Array of sub-effects.
    */
-  getAncestorsSync() {
-    const ancestors = [];
-    let ancestor = this.getParentSync();
-    if (ancestor) {
-      ancestors.push(ancestor);
-      ancestors.push(...ancestor.getAncestorsSync());
+  get subs() {
+    const subEffects = [];
+    if (this.system.subIds?.length > 0) {
+      for (const uuid of this.system.subUuids) {
+        try {
+          const subEffect = foundry.utils.fromUuidSync(uuid);
+          subEffects.push(subEffect);
+        } catch (e) {
+          // Fallback to async if sync fails
+          const subEffect = foundry.utils.fromUuid(uuid);
+          subEffects.push(subEffect);
+        }
+      }
     }
-    return ancestors;
+    return subEffects;
   }
 
   /**
-   * Gets the document that most directly applies this effect. If it's an ability, returns that.
+   * Gets all sub-effects that are derived from this effect.
+   * Always asynchronous.
+   * @returns {function(): Promise<TeriockEffect[]>} Array of sub-effects.
+   */
+  get subsAsync() {
+    return (async () => {
+      const subEffects = [];
+      if (this.system.subUuids?.length > 0) {
+        for (const uuid of this.system.subUuids) {
+          const subEffect = await foundry.utils.fromUuid(uuid);
+          if (subEffect) {
+            subEffects.push(subEffect);
+          }
+        }
+      }
+      return subEffects;
+    })
+  }
+
+  /**
+   * Gets all sub-effects descendant from this effect recursively.
+   * Synchronous by default. Asynchronous fallback for compendiums.
+   * @returns {TeriockEffect[]} Array of all descendant effects.
+   */
+  get allSubs(){
+    const allSubEffects = [];
+    const subEffects = this.subs;
+    for (const subEffect of subEffects) {
+      allSubEffects.push(subEffect);
+      allSubEffects.push(...subEffect.allSubs);
+    }
+    return allSubEffects;
+  }
+
+  /**
+   * Gets all sub-effect descendents from this effect recursively.
+   * Always asynchronous.
+   * @returns {function(): Promise<TeriockEffect[]>}
+   */
+  get allSubsAsync() {
+    return (async () => {
+      const allSubEffects = [];
+      const subEffects = await this.subsAsync;
+      for (const subEffect of subEffects) {
+        allSubEffects.push(subEffect);
+        const subSubEffects = await subEffect.allSubsAsync;
+        allSubEffects.push(...subSubEffects);
+      }
+      return allSubEffects;
+    })
+  }
+
+  /**
+   * Saves the hierarchy relationships by updating sub UUIDs and sup UUID.
+   * @returns {Promise<void>} Promise that resolves once the hierarchy data is saved.
+   */
+  async lockHierarchy() {
+    const subs = this.subs;
+    const subUuids = subs.map((sub) => sub.uuid);
+    const sup = this.sup;
+    const supUuid = sup ? sup.uuid : null;
+    await this.update({
+      "system.subUuids": subUuids,
+      "system.supUuid": supUuid,
+    })
+  }
+
+  /**
+   * Removes the hierarchy relationships by clearing sub UUIDs and sup UUID.
+   * @returns {Promise<void>} Promise that resolves when the hierarchy data is cleared.
+   */
+  async unlockHierarchy() {
+    await this.update({
+      "system.subUuids": [],
+      "system.supUuid": null,
+    })
+  }
+
+  /**
+   * Deletes all sub-effects and clears the sub IDs from this effect.
+   * @returns {Promise<void>} Promise that resolves when all subs are deleted.
+   */
+  async deleteSubs() {
+    if (this.system?.subIds?.length > 0) {
+      const subIds = this.system.subIds;
+      await this.update({
+        "system.subIds": [],
+      })
+      await this.parent?.deleteEmbeddedDocuments("ActiveEffect", subIds);
+    }
+  }
+
+  /**
+   * Gets the document that most directly applies this effect. If it's an effect, returns that.
    * Otherwise, gets what Foundry considers to be the parent.
    * @returns {TeriockActor|TeriockEffect|TeriockItem} The source document that applies this effect.
    */
-  getSource() {
-    let source = this.getParent();
+  get source() {
+    let source = this.sup;
     if (!source) {
       source = this.parent;
     }
@@ -125,49 +237,13 @@ export default class TeriockEffect extends ChildDocumentMixin(foundry.documents.
   }
 
   /**
-   * Gets all child effects that are derived from this effect.
-   * @returns {ActiveEffect[]} Array of child effects.
-   */
-  getChildren() {
-    const children = [];
-    if (this.system.childIds?.length > 0) {
-      for (const uuid of this.system.childUuids) {
-        try {
-          const child = foundry.utils.fromUuidSync(uuid);
-          children.push(child);
-        } catch (error) {
-          // Fallback to async if sync fails
-          const child = foundry.utils.fromUuid(uuid);
-          children.push(child);
-        }
-      }
-    }
-    return children;
-  }
-
-  /**
-   * Gets all child effects asynchronously using UUID resolution.
-   * @returns {Promise<ActiveEffect[]>} Promise that resolves to an array of child effects.
-   */
-  async getChildrenAsync() {
-    const children = [];
-    if (this.system.childUuids?.length > 0) {
-      for (const uuid of this.system.childUuids) {
-        const child = await foundry.utils.fromUuid(uuid);
-        children.push(child);
-      }
-    }
-    return children;
-  }
-
-  /**
-   * Checks if this effect is a reference effect by examining its ancestors for non-passive maneuvers.
+   * Checks if this effect is a reference effect by examining its sups for non-passive maneuvers.
    * @returns {boolean} True if this is a reference effect, false otherwise.
    */
   get isReference() {
-    const ancestors = this.getAncestors();
-    for (const ancestor of ancestors) {
-      if (ancestor.system.maneuver !== "passive") {
+    const sups = this.allSups;
+    for (const sup of sups) {
+      if (sup.system.maneuver !== "passive") {
         return true;
       }
     }
@@ -175,74 +251,20 @@ export default class TeriockEffect extends ChildDocumentMixin(foundry.documents.
   }
 
   /**
-   * Saves the family relationships by updating child UUIDs and parent UUID.
-   * @returns {Promise<void>} Promise that resolves when the family data is saved.
-   */
-  async saveFamily() {
-    const children = this.getChildren();
-    const childUuids = children.map((child) => child.uuid);
-    const parent = this.getParent();
-    const parentUuid = parent ? parent.uuid : null;
-    await this.update({
-      "system.childUuids": childUuids,
-      "system.parentUuid": parentUuid,
-    });
-  }
-
-  /**
-   * Removes family relationships by clearing child UUIDs and parent UUID.
-   * @returns {Promise<void>} Promise that resolves when the family data is cleared.
-   */
-  async unsaveFamily() {
-    await this.update({
-      "system.childUuids": [],
-      "system.parentUuid": null,
-    });
-  }
-
-  /**
    * Duplicates the effect and updates parent-child relationships.
-   * @todo Create addChild and setParent methods to handle this more generally.
+   * @todo Create addSub and setSup methods to handle this more generally.
    * @override
    * @returns {Promise<TeriockEffect>} Promise that resolves to the duplicated effect.
    */
   async duplicate() {
     const copy = await super.duplicate();
-    const parent = copy.getParent();
-    if (parent) {
-      const parentChildIds = parent.system.childIds || [];
-      parentChildIds.push(copy.id);
-      await parent.update({
-        "system.childIds": parentChildIds,
+    const sup = copy.sup;
+    if (sup) {
+      const supSubIds = sup.system.subIds || [];
+      supSubIds.push(copy.id);
+      await sup.update({
+        "system.subIds": supSubIds,
       });
-    }
-  }
-
-  /**
-   * Gets all descendant effects (children, grandchildren, etc.) in a recursive manner.
-   * @returns {TeriockAbility[]} Array of all descendant effects.
-   */
-  getDescendants() {
-    const descendants = [];
-    const children = this.getChildren();
-    for (const child of children) {
-      descendants.push(child);
-      descendants.push(...child.getDescendants());
-    }
-    return descendants;
-  }
-
-  /**
-   * Deletes all child effects and clears the child IDs from this effect.
-   * @returns {Promise<void>} Promise that resolves when all children are deleted.
-   */
-  async deleteChildren() {
-    if (this.system?.childIds?.length > 0) {
-      const childIds = this.system.childIds;
-      await this.update({
-        "system.childIds": [],
-      });
-      await this.parent?.deleteEmbeddedDocuments("ActiveEffect", childIds);
     }
   }
 

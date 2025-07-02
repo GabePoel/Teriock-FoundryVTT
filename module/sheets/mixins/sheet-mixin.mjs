@@ -262,7 +262,7 @@ export const TeriockSheet = (Base) =>
      * @returns {Promise<object>} Promise that resolves to the context object.
      * @override
      */
-    async _prepareContext() {
+    async _prepareContext(options) {
       return {
         config: CONFIG.TERIOCK,
         editable: this.editable,
@@ -433,16 +433,7 @@ export const TeriockSheet = (Base) =>
      */
     _onDragStart(event) {
       const embedded = this._embeddedFromCard(event.currentTarget);
-      const dragList = [];
-      dragList.push(embedded);
-      // Uncomment if migrating copy implementation out of hooks
-      // if (embedded?.documentName === "ActiveEffect") {
-      //   const children = embedded.getChildren();
-      //   children.forEach((child) => {
-      //     dragList.push(child);
-      //   });
-      // }
-      const dragData = dragList.map((item) => item?.toDragData());
+      const dragData = embedded?.toDragData();
       console.log("dragData", dragData);
       if (dragData) {
         event.dataTransfer.setData("text/plain", JSON.stringify(dragData));
@@ -465,13 +456,11 @@ export const TeriockSheet = (Base) =>
      * @private
      */
     async _onDrop(event) {
-      const data = await ux.TextEditor.getDragEventData(event);
-      for (const document of data) {
-        if (document.type === "ActiveEffect") {
-          await this._onDropActiveEffect(event, document);
-        } else if (document.type === "Item") {
-          await this._onDropItem(event, document);
-        }
+      const document = await ux.TextEditor.getDragEventData(event);
+      if (document.type === "ActiveEffect") {
+        await this._onDropActiveEffect(event, document);
+      } else if (document.type === "Item") {
+        await this._onDropItem(event, document);
       }
       return true;
     }
@@ -487,7 +476,7 @@ export const TeriockSheet = (Base) =>
       const effect = await getDocumentClass("ActiveEffect").fromDropData(data);
       if (!this._canDropEffect(effect)) return false;
 
-      await effect.saveFamily();
+      await effect.lockHierarchy();
       const target = this.document.documentName === "ActiveEffect" ? this.document.parent : this.document;
       return await target.createEmbeddedDocuments("ActiveEffect", [effect]);
     }

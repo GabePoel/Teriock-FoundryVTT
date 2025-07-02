@@ -24,18 +24,18 @@ function removeAttributeSaveChanges(changes) {
 /**
  * Creates context menus for ability configuration.
  * Provides comprehensive menu options for all ability properties and settings.
- * @param {ActiveEffect} ability - The ability to create context menus for.
+ * @param {TeriockAbility} ability - The ability to create context menus for.
  * @returns {object} Object containing all context menu configurations.
  */
 export function contextMenus(ability) {
   /**
    * Fetches configuration values from CONFIG.TERIOCK.abilityOptions.
-   * @param {string} keyChain - Dot-separated key chain to traverse.
+   * @param {string} keychain - Dot-separated keychain to traverse.
    * @returns {*} The configuration value at the specified path.
    */
-  function fetch(keyChain) {
+  function fetch(keychain) {
     let keys = CONFIG.TERIOCK.abilityOptions;
-    const keysArray = keyChain.split(".");
+    const keysArray = keychain.split(".");
     for (const key of keysArray) {
       keys = keys[key];
     }
@@ -44,13 +44,13 @@ export function contextMenus(ability) {
 
   /**
    * Creates a quick menu from configuration options.
-   * @param {string} keyChain - The configuration key chain to use.
+   * @param {string} keychain - The configuration keychain to use.
    * @param {string} updateKey - The system key to update when an option is selected.
    * @param {boolean|null} nullOption - Whether to include a "None" option.
    * @returns {Array} Array of menu options.
    */
-  function quickMenu(keyChain, updateKey, nullOption = null) {
-    const keys = fetch(keyChain);
+  function quickMenu(keychain, updateKey, nullOption = null) {
+    const keys = fetch(keychain);
     const out = Object.entries(keys).map(([key, value]) => ({
       name: value,
       icon: CONFIG.TERIOCK.icons[key],
@@ -94,7 +94,7 @@ export function contextMenus(ability) {
             "system.maneuver": "active",
             "system.executionTime": "a1",
           });
-          await ability.deleteChildren();
+          await ability.deleteSubs();
         },
       },
       {
@@ -105,7 +105,7 @@ export function contextMenus(ability) {
             "system.maneuver": "reactive",
             "system.executionTime": "r1",
           });
-          await ability.deleteChildren();
+          await ability.deleteSubs();
         },
       },
       {
@@ -125,7 +125,7 @@ export function contextMenus(ability) {
             "system.maneuver": "slow",
             "system.executionTime": "10 Minutes",
           });
-          await ability.deleteChildren();
+          await ability.deleteSubs();
         },
       },
     ],
