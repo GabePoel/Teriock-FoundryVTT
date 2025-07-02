@@ -395,12 +395,11 @@ export const TeriockSheet = (Base) =>
      * @private
      */
     _connectContextMenu(cssClass, options, eventName) {
-      const menu = new ux.ContextMenu(this.element, cssClass, options, {
+      return new ux.ContextMenu(this.element, cssClass, options, {
         eventName,
         jQuery: false,
         fixed: false,
       });
-      return menu;
     }
 
     /**
@@ -502,7 +501,7 @@ export const TeriockSheet = (Base) =>
      * Handles dropping of items.
      * @param {DragEvent} event - The drop event.
      * @param {object} data - The item data.
-     * @returns {Promise<boolean>} Promise that resolves to true if drop was successful.
+     * @returns {Promise<TeriockItem>} Promise that resolves to true if drop was successful.
      * @private
      */
     async _onDropItem(event, data) {
@@ -511,9 +510,22 @@ export const TeriockSheet = (Base) =>
 
       const source = await utils.fromUuid(data.uuid);
       if (item.parent?.documentName === "Actor" && item.type === "equipment") {
-        await source.delete();
+        if (item.parent?.documentName === "Actor" && item.system.consumable) {
+          const targetItem = this.document.items.getName(item.name);
+          if (targetItem && targetItem.system.consumable) {
+            targetItem.update({
+              'system.quantity': targetItem.system.quantity + item.system.quantity,
+            })
+            await source.delete();
+            return targetItem;
+          }
+        }
+        if (source) {
+          await source.delete();
+        }
       }
-      return await this.document.createEmbeddedDocuments("Item", [item]);
+      const newItems = await this.document.createEmbeddedDocuments("Item", [item]);
+      return newItems[0];
     }
 
     /**
