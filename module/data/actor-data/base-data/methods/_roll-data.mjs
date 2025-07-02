@@ -400,18 +400,24 @@ function defenseData(system, data) {
  * @private
  */
 function offenseData(system, data) {
-  const hasAv0 =
-    system.piercing === "av0" ||
-    system.piercing === "ub" ||
-    system?.primaryAttacker?.effectKeys?.property?.has("av0") ||
-    system?.primaryAttacker?.effectKeys?.property?.has("ub");
-
+  const weaponAv0 =
+    system?.wielding.attacker.derived?.effectKeys?.property?.has("av0") ||
+    system?.wielding.attacker.derived?.effectKeys?.property?.has("ub");
+  const naturalAv0 = system.piercing === "av0" || system.piercing === "ub";
+  const hasAv0 = weaponAv0 || naturalAv0;
+  const weaponUb = system?.wielding.attacker.derived?.effectKeys?.property?.has("ub");
+  const naturalUb = system.piercing === "ub";
+  const hasUb = weaponUb || naturalUb;
   Object.assign(data, {
     sb: system.sb ? 1 : 0,
     av0: hasAv0 ? 2 : 0,
-    "av0.wep": system?.primaryAttacker?.effectKeys?.property?.has("av0") ? 1 : 0,
-    "av0.abi": 0, // Would need to be calculated from active abilities
-    "av0.nat": hasAv0 && !system?.primaryAttacker?.effectKeys?.property?.has("av0") ? 1 : 0,
+    "av0.wep": weaponAv0 ? 2 : 0,
+    "av0.abi": 0, // Determined by ability used.
+    "av0.nat": naturalAv0 ? 2 : 0,
+    ub: hasUb ? 1 : 0,
+    "ub.wep": weaponUb ? 1 : 0,
+    "ub.abi": 0, // Determined by ability used.
+    "ub.nat": naturalUb ? 1 : 0,
     atkPen: system.attackPenalty,
   });
 }
@@ -481,13 +487,13 @@ function equipmentData(system, data) {
   const equipment = actor.itemTypes.equipment.filter((item) => item.system.equipped);
 
   // Primary attack weapon
-  const primaryAttacker = system.primaryAttacker;
+  const primaryAttacker = system.wielding.attacker.derived;
   if (primaryAttacker) {
     addEquipmentData(data, "atk", primaryAttacker);
   }
 
   // Primary block weapon
-  const primaryBlocker = system.primaryBlocker;
+  const primaryBlocker = system.wielding.blocker.derived;
   if (primaryBlocker) {
     addEquipmentData(data, "blo", primaryBlocker);
   }
@@ -495,15 +501,15 @@ function equipmentData(system, data) {
 
 /**
  * Helper function to add equipment data for a specific slot.
+ * @todo Add properties.
  * @param {object} data - The roll data object to populate.
  * @param {string} slot - The equipment slot (atk, blo).
- * @param {object} equipment - The equipment item.
+ * @param {TeriockEquipment|null} equipment - The equipment item.
  * @returns {void}
  * @private
  */
 function addEquipmentData(data, slot, equipment) {
-  const sys = equipment.system;
-
+  const sys = equipment?.system;
   data[`${slot}.dmg`] = sys.damage || "0";
   data[`${slot}.dmg.2h`] = sys.twoHandedDamage || "0";
   data[`${slot}.range`] = sys.range || 0;
@@ -517,18 +523,4 @@ function addEquipmentData(data, slot, equipment) {
   data[`${slot}.dampened`] = sys.dampened ? 1 : 0;
   data[`${slot}.consumable`] = sys.consumable ? 1 : 0;
   data[`${slot}.quantity`] = sys.quantity || 1;
-
-  // Add property flags
-  const properties = equipment.transferredEffects
-    .filter((effect) => effect.type === "property")
-    .map((effect) => effect.name);
-
-  // Convert property names to camelCase
-  for (const property of properties) {
-    const camelCase = property
-      .toLowerCase()
-      .replace(/[^a-z0-9]+(.)/g, (match, char) => char.toUpperCase())
-      .replace(/^[A-Z]/, (char) => char.toLowerCase());
-    data[`${slot}.prop.${camelCase}`] = 1;
-  }
 }

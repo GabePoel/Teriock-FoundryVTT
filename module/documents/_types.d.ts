@@ -8,10 +8,39 @@ import type {
   TeriockItem as TeriockItemType,
   TeriockToken as TeriockTokenType,
 } from "./_module.mjs";
+import {
+  TeriockAbility,
+  TeriockCondition,
+  TeriockEquipment,
+  TeriockFluency,
+  TeriockPower,
+  TeriockProperty,
+  TeriockRank,
+  TeriockResource,
+} from "../types/documents";
 
 type ActorModel = (typeof actorModels)[keyof typeof actorModels];
 type EffectModel = (typeof effectModels)[keyof typeof effectModels];
 type ItemModel = (typeof itemModels)[keyof typeof itemModels];
+
+interface ParentDocumentMixinInterface {
+  validEffects: TeriockEffect[];
+  itemTypes: {
+    equipment?: TeriockEquipment[];
+    power?: TeriockPower[];
+    rank?: TeriockRank[];
+  }
+  effectTypes: {
+    ability?: TeriockAbility[];
+    attunement?: TeriockAttunement[];
+    base?: TeriockEffect[];
+    condition?: TeriockCondition[];
+    effect?: TeriockEffect[];
+    fluency?: TeriockFluency[];
+    property?: TeriockProperty[];
+    resource?: TeriockResource[];
+  }
+}
 
 declare module "@client/documents/_module.mjs" {
   interface TeriockActor extends TeriockActorType, ActorData, ParentDocumentMixinInterface {

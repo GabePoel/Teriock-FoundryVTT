@@ -4,7 +4,7 @@ import { SheetData } from "./sheet";
 /**
  * Derived data properties.
  */
-export interface TeriockDerivedActorData {
+export interface TeriockBaseActorDerived {
   // Size and encumbrance
   /** The calculated encumbrance level (0-3) based on carried weight vs capacity */
   encumbranceLevel: number;
@@ -62,10 +62,6 @@ export interface TeriockDerivedActorData {
   weightCarried: number;
   /** Weight of carried money */
   moneyWeight: number;
-
-  // Speed adjustments
-  /** Speed adjustments object with non-negative values */
-  speedAdjustments: Record<string, number>;
 
   // Enhanced sheet data
   sheet: SheetData & {

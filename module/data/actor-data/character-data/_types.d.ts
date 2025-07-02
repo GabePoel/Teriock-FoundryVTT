@@ -1,6 +1,8 @@
-import type TeriockBaseActorData from "../base-data/base-data.mjs";
+import type TeriockCharacterSheet from "../../../sheets/actor-sheets/character-sheet/character-sheet.mjs";
+import TeriockBaseActorData from "../base-data/base-data.mjs";
 
 declare module "./character-data.mjs" {
-  type TeriockCharacterData = TeriockBaseActorData;
-  export default TeriockCharacterData;
+  export default interface TeriockCharacterData extends TeriockBaseActorData {
+    parent: TeriockBaseActorData.parent & { sheet: TeriockCharacterSheet };
+  }
 }

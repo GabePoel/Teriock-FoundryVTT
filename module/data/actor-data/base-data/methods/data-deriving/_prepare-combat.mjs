@@ -12,12 +12,14 @@ export function _prepareDefenses(system) {
   const sheet = system.sheet;
   const equipment = actor.itemTypes.equipment;
   // Find and validate primary blocker
-  if (sheet.primaryBlocker) {
-    const blocker = equipment.find((i) => i._id === sheet.primaryBlocker && i.system.equipped);
-    system.primaryBlocker = blocker || null;
+  const blocker = actor.items.get(system.wielding.blocker.raw);
+  if (blocker?.system.equipped) {
+    system.wielding.blocker.derived = blocker;
+  } else {
+    system.wielding.blocker.derived = null;
   }
   // Block value
-  system.bv = system.primaryBlocker?.system.bv || 0;
+  system.bv = system.wielding.blocker.derived?.bv || 0;
   // Armor value
   const equipped = equipment.filter((i) => i.system.equipped);
   const av = Math.max(...equipped.map((item) => item.system.av || 0), system.naturalAv || 0);
@@ -42,10 +44,10 @@ export function _prepareDefenses(system) {
  */
 export function _prepareOffenses(system) {
   const actor = system.parent;
-  if (system.sheet.primaryAttacker) {
-    system.primaryAttacker = actor.itemTypes.equipment.find((i) => i._id === system.sheet.primaryAttacker);
-    if (!system.primaryAttacker || !system.primaryAttacker.system.equipped) {
-      system.sheet.primaryAttacker = null;
-    }
+  const attacker = actor.items.get(system.wielding.attacker.raw);
+  if (attacker?.system.equipped) {
+    system.wielding.attacker.derived = attacker;
+  } else {
+    system.wielding.attacker.derived = null;
   }
 }

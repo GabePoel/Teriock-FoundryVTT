@@ -344,7 +344,7 @@ async function stageUse(abilityData, advantage, disadvantage) {
   useData.costs.hp = await calculateCost(abilityData.costs.hp, useData.rollData);
 
   // Build initial formula
-  useData.formula = buildInitialFormula(abilityData, advantage, disadvantage);
+  useData.formula = buildFormula(abilityData, advantage, disadvantage);
 
   // Handle dialogs for variable costs and heightened
   await handleDialogs(abilityData, useData);
@@ -381,21 +381,29 @@ async function calculateCost(costConfig, rollData) {
 }
 
 /**
- * Builds the initial roll formula based on interaction type and advantage/disadvantage.
+ * Builds the roll formula based on interaction type and advantage/disadvantage.
  * @param {TeriockAbilityData} abilityData - The ability data to build formula for.
  * @param {boolean} advantage - Whether the roll has advantage.
  * @param {boolean} disadvantage - Whether the roll has disadvantage.
  * @returns {string} The initial roll formula.
  * @private
  */
-function buildInitialFormula(abilityData, advantage, disadvantage) {
+function buildFormula(abilityData, advantage, disadvantage) {
+  let formula;
   if (abilityData.interaction === "attack") {
-    let formula = advantage ? "2d20kh1" : disadvantage ? "2d20kl1" : "1d20";
-    formula += " + @atkPen + @av0";
-    if (abilityData.delivery.base === "weapon") formula += " + @sb";
-    return formula;
+    formula = advantage ? "2d20kh1" : disadvantage ? "2d20kl1" : "1d20";
+    formula += " + @atkPen";
+    if (abilityData.delivery.base === "weapon") {
+      formula += " + @av0 + @sb";
+    } else {
+      formula += " + @av0.abi";
+    }
+  } else if (abilityData.interaction === "feat") {
+    formula = "10";
+  } else {
+    formula = "0";
   }
-  return abilityData.interaction === "feat" ? "10" : "0";
+  return formula;
 }
 
 /**
@@ -485,18 +493,20 @@ export async function _generateAttackRoll(abilityData, useData, options = {}) {
   const { advantage = false, disadvantage = false, target = null, message = null, buttons = [] } = options;
 
   // Build roll formula
-  let rollFormula = buildAttackFormula(abilityData, advantage, disadvantage, useData);
+  // let rollFormula = buildAttackFormula(abilityData, advantage, disadvantage, useData);
 
   // Prepare roll data
-  const rollData = { ...useData.rollData, av0: 0, h: useData.modifiers.heightened || 0 };
+  const rollData = { ...useData.rollData, h: useData.modifiers.heightened || 0 };
 
   // Handle piercing and properties
   const { diceClass, diceTooltip, unblockable } = getPiercingInfo(abilityData, rollData);
+  console.log("rollData", rollData);
 
   // Build context
   const context = buildRollContext(abilityData, target, buttons, diceClass, diceTooltip, unblockable);
+  console.log(useData.formula);
 
-  return new TeriockRoll(rollFormula, rollData, { context, message });
+  return new TeriockRoll(useData.formula, rollData, { context, message });
 }
 
 /**
@@ -546,25 +556,20 @@ function getPiercingInfo(abilityData, rollData) {
     diceTooltip,
     unblockable = false;
 
-  if (abilityData.delivery.base === "weapon") {
-    const actor = abilityData.parent.getActor();
-    const properties = actor.system.primaryAttacker?.effectKeys?.property || new Set();
-    if (properties.has("av0") || actor?.system.piercing === "av0") {
-      rollData.av0 = 2;
-    }
-    if (properties.has("ub") || actor?.system.piercing === "ub") {
-      diceClass = "ub";
-      diceTooltip = "Unblockable";
-      rollData.av0 = 2;
-      unblockable = true;
-    }
+  if (abilityData.piercing === "av0" || abilityData.piercing === "ub") {
+    rollData["av0.abi"] = 2;
+    rollData["av0"] = 2;
+  }
+  if (abilityData.piercing === "ub") {
+    rollData["av0.abi"] = 2;
+    rollData["av0"] = 2;
+    rollData["ub.abi"] = 1;
+    rollData["ub"] = 1;
   }
 
-  if (abilityData.piercing === "av0") rollData.av0 = 2;
-  if (abilityData.piercing === "ub") {
+  if (rollData["ub"]) {
     diceClass = "ub";
     diceTooltip = "Unblockable";
-    rollData.av0 = 2;
     unblockable = true;
   }
 

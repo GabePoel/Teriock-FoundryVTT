@@ -1,4 +1,5 @@
 /** @import { CommonRollOptions, ConditionRollOptions } from "../../../types/rolls" */
+/** @import { HackableBodyPart } from "./types/parameters" */
 const { TypeDataModel } = foundry.abstract;
 import * as hacks from "./methods/consequences/_take-hacks.mjs";
 import * as numericals from "./methods/consequences/_take-numericals.mjs";
@@ -14,7 +15,6 @@ import { _rollCondition } from "./methods/rolling/_roll-condition.mjs";
 /**
  * Base actor data model for the Teriock system.
  * Handles all core actor functionality including damage, healing, rolling, and data management.
- * @extends {TypeDataModel}
  */
 export default class TeriockBaseActorData extends TypeDataModel {
   /**
@@ -128,7 +128,7 @@ export default class TeriockBaseActorData extends TypeDataModel {
    * Gains temporary mana points for the actor.
    * @param {number} amount - The amount of temporary mana points to gain.
    * @returns {Promise<void>} Promise that resolves when temporary mana points are gained.
-   */
+   */ fetch;
   async takeGainTempMp(amount) {
     await numericals._takeGainTempMp(this, amount);
   }
@@ -153,7 +153,7 @@ export default class TeriockBaseActorData extends TypeDataModel {
 
   /**
    * Applies hack effect to a specific part of the actor.
-   * @param {string} part - The part to hack.
+   * @param {HackableBodyPart} part - The part to hack.
    * @returns {Promise<void>} Promise that resolves when hack is applied.
    */
   async takeHack(part) {
@@ -162,7 +162,7 @@ export default class TeriockBaseActorData extends TypeDataModel {
 
   /**
    * Removes hack effect from a specific part of the actor.
-   * @param {string} part - The part to unhack.
+   * @param {HackableBodyPart} part - The part to unhack.
    * @returns {Promise<void>} Promise that resolves when unhack is applied.
    */
   async takeUnhack(part) {

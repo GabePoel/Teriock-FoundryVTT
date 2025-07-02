@@ -695,7 +695,16 @@ export const TeriockSheet = (Base) =>
      */
     static async _rollDoc(event, target) {
       const options = event?.altKey ? { advantage: true } : event?.shiftKey ? { disadvantage: true } : {};
-      await this._embeddedFromCard(target)?.use(options);
+      const document = this._embeddedFromCard(target);
+      if (document?.type === "equipment") {
+        if (event?.shiftKey) {
+          options.secret = true;
+        }
+        if (event?.ctrlKey) {
+          options.twoHanded = true;
+        }
+      }
+      await document?.use(options);
     }
 
     /**

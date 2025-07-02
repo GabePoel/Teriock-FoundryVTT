@@ -324,7 +324,7 @@ export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorShee
    */
   static async _openPrimaryAttacker(event, target) {
     event.stopPropagation();
-    this.document.system.primaryAttacker.sheet.render(true);
+    this.document.system.wielding.attacker.derived?.sheet.render(true);
   }
 
   /**
@@ -336,7 +336,7 @@ export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorShee
    */
   static async _openPrimaryBlocker(event, target) {
     event.stopPropagation();
-    this.document.system.primaryBlocker.sheet.render(true);
+    this.document.system.wielding.blocker.derived?.sheet.render(true);
   }
 
   /**
@@ -447,7 +447,7 @@ export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorShee
     if (event.altKey) options.increaseDie = true;
     if (event.shiftKey) options.decreaseDie = true;
     if (event.ctrlKey) options.skip = true;
-    this.actor.rollCondition(condition, options);
+    await this.actor.rollCondition(condition, options);
   }
 
   /**
@@ -463,14 +463,6 @@ export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorShee
     if (attunement) {
       await attunement.delete();
     }
-  }
-
-  /**
-   * Forces removal of a condition without rolling.
-   * @param {string} condition - The condition to remove.
-   */
-  _forceRemoveCondition(condition) {
-    this.actor.rollCondition(condition, { skip: true });
   }
 
   /**
@@ -660,7 +652,9 @@ export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorShee
       },
     };
     context.enrichedNotes = await this._editor(this.document.system.sheet.notes);
-    context.enrichedSpecialRules = await this._editor(this.document.system.primaryAttacker?.system?.specialRules);
+    context.enrichedSpecialRules = await this._editor(
+      this.document.system.wielding.attacker.derived?.system?.specialRules,
+    );
 
     return context;
   }
@@ -776,10 +770,10 @@ export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorShee
     });
 
     this.element.querySelectorAll(".condition-toggle").forEach((el) => {
-      el.addEventListener("contextmenu", (e) => {
+      el.addEventListener("contextmenu", async (e) => {
         e.preventDefault();
         const condition = el.dataset.condition;
-        this._forceRemoveCondition(condition);
+        await this.actor.rollCondition(condition, { skip: true });
         e.stopPropagation();
       });
     });

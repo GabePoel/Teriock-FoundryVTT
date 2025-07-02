@@ -19,7 +19,7 @@ export function primaryBlockerContextMenu(actor, options) {
       icon: icon,
       callback: () => {
         actor.update({
-          "system.sheet.primaryBlocker": item._id,
+          "system.wielding.blocker.raw": item._id,
         });
       },
     });
@@ -37,11 +37,13 @@ export function primaryBlockerContextMenu(actor, options) {
  * @returns {Array} The populated options array with attacker selection items.
  */
 export function primaryAttackContextMenu(actor, options) {
-  const equipped = actor.itemTypes.equipment.filter((i) => i.system.damage);
+  const equipped = actor.itemTypes.equipment.filter(
+    (i) => i.system.equipped && i.system.damage && i.system.damage !== "0",
+  );
   const attackOptions = [];
   for (const item of equipped) {
     let icon = "";
-    if (item.system.damage != 1) {
+    if (item.system.damage !== "1") {
       icon = '<i class="fa-solid fa-sword"></i>';
     } else {
       icon = '<i class="fa-solid fa-staff"></i>';
@@ -51,7 +53,7 @@ export function primaryAttackContextMenu(actor, options) {
       icon: icon,
       callback: () => {
         actor.update({
-          "system.sheet.primaryAttacker": item._id,
+          "system.wielding.attacker.raw": item._id,
         });
       },
     });

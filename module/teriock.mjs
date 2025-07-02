@@ -19,7 +19,7 @@ Hooks.once("init", function () {
     decimals: 2,
   };
 
-  CONFIG.statusEffects = [];
+  CONFIG.statusEffects.length = 0;
   for (const condition of Object.values(conditions)) {
     CONFIG.statusEffects.push(condition);
   }

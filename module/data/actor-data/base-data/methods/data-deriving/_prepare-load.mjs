@@ -67,15 +67,13 @@ export function _prepareMoney(system) {
  */
 export function _prepareWeightCarried(system) {
   const actor = system.parent;
-  const weight = actor.itemTypes.equipment
-    .filter((i) => i.system.equipped)
-    .reduce((sum, i) => {
-      let newWeight = i.system.weight || 0;
-      if (i.system.consumable) {
-        newWeight = newWeight * i.system.quantity;
-      }
-      return sum + newWeight;
-    }, 0);
+  const weight = actor.itemTypes.equipment.reduce((sum, i) => {
+    let newWeight = i.system.weight || 0;
+    if (i.system.consumable) {
+      newWeight = newWeight * i.system.quantity;
+    }
+    return sum + newWeight;
+  }, 0);
   const moneyWeight = Number(system.moneyWeight) || 0;
   system.weightCarried = Math.ceil(weight + moneyWeight);
 }
