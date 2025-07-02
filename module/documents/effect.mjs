@@ -85,7 +85,7 @@ export default class TeriockEffect extends ChildDocumentMixin(foundry.documents.
 
   /**
    * Gets all ancestor effects in the hierarchy, starting from the immediate parent.
-   * @returns {TeriockEffect[]} Array of ancestor effects, ordered from immediate parent to top level.
+   * @returns {TeriockAbility[]} Array of ancestor effects, ordered from immediate parent to top level.
    */
   getAncestors() {
     const ancestors = [];
@@ -99,7 +99,7 @@ export default class TeriockEffect extends ChildDocumentMixin(foundry.documents.
 
   /**
    * Gets all ancestor effects synchronously using the embedded document system.
-   * @returns {TeriockEffect[]} Array of ancestor effects, ordered from immediate parent to top level.
+   * @returns {TeriockAbility[]} Array of ancestor effects, ordered from immediate parent to top level.
    */
   getAncestorsSync() {
     const ancestors = [];
@@ -114,7 +114,7 @@ export default class TeriockEffect extends ChildDocumentMixin(foundry.documents.
   /**
    * Gets the document that most directly applies this effect. If it's an ability, returns that.
    * Otherwise, gets what Foundry considers to be the parent.
-   * @returns {Document} The source document that applies this effect.
+   * @returns {TeriockActor|TeriockEffect|TeriockItem} The source document that applies this effect.
    */
   getSource() {
     let source = this.getParent();
@@ -220,7 +220,7 @@ export default class TeriockEffect extends ChildDocumentMixin(foundry.documents.
 
   /**
    * Gets all descendant effects (children, grandchildren, etc.) in a recursive manner.
-   * @returns {ActiveEffect[]} Array of all descendant effects.
+   * @returns {TeriockAbility[]} Array of all descendant effects.
    */
   getDescendants() {
     const descendants = [];

@@ -2,7 +2,7 @@ import TeriockEffect from "../documents/effect.mjs";
 
 /**
  * Creates a new ability effect and optionally pulls content from the wiki.
- * @param {Document} document - The document to create the ability in.
+ * @param {TeriockActor|TeriockEffect|TeriockItem} document - The document to create the ability in.
  * @param {string} name - The name for the new ability. If not provided, defaults to "New Ability".
  * @param {Object} options - Additional options for the ability creation.
  * @returns {Promise<ActiveEffect>} The created ability effect.
@@ -66,7 +66,7 @@ export async function createResource(document) {
 
 /**
  * Creates a new property effect with optional predefined content.
- * @param {Document} document - The document to create the property in.
+ * @param {TeriockEquipment} document - The document to create the property in.
  * @param {string} key - Optional key to look up predefined property content.
  * @returns {Promise<ActiveEffect>} The created property effect.
  */
@@ -112,7 +112,7 @@ export async function createProperty(document, key = null) {
 
 /**
  * Creates a new effect.
- * @param {Document} document - The document to create the effect in.
+ * @param {TeriockActor|TeriockItem} document - The document to create the effect in.
  * @returns {Promise<ActiveEffect>} The created effect.
  */
 export async function createEffect(document) {
@@ -130,7 +130,7 @@ export async function createEffect(document) {
 
 /**
  * Creates a new fluency effect.
- * @param {Document} document - The document to create the fluency in.
+ * @param {TeriockActor|TeriockItem} document - The document to create the fluency in.
  * @returns {Promise<ActiveEffect>} The created fluency effect.
  */
 export async function createFluency(document) {

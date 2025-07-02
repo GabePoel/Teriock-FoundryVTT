@@ -2,8 +2,6 @@
  * A custom Roll class which enriches the provided flavor and uses a custom
  * chat template to display the flavor as enriched HTML. Also allows for custom
  * functions that Teriock requires.
- *
- * @extends {foundry.dice.Roll}
  */
 export default class TeriockRoll extends foundry.dice.Roll {
   static CHAT_TEMPLATE = "systems/teriock/templates/chat/roll.hbs";
@@ -240,8 +238,6 @@ export default class TeriockRoll extends foundry.dice.Roll {
 
   /**
    * Applies boost logic to a roll by increasing the highest face die.
-   *
-   * @param {foundry.dice.Roll} roll - The roll to boost
    * @private
    */
   static applyBoostToRoll(roll) {
@@ -252,8 +248,6 @@ export default class TeriockRoll extends foundry.dice.Roll {
 
   /**
    * Applies deboost logic to a roll by decreasing the highest face die.
-   *
-   * @param {foundry.dice.Roll} roll - The roll to deboost
    * @private
    */
   static applyDeboostToRoll(roll) {
@@ -309,9 +303,6 @@ export default class TeriockRoll extends foundry.dice.Roll {
 }
 
 /**
- * Selects a weighted random die from the dice terms, preferring dice with higher face counts.
- * @param {foundry.dice.terms.DiceTerm[]} diceTerms - Array of dice terms to select from.
- * @returns {foundry.dice.terms.DiceTerm} The selected die term.
  */
 function selectWeightedMaxFaceDie(diceTerms) {
   const maxFaces = Math.max(...diceTerms.map((term) => term.faces));

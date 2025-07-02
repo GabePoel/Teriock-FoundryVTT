@@ -205,12 +205,7 @@ export default class TeriockBaseActorData extends TypeDataModel {
 
   /**
    * Performs post-update operations for the actor.
-   * @param {Object} skipFunctions - Functions that should be skipped.
-   * @property {boolean} applyEncumbrance - Skip `applyEncumbrance`.
-   * @property {boolean} prepareTokens - Skip `prepareTokens`.
-   * @property {boolean} checkDown - Skip `checkDown`.
-   * @property {boolean} etherealKill - Skip `etherealKill`.
-   * @property {boolean} checkExpirations - Skip `checkExpirations`.
+   * @param {SkipFunctions} skipFunctions - Functions that should be skipped.
    * @returns {Promise<void>} Resolves when all post-update operations are complete
    * @returns {Promise<void>} Promise that resolves when post-update is complete.
    */

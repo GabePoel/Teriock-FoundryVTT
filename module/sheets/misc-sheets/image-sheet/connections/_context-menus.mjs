@@ -13,7 +13,7 @@ export const imageContextMenuOptions = [
     callback: async (target) => {
       const img = target.getAttribute("data-src");
       const image = new TeriockImageSheet(img);
-      image.render(true);
+      await image.render(true);
     },
     condition: (target) => {
       const img = target.getAttribute("data-src");

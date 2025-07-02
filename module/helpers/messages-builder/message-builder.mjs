@@ -5,12 +5,7 @@ import { messageBlock, messageBar, messageBox, messageWrapper, messageHeader } f
  *
  * This function takes an object containing message parts (image, name, bars, blocks, font)
  * and constructs a complete DOM element with proper structure and styling.
- * @param {object} messageParts - Object containing the message parts.
- * @param {string} messageParts.image - The image URL for the message header.
- * @param {string} messageParts.name - The name/title for the message header.
- * @param {object[]} messageParts.bars - Array of bar objects with icon, label, and wrappers.
- * @param {object[]} messageParts.blocks - Array of block objects with title, text, italic, special, and elements.
- * @param {string} messageParts.font - Font class to apply to the message.
+ * @param {MessageParts} messageParts - Object containing the message parts.
  * @returns {HTMLDivElement} The complete message element.
  */
 export function buildMessage(messageParts) {
@@ -65,7 +60,7 @@ export function buildMessage(messageParts) {
  */
 function barLength(bar) {
   bar.wrappers = bar.wrappers.filter(
-    (wrapper) => wrapper && typeof wrapper === "string" && wrapper.length > 0 && wrapper != "0",
+    (wrapper) => wrapper && typeof wrapper === "string" && wrapper.length > 0 && wrapper !== "0",
   );
   const length = bar.wrappers.length;
   return length;

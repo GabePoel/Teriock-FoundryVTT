@@ -13,17 +13,11 @@ import { encumbranceData } from "../../../../content/encumbrance.mjs";
  * 5. **Expiration Monitoring**: Checks and processes expiration effects
  *
  * @param {TeriockBaseActorData} system - The actor's base data system object
- * @param {Object} skipFunctions - Functions that should be skipped
- * @property {boolean} applyEncumbrance - Skip `applyEncumbrance`
- * @property {boolean} prepareTokens - Skip `prepareTokens`
- * @property {boolean} checkDown - Skip `checkDown`
- * @property {boolean} etherealKill - Skip `etherealKill`
- * @property {boolean} checkExpirations - Skip `checkExpirations`
+ * @param {SkipFunctions} skipFunctions - Functions that should be skipped
  * @returns {Promise<void>} Resolves when all post-update operations are complete
  * @private
  */
 export async function _postUpdate(system, skipFunctions = {}) {
-  console.log("Skip Functions", skipFunctions);
   if (!skipFunctions.applyEncumbrance) {
     await applyEncumbrance(system);
   }
