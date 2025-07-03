@@ -207,20 +207,26 @@ async function checkDown(system) {
     await system.parent.toggleStatusEffect("dead", {
       active: shouldBeDead,
       overlay: true,
-    })
-  } catch { /* empty */ }
+    });
+  } catch {
+    /* empty */
+  }
   try {
     await system.parent.toggleStatusEffect("asleep", {
       active: shouldBeAsleep,
       overlay: true,
-    })
-  } catch { /* empty */ }
+    });
+  } catch {
+    /* empty */
+  }
   try {
     await system.parent.toggleStatusEffect("unconscious", {
       active: shouldBeUnconscious && !system.parent.statuses.has("asleep"),
       overlay: true,
-    })
-  } catch { /* empty */ }
+    });
+  } catch {
+    /* empty */
+  }
 }
 
 /**

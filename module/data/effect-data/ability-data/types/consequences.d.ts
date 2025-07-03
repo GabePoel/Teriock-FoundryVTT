@@ -1,4 +1,4 @@
-import { EffectChangeData } from "@client/documents/_types.mjs"
+import { EffectChangeData } from "@client/documents/_types.mjs";
 
 /**
  * Valid turn expiration targets

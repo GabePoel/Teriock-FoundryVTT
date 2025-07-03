@@ -51,7 +51,7 @@ export default class TeriockEffect extends ChildDocumentMixin(foundry.documents.
    */
   get sup() {
     if (this.system.supId) {
-      const effect = this.supSync
+      const effect = this.supSync;
       if (effect) {
         return effect;
       }
@@ -89,7 +89,7 @@ export default class TeriockEffect extends ChildDocumentMixin(foundry.documents.
     let supEffect = this.sup;
     if (supEffect) {
       supEffects.push(supEffect);
-      supEffects.push(...supEffect.allSups)
+      supEffects.push(...supEffect.allSups);
     }
     return supEffects;
   }
@@ -99,12 +99,12 @@ export default class TeriockEffect extends ChildDocumentMixin(foundry.documents.
    * Always synchronous.
    * @returns {TeriockEffect[]} Array of super-effects, ordered from immediate sup to top level.
    */
-  get allSupsSync(){
+  get allSupsSync() {
     const supEffects = [];
     let supEffect = this.supSync;
     if (supEffect) {
       supEffects.push(supEffect);
-      supEffects.push(...supEffect.allSupsSync)
+      supEffects.push(...supEffect.allSupsSync);
     }
     return supEffects;
   }
@@ -136,7 +136,7 @@ export default class TeriockEffect extends ChildDocumentMixin(foundry.documents.
    * @returns {function(): Promise<TeriockEffect[]>} Array of sub-effects.
    */
   get subsAsync() {
-    return (async () => {
+    return async () => {
       const subEffects = [];
       if (this.system.subUuids?.length > 0) {
         for (const uuid of this.system.subUuids) {
@@ -147,7 +147,7 @@ export default class TeriockEffect extends ChildDocumentMixin(foundry.documents.
         }
       }
       return subEffects;
-    })
+    };
   }
 
   /**
@@ -155,7 +155,7 @@ export default class TeriockEffect extends ChildDocumentMixin(foundry.documents.
    * Synchronous by default. Asynchronous fallback for compendiums.
    * @returns {TeriockEffect[]} Array of all descendant effects.
    */
-  get allSubs(){
+  get allSubs() {
     const allSubEffects = [];
     const subEffects = this.subs;
     for (const subEffect of subEffects) {
@@ -171,7 +171,7 @@ export default class TeriockEffect extends ChildDocumentMixin(foundry.documents.
    * @returns {function(): Promise<TeriockEffect[]>}
    */
   get allSubsAsync() {
-    return (async () => {
+    return async () => {
       const allSubEffects = [];
       const subEffects = await this.subsAsync;
       for (const subEffect of subEffects) {
@@ -180,7 +180,7 @@ export default class TeriockEffect extends ChildDocumentMixin(foundry.documents.
         allSubEffects.push(...subSubEffects);
       }
       return allSubEffects;
-    })
+    };
   }
 
   /**
@@ -195,7 +195,7 @@ export default class TeriockEffect extends ChildDocumentMixin(foundry.documents.
     await this.update({
       "system.subUuids": subUuids,
       "system.supUuid": supUuid,
-    })
+    });
   }
 
   /**
@@ -206,7 +206,7 @@ export default class TeriockEffect extends ChildDocumentMixin(foundry.documents.
     await this.update({
       "system.subUuids": [],
       "system.supUuid": null,
-    })
+    });
   }
 
   /**
@@ -218,7 +218,7 @@ export default class TeriockEffect extends ChildDocumentMixin(foundry.documents.
       const subIds = this.system.subIds;
       await this.update({
         "system.subIds": [],
-      })
+      });
       await this.parent?.deleteEmbeddedDocuments("ActiveEffect", subIds);
     }
   }

@@ -37,7 +37,7 @@ export function _migrateData(data) {
             static: 0,
             formula: "",
             variable: variableCost || "",
-          }
+          },
         };
       }
       if (typeof data.costs[pointCost] == "number") {

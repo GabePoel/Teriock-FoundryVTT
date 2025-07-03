@@ -1,13 +1,13 @@
 /** Functions that should be skipped. */
 export type SkipFunctions = {
   /** Skip `applyEncumbrance()` */
-  applyEncumbrance?: boolean,
+  applyEncumbrance?: boolean;
   /** Skip `prepareTokens()` */
-  prepareTokens?: boolean,
+  prepareTokens?: boolean;
   /** Skip `checkDown()` */
-  checkDown?: boolean,
+  checkDown?: boolean;
   /** Skip `etherealKill()` */
-  etherealKill?: boolean,
+  etherealKill?: boolean;
   /** Skip `checkExpirations()` */
-  checkExpirations?: boolean,
-}
+  checkExpirations?: boolean;
+};

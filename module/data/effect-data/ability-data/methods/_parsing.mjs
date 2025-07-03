@@ -2,6 +2,7 @@
 import { abilityOptions } from "../../../../helpers/constants/ability-options.mjs";
 import { cleanFeet } from "../../../../helpers/clean.mjs";
 import { createAbility } from "../../../../helpers/create-effects.mjs";
+import { imageOverrides } from "./_image-overrides.mjs";
 
 /**
  * Cost value templates for different cost types.
@@ -110,7 +111,7 @@ export async function _parse(abilityData, rawHTML) {
   processDiceAndEffectExtraction(parameters);
 
   // Select image
-  const img = selectImage(parameters);
+  let img = selectImage(parameters);
 
   // Process sub-abilities
   await processSubAbilities(subs, abilityData);
@@ -118,6 +119,11 @@ export async function _parse(abilityData, rawHTML) {
   // Check if parent name contains "warded"
   if (abilityData.parent.name.toLowerCase().includes("warded")) {
     parameters.warded = true;
+  }
+
+  const overrideImg = imageOverrides[abilityData.parent.name];
+  if (overrideImg) {
+    img = overrideImg;
   }
 
   return { changes, system: parameters, img };
@@ -267,17 +273,23 @@ function processTags(parameters, tagTree, doc, changes) {
 
   const resultBars = ["hit", "critHit", "miss", "critMiss", "save", "critSave", "fail", "critFail"];
   const resultsBars = {
-    hit: "on-hit",
-    critHit: "on-critical-hit",
-    miss: "on-miss",
-    critMiss: "on-critical-miss",
-    save: "on-save",
-    critSave: "on-critical-save",
-    fail: "on-fail",
-    critFail: "on-critical-fail",
+    hit: ["on-hit"],
+    critHit: ["on-critical-hit"],
+    miss: ["on-miss"],
+    critMiss: ["on-critical-miss"],
+    save: ["on-save", "on-success"],
+    critSave: ["on-critical-save"],
+    fail: ["on-fail"],
+    critFail: ["on-critical-fail"],
   };
   resultBars.forEach((bar) => {
-    parameters.results[bar] = getBarText(doc, resultsBars[bar]);
+    let result;
+    for (const resultsBarOption of resultsBars[bar]) {
+      if (!result) {
+        result = getBarText(doc, resultsBarOption)
+      }
+    }
+    parameters.results[bar] = result;
   });
 
   // Process improvements

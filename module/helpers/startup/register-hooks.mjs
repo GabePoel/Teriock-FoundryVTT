@@ -20,7 +20,8 @@ export default function registerHooks() {
 
   Hooks.on("updateActor", async (document, changed, options, userId) => {
     if (game.user.id === userId && document.isOwner) {
-      const doCheckDown = (typeof changed.system?.hp?.value === "number") || (typeof changed.system?.mp?.value === "number");
+      const doCheckDown =
+        typeof changed.system?.hp?.value === "number" || typeof changed.system?.mp?.value === "number";
       await document.postUpdate({
         checkDown: !doCheckDown,
       });
@@ -49,7 +50,7 @@ export default function registerHooks() {
   Hooks.on("createActiveEffect", async (document, options, userId) => {
     if (game.user.id === userId && document.isOwner) {
       if (document.type === "ability" || document.type === "effect") {
-        console.log(document.system.subIds)
+        console.log(document.system.subIds);
         if (document.system.subIds?.length > 0) {
           const subAbilityData = [];
           let subs = document.subs;

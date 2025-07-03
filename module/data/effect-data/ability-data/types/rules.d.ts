@@ -16,7 +16,6 @@ import { ImprovementsConfig } from "./rules-parts/improvements";
  */
 export type AbilityType = "special" | "normal" | "gifted" | "echo" | "intrinsic" | "flaw";
 
-
 /**
  * Data structure that the game system rules care about. (Stuff that appears directly on the wiki.)
  */

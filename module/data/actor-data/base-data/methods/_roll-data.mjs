@@ -483,7 +483,6 @@ function moneyData(system, data) {
  * @private
  */
 function equipmentData(system, data) {
-
   // Primary attack weapon
   const primaryAttacker = system.wielding.attacker.derived;
   if (primaryAttacker) {

@@ -22,7 +22,7 @@ export default class TeriockBaseActorData extends TypeDataModel {
    * @returns {object} The metadata object.
    */
   static get metadata() {
-    return {}
+    return {};
   }
 
   /**

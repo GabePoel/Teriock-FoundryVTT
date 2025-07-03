@@ -6,12 +6,12 @@ import { TeriockAbilityHierarchySchema } from "./types/hierarchy";
 import { TeriockAbilityConsequenceSchema } from "./types/consequences";
 
 declare module "./ability-data.mjs" {
-  export default interface TeriockAbilityData extends
-    TeriockAbilityRulesSchema,
-    TeriockAbilityHierarchySchema,
-    TeriockAbilityConsequenceSchema,
-    WikiDataMixin,
-    TeriockBaseEffectData {
+  export default interface TeriockAbilityData
+    extends TeriockAbilityRulesSchema,
+      TeriockAbilityHierarchySchema,
+      TeriockAbilityConsequenceSchema,
+      WikiDataMixin,
+      TeriockBaseEffectData {
     parent: TeriockAbility;
     wikiNamespace: "Ability";
   }

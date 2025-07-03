@@ -2,9 +2,9 @@
 // Do not edit manually.
 
 export const magicalProperties = {
-    legendary: "Legendary",
-    magelore: "Magelore",
-    manaStoring: "Mana Storing",
-    runic: "Runic",
-    sentient: "Sentient"
+  legendary: "Legendary",
+  magelore: "Magelore",
+  manaStoring: "Mana Storing",
+  runic: "Runic",
+  sentient: "Sentient",
 };

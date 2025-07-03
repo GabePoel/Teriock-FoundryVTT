@@ -118,11 +118,11 @@ export async function _takeKill(system, amount) {
       img: "systems/teriock/assets/conditions/dead.svg",
       flags: {
         core: {
-          overlay: true
-        }
-      }
-    }
-    await system.parent.createEmbeddedDocuments("ActiveEffect", [effectData])
+          overlay: true,
+        },
+      },
+    };
+    await system.parent.createEmbeddedDocuments("ActiveEffect", [effectData]);
     // await system.parent.toggleStatusEffect("dead");
   }
 }

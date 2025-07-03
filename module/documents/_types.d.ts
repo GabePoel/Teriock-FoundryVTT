@@ -29,7 +29,7 @@ interface ParentDocumentMixinInterface {
     equipment?: TeriockEquipment[];
     power?: TeriockPower[];
     rank?: TeriockRank[];
-  }
+  };
   effectTypes: {
     ability?: TeriockAbility[];
     attunement?: TeriockAttunement[];
@@ -39,7 +39,7 @@ interface ParentDocumentMixinInterface {
     fluency?: TeriockFluency[];
     property?: TeriockProperty[];
     resource?: TeriockResource[];
-  }
+  };
 }
 
 declare module "@client/documents/_module.mjs" {

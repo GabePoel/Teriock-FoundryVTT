@@ -36,7 +36,7 @@ export type TargetType =
   | "spell"
   | "vitals"
   | "weapon"
-  | "other"
+  | "other";
 
 /**
  * Valid delivery methods

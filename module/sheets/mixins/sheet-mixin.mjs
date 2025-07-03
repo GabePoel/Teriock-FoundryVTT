@@ -514,8 +514,8 @@ export const TeriockSheet = (Base) =>
           const targetItem = this.document.items.getName(item.name);
           if (targetItem && targetItem.system.consumable) {
             targetItem.update({
-              'system.quantity': targetItem.system.quantity + item.system.quantity,
-            })
+              "system.quantity": targetItem.system.quantity + item.system.quantity,
+            });
             await source.delete();
             return targetItem;
           }
@@ -734,12 +734,6 @@ export const TeriockSheet = (Base) =>
       foundry.utils.setProperty(this, path, !current);
       this.render();
     }
-
-    // static async _toggleSwitch(event, target) {
-    //   const { name, value } = target.dataset;
-    //   const newValue = value == 0 ? 1 : value == 1 ? -1 : 0;
-    //   this.document.update({ [name]: newValue });
-    // }
 
     /**
      * Creates a new ability for the current document.
