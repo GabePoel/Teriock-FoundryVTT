@@ -10,6 +10,9 @@ import DetectionModeSoundPerception from "./detection-modes/sound-perception.mjs
 import DetectionModeTrueSightPerception from "./detection-modes/true-sight-perception.mjs";
 import DetectionModeBlindFighting from "./detection-modes/blind-fighting.mjs";
 
+/**
+ * @type {{lightPerception: DetectionModeLightPerception, trueSight: DetectionModeTrueSightPerception, seeInvisible: DetectionModeInvisiblePerception, scentPerception: DetectionModeScentPerception, soundPerception: DetectionModeSoundPerception, blindFighting: DetectionModeBlindFighting, materialMaterial: DetectionModeMaterialMaterial, materialEthereal: DetectionModeMaterialEthereal, etherealMaterial: DetectionModeEtherealMaterial, etherealEthereal: DetectionModeEtherealEthereal, darkVision: DetectionModeMaterialEthereal}}
+ */
 export const teriockDetectionModes = {
   lightPerception: new DetectionModeLightPerception({
     id: "lightPerception",

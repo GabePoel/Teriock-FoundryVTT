@@ -74,4 +74,6 @@ export const _defaultSheetSettings = {
   equipmentSortOption: "name",
   /** @type {boolean} */
   equipmentSortAscending: true,
+
+  conditionExpansions: {},
 };

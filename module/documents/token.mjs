@@ -22,17 +22,17 @@ export default class TeriockToken extends TokenDocument {
       if (actor?.system.senses.night > 0 && actor?.system.senses.night >= actor?.system.senses.dark) {
         visionMode = "lightAmplification";
       }
-      if (actor?.system.senses.blind + actor?.system.senses.hearing + actor?.system.senses.smell > 0) {
-        const maxTremor = Math.max(
-          actor?.system.senses.blind,
-          actor?.system.senses.hearing,
-          actor?.system.senses.smell,
-        );
-        const maxDark = Math.max(actor?.system.senses.dark, actor?.system.senses.night);
-        if (maxTremor > maxDark) {
-          visionMode = "tremorsense";
-        }
-      }
+      // if (actor?.system.senses.blind + actor?.system.senses.hearing + actor?.system.senses.smell > 0) {
+      //   const maxTremor = Math.max(
+      //     actor?.system.senses.blind,
+      //     actor?.system.senses.hearing,
+      //     actor?.system.senses.smell,
+      //   );
+      //   const maxDark = Math.max(actor?.system.senses.dark, actor?.system.senses.night);
+      //   if (maxTremor > maxDark) {
+      //     visionMode = "tremorsense";
+      //   }
+      // }
       if (actor?.statuses?.has("ethereal")) {
         visionMode = "ethereal";
       }

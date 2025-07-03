@@ -5,6 +5,7 @@ import { _defaultSheetSettings } from "./methods/_settings.mjs";
 import { _filterAbilities, _filterEquipment } from "./methods/_filters.mjs";
 import { _sortAbilities, _sortEquipment } from "./methods/_sort.mjs";
 import { documentOptions } from "../../../helpers/constants/document-options.mjs";
+import { conditions } from "../../../content/conditions.mjs";
 import {
   primaryBlockerContextMenu,
   primaryAttackContextMenu,
@@ -49,6 +50,7 @@ export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorShee
       immune: this._immune,
       endCondition: this._endCondition,
       deattuneDoc: this._deattuneDoc,
+      toggleConditionExpansion: this._toggleConditionExpansion,
     },
     form: {
       submitOnChange: true,
@@ -131,6 +133,10 @@ export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorShee
       itemTypes: {},
     };
     this._activeTab = "tradecrafts";
+    const sheetSettings = _defaultSheetSettings;
+    Object.keys(conditions).forEach((key) => {
+      sheetSettings.conditionExpansions[key] = false;
+    });
     this.settings = _defaultSheetSettings;
   }
 
@@ -465,6 +471,12 @@ export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorShee
     }
   }
 
+  static async _toggleConditionExpansion(event, target) {
+    const condition = target.dataset.condition;
+    this.settings.conditionExpansions[condition] = !this.settings.conditionExpansions[condition];
+    this.render();
+  }
+
   /**
    * Applies a hack to a specific body part.
    * @param {Event} event - The event object.
@@ -510,8 +522,6 @@ export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorShee
         message = img.alt;
       }
     }
-    console.log(target);
-    console.log(message);
     const options = {
       advantage: event.altKey,
       disadvantage: event.shiftKey,
@@ -536,8 +546,6 @@ export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorShee
         message = img.alt;
       }
     }
-    console.log(target);
-    console.log(message);
     const options = {
       advantage: event.altKey,
       disadvantage: event.shiftKey,
@@ -655,6 +663,7 @@ export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorShee
     context.enrichedSpecialRules = await this._editor(
       this.document.system.wielding.attacker.derived?.system?.specialRules,
     );
+    context.settings = this.settings;
 
     return context;
   }

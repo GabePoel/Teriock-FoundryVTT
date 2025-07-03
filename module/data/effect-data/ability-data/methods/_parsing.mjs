@@ -286,7 +286,7 @@ function processTags(parameters, tagTree, doc, changes) {
     let result;
     for (const resultsBarOption of resultsBars[bar]) {
       if (!result) {
-        result = getBarText(doc, resultsBarOption)
+        result = getBarText(doc, resultsBarOption);
       }
     }
     parameters.results[bar] = result;
