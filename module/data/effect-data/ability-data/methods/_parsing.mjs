@@ -1,4 +1,3 @@
-/** @import TeriockAbilityData from "../ability-data.mjs"; */
 import { abilityOptions } from "../../../../helpers/constants/ability-options.mjs";
 import { cleanFeet } from "../../../../helpers/clean.mjs";
 import { createAbility } from "../../../../helpers/create-effects.mjs";

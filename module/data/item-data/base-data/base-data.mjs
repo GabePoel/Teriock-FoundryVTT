@@ -1,5 +1,3 @@
-// Allows for typing within mixin.
-/** @import TypeDataModel from "@common/abstract/type-data.mjs" */
 const { fields } = foundry.data;
 const { TypeDataModel } = foundry.abstract;
 import { ChildDataMixin } from "../../mixins/child-mixin.mjs";

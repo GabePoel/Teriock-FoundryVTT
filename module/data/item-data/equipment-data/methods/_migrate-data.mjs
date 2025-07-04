@@ -1,5 +1,3 @@
-/** @import TeriockEquipmentData from "../equipment-data.mjs" */
-
 /**
  * Migrates equipment data from older versions to the current format.
  * Converts numeric tier and maxQuantity values to the new schema format with raw and derived fields.

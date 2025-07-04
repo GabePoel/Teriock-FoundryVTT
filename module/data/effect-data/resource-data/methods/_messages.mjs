@@ -1,6 +1,3 @@
-/** @import { MessageParts } from "../../../../types/messages" */
-/** @import TeriockResourceData from "../resource-data.mjs"; */
-
 /**
  * Generates message parts for a resource effect, including blocks for display.
  * Creates formatted display elements for resource description.

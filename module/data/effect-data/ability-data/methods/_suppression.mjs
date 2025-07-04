@@ -1,5 +1,3 @@
-/** @import TeriockAbilityData from "../ability-data.mjs"; */
-
 /**
  * Checks if an ability should be suppressed based on various conditions.
  * Considers equipment state, attunement, and sup effect modifications.

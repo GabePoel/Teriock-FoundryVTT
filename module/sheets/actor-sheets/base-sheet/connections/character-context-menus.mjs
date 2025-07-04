@@ -1,5 +1,3 @@
-/** @import TeriockActor from "@client/documents/_module.mjs"; */
-
 /**
  * Creates a context menu for selecting the primary blocker from equipped items.
  * Filters equipped items with blocking value (bv) and sorts them by bv in descending order.

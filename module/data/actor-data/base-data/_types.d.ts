@@ -1,4 +1,3 @@
-// base-data.d.ts
 import { TeriockBaseActorDefault } from "./types/default";
 import { TeriockBaseActorDerived } from "./types/derived";
 

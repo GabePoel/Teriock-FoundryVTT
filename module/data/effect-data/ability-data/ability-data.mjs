@@ -1,4 +1,3 @@
-/** @import { MessageParts } from "../../../types/messages" */
 import { _defineSchema } from "./methods/schema/_schema.mjs";
 import { _messageParts } from "./methods/_messages.mjs";
 import { _migrateData } from "./methods/_migrate-data.mjs";
@@ -28,39 +27,6 @@ export default class TeriockAbilityData extends WikiDataMixin(TeriockBaseEffectD
   }
 
   /**
-   * Defines the schema for the ability data model.
-   * @override
-   * @returns {object} The schema definition for the ability data.
-   */
-  static defineSchema() {
-    const commonData = super.defineSchema();
-    return {
-      ...commonData,
-      ..._defineSchema(),
-    };
-  }
-
-  /**
-   * Prepares derived data for the ability, calculating computed values.
-   * @override
-   */
-  prepareDerivedData() {
-    super.prepareDerivedData();
-    _prepareDerivedData(this);
-  }
-
-  /**
-   * Migrates ability data to the current schema version.
-   * @override
-   * @param {object} data - The data to migrate.
-   * @returns {object} The migrated data.
-   */
-  static migrateData(data) {
-    data = _migrateData(data);
-    return super.migrateData(data);
-  }
-
-  /**
    * Checks if the ability is suppressed.
    * Combines base suppression with ability-specific suppression logic.
    * @override
@@ -70,16 +36,6 @@ export default class TeriockAbilityData extends WikiDataMixin(TeriockBaseEffectD
     let suppressed = super.suppressed;
     suppressed = suppressed || _suppressed(this);
     return suppressed;
-  }
-
-  /**
-   * Rolls the ability with the specified options.
-   * @override
-   * @param {CommonRollOptions} options - Options for the ability roll.
-   * @returns {Promise<void>} Promise that resolves when the roll is complete.
-   */
-  async roll(options) {
-    return await _roll(this, options);
   }
 
   /**
@@ -102,6 +58,49 @@ export default class TeriockAbilityData extends WikiDataMixin(TeriockBaseEffectD
    */
   get wikiPage() {
     return `${this.wikiNamespace}:${this.parent.name}`;
+  }
+
+  /**
+   * Defines the schema for the ability data model.
+   * @override
+   * @returns {object} The schema definition for the ability data.
+   */
+  static defineSchema() {
+    const commonData = super.defineSchema();
+    return {
+      ...commonData,
+      ..._defineSchema(),
+    };
+  }
+
+  /**
+   * Migrates ability data to the current schema version.
+   * @override
+   * @param {object} data - The data to migrate.
+   * @returns {object} The migrated data.
+   */
+  static migrateData(data) {
+    data = _migrateData(data);
+    return super.migrateData(data);
+  }
+
+  /**
+   * Prepares derived data for the ability, calculating computed values.
+   * @override
+   */
+  prepareDerivedData() {
+    super.prepareDerivedData();
+    _prepareDerivedData(this);
+  }
+
+  /**
+   * Rolls the ability with the specified options.
+   * @override
+   * @param {CommonRollOptions} options - Options for the ability roll.
+   * @returns {Promise<void>} Promise that resolves when the roll is complete.
+   */
+  async roll(options) {
+    return await _roll(this, options);
   }
 
   /**

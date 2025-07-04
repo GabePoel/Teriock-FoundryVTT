@@ -1,5 +1,3 @@
-/** @import { CommonRollOptions } from "../../../../types/rolls"; */
-/** @import TeriockFluencyData from "../fluency-data.mjs"; */
 import TeriockRoll from "../../../../documents/roll.mjs";
 
 /**

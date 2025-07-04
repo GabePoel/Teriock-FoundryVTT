@@ -1,6 +1,3 @@
-/** @import { MessageOptions } from "../../types/messages" */
-/** @import Document from "@common/abstract/document.mjs"; */
-/** @import TeriockActor from "../actor.mjs"; */
 const { ux } = foundry.applications;
 import { buildMessage } from "../../helpers/messages-builder/message-builder.mjs";
 

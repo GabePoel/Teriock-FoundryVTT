@@ -18,6 +18,12 @@ import { _rollCondition } from "./methods/rolling/_roll-condition.mjs";
  */
 export default class TeriockBaseActorData extends TypeDataModel {
   /**
+   * Gains temporary mana points for the actor.
+   * @param {number} amount - The amount of temporary mana points to gain.
+   * @returns {Promise<void>} Promise that resolves when temporary mana points are gained.
+   */ fetch;
+
+  /**
    * Blank metadata.
    * @returns {object} The metadata object.
    */
@@ -132,11 +138,6 @@ export default class TeriockBaseActorData extends TypeDataModel {
     await numericals._takeGainTempHp(this, amount);
   }
 
-  /**
-   * Gains temporary mana points for the actor.
-   * @param {number} amount - The amount of temporary mana points to gain.
-   * @returns {Promise<void>} Promise that resolves when temporary mana points are gained.
-   */ fetch;
   async takeGainTempMp(amount) {
     await numericals._takeGainTempMp(this, amount);
   }

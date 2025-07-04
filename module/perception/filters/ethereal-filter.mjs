@@ -4,15 +4,11 @@ const { AbstractBaseFilter } = foundry.canvas.rendering.filters;
  * A ghostly filter with a static desaturated layer + animated blur overlay.
  */
 export default class EtherealFilter extends AbstractBaseFilter {
-  padding = 10;
-  animated = true;
-
   static defaultUniforms = {
     blur: 1.0,
     desaturate: 1.0,
     time: 0,
   };
-
   static fragmentShader = `
     precision mediump float;
     varying vec2 vTextureCoord;
@@ -64,7 +60,6 @@ export default class EtherealFilter extends AbstractBaseFilter {
       gl_FragColor = result;
     }
   `;
-
   static vertexShader = `
     precision mediump float;
     attribute vec2 aVertexPosition;
@@ -79,6 +74,8 @@ export default class EtherealFilter extends AbstractBaseFilter {
       vTextureCoord = aVertexPosition * (outputFrame.zw * inputSize.zw);
     }
   `;
+  padding = 10;
+  animated = true;
 
   static create(initialUniforms = {}) {
     const uniforms = { ...this.defaultUniforms, ...initialUniforms };

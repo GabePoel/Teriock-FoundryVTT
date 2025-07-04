@@ -1,4 +1,3 @@
-/** @import TeriockEquipmentData from "../equipment-data.mjs"; */
 const { api, ux } = foundry.applications;
 
 /**

@@ -1,28 +1,28 @@
 # Feature Improvements
 
 - [ ] Perception features
-  - [ ] Blind fighting/true sight/etc.
-  - [ ] Frozen and morganti vision modes
-  - [ ] Automatic perception mode inherited from actor
-  - [ ] Properties and abilities for light sources
+    - [ ] Blind fighting/true sight/etc.
+    - [ ] Frozen and morganti vision modes
+    - [ ] Automatic perception mode inherited from actor
+    - [ ] Properties and abilities for light sources
 - [ ] Token features
-  - [ ] Better death/down displays
-  - [ ] Frozen/transformed/lighted/terrored/burned visual clues
+    - [ ] Better death/down displays
+    - [ ] Frozen/transformed/lighted/terrored/burned visual clues
 - [ ] Ability management
-  - [ ] Abilities letting you know when they start/end
-  - [ ] Heightened duration scaling
-  - [x] Hack buttons
-  - [ ] Easy way to apply boosts
-  - [ ] Enricheds for different roll types
-  - [ ] Bow, hand, and foot BV scaling
-  - [ ] Ability resistance fix
-  - [ ] Attribute and feat save improvement appearing in ability chat messages
-  - [ ] Icons for all the basic abilities
-  - [ ] Attack ability targeting missing icon fix
-  - [ ] Throwing weapon range multiplier (from throwing training)
-  - [ ] Check metadata
+    - [ ] Abilities letting you know when they start/end
+    - [ ] Heightened duration scaling
+    - [x] Hack buttons
+    - [ ] Easy way to apply boosts
+    - [ ] Enricheds for different roll types
+    - [ ] Bow, hand, and foot BV scaling
+    - [ ] Ability resistance fix
+    - [ ] Attribute and feat save improvement appearing in ability chat messages
+    - [ ] Icons for all the basic abilities
+    - [ ] Attack ability targeting missing icon fix
+    - [ ] Throwing weapon range multiplier (from throwing training)
+    - [ ] Check metadata
 - [ ] Rank fixes
-  - [ ] Enable/disable buttons
+    - [ ] Enable/disable buttons
 
 # Codebase
 
@@ -33,118 +33,118 @@
 - [ ] Better roll chat message button handling
 - [ ] Ability usage modularization
 - [ ] Take basic abilities off of each individual actors to speed up sorting and make for smaller database
-- [ ] Better compendium building automation 
+- [ ] Better compendium building automation
 - [ ] More wiki links in documentation
 - [ ] Just some general sprucing around (as always)
 
 # Core Stuff (done?)
 
 - [x] Bug fixes
-  - [x] Drag/drop with descendent abilities
-    - [x] The descendants themselves
-    - [x] The parents
-  - [x] "No results found" popup appears briefly on changing tabs
-  - [x] Automatic condition application and inheritance
-  - [x] Player ActiveEffect warnings
-  - [x] Two-handed weapon damage
-  - [x] Ability sheet prematurely closes when making any edit that's not handled by external code
-  - [x] Slow loading of ability sheet entries
-  - [x] Material cost button not working
-  - [x] Rank number not appearing
-  - [x] HP/MP costs in ability chat messages
-  - [x] Window sizing limitations
-  - [x] No context menu on embedded sheets
-  - [x] Character sheet context menus not updating
+    - [x] Drag/drop with descendent abilities
+        - [x] The descendants themselves
+        - [x] The parents
+    - [x] "No results found" popup appears briefly on changing tabs
+    - [x] Automatic condition application and inheritance
+    - [x] Player ActiveEffect warnings
+    - [x] Two-handed weapon damage
+    - [x] Ability sheet prematurely closes when making any edit that's not handled by external code
+    - [x] Slow loading of ability sheet entries
+    - [x] Material cost button not working
+    - [x] Rank number not appearing
+    - [x] HP/MP costs in ability chat messages
+    - [x] Window sizing limitations
+    - [x] No context menu on embedded sheets
+    - [x] Character sheet context menus not updating
 - [x] Make encumbrance scale like hacks do
 - [x] Major functionality
-  - [x] Resistance save
-  - [x] Hack tracking
-    - [x] Limbs
-    - [x] Not limbs
-  - [x] Image popup windows
-  - [x] Archetype ability separation
-  - [x] Proficiency switches
-  - [x] AV0/UB overrides
-  - [x] Block interaction chain
-  - [x] End condition rolls
-  - [x] Easy damage/drain application
-  - [x] Wither display
-  - [x] Attack penalties
-  - [x] Advantage/disadvantage listeners
-  - [x] Elder Sorcery
-    - [x] Bring in stylings from wiki
-  - [x] Custom initiative
+    - [x] Resistance save
+    - [x] Hack tracking
+        - [x] Limbs
+        - [x] Not limbs
+    - [x] Image popup windows
+    - [x] Archetype ability separation
+    - [x] Proficiency switches
+    - [x] AV0/UB overrides
+    - [x] Block interaction chain
+    - [x] End condition rolls
+    - [x] Easy damage/drain application
+    - [x] Wither display
+    - [x] Attack penalties
+    - [x] Advantage/disadvantage listeners
+    - [x] Elder Sorcery
+        - [x] Bring in stylings from wiki
+    - [x] Custom initiative
 - [x] Ability improvements
-  - [x] Able to make as flaw
-  - [x] Improved dice rolling
-  - [x] Separate chart and dice rolling messages
-  - [x] Force proficiency
+    - [x] Able to make as flaw
+    - [x] Improved dice rolling
+    - [x] Separate chart and dice rolling messages
+    - [x] Force proficiency
 - [x] Equipment improvements
-  - [x] Have simple effects (custom properties?) that aren't abilities addable to items
-  - [x] Two-handed weapon damage
-  - [x] Able to set tier
-  - [x] Able to set properties
-  - [x] Able to add descriptions
-  - [x] Able to make consumable (and adjust from character sheet)
-  - [x] Able to easily set as flaw/ES/ECHO/physical/gifted (and styling to match)
-  - [x] Ability disabling synchronization
-  - [x] Shattering
-  - [x] Dampening
-  - [x] Custom property handling
+    - [x] Have simple effects (custom properties?) that aren't abilities addable to items
+    - [x] Two-handed weapon damage
+    - [x] Able to set tier
+    - [x] Able to set properties
+    - [x] Able to add descriptions
+    - [x] Able to make consumable (and adjust from character sheet)
+    - [x] Able to easily set as flaw/ES/ECHO/physical/gifted (and styling to match)
+    - [x] Ability disabling synchronization
+    - [x] Shattering
+    - [x] Dampening
+    - [x] Custom property handling
 - [x] Power improvements
-  - [x] Import abilities from wiki category
-  - [x] Get confirmation before doing it
+    - [x] Import abilities from wiki category
+    - [x] Get confirmation before doing it
 - [x] Character improvements
-  - [x] Basic abilities auto-import
-  - [x] Notes page
-  - [x] Automatic computations
-    - [x] Attributes
-    - [x] Hit and mana dice
-    - [x] Carrying capacity
-    - [x] Speed
-    - [x] Weight carried and limits
-    - [x] Rank
-    - [x] Proficiency bonus
-    - [x] Fluency bonus
-  - [x] Adding items directly within character sheet
-  - [x] Connect actions
-    - [x] Hit/mana dice
-    - [x] Tradecrafts
-    - [x] Feat save
-    - [x] Talented/expertise
-  - [x] Filters
-    - [x] Ability filters
-    - [x] Equipment filters
-    - [x] Power filters
-    - [x] Fluency filters
-    - [x] Filters and display settings collapsible
-  - [x] Able to resize sheet
-  - [x] Able to change name and icon
-  - [x] Search migrated to Foundry search filters.
+    - [x] Basic abilities auto-import
+    - [x] Notes page
+    - [x] Automatic computations
+        - [x] Attributes
+        - [x] Hit and mana dice
+        - [x] Carrying capacity
+        - [x] Speed
+        - [x] Weight carried and limits
+        - [x] Rank
+        - [x] Proficiency bonus
+        - [x] Fluency bonus
+    - [x] Adding items directly within character sheet
+    - [x] Connect actions
+        - [x] Hit/mana dice
+        - [x] Tradecrafts
+        - [x] Feat save
+        - [x] Talented/expertise
+    - [x] Filters
+        - [x] Ability filters
+        - [x] Equipment filters
+        - [x] Power filters
+        - [x] Fluency filters
+        - [x] Filters and display settings collapsible
+    - [x] Able to resize sheet
+    - [x] Able to change name and icon
+    - [x] Search migrated to Foundry search filters.
 - [x] Quality of life improvements
-  - [x] Rolling implementation for items
-  - [x] Handlebars consolidation across item and character sheets
-  - [x] Drag/drop implementations
-    - [x] Drag/drop between sheets
-    - [x] Drag/drop as macros onto hot bar
-  - [x] Styling improvements in lots of places
-    - [x] Embedded cards
-    - [x] Filter menus
-    - [x] Option menus
-    - [x] Box units
-    - [x] HP/MP bars
-    - [x] Equipment text
+    - [x] Rolling implementation for items
+    - [x] Handlebars consolidation across item and character sheets
+    - [x] Drag/drop implementations
+        - [x] Drag/drop between sheets
+        - [x] Drag/drop as macros onto hot bar
+    - [x] Styling improvements in lots of places
+        - [x] Embedded cards
+        - [x] Filter menus
+        - [x] Option menus
+        - [x] Box units
+        - [x] HP/MP bars
+        - [x] Equipment text
 - [x] Decisions
-  - [x] Should ES be an item or effect/ability?
-  - [x] Should items enter equipped?
-  - [x] Traits?
+    - [x] Should ES be an item or effect/ability?
+    - [x] Should items enter equipped?
+    - [x] Traits?
 - [x] Scripts
-  - [x] Property/effect/etc. imports scripts
+    - [x] Property/effect/etc. imports scripts
 - [x] Organization
-  - [x] Reorganize templates folder
-  - [x] Separate out handlebars registration
-  - [x] Sheet helpers, utilities, wiki, and parsing consistency
-  - [x] Remove all redundant click event handlers
+    - [x] Reorganize templates folder
+    - [x] Separate out handlebars registration
+    - [x] Sheet helpers, utilities, wiki, and parsing consistency
+    - [x] Remove all redundant click event handlers
 - [x] Resource implementation
 - [x] Effect separation
 - [x] Import conditions from wiki and have them as default status effects

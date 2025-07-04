@@ -21,6 +21,16 @@ export default class TeriockPropertyData extends WikiDataMixin(TeriockBaseEffect
   }
 
   /**
+   * Gets the message parts for the property effect.
+   * Combines base message parts with property-specific message parts.
+   * @override
+   * @returns {object} Object containing message parts for the property effect.
+   */
+  get messageParts() {
+    return { ...super.messageParts, ..._messageParts(this) };
+  }
+
+  /**
    * Defines the schema for the property data model.
    * @returns {object} The schema definition for the property data.
    */
@@ -32,15 +42,5 @@ export default class TeriockPropertyData extends WikiDataMixin(TeriockBaseEffect
       propertyType: new fields.StringField({ initial: "normal" }),
       damageType: new fields.StringField({ initial: "" }),
     };
-  }
-
-  /**
-   * Gets the message parts for the property effect.
-   * Combines base message parts with property-specific message parts.
-   * @override
-   * @returns {object} Object containing message parts for the property effect.
-   */
-  get messageParts() {
-    return { ...super.messageParts, ..._messageParts(this) };
   }
 }

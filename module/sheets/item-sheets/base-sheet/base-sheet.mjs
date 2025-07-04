@@ -1,5 +1,3 @@
-// Allows for typing within mixin.
-/** @import ItemSheet from "@client/applications/sheets/item-sheet.mjs"; */
 const { sheets, ux } = foundry.applications;
 import { cleanFeet } from "../../../helpers/clean.mjs";
 import { TeriockSheet } from "../../mixins/sheet-mixin.mjs";
@@ -20,6 +18,8 @@ export default class TeriockBaseItemSheet extends TeriockSheet(sheets.ItemSheet)
     classes: ["teriock"],
     dragDrop: [{ dragSelector: ".draggable", dropSelector: null }],
   };
+  /** @type {Array} */
+  #dragDrop;
 
   /**
    * Creates a new base item sheet instance.
@@ -30,6 +30,14 @@ export default class TeriockBaseItemSheet extends TeriockSheet(sheets.ItemSheet)
   constructor(...args) {
     super(...args);
     this.#dragDrop = this.#createDragDropHandlers();
+  }
+
+  /**
+   * Gets the drag and drop handlers for this sheet.
+   * @returns {Array} Array of drag and drop handlers.
+   */
+  get dragDrop() {
+    return this.#dragDrop;
   }
 
   /**
@@ -143,17 +151,6 @@ export default class TeriockBaseItemSheet extends TeriockSheet(sheets.ItemSheet)
   _canDragDrop() {
     return this.editable;
   }
-
-  /**
-   * Gets the drag and drop handlers for this sheet.
-   * @returns {Array} Array of drag and drop handlers.
-   */
-  get dragDrop() {
-    return this.#dragDrop;
-  }
-
-  /** @type {Array} */
-  #dragDrop;
 
   /**
    * Creates drag and drop handlers for the sheet.

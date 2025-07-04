@@ -1,4 +1,3 @@
-/** @import { CommonRollOptions } from "../types/rolls" */
 import { ParentDocumentMixin } from "./mixins/parent-mixin.mjs";
 import TeriockRoll from "./roll.mjs";
 
@@ -7,15 +6,6 @@ import TeriockRoll from "./roll.mjs";
  * @extends {ParentDocumentMixin}
  */
 export default class TeriockActor extends ParentDocumentMixin(foundry.documents.Actor) {
-  /**
-   * Gets roll data for this actor, delegating to the system's getRollData method.
-   * @inheritdoc
-   * @returns {object} The roll data for this actor.
-   */
-  getRollData() {
-    return this.system.getRollData();
-  }
-
   /**
    * Gets all valid effects that apply to this actor.
    * @inheritdoc
@@ -63,6 +53,15 @@ export default class TeriockActor extends ParentDocumentMixin(foundry.documents.
    */
   get disabled() {
     return this.statuses.has("dead");
+  }
+
+  /**
+   * Gets roll data for this actor, delegating to the system's getRollData method.
+   * @inheritdoc
+   * @returns {object} The roll data for this actor.
+   */
+  getRollData() {
+    return this.system.getRollData();
   }
 
   /**

@@ -1,6 +1,3 @@
-/** @import { MessageParts } from "../../../../types/messages" */
-/** @import TeriockFluencyData from "../fluency-data.mjs"; */
-
 /**
  * Generates message parts for a fluency effect, including bars and blocks for display.
  * Creates formatted display elements for tradecraft information and description.

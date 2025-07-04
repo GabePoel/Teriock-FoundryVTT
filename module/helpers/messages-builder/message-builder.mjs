@@ -1,4 +1,4 @@
-import { messageBlock, messageBar, messageBox, messageWrapper, messageHeader } from "./message-parts.mjs";
+import { messageBar, messageBlock, messageBox, messageHeader, messageWrapper } from "./message-parts.mjs";
 
 /**
  * Builds a complete message element from message parts.

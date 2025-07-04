@@ -1,5 +1,3 @@
-/** @import TeriockResourceData from "../resource-data.mjs" */
-
 /**
  * Migrates resource data from older versions to the current format.
  * Converts numeric maxQuantity to the new schema format with raw and derived fields.

@@ -1,6 +1,3 @@
-/** @import TeriockEquipmentData from "../equipment-data.mjs"; */
-/** @import TeriockEffect from "@client/documents/_module.mjs"; */
-
 import { evaluateSync } from "../../../../helpers/utils.mjs";
 
 /**

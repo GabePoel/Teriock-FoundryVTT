@@ -1,4 +1,3 @@
-/** @import TeriockAbilityData from "../ability-data.mjs"; */
 const { api, ux } = foundry.applications;
 import TeriockRoll from "../../../../documents/roll.mjs";
 import { _generateEffect, _generateTakes } from "./_generate-effect.mjs";

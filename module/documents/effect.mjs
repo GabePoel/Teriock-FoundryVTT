@@ -5,36 +5,6 @@ import { ChildDocumentMixin } from "./mixins/child-mixin.mjs";
  */
 export default class TeriockEffect extends ChildDocumentMixin(foundry.documents.ActiveEffect) {
   /**
-   * Prepares derived data for the effect, handling ability-specific logic and attunement changes.
-   * @todo Move this logic to TeriockAbilityData as appropriate.
-   * @inheritdoc
-   */
-  prepareDerivedData() {
-    super.prepareDerivedData();
-    if (this.type === "ability" && this.system.maneuver === "passive") {
-      if (this.system.applies.base.changes.length > 0) {
-        this.changes = this.system.applies.base.changes;
-      }
-      if (this.isProficient) {
-        if (this.system.applies.proficient.changes.length > 0) {
-          this.changes = this.system.applies.proficient.changes;
-        }
-      }
-      if (this.isFluent) {
-        if (this.system.applies.fluent.changes.length > 0) {
-          this.changes = this.system.applies.fluent.changes;
-        }
-      }
-    }
-    if (this.type === "attunement") {
-      this.changes = [
-        { key: "system.attunements", mode: 2, value: this.system.target, priority: 10 },
-        { key: "system.presence.value", mode: 2, value: this.system.tier, priority: 10 },
-      ];
-    }
-  }
-
-  /**
    * Checks if the effect is suppressed, combining system suppression with parent suppression.
    * @override
    * @returns {boolean} True if the effect is suppressed, false otherwise.
@@ -184,6 +154,63 @@ export default class TeriockEffect extends ChildDocumentMixin(foundry.documents.
   }
 
   /**
+   * Gets the document that most directly applies this effect. If it's an effect, returns that.
+   * Otherwise, gets what Foundry considers to be the parent.
+   * @returns {TeriockActor|TeriockEffect|TeriockItem} The source document that applies this effect.
+   */
+  get source() {
+    let source = this.sup;
+    if (!source) {
+      source = this.parent;
+    }
+    return source;
+  }
+
+  /**
+   * Checks if this effect is a reference effect by examining its sups for non-passive maneuvers.
+   * @returns {boolean} True if this is a reference effect, false otherwise.
+   */
+  get isReference() {
+    const sups = this.allSups;
+    for (const sup of sups) {
+      if (sup.system.maneuver !== "passive") {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  /**
+   * Prepares derived data for the effect, handling ability-specific logic and attunement changes.
+   * @todo Move this logic to TeriockAbilityData as appropriate.
+   * @inheritdoc
+   */
+  prepareDerivedData() {
+    super.prepareDerivedData();
+    if (this.type === "ability" && this.system.maneuver === "passive") {
+      if (this.system.applies.base.changes.length > 0) {
+        this.changes = this.system.applies.base.changes;
+      }
+      if (this.isProficient) {
+        if (this.system.applies.proficient.changes.length > 0) {
+          this.changes = this.system.applies.proficient.changes;
+        }
+      }
+      if (this.isFluent) {
+        if (this.system.applies.fluent.changes.length > 0) {
+          this.changes = this.system.applies.fluent.changes;
+        }
+      }
+    }
+    if (this.type === "attunement") {
+      this.changes = [
+        { key: "system.attunements", mode: 2, value: this.system.target, priority: 10 },
+        { key: "system.presence.value", mode: 2, value: this.system.tier, priority: 10 },
+      ];
+    }
+  }
+
+  /**
    * Saves the hierarchy relationships by updating sub UUIDs and sup UUID.
    * @returns {Promise<void>} Promise that resolves once the hierarchy data is saved.
    */
@@ -221,33 +248,6 @@ export default class TeriockEffect extends ChildDocumentMixin(foundry.documents.
       });
       await this.parent?.deleteEmbeddedDocuments("ActiveEffect", subIds);
     }
-  }
-
-  /**
-   * Gets the document that most directly applies this effect. If it's an effect, returns that.
-   * Otherwise, gets what Foundry considers to be the parent.
-   * @returns {TeriockActor|TeriockEffect|TeriockItem} The source document that applies this effect.
-   */
-  get source() {
-    let source = this.sup;
-    if (!source) {
-      source = this.parent;
-    }
-    return source;
-  }
-
-  /**
-   * Checks if this effect is a reference effect by examining its sups for non-passive maneuvers.
-   * @returns {boolean} True if this is a reference effect, false otherwise.
-   */
-  get isReference() {
-    const sups = this.allSups;
-    for (const sup of sups) {
-      if (sup.system.maneuver !== "passive") {
-        return true;
-      }
-    }
-    return false;
   }
 
   /**

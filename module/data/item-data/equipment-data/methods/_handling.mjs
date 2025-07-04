@@ -1,6 +1,3 @@
-/** @import TeriockEquipmentData from "../equipment-data.mjs"; */
-// const { api } = foundry.applications;
-
 /**
  * Shatters equipment, making it unusable.
  * @param {TeriockEquipmentData} equipmentData - The equipment data to shatter.

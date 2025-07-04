@@ -63,6 +63,281 @@ export const TeriockSheet = (Base) =>
     }
 
     /**
+     * Debug action for development purposes.
+     * @param {Event} _ - The event object.
+     * @param {HTMLElement} __ - The target element.
+     * @returns {Promise<void>} Promise that resolves when debug is complete.
+     * @static
+     */
+    static async _debug(_, __) {
+      console.log("Debug", this.document, this);
+    }
+
+    /**
+     * Pulls data from wiki for the current document.
+     * @param {Event} _ - The event object.
+     * @param {HTMLElement} __ - The target element.
+     * @returns {Promise<void>} Promise that resolves when wiki pull is complete.
+     * @static
+     */
+    static async _wikiPullThis(_, __) {
+      if (this.editable) this.document.system.wikiPull();
+    }
+
+    /**
+     * Opens the wiki page for the current document.
+     * @param {Event} _ - The event object.
+     * @param {HTMLElement} __ - The target element.
+     * @returns {Promise<void>} Promise that resolves when wiki page is opened.
+     * @static
+     */
+    static async _wikiOpenThis(_, __) {
+      this.document.system.wikiOpen();
+    }
+
+    /**
+     * Sends the current document to chat.
+     * @param {Event} _ - The event object.
+     * @param {HTMLElement} __ - The target element.
+     * @returns {Promise<void>} Promise that resolves when chat is sent.
+     * @static
+     */
+    static async _chatThis(_, __) {
+      this.document.chat();
+    }
+
+    /**
+     * Reloads the current document and re-renders the sheet.
+     * @param {Event} _ - The event object.
+     * @param {HTMLElement} __ - The target element.
+     * @returns {Promise<void>} Promise that resolves when reload is complete.
+     * @static
+     */
+    static async _reloadThis(_, __) {
+      await this.document.update({});
+      await this.document.sheet.render();
+    }
+
+    /**
+     * Toggles the lock state of the current sheet.
+     * @param {Event} _ - The event object.
+     * @param {HTMLElement} __ - The target element.
+     * @returns {Promise<void>} Promise that resolves when lock is toggled.
+     * @static
+     */
+    static async _toggleLockThis(_, __) {
+      this._locked = !this._locked;
+      this.editable = this.isEditable && !this._locked;
+      this.render();
+    }
+
+    /**
+     * Rolls the current document with optional advantage/disadvantage.
+     * @param {Event} event - The event object.
+     * @param {HTMLElement} target - The target element.
+     * @returns {Promise<void>} Promise that resolves when roll is complete.
+     * @static
+     */
+    static async _rollThis(event, target) {
+      const options = event?.altKey ? { advantage: true } : event?.shiftKey ? { disadvantage: true } : {};
+      this.document.use(options);
+    }
+
+    /**
+     * Opens image picker for editing document images.
+     * @param {Event} _ - The event object.
+     * @param {HTMLElement} target - The target element.
+     * @returns {Promise<void>} Promise that resolves when image picker is opened.
+     * @static
+     */
+    static async _editImage(_, target) {
+      const attr = target.dataset.edit;
+      const current = foundry.utils.getProperty(this.document, attr);
+      const defaultImg = this.document.constructor.getDefaultArtwork?.(this.document.toObject())?.img;
+
+      return new foundry.applications.apps.FilePicker({
+        current,
+        type: "image",
+        redirectToRoot: defaultImg ? [defaultImg] : [],
+        callback: (path) => this.document.update({ [attr]: path }),
+        top: this.position.top + 40,
+        left: this.position.left + 10,
+      }).browse();
+    }
+
+    /**
+     * Opens the sheet for an embedded document.
+     * @param {Event} event - The event object.
+     * @param {HTMLElement} target - The target element.
+     * @returns {Promise<void>} Promise that resolves when sheet is opened.
+     * @static
+     */
+    static async _openDoc(event, target) {
+      this._embeddedFromCard(target)?.sheet.render(true);
+    }
+
+    /**
+     * Sends an embedded document to chat.
+     * @param {Event} event - The event object.
+     * @param {HTMLElement} target - The target element.
+     * @returns {Promise<void>} Promise that resolves when chat is sent.
+     * @static
+     */
+    static async _chatDoc(event, target) {
+      this._embeddedFromCard(target)?.chat();
+    }
+
+    /**
+     * Uses one unit of an embedded consumable document.
+     * @param {Event} event - The event object.
+     * @param {HTMLElement} target - The target element.
+     * @returns {Promise<void>} Promise that resolves when use is complete.
+     * @static
+     */
+    static async _useOneDoc(event, target) {
+      await this._embeddedFromCard(target)?.system.useOne();
+    }
+
+    /**
+     * Toggles the disabled state of an embedded document.
+     * @param {Event} event - The event object.
+     * @param {HTMLElement} target - The target element.
+     * @returns {Promise<void>} Promise that resolves when toggle is complete.
+     * @static
+     */
+    static async _toggleDisabledDoc(event, target) {
+      await this._embeddedFromCard(target)?.toggleDisabled();
+    }
+
+    /**
+     * Rolls an embedded document with optional advantage/disadvantage.
+     * @param {Event} event - The event object.
+     * @param {HTMLElement} target - The target element.
+     * @returns {Promise<void>} Promise that resolves when roll is complete.
+     * @static
+     */
+    static async _rollDoc(event, target) {
+      const options = event?.altKey ? { advantage: true } : event?.shiftKey ? { disadvantage: true } : {};
+      const document = this._embeddedFromCard(target);
+      if (document?.type === "equipment") {
+        if (event?.shiftKey) {
+          options.secret = true;
+        }
+        if (event?.ctrlKey) {
+          options.twoHanded = true;
+        }
+      }
+      await document?.use(options);
+    }
+
+    /**
+     * Toggles a boolean field on the current document.
+     * @param {Event} event - The event object.
+     * @param {HTMLElement} target - The target element.
+     * @returns {Promise<void>} Promise that resolves when toggle is complete.
+     * @static
+     */
+    static async _quickToggle(event, target) {
+      const { path } = target.dataset;
+      const current = target.dataset.bool === "true";
+      await this.document.update({ [path]: !current });
+    }
+
+    /**
+     * Toggles a boolean field on the sheet and re-renders.
+     * @param {Event} event - The event object.
+     * @param {HTMLElement} target - The target element.
+     * @returns {Promise<void>} Promise that resolves when toggle is complete.
+     * @static
+     */
+    static async _sheetToggle(event, target) {
+      const { path } = target.dataset;
+      const current = target.dataset.bool === "true";
+      foundry.utils.setProperty(this, path, !current);
+      this.render();
+    }
+
+    /**
+     * Creates a new ability for the current document.
+     * @param {Event} event - The event object.
+     * @param {HTMLElement} __ - The target element.
+     * @returns {Promise<ActiveEffect>} Promise that resolves to the created ability.
+     * @static
+     */
+    static async _createAbility(event, __) {
+      return await createEffects.createAbility(this.document, null);
+    }
+
+    /**
+     * Creates a new resource for the current document.
+     * @param {Event} event - The event object.
+     * @param {HTMLElement} __ - The target element.
+     * @returns {Promise<ActiveEffect>} Promise that resolves to the created resource.
+     * @static
+     */
+    static async _createResource(event, __) {
+      return await createEffects.createResource(this.document, null);
+    }
+
+    /**
+     * Creates a new fluency for the current document.
+     * @param {Event} event - The event object.
+     * @param {HTMLElement} __ - The target element.
+     * @returns {Promise<ActiveEffect>} Promise that resolves to the created fluency.
+     * @static
+     */
+    static async _createFluency(event, __) {
+      return await createEffects.createFluency(this.document, null);
+    }
+
+    /**
+     * Creates a new property for the current document.
+     * Shows a dialog to select property type or create a new one.
+     * @param {Event} event - The event object.
+     * @param {HTMLElement} __ - The target element.
+     * @returns {Promise<ActiveEffect>} Promise that resolves to the created property.
+     * @static
+     */
+    static async _createProperty(event, __) {
+      const createOptions = (obj) =>
+        Object.entries(obj)
+          .map(([key, value]) => `<option value="${key}">${value}</option>`)
+          .join("");
+
+      const { equipmentOptions } = CONFIG.TERIOCK;
+      const propertyOptions = [
+        ...createOptions(equipmentOptions.properties),
+        ...createOptions(equipmentOptions.materialProperties),
+        ...createOptions(equipmentOptions.magicalProperties),
+      ].join("");
+
+      await new api.DialogV2({
+        window: { title: "Create Property" },
+        content: `
+          <label for="property-select">Select Property</label>
+          <select id="property-select" name="property">${propertyOptions}</select>
+        `,
+        buttons: [
+          {
+            action: "chosen",
+            label: "Add Chosen Property",
+            default: true,
+            callback: async (event, button) => {
+              return await createEffects.createProperty(this.item, button.form.elements.property.value);
+            },
+          },
+          {
+            action: "other",
+            label: "Create New Property",
+            callback: async () => {
+              return await createEffects.createProperty(this.item, null);
+            },
+          },
+        ],
+      }).render(true);
+    }
+
+    /**
      * Handles the render event for the sheet.
      * Sets up editable state, connects embedded documents, and initializes UI components.
      * @param {object} context - The render context.
@@ -207,6 +482,8 @@ export const TeriockSheet = (Base) =>
         });
       });
     }
+
+    // Static Actions
 
     /**
      * Sets up handlers for array field components.
@@ -536,283 +813,6 @@ export const TeriockSheet = (Base) =>
      */
     _canDropItem(item) {
       return this.document.isOwner && item && item.parent !== this.document && this.document.documentName === "Actor";
-    }
-
-    // Static Actions
-
-    /**
-     * Debug action for development purposes.
-     * @param {Event} _ - The event object.
-     * @param {HTMLElement} __ - The target element.
-     * @returns {Promise<void>} Promise that resolves when debug is complete.
-     * @static
-     */
-    static async _debug(_, __) {
-      console.log("Debug", this.document, this);
-    }
-
-    /**
-     * Pulls data from wiki for the current document.
-     * @param {Event} _ - The event object.
-     * @param {HTMLElement} __ - The target element.
-     * @returns {Promise<void>} Promise that resolves when wiki pull is complete.
-     * @static
-     */
-    static async _wikiPullThis(_, __) {
-      if (this.editable) this.document.system.wikiPull();
-    }
-
-    /**
-     * Opens the wiki page for the current document.
-     * @param {Event} _ - The event object.
-     * @param {HTMLElement} __ - The target element.
-     * @returns {Promise<void>} Promise that resolves when wiki page is opened.
-     * @static
-     */
-    static async _wikiOpenThis(_, __) {
-      this.document.system.wikiOpen();
-    }
-
-    /**
-     * Sends the current document to chat.
-     * @param {Event} _ - The event object.
-     * @param {HTMLElement} __ - The target element.
-     * @returns {Promise<void>} Promise that resolves when chat is sent.
-     * @static
-     */
-    static async _chatThis(_, __) {
-      this.document.chat();
-    }
-
-    /**
-     * Reloads the current document and re-renders the sheet.
-     * @param {Event} _ - The event object.
-     * @param {HTMLElement} __ - The target element.
-     * @returns {Promise<void>} Promise that resolves when reload is complete.
-     * @static
-     */
-    static async _reloadThis(_, __) {
-      await this.document.update({});
-      await this.document.sheet.render();
-    }
-
-    /**
-     * Toggles the lock state of the current sheet.
-     * @param {Event} _ - The event object.
-     * @param {HTMLElement} __ - The target element.
-     * @returns {Promise<void>} Promise that resolves when lock is toggled.
-     * @static
-     */
-    static async _toggleLockThis(_, __) {
-      this._locked = !this._locked;
-      this.editable = this.isEditable && !this._locked;
-      this.render();
-    }
-
-    /**
-     * Rolls the current document with optional advantage/disadvantage.
-     * @param {Event} event - The event object.
-     * @param {HTMLElement} target - The target element.
-     * @returns {Promise<void>} Promise that resolves when roll is complete.
-     * @static
-     */
-    static async _rollThis(event, target) {
-      const options = event?.altKey ? { advantage: true } : event?.shiftKey ? { disadvantage: true } : {};
-      this.document.use(options);
-    }
-
-    /**
-     * Opens image picker for editing document images.
-     * @param {Event} _ - The event object.
-     * @param {HTMLElement} target - The target element.
-     * @returns {Promise<void>} Promise that resolves when image picker is opened.
-     * @static
-     */
-    static async _editImage(_, target) {
-      const attr = target.dataset.edit;
-      const current = foundry.utils.getProperty(this.document, attr);
-      const defaultImg = this.document.constructor.getDefaultArtwork?.(this.document.toObject())?.img;
-
-      return new foundry.applications.apps.FilePicker({
-        current,
-        type: "image",
-        redirectToRoot: defaultImg ? [defaultImg] : [],
-        callback: (path) => this.document.update({ [attr]: path }),
-        top: this.position.top + 40,
-        left: this.position.left + 10,
-      }).browse();
-    }
-
-    /**
-     * Opens the sheet for an embedded document.
-     * @param {Event} event - The event object.
-     * @param {HTMLElement} target - The target element.
-     * @returns {Promise<void>} Promise that resolves when sheet is opened.
-     * @static
-     */
-    static async _openDoc(event, target) {
-      this._embeddedFromCard(target)?.sheet.render(true);
-    }
-
-    /**
-     * Sends an embedded document to chat.
-     * @param {Event} event - The event object.
-     * @param {HTMLElement} target - The target element.
-     * @returns {Promise<void>} Promise that resolves when chat is sent.
-     * @static
-     */
-    static async _chatDoc(event, target) {
-      this._embeddedFromCard(target)?.chat();
-    }
-
-    /**
-     * Uses one unit of an embedded consumable document.
-     * @param {Event} event - The event object.
-     * @param {HTMLElement} target - The target element.
-     * @returns {Promise<void>} Promise that resolves when use is complete.
-     * @static
-     */
-    static async _useOneDoc(event, target) {
-      await this._embeddedFromCard(target)?.system.useOne();
-    }
-
-    /**
-     * Toggles the disabled state of an embedded document.
-     * @param {Event} event - The event object.
-     * @param {HTMLElement} target - The target element.
-     * @returns {Promise<void>} Promise that resolves when toggle is complete.
-     * @static
-     */
-    static async _toggleDisabledDoc(event, target) {
-      await this._embeddedFromCard(target)?.toggleDisabled();
-    }
-
-    /**
-     * Rolls an embedded document with optional advantage/disadvantage.
-     * @param {Event} event - The event object.
-     * @param {HTMLElement} target - The target element.
-     * @returns {Promise<void>} Promise that resolves when roll is complete.
-     * @static
-     */
-    static async _rollDoc(event, target) {
-      const options = event?.altKey ? { advantage: true } : event?.shiftKey ? { disadvantage: true } : {};
-      const document = this._embeddedFromCard(target);
-      if (document?.type === "equipment") {
-        if (event?.shiftKey) {
-          options.secret = true;
-        }
-        if (event?.ctrlKey) {
-          options.twoHanded = true;
-        }
-      }
-      await document?.use(options);
-    }
-
-    /**
-     * Toggles a boolean field on the current document.
-     * @param {Event} event - The event object.
-     * @param {HTMLElement} target - The target element.
-     * @returns {Promise<void>} Promise that resolves when toggle is complete.
-     * @static
-     */
-    static async _quickToggle(event, target) {
-      const { path } = target.dataset;
-      const current = target.dataset.bool === "true";
-      await this.document.update({ [path]: !current });
-    }
-
-    /**
-     * Toggles a boolean field on the sheet and re-renders.
-     * @param {Event} event - The event object.
-     * @param {HTMLElement} target - The target element.
-     * @returns {Promise<void>} Promise that resolves when toggle is complete.
-     * @static
-     */
-    static async _sheetToggle(event, target) {
-      const { path } = target.dataset;
-      const current = target.dataset.bool === "true";
-      foundry.utils.setProperty(this, path, !current);
-      this.render();
-    }
-
-    /**
-     * Creates a new ability for the current document.
-     * @param {Event} event - The event object.
-     * @param {HTMLElement} __ - The target element.
-     * @returns {Promise<ActiveEffect>} Promise that resolves to the created ability.
-     * @static
-     */
-    static async _createAbility(event, __) {
-      return await createEffects.createAbility(this.document, null);
-    }
-
-    /**
-     * Creates a new resource for the current document.
-     * @param {Event} event - The event object.
-     * @param {HTMLElement} __ - The target element.
-     * @returns {Promise<ActiveEffect>} Promise that resolves to the created resource.
-     * @static
-     */
-    static async _createResource(event, __) {
-      return await createEffects.createResource(this.document, null);
-    }
-
-    /**
-     * Creates a new fluency for the current document.
-     * @param {Event} event - The event object.
-     * @param {HTMLElement} __ - The target element.
-     * @returns {Promise<ActiveEffect>} Promise that resolves to the created fluency.
-     * @static
-     */
-    static async _createFluency(event, __) {
-      return await createEffects.createFluency(this.document, null);
-    }
-
-    /**
-     * Creates a new property for the current document.
-     * Shows a dialog to select property type or create a new one.
-     * @param {Event} event - The event object.
-     * @param {HTMLElement} __ - The target element.
-     * @returns {Promise<ActiveEffect>} Promise that resolves to the created property.
-     * @static
-     */
-    static async _createProperty(event, __) {
-      const createOptions = (obj) =>
-        Object.entries(obj)
-          .map(([key, value]) => `<option value="${key}">${value}</option>`)
-          .join("");
-
-      const { equipmentOptions } = CONFIG.TERIOCK;
-      const propertyOptions = [
-        ...createOptions(equipmentOptions.properties),
-        ...createOptions(equipmentOptions.materialProperties),
-        ...createOptions(equipmentOptions.magicalProperties),
-      ].join("");
-
-      await new api.DialogV2({
-        window: { title: "Create Property" },
-        content: `
-          <label for="property-select">Select Property</label>
-          <select id="property-select" name="property">${propertyOptions}</select>
-        `,
-        buttons: [
-          {
-            action: "chosen",
-            label: "Add Chosen Property",
-            default: true,
-            callback: async (event, button) => {
-              return await createEffects.createProperty(this.item, button.form.elements.property.value);
-            },
-          },
-          {
-            action: "other",
-            label: "Create New Property",
-            callback: async () => {
-              return await createEffects.createProperty(this.item, null);
-            },
-          },
-        ],
-      }).render(true);
     }
 
     // Private helper methods

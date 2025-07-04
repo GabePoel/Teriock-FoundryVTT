@@ -158,12 +158,12 @@
           <div
             class="character-bar-temp"
             style="width: {{barTemp
-                system.wither.value
-                system.wither.max
-                0
-              }}%; {{barTempHide
-                system.wither.value
-              }}"
+              system.wither.value
+              system.wither.max
+              0
+            }}%; {{barTempHide
+              system.wither.value
+            }}"
           ></div>
           <div
             class="character-bar-lost"
@@ -199,18 +199,20 @@
       </div>
     </div>
     <!-- Wither Bar End -->
-    <div class="character-presence-container character-bar-container toutline {{#if system.presence.overflow}}overflow{{/if}}">
+    <div class="character-presence-container character-bar-container toutline {{#if
+      system.presence.overflow}}overflow{{/if}}">
       <div
         class="character-presence-bar"
         style="grid-template-columns:{{repeat system.pres ' 1fr'}};"
       >
         {{#if (geq system.usp 1)}}
-        <div
-          class="presence-indicator used"
-          style="grid-column: span {{{system.usp}}}; grid-template-columns:{{repeat system.usp ' 1fr'}}; display: grid;"
-        >
-          {{repeat system.usp '<div class="presence-indicator empty" style="background: transparent;"></div>'}}
-        </div>
+          <div
+            class="presence-indicator used"
+            style="grid-column: span {{{system.usp}}}; grid-template-columns:{{repeat system.usp
+                                                                                      ' 1fr'}}; display: grid;"
+          >
+            {{repeat system.usp '<div class="presence-indicator empty" style="background: transparent;"></div>'}}
+          </div>
         {{/if}}
         {{repeat system.unp '<div class="presence-indicator unused"></div>'}}
       </div>

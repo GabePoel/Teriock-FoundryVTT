@@ -1,11 +1,11 @@
 const { HandlebarsApplicationMixin, DialogV2 } = foundry.applications.api;
 import { documentOptions } from "../../../helpers/constants/document-options.mjs";
 import {
-  rankContextMenu,
-  classContextMenu,
   archetypeContextMenu,
+  classContextMenu,
   hitDieContextMenu,
   manaDieContextMenu,
+  rankContextMenu,
 } from "./connections/_context-menus.mjs";
 import TeriockBaseItemSheet from "../base-sheet/base-sheet.mjs";
 

@@ -9,16 +9,6 @@ import { ParentDocumentMixin } from "./mixins/parent-mixin.mjs";
  */
 export default class TeriockItem extends ParentDocumentMixin(ChildDocumentMixin(foundry.documents.Item)) {
   /**
-   * Rolls the item, delegating to the system's roll method.
-   * @override
-   * @param {object} options - Options for the roll.
-   * @returns {Promise<void>} Promise that resolves when the roll is complete.
-   */
-  async roll(options) {
-    await this.system.roll(options);
-  }
-
-  /**
    * Gets the valid effects for this item.
    * @inheritdoc
    * @returns {ActiveEffect[]} Array of transferred effects.
@@ -33,6 +23,16 @@ export default class TeriockItem extends ParentDocumentMixin(ChildDocumentMixin(
    */
   get disabled() {
     return this.system.disabled;
+  }
+
+  /**
+   * Rolls the item, delegating to the system's roll method.
+   * @override
+   * @param {object} options - Options for the roll.
+   * @returns {Promise<void>} Promise that resolves when the roll is complete.
+   */
+  async roll(options) {
+    await this.system.roll(options);
   }
 
   /**

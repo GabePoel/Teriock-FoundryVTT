@@ -1,5 +1,3 @@
-/** @import { MessageParts } from "../../types/messages"; */
-
 const { fields } = foundry.data;
 
 /**
@@ -11,6 +9,36 @@ const { fields } = foundry.data;
  */
 export const ChildDataMixin = (Base) =>
   class ChildDataMixin extends Base {
+    /**
+     * Gets the message rules-parts for displaying the child document in chat.
+     * Includes image, name, and font information from the parent document.
+     * @returns {MessageParts} Object containing message display components.
+     */
+    get messageParts() {
+      return {
+        image: this.parent.img,
+        name: this.parent.name,
+        bars: [],
+        blocks: [],
+        font: this.font,
+      };
+    }
+
+    /**
+     * Gets the secret message rules-parts for displaying hidden child documents.
+     * Uses generic uncertainty image and type-based name for privacy.
+     * @returns {MessageParts} Object containing secret message display components.
+     */
+    get secretMessageParts() {
+      return {
+        image: "systems/teriock/assets/uncertainty.svg",
+        name: this.parent.type.charAt(0).toUpperCase() + this.parent.type.slice(1),
+        bars: [],
+        blocks: [],
+        font: null,
+      };
+    }
+
     /**
      * Defines the schema for child document data fields.
      * Includes proficiency flags, font customization, and description fields.
@@ -54,35 +82,5 @@ export const ChildDataMixin = (Base) =>
      */
     async use(options) {
       await this.roll(options);
-    }
-
-    /**
-     * Gets the message rules-parts for displaying the child document in chat.
-     * Includes image, name, and font information from the parent document.
-     * @returns {MessageParts} Object containing message display components.
-     */
-    get messageParts() {
-      return {
-        image: this.parent.img,
-        name: this.parent.name,
-        bars: [],
-        blocks: [],
-        font: this.font,
-      };
-    }
-
-    /**
-     * Gets the secret message rules-parts for displaying hidden child documents.
-     * Uses generic uncertainty image and type-based name for privacy.
-     * @returns {MessageParts} Object containing secret message display components.
-     */
-    get secretMessageParts() {
-      return {
-        image: "systems/teriock/assets/uncertainty.svg",
-        name: this.parent.type.charAt(0).toUpperCase() + this.parent.type.slice(1),
-        bars: [],
-        blocks: [],
-        font: null,
-      };
     }
   };

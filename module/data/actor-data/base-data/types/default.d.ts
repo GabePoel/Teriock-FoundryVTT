@@ -1,5 +1,5 @@
 import type TeriockActor from "../../../../documents/actor.mjs";
-import { BarData, AttributeData, HackData } from "./stats";
+import { AttributeData, BarData, HackData } from "./stats";
 import { ProtectionData } from "./protections";
 import { TeriockEquipment } from "../../../../types/documents";
 import { TradecraftData } from "./tradecrafts";

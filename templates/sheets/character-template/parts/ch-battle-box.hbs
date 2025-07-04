@@ -38,11 +38,11 @@
             data-tooltip="Roll End Condition"
           ></i>
           {{#if (exists system.wielding.blocker.derived)}}
-          <i
-            class="fa-regular fa-arrow-up-right-from-square thover"
-            data-action="openPrimaryBlocker"
-            data-tooltip="Open"
-          ></i>
+            <i
+              class="fa-regular fa-arrow-up-right-from-square thover"
+              data-action="openPrimaryBlocker"
+              data-tooltip="Open"
+            ></i>
           {{/if}}
         </div>
       </div>
@@ -51,9 +51,9 @@
         data-tooltip="Block Item"
       >
         {{#if (exists system.wielding.blocker.derived)}}
-        {{{system.wielding.blocker.derived.name}}}
+          {{{system.wielding.blocker.derived.name}}}
         {{else}}
-        None
+          None
         {{/if}}
       </div>
     </div>
@@ -65,25 +65,25 @@
         <div class="tsubtle tcenter" data-action="piercingChange">Piercing</div>
         <div class="character-smallbox-value thover">
           {{#if
-          (or
-          (eq system.piercing "ub")
-          (has system.wielding.attacker.effectKeys.property "ub")
-          )
+            (or
+              (eq system.piercing "ub")
+              (has system.wielding.attacker.effectKeys.property "ub")
+            )
           }}
-          UB
-          {{#if (eq system.piercing "ub")}}*{{/if}}
+            UB
+            {{#if (eq system.piercing "ub")}}*{{/if}}
           {{else}}
-          {{#if
-          (or
-          (eq system.piercing "av0")
-          (has system.wielding.attacker.effectKeys.property "av0")
-          )
-          }}
-          AV0
-          {{#if (eq system.piercing "av0")}}*{{/if}}
-          {{else}}
-          <i class="fa-solid fa-xmark thover"></i>
-          {{/if}}
+            {{#if
+              (or
+                (eq system.piercing "av0")
+                (has system.wielding.attacker.effectKeys.property "av0")
+              )
+            }}
+              AV0
+              {{#if (eq system.piercing "av0")}}*{{/if}}
+            {{else}}
+              <i class="fa-solid fa-xmark thover"></i>
+            {{/if}}
           {{/if}}
         </div>
       </div>
@@ -92,9 +92,9 @@
         <div class="tsubtle tcenter">SB</div>
         <div class="character-smallbox-value">
           {{#if system.sb}}
-          <i class="fa-solid fa-check thover"></i>
+            <i class="fa-solid fa-check thover"></i>
           {{else}}
-          <i class="fa-solid fa-xmark thover"></i>
+            <i class="fa-solid fa-xmark thover"></i>
           {{/if}}
         </div>
       </div>
@@ -122,17 +122,17 @@
             data-tooltip="Roll Attack"
           ></i>
           {{#if (exists system.wielding.attacker.derived)}}
-          <i
-            class="fa-regular fa-hammer-crash thover"
-            data-action="quickUse"
-            data-id="{{system.wielding.attacker.derived._id}}"
-            data-tooltip="Roll Damage"
-          ></i>
-          <i
-            class="fa-regular fa-arrow-up-right-from-square thover"
-            data-action="openPrimaryAttacker"
-            data-tooltip="Open"
-          ></i>
+            <i
+              class="fa-regular fa-hammer-crash thover"
+              data-action="quickUse"
+              data-id="{{system.wielding.attacker.derived._id}}"
+              data-tooltip="Roll Damage"
+            ></i>
+            <i
+              class="fa-regular fa-arrow-up-right-from-square thover"
+              data-action="openPrimaryAttacker"
+              data-tooltip="Open"
+            ></i>
           {{/if}}
         </div>
       </div>
@@ -142,18 +142,19 @@
         data-tooltip="Attack Item"
       >
         {{#if (exists system.wielding.attacker.derived)}}
-        {{{system.wielding.attacker.derived.name}}}
+          {{{system.wielding.attacker.derived.name}}}
         {{else}}
-        None
+          None
         {{/if}}
       </div>
 
       {{#if (exists system.wielding.attacker.derived.system.specialRules)}}
-      <div class="tsubtle little-title" style="margin-top: 0.5em;">Special
-        rules</div>
-      <div>
-        {{editor enrichedSpecialRules button=false editable=false}}
-      </div>
+        <div class="tsubtle little-title" style="margin-top: 0.5em;">Special
+          rules
+        </div>
+        <div>
+          {{editor enrichedSpecialRules button=false editable=false}}
+        </div>
       {{/if}}
     </div>
   </div>

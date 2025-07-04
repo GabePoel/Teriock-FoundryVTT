@@ -1,5 +1,3 @@
-// Allows for typing within mixin.
-/** @import ActiveEffectConfig from "@client/applications/sheets/active-effect-config.mjs"; */
 const { sheets } = foundry.applications;
 import { documentOptions } from "../../../helpers/constants/document-options.mjs";
 import { TeriockSheet } from "../../mixins/sheet-mixin.mjs";
@@ -27,6 +25,56 @@ export default class TeriockBaseEffectSheet extends TeriockSheet(sheets.ActiveEf
       toggleDisabledThis: this._toggledDisabledThis,
     },
   };
+
+  /**
+   * Adds a new change to an effect application.
+   * @param {Event} event - The event object.
+   * @param {HTMLElement} target - The target element.
+   * @returns {Promise<void>} Promise that resolves when change is added.
+   * @static
+   */
+  static async _addChange(event, target) {
+    const application = target.dataset.application;
+    const updateString = `system.applies.${application}.changes`;
+    const changes = this.document.system.applies[application].changes;
+    const newChange = {
+      key: "",
+      mode: 0,
+      value: "",
+      priority: 0,
+    };
+    changes.push(newChange);
+    await this.document.update({ [updateString]: changes });
+  }
+
+  /**
+   * Deletes a change from an effect application.
+   * @param {Event} event - The event object.
+   * @param {HTMLElement} target - The target element.
+   * @returns {Promise<void>} Promise that resolves when change is deleted.
+   * @static
+   */
+  static async _deleteChange(event, target) {
+    const index = parseInt(target.dataset.index, 10);
+    const application = target.dataset.application;
+    const updateString = `system.applies.${application}.changes`;
+    const changes = this.document.system.applies[application].changes;
+    if (index >= 0 && index < changes.length) {
+      changes.splice(index, 1);
+      await this.document.update({ [updateString]: changes });
+    }
+  }
+
+  /**
+   * Toggles the disabled state of the current effect.
+   * @param {Event} event - The event object.
+   * @param {HTMLElement} target - The target element.
+   * @returns {Promise<void>} Promise that resolves when disabled state is toggled.
+   * @static
+   */
+  static async _toggledDisabledThis(event, target) {
+    await this.document.toggleDisabled();
+  }
 
   /**
    * Prepares the context data for template rendering.
@@ -79,55 +127,5 @@ export default class TeriockBaseEffectSheet extends TeriockSheet(sheets.ActiveEf
         }
       });
     });
-  }
-
-  /**
-   * Adds a new change to an effect application.
-   * @param {Event} event - The event object.
-   * @param {HTMLElement} target - The target element.
-   * @returns {Promise<void>} Promise that resolves when change is added.
-   * @static
-   */
-  static async _addChange(event, target) {
-    const application = target.dataset.application;
-    const updateString = `system.applies.${application}.changes`;
-    const changes = this.document.system.applies[application].changes;
-    const newChange = {
-      key: "",
-      mode: 0,
-      value: "",
-      priority: 0,
-    };
-    changes.push(newChange);
-    await this.document.update({ [updateString]: changes });
-  }
-
-  /**
-   * Deletes a change from an effect application.
-   * @param {Event} event - The event object.
-   * @param {HTMLElement} target - The target element.
-   * @returns {Promise<void>} Promise that resolves when change is deleted.
-   * @static
-   */
-  static async _deleteChange(event, target) {
-    const index = parseInt(target.dataset.index, 10);
-    const application = target.dataset.application;
-    const updateString = `system.applies.${application}.changes`;
-    const changes = this.document.system.applies[application].changes;
-    if (index >= 0 && index < changes.length) {
-      changes.splice(index, 1);
-      await this.document.update({ [updateString]: changes });
-    }
-  }
-
-  /**
-   * Toggles the disabled state of the current effect.
-   * @param {Event} event - The event object.
-   * @param {HTMLElement} target - The target element.
-   * @returns {Promise<void>} Promise that resolves when disabled state is toggled.
-   * @static
-   */
-  static async _toggledDisabledThis(event, target) {
-    await this.document.toggleDisabled();
   }
 }

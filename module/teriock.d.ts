@@ -16,6 +16,7 @@ declare global {
    * This class manages the registration and execution of hooked callback functions.
    */
   class Hooks extends foundry.helpers.Hooks {}
+
   const fromUuid = foundry.utils.fromUuid;
   const fromUuidSync = foundry.utils.fromUuidSync;
   /**

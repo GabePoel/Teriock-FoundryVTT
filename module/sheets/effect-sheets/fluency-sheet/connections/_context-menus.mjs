@@ -1,4 +1,3 @@
-/** @import TeriockEffect from "@client/applications/sheets/item-sheet.mjs"; */
 import { makeIcon } from "../../../../helpers/utils.mjs";
 
 /**

@@ -1,6 +1,4 @@
-/** @import Document from "@common/abstract/document.mjs"; */
 import { toCamelCase } from "../../helpers/utils.mjs";
-import TeriockEffect from "../effect.mjs";
 
 /**
  * Builds effect types and keys from a document's valid effects.

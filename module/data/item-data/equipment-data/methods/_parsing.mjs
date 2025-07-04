@@ -1,4 +1,3 @@
-/** @import TeriockEquipmentData from "../equipment-data.mjs"; */
 import { cleanValue } from "../../../../helpers/clean.mjs";
 import { createProperty } from "../../../../helpers/create-effects.mjs";
 import { toCamelCase, toCamelCaseList } from "../../../../helpers/utils.mjs";

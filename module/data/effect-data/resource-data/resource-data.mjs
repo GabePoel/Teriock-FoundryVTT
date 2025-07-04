@@ -23,6 +23,30 @@ export default class TeriockResourceData extends ConsumableDataMixin(TeriockBase
   }
 
   /**
+   * Checks if the resource effect is suppressed.
+   * Combines base suppression with attunement-based suppression for equipment.
+   * @override
+   * @returns {boolean} True if the resource effect is suppressed, false otherwise.
+   */
+  get suppressed() {
+    let suppressed = super.suppressed;
+    if (!suppressed && this.parent?.parent?.type === "equipment") {
+      suppressed = !this.parent.parent.system.attuned;
+    }
+    return suppressed;
+  }
+
+  /**
+   * Gets the message parts for the resource effect.
+   * Combines base message parts with resource-specific message parts.
+   * @override
+   * @returns {object} Object containing message parts for the resource effect.
+   */
+  get messageParts() {
+    return { ...super.messageParts, ..._messageParts(this) };
+  }
+
+  /**
    * Defines the schema for the resource data model.
    * @returns {object} The schema definition for the resource data.
    */
@@ -76,20 +100,6 @@ export default class TeriockResourceData extends ConsumableDataMixin(TeriockBase
   }
 
   /**
-   * Checks if the resource effect is suppressed.
-   * Combines base suppression with attunement-based suppression for equipment.
-   * @override
-   * @returns {boolean} True if the resource effect is suppressed, false otherwise.
-   */
-  get suppressed() {
-    let suppressed = super.suppressed;
-    if (!suppressed && this.parent?.parent?.type === "equipment") {
-      suppressed = !this.parent.parent.system.attuned;
-    }
-    return suppressed;
-  }
-
-  /**
    * Rolls the resource effect with the specified options.
    * @override
    * @param {object} options - Options for the resource roll.
@@ -97,16 +107,6 @@ export default class TeriockResourceData extends ConsumableDataMixin(TeriockBase
    */
   async roll(options) {
     await _roll(this, options);
-  }
-
-  /**
-   * Gets the message parts for the resource effect.
-   * Combines base message parts with resource-specific message parts.
-   * @override
-   * @returns {object} Object containing message parts for the resource effect.
-   */
-  get messageParts() {
-    return { ...super.messageParts, ..._messageParts(this) };
   }
 
   /**

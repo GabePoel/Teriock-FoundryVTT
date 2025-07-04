@@ -1,4 +1,3 @@
-/** @import { CommonRollOptions } from "../../../../types/rolls"; */
 const { fields } = foundry.data;
 import { _messageParts } from "./methods/_messages.mjs";
 import { _roll } from "./methods/_rolling.mjs";
@@ -20,6 +19,39 @@ export default class TeriockFluencyData extends WikiDataMixin(TeriockBaseEffectD
     return foundry.utils.mergeObject(super.metadata, {
       type: "fluency",
     });
+  }
+
+  /**
+   * Checks if the fluency effect is suppressed.
+   * Combines base suppression with attunement-based suppression for equipment.
+   * @override
+   * @returns {boolean} True if the fluency effect is suppressed, false otherwise.
+   */
+  get suppressed() {
+    let suppressed = super.suppressed;
+    if (!suppressed && this.parent?.parent?.type === "equipment") {
+      suppressed = !this.parent.parent.system.attuned;
+    }
+    return suppressed;
+  }
+
+  /**
+   * Gets the message parts for the fluency effect.
+   * Combines base message parts with fluency-specific message parts.
+   * @override
+   * @returns {object} Object containing message parts for the fluency effect.
+   */
+  get messageParts() {
+    return { ...super.messageParts, ..._messageParts(this) };
+  }
+
+  /**
+   * Gets the wiki page URL for the fluency effect.
+   * @override
+   * @returns {string} The wiki page URL for the tradecraft.
+   */
+  get wikiPage() {
+    return `Tradecraft:${CONFIG.TERIOCK.tradecraftOptions[this.field].tradecrafts[this.tradecraft].name}`;
   }
 
   /**
@@ -55,20 +87,6 @@ export default class TeriockFluencyData extends WikiDataMixin(TeriockBaseEffectD
   }
 
   /**
-   * Checks if the fluency effect is suppressed.
-   * Combines base suppression with attunement-based suppression for equipment.
-   * @override
-   * @returns {boolean} True if the fluency effect is suppressed, false otherwise.
-   */
-  get suppressed() {
-    let suppressed = super.suppressed;
-    if (!suppressed && this.parent?.parent?.type === "equipment") {
-      suppressed = !this.parent.parent.system.attuned;
-    }
-    return suppressed;
-  }
-
-  /**
    * Rolls the fluency effect with the specified options.
    * @override
    * @param {CommonRollOptions} options - Options for the fluency roll.
@@ -76,24 +94,5 @@ export default class TeriockFluencyData extends WikiDataMixin(TeriockBaseEffectD
    */
   async roll(options) {
     await _roll(this, options);
-  }
-
-  /**
-   * Gets the message parts for the fluency effect.
-   * Combines base message parts with fluency-specific message parts.
-   * @override
-   * @returns {object} Object containing message parts for the fluency effect.
-   */
-  get messageParts() {
-    return { ...super.messageParts, ..._messageParts(this) };
-  }
-
-  /**
-   * Gets the wiki page URL for the fluency effect.
-   * @override
-   * @returns {string} The wiki page URL for the tradecraft.
-   */
-  get wikiPage() {
-    return `Tradecraft:${CONFIG.TERIOCK.tradecraftOptions[this.field].tradecrafts[this.tradecraft].name}`;
   }
 }

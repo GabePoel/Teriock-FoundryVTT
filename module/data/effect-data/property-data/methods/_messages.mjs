@@ -1,6 +1,3 @@
-/** @import { MessageParts } from "../../../../types/messages" */
-/** @import TeriockPropertyData from "../property-data.mjs"; */
-
 /**
  * Generates message parts for a property effect, including bars and blocks for display.
  * Creates formatted display elements for property type information and description.

@@ -1,4 +1,3 @@
-/** @import TeriockEquipmentData from "../equipment-data.mjs" */
 import { smartEvaluateSync } from "../../../../helpers/utils.mjs";
 
 /**

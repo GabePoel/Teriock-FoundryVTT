@@ -3,67 +3,67 @@
     <div class="ab-menu-bar">
       <div class="tgrid ab-check-grid">
         {{formGroup
-        systemFields.glued
-        value=system.glued
-        disabled=(not editable)
-        classes="tgrid-item"
-        rootId=(concat uuid)
+          systemFields.glued
+          value=system.glued
+          disabled=(not editable)
+          classes="tgrid-item"
+          rootId=(concat uuid)
         }}
         {{formGroup
-        systemFields.shattered
-        value=system.shattered
-        disabled=(not editable)
-        classes="tgrid-item"
-        rootId=(concat uuid)
-        dataset=(dataset action="toggleShattered")  
+          systemFields.shattered
+          value=system.shattered
+          disabled=(not editable)
+          classes="tgrid-item"
+          rootId=(concat uuid)
+          dataset=(dataset action="toggleShattered")
         }}
         {{formGroup
-        systemFields.dampened
-        value=system.dampened
-        disabled=(not editable)
-        classes="tgrid-item"
-        rootId=(concat uuid)
-        dataset=(dataset action="toggleDampened")
+          systemFields.dampened
+          value=system.dampened
+          disabled=(not editable)
+          classes="tgrid-item"
+          rootId=(concat uuid)
+          dataset=(dataset action="toggleDampened")
         }}
         {{
         formGroup
-        systemFields.consumable
-        value=system.consumable
-        disabled=(not editable)
-        classes="tgrid-item"
-        rootId=(concat uuid)
+          systemFields.consumable
+          value=system.consumable
+          disabled=(not editable)
+          classes="tgrid-item"
+          rootId=(concat uuid)
         }}
         {{
         formGroup
-        systemFields.equipped
-        value=system.equipped
-        disabled=(not editable)
-        classes="tgrid-item"
-        rootId=(concat uuid)
-        dataset=(dataset action="toggleEquipped")
+          systemFields.equipped
+          value=system.equipped
+          disabled=(not editable)
+          classes="tgrid-item"
+          rootId=(concat uuid)
+          dataset=(dataset action="toggleEquipped")
         }}
         {{
         formGroup
-        systemFields.proficient
-        value=system.proficient
-        disabled=(not editable)
-        classes="tgrid-item"
-        rootId=(concat uuid)
+          systemFields.proficient
+          value=system.proficient
+          disabled=(not editable)
+          classes="tgrid-item"
+          rootId=(concat uuid)
         }}
         {{formGroup
-        systemFields.fluent
-        value=system.fluent
-        disabled=(not editable)
-        classes="tgrid-item"
-        rootId=(concat uuid)
+          systemFields.fluent
+          value=system.fluent
+          disabled=(not editable)
+          classes="tgrid-item"
+          rootId=(concat uuid)
         }}
         {{
         formGroup
-        systemFields.disabled
-        value=system.disabled
-        disabled=(not editable)
-        classes="tgrid-item"
-        rootId=(concat uuid)
+          systemFields.disabled
+          value=system.disabled
+          disabled=(not editable)
+          classes="tgrid-item"
+          rootId=(concat uuid)
         }}
       </div>
     </div>
@@ -79,8 +79,8 @@
               data-edit="system.equipmentClasses"
             >
               {{selectOptions
-              config.equipmentOptions.equipmentClasses
-              selected=system.equipmentClasses
+                config.equipmentOptions.equipmentClasses
+                selected=system.equipmentClasses
               }}
             </multi-select>
           </div>
@@ -147,8 +147,8 @@
             >
               <option value="">Style Bonus</option>
               {{selectOptions
-              config.equipmentOptions.weaponFightingStyles
-              selected=system.sb
+                config.equipmentOptions.weaponFightingStyles
+                selected=system.sb
               }}
             </select>
           </div>
@@ -158,150 +158,150 @@
     <div class="ab-menu-bar">
       <div class="tgrid g3">
         {{#if (not (exists system.damage))}}
-        <div class="tgrid-item">
-          <button
-            class="ab-menu-button ab-damage-button"
-            {{#if (not editable)}}
-            disabled="true"
-            {{/if}}
+          <div class="tgrid-item">
+            <button
+              class="ab-menu-button ab-damage-button"
+              {{#if (not editable)}}
+              disabled="true"
+              {{/if}}
             >
-            {{{config.icons.add}}}
-            Damage
-          </button>
-        </div>
+              {{{config.icons.add}}}
+              Damage
+            </button>
+          </div>
         {{/if}}
         {{#if (not (exists system.twoHandedDamage))}}
-        <div class="tgrid-item">
-          <button
-            class="ab-menu-button ab-two-handed-damage-button"
-            {{#if (not editable)}}
-            disabled="true"
-            {{/if}}
+          <div class="tgrid-item">
+            <button
+              class="ab-menu-button ab-two-handed-damage-button"
+              {{#if (not editable)}}
+              disabled="true"
+              {{/if}}
             >
-            {{{config.icons.add}}}
-            Two-Handed Damage
-          </button>
-        </div>
+              {{{config.icons.add}}}
+              Two-Handed Damage
+            </button>
+          </div>
         {{/if}}
         {{#if (not (exists system.range))}}
-        <div class="tgrid-item">
-          <button class="ab-menu-button ab-range-button"
-            {{#if (not editable)}}
-            disabled="true"
-            {{/if}}
+          <div class="tgrid-item">
+            <button class="ab-menu-button ab-range-button"
+              {{#if (not editable)}}
+                    disabled="true"
+              {{/if}}
             >
-            {{{config.icons.add}}}
-            Normal Range
-          </button>
-        </div>
+              {{{config.icons.add}}}
+              Normal Range
+            </button>
+          </div>
         {{/if}}
         {{#if (not (exists system.shortRange))}}
-        <div class="tgrid-item">
-          <button class="ab-menu-button ab-short-range-button"
-            {{#if (not editable)}}
-            disabled="true"
-            {{/if}}
+          <div class="tgrid-item">
+            <button class="ab-menu-button ab-short-range-button"
+              {{#if (not editable)}}
+                    disabled="true"
+              {{/if}}
             >
-            {{{config.icons.add}}}
-            Short Range
-          </button>
-        </div>
+              {{{config.icons.add}}}
+              Short Range
+            </button>
+          </div>
         {{/if}}
         {{#if (not (exists system.av))}}
-        <div class="tgrid-item">
-          <button class="ab-menu-button ab-av-button"
-            {{#if (not editable)}}
-            disabled="true"
-            {{/if}}
+          <div class="tgrid-item">
+            <button class="ab-menu-button ab-av-button"
+              {{#if (not editable)}}
+                    disabled="true"
+              {{/if}}
             >
-            {{{config.icons.add}}}
-            AV
-          </button>
-        </div>
+              {{{config.icons.add}}}
+              AV
+            </button>
+          </div>
         {{/if}}
         {{#if (not (exists system.bv))}}
-        <div class="tgrid-item">
-          <button class="ab-menu-button ab-bv-button"
-            {{#if (not editable)}}
-            disabled="true"
-            {{/if}}
+          <div class="tgrid-item">
+            <button class="ab-menu-button ab-bv-button"
+              {{#if (not editable)}}
+                    disabled="true"
+              {{/if}}
             >
-            {{{config.icons.add}}}
-            BV
-          </button>
-        </div>
+              {{{config.icons.add}}}
+              BV
+            </button>
+          </div>
         {{/if}}
         {{#if (not (exists system.weight))}}
-        <div class="tgrid-item">
-          <button class="ab-menu-button ab-weight-button"
-            {{#if (not editable)}}
-            disabled="true"
-            {{/if}}
+          <div class="tgrid-item">
+            <button class="ab-menu-button ab-weight-button"
+              {{#if (not editable)}}
+                    disabled="true"
+              {{/if}}
             >
-            {{{config.icons.add}}}
-            Weight
-          </button>
-        </div>
+              {{{config.icons.add}}}
+              Weight
+            </button>
+          </div>
         {{/if}}
         {{#if (not (exists system.description))}}
-        <div class="tgrid-item">
-          <button class="ab-menu-button ab-description-button"
-            {{#if (not editable)}}
-            disabled="true"
-            {{/if}}
+          <div class="tgrid-item">
+            <button class="ab-menu-button ab-description-button"
+              {{#if (not editable)}}
+                    disabled="true"
+              {{/if}}
             >
-            {{{config.icons.add}}}
-            Description
-          </button>
-        </div>
+              {{{config.icons.add}}}
+              Description
+            </button>
+          </div>
         {{/if}}
         {{#if (not (exists system.notes))}}
-        <div class="tgrid-item">
-          <button class="ab-menu-button ab-notes-button"
-            {{#if (not editable)}}
-            disabled="true"
-            {{/if}}
+          <div class="tgrid-item">
+            <button class="ab-menu-button ab-notes-button"
+              {{#if (not editable)}}
+                    disabled="true"
+              {{/if}}
             >
-            {{{config.icons.add}}}
-            Notes
-          </button>
-        </div>
+              {{{config.icons.add}}}
+              Notes
+            </button>
+          </div>
         {{/if}}
         {{#if (not (exists system.specialRules))}}
-        <div class="tgrid-item">
-          <button class="ab-menu-button ab-equipment-type-rules-button"
-            {{#if (not editable)}}
-            disabled="true"
-            {{/if}}
+          <div class="tgrid-item">
+            <button class="ab-menu-button ab-equipment-type-rules-button"
+              {{#if (not editable)}}
+                    disabled="true"
+              {{/if}}
             >
-            {{{config.icons.add}}}
-            Equipment Type Rules
-          </button>
-        </div>
+              {{{config.icons.add}}}
+              Equipment Type Rules
+            </button>
+          </div>
         {{/if}}
         {{#if (not (exists system.flaws))}}
-        <div class="tgrid-item">
-          <button class="ab-menu-button ab-flaws-button"
-            {{#if (not editable)}}
-            disabled="true"
-            {{/if}}
+          <div class="tgrid-item">
+            <button class="ab-menu-button ab-flaws-button"
+              {{#if (not editable)}}
+                    disabled="true"
+              {{/if}}
             >
-            {{{config.icons.add}}}
-            Flaws
-          </button>
-        </div>
+              {{{config.icons.add}}}
+              Flaws
+            </button>
+          </div>
         {{/if}}
         {{#if (not (exists system.tier))}}
-        <div class="tgrid-item">
-          <button class="ab-menu-button ab-tier-button"
-            {{#if (not editable)}}
-            disabled="true"
-            {{/if}}
+          <div class="tgrid-item">
+            <button class="ab-menu-button ab-tier-button"
+              {{#if (not editable)}}
+                    disabled="true"
+              {{/if}}
             >
-            {{{config.icons.add}}}
-            Tier
-          </button>
-        </div>
+              {{{config.icons.add}}}
+              Tier
+            </button>
+          </div>
         {{/if}}
       </div>
     </div>

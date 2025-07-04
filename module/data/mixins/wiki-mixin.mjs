@@ -1,4 +1,3 @@
-/** @import { WikiPullOptions } from "../../types/wiki" */
 import { fetchWikiPageHTML, openWikiPage } from "../../helpers/wiki.mjs";
 
 /**

@@ -1,4 +1,3 @@
-/** @import { MessageParts } from "../../../types/messages" */
 const { fields } = foundry.data;
 import { _messageParts } from "./methods/_messages.mjs";
 import TeriockBaseItemData from "../base-data/base-data.mjs";
@@ -18,6 +17,19 @@ export default class TeriockPowerData extends TeriockBaseItemData {
     return foundry.utils.mergeObject(super.metadata, {
       type: "power",
     });
+  }
+
+  /**
+   * Gets the message parts for the power.
+   * Combines base message parts with power-specific message parts.
+   * @override
+   * @returns {MessageParts} Object containing message parts for the power.
+   */
+  get messageParts() {
+    return {
+      ...super.messageParts,
+      ..._messageParts(this),
+    };
   }
 
   /**
@@ -52,19 +64,6 @@ export default class TeriockPowerData extends TeriockBaseItemData {
         min: 0,
         label: "Age of Maturity",
       }),
-    };
-  }
-
-  /**
-   * Gets the message parts for the power.
-   * Combines base message parts with power-specific message parts.
-   * @override
-   * @returns {MessageParts} Object containing message parts for the power.
-   */
-  get messageParts() {
-    return {
-      ...super.messageParts,
-      ..._messageParts(this),
     };
   }
 }

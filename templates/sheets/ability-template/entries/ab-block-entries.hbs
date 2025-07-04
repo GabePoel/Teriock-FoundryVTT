@@ -1,34 +1,34 @@
 {{#if (exists system.results.save)}}
-<div class="ab-section-container">
-  <div class="ab-section">
-    <span class="ab-section-title">On success</span>
+  <div class="ab-section-container">
+    <div class="ab-section">
+      <span class="ab-section-title">On success</span>
+    </div>
+    {{#if editable}}
+      <prose-mirror
+        name="system.results.save"
+        value="{{system.results.save}}"
+        toggled="true"
+        editable="editable"
+      >{{{onSave}}}</prose-mirror>
+    {{else}}
+      {{{onSave}}}
+    {{/if}}
   </div>
-  {{#if editable}}
-  <prose-mirror
-    name="system.results.save"
-    value="{{system.results.save}}"
-    toggled="true"
-    editable="editable"
-  >{{{onSave}}}</prose-mirror>
-  {{else}}
-  {{{onSave}}}
-  {{/if}}
-</div>
 {{/if}}
 {{#if (exists system.results.fail)}}
-<div class="ab-section-container">
-  <div class="ab-section">
-    <span class="ab-section-title">On fail</span>
+  <div class="ab-section-container">
+    <div class="ab-section">
+      <span class="ab-section-title">On fail</span>
+    </div>
+    {{#if editable}}
+      <prose-mirror
+        name="system.results.fail"
+        value="{{system.results.save}}"
+        toggled="true"
+        editable="editable"
+      >{{{onFail}}}</prose-mirror>
+    {{else}}
+      {{{onFail}}}
+    {{/if}}
   </div>
-  {{#if editable}}
-  <prose-mirror
-    name="system.results.fail"
-    value="{{system.results.save}}"
-    toggled="true"
-    editable="editable"
-  >{{{onFail}}}</prose-mirror>
-  {{else}}
-  {{{onFail}}}
-  {{/if}}
-</div>
 {{/if}}

@@ -1,4 +1,3 @@
-/** @import { Document } from "@common/abstract/_module.mjs"; */
 import TeriockRoll from "../documents/roll.mjs";
 
 /**

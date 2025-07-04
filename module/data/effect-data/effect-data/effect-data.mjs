@@ -19,6 +19,47 @@ export default class TeriockEffectData extends TeriockBaseEffectData {
   }
 
   /**
+   * Checks if the effect has condition-based expiration.
+   * @returns {boolean} True if the effect expires based on a condition, false otherwise.
+   */
+  get conditionExpiration() {
+    return this.expirations.condition.value ? true : false;
+  }
+
+  /**
+   * Checks if the effect expires on movement.
+   * @returns {boolean} True if the effect expires on movement, false otherwise.
+   */
+  get movementExpiration() {
+    return this.expirations.movement;
+  }
+
+  /**
+   * Checks if the effect expires at dawn.
+   * @returns {boolean} True if the effect expires at dawn, false otherwise.
+   */
+  get dawnExpiration() {
+    return this.expirations.dawn;
+  }
+
+  /**
+   * Checks if the effect expires when its source is deleted or disabled.
+   * @returns {boolean} True if the effect expires when sustained, false otherwise.
+   */
+  get sustainedExpiration() {
+    return this.expirations.sustained;
+  }
+
+  /**
+   * Gets the maneuver type for this effect.
+   * Effects are always passive maneuvers.
+   * @returns {string} The maneuver type ("passive").
+   */
+  get maneuver() {
+    return "passive";
+  }
+
+  /**
    * Defines the schema for the effect data model.
    * @override
    * @returns {object} The schema definition for the effect data.
@@ -61,47 +102,6 @@ export default class TeriockEffectData extends TeriockBaseEffectData {
       subIds: new fields.ArrayField(new fields.DocumentIdField()),
       subUuids: new fields.ArrayField(new fields.DocumentUUIDField()),
     };
-  }
-
-  /**
-   * Checks if the effect has condition-based expiration.
-   * @returns {boolean} True if the effect expires based on a condition, false otherwise.
-   */
-  get conditionExpiration() {
-    return this.expirations.condition.value ? true : false;
-  }
-
-  /**
-   * Checks if the effect expires on movement.
-   * @returns {boolean} True if the effect expires on movement, false otherwise.
-   */
-  get movementExpiration() {
-    return this.expirations.movement;
-  }
-
-  /**
-   * Checks if the effect expires at dawn.
-   * @returns {boolean} True if the effect expires at dawn, false otherwise.
-   */
-  get dawnExpiration() {
-    return this.expirations.dawn;
-  }
-
-  /**
-   * Checks if the effect expires when its source is deleted or disabled.
-   * @returns {boolean} True if the effect expires when sustained, false otherwise.
-   */
-  get sustainedExpiration() {
-    return this.expirations.sustained;
-  }
-
-  /**
-   * Gets the maneuver type for this effect.
-   * Effects are always passive maneuvers.
-   * @returns {string} The maneuver type ("passive").
-   */
-  get maneuver() {
-    return "passive";
   }
 
   /**

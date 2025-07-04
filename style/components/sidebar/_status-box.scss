@@ -5,93 +5,112 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
   .character-status-bars {
     width: 100%;
     display: flex;
     flex-direction: column;
     gap: 1em;
+
     .character-bar-container {
       position: relative;
       box-shadow: 0 0 6px rgba(0, 0, 0, 0.4);
+
       .character-bar {
         height: 3em;
         display: flex;
         flex-direction: row;
         border-radius: 6px;
         overflow: hidden;
+
         &.character-hit-bar {
           border: 2px solid $hp-red;
+
           .character-bar-left {
             background-color: $hp-red;
           }
+
           .character-bar-temp {
             background-image: repeating-linear-gradient(
-              135deg,
-              $hp-red 0px,
-              $hp-red 2px,
-              $hp-red-dark 2px,
-              $hp-red-dark 8px /* gap between lines: 2px line + 6px gap */
+                            135deg,
+                            $hp-red 0px,
+                            $hp-red 2px,
+                            $hp-red-dark 2px,
+                            $hp-red-dark 8px /* gap between lines: 2px line + 6px gap */
             );
             // border-left: 2px solid $hp-red;
             border-right: 2px solid $hp-red;
           }
+
           .character-bar-lost {
             background-color: $hp-red-darkest;
           }
         }
+
         &.character-mana-bar {
           border: 2px solid $mp-blue;
+
           .character-bar-left {
             background-color: $mp-blue;
           }
+
           .character-bar-temp {
             background-image: repeating-linear-gradient(
-              135deg,
-              $mp-blue 0px,
-              $mp-blue 2px,
-              $mp-blue-dark 2px,
-              $mp-blue-dark 8px /* gap between lines: 2px line + 6px gap */
+                            135deg,
+                            $mp-blue 0px,
+                            $mp-blue 2px,
+                            $mp-blue-dark 2px,
+                            $mp-blue-dark 8px /* gap between lines: 2px line + 6px gap */
             );
             // border-left: 2px solid $mp-blue;
             border-right: 2px solid $mp-blue;
           }
+
           .character-bar-lost {
             background-color: $mp-blue-darkest;
           }
         }
+
         &.character-wither-bar {
           border: 2px solid $mp-grey;
+
           .character-bar-left {
             background-color: $mp-grey;
           }
+
           .character-bar-temp {
             background-image: repeating-linear-gradient(
-              135deg,
-              $mp-grey 0px,
-              $mp-grey 2px,
-              $mp-grey-dark 2px,
-              $mp-grey-dark 8px /* gap between lines: 2px line + 6px gap */
+                            135deg,
+                            $mp-grey 0px,
+                            $mp-grey 2px,
+                            $mp-grey-dark 2px,
+                            $mp-grey-dark 8px /* gap between lines: 2px line + 6px gap */
             );
             // border-left: 2px solid $mp-grey;
             border-right: 2px solid $mp-grey;
           }
+
           .character-bar-lost {
             background-color: $mp-grey-darkest;
           }
         }
+
         .character-bar-left {
           height: 3em;
           flex: none;
         }
+
         .character-bar-temp {
           height: 3em;
           flex: none;
         }
+
         .character-bar-lost {
           height: 3em;
           flex: none;
         }
       }
+
       .character-bar-overlay {
         position: absolute;
         top: 0;
@@ -99,26 +118,31 @@
         right: 0;
         bottom: 0;
         align-content: center;
+
         .character-bar-overlay-row {
           display: flex;
           flex-direction: row;
           justify-content: start;
           align-items: center;
+
           input {
             margin-inline: 2px;
             padding-inline: 2px;
             border: none;
           }
+
           .character-bar-overlay-label {
             background-color: transparent;
             font-size: 1.5em;
             flex: none;
           }
+
           .character-bar-overlay-left {
             width: 2em;
             text-align: right;
             margin-left: 0.25em;
           }
+
           .character-bar-overlay-temp {
             width: 2em;
             text-align: left;

@@ -1,18 +1,19 @@
 <div id="power-results" class="tcard-results">
-  <div class="tcard-container {{#if system.sheet.display.power.gapless}}gapless{{/if}} {{system.sheet.display.power.size}}">
+  <div class="tcard-container {{#if
+    system.sheet.display.power.gapless}}gapless{{/if}} {{system.sheet.display.power.size}}">
     {{#each powers as |item|}}
-    {{tcard
-    img=item.img
-    title=item.name
-    subtitle=item.system.type
-    id=item._id
-    active=(not item.disabled)
-    text=""
-    icons=(concat
-    (ticon "comment" action="chatDoc" id=rank._id tooltip="Send to Chat")
-    (ticonToggle "circle-check" "circle" (not item.disabled) action="toggleDisabledDoc" id=item._id tooltipTrue="Enabled" tooltipFalse="Disabled")
-    )
-    }}
+      {{tcard
+        img=item.img
+        title=item.name
+        subtitle=item.system.type
+        id=item._id
+        active=(not item.disabled)
+        text=""
+        icons=(concat
+          (ticon "comment" action="chatDoc" id=rank._id tooltip="Send to Chat")
+          (ticonToggle "circle-check" "circle" (not item.disabled) action="toggleDisabledDoc" id=item._id tooltipTrue="Enabled" tooltipFalse="Disabled")
+        )
+      }}
     {{/each}}
   </div>
   <div class="no-results {{{system.sheet.display.power.size}}}">

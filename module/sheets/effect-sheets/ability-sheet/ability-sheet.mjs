@@ -50,6 +50,30 @@ export default class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(
   }
 
   /**
+   * Toggles between overview and consequences tabs.
+   * @param {Event} event - The event object.
+   * @returns {Promise<void>} Promise that resolves when tab is toggled.
+   * @static
+   */
+  static async _toggleConsequences(event) {
+    this._tab = this._tab === "consequences" ? "overview" : "consequences";
+    this.render();
+  }
+
+  /**
+   * Switches to a specific consequence tab.
+   * @param {Event} event - The event object.
+   * @param {HTMLElement} target - The target element.
+   * @returns {Promise<void>} Promise that resolves when tab is switched.
+   * @static
+   */
+  static async _consequenceTab(event, target) {
+    const tab = target.dataset.tab;
+    this._consequenceTab = tab;
+    this.render();
+  }
+
+  /**
    * Prepares the context data for template rendering.
    * Adds ability-specific data including child abilities, parent ability, and enriched text fields.
    * @returns {Promise<object>} Promise that resolves to the context object.
@@ -275,29 +299,5 @@ export default class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(
     for (const [selector, update] of Object.entries(staticUpdates)) {
       this._connect(selector, "click", () => doc.update(update));
     }
-  }
-
-  /**
-   * Toggles between overview and consequences tabs.
-   * @param {Event} event - The event object.
-   * @returns {Promise<void>} Promise that resolves when tab is toggled.
-   * @static
-   */
-  static async _toggleConsequences(event) {
-    this._tab = this._tab === "consequences" ? "overview" : "consequences";
-    this.render();
-  }
-
-  /**
-   * Switches to a specific consequence tab.
-   * @param {Event} event - The event object.
-   * @param {HTMLElement} target - The target element.
-   * @returns {Promise<void>} Promise that resolves when tab is switched.
-   * @static
-   */
-  static async _consequenceTab(event, target) {
-    const tab = target.dataset.tab;
-    this._consequenceTab = tab;
-    this.render();
   }
 }

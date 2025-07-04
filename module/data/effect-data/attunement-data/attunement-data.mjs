@@ -19,6 +19,32 @@ export default class TeriockAttunementData extends TeriockBaseEffectData {
   }
 
   /**
+   * Gets the target document for this attunement.
+   * @override
+   * @returns {Document|null} The target document or null if not found.
+   */
+  get targetDocument() {
+    return this.parent.getActor().items.get(this.target);
+  }
+
+  /**
+   * Gets the usage status of the attunement target.
+   * @override
+   * @returns {string} The usage status ("Equipped", "Unequipped", or "Not on Character").
+   */
+  get usage() {
+    if (this.targetDocument) {
+      if (this.targetDocument.system.equipped) {
+        return "Equipped";
+      } else {
+        return "Unequipped";
+      }
+    } else {
+      return "Not on Character";
+    }
+  }
+
+  /**
    * Defines the schema for the attunement data model.
    * @override
    * @returns {object} The schema definition for the attunement data.
@@ -63,32 +89,6 @@ export default class TeriockAttunementData extends TeriockBaseEffectData {
     super.prepareDerivedData();
     if (this.inheritTier && this.targetDocument) {
       this.tier = this.parent.getActor().items.get(this.target)?.system.tier.derived;
-    }
-  }
-
-  /**
-   * Gets the target document for this attunement.
-   * @override
-   * @returns {Document|null} The target document or null if not found.
-   */
-  get targetDocument() {
-    return this.parent.getActor().items.get(this.target);
-  }
-
-  /**
-   * Gets the usage status of the attunement target.
-   * @override
-   * @returns {string} The usage status ("Equipped", "Unequipped", or "Not on Character").
-   */
-  get usage() {
-    if (this.targetDocument) {
-      if (this.targetDocument.system.equipped) {
-        return "Equipped";
-      } else {
-        return "Unequipped";
-      }
-    } else {
-      return "Not on Character";
     }
   }
 }

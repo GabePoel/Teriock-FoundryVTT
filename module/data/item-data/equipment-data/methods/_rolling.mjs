@@ -1,4 +1,3 @@
-/** @import TeriockEquipmentData from "../equipment-data.mjs"; */
 import TeriockHarmRoll from "../../../../documents/harm.mjs";
 
 /**

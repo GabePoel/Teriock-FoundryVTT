@@ -1,6 +1,3 @@
-/** @import { MessageParts } from "../../../../types/messages" */
-/** @import TeriockAbilityData from "../ability-data.mjs"; */
-
 /**
  * Generates message parts for an ability, including bars and blocks for display.
  * Creates formatted display elements for execution, targeting, expansion, costs, effects, and ability type.

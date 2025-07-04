@@ -1,32 +1,33 @@
 <div id="equipment-results" class="tcard-results">
-  <div class="tcard-container {{#if system.sheet.display.equipment.gapless}}gapless{{/if}} {{system.sheet.display.equipment.size}}">
+  <div class="tcard-container {{#if
+    system.sheet.display.equipment.gapless}}gapless{{/if}} {{system.sheet.display.equipment.size}}">
     {{#each equipment as |item|}}
-    {{tcard
-    img=item.img
-    title=item.name
-    subtitle=(dotJoin
-    item.system.equipmentType
-    (lookup ../config.equipmentOptions.weaponFightingStyles item.system.sb)
-    )
-    text=(dotJoin
-    (suffix item.system.damage 'Damage')
-    (suffix item.system.bv 'BV')
-    (suffix item.system.av 'AV')
-    (prefix item.system.tier.derived 'Tier')
-    (suffix item.system.weight 'lb')
-    )
-    id=item._id
-    active=item.system.equipped
-    marker=(equipmentMarker item)
-    shattered=item.system.shattered
-    consumable=item.system.consumable
-    amount=item.system.quantity
-    max=item.system.maxQuantity.derived
-    icons=(concat
-    (ticon "comment" action="chatDoc" id=item._id tooltip="Send to Chat")
-    (ticonToggle "circle-check" "circle" item.system.equipped action="toggleEquippedDoc" id=item._id parentId=item.parent._id tooltipTrue="Equipped" tooltipFalse="Unequipped")
-    )
-    }}
+      {{tcard
+        img=item.img
+        title=item.name
+        subtitle=(dotJoin
+          item.system.equipmentType
+          (lookup ../config.equipmentOptions.weaponFightingStyles item.system.sb)
+        )
+        text=(dotJoin
+          (suffix item.system.damage 'Damage')
+          (suffix item.system.bv 'BV')
+          (suffix item.system.av 'AV')
+          (prefix item.system.tier.derived 'Tier')
+          (suffix item.system.weight 'lb')
+        )
+        id=item._id
+        active=item.system.equipped
+        marker=(equipmentMarker item)
+        shattered=item.system.shattered
+        consumable=item.system.consumable
+        amount=item.system.quantity
+        max=item.system.maxQuantity.derived
+        icons=(concat
+          (ticon "comment" action="chatDoc" id=item._id tooltip="Send to Chat")
+          (ticonToggle "circle-check" "circle" item.system.equipped action="toggleEquippedDoc" id=item._id parentId=item.parent._id tooltipTrue="Equipped" tooltipFalse="Unequipped")
+        )
+      }}
     {{/each}}
   </div>
   <div class="no-results {{{system.sheet.display.equipment.size}}}">

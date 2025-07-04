@@ -1,4 +1,3 @@
-/** @import TeriockResourceData from "../resource-data.mjs"; */
 import TeriockRoll from "../../../../documents/roll.mjs";
 
 /**

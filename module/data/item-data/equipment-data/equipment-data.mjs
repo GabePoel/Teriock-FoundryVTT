@@ -1,4 +1,3 @@
-/** @import { MessageParts } from "../../../types/messages" */
 import { ConsumableDataMixin } from "../../mixins/consumable-mixin.mjs";
 import { WikiDataMixin } from "../../mixins/wiki-mixin.mjs";
 import * as attunement from "./methods/_attunement.mjs";
@@ -30,6 +29,55 @@ export default class TeriockEquipmentData extends WikiDataMixin(ConsumableDataMi
   }
 
   /**
+   * Gets the wiki page URL for the equipment.
+   * @override
+   * @returns {string} The wiki page URL for the equipment type.
+   */
+  get wikiPage() {
+    return `Equipment:${this.equipmentType}`;
+  }
+
+  /**
+   * Gets the message rules-parts for the equipment.
+   * @override
+   * @returns {MessageParts} Object containing message rules-parts for the equipment.
+   */
+  get messageParts() {
+    return {
+      ...super.messageParts,
+      ...messages._messageParts(this),
+    };
+  }
+
+  /**
+   * Gets the secret message rules-parts for the equipment.
+   * @override
+   * @returns {MessageParts} Object containing secret message rules-parts for the equipment.
+   */
+  get secretMessageParts() {
+    return {
+      ...super.secretMessageParts,
+      ...messages._secretMessageParts(this),
+    };
+  }
+
+  /**
+   * Checks if the equipment is currently attuned.
+   * @returns {boolean} True if the equipment is attuned, false otherwise.
+   */
+  get attuned() {
+    return attunement._attuned(this);
+  }
+
+  /**
+   * Gets the current attunement data for the equipment.
+   * @returns {TeriockAttunementData | null} The attunement data or null if not attuned.
+   */
+  get attunement() {
+    return attunement._getAttunement(this);
+  }
+
+  /**
    * Defines the schema for the equipment data model.
    * @override
    * @returns {object} The schema definition for the equipment data.
@@ -40,16 +88,6 @@ export default class TeriockEquipmentData extends WikiDataMixin(ConsumableDataMi
       ...commonData,
       ...schema._defineSchema(),
     };
-  }
-
-  /**
-   * Prepares derived data for the equipment.
-   * @override
-   * @returns {void}
-   */
-  prepareDerivedData() {
-    super.prepareDerivedData();
-    deriving._prepareDerivedData(this);
   }
 
   /**
@@ -64,12 +102,13 @@ export default class TeriockEquipmentData extends WikiDataMixin(ConsumableDataMi
   }
 
   /**
-   * Gets the wiki page URL for the equipment.
+   * Prepares derived data for the equipment.
    * @override
-   * @returns {string} The wiki page URL for the equipment type.
+   * @returns {void}
    */
-  get wikiPage() {
-    return `Equipment:${this.equipmentType}`;
+  prepareDerivedData() {
+    super.prepareDerivedData();
+    deriving._prepareDerivedData(this);
   }
 
   /**
@@ -103,30 +142,6 @@ export default class TeriockEquipmentData extends WikiDataMixin(ConsumableDataMi
    */
   async roll(options) {
     await rolling._roll(this, options);
-  }
-
-  /**
-   * Gets the message rules-parts for the equipment.
-   * @override
-   * @returns {MessageParts} Object containing message rules-parts for the equipment.
-   */
-  get messageParts() {
-    return {
-      ...super.messageParts,
-      ...messages._messageParts(this),
-    };
-  }
-
-  /**
-   * Gets the secret message rules-parts for the equipment.
-   * @override
-   * @returns {MessageParts} Object containing secret message rules-parts for the equipment.
-   */
-  get secretMessageParts() {
-    return {
-      ...super.secretMessageParts,
-      ...messages._secretMessageParts(this),
-    };
   }
 
   /**
@@ -266,21 +281,5 @@ export default class TeriockEquipmentData extends WikiDataMixin(ConsumableDataMi
    */
   async deattune() {
     await attunement._deattune(this);
-  }
-
-  /**
-   * Checks if the equipment is currently attuned.
-   * @returns {boolean} True if the equipment is attuned, false otherwise.
-   */
-  get attuned() {
-    return attunement._attuned(this);
-  }
-
-  /**
-   * Gets the current attunement data for the equipment.
-   * @returns {TeriockAttunementData | null} The attunement data or null if not attuned.
-   */
-  get attunement() {
-    return attunement._getAttunement(this);
   }
 }

@@ -1,6 +1,7 @@
 import { TeriockArrayField, TeriockRecordField } from "../../../../shared/fields.mjs";
 import { mergeLevel } from "../../../../../helpers/utils.mjs";
 import { tradecraftOptions } from "../../../../../helpers/constants/tradecraft-options.mjs";
+
 const { fields } = foundry.data;
 
 const tradecrafts = mergeLevel(tradecraftOptions, "*", "tradecrafts");

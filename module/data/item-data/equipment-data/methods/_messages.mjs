@@ -1,5 +1,3 @@
-/** @import { MessageParts } from "../../../../types/messages" */
-/** @import TeriockEquipmentData from "../equipment-data.mjs"; */
 import {
   addAbilitiesBlock,
   addPropertiesBlock,

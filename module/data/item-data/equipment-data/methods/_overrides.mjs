@@ -1,5 +1,3 @@
-/** @import TeriockEquipmentData from "../equipment-data.mjs"; */
-
 /**
  * Equipment type overrides for specific equipment types.
  * Provides default values for damage, damage types, and consumable properties.

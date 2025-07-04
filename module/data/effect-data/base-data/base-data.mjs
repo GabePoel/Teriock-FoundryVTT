@@ -1,7 +1,7 @@
 const { fields } = foundry.data;
 const { TypeDataModel } = foundry.abstract;
 import { ChildDataMixin } from "../../mixins/child-mixin.mjs";
-import { _shouldExpire, _expire } from "./methods/_expiration.mjs";
+import { _expire, _shouldExpire } from "./methods/_expiration.mjs";
 
 /**
  * Base effect data model for all effects.
@@ -22,6 +22,18 @@ export default class TeriockBaseEffectData extends ChildDataMixin(TypeDataModel)
   }
 
   /**
+   * Checks if the effect is suppressed.
+   * Effects are suppressed if their parent item is disabled.
+   * @returns {boolean} True if the effect is suppressed, false otherwise.
+   */
+  get suppressed() {
+    if (this.parent.parent?.documentName === "Item") {
+      return this.parent.parent?.system.disabled;
+    }
+    return false;
+  }
+
+  /**
    * Defines the schema for the base effect data model.
    * @override
    * @returns {object} The schema definition for the effect data.
@@ -39,18 +51,6 @@ export default class TeriockBaseEffectData extends ChildDataMixin(TypeDataModel)
         label: "Update Counter",
       }),
     };
-  }
-
-  /**
-   * Checks if the effect is suppressed.
-   * Effects are suppressed if their parent item is disabled.
-   * @returns {boolean} True if the effect is suppressed, false otherwise.
-   */
-  get suppressed() {
-    if (this.parent.parent?.documentName === "Item") {
-      return this.parent.parent?.system.disabled;
-    }
-    return false;
   }
 
   /**

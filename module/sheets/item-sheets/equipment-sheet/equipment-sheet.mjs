@@ -1,7 +1,7 @@
 const { HandlebarsApplicationMixin } = foundry.applications.api;
 import { cleanCapitalization } from "../../../helpers/clean.mjs";
 import { documentOptions } from "../../../helpers/constants/document-options.mjs";
-import { powerLevelContextMenu, fontContextMenu } from "./connections/_context-menus.mjs";
+import { fontContextMenu, powerLevelContextMenu } from "./connections/_context-menus.mjs";
 import TeriockBaseItemSheet from "../base-sheet/base-sheet.mjs";
 
 /**

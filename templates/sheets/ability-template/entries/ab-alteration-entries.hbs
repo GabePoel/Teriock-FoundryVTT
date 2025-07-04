@@ -1,34 +1,34 @@
 {{#if (exists system.limitation)}}
-<div class="ab-section-container">
-  <div class="ab-section">
-    <span class="ab-section-title">Limitation</span>
+  <div class="ab-section-container">
+    <div class="ab-section">
+      <span class="ab-section-title">Limitation</span>
+    </div>
+    {{#if editable}}
+      <prose-mirror
+        name="system.limitation"
+        value="{{system.limitation}}"
+        toggled="true"
+        editable="editable"
+      >{{{limitation}}}</prose-mirror>
+    {{else}}
+      {{{limitation}}}
+    {{/if}}
   </div>
-  {{#if editable}}
-  <prose-mirror
-    name="system.limitation"
-    value="{{system.limitation}}"
-    toggled="true"
-    editable="editable"
-  >{{{limitation}}}</prose-mirror>
-  {{else}}
-  {{{limitation}}}
-  {{/if}}
-</div>
 {{/if}}
 {{#if (exists system.improvement)}}
-<div class="ab-section-container">
-  <div class="ab-section">
-    <span class="ab-section-title">Improvement</span>
+  <div class="ab-section-container">
+    <div class="ab-section">
+      <span class="ab-section-title">Improvement</span>
+    </div>
+    {{#if editable}}
+      <prose-mirror
+        name="system.improvement"
+        value="{{system.improvement}}"
+        toggled="true"
+        editable="editable"
+      >{{{improvement}}}</prose-mirror>
+    {{else}}
+      {{{improvement}}}
+    {{/if}}
   </div>
-  {{#if editable}}
-  <prose-mirror
-    name="system.improvement"
-    value="{{system.improvement}}"
-    toggled="true"
-    editable="editable"
-  >{{{improvement}}}</prose-mirror>
-  {{else}}
-  {{{improvement}}}
-  {{/if}}
-</div>
 {{/if}}
