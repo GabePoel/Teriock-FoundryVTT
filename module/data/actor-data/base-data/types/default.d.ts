@@ -4,6 +4,24 @@ import { ProtectionData } from "./protections";
 import { TeriockEquipment } from "../../../../types/documents";
 import { TradecraftData } from "./tradecrafts";
 
+/** The types of hacks that could be applied. */
+export interface HackDataCollection {
+  /** Arm hacks */
+  arm: HackData;
+  /** Leg hacks */
+  leg: HackData;
+  /** Body hacks */
+  body: HackData;
+  /** Eye hacks */
+  eye: HackData;
+  /** Ear hacks */
+  ear: HackData;
+  /** Mouth hacks */
+  mouth: HackData;
+  /** Nose hacks */
+  nose: HackData;
+}
+
 export interface TeriockBaseActorDefault {
   /** Parent actor */
   parent: TeriockActor;
@@ -72,22 +90,7 @@ export interface TeriockBaseActorDefault {
     towerShield: string;
   };
   /** Hacks */
-  hacks: {
-    /** Arm hacks */
-    arm: HackData;
-    /** Leg hacks */
-    leg: HackData;
-    /** Body hacks */
-    body: HackData;
-    /** Eye hacks */
-    eye: HackData;
-    /** Ear hacks */
-    ear: HackData;
-    /** Mouth hacks */
-    mouth: HackData;
-    /** Nose hacks */
-    nose: HackData;
-  };
+  hacks: HackDataCollection;
   /** Money */
   money: {
     /** Copper coins */

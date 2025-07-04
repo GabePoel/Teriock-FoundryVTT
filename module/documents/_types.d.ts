@@ -1,5 +1,5 @@
 import "./mixins/_types";
-import { ActorData, ActiveEffectData, ItemData, TokenData } from "@common/documents/_types.mjs";
+import { ActiveEffectData, ActorData, ItemData, TokenData } from "@common/documents/_types.mjs";
 import Collection from "@common/utils/collection.mjs";
 import { actor as actorModels, effect as effectModels, item as itemModels } from "../data/_module.mjs";
 import type {
@@ -24,12 +24,32 @@ type EffectModel = (typeof effectModels)[keyof typeof effectModels];
 type ItemModel = (typeof itemModels)[keyof typeof itemModels];
 
 interface ParentDocumentMixinInterface {
+  /** Each {@link TeriockEffect} this contains. */
   validEffects: TeriockEffect[];
+  /** The names of each {@link TeriockItem} this contains, in camel case, keyed by type. */
+  itemKeys: {
+    equipment?: Set<string>;
+    power?: Set<string>;
+    rank?: Set<string>;
+  };
+  /** Each {@link TeriockItem} this contains, keyed by type. */
   itemTypes: {
     equipment?: TeriockEquipment[];
     power?: TeriockPower[];
     rank?: TeriockRank[];
   };
+  /** The names of each {@link TeriockEffect} this contains, in camel case, keyed by type. */
+  effectKeys: {
+    ability?: Set<string>;
+    attunement?: Set<string>;
+    base?: Set<string>;
+    condition?: Set<string>;
+    effect?: Set<string>;
+    fluency?: Set<string>;
+    property?: Set<string>;
+    resource?: Set<string>;
+  };
+  /** Each {@link TeriockEffect} this contains, keyed by type. */
   effectTypes: {
     ability?: TeriockAbility[];
     attunement?: TeriockAttunement[];

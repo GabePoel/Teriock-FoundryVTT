@@ -87,13 +87,11 @@ async function updateHackStatus(system, newStats) {
   for (const part in hacks) {
     const value = hacks[part].value || 0;
     const max = hacks[part].max || 2;
-    const relevantHackData = [];
     const hackDataWanted = [];
     const hackDataUnwanted = [];
     for (let i = 1; i <= max; i++) {
       const hackData = hacksData[part + i];
       if (value >= i && hackData) {
-        relevantHackData.push(hackData);
         hackDataWanted.push(hackData);
       } else if (value < i && hackData) {
         hackDataUnwanted.push(hackData);
