@@ -32,7 +32,7 @@ export const imageOverrides = {
   "Auto-Rebirth": "modules/game-icons-net/whitetransparent/healing.svg",
   Avoid: "modules/game-icons-net/whitetransparent/return-arrow.svg",
   Backstab: "modules/game-icons-net/whitetransparent/backstab.svg",
-  "Basic Attack": "modules/game-icons-net/whitetransparent/high-kick.svg",
+  "Basic Attack": "modules/game-icons-net/whitetransparent/saber-slash.svg",
   "Basic Block": "modules/game-icons-net/whitetransparent/arrows-shield.svg",
   "Basic Command": "modules/game-icons-net/whitetransparent/minions.svg",
   "Battle Charge": "modules/game-icons-net/whitetransparent/goat.svg",

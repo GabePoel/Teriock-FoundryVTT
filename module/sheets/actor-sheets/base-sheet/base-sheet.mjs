@@ -472,7 +472,8 @@ export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorShee
   static async _toggleConditionExpansion(event, target) {
     const condition = target.dataset.condition;
     this.settings.conditionExpansions[condition] = !this.settings.conditionExpansions[condition];
-    this.render();
+    const conditionBodyEl = this.element.querySelector(`.condition-body.${condition}`);
+    conditionBodyEl.classList.toggle("expanded", this.settings.conditionExpansions[condition]);
   }
 
   /**
@@ -638,6 +639,7 @@ export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorShee
     const context = await super._prepareContext(options);
     context.activeTab = this._activeTab;
     context.conditions = conditions;
+    context.removableConditions = conditions.filter((c) => this.document.effectKeys.base.has(c));
     context.editable = this.isEditable;
     context.actor = this.actor;
     context.abilities = _sortAbilities(this.actor) || [];

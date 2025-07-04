@@ -232,7 +232,6 @@
   width: var(--tcard-height);
   height: var(--tcard-height);
   min-width: var(--tcard-height);
-  border-radius: var(--tcard-border-radius);
   margin-right: var(--tcard-image-padding);
   overflow: hidden;
   opacity: var(--tcard-opacity);
@@ -2123,11 +2122,14 @@
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.4);
   transition: all 0.2s ease-in-out;
 }
-.teriock .condition-display .condition-header img:hover {
+.teriock .condition-display .condition-header img.locked {
+  filter: brightness(0) saturate(100%) invert(24%) sepia(30%) saturate(3723%) hue-rotate(326deg) brightness(89%) contrast(109%);
+}
+.teriock .condition-display .condition-header img.removable:hover {
   background-color: rgba(0, 0, 0, 0.5);
   border-color: var(--color-cool-3);
 }
-.teriock .condition-display .condition-header img:active {
+.teriock .condition-display .condition-header img.removable:active {
   background-color: rgba(0, 0, 0, 0.7);
   border-color: var(--color-warm-2);
 }
