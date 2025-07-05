@@ -1,4 +1,4 @@
-const { DetectionMode, DetectionModeDarkvision } = foundry.canvas.perception;
+const { DetectionMode } = foundry.canvas.perception;
 import DetectionModeEtherealEthereal from "./detection-modes/ethereal-ethereal-perception.mjs";
 import DetectionModeEtherealMaterial from "./detection-modes/ethereal-material-perception.mjs";
 import DetectionModeInvisiblePerception from "./detection-modes/invisible-perception.mjs";
@@ -107,11 +107,20 @@ export const teriockDetectionModes = {
   }),
   /**
    * Dark vision detection mode.
-   * @type{DetectionModeDarkvision}
+   * @type{DetectionModeMaterialMaterial}
    */
-  darkVision: new DetectionModeDarkvision({
+  darkVision: new DetectionModeMaterialMaterial({
     id: "darkVision",
     label: "Dark Vision",
+    type: DetectionMode.DETECTION_TYPES.SIGHT,
+  }),
+  /**
+   * Night vision detection mode.
+   * @type{DetectionModeMaterialMaterial}
+   */
+  nightVision: new DetectionModeMaterialMaterial({
+    id: "nightVision",
+    label: "Night Vision",
     type: DetectionMode.DETECTION_TYPES.SIGHT,
   }),
 };

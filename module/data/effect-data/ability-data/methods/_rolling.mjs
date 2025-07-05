@@ -77,6 +77,8 @@ export async function _roll(abilityData, options) {
   const useData = await stageUse(abilityData, advantage, disadvantage);
   let rawMessage = await abilityData.parent.buildMessage();
 
+  await measure(abilityData);
+
   // Compute variable MP/HP spent (only if type is variable)
   const mpSpent = useData.costs.mp;
   const hpSpent = useData.costs.hp;
@@ -443,6 +445,7 @@ async function handleDialogs(abilityData, useData) {
     await api.DialogV2.prompt({
       window: { title },
       content: dialogs.join(""),
+      modal: true,
       ok: {
         label: "Confirm",
         callback: (event, button) => {
@@ -666,4 +669,62 @@ function createSummaryBarBox({ heightened, mpSpent, hpSpent, shouldBottomBar }) 
   barBox.appendChild(bar);
   tmessage.appendChild(barBox);
   return tmessage;
+}
+
+/**
+ * Option to create a measured template.
+ * @param {TeriockAbilityData} abilityData - The ability data to generate template from.
+ * @returns {Promise<void>}
+ */
+async function measure(abilityData) {
+  if (abilityData.delivery.base === "aura") {
+    const token =
+      abilityData.parent.getActor().token ||
+      abilityData.parent.getActor().getActiveTokens()[0] ||
+      abilityData.parent.getActor().prototypeToken ||
+      null;
+    if (token) {
+      let placeTemplate;
+      let radius = Number(abilityData.range);
+      try {
+        placeTemplate = await api.DialogV2.prompt({
+          window: { title: "Template Confirmation" },
+          modal: true,
+          content: `
+            <p>Place measured template?</p>
+            <div class="standard-form form-group">
+              <label>Distance <span class="units">(ft)</span></label>
+              <input name='range' type='number' min='0' step='1' value='${abilityData.range}'>
+            </div>`,
+          ok: {
+            label: "Yes",
+            callback: (event, button, dialog) => (radius = button.form.elements.range.valueAsNumber),
+          },
+        });
+      } catch {
+        return;
+      }
+      if (placeTemplate) {
+        const x = token.x;
+        const y = token.y;
+        const templateData = {
+          t: "circle",
+          x: x + (token.width * canvas.scene.grid.sizeX) / 2,
+          y: y + (token.height * canvas.scene.grid.sizeY) / 2,
+          distance: radius,
+        };
+        const template = await MeasuredTemplateDocument.create(templateData, { parent: canvas.scene });
+        Hooks.once("combatTurnChange", async () => {
+          if (template) {
+            await template.delete();
+          }
+        });
+        Hooks.once("updateWorldTime", async () => {
+          if (template) {
+            await template.delete();
+          }
+        });
+      }
+    }
+  }
 }
