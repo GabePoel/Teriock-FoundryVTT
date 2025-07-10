@@ -147,11 +147,10 @@ export const TeriockSheet = (Base) =>
     /**
      * Rolls the current document with optional advantage/disadvantage.
      * @param {Event} event - The event object.
-     * @param {HTMLElement} target - The target element.
      * @returns {Promise<void>} Promise that resolves when roll is complete.
      * @static
      */
-    static async _rollThis(event, target) {
+    static async _rollThis(event) {
       const options = event?.altKey ? { advantage: true } : event?.shiftKey ? { disadvantage: true } : {};
       this.document.use(options);
     }
@@ -558,7 +557,7 @@ export const TeriockSheet = (Base) =>
      * @returns {Promise<object>} Promise that resolves to the context object.
      * @override
      */
-    async _prepareContext(options) {
+    async _prepareContext() {
       return {
         config: CONFIG.TERIOCK,
         editable: this.editable,

@@ -487,7 +487,6 @@ export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorShee
   /**
    * Performs a basic attack with optional advantage/disadvantage.
    * @param {Event} event - The event object.
-   * @param {HTMLElement} target - The target element.
    * @returns {Promise<void>} Promise that resolves when attack is performed.
    * @static
    */

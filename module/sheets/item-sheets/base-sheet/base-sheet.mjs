@@ -34,7 +34,7 @@ export default class TeriockBaseItemSheet extends TeriockSheet(sheets.ItemSheet)
    */
   async _prepareContext(options) {
     const abilityTypeOrder = Object.keys(CONFIG.TERIOCK.abilityOptions.abilityType || {});
-    const { effectTypes, effectKeys } = this.item.buildEffectTypes();
+    const { effectTypes } = this.item.buildEffectTypes();
     const abilities =
       effectTypes.ability ||
       [].sort((a, b) => {
