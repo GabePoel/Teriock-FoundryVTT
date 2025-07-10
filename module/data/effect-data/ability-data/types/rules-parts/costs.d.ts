@@ -9,38 +9,26 @@ export type BreakCost = "shatter" | "destroy";
 export type CostType = "none" | "static" | "formula" | "variable" | "hack";
 
 /**
- * Cost configuration for MP
+ * Numerical cost configuration.
  */
-export interface MPCost {
+export interface NumberCost {
   type: CostType;
   value: {
     static: number;
     formula: string;
     variable: string;
-  };
+  }
 }
 
 /**
- * Cost configuration for HP
- */
-export interface HPCost {
-  type: CostType;
-  value: {
-    static: number;
-    formula: string;
-    variable: string;
-  };
-}
-
-/**
- * Complete costs configuration
+ * Complete costs configuration.
  */
 export interface CostsConfig {
   verbal: boolean;
   somatic: boolean;
   material: boolean;
-  mp: MPCost;
-  hp: HPCost;
+  mp: NumberCost;
+  hp: NumberCost;
   break: BreakCost;
   materialCost: string;
 }

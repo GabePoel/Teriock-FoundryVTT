@@ -3,7 +3,7 @@ import { _messageParts } from "./methods/_messages.mjs";
 import { _migrateData } from "./methods/_migrate-data.mjs";
 import { _parse } from "./methods/_parsing.mjs";
 import { _prepareDerivedData } from "./methods/data-deriving/_data-deriving.mjs";
-import { _roll } from "./methods/_rolling.mjs";
+import { _roll } from "./methods/rolling/_rolling.mjs";
 import { _suppressed } from "./methods/_suppression.mjs";
 import { WikiDataMixin } from "../../mixins/wiki-mixin.mjs";
 import TeriockBaseEffectData from "../base-data/base-data.mjs";

@@ -1,3 +1,4 @@
+import "types/roll-config"
 import type TeriockBaseEffectData from "../base-data/base-data.mjs";
 import type { WikiDataMixin } from "../mixins/wiki-mixin.mjs";
 import { TeriockAbility } from "../../../types/documents";

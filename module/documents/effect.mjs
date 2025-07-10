@@ -171,7 +171,7 @@ export default class TeriockEffect extends ChildDocumentMixin(foundry.documents.
    * @returns {boolean} True if this is a reference effect, false otherwise.
    */
   get isReference() {
-    const sups = this.allSups;
+    const sups = this.allSupsSync;
     for (const sup of sups) {
       if (sup.system.maneuver !== "passive") {
         return true;

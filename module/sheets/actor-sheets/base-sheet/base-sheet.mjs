@@ -327,7 +327,7 @@ export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorShee
    */
   static async _openPrimaryAttacker(event) {
     event.stopPropagation();
-    this.document.system.wielding.attacker.derived?.sheet.render(true);
+    await this.document.system.wielding.attacker.derived?.sheet.render(true);
   }
 
   /**
@@ -338,7 +338,7 @@ export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorShee
    */
   static async _openPrimaryBlocker(event) {
     event.stopPropagation();
-    this.document.system.wielding.blocker.derived?.sheet.render(true);
+    await this.document.system.wielding.blocker.derived?.sheet.render(true);
   }
 
   /**
