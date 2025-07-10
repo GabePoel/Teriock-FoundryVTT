@@ -6,15 +6,18 @@ import { evaluateAsync, getRollIcon } from "../../../../helpers/utils.mjs";
 /**
  * Button configurations for different roll types.
  * Defines labels, icons, and actions for various ability roll buttons.
- * @type {object}
- * @private
+ * @typedef {object} buttonConfig
+ * @property {string} icon - Font Awesome icon.
+ * @property {string} action - Action assigned to the button.
+ * @property {string} [label] - Optional label to apply to the button.
+ * @property {string} [data] - Optional data to pass along with the button.
+ * @type {Record<string,buttonConfig>}
  */
 const BUTTON_CONFIGS = {
   feat: { label: "Roll SAVE Save", icon: "fas fa-dice-d20", action: "rollFeatSave" },
   effect: { label: "Apply Effect", icon: "fas fa-disease", action: "applyEffect" },
   resistance: { label: "Roll Resistance", icon: "fas fa-shield-alt", action: "rollResistance", data: "resistance" },
-  tradecraft: { label: "Roll Tradecraft", icon: "fas fa-compass-drafting", action: "rollTradecraft" },
-  // Roll buttons
+  tradecraft: { label: "Roll Tradecraft", icon: "fas fa-compass-drafting", action: "rollTradecraft" }, // Roll buttons
   damage: { label: "Roll Damage", icon: "fas fa-heart", action: "takeDamage" },
   drain: { label: "Roll Drain", icon: "fas fa-brain", action: "takeDrain" },
   wither: { label: "Roll Wither", icon: "fas fa-hourglass-half", action: "takeWither" },
@@ -27,16 +30,14 @@ const BUTTON_CONFIGS = {
   sleep: { label: "Roll Sleep", icon: "fas fa-bed", action: "takeSleep" },
   kill: { label: "Roll Kill", icon: "fas fa-skull", action: "takeKill" },
   awaken: { label: "Awaken", icon: "fas fa-sunrise", action: "takeAwaken" },
-  revive: { label: "Revive", icon: "fas fa-heart-pulse", action: "takeRevive" },
-  // Hack buttons
+  revive: { label: "Revive", icon: "fas fa-heart-pulse", action: "takeRevive" }, // Hack buttons
   arm: { label: "Hack Arm", icon: "fas fa-hand", action: "takeHack", data: "arm" },
   leg: { label: "Hack Leg", icon: "fas fa-boot", action: "takeHack", data: "leg" },
   body: { label: "Hack Body", icon: "fas fa-kidneys", action: "takeHack", data: "body" },
   eye: { label: "Hack Eye", icon: "fas fa-eye", action: "takeHack", data: "eye" },
   ear: { label: "Hack Ear", icon: "fas fa-ear", action: "takeHack", data: "ear" },
   mouth: { label: "Hack Mouth", icon: "fas fa-lips", action: "takeHack", data: "mouth" },
-  nose: { label: "Hack Nose", icon: "fas fa-nose", action: "takeHack", data: "nose" },
-  // Status button templates
+  nose: { label: "Hack Nose", icon: "fas fa-nose", action: "takeHack", data: "nose" }, // Status button templates
   startStatus: { icon: "fas fa-plus", action: "applyStatus" },
   endStatus: { icon: "fas fa-xmark", action: "removeStatus" },
 };
@@ -126,6 +127,17 @@ export async function _roll(abilityData, options) {
     speaker: ChatMessage.getSpeaker({ actor: abilityData.parent.getActor() }),
     rolls: [],
   };
+
+  if (abilityData.applies.macro) {
+    /** @type {foundry.documents.Macro} */
+    const macro = await foundry.utils.fromUuid(abilityData.applies.macro);
+    if (macro) {
+      macro.execute({
+        actor: abilityData.parent.getActor(),
+        ...useData,
+      });
+    }
+  }
 
   // Generate rolls based on interaction type
   const rollGenerators = {

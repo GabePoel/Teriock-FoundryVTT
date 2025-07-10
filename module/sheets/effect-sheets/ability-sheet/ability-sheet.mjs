@@ -20,6 +20,7 @@ export default class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(
     actions: {
       toggleConsequences: this._toggleConsequences,
       consequenceTab: this._consequenceTab,
+      unlinkMacro: this._unlinkMacro,
     },
     window: {
       icon: `fa-solid fa-${documentOptions.ability.icon}`,
@@ -51,11 +52,10 @@ export default class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(
 
   /**
    * Toggles between overview and consequences tabs.
-   * @param {Event} event - The event object.
    * @returns {Promise<void>} Promise that resolves when tab is toggled.
    * @static
    */
-  static async _toggleConsequences(event) {
+  static async _toggleConsequences() {
     this._tab = this._tab === "consequences" ? "overview" : "consequences";
     this.render();
   }
@@ -68,9 +68,19 @@ export default class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(
    * @static
    */
   static async _consequenceTab(event, target) {
-    const tab = target.dataset.tab;
-    this._consequenceTab = tab;
+    this._consequenceTab = target.dataset.tab;
     this.render();
+  }
+
+  /**
+   * Disconnects the execution macro from this ability.
+   * @returns {Promise<void>}
+   * @private
+   */
+  static async _unlinkMacro() {
+    await this.document.update({
+      "system.applies.macro": null,
+    });
   }
 
   /**
@@ -87,6 +97,10 @@ export default class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(
     context.consequenceTab = this._consequenceTab;
     context.childAbilities = await this.document.subsAsync();
     context.parentAbility = this.document.sup;
+    context.macro = null;
+    if (this.document.system.applies.macro) {
+      context.macro = await foundry.utils.fromUuid(this.document.system.applies.macro);
+    }
     const editors = {
       manaCost: system.costs.mp.value.variable,
       hitCost: system.costs.hp.value.variable,

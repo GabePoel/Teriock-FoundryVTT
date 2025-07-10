@@ -184,6 +184,13 @@ export function _defineApplies(schema) {
     proficient: appliesField(),
     fluent: appliesField(),
     heightened: appliesField(),
+    macro: new fields.DocumentUUIDField({
+      nullable: true,
+      initial: null,
+      label: "Custom Macro",
+      hint: "Custom macro that executes instead of any of the default application options.",
+      type: "Macro"
+    })
   });
 
   return schema;

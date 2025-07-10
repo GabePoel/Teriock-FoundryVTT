@@ -68,5 +68,6 @@ export interface TeriockAbilityConsequenceSchema {
     proficient: AppliesData;
     fluent: AppliesData;
     heightened: AppliesData;
+    macro: string | null;
   };
 }

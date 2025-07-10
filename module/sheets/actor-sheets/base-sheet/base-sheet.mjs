@@ -146,7 +146,8 @@ export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorShee
    * @static
    */
   static async _toggleEquippedDoc(event, target) {
-    this._embeddedFromCard(target)?.system.toggleEquipped();
+    const embedded = await this._embeddedFromCard(target);
+    embedded?.system.toggleEquipped();
   }
 
   /**
@@ -157,7 +158,8 @@ export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorShee
    * @static
    */
   static async _toggleDisabledDoc(event, target) {
-    this._embeddedFromCard(target)?.toggleDisabled();
+    const embedded = await this._embeddedFromCard(target);
+    embedded?.toggleDisabled();
   }
 
   /**
@@ -310,23 +312,20 @@ export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorShee
 
   /**
    * Toggles the shield bash (sb) state.
-   * @param {Event} event - The event object.
-   * @param {HTMLElement} target - The target element.
    * @returns {Promise<void>} Promise that resolves when sb is toggled.
    * @static
    */
-  static async _toggleSb(event, target) {
+  static async _toggleSb() {
     this.document.update({ "system.sb": !this.document.system.sb });
   }
 
   /**
    * Opens the primary attacker's sheet.
    * @param {Event} event - The event object.
-   * @param {HTMLElement} target - The target element.
    * @returns {Promise<void>} Promise that resolves when sheet is opened.
    * @static
    */
-  static async _openPrimaryAttacker(event, target) {
+  static async _openPrimaryAttacker(event) {
     event.stopPropagation();
     this.document.system.wielding.attacker.derived?.sheet.render(true);
   }
@@ -334,11 +333,10 @@ export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorShee
   /**
    * Opens the primary blocker's sheet.
    * @param {Event} event - The event object.
-   * @param {HTMLElement} target - The target element.
    * @returns {Promise<void>} Promise that resolves when sheet is opened.
    * @static
    */
-  static async _openPrimaryBlocker(event, target) {
+  static async _openPrimaryBlocker(event) {
     event.stopPropagation();
     this.document.system.wielding.blocker.derived?.sheet.render(true);
   }
@@ -368,18 +366,17 @@ export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorShee
   /**
    * Prompts for damage amount and applies it to the actor.
    * @param {Event} event - The event object.
-   * @param {HTMLElement} target - The target element.
    * @returns {Promise<void>} Promise that resolves when damage is applied.
    * @static
    */
-  static async _takeDamage(event, target) {
+  static async _takeDamage(event) {
     event.stopPropagation();
     await api.DialogV2.prompt({
       window: { title: "Take Damage" },
       content: '<input type="number" name="damage" placeholder="Damage Amount">',
       ok: {
         label: "Confirm",
-        callback: (event, button, dialog) => {
+        callback: (event, button) => {
           let input = button.form.elements.damage.value;
           if (input) {
             this.document.takeDamage(Number(input));
@@ -392,18 +389,17 @@ export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorShee
   /**
    * Prompts for drain amount and applies it to the actor.
    * @param {Event} event - The event object.
-   * @param {HTMLElement} target - The target element.
    * @returns {Promise<void>} Promise that resolves when drain is applied.
    * @static
    */
-  static async _takeDrain(event, target) {
+  static async _takeDrain(event) {
     event.stopPropagation();
     await api.DialogV2.prompt({
       window: { title: "Take Drain" },
       content: '<input type="number" name="drain" placeholder="Drain Amount">',
       ok: {
         label: "Confirm",
-        callback: (event, button, dialog) => {
+        callback: (event, button) => {
           let input = button.form.elements.drain.value;
           if (input) {
             this.document.takeDrain(Number(input));
@@ -416,18 +412,17 @@ export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorShee
   /**
    * Prompts for wither amount and applies it to the actor.
    * @param {Event} event - The event object.
-   * @param {HTMLElement} target - The target element.
    * @returns {Promise<void>} Promise that resolves when wither is applied.
    * @static
    */
-  static async _takeWither(event, target) {
+  static async _takeWither(event) {
     event.stopPropagation();
     await api.DialogV2.prompt({
       window: { title: "Take Wither" },
       content: '<input type="number" name="wither" placeholder="Wither Amount">',
       ok: {
         label: "Confirm",
-        callback: (event, button, dialog) => {
+        callback: (event, button) => {
           let input = button.form.elements.wither.value;
           if (input) {
             this.document.takeWither(Number(input));
@@ -496,7 +491,7 @@ export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorShee
    * @returns {Promise<void>} Promise that resolves when attack is performed.
    * @static
    */
-  static async _attack(event, target) {
+  static async _attack(event) {
     event.stopPropagation();
     const options = {
       advantage: event.altKey,
@@ -836,7 +831,7 @@ export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorShee
     // Add listeners for tswitch buttons
     this.element.querySelectorAll('button[data-action="toggleSwitch"]').forEach((el) => {
       // Left click: forward cycle
-      el.addEventListener("click", (e) => {
+      el.addEventListener("click", () => {
         const name = el.getAttribute("data-name");
         if (!name) return;
         const path = name.split(".").slice(1); // remove 'settings'
@@ -847,9 +842,9 @@ export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorShee
         // Three-way toggle: 0 -> 1 -> -1 -> 0
         const key = path[path.length - 1];
         let val = obj[key];
-        if (val == 0) {
+        if (val === 0) {
           obj[key] = 1;
-        } else if (val == 1) {
+        } else if (val === 1) {
           obj[key] = -1;
         } else {
           obj[key] = 0;
@@ -869,9 +864,9 @@ export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorShee
         // Reverse three-way toggle: 0 -> -1 -> 1 -> 0
         const key = path[path.length - 1];
         let val = obj[key];
-        if (val == 0) {
+        if (val === 0) {
           obj[key] = -1;
-        } else if (val == -1) {
+        } else if (val === -1) {
           obj[key] = 1;
         } else {
           obj[key] = 0;
@@ -893,7 +888,7 @@ export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorShee
       if (!(contentEl && inputEl)) return;
 
       const instance = new ux.SearchFilter({
-        callback: (event, query, rgx, content) => {
+        callback: (event, query, rgx) => {
           if (!query && this._loadingSearch) {
             const searchPath = `_${type}SearchValue`;
             const value = this[searchPath] || "";

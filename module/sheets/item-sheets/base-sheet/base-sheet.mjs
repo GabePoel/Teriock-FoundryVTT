@@ -1,11 +1,10 @@
-const { sheets, ux } = foundry.applications;
+const { sheets } = foundry.applications;
 import { cleanFeet } from "../../../helpers/clean.mjs";
 import { TeriockSheet } from "../../mixins/sheet-mixin.mjs";
 
 /**
  * Base item sheet for Teriock system items.
- * Provides common functionality for all item sheets including drag and drop,
- * effect type management, and input cleaning.
+ * Provides common functionality for all item sheets.
  * @extends {ItemSheet}
  */
 export default class TeriockBaseItemSheet extends TeriockSheet(sheets.ItemSheet) {
@@ -16,28 +15,15 @@ export default class TeriockBaseItemSheet extends TeriockSheet(sheets.ItemSheet)
    */
   static DEFAULT_OPTIONS = {
     classes: ["teriock"],
-    dragDrop: [{ dragSelector: ".draggable", dropSelector: null }],
   };
-  /** @type {Array} */
-  #dragDrop;
 
   /**
    * Creates a new base item sheet instance.
-   * Initializes drag and drop handlers for the sheet.
    * @param {...any} args - Arguments to pass to the parent constructor.
    * @override
    */
   constructor(...args) {
     super(...args);
-    this.#dragDrop = this.#createDragDropHandlers();
-  }
-
-  /**
-   * Gets the drag and drop handlers for this sheet.
-   * @returns {Array} Array of drag and drop handlers.
-   */
-  get dragDrop() {
-    return this.#dragDrop;
   }
 
   /**
@@ -88,7 +74,6 @@ export default class TeriockBaseItemSheet extends TeriockSheet(sheets.ItemSheet)
 
   /**
    * Handles the render event for the item sheet.
-   * Sets up drag and drop, static events, and input cleaning.
    * @param {object} context - The render context.
    * @param {object} options - Render options.
    * @override
@@ -96,7 +81,6 @@ export default class TeriockBaseItemSheet extends TeriockSheet(sheets.ItemSheet)
   _onRender(context, options) {
     super._onRender(context, options);
     if (!this.editable) return;
-    this.#dragDrop.forEach((d) => d.bind(this.element));
 
     this._bindStaticEvents();
     this._bindCleanInputs();
@@ -134,41 +118,5 @@ export default class TeriockBaseItemSheet extends TeriockSheet(sheets.ItemSheet)
         this._connectInput(el, el.getAttribute("name"), cleaner);
       });
     }
-  }
-
-  /**
-   * Checks if drag start is allowed.
-   * @returns {boolean} True if drag start is allowed.
-   */
-  _canDragStart() {
-    return this.editable;
-  }
-
-  /**
-   * Checks if drag drop is allowed.
-   * @returns {boolean} True if drag drop is allowed.
-   */
-  _canDragDrop() {
-    return this.editable;
-  }
-
-  /**
-   * Creates drag and drop handlers for the sheet.
-   * @returns {Array} Array of configured drag and drop handlers.
-   * @private
-   */
-  #createDragDropHandlers() {
-    return this.options.dragDrop.map((config) => {
-      config.permissions = {
-        dragstart: this._canDragStart.bind(this),
-        drop: this._canDragDrop.bind(this),
-      };
-      config.callbacks = {
-        dragstart: this._onDragStart.bind(this),
-        dragover: this._onDragOver.bind(this),
-        drop: this._onDrop.bind(this),
-      };
-      return new ux.DragDrop(config);
-    });
   }
 }

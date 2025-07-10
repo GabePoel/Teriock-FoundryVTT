@@ -70,7 +70,7 @@ export async function createResource(document) {
  * @param {string} key - Optional key to look up predefined property content.
  * @returns {Promise<ActiveEffect>} The created property effect.
  */
-export async function createProperty(document, key = null) {
+export async function createProperty(document, key = "") {
   let description = "Insert description here.";
   let propertyType = "normal";
   let name = "New Property";

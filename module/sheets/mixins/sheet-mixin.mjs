@@ -47,7 +47,11 @@ export const TeriockSheet = (Base) =>
       form: { submitOnChange: true, closeOnSubmit: false },
       window: { resizable: true },
       position: { width: 560, height: 600 },
+      dragDrop: [{ dragSelector: ".draggable", dropSelector: null }],
     };
+
+    /** @type {DragDrop[]} */
+    #dragDrop;
 
     /**
      * Creates a new Teriock sheet instance.
@@ -60,6 +64,15 @@ export const TeriockSheet = (Base) =>
       this._contextMenus = [];
       this._locked = true;
       this.settings = {};
+      this.#dragDrop = this.#createDragDropHandlers();
+    }
+
+    /**
+     * Gets the drag and drop handlers for this sheet.
+     * @returns {DragDrop[]} Array of drag and drop handlers.
+     */
+    get dragDrop() {
+      return this.#dragDrop;
     }
 
     /**
@@ -173,7 +186,8 @@ export const TeriockSheet = (Base) =>
      * @static
      */
     static async _openDoc(event, target) {
-      this._embeddedFromCard(target)?.sheet.render(true);
+      const embedded = await this._embeddedFromCard(target);
+      embedded?.sheet.render(true);
     }
 
     /**
@@ -184,7 +198,8 @@ export const TeriockSheet = (Base) =>
      * @static
      */
     static async _chatDoc(event, target) {
-      this._embeddedFromCard(target)?.chat();
+      const embedded = await this._embeddedFromCard(target);
+      await embedded?.chat();
     }
 
     /**
@@ -195,7 +210,8 @@ export const TeriockSheet = (Base) =>
      * @static
      */
     static async _useOneDoc(event, target) {
-      await this._embeddedFromCard(target)?.system.useOne();
+      const embedded = await this._embeddedFromCard(target);
+      await embedded?.system.useOne();
     }
 
     /**
@@ -206,7 +222,8 @@ export const TeriockSheet = (Base) =>
      * @static
      */
     static async _toggleDisabledDoc(event, target) {
-      await this._embeddedFromCard(target)?.toggleDisabled();
+      const embedded = await this._embeddedFromCard(target);
+      await embedded?.toggleDisabled();
     }
 
     /**
@@ -218,8 +235,8 @@ export const TeriockSheet = (Base) =>
      */
     static async _rollDoc(event, target) {
       const options = event?.altKey ? { advantage: true } : event?.shiftKey ? { disadvantage: true } : {};
-      const document = this._embeddedFromCard(target);
-      if (document?.type === "equipment") {
+      const embedded = await this._embeddedFromCard(target);
+      if (embedded?.type === "equipment") {
         if (event?.shiftKey) {
           options.secret = true;
         }
@@ -227,7 +244,7 @@ export const TeriockSheet = (Base) =>
           options.twoHanded = true;
         }
       }
-      await document?.use(options);
+      await embedded?.use(options);
     }
 
     /**
@@ -265,7 +282,7 @@ export const TeriockSheet = (Base) =>
      * @static
      */
     static async _createAbility(event, __) {
-      return await createEffects.createAbility(this.document, null);
+      return await createEffects.createAbility(this.document);
     }
 
     /**
@@ -276,7 +293,7 @@ export const TeriockSheet = (Base) =>
      * @static
      */
     static async _createResource(event, __) {
-      return await createEffects.createResource(this.document, null);
+      return await createEffects.createResource(this.document);
     }
 
     /**
@@ -287,7 +304,7 @@ export const TeriockSheet = (Base) =>
      * @static
      */
     static async _createFluency(event, __) {
-      return await createEffects.createFluency(this.document, null);
+      return await createEffects.createFluency(this.document);
     }
 
     /**
@@ -330,7 +347,7 @@ export const TeriockSheet = (Base) =>
             action: "other",
             label: "Create New Property",
             callback: async () => {
-              return await createEffects.createProperty(this.item, null);
+              return await createEffects.createProperty(this.item, "");
             },
           },
         ],
@@ -358,6 +375,8 @@ export const TeriockSheet = (Base) =>
       this._connect(".chat-button", "contextmenu", (e) => {
         TeriockSheet._debug.call(this, e, e.currentTarget);
       });
+
+      this.#dragDrop.forEach((d) => d.bind(this.element));
 
       this._activateMenu();
       this._setupEventListeners();
@@ -668,7 +687,7 @@ export const TeriockSheet = (Base) =>
      * @param {string} cssClass - The CSS class for elements to attach the menu to.
      * @param {object} options - The context menu options.
      * @param {string} eventName - The event name to trigger the menu.
-     * @returns {ux.ContextMenu} The created context menu.
+     * @returns {ContextMenu} The created context menu.
      * @private
      */
     _connectContextMenu(cssClass, options, eventName) {
@@ -682,12 +701,14 @@ export const TeriockSheet = (Base) =>
     /**
      * Extracts an embedded document from a card element.
      * @param {HTMLElement} target - The target element to extract from.
-     * @returns {Document|null} The embedded document or null if not found.
+     * @returns {Promise<Document|null>} The embedded document or null if not found.
      * @private
      */
-    _embeddedFromCard(target) {
+    async _embeddedFromCard(target) {
       const card = target.closest(".tcard");
       const { id, type, parentId } = card?.dataset ?? {};
+
+      if (type === "macro") return await foundry.utils.fromUuid(id);
 
       if (type === "item") return this.document.items.get(id);
 
@@ -707,8 +728,8 @@ export const TeriockSheet = (Base) =>
      * @param {DragEvent} event - The drag start event.
      * @private
      */
-    _onDragStart(event) {
-      const embedded = this._embeddedFromCard(event.currentTarget);
+    async _onDragStart(event) {
+      const embedded = await this._embeddedFromCard(event.currentTarget);
       const dragData = embedded?.toDragData();
       console.log("dragData", dragData);
       if (dragData) {
@@ -733,10 +754,13 @@ export const TeriockSheet = (Base) =>
      */
     async _onDrop(event) {
       const document = await ux.TextEditor.getDragEventData(event);
+      console.log(document.type, document);
       if (document.type === "ActiveEffect") {
         await this._onDropActiveEffect(event, document);
       } else if (document.type === "Item") {
         await this._onDropItem(event, document);
+      } else if (document.type === "Macro") {
+        await this._onDropMacro(event, document);
       }
       return true;
     }
@@ -815,7 +839,51 @@ export const TeriockSheet = (Base) =>
       return this.document.isOwner && item && item.parent !== this.document && this.document.documentName === "Actor";
     }
 
+    async _onDropMacro(event, data) {
+      if (this.document.type === "ability" && this.document.isOwner) {
+        this.document.update({
+          "system.applies.macro": data.uuid,
+        });
+      }
+    }
+
+    /**
+     * Checks if drag start is allowed.
+     * @returns {boolean} True if drag start is allowed.
+     */
+    _canDragStart() {
+      return this.editable;
+    }
+
+    /**
+     * Checks if drag drop is allowed.
+     * @returns {boolean} True if drag drop is allowed.
+     */
+    _canDragDrop() {
+      return this.editable;
+    }
+
     // Private helper methods
+
+    /**
+     * Creates drag and drop handlers for the sheet.
+     * @returns {Array} Array of configured drag and drop handlers.
+     * @private
+     */
+    #createDragDropHandlers() {
+      return this.options.dragDrop.map((config) => {
+        config.permissions = {
+          dragstart: this._canDragStart.bind(this),
+          drop: this._canDragDrop.bind(this),
+        };
+        config.callbacks = {
+          dragstart: this._onDragStart.bind(this),
+          dragover: this._onDragOver.bind(this),
+          drop: this._onDrop.bind(this),
+        };
+        return new ux.DragDrop(config);
+      });
+    }
 
     /**
      * Adds a key to a record field with validation.
