@@ -77,8 +77,6 @@ export async function _roll(abilityData, options) {
   const useData = await stageUse(abilityData, advantage, disadvantage);
   let rawMessage = await abilityData.parent.buildMessage();
 
-  await measure(abilityData);
-
   // Compute variable MP/HP spent (only if type is variable)
   const mpSpent = useData.costs.mp;
   const hpSpent = useData.costs.hp;
@@ -97,7 +95,12 @@ export async function _roll(abilityData, options) {
 
   // Determine if we should add the bottom bar class
   const buttons = await buildButtons(abilityData, useData);
-  const targets = getTargets(abilityData);
+  let targets = getTargets(abilityData);
+
+  const measureData = await measure(abilityData);
+
+  targets = measureData.targets || targets;
+
   let shouldBottomBar = true;
   if (
     buttons.length === 0 &&
@@ -674,9 +677,10 @@ function createSummaryBarBox({ heightened, mpSpent, hpSpent, shouldBottomBar }) 
 /**
  * Option to create a measured template.
  * @param {TeriockAbilityData} abilityData - The ability data to generate template from.
- * @returns {Promise<void>}
+ * @returns {Promise<object>}
  */
 async function measure(abilityData) {
+  const measureData = {};
   if (abilityData.delivery.base === "aura") {
     const token =
       abilityData.parent.getActor().token ||
@@ -686,6 +690,7 @@ async function measure(abilityData) {
     if (token) {
       let placeTemplate;
       let radius = Number(abilityData.range);
+      let autoTarget = false;
       try {
         placeTemplate = await api.DialogV2.prompt({
           window: { title: "Template Confirmation" },
@@ -695,14 +700,22 @@ async function measure(abilityData) {
             <div class="standard-form form-group">
               <label>Distance <span class="units">(ft)</span></label>
               <input name='range' type='number' min='0' step='1' value='${abilityData.range}'>
-            </div>`,
+            </div>
+            <div class="standard-form form-group">
+              <label>Automatic Targets</label>
+              <input name="auto" type="checkbox" checked>
+            </div>
+          `,
           ok: {
             label: "Yes",
-            callback: (event, button, dialog) => (radius = button.form.elements.range.valueAsNumber),
+            callback: (event, button) => {
+              radius = button.form.elements.range.valueAsNumber;
+              autoTarget = button.form.elements.auto.checked;
+            },
           },
         });
       } catch {
-        return;
+        return measureData;
       }
       if (placeTemplate) {
         const x = token.x;
@@ -713,7 +726,32 @@ async function measure(abilityData) {
           y: y + (token.height * canvas.scene.grid.sizeY) / 2,
           distance: radius,
         };
+        const isEthereal = token.hasStatusEffect("ethereal");
+        /** @type {MeasuredTemplateDocument} template */
         const template = await MeasuredTemplateDocument.create(templateData, { parent: canvas.scene });
+        if (autoTarget) {
+          let targets = new Set();
+          canvas.scene.tokens.forEach((targetToken) => {
+            let targeted = false;
+            for (let i = 0; i < targetToken.width; i++) {
+              for (let j = 0; j < targetToken.height; j++) {
+                const point = {
+                  x: targetToken.x + canvas.scene.grid.sizeX * (i + 0.5),
+                  y: targetToken.y + canvas.scene.grid.sizeY * (j + 0.5),
+                };
+                // TODO: Replace manual calculation with more robust template position checking.
+                const dist = Math.sqrt(Math.pow(point.x - templateData.x, 2) + Math.pow(point.y - templateData.y, 2));
+                targeted = dist <= (radius / 5) * canvas.scene.grid.sizeX;
+                if (targetToken === token) targeted = false;
+                if (targetToken.hasStatusEffect("ethereal") !== isEthereal) targeted = false;
+                if (targeted) {
+                  targets.add(targetToken);
+                }
+              }
+            }
+          });
+          measureData.targets = Array.from(targets);
+        }
         Hooks.once("combatTurnChange", async () => {
           if (template) {
             await template.delete();
@@ -727,4 +765,5 @@ async function measure(abilityData) {
       }
     }
   }
+  return measureData;
 }
