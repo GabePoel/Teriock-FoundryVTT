@@ -1,11 +1,14 @@
-import type TeriockBaseEffectData from "../base-data/base-data.mjs";
-import { TeriockProperty } from "../../../types/documents";
+import { TeriockBaseEffectData } from "../base-effect-data/base-effect-data.mjs";
+
+interface TeriockPropertySchema extends TeriockBaseEffectSchema {
+  /** Wiki Namespace */
+  readonly wikiNamespace: "Property";
+  /** Property Type */
+  propertyType: string;
+  /** Damage Type */
+  damageType: string;
+}
 
 declare module "./property-data.mjs" {
-  export default interface TeriockPropertyData extends TeriockBaseEffectData {
-    parent: TeriockProperty;
-    wikiNamespace: string;
-    propertyType: string;
-    damageType: string;
-  }
+  export default interface TeriockPropertyData extends TeriockPropertySchema, TeriockBaseEffectData {}
 }

@@ -1,13 +1,20 @@
+import "./commands/_types";
 import "./data/_types";
 import "./documents/_types";
 import "./sheets/_types";
-import "./commands/_types";
+import "./types/chat";
+import "./types/documents";
+import "./types/messages";
+import "./types/rolls";
+import "./types/ui";
+import "./types/updates";
+import "./types/wiki";
 import "@client/global.mjs";
 import "@common/primitives/global.mjs";
 import Canvas from "@client/canvas/board.mjs";
 
 // Foundry's use of `Object.assign(globalThis) means many globally available objects are not read as such
-// This declare global hopefully fixes that
+// This global declaration hopefully fixes that
 declare global {
   // not a real extension of course but simplest way for this to work with the intellisense.
   /**

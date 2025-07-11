@@ -9,9 +9,9 @@ import connectEmbedded from "../../helpers/connect-embedded.mjs";
  * Base sheet mixin for Teriock system applications.
  * Provides common functionality for all Teriock sheets including event handling,
  * drag and drop, context menus, and form management.
- * @template {Function} Base - The base application class constructor to extend.
- * @param {Base} Base - The base application class to mix in with.
- * @returns {Base} The extended application class with Teriock sheet functionality.
+ * @template {import("@common/_types.mjs").Constructor<DocumentSheetV2>} BaseSheet
+ * @param {BaseSheet} Base - The base application class to mix in with.
+ * @returns BaseSheet
  */
 export const TeriockSheet = (Base) =>
   class TeriockSheet extends Base {

@@ -1,17 +1,12 @@
 const { fields } = foundry.data;
-import TeriockBaseEffectData from "../base-data/base-data.mjs";
+import TeriockBaseEffectData from "../base-effect-data/base-effect-data.mjs";
 
 /**
  * Attunement-specific effect data model.
- * Handles attunement functionality including target tracking and tier inheritance.
  * @extends {TeriockBaseEffectData}
  */
 export default class TeriockAttunementData extends TeriockBaseEffectData {
-  /**
-   * Gets the metadata for the attunement data model.
-   * @inheritdoc
-   * @returns {object} The metadata object with attunement type information.
-   */
+  /** @inheritdoc */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
       type: "attunement",
@@ -24,7 +19,7 @@ export default class TeriockAttunementData extends TeriockBaseEffectData {
    * @returns {Document|null} The target document or null if not found.
    */
   get targetDocument() {
-    return this.parent.getActor().items.get(this.target);
+    return this.actor?.items.get(this.target);
   }
 
   /**
@@ -47,12 +42,10 @@ export default class TeriockAttunementData extends TeriockBaseEffectData {
   /**
    * Defines the schema for the attunement data model.
    * @override
-   * @returns {object} The schema definition for the attunement data.
+   * @returns {object} The schema definition for the ability data.
    */
   static defineSchema() {
-    const commonData = super.defineSchema();
-    return {
-      ...commonData,
+    return foundry.utils.mergeObject(super.defineSchema(), {
       type: new fields.StringField({
         initial: "equipment",
         label: "Attunement Type",
@@ -78,7 +71,7 @@ export default class TeriockAttunementData extends TeriockBaseEffectData {
         hint: "The tier of this attunement.",
         initial: 0,
       }),
-    };
+    });
   }
 
   /**
@@ -86,9 +79,8 @@ export default class TeriockAttunementData extends TeriockBaseEffectData {
    * @override
    */
   prepareDerivedData() {
-    super.prepareDerivedData();
     if (this.inheritTier && this.targetDocument) {
-      this.tier = this.parent.getActor().items.get(this.target)?.system.tier.derived;
+      this.tier = this.actor.items.get(this.target)?.system.tier.derived;
     }
   }
 }

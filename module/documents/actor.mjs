@@ -1,11 +1,11 @@
-import { ParentDocumentMixin } from "./mixins/parent-mixin.mjs";
 import TeriockRoll from "./roll.mjs";
+import { BaseTeriockActor } from "./_base.mjs";
 
 /**
- * @extends {foundry.documents.Actor}
- * @extends {ParentDocumentMixin}
+ * @property {TeriockBaseActorData} system
+ * @property {TeriockBaseActorSheet} sheet
  */
-export default class TeriockActor extends ParentDocumentMixin(foundry.documents.Actor) {
+export default class TeriockActor extends BaseTeriockActor {
   /**
    * Gets all valid effects that apply to this actor.
    * @inheritdoc
@@ -165,7 +165,7 @@ export default class TeriockActor extends ParentDocumentMixin(foundry.documents.
 
   /**
    * Applies hack effect to a specific part of the actor.
-   * @param {string} part - The part to hack.
+   * @param {HackableBodyPart} part - The part to hack.
    * @returns {Promise<void>} Promise that resolves when hack is applied.
    */
   async takeHack(part) {
@@ -174,7 +174,7 @@ export default class TeriockActor extends ParentDocumentMixin(foundry.documents.
 
   /**
    * Removes hack effect from a specific part of the actor.
-   * @param {string} part - The part to unhack.
+   * @param {HackableBodyPart} part - The part to unhack.
    * @returns {Promise<void>} Promise that resolves when unhack is applied.
    */
   async takeUnhack(part) {
@@ -261,15 +261,15 @@ export default class TeriockActor extends ParentDocumentMixin(foundry.documents.
    * @param {CommonRollOptions} options - Options for using the ability.
    * @returns {void}
    */
-  useAbility(abilityName, options = {}) {
+  async useAbility(abilityName, options = {}) {
     const abilities = Array.from(this.allApplicableEffects()).filter((i) => i.type === "ability");
+    /** @type TeriockAbility */
     const ability = abilities.find((i) => i.name === abilityName);
     if (ability) {
-      ability.use(options);
+      await ability.use(options);
     } else {
       ui.notifications.warn(`${this.name} does not have ${abilityName}.`);
     }
-    return;
   }
 
   /**

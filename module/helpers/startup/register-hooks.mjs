@@ -14,7 +14,7 @@ export default function registerHooks() {
           });
         }
       }
-      await document.getActor()?.postUpdate();
+      await document.actor.postUpdate();
     }
   });
 
@@ -31,19 +31,19 @@ export default function registerHooks() {
   Hooks.on("createItem", async (document, options, userId) => {
     if (game.user.id === userId && document.isOwner) {
       if (document.type === "equipment") {
-        if (document.getActor()) {
+        if (document.actor) {
           await document.system.unequip();
         }
       }
-      document.getActor()?.buildEffectTypes();
-      await document.getActor()?.postUpdate();
+      document.actor?.buildEffectTypes();
+      await document.actor?.postUpdate();
     }
   });
 
   Hooks.on("deleteItem", async (document, options, userId) => {
     if (game.user.id === userId && document.isOwner) {
-      document.getActor()?.buildEffectTypes();
-      await document.getActor()?.postUpdate();
+      document.actor?.buildEffectTypes();
+      await document.actor?.postUpdate();
     }
   });
 
@@ -71,8 +71,8 @@ export default function registerHooks() {
           await document.unlockHierarchy();
         }
       }
-      document.getActor()?.buildEffectTypes();
-      await document.getActor()?.postUpdate({ checkDown: true });
+      document.actor?.buildEffectTypes();
+      await document.actor?.postUpdate({ checkDown: true });
     }
   });
 
@@ -91,8 +91,8 @@ export default function registerHooks() {
           await document.parent.deleteEmbeddedDocuments("ActiveEffect", subIds);
         }
       }
-      document.getActor()?.buildEffectTypes();
-      await document.getActor()?.postUpdate({ checkDown: true });
+      document.actor?.buildEffectTypes();
+      await document.actor?.postUpdate({ checkDown: true });
     }
   });
 

@@ -3,7 +3,7 @@ import TeriockRoll from "../../../../documents/roll.mjs";
 /**
  * Initiates a fluency roll with the specified options.
  * @param {TeriockFluencyData} fluencyData - The fluency data to roll for.
- * @param {CommonRollOptions} options - Options for the roll including advantage/disadvantage.
+ * @param {object} options - Options for the roll including advantage/disadvantage.
  * @returns {Promise<void>} Promise that resolves when the roll is complete.
  * @private
  */
@@ -15,7 +15,7 @@ export async function _roll(fluencyData, options) {
  * Performs the actual fluency roll, creating a message with the roll result.
  * Handles advantage/disadvantage and applies tradecraft modifiers.
  * @param {TeriockFluencyData} fluencyData - The fluency data to roll for.
- * @param {CommonRollOptions} options - Options for the roll including advantage/disadvantage.
+ * @param {object} options - Options for the roll including advantage/disadvantage.
  * @returns {Promise<void>} Promise that resolves when the roll message is sent.
  * @private
  */
@@ -29,10 +29,10 @@ async function use(fluencyData, options) {
   }
   rollFormula += " + @f + @" + fluencyData.tradecraft;
   message = await foundry.applications.ux.TextEditor.enrichHTML(message);
-  const roll = new TeriockRoll(rollFormula, fluencyData.parent.getActor()?.getRollData(), { message: message });
+  const roll = new TeriockRoll(rollFormula, fluencyData.actor.getRollData(), { message: message });
   roll.toMessage({
     speaker: ChatMessage.getSpeaker({
-      actor: fluencyData.parent.getActor(),
+      actor: fluencyData.actor,
     }),
   });
 }

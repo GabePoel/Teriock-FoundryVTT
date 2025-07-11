@@ -1,17 +1,11 @@
 const { fields } = foundry.data;
-import TeriockBaseEffectData from "../base-data/base-data.mjs";
+import TeriockBaseEffectData from "../base-effect-data/base-effect-data.mjs";
 
 /**
  * Effect-specific effect data model.
- * Handles general effect functionality including various expiration types and sub relationships.
- * @extends {TeriockBaseEffectData}
  */
 export default class TeriockEffectData extends TeriockBaseEffectData {
-  /**
-   * Gets the metadata for the effect data model.
-   * @inheritdoc
-   * @returns {object} The metadata object with effect type information.
-   */
+  /** @inheritdoc */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
       type: "effect",
@@ -23,7 +17,7 @@ export default class TeriockEffectData extends TeriockBaseEffectData {
    * @returns {boolean} True if the effect expires based on a condition, false otherwise.
    */
   get conditionExpiration() {
-    return this.expirations.condition.value ? true : false;
+    return !!this.expirations.condition.value;
   }
 
   /**
@@ -61,13 +55,11 @@ export default class TeriockEffectData extends TeriockBaseEffectData {
 
   /**
    * Defines the schema for the effect data model.
-   * @override
    * @returns {object} The schema definition for the effect data.
+   * @override
    */
   static defineSchema() {
-    const commonData = super.defineSchema();
-    return {
-      ...commonData,
+    return foundry.utils.mergeObject(super.defineSchema(), {
       source: new fields.StringField({ initial: "", nullable: true }),
       expirations: new fields.SchemaField({
         condition: new fields.SchemaField({
@@ -101,21 +93,21 @@ export default class TeriockEffectData extends TeriockBaseEffectData {
       }),
       subIds: new fields.ArrayField(new fields.DocumentIdField()),
       subUuids: new fields.ArrayField(new fields.DocumentUUIDField()),
-    };
+    });
   }
 
   /**
    * Checks if the effect should expire based on various conditions.
    * Considers base expiration, condition-based expiration, and sustained expiration.
-   * @override
    * @returns {boolean} True if the effect should expire, false otherwise.
+   * @override
    */
   shouldExpire() {
     let should = super.shouldExpire();
     if (this.conditionExpiration) {
       const condition = this.expirations.condition.value;
       const present = this.expirations.condition.present;
-      const hasCondition = this.parent.getActor()?.statuses.has(condition);
+      const hasCondition = this.actor?.statuses.has(condition);
       should = should || (present ? hasCondition : !hasCondition);
     }
     if (this.sustainedExpiration) {

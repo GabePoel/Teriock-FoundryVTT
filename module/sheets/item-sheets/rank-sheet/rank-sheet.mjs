@@ -7,7 +7,7 @@ import {
   manaDieContextMenu,
   rankContextMenu,
 } from "./connections/_context-menus.mjs";
-import TeriockBaseItemSheet from "../base-sheet/base-sheet.mjs";
+import TeriockBaseItemSheet from "../base-item-sheet/base-item-sheet.mjs";
 
 /**
  * Rank sheet for Teriock system ranks.
@@ -34,7 +34,7 @@ export default class TeriockRankSheet extends HandlebarsApplicationMixin(Teriock
    */
   static PARTS = {
     all: {
-      template: "systems/teriock/templates/sheets/rank-template/rank-template.hbs",
+      template: "systems/teriock/templates/item-templates/rank-template/rank-template.hbs",
       scrollable: [".window-content", ".tsheet-page", ".ab-sheet-everything"],
     },
   };

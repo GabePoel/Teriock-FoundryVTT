@@ -58,28 +58,22 @@ async function use(equipmentData, options) {
     if (options?.bonusDamage) {
       rollFormula = rollFormula + " + " + options.bonusDamage;
     }
-    if (equipmentData.parent.getActor()?.system?.damage?.standard) {
-      rollFormula += equipmentData.parent.getActor().system.damage.standard;
+    if (equipmentData.actor?.system?.damage?.standard) {
+      rollFormula += equipmentData.actor.system.damage.standard;
     }
-    // if (options?.advantage) {
-    //   rollFormula = rollFormula.replace(/(\d*)d(\d+)/gi, (match, dice, sides) => {
-    //     const numDice = parseInt(dice) || 1;
-    //     return (numDice * 2) + 'd' + sides;
-    //   });
-    // }
     if (options?.secret) {
       message = await equipmentData.parent.buildMessage({ secret: true });
     } else {
       message = await equipmentData.parent.buildMessage({ secret: false });
     }
-    const rollData = equipmentData.parent.getActor()?.getRollData() || {};
+    const rollData = equipmentData.actor?.getRollData() || {};
     let roll = new TeriockHarmRoll(rollFormula, rollData, { message: message });
     if (options?.advantage) {
       roll = roll.alter(2, 0);
     }
     roll.toMessage({
       speaker: ChatMessage.getSpeaker({
-        actor: equipmentData.parent.getActor(),
+        actor: equipmentData.actor,
       }),
     });
   } else {

@@ -3,24 +3,11 @@ import { buildMessage } from "../../helpers/messages-builder/message-builder.mjs
 
 /**
  * Mixin for common functions used across document classes embedded in actors.
- * @template {import("@common/_types.mjs").Constructor<Document>} BaseDocument
+ * @template {import("@common/_types.mjs").Constructor<foundry.abstract.Document>} BaseDocument
  * @param {BaseDocument} Base
- * @returns {new (...args: any[]) => BaseDocument & {
- *   hookCall(incant: string, ...args: any[]): void;
- *   chat(): Promise<void>;
- *   chatImage(): Promise<void>;
- *   roll(options: object): Promise<void>;
- *   use(options: object): Promise<void>;
- *   duplicate(): Promise<ChildDocumentMixin>;
- *   buildRawMessage(options: MessageOptions): string;
- *   buildMessage(options: MessageOptions): Promise<string>;
- *   getActor(): TeriockActor;
- *   wikiPull(): Promise<void>;
- *   wikiOpen(): Promise<void>;
- * }}
  */
-export const ChildDocumentMixin = (Base) =>
-  class ChildDocumentMixin extends Base {
+export default (Base) => {
+  return class ChildDocumentMixin extends Base {
     /**
      * Checks if the document is fluent.
      * @returns {boolean} True if the document is fluent, false otherwise.
@@ -70,7 +57,7 @@ export const ChildDocumentMixin = (Base) =>
       content = `<div class="teriock">${content}</div>`;
       await ChatMessage.create({
         content: content,
-        speaker: ChatMessage.getSpeaker({ actor: this.getActor() }),
+        speaker: ChatMessage.getSpeaker({ actor: this.actor }),
       });
     }
 
@@ -82,18 +69,20 @@ export const ChildDocumentMixin = (Base) =>
       const img = this.img;
       if (img) {
         await ChatMessage.create({
-          content: `<div class="timage" data-src="${img}" style="display: flex; justify-content: center;"><img src="${img}" alt="${this.name}" class="teriock-image"></div>`,
-          speaker: ChatMessage.getSpeaker({ actor: this.getActor() }),
+          content: `
+            <div class="timage" data-src="${img}" style="display: flex; justify-content: center;">
+              <img src="${img}" alt="${this.name}" class="teriock-image">
+            </div>`,
+          speaker: ChatMessage.getSpeaker({ actor: this.actor }),
         });
       }
     }
 
     /**
      * Rolls the document, which by default sends a chat message.
-     * @param {object} options - Options for the roll.
      * @returns {Promise<void>} Promise that resolves when the roll is complete.
      */
-    async roll(options) {
+    async roll() {
       await this.chat();
     }
 
@@ -121,7 +110,7 @@ export const ChildDocumentMixin = (Base) =>
     /**
      * Builds a raw message string from the document's message parts.
      * @param {MessageOptions} options - Options for building the message.
-     * @returns {string} The raw message HTML string.
+     * @returns {HTMLDivElement} The raw message HTML.
      */
     buildRawMessage(options = {}) {
       let messageParts;
@@ -145,20 +134,6 @@ export const ChildDocumentMixin = (Base) =>
     }
 
     /**
-     * Gets the actor that owns this document.
-     * @returns {TeriockActor} The owning actor.
-     */
-    getActor() {
-      if (this.documentName === "Actor") {
-        return this;
-      } else if (this.parent?.documentName === "Actor") {
-        return this.parent;
-      } else {
-        return this.parent?.parent;
-      }
-    }
-
-    /**
      * Attempts to pull content from the wiki (default implementation shows error).
      * @returns {Promise<void>} Promise that resolves when the wiki pull is complete.
      */
@@ -174,3 +149,4 @@ export const ChildDocumentMixin = (Base) =>
       await this.wikiPull();
     }
   };
+};

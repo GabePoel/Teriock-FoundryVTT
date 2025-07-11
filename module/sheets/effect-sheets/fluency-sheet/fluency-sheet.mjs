@@ -1,7 +1,7 @@
 const { api } = foundry.applications;
 import { documentOptions } from "../../../helpers/constants/document-options.mjs";
 import { fieldContextMenu, tradecraftContextMenu } from "./connections/_context-menus.mjs";
-import TeriockBaseEffectSheet from "../base-sheet/base-sheet.mjs";
+import TeriockBaseEffectSheet from "../base-effect-sheet/base-effect-sheet.mjs";
 
 /**
  * Fluency sheet for Teriock system fluencies.
@@ -28,7 +28,7 @@ export default class TeriockFluencySheet extends api.HandlebarsApplicationMixin(
    */
   static PARTS = {
     all: {
-      template: "systems/teriock/templates/sheets/fluency-template/fluency-template.hbs",
+      template: "systems/teriock/templates/effect-templates/fluency-template/fluency-template.hbs",
       scrollable: [".window-content", ".tsheet-page", ".ab-sheet-everything"],
     },
   };

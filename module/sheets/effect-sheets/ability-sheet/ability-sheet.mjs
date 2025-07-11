@@ -1,7 +1,7 @@
 const { api } = foundry.applications;
 import { contextMenus } from "./connections/_context-menus.mjs";
 import { documentOptions } from "../../../helpers/constants/document-options.mjs";
-import TeriockBaseEffectSheet from "../base-sheet/base-sheet.mjs";
+import TeriockBaseEffectSheet from "../base-effect-sheet/base-effect-sheet.mjs";
 
 /**
  * Ability sheet for Teriock system abilities.
@@ -34,7 +34,7 @@ export default class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(
    */
   static PARTS = {
     all: {
-      template: "systems/teriock/templates/sheets/ability-template/ability-template.hbs",
+      template: "systems/teriock/templates/effect-templates/ability-template/ability-template.hbs",
       scrollable: [".window-content", ".tsheet-page", ".ab-sheet-everything"],
     },
   };
@@ -91,7 +91,6 @@ export default class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(
    */
   async _prepareContext(options) {
     const context = await super._prepareContext(options);
-
     const system = this.document.system;
     context.tab = this._tab;
     context.consequenceTab = this._consequenceTab;
@@ -148,22 +147,6 @@ export default class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(
   }
 
   /**
-   * Connects input elements with automatic updates.
-   * @param {HTMLElement} element - The input element to connect.
-   * @param {string} attribute - The attribute path to update.
-   * @param {Function} callback - Function to transform the input value.
-   */
-  _connectInput(element, attribute, callback) {
-    const update = (event) => {
-      const value = callback(event.currentTarget.value);
-      this.document.update({ [attribute]: value });
-    };
-
-    ["focusout", "change"].forEach((evt) => element.addEventListener(evt, update));
-    element.addEventListener("keyup", (e) => e.key === "Enter" && update(e));
-  }
-
-  /**
    * Handles the render event for the ability sheet.
    * Sets up context menus, tag management, and button mappings.
    * @param {object} context - The render context.
@@ -198,6 +181,30 @@ export default class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(
       ".ab-requirements-button": "system.requirements",
     };
     this._connectButtonMap(buttonMap);
+
+    this.element.querySelectorAll(".change-box-entry").forEach((entry) => {
+      entry.addEventListener("change", async () => {
+        const index = parseInt(entry.dataset.index, 10);
+        const key = entry.dataset.key;
+        const application = entry.dataset.application;
+        const updateString = `system.applies.${application}.changes`;
+        let value = entry.value;
+        if (!isNaN(value) && value !== "") {
+          const intValue = parseInt(value, 10);
+          if (!isNaN(intValue) && intValue.toString() === value.trim()) {
+            value = intValue;
+          }
+        }
+        if (typeof value === "string" && value.trim() !== "" && !isNaN(Number(value))) {
+          value = Number(value);
+        }
+        const changes = this.document.system.applies[application].changes;
+        if (index >= 0 && index < changes.length) {
+          changes[index][key] = value;
+          await this.document.update({ [updateString]: changes });
+        }
+      });
+    });
   }
 
   /**
@@ -255,9 +262,8 @@ export default class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(
     };
 
     for (const [selector, param] of Object.entries(tags)) {
-      html.on("click", selector, (e) => {
-        e.preventDefault();
-        doc.update({ [param]: false });
+      html.on("click", selector, async () => {
+        await doc.update({ [param]: false });
       });
     }
 
@@ -268,10 +274,10 @@ export default class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(
     };
 
     for (const [selector, param] of Object.entries(arrayTags)) {
-      this._connect(selector, "click", (e) => {
+      this._connect(selector, "click", async (e) => {
         const value = e.currentTarget.getAttribute("value");
         const list = doc.system[param.split(".")[1]].filter((e) => e !== value);
-        doc.update({ [param]: list });
+        await doc.update({ [param]: list });
       });
     }
 

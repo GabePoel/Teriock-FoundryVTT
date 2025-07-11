@@ -1,11 +1,14 @@
-import type TeriockBaseEffectData from "../base-data/base-data.mjs";
-import { TeriockFluency } from "../../../types/documents";
+import { TeriockBaseEffectData } from "../base-effect-data/base-effect-data.mjs";
+
+interface TeriockFluencySchema extends TeriockBaseEffectSchema {
+  /** Wiki Namespace */
+  readonly wikiNamespace: "Tradecraft";
+  /** Tradecarft field */
+  field: string;
+  /** Tradecraft */
+  tradecraft: string;
+}
 
 declare module "./fluency-data.mjs" {
-  export default interface TeriockFluencyData extends TeriockBaseEffectData {
-    parent: TeriockFluency;
-    wikiNamespace: string;
-    field: string;
-    tradecraft: string;
-  }
+  export default interface TeriockFluencyData extends TeriockFluencySchema, TeriockBaseEffectData {}
 }

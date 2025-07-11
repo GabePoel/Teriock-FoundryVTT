@@ -63,7 +63,7 @@ export function _defineSchema() {
       initial: "0",
       label: "Two-Handed Damage",
     }),
-    damageTypes: new fields.ArrayField(new fields.StringField()),
+    damageTypes: new fields.SetField(new fields.StringField()),
     weight: new fields.NumberField({
       initial: 0,
       integer: true,
@@ -82,7 +82,7 @@ export function _defineSchema() {
       label: "Short Range",
       min: 0,
     }),
-    equipmentClasses: new fields.ArrayField(
+    equipmentClasses: new fields.SetField(
       new fields.StringField({
         choices: equipmentOptions.equipmentClasses,
       }),
@@ -141,10 +141,6 @@ export function _defineSchema() {
         initial: 0,
         label: "Tier (Derived)",
       }),
-    }),
-    manaStoring: new fields.StringField({
-      initial: "",
-      label: "Mana Storing",
     }),
     identified: new fields.BooleanField({
       initial: true,

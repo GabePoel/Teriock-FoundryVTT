@@ -3,12 +3,11 @@ import { fetchWikiPageHTML, openWikiPage } from "../../helpers/wiki.mjs";
 /**
  * Mixin that provides wiki integration functionality for document data models.
  * Adds wiki page fetching, parsing, and opening capabilities.
- * @template {Function} Base - The base class constructor to extend.
- * @param {Base} Base - The base class to mix in with.
- * @returns {Base} The extended class with wiki functionality.
+ * @template {import("@common/_types.mjs").Constructor<foundry.abstract.TypeDataModel>} ModelClass
+ * @param {ModelClass} Base - The base class to mix in with.
  */
-export const WikiDataMixin = (Base) =>
-  class WikiDataMixin extends Base {
+export default (Base) => {
+  return class WikiDataMixin extends Base {
     /**
      * Gets the full wiki page path including namespace.
      * Constructs the wiki page identifier from namespace and parent name.
@@ -72,3 +71,4 @@ export const WikiDataMixin = (Base) =>
       openWikiPage(pageTitle);
     }
   };
+};

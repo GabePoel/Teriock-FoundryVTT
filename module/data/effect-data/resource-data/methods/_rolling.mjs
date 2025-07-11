@@ -32,10 +32,10 @@ async function use(resourceData, options) {
     }
 
     message = await foundry.applications.ux.TextEditor.enrichHTML(message);
-    const roll = new TeriockRoll(rollFormula, resourceData.parent.getActor()?.getRollData(), { message: message });
+    const roll = new TeriockRoll(rollFormula, resourceData.actor?.getRollData(), { message: message });
     await roll.toMessage({
       speaker: ChatMessage.getSpeaker({
-        actor: resourceData.parent.getActor(),
+        actor: resourceData.actor,
       }),
     });
     const result = roll.total;
@@ -45,6 +45,6 @@ async function use(resourceData, options) {
       await hookFunction?.(resourceData.parent, result);
     }
   } else {
-    resourceData.parent.chat();
+    await resourceData.parent.chat();
   }
 }

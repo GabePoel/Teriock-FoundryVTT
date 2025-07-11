@@ -2,8 +2,7 @@ import { toCamelCase } from "../../helpers/utils.mjs";
 
 /**
  * Builds effect types and keys from a document's valid effects.
- * @param {Document} document - The document to build effect types for.
- * @returns {{ effectTypes: object, effectKeys: object }} Object containing effect types and keys.
+ * @param {ParentDocumentMixin} document - The document to build effect types for.
  * @private
  */
 function _buildEffectTypes(document) {
@@ -21,19 +20,11 @@ function _buildEffectTypes(document) {
 
 /**
  * Mixin for common functions used across document classes that embed children.
- * @template {import("@common/_types.mjs").Constructor<Document>} BaseDocument
+ * @template {import("@common/_types.mjs").Constructor<foundry.abstract.Document>} BaseDocument
  * @param {BaseDocument} Base
- * @returns {new (...args: any[]) => BaseDocument & {
- *   validEffects: TeriockEffect[];
- *   buildEffectTypes(): { effectTypes: any; effectKeys: any };
- *   prepareDerivedData(): void;
- *   effectTypes: any;
- *   effectKeys: any;
- *   forceUpdate(): Promise<void>;
- * }}
  */
-export const ParentDocumentMixin = (Base) =>
-  class ParentDocumentMixin extends Base {
+export default (Base) => {
+  return class ParentDocumentMixin extends Base {
     /**
      * Gets the list of effects associated with this document.
      * Helper method for `prepareDerivedData()` that can be called explicitly.
@@ -72,3 +63,4 @@ export const ParentDocumentMixin = (Base) =>
       await this.update({ "system.updateCounter": !this.system.updateCounter });
     }
   };
+};

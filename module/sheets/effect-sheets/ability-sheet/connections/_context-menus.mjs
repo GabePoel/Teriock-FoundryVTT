@@ -24,7 +24,7 @@ function removeAttributeSaveChanges(changes) {
 /**
  * Creates context menus for ability configuration.
  * Provides comprehensive menu options for all ability properties and settings.
- * @param {TeriockAbility} ability - The ability to create context menus for.
+ * @param {TeriockEffect} ability - The ability to create context menus for.
  * @returns {object} Object containing all context menu configurations.
  */
 export function contextMenus(ability) {
@@ -332,7 +332,7 @@ export function contextMenus(ability) {
     attributeImprovement: ["int", "mov", "per", "snk", "str", "unp"].map((attr) => ({
       name: attr.toUpperCase(),
       icon: CONFIG.TERIOCK.icons[attr],
-      callback: () => {
+      callback: async () => {
         const existingChanges = ability.changes;
         const oldAttr = ability.system.improvements.attributeImprovement.attribute;
         const oldKey = oldAttr ? `system.attributes.${oldAttr}.value` : null;
@@ -340,14 +340,14 @@ export function contextMenus(ability) {
         const filteredChanges = oldKey
           ? existingChanges.filter((change) => change.key !== oldKey)
           : [...existingChanges];
-        const minVal = ability.system.improvements.attributeImprovement.minVal ?? 0;
+        const minVal = ability.system.improvements.attributeImprovement.minVal.toString();
         filteredChanges.push({
           key: newKey,
           mode: 2,
           value: minVal,
           priority: 20,
         });
-        ability.update({
+        await ability.update({
           "system.improvements.attributeImprovement.attribute": attr,
           changes: filteredChanges,
         });
@@ -356,7 +356,7 @@ export function contextMenus(ability) {
     attributeImprovementMinVal: Array.from({ length: 9 }, (_, i) => i - 3).map((i) => ({
       name: i.toString(),
       icon: CONFIG.TERIOCK.icons.numerical,
-      callback: () => {
+      callback: async () => {
         const existingChanges = ability.changes;
         const key = `system.attributes.${ability.system.improvements.attributeImprovement.attribute}.value`;
         const filteredChanges = existingChanges.filter((change) => change.key !== key);
@@ -368,7 +368,7 @@ export function contextMenus(ability) {
           value: i,
           priority: 20,
         });
-        ability.update({
+        await ability.update({
           "system.improvements.attributeImprovement.minVal": i,
           changes: existingChanges,
         });
@@ -377,7 +377,7 @@ export function contextMenus(ability) {
     featSaveImprovement: ["int", "mov", "per", "snk", "str", "unp"].map((attr) => ({
       name: attr.toUpperCase(),
       icon: CONFIG.TERIOCK.icons[attr],
-      callback: () => {
+      callback: async () => {
         const existingChanges = ability.changes;
         const amount = ability.system.improvements.featSaveImprovement.amount || "proficiency";
         const saveKey = amount === "fluency" ? "saveFluent" : "saveProficient";
@@ -389,7 +389,7 @@ export function contextMenus(ability) {
           value: true,
           priority: 20,
         });
-        ability.update({
+        await ability.update({
           "system.improvements.featSaveImprovement.attribute": attr,
           changes: filteredChanges,
         });
@@ -398,7 +398,7 @@ export function contextMenus(ability) {
     featSaveImprovementAmount: ["proficiency", "fluency"].map((level) => ({
       name: capitalize(level),
       icon: CONFIG.TERIOCK.icons[level],
-      callback: () => {
+      callback: async () => {
         const existingChanges = ability.changes;
         const attr = ability.system.improvements.featSaveImprovement.attribute;
         if (!attr) return;
@@ -411,7 +411,7 @@ export function contextMenus(ability) {
           value: true,
           priority: 20,
         });
-        ability.update({
+        await ability.update({
           "system.improvements.featSaveImprovement.amount": level,
           changes: filteredChanges,
         });
@@ -420,8 +420,8 @@ export function contextMenus(ability) {
     abilityType: Object.entries(fetch("abilityType")).map(([key, value]) => ({
       name: value.name,
       icon: makeIcon(value.icon, CONFIG.TERIOCK.iconStyles.contextMenu),
-      callback: () => {
-        ability.update({
+      callback: async () => {
+        await ability.update({
           "system.abilityType": key,
         });
       },

@@ -1,6 +1,6 @@
 const { api } = foundry.applications;
 import { documentOptions } from "../../../helpers/constants/document-options.mjs";
-import TeriockBaseActorSheet from "../base-sheet/base-sheet.mjs";
+import TeriockBaseActorSheet from "../base-actor-sheet/base-actor-sheet.mjs";
 
 /**
  * Character sheet for Teriock system characters.
@@ -31,7 +31,7 @@ export default class TeriockCharacterSheet extends api.HandlebarsApplicationMixi
    */
   static PARTS = {
     all: {
-      template: "systems/teriock/templates/sheets/character-template/character-template.hbs",
+      template: "systems/teriock/templates/actor-templates/character-template/character-template.hbs",
       scrollable: [".character-sidebar", ".character-tab-content"],
     },
   };

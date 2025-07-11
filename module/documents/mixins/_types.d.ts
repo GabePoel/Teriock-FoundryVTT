@@ -7,6 +7,8 @@ export interface ChildDocumentMixin {
 
 export interface ParentDocumentMixinInterface {
   validEffects: TeriockEffect[];
+  effectTypes: Record<string, TeriockEffect[]>;
+  effectKeys: Record<string, Set<string>>;
 
   buildEffectTypes(): {
     effectTypes: Record<string, TeriockEffect[]>;
@@ -14,7 +16,4 @@ export interface ParentDocumentMixinInterface {
   };
 
   prepareDerivedData(): void;
-
-  effectTypes: Record<string, TeriockEffect[]>;
-  effectKeys: Record<string, Set<string>>;
 }

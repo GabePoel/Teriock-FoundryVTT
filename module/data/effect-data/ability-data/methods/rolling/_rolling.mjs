@@ -8,7 +8,7 @@ import { _generateRolls } from "./_roll-object-generation.mjs";
  * Initiates an ability roll with the specified options.
  * Handles cost calculation, resource spending, and roll generation based on interaction type.
  * @param {TeriockAbilityData} abilityData - The data of the ability being rolled for.
- * @param {CommonRollOptions} options - Options for the ability roll including advantage/disadvantage.
+ * @param {object} options - Options for the ability roll including advantage/disadvantage.
  * @returns {Promise<void>} Promise that resolves when the roll is complete.
  * @todo Finish modularizing and cleaning this up.
  * @private
@@ -32,7 +32,7 @@ export async function _roll(abilityData, options) {
     abilityData: abilityData,
     chatData: {
       message: "",
-      speaker: ChatMessage.getSpeaker({ actor: abilityData.parent.getActor() }),
+      speaker: ChatMessage.getSpeaker({ actor: abilityData.actor }),
       rolls: [],
       buttons: [],
     },
@@ -49,7 +49,7 @@ export async function _roll(abilityData, options) {
 
   // Subtract MP/HP costs from actor
 
-  const actor = abilityData.parent.getActor();
+  const actor = abilityData.actor;
   if (mpSpent > 0) {
     const newMp = Math.max(actor.system.mp.value - mpSpent, actor.system.mp.min ?? 0);
     await actor.update({ "system.mp.value": newMp });
@@ -96,7 +96,7 @@ export async function _roll(abilityData, options) {
     const macro = await foundry.utils.fromUuid(abilityData.applies.macro);
     if (macro) {
       macro.execute({
-        actor: abilityData.parent.getActor(),
+        actor: abilityData.actor,
         useData: rollConfig.useData,
         abilityData: rollConfig.abilityData,
       });
@@ -106,7 +106,7 @@ export async function _roll(abilityData, options) {
   await _generateRolls(rollConfig);
 
   if (abilityData.interaction === "attack") {
-    const actor = abilityData.parent.getActor();
+    const actor = abilityData.actor;
     await actor.update({ "system.attackPenalty": actor.system.attackPenalty - 3 });
   }
 
@@ -128,7 +128,7 @@ export async function _roll(abilityData, options) {
  * @returns {Promise<void>}
  */
 async function stageUse(rollConfig) {
-  rollConfig.useData.rollData = rollConfig.abilityData.parent.getActor().getRollData();
+  rollConfig.useData.rollData = rollConfig.abilityData.actor.getRollData();
 
   // Calculate costs
   rollConfig.useData.costs.hp = await calculateCost(rollConfig.abilityData.costs.hp, rollConfig.useData.rollData);

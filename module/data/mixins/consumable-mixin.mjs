@@ -3,12 +3,11 @@ import { smartEvaluateSync } from "../../helpers/utils.mjs";
 /**
  * Mixin that provides consumable document functionality.
  * Adds quantity management, automatic consumption, and quantity validation capabilities.
- * @template {Function} Base - The base class constructor to extend.
- * @param {Base} Base - The base class to mix in with.
- * @returns {Base} The extended class with consumable functionality.
+ * @template {import("@common/_types.mjs").Constructor<foundry.abstract.TypeDataModel>} ModelClass
+ * @param {ModelClass} Base - The base class to mix in with.
  */
-export const ConsumableDataMixin = (Base) =>
-  class ConsumableDataMixin extends Base {
+export default (Base) => {
+  return class ConsumableDataMixin extends Base {
     /**
      * Uses the consumable item, triggering consumption logic.
      * Calls the parent use method and then consumes one unit of the item.
@@ -64,8 +63,8 @@ export const ConsumableDataMixin = (Base) =>
           quantity = 0;
         }
         let maxQuantity = this.maxQuantity.derived;
-        if (maxQuantity.derived) {
-          quantity = Math.min(maxQuantity.derived, quantity + 1);
+        if (maxQuantity) {
+          quantity = Math.min(maxQuantity, quantity + 1);
         } else {
           quantity = Math.max(0, quantity + 1);
         }
@@ -75,3 +74,4 @@ export const ConsumableDataMixin = (Base) =>
       }
     }
   };
+};

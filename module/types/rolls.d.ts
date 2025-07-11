@@ -1,23 +1,28 @@
 /**
  * Options for performing a d20 roll.
- *
- * @property advantage - If true, the roll is made with advantage.
- * @property disadvantage - If true, the roll is made with disadvantage.
  */
 export type CommonRollOptions = {
+  /** Is this roll made with advantage? */
   advantage?: boolean;
+  /** Is this roll made with disadvantage? */
   disadvantage?: boolean;
+  /** Chat Message HTML */
+  message?: string;
 };
 
 /**
  * Options for modifying the behavior of a condition (2d4) roll.
- *
- * @property increaseDie - If true, roll 3d4.
- * @property decreaseDie - If true, roll 1d4.
- * @property skip - If true, skips the roll. Automatically removes condition.
  */
 export type ConditionRollOptions = {
+  /** Roll 3d4? */
   increaseDie?: boolean;
+  /** Roll 1d4? */
   decreaseDie?: boolean;
+  /** Should the roll be skipped and the condition removed automatically? */
   skip?: boolean;
 };
+
+/**
+ * Allowable dice values.
+ */
+export type PolyhedralDie = "d4" | "d6" | "d8" | "d10" | "d12" | "d20";

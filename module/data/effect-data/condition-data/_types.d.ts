@@ -1,9 +1,11 @@
-import type TeriockBaseEffectData from "../base-data/base-data.mjs";
-import { TeriockCondition } from "../../../types/documents";
+import { TeriockBaseEffectData } from "../base-effect-data/base-effect-data.mjs";
+import { TeriockBaseEffectSchema } from "../base-effect-data/_types";
+
+export interface TeriockConditionSchema extends TeriockBaseEffectSchema {
+  /** Wiki Namespace */
+  readonly wikiNamespace: "Condition";
+}
 
 declare module "./condition-data.mjs" {
-  export default interface TeriockConditionData extends TeriockBaseEffectData {
-    parent: TeriockCondition;
-    wikiNamespace: string;
-  }
+  export default interface TeriockConditionData extends TeriockConditionSchema, TeriockBaseEffectData {}
 }

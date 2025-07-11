@@ -19,7 +19,7 @@ export const resourceOptions = {
       name: "Heal",
       icon: "hand-holding-medical",
       callback: async (resource, amount) => {
-        const actor = resource.getActor();
+        const actor = resource.actor;
         if (actor) {
           await actor.takeHeal(amount);
         }
@@ -29,7 +29,7 @@ export const resourceOptions = {
       name: "Revitalize",
       icon: "hand-holding-droplet",
       callback: async (resource, amount) => {
-        const actor = resource.getActor();
+        const actor = resource.actor;
         if (actor) {
           await actor.takeRevitalize(amount);
         }
@@ -39,7 +39,7 @@ export const resourceOptions = {
       name: "Damage",
       icon: "heart",
       callback: async (resource, amount) => {
-        const actor = resource.getActor();
+        const actor = resource.actor;
         if (actor) {
           await actor.takeDamage(amount);
         }
@@ -49,7 +49,7 @@ export const resourceOptions = {
       name: "Drain",
       icon: "brain",
       callback: async (resource, amount) => {
-        const actor = resource.getActor();
+        const actor = resource.actor;
         if (actor) {
           await actor.takeDrain(amount);
         }
@@ -59,7 +59,7 @@ export const resourceOptions = {
       name: "Wither",
       icon: "hourglass-half",
       callback: async (resource, amount) => {
-        const actor = resource.getActor();
+        const actor = resource.actor;
         if (actor) {
           await actor.takeWither(amount);
         }

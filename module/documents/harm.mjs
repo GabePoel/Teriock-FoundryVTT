@@ -7,5 +7,5 @@ import TeriockRoll from "./roll.mjs";
  * @extends {TeriockRoll}
  */
 export default class TeriockHarmRoll extends TeriockRoll {
-  static CHAT_TEMPLATE = "systems/teriock/templates/chat/harm.hbs";
+  static CHAT_TEMPLATE = "systems/teriock/templates/roll-templates/harm.hbs";
 }

@@ -1,13 +1,13 @@
 const { api } = foundry.applications;
+import { BaseTeriockItem } from "./_base.mjs";
 import { createAbility } from "../helpers/create-effects.mjs";
 import { fetchCategoryMembers } from "../helpers/wiki.mjs";
-import { ChildDocumentMixin } from "./mixins/child-mixin.mjs";
-import { ParentDocumentMixin } from "./mixins/parent-mixin.mjs";
 
 /**
- * @extends {foundry.documents.Item}
+ * @property {TeriockBaseItemData} system
+ * @property {TeriockBaseItemSheet} sheet
  */
-export default class TeriockItem extends ParentDocumentMixin(ChildDocumentMixin(foundry.documents.Item)) {
+export default class TeriockItem extends BaseTeriockItem {
   /**
    * Gets the valid effects for this item.
    * @inheritdoc
@@ -73,7 +73,7 @@ export default class TeriockItem extends ParentDocumentMixin(ChildDocumentMixin(
       content: `<input type="text" name="pullInput" placeholder="${pullTypeName} Name" />`,
       ok: {
         label: "Pull",
-        callback: (event, button, dialog) => {
+        callback: (event, button) => {
           let input = button.form.elements.pullInput.value;
           if (input.startsWith(`${pullTypeName}:`)) {
             input = input.slice(`${pullTypeName}:`.length);
@@ -86,11 +86,12 @@ export default class TeriockItem extends ParentDocumentMixin(ChildDocumentMixin(
     const progress = ui.notifications.info(`Pulling Category:${toPull} from wiki.`, { progress: true });
     let pct = 0;
     for (const page of pages) {
-      pct += 1 / pages.length;
       progress.update({ pct: pct, message: `Pulling ${page.title} from wiki.` });
       if (page.title.startsWith("Ability:")) {
         await createAbility(this, page.title.replace(/^Ability:/, ""), { notify: false });
       }
+      pct += 1 / pages.length;
+      progress.update({ pct: pct, message: `Pulling ${page.title} from wiki.` });
     }
   }
 

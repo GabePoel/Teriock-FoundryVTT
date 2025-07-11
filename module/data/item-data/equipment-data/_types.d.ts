@@ -1,41 +1,75 @@
-import type TeriockBaseItemData from "../base-data/base-data.mjs";
-import { TeriockEquipment } from "../../../types/documents";
+import { TeriockBaseItemData } from "../base-item-data/base-item-data.mjs";
+import { TeriockBaseItemSchema } from "../base-item-data/_types";
+
+export interface TeriockEquipmentSchema extends TeriockBaseItemSchema {
+  /** Wiki Namespace */
+  readonly wikiNamespace: "Equipment";
+  /** Is the equipment equipped? */
+  equipped: boolean;
+  /** Is the equipment glued? */
+  glued: boolean;
+  /** Is the equipment shattered? */
+  shattered: boolean;
+  /** Is the equipment dampened? */
+  dampened: boolean;
+  /** Is the equipment consumable? */
+  consumable: boolean;
+  /** Quantity (if consumable) */
+  quantity: number;
+  /** Max Quantity (if consumable) */
+  maxQuantity: {
+    /** Raw Max Quantity Value */
+    raw: string;
+    /** Derived Max Quantity Value */
+    derived: number;
+  };
+  /** Is the equipment ranged? */
+  ranged: boolean;
+  /** Damage Dice */
+  damage: string;
+  /** Two-handed Damage Dice */
+  twoHandedDamage: string;
+  /** Damage Types */
+  damageTypes: Set<string>;
+  /** Weight (lb) */
+  weight: number;
+  /** Range (ft) (if ranged) */
+  range: number;
+  /** Short Range (ft) (if ranged) */
+  shortRange: number;
+  /** Equipment Classes */
+  equipmentClasses: Set<string>;
+  /** Minimum STR */
+  minStr: number;
+  /** Style Bonus (Weapon Fighting Style) */
+  sb: string;
+  /** Armor Value */
+  av: number;
+  /** Block Value */
+  bv: number;
+  /** Special Rules (Weapon Fighting Style) */
+  specialRules: string;
+  /** Canonical Equipment Type */
+  equipmentType: string;
+  /** Power Level */
+  powerLevel: string;
+  /** Flaws */
+  flaws: string;
+  /** Notes */
+  notes: string;
+  /** Presence Tier */
+  tier: {
+    /** Raw Presence Tier */
+    raw: string;
+    /** Derived Presence Tier */
+    derived: number;
+  };
+  /** Is the equipment identified? */
+  identified: boolean;
+  /** Identification Reference Equipment UUID */
+  reference: string;
+}
 
 declare module "./equipment-data.mjs" {
-  export default interface TeriockEquipmentData extends TeriockBaseItemData {
-    parent: TeriockEquipment;
-    wikiNamespace: string;
-    equipped: boolean;
-    glued: boolean;
-    shattered: boolean;
-    dampened: boolean;
-    consumable: boolean;
-    quantity: number;
-    maxQuantity: {
-      raw: string;
-      derived: number;
-    };
-    ranged: boolean;
-    damage: string;
-    twoHandedDamage: string;
-    damageTypes: string[];
-    weight: number;
-    range: number;
-    shortRange: number;
-    equipmentClasses: string[];
-    minStr: number;
-    sb: string;
-    av: number;
-    bv: number;
-    specialRules: string;
-    equipmentType: string;
-    powerLevel: string;
-    flaws: string;
-    notes: string;
-    tier: number;
-    fullTier: string;
-    manaStoring: string;
-    identifier: boolean;
-    reference: string;
-  }
+  export default interface TeriockEquipmentData extends TeriockEquipmentSchema, TeriockBaseItemData {}
 }

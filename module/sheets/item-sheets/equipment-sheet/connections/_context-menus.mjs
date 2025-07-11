@@ -3,7 +3,7 @@ import { makeIcon } from "../../../../helpers/utils.mjs";
 /**
  * Creates a context menu for selecting power levels within an equipment item.
  * Generates options for all available power levels, excluding "unknown".
- * @param {Item} item - The equipment item to create the context menu for.
+ * @param {TeriockItem} item - The equipment item to create the context menu for.
  * @returns {Array} Array of context menu options for power level selection.
  */
 export function powerLevelContextMenu(item) {
@@ -18,8 +18,8 @@ export function powerLevelContextMenu(item) {
     const option = {
       name: powerLevelName,
       icon: icon,
-      callback: () => {
-        item.update({
+      callback: async () => {
+        await item.update({
           system: {
             powerLevel: powerLevel,
           },
@@ -34,7 +34,7 @@ export function powerLevelContextMenu(item) {
 /**
  * Creates a context menu for selecting fonts within an equipment item.
  * Generates options for all available fonts with a "None" option at the beginning.
- * @param {Item} item - The equipment item to create the context menu for.
+ * @param {TeriockItem} item - The equipment item to create the context menu for.
  * @returns {Array} Array of context menu options for font selection.
  */
 export function fontContextMenu(item) {
@@ -48,8 +48,8 @@ export function fontContextMenu(item) {
     const option = {
       name: fontName,
       icon: icon,
-      callback: () => {
-        item.update({
+      callback: async () => {
+        await item.update({
           system: {
             font: fonts[font].cssClass,
           },
@@ -61,8 +61,8 @@ export function fontContextMenu(item) {
   const noneOption = {
     name: "None",
     icon: makeIcon("xmark", iconStyle),
-    callback: () => {
-      item.update({
+    callback: async () => {
+      await item.update({
         system: {
           font: "",
         },

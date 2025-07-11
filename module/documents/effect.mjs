@@ -1,9 +1,11 @@
-import { ChildDocumentMixin } from "./mixins/child-mixin.mjs";
+import { BaseTeriockEffect } from "./_base.mjs";
 
 /**
- * @extends {foundry.documents.ActiveEffect}
+ * @property {TeriockBaseEffectData} system
+ * @property {TeriockBaseEffectSheet} sheet
+ * @property {TeriockActor|TeriockItem} parent
  */
-export default class TeriockEffect extends ChildDocumentMixin(foundry.documents.ActiveEffect) {
+export default class TeriockEffect extends BaseTeriockEffect {
   /**
    * Checks if the effect is suppressed, combining system suppression with parent suppression.
    * @override
@@ -12,6 +14,18 @@ export default class TeriockEffect extends ChildDocumentMixin(foundry.documents.
   get isSuppressed() {
     let suppressed = super.isSuppressed;
     return this.system.suppressed || suppressed;
+  }
+
+  /**
+   * Returns the actor that this effect is associated with, if there is one.
+   * @returns {TeriockActor}
+   */
+  get actor() {
+    if (this.parent?.documentName === "Actor") {
+      return this.parent;
+    } else {
+      return this.parent.actor;
+    }
   }
 
   /**
@@ -142,11 +156,12 @@ export default class TeriockEffect extends ChildDocumentMixin(foundry.documents.
    */
   get allSubsAsync() {
     return async () => {
+      /** @type {TeriockEffect[]} */
       const allSubEffects = [];
-      const subEffects = await this.subsAsync;
+      const subEffects = await this.subsAsync();
       for (const subEffect of subEffects) {
         allSubEffects.push(subEffect);
-        const subSubEffects = await subEffect.allSubsAsync;
+        const subSubEffects = await subEffect.allSubsAsync();
         allSubEffects.push(...subSubEffects);
       }
       return allSubEffects;
@@ -187,21 +202,6 @@ export default class TeriockEffect extends ChildDocumentMixin(foundry.documents.
    */
   prepareDerivedData() {
     super.prepareDerivedData();
-    if (this.type === "ability" && this.system.maneuver === "passive") {
-      if (this.system.applies.base.changes.length > 0) {
-        this.changes = this.system.applies.base.changes;
-      }
-      if (this.isProficient) {
-        if (this.system.applies.proficient.changes.length > 0) {
-          this.changes = this.system.applies.proficient.changes;
-        }
-      }
-      if (this.isFluent) {
-        if (this.system.applies.fluent.changes.length > 0) {
-          this.changes = this.system.applies.fluent.changes;
-        }
-      }
-    }
     if (this.type === "attunement") {
       this.changes = [
         { key: "system.attunements", mode: 2, value: this.system.target, priority: 10 },

@@ -1,0 +1,39 @@
+<div class="{{cssClass}} tsheet-page">
+  <div class="ab-sheet-everything">
+    <div class="ab-sheet-top">
+      {{> "systems/teriock/templates/shared/header.hbs"}}
+      <div class="ab-bars">
+        {{> "systems/teriock/templates/item-templates/equipment-template/bars/eq-status-bar.hbs"}}
+        {{> "systems/teriock/templates/item-templates/equipment-template/bars/eq-consumable-bar.hbs"}}
+        {{> "systems/teriock/templates/item-templates/equipment-template/bars/eq-attack-bar.hbs"}}
+        {{> "systems/teriock/templates/item-templates/equipment-template/bars/eq-load-bar.hbs"}}
+      </div>
+    </div>
+    {{> "systems/teriock/templates/item-templates/equipment-template/parts/eq-menu.hbs"}}
+    <div class="ab-main">
+      <div class="ab-tags-all">
+        {{> "systems/teriock/templates/item-templates/equipment-template/tags/eq-classes-tags.hbs"}}
+      </div>
+      {{#if (exists system.description)}}
+        {{> "systems/teriock/templates/item-templates/equipment-template/entries/eq-description.hbs"}}
+      {{/if}}
+      {{#if (exists system.notes)}}
+        {{> "systems/teriock/templates/item-templates/equipment-template/entries/eq-notes.hbs"}}
+      {{/if}}
+      {{#if (exists system.specialRules)}}
+        {{> "systems/teriock/templates/item-templates/equipment-template/entries/eq-special-rules.hbs"}}
+      {{/if}}
+      {{#if (exists system.flaws)}}
+        {{> "systems/teriock/templates/item-templates/equipment-template/entries/eq-flaws.hbs"}}
+      {{/if}}
+    </div>
+    {{#if (or editable (exists properties))}}
+      <div class="ab-main">
+        {{#if editable}}
+          <button class="createProperty" data-action="createProperty">Add Property</button>{{/if}}
+        {{abilityCards properties system}}
+      </div>
+    {{/if}}
+    {{> "systems/teriock/templates/shared/effects.hbs"}}
+  </div>
+</div>

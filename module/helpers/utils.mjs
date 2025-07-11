@@ -109,7 +109,7 @@ export function smartEvaluateSync(formula, document, options = {}) {
   if (!isNaN(Number(formula))) {
     return Number(formula);
   }
-  const rollData = document.getActor()?.getRollData() || {};
+  const rollData = document.actor?.getRollData() || {};
   return evaluateSync(formula, rollData, options);
 }
 

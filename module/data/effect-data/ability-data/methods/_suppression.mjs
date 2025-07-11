@@ -19,7 +19,7 @@ export function _suppressed(abilityData) {
       suppressed = !attuned;
     }
   }
-  if (!suppressed && abilityData.parent.getActor() && abilityData.parent.supSync) {
+  if (!suppressed && abilityData.actor && abilityData.parent.supSync) {
     const sups = abilityData.parent.allSupsSync;
     if (sups.some((sup) => !sup.modifiesActor)) {
       suppressed = true;

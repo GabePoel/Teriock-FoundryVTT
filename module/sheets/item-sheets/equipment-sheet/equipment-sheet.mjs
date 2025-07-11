@@ -1,8 +1,8 @@
 const { HandlebarsApplicationMixin } = foundry.applications.api;
+import TeriockBaseItemSheet from "../base-item-sheet/base-item-sheet.mjs";
 import { cleanCapitalization } from "../../../helpers/clean.mjs";
 import { documentOptions } from "../../../helpers/constants/document-options.mjs";
 import { fontContextMenu, powerLevelContextMenu } from "./connections/_context-menus.mjs";
-import TeriockBaseItemSheet from "../base-sheet/base-sheet.mjs";
 
 /**
  * Equipment sheet for Teriock system equipment.
@@ -35,7 +35,7 @@ export default class TeriockEquipmentSheet extends HandlebarsApplicationMixin(Te
    */
   static PARTS = {
     all: {
-      template: "systems/teriock/templates/sheets/equipment-template/equipment-template.hbs",
+      template: "systems/teriock/templates/item-templates/equipment-template/equipment-template.hbs",
       scrollable: [".window-content", ".tsheet-page", ".ab-sheet-everything"],
     },
   };
@@ -120,8 +120,6 @@ export default class TeriockEquipmentSheet extends HandlebarsApplicationMixin(Te
       ".ab-description-button": "system.description",
       ".ab-flaws-button": "system.flaws",
       ".ab-notes-button": "system.notes",
-      // ".ab-full-tier-button": "system.fullTier",
-      // ".ab-mana-storing-button": "system.manaStoring",
     };
     this._connectButtonMap(buttonMap);
   }
@@ -139,9 +137,9 @@ export default class TeriockEquipmentSheet extends HandlebarsApplicationMixin(Te
     };
 
     for (const [selector, path] of Object.entries(flagTags)) {
-      html.on("click", selector, (e) => {
+      html.on("click", selector, async (e) => {
         e.preventDefault();
-        doc.update({ [path]: false });
+        await doc.update({ [path]: false });
       });
     }
 
@@ -153,10 +151,10 @@ export default class TeriockEquipmentSheet extends HandlebarsApplicationMixin(Te
     };
 
     for (const [selector, path] of Object.entries(arrayTags)) {
-      this._connect(selector, "click", (e) => {
+      this._connect(selector, "click", async (e) => {
         const val = e.currentTarget.getAttribute("value");
         const current = doc.system[path].filter((v) => v !== val);
-        doc.update({ [`system.${path}`]: current });
+        await doc.update({ [`system.${path}`]: current });
       });
     }
 

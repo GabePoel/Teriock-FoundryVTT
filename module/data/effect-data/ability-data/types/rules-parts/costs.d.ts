@@ -17,7 +17,7 @@ export interface NumberCost {
     static: number;
     formula: string;
     variable: string;
-  }
+  };
 }
 
 /**

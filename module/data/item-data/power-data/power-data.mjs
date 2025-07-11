@@ -1,18 +1,13 @@
 const { fields } = foundry.data;
 import { _messageParts } from "./methods/_messages.mjs";
-import TeriockBaseItemData from "../base-data/base-data.mjs";
+import TeriockBaseItemData from "../base-item-data/base-item-data.mjs";
 
 /**
  * Power-specific item data model.
  * Handles power functionality including type, flaws, proficiency, and lifecycle management.
- * @extends {TeriockBaseItemData}
  */
 export default class TeriockPowerData extends TeriockBaseItemData {
-  /**
-   * Gets the metadata for the power data model.
-   * @inheritdoc
-   * @returns {object} The metadata object with power type information.
-   */
+  /** @inheritDoc */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
       type: "power",
@@ -22,8 +17,8 @@ export default class TeriockPowerData extends TeriockBaseItemData {
   /**
    * Gets the message parts for the power.
    * Combines base message parts with power-specific message parts.
-   * @override
    * @returns {MessageParts} Object containing message parts for the power.
+   * @override
    */
   get messageParts() {
     return {
@@ -37,9 +32,7 @@ export default class TeriockPowerData extends TeriockBaseItemData {
    * @returns {object} The schema definition for the power data.
    */
   static defineSchema() {
-    const commonData = super.defineSchema();
-    return {
-      ...commonData,
+    return foundry.utils.mergeObject(super.defineSchema(), {
       type: new fields.StringField({
         initial: "other",
         label: "Power Type",
@@ -64,6 +57,6 @@ export default class TeriockPowerData extends TeriockBaseItemData {
         min: 0,
         label: "Age of Maturity",
       }),
-    };
+    });
   }
 }

@@ -1,5 +1,5 @@
 const { api } = foundry.applications;
-import TeriockBaseEffectSheet from "../base-sheet/base-sheet.mjs";
+import TeriockBaseEffectSheet from "../base-effect-sheet/base-effect-sheet.mjs";
 
 /**
  * Effect sheet for Teriock system effects.

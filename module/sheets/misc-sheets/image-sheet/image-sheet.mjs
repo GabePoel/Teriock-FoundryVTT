@@ -32,7 +32,7 @@ export default class TeriockImageSheet extends api.HandlebarsApplicationMixin(ap
    */
   static PARTS = {
     image: {
-      template: "systems/teriock/templates/common/image.hbs",
+      template: "systems/teriock/templates/shared/image.hbs",
       scrollable: [""],
     },
   };

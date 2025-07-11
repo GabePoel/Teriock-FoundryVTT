@@ -1,7 +1,7 @@
 const { HandlebarsApplicationMixin } = foundry.applications.api;
 import { documentOptions } from "../../../helpers/constants/document-options.mjs";
 import { powerContextMenu } from "./connections/_context-menus.mjs";
-import TeriockBaseItemSheet from "../base-sheet/base-sheet.mjs";
+import TeriockBaseItemSheet from "../base-item-sheet/base-item-sheet.mjs";
 
 /**
  * Power sheet for Teriock system powers.
@@ -30,7 +30,7 @@ export default class TeriockPowerSheet extends HandlebarsApplicationMixin(Terioc
    */
   static PARTS = {
     all: {
-      template: "systems/teriock/templates/sheets/power-template/power-template.hbs",
+      template: "systems/teriock/templates/item-templates/power-template/power-template.hbs",
       scrollable: [".window-content", ".tsheet-page", ".ab-sheet-everything"],
     },
   };

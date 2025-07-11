@@ -4,7 +4,7 @@
  * functions that Teriock requires.
  */
 export default class TeriockRoll extends foundry.dice.Roll {
-  static CHAT_TEMPLATE = "systems/teriock/templates/chat/roll.hbs";
+  static CHAT_TEMPLATE = "systems/teriock/templates/roll-templates/roll.hbs";
 
   /**
    * Creates a new TeriockRoll instance with enforced parsing and enrichment options.

@@ -1,7 +1,7 @@
 const { api } = foundry.applications;
 import { callbackContextMenu } from "./connections/_context-menus.mjs";
 import { documentOptions } from "../../../helpers/constants/document-options.mjs";
-import TeriockBaseEffectSheet from "../base-sheet/base-sheet.mjs";
+import TeriockBaseEffectSheet from "../base-effect-sheet/base-effect-sheet.mjs";
 
 /**
  * Resource sheet for Teriock system resources.
@@ -28,7 +28,7 @@ export default class TeriockResourceSheet extends api.HandlebarsApplicationMixin
    */
   static PARTS = {
     all: {
-      template: "systems/teriock/templates/sheets/resource-template/resource-template.hbs",
+      template: "systems/teriock/templates/effect-templates/resource-template/resource-template.hbs",
       scrollable: [".window-content", ".tsheet-page", ".ab-sheet-everything"],
     },
   };
@@ -38,8 +38,8 @@ export default class TeriockResourceSheet extends api.HandlebarsApplicationMixin
    * Sets up context menu for function callback selection.
    * @override
    */
-  _onRender() {
-    super._onRender();
+  _onRender(options, context) {
+    super._onRender(options, context);
     this._connectContextMenu(".function-box", callbackContextMenu(this.document), "click");
   }
 }

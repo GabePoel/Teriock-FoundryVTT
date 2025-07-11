@@ -7,6 +7,18 @@
  * @private
  */
 export function _prepareDerivedData(system) {
+  if (system.maneuver === "passive") {
+    if (system.applies.base.changes.length > 0) {
+      system.parent.changes = system.applies.base.changes;
+    }
+    if (system.parent.isProficient && system.applies.proficient.changes.length > 0) {
+      system.parent.changes = system.applies.proficient.changes;
+    }
+    if (system.parent.isFluent && system.applies.fluent.changes.length > 0) {
+      system.parent.changes = system.applies.fluent.changes;
+    }
+  }
+
   const subUuids = [];
   if (system.subIds?.length > 0) {
     for (const id of system.subIds) {

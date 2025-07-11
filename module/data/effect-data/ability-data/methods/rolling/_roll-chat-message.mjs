@@ -57,7 +57,7 @@ export async function _buildButtons(rollConfig) {
   }
 
   // Effect button
-  const effectData = await _generateEffect(abilityData, abilityData.parent.getActor(), useData.modifiers.heightened);
+  const effectData = await _generateEffect(abilityData, abilityData.actor, useData.modifiers.heightened);
   if (effectData) {
     buttons.push({
       ...BUTTON_CONFIGS.effect,

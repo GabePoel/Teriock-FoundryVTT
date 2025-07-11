@@ -1,4 +1,4 @@
-import TeriockBaseActorData from "../base-data/base-data.mjs";
+import TeriockBaseActorData from "../base-actor-data/base-actor-data.mjs";
 
 /**
  * Character-specific actor data model. Currently, there are only characters.

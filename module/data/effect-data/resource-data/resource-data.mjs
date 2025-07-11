@@ -2,20 +2,15 @@ const { fields } = foundry.data;
 import { _messageParts } from "./methods/_messages.mjs";
 import { _migrateData } from "./methods/_migrate-data.mjs";
 import { _roll } from "./methods/_rolling.mjs";
-import { ConsumableDataMixin } from "../../mixins/consumable-mixin.mjs";
-import TeriockBaseEffectData from "../base-data/base-data.mjs";
+import ConsumableDataMixin from "../../mixins/consumable-mixin.mjs";
+import TeriockBaseEffectData from "../base-effect-data/base-effect-data.mjs";
 
 /**
  * Resource-specific effect data model.
- * Handles resource functionality including consumable behavior, quantity management, and rolling.
  * @extends {TeriockBaseEffectData}
  */
 export default class TeriockResourceData extends ConsumableDataMixin(TeriockBaseEffectData) {
-  /**
-   * Gets the metadata for the resource data model.
-   * @inheritdoc
-   * @returns {object} The metadata object with resource type information.
-   */
+  /** @inheritdoc */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
       type: "resource",
@@ -25,8 +20,8 @@ export default class TeriockResourceData extends ConsumableDataMixin(TeriockBase
   /**
    * Checks if the resource effect is suppressed.
    * Combines base suppression with attunement-based suppression for equipment.
-   * @override
    * @returns {boolean} True if the resource effect is suppressed, false otherwise.
+   * @override
    */
   get suppressed() {
     let suppressed = super.suppressed;
@@ -39,8 +34,8 @@ export default class TeriockResourceData extends ConsumableDataMixin(TeriockBase
   /**
    * Gets the message parts for the resource effect.
    * Combines base message parts with resource-specific message parts.
-   * @override
    * @returns {object} Object containing message parts for the resource effect.
+   * @override
    */
   get messageParts() {
     return { ...super.messageParts, ..._messageParts(this) };
@@ -51,9 +46,7 @@ export default class TeriockResourceData extends ConsumableDataMixin(TeriockBase
    * @returns {object} The schema definition for the resource data.
    */
   static defineSchema() {
-    const commonData = super.defineSchema();
-    return {
-      ...commonData,
+    return foundry.utils.mergeObject(super.defineSchema(), {
       consumable: new fields.BooleanField({
         initial: true,
         label: "Consumable",
@@ -85,14 +78,14 @@ export default class TeriockResourceData extends ConsumableDataMixin(TeriockBase
         initial: "none",
         label: "Function Hook",
       }),
-    };
+    });
   }
 
   /**
    * Migrates data from older versions to the current format.
-   * @override
    * @param {object} data - The data to migrate.
    * @returns {object} The migrated data.
+   * @override
    */
   static migrateData(data) {
     data = _migrateData(data);
@@ -101,9 +94,9 @@ export default class TeriockResourceData extends ConsumableDataMixin(TeriockBase
 
   /**
    * Rolls the resource effect with the specified options.
-   * @override
    * @param {object} options - Options for the resource roll.
    * @returns {Promise<void>} Promise that resolves when the roll is complete.
+   * @override
    */
   async roll(options) {
     await _roll(this, options);
@@ -112,25 +105,25 @@ export default class TeriockResourceData extends ConsumableDataMixin(TeriockBase
   /**
    * Uses one unit of the resource.
    * If quantity becomes 0 or less, disables the parent effect.
-   * @override
    * @returns {Promise<void>} Promise that resolves when the resource is used.
+   * @override
    */
   async useOne() {
     const toDisable = this.quantity <= 1;
     await super.useOne();
     if (toDisable) {
-      await this.parent.setSoftDisabled(true);
+      await this.parent.disable();
     }
   }
 
   /**
    * Gains one unit of the resource.
    * Re-enables the parent effect when gaining resources.
-   * @override
    * @returns {Promise<void>} Promise that resolves when the resource is gained.
+   * @override
    */
   async gainOne() {
     await super.gainOne();
-    await this.parent.setSoftDisabled(false);
+    await this.parent.enable();
   }
 }

@@ -1,2 +1,2 @@
-import "./base-sheet/_types";
+import "./base-actor-sheet/_types";
 import "./character-sheet/_types";

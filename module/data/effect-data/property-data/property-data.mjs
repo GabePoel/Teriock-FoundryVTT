@@ -1,19 +1,14 @@
 const { fields } = foundry.data;
 import { _messageParts } from "./methods/_messages.mjs";
-import { WikiDataMixin } from "../../mixins/wiki-mixin.mjs";
-import TeriockBaseEffectData from "../base-data/base-data.mjs";
+import WikiDataMixin from "../../mixins/wiki-mixin.mjs";
+import TeriockBaseEffectData from "../base-effect-data/base-effect-data.mjs";
 
 /**
  * Property-specific effect data model.
- * Handles property functionality including damage types and wiki integration.
  * @extends {TeriockBaseEffectData}
  */
 export default class TeriockPropertyData extends WikiDataMixin(TeriockBaseEffectData) {
-  /**
-   * Gets the metadata for the property data model.
-   * @inheritdoc
-   * @returns {object} The metadata object with property type information.
-   */
+  /** @inheritdoc */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
       type: "property",
@@ -23,8 +18,8 @@ export default class TeriockPropertyData extends WikiDataMixin(TeriockBaseEffect
   /**
    * Gets the message parts for the property effect.
    * Combines base message parts with property-specific message parts.
-   * @override
    * @returns {object} Object containing message parts for the property effect.
+   * @override
    */
   get messageParts() {
     return { ...super.messageParts, ..._messageParts(this) };
@@ -35,12 +30,10 @@ export default class TeriockPropertyData extends WikiDataMixin(TeriockBaseEffect
    * @returns {object} The schema definition for the property data.
    */
   static defineSchema() {
-    const commonData = super.defineSchema();
-    return {
-      ...commonData,
+    return foundry.utils.mergeObject(super.defineSchema(), {
       wikiNamespace: new fields.StringField({ initial: "Property", gmOnly: true }),
       propertyType: new fields.StringField({ initial: "normal" }),
       damageType: new fields.StringField({ initial: "" }),
-    };
+    });
   }
 }

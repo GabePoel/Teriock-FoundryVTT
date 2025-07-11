@@ -3,12 +3,11 @@ const { fields } = foundry.data;
 /**
  * Mixin that provides child document functionality for embedded documents.
  * Adds proficiency tracking, font customization, and message generation capabilities.
- * @template {Function} Base - The base class constructor to extend.
- * @param {Base} Base - The base class to mix in with.
- * @returns {Base} The extended class with child document functionality.
+ * @template {import("@common/_types.mjs").Constructor<foundry.abstract.TypeDataModel>} ModelClass
+ * @param {ModelClass} Base - The base class to mix in with.
  */
-export const ChildDataMixin = (Base) =>
-  class ChildDataMixin extends Base {
+export default (Base) => {
+  return class ChildDataMixin extends Base {
     /**
      * Gets the message rules-parts for displaying the child document in chat.
      * Includes image, name, and font information from the parent document.
@@ -46,22 +45,25 @@ export const ChildDataMixin = (Base) =>
      * @override
      */
     static defineSchema() {
-      return {
-        proficient: new fields.BooleanField({
-          initial: false,
-          label: "Proficient",
-        }),
-        fluent: new fields.BooleanField({
-          initial: false,
-          label: "Fluent",
-        }),
-        font: new fields.StringField({
-          initial: "",
-          label: "Font",
-          hint: "The font to be used for this document's name on its sheet and in chat messages.",
-        }),
-        description: new fields.HTMLField({ initial: "<p>None.</p>" }),
-      };
+      return foundry.utils.mergeObject(
+        {},
+        {
+          proficient: new fields.BooleanField({
+            initial: false,
+            label: "Proficient",
+          }),
+          fluent: new fields.BooleanField({
+            initial: false,
+            label: "Fluent",
+          }),
+          font: new fields.StringField({
+            initial: "",
+            label: "Font",
+            hint: "The font to be used for this document's name on its sheet and in chat messages.",
+          }),
+          description: new fields.HTMLField({ initial: "<p>None.</p>" }),
+        },
+      );
     }
 
     /**
@@ -84,3 +86,4 @@ export const ChildDataMixin = (Base) =>
       await this.roll(options);
     }
   };
+};

@@ -1,5 +1,5 @@
-import { ConsumableDataMixin } from "../../mixins/consumable-mixin.mjs";
-import { WikiDataMixin } from "../../mixins/wiki-mixin.mjs";
+import ConsumableDataMixin from "../../mixins/consumable-mixin.mjs";
+import WikiDataMixin from "../../mixins/wiki-mixin.mjs";
 import * as attunement from "./methods/_attunement.mjs";
 import * as deriving from "./methods/_data-deriving.mjs";
 import * as handling from "./methods/_handling.mjs";
@@ -9,7 +9,7 @@ import * as migrate from "./methods/_migrate-data.mjs";
 import * as parsing from "./methods/_parsing.mjs";
 import * as rolling from "./methods/_rolling.mjs";
 import * as schema from "./methods/_schema.mjs";
-import TeriockBaseItemData from "../base-data/base-data.mjs";
+import TeriockBaseItemData from "../base-item-data/base-item-data.mjs";
 
 /**
  * Equipment-specific item data model.
@@ -17,11 +17,7 @@ import TeriockBaseItemData from "../base-data/base-data.mjs";
  * @extends {TeriockBaseItemData}
  */
 export default class TeriockEquipmentData extends WikiDataMixin(ConsumableDataMixin(TeriockBaseItemData)) {
-  /**
-   * Gets the metadata for the equipment data model.
-   * @inheritdoc
-   * @returns {object} The metadata object with equipment type information.
-   */
+  /** @inheritDoc */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
       type: "equipment",
@@ -30,8 +26,8 @@ export default class TeriockEquipmentData extends WikiDataMixin(ConsumableDataMi
 
   /**
    * Gets the wiki page URL for the equipment.
-   * @override
    * @returns {string} The wiki page URL for the equipment type.
+   * @override
    */
   get wikiPage() {
     return `Equipment:${this.equipmentType}`;
@@ -39,8 +35,8 @@ export default class TeriockEquipmentData extends WikiDataMixin(ConsumableDataMi
 
   /**
    * Gets the message rules-parts for the equipment.
-   * @override
    * @returns {MessageParts} Object containing message rules-parts for the equipment.
+   * @override
    */
   get messageParts() {
     return {
@@ -51,8 +47,8 @@ export default class TeriockEquipmentData extends WikiDataMixin(ConsumableDataMi
 
   /**
    * Gets the secret message rules-parts for the equipment.
-   * @override
    * @returns {MessageParts} Object containing secret message rules-parts for the equipment.
+   * @override
    */
   get secretMessageParts() {
     return {
@@ -79,22 +75,20 @@ export default class TeriockEquipmentData extends WikiDataMixin(ConsumableDataMi
 
   /**
    * Defines the schema for the equipment data model.
-   * @override
    * @returns {object} The schema definition for the equipment data.
+   * @override
    */
   static defineSchema() {
-    const commonData = super.defineSchema();
-    return {
-      ...commonData,
+    return foundry.utils.mergeObject(super.defineSchema(), {
       ...schema._defineSchema(),
-    };
+    });
   }
 
   /**
    * Migrates data from older versions to the current format.
-   * @override
    * @param {object} data - The data to migrate.
    * @returns {object} The migrated data.
+   * @override
    */
   static migrateData(data) {
     data = migrate._migrateData(data);
@@ -103,8 +97,8 @@ export default class TeriockEquipmentData extends WikiDataMixin(ConsumableDataMi
 
   /**
    * Prepares derived data for the equipment.
-   * @override
    * @returns {void}
+   * @override
    */
   prepareDerivedData() {
     super.prepareDerivedData();
@@ -114,8 +108,8 @@ export default class TeriockEquipmentData extends WikiDataMixin(ConsumableDataMi
   /**
    * Uses one unit of the equipment.
    * If consumable and quantity reaches 0, unequips the item.
-   * @override
    * @returns {Promise<void>} Promise that resolves when the equipment is used.
+   * @override
    */
   async useOne() {
     await super.useOne();
@@ -126,9 +120,9 @@ export default class TeriockEquipmentData extends WikiDataMixin(ConsumableDataMi
 
   /**
    * Parses raw HTML content for the equipment.
-   * @override
    * @param {string} rawHTML - The raw HTML content to parse.
    * @returns {Promise<object>} Promise that resolves to the parsed HTML content.
+   * @override
    */
   async parse(rawHTML) {
     return await parsing._parse(this, rawHTML);
@@ -136,9 +130,9 @@ export default class TeriockEquipmentData extends WikiDataMixin(ConsumableDataMi
 
   /**
    * Rolls the equipment with the specified options.
-   * @override
    * @param {object} options - Options for the equipment roll.
    * @returns {Promise<void>} Promise that resolves when the roll is complete.
+   * @override
    */
   async roll(options) {
     await rolling._roll(this, options);

@@ -2,8 +2,8 @@ const { fields } = foundry.data;
 import { _messageParts } from "./methods/_messages.mjs";
 import { _parse } from "./methods/_parsing.mjs";
 import { _rollHitDie, _rollManaDie } from "./methods/_rolling.mjs";
-import { WikiDataMixin } from "../../mixins/wiki-mixin.mjs";
-import TeriockBaseItemData from "../base-data/base-data.mjs";
+import WikiDataMixin from "../../mixins/wiki-mixin.mjs";
+import TeriockBaseItemData from "../base-item-data/base-item-data.mjs";
 
 /**
  * Rank-specific item data model.
@@ -11,11 +11,7 @@ import TeriockBaseItemData from "../base-data/base-data.mjs";
  * @extends {TeriockBaseItemData}
  */
 export default class TeriockRankData extends WikiDataMixin(TeriockBaseItemData) {
-  /**
-   * Gets the metadata for the rank data model.
-   * @inheritdoc
-   * @returns {object} The metadata object with rank type information.
-   */
+  /** @inheritDoc */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
       type: "rank",
@@ -24,8 +20,8 @@ export default class TeriockRankData extends WikiDataMixin(TeriockBaseItemData) 
 
   /**
    * Gets the wiki page URL for the rank.
-   * @override
    * @returns {string} The wiki page URL for the class.
+   * @override
    */
   get wikiPage() {
     return `Class:${CONFIG.TERIOCK.rankOptions[this.archetype].classes[this.className].name}`;
@@ -34,8 +30,8 @@ export default class TeriockRankData extends WikiDataMixin(TeriockBaseItemData) 
   /**
    * Gets the message parts for the rank.
    * Combines base message parts with rank-specific message parts.
-   * @override
    * @returns {object} Object containing message parts for the rank.
+   * @override
    */
   get messageParts() {
     return { ...super.messageParts, ..._messageParts(this.parent) };
@@ -46,9 +42,7 @@ export default class TeriockRankData extends WikiDataMixin(TeriockBaseItemData) 
    * @returns {object} The schema definition for the rank data.
    */
   static defineSchema() {
-    const commonData = super.defineSchema();
-    return {
-      ...commonData,
+    return foundry.utils.mergeObject(super.defineSchema(), {
       wikiNamespace: new fields.StringField({
         initial: "Class",
         gmOnly: true,
@@ -129,17 +123,17 @@ export default class TeriockRankData extends WikiDataMixin(TeriockBaseItemData) 
         initial: true,
         label: "Proficient",
       }),
-    };
+    });
   }
 
   /**
    * Parses raw HTML content for the rank.
-   * @override
    * @param {string} rawHTML - The raw HTML content to parse.
    * @returns {Promise<object>} Promise that resolves to the parsed HTML content.
+   * @override
    */
   async parse(rawHTML) {
-    return await _parse(this.parent, rawHTML);
+    return await _parse(this, rawHTML);
   }
 
   /**

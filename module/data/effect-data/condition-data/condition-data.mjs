@@ -1,17 +1,13 @@
-import { WikiDataMixin } from "../../mixins/wiki-mixin.mjs";
-import TeriockBaseEffectData from "../base-data/base-data.mjs";
+const { fields } = foundry.data;
+import TeriockBaseEffectData from "../base-effect-data/base-effect-data.mjs";
+import WikiDataMixin from "../../mixins/wiki-mixin.mjs";
 
 /**
  * Condition-specific effect data model.
- * Handles condition functionality including wiki integration.
  * @extends {TeriockBaseEffectData}
  */
 export default class TeriockConditionData extends WikiDataMixin(TeriockBaseEffectData) {
-  /**
-   * Gets the metadata for the condition data model.
-   * @inheritdoc
-   * @returns {object} The metadata object with condition type information.
-   */
+  /** @inheritdoc */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
       type: "condition",
@@ -20,14 +16,12 @@ export default class TeriockConditionData extends WikiDataMixin(TeriockBaseEffec
 
   /**
    * Defines the schema for the condition data model.
-   * @override
    * @returns {object} The schema definition for the condition data.
+   * @override
    */
   static defineSchema() {
-    const commonData = super.defineSchema();
-    return {
-      ...commonData,
+    return foundry.utils.mergeObject(super.defineSchema(), {
       wikiNamespace: new fields.StringField({ initial: "Condition", gmOnly: true }),
-    };
+    });
   }
 }

@@ -36,7 +36,7 @@ export function _getTargets(abilityData) {
   const includesSelf = abilityData.targets?.includes("self");
 
   if (targetsSelf || (includesSelf && targets.length === 0)) {
-    const actor = abilityData.parent.getActor();
+    const actor = abilityData.parent.actor;
     const activeToken = actor.getActiveTokens?.()?.[0];
     const tokenName = actor.token?.name || activeToken?.name || actor.prototypeToken?.name || actor.name;
     const tokenActorSrc = actor.token?.actor?.token?.texture?.src;
@@ -66,10 +66,7 @@ export async function _measure(abilityData) {
   const measureData = {};
   if (abilityData.delivery.base === "aura") {
     const token =
-      abilityData.parent.getActor().token ||
-      abilityData.parent.getActor().getActiveTokens()[0] ||
-      abilityData.parent.getActor().prototypeToken ||
-      null;
+      abilityData.actor.token || abilityData.actor.getActiveTokens()[0] || abilityData.actor.prototypeToken || null;
     if (token) {
       let placeTemplate;
       let radius = Number(abilityData.range);

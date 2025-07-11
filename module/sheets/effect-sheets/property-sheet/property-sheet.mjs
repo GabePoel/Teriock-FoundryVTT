@@ -1,7 +1,7 @@
 const { api } = foundry.applications;
 import { documentOptions } from "../../../helpers/constants/document-options.mjs";
 import { propertyContextMenu } from "./connections/_context-menus.mjs";
-import TeriockBaseEffectSheet from "../base-sheet/base-sheet.mjs";
+import TeriockBaseEffectSheet from "../base-effect-sheet/base-effect-sheet.mjs";
 
 /**
  * Property sheet for Teriock system properties.
@@ -28,7 +28,7 @@ export default class TeriockPropertySheet extends api.HandlebarsApplicationMixin
    */
   static PARTS = {
     all: {
-      template: "systems/teriock/templates/sheets/property-template/property-template.hbs",
+      template: "systems/teriock/templates/effect-templates/property-template/property-template.hbs",
       scrollable: [".window-content", ".tsheet-page", ".ab-sheet-everything"],
     },
   };
