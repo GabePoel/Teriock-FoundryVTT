@@ -1,15 +1,11 @@
-const { ItemSheetV2 } = foundry.applications.sheets;
+import { BaseItemSheet } from "../../_base.mjs";
 import { cleanFeet } from "../../../helpers/clean.mjs";
-import { TeriockSheet } from "../../mixins/sheet-mixin.mjs";
 
 /**
  * Base item sheet for Teriock system items.
  * Provides common functionality for all item sheets.
- * @property {TeriockItem} item
- * @property {TeriockItem} document
- * @extends {ItemSheet}
  */
-export default class TeriockBaseItemSheet extends TeriockSheet(ItemSheetV2) {
+export default class TeriockBaseItemSheet extends BaseItemSheet {
   /**
    * Default options for the base item sheet.
    * @type {object}

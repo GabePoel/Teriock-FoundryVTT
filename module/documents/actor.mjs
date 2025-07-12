@@ -8,8 +8,8 @@ import { BaseTeriockActor } from "./_base.mjs";
 export default class TeriockActor extends BaseTeriockActor {
   /**
    * Gets all valid effects that apply to this actor.
-   * @inheritdoc
    * @returns {ActiveEffect[]} Array of all applicable effects.
+   * @inheritdoc
    */
   get validEffects() {
     return Array.from(this.allApplicableEffects());

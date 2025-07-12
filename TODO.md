@@ -26,16 +26,16 @@
 
 # Codebase
 
-- [ ] Consolidate applies and consequences systems
+- [x] Consolidate applies and consequences systems
 - [ ] Clean up the CSS (as if)
 - [ ] Organize hooks (and move stuff out of hooks?)
 - [ ] Hacks and encumbrance to statuses (no HUD)
 - [ ] Better roll chat message button handling
-- [ ] Ability usage modularization
+- [x] Ability usage modularization
 - [ ] Take basic abilities off of each individual actors to speed up sorting and make for smaller database
 - [ ] Better compendium building automation
 - [ ] More wiki links in documentation
-- [ ] Just some general sprucing around (as always)
+- [x] Just some general sprucing around (as always)
 
 # Core Stuff (done?)
 

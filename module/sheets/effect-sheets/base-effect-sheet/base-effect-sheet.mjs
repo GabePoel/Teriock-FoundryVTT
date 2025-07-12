@@ -1,14 +1,12 @@
-const { ActiveEffectConfig } = foundry.applications.sheets;
+import { BaseEffectSheet } from "../../_base.mjs";
 import { documentOptions } from "../../../helpers/constants/document-options.mjs";
-import { TeriockSheet } from "../../mixins/sheet-mixin.mjs";
 
 /**
  * Base effect sheet for Teriock system active effects.
  * Provides common functionality for all effect sheets including change management,
  * context preparation, and effect state handling.
- * @extends {ActiveEffectConfig}
  */
-export default class TeriockBaseEffectSheet extends TeriockSheet(ActiveEffectConfig) {
+export default class TeriockBaseEffectSheet extends BaseEffectSheet {
   /**
    * Default options for the base effect sheet.
    * @type {object}

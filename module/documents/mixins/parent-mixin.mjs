@@ -3,10 +3,12 @@ import { toCamelCase } from "../../helpers/utils.mjs";
 /**
  * Builds effect types and keys from a document's valid effects.
  * @param {ParentDocumentMixin} document - The document to build effect types for.
- * @private
+ * @returns {BuiltEffectTypes} Each {@link TeriockEffect} this contains, keyed by type, in multiple formats.
  */
 function _buildEffectTypes(document) {
+  /** @type ParentEffectTypes */
   const effectTypes = {};
+  /** @type ParentEffectKeys */
   const effectKeys = {};
   for (const effect of document.validEffects) {
     const type = effect.type;
@@ -21,6 +23,7 @@ function _buildEffectTypes(document) {
 /**
  * Mixin for common functions used across document classes that embed children.
  * @template {import("@common/_types.mjs").Constructor<foundry.abstract.Document>} BaseDocument
+ * @implements {ParentDocumentMixinInterface}
  * @param {BaseDocument} Base
  */
 export default (Base) => {
@@ -37,7 +40,7 @@ export default (Base) => {
     /**
      * Gets the list of all effects that apply to this document, including those
      * that are not currently active.
-     * @returns {{ effectTypes: Record<string, TeriockEffect[]>, effectKeys: Record<string, Set<string>> }} Object containing effect types and keys.
+     * @returns {BuiltEffectTypes}
      */
     buildEffectTypes() {
       return _buildEffectTypes(this);

@@ -1,32 +1,29 @@
-const { sheets, api, ux } = foundry.applications;
+const { api, ux } = foundry.applications;
+import { BaseActorSheet } from "../../_base.mjs";
 import { _defaultSheetSettings } from "./methods/_settings.mjs";
 import { _filterAbilities, _filterEquipment } from "./methods/_filters.mjs";
 import { _sortAbilities, _sortEquipment } from "./methods/_sort.mjs";
-import { documentOptions } from "../../../helpers/constants/document-options.mjs";
 import { conditions } from "../../../content/conditions.mjs";
+import { documentOptions } from "../../../helpers/constants/document-options.mjs";
 import {
   piercingContextMenu,
   primaryAttackContextMenu,
   primaryBlockerContextMenu,
 } from "./connections/character-context-menus.mjs";
-import { TeriockSheet } from "../../mixins/sheet-mixin.mjs";
 
 /**
  * Base actor sheet for actors.
  * Provides comprehensive character management including abilities, equipment, tradecrafts,
  * and various interactive features like rolling, damage tracking, and condition management.
- * @property {TeriockActor} actor
- * @property {TeriockActor} document
- * @extends {sheets.ActorSheetV2}
  */
-export default class TeriockBaseActorSheet extends TeriockSheet(sheets.ActorSheetV2) {
+export default class TeriockBaseActorSheet extends BaseActorSheet {
   /**
    * Default options for the base actor sheet.
    * @type {object}
    * @static
    */
   static DEFAULT_OPTIONS = {
-    classes: ["character"],
+    classes: ["teriock", "character"],
     actions: {
       toggleEquippedDoc: this._toggleEquippedDoc,
       toggleDisabledDoc: this._toggleDisabledDoc,

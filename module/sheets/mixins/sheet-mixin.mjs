@@ -1,6 +1,5 @@
 const { utils } = foundry;
 const { ux, api } = foundry.applications;
-import { chatImage } from "../../helpers/utils.mjs";
 import { imageContextMenuOptions } from "../misc-sheets/image-sheet/connections/_context-menus.mjs";
 import * as createEffects from "../../helpers/create-effects.mjs";
 import connectEmbedded from "../../helpers/connect-embedded.mjs";
@@ -13,8 +12,8 @@ import connectEmbedded from "../../helpers/connect-embedded.mjs";
  * @param {BaseSheet} Base - The base application class to mix in with.
  * @returns BaseSheet
  */
-export const TeriockSheet = (Base) =>
-  class TeriockSheet extends Base {
+export default (Base) => {
+  return class TeriockSheet extends Base {
     /**
      * Default options for Teriock sheets.
      * @type {object}
@@ -42,7 +41,6 @@ export const TeriockSheet = (Base) =>
         createResource: this._createResource,
         createProperty: this._createProperty,
         createFluency: this._createFluency,
-        // toggleSwitch: this._toggleSwitch,
       },
       form: { submitOnChange: true, closeOnSubmit: false },
       window: { resizable: true },
@@ -577,15 +575,6 @@ export const TeriockSheet = (Base) =>
     }
 
     /**
-     * Sends an image to chat.
-     * @param {string} img - The image path to send to chat.
-     * @returns {Promise<void>} Promise that resolves when the image is sent.
-     */
-    async _chatImage(img) {
-      await chatImage(img);
-    }
-
-    /**
      * Enriches HTML content for display.
      * @param {string} parameter - The HTML content to enrich.
      * @returns {Promise<string|undefined>} Promise that resolves to the enriched HTML or undefined.
@@ -662,21 +651,6 @@ export const TeriockSheet = (Base) =>
         html.on("click", selector, (e) => {
           e.preventDefault();
           this.document.update({ [path]: "Insert effect here." });
-        });
-      }
-    }
-
-    /**
-     * Connects checkbox elements to document methods.
-     * @param {object} map - Object mapping selectors to method names.
-     * @private
-     */
-    _connectCheckboxMap(map) {
-      const html = $(this.element);
-      for (const [selector, method] of Object.entries(map)) {
-        html.on("click", selector, (e) => {
-          e.preventDefault();
-          this.document[method](e.currentTarget.checked);
         });
       }
     }
@@ -957,3 +931,4 @@ export const TeriockSheet = (Base) =>
       await this.document.update({ [name]: new Set(values) });
     }
   };
+};
