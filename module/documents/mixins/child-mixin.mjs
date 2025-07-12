@@ -109,7 +109,7 @@ export default (Base) => {
 
     /**
      * Builds a raw message string from the document's message parts.
-     * @param {MessageOptions} options - Options for building the message.
+     * @param {Teriock.MessageOptions} options - Options for building the message.
      * @returns {HTMLDivElement} The raw message HTML.
      */
     buildRawMessage(options = {}) {
@@ -125,7 +125,7 @@ export default (Base) => {
 
     /**
      * Builds an enriched message from the document's message parts.
-     * @param {MessageOptions} options - Options for building the message.
+     * @param {Teriock.MessageOptions} options - Options for building the message.
      * @returns {Promise<string>} Promise that resolves to the enriched message HTML.
      */
     async buildMessage(options = {}) {

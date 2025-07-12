@@ -1,9 +1,12 @@
+const { Roll } = foundry.dice;
+
 /**
  * A custom Roll class which enriches the provided flavor and uses a custom
  * chat template to display the flavor as enriched HTML. Also allows for custom
  * functions that Teriock requires.
+ * @extends {Roll}
  */
-export default class TeriockRoll extends foundry.dice.Roll {
+export default class TeriockRoll extends Roll {
   static CHAT_TEMPLATE = "systems/teriock/templates/roll-templates/roll.hbs";
 
   /**

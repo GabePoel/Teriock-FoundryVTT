@@ -100,8 +100,8 @@ export default class TeriockEquipmentSheet extends HandlebarsApplicationMixin(Te
    * @param {object} options - Render options.
    * @override
    */
-  _onRender(context, options) {
-    super._onRender(context, options);
+  async _onRender(context, options) {
+    await super._onRender(context, options);
     if (!this.editable) return;
 
     const item = this.item;
@@ -113,8 +113,7 @@ export default class TeriockEquipmentSheet extends HandlebarsApplicationMixin(Te
       this._connectInput(el, el.getAttribute("name"), cleanCapitalization);
     });
 
-    const html = $(this.element);
-    this._activateTags(html);
+    this._activateTags();
     const buttonMap = {
       ".ab-special-rules-button": "system.specialRules",
       ".ab-description-button": "system.description",
@@ -127,19 +126,21 @@ export default class TeriockEquipmentSheet extends HandlebarsApplicationMixin(Te
   /**
    * Activates tag management for equipment flags and properties.
    * Sets up click handlers for boolean flags, array tags, and static updates.
-   * @param {jQuery} html - The jQuery element for the sheet.
    */
-  _activateTags(html) {
+  _activateTags() {
     const doc = this.document;
+    const root = this.element;
 
     const flagTags = {
       ".flag-tag-glued": "system.glued",
     };
 
     for (const [selector, path] of Object.entries(flagTags)) {
-      html.on("click", selector, async (e) => {
-        e.preventDefault();
-        await doc.update({ [path]: false });
+      root.querySelectorAll(selector).forEach((el) => {
+        el.addEventListener("click", async (e) => {
+          e.preventDefault();
+          await doc.update({ [path]: false });
+        });
       });
     }
 
@@ -151,10 +152,12 @@ export default class TeriockEquipmentSheet extends HandlebarsApplicationMixin(Te
     };
 
     for (const [selector, path] of Object.entries(arrayTags)) {
-      this._connect(selector, "click", async (e) => {
-        const val = e.currentTarget.getAttribute("value");
-        const current = doc.system[path].filter((v) => v !== val);
-        await doc.update({ [`system.${path}`]: current });
+      root.querySelectorAll(selector).forEach((el) => {
+        el.addEventListener("click", async () => {
+          const val = el.getAttribute("value");
+          const current = doc.system[path].filter((v) => v !== val);
+          await doc.update({ [`system.${path}`]: current });
+        });
       });
     }
 
@@ -170,10 +173,19 @@ export default class TeriockEquipmentSheet extends HandlebarsApplicationMixin(Te
     };
 
     for (const [selector, update] of Object.entries(staticUpdates)) {
-      this._connect(selector, "click", () => doc.update(update));
+      root.querySelectorAll(selector).forEach((el) => {
+        el.addEventListener("click", () => doc.update(update));
+      });
     }
 
-    this._connect(".flag-tag-dampened", "click", () => doc.system.undampen());
-    this._connect(".flag-tag-shattered", "click", () => doc.system.repair());
+    const dampenedEls = root.querySelectorAll(".flag-tag-dampened");
+    dampenedEls.forEach((el) =>
+      el.addEventListener("click", () => doc.system.undampen())
+    );
+
+    const shatteredEls = root.querySelectorAll(".flag-tag-shattered");
+    shatteredEls.forEach((el) =>
+      el.addEventListener("click", () => doc.system.repair())
+    );
   }
 }

@@ -71,7 +71,7 @@ async function use(equipmentData, options) {
     if (options?.advantage) {
       roll = roll.alter(2, 0);
     }
-    roll.toMessage({
+    await roll.toMessage({
       speaker: ChatMessage.getSpeaker({
         actor: equipmentData.actor,
       }),

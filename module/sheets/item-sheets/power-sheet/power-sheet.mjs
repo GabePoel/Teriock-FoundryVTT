@@ -66,8 +66,8 @@ export default class TeriockPowerSheet extends HandlebarsApplicationMixin(Terioc
    * @param {object} options - Render options.
    * @override
    */
-  _onRender(context, options) {
-    super._onRender(context, options);
+  async _onRender(context, options) {
+    await super._onRender(context, options);
     if (!this.editable) return;
     const powerContextMenuOptions = powerContextMenu(this.item);
     this._connectContextMenu(".power-box", powerContextMenuOptions, "click");

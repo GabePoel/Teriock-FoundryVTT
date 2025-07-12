@@ -1,4 +1,3 @@
-/** @import TeriockBaseActorData from "../../base-actor-data.mjs"; */
 import TeriockRankData from "../../../../item-data/rank-data/rank-data.mjs";
 
 /**

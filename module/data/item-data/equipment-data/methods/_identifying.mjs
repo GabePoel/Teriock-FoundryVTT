@@ -49,6 +49,7 @@ export async function _identify(equipmentData) {
   if (equipmentData.reference && !equipmentData.identified) {
     const users = game.users.filter((u) => u.active && u.isGM);
     let doIdentify = false;
+    /** @type TeriockItem */
     const ref = await foundry.utils.fromUuid(equipmentData.reference);
     const referenceName = ref ? ref.name : "Unknown";
     const referenceUuid = ref ? ref.uuid : "Unknown";

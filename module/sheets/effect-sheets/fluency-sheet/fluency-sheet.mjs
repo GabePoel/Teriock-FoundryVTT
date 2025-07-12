@@ -40,8 +40,8 @@ export default class TeriockFluencySheet extends api.HandlebarsApplicationMixin(
    * @param {object} options - Render options.
    * @override
    */
-  _onRender(context, options) {
-    super._onRender(context, options);
+  async _onRender(context, options) {
+    await super._onRender(context, options);
     [
       { selector: ".field-box", menu: fieldContextMenu },
       { selector: ".tradecraft-box", menu: tradecraftContextMenu },

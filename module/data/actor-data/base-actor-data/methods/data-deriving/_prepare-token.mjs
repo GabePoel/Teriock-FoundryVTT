@@ -1,5 +1,3 @@
-/** @import TeriockBaseActorData from "../../base-actor-data.mjs"; */
-
 /**
  * Prepares the named size for the actor based on their numerical size value.
  * Maps numerical size values to named sizes (Tiny, Small, Medium, Large, Huge, Gargantuan, Colossal).

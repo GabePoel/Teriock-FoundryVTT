@@ -33,7 +33,7 @@ export default (Base) => {
     /**
      * Pulls data from the wiki and updates the document.
      * Fetches wiki page content, parses it, and applies updates to the document.
-     * @param {WikiPullOptions} options - Options for the wiki pull operation.
+     * @param {Teriock.WikiPullOptions} options - Options for the wiki pull operation.
      * @returns {Promise<void>} Promise that resolves when the wiki pull is complete.
      */
     async wikiPull(options = {}) {

@@ -28,9 +28,11 @@ export function _sortEmbedded(items, sortKey, ascending, accessorMap = {}) {
  * @returns {Array} Sorted array of abilities.
  */
 export function _sortAbilities(actor) {
+  /** @type {TeriockBaseActorSheet} */
+  const sheet = actor.sheet;
   const abilities = actor.effectTypes.ability;
-  const sortKey = actor.sheet.settings.abilitySortOption;
-  const ascending = actor.sheet.settings.abilitySortAscending;
+  const sortKey = sheet.settings.abilitySortOption;
+  const ascending = sheet.settings.abilitySortAscending;
   const sortMap = {
     name: (i) => i.name,
     sourceName: (i) => i.parent?.name ?? "",
@@ -48,9 +50,11 @@ export function _sortAbilities(actor) {
  * @returns {Array} Sorted array of equipment.
  */
 export function _sortEquipment(actor) {
+  /** @type {TeriockBaseActorSheet} */
+  const sheet = actor.sheet;
   const equipment = actor.itemTypes.equipment;
-  const sortKey = actor.sheet.settings.equipmentSortOption;
-  const ascending = actor.sheet.settings.equipmentSortAscending;
+  const sortKey = sheet.settings.equipmentSortOption;
+  const ascending = sheet.settings.equipmentSortAscending;
   const sortMap = {
     name: (i) => i.name,
     av: (i) => i.system.av ?? 0,

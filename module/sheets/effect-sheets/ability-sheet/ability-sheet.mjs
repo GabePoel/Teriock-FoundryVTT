@@ -132,34 +132,18 @@ export default class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(
   }
 
   /**
-   * Connects event listeners to elements matching a CSS selector.
-   * @param {string} cssClass - The CSS selector for elements to connect.
-   * @param {string} listener - The event type to listen for.
-   * @param {Function} callback - The event handler function.
-   */
-  _connect(cssClass, listener, callback) {
-    this.element.querySelectorAll(cssClass).forEach((el) =>
-      el.addEventListener(listener, (event) => {
-        event.preventDefault();
-        callback(event);
-      }),
-    );
-  }
-
-  /**
    * Handles the render event for the ability sheet.
    * Sets up context menus, tag management, and button mappings.
    * @param {object} context - The render context.
    * @param {object} options - Render options.
    * @override
    */
-  _onRender(context, options) {
-    super._onRender(context, options);
+  async _onRender(context, options) {
+    await super._onRender(context, options);
     if (!this.editable) return;
 
-    const html = $(this.element);
     this._activateContextMenus();
-    this._activateTags(html);
+    this._activateTags();
     const buttonMap = {
       ".ab-material-cost-button": "system.costs.materialCost",
       ".ab-trigger-button": "system.trigger",
@@ -182,14 +166,17 @@ export default class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(
     };
     this._connectButtonMap(buttonMap);
 
-    this.element.querySelectorAll(".change-box-entry").forEach((entry) => {
+    /** @type {NodeListOf<HTMLInputElement|HTMLSelectElement>} */
+    const elements = this.element.querySelectorAll(".change-box-entry");
+
+    elements.forEach((entry) => {
       entry.addEventListener("change", async () => {
         const index = parseInt(entry.dataset.index, 10);
         const key = entry.dataset.key;
         const application = entry.dataset.application;
         const updateString = `system.applies.${application}.changes`;
         let value = entry.value;
-        if (!isNaN(value) && value !== "") {
+        if (!isNaN(Number(value)) && value !== "") {
           const intValue = parseInt(value, 10);
           if (!isNaN(intValue) && intValue.toString() === value.trim()) {
             value = intValue;
@@ -243,10 +230,11 @@ export default class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(
   /**
    * Activates tag management for ability flags and properties.
    * Sets up click handlers for boolean flags, array tags, and static updates.
-   * @param {jQuery} html - The jQuery element for the sheet.
    */
-  _activateTags(html) {
+  _activateTags() {
     const doc = this.document;
+    const root = this.element;
+
     const tags = {
       ".flag-tag-basic": "system.basic",
       ".flag-tag-sustained": "system.sustained",
@@ -262,8 +250,10 @@ export default class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(
     };
 
     for (const [selector, param] of Object.entries(tags)) {
-      html.on("click", selector, async () => {
-        await doc.update({ [param]: false });
+      root.querySelectorAll(selector).forEach((el) => {
+        el.addEventListener("click", async () => {
+          await doc.update({ [param]: false });
+        });
       });
     }
 
@@ -274,10 +264,13 @@ export default class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(
     };
 
     for (const [selector, param] of Object.entries(arrayTags)) {
-      this._connect(selector, "click", async (e) => {
-        const value = e.currentTarget.getAttribute("value");
-        const list = doc.system[param.split(".")[1]].filter((e) => e !== value);
-        await doc.update({ [param]: list });
+      root.querySelectorAll(selector).forEach((el) => {
+        el.addEventListener("click", async () => {
+          const value = el.getAttribute("value");
+          const pathKey = param.split(".")[1];
+          const list = doc.system[pathKey].filter((entry) => entry !== value);
+          await doc.update({ [param]: list });
+        });
       });
     }
 
@@ -317,7 +310,9 @@ export default class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(
     };
 
     for (const [selector, update] of Object.entries(staticUpdates)) {
-      this._connect(selector, "click", () => doc.update(update));
+      root.querySelectorAll(selector).forEach((el) => {
+        el.addEventListener("click", () => doc.update(update));
+      });
     }
   }
 }

@@ -66,17 +66,17 @@ export async function _buildButtons(rollConfig) {
   }
 
   // Resistance button
-  if (abilityData.effects?.includes("resistance")) {
+  if (Array(abilityData.effects)?.includes("resistance")) {
     buttons.push(BUTTON_CONFIGS.resistance);
   }
 
   // Awaken button
-  if (abilityData.effects?.includes("awakening")) {
+  if (Array(abilityData.effects)?.includes("awakening")) {
     buttons.push(BUTTON_CONFIGS.awaken);
   }
 
   // Revive button
-  if (abilityData.effects?.includes("revival")) {
+  if (Array(abilityData.effects)?.includes("revival")) {
     buttons.push(BUTTON_CONFIGS.revive);
   }
 

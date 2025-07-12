@@ -12,7 +12,7 @@ import registerTemplates from "./helpers/startup/register-templates.mjs";
 const { ActorSheet, ItemSheet } = foundry.appv1.sheets;
 const { DocumentSheetConfig } = foundry.applications.apps;
 
-Hooks.once("init", function () {
+foundry.helpers.Hooks.once("init", function () {
   CONFIG.TERIOCK = TERIOCK;
 
   CONFIG.Combat.initiative = {
@@ -79,9 +79,6 @@ Hooks.once("init", function () {
     property: data.effect.PropertyData,
     resource: data.effect.ResourceData,
   });
-
-  // Legacy transferral
-  CONFIG.ActiveEffect.legacyTransferral = false;
 
   // Unregister V1 sheets
   DocumentSheetConfig.unregisterSheet(documents.TeriockActor, "teriock", ActorSheet);
@@ -157,15 +154,17 @@ Hooks.once("init", function () {
   );
 
   // Registering custom dice rolls and functions
-  CONFIG.Dice.rolls = [documents.TeriockRoll, documents.TeriockHarmRoll];
+  CONFIG.Dice.rolls.length = 0;
+  CONFIG.Dice.rolls.push(documents.TeriockRoll);
+  CONFIG.Dice.rolls.push(documents.TeriockHarmRoll);
 
   game.teriock = {
-    TeriockActor: documents.TeriockActor,
-    TeriockEffect: documents.TeriockEffect,
-    TeriockHarmRoll: documents.TeriockHarmRoll,
-    TeriockItem: documents.TeriockItem,
-    TeriockRoll: documents.TeriockRoll,
-    TeriockToken: documents.TeriockToken,
+    Actor: documents.TeriockActor,
+    Effect: documents.TeriockEffect,
+    HarmRoll: documents.TeriockHarmRoll,
+    Item: documents.TeriockItem,
+    Roll: documents.TeriockRoll,
+    Token: documents.TeriockToken,
   };
 
   // Register custom handlebars templates

@@ -17,7 +17,7 @@ export function _messageParts(equipmentData) {
   let damageString = "";
   if (src.damage) {
     damageString += src.damage;
-    if (src.twoHandedDamage != 0) {
+    if (src.twoHandedDamage !== "0") {
       damageString += " / " + src.twoHandedDamage;
     }
     damageString += " damage";
@@ -66,16 +66,8 @@ export function _messageParts(equipmentData) {
       text: src.specialRules,
     },
     {
-      title: "Mana storing",
-      text: src.manaStoring,
-    },
-    {
       title: "Flaws",
       text: src.flaws,
-    },
-    {
-      title: "Item tier",
-      text: src.fllTier,
     },
   ];
   addPropertiesBlock(equipmentData.parent.transferredEffects, blocks);
@@ -95,20 +87,10 @@ export function _messageParts(equipmentData) {
  * @private
  */
 export function _secretMessageParts(equipmentData) {
-  const src = equipmentData;
-  let damageString = "";
-  if (src.damage) {
-    damageString += src.damage;
-    if (src.twoHandedDamage != 0) {
-      damageString += " / " + src.twoHandedDamage;
-    }
-    damageString += " damage";
-  }
   const bars = [];
   const blocks = [
     {
       title: "Noticeable properties",
-      text: src.noticeableProperties,
     },
   ];
   return {

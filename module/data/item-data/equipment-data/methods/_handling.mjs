@@ -106,7 +106,7 @@ export async function _unequip(equipmentData) {
  * @private
  */
 export async function _equip(equipmentData) {
-  if (!equipmentData.parent.consumable || (equipmentData.consumable && equipmentData.quantity >= 1)) {
+  if (equipmentData.consumable && equipmentData.quantity >= 1) {
     await equipmentData.parent.update({ "system.equipped": true });
   }
 }

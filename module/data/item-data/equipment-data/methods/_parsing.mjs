@@ -18,11 +18,13 @@ export async function _parse(equipmentData, rawHTML) {
   const allValidProperties = [...validProperties, ...validMaterialProperties, ...validMagicalProperties, "Weapon"];
 
   // Remove existing properties
+  const toRemove = [];
   for (const effect of equipmentData.parent.transferredEffects.filter((e) => e.type === "property")) {
     if (allValidProperties.includes(effect.name)) {
-      effect.delete();
+      toRemove.push(effect._id);
     }
   }
+  await equipmentData.parent.deleteEmbeddedDocuments("ActiveEffect", toRemove);
   const doc = new DOMParser().parseFromString(rawHTML, "text/html");
   const q = (s) => doc.querySelector(s);
   const getValue = (s) => q(s)?.getAttribute("data-val");
@@ -58,8 +60,8 @@ export async function _parse(equipmentData, rawHTML) {
 
   // Parse sb, av, bv
   parameters.sb = toCamelCase(getValue(".sb") || "") ?? parameters.sb;
-  parameters.av = parseInt(cleanValue(getValue(".av"))) || 0;
-  parameters.bv = parseInt(cleanValue(getValue(".bv"))) || 0;
+  parameters.av = cleanValue(getValue(".av")) || 0;
+  parameters.bv = cleanValue(getValue(".bv")) || 0;
 
   // Special rules
   parameters.specialRules = getHTML(".special-rules") ?? parameters.specialRules;

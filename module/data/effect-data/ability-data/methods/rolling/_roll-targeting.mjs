@@ -33,7 +33,7 @@ export function tokenFromTarget(target) {
 export function _getTargets(abilityData) {
   let targets = Array.from(game.user.targets);
   const targetsSelf = abilityData.targets?.length === 1 && abilityData.targets[0] === "self";
-  const includesSelf = abilityData.targets?.includes("self");
+  const includesSelf = Array(abilityData.targets)?.includes("self");
 
   if (targetsSelf || (includesSelf && targets.length === 0)) {
     const actor = abilityData.parent.actor;
@@ -89,8 +89,9 @@ export async function _measure(abilityData) {
           ok: {
             label: "Yes",
             callback: (event, button) => {
-              radius = button.form.elements.range.valueAsNumber;
-              autoTarget = button.form.elements.auto.checked;
+              radius = Number(button.form.elements.namedItem("range").value);
+              const autoTargetCheckbox = /** @type {HTMLInputElement} */ button.form.elements.namedItem("auto");
+              autoTarget = autoTargetCheckbox.checked;
             },
           },
         });
@@ -132,12 +133,12 @@ export async function _measure(abilityData) {
           });
           measureData.targets = Array.from(targets);
         }
-        Hooks.once("combatTurnChange", async () => {
+        foundry.helpers.Hooks.once("combatTurnChange", async () => {
           if (template) {
             await template.delete();
           }
         });
-        Hooks.once("updateWorldTime", async () => {
+        foundry.helpers.Hooks.once("updateWorldTime", async () => {
           if (template) {
             await template.delete();
           }

@@ -1,4 +1,3 @@
-/** @import TeriockBaseActorData from "../../base-actor-data.mjs" */
 const { DialogV2 } = foundry.applications.api;
 import TeriockRoll from "../../../../../documents/roll.mjs";
 
@@ -6,7 +5,7 @@ import TeriockRoll from "../../../../../documents/roll.mjs";
  * Rolls to remove a condition from an actor.
  * @param {TeriockBaseActorData} system
  * @param {string} condition - The condition to roll for.
- * @param {ConditionRollOptions} options
+ * @param {Teriock.ConditionRollOptions} options
  * @returns {Promise<void>}
  * @private
  */

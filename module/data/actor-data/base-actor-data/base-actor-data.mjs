@@ -147,7 +147,7 @@ export default class TeriockBaseActorData extends TypeDataModel {
 
   /**
    * Applies hack effect to a specific part of the actor.
-   * @param {HackableBodyPart} part - The part to hack.
+   * @param {Teriock.HackableBodyPart} part - The part to hack.
    * @returns {Promise<void>} Promise that resolves when hack is applied.
    */
   async takeHack(part) {
@@ -156,7 +156,7 @@ export default class TeriockBaseActorData extends TypeDataModel {
 
   /**
    * Removes hack effect from a specific part of the actor.
-   * @param {HackableBodyPart} part - The part to unhack.
+   * @param {Teriock.HackableBodyPart} part - The part to unhack.
    * @returns {Promise<void>} Promise that resolves when unhack is applied.
    */
   async takeUnhack(part) {
@@ -182,7 +182,7 @@ export default class TeriockBaseActorData extends TypeDataModel {
   /**
    * Rolls a condition check for the actor.
    * @param {string} condition - The condition to roll for.
-   * @param {ConditionRollOptions} options - Options for the condition roll.
+   * @param {Teriock.ConditionRollOptions} options - Options for the condition roll.
    * @returns {Promise<void>} Promise that resolves when the condition roll is complete.
    */
   async rollCondition(condition, options) {
@@ -191,7 +191,7 @@ export default class TeriockBaseActorData extends TypeDataModel {
 
   /**
    * Performs post-update operations for the actor.
-   * @param {SkipFunctions} skipFunctions - Functions that should be skipped.
+   * @param {Teriock.SkipFunctions} skipFunctions - Functions that should be skipped.
    * @returns {Promise<void>} Resolves when all post-update operations are complete
    * @returns {Promise<void>} Promise that resolves when post-update is complete.
    */
@@ -202,7 +202,7 @@ export default class TeriockBaseActorData extends TypeDataModel {
   /**
    * Rolls a feat save for the specified attribute.
    * @param {string} attribute - The attribute to roll a feat save for.
-   * @param {CommonRollOptions} options - Options for the roll.
+   * @param {Teriock.} options - Options for the roll.
    * @returns {void}
    */
   rollFeatSave(attribute, options = {}) {
@@ -211,7 +211,7 @@ export default class TeriockBaseActorData extends TypeDataModel {
 
   /**
    * Rolls a resistance check.
-   * @param {CommonRollOptions} options - Options for the roll.
+   * @param {Teriock.CommonRollOptions} options - Options for the roll.
    * @returns {void}
    */
   rollResistance(options = {}) {
@@ -220,21 +220,21 @@ export default class TeriockBaseActorData extends TypeDataModel {
 
   /**
    * Rolls an immunity check.
-   * @param {CommonRollOptions} options - Options for the roll.
+   * @param {Teriock.CommonRollOptions} options - Options for the roll.
    * @returns {void}
    */
-  rollImmunity(options = {}) {
-    rollGeneric._rollImmunity(this, options);
+  async rollImmunity(options = {}) {
+    await rollGeneric._rollImmunity(this, options);
   }
 
   /**
    * Rolls a tradecraft check.
    * @param {string} tradecraft - The tradecraft to roll for.
-   * @param {CommonRollOptions} options - Options for the roll.
+   * @param {Teriock.CommonRollOptions} options - Options for the roll.
    * @returns {void}
    */
-  rollTradecraft(tradecraft, options = {}) {
-    rollGeneric._rollTradecraft(this, tradecraft, options);
+  async rollTradecraft(tradecraft, options = {}) {
+    await rollGeneric._rollTradecraft(this, tradecraft, options);
   }
 
   /**

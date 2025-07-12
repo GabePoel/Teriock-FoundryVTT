@@ -3,8 +3,6 @@ const { api, ux } = foundry.applications;
 /**
  * Handles dialogs for variable costs and heightened effects.
  * Prompts user for variable MP/HP costs and heightened amounts.
- // * @param {TeriockAbilityData} abilityData - The ability data to handle dialogs for.
- // * @param {object} useData - The use data to update with dialog results.
  * @param {object} rollConfig
  * @returns {Promise<void>} Promise that resolves when dialogs are handled.
  * @private
@@ -47,13 +45,13 @@ export async function _handleDialogs(rollConfig) {
         label: "Confirm",
         callback: (event, button) => {
           if (abilityData.costs.mp?.type === "variable") {
-            useData.costs.mp = button.form.elements.mp.valueAsNumber;
+            useData.costs.mp = Number(button.form.elements.namedItem("mp").value);
           }
           if (abilityData.costs.hp?.type === "variable") {
-            useData.costs.hp = button.form.elements.hp.valueAsNumber;
+            useData.costs.hp = Number(button.form.elements.namedItem("hp").value);
           }
           if (abilityData.parent.isProficient && abilityData.heightened) {
-            useData.modifiers.heightened = button.form.elements.heightened.valueAsNumber;
+            useData.modifiers.heightened = Number(button.form.elements.namedItem("heightened").value);
             useData.costs.mp += useData.modifiers.heightened;
           }
         },

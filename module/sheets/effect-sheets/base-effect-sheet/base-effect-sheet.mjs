@@ -24,12 +24,6 @@ export default class TeriockBaseEffectSheet extends BaseEffectSheet {
     },
   };
 
-  /** @inheritDoc */
-  constructor(...args) {
-    super(...args);
-    this.effect = this.document;
-  }
-
   /**
    * Adds a new change to an effect application.
    * @param {Event} event - The event object.
@@ -71,12 +65,10 @@ export default class TeriockBaseEffectSheet extends BaseEffectSheet {
 
   /**
    * Toggles the disabled state of the current effect.
-   * @param {Event} event - The event object.
-   * @param {HTMLElement} target - The target element.
    * @returns {Promise<void>} Promise that resolves when disabled state is toggled.
    * @static
    */
-  static async _toggledDisabledThis(event, target) {
+  static async _toggledDisabledThis() {
     await this.document.toggleDisabled();
   }
 
@@ -91,7 +83,6 @@ export default class TeriockBaseEffectSheet extends BaseEffectSheet {
     context.disabled = this.document.disabled;
     context.isSuppressed = this.document.isSuppressed;
     context.transfer = this.document.transfer;
-    context.changes = this.document.system.applies;
     const system = this.document.system;
     context.enrichedDescription = await this._editor(system.description);
     context.isProficient = this.document.isProficient;
@@ -106,7 +97,7 @@ export default class TeriockBaseEffectSheet extends BaseEffectSheet {
    * @param {object} options - Render options.
    * @override
    */
-  _onRender(context, options) {
-    super._onRender(context, options);
+  async _onRender(context, options) {
+    await super._onRender(context, options);
   }
 }

@@ -48,7 +48,7 @@ export default (Base) => {
       dragDrop: [{ dragSelector: ".draggable", dropSelector: null }],
     };
 
-    /** @type {DragDrop[]} */
+    /** @type {ux.DragDrop[]} */
     #dragDrop;
 
     /**
@@ -67,7 +67,7 @@ export default (Base) => {
 
     /**
      * Gets the drag and drop handlers for this sheet.
-     * @returns {DragDrop[]} Array of drag and drop handlers.
+     * @returns {ux.DragDrop[]} Array of drag and drop handlers.
      */
     get dragDrop() {
       return this.#dragDrop;
@@ -144,7 +144,7 @@ export default (Base) => {
 
     /**
      * Rolls the current document with optional advantage/disadvantage.
-     * @param {Event} event - The event object.
+     * @param {MouseEvent} event - The event object.
      * @returns {Promise<void>} Promise that resolves when roll is complete.
      * @static
      */
@@ -155,9 +155,9 @@ export default (Base) => {
 
     /**
      * Opens image picker for editing document images.
-     * @param {Event} _ - The event object.
+     * @param {MouseEvent} _ - The event object.
      * @param {HTMLElement} target - The target element.
-     * @returns {Promise<void>} Promise that resolves when image picker is opened.
+     * @returns {Promise<FilePicker>} Promise that resolves when image picker is opened.
      * @static
      */
     static async _editImage(_, target) {
@@ -165,7 +165,7 @@ export default (Base) => {
       const current = foundry.utils.getProperty(this.document, attr);
       const defaultImg = this.document.constructor.getDefaultArtwork?.(this.document.toObject())?.img;
 
-      return new foundry.applications.apps.FilePicker({
+      return /** @type {FilePicker} */ new foundry.applications.apps.FilePicker({
         current,
         type: "image",
         redirectToRoot: defaultImg ? [defaultImg] : [],
@@ -225,7 +225,7 @@ export default (Base) => {
 
     /**
      * Rolls an embedded document with optional advantage/disadvantage.
-     * @param {Event} event - The event object.
+     * @param {MouseEvent} event - The event object.
      * @param {HTMLElement} target - The target element.
      * @returns {Promise<void>} Promise that resolves when roll is complete.
      * @static
@@ -358,8 +358,8 @@ export default (Base) => {
      * @param {object} options - Render options.
      * @override
      */
-    _onRender(context, options) {
-      super._onRender(context, options);
+    async _onRender(context, options) {
+      await super._onRender(context, options);
       this.editable = this.isEditable && !this._locked;
       connectEmbedded(this.document, this.element, this.editable);
 
@@ -646,11 +646,14 @@ export default (Base) => {
      * @private
      */
     _connectButtonMap(map) {
-      const html = $(this.element);
+      const container = this.element;
       for (const [selector, path] of Object.entries(map)) {
-        html.on("click", selector, (e) => {
-          e.preventDefault();
-          this.document.update({ [path]: "Insert effect here." });
+        const elements = container.querySelectorAll(selector);
+        elements.forEach((el) => {
+          el.addEventListener("click", (e) => {
+            e.preventDefault();
+            this.document.update({ [path]: "Insert effect here." });
+          });
         });
       }
     }
@@ -658,13 +661,13 @@ export default (Base) => {
     /**
      * Creates a context menu for elements.
      * @param {string} cssClass - The CSS class for elements to attach the menu to.
-     * @param {object} options - The context menu options.
+     * @param {object} menuItems - The context menu items.
      * @param {string} eventName - The event name to trigger the menu.
      * @returns {ContextMenu} The created context menu.
      * @private
      */
-    _connectContextMenu(cssClass, options, eventName) {
-      return new ux.ContextMenu(this.element, cssClass, options, {
+    _connectContextMenu(cssClass, menuItems, eventName) {
+      return /** @type {ContextMenu} */ new ux.ContextMenu(this.element, cssClass, menuItems, {
         eventName,
         jQuery: false,
         fixed: false,
@@ -674,10 +677,11 @@ export default (Base) => {
     /**
      * Extracts an embedded document from a card element.
      * @param {HTMLElement} target - The target element to extract from.
-     * @returns {Promise<Document|null>} The embedded document or null if not found.
+     * @returns {Promise<ClientDocument|null>} The embedded document or null if not found.
      * @private
      */
     async _embeddedFromCard(target) {
+      /** @type {HTMLElement} */
       const card = target.closest(".tcard");
       const { id, type, parentId } = card?.dataset ?? {};
 
@@ -775,7 +779,7 @@ export default (Base) => {
      * Handles dropping of items.
      * @param {DragEvent} event - The drop event.
      * @param {object} data - The item data.
-     * @returns {Promise<TeriockItem>} Promise that resolves to true if drop was successful.
+     * @returns {Promise<TeriockItem|boolean>} Promise that resolves to true if drop was successful.
      * @private
      */
     async _onDropItem(event, data) {

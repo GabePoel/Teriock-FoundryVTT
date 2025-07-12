@@ -1,4 +1,3 @@
-/** @import TeriockBaseActorData from "../../base-actor-data.mjs"; */
 import { _prepareAttributes, _prepareBonuses, _prepareHpMp, _preparePresence } from "./_prepare-stats.mjs";
 import { _prepareDefenses, _prepareOffenses } from "./_prepare-combat.mjs";
 import { _prepareEncumbrance, _prepareMoney, _prepareWeightCarried } from "./_prepare-load.mjs";

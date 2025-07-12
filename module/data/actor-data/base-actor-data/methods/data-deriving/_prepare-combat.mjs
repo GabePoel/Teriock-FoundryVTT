@@ -1,5 +1,3 @@
-/** @import TeriockBaseActorData from "../../base-actor-data.mjs" */
-
 /**
  * Prepares defensive combat values for the actor.
  * Calculates block value, armor value, armor class, and combined class based on equipped equipment.

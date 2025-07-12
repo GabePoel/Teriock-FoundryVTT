@@ -24,7 +24,7 @@ function _buildEffectTypes(document) {
  * Mixin for common functions used across document classes that embed children.
  * @template {import("@common/_types.mjs").Constructor<foundry.abstract.Document>} BaseDocument
  * @implements {ParentDocumentMixinInterface}
- * @param {BaseDocument} Base
+ * @param {{new(): ChildDocumentMixin, prototype: ChildDocumentMixin}|BaseDocument} Base
  */
 export default (Base) => {
   return class ParentDocumentMixin extends Base {

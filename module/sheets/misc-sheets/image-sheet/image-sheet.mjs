@@ -66,8 +66,8 @@ export default class TeriockImageSheet extends api.HandlebarsApplicationMixin(ap
    * @param {object} options - Render options.
    * @override
    */
-  _onRender(context, options) {
-    super._onRender(context, options);
+  async _onRender(context, options) {
+    await super._onRender(context);
     new ux.ContextMenu(this.element, ".timage", imageContextMenuOptions, {
       eventName: "contextmenu",
       jQuery: false,

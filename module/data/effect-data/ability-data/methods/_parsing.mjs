@@ -254,8 +254,7 @@ function processTags(parameters, tagTree, doc, changes) {
   if (parameters.executionTime === "shortRest") parameters.executionTime = "Short Rest";
   if (parameters.executionTime === "longRest") parameters.executionTime = "Long Rest";
   if (!parameters.executionTime) {
-    const executionTime = getBarText(doc, "execution-time", true) || getBarText(doc, "casting-time", true);
-    parameters.executionTime = executionTime;
+    parameters.executionTime = getBarText(doc, "execution-time", true) || getBarText(doc, "casting-time", true);
   }
 
   // Set basic parameters
@@ -446,6 +445,7 @@ function extractDiceFromHTML(html) {
   tempDiv.innerHTML = html || "";
   const dice = {};
   tempDiv.querySelectorAll(".dice").forEach((el) => {
+    if (!(el instanceof HTMLElement)) return;
     const type = el.dataset.type;
     const fullRoll = el.dataset.fullRoll;
     if (type && type !== "none" && fullRoll) {
@@ -467,6 +467,7 @@ function extractHacksFromHTML(html) {
   tempDiv.innerHTML = html || "";
   const hacks = new Set();
   tempDiv.querySelectorAll("span.metadata[data-type='hack']").forEach((el) => {
+    if (!(el instanceof HTMLElement)) return;
     const part = el.dataset.part;
     if (part) {
       hacks.add(part);
@@ -487,6 +488,7 @@ function extractConditionsFromHTML(html) {
   tempDiv.innerHTML = html || "";
   const conditions = new Set();
   tempDiv.querySelectorAll("span.metadata[data-type='condition']").forEach((el) => {
+    if (!(el instanceof HTMLElement)) return;
     const condition = el.dataset.condition;
     if (condition) {
       conditions.add(condition);
@@ -507,6 +509,7 @@ function extractStartConditionsFromHTML(html) {
   tempDiv.innerHTML = html || "";
   const startConditions = new Set();
   tempDiv.querySelectorAll("span.metadata[data-type='start-condition']").forEach((el) => {
+    if (!(el instanceof HTMLElement)) return;
     const condition = el.dataset.condition;
     if (condition) {
       startConditions.add(condition);
@@ -527,6 +530,7 @@ function extractEndConditionsFromHTML(html) {
   tempDiv.innerHTML = html || "";
   const endConditions = new Set();
   tempDiv.querySelectorAll("span.metadata[data-type='end-condition']").forEach((el) => {
+    if (!(el instanceof HTMLElement)) return;
     const condition = el.dataset.condition;
     if (condition) {
       endConditions.add(condition);
@@ -547,6 +551,7 @@ function extractTradecraftChecksFromHTML(html) {
   tempDiv.innerHTML = html || "";
   const checks = new Set();
   tempDiv.querySelectorAll("span.metadata[data-type='tradecraft-check']").forEach((el) => {
+    if (!(el instanceof HTMLElement)) return;
     const tradecraft = el.dataset.tradecraft;
     if (tradecraft) {
       checks.add(tradecraft);
@@ -568,6 +573,7 @@ function extractChangesFromHTML(html) {
   tempDiv.innerHTML = html || "";
   const changes = [];
   tempDiv.querySelectorAll("span.metadata[data-type='change']").forEach((el) => {
+    if (!(el instanceof HTMLElement)) return;
     const key = el.dataset.key;
     const mode = el.dataset.mode;
     const value = el.dataset.value;

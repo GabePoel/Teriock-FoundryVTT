@@ -139,7 +139,7 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
 
   /**
    * Toggles the equipped state of an embedded document.
-   * @param {Event} event - The event object.
+   * @param {MouseEvent} event - The event object.
    * @param {HTMLElement} target - The target element.
    * @returns {Promise<void>} Promise that resolves when toggle is complete.
    * @static
@@ -151,7 +151,7 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
 
   /**
    * Toggles the disabled state of an embedded document.
-   * @param {Event} event - The event object.
+   * @param {MouseEvent} event - The event object.
    * @param {HTMLElement} target - The target element.
    * @returns {Promise<void>} Promise that resolves when toggle is complete.
    * @static
@@ -164,7 +164,7 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
   /**
    * Adds a new embedded document to the actor.
    * Creates documents based on the specified tab type.
-   * @param {Event} _ - The event object.
+   * @param {MouseEvent} _ - The event object.
    * @param {HTMLElement} target - The target element.
    * @returns {Promise<void>} Promise that resolves when document is created.
    * @static
@@ -231,13 +231,14 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
     };
     const entry = tabMap[tab];
     if (!entry) return;
+    /** @type {(Document|ClientDocument)[]} */
     const docs = await this.actor.createEmbeddedDocuments(entry.docType, [entry.data]);
-    if (docs[0]?.sheet) docs[0].sheet.render(true);
+    await docs[0].sheet?.render(true);
   }
 
   /**
    * Cycles through tradecraft extra levels (0, 1, 2).
-   * @param {Event} event - The event object.
+   * @param {MouseEvent} event - The event object.
    * @param {HTMLElement} target - The target element.
    * @returns {Promise<void>} Promise that resolves when tradecraft extra is updated.
    * @static
@@ -251,7 +252,7 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
 
   /**
    * Rolls a hit die for a rank item.
-   * @param {Event} event - The event object.
+   * @param {MouseEvent} event - The event object.
    * @param {HTMLElement} target - The target element.
    * @returns {Promise<void>} Promise that resolves when hit die is rolled.
    * @static
@@ -266,7 +267,7 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
 
   /**
    * Rolls a mana die for a rank item.
-   * @param {Event} event - The event object.
+   * @param {MouseEvent} event - The event object.
    * @param {HTMLElement} target - The target element.
    * @returns {Promise<void>} Promise that resolves when mana die is rolled.
    * @static
@@ -281,7 +282,7 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
 
   /**
    * Rolls a tradecraft check with optional advantage/disadvantage.
-   * @param {Event} event - The event object.
+   * @param {MouseEvent} event - The event object.
    * @param {HTMLElement} target - The target element.
    * @returns {Promise<void>} Promise that resolves when tradecraft is rolled.
    * @static
@@ -296,7 +297,7 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
 
   /**
    * Rolls a feat save with optional advantage/disadvantage.
-   * @param {Event} event - The event object.
+   * @param {MouseEvent} event - The event object.
    * @param {HTMLElement} target - The target element.
    * @returns {Promise<void>} Promise that resolves when feat save is rolled.
    * @static
@@ -315,12 +316,12 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
    * @static
    */
   static async _toggleSb() {
-    this.document.update({ "system.sb": !this.document.system.sb });
+    await this.document.update({ "system.sb": !this.document.system.sb });
   }
 
   /**
    * Opens the primary attacker's sheet.
-   * @param {Event} event - The event object.
+   * @param {MouseEvent} event - The event object.
    * @returns {Promise<void>} Promise that resolves when sheet is opened.
    * @static
    */
@@ -331,7 +332,7 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
 
   /**
    * Opens the primary blocker's sheet.
-   * @param {Event} event - The event object.
+   * @param {MouseEvent} event - The event object.
    * @returns {Promise<void>} Promise that resolves when sheet is opened.
    * @static
    */
@@ -342,7 +343,7 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
 
   /**
    * Quickly uses an item with optional modifiers.
-   * @param {Event} event - The event object.
+   * @param {MouseEvent} event - The event object.
    * @param {HTMLElement} target - The target element.
    * @returns {Promise<void>} Promise that resolves when item is used.
    * @static
@@ -364,7 +365,7 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
 
   /**
    * Prompts for damage amount and applies it to the actor.
-   * @param {Event} event - The event object.
+   * @param {MouseEvent} event - The event object.
    * @returns {Promise<void>} Promise that resolves when damage is applied.
    * @static
    */
@@ -376,7 +377,7 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
       ok: {
         label: "Confirm",
         callback: (event, button) => {
-          let input = button.form.elements.damage.value;
+          let input = button.form.elements.namedItem("damage").value;
           if (input) {
             this.document.takeDamage(Number(input));
           }
@@ -387,7 +388,7 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
 
   /**
    * Prompts for drain amount and applies it to the actor.
-   * @param {Event} event - The event object.
+   * @param {MouseEvent} event - The event object.
    * @returns {Promise<void>} Promise that resolves when drain is applied.
    * @static
    */
@@ -399,7 +400,7 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
       ok: {
         label: "Confirm",
         callback: (event, button) => {
-          let input = button.form.elements.drain.value;
+          let input = button.form.elements.namedItem("drain").value;
           if (input) {
             this.document.takeDrain(Number(input));
           }
@@ -410,7 +411,7 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
 
   /**
    * Prompts for wither amount and applies it to the actor.
-   * @param {Event} event - The event object.
+   * @param {MouseEvent} event - The event object.
    * @returns {Promise<void>} Promise that resolves when wither is applied.
    * @static
    */
@@ -422,7 +423,7 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
       ok: {
         label: "Confirm",
         callback: (event, button) => {
-          let input = button.form.elements.wither.value;
+          let input = button.form.elements.namedItem("wither").value;
           if (input) {
             this.document.takeWither(Number(input));
           }
@@ -433,7 +434,7 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
 
   /**
    * Removes a condition with optional modifiers.
-   * @param {Event} event - The event object.
+   * @param {MouseEvent} event - The event object.
    * @param {HTMLElement} target - The target element.
    * @returns {Promise<void>} Promise that resolves when condition is removed.
    * @static
@@ -450,7 +451,7 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
 
   /**
    * Deattunes an attunement effect.
-   * @param {Event} event - The event object.
+   * @param {MouseEvent} event - The event object.
    * @param {HTMLElement} target - The target element.
    * @returns {Promise<void>} Promise that resolves when attunement is removed.
    * @static
@@ -472,35 +473,36 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
 
   /**
    * Applies a hack to a specific body part.
-   * @param {Event} event - The event object.
+   * @param {MouseEvent} event - The event object.
    * @param {HTMLElement} target - The target element.
    * @returns {Promise<void>} Promise that resolves when hack is applied.
    * @static
    */
   static async _takeHack(event, target) {
     event.stopPropagation();
-    const part = target.dataset.part;
+    const part = /** @type {Teriock.HackableBodyPart} */ target.dataset.part;
     await this.actor.takeHack(part);
   }
 
   /**
    * Performs a basic attack with optional advantage/disadvantage.
-   * @param {Event} event - The event object.
+   * @param {MouseEvent} event - The event object.
    * @returns {Promise<void>} Promise that resolves when attack is performed.
    * @static
    */
   static async _attack(event) {
     event.stopPropagation();
+    /** @type {Teriock.CommonRollOptions} */
     const options = {
-      advantage: event.altKey,
-      disadvantage: event.shiftKey,
+      advantage: Boolean(event.altKey),
+      disadvantage: Boolean(event.shiftKey),
     };
     await this.actor.useAbility("Basic Attack", options);
   }
 
   /**
    * Rolls resistance with optional advantage/disadvantage.
-   * @param {Event} event - The event object.
+   * @param {MouseEvent} event - The event object.
    * @param {HTMLElement} target - The target element.
    * @returns {Promise<void>} Promise that resolves when resistance is rolled.
    * @static
@@ -524,7 +526,7 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
 
   /**
    * Rolls immunity with optional advantage/disadvantage.
-   * @param {Event} event - The event object.
+   * @param {MouseEvent} event - The event object.
    * @param {HTMLElement} target - The target element.
    * @returns {Promise<void>} Promise that resolves when immunity is rolled.
    * @static
@@ -538,6 +540,7 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
         message = img.alt;
       }
     }
+    /** @type {Teriock.CommonRollOptions} */
     const options = {
       advantage: event.altKey,
       disadvantage: event.shiftKey,
@@ -548,7 +551,7 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
 
   /**
    * Ends a condition with optional advantage/disadvantage.
-   * @param {Event} event - The event object.
+   * @param {MouseEvent} event - The event object.
    * @param {HTMLElement} target - The target element.
    * @returns {Promise<void>} Promise that resolves when condition is ended.
    * @static
@@ -632,7 +635,7 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
     const context = await super._prepareContext(options);
     context.activeTab = this._activeTab;
     context.conditions = conditions;
-    context.removableConditions = conditions.filter((c) => this.document.effectKeys.base.has(c));
+    context.removableConditions = conditions.filter((c) => this.actor.effectKeys.base.has(c));
     context.editable = this.isEditable;
     context.actor = this.actor;
     context.abilities = _sortAbilities(this.actor) || [];
@@ -646,9 +649,10 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
     context.sidebarOpen = this._sidebarOpen;
     context.tabs = {
       classes: {
-        cssClass: this.tabGroups.primary === "classes" ? "active" : "",
-        group: "primary",
         id: "classes",
+        group: "primary",
+        active: this.tabGroups.primary === "classes",
+        cssClass: this.tabGroups.primary === "classes" ? "active" : "",
         label: "Classes",
       },
     };
@@ -668,7 +672,7 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
    * @returns {ActiveEffect|null} The ability effect or null if not found.
    */
   _getAbility(id, parentId) {
-    return parentId ? this.document.items.get(parentId)?.effects.get(id) : this.document.effects.get(id);
+    return parentId ? this.actor.items.get(parentId)?.effects.get(id) : this.actor.effects.get(id);
   }
 
   /**
@@ -678,12 +682,16 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
    * @param {object} options - Render options.
    * @override
    */
-  _onRender(context, options) {
-    super._onRender(context, options);
+  async _onRender(context, options) {
+    await super._onRender(context, options);
 
+    /** @type {HTMLDivElement} */
     const sidebar = this.element.querySelector(".character-sidebar");
+    /** @type {HTMLDivElement} */
     const tabber = this.element.querySelector(".character-sidebar-tabber-container");
+    /** @type {HTMLDivElement} */
     const hitDrawer = this.element.querySelector(".hit-die-drawer");
+    /** @type {HTMLDivElement} */
     const manaDrawer = this.element.querySelector(".mana-die-drawer");
 
     sidebar.classList.add("no-transition");
@@ -709,7 +717,9 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
     this.element.querySelectorAll(".character-tabber").forEach((el) => {
       el.addEventListener("click", async (e) => {
         e.preventDefault();
-        const tab = e.currentTarget.dataset.tab;
+        /** @type {HTMLElement} */
+        const currentTarget = e.currentTarget;
+        const tab = currentTarget.dataset.tab;
         if (tab === "sidebar") {
           sidebar.classList.toggle("collapsed");
           tabber.classList.toggle("collapsed");
@@ -743,6 +753,7 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
     this.element.querySelectorAll(".die-box").forEach((el) => {
       el.addEventListener("contextmenu", (e) => {
         e.preventDefault();
+        if (!(el instanceof HTMLElement)) return;
         const id = el.dataset.id;
         const rank = this.actor.items.get(id);
         const die = el.dataset.die;
@@ -758,6 +769,7 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
     this.element.querySelectorAll(".ch-attribute-save-box").forEach((el) => {
       el.addEventListener("contextmenu", async (e) => {
         e.preventDefault();
+        if (!(el instanceof HTMLElement)) return;
         const attr = el.dataset.attribute;
         const current = this.document.system.attributes[attr].saveFluent;
         await this.document.update({ [`system.attributes.${attr}.saveFluent`]: !current });
@@ -774,6 +786,7 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
     this.element.querySelectorAll(".condition-toggle").forEach((el) => {
       el.addEventListener("contextmenu", async (e) => {
         e.preventDefault();
+        if (!(el instanceof HTMLElement)) return;
         const condition = el.dataset.condition;
         await this.actor.rollCondition(condition, { skip: true });
         e.stopPropagation();
@@ -783,7 +796,8 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
     this.element.querySelectorAll(".hack-marker-box").forEach((el) => {
       el.addEventListener("contextmenu", async (e) => {
         e.preventDefault();
-        const part = el.dataset.part;
+        if (!(el instanceof HTMLElement)) return;
+        const part = /** @type {Teriock.HackableBodyPart} */ el.dataset.part;
         await this.actor.takeUnhack(part);
         e.stopPropagation();
       });
@@ -805,73 +819,70 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
     this._loadingSearch = true;
     this.#runSearchFilters();
     this.#initSearchFilters();
-    this.element.querySelectorAll(".tcard-search").forEach((input) => {
+
+    /** @type {NodeListOf<HTMLInputElement>} */
+    const searchInputs = this.element.querySelectorAll(".tcard-search");
+    searchInputs.forEach((input) => {
       input.value = this[`_${input.dataset.type}SearchValue`];
     });
 
     // Add listeners for filter selects
-    this.element
-      .querySelectorAll('select[name^="settings.abilityFilters"], select[name^="settings.equipmentFilters"]')
-      .forEach((el) => {
-        el.addEventListener("change", async (e) => {
-          const name = e.target.name;
-          if (!name) return;
-          const path = name.split(".").slice(1); // remove 'settings'
-          let obj = this.settings;
-          for (let i = 0; i < path.length - 1; i++) {
-            obj = obj[path[i]];
-          }
-          obj[path[path.length - 1]] = e.target.value;
-          await this.render();
-        });
-      });
 
-    // Add listeners for tswitch buttons
-    this.element.querySelectorAll('button[data-action="toggleSwitch"]').forEach((el) => {
-      // Left click: forward cycle
-      el.addEventListener("click", async () => {
-        const name = el.getAttribute("data-name");
+    /** @type {NodeListOf<HTMLSelectElement>} */
+    const filterSelects = this.element.querySelectorAll(
+      'select[name^="settings.abilityFilters"], select[name^="settings.equipmentFilters"]',
+    );
+    filterSelects.forEach((el) => {
+      el.addEventListener("change", async (e) => {
+        /** @type {HTMLSelectElement} */
+        const filterSelect = e.target;
+        const name = filterSelect.name;
         if (!name) return;
-        const path = name.split(".").slice(1); // remove 'settings'
+        const path = name.split(".").slice(1);
         let obj = this.settings;
         for (let i = 0; i < path.length - 1; i++) {
           obj = obj[path[i]];
         }
-        // Three-way toggle: 0 -> 1 -> -1 -> 0
-        const key = path[path.length - 1];
-        let val = obj[key];
-        if (val === 0) {
-          obj[key] = 1;
-        } else if (val === 1) {
-          obj[key] = -1;
-        } else {
-          obj[key] = 0;
-        }
-        await this.render();
-      });
-      // Right click: reverse cycle
-      el.addEventListener("contextmenu", async (e) => {
-        e.preventDefault();
-        const name = el.getAttribute("data-name");
-        if (!name) return;
-        const path = name.split(".").slice(1); // remove 'settings'
-        let obj = this.settings;
-        for (let i = 0; i < path.length - 1; i++) {
-          obj = obj[path[i]];
-        }
-        // Reverse three-way toggle: 0 -> -1 -> 1 -> 0
-        const key = path[path.length - 1];
-        let val = obj[key];
-        if (val === 0) {
-          obj[key] = -1;
-        } else if (val === -1) {
-          obj[key] = 1;
-        } else {
-          obj[key] = 0;
-        }
+        obj[path[path.length - 1]] = e.target.value;
         await this.render();
       });
     });
+
+    /** @type {NodeListOf<HTMLButtonElement>} */
+    const toggleSwitches = this.element.querySelectorAll('button[data-action="toggleSwitch"]');
+    toggleSwitches.forEach((el) => {
+      // Left click: forward cycle
+      el.addEventListener("click", async () => {
+        this.cycleToggleSwitch(el, true);
+        await this.render();
+      });
+      // Right click: reverse cycle
+      el.addEventListener("contextmenu", async () => {
+        this.cycleToggleSwitch(el, false);
+        await this.render();
+      });
+    });
+  }
+
+  /**
+   * @param {HTMLButtonElement} toggleSwitch
+   * @param {boolean} forward
+   */
+  cycleToggleSwitch(toggleSwitch, forward = true) {
+    const name = toggleSwitch.getAttribute("data-name");
+    if (!name) return;
+    const path = name.split(".").slice(1);
+    let obj = this.settings;
+    for (let i = 0; i < path.length - 1; i++) {
+      obj = obj[path[i]];
+    }
+    const key = path[path.length - 1];
+    const val = obj[key];
+    if (forward) {
+      obj[key] = ((val + 2) % 3) - 1;
+    } else {
+      obj[key] = ((val + 3) % 3) - 1;
+    }
   }
 
   /**
@@ -929,7 +940,7 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
    * @param {string|null} filterMethodName - The filter method name.
    * @param {RegExp} rgx - The search regex.
    * @param {HTMLElement} content - The content element.
-   * @param {HTMLElement} input - The input element.
+   * @param {HTMLInputElement} input - The input element.
    * @private
    */
   #handleSearchFilter(type, sourceKey, filterMethodName, rgx, content, input) {

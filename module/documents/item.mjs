@@ -74,7 +74,7 @@ export default class TeriockItem extends BaseTeriockItem {
       ok: {
         label: "Pull",
         callback: (event, button) => {
-          let input = button.form.elements.pullInput.value;
+          let input = button.form.elements.namedItem("pullInput").value;
           if (input.startsWith(`${pullTypeName}:`)) {
             input = input.slice(`${pullTypeName}:`.length);
           }
@@ -83,6 +83,7 @@ export default class TeriockItem extends BaseTeriockItem {
       },
     });
     const pages = await fetchCategoryMembers(toPull);
+    /** @type {object} */
     const progress = ui.notifications.info(`Pulling Category:${toPull} from wiki.`, { progress: true });
     let pct = 0;
     for (const page of pages) {

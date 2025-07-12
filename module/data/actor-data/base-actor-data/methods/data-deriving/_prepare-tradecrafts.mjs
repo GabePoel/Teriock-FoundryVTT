@@ -1,5 +1,3 @@
-/** @import TeriockBaseActorData from "../../base-actor-data.mjs"; */
-
 /**
  * Prepares a single tradecraft's bonus value.
  * Calculates the total bonus based on proficiency and extra modifiers.

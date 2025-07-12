@@ -4,7 +4,7 @@ import { dispatch } from "../../commands/dispatch.mjs";
 import { imageContextMenuOptions } from "../../sheets/misc-sheets/image-sheet/connections/_context-menus.mjs";
 
 export default function registerHooks() {
-  Hooks.on("updateItem", async (document, updateData, options, userId) => {
+  foundry.helpers.Hooks.on("updateItem", async (document, updateData, options, userId) => {
     if (game.user.id === userId && document.isOwner) {
       if (document.type === "equipment" && document.system.attuned && updateData.system.tier) {
         const attunement = document.system.attunement;
@@ -18,7 +18,7 @@ export default function registerHooks() {
     }
   });
 
-  Hooks.on("updateActor", async (document, changed, options, userId) => {
+  foundry.helpers.Hooks.on("updateActor", async (document, changed, options, userId) => {
     if (game.user.id === userId && document.isOwner) {
       const doCheckDown =
         typeof changed.system?.hp?.value === "number" || typeof changed.system?.mp?.value === "number";
@@ -28,7 +28,7 @@ export default function registerHooks() {
     }
   });
 
-  Hooks.on("createItem", async (document, options, userId) => {
+  foundry.helpers.Hooks.on("createItem", async (document, options, userId) => {
     if (game.user.id === userId && document.isOwner) {
       if (document.type === "equipment") {
         if (document.actor) {
@@ -40,14 +40,14 @@ export default function registerHooks() {
     }
   });
 
-  Hooks.on("deleteItem", async (document, options, userId) => {
+  foundry.helpers.Hooks.on("deleteItem", async (document, options, userId) => {
     if (game.user.id === userId && document.isOwner) {
       document.actor?.buildEffectTypes();
       await document.actor?.postUpdate();
     }
   });
 
-  Hooks.on("createActiveEffect", async (document, options, userId) => {
+  foundry.helpers.Hooks.on("createActiveEffect", async (document, options, userId) => {
     if (game.user.id === userId && document.isOwner) {
       if (document.type === "ability" || document.type === "effect") {
         console.log(document.system.subIds);
@@ -76,7 +76,7 @@ export default function registerHooks() {
     }
   });
 
-  Hooks.on("deleteActiveEffect", async (document, options, userId) => {
+  foundry.helpers.Hooks.on("deleteActiveEffect", async (document, options, userId) => {
     if (game.user.id === userId && document.isOwner) {
       if (document.type === "ability" || document.type === "effect") {
         if (document.system.supId) {
@@ -97,7 +97,7 @@ export default function registerHooks() {
   });
 
   // TODO: This might not be needed anymore.
-  Hooks.on("updateActiveEffect", async (document, updateData, options, userId) => {
+  foundry.helpers.Hooks.on("updateActiveEffect", async (document, updateData, options, userId) => {
     console.debug(`Teriock | Active Effect updated: ${document.name}`, updateData);
     if (game.user.id === userId && document.isOwner && document.type === "ability") {
       const sup = document.sup;
@@ -108,7 +108,7 @@ export default function registerHooks() {
     }
   });
 
-  Hooks.on("combatTurnChange", async (combat, prior, current) => {
+  foundry.helpers.Hooks.on("combatTurnChange", async (combat, prior, current) => {
     const combatants = combat.combatants;
     for (const combatant of combatants) {
       const actor = combatant.actor;
@@ -128,12 +128,12 @@ export default function registerHooks() {
     }
   });
 
-  Hooks.on("chatMessage", (chatLog, message, chatData) => {
+  foundry.helpers.Hooks.on("chatMessage", (chatLog, message, chatData) => {
     const sender = game.users.get(chatData.user);
     if (message.startsWith("/")) return dispatch(message, chatData, sender);
   });
 
-  Hooks.on("renderChatMessageHTML", (message, html, context) => {
+  foundry.helpers.Hooks.on("renderChatMessageHTML", (message, html, context) => {
     new ux.ContextMenu(html, ".timage", imageContextMenuOptions, {
       eventName: "contextmenu",
       jQuery: false,
@@ -146,7 +146,7 @@ export default function registerHooks() {
         const img = imgEl.getAttribute("data-src");
         if (img && img.length > 0) {
           const image = new TeriockImageSheet(img);
-          image.render(true);
+          await image.render(true);
         }
       });
     });
@@ -157,9 +157,9 @@ export default function registerHooks() {
           const data = event.currentTarget.dataset;
           const amount = parseInt(data.amount);
           const type = data.type || "damage";
-          const targets = game.user.targets;
-
+          const targets = game.user?.targets;
           for (const target of targets) {
+            /** @type {TeriockActor} */
             const actor = target.actor;
             if (!actor) continue;
             if (type === "damage") {
@@ -179,9 +179,10 @@ export default function registerHooks() {
         event.preventDefault();
         const uuid = tag.getAttribute("data-uuid");
         if (!uuid) return;
-        const doc = await fromUuid(uuid);
+        /** @type {ClientDocument} */
+        const doc = await foundry.utils.fromUuid(uuid);
         if (doc && typeof doc.sheet?.render === "function") {
-          doc.sheet.render(true);
+          await doc.sheet.render(true);
         }
       });
     });
@@ -264,7 +265,6 @@ export default function registerHooks() {
             }
           }
           if (action === "rollResistance") {
-            const attr = button.getAttribute("data-data");
             const options = {};
             if (event.altKey) options.advantage = true;
             if (event.shiftKey) options.disadvantage = true;
@@ -580,22 +580,7 @@ export default function registerHooks() {
     });
   });
 
-  Hooks.on("renderDialogV2", (application, html, context) => {
-    const openTags = html.querySelectorAll('[data-action="open"]');
-    openTags.forEach((tag) => {
-      tag.addEventListener("click", async (event) => {
-        event.preventDefault();
-        const uuid = tag.getAttribute("data-uuid");
-        if (!uuid) return;
-        const doc = await fromUuid(uuid);
-        if (doc && typeof doc.sheet?.render === "function") {
-          doc.sheet.render(true);
-        }
-      });
-    });
-  });
-
-  Hooks.on("hotbarDrop", (bar, data, slot) => {
+  foundry.helpers.Hooks.on("hotbarDrop", (bar, data, slot) => {
     fromUuid(data.uuid).then(async (item) => {
       if (!item || typeof item.roll !== "function") return;
       const id = item._id;
@@ -644,17 +629,17 @@ await item.use(options);
     return false;
   });
 
-  Hooks.on("combatRound", (combat, updateData, updateOptions) => {
+  foundry.helpers.Hooks.on("combatRound", (combat, updateData, updateOptions) => {
     const direction = updateOptions.direction;
     game.time.advance(5 * direction);
   });
 
-  Hooks.on("updateWorldTime", (worldTime, dt, options, userId) => {
-    if (game.user.id === userId && game.user.isActiveGM) {
-      const sceneId = game.user.viewedScene;
-      const scene = game.scenes.get(sceneId);
-      const tokens = scene?.tokens;
-      const actors = tokens?.map((token) => token.actor);
+  foundry.helpers.Hooks.on("updateWorldTime", (worldTime, dt, options, userId) => {
+    if (game.user.id === userId && game.user?.isActiveGM) {
+      const scene = game.scenes.viewed;
+      const tokens = scene.tokens;
+      /** @type TeriockActor[] */
+      const actors = tokens.map((token) => token.actor);
       for (const actor of actors) {
         const effects = actor.temporaryEffects;
         for (const effect of effects) {
@@ -664,7 +649,7 @@ await item.use(options);
     }
   });
 
-  Hooks.on("moveToken", async (document, movement, operation, user) => {
+  foundry.helpers.Hooks.on("moveToken", async (document, movement, operation, user) => {
     if (document.isOwner && document.actor && game.user.id === user._id) {
       const actor = document.actor;
       if (actor.effectKeys?.effect?.has("brace")) {
@@ -677,7 +662,7 @@ await item.use(options);
     }
   });
 
-  Hooks.on("applyTokenStatusEffect", (token, statusId, active) => {
+  foundry.helpers.Hooks.on("applyTokenStatusEffect", (token, statusId, active) => {
     const actor = token.actor;
     if (actor) {
       actor.prepareDerivedData();

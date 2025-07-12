@@ -70,7 +70,7 @@ async function generateRolls(rollConfig, rollGenerator, noDice) {
  * Handles attack formula construction, piercing, and target information.
  * @param {TeriockAbilityData} abilityData - The ability data to generate attack roll for.
  * @param {object} useData - The use data containing costs and modifiers.
- * @param {CommonRollOptions} options - Options for the attack roll.
+ * @param {Teriock.CommonRollOptions} options - Options for the attack roll.
  * @returns {Promise<TeriockRoll>} Promise that resolves to the attack roll.
  * @private
  */
@@ -139,7 +139,7 @@ function getPiercingInfo(abilityData, rollData) {
 function buildRollContext(abilityData, target, buttons, diceClass, diceTooltip, unblockable) {
   const context = { diceClass, diceTooltip, buttons };
 
-  if (abilityData.effects?.includes("resistance")) {
+  if (Array(abilityData.effects)?.includes("resistance")) {
     Object.assign(context, {
       diceClass: "resist",
       diceTooltip: "",
@@ -177,7 +177,7 @@ function buildRollContext(abilityData, target, buttons, diceClass, diceTooltip, 
  * Creates a feat roll with proficiency modifiers and target information.
  * @param {TeriockAbilityData} abilityData - The ability data to generate feat roll for.
  * @param {object} useData - The use data containing costs and modifiers.
- * @param {CommonRollOptions} options - Options for the feat roll.
+ * @param {Teriock.CommonRollOptions} options - Options for the feat roll.
  * @returns {Promise<TeriockRoll>} Promise that resolves to the feat roll.
  * @private
  */

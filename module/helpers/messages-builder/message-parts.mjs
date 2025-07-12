@@ -22,8 +22,8 @@ export function messageBox() {
 /**
  * Creates a message bar with icon and label containers.
  * @param {HTMLElement} parent - The parent element to append the bar to.
- * @param {string} icon - Optional icon class for the bar.
- * @param {string} label - Optional label text for the bar.
+ * @param {string|null} icon - Optional icon class for the bar.
+ * @param {string|null} label - Optional label text for the bar.
  * @returns {HTMLDivElement} The created message bar element.
  */
 export function messageBar(parent, icon = null, label = null) {
@@ -46,7 +46,7 @@ export function messageBar(parent, icon = null, label = null) {
  * @returns {HTMLDivElement|null} The created wrapper element, or null if no content provided.
  */
 export function messageWrapper(parent, content) {
-  if (!content) return;
+  if (!content) return null;
   const wrapper = createElement("div", {
     className: "abm-label tsubtle",
     innerHTML: content,
@@ -62,12 +62,12 @@ export function messageWrapper(parent, content) {
  * @param {string} title - The title for the block.
  * @param {string} text - The text content for the block.
  * @param {boolean} italic - Whether to apply italic styling to the text.
- * @param {string} special - Special formatting type (e.g., "ES" for Elder Sorcery).
- * @param {string} elements - Additional elements for special formatting.
+ * @param {string|null} special - Special formatting type (e.g., "ES" for Elder Sorcery).
+ * @param {string|null} elements - Additional elements for special formatting.
  * @returns {HTMLDivElement|null} The created block element, or null if no text provided.
  */
 export function messageBlock(parent, title, text, italic = false, special = null, elements = null) {
-  if (!text) return;
+  if (!text) return null;
 
   const block = createElement("div", { className: "abm-block" });
   const titleElement = createElement("div", {
@@ -183,13 +183,12 @@ function addEmbeddedBlock(entities, blocks, name, typeKey, iconFallback = "hasht
           ? `&nbsp;(${quantity}${maxQuantity ? `/${maxQuantity}` : ""})`
           : "";
 
-      const type = typeKey.charAt(0).toUpperCase() + typeKey.slice(1);
-
-      return `<li class="tmessage-embedded-li">
-      <span class="tmes-emb-li-icon" style="color: ${color};">
-        <i class="fa-solid fa-${icon} fa-fw"></i>
-      </span>@UUID[${uuid}]{${name}}${suffix}
-    </li>`;
+      return `
+        <li class="tmessage-embedded-li">
+          <span class="tmes-emb-li-icon" style="color: ${color};">
+            <i class="fa-solid fa-${icon} fa-fw"></i>
+          </span>@UUID[${uuid}]{${name}}${suffix}
+        </li>`;
     })
     .join("");
 

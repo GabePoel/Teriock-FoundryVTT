@@ -6,6 +6,7 @@
  */
 export type MessageBar = {
   icon: string;
+  label: string;
   wrappers: string[];
 };
 
@@ -22,6 +23,7 @@ export type MessageBlock = {
   text?: string;
   special?: string;
   elements?: string;
+  italic?: boolean;
 };
 
 /**

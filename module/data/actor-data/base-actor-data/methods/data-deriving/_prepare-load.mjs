@@ -1,5 +1,3 @@
-/** @import TeriockBaseActorData from "../../base-actor-data.mjs" */
-
 /**
  * Applies encumbrance level based on carried weight and cumbersome equipment.
  * Calculates encumbrance level (0-3) based on weight thresholds and cumbersome properties.

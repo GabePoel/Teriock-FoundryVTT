@@ -73,7 +73,7 @@ export function _attuned(equipmentData) {
 /**
  * Gets the current attunement effect for the equipment.
  * @param {TeriockEquipmentData} equipmentData - The equipment data to get attunement for.
- * @returns {TeriockAttunementData | null} The attunement effect or null if not attuned.
+ * @returns {TeriockEffect | null} The attunement effect or null if not attuned.
  * @private
  */
 export function _getAttunement(equipmentData) {

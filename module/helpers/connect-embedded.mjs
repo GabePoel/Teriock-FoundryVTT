@@ -189,6 +189,7 @@ export default function connectEmbedded(document, element, editable = true) {
             name: "Delete",
             icon: makeIcon("trash", iconStyle),
             callback: async () => {
+              /** @type {TeriockActor|TeriockItem} */
               const parent = embedded.parent;
               await embedded.delete();
               await parent.forceUpdate();

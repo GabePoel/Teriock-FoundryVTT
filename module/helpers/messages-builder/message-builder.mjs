@@ -5,7 +5,7 @@ import { messageBar, messageBlock, messageBox, messageHeader, messageWrapper } f
  *
  * This function takes an object containing message parts (image, name, bars, blocks, font)
  * and constructs a complete DOM element with proper structure and styling.
- * @param {MessageParts} messageParts - Object containing the message parts.
+ * @param {Teriock.MessageParts} messageParts - Object containing the message parts.
  * @returns {HTMLDivElement} The complete message element.
  */
 export function buildMessage(messageParts) {
@@ -62,6 +62,5 @@ function barLength(bar) {
   bar.wrappers = bar.wrappers.filter(
     (wrapper) => wrapper && typeof wrapper === "string" && wrapper.length > 0 && wrapper !== "0",
   );
-  const length = bar.wrappers.length;
-  return length;
+  return bar.wrappers.length;
 }

@@ -17,9 +17,10 @@ export function _messageParts(powerData) {
       wrappers: [ref[src.type].name],
     },
   ];
-  if (powerData.type == "species") {
+  if (powerData.type === "species") {
     bars.push({
       icon: "fa-user",
+      label: "Species",
       wrappers: [
         powerData.size ? "Size " + powerData.size : "",
         powerData.adult ? "Adult at " + powerData.adult : "",

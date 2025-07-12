@@ -1,11 +1,9 @@
-/** @import { CommandOptions, ChatOptions } from "./_types" */
-
 /**
  * Parse roll-related flags from the argument list.
  * Strips known option flags and returns the rest as `rawArgs`.
  *
  * @param {string[]} args - Raw chat args
- * @returns {ChatOptions} - Parsed options
+ * @returns {Teriock.ChatOptions} - Parsed options
  */
 function parseRollOptions(args) {
   const optionFlags = ["advantage", "disadvantage", "twoHanded"];
@@ -34,7 +32,7 @@ export default class TeriockCommand {
    * @param {string} id - Unique identifier for the command (e.g., "damage").
    * @param {string} docs - Help string for the command.
    * @param {Function} callback - Async function to run the command logic.
-   * @param {CommandOptions} options - Additional options for the command.
+   * @param {Teriock.CommandOptions} options - Additional options for the command.
    */
   constructor(id, docs, callback, options = {}) {
     this.id = id;

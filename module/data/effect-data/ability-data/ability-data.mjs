@@ -35,7 +35,7 @@ export default class TeriockAbilityData extends WikiDataMixin(TeriockBaseEffectD
   /**
    * Gets the message parts for the ability.
    * Combines base message parts with ability-specific message parts.
-   * @returns {MessageParts} Object containing message parts for the ability.
+   * @returns {Teriock.MessageParts} Object containing message parts for the ability.
    * @override
    */
   get messageParts() {
@@ -85,7 +85,7 @@ export default class TeriockAbilityData extends WikiDataMixin(TeriockBaseEffectD
 
   /**
    * Rolls the ability with the specified options.
-   * @param {CommonRollOptions} options - Options for the ability roll.
+   * @param {Teriock.CommonRollOptions} options - Options for the ability roll.
    * @returns {Promise<void>} Promise that resolves when the roll is complete.
    * @override
    */

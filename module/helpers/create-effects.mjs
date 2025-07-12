@@ -3,11 +3,11 @@ import TeriockEffect from "../documents/effect.mjs";
 /**
  * Creates a new ability effect and optionally pulls content from the wiki.
  * @param {TeriockActor|TeriockEffect|TeriockItem} document - The document to create the ability in.
- * @param {string} name - The name for the new ability. If not provided, defaults to "New Ability".
+ * @param {string|null} name - The name for the new ability. If not provided, defaults to "New Ability".
  * @param {Object} options - Additional options for the ability creation.
  * @returns {Promise<ActiveEffect>} The created ability effect.
  */
-export async function createAbility(document, name, options = {}) {
+export async function createAbility(document, name = null, options = {}) {
   const abilityData = {
     name: "New Ability",
     type: "ability",
@@ -23,7 +23,7 @@ export async function createAbility(document, name, options = {}) {
     sup = document;
     embeddingDocument = document.parent;
   }
-  const abilities = await embeddingDocument.createEmbeddedDocuments("ActiveEffect", [abilityData]);
+  const abilities = /** @type {ActiveEffect[]} */ await embeddingDocument.createEmbeddedDocuments("ActiveEffect", [abilityData]);
   const ability = abilities[0];
   if (ability.name !== "New Ability") {
     await ability.system.wikiPull(options);
@@ -48,7 +48,7 @@ export async function createAbility(document, name, options = {}) {
 
 /**
  * Creates a new resource effect.
- * @param {Document} document - The document to create the resource in.
+ * @param {TeriockActor|TeriockItem} document - The document to create the resource in.
  * @returns {Promise<ActiveEffect>} The created resource effect.
  */
 export async function createResource(document) {
@@ -66,7 +66,7 @@ export async function createResource(document) {
 
 /**
  * Creates a new property effect with optional predefined content.
- * @param {TeriockEquipment} document - The document to create the property in.
+ * @param {TeriockItem} document - The document to create the property in.
  * @param {string} key - Optional key to look up predefined property content.
  * @returns {Promise<ActiveEffect>} The created property effect.
  */

@@ -165,7 +165,7 @@ export default class TeriockActor extends BaseTeriockActor {
 
   /**
    * Applies hack effect to a specific part of the actor.
-   * @param {HackableBodyPart} part - The part to hack.
+   * @param {Teriock.HackableBodyPart} part - The part to hack.
    * @returns {Promise<void>} Promise that resolves when hack is applied.
    */
   async takeHack(part) {
@@ -174,7 +174,7 @@ export default class TeriockActor extends BaseTeriockActor {
 
   /**
    * Removes hack effect from a specific part of the actor.
-   * @param {HackableBodyPart} part - The part to unhack.
+   * @param {Teriock.HackableBodyPart} part - The part to unhack.
    * @returns {Promise<void>} Promise that resolves when unhack is applied.
    */
   async takeUnhack(part) {
@@ -199,7 +199,7 @@ export default class TeriockActor extends BaseTeriockActor {
 
   /**
    * Performs post-update operations for the actor.
-   * @param {SkipFunctions} skipFunctions - Functions that should be skipped.
+   * @param {Teriock.SkipFunctions} skipFunctions - Functions that should be skipped.
    * @returns {Promise<void>} Resolves when all post-update operations are complete
    * @returns {Promise<void>} Promise that resolves when post-update is complete.
    */
@@ -220,7 +220,7 @@ export default class TeriockActor extends BaseTeriockActor {
   /**
    * Rolls a feat save for the specified attribute.
    * @param {string} attribute - The attribute to roll a feat save for.
-   * @param {CommonRollOptions} options - Options for the roll.
+   * @param {Teriock.CommonRollOptions} options - Options for the roll.
    * @returns {void}
    */
   rollFeatSave(attribute, options = {}) {
@@ -229,7 +229,7 @@ export default class TeriockActor extends BaseTeriockActor {
 
   /**
    * Rolls a resistance check.
-   * @param {CommonRollOptions} options - Options for the roll.
+   * @param {Teriock.CommonRollOptions} options - Options for the roll.
    * @returns {void}
    */
   rollResistance(options = {}) {
@@ -238,7 +238,7 @@ export default class TeriockActor extends BaseTeriockActor {
 
   /**
    * Rolls an immunity check.
-   * @param {CommonRollOptions} options - Options for the roll.
+   * @param {Teriock.CommonRollOptions} options - Options for the roll.
    * @returns {void}
    */
   rollImmunity(options = {}) {
@@ -248,7 +248,7 @@ export default class TeriockActor extends BaseTeriockActor {
   /**
    * Rolls a tradecraft check.
    * @param {string} tradecraft - The tradecraft to roll for.
-   * @param {CommonRollOptions} options - Options for the roll.
+   * @param {Teriock.CommonRollOptions} options - Options for the roll.
    * @returns {void}
    */
   rollTradecraft(tradecraft, options = {}) {
@@ -258,7 +258,7 @@ export default class TeriockActor extends BaseTeriockActor {
   /**
    * Uses an ability by name.
    * @param {string} abilityName - The name of the ability to use.
-   * @param {CommonRollOptions} options - Options for using the ability.
+   * @param {Teriock.CommonRollOptions} options - Options for using the ability.
    * @returns {void}
    */
   async useAbility(abilityName, options = {}) {
@@ -275,7 +275,7 @@ export default class TeriockActor extends BaseTeriockActor {
   /**
    * Ends a condition with an optional roll.
    * @todo Convert to using `ConditionRollOptions` type.
-   * @param {CommonRollOptions} options - Options for ending the condition.
+   * @param {Teriock.CommonRollOptions} options - Options for ending the condition.
    * @returns {void}
    */
   endCondition(options = {}) {

@@ -33,7 +33,8 @@ export default function registerHandlebarsHelpers() {
     return "";
   });
   Handlebars.registerHelper("dotJoin", (...args) => {
-    const options = args.pop();
+    // Removed unused "options" argument.
+    args.pop()
     let out = "";
     for (const arg of args) {
       if (arg && arg !== "0") {
@@ -155,7 +156,7 @@ export default function registerHandlebarsHelpers() {
 
   // Elder Sorcery Helpers
 
-  Handlebars.registerHelper("elements", (elements, options) => {
+  Handlebars.registerHelper("elements", (elements) => {
     let out = "Celestial";
     if (elements && elements.length > 0) {
       out = elements
@@ -171,7 +172,7 @@ export default function registerHandlebarsHelpers() {
     return out;
   });
 
-  Handlebars.registerHelper("elementClass", function (elements) {
+  Handlebars.registerHelper("elementClass", (elements) => {
     const colorMap = {
       life: "es-life",
       storm: "es-storm",
@@ -261,16 +262,9 @@ export default function registerHandlebarsHelpers() {
     function (optionsToggle, filterToggle, sortToggle, searchValue, tab, options) {
       const { showAddButton = true, sortOptions = {}, sortValue = "" } = options.hash;
       const context = options.data.root;
-
-      const escape = Handlebars.Utils.escapeExpression;
       const ttoggle = Handlebars.helpers.ttoggle;
       const checked = Handlebars.helpers.checked;
       const selectOptions = Handlebars.helpers.selectOptions;
-
-      const inputName = `system.sheet.${tab}Filters.search`;
-      // const inputValue = escape(searchValue);
-      // const inputValue = `${tab}SearchValue`
-
       const optionsPath = `settings.menus.${tab}Options`;
       const filterPath = `settings.menus.${tab}Filters`;
       const sortPath = `settings.menus.${tab}Sort`;
@@ -433,7 +427,7 @@ export default function registerHandlebarsHelpers() {
       action = "rollDoc",
       tooltip = "Use",
     } = options.hash;
-    if (max == Infinity) max = null;
+    if (max === Infinity) max = null;
     const tooltipAttr = tooltip ? `data-tooltip="${tooltip}"` : "";
     const idAttr = id ? `data-id="${id}"` : "";
     const parentIdAttr = parentId ? `data-parent-id="${parentId}"` : "";

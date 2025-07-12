@@ -4,7 +4,7 @@ import TeriockRoll from "../../../../documents/roll.mjs";
  * Rolls a resource die (hit or mana) for a rank and updates the actor's resources.
  * Handles die rolling, message creation, and resource updates.
  * @param {string} type - The type of die to roll ("hit" or "mana").
- * @param {TeriockRank} rank - The rank item to roll the die for.
+ * @param {TeriockItem} rank - The rank item to roll the die for.
  * @returns {Promise<void>} Promise that resolves when the die roll is complete.
  * @private
  */
@@ -15,12 +15,11 @@ async function rollResourceDie(type, rank) {
   if (rank.system[spentKey]) return;
 
   const die = rank.system[dieKey];
-  const roll = new TeriockRoll(die);
-  await roll.evaluate({ async: true });
+  const roll = new TeriockRoll(die, rank.actor.getRollData());
+  await roll.evaluate();
   await roll.toMessage({
     speaker: ChatMessage.getSpeaker({ actor: rank.actor }),
     flavor: `${type === "hit" ? "Hit" : "Mana"} Die`,
-    type: CONST.CHAT_MESSAGE_TYPES.ROLL,
     rollMode: game.settings.get("core", "rollMode"),
     create: true,
   });

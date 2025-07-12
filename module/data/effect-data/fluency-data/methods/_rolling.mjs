@@ -30,7 +30,7 @@ async function use(fluencyData, options) {
   rollFormula += " + @f + @" + fluencyData.tradecraft;
   message = await foundry.applications.ux.TextEditor.enrichHTML(message);
   const roll = new TeriockRoll(rollFormula, fluencyData.actor.getRollData(), { message: message });
-  roll.toMessage({
+  await roll.toMessage({
     speaker: ChatMessage.getSpeaker({
       actor: fluencyData.actor,
     }),

@@ -5,7 +5,7 @@ import { drain } from "./drain.mjs";
 import { endcon } from "./endcon.mjs";
 import { gaintemphp } from "./gaintemphp.mjs";
 import { gaintempmp } from "./gaintempmp.mjs";
-import { hack } from "./hack.mjs";
+import { hack, unhack } from "./hack.mjs";
 import { harm } from "./harm.mjs";
 import { heal } from "./heal.mjs";
 import { kill } from "./kill.mjs";
@@ -14,7 +14,6 @@ import { revitalize } from "./revitalize.mjs";
 import { settemphp } from "./settemphp.mjs";
 import { settempmp } from "./settempmp.mjs";
 import { sleep } from "./sleep.mjs";
-import { unhack } from "./unhack.mjs";
 import { use } from "./use.mjs";
 import { wither } from "./wither.mjs";
 

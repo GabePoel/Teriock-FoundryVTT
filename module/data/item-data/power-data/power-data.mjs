@@ -9,7 +9,7 @@ import TeriockBaseItemData from "../base-item-data/base-item-data.mjs";
 export default class TeriockPowerData extends TeriockBaseItemData {
   /** @inheritDoc */
   static get metadata() {
-    return foundry.utils.mergeObject(super.metadata, {
+    return foundry.utils.mergeObject({}, {
       type: "power",
     });
   }
@@ -17,7 +17,7 @@ export default class TeriockPowerData extends TeriockBaseItemData {
   /**
    * Gets the message parts for the power.
    * Combines base message parts with power-specific message parts.
-   * @returns {MessageParts} Object containing message parts for the power.
+   * @returns {Teriock.MessageParts} Object containing message parts for the power.
    * @override
    */
   get messageParts() {

@@ -1,4 +1,3 @@
-/** @import TeriockBaseActorData from "../../base-actor-data.mjs" */
 import { hacksData } from "../../../../../content/hacks.mjs";
 
 /**
@@ -8,7 +7,7 @@ import { hacksData } from "../../../../../content/hacks.mjs";
  * - [Hacks](https://wiki.teriock.com/index.php/Condition:Hacked)
  *
  * @param {TeriockBaseActorData} system - The actor's base data system object
- * @param {HackableBodyPart} part - The body part to hack
+ * @param {Teriock.HackableBodyPart} part - The body part to hack
  * @returns {Promise<void>} Resolves when the hack is applied and effects are updated
  *
  * @example
@@ -38,7 +37,7 @@ export async function _takeHack(system, part) {
  * - [Hacks](https://wiki.teriock.com/index.php/Condition:Hacked)
  *
  * @param {TeriockBaseActorData} system - The actor's base data system object
- * @param {HackableBodyPart} part - The body part to unhack
+ * @param {Teriock.HackableBodyPart} part - The body part to unhack
  * @returns {Promise<void>} Resolves when the unhack is applied and effects are updated
  *
  * @example

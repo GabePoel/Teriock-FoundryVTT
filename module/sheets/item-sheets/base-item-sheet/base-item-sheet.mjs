@@ -62,8 +62,8 @@ export default class TeriockBaseItemSheet extends BaseItemSheet {
   }
 
   /** @inheritDoc */
-  _onRender(context, options) {
-    super._onRender(context, options);
+  async _onRender(context, options) {
+    await super._onRender(context, options);
     if (!this.editable) return;
 
     this._bindStaticEvents();

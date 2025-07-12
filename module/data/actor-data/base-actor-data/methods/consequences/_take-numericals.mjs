@@ -1,5 +1,3 @@
-/** @import TeriockBaseActorData from "../../base-actor-data.mjs" */
-
 /**
  * @param {TeriockBaseActorData} system
  * @param {number} amount

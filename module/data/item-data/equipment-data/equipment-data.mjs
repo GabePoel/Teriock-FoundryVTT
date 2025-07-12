@@ -35,7 +35,7 @@ export default class TeriockEquipmentData extends WikiDataMixin(ConsumableDataMi
 
   /**
    * Gets the message rules-parts for the equipment.
-   * @returns {MessageParts} Object containing message rules-parts for the equipment.
+   * @returns {Teriock.MessageParts} Object containing message rules-parts for the equipment.
    * @override
    */
   get messageParts() {
@@ -47,7 +47,7 @@ export default class TeriockEquipmentData extends WikiDataMixin(ConsumableDataMi
 
   /**
    * Gets the secret message rules-parts for the equipment.
-   * @returns {MessageParts} Object containing secret message rules-parts for the equipment.
+   * @returns {Teriock.MessageParts} Object containing secret message rules-parts for the equipment.
    * @override
    */
   get secretMessageParts() {

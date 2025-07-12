@@ -40,8 +40,8 @@ export default class TeriockPropertySheet extends api.HandlebarsApplicationMixin
    * @param {object} options - Render options.
    * @override
    */
-  _onRender(context, options) {
-    super._onRender(context, options);
+  async _onRender(context, options) {
+    await super._onRender(context, options);
     if (!this.editable) return;
     const propertyContextMenuOptions = propertyContextMenu(this.document);
     this._connectContextMenu(".property-type-box", propertyContextMenuOptions, "click");

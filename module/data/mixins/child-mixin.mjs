@@ -11,7 +11,7 @@ export default (Base) => {
     /**
      * Gets the message rules-parts for displaying the child document in chat.
      * Includes image, name, and font information from the parent document.
-     * @returns {MessageParts} Object containing message display components.
+     * @returns {Teriock.MessageParts} Object containing message display components.
      */
     get messageParts() {
       return {
@@ -26,7 +26,7 @@ export default (Base) => {
     /**
      * Gets the secret message rules-parts for displaying hidden child documents.
      * Uses generic uncertainty image and type-based name for privacy.
-     * @returns {MessageParts} Object containing secret message display components.
+     * @returns {Teriock.MessageParts} Object containing secret message display components.
      */
     get secretMessageParts() {
       return {

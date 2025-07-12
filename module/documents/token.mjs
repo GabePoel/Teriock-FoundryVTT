@@ -1,9 +1,6 @@
-const { TokenDocument } = foundry.documents;
+import { BaseTeriockToken } from "./_base.mjs";
 
-/**
- * @extends {foundry.documents.TokenDocument}
- */
-export default class TeriockToken extends TokenDocument {
+export default class TeriockToken extends BaseTeriockToken {
   /**
    * Ensures that vision is correctly set when the token is first created.
    * Configures vision modes and detection ranges based on the actor's senses.

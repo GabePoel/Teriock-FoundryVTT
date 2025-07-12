@@ -38,8 +38,8 @@ export default class TeriockResourceSheet extends api.HandlebarsApplicationMixin
    * Sets up context menu for function callback selection.
    * @override
    */
-  _onRender(options, context) {
-    super._onRender(options, context);
+  async _onRender(options, context) {
+    await super._onRender(options, context);
     this._connectContextMenu(".function-box", callbackContextMenu(this.document), "click");
   }
 }
