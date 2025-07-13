@@ -13,9 +13,9 @@ import { _prepareTradecrafts } from "./_prepare-tradecrafts.mjs";
  * are up-to-date and consistent.
  *
  * The derived data includes:
- * - Level-based bonuses (pres, rank, p, f)
- * - Attribute saves (intSave, movSave, etc.)
- * - Combat values (av, bv, ac, cc)
+ * - Level-based bonuses (`pres`, `rank`, `p`, `f`)
+ * - Attribute saves (`intSave`, `movSave`, etc.)
+ * - Combat values (`av`, `bv`, `ac`, `cc`)
  * - Load and encumbrance calculations
  * - Token size and vision information
  * - Presence management

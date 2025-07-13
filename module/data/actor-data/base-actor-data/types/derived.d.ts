@@ -62,7 +62,9 @@ export interface TeriockBaseActorDerived {
   sheet: SheetData & {
     /** Die box display for hit and mana dice */
     dieBox: {
+      /** Hit Dice */
       hitDice: string;
+      /** Mana Dice */
       manaDice: string;
     };
   };

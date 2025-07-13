@@ -148,8 +148,8 @@ export function _createSummaryBarBox({ heightened, mpSpent, hpSpent, shouldBotto
   if (hpSpent > 0) labels.push(`${hpSpent} HP Spent`);
   if (labels.length === 0) return null;
 
-  const tmessage = document.createElement("div");
-  tmessage.className = "tmessage" + (shouldBottomBar ? " tmessage-bottom-bar" : "");
+  const messageElement = document.createElement("div");
+  messageElement.className = "tmessage" + (shouldBottomBar ? " tmessage-bottom-bar" : "");
 
   const barBox = document.createElement("div");
   barBox.className = "tmes-bar-box";
@@ -167,6 +167,6 @@ export function _createSummaryBarBox({ heightened, mpSpent, hpSpent, shouldBotto
 
   bar.appendChild(tags);
   barBox.appendChild(bar);
-  tmessage.appendChild(barBox);
-  return tmessage;
+  messageElement.appendChild(barBox);
+  return messageElement;
 }

@@ -1,5 +1,3 @@
-/** @import TeriockAbilityData from "../../ability-data.mjs" */
-
 /**
  * Poor workaround to allow for subs to be accessible for effect duplication.
  *

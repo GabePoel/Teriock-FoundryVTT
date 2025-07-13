@@ -56,6 +56,16 @@ export default class TeriockBaseActorData extends TypeDataModel {
   }
 
   /**
+   * Performs post-update operations for the actor.
+   *
+   * @param {Teriock.SkipFunctions} skipFunctions - Functions that should be skipped.
+   * @returns {Promise<void>} Resolves when all post-update operations are complete
+   */
+  async postUpdate(skipFunctions) {
+    await _postUpdate(this, skipFunctions);
+  }
+
+  /**
    * Applies damage to the actor's hit points.
    *
    * Relevant wiki pages:
@@ -263,16 +273,6 @@ export default class TeriockBaseActorData extends TypeDataModel {
   }
 
   /**
-   * Performs post-update operations for the actor.
-   *
-   * @param {Teriock.SkipFunctions} skipFunctions - Functions that should be skipped.
-   * @returns {Promise<void>} Resolves when all post-update operations are complete
-   */
-  async postUpdate(skipFunctions) {
-    await _postUpdate(this, skipFunctions);
-  }
-
-  /**
    * Rolls a feat save for the specified attribute.
    *
    * Relevant wiki pages:
@@ -287,7 +287,7 @@ export default class TeriockBaseActorData extends TypeDataModel {
   }
 
   /**
-   * Rolls a resistance check.
+   * Rolls a resistance save.
    *
    * Relevant wiki pages:
    * - [Resistance](https://wiki.teriock.com/index.php/Ability:Resist_Effects)
