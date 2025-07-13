@@ -265,7 +265,7 @@ export default class TeriockBaseActorData extends TypeDataModel {
    * - [Conditions](https://wiki.teriock.com/index.php/Category:Conditions)
    *
    * @param {string} condition - The condition to roll for.
-   * @param {Teriock.ConditionRollOptions} options - Options for the condition roll.
+   * @param {Teriock.ConditionRollOptions} [options] - Options for the condition roll.
    * @returns {Promise<void>} Promise that resolves when the condition roll is complete.
    */
   async rollCondition(condition, options) {
@@ -279,7 +279,7 @@ export default class TeriockBaseActorData extends TypeDataModel {
    * - [Feat Interaction](https://wiki.teriock.com/index.php/Core:Feat_Interaction)
    *
    * @param {string} attribute - The attribute to roll a feat save for.
-   * @param {Teriock.CommonRollOptions} options - Options for the roll.
+   * @param {Teriock.CommonRollOptions} [options] - Options for the roll.
    * @returns {Promise<void>}
    */
   async rollFeatSave(attribute, options = {}) {
@@ -292,7 +292,7 @@ export default class TeriockBaseActorData extends TypeDataModel {
    * Relevant wiki pages:
    * - [Resistance](https://wiki.teriock.com/index.php/Ability:Resist_Effects)
    *
-   * @param {Teriock.CommonRollOptions} options - Options for the roll.
+   * @param {Teriock.CommonRollOptions} [options] - Options for the roll.
    * @returns {Promise<void>}
    */
   async rollResistance(options = {}) {
@@ -300,12 +300,12 @@ export default class TeriockBaseActorData extends TypeDataModel {
   }
 
   /**
-   * Rolls an immunity check.
+   * Rolls an immunity save (these always succeed).
    *
    * Relevant wiki pages:
    * - [Immunity](https://wiki.teriock.com/index.php/Keyword:Immunity)
    *
-   * @param {Teriock.CommonRollOptions} options - Options for the roll.
+   * @param {Teriock.CommonRollOptions} [options] - Options for the roll.
    * @returns {Promise<void>}
    */
   async rollImmunity(options = {}) {
@@ -319,7 +319,7 @@ export default class TeriockBaseActorData extends TypeDataModel {
    * - [Tradecrafts](https://wiki.teriock.com/index.php/Core:Tradecrafts)
    *
    * @param {string} tradecraft - The tradecraft to roll for.
-   * @param {Teriock.CommonRollOptions} options - Options for the roll.
+   * @param {Teriock.CommonRollOptions} [options] - Options for the roll.
    * @returns {Promise<void>}
    */
   async rollTradecraft(tradecraft, options = {}) {

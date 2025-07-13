@@ -296,7 +296,7 @@ export default class TeriockActor extends BaseTeriockActor {
    * - [Feat Interaction](https://wiki.teriock.com/index.php/Core:Feat_Interaction)
    *
    * @param {string} attribute - The attribute to roll a feat save for.
-   * @param {Teriock.CommonRollOptions} options - Options for the roll.
+   * @param {Teriock.CommonRollOptions} [options] - Options for the roll.
    * @returns {Promise<void>}
    */
   async rollFeatSave(attribute, options = {}) {
@@ -309,7 +309,7 @@ export default class TeriockActor extends BaseTeriockActor {
    * Relevant wiki pages:
    * - [Resistance](https://wiki.teriock.com/index.php/Ability:Resist_Effects)
    *
-   * @param {Teriock.CommonRollOptions} options - Options for the roll.
+   * @param {Teriock.CommonRollOptions} [options] - Options for the roll.
    * @returns {Promise<void>}
    */
   async rollResistance(options = {}) {
@@ -317,12 +317,12 @@ export default class TeriockActor extends BaseTeriockActor {
   }
 
   /**
-   * Rolls an immunity check.
+   * Rolls an immunity save (these always succeed).
    *
    * Relevant wiki pages:
    * - [Immunity](https://wiki.teriock.com/index.php/Keyword:Immunity)
    *
-   * @param {Teriock.CommonRollOptions} options - Options for the roll.
+   * @param {Teriock.CommonRollOptions} [options] - Options for the roll.
    * @returns {Promise<void>}
    */
   async rollImmunity(options = {}) {
@@ -336,7 +336,7 @@ export default class TeriockActor extends BaseTeriockActor {
    * - [Tradecrafts](https://wiki.teriock.com/index.php/Core:Tradecrafts)
    *
    * @param {string} tradecraft - The tradecraft to roll for.
-   * @param {Teriock.CommonRollOptions} options - Options for the roll.
+   * @param {Teriock.CommonRollOptions} [options] - Options for the roll.
    * @returns {Promise<void>}
    */
   async rollTradecraft(tradecraft, options = {}) {
@@ -347,7 +347,7 @@ export default class TeriockActor extends BaseTeriockActor {
    * Uses an ability by name.
    *
    * @param {string} abilityName - The name of the ability to use.
-   * @param {Teriock.CommonRollOptions} options - Options for using the ability.
+   * @param {Teriock.CommonRollOptions} [options] - Options for using the ability.
    * @returns {Promise<void>}
    */
   async useAbility(abilityName, options = {}) {

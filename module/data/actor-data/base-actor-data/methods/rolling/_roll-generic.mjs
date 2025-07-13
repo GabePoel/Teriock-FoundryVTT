@@ -1,11 +1,14 @@
 import TeriockRoll from "../../../../../documents/roll.mjs";
 
 /**
- * Rolls a feat save for the actor.
+ * Rolls a feat save for the specified attribute.
+ *
+ * Relevant wiki pages:
+ * - [Feat Interaction](https://wiki.teriock.com/index.php/Core:Feat_Interaction)
  *
  * @param {TeriockBaseActorData} actorData
- * @param {string} attribute - The attribute to roll the save against (e.g., "strength", "dexterity").
- * @param {object} [options] - Options for the roll, such as advantage or disadvantage.
+ * @param {string} attribute - The attribute to roll a feat save for.
+ * @param {Teriock.CommonRollOptions} [options] - Options for the roll.
  * @private
  */
 export async function _rollFeatSave(actorData, attribute, options = {}) {
@@ -29,10 +32,13 @@ export async function _rollFeatSave(actorData, attribute, options = {}) {
 }
 
 /**
- * Rolls a resistance save for the actor.
+ * Rolls a resistance save.
+ *
+ * Relevant wiki pages:
+ * - [Resistance](https://wiki.teriock.com/index.php/Ability:Resist_Effects)
  *
  * @param {TeriockBaseActorData} actorData
- * @param {object} [options]
+ * @param {Teriock.CommonRollOptions} [options] - Options for the roll.
  * @private
  */
 export async function _rollResistance(actorData, options = {}) {
@@ -63,10 +69,13 @@ export async function _rollResistance(actorData, options = {}) {
 }
 
 /**
- * Rolls an immunity save for the actor.
+ * Rolls an immunity save (these always succeed).
+ *
+ * Relevant wiki pages:
+ * - [Immunity](https://wiki.teriock.com/index.php/Keyword:Immunity)
  *
  * @param {TeriockBaseActorData} actorData
- * @param {object} [options]
+ * @param {Teriock.CommonRollOptions} [options] - Options for the roll.
  * @private
  */
 export async function _rollImmunity(actorData, options = {}) {
@@ -82,11 +91,14 @@ export async function _rollImmunity(actorData, options = {}) {
 }
 
 /**
- * Rolls a tradecraft check for the actor.
+ * Rolls a tradecraft check.
+ *
+ * Relevant wiki pages:
+ * - [Tradecrafts](https://wiki.teriock.com/index.php/Core:Tradecrafts)
  *
  * @param {TeriockBaseActorData} actorData
- * @param {string} tradecraft
- * @param {object} [options]
+ * @param {string} tradecraft - The tradecraft to roll for.
+ * @param {Teriock.CommonRollOptions} [options] - Options for the roll.
  * @private
  */
 export async function _rollTradecraft(actorData, tradecraft, options = {}) {
