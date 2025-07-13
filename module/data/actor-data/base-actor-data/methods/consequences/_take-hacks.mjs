@@ -6,7 +6,7 @@ import { hacksData } from "../../../../../content/hacks.mjs";
  * Relevant wiki pages:
  * - [Hacks](https://wiki.teriock.com/index.php/Condition:Hacked)
  *
- * @param {TeriockBaseActorData} system - The actor's base data system object
+ * @param {TeriockBaseActorData} actorData - The actor's base data system object
  * @param {Teriock.HackableBodyPart} part - The body part to hack
  * @returns {Promise<void>} Resolves when the hack is applied and effects are updated
  *
@@ -18,16 +18,16 @@ import { hacksData } from "../../../../../content/hacks.mjs";
  * // Hack an actor's leg (will apply slowed status)
  * await _takeHack(actor.system, "leg");
  */
-export async function _takeHack(system, part) {
-  const actor = system.parent;
-  const stat = system.hacks[part];
+export async function _takeHack(actorData, part) {
+  const actor = actorData.parent;
+  const stat = actorData.hacks[part];
   const min = stat.min || 0;
   const max = stat.max || 2;
   const value = Math.min(max, Math.max(min, stat.value + 1));
-  const newStats = { ...system.hacks };
+  const newStats = { ...actorData.hacks };
   newStats[part].value = value;
   await actor.update({ [`system.hacks.${part}.value`]: value });
-  await updateHackStatus(system, newStats);
+  await updateHackStatus(actorData, newStats);
 }
 
 /**
@@ -36,7 +36,7 @@ export async function _takeHack(system, part) {
  * Relevant wiki pages:
  * - [Hacks](https://wiki.teriock.com/index.php/Condition:Hacked)
  *
- * @param {TeriockBaseActorData} system - The actor's base data system object
+ * @param {TeriockBaseActorData} actorData - The actor's base data system object
  * @param {Teriock.HackableBodyPart} part - The body part to unhack
  * @returns {Promise<void>} Resolves when the unhack is applied and effects are updated
  *
@@ -48,16 +48,16 @@ export async function _takeHack(system, part) {
  * // Reduce an actor's leg hack (may remove slowed status)
  * await _takeUnhack(actor.system, "leg");
  */
-export async function _takeUnhack(system, part) {
-  const actor = system.parent;
-  const stat = system.hacks[part];
+export async function _takeUnhack(actorData, part) {
+  const actor = actorData.parent;
+  const stat = actorData.hacks[part];
   const min = stat.min || 0;
   const max = stat.max || 2;
   const value = Math.min(max, Math.max(min, stat.value - 1));
-  const newStats = { ...system.hacks };
+  const newStats = { ...actorData.hacks };
   newStats[part].value = value;
   await actor.update({ [`system.hacks.${part}.value`]: value });
-  await updateHackStatus(system, newStats);
+  await updateHackStatus(actorData, newStats);
 }
 
 /**
@@ -71,7 +71,7 @@ export async function _takeUnhack(system, part) {
  * Relevant wiki pages:
  * - [Hacks](https://wiki.teriock.com/index.php/Condition:Hacked)
  *
- * @param {TeriockBaseActorData} system - The actor's base data system object
+ * @param {TeriockBaseActorData} actorData - The actor's base data system object
  * @param {HackDataCollection} newStats - The updated hack statistics for all body parts
  * @returns {Promise<void>} Resolves when all hack effects are updated
  *
@@ -80,8 +80,8 @@ export async function _takeUnhack(system, part) {
  * const updatedHacks = { ...system.hacks, arm: { ...system.hacks.arm, value: 2 } };
  * await updateHackStatus(system, updatedHacks);
  */
-async function updateHackStatus(system, newStats) {
-  const actor = system.parent;
+async function updateHackStatus(actorData, newStats) {
+  const actor = actorData.parent;
   const hacks = newStats;
   for (const part in hacks) {
     const value = hacks[part].value || 0;

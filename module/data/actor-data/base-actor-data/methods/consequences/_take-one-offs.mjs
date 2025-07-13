@@ -1,30 +1,36 @@
 /**
- * @param {TeriockBaseActorData} system
+ * Relevant wiki pages:
+ * - [Awaken](https://wiki.teriock.com/index.php/Keyword:Awaken)
+ *
+ * @param {TeriockBaseActorData} actorData
  * @returns {Promise<void>}
  */
-export async function _takeAwaken(system) {
-  if (system.parent.statuses.has("unconscious") && !system.parent.statuses.has("dead")) {
-    if (system.hp.value <= 0) {
-      await system.parent.update({ "system.hp.value": 1 });
+export async function _takeAwaken(actorData) {
+  if (actorData.parent.statuses.has("unconscious") && !actorData.parent.statuses.has("dead")) {
+    if (actorData.hp.value <= 0) {
+      await actorData.parent.update({ "system.hp.value": 1 });
     }
-    if (system.parent.statuses.has("asleep")) {
-      await system.parent.toggleStatusEffect("asleep", { active: false });
+    if (actorData.parent.statuses.has("asleep")) {
+      await actorData.parent.toggleStatusEffect("asleep", { active: false });
     }
-    if (system.parent.statuses.has("unconscious")) {
-      await system.parent.toggleStatusEffect("unconscious", { active: false });
+    if (actorData.parent.statuses.has("unconscious")) {
+      await actorData.parent.toggleStatusEffect("unconscious", { active: false });
     }
   }
 }
 
 /**
- * @param {TeriockBaseActorData} system
+ * Relevant wiki pages:
+ * - [Revival Effects](https://wiki.teriock.com/index.php/Category:Revival_effects)
+ *
+ * @param {TeriockBaseActorData} actorData
  * @returns {Promise<void>}
  */
-export async function _takeRevive(system) {
-  if (system.parent.statuses.has("dead")) {
-    if (system.hp.value <= 0) {
-      await system.parent.update({ "system.hp.value": 1 });
+export async function _takeRevive(actorData) {
+  if (actorData.parent.statuses.has("dead")) {
+    if (actorData.hp.value <= 0) {
+      await actorData.parent.update({ "system.hp.value": 1 });
     }
-    await system.parent.toggleStatusEffect("dead", { active: false });
+    await actorData.parent.toggleStatusEffect("dead", { active: false });
   }
 }

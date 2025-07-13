@@ -34,7 +34,7 @@ export default function registerHandlebarsHelpers() {
   });
   Handlebars.registerHelper("dotJoin", (...args) => {
     // Removed unused "options" argument.
-    args.pop()
+    args.pop();
     let out = "";
     for (const arg of args) {
       if (arg && arg !== "0") {

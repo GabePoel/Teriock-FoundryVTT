@@ -22,6 +22,7 @@ declare global {
     export type MessageParts = Messages.MessageParts;
     export type MessageOptions = Messages.MessageOptions;
     export type CommonRollOptions = Rolls.CommonRollOptions;
+    export type EquipmentRollOptions = Rolls.EquipmentRollOptions;
     export type ConditionRollOptions = Rolls.ConditionRollOptions;
     export type PolyhedralDie = Rolls.PolyhedralDie;
     export type ThreeToggle = Ui.ThreeToggle;

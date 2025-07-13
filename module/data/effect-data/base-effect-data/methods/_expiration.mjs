@@ -1,8 +1,7 @@
-/** @import TeriockBaseEffectData from "../base-actor-data.mjs" */
-
 /**
  * Checks if an effect should expire based on its duration and current game state.
  * Considers both world time and combat turn progression for expiration timing.
+ *
  * @param {TeriockBaseEffectData} effectData - The effect data to check for expiration.
  * @returns {boolean} True if the effect should expire, false otherwise.
  * @private
@@ -28,6 +27,7 @@ export function _shouldExpire(effectData) {
 /**
  * Expires an effect by either deleting it or disabling it.
  * The behavior depends on the effect's deleteOnExpire setting.
+ *
  * @param {TeriockBaseEffectData} effectData - The effect data to expire.
  * @returns {Promise<void>} Promise that resolves when the effect is expired.
  * @private

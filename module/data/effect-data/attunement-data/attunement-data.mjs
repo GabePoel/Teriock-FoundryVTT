@@ -3,6 +3,10 @@ import TeriockBaseEffectData from "../base-effect-data/base-effect-data.mjs";
 
 /**
  * Attunement-specific effect data model.
+ *
+ * Relevant wiki pages:
+ * - [Presence](https://wiki.teriock.com/index.php/Core:Presence)
+ *
  * @extends {TeriockBaseEffectData}
  */
 export default class TeriockAttunementData extends TeriockBaseEffectData {
@@ -15,8 +19,9 @@ export default class TeriockAttunementData extends TeriockBaseEffectData {
 
   /**
    * Gets the target document for this attunement.
-   * @override
+   *
    * @returns {Document|null} The target document or null if not found.
+   * @override
    */
   get targetDocument() {
     return this.actor?.items.get(this.target);
@@ -24,8 +29,9 @@ export default class TeriockAttunementData extends TeriockBaseEffectData {
 
   /**
    * Gets the usage status of the attunement target.
-   * @override
+   *
    * @returns {string} The usage status ("Equipped", "Unequipped", or "Not on Character").
+   * @override
    */
   get usage() {
     if (this.targetDocument) {
@@ -41,8 +47,9 @@ export default class TeriockAttunementData extends TeriockBaseEffectData {
 
   /**
    * Defines the schema for the attunement data model.
-   * @override
+   *
    * @returns {object} The schema definition for the ability data.
+   * @override
    */
   static defineSchema() {
     return foundry.utils.mergeObject(super.defineSchema(), {
@@ -76,6 +83,7 @@ export default class TeriockAttunementData extends TeriockBaseEffectData {
 
   /**
    * Prepares derived data for the attunement, including tier inheritance.
+   *
    * @override
    */
   prepareDerivedData() {

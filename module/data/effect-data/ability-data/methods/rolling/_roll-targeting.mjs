@@ -3,6 +3,7 @@ const { api } = foundry.applications;
 /**
  * Extracts token information from a target.
  * Gets name, actor, and image from the target's token or actor data.
+ *
  * @param {object} target - The target to extract token information from.
  * @returns {object} Object containing token name, actor, and image.
  * @private
@@ -26,6 +27,7 @@ export function tokenFromTarget(target) {
 /**
  * Gets targets for the ability, handling self-targeting logic.
  * Returns array of targets or creates self-target if ability targets self.
+ *
  * @param {TeriockAbilityData} abilityData - The ability data to get targets for.
  * @returns {Array} Array of target objects.
  * @private
@@ -59,6 +61,7 @@ export function _getTargets(abilityData) {
 
 /**
  * Option to create a measured template.
+ *
  * @param {TeriockAbilityData} abilityData - The ability data to generate template from.
  * @returns {Promise<object>}
  */

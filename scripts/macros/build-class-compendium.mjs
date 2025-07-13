@@ -19,6 +19,7 @@ if (!classesFolder) {
 
 const archetypes = CONFIG.TERIOCK.rankOptions;
 
+/** @type {object} */
 const progress = ui.notifications.info(`Pulling classes from wiki.`, { progress: true });
 let pct = 0;
 

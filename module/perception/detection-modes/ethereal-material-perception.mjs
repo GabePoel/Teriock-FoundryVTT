@@ -2,6 +2,9 @@ const { Token } = foundry.canvas.placeables;
 import EtherealFilter from "../filters/ethereal-filter.mjs";
 import TeriockDetectionMode from "./teriock-detection-mode.mjs";
 
+/**
+ * Ethereal creatures seeing Material creatures.
+ */
 export default class DetectionModeEtherealMaterial extends TeriockDetectionMode {
   /** @override */
   static getDetectionFilter() {

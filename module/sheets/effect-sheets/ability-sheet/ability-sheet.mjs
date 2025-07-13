@@ -1,12 +1,13 @@
 const { api } = foundry.applications;
-import { contextMenus } from "./connections/_context-menus.mjs";
 import { documentOptions } from "../../../helpers/constants/document-options.mjs";
 import TeriockBaseEffectSheet from "../base-effect-sheet/base-effect-sheet.mjs";
+import { contextMenus } from "./connections/_context-menus.mjs";
 
 /**
  * Ability sheet for Teriock system abilities.
  * Provides comprehensive ability management including consequences, context menus,
  * tag management, and rich text editing for various ability components.
+ *
  * @extends {TeriockBaseEffectSheet}
  */
 export default class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(TeriockBaseEffectSheet) {
@@ -42,6 +43,7 @@ export default class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(
   /**
    * Creates a new ability sheet instance.
    * Initializes tab state for overview and consequences.
+   *
    * @param {...any} args - Arguments to pass to the parent constructor.
    */
   constructor(...args) {

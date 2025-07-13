@@ -3,6 +3,7 @@ import { buildMessage } from "../../helpers/messages-builder/message-builder.mjs
 
 /**
  * Mixin for common functions used across document classes embedded in actors.
+ *
  * @template {import("@common/_types.mjs").Constructor<foundry.abstract.Document>} BaseDocument
  * @param {BaseDocument} Base
  */
@@ -10,6 +11,7 @@ export default (Base) => {
   return class ChildDocumentMixin extends Base {
     /**
      * Checks if the document is fluent.
+     *
      * @returns {boolean} True if the document is fluent, false otherwise.
      */
     get isFluent() {
@@ -22,6 +24,7 @@ export default (Base) => {
 
     /**
      * Checks if the document is proficient.
+     *
      * @returns {boolean} True if the document is proficient, false otherwise.
      */
     get isProficient() {
@@ -40,6 +43,7 @@ export default (Base) => {
 
     /**
      * Calls a hook with the document as the first parameter.
+     *
      * @param {string} incant - The hook incantation to call.
      * @param {string[]} args - Additional arguments to pass to the hook.
      */
@@ -50,6 +54,7 @@ export default (Base) => {
 
     /**
      * Sends a chat message with the document's content.
+     *
      * @returns {Promise<void>} Promise that resolves when the chat message is sent.
      */
     async chat() {
@@ -63,6 +68,7 @@ export default (Base) => {
 
     /**
      * Sends a chat message with the document's image.
+     *
      * @returns {Promise<void>} Promise that resolves when the image message is sent.
      */
     async chatImage() {
@@ -80,6 +86,7 @@ export default (Base) => {
 
     /**
      * Rolls the document, which by default sends a chat message.
+     *
      * @returns {Promise<void>} Promise that resolves when the roll is complete.
      */
     async roll() {
@@ -88,6 +95,7 @@ export default (Base) => {
 
     /**
      * Uses the document, calling hooks and delegating to the system's use method.
+     *
      * @param {object} options - Options for using the document.
      * @returns {Promise<void>} Promise that resolves when the use action is complete.
      */
@@ -98,6 +106,7 @@ export default (Base) => {
 
     /**
      * Duplicates the document within its parent.
+     *
      * @returns {Promise<ChildDocumentMixin>} Promise that resolves to the duplicated document.
      */
     async duplicate() {
@@ -109,6 +118,7 @@ export default (Base) => {
 
     /**
      * Builds a raw message string from the document's message parts.
+     *
      * @param {Teriock.MessageOptions} options - Options for building the message.
      * @returns {HTMLDivElement} The raw message HTML.
      */
@@ -125,6 +135,7 @@ export default (Base) => {
 
     /**
      * Builds an enriched message from the document's message parts.
+     *
      * @param {Teriock.MessageOptions} options - Options for building the message.
      * @returns {Promise<string>} Promise that resolves to the enriched message HTML.
      */
@@ -135,6 +146,7 @@ export default (Base) => {
 
     /**
      * Attempts to pull content from the wiki (default implementation shows error).
+     *
      * @returns {Promise<void>} Promise that resolves when the wiki pull is complete.
      */
     async wikiPull() {
@@ -143,6 +155,7 @@ export default (Base) => {
 
     /**
      * Opens the wiki for this document (default implementation calls wikiPull).
+     *
      * @returns {Promise<void>} Promise that resolves when the wiki is opened.
      */
     async wikiOpen() {

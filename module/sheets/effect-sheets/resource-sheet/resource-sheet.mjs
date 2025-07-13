@@ -1,7 +1,7 @@
 const { api } = foundry.applications;
-import { callbackContextMenu } from "./connections/_context-menus.mjs";
 import { documentOptions } from "../../../helpers/constants/document-options.mjs";
 import TeriockBaseEffectSheet from "../base-effect-sheet/base-effect-sheet.mjs";
+import { callbackContextMenu } from "./connections/_context-menus.mjs";
 
 /**
  * Resource sheet for Teriock system resources.

@@ -1,13 +1,13 @@
-import TERIOCK from "./helpers/config.mjs";
 import { conditions } from "./content/conditions.mjs";
-import { teriockDetectionModes } from "./perception/detection-modes.mjs";
-import { teriockVisionModes } from "./perception/vision-modes.mjs";
 import * as data from "./data/_module.mjs";
 import * as documents from "./documents/_module.mjs";
-import * as sheets from "./sheets/_module.mjs";
+import TERIOCK from "./helpers/config.mjs";
 import registerHandlebarsHelpers from "./helpers/startup/register-handlebars.mjs";
 import registerHooks from "./helpers/startup/register-hooks.mjs";
 import registerTemplates from "./helpers/startup/register-templates.mjs";
+import { teriockDetectionModes } from "./perception/detection-modes.mjs";
+import { teriockVisionModes } from "./perception/vision-modes.mjs";
+import * as sheets from "./sheets/_module.mjs";
 
 const { ActorSheet, ItemSheet } = foundry.appv1.sheets;
 const { DocumentSheetConfig } = foundry.applications.apps;

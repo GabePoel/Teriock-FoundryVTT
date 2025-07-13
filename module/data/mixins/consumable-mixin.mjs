@@ -3,6 +3,7 @@ import { smartEvaluateSync } from "../../helpers/utils.mjs";
 /**
  * Mixin that provides consumable document functionality.
  * Adds quantity management, automatic consumption, and quantity validation capabilities.
+ *
  * @template {import("@common/_types.mjs").Constructor<foundry.abstract.TypeDataModel>} ModelClass
  * @param {ModelClass} Base - The base class to mix in with.
  */
@@ -11,6 +12,7 @@ export default (Base) => {
     /**
      * Uses the consumable item, triggering consumption logic.
      * Calls the parent use method and then consumes one unit of the item.
+     *
      * @param {object} options - Options for the use operation.
      * @returns {Promise<void>} Promise that resolves when the use is complete.
      * @override
@@ -23,6 +25,7 @@ export default (Base) => {
     /**
      * Prepares derived data for the consumable item.
      * Calculates maximum quantity and validates current quantity against limits.
+     *
      * @override
      */
     prepareDerivedData() {
@@ -40,6 +43,7 @@ export default (Base) => {
     /**
      * Consumes one unit of the consumable item.
      * Decrements the quantity by 1, ensuring it doesn't go below 0.
+     *
      * @returns {Promise<void>} Promise that resolves when consumption is complete.
      */
     async useOne() {
@@ -54,6 +58,7 @@ export default (Base) => {
     /**
      * Adds one unit to the consumable item.
      * Increments the quantity by 1, respecting maximum quantity limits.
+     *
      * @returns {Promise<void>} Promise that resolves when the gain is complete.
      */
     async gainOne() {

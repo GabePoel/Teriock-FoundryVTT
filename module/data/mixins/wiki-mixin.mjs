@@ -3,6 +3,7 @@ import { fetchWikiPageHTML, openWikiPage } from "../../helpers/wiki.mjs";
 /**
  * Mixin that provides wiki integration functionality for document data models.
  * Adds wiki page fetching, parsing, and opening capabilities.
+ *
  * @template {import("@common/_types.mjs").Constructor<foundry.abstract.TypeDataModel>} ModelClass
  * @param {ModelClass} Base - The base class to mix in with.
  */
@@ -11,6 +12,7 @@ export default (Base) => {
     /**
      * Gets the full wiki page path including namespace.
      * Constructs the wiki page identifier from namespace and parent name.
+     *
      * @returns {string} The complete wiki page path with namespace prefix.
      */
     get wikiPage() {
@@ -21,6 +23,7 @@ export default (Base) => {
     /**
      * Parses raw HTML content from the wiki into document data updates.
      * Converts wiki HTML content into structured data for document updates.
+     *
      * @param {string} rawHTML - The raw HTML content fetched from the wiki.
      * @returns {Promise<object>} Promise that resolves to an object containing data updates.
      */
@@ -33,6 +36,7 @@ export default (Base) => {
     /**
      * Pulls data from the wiki and updates the document.
      * Fetches wiki page content, parses it, and applies updates to the document.
+     *
      * @param {Teriock.WikiPullOptions} options - Options for the wiki pull operation.
      * @returns {Promise<void>} Promise that resolves when the wiki pull is complete.
      */
@@ -62,6 +66,7 @@ export default (Base) => {
     /**
      * Opens the wiki page in the default browser.
      * Navigates to the wiki page URL for manual viewing and editing.
+     *
      * @returns {void}
      */
     wikiOpen() {

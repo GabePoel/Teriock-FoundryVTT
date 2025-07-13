@@ -3,22 +3,23 @@ import TeriockRankData from "../../../../item-data/rank-data/rank-data.mjs";
 /**
  * Prepares attribute saves and movement-related derived data.
  * Calculates save bonuses based on proficiency and fluency, movement speed, and carrying capacity.
- * @param {TeriockBaseActorData} system - The actor's base data system object.
+ *
+ * @param {TeriockBaseActorData} actorData - The actor's base data system object.
  * @returns {void} Modifies the system object in place.
  * @private
  */
-export function _prepareAttributes(system) {
-  const { attributes, size, f, p } = system;
+export function _prepareAttributes(actorData) {
+  const { attributes, size, f, p } = actorData;
   Object.entries(attributes).forEach(([key, attr]) => {
     const bonus = attr.saveFluent ? f : attr.saveProficient ? p : 0;
-    system[`${key}Save`] = attr.value + bonus;
+    actorData[`${key}Save`] = attr.value + bonus;
   });
   const mov = attributes.mov.value;
   const str = attributes.str.value;
   const strFactor = size < 5 ? str : str + Math.pow(size - 5, 2);
   const base = 65 + 20 * strFactor;
-  system.movementSpeed.value = Math.max(30 + 10 * mov + system.movementSpeed.base, 0);
-  system.carryingCapacity = {
+  actorData.movementSpeed.value = Math.max(30 + 10 * mov + actorData.movementSpeed.base, 0);
+  actorData.carryingCapacity = {
     light: base,
     heavy: base * 2,
     max: base * 3,
@@ -28,6 +29,7 @@ export function _prepareAttributes(system) {
 /**
  * Prepares level-based bonuses for the actor.
  * Calculates presence, rank, proficiency, and fluency bonuses based on level.
+ *
  * @param {TeriockBaseActorData} system - The actor's base data system object.
  * @returns {void} Modifies the system object in place.
  * @private
@@ -45,6 +47,7 @@ export function _prepareBonuses(system) {
 /**
  * Prepares hit points and mana points derived data.
  * Calculates maximum HP/MP from base values and rank bonuses, including die boxes for the character sheet.
+ *
  * @param {TeriockBaseActorData} system - The actor's base data system object.
  * @returns {void} Modifies the system object in place.
  * @private
@@ -84,6 +87,7 @@ export function _prepareHpMp(system) {
 /**
  * Prepares presence-related derived data.
  * Calculates presence overflow, maximum presence, and used/unused presence points.
+ *
  * @param {TeriockBaseActorData} system - The actor's base data system object.
  * @returns {void} Modifies the system object in place.
  * @private
@@ -99,6 +103,7 @@ export function _preparePresence(system) {
 /**
  * Renders a die box HTML element for the character sheet.
  * Creates a clickable die icon that shows whether the die has been spent or not.
+ *
  * @param {TeriockRankData} rankData - The rank data containing die information.
  * @param {string} type - The type of die ("hit" or "mana").
  * @param {string} dieProp - The property name for the die value.

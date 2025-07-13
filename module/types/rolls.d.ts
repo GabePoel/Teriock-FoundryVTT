@@ -11,6 +11,20 @@ export type CommonRollOptions = {
 };
 
 /**
+ * Options for performing an equipment roll.
+ */
+export type EquipmentRollOptions = {
+  /** Should this deal two-handed damage? */
+  twoHanded?: boolean;
+  /** Bonus damage that should be added */
+  bonusDamage?: string;
+  /** Should this hide information about the equipment? */
+  secret?: boolean;
+  /** Should this be a crit? */
+  advantage?: boolean;
+};
+
+/**
  * Options for modifying the behavior of a condition (2d4) roll.
  */
 export type ConditionRollOptions = {

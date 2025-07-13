@@ -2,6 +2,7 @@ import { createAbility } from "../../../../helpers/create-effects.mjs";
 
 /**
  * Default statistics for different archetypes.
+ *
  * @type {object}
  * @private
  */
@@ -14,6 +15,7 @@ const ARCHETYPE_STATS = {
 /**
  * Extracts ability names from metadata attributes.
  * Splits comma-separated values and filters out empty strings.
+ *
  * @param {Element} metaData - The metadata element to extract from.
  * @param {string} attr - The attribute name to extract.
  * @returns {string[]} Array of ability names.
@@ -32,6 +34,7 @@ function extractAbilityNames(metaData, attr) {
 /**
  * Parses raw HTML content for a rank, extracting class information and abilities.
  * Creates abilities based on class rank and updates the rank with parsed data.
+ *
  * @param {TeriockRankData} rankData - The rank data to parse content for.
  * @param {string} rawHTML - The raw HTML content to parse.
  * @returns {Promise<object>} Promise that resolves to the parsed parent data.
@@ -74,6 +77,7 @@ export async function _parse(rankData, rawHTML) {
     for (const name of rankNames["3s"]) toCreate.push(name);
   }
 
+  /** @type {object} */
   const progress = ui.notifications.info(`Pulling Rank from wiki.`, { progress: true });
   let pct = 0;
   for (const abilityName of toCreate) {

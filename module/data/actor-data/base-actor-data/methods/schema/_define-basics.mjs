@@ -44,22 +44,6 @@ function attributeField(name) {
  * const basicSchema = _defineBasics(schema);
  * // basicSchema now contains: lvl, size, and attributes fields
  * ```
- *
- * @typedef {Object} AttributeField
- * @property {BooleanField} saveProficient - Whether proficient in saves for this attribute
- * @property {BooleanField} saveFluent - Whether fluent in saves for this attribute
- * @property {NumberField} value - Save bonus value for this attribute
- *
- * @typedef {Object} BasicActorSchema
- * @property {NumberField} lvl - Actor level (>= 1, integer)
- * @property {NumberField} size - Actor size (0-30)
- * @property {SchemaField} attributes - Object containing six attribute fields:
- *   - int: {@link AttributeField} Intelligence attribute
- *   - mov: {@link AttributeField} Movement attribute
- *   - per: {@link AttributeField} Perception attribute
- *   - snk: {@link AttributeField} Sneak attribute
- *   - str: {@link AttributeField} Strength attribute
- *   - unp: {@link AttributeField} Unpredictability attribute
  */
 export function _defineBasics(schema) {
   schema.lvl = new fields.NumberField({

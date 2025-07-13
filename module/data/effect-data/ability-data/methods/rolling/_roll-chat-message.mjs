@@ -1,8 +1,9 @@
-import { _generateEffect, _generateTakes } from "../_generate-effect.mjs";
 import { getRollIcon } from "../../../../../helpers/utils.mjs";
+import { _generateEffect, _generateTakes } from "../_generate-effect.mjs";
 
 /**
  * Button configurations for different roll types.
+ *
  * @type {Record<string,ChatActionButton>}
  */
 const BUTTON_CONFIGS = {
@@ -37,6 +38,7 @@ const BUTTON_CONFIGS = {
 /**
  * Builds buttons for the ability roll based on the ability's effects and takes.
  * Creates buttons for feat saves, effects, resistance, and various take actions.
+ *
  * @param {AbilityRollConfig} rollConfig - Configurations for this ability usage.
  * @returns {Promise<ChatActionButton[]>} Promise that resolves to an array of button configurations.
  * @private
@@ -134,6 +136,7 @@ export async function _buildButtons(rollConfig) {
 /**
  * Manually constructs a summary bar box DOM element for heightened/variable costs.
  * Creates a visual summary of costs and modifiers for the ability roll.
+ *
  * @param {object} params - Parameters containing heightened, mpSpent, hpSpent, and shouldBottomBar.
  * @returns {HTMLElement|null} The summary bar box element or null if no summary needed.
  * @private

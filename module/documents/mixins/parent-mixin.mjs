@@ -2,6 +2,7 @@ import { toCamelCase } from "../../helpers/utils.mjs";
 
 /**
  * Builds effect types and keys from a document's valid effects.
+ *
  * @param {ParentDocumentMixin} document - The document to build effect types for.
  * @returns {BuiltEffectTypes} Each {@link TeriockEffect} this contains, keyed by type, in multiple formats.
  */
@@ -22,6 +23,7 @@ function _buildEffectTypes(document) {
 
 /**
  * Mixin for common functions used across document classes that embed children.
+ *
  * @template {import("@common/_types.mjs").Constructor<foundry.abstract.Document>} BaseDocument
  * @implements {ParentDocumentMixinInterface}
  * @param {{new(): ChildDocumentMixin, prototype: ChildDocumentMixin}|BaseDocument} Base
@@ -31,6 +33,7 @@ export default (Base) => {
     /**
      * Gets the list of effects associated with this document.
      * Helper method for `prepareDerivedData()` that can be called explicitly.
+     *
      * @type {TeriockEffect[]}
      */
     get validEffects() {
@@ -40,6 +43,7 @@ export default (Base) => {
     /**
      * Gets the list of all effects that apply to this document, including those
      * that are not currently active.
+     *
      * @returns {BuiltEffectTypes}
      */
     buildEffectTypes() {
@@ -48,6 +52,7 @@ export default (Base) => {
 
     /**
      * Prepares derived data for the document, including effect types and keys.
+     *
      * @inheritdoc
      */
     prepareDerivedData() {
@@ -60,6 +65,7 @@ export default (Base) => {
     /**
      * Forces an update of the document by toggling the update counter.
      * This is useful for triggering reactive updates in the UI.
+     *
      * @returns {Promise<void>} Promise that resolves when the document is updated.
      */
     async forceUpdate() {

@@ -1,13 +1,16 @@
 const { fields } = foundry.data;
+import WikiDataMixin from "../../mixins/wiki-mixin.mjs";
+import TeriockBaseItemData from "../base-item-data/base-item-data.mjs";
 import { _messageParts } from "./methods/_messages.mjs";
 import { _parse } from "./methods/_parsing.mjs";
 import { _rollHitDie, _rollManaDie } from "./methods/_rolling.mjs";
-import WikiDataMixin from "../../mixins/wiki-mixin.mjs";
-import TeriockBaseItemData from "../base-item-data/base-item-data.mjs";
 
 /**
  * Rank-specific item data model.
- * Handles rank functionality including class progression, hit/mana dice, and wiki integration.
+ *
+ * Relevant wiki pages:
+ * - [Classes](https://wiki.teriock.com/index.php/Category:Classes)
+ *
  * @extends {TeriockBaseItemData}
  */
 export default class TeriockRankData extends WikiDataMixin(TeriockBaseItemData) {
@@ -20,6 +23,7 @@ export default class TeriockRankData extends WikiDataMixin(TeriockBaseItemData) 
 
   /**
    * Gets the wiki page URL for the rank.
+   *
    * @returns {string} The wiki page URL for the class.
    * @override
    */
@@ -30,6 +34,7 @@ export default class TeriockRankData extends WikiDataMixin(TeriockBaseItemData) 
   /**
    * Gets the message parts for the rank.
    * Combines base message parts with rank-specific message parts.
+   *
    * @returns {object} Object containing message parts for the rank.
    * @override
    */
@@ -39,6 +44,7 @@ export default class TeriockRankData extends WikiDataMixin(TeriockBaseItemData) 
 
   /**
    * Defines the schema for the rank data model.
+   *
    * @returns {object} The schema definition for the rank data.
    */
   static defineSchema() {
@@ -128,6 +134,7 @@ export default class TeriockRankData extends WikiDataMixin(TeriockBaseItemData) 
 
   /**
    * Parses raw HTML content for the rank.
+   *
    * @param {string} rawHTML - The raw HTML content to parse.
    * @returns {Promise<object>} Promise that resolves to the parsed HTML content.
    * @override
@@ -138,6 +145,10 @@ export default class TeriockRankData extends WikiDataMixin(TeriockBaseItemData) 
 
   /**
    * Rolls the hit die for the rank.
+   *
+   * Relevant wiki pages:
+   * - [Hit Points and Mana Points](https://wiki.teriock.com/index.php/Core:Hit_Points_and_Mana_Points)
+   *
    * @returns {Promise<object>} Promise that resolves to the hit die roll result.
    */
   async rollHitDie() {
@@ -146,6 +157,10 @@ export default class TeriockRankData extends WikiDataMixin(TeriockBaseItemData) 
 
   /**
    * Rolls the mana die for the rank.
+   *
+   * Relevant wiki pages:
+   * - [Hit Points and Mana Points](https://wiki.teriock.com/index.php/Core:Hit_Points_and_Mana_Points)
+   *
    * @returns {Promise<object>} Promise that resolves to the mana die roll result.
    */
   async rollManaDie() {

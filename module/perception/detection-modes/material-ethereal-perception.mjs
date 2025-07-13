@@ -2,6 +2,14 @@ const { Token } = foundry.canvas.placeables;
 import EtherealFilter from "../filters/ethereal-filter.mjs";
 import TeriockDetectionMode from "./teriock-detection-mode.mjs";
 
+/**
+ * Material creatures seeing Ethereal creatures.
+ *
+ * Relevant wiki pages:
+ * - [Cat Sense](https://wiki.teriock.com/index.php/Ability:Cat_Sense)
+ * - [Ethereal Senses](https://wiki.teriock.com/index.php/Ability:Ethereal_Senses)
+ * - [Spirit Guide](https://wiki.teriock.com/index.php/Ability:Spirit_Guide)
+ */
 export default class DetectionModeMaterialEthereal extends TeriockDetectionMode {
   /** @override */
   static getDetectionFilter() {

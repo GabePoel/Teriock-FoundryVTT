@@ -1,7 +1,7 @@
 const { api } = foundry.applications;
-import { BaseTeriockItem } from "./_base.mjs";
 import { createAbility } from "../helpers/create-effects.mjs";
 import { fetchCategoryMembers } from "../helpers/wiki.mjs";
+import { BaseTeriockItem } from "./_base.mjs";
 
 /**
  * @property {TeriockBaseItemData} system
@@ -10,8 +10,9 @@ import { fetchCategoryMembers } from "../helpers/wiki.mjs";
 export default class TeriockItem extends BaseTeriockItem {
   /**
    * Gets the valid effects for this item.
-   * @inheritdoc
+   *
    * @returns {ActiveEffect[]} Array of transferred effects.
+   * @inheritdoc
    */
   get validEffects() {
     return this.transferredEffects;
@@ -19,6 +20,7 @@ export default class TeriockItem extends BaseTeriockItem {
 
   /**
    * Checks if the item is disabled.
+   *
    * @returns {boolean} True if the item is disabled, false otherwise.
    */
   get disabled() {
@@ -27,9 +29,10 @@ export default class TeriockItem extends BaseTeriockItem {
 
   /**
    * Rolls the item, delegating to the system's roll method.
-   * @override
+   *
    * @param {object} options - Options for the roll.
    * @returns {Promise<void>} Promise that resolves when the roll is complete.
+   * @override
    */
   async roll(options) {
     await this.system.roll(options);
@@ -37,6 +40,7 @@ export default class TeriockItem extends BaseTeriockItem {
 
   /**
    * Disables the item by setting its disabled property to true.
+   *
    * @returns {Promise<void>} Promise that resolves when the item is disabled.
    */
   async disable() {
@@ -45,6 +49,7 @@ export default class TeriockItem extends BaseTeriockItem {
 
   /**
    * Enables the item by setting its disabled property to false.
+   *
    * @returns {Promise<void>} Promise that resolves when the item is enabled.
    */
   async enable() {
@@ -53,6 +58,7 @@ export default class TeriockItem extends BaseTeriockItem {
 
   /**
    * Toggles the disabled state of the item.
+   *
    * @returns {Promise<void>} Promise that resolves when the disabled state is toggled.
    */
   async toggleDisabled() {
@@ -61,6 +67,7 @@ export default class TeriockItem extends BaseTeriockItem {
 
   /**
    * Helper method for bulk wiki pulling operations.
+   *
    * @param {string} pullType - The type of pull operation ("pages" or "categories").
    * @returns {Promise<void>} Promise that resolves when the bulk pull is complete.
    * @private
@@ -98,6 +105,7 @@ export default class TeriockItem extends BaseTeriockItem {
 
   /**
    * Initiates a bulk wiki pull operation for supported item types.
+   *
    * @returns {Promise<void>} Promise that resolves when the bulk pull dialog is complete.
    * @private
    */

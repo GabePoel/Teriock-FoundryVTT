@@ -2,6 +2,9 @@ const { AbstractBaseFilter } = foundry.canvas.rendering.filters;
 
 /**
  * A ghostly filter with a static desaturated layer + animated blur overlay.
+ *
+ * Relevant wiki pages:
+ * - [Ethereal](https://wiki.teriock.com/index.php/Condition:Ethereal)
  */
 export default class EtherealFilter extends AbstractBaseFilter {
   static defaultUniforms = {

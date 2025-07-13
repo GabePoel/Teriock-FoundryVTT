@@ -1,14 +1,14 @@
-/** @import TeriockAbilityData from "../ability-data.mjs"; */
-/** @import TeriockActor from "../../../../documents/actor.mjs"; */
 import { parseTimeString } from "../../../../helpers/utils.mjs";
 
 /**
  * Generates an effect from ability data based on proficiency level and heightened amount.
  * Creates an effect with appropriate changes, statuses, and duration based on the ability's applies data.
+ *
  * @param {TeriockAbilityData} abilityData - The ability data to generate effect from.
  * @param {TeriockActor} actor - The actor that owns the ability.
  * @param {number} heightenAmount - The amount of heightening applied to the ability.
- * @returns {Promise<object|false>} Promise that resolves to the generated effect data or false if no effect should be created.
+ * @returns {Promise<object|false>} Promise that resolves to the generated effect data or false if no effect should be
+ *   created.
  * @private
  */
 export async function _generateEffect(abilityData, actor, heightenAmount = 0) {
@@ -48,8 +48,8 @@ export async function _generateEffect(abilityData, actor, heightenAmount = 0) {
     }
     // if (abilityData.applies.heightened.duration > 0) {
     //   seconds += abilityData.applies.heightened.duration * heightenAmount;
-    //   seconds = Math.round(seconds / abilityData.applies.heightened.duration) * abilityData.applies.heightened.duration;
-    // }
+    //   seconds = Math.round(seconds / abilityData.applies.heightened.duration) *
+    // abilityData.applies.heightened.duration; }
   }
 
   let description = await abilityData.parent.buildMessage();
@@ -126,6 +126,7 @@ export async function _generateEffect(abilityData, actor, heightenAmount = 0) {
 /**
  * Generates takes data from ability data based on proficiency level and heightened amount.
  * Creates rolls, hacks, checks, and status changes based on the ability's applies data.
+ *
  * @param {TeriockAbilityData} abilityData - The ability data to generate takes from.
  * @param {number} heightenAmount - The amount of heightening applied to the ability.
  * @returns {Object} Object containing rolls, hacks, checks, startStatuses, and endStatuses.

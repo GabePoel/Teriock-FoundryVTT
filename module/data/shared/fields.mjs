@@ -3,6 +3,7 @@ const { fields } = foundry.data;
 /**
  * Utility function for creating DOM elements with common properties.
  * Creates an element with specified tag, class, styles, and content.
+ *
  * @param {string} tag - The HTML tag name for the element.
  * @param {string} className - The CSS class name to apply to the element.
  * @param {object} styles - Object containing CSS styles to apply.
@@ -21,6 +22,7 @@ const createElement = (tag, className, styles = {}, content = "") => {
 /**
  * Utility function for creating button elements with dataset attributes.
  * Creates a button with specified class, content, and data attributes.
+ *
  * @param {string} className - The CSS class name for the button.
  * @param {string} content - The inner HTML content for the button.
  * @param {object} dataset - Object containing data attributes to set.
@@ -41,6 +43,7 @@ export class TeriockArrayField extends fields.ArrayField {
   /**
    * Creates the input element for the array field.
    * Renders a button with plus icon for adding new items to the array.
+   *
    * @param {object} config - Configuration object for the input element.
    * @returns {HTMLButtonElement} The rendered input button element.
    * @override
@@ -63,6 +66,7 @@ export class TeriockRecordField extends fields.TypedObjectField {
   /**
    * Creates the input element for the record field.
    * Renders a multi-select input for choosing which record items to display.
+   *
    * @param {object} config - Configuration object for the input element.
    * @returns {HTMLElement} The rendered multi-select input element.
    * @override
@@ -86,6 +90,7 @@ export class TeriockRecordField extends fields.TypedObjectField {
   /**
    * Creates a form group for the record field with individual item inputs.
    * Renders both the multi-select and individual form inputs for each record item.
+   *
    * @param {object} groupConfig - Configuration for the form group.
    * @param {object} inputConfig - Configuration for the input elements.
    * @returns {HTMLElement} The rendered form group element.

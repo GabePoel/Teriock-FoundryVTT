@@ -2,14 +2,15 @@ import TeriockRoll from "../../../../../documents/roll.mjs";
 
 /**
  * Rolls a feat save for the actor.
- * @param {TeriockBaseActorData} system
+ *
+ * @param {TeriockBaseActorData} actorData
  * @param {string} attribute - The attribute to roll the save against (e.g., "strength", "dexterity").
  * @param {object} [options] - Options for the roll, such as advantage or disadvantage.
  * @private
  */
-export async function _rollFeatSave(system, attribute, options = {}) {
-  const actor = system.parent;
-  const bonus = system[`${attribute}Save`] || 0;
+export async function _rollFeatSave(actorData, attribute, options = {}) {
+  const actor = actorData.parent;
+  const bonus = actorData[`${attribute}Save`] || 0;
   const adv = options.advantage ? "kh1" : options.disadvantage ? "kl1" : "";
   const formula = `2d20${adv || ""}`.replace(/^2d20$/, "1d20") + ` + ${bonus}`;
   const context = {
@@ -29,12 +30,13 @@ export async function _rollFeatSave(system, attribute, options = {}) {
 
 /**
  * Rolls a resistance save for the actor.
- * @param {TeriockBaseActorData} system
+ *
+ * @param {TeriockBaseActorData} actorData
  * @param {object} [options]
  * @private
  */
-export async function _rollResistance(system, options = {}) {
-  const actor = system.parent;
+export async function _rollResistance(actorData, options = {}) {
+  const actor = actorData.parent;
   let message = null;
   if (options.message) {
     message = options.message;
@@ -62,11 +64,12 @@ export async function _rollResistance(system, options = {}) {
 
 /**
  * Rolls an immunity save for the actor.
- * @param {TeriockBaseActorData} system
+ *
+ * @param {TeriockBaseActorData} actorData
  * @param {object} [options]
  * @private
  */
-export async function _rollImmunity(system, options = {}) {
+export async function _rollImmunity(actorData, options = {}) {
   let message = null;
   if (options.message) {
     message = options.message;
@@ -80,14 +83,15 @@ export async function _rollImmunity(system, options = {}) {
 
 /**
  * Rolls a tradecraft check for the actor.
- * @param {TeriockBaseActorData} system
+ *
+ * @param {TeriockBaseActorData} actorData
  * @param {string} tradecraft
  * @param {object} [options]
  * @private
  */
-export async function _rollTradecraft(system, tradecraft, options = {}) {
-  const actor = system.parent;
-  const { proficient, extra } = system.tradecrafts[tradecraft] || {};
+export async function _rollTradecraft(actorData, tradecraft, options = {}) {
+  const actor = actorData.parent;
+  const { proficient, extra } = actorData.tradecrafts[tradecraft] || {};
   let formula = options.advantage ? "2d20kh1" : options.disadvantage ? "2d20kl1" : "1d20";
   if (proficient) formula += " + @p";
   if (extra) formula += ` + @${tradecraft}`;

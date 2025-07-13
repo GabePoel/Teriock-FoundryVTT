@@ -1,11 +1,15 @@
 const { fields } = foundry.data;
-import { _messageParts } from "./methods/_messages.mjs";
-import { _roll } from "./methods/_rolling.mjs";
 import WikiDataMixin from "../../mixins/wiki-mixin.mjs";
 import TeriockBaseEffectData from "../base-effect-data/base-effect-data.mjs";
+import { _messageParts } from "./methods/_messages.mjs";
+import { _roll } from "./methods/_rolling.mjs";
 
 /**
  * Fluency-specific effect data model.
+ *
+ * Relevant wiki pages:
+ * - [Tradecraft Fluencies](https://wiki.teriock.com/index.php/Core:Tradecraft_Fluencies)
+ *
  * @extends {TeriockBaseEffectData}
  */
 export default class TeriockFluencyData extends WikiDataMixin(TeriockBaseEffectData) {
@@ -19,6 +23,7 @@ export default class TeriockFluencyData extends WikiDataMixin(TeriockBaseEffectD
   /**
    * Checks if the fluency effect is suppressed.
    * Combines base suppression with attunement-based suppression for equipment.
+   *
    * @returns {boolean} True if the fluency effect is suppressed, false otherwise.
    * @override
    */
@@ -33,6 +38,7 @@ export default class TeriockFluencyData extends WikiDataMixin(TeriockBaseEffectD
   /**
    * Gets the message parts for the fluency effect.
    * Combines base message parts with fluency-specific message parts.
+   *
    * @returns {object} Object containing message parts for the fluency effect.
    * @override
    */
@@ -42,6 +48,7 @@ export default class TeriockFluencyData extends WikiDataMixin(TeriockBaseEffectD
 
   /**
    * Gets the wiki page URL for the fluency effect.
+   *
    * @returns {string} The wiki page URL for the tradecraft.
    * @override
    */
@@ -51,6 +58,7 @@ export default class TeriockFluencyData extends WikiDataMixin(TeriockBaseEffectD
 
   /**
    * Defines the schema for the fluency data model.
+   *
    * @returns {object} The schema definition for the fluency data.
    * @override
    */
@@ -81,6 +89,7 @@ export default class TeriockFluencyData extends WikiDataMixin(TeriockBaseEffectD
 
   /**
    * Rolls the fluency effect with the specified options.
+   *
    * @param {object} options - Options for the fluency roll.
    * @returns {Promise<void>} Promise that resolves when the roll is complete.
    * @override

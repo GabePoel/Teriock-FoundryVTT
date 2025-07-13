@@ -3,6 +3,10 @@ const { api, ux } = foundry.applications;
 /**
  * Reads magic on equipment to reveal its power level.
  * Requires GM approval and updates the equipment with reference power level information.
+ *
+ * Relevant wiki pages:
+ * - [Read Magic](https://wiki.teriock.com/index.php/Ability:Read_Magic)
+ *
  * @param {TeriockEquipmentData} equipmentData - The equipment data to read magic on.
  * @returns {Promise<void>} Promise that resolves when the magic reading is complete.
  * @private
@@ -41,6 +45,10 @@ export async function _readMagic(equipmentData) {
 /**
  * Identifies equipment, revealing all its properties and effects.
  * Requires GM approval and copies all data from the reference equipment.
+ *
+ * Relevant wiki pages:
+ * - [Identify](https://wiki.teriock.com/index.php/Ability:Identify)
+ *
  * @param {TeriockEquipmentData} equipmentData - The equipment data to identify.
  * @returns {Promise<void>} Promise that resolves when the identification is complete.
  * @private
@@ -89,6 +97,7 @@ export async function _identify(equipmentData) {
 /**
  * Removes identification from equipment, making it unidentified again.
  * Creates a copy with limited properties and removes most effects.
+ *
  * @param {TeriockEquipmentData} equipmentData - The equipment data to unidentify.
  * @returns {Promise<void>} Promise that resolves when the unidentification is complete.
  * @private

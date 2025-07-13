@@ -1,5 +1,6 @@
 import ConsumableDataMixin from "../../mixins/consumable-mixin.mjs";
 import WikiDataMixin from "../../mixins/wiki-mixin.mjs";
+import TeriockBaseItemData from "../base-item-data/base-item-data.mjs";
 import * as attunement from "./methods/_attunement.mjs";
 import * as deriving from "./methods/_data-deriving.mjs";
 import * as handling from "./methods/_handling.mjs";
@@ -9,11 +10,13 @@ import * as migrate from "./methods/_migrate-data.mjs";
 import * as parsing from "./methods/_parsing.mjs";
 import * as rolling from "./methods/_rolling.mjs";
 import * as schema from "./methods/_schema.mjs";
-import TeriockBaseItemData from "../base-item-data/base-item-data.mjs";
 
 /**
  * Equipment-specific item data model.
- * Handles equipment functionality including attunement, identification, handling, and wiki integration.
+ *
+ * Relevant wiki pages:
+ * - [Equipment](https://wiki.teriock.com/index.php/Category:Equipment)
+ *
  * @extends {TeriockBaseItemData}
  */
 export default class TeriockEquipmentData extends WikiDataMixin(ConsumableDataMixin(TeriockBaseItemData)) {
@@ -26,6 +29,7 @@ export default class TeriockEquipmentData extends WikiDataMixin(ConsumableDataMi
 
   /**
    * Gets the wiki page URL for the equipment.
+   *
    * @returns {string} The wiki page URL for the equipment type.
    * @override
    */
@@ -35,6 +39,7 @@ export default class TeriockEquipmentData extends WikiDataMixin(ConsumableDataMi
 
   /**
    * Gets the message rules-parts for the equipment.
+   *
    * @returns {Teriock.MessageParts} Object containing message rules-parts for the equipment.
    * @override
    */
@@ -47,6 +52,7 @@ export default class TeriockEquipmentData extends WikiDataMixin(ConsumableDataMi
 
   /**
    * Gets the secret message rules-parts for the equipment.
+   *
    * @returns {Teriock.MessageParts} Object containing secret message rules-parts for the equipment.
    * @override
    */
@@ -59,6 +65,7 @@ export default class TeriockEquipmentData extends WikiDataMixin(ConsumableDataMi
 
   /**
    * Checks if the equipment is currently attuned.
+   *
    * @returns {boolean} True if the equipment is attuned, false otherwise.
    */
   get attuned() {
@@ -67,6 +74,7 @@ export default class TeriockEquipmentData extends WikiDataMixin(ConsumableDataMi
 
   /**
    * Gets the current attunement data for the equipment.
+   *
    * @returns {TeriockAttunementData | null} The attunement data or null if not attuned.
    */
   get attunement() {
@@ -75,6 +83,7 @@ export default class TeriockEquipmentData extends WikiDataMixin(ConsumableDataMi
 
   /**
    * Defines the schema for the equipment data model.
+   *
    * @returns {object} The schema definition for the equipment data.
    * @override
    */
@@ -86,6 +95,7 @@ export default class TeriockEquipmentData extends WikiDataMixin(ConsumableDataMi
 
   /**
    * Migrates data from older versions to the current format.
+   *
    * @param {object} data - The data to migrate.
    * @returns {object} The migrated data.
    * @override
@@ -97,6 +107,7 @@ export default class TeriockEquipmentData extends WikiDataMixin(ConsumableDataMi
 
   /**
    * Prepares derived data for the equipment.
+   *
    * @returns {void}
    * @override
    */
@@ -108,6 +119,7 @@ export default class TeriockEquipmentData extends WikiDataMixin(ConsumableDataMi
   /**
    * Uses one unit of the equipment.
    * If consumable and quantity reaches 0, unequips the item.
+   *
    * @returns {Promise<void>} Promise that resolves when the equipment is used.
    * @override
    */
@@ -120,6 +132,7 @@ export default class TeriockEquipmentData extends WikiDataMixin(ConsumableDataMi
 
   /**
    * Parses raw HTML content for the equipment.
+   *
    * @param {string} rawHTML - The raw HTML content to parse.
    * @returns {Promise<object>} Promise that resolves to the parsed HTML content.
    * @override
@@ -130,6 +143,7 @@ export default class TeriockEquipmentData extends WikiDataMixin(ConsumableDataMi
 
   /**
    * Rolls the equipment with the specified options.
+   *
    * @param {object} options - Options for the equipment roll.
    * @returns {Promise<void>} Promise that resolves when the roll is complete.
    * @override
@@ -140,6 +154,7 @@ export default class TeriockEquipmentData extends WikiDataMixin(ConsumableDataMi
 
   /**
    * Shatters the equipment, making it unusable.
+   *
    * @returns {Promise<void>} Promise that resolves when the equipment is shattered.
    */
   async shatter() {
@@ -148,6 +163,7 @@ export default class TeriockEquipmentData extends WikiDataMixin(ConsumableDataMi
 
   /**
    * Repairs the equipment, making it usable again.
+   *
    * @returns {Promise<void>} Promise that resolves when the equipment is repaired.
    */
   async repair() {
@@ -156,6 +172,7 @@ export default class TeriockEquipmentData extends WikiDataMixin(ConsumableDataMi
 
   /**
    * Sets the shattered state of the equipment.
+   *
    * @param {boolean} bool - Whether the equipment should be shattered.
    * @returns {Promise<void>} Promise that resolves when the shattered state is set.
    */
@@ -165,6 +182,7 @@ export default class TeriockEquipmentData extends WikiDataMixin(ConsumableDataMi
 
   /**
    * Toggles the shattered state of the equipment.
+   *
    * @returns {Promise<void>} Promise that resolves when the shattered state is toggled.
    */
   async toggleShattered() {
@@ -173,6 +191,7 @@ export default class TeriockEquipmentData extends WikiDataMixin(ConsumableDataMi
 
   /**
    * Dampens the equipment, reducing its effectiveness.
+   *
    * @returns {Promise<void>} Promise that resolves when the equipment is dampened.
    */
   async dampen() {
@@ -181,6 +200,7 @@ export default class TeriockEquipmentData extends WikiDataMixin(ConsumableDataMi
 
   /**
    * Removes dampening from the equipment.
+   *
    * @returns {Promise<void>} Promise that resolves when the equipment is undampened.
    */
   async undampen() {
@@ -189,6 +209,7 @@ export default class TeriockEquipmentData extends WikiDataMixin(ConsumableDataMi
 
   /**
    * Sets the dampened state of the equipment.
+   *
    * @param {boolean} bool - Whether the equipment should be dampened.
    * @returns {Promise<void>} Promise that resolves when the dampened state is set.
    */
@@ -198,6 +219,7 @@ export default class TeriockEquipmentData extends WikiDataMixin(ConsumableDataMi
 
   /**
    * Toggles the dampened state of the equipment.
+   *
    * @returns {Promise<void>} Promise that resolves when the dampened state is toggled.
    */
   async toggleDampened() {
@@ -206,6 +228,7 @@ export default class TeriockEquipmentData extends WikiDataMixin(ConsumableDataMi
 
   /**
    * Unequips the equipment from its current slot.
+   *
    * @returns {Promise<void>} Promise that resolves when the equipment is unequipped.
    */
   async unequip() {
@@ -214,6 +237,7 @@ export default class TeriockEquipmentData extends WikiDataMixin(ConsumableDataMi
 
   /**
    * Equips the equipment to an appropriate slot.
+   *
    * @returns {Promise<void>} Promise that resolves when the equipment is equipped.
    */
   async equip() {
@@ -222,6 +246,7 @@ export default class TeriockEquipmentData extends WikiDataMixin(ConsumableDataMi
 
   /**
    * Sets the equipped state of the equipment.
+   *
    * @param {boolean} bool - Whether the equipment should be equipped.
    * @returns {Promise<void>} Promise that resolves when the equipped state is set.
    */
@@ -231,6 +256,7 @@ export default class TeriockEquipmentData extends WikiDataMixin(ConsumableDataMi
 
   /**
    * Toggles the equipped state of the equipment.
+   *
    * @returns {Promise<void>} Promise that resolves when the equipped state is toggled.
    */
   async toggleEquipped() {
@@ -239,6 +265,7 @@ export default class TeriockEquipmentData extends WikiDataMixin(ConsumableDataMi
 
   /**
    * Removes identification from the equipment.
+   *
    * @returns {Promise<void>} Promise that resolves when the equipment is unidentified.
    */
   async unidentify() {
@@ -247,6 +274,7 @@ export default class TeriockEquipmentData extends WikiDataMixin(ConsumableDataMi
 
   /**
    * Reads magic on the equipment to reveal its properties.
+   *
    * @returns {Promise<void>} Promise that resolves when magic reading is complete.
    */
   async readMagic() {
@@ -255,6 +283,7 @@ export default class TeriockEquipmentData extends WikiDataMixin(ConsumableDataMi
 
   /**
    * Identifies the equipment, revealing all its properties.
+   *
    * @returns {Promise<void>} Promise that resolves when the equipment is identified.
    */
   async identify() {
@@ -263,6 +292,7 @@ export default class TeriockEquipmentData extends WikiDataMixin(ConsumableDataMi
 
   /**
    * Attunes the equipment to the current character.
+   *
    * @returns {Promise<TeriockEffect | null>} Promise that resolves to the attunement effect or null.
    */
   async attune() {
@@ -271,6 +301,7 @@ export default class TeriockEquipmentData extends WikiDataMixin(ConsumableDataMi
 
   /**
    * Removes attunement from the equipment.
+   *
    * @returns {Promise<void>} Promise that resolves when the equipment is deattuned.
    */
   async deattune() {

@@ -1,7 +1,7 @@
 const { HandlebarsApplicationMixin } = foundry.applications.api;
-import TeriockBaseItemSheet from "../base-item-sheet/base-item-sheet.mjs";
 import { cleanCapitalization } from "../../../helpers/clean.mjs";
 import { documentOptions } from "../../../helpers/constants/document-options.mjs";
+import TeriockBaseItemSheet from "../base-item-sheet/base-item-sheet.mjs";
 import { fontContextMenu, powerLevelContextMenu } from "./connections/_context-menus.mjs";
 
 /**
@@ -179,13 +179,9 @@ export default class TeriockEquipmentSheet extends HandlebarsApplicationMixin(Te
     }
 
     const dampenedEls = root.querySelectorAll(".flag-tag-dampened");
-    dampenedEls.forEach((el) =>
-      el.addEventListener("click", () => doc.system.undampen())
-    );
+    dampenedEls.forEach((el) => el.addEventListener("click", () => doc.system.undampen()));
 
     const shatteredEls = root.querySelectorAll(".flag-tag-shattered");
-    shatteredEls.forEach((el) =>
-      el.addEventListener("click", () => doc.system.repair())
-    );
+    shatteredEls.forEach((el) => el.addEventListener("click", () => doc.system.repair()));
   }
 }

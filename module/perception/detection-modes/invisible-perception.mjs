@@ -1,6 +1,10 @@
 const { Token } = foundry.canvas.placeables;
 import TeriockDetectionMode from "./teriock-detection-mode.mjs";
 
+/**
+ * Relevant wiki pages:
+ * - [See Invisible](https://wiki.teriock.com/index.php/Ability:See_Invisible)
+ */
 export default class DetectionModeInvisiblePerception extends TeriockDetectionMode {
   static BLOCKING_TGT_STATUS_EFFECTS = ["hidden"];
 

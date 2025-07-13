@@ -1,4 +1,5 @@
 const { DetectionMode } = foundry.canvas.perception;
+import DetectionModeBlindFighting from "./detection-modes/blind-fighting.mjs";
 import DetectionModeEtherealEthereal from "./detection-modes/ethereal-ethereal-perception.mjs";
 import DetectionModeEtherealMaterial from "./detection-modes/ethereal-material-perception.mjs";
 import DetectionModeInvisiblePerception from "./detection-modes/invisible-perception.mjs";
@@ -8,7 +9,6 @@ import DetectionModeMaterialMaterial from "./detection-modes/material-material-p
 import DetectionModeScentPerception from "./detection-modes/scent-perception.mjs";
 import DetectionModeSoundPerception from "./detection-modes/sound-perception.mjs";
 import DetectionModeTrueSightPerception from "./detection-modes/true-sight-perception.mjs";
-import DetectionModeBlindFighting from "./detection-modes/blind-fighting.mjs";
 
 /**
  * Custom detection modes.

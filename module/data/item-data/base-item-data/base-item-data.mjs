@@ -5,11 +5,13 @@ import ChildDataMixin from "../../mixins/child-mixin.mjs";
 /**
  * Base item data model for all Teriock items.
  * Provides common functionality for disabled state and update tracking.
+ *
  * @extends {TypeDataModel}
  */
 export default class TeriockBaseItemData extends ChildDataMixin(TypeDataModel) {
   /**
    * Get the actor associated with this item data.
+   *
    * @returns {TeriockActor}
    */
   get actor() {
@@ -18,6 +20,7 @@ export default class TeriockBaseItemData extends ChildDataMixin(TypeDataModel) {
 
   /**
    * Defines the schema for the base item data model.
+   *
    * @returns {object} The schema definition for the base item data.
    * @override
    */

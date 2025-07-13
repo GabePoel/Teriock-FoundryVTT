@@ -1,5 +1,5 @@
-import { tokenFromTarget } from "./_roll-targeting.mjs";
 import TeriockRoll from "../../../../../documents/roll.mjs";
+import { tokenFromTarget } from "./_roll-targeting.mjs";
 
 const ROLL_GENERATORS = {
   attack: { generator: "attack", noDice: false },
@@ -10,6 +10,7 @@ const ROLL_GENERATORS = {
 
 /**
  * Generate the roll used for this ability instance.
+ *
  * @param {AbilityRollConfig} rollConfig - Configurations for this ability usage.
  * @returns {Promise<TeriockRoll[]>}
  */
@@ -26,6 +27,7 @@ export async function _generateRolls(rollConfig) {
 /**
  * Generates rolls for multiple targets or single roll if no targets.
  * Handles roll generation for different interaction types.
+ *
  * @param {AbilityRollConfig} rollConfig - Configurations for this ability usage.
  * @param {Function} rollGenerator - Function to generate individual rolls.
  * @param {boolean} noDice - Whether to generate rolls without dice.
@@ -68,6 +70,7 @@ async function generateRolls(rollConfig, rollGenerator, noDice) {
 /**
  * Generates an attack roll for an ability.
  * Handles attack formula construction, piercing, and target information.
+ *
  * @param {TeriockAbilityData} abilityData - The ability data to generate attack roll for.
  * @param {object} useData - The use data containing costs and modifiers.
  * @param {Teriock.CommonRollOptions} options - Options for the attack roll.
@@ -94,6 +97,7 @@ export async function _generateAttackRoll(abilityData, useData, options = {}) {
 /**
  * Gets piercing information for the ability.
  * Determines if the ability has piercing properties and updates roll data accordingly.
+ *
  * @param {TeriockAbilityData} abilityData - The ability data to get piercing info for.
  * @param {object} rollData - The roll data to update with piercing information.
  * @returns {object} Object containing dice class, tooltip, and unblockable status.
@@ -127,6 +131,7 @@ function getPiercingInfo(abilityData, rollData) {
 /**
  * Builds the roll context for the ability roll.
  * Includes target information, elder sorcery data, and resistance effects.
+ *
  * @param {TeriockAbilityData} abilityData - The ability data to build context for.
  * @param {object} target - The target for the roll.
  * @param {Array} buttons - Array of buttons for the roll.
@@ -175,6 +180,7 @@ function buildRollContext(abilityData, target, buttons, diceClass, diceTooltip, 
 /**
  * Generates a feat roll for an ability.
  * Creates a feat roll with proficiency modifiers and target information.
+ *
  * @param {TeriockAbilityData} abilityData - The ability data to generate feat roll for.
  * @param {object} useData - The use data containing costs and modifiers.
  * @param {Teriock.CommonRollOptions} options - Options for the feat roll.

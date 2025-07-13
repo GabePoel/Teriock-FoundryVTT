@@ -1,6 +1,7 @@
 /**
  * Migrates resource data from older versions to the current format.
  * Converts numeric maxQuantity to the new schema format with raw and derived fields.
+ *
  * @param {object} data - The resource data to migrate.
  * @returns {Partial<TeriockResourceData>} The migrated resource data.
  * @private

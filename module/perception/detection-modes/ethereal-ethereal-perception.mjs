@@ -1,6 +1,9 @@
 const { Token } = foundry.canvas.placeables;
 import TeriockDetectionMode from "./teriock-detection-mode.mjs";
 
+/**
+ * Ethereal creatures seeing Ethereal creatures.
+ */
 export default class DetectionModeEtherealEthereal extends TeriockDetectionMode {
   /** @override */
   _canDetect(visionSource, target) {

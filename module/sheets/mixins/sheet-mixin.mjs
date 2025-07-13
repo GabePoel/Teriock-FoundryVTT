@@ -1,8 +1,8 @@
 const { utils } = foundry;
 const { ux, api } = foundry.applications;
-import { imageContextMenuOptions } from "../misc-sheets/image-sheet/connections/_context-menus.mjs";
-import * as createEffects from "../../helpers/create-effects.mjs";
 import connectEmbedded from "../../helpers/connect-embedded.mjs";
+import * as createEffects from "../../helpers/create-effects.mjs";
+import { imageContextMenuOptions } from "../misc-sheets/image-sheet/connections/_context-menus.mjs";
 
 /**
  * Base sheet mixin for Teriock system applications.

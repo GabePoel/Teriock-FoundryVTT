@@ -1,6 +1,9 @@
 const { Token } = foundry.canvas.placeables;
 import TeriockDetectionMode from "./teriock-detection-mode.mjs";
 
+/**
+ * Material creatures seeing Material creatures.
+ */
 export default class DetectionModeMaterialMaterial extends TeriockDetectionMode {
   /** @override */
   _canDetect(visionSource, target) {
@@ -9,7 +12,7 @@ export default class DetectionModeMaterialMaterial extends TeriockDetectionMode 
     }
     const src = visionSource.object.document;
     if (target instanceof Token) {
-      const tgt = target.document;
+      const tgt = /** @type{TeriockToken} */ target.document;
       if (!(!src.hasStatusEffect("ethereal") && !tgt.hasStatusEffect("ethereal"))) {
         return false;
       }

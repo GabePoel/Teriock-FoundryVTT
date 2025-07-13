@@ -1,15 +1,19 @@
-import { _defineSchema } from "./methods/schema/_schema.mjs";
+import WikiDataMixin from "../../mixins/wiki-mixin.mjs";
+import TeriockBaseEffectData from "../base-effect-data/base-effect-data.mjs";
 import { _messageParts } from "./methods/_messages.mjs";
 import { _migrateData } from "./methods/_migrate-data.mjs";
 import { _parse } from "./methods/_parsing.mjs";
+import { _suppressed } from "./methods/_suppression.mjs";
 import { _prepareDerivedData } from "./methods/data-deriving/_data-deriving.mjs";
 import { _roll } from "./methods/rolling/_rolling.mjs";
-import { _suppressed } from "./methods/_suppression.mjs";
-import WikiDataMixin from "../../mixins/wiki-mixin.mjs";
-import TeriockBaseEffectData from "../base-effect-data/base-effect-data.mjs";
+import { _defineSchema } from "./methods/schema/_schema.mjs";
 
 /**
  * Ability-specific effect data model.
+ *
+ * Relevant wiki pages:
+ * - [Ability Rules](https://wiki.teriock.com/index.php/Category:Ability_rules)
+ *
  * @extends {TeriockBaseEffectData}
  */
 export default class TeriockAbilityData extends WikiDataMixin(TeriockBaseEffectData) {
@@ -23,6 +27,7 @@ export default class TeriockAbilityData extends WikiDataMixin(TeriockBaseEffectD
   /**
    * Checks if the ability is suppressed.
    * Combines base suppression with ability-specific suppression logic.
+   *
    * @returns {boolean} True if the ability is suppressed, false otherwise.
    * @override
    */
@@ -35,6 +40,7 @@ export default class TeriockAbilityData extends WikiDataMixin(TeriockBaseEffectD
   /**
    * Gets the message parts for the ability.
    * Combines base message parts with ability-specific message parts.
+   *
    * @returns {Teriock.MessageParts} Object containing message parts for the ability.
    * @override
    */
@@ -47,6 +53,7 @@ export default class TeriockAbilityData extends WikiDataMixin(TeriockBaseEffectD
 
   /**
    * Gets the wiki page URL for the ability.
+   *
    * @returns {string} The wiki page URL for the ability.
    * @override
    */
@@ -56,6 +63,7 @@ export default class TeriockAbilityData extends WikiDataMixin(TeriockBaseEffectD
 
   /**
    * Defines the schema for the ability data model.
+   *
    * @returns {object} The schema definition for the ability data.
    * @override
    */
@@ -65,6 +73,7 @@ export default class TeriockAbilityData extends WikiDataMixin(TeriockBaseEffectD
 
   /**
    * Migrates ability data to the current schema version.
+   *
    * @param {object} data - The data to migrate.
    * @returns {object} The migrated data.
    * @override
@@ -76,6 +85,7 @@ export default class TeriockAbilityData extends WikiDataMixin(TeriockBaseEffectD
 
   /**
    * Prepares derived data for the ability, calculating computed values.
+   *
    * @override
    */
   prepareDerivedData() {
@@ -85,6 +95,7 @@ export default class TeriockAbilityData extends WikiDataMixin(TeriockBaseEffectD
 
   /**
    * Rolls the ability with the specified options.
+   *
    * @param {Teriock.CommonRollOptions} options - Options for the ability roll.
    * @returns {Promise<void>} Promise that resolves when the roll is complete.
    * @override
@@ -95,6 +106,7 @@ export default class TeriockAbilityData extends WikiDataMixin(TeriockBaseEffectD
 
   /**
    * Parses raw HTML content for the ability.
+   *
    * @param {string} rawHTML - The raw HTML content to parse.
    * @returns {Promise<object>} Promise that resolves to the parsed ability data.
    * @override

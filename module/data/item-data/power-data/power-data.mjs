@@ -1,22 +1,20 @@
 const { fields } = foundry.data;
-import { _messageParts } from "./methods/_messages.mjs";
 import TeriockBaseItemData from "../base-item-data/base-item-data.mjs";
+import { _messageParts } from "./methods/_messages.mjs";
 
 /**
  * Power-specific item data model.
- * Handles power functionality including type, flaws, proficiency, and lifecycle management.
  */
 export default class TeriockPowerData extends TeriockBaseItemData {
   /** @inheritDoc */
   static get metadata() {
-    return foundry.utils.mergeObject({}, {
-      type: "power",
-    });
+    return foundry.utils.mergeObject({}, { type: "power" });
   }
 
   /**
    * Gets the message parts for the power.
    * Combines base message parts with power-specific message parts.
+   *
    * @returns {Teriock.MessageParts} Object containing message parts for the power.
    * @override
    */
@@ -29,6 +27,7 @@ export default class TeriockPowerData extends TeriockBaseItemData {
 
   /**
    * Defines the schema for the power data model.
+   *
    * @returns {object} The schema definition for the power data.
    */
   static defineSchema() {

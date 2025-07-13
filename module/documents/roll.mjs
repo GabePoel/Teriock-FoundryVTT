@@ -4,6 +4,11 @@ const { Roll } = foundry.dice;
  * A custom Roll class which enriches the provided flavor and uses a custom
  * chat template to display the flavor as enriched HTML. Also allows for custom
  * functions that Teriock requires.
+ *
+ * Relevant wiki pages:
+ * - [Boosted](https://wiki.teriock.com/index.php/Keyword:Boosted)
+ * - [Deboosted](https://wiki.teriock.com/index.php/Keyword:Deboosted)
+ *
  * @extends {Roll}
  */
 export default class TeriockRoll extends Roll {
@@ -17,7 +22,7 @@ export default class TeriockRoll extends Roll {
    * @param {object} options - Options for the roll, including enrichment settings.
    */
   constructor(formula, data, options = {}) {
-    const parsedFormula = TeriockRoll.parseFormula(formula);
+    const parsedFormula = TeriockRoll.#parseFormula(formula);
     super(parsedFormula, data, options);
     const defaultOptions = {
       enrich: false,
@@ -74,8 +79,8 @@ export default class TeriockRoll extends Roll {
    * TeriockRoll.parseFormula("boost(deboost(2d4 + 1d6))") // -> "2d4 + 1d6"
    * TeriockRoll.parseFormula("b(db(2d4 + 1d6))") // -> "2d4 + 1d6"
    */
-  static parseFormula(formula) {
-    return TeriockRoll.parseFormulaRecursive(formula);
+  static #parseFormula(formula) {
+    return TeriockRoll.#parseFormulaRecursive(formula);
   }
 
   /**
@@ -85,7 +90,7 @@ export default class TeriockRoll extends Roll {
    * @returns {string} The parsed formula
    * @private
    */
-  static parseFormulaRecursive(formula) {
+  static #parseFormulaRecursive(formula) {
     // Find the outermost boost, deboost, or setboost function (including aliases)
     const boostMatch = formula.match(/(?:boost|b)\s*\(/);
     const deboostMatch = formula.match(/(?:deboost|db)\s*\(/);
@@ -106,25 +111,25 @@ export default class TeriockRoll extends Roll {
     const functionStart = formula.substring(firstFunctionIndex);
 
     // Find the matching closing parenthesis
-    const innerFormula = TeriockRoll.extractFunctionContent(functionStart);
+    const innerFormula = TeriockRoll.#extractFunctionContent(functionStart);
     const functionName = functionStart.match(/^(boost|b|deboost|db|setboost|sb)\s*\(/)[1];
     const afterFunction = functionStart.substring(functionStart.indexOf(innerFormula) + innerFormula.length + 1);
 
     // Recursively parse the inner formula
-    const parsedInnerFormula = TeriockRoll.parseFormulaRecursive(innerFormula);
+    const parsedInnerFormula = TeriockRoll.#parseFormulaRecursive(innerFormula);
 
     // Evaluate the function (map aliases to full names)
     let evaluatedFormula;
     if (functionName === "boost" || functionName === "b") {
-      evaluatedFormula = TeriockRoll.evaluateBoostFunction(parsedInnerFormula, true);
+      evaluatedFormula = TeriockRoll.#evaluateBoostFunction(parsedInnerFormula, true);
     } else if (functionName === "deboost" || functionName === "db") {
-      evaluatedFormula = TeriockRoll.evaluateBoostFunction(parsedInnerFormula, false);
+      evaluatedFormula = TeriockRoll.#evaluateBoostFunction(parsedInnerFormula, false);
     } else if (functionName === "setboost" || functionName === "sb") {
-      evaluatedFormula = TeriockRoll.evaluateSetboostFunction(parsedInnerFormula);
+      evaluatedFormula = TeriockRoll.#evaluateSetboostFunction(parsedInnerFormula);
     }
 
     // Recursively parse the rest of the formula
-    const parsedAfterFunction = TeriockRoll.parseFormulaRecursive(afterFunction);
+    const parsedAfterFunction = TeriockRoll.#parseFormulaRecursive(afterFunction);
 
     return beforeFunction + evaluatedFormula + parsedAfterFunction;
   }
@@ -136,7 +141,7 @@ export default class TeriockRoll extends Roll {
    * @returns {string} The content inside the function parentheses
    * @private
    */
-  static extractFunctionContent(functionCall) {
+  static #extractFunctionContent(functionCall) {
     const openParenIndex = functionCall.indexOf("(");
     if (openParenIndex === -1) {
       foundry.ui.notifications.error(`Invalid function call: missing opening parenthesis`);
@@ -169,16 +174,16 @@ export default class TeriockRoll extends Roll {
    * @returns {string} The resulting formula after boost/deboost is applied
    * @private
    */
-  static evaluateBoostFunction(innerFormula, isBoost) {
+  static #evaluateBoostFunction(innerFormula, isBoost) {
     try {
       // Create a temporary regular Roll to avoid circular dependency
       const tempRoll = new foundry.dice.Roll(innerFormula);
 
       // Apply boost or deboost logic directly
       if (isBoost) {
-        TeriockRoll.applyBoostToRoll(tempRoll);
+        TeriockRoll._boost(tempRoll);
       } else {
-        TeriockRoll.applyDeboostToRoll(tempRoll);
+        TeriockRoll._deboost(tempRoll);
       }
 
       // Return the modified formula
@@ -197,7 +202,7 @@ export default class TeriockRoll extends Roll {
    * @returns {string} The resulting formula after setboost is applied
    * @private
    */
-  static evaluateSetboostFunction(innerFormula) {
+  static #evaluateSetboostFunction(innerFormula) {
     try {
       // Parse the parameters: "formula, number"
       const commaIndex = innerFormula.lastIndexOf(",");
@@ -222,11 +227,11 @@ export default class TeriockRoll extends Roll {
       // Apply the specified number of boosts/deboosts
       if (boostNumber > 0) {
         for (let i = 0; i < boostNumber; i++) {
-          TeriockRoll.applyBoostToRoll(tempRoll);
+          TeriockRoll._boost(tempRoll);
         }
       } else if (boostNumber < 0) {
         for (let i = 0; i < Math.abs(boostNumber); i++) {
-          TeriockRoll.applyDeboostToRoll(tempRoll);
+          TeriockRoll._deboost(tempRoll);
         }
       }
       // If boostNumber is 0, no changes are made
@@ -243,7 +248,7 @@ export default class TeriockRoll extends Roll {
    * Applies boost logic to a roll by increasing the highest face die.
    * @private
    */
-  static applyBoostToRoll(roll) {
+  static _boost(roll) {
     const die = selectWeightedMaxFaceDie(roll.dice);
     die._number = die._number + 1;
     roll.resetFormula();
@@ -253,7 +258,7 @@ export default class TeriockRoll extends Roll {
    * Applies deboost logic to a roll by decreasing the highest face die.
    * @private
    */
-  static applyDeboostToRoll(roll) {
+  static _deboost(roll) {
     const die = selectWeightedMaxFaceDie(roll.dice);
     die._number = Math.max(0, die._number - 1);
     roll.resetFormula();
@@ -276,24 +281,33 @@ export default class TeriockRoll extends Roll {
 
   /**
    * Applies a boost to this roll by increasing the highest face die.
+   *
+   * Relevant wiki pages:
+   * - [Boosted](https://wiki.teriock.com/index.php/Keyword:Boosted)
+   *
    * @returns {void}
    */
   boost() {
-    TeriockRoll.applyBoostToRoll(this);
+    TeriockRoll._boost(this);
   }
 
   /**
    * Applies a deboost to this roll by decreasing the highest face die.
+   *
+   * Relevant wiki pages:
+   * - [Deboosted](https://wiki.teriock.com/index.php/Keyword:Deboosted)
+   *
    * @returns {void}
    */
   deboost() {
-    TeriockRoll.applyDeboostToRoll(this);
+    TeriockRoll._deboost(this);
   }
 
   /**
    * Sets the number of boosts or deboosts for this roll.
    * Positive numbers apply boosts, negative numbers apply deboosts.
-   * @param {number} number - The number of boosts or deboosts to apply. Positive numbers boost, negative numbers deboost.
+   * @param {number} number - The number of boosts or deboosts to apply. Positive numbers boost, negative numbers
+   *   deboost.
    * @returns {void}
    */
   setBoost(number) {

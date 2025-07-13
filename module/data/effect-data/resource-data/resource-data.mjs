@@ -1,12 +1,13 @@
 const { fields } = foundry.data;
+import ConsumableDataMixin from "../../mixins/consumable-mixin.mjs";
+import TeriockBaseEffectData from "../base-effect-data/base-effect-data.mjs";
 import { _messageParts } from "./methods/_messages.mjs";
 import { _migrateData } from "./methods/_migrate-data.mjs";
 import { _roll } from "./methods/_rolling.mjs";
-import ConsumableDataMixin from "../../mixins/consumable-mixin.mjs";
-import TeriockBaseEffectData from "../base-effect-data/base-effect-data.mjs";
 
 /**
  * Resource-specific effect data model.
+ *
  * @extends {TeriockBaseEffectData}
  */
 export default class TeriockResourceData extends ConsumableDataMixin(TeriockBaseEffectData) {
@@ -20,6 +21,7 @@ export default class TeriockResourceData extends ConsumableDataMixin(TeriockBase
   /**
    * Checks if the resource effect is suppressed.
    * Combines base suppression with attunement-based suppression for equipment.
+   *
    * @returns {boolean} True if the resource effect is suppressed, false otherwise.
    * @override
    */
@@ -34,6 +36,7 @@ export default class TeriockResourceData extends ConsumableDataMixin(TeriockBase
   /**
    * Gets the message parts for the resource effect.
    * Combines base message parts with resource-specific message parts.
+   *
    * @returns {object} Object containing message parts for the resource effect.
    * @override
    */
@@ -43,6 +46,7 @@ export default class TeriockResourceData extends ConsumableDataMixin(TeriockBase
 
   /**
    * Defines the schema for the resource data model.
+   *
    * @returns {object} The schema definition for the resource data.
    */
   static defineSchema() {
@@ -83,6 +87,7 @@ export default class TeriockResourceData extends ConsumableDataMixin(TeriockBase
 
   /**
    * Migrates data from older versions to the current format.
+   *
    * @param {object} data - The data to migrate.
    * @returns {object} The migrated data.
    * @override
@@ -94,6 +99,7 @@ export default class TeriockResourceData extends ConsumableDataMixin(TeriockBase
 
   /**
    * Rolls the resource effect with the specified options.
+   *
    * @param {object} options - Options for the resource roll.
    * @returns {Promise<void>} Promise that resolves when the roll is complete.
    * @override
@@ -105,6 +111,7 @@ export default class TeriockResourceData extends ConsumableDataMixin(TeriockBase
   /**
    * Uses one unit of the resource.
    * If quantity becomes 0 or less, disables the parent effect.
+   *
    * @returns {Promise<void>} Promise that resolves when the resource is used.
    * @override
    */
@@ -119,6 +126,7 @@ export default class TeriockResourceData extends ConsumableDataMixin(TeriockBase
   /**
    * Gains one unit of the resource.
    * Re-enables the parent effect when gaining resources.
+   *
    * @returns {Promise<void>} Promise that resolves when the resource is gained.
    * @override
    */

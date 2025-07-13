@@ -1,5 +1,5 @@
-import { BaseEffectSheet } from "../../_base.mjs";
 import { documentOptions } from "../../../helpers/constants/document-options.mjs";
+import { BaseEffectSheet } from "../../_base.mjs";
 
 /**
  * Base effect sheet for Teriock system active effects.
@@ -9,6 +9,7 @@ import { documentOptions } from "../../../helpers/constants/document-options.mjs
 export default class TeriockBaseEffectSheet extends BaseEffectSheet {
   /**
    * Default options for the base effect sheet.
+   *
    * @type {object}
    * @static
    */
@@ -26,6 +27,7 @@ export default class TeriockBaseEffectSheet extends BaseEffectSheet {
 
   /**
    * Adds a new change to an effect application.
+   *
    * @param {Event} event - The event object.
    * @param {HTMLElement} target - The target element.
    * @returns {Promise<void>} Promise that resolves when change is added.
@@ -47,6 +49,7 @@ export default class TeriockBaseEffectSheet extends BaseEffectSheet {
 
   /**
    * Deletes a change from an effect application.
+   *
    * @param {Event} event - The event object.
    * @param {HTMLElement} target - The target element.
    * @returns {Promise<void>} Promise that resolves when change is deleted.
@@ -75,6 +78,7 @@ export default class TeriockBaseEffectSheet extends BaseEffectSheet {
   /**
    * Prepares the context data for template rendering.
    * Adds effect-specific data including disabled state, suppression, and enriched description.
+   *
    * @returns {Promise<object>} Promise that resolves to the context object.
    * @override
    */
@@ -93,6 +97,7 @@ export default class TeriockBaseEffectSheet extends BaseEffectSheet {
   /**
    * Handles the render event for the effect sheet.
    * Sets up change entry event listeners for dynamic updates.
+   *
    * @param {object} context - The render context.
    * @param {object} options - Render options.
    * @override

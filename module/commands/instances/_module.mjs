@@ -1,5 +1,4 @@
 import { attack } from "./attack.mjs";
-import { createHelpCommand } from "./help.mjs";
 import { damage } from "./damage.mjs";
 import { drain } from "./drain.mjs";
 import { endcon } from "./endcon.mjs";
@@ -8,6 +7,7 @@ import { gaintempmp } from "./gaintempmp.mjs";
 import { hack, unhack } from "./hack.mjs";
 import { harm } from "./harm.mjs";
 import { heal } from "./heal.mjs";
+import { createHelpCommand } from "./help.mjs";
 import { kill } from "./kill.mjs";
 import { resist } from "./resist.mjs";
 import { revitalize } from "./revitalize.mjs";

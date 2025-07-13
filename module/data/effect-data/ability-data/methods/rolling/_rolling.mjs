@@ -1,16 +1,17 @@
-import { _buildButtons, _createSummaryBarBox } from "./_roll-chat-message.mjs";
 import { evaluateAsync } from "../../../../../helpers/utils.mjs";
-import { _getTargets, _measure } from "./_roll-targeting.mjs";
+import { _buildButtons, _createSummaryBarBox } from "./_roll-chat-message.mjs";
 import { _handleDialogs } from "./_roll-dialogs.mjs";
 import { _generateRolls } from "./_roll-object-generation.mjs";
+import { _getTargets, _measure } from "./_roll-targeting.mjs";
 
 /**
  * Initiates an ability roll with the specified options.
  * Handles cost calculation, resource spending, and roll generation based on interaction type.
+ *
+ * @todo Finish modularizing and cleaning this up.
  * @param {TeriockAbilityData} abilityData - The data of the ability being rolled for.
  * @param {object} options - Options for the ability roll including advantage/disadvantage.
  * @returns {Promise<void>} Promise that resolves when the roll is complete.
- * @todo Finish modularizing and cleaning this up.
  * @private
  */
 export async function _roll(abilityData, options) {
@@ -92,7 +93,6 @@ export async function _roll(abilityData, options) {
   rollConfig.chatData.buttons = buttons;
 
   if (abilityData.applies.macro) {
-    /** @type {Macro} */
     const macro = await foundry.utils.fromUuid(abilityData.applies.macro);
     if (macro) {
       macro.execute({
@@ -124,6 +124,7 @@ export async function _roll(abilityData, options) {
 /**
  * Stages the use of an ability, calculating costs and handling dialogs.
  * Prepares use data including costs, modifiers, and roll formula.
+ *
  * @param {AbilityRollConfig} rollConfig - Configurations for this ability usage.
  * @returns {Promise<void>}
  */
@@ -151,6 +152,7 @@ async function stageUse(rollConfig) {
 /**
  * Calculates cost based on cost configuration type.
  * Handles static, formula, and variable cost types.
+ *
  * @param {NumberCost} costConfig - The cost configuration to calculate.
  * @param {object} rollData - The roll data for formula evaluation.
  * @returns {Promise<number>} Promise that resolves to the calculated cost.
@@ -170,6 +172,7 @@ async function calculateCost(costConfig, rollData) {
 
 /**
  * Builds the roll formula based on interaction type and advantage/disadvantage.
+ *
  * @param {AbilityRollConfig} rollConfig - Configurations for this ability usage.
  * @returns {string} The initial roll formula.
  */

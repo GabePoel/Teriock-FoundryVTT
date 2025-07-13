@@ -1,8 +1,7 @@
-/** @import TeriockAbilityData from "../ability-data.mjs"; */
-
 /**
  * Migrates ability data to the current schema version.
  * Handles data format conversions for effects, costs, and other ability properties.
+ *
  * @param {object} data - The ability data to migrate.
  * @returns {Partial<TeriockAbilityData>} The migrated ability data.
  * @private

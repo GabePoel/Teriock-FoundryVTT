@@ -3,6 +3,7 @@ const { fields } = foundry.data;
 /**
  * Mixin that provides child document functionality for embedded documents.
  * Adds proficiency tracking, font customization, and message generation capabilities.
+ *
  * @template {import("@common/_types.mjs").Constructor<foundry.abstract.TypeDataModel>} ModelClass
  * @param {ModelClass} Base - The base class to mix in with.
  */
@@ -11,6 +12,7 @@ export default (Base) => {
     /**
      * Gets the message rules-parts for displaying the child document in chat.
      * Includes image, name, and font information from the parent document.
+     *
      * @returns {Teriock.MessageParts} Object containing message display components.
      */
     get messageParts() {
@@ -26,6 +28,7 @@ export default (Base) => {
     /**
      * Gets the secret message rules-parts for displaying hidden child documents.
      * Uses generic uncertainty image and type-based name for privacy.
+     *
      * @returns {Teriock.MessageParts} Object containing secret message display components.
      */
     get secretMessageParts() {
@@ -41,6 +44,7 @@ export default (Base) => {
     /**
      * Defines the schema for child document data fields.
      * Includes proficiency flags, font customization, and description fields.
+     *
      * @returns {object} The schema definition for child document fields.
      * @override
      */
@@ -69,6 +73,7 @@ export default (Base) => {
     /**
      * Initiates a roll for the child document.
      * Delegates to the parent document's chat functionality.
+     *
      * @param {object} options - Options for the roll operation.
      * @returns {Promise<void>} Promise that resolves when the roll is complete.
      */
@@ -79,6 +84,7 @@ export default (Base) => {
     /**
      * Uses the child document, which triggers a roll.
      * Alias for the roll method to provide consistent interface.
+     *
      * @param {object} options - Options for the use operation.
      * @returns {Promise<void>} Promise that resolves when the use is complete.
      */

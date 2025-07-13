@@ -8,8 +8,9 @@ import { BaseTeriockEffect } from "./_base.mjs";
 export default class TeriockEffect extends BaseTeriockEffect {
   /**
    * Checks if the effect is suppressed, combining system suppression with parent suppression.
-   * @override
+
    * @returns {boolean} True if the effect is suppressed, false otherwise.
+   * @override
    */
   get isSuppressed() {
     let suppressed = super.isSuppressed;
@@ -18,6 +19,7 @@ export default class TeriockEffect extends BaseTeriockEffect {
 
   /**
    * Returns the actor that this effect is associated with, if there is one.
+   *
    * @returns {TeriockActor}
    */
   get actor() {
@@ -31,6 +33,7 @@ export default class TeriockEffect extends BaseTeriockEffect {
   /**
    * Gets the effect that provides this effect, if there is one.
    * Synchronous by default. Asynchronous fallback for compendiums.
+   *
    * @returns {TeriockEffect|null|Promise<TeriockEffect|null>}
    */
   get sup() {
@@ -54,11 +57,12 @@ export default class TeriockEffect extends BaseTeriockEffect {
   /**
    * Gets te effect that provides this effect, if there is one.
    * Always synchronous.
+   *
    * @returns {TeriockEffect|null}
    */
   get supSync() {
     if (this.system.supId) {
-      return this.parent.getEmbeddedDocument("ActiveEffect", this.system.supId);
+      return /** @type {TeriockEffect} */ this.parent.getEmbeddedDocument("ActiveEffect", this.system.supId);
     }
     return null;
   }
@@ -66,7 +70,9 @@ export default class TeriockEffect extends BaseTeriockEffect {
   /**
    * Gets all effects that this effect is a sub-effect of.
    * Synchronous by default. Asynchronous fallback for compendiums.
-   * @returns {TeriockEffect[]|Promise<TeriockEffect[]>} Array of super-effects, ordered from immediate sup to top level.
+   *
+   * @returns {TeriockEffect[]|Promise<TeriockEffect[]>} Array of super-effects, ordered from immediate sup to top
+   *   level.
    */
   get allSups() {
     const supEffects = [];
@@ -81,6 +87,7 @@ export default class TeriockEffect extends BaseTeriockEffect {
   /**
    * Gets all effects that this effect is a sub-effect of.
    * Always synchronous.
+   *
    * @returns {TeriockEffect[]} Array of super-effects, ordered from immediate sup to top level.
    */
   get allSupsSync() {
@@ -95,6 +102,7 @@ export default class TeriockEffect extends BaseTeriockEffect {
 
   /**
    * Gets all sub-effects that are derived from this effect.
+   *
    * @returns {TeriockEffect[]|Promise<TeriockEffect>} Array of sub-effects.
    */
   get subs() {
@@ -117,6 +125,7 @@ export default class TeriockEffect extends BaseTeriockEffect {
   /**
    * Gets all sub-effects that are derived from this effect.
    * Always asynchronous.
+   *
    * @returns {function(): Promise<TeriockEffect[]>} Array of sub-effects.
    */
   get subsAsync() {
@@ -137,6 +146,7 @@ export default class TeriockEffect extends BaseTeriockEffect {
   /**
    * Gets all sub-effects descendant from this effect recursively.
    * Synchronous by default. Asynchronous fallback for compendiums.
+   *
    * @returns {TeriockEffect[]} Array of all descendant effects.
    */
   get allSubs() {
@@ -152,6 +162,7 @@ export default class TeriockEffect extends BaseTeriockEffect {
   /**
    * Gets all sub-effect descendents from this effect recursively.
    * Always asynchronous.
+   *
    * @returns {function(): Promise<TeriockEffect[]>}
    */
   get allSubsAsync() {
@@ -171,6 +182,7 @@ export default class TeriockEffect extends BaseTeriockEffect {
   /**
    * Gets the document that most directly applies this effect. If it's an effect, returns that.
    * Otherwise, gets what Foundry considers to be the parent.
+   *
    * @returns {TeriockActor|TeriockEffect|TeriockItem} The source document that applies this effect.
    */
   get source() {
@@ -183,6 +195,7 @@ export default class TeriockEffect extends BaseTeriockEffect {
 
   /**
    * Checks if this effect is a reference effect by examining its sups for non-passive maneuvers.
+   *
    * @returns {boolean} True if this is a reference effect, false otherwise.
    */
   get isReference() {
@@ -197,7 +210,8 @@ export default class TeriockEffect extends BaseTeriockEffect {
 
   /**
    * Prepares derived data for the effect, handling ability-specific logic and attunement changes.
-   * @todo Move this logic to TeriockAbilityData as appropriate.
+   *
+   * @todo Move this logic to {@link TeriockAttunementData} as appropriate.
    * @inheritdoc
    */
   prepareDerivedData() {
@@ -212,6 +226,7 @@ export default class TeriockEffect extends BaseTeriockEffect {
 
   /**
    * Saves the hierarchy relationships by updating sub UUIDs and sup UUID.
+   *
    * @returns {Promise<void>} Promise that resolves once the hierarchy data is saved.
    */
   async lockHierarchy() {
@@ -227,6 +242,7 @@ export default class TeriockEffect extends BaseTeriockEffect {
 
   /**
    * Removes the hierarchy relationships by clearing sub UUIDs and sup UUID.
+   *
    * @returns {Promise<void>} Promise that resolves when the hierarchy data is cleared.
    */
   async unlockHierarchy() {
@@ -238,6 +254,7 @@ export default class TeriockEffect extends BaseTeriockEffect {
 
   /**
    * Deletes all sub-effects and clears the sub IDs from this effect.
+   *
    * @returns {Promise<void>} Promise that resolves when all subs are deleted.
    */
   async deleteSubs() {
@@ -252,9 +269,10 @@ export default class TeriockEffect extends BaseTeriockEffect {
 
   /**
    * Duplicates the effect and updates parent-child relationships.
-   * @todo Create addSub and setSup methods to handle this more generally.
-   * @override
+   *
+   * @todo Create `addSub` and `setSup` methods to handle this more generally.
    * @returns {Promise<TeriockEffect>} Promise that resolves to the duplicated effect.
+   * @override
    */
   async duplicate() {
     const copy = await super.duplicate();
@@ -270,6 +288,7 @@ export default class TeriockEffect extends BaseTeriockEffect {
 
   /**
    * Disables the effect by setting its `disabled` property to true.
+   *
    * @returns {Promise<void>} Promise that resolves when the effect is disabled.
    */
   async disable() {
@@ -278,6 +297,7 @@ export default class TeriockEffect extends BaseTeriockEffect {
 
   /**
    * Enables the effect by setting its `disabled` property to false.
+   *
    * @returns {Promise<void>} Promise that resolves when the effect is enabled.
    */
   async enable() {
@@ -287,6 +307,7 @@ export default class TeriockEffect extends BaseTeriockEffect {
   /**
    * Toggles the `disabled` state of the effect.
    * If the effect is currently disabled, it will be enabled, and vice versa.
+   *
    * @returns {Promise<void>} Promise that resolves when the disabled state is toggled.
    */
   async toggleDisabled() {
@@ -296,6 +317,7 @@ export default class TeriockEffect extends BaseTeriockEffect {
   /**
    * Forces an update of the effect by toggling the update counter.
    * This is useful for triggering reactive updates in the UI.
+   *
    * @returns {Promise<void>} Promise that resolves when the effect is updated.
    */
   async forceUpdate() {

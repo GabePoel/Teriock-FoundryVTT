@@ -1,7 +1,7 @@
 const { api } = foundry.applications;
 import { documentOptions } from "../../../helpers/constants/document-options.mjs";
-import { fieldContextMenu, tradecraftContextMenu } from "./connections/_context-menus.mjs";
 import TeriockBaseEffectSheet from "../base-effect-sheet/base-effect-sheet.mjs";
+import { fieldContextMenu, tradecraftContextMenu } from "./connections/_context-menus.mjs";
 
 /**
  * Fluency sheet for Teriock system fluencies.

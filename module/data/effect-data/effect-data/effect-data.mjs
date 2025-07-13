@@ -14,6 +14,7 @@ export default class TeriockEffectData extends TeriockBaseEffectData {
 
   /**
    * Checks if the effect has condition-based expiration.
+   *
    * @returns {boolean} True if the effect expires based on a condition, false otherwise.
    */
   get conditionExpiration() {
@@ -22,6 +23,7 @@ export default class TeriockEffectData extends TeriockBaseEffectData {
 
   /**
    * Checks if the effect expires on movement.
+   *
    * @returns {boolean} True if the effect expires on movement, false otherwise.
    */
   get movementExpiration() {
@@ -30,6 +32,7 @@ export default class TeriockEffectData extends TeriockBaseEffectData {
 
   /**
    * Checks if the effect expires at dawn.
+   *
    * @returns {boolean} True if the effect expires at dawn, false otherwise.
    */
   get dawnExpiration() {
@@ -38,6 +41,7 @@ export default class TeriockEffectData extends TeriockBaseEffectData {
 
   /**
    * Checks if the effect expires when its source is deleted or disabled.
+   *
    * @returns {boolean} True if the effect expires when sustained, false otherwise.
    */
   get sustainedExpiration() {
@@ -47,6 +51,7 @@ export default class TeriockEffectData extends TeriockBaseEffectData {
   /**
    * Gets the maneuver type for this effect.
    * Effects are always passive maneuvers.
+   *
    * @returns {string} The maneuver type ("passive").
    */
   get maneuver() {
@@ -55,6 +60,7 @@ export default class TeriockEffectData extends TeriockBaseEffectData {
 
   /**
    * Defines the schema for the effect data model.
+   *
    * @returns {object} The schema definition for the effect data.
    * @override
    */
@@ -99,6 +105,7 @@ export default class TeriockEffectData extends TeriockBaseEffectData {
   /**
    * Checks if the effect should expire based on various conditions.
    * Considers base expiration, condition-based expiration, and sustained expiration.
+   *
    * @returns {boolean} True if the effect should expire, false otherwise.
    * @override
    */

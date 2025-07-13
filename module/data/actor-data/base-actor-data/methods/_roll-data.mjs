@@ -2,77 +2,81 @@
 
 /**
  * Gets roll data for an actor system, including basic stats, attack data, class ranks, and tradecrafts.
- * @param {TeriockBaseActorData} system - The actor system to get roll data for.
+ *
+ * @param {TeriockBaseActorData} actorData - The actor system to get roll data for.
  * @returns {object} Object containing all roll data for the actor.
  * @private
  */
-export function _getRollData(system) {
+export function _getRollData(actorData) {
   const data = {};
-  data["data"] = foundry.utils.deepClone(system.toObject());
-  basicData(system, data);
-  presenceData(system, data);
-  rankData(system, data);
-  ageData(system, data);
-  attributeData(system, data);
-  tradecraftData(system, data);
-  hpData(system, data);
-  mpData(system, data);
-  witherData(system, data);
-  hackData(system, data);
-  speedData(system, data);
-  damageData(system, data);
-  carryingData(system, data);
-  defenseData(system, data);
-  offenseData(system, data);
-  moneyData(system, data);
-  equipmentData(system, data);
+  data["data"] = foundry.utils.deepClone(actorData.toObject());
+  basicData(actorData, data);
+  presenceData(actorData, data);
+  rankData(actorData, data);
+  ageData(actorData, data);
+  attributeData(actorData, data);
+  tradecraftData(actorData, data);
+  hpData(actorData, data);
+  mpData(actorData, data);
+  witherData(actorData, data);
+  hackData(actorData, data);
+  speedData(actorData, data);
+  damageData(actorData, data);
+  carryingData(actorData, data);
+  defenseData(actorData, data);
+  offenseData(actorData, data);
+  moneyData(actorData, data);
+  equipmentData(actorData, data);
   return foundry.utils.deepClone(data);
 }
 
 /**
  * Adds basic actor data to the roll data object.
  * Includes level, size, weight, proficiency, and fluency bonuses.
- * @param {TeriockBaseActorData} system - The actor system to get data from.
+ *
+ * @param {TeriockBaseActorData} actorData - The actor system to get data from.
  * @param {object} data - The roll data object to populate.
  * @returns {void}
  * @private
  */
-function basicData(system, data) {
+function basicData(actorData, data) {
   Object.assign(data, {
-    lvl: system.lvl,
-    size: system.size,
-    weight: system.weight,
-    p: system.p,
-    f: system.f,
+    lvl: actorData.lvl,
+    size: actorData.size,
+    weight: actorData.weight,
+    p: actorData.p,
+    f: actorData.f,
   });
 }
 
 /**
  * Adds presence data to the roll data object.
  * Includes total presence, used presence, and unused presence.
- * @param {TeriockBaseActorData} system - The actor system to get data from.
+ *
+ * @param {TeriockBaseActorData} actorData - The actor system to get data from.
  * @param {object} data - The roll data object to populate.
  * @returns {void}
  * @private
  */
-function presenceData(system, data) {
+function presenceData(actorData, data) {
   Object.assign(data, {
-    pres: system.pres,
-    "pres.used": system.usp,
-    "pres.unused": system.unp,
+    pres: actorData.pres,
+    "pres.used": actorData.usp,
+    "pres.unused": actorData.unp,
   });
 }
 
 /**
  * Adds rank data to the roll data object.
  * Includes total rank and individual class/archetype ranks.
- * @param {TeriockBaseActorData} system - The actor system to get data from.
+ *
+ * @param {TeriockBaseActorData} actorData - The actor system to get data from.
  * @param {object} data - The roll data object to populate.
  * @returns {void}
  * @private
  */
-function rankData(system, data) {
-  const actor = system.parent;
+function rankData(actorData, data) {
+  const actor = actorData.parent;
   const rankKeys = [
     "mag",
     "sem",
@@ -112,17 +116,18 @@ function rankData(system, data) {
     }
   }
 
-  data.rank = system.rank;
+  data.rank = actorData.rank;
 }
 
 /**
  * Adds age data to the roll data object.
- * @param {TeriockBaseActorData} system - The actor system to get data from.
+ *
+ * @param {TeriockBaseActorData} actorData - The actor system to get data from.
  * @param {object} data - The roll data object to populate.
  * @returns {void}
  * @private
  */
-function ageData(system, data) {
+function ageData(actorData, data) {
   // Age data would need to be added to the actor schema
   // For now, using placeholder values
   Object.assign(data, {
@@ -135,13 +140,14 @@ function ageData(system, data) {
 /**
  * Adds attribute data to the roll data object.
  * Includes attribute values, save proficiency, fluency, and save bonuses.
- * @param {TeriockBaseActorData} system - The actor system to get data from.
+ *
+ * @param {TeriockBaseActorData} actorData - The actor system to get data from.
  * @param {object} data - The roll data object to populate.
  * @returns {void}
  * @private
  */
-function attributeData(system, data) {
-  const attr = system.attributes;
+function attributeData(actorData, data) {
+  const attr = actorData.attributes;
   const attrKeys = ["int", "mov", "per", "snk", "str", "unp"];
 
   for (const key of attrKeys) {
@@ -149,19 +155,20 @@ function attributeData(system, data) {
     data[`att.${key}`] = attribute.value;
     data[`att.${key}.pro`] = attribute.saveProficient ? 1 : 0;
     data[`att.${key}.flu`] = attribute.saveFluent ? 1 : 0;
-    data[`att.${key}.save`] = system[`${key}Save`];
+    data[`att.${key}.save`] = actorData[`${key}Save`];
   }
 }
 
 /**
  * Adds tradecraft data to the roll data object.
  * Includes tradecraft check values, proficiency, talent, and expertise flags.
- * @param {TeriockBaseActorData} system - The actor system to get data from.
+ *
+ * @param {TeriockBaseActorData} actorData - The actor system to get data from.
  * @param {object} data - The roll data object to populate.
  * @returns {void}
  * @private
  */
-function tradecraftData(system, data) {
+function tradecraftData(actorData, data) {
   const tradecraftKeys = [
     "art",
     "bla",
@@ -195,7 +202,7 @@ function tradecraftData(system, data) {
   ];
 
   for (const key of tradecraftKeys) {
-    const tc = system.tradecrafts[key];
+    const tc = actorData.tradecrafts[key];
     if (tc) {
       data[`tc.${key}`] = tc.bonus;
       data[`tc.${key}.pro`] = tc.proficient ? 1 : 0;
@@ -212,65 +219,69 @@ function tradecraftData(system, data) {
 
 /**
  * Adds HP data to the roll data object.
- * @param {TeriockBaseActorData} system - The actor system to get data from.
+ *
+ * @param {TeriockBaseActorData} actorData - The actor system to get data from.
  * @param {object} data - The roll data object to populate.
  * @returns {void}
  * @private
  */
-function hpData(system, data) {
+function hpData(actorData, data) {
   Object.assign(data, {
-    hp: system.hp.value,
-    "hp.base": system.hp.base,
-    "hp.max": system.hp.max,
-    "hp.min": system.hp.min,
-    "hp.temp": system.hp.temp,
+    hp: actorData.hp.value,
+    "hp.base": actorData.hp.base,
+    "hp.max": actorData.hp.max,
+    "hp.min": actorData.hp.min,
+    "hp.temp": actorData.hp.temp,
   });
 }
 
 /**
  * Adds MP data to the roll data object.
- * @param {TeriockBaseActorData} system - The actor system to get data from.
+ *
+ * @param {TeriockBaseActorData} actorData - The actor system to get data from.
  * @param {object} data - The roll data object to populate.
  * @returns {void}
  * @private
  */
-function mpData(system, data) {
+function mpData(actorData, data) {
   Object.assign(data, {
-    mp: system.mp.value,
-    "mp.base": system.mp.base,
-    "mp.max": system.mp.max,
-    "mp.min": system.mp.min,
-    "mp.temp": system.mp.temp,
+    mp: actorData.mp.value,
+    "mp.base": actorData.mp.base,
+    "mp.max": actorData.mp.max,
+    "mp.min": actorData.mp.min,
+    "mp.temp": actorData.mp.temp,
   });
 }
 
 /**
  * Adds wither data to the roll data object.
- * @param {TeriockBaseActorData} system - The actor system to get data from.
+ *
+ * @param {TeriockBaseActorData} actorData - The actor system to get data from.
  * @param {object} data - The roll data object to populate.
  * @returns {void}
  * @private
  */
-function witherData(system, data) {
+function witherData(actorData, data) {
   Object.assign(data, {
-    wither: system.wither.value,
-    "wither.value": system.wither.value,
-    "wither.max": system.wither.max,
+    wither: actorData.wither.value,
+    "wither.value": actorData.wither.value,
+    "wither.max": actorData.wither.max,
   });
 }
 
 /**
  * Adds hack data to the roll data object.
- * @param {TeriockBaseActorData} system - The actor system to get data from.
+ *
+ * @param {TeriockBaseActorData} actorData - The actor system to get data from.
  * @param {object} data - The roll data object to populate.
  * @returns {void}
  * @private
  */
-function hackData(system, data) {
+function hackData(actorData, data) {
   const hackKeys = ["arm", "leg", "bod", "eye", "ear", "mou", "nos"];
 
   for (const key of hackKeys) {
-    const hack = system.hacks[key];
+    const hack = actorData.hacks[key];
     if (hack) {
       data[`hack.${key}`] = hack.value;
     } else {
@@ -281,12 +292,13 @@ function hackData(system, data) {
 
 /**
  * Adds speed data to the roll data object.
- * @param {TeriockBaseActorData} system - The actor system to get data from.
+ *
+ * @param {TeriockBaseActorData} actorData - The actor system to get data from.
  * @param {object} data - The roll data object to populate.
  * @returns {void}
  * @private
  */
-function speedData(system, data) {
+function speedData(actorData, data) {
   const speedKeys = ["wal", "dif", "cra", "swi", "cli", "hid", "leh", "lev", "fly", "dig", "div"];
   const speedMap = {
     wal: "walk",
@@ -304,7 +316,7 @@ function speedData(system, data) {
 
   for (const key of speedKeys) {
     const systemKey = speedMap[key];
-    const adjustment = system.speedAdjustments[systemKey] || 0;
+    const adjustment = actorData.speedAdjustments[systemKey] || 0;
     data[`speed.${key}`] = adjustment;
 
     // Calculate feet per turn based on adjustment level
@@ -314,16 +326,16 @@ function speedData(system, data) {
         feetPerTurn = 0;
         break;
       case 1:
-        feetPerTurn = system.movementSpeed.value / 4;
+        feetPerTurn = actorData.movementSpeed.value / 4;
         break;
       case 2:
-        feetPerTurn = system.movementSpeed.value / 2;
+        feetPerTurn = actorData.movementSpeed.value / 2;
         break;
       case 3:
-        feetPerTurn = system.movementSpeed.value;
+        feetPerTurn = actorData.movementSpeed.value;
         break;
       case 4:
-        feetPerTurn = system.movementSpeed.value * 2;
+        feetPerTurn = actorData.movementSpeed.value * 2;
         break;
     }
     data[`speed.feet`] = Math.floor(feetPerTurn);
@@ -332,34 +344,36 @@ function speedData(system, data) {
 
 /**
  * Adds damage data to the roll data object.
- * @param {TeriockBaseActorData} system - The actor system to get data from.
+ *
+ * @param {TeriockBaseActorData} actorData - The actor system to get data from.
  * @param {object} data - The roll data object to populate.
  * @returns {void}
  * @private
  */
-function damageData(system, data) {
+function damageData(actorData, data) {
   Object.assign(data, {
-    "dmg.hand": system.damage.hand,
-    "dmg.foot": system.damage.foot,
-    "dmg.mouth": system.damage.mouth,
-    "dmg.shield.buckler": system.damage.bucklerShield,
-    "dmg.shield.large": system.damage.largeShield,
-    "dmg.shield.tower": system.damage.towerShield,
+    "dmg.hand": actorData.damage.hand,
+    "dmg.foot": actorData.damage.foot,
+    "dmg.mouth": actorData.damage.mouth,
+    "dmg.shield.buckler": actorData.damage.bucklerShield,
+    "dmg.shield.large": actorData.damage.largeShield,
+    "dmg.shield.tower": actorData.damage.towerShield,
   });
 }
 
 /**
  * Adds carrying capacity data to the roll data object.
- * @param {TeriockBaseActorData} system - The actor system to get data from.
+ *
+ * @param {TeriockBaseActorData} actorData - The actor system to get data from.
  * @param {object} data - The roll data object to populate.
  * @returns {void}
  * @private
  */
-function carryingData(system, data) {
-  const weightCarried = system.weightCarried || 0;
-  const lightCap = system.carryingCapacity.light;
-  const heavyCap = system.carryingCapacity.heavy;
-  const maxCap = system.carryingCapacity.max;
+function carryingData(actorData, data) {
+  const weightCarried = actorData.weightCarried || 0;
+  const lightCap = actorData.carryingCapacity.light;
+  const heavyCap = actorData.carryingCapacity.heavy;
+  const maxCap = actorData.carryingCapacity.max;
 
   Object.assign(data, {
     "carry.weight": weightCarried,
@@ -374,42 +388,44 @@ function carryingData(system, data) {
 
 /**
  * Adds defense data to the roll data object.
- * @param {TeriockBaseActorData} system - The actor system to get data from.
+ *
+ * @param {TeriockBaseActorData} actorData - The actor system to get data from.
  * @param {object} data - The roll data object to populate.
  * @returns {void}
  * @private
  */
-function defenseData(system, data) {
+function defenseData(actorData, data) {
   Object.assign(data, {
-    av: system.av,
-    "av.worn": system.wornAc,
+    av: actorData.av,
+    "av.worn": actorData.wornAc,
     "av.worn.bonus": 0, // Would need to be calculated from effects
-    "av.nat": system.naturalAv,
+    "av.nat": actorData.naturalAv,
     "av.nat.bonus": 0, // Would need to be calculated from effects
-    ac: system.ac,
-    bv: system.bv,
-    def: system.ac + system.bv,
+    ac: actorData.ac,
+    bv: actorData.bv,
+    def: actorData.ac + actorData.bv,
   });
 }
 
 /**
  * Adds offense data to the roll data object.
- * @param {TeriockBaseActorData} system - The actor system to get data from.
+ *
+ * @param {TeriockBaseActorData} actorData - The actor system to get data from.
  * @param {object} data - The roll data object to populate.
  * @returns {void}
  * @private
  */
-function offenseData(system, data) {
+function offenseData(actorData, data) {
   const weaponAv0 =
-    system?.wielding.attacker.derived?.effectKeys?.property?.has("av0") ||
-    system?.wielding.attacker.derived?.effectKeys?.property?.has("ub");
-  const naturalAv0 = system.piercing === "av0" || system.piercing === "ub";
+    actorData?.wielding.attacker.derived?.effectKeys?.property?.has("av0") ||
+    actorData?.wielding.attacker.derived?.effectKeys?.property?.has("ub");
+  const naturalAv0 = actorData.piercing === "av0" || actorData.piercing === "ub";
   const hasAv0 = weaponAv0 || naturalAv0;
-  const weaponUb = system?.wielding.attacker.derived?.effectKeys?.property?.has("ub");
-  const naturalUb = system.piercing === "ub";
+  const weaponUb = actorData?.wielding.attacker.derived?.effectKeys?.property?.has("ub");
+  const naturalUb = actorData.piercing === "ub";
   const hasUb = weaponUb || naturalUb;
   Object.assign(data, {
-    sb: system.sb ? 1 : 0,
+    sb: actorData.sb ? 1 : 0,
     av0: hasAv0 ? 2 : 0,
     "av0.wep": weaponAv0 ? 2 : 0,
     "av0.abi": 0, // Determined by ability used.
@@ -418,18 +434,19 @@ function offenseData(system, data) {
     "ub.wep": weaponUb ? 1 : 0,
     "ub.abi": 0, // Determined by ability used.
     "ub.nat": naturalUb ? 1 : 0,
-    atkPen: system.attackPenalty,
+    atkPen: actorData.attackPenalty,
   });
 }
 
 /**
  * Adds money data to the roll data object.
- * @param {TeriockBaseActorData} system - The actor system to get data from.
+ *
+ * @param {TeriockBaseActorData} actorData - The actor system to get data from.
  * @param {object} data - The roll data object to populate.
  * @returns {void}
  * @private
  */
-function moneyData(system, data) {
+function moneyData(actorData, data) {
   const moneyKeys = ["cop", "sil", "gol", "ent", "fir", "pix", "sno", "dra", "moo", "mag", "hea"];
   const moneyMap = {
     cop: "copper",
@@ -449,7 +466,7 @@ function moneyData(system, data) {
 
   for (const key of moneyKeys) {
     const systemKey = moneyMap[key];
-    const amount = system.money[systemKey] || 0;
+    const amount = actorData.money[systemKey] || 0;
     const currency = currencyOptions[systemKey];
 
     data[`money.${key}.num`] = amount;
@@ -458,9 +475,10 @@ function moneyData(system, data) {
   }
 
   // Combined currency values
-  data["money.all.num"] = Object.values(system.money).reduce((sum, val) => sum + (val || 0), 0) - system.money.total;
-  data["money.all.val"] = system.money.total || 0;
-  data["money.all.weight"] = system.moneyWeight || 0;
+  data["money.all.num"] =
+    Object.values(actorData.money).reduce((sum, val) => sum + (val || 0), 0) - actorData.money.total;
+  data["money.all.val"] = actorData.money.total || 0;
+  data["money.all.weight"] = actorData.moneyWeight || 0;
 
   // Coins only
   const coinKeys = ["cop", "sil", "gol"];
@@ -477,20 +495,21 @@ function moneyData(system, data) {
 
 /**
  * Adds equipment data to the roll data object.
- * @param {TeriockBaseActorData} system - The actor system to get data from.
+ *
+ * @param {TeriockBaseActorData} actorData - The actor system to get data from.
  * @param {object} data - The roll data object to populate.
  * @returns {void}
  * @private
  */
-function equipmentData(system, data) {
+function equipmentData(actorData, data) {
   // Primary attack weapon
-  const primaryAttacker = system.wielding.attacker.derived;
+  const primaryAttacker = actorData.wielding.attacker.derived;
   if (primaryAttacker) {
     addEquipmentData(data, "atk", primaryAttacker);
   }
 
   // Primary block weapon
-  const primaryBlocker = system.wielding.blocker.derived;
+  const primaryBlocker = actorData.wielding.blocker.derived;
   if (primaryBlocker) {
     addEquipmentData(data, "blo", primaryBlocker);
   }
@@ -498,6 +517,7 @@ function equipmentData(system, data) {
 
 /**
  * Helper function to add equipment data for a specific slot.
+ *
  * @todo Add properties.
  * @param {object} data - The roll data object to populate.
  * @param {string} slot - The equipment slot (atk, blo).

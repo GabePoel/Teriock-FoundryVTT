@@ -1,5 +1,9 @@
 /**
  * Shatters equipment, making it unusable.
+ *
+ * Relevant wiki pages:
+ * - [Shattered](https://wiki.teriock.com/index.php/Property:Shattered)
+ *
  * @param {TeriockEquipmentData} equipmentData - The equipment data to shatter.
  * @returns {Promise<void>} Promise that resolves when the equipment is shattered.
  * @private
@@ -10,6 +14,10 @@ export async function _shatter(equipmentData) {
 
 /**
  * Repairs equipment, making it usable again.
+ *
+ * Relevant wiki pages:
+ * - [Shattered](https://wiki.teriock.com/index.php/Property:Shattered)
+ *
  * @param {TeriockEquipmentData} equipmentData - The equipment data to repair.
  * @returns {Promise<void>} Promise that resolves when the equipment is repaired.
  * @private
@@ -20,6 +28,10 @@ export async function _repair(equipmentData) {
 
 /**
  * Sets the shattered state of equipment.
+ *
+ * Relevant wiki pages:
+ * - [Shattered](https://wiki.teriock.com/index.php/Property:Shattered)
+ *
  * @param {TeriockEquipmentData} equipmentData - The equipment data to modify.
  * @param {boolean} bool - Whether the equipment should be shattered.
  * @returns {Promise<void>} Promise that resolves when the shattered state is set.
@@ -35,6 +47,10 @@ export async function _setShattered(equipmentData, bool) {
 
 /**
  * Toggles the shattered state of equipment.
+ *
+ * Relevant wiki pages:
+ * - [Shattered](https://wiki.teriock.com/index.php/Property:Shattered)
+ *
  * @param {TeriockEquipmentData} equipmentData - The equipment data to toggle.
  * @returns {Promise<void>} Promise that resolves when the shattered state is toggled.
  * @private
@@ -45,6 +61,7 @@ export async function _toggleShattered(equipmentData) {
 
 /**
  * Dampens equipment, reducing its effectiveness.
+ *
  * @param {TeriockEquipmentData} equipmentData - The equipment data to dampen.
  * @returns {Promise<void>} Promise that resolves when the equipment is dampened.
  * @private
@@ -55,6 +72,7 @@ export async function _dampen(equipmentData) {
 
 /**
  * Removes dampening from equipment.
+ *
  * @param {TeriockEquipmentData} equipmentData - The equipment data to undampen.
  * @returns {Promise<void>} Promise that resolves when the equipment is undampened.
  * @private
@@ -65,6 +83,7 @@ export async function _undampen(equipmentData) {
 
 /**
  * Sets the dampened state of equipment.
+ *
  * @param {TeriockEquipmentData} equipmentData - The equipment data to modify.
  * @param {boolean} bool - Whether the equipment should be dampened.
  * @returns {Promise<void>} Promise that resolves when the dampened state is set.
@@ -80,6 +99,7 @@ export async function _setDampened(equipmentData, bool) {
 
 /**
  * Toggles the dampened state of equipment.
+ *
  * @param {TeriockEquipmentData} equipmentData - The equipment data to toggle.
  * @returns {Promise<void>} Promise that resolves when the dampened state is toggled.
  * @private
@@ -90,6 +110,7 @@ export async function _toggleDampened(equipmentData) {
 
 /**
  * Unequips equipment from its current slot.
+ *
  * @param {TeriockEquipmentData} equipmentData - The equipment data to unequip.
  * @returns {Promise<void>} Promise that resolves when the equipment is unequipped.
  * @private
@@ -100,6 +121,7 @@ export async function _unequip(equipmentData) {
 
 /**
  * Equips equipment to an appropriate slot.
+ *
  * Only equips if the equipment is not consumable or has sufficient quantity.
  * @param {TeriockEquipmentData} equipmentData - The equipment data to equip.
  * @returns {Promise<void>} Promise that resolves when the equipment is equipped.
@@ -113,6 +135,7 @@ export async function _equip(equipmentData) {
 
 /**
  * Sets the equipped state of equipment.
+ *
  * @param {TeriockEquipmentData} equipmentData - The equipment data to modify.
  * @param {boolean} bool - Whether the equipment should be equipped.
  * @returns {Promise<void>} Promise that resolves when the equipped state is set.
@@ -128,6 +151,7 @@ export async function _setEquipped(equipmentData, bool) {
 
 /**
  * Toggles the equipped state of equipment.
+ *
  * @param {TeriockEquipmentData} equipmentData - The equipment data to toggle.
  * @returns {Promise<void>} Promise that resolves when the equipped state is toggled.
  * @private

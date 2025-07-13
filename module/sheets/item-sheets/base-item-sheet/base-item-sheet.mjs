@@ -1,5 +1,5 @@
-import { BaseItemSheet } from "../../_base.mjs";
 import { cleanFeet } from "../../../helpers/clean.mjs";
+import { BaseItemSheet } from "../../_base.mjs";
 
 /**
  * Base item sheet for Teriock system items.

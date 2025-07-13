@@ -1,5 +1,6 @@
 const { HandlebarsApplicationMixin, DialogV2 } = foundry.applications.api;
 import { documentOptions } from "../../../helpers/constants/document-options.mjs";
+import TeriockBaseItemSheet from "../base-item-sheet/base-item-sheet.mjs";
 import {
   archetypeContextMenu,
   classContextMenu,
@@ -7,7 +8,6 @@ import {
   manaDieContextMenu,
   rankContextMenu,
 } from "./connections/_context-menus.mjs";
-import TeriockBaseItemSheet from "../base-item-sheet/base-item-sheet.mjs";
 
 /**
  * Rank sheet for Teriock system ranks.

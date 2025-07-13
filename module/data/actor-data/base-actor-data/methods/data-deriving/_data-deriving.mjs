@@ -1,8 +1,8 @@
-import { _prepareAttributes, _prepareBonuses, _prepareHpMp, _preparePresence } from "./_prepare-stats.mjs";
 import { _prepareDefenses, _prepareOffenses } from "./_prepare-combat.mjs";
 import { _prepareEncumbrance, _prepareMoney, _prepareWeightCarried } from "./_prepare-load.mjs";
-import { _prepareSize } from "./_prepare-token.mjs";
 import { _prepareSpeed } from "./_prepare-speed.mjs";
+import { _prepareAttributes, _prepareBonuses, _prepareHpMp, _preparePresence } from "./_prepare-stats.mjs";
+import { _prepareSize } from "./_prepare-token.mjs";
 import { _prepareTradecrafts } from "./_prepare-tradecrafts.mjs";
 
 /**
@@ -21,24 +21,24 @@ import { _prepareTradecrafts } from "./_prepare-tradecrafts.mjs";
  * - Presence management
  * - Speed adjustments
  *
- * @param {TeriockBaseActorData} system - The actor's base data system object
+ * @param {TeriockBaseActorData} actorData - The actor's base data system object
  * @returns {void} Modifies the system object in place with derived data
  *
  * @example
  * // Calculate all derived data for an actor
  * _prepareDerivedData(actor.system);
  */
-export function _prepareDerivedData(system) {
-  _prepareSize(system);
-  _prepareBonuses(system);
-  _prepareHpMp(system);
-  _preparePresence(system);
-  _prepareAttributes(system);
-  _prepareTradecrafts(system);
-  _prepareMoney(system);
-  _prepareWeightCarried(system);
-  _prepareDefenses(system);
-  _prepareOffenses(system);
-  _prepareEncumbrance(system);
-  _prepareSpeed(system);
+export function _prepareDerivedData(actorData) {
+  _prepareSize(actorData);
+  _prepareBonuses(actorData);
+  _prepareHpMp(actorData);
+  _preparePresence(actorData);
+  _prepareAttributes(actorData);
+  _prepareTradecrafts(actorData);
+  _prepareMoney(actorData);
+  _prepareWeightCarried(actorData);
+  _prepareDefenses(actorData);
+  _prepareOffenses(actorData);
+  _prepareEncumbrance(actorData);
+  _prepareSpeed(actorData);
 }

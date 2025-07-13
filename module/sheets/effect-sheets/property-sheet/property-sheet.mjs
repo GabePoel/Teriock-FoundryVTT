@@ -1,7 +1,7 @@
 const { api } = foundry.applications;
 import { documentOptions } from "../../../helpers/constants/document-options.mjs";
-import { propertyContextMenu } from "./connections/_context-menus.mjs";
 import TeriockBaseEffectSheet from "../base-effect-sheet/base-effect-sheet.mjs";
+import { propertyContextMenu } from "./connections/_context-menus.mjs";
 
 /**
  * Property sheet for Teriock system properties.

@@ -1,6 +1,6 @@
 const { ux } = foundry.applications;
-import { makeIcon } from "./utils.mjs";
 import TeriockImageSheet from "../sheets/misc-sheets/image-sheet/image-sheet.mjs";
+import { makeIcon } from "./utils.mjs";
 
 /**
  * Connects embedded documents to their UI elements with context menus and event handlers.

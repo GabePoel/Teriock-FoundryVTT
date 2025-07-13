@@ -2,6 +2,7 @@ import TeriockHarmRoll from "../../../../documents/harm.mjs";
 
 /**
  * Initiates an equipment roll with the specified options.
+ *
  * @param {TeriockEquipmentData} equipmentData - The equipment data to roll for.
  * @param {object} options - Options for the equipment roll including twoHanded, bonusDamage, advantage, and secret.
  * @returns {Promise<void>} Promise that resolves when the roll is complete.
@@ -14,8 +15,10 @@ export async function _roll(equipmentData, options) {
 /**
  * Performs the actual equipment roll, creating a harm roll with damage types and modifiers.
  * Handles damage formula construction, damage types, and roll options.
+ *
  * @param {TeriockEquipmentData} equipmentData - The equipment data to roll for.
- * @param {object} options - Options for the equipment roll including twoHanded, bonusDamage, advantage, and secret.
+ * @param {Teriock.EquipmentRollOptions} options - Options for the equipment roll including twoHanded, bonusDamage,
+ *   advantage, and secret.
  * @returns {Promise<void>} Promise that resolves when the roll message is sent.
  * @private
  */

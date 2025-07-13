@@ -4,6 +4,7 @@ import { equipmentOptions } from "../../../../helpers/constants/equipment-option
 /**
  * Defines the schema for equipment data fields.
  * Includes all equipment-specific fields such as damage, weight, equipment classes, and status flags.
+ *
  * @returns {object} The schema definition for equipment data fields.
  * @private
  */

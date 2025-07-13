@@ -6,9 +6,11 @@ import { _override } from "./_overrides.mjs";
 /**
  * Parses raw HTML content for equipment, extracting properties and creating effects.
  * Handles damage parsing, numeric values, arrays, and property creation.
+ *
  * @param {TeriockEquipmentData} equipmentData - The equipment data to parse content for.
  * @param {string} rawHTML - The raw HTML content to parse.
- * @returns {Promise<{ changes: object[], system: Partial<TeriockEquipmentData>, img: string }>} Promise that resolves to the parsed equipment data.
+ * @returns {Promise<{ changes: object[], system: Partial<TeriockEquipmentData>, img: string }>} Promise that resolves
+ *   to the parsed equipment data.
  * @private
  */
 export async function _parse(equipmentData, rawHTML) {
@@ -99,7 +101,7 @@ export async function _parse(equipmentData, rawHTML) {
     newImg = `systems/teriock/assets/equipment/${equipmentData.equipmentType?.toLowerCase().replace(/\s+/g, "-")}.svg`;
   }
 
-  // Remove unused properties
+  // Remove unused parameters
   [
     "equipmentType",
     "powerLevel",

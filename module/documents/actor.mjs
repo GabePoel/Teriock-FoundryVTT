@@ -1,5 +1,5 @@
-import TeriockRoll from "./roll.mjs";
 import { BaseTeriockActor } from "./_base.mjs";
+import TeriockRoll from "./roll.mjs";
 
 /**
  * @property {TeriockBaseActorData} system
@@ -8,6 +8,7 @@ import { BaseTeriockActor } from "./_base.mjs";
 export default class TeriockActor extends BaseTeriockActor {
   /**
    * Gets all valid effects that apply to this actor.
+   *
    * @returns {ActiveEffect[]} Array of all applicable effects.
    * @inheritdoc
    */
@@ -17,6 +18,7 @@ export default class TeriockActor extends BaseTeriockActor {
 
   /**
    * Gets effects that expire based on conditions.
+   *
    * @returns {ActiveEffect[]} Array of condition expiration effects.
    */
   get conditionExpirationEffects() {
@@ -25,6 +27,7 @@ export default class TeriockActor extends BaseTeriockActor {
 
   /**
    * Gets effects that expire based on movement.
+   *
    * @returns {ActiveEffect[]} Array of movement expiration effects.
    */
   get movementExpirationEffects() {
@@ -33,6 +36,7 @@ export default class TeriockActor extends BaseTeriockActor {
 
   /**
    * Gets effects that expire at dawn.
+   *
    * @returns {ActiveEffect[]} Array of dawn expiration effects.
    */
   get dawnExpirationEffects() {
@@ -41,6 +45,7 @@ export default class TeriockActor extends BaseTeriockActor {
 
   /**
    * Gets effects that expire when sustained abilities end.
+   *
    * @returns {ActiveEffect[]} Array of sustained expiration effects.
    */
   get sustainedExpirationEffects() {
@@ -49,6 +54,7 @@ export default class TeriockActor extends BaseTeriockActor {
 
   /**
    * Checks if the actor is disabled (dead).
+   *
    * @returns {boolean} True if the actor is dead, false otherwise.
    */
   get disabled() {
@@ -57,8 +63,9 @@ export default class TeriockActor extends BaseTeriockActor {
 
   /**
    * Gets roll data for this actor, delegating to the system's getRollData method.
-   * @inheritdoc
+   *
    * @returns {object} The roll data for this actor.
+   * @inheritdoc
    */
   getRollData() {
     return this.system.getRollData();
@@ -66,6 +73,7 @@ export default class TeriockActor extends BaseTeriockActor {
 
   /**
    * Applies damage to the actor.
+   *
    * @param {number} amount - The amount of damage to apply.
    * @returns {Promise<void>} Promise that resolves when damage is applied.
    */
@@ -75,6 +83,7 @@ export default class TeriockActor extends BaseTeriockActor {
 
   /**
    * Applies drain to the actor.
+   *
    * @param {number} amount - The amount of drain to apply.
    * @returns {Promise<void>} Promise that resolves when drain is applied.
    */
@@ -84,6 +93,7 @@ export default class TeriockActor extends BaseTeriockActor {
 
   /**
    * Applies wither to the actor.
+   *
    * @param {number} amount - The amount of wither to apply.
    * @returns {Promise<void>} Promise that resolves when wither is applied.
    */
@@ -93,6 +103,7 @@ export default class TeriockActor extends BaseTeriockActor {
 
   /**
    * Applies healing to the actor.
+   *
    * @param {number} amount - The amount of healing to apply.
    * @returns {Promise<void>} Promise that resolves when healing is applied.
    */
@@ -102,6 +113,7 @@ export default class TeriockActor extends BaseTeriockActor {
 
   /**
    * Applies revitalization to the actor.
+   *
    * @param {number} amount - The amount of revitalization to apply.
    * @returns {Promise<void>} Promise that resolves when revitalization is applied.
    */
@@ -111,6 +123,7 @@ export default class TeriockActor extends BaseTeriockActor {
 
   /**
    * Sets temporary hit points for the actor.
+   *
    * @param {number} amount - The amount of temporary hit points to set.
    * @returns {Promise<void>} Promise that resolves when temporary hit points are set.
    */
@@ -120,6 +133,7 @@ export default class TeriockActor extends BaseTeriockActor {
 
   /**
    * Sets temporary mana points for the actor.
+   *
    * @param {number} amount - The amount of temporary mana points to set.
    * @returns {Promise<void>} Promise that resolves when temporary mana points are set.
    */
@@ -129,6 +143,7 @@ export default class TeriockActor extends BaseTeriockActor {
 
   /**
    * Gains temporary hit points for the actor.
+   *
    * @param {number} amount - The amount of temporary hit points to gain.
    * @returns {Promise<void>} Promise that resolves when temporary hit points are gained.
    */
@@ -138,6 +153,7 @@ export default class TeriockActor extends BaseTeriockActor {
 
   /**
    * Gains temporary mana points for the actor.
+   *
    * @param {number} amount - The amount of temporary mana points to gain.
    * @returns {Promise<void>} Promise that resolves when temporary mana points are gained.
    */
@@ -147,6 +163,7 @@ export default class TeriockActor extends BaseTeriockActor {
 
   /**
    * Applies sleep to the actor.
+   *
    * @param {number} amount - The amount of sleep to apply.
    * @returns {Promise<void>} Promise that resolves when sleep is applied.
    */
@@ -156,6 +173,7 @@ export default class TeriockActor extends BaseTeriockActor {
 
   /**
    * Applies kill effect to the actor.
+   *
    * @param {number} amount - The amount of kill effect to apply.
    * @returns {Promise<void>} Promise that resolves when kill effect is applied.
    */
@@ -165,6 +183,7 @@ export default class TeriockActor extends BaseTeriockActor {
 
   /**
    * Applies hack effect to a specific part of the actor.
+   *
    * @param {Teriock.HackableBodyPart} part - The part to hack.
    * @returns {Promise<void>} Promise that resolves when hack is applied.
    */
@@ -174,6 +193,7 @@ export default class TeriockActor extends BaseTeriockActor {
 
   /**
    * Removes hack effect from a specific part of the actor.
+   *
    * @param {Teriock.HackableBodyPart} part - The part to unhack.
    * @returns {Promise<void>} Promise that resolves when unhack is applied.
    */
@@ -183,6 +203,7 @@ export default class TeriockActor extends BaseTeriockActor {
 
   /**
    * Awakens the actor from sleep.
+   *
    * @returns {Promise<void>} Promise that resolves when the actor is awakened.
    */
   async takeAwaken() {
@@ -191,6 +212,7 @@ export default class TeriockActor extends BaseTeriockActor {
 
   /**
    * Revives the actor from death.
+   *
    * @returns {Promise<void>} Promise that resolves when the actor is revived.
    */
   async takeRevive() {
@@ -199,6 +221,7 @@ export default class TeriockActor extends BaseTeriockActor {
 
   /**
    * Performs post-update operations for the actor.
+   *
    * @param {Teriock.SkipFunctions} skipFunctions - Functions that should be skipped.
    * @returns {Promise<void>} Resolves when all post-update operations are complete
    * @returns {Promise<void>} Promise that resolves when post-update is complete.
@@ -209,6 +232,7 @@ export default class TeriockActor extends BaseTeriockActor {
 
   /**
    * Rolls a condition check for the actor.
+   *
    * @param {string} condition - The condition to roll for.
    * @param {object} options - Options for the roll.
    * @returns {Promise<void>} Promise that resolves when the condition roll is complete.
@@ -219,47 +243,52 @@ export default class TeriockActor extends BaseTeriockActor {
 
   /**
    * Rolls a feat save for the specified attribute.
+   *
    * @param {string} attribute - The attribute to roll a feat save for.
    * @param {Teriock.CommonRollOptions} options - Options for the roll.
-   * @returns {void}
+   * @returns {Promise<void>}
    */
-  rollFeatSave(attribute, options = {}) {
-    this.system.rollFeatSave(attribute, options);
+  async rollFeatSave(attribute, options = {}) {
+    await this.system.rollFeatSave(attribute, options);
   }
 
   /**
    * Rolls a resistance check.
+   *
    * @param {Teriock.CommonRollOptions} options - Options for the roll.
-   * @returns {void}
+   * @returns {Promise<void>}
    */
-  rollResistance(options = {}) {
-    this.system.rollResistance(options);
+  async rollResistance(options = {}) {
+    await this.system.rollResistance(options);
   }
 
   /**
    * Rolls an immunity check.
+   *
    * @param {Teriock.CommonRollOptions} options - Options for the roll.
-   * @returns {void}
+   * @returns {Promise<void>}
    */
-  rollImmunity(options = {}) {
-    this.system.rollImmunity(options);
+  async rollImmunity(options = {}) {
+    await this.system.rollImmunity(options);
   }
 
   /**
    * Rolls a tradecraft check.
+   *
    * @param {string} tradecraft - The tradecraft to roll for.
    * @param {Teriock.CommonRollOptions} options - Options for the roll.
-   * @returns {void}
+   * @returns {Promise<void>}
    */
-  rollTradecraft(tradecraft, options = {}) {
-    this.system.rollTradecraft(tradecraft, options);
+  async rollTradecraft(tradecraft, options = {}) {
+    await this.system.rollTradecraft(tradecraft, options);
   }
 
   /**
    * Uses an ability by name.
+   *
    * @param {string} abilityName - The name of the ability to use.
    * @param {Teriock.CommonRollOptions} options - Options for using the ability.
-   * @returns {void}
+   * @returns {Promise<void>}
    */
   async useAbility(abilityName, options = {}) {
     const abilities = Array.from(this.allApplicableEffects()).filter((i) => i.type === "ability");
@@ -274,11 +303,12 @@ export default class TeriockActor extends BaseTeriockActor {
 
   /**
    * Ends a condition with an optional roll.
+   *
    * @todo Convert to using `ConditionRollOptions` type.
    * @param {Teriock.CommonRollOptions} options - Options for ending the condition.
-   * @returns {void}
+   * @returns {Promise<void>}
    */
-  endCondition(options = {}) {
+  async endCondition(options = {}) {
     let message = null;
     if (options.message) {
       message = options.message;
@@ -298,7 +328,7 @@ export default class TeriockActor extends BaseTeriockActor {
         threshold: 4,
       },
     });
-    roll.toMessage({
+    await roll.toMessage({
       speaker: ChatMessage.getSpeaker({ actor: this }),
       flavor: "Condition Ending Roll",
     });

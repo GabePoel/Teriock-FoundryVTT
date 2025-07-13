@@ -3,14 +3,18 @@ import TeriockRoll from "../../../../../documents/roll.mjs";
 
 /**
  * Rolls to remove a condition from an actor.
- * @param {TeriockBaseActorData} system
+ *
+ * Relevant wiki pages:
+ * - [Conditions](https://wiki.teriock.com/index.php/Category:Conditions)
+ *
+ * @param {TeriockBaseActorData} actorData
  * @param {string} condition - The condition to roll for.
  * @param {Teriock.ConditionRollOptions} options
  * @returns {Promise<void>}
  * @private
  */
-export async function _rollCondition(system, condition, options) {
-  const actor = system.parent;
+export async function _rollCondition(actorData, condition, options) {
+  const actor = actorData.parent;
   let skip = options?.skip || false;
   const increaseDie = options?.increaseDie || false;
   const decreaseDie = options?.decreaseDie || false;

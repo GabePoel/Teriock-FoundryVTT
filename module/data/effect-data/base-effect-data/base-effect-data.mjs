@@ -5,6 +5,7 @@ import { _expire, _shouldExpire } from "./methods/_expiration.mjs";
 
 /**
  * Base effect data model.
+ *
  * @extends {TypeDataModel}
  */
 export default class TeriockBaseEffectData extends ChildDataMixin(TypeDataModel) {
@@ -18,6 +19,7 @@ export default class TeriockBaseEffectData extends ChildDataMixin(TypeDataModel)
   /**
    * Checks if the effect is suppressed.
    * Effects are suppressed if their parent item is disabled.
+   *
    * @returns {boolean} True if the effect is suppressed, false otherwise.
    */
   get suppressed() {
@@ -29,6 +31,7 @@ export default class TeriockBaseEffectData extends ChildDataMixin(TypeDataModel)
 
   /**
    * Get the actor associated with this effect data.
+   *
    * @returns {TeriockActor|null}
    */
   get actor() {
@@ -37,6 +40,7 @@ export default class TeriockBaseEffectData extends ChildDataMixin(TypeDataModel)
 
   /**
    * Defines this effect's schema.
+   *
    * @returns {object} The schema definition for the effect data.
    * @override
    */
@@ -55,6 +59,7 @@ export default class TeriockBaseEffectData extends ChildDataMixin(TypeDataModel)
 
   /**
    * Checks if the effect should expire based on its current state.
+   *
    * @returns {boolean} True if the effect should expire, false otherwise.
    */
   shouldExpire() {
@@ -63,6 +68,7 @@ export default class TeriockBaseEffectData extends ChildDataMixin(TypeDataModel)
 
   /**
    * Expires the effect, removing it from the parent document.
+   *
    * @returns {Promise<void>} Promise that resolves when the effect is expired.
    */
   async expire() {
@@ -71,6 +77,7 @@ export default class TeriockBaseEffectData extends ChildDataMixin(TypeDataModel)
 
   /**
    * Checks if the effect should expire and expires it if necessary.
+   *
    * @returns {Promise<void>} Promise that resolves when the expiration check is complete.
    */
   async checkExpiration() {

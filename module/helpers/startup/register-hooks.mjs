@@ -1,7 +1,7 @@
 const { ux } = foundry.applications;
-import TeriockImageSheet from "../../sheets/misc-sheets/image-sheet/image-sheet.mjs";
 import { dispatch } from "../../commands/dispatch.mjs";
 import { imageContextMenuOptions } from "../../sheets/misc-sheets/image-sheet/connections/_context-menus.mjs";
+import TeriockImageSheet from "../../sheets/misc-sheets/image-sheet/image-sheet.mjs";
 
 export default function registerHooks() {
   foundry.helpers.Hooks.on("updateItem", async (document, updateData, options, userId) => {

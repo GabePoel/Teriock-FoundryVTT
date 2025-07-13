@@ -1,5 +1,5 @@
-import TeriockCommand from "../command.mjs";
 import TeriockRoll from "../../documents/roll.mjs";
+import TeriockCommand from "../command.mjs";
 
 export const drain = new TeriockCommand(
   "drain",

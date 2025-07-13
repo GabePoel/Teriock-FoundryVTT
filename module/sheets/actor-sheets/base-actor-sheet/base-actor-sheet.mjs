@@ -1,15 +1,15 @@
 const { api, ux } = foundry.applications;
-import { BaseActorSheet } from "../../_base.mjs";
-import { _defaultSheetSettings } from "./methods/_settings.mjs";
-import { _filterAbilities, _filterEquipment } from "./methods/_filters.mjs";
-import { _sortAbilities, _sortEquipment } from "./methods/_sort.mjs";
 import { conditions } from "../../../content/conditions.mjs";
 import { documentOptions } from "../../../helpers/constants/document-options.mjs";
+import { BaseActorSheet } from "../../_base.mjs";
 import {
   piercingContextMenu,
   primaryAttackContextMenu,
   primaryBlockerContextMenu,
 } from "./connections/character-context-menus.mjs";
+import { _filterAbilities, _filterEquipment } from "./methods/_filters.mjs";
+import { _defaultSheetSettings } from "./methods/_settings.mjs";
+import { _sortAbilities, _sortEquipment } from "./methods/_sort.mjs";
 
 /**
  * Base actor sheet for actors.
@@ -19,6 +19,7 @@ import {
 export default class TeriockBaseActorSheet extends BaseActorSheet {
   /**
    * Default options for the base actor sheet.
+   *
    * @type {object}
    * @static
    */
@@ -72,6 +73,7 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
 
   /**
    * Search result partials for different document types.
+   *
    * @type {object}
    * @static
    */
@@ -87,6 +89,7 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
 
   /**
    * Search configurations for different document types.
+   *
    * @type {Array}
    * @static
    */
@@ -103,6 +106,7 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
   /**
    * Creates a new base actor sheet instance.
    * Initializes sheet state including menus, drawers, search values, and settings.
+   *
    * @param {...any} args - Arguments to pass to the parent constructor.
    */
   constructor(...args) {
@@ -139,6 +143,7 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
 
   /**
    * Toggles the equipped state of an embedded document.
+   *
    * @param {MouseEvent} event - The event object.
    * @param {HTMLElement} target - The target element.
    * @returns {Promise<void>} Promise that resolves when toggle is complete.
@@ -151,6 +156,7 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
 
   /**
    * Toggles the disabled state of an embedded document.
+   *
    * @param {MouseEvent} event - The event object.
    * @param {HTMLElement} target - The target element.
    * @returns {Promise<void>} Promise that resolves when toggle is complete.
@@ -164,6 +170,7 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
   /**
    * Adds a new embedded document to the actor.
    * Creates documents based on the specified tab type.
+   *
    * @param {MouseEvent} _ - The event object.
    * @param {HTMLElement} target - The target element.
    * @returns {Promise<void>} Promise that resolves when document is created.
@@ -238,6 +245,7 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
 
   /**
    * Cycles through tradecraft extra levels (0, 1, 2).
+   *
    * @param {MouseEvent} event - The event object.
    * @param {HTMLElement} target - The target element.
    * @returns {Promise<void>} Promise that resolves when tradecraft extra is updated.
@@ -252,6 +260,7 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
 
   /**
    * Rolls a hit die for a rank item.
+   *
    * @param {MouseEvent} event - The event object.
    * @param {HTMLElement} target - The target element.
    * @returns {Promise<void>} Promise that resolves when hit die is rolled.
@@ -259,14 +268,14 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
    */
   static async _rollHitDie(event, target) {
     const id = target.dataset.id;
+    /** @type TeriockRank */
     const rank = this.actor.items.get(id);
-    if (rank) {
-      rank.system.rollHitDie();
-    }
+    if (rank) await rank.system.rollHitDie();
   }
 
   /**
    * Rolls a mana die for a rank item.
+   *
    * @param {MouseEvent} event - The event object.
    * @param {HTMLElement} target - The target element.
    * @returns {Promise<void>} Promise that resolves when mana die is rolled.
@@ -274,14 +283,14 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
    */
   static async _rollManaDie(event, target) {
     const id = target.dataset.id;
+    /** @type {TeriockRank} */
     const rank = this.actor.items.get(id);
-    if (rank) {
-      rank.system.rollManaDie();
-    }
+    if (rank) await rank.system.rollManaDie();
   }
 
   /**
    * Rolls a tradecraft check with optional advantage/disadvantage.
+   *
    * @param {MouseEvent} event - The event object.
    * @param {HTMLElement} target - The target element.
    * @returns {Promise<void>} Promise that resolves when tradecraft is rolled.
@@ -292,11 +301,12 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
     const options = {};
     if (event.altKey) options.advantage = true;
     if (event.shiftKey) options.disadvantage = true;
-    this.actor.rollTradecraft(tradecraft, options);
+    await this.actor.rollTradecraft(tradecraft, options);
   }
 
   /**
    * Rolls a feat save with optional advantage/disadvantage.
+   *
    * @param {MouseEvent} event - The event object.
    * @param {HTMLElement} target - The target element.
    * @returns {Promise<void>} Promise that resolves when feat save is rolled.
@@ -307,11 +317,12 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
     const options = {};
     if (event.altKey) options.advantage = true;
     if (event.shiftKey) options.disadvantage = true;
-    this.actor.rollFeatSave(attribute, options);
+    await this.actor.rollFeatSave(attribute, options);
   }
 
   /**
    * Toggles the shield bash (sb) state.
+   *
    * @returns {Promise<void>} Promise that resolves when sb is toggled.
    * @static
    */
@@ -321,6 +332,7 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
 
   /**
    * Opens the primary attacker's sheet.
+   *
    * @param {MouseEvent} event - The event object.
    * @returns {Promise<void>} Promise that resolves when sheet is opened.
    * @static
@@ -332,6 +344,7 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
 
   /**
    * Opens the primary blocker's sheet.
+   *
    * @param {MouseEvent} event - The event object.
    * @returns {Promise<void>} Promise that resolves when sheet is opened.
    * @static
@@ -343,6 +356,7 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
 
   /**
    * Quickly uses an item with optional modifiers.
+   *
    * @param {MouseEvent} event - The event object.
    * @param {HTMLElement} target - The target element.
    * @returns {Promise<void>} Promise that resolves when item is used.
@@ -365,6 +379,7 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
 
   /**
    * Prompts for damage amount and applies it to the actor.
+   *
    * @param {MouseEvent} event - The event object.
    * @returns {Promise<void>} Promise that resolves when damage is applied.
    * @static
@@ -388,6 +403,7 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
 
   /**
    * Prompts for drain amount and applies it to the actor.
+   *
    * @param {MouseEvent} event - The event object.
    * @returns {Promise<void>} Promise that resolves when drain is applied.
    * @static
@@ -411,6 +427,7 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
 
   /**
    * Prompts for wither amount and applies it to the actor.
+   *
    * @param {MouseEvent} event - The event object.
    * @returns {Promise<void>} Promise that resolves when wither is applied.
    * @static
@@ -434,6 +451,7 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
 
   /**
    * Removes a condition with optional modifiers.
+   *
    * @param {MouseEvent} event - The event object.
    * @param {HTMLElement} target - The target element.
    * @returns {Promise<void>} Promise that resolves when condition is removed.
@@ -451,6 +469,7 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
 
   /**
    * Deattunes an attunement effect.
+   *
    * @param {MouseEvent} event - The event object.
    * @param {HTMLElement} target - The target element.
    * @returns {Promise<void>} Promise that resolves when attunement is removed.
@@ -473,6 +492,7 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
 
   /**
    * Applies a hack to a specific body part.
+   *
    * @param {MouseEvent} event - The event object.
    * @param {HTMLElement} target - The target element.
    * @returns {Promise<void>} Promise that resolves when hack is applied.
@@ -486,6 +506,7 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
 
   /**
    * Performs a basic attack with optional advantage/disadvantage.
+   *
    * @param {MouseEvent} event - The event object.
    * @returns {Promise<void>} Promise that resolves when attack is performed.
    * @static
@@ -502,6 +523,7 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
 
   /**
    * Rolls resistance with optional advantage/disadvantage.
+   *
    * @param {MouseEvent} event - The event object.
    * @param {HTMLElement} target - The target element.
    * @returns {Promise<void>} Promise that resolves when resistance is rolled.
@@ -521,11 +543,12 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
       disadvantage: event.shiftKey,
       message: message,
     };
-    this.actor.rollResistance(options);
+    await this.actor.rollResistance(options);
   }
 
   /**
    * Rolls immunity with optional advantage/disadvantage.
+   *
    * @param {MouseEvent} event - The event object.
    * @param {HTMLElement} target - The target element.
    * @returns {Promise<void>} Promise that resolves when immunity is rolled.
@@ -546,11 +569,12 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
       disadvantage: event.shiftKey,
       message: message,
     };
-    this.actor.rollImmunity(options);
+    await this.actor.rollImmunity(options);
   }
 
   /**
    * Ends a condition with optional advantage/disadvantage.
+   *
    * @param {MouseEvent} event - The event object.
    * @param {HTMLElement} target - The target element.
    * @returns {Promise<void>} Promise that resolves when condition is ended.
@@ -570,11 +594,12 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
       disadvantage: event.shiftKey,
       message: message,
     };
-    this.actor.endCondition(options);
+    await this.actor.endCondition(options);
   }
 
   /**
    * Gets filtered equipment based on current settings.
+   *
    * @param {Array} equipment - Array of equipment to filter.
    * @returns {Array} Filtered equipment array.
    */
@@ -584,6 +609,7 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
 
   /**
    * Gets filtered abilities based on current settings.
+   *
    * @param {Array} abilities - Array of abilities to filter.
    * @returns {Array} Filtered abilities array.
    */
@@ -594,6 +620,7 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
   /**
    * Prepares the context data for template rendering.
    * Builds effect types, sorts data, and prepares all necessary context information.
+   *
    * @returns {Promise<object>} Promise that resolves to the context object.
    * @override
    */
@@ -667,6 +694,7 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
 
   /**
    * Gets an ability by ID and optional parent ID.
+   *
    * @param {string} id - The ability ID.
    * @param {string} parentId - The optional parent ID.
    * @returns {ActiveEffect|null} The ability effect or null if not found.
@@ -678,6 +706,7 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
   /**
    * Handles the render event for the actor sheet.
    * Sets up UI state, event listeners, and context menus.
+   *
    * @param {object} context - The render context.
    * @param {object} options - Render options.
    * @override
@@ -853,22 +882,25 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
     toggleSwitches.forEach((el) => {
       // Left click: forward cycle
       el.addEventListener("click", async () => {
-        this.cycleToggleSwitch(el, true);
+        this.#cycleToggleSwitch(el, true);
         await this.render();
       });
       // Right click: reverse cycle
       el.addEventListener("contextmenu", async () => {
-        this.cycleToggleSwitch(el, false);
+        this.#cycleToggleSwitch(el, false);
         await this.render();
       });
     });
   }
 
   /**
+   * Cycle the value of a three-way switch either forwards or backwards.
+   *
    * @param {HTMLButtonElement} toggleSwitch
    * @param {boolean} forward
+   * @private
    */
-  cycleToggleSwitch(toggleSwitch, forward = true) {
+  #cycleToggleSwitch(toggleSwitch, forward = true) {
     const name = toggleSwitch.getAttribute("data-name");
     if (!name) return;
     const path = name.split(".").slice(1);
@@ -887,6 +919,7 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
 
   /**
    * Initializes search filters for all document types.
+   *
    * @private
    */
   #initSearchFilters() {
@@ -919,6 +952,7 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
 
   /**
    * Runs search filters for all document types.
+   *
    * @private
    */
   #runSearchFilters() {
@@ -935,6 +969,7 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
 
   /**
    * Handles search filter changes for a specific type.
+   *
    * @param {string} type - The document type.
    * @param {string} sourceKey - The source key for the data.
    * @param {string|null} filterMethodName - The filter method name.
@@ -955,6 +990,7 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
 
   /**
    * Applies a filter to content elements.
+   *
    * @param {string} type - The document type.
    * @param {string} sourceKey - The source key for the data.
    * @param {string|null} filterMethodName - The filter method name.
