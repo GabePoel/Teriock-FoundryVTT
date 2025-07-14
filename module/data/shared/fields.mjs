@@ -41,6 +41,15 @@ const createButton = (className, content, dataset = {}) => {
  */
 export class TeriockArrayField extends fields.ArrayField {
   /**
+   * @param {ElementType} element          The type of element contained in the Array
+   * @param {ArrayFieldOptions} [options]  Options which configure the behavior of the field
+   * @param {DataFieldContext} [context]   Additional context which describes the field
+   */
+  constructor(element, options = {}, context = {}) {
+    super(element, options, context);
+  }
+
+  /**
    * Creates the input element for the array field.
    * Renders a button with plus icon for adding new items to the array.
    *
@@ -63,6 +72,15 @@ export class TeriockArrayField extends fields.ArrayField {
  * Extends Foundry's TypedObjectField to provide enhanced record editing capabilities.
  */
 export class TeriockRecordField extends fields.TypedObjectField {
+  /**
+   * @param {DataField} element             The value type of each entry in this object.
+   * @param {DataFieldOptions} [options]    Options which configure the behavior of the field.
+   * @param {DataFieldContext} [context]    Additional context which describes the field
+   */
+  constructor(element, options = {}, context = {}) {
+    super(element, options, context);
+  }
+
   /**
    * Creates the input element for the record field.
    * Renders a multi-select input for choosing which record items to display.

@@ -1,11 +1,237 @@
 const { ux } = foundry.applications;
 import { dispatch } from "../../commands/dispatch.mjs";
+import { TeriockRoll } from "../../documents/_module.mjs";
 import { imageContextMenuOptions } from "../../sheets/misc-sheets/image-sheet/connections/_context-menus.mjs";
 import TeriockImageSheet from "../../sheets/misc-sheets/image-sheet/image-sheet.mjs";
 
+/**
+ * Check if the {@link TeriockUser} owns and uses the given document.
+ *
+ * @param {ClientDocument} document
+ * @param {string} userId
+ * @returns {boolean}
+ */
+function isOwnerAndCurrentUser(document, userId) {
+  return game.user.id === userId && document.isOwner;
+}
+
+/**
+ * Get targets.
+ *
+ * @returns {TeriockActor[]}
+ */
+function getTargetActors() {
+  let actors = [];
+  if (canvas.tokens?.controlled?.length > 0) {
+    actors = canvas.tokens.controlled.map((t) => t.actor).filter(Boolean);
+  } else if (game.user.character) {
+    actors = [game.user.character];
+  }
+  return actors;
+}
+
+/**
+ * Modifier roll options.
+ *
+ * @param {MouseEvent} event
+ * @returns {{advantage, disadvantage, double, twoHanded}}
+ */
+function getModifierOptions(event) {
+  return {
+    advantage: event.altKey,
+    disadvantage: event.shiftKey,
+    double: event.ctrlKey,
+    twoHanded: event.ctrlKey,
+  };
+}
+
+/**
+ * Apply an action to multiple actors with consistent notification messages.
+ *
+ * @param {TeriockActor[]} actors - Array of actors to apply the action to
+ * @param {string} action - The action to perform (e.g., "takeDamage", "takeHeal")
+ * @param {number} [amount] - The amount value for the action
+ * @param {string} [data] - Additional data for the action (e.g., body part for hack actions)
+ * @returns {Promise<void>}
+ */
+async function applyActorAction(actors, action, amount, data) {
+  const actionMap = {
+    takeDamage: (actor, amt) => actor.takeDamage(amt),
+    takeDrain: (actor, amt) => actor.takeDrain(amt),
+    takeWither: (actor, amt) => actor.takeWither(amt),
+    takeHeal: (actor, amt) => actor.takeHeal(amt),
+    takeRevitalize: (actor, amt) => actor.takeRevitalize(amt),
+    takeSetTempHp: (actor, amt) => actor.takeSetTempHp(amt),
+    takeSetTempMp: (actor, amt) => actor.takeSetTempMp(amt),
+    takeGainTempHp: (actor, amt) => actor.takeGainTempHp(amt),
+    takeGainTempMp: (actor, amt) => actor.takeGainTempMp(amt),
+    takeSleep: (actor, amt) => actor.takeSleep(amt),
+    takeKill: (actor, amt) => actor.takeKill(amt),
+    takeHack: (actor, _, bodyPart) => actor.takeHack(bodyPart),
+    takeUnhack: (actor, _, bodyPart) => actor.takeUnhack(bodyPart),
+    takeAwaken: (actor) => actor.takeAwaken(),
+    takeRevive: (actor) => actor.takeRevive(),
+  };
+
+  const actionMessages = {
+    takeDamage: (name, amt) => `${name} took ${amt} damage`,
+    takeDrain: (name, amt) => `${name} took ${amt} drain`,
+    takeWither: (name, amt) => `${name} took ${amt} wither`,
+    takeHeal: (name, amt) => `${name} gained ${amt} HP`,
+    takeRevitalize: (name, amt) => `${name} gained ${amt} MP`,
+    takeSetTempHp: (name, actor) => `${name} now has ${actor.system.hp.temp} temporary HP`,
+    takeSetTempMp: (name, actor) => `${name} now has ${actor.system.mp.temp} temporary MP`,
+    takeGainTempHp: (name, amt) => `${name} gained ${amt} temporary HP`,
+    takeGainTempMp: (name, amt) => `${name} gained ${amt} temporary MP`,
+    takeSleep: (name) => `Did sleep check for ${name}`,
+    takeKill: (name) => `Did kill check for ${name}`,
+    takeHack: (name, _, bodyPart) => `Hacked ${bodyPart} for ${name}`,
+    takeUnhack: (name, _, bodyPart) => `Unhacked ${bodyPart} for ${name}`,
+    takeAwaken: (name) => `Awakened ${name}`,
+    takeRevive: (name) => `Revived ${name}`,
+  };
+
+  const actionFn = actionMap[action];
+  if (!actionFn) return;
+
+  for (const actor of actors) {
+    if (!actor) continue;
+
+    await actionFn(actor, amount, data);
+
+    const messageFn = actionMessages[action];
+    if (messageFn) {
+      const message = messageFn(actor.name, amount === undefined ? actor : amount, data);
+      ui.notifications.info(message);
+    }
+  }
+}
+
+/**
+ * Toggle a status effect on multiple actors.
+ *
+ * @param {TeriockActor[]} actors - Array of actors to toggle the status effect on
+ * @param {string} status - The status effect identifier
+ * @param {boolean} active - Whether to activate (true) or deactivate (false) the status
+ * @returns {Promise<void>}
+ */
+async function toggleStatusEffect(actors, status, active) {
+  if (!status) {
+    ui.notifications.error("No status specified.");
+    return;
+  }
+
+  for (const actor of actors) {
+    if (actor && typeof actor.toggleStatusEffect === "function") {
+      await actor.toggleStatusEffect(status, { active });
+      const statusText = active ? "now" : "no longer";
+      ui.notifications.info(`${actor.name} is ${statusText} ${CONFIG.TERIOCK.conditions[status].toLowerCase()}`);
+    }
+  }
+}
+
+/**
+ * Handle applying or removing effects on multiple actors.
+ *
+ * @param {TeriockActor[]} actors - Array of actors to apply/remove effects on
+ * @param {string} effectData - JSON string containing effect data
+ * @param {boolean} [remove=false] - Whether to remove the effect instead of applying it
+ * @returns {Promise<void>}
+ */
+async function handleEffectAction(actors, effectData, remove = false) {
+  let effectObj = null;
+  try {
+    effectObj = JSON.parse(effectData);
+  } catch (e) {
+    ui.notifications.error("Failed to parse effect data.");
+    return;
+  }
+
+  for (const actor of actors) {
+    if (!actor) continue;
+
+    if (remove) {
+      if (typeof actor.deleteEmbeddedDocuments === "function") {
+        const found = actor.effects.find((e) => e.name === effectObj.name);
+        if (found) {
+          await actor.deleteEmbeddedDocuments("ActiveEffect", [found.id]);
+          ui.notifications.info(`Removed effect: ${effectObj.name}`);
+        } else {
+          ui.notifications.warn(`Effect not found: ${effectObj.name}`);
+        }
+      }
+    } else {
+      if (typeof actor.createEmbeddedDocuments === "function") {
+        await actor.createEmbeddedDocuments("ActiveEffect", [effectObj]);
+        ui.notifications.info(`Applied effect: ${effectObj.name}`);
+      }
+    }
+  }
+}
+
+/**
+ * Perform roll-based actions on multiple actors.
+ *
+ * @param {TeriockActor[]} actors - Array of actors to perform rolls for
+ * @param {string} action - The roll action to perform (e.g., "rollResistance", "rollFeatSave")
+ * @param {any} data - Data needed for the roll action
+ * @param {object} [options={}] - Roll options including advantage/disadvantage
+ * @returns {Promise<void>}
+ */
+async function performRollAction(actors, action, data, options = {}) {
+  const rollActions = {
+    rollResistance: (actor) => actor.rollResistance(options),
+    rollFeatSave: (actor) => actor.rollFeatSave(data, options),
+    rollTradecraft: (actor) => actor.rollTradecraft(data, options),
+  };
+
+  const rollFn = rollActions[action];
+  if (!rollFn) return;
+
+  for (const actor of actors) {
+    if (actor && typeof rollFn === "function") {
+      rollFn(actor);
+    }
+  }
+}
+
+/**
+ * Add click event listeners to multiple elements.
+ *
+ * @param {NodeList} elements - Collection of DOM elements to add listeners to
+ * @param {Function} handler - Click event handler function
+ * @returns {void}
+ */
+function addClickHandler(elements, handler) {
+  elements.forEach((element) => {
+    if (element) {
+      element.addEventListener("click", handler);
+    }
+  });
+}
+
+/**
+ * Add context menu (right-click) event listeners to multiple elements.
+ *
+ * @param {NodeList} elements - Collection of DOM elements to add listeners to
+ * @param {Function} handler - Context menu event handler function
+ * @returns {void}
+ */
+function addContextMenuHandler(elements, handler) {
+  elements.forEach((element) => {
+    element.addEventListener("contextmenu", handler);
+  });
+}
+
+/**
+ * Register all Foundry VTT hooks for Teriock.
+ * Handles document updates, chat interactions, combat events, and UI behaviors.
+ *
+ * @returns {void}
+ */
 export default function registerHooks() {
   foundry.helpers.Hooks.on("updateItem", async (document, updateData, options, userId) => {
-    if (game.user.id === userId && document.isOwner) {
+    if (isOwnerAndCurrentUser(document, userId)) {
       if (document.type === "equipment" && document.system.attuned && updateData.system.tier) {
         const attunement = document.system.attunement;
         if (attunement) {
@@ -19,7 +245,7 @@ export default function registerHooks() {
   });
 
   foundry.helpers.Hooks.on("updateActor", async (document, changed, options, userId) => {
-    if (game.user.id === userId && document.isOwner) {
+    if (isOwnerAndCurrentUser(document, userId)) {
       const doCheckDown =
         typeof changed.system?.hp?.value === "number" || typeof changed.system?.mp?.value === "number";
       await document.postUpdate({
@@ -29,7 +255,7 @@ export default function registerHooks() {
   });
 
   foundry.helpers.Hooks.on("createItem", async (document, options, userId) => {
-    if (game.user.id === userId && document.isOwner) {
+    if (isOwnerAndCurrentUser(document, userId)) {
       if (document.type === "equipment") {
         if (document.actor) {
           await document.system.unequip();
@@ -41,14 +267,14 @@ export default function registerHooks() {
   });
 
   foundry.helpers.Hooks.on("deleteItem", async (document, options, userId) => {
-    if (game.user.id === userId && document.isOwner) {
+    if (isOwnerAndCurrentUser(document, userId)) {
       document.actor?.buildEffectTypes();
       await document.actor?.postUpdate();
     }
   });
 
   foundry.helpers.Hooks.on("createActiveEffect", async (document, options, userId) => {
-    if (game.user.id === userId && document.isOwner) {
+    if (isOwnerAndCurrentUser(document, userId)) {
       if (document.type === "ability" || document.type === "effect") {
         console.log(document.system.subIds);
         if (document.system.subIds?.length > 0) {
@@ -77,7 +303,7 @@ export default function registerHooks() {
   });
 
   foundry.helpers.Hooks.on("deleteActiveEffect", async (document, options, userId) => {
-    if (game.user.id === userId && document.isOwner) {
+    if (isOwnerAndCurrentUser(document, userId)) {
       if (document.type === "ability" || document.type === "effect") {
         if (document.system.supId) {
           const sup = document.parent.getEmbeddedDocument("ActiveEffect", document.system.supId);
@@ -96,10 +322,9 @@ export default function registerHooks() {
     }
   });
 
-  // TODO: This might not be needed anymore.
   foundry.helpers.Hooks.on("updateActiveEffect", async (document, updateData, options, userId) => {
     console.debug(`Teriock | Active Effect updated: ${document.name}`, updateData);
-    if (game.user.id === userId && document.isOwner && document.type === "ability") {
+    if (isOwnerAndCurrentUser(document, userId) && document.type === "ability") {
       const sup = document.sup;
       if (sup && typeof sup.update === "function") {
         await sup.update({});
@@ -108,7 +333,7 @@ export default function registerHooks() {
     }
   });
 
-  foundry.helpers.Hooks.on("combatTurnChange", async (combat, prior, current) => {
+  foundry.helpers.Hooks.on("combatTurnChange", async (combat) => {
     const combatants = combat.combatants;
     for (const combatant of combatants) {
       const actor = combatant.actor;
@@ -129,16 +354,19 @@ export default function registerHooks() {
   });
 
   foundry.helpers.Hooks.on("chatMessage", (chatLog, message, chatData) => {
-    const sender = game.users.get(chatData.user);
+    const users = /** @type {WorldCollection<TeriockUser>} */ game.users;
+    const sender = users.get(chatData.user);
     if (message.startsWith("/")) return dispatch(message, chatData, sender);
   });
 
-  foundry.helpers.Hooks.on("renderChatMessageHTML", (message, html, context) => {
+  foundry.helpers.Hooks.on("renderChatMessageHTML", (message, html) => {
     new ux.ContextMenu(html, ".timage", imageContextMenuOptions, {
       eventName: "contextmenu",
       jQuery: false,
       fixed: true,
     });
+
+    // Image click handler
     html.querySelectorAll(".timage").forEach((imgEl) => {
       imgEl.addEventListener("click", async (event) => {
         event.stopPropagation();
@@ -150,388 +378,202 @@ export default function registerHooks() {
         }
       });
     });
-    const buttons = html.querySelectorAll(".harm-button");
-    buttons.forEach((button) => {
-      if (button) {
-        button.addEventListener("click", async (event) => {
-          const data = event.currentTarget.dataset;
-          const amount = parseInt(data.amount);
-          const type = data.type || "damage";
-          const targets = game.user?.targets;
-          for (const target of targets) {
-            /** @type {TeriockActor} */
-            const actor = target.actor;
-            if (!actor) continue;
-            if (type === "damage") {
-              await actor.takeDamage(amount);
-            } else if (type === "drain") {
-              await actor.takeDrain(amount);
-            } else if (type === "wither") {
-              await actor.takeWither(amount);
-            }
-          }
-        });
+
+    // Harm buttons
+    addClickHandler(html.querySelectorAll(".harm-button"), async (event) => {
+      const data = event.currentTarget.dataset;
+      const amount = parseInt(data.amount);
+      const type = data.type || "damage";
+      const targets = game.user?.targets;
+      for (const target of targets) {
+        const actor = target.actor;
+        if (!actor) continue;
+        await applyActorAction([actor], `take${type.charAt(0).toUpperCase() + type.slice(1)}`, amount);
       }
     });
-    const openTags = html.querySelectorAll('[data-action="open"]');
-    openTags.forEach((tag) => {
-      tag.addEventListener("click", async (event) => {
-        event.preventDefault();
-        const uuid = tag.getAttribute("data-uuid");
-        if (!uuid) return;
-        /** @type {ClientDocument} */
-        const doc = await foundry.utils.fromUuid(uuid);
-        if (doc && typeof doc.sheet?.render === "function") {
-          await doc.sheet.render(true);
-        }
-      });
-    });
-    // Add event listener for roll buttons in chat
-    const rollButtons = html.querySelectorAll(".teriock-chat-button");
-    rollButtons.forEach((button) => {
-      if (button) {
-        button.addEventListener("click", async (event) => {
-          const data = event.currentTarget.dataset;
-          const action = data.action;
-          const formula = data.data;
-          // Determine actors: prefer selected tokens, else character, else do nothing
-          let actors = [];
-          if (canvas.tokens?.controlled?.length > 0) {
-            actors = canvas.tokens.controlled.map((t) => t.actor).filter(Boolean);
-          } else if (game.user.character) {
-            actors = [game.user.character];
-          }
-          let double = false;
-          if (event.ctrlKey) double = true;
-          if (actors.length === 0) return;
-          // List of supported roll actions
-          const rollActions = [
-            "takeDamage",
-            "takeDrain",
-            "takeWither",
-            "takeHeal",
-            "takeRevitalize",
-            "takeSetTempHp",
-            "takeSetTempMp",
-            "takeGainTempHp",
-            "takeGainTempMp",
-            "takeSleep",
-            "takeKill",
-          ];
-          // Map action to button label
-          const actionLabels = {
-            takeDamage: "Apply Damage",
-            takeDrain: "Apply Drain",
-            takeWither: "Apply Wither",
-            takeHeal: "Apply Healing",
-            takeRevitalize: "Apply Revitalization",
-            takeSetTempHp: "Set Temp HP",
-            takeSetTempMp: "Set Temp MP",
-            takeGainTempHp: "Gain Temp HP",
-            takeGainTempMp: "Gain Temp MP",
-            takeSleep: "Sleep",
-            takeKill: "Kill",
-          };
-          const actionIcons = {
-            takeDamage: "fa-heart",
-            takeDrain: "fa-brain",
-            takeWither: "fa-hourglass-half",
-          };
-          const actionClasses = {
-            takeDamage: "damage-button",
-            takeDrain: "drain-button",
-            takeWither: "wither-button",
-          };
-          if (rollActions.includes(action) && formula) {
-            // Roll the formula using TeriockRoll for each actor
-            const context = {
-              buttons: [
-                {
-                  label: actionLabels[action] || "Apply to Targets",
-                  icon: `fa-solid ${actionIcons[action] || "fa-plus"}`,
-                  action: action,
-                  classes: `apply-result ${actionClasses[action] || ""}`,
-                },
-              ],
-            };
-            for (const actor of actors) {
-              const roll = new game.teriock.TeriockRoll(formula, actor.getRollData(), { context });
-              if (double) {
-                roll.alter(2, 0);
-              }
-              await roll.toMessage({
-                speaker: ChatMessage.getSpeaker({ actor }),
-              });
-            }
-          }
-          if (action === "rollResistance") {
-            const options = {};
-            if (event.altKey) options.advantage = true;
-            if (event.shiftKey) options.disadvantage = true;
-            for (const actor of actors) {
-              if (actor && typeof actor.rollResistance === "function") {
-                actor.rollResistance(options);
-              }
-            }
-          }
-          if (action === "rollFeatSave") {
-            const attr = button.getAttribute("data-data");
-            const total = button.getAttribute("data-total");
-            const threshold = total ? Number(total) : undefined;
-            const options = threshold !== undefined ? { threshold } : {};
-            if (event.altKey) options.advantage = true;
-            if (event.shiftKey) options.disadvantage = true;
-            for (const actor of actors) {
-              if (typeof actor.rollFeatSave === "function") {
-                actor.rollFeatSave(attr, options);
-              }
-            }
-          }
-          if (action === "applyEffect") {
-            const effectData = button.getAttribute("data-data");
-            let effectObj = null;
-            try {
-              effectObj = JSON.parse(effectData);
-            } catch (e) {
-              ui.notifications.error("Failed to parse effect data.");
-              return;
-            }
-            for (const actor of actors) {
-              if (actor && typeof actor.createEmbeddedDocuments === "function") {
-                await actor.createEmbeddedDocuments("ActiveEffect", [effectObj]);
-                ui.notifications.info(`Applied effect: ${effectObj.name}`);
-              }
-            }
-          }
-          if (action === "takeHack") {
-            const bodyPart = button.getAttribute("data-data");
-            for (const actor of actors) {
-              if (actor && typeof actor.takeHack === "function") {
-                await actor.takeHack(bodyPart);
-                ui.notifications.info(`Hacked ${bodyPart} for ${actor.name}`);
-              }
-            }
-          }
-          if (action === "takeAwaken") {
-            for (const actor of actors) {
-              if (actor && typeof actor.takeAwaken === "function") {
-                await actor.takeAwaken();
-                ui.notifications.info(`Awakened ${actor.name}`);
-              }
-            }
-          }
-          if (action === "takeRevive") {
-            for (const actor of actors) {
-              if (actor && typeof actor.takeRevive === "function") {
-                await actor.takeRevive();
-                ui.notifications.info(`Revived ${actor.name}`);
-              }
-            }
-          }
-          if (action === "applyStatus") {
-            const status = button.getAttribute("data-data");
-            if (!status) {
-              ui.notifications.error("No status specified.");
-              return;
-            }
-            for (const actor of actors) {
-              if (actor && typeof actor.toggleStatusEffect === "function") {
-                await actor.toggleStatusEffect(status, { active: true });
-                ui.notifications.info(`${actor.name} is now ${CONFIG.TERIOCK.conditions[status].toLowerCase()}`);
-              }
-            }
-          }
-          if (action === "removeStatus") {
-            const status = button.getAttribute("data-data");
-            if (!status) {
-              ui.notifications.error("No status specified.");
-              return;
-            }
-            for (const actor of actors) {
-              if (actor && typeof actor.toggleStatusEffect === "function") {
-                await actor.toggleStatusEffect(status, { active: false });
-                ui.notifications.info(`${actor.name} is no longer ${CONFIG.TERIOCK.conditions[status].toLowerCase()}`);
-              }
-            }
-          }
-          if (action === "rollTradecraft") {
-            const tradecraftKey = button.getAttribute("data-data");
-            const options = {};
-            if (event.altKey) options.advantage = true;
-            if (event.shiftKey) options.disadvantage = true;
-            for (const actor of actors) {
-              if (actor && typeof actor.rollTradecraft === "function") {
-                actor.rollTradecraft(tradecraftKey, options);
-              }
-            }
-          }
-        });
+
+    // Open tags
+    addClickHandler(html.querySelectorAll('[data-action="open"]'), async (event) => {
+      event.preventDefault();
+      const uuid = event.currentTarget.getAttribute("data-uuid");
+      if (!uuid) return;
+      const doc = /** @type{ClientDocument} */ await foundry.utils.fromUuid(uuid);
+      if (doc && typeof doc.sheet?.render === "function") {
+        await doc.sheet.render(true);
       }
     });
-    // Add event listener for apply-result buttons
-    html.querySelectorAll(".apply-result").forEach((button) => {
-      button.addEventListener("click", async (event) => {
-        const data = event.currentTarget.dataset;
-        const amount = parseInt(data.total);
-        let actors = [];
-        if (canvas.tokens?.controlled?.length > 0) {
-          actors = canvas.tokens.controlled.map((t) => t.actor).filter(Boolean);
-        } else if (game.user.character) {
-          actors = [game.user.character];
-        }
-        if (actors.length === 0) return;
-        const action = data.action;
+
+    // Main roll buttons
+    addClickHandler(html.querySelectorAll(".teriock-chat-button"), async (event) => {
+      const data = event.currentTarget.dataset;
+      const action = data.action;
+      const formula = data.data;
+      const actors = getTargetActors();
+      const options = getModifierOptions(event);
+
+      if (actors.length === 0) return;
+
+      // Roll actions with formulas
+      const rollActions = [
+        "takeDamage",
+        "takeDrain",
+        "takeWither",
+        "takeHeal",
+        "takeRevitalize",
+        "takeSetTempHp",
+        "takeSetTempMp",
+        "takeGainTempHp",
+        "takeGainTempMp",
+        "takeSleep",
+        "takeKill",
+      ];
+
+      const actionLabels = {
+        takeDamage: "Apply Damage",
+        takeDrain: "Apply Drain",
+        takeWither: "Apply Wither",
+        takeHeal: "Apply Healing",
+        takeRevitalize: "Apply Revitalization",
+        takeSetTempHp: "Set Temp HP",
+        takeSetTempMp: "Set Temp MP",
+        takeGainTempHp: "Gain Temp HP",
+        takeGainTempMp: "Gain Temp MP",
+        takeSleep: "Sleep",
+        takeKill: "Kill",
+      };
+
+      const actionIcons = {
+        takeDamage: "fa-heart",
+        takeDrain: "fa-brain",
+        takeWither: "fa-hourglass-half",
+      };
+
+      const actionClasses = {
+        takeDamage: "damage-button",
+        takeDrain: "drain-button",
+        takeWither: "wither-button",
+      };
+
+      if (rollActions.includes(action) && formula) {
+        const context = {
+          buttons: [
+            {
+              label: actionLabels[action] || "Apply to Targets",
+              icon: `fa-solid ${actionIcons[action] || "fa-plus"}`,
+              action: action,
+              classes: `apply-result ${actionClasses[action] || ""}`,
+            },
+          ],
+        };
         for (const actor of actors) {
-          if (!actor) continue;
-          if (action === "takeDamage") {
-            await actor.takeDamage(amount);
-            ui.notifications.info(`${actor.name} took ${amount} damage`);
-          } else if (action === "takeDrain") {
-            await actor.takeDrain(amount);
-            ui.notifications.info(`${actor.name} took ${amount} drain`);
-          } else if (action === "takeWither") {
-            await actor.takeWither(amount);
-            ui.notifications.info(`${actor.name} took ${amount} wither`);
-          } else if (action === "takeHeal") {
-            await actor.takeHeal(amount);
-            ui.notifications.info(`${actor.name} gained ${amount} HP`);
-          } else if (action === "takeRevitalize") {
-            await actor.takeRevitalize(amount);
-            ui.notifications.info(`${actor.name} gained ${amount} MP`);
-          } else if (action === "takeSetTempHp") {
-            await actor.takeSetTempHp(amount);
-            ui.notifications.info(`${actor.name} now has ${actor.system.hp.temp} temporary HP`);
-          } else if (action === "takeSetTempMp") {
-            await actor.takeSetTempMp(amount);
-            ui.notifications.info(`${actor.name} now has ${actor.system.mp.temp} temporary MP`);
-          } else if (action === "takeGainTempHp") {
-            await actor.takeGainTempHp(amount);
-            ui.notifications.info(`${actor.name} gained ${amount} temporary HP`);
-          } else if (action === "takeGainTempMp") {
-            await actor.takeGainTempMp(amount);
-            ui.notifications.info(`${actor.name} gained ${amount} temporary MP`);
-          } else if (action === "takeSleep") {
-            await actor.takeSleep(amount);
-            ui.notifications.info(`Did sleep check for ${actor.name}`);
-          } else if (action === "takeKill") {
-            await actor.takeKill(amount);
-            ui.notifications.info(`Did kill check for ${actor.name}`);
-          } else if (action === "takeHack") {
-            const bodyPart = data.data;
-            await actor.takeHack(bodyPart);
-            ui.notifications.info(`Hacked ${bodyPart} for ${actor.name}`);
+          const roll = new TeriockRoll(formula, actor.getRollData(), { context });
+          if (options.double) {
+            roll.alter(2, 0);
           }
+          await roll.toMessage({
+            speaker: ChatMessage.getSpeaker({ actor }),
+          });
         }
-      });
+      }
+
+      // Handle specific actions
+      if (action === "rollResistance") {
+        await performRollAction(actors, action, null, options);
+      }
+
+      if (action === "rollFeatSave") {
+        const attr = event.currentTarget.getAttribute("data-data");
+        const total = event.currentTarget.getAttribute("data-total");
+        const threshold = total ? Number(total) : undefined;
+        const rollOptions = threshold !== undefined ? { ...options, threshold } : options;
+        await performRollAction(actors, action, attr, rollOptions);
+      }
+
+      if (action === "rollTradecraft") {
+        const tradecraftKey = event.currentTarget.getAttribute("data-data");
+        await performRollAction(actors, action, tradecraftKey, options);
+      }
+
+      if (action === "applyEffect") {
+        const effectData = event.currentTarget.getAttribute("data-data");
+        await handleEffectAction(actors, effectData);
+      }
+
+      if (action === "takeHack") {
+        const bodyPart = event.currentTarget.getAttribute("data-data");
+        await applyActorAction(actors, action, undefined, bodyPart);
+      }
+
+      if (action === "takeAwaken") {
+        await applyActorAction(actors, action);
+      }
+
+      if (action === "takeRevive") {
+        await applyActorAction(actors, action);
+      }
+
+      if (action === "applyStatus") {
+        const status = event.currentTarget.getAttribute("data-data");
+        await toggleStatusEffect(actors, status, true);
+      }
+
+      if (action === "removeStatus") {
+        const status = event.currentTarget.getAttribute("data-data");
+        await toggleStatusEffect(actors, status, false);
+      }
     });
 
-    // Add right-click (contextmenu) handler for Apply Effect button
-    html.querySelectorAll('.teriock-chat-button[data-action="applyEffect"]').forEach((button) => {
-      button.addEventListener("contextmenu", async (event) => {
-        event.preventDefault();
-        const effectData = button.getAttribute("data-data");
-        let effectObj = null;
-        try {
-          effectObj = JSON.parse(effectData);
-        } catch (e) {
-          ui.notifications.error("Failed to parse effect data.");
-          return;
-        }
-        // Determine actors: prefer selected tokens, else character
-        let actors = [];
-        if (canvas.tokens?.controlled?.length > 0) {
-          actors = canvas.tokens.controlled.map((t) => t.actor).filter(Boolean);
-        } else if (game.user.character) {
-          actors = [game.user.character];
-        }
-        if (actors.length === 0) return;
-        for (const actor of actors) {
-          if (actor && typeof actor.deleteEmbeddedDocuments === "function") {
-            // Find the effect by name
-            const found = actor.effects.find((e) => e.name === effectObj.name);
-            if (found) {
-              await actor.deleteEmbeddedDocuments("ActiveEffect", [found.id]);
-              ui.notifications.info(`Removed effect: ${effectObj.name}`);
-            } else {
-              ui.notifications.warn(`Effect not found: ${effectObj.name}`);
-            }
-          }
-        }
-      });
+    // Apply result buttons
+    addClickHandler(html.querySelectorAll(".apply-result"), async (event) => {
+      const data = event.currentTarget.dataset;
+      const amount = parseInt(data.total);
+      const action = data.action;
+      const actors = getTargetActors();
+
+      if (actors.length === 0) return;
+
+      if (action === "takeHack") {
+        const bodyPart = data.data;
+        await applyActorAction(actors, action, undefined, bodyPart);
+      } else {
+        await applyActorAction(actors, action, amount);
+      }
     });
 
-    // Add right-click (contextmenu) handler for applyStatus: right-click removes the status
-    html.querySelectorAll('.teriock-chat-button[data-action="applyStatus"]').forEach((button) => {
-      button.addEventListener("contextmenu", async (event) => {
-        event.preventDefault();
-        const status = button.getAttribute("data-data");
-        if (!status) {
-          ui.notifications.error("No status specified.");
-          return;
-        }
-        let actors = [];
-        if (canvas.tokens?.controlled?.length > 0) {
-          actors = canvas.tokens.controlled.map((t) => t.actor).filter(Boolean);
-        } else if (game.user.character) {
-          actors = [game.user.character];
-        }
-        if (actors.length === 0) return;
-        for (const actor of actors) {
-          if (actor && typeof actor.toggleStatusEffect === "function") {
-            await actor.toggleStatusEffect(status, { active: false });
-            ui.notifications.info(`${actor.name} is no longer ${CONFIG.TERIOCK.conditions[status].toLowerCase()}`);
-          }
-        }
-      });
+    // Context menu handlers
+    addContextMenuHandler(html.querySelectorAll('.teriock-chat-button[data-action="applyEffect"]'), async (event) => {
+      event.preventDefault();
+      const effectData = event.currentTarget.getAttribute("data-data");
+      const actors = getTargetActors();
+      if (actors.length === 0) return;
+      await handleEffectAction(actors, effectData, true);
     });
 
-    // Add right-click (contextmenu) handler for removeStatus: right-click applies the status
-    html.querySelectorAll('.teriock-chat-button[data-action="removeStatus"]').forEach((button) => {
-      button.addEventListener("contextmenu", async (event) => {
-        event.preventDefault();
-        const status = button.getAttribute("data-data");
-        if (!status) {
-          ui.notifications.error("No status specified.");
-          return;
-        }
-        let actors = [];
-        if (canvas.tokens?.controlled?.length > 0) {
-          actors = canvas.tokens.controlled.map((t) => t.actor).filter(Boolean);
-        } else if (game.user.character) {
-          actors = [game.user.character];
-        }
-        if (actors.length === 0) return;
-        for (const actor of actors) {
-          if (actor && typeof actor.toggleStatusEffect === "function") {
-            await actor.toggleStatusEffect(status, { active: true });
-            ui.notifications.info(`${actor.name} is now ${CONFIG.TERIOCK.conditions[status].toLowerCase()}`);
-          }
-        }
-      });
+    addContextMenuHandler(html.querySelectorAll('.teriock-chat-button[data-action="applyStatus"]'), async (event) => {
+      event.preventDefault();
+      const status = event.currentTarget.getAttribute("data-data");
+      const actors = getTargetActors();
+      if (actors.length === 0) return;
+      await toggleStatusEffect(actors, status, false);
     });
 
-    // Add right-click (contextmenu) handler for takeHack: right-click does unhack
-    html.querySelectorAll('.teriock-chat-button[data-action="takeHack"]').forEach((button) => {
-      button.addEventListener("contextmenu", async (event) => {
-        event.preventDefault();
-        const bodyPart = button.getAttribute("data-data");
-        let actors = [];
-        if (canvas.tokens?.controlled?.length > 0) {
-          actors = canvas.tokens.controlled.map((t) => t.actor).filter(Boolean);
-        } else if (game.user.character) {
-          actors = [game.user.character];
-        }
-        if (actors.length === 0) return;
-        for (const actor of actors) {
-          if (actor && typeof actor.takeUnhack === "function") {
-            await actor.takeUnhack(bodyPart);
-            ui.notifications.info(`Unhacked ${bodyPart} for ${actor.name}`);
-          }
-        }
-      });
+    addContextMenuHandler(html.querySelectorAll('.teriock-chat-button[data-action="removeStatus"]'), async (event) => {
+      event.preventDefault();
+      const status = event.currentTarget.getAttribute("data-data");
+      const actors = getTargetActors();
+      if (actors.length === 0) return;
+      await toggleStatusEffect(actors, status, true);
     });
 
-    // Add event listeners for .teriock-target-container
+    addContextMenuHandler(html.querySelectorAll('.teriock-chat-button[data-action="takeHack"]'), async (event) => {
+      event.preventDefault();
+      const bodyPart = event.currentTarget.getAttribute("data-data");
+      const actors = getTargetActors();
+      if (actors.length === 0) return;
+      await applyActorAction(actors, "takeUnhack", undefined, bodyPart);
+    });
+
+    // Target container handlers
     html.querySelectorAll(".teriock-target-container").forEach((container) => {
       let clickTimeout = null;
 
@@ -540,16 +582,14 @@ export default function registerHooks() {
         const uuid = container.getAttribute("data-uuid");
         if (!uuid) return;
 
-        // Clear any existing timeout
         if (clickTimeout) {
           clearTimeout(clickTimeout);
           clickTimeout = null;
-          return; // This was a double-click, let the dblclick handler deal with it
+          return;
         }
 
-        // Set timeout for single click
         clickTimeout = setTimeout(async () => {
-          const doc = await foundry.utils.fromUuid(uuid);
+          const doc = /** @type{TeriockToken} */ await foundry.utils.fromUuid(uuid);
           if (doc.isOwner) {
             if (doc?.token?.object) {
               doc.token.object.control();
@@ -558,7 +598,7 @@ export default function registerHooks() {
             }
           }
           clickTimeout = null;
-        }, 200); // 200ms delay to detect double-click
+        }, 200);
       });
 
       container.addEventListener("dblclick", async (event) => {
@@ -566,27 +606,27 @@ export default function registerHooks() {
         const uuid = container.getAttribute("data-uuid");
         if (!uuid) return;
 
-        // Clear single click timeout
         if (clickTimeout) {
           clearTimeout(clickTimeout);
           clickTimeout = null;
         }
 
-        const doc = await foundry.utils.fromUuid(uuid);
+        const doc = /** @type {TeriockActor} */ await foundry.utils.fromUuid(uuid);
         if (doc && doc.sheet && doc.isOwner && typeof doc.sheet.render === "function") {
-          doc.sheet.render(true);
+          await doc.sheet.render(true);
         }
       });
     });
   });
 
-  foundry.helpers.Hooks.on("hotbarDrop", (bar, data, slot) => {
-    fromUuid(data.uuid).then(async (item) => {
-      if (!item || typeof item.roll !== "function") return;
-      const id = item._id;
+  foundry.helpers.Hooks.on("hotbarDrop", async (bar, data, slot) => {
+    fromUuid(data.uuid).then(
+      /** @param {TeriockItem|TeriockEffect} item */ async (item) => {
+        if (!item || !["Item", "ActiveEffect"].includes(item.documentName)) return;
+        const id = item._id;
 
-      const macroName = `Roll ${item.name}`;
-      const command = `// ID: ${id}
+        const macroName = `Roll ${item.name}`;
+        const command = `// ID: ${id}
 const item = await fromUuid("${item.uuid}");
 if (!item) return ui.notifications.warn("Item not found: ${item.name}");
 
@@ -598,53 +638,60 @@ const options = {
 
 await item.use(options);
 `;
-      let macroFolder = game.folders.find((f) => f.name === "Player Macros" && f.type === "Macro");
-      if (!macroFolder) {
-        macroFolder = await Folder.create({
-          name: "Player Macros",
-          type: "Macro",
-        });
-      }
-      let macro = game.macros.find((m) => m.name === macroName && m.command?.startsWith(`// ID: ${id}`));
-      if (!macro) {
-        macro = await Macro.create({
-          name: macroName,
-          type: "script",
-          img: item.img,
-          command,
-          flags: { teriock: { itemMacro: true } },
-          folder: macroFolder.id,
-        }).catch((err) => {
-          console.error(`Failed to create macro: ${err}`);
-          ui.notifications.error(`Failed to create macro: ${err.message}`);
-        });
-        if (macro) {
-          game.user.assignHotbarMacro(macro, slot);
+        const folders = /** @type {WorldCollection<Folder>} */ game.folders;
+        let macroFolder = folders.find((f) => f.name === "Player Macros" && f.type === "Macro");
+        if (!macroFolder) {
+          macroFolder = await Folder.create({
+            name: "Player Macros",
+            type: "Macro",
+          });
         }
-      } else {
-        game.user.assignHotbarMacro(macro, slot);
-      }
-    });
+        const macros = /** @type {WorldCollection<TeriockMacro>} */ game.macros;
+        let macro = /** @type {TeriockMacro|undefined} */ macros.find(
+          (m) => m.name === macroName && m.command?.startsWith(`// ID: ${id}`),
+        );
+        /** @type {TeriockUser} */
+        const user = game.user;
+        if (!macro) {
+          macro = /** @type {TeriockMacro} */ await Macro.create({
+            name: macroName,
+            type: "script",
+            img: item.img,
+            command,
+            flags: { teriock: { itemMacro: true } },
+            folder: macroFolder.id,
+          }).catch((err) => {
+            console.error(`Failed to create macro: ${err}`);
+            ui.notifications.error(`Failed to create macro: ${err.message}`);
+          });
+          if (macro) {
+            await user.assignHotbarMacro(macro, slot);
+          }
+        } else {
+          await user.assignHotbarMacro(macro, slot);
+        }
+      },
+    );
 
     return false;
   });
 
-  foundry.helpers.Hooks.on("combatRound", (combat, updateData, updateOptions) => {
+  foundry.helpers.Hooks.on("combatRound", async (combat, updateData, updateOptions) => {
     const direction = updateOptions.direction;
-    game.time.advance(5 * direction);
+    await game.time.advance(5 * direction);
   });
 
-  foundry.helpers.Hooks.on("updateWorldTime", (worldTime, dt, options, userId) => {
+  foundry.helpers.Hooks.on("updateWorldTime", async (worldTime, dt, options, userId) => {
     if (game.user.id === userId && game.user?.isActiveGM) {
       const scene = game.scenes.viewed;
       const tokens = scene.tokens;
-      /** @type TeriockActor[] */
       const actors = tokens.map((token) => token.actor);
       for (const actor of actors) {
         const effects = actor.temporaryEffects;
         for (const effect of effects) {
-          effect.system.checkExpiration();
+          await effect.system.checkExpiration();
         }
+        await actor.forceUpdate();
       }
     }
   });
@@ -662,7 +709,7 @@ await item.use(options);
     }
   });
 
-  foundry.helpers.Hooks.on("applyTokenStatusEffect", (token, statusId, active) => {
+  foundry.helpers.Hooks.on("applyTokenStatusEffect", (token) => {
     const actor = token.actor;
     if (actor) {
       actor.prepareDerivedData();

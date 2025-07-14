@@ -1,5 +1,3 @@
-import { EffectChangeData } from "@client/documents/_types.mjs";
-
 /**
  * Valid turn expiration targets
  */
@@ -12,6 +10,17 @@ export type TurnExpirationTiming = "start" | "end" | "other";
  * Valid turn expiration methods
  */
 export type TurnExpirationMethod = "roll" | "auto";
+
+export type EffectChangeData = {
+  /** The attribute path in the {@link TeriockActor} or {@link TeriockItem} data which the change modifies */
+  key: string;
+  /** The value of the change effect */
+  value: string;
+  /** The modification mode with which the change is applied */
+  mode: number;
+  /** The priority level with which this change is applied */
+  priority: number;
+}
 
 /**
  * Consequence rolls for different effect types
@@ -55,8 +64,9 @@ export interface AppliesData {
   endStatuses: Set<string>;
   rolls: ConsequenceRolls;
   hacks: Set<string>;
-  changes: EffectChangeData[];
   checks: Set<string>;
+  duration: number;
+  changes: EffectChangeData[];
 }
 
 /**

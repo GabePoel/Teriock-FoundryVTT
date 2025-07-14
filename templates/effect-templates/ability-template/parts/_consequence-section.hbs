@@ -40,6 +40,11 @@
     classes="teriock-full-width"
     disabled=(not editable)
   }}
+  {{formGroup
+    (lookup (lookup (lookup systemFields.applies.fields typeKey) "fields") "duration")
+    value=(lookup (lookup system.applies typeKey) "duration")
+    disabled=(not editable)
+  }}
   <!-- Changes UI -->
   <div class="changes-container tgrid g12" style="margin-top: 0.5em;">
     <div class="change-box tgrid-item gi4" style="justify-content: start;">

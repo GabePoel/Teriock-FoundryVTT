@@ -73,7 +73,7 @@ export function _migrateData(data) {
   }
 
   // Hierarchy migration
-  if (typeof data.parentId !== "string") {
+  if (typeof data.parentId === "string") {
     data.supId = data.parentId;
     delete data.parentId;
   }

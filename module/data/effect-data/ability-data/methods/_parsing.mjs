@@ -105,7 +105,6 @@ export async function _parse(abilityData, rawHTML) {
   setRemainingParameters(parameters, tagTree, doc);
 
   // Clean up parameters
-  parameters.editable = false;
   delete parameters.improvement;
   delete parameters.limitation;
   delete parameters.supId;
@@ -588,12 +587,11 @@ function extractTradecraftChecksFromHTML(html) {
  * @private
  */
 function extractChangesFromHTML(html) {
-  console.log(html);
   const tempDiv = document.createElement("div");
   tempDiv.innerHTML = html || "";
   const changes = [];
   tempDiv.querySelectorAll("span.metadata[data-type='change']").forEach((el) => {
-    if (!(el instanceof HTMLElement)) return;
+    if (!(el instanceof HTMLElement)) return [];
     const key = el.dataset.key;
     const mode = el.dataset.mode;
     const value = el.dataset.value;
@@ -609,8 +607,24 @@ function extractChangesFromHTML(html) {
       });
     }
   });
-  console.log(changes);
   return changes;
+}
+
+/**
+ * Extracts duration from HTML content. Finds duration metadata elements and extracts its number of seconds.
+ *
+ * @param html - The HTML content to extract changes from.
+ * @returns {number} Number of seconds.
+ * @private
+ */
+function extractDurationFromHTML(html) {
+  console.log("extractDurationFromHTML");
+  const tempDiv = document.createElement("div");
+  tempDiv.innerHTML = html || "";
+  const el = tempDiv.querySelector("span.metadata[data-type='duration']");
+  console.log(el);
+  if (!(el instanceof HTMLElement)) return 0;
+  return Number(el.dataset.seconds);
 }
 
 /**
@@ -668,6 +682,11 @@ function processDiceAndEffectExtraction(parameters) {
     if (changes.length > 0) {
       target.changes = [...(target.changes || []), ...changes];
     }
+
+    const duration = extractDurationFromHTML(source);
+    if (duration > 0) {
+      target.duration = duration;
+    }
   });
 
   // Extract dice and effects from results
@@ -678,6 +697,7 @@ function processDiceAndEffectExtraction(parameters) {
   let resultEndConditions = new Set();
   let resultTradecraftChecks = new Set();
   let resultChanges = [];
+  let resultDuration = 0;
 
   // Process all result types for tradecraft checks and other metadata
   const resultTypes = ["hit", "critHit", "miss", "critMiss", "save", "critSave", "fail", "critFail"];
@@ -690,6 +710,7 @@ function processDiceAndEffectExtraction(parameters) {
       const currentEndConditions = extractEndConditionsFromHTML(parameters.results[resultType]);
       const currentTradecraftChecks = extractTradecraftChecksFromHTML(parameters.results[resultType]);
       const currentChanges = extractChangesFromHTML(parameters.results[resultType]);
+      const currentDuration = extractDurationFromHTML(parameters.results[resultType]);
 
       // Merge all results
       resultHacks = new Set([...resultHacks, ...currentHacks]);
@@ -698,6 +719,7 @@ function processDiceAndEffectExtraction(parameters) {
       resultEndConditions = new Set([...resultEndConditions, ...currentEndConditions]);
       resultTradecraftChecks = new Set([...resultTradecraftChecks, ...currentTradecraftChecks]);
       resultChanges = [...resultChanges, ...currentChanges];
+      resultDuration = Math.max(resultDuration, currentDuration);
     }
   });
 

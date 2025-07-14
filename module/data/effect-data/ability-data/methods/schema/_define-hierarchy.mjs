@@ -8,7 +8,7 @@ const { fields } = foundry.data;
  * @private
  */
 export function _defineHierarchy(schema) {
-  schema.supId = new fields.DocumentIdField({
+  schema.supId = new fields.StringField({
     initial: null,
     nullable: true,
     label: "Super Ability ID",

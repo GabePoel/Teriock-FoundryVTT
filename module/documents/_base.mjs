@@ -13,6 +13,7 @@ import ParentDocumentMixin from "./mixins/parent-mixin.mjs";
  * @property {EmbeddedCollection<string, TeriockEffect>} effects
  * @property {ParentItemTypes} itemTypes
  * @property {TeriockEffect[]} appliedEffects
+ * @property {TeriockEffect[]} temporaryEffects
  * @property {() => Generator<TeriockEffect, void, void>} allApplicableEffects
  * @property {TeriockBaseActorData} system
  * @property {Teriock.ActorType} type
@@ -56,6 +57,7 @@ export class BaseTeriockEffect extends ChildDocumentMixin(ActiveEffect) {}
  *
  * @extends {TokenDocument}
  * @implements {TokenData}
+ * @property {Token} token
  * @property {"TokenDocument"} documentName
  */
 export class BaseTeriockToken extends TokenDocument {}

@@ -17,12 +17,16 @@ export async function createAbility(document, name = null, options = {}) {
   if (name) {
     abilityData.name = name;
   }
+  /** @type {TeriockEffect|null} */
   let sup = null;
+  const supId = document._id;
   let embeddingDocument = document;
   if (document.documentName === "ActiveEffect") {
-    sup = document;
+    sup = /** @type {TeriockEffect} */ document;
     embeddingDocument = document.parent;
+    abilityData.system["supId"] = supId;
   }
+  console.log(abilityData);
   const abilities = /** @type {ActiveEffect[]} */ await embeddingDocument.createEmbeddedDocuments("ActiveEffect", [
     abilityData,
   ]);
@@ -31,18 +35,20 @@ export async function createAbility(document, name = null, options = {}) {
     await ability.system.wikiPull(options);
   }
   if (sup) {
-    await sup.parent.updateEmbeddedDocuments("ActiveEffect", [
+    const updateData = [
       {
         _id: ability._id,
-        "system.supId": sup._id,
+        "system.supId": supId,
         "system.proficient": sup.isProficient,
         "system.fluent": sup.isFluent,
       },
       {
-        _id: sup._id,
-        "system.subIds": sup.system.subIds.concat(ability._id),
+        _id: supId,
+        "system.subIds": foundry.utils.deepClone(sup.system.subIds).concat(ability._id),
       },
-    ]);
+    ];
+    console.log("UPDATE DATA", updateData);
+    await sup.parent.updateEmbeddedDocuments("ActiveEffect", updateData);
   }
   await embeddingDocument.forceUpdate();
   return ability;

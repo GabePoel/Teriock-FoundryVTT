@@ -27,6 +27,7 @@ const tradecrafts = mergeLevel(tradecraftOptions, "*", "tradecrafts");
  */
 export function consequenceRollsField() {
   return new TeriockRecordField(
+    /** @type {typeof StringField} */
     new fields.StringField({
       nullable: true,
     }),
@@ -34,6 +35,7 @@ export function consequenceRollsField() {
       label: "Rolls",
       hint: "The rolls that are made as part of the consequence.",
     },
+    undefined,
   );
 }
 
@@ -51,6 +53,7 @@ export function consequenceRollsField() {
  */
 export function consequenceChangesField() {
   return new TeriockArrayField(
+    /** @type {typeof SchemaField} */
     new fields.SchemaField({
       key: new fields.StringField({ initial: "" }),
       mode: new fields.NumberField({
@@ -90,64 +93,75 @@ export function consequenceChangesField() {
  * const appliesField = appliesField();
  */
 function appliesField() {
-  return new fields.SchemaField({
-    statuses: new fields.SetField(
-      new fields.StringField({
-        choices: CONFIG.TERIOCK.conditions,
-      }),
-      {
-        label: "Conditions",
-        hint: "Conditions applied as part of the ability's ongoing effect. These are not applied as separate conditions, but merged into an ongoing effect.",
-      },
-    ),
-    startStatuses: new fields.SetField(
-      new fields.StringField({
-        choices: CONFIG.TERIOCK.conditions,
-      }),
-      {
-        label: "Apply Conditions",
-        hint: "Conditions that may be immediately applied when the ability is used. They exist independently of the ability.",
-      },
-    ),
-    endStatuses: new fields.SetField(
-      new fields.StringField({
-        choices: CONFIG.TERIOCK.conditions,
-      }),
-      {
-        label: "Remove Conditions",
-        hint: "Conditions that may be immediately removed when the ability is used This only works on conditions that exist independently of the ability.",
-      },
-    ),
-    rolls: consequenceRollsField(),
-    hacks: new fields.SetField(
-      new fields.StringField({
-        choices: {
-          arm: "Arm",
-          leg: "Leg",
-          body: "Body",
-          eye: "Eye",
-          ear: "Ear",
-          mouth: "Mouth",
-          nose: "Nose",
+  return new fields.SchemaField(
+    /** @type {typeof DataField} */ {
+      statuses: new fields.SetField(
+        /** @type {typeof StringField} */
+        new fields.StringField({
+          choices: CONFIG.TERIOCK.conditions,
+        }),
+        {
+          label: "Conditions",
+          hint: "Conditions applied as part of the ability's ongoing effect. These are not applied as separate conditions, but merged into an ongoing effect.",
         },
+      ),
+      startStatuses: new fields.SetField(
+        /** @type {typeof StringField} */
+        new fields.StringField({
+          choices: CONFIG.TERIOCK.conditions,
+        }),
+        {
+          label: "Apply Conditions",
+          hint: "Conditions that may be immediately applied when the ability is used. They exist independently of the ability.",
+        },
+      ),
+      endStatuses: new fields.SetField(
+        /** @type {typeof StringField} */
+        new fields.StringField({
+          choices: CONFIG.TERIOCK.conditions,
+        }),
+        {
+          label: "Remove Conditions",
+          hint: "Conditions that may be immediately removed when the ability is used This only works on conditions that exist independently of the ability.",
+        },
+      ),
+      rolls: consequenceRollsField(),
+      hacks: new fields.SetField(
+        /** @type {typeof StringField} */
+        new fields.StringField({
+          choices: {
+            arm: "Arm",
+            leg: "Leg",
+            body: "Body",
+            eye: "Eye",
+            ear: "Ear",
+            mouth: "Mouth",
+            nose: "Nose",
+          },
+        }),
+        {
+          label: "Hacks",
+          hint: "Types of hack damage that may be applied by the ability.",
+        },
+      ),
+      checks: new fields.SetField(
+        /** @type {typeof StringField} */
+        new fields.StringField({
+          choices: tradecrafts,
+        }),
+        {
+          label: "Tradecraft Checks",
+          hint: "Tradecraft checks that may be made as part of the ability.",
+        },
+      ),
+      duration: new fields.NumberField({
+        hint: "Increase in the duration (in seconds) of an effect made as part of the ability. If this is nonzero, it overrides the default duration.",
+        initial: 0,
+        label: "Duration",
       }),
-      {
-        label: "Hacks",
-        hint: "Types of hack damage that may be applied by the ability.",
-      },
-    ),
-    checks: new fields.SetField(
-      new fields.StringField({
-        choices: tradecrafts,
-      }),
-      {
-        label: "Tradecraft Checks",
-        hint: "Tradecraft checks that may be made as part of the ability.",
-      },
-    ),
-    duration: new fields.NumberField({ initial: 0 }),
-    changes: consequenceChangesField(),
-  });
+      changes: consequenceChangesField(),
+    },
+  );
 }
 
 /**

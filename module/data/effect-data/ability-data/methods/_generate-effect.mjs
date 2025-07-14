@@ -1,3 +1,4 @@
+import { TeriockRoll } from "../../../../documents/_module.mjs";
 import { parseTimeString } from "../../../../helpers/utils.mjs";
 
 /**
@@ -24,6 +25,9 @@ export async function _generateEffect(abilityData, actor, heightenAmount = 0) {
     if (abilityData.applies.proficient.statuses.size > 0) {
       statuses = foundry.utils.deepClone(abilityData.applies.proficient.statuses);
     }
+    if (abilityData.applies.proficient.duration > 0) {
+      seconds = abilityData.applies.proficient.duration;
+    }
   }
   if (abilityData.parent.isFluent) {
     if (abilityData.applies.fluent.changes.length > 0) {
@@ -32,12 +36,18 @@ export async function _generateEffect(abilityData, actor, heightenAmount = 0) {
     if (abilityData.applies.fluent.statuses.size > 0) {
       statuses = foundry.utils.deepClone(abilityData.applies.fluent.statuses);
     }
+    if (abilityData.applies.fluent.duration > 0) {
+      seconds = abilityData.applies.fluent.duration;
+    }
   }
   if (heightenAmount > 0) {
     if (abilityData.applies.heightened.changes.length > 0) {
       const heightenedChanges = foundry.utils.deepClone(abilityData.applies.heightened.changes);
       for (const change of heightenedChanges) {
-        change.value = change.value * heightenAmount;
+        const heightenEvaluateRoll = new TeriockRoll(change.value, actor.getRollData());
+        heightenEvaluateRoll.alter(heightenAmount, 0, { multiplyNumeric: true });
+        await heightenEvaluateRoll.evaluate();
+        change.value = heightenEvaluateRoll.result.toString();
       }
       changes = [...changes, ...heightenedChanges];
     }
@@ -46,10 +56,10 @@ export async function _generateEffect(abilityData, actor, heightenAmount = 0) {
         statuses.add(status);
       }
     }
-    // if (abilityData.applies.heightened.duration > 0) {
-    //   seconds += abilityData.applies.heightened.duration * heightenAmount;
-    //   seconds = Math.round(seconds / abilityData.applies.heightened.duration) *
-    // abilityData.applies.heightened.duration; }
+    if (abilityData.applies.heightened.duration > 0) {
+      seconds += abilityData.applies.heightened.duration * heightenAmount;
+      seconds = Math.round(seconds / abilityData.applies.heightened.duration) * abilityData.applies.heightened.duration;
+    }
   }
 
   let description = await abilityData.parent.buildMessage();
@@ -155,13 +165,9 @@ export function _generateTakes(abilityData, heightenAmount = 0) {
   }
   if (heightenAmount > 0) {
     for (const [key, value] of Object.entries(abilityData.applies.heightened.rolls || {})) {
-      rolls[key] = rolls[key] || "";
-      for (let i = 0; i < heightenAmount; i++) {
-        rolls[key] += `+${value}`;
-        if (rolls[key].trim().startsWith("+")) {
-          rolls[key] = rolls[key].trim().slice(1);
-        }
-      }
+      const rollRoll = new TeriockRoll(value, abilityData.actor.getRollData());
+      rollRoll.alter(heightenAmount, 0, { multiplyNumeric: true });
+      rolls[key] = (rolls[key] ? rolls[key] + " + " : "") + rollRoll.formula;
     }
     for (const hack of abilityData.applies.heightened.hacks || []) {
       hacks.add(hack);

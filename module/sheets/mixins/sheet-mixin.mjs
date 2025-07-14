@@ -688,6 +688,10 @@ export default (Base) => {
       const card = target.closest(".tcard");
       const { id, type, parentId } = card?.dataset ?? {};
 
+      if (type === "noneMacro") {
+        foundry.ui.notifications.warn("Drag a macro onto sheet to assign it.", { console: false });
+      }
+
       if (type === "macro") return await foundry.utils.fromUuid(id);
 
       if (type === "item") return this.document.items.get(id);
