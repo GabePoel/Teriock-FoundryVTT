@@ -85,11 +85,9 @@ export async function _generateAttackRoll(abilityData, useData, options = {}) {
 
   // Handle piercing and properties
   const { diceClass, diceTooltip, unblockable } = getPiercingInfo(abilityData, rollData);
-  console.log("rollData", rollData);
 
   // Build context
   const context = buildRollContext(abilityData, target, buttons, diceClass, diceTooltip, unblockable);
-  console.log(useData.formula);
 
   return new TeriockRoll(useData.formula, rollData, { context, message });
 }

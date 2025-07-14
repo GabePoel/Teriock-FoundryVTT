@@ -26,7 +26,6 @@ export async function createAbility(document, name = null, options = {}) {
     embeddingDocument = document.parent;
     abilityData.system["supId"] = supId;
   }
-  console.log(abilityData);
   const abilities = /** @type {ActiveEffect[]} */ await embeddingDocument.createEmbeddedDocuments("ActiveEffect", [
     abilityData,
   ]);
@@ -47,7 +46,6 @@ export async function createAbility(document, name = null, options = {}) {
         "system.subIds": foundry.utils.deepClone(sup.system.subIds).concat(ability._id),
       },
     ];
-    console.log("UPDATE DATA", updateData);
     await sup.parent.updateEmbeddedDocuments("ActiveEffect", updateData);
   }
   await embeddingDocument.forceUpdate();

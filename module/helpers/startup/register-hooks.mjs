@@ -276,7 +276,6 @@ export default function registerHooks() {
   foundry.helpers.Hooks.on("createActiveEffect", async (document, options, userId) => {
     if (isOwnerAndCurrentUser(document, userId)) {
       if (document.type === "ability" || document.type === "effect") {
-        console.log(document.system.subIds);
         if (document.system.subIds?.length > 0) {
           const subAbilityData = [];
           let subs = document.subs;
@@ -285,7 +284,6 @@ export default function registerHooks() {
           }
           for (const subAbility of subs) {
             const data = foundry.utils.duplicate(subAbility);
-            console.log(data);
             data.system.supId = document._id;
             subAbilityData.push(data);
           }

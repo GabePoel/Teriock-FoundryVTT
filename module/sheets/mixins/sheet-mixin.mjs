@@ -715,7 +715,6 @@ export default (Base) => {
     async _onDragStart(event) {
       const embedded = await this._embeddedFromCard(event.currentTarget);
       const dragData = embedded?.toDragData();
-      console.log("dragData", dragData);
       if (dragData) {
         event.dataTransfer.setData("text/plain", JSON.stringify(dragData));
       }
@@ -738,7 +737,6 @@ export default (Base) => {
      */
     async _onDrop(event) {
       const document = await TextEditor.getDragEventData(event);
-      console.log(document.type, document);
       if (document.type === "ActiveEffect") {
         await this._onDropActiveEffect(event, document);
       } else if (document.type === "Item") {

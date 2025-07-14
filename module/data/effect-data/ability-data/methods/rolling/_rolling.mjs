@@ -123,8 +123,6 @@ export async function _roll(abilityData, options) {
   foundry.documents.ChatMessage.applyRollMode(rollConfig.chatData, game.settings.get("core", "rollMode"));
 
   await foundry.documents.ChatMessage.create(rollConfig.chatData);
-
-  console.log(rollConfig);
 }
 
 /**

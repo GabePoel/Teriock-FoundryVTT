@@ -120,7 +120,5 @@ export async function _parse(equipmentData, rawHTML) {
     "font",
   ].forEach((key) => delete parameters[key]);
 
-  console.log(parameters);
-
   return { system: parameters, img: newImg };
 }

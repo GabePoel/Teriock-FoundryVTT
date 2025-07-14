@@ -596,8 +596,6 @@ function extractChangesFromHTML(html) {
     const mode = el.dataset.mode;
     const value = el.dataset.value;
     const priority = el.dataset.priority;
-    console.log(el);
-    console.log(key, mode, value, priority);
     if (key && mode !== undefined && value !== undefined) {
       changes.push({
         key,
@@ -618,11 +616,9 @@ function extractChangesFromHTML(html) {
  * @private
  */
 function extractDurationFromHTML(html) {
-  console.log("extractDurationFromHTML");
   const tempDiv = document.createElement("div");
   tempDiv.innerHTML = html || "";
   const el = tempDiv.querySelector("span.metadata[data-type='duration']");
-  console.log(el);
   if (!(el instanceof HTMLElement)) return 0;
   return Number(el.dataset.seconds);
 }
