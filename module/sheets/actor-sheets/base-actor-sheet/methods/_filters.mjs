@@ -1,7 +1,7 @@
 /**
  * Applies a binary filter to a value based on filter criteria.
  * Handles boolean and numeric filter values with different logic.
- * @param {boolean|number} filterVal - The filter value to apply.
+ * @param {Teriock.ThreeToggle} filterVal - The filter value to apply.
  * @param {boolean|string|number} actualVal - The actual value to filter.
  * @returns {boolean} True if the value passes the filter, false otherwise.
  */
@@ -80,7 +80,7 @@ export function _filterEquipment(actor, equipment, filters = {}) {
       binaryFilter(filters.identified, e.system.identified) &&
       binaryFilter(filters.consumable, e.system.consumable) &&
       (!filters.powerLevel || e.system.powerLevel === filters.powerLevel) &&
-      (!filters.equipmentClasses || (e.system.equipmentClasses || []).includes(filters.equipmentClasses)) &&
+      (!filters.equipmentClasses || (e.system.equipmentClasses || new Set()).has(filters.equipmentClasses)) &&
       (!filters.weaponFightingStyles || e.system.sb === filters.weaponFightingStyles),
   );
   return equipment;

@@ -47,64 +47,72 @@
     {{#each application.changes as |change i|}}
       <div class="change-box tgrid-item gi4">
         <div class="change-box">
-          <input
-            class="change-box-entry"
-            type="text"
-            data-index="{{i}}"
-            data-application="{{key}}"
-            data-key="key"
-            value="{{change.key}}"
-            {{#if (not ../../editable)}}
-            disabled="true"
-            {{/if}}
-          />
+          <label>
+            <input
+              class="change-box-entry"
+              type="text"
+              data-index="{{i}}"
+              data-application="{{key}}"
+              data-key="key"
+              value="{{change.key}}"
+              {{#if (not ../../editable)}}
+              disabled="disabled"
+              {{/if}}
+            />
+          </label>
         </div>
       </div>
       {{log change}}
       {{log change.mode}}
       <div class="change-box tgrid-item gi3">
-        <select
-          class="change-box-entry"
-          data-index="{{i}}"
-          data-application="{{key}}"
-          data-key="mode"
-          {{#if (not ../../editable)}}
-          disabled="true"
-          {{/if}}
-        >
-          <option value="0" {{#if (eq change.mode 0)}}selected{{/if}}>Custom</option>
-          <option value="1" {{#if (eq change.mode 1)}}selected{{/if}}>Multiply</option>
-          <option value="2" {{#if (eq change.mode 2)}}selected{{/if}}>Add</option>
-          <option value="3" {{#if (eq change.mode 3)}}selected{{/if}}>Downgrade</option>
-          <option value="4" {{#if (eq change.mode 4)}}selected{{/if}}>Upgrade</option>
-          <option value="5" {{#if (eq change.mode 5)}}selected{{/if}}>Override</option>
-        </select>
+        <label>
+          <select
+            class="change-box-entry"
+            data-index="{{i}}"
+            data-application="{{key}}"
+            data-key="mode"
+            {{#if (not ../../editable)}}
+            disabled="disabled"
+            {{/if}}
+          >
+            <option value="0" {{#if (eq change.mode 0)}}selected{{/if}}>Custom</option>
+            <option value="1" {{#if (eq change.mode 1)}}selected{{/if}}>Multiply</option>
+            <option value="2" {{#if (eq change.mode 2)}}selected{{/if}}>Add</option>
+            <option value="3" {{#if (eq change.mode 3)}}selected{{/if}}>Downgrade</option>
+            <option value="4" {{#if (eq change.mode 4)}}selected{{/if}}>Upgrade</option>
+            <option value="5" {{#if (eq change.mode 5)}}selected{{/if}}>Override</option>
+          </select>
+        </label>
       </div>
       <div class="change-box tgrid-item gi2">
-        <input
-          class="change-box-entry"
-          type="text"
-          data-index="{{i}}"
-          data-application="{{key}}"
-          data-key="value"
-          value="{{change.value}}"
-          {{#if (not ../../editable)}}
-          disabled="true"
-          {{/if}}
-        />
+        <label>
+          <input
+            class="change-box-entry"
+            type="text"
+            data-index="{{i}}"
+            data-application="{{key}}"
+            data-key="value"
+            value="{{change.value}}"
+            {{#if (not ../../editable)}}
+            disabled="disabled"
+            {{/if}}
+          />
+        </label>
       </div>
       <div class="change-box tgrid-item gi2">
-        <input
-          class="change-box-entry"
-          type="number"
-          data-index="{{i}}"
-          data-application="{{key}}"
-          data-key="priority"
-          value="{{change.priority}}"
-          {{#if (not ../../editable)}}
-          disabled="true"
-          {{/if}}
-        />
+        <label>
+          <input
+            class="change-box-entry"
+            type="number"
+            data-index="{{i}}"
+            data-application="{{key}}"
+            data-key="priority"
+            value="{{change.priority}}"
+            {{#if (not ../../editable)}}
+            disabled="disabled"
+            {{/if}}
+          />
+        </label>
       </div>
       <div
         class="change-box tgrid-item gi1"

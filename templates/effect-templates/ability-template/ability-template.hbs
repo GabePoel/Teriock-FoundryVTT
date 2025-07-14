@@ -1,5 +1,4 @@
-<div class="{{cssClass}} tsheet-page {{#if system.elderSorcery}}es-container {{elementClass system.elements}}{{/if}}"
-     autocomplete="off">
+<div class="{{cssClass}} tsheet-page {{#if system.elderSorcery}}es-container {{elementClass system.elements}}{{/if}}">
   {{#if (eq tab "overview")}}
     {{#if system.elderSorcery}}
       <div class="es-mask-rotator"></div>
@@ -40,8 +39,7 @@
         {{/if}}
         {{#if (eq system.interaction "feat")}}
           {{> "systems/teriock/templates/effect-templates/ability-template/entries/ab-feat-entries.hbs"}}
-        {{/if}}
-        {{#if (eq system.interaction "block")}}
+        {{else}}
           {{> "systems/teriock/templates/effect-templates/ability-template/entries/ab-block-entries.hbs"}}
         {{/if}}
         {{#if (exists system.heightened)}}
