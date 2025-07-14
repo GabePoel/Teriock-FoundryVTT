@@ -10,7 +10,7 @@
     - [ ] Frozen/transformed/lighted/terrored/burned visual clues
 - [ ] Ability management
     - [ ] Abilities letting you know when they start/end
-    - [ ] Heightened duration scaling
+    - [x] Heightened duration scaling
     - [x] Hack buttons
     - [ ] Easy way to apply boosts
     - [ ] Enricheds for different roll types
