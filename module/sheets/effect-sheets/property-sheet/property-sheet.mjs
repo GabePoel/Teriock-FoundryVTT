@@ -6,7 +6,10 @@ import { propertyContextMenu } from "./connections/_context-menus.mjs";
 /**
  * Property sheet for Teriock system properties.
  * Provides property management with context menus for property types.
+ *
  * @extends {TeriockBaseEffectSheet}
+ * @property {TeriockProperty} document
+ * @property {TeriockProperty} effect
  */
 export default class TeriockPropertySheet extends api.HandlebarsApplicationMixin(TeriockBaseEffectSheet) {
   /**

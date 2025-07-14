@@ -25,6 +25,12 @@ export default class TeriockBaseEffectSheet extends BaseEffectSheet {
     },
   };
 
+  /** @inheritDoc */
+  constructor(...args) {
+    super(...args);
+    this.effect = this.document;
+  }
+
   /**
    * Adds a new change to an effect application.
    *

@@ -34,8 +34,9 @@
 - [x] Ability usage modularization
 - [ ] Take basic abilities off of each individual actors to speed up sorting and make for smaller database
 - [ ] Better compendium building automation
-- [ ] More wiki links in documentation
+- [x] More wiki links in documentation
 - [x] Just some general sprucing around (as always)
+- [x] Complete typing and intellisense
 
 # Core Stuff (done?)
 

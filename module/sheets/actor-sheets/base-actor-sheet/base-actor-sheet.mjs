@@ -15,6 +15,8 @@ import { _sortAbilities, _sortEquipment } from "./methods/_sort.mjs";
  * Base actor sheet for actors.
  * Provides comprehensive character management including abilities, equipment, tradecrafts,
  * and various interactive features like rolling, damage tracking, and condition management.
+ *
+ * @property{TeriockActor} actor
  */
 export default class TeriockBaseActorSheet extends BaseActorSheet {
   /**
@@ -69,22 +71,6 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
       template: "systems/teriock/templates/actor-templates/character-template/character-template.hbs",
       scrollable: [".character-sidebar", ".character-tab-content"],
     },
-  };
-
-  /**
-   * Search result partials for different document types.
-   *
-   * @type {object}
-   * @static
-   */
-  static SEARCH_RESULT_PARTIALS = {
-    ability: "systems/teriock/templates/actor-templates/character-template/results/ch-ability-results.hbs",
-    equipment: "systems/teriock/templates/actor-templates/character-template/results/ch-equipment-results.hbs",
-    fluency: "systems/teriock/templates/actor-templates/character-template/results/ch-fluency-results.hbs",
-    power: "systems/teriock/templates/actor-templates/character-template/results/ch-power-results.hbs",
-    rank: "systems/teriock/templates/actor-templates/character-template/results/ch-rank-results.hbs",
-    resource: "systems/teriock/templates/actor-templates/character-template/results/ch-resource-results.hbs",
-    effect: "systems/teriock/templates/actor-templates/character-template/results/ch-effect-results.hbs",
   };
 
   /**
@@ -784,6 +770,7 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
         e.preventDefault();
         if (!(el instanceof HTMLElement)) return;
         const id = el.dataset.id;
+        /** @type {TeriockRank} */
         const rank = this.actor.items.get(id);
         const die = el.dataset.die;
         if (die === "hit") {

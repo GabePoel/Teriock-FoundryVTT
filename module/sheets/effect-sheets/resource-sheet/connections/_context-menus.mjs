@@ -3,7 +3,7 @@ import { makeIcon } from "../../../../helpers/utils.mjs";
 /**
  * Creates a context menu for selecting function hooks within a resource effect.
  * Generates options for all available function hooks that can be used as callbacks.
- * @param {TeriockEffect} resource - The resource effect to create the context menu for.
+ * @param {TeriockResource} resource - The resource effect to create the context menu for.
  * @returns {Array} Array of context menu options for function hook selection.
  */
 export function callbackContextMenu(resource) {

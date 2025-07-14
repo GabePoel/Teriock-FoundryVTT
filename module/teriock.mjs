@@ -56,10 +56,14 @@ foundry.helpers.Hooks.once("init", function () {
   };
 
   // Register custom core documents
-  CONFIG.Actor.documentClass = documents.TeriockActor;
-  CONFIG.Item.documentClass = documents.TeriockItem;
   CONFIG.ActiveEffect.documentClass = documents.TeriockEffect;
+  CONFIG.Actor.documentClass = documents.TeriockActor;
+  CONFIG.ChatMessage.documentClass = documents.TeriockChatMessage;
+  CONFIG.Item.documentClass = documents.TeriockItem;
+  CONFIG.Macro.documentClass = documents.TeriockMacro;
+  CONFIG.Scene.documentClass = documents.TeriockScene;
   CONFIG.Token.documentClass = documents.TeriockToken;
+  CONFIG.User.documentClass = documents.TeriockUser;
 
   // Data models
   Object.assign(CONFIG.Actor.dataModels, {

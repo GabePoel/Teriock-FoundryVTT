@@ -4,11 +4,10 @@ const { fields } = foundry.data;
  * Mixin that provides child document functionality for embedded documents.
  * Adds proficiency tracking, font customization, and message generation capabilities.
  *
- * @template {import("@common/_types.mjs").Constructor<foundry.abstract.TypeDataModel>} ModelClass
- * @param {ModelClass} Base - The base class to mix in with.
+ * @param {TypeDataModel} Base - The base class to mix in with.
  */
 export default (Base) => {
-  return class ChildDataMixin extends Base {
+  return class ChildData extends Base {
     /**
      * Gets the message rules-parts for displaying the child document in chat.
      * Includes image, name, and font information from the parent document.

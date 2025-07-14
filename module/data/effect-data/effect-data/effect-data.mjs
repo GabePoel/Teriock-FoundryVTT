@@ -97,8 +97,8 @@ export default class TeriockEffectData extends TeriockBaseEffectData {
           hint: "If true, effect expires if its source is deleted or disabled.",
         }),
       }),
-      subIds: new fields.ArrayField(new fields.DocumentIdField()),
-      subUuids: new fields.ArrayField(new fields.DocumentUUIDField()),
+      subIds: new fields.ArrayField(/** @type {typeof DocumentIdField} */ new fields.DocumentIdField()),
+      subUuids: new fields.ArrayField(/** @type {typeof DocumentUUIDField} */ new fields.DocumentUUIDField()),
     });
   }
 

@@ -31,8 +31,8 @@ export default class TeriockCommand {
    *
    * @param {string} id - Unique identifier for the command (e.g., "damage").
    * @param {string} docs - Help string for the command.
-   * @param {Function} callback - Async function to run the command logic.
-   * @param {Teriock.CommandOptions} options - Additional options for the command.
+   * @param {Teriock.CommandCallback} callback - Async function to run the command logic.
+   * @param {Teriock.CommandOptions} [options={}] - Additional options for the command.
    */
   constructor(id, docs, callback, options = {}) {
     this.id = id;
@@ -46,10 +46,10 @@ export default class TeriockCommand {
   /**
    * Execute the command, handling roll options and common checks.
    *
-   * @param {Object} context
+   * @param {object} context
    * @param {string[]} context.args - The arguments from the chat message.
-   * @param {Object} context.chatData - The original chat message data.
-   * @param {Actor[]} context.actors - Targeted actors.
+   * @param {object} context.chatData - The original chat message data.
+   * @param {TeriockActor[]} context.actors - Targeted actors.
    */
   async execute({ args, chatData, actors }) {
     if (this.requiresTarget && (!actors || actors.length === 0)) {

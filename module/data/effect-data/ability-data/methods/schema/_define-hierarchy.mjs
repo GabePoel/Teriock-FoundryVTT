@@ -20,11 +20,11 @@ export function _defineHierarchy(schema) {
     label: "Super Ability UUID",
     hint: "The UUID of the ability or effect that provides this ability, if there is one.",
   });
-  schema.subIds = new fields.ArrayField(new fields.DocumentIdField(), {
+  schema.subIds = new fields.ArrayField(/** @type {typeof DocumentIdField} */ new fields.DocumentIdField(), {
     label: "Sub IDs",
     hint: "The IDs of the abilities that this ability provides, if there are any.",
   });
-  schema.subUuids = new fields.ArrayField(new fields.DocumentUUIDField(), {
+  schema.subUuids = new fields.ArrayField(/** @type {typeof DocumentUUIDField} */ new fields.DocumentUUIDField(), {
     label: "Sub UUIDs",
     hint: "The UUIDs of the abilities that this ability provides, if there are any.",
   });

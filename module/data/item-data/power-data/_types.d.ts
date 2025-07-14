@@ -1,5 +1,6 @@
 import { TeriockBaseItemData } from "../base-item-data/base-item-data.mjs";
 import { TeriockBaseItemSchema } from "../base-item-data/_types";
+import { TeriockPower } from "../../../documents/_documents.mjs";
 
 /** Allowed Power Types */
 type PowerType =
@@ -15,6 +16,8 @@ type PowerType =
   | "other";
 
 export interface TeriockPowerSchema extends TeriockBaseItemSchema {
+  /** Parent */
+  parent: TeriockPower;
   /** Power Type */
   type: PowerType;
   /** Flaws */

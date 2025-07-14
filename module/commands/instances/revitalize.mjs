@@ -23,7 +23,7 @@ export const revitalize = new TeriockCommand(
     }
   },
   {
-    category: "support",
+    category: "#support",
     requiresTarget: true,
   },
 );

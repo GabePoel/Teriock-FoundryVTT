@@ -9,6 +9,8 @@ import { contextMenus } from "./connections/_context-menus.mjs";
  * tag management, and rich text editing for various ability components.
  *
  * @extends {TeriockBaseEffectSheet}
+ * @property {TeriockAbility} document
+ * @property {TeriockAbility} effect
  */
 export default class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(TeriockBaseEffectSheet) {
   /**

@@ -1,9 +1,10 @@
+const { Document } = foundry.abstract;
 import { toCamelCase } from "../../helpers/utils.mjs";
 
 /**
  * Builds effect types and keys from a document's valid effects.
  *
- * @param {ParentDocumentMixin} document - The document to build effect types for.
+ * @param {ParentDocument} document - The document to build effect types for.
  * @returns {BuiltEffectTypes} Each {@link TeriockEffect} this contains, keyed by type, in multiple formats.
  */
 function _buildEffectTypes(document) {
@@ -11,7 +12,8 @@ function _buildEffectTypes(document) {
   const effectTypes = {};
   /** @type ParentEffectKeys */
   const effectKeys = {};
-  for (const effect of document.validEffects) {
+  const effects = document.validEffects;
+  for (const effect of effects) {
     const type = effect.type;
     if (!effectTypes[type]) effectTypes[type] = [];
     if (!effectKeys[type]) effectKeys[type] = new Set();
@@ -24,25 +26,25 @@ function _buildEffectTypes(document) {
 /**
  * Mixin for common functions used across document classes that embed children.
  *
- * @template {import("@common/_types.mjs").Constructor<foundry.abstract.Document>} BaseDocument
+ * @param {DeepPartial<Document>} BaseDocument
  * @implements {ParentDocumentMixinInterface}
- * @param {{new(): ChildDocumentMixin, prototype: ChildDocumentMixin}|BaseDocument} Base
+ * @mixin
  */
-export default (Base) => {
-  return class ParentDocumentMixin extends Base {
+export default (BaseDocument) => {
+  return class ParentDocument extends BaseDocument {
     /**
-     * Gets the list of effects associated with this document.
+     * Gets the list of {@link TeriockEffect} documents associated with this document.
      * Helper method for `prepareDerivedData()` that can be called explicitly.
      *
-     * @type {TeriockEffect[]}
+     * @returns {TeriockEffect[]}
      */
     get validEffects() {
-      return this.effects;
+      return [];
     }
 
     /**
-     * Gets the list of all effects that apply to this document, including those
-     * that are not currently active.
+     * Gets the list of all {@link TeriockEffect} documents that apply to this document.
+     * This includes those that are not currently active.
      *
      * @returns {BuiltEffectTypes}
      */

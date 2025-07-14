@@ -15,6 +15,11 @@ import { _getTargets, _measure } from "./_roll-targeting.mjs";
  * @private
  */
 export async function _roll(abilityData, options) {
+  if (!abilityData.actor) {
+    ui.notifications.error("Abilities must be on an actor to be used.", { console: false });
+    return;
+  }
+
   /** @type {AbilityRollConfig} */
   const rollConfig = {
     useData: {
@@ -93,6 +98,7 @@ export async function _roll(abilityData, options) {
   rollConfig.chatData.buttons = buttons;
 
   if (abilityData.applies.macro) {
+    /** @type {TeriockMacro} */
     const macro = await foundry.utils.fromUuid(abilityData.applies.macro);
     if (macro) {
       macro.execute({

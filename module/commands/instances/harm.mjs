@@ -19,7 +19,7 @@ export const harm = new TeriockCommand(
     });
   },
   {
-    category: "combat",
+    category: "#combat",
     aliases: ["h"],
     requiresTarget: false,
   },

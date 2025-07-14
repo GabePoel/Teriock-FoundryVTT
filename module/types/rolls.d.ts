@@ -8,6 +8,8 @@ export type CommonRollOptions = {
   disadvantage?: boolean;
   /** Chat Message HTML */
   message?: string;
+  /** Success Threshold */
+  threshold?: number;
 };
 
 /**

@@ -1,9 +1,12 @@
 import { TeriockBaseItemData } from "../base-item-data/base-item-data.mjs";
 import { TeriockBaseItemSchema } from "../base-item-data/_types";
+import { TeriockEquipment } from "../../../documents/_documents.mjs";
 
 export interface TeriockEquipmentSchema extends TeriockBaseItemSchema {
   /** Wiki Namespace */
   readonly wikiNamespace: "Equipment";
+  /** Parent */
+  parent: TeriockEquipment;
   /** Is the equipment equipped? */
   equipped: boolean;
   /** Is the equipment glued? */

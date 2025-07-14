@@ -4,8 +4,7 @@ import { smartEvaluateSync } from "../../helpers/utils.mjs";
  * Mixin that provides consumable document functionality.
  * Adds quantity management, automatic consumption, and quantity validation capabilities.
  *
- * @template {import("@common/_types.mjs").Constructor<foundry.abstract.TypeDataModel>} ModelClass
- * @param {ModelClass} Base - The base class to mix in with.
+ * @param {TypeDataModel} Base - The base class to mix in with.
  */
 export default (Base) => {
   return class ConsumableDataMixin extends Base {

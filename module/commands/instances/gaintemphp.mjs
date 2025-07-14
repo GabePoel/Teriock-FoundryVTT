@@ -23,7 +23,7 @@ export const gaintemphp = new TeriockCommand(
   },
   {
     aliases: ["gthp"],
-    category: "support",
+    category: "#support",
     requiresTarget: true,
   },
 );

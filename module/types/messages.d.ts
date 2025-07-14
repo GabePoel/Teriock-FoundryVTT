@@ -51,3 +51,17 @@ export type MessageParts = {
 export type MessageOptions = {
   secret?: boolean;
 };
+
+/**
+ * Describes the origin of a {@link TeriockChatMessage}.
+ */
+export type ChatSpeakerData = {
+  /** The `_id` of the {@link TeriockActor} who generated this message */
+  actor?: string;
+  /** An overridden alias name used instead of the {@link TeriockActor} or {@link TeriockToken} name */
+  alias?: string;
+  /** The `_id` of the {@link TeriockScene} where this message was created */
+  scene?: string;
+  /** The `_id` of the {@link TeriockToken} who generated this message */
+  token?: string;
+};

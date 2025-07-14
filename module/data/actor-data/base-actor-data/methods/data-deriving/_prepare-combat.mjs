@@ -11,6 +11,7 @@ export function _prepareDefenses(actorData) {
   const equipped = equipment.filter((i) => i.system.equipped);
 
   // Find and validate primary blocker
+
   const blocker = actor.items.get(actorData.wielding.blocker.raw);
   if (blocker?.system.equipped) {
     actorData.wielding.blocker.derived = blocker;
@@ -19,11 +20,12 @@ export function _prepareDefenses(actorData) {
   }
 
   // AV, BV, AC, CC
+
   actorData.bv = actorData.wielding.blocker.derived?.system.bv || 0;
   const av = Math.max(...equipped.map((item) => item.system.av || 0), actorData.naturalAv || 0);
   actorData.av = av;
   actorData.hasArmor = equipped.some(
-    (item) => Array.isArray(item.system.equipmentClasses) && item.system.equipmentClasses.includes("armor"),
+    (item) => Array.isArray(item.system.equipmentClasses) && item.system.equipmentClasses.has("armor"),
   );
   let ac = 10 + av;
   if (actorData.hasArmor) ac += actorData.wornAc || 0;

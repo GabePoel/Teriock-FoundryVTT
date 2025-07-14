@@ -31,7 +31,7 @@ export interface TeriockBaseActorDerived {
   snkSave: number;
   /** Strength save value */
   strSave: number;
-  /** Unpresence save value */
+  /** Unused presence save value */
   unpSave: number;
 
   // Presence management

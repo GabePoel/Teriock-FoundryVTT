@@ -1,14 +1,15 @@
+const { Document } = foundry.abstract;
 const { ux } = foundry.applications;
 import { buildMessage } from "../../helpers/messages-builder/message-builder.mjs";
 
 /**
  * Mixin for common functions used across document classes embedded in actors.
  *
- * @template {import("@common/_types.mjs").Constructor<foundry.abstract.Document>} BaseDocument
- * @param {BaseDocument} Base
+ * @param {DeepPartial<Document>} BaseDocument
+ * @mixin
  */
-export default (Base) => {
-  return class ChildDocumentMixin extends Base {
+export default (BaseDocument) => {
+  return class ChildDocument extends BaseDocument {
     /**
      * Checks if the document is fluent.
      *
@@ -85,11 +86,12 @@ export default (Base) => {
     }
 
     /**
-     * Rolls the document, which by default sends a chat message.
+     * Rolls the item, delegating to the system's roll method.
      *
+     * @param {object} options - Options for the roll.
      * @returns {Promise<void>} Promise that resolves when the roll is complete.
      */
-    async roll() {
+    async roll(options) {
       await this.chat();
     }
 
@@ -107,7 +109,7 @@ export default (Base) => {
     /**
      * Duplicates the document within its parent.
      *
-     * @returns {Promise<ChildDocumentMixin>} Promise that resolves to the duplicated document.
+     * @returns {Promise<ChildDocument>} Promise that resolves to the duplicated document.
      */
     async duplicate() {
       const copy = foundry.utils.duplicate(this);

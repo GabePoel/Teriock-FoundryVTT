@@ -6,7 +6,10 @@ import { fieldContextMenu, tradecraftContextMenu } from "./connections/_context-
 /**
  * Fluency sheet for Teriock system fluencies.
  * Provides fluency management with context menus for fields and tradecrafts.
+ *
  * @extends {TeriockBaseEffectSheet}
+ * @property {TeriockFluency} document
+ * @property {TeriockFluency} effect
  */
 export default class TeriockFluencySheet extends api.HandlebarsApplicationMixin(TeriockBaseEffectSheet) {
   /**

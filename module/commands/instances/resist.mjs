@@ -12,7 +12,7 @@ export const resist = new TeriockCommand(
     }
   },
   {
-    category: "utility",
+    category: "#utility",
     requiresTarget: true,
   },
 );

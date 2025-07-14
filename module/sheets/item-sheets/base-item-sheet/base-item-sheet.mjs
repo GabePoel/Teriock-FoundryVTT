@@ -4,6 +4,9 @@ import { BaseItemSheet } from "../../_base.mjs";
 /**
  * Base item sheet for Teriock system items.
  * Provides common functionality for all item sheets.
+ *
+ * @property {TeriockItem} item
+ * @property {TeriockItem} document
  */
 export default class TeriockBaseItemSheet extends BaseItemSheet {
   /**
@@ -78,9 +81,9 @@ export default class TeriockBaseItemSheet extends BaseItemSheet {
     const importBtn = this.element.querySelector(".import-button");
     const chatBtn = this.element.querySelector(".chat-button");
 
-    importBtn?.addEventListener("contextmenu", (event) => {
+    importBtn?.addEventListener("contextmenu", async (event) => {
       event.preventDefault();
-      this.item._bulkWikiPull();
+      await this.item.bulkWikiPull();
     });
 
     chatBtn?.addEventListener("contextmenu", (event) => {

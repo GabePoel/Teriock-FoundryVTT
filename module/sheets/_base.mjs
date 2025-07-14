@@ -7,7 +7,12 @@ import TeriockSheet from "./mixins/sheet-mixin.mjs";
  * @property {TeriockActor} actor
  * @property {TeriockActor} document
  */
-export class BaseActorSheet extends TeriockSheet(ActorSheetV2) {}
+export class BaseActorSheet extends TeriockSheet(ActorSheetV2) {
+  /** @returns {TeriockActor} */
+  get actor() {
+    return /** @type {TeriockActor} */ super.actor;
+  }
+}
 
 /**
  * This class is a hack to get {@link ItemSheetV2} intellisense without warnings for unimplemented methods.
@@ -15,7 +20,17 @@ export class BaseActorSheet extends TeriockSheet(ActorSheetV2) {}
  * @property {TeriockItem} item
  * @property {TeriockItem} document
  */
-export class BaseItemSheet extends TeriockSheet(ItemSheetV2) {}
+export class BaseItemSheet extends TeriockSheet(ItemSheetV2) {
+  /** @returns {TeriockItem} */
+  get item() {
+    return /** @type {TeriockItem} */ super.item;
+  }
+
+  /** @returns {TeriockItem} */
+  get document() {
+    return /** @type {TeriockItem} */ super.document;
+  }
+}
 
 /**
  * This class is a hack to get {@link ActiveEffectConfig} intellisense without warnings for unimplemented methods.

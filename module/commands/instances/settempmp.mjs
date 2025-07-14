@@ -23,7 +23,7 @@ export const settempmp = new TeriockCommand(
   },
   {
     aliases: ["stmp"],
-    category: "support",
+    category: "#support",
     requiresTarget: true,
   },
 );

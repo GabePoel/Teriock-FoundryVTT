@@ -6,7 +6,10 @@ import { callbackContextMenu } from "./connections/_context-menus.mjs";
 /**
  * Resource sheet for Teriock system resources.
  * Provides resource management with context menus for callback functions.
+ *
  * @extends {TeriockBaseEffectSheet}
+ * @property {TeriockResource} document
+ * @property {TeriockResource} effect
  */
 export default class TeriockResourceSheet extends api.HandlebarsApplicationMixin(TeriockBaseEffectSheet) {
   /**

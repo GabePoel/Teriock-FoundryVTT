@@ -36,7 +36,7 @@ export const hack = new TeriockCommand(
     ui.notifications.info(`Applied ${amount} hack(s) to ${bodyPart} on ${actors.length} target(s).`);
   },
   {
-    category: "damage",
+    category: "#damage",
     requiresTarget: true,
   },
 );
@@ -63,7 +63,7 @@ export const unhack = new TeriockCommand(
     ui.notifications.info(`Removed ${amount} hack(s) from ${bodyPart} on ${actors.length} target(s).`);
   },
   {
-    category: "support",
+    category: "#support",
     requiresTarget: true,
   },
 );

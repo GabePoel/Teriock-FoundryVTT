@@ -23,7 +23,7 @@ export default class TeriockEffect extends BaseTeriockEffect {
    * @returns {TeriockActor}
    */
   get actor() {
-    if (this.parent?.documentName === "Actor") {
+    if (this.parent.documentName === "Actor") {
       return this.parent;
     } else {
       return this.parent.actor;
@@ -275,7 +275,7 @@ export default class TeriockEffect extends BaseTeriockEffect {
    * @override
    */
   async duplicate() {
-    const copy = await super.duplicate();
+    const copy = /** @type {TeriockEffect} */ await super.duplicate();
     const sup = copy.sup;
     if (sup) {
       const supSubIds = sup.system.subIds || [];

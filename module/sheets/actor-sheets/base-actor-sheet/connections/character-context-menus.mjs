@@ -1,7 +1,7 @@
 /**
  * Creates a context menu for selecting the primary blocker from equipped items.
  * Filters equipped items with blocking value (bv) and sorts them by bv in descending order.
- * @param {Actor} actor - The actor to create the context menu for.
+ * @param {TeriockActor} actor - The actor to create the context menu for.
  * @param {Array} options - The array to populate with context menu options.
  * @returns {Array} The populated options array with blocker selection items.
  */
@@ -30,7 +30,7 @@ export function primaryBlockerContextMenu(actor, options) {
 /**
  * Creates a context menu for selecting the primary attacker from equipped items.
  * Filters equipped items with damage and provides appropriate icons based on damage value.
- * @param {Actor} actor - The actor to create the context menu for.
+ * @param {TeriockActor} actor - The actor to create the context menu for.
  * @param {Array} options - The array to populate with context menu options.
  * @returns {Array} The populated options array with attacker selection items.
  */
@@ -64,7 +64,7 @@ export function primaryAttackContextMenu(actor, options) {
 /**
  * Creates a context menu for selecting piercing type.
  * Provides options for none, AV0, and UB piercing types.
- * @param {Actor} actor - The actor to create the context menu for.
+ * @param {TeriockActor} actor - The actor to create the context menu for.
  * @returns {Array} Array of context menu options for piercing selection.
  */
 export function piercingContextMenu(actor) {

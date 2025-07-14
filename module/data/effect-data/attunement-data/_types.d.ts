@@ -1,3 +1,4 @@
+import { TeriockAttunement } from "../../../documents/_documents.mjs";
 import { TeriockBaseEffectData } from "../base-effect-data/base-effect-data.mjs";
 
 interface TeriockAttunementSchema {
@@ -9,6 +10,8 @@ interface TeriockAttunementSchema {
   inheritTier: boolean;
   /** Presence tier of the target entity */
   tier: number;
+  /** Parent */
+  parent: TeriockAttunement;
 }
 
 declare module "./attunement-data.mjs" {

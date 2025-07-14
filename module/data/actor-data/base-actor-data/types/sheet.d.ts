@@ -3,59 +3,6 @@ interface DisplayField {
   gapless: boolean;
 }
 
-interface SheetMenus {
-  abilityFilters: boolean;
-  abilityOptions: boolean;
-  abilitySort: boolean;
-  equipmentFilters: boolean;
-  equipmentOptions: boolean;
-  equipmentSort: boolean;
-  fluencyOptions: boolean;
-  resourceOptions: boolean;
-  rankOptions: boolean;
-  powerOptions: boolean;
-  effectOptions: boolean;
-}
-
-interface AbilityFilters {
-  search: string;
-  basic: number;
-  standard: number;
-  skill: number;
-  spell: number;
-  ritual: number;
-  rotator: number;
-  verbal: number;
-  somatic: number;
-  material: number;
-  invoked: number;
-  sustained: number;
-  broken: number;
-  hp: number;
-  mp: number;
-  heightened: number;
-  expansion: number;
-  maneuver: string | null;
-  interaction: string | null;
-  powerSource: string | null;
-  element: string | null;
-  effects: string[];
-}
-
-interface EquipmentFilters {
-  search: string;
-  equipped: number;
-  shattered: number;
-  consumable: number;
-  identified: number;
-  properties: string;
-  materialProperties: string;
-  magicalProperties: string;
-  weaponFightingStyles: string;
-  equipmentClasses: string;
-  powerLevel: string;
-}
-
 interface SheetDisplay {
   ability: DisplayField;
   fluency: DisplayField;
@@ -68,14 +15,6 @@ interface SheetDisplay {
 }
 
 export interface SheetData {
-  activeTab: string;
-  menus: SheetMenus;
-  abilityFilters: AbilityFilters;
-  equipmentFilters: EquipmentFilters;
-  abilitySortOption: string;
-  abilitySortAscending: boolean;
-  equipmentSortOption: string;
-  equipmentSortAscending: boolean;
   display: SheetDisplay;
   notes: string;
   dieBox: {

@@ -1,17 +1,17 @@
 /**
  * Generic sorting function for embedded items with customizable accessors.
  * Sorts items based on a sort key and direction, using custom accessor functions.
- * @param {Array} items - Array of items to sort.
+ * @param {TeriockAbility[]|TeriockEquipment[]} items - Array of items to sort.
  * @param {string} sortKey - The key to sort by.
  * @param {boolean} ascending - Whether to sort in ascending order.
- * @param {object} accessorMap - Map of sort keys to accessor functions.
- * @returns {Array} Sorted array of items.
+ * @param {Record<string, *>} sortMap - Map of sort keys to accessor functions.
+ * @returns {TeriockAbility[]|TeriockEquipment[]} Sorted array of items.
  */
-export function _sortEmbedded(items, sortKey, ascending, accessorMap = {}) {
+export function _sortEmbedded(items, sortKey, ascending, sortMap = {}) {
   if (!items || !Array.isArray(items) || items.length === 0) {
     return [];
   }
-  const accessor = accessorMap[sortKey] ?? ((i) => i.name ?? "");
+  const accessor = sortMap[sortKey] ?? ((i) => i.name ?? "");
   const sorted = [...items];
   sorted.sort((a, b) => {
     const aVal = accessor(a) ?? "";
@@ -24,8 +24,8 @@ export function _sortEmbedded(items, sortKey, ascending, accessorMap = {}) {
 /**
  * Sorts abilities based on actor sheet settings.
  * Uses the actor's ability sort configuration to determine sort criteria.
- * @param {Actor} actor - The actor whose abilities to sort.
- * @returns {Array} Sorted array of abilities.
+ * @param {TeriockActor} actor - The actor whose abilities to sort.
+ * @returns {TeriockAbility[]} Sorted array of abilities.
  */
 export function _sortAbilities(actor) {
   /** @type {TeriockBaseActorSheet} */
@@ -33,12 +33,18 @@ export function _sortAbilities(actor) {
   const abilities = actor.effectTypes.ability;
   const sortKey = sheet.settings.abilitySortOption;
   const ascending = sheet.settings.abilitySortAscending;
+  /** @type {Record<string, *>} */
   const sortMap = {
-    name: (i) => i.name,
-    sourceName: (i) => i.parent?.name ?? "",
-    sourceType: (i) => i.parent?.type ?? "",
-    enabled: (i) => Number(i.disabled),
-    type: (i) => i.system.abilityType ?? "",
+    /** @param {TeriockAbility} a */
+    name: (a) => a.name,
+    /** @param {TeriockAbility} a */
+    sourceName: (a) => a.parent?.name ?? "",
+    /** @param {TeriockAbility} a */
+    sourceType: (a) => a.parent?.type ?? "",
+    /** @param {TeriockAbility} a */
+    enabled: (a) => Number(a.disabled),
+    /** @param {TeriockAbility} a */
+    type: (a) => a.system.abilityType ?? "",
   };
   return _sortEmbedded(abilities, sortKey, ascending, sortMap);
 }
@@ -46,8 +52,8 @@ export function _sortAbilities(actor) {
 /**
  * Sorts equipment based on actor sheet settings.
  * Uses the actor's equipment sort configuration to determine sort criteria.
- * @param {Actor} actor - The actor whose equipment to sort.
- * @returns {Array} Sorted array of equipment.
+ * @param {TeriockActor} actor - The actor whose equipment to sort.
+ * @returns {TeriockEquipment[]} Sorted array of equipment.
  */
 export function _sortEquipment(actor) {
   /** @type {TeriockBaseActorSheet} */
@@ -55,20 +61,34 @@ export function _sortEquipment(actor) {
   const equipment = actor.itemTypes.equipment;
   const sortKey = sheet.settings.equipmentSortOption;
   const ascending = sheet.settings.equipmentSortAscending;
+  /** {Record<string, *>} */
   const sortMap = {
-    name: (i) => i.name,
-    av: (i) => i.system.av ?? 0,
-    bv: (i) => i.system.bv ?? 0,
-    consumable: (i) => Number(i.system.consumable),
-    damage: (i) => i.system.damage ?? 0,
-    identified: (i) => Number(i.system.identified),
-    equipmentType: (i) => i.system.equipmentType ?? "",
-    equipped: (i) => Number(i.system.equipped),
-    minStr: (i) => i.system.minStr ?? 0,
-    powerLevel: (i) => i.system.powerLevel ?? 0,
-    shattered: (i) => Number(i.system.shattered),
-    tier: (i) => i.system.tier.derived ?? 0,
-    weight: (i) => i.system.weight ?? 0,
+    /** @param {TeriockEquipment} e */
+    name: (e) => e.name,
+    /** @param {TeriockEquipment} e */
+    av: (e) => e.system.av ?? 0,
+    /** @param {TeriockEquipment} e */
+    bv: (e) => e.system.bv ?? 0,
+    /** @param {TeriockEquipment} e */
+    consumable: (e) => Number(e.system.consumable),
+    /** @param {TeriockEquipment} e */
+    damage: (e) => e.system.damage ?? 0,
+    /** @param {TeriockEquipment} e */
+    identified: (e) => Number(e.system.identified),
+    /** @param {TeriockEquipment} e */
+    equipmentType: (e) => e.system.equipmentType ?? "",
+    /** @param {TeriockEquipment} e */
+    equipped: (e) => Number(e.system.equipped),
+    /** @param {TeriockEquipment} e */
+    minStr: (e) => e.system.minStr ?? 0,
+    /** @param {TeriockEquipment} e */
+    powerLevel: (e) => e.system.powerLevel ?? 0,
+    /** @param {TeriockEquipment} e */
+    shattered: (e) => Number(e.system.shattered),
+    /** @param {TeriockEquipment} e */
+    tier: (e) => e.system.tier.derived ?? 0,
+    /** @param {TeriockEquipment} e */
+    weight: (e) => e.system.weight ?? 0,
   };
   return _sortEmbedded(equipment, sortKey, ascending, sortMap);
 }

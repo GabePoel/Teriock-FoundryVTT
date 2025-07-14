@@ -23,7 +23,7 @@ export const wither = new TeriockCommand(
     }
   },
   {
-    category: "combat",
+    category: "#combat",
     requiresTarget: true,
   },
 );

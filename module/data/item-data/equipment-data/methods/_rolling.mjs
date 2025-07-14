@@ -80,6 +80,6 @@ async function use(equipmentData, options) {
       }),
     });
   } else {
-    equipmentData.parent.chat();
+    await equipmentData.parent.chat();
   }
 }

@@ -46,7 +46,7 @@ export function createHelpCommand(allCommands) {
       });
     },
     {
-      category: "system",
+      category: "#system",
     },
   );
 }

@@ -1,5 +1,5 @@
-const { utils } = foundry;
-const { ux, api } = foundry.applications;
+const { DragDrop, TextEditor, ContextMenu } = foundry.applications.ux;
+const { DocumentSheetV2, DialogV2 } = foundry.applications.api;
 import connectEmbedded from "../../helpers/connect-embedded.mjs";
 import * as createEffects from "../../helpers/create-effects.mjs";
 import { imageContextMenuOptions } from "../misc-sheets/image-sheet/connections/_context-menus.mjs";
@@ -8,9 +8,9 @@ import { imageContextMenuOptions } from "../misc-sheets/image-sheet/connections/
  * Base sheet mixin for Teriock system applications.
  * Provides common functionality for all Teriock sheets including event handling,
  * drag and drop, context menus, and form management.
- * @template {import("@common/_types.mjs").Constructor<DocumentSheetV2>} BaseSheet
- * @param {BaseSheet} Base - The base application class to mix in with.
- * @returns BaseSheet
+ *
+ * @param {DocumentSheetV2} Base - The base application class to mix in with.
+ * @returns {DocumentSheetV2 & *}
  */
 export default (Base) => {
   return class TeriockSheet extends Base {
@@ -48,7 +48,7 @@ export default (Base) => {
       dragDrop: [{ dragSelector: ".draggable", dropSelector: null }],
     };
 
-    /** @type {ux.DragDrop[]} */
+    /** @type {DragDrop[]} */
     #dragDrop;
 
     /**
@@ -67,7 +67,7 @@ export default (Base) => {
 
     /**
      * Gets the drag and drop handlers for this sheet.
-     * @returns {ux.DragDrop[]} Array of drag and drop handlers.
+     * @returns {DragDrop[]} Array of drag and drop handlers.
      */
     get dragDrop() {
       return this.#dragDrop;
@@ -165,14 +165,17 @@ export default (Base) => {
       const current = foundry.utils.getProperty(this.document, attr);
       const defaultImg = this.document.constructor.getDefaultArtwork?.(this.document.toObject())?.img;
 
-      return /** @type {FilePicker} */ new foundry.applications.apps.FilePicker({
+      /** @type {*} */
+      const options = {
         current,
         type: "image",
         redirectToRoot: defaultImg ? [defaultImg] : [],
         callback: (path) => this.document.update({ [attr]: path }),
         top: this.position.top + 40,
         left: this.position.left + 10,
-      }).browse();
+      };
+
+      return /** @type {FilePicker} */ new foundry.applications.apps.FilePicker(options).browse();
     }
 
     /**
@@ -325,7 +328,7 @@ export default (Base) => {
         ...createOptions(equipmentOptions.magicalProperties),
       ].join("");
 
-      await new api.DialogV2({
+      await new DialogV2({
         window: { title: "Create Property" },
         content: `
           <label for="property-select">Select Property</label>
@@ -363,7 +366,7 @@ export default (Base) => {
       this.editable = this.isEditable && !this._locked;
       connectEmbedded(this.document, this.element, this.editable);
 
-      new ux.ContextMenu(this.element, ".timage", imageContextMenuOptions, {
+      new ContextMenu(this.element, ".timage", imageContextMenuOptions, {
         eventName: "contextmenu",
         jQuery: false,
         fixed: true,
@@ -580,7 +583,7 @@ export default (Base) => {
      * @returns {Promise<string|undefined>} Promise that resolves to the enriched HTML or undefined.
      */
     async _editor(parameter) {
-      return parameter?.length ? await ux.TextEditor.enrichHTML(parameter, { relativeTo: this.document }) : undefined;
+      return parameter?.length ? await TextEditor.enrichHTML(parameter, { relativeTo: this.document }) : undefined;
     }
 
     /**
@@ -661,13 +664,13 @@ export default (Base) => {
     /**
      * Creates a context menu for elements.
      * @param {string} cssClass - The CSS class for elements to attach the menu to.
-     * @param {object} menuItems - The context menu items.
+     * @param {object[]} menuItems - The context menu items.
      * @param {string} eventName - The event name to trigger the menu.
      * @returns {ContextMenu} The created context menu.
      * @private
      */
     _connectContextMenu(cssClass, menuItems, eventName) {
-      return /** @type {ContextMenu} */ new ux.ContextMenu(this.element, cssClass, menuItems, {
+      return /** @type {ContextMenu} */ new ContextMenu(this.element, cssClass, menuItems, {
         eventName,
         jQuery: false,
         fixed: false,
@@ -730,7 +733,7 @@ export default (Base) => {
      * @private
      */
     async _onDrop(event) {
-      const document = await ux.TextEditor.getDragEventData(event);
+      const document = await TextEditor.getDragEventData(event);
       console.log(document.type, document);
       if (document.type === "ActiveEffect") {
         await this._onDropActiveEffect(event, document);
@@ -750,7 +753,9 @@ export default (Base) => {
      * @private
      */
     async _onDropActiveEffect(event, data) {
-      const effect = await getDocumentClass("ActiveEffect").fromDropData(data);
+      /** @type {typeof ClientDocument} */
+      const EffectClass = await getDocumentClass("ActiveEffect");
+      const effect = /** @type {TeriockEffect} */ await EffectClass.fromDropData(data);
       if (!this._canDropEffect(effect)) return false;
 
       await effect.lockHierarchy();
@@ -783,10 +788,12 @@ export default (Base) => {
      * @private
      */
     async _onDropItem(event, data) {
-      const item = await getDocumentClass("Item").fromDropData(data);
+      /** @type {typeof ClientDocument} */
+      const ItemClass = await getDocumentClass("Item");
+      const item = /** @type {TeriockItem} */ await ItemClass.fromDropData(data);
       if (!this._canDropItem(item)) return false;
 
-      const source = await utils.fromUuid(data.uuid);
+      const source = await foundry.utils.fromUuid(data.uuid);
       if (item.parent?.documentName === "Actor" && item.type === "equipment") {
         if (item.parent?.documentName === "Actor" && item.system.consumable) {
           const targetItem = this.document.items.getName(item.name);
@@ -808,7 +815,7 @@ export default (Base) => {
 
     /**
      * Checks if an item can be dropped on this document.
-     * @param {Item} item - The item to check.
+     * @param {TeriockItem} item - The item to check.
      * @returns {boolean} True if the item can be dropped.
      * @private
      */
@@ -844,7 +851,7 @@ export default (Base) => {
 
     /**
      * Creates drag and drop handlers for the sheet.
-     * @returns {Array} Array of configured drag and drop handlers.
+     * @returns {DragDrop[]} Array of configured drag and drop handlers.
      * @private
      */
     #createDragDropHandlers() {
@@ -858,7 +865,7 @@ export default (Base) => {
           dragover: this._onDragOver.bind(this),
           drop: this._onDrop.bind(this),
         };
-        return new ux.DragDrop(config);
+        return new DragDrop(config);
       });
     }
 

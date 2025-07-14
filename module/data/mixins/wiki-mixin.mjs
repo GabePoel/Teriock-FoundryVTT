@@ -4,8 +4,7 @@ import { fetchWikiPageHTML, openWikiPage } from "../../helpers/wiki.mjs";
  * Mixin that provides wiki integration functionality for document data models.
  * Adds wiki page fetching, parsing, and opening capabilities.
  *
- * @template {import("@common/_types.mjs").Constructor<foundry.abstract.TypeDataModel>} ModelClass
- * @param {ModelClass} Base - The base class to mix in with.
+ * @param {TypeDataModel} Base - The base class to mix in with.
  */
 export default (Base) => {
   return class WikiDataMixin extends Base {

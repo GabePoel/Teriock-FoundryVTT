@@ -22,7 +22,7 @@ export const sleep = new TeriockCommand(
     ui.notifications.info(`Applied sleep check with ${damageAmount} damage to ${actors.length} target(s).`);
   },
   {
-    category: "damage",
+    category: "#damage",
     requiresTarget: true,
   },
 );

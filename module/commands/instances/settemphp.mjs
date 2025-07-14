@@ -23,7 +23,7 @@ export const settemphp = new TeriockCommand(
   },
   {
     aliases: ["sthp"],
-    category: "support",
+    category: "#support",
     requiresTarget: true,
   },
 );

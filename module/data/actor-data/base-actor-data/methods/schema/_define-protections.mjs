@@ -29,6 +29,7 @@ import { conditions as conditionsList } from "../../../../../helpers/constants/g
 function protectionField(name) {
   return new fields.SchemaField({
     damageTypes: new fields.SetField(
+      /** @type {typeof StringField} */
       new fields.StringField({
         initial: "",
         label: `Damage Type`,
@@ -39,6 +40,7 @@ function protectionField(name) {
       },
     ),
     drainTypes: new fields.SetField(
+      /** @type {typeof StringField} */
       new fields.StringField({
         initial: "",
         label: `Drain Type`,
@@ -49,6 +51,7 @@ function protectionField(name) {
       },
     ),
     statuses: new fields.SetField(
+      /** @type {typeof StringField} */
       new fields.StringField({
         initial: "",
         label: `Condition`,
@@ -60,6 +63,7 @@ function protectionField(name) {
       },
     ),
     elements: new fields.SetField(
+      /** @type {typeof StringField} */
       new fields.StringField({
         initial: "",
         label: `Element`,
@@ -71,6 +75,7 @@ function protectionField(name) {
       },
     ),
     effects: new fields.SetField(
+      /** @type {typeof StringField} */
       new fields.StringField({
         initial: "",
         label: `Effect`,
@@ -82,6 +87,7 @@ function protectionField(name) {
       },
     ),
     powerSources: new fields.SetField(
+      /** @type {typeof StringField} */
       new fields.StringField({
         initial: "",
         label: `Power Source`,
@@ -93,12 +99,14 @@ function protectionField(name) {
       },
     ),
     abilities: new fields.SetField(
+      /** @type {typeof StringField} */
       new fields.StringField({
         initial: "",
         label: `Ability`,
       }),
     ),
     other: new fields.SetField(
+      /** @type {typeof StringField} */
       new fields.StringField({
         initial: "",
         label: `Other`,

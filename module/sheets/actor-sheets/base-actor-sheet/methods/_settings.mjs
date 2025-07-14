@@ -39,6 +39,9 @@ export const _defaultSheetSettings = {
     powerSource: null,
     element: null,
     effects: null,
+    delivery: null,
+    piercing: null,
+    target: null,
   },
   equipmentFilters: {
     search: "",

@@ -3,7 +3,8 @@ import { makeIcon } from "../../../../helpers/utils.mjs";
 /**
  * Creates a context menu for selecting archetypes within a rank item.
  * Generates options for all available archetypes with appropriate hit and mana dice.
- * @param {TeriockItem} rank - The rank item to create the context menu for.
+ *
+ * @param {TeriockRank} rank - The rank item to create the context menu for.
  * @returns {Array} Array of context menu options for archetype selection.
  */
 export function archetypeContextMenu(rank) {
@@ -28,8 +29,8 @@ export function archetypeContextMenu(rank) {
     const option = {
       name: archetypeName,
       icon: icon,
-      callback: () => {
-        rank.update({
+      callback: async () => {
+        await rank.update({
           system: {
             archetype: archetype,
             className: firstClass,
@@ -62,8 +63,8 @@ export function classContextMenu(rank) {
       const option = {
         name: classes[className].name,
         icon: icon,
-        callback: () => {
-          rank.update({
+        callback: async () => {
+          await rank.update({
             system: {
               className: className,
               archetype: archetype,

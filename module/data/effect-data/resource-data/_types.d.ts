@@ -1,4 +1,5 @@
 import { TeriockBaseEffectData } from "../base-effect-data/base-effect-data.mjs";
+import { TeriockResource } from "../../../documents/_documents.mjs";
 
 interface TeriockResourceSchema extends TeriockBaseEffectSchema {
   /** Is the resource consumable? */
@@ -16,6 +17,8 @@ interface TeriockResourceSchema extends TeriockBaseEffectSchema {
   rollFormula: string;
   /** Function Hook */
   functionHook: string;
+  /** Parent */
+  parent: TeriockResource;
 }
 
 declare module "./resource-data.mjs" {

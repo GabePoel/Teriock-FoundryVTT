@@ -13,8 +13,7 @@ const { api, ux } = foundry.applications;
  */
 export async function _readMagic(equipmentData) {
   if (equipmentData.reference && !equipmentData.identified) {
-    const users = game.users.filter((u) => u.active && u.isGM);
-    let doReadMagic = false;
+    const activeGm = game.users.activeGM;
     const ref = await foundry.utils.fromUuid(equipmentData.reference);
     const referenceName = ref ? ref.name : "Unknown";
     const referenceUuid = ref ? ref.uuid : "Unknown";
@@ -22,13 +21,11 @@ export async function _readMagic(equipmentData) {
     const content = await ux.TextEditor.enrichHTML(
       `<p>Should ${game.user.name} read magic on @UUID[${referenceUuid}]{${referenceName}}?</p>`,
     );
-    for (const user of users) {
-      doReadMagic = await api.DialogV2.query(user, "confirm", {
-        title: "Read Magic",
-        content: content,
-        modal: false,
-      });
-    }
+    const doReadMagic = await api.DialogV2.query(activeGm, "confirm", {
+      title: "Read Magic",
+      content: content,
+      modal: false,
+    });
     if (doReadMagic) {
       if (ref) {
         await equipmentData.parent.update({
@@ -55,8 +52,7 @@ export async function _readMagic(equipmentData) {
  */
 export async function _identify(equipmentData) {
   if (equipmentData.reference && !equipmentData.identified) {
-    const users = game.users.filter((u) => u.active && u.isGM);
-    let doIdentify = false;
+    const activeGm = game.users.activeGM;
     /** @type TeriockItem */
     const ref = await foundry.utils.fromUuid(equipmentData.reference);
     const referenceName = ref ? ref.name : "Unknown";
@@ -65,13 +61,11 @@ export async function _identify(equipmentData) {
     const content = await ux.TextEditor.enrichHTML(
       `<p>Should ${game.user.name} identify @UUID[${referenceUuid}]{${referenceName}}?</p>`,
     );
-    for (const user of users) {
-      doIdentify = await api.DialogV2.query(user, "confirm", {
-        title: "Identify Item",
-        content: content,
-        modal: false,
-      });
-    }
+    const doIdentify = await api.DialogV2.query(activeGm, "confirm", {
+      title: "Identify Item",
+      content: content,
+      modal: false,
+    });
     if (doIdentify) {
       const knownEffectNames = equipmentData.parent.transferredEffects.map((e) => e.name);
       const unknownEffects = ref.transferredEffects.filter((e) => !knownEffectNames.includes(e.name));
@@ -105,7 +99,7 @@ export async function _identify(equipmentData) {
 export async function _unidentify(equipmentData) {
   if (equipmentData.identified) {
     const reference = equipmentData.parent.uuid;
-    const copy = await equipmentData.parent.duplicate();
+    const copy = /** @type {TeriockEquipment} */ await equipmentData.parent.duplicate();
     const name = "Unidentified " + equipmentData.equipmentType;
     const description = "This item has not been identified.";
     const effects = copy.transferredEffects;

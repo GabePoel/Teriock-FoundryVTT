@@ -32,7 +32,7 @@ function currencyField(label) {
  * @property {NumberField} copper - Copper coins (coin)
  * @property {NumberField} silver - Silver coins (coin)
  * @property {NumberField} gold - Gold coins (coin)
- * @property {NumberField} entTearAmber - Ent Tear Ambers (gem)
+ * @property {NumberField} entTearAmber - Ent Tear Amber (gem)
  * @property {NumberField} fireEyeRuby - Fire Eye Rubies (gem)
  * @property {NumberField} pixiePlumAmethyst - Pixie Plum Amethysts (gem)
  * @property {NumberField} snowDiamond - Snow Diamonds (gem)
@@ -51,7 +51,7 @@ export function _defineMoney(schema) {
     copper: currencyField("Copper Coins"),
     silver: currencyField("Silver Coins"),
     gold: currencyField("Gold Coins"),
-    entTearAmber: currencyField("Ent Tear Ambers"),
+    entTearAmber: currencyField("Ent Tear Amber"),
     fireEyeRuby: currencyField("Fire Eye Rubies"),
     pixiePlumAmethyst: currencyField("Pixie Plum Amethysts"),
     snowDiamond: currencyField("Snow Diamonds"),

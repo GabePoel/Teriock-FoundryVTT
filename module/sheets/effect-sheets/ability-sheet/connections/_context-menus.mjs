@@ -24,7 +24,7 @@ function removeAttributeSaveChanges(changes) {
 /**
  * Creates context menus for ability configuration.
  * Provides comprehensive menu options for all ability properties and settings.
- * @param {TeriockEffect} ability - The ability to create context menus for.
+ * @param {TeriockAbility} ability - The ability to create context menus for.
  * @returns {object} Object containing all context menu configurations.
  */
 export function contextMenus(ability) {

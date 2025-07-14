@@ -23,7 +23,7 @@ export const gaintempmp = new TeriockCommand(
   },
   {
     aliases: ["gtmp"],
-    category: "support",
+    category: "#support",
     requiresTarget: true,
   },
 );

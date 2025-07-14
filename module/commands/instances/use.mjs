@@ -18,7 +18,7 @@ export const use = new TeriockCommand(
     }
   },
   {
-    category: "utility",
+    category: "#utility",
     requiresTarget: true,
   },
 );

@@ -54,6 +54,7 @@ export function _defineGeneral(schema) {
     }),
     elderSorceryIncant: new fields.HTMLField({ initial: "" }),
     powerSources: new fields.ArrayField(
+      /** @type {typeof StringField} */
       new fields.StringField({
         choices: abilityOptions.powerSources,
       }),
@@ -88,11 +89,13 @@ export function _defineGeneral(schema) {
       }),
     }),
     targets: new fields.ArrayField(
+      /** @type {typeof StringField} */
       new fields.StringField({
         choices: abilityOptions.targets,
       }),
     ),
     elements: new fields.ArrayField(
+      /** @type {typeof StringField} */
       new fields.StringField({
         choices: abilityOptions.elements,
       }),
@@ -226,6 +229,7 @@ export function _defineGeneral(schema) {
     endCondition: new fields.HTMLField({ initial: "" }),
     requirements: new fields.HTMLField({ initial: "" }),
     effects: new fields.ArrayField(
+      /** @type {typeof StringField} */
       new fields.StringField({
         choices: abilityOptions.effects,
       }),

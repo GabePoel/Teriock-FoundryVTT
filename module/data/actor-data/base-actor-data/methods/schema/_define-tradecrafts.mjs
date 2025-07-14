@@ -26,7 +26,7 @@ function tradecraftField() {
 const tradecrafts = mergeLevel(tradecraftOptions, "*", "tradecrafts");
 
 /**
- * Defines the tradecrafts schema.
+ * Defines the tradecrafts' schema.
  *
  * Relevant wiki pages:
  * - [Tradecrafts](https://wiki.teriock.com/index.php/Core:Tradecrafts)

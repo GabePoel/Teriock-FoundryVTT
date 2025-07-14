@@ -9,7 +9,7 @@ import { _override } from "./_overrides.mjs";
  *
  * @param {TeriockEquipmentData} equipmentData - The equipment data to parse content for.
  * @param {string} rawHTML - The raw HTML content to parse.
- * @returns {Promise<{ changes: object[], system: Partial<TeriockEquipmentData>, img: string }>} Promise that resolves
+ * @returns {Promise<{ system: Partial<TeriockEquipmentData>, img: string }>} Promise that resolves
  *   to the parsed equipment data.
  * @private
  */
@@ -35,6 +35,7 @@ export async function _parse(equipmentData, rawHTML) {
   const getHTML = (s) => q(s)?.innerHTML.trim();
 
   const referenceEquipment = new Item({ name: "Reference Equipment", type: "equipment" });
+  /** @type {Partial<TeriockEquipmentData>} */
   const parameters = foundry.utils.deepClone(referenceEquipment.system).toObject();
 
   // Parse damage
@@ -53,7 +54,7 @@ export async function _parse(equipmentData, rawHTML) {
   parameters.minStr = cleanValue(getValue(".min-str")) ?? parameters.minStr;
 
   // Parse arrays
-  parameters.equipmentClasses = getTextAll(".equipment-class");
+  parameters.equipmentClasses = new Set(getTextAll(".equipment-class"));
   parameters.properties = getTextAll(".property");
 
   // Add piercing property if present
@@ -71,7 +72,7 @@ export async function _parse(equipmentData, rawHTML) {
   // Sort and filter properties/classes
   // parameters.properties = parameters.properties.filter(Boolean).sort((a, b) => a.localeCompare(b));
   parameters.equipmentClasses = parameters.equipmentClasses.filter(Boolean).sort((a, b) => a.localeCompare(b));
-  parameters.equipmentClasses = toCamelCaseList(parameters.equipmentClasses);
+  parameters.equipmentClasses = new Set(toCamelCaseList(Array.from(parameters.equipmentClasses)));
   const candidateProperties = toCamelCaseList(parameters.properties);
 
   // Filter properties by config

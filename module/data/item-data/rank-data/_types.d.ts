@@ -1,10 +1,13 @@
-import { TeriockBaseItemData } from "../base-item-data/base-item-data.mjs";
 import { PolyhedralDie } from "../../../types/rolls";
+import { TeriockBaseItemData } from "../base-item-data/base-item-data.mjs";
 import { TeriockBaseItemSchema } from "../base-item-data/_types";
+import { TeriockRank } from "../../../documents/_documents.mjs";
 
 export interface TeriockRankSchema extends TeriockBaseItemSchema {
   /** Wiki Namespace */
   readonly wikiNamespace: "Class";
+  /** Parent */
+  parent: TeriockRank;
   /** Description */
   description: string;
   /** Flaws */

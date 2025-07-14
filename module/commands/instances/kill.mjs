@@ -22,7 +22,7 @@ export const kill = new TeriockCommand(
     ui.notifications.info(`Applied kill check with ${damageAmount} damage to ${actors.length} target(s).`);
   },
   {
-    category: "damage",
+    category: "#damage",
     requiresTarget: true,
   },
 );

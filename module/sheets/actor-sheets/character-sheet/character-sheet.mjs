@@ -5,7 +5,10 @@ import TeriockBaseActorSheet from "../base-actor-sheet/base-actor-sheet.mjs";
 /**
  * Character sheet for Teriock system characters.
  * Extends the base actor sheet with character-specific functionality and Handlebars template support.
+ *
  * @extends TeriockBaseActorSheet
+ * @property {TeriockCharacter} actor
+ * @property {TeriockCharacter} document
  */
 export default class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(TeriockBaseActorSheet) {
   /**

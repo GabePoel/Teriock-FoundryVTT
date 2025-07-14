@@ -3,7 +3,7 @@ import { makeIcon } from "../../../../helpers/utils.mjs";
 /**
  * Creates a context menu for selecting tradecrafts within a fluency effect.
  * Generates options for all tradecrafts within the current field.
- * @param {TeriockEffect} fluency - The fluency effect to create the context menu for.
+ * @param {TeriockFluency} fluency - The fluency effect to create the context menu for.
  * @returns {Array} Array of context menu options for tradecraft selection.
  */
 export function tradecraftContextMenu(fluency) {
@@ -19,8 +19,8 @@ export function tradecraftContextMenu(fluency) {
       const option = {
         name: tradecraftName,
         icon: icon,
-        callback: () => {
-          fluency.update({
+        callback: async () => {
+          await fluency.update({
             system: {
               field: field,
               tradecraft: tradecraft,
@@ -40,7 +40,7 @@ export function tradecraftContextMenu(fluency) {
 /**
  * Creates a context menu for selecting fields within a fluency effect.
  * Generates options for all available fields and sets the first tradecraft as default.
- * @param {TeriockEffect} fluency - The fluency effect to create the context menu for.
+ * @param {TeriockFluency} fluency - The fluency effect to create the context menu for.
  * @returns {Array} Array of context menu options for field selection.
  */
 export function fieldContextMenu(fluency) {
@@ -54,8 +54,8 @@ export function fieldContextMenu(fluency) {
     const option = {
       name: fieldName,
       icon: icon,
-      callback: () => {
-        fluency.update({
+      callback: async () => {
+        await fluency.update({
           system: {
             field: field,
             tradecraft: firstTradecraft,

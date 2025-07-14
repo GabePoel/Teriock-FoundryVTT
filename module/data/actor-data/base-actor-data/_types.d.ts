@@ -1,4 +1,4 @@
-import TeriockActor from "../../../documents/actor.mjs";
+import { TeriockActor } from "../../../documents/_module.mjs";
 import { TeriockBaseActorDefault } from "./types/default";
 import { TeriockBaseActorDerived } from "./types/derived";
 

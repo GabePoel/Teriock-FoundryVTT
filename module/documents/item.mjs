@@ -11,8 +11,7 @@ export default class TeriockItem extends BaseTeriockItem {
   /**
    * Gets the valid effects for this item.
    *
-   * @returns {ActiveEffect[]} Array of transferred effects.
-   * @inheritdoc
+   * @returns {TeriockEffect[]} Array of transferred effects.
    */
   get validEffects() {
     return this.transferredEffects;
@@ -89,17 +88,21 @@ export default class TeriockItem extends BaseTeriockItem {
         },
       },
     });
-    const pages = await fetchCategoryMembers(toPull);
-    /** @type {object} */
-    const progress = ui.notifications.info(`Pulling Category:${toPull} from wiki.`, { progress: true });
-    let pct = 0;
-    for (const page of pages) {
-      progress.update({ pct: pct, message: `Pulling ${page.title} from wiki.` });
-      if (page.title.startsWith("Ability:")) {
-        await createAbility(this, page.title.replace(/^Ability:/, ""), { notify: false });
+    if (pullType === "categories") {
+      const pages = await fetchCategoryMembers(toPull);
+      /** @type {object} */
+      const progress = ui.notifications.info(`Pulling Category:${toPull} from wiki.`, { progress: true });
+      let pct = 0;
+      for (const page of pages) {
+        progress.update({ pct: pct, message: `Pulling ${page.title} from wiki.` });
+        if (page.title.startsWith("Ability:")) {
+          await createAbility(this, page.title.replace(/^Ability:/, ""), { notify: false });
+        }
+        pct += 1 / pages.length;
+        progress.update({ pct: pct, message: `Pulling ${page.title} from wiki.` });
       }
-      pct += 1 / pages.length;
-      progress.update({ pct: pct, message: `Pulling ${page.title} from wiki.` });
+    } else {
+      await createAbility(this, toPull.replace(/^Ability:/, ""));
     }
   }
 
@@ -107,9 +110,8 @@ export default class TeriockItem extends BaseTeriockItem {
    * Initiates a bulk wiki pull operation for supported item types.
    *
    * @returns {Promise<void>} Promise that resolves when the bulk pull dialog is complete.
-   * @private
    */
-  async _bulkWikiPull() {
+  async bulkWikiPull() {
     if (["ability", "equipment", "rank", "power"].includes(this.type)) {
       const dialog = new api.DialogV2({
         window: { title: "Bulk Wiki Pull" },
@@ -126,7 +128,10 @@ export default class TeriockItem extends BaseTeriockItem {
             default: false,
           },
         ],
-        submit: async (result) => this._bulkWikiPullHelper(result),
+        submit: async (result) => {
+          await dialog.close();
+          await this._bulkWikiPullHelper(result);
+        },
       });
       await dialog.render(true);
     }

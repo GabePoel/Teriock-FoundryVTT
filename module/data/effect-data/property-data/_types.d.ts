@@ -1,4 +1,5 @@
 import { TeriockBaseEffectData } from "../base-effect-data/base-effect-data.mjs";
+import { TeriockProperty } from "../../../documents/_documents.mjs";
 
 interface TeriockPropertySchema extends TeriockBaseEffectSchema {
   /** Wiki Namespace */
@@ -7,6 +8,8 @@ interface TeriockPropertySchema extends TeriockBaseEffectSchema {
   propertyType: string;
   /** Damage Type */
   damageType: string;
+  /** Parent */
+  parent: TeriockProperty;
 }
 
 declare module "./property-data.mjs" {

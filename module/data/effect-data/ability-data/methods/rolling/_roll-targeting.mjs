@@ -33,7 +33,8 @@ export function tokenFromTarget(target) {
  * @private
  */
 export function _getTargets(abilityData) {
-  let targets = Array.from(game.user.targets);
+  const user = /** @type {TeriockUser|null} */ game.user;
+  let targets = Array.from(user?.targets);
   const targetsSelf = abilityData.targets?.length === 1 && abilityData.targets[0] === "self";
   const includesSelf = Array(abilityData.targets)?.includes("self");
 
@@ -110,7 +111,7 @@ export async function _measure(abilityData) {
           y: y + (token.height * canvas.scene.grid.sizeY) / 2,
           distance: radius,
         };
-        const isEthereal = token.hasStatusEffect("ethereal");
+        const isEthereal = token?.hasStatusEffect("ethereal");
         /** @type {MeasuredTemplateDocument} template */
         const template = await MeasuredTemplateDocument.create(templateData, { parent: canvas.scene });
         if (autoTarget) {

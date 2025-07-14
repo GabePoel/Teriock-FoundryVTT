@@ -8,7 +8,10 @@ import { fontContextMenu, powerLevelContextMenu } from "./connections/_context-m
  * Equipment sheet for Teriock system equipment.
  * Provides comprehensive equipment management including state toggles, context menus,
  * tag management, and rich text editing for equipment components.
+ *
  * @extends {TeriockBaseItemSheet}
+ * @property {TeriockEquipment} document
+ * @property {TeriockEquipment} item
  */
 export default class TeriockEquipmentSheet extends HandlebarsApplicationMixin(TeriockBaseItemSheet) {
   /**
@@ -46,7 +49,7 @@ export default class TeriockEquipmentSheet extends HandlebarsApplicationMixin(Te
    * @static
    */
   static async _toggleEquipped() {
-    this.document.system.toggleEquipped();
+    await this.document.system.toggleEquipped();
   }
 
   /**
@@ -55,7 +58,7 @@ export default class TeriockEquipmentSheet extends HandlebarsApplicationMixin(Te
    * @static
    */
   static async _toggleShattered() {
-    this.document.system.toggleShattered();
+    await this.document.system.toggleShattered();
   }
 
   /**
@@ -64,7 +67,7 @@ export default class TeriockEquipmentSheet extends HandlebarsApplicationMixin(Te
    * @static
    */
   static async _toggleDampened() {
-    this.document.system.toggleDampened();
+    await this.document.system.toggleDampened();
   }
 
   /**

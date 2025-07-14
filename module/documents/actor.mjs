@@ -7,10 +7,9 @@ import TeriockRoll from "./roll.mjs";
  */
 export default class TeriockActor extends BaseTeriockActor {
   /**
-   * Gets all valid effects that apply to this actor.
+   * Gets the valid effects for this actor.
    *
-   * @returns {ActiveEffect[]} Array of all applicable effects.
-   * @inheritdoc
+   * @returns {TeriockEffect[]} Array of transferred effects.
    */
   get validEffects() {
     return Array.from(this.allApplicableEffects());
@@ -19,7 +18,7 @@ export default class TeriockActor extends BaseTeriockActor {
   /**
    * Gets effects that expire based on conditions.
    *
-   * @returns {ActiveEffect[]} Array of condition expiration effects.
+   * @returns {TeriockEffect[]} Array of condition expiration effects.
    */
   get conditionExpirationEffects() {
     return this.effectTypes.effect?.filter((effect) => effect.system.conditionExpiration) || [];
@@ -28,7 +27,7 @@ export default class TeriockActor extends BaseTeriockActor {
   /**
    * Gets effects that expire based on movement.
    *
-   * @returns {ActiveEffect[]} Array of movement expiration effects.
+   * @returns {TeriockEffect[]} Array of movement expiration effects.
    */
   get movementExpirationEffects() {
     return this.effectTypes.effect?.filter((effect) => effect.system.movementExpiration) || [];
@@ -37,7 +36,7 @@ export default class TeriockActor extends BaseTeriockActor {
   /**
    * Gets effects that expire at dawn.
    *
-   * @returns {ActiveEffect[]} Array of dawn expiration effects.
+   * @returns {TeriockEffect[]} Array of dawn expiration effects.
    */
   get dawnExpirationEffects() {
     return this.effectTypes.effect?.filter((effect) => effect.system.dawnExpiration) || [];
@@ -46,7 +45,7 @@ export default class TeriockActor extends BaseTeriockActor {
   /**
    * Gets effects that expire when sustained abilities end.
    *
-   * @returns {ActiveEffect[]} Array of sustained expiration effects.
+   * @returns {TeriockEffect[]} Array of sustained expiration effects.
    */
   get sustainedExpirationEffects() {
     return this.effectTypes.effect?.filter((effect) => effect.system.sustainedExpiration) || [];

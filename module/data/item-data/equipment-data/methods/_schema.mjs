@@ -64,7 +64,7 @@ export function _defineSchema() {
       initial: "0",
       label: "Two-Handed Damage",
     }),
-    damageTypes: new fields.SetField(new fields.StringField()),
+    damageTypes: new fields.SetField(/** @type {typeof StringField} **/ new fields.StringField()),
     weight: new fields.NumberField({
       initial: 0,
       integer: true,
@@ -84,6 +84,7 @@ export function _defineSchema() {
       min: 0,
     }),
     equipmentClasses: new fields.SetField(
+      /** @type {typeof StringField} **/
       new fields.StringField({
         choices: equipmentOptions.equipmentClasses,
       }),

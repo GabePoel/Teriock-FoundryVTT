@@ -12,7 +12,7 @@ export const endcon = new TeriockCommand(
     }
   },
   {
-    category: "utility",
+    category: "#utility",
     requiresTarget: true,
   },
 );

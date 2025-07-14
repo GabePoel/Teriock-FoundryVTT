@@ -23,7 +23,7 @@ export const heal = new TeriockCommand(
     }
   },
   {
-    category: "support",
+    category: "#support",
     requiresTarget: true,
   },
 );

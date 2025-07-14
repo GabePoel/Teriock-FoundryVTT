@@ -1,7 +1,7 @@
-import type TeriockActor from "../../../../documents/actor.mjs";
+import { TeriockActor } from "../../../../documents/_module.mjs";
 import { AttributeData, BarData, HackData } from "./stats";
 import { ProtectionData } from "./protections";
-import { TeriockEquipment } from "../../../../types/documents";
+import { TeriockEquipment } from "../../../../documents/_documents.mjs";
 import { TradecraftData } from "./tradecrafts";
 
 /** The types of hacks that could be applied. */
@@ -99,7 +99,7 @@ export interface TeriockBaseActorDefault {
     silver: number;
     /** Gold coins */
     gold: number;
-    /** Ent tear ambers */
+    /** Ent tear amber */
     entTearAmber: number;
     /** Fire eye rubies */
     fireEyeRuby: number;

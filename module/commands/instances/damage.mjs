@@ -23,7 +23,7 @@ export const damage = new TeriockCommand(
     }
   },
   {
-    category: "combat",
+    category: "#combat",
     requiresTarget: true,
   },
 );
