@@ -1,4 +1,4 @@
-import TeriockHarmRoll from "../../../../documents/harm.mjs";
+import TeriockHarmRoll from "../../../../documents/harm-roll.mjs";
 
 /**
  * Initiates an equipment roll with the specified options.

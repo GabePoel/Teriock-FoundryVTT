@@ -1,5 +1,3 @@
-import { ThreeToggle } from "../../../../types/ui";
-
 /**
  * Actor sheet display settings.
  */
@@ -24,9 +22,9 @@ export interface BaseActorSheetSettings {
     fluencyOptions: boolean;
     /** Show resource options menu. */
     resourceOptions: boolean;
-    /** Show rank options menu. */
+    /** Show rank options' menu. */
     rankOptions: boolean;
-    /** Show power options menu. */
+    /** Show power options' menu. */
     powerOptions: boolean;
     /** Show effect options menu. */
     effectOptions: boolean;
@@ -65,37 +63,37 @@ export interface AbilityFilters {
   /** Currently applied search term. */
   search: string;
   /** Show, hide, or don't filter based on if basic. */
-  basic: ThreeToggle;
+  basic: Teriock.ThreeToggle;
   /** Show, hide, or don't filter based on if standard. */
-  standard: ThreeToggle;
+  standard: Teriock.ThreeToggle;
   /** Show, hide, or don't filter based on if a skill. */
-  skill: ThreeToggle;
+  skill: Teriock.ThreeToggle;
   /** Show, hide, or don't filter based on if a spell. */
-  spell: ThreeToggle;
+  spell: Teriock.ThreeToggle;
   /** Show, hide, or don't filter based on if a ritual. */
-  ritual: ThreeToggle;
+  ritual: Teriock.ThreeToggle;
   /** Show, hide, or don't filter based on if a rotator. */
-  rotator: ThreeToggle;
+  rotator: Teriock.ThreeToggle;
   /** Show, hide, or don't filter based on if verbal cost. */
-  verbal: ThreeToggle;
+  verbal: Teriock.ThreeToggle;
   /** Show, hide, or don't filter based on if somatic cost. */
-  somatic: ThreeToggle;
+  somatic: Teriock.ThreeToggle;
   /** Show, hide, or don't filter based on if material cost. */
-  material: ThreeToggle;
+  material: Teriock.ThreeToggle;
   /** Show, hide, or don't filter based on if invoked. */
-  invoked: ThreeToggle;
+  invoked: Teriock.ThreeToggle;
   /** Show, hide, or don't filter based on if sustained. */
-  sustained: ThreeToggle;
+  sustained: Teriock.ThreeToggle;
   /** Show, hide, or don't filter based on if break cost. */
-  broken: ThreeToggle;
+  broken: Teriock.ThreeToggle;
   /** Show, hide, or don't filter based on if HP cost. */
-  hp: ThreeToggle;
+  hp: Teriock.ThreeToggle;
   /** Show, hide, or don't filter based on if MP cost. */
-  mp: ThreeToggle;
+  mp: Teriock.ThreeToggle;
   /** Show, hide, or don't filter based on if heightenable. */
-  heightened: ThreeToggle;
+  heightened: Teriock.ThreeToggle;
   /** Show, hide, or don't filter based on if expansion. */
-  expansion: ThreeToggle;
+  expansion: Teriock.ThreeToggle;
   /** If filter is applied, which maneuver is displayed. */
   maneuver: string | null;
   /** If filter is applied, which interaction is displayed. */
@@ -121,13 +119,13 @@ export interface EquipmentFilters {
   /** Currently applied search term. */
   search: string;
   /** Show, hide, or don't filter based on if equipped. */
-  equipped: ThreeToggle;
+  equipped: Teriock.ThreeToggle;
   /** Show, hide, or don't filter based on if shattered. */
-  shattered: ThreeToggle;
+  shattered: Teriock.ThreeToggle;
   /** Show, hide, or don't filter based on if consumable. */
-  consumable: ThreeToggle;
+  consumable: Teriock.ThreeToggle;
   /** Show, hide, or don't filter based on if identified. */
-  identified: ThreeToggle;
+  identified: Teriock.ThreeToggle;
   /** If filter is applied, which property is displayed. */
   properties: string | null;
   /** If filter is applied, which material property is displayed. */

@@ -1,4 +1,3 @@
-import { PolyhedralDie } from "../../../types/rolls";
 import { TeriockBaseItemData } from "../base-item-data/base-item-data.mjs";
 import { TeriockBaseItemSchema } from "../base-item-data/_types";
 import { TeriockRank } from "../../../documents/_documents.mjs";
@@ -23,9 +22,9 @@ export interface TeriockRankSchema extends TeriockBaseItemSchema {
   /** Is the rank's mana die spent? */
   manaDieSpent: boolean;
   /** Hit Die */
-  hitDie: PolyhedralDie;
+  hitDie: Teriock.PolyhedralDie;
   /** Mana Die */
-  manaDie: PolyhedralDie;
+  manaDie: Teriock.PolyhedralDie;
   /** Hit Points (rolled from Hit Die) */
   hp: number;
   /** Mana Points (rolled from Mana Die) */
