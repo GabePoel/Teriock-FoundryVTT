@@ -300,6 +300,68 @@ export function contextMenus(ability) {
           }),
       },
     ],
+    goldCost: [
+      {
+        name: "No Gold Cost",
+        icon: CONFIG.TERIOCK.icons.remove,
+        callback: () =>
+          ability.update({
+            "system.costs.gp": {
+              type: "none",
+              value: {
+                static: 0,
+                formula: "",
+                variable: "",
+              },
+            },
+          }),
+      },
+      {
+        name: "Static Cost",
+        icon: CONFIG.TERIOCK.icons.numerical,
+        callback: () =>
+          ability.update({
+            "system.costs.gp": {
+              type: "static",
+              value: {
+                static: 50,
+                formula: "",
+                variable: "",
+              },
+            },
+          }),
+      },
+      {
+        name: "Formula Cost",
+        icon: CONFIG.TERIOCK.icons.formula,
+        callback: () =>
+          ability.update({
+            "system.costs.gp": {
+              type: "formula",
+              value: {
+                static: 0,
+                formula: "1d100",
+                variable: "",
+              },
+            },
+          }),
+      },
+      {
+        name: "Variable Cost",
+        icon: CONFIG.TERIOCK.icons.variable,
+        callback: () =>
+          ability.update({
+            "system.costs.gp": {
+              type: "variable",
+              value: {
+                static: 0,
+                formula: "",
+                variable: "<p>Enter cost here.</p>",
+              },
+            },
+          }),
+      },
+    ],
     breakCost: [
       {
         name: "No Break Cost",

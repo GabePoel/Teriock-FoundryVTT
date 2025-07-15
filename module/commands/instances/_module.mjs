@@ -9,6 +9,7 @@ import { harm } from "./harm.mjs";
 import { heal } from "./heal.mjs";
 import { createHelpCommand } from "./help.mjs";
 import { kill } from "./kill.mjs";
+import { pay } from "./pay.mjs";
 import { resist } from "./resist.mjs";
 import { revitalize } from "./revitalize.mjs";
 import { settemphp } from "./settemphp.mjs";
@@ -29,6 +30,7 @@ export {
   harm,
   heal,
   kill,
+  pay,
   resist,
   revitalize,
   settemphp,

@@ -1,14 +1,14 @@
 export const currencyOptions = {
-  // copper: {
-  //   name: 'Copper',
-  //   value: 0.01,
-  //   weight: 0.02,
-  // },
-  // silver: {
-  //   name: 'Silver',
-  //   value: 0.1,
-  //   weight: 0.02,
-  // },
+  copper: {
+    name: 'Copper',
+    value: 0.01,
+    weight: 0.02,
+  },
+  silver: {
+    name: 'Silver',
+    value: 0.1,
+    weight: 0.02,
+  },
   gold: {
     name: "Gold",
     value: 1,

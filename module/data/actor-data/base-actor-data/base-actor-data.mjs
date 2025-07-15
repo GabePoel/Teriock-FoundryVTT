@@ -21,7 +21,7 @@ export default class TeriockBaseActorData extends TypeDataModel {
    * @returns {object} The metadata object.
    */
   static get metadata() {
-    return {};
+    return foundry.utils.mergeObject({}, { type: "base" });
   }
 
   /**
@@ -206,6 +206,16 @@ export default class TeriockBaseActorData extends TypeDataModel {
    */
   async takeKill(amount) {
     await numericals._takeKill(this, amount);
+  }
+
+  /**
+   * Actor pays money.
+   *
+   * @param {number} amount - The amount of gold-equivalent money to pay.
+   * @param {"exact" | "greedy"} mode - Exact change or closest denomination, rounded up.
+   */
+  async takePay(amount, mode = "greedy") {
+    await numericals._takePay(this, amount, mode);
   }
 
   /**

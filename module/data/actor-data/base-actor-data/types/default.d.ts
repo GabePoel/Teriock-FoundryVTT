@@ -115,6 +115,8 @@ export interface TeriockBaseActorDefault {
     magusQuartz: number;
     /** Heartstone rubies */
     heartstoneRuby: number;
+    /** Debt */
+    debt: number;
     /** Total money in gold */
     total: number;
   };

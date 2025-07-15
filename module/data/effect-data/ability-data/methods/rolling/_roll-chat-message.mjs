@@ -22,6 +22,7 @@ const BUTTON_CONFIGS = {
   gainTempMp: { label: "Roll Temp MP", icon: "fas fa-brain", action: "takeGainTempMp" },
   sleep: { label: "Roll Sleep", icon: "fas fa-bed", action: "takeSleep" },
   kill: { label: "Roll Kill", icon: "fas fa-skull", action: "takeKill" },
+  pay: { label: "Roll Pay", icon: "fas fa-coin", action: "takePay" },
   awaken: { label: "Awaken", icon: "fas fa-sunrise", action: "takeAwaken" },
   revive: { label: "Revive", icon: "fas fa-heart-pulse", action: "takeRevive" },
   arm: { label: "Hack Arm", icon: "fas fa-hand", action: "takeHack", data: "arm" },
@@ -141,11 +142,12 @@ export async function _buildButtons(rollConfig) {
  * @returns {HTMLElement|null} The summary bar box element or null if no summary needed.
  * @private
  */
-export function _createSummaryBarBox({ heightened, mpSpent, hpSpent, shouldBottomBar }) {
+export function _createSummaryBarBox({ heightened, mpSpent, hpSpent, gpSpent, shouldBottomBar }) {
   const labels = [];
   if (heightened > 0) labels.push(`Heightened ${heightened} Time${heightened === 1 ? "" : "s"}`);
   if (mpSpent > 0) labels.push(`${mpSpent} MP Spent`);
   if (hpSpent > 0) labels.push(`${hpSpent} HP Spent`);
+  if (gpSpent > 0) labels.push(`${gpSpent} ₲ Spent`);
   if (labels.length === 0) return null;
 
   const messageElement = document.createElement("div");

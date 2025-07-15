@@ -1,3 +1,4 @@
+// @ts-ignore
 import type { TeriockActor } from "../documents/_module.mjs";
 
 /**
@@ -51,13 +52,20 @@ export type CommandCallbackContext = {
 export type CommandCallback = (context: CommandCallbackContext) => Promise<void>;
 
 /**
+ * Valid command categories.
+ */
+export type CommandCategory = "#combat" | "#damage" | "#support" | "utility";
+
+
+/**
  * Options for creating a TeriockCommand
  */
 export type CommandOptions = {
   /** Alternative names for the command */
   aliases?: string[];
   /** Category for organizing commands */
-  category?: string;
+  category?: CommandCategory;
   /** Whether the command requires at least one targeted token */
   requiresTarget?: boolean;
 };
+

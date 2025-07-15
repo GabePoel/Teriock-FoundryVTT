@@ -4,12 +4,13 @@ const { fields } = foundry.data;
  * Creates a currency field definition for tracking different types of money.
  *
  * @param {string} label - The display label for this currency type
+ * @param {boolean} [integer] - If value must be an integer.
  * @returns {NumberField} A number field for tracking currency amounts
  */
-function currencyField(label) {
+function currencyField(label, integer = true) {
   return new fields.NumberField({
     initial: 0,
-    integer: true,
+    integer: integer,
     min: 0,
     label: label,
   });
@@ -40,6 +41,7 @@ function currencyField(label) {
  * @property {NumberField} moonOpal - Moon Opals (gem)
  * @property {NumberField} magusQuartz - Magus Quartz (gem)
  * @property {NumberField} heartstoneRuby - Heartstone Rubies (gem)
+ * @property {NumberField} debt - Debt (no weight)
  * @property {NumberField} total - Total money value (calculated field)
  *
  * @typedef {Object} MoneySchema
@@ -59,12 +61,19 @@ export function _defineMoney(schema) {
     moonOpal: currencyField("Moon Opals"),
     magusQuartz: currencyField("Magus Quartz"),
     heartstoneRuby: currencyField("Heartstone Rubies"),
-    total: currencyField("Total Money"),
+    debt: currencyField("Debt", false),
+    total: currencyField("Total Money", false),
+  });
+  schema.interestRate = new fields.NumberField({
+    initial: 1,
+    label: "Interest Rate",
+    integer: false,
   });
   schema.moneyWeight = new fields.NumberField({
     initial: 0,
     label: "Money Weight",
     min: 0,
+    integer: false,
   });
   return schema;
 }

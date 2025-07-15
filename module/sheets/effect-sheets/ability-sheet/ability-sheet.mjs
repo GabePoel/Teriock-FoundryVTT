@@ -107,6 +107,7 @@ export default class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(
     const editors = {
       manaCost: system.costs.mp.value.variable,
       hitCost: system.costs.hp.value.variable,
+      goldCost: system.costs.gp.value.variable,
       materialCost: system.costs.materialCost,
       trigger: system.trigger,
       baseOverview: system.overview.base,
@@ -215,6 +216,7 @@ export default class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(
       [".target-box", cm.targets, "click"],
       [".mana-cost-box", cm.manaCost, "contextmenu"],
       [".hit-cost-box", cm.hitCost, "contextmenu"],
+      [".gold-cost-box", cm.goldCost, "contextmenu"],
       [".break-cost-box", cm.breakCost, "contextmenu"],
       [".expansion-box", cm.expansion, "click"],
       [".expansion-box-detonate", cm.expansionSaveAttribute, "contextmenu"],
@@ -298,6 +300,16 @@ export default class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(
           value: {
             static: 1,
             formula: "",
+            variable: "",
+          },
+        },
+      },
+      ".ab-gold-cost-button": {
+        "system.costs.gp": {
+          type: "formula",
+          value: {
+            static: 0,
+            formula: "1d100",
             variable: "",
           },
         },

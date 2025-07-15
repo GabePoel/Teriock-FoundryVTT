@@ -37,6 +37,7 @@ export interface ConsequenceRolls {
   gainTempMp: string[];
   sleep: string[];
   kill: string[];
+  pay: string[];
   other: string[];
 }
 

@@ -5,9 +5,11 @@
       <div class="money-panels tgrid g3">
         {{#each config.currencyOptions as |currency id|}}
           <div class="money-panel tgrid g4">
-            <input type="number" class="tgrid-item gi1 money-panel-input tgrid-item tcenter"
-                   data-action="updateCurrency" name="system.money.{{id}}" value="{{lookup ../system.money id}}"
-                   min="0">
+            {{formInput
+              (lookup (lookup ../systemFields.money "fields") id)
+              value=(lookup ../system.money id)
+              classes="tgrid-item gi1 money-panel-input tgrid-item tcenter"
+            }}
             <div class="money-info tsubtle tcenter tgrid-item gi3">
               <div class="money-name">
                 {{currency.name}}
@@ -18,8 +20,23 @@
             </div>
           </div>
         {{/each}}
+        <div class="money-panel tgrid g4">
+          {{formInput
+            systemFields.money.fields.debt
+            value=system.money.debt
+            classes="tgrid-item gi1 money-panel-input tgrid-item tcenter"
+          }}
+          <div class="money-info tsubtle tcenter tgrid-item gi3">
+            <div class="money-name">
+              Debt
+            </div>
+            <div class="money-value">
+              (-1 ₲, {{system.interestRate}}% daily)
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="money-total">
+      <div class="money-total {{#if (lt system.money.total 0)}}tred{{/if}}">
         {{system.money.total}} ₲&nbsp;&nbsp;&nbsp;&nbsp;{{system.moneyWeight}} lb
       </div>
     </div>

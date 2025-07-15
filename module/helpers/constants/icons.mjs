@@ -41,6 +41,7 @@ export const icons = {
   break: '<i class="fa-light fa-wine-glass-crack"></i>',
   hp: '<i class="fa-light fa-heart"></i>',
   mp: '<i class="fa-light fa-brain"></i>',
+  gp: '<i class="fa-light fa-coin"></i>',
   hack: '<i class="fa-solid fa-axe"></i>',
   active: '<i class="fa-solid fa-arrow-right"></i>',
   reactive: '<i class="fa-solid fa-arrow-turn-left"></i>',

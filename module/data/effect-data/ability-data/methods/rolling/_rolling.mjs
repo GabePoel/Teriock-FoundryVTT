@@ -27,6 +27,7 @@ export async function _roll(abilityData, options) {
       costs: {
         hp: 0,
         mp: 0,
+        gp: 0,
       },
       modifiers: {
         heightened: 0,
@@ -51,6 +52,7 @@ export async function _roll(abilityData, options) {
 
   const mpSpent = rollConfig.useData.costs.mp;
   const hpSpent = rollConfig.useData.costs.hp;
+  const gpSpent = rollConfig.useData.costs.gp;
   const heightened = rollConfig.useData.modifiers.heightened || 0;
 
   // Subtract MP/HP costs from actor
@@ -63,6 +65,9 @@ export async function _roll(abilityData, options) {
   if (hpSpent > 0) {
     const newHp = Math.max(actor.system.hp.value - hpSpent, actor.system.hp.min ?? 0);
     await actor.update({ "system.hp.value": newHp });
+  }
+  if (gpSpent > 0) {
+    await actor.takePay(gpSpent);
   }
 
   // Determine if we should add the bottom bar class
@@ -84,8 +89,8 @@ export async function _roll(abilityData, options) {
   }
 
   // If heightened or variable costs, append the summary bar box
-  if (heightened > 0 || mpSpent > 0 || hpSpent > 0) {
-    const summaryBarBox = _createSummaryBarBox({ heightened, mpSpent, hpSpent, shouldBottomBar });
+  if (heightened > 0 || mpSpent > 0 || hpSpent > 0 || gpSpent > 0) {
+    const summaryBarBox = _createSummaryBarBox({ heightened, mpSpent, hpSpent, gpSpent, shouldBottomBar });
     if (summaryBarBox) {
       const tempDiv = document.createElement("div");
       tempDiv.innerHTML = rawMessage;
@@ -138,6 +143,7 @@ async function stageUse(rollConfig) {
   // Calculate costs
   rollConfig.useData.costs.hp = await calculateCost(rollConfig.abilityData.costs.hp, rollConfig.useData.rollData);
   rollConfig.useData.costs.mp = await calculateCost(rollConfig.abilityData.costs.mp, rollConfig.useData.rollData);
+  rollConfig.useData.costs.gp = await calculateCost(rollConfig.abilityData.costs.gp, rollConfig.useData.rollData);
 
   // Build initial formula
   rollConfig.useData.formula = buildFormula(rollConfig);

@@ -225,6 +225,16 @@ export default class TeriockActor extends BaseTeriockActor {
   }
 
   /**
+   * Actor pays money.
+   *
+   * @param {number} amount - The amount of gold-equivalent money to pay.
+   * @param {"exact" | "greedy"} mode - Exact change or closest denomination, rounded up.
+   */
+  async takePay(amount, mode = "greedy") {
+    await this.system.takePay(amount, mode);
+  }
+
+  /**
    * Applies hack effect to a specific part of the actor.
    *
    * Relevant wiki pages:

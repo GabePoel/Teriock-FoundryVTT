@@ -27,6 +27,14 @@ export function _messageParts(abilityData) {
   } else if (src.costs.hp.type === "hack") {
     hpCost = "Hack";
   }
+  let gpCost = "";
+  if (src.costs.gp.type === "variable") {
+    gpCost = "Variable ₲";
+  } else if (src.costs.gp.type === "formula") {
+    gpCost = src.costs.gp.value.formula + " ₲";
+  } else if (src.costs.gp.type === "static") {
+    gpCost = src.costs.gp.value.static + " ₲";
+  }
   const bars = [
     {
       icon: "fa-wreath-laurel",
@@ -64,6 +72,7 @@ export function _messageParts(abilityData) {
       wrappers: [
         mpCost,
         hpCost,
+        gpCost,
         ref.breakCost[src.costs.break],
         src.costs.verbal ? "Verbal" : "",
         src.costs.somatic ? "Somatic" : "",

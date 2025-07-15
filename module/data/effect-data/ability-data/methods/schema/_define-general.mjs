@@ -222,6 +222,26 @@ export function _defineGeneral(schema) {
           variable: new fields.HTMLField({ initial: "" }),
         }),
       }),
+      gp: new fields.SchemaField({
+        type: new fields.StringField({
+          initial: "none",
+          choices: {
+            none: "None",
+            static: "Static",
+            formula: "Formula",
+            variable: "Variable",
+          },
+        }),
+        value: new fields.SchemaField({
+          static: new fields.NumberField({
+            initial: 0,
+            integer: true,
+            min: 0,
+          }),
+          formula: new fields.StringField({ initial: "" }),
+          variable: new fields.HTMLField({ initial: "" }),
+        }),
+      }),
       break: new fields.StringField({ initial: "" }),
       materialCost: new fields.HTMLField({ initial: "" }),
     }),

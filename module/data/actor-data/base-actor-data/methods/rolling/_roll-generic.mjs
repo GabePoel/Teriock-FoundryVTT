@@ -83,7 +83,7 @@ export async function _rollImmunity(actorData, options = {}) {
   if (options.message) {
     message = options.message;
   }
-  await foundry.documents.ChatMessage.create({
+  await ChatMessage.create({
     title: "Immune",
     flavor: "Immune",
     content: message || "No effect.",

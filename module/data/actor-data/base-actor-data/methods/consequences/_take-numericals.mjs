@@ -1,3 +1,5 @@
+import { currencyOptions } from "../../../../../helpers/constants/currency-options.mjs";
+
 /**
  * Relevant wiki pages:
  * - [Damage](https://wiki.teriock.com/index.php/Core:Damage)
@@ -155,4 +157,101 @@ export async function _takeKill(actorData, amount) {
     };
     await actorData.parent.createEmbeddedDocuments("ActiveEffect", [effectData]);
   }
+}
+
+/**
+ * Pays the specified amount from an actor, using exact change if requested.
+ * Falls back to debt if funds are insufficient.
+ *
+ * @param {TeriockBaseActorData} actorData
+ * @param {number} amount - Gold-equivalent amount to pay.
+ * @param {"exact" | "greedy"} mode
+ * @returns {Promise<void>}
+ */
+export async function _takePay(actorData, amount, mode = "greedy") {
+  // Get current money state
+  const currentMoney = { ...actorData.money };
+
+  // Calculate total available wealth in gold value
+  const totalWealth = Object.keys(currencyOptions).reduce((total, currency) => {
+    return total + (currentMoney[currency] || 0) * currencyOptions[currency].value;
+  }, 0);
+
+  // If not enough money, add to debt and exit
+  if (totalWealth < amount) {
+    const shortfall = amount - totalWealth;
+    await actorData.parent.update({
+      "system.money.debt": currentMoney.debt + shortfall
+    });
+    return;
+  }
+
+  // Create array of currencies sorted by value (highest first)
+  const currencies = Object.entries(currencyOptions)
+    .sort(([, a], [, b]) => b.value - a.value)
+    .map(([key, config]) => ({ key, ...config, current: currentMoney[key] || 0 }));
+
+  let remainingAmount = amount;
+  const toDeduct = {};
+
+  // First pass: Deduct currencies starting from the highest value
+  for (const currency of currencies) {
+    if (remainingAmount <= 0) break;
+
+    const canTake = Math.min(currency.current, Math.floor(remainingAmount / currency.value));
+    if (canTake > 0) {
+      toDeduct[currency.key] = canTake;
+      remainingAmount -= canTake * currency.value;
+    }
+  }
+
+  // If we still need to pay more, take higher denominations for change
+  if (remainingAmount > 0) {
+    for (const currency of currencies) {
+      if (remainingAmount <= 0) break;
+
+      const alreadyTaken = toDeduct[currency.key] || 0;
+      const stillHave = currency.current - alreadyTaken;
+
+      if (stillHave > 0) {
+        toDeduct[currency.key] = (toDeduct[currency.key] || 0) + 1;
+        remainingAmount -= currency.value;
+        break;
+      }
+    }
+  }
+
+  // Calculate change needed (will be negative if we overpaid)
+  const changeNeeded = -remainingAmount;
+
+  // Prepare update object
+  const updateData = {};
+
+  // Deduct the currencies we're spending
+  for (const [currencyKey, amountToDeduct] of Object.entries(toDeduct)) {
+    updateData[`system.money.${currencyKey}`] = currentMoney[currencyKey] - amountToDeduct;
+  }
+
+  // Handle change for exact mode
+  if (mode === "exact" && changeNeeded > 0) {
+    let changeRemaining = changeNeeded;
+
+    // Give change using the largest denominations possible
+    for (const currency of currencies) {
+      if (changeRemaining <= 0) break;
+
+      const changeAmount = Math.floor(changeRemaining / currency.value);
+      if (changeAmount > 0) {
+        const currentAmount = updateData[`system.money.${currency.key}`] !== undefined
+          ? updateData[`system.money.${currency.key}`]
+          : currentMoney[currency.key];
+
+        updateData[`system.money.${currency.key}`] = currentAmount + changeAmount;
+        changeRemaining -= changeAmount * currency.value;
+      }
+    }
+  }
+
+  // Apply the update
+  await actorData.parent.update(updateData);
 }

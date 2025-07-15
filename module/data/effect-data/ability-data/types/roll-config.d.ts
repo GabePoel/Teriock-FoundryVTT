@@ -15,6 +15,8 @@ export interface AbilityRollConfig {
       hp: number;
       /** Total amount of MP spent on this ability. */
       mp: number;
+      /** Total amount of GP spend on this ability. */
+      gp: number;
     };
     /** Modifiers that change what the ability does. */
     modifiers: {
@@ -37,7 +39,7 @@ export interface AbilityRollConfig {
     /** Buttons to render in the chat message. */
     buttons: ChatActionButton[];
     /** Chat speaker data. */
-    speaker: ChatSpeakerData;
+    speaker: Teriock.ChatSpeakerData;
     /** Rolls to pass into the chat message. */
     rolls: TeriockRoll[];
   };

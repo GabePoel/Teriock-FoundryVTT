@@ -11,6 +11,7 @@ export const consequenceOptions = {
     gainTempMp: "Gain Temp MP",
     sleep: "Sleep Check",
     kill: "Kill Check",
+    pay: "Payment",
     other: "Other",
   },
   hacks: {

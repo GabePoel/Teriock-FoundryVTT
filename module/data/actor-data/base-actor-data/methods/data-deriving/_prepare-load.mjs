@@ -53,7 +53,7 @@ export function _prepareMoney(system) {
     const value = (money[key] || 0) * currencyOptions[key].weight;
     return sum + value;
   }, 0);
-  system.money.total = total;
+  system.money.total = total - system.money.debt;
   system.moneyWeight = Math.round(totalWeight * 100) / 100 || 0;
 }
 

@@ -2,6 +2,7 @@
   (or
     (eq system.costs.mp.type "variable")
     (eq system.costs.hp.type "variable")
+    (eq system.costs.gp.type "variable")
     (exists system.costs.materialCost)
   )
 }}
@@ -36,6 +37,23 @@
         >{{{hitCost}}}</prose-mirror>
       {{else}}
         {{{hitCost}}}
+      {{/if}}
+    </div>
+  {{/if}}
+  {{#if (eq system.costs.gp.type "variable")}}
+    <div class="ab-section-container">
+      <div class="ab-section">
+        <span class="ab-section-title">Gold cost</span>
+      </div>
+      {{#if editable}}
+        <prose-mirror
+          name="system.costs.gp.value.variable"
+          value="{{system.costs.gp.value.variable}}"
+          toggled="true"
+          editable="editable"
+        >{{{goldCost}}}</prose-mirror>
+      {{else}}
+        {{{goldCost}}}
       {{/if}}
     </div>
   {{/if}}

@@ -28,6 +28,12 @@ export async function _handleDialogs(rollConfig) {
     dialogs.push(createDialogFieldset("Variable Hit Point Cost", hpDescription, "hp", maxHp));
   }
 
+  // Variable GP cost dialog
+  if (abilityData.costs.gp?.type === "variable") {
+    const gpDescription = await ux.TextEditor.enrichHTML(abilityData.costs.gp.value.variable);
+    dialogs.push(createDialogFieldset("Variable Gold Cost", gpDescription, "gp", Infinity));
+  }
+
   // Heightened dialog
   if (abilityData.parent.isProficient && abilityData.heightened) {
     const p = actor.system.p;
@@ -50,6 +56,9 @@ export async function _handleDialogs(rollConfig) {
           }
           if (abilityData.costs.hp?.type === "variable") {
             useData.costs.hp = Number(button.form.elements.namedItem("hp").value);
+          }
+          if (abilityData.costs.gp?.type === "variable") {
+            useData.costs.gp = Number(button.form.elements.namedItem("gp").value);
           }
           if (abilityData.parent.isProficient && abilityData.heightened) {
             useData.modifiers.heightened = Number(button.form.elements.namedItem("heightened").value);

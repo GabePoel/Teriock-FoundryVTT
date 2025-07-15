@@ -67,6 +67,7 @@ async function applyActorAction(actors, action, amount, data) {
     takeGainTempMp: (actor, amt) => actor.takeGainTempMp(amt),
     takeSleep: (actor, amt) => actor.takeSleep(amt),
     takeKill: (actor, amt) => actor.takeKill(amt),
+    takePay: (actor, amt) => actor.takePay(amt),
     takeHack: (actor, _, bodyPart) => actor.takeHack(bodyPart),
     takeUnhack: (actor, _, bodyPart) => actor.takeUnhack(bodyPart),
     takeAwaken: (actor) => actor.takeAwaken(),
@@ -85,6 +86,7 @@ async function applyActorAction(actors, action, amount, data) {
     takeGainTempMp: (name, amt) => `${name} gained ${amt} temporary MP`,
     takeSleep: (name) => `Did sleep check for ${name}`,
     takeKill: (name) => `Did kill check for ${name}`,
+    takePay: (name, amt) => `${name} paid ${amt} ₲`,
     takeHack: (name, _, bodyPart) => `Hacked ${bodyPart} for ${name}`,
     takeUnhack: (name, _, bodyPart) => `Unhacked ${bodyPart} for ${name}`,
     takeAwaken: (name) => `Awakened ${name}`,
@@ -424,6 +426,7 @@ export default function registerHooks() {
         "takeGainTempMp",
         "takeSleep",
         "takeKill",
+        "takePay",
       ];
 
       const actionLabels = {
@@ -438,18 +441,23 @@ export default function registerHooks() {
         takeGainTempMp: "Gain Temp MP",
         takeSleep: "Sleep",
         takeKill: "Kill",
+        takePay: "Pay Gold",
       };
 
       const actionIcons = {
         takeDamage: "fa-heart",
         takeDrain: "fa-brain",
         takeWither: "fa-hourglass-half",
+        takeSleep: "fa-bed",
+        takeKill: "fa-skull",
+        takePay: "fa-coin",
       };
 
       const actionClasses = {
         takeDamage: "damage-button",
         takeDrain: "drain-button",
         takeWither: "wither-button",
+        takePay: "payment-button",
       };
 
       if (rollActions.includes(action) && formula) {
@@ -684,11 +692,29 @@ await item.use(options);
       const scene = game.scenes.viewed;
       const tokens = scene.tokens;
       const actors = tokens.map((token) => token.actor);
+
       for (const actor of actors) {
+        // Handle temporary effects expiration
         const effects = actor.temporaryEffects;
         for (const effect of effects) {
           await effect.system.checkExpiration();
         }
+
+        // Update debt with interest if the actor has debt and an interest rate
+        const currentDebt = actor.system.money?.debt || 0;
+        const dailyInterestRate = actor.system.interestRate || 0;
+
+        if (currentDebt > 0 && dailyInterestRate > 0) {
+          // Calculate new debt after interest
+          const daysElapsed = dt / 86400; // Convert seconds to days
+          const newDebt = currentDebt * Math.pow(1 + dailyInterestRate, daysElapsed);
+
+          // Update the actor's debt
+          await actor.update({
+            "system.money.debt": Math.round(newDebt * 100) / 100, // Round to 2 decimal places
+          });
+        }
+
         await actor.forceUpdate();
       }
     }

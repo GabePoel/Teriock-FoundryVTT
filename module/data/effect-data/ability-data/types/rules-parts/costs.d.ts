@@ -29,6 +29,7 @@ export interface CostsConfig {
   material: boolean;
   mp: NumberCost;
   hp: NumberCost;
+  gp: NumberCost;
   break: BreakCost;
   materialCost: string;
 }

@@ -219,6 +219,18 @@
             </button>
           </div>
         {{/if}}
+        {{#if (eq system.costs.gp.type "none")}}
+          <div class="tgrid-item">
+            <button class="ab-menu-button ab-gold-cost-button"
+              {{#if (not editable)}}
+                    disabled="disabled"
+              {{/if}}
+            >
+              {{{config.icons.add}}}
+              Gold Cost
+            </button>
+          </div>
+        {{/if}}
         {{#if (not (exists system.costs.break))}}
           <div class="tgrid-item">
             <button class="ab-menu-button ab-break-cost-button"
