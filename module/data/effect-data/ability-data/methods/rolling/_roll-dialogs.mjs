@@ -50,7 +50,7 @@ export async function _handleDialogs(rollConfig) {
       modal: true,
       ok: {
         label: "Confirm",
-        callback: (event, button) => {
+        callback: (event, button, dialog) => {
           if (abilityData.costs.mp?.type === "variable") {
             useData.costs.mp = Number(button.form.elements.namedItem("mp").value);
           }

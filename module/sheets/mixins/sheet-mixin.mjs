@@ -75,7 +75,7 @@ export default (Base) => {
 
     /**
      * Debug action for development purposes.
-     * @param {Event} _ - The event object.
+     * @param {MouseEvent} _ - The event object.
      * @param {HTMLElement} __ - The target element.
      * @returns {Promise<void>} Promise that resolves when debug is complete.
      * @static
@@ -86,7 +86,7 @@ export default (Base) => {
 
     /**
      * Pulls data from wiki for the current document.
-     * @param {Event} _ - The event object.
+     * @param {MouseEvent} _ - The event object.
      * @param {HTMLElement} __ - The target element.
      * @returns {Promise<void>} Promise that resolves when wiki pull is complete.
      * @static
@@ -97,7 +97,7 @@ export default (Base) => {
 
     /**
      * Opens the wiki page for the current document.
-     * @param {Event} _ - The event object.
+     * @param {MouseEvent} _ - The event object.
      * @param {HTMLElement} __ - The target element.
      * @returns {Promise<void>} Promise that resolves when wiki page is opened.
      * @static
@@ -108,7 +108,7 @@ export default (Base) => {
 
     /**
      * Sends the current document to chat.
-     * @param {Event} _ - The event object.
+     * @param {MouseEvent} _ - The event object.
      * @param {HTMLElement} __ - The target element.
      * @returns {Promise<void>} Promise that resolves when chat is sent.
      * @static
@@ -119,7 +119,7 @@ export default (Base) => {
 
     /**
      * Reloads the current document and re-renders the sheet.
-     * @param {Event} _ - The event object.
+     * @param {MouseEvent} _ - The event object.
      * @param {HTMLElement} __ - The target element.
      * @returns {Promise<void>} Promise that resolves when reload is complete.
      * @static
@@ -131,7 +131,7 @@ export default (Base) => {
 
     /**
      * Toggles the lock state of the current sheet.
-     * @param {Event} _ - The event object.
+     * @param {MouseEvent} _ - The event object.
      * @param {HTMLElement} __ - The target element.
      * @returns {Promise<void>} Promise that resolves when lock is toggled.
      * @static
@@ -180,7 +180,7 @@ export default (Base) => {
 
     /**
      * Opens the sheet for an embedded document.
-     * @param {Event} event - The event object.
+     * @param {MouseEvent} event - The event object.
      * @param {HTMLElement} target - The target element.
      * @returns {Promise<void>} Promise that resolves when sheet is opened.
      * @static
@@ -192,7 +192,7 @@ export default (Base) => {
 
     /**
      * Sends an embedded document to chat.
-     * @param {Event} event - The event object.
+     * @param {MouseEvent} event - The event object.
      * @param {HTMLElement} target - The target element.
      * @returns {Promise<void>} Promise that resolves when chat is sent.
      * @static
@@ -204,7 +204,7 @@ export default (Base) => {
 
     /**
      * Uses one unit of an embedded consumable document.
-     * @param {Event} event - The event object.
+     * @param {MouseEvent} event - The event object.
      * @param {HTMLElement} target - The target element.
      * @returns {Promise<void>} Promise that resolves when use is complete.
      * @static
@@ -216,7 +216,7 @@ export default (Base) => {
 
     /**
      * Toggles the disabled state of an embedded document.
-     * @param {Event} event - The event object.
+     * @param {MouseEvent} event - The event object.
      * @param {HTMLElement} target - The target element.
      * @returns {Promise<void>} Promise that resolves when toggle is complete.
      * @static
@@ -249,7 +249,7 @@ export default (Base) => {
 
     /**
      * Toggles a boolean field on the current document.
-     * @param {Event} event - The event object.
+     * @param {MouseEvent} event - The event object.
      * @param {HTMLElement} target - The target element.
      * @returns {Promise<void>} Promise that resolves when toggle is complete.
      * @static
@@ -262,7 +262,7 @@ export default (Base) => {
 
     /**
      * Toggles a boolean field on the sheet and re-renders.
-     * @param {Event} event - The event object.
+     * @param {MouseEvent} event - The event object.
      * @param {HTMLElement} target - The target element.
      * @returns {Promise<void>} Promise that resolves when toggle is complete.
      * @static
@@ -276,7 +276,7 @@ export default (Base) => {
 
     /**
      * Creates a new ability for the current document.
-     * @param {Event} event - The event object.
+     * @param {MouseEvent} event - The event object.
      * @param {HTMLElement} __ - The target element.
      * @returns {Promise<ActiveEffect>} Promise that resolves to the created ability.
      * @static
@@ -287,7 +287,7 @@ export default (Base) => {
 
     /**
      * Creates a new resource for the current document.
-     * @param {Event} event - The event object.
+     * @param {MouseEvent} event - The event object.
      * @param {HTMLElement} __ - The target element.
      * @returns {Promise<ActiveEffect>} Promise that resolves to the created resource.
      * @static
@@ -298,7 +298,7 @@ export default (Base) => {
 
     /**
      * Creates a new fluency for the current document.
-     * @param {Event} event - The event object.
+     * @param {MouseEvent} event - The event object.
      * @param {HTMLElement} __ - The target element.
      * @returns {Promise<ActiveEffect>} Promise that resolves to the created fluency.
      * @static
@@ -310,7 +310,7 @@ export default (Base) => {
     /**
      * Creates a new property for the current document.
      * Shows a dialog to select property type or create a new one.
-     * @param {Event} event - The event object.
+     * @param {MouseEvent} event - The event object.
      * @param {HTMLElement} __ - The target element.
      * @returns {Promise<ActiveEffect>} Promise that resolves to the created property.
      * @static

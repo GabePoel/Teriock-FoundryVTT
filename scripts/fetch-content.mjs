@@ -1,14 +1,14 @@
 import fs from "fs";
-import path from "path";
 import { JSDOM } from "jsdom";
+import path from "path";
 
 import { fileURLToPath } from "url";
-import { fetchWikiPageHTML } from "../module/helpers/wiki.mjs";
 
 import { conditions } from "../module/helpers/constants/generated/conditions.mjs";
 import { magicalProperties } from "../module/helpers/constants/generated/magical-properties.mjs";
 import { materialProperties } from "../module/helpers/constants/generated/material-properties.mjs";
 import { properties } from "../module/helpers/constants/generated/properties.mjs";
+import { fetchWikiPageHTML } from "../module/helpers/wiki.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -27,6 +27,8 @@ const writeModuleFile = (fileName, exportName, entries) => {
         (value._id ? `    _id: ${JSON.stringify(value._id)},\n` : "") +
         (value.statuses ? `    statuses: ${JSON.stringify(value.statuses)},\n` : "") +
         (value.changes ? `    changes: ${JSON.stringify(value.changes)},\n` : "") +
+        (value.type ? `    type: ${JSON.stringify(value.type)},\n` : "") +
+        `    system: {\n      description: ${JSON.stringify(value.content)}\n    },\n` +
         `    content: ${JSON.stringify(value.content)}\n  },`,
     );
   }
@@ -39,7 +41,7 @@ const writeModuleFile = (fileName, exportName, entries) => {
   console.log(`Wrote ${Object.keys(entries).length} entries to ${fileName}`);
 };
 
-const fetchContent = async (map, namespace, staticId, statuses) => {
+const fetchContent = async (map, namespace, staticId, statuses, type) => {
   const results = {};
 
   console.log(`Fetching content for namespace "${namespace}"...`);
@@ -61,6 +63,10 @@ const fetchContent = async (map, namespace, staticId, statuses) => {
 
       if (staticId) {
         results[key]._id = (key + "000000000000000").slice(0, 16);
+      }
+
+      if (type) {
+        results[key].type = type;
       }
 
       if (statuses) {
@@ -106,7 +112,16 @@ const fetchContent = async (map, namespace, staticId, statuses) => {
 
 const run = async () => {
   try {
-    const datasets = [
+    /**
+     * @typedef {object} ContentDataset
+     * @property {Record<string,string>} data
+     * @property {string} namespace
+     * @property {string} exportName
+     * @property {boolean} staticId
+     * @property {boolean} statuses
+     * @property {string|null} type
+     */
+    const datasets = /** @type {ContentDataset[]} */ [
       {
         data: conditions,
         namespace: "Condition",
@@ -114,6 +129,7 @@ const run = async () => {
         file: "conditions.mjs",
         staticId: true,
         statuses: true,
+        type: "condition",
       },
       {
         data: magicalProperties,
@@ -122,6 +138,7 @@ const run = async () => {
         file: "magical-properties.mjs",
         staticId: false,
         statuses: false,
+        type: null,
       },
       {
         data: materialProperties,
@@ -130,6 +147,7 @@ const run = async () => {
         file: "material-properties.mjs",
         staticId: false,
         statuses: false,
+        type: null,
       },
       {
         data: properties,
@@ -138,11 +156,12 @@ const run = async () => {
         file: "properties.mjs",
         staticId: false,
         statuses: false,
+        type: null,
       },
     ];
 
-    for (const { data, namespace, exportName, file, staticId, statuses } of datasets) {
-      const content = await fetchContent(data, namespace, staticId, statuses);
+    for (const { data, namespace, exportName, file, staticId, statuses, type } of datasets) {
+      const content = await fetchContent(data, namespace, staticId, statuses, type);
       writeModuleFile(file, exportName, content);
     }
   } catch (err) {
@@ -150,4 +169,4 @@ const run = async () => {
   }
 };
 
-run();
+await run();

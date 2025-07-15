@@ -648,7 +648,7 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
     const context = await super._prepareContext(options);
     context.activeTab = this._activeTab;
     context.conditions = conditions;
-    context.removableConditions = conditions.filter((c) => this.actor.effectKeys.base.has(c));
+    context.removableConditions = conditions.filter((c) => this.actor.effectKeys.condition?.has(c));
     context.editable = this.isEditable;
     context.actor = this.actor;
     context.abilities = _sortAbilities(this.actor) || [];

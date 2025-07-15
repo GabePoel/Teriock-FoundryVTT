@@ -227,6 +227,23 @@ async function checkDown(system) {
   } catch {
     /* empty */
   }
+  // Handle financial damage
+  if (system.parent.statuses.has("down") && system.money.debt > 0) {
+    if (!(system.resistances.effects.has("hollied") || system.immunities.effects.has("hollied"))) {
+      try {
+        await system.parent.toggleStatusEffect("hollied", { active: true });
+      } catch {
+        /* empty */
+      }
+    }
+    if (!(system.resistances.effects.has("terrored") || system.immunities.effects.has("terrored"))) {
+      try {
+        await system.parent.toggleStatusEffect("terrored", { active: true });
+      } catch {
+        /* empty */
+      }
+    }
+  }
 }
 
 /**
