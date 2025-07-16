@@ -28,5 +28,9 @@ export function _defineHierarchy(schema) {
     label: "Sub UUIDs",
     hint: "The UUIDs of the abilities that this ability provides, if there are any.",
   });
+  schema.rootUuid = new fields.DocumentUUIDField({
+    label: "Root UUID",
+    hint: "The UUID of the document this ability is embedded in.",
+  });
   return schema;
 }

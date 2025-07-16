@@ -91,6 +91,7 @@ export async function _parse(abilityData, rawHTML) {
   const changes = [];
   delete parameters.executionTime;
   delete parameters.maneuver;
+  delete parameters.rootUuid;
 
   // Process tags and build parameters
   processTags(parameters, tagTree, doc, changes);

@@ -423,6 +423,11 @@ export default function registerHooks() {
 
   foundry.helpers.Hooks.on("deleteItem", async (document, options, userId) => {
     if (isOwnerAndCurrentUser(document, userId)) {
+      const sup = document.sup;
+      if (sup && typeof sup.update === "function") {
+        await sup.update({});
+        await sup.sheet.render();
+      }
       document.actor?.buildEffectTypes();
       await document.actor?.postUpdate();
     }
@@ -430,25 +435,10 @@ export default function registerHooks() {
 
   foundry.helpers.Hooks.on("createActiveEffect", async (document, options, userId) => {
     if (isOwnerAndCurrentUser(document, userId)) {
-      if (document.type === "ability" || document.type === "effect") {
-        if (document.system.subIds?.length > 0) {
-          const subAbilityData = [];
-          let subs = document.subs;
-          if (subs[0] === null) {
-            subs = await document.subsAsync();
-          }
-          for (const subAbility of subs) {
-            const data = foundry.utils.duplicate(subAbility);
-            data.system.supId = document._id;
-            subAbilityData.push(data);
-          }
-          const newSubAbilities = await document.parent.createEmbeddedDocuments("ActiveEffect", subAbilityData);
-          const newSubIds = newSubAbilities.map((ability) => ability._id);
-          await document.update({
-            "system.subIds": newSubIds,
-          });
-          await document.unlockHierarchy();
-        }
+      const sup = document.sup;
+      if (sup && typeof sup.update === "function") {
+        await sup.update({});
+        await sup.sheet.render();
       }
       document.actor?.buildEffectTypes();
       await document.actor?.postUpdate({ checkDown: true });
@@ -457,18 +447,10 @@ export default function registerHooks() {
 
   foundry.helpers.Hooks.on("deleteActiveEffect", async (document, options, userId) => {
     if (isOwnerAndCurrentUser(document, userId)) {
-      if (document.type === "ability" || document.type === "effect") {
-        if (document.system.supId) {
-          const sup = document.parent.getEmbeddedDocument("ActiveEffect", document.system.supId);
-          if (sup) {
-            const subIds = sup.system.subIds.filter((id) => id !== document._id);
-            await sup.update({ "system.subIds": subIds });
-          }
-        }
-        if (document.system.subIds?.length > 0) {
-          const subIds = document.system.subIds;
-          await document.parent.deleteEmbeddedDocuments("ActiveEffect", subIds);
-        }
+      const sup = document.sup;
+      if (sup && typeof sup.update === "function") {
+        await sup.update({});
+        await sup.sheet.render();
       }
       document.actor?.buildEffectTypes();
       await document.actor?.postUpdate({ checkDown: true });
@@ -556,7 +538,6 @@ export default function registerHooks() {
       }
     });
 
-    // REPLACE THE OLD MAIN ROLL BUTTONS CODE WITH THIS:
     // Main roll buttons - left click (normal behavior)
     addClickHandler(html.querySelectorAll(".teriock-chat-button"), async (event) => {
       await handleRollButtonAction(event, false);
@@ -585,27 +566,6 @@ export default function registerHooks() {
       }
     });
 
-    // REMOVE OR REPLACE THE OLD CONTEXT MENU HANDLERS:
-    // These old context menu handlers can be removed since they're now handled by the main button handler:
-    /*
-    addContextMenuHandler(html.querySelectorAll('.teriock-chat-button[data-action="applyEffect"]'), async (event) => {
-      // This is now handled by the main handleRollButtonAction function
-    });
-
-    addContextMenuHandler(html.querySelectorAll('.teriock-chat-button[data-action="applyStatus"]'), async (event) => {
-      // This is now handled by the main handleRollButtonAction function
-    });
-
-    addContextMenuHandler(html.querySelectorAll('.teriock-chat-button[data-action="removeStatus"]'), async (event) => {
-      // This is now handled by the main handleRollButtonAction function
-    });
-
-    addContextMenuHandler(html.querySelectorAll('.teriock-chat-button[data-action="takeHack"]'), async (event) => {
-      // This is now handled by the main handleRollButtonAction function
-    });
-    */
-
-    // Target container handlers (these stay the same)
     html.querySelectorAll(".teriock-target-container").forEach((container) => {
       let clickTimeout = null;
 

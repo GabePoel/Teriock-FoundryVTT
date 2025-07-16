@@ -759,10 +759,16 @@ export default (Base) => {
       const EffectClass = await getDocumentClass("ActiveEffect");
       const effect = /** @type {TeriockEffect} */ await EffectClass.fromDropData(data);
       if (!this._canDropEffect(effect)) return false;
-
-      await effect.lockHierarchy();
+      if (this.document.documentName === "ActiveEffect") {
+        effect.updateSource({ "system.supId": this.document.id });
+      }
       const target = this.document.documentName === "ActiveEffect" ? this.document.parent : this.document;
-      return await target.createEmbeddedDocuments("ActiveEffect", [effect]);
+      const newEffects = await target.createEmbeddedDocuments("ActiveEffect", [effect]);
+      const newEffect = newEffects[0];
+      if (this.document.documentName === "ActiveEffect") {
+        await this.document.addSub(newEffect);
+      }
+      return newEffect;
     }
 
     /**

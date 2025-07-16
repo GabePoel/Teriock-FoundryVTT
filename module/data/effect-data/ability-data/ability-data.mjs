@@ -21,6 +21,7 @@ export default class TeriockAbilityData extends WikiDataMixin(TeriockBaseEffectD
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
       type: "ability",
+      canSub: true,
     });
   }
 
