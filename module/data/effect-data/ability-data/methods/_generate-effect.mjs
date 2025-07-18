@@ -119,8 +119,8 @@ export async function _generateEffect(abilityData, actor, heightenAmount = 0) {
         dawn: dawn,
         sustained: sustained,
       },
-      subIds: abilityData.subIds || [],
-      subUuids: abilityData.subUuids || [],
+      subIds: Array.from(abilityData.subIds || new Set()),
+      rootUuid: abilityData.parent.parent.uuid,
     },
     duration: {
       seconds: seconds || 0,

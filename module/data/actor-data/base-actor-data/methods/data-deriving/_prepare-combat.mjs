@@ -8,12 +8,12 @@
 export function _prepareDefenses(actorData) {
   const actor = actorData.parent;
   const equipment = actor.itemTypes.equipment;
-  const equipped = equipment.filter((i) => i.system.equipped);
+  const equipped = equipment.filter((i) => i.system.isEquipped);
 
   // Find and validate primary blocker
 
   const blocker = actor.items.get(actorData.wielding.blocker.raw);
-  if (blocker?.system.equipped) {
+  if (blocker?.system.isEquipped) {
     actorData.wielding.blocker.derived = blocker;
   } else {
     actorData.wielding.blocker.derived = null;
@@ -43,7 +43,7 @@ export function _prepareDefenses(actorData) {
 export function _prepareOffenses(system) {
   const actor = system.parent;
   const attacker = actor.items.get(system.wielding.attacker.raw);
-  if (attacker?.system.equipped) {
+  if (attacker?.system.isEquipped) {
     system.wielding.attacker.derived = attacker;
   } else {
     system.wielding.attacker.derived = null;

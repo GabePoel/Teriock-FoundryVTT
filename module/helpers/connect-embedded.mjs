@@ -53,20 +53,20 @@ export default function connectEmbedded(document, element, editable = true) {
             name: "Equip",
             icon: makeIcon("check", iconStyle),
             callback: async () => {
-              await embedded.system.equip();
+              await embedded.update({ "system.equipped": true });
             },
             condition: () => {
-              return embedded.type === "equipment" && !embedded.system.equipped;
+              return embedded.type === "equipment" && !embedded.system.canEquip;
             },
           },
           {
             name: "Unequip",
             icon: makeIcon("xmark", iconStyle),
             callback: async () => {
-              await embedded.system.unequip();
+              await embedded.update({ "system.equipped": false });
             },
             condition: () => {
-              return embedded.type === "equipment" && embedded.system.equipped;
+              return embedded.type === "equipment" && embedded.system.canUnequip;
             },
           },
           {
@@ -76,7 +76,7 @@ export default function connectEmbedded(document, element, editable = true) {
               await embedded.system.attune();
             },
             condition: () => {
-              return embedded.type === "equipment" && !embedded.system.attuned;
+              return embedded.type === "equipment" && !embedded.system.isAttuned;
             },
           },
           {
@@ -86,7 +86,7 @@ export default function connectEmbedded(document, element, editable = true) {
               await embedded.system.deattune();
             },
             condition: () => {
-              return embedded.type === "equipment" && embedded.system.attuned;
+              return embedded.type === "equipment" && embedded.system.isAttuned;
             },
           },
           {
@@ -117,7 +117,7 @@ export default function connectEmbedded(document, element, editable = true) {
             name: "Shatter",
             icon: makeIcon("wine-glass-crack", iconStyle),
             callback: async () => {
-              await embedded.system.shatter();
+              await embedded.update({ "system.shattered": true });
             },
             condition: () => {
               return embedded.type === "equipment" && !embedded.system.shattered;
@@ -127,7 +127,7 @@ export default function connectEmbedded(document, element, editable = true) {
             name: "Repair",
             icon: makeIcon("wine-glass", iconStyle),
             callback: async () => {
-              await embedded.system.repair();
+              await embedded.update({ "system.shattered": false });
             },
             condition: () => {
               return embedded.type === "equipment" && embedded.system.shattered;
@@ -137,7 +137,7 @@ export default function connectEmbedded(document, element, editable = true) {
             name: "Dampen",
             icon: makeIcon("bell-slash", iconStyle),
             callback: async () => {
-              await embedded.system.dampen();
+              await embedded.update({ "system.dampened": true });
             },
             condition: () => {
               return embedded.type === "equipment" && !embedded.system.dampened;
@@ -147,7 +147,7 @@ export default function connectEmbedded(document, element, editable = true) {
             name: "Undampen",
             icon: makeIcon("bell", iconStyle),
             callback: async () => {
-              await embedded.system.undampen();
+              await embedded.update({ "system.dampened": false });
             },
             condition: () => {
               return embedded.type === "equipment" && embedded.system.dampened;

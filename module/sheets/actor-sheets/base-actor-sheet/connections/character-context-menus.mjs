@@ -6,7 +6,7 @@
  * @returns {Array} The populated options array with blocker selection items.
  */
 export function primaryBlockerContextMenu(actor, options) {
-  const equipped = actor.itemTypes.equipment.filter((i) => i.system.equipped && i.system.bv);
+  const equipped = actor.itemTypes.equipment.filter((i) => i.system.isEquipped && i.system.bv);
   equipped.sort((a, b) => (b.system.bv ?? 0) - (a.system.bv ?? 0));
   const blockerOptions = [];
   for (const item of equipped) {

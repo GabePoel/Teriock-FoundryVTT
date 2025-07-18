@@ -43,7 +43,7 @@ export async function createAbility(document, name = null, options = {}) {
       },
       {
         _id: supId,
-        "system.subIds": foundry.utils.deepClone(sup.system.subIds).concat(ability._id),
+        "system.subIds": foundry.utils.deepClone(sup.system.subIds).add(ability._id),
       },
     ];
     await sup.parent.updateEmbeddedDocuments("ActiveEffect", updateData);

@@ -136,8 +136,8 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
    * @static
    */
   static async _toggleEquippedDoc(event, target) {
-    const embedded = await this._embeddedFromCard(target);
-    embedded?.system.toggleEquipped();
+    const embedded = /** @type {TeriockEquipment|null} */ await this._embeddedFromCard(target);
+    embedded?.update({ "system.equipped": !embedded.system.equipped });
   }
 
   /**

@@ -98,7 +98,7 @@ export default class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(
     const system = this.document.system;
     context.tab = this._tab;
     context.consequenceTab = this._consequenceTab;
-    context.childAbilities = await this.document.subsAsync();
+    context.childAbilities = this.document.subs;
     context.parentAbility = this.document.sup;
     context.macro = null;
     if (this.document.system.applies.macro) {

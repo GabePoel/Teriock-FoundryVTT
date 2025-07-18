@@ -49,7 +49,7 @@ export default class TeriockEquipmentSheet extends HandlebarsApplicationMixin(Te
    * @static
    */
   static async _toggleEquipped() {
-    await this.document.system.toggleEquipped();
+    await this.document.update({ "system.equipped": !this.document.system.equipped });
   }
 
   /**
@@ -58,7 +58,7 @@ export default class TeriockEquipmentSheet extends HandlebarsApplicationMixin(Te
    * @static
    */
   static async _toggleShattered() {
-    await this.document.system.toggleShattered();
+    await this.document.update({ "system.shattered": !this.document.system.shattered });
   }
 
   /**
@@ -67,7 +67,7 @@ export default class TeriockEquipmentSheet extends HandlebarsApplicationMixin(Te
    * @static
    */
   static async _toggleDampened() {
-    await this.document.system.toggleDampened();
+    await this.document.update({ "system.dampened": !this.document.system.dampened });
   }
 
   /**
@@ -85,8 +85,6 @@ export default class TeriockEquipmentSheet extends HandlebarsApplicationMixin(Te
       enrichedDescription: system.description,
       enrichedFlaws: system.flaws,
       enrichedNotes: system.notes,
-      // enrichedTier: system.fullTier,
-      // enrichedManaStoring: system.manaStoring,
     };
 
     for (const [key, value] of Object.entries(enrichments)) {

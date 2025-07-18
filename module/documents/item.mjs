@@ -18,6 +18,33 @@ export default class TeriockItem extends BaseTeriockItem {
   }
 
   /**
+   * Pre-process a creation operation, potentially altering its instructions or input data. Pre-operation events only
+   * occur for the client which requested the operation.
+   *
+   * This batch-wise workflow occurs after individual {@link _preCreate} workflows and provides a final pre-flight check
+   * before a database operation occurs.
+   *
+   * Modifications to pending documents must mutate the documents array or alter individual document instances using
+   * {@link updateSource}.
+   *
+   * @param {TeriockItem[]} documents - Pending document instances to be created
+   * @param {DatabaseCreateOperation} operation - Parameters of the database creation operation
+   * @param {BaseUser} user - The User requesting the creation operation
+   * @returns {Promise<boolean|void>} - Return false to cancel the creation operation entirely
+   * @protected
+   */
+  static async _preCreateOperation(documents, operation, user) {
+    await super._preCreateOperation(documents, operation, user);
+    for (const item of documents) {
+      item.effects.forEach(/** @param {TeriockEffect} effect */ (effect) => {
+        if (effect.metadata.canSub) {
+          effect.updateSource("")
+        }
+      })
+    }
+  }
+
+  /**
    * Checks if the item is disabled.
    *
    * @returns {boolean} True if the item is disabled, false otherwise.

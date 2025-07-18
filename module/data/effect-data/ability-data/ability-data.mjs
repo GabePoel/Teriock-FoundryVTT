@@ -17,7 +17,11 @@ import { _defineSchema } from "./methods/schema/_schema.mjs";
  * @extends {TeriockBaseEffectData}
  */
 export default class TeriockAbilityData extends WikiDataMixin(TeriockBaseEffectData) {
-  /** @inheritdoc */
+  /**
+   * Metadata for this effect.
+   *
+   * @returns {Teriock.EffectMetadata}
+   */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
       type: "ability",

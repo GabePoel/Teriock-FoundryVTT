@@ -328,9 +328,7 @@ async function handleRollButtonAction(event, useBoostDialog = false) {
   }
 
   if (action === "rollFeatSave") {
-    // const attr = event.currentTarget.getAttribute("data-data");
     const attr = target.dataset.data;
-    // const total = event.currentTarget.getAttribute("data-total");
     const total = target.dataset.total;
     const threshold = total ? Number(total) : undefined;
     const rollOptions = threshold !== undefined ? { ...options, threshold } : options;
@@ -338,19 +336,16 @@ async function handleRollButtonAction(event, useBoostDialog = false) {
   }
 
   if (action === "rollTradecraft") {
-    // const tradecraftKey = event.currentTarget.getAttribute("data-data");
     const tradecraftKey = target.dataset.data;
     await performRollAction(actors, action, tradecraftKey, options);
   }
 
   if (action === "applyEffect") {
-    // const effectData = event.currentTarget.getAttribute("data-data");
     const effectData = target.dataset.data;
     await handleEffectAction(actors, effectData);
   }
 
   if (action === "takeHack") {
-    // const bodyPart = event.currentTarget.getAttribute("data-data");
     const bodyPart = target.dataset.data;
     await applyActorAction(actors, action, undefined, bodyPart);
   }
@@ -364,13 +359,11 @@ async function handleRollButtonAction(event, useBoostDialog = false) {
   }
 
   if (action === "applyStatus") {
-    // const status = event.currentTarget.getAttribute("data-data");
     const status = target.dataset.data;
     await toggleStatusEffect(actors, status, true);
   }
 
   if (action === "removeStatus") {
-    // const status = event.currentTarget.getAttribute("data-data");
     const status = target.dataset.data;
     await toggleStatusEffect(actors, status, false);
   }
@@ -385,7 +378,7 @@ async function handleRollButtonAction(event, useBoostDialog = false) {
 export default function registerHooks() {
   foundry.helpers.Hooks.on("updateItem", async (document, updateData, options, userId) => {
     if (isOwnerAndCurrentUser(document, userId)) {
-      if (document.type === "equipment" && document.system.attuned && updateData.system.tier) {
+      if (document.type === "equipment" && document.system.isAttuned && updateData.system.tier) {
         const attunement = document.system.attunement;
         if (attunement) {
           await attunement.update({
@@ -393,7 +386,7 @@ export default function registerHooks() {
           });
         }
       }
-      await document.actor.postUpdate();
+      await document.actor?.postUpdate();
     }
   });
 
@@ -413,7 +406,7 @@ export default function registerHooks() {
     if (isOwnerAndCurrentUser(document, userId)) {
       if (document.type === "equipment") {
         if (document.actor) {
-          await document.system.unequip();
+          await document.update({ "system.equipped": false });
         }
       }
       document.actor?.buildEffectTypes();
@@ -437,8 +430,7 @@ export default function registerHooks() {
     if (isOwnerAndCurrentUser(document, userId)) {
       const sup = document.sup;
       if (sup && typeof sup.update === "function") {
-        await sup.update({});
-        await sup.sheet.render();
+        await sup.forceUpdate()
       }
       document.actor?.buildEffectTypes();
       await document.actor?.postUpdate({ checkDown: true });
@@ -449,8 +441,7 @@ export default function registerHooks() {
     if (isOwnerAndCurrentUser(document, userId)) {
       const sup = document.sup;
       if (sup && typeof sup.update === "function") {
-        await sup.update({});
-        await sup.sheet.render();
+        await sup.forceUpdate()
       }
       document.actor?.buildEffectTypes();
       await document.actor?.postUpdate({ checkDown: true });

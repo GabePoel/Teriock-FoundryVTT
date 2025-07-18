@@ -9,10 +9,15 @@ import { _expire, _shouldExpire } from "./methods/_expiration.mjs";
  * @extends {TypeDataModel}
  */
 export default class TeriockBaseEffectData extends ChildDataMixin(TypeDataModel) {
-  /** Metadata for this effect. */
+  /**
+   * Metadata for this effect.
+   *
+   * @returns {Teriock.EffectMetadata}
+   */
   static get metadata() {
-    return foundry.utils.mergeObject(super.metadata, {
+    return foundry.utils.mergeObject({}, {
       type: "base",
+      canSub: false,
     });
   }
 

@@ -54,12 +54,12 @@ export async function _parse(equipmentData, rawHTML) {
   parameters.minStr = cleanValue(getValue(".min-str")) ?? parameters.minStr;
 
   // Parse arrays
-  parameters.equipmentClasses = new Set(getTextAll(".equipment-class"));
-  parameters.properties = getTextAll(".property");
+  let equipmentClasses = new Set(getTextAll(".equipment-class"));
+  let properties = new Set(getTextAll(".property"))
 
   // Add piercing property if present
   const piercing = getValue(".piercing");
-  if (piercing) parameters.properties.push(piercing);
+  if (piercing) properties.add(piercing);
 
   // Parse sb, av, bv
   parameters.sb = toCamelCase(getValue(".sb") || "") ?? parameters.sb;
@@ -69,11 +69,9 @@ export async function _parse(equipmentData, rawHTML) {
   // Special rules
   parameters.specialRules = getHTML(".special-rules") ?? parameters.specialRules;
 
-  // Sort and filter properties/classes
-  // parameters.properties = parameters.properties.filter(Boolean).sort((a, b) => a.localeCompare(b));
-  parameters.equipmentClasses = parameters.equipmentClasses.filter(Boolean).sort((a, b) => a.localeCompare(b));
-  parameters.equipmentClasses = new Set(toCamelCaseList(Array.from(parameters.equipmentClasses)));
-  const candidateProperties = toCamelCaseList(parameters.properties);
+  // Sort and filter properties and equipment classes
+  parameters.equipmentClasses = new Set(toCamelCaseList(Array.from(equipmentClasses)));
+  const candidateProperties = toCamelCaseList(Array.from(properties));
 
   // Filter properties by config
   const allowedProperties = [

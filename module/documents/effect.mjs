@@ -1,6 +1,8 @@
 import { BaseTeriockEffect } from "./_base.mjs";
 
 /**
+ * The Teriock {@link ActiveEffect} implementation.
+ *
  * @property {TeriockBaseEffectData} system
  * @property {TeriockBaseEffectSheet} sheet
  * @property {TeriockActor|TeriockItem} parent
@@ -31,36 +33,20 @@ export default class TeriockEffect extends BaseTeriockEffect {
   }
 
   /**
-   * Gets the effect that provides this effect, if there is one.
-   * Synchronous by default. Asynchronous fallback for compendiums.
+   * Metadata for this effect.
    *
-   * @returns {TeriockEffect|null|Promise<TeriockEffect|null>}
+   * @returns {Teriock.EffectMetadata}
    */
-  get sup() {
-    if (this.supId) {
-      const effect = this.supSync;
-      if (effect) {
-        return effect;
-      }
-    }
-    if (this.system.supUuid) {
-      try {
-        return foundry.utils.fromUuidSync(this.system.supUuid);
-      } catch (e) {
-        // Fallback to async if sync fails
-        return foundry.utils.fromUuid(this.system.supUuid);
-      }
-    }
-    return null;
+  get metadata() {
+    return this.system.constructor.metadata;
   }
 
   /**
    * Gets the effect that provides this effect, if there is one.
-   * Always synchronous.
    *
    * @returns {TeriockEffect|null}
    */
-  get supSync() {
+  get sup() {
     if (this.supId) {
       return /** @type {TeriockEffect} */ this.parent.getEmbeddedDocument("ActiveEffect", this.supId);
     }
@@ -73,7 +59,7 @@ export default class TeriockEffect extends BaseTeriockEffect {
    * @returns {string|null}
    */
   get supId() {
-    if (this.system.supId && this.parent.effects.has(this.system.supId)) {
+    if (this.metadata.canSub && this.system.supId && this.parent.effects.has(this.system.supId)) {
       return this.system.supId;
     }
     return null;
@@ -81,10 +67,8 @@ export default class TeriockEffect extends BaseTeriockEffect {
 
   /**
    * Gets all effects that this effect is a sub-effect of.
-   * Synchronous by default. Asynchronous fallback for compendiums.
    *
-   * @returns {TeriockEffect[]|Promise<TeriockEffect[]>} Array of super-effects, ordered from immediate sup to top
-   *   level.
+   * @returns {TeriockEffect[]} Array of super-effects, ordered from immediate sup to top level.
    */
   get allSups() {
     const supEffects = [];
@@ -97,39 +81,16 @@ export default class TeriockEffect extends BaseTeriockEffect {
   }
 
   /**
-   * Gets all effects that this effect is a sub-effect of.
-   * Always synchronous.
-   *
-   * @returns {TeriockEffect[]} Array of super-effects, ordered from immediate sup to top level.
-   */
-  get allSupsSync() {
-    const supEffects = [];
-    let supEffect = this.supSync;
-    if (supEffect) {
-      supEffects.push(supEffect);
-      supEffects.push(...supEffect.allSupsSync);
-    }
-    return supEffects;
-  }
-
-  /**
    * Gets all sub-effects that are derived from this effect.
    *
-   * @returns {TeriockEffect[]|Promise<TeriockEffect>} Array of sub-effects.
+   * @returns {TeriockEffect[]}
    */
   get subs() {
+    /** @type {TeriockEffect[]} */
     const subEffects = [];
-    if (this.subIds?.length > 0) {
-      for (const uuid of this.system.subUuids) {
-        try {
-          const subEffect = foundry.utils.fromUuidSync(uuid);
-          subEffects.push(subEffect);
-        } catch (e) {
-          // Fallback to async if sync fails
-          const subEffect = foundry.utils.fromUuid(uuid);
-          subEffects.push(subEffect);
-        }
-      }
+    for (const id of this.subIds) {
+      const root = /** @type {TeriockActor|TeriockItem} */ foundry.utils.fromUuidSync(this.system.rootUuid);
+      subEffects.push(root.effects.get(id));
     }
     return subEffects;
   }
@@ -137,39 +98,18 @@ export default class TeriockEffect extends BaseTeriockEffect {
   /**
    * Safely gets the IDS of all sub-effects that are derived from this effect.
    *
-   * @returns {string[]}
+   * @returns {Set<string>}
    */
   get subIds() {
-    if (this.system.subIds?.length > 0) {
-      return /** @type {string[]} */ this.system.subIds.filter((id) => this.parent.effects.has(id));
+    if (this.metadata.canSub && this.system.subIds.size > 0) {
+      const root = /** @type {TeriockActor|TeriockItem} */ foundry.utils.fromUuidSync(this.system.rootUuid);
+      return this.system.subIds.filter((id) => root.effects.has(id));
     }
-    return [];
-  }
-
-  /**
-   * Gets all sub-effects that are derived from this effect.
-   * Always asynchronous.
-   *
-   * @returns {function(): Promise<TeriockEffect[]>} Array of sub-effects.
-   */
-  get subsAsync() {
-    return async () => {
-      const subEffects = [];
-      if (this.system.subUuids?.length > 0) {
-        for (const uuid of this.system.subUuids) {
-          const subEffect = await foundry.utils.fromUuid(uuid);
-          if (subEffect) {
-            subEffects.push(subEffect);
-          }
-        }
-      }
-      return subEffects;
-    };
+    return new Set();
   }
 
   /**
    * Gets all sub-effects descendant from this effect recursively.
-   * Synchronous by default. Asynchronous fallback for compendiums.
    *
    * @returns {TeriockEffect[]} Array of all descendant effects.
    */
@@ -181,26 +121,6 @@ export default class TeriockEffect extends BaseTeriockEffect {
       allSubEffects.push(...subEffect.allSubs);
     }
     return allSubEffects;
-  }
-
-  /**
-   * Gets all sub-effect descendents from this effect recursively.
-   * Always asynchronous.
-   *
-   * @returns {function(): Promise<TeriockEffect[]>}
-   */
-  get allSubsAsync() {
-    return async () => {
-      /** @type {TeriockEffect[]} */
-      const allSubEffects = [];
-      const subEffects = await this.subsAsync();
-      for (const subEffect of subEffects) {
-        allSubEffects.push(subEffect);
-        const subSubEffects = await subEffect.allSubsAsync();
-        allSubEffects.push(...subSubEffects);
-      }
-      return allSubEffects;
-    };
   }
 
   /**
@@ -223,13 +143,47 @@ export default class TeriockEffect extends BaseTeriockEffect {
    * @returns {boolean} True if this is a reference effect, false otherwise.
    */
   get isReference() {
-    const sups = this.allSupsSync;
+    const sups = this.allSups;
     for (const sup of sups) {
       if (sup.system.maneuver !== "passive") {
         return true;
       }
     }
     return false;
+  }
+
+  /**
+   * Change the IDs for many client effects consistently.
+   *
+   * @param {TeriockEffect[]} effects - Client documents.
+   * @param {Record<string,string>} idMap - Mapping of old IDs to new IDs.
+   * @param {string} rootUuid - UUID for the parent {@link TeriockActor} or {@link TeriockItem} document.
+   * @returns {TeriockEffect[]}
+   * @private
+   */
+  static _changeEffectIds(effects, idMap, rootUuid) {
+    const oldIds = Object.keys(idMap);
+    return effects.map((oldEffect) => {
+      const newEffect = /** @type {TeriockEffect} */ oldEffect.clone();
+      const updateData = {
+        "system.rootUuid": rootUuid,
+      };
+      if (oldIds.includes(oldEffect.id)) {
+        updateData["_id"] = idMap[oldEffect.id];
+      }
+      if (oldEffect.metadata.canSub) {
+        if (oldIds.includes(oldEffect.system.supId)) {
+          updateData["system.supId"] = idMap[oldEffect.system.supId];
+        }
+        const newSubIds = new Set();
+        for (const oldId of oldEffect.system.subIds) {
+          newSubIds.add(idMap[oldId]);
+        }
+        updateData["system.subIds"] = newSubIds;
+      }
+      newEffect.updateSource(updateData);
+      return newEffect;
+    });
   }
 
   /**
@@ -242,10 +196,10 @@ export default class TeriockEffect extends BaseTeriockEffect {
    * Modifications to pending documents must mutate the documents array or alter individual document instances using
    * {@link updateSource}.
    *
-   * @param {TeriockEffect[]} documents           Pending document instances to be created
-   * @param {DatabaseCreateOperation} operation   Parameters of the database creation operation
-   * @param {BaseUser} user                       The User requesting the creation operation
-   * @returns {Promise<boolean|void>}             Return false to cancel the creation operation entirely
+   * @param {TeriockEffect[]} documents - Pending document instances to be created
+   * @param {DatabaseCreateOperation} operation - Parameters of the database creation operation
+   * @param {BaseUser} user - The User requesting the creation operation
+   * @returns {Promise<boolean|void>} - Return false to cancel the creation operation entirely
    * @protected
    */
   static async _preCreateOperation(documents, operation, user) {
@@ -255,32 +209,26 @@ export default class TeriockEffect extends BaseTeriockEffect {
     for (const supEffect of documents) {
       const newSupId = foundry.utils.randomID();
       supEffect.updateSource({ _id: newSupId });
-      if (["ability", "effect"].includes(supEffect.type)) {
-        /** @type {string[]} */
-        const newSubIds = [];
-        if (supEffect.subIds.length > 0) {
-          const supRoot = /** @type {TeriockActor|TeriockItem} */ await foundry.utils.fromUuid(
-            supEffect.system?.rootUuid,
-          );
-          for (const id of supEffect.subIds) {
-            /** @type {TeriockEffect} */
-            const refSub = supRoot.effects.get(id);
-            const newSubId = foundry.utils.randomID();
-            const newSub = await refSub.clone({
-              "system.rootUuid": operation.parent.uuid,
-              "system.supId": newSupId,
-            });
-            newSub.updateSource({ _id: newSubId });
-            toCreate.push(newSub);
-            newSubIds.push(newSubId);
+      toCreate.push(supEffect);
+      if (supEffect.metadata.canSub) {
+        if (supEffect.subIds.size > 0) {
+          const oldSupId = supEffect.subs[0].system.supId;
+          const subEffects = supEffect.allSubs;
+          const idMap = {};
+          for (const id of subEffects.map((sub) => sub.id)) {
+            idMap[id] = foundry.utils.randomID();
           }
+          idMap[oldSupId] = newSupId;
+          const newSubs = this._changeEffectIds(subEffects, idMap, operation.parent.uuid);
+          supEffect.updateSource({
+            "system.subIds": supEffect.subIds.map((oldId) => idMap[oldId]),
+          });
+          toCreate.push(...newSubs);
         }
-        supEffect.updateSource({
-          "system.rootUuid": operation.parent.uuid,
-          "system.subIds": newSubIds,
-        });
+        supEffect.updateSource({ "system.rootUuid": operation.parent.uuid });
       }
     }
+    documents.length = 0;
     documents.push(...toCreate);
     operation.keepId = true;
   }
@@ -295,22 +243,17 @@ export default class TeriockEffect extends BaseTeriockEffect {
    * Modifications to the requested deletions are performed by mutating the operation object.
    * {@link updateSource}.
    *
-   * @param {TeriockEffect[]} documents                Document instances to be deleted
-   * @param {DatabaseDeleteOperation} operation   Parameters of the database update operation
-   * @param {BaseUser} user                       The User requesting the deletion operation
-   * @returns {Promise<boolean|void>}             Return false to cancel the deletion operation entirely
+   * @param {TeriockEffect[]} documents - Document instances to be deleted
+   * @param {DatabaseDeleteOperation} operation - Parameters of the database update operation
+   * @param {BaseUser} user - The User requesting the deletion operation
+   * @returns {Promise<boolean|void>} - Return false to cancel the deletion operation entirely
    * @protected
    */
   static async _preDeleteOperation(documents, operation, user) {
     await super._preDeleteOperation(documents, operation, user);
     for (const supEffect of documents) {
-      if (["ability", "effect"].includes(supEffect.type)) {
-        const subEffects = await supEffect.subsAsync();
-        const subIds = subEffects.map((e) => e.id);
-        /** @type {TeriockActor|TeriockItem} */
-        const parent = operation.parent;
-        const realSubIds = subIds.filter((id) => parent.effects.has(id));
-        operation.ids.push(...realSubIds);
+      if (supEffect.metadata.canSub) {
+        operation.ids.push(...Array.from(supEffect.allSubs.map((e) => e.id)));
       }
     }
   }
@@ -337,11 +280,11 @@ export default class TeriockEffect extends BaseTeriockEffect {
    * @returns {Promise<void>} Promise that resolves when all subs are deleted.
    */
   async deleteSubs() {
-    if (this.subIds > 0) {
+    if (this.subIds.size > 0) {
+      await this.parent?.deleteEmbeddedDocuments("ActiveEffect", Array.from(this.subIds));
       await this.update({
-        "system.subIds": [],
+        "system.subIds": new Set(),
       });
-      await this.parent?.deleteEmbeddedDocuments("ActiveEffect", this.subIds);
     }
   }
 
@@ -352,10 +295,9 @@ export default class TeriockEffect extends BaseTeriockEffect {
    * @returns {Promise<void>}
    */
   async addSub(sub) {
-    const validTypes = ["ability", "effect"];
-    if (validTypes.includes(this.type) && validTypes.includes(sub.type)) {
+    if (this.metadata.canSub && sub.metadata.canSub) {
       const newSubIds = this.subIds;
-      newSubIds.push(sub.id);
+      newSubIds.add(sub.id);
       await this.parent.updateEmbeddedDocuments("ActiveEffect", [
         {
           _id: this.id,

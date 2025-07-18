@@ -16,12 +16,12 @@ export function _suppressed(abilityData) {
       suppressed = true;
     }
     if (!suppressed && abilityData.abilityType !== "intrinsic") {
-      const attuned = abilityData.parent.parent.system.attuned;
-      suppressed = !attuned;
+      const isAttuned = abilityData.parent.parent.system.isAttuned;
+      suppressed = !isAttuned;
     }
   }
-  if (!suppressed && abilityData.actor && abilityData.parent.supSync) {
-    const sups = abilityData.parent.allSupsSync;
+  if (!suppressed && abilityData.actor && abilityData.parent.sup) {
+    const sups = abilityData.parent.allSups;
     if (sups.some((sup) => !sup.modifiesActor)) {
       suppressed = true;
     }

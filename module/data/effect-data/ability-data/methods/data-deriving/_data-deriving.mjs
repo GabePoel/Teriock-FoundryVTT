@@ -17,25 +17,7 @@ export function _prepareDerivedData(abilityData) {
       abilityData.parent.changes = /** @type {EffectChangeData[]} */ abilityData.applies.fluent.changes;
     }
   }
-
-  const subUuids = [];
-  if (abilityData.subIds?.length > 0) {
-    for (const id of abilityData.subIds) {
-      const sub = abilityData.parent.parent.getEmbeddedDocument("ActiveEffect", id);
-      if (sub) {
-        subUuids.push(sub.uuid);
-      }
-    }
-  }
-  if (subUuids.length > 0) {
-    abilityData.subUuids = subUuids;
-  }
-  let supUuid = null;
-  if (abilityData.supId) {
-    const parent = abilityData.parent.parent.getEmbeddedDocument("ActiveEffect", abilityData.supId);
-    if (parent) {
-      supUuid = parent.uuid;
-    }
-    abilityData.supUuid = supUuid;
+  if (abilityData.parent.parent?.uuid) {
+    abilityData.rootUuid = abilityData.parent.parent.uuid;
   }
 }

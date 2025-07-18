@@ -11,7 +11,11 @@ import { _roll } from "./methods/_rolling.mjs";
  * @extends {TeriockBaseEffectData}
  */
 export default class TeriockResourceData extends ConsumableDataMixin(TeriockBaseEffectData) {
-  /** @inheritdoc */
+  /**
+   * Metadata for this effect.
+   *
+   * @returns {Teriock.EffectMetadata}
+   */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
       type: "resource",
@@ -28,7 +32,7 @@ export default class TeriockResourceData extends ConsumableDataMixin(TeriockBase
   get suppressed() {
     let suppressed = super.suppressed;
     if (!suppressed && this.parent?.parent?.type === "equipment") {
-      suppressed = !this.parent.parent.system.attuned;
+      suppressed = !this.parent.parent.system.isAttuned;
     }
     return suppressed;
   }

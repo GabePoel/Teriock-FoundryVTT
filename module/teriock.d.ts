@@ -5,6 +5,7 @@ import * as Chat from "./types/chat";
 import * as Command from "./types/command";
 import * as DocumentTypes from "./types/document-types";
 import * as Messages from "./types/messages";
+import * as Metadata from "./types/metadata";
 import * as Parameters from "./types/parameters";
 import * as Rolls from "./types/rolls";
 import * as Ui from "./types/ui";
@@ -55,6 +56,7 @@ declare global {
     type ActorType = DocumentTypes.ActorType;
     type ItemType = DocumentTypes.ItemType;
     type EffectType = DocumentTypes.EffectType;
+    type EffectMetadata = Metadata.EffectMetadata;
     type ChatActionButton = Chat.ChatActionButton;
     type ChatOptions = Command.ChatOptions;
     type CommandOptions = Command.CommandOptions;

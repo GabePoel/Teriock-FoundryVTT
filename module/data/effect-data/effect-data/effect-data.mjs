@@ -5,10 +5,15 @@ import TeriockBaseEffectData from "../base-effect-data/base-effect-data.mjs";
  * Effect-specific effect data model.
  */
 export default class TeriockEffectData extends TeriockBaseEffectData {
-  /** @inheritdoc */
+  /**
+   * Metadata for this effect.
+   *
+   * @returns {Teriock.EffectMetadata}
+   */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
       type: "effect",
+      canSub: true,
     });
   }
 
@@ -97,8 +102,20 @@ export default class TeriockEffectData extends TeriockBaseEffectData {
           hint: "If true, effect expires if its source is deleted or disabled.",
         }),
       }),
-      subIds: new fields.ArrayField(/** @type {typeof DocumentIdField} */ new fields.DocumentIdField()),
-      subUuids: new fields.ArrayField(/** @type {typeof DocumentUUIDField} */ new fields.DocumentUUIDField()),
+      supId: new fields.DocumentIdField({
+        initial: null,
+        nullable: true,
+        label: "Super Ability ID",
+        hint: "The ID of the ability or effect that provides this ability, if there is one.",
+      }),
+      subIds: new fields.SetField(/** @type {typeof DocumentIdField} */ new fields.DocumentIdField(), {
+        label: "Sub IDs",
+        hint: "The IDs of the abilities that this ability provides, if there are any.",
+      }),
+      rootUuid: new fields.DocumentUUIDField({
+        label: "Root UUID",
+        hint: "The UUID of the document this ability is embedded in.",
+      }),
     });
   }
 

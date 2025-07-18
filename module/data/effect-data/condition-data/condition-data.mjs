@@ -11,7 +11,11 @@ import TeriockBaseEffectData from "../base-effect-data/base-effect-data.mjs";
  * @extends {TeriockBaseEffectData}
  */
 export default class TeriockConditionData extends WikiDataMixin(TeriockBaseEffectData) {
-  /** @inheritdoc */
+  /**
+   * Metadata for this effect.
+   *
+   * @returns {Teriock.EffectMetadata}
+   */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
       type: "condition",

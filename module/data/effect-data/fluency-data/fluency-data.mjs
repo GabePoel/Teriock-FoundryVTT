@@ -13,7 +13,11 @@ import { _roll } from "./methods/_rolling.mjs";
  * @extends {TeriockBaseEffectData}
  */
 export default class TeriockFluencyData extends WikiDataMixin(TeriockBaseEffectData) {
-  /** @inheritdoc */
+  /**
+   * Metadata for this effect.
+   *
+   * @returns {Teriock.EffectMetadata}
+   */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
       type: "fluency",
@@ -30,7 +34,7 @@ export default class TeriockFluencyData extends WikiDataMixin(TeriockBaseEffectD
   get suppressed() {
     let suppressed = super.suppressed;
     if (!suppressed && this.parent?.parent?.type === "equipment") {
-      suppressed = !this.parent.parent.system.attuned;
+      suppressed = !this.parent.parent.system.isAttuned;
     }
     return suppressed;
   }

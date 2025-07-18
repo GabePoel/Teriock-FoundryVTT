@@ -38,26 +38,28 @@
       </div>
     </div>
   </div>
-  <div class="ab-box-container">
-    <div
-      class="ab-box {{#if editable}}equipped-box{{/if}}"
-      data-action="toggleEquipped"
-      data-tooltip="Equipped?"
-    >
-      <div class="ab-box-icon">
-        {{#if system.equipped}}
-          <i class="fa-light fa-check"></i>
-        {{else}}
-          <i class="fa-light fa-xmark"></i>
-        {{/if}}
-      </div>
-      <div class="ab-box-content">
-        {{#if system.equipped}}
-          Equipped
-        {{else}}
-          Unequipped
-        {{/if}}
+  {{#if (or system.canEquip system.canUnequip)}}
+    <div class="ab-box-container">
+      <div
+        class="ab-box {{#if editable}}equipped-box{{/if}}"
+        data-action="toggleEquipped"
+        data-tooltip="Equipped?"
+      >
+        <div class="ab-box-icon">
+          {{#if system.equipped}}
+            <i class="fa-light fa-check"></i>
+          {{else}}
+            <i class="fa-light fa-xmark"></i>
+          {{/if}}
+        </div>
+        <div class="ab-box-content">
+          {{#if system.equipped}}
+            Equipped
+          {{else}}
+            Unequipped
+          {{/if}}
+        </div>
       </div>
     </div>
-  </div>
+  {{/if}}
 </div>

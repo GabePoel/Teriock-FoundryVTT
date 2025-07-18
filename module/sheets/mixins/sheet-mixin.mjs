@@ -759,6 +759,7 @@ export default (Base) => {
       const EffectClass = await getDocumentClass("ActiveEffect");
       const effect = /** @type {TeriockEffect} */ await EffectClass.fromDropData(data);
       if (!this._canDropEffect(effect)) return false;
+
       if (this.document.documentName === "ActiveEffect") {
         effect.updateSource({ "system.supId": this.document.id });
       }
@@ -773,7 +774,7 @@ export default (Base) => {
 
     /**
      * Checks if an effect can be dropped on this document.
-     * @param {ActiveEffect} effect - The effect to check.
+     * @param {TeriockEffect} effect - The effect to check.
      * @returns {boolean} True if the effect can be dropped.
      * @private
      */
@@ -783,8 +784,9 @@ export default (Base) => {
         effect &&
         effect.parent !== this.document &&
         effect.target !== this.document &&
+        effect !== this.document &&
         (["Actor", "Item"].includes(this.document.documentName) ||
-          (this.document.type === "ability" && effect.type === "ability"))
+          (this.document.metadata.canSub && effect.metadata.canSub))
       );
     }
 
@@ -817,7 +819,10 @@ export default (Base) => {
           await source.delete();
         }
       }
-      const newItems = await this.document.createEmbeddedDocuments("Item", [item]);
+      const newItems = await this.document.createEmbeddedDocuments("Item", [item], {
+        keepId: true,
+        keepEmbeddedIds: true,
+      });
       return newItems[0];
     }
 

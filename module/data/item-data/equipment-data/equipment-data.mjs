@@ -3,7 +3,6 @@ import WikiDataMixin from "../../mixins/wiki-mixin.mjs";
 import TeriockBaseItemData from "../base-item-data/base-item-data.mjs";
 import * as attunement from "./methods/_attunement.mjs";
 import * as deriving from "./methods/_data-deriving.mjs";
-import * as handling from "./methods/_handling.mjs";
 import * as identifying from "./methods/_identifying.mjs";
 import * as messages from "./methods/_messages.mjs";
 import * as migrate from "./methods/_migrate-data.mjs";
@@ -64,21 +63,52 @@ export default class TeriockEquipmentData extends WikiDataMixin(ConsumableDataMi
   }
 
   /**
+   * Gets the current attunement data for the equipment.
+   *
+   * @returns {TeriockAttunement|null} The attunement data or null if not attuned.
+   */
+  get attunement() {
+    return attunement._getAttunement(this);
+  }
+
+  /**
    * Checks if the equipment is currently attuned.
    *
    * @returns {boolean} True if the equipment is attuned, false otherwise.
    */
-  get attuned() {
+  get isAttuned() {
     return attunement._attuned(this);
   }
 
   /**
-   * Gets the current attunement data for the equipment.
+   * Checks if the equipment is currently equipped.
    *
-   * @returns {TeriockAttunementData | null} The attunement data or null if not attuned.
+   * @returns {boolean} - True if the equipment is equipped, false otherwise.
    */
-  get attunement() {
-    return attunement._getAttunement(this);
+  get isEquipped() {
+    if (this.consumable) {
+      return this.quantity >= 1 && this.equipped;
+    } else {
+      return this.equipped;
+    }
+  }
+
+  /**
+   * Checks if equipping is a valid operation.
+   *
+   * @returns {boolean}
+   */
+  get canEquip() {
+    return ((this.consumable && this.quantity >= 1) || !this.consumable) && !this.isEquipped;
+  }
+
+  /**
+   * Checks if unequipping is a valid operation.
+   *
+   * @returns {boolean}
+   */
+  get canUnequip() {
+    return ((this.consumable && this.quantity >= 1) || !this.consumable) && this.isEquipped;
   }
 
   /**
@@ -117,20 +147,6 @@ export default class TeriockEquipmentData extends WikiDataMixin(ConsumableDataMi
   }
 
   /**
-   * Uses one unit of the equipment.
-   * If consumable and quantity reaches 0, unequips the item.
-   *
-   * @returns {Promise<void>} Promise that resolves when the equipment is used.
-   * @override
-   */
-  async useOne() {
-    await super.useOne();
-    if (this.consumable && this.quantity <= 0) {
-      await this.unequip();
-    }
-  }
-
-  /**
    * Parses raw HTML content for the equipment.
    *
    * @param {string} rawHTML - The raw HTML content to parse.
@@ -150,117 +166,6 @@ export default class TeriockEquipmentData extends WikiDataMixin(ConsumableDataMi
    */
   async roll(options) {
     await rolling._roll(this, options);
-  }
-
-  /**
-   * Shatters the equipment, making it unusable.
-   *
-   * @returns {Promise<void>} Promise that resolves when the equipment is shattered.
-   */
-  async shatter() {
-    await handling._shatter(this);
-  }
-
-  /**
-   * Repairs the equipment, making it usable again.
-   *
-   * @returns {Promise<void>} Promise that resolves when the equipment is repaired.
-   */
-  async repair() {
-    await handling._repair(this);
-  }
-
-  /**
-   * Sets the shattered state of the equipment.
-   *
-   * @param {boolean} bool - Whether the equipment should be shattered.
-   * @returns {Promise<void>} Promise that resolves when the shattered state is set.
-   */
-  async setShattered(bool) {
-    await handling._setShattered(this, bool);
-  }
-
-  /**
-   * Toggles the shattered state of the equipment.
-   *
-   * @returns {Promise<void>} Promise that resolves when the shattered state is toggled.
-   */
-  async toggleShattered() {
-    await handling._toggleShattered(this);
-  }
-
-  /**
-   * Dampens the equipment, reducing its effectiveness.
-   *
-   * @returns {Promise<void>} Promise that resolves when the equipment is dampened.
-   */
-  async dampen() {
-    await handling._dampen(this);
-  }
-
-  /**
-   * Removes dampening from the equipment.
-   *
-   * @returns {Promise<void>} Promise that resolves when the equipment is undampened.
-   */
-  async undampen() {
-    await handling._undampen(this);
-  }
-
-  /**
-   * Sets the dampened state of the equipment.
-   *
-   * @param {boolean} bool - Whether the equipment should be dampened.
-   * @returns {Promise<void>} Promise that resolves when the dampened state is set.
-   */
-  async setDampened(bool) {
-    await handling._setDampened(this, bool);
-  }
-
-  /**
-   * Toggles the dampened state of the equipment.
-   *
-   * @returns {Promise<void>} Promise that resolves when the dampened state is toggled.
-   */
-  async toggleDampened() {
-    await handling._toggleDampened(this);
-  }
-
-  /**
-   * Unequips the equipment from its current slot.
-   *
-   * @returns {Promise<void>} Promise that resolves when the equipment is unequipped.
-   */
-  async unequip() {
-    await handling._unequip(this);
-  }
-
-  /**
-   * Equips the equipment to an appropriate slot.
-   *
-   * @returns {Promise<void>} Promise that resolves when the equipment is equipped.
-   */
-  async equip() {
-    await handling._equip(this);
-  }
-
-  /**
-   * Sets the equipped state of the equipment.
-   *
-   * @param {boolean} bool - Whether the equipment should be equipped.
-   * @returns {Promise<void>} Promise that resolves when the equipped state is set.
-   */
-  async setEquipped(bool) {
-    await handling._setEquipped(this, bool);
-  }
-
-  /**
-   * Toggles the equipped state of the equipment.
-   *
-   * @returns {Promise<void>} Promise that resolves when the equipped state is toggled.
-   */
-  async toggleEquipped() {
-    await handling._toggleEquipped(this);
   }
 
   /**

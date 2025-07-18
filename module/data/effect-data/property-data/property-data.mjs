@@ -12,7 +12,11 @@ import { _messageParts } from "./methods/_messages.mjs";
  * @extends {TeriockBaseEffectData}
  */
 export default class TeriockPropertyData extends WikiDataMixin(TeriockBaseEffectData) {
-  /** @inheritdoc */
+  /**
+   * Metadata for this effect.
+   *
+   * @returns {Teriock.EffectMetadata}
+   */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
       type: "property",

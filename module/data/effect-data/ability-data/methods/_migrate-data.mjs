@@ -71,23 +71,5 @@ export function _migrateData(data) {
       }
     }
   }
-
-  // Hierarchy migration
-  if (typeof data.parentId === "string") {
-    data.supId = data.parentId;
-    delete data.parentId;
-  }
-  if (typeof data.parentUuid === "string") {
-    data.supUuid = data.parentUuid;
-    delete data.parentUuid;
-  }
-  if (data.childIds instanceof Array) {
-    data.subIds = data.childIds;
-    delete data.subIds;
-  }
-  if (data.childUuids instanceof Array) {
-    data.subUuids = data.childUuids;
-    delete data.subUuids;
-  }
   return data;
 }
