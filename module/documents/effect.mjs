@@ -208,9 +208,9 @@ export default class TeriockEffect extends BaseTeriockEffect {
     const toCreate = [];
     for (const supEffect of documents) {
       const newSupId = foundry.utils.randomID();
-      supEffect.updateSource({ _id: newSupId });
       toCreate.push(supEffect);
-      if (supEffect.metadata.canSub) {
+      if (supEffect?.metadata?.canSub) {
+        supEffect.updateSource({ _id: newSupId });
         if (supEffect.subIds.size > 0) {
           const oldSupId = supEffect.subs[0].system.supId;
           const subEffects = supEffect.allSubs;
@@ -226,11 +226,11 @@ export default class TeriockEffect extends BaseTeriockEffect {
           toCreate.push(...newSubs);
         }
         supEffect.updateSource({ "system.rootUuid": operation.parent.uuid });
+        operation.keepId = true;
       }
     }
     documents.length = 0;
     documents.push(...toCreate);
-    operation.keepId = true;
   }
 
   /**
@@ -252,7 +252,7 @@ export default class TeriockEffect extends BaseTeriockEffect {
   static async _preDeleteOperation(documents, operation, user) {
     await super._preDeleteOperation(documents, operation, user);
     for (const supEffect of documents) {
-      if (supEffect.metadata.canSub) {
+      if (supEffect?.metadata?.canSub) {
         operation.ids.push(...Array.from(supEffect.allSubs.map((e) => e.id)));
       }
     }
