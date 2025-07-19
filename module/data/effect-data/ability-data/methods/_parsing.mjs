@@ -400,6 +400,17 @@ function processCosts(parameters, tagTree, doc) {
       }
     }
 
+    if (c.startsWith("gp")) {
+      const gp = c.slice(2);
+      if (gp === "x") {
+        parameters.costs.gp = COST_TEMPLATES.variable(getBarText(doc, "gold-cost"));
+      } else if (gp && !isNaN(gp)) {
+        parameters.costs.gp = COST_TEMPLATES.static(parseInt(gp, 10));
+      } else {
+        parameters.costs.gp = COST_TEMPLATES.formula(gp || "");
+      }
+    }
+
     if (c === "shatter") parameters.costs.break = "shatter";
     if (c === "destroy") parameters.costs.break = "destroy";
   });

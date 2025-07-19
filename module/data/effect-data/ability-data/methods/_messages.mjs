@@ -37,7 +37,7 @@ export function _messageParts(abilityData) {
   }
   const bars = [
     {
-      icon: "fa-wreath-laurel",
+      icon: "fa-arrows-turn-right",
       label: "Execution",
       wrappers: [
         ref.executionTime[src.maneuver][src.executionTime],

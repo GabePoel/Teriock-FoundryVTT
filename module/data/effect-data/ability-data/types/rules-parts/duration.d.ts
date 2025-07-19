@@ -1,9 +1,11 @@
-export type NormalDurationUnit = "year" | "month" | "week" | "day" | "hour" | "minute" | "second";
-
-export type PassiveDurationUnit = "always" | "up" | "down" | "alive" | "dead" | "stationary";
+export type NormalDurationUnit = "year" | "month" | "week" | "day" | "hour" | "minute" | "second" | "instant";
 
 export type Duration = {
-  unit: NormalDurationUnit | PassiveDurationUnit;
+  unit: NormalDurationUnit;
   quantity: number;
   description: string;
-}
+  requiredConditions: {
+    present: Set<string>;
+    absent: Set<string>;
+  };
+};
