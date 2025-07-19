@@ -1,3 +1,5 @@
+import {parseDurationString} from "../../../../helpers/utils.mjs";
+
 /**
  * Migrates ability data to the current schema version.
  * Handles data format conversions for effects, costs, and other ability properties.
@@ -69,6 +71,11 @@ export function _migrateData(data) {
           },
         };
       }
+    }
+
+    // Duration migration
+    if (typeof data.duration == "string") {
+      data.duration = parseDurationString(data.duration);
     }
   }
   return data;

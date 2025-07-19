@@ -16,7 +16,8 @@ export async function _generateEffect(abilityData, actor, heightenAmount = 0) {
   let changes = foundry.utils.deepClone(abilityData.applies.base.changes) || [];
   let statuses = foundry.utils.deepClone(abilityData.applies.base.statuses) || new Set();
 
-  let seconds = parseTimeString(abilityData.duration);
+  // TODO: Switch parsing to unit based.
+  let seconds = parseTimeString(abilityData.duration.description);
 
   if (abilityData.parent.isProficient) {
     if (abilityData.applies.proficient.changes.length > 0) {
@@ -82,21 +83,21 @@ export async function _generateEffect(abilityData, actor, heightenAmount = 0) {
   let dawn = false;
   let movement = false;
   let sustained = false;
-  if (abilityData.duration.toLowerCase().includes("while dueling")) {
+  if (abilityData.duration.description.toLowerCase().includes("while dueling")) {
     condition.value = "dueling";
     condition.present = false;
-  } else if (abilityData.duration.toLowerCase().includes("while up")) {
+  } else if (abilityData.duration.description.toLowerCase().includes("while up")) {
     condition.value = "down";
     condition.present = true;
-  } else if (abilityData.duration.toLowerCase().includes("while down")) {
+  } else if (abilityData.duration.description.toLowerCase().includes("while down")) {
     condition.value = "down";
     condition.present = false;
-  } else if (abilityData.duration.toLowerCase().includes("while alive")) {
+  } else if (abilityData.duration.description.toLowerCase().includes("while alive")) {
     condition.value = "dead";
     condition.present = true;
-  } else if (abilityData.duration.toLowerCase().includes("while stationary")) {
+  } else if (abilityData.duration.description.toLowerCase().includes("while stationary")) {
     movement = true;
-  } else if (abilityData.duration.toLowerCase().includes("until dawn")) {
+  } else if (abilityData.duration.description.toLowerCase().includes("until dawn")) {
     dawn = true;
   }
   if (abilityData.sustained) {
@@ -126,7 +127,7 @@ export async function _generateEffect(abilityData, actor, heightenAmount = 0) {
       seconds: seconds || 0,
     },
   };
-  if ((seconds > 0 || abilityData.duration.toLowerCase().trim() !== "instant") && abilityData.maneuver !== "passive") {
+  if ((seconds > 0 || abilityData.duration.description.toLowerCase().trim() !== "instant") && abilityData.maneuver !== "passive") {
     return effectData;
   }
   return false;

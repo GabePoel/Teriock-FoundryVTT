@@ -1,7 +1,10 @@
 import TeriockRoll from "../documents/roll.mjs";
+import {abilityOptions} from "./constants/ability-options.mjs";
+import {conditions} from "./constants/generated/conditions.mjs";
 
 /**
  * Creates an HTML icon element using Font Awesome classes.
+ *
  * @param {string} icon - The icon name to use.
  * @param {string} style - The Font Awesome style (solid, light, etc.). Defaults to "solid".
  * @returns {string} The HTML string for the icon element.
@@ -12,6 +15,7 @@ export function makeIcon(icon, style = "solid") {
 
 /**
  * Converts a string to camelCase format.
+ *
  * @param {string} str - The string to convert.
  * @returns {string} The camelCase version of the string.
  */
@@ -24,6 +28,7 @@ export function toCamelCase(str) {
 
 /**
  * Determines the appropriate dice icon based on the roll formula.
+ *
  * @param {string} rollFormula - The dice roll formula to analyze.
  * @returns {string} The Font Awesome class for the appropriate dice icon.
  */
@@ -42,6 +47,7 @@ export function getRollIcon(rollFormula) {
 
 /**
  * Converts an array of strings to camelCase format.
+ *
  * @param {string[]} names - The array of strings to convert.
  * @returns {string[]} An array of camelCase strings.
  */
@@ -51,6 +57,7 @@ export function toCamelCaseList(names) {
 
 /**
  * Creates a chat message with an image.
+ *
  * @param {string} img - The image URL to display in chat.
  * @returns {Promise<void>}
  */
@@ -71,6 +78,7 @@ export async function chatImage(img) {
 
 /**
  * Evaluates a die roll formula synchronously and returns the total result.
+ *
  * @param {string} formula - The dice roll formula to evaluate.
  * @param {Object} data - The roll data to use for the evaluation.
  * @param {Object} options - Options that get passed to the roll.
@@ -94,6 +102,7 @@ export function evaluateSync(formula, data = {}, options = {}) {
 /**
  * Evaluates a die roll formula synchronously and returns the total result.
  * Avoids having to generate roll data if it's not needed.
+ *
  * @param {string} formula - The dice roll formula to evaluate.
  * @param {TeriockActor|TeriockItem|TeriockEffect} document - The document to get roll data from.
  * @param {Object} options - Options that get passed to the roll.
@@ -115,6 +124,7 @@ export function smartEvaluateSync(formula, document, options = {}) {
 
 /**
  * Evaluates a die roll formula asynchronously and returns the total result.
+ *
  * @param {string} formula - The dice roll formula to evaluate.
  * @param {Object} data - The roll data to use for the evaluation.
  * @param {Object} options - Options that get passed to the roll.
@@ -136,7 +146,58 @@ export async function evaluateAsync(formula, data = {}, options = {}) {
 }
 
 /**
+ * Parses a duration string and returns a duration.
+ *
+ * @param durationString
+ * @returns {Duration}
+ */
+export function parseDurationString(durationString) {
+  let parsingString = durationString.trim().toLowerCase().replace(/\.$/, '');
+  let parsedUnit = 'noLimit';
+  let parsedQuantity = parseInt(parsingString) || 0;
+  let parsedAbsentConditions = new Set();
+  let parsedPresentConditions = new Set();
+  // Handle special cases first
+  if (parsingString === 'while up') {
+    parsedAbsentConditions.add("down");
+  } else if (parsingString === 'while alive') {
+    parsedAbsentConditions.add("dead");
+  } else if (parsingString === "instant") {
+    parsedUnit = "instant";
+  } else {
+    // General condition parsing
+    for (const condition of Object.keys(conditions)) {
+      if (parsingString.includes("not " + condition)) {
+        parsedAbsentConditions.add(condition);
+      } else if (parsingString.includes(condition)) {
+        parsedPresentConditions.add(condition);
+      }
+    }
+  }
+  console.log(parsedAbsentConditions)
+  // Use word boundaries for unit matching to avoid partial matches
+  for (const unit of Object.keys(abilityOptions.duration.unit)) {
+    const regex = new RegExp(`\\b${unit}s?\\b`);
+    if (regex.test(parsingString)) {
+      parsedUnit = unit;
+      break;
+    }
+  }
+
+  return {
+    unit: parsedUnit,
+    quantity: parsedQuantity,
+    description: durationString,
+    conditions: {
+      absent: parsedAbsentConditions,
+      present: parsedPresentConditions,
+    }
+  };
+}
+
+/**
  * Parses a time string and returns a number of seconds.
+ *
  * @param {string} timeString - The time string to parse.
  * @returns {number|null} A number of seconds corresponding to the duration, or null if invalid.
  */
@@ -168,6 +229,7 @@ export function parseTimeString(timeString) {
 
 /**
  * Converts a number of seconds to a human-readable time string.
+ *
  * @param {number} totalSeconds - The total number of seconds to convert.
  * @returns {string} A human-readable time string.
  */
@@ -201,6 +263,7 @@ export function secondsToReadable(totalSeconds) {
  * Traverses the given object (`obj`) following the specified `path`, which can include wildcards (`*`)
  * to match any key at that level. If a `key` is provided, only values associated with that key are merged
  * into the result. If no `key` is provided, all values at the target path are merged.
+ *
  * @param {Object} obj - The source object to traverse and merge values from.
  * @param {string} path - Dot-separated path string, supports wildcards (`*`) for matching any key.
  * @param {string} [key] - Optional key to extract values from objects at the target path.

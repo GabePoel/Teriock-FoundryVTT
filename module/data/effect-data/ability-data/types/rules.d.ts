@@ -10,6 +10,7 @@ import {
 } from "./rules-parts/interaction";
 import { OverviewText, ResultsText } from "./rules-parts/summary";
 import { ImprovementsConfig } from "./rules-parts/improvements";
+import type {Duration} from "./rules-parts/duration";
 
 /**
  * Valid ability types
@@ -33,7 +34,7 @@ export interface TeriockAbilityRulesSchema {
   delivery: DeliveryConfig;
   targets: TargetType[];
   elements: Element[];
-  duration: string;
+  duration: Duration;
   sustained: boolean;
   range: string | null;
 

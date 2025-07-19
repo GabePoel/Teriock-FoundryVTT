@@ -59,7 +59,7 @@ export default class TeriockEffect extends BaseTeriockEffect {
    * @returns {string|null}
    */
   get supId() {
-    if (this.metadata.canSub && this.system.supId && this.parent.effects.has(this.system.supId)) {
+    if (this.metadata?.canSub && this.system.supId && this.parent.effects.has(this.system.supId)) {
       return this.system.supId;
     }
     return null;
