@@ -46,6 +46,7 @@ declare global {
 
   const TeriockAbility: typeof import("./documents/_documents.mjs").TeriockAbility;
   const TeriockAttunement: typeof import("./documents/_documents.mjs").TeriockAttunement;
+  const TeriockLingeringEffect: typeof import("./documents/_documents.mjs").TeriockLingeringEffect;
   const TeriockCondition: typeof import("./documents/_documents.mjs").TeriockCondition;
   const TeriockFluency: typeof import("./documents/_documents.mjs").TeriockFluency;
   const TeriockProperty: typeof import("./documents/_documents.mjs").TeriockProperty;
@@ -74,6 +75,17 @@ declare global {
     type SkipFunctions = Updates.SkipFunctions;
     type WikiPullOptions = Wiki.WikiPullOptions;
     type HackableBodyPart = Parameters.HackableBodyPart;
+
+    const __brand: unique symbol;
+
+    /** FoundryVTT UUID */
+    type UUID<T = unknown> = string & {
+      readonly [__brand]: T;
+    };
+    /** FoundryVTT ID */
+    type ID<T = unknown> = string & {
+      readonly [__brand]: T;
+    };
   }
 }
 

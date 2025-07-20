@@ -86,6 +86,61 @@ export default class TeriockEffectData extends TeriockBaseEffectData {
             hint: "If true, effect expires if condition is present. If false, effect expires if condition is not present.",
           }),
         }),
+        combat: new fields.SchemaField({
+          who: new fields.DocumentUUIDField({
+            type: "Actor",
+            label: "Who",
+            hint: "UUID of the actor whose turn this expires on.",
+            nullable: true,
+          }),
+          what: new fields.SchemaField({
+            type: new fields.StringField({
+              choices: {
+                forced: "Expires Automatically",
+                rolled: "Expires on Roll",
+                none: "Does not Expire on Turn",
+              },
+              label: "What",
+              hint: "What is the type of thing that causes this to expire?",
+              initial: "none",
+            }),
+            roll: new fields.StringField({
+              initial: "2d4",
+              label: "Roll",
+              hint: "If this expires on a roll, what is the roll that needs to be made?"
+            }),
+            threshold: new fields.NumberField({
+              initial: 4,
+              label: "Threshold",
+              hint: "What is the minimum value that needs to be rolled in order for this to expire?"
+            })
+          }),
+          when: new fields.SchemaField({
+            time: new fields.StringField({
+              choices: {
+                start: "Start",
+                end: "End",
+              },
+              initial: "start",
+              label: "When",
+              hint: "What is the timing for the trigger of this effect expiring?",
+            }),
+            trigger: new fields.StringField({
+              choices: {
+                turn: "Turn",
+                combat: "Combat",
+              },
+              initial: "turn",
+              label: "Trigger",
+              hint: "What is the trigger for this effect expiring?",
+            }),
+            skip: new fields.NumberField({
+              initial: 0,
+              label: "Skip",
+              hint: "A number of instances of the trigger firing to skip before this effect expires."
+            })
+          })
+        }),
         movement: new fields.BooleanField({
           initial: false,
           label: "Stationary Expiration",
@@ -101,6 +156,10 @@ export default class TeriockEffectData extends TeriockBaseEffectData {
           label: "Sustained Expiration",
           hint: "If true, effect expires if its source is deleted or disabled.",
         }),
+        description: new fields.StringField({
+          label: "End Condition",
+          hint: "Under what circumstances should this effect expire?"
+        })
       }),
       supId: new fields.DocumentIdField({
         initial: null,

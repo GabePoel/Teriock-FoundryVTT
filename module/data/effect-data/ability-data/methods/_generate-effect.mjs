@@ -119,6 +119,7 @@ export async function _generateEffect(abilityData, actor, heightenAmount = 0) {
         movement: movement,
         dawn: dawn,
         sustained: sustained,
+        description: abilityData.endCondition,
       },
       subIds: Array.from(abilityData.subIds || new Set()),
       rootUuid: abilityData.parent.parent.uuid,

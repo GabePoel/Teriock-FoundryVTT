@@ -1,4 +1,5 @@
 const { api, ux } = foundry.applications;
+import { createDialogFieldset } from "../../../../../helpers/html.mjs";
 
 /**
  * Handles dialogs for variable costs and heightened effects.
@@ -68,22 +69,4 @@ export async function _handleDialogs(rollConfig) {
       },
     });
   }
-}
-
-/**
- * Creates a dialog fieldset for user input.
- *
- * @param {string} legend - The legend text for the fieldset.
- * @param {string} description - The description text for the field.
- * @param {string} name - The name attribute for the input field.
- * @param {number} max - The maximum value for the number input.
- * @returns {string} HTML string for the dialog fieldset.
- * @private
- */
-function createDialogFieldset(legend, description, name, max) {
-  return `
-    <fieldset><legend>${legend}</legend>
-      <div>${description}</div>
-      <input type="number" name="${name}" value="0" min="0" max="${max}" step="1">
-    </fieldset>`;
 }

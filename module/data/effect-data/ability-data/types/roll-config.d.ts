@@ -1,7 +1,5 @@
 import { CommonRollOptions } from "../../../../types/rolls";
-import { ChatActionButton } from "../../../../types/chat";
 import type TeriockAbilityData from "../ability-data.mjs";
-import type { TeriockToken } from "../../../../documents/_module.mjs";
 import TeriockRoll from "../../../../documents/roll.mjs";
 import type TeriockBaseChatMessageSchema from "../../../message-data/base-message-data/_types";
 
@@ -28,7 +26,7 @@ export type AbilityUseData = {
   rollData: object;
   /** Targeted tokens. */
   targets: Set<any>;
-}
+};
 
 export interface AbilityRollConfig {
   /** Data that describes this specific use of the ability. */
