@@ -29,12 +29,6 @@ export class TakeUnhackHandler extends ActionHandler {
   /** @inheritDoc */
   static ACTION = "take-unhack";
 
-  /**
-   * @property {Teriock.HackableBodyPart} part - What body part to unhack
-   * @inheritDoc
-   */
-  dataset;
-
   /** @inheritDoc */
   async primaryAction() {
     for (const actor of this.actors) {
