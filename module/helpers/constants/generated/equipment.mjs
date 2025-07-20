@@ -1,4 +1,4 @@
-// This file was auto-generated on 2025-07-15 by scripts/update-options.mjs.
+// This file was auto-generated on 2025-07-20 by scripts/update-options.mjs.
 // Do not edit manually.
 
 export const equipment = {

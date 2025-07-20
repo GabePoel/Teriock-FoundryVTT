@@ -1,4 +1,8 @@
-import { addAbilitiesBlock } from "../../../../helpers/messages-builder/message-parts.mjs";
+import {
+  addAbilitiesBlock,
+  addPropertiesBlock,
+  addResourcesBlock,
+} from "../../../../helpers/messages-builder/message-parts.mjs";
 
 /**
  * Generates message parts for a rank item, including bars and blocks for display.
@@ -33,7 +37,12 @@ export function _messageParts(rank) {
       text: src.flaws,
     },
   ];
-  addAbilitiesBlock(rank.transferredEffects, blocks);
+  addPropertiesBlock(rank.transferredEffects, blocks);
+  addAbilitiesBlock(
+    rank.transferredEffects.filter((e) => !e.sup),
+    blocks,
+  );
+  addResourcesBlock(rank.transferredEffects, blocks);
   return {
     bars: bars,
     blocks: blocks,

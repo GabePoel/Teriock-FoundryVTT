@@ -163,12 +163,10 @@ foundry.helpers.Hooks.once("init", function () {
   // Registering custom dice rolls and functions
   CONFIG.Dice.rolls.length = 0;
   CONFIG.Dice.rolls.push(documents.TeriockRoll);
-  CONFIG.Dice.rolls.push(documents.TeriockHarmRoll);
 
   game.teriock = {
     Actor: documents.TeriockActor,
     Effect: documents.TeriockEffect,
-    HarmRoll: documents.TeriockHarmRoll,
     Item: documents.TeriockItem,
     Roll: documents.TeriockRoll,
     Token: documents.TeriockToken,

@@ -1,4 +1,5 @@
-import TeriockHarmRoll from "../../../../documents/harm-roll.mjs";
+import TeriockRoll from "../../../../documents/roll.mjs";
+import { harmRoll } from "../../../../helpers/quick-rolls.mjs";
 
 /**
  * Initiates an equipment roll with the specified options.
@@ -64,21 +65,16 @@ async function use(equipmentData, options) {
     if (equipmentData.actor?.system?.damage?.standard) {
       rollFormula += equipmentData.actor.system.damage.standard;
     }
+    if (options?.advantage) {
+      rollFormula = new TeriockRoll(rollFormula).alter(2, 0, { multiplyNumeric: false }).formula;
+    }
     if (options?.secret) {
       message = await equipmentData.parent.buildMessage({ secret: true });
     } else {
       message = await equipmentData.parent.buildMessage({ secret: false });
     }
     const rollData = equipmentData.actor?.getRollData() || {};
-    let roll = new TeriockHarmRoll(rollFormula, rollData, { message: message });
-    if (options?.advantage) {
-      roll = roll.alter(2, 0);
-    }
-    await roll.toMessage({
-      speaker: ChatMessage.getSpeaker({
-        actor: equipmentData.actor,
-      }),
-    });
+    await harmRoll(rollFormula, rollData, message);
   } else {
     await equipmentData.parent.chat();
   }

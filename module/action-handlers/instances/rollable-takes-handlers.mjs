@@ -1,6 +1,6 @@
-import TeriockChatMessage from "../../../../../documents/chat-message.mjs";
-import TeriockRoll from "../../../../../documents/roll.mjs";
-import boostDialog from "../../../../../helpers/dialogs/boost-dialog.mjs";
+import TeriockChatMessage from "../../documents/chat-message.mjs";
+import TeriockRoll from "../../documents/roll.mjs";
+import boostDialog from "../../helpers/dialogs/boost-dialog.mjs";
 import ActionHandler from "../action-handler.mjs";
 
 export class RollRollableTakeHandler extends ActionHandler {
@@ -26,6 +26,7 @@ export class RollRollableTakeHandler extends ActionHandler {
           {
             label: ROLL_TYPES[this.dataset.type].label || "Apply",
             icon: `fa-solid fa-${ROLL_TYPES[this.dataset.type].icon || "plus"}`,
+            classes: ["teriock-chat-button", `${this.dataset.type}-button`],
             dataset: {
               action: "take-rollable-take",
               type: this.dataset.type,

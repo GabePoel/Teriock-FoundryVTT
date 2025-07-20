@@ -1,9 +1,5 @@
-const { ux } = foundry.applications;
 import { dispatch } from "../../commands/dispatch.mjs";
-import { TeriockRoll } from "../../documents/_module.mjs";
-import { imageContextMenuOptions } from "../../sheets/misc-sheets/image-sheet/connections/_context-menus.mjs";
 import TeriockImageSheet from "../../sheets/misc-sheets/image-sheet/image-sheet.mjs";
-import { boostDialog } from "../dialogs/_module.mjs";
 
 /**
  * Check if the {@link TeriockUser} owns and uses the given document.
@@ -14,140 +10,6 @@ import { boostDialog } from "../dialogs/_module.mjs";
  */
 function isOwnerAndCurrentUser(document, userId) {
   return game.user.id === userId && document.isOwner;
-}
-
-/**
- * Get targets.
- *
- * @returns {TeriockActor[]}
- */
-function getTargetActors() {
-  let actors = [];
-  if (canvas.tokens?.controlled?.length > 0) {
-    actors = canvas.tokens.controlled.map((t) => t.actor).filter(Boolean);
-  } else if (game.user.character) {
-    actors = [game.user.character];
-  }
-  return actors;
-}
-
-/**
- * Modifier roll options.
- *
- * @param {MouseEvent} event
- * @returns {{advantage, disadvantage, double, twoHanded}}
- */
-function getModifierOptions(event) {
-  return {
-    advantage: event.altKey,
-    disadvantage: event.shiftKey,
-    double: event.altKey,
-    twoHanded: event.ctrlKey,
-  };
-}
-
-/**
- * Apply an action to multiple actors with consistent notification messages.
- *
- * @param {TeriockActor[]} actors - Array of actors to apply the action to
- * @param {string} action - The action to perform (e.g., "takeDamage", "takeHeal")
- * @param {number} [amount] - The amount value for the action
- * @param {string} [data] - Additional data for the action (e.g., body part for hack actions)
- * @returns {Promise<void>}
- */
-async function applyActorAction(actors, action, amount, data) {
-  const actionMap = {
-    takeDamage: (actor, amt) => actor.takeDamage(amt),
-    takeDrain: (actor, amt) => actor.takeDrain(amt),
-    takeWither: (actor, amt) => actor.takeWither(amt),
-  };
-
-  const actionMessages = {
-    takeDamage: (name, amt) => `${name} took ${amt} damage`,
-    takeDrain: (name, amt) => `${name} took ${amt} drain`,
-    takeWither: (name, amt) => `${name} took ${amt} wither`,
-  };
-
-  const actionFn = actionMap[action];
-  if (!actionFn) return;
-
-  for (const actor of actors) {
-    if (!actor) continue;
-
-    await actionFn(actor, amount, data);
-
-    const messageFn = actionMessages[action];
-    if (messageFn) {
-      const message = messageFn(actor.name, amount === undefined ? actor : amount, data);
-      ui.notifications.info(message);
-    }
-  }
-}
-
-
-/**
- * Handle applying or removing effects on multiple actors.
- *
- * @param {TeriockActor[]} actors - Array of actors to apply/remove effects on
- * @param {string} effectData - JSON string containing effect data
- * @param {boolean} [remove=false] - Whether to remove the effect instead of applying it
- * @returns {Promise<void>}
- */
-async function handleEffectAction(actors, effectData, remove = false) {
-  let effectObj = null;
-  try {
-    effectObj = JSON.parse(effectData);
-  } catch (e) {
-    ui.notifications.error("Failed to parse effect data.");
-    return;
-  }
-
-  for (const actor of actors) {
-    if (!actor) continue;
-
-    if (remove) {
-      if (typeof actor.deleteEmbeddedDocuments === "function") {
-        const found = actor.effects.find((e) => e.name === effectObj.name);
-        if (found) {
-          await actor.deleteEmbeddedDocuments("ActiveEffect", [found.id]);
-          ui.notifications.info(`Removed effect: ${effectObj.name}`);
-        } else {
-          ui.notifications.warn(`Effect not found: ${effectObj.name}`);
-        }
-      }
-    } else {
-      if (typeof actor.createEmbeddedDocuments === "function") {
-        await actor.createEmbeddedDocuments("ActiveEffect", [effectObj]);
-        ui.notifications.info(`Applied effect: ${effectObj.name}`);
-      }
-    }
-  }
-}
-
-/**
- * Perform roll-based actions on multiple actors.
- *
- * @param {TeriockActor[]} actors - Array of actors to perform rolls for
- * @param {string} action - The roll action to perform (e.g., "rollResistance", "rollFeatSave")
- * @param {any} data - Data needed for the roll action
- * @param {object} [options={}] - Roll options including advantage/disadvantage
- * @returns {Promise<void>}
- */
-async function performRollAction(actors, action, data, options = {}) {
-  const rollActions = {
-    rollResistance: (actor) => actor.rollResistance(options),
-    rollFeatSave: (actor) => actor.rollFeatSave(data, options),
-    rollTradecraft: (actor) => actor.rollTradecraft(data, options),
-  };
-
-  const rollFn = rollActions[action];
-  if (!rollFn) return;
-
-  for (const actor of actors) {
-    if (actor && typeof rollFn === "function") {
-      rollFn(actor);
-    }
-  }
 }
 
 /**
@@ -282,13 +144,8 @@ export default function registerHooks() {
   });
 
   foundry.helpers.Hooks.on("renderChatMessageHTML", (message, html) => {
-    new ux.ContextMenu(html, ".timage", imageContextMenuOptions, {
-      eventName: "contextmenu",
-      jQuery: false,
-      fixed: true,
-    });
-
     // Image click handler
+    /** TODO: Fix and move to {@link TeriockBaseMessageData} */
     html.querySelectorAll(".timage").forEach((imgEl) => {
       imgEl.addEventListener("click", async (event) => {
         event.stopPropagation();
@@ -301,20 +158,8 @@ export default function registerHooks() {
       });
     });
 
-    // Harm buttons
-    addClickHandler(html.querySelectorAll(".harm-button"), async (event) => {
-      const data = event.currentTarget.dataset;
-      const amount = parseInt(data.amount);
-      const type = data.type || "damage";
-      const targets = game.user?.targets;
-      for (const target of targets) {
-        const actor = target.actor;
-        if (!actor) continue;
-        await applyActorAction([actor], `take${type.charAt(0).toUpperCase() + type.slice(1)}`, amount);
-      }
-    });
-
     // Open tags
+    /** TODO: Move to {@link TeriockBaseMessageData} */
     addClickHandler(html.querySelectorAll('[data-action="open"]'), async (event) => {
       event.preventDefault();
       const uuid = event.currentTarget.getAttribute("data-uuid");
@@ -325,6 +170,7 @@ export default function registerHooks() {
       }
     });
 
+    /** TODO: Move to {@link TeriockBaseMessageData} */
     html.querySelectorAll(".teriock-target-container").forEach((container) => {
       let clickTimeout = null;
 
@@ -370,6 +216,7 @@ export default function registerHooks() {
     });
   });
 
+  /** TODO: Fix and/or move to {@link TeriockMacro} */
   foundry.helpers.Hooks.on("hotbarDrop", async (bar, data, slot) => {
     fromUuid(data.uuid).then(
       /** @param {TeriockItem|TeriockEffect} item */ async (item) => {

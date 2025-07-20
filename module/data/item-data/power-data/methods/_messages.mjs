@@ -1,4 +1,8 @@
-import { addAbilitiesBlock } from "../../../../helpers/messages-builder/message-parts.mjs";
+import {
+  addAbilitiesBlock,
+  addPropertiesBlock,
+  addResourcesBlock,
+} from "../../../../helpers/messages-builder/message-parts.mjs";
 
 /**
  * Generates message parts for a power item, including bars and blocks for display.
@@ -39,7 +43,12 @@ export function _messageParts(powerData) {
       text: src.flaws,
     },
   ];
-  addAbilitiesBlock(powerData.parent.transferredEffects, blocks);
+  addPropertiesBlock(powerData.parent.transferredEffects, blocks);
+  addAbilitiesBlock(
+    powerData.parent.transferredEffects.filter((e) => !e.sup),
+    blocks,
+  );
+  addResourcesBlock(powerData.parent.transferredEffects, blocks);
   return {
     bars: bars,
     blocks: blocks,

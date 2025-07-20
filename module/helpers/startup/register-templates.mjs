@@ -79,7 +79,6 @@ export default async function registerTemplates () {
     'systems/teriock/templates/item-templates/rank-template/bars/rk-bar-class.hbs',
     'systems/teriock/templates/item-templates/rank-template/bars/rk-bar-stats.hbs',
     'systems/teriock/templates/item-templates/rank-template/rank-template.hbs',
-    'systems/teriock/templates/roll-templates/harm.hbs',
     'systems/teriock/templates/roll-templates/roll.hbs',
     'systems/teriock/templates/shared/changes.hbs',
     'systems/teriock/templates/shared/effects.hbs',

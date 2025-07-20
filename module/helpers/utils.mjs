@@ -246,7 +246,6 @@ export function parseDurationString(durationString) {
       }
     }
   }
-  console.log(parsedAbsentConditions);
   // Use word boundaries for unit matching to avoid partial matches
   for (const unit of Object.keys(abilityOptions.duration.unit)) {
     const regex = new RegExp(`\\b${unit}s?\\b`);

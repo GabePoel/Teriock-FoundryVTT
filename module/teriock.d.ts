@@ -19,7 +19,6 @@ declare global {
   const TeriockActor: typeof import("./documents/actor.mjs").default;
   const TeriockChatMessage: typeof import("./documents/chat-message.mjs").default;
   const TeriockEffect: typeof import("./documents/effect.mjs").default;
-  const TeriockHarmRoll: typeof import("./documents/harm-roll.mjs").default;
   const TeriockItem: typeof import("./documents/item.mjs").default;
   const TeriockMacro: typeof import("./documents/macro.mjs").default;
   const TeriockRoll: typeof import("./documents/roll.mjs").default;

@@ -1,3 +1,5 @@
+import { addAbilitiesBlock } from "../../../../helpers/messages-builder/message-parts.mjs";
+
 /**
  * Generates message parts for an ability, including bars and blocks for display.
  * Creates formatted display elements for execution, targeting, expansion, costs, effects, and ability type.
@@ -211,6 +213,7 @@ export function _messageParts(abilityData) {
       text: src.endCondition,
     },
   ];
+  addAbilitiesBlock(abilityData.parent.subs, blocks);
   return {
     bars: bars,
     blocks: blocks,

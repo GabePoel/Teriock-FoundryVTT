@@ -41,7 +41,9 @@ export async function _takeDrain(actorData, amount) {
  * @returns {Promise<void>}
  */
 export async function _takeWither(actorData, amount) {
-  await actorData.parent.update({ "system.wither.value": Math.min(Math.max(0, actorData.wither.value + amount), 100) });
+  const { wither } = actorData;
+  const value = Math.min(wither.max, wither.value + Number(amount));
+  await actorData.parent.update({ "system.wither.value": value });
 }
 
 /**

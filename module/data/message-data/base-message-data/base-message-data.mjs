@@ -1,7 +1,9 @@
+const { ux } = foundry.applications;
 const { fields } = foundry.data;
 const { TypeDataModel } = foundry.abstract;
 import { buildHTMLButton } from "../../../helpers/html.mjs";
-import { handlers } from "./action-handlers/instances/_handlers.mjs";
+import { handlers } from "../../../action-handlers/instances/_handlers.mjs";
+import { imageContextMenuOptions } from "../../../sheets/misc-sheets/image-sheet/connections/_context-menus.mjs";
 
 export default class TeriockBaseMessageData extends TypeDataModel {
   /**
@@ -183,6 +185,13 @@ export default class TeriockBaseMessageData extends TypeDataModel {
    * @param {HTMLLIElement} html The pending HTML
    */
   addListeners(html) {
+    // Connect image context menu
+    new ux.ContextMenu(html, ".timage", imageContextMenuOptions, {
+      eventName: "contextmenu",
+      jQuery: false,
+      fixed: true,
+    })
+
     const actionElements = html.querySelectorAll("[data-action]");
     for (const /** @type {HTMLElement} */ element of actionElements) {
       const action = element.dataset.action;
