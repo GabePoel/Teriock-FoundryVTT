@@ -39,6 +39,14 @@ export type ConditionRollOptions = {
 };
 
 /**
+ * Options for modifying the behavior of a roll that can crit.
+ */
+export type CritRollOptions = {
+  /** Go critical? */
+  crit?: boolean;
+}
+
+/**
  * Allowable dice values.
  */
 export type PolyhedralDie = "d4" | "d6" | "d8" | "d10" | "d12" | "d20";

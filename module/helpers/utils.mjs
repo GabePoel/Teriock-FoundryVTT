@@ -1,6 +1,78 @@
 import TeriockRoll from "../documents/roll.mjs";
-import {abilityOptions} from "./constants/ability-options.mjs";
-import {conditions} from "./constants/generated/conditions.mjs";
+import { abilityOptions } from "./constants/ability-options.mjs";
+import { conditions } from "./constants/generated/conditions.mjs";
+
+/**
+ * Get the image for a {@link Token}.
+ *
+ * @param {Token} token
+ * @returns {string}
+ */
+export function tokenImage(token) {
+  const tokenDoc = tokenDocument(token);
+  return (
+    tokenDoc?.texture?.src ||
+    tokenDoc?.actor.token?.texture?.src ||
+    tokenDoc?.actor.getActiveTokens()[0]?.texture?.src ||
+    tokenDoc?.actor.prototypeToken?.texture?.src ||
+    tokenDoc?.actor.img ||
+    token?.texture?.src ||
+    token?.actor.token?.texture?.src ||
+    token?.actor.getActiveTokens()[0]?.texture?.src ||
+    token?.actor.prototypeToken?.texture?.src ||
+    token.actor.img
+  );
+}
+
+/**
+ * Get the name for a {@link Token}.
+ *
+ * @param {Token} token
+ * @returns {string}
+ */
+export function tokenName(token) {
+  const tokenDoc = tokenDocument(token);
+  return (
+    tokenDoc?.name ||
+    tokenDoc?.actor.token?.name ||
+    tokenDoc?.actor.prototypeToken?.name ||
+    tokenDoc?.actor.name ||
+    token?.name ||
+    token?.actor.token?.name ||
+    token?.actor.prototypeToken?.name ||
+    token.actor.name
+  );
+}
+
+/**
+ * Get the token for a {@link TeriockActor}.
+ *
+ * @param {TeriockActor} actor
+ * @returns {TeriockToken|null}
+ */
+export function actorToken(actor) {
+  return actor.token || actor.getActiveTokens?.()?.[0] || actor.prototypeToken || null;
+}
+
+/**
+ * Get the actor for a {@link Token}.
+ *
+ * @param {Token} token
+ * @returns {TeriockActor}
+ */
+export function tokenActor(token) {
+  return token.actor;
+}
+
+/**
+ * Get the document for a {@link Token}.
+ *
+ * @param {Token} token
+ * @returns {TeriockToken}
+ */
+export function tokenDocument(token) {
+  return /** @type {TeriockToken} */ token.document;
+}
 
 /**
  * Creates an HTML icon element using Font Awesome classes.
@@ -152,15 +224,15 @@ export async function evaluateAsync(formula, data = {}, options = {}) {
  * @returns {Duration}
  */
 export function parseDurationString(durationString) {
-  let parsingString = durationString.trim().toLowerCase().replace(/\.$/, '');
-  let parsedUnit = 'noLimit';
+  let parsingString = durationString.trim().toLowerCase().replace(/\.$/, "");
+  let parsedUnit = "noLimit";
   let parsedQuantity = parseInt(parsingString) || 0;
   let parsedAbsentConditions = new Set();
   let parsedPresentConditions = new Set();
   // Handle special cases first
-  if (parsingString === 'while up') {
+  if (parsingString === "while up") {
     parsedAbsentConditions.add("down");
-  } else if (parsingString === 'while alive') {
+  } else if (parsingString === "while alive") {
     parsedAbsentConditions.add("dead");
   } else if (parsingString === "instant") {
     parsedUnit = "instant";
@@ -174,7 +246,7 @@ export function parseDurationString(durationString) {
       }
     }
   }
-  console.log(parsedAbsentConditions)
+  console.log(parsedAbsentConditions);
   // Use word boundaries for unit matching to avoid partial matches
   for (const unit of Object.keys(abilityOptions.duration.unit)) {
     const regex = new RegExp(`\\b${unit}s?\\b`);
@@ -191,7 +263,7 @@ export function parseDurationString(durationString) {
     conditions: {
       absent: parsedAbsentConditions,
       present: parsedPresentConditions,
-    }
+    },
   };
 }
 

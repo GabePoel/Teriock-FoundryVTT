@@ -107,7 +107,11 @@ export async function _rollTradecraft(actorData, tradecraft, options = {}) {
   let formula = options.advantage ? "2d20kh1" : options.disadvantage ? "2d20kl1" : "1d20";
   if (proficient) formula += " + @p";
   if (extra) formula += ` + @${tradecraft}`;
-  const roll = new TeriockRoll(formula, actor.getRollData());
+  const context = {};
+  if (typeof options.threshold === "number") {
+    context.threshold = options.threshold;
+  }
+  const roll = new TeriockRoll(formula, actor.getRollData(), { context });
   await roll.toMessage({
     speaker: ChatMessage.getSpeaker({ actor: actor }),
     flavor: `${tradecraft.charAt(0).toUpperCase() + tradecraft.slice(1)} Check`,

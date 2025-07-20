@@ -58,6 +58,7 @@ export class BaseTeriockEffect extends ChildDocumentMixin(ActiveEffect) {}
  * @extends {TokenDocument}
  * @implements {TokenData}
  * @property {Token} token
+ * @property {TeriockActor} actor
  * @property {"TokenDocument"} documentName
  */
 export class BaseTeriockToken extends TokenDocument {}
@@ -94,6 +95,7 @@ export class BaseTeriockScene extends Scene {}
  *
  * @extends {ChatMessage}
  * @implements {ChatMessageData}
+ * @property {TeriockBaseMessageData} system
  * @property {"ChatMessage"} documentName
  */
 export class BaseTeriockChatMessage extends ChatMessage {}

@@ -83,6 +83,9 @@ foundry.helpers.Hooks.once("init", function () {
     property: data.effect.PropertyData,
     resource: data.effect.ResourceData,
   });
+  Object.assign(CONFIG.ChatMessage.dataModels, {
+    base: data.message.BaseChatMessageData,
+  })
 
   // Unregister V1 sheets
   DocumentSheetConfig.unregisterSheet(documents.TeriockActor, "teriock", ActorSheet);

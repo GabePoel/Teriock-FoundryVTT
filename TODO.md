@@ -3,7 +3,7 @@
 - [ ] Perception features
     - [ ] Blind fighting/true sight/etc.
     - [ ] Frozen and morganti vision modes
-    - [ ] Automatic perception mode inherited from actor
+    - [x] Automatic perception mode inherited from actor
     - [ ] Properties and abilities for light sources
 - [ ] Token features
     - [ ] Better death/down displays
@@ -12,17 +12,18 @@
     - [ ] Abilities letting you know when they start/end
     - [x] Heightened duration scaling
     - [x] Hack buttons
-    - [ ] Easy way to apply boosts
+    - [x] Easy way to apply boosts
     - [ ] Enricheds for different roll types
     - [ ] Bow, hand, and foot BV scaling
     - [ ] Ability resistance fix
     - [ ] Attribute and feat save improvement appearing in ability chat messages
-    - [ ] Icons for all the basic abilities
-    - [ ] Attack ability targeting missing icon fix
+    - [x] Icons for all the basic abilities
+    - [x] Attack ability targeting missing icon fix
     - [ ] Throwing weapon range multiplier (from throwing training)
     - [ ] Check metadata
 - [ ] Rank fixes
     - [ ] Enable/disable buttons
+- [ ] Hot bar fix
 
 # Codebase
 
@@ -30,7 +31,8 @@
 - [ ] Clean up the CSS (as if)
 - [ ] Organize hooks (and move stuff out of hooks?)
 - [ ] Hacks and encumbrance to statuses (no HUD)
-- [ ] Better roll chat message button handling
+  - [x] Ability buttons
+- [x] Better roll chat message button handling
 - [x] Ability usage modularization
 - [ ] Take basic abilities off of each individual actors to speed up sorting and make for smaller database
 - [ ] Better compendium building automation

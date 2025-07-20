@@ -24,21 +24,7 @@ export default class TeriockRoll extends Roll {
   constructor(formula, data, options = {}) {
     const parsedFormula = TeriockRoll.#parseFormula(formula);
     super(parsedFormula, data, options);
-    const defaultOptions = {
-      enrich: false,
-    };
-    options = foundry.utils.mergeObject(defaultOptions, options);
-    if (options.enrich && options.message) {
-      foundry.applications.ux.TextEditor.enrichHTML(options.message).then((html) => {
-        options.message = html;
-      });
-    }
-    if (options.message) {
-      this.message = options.message;
-    }
-    if (options.context) {
-      this.context = options.context;
-    }
+    this.context = options.context || {};
   }
 
   /**
@@ -265,14 +251,14 @@ export default class TeriockRoll extends Roll {
   }
 
   /**
-   * Prepares the chat render context with custom message and context data.
+   * Prepares the chat render context.
+   *
    * @override
    * @param {object} options - Options for preparing the context.
    * @returns {Promise<object>} Promise that resolves to the prepared context.
    */
   async _prepareChatRenderContext(options = {}) {
     const context = await super._prepareChatRenderContext(options);
-    context.message = this.message;
     if (this.context) {
       Object.assign(context, this.context);
     }

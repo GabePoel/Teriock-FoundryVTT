@@ -1,0 +1,24 @@
+/**
+ * Pay the costs necessary for using an ability.
+ *
+ * @param {AbilityRollConfig} rollConfig - Configurations for this ability usage.
+ * @returns {Promise<void>}
+ */
+export async function _payCosts(rollConfig) {
+  const mpSpent = rollConfig.useData.costs.mp;
+  const hpSpent = rollConfig.useData.costs.hp;
+  const gpSpent = rollConfig.useData.costs.gp;
+  const heightened = rollConfig.useData.modifiers.heightened || 0;
+  const actor = rollConfig.abilityData.actor;
+  const updates = {};
+  if (mpSpent > 0) {
+    updates["system.mp.value"] = Math.max(actor.system.mp.value - mpSpent, actor.system.mp.min ?? 0);
+  }
+  if (hpSpent > 0) {
+    updates["system.mp.value"] = Math.max(actor.system.hp.value - hpSpent, actor.system.hp.min ?? 0);
+  }
+  if (gpSpent > 0) {
+    await actor.takePay(gpSpent);
+  }
+  await actor.update(updates);
+}

@@ -1,79 +1,33 @@
+import { actorToken } from "../../../../../helpers/utils.mjs";
+
 const { api } = foundry.applications;
 
 /**
- * Extracts token information from a target.
- * Gets name, actor, and image from the target's token or actor data.
+ * Set the targets for the ability.
  *
- * @param {object} target - The target to extract token information from.
- * @returns {object} Object containing token name, actor, and image.
- * @private
+ * @param {AbilityRollConfig} rollConfig
  */
-export function tokenFromTarget(target) {
-  const actor = target.actor;
-  const img =
-    target.texture?.src ||
-    actor.token?.texture?.src ||
-    actor.getActiveTokens()[0]?.texture?.src ||
-    actor.prototypeToken?.texture?.src ||
-    actor.img;
-  const name = target.name || actor.token?.name || actor.prototypeToken?.name || actor.name;
-  return {
-    name,
-    actor,
-    img,
-  };
-}
-
-/**
- * Gets targets for the ability, handling self-targeting logic.
- * Returns array of targets or creates self-target if ability targets self.
- *
- * @param {TeriockAbilityData} abilityData - The ability data to get targets for.
- * @returns {Array} Array of target objects.
- * @private
- */
-export function _getTargets(abilityData) {
-  const user = /** @type {TeriockUser|null} */ game.user;
-  let targets = Array.from(user?.targets);
-  const targetsSelf = abilityData.targets?.length === 1 && abilityData.targets[0] === "self";
-  const includesSelf = Array(abilityData.targets)?.includes("self");
-
-  if (targetsSelf || (includesSelf && targets.length === 0)) {
-    const actor = abilityData.parent.actor;
-    const activeToken = actor.getActiveTokens?.()?.[0];
-    const tokenName = actor.token?.name || activeToken?.name || actor.prototypeToken?.name || actor.name;
-    const tokenActorSrc = actor.token?.actor?.token?.texture?.src;
-    const activeTokenSrc = activeToken?.actor?.token?.texture?.src;
-    const prototypeSrc = actor.prototypeToken?.texture?.src;
-    const tokenImg = actor.token?.texture?.src || tokenActorSrc || activeTokenSrc || prototypeSrc || actor.img;
-    const token = actor.token || activeToken || actor.prototypeToken || null;
-    targets = [
-      {
-        name: tokenName,
-        actor: actor,
-        img: tokenImg,
-        uuid: token?.document?.uuid || actor.uuid,
-      },
-    ];
+export async function _setTargets(rollConfig) {
+  const user = /** @type {TeriockUser} */ game.user;
+  rollConfig.useData.targets = user.targets;
+  if (rollConfig.abilityData.targets.length === 1 && rollConfig.abilityData.targets.includes("self")) {
+    const token = actorToken(rollConfig.abilityData.actor);
+    if (token) rollConfig.useData.targets = new Set([token]);
   }
-
-  return targets;
+  await auraMeasure(rollConfig);
 }
 
 /**
- * Option to create a measured template.
+ * Update targets in case of aura.
  *
- * @param {TeriockAbilityData} abilityData - The ability data to generate template from.
- * @returns {Promise<object>}
+ * @param {AbilityRollConfig} rollConfig
  */
-export async function _measure(abilityData) {
-  const measureData = {};
-  if (abilityData.delivery.base === "aura") {
-    const token =
-      abilityData.actor.token || abilityData.actor.getActiveTokens()[0] || abilityData.actor.prototypeToken || null;
+async function auraMeasure(rollConfig) {
+  if (rollConfig.abilityData.delivery.base === "aura") {
+    const token = actorToken(rollConfig.abilityData.actor);
     if (token) {
       let placeTemplate;
-      let radius = Number(abilityData.range);
+      let radius = Number(rollConfig.abilityData.range);
       let autoTarget = false;
       try {
         placeTemplate = await api.DialogV2.prompt({
@@ -83,7 +37,7 @@ export async function _measure(abilityData) {
             <p>Place measured template?</p>
             <div class="standard-form form-group">
               <label>Distance <span class="units">(ft)</span></label>
-              <input name='range' type='number' min='0' step='1' value='${abilityData.range}'>
+              <input name='range' type='number' min='0' step='1' value='${rollConfig.abilityData.range}'>
             </div>
             <div class="standard-form form-group">
               <label>Automatic Targets</label>
@@ -99,10 +53,8 @@ export async function _measure(abilityData) {
             },
           },
         });
-      } catch {
-        return measureData;
-      }
-      if (placeTemplate) {
+      } catch {}
+      if (placeTemplate && autoTarget) {
         const x = token.x;
         const y = token.y;
         const templateData = {
@@ -135,7 +87,7 @@ export async function _measure(abilityData) {
               }
             }
           });
-          measureData.targets = Array.from(targets);
+          rollConfig.useData.targets = targets;
         }
         foundry.helpers.Hooks.once("combatTurnChange", async () => {
           if (template) {
@@ -150,5 +102,4 @@ export async function _measure(abilityData) {
       }
     }
   }
-  return measureData;
 }

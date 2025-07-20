@@ -1,3 +1,4 @@
+import { elementClass } from "../html.mjs";
 import { secondsToReadable } from "../utils.mjs";
 
 export default function registerHandlebarsHelpers() {
@@ -173,17 +174,7 @@ export default function registerHandlebarsHelpers() {
   });
 
   Handlebars.registerHelper("elementClass", (elements) => {
-    const colorMap = {
-      life: "es-life",
-      storm: "es-storm",
-      necro: "es-necro",
-      flame: "es-flame",
-      nature: "es-nature",
-    };
-    if (!Array.isArray(elements)) return "es-multi";
-    const validElements = elements.filter((el) => Object.prototype.hasOwnProperty.call(colorMap, el));
-    if (validElements.length !== 1) return "es-multi";
-    return colorMap[validElements[0]] || "es-multi";
+    return elementClass(elements);
   });
 
   // UI Helpers

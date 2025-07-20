@@ -3,44 +3,47 @@ import { ChatActionButton } from "../../../../types/chat";
 import type TeriockAbilityData from "../ability-data.mjs";
 import type { TeriockToken } from "../../../../documents/_module.mjs";
 import TeriockRoll from "../../../../documents/roll.mjs";
+import type TeriockBaseChatMessageSchema from "../../../message-data/base-message-data/_types";
+
+export type AbilityUseData = {
+  /** Options for the ability roll. */
+  rollOptions: CommonRollOptions;
+  /** Costs spent on this use of the ability */
+  costs: {
+    /** Total amount of HP spent on this ability. */
+    hp: number;
+    /** Total amount of MP spent on this ability. */
+    mp: number;
+    /** Total amount of GP spend on this ability. */
+    gp: number;
+  };
+  /** Modifiers that change what the ability does. */
+  modifiers: {
+    /** Number of times this ability is heightened. */
+    heightened: number;
+  };
+  /** Formula used for this ability's dice roll. */
+  formula: string;
+  /** Data that can be referenced in the roll formula. */
+  rollData: object;
+  /** Targeted tokens. */
+  targets: Set<any>;
+}
 
 export interface AbilityRollConfig {
   /** Data that describes this specific use of the ability. */
-  useData: {
-    /** Options for the ability roll. */
-    rollOptions: CommonRollOptions;
-    /** Costs spent on this use of the ability */
-    costs: {
-      /** Total amount of HP spent on this ability. */
-      hp: number;
-      /** Total amount of MP spent on this ability. */
-      mp: number;
-      /** Total amount of GP spend on this ability. */
-      gp: number;
-    };
-    /** Modifiers that change what the ability does. */
-    modifiers: {
-      /** Number of times this ability is heightened. */
-      heightened: number;
-    };
-    /** Formula used for this ability's dice roll. */
-    formula: string;
-    /** Data that can be referenced in the roll formula. */
-    rollData: object;
-    /** Targeted tokens. */
-    targets: TeriockToken[];
-  };
+  useData: AbilityUseData;
   /** The data of the ability being rolled for. This should not be mutated. */
   abilityData: TeriockAbilityData;
   /** Data relevant for generating this ability's chat message. */
   chatData: {
     /** The HTML of the chat message. */
-    message: string;
-    /** Buttons to render in the chat message. */
-    buttons: ChatActionButton[];
+    content: string;
     /** Chat speaker data. */
     speaker: Teriock.ChatSpeakerData;
     /** Rolls to pass into the chat message. */
     rolls: TeriockRoll[];
+    /** Chat Message Data */
+    system: TeriockBaseChatMessageSchema;
   };
 }

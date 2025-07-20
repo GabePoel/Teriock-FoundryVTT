@@ -58,6 +58,7 @@ declare global {
     type EffectType = DocumentTypes.EffectType;
     type EffectMetadata = Metadata.EffectMetadata;
     type ChatActionButton = Chat.ChatActionButton;
+    type HTMLButtonConfig = Chat.HTMLButtonConfig;
     type ChatOptions = Command.ChatOptions;
     type CommandOptions = Command.CommandOptions;
     type CommandExecuteContext = Command.CommandExecuteContext;
@@ -66,6 +67,7 @@ declare global {
     type MessageOptions = Messages.MessageOptions;
     type MessageParts = Messages.MessageParts;
     type CommonRollOptions = Rolls.CommonRollOptions;
+    type CritRollOptions = Rolls.CritRollOptions;
     type EquipmentRollOptions = Rolls.EquipmentRollOptions;
     type ConditionRollOptions = Rolls.ConditionRollOptions;
     type PolyhedralDie = Rolls.PolyhedralDie;

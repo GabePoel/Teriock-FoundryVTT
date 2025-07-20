@@ -1,7 +1,6 @@
-import type TypeDataModel from "@common/abstract/type-data.mjs";
 import { MessageParts } from "../../types/messages";
 
-export interface ChildDataMixin extends TypeDataModel {
+export interface ChildDataMixin {
   proficient: boolean;
   fluent: boolean;
   font: string;

@@ -26,19 +26,19 @@ export type EffectChangeData = {
  * Consequence rolls for different effect types
  */
 export interface ConsequenceRolls {
-  damage: string[];
-  drain: string[];
-  wither: string[];
-  heal: string[];
-  revitalize: string[];
-  setTempHp: string[];
-  setTempMp: string[];
-  gainTempHp: string[];
-  gainTempMp: string[];
-  sleep: string[];
-  kill: string[];
-  pay: string[];
-  other: string[];
+  damage: string;
+  drain: string;
+  wither: string;
+  heal: string;
+  revitalize: string;
+  setTempHp: string;
+  setTempMp: string;
+  gainTempHp: string;
+  gainTempMp: string;
+  sleep: string;
+  kill: string;
+  pay: string;
+  other: string;
 }
 
 /**
@@ -64,7 +64,7 @@ export interface AppliesData {
   startStatuses: Set<string>;
   endStatuses: Set<string>;
   rolls: ConsequenceRolls;
-  hacks: Set<string>;
+  hacks: Set<Teriock.HackableBodyPart>;
   checks: Set<string>;
   duration: number;
   changes: EffectChangeData[];

@@ -1,3 +1,5 @@
+// @ts-ignore
+
 declare module "./command.mjs" {
   export default class TeriockCommand {
     id: string;

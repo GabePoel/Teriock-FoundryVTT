@@ -1,3 +1,13 @@
+/** Parameters to construct an HTML button. */
+export type HTMLButtonConfig = {
+  label?: string;
+  dataset?: Record<string, string>;
+  classes?: string[];
+  icon?: string;
+  type?: "button";
+  disabled?: boolean;
+}
+
 /** Parameters that define a chat message button. */
 export interface ChatActionButton {
   /** Font Awesome icon class. */

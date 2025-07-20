@@ -60,38 +60,12 @@ async function applyActorAction(actors, action, amount, data) {
     takeDamage: (actor, amt) => actor.takeDamage(amt),
     takeDrain: (actor, amt) => actor.takeDrain(amt),
     takeWither: (actor, amt) => actor.takeWither(amt),
-    takeHeal: (actor, amt) => actor.takeHeal(amt),
-    takeRevitalize: (actor, amt) => actor.takeRevitalize(amt),
-    takeSetTempHp: (actor, amt) => actor.takeSetTempHp(amt),
-    takeSetTempMp: (actor, amt) => actor.takeSetTempMp(amt),
-    takeGainTempHp: (actor, amt) => actor.takeGainTempHp(amt),
-    takeGainTempMp: (actor, amt) => actor.takeGainTempMp(amt),
-    takeSleep: (actor, amt) => actor.takeSleep(amt),
-    takeKill: (actor, amt) => actor.takeKill(amt),
-    takePay: (actor, amt) => actor.takePay(amt),
-    takeHack: (actor, _, bodyPart) => actor.takeHack(bodyPart),
-    takeUnhack: (actor, _, bodyPart) => actor.takeUnhack(bodyPart),
-    takeAwaken: (actor) => actor.takeAwaken(),
-    takeRevive: (actor) => actor.takeRevive(),
   };
 
   const actionMessages = {
     takeDamage: (name, amt) => `${name} took ${amt} damage`,
     takeDrain: (name, amt) => `${name} took ${amt} drain`,
     takeWither: (name, amt) => `${name} took ${amt} wither`,
-    takeHeal: (name, amt) => `${name} gained ${amt} HP`,
-    takeRevitalize: (name, amt) => `${name} gained ${amt} MP`,
-    takeSetTempHp: (name, actor) => `${name} now has ${actor.system.hp.temp} temporary HP`,
-    takeSetTempMp: (name, actor) => `${name} now has ${actor.system.mp.temp} temporary MP`,
-    takeGainTempHp: (name, amt) => `${name} gained ${amt} temporary HP`,
-    takeGainTempMp: (name, amt) => `${name} gained ${amt} temporary MP`,
-    takeSleep: (name) => `Did sleep check for ${name}`,
-    takeKill: (name) => `Did kill check for ${name}`,
-    takePay: (name, amt) => `${name} paid ${amt} ₲`,
-    takeHack: (name, _, bodyPart) => `Hacked ${bodyPart} for ${name}`,
-    takeUnhack: (name, _, bodyPart) => `Unhacked ${bodyPart} for ${name}`,
-    takeAwaken: (name) => `Awakened ${name}`,
-    takeRevive: (name) => `Revived ${name}`,
   };
 
   const actionFn = actionMap[action];
@@ -110,28 +84,6 @@ async function applyActorAction(actors, action, amount, data) {
   }
 }
 
-/**
- * Toggle a status effect on multiple actors.
- *
- * @param {TeriockActor[]} actors - Array of actors to toggle the status effect on
- * @param {string} status - The status effect identifier
- * @param {boolean} active - Whether to activate (true) or deactivate (false) the status
- * @returns {Promise<void>}
- */
-async function toggleStatusEffect(actors, status, active) {
-  if (!status) {
-    ui.notifications.error("No status specified.");
-    return;
-  }
-
-  for (const actor of actors) {
-    if (actor && typeof actor.toggleStatusEffect === "function") {
-      await actor.toggleStatusEffect(status, { active });
-      const statusText = active ? "now" : "no longer";
-      ui.notifications.info(`${actor.name} is ${statusText} ${CONFIG.TERIOCK.conditions[status].toLowerCase()}`);
-    }
-  }
-}
 
 /**
  * Handle applying or removing effects on multiple actors.
@@ -211,162 +163,6 @@ function addClickHandler(elements, handler) {
       element.addEventListener("click", handler);
     }
   });
-}
-
-/**
- * Add context menu (right-click) event listeners to multiple elements.
- *
- * @param {NodeList} elements - Collection of DOM elements to add listeners to
- * @param {Function} handler - Context menu event handler function
- * @returns {void}
- */
-function addContextMenuHandler(elements, handler) {
-  elements.forEach((element) => {
-    element.addEventListener("contextmenu", handler);
-  });
-}
-
-/**
- * Handle roll button actions for both click and context menu events.
- *
- * @param {MouseEvent} event - The click or context menu event
- * @param {boolean} useBoostDialog - Whether to use the boost dialog for formulas
- * @returns {Promise<void>}
- */
-async function handleRollButtonAction(event, useBoostDialog = false) {
-  /** @type {HTMLButtonElement} */
-  const target = event.currentTarget;
-  const data = target.dataset;
-  const action = data.action;
-  const formula = data.data;
-  const actors = getTargetActors();
-  const options = getModifierOptions(event);
-
-  if (actors.length === 0) return;
-
-  // Roll actions with formulas
-  const rollActions = [
-    "takeDamage",
-    "takeDrain",
-    "takeWither",
-    "takeHeal",
-    "takeRevitalize",
-    "takeSetTempHp",
-    "takeSetTempMp",
-    "takeGainTempHp",
-    "takeGainTempMp",
-    "takeSleep",
-    "takeKill",
-    "takePay",
-  ];
-
-  const actionLabels = {
-    takeDamage: "Apply Damage",
-    takeDrain: "Apply Drain",
-    takeWither: "Apply Wither",
-    takeHeal: "Apply Healing",
-    takeRevitalize: "Apply Revitalization",
-    takeSetTempHp: "Set Temp HP",
-    takeSetTempMp: "Set Temp MP",
-    takeGainTempHp: "Gain Temp HP",
-    takeGainTempMp: "Gain Temp MP",
-    takeSleep: "Sleep",
-    takeKill: "Kill",
-    takePay: "Pay Gold",
-  };
-
-  const actionIcons = {
-    takeDamage: "fa-heart",
-    takeDrain: "fa-brain",
-    takeWither: "fa-hourglass-half",
-    takeSleep: "fa-bed",
-    takeKill: "fa-skull",
-    takePay: "fa-coin",
-  };
-
-  const actionClasses = {
-    takeDamage: "damage-button",
-    takeDrain: "drain-button",
-    takeWither: "wither-button",
-    takePay: "payment-button",
-  };
-
-  if (rollActions.includes(action) && formula) {
-    let finalFormula = formula;
-
-    // Use boost dialog if requested (right-click)
-    if (useBoostDialog) {
-      finalFormula = await boostDialog(formula);
-      if (finalFormula === null) return; // User cancelled the dialog
-    }
-
-    const context = {
-      buttons: [
-        {
-          label: actionLabels[action] || "Apply to Targets",
-          icon: `fa-solid ${actionIcons[action] || "fa-plus"}`,
-          action: action,
-          classes: `apply-result ${actionClasses[action] || ""}`,
-        },
-      ],
-    };
-
-    for (const actor of actors) {
-      const roll = new TeriockRoll(finalFormula, actor.getRollData(), { context });
-      if (options.double) {
-        roll.alter(2, 0);
-      }
-      await roll.toMessage({
-        speaker: ChatMessage.getSpeaker({ actor }),
-      });
-    }
-  }
-
-  // Handle specific actions
-  if (action === "rollResistance") {
-    await performRollAction(actors, action, null, options);
-  }
-
-  if (action === "rollFeatSave") {
-    const attr = target.dataset.data;
-    const total = target.dataset.total;
-    const threshold = total ? Number(total) : undefined;
-    const rollOptions = threshold !== undefined ? { ...options, threshold } : options;
-    await performRollAction(actors, action, attr, rollOptions);
-  }
-
-  if (action === "rollTradecraft") {
-    const tradecraftKey = target.dataset.data;
-    await performRollAction(actors, action, tradecraftKey, options);
-  }
-
-  if (action === "applyEffect") {
-    const effectData = target.dataset.data;
-    await handleEffectAction(actors, effectData);
-  }
-
-  if (action === "takeHack") {
-    const bodyPart = target.dataset.data;
-    await applyActorAction(actors, action, undefined, bodyPart);
-  }
-
-  if (action === "takeAwaken") {
-    await applyActorAction(actors, action);
-  }
-
-  if (action === "takeRevive") {
-    await applyActorAction(actors, action);
-  }
-
-  if (action === "applyStatus") {
-    const status = target.dataset.data;
-    await toggleStatusEffect(actors, status, true);
-  }
-
-  if (action === "removeStatus") {
-    const status = target.dataset.data;
-    await toggleStatusEffect(actors, status, false);
-  }
 }
 
 /**
@@ -526,34 +322,6 @@ export default function registerHooks() {
       const doc = /** @type{ClientDocument} */ await foundry.utils.fromUuid(uuid);
       if (doc && typeof doc.sheet?.render === "function") {
         await doc.sheet.render(true);
-      }
-    });
-
-    // Main roll buttons - left click (normal behavior)
-    addClickHandler(html.querySelectorAll(".teriock-chat-button"), async (event) => {
-      await handleRollButtonAction(event, false);
-    });
-
-    // Main roll buttons - right click (with boost dialog)
-    addContextMenuHandler(html.querySelectorAll(".teriock-chat-button"), async (event) => {
-      event.preventDefault();
-      await handleRollButtonAction(event, true);
-    });
-
-    // Apply result buttons (these stay the same)
-    addClickHandler(html.querySelectorAll(".apply-result"), async (event) => {
-      const data = event.currentTarget.dataset;
-      const amount = parseInt(data.total);
-      const action = data.action;
-      const actors = getTargetActors();
-
-      if (actors.length === 0) return;
-
-      if (action === "takeHack") {
-        const bodyPart = data.data;
-        await applyActorAction(actors, action, undefined, bodyPart);
-      } else {
-        await applyActorAction(actors, action, amount);
       }
     });
 
