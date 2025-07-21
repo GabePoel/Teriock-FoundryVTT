@@ -3,16 +3,16 @@ import TeriockRoll from "../../documents/roll.mjs";
 import boostDialog from "../../helpers/dialogs/boost-dialog.mjs";
 import ActionHandler from "../action-handler.mjs";
 
+/**
+ * Action to roll a rollable take.
+ */
 export class RollRollableTakeHandler extends ActionHandler {
   /** @inheritDoc */
   static ACTION = "roll-rollable-take";
 
   /**
-   * @property {string} type - Type of rollable take
    * @property {string} formula - Roll formula
-   * @inheritDoc
    */
-
   async _makeRoll(formula) {
     const roll = new TeriockRoll(formula);
     if (this.critRollOptions.crit) {

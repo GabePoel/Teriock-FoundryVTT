@@ -1,15 +1,5 @@
-/**
- * Valid turn expiration targets
- */
-export type TurnExpirationTarget = "target" | "executor" | "every" | "other";
-/**
- * Valid turn expiration timing
- */
-export type TurnExpirationTiming = "start" | "end" | "other";
-/**
- * Valid turn expiration methods
- */
-export type TurnExpirationMethod = "roll" | "auto";
+import type TeriockMacro from "../../../../documents/macro.mjs";
+import type { CombatExpirationMethod, CombatExpirationTiming } from "../../shared/shared-fields";
 
 export type EffectChangeData = {
   /** The attribute path in the {@link TeriockActor} or {@link TeriockItem} data which the change modifies */
@@ -20,7 +10,7 @@ export type EffectChangeData = {
   mode: number;
   /** The priority level with which this change is applied */
   priority: number;
-}
+};
 
 /**
  * Consequence rolls for different effect types
@@ -42,19 +32,15 @@ export interface ConsequenceRolls {
 }
 
 /**
- * Consequence expiration conditions
+ * Ability-specific expiration data.
  */
-export interface ConsequenceExpirations {
-  turn: {
-    enabled: boolean;
-    who: TurnExpirationTarget;
-    when: TurnExpirationTiming;
-    how: TurnExpirationMethod;
+type AbilityExpiration = {
+  combat: {
+    who: "target" | "executor" | "everyone";
+    what: CombatExpirationMethod;
+    when: CombatExpirationTiming;
   };
-  movement: boolean;
-  dawn: boolean;
-  sustained: boolean;
-}
+};
 
 /**
  * Applies data for different proficiency levels
@@ -68,6 +54,12 @@ export interface AppliesData {
   checks: Set<string>;
   duration: number;
   changes: EffectChangeData[];
+  expiration: {
+    normal: AbilityExpiration;
+    crit: AbilityExpiration;
+    changeOnCrit: boolean;
+    doesExpire: boolean;
+  };
 }
 
 /**
@@ -79,6 +71,6 @@ export interface TeriockAbilityConsequenceSchema {
     proficient: AppliesData;
     fluent: AppliesData;
     heightened: AppliesData;
-    macro: string | null;
+    macro: Teriock.UUID<TeriockMacro> | null;
   };
 }

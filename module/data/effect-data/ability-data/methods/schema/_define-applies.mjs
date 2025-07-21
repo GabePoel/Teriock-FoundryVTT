@@ -2,6 +2,7 @@ const { fields } = foundry.data;
 import { tradecraftOptions } from "../../../../../helpers/constants/tradecraft-options.mjs";
 import { mergeLevel } from "../../../../../helpers/utils.mjs";
 import { TeriockArrayField, TeriockRecordField } from "../../../../shared/fields.mjs";
+import { combatExpirationMethodField, combatExpirationTimingField } from "../../../shared/shared-fields.mjs";
 
 const tradecrafts = mergeLevel(tradecraftOptions, "*", "tradecrafts");
 
@@ -75,6 +76,29 @@ export function consequenceChangesField() {
       hint: "Changes made to the target's attributes as part of the ability's ongoing effect.",
     },
   );
+}
+
+/**
+ * Creates a field for ability-specific expiration data.
+ *
+ * @returns {SchemaField}
+ */
+function abilityExpirationField() {
+  return new fields.SchemaField({
+    combat: new fields.SchemaField({
+      who: new fields.StringField({
+        choices: {
+          target: "Target",
+          executor: "Executor",
+          everyone: "Everyone",
+        },
+        label: "Whose Turn",
+        hint: "Whose turn should this effect attempt to expire on?",
+      }),
+      what: combatExpirationMethodField(),
+      when: combatExpirationTimingField(),
+    }),
+  });
 }
 
 /**
@@ -160,6 +184,20 @@ function appliesField() {
         label: "Duration",
       }),
       changes: consequenceChangesField(),
+      expiration: new fields.SchemaField({
+        normal: abilityExpirationField(),
+        crit: abilityExpirationField(),
+        changeOnCrit: new fields.BooleanField({
+          initial: false,
+          label: "Special Crit Expiration",
+          hint: "Should the combat timing expiration change on a crit?",
+        }),
+        doesExpire: new fields.BooleanField({
+          initial: false,
+          label: "Override Expiration",
+          hint: "Should custom expiration timing be applied?",
+        }),
+      }),
     },
   );
 }

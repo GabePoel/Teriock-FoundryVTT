@@ -24,7 +24,7 @@ export async function createAbility(document, name = null, options = {}) {
   if (document.documentName === "ActiveEffect") {
     sup = /** @type {TeriockEffect} */ document;
     embeddingDocument = document.parent;
-    abilityData.system["supId"] = supId;
+    abilityData.system["hierarchy"] = { supId: supId };
   }
   const abilities = /** @type {ActiveEffect[]} */ await embeddingDocument.createEmbeddedDocuments("ActiveEffect", [
     abilityData,
@@ -37,13 +37,13 @@ export async function createAbility(document, name = null, options = {}) {
     const updateData = [
       {
         _id: ability._id,
-        "system.supId": supId,
+        "system.hierarchy.supId": supId,
         "system.proficient": sup.isProficient,
         "system.fluent": sup.isFluent,
       },
       {
         _id: supId,
-        "system.subIds": foundry.utils.deepClone(sup.system.subIds).add(ability._id),
+        "system.hierarchy.subIds": foundry.utils.deepClone(sup.system.hierarchy.subIds).add(ability._id),
       },
     ];
     await sup.parent.updateEmbeddedDocuments("ActiveEffect", updateData);

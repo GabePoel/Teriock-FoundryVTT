@@ -31,6 +31,7 @@ export async function _buildChatMessage(rollConfig) {
   for (const roll of rollConfig.chatData.rolls) {
     await roll.evaluate();
   }
+  rollConfig.chatData.system.source = /** @type{Teriock.UUID} */ rollConfig.abilityData.parent.uuid;
   const msg = await TeriockChatMessage.create(rollConfig.chatData);
   console.log(msg);
 }

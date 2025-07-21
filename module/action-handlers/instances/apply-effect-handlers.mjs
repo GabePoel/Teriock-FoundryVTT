@@ -1,5 +1,8 @@
 import ActionHandler from "../action-handler.mjs";
 
+/**
+ * Action to apply an effect.
+ */
 export class ApplyEffectHandler extends ActionHandler {
   /** @inheritDoc */
   static ACTION = "apply-effect";

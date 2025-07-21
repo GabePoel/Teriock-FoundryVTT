@@ -1,5 +1,6 @@
 const { fields } = foundry.data;
 import TeriockBaseEffectData from "../base-effect-data/base-effect-data.mjs";
+import { combatExpirationMethodField, combatExpirationTimingField, hierarchyField } from "../shared/shared-fields.mjs";
 
 /**
  * Effect-specific effect data model.
@@ -63,6 +64,29 @@ export default class TeriockEffectData extends TeriockBaseEffectData {
     return "passive";
   }
 
+  /** @inheritDoc */
+  static migrateData(data) {
+    if (typeof data.rootUuid === "string") {
+      if (typeof data.hierarchy !== "object") {
+        data.hierarchy = {};
+      }
+      data.hierarchy.rootUuid = data.rootUuid;
+    }
+    if (Array.isArray(data.subIds)) {
+      if (typeof data.hierarchy !== "object") {
+        data.hierarchy = {};
+      }
+      data.hierarchy.subIds = data.subIds;
+    }
+    if (typeof data.supId === "string") {
+      if (typeof data.hierarchy !== "object") {
+        data.hierarchy = {};
+      }
+      data.hierarchy.supId = data.supId;
+    }
+    return super.migrateData(data);
+  }
+
   /**
    * Defines the schema for the effect data model.
    *
@@ -86,61 +110,6 @@ export default class TeriockEffectData extends TeriockBaseEffectData {
             hint: "If true, effect expires if condition is present. If false, effect expires if condition is not present.",
           }),
         }),
-        combat: new fields.SchemaField({
-          who: new fields.DocumentUUIDField({
-            type: "Actor",
-            label: "Who",
-            hint: "UUID of the actor whose turn this expires on.",
-            nullable: true,
-          }),
-          what: new fields.SchemaField({
-            type: new fields.StringField({
-              choices: {
-                forced: "Expires Automatically",
-                rolled: "Expires on Roll",
-                none: "Does not Expire on Turn",
-              },
-              label: "What",
-              hint: "What is the type of thing that causes this to expire?",
-              initial: "none",
-            }),
-            roll: new fields.StringField({
-              initial: "2d4",
-              label: "Roll",
-              hint: "If this expires on a roll, what is the roll that needs to be made?"
-            }),
-            threshold: new fields.NumberField({
-              initial: 4,
-              label: "Threshold",
-              hint: "What is the minimum value that needs to be rolled in order for this to expire?"
-            })
-          }),
-          when: new fields.SchemaField({
-            time: new fields.StringField({
-              choices: {
-                start: "Start",
-                end: "End",
-              },
-              initial: "start",
-              label: "When",
-              hint: "What is the timing for the trigger of this effect expiring?",
-            }),
-            trigger: new fields.StringField({
-              choices: {
-                turn: "Turn",
-                combat: "Combat",
-              },
-              initial: "turn",
-              label: "Trigger",
-              hint: "What is the trigger for this effect expiring?",
-            }),
-            skip: new fields.NumberField({
-              initial: 0,
-              label: "Skip",
-              hint: "A number of instances of the trigger firing to skip before this effect expires."
-            })
-          })
-        }),
         movement: new fields.BooleanField({
           initial: false,
           label: "Stationary Expiration",
@@ -158,23 +127,20 @@ export default class TeriockEffectData extends TeriockBaseEffectData {
         }),
         description: new fields.StringField({
           label: "End Condition",
-          hint: "Under what circumstances should this effect expire?"
-        })
+          hint: "Under what circumstances should this effect expire?",
+        }),
+        combat: new fields.SchemaField({
+          who: new fields.DocumentUUIDField({
+            type: "Actor",
+            nullable: true,
+            label: "Actor",
+            hint: "UUID of actor whose turn or other information is used to trigger an expiration?",
+          }),
+          what: combatExpirationMethodField(),
+          when: combatExpirationTimingField(),
+        }),
       }),
-      supId: new fields.DocumentIdField({
-        initial: null,
-        nullable: true,
-        label: "Super Ability ID",
-        hint: "The ID of the ability or effect that provides this ability, if there is one.",
-      }),
-      subIds: new fields.SetField(/** @type {typeof DocumentIdField} */ new fields.DocumentIdField(), {
-        label: "Sub IDs",
-        hint: "The IDs of the abilities that this ability provides, if there are any.",
-      }),
-      rootUuid: new fields.DocumentUUIDField({
-        label: "Root UUID",
-        hint: "The UUID of the document this ability is embedded in.",
-      }),
+      hierarchy: hierarchyField(),
     });
   }
 

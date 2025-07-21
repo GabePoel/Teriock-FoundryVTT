@@ -3,9 +3,11 @@ import TeriockChatMessage from "../../../documents/chat-message.mjs";
 export default interface TeriockBaseChatMessageSchema {
   /** Parent chat message */
   parent: TeriockChatMessage;
+  columns: number;
   buttons: Teriock.HTMLButtonConfig[];
   tags: string[];
   extraContent: string;
+  source: Teriock.UUID<any>;
 }
 
 declare module "./base-message-data.mjs" {

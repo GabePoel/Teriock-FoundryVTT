@@ -29,12 +29,6 @@ export class RemoveStatusHandler extends ActionHandler {
   /** @inheritDoc */
   static ACTION = "remove-status";
 
-  /**
-   * @property {string} status - Condition to remove
-   * @inheritDoc
-   */
-  dataset;
-
   /** @inheritDoc */
   async primaryAction() {
     for (const actor of this.actors) {

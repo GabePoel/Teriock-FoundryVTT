@@ -761,7 +761,7 @@ export default (Base) => {
       if (!this._canDropEffect(effect)) return false;
 
       if (this.document.documentName === "ActiveEffect") {
-        effect.updateSource({ "system.supId": this.document.id });
+        effect.updateSource({ "system.hierarchy.supId": this.document.id });
       }
       const target = this.document.documentName === "ActiveEffect" ? this.document.parent : this.document;
       const newEffects = await target.createEmbeddedDocuments("ActiveEffect", [effect]);

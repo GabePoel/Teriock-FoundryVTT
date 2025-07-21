@@ -25,6 +25,6 @@ export function _prepareDerivedData(abilityData) {
     }
   }
   if (abilityData.parent.parent?.uuid) {
-    abilityData.rootUuid = abilityData.parent.parent.uuid;
+    abilityData.hierarchy.rootUuid = abilityData.parent.parent.uuid;
   }
 }

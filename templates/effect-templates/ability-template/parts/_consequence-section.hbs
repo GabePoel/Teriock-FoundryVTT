@@ -46,67 +46,167 @@
     disabled=(not editable)
   }}
   <!-- Changes UI -->
-  <div class="changes-container tgrid g12" style="margin-top: 0.5em;">
-    <div class="change-box tgrid-item gi4" style="justify-content: start;">
-      <div class="change-key">Change Key</div>
-    </div>
-    <div class="change-box tgrid-item gi3" style="justify-content: start;">
-      <div class="change-mode">Mode</div>
-    </div>
-    <div class="change-box tgrid-item gi2" style="justify-content: start;">
-      <div class="change-value">Value</div>
-    </div>
-    <div class="change-box tgrid-item gi2" style="justify-content: start;">
-      <div class="change-priority">Priority</div>
-    </div>
-    <div class="change-box tgrid-item gi1" style="justify-content: center;">
-      <a class="add-change-button" style="display: flex; justify-content: center; align-items: center;"
-         data-action="addChange" data-tooltip="Add Change" data-application="{{typeKey}}"
-         {{#if (not editable)}}disabled="true"{{/if}}>
-        <i class="fa-regular fa-square-plus"></i>
-      </a>
-    </div>
-    {{#each (lookup (lookup system.applies typeKey) "changes") as |change i|}}
-      <div class="change-box tgrid-item gi4">
-        <div class="change-box">
-          <label>
-            <input class="change-box-entry" type="text" data-index="{{i}}" data-application="{{../typeKey}}"
-                   data-key="key" value="{{change.key}}" {{#if (not ../editable)}}disabled="disabled"{{/if}} />
-          </label>
-        </div>
+  <fieldset class="teriock-full-width" style="margin-top: 6px;">
+    <legend>Changes</legend>
+    <div class="changes-container tgrid g12" style="margin-top: 0.5em;">
+      <div class="change-box tgrid-item gi4" style="justify-content: start;">
+        <div class="change-key">Change Key</div>
       </div>
-      <div class="change-box tgrid-item gi3">
-        <label>
-          <select class="change-box-entry" data-index="{{i}}" data-application="{{../typeKey}}" data-key="mode"
-                  {{#if (not ../editable)}}disabled="disabled"{{/if}} >
-            <option value="0" {{#if (eq change.mode 0)}}selected{{/if}}>Custom</option>
-            <option value="1" {{#if (eq change.mode 1)}}selected{{/if}}>Multiply</option>
-            <option value="2" {{#if (eq change.mode 2)}}selected{{/if}}>Add</option>
-            <option value="3" {{#if (eq change.mode 3)}}selected{{/if}}>Downgrade</option>
-            <option value="4" {{#if (eq change.mode 4)}}selected{{/if}}>Upgrade</option>
-            <option value="5" {{#if (eq change.mode 5)}}selected{{/if}}>Override</option>
-          </select>
-        </label>
+      <div class="change-box tgrid-item gi3" style="justify-content: start;">
+        <div class="change-mode">Mode</div>
       </div>
-      <div class="change-box tgrid-item gi2">
-        <label>
-          <input class="change-box-entry" type="text" data-index="{{i}}" data-application="{{../typeKey}}"
-                 data-key="value" value="{{change.value}}" {{#if (not ../editable)}}disabled="disabled"{{/if}} />
-        </label>
+      <div class="change-box tgrid-item gi2" style="justify-content: start;">
+        <div class="change-value">Value</div>
       </div>
-      <div class="change-box tgrid-item gi2">
-        <label>
-          <input class="change-box-entry" type="number" data-index="{{i}}" data-application="{{../typeKey}}"
-                 data-key="priority" value="{{change.priority}}" {{#if (not ../editable)}}disabled="disabled"{{/if}} />
-        </label>
+      <div class="change-box tgrid-item gi2" style="justify-content: start;">
+        <div class="change-priority">Priority</div>
       </div>
       <div class="change-box tgrid-item gi1" style="justify-content: center;">
-        <a class="delete-change-button" style="display: flex; justify-content: center; align-items: center;"
-           data-action="deleteChange" data-tooltip="Delete Change" data-index="{{i}}" data-application="{{../typeKey}}"
-           {{#if (not ../editable)}}disabled="true"{{/if}}>
-          <i class="fa-solid fa-trash"></i>
+        <a class="add-change-button" style="display: flex; justify-content: center; align-items: center;"
+           data-action="addChange" data-tooltip="Add Change" data-application="{{typeKey}}"
+           {{#if (not editable)}}disabled="true"{{/if}}>
+          <i class="fa-regular fa-square-plus"></i>
         </a>
       </div>
-    {{/each}}
-  </div>
+      {{#each (lookup (lookup system.applies typeKey) "changes") as |change i|}}
+        <div class="change-box tgrid-item gi4">
+          <div class="change-box">
+            <label>
+              <input class="change-box-entry" type="text" data-index="{{i}}" data-application="{{../typeKey}}"
+                     data-key="key" value="{{change.key}}" {{#if (not ../editable)}}disabled="disabled"{{/if}} />
+            </label>
+          </div>
+        </div>
+        <div class="change-box tgrid-item gi3">
+          <label>
+            <select class="change-box-entry" data-index="{{i}}" data-application="{{../typeKey}}" data-key="mode"
+                    {{#if (not ../editable)}}disabled="disabled"{{/if}} >
+              <option value="0" {{#if (eq change.mode 0)}}selected{{/if}}>Custom</option>
+              <option value="1" {{#if (eq change.mode 1)}}selected{{/if}}>Multiply</option>
+              <option value="2" {{#if (eq change.mode 2)}}selected{{/if}}>Add</option>
+              <option value="3" {{#if (eq change.mode 3)}}selected{{/if}}>Downgrade</option>
+              <option value="4" {{#if (eq change.mode 4)}}selected{{/if}}>Upgrade</option>
+              <option value="5" {{#if (eq change.mode 5)}}selected{{/if}}>Override</option>
+            </select>
+          </label>
+        </div>
+        <div class="change-box tgrid-item gi2">
+          <label>
+            <input class="change-box-entry" type="text" data-index="{{i}}" data-application="{{../typeKey}}"
+                   data-key="value" value="{{change.value}}" {{#if (not ../editable)}}disabled="disabled"{{/if}} />
+          </label>
+        </div>
+        <div class="change-box tgrid-item gi2">
+          <label>
+            <input class="change-box-entry" type="number" data-index="{{i}}" data-application="{{../typeKey}}"
+                   data-key="priority" value="{{change.priority}}"
+                   {{#if (not ../editable)}}disabled="disabled"{{/if}} />
+          </label>
+        </div>
+        <div class="change-box tgrid-item gi1" style="justify-content: center;">
+          <a class="delete-change-button" style="display: flex; justify-content: center; align-items: center;"
+             data-action="deleteChange" data-tooltip="Delete Change" data-index="{{i}}"
+             data-application="{{../typeKey}}"
+             {{#if (not ../editable)}}disabled="true"{{/if}}>
+            <i class="fa-solid fa-trash"></i>
+          </a>
+        </div>
+      {{/each}}
+    </div>
+  </fieldset>
+  <!-- Expiration UI -->
+  {{formGroup
+    (lookup (lookup (lookup (lookup (lookup systemFields.applies.fields typeKey) "fields") "expiration") "fields") "doesExpire")
+    value=(lookup (lookup (lookup system.applies typeKey) "expiration") "doesExpire")
+    disabled=(not editable)
+    classes="teriock-full-width"
+  }}
+  {{#if (lookup (lookup (lookup system.applies typeKey) "expiration") "doesExpire")}}
+    <fieldset class="teriock-full-width" style="margin-top: 6px;">
+      <legend>Normal Combat Expiration</legend>
+      {{formGroup
+        (lookup (lookup (lookup (lookup (lookup (lookup (lookup (lookup (lookup (lookup (lookup systemFields.applies.fields typeKey) "fields") "expiration") "fields") "normal") "fields") "combat") "fields") "what") "fields") "type")
+        value=(lookup (lookup (lookup (lookup (lookup (lookup system.applies.fields typeKey) "expiration") "normal") "combat") "what") "type")
+        disabled=(not editable)
+        classes="teriock-full-width"
+      }}
+      {{formGroup
+        (lookup (lookup (lookup (lookup (lookup (lookup (lookup (lookup (lookup (lookup (lookup systemFields.applies.fields typeKey) "fields") "expiration") "fields") "normal") "fields") "combat") "fields") "what") "fields") "roll")
+        value=(lookup (lookup (lookup (lookup (lookup (lookup system.applies.fields typeKey) "expiration") "normal") "combat") "what") "roll")
+        disabled=(not editable)
+        classes="teriock-full-width"
+      }}
+      {{formGroup
+        (lookup (lookup (lookup (lookup (lookup (lookup (lookup (lookup (lookup (lookup (lookup systemFields.applies.fields typeKey) "fields") "expiration") "fields") "normal") "fields") "combat") "fields") "what") "fields") "threshold")
+        value=(lookup (lookup (lookup (lookup (lookup (lookup system.applies.fields typeKey) "expiration") "normal") "combat") "what") "threshold")
+        disabled=(not editable)
+        classes="teriock-full-width"
+      }}
+      {{formGroup
+        (lookup (lookup (lookup (lookup (lookup (lookup (lookup (lookup (lookup (lookup (lookup systemFields.applies.fields typeKey) "fields") "expiration") "fields") "normal") "fields") "combat") "fields") "when") "fields") "time")
+        value=(lookup (lookup (lookup (lookup (lookup (lookup system.applies.fields typeKey) "expiration") "normal") "combat") "when") "time")
+        disabled=(not editable)
+        classes="teriock-full-width"
+      }}
+      {{formGroup
+        (lookup (lookup (lookup (lookup (lookup (lookup (lookup (lookup (lookup (lookup (lookup systemFields.applies.fields typeKey) "fields") "expiration") "fields") "normal") "fields") "combat") "fields") "when") "fields") "trigger")
+        value=(lookup (lookup (lookup (lookup (lookup (lookup system.applies.fields typeKey) "expiration") "normal") "combat") "when") "trigger")
+        disabled=(not editable)
+        classes="teriock-full-width"
+      }}
+      {{formGroup
+        (lookup (lookup (lookup (lookup (lookup (lookup (lookup (lookup (lookup (lookup (lookup systemFields.applies.fields typeKey) "fields") "expiration") "fields") "normal") "fields") "combat") "fields") "when") "fields") "skip")
+        value=(lookup (lookup (lookup (lookup (lookup (lookup system.applies.fields typeKey) "expiration") "normal") "combat") "when") "skip")
+        disabled=(not editable)
+        classes="teriock-full-width"
+      }}
+    </fieldset>
+    {{formGroup
+      (lookup (lookup (lookup (lookup (lookup systemFields.applies.fields typeKey) "fields") "expiration") "fields") "changeOnCrit")
+      value=(lookup (lookup (lookup system.applies typeKey) "expiration") "changeOnCrit")
+      disabled=(not editable)
+      classes="teriock-full-width"
+    }}
+  {{/if}}
+  {{#if (lookup (lookup (lookup system.applies typeKey) "expiration") "changeOnCrit")}}
+    <fieldset class="teriock-full-width" style="margin-top: 6px;">
+      <legend>Crit Combat Expiration</legend>
+      {{formGroup
+        (lookup (lookup (lookup (lookup (lookup (lookup (lookup (lookup (lookup (lookup (lookup systemFields.applies.fields typeKey) "fields") "expiration") "fields") "crit") "fields") "combat") "fields") "what") "fields") "type")
+        value=(lookup (lookup (lookup (lookup (lookup (lookup system.applies.fields typeKey) "expiration") "crit") "combat") "what") "type")
+        disabled=(not editable)
+        classes="teriock-full-width"
+      }}
+      {{formGroup
+        (lookup (lookup (lookup (lookup (lookup (lookup (lookup (lookup (lookup (lookup (lookup systemFields.applies.fields typeKey) "fields") "expiration") "fields") "crit") "fields") "combat") "fields") "what") "fields") "roll")
+        value=(lookup (lookup (lookup (lookup (lookup (lookup system.applies.fields typeKey) "expiration") "crit") "combat") "what") "roll")
+        disabled=(not editable)
+        classes="teriock-full-width"
+      }}
+      {{formGroup
+        (lookup (lookup (lookup (lookup (lookup (lookup (lookup (lookup (lookup (lookup (lookup systemFields.applies.fields typeKey) "fields") "expiration") "fields") "crit") "fields") "combat") "fields") "what") "fields") "threshold")
+        value=(lookup (lookup (lookup (lookup (lookup (lookup system.applies.fields typeKey) "expiration") "crit") "combat") "what") "threshold")
+        disabled=(not editable)
+        classes="teriock-full-width"
+      }}
+      {{formGroup
+        (lookup (lookup (lookup (lookup (lookup (lookup (lookup (lookup (lookup (lookup (lookup systemFields.applies.fields typeKey) "fields") "expiration") "fields") "crit") "fields") "combat") "fields") "when") "fields") "time")
+        value=(lookup (lookup (lookup (lookup (lookup (lookup system.applies.fields typeKey) "expiration") "crit") "combat") "when") "time")
+        disabled=(not editable)
+        classes="teriock-full-width"
+      }}
+      {{formGroup
+        (lookup (lookup (lookup (lookup (lookup (lookup (lookup (lookup (lookup (lookup (lookup systemFields.applies.fields typeKey) "fields") "expiration") "fields") "crit") "fields") "combat") "fields") "when") "fields") "trigger")
+        value=(lookup (lookup (lookup (lookup (lookup (lookup system.applies.fields typeKey) "expiration") "crit") "combat") "when") "trigger")
+        disabled=(not editable)
+        classes="teriock-full-width"
+      }}
+      {{formGroup
+        (lookup (lookup (lookup (lookup (lookup (lookup (lookup (lookup (lookup (lookup (lookup systemFields.applies.fields typeKey) "fields") "expiration") "fields") "crit") "fields") "combat") "fields") "when") "fields") "skip")
+        value=(lookup (lookup (lookup (lookup (lookup (lookup system.applies.fields typeKey) "expiration") "crit") "combat") "when") "skip")
+        disabled=(not editable)
+        classes="teriock-full-width"
+      }}
+    </fieldset>
+  {{/if}}
 </div>

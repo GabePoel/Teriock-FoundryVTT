@@ -121,14 +121,19 @@ export async function _generateEffect(abilityData, actor, heightenAmount = 0) {
         sustained: sustained,
         description: abilityData.endCondition,
       },
-      subIds: Array.from(abilityData.subIds || new Set()),
-      rootUuid: abilityData.parent.parent.uuid,
+      hierarchy: {
+        subIds: Array.from(abilityData.hierarchy.subIds || new Set()),
+        rootUuid: abilityData.parent.parent.uuid,
+      },
     },
     duration: {
       seconds: seconds || 0,
     },
   };
-  if ((seconds > 0 || abilityData.duration.description.toLowerCase().trim() !== "instant") && abilityData.maneuver !== "passive") {
+  if (
+    (seconds > 0 || abilityData.duration.description.toLowerCase().trim() !== "instant") &&
+    abilityData.maneuver !== "passive"
+  ) {
     return effectData;
   }
   return false;

@@ -57,7 +57,6 @@ declare global {
     type ItemType = DocumentTypes.ItemType;
     type EffectType = DocumentTypes.EffectType;
     type EffectMetadata = Metadata.EffectMetadata;
-    type ChatActionButton = Chat.ChatActionButton;
     type HTMLButtonConfig = Chat.HTMLButtonConfig;
     type ChatOptions = Command.ChatOptions;
     type CommandOptions = Command.CommandOptions;
@@ -80,11 +79,11 @@ declare global {
 
     /** FoundryVTT UUID */
     type UUID<T = unknown> = string & {
-      readonly [__brand]: T;
+      [__brand]: T;
     };
     /** FoundryVTT ID */
     type ID<T = unknown> = string & {
-      readonly [__brand]: T;
+      [__brand]: T;
     };
   }
 }

@@ -59,8 +59,8 @@ export default class TeriockEffect extends BaseTeriockEffect {
    * @returns {string|null}
    */
   get supId() {
-    if (this.metadata?.canSub && this.system.supId && this.parent.effects.has(this.system.supId)) {
-      return this.system.supId;
+    if (this.metadata?.canSub && this.system.hierarchy.supId && this.parent.effects.has(this.system.hierarchy.supId)) {
+      return this.system.hierarchy.supId;
     }
     return null;
   }
@@ -89,7 +89,7 @@ export default class TeriockEffect extends BaseTeriockEffect {
     /** @type {TeriockEffect[]} */
     const subEffects = [];
     for (const id of this.subIds) {
-      const root = /** @type {TeriockActor|TeriockItem} */ foundry.utils.fromUuidSync(this.system.rootUuid);
+      const root = /** @type {TeriockActor|TeriockItem} */ foundry.utils.fromUuidSync(this.system.hierarchy.rootUuid);
       subEffects.push(root.effects.get(id));
     }
     return subEffects;
@@ -101,9 +101,9 @@ export default class TeriockEffect extends BaseTeriockEffect {
    * @returns {Set<string>}
    */
   get subIds() {
-    if (this.metadata.canSub && this.system.subIds.size > 0) {
-      const root = /** @type {TeriockActor|TeriockItem} */ foundry.utils.fromUuidSync(this.system.rootUuid);
-      return this.system.subIds.filter((id) => root.effects.has(id));
+    if (this.metadata.canSub && this.system.hierarchy.subIds.size > 0) {
+      const root = /** @type {TeriockActor|TeriockItem} */ foundry.utils.fromUuidSync(this.system.hierarchy.rootUuid);
+      return this.system.hierarchy.subIds.filter((id) => root.effects.has(id));
     }
     return new Set();
   }
@@ -166,20 +166,20 @@ export default class TeriockEffect extends BaseTeriockEffect {
     return effects.map((oldEffect) => {
       const newEffect = /** @type {TeriockEffect} */ oldEffect.clone();
       const updateData = {
-        "system.rootUuid": rootUuid,
+        "system.hierarchy.rootUuid": rootUuid,
       };
       if (oldIds.includes(oldEffect.id)) {
         updateData["_id"] = idMap[oldEffect.id];
       }
       if (oldEffect.metadata.canSub) {
-        if (oldIds.includes(oldEffect.system.supId)) {
-          updateData["system.supId"] = idMap[oldEffect.system.supId];
+        if (oldIds.includes(oldEffect.system.hierarchy.supId)) {
+          updateData["system.hierarchy.supId"] = idMap[oldEffect.system.hierarchy.supId];
         }
         const newSubIds = new Set();
-        for (const oldId of oldEffect.system.subIds) {
+        for (const oldId of oldEffect.system.hierarchy.subIds) {
           newSubIds.add(idMap[oldId]);
         }
-        updateData["system.subIds"] = newSubIds;
+        updateData["system.hierarchy.subIds"] = newSubIds;
       }
       newEffect.updateSource(updateData);
       return newEffect;
@@ -212,7 +212,7 @@ export default class TeriockEffect extends BaseTeriockEffect {
       if (supEffect?.metadata?.canSub) {
         supEffect.updateSource({ _id: newSupId });
         if (supEffect.subIds.size > 0) {
-          const oldSupId = supEffect.subs[0].system.supId;
+          const oldSupId = supEffect.subs[0].system.hierarchy.supId;
           const subEffects = supEffect.allSubs;
           const idMap = {};
           for (const id of subEffects.map((sub) => sub.id)) {
@@ -221,11 +221,11 @@ export default class TeriockEffect extends BaseTeriockEffect {
           idMap[oldSupId] = newSupId;
           const newSubs = this._changeEffectIds(subEffects, idMap, operation.parent.uuid);
           supEffect.updateSource({
-            "system.subIds": supEffect.subIds.map((oldId) => idMap[oldId]),
+            "system.hierarchy.subIds": supEffect.subIds.map((oldId) => idMap[oldId]),
           });
           toCreate.push(...newSubs);
         }
-        supEffect.updateSource({ "system.rootUuid": operation.parent.uuid });
+        supEffect.updateSource({ "system.hierarchy.rootUuid": operation.parent.uuid });
         operation.keepId = true;
       }
     }
@@ -283,7 +283,7 @@ export default class TeriockEffect extends BaseTeriockEffect {
     if (this.subIds.size > 0) {
       await this.parent?.deleteEmbeddedDocuments("ActiveEffect", Array.from(this.subIds));
       await this.update({
-        "system.subIds": new Set(),
+        "system.hierarchy.subIds": new Set(),
       });
     }
   }
@@ -301,11 +301,11 @@ export default class TeriockEffect extends BaseTeriockEffect {
       await this.parent.updateEmbeddedDocuments("ActiveEffect", [
         {
           _id: this.id,
-          "system.subIds": newSubIds,
+          "system.hierarchy.subIds": newSubIds,
         },
         {
           _id: sub.id,
-          "system.supId": this.id,
+          "system.hierarchy.supId": this.id,
         },
       ]);
     }

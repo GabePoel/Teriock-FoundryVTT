@@ -1,8 +1,8 @@
 const { ux } = foundry.applications;
 const { fields } = foundry.data;
 const { TypeDataModel } = foundry.abstract;
-import { buildHTMLButton } from "../../../helpers/html.mjs";
 import { handlers } from "../../../action-handlers/instances/_handlers.mjs";
+import { buildHTMLButton } from "../../../helpers/html.mjs";
 import { imageContextMenuOptions } from "../../../sheets/misc-sheets/image-sheet/connections/_context-menus.mjs";
 
 export default class TeriockBaseMessageData extends TypeDataModel {
@@ -33,6 +33,7 @@ export default class TeriockBaseMessageData extends TypeDataModel {
     );
     schema.tags = new fields.ArrayField(new fields.StringField());
     schema.extraContent = new fields.HTMLField();
+    schema.source = new fields.DocumentUUIDField({ nullable: true });
     return schema;
   }
 
@@ -140,7 +141,7 @@ export default class TeriockBaseMessageData extends TypeDataModel {
     if (remainder === 0) {
       // Clean multiple - all buttons same width
       buttonContainer.style.gridTemplateColumns = `repeat(${columns}, 1fr)`;
-      buttons.forEach(button => {
+      buttons.forEach((button) => {
         button.classList.remove("full-width", "full-row");
         buttonContainer.appendChild(button);
       });
@@ -190,7 +191,7 @@ export default class TeriockBaseMessageData extends TypeDataModel {
       eventName: "contextmenu",
       jQuery: false,
       fixed: true,
-    })
+    });
 
     const actionElements = html.querySelectorAll("[data-action]");
     for (const /** @type {HTMLElement} */ element of actionElements) {

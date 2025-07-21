@@ -78,5 +78,24 @@ export function _migrateData(data) {
       data.duration = parseDurationString(data.duration);
     }
   }
+
+  if (typeof data.rootUuid === "string") {
+    if (typeof data.hierarchy !== "object") {
+      data.hierarchy = {};
+    }
+    data.hierarchy.rootUuid = data.rootUuid;
+  }
+  if (Array.isArray(data.subIds)) {
+    if (typeof data.hierarchy !== "object") {
+      data.hierarchy = {};
+    }
+    data.hierarchy.subIds = data.subIds;
+  }
+  if (typeof data.supId === "string") {
+    if (typeof data.hierarchy !== "object") {
+      data.hierarchy = {};
+    }
+    data.hierarchy.supId = data.supId;
+  }
   return data;
 }
