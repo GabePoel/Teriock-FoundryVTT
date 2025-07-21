@@ -1,3 +1,4 @@
+import { createProperty } from "../../../helpers/create-effects.mjs";
 import ConsumableDataMixin from "../../mixins/consumable-mixin.mjs";
 import WikiDataMixin from "../../mixins/wiki-mixin.mjs";
 import TeriockBaseItemData from "../base-item-data/base-item-data.mjs";
@@ -211,5 +212,15 @@ export default class TeriockEquipmentData extends WikiDataMixin(ConsumableDataMi
    */
   async deattune() {
     await attunement._deattune(this);
+  }
+
+  /**
+   * Adds the specified property to this.
+   *
+   * @param {string} propertyKey - The property to add.
+   * @returns {Promise<void>} Promise that resolves when the property is added.
+   */
+  async addProperty(propertyKey = "") {
+    await createProperty(this.parent, propertyKey);
   }
 }
