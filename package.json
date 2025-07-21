@@ -3,15 +3,17 @@
   "version": "2.0.0",
   "description": "CSS compiler for the Teriock system. Based on the systemless one by Asacolips.",
   "scripts": {
-    "build": "sass style/teriock.scss css/teriock.css --style=expanded && node scripts/fetch-content.mjs && node scripts/update-templates.mjs && node scripts/update-options.mjs",
+    "build": "sass src/style/teriock.scss css/teriock.css --style=expanded && node scripts/fetch-content.mjs && node scripts/update-templates.mjs && node scripts/update-options.mjs",
     "fetch": "node scripts/fetch-content.mjs",
-    "style": "sass style/teriock.scss css/teriock.css --style=expanded",
+    "style": "sass src/style/teriock.scss css/teriock.css --style=expanded",
     "update": "node scripts/update-templates.mjs && node scripts/update-options.mjs",
     "symlink": "node scripts/create-symlinks.mjs",
-    "lint": "eslint module/**/* templates/**/*",
-    "lint:fix": "eslint --fix module/**/* templates/**/*",
+    "lint": "eslint src/module/**/* templates/**/*",
+    "lint:fix": "eslint --fix src/module/**/* templates/**/*",
     "format": "prettier --write \"**/*.{js,mjs,ts}\"",
-    "format:all": "npm run format && npm run lint:fix"
+    "format:all": "npm run format && npm run lint:fix",
+    "toJSON": "node scripts/pack-to-json.mjs",
+    "fromJSON": "node scripts/pack-from-json.mjs"
   },
   "browserslist": [
     "last 3 versions"

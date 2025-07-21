@@ -57,14 +57,14 @@ const cleanTitles = (members, prefixRegex = /^.*?:/) =>
     .map((m) => (prefixRegex ? m.title.replace(prefixRegex, "") : m.title));
 
 const processSimpleCategory = async (category, name, options = {}, prefixRegex) => {
-  const { fetchCategoryMembers } = await import("../module/helpers/wiki.mjs");
+  const { fetchCategoryMembers } = await import("../src/module/helpers/wiki.mjs");
   const members = await fetchCategoryMembers(category, options);
   const titles = cleanTitles(members, prefixRegex);
   await writeObjectToFile(titles, name);
 };
 
 (async () => {
-  const { fetchCategoryMembers } = await import("../module/helpers/wiki.mjs");
+  const { fetchCategoryMembers } = await import("../src/module/helpers/wiki.mjs");
 
   try {
     // Properties & Subcategories

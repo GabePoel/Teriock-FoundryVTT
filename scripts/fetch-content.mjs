@@ -4,11 +4,11 @@ import path from "path";
 
 import { fileURLToPath } from "url";
 
-import { conditions } from "../module/helpers/constants/generated/conditions.mjs";
-import { magicalProperties } from "../module/helpers/constants/generated/magical-properties.mjs";
-import { materialProperties } from "../module/helpers/constants/generated/material-properties.mjs";
-import { properties } from "../module/helpers/constants/generated/properties.mjs";
-import { fetchWikiPageHTML } from "../module/helpers/wiki.mjs";
+import { conditions } from "../src/module/helpers/constants/generated/conditions.mjs";
+import { magicalProperties } from "../src/module/helpers/constants/generated/magical-properties.mjs";
+import { materialProperties } from "../src/module/helpers/constants/generated/material-properties.mjs";
+import { properties } from "../src/module/helpers/constants/generated/properties.mjs";
+import { fetchWikiPageHTML } from "../src/module/helpers/wiki.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);

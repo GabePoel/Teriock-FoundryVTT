@@ -1,4 +1,4 @@
-import { AbilityManeuver, ExecutionTime } from "./rules-parts/maneuver";
+import { AbilityManeuver, ExecutionTime } from "./rules-parts/maneuver.ts";
 import { CostsConfig } from "./rules-parts/costs";
 import { Element, PowerSource } from "./rules-parts/tags";
 import {
