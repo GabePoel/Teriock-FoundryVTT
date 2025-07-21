@@ -170,6 +170,7 @@ function buildTagTree(doc) {
  */
 function getBarText(doc, selector, clean = false) {
   const el = doc.querySelector(`.ability-bar-${selector} .ability-bar-content`);
+  el?.querySelectorAll(".ability-bar").forEach((el2) => el2.remove());
   let text = el?.innerHTML || null;
   if (text && clean) {
     const tempDiv = document.createElement("div");

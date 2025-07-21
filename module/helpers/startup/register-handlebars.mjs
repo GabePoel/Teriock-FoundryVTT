@@ -398,7 +398,7 @@ export default function registerHandlebarsHelpers() {
 
   // TCard & AbilityCards Helpers
 
-  Handlebars.registerHelper("tcard", function (options) {
+  Handlebars.registerHelper("tcard", function async (options) {
     let {
       img,
       title,
@@ -428,9 +428,18 @@ export default function registerHandlebarsHelpers() {
       : `<div class="tcard-subtitle">${subtitle}</div>`;
 
     return new Handlebars.SafeString(`
-      <div class="tcard ${draggable ? "draggable" : ""} ${active ? "active" : "inactive"} ${shattered ? "shattered" : ""}" ${idAttr} ${parentIdAttr} ${typeAttr} data-action="openDoc" data-img="${img}">
+      <div 
+        class="tcard ${draggable ? "draggable" : ""} ${active ? "active" : "inactive"} ${shattered ? "shattered" : ""}" ${idAttr} ${parentIdAttr} ${typeAttr} 
+        data-action="openDoc" 
+        data-img="${img}"
+      >
         <div class="tcard-marker" style="${marker ? `background-color: ${marker}; width: 4px; min-width: 4px;` : ""}"></div>
-        <div class="tcard-image" data-action="${action}" ${tooltipAttr}><img src="${img}" alt="${title}" /></div>
+        <div 
+          class="tcard-image"
+          data-action="${action}" ${tooltipAttr}
+          data-tooltip-direction="LEFT"
+          data-tooltip-class="teriock"
+        ><img src="${img}" alt="${title}" /></div>
         <div class="tcard-body">
           <div class="tcard-titles">
             <div class="tcard-title">${title}</div>
@@ -438,7 +447,7 @@ export default function registerHandlebarsHelpers() {
           </div>
           <div class="tcard-content">
             <div class="tcard-text">${text}</div>
-            <div class="tcard-icons">${icons || ""}</div>
+            <div class="tcard-icons" data-tooltip-direction="DOWN" data-tooltip-class="teriock">${icons || ""}</div>
           </div>
         </div>
         <div class="tcard-background"></div>

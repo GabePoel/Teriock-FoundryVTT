@@ -380,6 +380,23 @@ export default (Base) => {
 
       this._activateMenu();
       this._setupEventListeners();
+
+      for (const /** @type {HTMLElement} */ element of this.element.querySelectorAll(".tcard")) {
+        const embedded = /** @type {TeriockItem|TeriockEffect} */ await this._embeddedFromCard(element);
+        if (embedded && typeof embedded.buildMessage === "function") {
+          element.dataset.tooltipHtml = await embedded.buildMessage();
+          element.dataset.tooltipClass = "teriock teriock-rich-tooltip";
+        }
+      }
+
+      this.element.querySelectorAll(".tcard-container").forEach((element) => {
+        element.addEventListener(
+          "pointerenter",
+          async function () {
+            await this._richTooltipContainer(element);
+          }.bind(this),
+        );
+      });
     }
 
     /**
@@ -704,6 +721,26 @@ export default (Base) => {
           return this.document.parent?.effects.get(id);
         }
         return this.document.effects.get(id);
+      }
+    }
+
+    /**
+     * Assigns overall rules to tooltips of tcard containers.
+     *
+     * @param {HTMLElement} target
+     * @returns {Promise<void>}
+     * @private
+     */
+    async _richTooltipContainer(target) {
+      const rect = target.getBoundingClientRect();
+      const leftSpace = rect.left;
+      const rightSpace = window.innerWidth - rect.right;
+
+      // Determine tooltip direction
+      if (rightSpace >= 350) {
+        target.dataset.tooltipDirection = "RIGHT";
+      } else {
+        target.dataset.tooltipDirection = leftSpace > rightSpace ? "LEFT" : "RIGHT";
       }
     }
 

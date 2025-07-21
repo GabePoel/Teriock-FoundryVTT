@@ -54,3 +54,40 @@ export function createDialogFieldset(legend, description, name, max) {
       <input type="number" name="${name}" value="0" min="0" max="${max}" step="1">
     </fieldset>`;
 }
+
+/**
+ * Add an Elder Sorcery mask to the given element if possible.
+ *
+ * @param {HTMLElement} element
+ * @param {TeriockAbility} ability
+ * @returns {HTMLElement} The modified element.
+ */
+export function insertElderSorceryMask(element, ability) {
+  const esMask = elderSorceryMask(ability);
+  if (esMask) {
+    element.insertAdjacentElement("afterbegin", esMask);
+  }
+  return element;
+}
+
+/**
+ * Makes an Elder Sorcery mask if possible.
+ *
+ * @param {TeriockAbility} ability
+ * @returns {HTMLDivElement|null}
+ */
+export function elderSorceryMask(ability) {
+  if (ability.system.elderSorcery) {
+    const esMaskContainer = document.createElement("div");
+    esMaskContainer.classList.add("es-mask-container");
+    const esMaskRotator = document.createElement("div");
+    esMaskRotator.classList.add("es-mask-rotator");
+    const esMaskOverlay = document.createElement("div");
+    esMaskOverlay.classList.add("es-mask-overlay");
+    esMaskOverlay.classList.add(elementClass(ability.system.elements));
+    esMaskContainer.appendChild(esMaskRotator);
+    esMaskContainer.appendChild(esMaskOverlay);
+    return esMaskContainer;
+  }
+  return null;
+}

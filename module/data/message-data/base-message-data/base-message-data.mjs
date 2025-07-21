@@ -21,6 +21,7 @@ export default class TeriockBaseMessageData extends TypeDataModel {
   static defineSchema() {
     const schema = {};
     schema.columns = new fields.NumberField({ initial: 2 });
+    schema.overlay = new fields.HTMLField({ nullable: true, initial: null });
     schema.buttons = new fields.ArrayField(
       new fields.SchemaField({
         label: new fields.StringField(),
@@ -59,6 +60,13 @@ export default class TeriockBaseMessageData extends TypeDataModel {
     if (hasContent) {
       const footer = this._constructFooter();
       html.insertAdjacentElement("beforeend", footer);
+    }
+
+    if (this.overlay) {
+      const overlay = document.createElement("div");
+      overlay.innerHTML = this.overlay;
+      html.insertAdjacentElement("afterbegin", overlay.firstElementChild);
+      html.style.position = "relative";
     }
 
     this.addListeners(html);
@@ -186,7 +194,6 @@ export default class TeriockBaseMessageData extends TypeDataModel {
    * @param {HTMLLIElement} html The pending HTML
    */
   addListeners(html) {
-    // Connect image context menu
     new ux.ContextMenu(html, ".timage", imageContextMenuOptions, {
       eventName: "contextmenu",
       jQuery: false,

@@ -142,7 +142,8 @@ export default (BaseDocument) => {
      * @returns {Promise<string>} Promise that resolves to the enriched message HTML.
      */
     async buildMessage(options = {}) {
-      const rawMessage = this.buildRawMessage(options);
+      let rawMessage = this.buildRawMessage(options);
+      rawMessage = this.system.adjustMessage(rawMessage);
       return await ux.TextEditor.enrichHTML(rawMessage.outerHTML);
     }
 

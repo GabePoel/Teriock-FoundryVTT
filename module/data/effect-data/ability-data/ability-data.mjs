@@ -1,3 +1,4 @@
+import { insertElderSorceryMask } from "../../../helpers/html.mjs";
 import WikiDataMixin from "../../mixins/wiki-mixin.mjs";
 import TeriockBaseEffectData from "../base-effect-data/base-effect-data.mjs";
 import { _messageParts } from "./methods/_messages.mjs";
@@ -118,5 +119,19 @@ export default class TeriockAbilityData extends WikiDataMixin(TeriockBaseEffectD
    */
   async parse(rawHTML) {
     return await _parse(this, rawHTML);
+  }
+
+  /**
+   * Adjust the built message after it's created.
+   * Includes custom styling for Elder Sorcery.
+   *
+   * @param {HTMLDivElement} messageElement - The raw message HTML.
+   * @returns {HTMLDivElement} The modified raw message HTML.
+   * @override
+   */
+  adjustMessage(messageElement) {
+    messageElement = super.adjustMessage(messageElement);
+    messageElement = insertElderSorceryMask(messageElement, this.parent);
+    return messageElement;
   }
 }

@@ -38,6 +38,7 @@ export function buildMessage(messageParts) {
   // Blocks
   const blockBox = messageBox();
   blockBox.classList.add("tmes-block-box");
+  blockBox.classList.add("text-left");
   blocks
     .filter((block) => block.text !== "")
     .forEach((block) => {

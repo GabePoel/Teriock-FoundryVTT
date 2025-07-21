@@ -11,6 +11,8 @@ function createElement(tag, props = {}, ...children) {
   return el;
 }
 
+CONFIG.TextEditor.enrichers
+
 /**
  * Creates a message box container element.
  * @returns {HTMLDivElement} A div element for containing message content.
@@ -138,6 +140,7 @@ function barIcon(parent, iconClass, label, first = true) {
   const wrapper = createElement("div", { className: "abm-icon-wrapper tsubtle" }, icon);
   if (label) {
     wrapper.setAttribute("data-tooltip", label);
+    wrapper.setAttribute("data-tooltip-direction", "LEFT");
   }
   const iconParent = parent.querySelector(".abm-bar-icon") || parent;
 
@@ -184,7 +187,7 @@ function addEmbeddedBlock(entities, blocks, name, typeKey, iconFallback = "hasht
           : "";
 
       return `
-        <li class="tmessage-embedded-li">
+        <li class="tmessage-embedded-li" data-tooltip-direction="LEFT">
           <span class="tmes-emb-li-icon" style="color: ${color};">
             <i class="fa-solid fa-${icon} fa-fw"></i>
           </span>@UUID[${uuid}]{${name}}${suffix}
