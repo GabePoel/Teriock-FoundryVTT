@@ -46,6 +46,7 @@ export default async function registerTemplates () {
     'systems/teriock/templates/effect-templates/ability-template/entries/ab-overview-entries.hbs',
     'systems/teriock/templates/effect-templates/ability-template/entries/ab-requirements-entries.hbs',
     'systems/teriock/templates/effect-templates/ability-template/entries/ab-trigger-entries.hbs',
+    'systems/teriock/templates/effect-templates/ability-template/parts/_consequence-expiration.hbs',
     'systems/teriock/templates/effect-templates/ability-template/parts/_consequence-section.hbs',
     'systems/teriock/templates/effect-templates/ability-template/parts/ab-consequences.hbs',
     'systems/teriock/templates/effect-templates/ability-template/parts/ab-elder-sorcery.hbs',

@@ -120,45 +120,17 @@
     value=(lookup (lookup (lookup system.applies typeKey) "expiration") "doesExpire")
     disabled=(not editable)
     classes="teriock-full-width"
+    rootId=(concat uuid)
   }}
   {{#if (lookup (lookup (lookup system.applies typeKey) "expiration") "doesExpire")}}
     <fieldset class="teriock-full-width" style="margin-top: 6px;">
       <legend>Normal Combat Expiration</legend>
-      {{formGroup
-        (lookup (lookup (lookup (lookup (lookup (lookup (lookup (lookup (lookup (lookup (lookup systemFields.applies.fields typeKey) "fields") "expiration") "fields") "normal") "fields") "combat") "fields") "what") "fields") "type")
-        value=(lookup (lookup (lookup (lookup (lookup (lookup system.applies.fields typeKey) "expiration") "normal") "combat") "what") "type")
-        disabled=(not editable)
-        classes="teriock-full-width"
-      }}
-      {{formGroup
-        (lookup (lookup (lookup (lookup (lookup (lookup (lookup (lookup (lookup (lookup (lookup systemFields.applies.fields typeKey) "fields") "expiration") "fields") "normal") "fields") "combat") "fields") "what") "fields") "roll")
-        value=(lookup (lookup (lookup (lookup (lookup (lookup system.applies.fields typeKey) "expiration") "normal") "combat") "what") "roll")
-        disabled=(not editable)
-        classes="teriock-full-width"
-      }}
-      {{formGroup
-        (lookup (lookup (lookup (lookup (lookup (lookup (lookup (lookup (lookup (lookup (lookup systemFields.applies.fields typeKey) "fields") "expiration") "fields") "normal") "fields") "combat") "fields") "what") "fields") "threshold")
-        value=(lookup (lookup (lookup (lookup (lookup (lookup system.applies.fields typeKey) "expiration") "normal") "combat") "what") "threshold")
-        disabled=(not editable)
-        classes="teriock-full-width"
-      }}
-      {{formGroup
-        (lookup (lookup (lookup (lookup (lookup (lookup (lookup (lookup (lookup (lookup (lookup systemFields.applies.fields typeKey) "fields") "expiration") "fields") "normal") "fields") "combat") "fields") "when") "fields") "time")
-        value=(lookup (lookup (lookup (lookup (lookup (lookup system.applies.fields typeKey) "expiration") "normal") "combat") "when") "time")
-        disabled=(not editable)
-        classes="teriock-full-width"
-      }}
-      {{formGroup
-        (lookup (lookup (lookup (lookup (lookup (lookup (lookup (lookup (lookup (lookup (lookup systemFields.applies.fields typeKey) "fields") "expiration") "fields") "normal") "fields") "combat") "fields") "when") "fields") "trigger")
-        value=(lookup (lookup (lookup (lookup (lookup (lookup system.applies.fields typeKey) "expiration") "normal") "combat") "when") "trigger")
-        disabled=(not editable)
-        classes="teriock-full-width"
-      }}
-      {{formGroup
-        (lookup (lookup (lookup (lookup (lookup (lookup (lookup (lookup (lookup (lookup (lookup systemFields.applies.fields typeKey) "fields") "expiration") "fields") "normal") "fields") "combat") "fields") "when") "fields") "skip")
-        value=(lookup (lookup (lookup (lookup (lookup (lookup system.applies.fields typeKey) "expiration") "normal") "combat") "when") "skip")
-        disabled=(not editable)
-        classes="teriock-full-width"
+      {{> "systems/teriock/templates/effect-templates/ability-template/parts/_consequence-expiration.hbs"
+        editable=editable
+        expirationKey="normal"
+        system=system
+        systemFields=systemFields
+        typeKey=typeKey
       }}
     </fieldset>
     {{formGroup
@@ -166,46 +138,18 @@
       value=(lookup (lookup (lookup system.applies typeKey) "expiration") "changeOnCrit")
       disabled=(not editable)
       classes="teriock-full-width"
+      rootId=(concat uuid)
     }}
   {{/if}}
   {{#if (lookup (lookup (lookup system.applies typeKey) "expiration") "changeOnCrit")}}
     <fieldset class="teriock-full-width" style="margin-top: 6px;">
       <legend>Crit Combat Expiration</legend>
-      {{formGroup
-        (lookup (lookup (lookup (lookup (lookup (lookup (lookup (lookup (lookup (lookup (lookup systemFields.applies.fields typeKey) "fields") "expiration") "fields") "crit") "fields") "combat") "fields") "what") "fields") "type")
-        value=(lookup (lookup (lookup (lookup (lookup (lookup system.applies.fields typeKey) "expiration") "crit") "combat") "what") "type")
-        disabled=(not editable)
-        classes="teriock-full-width"
-      }}
-      {{formGroup
-        (lookup (lookup (lookup (lookup (lookup (lookup (lookup (lookup (lookup (lookup (lookup systemFields.applies.fields typeKey) "fields") "expiration") "fields") "crit") "fields") "combat") "fields") "what") "fields") "roll")
-        value=(lookup (lookup (lookup (lookup (lookup (lookup system.applies.fields typeKey) "expiration") "crit") "combat") "what") "roll")
-        disabled=(not editable)
-        classes="teriock-full-width"
-      }}
-      {{formGroup
-        (lookup (lookup (lookup (lookup (lookup (lookup (lookup (lookup (lookup (lookup (lookup systemFields.applies.fields typeKey) "fields") "expiration") "fields") "crit") "fields") "combat") "fields") "what") "fields") "threshold")
-        value=(lookup (lookup (lookup (lookup (lookup (lookup system.applies.fields typeKey) "expiration") "crit") "combat") "what") "threshold")
-        disabled=(not editable)
-        classes="teriock-full-width"
-      }}
-      {{formGroup
-        (lookup (lookup (lookup (lookup (lookup (lookup (lookup (lookup (lookup (lookup (lookup systemFields.applies.fields typeKey) "fields") "expiration") "fields") "crit") "fields") "combat") "fields") "when") "fields") "time")
-        value=(lookup (lookup (lookup (lookup (lookup (lookup system.applies.fields typeKey) "expiration") "crit") "combat") "when") "time")
-        disabled=(not editable)
-        classes="teriock-full-width"
-      }}
-      {{formGroup
-        (lookup (lookup (lookup (lookup (lookup (lookup (lookup (lookup (lookup (lookup (lookup systemFields.applies.fields typeKey) "fields") "expiration") "fields") "crit") "fields") "combat") "fields") "when") "fields") "trigger")
-        value=(lookup (lookup (lookup (lookup (lookup (lookup system.applies.fields typeKey) "expiration") "crit") "combat") "when") "trigger")
-        disabled=(not editable)
-        classes="teriock-full-width"
-      }}
-      {{formGroup
-        (lookup (lookup (lookup (lookup (lookup (lookup (lookup (lookup (lookup (lookup (lookup systemFields.applies.fields typeKey) "fields") "expiration") "fields") "crit") "fields") "combat") "fields") "when") "fields") "skip")
-        value=(lookup (lookup (lookup (lookup (lookup (lookup system.applies.fields typeKey) "expiration") "crit") "combat") "when") "skip")
-        disabled=(not editable)
-        classes="teriock-full-width"
+      {{> "systems/teriock/templates/effect-templates/ability-template/parts/_consequence-expiration.hbs"
+        editable=editable
+        expirationKey="crit"
+        system=system
+        systemFields=systemFields
+        typeKey=typeKey
       }}
     </fieldset>
   {{/if}}
