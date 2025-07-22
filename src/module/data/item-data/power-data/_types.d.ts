@@ -1,4 +1,4 @@
-import { TeriockBaseItemData } from "../base-item-data/base-item-data.mjs";
+import TeriockBaseItemData from "../base-item-data/base-item-data.mjs";
 import { TeriockBaseItemSchema } from "../base-item-data/_types";
 import { TeriockPower } from "../../../documents/_documents.mjs";
 

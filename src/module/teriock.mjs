@@ -2,9 +2,17 @@ import { conditions } from "./content/conditions.mjs";
 import * as data from "./data/_module.mjs";
 import * as documents from "./documents/_module.mjs";
 import TERIOCK from "./helpers/config.mjs";
+import {
+  createAbility,
+  createEffect,
+  createFluency,
+  createProperty,
+  createResource,
+} from "./helpers/create-effects.mjs";
 import registerHandlebarsHelpers from "./helpers/startup/register-handlebars.mjs";
 import registerHooks from "./helpers/startup/register-hooks.mjs";
 import registerTemplates from "./helpers/startup/register-templates.mjs";
+import { cleanWikiHTML, fetchCategoryMembers, fetchWikiPageHTML, openWikiPage } from "./helpers/wiki.mjs";
 import { teriockDetectionModes } from "./perception/detection-modes.mjs";
 import { teriockVisionModes } from "./perception/vision-modes.mjs";
 import * as sheets from "./sheets/_module.mjs";
@@ -85,7 +93,7 @@ foundry.helpers.Hooks.once("init", function () {
   });
   Object.assign(CONFIG.ChatMessage.dataModels, {
     base: data.message.BaseChatMessageData,
-  })
+  });
 
   // Unregister V1 sheets
   DocumentSheetConfig.unregisterSheet(documents.TeriockActor, "teriock", ActorSheet);
@@ -170,6 +178,21 @@ foundry.helpers.Hooks.once("init", function () {
     Item: documents.TeriockItem,
     Roll: documents.TeriockRoll,
     Token: documents.TeriockToken,
+    api: {
+      wiki: {
+        openWikiPage: openWikiPage,
+        fetchWikiPageHTML: fetchWikiPageHTML,
+        cleanWikiHTML: cleanWikiHTML,
+        fetchCategoryMembers: fetchCategoryMembers,
+      },
+      create: {
+        createProperty: createProperty,
+        createAbility: createAbility,
+        createResource: createResource,
+        createEffect: createEffect,
+        createFluency: createFluency,
+      }
+    },
   };
 
   // Register custom handlebars templates

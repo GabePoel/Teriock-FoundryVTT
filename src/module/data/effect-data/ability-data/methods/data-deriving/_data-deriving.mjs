@@ -8,10 +8,10 @@
 export function _prepareDerivedData(abilityData) {
   let applyChanges = abilityData.maneuver === "passive";
   for (const status of abilityData.duration.conditions.present) {
-    if (!abilityData.actor.statuses.has(status)) applyChanges = false;
+    if (!abilityData.actor?.statuses.has(status)) applyChanges = false;
   }
   for (const status of abilityData.duration.conditions.absent) {
-    if (abilityData.actor.statuses.has(status)) applyChanges = false;
+    if (abilityData.actor?.statuses.has(status)) applyChanges = false;
   }
   if (applyChanges) {
     if (abilityData.applies.base.changes.length > 0) {
