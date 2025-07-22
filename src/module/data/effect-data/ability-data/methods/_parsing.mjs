@@ -621,6 +621,18 @@ function extractChangesFromHTML(html) {
   return changes;
 }
 
+function extractStandardDamageFromHTML(html) {
+  const tempDiv = document.createElement("div");
+  tempDiv.innerHTML = html || "";
+  let standardDamage = false;
+  console.log(tempDiv);
+  tempDiv.querySelectorAll("span.metadata[data-type='standard-damage']").forEach(() => {
+    standardDamage = true;
+    console.log(standardDamage);
+  });
+  return standardDamage;
+}
+
 /**
  * Extracts duration from HTML content. Finds duration metadata elements and extracts its number of seconds.
  *
@@ -692,6 +704,11 @@ function processDiceAndEffectExtraction(parameters) {
       target.changes = [...(target.changes || []), ...changes];
     }
 
+    const standardDamage = extractStandardDamageFromHTML(source);
+    if (standardDamage) {
+      target.standardDamage = standardDamage;
+    }
+
     const duration = extractDurationFromHTML(source);
     if (duration > 0) {
       target.duration = duration;
@@ -707,6 +724,7 @@ function processDiceAndEffectExtraction(parameters) {
   let resultTradecraftChecks = new Set();
   let resultChanges = [];
   let resultDuration = 0;
+  let resultStandardDamage = false;
 
   // Process all result types for tradecraft checks and other metadata
   const resultTypes = ["hit", "critHit", "miss", "critMiss", "save", "critSave", "fail", "critFail"];
@@ -720,6 +738,7 @@ function processDiceAndEffectExtraction(parameters) {
       const currentTradecraftChecks = extractTradecraftChecksFromHTML(parameters.results[resultType]);
       const currentChanges = extractChangesFromHTML(parameters.results[resultType]);
       const currentDuration = extractDurationFromHTML(parameters.results[resultType]);
+      const currentStandardDamage = extractStandardDamageFromHTML(parameters.results[resultType]);
 
       // Merge all results
       resultHacks = new Set([...resultHacks, ...currentHacks]);
@@ -729,6 +748,7 @@ function processDiceAndEffectExtraction(parameters) {
       resultTradecraftChecks = new Set([...resultTradecraftChecks, ...currentTradecraftChecks]);
       resultChanges = [...resultChanges, ...currentChanges];
       resultDuration = Math.max(resultDuration, currentDuration);
+      resultStandardDamage = resultStandardDamage || currentStandardDamage;
     }
   });
 
@@ -764,6 +784,10 @@ function processDiceAndEffectExtraction(parameters) {
 
   if (resultChanges.length > 0) {
     parameters.applies.base.changes = [...(parameters.applies.base.changes || []), ...resultChanges];
+  }
+
+  if (resultStandardDamage) {
+    parameters.applies.base.standardDamage = resultStandardDamage;
   }
 }
 

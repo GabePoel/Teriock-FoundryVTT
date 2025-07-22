@@ -10,136 +10,151 @@ import { _generateEffect, _generateTakes } from "../_generate-effect.mjs";
  * @private
  */
 export async function _buildButtons(rollConfig) {
-    const abilityData = rollConfig.abilityData;
-    const useData = rollConfig.useData;
-    const buttons = [];
+  const abilityData = rollConfig.abilityData;
+  const useData = rollConfig.useData;
+  const buttons = [];
 
-    // Feat Save Button
-    if (abilityData.interaction === "feat") {
-      const attribute = abilityData.featSaveAttribute;
-      buttons.push({
-        label: `Roll ${attribute.toUpperCase()} Save`,
-        icon: "fas fa-dice-d20",
-        dataset: {
-          action: "feat-save",
-          attribute: attribute,
-          dc: rollConfig.chatData.rolls[0].total,
-        },
-      });
-    }
-
-    // Apply Effect Button
-    const effectData = await _generateEffect(abilityData, abilityData.actor, useData.modifiers.heightened);
-    const effectJSON = JSON.stringify(effectData);
-    if (effectData) {
-      buttons.push({
-        label: "Apply Effect",
-        icon: "fas fa-disease",
-        dataset: {
-          action: "apply-effect",
-          data: effectJSON,
-        },
-      });
-    }
-
-    // Resistance Button
-    if (Array(abilityData.effects)?.includes("resistance")) {
-      buttons.push({
-        label: "Roll Resistance",
-        icon: "fas fa-shield-alt",
-        dataset: {
-          action: "resist",
-        },
-      });
-    }
-
-    // Awaken Button
-    if (Array(abilityData.effects)?.includes("awakening")) {
-      buttons.push({
-        label: "Awaken",
-        icon: "fas fa-sunrise",
-        dataset: {
-          action: "awaken",
-        },
-      });
-    }
-
-    // Revive Button
-    if (Array(abilityData.effects)?.includes("revival")) {
-      buttons.push({
-        label: "Revive",
-        icon: "fas fa-heart-pulse",
-        dataset: {
-          action: "revive",
-        },
-      });
-    }
-
-    // Take Data
-    const takeData = _generateTakes(abilityData, useData.modifiers.heightened);
-
-    // Rollable Take Buttons
-    Object.entries(takeData.rolls).forEach(([rollType, formula]) => {
-      if (formula && ROLL_BUTTON_CONFIGS[rollType]) {
-        const buttonConfig = ROLL_BUTTON_CONFIGS[rollType];
-        buttonConfig.icon = getRollIcon(formula);
-        buttonConfig.dataset = {
-          action: "roll-rollable-take",
-          type: rollType,
-          tooltip: formula,
-          formula: formula,
-        };
-        buttons.push(buttonConfig);
-      }
+  // Feat Save Button
+  if (abilityData.interaction === "feat") {
+    const attribute = abilityData.featSaveAttribute;
+    buttons.push({
+      label: `Roll ${attribute.toUpperCase()} Save`,
+      icon: "fas fa-dice-d20",
+      dataset: {
+        action: "feat-save",
+        attribute: attribute,
+        dc: rollConfig.chatData.rolls[0].total,
+      },
     });
+  }
 
-    // Hack Buttons
-    for (const hackType of takeData.hacks) {
-      const buttonConfig = HACK_BUTTON_CONFIGS[hackType];
+  // Apply Effect Button
+  const effectData = await _generateEffect(abilityData, abilityData.actor, useData.modifiers.heightened);
+  const effectJSON = JSON.stringify(effectData);
+  if (effectData) {
+    buttons.push({
+      label: "Apply Effect",
+      icon: "fas fa-disease",
+      dataset: {
+        action: "apply-effect",
+        data: effectJSON,
+      },
+    });
+  }
+
+  // Standard Damage Button
+  if (
+    abilityData.applies.base.standardDamage ||
+    (abilityData.parent.isProficient && abilityData.applies.proficient.standardDamage) ||
+    (abilityData.parent.isFluent && abilityData.applies.fluent.standardDamage)
+  ) {
+    buttons.push({
+      label: "Standard Roll",
+      icon: "fas fa-hammer-crash",
+      dataset: {
+        action: "standard-damage",
+      },
+    });
+  }
+
+  // Resistance Button
+  if (Array(abilityData.effects)?.includes("resistance")) {
+    buttons.push({
+      label: "Roll Resistance",
+      icon: "fas fa-shield-alt",
+      dataset: {
+        action: "resist",
+      },
+    });
+  }
+
+  // Awaken Button
+  if (Array(abilityData.effects)?.includes("awakening")) {
+    buttons.push({
+      label: "Awaken",
+      icon: "fas fa-sunrise",
+      dataset: {
+        action: "awaken",
+      },
+    });
+  }
+
+  // Revive Button
+  if (Array(abilityData.effects)?.includes("revival")) {
+    buttons.push({
+      label: "Revive",
+      icon: "fas fa-heart-pulse",
+      dataset: {
+        action: "revive",
+      },
+    });
+  }
+
+  // Take Data
+  const takeData = _generateTakes(abilityData, useData.modifiers.heightened);
+
+  // Rollable Take Buttons
+  Object.entries(takeData.rolls).forEach(([rollType, formula]) => {
+    if (formula && ROLL_BUTTON_CONFIGS[rollType]) {
+      const buttonConfig = ROLL_BUTTON_CONFIGS[rollType];
+      buttonConfig.icon = getRollIcon(formula);
       buttonConfig.dataset = {
-        action: "take-hack",
-        part: hackType,
-      }
+        action: "roll-rollable-take",
+        type: rollType,
+        tooltip: formula,
+        formula: formula,
+      };
       buttons.push(buttonConfig);
     }
+  });
 
-    // Apply Condition Buttons
-    for (const status of takeData.startStatuses) {
-      buttons.push({
-        label: `Apply ${CONFIG.TERIOCK.conditions[status]}`,
-        icon: "fas fa-plus",
-        dataset: {
-          action: "apply-status",
-          status: status,
-        }
-      })
-    }
+  // Hack Buttons
+  for (const hackType of takeData.hacks) {
+    const buttonConfig = HACK_BUTTON_CONFIGS[hackType];
+    buttonConfig.dataset = {
+      action: "take-hack",
+      part: hackType,
+    };
+    buttons.push(buttonConfig);
+  }
 
-    // Remove Condition Buttons
-    for (const status of takeData.endStatuses) {
-      buttons.push({
-        label: `Remove ${CONFIG.TERIOCK.conditions[status]}`,
-        icon: "fas fa-xmark",
-        dataset: {
-          action: "remove-status",
-          status: status,
-        }
-      })
-    }
+  // Apply Condition Buttons
+  for (const status of takeData.startStatuses) {
+    buttons.push({
+      label: `Apply ${CONFIG.TERIOCK.conditions[status]}`,
+      icon: "fas fa-plus",
+      dataset: {
+        action: "apply-status",
+        status: status,
+      },
+    });
+  }
 
-    // Tradecraft Check Buttons
-    for (const tradecraft of takeData.checks) {
-      buttons.push({
-        label: `${CONFIG.TERIOCK.tradecraftOptionsList[tradecraft]} Check`,
-        icon: "fas fa-compass-drafting",
-        dataset: {
-          action: "tradecraft-check",
-          tradecraft: tradecraft,
-        }
-      })
-    }
+  // Remove Condition Buttons
+  for (const status of takeData.endStatuses) {
+    buttons.push({
+      label: `Remove ${CONFIG.TERIOCK.conditions[status]}`,
+      icon: "fas fa-xmark",
+      dataset: {
+        action: "remove-status",
+        status: status,
+      },
+    });
+  }
 
-    rollConfig.chatData.system.buttons.push(...buttons);
+  // Tradecraft Check Buttons
+  for (const tradecraft of takeData.checks) {
+    buttons.push({
+      label: `${CONFIG.TERIOCK.tradecraftOptionsList[tradecraft]} Check`,
+      icon: "fas fa-compass-drafting",
+      dataset: {
+        action: "tradecraft-check",
+        tradecraft: tradecraft,
+      },
+    });
+  }
+
+  rollConfig.chatData.system.buttons.push(...buttons);
 }
 
 /**

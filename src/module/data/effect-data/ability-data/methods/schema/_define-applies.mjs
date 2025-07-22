@@ -184,6 +184,11 @@ function appliesField() {
         label: "Duration",
       }),
       changes: consequenceChangesField(),
+      standardDamage: new fields.BooleanField({
+        initial: false,
+        label: "Standard Damage",
+        hint: "Can this deal standard damage?",
+      }),
       expiration: new fields.SchemaField({
         normal: abilityExpirationField(),
         crit: abilityExpirationField(),

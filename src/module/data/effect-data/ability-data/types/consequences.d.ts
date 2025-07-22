@@ -54,6 +54,7 @@ export interface AppliesData {
   checks: Set<string>;
   duration: number;
   changes: EffectChangeData[];
+  standardDamage: boolean;
   expiration: {
     normal: AbilityExpiration;
     crit: AbilityExpiration;

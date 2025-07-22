@@ -6,12 +6,12 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // REAL file path on disk
-const actualDir = path.resolve(__dirname, "..", "templates");
+const actualDir = path.resolve(__dirname, "..", "src", "templates");
 
 // FOUNDY VTT virtual path (used in loadTemplates)
-const virtualBase = "systems/teriock/templates";
+const virtualBase = "systems/teriock/src/templates";
 
-const outputFile = path.resolve(__dirname, "..", "module", "helpers", "startup", "register-templates.mjs");
+const outputFile = path.resolve(__dirname, "..", "src", "module", "helpers", "startup", "register-templates.mjs");
 
 function getHandlebarsFiles(dir, fileList = []) {
   if (!fs.existsSync(dir)) {

@@ -31,7 +31,7 @@ export default class TeriockPropertySheet extends api.HandlebarsApplicationMixin
    */
   static PARTS = {
     all: {
-      template: "systems/teriock/templates/effect-templates/property-template/property-template.hbs",
+      template: "systems/teriock/src/templates/effect-templates/property-template/property-template.hbs",
       scrollable: [".window-content", ".tsheet-page", ".ab-sheet-everything"],
     },
   };

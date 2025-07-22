@@ -24,6 +24,8 @@ export type EquipmentRollOptions = {
   secret?: boolean;
   /** Should this be a crit? */
   advantage?: boolean;
+  /** Override the default roll formula */
+  formula?: string;
 };
 
 /**

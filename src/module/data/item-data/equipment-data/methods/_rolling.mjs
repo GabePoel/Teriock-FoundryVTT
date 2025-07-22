@@ -27,6 +27,7 @@ async function use(equipmentData, options) {
   let message = await equipmentData.parent.buildMessage();
   if (equipmentData.damage) {
     let rollFormula = equipmentData.damage || "";
+    if (options.formula) rollFormula = options.formula;
     rollFormula = rollFormula.trim();
 
     // let damageTypes = equipmentData.damageTypes || [];

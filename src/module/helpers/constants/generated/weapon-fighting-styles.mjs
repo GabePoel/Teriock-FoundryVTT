@@ -1,4 +1,4 @@
-// This file was auto-generated on 2025-07-21 by scripts/update-options.mjs.
+// This file was auto-generated on 2025-07-22 by scripts/update-options.mjs.
 // Do not edit manually.
 
 export const weaponFightingStyles = {

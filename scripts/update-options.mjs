@@ -5,8 +5,8 @@ import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const outputDir = path.resolve(__dirname, "../module/helpers/constants/generated");
-const manualDir = path.resolve(__dirname, "../module/helpers/constants/manual");
+const outputDir = path.resolve(__dirname, "../src/module/helpers/constants/generated");
+const manualDir = path.resolve(__dirname, "../src/module/helpers/constants/manual");
 
 const camelCase = (str) => str.toLowerCase().replace(/[-\s]+(.)/g, (_, c) => c.toUpperCase());
 const kebabCase = (str) =>
@@ -21,7 +21,7 @@ const loadManualOverrides = async (name) => {
   const fullPath = path.join(manualDir, file);
   if (fs.existsSync(fullPath)) {
     try {
-      const mod = await import(`../module/helpers/constants/manual/${file}?t=${Date.now()}`);
+      const mod = await import(`../src/module/helpers/constants/manual/${file}?t=${Date.now()}`);
       const override = mod[camelCase(name)] || {};
       const remove = mod.remove || [];
       console.log(`Loaded manual overrides for ${name}`);

@@ -38,7 +38,7 @@ export default class TeriockEquipmentSheet extends HandlebarsApplicationMixin(Te
    */
   static PARTS = {
     all: {
-      template: "systems/teriock/templates/item-templates/equipment-template/equipment-template.hbs",
+      template: "systems/teriock/src/templates/item-templates/equipment-template/equipment-template.hbs",
       scrollable: [".window-content", ".tsheet-page", ".ab-sheet-everything"],
     },
   };

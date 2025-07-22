@@ -1,0 +1,163 @@
+<div class="form-group" style="flex-direction: column;">
+  {{formGroup
+    (lookup (lookup (lookup systemFields.applies.fields typeKey) "fields") "standardDamage")
+    value=(lookup (lookup system.applies typeKey) "standardDamage")
+    classes="teriock-full-width"
+    disabled=(not editable)
+    rootId=(concat uuid)
+  }}
+  {{formGroup
+    (lookup (lookup (lookup systemFields.applies.fields typeKey) "fields") "rolls")
+    value=(lookup (lookup system.applies typeKey) "rolls")
+    choices=config.consequenceOptions.rolls
+    disabled=(not editable)
+  }}
+  {{formGroup
+    (lookup (lookup (lookup systemFields.applies.fields typeKey) "fields") "statuses")
+    value=(lookup (lookup system.applies typeKey) "statuses")
+    choices=config.consequenceOptions.statuses
+    classes="teriock-full-width"
+    disabled=(not editable)
+  }}
+  {{formGroup
+    (lookup (lookup (lookup systemFields.applies.fields typeKey) "fields") "startStatuses")
+    value=(lookup (lookup system.applies typeKey) "startStatuses")
+    choices=config.consequenceOptions.statuses
+    classes="teriock-full-width"
+    disabled=(not editable)
+  }}
+  {{formGroup
+    (lookup (lookup (lookup systemFields.applies.fields typeKey) "fields") "endStatuses")
+    value=(lookup (lookup system.applies typeKey) "endStatuses")
+    choices=config.consequenceOptions.statuses
+    classes="teriock-full-width"
+    disabled=(not editable)
+  }}
+  {{formGroup
+    (lookup (lookup (lookup systemFields.applies.fields typeKey) "fields") "hacks")
+    value=(lookup (lookup system.applies typeKey) "hacks")
+    choices=config.consequenceOptions.hacks
+    classes="teriock-full-width"
+    disabled=(not editable)
+  }}
+  {{formGroup
+    (lookup (lookup (lookup systemFields.applies.fields typeKey) "fields") "checks")
+    value=(lookup (lookup system.applies typeKey) "checks")
+    choices=config.tradecraftOptionsList
+    classes="teriock-full-width"
+    disabled=(not editable)
+  }}
+  {{formGroup
+    (lookup (lookup (lookup systemFields.applies.fields typeKey) "fields") "duration")
+    value=(lookup (lookup system.applies typeKey) "duration")
+    disabled=(not editable)
+  }}
+  <!-- Changes UI -->
+  <fieldset class="teriock-full-width" style="margin-top: 6px;">
+    <legend>Changes</legend>
+    <div class="changes-container tgrid g12" style="margin-top: 0.5em;">
+      <div class="change-box tgrid-item gi4" style="justify-content: start;">
+        <div class="change-key">Change Key</div>
+      </div>
+      <div class="change-box tgrid-item gi3" style="justify-content: start;">
+        <div class="change-mode">Mode</div>
+      </div>
+      <div class="change-box tgrid-item gi2" style="justify-content: start;">
+        <div class="change-value">Value</div>
+      </div>
+      <div class="change-box tgrid-item gi2" style="justify-content: start;">
+        <div class="change-priority">Priority</div>
+      </div>
+      <div class="change-box tgrid-item gi1" style="justify-content: center;">
+        <a class="add-change-button" style="display: flex; justify-content: center; align-items: center;"
+           data-action="addChange" data-tooltip="Add Change" data-application="{{typeKey}}"
+           {{#if (not editable)}}disabled="true"{{/if}}>
+          <i class="fa-regular fa-square-plus"></i>
+        </a>
+      </div>
+      {{#each (lookup (lookup system.applies typeKey) "changes") as |change i|}}
+        <div class="change-box tgrid-item gi4">
+          <div class="change-box">
+            <label>
+              <input class="change-box-entry" type="text" data-index="{{i}}" data-application="{{../typeKey}}"
+                     data-key="key" value="{{change.key}}" {{#if (not ../editable)}}disabled="disabled"{{/if}} />
+            </label>
+          </div>
+        </div>
+        <div class="change-box tgrid-item gi3">
+          <label>
+            <select class="change-box-entry" data-index="{{i}}" data-application="{{../typeKey}}" data-key="mode"
+                    {{#if (not ../editable)}}disabled="disabled"{{/if}} >
+              <option value="0" {{#if (eq change.mode 0)}}selected{{/if}}>Custom</option>
+              <option value="1" {{#if (eq change.mode 1)}}selected{{/if}}>Multiply</option>
+              <option value="2" {{#if (eq change.mode 2)}}selected{{/if}}>Add</option>
+              <option value="3" {{#if (eq change.mode 3)}}selected{{/if}}>Downgrade</option>
+              <option value="4" {{#if (eq change.mode 4)}}selected{{/if}}>Upgrade</option>
+              <option value="5" {{#if (eq change.mode 5)}}selected{{/if}}>Override</option>
+            </select>
+          </label>
+        </div>
+        <div class="change-box tgrid-item gi2">
+          <label>
+            <input class="change-box-entry" type="text" data-index="{{i}}" data-application="{{../typeKey}}"
+                   data-key="value" value="{{change.value}}" {{#if (not ../editable)}}disabled="disabled"{{/if}} />
+          </label>
+        </div>
+        <div class="change-box tgrid-item gi2">
+          <label>
+            <input class="change-box-entry" type="number" data-index="{{i}}" data-application="{{../typeKey}}"
+                   data-key="priority" value="{{change.priority}}"
+                   {{#if (not ../editable)}}disabled="disabled"{{/if}} />
+          </label>
+        </div>
+        <div class="change-box tgrid-item gi1" style="justify-content: center;">
+          <a class="delete-change-button" style="display: flex; justify-content: center; align-items: center;"
+             data-action="deleteChange" data-tooltip="Delete Change" data-index="{{i}}"
+             data-application="{{../typeKey}}"
+             {{#if (not ../editable)}}disabled="true"{{/if}}>
+            <i class="fa-solid fa-trash"></i>
+          </a>
+        </div>
+      {{/each}}
+    </div>
+  </fieldset>
+  <!-- Expiration UI -->
+  {{formGroup
+    (lookup (lookup (lookup (lookup (lookup systemFields.applies.fields typeKey) "fields") "expiration") "fields") "doesExpire")
+    value=(lookup (lookup (lookup system.applies typeKey) "expiration") "doesExpire")
+    disabled=(not editable)
+    classes="teriock-full-width"
+    rootId=(concat uuid)
+  }}
+  {{#if (lookup (lookup (lookup system.applies typeKey) "expiration") "doesExpire")}}
+    <fieldset class="teriock-full-width" style="margin-top: 6px;">
+      <legend>Normal Combat Expiration</legend>
+      {{> "systems/teriock/src/templates/effect-templates/ability-template/parts/_consequence-expiration.hbs"
+        editable=editable
+        expirationKey="normal"
+        system=system
+        systemFields=systemFields
+        typeKey=typeKey
+      }}
+    </fieldset>
+    {{formGroup
+      (lookup (lookup (lookup (lookup (lookup systemFields.applies.fields typeKey) "fields") "expiration") "fields") "changeOnCrit")
+      value=(lookup (lookup (lookup system.applies typeKey) "expiration") "changeOnCrit")
+      disabled=(not editable)
+      classes="teriock-full-width"
+      rootId=(concat uuid)
+    }}
+  {{/if}}
+  {{#if (lookup (lookup (lookup system.applies typeKey) "expiration") "changeOnCrit")}}
+    <fieldset class="teriock-full-width" style="margin-top: 6px;">
+      <legend>Crit Combat Expiration</legend>
+      {{> "systems/teriock/src/templates/effect-templates/ability-template/parts/_consequence-expiration.hbs"
+        editable=editable
+        expirationKey="crit"
+        system=system
+        systemFields=systemFields
+        typeKey=typeKey
+      }}
+    </fieldset>
+  {{/if}}
+</div>

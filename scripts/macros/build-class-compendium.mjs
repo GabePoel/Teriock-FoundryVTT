@@ -50,15 +50,8 @@ for (const [a, ao] of Object.entries(CONFIG.TERIOCK.rankOptions)) {
       const name = `Rank ${r} ${co.name}`;
 
       await classPack.getIndex();
-      const matches = classPack.index.filter((e) => e.name === name);
-      for (const entry of matches) {
-        try {
-          const doc = /** @type {TeriockRank} */ await classPack.getDocument(entry._id);
-          await doc.delete();
-        } catch (e) {
-          console.warn(`Failed to delete existing item '${name}':`, e);
-        }
-      }
+      let rank = classPack.index.find((e) => e.name === name);
+      rank = await foundry.utils.fromUuid(rank.uuid);
 
       // Create new item
       const itemData = {
@@ -77,9 +70,11 @@ for (const [a, ao] of Object.entries(CONFIG.TERIOCK.rankOptions)) {
 
       try {
         const TeriockItem = CONFIG.Item.documentClass;
-        const rank = /** @type {TeriockRank} */ await TeriockItem.create(itemData, {
-          pack: "teriock.classes",
-        });
+        if (!rank) {
+          rank = /** @type {TeriockRank} */ await TeriockItem.create(itemData, {
+            pack: "teriock.classes",
+          });
+        }
         await rank.system.wikiPull({
           notify: false,
         })

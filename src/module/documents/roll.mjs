@@ -12,7 +12,7 @@ const { Roll } = foundry.dice;
  * @extends {Roll}
  */
 export default class TeriockRoll extends Roll {
-  static CHAT_TEMPLATE = "systems/teriock/templates/roll-templates/roll.hbs";
+  static CHAT_TEMPLATE = "systems/teriock/src/templates/roll-templates/roll.hbs";
 
   /**
    * Creates a new TeriockRoll instance with enforced parsing and enrichment options.

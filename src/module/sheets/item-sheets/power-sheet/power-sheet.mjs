@@ -30,7 +30,7 @@ export default class TeriockPowerSheet extends HandlebarsApplicationMixin(Terioc
    */
   static PARTS = {
     all: {
-      template: "systems/teriock/templates/item-templates/power-template/power-template.hbs",
+      template: "systems/teriock/src/templates/item-templates/power-template/power-template.hbs",
       scrollable: [".window-content", ".tsheet-page", ".ab-sheet-everything"],
     },
   };
