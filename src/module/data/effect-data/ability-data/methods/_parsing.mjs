@@ -114,6 +114,18 @@ export async function _parse(abilityData, rawHTML) {
   // Process dice and effect extraction
   processDiceAndEffectExtraction(parameters);
 
+  // Add macro if appropriate
+  const macroName = extractMacroFromHTML(doc);
+  console.log("macroName", macroName);
+  if (macroName) {
+    try {
+      /** @type {CompendiumPacks} */
+      const packs = game.packs;
+      const macroPack = packs.get("teriock.execution");
+      parameters.applies.macro = macroPack?.index.getName(macroName).uuid;
+    } catch {}
+  }
+
   // Select image
   let img = selectImage(parameters);
 
@@ -625,7 +637,6 @@ function extractStandardDamageFromHTML(html) {
   const tempDiv = document.createElement("div");
   tempDiv.innerHTML = html || "";
   let standardDamage = false;
-  console.log(tempDiv);
   tempDiv.querySelectorAll("span.metadata[data-type='standard-damage']").forEach(() => {
     standardDamage = true;
     console.log(standardDamage);
@@ -647,6 +658,25 @@ function extractDurationFromHTML(html) {
   if (!(el instanceof HTMLElement)) return 0;
   return Number(el.dataset.seconds);
 }
+
+/**
+ * Extracts macro from raw document content.
+ *
+ * @param doc - The raw document content to extract macro from.
+ * @returns {string|null} The macro name.
+ */
+function extractMacroFromHTML(doc) {
+  const elements = doc.querySelectorAll("span.metadata[data-type='macro']");
+  console.log(doc);
+  console.log(elements);
+  for (const /** @type {HTMLElement} */ el of elements) {
+    if (el instanceof HTMLElement && el.dataset.name) {
+      return el.dataset.name;
+    }
+  }
+  return null;
+}
+
 
 /**
  * Processes dice and effect extraction from ability parameters.

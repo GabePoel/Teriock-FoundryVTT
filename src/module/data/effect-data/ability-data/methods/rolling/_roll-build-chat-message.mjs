@@ -16,7 +16,7 @@ export async function _buildChatMessage(rollConfig) {
   rollConfig.chatData.speaker = TeriockChatMessage.getSpeaker({ actor: rollConfig.abilityData.actor });
   TeriockChatMessage.applyRollMode(rollConfig.chatData, game.settings.get("core", "rollMode"));
   for (const roll of rollConfig.chatData.rolls) {
-    await roll.evaluate();
+    if (!roll._evaluated) await roll.evaluate();
   }
   rollConfig.chatData.system.overlay = elderSorceryMask(rollConfig.abilityData.parent)?.outerHTML;
   rollConfig.chatData.system.source = /** @type{Teriock.UUID} */ rollConfig.abilityData.parent.uuid;

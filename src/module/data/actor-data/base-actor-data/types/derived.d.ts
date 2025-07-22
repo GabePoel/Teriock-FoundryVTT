@@ -68,4 +68,7 @@ export interface TeriockBaseActorDerived {
       manaDice: string;
     };
   };
+
+  // Ability maintenance
+  abilityFlags: Record<string, string>;
 }

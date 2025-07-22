@@ -302,9 +302,6 @@ export default function registerHooks() {
   foundry.helpers.Hooks.on("moveToken", async (document, movement, operation, user) => {
     if (document.isOwner && document.actor && game.user.id === user._id) {
       const actor = document.actor;
-      if (actor.effectKeys?.effect?.has("brace")) {
-        actor.update({ "system.hp.temp": 0 });
-      }
       const effects = actor.movementExpirationEffects;
       for (const effect of effects) {
         await effect.system.expire();

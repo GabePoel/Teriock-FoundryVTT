@@ -70,5 +70,6 @@ export function _defineBasics(schema) {
     initial: false,
     label: "Update Counter",
   });
+  schema.abilityFlags = new fields.TypedObjectField(new fields.StringField());
   return schema;
 }
