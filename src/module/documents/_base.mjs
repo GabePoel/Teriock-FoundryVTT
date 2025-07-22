@@ -12,6 +12,7 @@ import ParentDocumentMixin from "./mixins/parent-mixin.mjs";
  * @property {EmbeddedCollection<string, TeriockItem>} items
  * @property {EmbeddedCollection<string, TeriockEffect>} effects
  * @property {ParentItemTypes} itemTypes
+ * @property {ParentItemKeys} itemKeys
  * @property {TeriockEffect[]} appliedEffects
  * @property {TeriockEffect[]} temporaryEffects
  * @property {() => Generator<TeriockEffect, void, void>} allApplicableEffects

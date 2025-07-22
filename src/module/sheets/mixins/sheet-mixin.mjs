@@ -16,6 +16,7 @@ export default (Base) => {
   return class TeriockSheet extends Base {
     /**
      * Default options for Teriock sheets.
+     *
      * @type {object}
      * @static
      */
@@ -54,6 +55,7 @@ export default (Base) => {
     /**
      * Creates a new Teriock sheet instance.
      * Initializes sheet state including menu state, context menus, and settings.
+     *
      * @param {...any} args - Arguments to pass to the base constructor.
      */
     constructor(...args) {
@@ -67,6 +69,7 @@ export default (Base) => {
 
     /**
      * Gets the drag and drop handlers for this sheet.
+     *
      * @returns {DragDrop[]} Array of drag and drop handlers.
      */
     get dragDrop() {
@@ -75,6 +78,7 @@ export default (Base) => {
 
     /**
      * Debug action for development purposes.
+     *
      * @param {MouseEvent} _ - The event object.
      * @param {HTMLElement} __ - The target element.
      * @returns {Promise<void>} Promise that resolves when debug is complete.
@@ -86,6 +90,7 @@ export default (Base) => {
 
     /**
      * Pulls data from wiki for the current document.
+     *
      * @param {MouseEvent} _ - The event object.
      * @param {HTMLElement} __ - The target element.
      * @returns {Promise<void>} Promise that resolves when wiki pull is complete.
@@ -97,6 +102,7 @@ export default (Base) => {
 
     /**
      * Opens the wiki page for the current document.
+     *
      * @param {MouseEvent} _ - The event object.
      * @param {HTMLElement} __ - The target element.
      * @returns {Promise<void>} Promise that resolves when wiki page is opened.
@@ -108,6 +114,7 @@ export default (Base) => {
 
     /**
      * Sends the current document to chat.
+     *
      * @param {MouseEvent} _ - The event object.
      * @param {HTMLElement} __ - The target element.
      * @returns {Promise<void>} Promise that resolves when chat is sent.
@@ -119,6 +126,7 @@ export default (Base) => {
 
     /**
      * Reloads the current document and re-renders the sheet.
+     *
      * @param {MouseEvent} _ - The event object.
      * @param {HTMLElement} __ - The target element.
      * @returns {Promise<void>} Promise that resolves when reload is complete.
@@ -131,6 +139,7 @@ export default (Base) => {
 
     /**
      * Toggles the lock state of the current sheet.
+     *
      * @param {MouseEvent} _ - The event object.
      * @param {HTMLElement} __ - The target element.
      * @returns {Promise<void>} Promise that resolves when lock is toggled.
@@ -144,6 +153,7 @@ export default (Base) => {
 
     /**
      * Rolls the current document with optional advantage/disadvantage.
+     *
      * @param {MouseEvent} event - The event object.
      * @returns {Promise<void>} Promise that resolves when roll is complete.
      * @static
@@ -155,6 +165,7 @@ export default (Base) => {
 
     /**
      * Opens image picker for editing document images.
+     *
      * @param {MouseEvent} _ - The event object.
      * @param {HTMLElement} target - The target element.
      * @returns {Promise<FilePicker>} Promise that resolves when image picker is opened.
@@ -180,6 +191,7 @@ export default (Base) => {
 
     /**
      * Opens the sheet for an embedded document.
+     *
      * @param {MouseEvent} event - The event object.
      * @param {HTMLElement} target - The target element.
      * @returns {Promise<void>} Promise that resolves when sheet is opened.
@@ -192,6 +204,7 @@ export default (Base) => {
 
     /**
      * Sends an embedded document to chat.
+     *
      * @param {MouseEvent} event - The event object.
      * @param {HTMLElement} target - The target element.
      * @returns {Promise<void>} Promise that resolves when chat is sent.
@@ -204,6 +217,7 @@ export default (Base) => {
 
     /**
      * Uses one unit of an embedded consumable document.
+     *
      * @param {MouseEvent} event - The event object.
      * @param {HTMLElement} target - The target element.
      * @returns {Promise<void>} Promise that resolves when use is complete.
@@ -216,6 +230,7 @@ export default (Base) => {
 
     /**
      * Toggles the disabled state of an embedded document.
+     *
      * @param {MouseEvent} event - The event object.
      * @param {HTMLElement} target - The target element.
      * @returns {Promise<void>} Promise that resolves when toggle is complete.
@@ -228,6 +243,7 @@ export default (Base) => {
 
     /**
      * Rolls an embedded document with optional advantage/disadvantage.
+     *
      * @param {MouseEvent} event - The event object.
      * @param {HTMLElement} target - The target element.
      * @returns {Promise<void>} Promise that resolves when roll is complete.
@@ -249,6 +265,7 @@ export default (Base) => {
 
     /**
      * Toggles a boolean field on the current document.
+     *
      * @param {MouseEvent} event - The event object.
      * @param {HTMLElement} target - The target element.
      * @returns {Promise<void>} Promise that resolves when toggle is complete.
@@ -262,6 +279,7 @@ export default (Base) => {
 
     /**
      * Toggles a boolean field on the sheet and re-renders.
+     *
      * @param {MouseEvent} event - The event object.
      * @param {HTMLElement} target - The target element.
      * @returns {Promise<void>} Promise that resolves when toggle is complete.
@@ -276,6 +294,7 @@ export default (Base) => {
 
     /**
      * Creates a new ability for the current document.
+     *
      * @param {MouseEvent} event - The event object.
      * @param {HTMLElement} __ - The target element.
      * @returns {Promise<ActiveEffect>} Promise that resolves to the created ability.
@@ -287,6 +306,7 @@ export default (Base) => {
 
     /**
      * Creates a new resource for the current document.
+     *
      * @param {MouseEvent} event - The event object.
      * @param {HTMLElement} __ - The target element.
      * @returns {Promise<ActiveEffect>} Promise that resolves to the created resource.
@@ -298,6 +318,7 @@ export default (Base) => {
 
     /**
      * Creates a new fluency for the current document.
+     *
      * @param {MouseEvent} event - The event object.
      * @param {HTMLElement} __ - The target element.
      * @returns {Promise<ActiveEffect>} Promise that resolves to the created fluency.
@@ -310,6 +331,7 @@ export default (Base) => {
     /**
      * Creates a new property for the current document.
      * Shows a dialog to select property type or create a new one.
+     *
      * @param {MouseEvent} event - The event object.
      * @param {HTMLElement} __ - The target element.
      * @returns {Promise<ActiveEffect>} Promise that resolves to the created property.
@@ -357,6 +379,7 @@ export default (Base) => {
     /**
      * Handles the render event for the sheet.
      * Sets up editable state, connects embedded documents, and initializes UI components.
+     *
      * @param {object} context - The render context.
      * @param {object} options - Render options.
      * @override
@@ -402,6 +425,7 @@ export default (Base) => {
     /**
      * Sets up all event listeners for the sheet.
      * Configures handlers for form updates, record fields, set fields, array fields, and changes.
+     *
      * @private
      */
     _setupEventListeners() {
@@ -425,6 +449,7 @@ export default (Base) => {
     /**
      * Sets up update handlers for various input types.
      * Configures change and click handlers for update inputs, selects, and checkboxes.
+     *
      * @private
      */
     _setupUpdateHandlers() {
@@ -455,6 +480,7 @@ export default (Base) => {
     /**
      * Sets up handlers for record field components.
      * Configures multi-select inputs and remove buttons for record fields.
+     *
      * @private
      */
     _setupRecordFieldHandlers() {

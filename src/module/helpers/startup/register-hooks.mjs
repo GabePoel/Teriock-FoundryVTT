@@ -1,5 +1,6 @@
 import { dispatch } from "../../commands/dispatch.mjs";
 import TeriockImageSheet from "../../sheets/misc-sheets/image-sheet/image-sheet.mjs";
+import hotbarDropDialog from "../dialogs/hotbar-drop-dialog.mjs";
 
 /**
  * Check if the {@link TeriockUser} owns and uses the given document.
@@ -88,7 +89,7 @@ export default function registerHooks() {
     if (isOwnerAndCurrentUser(document, userId)) {
       const sup = document.sup;
       if (sup && typeof sup.update === "function") {
-        await sup.forceUpdate()
+        await sup.forceUpdate();
       }
       document.actor?.buildEffectTypes();
       await document.actor?.postUpdate({ checkDown: true });
@@ -99,7 +100,7 @@ export default function registerHooks() {
     if (isOwnerAndCurrentUser(document, userId)) {
       const sup = document.sup;
       if (sup && typeof sup.update === "function") {
-        await sup.forceUpdate()
+        await sup.forceUpdate();
       }
       document.actor?.buildEffectTypes();
       await document.actor?.postUpdate({ checkDown: true });
@@ -216,26 +217,12 @@ export default function registerHooks() {
     });
   });
 
-  /** TODO: Fix and/or move to {@link TeriockMacro} */
-  foundry.helpers.Hooks.on("hotbarDrop", async (bar, data, slot) => {
+  foundry.helpers.Hooks.on("hotbarDrop", (bar, data, slot) => {
     fromUuid(data.uuid).then(
-      /** @param {TeriockItem|TeriockEffect} item */ async (item) => {
-        if (!item || !["Item", "ActiveEffect"].includes(item.documentName)) return;
-        const id = item._id;
-
-        const macroName = `Roll ${item.name}`;
-        const command = `// ID: ${id}
-const item = await fromUuid("${item.uuid}");
-if (!item) return ui.notifications.warn("Item not found: ${item.name}");
-
-const options = {
-  advantage: window.event?.altKey,
-  disadvantage: window.event?.shiftKey,
-  twoHanded: window.event?.ctrlKey,
-};
-
-await item.use(options);
-`;
+      /** @param {TeriockItem|TeriockEffect} doc */ async (doc) => {
+        if (!doc || !["Item", "ActiveEffect"].includes(doc.documentName)) return;
+        const macroName = `Use ${doc.name}`;
+        const { searchTerm, command } = await hotbarDropDialog(doc);
         const folders = /** @type {WorldCollection<Folder>} */ game.folders;
         let macroFolder = folders.find((f) => f.name === "Player Macros" && f.type === "Macro");
         if (!macroFolder) {
@@ -246,7 +233,7 @@ await item.use(options);
         }
         const macros = /** @type {WorldCollection<TeriockMacro>} */ game.macros;
         let macro = /** @type {TeriockMacro|undefined} */ macros.find(
-          (m) => m.name === macroName && m.command?.startsWith(`// ID: ${id}`),
+          (m) => m.name === macroName && m.command?.startsWith(searchTerm),
         );
         /** @type {TeriockUser} */
         const user = game.user;
@@ -254,7 +241,7 @@ await item.use(options);
           macro = /** @type {TeriockMacro} */ await Macro.create({
             name: macroName,
             type: "script",
-            img: item.img,
+            img: doc.img,
             command,
             flags: { teriock: { itemMacro: true } },
             folder: macroFolder.id,
@@ -268,9 +255,9 @@ await item.use(options);
         } else {
           await user.assignHotbarMacro(macro, slot);
         }
+        return false;
       },
     );
-
     return false;
   });
 

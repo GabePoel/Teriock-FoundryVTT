@@ -13,7 +13,7 @@
     - [x] Heightened duration scaling
     - [x] Hack buttons
     - [x] Easy way to apply boosts
-    - [ ] Enricheds for different roll types
+    - [x] Enricheds for different roll types
     - [ ] Bow, hand, and foot BV scaling
     - [ ] Ability resistance fix
     - [ ] Attribute and feat save improvement appearing in ability chat messages
@@ -23,7 +23,7 @@
     - [ ] Check metadata
 - [ ] Rank fixes
     - [ ] Enable/disable buttons
-- [ ] Hot bar fix
+- [x] Hot bar fix
 
 # Codebase
 
@@ -35,7 +35,7 @@
 - [x] Better roll chat message button handling
 - [x] Ability usage modularization
 - [ ] Take basic abilities off of each individual actors to speed up sorting and make for smaller database
-- [ ] Better compendium building automation
+- [x] Better compendium building automation
 - [x] More wiki links in documentation
 - [x] Just some general sprucing around (as always)
 - [x] Complete typing and intellisense

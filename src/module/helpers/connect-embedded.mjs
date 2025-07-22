@@ -191,7 +191,7 @@ export default function connectEmbedded(document, element, editable = true) {
             callback: async () => {
               /** @type {TeriockActor|TeriockItem} */
               const parent = embedded.parent;
-              await embedded.delete();
+              await parent.deleteEmbeddedDocuments(embedded.documentName, [embedded.id]);
               await parent.forceUpdate();
             },
             condition: () => {

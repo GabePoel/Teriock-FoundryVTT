@@ -98,6 +98,7 @@ export function _preparePresence(system) {
   system.presence.value = Math.min(system.presence.value, system.pres);
   system.usp = system.presence.value;
   system.unp = system.presence.max - system.presence.value;
+  system.attributes.unp.value = system.unp;
 }
 
 /**

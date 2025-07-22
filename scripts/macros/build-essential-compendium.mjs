@@ -1,8 +1,8 @@
-const essentialsPack = /** @type {CompendiumCollection} */ game.packs.get("teriock.essentials");
-const essentialsFolders = /** @type {CompendiumCollection<Folder>) */ essentialsPack.folders;
+const essentialPack = /** @type {CompendiumCollection} */ game.packs.get("teriock.essentials");
+const essentialFolders = /** @type {CompendiumCollection<Folder>} */ essentialPack.folders;
 
 const rawAbilitiesFolderName = "Raw Abilities";
-let rawAbilitiesFolder = essentialsFolders.getName(rawAbilitiesFolderName);
+let rawAbilitiesFolder = /** @type {Folder} */ essentialFolders.getName(rawAbilitiesFolderName);
 if (!rawAbilitiesFolder) {
   await Folder.create(
     {
@@ -27,7 +27,7 @@ for (const abilityPage of allAbilityPages) {
   pct += 1 / allAbilityPages.length;
   progress.update({ pct: pct, message: `Pulling ${abilityName} from wiki.` });
 
-  let abilityItem = essentialsPack.index.find((e) => e.name === abilityName);
+  let abilityItem = essentialPack.index.find((e) => e.name === abilityName);
   if (!abilityItem) {
     abilityItem = /** @type {TeriockPower} */ await game.teriock.Item.create(
       {
@@ -51,6 +51,6 @@ for (const abilityPage of allAbilityPages) {
     await abilityEffect.system.wikiPull({ notify: false });
   }
   if (abilityItem.img !== abilityEffect.img) {
-    abilityItem.update({ img: abilityEffect.img });
+    await abilityItem.update({ img: abilityEffect.img });
   }
 }

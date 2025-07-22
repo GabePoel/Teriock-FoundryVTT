@@ -2,14 +2,15 @@ import {
   TeriockAbility,
   TeriockAttunement,
   TeriockCondition,
-  TeriockEffect,
   TeriockEquipment,
   TeriockFluency,
+  TeriockLingeringEffect,
   TeriockPower,
   TeriockProperty,
   TeriockRank,
   TeriockResource,
-} from "../_module.mjs";
+} from "../_documents.mjs";
+import type TeriockEffect from "../effect.mjs";
 
 /** The names of each {@link TeriockItem} this contains, in camel case, keyed by type. */
 export type ParentItemKeys = {
@@ -43,7 +44,7 @@ export type ParentEffectTypes = {
   attunement?: TeriockAttunement[];
   base?: TeriockEffect[];
   condition?: TeriockCondition[];
-  effect?: TeriockEffect[];
+  effect?: TeriockLingeringEffect[];
   fluency?: TeriockFluency[];
   property?: TeriockProperty[];
   resource?: TeriockResource[];
