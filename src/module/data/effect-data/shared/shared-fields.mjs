@@ -25,6 +25,23 @@ export function hierarchyField() {
 }
 
 /**
+ * Field for source portion of combat expiration.
+ *
+ * @returns {StringField}
+ */
+export function combatExpirationSourceTypeField() {
+  return new fields.StringField({
+    choices: {
+      target: "Target",
+      executor: "Executor",
+      everyone: "Everyone",
+    },
+    label: "Whose Turn",
+    hint: "Whose turn should this effect attempt to expire on?",
+  });
+}
+
+/**
  * Field for method portion of combat expiration.
  *
  * @returns {SchemaField} Timing field.

@@ -8,13 +8,19 @@ import { parseTimeString } from "../../../../helpers/utils.mjs";
  * @param {TeriockAbilityData} abilityData - The ability data to generate effect from.
  * @param {TeriockActor} actor - The actor that owns the ability.
  * @param {number} heightenAmount - The amount of heightening applied to the ability.
+ * @param {boolean} crit - If this should generate a critical version of the effect.
  * @returns {Promise<object|false>} Promise that resolves to the generated effect data or false if no effect should be
  *   created.
  * @private
  */
-export async function _generateEffect(abilityData, actor, heightenAmount = 0) {
+export async function _generateEffect(abilityData, actor, heightenAmount = 0, crit = false) {
   let changes = foundry.utils.deepClone(abilityData.applies.base.changes) || [];
   let statuses = foundry.utils.deepClone(abilityData.applies.base.statuses) || new Set();
+  let combatExpirations = foundry.utils.deepClone(abilityData.applies.base.expiration.normal.combat);
+  combatExpirations.who.source = abilityData.actor?.uuid;
+  if (crit && abilityData.applies.base.expiration.changeOnCrit) {
+    combatExpirations = foundry.utils.mergeObject(combatExpirations, abilityData.applies.base.expiration.crit.combat);
+  }
 
   // TODO: Switch parsing to unit based.
   let seconds = parseTimeString(abilityData.duration.description);
@@ -29,6 +35,18 @@ export async function _generateEffect(abilityData, actor, heightenAmount = 0) {
     if (abilityData.applies.proficient.duration > 0) {
       seconds = abilityData.applies.proficient.duration;
     }
+    if (abilityData.applies.proficient.expiration.doesExpire) {
+      combatExpirations = foundry.utils.mergeObject(
+        combatExpirations,
+        abilityData.applies.proficient.expiration.normal.combat,
+      );
+      if (crit && abilityData.applies.proficient.expiration.changeOnCrit) {
+        combatExpirations = foundry.utils.mergeObject(
+          combatExpirations,
+          abilityData.applies.proficient.expiration.crit.combat,
+        );
+      }
+    }
   }
   if (abilityData.parent.isFluent) {
     if (abilityData.applies.fluent.changes.length > 0) {
@@ -39,6 +57,18 @@ export async function _generateEffect(abilityData, actor, heightenAmount = 0) {
     }
     if (abilityData.applies.fluent.duration > 0) {
       seconds = abilityData.applies.fluent.duration;
+    }
+    if (abilityData.applies.fluent.expiration.doesExpire) {
+      combatExpirations = foundry.utils.mergeObject(
+        combatExpirations,
+        abilityData.applies.fluent.expiration.normal.combat,
+      );
+      if (crit && abilityData.applies.fluent.expiration.changeOnCrit) {
+        combatExpirations = foundry.utils.mergeObject(
+          combatExpirations,
+          abilityData.applies.fluent.expiration.crit.combat,
+        );
+      }
     }
   }
   if (heightenAmount > 0) {
@@ -61,6 +91,8 @@ export async function _generateEffect(abilityData, actor, heightenAmount = 0) {
       seconds += abilityData.applies.heightened.duration * heightenAmount;
       seconds = Math.round(seconds / abilityData.applies.heightened.duration) * abilityData.applies.heightened.duration;
     }
+    // Heightening combat expirations is not currently supported
+    // TODO: Support heightening combat expirations lol
   }
 
   let description = await abilityData.parent.buildMessage();
@@ -104,8 +136,9 @@ export async function _generateEffect(abilityData, actor, heightenAmount = 0) {
     sustained = true;
   }
 
+  /** @type {Partial<TeriockEffectData>} */
   const effectData = {
-    name: `${abilityData.parent?.name} Effect`,
+    name: `${abilityData.parent?.name} Effect${crit ? " (Crit)" : ""}`,
     type: "effect",
     img: abilityData.parent?.img,
     changes: changes,
@@ -115,6 +148,7 @@ export async function _generateEffect(abilityData, actor, heightenAmount = 0) {
       source: abilityData.parent?._id,
       deleteOnExpire: true,
       expirations: {
+        combat: combatExpirations,
         condition: condition,
         movement: movement,
         dawn: dawn,

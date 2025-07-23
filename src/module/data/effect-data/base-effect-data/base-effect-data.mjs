@@ -67,7 +67,7 @@ export default class TeriockBaseEffectData extends ChildDataMixin(TypeDataModel)
    *
    * @returns {boolean} True if the effect should expire, false otherwise.
    */
-  shouldExpire() {
+  get shouldExpire() {
     return _shouldExpire(this);
   }
 
@@ -86,7 +86,7 @@ export default class TeriockBaseEffectData extends ChildDataMixin(TypeDataModel)
    * @returns {Promise<void>} Promise that resolves when the expiration check is complete.
    */
   async checkExpiration() {
-    if (this.shouldExpire()) {
+    if (this.shouldExpire) {
       await this.expire();
     }
   }

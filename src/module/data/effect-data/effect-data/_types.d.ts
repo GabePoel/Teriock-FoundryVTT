@@ -1,5 +1,10 @@
 import TeriockBaseEffectData from "../base-effect-data/base-effect-data.mjs";
-import type { CombatExpirationMethod, CombatExpirationTiming, HierarchyField } from "../shared/shared-fields";
+import type {
+  CombatExpirationMethod,
+  CombatExpirationSourceType,
+  CombatExpirationTiming,
+  HierarchyField,
+} from "../shared/shared-fields";
 import type TeriockActor from "../../../documents/actor.mjs";
 
 export interface TeriockEffectSchema extends TeriockBaseEffectData {
@@ -11,10 +16,13 @@ export interface TeriockEffectSchema extends TeriockBaseEffectData {
     };
     /** Expirations based on combat timing. */
     combat: {
-      who: Teriock.UUID<TeriockActor>;
+      who: {
+        type: CombatExpirationSourceType;
+        source: Teriock.UUID<TeriockActor>;
+      };
       what: CombatExpirationMethod;
       when: CombatExpirationTiming;
-    }
+    };
     movement: boolean;
     dawn: boolean;
     sustained: boolean;

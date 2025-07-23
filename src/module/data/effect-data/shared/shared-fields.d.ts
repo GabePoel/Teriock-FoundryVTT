@@ -12,7 +12,10 @@ export type HierarchyField = {
   rootUuid: Teriock.UUID<TeriockEffect>;
 };
 
-/**  What is the type of thing that causes this to expire? */
+/** What actor is the source who triggers expirations? */
+export type CombatExpirationSourceType = "target" | "executor" | "everyone";
+
+/**  What is the type of method of this expiration? */
 export type CombatExpirationMethod = {
   /**  What is the type of thing that causes this to expire? */
   type: "forced" | "rolled" | "none";

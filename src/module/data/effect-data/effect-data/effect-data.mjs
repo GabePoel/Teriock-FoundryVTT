@@ -1,6 +1,11 @@
 const { fields } = foundry.data;
 import TeriockBaseEffectData from "../base-effect-data/base-effect-data.mjs";
-import { combatExpirationMethodField, combatExpirationTimingField, hierarchyField } from "../shared/shared-fields.mjs";
+import {
+  combatExpirationMethodField,
+  combatExpirationSourceTypeField,
+  combatExpirationTimingField,
+  hierarchyField,
+} from "../shared/shared-fields.mjs";
 
 /**
  * Effect-specific effect data model.
@@ -130,11 +135,14 @@ export default class TeriockEffectData extends TeriockBaseEffectData {
           hint: "Under what circumstances should this effect expire?",
         }),
         combat: new fields.SchemaField({
-          who: new fields.DocumentUUIDField({
-            type: "Actor",
-            nullable: true,
-            label: "Actor",
-            hint: "UUID of actor whose turn or other information is used to trigger an expiration?",
+          who: new fields.SchemaField({
+            type: combatExpirationSourceTypeField(),
+            source: new fields.DocumentUUIDField({
+              type: "Actor",
+              nullable: true,
+              label: "Actor",
+              hint: "UUID of actor whose turn or other information is used to trigger an expiration?",
+            }),
           }),
           what: combatExpirationMethodField(),
           when: combatExpirationTimingField(),

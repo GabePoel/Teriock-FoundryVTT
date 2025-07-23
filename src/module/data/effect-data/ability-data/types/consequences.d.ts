@@ -1,5 +1,9 @@
 import type TeriockMacro from "../../../../documents/macro.mjs";
-import type { CombatExpirationMethod, CombatExpirationTiming } from "../../shared/shared-fields";
+import type {
+  CombatExpirationMethod,
+  CombatExpirationSourceType,
+  CombatExpirationTiming,
+} from "../../shared/shared-fields";
 
 export type EffectChangeData = {
   /** The attribute path in the {@link TeriockActor} or {@link TeriockItem} data which the change modifies */
@@ -36,7 +40,7 @@ export interface ConsequenceRolls {
  */
 type AbilityExpiration = {
   combat: {
-    who: "target" | "executor" | "everyone";
+    who: { type: CombatExpirationSourceType };
     what: CombatExpirationMethod;
     when: CombatExpirationTiming;
   };

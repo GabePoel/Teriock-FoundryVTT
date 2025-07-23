@@ -2,7 +2,11 @@ const { fields } = foundry.data;
 import { tradecraftOptions } from "../../../../../helpers/constants/tradecraft-options.mjs";
 import { mergeLevel } from "../../../../../helpers/utils.mjs";
 import { TeriockArrayField, TeriockRecordField } from "../../../../shared/fields.mjs";
-import { combatExpirationMethodField, combatExpirationTimingField } from "../../../shared/shared-fields.mjs";
+import {
+  combatExpirationMethodField,
+  combatExpirationSourceTypeField,
+  combatExpirationTimingField,
+} from "../../../shared/shared-fields.mjs";
 
 const tradecrafts = mergeLevel(tradecraftOptions, "*", "tradecrafts");
 
@@ -86,14 +90,8 @@ export function consequenceChangesField() {
 function abilityExpirationField() {
   return new fields.SchemaField({
     combat: new fields.SchemaField({
-      who: new fields.StringField({
-        choices: {
-          target: "Target",
-          executor: "Executor",
-          everyone: "Everyone",
-        },
-        label: "Whose Turn",
-        hint: "Whose turn should this effect attempt to expire on?",
+      who: new fields.SchemaField({
+        type: combatExpirationSourceTypeField(),
       }),
       what: combatExpirationMethodField(),
       when: combatExpirationTimingField(),
