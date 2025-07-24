@@ -14,7 +14,7 @@ export const _defaultSheetSettings = {
     resourceOptions: false,
     rankOptions: false,
     powerOptions: false,
-    effectOptions: false,
+    consequenceOptions: false,
   },
   abilityFilters: {
     search: "",

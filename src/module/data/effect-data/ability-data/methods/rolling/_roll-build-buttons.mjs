@@ -33,14 +33,14 @@ export async function _buildButtons(rollConfig) {
   const normalEffectJSON = JSON.stringify(normalEffectData);
   const critEffectData = await _generateEffect(abilityData, abilityData.actor, useData.modifiers.heightened, true);
   const critEffectJSON = JSON.stringify(critEffectData);
-  if (normalEffectData || critEffectJSON) {
+  if (normalEffectData || critEffectData) {
     buttons.push({
       label: "Apply Effect",
       icon: "fas fa-disease",
       dataset: {
         action: "apply-effect",
-        normal: normalEffectJSON,
-        crit: critEffectJSON,
+        normal: normalEffectJSON || critEffectJSON,
+        crit: critEffectJSON || normalEffectJSON,
       },
     });
   }

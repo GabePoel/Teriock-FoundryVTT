@@ -7,6 +7,7 @@ import * as DocumentTypes from "./types/document-types";
 import * as Messages from "./types/messages";
 import * as Metadata from "./types/metadata";
 import * as Parameters from "./types/parameters";
+import * as Queries from "./types/queries";
 import * as Rolls from "./types/rolls";
 import * as Ui from "./types/ui";
 import * as Updates from "./types/updates";
@@ -46,7 +47,7 @@ declare global {
 
   const TeriockAbility: typeof import("./documents/_documents.mjs").TeriockAbility;
   const TeriockAttunement: typeof import("./documents/_documents.mjs").TeriockAttunement;
-  const TeriockLingeringEffect: typeof import("./documents/_documents.mjs").TeriockLingeringEffect;
+  const TeriockConsequence: typeof import("./documents/_documents.mjs").TeriockConsequence;
   const TeriockCondition: typeof import("./documents/_documents.mjs").TeriockCondition;
   const TeriockFluency: typeof import("./documents/_documents.mjs").TeriockFluency;
   const TeriockProperty: typeof import("./documents/_documents.mjs").TeriockProperty;
@@ -54,26 +55,27 @@ declare global {
 
   namespace Teriock {
     type ActorType = DocumentTypes.ActorType;
-    type ItemType = DocumentTypes.ItemType;
-    type EffectType = DocumentTypes.EffectType;
-    type EffectMetadata = Metadata.EffectMetadata;
-    type HTMLButtonConfig = Chat.HTMLButtonConfig;
     type ChatOptions = Command.ChatOptions;
-    type CommandOptions = Command.CommandOptions;
-    type CommandExecuteContext = Command.CommandExecuteContext;
-    type CommandCallback = Command.CommandCallback;
     type ChatSpeakerData = Messages.ChatSpeakerData;
+    type CommandCallback = Command.CommandCallback;
+    type CommandExecuteContext = Command.CommandExecuteContext;
+    type CommandOptions = Command.CommandOptions;
+    type CommonRollOptions = Rolls.CommonRollOptions;
+    type ConditionRollOptions = Rolls.ConditionRollOptions;
+    type CritRollOptions = Rolls.CritRollOptions;
+    type EffectMetadata = Metadata.EffectMetadata;
+    type EffectType = DocumentTypes.EffectType;
+    type EquipmentRollOptions = Rolls.EquipmentRollOptions;
+    type HTMLButtonConfig = Chat.HTMLButtonConfig;
+    type HackableBodyPart = Parameters.HackableBodyPart;
+    type ItemType = DocumentTypes.ItemType;
     type MessageOptions = Messages.MessageOptions;
     type MessageParts = Messages.MessageParts;
-    type CommonRollOptions = Rolls.CommonRollOptions;
-    type CritRollOptions = Rolls.CritRollOptions;
-    type EquipmentRollOptions = Rolls.EquipmentRollOptions;
-    type ConditionRollOptions = Rolls.ConditionRollOptions;
     type PolyhedralDie = Rolls.PolyhedralDie;
-    type ThreeToggle = Ui.ThreeToggle;
+    type QueryInCombatExpirationData = Queries.QueryInCombatExpirationData;
     type SkipFunctions = Updates.SkipFunctions;
+    type ThreeToggle = Ui.ThreeToggle;
     type WikiPullOptions = Wiki.WikiPullOptions;
-    type HackableBodyPart = Parameters.HackableBodyPart;
 
     const __brand: unique symbol;
 

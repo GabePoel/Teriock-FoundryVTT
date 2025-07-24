@@ -8,9 +8,11 @@ export async function _payCosts(rollConfig) {
   const mpSpent = rollConfig.useData.costs.mp;
   const hpSpent = rollConfig.useData.costs.hp;
   const gpSpent = rollConfig.useData.costs.gp;
-  const heightened = rollConfig.useData.modifiers.heightened || 0;
   const actor = rollConfig.abilityData.actor;
   const updates = {};
+  if (rollConfig.abilityData.interaction === "attack") {
+    updates["system.attackPenalty"] = actor.system.attackPenalty - 3;
+  }
   if (mpSpent > 0) {
     updates["system.mp.value"] = Math.max(actor.system.mp.value - mpSpent, actor.system.mp.min ?? 0);
   }

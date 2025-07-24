@@ -7,7 +7,7 @@ export type EffectType =
   | "attunement"
   | "base"
   | "condition"
-  | "effect"
+  | "consequence"
   | "fluency"
   | "property"
   | "resource";

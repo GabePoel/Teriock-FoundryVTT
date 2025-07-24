@@ -1,4 +1,5 @@
-import { TeriockBaseEffectData } from "../base-effect-data/base-effect-data.mjs";
+import { TeriockBaseEffectSchema } from "../base-effect-data/_types";
+import TeriockBaseEffectData from "../base-effect-data/base-effect-data.mjs";
 import { TeriockProperty } from "../../../documents/_documents.mjs";
 
 interface TeriockPropertySchema extends TeriockBaseEffectSchema {
@@ -13,5 +14,7 @@ interface TeriockPropertySchema extends TeriockBaseEffectSchema {
 }
 
 declare module "./property-data.mjs" {
-  export default interface TeriockPropertyData extends TeriockPropertySchema, TeriockBaseEffectData {}
+  export default interface TeriockPropertyData
+    extends TeriockPropertySchema,
+      TeriockBaseEffectData {}
 }

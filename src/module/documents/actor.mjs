@@ -187,7 +187,7 @@ export default class TeriockActor extends BaseTeriockActor {
         }
       }
     }
-    return await super.deleteEmbeddedDocuments("Item", ids, operation);
+    return await super.deleteEmbeddedDocuments(embeddedName, ids, operation);
   }
 
   /**

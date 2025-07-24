@@ -21,5 +21,4 @@ export async function _buildChatMessage(rollConfig) {
   rollConfig.chatData.system.overlay = elderSorceryMask(rollConfig.abilityData.parent)?.outerHTML;
   rollConfig.chatData.system.source = /** @type{Teriock.UUID} */ rollConfig.abilityData.parent.uuid;
   const msg = await TeriockChatMessage.create(rollConfig.chatData);
-  console.log(msg);
 }

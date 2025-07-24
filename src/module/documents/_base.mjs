@@ -100,3 +100,12 @@ export class BaseTeriockScene extends Scene {}
  * @property {"ChatMessage"} documentName
  */
 export class BaseTeriockChatMessage extends ChatMessage {}
+
+/**
+ * This class is a hack to get @type {Combat} intellisense without warnings for unimplemented methods.
+ *
+ * @extends {Combat}
+ * @implements {CombatData}
+ * @property {"Combat"} documentName
+ */
+export class BaseTeriockCombat extends Combat {}

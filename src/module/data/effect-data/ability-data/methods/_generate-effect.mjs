@@ -136,10 +136,10 @@ export async function _generateEffect(abilityData, actor, heightenAmount = 0, cr
     sustained = true;
   }
 
-  /** @type {Partial<TeriockEffectData>} */
+  /** @type {Partial<TeriockConsequenceData>} */
   const effectData = {
     name: `${abilityData.parent?.name} Effect${crit ? " (Crit)" : ""}`,
-    type: "effect",
+    type: "consequence",
     img: abilityData.parent?.img,
     changes: changes,
     statuses: Array.from(statuses),

@@ -1,5 +1,6 @@
 export { default as TeriockActor } from "./actor.mjs";
 export { default as TeriockChatMessage } from "./chat-message.mjs";
+export { default as TeriockCombat } from "./combat.mjs";
 export { default as TeriockEffect } from "./effect.mjs";
 export { default as TeriockItem } from "./item.mjs";
 export { default as TeriockMacro } from "./macro.mjs";

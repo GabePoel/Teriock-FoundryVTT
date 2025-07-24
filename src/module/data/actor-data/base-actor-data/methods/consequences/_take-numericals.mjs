@@ -149,7 +149,7 @@ export async function _takeKill(actorData, amount) {
     const effectData = {
       name: "Forced Dead",
       statuses: ["dead", "down", "blind", "unconscious", "prone", "anosmatic", "mute"],
-      type: "effect",
+      type: "consequence",
       img: "systems/teriock/assets/conditions/dead.svg",
       flags: {
         core: {

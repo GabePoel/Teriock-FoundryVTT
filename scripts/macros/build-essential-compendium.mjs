@@ -46,7 +46,7 @@ for (const abilityPage of allAbilityPages) {
   }
   let abilityEffect = /** @type {TeriockAbility} */ abilityItem.effects.getName(abilityName);
   if (!abilityEffect) {
-    abilityEffect = await game.teriock.api.create.createAbility(abilityItem, abilityName, { notify: false });
+    abilityEffect = await game.teriock.api.create.ability(abilityItem, abilityName, { notify: false });
   } else {
     await abilityEffect.system.wikiPull({ notify: false });
   }

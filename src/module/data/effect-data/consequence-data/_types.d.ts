@@ -7,7 +7,7 @@ import type {
 } from "../shared/shared-fields";
 import type TeriockActor from "../../../documents/actor.mjs";
 
-export interface TeriockEffectSchema extends TeriockBaseEffectData {
+export interface TeriockConsequenceSchema extends TeriockBaseEffectData {
   source: string;
   expirations: {
     condition: {
@@ -36,6 +36,6 @@ export interface TeriockEffectSchema extends TeriockBaseEffectData {
   hierarchy: HierarchyField;
 }
 
-declare module "./effect-data.mjs" {
-  export default interface TeriockEffectData extends TeriockEffectSchema {}
+declare module "./consequence-data.mjs" {
+  export default interface TeriockConsequenceData extends TeriockConsequenceSchema {}
 }

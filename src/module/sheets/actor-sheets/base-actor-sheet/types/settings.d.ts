@@ -27,7 +27,7 @@ export interface BaseActorSheetSettings {
     /** Show power options' menu. */
     powerOptions: boolean;
     /** Show effect options menu. */
-    effectOptions: boolean;
+    consequenceOptions: boolean;
   };
 
   /**

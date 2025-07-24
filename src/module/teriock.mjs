@@ -4,15 +4,21 @@ import * as documents from "./documents/_module.mjs";
 import TERIOCK from "./helpers/config.mjs";
 import {
   createAbility,
-  createEffect,
+  createConsequence,
   createFluency,
   createProperty,
   createResource,
 } from "./helpers/create-effects.mjs";
+import * as queries from "./helpers/queries/_module.mjs";
 import registerHandlebarsHelpers from "./helpers/startup/register-handlebars.mjs";
 import registerHooks from "./helpers/startup/register-hooks.mjs";
 import registerTemplates from "./helpers/startup/register-templates.mjs";
-import { cleanWikiHTML, fetchCategoryMembers, fetchWikiPageHTML, openWikiPage } from "./helpers/wiki.mjs";
+import {
+  cleanWikiHTML,
+  fetchCategoryMembers,
+  fetchWikiPageHTML,
+  openWikiPage,
+} from "./helpers/wiki.mjs";
 import { teriockDetectionModes } from "./perception/detection-modes.mjs";
 import { teriockVisionModes } from "./perception/vision-modes.mjs";
 import * as sheets from "./sheets/_module.mjs";
@@ -67,6 +73,7 @@ foundry.helpers.Hooks.once("init", function () {
   CONFIG.ActiveEffect.documentClass = documents.TeriockEffect;
   CONFIG.Actor.documentClass = documents.TeriockActor;
   CONFIG.ChatMessage.documentClass = documents.TeriockChatMessage;
+  CONFIG.Combat.documentClass = documents.TeriockCombat;
   CONFIG.Item.documentClass = documents.TeriockItem;
   CONFIG.Macro.documentClass = documents.TeriockMacro;
   CONFIG.Scene.documentClass = documents.TeriockScene;
@@ -86,7 +93,7 @@ foundry.helpers.Hooks.once("init", function () {
     ability: data.effect.AbilityData,
     attunement: data.effect.AttunementData,
     base: data.effect.BaseEffectData,
-    effect: data.effect.EffectData,
+    consequence: data.effect.ConsequenceData,
     fluency: data.effect.FluencyData,
     property: data.effect.PropertyData,
     resource: data.effect.ResourceData,
@@ -96,8 +103,16 @@ foundry.helpers.Hooks.once("init", function () {
   });
 
   // Unregister V1 sheets
-  DocumentSheetConfig.unregisterSheet(documents.TeriockActor, "teriock", ActorSheet);
-  DocumentSheetConfig.unregisterSheet(documents.TeriockItem, "teriock", ItemSheet);
+  DocumentSheetConfig.unregisterSheet(
+    documents.TeriockActor,
+    "teriock",
+    ActorSheet,
+  );
+  DocumentSheetConfig.unregisterSheet(
+    documents.TeriockItem,
+    "teriock",
+    ItemSheet,
+  );
 
   // Register custom sheets
   const sheetMap = [
@@ -153,9 +168,9 @@ foundry.helpers.Hooks.once("init", function () {
       doc: documents.TeriockEffect,
     },
     {
-      cls: sheets.effect.EffectSheet,
-      label: "Effect",
-      types: ["effect"],
+      cls: sheets.effect.ConsequenceSheet,
+      label: "Consequence",
+      types: ["consequence"],
       doc: documents.TeriockEffect,
       makeDefault: false,
     },
@@ -172,6 +187,10 @@ foundry.helpers.Hooks.once("init", function () {
   CONFIG.Dice.rolls.length = 0;
   CONFIG.Dice.rolls.push(documents.TeriockRoll);
 
+  // Registering custom queries
+  CONFIG.queries["teriock.inCombatExpiration"] =
+    queries.inCombatExpirationQuery;
+
   game.teriock = {
     Actor: documents.TeriockActor,
     Effect: documents.TeriockEffect,
@@ -186,12 +205,12 @@ foundry.helpers.Hooks.once("init", function () {
         fetchCategoryMembers: fetchCategoryMembers,
       },
       create: {
-        createProperty: createProperty,
-        createAbility: createAbility,
-        createResource: createResource,
-        createEffect: createEffect,
-        createFluency: createFluency,
-      }
+        property: createProperty,
+        ability: createAbility,
+        resource: createResource,
+        consequence: createConsequence,
+        fluency: createFluency,
+      },
     },
   };
 

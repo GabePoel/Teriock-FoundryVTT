@@ -14,7 +14,7 @@ export default async function registerTemplates () {
     'systems/teriock/src/templates/actor-templates/character-template/parts/ch-status-box.hbs',
     'systems/teriock/src/templates/actor-templates/character-template/results/ch-ability-results.hbs',
     'systems/teriock/src/templates/actor-templates/character-template/results/ch-attunement-results.hbs',
-    'systems/teriock/src/templates/actor-templates/character-template/results/ch-effect-results.hbs',
+    'systems/teriock/src/templates/actor-templates/character-template/results/ch-consequence-results.hbs',
     'systems/teriock/src/templates/actor-templates/character-template/results/ch-equipment-results.hbs',
     'systems/teriock/src/templates/actor-templates/character-template/results/ch-fluency-results.hbs',
     'systems/teriock/src/templates/actor-templates/character-template/results/ch-power-results.hbs',

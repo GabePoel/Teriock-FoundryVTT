@@ -1,5 +1,5 @@
 import { TeriockAttunement } from "../../../documents/_documents.mjs";
-import { TeriockBaseEffectData } from "../base-effect-data/base-effect-data.mjs";
+import TeriockBaseEffectData from "../base-effect-data/base-effect-data.mjs";
 
 interface TeriockAttunementSchema {
   /** What type of entity this attunement corresponds to */

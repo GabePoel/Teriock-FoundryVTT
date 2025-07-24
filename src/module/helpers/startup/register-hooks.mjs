@@ -119,70 +119,6 @@ export default function registerHooks() {
     }
   });
 
-  foundry.helpers.Hooks.on("combatTurnChange", async (combat, prior, current) => {
-    const combatants = combat.combatants;
-    /** @type {TeriockActor & ClientDocument} */
-    let priorActor;
-    /** @type {TeriockActor & ClientDocument} */
-    let currentActor;
-    for (const combatant of combatants) {
-      if (combatant.id === prior.combatantId && priorActor?.isOwner) {
-        priorActor = combatant.actor;
-        for (const effect of priorActor?.effectTypes?.effect) {
-          if (
-            effect.system.expirations.combat.what.type !== "none" &&
-            effect.system.expirations.combat.when.trigger === "turn" &&
-            effect.system.expirations.combat.when.time === "end"
-          ) {
-            if (effect.system.expirations.combat.when.skip <= 0) {
-              inCombatExpirationDialog(effect);
-            }
-            try {
-              await effect.update({
-                "system.expirations.combat.when.skip": effect.system.expirations.combat.when.skip - 1,
-              });
-            } catch {}
-          }
-        }
-      }
-      if (combatant.id === current.combatantId && currentActor?.isOwner) {
-        currentActor = combatant.actor;
-        for (const effect of currentActor?.effectTypes?.effect) {
-          if (
-            effect.system.expirations.combat.what.type !== "none" &&
-            effect.system.expirations.combat.when.trigger === "turn" &&
-            effect.system.expirations.combat.when.time === "start"
-          ) {
-            if (effect.system.expirations.combat.when.skip <= 0) {
-              inCombatExpirationDialog(effect);
-            }
-            try {
-              await effect.update({
-                "system.expirations.combat.when.skip": effect.system.expirations.combat.when.skip - 1,
-              });
-            } catch {}
-          }
-        }
-      }
-
-      /** @type {TeriockActor & ClientDocument} */
-      const actor = combatant.actor;
-      if (actor?.isOwner) {
-        if (actor.system.attackPenalty > 0) {
-          await actor.update({
-            "system.attackPenalty": 0,
-          });
-        } else {
-          await actor.forceUpdate();
-        }
-        // const effects = actor.temporaryEffects;
-        // for (const effect of effects) {
-        //   await effect.system.checkExpiration();
-        // }
-      }
-    }
-  });
-
   foundry.helpers.Hooks.on("chatMessage", (chatLog, message, chatData) => {
     const users = /** @type {WorldCollection<TeriockUser>} */ game.users;
     const sender = users.get(chatData.user);
@@ -306,11 +242,6 @@ export default function registerHooks() {
     return false;
   });
 
-  foundry.helpers.Hooks.on("combatRound", async (combat, updateData, updateOptions) => {
-    const direction = updateOptions.direction;
-    await game.time.advance(5 * direction);
-  });
-
   foundry.helpers.Hooks.on("updateWorldTime", async (worldTime, dt, options, userId) => {
     if (game.user.id === userId && game.user?.isActiveGM) {
       const scene = game.scenes.viewed;
@@ -321,7 +252,9 @@ export default function registerHooks() {
         // Handle temporary effects expiration
         const effects = actor.temporaryEffects;
         for (const effect of effects) {
-          await effect.system.checkExpiration();
+          if (typeof effect?.system?.checkExpiration === "function") {
+            await effect?.system?.checkExpiration();
+          }
         }
 
         // Update debt with interest if the actor has debt and an interest rate

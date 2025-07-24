@@ -1,16 +1,17 @@
 const { fields } = foundry.data;
+import inCombatExpirationDialog from "../../../helpers/dialogs/in-combat-expiration-dialog.mjs";
 import TeriockBaseEffectData from "../base-effect-data/base-effect-data.mjs";
 import {
   combatExpirationMethodField,
   combatExpirationSourceTypeField,
   combatExpirationTimingField,
-  hierarchyField,
+  hierarchyField
 } from "../shared/shared-fields.mjs";
 
 /**
  * Effect-specific effect data model.
  */
-export default class TeriockEffectData extends TeriockBaseEffectData {
+export default class TeriockConsequenceData extends TeriockBaseEffectData {
   /**
    * Metadata for this effect.
    *
@@ -18,7 +19,7 @@ export default class TeriockEffectData extends TeriockBaseEffectData {
    */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
-      type: "effect",
+      type: "consequence",
       canSub: true,
     });
   }
@@ -153,14 +154,23 @@ export default class TeriockEffectData extends TeriockBaseEffectData {
   }
 
   /**
+   * Trigger in-combat expiration.
+   *
+   * @returns {Promise<void>}
+   */
+  async inCombatExpiration() {
+    await inCombatExpirationDialog(this.parent);
+  }
+
+  /**
    * Checks if the effect should expire based on various conditions.
    * Considers base expiration, condition-based expiration, and sustained expiration.
    *
    * @returns {boolean} True if the effect should expire, false otherwise.
    * @override
    */
-  shouldExpire() {
-    let should = super.shouldExpire();
+  get shouldExpire() {
+    let should = super.shouldExpire;
     if (this.conditionExpiration) {
       const condition = this.expirations.condition.value;
       const present = this.expirations.condition.present;

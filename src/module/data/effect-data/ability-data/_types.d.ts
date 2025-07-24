@@ -1,4 +1,4 @@
-import "src/module/data/effect-data/ability-data/types/roll-config";
+import "src/module/data/consequence-data/ability-data/types/roll-config";
 import { TeriockAbility } from "../../../documents/_documents.mjs";
 import { TeriockAbilityConsequenceSchema } from "./types/consequences";
 import { TeriockAbilityHierarchySchema } from "./types/hierarchy";

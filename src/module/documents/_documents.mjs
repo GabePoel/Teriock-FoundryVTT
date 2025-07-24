@@ -62,12 +62,12 @@ export class TeriockRank extends TeriockItem {}
 export class TeriockAbility extends TeriockEffect {}
 
 /**
- * Lingering {@link TeriockEffect} class.
+ * Consequence-specific {@link TeriockEffect} class.
  *
- * @property {TeriockEffectData} system
- * @property {"effect"} type
+ * @property {TeriockConsequenceData} system
+ * @property {"consequence"} type
  */
-export class TeriockLingeringEffect extends TeriockEffect {}
+export class TeriockConsequence extends TeriockEffect {}
 
 /**
  * Attunement-specific {@link TeriockEffect} class.

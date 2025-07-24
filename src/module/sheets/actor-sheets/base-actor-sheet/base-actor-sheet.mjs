@@ -86,7 +86,7 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
     { type: "power", source: "itemTypes", method: null },
     { type: "rank", source: "itemTypes", method: null },
     { type: "resource", source: "effectTypes", method: null },
-    { type: "effect", source: "effectTypes", method: null },
+    { type: "consequence", source: "effectTypes", method: null },
   ];
 
   /**
@@ -112,7 +112,7 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
     this._equipmentSearchValue = "";
     this._powerSearchValue = "";
     this._fluencySearchValue = "";
-    this._effectSearchValue = "";
+    this._consequenceSearchValue = "";
     this._rankSearchValue = "";
     this._resourceSearchValue = "";
     this._embeds = {
@@ -181,12 +181,12 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
           type: "resource",
         },
       },
-      effect: {
+      consequence: {
         docType: "ActiveEffect",
         data: {
-          name: "New Effect",
+          name: "New Consequence",
           img: "systems/teriock/assets/effect.svg",
-          type: "effect",
+          type: "consequence",
         },
       },
       equipment: {
@@ -618,7 +618,7 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
     this._embeds.effectTypes = {
       resource: tab === "resources" ? this.actor.effectTypes.resource : [],
       fluency: tab === "tradecrafts" ? this.actor.effectTypes.fluency : [],
-      effect: tab === "conditions" ? this.actor.effectTypes.effect : [],
+      consequence: tab === "conditions" ? this.actor.effectTypes.consequence : [],
       attunement: tab === "conditions" ? this.actor.effectTypes.attunement : [],
       ability: tab === "abilities" ? this.actor.effectTypes.ability : [],
     };
@@ -656,7 +656,7 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
     context.equipment = _sortEquipment(this.actor) || [];
     context.powers = this.actor.itemTypes.power || [];
     context.fluencies = this.actor.effectTypes.fluency || [];
-    context.effects = this.actor.effectTypes.effect || [];
+    context.consequences = this.actor.effectTypes.consequence || [];
     context.attunements = this.actor.effectTypes.attunement || [];
     context.ranks = this.actor.itemTypes.rank || [];
     context.sidebarOpen = this._sidebarOpen;

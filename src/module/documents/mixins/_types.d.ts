@@ -4,7 +4,7 @@ import {
   TeriockCondition,
   TeriockEquipment,
   TeriockFluency,
-  TeriockLingeringEffect,
+  TeriockConsequence,
   TeriockPower,
   TeriockProperty,
   TeriockRank,
@@ -32,7 +32,7 @@ export type ParentEffectKeys = {
   attunement?: Set<string>;
   base?: Set<string>;
   condition?: Set<string>;
-  effect?: Set<string>;
+  consequence?: Set<string>;
   fluency?: Set<string>;
   property?: Set<string>;
   resource?: Set<string>;
@@ -44,7 +44,7 @@ export type ParentEffectTypes = {
   attunement?: TeriockAttunement[];
   base?: TeriockEffect[];
   condition?: TeriockCondition[];
-  effect?: TeriockLingeringEffect[];
+  consequence?: TeriockConsequence[];
   fluency?: TeriockFluency[];
   property?: TeriockProperty[];
   resource?: TeriockResource[];

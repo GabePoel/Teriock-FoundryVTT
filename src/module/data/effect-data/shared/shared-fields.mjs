@@ -60,7 +60,7 @@ export function combatExpirationMethodField() {
       initial: "none",
     }),
     roll: new fields.StringField({
-      initial: "2d4",
+      initial: "2d4kh1",
       label: "Roll",
       hint: "If this expires on a roll, what is the roll that needs to be made?",
     }),

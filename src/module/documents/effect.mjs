@@ -8,6 +8,14 @@ import { BaseTeriockEffect } from "./_base.mjs";
  * @property {TeriockActor|TeriockItem} parent
  */
 export default class TeriockEffect extends BaseTeriockEffect {
+  /** @inheritDoc */
+  static migrateData(data) {
+    if (typeof data.type === "string" && data.type === "effect") {
+      data.type = "consequence";
+    }
+    return data;
+  }
+
   /**
    * Checks if the effect is suppressed, combining system suppression with parent suppression.
 

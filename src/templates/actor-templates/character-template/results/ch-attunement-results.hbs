@@ -11,12 +11,13 @@
           attunement.system.usage
         )
         id=attunement._id
-        active=attunement.system.targetDocument
+        active=(and attunement.system.targetDocument (not attunement.disabled))
         type="effect"
         draggable=false
         parentId=attunement.parent._id
         icons=(concat
           (ticon "handshake-simple-slash" action="deattuneDoc" id=attunement._id tooltip="Deattune")
+          (ticonToggle "circle-check" "circle" (not item.disabled) action="toggleDisabledDoc" id=item._id tooltipTrue="Enabled" tooltipFalse="Disabled")
         )
       }}
     {{/each}}

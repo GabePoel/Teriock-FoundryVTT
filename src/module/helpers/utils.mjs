@@ -3,6 +3,47 @@ import { abilityOptions } from "./constants/ability-options.mjs";
 import { conditions } from "./constants/generated/conditions.mjs";
 
 /**
+ * Designates a specific {@link TeriockUser} for a given {@link TeriockActor}.
+ *
+ * @param {TeriockActor} actor
+ * @returns {TeriockUser|null}
+ */
+export function selectUser(actor) {
+  const users = /** @type {WorldCollection<TeriockUser>} */ game.users;
+  /** @type {TeriockUser|null} */
+  let selectedUser = null;
+  // See if any user has the actor as a character
+  users.forEach(
+    /** @param {TeriockUser} user */ (user) => {
+      if (user.character?.uuid === actor.uuid) {
+        selectedUser = user;
+      }
+    },
+  );
+  // See if any players have control over the actor
+  if (!selectedUser) {
+    users.forEach(
+      /** @param {TeriockUser} user */ (user) => {
+        if (!user.isActiveGM && actor.canUserModify(user, "update")) {
+          selectedUser = user;
+        }
+      },
+    );
+  }
+  // See if anyone has control over the actor
+  if (!selectedUser) {
+    users.forEach(
+      /** @param {TeriockUser} user */ (user) => {
+        if (actor.canUserModify(user, "update")) {
+          selectedUser = user;
+        }
+      },
+    );
+  }
+  return selectedUser;
+}
+
+/**
  * Get the image for a {@link Token}.
  *
  * @param {Token} token
@@ -51,7 +92,12 @@ export function tokenName(token) {
  * @returns {TeriockToken|null}
  */
 export function actorToken(actor) {
-  return actor.token || actor.getActiveTokens?.()?.[0] || actor.prototypeToken || null;
+  return (
+    actor.token ||
+    actor.getActiveTokens?.()?.[0] ||
+    actor.prototypeToken ||
+    null
+  );
 }
 
 /**
@@ -190,7 +236,8 @@ export function smartEvaluateSync(formula, document, options = {}) {
   if (!isNaN(Number(formula))) {
     return Number(formula);
   }
-  const rollData = document.actor?.getRollData() || document.getRollData() || {};
+  const rollData =
+    document.actor?.getRollData() || document.getRollData() || {};
   return evaluateSync(formula, rollData, options);
 }
 
@@ -290,7 +337,9 @@ export function parseTimeString(timeString) {
   };
 
   const conversions = Object.fromEntries(
-    Object.entries(units).flatMap(([seconds, aliases]) => aliases.map((alias) => [alias, parseInt(seconds)])),
+    Object.entries(units).flatMap(([seconds, aliases]) =>
+      aliases.map((alias) => [alias, parseInt(seconds)]),
+    ),
   );
   if (!(unit in conversions)) {
     return null;
@@ -351,7 +400,11 @@ export function mergeLevel(obj, path, key) {
             Object.assign(result, object[key]);
           } else {
             Object.keys(object).forEach((itemKey) => {
-              if (object[itemKey] && typeof object[itemKey] === "object" && key in object[itemKey]) {
+              if (
+                object[itemKey] &&
+                typeof object[itemKey] === "object" &&
+                key in object[itemKey]
+              ) {
                 result[itemKey] = object[itemKey][key];
               }
             });

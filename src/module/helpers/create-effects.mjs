@@ -5,7 +5,7 @@ import TeriockEffect from "../documents/effect.mjs";
  * @param {TeriockActor|TeriockEffect|TeriockItem} document - The document to create the ability in.
  * @param {string|null} name - The name for the new ability. If not provided, defaults to "New Ability".
  * @param {Object} options - Additional options for the ability creation.
- * @returns {Promise<ActiveEffect>} The created ability effect.
+ * @returns {Promise<TeriockAbility>} The created ability effect.
  */
 export async function createAbility(document, name = null, options = {}) {
   const abilityData = {
@@ -55,7 +55,7 @@ export async function createAbility(document, name = null, options = {}) {
 /**
  * Creates a new resource effect.
  * @param {TeriockActor|TeriockItem} document - The document to create the resource in.
- * @returns {Promise<ActiveEffect>} The created resource effect.
+ * @returns {Promise<TeriockResource>} The created resource effect.
  */
 export async function createResource(document) {
   const resource = await TeriockEffect.create(
@@ -74,7 +74,7 @@ export async function createResource(document) {
  * Creates a new property effect with optional predefined content.
  * @param {TeriockItem} document - The document to create the property in.
  * @param {string} key - Optional key to look up predefined property content.
- * @returns {Promise<ActiveEffect>} The created property effect.
+ * @returns {Promise<TeriockProperty>} The created property effect.
  */
 export async function createProperty(document, key = "") {
   let description = "Insert description here.";
@@ -119,13 +119,13 @@ export async function createProperty(document, key = "") {
 /**
  * Creates a new effect.
  * @param {TeriockActor|TeriockItem} document - The document to create the effect in.
- * @returns {Promise<ActiveEffect>} The created effect.
+ * @returns {Promise<TeriockConsequence>} The created effect.
  */
-export async function createEffect(document) {
+export async function createConsequence(document) {
   const effect = await TeriockEffect.create(
     {
       name: "New Effect",
-      type: "effect",
+      type: "consequence",
       img: "systems/teriock/assets/effect.svg",
     },
     { parent: document },
@@ -137,7 +137,7 @@ export async function createEffect(document) {
 /**
  * Creates a new fluency effect.
  * @param {TeriockActor|TeriockItem} document - The document to create the fluency in.
- * @returns {Promise<ActiveEffect>} The created fluency effect.
+ * @returns {Promise<TeriockFluency>} The created fluency effect.
  */
 export async function createFluency(document) {
   const fluency = await TeriockEffect.create(
