@@ -38,6 +38,7 @@ export function combatExpirationSourceTypeField() {
     },
     label: "Whose Turn",
     hint: "Whose turn should this effect attempt to expire on?",
+    initial: "target",
   });
 }
 

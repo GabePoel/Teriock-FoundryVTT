@@ -1,6 +1,7 @@
 import { dispatch } from "../../commands/dispatch.mjs";
 import TeriockImageSheet from "../../sheets/misc-sheets/image-sheet/image-sheet.mjs";
 import hotbarDropDialog from "../dialogs/hotbar-drop-dialog.mjs";
+import inCombatExpirationDialog from "../dialogs/in-combat-expiration-dialog.mjs";
 
 /**
  * Check if the {@link TeriockUser} owns and uses the given document.
@@ -118,9 +119,53 @@ export default function registerHooks() {
     }
   });
 
-  foundry.helpers.Hooks.on("combatTurnChange", async (combat) => {
+  foundry.helpers.Hooks.on("combatTurnChange", async (combat, prior, current) => {
     const combatants = combat.combatants;
+    /** @type {TeriockActor & ClientDocument} */
+    let priorActor;
+    /** @type {TeriockActor & ClientDocument} */
+    let currentActor;
     for (const combatant of combatants) {
+      if (combatant.id === prior.combatantId && priorActor?.isOwner) {
+        priorActor = combatant.actor;
+        for (const effect of priorActor?.effectTypes?.effect) {
+          if (
+            effect.system.expirations.combat.what.type !== "none" &&
+            effect.system.expirations.combat.when.trigger === "turn" &&
+            effect.system.expirations.combat.when.time === "end"
+          ) {
+            if (effect.system.expirations.combat.when.skip <= 0) {
+              inCombatExpirationDialog(effect);
+            }
+            try {
+              await effect.update({
+                "system.expirations.combat.when.skip": effect.system.expirations.combat.when.skip - 1,
+              });
+            } catch {}
+          }
+        }
+      }
+      if (combatant.id === current.combatantId && currentActor?.isOwner) {
+        currentActor = combatant.actor;
+        for (const effect of currentActor?.effectTypes?.effect) {
+          if (
+            effect.system.expirations.combat.what.type !== "none" &&
+            effect.system.expirations.combat.when.trigger === "turn" &&
+            effect.system.expirations.combat.when.time === "start"
+          ) {
+            if (effect.system.expirations.combat.when.skip <= 0) {
+              inCombatExpirationDialog(effect);
+            }
+            try {
+              await effect.update({
+                "system.expirations.combat.when.skip": effect.system.expirations.combat.when.skip - 1,
+              });
+            } catch {}
+          }
+        }
+      }
+
+      /** @type {TeriockActor & ClientDocument} */
       const actor = combatant.actor;
       if (actor?.isOwner) {
         if (actor.system.attackPenalty > 0) {
@@ -130,10 +175,10 @@ export default function registerHooks() {
         } else {
           await actor.forceUpdate();
         }
-        const effects = actor.temporaryEffects;
-        for (const effect of effects) {
-          await effect.system.checkExpiration();
-        }
+        // const effects = actor.temporaryEffects;
+        // for (const effect of effects) {
+        //   await effect.system.checkExpiration();
+        // }
       }
     }
   });

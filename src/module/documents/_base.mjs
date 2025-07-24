@@ -8,7 +8,7 @@ import ParentDocumentMixin from "./mixins/parent-mixin.mjs";
  * @extends {Actor}
  * @mixes ParentDocumentMixin
  * @implements {ActorData}
- * @implements{ParentDocumentMixinInterface}
+ * @implements {ParentDocumentMixinInterface}
  * @property {EmbeddedCollection<string, TeriockItem>} items
  * @property {EmbeddedCollection<string, TeriockEffect>} effects
  * @property {ParentItemTypes} itemTypes
