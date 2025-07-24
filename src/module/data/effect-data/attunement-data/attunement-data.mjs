@@ -1,5 +1,4 @@
 const { fields } = foundry.data;
-import * as messages from "../../item-data/equipment-data/methods/_messages.mjs";
 import TeriockBaseEffectData from "../base-effect-data/base-effect-data.mjs";
 
 /**
@@ -35,7 +34,7 @@ export default class TeriockAttunementData extends TeriockBaseEffectData {
   get messageParts() {
     return {
       ...super.messageParts,
-      ...messages._messageParts(this.targetDocument.system),
+      ...this.targetDocument.system.messageParts,
     };
   }
 
