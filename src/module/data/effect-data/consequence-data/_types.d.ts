@@ -33,6 +33,7 @@ export interface TeriockConsequenceSchema extends TeriockBaseEffectData {
   movementExpiration: boolean;
   dawnExpiration: boolean;
   sustainedExpiration: boolean;
+  sourceDescription: string;
   hierarchy: HierarchyField;
 }
 

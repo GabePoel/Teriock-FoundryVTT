@@ -102,9 +102,11 @@ export async function _generateEffect(abilityData, actor, heightenAmount = 0, cr
   // Remove .tmes-header-box and .tmes-bar-box elements
   const headerBoxes = tempDiv.querySelectorAll(".tmes-header-box");
   const barBoxes = tempDiv.querySelectorAll(".tmes-bar-box");
+  const embeddedBlocks = tempDiv.querySelectorAll(".abm-embedded-block");
 
   headerBoxes.forEach((element) => element.remove());
   barBoxes.forEach((element) => element.remove());
+  embeddedBlocks.forEach((element) => element.remove());
 
   description = tempDiv.innerHTML;
 
@@ -143,10 +145,11 @@ export async function _generateEffect(abilityData, actor, heightenAmount = 0, cr
     img: abilityData.parent?.img,
     changes: changes,
     statuses: Array.from(statuses),
-    description: description,
+    // description: description,
     system: {
       source: abilityData.parent?._id,
       deleteOnExpire: true,
+      sourceDescription: description,
       expirations: {
         combat: combatExpirations,
         condition: condition,

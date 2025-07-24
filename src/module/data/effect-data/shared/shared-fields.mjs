@@ -36,7 +36,7 @@ export function combatExpirationSourceTypeField() {
       executor: "Executor",
       everyone: "Everyone",
     },
-    label: "Whose Turn",
+    label: "Who",
     hint: "Whose turn should this effect attempt to expire on?",
     initial: "target",
   });

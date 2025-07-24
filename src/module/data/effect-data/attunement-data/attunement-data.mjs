@@ -21,6 +21,24 @@ export default class TeriockAttunementData extends TeriockBaseEffectData {
     });
   }
 
+  /** @inheritDoc */
+  get messageParts() {
+    return {
+      ...super.messageParts,
+      ...(this.targetDocument?.system?.messageParts || {
+        bars: [
+          {
+            icon: "fa-weight-hanging",
+            label: "Tier",
+            wrappers: [`Tier ${this.tier}`],
+          },
+        ],
+      }),
+      name: this.parent.name,
+      image: this.parent.img,
+    };
+  }
+
   /**
    * Gets the target document for this attunement.
    *
@@ -29,13 +47,6 @@ export default class TeriockAttunementData extends TeriockBaseEffectData {
    */
   get targetDocument() {
     return this.actor?.items.get(this.target);
-  }
-
-  get messageParts() {
-    return {
-      ...super.messageParts,
-      ...this.targetDocument.system.messageParts,
-    };
   }
 
   /**

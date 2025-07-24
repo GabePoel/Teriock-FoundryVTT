@@ -7,6 +7,7 @@ import {
   combatExpirationTimingField,
   hierarchyField
 } from "../shared/shared-fields.mjs";
+import { _messageParts } from "./methods/_messages.mjs";
 
 /**
  * Effect-specific effect data model.
@@ -22,6 +23,14 @@ export default class TeriockConsequenceData extends TeriockBaseEffectData {
       type: "consequence",
       canSub: true,
     });
+  }
+
+  /** @inheritDoc */
+  get messageParts() {
+    return {
+      ...super.messageParts,
+      ..._messageParts(this),
+    }
   }
 
   /**
@@ -149,6 +158,7 @@ export default class TeriockConsequenceData extends TeriockBaseEffectData {
           when: combatExpirationTimingField(),
         }),
       }),
+      sourceDescription: new fields.HTMLField(),
       hierarchy: hierarchyField(),
     });
   }

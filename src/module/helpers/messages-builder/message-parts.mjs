@@ -11,8 +11,6 @@ function createElement(tag, props = {}, ...children) {
   return el;
 }
 
-CONFIG.TextEditor.enrichers
-
 /**
  * Creates a message box container element.
  * @returns {HTMLDivElement} A div element for containing message content.
@@ -82,6 +80,7 @@ export function messageBlock(parent, title, text, italic = false, special = null
   });
 
   if (special === "ES") block.classList.add("abm-es-block");
+  if (special === "embedded-block") block.classList.add("abm-embedded-block");
 
   textElement.querySelectorAll("table").forEach((t) => t.remove());
   if (italic) textElement.style.fontStyle = "italic";
@@ -151,7 +150,7 @@ function barIcon(parent, iconClass, label, first = true) {
 /**
  * Adds an embedded block for a specific entity type to the blocks array.
  * @param {Array} entities - Array of entities to filter and process.
- * @param {Array} blocks - Array to add the generated block to.
+ * @param {MessageBlock} blocks - Array to add the generated block to.
  * @param {string} name - The name/title for the block.
  * @param {string} typeKey - The type key to filter entities by.
  * @param {string} iconFallback - Fallback icon class if no specific icon is found.
@@ -198,6 +197,7 @@ function addEmbeddedBlock(entities, blocks, name, typeKey, iconFallback = "hasht
   blocks.push({
     title: name,
     text: `<ul class="tmessage-embedded-ul">${listItems}</ul>`,
+    special: "embedded-block"
   });
 }
 
