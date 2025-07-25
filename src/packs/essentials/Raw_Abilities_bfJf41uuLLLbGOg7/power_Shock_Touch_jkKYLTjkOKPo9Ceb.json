@@ -80,13 +80,13 @@
               "normal": {
                 "combat": {
                   "what": {
-                    "type": "none",
-                    "roll": "2d4",
+                    "type": "rolled",
+                    "roll": "2d4kh1",
                     "threshold": 4
                   },
                   "when": {
-                    "time": "start",
-                    "trigger": "turn",
+                    "time": "end",
+                    "trigger": "action",
                     "skip": 0
                   }
                 }
@@ -94,19 +94,19 @@
               "crit": {
                 "combat": {
                   "what": {
-                    "type": "none",
-                    "roll": "2d4",
+                    "type": "rolled",
+                    "roll": "2d4kh1",
                     "threshold": 4
                   },
                   "when": {
-                    "time": "start",
-                    "trigger": "turn",
-                    "skip": 0
+                    "time": "end",
+                    "trigger": "action",
+                    "skip": 1
                   }
                 }
               },
-              "changeOnCrit": false,
-              "doesExpire": false
+              "changeOnCrit": true,
+              "doesExpire": true
             }
           },
           "proficient": {
@@ -123,7 +123,7 @@
                 "combat": {
                   "what": {
                     "type": "none",
-                    "roll": "2d4",
+                    "roll": "2d4kh1",
                     "threshold": 4
                   },
                   "when": {
@@ -137,7 +137,7 @@
                 "combat": {
                   "what": {
                     "type": "none",
-                    "roll": "2d4",
+                    "roll": "2d4kh1",
                     "threshold": 4
                   },
                   "when": {
@@ -165,7 +165,7 @@
                 "combat": {
                   "what": {
                     "type": "none",
-                    "roll": "2d4",
+                    "roll": "2d4kh1",
                     "threshold": 4
                   },
                   "when": {
@@ -179,7 +179,7 @@
                 "combat": {
                   "what": {
                     "type": "none",
-                    "roll": "2d4",
+                    "roll": "2d4kh1",
                     "threshold": 4
                   },
                   "when": {
@@ -209,7 +209,7 @@
                 "combat": {
                   "what": {
                     "type": "none",
-                    "roll": "2d4",
+                    "roll": "2d4kh1",
                     "threshold": 4
                   },
                   "when": {
@@ -223,7 +223,7 @@
                 "combat": {
                   "what": {
                     "type": "none",
-                    "roll": "2d4",
+                    "roll": "2d4kh1",
                     "threshold": 4
                   },
                   "when": {
@@ -278,7 +278,7 @@
         },
         "results": {
           "hit": "Target is <a href=\"https://wiki.teriock.com/index.php/Condition:Frozen\" title=\"Condition:Frozen\" target=\"_blank\">frozen</a>.<span class=\"metadata\" data-type=\"condition\" data-condition=\"frozen\"></span>",
-          "critHit": "The target automatically fails the first <span class=\"dice\" data-full-roll=\"2d4\" data-quick-roll=\"2d4\" data-type=\"endCon\">[[/roll 2d4]]</span> roll.",
+          "critHit": "The target automatically fails the first <span class=\"dice\" data-full-roll=\"2d4\" data-quick-roll=\"2d4\" data-type=\"endCon\">[[/roll 2d4]]</span> roll.<span class=\"metadata\" data-type=\"combat-expiration\" data-who-type=\"target\" data-what-type=\"rolled\" data-what-roll=\"2d4kh1\" data-what-threshold=\"4\" data-when-time=\"end\" data-when-trigger=\"action\" data-when-skip=\"1\"></span>",
           "miss": "",
           "critMiss": "",
           "save": "",
@@ -336,7 +336,7 @@
           "materialCost": ""
         },
         "heightened": "For each additional <a href=\"https://wiki.teriock.com/index.php/Core:MP\" class=\"mw-redirect\" title=\"Core:MP\" target=\"_blank\">MP</a> spent, deal an additional <span class=\"dice\" data-full-roll=\"1d4[magic ice]\" data-quick-roll=\"1d4\" data-type=\"damage\">[[/roll 1d4[magic ice]]]</span> <a href=\"https://wiki.teriock.com/index.php/Core:Damage\" title=\"Core:Damage\" target=\"_blank\">damage</a><span class=\"nowrap\">&nbsp;</span>as well.",
-        "endCondition": "At the end of each of the target's actions, they roll <span class=\"dice\" data-full-roll=\"2d4\" data-quick-roll=\"2d4\" data-type=\"endCon\">[[/roll 2d4]]</span>. If either of these dice roll a 4, this effect ends.",
+        "endCondition": "At the end of each of the target's actions, they roll <span class=\"dice\" data-full-roll=\"2d4\" data-quick-roll=\"2d4\" data-type=\"endCon\">[[/roll 2d4]]</span>. If either of these dice roll a 4, this effect ends.<span class=\"metadata\" data-type=\"combat-expiration\" data-who-type=\"target\" data-what-type=\"rolled\" data-what-roll=\"2d4kh1\" data-what-threshold=\"4\" data-when-time=\"end\" data-when-trigger=\"action\" data-when-skip=\"0\"></span>",
         "requirements": "",
         "effects": [
           "temporal"
@@ -375,7 +375,7 @@
         "systemId": "teriock",
         "systemVersion": "0.1.0",
         "createdTime": 1753145895592,
-        "modifiedTime": 1753145895707,
+        "modifiedTime": 1753406579954,
         "lastModifiedBy": "IIjfAJm5Tf1B6G7t"
       },
       "_key": "!items.effects!jkKYLTjkOKPo9Ceb.K0vciGLYTe1zH3Y2"
