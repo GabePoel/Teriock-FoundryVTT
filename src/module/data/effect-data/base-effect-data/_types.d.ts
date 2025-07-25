@@ -21,5 +21,7 @@ export interface TeriockBaseEffectSchema extends ChildDataMixin {
 
 declare module "./base-effect-data.mjs" {
   /** Redundant extension is needed for intellisense. */
-  export default interface TeriockBaseEffectData extends TeriockBaseEffectSchema, ChildDataMixin {}
+  export default interface TeriockBaseEffectData
+    extends TeriockBaseEffectSchema,
+      ChildDataMixin {}
 }

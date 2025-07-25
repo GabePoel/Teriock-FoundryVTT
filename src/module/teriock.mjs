@@ -1,30 +1,19 @@
-import { conditions } from "./content/conditions.mjs";
+const { ActorSheet, ItemSheet } = foundry.appv1.sheets;
+const { DocumentSheetConfig } = foundry.applications.apps;
+import * as createEffects from "./helpers/create-effects.mjs";
 import * as data from "./data/_module.mjs";
+import * as dialogs from "./helpers/dialogs/_module.mjs";
 import * as documents from "./documents/_module.mjs";
-import TERIOCK from "./helpers/config.mjs";
-import {
-  createAbility,
-  createConsequence,
-  createFluency,
-  createProperty,
-  createResource,
-} from "./helpers/create-effects.mjs";
 import * as queries from "./helpers/queries/_module.mjs";
+import * as sheets from "./sheets/_module.mjs";
+import * as wiki from "./helpers/wiki.mjs";
+import TERIOCK from "./helpers/config.mjs";
 import registerHandlebarsHelpers from "./helpers/startup/register-handlebars.mjs";
 import registerHooks from "./helpers/startup/register-hooks.mjs";
 import registerTemplates from "./helpers/startup/register-templates.mjs";
-import {
-  cleanWikiHTML,
-  fetchCategoryMembers,
-  fetchWikiPageHTML,
-  openWikiPage,
-} from "./helpers/wiki.mjs";
+import { conditions } from "./content/conditions.mjs";
 import { teriockDetectionModes } from "./perception/detection-modes.mjs";
 import { teriockVisionModes } from "./perception/vision-modes.mjs";
-import * as sheets from "./sheets/_module.mjs";
-
-const { ActorSheet, ItemSheet } = foundry.appv1.sheets;
-const { DocumentSheetConfig } = foundry.applications.apps;
 
 foundry.helpers.Hooks.once("init", function () {
   CONFIG.TERIOCK = TERIOCK;
@@ -199,17 +188,23 @@ foundry.helpers.Hooks.once("init", function () {
     Token: documents.TeriockToken,
     api: {
       wiki: {
-        openWikiPage: openWikiPage,
-        fetchWikiPageHTML: fetchWikiPageHTML,
-        cleanWikiHTML: cleanWikiHTML,
-        fetchCategoryMembers: fetchCategoryMembers,
+        openWikiPage: wiki.openWikiPage,
+        fetchWikiPageHTML: wiki.fetchWikiPageHTML,
+        cleanWikiHTML: wiki.cleanWikiHTML,
+        fetchCategoryMembers: wiki.fetchCategoryMembers,
       },
       create: {
-        property: createProperty,
-        ability: createAbility,
-        resource: createResource,
-        consequence: createConsequence,
-        fluency: createFluency,
+        property: createEffects.createProperty,
+        ability: createEffects.createAbility,
+        resource: createEffects.createResource,
+        consequence: createEffects.createConsequence,
+        fluency: createEffects.createFluency,
+      },
+      dialog: {
+        boost: dialogs.boostDialog,
+        duration: dialogs.durationDialog,
+        hotbarDrop: dialogs.hotbarDropDialog,
+        inCombatExpiration: dialogs.inCombatExpirationDialog,
       },
     },
   };

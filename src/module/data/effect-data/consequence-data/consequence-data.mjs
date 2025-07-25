@@ -1,5 +1,6 @@
 const { fields } = foundry.data;
 import inCombatExpirationDialog from "../../../helpers/dialogs/in-combat-expiration-dialog.mjs";
+import { migrateHierarchy } from "../../shared/migrations.mjs";
 import TeriockBaseEffectData from "../base-effect-data/base-effect-data.mjs";
 import {
   combatExpirationMethodField,
@@ -30,7 +31,7 @@ export default class TeriockConsequenceData extends TeriockBaseEffectData {
     return {
       ...super.messageParts,
       ..._messageParts(this),
-    }
+    };
   }
 
   /**
@@ -79,26 +80,31 @@ export default class TeriockConsequenceData extends TeriockBaseEffectData {
     return "passive";
   }
 
+  /**
+   * Checks if the effect should expire based on various conditions.
+   * Considers base expiration, condition-based expiration, and sustained expiration.
+   *
+   * @returns {boolean} True if the effect should expire, false otherwise.
+   * @override
+   */
+  get shouldExpire() {
+    let should = super.shouldExpire;
+    if (this.conditionExpiration) {
+      const condition = this.expirations.condition.value;
+      const present = this.expirations.condition.present;
+      const hasCondition = this.actor?.statuses.has(condition);
+      should = should || (present ? hasCondition : !hasCondition);
+    }
+    if (this.sustainedExpiration) {
+      const source = this.parent.source;
+      should = should || !source || source.disabled;
+    }
+    return should;
+  }
+
   /** @inheritDoc */
   static migrateData(data) {
-    if (typeof data.rootUuid === "string") {
-      if (typeof data.hierarchy !== "object") {
-        data.hierarchy = {};
-      }
-      data.hierarchy.rootUuid = data.rootUuid;
-    }
-    if (Array.isArray(data.subIds)) {
-      if (typeof data.hierarchy !== "object") {
-        data.hierarchy = {};
-      }
-      data.hierarchy.subIds = data.subIds;
-    }
-    if (typeof data.supId === "string") {
-      if (typeof data.hierarchy !== "object") {
-        data.hierarchy = {};
-      }
-      data.hierarchy.supId = data.supId;
-    }
+    data = migrateHierarchy(data);
     return super.migrateData(data);
   }
 
@@ -173,24 +179,12 @@ export default class TeriockConsequenceData extends TeriockBaseEffectData {
   }
 
   /**
-   * Checks if the effect should expire based on various conditions.
-   * Considers base expiration, condition-based expiration, and sustained expiration.
+   * Rolls the consequence. Alias for {@link inCombatExpiration}.
    *
-   * @returns {boolean} True if the effect should expire, false otherwise.
+   * @returns {Promise<void>} Promise that resolves when the roll is complete.
    * @override
    */
-  get shouldExpire() {
-    let should = super.shouldExpire;
-    if (this.conditionExpiration) {
-      const condition = this.expirations.condition.value;
-      const present = this.expirations.condition.present;
-      const hasCondition = this.actor?.statuses.has(condition);
-      should = should || (present ? hasCondition : !hasCondition);
-    }
-    if (this.sustainedExpiration) {
-      const source = this.parent.source;
-      should = should || !source || source.disabled;
-    }
-    return should;
+  async roll() {
+    await this.inCombatExpiration();
   }
 }

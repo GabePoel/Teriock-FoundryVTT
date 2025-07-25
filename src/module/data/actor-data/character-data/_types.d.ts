@@ -1,7 +1,7 @@
-import { TeriockBaseActorData } from "../base-actor-data/base-actor-data.mjs";
+import TeriockBaseActorData from "../base-actor-data/base-actor-data.mjs";
 import { TeriockCharacter } from "../../../documents/_documents.mjs";
 
-interface TeriockCharacterSchema {
+interface TeriockCharacterSchema extends TeriockBaseActorData {
   /** Metadata */
   readonly metadata: { type: "Character" };
   /** Parent */
@@ -9,5 +9,6 @@ interface TeriockCharacterSchema {
 }
 
 declare module "./character-data.mjs" {
-  export default interface TeriockCharacterData extends TeriockBaseActorData, TeriockCharacterSchema {}
+  export default interface TeriockCharacterData
+    extends TeriockCharacterSchema {}
 }

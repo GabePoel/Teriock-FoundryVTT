@@ -1,9 +1,8 @@
-import "src/module/data/consequence-data/ability-data/types/roll-config";
+import TeriockBaseEffectData from "../base-effect-data/base-effect-data.mjs";
 import { TeriockAbility } from "../../../documents/_documents.mjs";
 import { TeriockAbilityConsequenceSchema } from "./types/consequences";
 import { TeriockAbilityHierarchySchema } from "./types/hierarchy";
 import { TeriockAbilityRulesSchema } from "./types/rules";
-import TeriockBaseEffectData from "../base-effect-data/base-effect-data.mjs";
 import { TeriockBaseEffectSchema } from "../base-effect-data/_types";
 
 export interface TeriockAbilitySchema
@@ -18,5 +17,7 @@ export interface TeriockAbilitySchema
 }
 
 declare module "./ability-data.mjs" {
-  export default interface TeriockAbilityData extends TeriockAbilitySchema, TeriockBaseEffectData {}
+  export default interface TeriockAbilityData
+    extends TeriockAbilitySchema,
+      TeriockBaseEffectData {}
 }

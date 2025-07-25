@@ -128,7 +128,7 @@ export async function _parse(abilityData, rawHTML) {
   // Set remaining parameters
   setRemainingParameters(parameters, tagTree, doc);
 
-  console.log("LAST CALL")
+  console.log("LAST CALL");
   console.log(foundry.utils.deepClone(parameters));
 
   // Clean up parameters
@@ -324,7 +324,8 @@ function processTags(parameters, tagTree, doc, changes) {
   }
 
   // Set basic parameters
-  parameters.duration = getBarText(doc, "duration", true);
+  parameters.duration = { description: getBarText(doc, "duration", true) };
+  console.log(parameters);
   parameters.range = getBarText(doc, "range", true);
   if (parameters.delivery.base === "self") parameters.range = "Self.";
 

@@ -4,13 +4,18 @@ import TeriockRoll from "../../documents/roll.mjs";
 /**
  * Dialog that asks the {@link TeriockUser} if their effect should expire.
  *
- * @param {TeriockConsequence} effect
+ * @param {TeriockConsequence|TeriockCondition} effect - The consequence to make the dialog for.
+ * @param {boolean} [forceDialog] - Force a dialog to show up.
  * @returns {Promise<void>}
  */
-export default async function inCombatExpirationDialog(effect) {
-  if (effect.system.expirations.combat.what.type === "none") return;
+export default async function inCombatExpirationDialog(
+  effect,
+  forceDialog = false,
+) {
+  if (effect.system.expirations.combat.what.type === "none" && !forceDialog)
+    return;
   let expire = false;
-  if (effect.system.expirations.combat.what.type === "forced") {
+  if (effect.system.expirations.combat.what.type === "forced" && !forceDialog) {
     expire = await api.DialogV2.confirm({
       window: { title: `${effect.name} Expiration` },
       content: `Should ${effect.name} expire?`,
@@ -18,7 +23,7 @@ export default async function inCombatExpirationDialog(effect) {
       rejectClose: false,
     });
     if (expire) await effect.system.expire();
-  } else if (effect.system.expirations.combat.what.type === "rolled") {
+  } else if (effect.system.expirations.combat.what.type === "rolled" || forceDialog) {
     const contentHtml = document.createElement("div");
     if (effect.system.expirations.description) {
       const descriptionElement = document.createElement("fieldset");

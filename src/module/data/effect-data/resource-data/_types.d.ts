@@ -1,8 +1,7 @@
-import { TeriockBaseEffectSchema } from "../base-effect-data/_types";
 import TeriockBaseEffectData from "../base-effect-data/base-effect-data.mjs";
 import { TeriockResource } from "../../../documents/_documents.mjs";
 
-interface TeriockResourceSchema extends TeriockBaseEffectSchema {
+interface TeriockResourceSchema extends TeriockBaseEffectData {
   /** Is the resource consumable? */
   consumable: true;
   /** Quantity (if consumable) */
@@ -23,7 +22,5 @@ interface TeriockResourceSchema extends TeriockBaseEffectSchema {
 }
 
 declare module "./resource-data.mjs" {
-  export default interface TeriockResourceData
-    extends TeriockResourceSchema,
-      TeriockBaseEffectData {}
+  export default interface TeriockResourceData extends TeriockResourceSchema {}
 }

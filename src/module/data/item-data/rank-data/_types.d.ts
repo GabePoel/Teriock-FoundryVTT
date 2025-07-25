@@ -1,8 +1,7 @@
 import TeriockBaseItemData from "../base-item-data/base-item-data.mjs";
-import { TeriockBaseItemSchema } from "../base-item-data/_types";
 import { TeriockRank } from "../../../documents/_documents.mjs";
 
-export interface TeriockRankSchema extends TeriockBaseItemSchema {
+export interface TeriockRankSchema extends TeriockBaseItemData {
   /** Wiki Namespace */
   readonly wikiNamespace: "Class";
   /** Parent */
@@ -34,5 +33,5 @@ export interface TeriockRankSchema extends TeriockBaseItemSchema {
 }
 
 declare module "./rank-data.mjs" {
-  export default interface TeriockRankData extends TeriockRankSchema, TeriockBaseItemData {}
+  export default interface TeriockRankData extends TeriockRankSchema {}
 }

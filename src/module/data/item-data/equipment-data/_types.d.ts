@@ -1,8 +1,7 @@
 import TeriockBaseItemData from "../base-item-data/base-item-data.mjs";
-import { TeriockBaseItemSchema } from "../base-item-data/_types";
 import { TeriockEquipment } from "../../../documents/_documents.mjs";
 
-export interface TeriockEquipmentSchema extends TeriockBaseItemSchema {
+export interface TeriockEquipmentSchema extends TeriockBaseItemData {
   /** Wiki Namespace */
   readonly wikiNamespace: "Equipment";
   /** Parent */
@@ -74,5 +73,6 @@ export interface TeriockEquipmentSchema extends TeriockBaseItemSchema {
 }
 
 declare module "./equipment-data.mjs" {
-  export default interface TeriockEquipmentData extends TeriockEquipmentSchema, TeriockBaseItemData {}
+  export default interface TeriockEquipmentData
+    extends TeriockEquipmentSchema {}
 }

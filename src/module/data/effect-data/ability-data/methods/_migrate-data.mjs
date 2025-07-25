@@ -1,4 +1,5 @@
-import {parseDurationString} from "../../../../helpers/utils.mjs";
+import { parseDurationString } from "../../../../helpers/utils.mjs";
+import { migrateHierarchy } from "../../../shared/migrations.mjs";
 
 /**
  * Migrates ability data to the current schema version.
@@ -11,10 +12,14 @@ import {parseDurationString} from "../../../../helpers/utils.mjs";
 export function _migrateData(data) {
   // Effect key migration
   if (data.effects?.includes("truth")) {
-    data.effects = data.effects.map((effect) => (effect === "truth" ? "truthDetecting" : effect));
+    data.effects = data.effects.map((effect) =>
+      effect === "truth" ? "truthDetecting" : effect,
+    );
   }
   if (data.effects?.includes("duelMod")) {
-    data.effects = data.effects.map((effect) => (effect === "duelMod" ? "duelModifying" : effect));
+    data.effects = data.effects.map((effect) =>
+      effect === "duelMod" ? "duelModifying" : effect,
+    );
   }
 
   // HP and MP cost migration
@@ -31,7 +36,9 @@ export function _migrateData(data) {
         };
       }
       if (typeof data.costs[pointCost] == "string") {
-        const variableCost = String(pointCost === "mp" ? "manaCost" : "hitCost");
+        const variableCost = String(
+          pointCost === "mp" ? "manaCost" : "hitCost",
+        );
         data.costs[pointCost] = {
           type: "variable",
           value: {
@@ -79,23 +86,7 @@ export function _migrateData(data) {
     }
   }
 
-  if (typeof data.rootUuid === "string") {
-    if (typeof data.hierarchy !== "object") {
-      data.hierarchy = {};
-    }
-    data.hierarchy.rootUuid = data.rootUuid;
-  }
-  if (Array.isArray(data.subIds)) {
-    if (typeof data.hierarchy !== "object") {
-      data.hierarchy = {};
-    }
-    data.hierarchy.subIds = data.subIds;
-  }
-  if (typeof data.supId === "string") {
-    if (typeof data.hierarchy !== "object") {
-      data.hierarchy = {};
-    }
-    data.hierarchy.supId = data.supId;
-  }
+  // Hierarchy migration
+  data = migrateHierarchy(data);
   return data;
 }

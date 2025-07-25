@@ -11,5 +11,5 @@ export default async function inCombatExpirationQuery(queryData, { timeout }) {
   const effectUuid = queryData.effectUuid;
   /** @type {TeriockConsequence} */
   const effect = await foundry.utils.fromUuid(effectUuid);
-  await inCombatExpirationDialog(effect);
+  await effect.system.inCombatExpiration();
 }

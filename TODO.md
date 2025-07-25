@@ -9,7 +9,7 @@
     - [ ] Better death/down displays
     - [ ] Frozen/transformed/lighted/terrored/burned visual clues
 - [ ] Ability management
-    - [ ] Abilities letting you know when they start/end
+    - [x] Abilities letting you know when they start/end
     - [x] Heightened duration scaling
     - [x] Hack buttons
     - [x] Easy way to apply boosts
@@ -21,8 +21,8 @@
     - [x] Attack ability targeting missing icon fix
     - [ ] Throwing weapon range multiplier (from throwing training)
     - [ ] Check metadata
-- [ ] Rank fixes
-    - [ ] Enable/disable buttons
+- [x] Rank fixes
+    - [x] Enable/disable buttons
 - [x] Hot bar fix
 
 # Codebase
@@ -31,10 +31,10 @@
 - [ ] Clean up the CSS (as if)
 - [ ] Organize hooks (and move stuff out of hooks?)
 - [ ] Hacks and encumbrance to statuses (no HUD)
-  - [x] Ability buttons
+    - [x] Ability buttons
 - [x] Better roll chat message button handling
 - [x] Ability usage modularization
-- [ ] Take basic abilities off of each individual actors to speed up sorting and make for smaller database
+- [ ] Take basic abilities off of each individual actors to speed up sorting and make for smaller database?
 - [x] Better compendium building automation
 - [x] More wiki links in documentation
 - [x] Just some general sprucing around (as always)
