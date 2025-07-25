@@ -6,7 +6,7 @@ export default class TeriockCombat extends BaseTeriockCombat {
    * Check if the effect might expire and send a dialog to some {@link TeriockUser}.
    *
    * @param {TeriockConsequence} effect - Effect to check expiration for.
-   * @param {"turn"|"combat"} trigger - What might trigger this effect to expire.
+   * @param {"turn"|"combat"|"action"} trigger - What might trigger this effect to expire.
    * @param {"start"|"end"} time - When this effect might expire.
    * @param {Teriock.UUID<TeriockActor>} actorUuid - UUID of some {@link TeriockActor} to compare against.
    * @param {object[]} [updates] - Optional array to mutate with additional updates.
@@ -49,7 +49,7 @@ export default class TeriockCombat extends BaseTeriockCombat {
    *
    * @param {TeriockActor} effectActor
    * @param {TeriockActor} timeActor
-   * @param {"turn"|"combat"} trigger
+   * @param {"turn"|"combat"|"action"} trigger
    * @param {"start"|"end"} time
    * @returns {Promise<void>}
    * @private
@@ -57,7 +57,7 @@ export default class TeriockCombat extends BaseTeriockCombat {
   async _tryAllEffectExpirations(effectActor, timeActor, trigger, time) {
     const updates = [];
     /** @type {TeriockConsequence[]} */
-    const effects = effectActor?.effectTypes?.effect || [];
+    const effects = effectActor?.effectTypes?.consequence || [];
     for (const effect of effects) {
       await this._confirmEffectExpiration(
         effect,
@@ -99,6 +99,7 @@ export default class TeriockCombat extends BaseTeriockCombat {
     for (const actor of this.combatants.map(
       (combatant) => /** @type {TeriockActor} */ combatant.actor,
     )) {
+      await this._tryAllEffectExpirations(actor, newActor, "action", "start");
       await this._tryAllEffectExpirations(actor, newActor, "turn", "start");
     }
 

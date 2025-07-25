@@ -20,7 +20,7 @@ export type CombatExpirationMethod = {
   /**  What is the type of thing that causes this to expire? */
   type: "forced" | "rolled" | "none";
   /** If this expires on a roll, what is the roll that needs to be made? */
-  roll: "2d4";
+  roll: "2d4kh1";
   /** What is the minimum value that needs to be rolled in order for this to expire? */
   threshold: number;
 };
@@ -30,7 +30,7 @@ export type CombatExpirationTiming = {
   /** What is the timing for the trigger of this effect expiring? */
   time: "start" | "end";
   /** What is the trigger for this effect expiring? */
-  trigger: "turn" | "combat";
+  trigger: "turn" | "combat" | "action";
   /** A number of instances of the trigger firing to skip before this effect expires. */
   skip: number;
 };

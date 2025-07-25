@@ -92,6 +92,7 @@ export function combatExpirationTimingField() {
       choices: {
         turn: "Turn",
         combat: "Combat",
+        action: "Action",
       },
       initial: "turn",
       label: "Trigger",

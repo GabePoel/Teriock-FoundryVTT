@@ -23,7 +23,7 @@ export default class TeriockActor extends BaseTeriockActor {
    * @returns {TeriockEffect[]} Array of condition expiration effects.
    */
   get conditionExpirationEffects() {
-    return this.effectTypes.effect?.filter((effect) => effect.system.conditionExpiration) || [];
+    return this.effectTypes.consequence?.filter((effect) => effect.system.conditionExpiration) || [];
   }
 
   /**
@@ -32,7 +32,7 @@ export default class TeriockActor extends BaseTeriockActor {
    * @returns {TeriockEffect[]} Array of movement expiration effects.
    */
   get movementExpirationEffects() {
-    return this.effectTypes.effect?.filter((effect) => effect.system.movementExpiration) || [];
+    return this.effectTypes.consequence?.filter((effect) => effect.system.movementExpiration) || [];
   }
 
   /**
@@ -41,7 +41,7 @@ export default class TeriockActor extends BaseTeriockActor {
    * @returns {TeriockEffect[]} Array of dawn expiration effects.
    */
   get dawnExpirationEffects() {
-    return this.effectTypes.effect?.filter((effect) => effect.system.dawnExpiration) || [];
+    return this.effectTypes.consequence?.filter((effect) => effect.system.dawnExpiration) || [];
   }
 
   /**
@@ -50,7 +50,7 @@ export default class TeriockActor extends BaseTeriockActor {
    * @returns {TeriockEffect[]} Array of sustained expiration effects.
    */
   get sustainedExpirationEffects() {
-    return this.effectTypes.effect?.filter((effect) => effect.system.sustainedExpiration) || [];
+    return this.effectTypes.consequence?.filter((effect) => effect.system.sustainedExpiration) || [];
   }
 
   /**
