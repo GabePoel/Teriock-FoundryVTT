@@ -1,0 +1,28 @@
+{
+  "name": "Arcane Archery Macro",
+  "type": "script",
+  "_id": "r6Czu80rh0Puqcfz",
+  "author": "qf5JYGZKzM588nE6",
+  "img": "icons/svg/dice-target.svg",
+  "scope": "global",
+  "command": "const spells = {\n  flameRay: \"Flame Ray\",\n  lightRay: \"Light Ray\",\n  empathicRay: \"Empathic Ray\",\n  deathRay: \"Death Ray\",\n  lightningRay: \"Lightning Ray\",\n  fireBall: \"Fire Ball\",\n  medicineBall: \"Medicine Ball\",\n  treeformBall: \"Treeform Ball\",\n  terrorBall: \"Terror Ball\",\n  iceBall: \"Ice Ball\",\n}\n\nconst contentHtml = document.createElement(\"div\");\nconst spellField = new foundry.data.fields.StringField({\n  label: \"Missile Spell\",\n  hint: \"Please select a missile spell.\",\n  choices: spells,\n});\ncontentHtml.append(spellField.toFormGroup({}, { name: \"spell\" }));\nconst chosenAbilityName = await foundry.applications.api.DialogV2.prompt({\n  window: { title: \"Select Missile Spell\" },\n  modal: true,\n  content: contentHtml,\n  ok: {\n    label: \"Select\",\n    callback: (event, button) => button.form.elements.namedItem(\"spell\").value,\n  }\n})\nconst actor = scope.abilityData.actor;\nconst ability = await game.teriock.api.import.ability(actor, spells[chosenAbilityName]);\nif (scope.abilityData.parent.isFluent) {\n  await ability.update({\n    \"system.fluent\": true,\n  })\n} else if (scope.abilityData.parent.isProficient) {\n  await ability.update({\n    \"system.proficient\": true,\n  })\n}\nHooks.once(\"renderChatMessageHTML\", async () => {\n  await ability.system.roll({ noHeighten: true });\n  await ability.delete();\n});",
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "qf5JYGZKzM588nE6": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null,
+    "coreVersion": "13.345",
+    "systemId": "teriock",
+    "systemVersion": "0.1.0",
+    "createdTime": 1753509156376,
+    "modifiedTime": 1753511054031,
+    "lastModifiedBy": "qf5JYGZKzM588nE6"
+  },
+  "_key": "!macros!r6Czu80rh0Puqcfz"
+}

@@ -1,0 +1,28 @@
+{
+  "name": "Might Strike Macro",
+  "type": "script",
+  "_id": "0nUlKerGkkdmEuVW",
+  "author": "qf5JYGZKzM588nE6",
+  "img": "icons/svg/dice-target.svg",
+  "scope": "global",
+  "command": "const abilityData = scope.abilityData;\nconst buttons = scope.chatData.system.buttons;\nscope.chatData.system.buttons = buttons.filter(button => button.dataset.action === \"apply-effect\");\nconst button = scope.chatData.system.buttons[0];\nconst effectObject = JSON.parse(button.dataset.normal);\nconst equipmentClass = await game.teriock.api.dialog.equipmentClass()\neffectObject.changes[0] = {\n  key: `system.equipmentChanges.upgrades.classes.${equipmentClass}.damage`,\n  value: \"1d4[holy]\",\n  mode: 2,\n  priority: 10\n}\nconst effectString = JSON.stringify(effectObject);\nscope.chatData.system.buttons[0].dataset.normal = effectString;\nscope.chatData.system.buttons[0].dataset.crit = effectString;",
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "qf5JYGZKzM588nE6": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null,
+    "coreVersion": "13.345",
+    "systemId": "teriock",
+    "systemVersion": "0.1.0",
+    "createdTime": 1753507084853,
+    "modifiedTime": 1753507977732,
+    "lastModifiedBy": "qf5JYGZKzM588nE6"
+  },
+  "_key": "!macros!0nUlKerGkkdmEuVW"
+}
