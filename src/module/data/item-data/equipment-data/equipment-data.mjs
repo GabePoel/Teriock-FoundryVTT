@@ -10,6 +10,7 @@ import * as migrate from "./methods/_migrate-data.mjs";
 import * as parsing from "./methods/_parsing.mjs";
 import * as rolling from "./methods/_rolling.mjs";
 import * as schema from "./methods/_schema.mjs";
+import * as overrides from "./methods/_derived-overrides.mjs";
 
 /**
  * Equipment-specific item data model.
@@ -110,6 +111,58 @@ export default class TeriockEquipmentData extends WikiDataMixin(ConsumableDataMi
    */
   get canUnequip() {
     return ((this.consumable && this.quantity >= 1) || !this.consumable) && this.isEquipped;
+  }
+
+  /**
+   * Derived AV0 value.
+   *
+   * @returns {boolean}
+   */
+  get derivedAv0() {
+    return overrides._derivedAv0(this);
+  }
+
+  /**
+   * Derived UB value.
+   *
+   * @returns {boolean}
+   */
+  get derivedUb() {
+    return overrides._derivedUb(this);
+  }
+
+  /**
+   * Derived armor value.
+   *
+   * @returns {number}
+   */
+  get derivedAv() {
+    return overrides._derivedAv(this);
+  }
+
+  /**
+   * Derived block value.
+   *
+   * @returns {number}
+   */
+  get derivedBv() {
+    return overrides._derivedBv(this);
+  }
+
+  /**
+   * Derived damage dice.
+   *
+   * @returns {string}
+   */
+  get derivedDamage() {
+    return overrides._derivedDamage(this);
+  }
+
+  /**
+   * Derived two-handed damage dice.
+   */
+  get derivedTwoHandedDamage() {
+    return overrides._derivedTwoHandedDamage(this);
   }
 
   /**

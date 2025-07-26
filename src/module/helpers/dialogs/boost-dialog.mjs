@@ -1,5 +1,5 @@
-const {fields} = foundry.data;
-const {DialogV2} = foundry.applications.api;
+const { fields } = foundry.data;
+const { DialogV2 } = foundry.applications.api;
 import {TeriockRoll} from "../../documents/_module.mjs";
 
 /**

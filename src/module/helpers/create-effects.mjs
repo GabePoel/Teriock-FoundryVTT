@@ -2,6 +2,7 @@ import TeriockEffect from "../documents/effect.mjs";
 
 /**
  * Creates a new ability effect and optionally pulls content from the wiki.
+ *
  * @param {TeriockActor|TeriockEffect|TeriockItem} document - The document to create the ability in.
  * @param {string|null} name - The name for the new ability. If not provided, defaults to "New Ability".
  * @param {Object} options - Additional options for the ability creation.
@@ -26,9 +27,11 @@ export async function createAbility(document, name = null, options = {}) {
     embeddingDocument = document.parent;
     abilityData.system["hierarchy"] = { supId: supId };
   }
-  const abilities = /** @type {ActiveEffect[]} */ await embeddingDocument.createEmbeddedDocuments("ActiveEffect", [
-    abilityData,
-  ]);
+  const abilities =
+    /** @type {TeriockAbility[]} */ await embeddingDocument.createEmbeddedDocuments(
+      "ActiveEffect",
+      [abilityData],
+    );
   const ability = abilities[0];
   if (ability.name !== "New Ability") {
     await ability.system.wikiPull(options);
@@ -43,7 +46,9 @@ export async function createAbility(document, name = null, options = {}) {
       },
       {
         _id: supId,
-        "system.hierarchy.subIds": foundry.utils.deepClone(sup.system.hierarchy.subIds).add(ability._id),
+        "system.hierarchy.subIds": foundry.utils
+          .deepClone(sup.system.hierarchy.subIds)
+          .add(ability._id),
       },
     ];
     await sup.parent.updateEmbeddedDocuments("ActiveEffect", updateData);
@@ -53,7 +58,30 @@ export async function createAbility(document, name = null, options = {}) {
 }
 
 /**
+ * Creates a new ability effect and optionally pulls content from the wiki.
+ *
+ * @param {TeriockActor|TeriockEffect|TeriockItem} document - The document to create the ability in.
+ * @param {string} name - The name of the imported ability.
+ * @returns {TeriockAbility}
+ */
+export async function importAbility(document, name) {
+  /** @type {CompendiumPacks} */
+  const packs = game.packs;
+  const essentialPack = packs.get("teriock.essentials");
+  const refAbilityWrapper =
+    /** @type {TeriockProperty|null} */ await foundry.utils.fromUuid(
+      essentialPack?.index.getName(name).uuid,
+    );
+  const refAbility = await refAbilityWrapper?.effects.getName(name);
+  const abilities = await document.createEmbeddedDocuments("ActiveEffect", [
+    refAbility.toObject(),
+  ]);
+  return abilities[0];
+}
+
+/**
  * Creates a new resource effect.
+ *
  * @param {TeriockActor|TeriockItem} document - The document to create the resource in.
  * @returns {Promise<TeriockResource>} The created resource effect.
  */
@@ -72,6 +100,7 @@ export async function createResource(document) {
 
 /**
  * Creates a new property effect with optional predefined content.
+ *
  * @param {TeriockItem} document - The document to create the property in.
  * @param {string} key - Optional key to look up predefined property content.
  * @returns {Promise<TeriockProperty>} The created property effect.
@@ -118,6 +147,7 @@ export async function createProperty(document, key = "") {
 
 /**
  * Creates a new effect.
+ *
  * @param {TeriockActor|TeriockItem} document - The document to create the effect in.
  * @returns {Promise<TeriockConsequence>} The created effect.
  */
@@ -136,6 +166,7 @@ export async function createConsequence(document) {
 
 /**
  * Creates a new fluency effect.
+ *
  * @param {TeriockActor|TeriockItem} document - The document to create the fluency in.
  * @returns {Promise<TeriockFluency>} The created fluency effect.
  */

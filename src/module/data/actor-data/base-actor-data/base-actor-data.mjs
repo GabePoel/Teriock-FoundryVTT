@@ -1,6 +1,7 @@
 const { TypeDataModel } = foundry.abstract;
 import { _migrateData } from "./methods/_migrate-data.mjs";
 import { _postUpdate } from "./methods/_post-update.mjs";
+import { _prepareBaseData } from "./methods/_prepare-base-data.mjs";
 import { _getRollData } from "./methods/_roll-data.mjs";
 import * as hacks from "./methods/consequences/_take-hacks.mjs";
 import * as numericals from "./methods/consequences/_take-numericals.mjs";
@@ -53,6 +54,15 @@ export default class TeriockBaseActorData extends TypeDataModel {
    */
   prepareDerivedData() {
     _prepareDerivedData(this);
+  }
+
+  /**
+   * Prepare data relating to the data model before any data is derived.
+   *
+   * @override
+   */
+  prepareBaseData() {
+    _prepareBaseData(this);
   }
 
   /**

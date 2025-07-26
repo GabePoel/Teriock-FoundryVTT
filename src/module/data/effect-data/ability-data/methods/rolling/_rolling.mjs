@@ -23,6 +23,8 @@ export async function _roll(abilityData, options) {
   const rollConfig = foundry.utils.deepClone(DEFAULT_ROLL_CONFIG);
   rollConfig.abilityData = abilityData;
 
+  if (options.noHeighten) rollConfig.useData.modifiers.noHeighten = true;
+
   await _setTargets(rollConfig);
   await _stageUse(rollConfig);
   await _payCosts(rollConfig);

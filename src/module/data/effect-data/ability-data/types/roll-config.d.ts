@@ -19,6 +19,8 @@ export type AbilityUseData = {
   modifiers: {
     /** Number of times this ability is heightened. */
     heightened: number;
+    /** Prevent this ability from being heightened. */
+    noHeighten: boolean;
   };
   /** Formula used for this ability's dice roll. */
   formula: string;

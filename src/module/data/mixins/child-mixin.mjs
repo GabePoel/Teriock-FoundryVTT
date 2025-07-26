@@ -33,7 +33,8 @@ export default (Base) => {
     get secretMessageParts() {
       return {
         image: "systems/teriock/assets/uncertainty.svg",
-        name: this.parent.type.charAt(0).toUpperCase() + this.parent.type.slice(1),
+        name:
+          this.parent.type.charAt(0).toUpperCase() + this.parent.type.slice(1),
         bars: [],
         blocks: [],
         font: null,
@@ -88,6 +89,12 @@ export default (Base) => {
      * @returns {Promise<void>} Promise that resolves when the use is complete.
      */
     async use(options) {
+      Hooks.callAll(
+        "teriock.use" +
+          this.parent.type.charAt(0).toUpperCase() +
+          this.parent.type.slice(1),
+        [this.parent],
+      );
       await this.roll(options);
     }
 

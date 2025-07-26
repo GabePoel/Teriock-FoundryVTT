@@ -64,23 +64,11 @@
       <div class="character-shortbox character-piercing-box">
         <div class="tsubtle tcenter" data-action="piercingChange">Piercing</div>
         <div class="character-smallbox-value thover">
-          {{#if
-            (or
-              (eq system.piercing "ub")
-              (has system.wielding.attacker.effectKeys.property "ub")
-            )
-          }}
-            UB
-            {{#if (eq system.piercing "ub")}}*{{/if}}
+          {{#if (or (eq system.piercing "ub") system.wielding.attacker.derived.system.derivedUb)}}
+            UB{{#if (eq system.piercing "ub")}}*{{/if}}
           {{else}}
-            {{#if
-              (or
-                (eq system.piercing "av0")
-                (has system.wielding.attacker.effectKeys.property "av0")
-              )
-            }}
-              AV0
-              {{#if (eq system.piercing "av0")}}*{{/if}}
+            {{#if (or (eq system.piercing "av0") system.wielding.attacker.derived.system.derivedAv0)}}
+              AV0{{#if (eq system.piercing "av0")}}*{{/if}}
             {{else}}
               <i class="fa-solid fa-xmark thover"></i>
             {{/if}}
@@ -101,13 +89,11 @@
 
       <div class="character-shortbox character-penalty-box">
         <div class="tsubtle tcenter">Penalty</div>
-        <input
-          type="number"
-          name="system.attackPenalty"
-          value="{{system.attackPenalty}}"
-          class="character-penalty-input character-smallbox-value"
-          max="0"
-        >
+        {{formInput
+          systemFields.attackPenalty
+          value=system.attackPenalty
+          classes="character-penalty-input character-smallbox-value"
+        }}
       </div>
     </div>
 

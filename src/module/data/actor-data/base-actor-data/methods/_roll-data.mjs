@@ -21,7 +21,6 @@ export function _getRollData(actorData) {
   witherData(actorData, data);
   hackData(actorData, data);
   speedData(actorData, data);
-  damageData(actorData, data);
   carryingData(actorData, data);
   defenseData(actorData, data);
   offenseData(actorData, data);
@@ -299,7 +298,19 @@ function hackData(actorData, data) {
  * @private
  */
 function speedData(actorData, data) {
-  const speedKeys = ["wal", "dif", "cra", "swi", "cli", "hid", "leh", "lev", "fly", "dig", "div"];
+  const speedKeys = [
+    "wal",
+    "dif",
+    "cra",
+    "swi",
+    "cli",
+    "hid",
+    "leh",
+    "lev",
+    "fly",
+    "dig",
+    "div",
+  ];
   const speedMap = {
     wal: "walk",
     dif: "difficultTerrain",
@@ -340,25 +351,6 @@ function speedData(actorData, data) {
     }
     data[`speed.feet`] = Math.floor(feetPerTurn);
   }
-}
-
-/**
- * Adds damage data to the roll data object.
- *
- * @param {TeriockBaseActorData} actorData - The actor system to get data from.
- * @param {object} data - The roll data object to populate.
- * @returns {void}
- * @private
- */
-function damageData(actorData, data) {
-  Object.assign(data, {
-    "dmg.hand": actorData.damage.hand,
-    "dmg.foot": actorData.damage.foot,
-    "dmg.mouth": actorData.damage.mouth,
-    "dmg.shield.buckler": actorData.damage.bucklerShield,
-    "dmg.shield.large": actorData.damage.largeShield,
-    "dmg.shield.tower": actorData.damage.towerShield,
-  });
 }
 
 /**
@@ -416,12 +408,11 @@ function defenseData(actorData, data) {
  * @private
  */
 function offenseData(actorData, data) {
-  const weaponAv0 =
-    actorData?.wielding.attacker.derived?.effectKeys?.property?.has("av0") ||
-    actorData?.wielding.attacker.derived?.effectKeys?.property?.has("ub");
-  const naturalAv0 = actorData.piercing === "av0" || actorData.piercing === "ub";
+  const weaponAv0 = actorData?.wielding.attacker.derived?.system.derivedAv0;
+  const naturalAv0 =
+    actorData.piercing === "av0" || actorData.piercing === "ub";
   const hasAv0 = weaponAv0 || naturalAv0;
-  const weaponUb = actorData?.wielding.attacker.derived?.effectKeys?.property?.has("ub");
+  const weaponUb = actorData?.wielding.attacker.derived?.system.derivedUb;
   const naturalUb = actorData.piercing === "ub";
   const hasUb = weaponUb || naturalUb;
   Object.assign(data, {
@@ -447,7 +438,19 @@ function offenseData(actorData, data) {
  * @private
  */
 function moneyData(actorData, data) {
-  const moneyKeys = ["cop", "sil", "gol", "ent", "fir", "pix", "sno", "dra", "moo", "mag", "hea"];
+  const moneyKeys = [
+    "cop",
+    "sil",
+    "gol",
+    "ent",
+    "fir",
+    "pix",
+    "sno",
+    "dra",
+    "moo",
+    "mag",
+    "hea",
+  ];
   const moneyMap = {
     cop: "copper",
     sil: "silver",
@@ -476,21 +479,40 @@ function moneyData(actorData, data) {
 
   // Combined currency values
   data["money.all.num"] =
-    Object.values(actorData.money).reduce((sum, val) => sum + (val || 0), 0) - actorData.money.total;
+    Object.values(actorData.money).reduce((sum, val) => sum + (val || 0), 0) -
+    actorData.money.total;
   data["money.all.val"] = actorData.money.total || 0;
   data["money.all.weight"] = actorData.moneyWeight || 0;
 
   // Coins only
   const coinKeys = ["cop", "sil", "gol"];
-  data["money.coi.num"] = coinKeys.reduce((sum, key) => sum + (data[`money.${key}.num`] || 0), 0);
-  data["money.coi.val"] = coinKeys.reduce((sum, key) => sum + (data[`money.${key}.val`] || 0), 0);
-  data["money.coi.weight"] = coinKeys.reduce((sum, key) => sum + (data[`money.${key}.weight`] || 0), 0);
+  data["money.coi.num"] = coinKeys.reduce(
+    (sum, key) => sum + (data[`money.${key}.num`] || 0),
+    0,
+  );
+  data["money.coi.val"] = coinKeys.reduce(
+    (sum, key) => sum + (data[`money.${key}.val`] || 0),
+    0,
+  );
+  data["money.coi.weight"] = coinKeys.reduce(
+    (sum, key) => sum + (data[`money.${key}.weight`] || 0),
+    0,
+  );
 
   // Gemstones only
   const gemKeys = ["ent", "fir", "pix", "sno", "dra", "moo", "mag", "hea"];
-  data["money.gem.num"] = gemKeys.reduce((sum, key) => sum + (data[`money.${key}.num`] || 0), 0);
-  data["money.gem.val"] = gemKeys.reduce((sum, key) => sum + (data[`money.${key}.val`] || 0), 0);
-  data["money.gem.weight"] = gemKeys.reduce((sum, key) => sum + (data[`money.${key}.weight`] || 0), 0);
+  data["money.gem.num"] = gemKeys.reduce(
+    (sum, key) => sum + (data[`money.${key}.num`] || 0),
+    0,
+  );
+  data["money.gem.val"] = gemKeys.reduce(
+    (sum, key) => sum + (data[`money.${key}.val`] || 0),
+    0,
+  );
+  data["money.gem.weight"] = gemKeys.reduce(
+    (sum, key) => sum + (data[`money.${key}.weight`] || 0),
+    0,
+  );
 }
 
 /**
@@ -527,14 +549,14 @@ function equipmentData(actorData, data) {
  */
 function addEquipmentData(data, slot, equipment) {
   const sys = equipment?.system;
-  data[`${slot}.dmg`] = sys.damage || "0";
-  data[`${slot}.dmg.2h`] = sys.twoHandedDamage || "0";
+  data[`${slot}.dmg`] = sys.derivedDamage || "0";
+  data[`${slot}.dmg.2h`] = sys.derivedTwoHandedDamage || "0";
   data[`${slot}.range`] = sys.range || 0;
   data[`${slot}.range.short`] = sys.shortRange || 0;
   data[`${slot}.weight`] = sys.weight || 0;
   data[`${slot}.tier`] = sys.tier?.derived || 0;
-  data[`${slot}.av`] = sys.av || 0;
-  data[`${slot}.bv`] = sys.bv || 0;
+  data[`${slot}.av`] = sys.derivedAv || 0;
+  data[`${slot}.bv`] = sys.derivedBv || 0;
   data[`${slot}.str`] = sys.minStr || -3;
   data[`${slot}.shattered`] = sys.shattered ? 1 : 0;
   data[`${slot}.dampened`] = sys.dampened ? 1 : 0;

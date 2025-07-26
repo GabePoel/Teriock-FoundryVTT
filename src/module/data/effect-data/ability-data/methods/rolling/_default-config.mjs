@@ -9,6 +9,7 @@ export const DEFAULT_ROLL_CONFIG = {
     },
     modifiers: {
       heightened: 0,
+      noHeighten: false,
     },
     formula: "",
     rollData: {},

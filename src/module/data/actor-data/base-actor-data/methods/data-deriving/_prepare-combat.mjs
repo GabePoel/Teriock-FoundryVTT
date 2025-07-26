@@ -21,8 +21,8 @@ export function _prepareDefenses(actorData) {
 
   // AV, BV, AC, CC
 
-  actorData.bv = actorData.wielding.blocker.derived?.system.bv || 0;
-  const av = Math.max(...equipped.map((item) => item.system.av || 0), actorData.naturalAv || 0);
+  actorData.bv = actorData.wielding.blocker.derived?.system.derivedBv || 0;
+  const av = Math.max(...equipped.map((item) => item.system.derivedAv || 0), actorData.naturalAv || 0);
   actorData.av = av;
   actorData.hasArmor = equipped.some(
     (item) => Array.isArray(item.system.equipmentClasses) && item.system.equipmentClasses.has("armor"),

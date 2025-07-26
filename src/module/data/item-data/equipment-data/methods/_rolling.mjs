@@ -25,8 +25,8 @@ export async function _roll(equipmentData, options) {
  */
 async function use(equipmentData, options) {
   let message = await equipmentData.parent.buildMessage();
-  if (equipmentData.damage) {
-    let rollFormula = equipmentData.damage || "";
+  if (equipmentData.derivedDamage) {
+    let rollFormula = equipmentData.derivedDamage || "";
     if (options.formula) rollFormula = options.formula;
     rollFormula = rollFormula.trim();
 
@@ -57,8 +57,8 @@ async function use(equipmentData, options) {
       rollFormula += "[" + damageTypes.join(" ") + "]";
     }
 
-    if (options?.twoHanded && equipmentData.twoHandedDamage) {
-      rollFormula = equipmentData.twoHandedDamage || rollFormula;
+    if (options?.twoHanded && equipmentData.derivedTwoHandedDamage) {
+      rollFormula = equipmentData.derivedTwoHandedDamage || rollFormula;
     }
     if (options?.bonusDamage) {
       rollFormula = rollFormula + " + " + options.bonusDamage;

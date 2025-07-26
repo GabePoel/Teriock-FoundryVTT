@@ -208,6 +208,7 @@ export default class TeriockActor extends BaseTeriockActor {
    * @returns {Promise<void>} Promise that resolves when post-update is complete.
    */
   async postUpdate(skipFunctions = {}) {
+    Hooks.callAll("teriock.postUpdate", [this, skipFunctions]);
     await this.system.postUpdate(skipFunctions);
   }
 
@@ -221,6 +222,7 @@ export default class TeriockActor extends BaseTeriockActor {
    * @returns {Promise<void>} Promise that resolves when damage is applied.
    */
   async takeDamage(amount) {
+    Hooks.callAll("teriock.takeDamage", [this, amount]);
     await this.system.takeDamage(amount);
   }
 
@@ -234,6 +236,7 @@ export default class TeriockActor extends BaseTeriockActor {
    * @returns {Promise<void>} Promise that resolves when drain is applied.
    */
   async takeDrain(amount) {
+    Hooks.callAll("teriock.takeDrain", [this, amount]);
     await this.system.takeDrain(amount);
   }
 
@@ -247,6 +250,7 @@ export default class TeriockActor extends BaseTeriockActor {
    * @returns {Promise<void>} Promise that resolves when wither is applied.
    */
   async takeWither(amount) {
+    Hooks.callAll("teriock.takeWither", [this, amount]);
     await this.system.takeWither(amount);
   }
 
@@ -260,6 +264,7 @@ export default class TeriockActor extends BaseTeriockActor {
    * @returns {Promise<void>} Promise that resolves when healing is applied.
    */
   async takeHeal(amount) {
+    Hooks.callAll("teriock.takeHeal", [this, amount]);
     await this.system.takeHeal(amount);
   }
 
@@ -273,6 +278,7 @@ export default class TeriockActor extends BaseTeriockActor {
    * @returns {Promise<void>} Promise that resolves when revitalization is applied.
    */
   async takeRevitalize(amount) {
+    Hooks.callAll("teriock.takeRevitalize", [this, amount]);
     await this.system.takeRevitalize(amount);
   }
 
@@ -286,6 +292,7 @@ export default class TeriockActor extends BaseTeriockActor {
    * @returns {Promise<void>} Promise that resolves when temporary hit points are set.
    */
   async takeSetTempHp(amount) {
+    Hooks.callAll("teriock.takeSetTempHp", [this, amount]);
     await this.system.takeSetTempHp(amount);
   }
 
@@ -299,6 +306,7 @@ export default class TeriockActor extends BaseTeriockActor {
    * @returns {Promise<void>} Promise that resolves when temporary mana points are set.
    */
   async takeSetTempMp(amount) {
+    Hooks.callAll("teriock.takeSetTempMp", [this, amount]);
     await this.system.takeSetTempMp(amount);
   }
 
@@ -312,6 +320,7 @@ export default class TeriockActor extends BaseTeriockActor {
    * @returns {Promise<void>} Promise that resolves when temporary hit points are gained.
    */
   async takeGainTempHp(amount) {
+    Hooks.callAll("teriock.takeGainTempHp", [this, amount]);
     await this.system.takeGainTempHp(amount);
   }
 
@@ -325,6 +334,7 @@ export default class TeriockActor extends BaseTeriockActor {
    * @returns {Promise<void>} Promise that resolves when temporary mana points are gained.
    */
   async takeGainTempMp(amount) {
+    Hooks.callAll("teriock.takeGainTempMp", [this, amount]);
     await this.system.takeGainTempMp(amount);
   }
 
@@ -338,6 +348,7 @@ export default class TeriockActor extends BaseTeriockActor {
    * @returns {Promise<void>} Promise that resolves when sleep is applied.
    */
   async takeSleep(amount) {
+    Hooks.callAll("teriock.takeSleep", [this, amount]);
     await this.system.takeSleep(amount);
   }
 
@@ -351,6 +362,7 @@ export default class TeriockActor extends BaseTeriockActor {
    * @returns {Promise<void>} Promise that resolves when kill effect is applied.
    */
   async takeKill(amount) {
+    Hooks.callAll("teriock.takeKill", [this, amount]);
     await this.system.takeKill(amount);
   }
 
@@ -361,6 +373,7 @@ export default class TeriockActor extends BaseTeriockActor {
    * @param {"exact" | "greedy"} mode - Exact change or closest denomination, rounded up.
    */
   async takePay(amount, mode = "greedy") {
+    Hooks.callAll("teriock.takePay", [this, amount]);
     await this.system.takePay(amount, mode);
   }
 
@@ -374,6 +387,7 @@ export default class TeriockActor extends BaseTeriockActor {
    * @returns {Promise<void>} Promise that resolves when hack is applied.
    */
   async takeHack(part) {
+    Hooks.callAll("teriock.takeHack", [this, part]);
     await this.system.takeHack(part);
   }
 
@@ -387,6 +401,7 @@ export default class TeriockActor extends BaseTeriockActor {
    * @returns {Promise<void>} Promise that resolves when unhack is applied.
    */
   async takeUnhack(part) {
+    Hooks.callAll("teriock.takeUnhack", [this, part]);
     await this.system.takeUnhack(part);
   }
 
@@ -399,6 +414,7 @@ export default class TeriockActor extends BaseTeriockActor {
    * @returns {Promise<void>} Promise that resolves when the actor is awakened.
    */
   async takeAwaken() {
+    Hooks.callAll("teriock.takeAwaken", [this]);
     await this.system.takeAwaken();
   }
 
@@ -411,6 +427,7 @@ export default class TeriockActor extends BaseTeriockActor {
    * @returns {Promise<void>} Promise that resolves when the actor is revived.
    */
   async takeRevive() {
+    Hooks.callAll("teriock.takeRevive", [this]);
     await this.system.takeRevive();
   }
 
@@ -425,6 +442,7 @@ export default class TeriockActor extends BaseTeriockActor {
    * @returns {Promise<void>} Promise that resolves when the condition roll is complete.
    */
   async rollCondition(condition, options) {
+    Hooks.callAll("teriock.rollCondition", [this, options]);
     await this.system.rollCondition(condition, options);
   }
 
@@ -439,6 +457,7 @@ export default class TeriockActor extends BaseTeriockActor {
    * @returns {Promise<void>}
    */
   async rollFeatSave(attribute, options = {}) {
+    Hooks.callAll("teriock.rollFeatSave", [this, options]);
     await this.system.rollFeatSave(attribute, options);
   }
 
@@ -452,6 +471,7 @@ export default class TeriockActor extends BaseTeriockActor {
    * @returns {Promise<void>}
    */
   async rollResistance(options = {}) {
+    Hooks.callAll("teriock.rollResistance", [this, options]);
     await this.system.rollResistance(options);
   }
 
@@ -465,6 +485,7 @@ export default class TeriockActor extends BaseTeriockActor {
    * @returns {Promise<void>}
    */
   async rollImmunity(options = {}) {
+    Hooks.callAll("teriock.rollImmunity", [this, options]);
     await this.system.rollImmunity(options);
   }
 
@@ -479,6 +500,7 @@ export default class TeriockActor extends BaseTeriockActor {
    * @returns {Promise<void>}
    */
   async rollTradecraft(tradecraft, options = {}) {
+    Hooks.callAll("teriock.rollTradecraft", [this, options]);
     await this.system.rollTradecraft(tradecraft, options);
   }
 

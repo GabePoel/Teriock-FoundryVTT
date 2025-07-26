@@ -6,7 +6,7 @@ import { _prepareSize } from "./_prepare-token.mjs";
 import { _prepareTradecrafts } from "./_prepare-tradecrafts.mjs";
 
 /**
- * Prepares all derived system data from base data.
+ * Prepares all derived system data from other data.
  *
  * This function orchestrates the calculation of all derived properties that depend
  * on base data, equipment, and other factors. It ensures that all computed values

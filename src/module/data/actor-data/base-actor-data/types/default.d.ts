@@ -76,18 +76,6 @@ export interface TeriockBaseActorDefault {
   damage: {
     /** Standard damage */
     standard: string;
-    /** Hand damage */
-    hand: string;
-    /** Foot damage */
-    foot: string;
-    /** Mouth damage */
-    mouth: string;
-    /** Buckler shield damage */
-    bucklerShield: string;
-    /** Large shield damage */
-    largeShield: string;
-    /** Tower shield damage */
-    towerShield: string;
   };
   /** Hacks */
   hacks: HackDataCollection;

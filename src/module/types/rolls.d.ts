@@ -10,6 +10,8 @@ export type CommonRollOptions = {
   message?: string;
   /** Success Threshold */
   threshold?: number;
+  /** Turn of Heightening */
+  noHeighten?: boolean;
 };
 
 /**

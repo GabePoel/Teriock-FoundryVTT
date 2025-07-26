@@ -1,19 +1,19 @@
 const { ActorSheet, ItemSheet } = foundry.appv1.sheets;
 const { DocumentSheetConfig } = foundry.applications.apps;
-import * as createEffects from "./helpers/create-effects.mjs";
+import { conditions } from "./content/conditions.mjs";
 import * as data from "./data/_module.mjs";
-import * as dialogs from "./helpers/dialogs/_module.mjs";
 import * as documents from "./documents/_module.mjs";
-import * as queries from "./helpers/queries/_module.mjs";
-import * as sheets from "./sheets/_module.mjs";
-import * as wiki from "./helpers/wiki.mjs";
 import TERIOCK from "./helpers/config.mjs";
+import * as createEffects from "./helpers/create-effects.mjs";
+import * as dialogs from "./helpers/dialogs/_module.mjs";
+import * as queries from "./helpers/queries/_module.mjs";
 import registerHandlebarsHelpers from "./helpers/startup/register-handlebars.mjs";
 import registerHooks from "./helpers/startup/register-hooks.mjs";
 import registerTemplates from "./helpers/startup/register-templates.mjs";
-import { conditions } from "./content/conditions.mjs";
+import * as wiki from "./helpers/wiki.mjs";
 import { teriockDetectionModes } from "./perception/detection-modes.mjs";
 import { teriockVisionModes } from "./perception/vision-modes.mjs";
+import * as sheets from "./sheets/_module.mjs";
 
 foundry.helpers.Hooks.once("init", function () {
   CONFIG.TERIOCK = TERIOCK;
@@ -200,9 +200,13 @@ foundry.helpers.Hooks.once("init", function () {
         consequence: createEffects.createConsequence,
         fluency: createEffects.createFluency,
       },
+      import: {
+        ability: createEffects.importAbility,
+      },
       dialog: {
         boost: dialogs.boostDialog,
         duration: dialogs.durationDialog,
+        equipmentClass: dialogs.equipmentClassDialog,
         hotbarDrop: dialogs.hotbarDropDialog,
         inCombatExpiration: dialogs.inCombatExpirationDialog,
       },
