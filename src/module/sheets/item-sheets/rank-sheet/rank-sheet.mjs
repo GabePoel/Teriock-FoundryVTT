@@ -6,7 +6,7 @@ import {
   classContextMenu,
   hitDieContextMenu,
   manaDieContextMenu,
-  rankContextMenu,
+  rankContextMenu
 } from "./connections/_context-menus.mjs";
 
 /**
@@ -14,7 +14,9 @@ import {
  * Provides rank management with context menus for various rank components and die re-rolling functionality.
  * @extends {TeriockBaseItemSheet}
  */
-export default class TeriockRankSheet extends HandlebarsApplicationMixin(TeriockBaseItemSheet) {
+export default class TeriockRankSheet extends HandlebarsApplicationMixin(
+  TeriockBaseItemSheet,
+) {
   /**
    * Default options for the rank sheet.
    * @type {object}
@@ -34,7 +36,8 @@ export default class TeriockRankSheet extends HandlebarsApplicationMixin(Teriock
    */
   static PARTS = {
     all: {
-      template: "systems/teriock/src/templates/item-templates/rank-template/rank-template.hbs",
+      template:
+        "systems/teriock/src/templates/item-templates/rank-template/rank-template.hbs",
       scrollable: [".window-content", ".tsheet-page", ".ab-sheet-everything"],
     },
   };
@@ -47,7 +50,9 @@ export default class TeriockRankSheet extends HandlebarsApplicationMixin(Teriock
    */
   async _prepareContext(options) {
     const context = await super._prepareContext(options);
-    context.enrichedDescription = await this._editor(this.item.system.description);
+    context.enrichedDescription = await this._editor(
+      this.item.system.description,
+    );
     context.enrichedFlaws = await this._editor(this.item.system.flaws);
     return context;
   }
@@ -74,13 +79,15 @@ export default class TeriockRankSheet extends HandlebarsApplicationMixin(Teriock
     [
       {
         selector: ".hit-die-box",
-        confirmText: "Are you sure you want to re-roll how much HP you gain from this rank?",
+        confirmText:
+          "Are you sure you want to re-roll how much HP you gain from this rank?",
         dieKey: "hitDie",
         updateKey: "hp",
       },
       {
         selector: ".mana-die-box",
-        confirmText: "Are you sure you want to re-roll how much mana you gain from this rank?",
+        confirmText:
+          "Are you sure you want to re-roll how much mana you gain from this rank?",
         dieKey: "manaDie",
         updateKey: "mp",
       },

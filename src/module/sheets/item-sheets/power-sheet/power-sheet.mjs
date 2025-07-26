@@ -8,7 +8,9 @@ import { powerContextMenu } from "./connections/_context-menus.mjs";
  * Provides power management with proficiency toggling, context menus, and rich text editing.
  * @extends {TeriockBaseItemSheet}
  */
-export default class TeriockPowerSheet extends HandlebarsApplicationMixin(TeriockBaseItemSheet) {
+export default class TeriockPowerSheet extends HandlebarsApplicationMixin(
+  TeriockBaseItemSheet,
+) {
   /**
    * Default options for the power sheet.
    * @type {object}
@@ -30,7 +32,8 @@ export default class TeriockPowerSheet extends HandlebarsApplicationMixin(Terioc
    */
   static PARTS = {
     all: {
-      template: "systems/teriock/src/templates/item-templates/power-template/power-template.hbs",
+      template:
+        "systems/teriock/src/templates/item-templates/power-template/power-template.hbs",
       scrollable: [".window-content", ".tsheet-page", ".ab-sheet-everything"],
     },
   };
@@ -42,7 +45,9 @@ export default class TeriockPowerSheet extends HandlebarsApplicationMixin(Terioc
    */
   static async _toggleProficient() {
     if (this.editable) {
-      await this.item.update({ "system.proficient": !this.item.system.proficient });
+      await this.item.update({
+        "system.proficient": !this.item.system.proficient,
+      });
     }
   }
 
@@ -54,7 +59,9 @@ export default class TeriockPowerSheet extends HandlebarsApplicationMixin(Terioc
    */
   async _prepareContext(options) {
     const context = await super._prepareContext(options);
-    context.enrichedDescription = await this._editor(this.item.system.description);
+    context.enrichedDescription = await this._editor(
+      this.item.system.description,
+    );
     context.enrichedFlaws = await this._editor(this.item.system.flaws);
     return context;
   }

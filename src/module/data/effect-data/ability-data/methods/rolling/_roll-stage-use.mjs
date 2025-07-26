@@ -12,9 +12,18 @@ export async function _stageUse(rollConfig) {
   rollConfig.useData.rollData = rollConfig.abilityData.actor.getRollData();
 
   // Calculate costs
-  rollConfig.useData.costs.hp = await calculateCost(rollConfig.abilityData.costs.hp, rollConfig.useData.rollData);
-  rollConfig.useData.costs.mp = await calculateCost(rollConfig.abilityData.costs.mp, rollConfig.useData.rollData);
-  rollConfig.useData.costs.gp = await calculateCost(rollConfig.abilityData.costs.gp, rollConfig.useData.rollData);
+  rollConfig.useData.costs.hp = await calculateCost(
+    rollConfig.abilityData.costs.hp,
+    rollConfig.useData.rollData,
+  );
+  rollConfig.useData.costs.mp = await calculateCost(
+    rollConfig.abilityData.costs.mp,
+    rollConfig.useData.rollData,
+  );
+  rollConfig.useData.costs.gp = await calculateCost(
+    rollConfig.abilityData.costs.gp,
+    rollConfig.useData.rollData,
+  );
 
   // Build initial formula
   rollConfig.useData.formula = buildFormula(rollConfig);
@@ -25,7 +34,10 @@ export async function _stageUse(rollConfig) {
   // Update the roll data
   rollConfig.useData.rollData["h"] = rollConfig.useData.modifiers.heightened;
 
-  if (rollConfig.abilityData.piercing === "av0" || rollConfig.abilityData.piercing === "ub") {
+  if (
+    rollConfig.abilityData.piercing === "av0" ||
+    rollConfig.abilityData.piercing === "ub"
+  ) {
     rollConfig.useData.rollData["av0.abi"] = 2;
     rollConfig.useData.rollData["av0"] = 2;
   }
@@ -36,9 +48,12 @@ export async function _stageUse(rollConfig) {
 
   // Add proficiency modifiers
   if (["attack", "feat"].includes(rollConfig.abilityData.interaction)) {
-    if (rollConfig.abilityData.parent.isFluent) rollConfig.useData.formula += " + @f";
-    else if (rollConfig.abilityData.parent.isProficient) rollConfig.useData.formula += " + @p";
-    if (rollConfig.useData.modifiers.heightened > 0) rollConfig.useData.formula += " + @h";
+    if (rollConfig.abilityData.parent.isFluent)
+      rollConfig.useData.formula += " + @f";
+    else if (rollConfig.abilityData.parent.isProficient)
+      rollConfig.useData.formula += " + @p";
+    if (rollConfig.useData.modifiers.heightened > 0)
+      rollConfig.useData.formula += " + @h";
   }
 }
 

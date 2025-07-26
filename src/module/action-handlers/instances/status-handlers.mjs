@@ -10,14 +10,14 @@ export class ApplyStatusHandler extends ActionHandler {
   /** @inheritDoc */
   async primaryAction() {
     for (const actor of this.actors) {
-      await actor.toggleStatusEffect(this.dataset.status, true)
+      await actor.toggleStatusEffect(this.dataset.status, true);
     }
   }
 
   /** @inheritDoc */
   async secondaryAction() {
     for (const actor of this.actors) {
-      await actor.toggleStatusEffect(this.dataset.status, false)
+      await actor.toggleStatusEffect(this.dataset.status, false);
     }
   }
 }
@@ -32,14 +32,14 @@ export class RemoveStatusHandler extends ActionHandler {
   /** @inheritDoc */
   async primaryAction() {
     for (const actor of this.actors) {
-      await actor.toggleStatusEffect(this.dataset.status, false)
+      await actor.toggleStatusEffect(this.dataset.status, false);
     }
   }
 
   /** @inheritDoc */
   async secondaryAction() {
     for (const actor of this.actors) {
-      await actor.toggleStatusEffect(this.dataset.status, true)
+      await actor.toggleStatusEffect(this.dataset.status, true);
     }
   }
 }

@@ -51,9 +51,12 @@ export function _filterAbilities(actor, abilities, filters = {}) {
       (!filters.delivery || a.system.delivery.base === filters.delivery) &&
       (!filters.piercing || a.system.piercing === filters.piercing) &&
       (!filters.target || (a.system.targets || []).includes(filters.target)) &&
-      (!filters.powerSource || (a.system.powerSources || []).includes(filters.powerSource)) &&
-      (!filters.element || (a.system.elements || []).includes(filters.element)) &&
-      (!filters.effects || (a.system.effects || []).some((e) => filters.effects.includes(e))),
+      (!filters.powerSource ||
+        (a.system.powerSources || []).includes(filters.powerSource)) &&
+      (!filters.element ||
+        (a.system.elements || []).includes(filters.element)) &&
+      (!filters.effects ||
+        (a.system.effects || []).some((e) => filters.effects.includes(e))),
   );
   return abilities;
 }
@@ -73,15 +76,21 @@ export function _filterEquipment(actor, equipment, filters = {}) {
   equipment = equipment.filter(
     (e) =>
       (!filters.properties || e.effectKeys.property.has(filters.properties)) &&
-      (!filters.materialProperties || e.effectKeys.property.has(filters.materialProperties)) &&
-      (!filters.magicalProperties || e.effectKeys.property.has(filters.magicalProperties)) &&
+      (!filters.materialProperties ||
+        e.effectKeys.property.has(filters.materialProperties)) &&
+      (!filters.magicalProperties ||
+        e.effectKeys.property.has(filters.magicalProperties)) &&
       binaryFilter(filters.equipped, e.system.equipped) &&
       binaryFilter(filters.shattered, e.system.shattered) &&
       binaryFilter(filters.identified, e.system.identified) &&
       binaryFilter(filters.consumable, e.system.consumable) &&
       (!filters.powerLevel || e.system.powerLevel === filters.powerLevel) &&
-      (!filters.equipmentClasses || (e.system.equipmentClasses || new Set()).has(filters.equipmentClasses)) &&
-      (!filters.weaponFightingStyles || e.system.sb === filters.weaponFightingStyles),
+      (!filters.equipmentClasses ||
+        (e.system.equipmentClasses || new Set()).has(
+          filters.equipmentClasses,
+        )) &&
+      (!filters.weaponFightingStyles ||
+        e.system.sb === filters.weaponFightingStyles),
   );
   return equipment;
 }

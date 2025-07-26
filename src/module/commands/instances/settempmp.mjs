@@ -19,7 +19,9 @@ export const settempmp = new TeriockCommand(
       await actor.takeSetTempMp(amount);
     }
 
-    ui.notifications.info(`Set ${amount} temporary MP on ${actors.length} target(s).`);
+    ui.notifications.info(
+      `Set ${amount} temporary MP on ${actors.length} target(s).`,
+    );
   },
   {
     aliases: ["stmp"],

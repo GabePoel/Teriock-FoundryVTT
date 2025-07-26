@@ -17,7 +17,9 @@ import { _stageUse } from "./_roll-stage-use.mjs";
  */
 export async function _roll(abilityData, options) {
   if (!abilityData.actor) {
-    ui.notifications.error("Abilities must be on an actor to be used.", { console: false });
+    ui.notifications.error("Abilities must be on an actor to be used.", {
+      console: false,
+    });
     return;
   }
   const rollConfig = foundry.utils.deepClone(DEFAULT_ROLL_CONFIG);

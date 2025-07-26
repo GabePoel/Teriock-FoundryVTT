@@ -4,7 +4,14 @@
  * @param {Teriock.HTMLButtonConfig} config Options forwarded to the button
  * @returns {HTMLButtonElement}
  */
-export function buildHTMLButton({ label, dataset = {}, classes = [], icon = "", type = "button", disabled = false }) {
+export function buildHTMLButton({
+  label,
+  dataset = {},
+  classes = [],
+  icon = "",
+  type = "button",
+  disabled = false,
+}) {
   const button = document.createElement("button");
   button.type = type;
   for (const [key, value] of Object.entries(dataset)) {
@@ -32,7 +39,9 @@ export function elementClass(elements) {
     nature: "es-nature",
   };
   if (!Array.isArray(elements)) return "es-multi";
-  const validElements = elements.filter((el) => Object.prototype.hasOwnProperty.call(colorMap, el));
+  const validElements = elements.filter((el) =>
+    Object.prototype.hasOwnProperty.call(colorMap, el),
+  );
   if (validElements.length !== 1) return "es-multi";
   return colorMap[validElements[0]] || "es-multi";
 }

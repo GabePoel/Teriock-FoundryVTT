@@ -1,4 +1,13 @@
-const { Actor, Item, ActiveEffect, TokenDocument, Macro, User, Scene, ChatMessage } = foundry.documents;
+const {
+  Actor,
+  Item,
+  ActiveEffect,
+  TokenDocument,
+  Macro,
+  User,
+  Scene,
+  ChatMessage,
+} = foundry.documents;
 import ChildDocumentMixin from "./mixins/child-mixin.mjs";
 import ParentDocumentMixin from "./mixins/parent-mixin.mjs";
 
@@ -38,7 +47,9 @@ export class BaseTeriockActor extends ParentDocumentMixin(Actor) {}
  * @property {Teriock.ItemType} type
  * @property {"Item"} documentName
  */
-export class BaseTeriockItem extends ParentDocumentMixin(ChildDocumentMixin(Item)) {}
+export class BaseTeriockItem extends ParentDocumentMixin(
+  ChildDocumentMixin(Item),
+) {}
 
 /**
  * This class is a hack to get {@link ActiveEffect} intellisense without warnings for unimplemented methods.

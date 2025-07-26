@@ -62,11 +62,16 @@ export default async function durationDialog(ability) {
         label: "Apply",
         callback: async (event, button) => {
           await ability.update({
-            "system.duration.unit": button.form.elements.namedItem("unit").value,
-            "system.duration.quantity": button.form.elements.namedItem("quantity").value,
-            "system.duration.conditions.absent": button.form.elements.namedItem("absent").value,
-            "system.duration.conditions.present": button.form.elements.namedItem("present").value,
-            "system.duration.description": button.form.elements.namedItem("description").value,
+            "system.duration.unit":
+              button.form.elements.namedItem("unit").value,
+            "system.duration.quantity":
+              button.form.elements.namedItem("quantity").value,
+            "system.duration.conditions.absent":
+              button.form.elements.namedItem("absent").value,
+            "system.duration.conditions.present":
+              button.form.elements.namedItem("present").value,
+            "system.duration.description":
+              button.form.elements.namedItem("description").value,
           });
         },
       },

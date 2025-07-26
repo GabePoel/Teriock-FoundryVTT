@@ -12,7 +12,12 @@ export function _shouldExpire(effectData) {
   const duration = effect.duration;
   const currentTime = game.time.worldTime;
   const combat = game.combat;
-  if (!duration || duration.startTime === undefined || duration.seconds === undefined) return false;
+  if (
+    !duration ||
+    duration.startTime === undefined ||
+    duration.seconds === undefined
+  )
+    return false;
   const expirationTime = duration.startTime + duration.seconds;
   if (!combat || !combat.active) {
     return currentTime >= expirationTime;

@@ -19,7 +19,9 @@ export const settemphp = new TeriockCommand(
       await actor.takeSetTempHp(amount);
     }
 
-    ui.notifications.info(`Set ${amount} temporary HP on ${actors.length} target(s).`);
+    ui.notifications.info(
+      `Set ${amount} temporary HP on ${actors.length} target(s).`,
+    );
   },
   {
     aliases: ["sthp"],

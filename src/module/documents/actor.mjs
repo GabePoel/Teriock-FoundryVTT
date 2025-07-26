@@ -23,7 +23,11 @@ export default class TeriockActor extends BaseTeriockActor {
    * @returns {TeriockEffect[]} Array of condition expiration effects.
    */
   get conditionExpirationEffects() {
-    return this.effectTypes.consequence?.filter((effect) => effect.system.conditionExpiration) || [];
+    return (
+      this.effectTypes.consequence?.filter(
+        (effect) => effect.system.conditionExpiration,
+      ) || []
+    );
   }
 
   /**
@@ -32,7 +36,11 @@ export default class TeriockActor extends BaseTeriockActor {
    * @returns {TeriockEffect[]} Array of movement expiration effects.
    */
   get movementExpirationEffects() {
-    return this.effectTypes.consequence?.filter((effect) => effect.system.movementExpiration) || [];
+    return (
+      this.effectTypes.consequence?.filter(
+        (effect) => effect.system.movementExpiration,
+      ) || []
+    );
   }
 
   /**
@@ -41,7 +49,11 @@ export default class TeriockActor extends BaseTeriockActor {
    * @returns {TeriockEffect[]} Array of dawn expiration effects.
    */
   get dawnExpirationEffects() {
-    return this.effectTypes.consequence?.filter((effect) => effect.system.dawnExpiration) || [];
+    return (
+      this.effectTypes.consequence?.filter(
+        (effect) => effect.system.dawnExpiration,
+      ) || []
+    );
   }
 
   /**
@@ -50,7 +62,11 @@ export default class TeriockActor extends BaseTeriockActor {
    * @returns {TeriockEffect[]} Array of sustained expiration effects.
    */
   get sustainedExpirationEffects() {
-    return this.effectTypes.consequence?.filter((effect) => effect.system.sustainedExpiration) || [];
+    return (
+      this.effectTypes.consequence?.filter(
+        (effect) => effect.system.sustainedExpiration,
+      ) || []
+    );
   }
 
   /**
@@ -83,7 +99,9 @@ export default class TeriockActor extends BaseTeriockActor {
     /** @type {CompendiumPacks} */
     const packs = game.packs;
     const essentialPack = packs.get("teriock.essentials");
-    const basicAbilities = await foundry.utils.fromUuid(essentialPack?.index.getName("Basic Abilities").uuid);
+    const basicAbilities = await foundry.utils.fromUuid(
+      essentialPack?.index.getName("Basic Abilities").uuid,
+    );
     const createdElderSorceries = await foundry.utils.fromUuid(
       essentialPack?.index.getName("Created Elder Sorceries").uuid,
     );
@@ -91,13 +109,23 @@ export default class TeriockActor extends BaseTeriockActor {
       essentialPack?.index.getName("Learned Elder Sorceries").uuid,
     );
     const classPack = packs.get("teriock.classes");
-    const journeyman = await foundry.utils.fromUuid(classPack?.index.getName("Journeyman").uuid);
+    const journeyman = await foundry.utils.fromUuid(
+      classPack?.index.getName("Journeyman").uuid,
+    );
     const equipmentPack = packs.get("teriock.equipment");
-    const foot = await foundry.utils.fromUuid(equipmentPack?.index.getName("Foot").uuid);
-    const hand = await foundry.utils.fromUuid(equipmentPack?.index.getName("Hand").uuid);
-    const mouth = await foundry.utils.fromUuid(equipmentPack?.index.getName("Mouth").uuid);
+    const foot = await foundry.utils.fromUuid(
+      equipmentPack?.index.getName("Foot").uuid,
+    );
+    const hand = await foundry.utils.fromUuid(
+      equipmentPack?.index.getName("Hand").uuid,
+    );
+    const mouth = await foundry.utils.fromUuid(
+      equipmentPack?.index.getName("Mouth").uuid,
+    );
     const speciesPack = packs.get("teriock.species");
-    const human = await foundry.utils.fromUuid(speciesPack?.index.getName("Human").uuid);
+    const human = await foundry.utils.fromUuid(
+      speciesPack?.index.getName("Human").uuid,
+    );
     for (const actor of documents) {
       actor.updateSource({
         items: [
@@ -122,7 +150,9 @@ export default class TeriockActor extends BaseTeriockActor {
   prepareDerivedData() {
     super.prepareDerivedData();
     this.itemKeys = {
-      equipment: new Set(this.itemTypes?.equipment.map((e) => toCamelCase(e.name))),
+      equipment: new Set(
+        this.itemTypes?.equipment.map((e) => toCamelCase(e.name)),
+      ),
       power: new Set(this.itemTypes?.power.map((e) => toCamelCase(e.name))),
       rank: new Set(this.itemTypes?.rank.map((e) => toCamelCase(e.name))),
     };
@@ -142,21 +172,36 @@ export default class TeriockActor extends BaseTeriockActor {
     /** @type {CompendiumPacks} */
     const packs = game.packs;
     const classPack = packs.get("teriock.classes");
-    if (embeddedName === "Item" && data.find((d) => d.type === "rank" && d.system?.archetype === "mage")) {
+    if (
+      embeddedName === "Item" &&
+      data.find((d) => d.type === "rank" && d.system?.archetype === "mage")
+    ) {
       if (!this.itemKeys?.power.has("mage")) {
-        const mage = await foundry.utils.fromUuid(classPack?.index.getName("Mage").uuid);
+        const mage = await foundry.utils.fromUuid(
+          classPack?.index.getName("Mage").uuid,
+        );
         data.push(mage.toObject());
       }
     }
-    if (embeddedName === "Item" && data.find((d) => d.type === "rank" && d.system?.archetype === "semi")) {
+    if (
+      embeddedName === "Item" &&
+      data.find((d) => d.type === "rank" && d.system?.archetype === "semi")
+    ) {
       if (!this.itemKeys?.power.has("semi")) {
-        const semi = await foundry.utils.fromUuid(classPack?.index.getName("Semi").uuid);
+        const semi = await foundry.utils.fromUuid(
+          classPack?.index.getName("Semi").uuid,
+        );
         data.push(semi.toObject());
       }
     }
-    if (embeddedName === "Item" && data.find((d) => d.type === "rank" && d.system?.archetype === "warrior")) {
+    if (
+      embeddedName === "Item" &&
+      data.find((d) => d.type === "rank" && d.system?.archetype === "warrior")
+    ) {
       if (!this.itemKeys?.power.has("warrior")) {
-        const warrior = await foundry.utils.fromUuid(classPack?.index.getName("Warrior").uuid);
+        const warrior = await foundry.utils.fromUuid(
+          classPack?.index.getName("Warrior").uuid,
+        );
         data.push(warrior.toObject());
       }
     }
@@ -175,14 +220,21 @@ export default class TeriockActor extends BaseTeriockActor {
    */
   async deleteEmbeddedDocuments(embeddedName, ids = [], operation = {}) {
     if (embeddedName === "Item") {
-      const ranksBeingDeleted = this.itemTypes?.rank?.filter((i) => ids.includes(i.id)) ?? [];
-      const archetypesDeleted = new Set(ranksBeingDeleted.map((i) => i.system?.archetype).filter(Boolean));
+      const ranksBeingDeleted =
+        this.itemTypes?.rank?.filter((i) => ids.includes(i.id)) ?? [];
+      const archetypesDeleted = new Set(
+        ranksBeingDeleted.map((i) => i.system?.archetype).filter(Boolean),
+      );
       for (const archetype of ["mage", "semi", "warrior"]) {
         if (!archetypesDeleted.has(archetype)) continue;
-        const remaining = this.itemTypes?.rank?.some((i) => i.system?.archetype === archetype && !ids.includes(i.id));
+        const remaining = this.itemTypes?.rank?.some(
+          (i) => i.system?.archetype === archetype && !ids.includes(i.id),
+        );
         if (!remaining) {
           const powerName = rankOptions[archetype].name;
-          const powerItem = this.itemTypes?.power?.find((i) => i.name === powerName);
+          const powerItem = this.itemTypes?.power?.find(
+            (i) => i.name === powerName,
+          );
           if (powerItem && !ids.includes(powerItem.id)) ids.push(powerItem.id);
         }
       }
@@ -512,7 +564,9 @@ export default class TeriockActor extends BaseTeriockActor {
    * @returns {Promise<void>}
    */
   async useAbility(abilityName, options = {}) {
-    const abilities = Array.from(this.allApplicableEffects()).filter((i) => i.type === "ability");
+    const abilities = Array.from(this.allApplicableEffects()).filter(
+      (i) => i.type === "ability",
+    );
     /** @type TeriockAbility */
     const ability = abilities.find((i) => i.name === abilityName);
     if (ability) {

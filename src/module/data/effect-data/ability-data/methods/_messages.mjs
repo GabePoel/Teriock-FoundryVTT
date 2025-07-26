@@ -45,7 +45,9 @@ export function _messageParts(abilityData) {
         ref.executionTime[src.maneuver][src.executionTime],
         ref.piercing[src.piercing],
         ref.delivery[src.delivery.base],
-        src.interaction === "feat" ? ref.featSaveAttribute[src.featSaveAttribute] : "",
+        src.interaction === "feat"
+          ? ref.featSaveAttribute[src.featSaveAttribute]
+          : "",
         ref.interaction[src.interaction],
       ],
     },
@@ -53,7 +55,9 @@ export function _messageParts(abilityData) {
       icon: "fa-crosshairs-simple",
       label: "Targeting",
       wrappers: [
-        ["missile", "cone", "sight", "aura"].includes(src.delivery.base) ? src.range + " ft" : "",
+        ["missile", "cone", "sight", "aura"].includes(src.delivery.base)
+          ? src.range + " ft"
+          : "",
         src.targets.map((target) => ref.targets[target]).join(", "),
         src.duration,
       ],
@@ -62,10 +66,16 @@ export function _messageParts(abilityData) {
       icon: "fa-expand",
       label: "Expansion",
       wrappers: [
-        ["detonate", "ripple"].includes(src.expansion) ? ref.attribute[src.expansionSaveAttribute] : "",
+        ["detonate", "ripple"].includes(src.expansion)
+          ? ref.attribute[src.expansionSaveAttribute]
+          : "",
         ref.expansion[src.expansion],
-        src.expansionRange?.includes(",") ? src.expansionRange.split(",")[0] : [src.expansionRange],
-        src.expansionRange?.includes(",") ? src.expansionRange.split(",")[1] : [src.expansionRange],
+        src.expansionRange?.includes(",")
+          ? src.expansionRange.split(",")[0]
+          : [src.expansionRange],
+        src.expansionRange?.includes(",")
+          ? src.expansionRange.split(",")[1]
+          : [src.expansionRange],
       ],
     },
     {
@@ -122,7 +132,9 @@ export function _messageParts(abilityData) {
       elderSorceryElementString = `${elderSorceryElements[0]} and ${elderSorceryElements[1]}`;
     } else {
       elderSorceryElementString =
-        elderSorceryElements.slice(0, -1).join(", ") + ", and " + elderSorceryElements[elderSorceryElements.length - 1];
+        elderSorceryElements.slice(0, -1).join(", ") +
+        ", and " +
+        elderSorceryElements[elderSorceryElements.length - 1];
     }
   }
   const blocks = [

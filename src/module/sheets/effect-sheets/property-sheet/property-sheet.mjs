@@ -11,7 +11,9 @@ import { propertyContextMenu } from "./connections/_context-menus.mjs";
  * @property {TeriockProperty} document
  * @property {TeriockProperty} effect
  */
-export default class TeriockPropertySheet extends api.HandlebarsApplicationMixin(TeriockBaseEffectSheet) {
+export default class TeriockPropertySheet extends api.HandlebarsApplicationMixin(
+  TeriockBaseEffectSheet,
+) {
   /**
    * Default options for the property sheet.
    * @type {object}
@@ -31,7 +33,8 @@ export default class TeriockPropertySheet extends api.HandlebarsApplicationMixin
    */
   static PARTS = {
     all: {
-      template: "systems/teriock/src/templates/effect-templates/property-template/property-template.hbs",
+      template:
+        "systems/teriock/src/templates/effect-templates/property-template/property-template.hbs",
       scrollable: [".window-content", ".tsheet-page", ".ab-sheet-everything"],
     },
   };
@@ -47,6 +50,10 @@ export default class TeriockPropertySheet extends api.HandlebarsApplicationMixin
     await super._onRender(context, options);
     if (!this.editable) return;
     const propertyContextMenuOptions = propertyContextMenu(this.document);
-    this._connectContextMenu(".property-type-box", propertyContextMenuOptions, "click");
+    this._connectContextMenu(
+      ".property-type-box",
+      propertyContextMenuOptions,
+      "click",
+    );
   }
 }

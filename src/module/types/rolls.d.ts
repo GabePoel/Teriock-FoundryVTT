@@ -48,7 +48,7 @@ export type ConditionRollOptions = {
 export type CritRollOptions = {
   /** Go critical? */
   crit?: boolean;
-}
+};
 
 /**
  * Allowable dice values.

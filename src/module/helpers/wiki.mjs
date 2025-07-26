@@ -33,8 +33,7 @@ export async function fetchWikiPageContent(title) {
     const pages = data.query.pages;
     const page = Object.values(pages)[0];
 
-    const content = page.revisions?.[0]?.slots?.main["*"] || page.revisions?.[0]["*"];
-    return content;
+    return page.revisions?.[0]?.slots?.main["*"] || page.revisions?.[0]["*"];
   } catch (error) {
     console.error("Error fetching page:", title, error);
   }

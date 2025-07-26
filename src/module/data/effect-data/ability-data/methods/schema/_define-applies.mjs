@@ -1,7 +1,10 @@
 const { fields } = foundry.data;
 import { tradecraftOptions } from "../../../../../helpers/constants/tradecraft-options.mjs";
 import { mergeLevel } from "../../../../../helpers/utils.mjs";
-import { TeriockArrayField, TeriockRecordField } from "../../../../shared/fields.mjs";
+import {
+  TeriockArrayField,
+  TeriockRecordField,
+} from "../../../../shared/fields.mjs";
 import {
   combatExpirationMethodField,
   combatExpirationSourceTypeField,

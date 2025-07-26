@@ -13,7 +13,9 @@ export default class DetectionModeMaterialMaterial extends TeriockDetectionMode 
     const src = visionSource.object.document;
     if (target instanceof Token) {
       const tgt = /** @type{TeriockToken} */ target.document;
-      if (!(!src.hasStatusEffect("ethereal") && !tgt.hasStatusEffect("ethereal"))) {
+      if (
+        !(!src.hasStatusEffect("ethereal") && !tgt.hasStatusEffect("ethereal"))
+      ) {
         return false;
       }
     }

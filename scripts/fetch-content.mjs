@@ -25,8 +25,12 @@ const writeModuleFile = (fileName, exportName, entries) => {
         `    id: ${JSON.stringify(key)},\n` +
         `    img: ${JSON.stringify(`systems/teriock/assets/${exportName}/${key}.svg`)},\n` +
         (value._id ? `    _id: ${JSON.stringify(value._id)},\n` : "") +
-        (value.statuses ? `    statuses: ${JSON.stringify(value.statuses)},\n` : "") +
-        (value.changes ? `    changes: ${JSON.stringify(value.changes)},\n` : "") +
+        (value.statuses
+          ? `    statuses: ${JSON.stringify(value.statuses)},\n`
+          : "") +
+        (value.changes
+          ? `    changes: ${JSON.stringify(value.changes)},\n`
+          : "") +
         (value.type ? `    type: ${JSON.stringify(value.type)},\n` : "") +
         `    system: {\n      description: ${JSON.stringify(value.content)}\n    },\n` +
         `    content: ${JSON.stringify(value.content)}\n  },`,
@@ -54,7 +58,9 @@ const fetchContent = async (map, namespace, staticId, statuses, type) => {
     if (html) {
       const dom = new JSDOM(html);
       const document = dom.window.document;
-      document.querySelectorAll(".ability-sub-container").forEach((el) => el.remove());
+      document
+        .querySelectorAll(".ability-sub-container")
+        .forEach((el) => el.remove());
 
       results[key] = {
         name,
@@ -80,13 +86,17 @@ const fetchContent = async (map, namespace, staticId, statuses, type) => {
             .map((s) => s.trim())
             .filter(Boolean);
         }
-        const changesMetadata = document.querySelectorAll('.metadata[data-type="change"]');
+        const changesMetadata = document.querySelectorAll(
+          '.metadata[data-type="change"]',
+        );
         console.log(changesMetadata);
         changesMetadata.forEach((change) => {
           const changeKey = change.getAttribute("data-key");
           let changeValueRaw = change.getAttribute("data-value");
           let changeValue =
-            !isNaN(changeValueRaw) && changeValueRaw.trim() !== "" ? Number(changeValueRaw) : changeValueRaw;
+            !isNaN(changeValueRaw) && changeValueRaw.trim() !== ""
+              ? Number(changeValueRaw)
+              : changeValueRaw;
           console.log(changeKey);
           results[key].changes.push({
             key: changeKey,
@@ -160,8 +170,22 @@ const run = async () => {
       },
     ];
 
-    for (const { data, namespace, exportName, file, staticId, statuses, type } of datasets) {
-      const content = await fetchContent(data, namespace, staticId, statuses, type);
+    for (const {
+      data,
+      namespace,
+      exportName,
+      file,
+      staticId,
+      statuses,
+      type,
+    } of datasets) {
+      const content = await fetchContent(
+        data,
+        namespace,
+        staticId,
+        statuses,
+        type,
+      );
       writeModuleFile(file, exportName, content);
     }
   } catch (err) {

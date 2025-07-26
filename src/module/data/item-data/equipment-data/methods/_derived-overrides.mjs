@@ -5,7 +5,8 @@
  * @param {string} property - The property name to check overrides for
  * @param {function} getInitialValue - Function to extract initial value from equipmentData
  * @param {function} combineValues - Function to combine current and override values
- * @param {function|null} applyUpgrade - Function to apply upgrade values (addition for numbers, concatenation for strings, etc.)
+ * @param {function|null} applyUpgrade - Function to apply upgrade values (addition for numbers, concatenation for
+ *   strings, etc.)
  * @returns {any}
  */
 function _deriveEquipmentProperty(
@@ -89,7 +90,7 @@ export function _derivedAv0(equipmentData) {
       "av0",
       (data) => data.parent.effectKeys?.property?.has("av0"),
       (current, override) => override || current,
-      null // No upgrade logic needed for booleans
+      null, // No upgrade logic needed for booleans
     ) || _derivedUb(equipmentData)
   );
 }
@@ -106,7 +107,7 @@ export function _derivedUb(equipmentData) {
     "ub",
     (data) => data.parent.effectKeys?.property?.has("ub"),
     (current, override) => override || current,
-    null // No upgrade logic needed for booleans
+    null, // No upgrade logic needed for booleans
   );
 }
 
@@ -122,7 +123,7 @@ export function _derivedAv(equipmentData) {
     "av",
     (data) => data.av,
     (current, override) => Math.max(override || 0, current),
-    (current, upgrade) => current + (upgrade || 0) // Addition for numbers
+    (current, upgrade) => current + (upgrade || 0), // Addition for numbers
   );
 }
 
@@ -138,13 +139,13 @@ export function _derivedBv(equipmentData) {
     "bv",
     (data) => data.bv,
     (current, override) => Math.max(override || 0, current),
-    (current, upgrade) => current + (upgrade || 0) // Addition for numbers
+    (current, upgrade) => current + (upgrade || 0), // Addition for numbers
   );
 }
 
 /**
  * Helper function to format string upgrades with appropriate operators
- * 
+ *
  * @param {string} current - Current value
  * @param {string} upgrade - Upgrade value
  * @returns {string}
@@ -152,11 +153,11 @@ export function _derivedBv(equipmentData) {
 function _formatStringUpgrade(current, upgrade) {
   if (!upgrade) return current;
 
-  if (upgrade.startsWith('-')) {
+  if (upgrade.startsWith("-")) {
     return `${current} - ${upgrade.slice(1)}`;
-  } else if (upgrade.startsWith('*')) {
+  } else if (upgrade.startsWith("*")) {
     return `${current} * ${upgrade.slice(1)}`;
-  } else if (upgrade.startsWith('/')) {
+  } else if (upgrade.startsWith("/")) {
     return `${current} / ${upgrade.slice(1)}`;
   } else {
     return `${current} + ${upgrade}`;
@@ -175,7 +176,7 @@ export function _derivedDamage(equipmentData) {
     "damage",
     (data) => data.damage,
     (current, override) => override || current,
-    (current, upgrade) => _formatStringUpgrade(current, upgrade) // String concatenation with operators
+    (current, upgrade) => _formatStringUpgrade(current, upgrade), // String concatenation with operators
   );
 }
 
@@ -191,6 +192,6 @@ export function _derivedTwoHandedDamage(equipmentData) {
     "twoHandedDamage",
     (data) => data.twoHandedDamage,
     (current, override) => override || current,
-    (current, upgrade) => _formatStringUpgrade(current, upgrade) // String concatenation with operators
+    (current, upgrade) => _formatStringUpgrade(current, upgrade), // String concatenation with operators
   );
 }

@@ -29,6 +29,7 @@ declare module "./action-handler.mjs" {
     actors: TeriockActor[];
 
     primaryAction(): Promise<void>;
+
     secondaryAction(): Promise<void>;
   }
 }

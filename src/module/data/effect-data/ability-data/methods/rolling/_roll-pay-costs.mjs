@@ -14,10 +14,16 @@ export async function _payCosts(rollConfig) {
     updates["system.attackPenalty"] = actor.system.attackPenalty - 3;
   }
   if (mpSpent > 0) {
-    updates["system.mp.value"] = Math.max(actor.system.mp.value - mpSpent, actor.system.mp.min ?? 0);
+    updates["system.mp.value"] = Math.max(
+      actor.system.mp.value - mpSpent,
+      actor.system.mp.min ?? 0,
+    );
   }
   if (hpSpent > 0) {
-    updates["system.mp.value"] = Math.max(actor.system.hp.value - hpSpent, actor.system.hp.min ?? 0);
+    updates["system.mp.value"] = Math.max(
+      actor.system.hp.value - hpSpent,
+      actor.system.hp.min ?? 0,
+    );
   }
   if (gpSpent > 0) {
     await actor.takePay(gpSpent);

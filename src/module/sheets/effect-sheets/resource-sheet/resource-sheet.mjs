@@ -11,7 +11,9 @@ import { callbackContextMenu } from "./connections/_context-menus.mjs";
  * @property {TeriockResource} document
  * @property {TeriockResource} effect
  */
-export default class TeriockResourceSheet extends api.HandlebarsApplicationMixin(TeriockBaseEffectSheet) {
+export default class TeriockResourceSheet extends api.HandlebarsApplicationMixin(
+  TeriockBaseEffectSheet,
+) {
   /**
    * Default options for the resource sheet.
    * @type {object}
@@ -31,7 +33,8 @@ export default class TeriockResourceSheet extends api.HandlebarsApplicationMixin
    */
   static PARTS = {
     all: {
-      template: "systems/teriock/src/templates/effect-templates/resource-template/resource-template.hbs",
+      template:
+        "systems/teriock/src/templates/effect-templates/resource-template/resource-template.hbs",
       scrollable: [".window-content", ".tsheet-page", ".ab-sheet-everything"],
     },
   };
@@ -43,6 +46,10 @@ export default class TeriockResourceSheet extends api.HandlebarsApplicationMixin
    */
   async _onRender(options, context) {
     await super._onRender(options, context);
-    this._connectContextMenu(".function-box", callbackContextMenu(this.document), "click");
+    this._connectContextMenu(
+      ".function-box",
+      callbackContextMenu(this.document),
+      "click",
+    );
   }
 }

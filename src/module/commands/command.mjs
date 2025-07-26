@@ -53,7 +53,9 @@ export default class TeriockCommand {
    */
   async execute({ args, chatData, actors }) {
     if (this.requiresTarget && (!actors || actors.length === 0)) {
-      ui.notifications.warn(`The "${this.id}" command requires at least one targeted token.`);
+      ui.notifications.warn(
+        `The "${this.id}" command requires at least one targeted token.`,
+      );
       return;
     }
 

@@ -18,7 +18,10 @@ export function _prepareAttributes(actorData) {
   const str = attributes.str.value;
   const strFactor = size < 5 ? str : str + Math.pow(size - 5, 2);
   const base = 65 + 20 * strFactor;
-  actorData.movementSpeed.value = Math.max(30 + 10 * mov + actorData.movementSpeed.base, 0);
+  actorData.movementSpeed.value = Math.max(
+    30 + 10 * mov + actorData.movementSpeed.base,
+    0,
+  );
   actorData.carryingCapacity = {
     light: base,
     heavy: base * 2,
@@ -115,7 +118,9 @@ export function _preparePresence(system) {
 function _renderDieBox(rankData, type, dieProp, spent) {
   const iconClass = spent ? "fa-light" : "fa-solid";
   const rollClass = spent ? "rolled" : "unrolled";
-  const action = spent ? "" : `data-action='roll${type === "hit" ? "Hit" : "Mana"}Die'`;
+  const action = spent
+    ? ""
+    : `data-action='roll${type === "hit" ? "Hit" : "Mana"}Die'`;
   return `
     <div
       class="thover die-box ${rollClass}"

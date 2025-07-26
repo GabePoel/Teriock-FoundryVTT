@@ -6,7 +6,10 @@
  * @returns {Promise<void>}
  */
 export async function _takeAwaken(actorData) {
-  if (actorData.parent.statuses.has("unconscious") && !actorData.parent.statuses.has("dead")) {
+  if (
+    actorData.parent.statuses.has("unconscious") &&
+    !actorData.parent.statuses.has("dead")
+  ) {
     if (actorData.hp.value <= 0) {
       await actorData.parent.update({ "system.hp.value": 1 });
     }
@@ -14,7 +17,9 @@ export async function _takeAwaken(actorData) {
       await actorData.parent.toggleStatusEffect("asleep", { active: false });
     }
     if (actorData.parent.statuses.has("unconscious")) {
-      await actorData.parent.toggleStatusEffect("unconscious", { active: false });
+      await actorData.parent.toggleStatusEffect("unconscious", {
+        active: false,
+      });
     }
   }
 }

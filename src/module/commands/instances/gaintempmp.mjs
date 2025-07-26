@@ -19,7 +19,9 @@ export const gaintempmp = new TeriockCommand(
       await actor.takeGainTempMp(amount);
     }
 
-    ui.notifications.info(`Gained ${amount} temporary MP on ${actors.length} target(s).`);
+    ui.notifications.info(
+      `Gained ${amount} temporary MP on ${actors.length} target(s).`,
+    );
   },
   {
     aliases: ["gtmp"],

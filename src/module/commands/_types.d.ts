@@ -9,7 +9,12 @@ declare module "./command.mjs" {
     category: string;
     requiresTarget: boolean;
 
-    constructor(id: string, docs: string, callback: Teriock.CommandCallback, options?: Teriock.CommandOptions);
+    constructor(
+      id: string,
+      docs: string,
+      callback: Teriock.CommandCallback,
+      options?: Teriock.CommandOptions,
+    );
 
     execute(context: Teriock.CommandExecuteContext): Promise<void>;
   }

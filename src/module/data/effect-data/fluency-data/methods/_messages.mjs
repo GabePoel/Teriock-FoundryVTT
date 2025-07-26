@@ -14,7 +14,10 @@ export function _messageParts(fluencyData) {
       icon: "fa-" + ref[src.field].tradecrafts[src.tradecraft].icon,
       label: "Tradecraft",
       /** @type string[] */
-      wrappers: [ref[src.field].name, ref[src.field].tradecrafts[src.tradecraft].name],
+      wrappers: [
+        ref[src.field].name,
+        ref[src.field].tradecrafts[src.tradecraft].name,
+      ],
     },
   ];
   const blocks = [

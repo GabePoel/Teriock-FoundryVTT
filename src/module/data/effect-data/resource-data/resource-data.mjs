@@ -10,7 +10,9 @@ import { _roll } from "./methods/_rolling.mjs";
  *
  * @extends {TeriockBaseEffectData}
  */
-export default class TeriockResourceData extends ConsumableDataMixin(TeriockBaseEffectData) {
+export default class TeriockResourceData extends ConsumableDataMixin(
+  TeriockBaseEffectData,
+) {
   /**
    * Metadata for this effect.
    *

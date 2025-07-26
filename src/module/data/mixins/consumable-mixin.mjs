@@ -33,9 +33,15 @@ export default (Base) => {
         if (!this.maxQuantity.raw) {
           this.maxQuantity.derived = Infinity;
         } else {
-          this.maxQuantity.derived = smartEvaluateSync(this.maxQuantity.raw, this.parent);
+          this.maxQuantity.derived = smartEvaluateSync(
+            this.maxQuantity.raw,
+            this.parent,
+          );
         }
-        this.quantity = Math.max(Math.min(this.maxQuantity.derived, this.quantity), 0);
+        this.quantity = Math.max(
+          Math.min(this.maxQuantity.derived, this.quantity),
+          0,
+        );
       }
     }
 

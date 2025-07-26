@@ -2,7 +2,14 @@ const { DetectionMode } = foundry.canvas.perception;
 const { Token } = foundry.canvas.placeables;
 
 export default class TeriockDetectionMode extends DetectionMode {
-  static BLOCKING_SRC_STATUS_EFFECTS = ["blind", "down", "frozen", "asleep", "unconscious", "dead"];
+  static BLOCKING_SRC_STATUS_EFFECTS = [
+    "blind",
+    "down",
+    "frozen",
+    "asleep",
+    "unconscious",
+    "dead",
+  ];
   static BLOCKING_TGT_STATUS_EFFECTS = ["invisible", "hidden"];
 
   /**

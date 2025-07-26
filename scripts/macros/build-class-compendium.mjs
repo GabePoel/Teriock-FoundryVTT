@@ -1,8 +1,13 @@
-const classPack = /** @type {CompendiumCollection} */ game.packs.get("teriock.classes");
-const classFolders = /** @type {CompendiumCollection<Folder>} */ classPack.folders;
+const classPack = /** @type {CompendiumCollection} */ (
+  /** @type {WorldCollection<CompendiumCollection>} */ game.packs
+).get("teriock.classes");
+const classFolders =
+  /** @type {CompendiumCollection<Folder>} */ classPack.folders;
 
 /** @type {object} */
-const progress = ui.notifications.info(`Pulling classes from wiki.`, { progress: true });
+const progress = ui.notifications.info(`Pulling classes from wiki.`, {
+  progress: true,
+});
 let pct = 0;
 
 for (const [a, ao] of Object.entries(CONFIG.TERIOCK.rankOptions)) {
@@ -77,7 +82,7 @@ for (const [a, ao] of Object.entries(CONFIG.TERIOCK.rankOptions)) {
         }
         await rank.system.wikiPull({
           notify: false,
-        })
+        });
       } catch (e) {
         console.error(`Error creating or processing '${name}':`, e);
       }

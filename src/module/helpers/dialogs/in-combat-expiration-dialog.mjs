@@ -23,7 +23,10 @@ export default async function inCombatExpirationDialog(
       rejectClose: false,
     });
     if (expire) await effect.system.expire();
-  } else if (effect.system.expirations.combat.what.type === "rolled" || forceDialog) {
+  } else if (
+    effect.system.expirations.combat.what.type === "rolled" ||
+    forceDialog
+  ) {
     const contentHtml = document.createElement("div");
     if (effect.system.expirations.description) {
       const descriptionElement = document.createElement("fieldset");

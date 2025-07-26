@@ -4,13 +4,13 @@ import WikiDataMixin from "../../mixins/wiki-mixin.mjs";
 import TeriockBaseItemData from "../base-item-data/base-item-data.mjs";
 import * as attunement from "./methods/_attunement.mjs";
 import * as deriving from "./methods/_data-deriving.mjs";
+import * as overrides from "./methods/_derived-overrides.mjs";
 import * as identifying from "./methods/_identifying.mjs";
 import * as messages from "./methods/_messages.mjs";
 import * as migrate from "./methods/_migrate-data.mjs";
 import * as parsing from "./methods/_parsing.mjs";
 import * as rolling from "./methods/_rolling.mjs";
 import * as schema from "./methods/_schema.mjs";
-import * as overrides from "./methods/_derived-overrides.mjs";
 
 /**
  * Equipment-specific item data model.
@@ -20,7 +20,9 @@ import * as overrides from "./methods/_derived-overrides.mjs";
  *
  * @extends {TeriockBaseItemData}
  */
-export default class TeriockEquipmentData extends WikiDataMixin(ConsumableDataMixin(TeriockBaseItemData)) {
+export default class TeriockEquipmentData extends WikiDataMixin(
+  ConsumableDataMixin(TeriockBaseItemData),
+) {
   /** @inheritDoc */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
@@ -101,7 +103,10 @@ export default class TeriockEquipmentData extends WikiDataMixin(ConsumableDataMi
    * @returns {boolean}
    */
   get canEquip() {
-    return ((this.consumable && this.quantity >= 1) || !this.consumable) && !this.isEquipped;
+    return (
+      ((this.consumable && this.quantity >= 1) || !this.consumable) &&
+      !this.isEquipped
+    );
   }
 
   /**
@@ -110,7 +115,10 @@ export default class TeriockEquipmentData extends WikiDataMixin(ConsumableDataMi
    * @returns {boolean}
    */
   get canUnequip() {
-    return ((this.consumable && this.quantity >= 1) || !this.consumable) && this.isEquipped;
+    return (
+      ((this.consumable && this.quantity >= 1) || !this.consumable) &&
+      this.isEquipped
+    );
   }
 
   /**

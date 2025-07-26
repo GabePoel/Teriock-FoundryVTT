@@ -1,4 +1,5 @@
-const { ActorSheetV2, ItemSheetV2, ActiveEffectConfig } = foundry.applications.sheets;
+const { ActorSheetV2, ItemSheetV2, ActiveEffectConfig } =
+  foundry.applications.sheets;
 import TeriockSheet from "./mixins/sheet-mixin.mjs";
 
 /**

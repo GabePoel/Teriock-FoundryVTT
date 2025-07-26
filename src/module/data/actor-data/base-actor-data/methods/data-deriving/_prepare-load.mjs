@@ -24,7 +24,9 @@ export function _prepareEncumbrance(actorData) {
   }
   const hasCumbersome = actor.itemTypes.equipment.some(
     (item) =>
-      item.system.equipped && Array.isArray(item.system.properties) && item.system.properties.includes("cumbersome"),
+      item.system.equipped &&
+      Array.isArray(item.system.properties) &&
+      item.system.properties.includes("cumbersome"),
   );
   if (hasCumbersome) {
     encumbranceLevel += 1;

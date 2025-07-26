@@ -1,1 +1,8 @@
-export type HackableBodyPart = "arm" | "leg" | "body" | "ear" | "eye" | "mouth" | "nose";
+export type HackableBodyPart =
+  | "arm"
+  | "leg"
+  | "body"
+  | "ear"
+  | "eye"
+  | "mouth"
+  | "nose";

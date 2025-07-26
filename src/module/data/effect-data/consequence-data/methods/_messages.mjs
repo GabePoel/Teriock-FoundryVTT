@@ -44,7 +44,7 @@ export function _messageParts(consequenceData) {
     {
       title: "Source Description",
       text: consequenceData.sourceDescription,
-    }
+    },
   ];
   addAbilitiesBlock(consequenceData.parent.subs, blocks);
   return {

@@ -29,9 +29,18 @@ export async function _buildButtons(rollConfig) {
   }
 
   // Apply Effect Button
-  const normalEffectData = await _generateEffect(abilityData, abilityData.actor, useData.modifiers.heightened);
+  const normalEffectData = await _generateEffect(
+    abilityData,
+    abilityData.actor,
+    useData.modifiers.heightened,
+  );
   const normalEffectJSON = JSON.stringify(normalEffectData);
-  const critEffectData = await _generateEffect(abilityData, abilityData.actor, useData.modifiers.heightened, true);
+  const critEffectData = await _generateEffect(
+    abilityData,
+    abilityData.actor,
+    useData.modifiers.heightened,
+    true,
+  );
   const critEffectJSON = JSON.stringify(critEffectData);
   if (normalEffectData || critEffectData) {
     buttons.push({
@@ -48,7 +57,8 @@ export async function _buildButtons(rollConfig) {
   // Standard Damage Button
   if (
     abilityData.applies.base.standardDamage ||
-    (abilityData.parent.isProficient && abilityData.applies.proficient.standardDamage) ||
+    (abilityData.parent.isProficient &&
+      abilityData.applies.proficient.standardDamage) ||
     (abilityData.parent.isFluent && abilityData.applies.fluent.standardDamage)
   ) {
     buttons.push({

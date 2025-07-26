@@ -9,5 +9,8 @@ import { smartEvaluateSync } from "../../../../helpers/utils.mjs";
  * @private
  */
 export function _prepareDerivedData(system) {
-  system.tier.derived = Math.max(0, smartEvaluateSync(system.tier.raw, system.parent));
+  system.tier.derived = Math.max(
+    0,
+    smartEvaluateSync(system.tier.raw, system.parent),
+  );
 }

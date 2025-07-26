@@ -12,7 +12,9 @@ import { _roll } from "./methods/_rolling.mjs";
  *
  * @extends {TeriockBaseEffectData}
  */
-export default class TeriockFluencyData extends WikiDataMixin(TeriockBaseEffectData) {
+export default class TeriockFluencyData extends WikiDataMixin(
+  TeriockBaseEffectData,
+) {
   /**
    * Metadata for this effect.
    *

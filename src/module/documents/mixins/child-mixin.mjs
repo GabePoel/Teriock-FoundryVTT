@@ -49,7 +49,11 @@ export default (BaseDocument) => {
      * @param {string[]} args - Additional arguments to pass to the hook.
      */
     hookCall(incant, args = []) {
-      incant = "ter." + incant + this.type.charAt(0).toUpperCase() + this.type.slice(1);
+      incant =
+        "teriock." +
+        incant +
+        this.type.charAt(0).toUpperCase() +
+        this.type.slice(1);
       Hooks.call(incant, this, ...args);
     }
 
@@ -59,6 +63,7 @@ export default (BaseDocument) => {
      * @returns {Promise<void>} Promise that resolves when the chat message is sent.
      */
     async chat() {
+      this.hookCall("chat");
       let content = await this.buildMessage();
       content = `<div class="teriock">${content}</div>`;
       await ChatMessage.create({
@@ -102,7 +107,6 @@ export default (BaseDocument) => {
      * @returns {Promise<void>} Promise that resolves when the use action is complete.
      */
     async use(options) {
-      this.hookCall("use");
       await this.system.use(options);
     }
 
@@ -113,8 +117,12 @@ export default (BaseDocument) => {
      */
     async duplicate() {
       const copy = foundry.utils.duplicate(this);
-      const copyDocument = await this.parent.createEmbeddedDocuments(this.documentName, [copy]);
+      const copyDocument = await this.parent.createEmbeddedDocuments(
+        this.documentName,
+        [copy],
+      );
       await this.parent.forceUpdate();
+      this.hookCall("duplicate", [this, copyDocument[0]]);
       return copyDocument[0];
     }
 
@@ -162,7 +170,7 @@ export default (BaseDocument) => {
      * @returns {Promise<void>} Promise that resolves when the wiki is opened.
      */
     async wikiOpen() {
-      await this.wikiPull();
+      ui.notifications.error(`There are no ${this.type} pages on the wiki.`);
     }
   };
 };

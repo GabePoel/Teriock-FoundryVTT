@@ -72,7 +72,9 @@ export function classContextMenu(rank) {
           });
         },
         condition: () => {
-          return foundry.utils.getProperty(rank.system, "archetype") === archetype;
+          return (
+            foundry.utils.getProperty(rank.system, "archetype") === archetype
+          );
         },
       };
       options.push(option);

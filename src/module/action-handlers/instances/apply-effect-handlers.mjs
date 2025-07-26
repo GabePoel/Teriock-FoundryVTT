@@ -35,7 +35,9 @@ export class ApplyEffectHandler extends ActionHandler {
       effectObj = this._toObj(this.dataset.crit);
     }
     for (const actor of this.actors) {
-      const foundEffects = actor.effects.filter((effect) => effect.name === effectObj.name);
+      const foundEffects = actor.effects.filter(
+        (effect) => effect.name === effectObj.name,
+      );
       for (const effect of foundEffects) {
         await effect.delete();
       }

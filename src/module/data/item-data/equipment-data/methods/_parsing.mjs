@@ -14,14 +14,27 @@ import { _override } from "./_overrides.mjs";
  * @private
  */
 export async function _parse(equipmentData, rawHTML) {
-  const validProperties = Object.values(CONFIG.TERIOCK.equipmentOptions.properties);
-  const validMaterialProperties = Object.values(CONFIG.TERIOCK.equipmentOptions.materialProperties);
-  const validMagicalProperties = Object.values(CONFIG.TERIOCK.equipmentOptions.magicalProperties);
-  const allValidProperties = [...validProperties, ...validMaterialProperties, ...validMagicalProperties, "Weapon"];
+  const validProperties = Object.values(
+    CONFIG.TERIOCK.equipmentOptions.properties,
+  );
+  const validMaterialProperties = Object.values(
+    CONFIG.TERIOCK.equipmentOptions.materialProperties,
+  );
+  const validMagicalProperties = Object.values(
+    CONFIG.TERIOCK.equipmentOptions.magicalProperties,
+  );
+  const allValidProperties = [
+    ...validProperties,
+    ...validMaterialProperties,
+    ...validMagicalProperties,
+    "Weapon",
+  ];
 
   // Remove existing properties
   const toRemove = [];
-  for (const effect of equipmentData.parent.transferredEffects.filter((e) => e.type === "property")) {
+  for (const effect of equipmentData.parent.transferredEffects.filter(
+    (e) => e.type === "property",
+  )) {
     if (allValidProperties.includes(effect.name)) {
       toRemove.push(effect._id);
     }
@@ -31,12 +44,18 @@ export async function _parse(equipmentData, rawHTML) {
   const q = (s) => doc.querySelector(s);
   const getValue = (s) => q(s)?.getAttribute("data-val");
   const getText = (s) => q(s)?.textContent.trim();
-  const getTextAll = (s) => Array.from(doc.querySelectorAll(s), (el) => el.textContent.trim());
+  const getTextAll = (s) =>
+    Array.from(doc.querySelectorAll(s), (el) => el.textContent.trim());
   const getHTML = (s) => q(s)?.innerHTML.trim();
 
-  const referenceEquipment = new Item({ name: "Reference Equipment", type: "equipment" });
+  const referenceEquipment = new Item({
+    name: "Reference Equipment",
+    type: "equipment",
+  });
   /** @type {Partial<TeriockEquipmentData>} */
-  const parameters = foundry.utils.deepClone(referenceEquipment.system).toObject();
+  const parameters = foundry.utils
+    .deepClone(referenceEquipment.system)
+    .toObject();
 
   // Parse damage
   const damageText = getText(".damage");
@@ -48,14 +67,15 @@ export async function _parse(equipmentData, rawHTML) {
 
   // Parse numeric and range values
   parameters.weight = cleanValue(getValue(".weight")) ?? parameters.weight;
-  parameters.shortRange = cleanValue(getText(".short-range")) ?? parameters.shortRange;
+  parameters.shortRange =
+    cleanValue(getText(".short-range")) ?? parameters.shortRange;
   parameters.range = cleanValue(getText(".normal-range")) ?? parameters.range;
   parameters.range = cleanValue(getText(".long-range")) ?? parameters.range;
   parameters.minStr = cleanValue(getValue(".min-str")) ?? parameters.minStr;
 
   // Parse arrays
   let equipmentClasses = new Set(getTextAll(".equipment-class"));
-  let properties = new Set(getTextAll(".property"))
+  let properties = new Set(getTextAll(".property"));
 
   // Add piercing property if present
   const piercing = getValue(".piercing");
@@ -67,10 +87,13 @@ export async function _parse(equipmentData, rawHTML) {
   parameters.bv = cleanValue(getValue(".bv")) || 0;
 
   // Special rules
-  parameters.specialRules = getHTML(".special-rules") ?? parameters.specialRules;
+  parameters.specialRules =
+    getHTML(".special-rules") ?? parameters.specialRules;
 
   // Sort and filter properties and equipment classes
-  parameters.equipmentClasses = new Set(toCamelCaseList(Array.from(equipmentClasses)));
+  parameters.equipmentClasses = new Set(
+    toCamelCaseList(Array.from(equipmentClasses)),
+  );
   const candidateProperties = toCamelCaseList(Array.from(properties));
 
   // Filter properties by config
@@ -79,7 +102,9 @@ export async function _parse(equipmentData, rawHTML) {
     ...Object.keys(CONFIG.TERIOCK.equipmentOptions.materialProperties),
     ...Object.keys(CONFIG.TERIOCK.equipmentOptions.magicalProperties),
   ];
-  const filteredProperties = candidateProperties.filter((p) => allowedProperties.includes(p));
+  const filteredProperties = candidateProperties.filter((p) =>
+    allowedProperties.includes(p),
+  );
   candidateProperties.length = 0;
   candidateProperties.push(...filteredProperties);
 
@@ -95,7 +120,10 @@ export async function _parse(equipmentData, rawHTML) {
 
   const oldImg = equipmentData.parent.img;
   let newImg = oldImg;
-  if (oldImg?.startsWith("systems/teriock/assets") || oldImg?.startsWith("icons/svg")) {
+  if (
+    oldImg?.startsWith("systems/teriock/assets") ||
+    oldImg?.startsWith("icons/svg")
+  ) {
     newImg = "systems/teriock/assets/searchable.svg";
     newImg = `systems/teriock/assets/equipment/${equipmentData.equipmentType?.toLowerCase().replace(/\s+/g, "-")}.svg`;
   }

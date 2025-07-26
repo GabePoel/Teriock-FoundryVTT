@@ -9,7 +9,7 @@ const { DialogV2 } = foundry.applications.api;
 export default async function hotbarDropDialog(doc) {
   let macroType = "linked";
   if (doc.type === "ability") {
-  macroType = "general";
+    macroType = "general";
     try {
       await new DialogV2({
         window: { title: `Making ${doc.name} Macro` },

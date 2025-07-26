@@ -7,7 +7,15 @@ import TeriockDetectionMode from "./teriock-detection-mode.mjs";
  * - [Scent Seeing](https://wiki.teriock.com/index.php/Ability:Scent_Seeing)
  */
 export default class DetectionModeScentPerception extends TeriockDetectionMode {
-  static BLOCKING_SRC_STATUS_EFFECTS = ["down", "frozen", "asleep", "unconscious", "dead", "anosmatic", "ethereal"];
+  static BLOCKING_SRC_STATUS_EFFECTS = [
+    "down",
+    "frozen",
+    "asleep",
+    "unconscious",
+    "dead",
+    "anosmatic",
+    "ethereal",
+  ];
   static BLOCKING_TGT_STATUS_EFFECTS = ["odorless", "ethereal"];
 
   /** @override */

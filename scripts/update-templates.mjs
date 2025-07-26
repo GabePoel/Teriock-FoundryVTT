@@ -11,7 +11,15 @@ const actualDir = path.resolve(__dirname, "..", "src", "templates");
 // FOUNDY VTT virtual path (used in loadTemplates)
 const virtualBase = "systems/teriock/src/templates";
 
-const outputFile = path.resolve(__dirname, "..", "src", "module", "helpers", "startup", "register-templates.mjs");
+const outputFile = path.resolve(
+  __dirname,
+  "..",
+  "src",
+  "module",
+  "helpers",
+  "startup",
+  "register-templates.mjs",
+);
 
 function getHandlebarsFiles(dir, fileList = []) {
   if (!fs.existsSync(dir)) {
@@ -28,7 +36,9 @@ function getHandlebarsFiles(dir, fileList = []) {
     if (stat.isDirectory()) {
       getHandlebarsFiles(fullPath, fileList);
     } else if (file.endsWith(".hbs")) {
-      const relativePath = path.relative(actualDir, fullPath).replace(/\\/g, "/");
+      const relativePath = path
+        .relative(actualDir, fullPath)
+        .replace(/\\/g, "/");
       const virtualPath = `${virtualBase}/${relativePath}`;
       fileList.push(`'${virtualPath}'`);
     }

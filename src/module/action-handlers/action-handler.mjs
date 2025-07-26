@@ -5,6 +5,13 @@
  */
 export default class ActionHandler {
   /**
+   * Name of action to connect to listeners.
+   *
+   * @type {string}
+   */
+  static ACTION = "";
+
+  /**
    * @param {MouseEvent} event
    * @param {HTMLElement} element
    */
@@ -17,9 +24,15 @@ export default class ActionHandler {
     const user = /** @type {TeriockUser} */ game.user;
 
     this.selectedTokens = /** @type {TeriockToken[]} */ tokenLayer.controlled;
-    this.selectedActors = /** @type {TeriockActor[]} */ this.selectedTokens.map(t => t.actor);
-    this.targetedTokens = /** @type {TeriockToken[]} */ Array.from(user.targets);
-    this.targetedActors = /** @type {TeriockActor[]} */ this.targetedTokens.map(t => t.actor);
+    this.selectedActors = /** @type {TeriockActor[]} */ this.selectedTokens.map(
+      (t) => t.actor,
+    );
+    this.targetedTokens = /** @type {TeriockToken[]} */ Array.from(
+      user.targets,
+    );
+    this.targetedActors = /** @type {TeriockActor[]} */ this.targetedTokens.map(
+      (t) => t.actor,
+    );
     this.tokens = this.selectedTokens;
     this.actors = this.selectedActors;
     if (event.ctrlKey) {
@@ -30,19 +43,12 @@ export default class ActionHandler {
     this.commonRollOptions = {
       advantage: event.altKey,
       disadvantage: event.shiftKey,
-    }
+    };
 
     this.critRollOptions = {
       crit: event.altKey,
-    }
+    };
   }
-
-  /**
-   * Name of action to connect to listeners.
-   *
-   * @type {string}
-   */
-  static ACTION = "";
 
   /**
    * Left-click action.

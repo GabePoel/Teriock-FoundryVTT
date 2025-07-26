@@ -1,8 +1,13 @@
-const essentialPack = /** @type {CompendiumCollection} */ game.packs.get("teriock.essentials");
-const essentialFolders = /** @type {CompendiumCollection<Folder>} */ essentialPack.folders;
+const essentialPack = /** @type {CompendiumCollection} */ (
+  /** @type {WorldCollection<CompendiumCollection>} */ game.packs
+).get("teriock.essentials");
+const essentialFolders =
+  /** @type {CompendiumCollection<Folder>} */ essentialPack.folders;
 
 const rawAbilitiesFolderName = "Raw Abilities";
-let rawAbilitiesFolder = /** @type {Folder} */ essentialFolders.getName(rawAbilitiesFolderName);
+let rawAbilitiesFolder = /** @type {Folder} */ essentialFolders.getName(
+  rawAbilitiesFolderName,
+);
 if (!rawAbilitiesFolder) {
   await Folder.create(
     {
@@ -16,11 +21,16 @@ if (!rawAbilitiesFolder) {
 }
 
 /** @type {object} */
-const progress = ui.notifications.info(`Pulling all abilities from wiki.`, { progress: true });
+const progress = ui.notifications.info(`Pulling all abilities from wiki.`, {
+  progress: true,
+});
 let pct = 0;
 
-let allAbilityPages = await game.teriock.api.wiki.fetchCategoryMembers("Abilities");
-allAbilityPages = allAbilityPages.filter((page) => page.title.includes("Ability:"));
+let allAbilityPages =
+  await game.teriock.api.wiki.fetchCategoryMembers("Abilities");
+allAbilityPages = allAbilityPages.filter((page) =>
+  page.title.includes("Ability:"),
+);
 for (const abilityPage of allAbilityPages) {
   const abilityName = abilityPage.title.split("Ability:")[1];
 
@@ -42,11 +52,18 @@ for (const abilityPage of allAbilityPages) {
       { pack: "teriock.essentials" },
     );
   } else {
-    abilityItem = /** @type {TeriockPower} */ await foundry.utils.fromUuid(abilityItem.uuid);
+    abilityItem = /** @type {TeriockPower} */ await foundry.utils.fromUuid(
+      abilityItem.uuid,
+    );
   }
-  let abilityEffect = /** @type {TeriockAbility} */ abilityItem.effects.getName(abilityName);
+  let abilityEffect =
+    /** @type {TeriockAbility} */ abilityItem.effects.getName(abilityName);
   if (!abilityEffect) {
-    abilityEffect = await game.teriock.api.create.ability(abilityItem, abilityName, { notify: false });
+    abilityEffect = await game.teriock.api.create.ability(
+      abilityItem,
+      abilityName,
+      { notify: false },
+    );
   } else {
     await abilityEffect.system.wikiPull({ notify: false });
   }

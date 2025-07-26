@@ -11,7 +11,9 @@ import { _messageParts } from "./methods/_messages.mjs";
  *
  * @extends {TeriockBaseEffectData}
  */
-export default class TeriockPropertyData extends WikiDataMixin(TeriockBaseEffectData) {
+export default class TeriockPropertyData extends WikiDataMixin(
+  TeriockBaseEffectData,
+) {
   /**
    * Metadata for this effect.
    *
@@ -41,7 +43,10 @@ export default class TeriockPropertyData extends WikiDataMixin(TeriockBaseEffect
    */
   static defineSchema() {
     return foundry.utils.mergeObject(super.defineSchema(), {
-      wikiNamespace: new fields.StringField({ initial: "Property", gmOnly: true }),
+      wikiNamespace: new fields.StringField({
+        initial: "Property",
+        gmOnly: true,
+      }),
       propertyType: new fields.StringField({ initial: "normal" }),
       damageType: new fields.StringField({ initial: "" }),
     });

@@ -1,11 +1,14 @@
-const equipmentPack = /** @type {CompendiumCollection} */ game.packs.get("teriock.equipment");
-const equipmentFolders = /** @type {CompendiumCollection<Folder>} */ equipmentPack.folders;
+const equipmentPack = /** @type {CompendiumCollection} */ (
+  /** @type {WorldCollection<CompendiumCollection>} */ game.packs
+).get("teriock.equipment");
+const equipmentFolders =
+  /** @type {CompendiumCollection<Folder>} */ equipmentPack.folders;
 const assignedProperties = ["Magelore", "Master Crafted", "Runic", "Silver"];
 
 const toCamelCase = (str) => {
   return str
     .toLowerCase()
-    .replace(/(?:^\w|[A-Z]|\b\w|\s+)/g, (match, index) =>
+    .replace(/^\w|[A-Z]|\b\w|\s+/g, (match, index) =>
       index === 0 ? match.toLowerCase() : match.trim().toUpperCase(),
     )
     .replace(/\s+/g, "");
@@ -35,7 +38,9 @@ const propertyMap = {
 };
 
 /** @type {object} */
-const progress = ui.notifications.info(`Pulling equipment from wiki.`, { progress: true });
+const progress = ui.notifications.info(`Pulling equipment from wiki.`, {
+  progress: true,
+});
 let pct = 0;
 
 const combinations = generateCombinations(assignedProperties);
@@ -47,8 +52,7 @@ combinations.sort((a, b) => {
 
 for (const combo of combinations) {
   const name = combo.join(" ") + " Equipment";
-  const camelProps = combo.map(toCamelCase);
-  propertyMap[name] = camelProps;
+  propertyMap[name] = combo.map(toCamelCase);
 }
 
 for (const [folderName, properties] of Object.entries(propertyMap)) {
@@ -68,7 +72,11 @@ for (const [folderName, properties] of Object.entries(propertyMap)) {
 
   for (const [e, eo] of Object.entries(CONFIG.TERIOCK.equipment)) {
     let generatedName =
-      properties.map((p) => assignedProperties.find((ap) => toCamelCase(ap) === p)).join(" ") + " " + eo;
+      properties
+        .map((p) => assignedProperties.find((ap) => toCamelCase(ap) === p))
+        .join(" ") +
+      " " +
+      eo;
     generatedName = generatedName.trim();
 
     const matches = equipmentPack.index.filter((e) => e.name === generatedName);
@@ -86,8 +94,14 @@ for (const [folderName, properties] of Object.entries(propertyMap)) {
       },
     };
 
-    pct += 1 / (Object.keys(CONFIG.TERIOCK.equipment).length * Object.keys(propertyMap).length);
-    progress.update({ pct: pct, message: `Pulling ${generatedName} from wiki.` });
+    pct +=
+      1 /
+      (Object.keys(CONFIG.TERIOCK.equipment).length *
+        Object.keys(propertyMap).length);
+    progress.update({
+      pct: pct,
+      message: `Pulling ${generatedName} from wiki.`,
+    });
 
     const TeriockItem = CONFIG.Item.documentClass;
     /** @type {TeriockEquipment} */

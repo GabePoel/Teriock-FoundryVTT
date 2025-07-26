@@ -42,11 +42,14 @@ function extractAbilityNames(metaData, attr) {
  */
 export async function _parse(rankData, rawHTML) {
   const { className, classRank, archetype } = rankData;
-  const classValue = CONFIG.TERIOCK.rankOptions[archetype].classes[className].name;
+  const classValue =
+    CONFIG.TERIOCK.rankOptions[archetype].classes[className].name;
   const toDelete = [];
 
   // Remove existing abilities
-  for (const effect of rankData.parent.transferredEffects.filter((e) => e.type === "ability")) {
+  for (const effect of rankData.parent.transferredEffects.filter(
+    (e) => e.type === "ability",
+  )) {
     toDelete.push(effect._id);
   }
 
@@ -78,7 +81,9 @@ export async function _parse(rankData, rawHTML) {
   }
 
   /** @type {object} */
-  const progress = ui.notifications.info(`Pulling Rank from wiki.`, { progress: true });
+  const progress = ui.notifications.info(`Pulling Rank from wiki.`, {
+    progress: true,
+  });
   let pct = 0;
   for (const abilityName of toCreate) {
     progress.update({ pct: pct, message: `Pulling ${abilityName} from wiki.` });

@@ -10,7 +10,9 @@ import TeriockBaseActorSheet from "../base-actor-sheet/base-actor-sheet.mjs";
  * @property {TeriockCharacter} actor
  * @property {TeriockCharacter} document
  */
-export default class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(TeriockBaseActorSheet) {
+export default class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(
+  TeriockBaseActorSheet,
+) {
   /**
    * Default options for the character sheet.
    * @type {object}
@@ -34,7 +36,8 @@ export default class TeriockCharacterSheet extends api.HandlebarsApplicationMixi
    */
   static PARTS = {
     all: {
-      template: "systems/teriock/src/templates/actor-templates/character-template/character-template.hbs",
+      template:
+        "systems/teriock/src/templates/actor-templates/character-template/character-template.hbs",
       scrollable: [".character-sidebar", ".character-tab-content"],
     },
   };

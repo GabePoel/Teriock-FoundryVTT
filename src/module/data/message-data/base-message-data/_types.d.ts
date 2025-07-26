@@ -13,5 +13,6 @@ export default interface TeriockBaseChatMessageSchema {
 
 declare module "./base-message-data.mjs" {
   /** Redundant declaration is needed for intellisense. */
-  export default interface TeriockBaseMessageData extends TeriockBaseChatMessageSchema {}
+  export default interface TeriockBaseMessageData
+    extends TeriockBaseChatMessageSchema {}
 }

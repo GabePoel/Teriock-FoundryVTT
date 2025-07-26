@@ -6,7 +6,14 @@ import TeriockDetectionMode from "./teriock-detection-mode.mjs";
  * - [Blind Fighting](https://wiki.teriock.com/index.php/Ability:Blind_Fighting)
  */
 export default class DetectionModeBlindFighting extends TeriockDetectionMode {
-  static BLOCKING_SRC_STATUS_EFFECTS = ["down", "frozen", "asleep", "unconscious", "dead", "ethereal"];
+  static BLOCKING_SRC_STATUS_EFFECTS = [
+    "down",
+    "frozen",
+    "asleep",
+    "unconscious",
+    "dead",
+    "ethereal",
+  ];
   static BLOCKING_TGT_STATUS_EFFECTS = ["ethereal", "hidden"];
 
   /** @override */

@@ -42,7 +42,14 @@ export function buildMessage(messageParts) {
   blocks
     .filter((block) => block.text !== "")
     .forEach((block) => {
-      messageBlock(blockBox, block.title, block.text, block.italic, block.special, block.elements);
+      messageBlock(
+        blockBox,
+        block.title,
+        block.text,
+        block.italic,
+        block.special,
+        block.elements,
+      );
     });
 
   // Append non-empty sections
@@ -61,7 +68,11 @@ export function buildMessage(messageParts) {
  */
 function barLength(bar) {
   bar.wrappers = bar.wrappers.filter(
-    (wrapper) => wrapper && typeof wrapper === "string" && wrapper.length > 0 && wrapper !== "0",
+    (wrapper) =>
+      wrapper &&
+      typeof wrapper === "string" &&
+      wrapper.length > 0 &&
+      wrapper !== "0",
   );
   return bar.wrappers.length;
 }

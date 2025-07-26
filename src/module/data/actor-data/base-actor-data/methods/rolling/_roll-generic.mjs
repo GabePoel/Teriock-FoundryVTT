@@ -26,8 +26,9 @@ export async function _rollFeatSave(actorData, attribute, options = {}) {
   await roll.toMessage({
     speaker: ChatMessage.getSpeaker({ actor: actor }),
     flavor:
-      (typeof options.threshold === "number" ? `DC ${options.threshold} ` : "") +
-      `${attribute.toUpperCase()} Feat Save`,
+      (typeof options.threshold === "number"
+        ? `DC ${options.threshold} `
+        : "") + `${attribute.toUpperCase()} Feat Save`,
   });
 }
 
@@ -104,7 +105,11 @@ export async function _rollImmunity(actorData, options = {}) {
 export async function _rollTradecraft(actorData, tradecraft, options = {}) {
   const actor = actorData.parent;
   const { proficient, extra } = actorData.tradecrafts[tradecraft] || {};
-  let formula = options.advantage ? "2d20kh1" : options.disadvantage ? "2d20kl1" : "1d20";
+  let formula = options.advantage
+    ? "2d20kh1"
+    : options.disadvantage
+      ? "2d20kl1"
+      : "1d20";
   if (proficient) formula += " + @p";
   if (extra) formula += ` + @${tradecraft}`;
   const context = {};

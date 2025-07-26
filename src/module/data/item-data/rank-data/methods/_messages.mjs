@@ -1,7 +1,7 @@
 import {
   addAbilitiesBlock,
   addPropertiesBlock,
-  addResourcesBlock,
+  addResourcesBlock
 } from "../../../../helpers/messages-builder/message-parts.mjs";
 
 /**
@@ -19,12 +19,20 @@ export function _messageParts(rank) {
     {
       icon: "fa-" + ref[src.archetype].classes[src.className].icon,
       label: "Archetype",
-      wrappers: [ref[src.archetype].name, ref[src.archetype].classes[src.className].name, "Rank " + src.classRank],
+      wrappers: [
+        ref[src.archetype].name,
+        ref[src.archetype].classes[src.className].name,
+        "Rank " + src.classRank,
+      ],
     },
     {
       icon: "fa-circle-info",
       label: "Dice",
-      wrappers: [src.hitDie + " Hit Die", src.manaDie + " Mana Die", src.maxAv + " Max AV"],
+      wrappers: [
+        src.hitDie + " Hit Die",
+        src.manaDie + " Mana Die",
+        src.maxAv + " Max AV",
+      ],
     },
   ];
   const blocks = [

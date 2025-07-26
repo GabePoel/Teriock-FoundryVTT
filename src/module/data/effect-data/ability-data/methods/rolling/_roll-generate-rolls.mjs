@@ -23,15 +23,27 @@ export async function _generateRolls(rollConfig) {
         rollContext.diceClass = "ub";
         rollContext.diceTooltip = "Unblockable";
       }
-      rolls.push(new TeriockRoll(rollConfig.useData.formula, rollConfig.useData.rollData, { context: rollContext }));
+      rolls.push(
+        new TeriockRoll(
+          rollConfig.useData.formula,
+          rollConfig.useData.rollData,
+          { context: rollContext },
+        ),
+      );
     }
     if (rollConfig.useData.targets.size === 0) {
-      const rollContext = {}
+      const rollContext = {};
       if (rollConfig.useData.rollData["ub"]) {
         rollContext.diceClass = "ub";
         rollContext.diceTooltip = "Unblockable";
       }
-      rolls.push(new TeriockRoll(rollConfig.useData.formula, rollConfig.useData.rollData, { context: rollContext }));
+      rolls.push(
+        new TeriockRoll(
+          rollConfig.useData.formula,
+          rollConfig.useData.rollData,
+          { context: rollContext },
+        ),
+      );
     }
   } else if (rollConfig.abilityData.interaction === "feat") {
     for (const target of rollConfig.useData.targets) {
@@ -47,7 +59,11 @@ export async function _generateRolls(rollConfig) {
       diceClass: "feat",
       totalClass: "feat",
     };
-    rolls.push(new TeriockRoll(rollConfig.useData.formula, rollConfig.useData.rollData, { context: rollContext }));
+    rolls.push(
+      new TeriockRoll(rollConfig.useData.formula, rollConfig.useData.rollData, {
+        context: rollContext,
+      }),
+    );
   } else {
     for (const target of rollConfig.useData.targets) {
       const rollContext = {

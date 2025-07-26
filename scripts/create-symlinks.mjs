@@ -13,16 +13,25 @@ console.log("Reforging Symlinks");
 if (!fs.existsSync("foundry-config.yaml")) {
   if (fs.existsSync("example-foundry-config.yaml")) {
     try {
-      await fs.promises.copyFile("example-foundry-config.yaml", "foundry-config.yaml");
+      await fs.promises.copyFile(
+        "example-foundry-config.yaml",
+        "foundry-config.yaml",
+      );
       console.log("Copied example-foundry-config.yaml to foundry-config.yaml");
     } catch (err) {
       console.error(`Error copying config file: ${err}`);
-      console.log("Please manually copy example-foundry-config.yaml to foundry-config.yaml");
+      console.log(
+        "Please manually copy example-foundry-config.yaml to foundry-config.yaml",
+      );
       process.exit(1);
     }
   } else {
-    console.log("Neither foundry-config.yaml nor example-foundry-config.yaml exist.");
-    console.log("Please create a foundry-config.yaml file with your Foundry installation path.");
+    console.log(
+      "Neither foundry-config.yaml nor example-foundry-config.yaml exist.",
+    );
+    console.log(
+      "Please create a foundry-config.yaml file with your Foundry installation path.",
+    );
     process.exit(1);
   }
 }
@@ -59,7 +68,10 @@ if (fs.existsSync("foundry-config.yaml")) {
   // Javascript files
   for (const p of ["client", "common", "tsconfig.json"]) {
     try {
-      await fs.promises.symlink(path.join(fileRoot, p), path.join("foundry", p));
+      await fs.promises.symlink(
+        path.join(fileRoot, p),
+        path.join("foundry", p),
+      );
     } catch (e) {
       if (e.code !== "EEXIST") throw e;
     }
@@ -67,7 +79,10 @@ if (fs.existsSync("foundry-config.yaml")) {
 
   // Language files
   try {
-    await fs.promises.symlink(path.join(fileRoot, "public", "lang"), path.join("foundry", "lang"));
+    await fs.promises.symlink(
+      path.join(fileRoot, "public", "lang"),
+      path.join("foundry", "lang"),
+    );
   } catch (e) {
     if (e.code !== "EEXIST") throw e;
   }

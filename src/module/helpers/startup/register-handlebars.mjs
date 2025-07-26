@@ -14,13 +14,19 @@ export default function registerHandlebarsHelpers() {
 
   // String Helpers
 
-  Handlebars.registerHelper("lc", (str) => (typeof str === "string" ? str.toLowerCase() : ""));
-  Handlebars.registerHelper("uc", (str) => (typeof str === "string" ? str.toUpperCase() : ""));
+  Handlebars.registerHelper("lc", (str) =>
+    typeof str === "string" ? str.toLowerCase() : "",
+  );
+  Handlebars.registerHelper("uc", (str) =>
+    typeof str === "string" ? str.toUpperCase() : "",
+  );
   Handlebars.registerHelper("ucFirst", (str) => {
     if (typeof str !== "string") return "";
     return str.charAt(0).toUpperCase() + str.slice(1);
   });
-  Handlebars.registerHelper("length", (str) => (typeof str === "string" ? str.length : 0));
+  Handlebars.registerHelper("length", (str) =>
+    typeof str === "string" ? str.length : 0,
+  );
   Handlebars.registerHelper("prefix", (str, prefix) => {
     if (str && str !== "0" && str !== "+0") {
       return prefix + " " + str;
@@ -88,7 +94,8 @@ export default function registerHandlebarsHelpers() {
   Handlebars.registerHelper("exists", (val) => {
     if (Array.isArray(val)) return val.length > 0;
     if (val === undefined || val === null) return false;
-    if (typeof val === "string") return !(val.trim() === "" || val === "0" || val === "+0");
+    if (typeof val === "string")
+      return !(val.trim() === "" || val === "0" || val === "+0");
     if (typeof val === "number") return val > 0;
     return true;
   });
@@ -162,11 +169,14 @@ export default function registerHandlebarsHelpers() {
     if (elements && elements.length > 0) {
       out = elements
         .map((e) => e.charAt(0).toUpperCase() + e.slice(1))
-        .join(elements.length > 2 ? ", " : elements.length === 2 ? " and " : "");
+        .join(
+          elements.length > 2 ? ", " : elements.length === 2 ? " and " : "",
+        );
       if (elements.length > 1) {
         const lastComma = out.lastIndexOf(", ");
         if (lastComma !== -1) {
-          out = out.substring(0, lastComma) + " and" + out.substring(lastComma + 1);
+          out =
+            out.substring(0, lastComma) + " and" + out.substring(lastComma + 1);
         }
       }
     }
@@ -179,7 +189,9 @@ export default function registerHandlebarsHelpers() {
 
   // UI Helpers
 
-  Handlebars.registerHelper("tabActive", (active, tab) => (active === tab ? "active" : "inactive"));
+  Handlebars.registerHelper("tabActive", (active, tab) =>
+    active === tab ? "active" : "inactive",
+  );
 
   Handlebars.registerHelper("tswitch", (options) => {
     const { name, disabled } = options.hash;
@@ -211,10 +223,20 @@ export default function registerHandlebarsHelpers() {
     `);
   });
 
-  Handlebars.registerHelper("ttoggle", (bool) => `ttoggle-button${bool ? " toggled" : ""}`);
+  Handlebars.registerHelper(
+    "ttoggle",
+    (bool) => `ttoggle-button${bool ? " toggled" : ""}`,
+  );
 
   Handlebars.registerHelper("ticon", (icon, options) => {
-    const { cssClass = "", id, parentId, action, style = "light", tooltip = "" } = options.hash;
+    const {
+      cssClass = "",
+      id,
+      parentId,
+      action,
+      style = "light",
+      tooltip = "",
+    } = options.hash;
     const attrs = [
       id ? `data-id="${id}"` : "",
       parentId ? `data-parent-id="${parentId}"` : "",
@@ -226,32 +248,50 @@ export default function registerHandlebarsHelpers() {
     );
   });
 
-  Handlebars.registerHelper("ticonToggle", (iconTrue, iconFalse, bool, options) => {
-    const {
-      cssClass = "",
-      id,
-      parentId,
-      action,
-      falseAction = true,
-      tooltipTrue = "",
-      tooltipFalse = "",
-    } = options.hash;
-    const icon = bool ? iconTrue : iconFalse;
-    const actionAttr = (bool || falseAction) && action ? `data-action="${action}"` : "";
-    const tooltipAttr = (bool || falseAction) && action ? `data-tooltip="${bool ? tooltipTrue : tooltipFalse}"` : "";
-    return new Handlebars.SafeString(`
+  Handlebars.registerHelper(
+    "ticonToggle",
+    (iconTrue, iconFalse, bool, options) => {
+      const {
+        cssClass = "",
+        id,
+        parentId,
+        action,
+        falseAction = true,
+        tooltipTrue = "",
+        tooltipFalse = "",
+      } = options.hash;
+      const icon = bool ? iconTrue : iconFalse;
+      const actionAttr =
+        (bool || falseAction) && action ? `data-action="${action}"` : "";
+      const tooltipAttr =
+        (bool || falseAction) && action
+          ? `data-tooltip="${bool ? tooltipTrue : tooltipFalse}"`
+          : "";
+      return new Handlebars.SafeString(`
             <i class="ticon tcard-clickable ${cssClass} fa-fw fa-light fa-${icon}" 
             ${id ? `data-id="${id}"` : ""} 
             ${parentId ? `data-parent-id="${parentId}"` : ""} 
             ${actionAttr}
             ${tooltipAttr}></i>
         `);
-  });
+    },
+  );
 
   Handlebars.registerHelper(
     "tcardOptions",
-    function (optionsToggle, filterToggle, sortToggle, searchValue, tab, options) {
-      const { showAddButton = true, sortOptions = {}, sortValue = "" } = options.hash;
+    function (
+      optionsToggle,
+      filterToggle,
+      sortToggle,
+      searchValue,
+      tab,
+      options,
+    ) {
+      const {
+        showAddButton = true,
+        sortOptions = {},
+        sortValue = "",
+      } = options.hash;
       const context = options.data.root;
       const ttoggle = Handlebars.helpers.ttoggle;
       const checked = Handlebars.helpers.checked;
@@ -264,14 +304,18 @@ export default function registerHandlebarsHelpers() {
       const sizePath = `system.sheet.display.${tab}.size`;
       const ascendingPath = `settings.${tab}SortAscending`;
 
-      const get = (path) => path.split(".").reduce((obj, key) => obj?.[key], context);
+      const get = (path) =>
+        path.split(".").reduce((obj, key) => obj?.[key], context);
 
       const gaplessValue = get(gaplessPath);
       const sizeValue = get(sizePath);
       const ascendingValue = get(ascendingPath);
 
       const sizeOptions = context.config?.displayOptions?.sizes ?? {};
-      const sortSelectHTML = selectOptions(sortOptions, { hash: { selected: sortValue } })?.toHTML?.() ?? "";
+      const sortSelectHTML =
+        selectOptions(sortOptions, {
+          hash: { selected: sortValue },
+        })?.toHTML?.() ?? "";
 
       const tabDisplay = tab.charAt(0).toUpperCase() + tab.slice(1);
 
@@ -376,20 +420,33 @@ export default function registerHandlebarsHelpers() {
 
   // Game Config Lookup Helpers
 
-  Handlebars.registerHelper("className", (arch, name) => CONFIG.TERIOCK.rankOptions[arch].classes[name].name);
-  Handlebars.registerHelper("classArchetype", (arch) => CONFIG.TERIOCK.rankOptions[arch].name);
+  Handlebars.registerHelper(
+    "className",
+    (arch, name) => CONFIG.TERIOCK.rankOptions[arch].classes[name].name,
+  );
+  Handlebars.registerHelper(
+    "classArchetype",
+    (arch) => CONFIG.TERIOCK.rankOptions[arch].name,
+  );
   Handlebars.registerHelper(
     "executionTime",
-    (maneuver, execTime) => CONFIG.TERIOCK.abilityOptions.executionTime[maneuver]?.[execTime] ?? execTime,
+    (maneuver, execTime) =>
+      CONFIG.TERIOCK.abilityOptions.executionTime[maneuver]?.[execTime] ??
+      execTime,
   );
   Handlebars.registerHelper(
     "tradecraft",
-    (field, name) => CONFIG.TERIOCK.tradecraftOptions[field].tradecrafts[name].name,
+    (field, name) =>
+      CONFIG.TERIOCK.tradecraftOptions[field].tradecrafts[name].name,
   );
-  Handlebars.registerHelper("field", (field) => CONFIG.TERIOCK.tradecraftOptions[field].name);
+  Handlebars.registerHelper(
+    "field",
+    (field) => CONFIG.TERIOCK.tradecraftOptions[field].name,
+  );
   Handlebars.registerHelper(
     "equipmentMarker",
-    (item) => CONFIG.TERIOCK.equipmentOptions.powerLevel[item.system.powerLevel]?.color,
+    (item) =>
+      CONFIG.TERIOCK.equipmentOptions.powerLevel[item.system.powerLevel]?.color,
   );
   Handlebars.registerHelper("abilityMarker", (effect) => {
     const type = effect.system.abilityType || effect.system.propertyType;
@@ -398,7 +455,7 @@ export default function registerHandlebarsHelpers() {
 
   // TCard & AbilityCards Helpers
 
-  Handlebars.registerHelper("tcard", function async (options) {
+  Handlebars.registerHelper("tcard", function async(options) {
     let {
       img,
       title,
@@ -455,109 +512,144 @@ export default function registerHandlebarsHelpers() {
     `);
   });
 
-  Handlebars.registerHelper("abilityCards", function (abilities, system, options) {
-    const {
-      tab = "ability",
-      skipDescendants = false,
-      action = "rollDoc",
-      tooltip = "Use",
-      draggable = true,
-    } = options.hash;
-    if (!Array.isArray(abilities) || abilities.length === 0) return "";
-    const isGapless = tab ? system?.sheet?.display?.[tab]?.gapless : false;
-    const sizeClass = tab ? system?.sheet?.display?.[tab]?.size || "" : "";
-    const containerClass = `tcard-container ${isGapless ? "gapless" : ""} ${sizeClass}`.trim();
+  Handlebars.registerHelper(
+    "abilityCards",
+    function (abilities, system, options) {
+      const {
+        tab = "ability",
+        skipDescendants = false,
+        action = "rollDoc",
+        tooltip = "Use",
+        draggable = true,
+      } = options.hash;
+      if (!Array.isArray(abilities) || abilities.length === 0) return "";
+      const isGapless = tab ? system?.sheet?.display?.[tab]?.gapless : false;
+      const sizeClass = tab ? system?.sheet?.display?.[tab]?.size || "" : "";
+      const containerClass =
+        `tcard-container ${isGapless ? "gapless" : ""} ${sizeClass}`.trim();
 
-    const renderedCards = abilities
-      .map((ability) => {
-        let subtitle =
-          ability.type === "ability"
-            ? Handlebars.helpers.executionTime(ability.system?.maneuver, ability.system?.executionTime)
-            : ability.type === "property"
-              ? ability.system?.propertyType
-              : "";
-        if (ability.isTemporary && ability.duration.seconds) {
-          subtitle =
-            secondsToReadable(ability.duration.startTime + ability.duration.seconds - ability.duration._worldTime) +
-            " remaining";
-        }
-        const marker = Handlebars.helpers.abilityMarker(ability);
-        const chatIcon = Handlebars.helpers.ticon("comment", {
-          hash: { action: "chatDoc", id: ability._id, parentId: ability.parent?._id, tooltip: "Send to Chat" },
-        });
-        const enableIcon = Handlebars.helpers.ticonToggle("circle", "circle-check", ability.disabled, {
-          hash: {
-            action: "toggleDisabledDoc",
-            id: ability._id,
-            parentId: ability.parent?._id,
-            tooltipTrue: "Disabled",
-            tooltipFalse: "Enabled",
-          },
-        });
+      const renderedCards = abilities
+        .map((ability) => {
+          let subtitle =
+            ability.type === "ability"
+              ? Handlebars.helpers.executionTime(
+                  ability.system?.maneuver,
+                  ability.system?.executionTime,
+                )
+              : ability.type === "property"
+                ? ability.system?.propertyType
+                : "";
+          if (ability.isTemporary && ability.duration.seconds) {
+            subtitle =
+              secondsToReadable(
+                ability.duration.startTime +
+                  ability.duration.seconds -
+                  ability.duration._worldTime,
+              ) + " remaining";
+          }
+          const marker = Handlebars.helpers.abilityMarker(ability);
+          const chatIcon = Handlebars.helpers.ticon("comment", {
+            hash: {
+              action: "chatDoc",
+              id: ability._id,
+              parentId: ability.parent?._id,
+              tooltip: "Send to Chat",
+            },
+          });
+          const enableIcon = Handlebars.helpers.ticonToggle(
+            "circle",
+            "circle-check",
+            ability.disabled,
+            {
+              hash: {
+                action: "toggleDisabledDoc",
+                id: ability._id,
+                parentId: ability.parent?._id,
+                tooltipTrue: "Disabled",
+                tooltipFalse: "Enabled",
+              },
+            },
+          );
 
-        const baseIcon = Handlebars.helpers.ticon("certificate", { hash: { tooltip: "Not Proficient" } });
-        const proficientIcon = Handlebars.helpers.ticon("award-simple", { hash: { tooltip: "Proficient" } });
-        const fluentIcon = Handlebars.helpers.ticon("award", { hash: { tooltip: "Fluent" } });
+          const baseIcon = Handlebars.helpers.ticon("certificate", {
+            hash: { tooltip: "Not Proficient" },
+          });
+          const proficientIcon = Handlebars.helpers.ticon("award-simple", {
+            hash: { tooltip: "Proficient" },
+          });
+          const fluentIcon = Handlebars.helpers.ticon("award", {
+            hash: { tooltip: "Fluent" },
+          });
 
-        let masteryIcon = baseIcon;
-        if (ability.isProficient) {
-          masteryIcon = proficientIcon;
-        }
-        if (ability.isFluent) {
-          masteryIcon = fluentIcon;
-        }
+          let masteryIcon = baseIcon;
+          if (ability.isProficient) {
+            masteryIcon = proficientIcon;
+          }
+          if (ability.isFluent) {
+            masteryIcon = fluentIcon;
+          }
 
-        let text = ability.parent?.name;
-        const sup = ability.sup;
-        if (sup) {
-          text = sup.name;
-        }
+          let text = ability.parent?.name;
+          const sup = ability.sup;
+          if (sup) {
+            text = sup.name;
+          }
 
-        if (sup && skipDescendants) {
-          return "";
-        }
-        return Handlebars.helpers.tcard({
-          hash: {
-            img: ability.img,
-            title: ability.name,
-            subtitle,
-            text: text,
-            icons: masteryIcon + chatIcon + enableIcon,
-            id: ability._id,
-            parentId: ability.parent?._id,
-            active: !ability.disabled && !ability.isSuppressed,
-            marker,
-            shattered: false,
-            consumable: ability.system.consumable,
-            amount: ability.system.quantity,
-            max: ability.system.maxQuantity?.derived,
-            type: "effect",
-            action,
-            tooltip,
-            draggable,
-          },
-        });
-      })
-      .join("\n");
+          if (sup && skipDescendants) {
+            return "";
+          }
+          return Handlebars.helpers.tcard({
+            hash: {
+              img: ability.img,
+              title: ability.name,
+              subtitle,
+              text: text,
+              icons: masteryIcon + chatIcon + enableIcon,
+              id: ability._id,
+              parentId: ability.parent?._id,
+              active: !ability.disabled && !ability.isSuppressed,
+              marker,
+              shattered: false,
+              consumable: ability.system.consumable,
+              amount: ability.system.quantity,
+              max: ability.system.maxQuantity?.derived,
+              type: "effect",
+              action,
+              tooltip,
+              draggable,
+            },
+          });
+        })
+        .join("\n");
 
-    return new Handlebars.SafeString(`<div class="${containerClass}">${renderedCards}</div>`);
-  });
+      return new Handlebars.SafeString(
+        `<div class="${containerClass}">${renderedCards}</div>`,
+      );
+    },
+  );
 
-  Handlebars.registerHelper("tcardsSearchResults", function (documents, system, tab, plural) {
-    const tcardsContainer = Handlebars.helpers.abilityCards(documents, system, tab);
-    const sizeClass = system?.sheet?.display?.[tab]?.size || "";
-    const hasResults = documents && documents.length > 0;
-    let output = `<div id="${tab}-results" class="tcard-results">`;
-    output += tcardsContainer;
-    if (!hasResults) {
-      output += `
+  Handlebars.registerHelper(
+    "tcardsSearchResults",
+    function (documents, system, tab, plural) {
+      const tcardsContainer = Handlebars.helpers.abilityCards(
+        documents,
+        system,
+        tab,
+      );
+      const sizeClass = system?.sheet?.display?.[tab]?.size || "";
+      const hasResults = documents && documents.length > 0;
+      let output = `<div id="${tab}-results" class="tcard-results">`;
+      output += tcardsContainer;
+      if (!hasResults) {
+        output += `
       <div class="no-results ${sizeClass}">
         <p>No ${plural} found.</p>
       </div>`;
-    }
-    output += "</div>";
-    return new Handlebars.SafeString(output);
-  });
+      }
+      output += "</div>";
+      return new Handlebars.SafeString(output);
+    },
+  );
 
   Handlebars.registerHelper("hackFill", function (stat) {
     const min = stat?.min || 0;

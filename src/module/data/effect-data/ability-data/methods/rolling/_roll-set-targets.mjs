@@ -10,7 +10,10 @@ const { api } = foundry.applications;
 export async function _setTargets(rollConfig) {
   const user = /** @type {TeriockUser} */ game.user;
   rollConfig.useData.targets = user.targets;
-  if (rollConfig.abilityData.targets.length === 1 && rollConfig.abilityData.targets.includes("self")) {
+  if (
+    rollConfig.abilityData.targets.length === 1 &&
+    rollConfig.abilityData.targets.includes("self")
+  ) {
     const token = actorToken(rollConfig.abilityData.actor);
     if (token) rollConfig.useData.targets = new Set([token]);
   }
@@ -48,7 +51,10 @@ async function auraMeasure(rollConfig) {
             label: "Yes",
             callback: (event, button) => {
               radius = Number(button.form.elements.namedItem("range").value);
-              const autoTargetCheckbox = /** @type {HTMLInputElement} */ button.form.elements.namedItem("auto");
+              const autoTargetCheckbox =
+                /** @type {HTMLInputElement} */ button.form.elements.namedItem(
+                  "auto",
+                );
               autoTarget = autoTargetCheckbox.checked;
             },
           },
@@ -65,7 +71,9 @@ async function auraMeasure(rollConfig) {
         };
         const isEthereal = token?.hasStatusEffect("ethereal");
         /** @type {MeasuredTemplateDocument} template */
-        const template = await MeasuredTemplateDocument.create(templateData, { parent: canvas.scene });
+        const template = await MeasuredTemplateDocument.create(templateData, {
+          parent: canvas.scene,
+        });
         if (autoTarget) {
           let targets = new Set();
           canvas.scene.tokens.forEach((targetToken) => {
@@ -77,10 +85,14 @@ async function auraMeasure(rollConfig) {
                   y: targetToken.y + canvas.scene.grid.sizeY * (j + 0.5),
                 };
                 // TODO: Replace manual calculation with more robust template position checking.
-                const dist = Math.sqrt(Math.pow(point.x - templateData.x, 2) + Math.pow(point.y - templateData.y, 2));
+                const dist = Math.sqrt(
+                  Math.pow(point.x - templateData.x, 2) +
+                    Math.pow(point.y - templateData.y, 2),
+                );
                 targeted = dist <= (radius / 5) * canvas.scene.grid.sizeX;
                 if (targetToken === token) targeted = false;
-                if (targetToken.hasStatusEffect("ethereal") !== isEthereal) targeted = false;
+                if (targetToken.hasStatusEffect("ethereal") !== isEthereal)
+                  targeted = false;
                 if (targeted) {
                   targets.add(targetToken);
                 }

@@ -19,7 +19,9 @@ export const sleep = new TeriockCommand(
       await actor.takeSleep(damageAmount);
     }
 
-    ui.notifications.info(`Applied sleep check with ${damageAmount} damage to ${actors.length} target(s).`);
+    ui.notifications.info(
+      `Applied sleep check with ${damageAmount} damage to ${actors.length} target(s).`,
+    );
   },
   {
     category: "#damage",

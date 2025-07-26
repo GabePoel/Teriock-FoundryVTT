@@ -17,7 +17,9 @@ import { _defineSchema } from "./methods/schema/_schema.mjs";
  *
  * @extends {TeriockBaseEffectData}
  */
-export default class TeriockAbilityData extends WikiDataMixin(TeriockBaseEffectData) {
+export default class TeriockAbilityData extends WikiDataMixin(
+  TeriockBaseEffectData,
+) {
   /**
    * Metadata for this effect.
    *

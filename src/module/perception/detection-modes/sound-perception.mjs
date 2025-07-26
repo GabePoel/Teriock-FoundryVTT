@@ -7,7 +7,15 @@ import TeriockDetectionMode from "./teriock-detection-mode.mjs";
  * - [Advanced Hearing](https://wiki.teriock.com/index.php/Ability:Advanced_Hearing)
  */
 export default class DetectionModeSoundPerception extends TeriockDetectionMode {
-  static BLOCKING_SRC_STATUS_EFFECTS = ["down", "frozen", "asleep", "unconscious", "dead", "deaf", "ethereal"];
+  static BLOCKING_SRC_STATUS_EFFECTS = [
+    "down",
+    "frozen",
+    "asleep",
+    "unconscious",
+    "dead",
+    "deaf",
+    "ethereal",
+  ];
   static BLOCKING_TGT_STATUS_EFFECTS = ["silent", "ethereal"];
 
   /** @override */

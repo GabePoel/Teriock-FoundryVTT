@@ -58,7 +58,13 @@ export type DeliveryMethod =
 /**
  * Valid delivery packages
  */
-export type DeliveryPackage = "ball" | "ray" | "ritual" | "strike" | "touch" | null;
+export type DeliveryPackage =
+  | "ball"
+  | "ray"
+  | "ritual"
+  | "strike"
+  | "touch"
+  | null;
 
 /**
  * Valid delivery parents

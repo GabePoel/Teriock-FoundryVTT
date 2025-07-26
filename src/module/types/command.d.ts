@@ -49,13 +49,14 @@ export type CommandCallbackContext = {
 /**
  * Function signature for command callbacks
  */
-export type CommandCallback = (context: CommandCallbackContext) => Promise<void>;
+export type CommandCallback = (
+  context: CommandCallbackContext,
+) => Promise<void>;
 
 /**
  * Valid command categories.
  */
 export type CommandCategory = "#combat" | "#damage" | "#support" | "utility";
-
 
 /**
  * Options for creating a TeriockCommand
@@ -68,4 +69,3 @@ export type CommandOptions = {
   /** Whether the command requires at least one targeted token */
   requiresTarget?: boolean;
 };
-

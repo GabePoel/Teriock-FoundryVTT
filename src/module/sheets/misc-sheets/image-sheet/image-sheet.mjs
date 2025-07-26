@@ -6,7 +6,9 @@ import { imageContextMenuOptions } from "./connections/_context-menus.mjs";
  * Provides image display functionality with context menus for image interactions.
  * @extends {ApplicationV2}
  */
-export default class TeriockImageSheet extends api.HandlebarsApplicationMixin(api.ApplicationV2) {
+export default class TeriockImageSheet extends api.HandlebarsApplicationMixin(
+  api.ApplicationV2,
+) {
   /**
    * Default options for the image sheet.
    * @type {object}

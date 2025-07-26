@@ -19,7 +19,9 @@ export const gaintemphp = new TeriockCommand(
       await actor.takeGainTempHp(amount);
     }
 
-    ui.notifications.info(`Gained ${amount} temporary HP on ${actors.length} target(s).`);
+    ui.notifications.info(
+      `Gained ${amount} temporary HP on ${actors.length} target(s).`,
+    );
   },
   {
     aliases: ["gthp"],

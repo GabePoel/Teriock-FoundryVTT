@@ -19,7 +19,9 @@ export const kill = new TeriockCommand(
       await actor.takeKill(damageAmount);
     }
 
-    ui.notifications.info(`Applied kill check with ${damageAmount} damage to ${actors.length} target(s).`);
+    ui.notifications.info(
+      `Applied kill check with ${damageAmount} damage to ${actors.length} target(s).`,
+    );
   },
   {
     category: "#damage",

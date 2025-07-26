@@ -53,7 +53,9 @@ export default (Base) => {
         const parsed = await this.parse(wikiPage);
         await this.parent.update(parsed);
         if (notify) {
-          ui.notifications.success(`Updated ${this.parent.name} with ${pageTitle} wiki data.`);
+          ui.notifications.success(
+            `Updated ${this.parent.name} with ${pageTitle} wiki data.`,
+          );
         }
       } else {
         if (notify) {

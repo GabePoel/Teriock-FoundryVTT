@@ -7,7 +7,10 @@
  * @private
  */
 export function _prepareSpeed(actorData) {
-  if (actorData.speedAdjustments && typeof actorData.speedAdjustments === "object") {
+  if (
+    actorData.speedAdjustments &&
+    typeof actorData.speedAdjustments === "object"
+  ) {
     for (const key of Object.keys(actorData.speedAdjustments)) {
       if (actorData.parent.statuses.has("slowed")) {
         actorData.speedAdjustments[key] -= 1;
@@ -15,7 +18,10 @@ export function _prepareSpeed(actorData) {
       if (actorData.parent.statuses.has("immobilized")) {
         actorData.speedAdjustments[key] = 0;
       }
-      actorData.speedAdjustments[key] = Math.max(0, actorData.speedAdjustments[key]);
+      actorData.speedAdjustments[key] = Math.max(
+        0,
+        actorData.speedAdjustments[key],
+      );
     }
   }
 }

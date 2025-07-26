@@ -9,7 +9,8 @@ import TeriockCommand from "../command.mjs";
 export function createHelpCommand(allCommands) {
   // Filter to unique commands (skip aliases)
   const uniqueCommands = Object.values(allCommands).filter(
-    (cmd, index, arr) => arr.findIndex((other) => other.id === cmd.id) === index,
+    (cmd, index, arr) =>
+      arr.findIndex((other) => other.id === cmd.id) === index,
   );
 
   return new TeriockCommand(
@@ -23,7 +24,9 @@ export function createHelpCommand(allCommands) {
             cmd.aliases.length > 0
               ? ` <span class="aliases">(aliases: ${cmd.aliases.map((a) => `/${a}`).join(", ")})</span>`
               : "";
-          const category = cmd.category ? `<span class="category">[${cmd.category}]</span>` : "";
+          const category = cmd.category
+            ? `<span class="category">[${cmd.category}]</span>`
+            : "";
           return `
             <div class="teriock-chat-help">
               <code>/${cmd.id}</code>${aliases} ${category}

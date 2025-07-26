@@ -25,7 +25,9 @@ export default class TeriockBaseItemSheet extends BaseItemSheet {
    * @override
    */
   async _prepareContext(options) {
-    const abilityTypeOrder = Object.keys(CONFIG.TERIOCK.abilityOptions.abilityType || {});
+    const abilityTypeOrder = Object.keys(
+      CONFIG.TERIOCK.abilityOptions.abilityType || {},
+    );
     const { effectTypes } = this.item.buildEffectTypes();
     const abilities =
       effectTypes.ability ||
@@ -38,7 +40,9 @@ export default class TeriockBaseItemSheet extends BaseItemSheet {
         return (a.name || "").localeCompare(b.name || "");
       });
 
-    const propertyTypeOrder = Object.keys(CONFIG.TERIOCK.abilityOptions.abilityType || {});
+    const propertyTypeOrder = Object.keys(
+      CONFIG.TERIOCK.abilityOptions.abilityType || {},
+    );
     const properties =
       effectTypes.property ||
       [].sort((a, b) => {
@@ -50,9 +54,13 @@ export default class TeriockBaseItemSheet extends BaseItemSheet {
         return (a.name || "").localeCompare(b.name || "");
       });
 
-    const fluencies = effectTypes.fluency || [].sort((a, b) => (a.name || "").localeCompare(b.name || ""));
+    const fluencies =
+      effectTypes.fluency ||
+      [].sort((a, b) => (a.name || "").localeCompare(b.name || ""));
 
-    const resources = effectTypes.resource || [].sort((a, b) => (a.name || "").localeCompare(b.name || ""));
+    const resources =
+      effectTypes.resource ||
+      [].sort((a, b) => (a.name || "").localeCompare(b.name || ""));
 
     const context = await super._prepareContext(options);
     context.item = this.item;

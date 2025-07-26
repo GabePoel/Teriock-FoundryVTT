@@ -24,8 +24,18 @@ export async function _attune(equipmentData) {
       tier: equipmentData.tier.derived,
     },
     changes: [
-      { key: "system.attunements", mode: 2, value: equipmentData.parent._id, priority: 10 },
-      { key: "system.presence.value", mode: 2, value: equipmentData.tier.derived, priority: 10 },
+      {
+        key: "system.attunements",
+        mode: 2,
+        value: equipmentData.parent._id,
+        priority: 10,
+      },
+      {
+        key: "system.presence.value",
+        mode: 2,
+        value: equipmentData.tier.derived,
+        priority: 10,
+      },
     ],
   };
   if (equipmentData.parent.actor && (await _canAttune(equipmentData))) {
@@ -37,10 +47,17 @@ export async function _attune(equipmentData) {
         });
       }
     }
-    attunement = await equipmentData.parent.actor.createEmbeddedDocuments("ActiveEffect", [attunementData]);
-    ui.notifications.success(`${equipmentData.parent.name} was successfully attuned.`);
+    attunement = await equipmentData.parent.actor.createEmbeddedDocuments(
+      "ActiveEffect",
+      [attunementData],
+    );
+    ui.notifications.success(
+      `${equipmentData.parent.name} was successfully attuned.`,
+    );
   } else {
-    ui.notifications.error(`You do not have enough unused presence to attune ${equipmentData.parent.name}.`);
+    ui.notifications.error(
+      `You do not have enough unused presence to attune ${equipmentData.parent.name}.`,
+    );
   }
   return attunement;
 }
@@ -68,7 +85,9 @@ export async function _deattune(equipmentData) {
  */
 export function _attuned(equipmentData) {
   if (equipmentData.parent?.actor) {
-    return equipmentData.parent.actor.system.attunements.has(equipmentData.parent._id);
+    return equipmentData.parent.actor.system.attunements.has(
+      equipmentData.parent._id,
+    );
   }
   return false;
 }
@@ -105,7 +124,9 @@ export async function _canAttune(equipmentData) {
       const tierRaw = ref.system.tier.raw;
       tierDerived = evaluateSync(tierRaw);
     }
-    const unp = equipmentData.parent.actor.system.presence.max - equipmentData.parent.actor.system.presence.value;
+    const unp =
+      equipmentData.parent.actor.system.presence.max -
+      equipmentData.parent.actor.system.presence.value;
     return tierDerived <= unp;
   }
   return false;

@@ -66,7 +66,9 @@ export default function connectEmbedded(document, element, editable = true) {
               await embedded.update({ "system.equipped": false });
             },
             condition: () => {
-              return embedded.type === "equipment" && embedded.system.canUnequip;
+              return (
+                embedded.type === "equipment" && embedded.system.canUnequip
+              );
             },
           },
           {
@@ -76,7 +78,9 @@ export default function connectEmbedded(document, element, editable = true) {
               await embedded.system.attune();
             },
             condition: () => {
-              return embedded.type === "equipment" && !embedded.system.isAttuned;
+              return (
+                embedded.type === "equipment" && !embedded.system.isAttuned
+              );
             },
           },
           {
@@ -120,7 +124,9 @@ export default function connectEmbedded(document, element, editable = true) {
               await embedded.update({ "system.shattered": true });
             },
             condition: () => {
-              return embedded.type === "equipment" && !embedded.system.shattered;
+              return (
+                embedded.type === "equipment" && !embedded.system.shattered
+              );
             },
           },
           {
@@ -164,7 +170,10 @@ export default function connectEmbedded(document, element, editable = true) {
               }
             },
             condition: () => {
-              return embedded.documentName === "ActiveEffect" && embedded.source !== document;
+              return (
+                embedded.documentName === "ActiveEffect" &&
+                embedded.source !== document
+              );
             },
           },
           {
@@ -191,7 +200,9 @@ export default function connectEmbedded(document, element, editable = true) {
             callback: async () => {
               /** @type {TeriockActor|TeriockItem} */
               const parent = embedded.parent;
-              await parent.deleteEmbeddedDocuments(embedded.documentName, [embedded.id]);
+              await parent.deleteEmbeddedDocuments(embedded.documentName, [
+                embedded.id,
+              ]);
               await parent.forceUpdate();
             },
             condition: () => {

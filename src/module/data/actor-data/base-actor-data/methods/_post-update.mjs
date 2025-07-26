@@ -152,7 +152,11 @@ async function prepareTokens(system) {
       visionMode = "lightAmplification";
     }
     if (system.senses.blind + system.senses.hearing + system.senses.smell > 0) {
-      const maxTremor = Math.max(system.senses.blind, system.senses.hearing, system.senses.smell);
+      const maxTremor = Math.max(
+        system.senses.blind,
+        system.senses.hearing,
+        system.senses.smell,
+      );
       const maxDark = Math.max(system.senses.dark, system.senses.night);
       if (maxTremor > maxDark) {
         visionMode = "tremorsense";
@@ -182,14 +186,16 @@ async function prepareTokens(system) {
  */
 async function checkDown(system) {
   let shouldBeAsleep = system.parent.statuses.has("asleep");
-  let shouldBeUnconscious = system.hp.value <= 0 || system.mp.value <= 0 || shouldBeAsleep;
+  let shouldBeUnconscious =
+    system.hp.value <= 0 || system.mp.value <= 0 || shouldBeAsleep;
   if (system.resistances.effects.has("unconscious")) {
     shouldBeUnconscious = false;
   }
   if (system.immunities.effects.has("unconscious")) {
     shouldBeUnconscious = false;
   }
-  let shouldBeDead = system.hp.value <= system.hp.min || system.mp.value <= system.mp.min;
+  let shouldBeDead =
+    system.hp.value <= system.hp.min || system.mp.value <= system.mp.min;
   if (system.resistances.effects.has("dead")) {
     shouldBeDead = false;
   }
@@ -229,14 +235,24 @@ async function checkDown(system) {
   }
   // Handle financial damage
   if (system.parent.statuses.has("down") && system.money.debt > 0) {
-    if (!(system.resistances.effects.has("hollied") || system.immunities.effects.has("hollied"))) {
+    if (
+      !(
+        system.resistances.effects.has("hollied") ||
+        system.immunities.effects.has("hollied")
+      )
+    ) {
       try {
         await system.parent.toggleStatusEffect("hollied", { active: true });
       } catch {
         /* empty */
       }
     }
-    if (!(system.resistances.effects.has("terrored") || system.immunities.effects.has("terrored"))) {
+    if (
+      !(
+        system.resistances.effects.has("terrored") ||
+        system.immunities.effects.has("terrored")
+      )
+    ) {
       try {
         await system.parent.toggleStatusEffect("terrored", { active: true });
       } catch {

@@ -26,7 +26,9 @@ export default class TeriockBaseMessageData extends TypeDataModel {
       new fields.SchemaField({
         label: new fields.StringField(),
         dataset: new fields.TypedObjectField(new fields.StringField()),
-        classes: new fields.SetField(new fields.StringField(), { initial: ["teriock-chat-button"] }),
+        classes: new fields.SetField(new fields.StringField(), {
+          initial: ["teriock-chat-button"],
+        }),
         icon: new fields.StringField(),
         type: new fields.StringField(),
         disabled: new fields.BooleanField(),
@@ -56,7 +58,8 @@ export default class TeriockBaseMessageData extends TypeDataModel {
       }
     }
 
-    const hasContent = (this.tags && this.tags.length > 0) || this.buttons.length > 0;
+    const hasContent =
+      (this.tags && this.tags.length > 0) || this.buttons.length > 0;
     if (hasContent) {
       const footer = this._constructFooter();
       html.insertAdjacentElement("beforeend", footer);
@@ -204,20 +207,28 @@ export default class TeriockBaseMessageData extends TypeDataModel {
     for (const /** @type {HTMLElement} */ element of actionElements) {
       const action = element.dataset.action;
 
-      const HandlerClass = Object.values(handlers).find((cls) => cls.ACTION === action);
+      const HandlerClass = Object.values(handlers).find(
+        (cls) => cls.ACTION === action,
+      );
 
       if (!HandlerClass) {
         continue;
       }
 
       element.addEventListener("click", async (event) => {
-        const handler = /** @type {ActionHandler} */ new HandlerClass(event, element);
+        const handler = /** @type {ActionHandler} */ new HandlerClass(
+          event,
+          element,
+        );
         await handler.primaryAction();
       });
 
       element.addEventListener("contextmenu", async (event) => {
         event.preventDefault();
-        const handler = /** @type {ActionHandler} */ new HandlerClass(event, element);
+        const handler = /** @type {ActionHandler} */ new HandlerClass(
+          event,
+          element,
+        );
         await handler.secondaryAction();
       });
     }

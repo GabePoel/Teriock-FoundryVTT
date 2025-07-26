@@ -1,7 +1,7 @@
 import {
   addAbilitiesBlock,
   addPropertiesBlock,
-  addResourcesBlock,
+  addResourcesBlock
 } from "../../../../helpers/messages-builder/message-parts.mjs";
 
 /**
@@ -35,7 +35,11 @@ export function _messageParts(equipmentData) {
     {
       icon: "fa-" + ref.powerLevel[src.powerLevel].icon,
       label: "Equipment Type",
-      wrappers: [ref.powerLevel[src.powerLevel].name, src.shattered ? "Shattered" : "", src.equipmentType],
+      wrappers: [
+        ref.powerLevel[src.powerLevel].name,
+        src.shattered ? "Shattered" : "",
+        src.equipmentType,
+      ],
     },
     {
       icon: "fa-crosshairs-simple",
@@ -45,12 +49,20 @@ export function _messageParts(equipmentData) {
     {
       icon: "fa-weight-hanging",
       label: "Load",
-      wrappers: [src.weight + " lb", src.minStr + " min STR", src.tier.raw ? "Tier " + src.tier.raw : ""],
+      wrappers: [
+        src.weight + " lb",
+        src.minStr + " min STR",
+        src.tier.raw ? "Tier " + src.tier.raw : "",
+      ],
     },
     {
       icon: "fa-flag",
       label: "Equipment Classes",
-      wrappers: [...src.equipmentClasses.map((equipmentClass) => ref.equipmentClasses[equipmentClass])],
+      wrappers: [
+        ...src.equipmentClasses.map(
+          (equipmentClass) => ref.equipmentClasses[equipmentClass],
+        ),
+      ],
     },
   ];
   const blocks = [

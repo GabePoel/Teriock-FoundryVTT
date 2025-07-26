@@ -91,15 +91,26 @@ export default class TeriockItem extends BaseTeriockItem {
     if (pullType === "categories") {
       const pages = await fetchCategoryMembers(toPull);
       /** @type {object} */
-      const progress = ui.notifications.info(`Pulling Category:${toPull} from wiki.`, { progress: true });
+      const progress = ui.notifications.info(
+        `Pulling Category:${toPull} from wiki.`,
+        { progress: true },
+      );
       let pct = 0;
       for (const page of pages) {
-        progress.update({ pct: pct, message: `Pulling ${page.title} from wiki.` });
+        progress.update({
+          pct: pct,
+          message: `Pulling ${page.title} from wiki.`,
+        });
         if (page.title.startsWith("Ability:")) {
-          await createAbility(this, page.title.replace(/^Ability:/, ""), { notify: false });
+          await createAbility(this, page.title.replace(/^Ability:/, ""), {
+            notify: false,
+          });
         }
         pct += 1 / pages.length;
-        progress.update({ pct: pct, message: `Pulling ${page.title} from wiki.` });
+        progress.update({
+          pct: pct,
+          message: `Pulling ${page.title} from wiki.`,
+        });
       }
     } else {
       await createAbility(this, toPull.replace(/^Ability:/, ""));

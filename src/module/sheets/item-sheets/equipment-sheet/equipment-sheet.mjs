@@ -13,7 +13,9 @@ import { fontContextMenu, powerLevelContextMenu } from "./connections/_context-m
  * @property {TeriockEquipment} document
  * @property {TeriockEquipment} item
  */
-export default class TeriockEquipmentSheet extends HandlebarsApplicationMixin(TeriockBaseItemSheet) {
+export default class TeriockEquipmentSheet extends HandlebarsApplicationMixin(
+  TeriockBaseItemSheet,
+) {
   /**
    * Default options for the equipment sheet.
    * @type {object}
@@ -38,7 +40,8 @@ export default class TeriockEquipmentSheet extends HandlebarsApplicationMixin(Te
    */
   static PARTS = {
     all: {
-      template: "systems/teriock/src/templates/item-templates/equipment-template/equipment-template.hbs",
+      template:
+        "systems/teriock/src/templates/item-templates/equipment-template/equipment-template.hbs",
       scrollable: [".window-content", ".tsheet-page", ".ab-sheet-everything"],
     },
   };
@@ -49,7 +52,9 @@ export default class TeriockEquipmentSheet extends HandlebarsApplicationMixin(Te
    * @static
    */
   static async _toggleEquipped() {
-    await this.document.update({ "system.equipped": !this.document.system.equipped });
+    await this.document.update({
+      "system.equipped": !this.document.system.equipped,
+    });
   }
 
   /**
@@ -58,7 +63,9 @@ export default class TeriockEquipmentSheet extends HandlebarsApplicationMixin(Te
    * @static
    */
   static async _toggleShattered() {
-    await this.document.update({ "system.shattered": !this.document.system.shattered });
+    await this.document.update({
+      "system.shattered": !this.document.system.shattered,
+    });
   }
 
   /**
@@ -67,7 +74,9 @@ export default class TeriockEquipmentSheet extends HandlebarsApplicationMixin(Te
    * @static
    */
   static async _toggleDampened() {
-    await this.document.update({ "system.dampened": !this.document.system.dampened });
+    await this.document.update({
+      "system.dampened": !this.document.system.dampened,
+    });
   }
 
   /**
@@ -107,7 +116,11 @@ export default class TeriockEquipmentSheet extends HandlebarsApplicationMixin(Te
 
     const item = this.item;
 
-    this._connectContextMenu(".power-level-box", powerLevelContextMenu(item), "click");
+    this._connectContextMenu(
+      ".power-level-box",
+      powerLevelContextMenu(item),
+      "click",
+    );
     this._connectContextMenu(".ab-title", fontContextMenu(item), "contextmenu");
 
     this.element.querySelectorAll(".capitalization-input").forEach((el) => {
@@ -164,7 +177,9 @@ export default class TeriockEquipmentSheet extends HandlebarsApplicationMixin(Te
 
     const staticUpdates = {
       ".ab-damage-button": { "system.damage": 2 },
-      ".ab-two-handed-damage-button": { "system.twoHandedDamage": this.item.system.damage },
+      ".ab-two-handed-damage-button": {
+        "system.twoHandedDamage": this.item.system.damage,
+      },
       ".ab-short-range-button": { "system.shortRange": 5 },
       ".ab-range-button": { "system.range": 5 },
       ".ab-av-button": { "system.av": 1 },
@@ -180,9 +195,13 @@ export default class TeriockEquipmentSheet extends HandlebarsApplicationMixin(Te
     }
 
     const dampenedEls = root.querySelectorAll(".flag-tag-dampened");
-    dampenedEls.forEach((el) => el.addEventListener("click", () => doc.system.undampen()));
+    dampenedEls.forEach((el) =>
+      el.addEventListener("click", () => doc.system.undampen()),
+    );
 
     const shatteredEls = root.querySelectorAll(".flag-tag-shattered");
-    shatteredEls.forEach((el) => el.addEventListener("click", () => doc.system.repair()));
+    shatteredEls.forEach((el) =>
+      el.addEventListener("click", () => doc.system.repair()),
+    );
   }
 }

@@ -42,7 +42,9 @@ export class StandardDamageHandler extends ActionHandler {
   /** @inheritDoc */
   async primaryAction() {
     for (const actor of this.selectedActors) {
-      await this._makeRoll(actor, this._prepFormula(actor), { twoHanded: this.event.ctrlKey });
+      await this._makeRoll(actor, this._prepFormula(actor), {
+        twoHanded: this.event.ctrlKey,
+      });
     }
   }
 

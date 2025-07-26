@@ -2,13 +2,13 @@ import {
   TeriockAbility,
   TeriockAttunement,
   TeriockCondition,
+  TeriockConsequence,
   TeriockEquipment,
   TeriockFluency,
-  TeriockConsequence,
   TeriockPower,
   TeriockProperty,
   TeriockRank,
-  TeriockResource,
+  TeriockResource
 } from "../_documents.mjs";
 import type TeriockEffect from "../effect.mjs";
 

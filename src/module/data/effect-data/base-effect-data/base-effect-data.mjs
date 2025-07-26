@@ -8,17 +8,22 @@ import { _expire, _shouldExpire } from "./methods/_expiration.mjs";
  *
  * @extends {TypeDataModel}
  */
-export default class TeriockBaseEffectData extends ChildDataMixin(TypeDataModel) {
+export default class TeriockBaseEffectData extends ChildDataMixin(
+  TypeDataModel,
+) {
   /**
    * Metadata for this effect.
    *
    * @returns {Teriock.EffectMetadata}
    */
   static get metadata() {
-    return foundry.utils.mergeObject({}, {
-      type: "base",
-      canSub: false,
-    });
+    return foundry.utils.mergeObject(
+      {},
+      {
+        type: "base",
+        canSub: false,
+      },
+    );
   }
 
   /**
@@ -44,6 +49,15 @@ export default class TeriockBaseEffectData extends ChildDataMixin(TypeDataModel)
   }
 
   /**
+   * Checks if the effect should expire based on its current state.
+   *
+   * @returns {boolean} True if the effect should expire, false otherwise.
+   */
+  get shouldExpire() {
+    return _shouldExpire(this);
+  }
+
+  /**
    * Defines this effect's schema.
    *
    * @returns {object} The schema definition for the effect data.
@@ -60,15 +74,6 @@ export default class TeriockBaseEffectData extends ChildDataMixin(TypeDataModel)
         label: "Update Counter",
       }),
     });
-  }
-
-  /**
-   * Checks if the effect should expire based on its current state.
-   *
-   * @returns {boolean} True if the effect should expire, false otherwise.
-   */
-  get shouldExpire() {
-    return _shouldExpire(this);
   }
 
   /**

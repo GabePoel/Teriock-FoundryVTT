@@ -11,7 +11,9 @@ import { fieldContextMenu, tradecraftContextMenu } from "./connections/_context-
  * @property {TeriockFluency} document
  * @property {TeriockFluency} effect
  */
-export default class TeriockFluencySheet extends api.HandlebarsApplicationMixin(TeriockBaseEffectSheet) {
+export default class TeriockFluencySheet extends api.HandlebarsApplicationMixin(
+  TeriockBaseEffectSheet,
+) {
   /**
    * Default options for the fluency sheet.
    * @type {object}
@@ -31,7 +33,8 @@ export default class TeriockFluencySheet extends api.HandlebarsApplicationMixin(
    */
   static PARTS = {
     all: {
-      template: "systems/teriock/src/templates/effect-templates/fluency-template/fluency-template.hbs",
+      template:
+        "systems/teriock/src/templates/effect-templates/fluency-template/fluency-template.hbs",
       scrollable: [".window-content", ".tsheet-page", ".ab-sheet-everything"],
     },
   };

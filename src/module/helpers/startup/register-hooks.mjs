@@ -1,7 +1,6 @@
 import { dispatch } from "../../commands/dispatch.mjs";
 import TeriockImageSheet from "../../sheets/misc-sheets/image-sheet/image-sheet.mjs";
 import hotbarDropDialog from "../dialogs/hotbar-drop-dialog.mjs";
-import inCombatExpirationDialog from "../dialogs/in-combat-expiration-dialog.mjs";
 
 /**
  * Check if the {@link TeriockUser} owns and uses the given document.
@@ -36,31 +35,41 @@ function addClickHandler(elements, handler) {
  * @returns {void}
  */
 export default function registerHooks() {
-  foundry.helpers.Hooks.on("updateItem", async (document, updateData, options, userId) => {
-    if (isOwnerAndCurrentUser(document, userId)) {
-      if (document.type === "equipment" && document.system.isAttuned && updateData.system.tier) {
-        const attunement = document.system.attunement;
-        if (attunement) {
-          await attunement.update({
-            "system.tier": document.system.tier.derived,
-          });
+  foundry.helpers.Hooks.on(
+    "updateItem",
+    async (document, updateData, options, userId) => {
+      if (isOwnerAndCurrentUser(document, userId)) {
+        if (
+          document.type === "equipment" &&
+          document.system.isAttuned &&
+          updateData.system.tier
+        ) {
+          const attunement = document.system.attunement;
+          if (attunement) {
+            await attunement.update({
+              "system.tier": document.system.tier.derived,
+            });
+          }
         }
+        await document.actor?.postUpdate();
       }
-      await document.actor?.postUpdate();
-    }
-  });
+    },
+  );
 
-  foundry.helpers.Hooks.on("updateActor", async (document, changed, options, userId) => {
-    if (isOwnerAndCurrentUser(document, userId)) {
-      const doCheckDown =
-        typeof changed.system?.hp?.value === "number" ||
-        typeof changed.system?.mp?.value === "number" ||
-        typeof changed.system?.money?.debt === "number";
-      await document.postUpdate({
-        checkDown: !doCheckDown,
-      });
-    }
-  });
+  foundry.helpers.Hooks.on(
+    "updateActor",
+    async (document, changed, options, userId) => {
+      if (isOwnerAndCurrentUser(document, userId)) {
+        const doCheckDown =
+          typeof changed.system?.hp?.value === "number" ||
+          typeof changed.system?.mp?.value === "number" ||
+          typeof changed.system?.money?.debt === "number";
+        await document.postUpdate({
+          checkDown: !doCheckDown,
+        });
+      }
+    },
+  );
 
   foundry.helpers.Hooks.on("createItem", async (document, options, userId) => {
     if (isOwnerAndCurrentUser(document, userId)) {
@@ -86,38 +95,53 @@ export default function registerHooks() {
     }
   });
 
-  foundry.helpers.Hooks.on("createActiveEffect", async (document, options, userId) => {
-    if (isOwnerAndCurrentUser(document, userId)) {
-      const sup = document.sup;
-      if (sup && typeof sup.update === "function") {
-        await sup.forceUpdate();
+  foundry.helpers.Hooks.on(
+    "createActiveEffect",
+    async (document, options, userId) => {
+      if (isOwnerAndCurrentUser(document, userId)) {
+        const sup = document.sup;
+        if (sup && typeof sup.update === "function") {
+          await sup.forceUpdate();
+        }
+        document.actor?.buildEffectTypes();
+        await document.actor?.postUpdate({ checkDown: true });
       }
-      document.actor?.buildEffectTypes();
-      await document.actor?.postUpdate({ checkDown: true });
-    }
-  });
+    },
+  );
 
-  foundry.helpers.Hooks.on("deleteActiveEffect", async (document, options, userId) => {
-    if (isOwnerAndCurrentUser(document, userId)) {
-      const sup = document.sup;
-      if (sup && typeof sup.update === "function") {
-        await sup.forceUpdate();
+  foundry.helpers.Hooks.on(
+    "deleteActiveEffect",
+    async (document, options, userId) => {
+      if (isOwnerAndCurrentUser(document, userId)) {
+        const sup = document.sup;
+        if (sup && typeof sup.update === "function") {
+          await sup.forceUpdate();
+        }
+        document.actor?.buildEffectTypes();
+        await document.actor?.postUpdate({ checkDown: true });
       }
-      document.actor?.buildEffectTypes();
-      await document.actor?.postUpdate({ checkDown: true });
-    }
-  });
+    },
+  );
 
-  foundry.helpers.Hooks.on("updateActiveEffect", async (document, updateData, options, userId) => {
-    console.debug(`Teriock | Active Effect updated: ${document.name}`, updateData);
-    if (isOwnerAndCurrentUser(document, userId) && document.type === "ability") {
-      const sup = document.sup;
-      if (sup && typeof sup.update === "function") {
-        await sup.update({});
-        await sup.sheet.render();
+  foundry.helpers.Hooks.on(
+    "updateActiveEffect",
+    async (document, updateData, options, userId) => {
+      console.debug(
+        `Teriock | Active Effect updated: ${document.name}`,
+        updateData,
+      );
+      if (
+        isOwnerAndCurrentUser(document, userId) &&
+        document.type === "ability"
+      ) {
+        const sup = document.sup;
+        if (sup && typeof sup.update === "function") {
+          await sup.update({});
+          await sup.sheet.render();
+        }
       }
-    }
-  });
+    },
+  );
 
   foundry.helpers.Hooks.on("chatMessage", (chatLog, message, chatData) => {
     const users = /** @type {WorldCollection<TeriockUser>} */ game.users;
@@ -142,15 +166,19 @@ export default function registerHooks() {
 
     // Open tags
     /** TODO: Move to {@link TeriockBaseMessageData} */
-    addClickHandler(html.querySelectorAll('[data-action="open"]'), async (event) => {
-      event.preventDefault();
-      const uuid = event.currentTarget.getAttribute("data-uuid");
-      if (!uuid) return;
-      const doc = /** @type{ClientDocument} */ await foundry.utils.fromUuid(uuid);
-      if (doc && typeof doc.sheet?.render === "function") {
-        await doc.sheet.render(true);
-      }
-    });
+    addClickHandler(
+      html.querySelectorAll('[data-action="open"]'),
+      async (event) => {
+        event.preventDefault();
+        const uuid = event.currentTarget.getAttribute("data-uuid");
+        if (!uuid) return;
+        const doc =
+          /** @type{ClientDocument} */ await foundry.utils.fromUuid(uuid);
+        if (doc && typeof doc.sheet?.render === "function") {
+          await doc.sheet.render(true);
+        }
+      },
+    );
 
     /** TODO: Move to {@link TeriockBaseMessageData} */
     html.querySelectorAll(".teriock-target-container").forEach((container) => {
@@ -168,7 +196,8 @@ export default function registerHooks() {
         }
 
         clickTimeout = setTimeout(async () => {
-          const doc = /** @type{TeriockToken} */ await foundry.utils.fromUuid(uuid);
+          const doc =
+            /** @type{TeriockToken} */ await foundry.utils.fromUuid(uuid);
           if (doc.isOwner) {
             if (doc?.token?.object) {
               doc.token.object.control();
@@ -190,8 +219,14 @@ export default function registerHooks() {
           clickTimeout = null;
         }
 
-        const doc = /** @type {TeriockActor} */ await foundry.utils.fromUuid(uuid);
-        if (doc && doc.sheet && doc.isOwner && typeof doc.sheet.render === "function") {
+        const doc =
+          /** @type {TeriockActor} */ await foundry.utils.fromUuid(uuid);
+        if (
+          doc &&
+          doc.sheet &&
+          doc.isOwner &&
+          typeof doc.sheet.render === "function"
+        ) {
           await doc.sheet.render(true);
         }
       });
@@ -201,11 +236,14 @@ export default function registerHooks() {
   foundry.helpers.Hooks.on("hotbarDrop", (bar, data, slot) => {
     fromUuid(data.uuid).then(
       /** @param {TeriockItem|TeriockEffect} doc */ async (doc) => {
-        if (!doc || !["Item", "ActiveEffect"].includes(doc.documentName)) return;
+        if (!doc || !["Item", "ActiveEffect"].includes(doc.documentName))
+          return;
         const macroName = `Use ${doc.name}`;
         const { searchTerm, command } = await hotbarDropDialog(doc);
         const folders = /** @type {WorldCollection<Folder>} */ game.folders;
-        let macroFolder = folders.find((f) => f.name === "Player Macros" && f.type === "Macro");
+        let macroFolder = folders.find(
+          (f) => f.name === "Player Macros" && f.type === "Macro",
+        );
         if (!macroFolder) {
           macroFolder = await Folder.create({
             name: "Player Macros",
@@ -242,50 +280,57 @@ export default function registerHooks() {
     return false;
   });
 
-  foundry.helpers.Hooks.on("updateWorldTime", async (worldTime, dt, options, userId) => {
-    if (game.user.id === userId && game.user?.isActiveGM) {
-      const scene = game.scenes.viewed;
-      const tokens = scene.tokens;
-      const actors = tokens.map((token) => token.actor);
+  foundry.helpers.Hooks.on(
+    "updateWorldTime",
+    async (worldTime, dt, options, userId) => {
+      if (game.user.id === userId && game.user?.isActiveGM) {
+        const scene = game.scenes.viewed;
+        const tokens = scene.tokens;
+        const actors = tokens.map((token) => token.actor);
 
-      for (const actor of actors) {
-        // Handle temporary effects expiration
-        const effects = actor.temporaryEffects;
-        for (const effect of effects) {
-          if (typeof effect?.system?.checkExpiration === "function") {
-            await effect?.system?.checkExpiration();
+        for (const actor of actors) {
+          // Handle temporary effects expiration
+          const effects = actor.temporaryEffects;
+          for (const effect of effects) {
+            if (typeof effect?.system?.checkExpiration === "function") {
+              await effect?.system?.checkExpiration();
+            }
           }
+
+          // Update debt with interest if the actor has debt and an interest rate
+          const currentDebt = actor.system.money?.debt || 0;
+          const dailyInterestRate = actor.system.interestRate || 0;
+
+          if (currentDebt > 0 && dailyInterestRate > 0) {
+            // Calculate new debt after interest
+            const daysElapsed = dt / 86400; // Convert seconds to days
+            const newDebt =
+              currentDebt * Math.pow(1 + dailyInterestRate, daysElapsed);
+
+            // Update the actor's debt
+            await actor.update({
+              "system.money.debt": Math.round(newDebt * 100) / 100, // Round to 2 decimal places
+            });
+          }
+
+          await actor.forceUpdate();
         }
+      }
+    },
+  );
 
-        // Update debt with interest if the actor has debt and an interest rate
-        const currentDebt = actor.system.money?.debt || 0;
-        const dailyInterestRate = actor.system.interestRate || 0;
-
-        if (currentDebt > 0 && dailyInterestRate > 0) {
-          // Calculate new debt after interest
-          const daysElapsed = dt / 86400; // Convert seconds to days
-          const newDebt = currentDebt * Math.pow(1 + dailyInterestRate, daysElapsed);
-
-          // Update the actor's debt
-          await actor.update({
-            "system.money.debt": Math.round(newDebt * 100) / 100, // Round to 2 decimal places
-          });
+  foundry.helpers.Hooks.on(
+    "moveToken",
+    async (document, movement, operation, user) => {
+      if (document.isOwner && document.actor && game.user.id === user._id) {
+        const actor = document.actor;
+        const effects = actor.movementExpirationEffects;
+        for (const effect of effects) {
+          await effect.system.expire();
         }
-
-        await actor.forceUpdate();
       }
-    }
-  });
-
-  foundry.helpers.Hooks.on("moveToken", async (document, movement, operation, user) => {
-    if (document.isOwner && document.actor && game.user.id === user._id) {
-      const actor = document.actor;
-      const effects = actor.movementExpirationEffects;
-      for (const effect of effects) {
-        await effect.system.expire();
-      }
-    }
-  });
+    },
+  );
 
   foundry.helpers.Hooks.on("applyTokenStatusEffect", (token) => {
     const actor = token.actor;

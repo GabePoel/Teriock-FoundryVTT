@@ -26,4 +26,8 @@ export type SlowExecutionTime = "longRest" | "shortRest" | string;
 /**
  * Valid execution times
  */
-export type ExecutionTime = ActiveExecutionTime | ReactiveExecutionTime | PassiveExecutionTime | SlowExecutionTime;
+export type ExecutionTime =
+  | ActiveExecutionTime
+  | ReactiveExecutionTime
+  | PassiveExecutionTime
+  | SlowExecutionTime;

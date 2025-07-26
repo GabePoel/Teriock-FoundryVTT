@@ -6,16 +6,22 @@ import {
   DeliveryConfig,
   FeatSaveAttribute,
   PiercingType,
-  TargetType,
+  TargetType
 } from "./rules-parts/interaction";
 import { OverviewText, ResultsText } from "./rules-parts/summary";
 import { ImprovementsConfig } from "./rules-parts/improvements";
-import type {Duration} from "./rules-parts/duration";
+import type { Duration } from "./rules-parts/duration";
 
 /**
  * Valid ability types
  */
-export type AbilityType = "special" | "normal" | "gifted" | "echo" | "intrinsic" | "flaw";
+export type AbilityType =
+  | "special"
+  | "normal"
+  | "gifted"
+  | "echo"
+  | "intrinsic"
+  | "flaw";
 
 /**
  * Data structure that the game system rules care about. (Stuff that appears directly on the wiki.)

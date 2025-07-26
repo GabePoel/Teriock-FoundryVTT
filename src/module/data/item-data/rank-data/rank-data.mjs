@@ -13,7 +13,9 @@ import { _rollHitDie, _rollManaDie } from "./methods/_rolling.mjs";
  *
  * @extends {TeriockBaseItemData}
  */
-export default class TeriockRankData extends WikiDataMixin(TeriockBaseItemData) {
+export default class TeriockRankData extends WikiDataMixin(
+  TeriockBaseItemData,
+) {
   /** @inheritDoc */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
@@ -54,7 +56,8 @@ export default class TeriockRankData extends WikiDataMixin(TeriockBaseItemData) 
         gmOnly: true,
       }),
       description: new fields.HTMLField({
-        initial: "<p>Every adventurer is a journeyman before they join their first class.</p>",
+        initial:
+          "<p>Every adventurer is a journeyman before they join their first class.</p>",
         label: "Description",
       }),
       flaws: new fields.HTMLField({

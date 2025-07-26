@@ -1,5 +1,3 @@
-import inCombatExpirationDialog from "../dialogs/in-combat-expiration-dialog.mjs";
-
 /**
  * Query that asks the {@link TeriockUser} if their effect should expire.
  *

@@ -6,4 +6,6 @@ import TeriockBaseEffectSheet from "../base-effect-sheet/base-effect-sheet.mjs";
  * Provides basic effect management functionality extending the base effect sheet.
  * @extends {TeriockBaseEffectSheet}
  */
-export default class TeriockConsequenceSheet extends api.HandlebarsApplicationMixin(TeriockBaseEffectSheet) {}
+export default class TeriockConsequenceSheet extends api.HandlebarsApplicationMixin(
+  TeriockBaseEffectSheet,
+) {}

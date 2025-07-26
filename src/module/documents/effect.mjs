@@ -8,14 +8,6 @@ import { BaseTeriockEffect } from "./_base.mjs";
  * @property {TeriockActor|TeriockItem} parent
  */
 export default class TeriockEffect extends BaseTeriockEffect {
-  /** @inheritDoc */
-  static migrateData(data) {
-    if (typeof data.type === "string" && data.type === "effect") {
-      data.type = "consequence";
-    }
-    return data;
-  }
-
   /**
    * Checks if the effect is suppressed, combining system suppression with parent suppression.
 
@@ -56,7 +48,10 @@ export default class TeriockEffect extends BaseTeriockEffect {
    */
   get sup() {
     if (this.supId) {
-      return /** @type {TeriockEffect} */ this.parent.getEmbeddedDocument("ActiveEffect", this.supId);
+      return /** @type {TeriockEffect} */ this.parent.getEmbeddedDocument(
+        "ActiveEffect",
+        this.supId,
+      );
     }
     return null;
   }
@@ -67,7 +62,11 @@ export default class TeriockEffect extends BaseTeriockEffect {
    * @returns {string|null}
    */
   get supId() {
-    if (this.metadata?.canSub && this.system.hierarchy.supId && this.parent.effects.has(this.system.hierarchy.supId)) {
+    if (
+      this.metadata?.canSub &&
+      this.system.hierarchy.supId &&
+      this.parent.effects.has(this.system.hierarchy.supId)
+    ) {
       return this.system.hierarchy.supId;
     }
     return null;
@@ -97,7 +96,10 @@ export default class TeriockEffect extends BaseTeriockEffect {
     /** @type {TeriockEffect[]} */
     const subEffects = [];
     for (const id of this.subIds) {
-      const root = /** @type {TeriockActor|TeriockItem} */ foundry.utils.fromUuidSync(this.system.hierarchy.rootUuid);
+      const root =
+        /** @type {TeriockActor|TeriockItem} */ foundry.utils.fromUuidSync(
+          this.system.hierarchy.rootUuid,
+        );
       subEffects.push(root.effects.get(id));
     }
     return subEffects;
@@ -110,7 +112,10 @@ export default class TeriockEffect extends BaseTeriockEffect {
    */
   get subIds() {
     if (this.metadata.canSub && this.system.hierarchy.subIds.size > 0) {
-      const root = /** @type {TeriockActor|TeriockItem} */ foundry.utils.fromUuidSync(this.system.hierarchy.rootUuid);
+      const root =
+        /** @type {TeriockActor|TeriockItem} */ foundry.utils.fromUuidSync(
+          this.system.hierarchy.rootUuid,
+        );
       return this.system.hierarchy.subIds.filter((id) => root.effects.has(id));
     }
     return new Set();
@@ -160,6 +165,14 @@ export default class TeriockEffect extends BaseTeriockEffect {
     return false;
   }
 
+  /** @inheritDoc */
+  static migrateData(data) {
+    if (typeof data.type === "string" && data.type === "effect") {
+      data.type = "consequence";
+    }
+    return data;
+  }
+
   /**
    * Change the IDs for many client effects consistently.
    *
@@ -181,7 +194,8 @@ export default class TeriockEffect extends BaseTeriockEffect {
       }
       if (oldEffect.metadata.canSub) {
         if (oldIds.includes(oldEffect.system.hierarchy.supId)) {
-          updateData["system.hierarchy.supId"] = idMap[oldEffect.system.hierarchy.supId];
+          updateData["system.hierarchy.supId"] =
+            idMap[oldEffect.system.hierarchy.supId];
         }
         const newSubIds = new Set();
         for (const oldId of oldEffect.system.hierarchy.subIds) {
@@ -227,13 +241,21 @@ export default class TeriockEffect extends BaseTeriockEffect {
             idMap[id] = foundry.utils.randomID();
           }
           idMap[oldSupId] = newSupId;
-          const newSubs = this._changeEffectIds(subEffects, idMap, operation.parent.uuid);
+          const newSubs = this._changeEffectIds(
+            subEffects,
+            idMap,
+            operation.parent.uuid,
+          );
           supEffect.updateSource({
-            "system.hierarchy.subIds": supEffect.subIds.map((oldId) => idMap[oldId]),
+            "system.hierarchy.subIds": supEffect.subIds.map(
+              (oldId) => idMap[oldId],
+            ),
           });
           toCreate.push(...newSubs);
         }
-        supEffect.updateSource({ "system.hierarchy.rootUuid": operation.parent.uuid });
+        supEffect.updateSource({
+          "system.hierarchy.rootUuid": operation.parent.uuid,
+        });
         operation.keepId = true;
       }
     }
@@ -276,8 +298,18 @@ export default class TeriockEffect extends BaseTeriockEffect {
     super.prepareDerivedData();
     if (this.type === "attunement") {
       this.changes = [
-        { key: "system.attunements", mode: 2, value: this.system.target, priority: 10 },
-        { key: "system.presence.value", mode: 2, value: this.system.tier, priority: 10 },
+        {
+          key: "system.attunements",
+          mode: 2,
+          value: this.system.target,
+          priority: 10,
+        },
+        {
+          key: "system.presence.value",
+          mode: 2,
+          value: this.system.tier,
+          priority: 10,
+        },
       ];
     }
   }
@@ -289,7 +321,10 @@ export default class TeriockEffect extends BaseTeriockEffect {
    */
   async deleteSubs() {
     if (this.subIds.size > 0) {
-      await this.parent?.deleteEmbeddedDocuments("ActiveEffect", Array.from(this.subIds));
+      await this.parent?.deleteEmbeddedDocuments(
+        "ActiveEffect",
+        Array.from(this.subIds),
+      );
       await this.update({
         "system.hierarchy.subIds": new Set(),
       });

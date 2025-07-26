@@ -13,7 +13,10 @@ export async function _takeDamage(actorData, amount) {
   const temp = Math.max(0, hp.temp - amount);
   amount = Math.max(0, amount - hp.temp);
   const value = Math.max(hp.min, hp.value - amount);
-  await actorData.parent.update({ "system.hp.value": value, "system.hp.temp": temp });
+  await actorData.parent.update({
+    "system.hp.value": value,
+    "system.hp.temp": temp,
+  });
 }
 
 /**
@@ -29,7 +32,10 @@ export async function _takeDrain(actorData, amount) {
   const temp = Math.max(0, mp.temp - amount);
   amount = Math.max(0, amount - mp.temp);
   const value = Math.max(mp.min, mp.value - amount);
-  await actorData.parent.update({ "system.mp.value": value, "system.mp.temp": temp });
+  await actorData.parent.update({
+    "system.mp.value": value,
+    "system.mp.temp": temp,
+  });
 }
 
 /**
@@ -107,7 +113,9 @@ export async function _takeSetTempMp(actorData, amount) {
  * @returns {Promise<void>}
  */
 export async function _takeGainTempHp(actorData, amount) {
-  await actorData.parent.update({ "system.hp.temp": Math.max(actorData.hp.temp + amount, 0) });
+  await actorData.parent.update({
+    "system.hp.temp": Math.max(actorData.hp.temp + amount, 0),
+  });
 }
 
 /**
@@ -119,7 +127,9 @@ export async function _takeGainTempHp(actorData, amount) {
  * @returns {Promise<void>}
  */
 export async function _takeGainTempMp(actorData, amount) {
-  await actorData.parent.update({ "system.mp.temp": Math.max(actorData.mp.temp + amount, 0) });
+  await actorData.parent.update({
+    "system.mp.temp": Math.max(actorData.mp.temp + amount, 0),
+  });
 }
 
 /**
@@ -132,7 +142,10 @@ export async function _takeGainTempMp(actorData, amount) {
  */
 export async function _takeSleep(actorData, amount) {
   if (actorData.hp.value <= amount) {
-    await actorData.parent.toggleStatusEffect("asleep", { active: true, overlay: true });
+    await actorData.parent.toggleStatusEffect("asleep", {
+      active: true,
+      overlay: true,
+    });
   }
 }
 
@@ -148,7 +161,15 @@ export async function _takeKill(actorData, amount) {
   if (actorData.hp.value <= amount) {
     const effectData = {
       name: "Forced Dead",
-      statuses: ["dead", "down", "blind", "unconscious", "prone", "anosmatic", "mute"],
+      statuses: [
+        "dead",
+        "down",
+        "blind",
+        "unconscious",
+        "prone",
+        "anosmatic",
+        "mute",
+      ],
       type: "consequence",
       img: "systems/teriock/assets/conditions/dead.svg",
       flags: {
@@ -157,7 +178,9 @@ export async function _takeKill(actorData, amount) {
         },
       },
     };
-    await actorData.parent.createEmbeddedDocuments("ActiveEffect", [effectData]);
+    await actorData.parent.createEmbeddedDocuments("ActiveEffect", [
+      effectData,
+    ]);
   }
 }
 
@@ -176,14 +199,16 @@ export async function _takePay(actorData, amount, mode = "greedy") {
 
   // Calculate total available wealth in gold value
   const totalWealth = Object.keys(currencyOptions).reduce((total, currency) => {
-    return total + (currentMoney[currency] || 0) * currencyOptions[currency].value;
+    return (
+      total + (currentMoney[currency] || 0) * currencyOptions[currency].value
+    );
   }, 0);
 
   // If not enough money, add to debt and exit
   if (totalWealth < amount) {
     const shortfall = amount - totalWealth;
     await actorData.parent.update({
-      "system.money.debt": currentMoney.debt + shortfall
+      "system.money.debt": currentMoney.debt + shortfall,
     });
     return;
   }
@@ -191,7 +216,11 @@ export async function _takePay(actorData, amount, mode = "greedy") {
   // Create array of currencies sorted by value (highest first)
   const currencies = Object.entries(currencyOptions)
     .sort(([, a], [, b]) => b.value - a.value)
-    .map(([key, config]) => ({ key, ...config, current: currentMoney[key] || 0 }));
+    .map(([key, config]) => ({
+      key,
+      ...config,
+      current: currentMoney[key] || 0,
+    }));
 
   let remainingAmount = amount;
   const toDeduct = {};
@@ -200,7 +229,10 @@ export async function _takePay(actorData, amount, mode = "greedy") {
   for (const currency of currencies) {
     if (remainingAmount <= 0) break;
 
-    const canTake = Math.min(currency.current, Math.floor(remainingAmount / currency.value));
+    const canTake = Math.min(
+      currency.current,
+      Math.floor(remainingAmount / currency.value),
+    );
     if (canTake > 0) {
       toDeduct[currency.key] = canTake;
       remainingAmount -= canTake * currency.value;
@@ -231,7 +263,8 @@ export async function _takePay(actorData, amount, mode = "greedy") {
 
   // Deduct the currencies we're spending
   for (const [currencyKey, amountToDeduct] of Object.entries(toDeduct)) {
-    updateData[`system.money.${currencyKey}`] = currentMoney[currencyKey] - amountToDeduct;
+    updateData[`system.money.${currencyKey}`] =
+      currentMoney[currencyKey] - amountToDeduct;
   }
 
   // Handle change for exact mode
@@ -244,11 +277,13 @@ export async function _takePay(actorData, amount, mode = "greedy") {
 
       const changeAmount = Math.floor(changeRemaining / currency.value);
       if (changeAmount > 0) {
-        const currentAmount = updateData[`system.money.${currency.key}`] !== undefined
-          ? updateData[`system.money.${currency.key}`]
-          : currentMoney[currency.key];
+        const currentAmount =
+          updateData[`system.money.${currency.key}`] !== undefined
+            ? updateData[`system.money.${currency.key}`]
+            : currentMoney[currency.key];
 
-        updateData[`system.money.${currency.key}`] = currentAmount + changeAmount;
+        updateData[`system.money.${currency.key}`] =
+          currentAmount + changeAmount;
         changeRemaining -= changeAmount * currency.value;
       }
     }

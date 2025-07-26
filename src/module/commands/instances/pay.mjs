@@ -14,10 +14,16 @@ export const pay = new TeriockCommand(
 
     /** @type {"greedy" | "exact"} */
     let mode = "greedy";
-    if (options.rawArgs?.includes("--exact") || options.rawArgs?.includes("-e")) {
+    if (
+      options.rawArgs?.includes("--exact") ||
+      options.rawArgs?.includes("-e")
+    ) {
       mode = "exact";
     }
-    if (options.rawArgs?.includes("--greedy") || options.rawArgs?.includes("-g")) {
+    if (
+      options.rawArgs?.includes("--greedy") ||
+      options.rawArgs?.includes("-g")
+    ) {
       mode = "greedy";
     }
 

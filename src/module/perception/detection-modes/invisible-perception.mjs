@@ -16,7 +16,10 @@ export default class DetectionModeInvisiblePerception extends TeriockDetectionMo
     const src = visionSource.object.document;
     if (target instanceof Token) {
       const tgt = target.document;
-      if (!src.hasStatusEffect("ethereal") && tgt.hasStatusEffect("invisible")) {
+      if (
+        !src.hasStatusEffect("ethereal") &&
+        tgt.hasStatusEffect("invisible")
+      ) {
         return true;
       }
     }

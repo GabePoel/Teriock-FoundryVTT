@@ -59,9 +59,13 @@ export class TeriockArrayField extends fields.ArrayField {
    * @private
    */
   _toInput(config) {
-    const btn = createButton("teriock-array-field-add", '<i class="fa-solid fa-plus"></i> Add Item', {
-      path: this.fieldPath,
-    });
+    const btn = createButton(
+      "teriock-array-field-add",
+      '<i class="fa-solid fa-plus"></i> Add Item',
+      {
+        path: this.fieldPath,
+      },
+    );
     if (config.name) btn.setAttribute("name", config.name);
     return btn;
   }
@@ -131,7 +135,10 @@ export class TeriockRecordField extends fields.TypedObjectField {
           disabled: inputConfig.disabled,
         },
       );
-      itemInput.classList.add("teriock-record-field-item", "teriock-full-width");
+      itemInput.classList.add(
+        "teriock-record-field-item",
+        "teriock-full-width",
+      );
       items.appendChild(itemInput);
     }
     out.appendChild(items);

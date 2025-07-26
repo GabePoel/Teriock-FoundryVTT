@@ -5,7 +5,7 @@ export const DEFAULT_ROLL_CONFIG = {
     costs: {
       hp: 0,
       mp: 0,
-      gp: 0
+      gp: 0,
     },
     modifiers: {
       heightened: 0,
@@ -24,4 +24,4 @@ export const DEFAULT_ROLL_CONFIG = {
       tags: [],
     },
   },
-}
+};

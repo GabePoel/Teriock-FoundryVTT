@@ -10,5 +10,7 @@ export interface TeriockBaseItemSchema extends ChildDataMixin {
 
 declare module "./base-item-data.mjs" {
   /** Redundant extension is needed for intellisense. */
-  export default interface TeriockBaseItemData extends TeriockBaseItemSchema, ChildDataMixin {}
+  export default interface TeriockBaseItemData
+    extends TeriockBaseItemSchema,
+      ChildDataMixin {}
 }

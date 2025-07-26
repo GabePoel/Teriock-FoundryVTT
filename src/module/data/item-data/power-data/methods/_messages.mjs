@@ -1,7 +1,7 @@
 import {
   addAbilitiesBlock,
   addPropertiesBlock,
-  addResourcesBlock,
+  addResourcesBlock
 } from "../../../../helpers/messages-builder/message-parts.mjs";
 
 /**
@@ -29,7 +29,9 @@ export function _messageParts(powerData) {
       wrappers: [
         powerData.size ? "Size " + powerData.size : "",
         powerData.adult ? "Adult at " + powerData.adult : "",
-        powerData.lifespan ? powerData.lifespan + " Year Lifespan" : "Infinite Lifespan",
+        powerData.lifespan
+          ? powerData.lifespan + " Year Lifespan"
+          : "Infinite Lifespan",
       ],
     });
   }

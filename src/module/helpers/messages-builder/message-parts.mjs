@@ -66,13 +66,21 @@ export function messageWrapper(parent, content) {
  * @param {string|null} elements - Additional elements for special formatting.
  * @returns {HTMLDivElement|null} The created block element, or null if no text provided.
  */
-export function messageBlock(parent, title, text, italic = false, special = null, elements = null) {
+export function messageBlock(
+  parent,
+  title,
+  text,
+  italic = false,
+  special = null,
+  elements = null,
+) {
   if (!text) return null;
 
   const block = createElement("div", { className: "abm-block" });
   const titleElement = createElement("div", {
     className: "abm-block-title",
-    innerHTML: special === "ES" ? `With the Elder Sorcery of ${elements}...` : title,
+    innerHTML:
+      special === "ES" ? `With the Elder Sorcery of ${elements}...` : title,
   });
   const textElement = createElement("div", {
     className: "abm-block-text",
@@ -117,7 +125,12 @@ export function messageHeader(parent, image, text, fontClass = "tfont") {
     innerHTML: text,
   });
 
-  const header = createElement("div", { className: "tmessage-header" }, imageContainer, headerText);
+  const header = createElement(
+    "div",
+    { className: "tmessage-header" },
+    imageContainer,
+    headerText,
+  );
   parent.appendChild(header);
   return header;
 }
@@ -136,7 +149,11 @@ function barIcon(parent, iconClass, label, first = true) {
     style: "font-size: 1em;",
   });
 
-  const wrapper = createElement("div", { className: "abm-icon-wrapper tsubtle" }, icon);
+  const wrapper = createElement(
+    "div",
+    { className: "abm-icon-wrapper tsubtle" },
+    icon,
+  );
   if (label) {
     wrapper.setAttribute("data-tooltip", label);
     wrapper.setAttribute("data-tooltip-direction", "LEFT");
@@ -155,7 +172,13 @@ function barIcon(parent, iconClass, label, first = true) {
  * @param {string} typeKey - The type key to filter entities by.
  * @param {string} iconFallback - Fallback icon class if no specific icon is found.
  */
-function addEmbeddedBlock(entities, blocks, name, typeKey, iconFallback = "hashtag") {
+function addEmbeddedBlock(
+  entities,
+  blocks,
+  name,
+  typeKey,
+  iconFallback = "hashtag",
+) {
   const config = CONFIG.TERIOCK.abilityOptions.abilityType;
   const typeOrder = Object.keys(config);
 
@@ -176,7 +199,8 @@ function addEmbeddedBlock(entities, blocks, name, typeKey, iconFallback = "hasht
   const listItems = filtered
     .map((e) => {
       const { name, uuid, system } = e;
-      const { color = "", icon = iconFallback } = config[system[`${typeKey}Type`]] || {};
+      const { color = "", icon = iconFallback } =
+        config[system[`${typeKey}Type`]] || {};
       const quantity = system.quantity,
         maxQuantity = system.maxQuantity?.derived;
 
@@ -197,7 +221,7 @@ function addEmbeddedBlock(entities, blocks, name, typeKey, iconFallback = "hasht
   blocks.push({
     title: name,
     text: `<ul class="tmessage-embedded-ul">${listItems}</ul>`,
-    special: "embedded-block"
+    special: "embedded-block",
   });
 }
 
