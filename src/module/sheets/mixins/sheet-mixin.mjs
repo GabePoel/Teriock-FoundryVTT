@@ -1,7 +1,10 @@
 const { DragDrop, TextEditor, ContextMenu } = foundry.applications.ux;
 const { DocumentSheetV2, DialogV2 } = foundry.applications.api;
 import connectEmbedded from "../../helpers/connect-embedded.mjs";
+import { abilities } from "../../helpers/constants/generated/abilities.mjs";
 import * as createEffects from "../../helpers/create-effects.mjs";
+import { createProperty } from "../../helpers/create-effects.mjs";
+import { selectAbilityDialog, selectPropertyDialog } from "../../helpers/dialogs/select-dialog.mjs";
 import { imageContextMenuOptions } from "../misc-sheets/image-sheet/connections/_context-menus.mjs";
 
 /**
@@ -313,6 +316,16 @@ export default (Base) => {
      * @static
      */
     static async _createAbility(event, __) {
+      // const abilityKey = await selectAbilityDialog();
+      // console.log(abilityKey);
+      // if (abilityKey) {
+      //   return await createEffects.importAbility(
+      //     this.document,
+      //     abilities[abilityKey],
+      //   );
+      // } else {
+      //   return await createEffects.createAbility(this.document);
+      // }
       return await createEffects.createAbility(this.document);
     }
 
@@ -350,45 +363,12 @@ export default (Base) => {
      * @static
      */
     static async _createProperty(event, __) {
-      const createOptions = (obj) =>
-        Object.entries(obj)
-          .map(([key, value]) => `<option value="${key}">${value}</option>`)
-          .join("");
-
-      const { equipmentOptions } = CONFIG.TERIOCK;
-      const propertyOptions = [
-        ...createOptions(equipmentOptions.properties),
-        ...createOptions(equipmentOptions.materialProperties),
-        ...createOptions(equipmentOptions.magicalProperties),
-      ].join("");
-
-      await new DialogV2({
-        window: { title: "Create Property" },
-        content: `
-          <label for="property-select">Select Property</label>
-          <select id="property-select" name="property">${propertyOptions}</select>
-        `,
-        buttons: [
-          {
-            action: "chosen",
-            label: "Add Chosen Property",
-            default: true,
-            callback: async (event, button) => {
-              return await createEffects.createProperty(
-                this.item,
-                button.form.elements.property.value,
-              );
-            },
-          },
-          {
-            action: "other",
-            label: "Create New Property",
-            callback: async () => {
-              return await createEffects.createProperty(this.item, "");
-            },
-          },
-        ],
-      }).render(true);
+      let property = await selectPropertyDialog();
+      if (!property) {
+        property = "newProperty";
+      }
+      console.log("PROPERTY", property);
+      await createProperty(this.document, property);
     }
 
     /**

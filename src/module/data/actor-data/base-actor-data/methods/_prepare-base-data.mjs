@@ -18,15 +18,17 @@ export function _prepareBaseData(actorData) {
   actorData.equipmentChanges = {
     upgrades: {
       classes: {},
-      types: {},
-      names: {},
       ids: {},
+      names: {},
+      properties: {},
+      types: {},
     },
     overrides: {
       classes: {},
-      types: {},
-      names: {},
       ids: {},
+      names: {},
+      properties: {},
+      types: {},
     },
   };
 }

@@ -46,10 +46,12 @@ const writeObjectToFile = async (titles, name) => {
   const generated = Object.fromEntries(titles.map((t) => [camelCase(t), t]));
   const { override, remove } = await loadManualOverrides(name);
   const merged = { ...generated, ...override };
-  remove.map(camelCase).forEach((key) => delete merged[key]);
+  remove.forEach((key) => delete merged[key]);
+
   const stringifyObject = (obj) =>
     "{\n" +
     Object.entries(obj)
+      .sort(([a], [b]) => a.localeCompare(b)) // Sort keys alphabetically
       .map(([k, v]) => `    ${k}: ${JSON.stringify(v)}`)
       .join(",\n") +
     "\n}";
@@ -167,6 +169,31 @@ const processSimpleCategory = async (
       new Set([...baseTitles, ...topSubcats, ...nestedSubcats]),
     );
     await writeObjectToFile(allEquipmentClasses, "equipmentClasses");
+
+    // Weapon Classes
+    const weaponMembers = await fetchCategoryMembers("Weapon classes", {
+      cmtype: "page|subcat",
+    });
+    const weaponBaseTitles = cleanTitles(weaponMembers);
+    const weaponTopSubcats = weaponMembers
+      .filter((m) => m.title.startsWith("Category:"))
+      .map((m) => m.title.replace(/^Category:/, ""));
+
+    let weaponNestedSubcats = [];
+    for (const subcat of weaponTopSubcats) {
+      const nested = await fetchCategoryMembers(subcat, { cmtype: "subcat" });
+      weaponNestedSubcats.push(
+        ...nested
+          .filter((m) => m.title.startsWith("Category:"))
+          .map((m) => m.title.replace(/^Category:/, "")),
+      );
+    }
+
+    const allWeaponClasses = Array.from(
+      new Set([...weaponBaseTitles, ...weaponTopSubcats, ...weaponNestedSubcats]),
+    );
+    await writeObjectToFile(allWeaponClasses, "weaponClasses");
+
   } catch (err) {
     console.error("Error:", err);
   }

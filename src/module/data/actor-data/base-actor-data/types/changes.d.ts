@@ -20,6 +20,8 @@ type EquipmentChangeValues = {
 type EquipmentChangeKeys = {
   /** Overrides by equipment type */
   types: Record<string, Partial<EquipmentChangeValues>>;
+  /** Overrides by equipment property */
+  properties: Record<string, Partial<EquipmentChangeValues>>;
   /** Overrides by equipment class */
   classes: Record<string, Partial<EquipmentChangeValues>>;
   /** Overrides by equipment name */

@@ -95,6 +95,9 @@ export function _defineGeneral(schema) {
       new fields.StringField({
         choices: abilityOptions.targets,
       }),
+      {
+        initial: ["creature"],
+      },
     ),
     elements: new fields.ArrayField(
       /** @type {typeof StringField} */
@@ -136,6 +139,7 @@ export function _defineGeneral(schema) {
       description: new fields.StringField({
         label: "Description",
         hint: "Custom description. Leave blank in order for the duration to be automatically generated.",
+        initial: "1 Minute",
       }),
     }),
     sustained: new fields.BooleanField({

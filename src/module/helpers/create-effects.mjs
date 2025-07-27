@@ -73,8 +73,12 @@ export async function importAbility(document, name) {
       essentialPack?.index.getName(name).uuid,
     );
   const refAbility = await refAbilityWrapper?.effects.getName(name);
+  /** @type {TeriockAbilityData} */
+  const refData = refAbility.toObject();
+  refData.hierarchy = foundry.utils.deepClone(refAbility.system.hierarchy);
+  console.log(refData);
   const abilities = await document.createEmbeddedDocuments("ActiveEffect", [
-    refAbility.toObject(),
+    refData,
   ]);
   return abilities[0];
 }
@@ -109,6 +113,7 @@ export async function createProperty(document, key = "") {
   let description = "Insert description here.";
   let propertyType = "normal";
   let name = "New Property";
+  if (key === "other") key = null;
   if (CONFIG.TERIOCK.equipmentOptions.properties[key]) {
     name = CONFIG.TERIOCK.equipmentOptions.properties[key];
     description = CONFIG.TERIOCK.content.properties[key].content;

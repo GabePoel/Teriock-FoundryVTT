@@ -2,16 +2,16 @@
  * Generic function to derive equipment property values with actor overrides and upgrades
  *
  * @param {TeriockEquipmentData} equipmentData
- * @param {string} property - The property name to check overrides for
+ * @param {string} dataKey - The data key to check overrides for
  * @param {function} getInitialValue - Function to extract initial value from equipmentData
  * @param {function} combineValues - Function to combine current and override values
  * @param {function|null} applyUpgrade - Function to apply upgrade values (addition for numbers, concatenation for
  *   strings, etc.)
  * @returns {any}
  */
-function _deriveEquipmentProperty(
+function deriveEquipmentDataValue(
   equipmentData,
-  property,
+  dataKey,
   getInitialValue,
   combineValues,
   applyUpgrade,
@@ -23,51 +23,65 @@ function _deriveEquipmentProperty(
     const overrides = actor.system.equipmentChanges.overrides;
     const upgrades = actor.system.equipmentChanges.upgrades;
 
-    // Apply overrides in order: classes, types, names, ids
+    // Apply overrides in order: classes, properties, types, names, ids
     for (const equipmentClass of equipmentData.equipmentClasses) {
-      const classOverride = overrides.classes[equipmentClass]?.[property];
+      const classOverride = overrides.classes[equipmentClass]?.[dataKey];
       if (classOverride !== undefined) {
         value = combineValues(value, classOverride);
       }
     }
 
+    for (const propertyKey of equipmentData.parent?.effectKeys?.property || []) {
+      const propertyOverride = overrides.properties[propertyKey]?.[dataKey];
+      if (propertyOverride !== undefined) {
+        value = combineValues(value, propertyOverride);
+      }
+    }
+
     const typeOverride =
-      overrides.types[equipmentData.equipmentType]?.[property];
+      overrides.types[equipmentData.equipmentType]?.[dataKey];
     if (typeOverride !== undefined) {
       value = combineValues(value, typeOverride);
     }
 
-    const nameOverride = overrides.names[equipmentData.parent.name]?.[property];
+    const nameOverride = overrides.names[equipmentData.parent.name]?.[dataKey];
     if (nameOverride !== undefined) {
       value = combineValues(value, nameOverride);
     }
 
-    const idOverride = overrides.ids[equipmentData.parent.id]?.[property];
+    const idOverride = overrides.ids[equipmentData.parent.id]?.[dataKey];
     if (idOverride !== undefined) {
       value = combineValues(value, idOverride);
     }
 
-    // Apply upgrades in the same order: classes, types, names, ids
+    // Apply upgrades in order: classes, properties, types, names, ids
     if (applyUpgrade) {
       for (const equipmentClass of equipmentData.equipmentClasses) {
-        const classUpgrade = upgrades.classes[equipmentClass]?.[property];
+        const classUpgrade = upgrades.classes[equipmentClass]?.[dataKey];
         if (classUpgrade !== undefined) {
           value = applyUpgrade(value, classUpgrade);
         }
       }
 
+      for (const propertyKey of equipmentData.parent?.effectKeys?.property || []) {
+        const propertyUpgrade = upgrades.properties[propertyKey]?.[dataKey];
+        if (propertyUpgrade !== undefined) {
+          value = combineValues(value, propertyUpgrade);
+        }
+      }
+
       const typeUpgrade =
-        upgrades.types[equipmentData.equipmentType]?.[property];
+        upgrades.types[equipmentData.equipmentType]?.[dataKey];
       if (typeUpgrade !== undefined) {
         value = applyUpgrade(value, typeUpgrade);
       }
 
-      const nameUpgrade = upgrades.names[equipmentData.parent.name]?.[property];
+      const nameUpgrade = upgrades.names[equipmentData.parent.name]?.[dataKey];
       if (nameUpgrade !== undefined) {
         value = applyUpgrade(value, nameUpgrade);
       }
 
-      const idUpgrade = upgrades.ids[equipmentData.parent.id]?.[property];
+      const idUpgrade = upgrades.ids[equipmentData.parent.id]?.[dataKey];
       if (idUpgrade !== undefined) {
         value = applyUpgrade(value, idUpgrade);
       }
@@ -78,6 +92,27 @@ function _deriveEquipmentProperty(
 }
 
 /**
+ * Helper function to format string upgrades with appropriate operators
+ *
+ * @param {string} current - Current value
+ * @param {string} upgrade - Upgrade value
+ * @returns {string}
+ */
+function formatStringUpgrade(current, upgrade) {
+  if (!upgrade) return current;
+
+  if (upgrade.startsWith("-")) {
+    return `${current} - ${upgrade.slice(1)}`;
+  } else if (upgrade.startsWith("*")) {
+    return `${current} * ${upgrade.slice(1)}`;
+  } else if (upgrade.startsWith("/")) {
+    return `${current} / ${upgrade.slice(1)}`;
+  } else {
+    return `${current} + ${upgrade}`;
+  }
+}
+
+/**
  * Derived AV0 value.
  *
  * @param {TeriockEquipmentData} equipmentData
@@ -85,7 +120,7 @@ function _deriveEquipmentProperty(
  */
 export function _derivedAv0(equipmentData) {
   return (
-    _deriveEquipmentProperty(
+    deriveEquipmentDataValue(
       equipmentData,
       "av0",
       (data) => data.parent.effectKeys?.property?.has("av0"),
@@ -102,7 +137,7 @@ export function _derivedAv0(equipmentData) {
  * @returns {boolean}
  */
 export function _derivedUb(equipmentData) {
-  return _deriveEquipmentProperty(
+  return deriveEquipmentDataValue(
     equipmentData,
     "ub",
     (data) => data.parent.effectKeys?.property?.has("ub"),
@@ -118,7 +153,7 @@ export function _derivedUb(equipmentData) {
  * @returns {number}
  */
 export function _derivedAv(equipmentData) {
-  return _deriveEquipmentProperty(
+  return deriveEquipmentDataValue(
     equipmentData,
     "av",
     (data) => data.av,
@@ -134,7 +169,7 @@ export function _derivedAv(equipmentData) {
  * @returns {number}
  */
 export function _derivedBv(equipmentData) {
-  return _deriveEquipmentProperty(
+  return deriveEquipmentDataValue(
     equipmentData,
     "bv",
     (data) => data.bv,
@@ -144,39 +179,18 @@ export function _derivedBv(equipmentData) {
 }
 
 /**
- * Helper function to format string upgrades with appropriate operators
- *
- * @param {string} current - Current value
- * @param {string} upgrade - Upgrade value
- * @returns {string}
- */
-function _formatStringUpgrade(current, upgrade) {
-  if (!upgrade) return current;
-
-  if (upgrade.startsWith("-")) {
-    return `${current} - ${upgrade.slice(1)}`;
-  } else if (upgrade.startsWith("*")) {
-    return `${current} * ${upgrade.slice(1)}`;
-  } else if (upgrade.startsWith("/")) {
-    return `${current} / ${upgrade.slice(1)}`;
-  } else {
-    return `${current} + ${upgrade}`;
-  }
-}
-
-/**
  * Derived damage dice.
  *
  * @param {TeriockEquipmentData} equipmentData
  * @returns {string}
  */
 export function _derivedDamage(equipmentData) {
-  return _deriveEquipmentProperty(
+  return deriveEquipmentDataValue(
     equipmentData,
     "damage",
     (data) => data.damage,
     (current, override) => override || current,
-    (current, upgrade) => _formatStringUpgrade(current, upgrade), // String concatenation with operators
+    (current, upgrade) => formatStringUpgrade(current, upgrade), // String concatenation with operators
   );
 }
 
@@ -187,11 +201,11 @@ export function _derivedDamage(equipmentData) {
  * @returns {string}
  */
 export function _derivedTwoHandedDamage(equipmentData) {
-  return _deriveEquipmentProperty(
+  return deriveEquipmentDataValue(
     equipmentData,
     "twoHandedDamage",
     (data) => data.twoHandedDamage,
     (current, override) => override || current,
-    (current, upgrade) => _formatStringUpgrade(current, upgrade), // String concatenation with operators
+    (current, upgrade) => formatStringUpgrade(current, upgrade), // String concatenation with operators
   );
 }

@@ -1,5 +1,6 @@
 const { fields } = foundry.data;
 import { equipmentOptions } from "../../../../helpers/constants/equipment-options.mjs";
+import { weaponFightingStyles } from "../../../../helpers/constants/generated/weapon-fighting-styles.mjs";
 
 /**
  * Defines the schema for equipment data fields.
@@ -101,6 +102,7 @@ export function _defineSchema() {
       initial: null,
       label: "Style Bonus",
       nullable: true,
+      choices: weaponFightingStyles,
     }),
     av: new fields.NumberField({
       initial: 0,

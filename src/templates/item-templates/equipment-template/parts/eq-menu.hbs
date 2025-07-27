@@ -25,16 +25,14 @@
           rootId=(concat uuid)
           dataset=(dataset action="toggleDampened")
         }}
-        {{
-        formGroup
+        {{formGroup
           systemFields.consumable
           value=system.consumable
           disabled=(not editable)
           classes="tgrid-item"
           rootId=(concat uuid)
         }}
-        {{
-        formGroup
+        {{formGroup
           systemFields.equipped
           value=system.equipped
           disabled=(not editable)
@@ -42,8 +40,7 @@
           rootId=(concat uuid)
           dataset=(dataset action="toggleEquipped")
         }}
-        {{
-        formGroup
+        {{formGroup
           systemFields.proficient
           value=system.proficient
           disabled=(not editable)
@@ -57,8 +54,7 @@
           classes="tgrid-item"
           rootId=(concat uuid)
         }}
-        {{
-        formGroup
+        {{formGroup
           systemFields.disabled
           value=system.disabled
           disabled=(not editable)
@@ -70,38 +66,24 @@
     <div class="ab-menu-bar">
       <div class="tgrid g2">
         <div class="tgrid-item">
-          <div class="ab-multi-select-label ab-multi-select-equipment-classes">
-            <multi-select
-              {{#if (not editable)}}
-              disabled="true"
-              {{/if}}
-              name="system.equipmentClasses"
-              data-edit="system.equipmentClasses"
-            >
-              {{selectOptions
-                config.equipmentOptions.equipmentClasses
-                selected=system.equipmentClasses
-              }}
-            </multi-select>
-          </div>
+          {{formInput
+            systemFields.equipmentClasses
+            value=system.equipmentClasses
+            disabled=(not editable)
+            classes="teriock-full-width ab-menu-inline"
+            dataset=(dataset tooltip="Equipment Classes")
+            rootId=(concat uuid)
+          }}
         </div>
         <div class="tgrid-item">
-          <div>
-            <label>
-              <select
-                {{#if (not editable)}}
-                disabled="disabled"
-                {{/if}}
-                name="system.sb"
-              >
-                <option value="">Style Bonus</option>
-                {{selectOptions
-                  config.equipmentOptions.weaponFightingStyles
-                  selected=system.sb
-                }}
-              </select>
-            </label>
-          </div>
+          {{formInput
+            systemFields.sb
+            value=system.sb
+            disabled=(not editable)
+            classes="teriock-full-width"
+            dataset=(dataset tooltip="Style Bonus")
+            rootId=(concat uuid)
+          }}
         </div>
       </div>
     </div>
