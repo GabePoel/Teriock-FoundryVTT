@@ -5,7 +5,7 @@
   "author": "qf5JYGZKzM588nE6",
   "img": "icons/svg/dice-target.svg",
   "scope": "global",
-  "command": "const options = foundry.utils.deepClone({\n  advantage: window.event?.altKey,\n  disadvantage: window.event?.shiftKey,\n})\nconst actor = scope.abilityData.actor;\nconst abilities = {};\nactor.effectTypes?.ability.filter((a) => (a.system.interaction === \"attack\") && (a.system.maneuver === \"active\") && (a.system.executionTime === \"a1\") && [\"weapon\", \"hand\"].includes(a.system.delivery.base)).map((a) => abilities[a.id] = a.name);\nconst id = await game.teriock.api.dialog.select(abilities, \"Ability\", \"Please select an ability.\", \"Select Ability\");\nconst ability = actor.effectTypes?.ability?.find((a) => a.id === id);\nHooks.once(\"renderChatMessageHTML\", async () => {\n  await ability.system.roll(options);\n  await ability.delete();\n});",
+  "command": "const options = foundry.utils.deepClone({\n  advantage: window.event?.altKey,\n  disadvantage: window.event?.shiftKey,\n})\nconst actor = scope.abilityData.actor;\nconst abilities = {};\nactor.effectTypes?.ability.filter((a) => (a.system.interaction === \"attack\") && (a.system.maneuver === \"active\") && (a.system.executionTime === \"a1\") && [\"weapon\", \"hand\"].includes(a.system.delivery.base)).map((a) => abilities[a.id] = a.name);\nconst id = await game.teriock.api.dialog.select(abilities, {label: \"Ability\", hint: \"Please select an ability.\", title: \"Select Ability\"});\nconst ability = actor.effectTypes?.ability?.find((a) => a.id === id);\nHooks.once(\"renderChatMessageHTML\", async () => {\n  await ability.system.roll(options);\n  await ability.delete();\n});",
   "folder": null,
   "sort": 0,
   "ownership": {
@@ -21,7 +21,7 @@
     "systemId": "teriock",
     "systemVersion": "0.1.0",
     "createdTime": 1753599982446,
-    "modifiedTime": 1753600376525,
+    "modifiedTime": 1753650774172,
     "lastModifiedBy": "qf5JYGZKzM588nE6"
   },
   "_key": "!macros!OCGHKTqnI04j1L3h"

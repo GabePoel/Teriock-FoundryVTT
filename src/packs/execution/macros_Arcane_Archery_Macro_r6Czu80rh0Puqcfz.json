@@ -5,7 +5,7 @@
   "author": "qf5JYGZKzM588nE6",
   "img": "icons/svg/dice-target.svg",
   "scope": "global",
-  "command": "const options = foundry.utils.deepClone({\n  advantage: window.event?.altKey,\n  disadvantage: window.event?.shiftKey,\n  noHeighten: true,\n})\nconst spells = {\n  flameRay: \"Flame Ray\",\n  lightRay: \"Light Ray\",\n  empathicRay: \"Empathic Ray\",\n  deathRay: \"Death Ray\",\n  lightningRay: \"Lightning Ray\",\n  fireBall: \"Fire Ball\",\n  medicineBall: \"Medicine Ball\",\n  treeformBall: \"Treeform Ball\",\n  terrorBall: \"Terror Ball\",\n  iceBall: \"Ice Ball\",\n}\nconst chosenAbilityName = await game.teriock.api.dialog.select(spells, \"Missile Spell\", \"Please select a missile spell.\", \"Select Missile Spell\");\nconst actor = scope.abilityData.actor;\nconst ability = await game.teriock.api.import.ability(actor, spells[chosenAbilityName]);\nif (scope.abilityData.parent.isFluent) {\n  await ability.update({\n    \"system.fluent\": true,\n  })\n} else if (scope.abilityData.parent.isProficient) {\n  await ability.update({\n    \"system.proficient\": true,\n  })\n}\nHooks.once(\"renderChatMessageHTML\", async () => {\n  await ability.system.roll(options);\n  await ability.delete();\n});",
+  "command": "const options = foundry.utils.deepClone({\n  advantage: window.event?.altKey,\n  disadvantage: window.event?.shiftKey,\n  noHeighten: true,\n})\nconst spells = {\n  flameRay: \"Flame Ray\",\n  lightRay: \"Light Ray\",\n  empathicRay: \"Empathic Ray\",\n  deathRay: \"Death Ray\",\n  lightningRay: \"Lightning Ray\",\n  fireBall: \"Fire Ball\",\n  medicineBall: \"Medicine Ball\",\n  treeformBall: \"Treeform Ball\",\n  terrorBall: \"Terror Ball\",\n  iceBall: \"Ice Ball\",\n}\nconst chosenAbilityName = await game.teriock.api.dialog.select(spells, {label: \"Missile Spell\", hint: \"Please select a missile spell.\", title: \"Select Missile Spell\"});\nconst actor = scope.abilityData.actor;\nconst ability = await game.teriock.api.import.ability(actor, spells[chosenAbilityName]);\nif (scope.abilityData.parent.isFluent) {\n  await ability.update({\n    \"system.fluent\": true,\n  })\n} else if (scope.abilityData.parent.isProficient) {\n  await ability.update({\n    \"system.proficient\": true,\n  })\n}\nawait ability.system.roll(options);\nawait ability.delete();",
   "folder": null,
   "sort": 0,
   "ownership": {
@@ -21,7 +21,7 @@
     "systemId": "teriock",
     "systemVersion": "0.1.0",
     "createdTime": 1753509156376,
-    "modifiedTime": 1753603524693,
+    "modifiedTime": 1753650969223,
     "lastModifiedBy": "qf5JYGZKzM588nE6"
   },
   "_key": "!macros!r6Czu80rh0Puqcfz"

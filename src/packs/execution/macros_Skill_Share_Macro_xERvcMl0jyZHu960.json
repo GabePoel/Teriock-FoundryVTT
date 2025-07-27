@@ -1,0 +1,28 @@
+{
+  "name": "Skill Share Macro",
+  "type": "script",
+  "_id": "xERvcMl0jyZHu960",
+  "author": "qf5JYGZKzM588nE6",
+  "img": "icons/svg/dice-target.svg",
+  "scope": "global",
+  "command": "const abilityData = scope.abilityData;\nconst buttons = scope.chatData.system.buttons;\nscope.chatData.system.buttons = buttons.filter(button => button.dataset.action === \"apply-effect\");\nconst button = scope.chatData.system.buttons[0];\nconst effectObject = JSON.parse(button.dataset.normal);\n\nconst allAbilities = actor.effectTypes?.ability || [];\nconst validAbilities = allAbilities.filter((a) => !a.isReference && a.system.standard);\nconst validAbilityMap = {};\nfor (const validAbility of validAbilities) {\n  validAbilityMap[validAbility.uuid] = validAbility.name;\n}\nconst chosenAbilityUuid = await game.teriock.api.dialog.select(\n  validAbilityMap,\n  {\n    label: \"Ability\",\n    hint: \"Select an ability to share.\",\n    title: \"Select Ability\"\n  }\n)\nconst chosenAbility = await foundry.utils.fromUuid(chosenAbilityUuid);\neffectObject.system.hierarchy.rootUuid = chosenAbility.system.hierarchy.rootUuid;\neffectObject.system.hierarchy.subIds = [chosenAbility.id];\nconst effectString = JSON.stringify(effectObject);\nscope.chatData.system.buttons[0].dataset.normal = effectString;\nscope.chatData.system.buttons[0].dataset.crit = effectString;\nscope.chatData.system.proficient = false;\nscope.chatData.system.fluent = false;\nconsole.log(effectObject);",
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "qf5JYGZKzM588nE6": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null,
+    "coreVersion": "13.345",
+    "systemId": "teriock",
+    "systemVersion": "0.1.0",
+    "createdTime": 1753651322708,
+    "modifiedTime": 1753652654345,
+    "lastModifiedBy": "qf5JYGZKzM588nE6"
+  },
+  "_key": "!macros!xERvcMl0jyZHu960"
+}

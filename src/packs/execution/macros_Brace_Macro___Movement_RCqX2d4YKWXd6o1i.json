@@ -1,0 +1,28 @@
+{
+  "name": "Brace Macro - Movement",
+  "type": "script",
+  "_id": "RCqX2d4YKWXd6o1i",
+  "author": "qf5JYGZKzM588nE6",
+  "img": "icons/svg/dice-target.svg",
+  "scope": "global",
+  "command": "const toRemove = [];\nconst consequences = actor.effectTypes?.consequence || [];\nawait actor.takeSetTempHp(0);\nconsequences.map((c) => {\n  if (c.name === \"Brace Effect\") {\n    toRemove.push(c.id);\n  }\n});\nif (toRemove.length > 0) {\n  await actor.deleteEmbeddedDocuments(\"ActiveEffect\", toRemove);\n};",
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "qf5JYGZKzM588nE6": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null,
+    "coreVersion": "13.345",
+    "systemId": "teriock",
+    "systemVersion": "0.1.0",
+    "createdTime": 1753649773575,
+    "modifiedTime": 1753650551808,
+    "lastModifiedBy": "qf5JYGZKzM588nE6"
+  },
+  "_key": "!macros!RCqX2d4YKWXd6o1i"
+}
