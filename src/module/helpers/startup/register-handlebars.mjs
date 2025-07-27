@@ -1,5 +1,5 @@
 import { elementClass } from "../html.mjs";
-import { secondsToReadable } from "../utils.mjs";
+import { pureUuid, safeUuid, secondsToReadable } from "../utils.mjs";
 
 export default function registerHandlebarsHelpers() {
   // Debugging
@@ -11,6 +11,16 @@ export default function registerHandlebarsHelpers() {
     }
     return "";
   });
+
+  // Object Helpers
+  Handlebars.registerHelper(
+    "fromUuid",
+    async (str) => await foundry.utils.fromUuid(str),
+  );
+
+  Handlebars.registerHelper("safeUuid", (str) => safeUuid(str));
+
+  Handlebars.registerHelper("pureUuid", (str) => pureUuid(str));
 
   // String Helpers
 

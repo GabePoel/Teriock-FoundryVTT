@@ -16,6 +16,7 @@ import { equipment } from "./constants/generated/equipment.mjs";
 import { iconStyles } from "./constants/icon-styles.mjs";
 import { icons } from "./constants/icons.mjs";
 import { powerOptions } from "./constants/power-options.mjs";
+import { pseudoHooks } from "./constants/pseudo-hooks.mjs";
 import { rankOptions } from "./constants/rank-options.mjs";
 import { resourceOptions } from "./constants/resource-options.mjs";
 import { tradecraftOptions } from "./constants/tradecraft-options.mjs";
@@ -80,6 +81,7 @@ const TERIOCK = {
     survivalist: tradecraftOptions.survivalist,
   },
   resourceOptions: resourceOptions,
+  pseudoHooks: pseudoHooks,
 };
 
 export default TERIOCK;

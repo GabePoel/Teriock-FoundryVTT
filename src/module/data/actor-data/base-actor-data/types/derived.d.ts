@@ -1,4 +1,5 @@
 import { SheetData } from "./sheet";
+import type TeriockMacro from "../../../../documents/macro.mjs";
 
 /**
  * Derived data properties.
@@ -70,5 +71,8 @@ export interface TeriockBaseActorDerived {
   };
 
   // Ability maintenance
+  /** Ability flags */
   abilityFlags: Record<string, string>;
+  /** Registered pseudo-hook macros to fire */
+  hookedMacros: Record<string, Teriock.UUID<TeriockMacro>[]>;
 }

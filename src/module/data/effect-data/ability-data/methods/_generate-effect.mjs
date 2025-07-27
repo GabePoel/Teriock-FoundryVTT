@@ -19,7 +19,7 @@ export async function _generateEffect(
   heightenAmount = 0,
   crit = false,
 ) {
-  let changes = foundry.utils.deepClone(abilityData.applies.base.changes) || [];
+  let changes = abilityData.changes;
   let statuses =
     foundry.utils.deepClone(abilityData.applies.base.statuses) || new Set();
   let combatExpirations = foundry.utils.deepClone(
@@ -37,9 +37,6 @@ export async function _generateEffect(
   let seconds = parseTimeString(abilityData.duration.description);
 
   if (abilityData.parent.isProficient) {
-    if (abilityData.applies.proficient.changes.length > 0) {
-      changes = foundry.utils.deepClone(abilityData.applies.proficient.changes);
-    }
     if (abilityData.applies.proficient.statuses.size > 0) {
       statuses = foundry.utils.deepClone(
         abilityData.applies.proficient.statuses,
@@ -62,9 +59,6 @@ export async function _generateEffect(
     }
   }
   if (abilityData.parent.isFluent) {
-    if (abilityData.applies.fluent.changes.length > 0) {
-      changes = foundry.utils.deepClone(abilityData.applies.fluent.changes);
-    }
     if (abilityData.applies.fluent.statuses.size > 0) {
       statuses = foundry.utils.deepClone(abilityData.applies.fluent.statuses);
     }

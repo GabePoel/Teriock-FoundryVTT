@@ -1,6 +1,9 @@
 const { api } = foundry.applications;
 import { documentOptions } from "../../../helpers/constants/document-options.mjs";
+import { pseudoHooks } from "../../../helpers/constants/pseudo-hooks.mjs";
 import durationDialog from "../../../helpers/dialogs/duration-dialog.mjs";
+import { selectDialog } from "../../../helpers/dialogs/select-dialog.mjs";
+import { pureUuid, safeUuid } from "../../../helpers/utils.mjs";
 import TeriockBaseEffectSheet from "../base-effect-sheet/base-effect-sheet.mjs";
 import { contextMenus } from "./connections/_context-menus.mjs";
 
@@ -28,6 +31,7 @@ export default class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(
       toggleConsequences: this._toggleConsequences,
       consequenceTab: this._consequenceTab,
       unlinkMacro: this._unlinkMacro,
+      changeMacroRunHook: this._changeMacroRunHook,
       setDuration: this._setDuration,
     },
     window: {
@@ -86,15 +90,39 @@ export default class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(
   }
 
   /**
-   * Disconnects the execution macro from this ability.
+   * Disconnects the given macro from this ability.
    *
+   * @param {Event} event - The event object.
+   * @param {HTMLElement} target - The target element.
    * @returns {Promise<void>}
    * @private
    */
-  static async _unlinkMacro() {
-    await this.document.update({
-      "system.applies.macro": null,
+  static async _unlinkMacro(event, target) {
+    const uuid = target.dataset.parentId;
+    const updateData = {};
+    updateData[`system.applies.macros.-=${safeUuid(uuid)}`] = null;
+    await this.document.update(updateData);
+  }
+
+  /**
+   * Change the run pseudo-hook for a given macro
+   *
+   * @param {Event} event - The event object.
+   * @param {HTMLElement} target - The target element.
+   * @returns {Promise<void>}
+   * @private
+   */
+  static async _changeMacroRunHook(event, target) {
+    const uuid = target.dataset.parentId;
+    const pseudoHook = await selectDialog(pseudoHooks, {
+      label: "Pseudo-hook",
+      hint: "Please select a pseudo-hook that triggers this macro to run.",
+      title: "Select Pseudo-hook",
+      initial: this.document.system.applies.macros[safeUuid(uuid)],
     });
+    const updateData = {};
+    updateData[`system.applies.macros.${safeUuid(uuid)}`] = pseudoHook;
+    await this.document.update(updateData);
   }
 
   /**
@@ -122,12 +150,13 @@ export default class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(
     context.consequenceTab = this._consequenceTab;
     context.childAbilities = this.document.subs;
     context.parentAbility = this.document.sup;
-    context.macro = null;
-    if (this.document.system.applies.macro) {
-      context.macro = await foundry.utils.fromUuid(
-        this.document.system.applies.macro,
+    context.macros = {};
+    for (const uuid of Object.keys(this.document.system.applies.macros)) {
+      context.macros[pureUuid(uuid)] = await foundry.utils.fromUuid(
+        pureUuid(uuid),
       );
     }
+    console.log(context.macros);
     const editors = {
       manaCost: system.costs.mp.value.variable,
       hitCost: system.costs.hp.value.variable,
@@ -367,5 +396,23 @@ export default class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(
         el.addEventListener("click", () => doc.update(update));
       });
     }
+  }
+
+  /**
+   * Handles dropping of a macro on this document.
+   *
+   * @param {DragEvent} event - The drop event.
+   * @param {object} data - The macro data.
+   * @returns {Promise<TeriockMacro|void>} Promise that resolves to the dropped macro if successful.
+   * @private
+   * @override
+   */
+  async _onDropMacro(event, data) {
+    console.log(data);
+    const updateData = {
+      [`system.applies.macros.${safeUuid(data?.uuid)}`]: "execution",
+    };
+    console.log(updateData);
+    await this.document.update(updateData);
   }
 }

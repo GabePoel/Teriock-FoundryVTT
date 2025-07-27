@@ -1,6 +1,7 @@
 import { insertElderSorceryMask } from "../../../helpers/html.mjs";
 import WikiDataMixin from "../../mixins/wiki-mixin.mjs";
 import TeriockBaseEffectData from "../base-effect-data/base-effect-data.mjs";
+import { _generateChanges } from "./methods/_generate-changes.mjs";
 import { _messageParts } from "./methods/_messages.mjs";
 import { _migrateData } from "./methods/_migrate-data.mjs";
 import { _parse } from "./methods/_parsing.mjs";
@@ -67,6 +68,15 @@ export default class TeriockAbilityData extends WikiDataMixin(
    */
   get wikiPage() {
     return `${this.wikiNamespace}:${this.parent.name}`;
+  }
+
+  /**
+   * Gets the changes this ability would provide.
+   * 
+   * @returns {EffectChangeData[]}
+   */
+  get changes() {
+    return _generateChanges(this);
   }
 
   /**

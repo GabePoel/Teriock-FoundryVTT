@@ -1,6 +1,7 @@
 import { cleanFeet } from "../../../../helpers/clean.mjs";
 import { abilityOptions } from "../../../../helpers/constants/ability-options.mjs";
 import { createAbility } from "../../../../helpers/create-effects.mjs";
+import { safeUuid } from "../../../../helpers/utils.mjs";
 import { imageOverrides } from "./_image-overrides.mjs";
 
 /**
@@ -141,16 +142,7 @@ export async function _parse(abilityData, rawHTML) {
   processDiceAndEffectExtraction(parameters);
 
   // Add macro if appropriate
-  const macroName = extractMacroFromHTML(doc);
-  console.log("macroName", macroName);
-  if (macroName) {
-    try {
-      /** @type {CompendiumPacks} */
-      const packs = game.packs;
-      const macroPack = packs.get("teriock.execution");
-      parameters.applies.macro = macroPack?.index.getName(macroName).uuid;
-    } catch {}
-  }
+  parameters.applies.macros = extractMacroFromHTML(doc);
 
   // Select image
   let img = selectImage(parameters);
@@ -769,18 +761,32 @@ function extractDurationFromHTML(html) {
  * Extracts macro from raw document content.
  *
  * @param doc - The raw document content to extract macro from.
- * @returns {string|null} The macro name.
+ * @returns {Record<Teriock.SafeUUID<TeriockMacro>, string>} The macro name.
  */
 function extractMacroFromHTML(doc) {
   const elements = doc.querySelectorAll("span.metadata[data-type='macro']");
+  const macroAssignments = {};
   console.log(doc);
   console.log(elements);
   for (const /** @type {HTMLElement} */ el of elements) {
     if (el instanceof HTMLElement && el.dataset.name) {
-      return el.dataset.name;
+      const macroName = el.dataset.name;
+      const pseudoHook = el.dataset.pseudoHook;
+      if (macroName && pseudoHook) {
+        try {
+          /** @type {CompendiumPacks} */
+          const packs = game.packs;
+          const macroPack = packs.get("teriock.execution");
+          const macroUuid = macroPack?.index.getName(macroName).uuid;
+          if (macroUuid) {
+            const macroSafeUuid = safeUuid(macroUuid);
+            macroAssignments[macroSafeUuid] = pseudoHook;
+          }
+        } catch {}
+      }
     }
   }
-  return null;
+  return macroAssignments;
 }
 
 /**

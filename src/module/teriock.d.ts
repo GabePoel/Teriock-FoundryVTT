@@ -87,6 +87,10 @@ declare global {
     type ID<T = unknown> = string & {
       [__brand]: T;
     };
+    /** Safe Teriock UUID */
+    type SafeUUID<T = unknown> = string & {
+      [__brand]: T;
+    };
   }
 }
 

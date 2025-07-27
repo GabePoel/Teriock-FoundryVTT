@@ -1,10 +1,9 @@
 const { DragDrop, TextEditor, ContextMenu } = foundry.applications.ux;
-const { DocumentSheetV2, DialogV2 } = foundry.applications.api;
+const { DocumentSheetV2 } = foundry.applications.api;
 import connectEmbedded from "../../helpers/connect-embedded.mjs";
-import { abilities } from "../../helpers/constants/generated/abilities.mjs";
 import * as createEffects from "../../helpers/create-effects.mjs";
 import { createProperty } from "../../helpers/create-effects.mjs";
-import { selectAbilityDialog, selectPropertyDialog } from "../../helpers/dialogs/select-dialog.mjs";
+import { selectPropertyDialog } from "../../helpers/dialogs/select-dialog.mjs";
 import { imageContextMenuOptions } from "../misc-sheets/image-sheet/connections/_context-menus.mjs";
 
 /**
@@ -953,13 +952,15 @@ export default (Base) => {
       );
     }
 
-    async _onDropMacro(event, data) {
-      if (this.document.type === "ability" && this.document.isOwner) {
-        this.document.update({
-          "system.applies.macro": data.uuid,
-        });
-      }
-    }
+    /**
+     * Handles dropping of a macro on this document.
+     *
+     * @param {DragEvent} event - The drop event.
+     * @param {object} data - The macro data.
+     * @returns {Promise<TeriockMacro|void>} Promise that resolves to the dropped macro if successful.
+     * @private
+     */
+    async _onDropMacro(event, data) {}
 
     /**
      * Checks if drag start is allowed.

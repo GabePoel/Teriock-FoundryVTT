@@ -12,82 +12,83 @@ import { weaponclasses } from "../constants/generated/weapon-classes.mjs";
  * Dialog that lets you select something.
  *
  * @param {Record<string, string>} choices - Key and value pairs to select from.
- * @param {string} [label] - Label to use.
- * @param {string} [hint] - Hint to use.
- * @param {string} [title] - Title to use.
- * @param {boolean} [other] - If an "other" option should be provided.
- * @param {boolean} [genericOther] - If a generic `null` should be provided as the other result.
- * @returns {Promise<string|null>} - The chosen equipment class key.
+ * @param {{
+ *   initial?: string|null,
+ *   label?: string,
+ *   hint?: string,
+ *   title?: string,
+ *   other?: boolean,
+ *   genericOther?: boolean
+ * }} [options={}] - Dialog options.
+ * @returns {Promise<string|null>} - The chosen value.
  */
-export async function selectDialog(
-  choices,
-  label = "Select",
-  hint = "Please select an option above.",
-  title = "Select",
-  other = false,
-  genericOther = true,
-) {
+export async function selectDialog(choices, options = {}) {
+  const {
+    initial = null,
+    label = "Select",
+    hint = "Please select an option above.",
+    title = "Select",
+    other = false,
+    genericOther = true,
+  } = options;
+
   const selectContentHtml = document.createElement("div");
   const selectField = new fields.StringField({
-    label: label,
-    hint: hint,
-    choices: choices,
+    label,
+    hint,
+    choices,
+    initial,
   });
   selectContentHtml.append(selectField.toFormGroup({}, { name: "selected" }));
-  const otherContentHtml = document.createElement("div");
-  const otherField = new fields.StringField({
-    label: label,
-    hint: hint,
-  });
-  otherContentHtml.append(
-    otherField.toFormGroup({ units: "other" }, { name: "other" }),
-  );
-  if (other) {
+
+  if (!other) {
     return await DialogV2.prompt({
-      window: { title: title },
+      window: { title },
       modal: true,
       content: selectContentHtml,
       ok: {
-        default: true,
-        callback: async (event, button) => {
-          return button.form.elements.namedItem("selected").value;
-        },
-      },
-      buttons: [
-        {
-          action: "other",
-          label: "Other",
-          callback: async (event, button, dialog) => {
-            await dialog.classList.add("force-hidden");
-            if (genericOther) {
-              return null;
-            }
-            return await DialogV2.prompt({
-              window: { title: title },
-              modal: true,
-              content: otherContentHtml,
-              ok: {
-                callback: (event, button) => {
-                  return button.form.elements.namedItem("other").value;
-                },
-              },
-            });
-          },
-        },
-      ],
-    });
-  } else {
-    return await DialogV2.prompt({
-      window: { title: title },
-      modal: true,
-      content: selectContentHtml,
-      ok: {
-        callback: (event, button) => {
-          return button.form.elements.namedItem("selected").value;
-        },
+        callback: (event, button) =>
+          button.form.elements.namedItem("selected").value,
       },
     });
   }
+
+  const otherContentHtml = document.createElement("div");
+  const otherField = new fields.StringField({ label, hint });
+  otherContentHtml.append(
+    otherField.toFormGroup({ units: "other" }, { name: "other" }),
+  );
+
+  return await DialogV2.prompt({
+    window: { title },
+    modal: true,
+    content: selectContentHtml,
+    ok: {
+      default: true,
+      callback: (event, button) =>
+        button.form.elements.namedItem("selected").value,
+    },
+    buttons: [
+      {
+        action: "other",
+        label: "Other",
+        callback: async (event, button, dialog) => {
+          dialog.classList.add("force-hidden");
+          if (genericOther) return null;
+
+          return await DialogV2.prompt({
+            window: { title },
+            modal: true,
+            content: otherContentHtml,
+            ok: {
+              callback: (event, button) =>
+                button.form.elements.namedItem("other").value,
+            },
+          });
+        },
+      },
+    ],
+  });
 }
 
 /**
@@ -96,12 +97,11 @@ export async function selectDialog(
  * @returns {Promise<string>}
  */
 export async function selectEquipmentClassDialog() {
-  return await selectDialog(
-    equipmentclasses,
-    "Equipment Class",
-    "Please select an equipment class.",
-    "Select Equipment Class",
-  );
+  return await selectDialog(equipmentclasses, {
+    label: "Equipment Class",
+    hint: "Please select an equipment class.",
+    title: "Select Equipment Class",
+  });
 }
 
 /**
@@ -110,12 +110,11 @@ export async function selectEquipmentClassDialog() {
  * @returns {Promise<string>}
  */
 export async function selectWeaponClassDialog() {
-  return await selectDialog(
-    weaponclasses,
-    "Weapon Class",
-    "Please select a weapon class.",
-    "Select Weapon Class",
-  );
+  return await selectDialog(weaponclasses, {
+    label: "Weapon Class",
+    hint: "Please select a weapon class.",
+    title: "Select Weapon Class",
+  });
 }
 
 /**
@@ -124,12 +123,11 @@ export async function selectWeaponClassDialog() {
  * @returns {Promise<string>}
  */
 export async function selectConditionDialog() {
-  return await selectDialog(
-    conditions,
-    "Condition",
-    "Please select a condition.",
-    "Select Condition",
-  );
+  return await selectDialog(conditions, {
+    label: "Condition",
+    hint: "Please select a condition.",
+    title: "Select Condition",
+  });
 }
 
 /**
@@ -143,11 +141,13 @@ export async function selectPropertyDialog() {
       foundry.utils.mergeObject(properties, magicalProperties),
       materialProperties,
     ),
-    "Property",
-    "Please select a property.",
-    "Select Property",
-    true,
-    true,
+    {
+      label: "Property",
+      hint: "Please select a property.",
+      title: "Select Property",
+      other: true,
+      genericOther: true,
+    },
   );
 }
 
@@ -157,12 +157,11 @@ export async function selectPropertyDialog() {
  * @returns {Promise<string>}
  */
 export async function selectTradecraftDialog() {
-  return await selectDialog(
-    CONFIG.TERIOCK.tradecraftOptionsList,
-    "Tradecraft",
-    "Please select a tradecraft.",
-    "Select Tradecraft",
-  );
+  return await selectDialog(CONFIG.TERIOCK.tradecraftOptionsList, {
+    label: "Tradecraft",
+    hint: "Please select a tradecraft.",
+    title: "Select Tradecraft",
+  });
 }
 
 /**
@@ -171,12 +170,11 @@ export async function selectTradecraftDialog() {
  * @returns {Promise<string>}
  */
 export async function selectAbilityDialog() {
-  return await selectDialog(
-    abilities,
-    "Ability",
-    "Please select an ability.",
-    "Select Ability",
-    true,
-    true,
-  );
+  return await selectDialog(abilities, {
+    label: "Ability",
+    hint: "Please select an ability.",
+    title: "Select Ability",
+    other: true,
+    genericOther: true,
+  });
 }

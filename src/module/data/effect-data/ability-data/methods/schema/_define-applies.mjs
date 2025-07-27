@@ -1,4 +1,5 @@
 const { fields } = foundry.data;
+import { pseudoHooks } from "../../../../../helpers/constants/pseudo-hooks.mjs";
 import { tradecraftOptions } from "../../../../../helpers/constants/tradecraft-options.mjs";
 import { mergeLevel } from "../../../../../helpers/utils.mjs";
 import {
@@ -241,13 +242,11 @@ export function _defineApplies(schema) {
     proficient: appliesField(),
     fluent: appliesField(),
     heightened: appliesField(),
-    macro: new fields.DocumentUUIDField({
-      nullable: true,
-      initial: null,
-      label: "Custom Macro",
-      hint: "Custom macro that executes instead of any of the default application options.",
-      type: "Macro",
-    }),
+    macros: new fields.TypedObjectField(
+      new fields.StringField({
+        choices: pseudoHooks,
+      }),
+    ),
   });
 
   return schema;

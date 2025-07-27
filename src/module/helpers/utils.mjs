@@ -3,6 +3,28 @@ import { abilityOptions } from "./constants/ability-options.mjs";
 import { conditions } from "./constants/generated/conditions.mjs";
 
 /**
+ * Convert a UUID to a string that can be safely used as a key in some document's system data.
+ *
+ * @template T
+ * @param {Teriock.UUID<T>} uuid - The UUID to convert.
+ * @returns {Teriock.SafeUUID<T>} The converted safe UUID.
+ */
+export function safeUuid(uuid) {
+  return /** @type {Teriock.SafeUUID<T>} */ (uuid.replace(/\./g, "_"));
+}
+
+/**
+ * Convert a UUID to a string that can be safely used as a key in some document's system data.
+ *
+ * @template T
+ * @param {Teriock.SafeUUID<T>} safeUuid - The safe UUID to convert.
+ * @returns {Teriock.UUID<T>} The original UUID.
+ */
+export function pureUuid(safeUuid) {
+  return /** @type {Teriock.UUID<T>} */ (safeUuid.replace(/_/g, "."));
+}
+
+/**
  * Designates a specific {@link TeriockUser} for a given {@link TeriockActor}.
  *
  * @param {TeriockActor} actor

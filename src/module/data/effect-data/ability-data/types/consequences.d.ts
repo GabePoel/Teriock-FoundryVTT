@@ -76,6 +76,6 @@ export interface TeriockAbilityConsequenceSchema {
     proficient: AppliesData;
     fluent: AppliesData;
     heightened: AppliesData;
-    macro: Teriock.UUID<TeriockMacro> | null;
+    macros: Record<Teriock.SafeUUID<TeriockMacro>, string>;
   };
 }

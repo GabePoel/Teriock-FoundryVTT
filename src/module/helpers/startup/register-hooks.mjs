@@ -322,12 +322,8 @@ export default function registerHooks() {
   foundry.helpers.Hooks.on(
     "moveToken",
     async (document, movement, operation, user) => {
-      if (document.isOwner && document.actor && game.user.id === user._id) {
-        const actor = document.actor;
-        const effects = actor.movementExpirationEffects;
-        for (const effect of effects) {
-          await effect.system.expire();
-        }
+      if (isOwnerAndCurrentUser(document, user._id)) {
+        await document.actor?.hookCall("movement");
       }
     },
   );

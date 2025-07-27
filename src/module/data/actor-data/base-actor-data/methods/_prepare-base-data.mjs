@@ -1,3 +1,5 @@
+import { pseudoHooks } from "../../../../helpers/constants/pseudo-hooks.mjs";
+
 /**
  * Prepare all data that needs to be initialized but exists to be set with effects.
  *
@@ -31,4 +33,8 @@ export function _prepareBaseData(actorData) {
       types: {},
     },
   };
+  actorData.hookedMacros = {};
+  for (const pseudoHook of Object.keys(pseudoHooks)) {
+    actorData.hookedMacros[pseudoHook] = [];
+  }
 }

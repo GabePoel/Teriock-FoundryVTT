@@ -2,7 +2,7 @@ import { DEFAULT_ROLL_CONFIG } from "./_default-config.mjs";
 import { _buildButtons } from "./_roll-build-buttons.mjs";
 import { _buildChatMessage } from "./_roll-build-chat-message.mjs";
 import { _buildTags } from "./_roll-build-tags.mjs";
-import { _executeMacro } from "./_roll-execute-macro.mjs";
+import { _executeMacros } from "./_roll-execute-macros.mjs";
 import { _generateRolls } from "./_roll-generate-rolls.mjs";
 import { _payCosts } from "./_roll-pay-costs.mjs";
 import { _setTargets } from "./_roll-set-targets.mjs";
@@ -33,6 +33,7 @@ export async function _roll(abilityData, options) {
   await _generateRolls(rollConfig);
   await _buildButtons(rollConfig);
   _buildTags(rollConfig);
-  await _executeMacro(rollConfig);
+  await _executeMacros(rollConfig, "preExecution");
   await _buildChatMessage(rollConfig);
+  await _executeMacros(rollConfig, "execution");
 }
