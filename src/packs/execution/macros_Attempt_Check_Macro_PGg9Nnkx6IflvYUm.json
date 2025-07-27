@@ -1,0 +1,28 @@
+{
+  "name": "Attempt Check Macro",
+  "type": "script",
+  "_id": "PGg9Nnkx6IflvYUm",
+  "author": "qf5JYGZKzM588nE6",
+  "img": "icons/svg/dice-target.svg",
+  "scope": "global",
+  "command": "const options = foundry.utils.deepClone({\n  advantage: window.event?.altKey,\n  disadvantage: window.event?.shiftKey,\n});\nconst actor = scope.abilityData.actor;\nconsole.log(actor);\nconst tradecraft = await game.teriock.api.dialog.selectTradecraft();\nHooks.once(\"renderChatMessageHTML\", async () => {\n  await actor.rollTradecraft(tradecraft, options);\n});",
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "qf5JYGZKzM588nE6": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null,
+    "coreVersion": "13.345",
+    "systemId": "teriock",
+    "systemVersion": "0.1.0",
+    "createdTime": 1753598195229,
+    "modifiedTime": 1753599022460,
+    "lastModifiedBy": "qf5JYGZKzM588nE6"
+  },
+  "_key": "!macros!PGg9Nnkx6IflvYUm"
+}

@@ -1,0 +1,28 @@
+{
+  "name": "Deattune Macro",
+  "type": "script",
+  "_id": "ARwwvQ4JsEm4MicQ",
+  "author": "qf5JYGZKzM588nE6",
+  "img": "icons/svg/dice-target.svg",
+  "scope": "global",
+  "command": "const actor = scope.abilityData.actor;\nconst equipment = {};\nactor.itemTypes?.equipment.filter((e) => e.system.isAttuned).map((e) => equipment[e.id] = e.name);\nconst id = await game.teriock.api.dialog.select(equipment, \"Equipment\", \"Please select an attuned item.\", \"Select Attuned Item\");\nconst item = actor.items.get(id);\nawait item.system.deattune();",
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "qf5JYGZKzM588nE6": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null,
+    "coreVersion": "13.345",
+    "systemId": "teriock",
+    "systemVersion": "0.1.0",
+    "createdTime": 1753599764881,
+    "modifiedTime": 1753599783351,
+    "lastModifiedBy": "qf5JYGZKzM588nE6"
+  },
+  "_key": "!macros!ARwwvQ4JsEm4MicQ"
+}
