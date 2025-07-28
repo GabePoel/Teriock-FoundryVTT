@@ -97,7 +97,7 @@ export const teriockDetectionModes = {
     type: DetectionMode.DETECTION_TYPES.SIGHT,
   }),
   /**
-   * In Ethereal, seeing Ethereal detection mdoe.
+   * In Ethereal, seeing Ethereal detection mode.
    * @type {DetectionModeEtherealEthereal}
    */
   etherealEthereal: new DetectionModeEtherealEthereal({

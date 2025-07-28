@@ -1,8 +1,8 @@
-import TeriockChatMessage from "../../../documents/chat-message.mjs";
+import TeriockMessage from "../../../documents/chat-message.mjs";
 
 export default interface TeriockBaseChatMessageSchema {
   /** Parent chat message */
-  parent: TeriockChatMessage;
+  parent: TeriockMessage;
   overlay: string;
   columns: number;
   buttons: Teriock.HTMLButtonConfig[];

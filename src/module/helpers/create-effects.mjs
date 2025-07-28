@@ -102,7 +102,7 @@ export async function createResource(document) {
  * Creates a new property effect with optional predefined content.
  *
  * @param {TeriockItem} document - The document to create the property in.
- * @param {string} key - Optional key to look up predefined property content.
+ * @param {string|null} key - Optional key to look up predefined property content.
  * @returns {Promise<TeriockProperty>} The created property effect.
  */
 export async function createProperty(document, key = "") {

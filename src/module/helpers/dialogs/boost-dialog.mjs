@@ -44,7 +44,7 @@ export default async function boostDialog(rollFormula) {
       content: contentHtml,
       ok: {
         label: "Apply",
-        callback: (event, button) => {
+        callback: (_event, button) => {
           const updatedFormula =
             button.form.elements.namedItem("formula").value;
           const boosts = Number(button.form.elements.namedItem("boosts").value);

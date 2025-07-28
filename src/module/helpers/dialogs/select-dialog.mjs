@@ -47,7 +47,7 @@ export async function selectDialog(choices, options = {}) {
       modal: true,
       content: selectContentHtml,
       ok: {
-        callback: (event, button) =>
+        callback: (_event, button) =>
           button.form.elements.namedItem("selected").value,
       },
     });
@@ -65,14 +65,14 @@ export async function selectDialog(choices, options = {}) {
     content: selectContentHtml,
     ok: {
       default: true,
-      callback: (event, button) =>
+      callback: (_event, button) =>
         button.form.elements.namedItem("selected").value,
     },
     buttons: [
       {
         action: "other",
         label: "Other",
-        callback: async (event, button, dialog) => {
+        callback: async (_event, _button, dialog) => {
           dialog.classList.add("force-hidden");
           if (genericOther) return null;
 
@@ -81,7 +81,7 @@ export async function selectDialog(choices, options = {}) {
             modal: true,
             content: otherContentHtml,
             ok: {
-              callback: (event, button) =>
+              callback: (_event, button) =>
                 button.form.elements.namedItem("other").value,
             },
           });

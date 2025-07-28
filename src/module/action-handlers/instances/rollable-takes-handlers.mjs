@@ -1,4 +1,4 @@
-import TeriockChatMessage from "../../documents/chat-message.mjs";
+import TeriockMessage from "../../documents/chat-message.mjs";
 import TeriockRoll from "../../documents/roll.mjs";
 import boostDialog from "../../helpers/dialogs/boost-dialog.mjs";
 import ActionHandler from "../action-handler.mjs";
@@ -36,7 +36,7 @@ export class RollRollableTakeHandler extends ActionHandler {
         ],
       },
     };
-    await TeriockChatMessage.create(messageData);
+    await TeriockMessage.create(messageData);
   }
 
   /** @inheritDoc */

@@ -1,3 +1,5 @@
+import { abilityOptions } from "../constants/ability-options.mjs";
+
 /**
  * Creates a DOM element with specified properties and children.
  * @param {string} tag - The HTML tag name for the element.
@@ -167,7 +169,7 @@ function barIcon(parent, iconClass, label, first = true) {
 /**
  * Adds an embedded block for a specific entity type to the blocks array.
  * @param {Array} entities - Array of entities to filter and process.
- * @param {MessageBlock} blocks - Array to add the generated block to.
+ * @param {Teriock.MessageBlock[]} blocks - Array to add the generated block to.
  * @param {string} name - The name/title for the block.
  * @param {string} typeKey - The type key to filter entities by.
  * @param {string} iconFallback - Fallback icon class if no specific icon is found.
@@ -179,7 +181,7 @@ function addEmbeddedBlock(
   typeKey,
   iconFallback = "hashtag",
 ) {
-  const config = CONFIG.TERIOCK.abilityOptions.abilityType;
+  const config = abilityOptions.abilityType;
   const typeOrder = Object.keys(config);
 
   const filtered = (entities || [])

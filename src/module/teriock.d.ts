@@ -114,6 +114,8 @@ declare global {
     type HTMLButtonConfig = Chat.HTMLButtonConfig;
     type HackableBodyPart = Parameters.HackableBodyPart;
     type ItemType = DocumentTypes.ItemType;
+    type MessageBar = Messages.MessageBar;
+    type MessageBlock = Messages.MessageBlock;
     type MessageOptions = Messages.MessageOptions;
     type MessageParts = Messages.MessageParts;
     type PolyhedralDie = Rolls.PolyhedralDie;

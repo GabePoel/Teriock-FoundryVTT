@@ -60,7 +60,7 @@ export default async function durationDialog(ability) {
       content: contentHtml,
       ok: {
         label: "Apply",
-        callback: async (event, button) => {
+        callback: async (_event, button) => {
           await ability.update({
             "system.duration.unit":
               button.form.elements.namedItem("unit").value,

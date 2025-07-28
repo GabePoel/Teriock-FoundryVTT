@@ -105,7 +105,7 @@ export default class TeriockConsequenceData extends TeriockBaseEffectData {
   /** @inheritDoc */
   static migrateData(data) {
     data = migrateHierarchy(data);
-    return super.migrateData(data);
+    return data;
   }
 
   /**

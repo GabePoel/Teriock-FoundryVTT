@@ -38,8 +38,8 @@ export type MessageBlock = {
 export type MessageParts = {
   image?: string;
   name?: string;
-  bars?: MessageBar[];
-  blocks?: MessageBlock[];
+  bars?: Teriock.MessageBar[];
+  blocks?: Teriock.MessageBlock[];
   font?: string | null;
 };
 

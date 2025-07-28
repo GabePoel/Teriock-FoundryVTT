@@ -49,7 +49,7 @@ async function auraMeasure(rollConfig) {
           `,
           ok: {
             label: "Yes",
-            callback: (event, button) => {
+            callback: (_event, button) => {
               radius = Number(button.form.elements.namedItem("range").value);
               const autoTargetCheckbox =
                 /** @type {HTMLInputElement} */ button.form.elements.namedItem(

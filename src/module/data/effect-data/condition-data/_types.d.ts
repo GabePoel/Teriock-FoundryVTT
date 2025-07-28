@@ -8,7 +8,10 @@ export interface TeriockConditionSchema extends TeriockBaseEffectData {
   /** Parent */
   parent: TeriockAttunement;
   /** Expirations */
-  expirations: { combat: { what: CombatExpirationMethod } };
+  expirations: {
+    combat: { what: CombatExpirationMethod };
+    description?: string;
+  };
 }
 
 declare module "./condition-data.mjs" {

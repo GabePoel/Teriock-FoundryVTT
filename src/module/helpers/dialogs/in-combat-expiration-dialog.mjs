@@ -68,7 +68,7 @@ export default async function inCombatExpirationDialog(
             action: "roll",
             label: "Roll",
             default: true,
-            callback: async (event, button) => {
+            callback: async (_event, button) => {
               const expirationRoll = new TeriockRoll(
                 button.form.elements.namedItem("roll").value,
                 effect.actor.getRollData(),

@@ -37,7 +37,7 @@ function addClickHandler(elements, handler) {
 export default function registerHooks() {
   foundry.helpers.Hooks.on(
     "updateItem",
-    async (document, updateData, options, userId) => {
+    async (document, updateData, _options, userId) => {
       if (isOwnerAndCurrentUser(document, userId)) {
         if (
           document.type === "equipment" &&
@@ -58,7 +58,7 @@ export default function registerHooks() {
 
   foundry.helpers.Hooks.on(
     "updateActor",
-    async (document, changed, options, userId) => {
+    async (document, changed, _options, userId) => {
       if (isOwnerAndCurrentUser(document, userId)) {
         const doCheckDown =
           typeof changed.system?.hp?.value === "number" ||
@@ -71,7 +71,7 @@ export default function registerHooks() {
     },
   );
 
-  foundry.helpers.Hooks.on("createItem", async (document, options, userId) => {
+  foundry.helpers.Hooks.on("createItem", async (document, _options, userId) => {
     if (isOwnerAndCurrentUser(document, userId)) {
       if (document.type === "equipment") {
         if (document.actor) {
@@ -83,7 +83,7 @@ export default function registerHooks() {
     }
   });
 
-  foundry.helpers.Hooks.on("deleteItem", async (document, options, userId) => {
+  foundry.helpers.Hooks.on("deleteItem", async (document, _options, userId) => {
     if (isOwnerAndCurrentUser(document, userId)) {
       const sup = document.sup;
       if (sup && typeof sup.update === "function") {
@@ -97,7 +97,7 @@ export default function registerHooks() {
 
   foundry.helpers.Hooks.on(
     "createActiveEffect",
-    async (document, options, userId) => {
+    async (document, _options, userId) => {
       if (isOwnerAndCurrentUser(document, userId)) {
         const sup = document.sup;
         if (sup && typeof sup.update === "function") {
@@ -111,7 +111,7 @@ export default function registerHooks() {
 
   foundry.helpers.Hooks.on(
     "deleteActiveEffect",
-    async (document, options, userId) => {
+    async (document, _options, userId) => {
       if (isOwnerAndCurrentUser(document, userId)) {
         const sup = document.sup;
         if (sup && typeof sup.update === "function") {
@@ -125,7 +125,7 @@ export default function registerHooks() {
 
   foundry.helpers.Hooks.on(
     "updateActiveEffect",
-    async (document, updateData, options, userId) => {
+    async (document, updateData, _options, userId) => {
       console.debug(
         `Teriock | Active Effect updated: ${document.name}`,
         updateData,
@@ -143,13 +143,13 @@ export default function registerHooks() {
     },
   );
 
-  foundry.helpers.Hooks.on("chatMessage", (chatLog, message, chatData) => {
+  foundry.helpers.Hooks.on("chatMessage", (_chatLog, message, chatData) => {
     const users = /** @type {WorldCollection<TeriockUser>} */ game.users;
     const sender = users.get(chatData.user);
     if (message.startsWith("/")) return dispatch(message, chatData, sender);
   });
 
-  foundry.helpers.Hooks.on("renderChatMessageHTML", (message, html) => {
+  foundry.helpers.Hooks.on("renderChatMessageHTML", (_message, html) => {
     // Image click handler
     /** TODO: Fix and move to {@link TeriockBaseMessageData} */
     html.querySelectorAll(".timage").forEach((imgEl) => {
@@ -235,7 +235,7 @@ export default function registerHooks() {
     });
   });
 
-  foundry.helpers.Hooks.on("hotbarDrop", (bar, data, slot) => {
+  foundry.helpers.Hooks.on("hotbarDrop", (_bar, data, slot) => {
     game.teriock.api.fromUuid(data.uuid).then(
       /** @param {TeriockItem|TeriockEffect} doc */ async (doc) => {
         if (!doc || !["Item", "ActiveEffect"].includes(doc.documentName))
@@ -284,7 +284,7 @@ export default function registerHooks() {
 
   foundry.helpers.Hooks.on(
     "updateWorldTime",
-    async (worldTime, dt, options, userId) => {
+    async (_worldTime, dt, _options, userId) => {
       if (game.user.id === userId && game.user?.isActiveGM) {
         const scene = game.scenes.viewed;
         const tokens = scene.tokens;
@@ -323,7 +323,7 @@ export default function registerHooks() {
 
   foundry.helpers.Hooks.on(
     "moveToken",
-    async (document, movement, operation, user) => {
+    async (document, _movement, _operation, user) => {
       if (isOwnerAndCurrentUser(document, user._id)) {
         await document.actor?.hookCall("movement");
       }

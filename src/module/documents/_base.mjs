@@ -113,7 +113,7 @@ export class BaseTeriockScene extends Scene {}
  * @property {TeriockBaseMessageData} system
  * @property {"ChatMessage"} documentName
  */
-export class BaseTeriockChatMessage extends ChatMessage {}
+export class BaseTeriockMessage extends ChatMessage {}
 
 /**
  * This class is a hack to get {@link Combat} intellisense without warnings for unimplemented methods.

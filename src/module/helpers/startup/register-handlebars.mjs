@@ -293,7 +293,7 @@ export default function registerHandlebarsHelpers() {
       optionsToggle,
       filterToggle,
       sortToggle,
-      searchValue,
+      _searchValue,
       tab,
       options,
     ) {

@@ -32,9 +32,7 @@ for (const abilityPage of allAbilityPages) {
   pct += 1 / allAbilityPages.length;
   progress.update({ pct: pct, message: `Pulling ${abilityName} from wiki.` });
 
-  let abilityItem = /** @type {TeriockPower|null} */ essentialsPack.index.find(
-    (e) => e.name === abilityName,
-  );
+  let abilityItem = essentialsPack.index.find((e) => e.name === abilityName);
   if (!abilityItem) {
     abilityItem = await game.teriock.Item.create(
       {

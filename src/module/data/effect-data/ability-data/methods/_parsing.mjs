@@ -237,7 +237,7 @@ function getText(doc, selector) {
  * Handles power sources, basic tag assignments, maneuver types, and improvements.
  *
  * @param {object} parameters - The ability parameters to populate.
- * @param {object} tagTree - The tag tree extracted from the document.
+ * @param {Record<string, string[]>} tagTree - The tag tree extracted from the document.
  * @param {Document} doc - The parsed HTML document.
  * @param {Array} changes - Array to collect changes for improvements.
  * @private

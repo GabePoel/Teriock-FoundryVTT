@@ -1,6 +1,6 @@
-import { BaseTeriockChatMessage } from "./_base.mjs";
+import { BaseTeriockMessage } from "./_base.mjs";
 
-export default class TeriockChatMessage extends BaseTeriockChatMessage {
+export default class TeriockMessage extends BaseTeriockMessage {
   /** @inheritDoc */
   async renderHTML(options) {
     const html = await super.renderHTML(options);

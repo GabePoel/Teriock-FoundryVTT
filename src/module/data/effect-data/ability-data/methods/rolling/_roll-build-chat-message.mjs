@@ -1,11 +1,11 @@
-import TeriockChatMessage from "../../../../../documents/chat-message.mjs";
+import TeriockMessage from "../../../../../documents/chat-message.mjs";
 import { elderSorceryMask } from "../../../../../helpers/html.mjs";
 
 /**
  * Build chat message for the ability roll.
  *
  * @param {AbilityRollConfig} rollConfig - Configurations for this ability usage.
- * @returns {Promise<Teriock.HTMLButtonConfig[]>} Promise that resolves to an array of button configurations.
+ * @returns {Promise<void>} Promise that resolves to an array of button configurations.
  * @private
  */
 export async function _buildChatMessage(rollConfig) {
@@ -14,10 +14,10 @@ export async function _buildChatMessage(rollConfig) {
   element.innerHTML = content;
   if (rollConfig.useData.formula)
     rollConfig.chatData.system.extraContent = element.outerHTML;
-  rollConfig.chatData.speaker = TeriockChatMessage.getSpeaker({
+  rollConfig.chatData.speaker = TeriockMessage.getSpeaker({
     actor: rollConfig.abilityData.actor,
   });
-  TeriockChatMessage.applyRollMode(
+  TeriockMessage.applyRollMode(
     rollConfig.chatData,
     game.settings.get("core", "rollMode"),
   );
@@ -27,7 +27,6 @@ export async function _buildChatMessage(rollConfig) {
   rollConfig.chatData.system.overlay = elderSorceryMask(
     rollConfig.abilityData.parent,
   )?.outerHTML;
-  rollConfig.chatData.system.source =
-    /** @type{Teriock.UUID} */ rollConfig.abilityData.parent.uuid;
-  const msg = await TeriockChatMessage.create(rollConfig.chatData);
+  rollConfig.chatData.system.source = rollConfig.abilityData.parent.uuid;
+  await TeriockMessage.create(rollConfig.chatData);
 }

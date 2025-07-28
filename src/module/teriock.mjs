@@ -62,7 +62,7 @@ foundry.helpers.Hooks.once("init", function () {
   // Register custom core documents
   CONFIG.ActiveEffect.documentClass = documents.TeriockEffect;
   CONFIG.Actor.documentClass = documents.TeriockActor;
-  CONFIG.ChatMessage.documentClass = documents.TeriockChatMessage;
+  CONFIG.ChatMessage.documentClass = documents.TeriockMessage;
   CONFIG.Combat.documentClass = documents.TeriockCombat;
   CONFIG.Item.documentClass = documents.TeriockItem;
   CONFIG.Macro.documentClass = documents.TeriockMacro;
@@ -185,70 +185,75 @@ foundry.helpers.Hooks.once("init", function () {
 
   game.teriock = {
     Actor: documents.TeriockActor,
+    Message: documents.TeriockMessage,
+    Combat: documents.TeriockCombat,
     Effect: documents.TeriockEffect,
     Item: documents.TeriockItem,
+    Macro: documents.TeriockMacro,
     Roll: documents.TeriockRoll,
+    Scene: documents.TeriockScene,
     Token: documents.TeriockToken,
+    User: documents.TeriockUser,
     api: {
-      wiki: {
-        openWikiPage: wiki.openWikiPage,
-        fetchWikiPageHTML: wiki.fetchWikiPageHTML,
-        cleanWikiHTML: wiki.cleanWikiHTML,
-        fetchCategoryMembers: wiki.fetchCategoryMembers,
-        fetchCategoryAbilities: wiki.fetchCategoryAbilities,
-      },
       create: {
-        property: createEffects.createProperty,
         ability: createEffects.createAbility,
-        resource: createEffects.createResource,
         consequence: createEffects.createConsequence,
         fluency: createEffects.createFluency,
-      },
-      import: {
-        ability: createEffects.importAbility,
+        property: createEffects.createProperty,
+        resource: createEffects.createResource,
       },
       dialog: {
         boost: dialogs.boostDialog,
         duration: dialogs.durationDialog,
-        select: dialogs.selectDialog,
-        selectAbility: dialogs.selectAbilityDialog,
-        selectEquipmentClass: dialogs.selectEquipmentClassDialog,
-        selectWeaponClass: dialogs.selectWeaponClassDialog,
-        selectCondition: dialogs.selectConditionDialog,
-        selectProperty: dialogs.selectPropertyDialog,
-        selectTradecraft: dialogs.selectTradecraftDialog,
         hotbarDrop: dialogs.hotbarDropDialog,
         inCombatExpiration: dialogs.inCombatExpirationDialog,
+        select: dialogs.selectDialog,
+        selectAbility: dialogs.selectAbilityDialog,
+        selectCondition: dialogs.selectConditionDialog,
+        selectEquipmentClass: dialogs.selectEquipmentClassDialog,
+        selectProperty: dialogs.selectPropertyDialog,
+        selectTradecraft: dialogs.selectTradecraftDialog,
+        selectWeaponClass: dialogs.selectWeaponClassDialog,
+      },
+      import: {
+        ability: createEffects.importAbility,
       },
       utils: {
         fromUuid: utils.fromUuid,
         fromUuidSync: utils.fromUuidSync,
-        safeUuid: utils.safeUuid,
         pureUuid: utils.pureUuid,
+        safeUuid: utils.safeUuid,
+      },
+      wiki: {
+        cleanWikiHTML: wiki.cleanWikiHTML,
+        fetchCategoryAbilities: wiki.fetchCategoryAbilities,
+        fetchCategoryMembers: wiki.fetchCategoryMembers,
+        fetchWikiPageHTML: wiki.fetchWikiPageHTML,
+        openWikiPage: wiki.openWikiPage,
       },
     },
     packs: {
-      creatures: () =>
-        /** @type {TeriockCharacterCompendium} */
-        packs.get("teriock.creatures"),
-      essentials: () =>
-        /** @type {TeriockPowerCompendium} */
-        packs.get("teriock.essentials"),
       classes: () =>
         /** @type {TeriockRankCompendium} */
         packs.get("teriock.classes"),
+      creatures: () =>
+        /** @type {TeriockCharacterCompendium} */
+        packs.get("teriock.creatures"),
       equipment: () =>
         /** @type {TeriockEquipmentCompendium} */
         packs.get("teriock.equipment"),
-      species: () =>
+      essentials: () =>
         /** @type {TeriockPowerCompendium} */
-        packs.get("teriock.species"),
+        packs.get("teriock.essentials"),
       execution: () =>
         /** @type {TeriockMacroCompendium} */
         packs.get("teriock.execution"),
       maintenance: () =>
         /** @type {TeriockMacroCompendium} */
         packs.get("teriock.maintenance"),
+      species: () =>
+        /** @type {TeriockPowerCompendium} */
+        packs.get("teriock.species"),
     },
   };
 
