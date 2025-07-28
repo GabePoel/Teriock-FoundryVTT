@@ -1,4 +1,6 @@
 import type TeriockEffect from "../../../documents/effect.mjs";
+import type TeriockItem from "../../../documents/item.mjs";
+import type TeriockActor from "../../../documents/actor.mjs";
 
 export type HierarchyField = {
   /** The ID of the {@link TeriockEffect} that this is descended from, if there is one. */
@@ -9,7 +11,7 @@ export type HierarchyField = {
    * The UUID of the {@link TeriockActor} or {@link TeriockItem} this {@link TeriockAbility} is embedded in.
    * This is calculated when the {@link TeriockAbility} is created and should not be set manually.
    */
-  rootUuid: Teriock.UUID<TeriockEffect>;
+  rootUuid: Teriock.UUID<TeriockItem | TeriockActor>;
 };
 
 /** What actor is the source who triggers expirations? */

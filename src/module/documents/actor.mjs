@@ -524,7 +524,7 @@ export default class TeriockActor extends BaseTeriockActor {
    * Relevant wiki pages:
    * - [Conditions](https://wiki.teriock.com/index.php/Category:Conditions)
    *
-   * @param {string} condition - The condition to roll for.
+   * @param {Teriock.ConditionKey} condition - The condition to roll for.
    * @param {Teriock.ConditionRollOptions} options - Options for the condition roll.
    * @returns {Promise<void>} Promise that resolves when the condition roll is complete.
    */
@@ -539,7 +539,7 @@ export default class TeriockActor extends BaseTeriockActor {
    * Relevant wiki pages:
    * - [Feat Interaction](https://wiki.teriock.com/index.php/Core:Feat_Interaction)
    *
-   * @param {string} attribute - The attribute to roll a feat save for.
+   * @param {Teriock.Attribute} attribute - The attribute to roll a feat save for.
    * @param {Teriock.CommonRollOptions} [options] - Options for the roll.
    * @returns {Promise<void>}
    */
@@ -582,7 +582,7 @@ export default class TeriockActor extends BaseTeriockActor {
    * Relevant wiki pages:
    * - [Tradecrafts](https://wiki.teriock.com/index.php/Core:Tradecrafts)
    *
-   * @param {string} tradecraft - The tradecraft to roll for.
+   * @param {Teriock.Tradecraft} tradecraft - The tradecraft to roll for.
    * @param {Teriock.CommonRollOptions} [options] - Options for the roll.
    * @returns {Promise<void>}
    */

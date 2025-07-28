@@ -1,7 +1,7 @@
-import type { ApplicationV2 } from "@client/applications/api/_module.mjs";
+// @ts-ignore
 
 declare module "./image-sheet.mjs" {
-  export default interface TeriockImageSheet extends ApplicationV2 {
+  export default interface TeriockImageSheet {
     img: string;
   }
 }

@@ -8,7 +8,7 @@ import TeriockRoll from "../../../../../documents/roll.mjs";
  * - [Conditions](https://wiki.teriock.com/index.php/Category:Conditions)
  *
  * @param {TeriockBaseActorData} actorData
- * @param {string} condition - The condition to roll for.
+ * @param {Teriock.ConditionKey} condition - The condition to roll for.
  * @param {Teriock.ConditionRollOptions} options
  * @returns {Promise<void>}
  * @private

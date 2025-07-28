@@ -7,7 +7,7 @@ import TeriockRoll from "../../../../../documents/roll.mjs";
  * - [Feat Interaction](https://wiki.teriock.com/index.php/Core:Feat_Interaction)
  *
  * @param {TeriockBaseActorData} actorData
- * @param {string} attribute - The attribute to roll a feat save for.
+ * @param {Teriock.Attribute} attribute - The attribute to roll a feat save for.
  * @param {Teriock.CommonRollOptions} [options] - Options for the roll.
  * @private
  */
@@ -98,7 +98,7 @@ export async function _rollImmunity(actorData, options = {}) {
  * - [Tradecrafts](https://wiki.teriock.com/index.php/Core:Tradecrafts)
  *
  * @param {TeriockBaseActorData} actorData
- * @param {string} tradecraft - The tradecraft to roll for.
+ * @param {Teriock.Tradecraft} tradecraft - The tradecraft to roll for.
  * @param {Teriock.CommonRollOptions} [options] - Options for the roll.
  * @private
  */
