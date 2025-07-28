@@ -1,0 +1,28 @@
+{
+  "name": "Update Basic Abilities",
+  "type": "script",
+  "_id": "AEHBs2Fh23ulcqyb",
+  "author": "qf5JYGZKzM588nE6",
+  "img": "modules/game-icons-net/whitetransparent/skills.svg",
+  "scope": "global",
+  "command": "const essentialsPack = game.teriock.packs.essentials();\n\nconst basicAbilitiesItem = await game.teriock.api.utils.fromUuid(\n  essentialsPack.index.find((e) => e.name === \"Basic Abilities\").uuid,\n);\n\nconst basicAbilityNames =\n  await game.teriock.api.wiki.fetchCategoryAbilities(\"Basic abilities\");\n\n/** @type {object} */\nconst progress = ui.notifications.info(`Pulling basic abilities from wiki.`, {\n  progress: true,\n});\nlet pct = 0;\n\nfor (const basicAbilityName of basicAbilityNames) {\n  let basicAbility = basicAbilitiesItem.effectTypes.ability.find(\n    (a) => a.name === basicAbilityName,\n  );\n  if (!basicAbility) {\n    basicAbility = await game.teriock.api.create.ability(\n      basicAbilitiesItem,\n      basicAbilityName,\n    );\n  }\n  pct += 1 / basicAbilityNames.length;\n  progress.update({\n    pct: pct,\n    message: `Pulling ${basicAbilityName} from wiki.`,\n  });\n  \n  await basicAbility.system.wikiPull({ notify: false });\n}\nconst toDelete = basicAbilitiesItem.effectTypes.ability\n  .filter((a) => !basicAbilityNames.includes(a.name))\n  .map((a) => a.id);\nawait basicAbilitiesItem.deleteEmbeddedDocuments(\"ActiveEffect\", toDelete);",
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "qf5JYGZKzM588nE6": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null,
+    "coreVersion": "13.345",
+    "systemId": "teriock",
+    "systemVersion": "0.1.0",
+    "createdTime": 1753659319940,
+    "modifiedTime": 1753680524998,
+    "lastModifiedBy": "qf5JYGZKzM588nE6"
+  },
+  "_key": "!macros!AEHBs2Fh23ulcqyb"
+}
