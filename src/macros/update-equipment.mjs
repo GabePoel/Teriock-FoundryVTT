@@ -1,8 +1,5 @@
-const equipmentPack = /** @type {CompendiumCollection} */ (
-  /** @type {WorldCollection<CompendiumCollection>} */ game.packs
-).get("teriock.equipment");
-const equipmentFolders =
-  /** @type {CompendiumCollection<Folder>} */ equipmentPack.folders;
+const equipmentPack = game.teriock.packs.equipment();
+const equipmentFolders = equipmentPack.folders;
 const assignedProperties = ["Magelore", "Master Crafted", "Runic", "Silver"];
 
 const toCamelCase = (str) => {
@@ -57,9 +54,9 @@ for (const combo of combinations) {
 
 for (const [folderName, properties] of Object.entries(propertyMap)) {
   ui.notifications.warn(folderName);
-  let folder = /** @type {Folder} */ equipmentFolders.getName(folderName);
+  let folder = equipmentFolders.getName(folderName);
   if (!folder) {
-    folder = await Folder.create(
+    folder = await CONFIG.Folder.documentClass.create(
       {
         name: folderName,
         type: "Item",
@@ -81,7 +78,7 @@ for (const [folderName, properties] of Object.entries(propertyMap)) {
 
     const matches = equipmentPack.index.filter((e) => e.name === generatedName);
     for (const match of matches) {
-      const entry = await foundry.utils.fromUuid(match.uuid);
+      const entry = await game.teriock.api.utils.fromUuid(match.uuid);
       await entry.delete();
     }
 

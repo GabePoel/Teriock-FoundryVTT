@@ -1,13 +1,16 @@
 const {
-  Actor,
-  Item,
   ActiveEffect,
-  TokenDocument,
-  Macro,
-  User,
-  Scene,
+  Actor,
   ChatMessage,
+  Combat,
+  Item,
+  Macro,
+  Scene,
+  TokenDocument,
+  User,
 } = foundry.documents;
+const { DocumentCollection, CompendiumCollection, CompendiumFolderCollection } =
+  foundry.documents.collections;
 import ChildDocumentMixin from "./mixins/child-mixin.mjs";
 import ParentDocumentMixin from "./mixins/parent-mixin.mjs";
 
@@ -113,10 +116,28 @@ export class BaseTeriockScene extends Scene {}
 export class BaseTeriockChatMessage extends ChatMessage {}
 
 /**
- * This class is a hack to get @type {Combat} intellisense without warnings for unimplemented methods.
+ * This class is a hack to get {@link Combat} intellisense without warnings for unimplemented methods.
  *
  * @extends {Combat}
  * @implements {CombatData}
  * @property {"Combat"} documentName
  */
 export class BaseTeriockCombat extends Combat {}
+
+export class BaseTeriockCollection extends Collection {}
+
+/**
+ * This class is a hack to get {@link CompendiumCollection} intellisense without warnings for unimplemented methods.
+ *
+ * @property {(name: string, options?: { strict?: boolean }) => Folder} getName
+ * @property {"Folder"} documentName
+ */
+export class BaseTeriockCompendiumFolderCollection extends CompendiumFolderCollection {}
+
+/**
+ * This class is a hack to get {@link CompendiumCollection} intellisense without warnings for unimplemented methods.
+ *
+ * @extends {CompendiumCollection<T>}
+ * @property {TeriockCompendiumFolderCollection} folders
+ */
+export class BaseTeriockCompendiumCollection extends CompendiumCollection {}

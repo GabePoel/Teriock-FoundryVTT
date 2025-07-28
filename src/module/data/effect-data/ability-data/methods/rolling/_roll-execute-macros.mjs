@@ -9,12 +9,14 @@ import { pureUuid } from "../../../../../helpers/utils.mjs";
  * @returns {Promise<void>}
  */
 export async function _executeMacros(rollConfig, pseudoHook) {
-  for (const [safeUuid, macroPseudoHook] of Object.entries(
-    rollConfig.abilityData.applies.macros,
-  )) {
+  const macroEntries =
+    /** @type {Array<[Teriock.SafeUUID<TeriockMacro>, string]>} */ Object.entries(
+      rollConfig.abilityData.applies.macros,
+    );
+
+  for (const [safeUuid, macroPseudoHook] of macroEntries) {
     if (macroPseudoHook === pseudoHook) {
-      /** @type {TeriockMacro|null} */
-      const macro = await foundry.utils.fromUuid(pureUuid(safeUuid));
+      const macro = await game.teriock.api.utils.fromUuid(pureUuid(safeUuid));
       if (macro) {
         await macro.execute({
           actor: rollConfig.abilityData.actor,

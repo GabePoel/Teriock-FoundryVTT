@@ -3,6 +3,28 @@ import { abilityOptions } from "./constants/ability-options.mjs";
 import { conditions } from "./constants/generated/conditions.mjs";
 
 /**
+ * A `foundry.utils.fromUuid` wrapper with typing enforcement.
+ *
+ * @template T
+ * @param {Teriock.UUID<T>} uuid - UUID
+ * @returns {T|undefined}
+ */
+export async function fromUuid(uuid) {
+  return await foundry.utils.fromUuid(uuid);
+}
+
+/**
+ * A `foundry.utils.fromUuidSync` wrapper with typing enforcement.
+ *
+ * @template T
+ * @param {Teriock.UUID<T>} uuid - UUID
+ * @returns {T|undefined}
+ */
+export function fromUuidSync(uuid) {
+  return foundry.utils.fromUuidSync(uuid);
+}
+
+/**
  * Convert a UUID to a string that can be safely used as a key in some document's system data.
  *
  * @template T

@@ -96,35 +96,33 @@ export default class TeriockActor extends BaseTeriockActor {
    */
   static async _preCreateOperation(documents, operation, user) {
     await super._preCreateOperation(documents, operation, user);
-    /** @type {CompendiumPacks} */
-    const packs = game.packs;
-    const essentialPack = packs.get("teriock.essentials");
-    const basicAbilities = await foundry.utils.fromUuid(
+    const essentialPack = game.teriock.packs.essentials();
+    const basicAbilities = await game.teriock.api.utils.fromUuid(
       essentialPack?.index.getName("Basic Abilities").uuid,
     );
-    const createdElderSorceries = await foundry.utils.fromUuid(
+    const createdElderSorceries = await game.teriock.api.utils.fromUuid(
       essentialPack?.index.getName("Created Elder Sorceries").uuid,
     );
-    const learnedElderSorceries = await foundry.utils.fromUuid(
+    const learnedElderSorceries = await game.teriock.api.utils.fromUuid(
       essentialPack?.index.getName("Learned Elder Sorceries").uuid,
     );
-    const classPack = packs.get("teriock.classes");
-    const journeyman = await foundry.utils.fromUuid(
-      classPack?.index.getName("Journeyman").uuid,
+    const classPack = game.teriock.packs.classes();
+    const journeyman = await game.teriock.api.utils.fromUuid(
+      classPack.index.getName("Journeyman").uuid,
     );
-    const equipmentPack = packs.get("teriock.equipment");
-    const foot = await foundry.utils.fromUuid(
-      equipmentPack?.index.getName("Foot").uuid,
+    const equipmentPack = game.teriock.packs.equipment();
+    const foot = await game.teriock.api.utils.fromUuid(
+      equipmentPack.index.getName("Foot").uuid,
     );
-    const hand = await foundry.utils.fromUuid(
-      equipmentPack?.index.getName("Hand").uuid,
+    const hand = await game.teriock.api.utils.fromUuid(
+      equipmentPack.index.getName("Hand").uuid,
     );
-    const mouth = await foundry.utils.fromUuid(
-      equipmentPack?.index.getName("Mouth").uuid,
+    const mouth = await game.teriock.api.utils.fromUuid(
+      equipmentPack.index.getName("Mouth").uuid,
     );
-    const speciesPack = packs.get("teriock.species");
-    const human = await foundry.utils.fromUuid(
-      speciesPack?.index.getName("Human").uuid,
+    const speciesPack = game.teriock.packs.species();
+    const human = await game.teriock.api.utils.fromUuid(
+      speciesPack.index.getName("Human").uuid,
     );
     for (const actor of documents) {
       actor.updateSource({
@@ -169,15 +167,13 @@ export default class TeriockActor extends BaseTeriockActor {
    * @returns {Promise<Document[]>} - An array of created Document instances
    */
   async createEmbeddedDocuments(embeddedName, data = [], operation = {}) {
-    /** @type {CompendiumPacks} */
-    const packs = game.packs;
-    const classPack = packs.get("teriock.classes");
+    const classPack = game.teriock.packs.classes();
     if (
       embeddedName === "Item" &&
       data.find((d) => d.type === "rank" && d.system?.archetype === "mage")
     ) {
       if (!this.itemKeys?.power.has("mage")) {
-        const mage = await foundry.utils.fromUuid(
+        const mage = await game.teriock.api.utils.fromUuid(
           classPack?.index.getName("Mage").uuid,
         );
         data.push(mage.toObject());
@@ -188,7 +184,7 @@ export default class TeriockActor extends BaseTeriockActor {
       data.find((d) => d.type === "rank" && d.system?.archetype === "semi")
     ) {
       if (!this.itemKeys?.power.has("semi")) {
-        const semi = await foundry.utils.fromUuid(
+        const semi = await game.teriock.api.utils.fromUuid(
           classPack?.index.getName("Semi").uuid,
         );
         data.push(semi.toObject());
@@ -199,7 +195,7 @@ export default class TeriockActor extends BaseTeriockActor {
       data.find((d) => d.type === "rank" && d.system?.archetype === "warrior")
     ) {
       if (!this.itemKeys?.power.has("warrior")) {
-        const warrior = await foundry.utils.fromUuid(
+        const warrior = await game.teriock.api.utils.fromUuid(
           classPack?.index.getName("Warrior").uuid,
         );
         data.push(warrior.toObject());
@@ -217,7 +213,7 @@ export default class TeriockActor extends BaseTeriockActor {
             if (change.key === "system.hookedMacros.effectApplication") {
               const uuid = pureUuid(change.value);
               /** @type {TeriockMacro|null} */
-              const macro = await foundry.utils.fromUuid(uuid);
+              const macro = await game.teriock.api.utils.fromUuid(uuid);
               if (macro) {
                 await macro.execute({ actor: this });
               }
@@ -283,8 +279,7 @@ export default class TeriockActor extends BaseTeriockActor {
     Hooks.callAll(`teriock.${name}`, this, ...args);
     if (this.system.hookedMacros[name]) {
       for (const macroUuid of this.system.hookedMacros[name]) {
-        /** @type {TeriockMacro|null} */
-        const macro = await foundry.utils.fromUuid(macroUuid);
+        const macro = await game.teriock.api.utils.fromUuid(macroUuid);
         if (macro) {
           await macro.execute({ actor: this, args: [...args] });
         }

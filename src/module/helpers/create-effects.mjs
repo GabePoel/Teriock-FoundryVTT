@@ -65,18 +65,14 @@ export async function createAbility(document, name = null, options = {}) {
  * @returns {TeriockAbility}
  */
 export async function importAbility(document, name) {
-  /** @type {CompendiumPacks} */
-  const packs = game.packs;
-  const essentialPack = packs.get("teriock.essentials");
-  const refAbilityWrapper =
-    /** @type {TeriockProperty|null} */ await foundry.utils.fromUuid(
-      essentialPack?.index.getName(name).uuid,
-    );
+  const essentialPack = game.teriock.packs.essentials();
+  const refAbilityWrapper = await game.teriock.api.utils.fromUuid(
+    essentialPack?.index.getName(name).uuid,
+  );
   const refAbility = await refAbilityWrapper?.effects.getName(name);
   /** @type {TeriockAbilityData} */
   const refData = refAbility.toObject();
   refData.hierarchy = foundry.utils.deepClone(refAbility.system.hierarchy);
-  console.log(refData);
   const abilities = await document.createEmbeddedDocuments("ActiveEffect", [
     refData,
   ]);

@@ -96,10 +96,9 @@ export default class TeriockEffect extends BaseTeriockEffect {
     /** @type {TeriockEffect[]} */
     const subEffects = [];
     for (const id of this.subIds) {
-      const root =
-        /** @type {TeriockActor|TeriockItem} */ foundry.utils.fromUuidSync(
-          this.system.hierarchy.rootUuid,
-        );
+      const root = game.teriock.api.utils.fromUuidSync(
+        this.system.hierarchy.rootUuid,
+      );
       subEffects.push(root.effects.get(id));
     }
     return subEffects;
@@ -113,7 +112,7 @@ export default class TeriockEffect extends BaseTeriockEffect {
   get subIds() {
     if (this.metadata.canSub && this.system.hierarchy.subIds.size > 0) {
       const root =
-        /** @type {TeriockActor|TeriockItem} */ foundry.utils.fromUuidSync(
+        /** @type {TeriockActor|TeriockItem} */ game.teriock.api.utils.fromUuidSync(
           this.system.hierarchy.rootUuid,
         );
       return this.system.hierarchy.subIds.filter((id) => root.effects.has(id));

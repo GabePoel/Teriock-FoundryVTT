@@ -19,6 +19,8 @@ declare global {
 
   const TeriockActor: typeof import("./documents/actor.mjs").default;
   const TeriockChatMessage: typeof import("./documents/chat-message.mjs").default;
+  const TeriockCompendiumCollection: typeof import("./documents/collections/compendium-collection.mjs").default;
+  const TeriockCompendiumFolderCollection: typeof import("./documents/collections/compendium-folder-collection.mjs").default;
   const TeriockEffect: typeof import("./documents/effect.mjs").default;
   const TeriockItem: typeof import("./documents/item.mjs").default;
   const TeriockMacro: typeof import("./documents/macro.mjs").default;
@@ -52,6 +54,49 @@ declare global {
   const TeriockFluency: typeof import("./documents/_documents.mjs").TeriockFluency;
   const TeriockProperty: typeof import("./documents/_documents.mjs").TeriockProperty;
   const TeriockResource: typeof import("./documents/_documents.mjs").TeriockResource;
+
+  // Compendium collections
+  // ----------------------
+
+  const TeriockCharacterCompendium: typeof import("./documents/collections/_documents.mjs").TeriockCharacterCompendium;
+  const TeriockEquipmentCompendium: typeof import("./documents/collections/_documents.mjs").TeriockEquipmentCompendium;
+  const TeriockPowerCompendium: typeof import("./documents/collections/_documents.mjs").TeriockPowerCompendium;
+  const TeriockRankCompendium: typeof import("./documents/collections/_documents.mjs").TeriockRankCompendium;
+  const TeriockMacroCompendium: typeof import("./documents/collections/_documents.mjs").TeriockMacroCompendium;
+
+  // Data Models
+  // ===========
+
+  // Base Data Models
+  // ----------------
+
+  const TeriockBaseActorData: typeof import("./data/actor-data/base-actor-data/base-actor-data.mjs").default;
+  const TeriockBaseItemData: typeof import("./data/item-data/base-item-data/base-item-data.mjs").default;
+  const TeriockBaseEffectData: typeof import("./data/effect-data/base-effect-data/base-effect-data.mjs").default;
+  const TeriockBaseMessageData: typeof import("./data/message-data/base-message-data/base-message-data.mjs").default;
+
+  // Actor
+  // -----
+
+  const TeriockCharacterData: typeof import("./data/_module.mjs").actor.CharacterData;
+
+  // Item
+  // ----
+
+  const TeriockEquipmentData: typeof import("./data/_module.mjs").item.EquipmentData;
+  const TeriockPowerData: typeof import("./data/_module.mjs").item.PowerData;
+  const TeriockRankData: typeof import("./data/_module.mjs").item.RankData;
+
+  // Effect
+  // ------
+
+  const TeriockAbilityData: typeof import("./data/_module.mjs").effect.AbilityData;
+  const TeriockAttunementData: typeof import("./data/_module.mjs").effect.AttunementData;
+  const TeriockConsequenceData: typeof import("./data/_module.mjs").effect.ConsequenceData;
+  const TeriockConditionData: typeof import("./data/_module.mjs").effect.ConditionData;
+  const TeriockFluencyData: typeof import("./data/_module.mjs").effect.FluencyData;
+  const TeriockPropertyData: typeof import("./data/_module.mjs").effect.PropertyData;
+  const TeriockResourceData: typeof import("./data/_module.mjs").effect.ResourceData;
 
   namespace Teriock {
     type ActorType = DocumentTypes.ActorType;

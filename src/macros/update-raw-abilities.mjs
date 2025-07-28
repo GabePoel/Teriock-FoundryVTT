@@ -1,13 +1,8 @@
-const essentialPack = /** @type {CompendiumCollection} */ (
-  /** @type {WorldCollection<CompendiumCollection>} */ game.packs
-).get("teriock.essentials");
-const essentialFolders =
-  /** @type {CompendiumCollection<Folder>} */ essentialPack.folders;
+const essentialsPack = game.teriock.packs.essentials();
+const essentialsFolders = essentialsPack.folders;
 
 const rawAbilitiesFolderName = "Raw Abilities";
-let rawAbilitiesFolder = /** @type {Folder} */ essentialFolders.getName(
-  rawAbilitiesFolderName,
-);
+let rawAbilitiesFolder = essentialsFolders.getName(rawAbilitiesFolderName);
 if (!rawAbilitiesFolder) {
   await Folder.create(
     {
@@ -37,9 +32,11 @@ for (const abilityPage of allAbilityPages) {
   pct += 1 / allAbilityPages.length;
   progress.update({ pct: pct, message: `Pulling ${abilityName} from wiki.` });
 
-  let abilityItem = essentialPack.index.find((e) => e.name === abilityName);
+  let abilityItem = /** @type {TeriockPower|null} */ essentialsPack.index.find(
+    (e) => e.name === abilityName,
+  );
   if (!abilityItem) {
-    abilityItem = /** @type {TeriockPower} */ await game.teriock.Item.create(
+    abilityItem = await game.teriock.Item.create(
       {
         name: abilityName,
         type: "power",
@@ -52,14 +49,15 @@ for (const abilityPage of allAbilityPages) {
       { pack: "teriock.essentials" },
     );
   } else {
-    abilityItem = /** @type {TeriockPower} */ await foundry.utils.fromUuid(
-      abilityItem.uuid,
-    );
+    abilityItem = await game.teriock.api.utils.fromUuid(abilityItem.uuid);
   }
-  let abilityEffect =
-    /** @type {TeriockAbility} */ abilityItem.effects.getName(abilityName);
+  let abilityEffect = abilityItem.effectTypes.ability.find(
+    (a) => a.name === abilityName,
+  );
+  console.log(abilityEffect);
+
   if (!abilityEffect) {
-    abilityEffect = await game.teriock.api.create.ability(
+    abilityEffect = await game.teriock.api.create.createAbility(
       abilityItem,
       abilityName,
       { notify: false },

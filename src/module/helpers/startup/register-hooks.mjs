@@ -173,7 +173,9 @@ export default function registerHooks() {
         const uuid = event.currentTarget.getAttribute("data-uuid");
         if (!uuid) return;
         const doc =
-          /** @type{ClientDocument} */ await foundry.utils.fromUuid(uuid);
+          /** @type{ClientDocument} */ await game.teriock.api.utils.fromUuid(
+            uuid,
+          );
         if (doc && typeof doc.sheet?.render === "function") {
           await doc.sheet.render(true);
         }
@@ -186,6 +188,7 @@ export default function registerHooks() {
 
       container.addEventListener("click", async (event) => {
         event.stopPropagation();
+        /** @type {Teriock.UUID<TeriockToken>} */
         const uuid = container.getAttribute("data-uuid");
         if (!uuid) return;
 
@@ -196,8 +199,7 @@ export default function registerHooks() {
         }
 
         clickTimeout = setTimeout(async () => {
-          const doc =
-            /** @type{TeriockToken} */ await foundry.utils.fromUuid(uuid);
+          const doc = await game.teriock.api.fromUuid(uuid);
           if (doc.isOwner) {
             if (doc?.token?.object) {
               doc.token.object.control();
@@ -211,6 +213,7 @@ export default function registerHooks() {
 
       container.addEventListener("dblclick", async (event) => {
         event.stopPropagation();
+        /** @type {Teriock.UUID<TeriockActor>} */
         const uuid = container.getAttribute("data-uuid");
         if (!uuid) return;
 
@@ -219,8 +222,7 @@ export default function registerHooks() {
           clickTimeout = null;
         }
 
-        const doc =
-          /** @type {TeriockActor} */ await foundry.utils.fromUuid(uuid);
+        const doc = await game.teriock.api.utils.fromUuid(uuid);
         if (
           doc &&
           doc.sheet &&
@@ -234,7 +236,7 @@ export default function registerHooks() {
   });
 
   foundry.helpers.Hooks.on("hotbarDrop", (bar, data, slot) => {
-    fromUuid(data.uuid).then(
+    game.teriock.api.fromUuid(data.uuid).then(
       /** @param {TeriockItem|TeriockEffect} doc */ async (doc) => {
         if (!doc || !["Item", "ActiveEffect"].includes(doc.documentName))
           return;

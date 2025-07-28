@@ -136,7 +136,7 @@ export async function cleanWikiHTML(html) {
 
 /**
  * Fetches all members of a wiki category via the MediaWiki API.
- * @param {string} category - The name of the category to fetch members from.
+ * @param {string} category - The name (without namespace) of the category to fetch members from.
  * @returns {Promise<Array>} An array of category member objects, or an empty array if the request fails.
  */
 export async function fetchCategoryMembers(category) {
@@ -176,4 +176,16 @@ export async function fetchCategoryMembers(category) {
     console.error("Error fetching category members:", category, error);
     return [];
   }
+}
+
+/**
+ * Fetches all ability names within a wiki category via the MediaWiki API.
+ *
+ * @param {string} category - The name (without namespace) of the category to fetch from.
+ * @returns {Promise<string[]>} An array of names of member pages.
+ */
+export async function fetchCategoryAbilities(category) {
+  let pages = await fetchCategoryMembers(category);
+  pages = pages.filter((page) => page.title.includes("Ability:"));
+  return pages.map((page) => page.title.split("Ability:")[1]);
 }

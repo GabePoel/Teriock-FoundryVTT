@@ -1,8 +1,5 @@
-const classPack = /** @type {CompendiumCollection} */ (
-  /** @type {WorldCollection<CompendiumCollection>} */ game.packs
-).get("teriock.classes");
-const classFolders =
-  /** @type {CompendiumCollection<Folder>} */ classPack.folders;
+const classPack = game.teriock.packs.classes();
+const classFolders = classPack.folders;
 
 /** @type {object} */
 const progress = ui.notifications.info(`Pulling classes from wiki.`, {
@@ -56,7 +53,7 @@ for (const [a, ao] of Object.entries(CONFIG.TERIOCK.rankOptions)) {
 
       await classPack.getIndex();
       let rank = classPack.index.find((e) => e.name === name);
-      rank = await foundry.utils.fromUuid(rank.uuid);
+      rank = await game.teriock.api.utils.fromUuid(rank.uuid);
 
       // Create new item
       const itemData = {

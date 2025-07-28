@@ -15,7 +15,7 @@ export default function registerHandlebarsHelpers() {
   // Object Helpers
   Handlebars.registerHelper(
     "fromUuid",
-    async (str) => await foundry.utils.fromUuid(str),
+    async (str) => await game.teriock.api.utils.fromUuid(str),
   );
 
   Handlebars.registerHelper("safeUuid", (str) => safeUuid(str));

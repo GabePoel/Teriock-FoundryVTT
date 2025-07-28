@@ -10,6 +10,7 @@ import * as queries from "./helpers/queries/_module.mjs";
 import registerHandlebarsHelpers from "./helpers/startup/register-handlebars.mjs";
 import registerHooks from "./helpers/startup/register-hooks.mjs";
 import registerTemplates from "./helpers/startup/register-templates.mjs";
+import * as utils from "./helpers/utils.mjs";
 import * as wiki from "./helpers/wiki.mjs";
 import { teriockDetectionModes } from "./perception/detection-modes.mjs";
 import { teriockVisionModes } from "./perception/vision-modes.mjs";
@@ -180,6 +181,8 @@ foundry.helpers.Hooks.once("init", function () {
   CONFIG.queries["teriock.inCombatExpiration"] =
     queries.inCombatExpirationQuery;
 
+  const packs = /** @type {Collection<CompendiumCollection>} */ game.packs;
+
   game.teriock = {
     Actor: documents.TeriockActor,
     Effect: documents.TeriockEffect,
@@ -192,6 +195,7 @@ foundry.helpers.Hooks.once("init", function () {
         fetchWikiPageHTML: wiki.fetchWikiPageHTML,
         cleanWikiHTML: wiki.cleanWikiHTML,
         fetchCategoryMembers: wiki.fetchCategoryMembers,
+        fetchCategoryAbilities: wiki.fetchCategoryAbilities,
       },
       create: {
         property: createEffects.createProperty,
@@ -216,6 +220,35 @@ foundry.helpers.Hooks.once("init", function () {
         hotbarDrop: dialogs.hotbarDropDialog,
         inCombatExpiration: dialogs.inCombatExpirationDialog,
       },
+      utils: {
+        fromUuid: utils.fromUuid,
+        fromUuidSync: utils.fromUuidSync,
+        safeUuid: utils.safeUuid,
+        pureUuid: utils.pureUuid,
+      },
+    },
+    packs: {
+      creatures: () =>
+        /** @type {TeriockCharacterCompendium} */
+        packs.get("teriock.creatures"),
+      essentials: () =>
+        /** @type {TeriockPowerCompendium} */
+        packs.get("teriock.essentials"),
+      classes: () =>
+        /** @type {TeriockRankCompendium} */
+        packs.get("teriock.classes"),
+      equipment: () =>
+        /** @type {TeriockEquipmentCompendium} */
+        packs.get("teriock.equipment"),
+      species: () =>
+        /** @type {TeriockPowerCompendium} */
+        packs.get("teriock.species"),
+      execution: () =>
+        /** @type {TeriockMacroCompendium} */
+        packs.get("teriock.execution"),
+      maintenance: () =>
+        /** @type {TeriockMacroCompendium} */
+        packs.get("teriock.maintenance"),
     },
   };
 

@@ -767,7 +767,7 @@ export default (Base) => {
         });
       }
 
-      if (type === "macro") return await foundry.utils.fromUuid(id);
+      if (type === "macro") return game.teriock.api.utils.fromUuid(id);
 
       if (type === "item") return this.document.items.get(id);
 
@@ -909,7 +909,7 @@ export default (Base) => {
         /** @type {TeriockItem} */ await ItemClass.fromDropData(data);
       if (!this._canDropItem(item)) return false;
 
-      const source = await foundry.utils.fromUuid(data.uuid);
+      const source = await game.teriock.api.fromUuid(data.uuid);
       if (item.parent?.documentName === "Actor" && item.type === "equipment") {
         if (item.parent?.documentName === "Actor" && item.system.consumable) {
           const targetItem = this.document.items.getName(item.name);

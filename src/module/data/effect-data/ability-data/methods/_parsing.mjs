@@ -774,10 +774,8 @@ function extractMacroFromHTML(doc) {
       const pseudoHook = el.dataset.pseudoHook;
       if (macroName && pseudoHook) {
         try {
-          /** @type {CompendiumPacks} */
-          const packs = game.packs;
-          const macroPack = packs.get("teriock.execution");
-          const macroUuid = macroPack?.index.getName(macroName).uuid;
+          const executionPack = game.teriock.packs.execution();
+          const macroUuid = executionPack?.index.getName(macroName).uuid;
           if (macroUuid) {
             const macroSafeUuid = safeUuid(macroUuid);
             macroAssignments[macroSafeUuid] = pseudoHook;

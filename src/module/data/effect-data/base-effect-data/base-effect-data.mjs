@@ -86,9 +86,9 @@ export default class TeriockBaseEffectData extends ChildDataMixin(
     const changes = this.parent.changes;
     for (const change of changes) {
       if (change.key === "system.hookedMacros.effectExpiration") {
+        /** @type {Teriock.UUID<TeriockMacro>} */
         const uuid = pureUuid(change.value);
-        /** @type {TeriockMacro|null} */
-        const macro = await foundry.utils.fromUuid(uuid);
+        const macro = await game.teriock.api.utils.fromUuid(uuid);
         if (macro) {
           await macro.execute({ actor: this });
         }

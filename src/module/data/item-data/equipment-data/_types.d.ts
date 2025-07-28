@@ -69,7 +69,7 @@ export interface TeriockEquipmentSchema extends TeriockBaseItemData {
   /** Is the equipment identified? */
   identified: boolean;
   /** Identification Reference Equipment UUID */
-  reference: string;
+  reference: Teriock.UUID<TeriockEquipment>;
 }
 
 declare module "./equipment-data.mjs" {

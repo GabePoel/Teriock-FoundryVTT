@@ -1,5 +1,4 @@
 import TeriockBaseEffectData from "../base-effect-data/base-effect-data.mjs";
-import { TeriockAbility } from "../../../documents/_documents.mjs";
 import { TeriockAbilityConsequenceSchema } from "./types/consequences";
 import { TeriockAbilityHierarchySchema } from "./types/hierarchy";
 import { TeriockAbilityRulesSchema } from "./types/rules";
@@ -13,7 +12,7 @@ export interface TeriockAbilitySchema
   /** Wiki Namespace */
   readonly wikiNamespace: "Ability";
   /** Parent */
-  parent: TeriockAbility;
+  parent: typeof TeriockAbility;
 }
 
 declare module "./ability-data.mjs" {

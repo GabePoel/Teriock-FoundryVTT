@@ -13,6 +13,8 @@ import TeriockItem from "./item.mjs";
  * @property {TeriockCharacterData} system
  * @property {TeriockCharacterSheet} sheet
  * @property {"actor"} type
+ * @property {Teriock.UUID<TeriockCharacter>} uuid
+ * @property {Teriock.ID<TeriockCharacter>} id
  */
 export class TeriockCharacter extends TeriockActor {}
 
@@ -25,6 +27,8 @@ export class TeriockCharacter extends TeriockActor {}
  * @property {TeriockEquipmentData} system
  * @property {TeriockEquipmentSheet} sheet
  * @property {"equipment"} type
+ * @property {Teriock.UUID<TeriockEquipment>} uuid
+ * @property {Teriock.ID<TeriockEquipment>} id
  */
 export class TeriockEquipment extends TeriockItem {}
 
@@ -34,6 +38,8 @@ export class TeriockEquipment extends TeriockItem {}
  * @property {TeriockPowerData} system
  * @property {TeriockPowerSheet} sheet
  * @property {"power"} type
+ * @property {Teriock.UUID<TeriockPower>} uuid
+ * @property {Teriock.ID<TeriockPower>} id
  */
 export class TeriockPower extends TeriockItem {}
 
@@ -46,6 +52,8 @@ export class TeriockPower extends TeriockItem {}
  * @property {TeriockRankData} system
  * @property {TeriockRankSheet} sheet
  * @property {"rank"} type
+ * @property {Teriock.UUID<TeriockRank>} uuid
+ * @property {Teriock.ID<TeriockCharacter>} id
  */
 export class TeriockRank extends TeriockItem {}
 
@@ -58,6 +66,8 @@ export class TeriockRank extends TeriockItem {}
  * @property {TeriockAbilityData} system
  * @property {TeriockAbilitySheet} sheet
  * @property {"ability"} type
+ * @property {Teriock.UUID<TeriockAbility>} uuid
+ * @property {Teriock.ID<TeriockAbility>} id
  */
 export class TeriockAbility extends TeriockEffect {}
 
@@ -66,6 +76,8 @@ export class TeriockAbility extends TeriockEffect {}
  *
  * @property {TeriockConsequenceData} system
  * @property {"consequence"} type
+ * @property {Teriock.UUID<TeriockConsequence>} uuid
+ * @property {Teriock.ID<TeriockConsequence>} id
  */
 export class TeriockConsequence extends TeriockEffect {}
 
@@ -77,6 +89,8 @@ export class TeriockConsequence extends TeriockEffect {}
  *
  * @property {TeriockAttunementData}
  * @property {"attunement"} type
+ * @property {Teriock.UUID<TeriockAttunement>} uuid
+ * @property {Teriock.ID<TeriockAttunement>} id
  */
 export class TeriockAttunement extends TeriockEffect {}
 
@@ -88,6 +102,8 @@ export class TeriockAttunement extends TeriockEffect {}
  *
  * @property {TeriockConditionData} system
  * @property {"condition"} type
+ * @property {Teriock.UUID<TeriockCondition>} uuid
+ * @property {Teriock.ID<TeriockCondition>} id
  */
 export class TeriockCondition extends TeriockEffect {}
 
@@ -100,6 +116,8 @@ export class TeriockCondition extends TeriockEffect {}
  * @property {TeriockFluencyData} system
  * @property {TeriockFluencySheet} sheet
  * @property {"fluency"} type
+ * @property {Teriock.UUID<TeriockFluency>} uuid
+ * @property {Teriock.ID<TeriockFluency>} id
  */
 export class TeriockFluency extends TeriockEffect {}
 
@@ -112,6 +130,8 @@ export class TeriockFluency extends TeriockEffect {}
  * @property {TeriockPropertyData} system
  * @property {TeriockPropertySheet} sheet
  * @property {"property"} type
+ * @property {Teriock.UUID<TeriockProperty>} uuid
+ * @property {Teriock.ID<TeriockProperty>} id
  */
 export class TeriockProperty extends TeriockEffect {}
 
@@ -121,5 +141,7 @@ export class TeriockProperty extends TeriockEffect {}
  * @property {TeriockResourceData} system
  * @property {TeriockResourceSheet} sheet
  * @property {"resource"} type
+ * @property {Teriock.UUID<TeriockResource>} uuid
+ * @property {Teriock.ID<TeriockResource>} id
  */
 export class TeriockResource extends TeriockEffect {}

@@ -152,7 +152,7 @@ export default class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(
     context.parentAbility = this.document.sup;
     context.macros = {};
     for (const uuid of Object.keys(this.document.system.applies.macros)) {
-      context.macros[pureUuid(uuid)] = await foundry.utils.fromUuid(
+      context.macros[pureUuid(uuid)] = await game.teriock.api.utils.fromUuid(
         pureUuid(uuid),
       );
     }
