@@ -67,7 +67,7 @@ for (const [folderName, properties] of Object.entries(propertyMap)) {
     );
   }
 
-  for (const [e, eo] of Object.entries(CONFIG.TERIOCK.equipment)) {
+  for (const [_e, eo] of Object.entries(CONFIG.TERIOCK.equipment)) {
     let generatedName =
       properties
         .map((p) => assignedProperties.find((ap) => toCamelCase(ap) === p))
