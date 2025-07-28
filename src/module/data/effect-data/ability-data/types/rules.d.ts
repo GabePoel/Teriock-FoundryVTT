@@ -1,12 +1,7 @@
-import { AbilityManeuver, ExecutionTime } from "./rules-parts/maneuver.ts";
 import { CostsConfig } from "./rules-parts/costs";
-import { Element, PowerSource } from "./rules-parts/tags";
 import {
-  AbilityInteraction,
   DeliveryConfig,
-  FeatSaveAttribute,
   PiercingType,
-  TargetType
 } from "./rules-parts/interaction";
 import { OverviewText, ResultsText } from "./rules-parts/summary";
 import { ImprovementsConfig } from "./rules-parts/improvements";
@@ -32,14 +27,14 @@ export interface TeriockAbilityRulesSchema {
   elderSorceryIncant: string;
 
   // Core ability properties
-  powerSources: PowerSource[];
-  interaction: AbilityInteraction;
-  featSaveAttribute: FeatSaveAttribute;
-  maneuver: AbilityManeuver;
-  executionTime: ExecutionTime;
+  powerSources: Teriock.PowerSource[];
+  interaction: Teriock.Interaction;
+  featSaveAttribute: Teriock.Attribute;
+  maneuver: Teriock.Maneuver;
+  executionTime: Teriock.ExecutionTime;
   delivery: DeliveryConfig;
-  targets: TargetType[];
-  elements: Element[];
+  targets: Teriock.Target[];
+  elements: Teriock.Element[];
   duration: Duration;
   sustained: boolean;
   range: string | null;
@@ -73,7 +68,7 @@ export interface TeriockAbilityRulesSchema {
   effects: string[];
   expansion: string | null;
   expansionRange: string | null;
-  expansionSaveAttribute: FeatSaveAttribute;
+  expansionSaveAttribute: Teriock.Attribute;
 
   // Costs
   costs: CostsConfig;

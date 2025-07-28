@@ -79,12 +79,12 @@ export default class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(
   /**
    * Switches to a specific consequence tab.
    *
-   * @param {Event} event - The event object.
+   * @param {Event} _event - The event object.
    * @param {HTMLElement} target - The target element.
    * @returns {Promise<void>} Promise that resolves when tab is switched.
    * @static
    */
-  static async _consequenceTab(event, target) {
+  static async _consequenceTab(_event, target) {
     this._consequenceTab = target.dataset.tab;
     this.render();
   }
@@ -92,12 +92,12 @@ export default class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(
   /**
    * Disconnects the given macro from this ability.
    *
-   * @param {Event} event - The event object.
+   * @param {Event} _event - The event object.
    * @param {HTMLElement} target - The target element.
    * @returns {Promise<void>}
    * @private
    */
-  static async _unlinkMacro(event, target) {
+  static async _unlinkMacro(_event, target) {
     const uuid = target.dataset.parentId;
     const updateData = {};
     updateData[`system.applies.macros.-=${safeUuid(uuid)}`] = null;
@@ -107,12 +107,12 @@ export default class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(
   /**
    * Change the run pseudo-hook for a given macro
    *
-   * @param {Event} event - The event object.
+   * @param {Event} _event - The event object.
    * @param {HTMLElement} target - The target element.
    * @returns {Promise<void>}
    * @private
    */
-  static async _changeMacroRunHook(event, target) {
+  static async _changeMacroRunHook(_event, target) {
     const uuid = target.dataset.parentId;
     const pseudoHook = await selectDialog(pseudoHooks, {
       label: "Pseudo-hook",
@@ -401,13 +401,13 @@ export default class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(
   /**
    * Handles dropping of a macro on this document.
    *
-   * @param {DragEvent} event - The drop event.
+   * @param {DragEvent} _event - The drop event.
    * @param {object} data - The macro data.
    * @returns {Promise<TeriockMacro|void>} Promise that resolves to the dropped macro if successful.
    * @private
    * @override
    */
-  async _onDropMacro(event, data) {
+  async _onDropMacro(_event, data) {
     console.log(data);
     const updateData = {
       [`system.applies.macros.${safeUuid(data?.uuid)}`]: "execution",

@@ -196,12 +196,18 @@ export default class TeriockEquipmentSheet extends HandlebarsApplicationMixin(
 
     const dampenedEls = root.querySelectorAll(".flag-tag-dampened");
     dampenedEls.forEach((el) =>
-      el.addEventListener("click", () => doc.system.undampen()),
+      el.addEventListener(
+        "click",
+        async () => await doc.update({ "system.dampened": false }),
+      ),
     );
 
     const shatteredEls = root.querySelectorAll(".flag-tag-shattered");
     shatteredEls.forEach((el) =>
-      el.addEventListener("click", () => doc.system.repair()),
+      el.addEventListener(
+        "click",
+        async () => await doc.update({ "system.shattered": false }),
+      ),
     );
   }
 }

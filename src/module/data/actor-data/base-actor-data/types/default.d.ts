@@ -173,7 +173,7 @@ export interface TeriockBaseActorDefault {
   /** Presence */
   presence: BarData;
   /** Tradecrafts */
-  tradecrafts: Record<string, TradecraftData>;
+  tradecrafts: Record<Teriock.Tradecraft, TradecraftData>;
   /** Resistances */
   resistances: ProtectionData;
   /** Immunities */
@@ -181,20 +181,20 @@ export interface TeriockBaseActorDefault {
   /** Update counter - used to force an update when adding/removing effects */
   updateCounter: boolean;
   /** Attunements - IDs of attuned equipment */
-  attunements: Set<string>;
+  attunements: Set<Teriock.ID<TeriockEquipment>>;
   /** Wielding */
   wielding: {
     /** Primary attacker */
     attacker: {
       /** ID for primary attacker */
-      raw: string | null;
+      raw: Teriock.ID<TeriockEquipment> | null;
       /** Derived primary attacker item */
       derived: TeriockEquipment | null;
     };
     /** Primary blocker */
     blocker: {
       /** ID for primary attacker */
-      raw: string | null;
+      raw: Teriock.ID<TeriockEquipment> | null;
       /** Derived primary attacker item */
       derived: TeriockEquipment | null;
     };

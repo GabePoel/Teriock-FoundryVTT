@@ -1,10 +1,3 @@
-import { FeatSaveAttribute } from "./interaction";
-
-/**
- * Valid attributes with values that can be adjusted by abilities
- */
-export type ImprovementAttribute = "int" | "mov" | "per" | "snk" | "str";
-
 /**
  * Valid feat save improvement amounts
  */
@@ -14,7 +7,7 @@ export type FeatSaveImprovementAmount = "proficiency" | "fluency";
  * Attribute improvement configuration
  */
 export interface AttributeImprovement {
-  attribute: ImprovementAttribute | null;
+  attribute: Teriock.StatAttribute | null;
   minVal: number;
 }
 
@@ -22,7 +15,7 @@ export interface AttributeImprovement {
  * Feat save improvement configuration
  */
 export interface FeatSaveImprovement {
-  attribute: FeatSaveAttribute | null;
+  attribute: Teriock.Attribute | null;
   amount: FeatSaveImprovementAmount;
 }
 

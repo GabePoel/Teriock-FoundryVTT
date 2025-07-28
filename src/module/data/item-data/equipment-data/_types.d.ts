@@ -40,11 +40,11 @@ export interface TeriockEquipmentSchema extends TeriockBaseItemData {
   /** Short Range (ft) (if ranged) */
   shortRange: number;
   /** Equipment Classes */
-  equipmentClasses: Set<string>;
+  equipmentClasses: Set<Teriock.EquipmentClass>;
   /** Minimum STR */
   minStr: number;
   /** Style Bonus (Weapon Fighting Style) */
-  sb: string;
+  sb: Teriock.WeaponFightingStyle;
   /** Armor Value */
   av: number;
   /** Block Value */

@@ -13,7 +13,7 @@ export interface TeriockConsequenceSchema extends TeriockBaseEffectData {
   source: string;
   expirations: {
     condition: {
-      value: string | null;
+      value: Teriock.ConditionKey | null;
       present: boolean;
     };
     /** Expirations based on combat timing. */

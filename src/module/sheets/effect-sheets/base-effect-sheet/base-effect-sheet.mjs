@@ -34,12 +34,12 @@ export default class TeriockBaseEffectSheet extends BaseEffectSheet {
   /**
    * Adds a new change to an effect application.
    *
-   * @param {Event} event - The event object.
+   * @param {Event} _event - The event object.
    * @param {HTMLElement} target - The target element.
    * @returns {Promise<void>} Promise that resolves when change is added.
    * @static
    */
-  static async _addChange(event, target) {
+  static async _addChange(_event, target) {
     const application = target.dataset.application;
     const updateString = `system.applies.${application}.changes`;
     const changes = this.document.system.applies[application].changes;
@@ -56,12 +56,12 @@ export default class TeriockBaseEffectSheet extends BaseEffectSheet {
   /**
    * Deletes a change from an effect application.
    *
-   * @param {Event} event - The event object.
+   * @param {Event} _event - The event object.
    * @param {HTMLElement} target - The target element.
    * @returns {Promise<void>} Promise that resolves when change is deleted.
    * @static
    */
-  static async _deleteChange(event, target) {
+  static async _deleteChange(_event, target) {
     const index = parseInt(target.dataset.index, 10);
     const application = target.dataset.application;
     const updateString = `system.applies.${application}.changes`;

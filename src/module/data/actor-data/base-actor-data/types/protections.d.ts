@@ -5,13 +5,13 @@ export interface ProtectionData {
   /** Drain Types */
   drainTypes: Set<string>;
   /** Statuses */
-  statuses: Set<string>;
+  statuses: Set<Teriock.ConditionKey>;
   /** Elements */
-  elements: Set<string>;
+  elements: Set<Teriock.Element>;
   /** Effects */
-  effects: Set<string>;
+  effects: Set<Teriock.EffectTag>;
   /** Power Sources */
-  powerSources: Set<string>;
+  powerSources: Set<Teriock.PowerSource>;
   /** Abilities */
   abilities: Set<string>;
   /** Other */

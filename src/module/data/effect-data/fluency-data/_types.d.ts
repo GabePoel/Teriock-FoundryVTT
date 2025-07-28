@@ -5,9 +5,9 @@ interface TeriockFluencySchema extends TeriockBaseEffectData {
   /** Wiki Namespace */
   readonly wikiNamespace: "Tradecraft";
   /** Tradecraft field */
-  field: string;
+  field: Teriock.Field;
   /** Tradecraft */
-  tradecraft: string;
+  tradecraft: Teriock.Tradecraft;
   /** Parent */
   parent: TeriockFluency;
 }

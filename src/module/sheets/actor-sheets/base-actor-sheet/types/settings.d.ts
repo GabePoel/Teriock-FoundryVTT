@@ -53,7 +53,7 @@ export interface BaseActorSheetSettings {
   equipmentSortAscending: boolean;
 
   /** Whether the rules text for a given condition is expanded or collapsed. */
-  conditionExpansions: Record<string, boolean>;
+  conditionExpansions: Record<Teriock.ConditionKey, boolean>;
 }
 
 /**
@@ -95,21 +95,21 @@ export interface AbilityFilters {
   /** Show, hide, or don't filter based on if expansion. */
   expansion: Teriock.ThreeToggle;
   /** If filter is applied, which maneuver is displayed. */
-  maneuver: string | null;
+  maneuver: Teriock.Maneuver | null;
   /** If filter is applied, which interaction is displayed. */
-  interaction: string | null;
+  interaction: Teriock.Interaction | null;
   /** If filter is applied, which power source type is displayed. */
-  powerSource: string | null;
+  powerSource: Teriock.PowerSource | null;
   /** If filter is applied, which element is displayed. */
-  element: string | null;
+  element: Teriock.Element | null;
   /** If filter is applied, which effect type is displayed. */
-  effects: string | null;
+  effects: Teriock.EffectTag | null;
   /** If filter is applied, which delivery is displayed. */
-  delivery: string | null;
+  delivery: Teriock.Delivery | null;
   /** If filter is applied, which piercing type is displayed. */
   piercing: string | null;
   /** If filter is applied, which target is displayed. */
-  target: string | null;
+  target: Teriock.Target | null;
 }
 
 /**
@@ -127,15 +127,15 @@ export interface EquipmentFilters {
   /** Show, hide, or don't filter based on if identified. */
   identified: Teriock.ThreeToggle;
   /** If filter is applied, which property is displayed. */
-  properties: string | null;
+  properties: Teriock.GenericPropertyKey | null;
   /** If filter is applied, which material property is displayed. */
-  materialProperties: string | null;
+  materialProperties: Teriock.MaterialPropertyKey | null;
   /** If filter is applied, which magical property is displayed. */
-  magicalProperties: string | null;
+  magicalProperties: Teriock.MagicalPropertyKey | null;
   /** If filter is applied, which weapon fighting style is displayed. */
-  weaponFightingStyles: string | null;
+  weaponFightingStyles: Teriock.WeaponFightingStyle | null;
   /** If filter is applied, which equipment class is displayed. */
-  equipmentClasses: string | null;
+  equipmentClasses: Teriock.EquipmentClass | null;
   /** If filter is applied, which power level is displayed. */
   powerLevel: string | null;
 }

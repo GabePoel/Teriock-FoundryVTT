@@ -99,7 +99,9 @@ declare global {
   const TeriockResourceData: typeof import("./data/_module.mjs").effect.ResourceData;
 
   namespace Teriock {
+    type ActiveExecutionTime = Parameters.ActiveExecutionTime;
     type ActorType = DocumentTypes.ActorType;
+    type Attribute = Parameters.Attribute;
     type ChatOptions = Command.ChatOptions;
     type ChatSpeakerData = Messages.ChatSpeakerData;
     type CommandCallback = Command.CommandCallback;
@@ -108,21 +110,43 @@ declare global {
     type CommonRollOptions = Rolls.CommonRollOptions;
     type ConditionRollOptions = Rolls.ConditionRollOptions;
     type CritRollOptions = Rolls.CritRollOptions;
+    type Delivery = Parameters.Delivery;
     type EffectMetadata = Metadata.EffectMetadata;
+    type EffectTag = Parameters.EffectTag;
     type EffectType = DocumentTypes.EffectType;
+    type Element = Parameters.Element;
+    type EquipmentClass = Parameters.EquipmentClass;
     type EquipmentRollOptions = Rolls.EquipmentRollOptions;
+    type ExecutionTime = Parameters.ExecutionTime;
+    type Field = Parameters.Field;
     type HTMLButtonConfig = Chat.HTMLButtonConfig;
     type HackableBodyPart = Parameters.HackableBodyPart;
+    type Interaction = Parameters.Interaction;
     type ItemType = DocumentTypes.ItemType;
+    type Maneuver = Parameters.Maneuver;
     type MessageBar = Messages.MessageBar;
     type MessageBlock = Messages.MessageBlock;
     type MessageOptions = Messages.MessageOptions;
     type MessageParts = Messages.MessageParts;
+    type PassiveExecutionTime = Parameters.PassiveExecutionTime;
     type PolyhedralDie = Rolls.PolyhedralDie;
+    type PowerSource = Parameters.PowerSource;
+    type PseudoHook = Parameters.PseudoHook;
     type QueryInCombatExpirationData = Queries.QueryInCombatExpirationData;
+    type ReactiveExecutionTime = Parameters.ReactiveExecutionTime;
     type SkipFunctions = Updates.SkipFunctions;
+    type SlowExecutionTime = Parameters.SlowExecutionTime;
+    type StatAttribute = Parameters.StatAttribute;
+    type ConditionKey = Parameters.ConditionKey;
+    type Target = Parameters.Target;
     type ThreeToggle = Ui.ThreeToggle;
+    type Tradecraft = Parameters.Tradecraft;
+    type WeaponClass = Parameters.WeaponClass;
+    type WeaponFightingStyle = Parameters.WeaponFightingStyle;
     type WikiPullOptions = Wiki.WikiPullOptions;
+    type GenericPropertyKey = Parameters.GenericPropertyKey;
+    type MaterialPropertyKey = Parameters.MaterialPropertyKey;
+    type MagicalPropertyKey = Parameters.MagicalPropertyKey;
 
     const __brand: unique symbol;
 
