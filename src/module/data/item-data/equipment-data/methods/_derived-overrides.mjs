@@ -125,7 +125,7 @@ export function _derivedAv0(equipmentData) {
       "av0",
       (data) => data.parent.effectKeys?.property?.has("av0"),
       (current, override) => override || current,
-      null, // No upgrade logic needed for booleans
+      null,
     ) || _derivedUb(equipmentData)
   );
 }
@@ -142,7 +142,7 @@ export function _derivedUb(equipmentData) {
     "ub",
     (data) => data.parent.effectKeys?.property?.has("ub"),
     (current, override) => override || current,
-    null, // No upgrade logic needed for booleans
+    null,
   );
 }
 
@@ -158,7 +158,7 @@ export function _derivedAv(equipmentData) {
     "av",
     (data) => data.av,
     (current, override) => Math.max(override || 0, current),
-    (current, upgrade) => current + (upgrade || 0), // Addition for numbers
+    (current, upgrade) => current + (upgrade || 0),
   );
 }
 
@@ -174,7 +174,7 @@ export function _derivedBv(equipmentData) {
     "bv",
     (data) => data.bv,
     (current, override) => Math.max(override || 0, current),
-    (current, upgrade) => current + (upgrade || 0), // Addition for numbers
+    (current, upgrade) => current + (upgrade || 0),
   );
 }
 
@@ -190,7 +190,7 @@ export function _derivedDamage(equipmentData) {
     "damage",
     (data) => data.damage,
     (current, override) => override || current,
-    (current, upgrade) => formatStringUpgrade(current, upgrade), // String concatenation with operators
+    (current, upgrade) => formatStringUpgrade(current, upgrade),
   );
 }
 
@@ -206,6 +206,6 @@ export function _derivedTwoHandedDamage(equipmentData) {
     "twoHandedDamage",
     (data) => data.twoHandedDamage,
     (current, override) => override || current,
-    (current, upgrade) => formatStringUpgrade(current, upgrade), // String concatenation with operators
+    (current, upgrade) => formatStringUpgrade(current, upgrade),
   );
 }

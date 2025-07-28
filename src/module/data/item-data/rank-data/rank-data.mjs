@@ -37,11 +37,11 @@ export default class TeriockRankData extends WikiDataMixin(
    * Gets the message parts for the rank.
    * Combines base message parts with rank-specific message parts.
    *
-   * @returns {object} Object containing message parts for the rank.
+   * @returns {Teriock.MessageParts} Object containing message parts for the rank.
    * @override
    */
   get messageParts() {
-    return { ...super.messageParts, ..._messageParts(this.parent) };
+    return { ...super.messageParts, ..._messageParts(this) };
   }
 
   /**
@@ -152,10 +152,10 @@ export default class TeriockRankData extends WikiDataMixin(
    * Relevant wiki pages:
    * - [Hit Points and Mana Points](https://wiki.teriock.com/index.php/Core:Hit_Points_and_Mana_Points)
    *
-   * @returns {Promise<object>} Promise that resolves to the hit die roll result.
+   * @returns {Promise<void>} Promise that resolves to the hit die roll result.
    */
   async rollHitDie() {
-    return await _rollHitDie(this.parent);
+    await _rollHitDie(this);
   }
 
   /**
@@ -164,9 +164,9 @@ export default class TeriockRankData extends WikiDataMixin(
    * Relevant wiki pages:
    * - [Hit Points and Mana Points](https://wiki.teriock.com/index.php/Core:Hit_Points_and_Mana_Points)
    *
-   * @returns {Promise<object>} Promise that resolves to the mana die roll result.
+   * @returns {Promise<void>} Promise that resolves to the mana die roll result.
    */
   async rollManaDie() {
-    return await _rollManaDie(this.parent);
+    await _rollManaDie(this);
   }
 }

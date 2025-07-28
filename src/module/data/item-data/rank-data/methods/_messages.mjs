@@ -8,13 +8,13 @@ import {
  * Generates message parts for a rank item, including bars and blocks for display.
  * Creates formatted display elements for archetype, class information, dice, and description.
  *
- * @param {TeriockItem} rank - The rank item to generate message parts for.
+ * @param {TeriockRankData} rankData - The rank item to generate message parts for.
  * @returns {object} Object containing bars and blocks for the rank message.
  * @private
  */
-export function _messageParts(rank) {
+export function _messageParts(rankData) {
   const ref = CONFIG.TERIOCK.rankOptions;
-  const src = rank.system;
+  const src = rankData;
   const bars = [
     {
       icon: "fa-" + ref[src.archetype].classes[src.className].icon,
@@ -45,12 +45,12 @@ export function _messageParts(rank) {
       text: src.flaws,
     },
   ];
-  addPropertiesBlock(rank.transferredEffects, blocks);
+  addPropertiesBlock(rankData.parent.transferredEffects, blocks);
   addAbilitiesBlock(
-    rank.transferredEffects.filter((e) => !e.sup),
+    rankData.parent.transferredEffects.filter((e) => !e.sup),
     blocks,
   );
-  addResourcesBlock(rank.transferredEffects, blocks);
+  addResourcesBlock(rankData.parent.transferredEffects, blocks);
   return {
     bars: bars,
     blocks: blocks,
