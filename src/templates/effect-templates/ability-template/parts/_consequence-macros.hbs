@@ -1,9 +1,9 @@
 <div class="tcard-container">
   {{#each system.applies.macros as |pseudoHook uuid|}}
     {{tcard
-      img=(lookup (lookup ../macros (pureUuid uuid)) "img")
-      title=(lookup (lookup ../macros (pureUuid uuid)) "name")
-      subtitle=(concat "Runs on " (lookup ../config.pseudoHooks pseudoHook))
+      img=(path ../macros uuid "img")
+      title=(path ../macros uuid "name")
+      subtitle=(concat "Runs on " (path ../config.pseudoHooks pseudoHook))
       text="Macro"
       icons=(concat
         (ticon "link-slash" tooltip="Unlink Macro" action="unlinkMacro" parentId=(pureUuid uuid))

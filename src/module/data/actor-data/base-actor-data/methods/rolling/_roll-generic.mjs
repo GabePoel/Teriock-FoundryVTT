@@ -13,9 +13,9 @@ import TeriockRoll from "../../../../../documents/roll.mjs";
  */
 export async function _rollFeatSave(actorData, attribute, options = {}) {
   const actor = actorData.parent;
-  const bonus = actorData[`${attribute}Save`] || 0;
   const adv = options.advantage ? "kh1" : options.disadvantage ? "kl1" : "";
-  const formula = `2d20${adv || ""}`.replace(/^2d20$/, "1d20") + ` + ${bonus}`;
+  const formula =
+    `2d20${adv || ""}`.replace(/^2d20$/, "1d20") + ` + @att.${attribute}.save`;
   const context = {
     diceClass: "feat",
   };

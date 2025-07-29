@@ -3,14 +3,11 @@
     <div class="ab-box {{#if editable}}power-box{{/if}}" data-tooltip="Power Type">
       <div class="ab-box-icon">
         <i
-          class="fa-fw fa-light fa-{{lookup
-            (lookup config.powerOptions system.type)
-            'icon'
-          }}"
+          class="fa-fw fa-light fa-{{path config.powerOptions system.type 'icon'}}"
         ></i>
       </div>
       <div class="ab-box-content">
-        {{lookup (lookup config.powerOptions system.type) "name"}}
+        {{path config.powerOptions system.type "name"}}
       </div>
     </div>
   </div>

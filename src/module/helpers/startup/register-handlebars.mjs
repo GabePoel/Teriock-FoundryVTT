@@ -13,6 +13,7 @@ export default function registerHandlebarsHelpers() {
   });
 
   // Object Helpers
+
   Handlebars.registerHelper(
     "fromUuid",
     async (str) => await game.teriock.api.utils.fromUuid(str),
@@ -120,6 +121,12 @@ export default function registerHandlebarsHelpers() {
 
   Handlebars.registerHelper("dataset", function (options) {
     return options.hash;
+  });
+
+  Handlebars.registerHelper("path", function (obj, ...pathSegments) {
+    const segments = pathSegments.slice(0, -1);
+    const fullPath = segments.join(".");
+    return foundry.utils.getProperty(obj, fullPath);
   });
 
   // Dice & Value Formatting Helpers

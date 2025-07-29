@@ -3,23 +3,14 @@
     <div class="ab-box {{#if editable}}property-type-box{{/if}}" data-tooltip="Property Type">
       <div
         class="ab-box-icon"
-        style="color: {{lookup
-          (lookup config.abilityOptions.abilityType system.propertyType)
-          'color'
-        }};"
+        style="color: {{path config.abilityOptions.abilityType system.propertyType 'color'}};"
       >
         <i
-          class="fa-fw fa-light fa-{{lookup
-            (lookup config.abilityOptions.abilityType system.propertyType)
-            'icon'
-          }}"
+          class="fa-fw fa-light fa-{{path config.abilityOptions.abilityType system.propertyType 'icon'}}"
         ></i>
       </div>
       <div class="ab-box-content">
-        {{{lookup
-          (lookup config.abilityOptions.abilityType system.propertyType)
-          "name"
-        }}}
+        {{{path config.abilityOptions.abilityType system.propertyType "name"}}}
       </div>
     </div>
   </div>
@@ -29,19 +20,13 @@
         <i class="fa-fw fa-light fa-hammer-crash"></i>
       </div>
       <div class="ab-box-content">
-        <label>
-          <input
-            class="ability-bar-input damage-type-input"
-            name="system.damageType"
-            type="text"
-            value="{{system.damageType}}"
-            data-edit="system.damageType"
-            placeholder="Damage Type"
-            {{#if (not editable)}}
-            disabled="disabled"
-            {{/if}}
-          />
-        </label>
+        {{formInput
+          systemFields.damageType
+          value=system.damageType
+          classes="ability-bar-input damage-type-input"
+          disabled=(not editable)
+          dataset=(dataset tooltip="Damage Type")
+        }}
       </div>
     </div>
   </div>

@@ -9,7 +9,7 @@ const {
   TokenDocument,
   User,
 } = foundry.documents;
-const { DocumentCollection, CompendiumCollection, CompendiumFolderCollection } =
+const { CompendiumCollection, CompendiumFolderCollection } =
   foundry.documents.collections;
 import ChildDocumentMixin from "./mixins/child-mixin.mjs";
 import ParentDocumentMixin from "./mixins/parent-mixin.mjs";
@@ -60,7 +60,6 @@ export class BaseTeriockItem extends ParentDocumentMixin(
  * @extends {ActiveEffect}
  * @mixes ChildDocumentMixin
  * @implements {ActiveEffectData}
- * @implements {ChildDocumentMixin}
  * @property {TeriockBaseEffectData} system
  * @property {Teriock.EffectType} type
  * @property {"ActiveEffect"} documentName

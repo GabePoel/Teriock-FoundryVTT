@@ -154,7 +154,7 @@ function attributeData(actorData, data) {
     data[`att.${key}`] = attribute.value;
     data[`att.${key}.pro`] = attribute.saveProficient ? 1 : 0;
     data[`att.${key}.flu`] = attribute.saveFluent ? 1 : 0;
-    data[`att.${key}.save`] = actorData[`${key}Save`];
+    data[`att.${key}.save`] = attribute.saveBonus;
   }
 }
 

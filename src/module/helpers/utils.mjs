@@ -3,6 +3,82 @@ import { abilityOptions } from "./constants/ability-options.mjs";
 import { conditions } from "./constants/generated/conditions.mjs";
 
 /**
+ * Convert the given unit to feet.
+ *
+ * @param {number} range
+ * @param {string} units
+ * @returns {number}
+ */
+export function fromFeet(range, units) {
+  switch (units) {
+    case "in":
+      return range / 12;
+    case "ft":
+      return range;
+    case "yd":
+      return range * 3;
+    case "mi":
+      return range * 1760;
+    case "mm":
+      return (range * 10) / 3000;
+    case "cm":
+      return (range * 10) / 300;
+    case "dm":
+      return (range * 10) / 30;
+    case "m":
+      return (range * 10) / 3;
+    case "km":
+      return (range * 10000) / 3;
+    default:
+      return range;
+  }
+}
+
+/**
+ * Convert from feet to the given unit.
+ *
+ * @param {number} range
+ * @param {string} units
+ * @returns {number}
+ */
+export function toFeet(range, units) {
+  switch (units) {
+    case "in":
+      return range * 12;
+    case "ft":
+      return range;
+    case "yd":
+      return range / 3;
+    case "mi":
+      return range / 1760;
+    case "mm":
+      return (range * 3000) / 10;
+    case "cm":
+      return (range * 300) / 10;
+    case "dm":
+      return (range * 30) / 10;
+    case "m":
+      return (range * 3) / 10;
+    case "km":
+      return (range * 3) / 10000;
+    default:
+      return range;
+  }
+}
+
+/**
+ * Convert between two units.
+ *
+ * @param {number} range
+ * @param {string} fromUnits
+ * @param {string} toUnits
+ * @returns {number}
+ */
+export function convertUnits(range, fromUnits, toUnits) {
+  return toFeet(fromFeet(range, fromUnits), toUnits);
+}
+
+/**
  * A `foundry.utils.fromUuid` wrapper with typing enforcement.
  *
  * @template T

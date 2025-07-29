@@ -1,6 +1,6 @@
 const { TypeDataModel } = foundry.abstract;
 import { _migrateData } from "./methods/_migrate-data.mjs";
-import { _postUpdate } from "./methods/_post-update.mjs";
+import * as postUpdate from "./methods/_post-update.mjs";
 import { _prepareBaseData } from "./methods/_prepare-base-data.mjs";
 import { _getRollData } from "./methods/_roll-data.mjs";
 import * as hacks from "./methods/consequences/_take-hacks.mjs";
@@ -72,7 +72,7 @@ export default class TeriockBaseActorData extends TypeDataModel {
    * @returns {Promise<void>} Resolves when all post-update operations are complete
    */
   async postUpdate(skipFunctions) {
-    await _postUpdate(this, skipFunctions);
+    await postUpdate._postUpdate(this, skipFunctions);
   }
 
   /**

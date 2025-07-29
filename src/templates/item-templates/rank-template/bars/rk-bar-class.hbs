@@ -3,14 +3,11 @@
     <div class="ab-box {{#if editable}}archetype-box{{/if}}" data-tooltip="Archetype">
       <div class="ab-box-icon">
         <i
-          class="fa-fw fa-light fa-{{lookup
-            (lookup config.rankOptions system.archetype)
-            'icon'
-          }}"
+          class="fa-fw fa-light fa-{{path config.rankOptions system.archetype "icon"}}"
         ></i>
       </div>
       <div class="ab-box-content">
-        {{lookup (lookup config.rankOptions system.archetype) "name"}}
+        {{path config.rankOptions system.archetype "name"}}
       </div>
     </div>
   </div>
@@ -18,23 +15,11 @@
     <div class="ab-box {{#if editable}}class-box{{/if}}" data-tooltip="Class">
       <div class="ab-box-icon">
         <i
-          class="fa-fw fa-light fa-{{lookup
-            (lookup
-              (lookup (lookup config.rankOptions system.archetype) 'classes')
-              system.className
-            )
-            'icon'
-          }}"
+          class="fa-fw fa-light fa-{{path config.rankOptions system.archetype "classes" system.className "icon"}}"
         ></i>
       </div>
       <div class="ab-box-content">
-        {{lookup
-          (lookup
-            (lookup (lookup config.rankOptions system.archetype) "classes")
-            system.className
-          )
-          "name"
-        }}
+        {{path config.rankOptions system.archetype "classes" system.className "name"}}
       </div>
     </div>
   </div>

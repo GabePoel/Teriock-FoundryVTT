@@ -21,20 +21,6 @@ export interface TeriockBaseActorDerived {
   /** Fluency bonus derived from level @derived */
   f: number;
 
-  // Attribute saves (base attribute + bonus)
-  /** Intelligence save value @derived */
-  intSave: number;
-  /** Movement save value @derived */
-  movSave: number;
-  /** Perception save value @derived */
-  perSave: number;
-  /** Sneak save value @derived */
-  snkSave: number;
-  /** Strength save value @derived */
-  strSave: number;
-  /** Unused presence save value @derived */
-  unpSave: number;
-
   // Presence management
   /** Used presence points @derived */
   usp: number;

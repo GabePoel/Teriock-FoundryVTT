@@ -219,7 +219,7 @@ export default class TeriockEffect extends BaseTeriockEffect {
    *
    * @param {TeriockEffect[]} documents - Pending document instances to be created
    * @param {DatabaseCreateOperation} operation - Parameters of the database creation operation
-   * @param {BaseUser} user - The User requesting the creation operation
+   * @param {TeriockUser} user - The User requesting the creation operation
    * @returns {Promise<boolean|void>} - Return false to cancel the creation operation entirely
    * @protected
    */
@@ -274,7 +274,7 @@ export default class TeriockEffect extends BaseTeriockEffect {
    *
    * @param {TeriockEffect[]} documents - Document instances to be deleted
    * @param {DatabaseDeleteOperation} operation - Parameters of the database update operation
-   * @param {BaseUser} user - The User requesting the deletion operation
+   * @param {TeriockUser} user - The User requesting the deletion operation
    * @returns {Promise<boolean|void>} - Return false to cancel the deletion operation entirely
    * @protected
    */

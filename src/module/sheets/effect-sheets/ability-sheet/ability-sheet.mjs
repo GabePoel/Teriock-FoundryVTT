@@ -152,7 +152,7 @@ export default class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(
     context.parentAbility = this.document.sup;
     context.macros = {};
     for (const uuid of Object.keys(this.document.system.applies.macros)) {
-      context.macros[pureUuid(uuid)] = await game.teriock.api.utils.fromUuid(
+      context.macros[uuid] = await game.teriock.api.utils.fromUuid(
         pureUuid(uuid),
       );
     }
@@ -267,8 +267,8 @@ export default class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(
       [".delivery-box", cm.delivery, "click"],
       [".delivery-box", cm.piercing, "contextmenu"],
       [".execution-box", cm.maneuver, "contextmenu"],
-      ['.execution-box[maneuver="Active"]', cm.active, "click"],
-      ['.execution-box[maneuver="Reactive"]', cm.reactive, "click"],
+      ['.execution-box[data-maneuver="Active"]', cm.active, "click"],
+      ['.execution-box[data-maneuver="Reactive"]', cm.reactive, "click"],
       [".interaction-box", cm.interaction, "click"],
       [".interaction-box-feat", cm.featSaveAttribute, "contextmenu"],
       [".target-box", cm.targets, "click"],
@@ -336,9 +336,9 @@ export default class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(
     };
 
     for (const [selector, param] of Object.entries(arrayTags)) {
-      root.querySelectorAll(selector).forEach((el) => {
+      root.querySelectorAll(selector).forEach(/** @param {HTMLElement} el */ (el) => {
         el.addEventListener("click", async () => {
-          const value = el.getAttribute("value");
+          const value = el.dataset.value;
           const pathKey = param.split(".")[1];
           const list = doc.system[pathKey].filter((entry) => entry !== value);
           await doc.update({ [param]: list });

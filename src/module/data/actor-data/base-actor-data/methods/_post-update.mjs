@@ -19,19 +19,22 @@ import { encumbranceData } from "../../../../content/encumbrance.mjs";
  */
 export async function _postUpdate(system, skipFunctions = {}) {
   if (!skipFunctions.applyEncumbrance) {
-    await applyEncumbrance(system);
-  }
-  if (!skipFunctions.prepareTokens) {
-    await prepareTokens(system);
+    await _applyEncumbrance(system);
   }
   if (!skipFunctions.checkDown) {
-    await checkDown(system);
+    await _checkDown(system);
   }
   if (!skipFunctions.etherealKill) {
-    await etherealKill(system);
+    await _etherealKill(system);
   }
   if (!skipFunctions.checkExpirations) {
-    await checkExpirations(system);
+    await _checkExpirations(system);
+  }
+  if (!skipFunctions.prepareTokens) {
+    for (const token of /** @type {TeriockToken[]} */ system.parent.getDependentTokens()) {
+      const { visionMode } = token._deriveVision();
+      await token.updateVisionMode(visionMode);
+    }
   }
 }
 
@@ -59,7 +62,7 @@ export async function _postUpdate(system, skipFunctions = {}) {
  * // Apply encumbrance effects for an actor carrying too much weight
  * await applyEncumbrance(actor.system);
  */
-async function applyEncumbrance(system) {
+export async function _applyEncumbrance(system) {
   const actor = system.parent;
   const level = system.encumbranceLevel || 0;
   const maxLevel = 3;
@@ -99,81 +102,6 @@ async function applyEncumbrance(system) {
 }
 
 /**
- * Prepares and updates all tokens associated with the actor.
- *
- * This function performs two main token maintenance tasks:
- *
- * 1. **Size Synchronization**: Updates token dimensions to match the actor's
- *    named size (Tiny, Small, Medium, Large, Huge, Gargantuan, Colossal)
- * 2. **Vision Mode Updates**: Sets the appropriate vision mode based on whether
- *    the actor has the "ethereal" status effect
- *
- * Vision modes are set to "ethereal" for ethereal actors, "basic" for others.
- *
- * Relevant wiki pages:
- * - [Token Sizes](https://wiki.teriock.com/index.php/Core:Size)
- * - [Vision Modes](https://wiki.teriock.com/index.php/Condition:Ethereal)
- *
- * @param {TeriockBaseActorData} system - The actor's base data system object
- * @returns {Promise<void>} Resolves when all tokens are updated
- *
- * @example
- * // Update all tokens for an actor that changed size or ethereal status
- * await prepareTokens(actor.system);
- */
-async function prepareTokens(system) {
-  const actor = system.parent;
-  const tokens = actor?.getDependentTokens();
-  const tokenSizes = {
-    Tiny: 0.5,
-    Small: 1,
-    Medium: 1,
-    Large: 2,
-    Huge: 3,
-    Gargantuan: 4,
-    Colossal: 6,
-  };
-  for (const token of tokens) {
-    const tokenSize = tokenSizes[system?.namedSize] || 1;
-    const tokenParameters = {
-      width: tokenSize,
-      height: tokenSize,
-    };
-    if (token.width !== tokenSize || token.height !== tokenSize) {
-      await token.update(tokenParameters);
-    }
-
-    let visionMode = "basic";
-
-    if (system.senses.dark > 0) {
-      visionMode = "darkvision";
-    }
-    if (system.senses.night > 0 && system.senses.night >= system.senses.dark) {
-      visionMode = "lightAmplification";
-    }
-    if (system.senses.blind + system.senses.hearing + system.senses.smell > 0) {
-      const maxTremor = Math.max(
-        system.senses.blind,
-        system.senses.hearing,
-        system.senses.smell,
-      );
-      const maxDark = Math.max(system.senses.dark, system.senses.night);
-      if (maxTremor > maxDark) {
-        visionMode = "tremorsense";
-      }
-    }
-    if (actor?.statuses?.has("ethereal")) {
-      visionMode = "ethereal";
-    }
-    if (actor?.statuses?.has("ethereal") && actor?.statuses?.has("invisible")) {
-      visionMode = "invisibleEthereal";
-    }
-
-    await token.updateVisionMode(visionMode);
-  }
-}
-
-/**
  * Checks if the actor should be unconscious or dead and updates the status effects accordingly.
  *
  * Relevant wiki pages:
@@ -184,7 +112,7 @@ async function prepareTokens(system) {
  * @param {TeriockBaseActorData} system - The actor's base data system object
  * @returns {Promise<void>} Resolves when the status effects are updated
  */
-async function checkDown(system) {
+export async function _checkDown(system) {
   let shouldBeAsleep = system.parent.statuses.has("asleep");
   let shouldBeUnconscious =
     system.hp.value <= 0 || system.mp.value <= 0 || shouldBeAsleep;
@@ -277,7 +205,7 @@ async function checkDown(system) {
  * // Check if an ethereal creature should be killed due to being down
  * await etherealKill(actor.system);
  */
-async function etherealKill(system) {
+export async function _etherealKill(system) {
   const actor = system.parent;
   const down = actor?.statuses?.has("down");
   const ethereal = actor?.statuses?.has("ethereal");
@@ -299,7 +227,7 @@ async function etherealKill(system) {
  * // Check for expired effects on an actor
  * await checkExpirations(actor.system);
  */
-async function checkExpirations(system) {
+export async function _checkExpirations(system) {
   const actor = system.parent;
   for (const effect of actor.conditionExpirationEffects) {
     await effect.system.checkExpiration();

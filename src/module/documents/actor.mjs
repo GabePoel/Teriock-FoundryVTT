@@ -2,6 +2,7 @@ import { rankOptions } from "../helpers/constants/rank-options.mjs";
 import { pureUuid, toCamelCase } from "../helpers/utils.mjs";
 import { BaseTeriockActor } from "./_base.mjs";
 import TeriockRoll from "./roll.mjs";
+import { characterOptions } from "../helpers/constants/character-options.mjs";
 
 /**
  * @property {TeriockBaseActorData} system
@@ -79,20 +80,11 @@ export default class TeriockActor extends BaseTeriockActor {
   }
 
   /**
-   * Pre-process a creation operation, potentially altering its instructions or input data. Pre-operation events only
-   * occur for the client which requested the operation.
-   *
-   * This batch-wise workflow occurs after individual {@link _preCreate} workflows and provides a final pre-flight check
-   * before a database operation occurs.
-   *
-   * Modifications to pending documents must mutate the documents array or alter individual document instances using
-   * {@link updateSource}.
-   *
+   * @inheritDoc
    * @param {TeriockActor[]} documents - Pending document instances to be created
    * @param {DatabaseCreateOperation} operation - Parameters of the database creation operation
-   * @param {BaseUser} user - The User requesting the creation operation
+   * @param {TeriockUser} user - The User requesting the creation operation
    * @returns {Promise<boolean|void>} - Return false to cancel the creation operation entirely
-   * @protected
    */
   static async _preCreateOperation(documents, operation, user) {
     await super._preCreateOperation(documents, operation, user);
@@ -141,10 +133,70 @@ export default class TeriockActor extends BaseTeriockActor {
   }
 
   /**
-   * Prepares derived data for the document, including effect types and keys.
+   * Figure out the named for a given size.
    *
-   * @inheritdoc
+   * @param {number} size
+   * @returns {string}
    */
+  static toNamedSize(size) {
+    const sizeKeys = Object.keys(characterOptions.namedSizes).map(Number);
+    const filteredSizeKeys = sizeKeys.filter((key) => key <= size);
+    const sizeKey = Math.max(...filteredSizeKeys, 0);
+    return characterOptions.namedSizes[sizeKey] || "Medium";
+  }
+
+  /**
+   * @inheritDoc
+   * @param {object} data
+   * @param {object} options
+   * @param {TeriockUser} user
+   * @returns {Promise<boolean|void>}
+   */
+  async _preCreate(data, options, user) {
+    super._preCreate(data, options, user);
+    const prototypeToken = {};
+    const size =
+      characterOptions.tokenSizes[TeriockActor.toNamedSize(this.system.size)] ||
+      1;
+    if (!foundry.utils.hasProperty(data, "prototypeToken.sight.enabled"))
+      prototypeToken.sight = { enabled: true };
+    if (!foundry.utils.hasProperty(data, "prototypeToken.width"))
+      prototypeToken.width = size;
+    if (!foundry.utils.hasProperty(data, "prototypeToken.height"))
+      prototypeToken.height = size;
+    this.updateSource({ prototypeToken: prototypeToken });
+  }
+
+  /**
+   * @inheritDoc
+   * @param {object} changed
+   * @param {object} options
+   * @param {TeriockUser} user
+   * @returns {Promise<boolean|void>}
+   */
+  async _preUpdate(changed, options, user) {
+    super._preUpdate(changed, options, user);
+    if (foundry.utils.hasProperty(changed, "system.size")) {
+      const tokenSize =
+        characterOptions.tokenSizes[
+          TeriockActor.toNamedSize(changed.system.size)
+        ] || 1;
+      if (!foundry.utils.hasProperty(changed, "prototypeToken.width")) {
+        changed.prototypeToken ||= {};
+        changed.prototypeToken.height = tokenSize;
+        changed.prototypeToken.width = tokenSize;
+      }
+      for (const token of /** @type {TeriockToken[]} */ this.getDependentTokens()) {
+        if (token.parent?.grid?.type === 0) {
+          await token.resize({ width: tokenSize, height: tokenSize });
+        } else {
+          await token.update({ width: tokenSize, height: tokenSize });
+        }
+      }
+    }
+  }
+
+  /** @inheritDoc */
   prepareDerivedData() {
     super.prepareDerivedData();
     this.itemKeys = {
@@ -157,14 +209,11 @@ export default class TeriockActor extends BaseTeriockActor {
   }
 
   /**
-   * Create multiple embedded Document instances within this parent Document using provided input data.
-   * Overridden with special handling to allow for archetype abilities.
-   *
-   * @see {@link Document.createDocuments}
-   * @param {string} embeddedName - The name of the embedded Document type
-   * @param {object[]} data - An array of data objects used to create multiple documents
-   * @param {DatabaseCreateOperation} [operation={}] - Parameters of the database creation workflow
-   * @returns {Promise<Document[]>} - An array of created Document instances
+   * @inheritDoc
+   * @param {string} embeddedName
+   * @param {object[]} data
+   * @param {DatabaseCreateOperation} [operation={}]
+   * @returns {Promise<Document[]>}
    */
   async createEmbeddedDocuments(embeddedName, data = [], operation = {}) {
     const classPack = game.teriock.packs.classes();
@@ -201,7 +250,6 @@ export default class TeriockActor extends BaseTeriockActor {
         data.push(warrior.toObject());
       }
     }
-    console.log(data);
     if (
       embeddedName === "ActiveEffect" &&
       data.find((d) => d.type === "consequence")
@@ -226,10 +274,9 @@ export default class TeriockActor extends BaseTeriockActor {
   }
 
   /**
-   * Delete multiple embedded Document instances within a parent Document using provided string ids.
    * Overridden with special handling to allow for archetype abilities.
    *
-   * @see {@link Document.deleteDocuments}
+   * @inheritDoc
    * @param {string} embeddedName - The name of the embedded Document type
    * @param {string[]} ids - An array of string ids for each Document to be deleted
    * @param {DatabaseDeleteOperation} [operation={}] - Parameters of the database deletion workflow
@@ -260,10 +307,8 @@ export default class TeriockActor extends BaseTeriockActor {
   }
 
   /**
-   * Gets roll data for this actor, delegating to the system's getRollData method.
-   *
-   * @returns {object} The roll data for this actor.
-   * @inheritdoc
+   * @inheritDoc
+   * @returns {object}
    */
   getRollData() {
     return this.system.getRollData();

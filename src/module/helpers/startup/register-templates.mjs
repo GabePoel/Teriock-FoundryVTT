@@ -46,6 +46,7 @@ export default async function registerTemplates () {
     'systems/teriock/src/templates/effect-templates/ability-template/entries/ab-overview-entries.hbs',
     'systems/teriock/src/templates/effect-templates/ability-template/entries/ab-requirements-entries.hbs',
     'systems/teriock/src/templates/effect-templates/ability-template/entries/ab-trigger-entries.hbs',
+    'systems/teriock/src/templates/effect-templates/ability-template/parts/_consequence-changes.hbs',
     'systems/teriock/src/templates/effect-templates/ability-template/parts/_consequence-expiration.hbs',
     'systems/teriock/src/templates/effect-templates/ability-template/parts/_consequence-macros.hbs',
     'systems/teriock/src/templates/effect-templates/ability-template/parts/_consequence-section.hbs',

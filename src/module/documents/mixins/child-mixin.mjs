@@ -93,10 +93,10 @@ export default (BaseDocument) => {
     /**
      * Rolls the item, delegating to the system's roll method.
      *
-     * @param {object} options - Options for the roll.
+     * @param {object} _options - Options for the roll.
      * @returns {Promise<void>} Promise that resolves when the roll is complete.
      */
-    async roll(options) {
+    async roll(_options) {
       await this.chat();
     }
 

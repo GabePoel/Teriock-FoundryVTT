@@ -6,8 +6,8 @@
         {{#each config.currencyOptions as |currency id|}}
           <div class="money-panel tgrid g4">
             {{formInput
-              (lookup (lookup ../systemFields.money "fields") id)
-              value=(lookup ../system.money id)
+              (path ../systemFields.money "fields" id)
+              value=(path ../system.money id)
               classes="tgrid-item gi1 money-panel-input tgrid-item tcenter"
             }}
             <div class="money-info tsubtle tcenter tgrid-item gi3">

@@ -181,7 +181,8 @@ foundry.helpers.Hooks.once("init", function () {
   CONFIG.queries["teriock.inCombatExpiration"] =
     queries.inCombatExpirationQuery;
 
-  const packs = /** @type {Collection<CompendiumCollection>} */ game.packs;
+  const packs =
+    /** @type {Collection<TeriockCompendiumCollection>} */ game.packs;
 
   game.teriock = {
     Actor: documents.TeriockActor,
@@ -223,6 +224,9 @@ foundry.helpers.Hooks.once("init", function () {
         fromUuidSync: utils.fromUuidSync,
         pureUuid: utils.pureUuid,
         safeUuid: utils.safeUuid,
+        toFeet: utils.toFeet,
+        fromFeet:  utils.fromFeet,
+        convertUnits: utils.convertUnits,
       },
       wiki: {
         cleanWikiHTML: wiki.cleanWikiHTML,
