@@ -1,8 +1,8 @@
 # Feature Improvements
 
 - [ ] Perception features
-    - [ ] Blind fighting/true sight/etc.
-    - [ ] Frozen and morganti vision modes
+    - [x] Blind fighting/true sight/etc.
+    - [x] Frozen and morganti vision modes
     - [x] Automatic perception mode inherited from actor
     - [ ] Properties and abilities for light sources
 - [ ] Token features
@@ -14,9 +14,9 @@
     - [x] Hack buttons
     - [x] Easy way to apply boosts
     - [x] Enricheds for different roll types
-    - [ ] Bow, hand, and foot BV scaling
+    - [x] Bow, hand, and foot BV scaling
     - [ ] Ability resistance fix
-    - [ ] Attribute and feat save improvement appearing in ability chat messages
+    - [x] Attribute and feat save improvement appearing in ability chat messages
     - [x] Icons for all the basic abilities
     - [x] Attack ability targeting missing icon fix
     - [ ] Throwing weapon range multiplier (from throwing training)
@@ -29,7 +29,7 @@
 
 - [x] Consolidate applies and consequences systems
 - [ ] Clean up the CSS (as if)
-- [ ] Organize hooks (and move stuff out of hooks?)
+- [x] Organize hooks (and move stuff out of hooks?)
 - [ ] Hacks and encumbrance to statuses (no HUD)
     - [x] Ability buttons
 - [x] Better roll chat message button handling
