@@ -110,8 +110,7 @@ export async function _rollTradecraft(actorData, tradecraft, options = {}) {
     : options.disadvantage
       ? "2d20kl1"
       : "1d20";
-  if (proficient) formula += " + @p";
-  if (extra) formula += ` + @${tradecraft}`;
+  if (extra) formula += ` + @tc.${tradecraft.slice(0, 3)}`;
   const context = {};
   if (typeof options.threshold === "number") {
     context.threshold = options.threshold;

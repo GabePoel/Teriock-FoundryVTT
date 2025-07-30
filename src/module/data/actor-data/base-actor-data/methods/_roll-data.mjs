@@ -1,5 +1,7 @@
 /** @import TeriockBaseActorData from "../base-actor-data.mjs"; */
 
+import config from "../../../../helpers/config.mjs";
+
 /**
  * Gets roll data for an actor system, including basic stats, attack data, class ranks, and tradecrafts.
  *
@@ -168,50 +170,19 @@ function attributeData(actorData, data) {
  * @private
  */
 function tradecraftData(actorData, data) {
-  const tradecraftKeys = [
-    "art",
-    "bla",
-    "bui",
-    "che",
-    "loc",
-    "mar",
-    "tai", // Artisan
-    "cou",
-    "enf",
-    "gam",
-    "inn",
-    "pea",
-    "per",
-    "tra", // Mediator
-    "car",
-    "dip",
-    "his",
-    "mes",
-    "pri",
-    "scr",
-    "tea", // Scholar
-    "far",
-    "her",
-    "hun",
-    "inv",
-    "min",
-    "tam",
-    "tra", // Survivalist
-    "met", // Prestige
-  ];
-
-  for (const key of tradecraftKeys) {
+  for (const key of Object.keys(config.tradecraftOptionsList)) {
     const tc = actorData.tradecrafts[key];
+    let short = key.slice(0, 3);
     if (tc) {
-      data[`tc.${key}`] = tc.bonus;
-      data[`tc.${key}.pro`] = tc.proficient ? 1 : 0;
-      data[`tc.${key}.tal`] = tc.extra >= 1 ? 1 : 0;
-      data[`tc.${key}.exp`] = tc.extra >= 2 ? 1 : 0;
+      data[`tc.${short}`] = tc.bonus;
+      data[`tc.${short}.pro`] = tc.proficient ? 1 : 0;
+      data[`tc.${short}.tal`] = tc.extra >= 1 ? 1 : 0;
+      data[`tc.${short}.exp`] = tc.extra >= 2 ? 1 : 0;
     } else {
-      data[`tc.${key}`] = 0;
-      data[`tc.${key}.pro`] = 0;
-      data[`tc.${key}.tal`] = 0;
-      data[`tc.${key}.exp`] = 0;
+      data[`tc.${short}`] = 0;
+      data[`tc.${short}.pro`] = 0;
+      data[`tc.${short}.tal`] = 0;
+      data[`tc.${short}.exp`] = 0;
     }
   }
 }
