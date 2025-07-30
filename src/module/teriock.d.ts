@@ -1,6 +1,6 @@
-import "./commands/_types";
+import "./helpers/commands/_types";
 import "./data/_types";
-import "./sheets/_types";
+import "./applications/sheets/_types";
 import * as Chat from "./types/chat";
 import * as Command from "./types/command";
 import * as DocumentTypes from "./types/document-types";
@@ -28,6 +28,7 @@ declare global {
   const TeriockScene: typeof import("./documents/scene.mjs").default;
   const TeriockToken: typeof import("./documents/token.mjs").default;
   const TeriockUser: typeof import("./documents/user.mjs").default;
+  const TeriockWorldCollection: typeof import("./documents/collections/world-collection.mjs").default;
 
   // Virtual document classes
   // ========================

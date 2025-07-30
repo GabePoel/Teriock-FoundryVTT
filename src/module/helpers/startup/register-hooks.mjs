@@ -1,6 +1,5 @@
-import { dispatch } from "../../commands/dispatch.mjs";
-import TeriockImageSheet from "../../sheets/misc-sheets/image-sheet/image-sheet.mjs";
-import hotbarDropDialog from "../dialogs/hotbar-drop-dialog.mjs";
+import { dispatch } from "../command/dispatch.mjs";
+import TeriockImageSheet from "../../applications/sheets/misc-sheets/image-sheet/image-sheet.mjs";
 
 /**
  * Check if the {@link TeriockUser} owns and uses the given document.
@@ -199,7 +198,7 @@ export default function registerHooks() {
         }
 
         clickTimeout = setTimeout(async () => {
-          const doc = await game.teriock.api.fromUuid(uuid);
+          const doc = await game.teriock.api.utils.fromUuid(uuid);
           if (doc.isOwner) {
             if (doc?.token?.object) {
               doc.token.object.control();
@@ -233,53 +232,6 @@ export default function registerHooks() {
         }
       });
     });
-  });
-
-  foundry.helpers.Hooks.on("hotbarDrop", (_bar, data, slot) => {
-    game.teriock.api.fromUuid(data.uuid).then(
-      /** @param {TeriockItem|TeriockEffect} doc */ async (doc) => {
-        if (!doc || !["Item", "ActiveEffect"].includes(doc.documentName))
-          return;
-        const macroName = `Use ${doc.name}`;
-        const { searchTerm, command } = await hotbarDropDialog(doc);
-        const folders = /** @type {WorldCollection<Folder>} */ game.folders;
-        let macroFolder = folders.find(
-          (f) => f.name === "Player Macros" && f.type === "Macro",
-        );
-        if (!macroFolder) {
-          macroFolder = await Folder.create({
-            name: "Player Macros",
-            type: "Macro",
-          });
-        }
-        const macros = /** @type {WorldCollection<TeriockMacro>} */ game.macros;
-        let macro = /** @type {TeriockMacro|undefined} */ macros.find(
-          (m) => m.name === macroName && m.command?.startsWith(searchTerm),
-        );
-        /** @type {TeriockUser} */
-        const user = game.user;
-        if (!macro) {
-          macro = /** @type {TeriockMacro} */ await Macro.create({
-            name: macroName,
-            type: "script",
-            img: doc.img,
-            command,
-            flags: { teriock: { itemMacro: true } },
-            folder: macroFolder.id,
-          }).catch((err) => {
-            console.error(`Failed to create macro: ${err}`);
-            ui.notifications.error(`Failed to create macro: ${err.message}`);
-          });
-          if (macro) {
-            await user.assignHotbarMacro(macro, slot);
-          }
-        } else {
-          await user.assignHotbarMacro(macro, slot);
-        }
-        return false;
-      },
-    );
-    return false;
   });
 
   foundry.helpers.Hooks.on(

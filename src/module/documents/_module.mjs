@@ -3,6 +3,7 @@ export { default as TeriockCombat } from "./combat.mjs";
 export { default as TeriockCompendiumCollection } from "./collections/compendium-collection.mjs";
 export { default as TeriockCompendiumFolderCollection } from "./collections/compendium-folder-collection.mjs";
 export { default as TeriockEffect } from "./effect.mjs";
+export { default as TeriockFolder } from "./folder.mjs";
 export { default as TeriockItem } from "./item.mjs";
 export { default as TeriockMacro } from "./macro.mjs";
 export { default as TeriockMessage } from "./chat-message.mjs";

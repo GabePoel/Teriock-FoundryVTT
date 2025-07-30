@@ -1,5 +1,5 @@
 const { ux } = foundry.applications;
-import TeriockImageSheet from "../sheets/misc-sheets/image-sheet/image-sheet.mjs";
+import TeriockImageSheet from "../applications/sheets/misc-sheets/image-sheet/image-sheet.mjs";
 import { makeIcon } from "./utils.mjs";
 
 /**

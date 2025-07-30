@@ -1,23 +1,25 @@
 const { ActorSheet, ItemSheet } = foundry.appv1.sheets;
 const { DocumentSheetConfig } = foundry.applications.apps;
-import { conditions } from "./content/conditions.mjs";
-import * as data from "./data/_module.mjs";
-import * as documents from "./documents/_module.mjs";
-import TERIOCK from "./helpers/config.mjs";
+import * as applications from "./applications/_module.mjs";
 import * as createEffects from "./helpers/create-effects.mjs";
-import * as dialogs from "./helpers/dialogs/_module.mjs";
+import * as data from "./data/_module.mjs";
+import * as dialogs from "./applications/dialogs/_module.mjs";
+import * as documents from "./documents/_module.mjs";
 import * as queries from "./helpers/queries/_module.mjs";
+import * as utils from "./helpers/utils.mjs";
+import * as wiki from "./helpers/wiki.mjs";
+import TERIOCK from "./helpers/config.mjs";
 import registerHandlebarsHelpers from "./helpers/startup/register-handlebars.mjs";
 import registerHooks from "./helpers/startup/register-hooks.mjs";
 import registerTemplates from "./helpers/startup/register-templates.mjs";
-import * as utils from "./helpers/utils.mjs";
-import * as wiki from "./helpers/wiki.mjs";
-import { teriockDetectionModes } from "./perception/detection-modes.mjs";
-import { teriockVisionModes } from "./perception/vision-modes.mjs";
-import * as sheets from "./sheets/_module.mjs";
+import { conditions } from "./content/conditions.mjs";
+import { teriockDetectionModes } from "./canvas/perception/detection-modes.mjs";
+import { teriockVisionModes } from "./canvas/perception/vision-modes.mjs";
 
 foundry.helpers.Hooks.once("init", function () {
   CONFIG.TERIOCK = TERIOCK;
+
+  CONFIG.ui.hotbar = applications.ui.TeriockHotbar;
 
   CONFIG.Combat.initiative = {
     formula: "1d20 + @mov",
@@ -108,57 +110,57 @@ foundry.helpers.Hooks.once("init", function () {
   const sheetMap = [
     // Actors
     {
-      cls: sheets.actor.CharacterSheet,
+      cls: applications.sheets.actor.CharacterSheet,
       label: "Character",
       types: ["character"],
       doc: documents.TeriockActor,
     },
     // Items
     {
-      cls: sheets.item.EquipmentSheet,
+      cls: applications.sheets.item.EquipmentSheet,
       label: "Equipment",
       types: ["equipment"],
       doc: documents.TeriockItem,
     },
     {
-      cls: sheets.item.RankSheet,
+      cls: applications.sheets.item.RankSheet,
       label: "Rank",
       types: ["rank"],
       doc: documents.TeriockItem,
     },
     {
-      cls: sheets.item.PowerSheet,
+      cls: applications.sheets.item.PowerSheet,
       label: "Power",
       types: ["power"],
       doc: documents.TeriockItem,
     },
     // Effects
     {
-      cls: sheets.effect.AbilitySheet,
+      cls: applications.sheets.effect.AbilitySheet,
       label: "Ability",
       types: ["ability"],
       doc: documents.TeriockEffect,
     },
     {
-      cls: sheets.effect.FluencySheet,
+      cls: applications.sheets.effect.FluencySheet,
       label: "Fluency",
       types: ["fluency"],
       doc: documents.TeriockEffect,
     },
     {
-      cls: sheets.effect.ResourceSheet,
+      cls: applications.sheets.effect.ResourceSheet,
       label: "Resource",
       types: ["resource"],
       doc: documents.TeriockEffect,
     },
     {
-      cls: sheets.effect.PropertySheet,
+      cls: applications.sheets.effect.PropertySheet,
       label: "Property",
       types: ["property"],
       doc: documents.TeriockEffect,
     },
     {
-      cls: sheets.effect.ConsequenceSheet,
+      cls: applications.sheets.effect.ConsequenceSheet,
       label: "Consequence",
       types: ["consequence"],
       doc: documents.TeriockEffect,
@@ -220,12 +222,13 @@ foundry.helpers.Hooks.once("init", function () {
         ability: createEffects.importAbility,
       },
       utils: {
+        dedent: utils.dedent,
         fromUuid: utils.fromUuid,
         fromUuidSync: utils.fromUuidSync,
         pureUuid: utils.pureUuid,
         safeUuid: utils.safeUuid,
         toFeet: utils.toFeet,
-        fromFeet:  utils.fromFeet,
+        fromFeet: utils.fromFeet,
         convertUnits: utils.convertUnits,
       },
       wiki: {

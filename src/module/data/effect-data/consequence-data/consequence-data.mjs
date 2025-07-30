@@ -1,5 +1,5 @@
 const { fields } = foundry.data;
-import inCombatExpirationDialog from "../../../helpers/dialogs/in-combat-expiration-dialog.mjs";
+import inCombatExpirationDialog from "../../../applications/dialogs/in-combat-expiration-dialog.mjs";
 import { migrateHierarchy } from "../../shared/migrations.mjs";
 import TeriockBaseEffectData from "../base-effect-data/base-effect-data.mjs";
 import {

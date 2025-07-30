@@ -79,6 +79,23 @@ export function convertUnits(range, fromUnits, toUnits) {
 }
 
 /**
+ * Remove indentation from code block.
+ *
+ * @param {string} str
+ * @returns {string}
+ */
+export function dedent(str) {
+  const lines = str.split("\n");
+  const minIndent = lines
+    .filter((line) => line.trim())
+    .reduce((min, line) => {
+      const match = line.match(/^(\s*)/);
+      return Math.min(min, match ? match[1].length : 0);
+    }, Infinity);
+  return lines.map((line) => line.slice(minIndent)).join("\n");
+}
+
+/**
  * A `foundry.utils.fromUuid` wrapper with typing enforcement.
  *
  * @template T

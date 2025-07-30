@@ -8,9 +8,11 @@ const {
   Scene,
   TokenDocument,
   User,
+  Folder,
 } = foundry.documents;
 const { CompendiumCollection, CompendiumFolderCollection } =
   foundry.documents.collections;
+const { WorldCollection } = foundry.documents.abstract;
 import ChildDocumentMixin from "./mixins/child-mixin.mjs";
 import ParentDocumentMixin from "./mixins/parent-mixin.mjs";
 
@@ -105,6 +107,15 @@ export class BaseTeriockUser extends User {}
 export class BaseTeriockScene extends Scene {}
 
 /**
+ * This class is a hack to get {@link Folder} intellisense without warnings for unimplemented methods.
+ *
+ * @extends {Folder}
+ * @implements {FolderData}
+ * @property {"Folder"} documentName
+ */
+export class BaseTeriockFolder extends Folder {}
+
+/**
  * This class is a hack to get {@link ChatMessage} intellisense without warnings for unimplemented methods.
  *
  * @extends {ChatMessage}
@@ -123,8 +134,6 @@ export class BaseTeriockMessage extends ChatMessage {}
  */
 export class BaseTeriockCombat extends Combat {}
 
-export class BaseTeriockCollection extends Collection {}
-
 /**
  * This class is a hack to get {@link CompendiumCollection} intellisense without warnings for unimplemented methods.
  *
@@ -140,3 +149,10 @@ export class BaseTeriockCompendiumFolderCollection extends CompendiumFolderColle
  * @property {TeriockCompendiumFolderCollection} folders
  */
 export class BaseTeriockCompendiumCollection extends CompendiumCollection {}
+
+/**
+ * This class is a hack to get {@link WorldCollection} intellisense without warnings for unimplemented methods.
+ *
+ * @extends {WorldCollection<T>}
+ */
+export class BaseTeriockWorldCollection extends WorldCollection {}

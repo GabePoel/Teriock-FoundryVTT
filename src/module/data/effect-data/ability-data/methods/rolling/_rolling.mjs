@@ -24,6 +24,7 @@ export async function _roll(abilityData, options) {
   }
   const rollConfig = foundry.utils.deepClone(DEFAULT_ROLL_CONFIG);
   rollConfig.abilityData = abilityData;
+  rollConfig.useData.rollOptions = options;
 
   if (options.noHeighten) rollConfig.useData.modifiers.noHeighten = true;
 
