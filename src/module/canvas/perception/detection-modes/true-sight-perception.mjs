@@ -8,16 +8,11 @@ import TeriockDetectionMode from "./teriock-detection-mode.mjs";
 export default class DetectionModeTrueSightPerception extends TeriockDetectionMode {
   static BLOCKING_TGT_STATUS_EFFECTS = [];
 
-  /** @override */
+  /** @inheritDoc */
   static getDetectionFilter() {
     return (this._detectionFilter ??= OutlineOverlayFilter.create({
       outlineColor: [1, 1, 1, 1],
       knockout: true,
     }));
-  }
-
-  /** @override */
-  _canDetect(visionSource, target) {
-    return super._canDetect(visionSource, target);
   }
 }

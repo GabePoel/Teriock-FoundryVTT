@@ -18,6 +18,8 @@ export default class TeriockToken extends BaseTeriockToken {
   /** @inheritDoc */
   _prepareDetectionModes() {
     super._prepareDetectionModes();
+    const basicMode = this.detectionModes.find((m) => m.id === "basicSight");
+    if (basicMode) basicMode.enabled = false;
     const enabledIds = [
       "materialMaterial",
       "etherealMaterial",
@@ -92,7 +94,7 @@ export default class TeriockToken extends BaseTeriockToken {
       );
 
       this.sight.visionMode = visionMode;
-      this.sight.range = Infinity;
+      // this.sight.range = Infinity;
       if (!["down", "dead", "invisibleEthereal"].includes(visionMode)) {
         this.sight.color = "";
       }
@@ -107,12 +109,14 @@ export default class TeriockToken extends BaseTeriockToken {
     if (this.actor) {
       for (const [sense, id] of Object.entries(characterOptions.senseMap)) {
         const mode = this.detectionModes.find((m) => m.id === id);
-        mode.range = convertUnits(
-          this.actor.system.senses[sense],
-          "ft",
-          this.parent?.grid.units || "",
-        );
-        mode.enabled = this.actor.system.senses[sense] > 0;
+        if (mode) {
+          mode.range = convertUnits(
+            this.actor.system.senses[sense],
+            "ft",
+            this.parent?.grid.units || "",
+          );
+          mode.enabled = this.actor.system.senses[sense] > 0;
+        }
       }
     }
   }

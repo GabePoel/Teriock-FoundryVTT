@@ -156,7 +156,6 @@ export default class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(
         pureUuid(uuid),
       );
     }
-    console.log(context.macros);
     const editors = {
       manaCost: system.costs.mp.value.variable,
       hitCost: system.costs.hp.value.variable,

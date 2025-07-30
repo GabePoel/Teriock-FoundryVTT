@@ -13,9 +13,7 @@ export default class TeriockDetectionMode extends DetectionMode {
   static BLOCKING_TGT_STATUS_EFFECTS = ["invisible", "hidden"];
 
   /**
-   * Can this PointVisionSource theoretically detect a certain object based on its properties?
-   * This check should not consider the relative positions of either object, only their state.
-   *
+   * @inheritDoc
    * @param {PointVisionSource} visionSource
    * @param {object|null} visionSource.object
    * @param {TeriockToken} visionSource.object.document
@@ -30,7 +28,6 @@ export default class TeriockDetectionMode extends DetectionMode {
         return false;
       }
     }
-
     if (target instanceof Token) {
       const tgt = target.document;
       for (const effect of this.constructor.BLOCKING_TGT_STATUS_EFFECTS) {
@@ -39,7 +36,6 @@ export default class TeriockDetectionMode extends DetectionMode {
         }
       }
     }
-
     return true;
   }
 }

@@ -11,14 +11,14 @@ import TeriockDetectionMode from "./teriock-detection-mode.mjs";
  * - [Spirit Guide](https://wiki.teriock.com/index.php/Ability:Spirit_Guide)
  */
 export default class DetectionModeMaterialEthereal extends TeriockDetectionMode {
-  /** @override */
+  /** @inheritDoc */
   static getDetectionFilter() {
     return (this._detectionFilter ??= EtherealFilter.create({
       blur: 10,
     }));
   }
 
-  /** @override */
+  /** @inheritDoc */
   _canDetect(visionSource, target) {
     if (!super._canDetect(visionSource, target)) {
       return false;

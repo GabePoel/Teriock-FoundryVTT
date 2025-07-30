@@ -7,14 +7,14 @@ import TeriockDetectionMode from "./teriock-detection-mode.mjs";
 export default class DetectionModeMaterialMaterial extends TeriockDetectionMode {
   static BLOCKING_SRC_STATUS_EFFECTS = ["blind"];
 
-  /** @override */
+  /** @inheritDoc */
   _canDetect(visionSource, target) {
     if (!super._canDetect(visionSource, target)) {
       return false;
     }
     const src = visionSource.object.document;
     if (target instanceof Token) {
-      const tgt = /** @type{TeriockToken} */ target.document;
+      const tgt = target.document;
       if (
         !(!src.hasStatusEffect("ethereal") && !tgt.hasStatusEffect("ethereal"))
       ) {
@@ -24,9 +24,9 @@ export default class DetectionModeMaterialMaterial extends TeriockDetectionMode 
     return true;
   }
 
-  // /** @inheritDoc */
-  // _testPoint(visionSource, mode, target, test) {
-  //   if (!super._testPoint(visionSource, mode, target, test)) return false;
-  //   return canvas.effects.testInsideLight(test.point);
-  // }
+  /** @inheritDoc */
+  _testPoint(visionSource, mode, target, test) {
+    if (!super._testPoint(visionSource, mode, target, test)) return false;
+    return canvas.effects.testInsideLight(test.point);
+  }
 }

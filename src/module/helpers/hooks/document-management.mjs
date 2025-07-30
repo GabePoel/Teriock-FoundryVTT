@@ -92,10 +92,7 @@ export default function registerDocumentManagementHooks() {
         isOwnerAndCurrentUser(document, userId) &&
         document.type === "ability"
       ) {
-        console.log(foundry.utils.deepClone(document), _updateData);
-        if (document.type === "ability") {
-          await document.system.expireSustainedConsequences();
-        }
+        await document.system.expireSustainedConsequences();
         if (document.sup) await document.sup.sheet.render();
       }
     },

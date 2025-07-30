@@ -51,7 +51,8 @@ foundry.helpers.Hooks.once("init", function () {
     ...perception.visionModes,
   };
   for (const key of Object.keys(CONFIG.Canvas.detectionModes)) {
-    if (CONFIG.Canvas.detectionModes[key]?.id !== "basicSight") {
+    const id = CONFIG.Canvas.detectionModes[key].id;
+    if (!["basicSight", "lightPerception"].includes(id)) {
       delete CONFIG.Canvas.detectionModes[key];
     }
   }
@@ -179,12 +180,11 @@ foundry.helpers.Hooks.once("init", function () {
   CONFIG.Dice.rolls.push(documents.TeriockRoll);
 
   // Registering custom queries
-  CONFIG.queries["teriock.addToSustaining"] =
-    queries.addToSustainingQuery;
-  CONFIG.queries["teriock.inCombatExpiration"] =
-    queries.inCombatExpirationQuery;
-  CONFIG.queries["teriock.sustainedExpiration"] =
-    queries.sustainedExpirationQuery;
+  Object.assign(CONFIG.queries, {
+    "teriock.addToSustaining": queries.addToSustainingQuery,
+    "teriock.inCombatExpiration": queries.inCombatExpirationQuery,
+    "teriock.sustainedExpiration": queries.sustainedExpirationQuery,
+  });
 
   const packs =
     /** @type {Collection<TeriockCompendiumCollection>} */ game.packs;

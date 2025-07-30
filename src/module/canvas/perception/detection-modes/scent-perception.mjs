@@ -18,7 +18,7 @@ export default class DetectionModeScentPerception extends TeriockDetectionMode {
   ];
   static BLOCKING_TGT_STATUS_EFFECTS = ["odorless", "ethereal"];
 
-  /** @override */
+  /** @inheritDoc */
   static getDetectionFilter() {
     return (this._detectionFilter ??= OutlineOverlayFilter.create({
       outlineColor: [0.5, 0.5, 0, 1],
@@ -27,7 +27,7 @@ export default class DetectionModeScentPerception extends TeriockDetectionMode {
     }));
   }
 
-  /** @override */
+  /** @inheritDoc */
   _canDetect(visionSource, target) {
     if (!super._canDetect(visionSource, target)) {
       return false;

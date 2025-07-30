@@ -1,8 +1,8 @@
+import { characterOptions } from "../helpers/constants/character-options.mjs";
 import { rankOptions } from "../helpers/constants/rank-options.mjs";
 import { pureUuid, toCamelCase } from "../helpers/utils.mjs";
 import { BaseTeriockActor } from "./_base.mjs";
 import TeriockRoll from "./roll.mjs";
-import { characterOptions } from "../helpers/constants/character-options.mjs";
 
 /**
  * @property {TeriockBaseActorData} system
@@ -159,7 +159,7 @@ export default class TeriockActor extends BaseTeriockActor {
       characterOptions.tokenSizes[TeriockActor.toNamedSize(this.system.size)] ||
       1;
     if (!foundry.utils.hasProperty(data, "prototypeToken.sight.enabled"))
-      prototypeToken.sight = { enabled: true };
+      prototypeToken.sight = { enabled: true, range: null };
     if (!foundry.utils.hasProperty(data, "prototypeToken.width"))
       prototypeToken.width = size;
     if (!foundry.utils.hasProperty(data, "prototypeToken.height"))

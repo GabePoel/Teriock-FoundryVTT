@@ -6,14 +6,14 @@ import TeriockDetectionMode from "./teriock-detection-mode.mjs";
  * Ethereal creatures seeing Material creatures.
  */
 export default class DetectionModeEtherealMaterial extends TeriockDetectionMode {
-  /** @override */
+  /** @inheritDoc */
   static getDetectionFilter() {
     return (this._detectionFilter ??= EtherealFilter.create({
       blur: 10,
     }));
   }
 
-  /** @override */
+  /** @inheritDoc */
   _canDetect(visionSource, target) {
     if (!super._canDetect(visionSource, target)) {
       return false;
@@ -28,5 +28,11 @@ export default class DetectionModeEtherealMaterial extends TeriockDetectionMode 
       }
     }
     return true;
+  }
+
+  /** @inheritDoc */
+  _testPoint(visionSource, mode, target, test) {
+    if (!super._testPoint(visionSource, mode, target, test)) return false;
+    return canvas.effects.testInsideLight(test.point);
   }
 }

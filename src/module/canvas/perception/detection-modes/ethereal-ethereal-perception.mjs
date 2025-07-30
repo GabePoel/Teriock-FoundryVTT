@@ -3,9 +3,12 @@ import TeriockDetectionMode from "./teriock-detection-mode.mjs";
 
 /**
  * Ethereal creatures seeing Ethereal creatures.
+ *
+ * Relevant wiki pages:
+ * - [Ethereal](https://wiki.teriock.com/index.php/Condition:Ethereal)
  */
 export default class DetectionModeEtherealEthereal extends TeriockDetectionMode {
-  /** @override */
+  /** @inheritDoc */
   _canDetect(visionSource, target) {
     if (!super._canDetect(visionSource, target)) {
       return false;
@@ -20,5 +23,11 @@ export default class DetectionModeEtherealEthereal extends TeriockDetectionMode 
       }
     }
     return true;
+  }
+
+  /** @inheritDoc */
+  _testPoint(visionSource, mode, target, test) {
+    if (!super._testPoint(visionSource, mode, target, test)) return false;
+    return canvas.effects.testInsideLight(test.point);
   }
 }

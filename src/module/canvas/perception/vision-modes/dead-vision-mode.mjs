@@ -5,6 +5,11 @@ import {
   WoundedColorationVisionShader,
 } from "../../rendering/wounded-shader.mjs";
 
+/**
+ * Everything turns intensely red.
+ *
+ * @returns {VisionMode}
+ */
 export default function deadVisionMode() {
   return new VisionMode(
     {

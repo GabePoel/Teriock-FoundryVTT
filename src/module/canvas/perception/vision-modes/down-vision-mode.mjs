@@ -5,6 +5,11 @@ import {
   WoundedColorationVisionShader,
 } from "../../rendering/wounded-shader.mjs";
 
+/**
+ * Everything turns a pale red.
+ *
+ * @returns {VisionMode}
+ */
 export default function downVisionMode() {
   return new VisionMode(
     {

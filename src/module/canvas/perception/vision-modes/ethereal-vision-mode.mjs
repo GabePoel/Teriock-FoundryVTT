@@ -5,6 +5,14 @@ import {
   EtherealColorationVisionShader,
 } from "../../rendering/ethereal-shaders.mjs";
 
+/**
+ * Everything is in black and white and there's an odd emanating haze.
+ *
+ * Relevant wiki pages:
+ * - [Ethereal](https://wiki.teriock.com/index.php/Condition:Ethereal)
+ *
+ * @returns {VisionMode}
+ */
 export default function etherealVisionMode() {
   return new VisionMode(
     {
