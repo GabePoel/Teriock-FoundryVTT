@@ -77,6 +77,13 @@ export default class TeriockToken extends BaseTeriockToken {
         visionMode = "invisibleEthereal";
       }
 
+      if (this.actor?.statuses?.has("down")) {
+        visionMode = "down";
+      }
+      if (this.actor?.statuses?.has("dead")) {
+        visionMode = "dead";
+      }
+
       range = Math.max(
         this.actor?.system.senses.dark,
         this.actor?.system.senses.night,
@@ -85,7 +92,10 @@ export default class TeriockToken extends BaseTeriockToken {
       );
 
       this.sight.visionMode = visionMode;
-      this.sight.range = range;
+      this.sight.range = Infinity;
+      if (!["down", "dead", "invisibleEthereal"].includes(visionMode)) {
+        this.sight.color = "";
+      }
     }
     return { visionMode, range };
   }

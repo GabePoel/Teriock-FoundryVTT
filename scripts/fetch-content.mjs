@@ -12,7 +12,7 @@ import { fetchWikiPageHTML } from "../src/module/helpers/wiki.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const contentDir = path.resolve(__dirname, "../module/content");
+const contentDir = path.resolve(__dirname, "../src/module/content");
 
 const writeModuleFile = (fileName, exportName, entries) => {
   const fileHeader = `// This file was auto-generated on ${new Date().toISOString().split("T")[0]} by scripts/fetch-content.mjs.\n// Do not edit manually.\n\n`;

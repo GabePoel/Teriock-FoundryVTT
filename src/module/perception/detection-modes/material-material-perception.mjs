@@ -5,6 +5,8 @@ import TeriockDetectionMode from "./teriock-detection-mode.mjs";
  * Material creatures seeing Material creatures.
  */
 export default class DetectionModeMaterialMaterial extends TeriockDetectionMode {
+  static BLOCKING_SRC_STATUS_EFFECTS = ["blind"];
+
   /** @override */
   _canDetect(visionSource, target) {
     if (!super._canDetect(visionSource, target)) {
