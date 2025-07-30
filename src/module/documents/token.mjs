@@ -13,6 +13,7 @@ export default class TeriockToken extends BaseTeriockToken {
     super.prepareDerivedData();
     this._derivedDetectionModes();
     this._deriveVision();
+    this._deriveLighting();
   }
 
   /** @inheritDoc */
@@ -100,6 +101,18 @@ export default class TeriockToken extends BaseTeriockToken {
       }
     }
     return { visionMode, range };
+  }
+
+  /**
+   * Do not emit light if Ethereal.
+   *
+   * @private
+   */
+  _deriveLighting() {
+    if (this.hasStatusEffect("ethereal")) {
+      this.light.dim = 0;
+      this.light.bright = 0;
+    }
   }
 
   /**
