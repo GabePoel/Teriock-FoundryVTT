@@ -1,4 +1,5 @@
 const { fields } = foundry.data;
+import { TeriockRoll } from "../../documents/_module.mjs";
 
 /**
  * Utility function for creating DOM elements with common properties.
@@ -41,15 +42,6 @@ const createButton = (className, content, dataset = {}) => {
  */
 export class TeriockArrayField extends fields.ArrayField {
   /**
-   * @param {ElementType} element          The type of element contained in the Array
-   * @param {ArrayFieldOptions} [options]  Options which configure the behavior of the field
-   * @param {DataFieldContext} [context]   Additional context which describes the field
-   */
-  constructor(element, options = {}, context = {}) {
-    super(element, options, context);
-  }
-
-  /**
    * Creates the input element for the array field.
    * Renders a button with plus icon for adding new items to the array.
    *
@@ -76,15 +68,6 @@ export class TeriockArrayField extends fields.ArrayField {
  * Extends Foundry's TypedObjectField to provide enhanced record editing capabilities.
  */
 export class TeriockRecordField extends fields.TypedObjectField {
-  /**
-   * @param {DataField} element             The value type of each entry in this object.
-   * @param {DataFieldOptions} [options]    Options which configure the behavior of the field.
-   * @param {DataFieldContext} [context]    Additional context which describes the field
-   */
-  constructor(element, options = {}, context = {}) {
-    super(element, options, context);
-  }
-
   /**
    * Creates the input element for the record field.
    * Renders a multi-select input for choosing which record items to display.
@@ -143,5 +126,69 @@ export class TeriockRecordField extends fields.TypedObjectField {
     }
     out.appendChild(items);
     return out;
+  }
+}
+
+/**
+ * Special case StringField which represents a formula.
+ *
+ * @param {StringFieldOptions & { deterministic?: boolean; }} [options={}] - Options which configure field behavior.
+ * @property {boolean} deterministic=false - Is this formula not allowed to have dice values?
+ */
+export class FormulaField extends fields.StringField {
+  /** @inheritdoc */
+  static get _defaults() {
+    return foundry.utils.mergeObject(super._defaults, {
+      required: true,
+      deterministic: false,
+    });
+  }
+
+  /** @inheritdoc */
+  _validateType(value) {
+    if (this.deterministic) {
+      const roll = new TeriockRoll(value);
+      if (!roll.isDeterministic) throw new Error("must not contain dice terms");
+    }
+    super._validateType(value);
+  }
+
+  /** @override */
+  _castChangeDelta(delta) {
+    return this._cast(delta).trim();
+  }
+
+  /** @override */
+  _applyChangeAdd(value, delta, model, change) {
+    if (!value) return delta;
+    const operator = delta.startsWith("-") ? "-" : "+";
+    delta = delta.replace(/^[+-]/, "").trim();
+    return `${value} ${operator} ${delta}`;
+  }
+
+  /** @override */
+  _applyChangeMultiply(value, delta, model, change) {
+    if (!value) return delta;
+    const terms = new TeriockRoll(value).terms;
+    if (terms.length > 1) return `(${value}) * ${delta}`;
+    return `${value} * ${delta}`;
+  }
+
+  /** @override */
+  _applyChangeUpgrade(value, delta, model, change) {
+    if (!value) return delta;
+    const terms = new TeriockRoll(value).terms;
+    if (terms.length === 1 && terms[0]?.fn === "max")
+      return value.replace(/\)$/, `, ${delta})`);
+    return `max(${value}, ${delta})`;
+  }
+
+  /** @override */
+  _applyChangeDowngrade(value, delta, model, change) {
+    if (!value) return delta;
+    const terms = new TeriockRoll(value).terms;
+    if (terms.length === 1 && terms[0]?.fn === "min")
+      return value.replace(/\)$/, `, ${delta})`);
+    return `min(${value}, ${delta})`;
   }
 }

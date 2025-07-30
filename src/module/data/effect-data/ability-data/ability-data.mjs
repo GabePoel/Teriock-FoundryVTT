@@ -72,7 +72,7 @@ export default class TeriockAbilityData extends WikiDataMixin(
 
   /**
    * Gets the changes this ability would provide.
-   * 
+   *
    * @returns {EffectChangeData[]}
    */
   get changes() {
@@ -131,6 +131,23 @@ export default class TeriockAbilityData extends WikiDataMixin(
    */
   async parse(rawHTML) {
     return await _parse(this, rawHTML);
+  }
+
+  /**
+   * Cause all consequences this is sustaining to expire.
+   *
+   * @param {boolean} force - Force consequences to expire even if this isn't suppressed.
+   */
+  async expireSustainedConsequences(force = false) {
+    if (this.parent.isSuppressed || this.parent.disabled || force) {
+      const activeGm = /** @type {TeriockUser} */ game.users.activeGM;
+      for (const uuid of this.sustaining) {
+        await activeGm.query("teriock.sustainedExpiration", {
+          sustainedUuid: uuid,
+        });
+      }
+      await this.parent.update({ "system.sustaining": new Set() });
+    }
   }
 
   /**

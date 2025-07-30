@@ -78,7 +78,7 @@ export default class TeriockBaseEffectSheet extends BaseEffectSheet {
    * @static
    */
   static async _toggledDisabledThis() {
-    await this.document.toggleDisabled();
+    await this.document.update({ disabled: !this.document.disabled });
   }
 
   /**

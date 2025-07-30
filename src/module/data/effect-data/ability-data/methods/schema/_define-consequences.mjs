@@ -236,7 +236,7 @@ function appliesField() {
  * schema = _defineApplies(schema);
  * schema = _defineGeneral(schema);
  */
-export function _defineApplies(schema) {
+export function _defineConsequences(schema) {
   schema.applies = new fields.SchemaField({
     base: appliesField(),
     proficient: appliesField(),
@@ -248,6 +248,9 @@ export function _defineApplies(schema) {
       }),
     ),
   });
+  schema.sustaining = new fields.SetField(
+    new fields.DocumentUUIDField({ type: "ActiveEffect" }),
+  );
 
   return schema;
 }

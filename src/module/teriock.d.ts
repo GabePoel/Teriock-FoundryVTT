@@ -12,6 +12,7 @@ import * as Rolls from "./types/rolls";
 import * as Ui from "./types/ui";
 import * as Updates from "./types/updates";
 import * as Wiki from "./types/wiki";
+import type { QuerySustainedExpirationData } from "./types/queries";
 
 declare global {
   // Base document classes
@@ -134,6 +135,8 @@ declare global {
     type PowerSource = Parameters.PowerSource;
     type PseudoHook = Parameters.PseudoHook;
     type QueryInCombatExpirationData = Queries.QueryInCombatExpirationData;
+    type QueryAddToSustainingData = Queries.QueryAddToSustainingData;
+    type QuerySustainedExpirationData = Queries.QuerySustainedExpirationData;
     type ReactiveExecutionTime = Parameters.ReactiveExecutionTime;
     type SkipFunctions = Updates.SkipFunctions;
     type SlowExecutionTime = Parameters.SlowExecutionTime;

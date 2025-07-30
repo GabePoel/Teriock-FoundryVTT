@@ -17,6 +17,10 @@ export default function registerDocumentManagementHooks() {
             });
           }
         }
+        const abilities = document.effectTypes.ability;
+        for (const ability of abilities) {
+          await ability.system.expireSustainedConsequences();
+        }
         await document.actor?.postUpdate();
       }
     },
@@ -51,11 +55,6 @@ export default function registerDocumentManagementHooks() {
 
   foundry.helpers.Hooks.on("deleteItem", async (document, _options, userId) => {
     if (isOwnerAndCurrentUser(document, userId)) {
-      const sup = document.sup;
-      if (sup && typeof sup.update === "function") {
-        await sup.update({});
-        await sup.sheet.render();
-      }
       document.actor?.buildEffectTypes();
       await document.actor?.postUpdate();
     }
@@ -65,10 +64,7 @@ export default function registerDocumentManagementHooks() {
     "createActiveEffect",
     async (document, _options, userId) => {
       if (isOwnerAndCurrentUser(document, userId)) {
-        const sup = document.sup;
-        if (sup && typeof sup.update === "function") {
-          await sup.forceUpdate();
-        }
+        if (document.sup) await document.sup.sheet.render();
         document.actor?.buildEffectTypes();
         await document.actor?.postUpdate({ checkDown: true });
       }
@@ -79,10 +75,10 @@ export default function registerDocumentManagementHooks() {
     "deleteActiveEffect",
     async (document, _options, userId) => {
       if (isOwnerAndCurrentUser(document, userId)) {
-        const sup = document.sup;
-        if (sup && typeof sup.update === "function") {
-          await sup.forceUpdate();
+        if (document.type === "ability") {
+          await document.system.expireSustainedConsequences(true);
         }
+        if (document.sup) await document.sup.sheet.render();
         document.actor?.buildEffectTypes();
         await document.actor?.postUpdate({ checkDown: true });
       }
@@ -91,20 +87,16 @@ export default function registerDocumentManagementHooks() {
 
   foundry.helpers.Hooks.on(
     "updateActiveEffect",
-    async (document, updateData, _options, userId) => {
-      console.debug(
-        `Teriock | Active Effect updated: ${document.name}`,
-        updateData,
-      );
+    async (document, _updateData, _options, userId) => {
       if (
         isOwnerAndCurrentUser(document, userId) &&
         document.type === "ability"
       ) {
-        const sup = document.sup;
-        if (sup && typeof sup.update === "function") {
-          await sup.update({});
-          await sup.sheet.render();
+        console.log(foundry.utils.deepClone(document), _updateData);
+        if (document.type === "ability") {
+          await document.system.expireSustainedConsequences();
         }
+        if (document.sup) await document.sup.sheet.render();
       }
     },
   );

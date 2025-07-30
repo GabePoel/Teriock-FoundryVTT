@@ -1,4 +1,4 @@
-import { getRollIcon } from "../../../../../helpers/utils.mjs";
+import { getRollIcon, safeUuid } from "../../../../../helpers/utils.mjs";
 import { _generateEffect, _generateTakes } from "../_generate-effect.mjs";
 
 /**
@@ -50,6 +50,9 @@ export async function _buildButtons(rollConfig) {
         action: "apply-effect",
         normal: normalEffectJSON || critEffectJSON,
         crit: critEffectJSON || normalEffectJSON,
+        sustaining: rollConfig.abilityData.sustained
+          ? safeUuid(rollConfig.abilityData.parent.uuid)
+          : "null",
       },
     });
   }

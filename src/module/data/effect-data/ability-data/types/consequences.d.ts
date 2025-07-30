@@ -4,6 +4,7 @@ import type {
   CombatExpirationSourceType,
   CombatExpirationTiming,
 } from "../../shared/shared-fields";
+import type { TeriockConsequence } from "../../../../documents/_documents.mjs";
 
 export type EffectChangeData = {
   /** The attribute path in the {@link TeriockActor} or {@link TeriockItem} data which the change modifies */
@@ -78,4 +79,5 @@ export interface TeriockAbilityConsequenceSchema {
     heightened: AppliesData;
     macros: Record<Teriock.SafeUUID<TeriockMacro>, Teriock.PseudoHook>;
   };
+  sustaining: Set<Teriock.UUID<TeriockConsequence>>;
 }

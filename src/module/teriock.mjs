@@ -1,19 +1,19 @@
 const { ActorSheet, ItemSheet } = foundry.appv1.sheets;
 const { DocumentSheetConfig } = foundry.applications.apps;
 import * as applications from "./applications/_module.mjs";
-import * as createEffects from "./helpers/create-effects.mjs";
-import * as data from "./data/_module.mjs";
 import * as dialogs from "./applications/dialogs/_module.mjs";
+import * as perception from "./canvas/perception/_module.mjs";
+import { conditions } from "./content/conditions.mjs";
+import * as data from "./data/_module.mjs";
 import * as documents from "./documents/_module.mjs";
+import TERIOCK from "./helpers/config.mjs";
+import * as createEffects from "./helpers/create-effects.mjs";
 import * as handlebars from "./helpers/handlebars/_module.mjs";
 import * as hooks from "./helpers/hooks/_module.mjs";
 import * as queries from "./helpers/queries/_module.mjs";
+import registerTemplates from "./helpers/register-templates.mjs";
 import * as utils from "./helpers/utils.mjs";
 import * as wiki from "./helpers/wiki.mjs";
-import * as perception from "./canvas/perception/_module.mjs";
-import TERIOCK from "./helpers/config.mjs";
-import registerTemplates from "./helpers/register-templates.mjs";
-import { conditions } from "./content/conditions.mjs";
 
 foundry.helpers.Hooks.once("init", function () {
   CONFIG.TERIOCK = TERIOCK;
@@ -179,8 +179,12 @@ foundry.helpers.Hooks.once("init", function () {
   CONFIG.Dice.rolls.push(documents.TeriockRoll);
 
   // Registering custom queries
+  CONFIG.queries["teriock.addToSustaining"] =
+    queries.addToSustainingQuery;
   CONFIG.queries["teriock.inCombatExpiration"] =
     queries.inCombatExpirationQuery;
+  CONFIG.queries["teriock.sustainedExpiration"] =
+    queries.sustainedExpirationQuery;
 
   const packs =
     /** @type {Collection<TeriockCompendiumCollection>} */ game.packs;

@@ -1,6 +1,7 @@
 const { fields } = foundry.data;
 import { equipmentOptions } from "../../../../helpers/constants/equipment-options.mjs";
 import { weaponFightingStyles } from "../../../../helpers/constants/generated/weapon-fighting-styles.mjs";
+import { FormulaField } from "../../../shared/fields.mjs";
 
 /**
  * Defines the schema for equipment data fields.
@@ -42,9 +43,10 @@ export function _defineSchema() {
       min: 0,
     }),
     maxQuantity: new fields.SchemaField({
-      raw: new fields.StringField({
+      raw: new FormulaField({
         label: "Max Quantity (Raw)",
         initial: "",
+        deterministic: true,
       }),
       derived: new fields.NumberField({
         initial: 0,
@@ -139,9 +141,10 @@ export function _defineSchema() {
       label: "Notes",
     }),
     tier: new fields.SchemaField({
-      raw: new fields.StringField({
+      raw: new FormulaField({
         initial: "",
         label: "Tier (Raw)",
+        deterministic: true,
       }),
       derived: new fields.NumberField({
         initial: 0,
