@@ -14,10 +14,10 @@ export class WoundedBackgroundVisionShader extends shaders.BackgroundVisionShade
     ${this.FRAGMENT_BEGIN}    
     
     // Calculate distance from center
-    float dist = distance(vUvs, vec2(0.5, 0.5));
+    float newDist = distance(vUvs, vec2(0.5, 0.5));
     
     // Create vignette (0 at edges, 1 at center)
-    float vignette = 1.0 - smoothstep(0.3, 0.8, dist);
+    float vignette = 1.0 - smoothstep(0.3, 0.8, newDist);
     
     // Mix between original color and red based on vignette
     vec3 redTint = vec3(1.0, 0.0, 0.0);
@@ -55,10 +55,10 @@ export class WoundedColorationVisionShader extends shaders.ColorationVisionShade
     ${this.FRAGMENT_BEGIN}
     
     // Calculate distance from center
-    float dist = distance(vUvs, vec2(0.5, 0.5));
+    float newDist = distance(vUvs, vec2(0.5, 0.5));
     
     // Create red ring at edges
-    float ring = smoothstep(0.4, 0.7, dist);
+    float ring = smoothstep(0.4, 0.7, newDist);
     
     // Set red color intensity based on ring
     finalColor = vec3(ring, 0.0, 0.0);

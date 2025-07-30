@@ -10,11 +10,10 @@ import * as hooks from "./helpers/hooks/_module.mjs";
 import * as queries from "./helpers/queries/_module.mjs";
 import * as utils from "./helpers/utils.mjs";
 import * as wiki from "./helpers/wiki.mjs";
+import * as perception from "./canvas/perception/_module.mjs";
 import TERIOCK from "./helpers/config.mjs";
 import registerTemplates from "./helpers/register-templates.mjs";
 import { conditions } from "./content/conditions.mjs";
-import { teriockDetectionModes } from "./canvas/perception/detection-modes.mjs";
-import { teriockVisionModes } from "./canvas/perception/vision-modes.mjs";
 
 foundry.helpers.Hooks.once("init", function () {
   CONFIG.TERIOCK = TERIOCK;
@@ -49,7 +48,7 @@ foundry.helpers.Hooks.once("init", function () {
 
   CONFIG.Canvas.visionModes = {
     ...CONFIG.Canvas.visionModes,
-    ...teriockVisionModes,
+    ...perception.visionModes,
   };
   for (const key of Object.keys(CONFIG.Canvas.detectionModes)) {
     if (CONFIG.Canvas.detectionModes[key]?.id !== "basicSight") {
@@ -58,7 +57,7 @@ foundry.helpers.Hooks.once("init", function () {
   }
   CONFIG.Canvas.detectionModes = {
     ...CONFIG.Canvas.detectionModes,
-    ...teriockDetectionModes,
+    ...perception.detectionModes,
   };
 
   // Register custom core documents
