@@ -1,3 +1,5 @@
+const { shaders } = foundry.canvas.rendering;
+const { VisionMode } = foundry.canvas.perception;
 import {
   EtherealBackgroundVisionShader,
   EtherealColorationVisionShader,
@@ -6,9 +8,6 @@ import {
   WoundedBackgroundVisionShader,
   WoundedColorationVisionShader,
 } from "./filters/wounded-shader.mjs";
-
-const { shaders } = foundry.canvas.rendering;
-const { VisionMode } = foundry.canvas.perception;
 
 export const teriockVisionModes = {
   down: new VisionMode(
