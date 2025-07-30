@@ -95,7 +95,6 @@ export default class TeriockToken extends BaseTeriockToken {
       );
 
       this.sight.visionMode = visionMode;
-      // this.sight.range = Infinity;
       if (!["down", "dead", "invisibleEthereal"].includes(visionMode)) {
         this.sight.color = "";
       }
