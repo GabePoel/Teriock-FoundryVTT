@@ -1,6 +1,6 @@
-import { BaseTeriockToken } from "./_base.mjs";
 import { characterOptions } from "../helpers/constants/character-options.mjs";
 import { convertUnits } from "../helpers/utils.mjs";
+import { BaseTeriockToken } from "./_base.mjs";
 
 export default class TeriockToken extends BaseTeriockToken {
   /**

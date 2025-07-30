@@ -5,13 +5,13 @@ import * as createEffects from "./helpers/create-effects.mjs";
 import * as data from "./data/_module.mjs";
 import * as dialogs from "./applications/dialogs/_module.mjs";
 import * as documents from "./documents/_module.mjs";
+import * as handlebars from "./helpers/handlebars/_module.mjs";
+import * as hooks from "./helpers/hooks/_module.mjs";
 import * as queries from "./helpers/queries/_module.mjs";
 import * as utils from "./helpers/utils.mjs";
 import * as wiki from "./helpers/wiki.mjs";
 import TERIOCK from "./helpers/config.mjs";
-import registerHandlebarsHelpers from "./helpers/startup/register-handlebars.mjs";
-import registerHooks from "./helpers/startup/register-hooks.mjs";
-import registerTemplates from "./helpers/startup/register-templates.mjs";
+import registerTemplates from "./helpers/register-templates.mjs";
 import { conditions } from "./content/conditions.mjs";
 import { teriockDetectionModes } from "./canvas/perception/detection-modes.mjs";
 import { teriockVisionModes } from "./canvas/perception/vision-modes.mjs";
@@ -268,5 +268,14 @@ foundry.helpers.Hooks.once("init", function () {
   return registerTemplates();
 });
 
-registerHooks();
-registerHandlebarsHelpers();
+for (const hook of Object.values(hooks)) {
+  if (typeof hook === "function") {
+    hook();
+  }
+}
+
+for (const helper of Object.values(handlebars)) {
+  if (typeof helper === "function") {
+    helper();
+  }
+}

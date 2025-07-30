@@ -572,3 +572,14 @@ export function mergeLevel(obj, path, key) {
   processPath(obj, pathSegments);
   return result;
 }
+
+/**
+ * Check if the {@link TeriockUser} owns and uses the given document.
+ *
+ * @param {ClientDocument} document
+ * @param {string} userId
+ * @returns {boolean}
+ */
+export function isOwnerAndCurrentUser(document, userId) {
+  return game.user.id === userId && document.isOwner;
+}

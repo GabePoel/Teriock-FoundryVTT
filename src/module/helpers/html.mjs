@@ -100,3 +100,18 @@ export function elderSorceryMask(ability) {
   }
   return null;
 }
+
+/**
+ * Add click event listeners to multiple elements.
+ *
+ * @param {NodeList} elements - Collection of DOM elements to add listeners to
+ * @param {Function} handler - Click event handler function
+ * @returns {void}
+ */
+export function addClickHandler(elements, handler) {
+  elements.forEach((element) => {
+    if (element) {
+      element.addEventListener("click", handler);
+    }
+  });
+}
