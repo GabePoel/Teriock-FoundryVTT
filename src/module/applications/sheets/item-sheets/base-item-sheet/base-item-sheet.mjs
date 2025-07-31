@@ -24,12 +24,12 @@ export default class TeriockBaseItemSheet extends BaseItemSheet {
   /**
    * Marks the {@link TeriockEffect} as being "on use" or not.
    *
-   * @param {MouseEvent} event - The event object.
+   * @param {MouseEvent} _event - The event object.
    * @param {HTMLElement} target - The target element.
    * @returns {Promise<void>} Promise that resolves when marked.
    * @private
    */
-  static async _toggleOnUseDoc(event, target) {
+  static async _toggleOnUseDoc(_event, target) {
     const id = target.dataset.id;
     const onUseSet = this.document.system.onUse;
     if (onUseSet.has(id)) {
