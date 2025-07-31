@@ -43,6 +43,7 @@ export default class TeriockBaseItemSheet extends BaseItemSheet {
   /**
    * Prepares the context data for template rendering.
    * Builds and sorts effect types including abilities, properties, fluencies, and resources.
+   *
    * @returns {Promise<object>} Promise that resolves to the context object.
    * @override
    */
