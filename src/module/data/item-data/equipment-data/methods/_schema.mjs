@@ -59,17 +59,17 @@ export function _defineSchema() {
       initial: false,
       label: "Ranged",
     }),
-    damage: new fields.StringField({
+    damage: new FormulaField({
       initial: "0",
       label: "Damage",
+      deterministic: false,
     }),
-    twoHandedDamage: new fields.StringField({
+    twoHandedDamage: new FormulaField({
       initial: "0",
       label: "Two-Handed Damage",
+      deterministic: false,
     }),
-    damageTypes: new fields.SetField(
-      /** @type {typeof StringField} **/ new fields.StringField(),
-    ),
+    damageTypes: new fields.SetField(new fields.StringField()),
     weight: new fields.NumberField({
       initial: 0,
       integer: true,
@@ -89,7 +89,6 @@ export function _defineSchema() {
       min: 0,
     }),
     equipmentClasses: new fields.SetField(
-      /** @type {typeof StringField} **/
       new fields.StringField({
         choices: equipmentOptions.equipmentClasses,
       }),

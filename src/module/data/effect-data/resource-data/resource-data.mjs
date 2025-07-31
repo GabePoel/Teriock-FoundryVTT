@@ -82,9 +82,10 @@ export default class TeriockResourceData extends ConsumableDataMixin(
           min: 0,
         }),
       }),
-      rollFormula: new fields.StringField({
+      rollFormula: new FormulaField({
         initial: "",
         label: "Roll Formula",
+        deterministic: false,
       }),
       functionHook: new fields.StringField({
         initial: "none",

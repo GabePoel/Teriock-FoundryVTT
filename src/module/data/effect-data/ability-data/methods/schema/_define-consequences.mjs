@@ -1,18 +1,11 @@
 const { fields } = foundry.data;
 import { pseudoHooks } from "../../../../../helpers/constants/pseudo-hooks.mjs";
-import { tradecraftOptions } from "../../../../../helpers/constants/tradecraft-options.mjs";
-import { mergeLevel } from "../../../../../helpers/utils.mjs";
-import {
-  TeriockArrayField,
-  TeriockRecordField,
-} from "../../../../shared/fields.mjs";
+import { FormulaField, TeriockArrayField, TeriockRecordField } from "../../../../shared/fields.mjs";
 import {
   combatExpirationMethodField,
   combatExpirationSourceTypeField,
-  combatExpirationTimingField,
+  combatExpirationTimingField
 } from "../../../shared/shared-fields.mjs";
-
-const tradecrafts = mergeLevel(tradecraftOptions, "*", "tradecrafts");
 
 /**
  * Creates a field for consequence rolls configuration.
@@ -36,10 +29,7 @@ const tradecrafts = mergeLevel(tradecraftOptions, "*", "tradecrafts");
  */
 export function consequenceRollsField() {
   return new TeriockRecordField(
-    /** @type {typeof StringField} */
-    new fields.StringField({
-      nullable: true,
-    }),
+    new FormulaField({ nullable: true, deterministic: false }),
     {
       label: "Rolls",
       hint: "The rolls that are made as part of the consequence.",
@@ -62,7 +52,6 @@ export function consequenceRollsField() {
  */
 export function consequenceChangesField() {
   return new TeriockArrayField(
-    /** @type {typeof SchemaField} */
     new fields.SchemaField({
       key: new fields.StringField({ initial: "" }),
       mode: new fields.NumberField({
@@ -119,94 +108,87 @@ function abilityExpirationField() {
  * const appliesField = appliesField();
  */
 function appliesField() {
-  return new fields.SchemaField(
-    /** @type {typeof DataField} */ {
-      statuses: new fields.SetField(
-        /** @type {typeof StringField} */
-        new fields.StringField({
-          choices: CONFIG.TERIOCK.conditions,
-        }),
-        {
-          label: "Conditions",
-          hint: "Conditions applied as part of the ability's ongoing effect. These are not applied as separate conditions, but merged into an ongoing effect.",
-        },
-      ),
-      startStatuses: new fields.SetField(
-        /** @type {typeof StringField} */
-        new fields.StringField({
-          choices: CONFIG.TERIOCK.conditions,
-        }),
-        {
-          label: "Apply Conditions",
-          hint: "Conditions that may be immediately applied when the ability is used. They exist independently of the ability.",
-        },
-      ),
-      endStatuses: new fields.SetField(
-        /** @type {typeof StringField} */
-        new fields.StringField({
-          choices: CONFIG.TERIOCK.conditions,
-        }),
-        {
-          label: "Remove Conditions",
-          hint: "Conditions that may be immediately removed when the ability is used This only works on conditions that exist independently of the ability.",
-        },
-      ),
-      rolls: consequenceRollsField(),
-      hacks: new fields.SetField(
-        /** @type {typeof StringField} */
-        new fields.StringField({
-          choices: {
-            arm: "Arm",
-            leg: "Leg",
-            body: "Body",
-            eye: "Eye",
-            ear: "Ear",
-            mouth: "Mouth",
-            nose: "Nose",
-          },
-        }),
-        {
-          label: "Hacks",
-          hint: "Types of hack damage that may be applied by the ability.",
-        },
-      ),
-      checks: new fields.SetField(
-        /** @type {typeof StringField} */
-        new fields.StringField({
-          choices: tradecrafts,
-        }),
-        {
-          label: "Tradecraft Checks",
-          hint: "Tradecraft checks that may be made as part of the ability.",
-        },
-      ),
-      duration: new fields.NumberField({
-        hint: "Increase in the duration (in seconds) of an effect made as part of the ability. If this is nonzero, it overrides the default duration.",
-        initial: 0,
-        label: "Duration",
+  return new fields.SchemaField({
+    statuses: new fields.SetField(
+      new fields.StringField({
+        choices: CONFIG.TERIOCK.conditions,
       }),
-      changes: consequenceChangesField(),
-      standardDamage: new fields.BooleanField({
+      {
+        label: "Conditions",
+        hint: "Conditions applied as part of the ability's ongoing effect. These are not applied as separate conditions, but merged into an ongoing effect.",
+      },
+    ),
+    startStatuses: new fields.SetField(
+      new fields.StringField({
+        choices: CONFIG.TERIOCK.conditions,
+      }),
+      {
+        label: "Apply Conditions",
+        hint: "Conditions that may be immediately applied when the ability is used. They exist independently of the ability.",
+      },
+    ),
+    endStatuses: new fields.SetField(
+      new fields.StringField({
+        choices: CONFIG.TERIOCK.conditions,
+      }),
+      {
+        label: "Remove Conditions",
+        hint: "Conditions that may be immediately removed when the ability is used This only works on conditions that exist independently of the ability.",
+      },
+    ),
+    rolls: consequenceRollsField(),
+    hacks: new fields.SetField(
+      new fields.StringField({
+        choices: {
+          arm: "Arm",
+          leg: "Leg",
+          body: "Body",
+          eye: "Eye",
+          ear: "Ear",
+          mouth: "Mouth",
+          nose: "Nose",
+        },
+      }),
+      {
+        label: "Hacks",
+        hint: "Types of hack damage that may be applied by the ability.",
+      },
+    ),
+    checks: new fields.SetField(
+      new fields.StringField({
+        choices: CONFIG.TERIOCK.tradecraftOptionsList,
+      }),
+      {
+        label: "Tradecraft Checks",
+        hint: "Tradecraft checks that may be made as part of the ability.",
+      },
+    ),
+    duration: new fields.NumberField({
+      hint: "Increase in the duration (in seconds) of an effect made as part of the ability. If this is nonzero, it overrides the default duration.",
+      initial: 0,
+      label: "Duration",
+    }),
+    changes: consequenceChangesField(),
+    standardDamage: new fields.BooleanField({
+      initial: false,
+      label: "Standard Damage",
+      hint: "Can this deal standard damage?",
+    }),
+    expiration: new fields.SchemaField({
+      normal: abilityExpirationField(),
+      crit: abilityExpirationField(),
+      changeOnCrit: new fields.BooleanField({
         initial: false,
-        label: "Standard Damage",
-        hint: "Can this deal standard damage?",
+        label: "Special Crit Expiration",
+        hint: "Should the combat timing expiration change on a crit?",
       }),
-      expiration: new fields.SchemaField({
-        normal: abilityExpirationField(),
-        crit: abilityExpirationField(),
-        changeOnCrit: new fields.BooleanField({
-          initial: false,
-          label: "Special Crit Expiration",
-          hint: "Should the combat timing expiration change on a crit?",
-        }),
-        doesExpire: new fields.BooleanField({
-          initial: false,
-          label: "Override Expiration",
-          hint: "Should custom expiration timing be applied?",
-        }),
+      doesExpire: new fields.BooleanField({
+        initial: false,
+        label: "Override Expiration",
+        hint: "Should custom expiration timing be applied?",
       }),
-    },
-  );
+    }),
+  });
 }
 
 /**

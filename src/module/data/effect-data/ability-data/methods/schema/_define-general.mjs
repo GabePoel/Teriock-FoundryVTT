@@ -1,5 +1,6 @@
 import { abilityOptions } from "../../../../../helpers/constants/ability-options.mjs";
 import { conditions } from "../../../../../helpers/constants/generated/conditions.mjs";
+import { FormulaField } from "../../../../shared/fields.mjs";
 
 const { fields } = foundry.data;
 
@@ -56,7 +57,6 @@ export function _defineGeneral(schema) {
     }),
     elderSorceryIncant: new fields.HTMLField({ initial: "" }),
     powerSources: new fields.ArrayField(
-      /** @type {typeof StringField} */
       new fields.StringField({
         choices: abilityOptions.powerSources,
       }),
@@ -91,7 +91,6 @@ export function _defineGeneral(schema) {
       }),
     }),
     targets: new fields.ArrayField(
-      /** @type {typeof StringField} */
       new fields.StringField({
         choices: abilityOptions.targets,
       }),
@@ -100,11 +99,10 @@ export function _defineGeneral(schema) {
       },
     ),
     elements: new fields.ArrayField(
-      /** @type {typeof StringField} */
       new fields.StringField({
         choices: abilityOptions.elements,
       }),
-    ), // duration: new fields.StringField({ initial: "Instant" }),
+    ),
     duration: new fields.SchemaField({
       unit: new fields.StringField({
         choices: abilityOptions.duration.unit,
@@ -120,7 +118,6 @@ export function _defineGeneral(schema) {
       }),
       conditions: new fields.SchemaField({
         present: new fields.SetField(
-          /** @type {StringField} */
           new fields.StringField({ choices: conditions }),
           {
             label: "Present Conditions",
@@ -128,7 +125,6 @@ export function _defineGeneral(schema) {
           },
         ),
         absent: new fields.SetField(
-          /** @type {StringField} */
           new fields.StringField({ choices: conditions }),
           {
             label: "Absent Conditions",
@@ -238,7 +234,7 @@ export function _defineGeneral(schema) {
             integer: true,
             min: 0,
           }),
-          formula: new fields.StringField({ initial: "" }),
+          formula: new FormulaField({ initial: "", deterministic: false }),
           variable: new fields.HTMLField({ initial: "" }),
         }),
       }),
@@ -259,7 +255,7 @@ export function _defineGeneral(schema) {
             integer: true,
             min: 0,
           }),
-          formula: new fields.StringField({ initial: "" }),
+          formula: new FormulaField({ initial: "", deterministic: false }),
           variable: new fields.HTMLField({ initial: "" }),
         }),
       }),
@@ -279,7 +275,7 @@ export function _defineGeneral(schema) {
             integer: true,
             min: 0,
           }),
-          formula: new fields.StringField({ initial: "" }),
+          formula: new FormulaField({ initial: "", deterministic: false }),
           variable: new fields.HTMLField({ initial: "" }),
         }),
       }),
@@ -290,7 +286,6 @@ export function _defineGeneral(schema) {
     endCondition: new fields.HTMLField({ initial: "" }),
     requirements: new fields.HTMLField({ initial: "" }),
     effects: new fields.ArrayField(
-      /** @type {typeof StringField} */
       new fields.StringField({
         choices: abilityOptions.effects,
       }),
