@@ -248,6 +248,7 @@ export default function registerUiHelpers() {
       id,
       parentId,
       active = true,
+      struck = false,
       marker = null,
       shattered = false,
       type = "item",
@@ -269,7 +270,7 @@ export default function registerUiHelpers() {
 
     return new Handlebars.SafeString(`
       <div 
-        class="tcard ${draggable ? "draggable" : ""} ${active ? "active" : "inactive"} ${shattered ? "shattered" : ""}" ${idAttr} ${parentIdAttr} ${typeAttr} 
+        class="tcard ${draggable ? "draggable" : ""} ${active ? "active" : "inactive"} ${struck ? "struck" : ""} ${shattered ? "shattered" : ""}" ${idAttr} ${parentIdAttr} ${typeAttr} 
         data-action="openDoc" 
         data-img="${img}"
       >
@@ -297,6 +298,11 @@ export default function registerUiHelpers() {
 
   Handlebars.registerHelper(
     "abilityCards",
+    /**
+     * @param {TeriockEffect[]} abilities
+     * @param {TeriockBaseItemData} system
+     * @param {object} options
+     */
     function (abilities, system, options) {
       const {
         tab = "ability",
@@ -304,6 +310,7 @@ export default function registerUiHelpers() {
         action = "rollDoc",
         tooltip = "Use",
         draggable = true,
+        onUseToggle = false,
       } = options.hash;
       if (!Array.isArray(abilities) || abilities.length === 0) return "";
       const isGapless = tab ? system?.sheet?.display?.[tab]?.gapless : false;
@@ -372,6 +379,21 @@ export default function registerUiHelpers() {
             masteryIcon = fluentIcon;
           }
 
+          const onUseIcon = Handlebars.helpers.ticonToggle(
+            "bolt",
+            "bolt-slash",
+            ability.isOnUse,
+            {
+              hash: {
+                action: "toggleOnUseDoc",
+                id: ability._id,
+                parentId: ability.parent?._id,
+                tooltipTrue: "Activates Only On Use",
+                tooltipFalse: "Always Active",
+              },
+            },
+          );
+
           let text = ability.parent?.name;
           const sup = ability.sup;
           if (sup) {
@@ -387,10 +409,15 @@ export default function registerUiHelpers() {
               title: ability.name,
               subtitle,
               text: text,
-              icons: masteryIcon + chatIcon + enableIcon,
+              icons:
+                (onUseToggle ? onUseIcon : "") +
+                masteryIcon +
+                chatIcon +
+                enableIcon,
               id: ability._id,
               parentId: ability.parent?._id,
               active: !ability.disabled && !ability.isSuppressed,
+              struck: ability.disabled,
               marker,
               shattered: false,
               consumable: ability.system.consumable,

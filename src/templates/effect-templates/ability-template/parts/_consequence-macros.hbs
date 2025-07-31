@@ -1,16 +1,23 @@
-<div class="tcard-container">
-  {{#each system.applies.macros as |pseudoHook uuid|}}
-    {{tcard
-      img=(path ../macros uuid "img")
-      title=(path ../macros uuid "name")
-      subtitle=(concat "Runs on " (path ../config.pseudoHooks pseudoHook))
-      text="Macro"
-      icons=(concat
-        (ticon "link-slash" tooltip="Unlink Macro" action="unlinkMacro" parentId=(pureUuid uuid))
-        (ticon "gear-code" tooltip="Change Run Hook" action="changeMacroRunHook" parentId=(pureUuid uuid))
-      )
-      type="macro"
-      id=(pureUuid uuid)
-    }}
-  {{/each}}
+<div class="tcard-display">
+  <div class="tcard-results">
+    <div class="tcard-container">
+      {{#each macros as |val|}}
+        {{tcard
+          img=(path val.macro "img")
+          title=(path val.macro "name")
+          subtitle=(concat "Runs upon " (path ../config.pseudoHooks val.pseudoHook))
+          text="Macro"
+          icons=(concat
+            (ticon "link-slash" tooltip="Unlink Macro" action="unlinkMacro" parentId=(pureUuid val.safeUuid))
+            (ticon "gear-code" tooltip="Change Run Hook" action="changeMacroRunHook" parentId=(pureUuid val.safeUuid))
+          )
+          type="macro"
+          id=(pureUuid val.safeUuid)
+        }}
+      {{/each}}
+    </div>
+  </div>
+  <div class="no-results medium {{#if (not (exists macros))}}not-hidden{{/if}}">
+    <p>No macros found. Drag a macro here to add it.</p>
+  </div>
 </div>

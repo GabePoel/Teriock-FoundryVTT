@@ -18,16 +18,23 @@ export async function _executeMacros(rollConfig, pseudoHook) {
     if (macroPseudoHook === pseudoHook) {
       const macro = await game.teriock.api.utils.fromUuid(pureUuid(safeUuid));
       if (macro) {
-        await macro.execute({
-          actor: rollConfig.abilityData.actor,
-          speaker: TeriockMessage.getSpeaker({
+        try {
+          await macro.execute({
             actor: rollConfig.abilityData.actor,
-          }),
-          args: [rollConfig],
-          useData: rollConfig.useData,
-          abilityData: rollConfig.abilityData,
-          chatData: rollConfig.chatData,
-        });
+            speaker: TeriockMessage.getSpeaker({
+              actor: rollConfig.abilityData.actor,
+            }),
+            args: [rollConfig],
+            useData: rollConfig.useData,
+            abilityData: rollConfig.abilityData,
+            chatData: rollConfig.chatData,
+          });
+        } catch (error) {
+          console.error(
+            `Could not execute macro with UUID ${pureUuid(safeUuid)}.`,
+            error,
+          );
+        }
       }
     }
   }

@@ -113,6 +113,7 @@ export async function _parse(abilityData, rawHTML) {
     .deepClone(referenceAbility.system)
     .toObject();
   const changes = [];
+  delete parameters.applies;
   delete parameters.executionTime;
   delete parameters.maneuver;
   delete parameters.hierarchy.rootUuid;
@@ -239,10 +240,9 @@ function getText(doc, selector) {
  * @param {object} parameters - The ability parameters to populate.
  * @param {Record<string, string[]>} tagTree - The tag tree extracted from the document.
  * @param {Document} doc - The parsed HTML document.
- * @param {Array} changes - Array to collect changes for improvements.
  * @private
  */
-function processTags(parameters, tagTree, doc, changes) {
+function processTags(parameters, tagTree, doc) {
   // Power sources
   if (tagTree.power) {
     parameters.powerSources = tagTree.power;
@@ -368,7 +368,7 @@ function processTags(parameters, tagTree, doc, changes) {
   console.log(foundry.utils.deepClone(parameters.results));
 
   // Process improvements
-  processImprovements(parameters, doc, changes);
+  processImprovements(parameters, doc);
 
   // Other tags
   if (tagTree.skill) parameters.skill = true;
@@ -393,10 +393,9 @@ function processTags(parameters, tagTree, doc, changes) {
  *
  * @param {object} parameters - The ability parameters to populate.
  * @param {Document} doc - The parsed HTML document.
- * @param {Array} changes - Array to collect changes for improvements.
  * @private
  */
-function processImprovements(parameters, doc, changes) {
+function processImprovements(parameters, doc) {
   // Attribute improvement
   const attrImp = doc.querySelector(".ability-bar-attribute-improvement");
   if (attrImp) {
@@ -413,12 +412,6 @@ function processImprovements(parameters, doc, changes) {
     parameters.improvements.attributeImprovement.minVal = minVal
       ? parseInt(minVal, 10)
       : null;
-    changes.push({
-      key: `system.attributes.${attr}.value`,
-      mode: 4,
-      value: minVal,
-      priority: 20,
-    });
   }
 
   // Feat save improvement
@@ -435,18 +428,6 @@ function processImprovements(parameters, doc, changes) {
       ?.replace("flag-value-", "");
     parameters.improvements.featSaveImprovement.attribute = attr;
     parameters.improvements.featSaveImprovement.amount = amount;
-    const toggle =
-      amount === "fluency"
-        ? "Fluent"
-        : amount === "proficiency"
-          ? "Proficient"
-          : null;
-    changes.push({
-      key: `system.attributes.${attr}.save${toggle}`,
-      mode: 4,
-      value: true,
-      priority: 20,
-    });
   }
 }
 

@@ -8,6 +8,7 @@
  */
 export function _suppressed(abilityData) {
   let suppressed = false;
+  if (!suppressed && abilityData.parent.isReference) suppressed = true;
   if (!suppressed && abilityData.parent.parent.type === "equipment") {
     if (!suppressed && !abilityData.parent.parent.system.equipped) {
       suppressed = true;

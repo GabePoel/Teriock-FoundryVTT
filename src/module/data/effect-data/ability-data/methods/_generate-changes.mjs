@@ -26,6 +26,26 @@ export function _generateChanges(abilityData) {
   ) {
     changes.push(...abilityData.applies.fluent.changes);
   }
+  if (abilityData.improvements.attributeImprovement.attribute) {
+    const attributeImprovementChange = {
+      key: `system.attributes.${abilityData.improvements.attributeImprovement.attribute}.value`,
+      value: abilityData.improvements.attributeImprovement.minVal,
+      mode: 4,
+      priority: 20,
+    };
+    changes.push(attributeImprovementChange);
+  }
+  if (abilityData.improvements.featSaveImprovement.attribute) {
+    const amount = abilityData.improvements.featSaveImprovement.amount;
+    const saveKey = amount === "fluency" ? "saveFluent" : "saveProficient";
+    const featSaveImprovementChange = {
+      key: `system.attributes.${abilityData.improvements.featSaveImprovement.attribute}.${saveKey}`,
+      value: true,
+      mode: 4,
+      priority: 20,
+    };
+    changes.push(featSaveImprovementChange);
+  }
   for (const [safeUuid, pseudoHook] of Object.entries(
     abilityData.applies.macros,
   )) {

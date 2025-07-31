@@ -2,6 +2,7 @@ import { makeIcon } from "../../../../../helpers/utils.mjs";
 
 /**
  * Capitalizes the first character of a string.
+ *
  * @param {string} str - The string to capitalize.
  * @returns {string} The capitalized string.
  */
@@ -10,23 +11,9 @@ function capitalize(str) {
 }
 
 /**
- * Removes attribute save changes from a changes array.
- * Filters out changes that match attribute save patterns.
- * @param {Array} changes - Array of changes to filter.
- * @returns {Array} Filtered array without attribute save changes.
- */
-function removeAttributeSaveChanges(changes) {
-  return changes.filter(
-    (change) =>
-      !/^system\.attributes\.(int|mov|per|snk|str|unp)\.save(Proficient|Fluent)$/.test(
-        change.key,
-      ),
-  );
-}
-
-/**
  * Creates context menus for ability configuration.
  * Provides comprehensive menu options for all ability properties and settings.
+ *
  * @param {TeriockAbility} ability - The ability to create context menus for.
  * @returns {object} Object containing all context menu configurations.
  */
@@ -47,6 +34,7 @@ export function contextMenus(ability) {
 
   /**
    * Creates a quick menu from configuration options.
+   *
    * @param {string} keychain - The configuration keychain to use.
    * @param {string} updateKey - The system key to update when an option is selected.
    * @param {boolean|null} nullOption - Whether to include a "None" option.
@@ -409,25 +397,8 @@ export function contextMenus(ability) {
         name: attr.toUpperCase(),
         icon: CONFIG.TERIOCK.icons[attr],
         callback: async () => {
-          const existingChanges = ability.changes;
-          const oldAttr =
-            ability.system.improvements.attributeImprovement.attribute;
-          const oldKey = oldAttr ? `system.attributes.${oldAttr}.value` : null;
-          const newKey = `system.attributes.${attr}.value`;
-          const filteredChanges = oldKey
-            ? existingChanges.filter((change) => change.key !== oldKey)
-            : [...existingChanges];
-          const minVal =
-            ability.system.improvements.attributeImprovement.minVal.toString();
-          filteredChanges.push({
-            key: newKey,
-            mode: 2,
-            value: minVal,
-            priority: 20,
-          });
           await ability.update({
             "system.improvements.attributeImprovement.attribute": attr,
-            changes: filteredChanges,
           });
         },
       }),
@@ -437,22 +408,8 @@ export function contextMenus(ability) {
         name: i.toString(),
         icon: CONFIG.TERIOCK.icons.numerical,
         callback: async () => {
-          const existingChanges = ability.changes;
-          const key = `system.attributes.${ability.system.improvements.attributeImprovement.attribute}.value`;
-          const filteredChanges = existingChanges.filter(
-            (change) => change.key !== key,
-          );
-          existingChanges.length = 0;
-          existingChanges.push(...filteredChanges);
-          existingChanges.push({
-            key: key,
-            mode: 2,
-            value: i,
-            priority: 20,
-          });
           await ability.update({
             "system.improvements.attributeImprovement.minVal": i,
-            changes: existingChanges,
           });
         },
       }),
@@ -462,23 +419,8 @@ export function contextMenus(ability) {
         name: attr.toUpperCase(),
         icon: CONFIG.TERIOCK.icons[attr],
         callback: async () => {
-          const existingChanges = ability.changes;
-          const amount =
-            ability.system.improvements.featSaveImprovement.amount ||
-            "proficiency";
-          const saveKey =
-            amount === "fluency" ? "saveFluent" : "saveProficient";
-          const newKey = `system.attributes.${attr}.${saveKey}`;
-          const filteredChanges = removeAttributeSaveChanges(existingChanges);
-          filteredChanges.push({
-            key: newKey,
-            mode: 2,
-            value: true,
-            priority: 20,
-          });
           await ability.update({
             "system.improvements.featSaveImprovement.attribute": attr,
-            changes: filteredChanges,
           });
         },
       }),
@@ -487,21 +429,8 @@ export function contextMenus(ability) {
       name: capitalize(level),
       icon: CONFIG.TERIOCK.icons[level],
       callback: async () => {
-        const existingChanges = ability.changes;
-        const attr = ability.system.improvements.featSaveImprovement.attribute;
-        if (!attr) return;
-        const saveKey = level === "fluency" ? "saveFluent" : "saveProficient";
-        const newKey = `system.attributes.${attr}.${saveKey}`;
-        const filteredChanges = removeAttributeSaveChanges(existingChanges);
-        filteredChanges.push({
-          key: newKey,
-          mode: 2,
-          value: true,
-          priority: 20,
-        });
         await ability.update({
           "system.improvements.featSaveImprovement.amount": level,
-          changes: filteredChanges,
         });
       },
     })),

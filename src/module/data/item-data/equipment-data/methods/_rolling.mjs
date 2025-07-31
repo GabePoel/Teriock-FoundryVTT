@@ -1,3 +1,4 @@
+import { onUseDialog } from "../../../../applications/dialogs/on-use-dialog.mjs";
 import TeriockRoll from "../../../../documents/roll.mjs";
 import { harmRoll } from "../../../../helpers/quick-rolls.mjs";
 
@@ -94,5 +95,13 @@ async function use(equipmentData, options) {
     await harmRoll(rollFormula, rollData, message);
   } else {
     await equipmentData.parent.chat();
+  }
+  const onUseId = await onUseDialog(equipmentData.parent);
+  if (onUseId) {
+    /** @type {TeriockAbility} */
+    const onUseAbility = equipmentData.parent.effects.get(onUseId);
+    if (onUseAbility) {
+      await onUseAbility.use();
+    }
   }
 }

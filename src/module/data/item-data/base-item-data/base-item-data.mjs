@@ -34,6 +34,7 @@ export default class TeriockBaseItemData extends ChildDataMixin(TypeDataModel) {
         initial: false,
         label: "Update Counter",
       }),
+      onUse: new fields.SetField(new fields.DocumentIdField()),
     });
   }
 }

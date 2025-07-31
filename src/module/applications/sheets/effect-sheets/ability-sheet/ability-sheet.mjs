@@ -1,9 +1,9 @@
 const { api } = foundry.applications;
 import { documentOptions } from "../../../../helpers/constants/document-options.mjs";
 import { pseudoHooks } from "../../../../helpers/constants/pseudo-hooks.mjs";
+import { pureUuid, safeUuid } from "../../../../helpers/utils.mjs";
 import durationDialog from "../../../dialogs/duration-dialog.mjs";
 import { selectDialog } from "../../../dialogs/select-dialog.mjs";
-import { pureUuid, safeUuid } from "../../../../helpers/utils.mjs";
 import TeriockBaseEffectSheet from "../base-effect-sheet/base-effect-sheet.mjs";
 import { contextMenus } from "./connections/_context-menus.mjs";
 
@@ -150,11 +150,18 @@ export default class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(
     context.consequenceTab = this._consequenceTab;
     context.childAbilities = this.document.subs;
     context.parentAbility = this.document.sup;
-    context.macros = {};
-    for (const uuid of Object.keys(this.document.system.applies.macros)) {
-      context.macros[uuid] = await game.teriock.api.utils.fromUuid(
-        pureUuid(uuid),
-      );
+    context.macros = [];
+    for (const [safeUuid, pseudoHook] of Object.entries(
+      this.document.system.applies.macros,
+    )) {
+      const macro = await game.teriock.api.utils.fromUuid(pureUuid(safeUuid));
+      if (macro) {
+        context.macros.push({
+          safeUuid: safeUuid,
+          macro: macro,
+          pseudoHook: pseudoHook,
+        });
+      }
     }
     const editors = {
       manaCost: system.costs.mp.value.variable,
@@ -335,14 +342,16 @@ export default class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(
     };
 
     for (const [selector, param] of Object.entries(arrayTags)) {
-      root.querySelectorAll(selector).forEach(/** @param {HTMLElement} el */ (el) => {
-        el.addEventListener("click", async () => {
-          const value = el.dataset.value;
-          const pathKey = param.split(".")[1];
-          const list = doc.system[pathKey].filter((entry) => entry !== value);
-          await doc.update({ [param]: list });
-        });
-      });
+      root.querySelectorAll(selector).forEach(
+        /** @param {HTMLElement} el */ (el) => {
+          el.addEventListener("click", async () => {
+            const value = el.dataset.value;
+            const pathKey = param.split(".")[1];
+            const list = doc.system[pathKey].filter((entry) => entry !== value);
+            await doc.update({ [param]: list });
+          });
+        },
+      );
     }
 
     const staticUpdates = {

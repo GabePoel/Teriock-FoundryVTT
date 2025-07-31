@@ -15,7 +15,7 @@ import { _stageUse } from "./_roll-stage-use.mjs";
  * @returns {Promise<void>}
  * @private
  */
-export async function _roll(abilityData, options) {
+export async function _roll(abilityData, options = {}) {
   if (!abilityData.actor) {
     ui.notifications.error("Abilities must be on an actor to be used.", {
       console: false,

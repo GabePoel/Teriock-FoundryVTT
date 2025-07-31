@@ -150,12 +150,25 @@ export default class TeriockEffect extends BaseTeriockEffect {
   }
 
   /**
+   * Checks if this effect is supposed to activate on the use of its parent {@link TeriockItem}.
+   *
+   * @returns {boolean}
+   */
+  get isOnUse() {
+    return (
+      this.parent.documentName === "Item" &&
+      this.parent.system.onUse.has(this.id)
+    );
+  }
+
+  /**
    * Checks if this effect is a reference effect by examining its sups for non-passive maneuvers.
    *
    * @returns {boolean} True if this is a reference effect, false otherwise.
    */
   get isReference() {
     const sups = this.allSups;
+    if (this.isOnUse) return true;
     for (const sup of sups) {
       if (sup.system.maneuver !== "passive") {
         return true;
