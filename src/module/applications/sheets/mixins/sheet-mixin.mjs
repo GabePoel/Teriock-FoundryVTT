@@ -81,60 +81,60 @@ export default (Base) => {
     /**
      * Debug action for development purposes.
      *
-     * @param {MouseEvent} _ - The event object.
-     * @param {HTMLElement} __ - The target element.
+     * @param {MouseEvent} _event - The event object.
+     * @param {HTMLElement} _target - The target element.
      * @returns {Promise<void>} Promise that resolves when debug is complete.
      * @static
      */
-    static async _debug(_, __) {
+    static async _debug(_event, _target) {
       console.log("Debug", this.document, this);
     }
 
     /**
      * Pulls data from wiki for the current document.
      *
-     * @param {MouseEvent} _ - The event object.
-     * @param {HTMLElement} __ - The target element.
+     * @param {MouseEvent} _event - The event object.
+     * @param {HTMLElement} _target - The target element.
      * @returns {Promise<void>} Promise that resolves when wiki pull is complete.
      * @static
      */
-    static async _wikiPullThis(_, __) {
+    static async _wikiPullThis(_event, _target) {
       if (this.editable) this.document.system.wikiPull();
     }
 
     /**
      * Opens the wiki page for the current document.
      *
-     * @param {MouseEvent} _ - The event object.
-     * @param {HTMLElement} __ - The target element.
+     * @param {MouseEvent} _event - The event object.
+     * @param {HTMLElement} _target - The target element.
      * @returns {Promise<void>} Promise that resolves when wiki page is opened.
      * @static
      */
-    static async _wikiOpenThis(_, __) {
+    static async _wikiOpenThis(_event, _target) {
       this.document.system.wikiOpen();
     }
 
     /**
      * Sends the current document to chat.
      *
-     * @param {MouseEvent} _ - The event object.
-     * @param {HTMLElement} __ - The target element.
+     * @param {MouseEvent} _event - The event object.
+     * @param {HTMLElement} _target - The target element.
      * @returns {Promise<void>} Promise that resolves when chat is sent.
      * @static
      */
-    static async _chatThis(_, __) {
+    static async _chatThis(_event, _target) {
       this.document.chat();
     }
 
     /**
      * Reloads the current document and re-renders the sheet.
      *
-     * @param {MouseEvent} _ - The event object.
-     * @param {HTMLElement} __ - The target element.
+     * @param {MouseEvent} _event - The event object.
+     * @param {HTMLElement} _target - The target element.
      * @returns {Promise<void>} Promise that resolves when reload is complete.
      * @static
      */
-    static async _reloadThis(_, __) {
+    static async _reloadThis(_event, _target) {
       await this.document.update({});
       await this.document.sheet.render();
     }
@@ -142,12 +142,12 @@ export default (Base) => {
     /**
      * Toggles the lock state of the current sheet.
      *
-     * @param {MouseEvent} _ - The event object.
-     * @param {HTMLElement} __ - The target element.
+     * @param {MouseEvent} _event - The event object.
+     * @param {HTMLElement} _target - The target element.
      * @returns {Promise<void>} Promise that resolves when lock is toggled.
      * @static
      */
-    static async _toggleLockThis(_, __) {
+    static async _toggleLockThis(_event, _target) {
       this._locked = !this._locked;
       this.editable = this.isEditable && !this._locked;
       this.render();
@@ -157,10 +157,11 @@ export default (Base) => {
      * Rolls the current document with optional advantage/disadvantage.
      *
      * @param {MouseEvent} event - The event object.
+     * @param {HTMLElement} _target - The target element.
      * @returns {Promise<void>} Promise that resolves when roll is complete.
      * @static
      */
-    static async _rollThis(event) {
+    static async _rollThis(event, _target) {
       const options = event?.altKey
         ? { advantage: true }
         : event?.shiftKey
@@ -172,12 +173,12 @@ export default (Base) => {
     /**
      * Opens image picker for editing document images.
      *
-     * @param {MouseEvent} _ - The event object.
+     * @param {MouseEvent} _event - The event object.
      * @param {HTMLElement} target - The target element.
      * @returns {Promise<FilePicker>} Promise that resolves when image picker is opened.
      * @static
      */
-    static async _editImage(_, target) {
+    static async _editImage(_event, target) {
       const attr = target.dataset.edit;
       const current = foundry.utils.getProperty(this.document, attr);
       const defaultImg = this.document.constructor.getDefaultArtwork?.(
@@ -202,12 +203,12 @@ export default (Base) => {
     /**
      * Opens the sheet for an embedded document.
      *
-     * @param {MouseEvent} event - The event object.
+     * @param {MouseEvent} _event - The event object.
      * @param {HTMLElement} target - The target element.
      * @returns {Promise<void>} Promise that resolves when sheet is opened.
      * @static
      */
-    static async _openDoc(event, target) {
+    static async _openDoc(_event, target) {
       const embedded = await this._embeddedFromCard(target);
       embedded?.sheet.render(true);
     }
@@ -215,12 +216,12 @@ export default (Base) => {
     /**
      * Sends an embedded document to chat.
      *
-     * @param {MouseEvent} event - The event object.
+     * @param {MouseEvent} _event - The event object.
      * @param {HTMLElement} target - The target element.
      * @returns {Promise<void>} Promise that resolves when chat is sent.
      * @static
      */
-    static async _chatDoc(event, target) {
+    static async _chatDoc(_event, target) {
       const embedded = await this._embeddedFromCard(target);
       await embedded?.chat();
     }
@@ -228,12 +229,12 @@ export default (Base) => {
     /**
      * Uses one unit of an embedded consumable document.
      *
-     * @param {MouseEvent} event - The event object.
+     * @param {MouseEvent} _event - The event object.
      * @param {HTMLElement} target - The target element.
      * @returns {Promise<void>} Promise that resolves when use is complete.
      * @static
      */
-    static async _useOneDoc(event, target) {
+    static async _useOneDoc(_event, target) {
       const embedded = await this._embeddedFromCard(target);
       await embedded?.system.useOne();
     }
@@ -241,12 +242,12 @@ export default (Base) => {
     /**
      * Toggles the disabled state of an embedded document.
      *
-     * @param {MouseEvent} event - The event object.
+     * @param {MouseEvent} _event - The event object.
      * @param {HTMLElement} target - The target element.
      * @returns {Promise<void>} Promise that resolves when toggle is complete.
      * @static
      */
-    static async _toggleDisabledDoc(event, target) {
+    static async _toggleDisabledDoc(_event, target) {
       const embedded = await this._embeddedFromCard(target);
       await embedded?.toggleDisabled();
     }
@@ -280,12 +281,12 @@ export default (Base) => {
     /**
      * Toggles a boolean field on the current document.
      *
-     * @param {MouseEvent} event - The event object.
+     * @param {MouseEvent} _event - The event object.
      * @param {HTMLElement} target - The target element.
      * @returns {Promise<void>} Promise that resolves when toggle is complete.
      * @static
      */
-    static async _quickToggle(event, target) {
+    static async _quickToggle(_event, target) {
       const { path } = target.dataset;
       const current = target.dataset.bool === "true";
       await this.document.update({ [path]: !current });
@@ -294,12 +295,12 @@ export default (Base) => {
     /**
      * Toggles a boolean field on the sheet and re-renders.
      *
-     * @param {MouseEvent} event - The event object.
+     * @param {MouseEvent} _event - The event object.
      * @param {HTMLElement} target - The target element.
      * @returns {Promise<void>} Promise that resolves when toggle is complete.
      * @static
      */
-    static async _sheetToggle(event, target) {
+    static async _sheetToggle(_event, target) {
       const { path } = target.dataset;
       const current = target.dataset.bool === "true";
       foundry.utils.setProperty(this, path, !current);
@@ -309,12 +310,12 @@ export default (Base) => {
     /**
      * Creates a new ability for the current document.
      *
-     * @param {MouseEvent} event - The event object.
-     * @param {HTMLElement} __ - The target element.
+     * @param {MouseEvent} _event - The event object.
+     * @param {HTMLElement} _target - The target element.
      * @returns {Promise<ActiveEffect>} Promise that resolves to the created ability.
      * @static
      */
-    static async _createAbility(event, __) {
+    static async _createAbility(_event, _target) {
       // const abilityKey = await selectAbilityDialog();
       // console.log(abilityKey);
       // if (abilityKey) {
@@ -331,24 +332,24 @@ export default (Base) => {
     /**
      * Creates a new resource for the current document.
      *
-     * @param {MouseEvent} event - The event object.
-     * @param {HTMLElement} __ - The target element.
+     * @param {MouseEvent} _event - The event object.
+     * @param {HTMLElement} _target - The target element.
      * @returns {Promise<ActiveEffect>} Promise that resolves to the created resource.
      * @static
      */
-    static async _createResource(event, __) {
+    static async _createResource(_event, _target) {
       return await createEffects.createResource(this.document);
     }
 
     /**
      * Creates a new fluency for the current document.
      *
-     * @param {MouseEvent} event - The event object.
-     * @param {HTMLElement} __ - The target element.
+     * @param {MouseEvent} _event - The event object.
+     * @param {HTMLElement} _target - The target element.
      * @returns {Promise<ActiveEffect>} Promise that resolves to the created fluency.
      * @static
      */
-    static async _createFluency(event, __) {
+    static async _createFluency(_event, _target) {
       return await createEffects.createFluency(this.document);
     }
 
@@ -356,12 +357,12 @@ export default (Base) => {
      * Creates a new property for the current document.
      * Shows a dialog to select property type or create a new one.
      *
-     * @param {MouseEvent} event - The event object.
-     * @param {HTMLElement} __ - The target element.
+     * @param {MouseEvent} _event - The event object.
+     * @param {HTMLElement} _target - The target element.
      * @returns {Promise<ActiveEffect>} Promise that resolves to the created property.
      * @static
      */
-    static async _createProperty(event, __) {
+    static async _createProperty(_event, _target) {
       let property = await selectPropertyDialog();
       if (!property) {
         property = "newProperty";
@@ -696,7 +697,6 @@ export default (Base) => {
      * @param {HTMLElement} element - The input element to connect.
      * @param {string} attribute - The attribute path to update.
      * @param {Function} transformer - Function to transform the input value.
-     * @private
      */
     _connectInput(element, attribute, transformer) {
       const update = (e) => {
@@ -714,7 +714,6 @@ export default (Base) => {
     /**
      * Connects button elements to document updates.
      * @param {object} map - Object mapping selectors to attribute paths.
-     * @private
      */
     _connectButtonMap(map) {
       const container = this.element;
@@ -735,7 +734,6 @@ export default (Base) => {
      * @param {object[]} menuItems - The context menu items.
      * @param {string} eventName - The event name to trigger the menu.
      * @returns {ContextMenu} The created context menu.
-     * @private
      */
     _connectContextMenu(cssClass, menuItems, eventName) {
       return /** @type {ContextMenu} */ new ContextMenu(
@@ -754,7 +752,6 @@ export default (Base) => {
      * Extracts an embedded document from a card element.
      * @param {HTMLElement} target - The target element to extract from.
      * @returns {Promise<ClientDocument|null>} The embedded document or null if not found.
-     * @private
      */
     async _embeddedFromCard(target) {
       /** @type {HTMLElement} */
@@ -790,7 +787,6 @@ export default (Base) => {
      *
      * @param {HTMLElement} target
      * @returns {Promise<void>}
-     * @private
      */
     async _richTooltipContainer(target) {
       const rect = target.getBoundingClientRect();
@@ -848,12 +844,12 @@ export default (Base) => {
 
     /**
      * Handles dropping of active effects.
-     * @param {DragEvent} event - The drop event.
+     * @param {DragEvent} _event - The drop event.
      * @param {object} data - The effect data.
      * @returns {Promise<boolean>} Promise that resolves to true if drop was successful.
      * @private
      */
-    async _onDropActiveEffect(event, data) {
+    async _onDropActiveEffect(_event, data) {
       /** @type {typeof ClientDocument} */
       const EffectClass = await getDocumentClass("ActiveEffect");
       const effect =
@@ -897,12 +893,12 @@ export default (Base) => {
 
     /**
      * Handles dropping of items.
-     * @param {DragEvent} event - The drop event.
+     * @param {DragEvent} _event - The drop event.
      * @param {object} data - The item data.
      * @returns {Promise<TeriockItem|boolean>} Promise that resolves to true if drop was successful.
      * @private
      */
-    async _onDropItem(event, data) {
+    async _onDropItem(_event, data) {
       /** @type {typeof ClientDocument} */
       const ItemClass = await getDocumentClass("Item");
       const item =
@@ -955,12 +951,12 @@ export default (Base) => {
     /**
      * Handles dropping of a macro on this document.
      *
-     * @param {DragEvent} event - The drop event.
-     * @param {object} data - The macro data.
+     * @param {DragEvent} _event - The drop event.
+     * @param {object} _data - The macro data.
      * @returns {Promise<TeriockMacro|void>} Promise that resolves to the dropped macro if successful.
      * @private
      */
-    async _onDropMacro(event, data) {}
+    async _onDropMacro(_event, _data) {}
 
     /**
      * Checks if drag start is allowed.
