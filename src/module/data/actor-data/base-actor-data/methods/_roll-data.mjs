@@ -7,7 +7,6 @@ import config from "../../../../helpers/config.mjs";
  *
  * @param {TeriockBaseActorData} actorData - The actor system to get roll data for.
  * @returns {object} Object containing all roll data for the actor.
- * @private
  */
 export function _getRollData(actorData) {
   const data = {};
@@ -28,6 +27,7 @@ export function _getRollData(actorData) {
   offenseData(actorData, data);
   moneyData(actorData, data);
   equipmentData(actorData, data);
+  speciesData(actorData, data);
   return foundry.utils.deepClone(data);
 }
 
@@ -37,8 +37,6 @@ export function _getRollData(actorData) {
  *
  * @param {TeriockBaseActorData} actorData - The actor system to get data from.
  * @param {object} data - The roll data object to populate.
- * @returns {void}
- * @private
  */
 function basicData(actorData, data) {
   Object.assign(data, {
@@ -56,8 +54,6 @@ function basicData(actorData, data) {
  *
  * @param {TeriockBaseActorData} actorData - The actor system to get data from.
  * @param {object} data - The roll data object to populate.
- * @returns {void}
- * @private
  */
 function presenceData(actorData, data) {
   Object.assign(data, {
@@ -73,8 +69,6 @@ function presenceData(actorData, data) {
  *
  * @param {TeriockBaseActorData} actorData - The actor system to get data from.
  * @param {object} data - The roll data object to populate.
- * @returns {void}
- * @private
  */
 function rankData(actorData, data) {
   const actor = actorData.parent;
@@ -125,8 +119,6 @@ function rankData(actorData, data) {
  *
  * @param {TeriockBaseActorData} actorData - The actor system to get data from.
  * @param {object} data - The roll data object to populate.
- * @returns {void}
- * @private
  */
 function ageData(actorData, data) {
   // Age data would need to be added to the actor schema
@@ -144,8 +136,6 @@ function ageData(actorData, data) {
  *
  * @param {TeriockBaseActorData} actorData - The actor system to get data from.
  * @param {object} data - The roll data object to populate.
- * @returns {void}
- * @private
  */
 function attributeData(actorData, data) {
   const attr = actorData.attributes;
@@ -166,8 +156,6 @@ function attributeData(actorData, data) {
  *
  * @param {TeriockBaseActorData} actorData - The actor system to get data from.
  * @param {object} data - The roll data object to populate.
- * @returns {void}
- * @private
  */
 function tradecraftData(actorData, data) {
   for (const key of Object.keys(config.tradecraftOptionsList)) {
@@ -192,8 +180,6 @@ function tradecraftData(actorData, data) {
  *
  * @param {TeriockBaseActorData} actorData - The actor system to get data from.
  * @param {object} data - The roll data object to populate.
- * @returns {void}
- * @private
  */
 function hpData(actorData, data) {
   Object.assign(data, {
@@ -210,8 +196,6 @@ function hpData(actorData, data) {
  *
  * @param {TeriockBaseActorData} actorData - The actor system to get data from.
  * @param {object} data - The roll data object to populate.
- * @returns {void}
- * @private
  */
 function mpData(actorData, data) {
   Object.assign(data, {
@@ -228,8 +212,6 @@ function mpData(actorData, data) {
  *
  * @param {TeriockBaseActorData} actorData - The actor system to get data from.
  * @param {object} data - The roll data object to populate.
- * @returns {void}
- * @private
  */
 function witherData(actorData, data) {
   Object.assign(data, {
@@ -244,8 +226,6 @@ function witherData(actorData, data) {
  *
  * @param {TeriockBaseActorData} actorData - The actor system to get data from.
  * @param {object} data - The roll data object to populate.
- * @returns {void}
- * @private
  */
 function hackData(actorData, data) {
   const hackKeys = ["arm", "leg", "bod", "eye", "ear", "mou", "nos"];
@@ -265,8 +245,6 @@ function hackData(actorData, data) {
  *
  * @param {TeriockBaseActorData} actorData - The actor system to get data from.
  * @param {object} data - The roll data object to populate.
- * @returns {void}
- * @private
  */
 function speedData(actorData, data) {
   const speedKeys = [
@@ -329,8 +307,6 @@ function speedData(actorData, data) {
  *
  * @param {TeriockBaseActorData} actorData - The actor system to get data from.
  * @param {object} data - The roll data object to populate.
- * @returns {void}
- * @private
  */
 function carryingData(actorData, data) {
   const weightCarried = actorData.weightCarried || 0;
@@ -354,8 +330,6 @@ function carryingData(actorData, data) {
  *
  * @param {TeriockBaseActorData} actorData - The actor system to get data from.
  * @param {object} data - The roll data object to populate.
- * @returns {void}
- * @private
  */
 function defenseData(actorData, data) {
   Object.assign(data, {
@@ -375,8 +349,6 @@ function defenseData(actorData, data) {
  *
  * @param {TeriockBaseActorData} actorData - The actor system to get data from.
  * @param {object} data - The roll data object to populate.
- * @returns {void}
- * @private
  */
 function offenseData(actorData, data) {
   const weaponAv0 = actorData?.wielding.attacker.derived?.system.derivedAv0;
@@ -405,8 +377,6 @@ function offenseData(actorData, data) {
  *
  * @param {TeriockBaseActorData} actorData - The actor system to get data from.
  * @param {object} data - The roll data object to populate.
- * @returns {void}
- * @private
  */
 function moneyData(actorData, data) {
   const moneyKeys = [
@@ -491,8 +461,6 @@ function moneyData(actorData, data) {
  *
  * @param {TeriockBaseActorData} actorData - The actor system to get data from.
  * @param {object} data - The roll data object to populate.
- * @returns {void}
- * @private
  */
 function equipmentData(actorData, data) {
   // Primary attack weapon
@@ -515,8 +483,6 @@ function equipmentData(actorData, data) {
  * @param {object} data - The roll data object to populate.
  * @param {string} slot - The equipment slot (atk, blo).
  * @param {TeriockEquipment|null} equipment - The equipment item.
- * @returns {void}
- * @private
  */
 function addEquipmentData(data, slot, equipment) {
   const sys = equipment?.system;
@@ -533,4 +499,16 @@ function addEquipmentData(data, slot, equipment) {
   data[`${slot}.dampened`] = sys.dampened ? 1 : 0;
   data[`${slot}.consumable`] = sys.consumable ? 1 : 0;
   data[`${slot}.quantity`] = sys.quantity || 1;
+}
+
+/**
+ * Adds species data to the roll data object.
+ *
+ * @param {TeriockBaseActorData} actorData
+ * @param {object} data
+ */
+function speciesData(actorData, data) {
+  for (const species of actorData.species) {
+    data[`species.${species}`] = 1;
+  }
 }

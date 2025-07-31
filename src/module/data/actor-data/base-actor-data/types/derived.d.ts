@@ -61,4 +61,6 @@ export interface TeriockBaseActorDerived {
   abilityFlags: Record<string, string>;
   /** Registered pseudo-hook macros to fire */
   hookedMacros: Record<Teriock.PseudoHook, Teriock.UUID<TeriockMacro>[]>;
+  /** Species */
+  species: Set<string>;
 }

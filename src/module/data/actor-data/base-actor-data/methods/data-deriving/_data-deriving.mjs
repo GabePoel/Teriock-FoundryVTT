@@ -1,8 +1,8 @@
 import { _prepareDefenses, _prepareOffenses } from "./_prepare-combat.mjs";
 import { _prepareEncumbrance, _prepareMoney, _prepareWeightCarried } from "./_prepare-load.mjs";
+import { _prepareSpecies } from "./_prepare-species.mjs";
 import { _prepareSpeed } from "./_prepare-speed.mjs";
 import { _prepareAttributes, _prepareBonuses, _prepareHpMp, _preparePresence } from "./_prepare-stats.mjs";
-import { _prepareSize } from "./_prepare-token.mjs";
 import { _prepareTradecrafts } from "./_prepare-tradecrafts.mjs";
 
 /**
@@ -29,7 +29,7 @@ import { _prepareTradecrafts } from "./_prepare-tradecrafts.mjs";
  * _prepareDerivedData(actor.system);
  */
 export function _prepareDerivedData(actorData) {
-  _prepareSize(actorData);
+  _prepareSpecies(actorData);
   _prepareBonuses(actorData);
   _prepareHpMp(actorData);
   _preparePresence(actorData);
