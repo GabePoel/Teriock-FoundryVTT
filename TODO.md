@@ -6,7 +6,7 @@
     - [x] Automatic perception mode inherited from actor
     - [ ] Properties and abilities for light sources
 - [ ] Token features
-    - [ ] Better death/down displays
+    - [x] Better death/down displays
     - [ ] Frozen/transformed/lighted/terrored/burned visual clues
 - [ ] Ability management
     - [x] Abilities letting you know when they start/end
@@ -15,26 +15,31 @@
     - [x] Easy way to apply boosts
     - [x] Enricheds for different roll types
     - [x] Bow, hand, and foot BV scaling
-    - [ ] Ability resistance fix
+    - [ ] ~~Ability resistance fix~~
+      - This can come back when resistances trigger automatically
     - [x] Attribute and feat save improvement appearing in ability chat messages
     - [x] Icons for all the basic abilities
     - [x] Attack ability targeting missing icon fix
-    - [ ] Throwing weapon range multiplier (from throwing training)
-    - [ ] Check metadata
+    - [ ] ~~Throwing weapon range multiplier (from throwing training)~~
+      - This can come back when range has some actual mechanical effect within the system
+    - [x] Check metadata
 - [x] Rank fixes
     - [x] Enable/disable buttons
 - [x] Hot bar fix
+- [ ] Refined duration integration
 
 # Codebase
 
 - [x] Consolidate applies and consequences systems
 - [ ] Clean up the CSS (as if)
 - [x] Organize hooks (and move stuff out of hooks?)
-- [ ] Hacks and encumbrance to statuses (no HUD)
+- [x] Hacks and encumbrance to statuses (no HUD)
     - [x] Ability buttons
+    - I decided the current implementation is good enough lol
 - [x] Better roll chat message button handling
 - [x] Ability usage modularization
-- [ ] Take basic abilities off of each individual actors to speed up sorting and make for smaller database?
+- [ ] ~~Take basic abilities off of each individual actors to speed up sorting and make for smaller database?~~
+  - Speed improvements were found elsewhere. Basic abilities shouldn't matter _too_ much?
 - [x] Better compendium building automation
 - [x] More wiki links in documentation
 - [x] Just some general sprucing around (as always)
