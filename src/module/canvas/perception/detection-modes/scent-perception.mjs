@@ -1,12 +1,12 @@
 const { OutlineOverlayFilter } = foundry.canvas.rendering.filters;
 const { Token } = foundry.canvas.placeables;
-import TeriockDetectionMode from "./teriock-detection-mode.mjs";
+import BaseDetectionMode from "./base-detection-mode.mjs";
 
 /**
  * Relevant wiki pages:
  * - [Scent Seeing](https://wiki.teriock.com/index.php/Ability:Scent_Seeing)
  */
-export default class DetectionModeScentPerception extends TeriockDetectionMode {
+export default class DetectionModeScentPerception extends BaseDetectionMode {
   static BLOCKING_SRC_STATUS_EFFECTS = [
     "down",
     "frozen",

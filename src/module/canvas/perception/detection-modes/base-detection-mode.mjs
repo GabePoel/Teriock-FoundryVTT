@@ -1,7 +1,7 @@
 const { DetectionMode } = foundry.canvas.perception;
 const { Token } = foundry.canvas.placeables;
 
-export default class TeriockDetectionMode extends DetectionMode {
+export default class BaseDetectionMode extends DetectionMode {
   static BLOCKING_SRC_STATUS_EFFECTS = [
     "blind",
     "down",

@@ -2,11 +2,10 @@ const { Token } = foundry.canvas.placeables;
 import BaseDetectionMode from "./base-detection-mode.mjs";
 
 /**
- * Relevant wiki pages:
- * - [See Invisible](https://wiki.teriock.com/index.php/Ability:See_Invisible)
+ * Material creatures seeing Material creatures in the dark.
  */
-export default class DetectionModeInvisiblePerception extends BaseDetectionMode {
-  static BLOCKING_TGT_STATUS_EFFECTS = ["hidden"];
+export default class DetectionModeDarkVision extends BaseDetectionMode {
+  static BLOCKING_SRC_STATUS_EFFECTS = ["blind"];
 
   /** @inheritDoc */
   _canDetect(visionSource, target) {
@@ -17,12 +16,11 @@ export default class DetectionModeInvisiblePerception extends BaseDetectionMode 
     if (target instanceof Token) {
       const tgt = target.document;
       if (
-        !src.hasStatusEffect("ethereal") &&
-        tgt.hasStatusEffect("invisible")
+        !(!src.hasStatusEffect("ethereal") && !tgt.hasStatusEffect("ethereal"))
       ) {
-        return true;
+        return false;
       }
     }
-    return false;
+    return true;
   }
 }

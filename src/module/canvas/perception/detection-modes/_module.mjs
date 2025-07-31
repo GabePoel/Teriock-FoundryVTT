@@ -1,4 +1,5 @@
 export { default as BlindFightingPerception } from "./blind-fighting-perception.mjs";
+export { default as DarkVisionPerception } from "./dark-vision-perception.mjs";
 export { default as EtherealEtherealPerception } from "./ethereal-ethereal-perception.mjs";
 export { default as EtherealMaterialPerception } from "./ethereal-material-perception.mjs";
 export { default as InvisiblePerception } from "./invisible-perception.mjs";

@@ -1,131 +1,99 @@
 import * as detection from "./detection-modes/_module.mjs";
-import TeriockDetectionMode from "./detection-modes/teriock-detection-mode.mjs";
+import BaseDetectionMode from "./detection-modes/base-detection-mode.mjs";
 import * as vision from "./vision-modes/_module.mjs";
 
 /**
  * Detection modes
  *
- * @type {Record<string, TeriockDetectionMode>}
+ * @type {Record<string, BaseDetectionMode>}
  */
 export const detectionModes = {
-  /**
-   * Light perception detection mode.
-   * @type {DetectionModeLightPerception}
-   */
+  /** Light perception detection mode */
   lightPerception: new detection.LightPerception({
     id: "lightPerception",
     label: "Light Perception",
-    type: TeriockDetectionMode.DETECTION_TYPES.SIGHT,
+    type: BaseDetectionMode.DETECTION_TYPES.SIGHT,
   }),
-  /**
-   * True sight detection mode.
-   * @type {DetectionModeTrueSightPerception}
-   */
+  /** True sight detection mode */
   trueSight: new detection.TrueSightPerception({
     id: "trueSight",
     label: "True Sight",
-    type: TeriockDetectionMode.DETECTION_TYPES.SIGHT,
+    type: BaseDetectionMode.DETECTION_TYPES.SIGHT,
   }),
-  /**
-   * Invisible perception detection mode.
-   * @type {DetectionModeInvisiblePerception}
-   */
+  /** Invisible perception detection mode */
   seeInvisible: new detection.InvisiblePerception({
     id: "seeInvisible",
     label: "See Invisible",
-    type: TeriockDetectionMode.DETECTION_TYPES.SIGHT,
+    type: BaseDetectionMode.DETECTION_TYPES.SIGHT,
   }),
-  /**
-   * Scent perception detection mode.
-   * @type {DetectionModeScentPerception}
-   */
+  /** Scent perception detection mode */
   scentPerception: new detection.ScentPerception({
     id: "scentPerception",
     label: "Scent Perception",
-    type: TeriockDetectionMode.DETECTION_TYPES.OTHER,
+    type: BaseDetectionMode.DETECTION_TYPES.OTHER,
   }),
-  /**
-   * Sound perception detection mode.
-   * @type {DetectionModeSoundPerception}
-   */
+  /** Sound perception detection mode */
   soundPerception: new detection.SoundPerception({
     id: "soundPerception",
     label: "Sound Perception",
-    type: TeriockDetectionMode.DETECTION_TYPES.SOUND,
+    type: BaseDetectionMode.DETECTION_TYPES.SOUND,
   }),
-  /**
-   * Blind fighting detection mode.
-   * @type {DetectionModeBlindFighting}
-   */
+  /** Blind fighting detection mode */
   blindFighting: new detection.BlindFightingPerception({
     id: "blindFighting",
     label: "Blind Fighting",
-    type: TeriockDetectionMode.DETECTION_TYPES.MOVE,
+    type: BaseDetectionMode.DETECTION_TYPES.MOVE,
   }),
-  /**
-   * In Material, seeing Material detection mode.
-   * @type {DetectionModeMaterialMaterial}
-   */
+  /** In Material, seeing Material detection mode */
   materialMaterial: new detection.MaterialMaterialPerception({
     id: "materialMaterial",
     label: "In Material, See Material",
-    type: TeriockDetectionMode.DETECTION_TYPES.SIGHT,
+    type: BaseDetectionMode.DETECTION_TYPES.SIGHT,
   }),
-  /**
-   * In Material, seeing Ethereal detection mode.
-   * @type {DetectionModeMaterialEthereal}
-   */
+  /** In Material, seeing Ethereal detection mode */
   materialEthereal: new detection.MaterialEtherealPerception({
     id: "materialEthereal",
     label: "In Material, See Ethereal",
-    type: TeriockDetectionMode.DETECTION_TYPES.SIGHT,
+    type: BaseDetectionMode.DETECTION_TYPES.SIGHT,
   }),
-  /**
-   * In Ethereal, seeing Material detection mode.
-   * @type {DetectionModeEtherealMaterial}
-   */
+  /** In Ethereal, seeing Material detection mode */
   etherealMaterial: new detection.EtherealMaterialPerception({
     id: "etherealMaterial",
     label: "In Ethereal, See Material",
-    type: TeriockDetectionMode.DETECTION_TYPES.SIGHT,
+    type: BaseDetectionMode.DETECTION_TYPES.SIGHT,
   }),
-  /**
-   * In Ethereal, seeing Ethereal detection mode.
-   * @type {DetectionModeEtherealEthereal}
-   */
+  /** In Ethereal, seeing Ethereal detection mode */
   etherealEthereal: new detection.EtherealEtherealPerception({
     id: "etherealEthereal",
     label: "In Ethereal, See Ethereal",
-    type: TeriockDetectionMode.DETECTION_TYPES.SIGHT,
+    type: BaseDetectionMode.DETECTION_TYPES.SIGHT,
   }),
-  /**
-   * Dark vision detection mode.
-   * @type{DetectionModeMaterialMaterial}
-   */
-  darkVision: new detection.MaterialMaterialPerception({
+  /** Dark vision detection mode */
+  darkVision: new detection.DarkVisionPerception({
     id: "darkVision",
     label: "Dark Vision",
-    type: TeriockDetectionMode.DETECTION_TYPES.SIGHT,
+    type: BaseDetectionMode.DETECTION_TYPES.SIGHT,
   }),
-  /**
-   * Night vision detection mode.
-   * @type{DetectionModeMaterialMaterial}
-   */
-  nightVision: new detection.MaterialMaterialPerception({
+  /** Night vision detection mode */
+  nightVision: new detection.DarkVisionPerception({
     id: "nightVision",
     label: "Night Vision",
-    type: TeriockDetectionMode.DETECTION_TYPES.SIGHT,
+    type: BaseDetectionMode.DETECTION_TYPES.SIGHT,
   }),
 };
 
 /**
  * Vision modes
  *
- * @type {Record<string, VisionMode>}
+ * @type {Record<string, TeriockVisionMode>}
  */
 export const visionModes = {
+  /** Dead vision mode */
   dead: vision.deadVisionMode(),
+  /** Down vision mode */
   down: vision.downVisionMode(),
+  /** Ethereal vision mode */
   ethereal: vision.etherealVisionMode(),
+  /** Invisible-Ethereal vision mode */
   invisibleEthereal: vision.invisibleEtherealVisionMode(),
 };

@@ -1,11 +1,11 @@
 const { OutlineOverlayFilter } = foundry.canvas.rendering.filters;
-import TeriockDetectionMode from "./teriock-detection-mode.mjs";
+import BaseDetectionMode from "./base-detection-mode.mjs";
 
 /**
  * Relevant wiki pages:
  * - [Blind Fighting](https://wiki.teriock.com/index.php/Ability:Blind_Fighting)
  */
-export default class DetectionModeBlindFighting extends TeriockDetectionMode {
+export default class DetectionModeBlindFighting extends BaseDetectionMode {
   static BLOCKING_SRC_STATUS_EFFECTS = [
     "down",
     "frozen",

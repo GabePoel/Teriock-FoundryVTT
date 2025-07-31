@@ -1,5 +1,5 @@
 const { Token } = foundry.canvas.placeables;
-import TeriockDetectionMode from "./teriock-detection-mode.mjs";
+import BaseDetectionMode from "./base-detection-mode.mjs";
 
 /**
  * Ethereal creatures seeing Ethereal creatures.
@@ -7,7 +7,7 @@ import TeriockDetectionMode from "./teriock-detection-mode.mjs";
  * Relevant wiki pages:
  * - [Ethereal](https://wiki.teriock.com/index.php/Condition:Ethereal)
  */
-export default class DetectionModeEtherealEthereal extends TeriockDetectionMode {
+export default class DetectionModeEtherealEthereal extends BaseDetectionMode {
   /** @inheritDoc */
   _canDetect(visionSource, target) {
     if (!super._canDetect(visionSource, target)) {

@@ -1,8 +1,9 @@
-const { VisionMode } = foundry.canvas.perception;
 const { shaders } = foundry.canvas.rendering;
+import TeriockVisionMode from "./base-vision-mode.mjs";
 
 /**
- * Everything goes black. If a creature is both Ethereal and invisible, they are detached from the world in a way that seems to call forth morganti beings.
+ * Everything goes black. If a creature is both Ethereal and invisible, they are detached from the world in a way that
+ * seems to call forth morganti beings.
  *
  *
  * Relevant wiki pages:
@@ -13,7 +14,7 @@ const { shaders } = foundry.canvas.rendering;
  * @returns {VisionMode}
  */
 export default function invisibleEtherealVisionMode() {
-  return new VisionMode(
+  return new TeriockVisionMode(
     {
       id: "invisibleEthereal",
       label: "Invisible Ethereal",
@@ -27,10 +28,18 @@ export default function invisibleEtherealVisionMode() {
         },
       },
       lighting: {
-        background: { visibility: VisionMode.LIGHTING_VISIBILITY.DISABLED },
-        illumination: { visibility: VisionMode.LIGHTING_VISIBILITY.DISABLED },
-        coloration: { visibility: VisionMode.LIGHTING_VISIBILITY.DISABLED },
-        darkness: { visibility: VisionMode.LIGHTING_VISIBILITY.DISABLED },
+        background: {
+          visibility: TeriockVisionMode.LIGHTING_VISIBILITY.DISABLED,
+        },
+        illumination: {
+          visibility: TeriockVisionMode.LIGHTING_VISIBILITY.DISABLED,
+        },
+        coloration: {
+          visibility: TeriockVisionMode.LIGHTING_VISIBILITY.DISABLED,
+        },
+        darkness: {
+          visibility: TeriockVisionMode.LIGHTING_VISIBILITY.DISABLED,
+        },
       },
       vision: {
         darkness: { adaptive: false },

@@ -1,28 +1,10 @@
-const { Token } = foundry.canvas.placeables;
-import TeriockDetectionMode from "./teriock-detection-mode.mjs";
+import DetectionModeDarkVision from "./dark-vision-perception.mjs";
 
 /**
  * Material creatures seeing Material creatures.
  */
-export default class DetectionModeMaterialMaterial extends TeriockDetectionMode {
+export default class DetectionModeMaterialMaterial extends DetectionModeDarkVision {
   static BLOCKING_SRC_STATUS_EFFECTS = ["blind"];
-
-  /** @inheritDoc */
-  _canDetect(visionSource, target) {
-    if (!super._canDetect(visionSource, target)) {
-      return false;
-    }
-    const src = visionSource.object.document;
-    if (target instanceof Token) {
-      const tgt = target.document;
-      if (
-        !(!src.hasStatusEffect("ethereal") && !tgt.hasStatusEffect("ethereal"))
-      ) {
-        return false;
-      }
-    }
-    return true;
-  }
 
   /** @inheritDoc */
   _testPoint(visionSource, mode, target, test) {

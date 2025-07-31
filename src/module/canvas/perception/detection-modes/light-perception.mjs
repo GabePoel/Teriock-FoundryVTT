@@ -1,5 +1,5 @@
-const { DetectionMode } = foundry.canvas.perception;
 const { Token } = foundry.canvas.placeables;
+import BaseDetectionMode from "./base-detection-mode.mjs";
 
 /**
  * This exists to override the default light perception mode. This handles non-token detection (doors, etc.), but token
@@ -9,7 +9,7 @@ const { Token } = foundry.canvas.placeables;
  * Relevant wiki pages:
  * - [Ethereal](https://wiki.teriock.com/index.php/Condition:Ethereal)
  */
-export default class DetectionModeLightPerception extends DetectionMode {
+export default class DetectionModeLightPerception extends BaseDetectionMode {
   /**
    * @inheritDoc
    * @param {PointVisionSource} visionSource
