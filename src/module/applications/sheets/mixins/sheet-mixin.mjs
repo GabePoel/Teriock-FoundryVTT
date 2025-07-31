@@ -20,7 +20,6 @@ export default (Base) => {
      * Default options for Teriock sheets.
      *
      * @type {object}
-     * @static
      */
     static DEFAULT_OPTIONS = {
       classes: ["teriock", "ability"],
@@ -84,7 +83,6 @@ export default (Base) => {
      * @param {MouseEvent} _event - The event object.
      * @param {HTMLElement} _target - The target element.
      * @returns {Promise<void>} Promise that resolves when debug is complete.
-     * @static
      */
     static async _debug(_event, _target) {
       console.log("Debug", this.document, this);
@@ -96,7 +94,6 @@ export default (Base) => {
      * @param {MouseEvent} _event - The event object.
      * @param {HTMLElement} _target - The target element.
      * @returns {Promise<void>} Promise that resolves when wiki pull is complete.
-     * @static
      */
     static async _wikiPullThis(_event, _target) {
       if (this.editable) this.document.system.wikiPull();
@@ -108,7 +105,6 @@ export default (Base) => {
      * @param {MouseEvent} _event - The event object.
      * @param {HTMLElement} _target - The target element.
      * @returns {Promise<void>} Promise that resolves when wiki page is opened.
-     * @static
      */
     static async _wikiOpenThis(_event, _target) {
       this.document.system.wikiOpen();
@@ -120,7 +116,6 @@ export default (Base) => {
      * @param {MouseEvent} _event - The event object.
      * @param {HTMLElement} _target - The target element.
      * @returns {Promise<void>} Promise that resolves when chat is sent.
-     * @static
      */
     static async _chatThis(_event, _target) {
       this.document.chat();
@@ -132,7 +127,6 @@ export default (Base) => {
      * @param {MouseEvent} _event - The event object.
      * @param {HTMLElement} _target - The target element.
      * @returns {Promise<void>} Promise that resolves when reload is complete.
-     * @static
      */
     static async _reloadThis(_event, _target) {
       await this.document.update({});
@@ -145,7 +139,6 @@ export default (Base) => {
      * @param {MouseEvent} _event - The event object.
      * @param {HTMLElement} _target - The target element.
      * @returns {Promise<void>} Promise that resolves when lock is toggled.
-     * @static
      */
     static async _toggleLockThis(_event, _target) {
       this._locked = !this._locked;
@@ -159,7 +152,6 @@ export default (Base) => {
      * @param {MouseEvent} event - The event object.
      * @param {HTMLElement} _target - The target element.
      * @returns {Promise<void>} Promise that resolves when roll is complete.
-     * @static
      */
     static async _rollThis(event, _target) {
       const options = event?.altKey
@@ -176,7 +168,6 @@ export default (Base) => {
      * @param {MouseEvent} _event - The event object.
      * @param {HTMLElement} target - The target element.
      * @returns {Promise<FilePicker>} Promise that resolves when image picker is opened.
-     * @static
      */
     static async _editImage(_event, target) {
       const attr = target.dataset.edit;
@@ -206,7 +197,6 @@ export default (Base) => {
      * @param {MouseEvent} _event - The event object.
      * @param {HTMLElement} target - The target element.
      * @returns {Promise<void>} Promise that resolves when sheet is opened.
-     * @static
      */
     static async _openDoc(_event, target) {
       const embedded = await this._embeddedFromCard(target);
@@ -219,7 +209,6 @@ export default (Base) => {
      * @param {MouseEvent} _event - The event object.
      * @param {HTMLElement} target - The target element.
      * @returns {Promise<void>} Promise that resolves when chat is sent.
-     * @static
      */
     static async _chatDoc(_event, target) {
       const embedded = await this._embeddedFromCard(target);
@@ -232,7 +221,6 @@ export default (Base) => {
      * @param {MouseEvent} _event - The event object.
      * @param {HTMLElement} target - The target element.
      * @returns {Promise<void>} Promise that resolves when use is complete.
-     * @static
      */
     static async _useOneDoc(_event, target) {
       const embedded = await this._embeddedFromCard(target);
@@ -245,7 +233,6 @@ export default (Base) => {
      * @param {MouseEvent} _event - The event object.
      * @param {HTMLElement} target - The target element.
      * @returns {Promise<void>} Promise that resolves when toggle is complete.
-     * @static
      */
     static async _toggleDisabledDoc(_event, target) {
       const embedded = await this._embeddedFromCard(target);
@@ -258,7 +245,6 @@ export default (Base) => {
      * @param {MouseEvent} event - The event object.
      * @param {HTMLElement} target - The target element.
      * @returns {Promise<void>} Promise that resolves when roll is complete.
-     * @static
      */
     static async _rollDoc(event, target) {
       const options = event?.altKey
@@ -284,7 +270,6 @@ export default (Base) => {
      * @param {MouseEvent} _event - The event object.
      * @param {HTMLElement} target - The target element.
      * @returns {Promise<void>} Promise that resolves when toggle is complete.
-     * @static
      */
     static async _quickToggle(_event, target) {
       const { path } = target.dataset;
@@ -298,7 +283,6 @@ export default (Base) => {
      * @param {MouseEvent} _event - The event object.
      * @param {HTMLElement} target - The target element.
      * @returns {Promise<void>} Promise that resolves when toggle is complete.
-     * @static
      */
     static async _sheetToggle(_event, target) {
       const { path } = target.dataset;
@@ -313,7 +297,6 @@ export default (Base) => {
      * @param {MouseEvent} _event - The event object.
      * @param {HTMLElement} _target - The target element.
      * @returns {Promise<ActiveEffect>} Promise that resolves to the created ability.
-     * @static
      */
     static async _createAbility(_event, _target) {
       // const abilityKey = await selectAbilityDialog();
@@ -335,7 +318,6 @@ export default (Base) => {
      * @param {MouseEvent} _event - The event object.
      * @param {HTMLElement} _target - The target element.
      * @returns {Promise<ActiveEffect>} Promise that resolves to the created resource.
-     * @static
      */
     static async _createResource(_event, _target) {
       return await createEffects.createResource(this.document);
@@ -347,7 +329,6 @@ export default (Base) => {
      * @param {MouseEvent} _event - The event object.
      * @param {HTMLElement} _target - The target element.
      * @returns {Promise<ActiveEffect>} Promise that resolves to the created fluency.
-     * @static
      */
     static async _createFluency(_event, _target) {
       return await createEffects.createFluency(this.document);
@@ -360,7 +341,6 @@ export default (Base) => {
      * @param {MouseEvent} _event - The event object.
      * @param {HTMLElement} _target - The target element.
      * @returns {Promise<ActiveEffect>} Promise that resolves to the created property.
-     * @static
      */
     static async _createProperty(_event, _target) {
       let property = await selectPropertyDialog();
@@ -425,8 +405,6 @@ export default (Base) => {
     /**
      * Sets up all event listeners for the sheet.
      * Configures handlers for form updates, record fields, set fields, array fields, and changes.
-     *
-     * @private
      */
     _setupEventListeners() {
       // Sheet select handler
@@ -449,8 +427,6 @@ export default (Base) => {
     /**
      * Sets up update handlers for various input types.
      * Configures change and click handlers for update inputs, selects, and checkboxes.
-     *
-     * @private
      */
     _setupUpdateHandlers() {
       const handlers = [
@@ -485,8 +461,6 @@ export default (Base) => {
     /**
      * Sets up handlers for record field components.
      * Configures multi-select inputs and remove buttons for record fields.
-     *
-     * @private
      */
     _setupRecordFieldHandlers() {
       this.element
@@ -521,7 +495,6 @@ export default (Base) => {
     /**
      * Sets up handlers for set field components.
      * Configures multi-select inputs and remove buttons for set fields.
-     * @private
      */
     _setupSetFieldHandlers() {
       this.element
@@ -562,7 +535,6 @@ export default (Base) => {
     /**
      * Sets up handlers for array field components.
      * Configures add buttons for array fields.
-     * @private
      */
     _setupArrayFieldHandlers() {
       this.element
@@ -581,7 +553,6 @@ export default (Base) => {
     /**
      * Sets up handlers for change field components.
      * Configures change inputs and remove buttons for change arrays.
-     * @private
      */
     _setupChangeHandlers() {
       // Change inputs
@@ -620,6 +591,7 @@ export default (Base) => {
     /**
      * Prepares the context data for template rendering.
      * Provides common data including config, editable state, document info, and settings.
+     *
      * @returns {Promise<object>} Promise that resolves to the context object.
      * @override
      */
@@ -644,6 +616,7 @@ export default (Base) => {
 
     /**
      * Enriches HTML content for display.
+     *
      * @param {string} parameter - The HTML content to enrich.
      * @returns {Promise<string|undefined>} Promise that resolves to the enriched HTML or undefined.
      */
@@ -656,7 +629,6 @@ export default (Base) => {
     /**
      * Activates the sheet menu functionality.
      * Sets up menu toggle behavior and initial state.
-     * @private
      */
     _activateMenu() {
       const menu = this.element.querySelector(".ab-menu");
@@ -678,6 +650,7 @@ export default (Base) => {
 
     /**
      * Connects event handlers to elements matching a selector.
+     *
      * @param {string} selector - The CSS selector for elements to connect.
      * @param {string} eventType - The event type to listen for.
      * @param {Function} handler - The event handler function.
@@ -694,6 +667,7 @@ export default (Base) => {
 
     /**
      * Connects input elements with automatic updates.
+     *
      * @param {HTMLElement} element - The input element to connect.
      * @param {string} attribute - The attribute path to update.
      * @param {Function} transformer - Function to transform the input value.
@@ -713,6 +687,7 @@ export default (Base) => {
 
     /**
      * Connects button elements to document updates.
+     *
      * @param {object} map - Object mapping selectors to attribute paths.
      */
     _connectButtonMap(map) {
@@ -730,6 +705,7 @@ export default (Base) => {
 
     /**
      * Creates a context menu for elements.
+     *
      * @param {string} cssClass - The CSS class for elements to attach the menu to.
      * @param {object[]} menuItems - The context menu items.
      * @param {string} eventName - The event name to trigger the menu.
@@ -750,6 +726,7 @@ export default (Base) => {
 
     /**
      * Extracts an embedded document from a card element.
+     *
      * @param {HTMLElement} target - The target element to extract from.
      * @returns {Promise<ClientDocument|null>} The embedded document or null if not found.
      */
@@ -804,6 +781,7 @@ export default (Base) => {
 
     /**
      * Handles drag start events for embedded documents.
+     *
      * @param {DragEvent} event - The drag start event.
      * @private
      */
@@ -817,6 +795,7 @@ export default (Base) => {
 
     /**
      * Handles drag over events.
+     *
      * @param {DragEvent} _event - The drag over event.
      * @private
      */
@@ -826,6 +805,7 @@ export default (Base) => {
 
     /**
      * Handles drop events for documents.
+     *
      * @param {DragEvent} event - The drop event.
      * @returns {Promise<boolean>} Promise that resolves to true if drop was handled.
      * @private
@@ -844,6 +824,7 @@ export default (Base) => {
 
     /**
      * Handles dropping of active effects.
+     *
      * @param {DragEvent} _event - The drop event.
      * @param {object} data - The effect data.
      * @returns {Promise<boolean>} Promise that resolves to true if drop was successful.
@@ -875,6 +856,7 @@ export default (Base) => {
 
     /**
      * Checks if an effect can be dropped on this document.
+     *
      * @param {TeriockEffect} effect - The effect to check.
      * @returns {boolean} True if the effect can be dropped.
      * @private
@@ -893,6 +875,7 @@ export default (Base) => {
 
     /**
      * Handles dropping of items.
+     *
      * @param {DragEvent} _event - The drop event.
      * @param {object} data - The item data.
      * @returns {Promise<TeriockItem|boolean>} Promise that resolves to true if drop was successful.
@@ -935,6 +918,7 @@ export default (Base) => {
 
     /**
      * Checks if an item can be dropped on this document.
+     *
      * @param {TeriockItem} item - The item to check.
      * @returns {boolean} True if the item can be dropped.
      * @private
@@ -960,6 +944,7 @@ export default (Base) => {
 
     /**
      * Checks if drag start is allowed.
+     *
      * @returns {boolean} True if drag start is allowed.
      */
     _canDragStart() {
@@ -968,6 +953,7 @@ export default (Base) => {
 
     /**
      * Checks if drag drop is allowed.
+     *
      * @returns {boolean} True if drag drop is allowed.
      */
     _canDragDrop() {
@@ -978,6 +964,7 @@ export default (Base) => {
 
     /**
      * Creates drag and drop handlers for the sheet.
+     *
      * @returns {DragDrop[]} Array of configured drag and drop handlers.
      * @private
      */
@@ -998,6 +985,7 @@ export default (Base) => {
 
     /**
      * Adds a key to a record field with validation.
+     *
      * @param {string} name - The field name.
      * @param {string} key - The key to add.
      * @param {Array} allowedKeys - Array of allowed keys.
@@ -1022,6 +1010,7 @@ export default (Base) => {
 
     /**
      * Cleans a record field by removing invalid keys.
+     *
      * @param {string} name - The field name.
      * @param {Array} allowedKeys - Array of allowed keys to keep.
      * @returns {Promise<void>} Promise that resolves when the field is cleaned.
@@ -1043,6 +1032,7 @@ export default (Base) => {
 
     /**
      * Adds an item to an array field.
+     *
      * @param {string} name - The field name.
      * @param {string} fieldPath - The path to the field schema.
      * @returns {Promise<void>} Promise that resolves when the item is added.
@@ -1066,6 +1056,7 @@ export default (Base) => {
 
     /**
      * Updates a set field with new values.
+     *
      * @param {string} name - The field name.
      * @param {Array} values - Array of values for the set.
      * @returns {Promise<void>} Promise that resolves when the set is updated.
