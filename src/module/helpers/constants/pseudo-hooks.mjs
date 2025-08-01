@@ -24,6 +24,17 @@ export const unsortedPseudoHooks = {
   rollResistance: "Rolling a Resistance Save",
   rollTradecraft: "Rolling a Tradecraft Check",
   useAbility: "Using an Ability",
+  equipmentAttune: "Equipment Attunement",
+  equipmentDeattune: "Equipment Deattunement",
+  equipmentIdentify: "Equipment Identification",
+  equipmentReadMagic: "Equipment Reading Magic",
+  equipmentUnidentify: "Equipment Unidentification",
+  equipmentShatter: "Equipment Shattering",
+  equipmentRepair: "Equipment Repairing",
+  equipmentDampen: "Equipment Dampening",
+  equipmentUndampen: "Equipment Undampening",
+  equipmentGlue: "Equipment Gluing",
+  equipmentUnglue: "Equipment Ungluing",
 };
 
 export const pseudoHooks = Object.fromEntries(

@@ -17,6 +17,7 @@ export default function connectEmbedded(document, element, editable = true) {
   element.querySelectorAll(".tcard").forEach((el) => {
     const id = el.getAttribute("data-id");
     const parentId = el.getAttribute("data-parent-id");
+    /** @type {TeriockItem|TeriockEffect} */
     const embedded =
       document.items?.get(id) ||
       document.effects?.get(id) ||
@@ -97,9 +98,7 @@ export default function connectEmbedded(document, element, editable = true) {
             name: "Glue",
             icon: makeIcon("link", iconStyle),
             callback: async () => {
-              await embedded.update({
-                "system.glued": !embedded.system.glued,
-              });
+              await embedded.system.glue();
             },
             condition: () => {
               return embedded.type === "equipment" && !embedded.system.glued;
@@ -109,9 +108,7 @@ export default function connectEmbedded(document, element, editable = true) {
             name: "Unglue",
             icon: makeIcon("link-slash", iconStyle),
             callback: async () => {
-              await embedded.update({
-                "system.glued": !embedded.system.glued,
-              });
+              await embedded.system.unglue();
             },
             condition: () => {
               return embedded.type === "equipment" && embedded.system.glued;
@@ -121,7 +118,7 @@ export default function connectEmbedded(document, element, editable = true) {
             name: "Shatter",
             icon: makeIcon("wine-glass-crack", iconStyle),
             callback: async () => {
-              await embedded.update({ "system.shattered": true });
+              await embedded.system.shatter();
             },
             condition: () => {
               return (
@@ -133,7 +130,7 @@ export default function connectEmbedded(document, element, editable = true) {
             name: "Repair",
             icon: makeIcon("wine-glass", iconStyle),
             callback: async () => {
-              await embedded.update({ "system.shattered": false });
+              await embedded.system.repair();
             },
             condition: () => {
               return embedded.type === "equipment" && embedded.system.shattered;
@@ -143,7 +140,7 @@ export default function connectEmbedded(document, element, editable = true) {
             name: "Dampen",
             icon: makeIcon("bell-slash", iconStyle),
             callback: async () => {
-              await embedded.update({ "system.dampened": true });
+              await embedded.system.dampen();
             },
             condition: () => {
               return embedded.type === "equipment" && !embedded.system.dampened;
@@ -153,7 +150,7 @@ export default function connectEmbedded(document, element, editable = true) {
             name: "Undampen",
             icon: makeIcon("bell", iconStyle),
             callback: async () => {
-              await embedded.update({ "system.dampened": false });
+              await embedded.system.undampen();
             },
             condition: () => {
               return embedded.type === "equipment" && embedded.system.dampened;
@@ -163,10 +160,10 @@ export default function connectEmbedded(document, element, editable = true) {
           {
             name: "Open Source",
             icon: makeIcon("arrow-up-right-from-square", iconStyle),
-            callback: () => {
+            callback: async () => {
               const source = embedded.source;
               if (source) {
-                source.sheet.render(true);
+                await source.sheet.render(true);
               }
             },
             condition: () => {
@@ -198,7 +195,6 @@ export default function connectEmbedded(document, element, editable = true) {
             name: "Delete",
             icon: makeIcon("trash", iconStyle),
             callback: async () => {
-              /** @type {TeriockActor|TeriockItem} */
               const parent = embedded.parent;
               await parent.deleteEmbeddedDocuments(embedded.documentName, [
                 embedded.id,

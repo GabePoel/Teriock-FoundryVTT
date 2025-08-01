@@ -164,8 +164,6 @@ export async function _takeKill(actorData, amount) {
       statuses: [
         "dead",
         "down",
-        "blind",
-        "unconscious",
         "prone",
         "anosmatic",
         "mute",

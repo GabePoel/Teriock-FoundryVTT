@@ -115,9 +115,9 @@ export default class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(
   static async _changeMacroRunHook(_event, target) {
     const uuid = target.dataset.parentId;
     const pseudoHook = await selectDialog(pseudoHooks, {
-      label: "Pseudo-hook",
-      hint: "Please select a pseudo-hook that triggers this macro to run.",
-      title: "Select Pseudo-hook",
+      label: "Event",
+      hint: "Please select an event that triggers this macro to run.",
+      title: "Select Event",
       initial: this.document.system.applies.macros[safeUuid(uuid)],
     });
     const updateData = {};

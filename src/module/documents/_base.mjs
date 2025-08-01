@@ -20,6 +20,7 @@ import ParentDocumentMixin from "./mixins/parent-mixin.mjs";
  * This class is a hack to get {@link Actor} intellisense without warnings for unimplemented methods.
  *
  * @extends {Actor}
+ * @extends {ClientDocument}
  * @mixes ParentDocumentMixin
  * @implements {ActorData}
  * @implements {ParentDocumentMixinInterface}
@@ -33,6 +34,7 @@ import ParentDocumentMixin from "./mixins/parent-mixin.mjs";
  * @property {TeriockBaseActorData} system
  * @property {Teriock.ActorType} type
  * @property {"Actor"} documentName
+ @property {boolean} isOwner
  */
 export class BaseTeriockActor extends ParentDocumentMixin(Actor) {}
 
@@ -40,6 +42,7 @@ export class BaseTeriockActor extends ParentDocumentMixin(Actor) {}
  * This class is a hack to get {@link Item} intellisense without warnings for unimplemented methods.
  *
  * @extends {Item}
+ * @extends {ClientDocument}
  * @mixes ChildDocumentMixin
  * @mixes ParentDocumentMixin
  * @implements {ItemData}
@@ -51,6 +54,7 @@ export class BaseTeriockActor extends ParentDocumentMixin(Actor) {}
  * @property {TeriockBaseItemData} system
  * @property {Teriock.ItemType} type
  * @property {"Item"} documentName
+ @property {boolean} isOwner
  */
 export class BaseTeriockItem extends ParentDocumentMixin(
   ChildDocumentMixin(Item),
@@ -60,11 +64,13 @@ export class BaseTeriockItem extends ParentDocumentMixin(
  * This class is a hack to get {@link ActiveEffect} intellisense without warnings for unimplemented methods.
  *
  * @extends {ActiveEffect}
+ * @extends {ClientDocument}
  * @mixes ChildDocumentMixin
  * @implements {ActiveEffectData}
  * @property {TeriockBaseEffectData} system
  * @property {Teriock.EffectType} type
  * @property {"ActiveEffect"} documentName
+ * @property {boolean} isOwner
  */
 export class BaseTeriockEffect extends ChildDocumentMixin(ActiveEffect) {}
 
@@ -72,10 +78,12 @@ export class BaseTeriockEffect extends ChildDocumentMixin(ActiveEffect) {}
  * This class is a hack to get {@link TokenDocument} intellisense without warnings for unimplemented methods.
  *
  * @extends {TokenDocument}
+ * @extends {ClientDocument}
  * @implements {TokenData}
  * @property {Token} token
  * @property {TeriockActor} actor
  * @property {"TokenDocument"} documentName
+ * @property {boolean} isOwner
  */
 export class BaseTeriockToken extends TokenDocument {}
 
@@ -83,8 +91,10 @@ export class BaseTeriockToken extends TokenDocument {}
  * This class is a hack to get {@link Macro} intellisense without warnings for unimplemented methods.
  *
  * @extends {Macro}
+ * @extends {ClientDocument}
  * @implements {MacroData}
  * @property {"Macro"} documentName
+ * @property {boolean} isOwner
  */
 export class BaseTeriockMacro extends Macro {}
 
