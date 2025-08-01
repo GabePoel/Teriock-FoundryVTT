@@ -3,6 +3,7 @@ const { DialogV2 } = foundry.applications.api;
 import { abilities } from "../../helpers/constants/generated/abilities.mjs";
 import { conditions } from "../../helpers/constants/generated/conditions.mjs";
 import { equipmentclasses } from "../../helpers/constants/generated/equipment-classes.mjs";
+import { equipment } from "../../helpers/constants/generated/equipment.mjs";
 import { magicalProperties } from "../../helpers/constants/generated/magical-properties.mjs";
 import { materialProperties } from "../../helpers/constants/generated/material-properties.mjs";
 import { properties } from "../../helpers/constants/generated/properties.mjs";
@@ -177,4 +178,14 @@ export async function selectAbilityDialog() {
     other: true,
     genericOther: true,
   });
+}
+
+export async function selectEquipmentTypeDialog() {
+  return await selectDialog(equipment, {
+    label: "Equipment Type",
+    hint: "Please select an equipmentType type.",
+    title: "Select Equipment Type",
+    other: true,
+    genericOther: false,
+  })
 }

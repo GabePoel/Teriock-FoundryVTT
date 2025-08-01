@@ -38,7 +38,7 @@ import { mergeLevel } from "./utils.mjs";
  * @property {Object} currencyOptions - Currency configuration options
  * @property {Object} displayOptions - Display configuration options
  * @property {Object} documentOptions - Document configuration options
- * @property {Object} equipment - Generated equipment data
+ * @property {Object} equipmentType - Generated equipment types
  * @property {Object} equipmentOptions - Equipment configuration options
  * @property {Object} fonts - Font configuration options
  * @property {Object} icons - Icon configuration options
@@ -65,7 +65,7 @@ const TERIOCK = {
   currencyOptions: currencyOptions,
   displayOptions: displayOptions,
   documentOptions: documentOptions,
-  equipment: equipment,
+  equipmentType: equipment,
   equipmentOptions: equipmentOptions,
   fonts: fonts,
   icons: icons,

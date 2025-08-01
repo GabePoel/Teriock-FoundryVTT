@@ -67,7 +67,7 @@ for (const [folderName, properties] of Object.entries(propertyMap)) {
     );
   }
 
-  for (const [_e, eo] of Object.entries(CONFIG.TERIOCK.equipment)) {
+  for (const [_e, eo] of Object.entries(CONFIG.TERIOCK.equipmentType)) {
     let generatedName =
       properties
         .map((p) => assignedProperties.find((ap) => toCamelCase(ap) === p))
@@ -93,7 +93,7 @@ for (const [folderName, properties] of Object.entries(propertyMap)) {
 
     pct +=
       1 /
-      (Object.keys(CONFIG.TERIOCK.equipment).length *
+      (Object.keys(CONFIG.TERIOCK.equipmentType).length *
         Object.keys(propertyMap).length);
     progress.update({
       pct: pct,

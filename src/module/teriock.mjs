@@ -217,6 +217,7 @@ foundry.helpers.Hooks.once("init", function () {
         selectAbility: dialogs.selectAbilityDialog,
         selectCondition: dialogs.selectConditionDialog,
         selectEquipmentClass: dialogs.selectEquipmentClassDialog,
+        selectEquipmentType: dialogs.selectEquipmentTypeDialog,
         selectProperty: dialogs.selectPropertyDialog,
         selectTradecraft: dialogs.selectTradecraftDialog,
         selectWeaponClass: dialogs.selectWeaponClassDialog,

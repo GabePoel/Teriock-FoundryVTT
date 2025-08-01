@@ -1,4 +1,5 @@
 import { equipmentclasses } from "./generated/equipment-classes.mjs";
+import { equipment } from "./generated/equipment.mjs";
 import { magicalProperties } from "./generated/magical-properties.mjs";
 import { materialProperties } from "./generated/material-properties.mjs";
 import { properties } from "./generated/properties.mjs";
@@ -40,6 +41,7 @@ export const equipmentOptions = {
   magicalProperties: magicalProperties,
   materialProperties: materialProperties,
   weaponFightingStyles: weaponFightingStyles,
+  equipmentType: equipment,
   unidentifiedProperties: [
     "Ammunition",
     "AP",
