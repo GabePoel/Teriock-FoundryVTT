@@ -379,6 +379,7 @@ function processTags(parameters, tagTree, doc) {
     parameters.abilityType = "special";
   }
   if (tagTree.deliveryPackage?.includes("ritual")) parameters.ritual = true;
+  if (tagTree.special) parameters.abilityType = "special";
   if (tagTree.flaw) parameters.abilityType = "flaw";
 
   if (doc.querySelector(".ability-basic")) {
