@@ -51,39 +51,35 @@ export default class TeriockBaseItemSheet extends BaseItemSheet {
     const abilityTypeOrder = Object.keys(
       CONFIG.TERIOCK.abilityOptions.abilityType || {},
     );
-    const { effectTypes } = this.item.buildEffectTypes();
-    const abilities =
-      effectTypes.ability ||
-      [].sort((a, b) => {
-        const typeA = a.system?.abilityType || "";
-        const typeB = b.system?.abilityType || "";
-        const indexA = abilityTypeOrder.indexOf(typeA);
-        const indexB = abilityTypeOrder.indexOf(typeB);
-        if (indexA !== indexB) return indexA - indexB;
-        return (a.name || "").localeCompare(b.name || "");
-      });
+    this.item.buildEffectTypes();
+    const abilities = this.item.abilities.sort((a, b) => {
+      const typeA = a.system?.abilityType || "";
+      const typeB = b.system?.abilityType || "";
+      const indexA = abilityTypeOrder.indexOf(typeA);
+      const indexB = abilityTypeOrder.indexOf(typeB);
+      if (indexA !== indexB) return indexA - indexB;
+      return (a.name || "").localeCompare(b.name || "");
+    });
 
     const propertyTypeOrder = Object.keys(
       CONFIG.TERIOCK.abilityOptions.abilityType || {},
     );
-    const properties =
-      effectTypes.property ||
-      [].sort((a, b) => {
-        const typeA = a.system?.propertyType || "";
-        const typeB = b.system?.propertyType || "";
-        const indexA = propertyTypeOrder.indexOf(typeA);
-        const indexB = propertyTypeOrder.indexOf(typeB);
-        if (indexA !== indexB) return indexA - indexB;
-        return (a.name || "").localeCompare(b.name || "");
-      });
+    const properties = this.item.properties.sort((a, b) => {
+      const typeA = a.system?.propertyType || "";
+      const typeB = b.system?.propertyType || "";
+      const indexA = propertyTypeOrder.indexOf(typeA);
+      const indexB = propertyTypeOrder.indexOf(typeB);
+      if (indexA !== indexB) return indexA - indexB;
+      return (a.name || "").localeCompare(b.name || "");
+    });
 
-    const fluencies =
-      effectTypes.fluency ||
-      [].sort((a, b) => (a.name || "").localeCompare(b.name || ""));
+    const fluencies = this.item.fluencies.sort((a, b) =>
+      (a.name || "").localeCompare(b.name || ""),
+    );
 
-    const resources =
-      effectTypes.resource ||
-      [].sort((a, b) => (a.name || "").localeCompare(b.name || ""));
+    const resources = this.item.resources.sort((a, b) =>
+      (a.name || "").localeCompare(b.name || ""),
+    );
 
     const context = await super._prepareContext(options);
     context.item = this.item;

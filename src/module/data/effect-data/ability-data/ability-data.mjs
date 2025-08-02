@@ -146,7 +146,9 @@ export default class TeriockAbilityData extends WikiDataMixin(
           sustainedUuid: uuid,
         });
       }
-      await this.parent.update({ "system.sustaining": new Set() });
+      try {
+        await this.parent.update({ "system.sustaining": new Set() });
+      } catch {}
     }
   }
 

@@ -111,6 +111,7 @@ export default function registerUiHelpers() {
         showAddButton = true,
         sortOptions = {},
         sortValue = "",
+        addAction = "addEmbedded",
       } = options.hash;
       const context = options.data.root;
       const ttoggle = Handlebars.helpers.ttoggle;
@@ -187,7 +188,7 @@ export default function registerUiHelpers() {
           showAddButton
             ? `
           <button class="ttoggle-button ${tab}-add-button add-button" data-tab="${tab}"
-            data-action="addEmbedded"
+            data-action="${addAction}"
             data-tooltip="New ${tabDisplay}"
           >
             <i class="fa-fw fa-solid fa-plus"></i>

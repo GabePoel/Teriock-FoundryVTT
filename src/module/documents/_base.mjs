@@ -157,6 +157,8 @@ export class BaseTeriockCompendiumFolderCollection extends CompendiumFolderColle
  *
  * @extends {CompendiumCollection<T>}
  * @property {TeriockCompendiumFolderCollection} folders
+ * @property {Collection<string, T>} index
+ * @property {(name: string, options?: { strict?: boolean }) => T} getName
  */
 export class BaseTeriockCompendiumCollection extends CompendiumCollection {}
 

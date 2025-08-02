@@ -49,7 +49,7 @@ for (const abilityPage of allAbilityPages) {
   } else {
     abilityItem = await game.teriock.api.utils.fromUuid(abilityItem.uuid);
   }
-  let abilityEffect = abilityItem.effectTypes.ability.find(
+  let abilityEffect = abilityItem.abilities.find(
     (a) => a.name === abilityName,
   );
   console.log(abilityEffect);

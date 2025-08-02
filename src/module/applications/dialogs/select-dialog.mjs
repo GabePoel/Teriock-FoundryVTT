@@ -180,6 +180,11 @@ export async function selectAbilityDialog() {
   });
 }
 
+/**
+ * Select equipment dialog.
+ *
+ * @returns {Promise<string>}
+ */
 export async function selectEquipmentTypeDialog() {
   return await selectDialog(equipment, {
     label: "Equipment Type",
@@ -187,5 +192,18 @@ export async function selectEquipmentTypeDialog() {
     title: "Select Equipment Type",
     other: true,
     genericOther: false,
-  })
+  });
+}
+
+/**
+ * Select class dialog.
+ *
+ * @returns {Promise<string>}
+ */
+export async function selectClassDialog() {
+  return await selectDialog(CONFIG.TERIOCK.rankOptionsList, {
+    label: "Class",
+    hint: "Please select a class.",
+    title: "Select Class",
+  });
 }

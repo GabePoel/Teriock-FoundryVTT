@@ -67,6 +67,14 @@ interface ParentDocumentMixinInterface {
   /** Each {@link TeriockEffect} this contains, keyed by type. */
   effectTypes: ParentEffectTypes;
 
+  abilities: TeriockAbility[];
+  attunements: TeriockAttunement[];
+  conditions: TeriockCondition[];
+  consequences: TeriockConsequence[];
+  fluencies: TeriockFluency[];
+  properties: TeriockProperty[];
+  resources: TeriockResource[];
+
   /**
    * Gets the list of all {@link TeriockEffect} documents that apply to this document.
    * This includes those that are not currently active.

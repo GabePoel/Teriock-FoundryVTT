@@ -56,9 +56,7 @@ export default class TeriockCombat extends BaseTeriockCombat {
    */
   async _tryAllEffectExpirations(effectActor, timeActor, trigger, time) {
     const updates = [];
-    /** @type {TeriockConsequence[]} */
-    const effects = effectActor?.effectTypes?.consequence || [];
-    for (const effect of effects) {
+    for (const effect of effectActor.consequences) {
       await this._confirmEffectExpiration(
         effect,
         trigger,

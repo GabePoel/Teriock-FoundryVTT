@@ -72,6 +72,7 @@ const TERIOCK = {
   iconStyles: iconStyles,
   powerOptions: powerOptions,
   rankOptions: rankOptions,
+  rankOptionsList: mergeLevel(rankOptions, "*.classes", "name"),
   tradecraftOptions: tradecraftOptions,
   tradecraftOptionsList: mergeLevel(tradecraftOptions, "*.tradecrafts", "name"),
   tradecraftOptionsMain: {

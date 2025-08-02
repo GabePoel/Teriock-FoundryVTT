@@ -42,6 +42,36 @@ export default (BaseDocument) => {
       return [];
     }
 
+    /** @returns {TeriockAbility[]} */
+    get abilities() {
+      return this.effectTypes?.ability || [];
+    }
+
+    /** @returns {TeriockAttunement[]} */
+    get attunements() {
+      return this.effectTypes?.attunement || [];
+    }
+
+    /** @returns {TeriockCondition[]} */
+    get conditions() {
+      return this.effectTypes?.condition || [];
+    }
+
+    /** @returns {TeriockFluency[]} */
+    get fluencies() {
+      return this.effectTypes?.fluency || [];
+    }
+
+    /** @returns {TeriockProperty[]} */
+    get properties() {
+      return this.effectTypes?.property || [];
+    }
+
+    /** @returns {TeriockResource[]} */
+    get resources() {
+      return this.effectTypes?.resource || [];
+    }
+
     /**
      * Gets the list of all {@link TeriockEffect} documents that apply to this document.
      * This includes those that are not currently active.

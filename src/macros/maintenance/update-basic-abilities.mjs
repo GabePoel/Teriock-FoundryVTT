@@ -1,7 +1,6 @@
-const essentialsPack = game.teriock.packs.essentials();
-
-const basicAbilitiesItem = await game.teriock.api.utils.fromUuid(
-  essentialsPack.index.find((e) => e.name === "Basic Abilities").uuid,
+const basicAbilitiesItem = await game.teriock.api.utils.getItem(
+  "Basic Abilities",
+  "essentials",
 );
 
 const basicAbilityNames =
@@ -14,7 +13,7 @@ const progress = ui.notifications.info(`Pulling basic abilities from wiki.`, {
 let pct = 0;
 
 for (const basicAbilityName of basicAbilityNames) {
-  let basicAbility = basicAbilitiesItem.effectTypes.ability.find(
+  let basicAbility = basicAbilitiesItem.abilities.find(
     (a) => a.name === basicAbilityName,
   );
   if (!basicAbility) {
@@ -28,10 +27,10 @@ for (const basicAbilityName of basicAbilityNames) {
     pct: pct,
     message: `Pulling ${basicAbilityName} from wiki.`,
   });
-  
+
   await basicAbility.system.wikiPull({ notify: false });
 }
-const toDelete = basicAbilitiesItem.effectTypes.ability
+const toDelete = basicAbilitiesItem.abilities
   .filter((a) => !basicAbilityNames.includes(a.name))
   .map((a) => a.id);
 await basicAbilitiesItem.deleteEmbeddedDocuments("ActiveEffect", toDelete);

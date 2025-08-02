@@ -1,5 +1,6 @@
 import { characterOptions } from "../helpers/constants/character-options.mjs";
 import { rankOptions } from "../helpers/constants/rank-options.mjs";
+import { copyItem } from "../helpers/fetch.mjs";
 import { pureUuid, toCamelCase } from "../helpers/utils.mjs";
 import { BaseTeriockActor } from "./_base.mjs";
 import TeriockRoll from "./roll.mjs";
@@ -16,6 +17,21 @@ export default class TeriockActor extends BaseTeriockActor {
    */
   get validEffects() {
     return Array.from(this.allApplicableEffects());
+  }
+
+  /** @returns {TeriockEquipment[]} */
+  get equipment() {
+    return this.itemTypes?.equipment || [];
+  }
+
+  /** @returns {TeriockRank[]} */
+  get ranks() {
+    return this.itemTypes?.rank || [];
+  }
+
+  /** @returns {TeriockPower[]} */
+  get powers() {
+    return this.itemTypes?.power || [];
   }
 
   /**
@@ -88,45 +104,17 @@ export default class TeriockActor extends BaseTeriockActor {
    */
   static async _preCreateOperation(documents, operation, user) {
     await super._preCreateOperation(documents, operation, user);
-    const essentialPack = game.teriock.packs.essentials();
-    const basicAbilities = await game.teriock.api.utils.fromUuid(
-      essentialPack?.index.getName("Basic Abilities").uuid,
-    );
-    const createdElderSorceries = await game.teriock.api.utils.fromUuid(
-      essentialPack?.index.getName("Created Elder Sorceries").uuid,
-    );
-    const learnedElderSorceries = await game.teriock.api.utils.fromUuid(
-      essentialPack?.index.getName("Learned Elder Sorceries").uuid,
-    );
-    const classPack = game.teriock.packs.classes();
-    const journeyman = await game.teriock.api.utils.fromUuid(
-      classPack.index.getName("Journeyman").uuid,
-    );
-    const equipmentPack = game.teriock.packs.equipment();
-    const foot = await game.teriock.api.utils.fromUuid(
-      equipmentPack.index.getName("Foot").uuid,
-    );
-    const hand = await game.teriock.api.utils.fromUuid(
-      equipmentPack.index.getName("Hand").uuid,
-    );
-    const mouth = await game.teriock.api.utils.fromUuid(
-      equipmentPack.index.getName("Mouth").uuid,
-    );
-    const speciesPack = game.teriock.packs.species();
-    const human = await game.teriock.api.utils.fromUuid(
-      speciesPack.index.getName("Human").uuid,
-    );
     for (const actor of documents) {
       actor.updateSource({
         items: [
-          basicAbilities.toObject(),
-          createdElderSorceries.toObject(),
-          learnedElderSorceries.toObject(),
-          journeyman.toObject(),
-          foot.toObject(),
-          hand.toObject(),
-          mouth.toObject(),
-          human.toObject(),
+          (await copyItem("Basic Abilities", "essentials")).toObject(),
+          (await copyItem("Created Elder Sorceries", "essentials")).toObject(),
+          (await copyItem("Learned Elder Sorceries", "essentials")).toObject(),
+          (await copyItem("Journeyman", "classes")).toObject(),
+          (await copyItem("Foot", "equipment")).toObject(),
+          (await copyItem("Hand", "equipment")).toObject(),
+          (await copyItem("Mouth", "equipment")).toObject(),
+          (await copyItem("Human", "species")).toObject(),
         ],
       });
     }
@@ -216,39 +204,26 @@ export default class TeriockActor extends BaseTeriockActor {
    * @returns {Promise<Document[]>}
    */
   async createEmbeddedDocuments(embeddedName, data = [], operation = {}) {
-    const classPack = game.teriock.packs.classes();
     if (
       embeddedName === "Item" &&
       data.find((d) => d.type === "rank" && d.system?.archetype === "mage")
     ) {
-      if (!this.itemKeys?.power.has("mage")) {
-        const mage = await game.teriock.api.utils.fromUuid(
-          classPack?.index.getName("Mage").uuid,
-        );
-        data.push(mage.toObject());
-      }
+      if (!this.itemKeys?.power.has("mage"))
+        data.push(await copyItem("Mage", "classes"));
     }
     if (
       embeddedName === "Item" &&
       data.find((d) => d.type === "rank" && d.system?.archetype === "semi")
     ) {
-      if (!this.itemKeys?.power.has("semi")) {
-        const semi = await game.teriock.api.utils.fromUuid(
-          classPack?.index.getName("Semi").uuid,
-        );
-        data.push(semi.toObject());
-      }
+      if (!this.itemKeys?.power.has("semi"))
+        data.push(await copyItem("Semi", "classes"));
     }
     if (
       embeddedName === "Item" &&
       data.find((d) => d.type === "rank" && d.system?.archetype === "warrior")
     ) {
-      if (!this.itemKeys?.power.has("warrior")) {
-        const warrior = await game.teriock.api.utils.fromUuid(
-          classPack?.index.getName("Warrior").uuid,
-        );
-        data.push(warrior.toObject());
-      }
+      if (!this.itemKeys?.power.has("warrior"))
+        data.push(await copyItem("Warrior", "classes"));
     }
     if (
       embeddedName === "ActiveEffect" &&

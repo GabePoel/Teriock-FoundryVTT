@@ -58,28 +58,6 @@ export async function createAbility(document, name = null, options = {}) {
 }
 
 /**
- * Creates a new ability effect and optionally pulls content from the wiki.
- *
- * @param {TeriockActor|TeriockEffect|TeriockItem} document - The document to create the ability in.
- * @param {string} name - The name of the imported ability.
- * @returns {TeriockAbility}
- */
-export async function importAbility(document, name) {
-  const essentialPack = game.teriock.packs.essentials();
-  const refAbilityWrapper = await game.teriock.api.utils.fromUuid(
-    essentialPack?.index.getName(name).uuid,
-  );
-  const refAbility = await refAbilityWrapper?.effects.getName(name);
-  /** @type {TeriockAbilityData} */
-  const refData = refAbility.toObject();
-  refData.hierarchy = foundry.utils.deepClone(refAbility.system.hierarchy);
-  const abilities = await document.createEmbeddedDocuments("ActiveEffect", [
-    refData,
-  ]);
-  return abilities[0];
-}
-
-/**
  * Creates a new resource effect.
  *
  * @param {TeriockActor|TeriockItem} document - The document to create the resource in.

@@ -17,8 +17,7 @@ export default function registerDocumentManagementHooks() {
             });
           }
         }
-        const abilities = document.effectTypes?.ability || [];
-        for (const ability of abilities) {
+        for (const ability of document.abilities) {
           await ability.system.expireSustainedConsequences();
         }
         await document.actor?.postUpdate();

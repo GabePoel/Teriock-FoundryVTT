@@ -1,6 +1,9 @@
 const { api, ux } = foundry.applications;
 import { conditions } from "../../../../content/conditions.mjs";
 import { documentOptions } from "../../../../helpers/constants/document-options.mjs";
+import { copyRank, getItem, getRank } from "../../../../helpers/fetch.mjs";
+import { toTitleCase } from "../../../../helpers/utils.mjs";
+import { selectClassDialog, selectDialog, selectEquipmentTypeDialog } from "../../../dialogs/select-dialog.mjs";
 import { BaseActorSheet } from "../../_base.mjs";
 import {
   piercingContextMenu,
@@ -31,6 +34,8 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
       toggleEquippedDoc: this._toggleEquippedDoc,
       toggleDisabledDoc: this._toggleDisabledDoc,
       addEmbedded: this._addEmbedded,
+      addRank: this._addRank,
+      addEquipment: this._addEquipment,
       tradecraftExtra: this._tradecraftExtra,
       rollHitDie: this._rollHitDie,
       rollManaDie: this._rollManaDie,
@@ -159,12 +164,12 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
    * Adds a new embedded document to the actor.
    * Creates documents based on the specified tab type.
    *
-   * @param {MouseEvent} _ - The event object.
+   * @param {MouseEvent} _event - The event object.
    * @param {HTMLElement} target - The target element.
    * @returns {Promise<void>} Promise that resolves when document is created.
    * @static
    */
-  static async _addEmbedded(_, target) {
+  static async _addEmbedded(_event, target) {
     const tab = target.dataset.tab;
     const tabMap = {
       ability: {
@@ -231,6 +236,133 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
       entry.data,
     ]);
     await docs[0].sheet?.render(true);
+  }
+
+  /**
+   * Adds a {@link TeriockRank} to the {@link TeriockActor}.
+   *
+   * @param {MouseEvent} _event - The event object.
+   * @param {HTMLElement} _target - The event target.
+   * @returns {Promise<void>} Promise that resolves when the {@link TeriockRank} is added.
+   * @private
+   */
+  static async _addRank(_event, _target) {
+    const rankClass = await selectClassDialog();
+    if (!rankClass) return;
+    const rankNumber = Number(
+      await selectDialog(
+        { 1: "1", 2: "2", 3: "3", 4: "4", 5: "5" },
+        {
+          label: "Rank",
+          hint: `What rank ${CONFIG.TERIOCK.rankOptionsList[rankClass]} is this?`,
+          title: "Select Rank",
+        },
+      ),
+    );
+    if (!rankClass) return;
+    const referenceRank = await getRank(rankClass, rankNumber);
+    console.log(referenceRank);
+    let rank = await copyRank(rankClass, rankNumber);
+    if (rankNumber <= 2) {
+      await this.document.createEmbeddedDocuments("Item", [rank]);
+      return;
+    }
+    const existingRanks = this.document.ranks.filter(
+      (r) => r.system.className === rankClass,
+    );
+    console.log(rank.abilities.filter((a) => !a.sup));
+    const combatAbilityNames = new Set(
+      referenceRank.abilities
+        .filter((a) => !a.sup)
+        .map((a) => a.name)
+        .slice(0, 3),
+    );
+    const availableCombatAbilityNames = new Set(combatAbilityNames);
+    const supportAbilityNames = new Set(
+      referenceRank.abilities
+        .filter((a) => !a.sup)
+        .map((a) => a.name)
+        .slice(3),
+    );
+    const availableSupportAbilityNames = new Set(supportAbilityNames);
+    for (const existingRank of existingRanks) {
+      for (const ability of existingRank.abilities) {
+        const existingAbility = rank.abilities.find(
+          (a) => a.name === ability.name,
+        );
+        if (existingAbility) {
+          availableCombatAbilityNames.delete(existingAbility.name);
+          availableSupportAbilityNames.delete(existingAbility.name);
+        }
+      }
+    }
+    const chosenAbilityNames = [];
+    if (availableCombatAbilityNames.size > 1) {
+      const combatAbilityChoices = {};
+      availableCombatAbilityNames.map((n) => (combatAbilityChoices[n] = n));
+      const chosenCombatAbilityName = await selectDialog(combatAbilityChoices, {
+        label: "Ability",
+        hint: "Select a combat ability.",
+        title: "Select Combat Ability",
+      });
+      chosenAbilityNames.push(chosenCombatAbilityName);
+    } else {
+      chosenAbilityNames.push(...availableCombatAbilityNames);
+    }
+    if (availableSupportAbilityNames.size > 1) {
+      const supportAbilityChoices = {};
+      availableSupportAbilityNames.map((n) => (supportAbilityChoices[n] = n));
+      const supportAbilityName = await selectDialog(supportAbilityChoices, {
+        label: "Support Ability",
+        hint: "Select a support ability.",
+        title: "Select Combat Ability",
+      });
+      chosenAbilityNames.push(supportAbilityName);
+    } else {
+      chosenAbilityNames.push(...availableSupportAbilityNames);
+    }
+    const abilities = rank.effects;
+    const allowedAbilityIds = new Set();
+    for (const chosenAbilityName of chosenAbilityNames) {
+      /** @type {TeriockAbility} */
+      const chosenAbility = abilities.getName(chosenAbilityName);
+      allowedAbilityIds.add(chosenAbility.id);
+      chosenAbility.allSubs.map((a) => allowedAbilityIds.add(a.id));
+    }
+    for (const ability of abilities) {
+      if (!allowedAbilityIds.has(ability.id)) abilities.delete(ability.id);
+    }
+    await this.document.createEmbeddedDocuments("Item", [rank]);
+  }
+
+  /**
+   * Adds a {@link TeriockEquipment} to the {@link TeriockActor}.
+   *
+   * @param {MouseEvent} _event - The event object.
+   * @param {HTMLElement} target - The event target.
+   * @returns {Promise<void>}
+   * @private
+   */
+  static async _addEquipment(_event, target) {
+    let equipmentType = await selectEquipmentTypeDialog();
+    if (Object.keys(CONFIG.TERIOCK.equipmentType).includes(equipmentType)) {
+      const equipment = await getItem(
+        CONFIG.TERIOCK.equipmentType[equipmentType],
+        "equipment",
+      );
+      await this.document.createEmbeddedDocuments("Item", [equipment]);
+    } else {
+      equipmentType = toTitleCase(equipmentType);
+      await this.document.createEmbeddedDocuments("Item", [
+        {
+          name: equipmentType,
+          type: "equipment",
+          system: {
+            equipmentType: equipmentType,
+          },
+        },
+      ]);
+    }
   }
 
   /**
@@ -638,17 +770,16 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
     }
     const tab = this._activeTab || "classes";
     this._embeds.effectTypes = {
-      resource: tab === "resources" ? this.actor.effectTypes.resource : [],
-      fluency: tab === "tradecrafts" ? this.actor.effectTypes.fluency : [],
-      consequence:
-        tab === "conditions" ? this.actor.effectTypes.consequence : [],
-      attunement: tab === "conditions" ? this.actor.effectTypes.attunement : [],
-      ability: tab === "abilities" ? this.actor.effectTypes.ability : [],
+      resource: tab === "resources" ? this.actor.resources : [],
+      fluency: tab === "tradecrafts" ? this.actor.fluencies : [],
+      consequence: tab === "conditions" ? this.actor.consequences : [],
+      attunement: tab === "conditions" ? this.actor.attunements : [],
+      ability: tab === "abilities" ? this.actor.abilities : [],
     };
     this._embeds.itemTypes = {
-      equipment: tab === "inventory" ? this.actor.itemTypes.equipment : [],
-      power: tab === "powers" ? this.actor.itemTypes.power : [],
-      rank: tab === "classes" ? this.actor.itemTypes.rank : [],
+      equipment: tab === "inventory" ? this.actor.equipment : [],
+      power: tab === "powers" ? this.actor.powers : [],
+      rank: tab === "classes" ? this.actor.ranks : [],
     };
     let conditions = Array.from(this.actor.statuses || []);
     // Sort: 'down' first, 'dead' second, rest alphabetical
@@ -677,13 +808,13 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
     context.editable = this.isEditable;
     context.actor = this.actor;
     context.abilities = _sortAbilities(this.actor) || [];
-    context.resources = this.actor.effectTypes.resource || [];
+    context.resources = this.actor.resources;
     context.equipment = _sortEquipment(this.actor) || [];
-    context.powers = this.actor.itemTypes.power || [];
-    context.fluencies = this.actor.effectTypes.fluency || [];
-    context.consequences = this.actor.effectTypes.consequence || [];
-    context.attunements = this.actor.effectTypes.attunement || [];
-    context.ranks = this.actor.itemTypes.rank || [];
+    context.powers = this.actor.powers;
+    context.fluencies = this.actor.fluencies;
+    context.consequences = this.actor.consequences;
+    context.attunements = this.actor.attunements;
+    context.ranks = this.actor.ranks;
     context.sidebarOpen = this._sidebarOpen;
     context.tabs = {
       classes: {

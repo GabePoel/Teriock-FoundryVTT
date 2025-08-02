@@ -103,7 +103,7 @@ export function _attuned(equipmentData) {
  */
 export function _getAttunement(equipmentData) {
   if (equipmentData.parent?.actor) {
-    return equipmentData.parent.actor.effectTypes?.attunement?.find(
+    return equipmentData.parent.actor.attunements.find(
       (effect) => effect.system.target === equipmentData.parent._id,
     );
   }

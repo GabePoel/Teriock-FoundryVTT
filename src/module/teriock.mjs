@@ -8,6 +8,7 @@ import * as data from "./data/_module.mjs";
 import * as documents from "./documents/_module.mjs";
 import TERIOCK from "./helpers/config.mjs";
 import * as createEffects from "./helpers/create-effects.mjs";
+import * as fetch from "./helpers/fetch.mjs";
 import * as handlebars from "./helpers/handlebars/_module.mjs";
 import * as hooks from "./helpers/hooks/_module.mjs";
 import * as queries from "./helpers/queries/_module.mjs";
@@ -222,9 +223,6 @@ foundry.helpers.Hooks.once("init", function () {
         selectTradecraft: dialogs.selectTradecraftDialog,
         selectWeaponClass: dialogs.selectWeaponClassDialog,
       },
-      import: {
-        ability: createEffects.importAbility,
-      },
       utils: {
         dedent: utils.dedent,
         fromUuid: utils.fromUuid,
@@ -234,6 +232,13 @@ foundry.helpers.Hooks.once("init", function () {
         toFeet: utils.toFeet,
         fromFeet: utils.fromFeet,
         convertUnits: utils.convertUnits,
+        getItem: fetch.getItem,
+        copyItem: fetch.copyItem,
+        getAbility: fetch.getAbility,
+        copyAbility: fetch.copyAbility,
+        importAbility: fetch.importAbility,
+        getRank: fetch.getRank,
+        copyRank: fetch.copyRank,
       },
       wiki: {
         cleanWikiHTML: wiki.cleanWikiHTML,

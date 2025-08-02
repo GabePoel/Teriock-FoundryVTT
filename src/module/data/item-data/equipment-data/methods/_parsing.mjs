@@ -1,6 +1,6 @@
 import { cleanValue } from "../../../../helpers/clean.mjs";
 import { createProperty } from "../../../../helpers/create-effects.mjs";
-import { toCamelCase, toCamelCaseList } from "../../../../helpers/utils.mjs";
+import { toCamelCase } from "../../../../helpers/utils.mjs";
 import { _override } from "./_overrides.mjs";
 
 /**
@@ -92,9 +92,9 @@ export async function _parse(equipmentData, rawHTML) {
 
   // Sort and filter properties and equipment classes
   parameters.equipmentClasses = new Set(
-    toCamelCaseList(Array.from(equipmentClasses)),
+    Array.from(equipmentClasses).map((s) => toCamelCase(s)),
   );
-  const candidateProperties = toCamelCaseList(Array.from(properties));
+  const candidateProperties = Array.from(properties).map((s) => toCamelCase(s));
 
   // Filter properties by config
   const allowedProperties = [

@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
+import { toCamelCase, toKebabCase } from "../src/module/helpers/utils.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -14,24 +15,17 @@ const manualDir = path.resolve(
   "../src/module/helpers/constants/manual",
 );
 
-const camelCase = (str) =>
-  str.toLowerCase().replace(/[-\s]+(.)/g, (_, c) => c.toUpperCase());
-const kebabCase = (str) =>
-  str
-    .replace(/\s+/g, "-")
-    .replace(/([a-z])([A-Z])/g, "$1-$2")
-    .toLowerCase();
 const fileHeader = `// This file was auto-generated on ${new Date().toISOString().split("T")[0]} by scripts/update-options.mjs.\n// Do not edit manually.\n\n`;
 
 const loadManualOverrides = async (name) => {
-  const file = `${kebabCase(name)}.mjs`;
+  const file = `${toKebabCase(name)}.mjs`;
   const fullPath = path.join(manualDir, file);
   if (fs.existsSync(fullPath)) {
     try {
       const mod = await import(
         `../src/module/helpers/constants/manual/${file}?t=${Date.now()}`
       );
-      const override = mod[camelCase(name)] || {};
+      const override = mod[toCamelCase(name)] || {};
       const remove = mod.remove || [];
       console.log(`Loaded manual overrides for ${name}`);
       return { override, remove };
@@ -43,7 +37,7 @@ const loadManualOverrides = async (name) => {
 };
 
 const writeObjectToFile = async (titles, name) => {
-  const generated = Object.fromEntries(titles.map((t) => [camelCase(t), t]));
+  const generated = Object.fromEntries(titles.map((t) => [toCamelCase(t), t]));
   const { override, remove } = await loadManualOverrides(name);
   const merged = { ...generated, ...override };
   remove.forEach((key) => delete merged[key]);
@@ -56,11 +50,11 @@ const writeObjectToFile = async (titles, name) => {
       .join(",\n") +
     "\n}";
 
-  const content = `${fileHeader}export const ${camelCase(name)} = ${stringifyObject(merged)};\n`;
-  const filePath = path.join(outputDir, `${kebabCase(name)}.mjs`);
+  const content = `${fileHeader}export const ${toCamelCase(name)} = ${stringifyObject(merged)};\n`;
+  const filePath = path.join(outputDir, `${toKebabCase(name)}.mjs`);
   fs.writeFileSync(filePath, content, "utf8");
   console.log(
-    `Wrote ${Object.keys(merged).length} items to ${kebabCase(name)}.mjs`,
+    `Wrote ${Object.keys(merged).length} items to ${toKebabCase(name)}.mjs`,
   );
 };
 
@@ -190,10 +184,13 @@ const processSimpleCategory = async (
     }
 
     const allWeaponClasses = Array.from(
-      new Set([...weaponBaseTitles, ...weaponTopSubcats, ...weaponNestedSubcats]),
+      new Set([
+        ...weaponBaseTitles,
+        ...weaponTopSubcats,
+        ...weaponNestedSubcats,
+      ]),
     );
     await writeObjectToFile(allWeaponClasses, "weaponClasses");
-
   } catch (err) {
     console.error("Error:", err);
   }

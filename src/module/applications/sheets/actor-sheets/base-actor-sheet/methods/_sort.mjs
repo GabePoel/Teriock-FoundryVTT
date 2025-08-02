@@ -30,7 +30,7 @@ export function _sortEmbedded(items, sortKey, ascending, sortMap = {}) {
 export function _sortAbilities(actor) {
   /** @type {TeriockBaseActorSheet} */
   const sheet = actor.sheet;
-  const abilities = actor.effectTypes.ability;
+  const abilities = actor.abilities;
   const sortKey = sheet.settings.abilitySortOption;
   const ascending = sheet.settings.abilitySortAscending;
   /** @type {Record<string, *>} */
