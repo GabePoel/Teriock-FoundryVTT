@@ -344,11 +344,11 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
    * Adds a {@link TeriockEquipment} to the {@link TeriockActor}.
    *
    * @param {MouseEvent} _event - The event object.
-   * @param {HTMLElement} target - The event target.
+   * @param {HTMLElement} _target - The event target.
    * @returns {Promise<void>}
    * @private
    */
-  static async _addEquipment(_event, target) {
+  static async _addEquipment(_event, _target) {
     let equipmentType = await selectEquipmentTypeDialog();
     if (Object.keys(CONFIG.TERIOCK.equipmentType).includes(equipmentType)) {
       const equipment = await getItem(

@@ -82,7 +82,6 @@ export default class TeriockBaseEffectData extends ChildDataMixin(
    * @returns {Promise<void>} Promise that resolves when the effect is expired.
    */
   async expire() {
-    const changes = this.parent.changes;
     await this.actor?.hookCall("effectExpiration");
     return await _expire(this);
   }
