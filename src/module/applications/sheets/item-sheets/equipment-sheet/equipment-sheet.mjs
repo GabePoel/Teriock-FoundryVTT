@@ -52,9 +52,11 @@ export default class TeriockEquipmentSheet extends HandlebarsApplicationMixin(
    * @static
    */
   static async _toggleEquipped() {
-    await this.document.update({
-      "system.equipped": !this.document.system.equipped,
-    });
+    if (this.document.system.equipped) {
+      await this.document.system.unequip();
+    } else {
+      await this.document.system.equip();
+    }
   }
 
   /**
@@ -63,9 +65,11 @@ export default class TeriockEquipmentSheet extends HandlebarsApplicationMixin(
    * @static
    */
   static async _toggleShattered() {
-    await this.document.update({
-      "system.shattered": !this.document.system.shattered,
-    });
+    if (this.document.system.shattered) {
+      await this.document.system.repair();
+    } else {
+      await this.document.system.shatter();
+    }
   }
 
   /**
@@ -74,9 +78,11 @@ export default class TeriockEquipmentSheet extends HandlebarsApplicationMixin(
    * @static
    */
   static async _toggleDampened() {
-    await this.document.update({
-      "system.dampened": !this.document.system.dampened,
-    });
+    if (this.document.system.dampened) {
+      await this.document.system.undampen();
+    } else {
+      await this.document.system.dampen();
+    }
   }
 
   /**

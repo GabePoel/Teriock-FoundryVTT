@@ -517,6 +517,7 @@ export const imageOverrides = {
   "Track": "modules/game-icons-net/whitetransparent/deer-track.svg",
   "Trample": "modules/game-icons-net/whitetransparent/rhinoceros-horn.svg",
   "Transmute": "modules/game-icons-net/whitetransparent/plate-claw.svg",
+  "Tree Toughness": "modules/game-icons-net/whitetransparent/pine-tree.svg",
   "Treeform Ball": "modules/game-icons-net/whitetransparent/holy-oak.svg",
   "Triumphant Awaken": "modules/game-icons-net/whitetransparent/trumpet-flag.svg",
   "Triumphant Damage Boost": "modules/game-icons-net/whitetransparent/tattered-banner.svg",

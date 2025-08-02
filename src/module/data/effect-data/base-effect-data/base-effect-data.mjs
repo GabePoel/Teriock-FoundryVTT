@@ -1,6 +1,5 @@
 const { fields } = foundry.data;
 const { TypeDataModel } = foundry.abstract;
-import { pureUuid } from "../../../helpers/utils.mjs";
 import ChildDataMixin from "../../mixins/child-mixin.mjs";
 import { _expire, _shouldExpire } from "./methods/_expiration.mjs";
 
@@ -84,16 +83,7 @@ export default class TeriockBaseEffectData extends ChildDataMixin(
    */
   async expire() {
     const changes = this.parent.changes;
-    for (const change of changes) {
-      if (change.key === "system.hookedMacros.effectExpiration") {
-        /** @type {Teriock.UUID<TeriockMacro>} */
-        const uuid = pureUuid(change.value);
-        const macro = await game.teriock.api.utils.fromUuid(uuid);
-        if (macro) {
-          await macro.execute({ actor: this });
-        }
-      }
-    }
+    await this.actor?.hookCall("effectExpiration");
     return await _expire(this);
   }
 

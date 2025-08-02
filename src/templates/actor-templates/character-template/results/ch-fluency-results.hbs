@@ -9,7 +9,8 @@
         text=(field effect.system.field)
         id=effect._id
         parentId=effect.parent._id
-        active=(not effect.disabled)
+        active=(and (not effect.disabled) (not effect.isSuppressed))
+        struck=effect.disabled
         type="effect"
         icons=(concat
           (ticon "award" cssClass="fluent" tooltip="Fluent")

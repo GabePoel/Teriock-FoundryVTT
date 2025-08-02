@@ -24,6 +24,8 @@ export const unsortedPseudoHooks = {
   rollResistance: "Rolling a Resistance Save",
   rollTradecraft: "Rolling a Tradecraft Check",
   useAbility: "Using an Ability",
+  equipmentEquip: "Equipment Equipping",
+  equipmentUnequip: "Equipment Unequipping",
   equipmentAttune: "Equipment Attunement",
   equipmentDeattune: "Equipment Deattunement",
   equipmentIdentify: "Equipment Identification",

@@ -188,7 +188,7 @@ export async function selectAbilityDialog() {
 export async function selectEquipmentTypeDialog() {
   return await selectDialog(equipment, {
     label: "Equipment Type",
-    hint: "Please select an equipmentType type.",
+    hint: "Please select an equipment type.",
     title: "Select Equipment Type",
     other: true,
     genericOther: false,

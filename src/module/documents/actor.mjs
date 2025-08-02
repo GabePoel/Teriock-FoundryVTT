@@ -104,7 +104,9 @@ export default class TeriockActor extends BaseTeriockActor {
    */
   static async _preCreateOperation(documents, operation, user) {
     await super._preCreateOperation(documents, operation, user);
-    for (const actor of documents) {
+    for (const actor of documents.filter(
+      (d) => new Set(d.items || [])?.size < 1,
+    )) {
       actor.updateSource({
         items: [
           (await copyItem("Basic Abilities", "essentials")).toObject(),

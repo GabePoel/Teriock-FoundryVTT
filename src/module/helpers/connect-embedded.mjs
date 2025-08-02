@@ -54,7 +54,7 @@ export default function connectEmbedded(document, element, editable = true) {
             name: "Equip",
             icon: makeIcon("check", iconStyle),
             callback: async () => {
-              await embedded.update({ "system.equipped": true });
+              await embedded.system.equip();
             },
             condition: () => {
               return embedded.type === "equipment" && !embedded.system.canEquip;
@@ -64,7 +64,7 @@ export default function connectEmbedded(document, element, editable = true) {
             name: "Unequip",
             icon: makeIcon("xmark", iconStyle),
             callback: async () => {
-              await embedded.update({ "system.equipped": false });
+              await embedded.system.unequip();
             },
             condition: () => {
               return (
