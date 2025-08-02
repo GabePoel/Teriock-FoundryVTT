@@ -1,36 +1,23 @@
 {
-  "id": "teriock",
-  "title": "Teriock",
-  "description": "FoundryVTT implementation of Teriock (FanWar).",
   "authors": [
     {
       "name": "Gabriel Perko-Engel",
       "discord": "gpoel"
     }
   ],
-  "url": "https://github.com/gabepoel/Teriock-FoundryVTT",
-  "license": "LICENSE.txt",
-  "readme": "README.md",
+  "background": "systems/teriock/assets/fanwar-logo.png",
   "bugs": "https://github.com/gabepoel/Teriock-FoundryVTT/issues",
   "changelog": "CHANGELOG.md",
-  "media": [
-    {
-      "type": "setup",
-      "url": "systems/teriock/assets/fanwar-logo.png",
-      "thumbnail": "systems/teriock/assets/fanwar-logo.png"
-    }
-  ],
-  "version": "0.1.0",
   "compatibility": {
     "minimum": 12,
     "verified": "13.345"
   },
+  "description": "FoundryVTT implementation of Teriock (FanWar).",
+  "download": "https://github.com/gabepoel/Teriock-FoundryVTT/releases/download/v1.0.0/system.zip",
   "esmodules": [
     "src/module/teriock.mjs"
   ],
-  "styles": [
-    "css/teriock.css"
-  ],
+  "id": "teriock",
   "languages": [
     {
       "lang": "en",
@@ -38,91 +25,22 @@
       "path": "lang/en.json"
     }
   ],
-  "packs": [
+  "license": "LICENSE.txt",
+  "manifest": "https://github.com/gabepoel/Teriock-FoundryVTT/releases/latest/download/system.json",
+  "media": [
     {
-      "name": "creatures",
-      "label": "Creatures",
-      "type": "Actor",
-      "system": "teriock",
-      "ownership": {
-        "PLAYER": "OBSERVER",
-        "TRUSTED": "OBSERVER",
-        "ASSISTANT": "OWNER"
-      }
-    },
-    {
-      "name": "classes",
-      "label": "Classes",
-      "type": "Item",
-      "system": "teriock",
-      "ownership": {
-        "PLAYER": "OBSERVER",
-        "TRUSTED": "OBSERVER",
-        "ASSISTANT": "OWNER"
-      }
-    },
-    {
-      "name": "species",
-      "label": "Species",
-      "type": "Item",
-      "system": "teriock",
-      "ownership": {
-        "PLAYER": "OBSERVER",
-        "TRUSTED": "OBSERVER",
-        "ASSISTANT": "OWNER"
-      }
-    },
-    {
-      "name": "essentials",
-      "label": "Essentials",
-      "type": "Item",
-      "system": "teriock",
-      "ownership": {
-        "PLAYER": "OBSERVER",
-        "TRUSTED": "OBSERVER",
-        "ASSISTANT": "OWNER"
-      }
-    },
-    {
-      "name": "equipment",
-      "label": "Equipment",
-      "type": "Item",
-      "system": "teriock",
-      "ownership": {
-        "PLAYER": "OBSERVER",
-        "TRUSTED": "OBSERVER",
-        "ASSISTANT": "OWNER"
-      }
-    },
-    {
-      "name": "execution",
-      "label": "Ability Execution Macros",
-      "type": "Macro",
-      "system": "teriock",
-      "ownership": {
-        "PLAYER": "OBSERVER",
-        "TRUSTED": "OBSERVER",
-        "ASSISTANT": "OWNER"
-      }
-    },
-    {
-      "name": "maintenance",
-      "label": "System Maintenance",
-      "type": "Macro",
-      "system": "teriock",
-      "ownership": {
-        "PLAYER": "OBSERVER",
-        "TRUSTED": "OBSERVER",
-        "ASSISTANT": "OWNER"
-      }
+      "type": "setup",
+      "url": "systems/teriock/assets/fanwar-logo.png",
+      "thumbnail": "systems/teriock/assets/fanwar-logo.png"
     }
   ],
   "packFolders": [
     {
-      "name": "Teriock Core",
       "color": "#3584E4",
+      "name": "Teriock Core",
       "packs": [
         "classes",
+        "creatures",
         "essentials",
         "equipment",
         "species",
@@ -131,6 +49,87 @@
       ]
     }
   ],
+  "packs": [
+    {
+      "label": "Creatures",
+      "name": "creatures",
+      "ownership": {
+        "ASSISTANT": "OWNER",
+        "PLAYER": "OBSERVER",
+        "TRUSTED": "OBSERVER"
+      },
+      "system": "teriock",
+      "type": "Actor"
+    },
+    {
+      "label": "Classes",
+      "name": "classes",
+      "ownership": {
+        "ASSISTANT": "OWNER",
+        "PLAYER": "OBSERVER",
+        "TRUSTED": "OBSERVER"
+      },
+      "system": "teriock",
+      "type": "Item"
+    },
+    {
+      "label": "Species",
+      "name": "species",
+      "ownership": {
+        "ASSISTANT": "OWNER",
+        "PLAYER": "OBSERVER",
+        "TRUSTED": "OBSERVER"
+      },
+      "system": "teriock",
+      "type": "Item"
+    },
+    {
+      "label": "Essentials",
+      "name": "essentials",
+      "ownership": {
+        "ASSISTANT": "OWNER",
+        "PLAYER": "OBSERVER",
+        "TRUSTED": "OBSERVER"
+      },
+      "system": "teriock",
+      "type": "Item"
+    },
+    {
+      "label": "Equipment",
+      "name": "equipment",
+      "ownership": {
+        "ASSISTANT": "OWNER",
+        "PLAYER": "OBSERVER",
+        "TRUSTED": "OBSERVER"
+      },
+      "system": "teriock",
+      "type": "Item"
+    },
+    {
+      "label": "Ability Execution Macros",
+      "name": "execution",
+      "ownership": {
+        "ASSISTANT": "OWNER",
+        "PLAYER": "OBSERVER",
+        "TRUSTED": "OBSERVER"
+      },
+      "system": "teriock",
+      "type": "Macro"
+    },
+    {
+      "label": "System Maintenance",
+      "name": "maintenance",
+      "ownership": {
+        "ASSISTANT": "OWNER",
+        "PLAYER": "OBSERVER",
+        "TRUSTED": "OBSERVER"
+      },
+      "system": "teriock",
+      "type": "Macro"
+    }
+  ],
+  "primaryTokenAttribute": "hp",
+  "readme": "README.md",
   "relationships": {
     "requires": [
       {
@@ -143,11 +142,13 @@
       }
     ]
   },
-  "socket": true,
-  "manifest": "https://github.com/gabepoel/Teriock-FoundryVTT/releases/latest/download/system.json",
-  "download": "https://github.com/gabepoel/Teriock-FoundryVTT/releases/download/v1.0.0/system.zip",
-  "background": "systems/teriock/assets/fanwar-logo.png",
-  "primaryTokenAttribute": "hp",
   "secondaryTokenAttribute": "mp",
+  "socket": true,
+  "styles": [
+    "css/teriock.css"
+  ],
+  "title": "Teriock",
+  "url": "https://github.com/gabepoel/Teriock-FoundryVTT",
+  "version": "0.1.0",
   "website": "https://wiki.teriock.com"
 }

@@ -57,6 +57,11 @@ export default (BaseDocument) => {
       return this.effectTypes?.condition || [];
     }
 
+    /** @returns {TeriockConsequence[]} */
+    get consequences() {
+      return this.effectTypes?.consequence || [];
+    }
+
     /** @returns {TeriockFluency[]} */
     get fluencies() {
       return this.effectTypes?.fluency || [];
