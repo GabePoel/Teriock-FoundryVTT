@@ -7,19 +7,19 @@ const { fields } = foundry.data;
  */
 export function hierarchyField() {
   return new fields.SchemaField({
-    supId: new fields.DocumentIdField({
-      initial: null,
-      nullable: true,
-      label: "Super Ability ID",
-      hint: "The ID of the ability or effect that provides this ability, if there is one.",
+    rootUuid: new fields.DocumentUUIDField({
+      label: "Root UUID",
+      hint: "The UUID of the document this ability is embedded in.",
     }),
     subIds: new fields.SetField(new fields.DocumentIdField(), {
       label: "Sub IDs",
       hint: "The IDs of the abilities that this ability provides, if there are any.",
     }),
-    rootUuid: new fields.DocumentUUIDField({
-      label: "Root UUID",
-      hint: "The UUID of the document this ability is embedded in.",
+    supId: new fields.DocumentIdField({
+      initial: null,
+      nullable: true,
+      label: "Super Ability ID",
+      hint: "The ID of the ability or effect that provides this ability, if there is one.",
     }),
   });
 }

@@ -654,15 +654,15 @@ export default class TeriockActor extends BaseTeriockActor {
     rollFormula += "kh1";
     const rollData = this.getRollData();
     const roll = new TeriockRoll(rollFormula, rollData, {
-      message: message,
       context: {
         diceClass: "condition",
         threshold: 4,
       },
+      message: message,
     });
     await roll.toMessage({
-      speaker: ChatMessage.getSpeaker({ actor: this }),
       flavor: "Condition Ending Roll",
+      speaker: ChatMessage.getSpeaker({ actor: this }),
     });
   }
 }

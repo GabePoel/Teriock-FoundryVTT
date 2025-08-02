@@ -112,66 +112,66 @@ foundry.helpers.Hooks.once("init", function () {
     // Actors
     {
       cls: applications.sheets.actor.CharacterSheet,
+      doc: documents.TeriockActor,
       label: "Character",
       types: ["character"],
-      doc: documents.TeriockActor,
     },
     // Items
     {
       cls: applications.sheets.item.EquipmentSheet,
+      doc: documents.TeriockItem,
       label: "Equipment",
       types: ["equipment"],
-      doc: documents.TeriockItem,
     },
     {
       cls: applications.sheets.item.RankSheet,
+      doc: documents.TeriockItem,
       label: "Rank",
       types: ["rank"],
-      doc: documents.TeriockItem,
     },
     {
       cls: applications.sheets.item.PowerSheet,
+      doc: documents.TeriockItem,
       label: "Power",
       types: ["power"],
-      doc: documents.TeriockItem,
     },
     // Effects
     {
       cls: applications.sheets.effect.AbilitySheet,
+      doc: documents.TeriockEffect,
       label: "Ability",
       types: ["ability"],
-      doc: documents.TeriockEffect,
     },
     {
       cls: applications.sheets.effect.FluencySheet,
+      doc: documents.TeriockEffect,
       label: "Fluency",
       types: ["fluency"],
-      doc: documents.TeriockEffect,
     },
     {
       cls: applications.sheets.effect.ResourceSheet,
+      doc: documents.TeriockEffect,
       label: "Resource",
       types: ["resource"],
-      doc: documents.TeriockEffect,
     },
     {
       cls: applications.sheets.effect.PropertySheet,
+      doc: documents.TeriockEffect,
       label: "Property",
       types: ["property"],
-      doc: documents.TeriockEffect,
     },
     {
       cls: applications.sheets.effect.ConsequenceSheet,
-      label: "Consequence",
-      types: ["consequence"],
       doc: documents.TeriockEffect,
+      label: "Consequence",
       makeDefault: false,
+      types: ["consequence"],
     },
   ];
   sheetMap.forEach(({ cls, label, types, doc, makeDefault = true }) =>
     DocumentSheetConfig.registerSheet(doc, "teriock", cls, {
-      makeDefault,
       label,
+      makeDefault,
       types,
     }),
   );
@@ -179,6 +179,13 @@ foundry.helpers.Hooks.once("init", function () {
   // Registering custom dice rolls and functions
   CONFIG.Dice.rolls.length = 0;
   CONFIG.Dice.rolls.push(documents.TeriockRoll);
+
+  // Modifying index fields
+  CONFIG.ActiveEffect.IndexFields = [
+    "system.hierarchy.rootUuid",
+    "system.hierarchy.subIds",
+    "system.hierarchy.supId",
+  ];
 
   // Registering custom queries
   Object.assign(CONFIG.queries, {
@@ -192,11 +199,11 @@ foundry.helpers.Hooks.once("init", function () {
 
   game.teriock = {
     Actor: documents.TeriockActor,
-    Message: documents.TeriockMessage,
     Combat: documents.TeriockCombat,
     Effect: documents.TeriockEffect,
     Item: documents.TeriockItem,
     Macro: documents.TeriockMacro,
+    Message: documents.TeriockMessage,
     Roll: documents.TeriockRoll,
     Scene: documents.TeriockScene,
     Token: documents.TeriockToken,
@@ -224,21 +231,21 @@ foundry.helpers.Hooks.once("init", function () {
         selectWeaponClass: dialogs.selectWeaponClassDialog,
       },
       utils: {
+        convertUnits: utils.convertUnits,
+        copyAbility: fetch.copyAbility,
+        copyItem: fetch.copyItem,
+        copyRank: fetch.copyRank,
         dedent: utils.dedent,
+        fromFeet: utils.fromFeet,
         fromUuid: utils.fromUuid,
         fromUuidSync: utils.fromUuidSync,
+        getAbility: fetch.getAbility,
+        getItem: fetch.getItem,
+        getRank: fetch.getRank,
+        importAbility: fetch.importAbility,
         pureUuid: utils.pureUuid,
         safeUuid: utils.safeUuid,
         toFeet: utils.toFeet,
-        fromFeet: utils.fromFeet,
-        convertUnits: utils.convertUnits,
-        getItem: fetch.getItem,
-        copyItem: fetch.copyItem,
-        getAbility: fetch.getAbility,
-        copyAbility: fetch.copyAbility,
-        importAbility: fetch.importAbility,
-        getRank: fetch.getRank,
-        copyRank: fetch.copyRank,
       },
       wiki: {
         cleanWikiHTML: wiki.cleanWikiHTML,

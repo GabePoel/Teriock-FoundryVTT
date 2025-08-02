@@ -31,31 +31,31 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
   static DEFAULT_OPTIONS = {
     classes: ["teriock", "character"],
     actions: {
-      toggleEquippedDoc: this._toggleEquippedDoc,
-      toggleDisabledDoc: this._toggleDisabledDoc,
       addEmbedded: this._addEmbedded,
-      addRank: this._addRank,
       addEquipment: this._addEquipment,
-      tradecraftExtra: this._tradecraftExtra,
-      rollHitDie: this._rollHitDie,
-      rollManaDie: this._rollManaDie,
-      rollTradecraft: this._rollTradecraft,
-      rollFeatSave: this._rollFeatSave,
-      toggleSb: this._toggleSb,
+      addRank: this._addRank,
+      attack: this._attack,
+      deattuneDoc: this._deattuneDoc,
+      endCondition: this._endCondition,
+      immune: this._immune,
       openPrimaryAttacker: this._openPrimaryAttacker,
       openPrimaryBlocker: this._openPrimaryBlocker,
       quickUse: this._quickUse,
+      removeCondition: this._removeCondition,
+      resist: this._resist,
+      rollFeatSave: this._rollFeatSave,
+      rollHitDie: this._rollHitDie,
+      rollManaDie: this._rollManaDie,
+      rollTradecraft: this._rollTradecraft,
       takeDamage: this._takeDamage,
       takeDrain: this._takeDrain,
-      takeWither: this._takeWither,
-      removeCondition: this._removeCondition,
       takeHack: this._takeHack,
-      attack: this._attack,
-      resist: this._resist,
-      immune: this._immune,
-      endCondition: this._endCondition,
-      deattuneDoc: this._deattuneDoc,
+      takeWither: this._takeWither,
       toggleConditionExpansion: this._toggleConditionExpansion,
+      toggleDisabledDoc: this._toggleDisabledDoc,
+      toggleEquippedDoc: this._toggleEquippedDoc,
+      toggleSb: this._toggleSb,
+      tradecraftExtra: this._tradecraftExtra,
     },
     form: {
       submitOnChange: true,
@@ -178,60 +178,60 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
     const tab = target.dataset.tab;
     const tabMap = {
       ability: {
-        docType: "ActiveEffect",
         data: {
-          name: "New Ability",
           img: "systems/teriock/assets/ability.svg",
+          name: "New Ability",
           type: "ability",
         },
-      },
-      resource: {
         docType: "ActiveEffect",
-        data: {
-          name: "New Resource",
-          img: "systems/teriock/assets/resource.svg",
-          type: "resource",
-        },
       },
       consequence: {
-        docType: "ActiveEffect",
         data: {
-          name: "New Consequence",
           img: "systems/teriock/assets/effect.svg",
+          name: "New Consequence",
           type: "consequence",
         },
+        docType: "ActiveEffect",
       },
       equipment: {
-        docType: "Item",
         data: {
-          name: "New Equipment",
           img: "systems/teriock/assets/equipment.svg",
+          name: "New Equipment",
           type: "equipment",
         },
-      },
-      power: {
         docType: "Item",
-        data: {
-          name: "New Power",
-          img: "systems/teriock/assets/power.svg",
-          type: "power",
-        },
-      },
-      rank: {
-        docType: "Item",
-        data: {
-          name: "New Rank",
-          img: "systems/teriock/assets/rank.svg",
-          type: "rank",
-        },
       },
       fluency: {
-        docType: "ActiveEffect",
         data: {
-          name: "New Fluency",
           img: "systems/teriock/assets/fluency.svg",
+          name: "New Fluency",
           type: "fluency",
         },
+        docType: "ActiveEffect",
+      },
+      power: {
+        data: {
+          img: "systems/teriock/assets/power.svg",
+          name: "New Power",
+          type: "power",
+        },
+        docType: "Item",
+      },
+      rank: {
+        data: {
+          img: "systems/teriock/assets/rank.svg",
+          name: "New Rank",
+          type: "rank",
+        },
+        docType: "Item",
+      },
+      resource: {
+        data: {
+          img: "systems/teriock/assets/resource.svg",
+          name: "New Resource",
+          type: "resource",
+        },
+        docType: "ActiveEffect",
       },
     };
     const entry = tabMap[tab];
@@ -361,10 +361,10 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
       await this.document.createEmbeddedDocuments("Item", [
         {
           name: equipmentType,
-          type: "equipment",
           system: {
             equipmentType: equipmentType,
           },
+          type: "equipment",
         },
       ]);
     }
@@ -775,11 +775,11 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
     }
     const tab = this._activeTab || "classes";
     this._embeds.effectTypes = {
-      resource: tab === "resources" ? this.actor.resources : [],
-      fluency: tab === "tradecrafts" ? this.actor.fluencies : [],
-      consequence: tab === "conditions" ? this.actor.consequences : [],
-      attunement: tab === "conditions" ? this.actor.attunements : [],
       ability: tab === "abilities" ? this.actor.abilities : [],
+      attunement: tab === "conditions" ? this.actor.attunements : [],
+      consequence: tab === "conditions" ? this.actor.consequences : [],
+      fluency: tab === "tradecrafts" ? this.actor.fluencies : [],
+      resource: tab === "resources" ? this.actor.resources : [],
     };
     this._embeds.itemTypes = {
       equipment: tab === "inventory" ? this.actor.equipment : [],

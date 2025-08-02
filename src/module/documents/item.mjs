@@ -75,10 +75,8 @@ export default class TeriockItem extends BaseTeriockItem {
     const pullTypeName = pullType === "pages" ? "Ability" : "Category";
     let toPull;
     await api.DialogV2.prompt({
-      window: { title: "Pulling " + pullTypeName },
       content: `<input type="text" name="pullInput" placeholder="${pullTypeName} Name" />`,
       ok: {
-        label: "Pull",
         callback: (event, button) => {
           let input = button.form.elements.namedItem("pullInput").value;
           if (input.startsWith(`${pullTypeName}:`)) {
@@ -86,7 +84,9 @@ export default class TeriockItem extends BaseTeriockItem {
           }
           toPull = input;
         },
+        label: "Pull",
       },
+      window: { title: "Pulling " + pullTypeName },
     });
     if (pullType === "categories") {
       const pages = await fetchCategoryMembers(toPull);
@@ -98,8 +98,8 @@ export default class TeriockItem extends BaseTeriockItem {
       let pct = 0;
       for (const page of pages) {
         progress.update({
-          pct: pct,
           message: `Pulling ${page.title} from wiki.`,
+          pct: pct,
         });
         if (page.title.startsWith("Ability:")) {
           await createAbility(this, page.title.replace(/^Ability:/, ""), {
@@ -108,8 +108,8 @@ export default class TeriockItem extends BaseTeriockItem {
         }
         pct += 1 / pages.length;
         progress.update({
-          pct: pct,
           message: `Pulling ${page.title} from wiki.`,
+          pct: pct,
         });
       }
     } else {
@@ -125,24 +125,24 @@ export default class TeriockItem extends BaseTeriockItem {
   async bulkWikiPull() {
     if (["ability", "equipment", "rank", "power"].includes(this.type)) {
       const dialog = new api.DialogV2({
-        window: { title: "Bulk Wiki Pull" },
-        content: "What would you like to pull?",
         buttons: [
           {
             action: "pages",
-            label: "Page",
             default: true,
+            label: "Page",
           },
           {
             action: "categories",
-            label: "Category",
             default: false,
+            label: "Category",
           },
         ],
+        content: "What would you like to pull?",
         submit: async (result) => {
           await dialog.close();
           await this._bulkWikiPullHelper(result);
         },
+        window: { title: "Bulk Wiki Pull" },
       });
       await dialog.render(true);
     }
