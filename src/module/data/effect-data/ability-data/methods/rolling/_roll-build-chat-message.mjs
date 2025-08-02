@@ -15,7 +15,7 @@ export async function _buildChatMessage(rollConfig) {
   if (rollConfig.useData.formula)
     rollConfig.chatData.system.extraContent = element.outerHTML;
   rollConfig.chatData.speaker = TeriockMessage.getSpeaker({
-    actor: rollConfig.abilityData.actor,
+    actor: rollConfig.useData.actor,
   });
   TeriockMessage.applyRollMode(
     rollConfig.chatData,

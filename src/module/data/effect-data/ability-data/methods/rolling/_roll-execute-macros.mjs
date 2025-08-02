@@ -20,9 +20,9 @@ export async function _executeMacros(rollConfig, pseudoHook) {
       if (macro) {
         try {
           await macro.execute({
-            actor: rollConfig.abilityData.actor,
+            actor: rollConfig.useData.actor,
             speaker: TeriockMessage.getSpeaker({
-              actor: rollConfig.abilityData.actor,
+              actor: rollConfig.useData.actor,
             }),
             args: [rollConfig],
             useData: rollConfig.useData,
@@ -38,5 +38,5 @@ export async function _executeMacros(rollConfig, pseudoHook) {
       }
     }
   }
-  await rollConfig.abilityData.actor.hookCall("useAbility", rollConfig);
+  await rollConfig.useData.actor.hookCall("useAbility", rollConfig);
 }

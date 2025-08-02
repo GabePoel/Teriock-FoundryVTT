@@ -14,7 +14,7 @@ export async function _setTargets(rollConfig) {
     rollConfig.abilityData.targets.length === 1 &&
     rollConfig.abilityData.targets.includes("self")
   ) {
-    const token = actorToken(rollConfig.abilityData.actor);
+    const token = actorToken(rollConfig.useData.actor);
     if (token) rollConfig.useData.targets = new Set([token]);
   }
   await auraMeasure(rollConfig);
@@ -27,7 +27,7 @@ export async function _setTargets(rollConfig) {
  */
 async function auraMeasure(rollConfig) {
   if (rollConfig.abilityData.delivery.base === "aura") {
-    const token = actorToken(rollConfig.abilityData.actor);
+    const token = actorToken(rollConfig.useData.actor);
     if (token) {
       let placeTemplate;
       let radius = Number(rollConfig.abilityData.range);

@@ -11,22 +11,25 @@ import { _stageUse } from "./_roll-stage-use.mjs";
 /**
  *
  * @param {TeriockAbilityData} abilityData
- * @param {object} options
+ * @param {Teriock.CommonRollOptions} options
  * @returns {Promise<void>}
  * @private
  */
 export async function _roll(abilityData, options = {}) {
-  if (!abilityData.actor) {
+  const rollConfig = foundry.utils.deepClone(DEFAULT_ROLL_CONFIG);
+  rollConfig.abilityData = abilityData;
+  rollConfig.useData.rollOptions = options;
+  rollConfig.useData.actor = abilityData?.actor;
+
+  if (options.noHeighten) rollConfig.useData.modifiers.noHeighten = true;
+  if (options.actor) rollConfig.useData.actor = options.actor;
+
+  if (!rollConfig.useData.actor) {
     ui.notifications.error("Abilities must be on an actor to be used.", {
       console: false,
     });
     return;
   }
-  const rollConfig = foundry.utils.deepClone(DEFAULT_ROLL_CONFIG);
-  rollConfig.abilityData = abilityData;
-  rollConfig.useData.rollOptions = options;
-
-  if (options.noHeighten) rollConfig.useData.modifiers.noHeighten = true;
 
   await _setTargets(rollConfig);
   await _stageUse(rollConfig);

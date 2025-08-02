@@ -8,7 +8,7 @@ export async function _payCosts(rollConfig) {
   const mpSpent = rollConfig.useData.costs.mp;
   const hpSpent = rollConfig.useData.costs.hp;
   const gpSpent = rollConfig.useData.costs.gp;
-  const actor = rollConfig.abilityData.actor;
+  const actor = rollConfig.useData.actor;
   const updates = {};
   if (rollConfig.abilityData.interaction === "attack") {
     updates["system.attackPenalty"] = actor.system.attackPenalty - 3;

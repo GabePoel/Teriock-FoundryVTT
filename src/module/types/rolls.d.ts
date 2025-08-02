@@ -1,3 +1,5 @@
+import type TeriockActor from "../documents/actor.mjs";
+
 /**
  * Options for performing a d20 roll.
  */
@@ -12,6 +14,8 @@ export type CommonRollOptions = {
   threshold?: number;
   /** Turn of Heightening */
   noHeighten?: boolean;
+  /** Forced {@link TeriockActor} */
+  actor?: TeriockActor;
 };
 
 /**

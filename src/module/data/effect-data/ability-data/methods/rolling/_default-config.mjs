@@ -1,6 +1,7 @@
 export const DEFAULT_ROLL_CONFIG = {
   /** @type {Partial<AbilityUseData>} */
   useData: {
+    actor: null,
     rollOptions: {},
     costs: {
       hp: 0,

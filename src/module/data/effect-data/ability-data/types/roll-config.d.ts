@@ -1,9 +1,12 @@
 import { CommonRollOptions } from "../../../../types/rolls";
 import type TeriockAbilityData from "../ability-data.mjs";
-import TeriockRoll from "../../../../documents/roll.mjs";
+import type TeriockActor from "../../../../documents/actor.mjs";
 import type TeriockBaseChatMessageSchema from "../../../message-data/base-message-data/_types";
+import type TeriockRoll from "../../../../documents/roll.mjs";
 
 export type AbilityUseData = {
+  /** Actor using this ability. */
+  actor: TeriockActor;
   /** Options for the ability roll. */
   rollOptions: CommonRollOptions;
   /** Costs spent on this use of the ability */

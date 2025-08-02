@@ -179,7 +179,7 @@ export default class TeriockEffect extends BaseTeriockEffect {
 
   /** @inheritDoc */
   static migrateData(data) {
-    if (typeof data.type === "string" && data.type === "effect") {
+    if (typeof data?.type === "string" && data.type === "effect") {
       data.type = "consequence";
     }
     return data;

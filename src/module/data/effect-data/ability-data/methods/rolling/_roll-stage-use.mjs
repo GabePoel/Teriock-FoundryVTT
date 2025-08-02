@@ -9,7 +9,7 @@ import { _handleDialogs } from "./_roll-dialogs.mjs";
  * @returns {Promise<void>}
  */
 export async function _stageUse(rollConfig) {
-  rollConfig.useData.rollData = rollConfig.abilityData.actor.getRollData();
+  rollConfig.useData.rollData = rollConfig.useData.actor.getRollData();
 
   // Calculate costs
   rollConfig.useData.costs.hp = await calculateCost(

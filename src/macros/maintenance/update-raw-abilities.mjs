@@ -55,7 +55,7 @@ for (const abilityPage of allAbilityPages) {
   console.log(abilityEffect);
 
   if (!abilityEffect) {
-    abilityEffect = await game.teriock.api.create.createAbility(
+    abilityEffect = await game.teriock.api.create.ability(
       abilityItem,
       abilityName,
       { notify: false },
