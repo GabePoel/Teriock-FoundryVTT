@@ -92,9 +92,15 @@ export async function _parse(abilityData, rawHTML) {
   const subs = Array.from(
     doc.querySelectorAll(".ability-sub-container"),
   ).filter((el) => !el.closest(".ability-sub-container:not(:scope)"));
+  const expandableSubs = Array.from(
+    doc.querySelectorAll(".expandable-container"),
+  ).filter((el) => !el.closest(".expandable-container:not(:scope)"));
+  subs.push(...expandableSubs);
+  console.log(expandableSubs);
 
   // Remove sub-containers and process dice
   doc.querySelectorAll(".ability-sub-container").forEach((el) => el.remove());
+  doc.querySelectorAll(".expandable-container").forEach((el) => el.remove());
   doc.querySelectorAll(".dice").forEach((el) => {
     const fullRoll = el.getAttribute("data-full-roll");
     const quickRoll = el.getAttribute("data-quick-roll");
@@ -410,6 +416,12 @@ function processImprovements(parameters, doc) {
     parameters.improvements.attributeImprovement.minVal = minVal
       ? parseInt(minVal, 10)
       : null;
+    if (minVal < 0) {
+      parameters.abilityType = "flaw";
+    }
+    if (minVal > 3) {
+      parameters.abilityType = "special";
+    }
   }
 
   // Feat save improvement
@@ -1080,7 +1092,8 @@ function selectImage(parameters) {
  */
 async function processSubAbilities(subs, abilityData) {
   for (const el of subs) {
-    const subNameEl = el.querySelector(".ability-sub-name");
+    let subNameEl = el.querySelector(".ability-sub-name");
+    if (el.className === "expandable-container") subNameEl = el;
     const namespace = subNameEl?.getAttribute("data-namespace");
     if (namespace === "Ability") {
       const subName = subNameEl.getAttribute("data-name");
