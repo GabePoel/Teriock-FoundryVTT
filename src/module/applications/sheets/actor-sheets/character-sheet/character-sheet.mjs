@@ -1,6 +1,7 @@
-const { api } = foundry.applications;
 import { documentOptions } from "../../../../helpers/constants/document-options.mjs";
 import TeriockBaseActorSheet from "../base-actor-sheet/base-actor-sheet.mjs";
+
+const { api } = foundry.applications;
 
 /**
  * Character sheet for Teriock system characters.

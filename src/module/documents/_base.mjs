@@ -1,3 +1,6 @@
+import ChildDocumentMixin from "./mixins/child-mixin.mjs";
+import ParentDocumentMixin from "./mixins/parent-mixin.mjs";
+
 const {
   ActiveEffect,
   Actor,
@@ -13,8 +16,6 @@ const {
 const { CompendiumCollection, CompendiumFolderCollection } =
   foundry.documents.collections;
 const { WorldCollection } = foundry.documents.abstract;
-import ChildDocumentMixin from "./mixins/child-mixin.mjs";
-import ParentDocumentMixin from "./mixins/parent-mixin.mjs";
 
 /**
  * This class is a hack to get {@link Actor} intellisense without warnings for unimplemented methods.

@@ -1,11 +1,16 @@
-const { fields } = foundry.data;
 import { pseudoHooks } from "../../../../../helpers/constants/pseudo-hooks.mjs";
-import { FormulaField, TeriockArrayField, TeriockRecordField } from "../../../../shared/fields.mjs";
+import {
+  FormulaField,
+  TeriockArrayField,
+  TeriockRecordField,
+} from "../../../../shared/fields.mjs";
 import {
   combatExpirationMethodField,
   combatExpirationSourceTypeField,
-  combatExpirationTimingField
+  combatExpirationTimingField,
 } from "../../../shared/shared-fields.mjs";
+
+const { fields } = foundry.data;
 
 /**
  * Creates a field for consequence rolls configuration.

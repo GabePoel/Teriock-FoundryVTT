@@ -1,4 +1,3 @@
-const { TypeDataModel } = foundry.abstract;
 import { _migrateData } from "./methods/_migrate-data.mjs";
 import * as postUpdate from "./methods/_post-update.mjs";
 import { _prepareBaseData } from "./methods/_prepare-base-data.mjs";
@@ -10,6 +9,8 @@ import { _prepareDerivedData } from "./methods/data-deriving/_data-deriving.mjs"
 import { _rollCondition } from "./methods/rolling/_roll-condition.mjs";
 import * as rollGeneric from "./methods/rolling/_roll-generic.mjs";
 import { _defineSchema } from "./methods/schema/_schema.mjs";
+
+const { TypeDataModel } = foundry.abstract;
 
 /**
  * Base actor data model for the Teriock system.

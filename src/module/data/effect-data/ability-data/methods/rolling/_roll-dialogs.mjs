@@ -1,5 +1,6 @@
-const { api, ux } = foundry.applications;
 import { createDialogFieldset } from "../../../../../helpers/html.mjs";
+
+const { api, ux } = foundry.applications;
 
 /**
  * Handles dialogs for variable costs and heightened effects.

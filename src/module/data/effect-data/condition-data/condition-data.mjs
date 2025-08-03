@@ -1,9 +1,10 @@
-const { fields } = foundry.data;
 import inCombatExpirationDialog from "../../../applications/dialogs/in-combat-expiration-dialog.mjs";
 import { makeIcon } from "../../../helpers/utils.mjs";
 import WikiDataMixin from "../../mixins/wiki-mixin.mjs";
 import TeriockBaseEffectData from "../base-effect-data/base-effect-data.mjs";
 import { combatExpirationMethodField } from "../shared/shared-fields.mjs";
+
+const { fields } = foundry.data;
 
 /**
  * Condition-specific effect data model.

@@ -1,5 +1,3 @@
-const { ActorSheet, ItemSheet } = foundry.appv1.sheets;
-const { DocumentSheetConfig } = foundry.applications.apps;
 import * as applications from "./applications/_module.mjs";
 import * as dialogs from "./applications/dialogs/_module.mjs";
 import * as perception from "./canvas/perception/_module.mjs";
@@ -15,6 +13,9 @@ import * as queries from "./helpers/queries/_module.mjs";
 import registerTemplates from "./helpers/register-templates.mjs";
 import * as utils from "./helpers/utils.mjs";
 import * as wiki from "./helpers/wiki.mjs";
+
+const { ActorSheet, ItemSheet } = foundry.appv1.sheets;
+const { DocumentSheetConfig } = foundry.applications.apps;
 
 foundry.helpers.Hooks.once("init", function () {
   CONFIG.TERIOCK = TERIOCK;

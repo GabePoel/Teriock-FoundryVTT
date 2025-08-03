@@ -1,7 +1,8 @@
-const { api } = foundry.applications;
 import { createAbility } from "../helpers/create-effects.mjs";
 import { fetchCategoryMembers } from "../helpers/wiki.mjs";
 import { BaseTeriockItem } from "./_base.mjs";
+
+const { api } = foundry.applications;
 
 /**
  * @property {TeriockBaseItemData} system

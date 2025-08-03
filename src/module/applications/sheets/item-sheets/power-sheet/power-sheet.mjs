@@ -1,7 +1,8 @@
-const { HandlebarsApplicationMixin } = foundry.applications.api;
 import { documentOptions } from "../../../../helpers/constants/document-options.mjs";
 import TeriockBaseItemSheet from "../base-item-sheet/base-item-sheet.mjs";
 import { powerContextMenu } from "./connections/_context-menus.mjs";
+
+const { HandlebarsApplicationMixin } = foundry.applications.api;
 
 /**
  * Power sheet for Teriock system powers.

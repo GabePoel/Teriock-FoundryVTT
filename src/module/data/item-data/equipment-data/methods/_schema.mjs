@@ -1,7 +1,8 @@
-const { fields } = foundry.data;
 import { equipmentOptions } from "../../../../helpers/constants/equipment-options.mjs";
 import { weaponFightingStyles } from "../../../../helpers/constants/generated/weapon-fighting-styles.mjs";
 import { FormulaField } from "../../../shared/fields.mjs";
+
+const { fields } = foundry.data;
 
 /**
  * Defines the schema for equipment data fields.

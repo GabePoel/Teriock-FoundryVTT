@@ -1,6 +1,7 @@
-const { fields } = foundry.data;
 import { tradecraftOptions } from "../../../../../helpers/constants/tradecraft-options.mjs";
 import { mergeLevel } from "../../../../../helpers/utils.mjs";
+
+const { fields } = foundry.data;
 
 /**
  * Creates a tradecraft field definition with proficiency, extra, and bonus tracking.

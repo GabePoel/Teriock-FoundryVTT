@@ -1,9 +1,10 @@
 import { createProperty } from "../../../helpers/create-effects.mjs";
-import { getRollIcon, makeIcon } from "../../../helpers/utils.mjs";
+import { getRollIcon } from "../../../helpers/utils.mjs";
 import ConsumableDataMixin from "../../mixins/consumable-mixin.mjs";
 import WikiDataMixin from "../../mixins/wiki-mixin.mjs";
 import TeriockBaseItemData from "../base-item-data/base-item-data.mjs";
 import * as attunement from "./methods/_attunement.mjs";
+import * as contextMenus from "./methods/_context-menus.mjs";
 import * as deriving from "./methods/_data-deriving.mjs";
 import * as overrides from "./methods/_derived-overrides.mjs";
 import * as identifying from "./methods/_identifying.mjs";
@@ -73,108 +74,7 @@ export default class TeriockEquipmentData extends WikiDataMixin(
    * @returns {Teriock.ContextMenuEntry[]}
    */
   get cardContextMenuEntries() {
-    return [
-      ...super.cardContextMenuEntries,
-      {
-        name: "Use in Two Hands",
-        icon: makeIcon(getRollIcon(this.derivedTwoHandedDamage), "contextMenu"),
-        callback: this.roll.bind(this, { twoHanded: true }),
-        condition: this.derivedTwoHandedDamage !== this.derivedDamage,
-        group: "usage",
-      },
-      {
-        name: "Identify",
-        icon: makeIcon("eye", "contextMenu"),
-        callback: this.identify.bind(this),
-        condition: !this.identified && this.reference,
-        group: "usage",
-      },
-      {
-        name: "Read Magic",
-        icon: makeIcon("hand", "contextMenu"),
-        callback: this.readMagic.bind(this),
-        condition:
-          !this.identified && this.reference && this.powerLevel === "unknown",
-        group: "usage",
-      },
-      {
-        name: "Equip",
-        icon: makeIcon("check", "contextMenu"),
-        callback: this.equip.bind(this),
-        condition: this.canEquip,
-        group: "control",
-      },
-      {
-        name: "Unequip",
-        icon: makeIcon("xmark", "contextMenu"),
-        callback: this.unequip.bind(this),
-        condition: this.canUnequip,
-        group: "control",
-      },
-      {
-        name: "Attune",
-        icon: makeIcon("handshake-simple", "contextMenu"),
-        callback: this.attune.bind(this),
-        condition: !this.isAttuned,
-        group: "control",
-      },
-      {
-        name: "Deattune",
-        icon: makeIcon("handshake-simple-slash", "contextMenu"),
-        callback: this.deattune.bind(this),
-        condition: this.isAttuned,
-        group: "control",
-      },
-      {
-        name: "Glue",
-        icon: makeIcon("link", "contextMenu"),
-        callback: this.glue.bind(this),
-        condition: !this.glued,
-        group: "control",
-      },
-      {
-        name: "Unglue",
-        icon: makeIcon("link-slash", "contextMenu"),
-        callback: this.unglue.bind(this),
-        condition: this.glued,
-        group: "control",
-      },
-      {
-        name: "Shatter",
-        icon: makeIcon("wine-glass-crack", "contextMenu"),
-        callback: this.shatter.bind(this),
-        condition: !this.shattered,
-        group: "control",
-      },
-      {
-        name: "Repair",
-        icon: makeIcon("wine-glass", "contextMenu"),
-        callback: this.repair.bind(this),
-        condition: this.shattered,
-        group: "control",
-      },
-      {
-        name: "Dampen",
-        icon: makeIcon("bell-slash", "contextMenu"),
-        callback: this.dampen.bind(this),
-        condition: !this.dampened,
-        group: "control",
-      },
-      {
-        name: "Undampen",
-        icon: makeIcon("bell", "contextMenu"),
-        callback: this.undampen.bind(this),
-        condition: this.dampened,
-        group: "control",
-      },
-      {
-        name: "Make Unidentified Copy",
-        icon: makeIcon("eye-slash", "contextMenu"),
-        callback: this.unidentify.bind(this),
-        condition: this.identified && game.user.isGM,
-        group: "usage",
-      },
-    ];
+    return [...super.cardContextMenuEntries, ...contextMenus._entries(this)];
   }
 
   /** @inheritDoc */

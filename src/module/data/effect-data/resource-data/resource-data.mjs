@@ -1,10 +1,11 @@
-const { fields } = foundry.data;
 import ConsumableDataMixin from "../../mixins/consumable-mixin.mjs";
 import { FormulaField } from "../../shared/fields.mjs";
 import TeriockBaseEffectData from "../base-effect-data/base-effect-data.mjs";
 import { _messageParts } from "./methods/_messages.mjs";
 import { _migrateData } from "./methods/_migrate-data.mjs";
 import { _roll } from "./methods/_rolling.mjs";
+
+const { fields } = foundry.data;
 
 /**
  * Resource-specific effect data model.

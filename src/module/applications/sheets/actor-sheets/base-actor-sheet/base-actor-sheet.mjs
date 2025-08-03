@@ -1,18 +1,23 @@
-const { api, ux } = foundry.applications;
 import { conditions } from "../../../../content/conditions.mjs";
 import { documentOptions } from "../../../../helpers/constants/document-options.mjs";
 import { copyRank, getItem, getRank } from "../../../../helpers/fetch.mjs";
 import { toTitleCase } from "../../../../helpers/utils.mjs";
-import { selectClassDialog, selectDialog, selectEquipmentTypeDialog } from "../../../dialogs/select-dialog.mjs";
+import {
+  selectClassDialog,
+  selectDialog,
+  selectEquipmentTypeDialog,
+} from "../../../dialogs/select-dialog.mjs";
 import { BaseActorSheet } from "../../_base.mjs";
 import {
   piercingContextMenu,
   primaryAttackContextMenu,
-  primaryBlockerContextMenu
+  primaryBlockerContextMenu,
 } from "./connections/character-context-menus.mjs";
 import { _filterAbilities, _filterEquipment } from "./methods/_filters.mjs";
 import { _defaultSheetSettings } from "./methods/_settings.mjs";
 import { _sortAbilities, _sortEquipment } from "./methods/_sort.mjs";
+
+const { api, ux } = foundry.applications;
 
 /**
  * Base actor sheet for actors.
@@ -141,12 +146,12 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
   /**
    * Toggles the equipped state of an embedded document.
    *
-   * @param {MouseEvent} event - The event object.
+   * @param {MouseEvent} _event - The event object.
    * @param {HTMLElement} target - The target element.
    * @returns {Promise<void>} Promise that resolves when toggle is complete.
    * @static
    */
-  static async _toggleEquippedDoc(event, target) {
+  static async _toggleEquippedDoc(_event, target) {
     const embedded =
       /** @type {TeriockEquipment|null} */
       await this._embeddedFromCard(target);
@@ -160,12 +165,12 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
   /**
    * Toggles the attuned state of an embedded document.
    *
-   * @param {MouseEvent} event - The event object.
+   * @param {MouseEvent} _event - The event object.
    * @param {HTMLElement} target - The target element.
    * @returns {Promise<void>} Promise that resolves when toggle is complete.
    * @static
    */
-  static async _toggleAttunedDoc(event, target) {
+  static async _toggleAttunedDoc(_event, target) {
     const embedded =
       /** @type {TeriockEquipment|null} */
       await this._embeddedFromCard(target);
@@ -179,12 +184,12 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
   /**
    * Toggles the glued state of an embedded document.
    *
-   * @param {MouseEvent} event - The event object.
+   * @param {MouseEvent} _event - The event object.
    * @param {HTMLElement} target - The target element.
    * @returns {Promise<void>} Promise that resolves when toggle is complete.
    * @static
    */
-  static async _toggleGluedDoc(event, target) {
+  static async _toggleGluedDoc(_event, target) {
     const embedded =
       /** @type {TeriockEquipment|null} */
       await this._embeddedFromCard(target);
@@ -198,12 +203,12 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
   /**
    * Toggles the dampened state of an embedded document.
    *
-   * @param {MouseEvent} event - The event object.
+   * @param {MouseEvent} _event - The event object.
    * @param {HTMLElement} target - The target element.
    * @returns {Promise<void>} Promise that resolves when toggle is complete.
    * @static
    */
-  static async _toggleDampenedDoc(event, target) {
+  static async _toggleDampenedDoc(_event, target) {
     const embedded =
       /** @type {TeriockEquipment|null} */
       await this._embeddedFromCard(target);
@@ -217,12 +222,12 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
   /**
    * Toggles the shattered state of an embedded document.
    *
-   * @param {MouseEvent} event - The event object.
+   * @param {MouseEvent} _event - The event object.
    * @param {HTMLElement} target - The target element.
    * @returns {Promise<void>} Promise that resolves when toggle is complete.
    * @static
    */
-  static async _toggleShatteredDoc(event, target) {
+  static async _toggleShatteredDoc(_event, target) {
     const embedded =
       /** @type {TeriockEquipment|null} */
       await this._embeddedFromCard(target);
@@ -236,12 +241,12 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
   /**
    * Toggles the disabled state of an embedded document.
    *
-   * @param {MouseEvent} event - The event object.
+   * @param {MouseEvent} _event - The event object.
    * @param {HTMLElement} target - The target element.
    * @returns {Promise<void>} Promise that resolves when toggle is complete.
    * @static
    */
-  static async _toggleDisabledDoc(event, target) {
+  static async _toggleDisabledDoc(_event, target) {
     const embedded = await this._embeddedFromCard(target);
     embedded?.toggleDisabled();
   }
@@ -454,12 +459,12 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
   /**
    * Cycles through tradecraft extra levels (0, 1, 2).
    *
-   * @param {MouseEvent} event - The event object.
+   * @param {MouseEvent} _event - The event object.
    * @param {HTMLElement} target - The target element.
    * @returns {Promise<void>} Promise that resolves when tradecraft extra is updated.
    * @static
    */
-  static async _tradecraftExtra(event, target) {
+  static async _tradecraftExtra(_event, target) {
     const tradecraft = target.dataset.tradecraft;
     const extra = this.document.system.tradecrafts[tradecraft].extra;
     const newExtra = (extra + 1) % 3;
@@ -471,12 +476,12 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
   /**
    * Rolls a hit die for a rank item.
    *
-   * @param {MouseEvent} event - The event object.
+   * @param {MouseEvent} _event - The event object.
    * @param {HTMLElement} target - The target element.
    * @returns {Promise<void>} Promise that resolves when hit die is rolled.
    * @static
    */
-  static async _rollHitDie(event, target) {
+  static async _rollHitDie(_event, target) {
     const id = target.dataset.id;
     /** @type TeriockRank */
     const rank = this.actor.items.get(id);
@@ -486,12 +491,12 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
   /**
    * Rolls a mana die for a rank item.
    *
-   * @param {MouseEvent} event - The event object.
+   * @param {MouseEvent} _event - The event object.
    * @param {HTMLElement} target - The target element.
    * @returns {Promise<void>} Promise that resolves when mana die is rolled.
    * @static
    */
-  static async _rollManaDie(event, target) {
+  static async _rollManaDie(_event, target) {
     const id = target.dataset.id;
     /** @type {TeriockRank} */
     const rank = this.actor.items.get(id);
@@ -501,12 +506,12 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
   /**
    * Rolls a hit die for a rank item.
    *
-   * @param {MouseEvent} event - The event object.
+   * @param {MouseEvent} _event - The event object.
    * @param {HTMLElement} target - The target element.
    * @returns {Promise<void>} Promise that resolves when hit die is rolled.
    * @static
    */
-  static async _unrollHitDie(event, target) {
+  static async _unrollHitDie(_event, target) {
     const id = target.dataset.id;
     /** @type TeriockRank */
     const rank = this.actor.items.get(id);
@@ -516,12 +521,12 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
   /**
    * Rolls a mana die for a rank item.
    *
-   * @param {MouseEvent} event - The event object.
+   * @param {MouseEvent} _event - The event object.
    * @param {HTMLElement} target - The target element.
    * @returns {Promise<void>} Promise that resolves when mana die is rolled.
    * @static
    */
-  static async _unrollManaDie(event, target) {
+  static async _unrollManaDie(_event, target) {
     const id = target.dataset.id;
     /** @type {TeriockRank} */
     const rank = this.actor.items.get(id);
@@ -632,7 +637,7 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
         '<input type="number" name="damage" placeholder="Damage Amount">',
       ok: {
         label: "Confirm",
-        callback: (event, button) => {
+        callback: (_event, button) => {
           let input = button.form.elements.namedItem("damage").value;
           if (input) {
             this.document.takeDamage(Number(input));
@@ -656,7 +661,7 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
       content: '<input type="number" name="drain" placeholder="Drain Amount">',
       ok: {
         label: "Confirm",
-        callback: (event, button) => {
+        callback: (_event, button) => {
           let input = button.form.elements.namedItem("drain").value;
           if (input) {
             this.document.takeDrain(Number(input));
@@ -681,7 +686,7 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
         '<input type="number" name="wither" placeholder="Wither Amount">',
       ok: {
         label: "Confirm",
-        callback: (event, button) => {
+        callback: (_event, button) => {
           let input = button.form.elements.namedItem("wither").value;
           if (input) {
             this.document.takeWither(Number(input));
@@ -707,7 +712,7 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
     }
   }
 
-  static async _toggleConditionExpansion(event, target) {
+  static async _toggleConditionExpansion(_event, target) {
     const condition = target.dataset.condition;
     this.settings.conditionExpansions[condition] =
       !this.settings.conditionExpansions[condition];
@@ -946,7 +951,9 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
               context.conditionProviders[condition].delete("1st Leg Hack");
             }
             if (e.name === "Heavily Encumbered") {
-              context.conditionProviders[condition].delete("Lightly Encumbered");
+              context.conditionProviders[condition].delete(
+                "Lightly Encumbered",
+              );
             }
           }
         }
@@ -967,19 +974,6 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
     }
 
     return context;
-  }
-
-  /**
-   * Gets an ability by ID and optional parent ID.
-   *
-   * @param {string} id - The ability ID.
-   * @param {string} parentId - The optional parent ID.
-   * @returns {ActiveEffect|null} The ability effect or null if not found.
-   */
-  _getAbility(id, parentId) {
-    return parentId
-      ? this.actor.items.get(parentId)?.effects.get(id)
-      : this.actor.effects.get(id);
   }
 
   /**
@@ -1226,7 +1220,7 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
       if (!(contentEl && inputEl)) return;
 
       const instance = new ux.SearchFilter({
-        callback: (event, query, rgx) => {
+        callback: (_event, query, rgx) => {
           if (!query && this._loadingSearch) {
             const searchPath = `_${type}SearchValue`;
             const value = this[searchPath] || "";

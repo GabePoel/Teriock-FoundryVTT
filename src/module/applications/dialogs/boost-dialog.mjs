@@ -1,6 +1,7 @@
-const { fields } = foundry.data;
-const { DialogV2 } = foundry.applications.api;
 import { TeriockRoll } from "../../documents/_module.mjs";
+
+const { DialogV2 } = foundry.applications.api;
+const { fields } = foundry.data;
 
 /**
  * Dialog that allows for modifying a roll with boosts/deboosts.

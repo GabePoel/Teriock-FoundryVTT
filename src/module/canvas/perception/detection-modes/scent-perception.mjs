@@ -1,6 +1,7 @@
+import BaseDetectionMode from "./base-detection-mode.mjs";
+
 const { OutlineOverlayFilter } = foundry.canvas.rendering.filters;
 const { Token } = foundry.canvas.placeables;
-import BaseDetectionMode from "./base-detection-mode.mjs";
 
 /**
  * Relevant wiki pages:

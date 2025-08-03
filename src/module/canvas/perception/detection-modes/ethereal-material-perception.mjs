@@ -1,6 +1,7 @@
-const { Token } = foundry.canvas.placeables;
 import EtherealFilter from "../../rendering/ethereal-filter.mjs";
 import BaseDetectionMode from "./base-detection-mode.mjs";
+
+const { Token } = foundry.canvas.placeables;
 
 /**
  * Ethereal creatures seeing Material creatures.

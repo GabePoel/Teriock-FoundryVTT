@@ -1,5 +1,6 @@
-const { ux } = foundry.applications;
 import { buildMessage } from "../../helpers/messages-builder/message-builder.mjs";
+
+const { ux } = foundry.applications;
 
 /**
  * Mixin for common functions used across document classes embedded in actors.

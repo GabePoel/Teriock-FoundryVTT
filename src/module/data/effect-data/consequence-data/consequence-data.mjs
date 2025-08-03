@@ -1,4 +1,3 @@
-const { fields } = foundry.data;
 import inCombatExpirationDialog from "../../../applications/dialogs/in-combat-expiration-dialog.mjs";
 import { getRollIcon } from "../../../helpers/utils.mjs";
 import { migrateHierarchy } from "../../shared/migrations.mjs";
@@ -7,9 +6,11 @@ import {
   combatExpirationMethodField,
   combatExpirationSourceTypeField,
   combatExpirationTimingField,
-  hierarchyField
+  hierarchyField,
 } from "../shared/shared-fields.mjs";
 import { _messageParts } from "./methods/_messages.mjs";
+
+const { fields } = foundry.data;
 
 /**
  * Effect-specific effect data model.
@@ -42,7 +43,7 @@ export default class TeriockConsequenceData extends TeriockBaseEffectData {
 
   /** @inheritDoc */
   get useText() {
-    return `Roll to Remove ${this.parent.name}`
+    return `Roll to Remove ${this.parent.name}`;
   }
 
   /**

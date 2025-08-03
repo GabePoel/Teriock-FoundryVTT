@@ -1,6 +1,7 @@
-const { fields } = foundry.data;
 import TeriockImageSheet from "../../applications/sheets/misc-sheets/image-sheet/image-sheet.mjs";
 import { makeIcon } from "../../helpers/utils.mjs";
+
+const { fields } = foundry.data;
 
 /**
  * Mixin that provides child document functionality for embedded documents.

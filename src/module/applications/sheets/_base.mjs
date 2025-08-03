@@ -1,6 +1,7 @@
+import TeriockSheet from "./mixins/sheet-mixin.mjs";
+
 const { ActorSheetV2, ItemSheetV2, ActiveEffectConfig } =
   foundry.applications.sheets;
-import TeriockSheet from "./mixins/sheet-mixin.mjs";
 
 /**
  * This class is a hack to get {@link ActorSheetV2} intellisense without warnings for unimplemented methods.

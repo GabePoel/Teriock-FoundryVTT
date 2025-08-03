@@ -1,6 +1,7 @@
-const { fields } = foundry.data;
 import { abilityOptions } from "../../../../../helpers/constants/ability-options.mjs";
 import { conditions as conditionsList } from "../../../../../helpers/constants/generated/conditions.mjs";
+
+const { fields } = foundry.data;
 
 /**
  * Creates a schema field definition for protection types.

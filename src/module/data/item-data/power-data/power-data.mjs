@@ -1,6 +1,7 @@
-const { fields } = foundry.data;
 import TeriockBaseItemData from "../base-item-data/base-item-data.mjs";
 import { _messageParts } from "./methods/_messages.mjs";
+
+const { fields } = foundry.data;
 
 /**
  * Power-specific item data model.

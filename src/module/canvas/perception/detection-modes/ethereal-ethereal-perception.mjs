@@ -1,5 +1,6 @@
-const { Token } = foundry.canvas.placeables;
 import BaseDetectionMode from "./base-detection-mode.mjs";
+
+const { Token } = foundry.canvas.placeables;
 
 /**
  * Ethereal creatures seeing Ethereal creatures.

@@ -1,6 +1,6 @@
-const { fields } = foundry.data;
-import { getRollIcon } from "../../../helpers/utils.mjs";
 import TeriockBaseEffectData from "../base-effect-data/base-effect-data.mjs";
+
+const { fields } = foundry.data;
 
 /**
  * Attunement-specific effect data model.

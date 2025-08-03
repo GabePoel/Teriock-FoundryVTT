@@ -1,5 +1,3 @@
-const { fields } = foundry.data;
-const { DialogV2 } = foundry.applications.api;
 import { abilities } from "../../helpers/constants/generated/abilities.mjs";
 import { conditions } from "../../helpers/constants/generated/conditions.mjs";
 import { equipmentclasses } from "../../helpers/constants/generated/equipment-classes.mjs";
@@ -8,6 +6,9 @@ import { magicalProperties } from "../../helpers/constants/generated/magical-pro
 import { materialProperties } from "../../helpers/constants/generated/material-properties.mjs";
 import { properties } from "../../helpers/constants/generated/properties.mjs";
 import { weaponclasses } from "../../helpers/constants/generated/weapon-classes.mjs";
+
+const { fields } = foundry.data;
+const { DialogV2 } = foundry.applications.api;
 
 /**
  * Dialog that lets you select something.

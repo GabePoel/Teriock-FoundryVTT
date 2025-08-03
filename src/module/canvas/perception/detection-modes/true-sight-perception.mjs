@@ -1,5 +1,6 @@
-const { OutlineOverlayFilter } = foundry.canvas.rendering.filters;
 import BaseDetectionMode from "./base-detection-mode.mjs";
+
+const { OutlineOverlayFilter } = foundry.canvas.rendering.filters;
 
 /**
  * Relevant wiki pages:

@@ -1,5 +1,6 @@
-const { ux, api } = foundry.applications;
 import { imageContextMenuOptions } from "./connections/_context-menus.mjs";
+
+const { ux, api } = foundry.applications;
 
 /**
  * Image sheet for Teriock system image previews.

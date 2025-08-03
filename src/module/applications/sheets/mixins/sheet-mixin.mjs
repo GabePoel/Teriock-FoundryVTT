@@ -1,11 +1,11 @@
-const { DragDrop, TextEditor, ContextMenu } = foundry.applications.ux;
-const { DocumentSheetV2 } = foundry.applications.api;
 import connectEmbedded from "../../../helpers/connect-embedded.mjs";
 import * as createEffects from "../../../helpers/create-effects.mjs";
-import { createProperty } from "../../../helpers/create-effects.mjs";
 import { buildMessage } from "../../../helpers/messages-builder/message-builder.mjs";
 import { selectPropertyDialog } from "../../dialogs/select-dialog.mjs";
 import { imageContextMenuOptions } from "../misc-sheets/image-sheet/connections/_context-menus.mjs";
+
+const { DragDrop, TextEditor, ContextMenu } = foundry.applications.ux;
+const { DocumentSheetV2 } = foundry.applications.api;
 
 /**
  * Base sheet mixin for Teriock system applications.
@@ -349,7 +349,7 @@ export default (Base) => {
         property = "newProperty";
       }
       console.log("PROPERTY", property);
-      await createProperty(this.document, property);
+      await createEffects.createProperty(this.document, property);
     }
 
     /**

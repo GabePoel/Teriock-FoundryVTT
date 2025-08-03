@@ -1,6 +1,7 @@
+import ChildDataMixin from "../../mixins/child-mixin.mjs";
+
 const { TypeDataModel } = foundry.abstract;
 const { fields } = foundry.data;
-import ChildDataMixin from "../../mixins/child-mixin.mjs";
 
 /**
  * Base item data model for all Teriock items.

@@ -1,5 +1,6 @@
-const { api, ux } = foundry.applications;
 import TeriockRoll from "../../documents/roll.mjs";
+
+const { api, ux } = foundry.applications;
 
 /**
  * Dialog that asks the {@link TeriockUser} if their effect should expire.

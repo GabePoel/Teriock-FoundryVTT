@@ -1,4 +1,3 @@
-const { api } = foundry.applications;
 import { documentOptions } from "../../../../helpers/constants/document-options.mjs";
 import { pseudoHooks } from "../../../../helpers/constants/pseudo-hooks.mjs";
 import { pureUuid, safeUuid } from "../../../../helpers/utils.mjs";
@@ -6,6 +5,8 @@ import durationDialog from "../../../dialogs/duration-dialog.mjs";
 import { selectDialog } from "../../../dialogs/select-dialog.mjs";
 import TeriockBaseEffectSheet from "../base-effect-sheet/base-effect-sheet.mjs";
 import { contextMenus } from "./connections/_context-menus.mjs";
+
+const { api } = foundry.applications;
 
 /**
  * Ability sheet for Teriock system abilities.

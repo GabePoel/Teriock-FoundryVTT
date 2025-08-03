@@ -1,5 +1,6 @@
-const { DialogV2 } = foundry.applications.api;
 import TeriockRoll from "../../../../../documents/roll.mjs";
+
+const { DialogV2 } = foundry.applications.api;
 
 /**
  * Rolls to remove a condition from an actor.

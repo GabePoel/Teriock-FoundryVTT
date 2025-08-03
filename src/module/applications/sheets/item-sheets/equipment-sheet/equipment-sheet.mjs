@@ -1,8 +1,12 @@
-const { HandlebarsApplicationMixin } = foundry.applications.api;
 import { cleanCapitalization } from "../../../../helpers/clean.mjs";
 import { documentOptions } from "../../../../helpers/constants/document-options.mjs";
 import TeriockBaseItemSheet from "../base-item-sheet/base-item-sheet.mjs";
-import { fontContextMenu, powerLevelContextMenu } from "./connections/_context-menus.mjs";
+import {
+  fontContextMenu,
+  powerLevelContextMenu,
+} from "./connections/_context-menus.mjs";
+
+const { HandlebarsApplicationMixin } = foundry.applications.api;
 
 /**
  * Equipment sheet for Teriock system equipment.

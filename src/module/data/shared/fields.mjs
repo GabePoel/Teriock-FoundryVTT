@@ -1,5 +1,6 @@
-const { fields } = foundry.data;
 import { TeriockRoll } from "../../documents/_module.mjs";
+
+const { fields } = foundry.data;
 
 /**
  * Utility function for creating DOM elements with common properties.

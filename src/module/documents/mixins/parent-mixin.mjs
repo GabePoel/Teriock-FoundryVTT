@@ -1,4 +1,3 @@
-const { Document } = foundry.abstract;
 import { toCamelCase } from "../../helpers/utils.mjs";
 
 /**

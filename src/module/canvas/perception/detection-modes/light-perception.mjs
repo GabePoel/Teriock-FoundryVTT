@@ -1,5 +1,6 @@
-const { Token } = foundry.canvas.placeables;
 import BaseDetectionMode from "./base-detection-mode.mjs";
+
+const { Token } = foundry.canvas.placeables;
 
 /**
  * This exists to override the default light perception mode. This handles non-token detection (doors, etc.), but token

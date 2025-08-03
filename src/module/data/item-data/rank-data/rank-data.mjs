@@ -1,10 +1,11 @@
-const { fields } = foundry.data;
 import { getRollIcon, makeIcon } from "../../../helpers/utils.mjs";
 import WikiDataMixin from "../../mixins/wiki-mixin.mjs";
 import TeriockBaseItemData from "../base-item-data/base-item-data.mjs";
 import { _messageParts } from "./methods/_messages.mjs";
 import { _parse } from "./methods/_parsing.mjs";
 import { _rollHitDie, _rollManaDie } from "./methods/_rolling.mjs";
+
+const { fields } = foundry.data;
 
 /**
  * Rank-specific item data model.

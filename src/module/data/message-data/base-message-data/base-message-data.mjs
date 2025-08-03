@@ -1,9 +1,10 @@
+import { imageContextMenuOptions } from "../../../applications/sheets/misc-sheets/image-sheet/connections/_context-menus.mjs";
+import { handlers } from "../../../helpers/action-handler/instances/_handlers.mjs";
+import { buildHTMLButton } from "../../../helpers/html.mjs";
+
 const { ux } = foundry.applications;
 const { fields } = foundry.data;
 const { TypeDataModel } = foundry.abstract;
-import { handlers } from "../../../helpers/action-handler/instances/_handlers.mjs";
-import { buildHTMLButton } from "../../../helpers/html.mjs";
-import { imageContextMenuOptions } from "../../../applications/sheets/misc-sheets/image-sheet/connections/_context-menus.mjs";
 
 export default class TeriockBaseMessageData extends TypeDataModel {
   /**
