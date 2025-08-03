@@ -935,17 +935,34 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
 
     if (tab === "conditions") {
       for (const condition of Object.keys(CONFIG.TERIOCK.conditions)) {
-        context.conditionProviders[condition] = [];
+        context.conditionProviders[condition] = new Set();
+        for (const e of this.document.effectTypes?.base || []) {
+          if (!e.id.includes(condition) && e.statuses.has(condition)) {
+            context.conditionProviders[condition].add(e.name);
+            if (e.name === "2nd Arm Hack") {
+              context.conditionProviders[condition].delete("1st Arm Hack");
+            }
+            if (e.name === "2nd Leg Hack") {
+              context.conditionProviders[condition].delete("1st Leg Hack");
+            }
+            if (e.name === "Heavily Encumbered") {
+              context.conditionProviders[condition].delete("Lightly Encumbered");
+            }
+          }
+        }
         for (const c of this.document.conditions) {
           if (!c.id.includes(condition) && c.statuses.has(condition)) {
-            context.conditionProviders[condition].push(c.name);
+            context.conditionProviders[condition].add(c.name);
           }
         }
         for (const c of this.document.consequences) {
           if (c.statuses.has(condition)) {
-            context.conditionProviders[condition].push(c.name);
+            context.conditionProviders[condition].add(c.name);
           }
         }
+        context.conditionProviders[condition] = Array.from(
+          context.conditionProviders[condition],
+        );
       }
     }
 

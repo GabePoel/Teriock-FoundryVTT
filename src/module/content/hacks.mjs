@@ -1,27 +1,27 @@
 export const hacksData = {
   arm1: {
-    name: "Arm Hack 1",
+    name: "1st Arm Hack",
     id: "armHack1",
     _id: "armHack100000000",
     statuses: ["hacked"],
   },
   arm2: {
-    name: "Arm Hack 2",
+    name: "2nd Arm Hack",
     id: "armHack2",
     _id: "armHack200000000",
     statuses: ["hacked"],
   },
   leg1: {
-    name: "Leg Hack 1",
+    name: "1st Leg Hack",
     id: "legHack1",
     _id: "legHack100000000",
     statuses: ["hacked", "slowed"],
   },
   leg2: {
-    name: "Leg Hack 2",
+    name: "2nd Leg Hack",
     id: "legHack2",
     _id: "legHack200000000",
-    statuses: ["hacked", "slowed", "immobilized"],
+    statuses: ["hacked", "immobilized"],
   },
   ear1: {
     name: "Ear Hack",

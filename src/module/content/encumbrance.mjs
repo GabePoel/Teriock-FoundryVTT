@@ -20,9 +20,9 @@ export const encumbranceData = {
     statuses: ["encumbered", "slowed"],
   },
   level3: {
-    name: "Cannot Carry More",
+    name: "Overburdened",
     id: "cannotCarryMore",
     _id: "encumbranceL3000",
-    statuses: ["encumbered", "slowed", "immobilized"],
+    statuses: ["immobilized"],
   },
 };
