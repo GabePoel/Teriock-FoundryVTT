@@ -7,6 +7,9 @@ import { _messageParts } from "./methods/_messages.mjs";
  */
 export default class TeriockPowerData extends TeriockBaseItemData {
   /** @inheritDoc */
+  static USABLE = false;
+
+  /** @inheritDoc */
   static get metadata() {
     return foundry.utils.mergeObject({}, { type: "power" });
   }

@@ -8,7 +8,7 @@ export default class TeriockCombat extends BaseTeriockCombat {
    * @param {TeriockConsequence} effect - Effect to check expiration for.
    * @param {"turn"|"combat"|"action"} trigger - What might trigger this effect to expire.
    * @param {"start"|"end"} time - When this effect might expire.
-   * @param {Teriock.UUID<TeriockActor>} actorUuid - UUID of some {@link TeriockActor} to compare against.
+   * @param {Teriock.UUID<TeriockActor>|null} actorUuid - UUID of some {@link TeriockActor} to compare against.
    * @param {object[]} [updates] - Optional array to mutate with additional updates.
    * @returns {Promise<void>}
    * @private
@@ -61,7 +61,7 @@ export default class TeriockCombat extends BaseTeriockCombat {
         effect,
         trigger,
         time,
-        timeActor.uuid,
+        timeActor?.uuid,
         updates,
       );
     }

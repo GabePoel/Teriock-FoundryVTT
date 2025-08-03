@@ -113,7 +113,7 @@ export async function _buildButtons(rollConfig) {
   Object.entries(takeData.rolls).forEach(([rollType, formula]) => {
     if (formula && ROLL_BUTTON_CONFIGS[rollType]) {
       const buttonConfig = ROLL_BUTTON_CONFIGS[rollType];
-      buttonConfig.icon = getRollIcon(formula);
+      buttonConfig.icon = `fas fa-${getRollIcon(formula)}`;
       buttonConfig.dataset = {
         action: "roll-rollable-take",
         type: rollType,

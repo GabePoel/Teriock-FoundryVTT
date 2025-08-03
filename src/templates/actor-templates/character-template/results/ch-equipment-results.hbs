@@ -25,6 +25,10 @@
         amount=item.system.quantity
         max=item.system.maxQuantity.derived
         icons=(concat
+          (ticonToggle "handshake-simple" "handshake-simple-slash" item.system.isAttuned action="toggleAttunedDoc" id=item._id parentId=item.parent._id tooltipTrue="Attuned" tooltipFalse="Deattuned")
+          (ticonToggle "link" "link-slash" item.system.glued action="toggleGluedDoc" id=item._id parentId=item.parent._id tooltipTrue="Glued" tooltipFalse="Unglued")
+          (ticonToggle "bell" "bell-slash" item.system.dampened action="toggleDampenedDoc" id=item._id parentId=item.parent._id tooltipTrue="Dampened" tooltipFalse="Undampened")
+          (ticonToggle "wine-glass" "wine-glass-crack" item.system.shattered action="toggleShatteredDoc" id=item._id parentId=item.parent._id tooltipTrue="Shattered" tooltipFalse="Repaired")
           (ticon "comment" action="chatDoc" id=item._id tooltip="Send to Chat")
           (ticonToggle "circle-check" "circle" item.system.equipped action="toggleEquippedDoc" id=item._id parentId=item.parent._id tooltipTrue="Equipped" tooltipFalse="Unequipped")
         )

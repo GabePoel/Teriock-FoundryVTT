@@ -1,4 +1,6 @@
 const { fields } = foundry.data;
+import TeriockImageSheet from "../../applications/sheets/misc-sheets/image-sheet/image-sheet.mjs";
+import { makeIcon } from "../../helpers/utils.mjs";
 
 /**
  * Mixin that provides child document functionality for embedded documents.
@@ -7,7 +9,17 @@ const { fields } = foundry.data;
  * @param {TypeDataModel} Base - The base class to mix in with.
  */
 export default (Base) => {
+  /**
+   * @property {TeriockItem|TeriockEffect} parent
+   */
   return class ChildData extends Base {
+    /**
+     * Can this type be "used"?
+     *
+     * @type {boolean}
+     */
+    static USABLE = true;
+
     /**
      * Gets the message rules-parts for displaying the child document in chat.
      * Includes image, name, and font information from the parent document.
@@ -39,6 +51,98 @@ export default (Base) => {
         blocks: [],
         font: null,
       };
+    }
+
+    /**
+     * Context menu entries to display for cards that represent the parent document.
+     *
+     * @returns {Teriock.ContextMenuEntry[]}
+     */
+    get cardContextMenuEntries() {
+      return [
+        {
+          name: this.useText,
+          icon: makeIcon(this.useIcon, "contextMenu"),
+          callback: this.use.bind(this),
+          condition: this.constructor.USABLE,
+          group: "usage",
+        },
+        {
+          name: "Enable",
+          icon: makeIcon("check", "contextMenu"),
+          callback: this.parent.enable.bind(this.parent),
+          condition: this.parent.disabled && this.parent.type !== "equipment",
+          group: "control",
+        },
+        {
+          name: "Disable",
+          icon: makeIcon("xmark-large", "contextMenu"),
+          callback: this.parent.disable.bind(this.parent),
+          condition: !this.parent.disabled && this.parent.type !== "equipment",
+          group: "control",
+        },
+        {
+          name: "Open Image",
+          icon: makeIcon("image", "contextMenu"),
+          callback: async () => {
+            await new TeriockImageSheet(this.parent.img).render(true);
+          },
+          group: "share",
+        },
+        {
+          name: "Share Image",
+          icon: makeIcon("comment-image", "contextMenu"),
+          callback: this.parent.chatImage.bind(this.parent),
+          group: "share",
+        },
+        {
+          name: "Share Writeup",
+          icon: makeIcon("comment-lines", "contextMenu"),
+          callback: this.parent.chat.bind(this.parent),
+          group: "share",
+        },
+        {
+          name: "Delete",
+          icon: makeIcon("trash", "contextMenu"),
+          callback: async () => {
+            await this.parent.parent.deleteEmbeddedDocuments(
+              this.parent.documentName,
+              [this.parent.id],
+            );
+          },
+          condition: () =>
+            this.parent.parent.sheet?.editable && this.parent.isOwner,
+          group: "document",
+        },
+        {
+          name: "Duplicate",
+          icon: makeIcon("copy", "contextMenu"),
+          callback: async () => {
+            await this.parent.duplicate();
+          },
+          condition: () =>
+            this.parent.parent.sheet?.editable && this.parent.isOwner,
+          group: "document",
+        },
+      ];
+    }
+
+    /**
+     * An icon that represents using this.
+     *
+     * @returns {string}
+     */
+    get useIcon() {
+      return "dice-d20";
+    }
+
+    /**
+     * A string that represents using this.
+     *
+     * @returns {string}
+     */
+    get useText() {
+      return `Use ${this.parent.name}`;
     }
 
     /**

@@ -1,4 +1,5 @@
 const { fields } = foundry.data;
+import { getRollIcon } from "../../../helpers/utils.mjs";
 import TeriockBaseEffectData from "../base-effect-data/base-effect-data.mjs";
 
 /**
@@ -10,6 +11,9 @@ import TeriockBaseEffectData from "../base-effect-data/base-effect-data.mjs";
  * @extends {TeriockBaseEffectData}
  */
 export default class TeriockAttunementData extends TeriockBaseEffectData {
+  /** @inheritDoc */
+  static USABLE = false;
+
   /**
    * Metadata for this effect.
    *

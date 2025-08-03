@@ -41,7 +41,6 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
       openPrimaryAttacker: this._openPrimaryAttacker,
       openPrimaryBlocker: this._openPrimaryBlocker,
       quickUse: this._quickUse,
-      removeCondition: this._removeCondition,
       resist: this._resist,
       rollFeatSave: this._rollFeatSave,
       rollHitDie: this._rollHitDie,
@@ -51,11 +50,17 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
       takeDrain: this._takeDrain,
       takeHack: this._takeHack,
       takeWither: this._takeWither,
+      toggleAttunedDoc: this._toggleAttunedDoc,
       toggleConditionExpansion: this._toggleConditionExpansion,
+      toggleDampenedDoc: this._toggleDampenedDoc,
       toggleDisabledDoc: this._toggleDisabledDoc,
       toggleEquippedDoc: this._toggleEquippedDoc,
+      toggleGluedDoc: this._toggleGluedDoc,
       toggleSb: this._toggleSb,
+      toggleShatteredDoc: this._toggleShatteredDoc,
       tradecraftExtra: this._tradecraftExtra,
+      unrollHitDie: this._unrollHitDie,
+      unrollManaDie: this._unrollManaDie,
     },
     form: {
       submitOnChange: true,
@@ -149,6 +154,82 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
       await embedded.system.unequip();
     } else {
       await embedded.system.equip();
+    }
+  }
+
+  /**
+   * Toggles the attuned state of an embedded document.
+   *
+   * @param {MouseEvent} event - The event object.
+   * @param {HTMLElement} target - The target element.
+   * @returns {Promise<void>} Promise that resolves when toggle is complete.
+   * @static
+   */
+  static async _toggleAttunedDoc(event, target) {
+    const embedded =
+      /** @type {TeriockEquipment|null} */
+      await this._embeddedFromCard(target);
+    if (embedded.system.isAttuned) {
+      await embedded.system.deattune();
+    } else {
+      await embedded.system.attune();
+    }
+  }
+
+  /**
+   * Toggles the glued state of an embedded document.
+   *
+   * @param {MouseEvent} event - The event object.
+   * @param {HTMLElement} target - The target element.
+   * @returns {Promise<void>} Promise that resolves when toggle is complete.
+   * @static
+   */
+  static async _toggleGluedDoc(event, target) {
+    const embedded =
+      /** @type {TeriockEquipment|null} */
+      await this._embeddedFromCard(target);
+    if (embedded.system.glued) {
+      await embedded.system.unglue();
+    } else {
+      await embedded.system.glue();
+    }
+  }
+
+  /**
+   * Toggles the dampened state of an embedded document.
+   *
+   * @param {MouseEvent} event - The event object.
+   * @param {HTMLElement} target - The target element.
+   * @returns {Promise<void>} Promise that resolves when toggle is complete.
+   * @static
+   */
+  static async _toggleDampenedDoc(event, target) {
+    const embedded =
+      /** @type {TeriockEquipment|null} */
+      await this._embeddedFromCard(target);
+    if (embedded.system.dampened) {
+      await embedded.system.undampen();
+    } else {
+      await embedded.system.dampen();
+    }
+  }
+
+  /**
+   * Toggles the shattered state of an embedded document.
+   *
+   * @param {MouseEvent} event - The event object.
+   * @param {HTMLElement} target - The target element.
+   * @returns {Promise<void>} Promise that resolves when toggle is complete.
+   * @static
+   */
+  static async _toggleShatteredDoc(event, target) {
+    const embedded =
+      /** @type {TeriockEquipment|null} */
+      await this._embeddedFromCard(target);
+    if (embedded.system.shattered) {
+      await embedded.system.repair();
+    } else {
+      await embedded.system.shatter();
     }
   }
 
@@ -418,6 +499,36 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
   }
 
   /**
+   * Rolls a hit die for a rank item.
+   *
+   * @param {MouseEvent} event - The event object.
+   * @param {HTMLElement} target - The target element.
+   * @returns {Promise<void>} Promise that resolves when hit die is rolled.
+   * @static
+   */
+  static async _unrollHitDie(event, target) {
+    const id = target.dataset.id;
+    /** @type TeriockRank */
+    const rank = this.actor.items.get(id);
+    if (rank) await rank.update({ "system.hitDieSpent": false });
+  }
+
+  /**
+   * Rolls a mana die for a rank item.
+   *
+   * @param {MouseEvent} event - The event object.
+   * @param {HTMLElement} target - The target element.
+   * @returns {Promise<void>} Promise that resolves when mana die is rolled.
+   * @static
+   */
+  static async _unrollManaDie(event, target) {
+    const id = target.dataset.id;
+    /** @type {TeriockRank} */
+    const rank = this.actor.items.get(id);
+    if (rank) await rank.update({ "system.manaDieSpent": false });
+  }
+
+  /**
    * Rolls a tradecraft check with optional advantage/disadvantage.
    *
    * @param {MouseEvent} event - The event object.
@@ -578,24 +689,6 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
         },
       },
     });
-  }
-
-  /**
-   * Removes a condition with optional modifiers.
-   *
-   * @param {MouseEvent} event - The event object.
-   * @param {HTMLElement} target - The target element.
-   * @returns {Promise<void>} Promise that resolves when condition is removed.
-   * @static
-   */
-  static async _removeCondition(event, target) {
-    event.stopPropagation();
-    const options = {};
-    const condition = target.dataset.condition;
-    if (event.altKey) options.increaseDie = true;
-    if (event.shiftKey) options.decreaseDie = true;
-    if (event.ctrlKey) options.skip = true;
-    await this.actor.rollCondition(condition, options);
   }
 
   /**
@@ -838,6 +931,24 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
     );
     context.settings = this.settings;
 
+    context.conditionProviders = {};
+
+    if (tab === "conditions") {
+      for (const condition of Object.keys(CONFIG.TERIOCK.conditions)) {
+        context.conditionProviders[condition] = [];
+        for (const c of this.document.conditions) {
+          if (!c.id.includes(condition) && c.statuses.has(condition)) {
+            context.conditionProviders[condition].push(c.name);
+          }
+        }
+        for (const c of this.document.consequences) {
+          if (c.statuses.has(condition)) {
+            context.conditionProviders[condition].push(c.name);
+          }
+        }
+      }
+    }
+
     return context;
   }
 
@@ -973,16 +1084,6 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
         await this.document.update({ "system.attackPenalty": 0 });
         e.stopPropagation();
       });
-
-    this.element.querySelectorAll(".condition-toggle").forEach((el) => {
-      el.addEventListener("contextmenu", async (e) => {
-        e.preventDefault();
-        if (!(el instanceof HTMLElement)) return;
-        const condition = el.dataset.condition;
-        await this.actor.rollCondition(condition, { skip: true });
-        e.stopPropagation();
-      });
-    });
 
     this.element.querySelectorAll(".hack-marker-box").forEach((el) => {
       el.addEventListener("contextmenu", async (e) => {

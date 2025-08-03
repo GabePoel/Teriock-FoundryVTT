@@ -14,6 +14,9 @@ import { _messageParts } from "./methods/_messages.mjs";
 export default class TeriockPropertyData extends WikiDataMixin(
   TeriockBaseEffectData,
 ) {
+  /** @inheritDoc */
+  static USABLE = false;
+
   /**
    * Metadata for this effect.
    *

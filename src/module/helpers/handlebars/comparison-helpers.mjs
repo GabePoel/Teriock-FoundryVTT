@@ -25,4 +25,8 @@ export default function registerComparisonHelpers() {
     if (typeof item === "string") item = item.toLowerCase();
     return set.has(item);
   });
+
+  Handlebars.registerHelper("ternary", function (condition, valTrue, valFalse) {
+    return condition ? valTrue : valFalse;
+  });
 }

@@ -3,6 +3,7 @@ const { DocumentSheetV2 } = foundry.applications.api;
 import connectEmbedded from "../../../helpers/connect-embedded.mjs";
 import * as createEffects from "../../../helpers/create-effects.mjs";
 import { createProperty } from "../../../helpers/create-effects.mjs";
+import { buildMessage } from "../../../helpers/messages-builder/message-builder.mjs";
 import { selectPropertyDialog } from "../../dialogs/select-dialog.mjs";
 import { imageContextMenuOptions } from "../misc-sheets/image-sheet/connections/_context-menus.mjs";
 
@@ -387,7 +388,24 @@ export default (Base) => {
             element,
           );
         if (embedded && typeof embedded.buildMessage === "function") {
+          console.log(embedded);
           element.dataset.tooltipHtml = await embedded.buildMessage();
+          element.dataset.tooltipClass = "teriock teriock-rich-tooltip";
+        } else if (embedded && embedded.type === "condition") {
+          const rawMessage = buildMessage({
+            image: embedded.img,
+            name: embedded.name,
+            bars: [],
+            blocks: [
+              {
+                title: "Description",
+                text: embedded.system.description,
+              },
+            ],
+          });
+          element.dataset.tooltipHtml = await TextEditor.enrichHTML(
+            rawMessage.outerHTML,
+          );
           element.dataset.tooltipClass = "teriock teriock-rich-tooltip";
         }
       }
@@ -610,6 +628,7 @@ export default (Base) => {
         img: this.document.img,
         flags: this.document.flags,
         uuid: this.document.uuid,
+        id: this.document.id,
         settings: this.settings,
       };
     }
@@ -745,7 +764,7 @@ export default (Base) => {
 
       if (type === "item") return this.document.items.get(id);
 
-      if (type === "effect") {
+      if (["effect", "conditionUnlocked"].includes(type)) {
         if (
           this.document.documentName === "Actor" &&
           this.document._id !== parentId
@@ -756,6 +775,10 @@ export default (Base) => {
           return this.document.parent?.effects.get(id);
         }
         return this.document.effects.get(id);
+      }
+
+      if (type === "conditionLocked") {
+        return CONFIG.TERIOCK.content.conditions[id];
       }
     }
 

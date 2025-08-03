@@ -261,11 +261,13 @@ export function tokenDocument(token) {
  * Creates an HTML icon element using Font Awesome classes.
  *
  * @param {string} icon - The icon name to use.
- * @param {string} style - The Font Awesome style (solid, light, etc.). Defaults to "solid".
+ * @param {...Teriock.IconStyle} styles - One or more Font Awesome style names (e.g., "solid", "duotone").
  * @returns {string} The HTML string for the icon element.
  */
-export function makeIcon(icon, style = "solid") {
-  return `<i class="fas fa-${style} fa-${icon}"></i>`;
+export function makeIcon(icon, ...styles) {
+  const styleClasses = styles.map((s) => CONFIG.TERIOCK.iconStyles[s] || s);
+  const classString = styleClasses.map((s) => `fa-${s}`).join(" ");
+  return `<i class="${classString} fa-${icon}"></i>`;
 }
 
 /**
@@ -319,10 +321,10 @@ export function getRollIcon(rollFormula) {
   dice.sort((a, b) => b.faces - a.faces);
   for (const die of dice) {
     if (validDice.includes(die.faces)) {
-      return `fas fa-dice-d${die.faces}`;
+      return `dice-d${die.faces}`;
     }
   }
-  return "fas fa-dice";
+  return "dice";
 }
 
 /**

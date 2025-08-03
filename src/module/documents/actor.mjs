@@ -541,21 +541,6 @@ export default class TeriockActor extends BaseTeriockActor {
   }
 
   /**
-   * Rolls a condition check for the actor.
-   *
-   * Relevant wiki pages:
-   * - [Conditions](https://wiki.teriock.com/index.php/Category:Conditions)
-   *
-   * @param {Teriock.ConditionKey} condition - The condition to roll for.
-   * @param {Teriock.ConditionRollOptions} options - Options for the condition roll.
-   * @returns {Promise<void>} Promise that resolves when the condition roll is complete.
-   */
-  async rollCondition(condition, options) {
-    await this.hookCall("rollCondition", options);
-    await this.system.rollCondition(condition, options);
-  }
-
-  /**
    * Rolls a feat save for the specified attribute.
    *
    * Relevant wiki pages:

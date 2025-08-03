@@ -1,5 +1,6 @@
 const { fields } = foundry.data;
 import inCombatExpirationDialog from "../../../applications/dialogs/in-combat-expiration-dialog.mjs";
+import { getRollIcon } from "../../../helpers/utils.mjs";
 import { migrateHierarchy } from "../../shared/migrations.mjs";
 import TeriockBaseEffectData from "../base-effect-data/base-effect-data.mjs";
 import {
@@ -32,6 +33,16 @@ export default class TeriockConsequenceData extends TeriockBaseEffectData {
       ...super.messageParts,
       ..._messageParts(this),
     };
+  }
+
+  /** @inheritDoc */
+  get useIcon() {
+    return getRollIcon(this.expirations.combat.what.roll);
+  }
+
+  /** @inheritDoc */
+  get useText() {
+    return `Roll to Remove ${this.parent.name}`
   }
 
   /**
@@ -172,19 +183,20 @@ export default class TeriockConsequenceData extends TeriockBaseEffectData {
   /**
    * Trigger in-combat expiration.
    *
+   * @param {boolean} [forceDialog] - Force a dialog to show up.
    * @returns {Promise<void>}
    */
-  async inCombatExpiration() {
-    await inCombatExpirationDialog(this.parent);
+  async inCombatExpiration(forceDialog = false) {
+    await inCombatExpirationDialog(this.parent, forceDialog);
   }
 
   /**
-   * Rolls the consequence. Alias for {@link inCombatExpiration}.
+   * Rolls the consequence. Forced alias for {@link inCombatExpiration}.
    *
    * @returns {Promise<void>} Promise that resolves when the roll is complete.
    * @override
    */
   async roll() {
-    await this.inCombatExpiration();
+    await this.inCombatExpiration(true);
   }
 }

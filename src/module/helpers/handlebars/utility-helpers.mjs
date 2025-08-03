@@ -80,20 +80,32 @@ export default function registerUiHelpers() {
         tooltipTrue = "",
         tooltipFalse = "",
       } = options.hash;
+
       const icon = bool ? iconTrue : iconFalse;
-      const actionAttr =
-        (bool || falseAction) && action ? `data-action="${action}"` : "";
+
+      // Determine action to use
+      const resolvedAction = bool
+        ? action
+        : typeof falseAction === "string"
+          ? falseAction
+          : falseAction && action;
+
+      const actionAttr = resolvedAction
+        ? `data-action="${resolvedAction}"`
+        : "";
+
       const tooltipAttr =
         (bool || falseAction) && action
           ? `data-tooltip="${bool ? tooltipTrue : tooltipFalse}"`
           : "";
+
       return new Handlebars.SafeString(`
-            <i class="ticon tcard-clickable ${cssClass} fa-fw fa-light fa-${icon}" 
-            ${id ? `data-id="${id}"` : ""} 
-            ${parentId ? `data-parent-id="${parentId}"` : ""} 
-            ${actionAttr}
-            ${tooltipAttr}></i>
-        `);
+        <i class="ticon tcard-clickable ${cssClass} fa-fw fa-light fa-${icon}" 
+        ${id ? `data-id="${id}"` : ""} 
+        ${parentId ? `data-parent-id="${parentId}"` : ""} 
+        ${actionAttr}
+        ${tooltipAttr}></i>
+    `);
     },
   );
 
@@ -254,6 +266,8 @@ export default function registerUiHelpers() {
       shattered = false,
       type = "item",
       draggable = true,
+      openable = true,
+      usable = true,
       consumable = false,
       amount = 1,
       max = null,
@@ -272,12 +286,12 @@ export default function registerUiHelpers() {
     return new Handlebars.SafeString(`
       <div 
         class="tcard ${draggable ? "draggable" : ""} ${active ? "active" : "inactive"} ${struck ? "struck" : ""} ${shattered ? "shattered" : ""}" ${idAttr} ${parentIdAttr} ${typeAttr} 
-        data-action="openDoc" 
+        data-action="${openable ? "openDoc" : ""}"
         data-img="${img}"
       >
         <div class="tcard-marker" style="${marker ? `background-color: ${marker}; width: 4px; min-width: 4px;` : ""}"></div>
         <div 
-          class="tcard-image"
+          class="tcard-image ${usable ? "usable" : ""}"
           data-action="${action}" ${tooltipAttr}
           data-tooltip-direction="LEFT"
           data-tooltip-class="teriock"

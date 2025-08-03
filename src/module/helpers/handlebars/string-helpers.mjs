@@ -42,6 +42,11 @@ export default function registerStringHelpers() {
     return out;
   });
 
+  Handlebars.registerHelper("dotJoinArray", (arr) => {
+    arr = foundry.utils.deepClone(arr);
+    return arr.join(" · ")
+  });
+
   Handlebars.registerHelper("str", (val) => {
     let out = "";
     if (!(val === undefined || val === null)) {

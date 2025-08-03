@@ -12,7 +12,6 @@ import * as Rolls from "./types/rolls";
 import * as Ui from "./types/ui";
 import * as Updates from "./types/updates";
 import * as Wiki from "./types/wiki";
-import type { QuerySustainedExpirationData } from "./types/queries";
 
 declare global {
   // Base document classes
@@ -111,6 +110,7 @@ declare global {
     type CommandOptions = Command.CommandOptions;
     type CommonRollOptions = Rolls.CommonRollOptions;
     type ConditionRollOptions = Rolls.ConditionRollOptions;
+    type ContextMenuEntry = Ui.ContextMenuEntry;
     type CritRollOptions = Rolls.CritRollOptions;
     type Delivery = Parameters.Delivery;
     type EffectMetadata = Metadata.EffectMetadata;
@@ -123,6 +123,7 @@ declare global {
     type Field = Parameters.Field;
     type HTMLButtonConfig = Chat.HTMLButtonConfig;
     type HackableBodyPart = Parameters.HackableBodyPart;
+    type IconStyle = Ui.IconStyle;
     type Interaction = Parameters.Interaction;
     type ItemType = DocumentTypes.ItemType;
     type Maneuver = Parameters.Maneuver;

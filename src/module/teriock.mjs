@@ -86,6 +86,7 @@ foundry.helpers.Hooks.once("init", function () {
     ability: data.effect.AbilityData,
     attunement: data.effect.AttunementData,
     base: data.effect.BaseEffectData,
+    condition: data.effect.ConditionData,
     consequence: data.effect.ConsequenceData,
     fluency: data.effect.FluencyData,
     property: data.effect.PropertyData,

@@ -1,11 +1,10 @@
-const { Document } = foundry.abstract;
 const { ux } = foundry.applications;
 import { buildMessage } from "../../helpers/messages-builder/message-builder.mjs";
 
 /**
  * Mixin for common functions used across document classes embedded in actors.
  *
- * @param {DeepPartial<Document>} BaseDocument
+ * @param {DeepPartial<ClientDocument>} BaseDocument
  * @mixin
  */
 export default (BaseDocument) => {

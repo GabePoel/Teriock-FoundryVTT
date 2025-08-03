@@ -46,6 +46,19 @@ export default class TeriockAbilityData extends WikiDataMixin(
     return suppressed;
   }
 
+  /** @inheritDoc */
+  get useText() {
+    if (this.spell) return `Cast ${this.parent.name}`
+    return super.useText;
+  }
+
+  /** @inheritDoc */
+  get useIcon() {
+    if (this.interaction === "attack") return "dice-d20";
+    if (this.interaction === "block") return "shield";
+    return CONFIG.TERIOCK.documentOptions.ability.icon;
+  }
+
   /**
    * Gets the message parts for the ability.
    * Combines base message parts with ability-specific message parts.

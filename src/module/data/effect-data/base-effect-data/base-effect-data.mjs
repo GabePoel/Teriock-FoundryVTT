@@ -1,5 +1,6 @@
 const { fields } = foundry.data;
 const { TypeDataModel } = foundry.abstract;
+import { makeIcon } from "../../../helpers/utils.mjs";
 import ChildDataMixin from "../../mixins/child-mixin.mjs";
 import { _expire, _shouldExpire } from "./methods/_expiration.mjs";
 

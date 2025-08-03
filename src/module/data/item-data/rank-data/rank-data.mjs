@@ -1,4 +1,5 @@
 const { fields } = foundry.data;
+import { getRollIcon, makeIcon } from "../../../helpers/utils.mjs";
 import WikiDataMixin from "../../mixins/wiki-mixin.mjs";
 import TeriockBaseItemData from "../base-item-data/base-item-data.mjs";
 import { _messageParts } from "./methods/_messages.mjs";
@@ -17,10 +18,54 @@ export default class TeriockRankData extends WikiDataMixin(
   TeriockBaseItemData,
 ) {
   /** @inheritDoc */
+  static USABLE = false;
+
+  /** @inheritDoc */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
       type: "rank",
     });
+  }
+
+  /**
+   * Context menu entries to display for cards that represent the parent document.
+   *
+   * @returns {Teriock.ContextMenuEntry[]}
+   */
+  get cardContextMenuEntries() {
+    return [
+      ...super.cardContextMenuEntries,
+      {
+        name: "Roll Hit Die",
+        icon: makeIcon(getRollIcon(this.hitDie), "contextMenu"),
+        callback: this.rollHitDie.bind(this),
+        condition: !this.hitDieSpent,
+        group: "usage",
+      },
+      {
+        name: "Recover Hit Die",
+        icon: makeIcon("rotate-left", "contextMenu"),
+        callback: async () =>
+          await this.parent.update({ "system.hitDieSpent": false }),
+        condition: this.hitDieSpent,
+        group: "usage",
+      },
+      {
+        name: "Roll Mana Die",
+        icon: makeIcon(getRollIcon(this.manaDie), "contextMenu"),
+        callback: this.rollManaDie.bind(this),
+        condition: !this.manaDieSpent,
+        group: "usage",
+      },
+      {
+        name: "Recover Mana Die",
+        icon: makeIcon("rotate-left", "contextMenu"),
+        callback: async () =>
+          await this.parent.update({ "system.manaDieSpent": false }),
+        condition: this.manaDieSpent,
+        group: "usage",
+      },
+    ];
   }
 
   /**

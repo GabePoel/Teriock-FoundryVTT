@@ -31,7 +31,8 @@ function deriveEquipmentDataValue(
       }
     }
 
-    for (const propertyKey of equipmentData.parent?.effectKeys?.property || []) {
+    for (const propertyKey of equipmentData.parent?.effectKeys?.property ||
+      []) {
       const propertyOverride = overrides.properties[propertyKey]?.[dataKey];
       if (propertyOverride !== undefined) {
         value = combineValues(value, propertyOverride);
@@ -63,7 +64,8 @@ function deriveEquipmentDataValue(
         }
       }
 
-      for (const propertyKey of equipmentData.parent?.effectKeys?.property || []) {
+      for (const propertyKey of equipmentData.parent?.effectKeys?.property ||
+        []) {
         const propertyUpgrade = upgrades.properties[propertyKey]?.[dataKey];
         if (propertyUpgrade !== undefined) {
           value = combineValues(value, propertyUpgrade);
@@ -204,7 +206,10 @@ export function _derivedTwoHandedDamage(equipmentData) {
   return deriveEquipmentDataValue(
     equipmentData,
     "twoHandedDamage",
-    (data) => data.twoHandedDamage,
+    (data) =>
+      data.twoHandedDamage && data.twoHandedDamage !== "0"
+        ? data.twoHandedDamage
+        : data.damage,
     (current, override) => override || current,
     (current, upgrade) => formatStringUpgrade(current, upgrade),
   );
