@@ -1,5 +1,6 @@
 import { SheetData } from "./sheet";
 import type TeriockMacro from "../../../../documents/macro.mjs";
+import type TeriockToken from "../../../../documents/token.mjs";
 
 /**
  * Derived data properties.
@@ -63,4 +64,8 @@ export interface TeriockBaseActorDerived {
   hookedMacros: Record<Teriock.PseudoHook, Teriock.UUID<TeriockMacro>[]>;
   /** Species */
   species: Set<string>;
+  /** Lighted to */
+  lightedTo: Teriock.UUID<TeriockToken>[];
+  /** Goaded to */
+  goadedTo: Teriock.UUID<TeriockToken>[];
 }

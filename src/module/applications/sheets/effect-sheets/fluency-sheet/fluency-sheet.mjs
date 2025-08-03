@@ -38,7 +38,7 @@ export default class TeriockFluencySheet extends api.HandlebarsApplicationMixin(
   static PARTS = {
     all: {
       template:
-        "systems/teriock/src/templates/effect-templates/fluency-template/fluency-template.hbs",
+        "systems/teriock/src/templates/document-templates/effect-templates/fluency-template/fluency-template.hbs",
       scrollable: [".window-content", ".tsheet-page", ".ab-sheet-everything"],
     },
   };

@@ -1,0 +1,34 @@
+<div id="condition-results" class="tcard-results">
+  <div class="tcard-container {{{system.sheet.display.consequence.size}}} {{#if
+    system.sheet.display.consequence.gapless}}gapless{{/if}}"
+       {{#if (not (exists conditions))}}style="box-shadow: none;"{{/if}}>
+    <div class="tcard-container-start" style="display: none;"></div>
+    {{#each conditions as |condition|}}
+      {{tcard
+        img=(path ../config.content.conditions condition "img")
+        title=(path ../config.content.conditions condition "name")
+        subtitle=""
+        text=(dotJoinArray (lookup ../conditionProviders condition))
+        id=(ternary (includes ../removableConditions condition) (path ../config.content.conditions condition "_id") condition)
+        action=(ternary (includes ../removableConditions condition) "rollDoc" "")
+        tooltip=(ternary (includes ../removableConditions condition) "Roll to Remove" "")
+        icons=(concat
+          (ternary (includes ../removableConditions condition)
+            (ticon "dice-d4" action="rollDoc" tooltip="Roll to Remove")
+            (ticon "lock" tooltip="Locked")
+          )
+        )
+        type=(ternary (includes ../removableConditions condition) "conditionUnlocked" "conditionLocked")
+        parentId=../id
+        draggable=false
+        openable=false
+        usable=(includes ../removableConditions condition)
+      }}
+    {{/each}}
+    {{#if (not (exists conditions))}}
+      <div class="no-results {{{system.sheet.display.consequence.size}}}">
+        <p>No conditions found.</p>
+      </div>
+    {{/if}}
+  </div>
+</div>

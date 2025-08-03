@@ -134,12 +134,14 @@
     cursor: default;
     margin-top: var(--tcard-margin-top);
 
-    &.visible-first {
+    &.visible-first,
+    &:first-child {
       border-top-left-radius: calc(var(--tcard-outer-border-radius) - 1px);
       border-top-right-radius: calc(var(--tcard-outer-border-radius) - 1px);
     }
 
-    &.visible-last {
+    &.visible-last,
+    &:last-child {
       border-bottom-left-radius: calc(var(--tcard-outer-border-radius) - 1px);
       border-bottom-right-radius: calc(var(--tcard-outer-border-radius) - 1px);
     }
@@ -303,6 +305,11 @@
     &.hidden {
       display: none;
     }
+  }
+
+  .tcard-container-start + .tcard {
+    border-top-left-radius: calc(var(--tcard-outer-border-radius) - 1px);
+    border-top-right-radius: calc(var(--tcard-outer-border-radius) - 1px);
   }
 }
 

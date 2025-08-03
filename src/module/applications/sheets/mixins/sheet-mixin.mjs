@@ -387,11 +387,8 @@ export default (Base) => {
           /** @type {TeriockItem|TeriockEffect} */ await this._embeddedFromCard(
             element,
           );
-        if (embedded && typeof embedded.buildMessage === "function") {
-          element.dataset.tooltipHtml = await embedded.buildMessage();
-          element.dataset.tooltipClass = "teriock teriock-rich-tooltip";
-        } else if (embedded && embedded.type === "condition") {
-          const rawMessage = buildMessage({
+        if (embedded && embedded.type === "condition") {
+          const messageParts = {
             image: embedded.img,
             name: embedded.name,
             bars: [],
@@ -401,10 +398,38 @@ export default (Base) => {
                 text: embedded.system.description,
               },
             ],
-          });
+          };
+          if (embedded.id === "lighted") {
+            let lightedToText = "<ul>";
+            for (const uuid of this.document.system.lightedTo) {
+              const token = await game.teriock.api.utils.fromUuid(uuid);
+              lightedToText += `<li>@UUID[${uuid}]{${token.name}}</li>`;
+            }
+            lightedToText += "</ul>";
+            messageParts.blocks.push({
+              title: "Lighted to",
+              text: lightedToText,
+            });
+          }
+          if (embedded.id === "goaded") {
+            let goadedToText = "<ul>";
+            for (const uuid of this.document.system.goadedTo) {
+              const token = await game.teriock.api.utils.fromUuid(uuid);
+              goadedToText += `<li>@UUID[${uuid}]{${token.name}}</li>`;
+            }
+            goadedToText += "</ul>";
+            messageParts.blocks.push({
+              title: "Goaded to",
+              text: goadedToText,
+            });
+          }
+          const rawMessage = buildMessage(messageParts);
           element.dataset.tooltipHtml = await TextEditor.enrichHTML(
             rawMessage.outerHTML,
           );
+          element.dataset.tooltipClass = "teriock teriock-rich-tooltip";
+        } else if (embedded && typeof embedded.buildMessage === "function") {
+          element.dataset.tooltipHtml = await embedded.buildMessage();
           element.dataset.tooltipClass = "teriock teriock-rich-tooltip";
         }
       }

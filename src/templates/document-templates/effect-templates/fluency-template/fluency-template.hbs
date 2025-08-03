@@ -1,0 +1,55 @@
+<div class="{{cssClass}} tsheet-page">
+  <div class="ab-sheet-everything">
+    <div class="ab-sheet-top">
+      {{> "systems/teriock/src/templates/document-templates/shared/header.hbs"}}
+      <div class="ab-bars">
+        <div class="ab-bar ab-bar-1">
+          <div class="ab-box-container">
+            <div class="ab-box {{#if editable}}field-box{{/if}}" data-tooltip="Discipline">
+              <div class="ab-box-icon">
+                <i
+                  class="fa-fw fa-light fa-{{path config.tradecraftOptions system.field "icon"}}"
+                ></i>
+              </div>
+              <div class="ab-box-content">
+                {{path config.tradecraftOptions system.field "name"}}
+              </div>
+            </div>
+          </div>
+          <div class="ab-box-container">
+            <div class="ab-box {{#if editable}}tradecraft-box{{/if}}" data-tooltip="Tradecraft">
+              <div class="ab-box-icon">
+                <i
+                  class="fa-fw fa-light fa-{{path config.tradecraftOptions system.field "tradecrafts" system.tradecraft
+                                                  "icon"}}"
+                ></i>
+              </div>
+              <div class="ab-box-content">
+                {{path config.tradecraftOptions system.field "tradecrafts" system.tradecraft "name"}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ab-main">
+      <div class="ab-section-container">
+        <div class="ab-section">
+          <span class="ab-section-title">Description</span>
+        </div>
+        {{#if editable}}
+          <prose-mirror
+            name="system.description"
+            value="{{system.description}}"
+            toggled="true"
+            editable="editable"
+          >
+            <div class="text-preview">{{{enrichedDescription}}}</div>
+          </prose-mirror>
+        {{else}}
+          <div class="text-preview">{{{enrichedDescription}}}</div>
+        {{/if}}
+      </div>
+    </div>
+  </div>
+</div>

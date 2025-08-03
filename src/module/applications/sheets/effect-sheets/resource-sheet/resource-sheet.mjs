@@ -34,7 +34,7 @@ export default class TeriockResourceSheet extends api.HandlebarsApplicationMixin
   static PARTS = {
     all: {
       template:
-        "systems/teriock/src/templates/effect-templates/resource-template/resource-template.hbs",
+        "systems/teriock/src/templates/document-templates/effect-templates/resource-template/resource-template.hbs",
       scrollable: [".window-content", ".tsheet-page", ".ab-sheet-everything"],
     },
   };

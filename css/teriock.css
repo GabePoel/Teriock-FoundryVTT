@@ -1,6 +1,41 @@
 .teriock {
   @import url("https://fonts.googleapis.com/css2?family=Bonheur+Royale&family=Cinzel:wght@400..900&family=Great+Vibes&family=Quintessential&family=Tagesschrift&display=swap");
 }
+.teriock .token-select {
+  padding: 0;
+  margin: 0;
+}
+.teriock .token-select .token-select-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 14px;
+  gap: 7px;
+  cursor: pointer;
+}
+.teriock .token-select .token-select-row .token-checkbox-container {
+  height: 28px;
+  margin-left: 7px;
+  margin-top: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.teriock .token-select .token-select-row .token-image-container {
+  height: 28px;
+  width: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.teriock .token-select .token-select-row .token-name-container {
+  height: 28px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
 @font-face {
   font-family: "XMasterpieceSwashes";
   src: url("../assets/fonts/xmasterpieceswashes.ttf");
@@ -193,11 +228,11 @@
   --tcard-opacity: 0.5;
   background-color: rgba(255, 255, 255, 0.05);
 }
-.teriock .tcard-container .tcard.visible-first {
+.teriock .tcard-container .tcard.visible-first, .teriock .tcard-container .tcard:first-child {
   border-top-left-radius: calc(var(--tcard-outer-border-radius) - 1px);
   border-top-right-radius: calc(var(--tcard-outer-border-radius) - 1px);
 }
-.teriock .tcard-container .tcard.visible-last {
+.teriock .tcard-container .tcard.visible-last, .teriock .tcard-container .tcard:last-child {
   border-bottom-left-radius: calc(var(--tcard-outer-border-radius) - 1px);
   border-bottom-right-radius: calc(var(--tcard-outer-border-radius) - 1px);
 }
@@ -330,6 +365,10 @@
 }
 .teriock .tcard-container .tcard.hidden {
   display: none;
+}
+.teriock .tcard-container .tcard-container-start + .tcard {
+  border-top-left-radius: calc(var(--tcard-outer-border-radius) - 1px);
+  border-top-right-radius: calc(var(--tcard-outer-border-radius) - 1px);
 }
 .teriock .tcard-results {
   width: 100%;

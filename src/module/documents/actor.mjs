@@ -1,4 +1,5 @@
 import { characterOptions } from "../helpers/constants/character-options.mjs";
+import { pseudoHooks } from "../helpers/constants/pseudo-hooks.mjs";
 import { rankOptions } from "../helpers/constants/rank-options.mjs";
 import { copyItem } from "../helpers/fetch.mjs";
 import { pureUuid, toCamelCase } from "../helpers/utils.mjs";
@@ -551,7 +552,7 @@ export default class TeriockActor extends BaseTeriockActor {
    * @returns {Promise<void>}
    */
   async rollFeatSave(attribute, options = {}) {
-    await this.hookCall("rollFeatSafe", options);
+    await this.hookCall("rollFeatSave", attribute, options);
     await this.system.rollFeatSave(attribute, options);
   }
 

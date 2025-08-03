@@ -34,6 +34,8 @@ export function _prepareBaseData(actorData) {
     },
   };
   actorData.hookedMacros = {};
+  actorData.lightedTo = [];
+  actorData.goadedTo = [];
   for (const pseudoHook of Object.keys(pseudoHooks)) {
     actorData.hookedMacros[pseudoHook] = [];
   }

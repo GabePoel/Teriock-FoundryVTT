@@ -1,6 +1,5 @@
+import { TeriockFolder, TeriockMacro } from "../../documents/_module.mjs";
 import { hotbarDropDialog } from "../dialogs/_module.mjs";
-import { TeriockMacro } from "../../documents/_module.mjs";
-import { TeriockFolder } from "../../documents/_module.mjs";
 
 const { Hotbar } = foundry.applications.ui;
 
@@ -14,11 +13,11 @@ export default class TeriockHotbar extends Hotbar {
       const macroType = await hotbarDropDialog(doc);
       let searchTerm;
       let command;
-      const macroName = `Use ${doc.name}`;
+      let macroName = `Use ${doc.name}`;
       if (macroType === "general") {
-        searchTerm = `// ABILITY: ${doc.name}`;
+        searchTerm = `// USER: ${game.user.id} ABILITY: ${doc.name}`;
         command = `
-          // ABILITY: ${doc.name}
+          // USER: ${game.user.id} ABILITY: ${doc.name}
           const tokens = game.canvas.tokens.controlled;
           const actors = tokens.map(t => t.actor);
           const options = {
@@ -30,9 +29,14 @@ export default class TeriockHotbar extends Hotbar {
             await actor.useAbility("${doc.name}", options);
           }`;
       } else {
-        searchTerm = `// UUID: ${doc.uuid}`;
+        if (doc.actor) {
+          macroName = `Use ${doc.name} (${doc.actor.name})`;
+        } else if (doc.parent) {
+          macroName = `Use ${doc.name} (${doc.parent.name})`;
+        }
+        searchTerm = `// USER: ${game.user.id} UUID: ${doc.uuid}`;
         command = `
-          // UUID: ${doc.uuid}
+          // USER: ${game.user.id} UUID: ${doc.uuid}
           const item = await fromUuid("${doc.uuid}");
           if (!item) return ui.notifications.warn("Document not found: ${doc.name}");
           const options = {
@@ -54,6 +58,16 @@ export default class TeriockHotbar extends Hotbar {
           type: "Macro",
         });
       }
+      let macroSubFolder = folders.find(
+        (f) => f.name === `${game.user.name}'s Macros`,
+      );
+      if (!macroSubFolder) {
+        macroSubFolder = await TeriockFolder.create({
+          name: `${game.user.name}'s Macros`,
+          type: "Macro",
+          folder: macroFolder,
+        });
+      }
       const macros =
         /** @type {Collection<string, TeriockMacro>} */ game.macros;
       let macro = macros.find(
@@ -66,7 +80,7 @@ export default class TeriockHotbar extends Hotbar {
           img: doc.img,
           command: command,
           flags: { teriock: { itemMacro: true } },
-          folder: macroFolder.id,
+          folder: macroSubFolder.id,
         });
       }
       return macro;

@@ -38,7 +38,7 @@ export default class TeriockRankSheet extends HandlebarsApplicationMixin(
   static PARTS = {
     all: {
       template:
-        "systems/teriock/src/templates/item-templates/rank-template/rank-template.hbs",
+        "systems/teriock/src/templates/document-templates/item-templates/rank-template/rank-template.hbs",
       scrollable: [".window-content", ".tsheet-page", ".ab-sheet-everything"],
     },
   };

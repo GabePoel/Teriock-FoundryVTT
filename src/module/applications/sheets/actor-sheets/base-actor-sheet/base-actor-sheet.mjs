@@ -84,7 +84,7 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
   static PARTS = {
     all: {
       template:
-        "systems/teriock/src/templates/actor-templates/character-template/character-template.hbs",
+        "systems/teriock/src/templates/document-templates/actor-templates/character-template/character-template.hbs",
       scrollable: [".character-sidebar", ".character-tab-content"],
     },
   };

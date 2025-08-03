@@ -49,7 +49,7 @@ export default class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(
   static PARTS = {
     all: {
       template:
-        "systems/teriock/src/templates/effect-templates/ability-template/ability-template.hbs",
+        "systems/teriock/src/templates/document-templates/effect-templates/ability-template/ability-template.hbs",
       scrollable: [".window-content", ".tsheet-page", ".ab-sheet-everything"],
     },
   };
