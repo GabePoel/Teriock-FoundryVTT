@@ -1,0 +1,28 @@
+{
+  "name": "Opportunity Attack Macro - Execution",
+  "type": "script",
+  "_id": "OCGHKTqnI04j1L3h",
+  "author": "qf5JYGZKzM588nE6",
+  "img": "icons/svg/dice-target.svg",
+  "scope": "global",
+  "command": "const options = foundry.utils.deepClone({\n  advantage: window.event?.altKey,\n  disadvantage: window.event?.shiftKey,\n})\nconst actor = scope.abilityData.actor;\nconst abilities = {};\nactor.effectTypes?.ability.filter((a) => (a.system.interaction === \"attack\") && (a.system.maneuver === \"active\") && (a.system.executionTime === \"a1\") && [\"weapon\", \"hand\"].includes(a.system.delivery.base)).map((a) => abilities[a.id] = a.name);\nconst id = await game.teriock.api.dialog.select(abilities, {label: \"Ability\", hint: \"Please select an ability.\", title: \"Select Ability\"});\nconst ability = actor.effectTypes?.ability?.find((a) => a.id === id);\nHooks.once(\"renderChatMessageHTML\", async () => {\n  await ability.system.roll(options);\n  await ability.delete();\n});",
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "qf5JYGZKzM588nE6": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null,
+    "coreVersion": "13.345",
+    "systemId": "teriock",
+    "systemVersion": "0.1.0",
+    "createdTime": 1753599982446,
+    "modifiedTime": 1754237271098,
+    "lastModifiedBy": "uxE8DDp7ujgsxtd2"
+  },
+  "_key": "!macros!OCGHKTqnI04j1L3h"
+}

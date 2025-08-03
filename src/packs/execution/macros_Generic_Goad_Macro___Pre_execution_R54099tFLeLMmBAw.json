@@ -1,0 +1,28 @@
+{
+  "name": "Generic Goad Macro - Pre-execution",
+  "type": "script",
+  "_id": "R54099tFLeLMmBAw",
+  "author": "uxE8DDp7ujgsxtd2",
+  "img": "icons/svg/dice-target.svg",
+  "scope": "global",
+  "command": "const goadedToUuids = await game.teriock.api.dialog.goadedTo();\nconst buttons = scope.chatData.system.buttons;\nscope.chatData.system.buttons = buttons.filter(button => button.dataset.action === \"apply-effect\");\nconst button = scope.chatData.system.buttons[0];\nasync function modifyData(data) {\n  const effectObject = JSON.parse(data);\n  effectObject.description = \"<ul>\"\n  for (const uuid of goadedToUuids) {\n    effectObject.changes.push({\n      key: \"system.goadedTo\",\n      value: uuid,\n      mode: 2,\n      priority: 10\n    })\n    const token = await game.teriock.api.utils.fromUuid(uuid);\n    effectObject.description += `<li>Goaded to @UUID[${uuid}]{${token.name}}</li>`\n  }\n  effectObject.description += \"</ul>\"\n  return JSON.stringify(effectObject);\n}\nbutton.dataset.normal = await modifyData(button.dataset.normal);\nbutton.dataset.crit = await modifyData(button.dataset.crit);",
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "uxE8DDp7ujgsxtd2": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null,
+    "coreVersion": "13.345",
+    "systemId": "teriock",
+    "systemVersion": "0.1.0",
+    "createdTime": 1754236840908,
+    "modifiedTime": 1754237142764,
+    "lastModifiedBy": "uxE8DDp7ujgsxtd2"
+  },
+  "_key": "!macros!R54099tFLeLMmBAw"
+}

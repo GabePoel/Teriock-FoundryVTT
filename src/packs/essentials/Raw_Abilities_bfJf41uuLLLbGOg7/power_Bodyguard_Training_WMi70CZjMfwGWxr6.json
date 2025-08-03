@@ -20,12 +20,12 @@
   },
   "folder": "bfJf41uuLLLbGOg7",
   "_id": "WMi70CZjMfwGWxr6",
-  "img": "modules/game-icons-net/whitetransparent/confrontation.svg",
+  "img": "modules/game-icons-net/whitetransparent/face-to-face.svg",
   "effects": [
     {
       "name": "Bodyguard Training",
       "type": "ability",
-      "img": "modules/game-icons-net/whitetransparent/confrontation.svg",
+      "img": "modules/game-icons-net/whitetransparent/face-to-face.svg",
       "system": {
         "htmlFields": [
           "elderSorceryIncant",
@@ -59,7 +59,10 @@
         "updateCounter": false,
         "hierarchy": {
           "supId": null,
-          "subIds": [],
+          "subIds": [
+            "UQDqTtsCaxNFLHky",
+            "2bZMc1jkjENDMKsY"
+          ],
           "rootUuid": "Compendium.teriock.essentials.Item.WMi70CZjMfwGWxr6"
         },
         "applies": {
@@ -239,15 +242,15 @@
         "powerSources": [],
         "interaction": "manifest",
         "featSaveAttribute": "mov",
-        "maneuver": "reactive",
-        "executionTime": "r0",
+        "maneuver": "passive",
+        "executionTime": "passive",
         "delivery": {
-          "base": "weapon",
+          "base": "self",
           "parent": null,
           "package": null
         },
         "targets": [
-          "creature"
+          "self"
         ],
         "elements": [],
         "duration": {
@@ -260,9 +263,9 @@
           "description": "1 Minute"
         },
         "sustained": false,
-        "range": "5",
+        "range": "Self.",
         "overview": {
-          "base": "Pick another creature within range. They either gain <a href=\"https://wiki.teriock.com/index.php/Core:Advantage\" title=\"Core:Advantage\" target=\"_blank\">advantage</a> on the next <a href=\"https://wiki.teriock.com/index.php/Core:Movement\" title=\"Core:Movement\" target=\"_blank\">MOV</a> or <a href=\"https://wiki.teriock.com/index.php/Core:Strength\" title=\"Core:Strength\" target=\"_blank\">STR</a> <a href=\"https://wiki.teriock.com/index.php/Core:Feat_Interaction\" title=\"Core:Feat Interaction\" target=\"_blank\">feat save</a> they make, or they are <a href=\"https://wiki.teriock.com/index.php/Condition:Goaded\" title=\"Condition:Goaded\" target=\"_blank\">goaded</a> until the start of your next <a href=\"https://wiki.teriock.com/index.php/Core:Turns\" title=\"Core:Turns\" target=\"_blank\">turn</a>.",
+          "base": "You gain <a href=\"https://wiki.teriock.com/index.php/Ability:Bodyguard_Backup\" title=\"Ability:Bodyguard Backup\" target=\"_blank\">Bodyguard Backup</a> and <a href=\"https://wiki.teriock.com/index.php/Ability:Bodyguard_Taunt\" title=\"Ability:Bodyguard Taunt\" target=\"_blank\">Bodyguard Taunt</a>.",
           "proficient": "",
           "fluent": ""
         },
@@ -332,7 +335,7 @@
         "expansion": null,
         "expansionRange": null,
         "expansionSaveAttribute": "mov",
-        "trigger": "You attempt an <a href=\"https://wiki.teriock.com/index.php/Core:Attack_Interaction\" title=\"Core:Attack Interaction\" target=\"_blank\">attack</a> against another creature.",
+        "trigger": "",
         "basic": false,
         "abilityType": "normal",
         "limitation": "",
@@ -363,10 +366,764 @@
         "systemId": "teriock",
         "systemVersion": "0.1.0",
         "createdTime": 1753145829287,
-        "modifiedTime": 1753653795344,
-        "lastModifiedBy": "qf5JYGZKzM588nE6"
+        "modifiedTime": 1754246598595,
+        "lastModifiedBy": "uxE8DDp7ujgsxtd2"
       },
       "_key": "!items.effects!WMi70CZjMfwGWxr6.jY8CAJzJ6LPytpT8"
+    },
+    {
+      "name": "Bodyguard Backup",
+      "type": "ability",
+      "img": "modules/game-icons-net/whitetransparent/black-hand-shield.svg",
+      "system": {
+        "htmlFields": [
+          "elderSorceryIncant",
+          "overview.base",
+          "overview.proficient",
+          "overview.fluent",
+          "results.hit",
+          "results.critHit",
+          "results.miss",
+          "results.critMiss",
+          "results.save",
+          "results.critSave",
+          "results.fail",
+          "results.critFail",
+          "costs.mp.value.variable",
+          "costs.hp.value.variable",
+          "costs.gp.value.variable",
+          "costs.materialCost",
+          "heightened",
+          "endCondition",
+          "requirements",
+          "trigger",
+          "limitation",
+          "improvement"
+        ],
+        "hierarchy": {
+          "supId": "jY8CAJzJ6LPytpT8",
+          "rootUuid": "Compendium.teriock.essentials.Item.WMi70CZjMfwGWxr6",
+          "subIds": []
+        },
+        "proficient": true,
+        "fluent": false,
+        "font": "",
+        "description": "<p>None.</p>",
+        "deleteOnExpire": false,
+        "updateCounter": false,
+        "applies": {
+          "base": {
+            "statuses": [],
+            "startStatuses": [],
+            "endStatuses": [],
+            "rolls": {},
+            "hacks": [],
+            "checks": [],
+            "duration": 0,
+            "changes": [],
+            "standardDamage": false,
+            "expiration": {
+              "normal": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "crit": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "changeOnCrit": false,
+              "doesExpire": false
+            }
+          },
+          "proficient": {
+            "statuses": [],
+            "startStatuses": [],
+            "endStatuses": [],
+            "rolls": {},
+            "hacks": [],
+            "checks": [],
+            "duration": 0,
+            "changes": [],
+            "standardDamage": false,
+            "expiration": {
+              "normal": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "crit": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "changeOnCrit": false,
+              "doesExpire": false
+            }
+          },
+          "fluent": {
+            "statuses": [],
+            "startStatuses": [],
+            "endStatuses": [],
+            "rolls": {},
+            "hacks": [],
+            "checks": [],
+            "duration": 0,
+            "changes": [],
+            "standardDamage": false,
+            "expiration": {
+              "normal": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "crit": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "changeOnCrit": false,
+              "doesExpire": false
+            }
+          },
+          "heightened": {
+            "statuses": [],
+            "startStatuses": [],
+            "endStatuses": [],
+            "rolls": {},
+            "hacks": [],
+            "checks": [],
+            "duration": 0,
+            "changes": [],
+            "standardDamage": false,
+            "expiration": {
+              "normal": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "crit": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "changeOnCrit": false,
+              "doesExpire": false
+            }
+          },
+          "macros": {}
+        },
+        "sustaining": [],
+        "wikiNamespace": "Ability",
+        "elderSorcery": false,
+        "elderSorceryIncant": "",
+        "powerSources": [],
+        "interaction": "manifest",
+        "featSaveAttribute": "mov",
+        "maneuver": "reactive",
+        "executionTime": "r0",
+        "delivery": {
+          "base": "weapon",
+          "parent": null,
+          "package": null
+        },
+        "targets": [
+          "creature"
+        ],
+        "elements": [],
+        "duration": {
+          "unit": "minute",
+          "quantity": 1,
+          "conditions": {
+            "present": [],
+            "absent": []
+          },
+          "description": "1 Minute"
+        },
+        "sustained": false,
+        "range": "5",
+        "overview": {
+          "base": "Pick another creature within range. They gain <a href=\"https://wiki.teriock.com/index.php/Core:Advantage\" title=\"Core:Advantage\" target=\"_blank\">advantage</a> on the next <a href=\"https://wiki.teriock.com/index.php/Core:Movement\" title=\"Core:Movement\" target=\"_blank\">MOV</a> or <a href=\"https://wiki.teriock.com/index.php/Core:Strength\" title=\"Core:Strength\" target=\"_blank\">STR</a> <a href=\"https://wiki.teriock.com/index.php/Core:Feat_Interaction\" title=\"Core:Feat Interaction\" target=\"_blank\">feat save</a> they make.",
+          "proficient": "",
+          "fluent": ""
+        },
+        "results": {
+          "hit": "",
+          "critHit": "",
+          "miss": "",
+          "critMiss": "",
+          "save": "",
+          "critSave": "",
+          "fail": "",
+          "critFail": ""
+        },
+        "piercing": "normal",
+        "improvements": {
+          "attributeImprovement": {
+            "attribute": null,
+            "minVal": 0
+          },
+          "featSaveImprovement": {
+            "attribute": null,
+            "amount": "proficient"
+          }
+        },
+        "skill": true,
+        "spell": false,
+        "standard": true,
+        "ritual": false,
+        "class": "veteran",
+        "rotator": false,
+        "invoked": false,
+        "costs": {
+          "verbal": false,
+          "somatic": false,
+          "material": false,
+          "mp": {
+            "type": "none",
+            "value": {
+              "static": 0,
+              "formula": "",
+              "variable": ""
+            }
+          },
+          "hp": {
+            "type": "none",
+            "value": {
+              "static": 0,
+              "formula": "",
+              "variable": ""
+            }
+          },
+          "gp": {
+            "type": "none",
+            "value": {
+              "static": 0,
+              "formula": "",
+              "variable": ""
+            }
+          },
+          "break": "",
+          "materialCost": ""
+        },
+        "heightened": "",
+        "endCondition": "",
+        "requirements": "You are not also using <a href=\"https://wiki.teriock.com/index.php/Ability:Bodyguard_Taunt\" title=\"Ability:Bodyguard Taunt\" target=\"_blank\">Bodyguard Taunt</a>.",
+        "effects": [],
+        "expansion": null,
+        "expansionRange": null,
+        "expansionSaveAttribute": "mov",
+        "trigger": "You attempt an <a href=\"https://wiki.teriock.com/index.php/Core:Attack_Interaction\" title=\"Core:Attack Interaction\" target=\"_blank\">attack</a> against another creature.",
+        "basic": false,
+        "abilityType": "normal",
+        "limitation": "",
+        "improvement": "",
+        "prepared": true,
+        "warded": false,
+        "secret": false
+      },
+      "_id": "UQDqTtsCaxNFLHky",
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.345",
+        "systemId": "teriock",
+        "systemVersion": "0.1.0",
+        "createdTime": 1754246598395,
+        "modifiedTime": 1754246598486,
+        "lastModifiedBy": "uxE8DDp7ujgsxtd2"
+      },
+      "_key": "!items.effects!WMi70CZjMfwGWxr6.UQDqTtsCaxNFLHky"
+    },
+    {
+      "name": "Bodyguard Taunt",
+      "type": "ability",
+      "img": "modules/game-icons-net/whitetransparent/confrontation.svg",
+      "system": {
+        "htmlFields": [
+          "elderSorceryIncant",
+          "overview.base",
+          "overview.proficient",
+          "overview.fluent",
+          "results.hit",
+          "results.critHit",
+          "results.miss",
+          "results.critMiss",
+          "results.save",
+          "results.critSave",
+          "results.fail",
+          "results.critFail",
+          "costs.mp.value.variable",
+          "costs.hp.value.variable",
+          "costs.gp.value.variable",
+          "costs.materialCost",
+          "heightened",
+          "endCondition",
+          "requirements",
+          "trigger",
+          "limitation",
+          "improvement"
+        ],
+        "hierarchy": {
+          "supId": "jY8CAJzJ6LPytpT8",
+          "rootUuid": "Compendium.teriock.essentials.Item.WMi70CZjMfwGWxr6",
+          "subIds": []
+        },
+        "proficient": true,
+        "fluent": false,
+        "font": "",
+        "description": "<p>None.</p>",
+        "deleteOnExpire": false,
+        "updateCounter": false,
+        "applies": {
+          "base": {
+            "statuses": [
+              "goaded"
+            ],
+            "startStatuses": [],
+            "endStatuses": [],
+            "rolls": {},
+            "hacks": [],
+            "checks": [],
+            "duration": 0,
+            "changes": [],
+            "standardDamage": false,
+            "expiration": {
+              "normal": {
+                "combat": {
+                  "who": {
+                    "type": "executor"
+                  },
+                  "what": {
+                    "type": "forced",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "crit": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "changeOnCrit": false,
+              "doesExpire": true
+            }
+          },
+          "proficient": {
+            "statuses": [],
+            "startStatuses": [],
+            "endStatuses": [],
+            "rolls": {},
+            "hacks": [],
+            "checks": [],
+            "duration": 0,
+            "changes": [],
+            "standardDamage": false,
+            "expiration": {
+              "normal": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "crit": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "changeOnCrit": false,
+              "doesExpire": false
+            }
+          },
+          "fluent": {
+            "statuses": [],
+            "startStatuses": [],
+            "endStatuses": [],
+            "rolls": {},
+            "hacks": [],
+            "checks": [],
+            "duration": 0,
+            "changes": [],
+            "standardDamage": false,
+            "expiration": {
+              "normal": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "crit": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "changeOnCrit": false,
+              "doesExpire": false
+            }
+          },
+          "heightened": {
+            "statuses": [],
+            "startStatuses": [],
+            "endStatuses": [],
+            "rolls": {},
+            "hacks": [],
+            "checks": [],
+            "duration": 0,
+            "changes": [],
+            "standardDamage": false,
+            "expiration": {
+              "normal": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "crit": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "changeOnCrit": false,
+              "doesExpire": false
+            }
+          },
+          "macros": {
+            "Compendium_teriock_execution_Macro_R54099tFLeLMmBAw": "preExecution"
+          }
+        },
+        "sustaining": [],
+        "wikiNamespace": "Ability",
+        "elderSorcery": false,
+        "elderSorceryIncant": "",
+        "powerSources": [],
+        "interaction": "manifest",
+        "featSaveAttribute": "mov",
+        "maneuver": "reactive",
+        "executionTime": "r0",
+        "delivery": {
+          "base": "weapon",
+          "parent": null,
+          "package": null
+        },
+        "targets": [
+          "creature"
+        ],
+        "elements": [],
+        "duration": {
+          "unit": "minute",
+          "quantity": 1,
+          "conditions": {
+            "present": [],
+            "absent": []
+          },
+          "description": "5 Seconds"
+        },
+        "sustained": false,
+        "range": "5",
+        "overview": {
+          "base": "Pick another creature within range. They are <a href=\"https://wiki.teriock.com/index.php/Condition:Goaded\" title=\"Condition:Goaded\" target=\"_blank\">goaded</a> until the start of your next <a href=\"https://wiki.teriock.com/index.php/Core:Turns\" title=\"Core:Turns\" target=\"_blank\">turn</a>.<span class=\"metadata\" data-type=\"macro\" data-name=\"Generic Goad Macro - Pre-execution\" data-pseudo-hook=\"preExecution\"></span><span class=\"metadata\" data-type=\"condition\" data-condition=\"goaded\"></span><span class=\"metadata\" data-type=\"combat-expiration\" data-who-type=\"executor\" data-what-type=\"forced\" data-what-roll=\"2d4kh1\" data-what-threshold=\"4\" data-when-time=\"start\" data-when-trigger=\"turn\" data-when-skip=\"0\"></span>",
+          "proficient": "",
+          "fluent": ""
+        },
+        "results": {
+          "hit": "",
+          "critHit": "",
+          "miss": "",
+          "critMiss": "",
+          "save": "",
+          "critSave": "",
+          "fail": "",
+          "critFail": ""
+        },
+        "piercing": "normal",
+        "improvements": {
+          "attributeImprovement": {
+            "attribute": null,
+            "minVal": 0
+          },
+          "featSaveImprovement": {
+            "attribute": null,
+            "amount": "proficient"
+          }
+        },
+        "skill": true,
+        "spell": false,
+        "standard": true,
+        "ritual": false,
+        "class": "veteran",
+        "rotator": false,
+        "invoked": false,
+        "costs": {
+          "verbal": false,
+          "somatic": false,
+          "material": false,
+          "mp": {
+            "type": "none",
+            "value": {
+              "static": 0,
+              "formula": "",
+              "variable": ""
+            }
+          },
+          "hp": {
+            "type": "none",
+            "value": {
+              "static": 0,
+              "formula": "",
+              "variable": ""
+            }
+          },
+          "gp": {
+            "type": "none",
+            "value": {
+              "static": 0,
+              "formula": "",
+              "variable": ""
+            }
+          },
+          "break": "",
+          "materialCost": ""
+        },
+        "heightened": "",
+        "endCondition": "",
+        "requirements": "You are not also using <a href=\"https://wiki.teriock.com/index.php/Ability:Bodyguard_Backup\" title=\"Ability:Bodyguard Backup\" target=\"_blank\">Bodyguard Backup</a>.",
+        "effects": [],
+        "expansion": null,
+        "expansionRange": null,
+        "expansionSaveAttribute": "mov",
+        "trigger": "You attempt an <a href=\"https://wiki.teriock.com/index.php/Core:Attack_Interaction\" title=\"Core:Attack Interaction\" target=\"_blank\">attack</a> against another creature.",
+        "basic": false,
+        "abilityType": "normal",
+        "limitation": "",
+        "improvement": "",
+        "prepared": true,
+        "warded": false,
+        "secret": false
+      },
+      "_id": "2bZMc1jkjENDMKsY",
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.345",
+        "systemId": "teriock",
+        "systemVersion": "0.1.0",
+        "createdTime": 1754246598505,
+        "modifiedTime": 1754246598595,
+        "lastModifiedBy": "uxE8DDp7ujgsxtd2"
+      },
+      "_key": "!items.effects!WMi70CZjMfwGWxr6.2bZMc1jkjENDMKsY"
     }
   ],
   "sort": 0,
@@ -383,8 +1140,8 @@
     "systemId": "teriock",
     "systemVersion": "0.1.0",
     "createdTime": 1753145829280,
-    "modifiedTime": 1753145829397,
-    "lastModifiedBy": "IIjfAJm5Tf1B6G7t"
+    "modifiedTime": 1754246598605,
+    "lastModifiedBy": "uxE8DDp7ujgsxtd2"
   },
   "_key": "!items!WMi70CZjMfwGWxr6"
 }
