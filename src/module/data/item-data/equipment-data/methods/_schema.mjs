@@ -127,6 +127,10 @@ export function _defineSchema() {
       initial: "Equipment Type",
       label: "Equipment Type",
     }),
+    price: new fields.NumberField({
+      initial: 0,
+      label: "Price",
+    }),
     powerLevel: new fields.StringField({
       choices: equipmentOptions.powerLevelShort,
       initial: "mundane",

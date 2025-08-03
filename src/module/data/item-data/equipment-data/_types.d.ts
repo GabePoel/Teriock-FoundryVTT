@@ -53,6 +53,8 @@ export interface TeriockEquipmentSchema extends TeriockBaseItemData {
   specialRules: string;
   /** Canonical Equipment Type */
   equipmentType: string;
+  /** Price */
+  price: number;
   /** Power Level */
   powerLevel: string;
   /** Flaws */
