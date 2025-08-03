@@ -388,7 +388,6 @@ export default (Base) => {
             element,
           );
         if (embedded && typeof embedded.buildMessage === "function") {
-          console.log(embedded);
           element.dataset.tooltipHtml = await embedded.buildMessage();
           element.dataset.tooltipClass = "teriock teriock-rich-tooltip";
         } else if (embedded && embedded.type === "condition") {

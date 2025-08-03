@@ -130,9 +130,6 @@ export async function _parse(abilityData, rawHTML) {
   // Set remaining parameters
   setRemainingParameters(parameters, tagTree, doc);
 
-  console.log("LAST CALL");
-  console.log(foundry.utils.deepClone(parameters));
-
   // Clean up parameters
   delete parameters.improvement;
   delete parameters.limitation;

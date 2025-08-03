@@ -420,7 +420,6 @@ export default class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(
     const updateData = {
       [`system.applies.macros.${safeUuid(data?.uuid)}`]: "execution",
     };
-    console.log(updateData);
     await this.document.update(updateData);
   }
 }

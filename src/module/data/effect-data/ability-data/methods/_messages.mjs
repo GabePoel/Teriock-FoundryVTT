@@ -225,7 +225,9 @@ export function _messageParts(abilityData) {
       text: src.endCondition,
     },
   ];
-  addAbilitiesBlock(abilityData.parent.subs, blocks);
+  if (!abilityData.parent.inCompendium) {
+    addAbilitiesBlock(abilityData.parent.subs, blocks);
+  }
   return {
     bars: bars,
     blocks: blocks,
