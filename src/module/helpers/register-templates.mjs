@@ -2,6 +2,7 @@
 
 export default async function registerTemplates () {
   return foundry.applications.handlebars.loadTemplates([
+    'systems/teriock/src/templates/dialog-templates/hotbar-drop.hbs',
     'systems/teriock/src/templates/dialog-templates/token-select.hbs',
     'systems/teriock/src/templates/document-templates/actor-templates/character-template/character-template.hbs',
     'systems/teriock/src/templates/document-templates/actor-templates/character-template/filters/ch-ability-filter.hbs',
