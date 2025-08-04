@@ -87,7 +87,6 @@ export async function fetchWikiPageHTML(
     "Property",
     "Damage",
     "Drain",
-    "Ability",
   ]);
 
   const params = new URLSearchParams({
