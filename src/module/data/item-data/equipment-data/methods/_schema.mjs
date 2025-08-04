@@ -15,7 +15,6 @@ export function _defineSchema() {
   return {
     wikiNamespace: new fields.StringField({
       initial: "Equipment",
-      gmOnly: true,
     }),
     equipped: new fields.BooleanField({
       initial: true,
@@ -162,7 +161,6 @@ export function _defineSchema() {
     reference: new fields.DocumentUUIDField({
       initial: null,
       nullable: true,
-      gmOnly: true,
     }),
   };
 }

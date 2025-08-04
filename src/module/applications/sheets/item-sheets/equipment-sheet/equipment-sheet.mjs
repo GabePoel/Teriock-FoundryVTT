@@ -102,7 +102,6 @@ export default class TeriockEquipmentSheet extends HandlebarsApplicationMixin(
     const enrichments = {
       enrichedSpecialRules: system.specialRules,
       enrichedDescription: system.description,
-      enrichedGmDescription: system.gmDescription,
       enrichedFlaws: system.flaws,
       enrichedNotes: system.notes,
     };

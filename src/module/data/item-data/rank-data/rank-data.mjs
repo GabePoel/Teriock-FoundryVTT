@@ -99,7 +99,6 @@ export default class TeriockRankData extends WikiDataMixin(
     return foundry.utils.mergeObject(super.defineSchema(), {
       wikiNamespace: new fields.StringField({
         initial: "Class",
-        gmOnly: true,
       }),
       description: new fields.HTMLField({
         initial:

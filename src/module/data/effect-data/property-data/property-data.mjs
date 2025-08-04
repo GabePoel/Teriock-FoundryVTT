@@ -49,7 +49,6 @@ export default class TeriockPropertyData extends WikiDataMixin(
     return foundry.utils.mergeObject(super.defineSchema(), {
       wikiNamespace: new fields.StringField({
         initial: "Property",
-        gmOnly: true,
       }),
       propertyType: new fields.StringField({ initial: "normal" }),
       damageType: new fields.StringField({ initial: "" }),

@@ -73,7 +73,6 @@ export default class TeriockFluencyData extends WikiDataMixin(
     return foundry.utils.mergeObject(super.defineSchema(), {
       wikiNamespace: new fields.StringField({
         initial: "Tradecraft",
-        gmOnly: true,
       }),
       field: new fields.StringField({
         initial: "artisan",

@@ -171,10 +171,6 @@ export default (Base) => {
             hint: "The font to be used for this document's name on its sheet and in chat messages.",
           }),
           description: new fields.HTMLField({ initial: "<p>None.</p>" }),
-          gmDescription: new fields.HTMLField({
-            initial: "<p>None.</p>",
-            gmOnly: true,
-          }),
         },
       );
     }
