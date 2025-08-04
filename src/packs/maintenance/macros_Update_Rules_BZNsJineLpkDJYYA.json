@@ -1,0 +1,28 @@
+{
+  "name": "Update Rules",
+  "type": "script",
+  "_id": "BZNsJineLpkDJYYA",
+  "author": "uxE8DDp7ujgsxtd2",
+  "img": "icons/svg/book.svg",
+  "scope": "global",
+  "command": "const coreRulesPack = game.teriock.packs.rules();\n\nconst namespaceCategoryMap = {\n  Core: \"Core rules\",\n  Keyword: \"Keywords\",\n  Damage: \"Damage types\",\n  Drain: \"Drain types\",\n  Condition: \"Conditions\",\n  Property: \"Properties\",\n  Tradecraft: \"Tradecrafts\",\n};\n\nfor (const [namespace, category] of Object.entries(namespaceCategoryMap)) {\n  console.log(`Processing namespace: ${namespace} (category: ${category})`);\n\n  // Fetch all pages in the category\n  let allRulesPages = await game.teriock.api.wiki.fetchCategoryMembers(namespace);\n  allRulesPages = allRulesPages.filter((page) => page.title.startsWith(`${namespace}:`));\n\n  console.log(namespace, allRulesPages);\n\n  // Attempt to load the journal from the pack\n  let rulesJournal = await game.teriock.api.utils.fromUuid(\n    coreRulesPack.index.getName(namespace)?.uuid ?? \"\"\n  );\n\n  // Create the journal if it's missing\n  if (!rulesJournal) {\n    console.warn(`Journal for namespace '${namespace}' not found. Creating it...`);\n    rulesJournal = await JournalEntry.implementation.create(\n      { name: namespace },\n      { pack: \"teriock.rules\" }\n    );\n  }\n\n  for (const rulesPage of allRulesPages) {\n    const title = rulesPage.title;\n\n    // Extract rule name after the namespace prefix\n    const rulesName = title.slice(namespace.length + 1).trim();\n    if (!rulesName) {\n      console.warn(`Skipping page with empty rule name: \"${title}\"`);\n      continue;\n    }\n\n    // Fetch and clean HTML\n    let rawHtml = await game.teriock.api.wiki.fetchWikiPageHTML(title);\n    const parser = new DOMParser();\n    const doc = parser.parseFromString(rawHtml, \"text/html\");\n\n    // Remove unwanted elements\n    const selectorsToRemove = [\n      \"#toc\",\n      \".mw-editsection-bracket\",\n      \".mw-editsection-visualeditor\",\n      \".citizen-editsection-icon\",\n      \".mw-ui-icon-wikimedia-edit\",\n      \".mw-editsection-divider\",\n    ];\n    selectorsToRemove.forEach((selector) => {\n      doc.querySelectorAll(selector).forEach((el) => el.remove());\n    });\n\n    const html = doc.body.innerHTML;\n\n    // Create or update journal page\n    let journalPage = rulesJournal.pages.getName(rulesName);\n\n    if (!journalPage) {\n      await rulesJournal.createEmbeddedDocuments(\"JournalEntryPage\", [\n        {\n          name: rulesName,\n          type: \"text\",\n          text: { content: html },\n        },\n      ]);\n      console.log(`Created: ${namespace}:${rulesName}`);\n    } else {\n      await journalPage.update({\n        text: { content: html },\n      });\n      console.log(`Updated: ${namespace}:${rulesName}`);\n    }\n  }\n}",
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "uxE8DDp7ujgsxtd2": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null,
+    "coreVersion": "13.345",
+    "systemId": "teriock",
+    "systemVersion": "0.1.0",
+    "createdTime": 1754273233127,
+    "modifiedTime": 1754286195751,
+    "lastModifiedBy": "uxE8DDp7ujgsxtd2"
+  },
+  "_key": "!macros!BZNsJineLpkDJYYA"
+}
