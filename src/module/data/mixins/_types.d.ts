@@ -5,6 +5,7 @@ export interface ChildDataMixin {
   fluent: boolean;
   font: Teriock.Font;
   description: string;
+  gmDescription: string;
   messageParts: MessageParts;
   secretMessageParts: MessageParts;
 

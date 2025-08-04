@@ -70,6 +70,7 @@ export default async function registerTemplates () {
     'systems/teriock/src/templates/document-templates/item-templates/equipment-template/bars/eq-status-bar.hbs',
     'systems/teriock/src/templates/document-templates/item-templates/equipment-template/entries/eq-description.hbs',
     'systems/teriock/src/templates/document-templates/item-templates/equipment-template/entries/eq-flaws.hbs',
+    'systems/teriock/src/templates/document-templates/item-templates/equipment-template/entries/eq-gm-description.hbs',
     'systems/teriock/src/templates/document-templates/item-templates/equipment-template/entries/eq-mana-storing.hbs',
     'systems/teriock/src/templates/document-templates/item-templates/equipment-template/entries/eq-notes.hbs',
     'systems/teriock/src/templates/document-templates/item-templates/equipment-template/entries/eq-special-rules.hbs',

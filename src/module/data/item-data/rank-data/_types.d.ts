@@ -6,8 +6,6 @@ export interface TeriockRankSchema extends TeriockBaseItemData {
   readonly wikiNamespace: "Class";
   /** Parent */
   parent: TeriockRank;
-  /** Description */
-  description: string;
   /** Flaws */
   flaws: string;
   /** Rank Class Archetype */

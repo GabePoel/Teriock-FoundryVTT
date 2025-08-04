@@ -642,6 +642,7 @@ export default (Base) => {
         config: CONFIG.TERIOCK,
         editable: this.editable,
         isEditable: this.isEditable,
+        isGm: game.user.isGM,
         document: this.document,
         limited: this.document.limited,
         owner: this.document.isOwner,
