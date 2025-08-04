@@ -1,14 +1,32 @@
 # Feature Improvements
 
-- [ ] Perception features
+## High Priority
+
+- [ ] Transformation system
+- [ ] Tooltip/message text for attribute and feat save improvements
+
+## Medium Priority
+
+- [ ] Custom enrichers
+- [ ] Refined duration integration
+
+## Low Priority
+
+- [ ] Journal entries pulled for rules
+- [ ] Better resistance/immunity tooltips
+- [ ] Condition toggling from character sheet
+
+# Complete(ish)
+
+- [x] Perception features
     - [x] Blind fighting/true sight/etc.
     - [x] Frozen and morganti vision modes
-    - [x] Automatic perception mode inherited from actor
-    - [ ] Properties and abilities for light sources
-- [ ] Token features
+    - [x] Automatic perception mode inherited from actors
+    - [ ] ~~Properties and abilities for light sources~~
+- [x] Token features
     - [x] Better death/down displays
-    - [ ] Frozen/transformed/lighted/terrored/burned visual clues
-- [ ] Ability management
+    - [ ] ~~Frozen/transformed/lighted/terrored/burned visual clues~~
+- [x] Ability management
     - [x] Abilities letting you know when they start/end
     - [x] Heightened duration scaling
     - [x] Hack buttons
@@ -26,7 +44,6 @@
 - [x] Rank fixes
     - [x] Enable/disable buttons
 - [x] Hot bar fix
-- [ ] Refined duration integration
 
 # Codebase
 

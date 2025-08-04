@@ -29,3 +29,9 @@ export class TeriockRankCompendium extends BaseTeriockCompendiumCollection {}
  * @property {(name: string, options?: { strict?: boolean }) => TeriockMacro} getName
  */
 export class TeriockMacroCompendium extends BaseTeriockCompendiumCollection {}
+
+/**
+ * @property {Collection<string,TeriockJournal>} index
+ * @property {(name: string, options?: { strict?: boolean }) => TeriockJournal} getName
+ */
+export class TeriockJournalCompendium extends BaseTeriockCompendiumCollection {}

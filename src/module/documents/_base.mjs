@@ -12,6 +12,7 @@ const {
   TokenDocument,
   User,
   Folder,
+  JournalEntry,
 } = foundry.documents;
 const { CompendiumCollection, CompendiumFolderCollection } =
   foundry.documents.collections;
@@ -98,6 +99,17 @@ export class BaseTeriockToken extends TokenDocument {}
  * @property {boolean} isOwner
  */
 export class BaseTeriockMacro extends Macro {}
+
+/**
+ * This class is a hack to get {@link JournalEntry} intellisense without warnings for unimplemented methods.
+ *
+ * @extends {JournalEntry}
+ * @extends {ClientDocument}
+ * @implements {JournalEntryData}
+ * @property {"JournalEntry"} documentName
+ * @property {boolean} isOwner
+ */
+export class BaseTeriockJournal extends JournalEntry {}
 
 /**
  * This class is a hack to get {@link User} intellisense without warnings for unimplemented methods.
