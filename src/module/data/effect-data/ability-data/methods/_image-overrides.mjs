@@ -240,6 +240,7 @@ export const imageOverrides = {
   "Hitman": "modules/game-icons-net/whitetransparent/high-grass.svg",
   "Hunter": "modules/game-icons-net/whitetransparent/hunting-bolas.svg",
   "Hunting Party": "modules/game-icons-net/whitetransparent/hunting-horn.svg",
+  "Hyperaware": "modules/game-icons-net/whitetransparent/surrounded-eye.svg",
   "Iaido": "modules/game-icons-net/whitetransparent/sword-slice.svg",
   "Ice Ball": "modules/game-icons-net/whitetransparent/ice-bolt.svg",
   "Identify": "modules/game-icons-net/whitetransparent/brain-dump.svg",
