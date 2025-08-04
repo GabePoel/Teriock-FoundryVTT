@@ -47,7 +47,11 @@ for (const [namespace, category] of Object.entries(namespaceCategoryMap)) {
     }
 
     // Fetch and clean HTML
-    let rawHtml = await game.teriock.api.wiki.fetchWikiPageHTML(title, true, true);
+    let rawHtml = await game.teriock.api.wiki.fetchWikiPageHTML(title, {
+      transformDice: true,
+      enrichText: true,
+      removeSubContainers: true,
+    });
     const parser = new DOMParser();
     const doc = parser.parseFromString(rawHtml, "text/html");
 

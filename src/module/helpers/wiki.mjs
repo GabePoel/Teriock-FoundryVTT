@@ -55,30 +55,41 @@ if (isNode) {
 /**
  * Fetches the parsed HTML content of a wiki page via the MediaWiki API.
  * @param {string} title - The title of the wiki page to fetch.
- * @param {boolean} [transformDice] - Should dice be converted to inline rolls?
- * @param {boolean} [removeSubContainers] - Should sub containers be removed?
+ * @param {object} [options] - Options.
+ * @param {boolean} [options.transformDice] - Should dice be converted to inline rolls?
+ * @param {boolean} [options.removeSubContainers] - Should sub containers be removed?
+ * @param {boolean} [options.enrichText] - Should text enrichments be applied?
  * @returns {Promise<string|null>} The cleaned HTML content as a string, or null if the request fails.
  */
 export async function fetchWikiPageHTML(
   title,
-  transformDice = false,
-  removeSubContainers = false,
+  options = {
+    transformDice: false,
+    removeSubContainers: false,
+    enrichText: false,
+  },
 ) {
   const endpoint = "https://wiki.teriock.com/api.php";
   const baseWikiUrl = "https://wiki.teriock.com";
 
-  const enricherKeys = [
-    "Core",
-    "Class",
-    "Keyword",
-    "Damage",
-    "Drain",
-    "Condition",
-    "Property",
-    "Tradecraft",
-    "Ability",
-    "Equipment",
-  ];
+  const { transformDice, removeSubContainers, enrichText = false } = options;
+
+  let enricherKeys = [];
+
+  if (enrichText) {
+    enricherKeys = [
+      "Core",
+      "Class",
+      "Keyword",
+      "Damage",
+      "Drain",
+      "Condition",
+      "Property",
+      "Tradecraft",
+      "Ability",
+      "Equipment",
+    ];
+  }
 
   const needsUuidCheck = new Set([
     "Core",
@@ -138,7 +149,7 @@ export async function fetchWikiPageHTML(
       }
 
       if (!titleAttr) {
-        if (isWikiLink) {
+        if (isWikiLink && enrichText) {
           const pageName = decodeURIComponent(
             href.split("/index.php/")[1] || "",
           ).replace(/_/g, " ");
@@ -186,7 +197,7 @@ export async function fetchWikiPageHTML(
           const enricherTag = `@Wiki[${pageName}]{${display}}`;
           link.replaceWith(document.createTextNode(enricherTag));
         }
-      } else if (isWikiLink) {
+      } else if (isWikiLink && enrichText) {
         const pageName = decodeURIComponent(
           href.split("/index.php/")[1] || "",
         ).replace(/_/g, " ");

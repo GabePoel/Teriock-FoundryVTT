@@ -107,21 +107,33 @@ const wikiEnricher = {
   enricher: async (match, _options) => {
     const pageName = match[1];
     const displayText = match[2];
-
     const urlPageName = pageName.replace(/ /g, "_");
-
     const link = document.createElement("a");
     link.href = `https://wiki.teriock.com/index.php/${urlPageName}`;
     link.className = "content-link";
     link.setAttribute("data-tooltip", pageName);
-
     const icon = document.createElement("i");
     icon.className = "fa-solid fa-globe";
-
     link.appendChild(icon);
-
     link.appendChild(document.createTextNode(displayText || pageName));
+    return link;
+  },
+  replaceParent: false,
+};
 
+const wikiLinkEnricher = {
+  pattern: /@L\[(.+?)\](?:\{(.+?)\})?/g,
+  enricher: async (match, _options) => {
+    const pageName = match[1];
+    const displayText = match[2];
+    const urlPageName = pageName.replace(/ /g, "_");
+    const link = document.createElement("a");
+    link.href = `https://wiki.teriock.com/index.php/${urlPageName}`;
+    link.setAttribute("data-tooltip", pageName);
+    const icon = document.createElement("i");
+    icon.className = "fa-solid fa-globe";
+    link.appendChild(icon);
+    link.appendChild(document.createTextNode(displayText || pageName));
     return link;
   },
   replaceParent: false,
@@ -137,4 +149,5 @@ export default function registerEnrichers() {
   CONFIG.TextEditor.enrichers.push(equipmentEnricher);
   CONFIG.TextEditor.enrichers.push(rankEnricher);
   CONFIG.TextEditor.enrichers.push(wikiEnricher);
+  CONFIG.TextEditor.enrichers.push(wikiLinkEnricher);
 }
