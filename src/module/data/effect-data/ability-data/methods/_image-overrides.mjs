@@ -317,6 +317,7 @@ export const imageOverrides = {
   "Mental Effect Immunity": "modules/game-icons-net/whitetransparent/rear-aura.svg",
   "Might Strike": "modules/game-icons-net/whitetransparent/pointy-sword.svg",
   "Military and Battle Training": "modules/game-icons-net/whitetransparent/medieval-pavilion.svg",
+  "Mind Lock": "modules/game-icons-net/whitetransparent/strongbox.svg",
   "Minor Item Enchantment": "modules/game-icons-net/whitetransparent/pearl-earring.svg",
   "Minor Undead": "modules/game-icons-net/whitetransparent/piece-skull.svg",
   "Minor Weapon Enchantment": "modules/game-icons-net/whitetransparent/flaming-trident.svg",
