@@ -4,11 +4,6 @@
 export type Expansion = "cascade" | "detonate" | "fork" | "ripple" | null;
 
 /**
- * Valid piercing types
- */
-export type PiercingType = "normal" | "av0" | "ub";
-
-/**
  * Valid delivery packages
  */
 export type DeliveryPackage =

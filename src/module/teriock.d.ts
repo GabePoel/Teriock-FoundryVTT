@@ -100,6 +100,7 @@ declare global {
   const TeriockResourceData: typeof import("./data/_module.mjs").effect.ResourceData;
 
   namespace Teriock {
+    type AbilityType = Parameters.AbilityType;
     type ActiveExecutionTime = Parameters.ActiveExecutionTime;
     type ActorType = DocumentTypes.ActorType;
     type Attribute = Parameters.Attribute;
@@ -109,6 +110,7 @@ declare global {
     type CommandExecuteContext = Command.CommandExecuteContext;
     type CommandOptions = Command.CommandOptions;
     type CommonRollOptions = Rolls.CommonRollOptions;
+    type ConditionKey = Parameters.ConditionKey;
     type ConditionRollOptions = Rolls.ConditionRollOptions;
     type ContextMenuEntry = Ui.ContextMenuEntry;
     type CritRollOptions = Rolls.CritRollOptions;
@@ -120,38 +122,44 @@ declare global {
     type EquipmentClass = Parameters.EquipmentClass;
     type EquipmentRollOptions = Rolls.EquipmentRollOptions;
     type ExecutionTime = Parameters.ExecutionTime;
+    type Expansion = Parameters.Expansion;
     type Field = Parameters.Field;
+    type Font = Parameters.Font;
+    type FunctionHook = Parameters.FunctionHook;
+    type GenericPropertyKey = Parameters.GenericPropertyKey;
     type HTMLButtonConfig = Chat.HTMLButtonConfig;
     type HackableBodyPart = Parameters.HackableBodyPart;
     type IconStyle = Ui.IconStyle;
     type Interaction = Parameters.Interaction;
     type ItemType = DocumentTypes.ItemType;
+    type MagicalPropertyKey = Parameters.MagicalPropertyKey;
     type Maneuver = Parameters.Maneuver;
+    type MaterialPropertyKey = Parameters.MaterialPropertyKey;
     type MessageBar = Messages.MessageBar;
     type MessageBlock = Messages.MessageBlock;
     type MessageOptions = Messages.MessageOptions;
     type MessageParts = Messages.MessageParts;
     type PassiveExecutionTime = Parameters.PassiveExecutionTime;
+    type Piercing = Parameters.Piercing;
     type PolyhedralDie = Rolls.PolyhedralDie;
     type PowerSource = Parameters.PowerSource;
+    type PowerType = Parameters.PowerType;
     type PseudoHook = Parameters.PseudoHook;
-    type QueryInCombatExpirationData = Queries.QueryInCombatExpirationData;
     type QueryAddToSustainingData = Queries.QueryAddToSustainingData;
+    type QueryInCombatExpirationData = Queries.QueryInCombatExpirationData;
     type QuerySustainedExpirationData = Queries.QuerySustainedExpirationData;
+    type RankArchetype = Parameters.RankArchetype;
+    type RankClass = Parameters.RankClass;
     type ReactiveExecutionTime = Parameters.ReactiveExecutionTime;
     type SkipFunctions = Updates.SkipFunctions;
     type SlowExecutionTime = Parameters.SlowExecutionTime;
     type StatAttribute = Parameters.StatAttribute;
-    type ConditionKey = Parameters.ConditionKey;
     type Target = Parameters.Target;
     type ThreeToggle = Ui.ThreeToggle;
     type Tradecraft = Parameters.Tradecraft;
     type WeaponClass = Parameters.WeaponClass;
     type WeaponFightingStyle = Parameters.WeaponFightingStyle;
     type WikiPullOptions = Wiki.WikiPullOptions;
-    type GenericPropertyKey = Parameters.GenericPropertyKey;
-    type MaterialPropertyKey = Parameters.MaterialPropertyKey;
-    type MagicalPropertyKey = Parameters.MagicalPropertyKey;
 
     const __brand: unique symbol;
 

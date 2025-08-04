@@ -12,7 +12,7 @@
 
 ## Low Priority
 
-- [ ] Journal entries pulled for rules
+- [x] Journal entries pulled for rules
 - [ ] Better resistance/immunity tooltips
 - [ ] Condition toggling from character sheet
 

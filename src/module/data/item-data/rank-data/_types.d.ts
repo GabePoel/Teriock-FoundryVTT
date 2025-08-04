@@ -11,11 +11,11 @@ export interface TeriockRankSchema extends TeriockBaseItemData {
   /** Flaws */
   flaws: string;
   /** Rank Class Archetype */
-  archetype: string;
+  archetype: Teriock.RankArchetype;
   /** Rank Class Name */
-  className: string;
+  className: Teriock.RankClass;
   /** What number rank this is, with respect to its class */
-  classRank: number;
+  classRank: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
   /** Is the rank's hit die spent? */
   hitDieSpent: boolean;
   /** Is the rank's mana die spent? */
@@ -29,7 +29,7 @@ export interface TeriockRankSchema extends TeriockBaseItemData {
   /** Mana Points (rolled from Mana Die) */
   mp: number;
   /** Max Armor Value */
-  maxAv: number;
+  maxAv: 0 | 1 | 2 | 3 | 4;
 }
 
 declare module "./rank-data.mjs" {

@@ -1,22 +1,8 @@
 import { CostsConfig } from "./rules-parts/costs";
-import {
-  DeliveryConfig,
-  PiercingType,
-} from "./rules-parts/interaction";
+import { DeliveryConfig } from "./rules-parts/interaction";
 import { OverviewText, ResultsText } from "./rules-parts/summary";
 import { ImprovementsConfig } from "./rules-parts/improvements";
 import type { Duration } from "./rules-parts/duration";
-
-/**
- * Valid ability types
- */
-export type AbilityType =
-  | "special"
-  | "normal"
-  | "gifted"
-  | "echo"
-  | "intrinsic"
-  | "flaw";
 
 /**
  * Data structure that the game system rules care about. (Stuff that appears directly on the wiki.)
@@ -50,7 +36,7 @@ export interface TeriockAbilityRulesSchema {
   trigger: string;
 
   // Combat properties
-  piercing: PiercingType;
+  piercing: Teriock.Piercing;
   improvements: ImprovementsConfig;
 
   // Ability types
@@ -58,15 +44,15 @@ export interface TeriockAbilityRulesSchema {
   spell: boolean;
   standard: boolean;
   ritual: boolean;
-  class: string;
+  class: Teriock.RankClass;
   rotator: boolean;
   invoked: boolean;
   basic: boolean;
-  abilityType: AbilityType;
+  abilityType: Teriock.AbilityType;
+  effects: Teriock.EffectTag[];
 
-  // Effects and expansion
-  effects: string[];
-  expansion: string | null;
+  // Expansion
+  expansion: Teriock.Expansion | null;
   expansionRange: string | null;
   expansionSaveAttribute: Teriock.Attribute;
 

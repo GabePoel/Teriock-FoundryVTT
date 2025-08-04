@@ -8,6 +8,10 @@ import type { unsortedPseudoHooks } from "../helpers/constants/pseudo-hooks.mjs"
 import type { properties } from "../helpers/constants/generated/properties.mjs";
 import type { materialProperties } from "../helpers/constants/generated/material-properties.mjs";
 import type { magicalProperties } from "../helpers/constants/generated/magical-properties.mjs";
+import type { powerOptions } from "../helpers/constants/power-options.mjs";
+import type { rankOptions } from "../helpers/constants/rank-options.mjs";
+import type { fonts } from "../helpers/constants/fonts.mjs";
+import type { resourceOptions } from "../helpers/constants/resource-options.mjs";
 
 // Actor typing
 
@@ -22,7 +26,7 @@ export type HackableBodyPart =
   | "nose";
 
 /** Valid stat attributes */
-export type StatAttribute = "int" | "mov" | "per" | "snk" | "str";
+export type StatAttribute = keyof typeof abilityOptions.attribute;
 
 /** Valid attributes */
 export type Attribute = Teriock.StatAttribute | "unp";
@@ -34,6 +38,9 @@ export type ConditionKey = keyof typeof conditions;
 export type PseudoHook = keyof typeof unsortedPseudoHooks;
 
 // Ability typing
+
+/** Ability type */
+export type AbilityType = keyof typeof abilityOptions.abilityType;
 
 /** Valid maneuvers */
 export type Maneuver = keyof typeof abilityOptions.maneuver;
@@ -88,6 +95,13 @@ export type Element = keyof typeof abilityOptions.elements;
 /** Valid power sources */
 export type PowerSource = keyof typeof abilityOptions.powerSources;
 
+
+/** Expansion */
+export type Expansion = keyof typeof abilityOptions.expansion;
+
+/** Piercing */
+export type Piercing = keyof typeof abilityOptions.piercing;
+
 // Fluency typing
 
 /** Valid fields */
@@ -100,6 +114,11 @@ export type Tradecraft =
   | keyof typeof tradecraftOptions.scholar.tradecrafts
   | keyof typeof tradecraftOptions.survivalist.tradecrafts
   | keyof typeof tradecraftOptions.prestige.tradecrafts;
+
+// Resource typing
+
+/** Function hook */
+export type FunctionHook = keyof typeof resourceOptions.functionHooks;
 
 // Equipment typing
 
@@ -120,3 +139,20 @@ export type MaterialPropertyKey = keyof typeof materialProperties;
 
 /** Magical property keys */
 export type MagicalPropertyKey = keyof typeof magicalProperties;
+
+// Power typing
+
+/** Power type */
+export type PowerType = keyof typeof powerOptions;
+
+// Rank typing
+
+/** Archetype */
+export type RankArchetype = keyof typeof rankOptions;
+
+/** Class */
+export type RankClass = keyof typeof abilityOptions.class;
+
+// General
+
+export type Font = keyof typeof fonts;

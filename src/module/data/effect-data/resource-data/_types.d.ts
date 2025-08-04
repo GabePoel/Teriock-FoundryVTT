@@ -16,7 +16,7 @@ interface TeriockResourceSchema extends TeriockBaseEffectData {
   /** Roll Formula */
   rollFormula: string;
   /** Function Hook */
-  functionHook: string;
+  functionHook: Teriock.FunctionHook;
   /** Parent */
   parent: TeriockResource;
 }
