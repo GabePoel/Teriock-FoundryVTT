@@ -1,7 +1,7 @@
 import * as applications from "./applications/_module.mjs";
 import * as dialogs from "./applications/dialogs/_module.mjs";
 import * as perception from "./canvas/perception/_module.mjs";
-import {conditions} from "./content/conditions.mjs";
+import { conditions } from "./content/conditions.mjs";
 import * as data from "./data/_module.mjs";
 import * as documents from "./documents/_module.mjs";
 import TERIOCK from "./helpers/config.mjs";
@@ -14,13 +14,15 @@ import registerTemplates from "./helpers/register-templates.mjs";
 import * as utils from "./helpers/utils.mjs";
 import * as wiki from "./helpers/wiki.mjs";
 
-const {ActorSheet, ItemSheet} = foundry.appv1.sheets;
-const {DocumentSheetConfig} = foundry.applications.apps;
+const { ActorSheet, ItemSheet } = foundry.appv1.sheets;
+const { DocumentSheetConfig } = foundry.applications.apps;
 
 foundry.helpers.Hooks.once("init", function () {
   CONFIG.TERIOCK = TERIOCK;
 
   CONFIG.ui.hotbar = applications.ui.TeriockHotbar;
+
+  applications.ux.registerEnrichers();
 
   CONFIG.Combat.initiative = {
     formula: "1d20 + @mov",
@@ -170,7 +172,7 @@ foundry.helpers.Hooks.once("init", function () {
       types: ["consequence"],
     },
   ];
-  sheetMap.forEach(({cls, label, types, doc, makeDefault = true}) =>
+  sheetMap.forEach(({ cls, label, types, doc, makeDefault = true }) =>
     DocumentSheetConfig.registerSheet(doc, "teriock", cls, {
       label,
       makeDefault,
@@ -256,14 +258,15 @@ foundry.helpers.Hooks.once("init", function () {
         cleanWikiHTML: wiki.cleanWikiHTML,
         fetchCategoryAbilities: wiki.fetchCategoryAbilities,
         fetchCategoryMembers: wiki.fetchCategoryMembers,
+        fetchNamespacePages: wiki.fetchNamespacePages,
         fetchWikiPageHTML: wiki.fetchWikiPageHTML,
         openWikiPage: wiki.openWikiPage,
       },
     },
     packs: {
-      coreRules: () =>
+      rules: () =>
         /** @type {TeriockJournalCompendium} */
-        packs.get("teriock.core-rules"),
+        packs.get("teriock.rules"),
       classes: () =>
         /** @type {TeriockRankCompendium} */
         packs.get("teriock.classes"),

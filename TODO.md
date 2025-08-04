@@ -7,7 +7,7 @@
 
 ## Medium Priority
 
-- [ ] Custom enrichers
+- [x] Custom enrichers
 - [ ] Refined duration integration
 
 ## Low Priority
