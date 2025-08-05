@@ -27,10 +27,10 @@ export default (Base) => {
      * Parses raw HTML content from the wiki into document data updates.
      * Converts wiki HTML content into structured data for document updates.
      *
-     * @param {string} rawHTML - The raw HTML content fetched from the wiki.
+     * @param {string} _rawHTML - The raw HTML content fetched from the wiki.
      * @returns {Promise<object>} Promise that resolves to an object containing data updates.
      */
-    async parse(rawHTML) {
+    async parse(_rawHTML) {
       return {
         "system.description": "Description.",
       };
