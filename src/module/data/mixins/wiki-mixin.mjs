@@ -15,8 +15,12 @@ export default (Base) => {
      * @returns {string} The complete wiki page path with namespace prefix.
      */
     get wikiPage() {
-      const prefix = this.wikiNamespace ? `${this.wikiNamespace}:` : "";
-      return `${prefix}${this.parent.name}`;
+      const prefix = this.constructor.metadata.namespace;
+      const pageName = foundry.utils.getProperty(
+        this.parent,
+        this.constructor.metadata.pageNameKey,
+      );
+      return `${prefix}:${pageName}`;
     }
 
     /**

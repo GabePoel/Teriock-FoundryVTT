@@ -19,14 +19,17 @@ export default class TeriockConsequenceData extends TeriockBaseEffectData {
   /**
    * Metadata for this effect.
    *
-   * @returns {Teriock.EffectMetadata}
+   * @type {Readonly<Teriock.EffectDataModelMetadata>}
    */
-  static get metadata() {
-    return foundry.utils.mergeObject(super.metadata, {
-      type: "consequence",
-      canSub: true,
-    });
-  }
+  static metadata = Object.freeze({
+    consumable: false,
+    hierarchy: true,
+    namespace: "",
+    pageNameKey: "name",
+    type: "consequence",
+    usable: true,
+    wiki: false,
+  });
 
   /** @inheritDoc */
   get messageParts() {

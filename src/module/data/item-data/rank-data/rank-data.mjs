@@ -18,15 +18,19 @@ const { fields } = foundry.data;
 export default class TeriockRankData extends WikiDataMixin(
   TeriockBaseItemData,
 ) {
-  /** @inheritDoc */
-  static USABLE = false;
-
-  /** @inheritDoc */
-  static get metadata() {
-    return foundry.utils.mergeObject(super.metadata, {
-      type: "rank",
-    });
-  }
+  /**
+   * Metadata for this item.
+   *
+   * @type {Readonly<Teriock.ItemDataModelMetadata>}
+   */
+  static metadata = Object.freeze({
+    consumable: false,
+    namespace: "Class",
+    pageNameKey: "system.className",
+    type: "rank",
+    usable: false,
+    wiki: true,
+  });
 
   /**
    * Context menu entries to display for cards that represent the parent document.
@@ -76,7 +80,15 @@ export default class TeriockRankData extends WikiDataMixin(
    * @override
    */
   get wikiPage() {
-    return `Class:${CONFIG.TERIOCK.rankOptions[this.archetype].classes[this.className].name}`;
+    const prefix = this.constructor.metadata.namespace;
+    const pageName =
+      CONFIG.TERIOCK.rankOptionsList[
+        foundry.utils.getProperty(
+          this.parent,
+          this.constructor.metadata.pageNameKey,
+        )
+      ];
+    return `${prefix}:${pageName}`;
   }
 
   /**

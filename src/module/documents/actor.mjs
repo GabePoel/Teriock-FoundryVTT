@@ -1,5 +1,4 @@
 import { characterOptions } from "../helpers/constants/character-options.mjs";
-import { pseudoHooks } from "../helpers/constants/pseudo-hooks.mjs";
 import { rankOptions } from "../helpers/constants/rank-options.mjs";
 import { copyItem } from "../helpers/fetch.mjs";
 import { pureUuid, toCamelCase } from "../helpers/utils.mjs";

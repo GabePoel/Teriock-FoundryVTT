@@ -7,13 +7,19 @@ const { fields } = foundry.data;
  * Power-specific item data model.
  */
 export default class TeriockPowerData extends TeriockBaseItemData {
-  /** @inheritDoc */
-  static USABLE = false;
-
-  /** @inheritDoc */
-  static get metadata() {
-    return foundry.utils.mergeObject({}, { type: "power" });
-  }
+  /**
+   * Metadata for this item.
+   *
+   * @type {Readonly<Teriock.ItemDataModelMetadata>}
+   */
+  static metadata = Object.freeze({
+    consumable: false,
+    namespace: "",
+    pageNameKey: "name",
+    type: "power",
+    usable: false,
+    wiki: false,
+  });
 
   /**
    * Gets the message parts for the power.

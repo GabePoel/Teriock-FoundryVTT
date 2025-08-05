@@ -18,13 +18,17 @@ export default class TeriockResourceData extends ConsumableDataMixin(
   /**
    * Metadata for this effect.
    *
-   * @returns {Teriock.EffectMetadata}
+   * @type {Readonly<Teriock.EffectDataModelMetadata>}
    */
-  static get metadata() {
-    return foundry.utils.mergeObject(super.metadata, {
-      type: "resource",
-    });
-  }
+  static metadata = Object.freeze({
+    consumable: true,
+    hierarchy: false,
+    namespace: "",
+    pageNameKey: "name",
+    type: "resource",
+    usable: true,
+    wiki: false,
+  });
 
   /**
    * Checks if the resource effect is suppressed.

@@ -20,13 +20,17 @@ export default class TeriockConditionData extends WikiDataMixin(
   /**
    * Metadata for this effect.
    *
-   * @returns {Teriock.EffectMetadata}
+   * @type {Readonly<Teriock.EffectDataModelMetadata>}
    */
-  static get metadata() {
-    return foundry.utils.mergeObject(super.metadata, {
-      type: "condition",
-    });
-  }
+  static metadata = Object.freeze({
+    consumable: false,
+    hierarchy: false,
+    namespace: "Condition",
+    pageNameKey: "name",
+    type: "condition",
+    usable: true,
+    wiki: true,
+  });
 
   /** @inheritDoc */
   get messageParts() {

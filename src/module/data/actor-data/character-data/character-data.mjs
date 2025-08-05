@@ -11,10 +11,12 @@ import TeriockBaseActorData from "../base-actor-data/base-actor-data.mjs";
  * @extends {TeriockBaseActorData}
  */
 export default class TeriockCharacterData extends TeriockBaseActorData {
-  /** @inheritDoc */
-  static get metadata() {
-    return foundry.utils.mergeObject(super.metadata, {
-      type: "character",
-    });
-  }
+  /**
+   * Metadata for this actor.
+   *
+   * @type {Readonly<Teriock.ActorDataModelMetadata>}
+   */
+  static metadata = Object.freeze({
+    type: "character",
+  });
 }

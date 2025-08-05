@@ -12,22 +12,21 @@ const { fields } = foundry.data;
  *
  * @extends {TeriockBaseEffectData}
  */
-export default class TeriockPropertyData extends WikiDataMixin(
-  TeriockBaseEffectData,
-) {
-  /** @inheritDoc */
-  static USABLE = false;
-
+export default class TeriockPropertyData extends WikiDataMixin(TeriockBaseEffectData) {
   /**
    * Metadata for this effect.
    *
-   * @returns {Teriock.EffectMetadata}
+   * @type {Readonly<Teriock.EffectDataModelMetadata>}
    */
-  static get metadata() {
-    return foundry.utils.mergeObject(super.metadata, {
-      type: "property",
-    });
-  }
+  static metadata = Object.freeze({
+    consumable: false,
+    hierarchy: false,
+    namespace: "Property",
+    pageNameKey: "name",
+    type: "property",
+    usable: false,
+    wiki: true,
+  });
 
   /**
    * Gets the message parts for the property effect.

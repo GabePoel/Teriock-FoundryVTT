@@ -18,15 +18,6 @@ const { TypeDataModel } = foundry.abstract;
  */
 export default class TeriockBaseActorData extends TypeDataModel {
   /**
-   * Blank metadata.
-   *
-   * @returns {object} The metadata object.
-   */
-  static get metadata() {
-    return foundry.utils.mergeObject({}, { type: "base" });
-  }
-
-  /**
    * Defines the schema for the base actor data model.
    *
    * @returns {object} The schema definition for the actor data.

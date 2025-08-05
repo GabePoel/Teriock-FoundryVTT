@@ -15,13 +15,6 @@ export default (Base) => {
    */
   return class ChildData extends Base {
     /**
-     * Can this type be "used"?
-     *
-     * @type {boolean}
-     */
-    static USABLE = true;
-
-    /**
      * Gets the message rules-parts for displaying the child document in chat.
      * Includes image, name, and font information from the parent document.
      *

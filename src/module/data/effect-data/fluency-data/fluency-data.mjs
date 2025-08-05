@@ -19,13 +19,17 @@ export default class TeriockFluencyData extends WikiDataMixin(
   /**
    * Metadata for this effect.
    *
-   * @returns {Teriock.EffectMetadata}
+   * @type {Readonly<Teriock.EffectDataModelMetadata>}
    */
-  static get metadata() {
-    return foundry.utils.mergeObject(super.metadata, {
-      type: "fluency",
-    });
-  }
+  static metadata = Object.freeze({
+    consumable: false,
+    hierarchy: false,
+    namespace: "Tradecraft",
+    pageNameKey: "system.tradecraft",
+    type: "fluency",
+    usable: true,
+    wiki: true,
+  });
 
   /**
    * Checks if the fluency effect is suppressed.
@@ -60,7 +64,7 @@ export default class TeriockFluencyData extends WikiDataMixin(
    * @override
    */
   get wikiPage() {
-    return `Tradecraft:${CONFIG.TERIOCK.tradecraftOptions[this.field].tradecrafts[this.tradecraft].name}`;
+    return `${this.constructor.metadata.namespace}:${CONFIG.TERIOCK.tradecraftOptions[this.field].tradecrafts[this.tradecraft].name}`;
   }
 
   /**

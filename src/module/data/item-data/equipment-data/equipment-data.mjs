@@ -25,22 +25,19 @@ import * as schema from "./methods/_schema.mjs";
 export default class TeriockEquipmentData extends WikiDataMixin(
   ConsumableDataMixin(TeriockBaseItemData),
 ) {
-  /** @inheritDoc */
-  static get metadata() {
-    return foundry.utils.mergeObject(super.metadata, {
-      type: "equipment",
-    });
-  }
-
   /**
-   * Gets the wiki page URL for the equipment.
+   * Metadata for this item.
    *
-   * @returns {string} The wiki page URL for the equipment type.
-   * @override
+   * @type {Readonly<Teriock.ItemDataModelMetadata>}
    */
-  get wikiPage() {
-    return `Equipment:${this.equipmentType}`;
-  }
+  static metadata = Object.freeze({
+    consumable: true,
+    namespace: "Equipment",
+    pageNameKey: "system.equipmentType",
+    type: "equipment",
+    usable: true,
+    wiki: true,
+  });
 
   /**
    * Gets the message rules-parts for the equipment.

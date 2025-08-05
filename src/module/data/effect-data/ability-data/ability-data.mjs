@@ -24,14 +24,17 @@ export default class TeriockAbilityData extends WikiDataMixin(
   /**
    * Metadata for this effect.
    *
-   * @returns {Teriock.EffectMetadata}
+   * @type {Readonly<Teriock.EffectDataModelMetadata>}
    */
-  static get metadata() {
-    return foundry.utils.mergeObject(super.metadata, {
-      type: "ability",
-      canSub: true,
-    });
-  }
+  static metadata = Object.freeze({
+    consumable: false,
+    hierarchy: true,
+    namespace: "Ability",
+    pageNameKey: "name",
+    type: "ability",
+    usable: true,
+    wiki: true,
+  });
 
   /**
    * Checks if the ability is suppressed.
@@ -48,7 +51,7 @@ export default class TeriockAbilityData extends WikiDataMixin(
 
   /** @inheritDoc */
   get useText() {
-    if (this.spell) return `Cast ${this.parent.name}`
+    if (this.spell) return `Cast ${this.parent.name}`;
     return super.useText;
   }
 
@@ -71,16 +74,6 @@ export default class TeriockAbilityData extends WikiDataMixin(
       ...super.messageParts,
       ..._messageParts(this),
     };
-  }
-
-  /**
-   * Gets the wiki page URL for the ability.
-   *
-   * @returns {string} The wiki page URL for the ability.
-   * @override
-   */
-  get wikiPage() {
-    return `${this.wikiNamespace}:${this.parent.name}`;
   }
 
   /**

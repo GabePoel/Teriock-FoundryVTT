@@ -13,21 +13,6 @@ export default class TeriockBaseEffectData extends ChildDataMixin(
   TypeDataModel,
 ) {
   /**
-   * Metadata for this effect.
-   *
-   * @returns {Teriock.EffectMetadata}
-   */
-  static get metadata() {
-    return foundry.utils.mergeObject(
-      {},
-      {
-        type: "base",
-        canSub: false,
-      },
-    );
-  }
-
-  /**
    * Checks if the effect is suppressed.
    * Effects are suppressed if their parent item is disabled.
    *

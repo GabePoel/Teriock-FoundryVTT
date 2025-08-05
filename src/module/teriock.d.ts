@@ -102,6 +102,7 @@ declare global {
   namespace Teriock {
     type AbilityType = Parameters.AbilityType;
     type ActiveExecutionTime = Parameters.ActiveExecutionTime;
+    type ActorDataModelMetadata = DocumentTypes.ActorDataModelMetadata;
     type ActorType = DocumentTypes.ActorType;
     type Attribute = Parameters.Attribute;
     type ChatOptions = Command.ChatOptions;
@@ -115,6 +116,7 @@ declare global {
     type ContextMenuEntry = Ui.ContextMenuEntry;
     type CritRollOptions = Rolls.CritRollOptions;
     type Delivery = Parameters.Delivery;
+    type EffectDataModelMetadata = DocumentTypes.EffectDataModelMetadata;
     type EffectMetadata = Metadata.EffectMetadata;
     type EffectTag = Parameters.EffectTag;
     type EffectType = DocumentTypes.EffectType;
@@ -131,6 +133,7 @@ declare global {
     type HackableBodyPart = Parameters.HackableBodyPart;
     type IconStyle = Ui.IconStyle;
     type Interaction = Parameters.Interaction;
+    type ItemDataModelMetadata = DocumentTypes.ItemDataModelMetadata;
     type ItemType = DocumentTypes.ItemType;
     type MagicalPropertyKey = Parameters.MagicalPropertyKey;
     type Maneuver = Parameters.Maneuver;

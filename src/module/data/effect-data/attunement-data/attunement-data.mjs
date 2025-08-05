@@ -11,19 +11,20 @@ const { fields } = foundry.data;
  * @extends {TeriockBaseEffectData}
  */
 export default class TeriockAttunementData extends TeriockBaseEffectData {
-  /** @inheritDoc */
-  static USABLE = false;
-
   /**
    * Metadata for this effect.
    *
-   * @returns {Teriock.EffectMetadata}
+   * @type {Readonly<Teriock.EffectDataModelMetadata>}
    */
-  static get metadata() {
-    return foundry.utils.mergeObject(super.metadata, {
-      type: "attunement",
-    });
-  }
+  static metadata = Object.freeze({
+    consumable: false,
+    hierarchy: false,
+    namespace: "",
+    pageNameKey: "name",
+    type: "attunement",
+    usable: false,
+    wiki: false,
+  });
 
   /** @inheritDoc */
   get messageParts() {
