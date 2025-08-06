@@ -9,5 +9,5 @@ export { default as TeriockMacro } from "./macro.mjs";
 export { default as TeriockMessage } from "./chat-message.mjs";
 export { default as TeriockRoll } from "./roll.mjs";
 export { default as TeriockScene } from "./scene.mjs";
-export { default as TeriockToken } from "./token.mjs";
+export { default as TeriockTokenDocument } from "./token-document.mjs";
 export { default as TeriockUser } from "./user.mjs";

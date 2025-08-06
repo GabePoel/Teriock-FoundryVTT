@@ -9,7 +9,7 @@ import { makeIcon } from "../../../../../helpers/utils.mjs";
 export function propertyContextMenu(property) {
   const iconStyle = CONFIG.TERIOCK.iconStyles.contextMenu;
   const options = [];
-  let types = CONFIG.TERIOCK.abilityOptions.abilityType;
+  let types = CONFIG.TERIOCK.abilityOptions.form;
   for (const type in types) {
     const typeName = types[type].name;
     const typeIcon = types[type].icon;
@@ -20,7 +20,7 @@ export function propertyContextMenu(property) {
       callback: async () => {
         await property.update({
           system: {
-            propertyType: type,
+            form: type,
           },
         });
       },

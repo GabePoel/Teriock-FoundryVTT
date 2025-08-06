@@ -34,8 +34,8 @@ export default function registerLookupHelpers() {
   );
 
   Handlebars.registerHelper("abilityMarker", (effect) => {
-    const type = effect.system.abilityType || effect.system.propertyType;
-    return CONFIG.TERIOCK.abilityOptions.abilityType[type]?.color;
+    const type = effect.system.form || effect.system.form;
+    return CONFIG.TERIOCK.abilityOptions.form[type]?.color;
   });
 
   Handlebars.registerHelper("path", function (obj, ...pathSegments) {

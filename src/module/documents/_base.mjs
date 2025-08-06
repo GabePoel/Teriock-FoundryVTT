@@ -33,6 +33,7 @@ const { WorldCollection } = foundry.documents.abstract;
  * @property {TeriockEffect[]} appliedEffects
  * @property {TeriockEffect[]} temporaryEffects
  * @property {() => Generator<TeriockEffect, void, void>} allApplicableEffects
+ * @property {Set<Teriock.ConditionKey>} statuses
  * @property {TeriockBaseActorData} system
  * @property {Teriock.ActorType} type
  * @property {"Actor"} documentName
@@ -87,7 +88,7 @@ export class BaseTeriockEffect extends ChildDocumentMixin(ActiveEffect) {}
  * @property {"TokenDocument"} documentName
  * @property {boolean} isOwner
  */
-export class BaseTeriockToken extends TokenDocument {}
+export class BaseTeriockTokenDocument extends TokenDocument {}
 
 /**
  * This class is a hack to get {@link Macro} intellisense without warnings for unimplemented methods.

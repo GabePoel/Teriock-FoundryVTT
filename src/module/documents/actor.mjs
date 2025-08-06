@@ -117,13 +117,14 @@ export default class TeriockActor extends BaseTeriockActor {
           (await copyItem("Hand", "equipment")).toObject(),
           (await copyItem("Mouth", "equipment")).toObject(),
           (await copyItem("Human", "species")).toObject(),
+          (await copyItem("Actor Mechanics", "essentials")).toObject(),
         ],
       });
     }
   }
 
   /**
-   * Figure out the named for a given size.
+   * Figure out the name for a given size.
    *
    * @param {number} size
    * @returns {string}
@@ -176,7 +177,7 @@ export default class TeriockActor extends BaseTeriockActor {
         changed.prototypeToken.height = tokenSize;
         changed.prototypeToken.width = tokenSize;
       }
-      for (const token of /** @type {TeriockToken[]} */ this.getDependentTokens()) {
+      for (const token of /** @type {TeriockTokenDocument[]} */ this.getDependentTokens()) {
         if (token.parent?.grid?.type === 0) {
           await token.resize({ width: tokenSize, height: tokenSize });
         } else {
@@ -196,6 +197,21 @@ export default class TeriockActor extends BaseTeriockActor {
       power: new Set(this.itemTypes?.power.map((e) => toCamelCase(e.name))),
       rank: new Set(this.itemTypes?.rank.map((e) => toCamelCase(e.name))),
     };
+  }
+
+  /**
+   * Prepare all embedded {@link TeriockMechanicSheet} instances which within this primary {@link TeriockActor}.
+   */
+  prepareMechanicalDocuments() {
+    for (const mechanic of this.itemTypes?.mechanic || []) {
+      mechanic.prepareData();
+    }
+  }
+
+  /** @inheritDoc */
+  prepareData() {
+    super.prepareData();
+    this.prepareMechanicalDocuments();
   }
 
   /**

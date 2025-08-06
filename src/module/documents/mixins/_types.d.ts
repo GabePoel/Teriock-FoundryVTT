@@ -5,6 +5,7 @@ import {
   TeriockConsequence,
   TeriockEquipment,
   TeriockFluency,
+  TeriockMechanic,
   TeriockPower,
   TeriockProperty,
   TeriockRank,
@@ -24,6 +25,7 @@ export type ParentItemTypes = {
   equipment?: TeriockEquipment[];
   power?: TeriockPower[];
   rank?: TeriockRank[];
+  mechanic?: TeriockMechanic[];
 };
 
 /** The names of each {@link TeriockEffect} this contains, in camel case, keyed by type. */

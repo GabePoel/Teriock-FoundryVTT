@@ -40,7 +40,7 @@ export type PseudoHook = keyof typeof unsortedPseudoHooks;
 // Ability typing
 
 /** Ability type */
-export type AbilityType = keyof typeof abilityOptions.abilityType;
+export type Form = keyof typeof abilityOptions.form;
 
 /** Valid maneuvers */
 export type Maneuver = keyof typeof abilityOptions.maneuver;
@@ -94,7 +94,6 @@ export type Element = keyof typeof abilityOptions.elements;
 
 /** Valid power sources */
 export type PowerSource = keyof typeof abilityOptions.powerSources;
-
 
 /** Expansion */
 export type Expansion = keyof typeof abilityOptions.expansion;
@@ -153,6 +152,45 @@ export type RankArchetype = keyof typeof rankOptions;
 /** Class */
 export type RankClass = keyof typeof abilityOptions.class;
 
+// Token typing
+
+export type LightingAnimation =
+  | ""
+  | "witchwave"
+  | "chroma"
+  | "energy"
+  | "fairy"
+  | "torch"
+  | "grid"
+  | "ghost"
+  | "hexa"
+  | "dome"
+  | "emanation"
+  | "pulse"
+  | "wave"
+  | "radialrainbow"
+  | "revolving"
+  | "siren"
+  | "smokepatch"
+  | "reactivepulse"
+  | "starlight"
+  | "sunburst"
+  | "fog"
+  | "rainbowswirl"
+  | "flame"
+  | "vortex";
+
 // General
 
+/** Font */
 export type Font = keyof typeof fonts;
+
+/** Comparison */
+export type Comparison = "=" | "!=" | ">" | "<" | ">=" | "<=";
+
+/** Comparator */
+export type Comparator = {
+  key: string;
+  comparison: Teriock.Comparison;
+  value: any;
+};

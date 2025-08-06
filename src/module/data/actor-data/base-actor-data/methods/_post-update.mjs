@@ -18,21 +18,22 @@ import { encumbranceData } from "../../../../content/encumbrance.mjs";
  * @private
  */
 export async function _postUpdate(system, skipFunctions = {}) {
-  if (!skipFunctions.applyEncumbrance) {
-    await _applyEncumbrance(system);
-  }
-  if (!skipFunctions.checkDown) {
-    await _checkDown(system);
-  }
-  if (!skipFunctions.etherealKill) {
-    await _etherealKill(system);
-  }
+  // if (!skipFunctions.applyEncumbrance) {
+  //   await _applyEncumbrance(system);
+  // }
+  // if (!skipFunctions.checkDown) {
+  //   await _checkDown(system);
+  // }
+  // if (!skipFunctions.etherealKill) {
+  //   await _etherealKill(system);
+  // }
   if (!skipFunctions.checkExpirations) {
     await _checkExpirations(system);
   }
   if (!skipFunctions.prepareTokens) {
-    for (const token of /** @type {TeriockToken[]} */ system.parent.getDependentTokens()) {
+    for (const token of /** @type {TeriockTokenDocument[]} */ system.parent.getDependentTokens()) {
       const { visionMode } = token._deriveVision();
+      await token.update({ light: system.light });
       await token.updateVisionMode(visionMode);
     }
   }

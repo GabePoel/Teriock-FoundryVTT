@@ -1,7 +1,7 @@
 const { shaders } = foundry.canvas.rendering;
 
 /**
- * Wounded vision shader - creates red vignette effect for a down/dead {@link TeriockToken}
+ * Wounded vision shader - creates red vignette effect for a down/dead {@link TeriockTokenDocument}
  */
 export class WoundedBackgroundVisionShader extends shaders.BackgroundVisionShader {
   /** @inheritdoc */

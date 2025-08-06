@@ -15,9 +15,9 @@ export default class DetectionModeLightPerception extends BaseDetectionMode {
    * @inheritDoc
    * @param {PointVisionSource} visionSource
    * @param {object|null} visionSource.object
-   * @param {TeriockToken} visionSource.object.document
+   * @param {TeriockTokenDocument} visionSource.object.document
    * @param {object|null} target
-   * @param {TeriockToken} target.document
+   * @param {TeriockTokenDocument} target.document
    */
   _canDetect(visionSource, target) {
     return !(

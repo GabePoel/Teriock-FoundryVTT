@@ -88,5 +88,14 @@ export function _migrateData(data) {
 
   // Hierarchy migration
   data = migrateHierarchy(data);
+
+  // Form migration
+  if (foundry.utils.getProperty(data, "abilityType")) {
+    foundry.utils.setProperty(
+      data,
+      "form",
+      foundry.utils.getProperty(data, "abilityType"),
+    );
+  }
   return data;
 }

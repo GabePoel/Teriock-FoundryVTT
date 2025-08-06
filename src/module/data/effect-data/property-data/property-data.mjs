@@ -1,6 +1,9 @@
 import WikiDataMixin from "../../mixins/wiki-mixin.mjs";
 import TeriockBaseEffectData from "../base-effect-data/base-effect-data.mjs";
 import { _messageParts } from "./methods/_messages.mjs";
+import { _migrateData } from "./methods/_migrate-data.mjs";
+import * as parsing from "./methods/_parsing.mjs";
+import { _suppressed } from "./methods/_suppression.mjs";
 
 const { fields } = foundry.data;
 
@@ -12,7 +15,9 @@ const { fields } = foundry.data;
  *
  * @extends {TeriockBaseEffectData}
  */
-export default class TeriockPropertyData extends WikiDataMixin(TeriockBaseEffectData) {
+export default class TeriockPropertyData extends WikiDataMixin(
+  TeriockBaseEffectData,
+) {
   /**
    * Metadata for this effect.
    *
@@ -29,6 +34,19 @@ export default class TeriockPropertyData extends WikiDataMixin(TeriockBaseEffect
   });
 
   /**
+   * Checks if the property is suppressed.
+   * Combines base suppression with property-specific suppression logic.
+   *
+   * @returns {boolean} True if the property is suppressed, false otherwise.
+   * @override
+   */
+  get suppressed() {
+    let suppressed = super.suppressed;
+    suppressed = suppressed || _suppressed(this);
+    return suppressed;
+  }
+
+  /**
    * Gets the message parts for the property effect.
    * Combines base message parts with property-specific message parts.
    *
@@ -37,6 +55,18 @@ export default class TeriockPropertyData extends WikiDataMixin(TeriockBaseEffect
    */
   get messageParts() {
     return { ...super.messageParts, ..._messageParts(this) };
+  }
+
+  /**
+   * Migrates property data to the current schema version.
+   *
+   * @param {object} data - The data to migrate.
+   * @returns {object} The migrated data.
+   * @override
+   */
+  static migrateData(data) {
+    data = _migrateData(data);
+    return super.migrateData(data);
   }
 
   /**
@@ -49,8 +79,19 @@ export default class TeriockPropertyData extends WikiDataMixin(TeriockBaseEffect
       wikiNamespace: new fields.StringField({
         initial: "Property",
       }),
-      propertyType: new fields.StringField({ initial: "normal" }),
+      form: new fields.StringField({ initial: "normal" }),
       damageType: new fields.StringField({ initial: "" }),
     });
+  }
+
+  /**
+   * Parses raw HTML content for the property.
+   *
+   * @param {string} rawHTML - The raw HTML content to parse.
+   * @returns {Promise<object>} Promise that resolves to the parsed HTML content.
+   * @override
+   */
+  async parse(rawHTML) {
+    return await parsing._parse(this, rawHTML);
   }
 }

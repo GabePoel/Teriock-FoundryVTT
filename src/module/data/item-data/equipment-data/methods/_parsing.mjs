@@ -14,28 +14,15 @@ import { _override } from "./_overrides.mjs";
  * @private
  */
 export async function _parse(equipmentData, rawHTML) {
-  const validProperties = Object.values(
-    CONFIG.TERIOCK.equipmentOptions.properties,
-  );
-  const validMaterialProperties = Object.values(
-    CONFIG.TERIOCK.equipmentOptions.materialProperties,
-  );
-  const validMagicalProperties = Object.values(
-    CONFIG.TERIOCK.equipmentOptions.magicalProperties,
-  );
-  const allValidProperties = [
-    ...validProperties,
-    ...validMaterialProperties,
-    ...validMagicalProperties,
-    "Weapon",
-  ];
+  const allValidProperties = foundry.utils.deepClone(CONFIG.TERIOCK.properties);
+  allValidProperties["weapon"] = "Weapon";
 
   // Remove existing properties
   const toRemove = [];
   for (const effect of equipmentData.parent.transferredEffects.filter(
     (e) => e.type === "property",
   )) {
-    if (allValidProperties.includes(effect.name)) {
+    if (Object.values(allValidProperties).includes(effect.name)) {
       toRemove.push(effect._id);
     }
   }
@@ -94,22 +81,15 @@ export async function _parse(equipmentData, rawHTML) {
   parameters.equipmentClasses = new Set(
     Array.from(equipmentClasses).map((s) => toCamelCase(s)),
   );
-  const candidateProperties = Array.from(properties).map((s) => toCamelCase(s));
-
-  // Filter properties by config
-  const allowedProperties = [
-    ...Object.keys(CONFIG.TERIOCK.equipmentOptions.properties),
-    ...Object.keys(CONFIG.TERIOCK.equipmentOptions.materialProperties),
-    ...Object.keys(CONFIG.TERIOCK.equipmentOptions.magicalProperties),
-  ];
+  const candidateProperties = Array.from(properties);
   const filteredProperties = candidateProperties.filter((p) =>
-    allowedProperties.includes(p),
+    Object.values(allValidProperties).includes(p),
   );
   candidateProperties.length = 0;
   candidateProperties.push(...filteredProperties);
 
-  for (const key of candidateProperties) {
-    await createProperty(equipmentData.parent, key);
+  for (const name of candidateProperties) {
+    await createProperty(equipmentData.parent, name);
   }
 
   parameters.properties = [];

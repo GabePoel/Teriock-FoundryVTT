@@ -1,6 +1,6 @@
 import { SheetData } from "./sheet";
 import type TeriockMacro from "../../../../documents/macro.mjs";
-import type TeriockToken from "../../../../documents/token.mjs";
+import type TeriockTokenDocument from "../../../../documents/token-document.mjs";
 
 /**
  * Derived data properties.
@@ -65,7 +65,14 @@ export interface TeriockBaseActorDerived {
   /** Species */
   species: Set<string>;
   /** Lighted to */
-  lightedTo: Teriock.UUID<TeriockToken>[];
+  lightedTo: Teriock.UUID<TeriockTokenDocument>[];
   /** Goaded to */
-  goadedTo: Teriock.UUID<TeriockToken>[];
+  goadedTo: Teriock.UUID<TeriockTokenDocument>[];
+  /** Transformation */
+  transformation: {
+    /** Transformed token art */
+    img: string | null;
+  };
+  /** Light */
+  light: object;
 }

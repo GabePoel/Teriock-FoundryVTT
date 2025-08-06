@@ -226,7 +226,7 @@ export function tokenName(token) {
  * Get the token for a {@link TeriockActor}.
  *
  * @param {TeriockActor} actor
- * @returns {TeriockToken|null}
+ * @returns {TeriockTokenDocument|null}
  */
 export function actorToken(actor) {
   return (
@@ -251,10 +251,10 @@ export function tokenActor(token) {
  * Get the document for a {@link Token}.
  *
  * @param {Token} token
- * @returns {TeriockToken}
+ * @returns {TeriockTokenDocument}
  */
 export function tokenDocument(token) {
-  return /** @type {TeriockToken} */ token.document;
+  return /** @type {TeriockTokenDocument} */ token.document;
 }
 
 /**
@@ -380,12 +380,13 @@ export function evaluateSync(formula, data = {}, options = {}) {
  * @param {Object} options - Options that get passed to the roll.
  * @returns {number} The total result of the evaluated roll.
  */
-export function smartEvaluateSync(formula, document, options = {}) {
+export function smartEvaluateSync(formula, document, options = { fail: 0 }) {
+  const fail = options?.fail || 0;
   if (!formula) {
-    return 0;
+    return fail;
   }
   if (typeof formula !== "string") {
-    return 0;
+    return fail;
   }
   if (!isNaN(Number(formula))) {
     return Number(formula);

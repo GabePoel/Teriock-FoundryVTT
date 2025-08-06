@@ -26,7 +26,7 @@ declare global {
   const TeriockMacro: typeof import("./documents/macro.mjs").default;
   const TeriockRoll: typeof import("./documents/roll.mjs").default;
   const TeriockScene: typeof import("./documents/scene.mjs").default;
-  const TeriockToken: typeof import("./documents/token.mjs").default;
+  const TeriockTokenDocument: typeof import("./documents/token-document.mjs").default;
   const TeriockUser: typeof import("./documents/user.mjs").default;
   const TeriockWorldCollection: typeof import("./documents/collections/world-collection.mjs").default;
 
@@ -100,7 +100,7 @@ declare global {
   const TeriockResourceData: typeof import("./data/_module.mjs").effect.ResourceData;
 
   namespace Teriock {
-    type AbilityType = Parameters.AbilityType;
+    type Form = Parameters.Form;
     type ActiveExecutionTime = Parameters.ActiveExecutionTime;
     type ActorDataModelMetadata = DocumentTypes.ActorDataModelMetadata;
     type ActorType = DocumentTypes.ActorType;
@@ -111,6 +111,8 @@ declare global {
     type CommandExecuteContext = Command.CommandExecuteContext;
     type CommandOptions = Command.CommandOptions;
     type CommonRollOptions = Rolls.CommonRollOptions;
+    type Comparison = Parameters.Comparison;
+    type Comparator = Parameters.Comparator;
     type ConditionKey = Parameters.ConditionKey;
     type ConditionRollOptions = Rolls.ConditionRollOptions;
     type ContextMenuEntry = Ui.ContextMenuEntry;
@@ -135,6 +137,7 @@ declare global {
     type Interaction = Parameters.Interaction;
     type ItemDataModelMetadata = DocumentTypes.ItemDataModelMetadata;
     type ItemType = DocumentTypes.ItemType;
+    type LightingAnimation = Parameters.LightingAnimation;
     type MagicalPropertyKey = Parameters.MagicalPropertyKey;
     type Maneuver = Parameters.Maneuver;
     type MaterialPropertyKey = Parameters.MaterialPropertyKey;

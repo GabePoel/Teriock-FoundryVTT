@@ -5,7 +5,7 @@ interface TeriockPropertySchema extends TeriockBaseEffectData {
   /** Wiki Namespace */
   readonly wikiNamespace: "Property";
   /** Property Type */
-  propertyType: Teriock.AbilityType;
+  form: Teriock.Form;
   /** Damage Type */
   damageType: string;
   /** Parent */

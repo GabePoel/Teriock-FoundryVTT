@@ -1,8 +1,8 @@
+import { _prepareAttributes } from "./_prepare-attributes.mjs";
 import { _prepareDefenses, _prepareOffenses } from "./_prepare-combat.mjs";
 import { _prepareEncumbrance, _prepareMoney, _prepareWeightCarried } from "./_prepare-load.mjs";
 import { _prepareSpecies } from "./_prepare-species.mjs";
 import { _prepareSpeed } from "./_prepare-speed.mjs";
-import { _prepareAttributes, _prepareBonuses, _prepareHpMp, _preparePresence } from "./_prepare-stats.mjs";
 import { _prepareTradecrafts } from "./_prepare-tradecrafts.mjs";
 
 /**
@@ -13,7 +13,6 @@ import { _prepareTradecrafts } from "./_prepare-tradecrafts.mjs";
  * are up-to-date and consistent.
  *
  * The derived data includes:
- * - Level-based bonuses (`pres`, `rank`, `p`, `f`)
  * - Attribute saves (`intSave`, `movSave`, etc.)
  * - Combat values (`av`, `bv`, `ac`, `cc`)
  * - Load and encumbrance calculations
@@ -30,9 +29,6 @@ import { _prepareTradecrafts } from "./_prepare-tradecrafts.mjs";
  */
 export function _prepareDerivedData(actorData) {
   _prepareSpecies(actorData);
-  _prepareBonuses(actorData);
-  _prepareHpMp(actorData);
-  _preparePresence(actorData);
   _prepareAttributes(actorData);
   _prepareTradecrafts(actorData);
   _prepareMoney(actorData);

@@ -1,4 +1,6 @@
-import { pseudoHooks } from "../../../../helpers/constants/pseudo-hooks.mjs";
+import { pseudoHooks } from "../../../../../helpers/constants/pseudo-hooks.mjs";
+import { _prepareLighting } from "./_prepare-lighting.mjs";
+import { _prepareBonuses, _prepareHpMp, _preparePresence } from "./_prepare-stats.mjs";
 
 /**
  * Prepare all data that needs to be initialized but exists to be set with effects.
@@ -13,6 +15,13 @@ import { pseudoHooks } from "../../../../helpers/constants/pseudo-hooks.mjs";
  * @private
  */
 export function _prepareBaseData(actorData) {
+  _prepareBonuses(actorData);
+  _prepareHpMp(actorData);
+  _preparePresence(actorData);
+  _prepareLighting(actorData);
+  actorData.transformation = {
+    img: null,
+  };
   actorData.abilityFlags = {};
   actorData.damage = {
     standard: "",

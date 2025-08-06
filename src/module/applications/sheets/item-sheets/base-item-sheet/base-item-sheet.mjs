@@ -48,27 +48,27 @@ export default class TeriockBaseItemSheet extends BaseItemSheet {
    * @override
    */
   async _prepareContext(options) {
-    const abilityTypeOrder = Object.keys(
-      CONFIG.TERIOCK.abilityOptions.abilityType || {},
+    const abilityFormOrder = Object.keys(
+      CONFIG.TERIOCK.abilityOptions.form || {},
     );
     this.item.buildEffectTypes();
     const abilities = this.item.abilities.sort((a, b) => {
-      const typeA = a.system?.abilityType || "";
-      const typeB = b.system?.abilityType || "";
-      const indexA = abilityTypeOrder.indexOf(typeA);
-      const indexB = abilityTypeOrder.indexOf(typeB);
+      const typeA = a.system?.form || "";
+      const typeB = b.system?.form || "";
+      const indexA = abilityFormOrder.indexOf(typeA);
+      const indexB = abilityFormOrder.indexOf(typeB);
       if (indexA !== indexB) return indexA - indexB;
       return (a.name || "").localeCompare(b.name || "");
     });
 
-    const propertyTypeOrder = Object.keys(
-      CONFIG.TERIOCK.abilityOptions.abilityType || {},
+    const propertyFormOrder = Object.keys(
+      CONFIG.TERIOCK.abilityOptions.form || {},
     );
     const properties = this.item.properties.sort((a, b) => {
-      const typeA = a.system?.propertyType || "";
-      const typeB = b.system?.propertyType || "";
-      const indexA = propertyTypeOrder.indexOf(typeA);
-      const indexB = propertyTypeOrder.indexOf(typeB);
+      const typeA = a.system?.form || "";
+      const typeB = b.system?.form || "";
+      const indexA = propertyFormOrder.indexOf(typeA);
+      const indexB = propertyFormOrder.indexOf(typeB);
       if (indexA !== indexB) return indexA - indexB;
       return (a.name || "").localeCompare(b.name || "");
     });
@@ -87,6 +87,7 @@ export default class TeriockBaseItemSheet extends BaseItemSheet {
     context.abilities = abilities;
     context.fluencies = fluencies;
     context.resources = resources;
+    context.baseEffects = this.document.effectTypes?.base || [];
 
     return context;
   }

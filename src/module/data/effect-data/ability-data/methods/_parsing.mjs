@@ -253,7 +253,7 @@ function processTags(parameters, tagTree, doc) {
       parameters.powerSources.includes("unknown") ||
       parameters.powerSources.includes("psionic")
     ) {
-      parameters.abilityType = "special";
+      parameters.form = "special";
     }
   }
 
@@ -379,15 +379,15 @@ function processTags(parameters, tagTree, doc) {
   if (tagTree.standard) parameters.standard = true;
   if (tagTree.rotator) {
     parameters.rotator = true;
-    parameters.abilityType = "special";
+    parameters.form = "special";
   }
   if (tagTree.deliveryPackage?.includes("ritual")) parameters.ritual = true;
-  if (tagTree.special) parameters.abilityType = "special";
-  if (tagTree.flaw) parameters.abilityType = "flaw";
+  if (tagTree.special) parameters.form = "special";
+  if (tagTree.flaw) parameters.form = "flaw";
 
   if (doc.querySelector(".ability-basic")) {
     parameters.basic = true;
-    parameters.abilityType = "intrinsic";
+    parameters.form = "intrinsic";
   }
 }
 
@@ -417,10 +417,10 @@ function processImprovements(parameters, doc) {
       ? parseInt(minVal, 10)
       : null;
     if (minVal < 0) {
-      parameters.abilityType = "flaw";
+      parameters.form = "flaw";
     }
     if (minVal > 3) {
-      parameters.abilityType = "special";
+      parameters.form = "special";
     }
   }
 

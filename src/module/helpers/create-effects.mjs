@@ -80,46 +80,29 @@ export async function createResource(document) {
  * Creates a new property effect with optional predefined content.
  *
  * @param {TeriockItem} document - The document to create the property in.
- * @param {string|null} key - Optional key to look up predefined property content.
+ * @param {string|null} name - The name for the new property. If not provided, defaults to "New Property".
  * @returns {Promise<TeriockProperty>} The created property effect.
  */
-export async function createProperty(document, key = "") {
-  let description = "Insert description here.";
-  let propertyType = "normal";
-  let name = "New Property";
-  if (key === "other") key = null;
-  if (CONFIG.TERIOCK.equipmentOptions.properties[key]) {
-    name = CONFIG.TERIOCK.equipmentOptions.properties[key];
-    description = CONFIG.TERIOCK.content.properties[key].content;
-    propertyType = "intrinsic";
-  } else if (CONFIG.TERIOCK.equipmentOptions.magicalProperties[key]) {
-    name = CONFIG.TERIOCK.equipmentOptions.magicalProperties[key];
-    description = CONFIG.TERIOCK.content.magicalProperties[key].content;
-    propertyType = "normal";
-  } else if (CONFIG.TERIOCK.equipmentOptions.materialProperties[key]) {
-    name = CONFIG.TERIOCK.equipmentOptions.materialProperties[key];
-    description = CONFIG.TERIOCK.content.materialProperties[key].content;
-    propertyType = "intrinsic";
-  }
-  if (key === "legendary") {
-    propertyType = "special";
-  } else if (key === "cumbersome") {
-    propertyType = "flaw";
-  }
-  const system = {
-    propertyType: propertyType,
-    description: description,
+export async function createProperty(document, name = null) {
+  const propertyData = {
+    name: "New Property",
+    type: "property",
+    img: "systems/teriock/assets/property.svg",
+    system: {},
   };
+  if (name) {
+    propertyData.name = name;
+  }
 
-  const property = await TeriockEffect.create(
-    {
-      name: name,
-      type: "property",
-      img: "systems/teriock/assets/property.svg",
-      system: system,
-    },
-    { parent: document },
-  );
+  /** @type {TeriockProperty} */
+  const property = (
+    await document.createEmbeddedDocuments("ActiveEffect", [propertyData])
+  )[0];
+  console.log(property);
+
+  if (propertyData.name !== "New Property") {
+    await property.system.wikiPull();
+  }
   await document.forceUpdate();
   return property;
 }
@@ -160,4 +143,22 @@ export async function createFluency(document) {
   );
   await document.forceUpdate();
   return fluency;
+}
+
+/**
+ * Creates a new base effect.
+ *
+ * @param {TeriockActor|TeriockItem} document - The document to create the base in.
+ * @returns {Promise<TeriockEffect>} The created base effect.
+ */
+export async function createBaseEffect(document) {
+  const baseEffect = await TeriockEffect.create(
+    {
+      name: "New Base Effect",
+      img: "icons/svg/clockwork.svg",
+    },
+    { parent: document },
+  );
+  await document.forceUpdate();
+  return baseEffect;
 }

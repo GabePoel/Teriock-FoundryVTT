@@ -174,7 +174,7 @@ export const abilityOptions = {
       noLimit: "No Limit",
     },
   },
-  abilityType: {
+  form: {
     special: {
       name: "Special",
       icon: "star",

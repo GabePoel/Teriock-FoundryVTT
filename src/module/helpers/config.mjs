@@ -1,7 +1,10 @@
 import { conditions as conditionsContent } from "../content/conditions.mjs";
 import { magicalProperties } from "../content/magical-properties.mjs";
 import { materialProperties } from "../content/material-properties.mjs";
-import { properties as propertiesContent } from "../content/properties.mjs";
+import {
+  properties,
+  properties as propertiesContent,
+} from "../content/properties.mjs";
 import { abilityOptions } from "./constants/ability-options.mjs";
 import { characterOptions } from "./constants/character-options.mjs";
 import { consequenceOptions } from "./constants/consequence-options.mjs";
@@ -21,6 +24,17 @@ import { rankOptions } from "./constants/rank-options.mjs";
 import { resourceOptions } from "./constants/resource-options.mjs";
 import { tradecraftOptions } from "./constants/tradecraft-options.mjs";
 import { mergeLevel } from "./utils.mjs";
+
+const allProperties = {};
+for (const [key, value] of Object.entries(properties)) {
+  allProperties[key] = value.name;
+}
+for (const [key, value] of Object.entries(magicalProperties)) {
+  allProperties[key] = value.name;
+}
+for (const [key, value] of Object.entries(materialProperties)) {
+  allProperties[key] = value.name;
+}
 
 /**
  * Main configuration object containing all system options, constants, and content.
@@ -52,6 +66,7 @@ import { mergeLevel } from "./utils.mjs";
  */
 const TERIOCK = {
   abilities: abilities,
+  properties: allProperties,
   abilityOptions: abilityOptions,
   characterOptions: characterOptions,
   conditions: conditionsList,

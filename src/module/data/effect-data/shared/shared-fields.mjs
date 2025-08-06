@@ -1,6 +1,28 @@
 const { fields } = foundry.data;
 
 /**
+ * Field for comparisons.
+ *
+ * @returns {SchemaField} comparison field.
+ */
+export function comparatorField() {
+  return new fields.SchemaField({
+    key: new fields.StringField(),
+    comparison: new fields.StringField({
+      choices: {
+        "=": "=",
+        "!=": "!=",
+        ">": ">",
+        "<": "<",
+        ">=": ">=",
+        "<=": "<=",
+      },
+    }),
+    value: new fields.AnyField(),
+  });
+}
+
+/**
  * Field for an effect hierarchy.
  *
  * @returns {SchemaField} Hierarchy field.

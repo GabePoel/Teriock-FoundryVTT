@@ -1,5 +1,3 @@
-import { abilities } from "./constants/generated/abilities.mjs";
-
 /**
  * Get a {@link TeriockItem} from a {@link TeriockCompendiumCollection}.
  *
@@ -55,9 +53,9 @@ export async function getAbility(name, options = {}) {
  * @returns {Promise<TeriockAbility>}
  */
 export async function copyAbility(name) {
-  if (Object.keys(abilities).includes(name))
-    name = Object.keys(abilities)[name];
-  if (!Object.values(abilities).includes(name)) return null;
+  if (Object.keys(CONFIG.TERIOCK.abilities).includes(name))
+    name = Object.keys(CONFIG.TERIOCK.abilities)[name];
+  if (!Object.values(CONFIG.TERIOCK.abilities).includes(name)) return null;
   return await getAbility(name, { clone: true });
 }
 
@@ -74,6 +72,47 @@ export async function importAbility(document, name) {
     /** @type {TeriockAbility[]} */
     await document.createEmbeddedDocuments("ActiveEffect", [ability]);
   return abilities[0];
+}
+
+/**
+ * Get a {@link TeriockProperty} from a {@link TeriockCompendiumCollection}.
+ *
+ * @param {string} name - Name of the {@link TeriockProperty}.
+ * @param {object} options - Options.
+ * @param {boolean} [options.clone] - Fetch a clone instead of the raw {@link TeriockProperty}.
+ * @returns {Promise<TeriockProperty>}
+ */
+export async function getProperty(name, options = {}) {
+  const item = await getItem(name, "essentials", options);
+  return item.effects.getName(name);
+}
+
+/**
+ * Copy a {@link TeriockProperty} from the default {@link TeriockCompendiumCollection}.
+ *
+ * @param {string} name - Name of the {@link TeriockProperty}.
+ * @returns {Promise<TeriockProperty>}
+ */
+export async function copyProperty(name) {
+  if (Object.keys(CONFIG.TERIOCK.properties).includes(name))
+    name = Object.keys(CONFIG.TERIOCK.properties)[name];
+  if (!Object.values(CONFIG.TERIOCK.properties).includes(name)) return null;
+  return await getProperty(name, { clone: true });
+}
+
+/**
+ * Import a {@link TeriockProperty} from the default {@link TeriockCompendiumCollection} to the given document.
+ *
+ * @param {TeriockActor|TeriockItem} document - Document to give the {@link TeriockProperty} to.
+ * @param {string} name - Name of the {@link TeriockProperty}.
+ * @returns {Promise<TeriockProperty>}
+ */
+export async function importProperty(document, name) {
+  const property = await copyProperty(name);
+  const properties =
+    /** @type {TeriockProperty[]} */
+    await document.createEmbeddedDocuments("ActiveEffect", [property]);
+  return properties[0];
 }
 
 /**

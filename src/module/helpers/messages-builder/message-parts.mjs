@@ -181,7 +181,7 @@ function addEmbeddedBlock(
   typeKey,
   iconFallback = "hashtag",
 ) {
-  const config = abilityOptions.abilityType;
+  const config = abilityOptions.form;
   const typeOrder = Object.keys(config);
 
   const filtered = (entities || [])

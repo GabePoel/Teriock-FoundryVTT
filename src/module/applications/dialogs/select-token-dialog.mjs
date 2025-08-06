@@ -6,7 +6,7 @@ const { DialogV2 } = foundry.applications.api;
  * @param {object} options
  * @param {string} options.[title] - Title for dialog.
  * @param {string} options.[hint] - Text for dialog.
- * @returns {Promise<Teriock.UUID<TeriockToken>>}
+ * @returns {Promise<Teriock.UUID<TeriockTokenDocument>>}
  */
 export async function selectTokensDialog(
   options = { title: "Select Tokens", hint: "" },
@@ -45,7 +45,7 @@ export async function selectTokensDialog(
 /**
  * Select some number of visible tokens for target to be lighted to.
  *
- * @returns {Promise<Teriock.UUID<TeriockToken>>}
+ * @returns {Promise<Teriock.UUID<TeriockTokenDocument>>}
  */
 export async function lightedToDialog() {
   return await selectTokensDialog({
@@ -57,7 +57,7 @@ export async function lightedToDialog() {
 /**
  * Select some number of visible tokens for target to be goaded to.
  *
- * @returns {Promise<Teriock.UUID<TeriockToken>>}
+ * @returns {Promise<Teriock.UUID<TeriockTokenDocument>>}
  */
 export async function goadedToDialog() {
   return await selectTokensDialog({

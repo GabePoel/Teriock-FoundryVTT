@@ -43,6 +43,7 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
       deattuneDoc: this._deattuneDoc,
       endCondition: this._endCondition,
       immune: this._immune,
+      openMechanics: this._openMechanics,
       openPrimaryAttacker: this._openPrimaryAttacker,
       openPrimaryBlocker: this._openPrimaryBlocker,
       quickUse: this._quickUse,
@@ -73,6 +74,13 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
     position: { width: 800, height: 600 },
     window: {
       icon: `fa-solid fa-${documentOptions.character.icon}`,
+      controls: [
+        {
+          icon: "fa-solid fa-gears",
+          label: "Mechanics",
+          action: "openMechanics",
+        },
+      ],
     },
   };
 
@@ -352,7 +360,6 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
     );
     if (!rankClass) return;
     const referenceRank = await getRank(rankClass, rankNumber);
-    console.log(referenceRank);
     let rank = await copyRank(rankClass, rankNumber);
     if (rankNumber <= 2) {
       await this.document.createEmbeddedDocuments("Item", [rank]);
@@ -361,7 +368,6 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
     const existingRanks = this.document.ranks.filter(
       (r) => r.system.className === rankClass,
     );
-    console.log(rank.abilities.filter((a) => !a.sup));
     const combatAbilityNames = new Set(
       referenceRank.abilities
         .filter((a) => !a.sup)
@@ -573,6 +579,20 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
    */
   static async _toggleSb() {
     await this.document.update({ "system.sb": !this.document.system.sb });
+  }
+
+  /**
+   * Opens the mechanics sheet.
+   *
+   * @returns {Promise<void>}
+   * @private
+   */
+  static async _openMechanics() {
+    const mechanics = this.document.itemTypes?.mechanic || [];
+    if (mechanics.length > 0) {
+      const mechanic = mechanics[0];
+      await mechanic.sheet.render(true);
+    }
   }
 
   /**
@@ -862,7 +882,7 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
 
   /**
    * Prepares the context data for template rendering.
-   * Builds effect types, sorts data, and prepares all necessary context information.
+   * Build effect types, sorts data, and prepare all necessary context information.
    *
    * @returns {Promise<object>} Promise that resolves to the context object.
    * @override
@@ -871,6 +891,7 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
     if (!this.actor.effectTypes) {
       this.actor.buildEffectTypes();
     }
+
     const tab = this._activeTab || "classes";
     this._embeds.effectTypes = {
       ability: tab === "abilities" ? this.actor.abilities : [],
@@ -942,7 +963,7 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
       for (const condition of Object.keys(CONFIG.TERIOCK.conditions)) {
         context.conditionProviders[condition] = new Set();
         for (const e of this.document.effectTypes?.base || []) {
-          if (!e.id.includes(condition) && e.statuses.has(condition)) {
+          if (e.statuses.has(condition) && e.active) {
             context.conditionProviders[condition].add(e.name);
             if (e.name === "2nd Arm Hack") {
               context.conditionProviders[condition].delete("1st Arm Hack");
@@ -958,12 +979,16 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
           }
         }
         for (const c of this.document.conditions) {
-          if (!c.id.includes(condition) && c.statuses.has(condition)) {
+          if (
+            !c.id.includes(condition) &&
+            c.statuses.has(condition) &&
+            c.active
+          ) {
             context.conditionProviders[condition].add(c.name);
           }
         }
         for (const c of this.document.consequences) {
-          if (c.statuses.has(condition)) {
+          if (c.statuses.has(condition) && c.active) {
             context.conditionProviders[condition].add(c.name);
           }
         }

@@ -298,7 +298,7 @@ export function _defineGeneral(schema) {
       initial: false,
       label: "Basic",
     }),
-    abilityType: new fields.StringField({ initial: "normal" }),
+    form: new fields.StringField({ initial: "normal" }),
     limitation: new fields.HTMLField({ initial: "" }),
     improvement: new fields.HTMLField({ initial: "" }),
     prepared: new fields.BooleanField({

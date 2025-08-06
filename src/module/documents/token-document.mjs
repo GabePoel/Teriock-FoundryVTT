@@ -1,8 +1,8 @@
 import { characterOptions } from "../helpers/constants/character-options.mjs";
 import { convertUnits } from "../helpers/utils.mjs";
-import { BaseTeriockToken } from "./_base.mjs";
+import { BaseTeriockTokenDocument } from "./_base.mjs";
 
-export default class TeriockToken extends BaseTeriockToken {
+export default class TeriockTokenDocument extends BaseTeriockTokenDocument {
   /**
    * Ensures that vision is correctly set when the token is first created.
    * Configures vision modes and detection ranges based on the {@link TeriockActor}'s senses.
@@ -104,13 +104,15 @@ export default class TeriockToken extends BaseTeriockToken {
 
   /**
    * Do not emit light if Ethereal.
-   *
-   * @private
    */
   _deriveLighting() {
     if (this.hasStatusEffect("ethereal")) {
       this.light.dim = 0;
       this.light.bright = 0;
+    } else if (this.actor) {
+      console.log(this.actor.system.light);
+      for (const [key, value] of Object.entries(this.actor.system.light))
+        foundry.utils.setProperty(this.light, key, value);
     }
   }
 

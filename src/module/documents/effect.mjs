@@ -35,7 +35,7 @@ export default class TeriockEffect extends BaseTeriockEffect {
   /**
    * Metadata for this effect.
    *
-   * @returns {Teriock.EffectMetadata}
+   * @returns {Teriock.EffectDataModelMetadata}
    */
   get metadata() {
     return this.system.constructor.metadata;
@@ -63,7 +63,7 @@ export default class TeriockEffect extends BaseTeriockEffect {
    */
   get supId() {
     if (
-      this.metadata?.canSub &&
+      this.metadata.hierarchy &&
       this.system.hierarchy.supId &&
       this.parent.effects.has(this.system.hierarchy.supId)
     ) {
@@ -110,7 +110,7 @@ export default class TeriockEffect extends BaseTeriockEffect {
    * @returns {Set<string>}
    */
   get subIds() {
-    if (this.metadata.canSub && this.system.hierarchy.subIds.size > 0) {
+    if (this.metadata.hierarchy && this.system.hierarchy.subIds.size > 0) {
       const root =
         /** @type {TeriockActor|TeriockItem} */ game.teriock.api.utils.fromUuidSync(
           this.system.hierarchy.rootUuid,
@@ -204,7 +204,7 @@ export default class TeriockEffect extends BaseTeriockEffect {
       if (oldIds.includes(oldEffect.id)) {
         updateData["_id"] = idMap[oldEffect.id];
       }
-      if (oldEffect.metadata.canSub) {
+      if (oldEffect.metadata.hierarchy) {
         if (oldIds.includes(oldEffect.system.hierarchy.supId)) {
           updateData["system.hierarchy.supId"] =
             idMap[oldEffect.system.hierarchy.supId];
@@ -243,7 +243,7 @@ export default class TeriockEffect extends BaseTeriockEffect {
     for (const supEffect of documents) {
       const newSupId = foundry.utils.randomID();
       toCreate.push(supEffect);
-      if (supEffect?.metadata?.canSub) {
+      if (supEffect?.metadata.hierarchy) {
         supEffect.updateSource({ _id: newSupId });
         if (supEffect.subIds.size > 0) {
           const oldSupId = supEffect.subs[0].system.hierarchy.supId;
@@ -294,7 +294,7 @@ export default class TeriockEffect extends BaseTeriockEffect {
   static async _preDeleteOperation(documents, operation, user) {
     await super._preDeleteOperation(documents, operation, user);
     for (const supEffect of documents) {
-      if (supEffect?.metadata?.canSub) {
+      if (supEffect?.metadata.hierarchy) {
         operation.ids.push(...Array.from(supEffect.allSubs.map((e) => e.id)));
       }
     }
@@ -350,7 +350,7 @@ export default class TeriockEffect extends BaseTeriockEffect {
    * @returns {Promise<void>}
    */
   async addSub(sub) {
-    if (this.metadata.canSub && sub.metadata.canSub) {
+    if (this.metadata.hierarchy && sub.metadata.hierarchy) {
       const newSubIds = this.subIds;
       newSubIds.add(sub.id);
       await this.parent.updateEmbeddedDocuments("ActiveEffect", [

@@ -87,6 +87,9 @@ export default function registerDocumentManagementHooks() {
   foundry.helpers.Hooks.on(
     "updateActiveEffect",
     async (document, _updateData, _options, userId) => {
+      if (isOwnerAndCurrentUser(document, userId)) {
+        await document.actor?.postUpdate();
+      }
       if (
         isOwnerAndCurrentUser(document, userId) &&
         document.type === "ability"

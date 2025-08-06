@@ -1,4 +1,4 @@
-import type TeriockToken from "../../documents/token.mjs";
+import type TeriockTokenDocument from "../../documents/token-document.mjs";
 import type TeriockActor from "../../documents/actor.mjs";
 
 declare module "./action-handler.mjs" {
@@ -16,15 +16,15 @@ declare module "./action-handler.mjs" {
     critRollOptions: Teriock.CritRollOptions;
 
     /** Selected Tokens */
-    selectedTokens: TeriockToken[];
+    selectedTokens: TeriockTokenDocument[];
     /** Selected Actors */
     selectedActors: TeriockActor[];
     /** Targeted Tokens */
-    targetedTokens: TeriockToken[];
+    targetedTokens: TeriockTokenDocument[];
     /** Targeted Actors */
     targetedActors: TeriockActor[];
     /** Default Tokens */
-    tokens: TeriockToken[];
+    tokens: TeriockTokenDocument[];
     /** Default Actors */
     actors: TeriockActor[];
 

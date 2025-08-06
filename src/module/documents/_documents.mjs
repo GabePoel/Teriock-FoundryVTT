@@ -58,6 +58,17 @@ export class TeriockPower extends TeriockItem {}
 export class TeriockRank extends TeriockItem {}
 
 /**
+ * Mechanic-specific {@link TeriockItem} class.
+ *
+ * @property {TeriockMechanicData} system
+ * @property {TeriockMechanicSheet} sheet
+ * @property {"rank"} type
+ * @property {Teriock.UUID<TeriockMechanic>} uuid
+ * @property {Teriock.ID<TeriockCharacter>} id
+ */
+export class TeriockMechanic extends TeriockItem {}
+
+/**
  * Ability-specific {@link TeriockEffect} class.
  *
  * Relevant wiki pages:

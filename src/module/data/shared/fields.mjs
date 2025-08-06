@@ -38,7 +38,7 @@ const createButton = (className, content, dataset = {}) => {
 };
 
 /**
- * Custom array field for Teriock system with enhanced input rendering.
+ * Custom array field for the Teriock system with enhanced input rendering.
  * Extends Foundry's ArrayField to provide custom input elements for array data.
  */
 export class TeriockArrayField extends fields.ArrayField {
@@ -131,7 +131,7 @@ export class TeriockRecordField extends fields.TypedObjectField {
 }
 
 /**
- * Special case StringField which represents a formula.
+ * Special case {@link StringField} which represents a formula.
  *
  * @param {StringFieldOptions & { deterministic?: boolean; }} [options={}] - Options which configure field behavior.
  * @property {boolean} deterministic=false - Is this formula not allowed to have dice values?

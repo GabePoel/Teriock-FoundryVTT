@@ -38,4 +38,14 @@ export default class TeriockBaseItemData extends ChildDataMixin(TypeDataModel) {
       onUse: new fields.SetField(new fields.DocumentIdField()),
     });
   }
+
+  /**
+   * Should an effect embedded in this be forcibly suppressed?
+   *
+   * @param {Teriock.ID<TeriockEffect>} _id
+   * @returns {boolean}
+   */
+  shouldSuppress(_id) {
+    return false;
+  }
 }

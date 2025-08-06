@@ -13,10 +13,14 @@ export function _suppressed(abilityData) {
     if (!suppressed && !abilityData.parent.parent.system.equipped) {
       suppressed = true;
     }
-    if (!suppressed && abilityData.parent.parent.system.dampened) {
+    if (
+      !suppressed &&
+      abilityData.parent.parent.system.dampened &&
+      abilityData.form !== "intrinsic"
+    ) {
       suppressed = true;
     }
-    if (!suppressed && abilityData.abilityType !== "intrinsic") {
+    if (!suppressed && abilityData.form !== "intrinsic") {
       const isAttuned = abilityData.parent.parent.system.isAttuned;
       suppressed = !isAttuned;
     }

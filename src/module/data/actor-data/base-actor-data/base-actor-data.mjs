@@ -1,11 +1,11 @@
 import { _migrateData } from "./methods/_migrate-data.mjs";
 import * as postUpdate from "./methods/_post-update.mjs";
-import { _prepareBaseData } from "./methods/_prepare-base-data.mjs";
 import { _getRollData } from "./methods/_roll-data.mjs";
+import { _prepareBaseData } from "./methods/base-data/_prepare-base-data.mjs";
 import * as hacks from "./methods/consequences/_take-hacks.mjs";
 import * as numericals from "./methods/consequences/_take-numericals.mjs";
 import * as oneOffs from "./methods/consequences/_take-one-offs.mjs";
-import { _prepareDerivedData } from "./methods/data-deriving/_data-deriving.mjs";
+import { _prepareDerivedData } from "./methods/derived-data/_derived-data.mjs";
 import { _rollCondition } from "./methods/rolling/_roll-condition.mjs";
 import * as rollGeneric from "./methods/rolling/_roll-generic.mjs";
 import { _defineSchema } from "./methods/schema/_schema.mjs";

@@ -1,5 +1,6 @@
 import * as applications from "./applications/_module.mjs";
 import * as dialogs from "./applications/dialogs/_module.mjs";
+import * as canvas from "./canvas/_module.mjs";
 import * as perception from "./canvas/perception/_module.mjs";
 import { conditions } from "./content/conditions.mjs";
 import * as data from "./data/_module.mjs";
@@ -49,6 +50,7 @@ foundry.helpers.Hooks.once("init", function () {
     return a.id.localeCompare(b.id);
   });
   CONFIG.specialStatusEffects["ETHEREAL"] = "ethereal";
+  CONFIG.specialStatusEffects["TRANSFORMED"] = "transformed";
 
   CONFIG.Canvas.visionModes = {
     ...CONFIG.Canvas.visionModes,
@@ -65,6 +67,9 @@ foundry.helpers.Hooks.once("init", function () {
     ...perception.detectionModes,
   };
 
+  // Register custom core placeables
+  CONFIG.Token.objectClass = canvas.placeables.TeriockToken;
+
   // Register custom core documents
   CONFIG.ActiveEffect.documentClass = documents.TeriockEffect;
   CONFIG.Actor.documentClass = documents.TeriockActor;
@@ -73,7 +78,7 @@ foundry.helpers.Hooks.once("init", function () {
   CONFIG.Item.documentClass = documents.TeriockItem;
   CONFIG.Macro.documentClass = documents.TeriockMacro;
   CONFIG.Scene.documentClass = documents.TeriockScene;
-  CONFIG.Token.documentClass = documents.TeriockToken;
+  CONFIG.Token.documentClass = documents.TeriockTokenDocument;
   CONFIG.User.documentClass = documents.TeriockUser;
 
   // Data models
@@ -84,6 +89,7 @@ foundry.helpers.Hooks.once("init", function () {
     equipment: data.item.EquipmentData,
     power: data.item.PowerData,
     rank: data.item.RankData,
+    mechanic: data.item.MechanicData,
   });
   Object.assign(CONFIG.ActiveEffect.dataModels, {
     ability: data.effect.AbilityData,
@@ -138,6 +144,12 @@ foundry.helpers.Hooks.once("init", function () {
       doc: documents.TeriockItem,
       label: "Power",
       types: ["power"],
+    },
+    {
+      cls: applications.sheets.item.MechanicSheet,
+      doc: documents.TeriockItem,
+      label: "Mechanic",
+      types: ["mechanic"],
     },
     // Effects
     {
@@ -210,7 +222,7 @@ foundry.helpers.Hooks.once("init", function () {
     Message: documents.TeriockMessage,
     Roll: documents.TeriockRoll,
     Scene: documents.TeriockScene,
-    Token: documents.TeriockToken,
+    Token: documents.TeriockTokenDocument,
     User: documents.TeriockUser,
     api: {
       create: {
@@ -241,6 +253,7 @@ foundry.helpers.Hooks.once("init", function () {
         convertUnits: utils.convertUnits,
         copyAbility: fetch.copyAbility,
         copyItem: fetch.copyItem,
+        copyProperty: fetch.copyProperty,
         copyRank: fetch.copyRank,
         dedent: utils.dedent,
         fromFeet: utils.fromFeet,
@@ -248,8 +261,10 @@ foundry.helpers.Hooks.once("init", function () {
         fromUuidSync: utils.fromUuidSync,
         getAbility: fetch.getAbility,
         getItem: fetch.getItem,
+        getProperty: fetch.getProperty,
         getRank: fetch.getRank,
         importAbility: fetch.importAbility,
+        importProperty: fetch.importProperty,
         pureUuid: utils.pureUuid,
         safeUuid: utils.safeUuid,
         toFeet: utils.toFeet,

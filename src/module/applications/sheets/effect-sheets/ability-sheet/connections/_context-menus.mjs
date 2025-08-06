@@ -434,12 +434,12 @@ export function contextMenus(ability) {
         });
       },
     })),
-    abilityType: Object.entries(fetch("abilityType")).map(([key, value]) => ({
+    form: Object.entries(fetch("form")).map(([key, value]) => ({
       name: value.name,
       icon: makeIcon(value.icon, CONFIG.TERIOCK.iconStyles.contextMenu),
       callback: async () => {
         await ability.update({
-          "system.abilityType": key,
+          "system.form": key,
         });
       },
     })),

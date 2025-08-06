@@ -298,7 +298,7 @@ export default class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(
         cm.featSaveImprovementAmount,
         "contextmenu",
       ],
-      [".ability-type-box", cm.abilityType, "click"],
+      [".ability-type-box", cm.form, "click"],
     ];
 
     for (const [selector, opts, evt] of contextMap) {

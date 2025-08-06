@@ -342,7 +342,7 @@ export default function registerUiHelpers() {
                   ability.system?.executionTime,
                 )
               : ability.type === "property"
-                ? ability.system?.propertyType
+                ? ability.system?.form
                 : "";
           if (ability.isTemporary && ability.duration.seconds) {
             subtitle =

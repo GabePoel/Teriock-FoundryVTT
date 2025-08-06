@@ -44,7 +44,7 @@ export function _sortAbilities(actor) {
     /** @param {TeriockAbility} a */
     enabled: (a) => Number(a.disabled),
     /** @param {TeriockAbility} a */
-    type: (a) => a.system.abilityType ?? "",
+    type: (a) => a.system.form ?? "",
   };
   return _sortEmbedded(abilities, sortKey, ascending, sortMap);
 }

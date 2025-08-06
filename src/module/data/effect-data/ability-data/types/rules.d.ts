@@ -48,7 +48,7 @@ export interface TeriockAbilityRulesSchema {
   rotator: boolean;
   invoked: boolean;
   basic: boolean;
-  abilityType: Teriock.AbilityType;
+  form: Teriock.Form;
   effects: Teriock.EffectTag[];
 
   // Expansion

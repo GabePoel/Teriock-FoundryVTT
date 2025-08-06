@@ -44,6 +44,7 @@ export default (Base) => {
         createResource: this._createResource,
         createProperty: this._createProperty,
         createFluency: this._createFluency,
+        createBaseEffect: this._createBaseEffect,
       },
       form: { submitOnChange: true, closeOnSubmit: false },
       window: { resizable: true },
@@ -325,7 +326,7 @@ export default (Base) => {
     }
 
     /**
-     * Creates a new fluency for the current document.
+     * Creates new fluency for the current document.
      *
      * @param {MouseEvent} _event - The event object.
      * @param {HTMLElement} _target - The target element.
@@ -336,20 +337,36 @@ export default (Base) => {
     }
 
     /**
+     * Creates a new base effect for the current document.
+     *
+     * @param {MouseEvent} _event - The event object.
+     * @param {HTMLElement} _target - The target element.
+     * @returns {Promise<ActiveEffect>} Promise that resolves to the created fluency.
+     */
+    static async _createBaseEffect(_event, _target) {
+      return await createEffects.createBaseEffect(this.document);
+    }
+
+    /**
      * Creates a new property for the current document.
-     * Shows a dialog to select property type or create a new one.
+     * Shows a dialog to select a property type or create a new one.
      *
      * @param {MouseEvent} _event - The event object.
      * @param {HTMLElement} _target - The target element.
      * @returns {Promise<ActiveEffect>} Promise that resolves to the created property.
      */
     static async _createProperty(_event, _target) {
-      let property = await selectPropertyDialog();
-      if (!property) {
-        property = "newProperty";
+      const propertyKey = await selectPropertyDialog();
+      let propertyName = "New Property";
+      if (propertyKey) {
+        propertyName = CONFIG.TERIOCK.properties[propertyKey];
+        await game.teriock.api.utils.importProperty(
+          this.document,
+          propertyName,
+        );
+      } else {
+        await createEffects.createProperty(this.document, propertyName);
       }
-      console.log("PROPERTY", property);
-      await createEffects.createProperty(this.document, property);
     }
 
     /**

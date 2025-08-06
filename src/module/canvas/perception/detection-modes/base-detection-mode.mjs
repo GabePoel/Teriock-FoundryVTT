@@ -16,9 +16,9 @@ export default class BaseDetectionMode extends DetectionMode {
    * @inheritDoc
    * @param {PointVisionSource} visionSource
    * @param {object|null} visionSource.object
-   * @param {TeriockToken} visionSource.object.document
+   * @param {TeriockTokenDocument} visionSource.object.document
    * @param {object|null} target
-   * @param {TeriockToken} target.document
+   * @param {TeriockTokenDocument} target.document
    * @override
    */
   _canDetect(visionSource, target) {

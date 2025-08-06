@@ -48,7 +48,7 @@ export default function registerChatManagementHooks() {
 
       container.addEventListener("click", async (event) => {
         event.stopPropagation();
-        /** @type {Teriock.UUID<TeriockToken>} */
+        /** @type {Teriock.UUID<TeriockTokenDocument>} */
         const uuid = container.getAttribute("data-uuid");
         if (!uuid) return;
 

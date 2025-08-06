@@ -109,10 +109,10 @@ export function _messageParts(abilityData) {
       ],
     },
     {
-      icon: "fa-" + ref.abilityType[src.abilityType].icon,
+      icon: "fa-" + ref.form[src.form].icon,
       label: "Ability Type",
       wrappers: [
-        ref.abilityType[src.abilityType].name,
+        ref.form[src.form].name,
         src.elderSorcery ? "Elder Sorcery" : "",
         ...src.effects.map((effect) => ref.effects[effect]),
       ],

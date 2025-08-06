@@ -17,9 +17,9 @@ export function _messageParts(propertyData) {
   return {
     bars: [
       {
-        icon: "fa-" + ref.abilityType[propertyData.propertyType].icon,
+        icon: "fa-" + ref.form[propertyData.form].icon,
         label: "Property Type",
-        wrappers: [ref.abilityType[propertyData.propertyType].name],
+        wrappers: [ref.form[propertyData.form].name],
       },
     ],
     blocks: blocks,
