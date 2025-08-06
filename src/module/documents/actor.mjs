@@ -150,7 +150,7 @@ export default class TeriockActor extends BaseTeriockActor {
       characterOptions.tokenSizes[TeriockActor.toNamedSize(this.system.size)] ||
       1;
     if (!foundry.utils.hasProperty(data, "prototypeToken.sight.enabled"))
-      prototypeToken.sight = { enabled: true, range: null };
+      prototypeToken.sight = { enabled: true, range: 0 };
     if (!foundry.utils.hasProperty(data, "prototypeToken.width"))
       prototypeToken.width = size;
     if (!foundry.utils.hasProperty(data, "prototypeToken.height"))

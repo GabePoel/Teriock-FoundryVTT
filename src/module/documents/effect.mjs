@@ -38,7 +38,19 @@ export default class TeriockEffect extends BaseTeriockEffect {
    * @returns {Teriock.EffectDataModelMetadata}
    */
   get metadata() {
-    return this.system.constructor.metadata;
+    const defaultMetadata = {
+      type: "base",
+      usable: false,
+      consumable: false,
+      wiki: false,
+      namespace: "",
+      pageNameKey: "name",
+      hierarchy: false,
+    };
+    return foundry.utils.mergeObject(
+      defaultMetadata,
+      this.system.constructor?.metadata,
+    );
   }
 
   /**

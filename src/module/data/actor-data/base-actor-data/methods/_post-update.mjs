@@ -21,9 +21,9 @@ export async function _postUpdate(system, skipFunctions = {}) {
   // if (!skipFunctions.applyEncumbrance) {
   //   await _applyEncumbrance(system);
   // }
-  // if (!skipFunctions.checkDown) {
-  //   await _checkDown(system);
-  // }
+  if (!skipFunctions.checkDown) {
+    await _checkDown(system);
+  }
   // if (!skipFunctions.etherealKill) {
   //   await _etherealKill(system);
   // }
@@ -32,8 +32,8 @@ export async function _postUpdate(system, skipFunctions = {}) {
   }
   if (!skipFunctions.prepareTokens) {
     for (const token of /** @type {TeriockTokenDocument[]} */ system.parent.getDependentTokens()) {
-      const { visionMode } = token._deriveVision();
-      await token.update({ light: system.light });
+      const { visionMode, range } = token._deriveVision();
+      await token.update({ light: system.light, "sight.range": range });
       await token.updateVisionMode(visionMode);
     }
   }
@@ -114,54 +114,54 @@ export async function _applyEncumbrance(system) {
  * @returns {Promise<void>} Resolves when the status effects are updated
  */
 export async function _checkDown(system) {
-  let shouldBeAsleep = system.parent.statuses.has("asleep");
-  let shouldBeUnconscious =
-    system.hp.value <= 0 || system.mp.value <= 0 || shouldBeAsleep;
-  if (system.resistances.effects.has("unconscious")) {
-    shouldBeUnconscious = false;
-  }
-  if (system.immunities.effects.has("unconscious")) {
-    shouldBeUnconscious = false;
-  }
-  let shouldBeDead =
-    system.hp.value <= system.hp.min || system.mp.value <= system.mp.min;
-  if (system.resistances.effects.has("dead")) {
-    shouldBeDead = false;
-  }
-  if (system.immunities.effects.has("dead")) {
-    shouldBeDead = false;
-  }
-  if (system.parent.statuses.has("ethereal") && shouldBeUnconscious) {
-    shouldBeDead = true;
-  }
-  if (shouldBeDead) {
-    shouldBeUnconscious = false;
-    shouldBeAsleep = false;
-  }
-  try {
-    await system.parent.toggleStatusEffect("dead", {
-      active: shouldBeDead,
-      overlay: true,
-    });
-  } catch {
-    /* empty */
-  }
-  try {
-    await system.parent.toggleStatusEffect("asleep", {
-      active: shouldBeAsleep,
-      overlay: true,
-    });
-  } catch {
-    /* empty */
-  }
-  try {
-    await system.parent.toggleStatusEffect("unconscious", {
-      active: shouldBeUnconscious && !system.parent.statuses.has("asleep"),
-      overlay: true,
-    });
-  } catch {
-    /* empty */
-  }
+  // let shouldBeAsleep = system.parent.statuses.has("asleep");
+  // let shouldBeUnconscious =
+  //   system.hp.value <= 0 || system.mp.value <= 0 || shouldBeAsleep;
+  // if (system.resistances.effects.has("unconscious")) {
+  //   shouldBeUnconscious = false;
+  // }
+  // if (system.immunities.effects.has("unconscious")) {
+  //   shouldBeUnconscious = false;
+  // }
+  // let shouldBeDead =
+  //   system.hp.value <= system.hp.min || system.mp.value <= system.mp.min;
+  // if (system.resistances.effects.has("dead")) {
+  //   shouldBeDead = false;
+  // }
+  // if (system.immunities.effects.has("dead")) {
+  //   shouldBeDead = false;
+  // }
+  // if (system.parent.statuses.has("ethereal") && shouldBeUnconscious) {
+  //   shouldBeDead = true;
+  // }
+  // if (shouldBeDead) {
+  //   shouldBeUnconscious = false;
+  //   shouldBeAsleep = false;
+  // }
+  // try {
+  //   await system.parent.toggleStatusEffect("dead", {
+  //     active: shouldBeDead,
+  //     overlay: true,
+  //   });
+  // } catch {
+  //   /* empty */
+  // }
+  // try {
+  //   await system.parent.toggleStatusEffect("asleep", {
+  //     active: shouldBeAsleep,
+  //     overlay: true,
+  //   });
+  // } catch {
+  //   /* empty */
+  // }
+  // try {
+  //   await system.parent.toggleStatusEffect("unconscious", {
+  //     active: shouldBeUnconscious && !system.parent.statuses.has("asleep"),
+  //     overlay: true,
+  //   });
+  // } catch {
+  //   /* empty */
+  // }
   // Handle financial damage
   if (system.parent.statuses.has("down") && system.money.debt > 0) {
     if (

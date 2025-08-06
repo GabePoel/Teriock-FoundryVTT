@@ -58,7 +58,7 @@ export default class TeriockTokenDocument extends BaseTeriockTokenDocument {
    */
   _deriveVision() {
     let visionMode = "basic";
-    let range = null;
+    let range = 0;
 
     if (this.sight?.enabled) {
       if (this.actor?.system.senses.dark > 0) {
@@ -110,7 +110,6 @@ export default class TeriockTokenDocument extends BaseTeriockTokenDocument {
       this.light.dim = 0;
       this.light.bright = 0;
     } else if (this.actor) {
-      console.log(this.actor.system.light);
       for (const [key, value] of Object.entries(this.actor.system.light))
         foundry.utils.setProperty(this.light, key, value);
     }
