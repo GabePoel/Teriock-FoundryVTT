@@ -2,15 +2,6 @@ const equipmentPack = game.teriock.packs.equipment();
 const equipmentFolders = equipmentPack.folders;
 const assignedProperties = ["Magelore", "Master Crafted", "Runic", "Silver"];
 
-const toCamelCase = (str) => {
-  return str
-    .toLowerCase()
-    .replace(/^\w|[A-Z]|\b\w|\s+/g, (match, index) =>
-      index === 0 ? match.toLowerCase() : match.trim().toUpperCase(),
-    )
-    .replace(/\s+/g, "");
-};
-
 function generateCombinations(arr) {
   const results = [];
 
@@ -49,7 +40,7 @@ combinations.sort((a, b) => {
 
 for (const combo of combinations) {
   const name = combo.join(" ") + " Equipment";
-  propertyMap[name] = combo.map(toCamelCase);
+  propertyMap[name] = combo;
 }
 
 for (const [folderName, properties] of Object.entries(propertyMap)) {
@@ -68,12 +59,7 @@ for (const [folderName, properties] of Object.entries(propertyMap)) {
   }
 
   for (const [_e, eo] of Object.entries(CONFIG.TERIOCK.equipmentType)) {
-    let generatedName =
-      properties
-        .map((p) => assignedProperties.find((ap) => toCamelCase(ap) === p))
-        .join(" ") +
-      " " +
-      eo;
+    let generatedName = properties.join(" ") + " " + eo;
     generatedName = generatedName.trim();
 
     const matches = equipmentPack.index.filter((e) => e.name === generatedName);
