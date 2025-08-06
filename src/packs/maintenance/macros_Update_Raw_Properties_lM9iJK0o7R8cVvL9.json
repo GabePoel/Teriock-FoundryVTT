@@ -1,0 +1,28 @@
+{
+  "name": "Update Raw Properties",
+  "type": "script",
+  "_id": "lM9iJK0o7R8cVvL9",
+  "author": "uxE8DDp7ujgsxtd2",
+  "img": "systems/teriock/assets/property.svg",
+  "scope": "global",
+  "command": "const essentialsPack = game.teriock.packs.essentials();\nconst essentialsFolders = essentialsPack.folders;\n\nconst rawPropertiesFolderName = \"Raw Properties\";\nlet rawPropertiesFolder = essentialsFolders.getName(rawPropertiesFolderName);\nif (!rawPropertiesFolder) {\n  await Folder.create(\n    {\n      name: rawPropertiesFolderName,\n      type: \"Item\",\n    },\n    {\n      pack: \"teriock.essentials\",\n    },\n  );\n}\n\n/** @type {object} */\nconst progress = ui.notifications.info(`Pulling all properties from wiki.`, {\n  progress: true,\n});\nlet pct = 0;\n\nlet allPropertyPages =\n  await game.teriock.api.wiki.fetchCategoryMembers(\"Properties\");\nallPropertyPages = allPropertyPages.filter((page) =>\n  page.title.includes(\"Property:\"),\n);\nfor (const propertyPage of allPropertyPages) {\n  const propertyName = propertyPage.title.split(\"Property:\")[1];\n\n  pct += 1 / allPropertyPages.length;\n  progress.update({ pct: pct, message: `Pulling ${propertyName} from wiki.` });\n\n  let propertyItem = essentialsPack.index.find((e) => e.name === propertyName);\n  if (!propertyItem) {\n    propertyItem = await game.teriock.Item.create(\n      {\n        name: propertyName,\n        type: \"equipment\",\n        system: {\n          type: \"other\",\n          description: `This equipment is a wrapper for ${propertyName}.`,\n        },\n        folder: rawPropertiesFolder.id,\n      },\n      { pack: \"teriock.essentials\" },\n    );\n  } else {\n    propertyItem = await game.teriock.api.utils.fromUuid(propertyItem.uuid);\n  }\n  let propertyEffect = propertyItem.properties.find(\n    (a) => a.name === propertyName,\n  );\n  console.log(propertyEffect);\n\n  if (!propertyEffect) {\n    propertyEffect = await game.teriock.api.create.property(\n      propertyItem,\n      propertyName,\n      { notify: false },\n    );\n  } else {\n    await propertyEffect.system.wikiPull({ notify: false });\n  }\n  if (propertyItem.img !== propertyEffect.img) {\n    await propertyItem.update({ img: propertyEffect.img });\n  }\n}",
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "uxE8DDp7ujgsxtd2": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null,
+    "coreVersion": "13.345",
+    "systemId": "teriock",
+    "systemVersion": "0.1.0",
+    "createdTime": 1754457994527,
+    "modifiedTime": 1754459859643,
+    "lastModifiedBy": "uxE8DDp7ujgsxtd2"
+  },
+  "_key": "!macros!lM9iJK0o7R8cVvL9"
+}
