@@ -98,7 +98,7 @@ export async function createProperty(document, name = null) {
     await document.createEmbeddedDocuments("ActiveEffect", [propertyData])
   )[0];
   if (propertyData.name !== "New Property") {
-    await property.system.wikiPull();
+    await property.system.wikiPull({ notify: false });
   }
   await document.forceUpdate();
   return property;

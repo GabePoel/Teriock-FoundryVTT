@@ -95,11 +95,13 @@ for (const [folderName, properties] of Object.entries(propertyMap)) {
       notify: false,
     });
 
-    console.log(properties);
-
     if (properties.length >= 1) {
       for (const property of properties) {
-        if (!equipment.effectKeys?.property?.has(property)) {
+        if (
+          !equipment.effectKeys?.property?.has(
+            game.teriock.api.utils.toCamelCase(property),
+          )
+        ) {
           await equipment.system.addProperty(property);
         }
       }

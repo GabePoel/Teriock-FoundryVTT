@@ -376,10 +376,10 @@ export default class TeriockEquipmentData extends WikiDataMixin(
   /**
    * Adds the specified property to this.
    *
-   * @param {string} propertyKey - The property to add.
+   * @param {string} name - The property to add.
    * @returns {Promise<void>} Promise that resolves when the property is added.
    */
-  async addProperty(propertyKey = "") {
-    await createProperty(this.parent, propertyKey);
+  async addProperty(name = "") {
+    await createProperty(this.parent, name);
   }
 }

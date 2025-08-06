@@ -267,7 +267,10 @@ foundry.helpers.Hooks.once("init", function () {
         importProperty: fetch.importProperty,
         pureUuid: utils.pureUuid,
         safeUuid: utils.safeUuid,
+        toCamelCase: utils.toCamelCase,
         toFeet: utils.toFeet,
+        toKebabCase: utils.toKebabCase,
+        toTitleCase: utils.toTitleCase,
       },
       wiki: {
         cleanWikiHTML: wiki.cleanWikiHTML,
