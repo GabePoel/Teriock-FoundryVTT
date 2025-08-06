@@ -3,7 +3,9 @@
 ## High Priority
 
 - [ ] Transformation system
-- [ ] Tooltip/message text for attribute and feat save improvements
+- [x] Character lighting integration
+- [x] Transformation art change
+- [x] Synchronous basic effects
 
 ## Medium Priority
 
@@ -13,6 +15,7 @@
 ## Low Priority
 
 - [x] Journal entries pulled for rules
+- [ ] Tooltip/message text for attribute and feat save improvements
 - [ ] Better resistance/immunity tooltips
 - [ ] Condition toggling from character sheet
 
