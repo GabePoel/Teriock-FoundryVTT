@@ -53,7 +53,7 @@ for (const [a, ao] of Object.entries(CONFIG.TERIOCK.rankOptions)) {
 
       await classPack.getIndex();
       let rank = classPack.index.find((e) => e.name === name);
-      rank = await game.teriock.api.utils.fromUuid(rank.uuid);
+      rank = await foundry.utils.fromUuid(rank.uuid);
 
       // Create new item
       const itemData = {

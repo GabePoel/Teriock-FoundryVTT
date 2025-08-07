@@ -64,7 +64,7 @@ for (const [folderName, properties] of Object.entries(propertyMap)) {
 
     const matches = equipmentPack.index.filter((e) => e.name === generatedName);
     for (const match of matches) {
-      const entry = await game.teriock.api.utils.fromUuid(match.uuid);
+      const entry = await foundry.utils.fromUuid(match.uuid);
       await entry.delete();
     }
 

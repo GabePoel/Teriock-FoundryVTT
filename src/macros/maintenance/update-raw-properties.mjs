@@ -47,7 +47,7 @@ for (const propertyPage of allPropertyPages) {
       { pack: "teriock.essentials" },
     );
   } else {
-    propertyItem = await game.teriock.api.utils.fromUuid(propertyItem.uuid);
+    propertyItem = await foundry.utils.fromUuid(propertyItem.uuid);
   }
   let propertyEffect = propertyItem.properties.find(
     (a) => a.name === propertyName,

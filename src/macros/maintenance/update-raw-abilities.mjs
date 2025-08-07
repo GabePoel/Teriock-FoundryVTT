@@ -47,7 +47,7 @@ for (const abilityPage of allAbilityPages) {
       { pack: "teriock.essentials" },
     );
   } else {
-    abilityItem = await game.teriock.api.utils.fromUuid(abilityItem.uuid);
+    abilityItem = await foundry.utils.fromUuid(abilityItem.uuid);
   }
   let abilityEffect = abilityItem.abilities.find(
     (a) => a.name === abilityName,

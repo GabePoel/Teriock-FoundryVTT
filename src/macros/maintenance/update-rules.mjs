@@ -21,7 +21,7 @@ for (const [namespace, category] of Object.entries(namespaceCategoryMap)) {
   );
 
   // Attempt to load the journal from the pack
-  let rulesJournal = await game.teriock.api.utils.fromUuid(
+  let rulesJournal = await foundry.utils.fromUuid(
     coreRulesPack.index.getName(namespace)?.uuid ?? "",
   );
 
