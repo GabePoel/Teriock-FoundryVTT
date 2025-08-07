@@ -25,11 +25,11 @@ function _buildEffectTypes(document) {
 /**
  * Mixin for common functions used across document classes that embed children.
  *
- * @param {ClientDocument} BaseDocument
- * @returns {typeof ParentDocument & typeof BaseDocument}
+ * @param {ClientDocument} Base
+ * @returns {typeof ParentDocument & typeof Base}
  */
-export default (BaseDocument) => {
-  return class ParentDocument extends BaseDocument {
+export default (Base) => {
+  return class ParentDocument extends Base {
     /**
      * Gets the list of {@link TeriockEffect} documents associated with this document.
      * Helper method for `prepareDerivedData()` that can be called explicitly.

@@ -224,6 +224,16 @@ export function _messageParts(abilityData) {
       title: "End condition",
       text: src.endCondition,
     },
+    {
+      title: "Attribute improvement",
+      text: src.attributeImprovementText,
+      italic: true,
+    },
+    {
+      title: "Feat save improvement",
+      text: src.featSaveImprovementText,
+      italic: true,
+    },
   ];
   if (!abilityData.parent.inCompendium) {
     addAbilitiesBlock(abilityData.parent.subs, blocks);

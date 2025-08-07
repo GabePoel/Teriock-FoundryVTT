@@ -1,4 +1,4 @@
-export { default as AttunementSheet } from "./consequence-sheet/attunement-sheet.mjs";
+export { default as AttunementSheet } from "./attunement-sheet/attunement-sheet.mjs";
 export { default as AbilitySheet } from "./ability-sheet/ability-sheet.mjs";
 export { default as ConditionSheet } from "./condition-sheet/condition-sheet.mjs";
 export { default as ConsequenceSheet } from "./consequence-sheet/consequence-sheet.mjs";

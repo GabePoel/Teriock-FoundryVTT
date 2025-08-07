@@ -170,6 +170,8 @@ export default class TeriockAbilitySheet extends TeriockBaseEffectSheet {
       elderSorceryIncant: system.elderSorceryIncant,
       limitation: system.limitation,
       improvement: system.improvement,
+      attributeImprovement: system.attributeImprovementText,
+      featSaveImprovement: system.featSaveImprovementText,
     };
 
     for (const [key, value] of Object.entries(editors)) {

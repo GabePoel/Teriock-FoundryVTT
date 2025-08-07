@@ -74,6 +74,36 @@ export default class TeriockAbilityData extends WikiDataMixin(
     return _generateChanges(this);
   }
 
+  /**
+   * Gets this ability's attribute improvement text.
+   *
+   * @returns {string}
+   */
+  get attributeImprovementText() {
+    if (this.improvements.attributeImprovement.attribute) {
+      const att = this.improvements.attributeImprovement.attribute;
+      const minVal = this.improvements.attributeImprovement.minVal;
+      return `This ability sets your @L[Core:${att.toUpperCase()}] score to a minimum of ${minVal}.`;
+    }
+    return "";
+  }
+
+  /**
+   * Gets this ability's feat save improvement text.
+   *
+   * @returns {string}
+   */
+  get featSaveImprovementText() {
+    if (this.improvements.featSaveImprovement.attribute) {
+      const att = this.improvements.featSaveImprovement.attribute;
+      const amount = this.improvements.featSaveImprovement.amount;
+      const amountVal =
+        CONFIG.TERIOCK.abilityOptions.featSaveImprovementAmount[amount];
+      return `This ability gives you @L[Core:${amountVal} Bonus]{${amount}} in @L[Core:${att.toUpperCase()}] @L[Core:Feat Interaction]{feat saves}.`;
+    }
+    return "";
+  }
+
   /** @inheritDoc */
   static defineSchema() {
     return foundry.utils.mergeObject(super.defineSchema(), _defineSchema());

@@ -1,6 +1,6 @@
 export type ActorType = "character";
 
-export type ItemType = "equipment" | "rank" | "power" | "mechanic";
+export type ItemType = "base" | "equipment" | "rank" | "power" | "mechanic";
 
 export type EffectType =
   | "ability"

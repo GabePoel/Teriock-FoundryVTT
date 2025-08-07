@@ -16,10 +16,19 @@ export default class TeriockBaseEffectData extends ChildDataMixin(
   TypeDataModel,
 ) {
   /**
-   * @inheritDoc
+   * Metadata for this effect.
+   *
    * @type {Readonly<Teriock.EffectDataModelMetadata>}
    */
-  static metadata;
+  static metadata = Object.freeze({
+    consumable: false,
+    hierarchy: false,
+    namespace: "",
+    pageNameKey: "name",
+    type: "base",
+    usable: false,
+    wiki: false,
+  });
 
   /**
    * Checks if the effect is suppressed.

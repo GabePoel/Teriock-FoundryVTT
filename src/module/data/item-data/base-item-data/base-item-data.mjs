@@ -15,7 +15,14 @@ export default class TeriockBaseItemData extends ChildDataMixin(TypeDataModel) {
    *
    * @type {Readonly<Teriock.ItemDataModelMetadata>}
    */
-  static metadata;
+  static metadata = Object.freeze({
+    consumable: true,
+    namespace: "",
+    pageNameKey: "name",
+    type: "base",
+    usable: false,
+    wiki: false,
+  });
 
   /**
    * Get the actor associated with this item data.

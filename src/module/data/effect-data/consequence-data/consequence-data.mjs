@@ -17,8 +17,7 @@ const { fields } = foundry.data;
  */
 export default class TeriockConsequenceData extends TeriockBaseEffectData {
   /**
-   * Metadata for this effect.
-   *
+   * @inheritDoc
    * @type {Readonly<Teriock.EffectDataModelMetadata>}
    */
   static metadata = Object.freeze({

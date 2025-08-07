@@ -103,9 +103,22 @@ export default class TeriockEffect extends BaseTeriockEffect {
     /** @type {TeriockEffect[]} */
     const subEffects = [];
     for (const id of this.subIds) {
-      const root = foundry.utils.fromUuidSync(
-        this.system.hierarchy.rootUuid,
-      );
+      const root = this.parent;
+      subEffects.push(root.effects.get(id));
+    }
+    return subEffects;
+  }
+
+  /**
+   * Gets all sub-effects that are derived from this effect via it's root.
+   *
+   * @returns {TeriockEffect[]}
+   */
+  get rootSubs() {
+    /** @type {TeriockEffect[]} */
+    const subEffects = [];
+    for (const id of this.rootSubIds) {
+      const root = foundry.utils.fromUuidSync(this.system.hierarchy.rootUuid);
       subEffects.push(root.effects.get(id));
     }
     return subEffects;
@@ -118,9 +131,20 @@ export default class TeriockEffect extends BaseTeriockEffect {
    */
   get subIds() {
     if (this.metadata.hierarchy && this.system.hierarchy.subIds.size > 0) {
-      const root = foundry.utils.fromUuidSync(
-        this.system.hierarchy.rootUuid,
-      );
+      const root = this.parent;
+      return this.system.hierarchy.subIds.filter((id) => root.effects.has(id));
+    }
+    return new Set();
+  }
+
+  /**
+   * Safely gets the IDS of all sub-effects that are derived from this effect via its root.
+   *
+   * @returns {Set<string>}
+   */
+  get rootSubIds() {
+    if (this.metadata.hierarchy && this.system.hierarchy.subIds.size > 0) {
+      const root = foundry.utils.fromUuidSync(this.system.hierarchy.rootUuid);
       return this.system.hierarchy.subIds.filter((id) => root.effects.has(id));
     }
     return new Set();
@@ -134,6 +158,21 @@ export default class TeriockEffect extends BaseTeriockEffect {
   get allSubs() {
     const allSubEffects = [];
     const subEffects = this.subs;
+    for (const subEffect of subEffects) {
+      allSubEffects.push(subEffect);
+      allSubEffects.push(...subEffect.allSubs);
+    }
+    return allSubEffects;
+  }
+
+  /**
+   * Gets all sub-effect descendants from this effect recursively via its root.
+   *
+   * @returns {TeriockEffect[]} Array of all descendant effects.
+   */
+  get rootAllSubs() {
+    const allSubEffects = [];
+    const subEffects = this.rootSubs;
     for (const subEffect of subEffects) {
       allSubEffects.push(subEffect);
       allSubEffects.push(...subEffect.allSubs);
@@ -244,6 +283,7 @@ export default class TeriockEffect extends BaseTeriockEffect {
    */
   static async _preCreateOperation(documents, operation, user) {
     await super._preCreateOperation(documents, operation, user);
+    console.log(documents);
     /** @type {TeriockEffect[]} */
     const toCreate = [];
     for (const supEffect of documents) {
@@ -251,9 +291,9 @@ export default class TeriockEffect extends BaseTeriockEffect {
       toCreate.push(supEffect);
       if (supEffect?.metadata.hierarchy) {
         supEffect.updateSource({ _id: newSupId });
-        if (supEffect.subIds.size > 0) {
-          const oldSupId = supEffect.subs[0].system.hierarchy.supId;
-          const subEffects = supEffect.allSubs;
+        if (supEffect.rootSubIds.size > 0) {
+          const oldSupId = supEffect.rootSubs[0].system.hierarchy.supId;
+          const subEffects = supEffect.rootAllSubs;
           const idMap = {};
           for (const id of subEffects.map((sub) => sub.id)) {
             idMap[id] = foundry.utils.randomID();
@@ -265,7 +305,7 @@ export default class TeriockEffect extends BaseTeriockEffect {
             operation.parent.uuid,
           );
           supEffect.updateSource({
-            "system.hierarchy.subIds": supEffect.subIds.map(
+            "system.hierarchy.subIds": supEffect.rootSubIds.map(
               (oldId) => idMap[oldId],
             ),
           });

@@ -264,6 +264,7 @@ foundry.helpers.Hooks.once("init", function () {
         importAbility: fetch.importAbility,
         importProperty: fetch.importProperty,
         pureUuid: utils.pureUuid,
+        refreshDocuments: utils.refreshDocuments,
         safeUuid: utils.safeUuid,
         toCamelCase: utils.toCamelCase,
         toFeet: utils.toFeet,

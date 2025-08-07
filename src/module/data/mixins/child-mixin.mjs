@@ -59,7 +59,7 @@ export default (Base) => {
           name: this.useText,
           icon: makeIcon(this.useIcon, "contextMenu"),
           callback: this.use.bind(this),
-          condition: this.parent.metadata.usable,
+          condition: this.constructor.metadata.usable,
           group: "usage",
         },
         {

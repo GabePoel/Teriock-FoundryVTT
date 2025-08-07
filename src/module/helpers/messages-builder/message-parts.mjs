@@ -187,8 +187,8 @@ function addEmbeddedBlock(
   const filtered = (entities || [])
     .filter((e) => e.type === typeKey)
     .sort((a, b) => {
-      const typeA = a.system[`${typeKey}Type`] || "";
-      const typeB = b.system[`${typeKey}Type`] || "";
+      const typeA = a.system.form || "";
+      const typeB = b.system.form || "";
       const indexA = typeOrder.indexOf(typeA);
       const indexB = typeOrder.indexOf(typeB);
 
@@ -201,8 +201,7 @@ function addEmbeddedBlock(
   const listItems = filtered
     .map((e) => {
       const { name, uuid, system } = e;
-      const { color = "", icon = iconFallback } =
-        config[system[`${typeKey}Type`]] || {};
+      const { color = "", icon = iconFallback } = config[system["form"]] || {};
       const quantity = system.quantity,
         maxQuantity = system.maxQuantity?.derived;
 

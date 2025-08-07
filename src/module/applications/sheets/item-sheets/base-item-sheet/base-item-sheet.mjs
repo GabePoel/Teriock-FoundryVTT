@@ -1,4 +1,5 @@
 import { cleanFeet } from "../../../../helpers/clean.mjs";
+import { refreshDocuments } from "../../../../helpers/utils.mjs";
 import { SheetMixin } from "../../mixins/_module.mjs";
 
 const { ItemSheetV2 } = foundry.applications.sheets;
@@ -20,6 +21,16 @@ export default class TeriockBaseItemSheet extends SheetMixin(ItemSheetV2) {
     classes: ["teriock"],
     actions: {
       toggleOnUseDoc: this._toggleOnUseDoc,
+      refreshThis: this._refreshThis,
+    },
+    window: {
+      controls: [
+        {
+          icon: "fa-solid fa-rotate-right",
+          label: "Refresh",
+          action: "refreshThis",
+        },
+      ],
     },
   };
 
@@ -40,6 +51,17 @@ export default class TeriockBaseItemSheet extends SheetMixin(ItemSheetV2) {
       onUseSet.add(id);
     }
     await this.document.update({ "system.onUse": onUseSet });
+  }
+
+  /**
+   * Refresh each {@link TeriockEffect} embedded in this {@link TeriockItem}.
+   *
+   * @returns {Promise<void>}
+   * @private
+   */
+  static async _refreshThis() {
+    const toRefresh = [...this.document.abilities, ...this.document.properties];
+    await refreshDocuments(toRefresh);
   }
 
   /** @inheritDoc */

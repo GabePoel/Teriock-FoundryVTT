@@ -118,6 +118,37 @@ export function pureUuid(safeUuid) {
 }
 
 /**
+ * Re-pull each provided {@link ChildDocument} from the wiki.
+ *
+ * @param {TeriockEffect[]|TeriockItem[]} docs - An array of {@link ChildDocument}s to pull.
+ * @param {object} [options]
+ * @param {boolean} [options.skipSubs] - Skip any {@link TeriockEffect} subs.
+ * @returns {Promise<void>}
+ */
+export async function refreshDocuments(docs, options = { skipSubs: true }) {
+  const skipSubs = options?.skipSubs;
+  const progress = ui.notifications.info(`Refreshing documents from wiki.`, {
+    progress: true,
+  });
+  let pct = 0;
+  for (const doc of docs) {
+    progress.update({
+      message: `Refreshing ${doc.name}.`,
+      pct: pct,
+    });
+    if (skipSubs && doc.documentName === "ActiveEffect" && doc.sup) continue;
+    if (doc.system.constructor.metadata.wiki) {
+      await doc.system.wikiPull({ notify: false });
+    }
+    pct += 1 / docs.length;
+    progress.update({
+      message: `Refreshing ${doc.name}.`,
+      pct: pct,
+    });
+  }
+}
+
+/**
  * Designates a specific {@link TeriockUser} for a given {@link TeriockActor}.
  *
  * @param {TeriockActor} actor

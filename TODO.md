@@ -2,16 +2,16 @@
 
 ## High Priority
 
-- [ ] Asynchronous subs
 - [ ] Transformation system
+- [x] Asynchronous subs
 - [x] Character lighting integration
 - [x] Transformation art change
 - [x] Synchronous basic effects
 
 ## Medium Priority
 
-- [ ] Italic attribute and feat save improvement text in ability previews
 - [ ] Refined duration integration
+- [x] Italic attribute and feat save improvement text in ability previews
 - [x] Custom enrichers
 
 ## Low Priority
@@ -28,7 +28,7 @@
     - [x] Blind fighting/true sight/etc.
     - [x] Frozen and morganti vision modes
     - [x] Automatic perception mode inherited from actors
-    - [ ] ~~Properties and abilities for light sources~~
+    - [x] ~~Properties and abilities for light sources~~
 - [x] Token features
     - [x] Better death/down displays
     - [ ] ~~Frozen/transformed/lighted/terrored/burned visual clues~~
