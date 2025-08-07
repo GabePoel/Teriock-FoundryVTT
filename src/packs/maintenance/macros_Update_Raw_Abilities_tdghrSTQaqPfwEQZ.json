@@ -7,7 +7,7 @@
   "scope": "global",
   "command": "const essentialsPack = game.teriock.packs.essentials();\nconst essentialsFolders = essentialsPack.folders;\n\nconst rawAbilitiesFolderName = \"Raw Abilities\";\nlet rawAbilitiesFolder = essentialsFolders.getName(rawAbilitiesFolderName);\nif (!rawAbilitiesFolder) {\n  await Folder.create(\n    {\n      name: rawAbilitiesFolderName,\n      type: \"Item\",\n    },\n    {\n      pack: \"teriock.essentials\",\n    },\n  );\n}\n\n/** @type {object} */\nconst progress = ui.notifications.info(`Pulling all abilities from wiki.`, {\n  progress: true,\n});\nlet pct = 0;\n\nlet allAbilityPages =\n  await game.teriock.api.wiki.fetchCategoryMembers(\"Abilities\");\nallAbilityPages = allAbilityPages.filter((page) =>\n  page.title.includes(\"Ability:\"),\n);\nfor (const abilityPage of allAbilityPages) {\n  const abilityName = abilityPage.title.split(\"Ability:\")[1];\n\n  pct += 1 / allAbilityPages.length;\n  progress.update({ pct: pct, message: `Pulling ${abilityName} from wiki.` });\n\n  let abilityItem = essentialsPack.index.find((e) => e.name === abilityName);\n  if (!abilityItem) {\n    abilityItem = await game.teriock.Item.create(\n      {\n        name: abilityName,\n        type: \"power\",\n        system: {\n          type: \"other\",\n          description: `This power is a wrapper for ${abilityName}.`,\n        },\n        folder: rawAbilitiesFolder.id,\n      },\n      { pack: \"teriock.essentials\" },\n    );\n  } else {\n    abilityItem = await foundry.utils.fromUuid(abilityItem.uuid);\n  }\n  let abilityEffect = abilityItem.abilities.find(\n    (a) => a.name === abilityName,\n  );\n  console.log(abilityEffect);\n\n  if (!abilityEffect) {\n    abilityEffect = await game.teriock.api.create.ability(\n      abilityItem,\n      abilityName,\n      { notify: false },\n    );\n  } else {\n    await abilityEffect.system.wikiPull({ notify: false });\n  }\n  if (abilityItem.img !== abilityEffect.img) {\n    await abilityItem.update({ img: abilityEffect.img });\n  }\n}",
   "folder": null,
-  "sort": 0,
+  "sort": 900000,
   "ownership": {
     "default": 0,
     "IIjfAJm5Tf1B6G7t": 3
@@ -21,8 +21,8 @@
     "systemId": "teriock",
     "systemVersion": "0.1.0",
     "createdTime": 1753144516198,
-    "modifiedTime": 1754544273272,
-    "lastModifiedBy": "MMeF1yfOcMgtpZFS"
+    "modifiedTime": 1754584194942,
+    "lastModifiedBy": "qf5JYGZKzM588nE6"
   },
   "_key": "!macros!tdghrSTQaqPfwEQZ"
 }
