@@ -4,10 +4,11 @@ import { smartEvaluateSync } from "../../helpers/utils.mjs";
  * Mixin that provides consumable document functionality.
  * Adds quantity management, automatic consumption, and quantity validation capabilities.
  *
- * @param {TypeDataModel} Base - The base class to mix in with.
+ * @param {typeof ChildData} Base - The base class to mix in with.
+ * @returns {typeof ConsumableData & Base}
  */
 export default (Base) => {
-  return class ConsumableDataMixin extends Base {
+  return class ConsumableData extends Base {
     /**
      * Uses the consumable item, triggering consumption logic.
      * Calls the parent use method and then consumes one unit of the item.

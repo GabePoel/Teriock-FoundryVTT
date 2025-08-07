@@ -4,6 +4,7 @@ import TeriockBaseItemData from "../base-item-data/base-item-data.mjs";
  * Effect that handles automatic synchronous effect handling of a {@link TeriockActor}.
  */
 export default class TeriockMechanicData extends TeriockBaseItemData {
+  /** @inheritDoc */
   static metadata = Object.freeze({
     consumable: false,
     namespace: "",

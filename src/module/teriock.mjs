@@ -211,7 +211,7 @@ foundry.helpers.Hooks.once("init", function () {
   });
 
   const packs =
-    /** @type {Collection<TeriockCompendiumCollection>} */ game.packs;
+    /** @type {Collection<string,TeriockCompendiumCollection>} */ game.packs;
 
   game.teriock = {
     Actor: documents.TeriockActor,
@@ -257,8 +257,6 @@ foundry.helpers.Hooks.once("init", function () {
         copyRank: fetch.copyRank,
         dedent: utils.dedent,
         fromFeet: utils.fromFeet,
-        fromUuid: utils.fromUuid,
-        fromUuidSync: utils.fromUuidSync,
         getAbility: fetch.getAbility,
         getItem: fetch.getItem,
         getProperty: fetch.getProperty,

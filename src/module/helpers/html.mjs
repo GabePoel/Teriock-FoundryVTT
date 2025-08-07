@@ -67,9 +67,9 @@ export function createDialogFieldset(legend, description, name, max) {
 /**
  * Add an Elder Sorcery mask to the given element if possible.
  *
- * @param {HTMLElement} element
+ * @param {HTMLDivElement} element
  * @param {TeriockAbility} ability
- * @returns {HTMLElement} The modified element.
+ * @returns {HTMLDivElement} The modified element.
  */
 export function insertElderSorceryMask(element, ability) {
   const esMask = elderSorceryMask(ability);

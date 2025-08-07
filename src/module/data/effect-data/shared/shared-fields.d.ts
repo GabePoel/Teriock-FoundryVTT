@@ -7,7 +7,7 @@ export type HierarchyField = {
    * The UUID of the {@link TeriockActor} or {@link TeriockItem} this {@link TeriockAbility} is embedded in.
    * This is calculated when the {@link TeriockAbility} is created and should not be set manually.
    */
-  rootUuid: Teriock.UUID<TeriockItem | TeriockActor>;
+  rootUuid: Teriock.UUID<TeriockItem>|Teriock.UUID<TeriockActor>;
   /** The IDs for each {@link TeriockEffect} that could be descended from this. */
   subIds: Set<Teriock.ID<TeriockEffect>>;
   /** The ID of the {@link TeriockEffect} that this is descended from, if there is one. */

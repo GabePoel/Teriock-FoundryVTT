@@ -123,6 +123,8 @@ export async function _parse(abilityData, rawHTML) {
   delete parameters.executionTime;
   delete parameters.maneuver;
   delete parameters.hierarchy.rootUuid;
+  delete parameters.proficient;
+  delete parameters.fluent;
 
   // Process tags and build parameters
   processTags(parameters, tagTree, doc, changes);

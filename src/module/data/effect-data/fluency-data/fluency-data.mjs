@@ -1,4 +1,4 @@
-import WikiDataMixin from "../../mixins/wiki-mixin.mjs";
+import { WikiDataMixin } from "../../mixins/_module.mjs";
 import TeriockBaseEffectData from "../base-effect-data/base-effect-data.mjs";
 import { _messageParts } from "./methods/_messages.mjs";
 import { _roll } from "./methods/_rolling.mjs";

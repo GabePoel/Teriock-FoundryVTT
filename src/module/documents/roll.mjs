@@ -8,10 +8,9 @@ const { Roll } = foundry.dice;
  * Relevant wiki pages:
  * - [Boosted](https://wiki.teriock.com/index.php/Keyword:Boosted)
  * - [Deboosted](https://wiki.teriock.com/index.php/Keyword:Deboosted)
- *
- * @extends {Roll}
  */
 export default class TeriockRoll extends Roll {
+  /** @inheritDoc */
   static CHAT_TEMPLATE =
     "systems/teriock/src/templates/document-templates/roll-templates/roll.hbs";
 
@@ -278,13 +277,7 @@ export default class TeriockRoll extends Roll {
     roll.resetFormula();
   }
 
-  /**
-   * Prepares the chat render context.
-   *
-   * @override
-   * @param {object} options - Options for preparing the context.
-   * @returns {Promise<object>} Promise that resolves to the prepared context.
-   */
+  /** @inheritDoc */
   async _prepareChatRenderContext(options = {}) {
     const context = await super._prepareChatRenderContext(options);
     if (this.context) {

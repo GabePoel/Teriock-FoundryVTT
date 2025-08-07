@@ -12,7 +12,7 @@ export const unsortedPseudoHooks = {
   takeSetTempHp: "Setting Temp HP",
   takeSetTempMp: "Setting Temp MP",
   takeGainTempHp: "Gaining Temp HP",
-  takeTainTempMp: "Gaining Temp MP",
+  takeGainTempMp: "Gaining Temp MP",
   takeSleep: "Taking Auto-sleep Effect",
   takeKill: "Taking Auto-kill Effect",
   takePay: "Making Payment",
@@ -37,6 +37,8 @@ export const unsortedPseudoHooks = {
   equipmentUndampen: "Equipment Undampening",
   equipmentGlue: "Equipment Gluing",
   equipmentUnglue: "Equipment Ungluing",
+  postUpdate: "Post-actor Updating",
+  rollImmunity: "Rolling an Immunity Save",
 };
 
 export const pseudoHooks = Object.fromEntries(

@@ -9,6 +9,7 @@ const { fields } = foundry.data;
  * - [Presence](https://wiki.teriock.com/index.php/Core:Presence)
  *
  * @extends {TeriockBaseEffectData}
+ * @extends {ChildData}
  */
 export default class TeriockAttunementData extends TeriockBaseEffectData {
   /**
@@ -47,8 +48,7 @@ export default class TeriockAttunementData extends TeriockBaseEffectData {
   /**
    * Gets the target document for this attunement.
    *
-   * @returns {Document|null} The target document or null if not found.
-   * @override
+   * @returns {TeriockEquipment|null} The target document or null if not found.
    */
   get targetDocument() {
     return this.actor?.items.get(this.target);
@@ -72,12 +72,7 @@ export default class TeriockAttunementData extends TeriockBaseEffectData {
     }
   }
 
-  /**
-   * Defines the schema for the attunement data model.
-   *
-   * @returns {object} The schema definition for the ability data.
-   * @override
-   */
+  /** @inheritDoc */
   static defineSchema() {
     return foundry.utils.mergeObject(super.defineSchema(), {
       type: new fields.StringField({
@@ -108,14 +103,10 @@ export default class TeriockAttunementData extends TeriockBaseEffectData {
     });
   }
 
-  /**
-   * Prepares derived data for the attunement, including tier inheritance.
-   *
-   * @override
-   */
+  /** @inheritDoc */
   prepareDerivedData() {
     if (this.inheritTier && this.targetDocument) {
-      this.tier = this.actor.items.get(this.target)?.system.tier.derived;
+      this.tier = this.targetDocument.system.tier.derived;
     }
   }
 }

@@ -1,0 +1,12 @@
+import type { TeriockItem } from "../../../../documents/_module.mjs";
+import { SheetMixin } from "../../mixins/_module.mjs";
+
+type SheetMixinType = typeof SheetMixin;
+
+declare module "./base-item-sheet.mjs" {
+  export default interface TeriockBaseItemSheet extends SheetMixinType {
+    get item(): TeriockItem;
+
+    get document(): TeriockItem;
+  }
+}

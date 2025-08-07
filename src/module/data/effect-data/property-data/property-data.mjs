@@ -1,4 +1,4 @@
-import WikiDataMixin from "../../mixins/wiki-mixin.mjs";
+import { WikiDataMixin } from "../../mixins/_module.mjs";
 import TeriockBaseEffectData from "../base-effect-data/base-effect-data.mjs";
 import { _messageParts } from "./methods/_messages.mjs";
 import { _migrateData } from "./methods/_migrate-data.mjs";
@@ -14,6 +14,7 @@ const { fields } = foundry.data;
  * - [Properties](https://wiki.teriock.com/index.php/Category:Properties)
  *
  * @extends {TeriockBaseEffectData}
+ * @extends {ChildData}
  */
 export default class TeriockPropertyData extends WikiDataMixin(
   TeriockBaseEffectData,
@@ -33,47 +34,25 @@ export default class TeriockPropertyData extends WikiDataMixin(
     wiki: true,
   });
 
-  /**
-   * Checks if the property is suppressed.
-   * Combines base suppression with property-specific suppression logic.
-   *
-   * @returns {boolean} True if the property is suppressed, false otherwise.
-   * @override
-   */
+  /** @inheritDoc */
   get suppressed() {
     let suppressed = super.suppressed;
     suppressed = suppressed || _suppressed(this);
     return suppressed;
   }
 
-  /**
-   * Gets the message parts for the property effect.
-   * Combines base message parts with property-specific message parts.
-   *
-   * @returns {object} Object containing message parts for the property effect.
-   * @override
-   */
+  /** @inheritDoc */
   get messageParts() {
     return { ...super.messageParts, ..._messageParts(this) };
   }
 
-  /**
-   * Migrates property data to the current schema version.
-   *
-   * @param {object} data - The data to migrate.
-   * @returns {object} The migrated data.
-   * @override
-   */
+  /** @inheritDoc */
   static migrateData(data) {
     data = _migrateData(data);
     return super.migrateData(data);
   }
 
-  /**
-   * Defines the schema for the property data model.
-   *
-   * @returns {object} The schema definition for the property data.
-   */
+  /** @inheritDoc */
   static defineSchema() {
     return foundry.utils.mergeObject(super.defineSchema(), {
       wikiNamespace: new fields.StringField({
@@ -84,13 +63,7 @@ export default class TeriockPropertyData extends WikiDataMixin(
     });
   }
 
-  /**
-   * Parses raw HTML content for the property.
-   *
-   * @param {string} rawHTML - The raw HTML content to parse.
-   * @returns {Promise<object>} Promise that resolves to the parsed HTML content.
-   * @override
-   */
+  /** @inheritDoc */
   async parse(rawHTML) {
     return await parsing._parse(this, rawHTML);
   }

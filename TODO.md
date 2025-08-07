@@ -2,6 +2,7 @@
 
 ## High Priority
 
+- [ ] Asynchronous subs
 - [ ] Transformation system
 - [x] Character lighting integration
 - [x] Transformation art change
@@ -9,15 +10,17 @@
 
 ## Medium Priority
 
-- [x] Custom enrichers
+- [ ] Italic attribute and feat save improvement text in ability previews
 - [ ] Refined duration integration
+- [x] Custom enrichers
 
 ## Low Priority
 
-- [x] Journal entries pulled for rules
+- [ ] Species size integration
 - [ ] Tooltip/message text for attribute and feat save improvements
 - [ ] Better resistance/immunity tooltips
 - [ ] Condition toggling from character sheet
+- [x] Journal entries pulled for rules
 
 # Complete(ish)
 
@@ -37,12 +40,12 @@
     - [x] Enricheds for different roll types
     - [x] Bow, hand, and foot BV scaling
     - [ ] ~~Ability resistance fix~~
-      - This can come back when resistances trigger automatically
+        - This can come back when resistances trigger automatically
     - [x] Attribute and feat save improvement appearing in ability chat messages
     - [x] Icons for all the basic abilities
     - [x] Attack ability targeting missing icon fix
     - [ ] ~~Throwing weapon range multiplier (from throwing training)~~
-      - This can come back when range has some actual mechanical effect within the system
+        - This can come back when range has some actual mechanical effect within the system
     - [x] Check metadata
 - [x] Rank fixes
     - [x] Enable/disable buttons
@@ -59,7 +62,7 @@
 - [x] Better roll chat message button handling
 - [x] Ability usage modularization
 - [ ] ~~Take basic abilities off of each individual actors to speed up sorting and make for smaller database?~~
-  - Speed improvements were found elsewhere. Basic abilities shouldn't matter _too_ much?
+    - Speed improvements were found elsewhere. Basic abilities shouldn't matter _too_ much?
 - [x] Better compendium building automation
 - [x] More wiki links in documentation
 - [x] Just some general sprucing around (as always)

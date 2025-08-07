@@ -8,21 +8,16 @@ import {
   rankContextMenu,
 } from "./connections/_context-menus.mjs";
 
-const { HandlebarsApplicationMixin, DialogV2 } = foundry.applications.api;
+const { DialogV2 } = foundry.applications.api;
 
 /**
- * Rank sheet for Teriock system ranks.
- * Provides rank management with context menus for various rank components and die re-rolling functionality.
- * @extends {TeriockBaseItemSheet}
+ * Sheet for a {@link TeriockRank}.
+ *
+ * @property {TeriockRank} document
+ * @property {TeriockRank} item
  */
-export default class TeriockRankSheet extends HandlebarsApplicationMixin(
-  TeriockBaseItemSheet,
-) {
-  /**
-   * Default options for the rank sheet.
-   * @type {object}
-   * @static
-   */
+export default class TeriockRankSheet extends TeriockBaseItemSheet {
+  /** @inheritDoc */
   static DEFAULT_OPTIONS = {
     classes: ["rank"],
     window: {
@@ -30,11 +25,7 @@ export default class TeriockRankSheet extends HandlebarsApplicationMixin(
     },
   };
 
-  /**
-   * Template parts configuration for the rank sheet.
-   * @type {object}
-   * @static
-   */
+  /** @inheritDoc */
   static PARTS = {
     all: {
       template:
@@ -43,12 +34,7 @@ export default class TeriockRankSheet extends HandlebarsApplicationMixin(
     },
   };
 
-  /**
-   * Prepares the context data for template rendering.
-   * Adds enriched text fields for rank descriptions and flaws.
-   * @returns {Promise<object>} Promise that resolves to the context object.
-   * @override
-   */
+  /** @inheritDoc */
   async _prepareContext(options) {
     const context = await super._prepareContext(options);
     context.enrichedDescription = await this._editor(
@@ -58,13 +44,7 @@ export default class TeriockRankSheet extends HandlebarsApplicationMixin(
     return context;
   }
 
-  /**
-   * Handles the render event for the rank sheet.
-   * Sets up context menus for rank components and die re-rolling functionality.
-   * @param {object} context - The render context.
-   * @param {object} options - Render options.
-   * @override
-   */
+  /** @inheritDoc */
   async _onRender(context, options) {
     await super._onRender(context, options);
     if (!this.editable) return;

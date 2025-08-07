@@ -1,32 +1,22 @@
 import { documentOptions } from "../../../../helpers/constants/document-options.mjs";
 import TeriockBaseItemSheet from "../base-item-sheet/base-item-sheet.mjs";
 
-const { HandlebarsApplicationMixin } = foundry.applications.api;
-
 /**
- * Mechanic sheet for Teriock system mechanics.
+ * Sheet for a {@link TeriockMechanic}.
  *
- * @extends {TeriockBaseItemSheet}
+ * @property {TeriockMechanic} document
+ * @property {TeriockMechanic} item
  */
-export default class TeriockMechanicSheet extends HandlebarsApplicationMixin(
-  TeriockBaseItemSheet,
-) {
-  /**
-   * Default options for the power sheet.
-   * @type {object}
-   * @static
-   */
+export default class TeriockMechanicSheet extends TeriockBaseItemSheet {
+  /** @inheritDoc */
   static DEFAULT_OPTIONS = {
     classes: ["mechanic"],
     window: {
       icon: "fa-solid fa-" + documentOptions.power.icon,
     },
   };
-  /**
-   * Template rules-parts configuration for the power sheet.
-   * @type {object}
-   * @static
-   */
+
+  /** @inheritDoc */
   static PARTS = {
     all: {
       template:
@@ -35,12 +25,7 @@ export default class TeriockMechanicSheet extends HandlebarsApplicationMixin(
     },
   };
 
-  /**
-   * Prepares the context data for template rendering.
-   * Adds enriched text fields for power descriptions and flaws.
-   * @returns {Promise<object>} Promise that resolves to the context object.
-   * @override
-   */
+  /** @inheritDoc */
   async _prepareContext(options) {
     const context = await super._prepareContext(options);
     context.enrichedDescription = await this._editor(

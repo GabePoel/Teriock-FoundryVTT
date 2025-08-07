@@ -7,7 +7,7 @@ import {
   selectDialog,
   selectEquipmentTypeDialog,
 } from "../../../dialogs/select-dialog.mjs";
-import { BaseActorSheet } from "../../_base.mjs";
+import { SheetMixin } from "../../mixins/_module.mjs";
 import {
   piercingContextMenu,
   primaryAttackContextMenu,
@@ -18,21 +18,19 @@ import { _defaultSheetSettings } from "./methods/_settings.mjs";
 import { _sortAbilities, _sortEquipment } from "./methods/_sort.mjs";
 
 const { api, ux } = foundry.applications;
+const { ActorSheetV2 } = foundry.applications.sheets;
 
 /**
  * Base actor sheet for actors.
  * Provides comprehensive character management including abilities, equipment, tradecrafts,
  * and various interactive features like rolling, damage tracking, and condition management.
  *
- * @property{TeriockActor} actor
+ * @property {TeriockActor} actor
+ * @property {TeriockActor} document
+ * @extends {ActorSheetV2}
  */
-export default class TeriockBaseActorSheet extends BaseActorSheet {
-  /**
-   * Default options for the base actor sheet.
-   *
-   * @type {object}
-   * @static
-   */
+export default class TeriockBaseActorSheet extends SheetMixin(ActorSheetV2) {
+  /** @inheritDoc */
   static DEFAULT_OPTIONS = {
     classes: ["teriock", "character"],
     actions: {
@@ -84,11 +82,7 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
     },
   };
 
-  /**
-   * Template parts configuration for the sheet.
-   * @type {object}
-   * @static
-   */
+  /** @inheritDoc */
   static PARTS = {
     all: {
       template:
@@ -880,13 +874,7 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
     );
   }
 
-  /**
-   * Prepares the context data for template rendering.
-   * Build effect types, sorts data, and prepare all necessary context information.
-   *
-   * @returns {Promise<object>} Promise that resolves to the context object.
-   * @override
-   */
+  /** @inheritDoc */
   async _prepareContext(options) {
     if (!this.actor.effectTypes) {
       this.actor.buildEffectTypes();
@@ -1001,14 +989,7 @@ export default class TeriockBaseActorSheet extends BaseActorSheet {
     return context;
   }
 
-  /**
-   * Handles the render event for the actor sheet.
-   * Sets up UI state, event listeners, and context menus.
-   *
-   * @param {object} context - The render context.
-   * @param {object} options - Render options.
-   * @override
-   */
+  /** @inheritDoc */
   async _onRender(context, options) {
     await super._onRender(context, options);
 

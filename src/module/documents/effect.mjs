@@ -8,19 +8,14 @@ import { BaseTeriockEffect } from "./_base.mjs";
  * @property {TeriockActor|TeriockItem} parent
  */
 export default class TeriockEffect extends BaseTeriockEffect {
-  /**
-   * Checks if the effect is suppressed, combining system suppression with parent suppression.
-
-   * @returns {boolean} True if the effect is suppressed, false otherwise.
-   * @override
-   */
+  /** @inheritDoc */
   get isSuppressed() {
     let suppressed = super.isSuppressed;
     return this.system.suppressed || suppressed;
   }
 
   /**
-   * Returns the actor that this effect is associated with, if there is one.
+   * Returns the actor that this effect is associated with if there is one.
    *
    * @returns {TeriockActor}
    */
@@ -54,7 +49,7 @@ export default class TeriockEffect extends BaseTeriockEffect {
   }
 
   /**
-   * Gets the effect that provides this effect, if there is one.
+   * Gets the effect that provides this effect if there is one.
    *
    * @returns {TeriockEffect|null}
    */
@@ -69,9 +64,9 @@ export default class TeriockEffect extends BaseTeriockEffect {
   }
 
   /**
-   * Safely gets the ID of the effect that provides this effect, if there is one.
+   * Safely gets the ID of the effect that provides this effect if there is one.
    *
-   * @returns {string|null}
+   * @returns {Teriock.ID<TeriockEffect>}
    */
   get supId() {
     if (
@@ -108,7 +103,7 @@ export default class TeriockEffect extends BaseTeriockEffect {
     /** @type {TeriockEffect[]} */
     const subEffects = [];
     for (const id of this.subIds) {
-      const root = game.teriock.api.utils.fromUuidSync(
+      const root = foundry.utils.fromUuidSync(
         this.system.hierarchy.rootUuid,
       );
       subEffects.push(root.effects.get(id));
@@ -123,17 +118,16 @@ export default class TeriockEffect extends BaseTeriockEffect {
    */
   get subIds() {
     if (this.metadata.hierarchy && this.system.hierarchy.subIds.size > 0) {
-      const root =
-        /** @type {TeriockActor|TeriockItem} */ game.teriock.api.utils.fromUuidSync(
-          this.system.hierarchy.rootUuid,
-        );
+      const root = foundry.utils.fromUuidSync(
+        this.system.hierarchy.rootUuid,
+      );
       return this.system.hierarchy.subIds.filter((id) => root.effects.has(id));
     }
     return new Set();
   }
 
   /**
-   * Gets all sub-effects descendant from this effect recursively.
+   * Gets all sub-effect descendants from this effect recursively.
    *
    * @returns {TeriockEffect[]} Array of all descendant effects.
    */
@@ -148,7 +142,7 @@ export default class TeriockEffect extends BaseTeriockEffect {
   }
 
   /**
-   * Gets the document that most directly applies this effect. If it's an effect, returns that.
+   * Gets the document that most directly applies this effect. If it's an effect, return that.
    * Otherwise, gets what Foundry considers to be the parent.
    *
    * @returns {TeriockActor|TeriockEffect|TeriockItem} The source document that applies this effect.
@@ -379,11 +373,8 @@ export default class TeriockEffect extends BaseTeriockEffect {
   }
 
   /**
-   * Duplicates the effect and updates parent-child relationships.
-   *
-   * @todo Create `addSub` and `setSup` methods to handle this more generally.
-   * @returns {Promise<TeriockEffect>} Promise that resolves to the duplicated effect.
-   * @override
+   * @inheritDoc
+   * @returns {Promise<TeriockEffect>}
    */
   async duplicate() {
     const copy = /** @type {TeriockEffect} */ await super.duplicate();

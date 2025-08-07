@@ -1,7 +1,6 @@
 import { createProperty } from "../../../helpers/create-effects.mjs";
 import { getRollIcon } from "../../../helpers/utils.mjs";
-import ConsumableDataMixin from "../../mixins/consumable-mixin.mjs";
-import WikiDataMixin from "../../mixins/wiki-mixin.mjs";
+import { ConsumableDataMixin, WikiDataMixin } from "../../mixins/_module.mjs";
 import TeriockBaseItemData from "../base-item-data/base-item-data.mjs";
 import * as attunement from "./methods/_attunement.mjs";
 import * as contextMenus from "./methods/_context-menus.mjs";
@@ -20,6 +19,7 @@ import * as schema from "./methods/_schema.mjs";
  * Relevant wiki pages:
  * - [Equipment](https://wiki.teriock.com/index.php/Category:Equipment)
  *
+ * @extends {ChildData}
  * @extends {TeriockBaseItemData}
  */
 export default class TeriockEquipmentData extends WikiDataMixin(
@@ -39,12 +39,7 @@ export default class TeriockEquipmentData extends WikiDataMixin(
     wiki: true,
   });
 
-  /**
-   * Gets the message rules-parts for the equipment.
-   *
-   * @returns {Teriock.MessageParts} Object containing message rules-parts for the equipment.
-   * @override
-   */
+  /** @inheritDoc */
   get messageParts() {
     return {
       ...super.messageParts,
@@ -52,12 +47,7 @@ export default class TeriockEquipmentData extends WikiDataMixin(
     };
   }
 
-  /**
-   * Gets the secret message rules-parts for the equipment.
-   *
-   * @returns {Teriock.MessageParts} Object containing secret message rules-parts for the equipment.
-   * @override
-   */
+  /** @inheritDoc */
   get secretMessageParts() {
     return {
       ...super.secretMessageParts,
@@ -65,11 +55,7 @@ export default class TeriockEquipmentData extends WikiDataMixin(
     };
   }
 
-  /**
-   * Context menu entries to display for cards that represent the parent document.
-   *
-   * @returns {Teriock.ContextMenuEntry[]}
-   */
+  /** @inheritDoc */
   get cardContextMenuEntries() {
     return [...super.cardContextMenuEntries, ...contextMenus._entries(this)];
   }
@@ -186,59 +172,31 @@ export default class TeriockEquipmentData extends WikiDataMixin(
     return overrides._derivedTwoHandedDamage(this);
   }
 
-  /**
-   * Defines the schema for the equipment data model.
-   *
-   * @returns {object} The schema definition for the equipment data.
-   * @override
-   */
+  /** @inheritDoc */
   static defineSchema() {
     return foundry.utils.mergeObject(super.defineSchema(), {
       ...schema._defineSchema(),
     });
   }
 
-  /**
-   * Migrates data from older versions to the current format.
-   *
-   * @param {object} data - The data to migrate.
-   * @returns {object} The migrated data.
-   * @override
-   */
+  /** @inheritDoc */
   static migrateData(data) {
     data = migrate._migrateData(data);
     return super.migrateData(data);
   }
 
-  /**
-   * Prepares derived data for the equipment.
-   *
-   * @returns {void}
-   * @override
-   */
+  /** @inheritDoc */
   prepareDerivedData() {
     super.prepareDerivedData();
     deriving._prepareDerivedData(this);
   }
 
-  /**
-   * Parses raw HTML content for the equipment.
-   *
-   * @param {string} rawHTML - The raw HTML content to parse.
-   * @returns {Promise<object>} Promise that resolves to the parsed HTML content.
-   * @override
-   */
+  /** @inheritDoc */
   async parse(rawHTML) {
     return await parsing._parse(this, rawHTML);
   }
 
-  /**
-   * Rolls the equipment with the specified options.
-   *
-   * @param {object} options - Options for the equipment roll.
-   * @returns {Promise<void>} Promise that resolves when the roll is complete.
-   * @override
-   */
+  /** @inheritDoc */
   async roll(options) {
     await rolling._roll(this, options);
   }

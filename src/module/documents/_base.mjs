@@ -25,7 +25,6 @@ const { WorldCollection } = foundry.documents.abstract;
  * @extends {ClientDocument}
  * @mixes ParentDocumentMixin
  * @implements {ActorData}
- * @implements {ParentDocumentMixinInterface}
  * @property {EmbeddedCollection<string, TeriockItem>} items
  * @property {EmbeddedCollection<string, TeriockEffect>} effects
  * @property {ParentItemTypes} itemTypes
@@ -37,7 +36,7 @@ const { WorldCollection } = foundry.documents.abstract;
  * @property {TeriockBaseActorData} system
  * @property {Teriock.ActorType} type
  * @property {"Actor"} documentName
- @property {boolean} isOwner
+ * @property {boolean} isOwner
  */
 export class BaseTeriockActor extends ParentDocumentMixin(Actor) {}
 
@@ -49,15 +48,13 @@ export class BaseTeriockActor extends ParentDocumentMixin(Actor) {}
  * @mixes ChildDocumentMixin
  * @mixes ParentDocumentMixin
  * @implements {ItemData}
- * @implements {ChildDocumentMixinInterface}
- * @implements {ParentDocumentMixinInterface}
  * @property {TeriockActor|null} actor
  * @property {EmbeddedCollection<string, TeriockEffect>} effects
  * @property {Readonly<TeriockEffect[]>} transferredEffects
  * @property {TeriockBaseItemData} system
  * @property {Teriock.ItemType} type
  * @property {"Item"} documentName
- @property {boolean} isOwner
+ * @property {boolean} isOwner
  */
 export class BaseTeriockItem extends ParentDocumentMixin(
   ChildDocumentMixin(Item),

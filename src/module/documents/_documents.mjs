@@ -86,6 +86,7 @@ export class TeriockAbility extends TeriockEffect {}
  * Consequence-specific {@link TeriockEffect} class.
  *
  * @property {TeriockConsequenceData} system
+ * @property {TeriockConsequenceSheet} sheet
  * @property {"consequence"} type
  * @property {Teriock.UUID<TeriockConsequence>} uuid
  * @property {Teriock.ID<TeriockConsequence>} id
@@ -99,6 +100,7 @@ export class TeriockConsequence extends TeriockEffect {}
  * - [Presence](https://wiki.teriock.com/index.php/Core:Presence)
  *
  * @property {TeriockAttunementData}
+ * @property {TeriockAttunementSheet} sheet
  * @property {"attunement"} type
  * @property {Teriock.UUID<TeriockAttunement>} uuid
  * @property {Teriock.ID<TeriockAttunement>} id
@@ -112,6 +114,7 @@ export class TeriockAttunement extends TeriockEffect {}
  * - [Conditions](https://wiki.teriock.com/index.php/Category:Conditions)
  *
  * @property {TeriockConditionData} system
+ * @property {TeriockConditionSheet} sheet
  * @property {"condition"} type
  * @property {Teriock.UUID<TeriockCondition>} uuid
  * @property {Teriock.ID<TeriockCondition>} id

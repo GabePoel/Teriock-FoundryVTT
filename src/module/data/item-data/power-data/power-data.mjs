@@ -7,11 +7,7 @@ const { fields } = foundry.data;
  * Power-specific item data model.
  */
 export default class TeriockPowerData extends TeriockBaseItemData {
-  /**
-   * Metadata for this item.
-   *
-   * @type {Readonly<Teriock.ItemDataModelMetadata>}
-   */
+  /** @inheritDoc */
   static metadata = Object.freeze({
     consumable: false,
     namespace: "",
@@ -21,13 +17,7 @@ export default class TeriockPowerData extends TeriockBaseItemData {
     wiki: false,
   });
 
-  /**
-   * Gets the message parts for the power.
-   * Combines base message parts with power-specific message parts.
-   *
-   * @returns {Teriock.MessageParts} Object containing message parts for the power.
-   * @override
-   */
+  /** @inheritDoc */
   get messageParts() {
     return {
       ...super.messageParts,
@@ -35,11 +25,7 @@ export default class TeriockPowerData extends TeriockBaseItemData {
     };
   }
 
-  /**
-   * Defines the schema for the power data model.
-   *
-   * @returns {object} The schema definition for the power data.
-   */
+  /** @inheritDoc */
   static defineSchema() {
     return foundry.utils.mergeObject(super.defineSchema(), {
       type: new fields.StringField({

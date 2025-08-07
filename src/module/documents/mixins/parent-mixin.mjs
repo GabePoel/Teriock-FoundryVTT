@@ -25,9 +25,8 @@ function _buildEffectTypes(document) {
 /**
  * Mixin for common functions used across document classes that embed children.
  *
- * @param {DeepPartial<Document>} BaseDocument
- * @implements {ParentDocumentMixinInterface}
- * @mixin
+ * @param {ClientDocument} BaseDocument
+ * @returns {typeof ParentDocument & typeof BaseDocument}
  */
 export default (BaseDocument) => {
   return class ParentDocument extends BaseDocument {

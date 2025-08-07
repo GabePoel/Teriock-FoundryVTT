@@ -6,26 +6,15 @@ import { selectDialog } from "../../../dialogs/select-dialog.mjs";
 import TeriockBaseEffectSheet from "../base-effect-sheet/base-effect-sheet.mjs";
 import { contextMenus } from "./connections/_context-menus.mjs";
 
-const { api } = foundry.applications;
-
 /**
  * Ability sheet for Teriock system abilities.
  * Provides comprehensive ability management including consequences, context menus,
  * tag management, and rich text editing for various ability components.
  *
- * @extends {TeriockBaseEffectSheet}
  * @property {TeriockAbility} document
- * @property {TeriockAbility} effect
  */
-export default class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(
-  TeriockBaseEffectSheet,
-) {
-  /**
-   * Default options for the ability sheet.
-   *
-   * @type {object}
-   * @static
-   */
+export default class TeriockAbilitySheet extends TeriockBaseEffectSheet {
+  /** @inheritDoc */
   static DEFAULT_OPTIONS = {
     classes: ["ability"],
     actions: {
@@ -137,13 +126,7 @@ export default class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(
     await durationDialog(this.document);
   }
 
-  /**
-   * Prepares the context data for template rendering.
-   * Adds ability-specific data including child abilities, parent ability, and enriched text fields.
-   *
-   * @returns {Promise<object>} Promise that resolves to the context object.
-   * @override
-   */
+  /** @inheritDoc */
   async _prepareContext(options) {
     const context = await super._prepareContext(options);
     const system = this.document.system;
@@ -155,7 +138,7 @@ export default class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(
     for (const [safeUuid, pseudoHook] of Object.entries(
       this.document.system.applies.macros,
     )) {
-      const macro = await game.teriock.api.utils.fromUuid(pureUuid(safeUuid));
+      const macro = await foundry.utils.fromUuid(pureUuid(safeUuid));
       if (macro) {
         context.macros.push({
           safeUuid: safeUuid,
@@ -407,15 +390,7 @@ export default class TeriockAbilitySheet extends api.HandlebarsApplicationMixin(
     }
   }
 
-  /**
-   * Handles dropping of a macro on this document.
-   *
-   * @param {DragEvent} _event - The drop event.
-   * @param {object} data - The macro data.
-   * @returns {Promise<TeriockMacro|void>} Promise that resolves to the dropped macro if successful.
-   * @private
-   * @override
-   */
+  /** @inheritDoc */
   async _onDropMacro(_event, data) {
     console.log(data);
     const updateData = {

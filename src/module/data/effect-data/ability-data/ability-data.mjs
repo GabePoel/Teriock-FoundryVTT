@@ -1,5 +1,5 @@
 import { insertElderSorceryMask } from "../../../helpers/html.mjs";
-import WikiDataMixin from "../../mixins/wiki-mixin.mjs";
+import { WikiDataMixin } from "../../mixins/_module.mjs";
 import TeriockBaseEffectData from "../base-effect-data/base-effect-data.mjs";
 import { _generateChanges } from "./methods/_generate-changes.mjs";
 import { _messageParts } from "./methods/_messages.mjs";
@@ -17,6 +17,7 @@ import { _defineSchema } from "./methods/schema/_schema.mjs";
  * - [Ability Rules](https://wiki.teriock.com/index.php/Category:Ability_rules)
  *
  * @extends {TeriockBaseEffectData}
+ * @extends {ChildData}
  */
 export default class TeriockAbilityData extends WikiDataMixin(
   TeriockBaseEffectData,
@@ -36,13 +37,7 @@ export default class TeriockAbilityData extends WikiDataMixin(
     wiki: true,
   });
 
-  /**
-   * Checks if the ability is suppressed.
-   * Combines base suppression with ability-specific suppression logic.
-   *
-   * @returns {boolean} True if the ability is suppressed, false otherwise.
-   * @override
-   */
+  /** @inheritDoc */
   get suppressed() {
     let suppressed = super.suppressed;
     suppressed = suppressed || _suppressed(this);
@@ -62,13 +57,7 @@ export default class TeriockAbilityData extends WikiDataMixin(
     return CONFIG.TERIOCK.documentOptions.ability.icon;
   }
 
-  /**
-   * Gets the message parts for the ability.
-   * Combines base message parts with ability-specific message parts.
-   *
-   * @returns {Teriock.MessageParts} Object containing message parts for the ability.
-   * @override
-   */
+  /** @inheritDoc */
   get messageParts() {
     return {
       ...super.messageParts,
@@ -85,56 +74,32 @@ export default class TeriockAbilityData extends WikiDataMixin(
     return _generateChanges(this);
   }
 
-  /**
-   * Defines the schema for the ability data model.
-   *
-   * @returns {object} The schema definition for the ability data.
-   * @override
-   */
+  /** @inheritDoc */
   static defineSchema() {
     return foundry.utils.mergeObject(super.defineSchema(), _defineSchema());
   }
 
-  /**
-   * Migrates ability data to the current schema version.
-   *
-   * @param {object} data - The data to migrate.
-   * @returns {object} The migrated data.
-   * @override
-   */
+  /** @inheritDoc */
   static migrateData(data) {
     data = _migrateData(data);
     return super.migrateData(data);
   }
 
-  /**
-   * Prepares derived data for the ability, calculating computed values.
-   *
-   * @override
-   */
+  /** @inheritDoc */
   prepareDerivedData() {
     super.prepareDerivedData();
     _prepareDerivedData(this);
   }
 
   /**
-   * Rolls the ability with the specified options.
-   *
-   * @param {Teriock.CommonRollOptions} options - Options for the ability roll.
-   * @returns {Promise<void>} Promise that resolves when the roll is complete.
-   * @override
+   * @inheritDoc
+   * @param {Teriock.CommonRollOptions} options
    */
   async roll(options) {
     return await _roll(this, options);
   }
 
-  /**
-   * Parses raw HTML content for the ability.
-   *
-   * @param {string} rawHTML - The raw HTML content to parse.
-   * @returns {Promise<object>} Promise that resolves to the parsed ability data.
-   * @override
-   */
+  /** @inheritDoc */
   async parse(rawHTML) {
     return await _parse(this, rawHTML);
   }
@@ -158,14 +123,7 @@ export default class TeriockAbilityData extends WikiDataMixin(
     }
   }
 
-  /**
-   * Adjust the built message after it's created.
-   * Includes custom styling for Elder Sorcery.
-   *
-   * @param {HTMLDivElement} messageElement - The raw message HTML.
-   * @returns {HTMLDivElement} The modified raw message HTML.
-   * @override
-   */
+  /** @inheritDoc */
   adjustMessage(messageElement) {
     messageElement = super.adjustMessage(messageElement);
     messageElement = insertElderSorceryMask(messageElement, this.parent);

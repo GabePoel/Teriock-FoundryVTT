@@ -1,30 +1,16 @@
 import { cleanCapitalization } from "../../../../helpers/clean.mjs";
 import { documentOptions } from "../../../../helpers/constants/document-options.mjs";
 import TeriockBaseItemSheet from "../base-item-sheet/base-item-sheet.mjs";
-import {
-  fontContextMenu,
-  powerLevelContextMenu,
-} from "./connections/_context-menus.mjs";
-
-const { HandlebarsApplicationMixin } = foundry.applications.api;
+import { fontContextMenu, powerLevelContextMenu } from "./connections/_context-menus.mjs";
 
 /**
- * Equipment sheet for Teriock system equipment.
- * Provides comprehensive equipment management including state toggles, context menus,
- * tag management, and rich text editing for equipment components.
+ * Sheet for a {@link TeriockEquipment}.
  *
- * @extends {TeriockBaseItemSheet}
  * @property {TeriockEquipment} document
  * @property {TeriockEquipment} item
  */
-export default class TeriockEquipmentSheet extends HandlebarsApplicationMixin(
-  TeriockBaseItemSheet,
-) {
-  /**
-   * Default options for the equipment sheet.
-   * @type {object}
-   * @static
-   */
+export default class TeriockEquipmentSheet extends TeriockBaseItemSheet {
+  /** @inheritDoc */
   static DEFAULT_OPTIONS = {
     classes: ["equipment"],
     actions: {
@@ -37,11 +23,7 @@ export default class TeriockEquipmentSheet extends HandlebarsApplicationMixin(
     },
   };
 
-  /**
-   * Template parts configuration for the equipment sheet.
-   * @type {object}
-   * @static
-   */
+  /** @inheritDoc */
   static PARTS = {
     all: {
       template:
@@ -89,21 +71,15 @@ export default class TeriockEquipmentSheet extends HandlebarsApplicationMixin(
     }
   }
 
-  /**
-   * Prepares the context data for template rendering.
-   * Adds enriched text fields for equipment descriptions and properties.
-   * @returns {Promise<object>} Promise that resolves to the context object.
-   * @override
-   */
+  /** @inheritDoc */
   async _prepareContext(options) {
     const context = await super._prepareContext(options);
-    const { system } = this.item;
 
     const enrichments = {
-      enrichedSpecialRules: system.specialRules,
-      enrichedDescription: system.description,
-      enrichedFlaws: system.flaws,
-      enrichedNotes: system.notes,
+      enrichedSpecialRules: this.item.system.specialRules,
+      enrichedDescription: this.item.system.description,
+      enrichedFlaws: this.item.system.flaws,
+      enrichedNotes: this.item.system.notes,
     };
 
     for (const [key, value] of Object.entries(enrichments)) {

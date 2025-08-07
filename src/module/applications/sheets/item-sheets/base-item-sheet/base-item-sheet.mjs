@@ -1,18 +1,20 @@
 import { cleanFeet } from "../../../../helpers/clean.mjs";
-import { BaseItemSheet } from "../../_base.mjs";
+import { SheetMixin } from "../../mixins/_module.mjs";
+
+const { ItemSheetV2 } = foundry.applications.sheets;
 
 /**
  * Base item sheet for Teriock system items.
  * Provides common functionality for all item sheets.
  *
- * @property {TeriockItem} item
  * @property {TeriockItem} document
+ * @property {TeriockItem} item
+ * @extends {ItemSheetV2}
  */
-export default class TeriockBaseItemSheet extends BaseItemSheet {
+export default class TeriockBaseItemSheet extends SheetMixin(ItemSheetV2) {
   /**
-   * Default options for the base item sheet.
+   * Default sheet options.
    * @type {object}
-   * @static
    */
   static DEFAULT_OPTIONS = {
     classes: ["teriock"],
@@ -40,13 +42,7 @@ export default class TeriockBaseItemSheet extends BaseItemSheet {
     await this.document.update({ "system.onUse": onUseSet });
   }
 
-  /**
-   * Prepares the context data for template rendering.
-   * Builds and sorts effect types including abilities, properties, fluencies, and resources.
-   *
-   * @returns {Promise<object>} Promise that resolves to the context object.
-   * @override
-   */
+  /** @inheritDoc */
   async _prepareContext(options) {
     const abilityFormOrder = Object.keys(
       CONFIG.TERIOCK.abilityOptions.form || {},

@@ -1,6 +1,6 @@
 import { TeriockRoll } from "../../documents/_module.mjs";
 
-const { fields } = foundry.data;
+const { StringField, ArrayField, TypedObjectField } = foundry.data.fields;
 
 /**
  * Utility function for creating DOM elements with common properties.
@@ -41,16 +41,8 @@ const createButton = (className, content, dataset = {}) => {
  * Custom array field for the Teriock system with enhanced input rendering.
  * Extends Foundry's ArrayField to provide custom input elements for array data.
  */
-export class TeriockArrayField extends fields.ArrayField {
-  /**
-   * Creates the input element for the array field.
-   * Renders a button with plus icon for adding new items to the array.
-   *
-   * @param {object} config - Configuration object for the input element.
-   * @returns {HTMLButtonElement} The rendered input button element.
-   * @override
-   * @private
-   */
+export class TeriockArrayField extends ArrayField {
+  /** @inheritDoc */
   _toInput(config) {
     const btn = createButton(
       "teriock-array-field-add",
@@ -68,20 +60,12 @@ export class TeriockArrayField extends fields.ArrayField {
  * Custom record field for Teriock system with multi-select and individual item inputs.
  * Extends Foundry's TypedObjectField to provide enhanced record editing capabilities.
  */
-export class TeriockRecordField extends fields.TypedObjectField {
-  /**
-   * Creates the input element for the record field.
-   * Renders a multi-select input for choosing which record items to display.
-   *
-   * @param {object} config - Configuration object for the input element.
-   * @returns {HTMLElement} The rendered multi-select input element.
-   * @override
-   * @private
-   */
+export class TeriockRecordField extends TypedObjectField {
+  /** @inheritDoc */
   _toInput(config) {
     config.value = Object.keys(config.value ?? {});
     config.classes = "teriock-record-field";
-    fields.StringField._prepareChoiceConfig(config);
+    StringField._prepareChoiceConfig(config);
 
     if (config.override) {
       config.name = config.override;
@@ -93,15 +77,7 @@ export class TeriockRecordField extends fields.TypedObjectField {
     return out;
   }
 
-  /**
-   * Creates a form group for the record field with individual item inputs.
-   * Renders both the multi-select and individual form inputs for each record item.
-   *
-   * @param {object} groupConfig - Configuration for the form group.
-   * @param {object} inputConfig - Configuration for the input elements.
-   * @returns {HTMLElement} The rendered form group element.
-   * @override
-   */
+  /** @inheritDoc */
   toFormGroup(groupConfig, inputConfig) {
     const out = super.toFormGroup(groupConfig, inputConfig);
     out.style.width = "100%";
@@ -136,7 +112,7 @@ export class TeriockRecordField extends fields.TypedObjectField {
  * @param {StringFieldOptions & { deterministic?: boolean; }} [options={}] - Options which configure field behavior.
  * @property {boolean} deterministic=false - Is this formula not allowed to have dice values?
  */
-export class FormulaField extends fields.StringField {
+export class FormulaField extends StringField {
   /** @inheritdoc */
   static get _defaults() {
     return foundry.utils.mergeObject(super._defaults, {
@@ -148,7 +124,7 @@ export class FormulaField extends fields.StringField {
   /** @inheritdoc */
   _validateType(value) {
     if (this.deterministic) {
-      const roll = new TeriockRoll(value);
+      const roll = new TeriockRoll(value, {});
       if (!roll.isDeterministic) throw new Error("must not contain dice terms");
     }
     super._validateType(value);
@@ -170,7 +146,7 @@ export class FormulaField extends fields.StringField {
   /** @override */
   _applyChangeMultiply(value, delta, model, change) {
     if (!value) return delta;
-    const terms = new TeriockRoll(value).terms;
+    const terms = new TeriockRoll(value, {}).terms;
     if (terms.length > 1) return `(${value}) * ${delta}`;
     return `${value} * ${delta}`;
   }
@@ -178,7 +154,7 @@ export class FormulaField extends fields.StringField {
   /** @override */
   _applyChangeUpgrade(value, delta, model, change) {
     if (!value) return delta;
-    const terms = new TeriockRoll(value).terms;
+    const terms = new TeriockRoll(value, {}).terms;
     if (terms.length === 1 && terms[0]?.fn === "max")
       return value.replace(/\)$/, `, ${delta})`);
     return `max(${value}, ${delta})`;
@@ -187,7 +163,7 @@ export class FormulaField extends fields.StringField {
   /** @override */
   _applyChangeDowngrade(value, delta, model, change) {
     if (!value) return delta;
-    const terms = new TeriockRoll(value).terms;
+    const terms = new TeriockRoll(value, {}).terms;
     if (terms.length === 1 && terms[0]?.fn === "min")
       return value.replace(/\)$/, `, ${delta})`);
     return `min(${value}, ${delta})`;

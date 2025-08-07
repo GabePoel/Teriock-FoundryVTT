@@ -1,6 +1,6 @@
 import { conditions } from "../../../helpers/constants/generated/conditions.mjs";
 import { smartEvaluateSync } from "../../../helpers/utils.mjs";
-import ChildDataMixin from "../../mixins/child-mixin.mjs";
+import { ChildDataMixin } from "../../mixins/_module.mjs";
 import { comparatorField } from "../shared/shared-fields.mjs";
 import { _expire, _shouldExpire } from "./methods/_expiration.mjs";
 
@@ -15,6 +15,12 @@ const { TypeDataModel } = foundry.abstract;
 export default class TeriockBaseEffectData extends ChildDataMixin(
   TypeDataModel,
 ) {
+  /**
+   * @inheritDoc
+   * @type {Readonly<Teriock.EffectDataModelMetadata>}
+   */
+  static metadata;
+
   /**
    * Checks if the effect is suppressed.
    * Effects are suppressed if their parent item is disabled.
@@ -34,35 +40,6 @@ export default class TeriockBaseEffectData extends ChildDataMixin(
     ) {
       return true;
     }
-    // if (this.actor) {
-    //   if (
-    //     this.suppression.statuses.active.some((status) =>
-    //       this.actor.statuses.has(status),
-    //     )
-    //   ) {
-    //     return true;
-    //   }
-    //   if (
-    //     this.suppression.statuses.inactive.some(
-    //       (status) => !this.actor.statuses.has(status),
-    //     )
-    //   ) {
-    //     return true;
-    //   }
-    //   if (
-    //     this.suppression.comparisons.actor.some((comp) =>
-    //       this._checkComparison(this.actor, comp),
-    //     )
-    //   ) {
-    //     return true;
-    //   }
-    // }
-    // return (
-    //   this.parent.parent?.documentName === "Item" &&
-    //   this.suppression.comparisons.item.some((comp) =>
-    //     this._checkComparison(this.parent.parent, comp),
-    //   )
-    // );
     return false;
   }
 
@@ -84,12 +61,7 @@ export default class TeriockBaseEffectData extends ChildDataMixin(
     return _shouldExpire(this);
   }
 
-  /**
-   * Defines this effect's schema.
-   *
-   * @returns {object} The schema definition for the effect data.
-   * @override
-   */
+  /** @inheritDoc */
   static defineSchema() {
     return foundry.utils.mergeObject(super.defineSchema(), {
       deleteOnExpire: new fields.BooleanField({

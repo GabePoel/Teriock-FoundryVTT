@@ -254,7 +254,7 @@ export default class TeriockActor extends BaseTeriockActor {
             if (change.key === "system.hookedMacros.effectApplication") {
               const uuid = pureUuid(change.value);
               /** @type {TeriockMacro|null} */
-              const macro = await game.teriock.api.utils.fromUuid(uuid);
+              const macro = await foundry.utils.fromUuid(uuid);
               if (macro) {
                 await macro.execute({ actor: this });
               }
@@ -311,13 +311,13 @@ export default class TeriockActor extends BaseTeriockActor {
    * Execute all macros for a given pseudo-hook and call a regular hook with the same name.
    *
    * @param {Teriock.PseudoHook} name - The name of the pseudo-hook and hook to call.
-   * @param {any[]} args - Arguments to pass to the pseudo-hook macros and the hook.
+   * @param {...any[]} args - Arguments to pass to the pseudo-hook macros and the hook.
    */
   async hookCall(name, ...args) {
     Hooks.callAll(`teriock.${name}`, this, ...args);
     if (this.system.hookedMacros[name]) {
       for (const macroUuid of this.system.hookedMacros[name]) {
-        const macro = await game.teriock.api.utils.fromUuid(macroUuid);
+        const macro = await foundry.utils.fromUuid(macroUuid);
         if (macro) {
           await macro.execute({ actor: this, args: [...args] });
         }

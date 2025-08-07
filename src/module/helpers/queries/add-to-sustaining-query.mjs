@@ -6,7 +6,7 @@
  * @returns {Promise<void>}
  */
 export default async function addToSustainingQuery(queryData, { timeout }) {
-  const sustainingAbility = await game.teriock.api.utils.fromUuid(
+  const sustainingAbility = await foundry.utils.fromUuid(
     queryData.sustainingUuid,
   );
   if (sustainingAbility) {

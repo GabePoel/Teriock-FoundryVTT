@@ -6,7 +6,7 @@
  * @returns {Promise<void>}
  */
 export default async function sustainedExpirationQuery(queryData, { timeout }) {
-  const sustainedConsequence = await game.teriock.api.utils.fromUuid(
+  const sustainedConsequence = await foundry.utils.fromUuid(
     queryData.sustainedUuid,
   );
   if (sustainedConsequence) {

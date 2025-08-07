@@ -33,7 +33,7 @@ export default function registerChatManagementHooks() {
         const uuid = event.currentTarget.getAttribute("data-uuid");
         if (!uuid) return;
         const doc =
-          /** @type{ClientDocument} */ await game.teriock.api.utils.fromUuid(
+          /** @type{ClientDocument} */ await foundry.utils.fromUuid(
             uuid,
           );
         if (doc && typeof doc.sheet?.render === "function") {
@@ -59,9 +59,9 @@ export default function registerChatManagementHooks() {
         }
 
         clickTimeout = setTimeout(async () => {
-          const doc = await game.teriock.api.utils.fromUuid(uuid);
+          const doc = await foundry.utils.fromUuid(uuid);
           if (doc.isOwner) {
-            if (doc?.token?.object) {
+            if (doc.token?.object) {
               doc.token.object.control();
             } else {
               doc.getActiveTokens()[0]?.control();
@@ -82,7 +82,7 @@ export default function registerChatManagementHooks() {
           clickTimeout = null;
         }
 
-        const doc = await game.teriock.api.utils.fromUuid(uuid);
+        const doc = await foundry.utils.fromUuid(uuid);
         if (
           doc &&
           doc.sheet &&

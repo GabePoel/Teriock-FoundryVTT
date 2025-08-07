@@ -171,7 +171,7 @@ export async function fetchWikiPageHTML(
         if (needsUuidCheck.has(type)) {
           try {
             const packIndex = game.teriock.packs.rules().index.getName(type);
-            const pack = await game.teriock.api.utils.fromUuid(packIndex.uuid);
+            const pack = await foundry.utils.fromUuid(packIndex.uuid);
             if (pack) {
               const page = pack.pages.getName(fileName);
               if (page?.uuid) {

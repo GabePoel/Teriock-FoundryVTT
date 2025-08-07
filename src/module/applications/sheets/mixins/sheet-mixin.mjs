@@ -5,20 +5,21 @@ import { selectPropertyDialog } from "../../dialogs/select-dialog.mjs";
 import { imageContextMenuOptions } from "../misc-sheets/image-sheet/connections/_context-menus.mjs";
 
 const { DragDrop, TextEditor, ContextMenu } = foundry.applications.ux;
-const { DocumentSheetV2 } = foundry.applications.api;
+const { DocumentSheetV2, HandlebarsApplicationMixin } =
+  foundry.applications.api;
 
 /**
  * Base sheet mixin for Teriock system applications.
  * Provides common functionality for all Teriock sheets including event handling,
  * drag and drop, context menus, and form management.
  *
- * @param {DocumentSheetV2} Base - The base application class to mix in with.
- * @returns {DocumentSheetV2 & *}
+ * @param {typeof DocumentSheetV2} Base - The base application class to mix in with.
+ * @returns {typeof TeriockSheet & typeof Base}
  */
 export default (Base) => {
-  return class TeriockSheet extends Base {
+  return class TeriockSheet extends HandlebarsApplicationMixin(Base) {
     /**
-     * Default options for Teriock sheets.
+     * Default sheet options.
      *
      * @type {object}
      */
@@ -51,6 +52,13 @@ export default (Base) => {
       position: { width: 560, height: 600 },
       dragDrop: [{ dragSelector: ".draggable", dropSelector: null }],
     };
+
+    /**
+     * Template parts configuration.
+     *
+     * @type {object}
+     */
+    static PARTS = {};
 
     /** @type {DragDrop[]} */
     #dragDrop;
@@ -419,7 +427,7 @@ export default (Base) => {
           if (embedded.id === "lighted") {
             let lightedToText = "<ul>";
             for (const uuid of this.document.system.lightedTo) {
-              const token = await game.teriock.api.utils.fromUuid(uuid);
+              const token = await foundry.utils.fromUuid(uuid);
               lightedToText += `<li>@UUID[${uuid}]{${token.name}}</li>`;
             }
             lightedToText += "</ul>";
@@ -431,7 +439,7 @@ export default (Base) => {
           if (embedded.id === "goaded") {
             let goadedToText = "<ul>";
             for (const uuid of this.document.system.goadedTo) {
-              const token = await game.teriock.api.utils.fromUuid(uuid);
+              const token = await foundry.utils.fromUuid(uuid);
               goadedToText += `<li>@UUID[${uuid}]{${token.name}}</li>`;
             }
             goadedToText += "</ul>";
@@ -802,7 +810,7 @@ export default (Base) => {
         });
       }
 
-      if (type === "macro") return game.teriock.api.utils.fromUuid(id);
+      if (type === "macro") return foundry.utils.fromUuid(id);
 
       if (type === "item") return this.document.items.get(id);
 
@@ -953,7 +961,7 @@ export default (Base) => {
         /** @type {TeriockItem} */ await ItemClass.fromDropData(data);
       if (!this._canDropItem(item)) return false;
 
-      const source = await game.teriock.api.utils.fromUuid(data.uuid);
+      const source = await foundry.utils.fromUuid(data.uuid);
       if (item.parent?.documentName === "Actor" && item.type === "equipment") {
         if (item.parent?.documentName === "Actor" && item.system.consumable) {
           const targetItem = this.document.items.getName(item.name);

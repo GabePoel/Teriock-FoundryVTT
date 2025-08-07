@@ -2,21 +2,14 @@ import { documentOptions } from "../../../../helpers/constants/document-options.
 import TeriockBaseItemSheet from "../base-item-sheet/base-item-sheet.mjs";
 import { powerContextMenu } from "./connections/_context-menus.mjs";
 
-const { HandlebarsApplicationMixin } = foundry.applications.api;
-
 /**
- * Power sheet for Teriock system powers.
- * Provides power management with proficiency toggling, context menus, and rich text editing.
- * @extends {TeriockBaseItemSheet}
+ * Sheet for a {@link TeriockPower}.
+ *
+ * @property {TeriockPower} document
+ * @property {TeriockPower} item
  */
-export default class TeriockPowerSheet extends HandlebarsApplicationMixin(
-  TeriockBaseItemSheet,
-) {
-  /**
-   * Default options for the power sheet.
-   * @type {object}
-   * @static
-   */
+export default class TeriockPowerSheet extends TeriockBaseItemSheet {
+  /** @inheritDoc */
   static DEFAULT_OPTIONS = {
     classes: ["power"],
     actions: {
@@ -26,11 +19,8 @@ export default class TeriockPowerSheet extends HandlebarsApplicationMixin(
       icon: "fa-solid fa-" + documentOptions.power.icon,
     },
   };
-  /**
-   * Template rules-parts configuration for the power sheet.
-   * @type {object}
-   * @static
-   */
+
+  /** @inheritDoc */
   static PARTS = {
     all: {
       template:
@@ -52,12 +42,7 @@ export default class TeriockPowerSheet extends HandlebarsApplicationMixin(
     }
   }
 
-  /**
-   * Prepares the context data for template rendering.
-   * Adds enriched text fields for power descriptions and flaws.
-   * @returns {Promise<object>} Promise that resolves to the context object.
-   * @override
-   */
+  /** @inheritDoc */
   async _prepareContext(options) {
     const context = await super._prepareContext(options);
     context.enrichedDescription = await this._editor(
@@ -67,13 +52,7 @@ export default class TeriockPowerSheet extends HandlebarsApplicationMixin(
     return context;
   }
 
-  /**
-   * Handles the render event for the power sheet.
-   * Sets up context menu for power type selection.
-   * @param {object} context - The render context.
-   * @param {object} options - Render options.
-   * @override
-   */
+  /** @inheritDoc */
   async _onRender(context, options) {
     await super._onRender(context, options);
     if (!this.editable) return;

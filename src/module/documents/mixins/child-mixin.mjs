@@ -5,8 +5,7 @@ const { ux } = foundry.applications;
 /**
  * Mixin for common functions used across document classes embedded in actors.
  *
- * @param {DeepPartial<ClientDocument>} BaseDocument
- * @mixin
+ * @param {ClientDocument} BaseDocument
  */
 export default (BaseDocument) => {
   return class ChildDocument extends BaseDocument {

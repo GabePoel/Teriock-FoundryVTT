@@ -95,13 +95,7 @@ export default class TeriockConsequenceData extends TeriockBaseEffectData {
     return "passive";
   }
 
-  /**
-   * Checks if the effect should expire based on various conditions.
-   * Considers base expiration, condition-based expiration, and sustained expiration.
-   *
-   * @returns {boolean} True if the effect should expire, false otherwise.
-   * @override
-   */
+  /** @inheritDoc */
   get shouldExpire() {
     let should = super.shouldExpire;
     if (this.conditionExpiration) {
@@ -123,12 +117,7 @@ export default class TeriockConsequenceData extends TeriockBaseEffectData {
     return data;
   }
 
-  /**
-   * Defines the schema for the effect data model.
-   *
-   * @returns {object} The schema definition for the effect data.
-   * @override
-   */
+  /** @inheritDoc */
   static defineSchema() {
     return foundry.utils.mergeObject(super.defineSchema(), {
       source: new fields.StringField({ initial: "", nullable: true }),
@@ -194,13 +183,8 @@ export default class TeriockConsequenceData extends TeriockBaseEffectData {
     await inCombatExpirationDialog(this.parent, forceDialog);
   }
 
-  /**
-   * Rolls the consequence. Forced alias for {@link inCombatExpiration}.
-   *
-   * @returns {Promise<void>} Promise that resolves when the roll is complete.
-   * @override
-   */
-  async roll() {
+  /** @inheritDoc */
+  async roll(_options) {
     await this.inCombatExpiration(true);
   }
 }

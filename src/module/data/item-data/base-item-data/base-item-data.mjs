@@ -1,4 +1,4 @@
-import ChildDataMixin from "../../mixins/child-mixin.mjs";
+import { ChildDataMixin } from "../../mixins/_module.mjs";
 
 const { TypeDataModel } = foundry.abstract;
 const { fields } = foundry.data;
@@ -11,6 +11,13 @@ const { fields } = foundry.data;
  */
 export default class TeriockBaseItemData extends ChildDataMixin(TypeDataModel) {
   /**
+   * Metadata for this item.
+   *
+   * @type {Readonly<Teriock.ItemDataModelMetadata>}
+   */
+  static metadata;
+
+  /**
    * Get the actor associated with this item data.
    *
    * @returns {TeriockActor}
@@ -19,12 +26,7 @@ export default class TeriockBaseItemData extends ChildDataMixin(TypeDataModel) {
     return this.parent.actor;
   }
 
-  /**
-   * Defines the schema for the base item data model.
-   *
-   * @returns {object} The schema definition for the base item data.
-   * @override
-   */
+  /** @inheritDoc */
   static defineSchema() {
     return foundry.utils.mergeObject(super.defineSchema(), {
       disabled: new fields.BooleanField({

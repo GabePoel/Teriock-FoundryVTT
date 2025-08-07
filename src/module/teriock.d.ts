@@ -1,6 +1,7 @@
 import "./helpers/commands/_types";
 import "./data/_types";
-import "./applications/sheets/_types";
+import "./applications/_types";
+import "./documents/_types";
 import * as Chat from "./types/chat";
 import * as Command from "./types/command";
 import * as DocumentTypes from "./types/document-types";
@@ -85,6 +86,7 @@ declare global {
   // ----
 
   const TeriockEquipmentData: typeof import("./data/_module.mjs").item.EquipmentData;
+  const TeriockMechanicData: typeof import("./data/_module.mjs").item.MechanicData;
   const TeriockPowerData: typeof import("./data/_module.mjs").item.PowerData;
   const TeriockRankData: typeof import("./data/_module.mjs").item.RankData;
 
@@ -98,6 +100,40 @@ declare global {
   const TeriockFluencyData: typeof import("./data/_module.mjs").effect.FluencyData;
   const TeriockPropertyData: typeof import("./data/_module.mjs").effect.PropertyData;
   const TeriockResourceData: typeof import("./data/_module.mjs").effect.ResourceData;
+
+  // Sheets
+  // ======
+
+  // Base Sheets
+  // -----------
+
+  const TeriockBaseActorSheet: typeof import("./applications/sheets/actor-sheets/base-actor-sheet/base-actor-sheet.mjs").default;
+  const TeriockBaseItemSheet: typeof import("./applications/sheets/item-sheets/base-item-sheet/base-item-sheet.mjs").default;
+  const TeriockBaseEffectSheet: typeof import("./applications/sheets/effect-sheets/base-effect-sheet/base-effect-sheet.mjs").default;
+
+  // Actor
+  // -----
+
+  const TeriockCharacterSheet: typeof import("./applications/sheets/_module.mjs").actor.CharacterSheet;
+
+  // Item
+  // ----
+
+  const TeriockEquipmentSheet: typeof import("./applications/sheets/_module.mjs").item.EquipmentSheet;
+  const TeriockMechanicSheet: typeof import("./applications/sheets/_module.mjs").item.MechanicSheet;
+  const TeriockPowerSheet: typeof import("./applications/sheets/_module.mjs").item.PowerSheet;
+  const TeriockRankSheet: typeof import("./applications/sheets/_module.mjs").item.RankSheet;
+
+  // Effect
+  // ------
+
+  const TeriockAbilitySheet: typeof import("./applications/sheets/_module.mjs").effect.AbilitySheet;
+  const TeriockAttunementSheet: typeof import("./applications/sheets/_module.mjs").effect.AttunementSheet;
+  const TeriockConsequenceSheet: typeof import("./applications/sheets/_module.mjs").effect.ConsequenceSheet;
+  const TeriockConditionSheet: typeof import("./applications/sheets/_module.mjs").effect.ConditionSheet;
+  const TeriockFluencySheet: typeof import("./applications/sheets/_module.mjs").effect.FluencySheet;
+  const TeriockPropertySheet: typeof import("./applications/sheets/_module.mjs").effect.PropertySheet;
+  const TeriockResourceSheet: typeof import("./applications/sheets/_module.mjs").effect.ResourceSheet;
 
   namespace Teriock {
     type Form = Parameters.Form;

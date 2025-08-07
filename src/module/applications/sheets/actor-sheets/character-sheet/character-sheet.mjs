@@ -1,24 +1,11 @@
 import { documentOptions } from "../../../../helpers/constants/document-options.mjs";
 import TeriockBaseActorSheet from "../base-actor-sheet/base-actor-sheet.mjs";
 
-const { api } = foundry.applications;
-
 /**
- * Character sheet for Teriock system characters.
- * Extends the base actor sheet with character-specific functionality and Handlebars template support.
- *
- * @extends TeriockBaseActorSheet
- * @property {TeriockCharacter} actor
- * @property {TeriockCharacter} document
+ * Sheet for a {@link TeriockCharacter}.
  */
-export default class TeriockCharacterSheet extends api.HandlebarsApplicationMixin(
-  TeriockBaseActorSheet,
-) {
-  /**
-   * Default options for the character sheet.
-   * @type {object}
-   * @static
-   */
+export default class TeriockCharacterSheet extends TeriockBaseActorSheet {
+  /** @inheritDoc */
   static DEFAULT_OPTIONS = {
     classes: ["character"],
     form: {
@@ -30,11 +17,7 @@ export default class TeriockCharacterSheet extends api.HandlebarsApplicationMixi
     },
   };
 
-  /**
-   * Template parts configuration for the character sheet.
-   * @type {object}
-   * @static
-   */
+  /** @inheritDoc */
   static PARTS = {
     all: {
       template:

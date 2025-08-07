@@ -40,7 +40,7 @@ export async function _attune(equipmentData) {
   };
   if (equipmentData.parent.actor && (await _canAttune(equipmentData))) {
     if (equipmentData.reference && !equipmentData.identified) {
-      const ref = await game.teriock.api.utils.fromUuid(
+      const ref = await foundry.utils.fromUuid(
         equipmentData.reference,
       );
       if (ref) {
@@ -122,7 +122,7 @@ export async function _canAttune(equipmentData) {
   if (equipmentData.parent?.actor) {
     let tierDerived = equipmentData.tier.derived;
     if (equipmentData.reference && !equipmentData.identified) {
-      const ref = await game.teriock.api.utils.fromUuid(equipmentData.reference);
+      const ref = await foundry.utils.fromUuid(equipmentData.reference);
       const tierRaw = ref.system.tier.raw;
       tierDerived = evaluateSync(tierRaw);
     }

@@ -19,9 +19,7 @@ const rulesEnrichers = Object.keys(enricherIcons).map((type) => ({
     const compendiumIndex = game.teriock.packs.rules().index.getName(type);
     if (!compendiumIndex) return null;
 
-    const compendium = await game.teriock.api.utils.fromUuid(
-      compendiumIndex.uuid,
-    );
+    const compendium = await foundry.utils.fromUuid(compendiumIndex.uuid);
     if (!compendium) return null;
 
     const page = compendium.pages.getName(fileName);
@@ -44,7 +42,7 @@ const abilityEnricher = {
   enricher: async (match, _options) => {
     const fileName = match[1];
     const title = match[2];
-    const itemWrapper = await game.teriock.api.utils.fromUuid(
+    const itemWrapper = await foundry.utils.fromUuid(
       game.teriock.packs.essentials().index.getName(fileName).uuid,
     );
     if (!itemWrapper) return null;

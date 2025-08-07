@@ -1,4 +1,3 @@
-const { api } = foundry.applications;
 import { documentOptions } from "../../../../helpers/constants/document-options.mjs";
 import TeriockBaseEffectSheet from "../base-effect-sheet/base-effect-sheet.mjs";
 import { propertyContextMenu } from "./connections/_context-menus.mjs";
@@ -7,13 +6,9 @@ import { propertyContextMenu } from "./connections/_context-menus.mjs";
  * Property sheet for Teriock system properties.
  * Provides property management with context menus for property types.
  *
- * @extends {TeriockBaseEffectSheet}
  * @property {TeriockProperty} document
- * @property {TeriockProperty} effect
  */
-export default class TeriockPropertySheet extends api.HandlebarsApplicationMixin(
-  TeriockBaseEffectSheet,
-) {
+export default class TeriockPropertySheet extends TeriockBaseEffectSheet {
   /**
    * Default options for the property sheet.
    * @type {object}
@@ -39,13 +34,7 @@ export default class TeriockPropertySheet extends api.HandlebarsApplicationMixin
     },
   };
 
-  /**
-   * Handles the render event for the property sheet.
-   * Sets up context menu for property type selection.
-   * @param {object} context - The render context.
-   * @param {object} options - Render options.
-   * @override
-   */
+  /** @inheritDoc */
   async _onRender(context, options) {
     await super._onRender(context, options);
     if (!this.editable) return;

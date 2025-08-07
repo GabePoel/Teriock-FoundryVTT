@@ -7,6 +7,6 @@
  */
 export default async function inCombatExpirationQuery(queryData, { timeout }) {
   const effectUuid = queryData.effectUuid;
-  const effect = await game.teriock.api.utils.fromUuid(effectUuid);
+  const effect = await foundry.utils.fromUuid(effectUuid);
   await effect.system.inCombatExpiration();
 }

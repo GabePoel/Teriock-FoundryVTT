@@ -14,7 +14,7 @@ const { api, ux } = foundry.applications;
 export async function _readMagic(equipmentData) {
   if (equipmentData.reference && !equipmentData.identified) {
     const activeGm = game.users.activeGM;
-    const ref = await game.teriock.api.utils.fromUuid(equipmentData.reference);
+    const ref = await foundry.utils.fromUuid(equipmentData.reference);
     const referenceName = ref ? ref.name : "Unknown";
     const referenceUuid = ref ? ref.uuid : "Unknown";
     ui.notifications.info(
@@ -59,7 +59,7 @@ export async function _readMagic(equipmentData) {
 export async function _identify(equipmentData) {
   if (equipmentData.reference && !equipmentData.identified) {
     const activeGm = game.users.activeGM;
-    const ref = await game.teriock.api.utils.fromUuid(equipmentData.reference);
+    const ref = await foundry.utils.fromUuid(equipmentData.reference);
     const referenceName = ref ? ref.name : "Unknown";
     const referenceUuid = ref ? ref.uuid : "Unknown";
     ui.notifications.info(

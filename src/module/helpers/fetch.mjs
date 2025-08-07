@@ -15,7 +15,7 @@ export async function getItem(name, pack, options = {}) {
   const compendium = packs.get(pack);
   /** @type {Teriock.UUID<TeriockItem>} */
   const uuid = compendium.index.getName(name).uuid;
-  const item = await game.teriock.api.utils.fromUuid(uuid);
+  const item = await foundry.utils.fromUuid(uuid);
   if (options.clone) {
     return item?.clone();
   }

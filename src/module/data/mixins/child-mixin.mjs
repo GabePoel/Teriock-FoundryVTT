@@ -8,6 +8,7 @@ const { fields } = foundry.data;
  * Adds proficiency tracking, font customization, and message generation capabilities.
  *
  * @param {TypeDataModel} Base - The base class to mix in with.
+ * @returns {typeof ChildData & Base}
  */
 export default (Base) => {
   /**
@@ -58,7 +59,7 @@ export default (Base) => {
           name: this.useText,
           icon: makeIcon(this.useIcon, "contextMenu"),
           callback: this.use.bind(this),
-          condition: this.constructor.USABLE,
+          condition: this.parent.metadata.usable,
           group: "usage",
         },
         {
@@ -140,11 +141,19 @@ export default (Base) => {
     }
 
     /**
-     * Defines the schema for child document data fields.
-     * Includes proficiency flags, font customization, and description fields.
+     * Migrate data to the current schema version.
      *
-     * @returns {object} The schema definition for child document fields.
-     * @override
+     * @param {object} data
+     * @returns {object}
+     */
+    static migrateData(data) {
+      return super.migrateData(data);
+    }
+
+    /**
+     * Defines the schema for data fields.
+     *
+     * @returns {object} The schema definition.
      */
     static defineSchema() {
       return foundry.utils.mergeObject(

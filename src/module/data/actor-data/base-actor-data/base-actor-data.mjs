@@ -17,42 +17,23 @@ const { TypeDataModel } = foundry.abstract;
  * Handles all core actor functionality including damage, healing, rolling, and data management.
  */
 export default class TeriockBaseActorData extends TypeDataModel {
-  /**
-   * Defines the schema for the base actor data model.
-   *
-   * @returns {object} The schema definition for the actor data.
-   * @override
-   */
+  /** @inheritDoc */
   static defineSchema() {
     return _defineSchema();
   }
 
-  /**
-   * Migrates actor data to the current schema version.
-   *
-   * @param {object} data - The data to migrate.
-   * @returns {object} The migrated data.
-   * @override
-   */
+  /** @inheritDoc */
   static migrateData(data) {
     data = _migrateData(data);
     return super.migrateData(data);
   }
 
-  /**
-   * Prepares derived data for the actor, calculating stats, speeds, and other derived values.
-   *
-   * @override
-   */
+  /** @inheritDoc */
   prepareDerivedData() {
     _prepareDerivedData(this);
   }
 
-  /**
-   * Prepare data relating to the data model before any data is derived.
-   *
-   * @override
-   */
+  /** @inheritDoc */
   prepareBaseData() {
     _prepareBaseData(this);
   }
@@ -164,7 +145,7 @@ export default class TeriockBaseActorData extends TypeDataModel {
    * Relevant wiki pages:
    * - [Temporary Hit Points](https://wiki.teriock.com/index.php/Core:Temporary_Hit_Points)
    *
-   * @param {number} amount - The amount of temporary hit points to gain.
+   * @param {number} amount - The number of temporary hit points to gain.
    * @returns {Promise<void>} Promise that resolves when temporary hit points are gained.
    */
   async takeGainTempHp(amount) {
@@ -177,7 +158,7 @@ export default class TeriockBaseActorData extends TypeDataModel {
    * Relevant wiki pages:
    * - [Temporary Mana Points](https://wiki.teriock.com/index.php/Core:Temporary_Mana_Points)
    *
-   * @param {number} amount - The amount of temporary mana points to gain.
+   * @param {number} amount - The number of temporary mana points to gain.
    * @returns {Promise<void>} Promise that resolves when temporary mana points are gained.
    */
   async takeGainTempMp(amount) {
@@ -214,7 +195,7 @@ export default class TeriockBaseActorData extends TypeDataModel {
    * Actor pays money.
    *
    * @param {number} amount - The amount of gold-equivalent money to pay.
-   * @param {"exact" | "greedy"} mode - Exact change or closest denomination, rounded up.
+   * @param {"exact" | "greedy"} mode - Exact change or the closest denomination, rounded up.
    */
   async takePay(amount, mode = "greedy") {
     await numericals._takePay(this, amount, mode);

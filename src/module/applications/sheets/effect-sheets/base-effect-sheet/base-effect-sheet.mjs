@@ -1,18 +1,19 @@
 import { documentOptions } from "../../../../helpers/constants/document-options.mjs";
-import { BaseEffectSheet } from "../../_base.mjs";
+import { SheetMixin } from "../../mixins/_module.mjs";
+
+const { ActiveEffectConfig } = foundry.applications.sheets;
 
 /**
  * Base effect sheet for Teriock system active effects.
  * Provides common functionality for all effect sheets including change management,
  * context preparation, and effect state handling.
+ *
+ * @extends ActiveEffectConfig
  */
-export default class TeriockBaseEffectSheet extends BaseEffectSheet {
-  /**
-   * Default options for the base effect sheet.
-   *
-   * @type {object}
-   * @static
-   */
+export default class TeriockBaseEffectSheet extends SheetMixin(
+  ActiveEffectConfig,
+) {
+  /** @inheritDoc */
   static DEFAULT_OPTIONS = {
     classes: ["effect"],
     window: {
@@ -24,12 +25,6 @@ export default class TeriockBaseEffectSheet extends BaseEffectSheet {
       toggleDisabledThis: this._toggledDisabledThis,
     },
   };
-
-  /** @inheritDoc */
-  constructor(...args) {
-    super(...args);
-    this.effect = this.document;
-  }
 
   /**
    * Adds a new change to an effect application.
@@ -81,13 +76,7 @@ export default class TeriockBaseEffectSheet extends BaseEffectSheet {
     await this.document.update({ disabled: !this.document.disabled });
   }
 
-  /**
-   * Prepares the context data for template rendering.
-   * Adds effect-specific data including disabled state, suppression, and enriched description.
-   *
-   * @returns {Promise<object>} Promise that resolves to the context object.
-   * @override
-   */
+  /** @inheritDoc */
   async _prepareContext(options) {
     const context = await super._prepareContext(options);
     context.disabled = this.document.disabled;
@@ -100,14 +89,7 @@ export default class TeriockBaseEffectSheet extends BaseEffectSheet {
     return context;
   }
 
-  /**
-   * Handles the render event for the effect sheet.
-   * Sets up change entry event listeners for dynamic updates.
-   *
-   * @param {object} context - The render context.
-   * @param {object} options - Render options.
-   * @override
-   */
+  /** @inheritDoc */
   async _onRender(context, options) {
     await super._onRender(context, options);
   }

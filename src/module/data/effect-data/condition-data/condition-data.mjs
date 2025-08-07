@@ -1,6 +1,6 @@
 import inCombatExpirationDialog from "../../../applications/dialogs/in-combat-expiration-dialog.mjs";
 import { makeIcon } from "../../../helpers/utils.mjs";
-import WikiDataMixin from "../../mixins/wiki-mixin.mjs";
+import { WikiDataMixin } from "../../mixins/_module.mjs";
 import TeriockBaseEffectData from "../base-effect-data/base-effect-data.mjs";
 import { combatExpirationMethodField } from "../shared/shared-fields.mjs";
 
@@ -13,6 +13,7 @@ const { fields } = foundry.data;
  * - [Conditions](https://wiki.teriock.com/index.php/Category:Conditions)
  *
  * @extends {TeriockBaseEffectData}
+ * @extends {ChildData}
  */
 export default class TeriockConditionData extends WikiDataMixin(
   TeriockBaseEffectData,
@@ -56,7 +57,7 @@ export default class TeriockConditionData extends WikiDataMixin(
         name: this.useText,
         icon: makeIcon(this.useIcon, "contextMenu"),
         callback: this.use.bind(this),
-        condition: this.constructor.USABLE,
+        condition: this.constructor.metadata.usable,
         group: "usage",
       },
       {
@@ -85,12 +86,7 @@ export default class TeriockConditionData extends WikiDataMixin(
     return `Roll to Remove ${this.parent.name}`;
   }
 
-  /**
-   * Defines the schema for the condition data model.
-   *
-   * @returns {object} The schema definition for the condition data.
-   * @override
-   */
+  /** @inheritDoc */
   static defineSchema() {
     return foundry.utils.mergeObject(super.defineSchema(), {
       wikiNamespace: new fields.StringField({
@@ -114,13 +110,8 @@ export default class TeriockConditionData extends WikiDataMixin(
     await inCombatExpirationDialog(this.parent, forceDialog);
   }
 
-  /**
-   * Rolls the condition. Forced alias for {@link inCombatExpiration}.
-   *
-   * @returns {Promise<void>} Promise that resolves when the roll is complete.
-   * @override
-   */
-  async roll() {
+  /** @inheritDoc */
+  async roll(_options) {
     await this.inCombatExpiration(true);
   }
 }
