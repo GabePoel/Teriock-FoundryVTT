@@ -5,7 +5,7 @@
   "author": "uxE8DDp7ujgsxtd2",
   "img": "icons/svg/dice-target.svg",
   "scope": "global",
-  "command": "const lightedToUuids = await game.teriock.api.dialog.lightedTo();\nconst buttons = scope.chatData.system.buttons;\nscope.chatData.system.buttons = buttons.filter(button => button.dataset.action === \"apply-effect\");\nconst button = scope.chatData.system.buttons[0];\nasync function modifyData(data) {\n  const effectObject = JSON.parse(data);\n  effectObject.description = \"<ul>\"\n  for (const uuid of lightedToUuids) {\n    effectObject.changes.push({\n      key: \"system.lightedTo\",\n      value: uuid,\n      mode: 2,\n      priority: 10\n    })\n    const token = await game.teriock.api.utils.fromUuid(uuid);\n    effectObject.description += `<li>Lighted to @UUID[${uuid}]{${token.name}}</li>`\n  }\n  effectObject.description += \"</ul>\"\n  return JSON.stringify(effectObject);\n}\nbutton.dataset.normal = await modifyData(button.dataset.normal);\nbutton.dataset.crit = await modifyData(button.dataset.crit);",
+  "command": "const lightedToUuids = await game.teriock.api.dialog.lightedTo();\nconst buttons = scope.chatData.system.buttons;\nscope.chatData.system.buttons = buttons.filter(\n  (button) => button.dataset.action === \"apply-effect\",\n);\nconst button = scope.chatData.system.buttons[0];\n\nasync function modifyData(data) {\n  const effectObject = JSON.parse(data);\n  effectObject.description = \"<ul>\";\n  for (const uuid of lightedToUuids) {\n    effectObject.changes.push({\n      key: \"system.lightedTo\",\n      value: uuid,\n      mode: 2,\n      priority: 10,\n    });\n    const token = await foundry.utils.fromUuid(uuid);\n    effectObject.description += `<li>Lighted to @UUID[${uuid}]{${token.name}}</li>`;\n  }\n  effectObject.description += \"</ul>\";\n  return JSON.stringify(effectObject);\n}\n\nbutton.dataset.normal = await modifyData(button.dataset.normal);\nbutton.dataset.crit = await modifyData(button.dataset.crit);",
   "folder": null,
   "sort": 0,
   "ownership": {
@@ -21,8 +21,8 @@
     "systemId": "teriock",
     "systemVersion": "0.1.0",
     "createdTime": 1754234520900,
-    "modifiedTime": 1754236828672,
-    "lastModifiedBy": "uxE8DDp7ujgsxtd2"
+    "modifiedTime": 1754545063532,
+    "lastModifiedBy": "MMeF1yfOcMgtpZFS"
   },
   "_key": "!macros!BJdPDE0aULbyEKrB"
 }

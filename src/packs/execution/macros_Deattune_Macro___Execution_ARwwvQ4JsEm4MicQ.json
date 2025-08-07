@@ -5,7 +5,7 @@
   "author": "qf5JYGZKzM588nE6",
   "img": "icons/svg/dice-target.svg",
   "scope": "global",
-  "command": "const actor = scope.abilityData.actor;\nconst equipment = {};\nactor.itemTypes?.equipment.filter((e) => e.system.isAttuned).map((e) => equipment[e.id] = e.name);\nconst id = await game.teriock.api.dialog.select(equipment, \"Equipment\", \"Please select an attuned item.\", \"Select Attuned Item\");\nconst item = actor.items.get(id);\nawait item.system.deattune();",
+  "command": "const actor = scope.abilityData.actor;\nconst equipment = {};\nactor.itemTypes?.equipment\n  .filter((e) => e.system.isAttuned)\n  .map((e) => (equipment[e.id] = e.name));\nconst id = await game.teriock.api.dialog.select(\n  equipment,\n  \"Equipment\",\n  \"Please select an attuned item.\",\n  \"Select Attuned Item\",\n);\nconst item = actor.items.get(id);\nawait item.system.deattune();",
   "folder": null,
   "sort": 0,
   "ownership": {
@@ -21,8 +21,8 @@
     "systemId": "teriock",
     "systemVersion": "0.1.0",
     "createdTime": 1753599764881,
-    "modifiedTime": 1754237230801,
-    "lastModifiedBy": "uxE8DDp7ujgsxtd2"
+    "modifiedTime": 1754545025821,
+    "lastModifiedBy": "MMeF1yfOcMgtpZFS"
   },
   "_key": "!macros!ARwwvQ4JsEm4MicQ"
 }

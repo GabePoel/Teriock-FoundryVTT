@@ -5,7 +5,7 @@
   "author": "uxE8DDp7ujgsxtd2",
   "img": "icons/svg/dice-target.svg",
   "scope": "global",
-  "command": "const essentialsPack = game.teriock.packs.essentials();\n\nlet actorMechanics = essentialsPack.index.find(\n  (m) => m.name === \"Actor Mechanics\",\n);\nactorMechanics = await game.teriock.api.utils.fromUuid(actorMechanics.uuid);\n\nconst existingMechanics = actor.itemTypes?.mechanic || [];\nconst existingMechanicIds = existingMechanics.map((m) => m.id);\n\nif (existingMechanics.length > 0) {\n  await actor.deleteEmbeddedDocuments(\n    \"Item\",\n    existingMechanicIds\n  );\n}\n\nawait actor.createEmbeddedDocuments(\"Item\", [actorMechanics]);",
+  "command": "const essentialsPack = game.teriock.packs.essentials();\n\nlet actorMechanics = essentialsPack.index.find(\n  (m) => m.name === \"Actor Mechanics\",\n);\nactorMechanics = await foundry.utils.fromUuid(actorMechanics.uuid);\n\nconst existingMechanics = actor.itemTypes?.mechanic || [];\nconst existingMechanicIds = existingMechanics.map((m) => m.id);\n\nif (existingMechanics.length > 0) {\n  await actor.deleteEmbeddedDocuments(\n    \"Item\",\n    existingMechanicIds\n  );\n}\n\nawait actor.createEmbeddedDocuments(\"Item\", [actorMechanics]);",
   "folder": null,
   "sort": 0,
   "ownership": {
@@ -21,8 +21,8 @@
     "systemId": "teriock",
     "systemVersion": "0.1.0",
     "createdTime": 1754405998308,
-    "modifiedTime": 1754446437076,
-    "lastModifiedBy": "uxE8DDp7ujgsxtd2"
+    "modifiedTime": 1754544213731,
+    "lastModifiedBy": "MMeF1yfOcMgtpZFS"
   },
   "_key": "!macros!pBdEEyrki4bEguUU"
 }
