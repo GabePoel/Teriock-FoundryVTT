@@ -27,42 +27,9 @@ export default class TeriockItem extends BaseTeriockItem {
     return this.system.disabled;
   }
 
-  /**
-   * Rolls the item, delegating to the system's roll method.
-   *
-   * @param {object} options - Options for the roll.
-   * @returns {Promise<void>} Promise that resolves when the roll is complete.
-   * @override
-   */
+  /** @inheritDoc */
   async roll(options) {
     await this.system.roll(options);
-  }
-
-  /**
-   * Disables the item by setting its disabled property to true.
-   *
-   * @returns {Promise<void>} Promise that resolves when the item is disabled.
-   */
-  async disable() {
-    await this.update({ "system.disabled": true });
-  }
-
-  /**
-   * Enables the item by setting its disabled property to false.
-   *
-   * @returns {Promise<void>} Promise that resolves when the item is enabled.
-   */
-  async enable() {
-    await this.update({ "system.disabled": false });
-  }
-
-  /**
-   * Toggles the disabled state of the item.
-   *
-   * @returns {Promise<void>} Promise that resolves when the disabled state is toggled.
-   */
-  async toggleDisabled() {
-    await this.update({ "system.disabled": !this.system.disabled });
   }
 
   /**
@@ -78,7 +45,7 @@ export default class TeriockItem extends BaseTeriockItem {
     await api.DialogV2.prompt({
       content: `<input type="text" name="pullInput" placeholder="${pullTypeName} Name" />`,
       ok: {
-        callback: (event, button) => {
+        callback: (_event, button) => {
           let input = button.form.elements.namedItem("pullInput").value;
           if (input.startsWith(`${pullTypeName}:`)) {
             input = input.slice(`${pullTypeName}:`.length);

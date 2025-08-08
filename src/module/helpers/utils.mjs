@@ -161,7 +161,10 @@ export function selectUser(actor) {
   // See if any user has the actor as a character
   users.forEach(
     /** @param {TeriockUser} user */ (user) => {
-      if (user.character?.uuid === actor.uuid) {
+      if (
+        user.character?.uuid === actor.uuid &&
+        user.lastActivityTime - game.time.serverTime < 120
+      ) {
         selectedUser = user;
       }
     },
@@ -400,9 +403,11 @@ export function smartEvaluateSync(formula, document, options = { fail: 0 }) {
   if (!isNaN(Number(formula))) {
     return Number(formula);
   }
-  const rollData =
-    document.actor?.getRollData() || document.getRollData() || {};
-  return evaluateSync(formula, rollData, options);
+  if (document.actor) {
+    return evaluateSync(formula, document.actor, options);
+  } else {
+    return evaluateSync(formula, {}, options);
+  }
 }
 
 /**
@@ -525,16 +530,17 @@ export function secondsToReadable(totalSeconds) {
     { name: "year", seconds: 365.25 * 24 * 60 * 60 },
     { name: "week", seconds: 7 * 24 * 60 * 60 },
     { name: "day", seconds: 24 * 60 * 60 },
-    { name: "hour", seconds: 60 * 60 },
-    { name: "minute", seconds: 60 },
-    { name: "second", seconds: 1 },
+    { name: "hr", seconds: 60 * 60 },
+    { name: "min", seconds: 60 },
+    { name: "sec", seconds: 1 },
   ];
   const parts = [];
   let remaining = Math.floor(totalSeconds);
   for (const unit of units) {
     const count = Math.floor(remaining / unit.seconds);
     if (count > 0) {
-      parts.push(`${count} ${unit.name}${count > 1 ? "s" : ""}`);
+      // parts.push(`${count} ${unit.name}${count > 1 ? "s" : ""}`);
+      parts.push(`${count} ${unit.name}`);
       remaining -= count * unit.seconds;
     }
   }

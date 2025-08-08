@@ -14,17 +14,11 @@ export default class TeriockEffect extends BaseTeriockEffect {
     return this.system.suppressed || suppressed;
   }
 
-  /**
-   * Returns the actor that this effect is associated with if there is one.
-   *
-   * @returns {TeriockActor}
-   */
+  /** @inheritDoc */
   get actor() {
-    if (this.parent.documentName === "Actor") {
-      return this.parent;
-    } else {
-      return this.parent.actor;
-    }
+    const actor = super.actor;
+    if (actor) return actor;
+    else return this.parent.actor;
   }
 
   /**
@@ -424,41 +418,18 @@ export default class TeriockEffect extends BaseTeriockEffect {
     }
   }
 
-  /**
-   * Disables the effect by setting its `disabled` property to true.
-   *
-   * @returns {Promise<void>} Promise that resolves when the effect is disabled.
-   */
+  /** @inheritDoc */
   async disable() {
     await this.update({ disabled: true });
   }
 
-  /**
-   * Enables the effect by setting its `disabled` property to false.
-   *
-   * @returns {Promise<void>} Promise that resolves when the effect is enabled.
-   */
+  /** @inheritDoc */
   async enable() {
     await this.update({ disabled: false });
   }
 
-  /**
-   * Toggles the `disabled` state of the effect.
-   * If the effect is currently disabled, it will be enabled, and vice versa.
-   *
-   * @returns {Promise<void>} Promise that resolves when the disabled state is toggled.
-   */
+  /** @inheritDoc */
   async toggleDisabled() {
     await this.update({ disabled: !this.disabled });
-  }
-
-  /**
-   * Forces an update of the effect by toggling the update counter.
-   * This is useful for triggering reactive updates in the UI.
-   *
-   * @returns {Promise<void>} Promise that resolves when the effect is updated.
-   */
-  async forceUpdate() {
-    await this.update({ "system.updateCounter": !this.system.updateCounter });
   }
 }

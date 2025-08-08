@@ -1,5 +1,8 @@
-import ChildDocumentMixin from "./mixins/child-mixin.mjs";
-import ParentDocumentMixin from "./mixins/parent-mixin.mjs";
+import {
+  ChildDocument,
+  CommonDocument,
+  ParentDocument,
+} from "./mixins/_module.mjs";
 
 const {
   ActiveEffect,
@@ -16,14 +19,15 @@ const {
 } = foundry.documents;
 const { CompendiumCollection, CompendiumFolderCollection } =
   foundry.documents.collections;
+const { Collection } = foundry.utils;
 const { WorldCollection } = foundry.documents.abstract;
 
 /**
  * This class is a hack to get {@link Actor} intellisense without warnings for unimplemented methods.
  *
  * @extends {Actor}
- * @extends {ClientDocument}
- * @mixes ParentDocumentMixin
+ * @mixes CommonDocument
+ * @mixes ParentDocument
  * @implements {ActorData}
  * @property {EmbeddedCollection<string, TeriockItem>} items
  * @property {EmbeddedCollection<string, TeriockEffect>} effects
@@ -37,15 +41,16 @@ const { WorldCollection } = foundry.documents.abstract;
  * @property {Teriock.ActorType} type
  * @property {"Actor"} documentName
  * @property {boolean} isOwner
+ * @property {Teriock.UUID<TeriockActor>} uuid
  */
-export class BaseTeriockActor extends ParentDocumentMixin(Actor) {}
+export class BaseTeriockActor extends ParentDocument(CommonDocument(Actor)) {}
 
 /**
  * This class is a hack to get {@link Item} intellisense without warnings for unimplemented methods.
  *
  * @extends {Item}
- * @extends {ClientDocument}
- * @mixes ChildDocumentMixin
+ * @mixes ChildDocument
+ * @mixes CommonDocument
  * @mixes ParentDocumentMixin
  * @implements {ItemData}
  * @property {TeriockActor|null} actor
@@ -55,24 +60,28 @@ export class BaseTeriockActor extends ParentDocumentMixin(Actor) {}
  * @property {Teriock.ItemType} type
  * @property {"Item"} documentName
  * @property {boolean} isOwner
+ * @property {Teriock.UUID<TeriockItem>} uuid
  */
-export class BaseTeriockItem extends ParentDocumentMixin(
-  ChildDocumentMixin(Item),
+export class BaseTeriockItem extends ParentDocument(
+  ChildDocument(CommonDocument(Item)),
 ) {}
 
 /**
  * This class is a hack to get {@link ActiveEffect} intellisense without warnings for unimplemented methods.
  *
  * @extends {ActiveEffect}
- * @extends {ClientDocument}
- * @mixes ChildDocumentMixin
+ * @mixes CommonDocument
+ * @mixes ChildDocument
  * @implements {ActiveEffectData}
  * @property {TeriockBaseEffectData} system
  * @property {Teriock.EffectType} type
  * @property {"ActiveEffect"} documentName
  * @property {boolean} isOwner
+ * @property {Teriock.UUID<TeriockEffect>} uuid
  */
-export class BaseTeriockEffect extends ChildDocumentMixin(ActiveEffect) {}
+export class BaseTeriockEffect extends ChildDocument(
+  CommonDocument(ActiveEffect),
+) {}
 
 /**
  * This class is a hack to get {@link TokenDocument} intellisense without warnings for unimplemented methods.
@@ -179,3 +188,8 @@ export class BaseTeriockCompendiumCollection extends CompendiumCollection {}
  * @extends {WorldCollection<T>}
  */
 export class BaseTeriockWorldCollection extends WorldCollection {}
+
+/**
+ * @implements {Collection<Teriock.UUID<CommonDocument>, CommonDocument>}
+ */
+export class BaseTeriockCollection extends Collection {}

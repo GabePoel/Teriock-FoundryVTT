@@ -1,5 +1,5 @@
 import { insertElderSorceryMask } from "../../../helpers/html.mjs";
-import { WikiDataMixin } from "../../mixins/_module.mjs";
+import { ConsumableDataMixin, WikiDataMixin } from "../../mixins/_module.mjs";
 import TeriockBaseEffectData from "../base-effect-data/base-effect-data.mjs";
 import { _generateChanges } from "./methods/_generate-changes.mjs";
 import { _messageParts } from "./methods/_messages.mjs";
@@ -20,7 +20,7 @@ import { _defineSchema } from "./methods/schema/_schema.mjs";
  * @extends {ChildData}
  */
 export default class TeriockAbilityData extends WikiDataMixin(
-  TeriockBaseEffectData,
+  ConsumableDataMixin(TeriockBaseEffectData),
 ) {
   /**
    * Metadata for this effect.

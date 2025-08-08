@@ -82,7 +82,7 @@ export default (Base) => {
           callback: async () => {
             await new TeriockImageSheet(this.parent.img).render(true);
           },
-          group: "share",
+          group: "open",
         },
         {
           name: "Share Image",

@@ -1,4 +1,6 @@
 import { documentOptions } from "../../../../helpers/constants/document-options.mjs";
+import * as createEffects from "../../../../helpers/create-effects.mjs";
+import { selectAbilityDialog } from "../../../dialogs/select-dialog.mjs";
 import { SheetMixin } from "../../mixins/_module.mjs";
 
 const { ActiveEffectConfig } = foundry.applications.sheets;
@@ -23,6 +25,7 @@ export default class TeriockBaseEffectSheet extends SheetMixin(
       addChange: this._addChange,
       deleteChange: this._deleteChange,
       toggleDisabledThis: this._toggledDisabledThis,
+      createAbility: this._createAbility,
     },
   };
 
@@ -46,6 +49,23 @@ export default class TeriockBaseEffectSheet extends SheetMixin(
     };
     changes.push(newChange);
     await this.document.update({ [updateString]: changes });
+  }
+
+  /** @inheritDoc */
+  static async _createAbility(_event, _target) {
+    const abilityKey = await selectAbilityDialog();
+    let abilityName = "New Ability";
+    console.log(abilityKey);
+    if (abilityKey && abilityKey !== "other") {
+      abilityName = CONFIG.TERIOCK.abilities[abilityKey];
+      const ability = await game.teriock.api.utils.importAbility(
+        this.document.parent,
+        abilityName,
+      );
+      await this.document.addSub(ability);
+    } else {
+      await createEffects.createAbility(this.document, abilityName);
+    }
   }
 
   /**

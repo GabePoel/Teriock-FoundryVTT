@@ -49,6 +49,8 @@ for (const propertyPage of allPropertyPages) {
   } else {
     propertyItem = await foundry.utils.fromUuid(propertyItem.uuid);
   }
+  await propertyItem.setFlag("teriock", "propertyWrapper", true);
+  await propertyItem.setFlag("teriock", "effectWrapper", true);
   let propertyEffect = propertyItem.properties.find(
     (a) => a.name === propertyName,
   );

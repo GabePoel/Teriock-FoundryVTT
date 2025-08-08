@@ -21,7 +21,7 @@ const { api, ux } = foundry.applications;
 const { ActorSheetV2 } = foundry.applications.sheets;
 
 /**
- * Base actor sheet for actors.
+ * Base actor sheet for actorsUuids.
  * Provides comprehensive character management including abilities, equipment, tradecrafts,
  * and various interactive features like rolling, damage tracking, and condition management.
  *

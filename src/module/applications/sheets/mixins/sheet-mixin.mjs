@@ -1,7 +1,10 @@
 import connectEmbedded from "../../../helpers/connect-embedded.mjs";
 import * as createEffects from "../../../helpers/create-effects.mjs";
 import { buildMessage } from "../../../helpers/messages-builder/message-builder.mjs";
-import { selectPropertyDialog } from "../../dialogs/select-dialog.mjs";
+import {
+  selectAbilityDialog,
+  selectPropertyDialog,
+} from "../../dialogs/select-dialog.mjs";
 import { imageContextMenuOptions } from "../misc-sheets/image-sheet/connections/_context-menus.mjs";
 
 const { DragDrop, TextEditor, ContextMenu } = foundry.applications.ux;
@@ -309,17 +312,15 @@ export default (Base) => {
      * @returns {Promise<ActiveEffect>} Promise that resolves to the created ability.
      */
     static async _createAbility(_event, _target) {
-      // const abilityKey = await selectAbilityDialog();
-      // console.log(abilityKey);
-      // if (abilityKey) {
-      //   return await createEffects.importAbility(
-      //     this.document,
-      //     abilities[abilityKey],
-      //   );
-      // } else {
-      //   return await createEffects.createAbility(this.document);
-      // }
-      return await createEffects.createAbility(this.document);
+      const abilityKey = await selectAbilityDialog();
+      let abilityName = "New Ability";
+      console.log(abilityKey);
+      if (abilityKey && abilityKey !== "other") {
+        abilityName = CONFIG.TERIOCK.abilities[abilityKey];
+        await game.teriock.api.utils.importAbility(this.document, abilityName);
+      } else {
+        await createEffects.createAbility(this.document, abilityName);
+      }
     }
 
     /**
@@ -366,7 +367,7 @@ export default (Base) => {
     static async _createProperty(_event, _target) {
       const propertyKey = await selectPropertyDialog();
       let propertyName = "New Property";
-      if (propertyKey) {
+      if (propertyKey && propertyKey !== "other") {
         propertyName = CONFIG.TERIOCK.properties[propertyKey];
         await game.teriock.api.utils.importProperty(
           this.document,
@@ -942,7 +943,8 @@ export default (Base) => {
         effect.target !== this.document &&
         effect !== this.document &&
         (["Actor", "Item"].includes(this.document.documentName) ||
-          (this.document.metadata.canSub && effect.metadata.canSub))
+          (this.document.documentName === "ActiveEffect" &&
+            this.document.system.constructor.metadata.hierarchy))
       );
     }
 
@@ -951,7 +953,7 @@ export default (Base) => {
      *
      * @param {DragEvent} _event - The drop event.
      * @param {object} data - The item data.
-     * @returns {Promise<TeriockItem|boolean>} Promise that resolves to true if drop was successful.
+     * @returns {Promise<TeriockItem|boolean>} Promise that resolves to true if the drop was successful.
      * @private
      */
     async _onDropItem(_event, data) {
@@ -959,6 +961,12 @@ export default (Base) => {
       const ItemClass = await getDocumentClass("Item");
       const item =
         /** @type {TeriockItem} */ await ItemClass.fromDropData(data);
+      if (item.getFlag("teriock", "abilityWrapper")) {
+        /** @type {ClientDocument} */
+        const ability = item.effects.getName(item.name);
+        await this._onDropActiveEffect(_event, ability.toDragData());
+        return false;
+      }
       if (!this._canDropItem(item)) return false;
 
       const source = await foundry.utils.fromUuid(data.uuid);
@@ -1025,9 +1033,9 @@ export default (Base) => {
     }
 
     /**
-     * Checks if drag drop is allowed.
+     * Checks if drag and drop is allowed.
      *
-     * @returns {boolean} True if drag drop is allowed.
+     * @returns {boolean} True if drag and drop is allowed.
      */
     _canDragDrop() {
       return this.editable;

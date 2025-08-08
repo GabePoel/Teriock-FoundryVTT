@@ -1,5 +1,5 @@
 import { conditions } from "../../../helpers/constants/generated/conditions.mjs";
-import { smartEvaluateSync } from "../../../helpers/utils.mjs";
+import { makeIcon } from "../../../helpers/utils.mjs";
 import { ChildDataMixin } from "../../mixins/_module.mjs";
 import { comparatorField } from "../shared/shared-fields.mjs";
 import { _expire, _shouldExpire } from "./methods/_expiration.mjs";
@@ -43,13 +43,10 @@ export default class TeriockBaseEffectData extends ChildDataMixin(
     ) {
       return true;
     }
-    if (
+    return !!(
       this.parent.parent?.documentName === "Item" &&
       this.parent.parent?.system.disabled
-    ) {
-      return true;
-    }
-    return false;
+    );
   }
 
   /**
@@ -58,7 +55,7 @@ export default class TeriockBaseEffectData extends ChildDataMixin(
    * @returns {TeriockActor|null}
    */
   get actor() {
-    return this.parent.actor;
+    return /** @type {TeriockActor} */ this.parent.actor;
   }
 
   /**
@@ -68,6 +65,20 @@ export default class TeriockBaseEffectData extends ChildDataMixin(
    */
   get shouldExpire() {
     return _shouldExpire(this);
+  }
+
+  /** @inheritDoc */
+  get cardContextMenuEntries() {
+    return [
+      ...super.cardContextMenuEntries,
+      {
+        name: "Open Source",
+        icon: makeIcon("arrow-up-right-from-square", "contextMenu"),
+        callback: async () => await this.parent.source.sheet.render(true),
+        condition: this.parent.source.documentName !== "Actor",
+        group: "open",
+      },
+    ];
   }
 
   /** @inheritDoc */
@@ -100,40 +111,6 @@ export default class TeriockBaseEffectData extends ChildDataMixin(
         }),
       }),
     });
-  }
-
-  /**
-   * Helper method to check a single comparison
-   *
-   * @private
-   */
-  _checkComparison(target, comparator) {
-    const actualValue = foundry.utils.getProperty(target, comparator.key);
-    let { comparison, value } = comparator;
-
-    if (typeof value === "string" && this.actor) {
-      try {
-        const newValue = smartEvaluateSync(value, this, { fail: null });
-        if (newValue !== null) value = newValue;
-      } catch {}
-    }
-
-    switch (comparison) {
-      case "=":
-        return actualValue === value;
-      case "!=":
-        return actualValue !== value;
-      case ">":
-        return actualValue > value;
-      case "<":
-        return actualValue < value;
-      case ">=":
-        return actualValue >= value;
-      case "<=":
-        return actualValue <= value;
-      default:
-        return false;
-    }
   }
 
   /**

@@ -96,34 +96,6 @@ export default class TeriockActor extends BaseTeriockActor {
   }
 
   /**
-   * @inheritDoc
-   * @param {TeriockActor[]} documents - Pending document instances to be created
-   * @param {DatabaseCreateOperation} operation - Parameters of the database creation operation
-   * @param {TeriockUser} user - The User requesting the creation operation
-   * @returns {Promise<boolean|void>} - Return false to cancel the creation operation entirely
-   */
-  static async _preCreateOperation(documents, operation, user) {
-    await super._preCreateOperation(documents, operation, user);
-    for (const actor of documents.filter(
-      (d) => new Set(d.items || [])?.size < 1,
-    )) {
-      actor.updateSource({
-        items: [
-          (await copyItem("Basic Abilities", "essentials")).toObject(),
-          (await copyItem("Created Elder Sorceries", "essentials")).toObject(),
-          (await copyItem("Learned Elder Sorceries", "essentials")).toObject(),
-          (await copyItem("Journeyman", "classes")).toObject(),
-          (await copyItem("Foot", "equipment")).toObject(),
-          (await copyItem("Hand", "equipment")).toObject(),
-          (await copyItem("Mouth", "equipment")).toObject(),
-          (await copyItem("Human", "species")).toObject(),
-          (await copyItem("Actor Mechanics", "essentials")).toObject(),
-        ],
-      });
-    }
-  }
-
-  /**
    * Figure out the name for a given size.
    *
    * @param {number} size
@@ -145,6 +117,23 @@ export default class TeriockActor extends BaseTeriockActor {
    */
   async _preCreate(data, options, user) {
     super._preCreate(data, options, user);
+
+    // Add Essential Items
+    this.updateSource({
+      items: [
+        (await copyItem("Basic Abilities", "essentials")).toObject(),
+        (await copyItem("Created Elder Sorceries", "essentials")).toObject(),
+        (await copyItem("Learned Elder Sorceries", "essentials")).toObject(),
+        (await copyItem("Journeyman", "classes")).toObject(),
+        (await copyItem("Foot", "equipment")).toObject(),
+        (await copyItem("Hand", "equipment")).toObject(),
+        (await copyItem("Mouth", "equipment")).toObject(),
+        (await copyItem("Human", "species")).toObject(),
+        (await copyItem("Actor Mechanics", "essentials")).toObject(),
+      ],
+    });
+
+    // Update Prototype Token
     const prototypeToken = {};
     const size =
       characterOptions.tokenSizes[TeriockActor.toNamedSize(this.system.size)] ||
@@ -307,12 +296,7 @@ export default class TeriockActor extends BaseTeriockActor {
     return this.system.getRollData();
   }
 
-  /**
-   * Execute all macros for a given pseudo-hook and call a regular hook with the same name.
-   *
-   * @param {Teriock.PseudoHook} name - The name of the pseudo-hook and hook to call.
-   * @param {...any[]} args - Arguments to pass to the pseudo-hook macros and the hook.
-   */
+  /** @inheritDoc */
   async hookCall(name, ...args) {
     Hooks.callAll(`teriock.${name}`, this, ...args);
     if (this.system.hookedMacros[name]) {

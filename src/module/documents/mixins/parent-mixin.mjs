@@ -25,8 +25,8 @@ function _buildEffectTypes(document) {
 /**
  * Mixin for common functions used across document classes that embed children.
  *
- * @param {ClientDocument} Base
- * @returns {typeof ParentDocument & typeof Base}
+ * @param {CommonDocument} Base
+ * @mixin
  */
 export default (Base) => {
   return class ParentDocument extends Base {
@@ -85,26 +85,12 @@ export default (Base) => {
       return _buildEffectTypes(this);
     }
 
-    /**
-     * Prepares derived data for the document, including effect types and keys.
-     *
-     * @inheritdoc
-     */
+    /** @inheritDoc */
     prepareDerivedData() {
       super.prepareDerivedData();
       const { effectTypes, effectKeys } = this.buildEffectTypes();
       this.effectTypes = effectTypes;
       this.effectKeys = effectKeys;
-    }
-
-    /**
-     * Forces an update of the document by toggling the update counter.
-     * This is useful for triggering reactive updates in the UI.
-     *
-     * @returns {Promise<void>} Promise that resolves when the document is updated.
-     */
-    async forceUpdate() {
-      await this.update({ "system.updateCounter": !this.system.updateCounter });
     }
   };
 };

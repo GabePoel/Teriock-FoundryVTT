@@ -10,14 +10,12 @@
 export async function getItem(name, pack, options = {}) {
   if (!pack.includes(".")) pack = `teriock.${pack}`;
   const packs =
-    /** @type {Collection<TeriockCompendiumCollection>} */ game.packs;
-  /** @type {TeriockCompendiumCollection} */
+    /** @type {Collection<string, TeriockCompendiumCollection>} */ game.packs;
   const compendium = packs.get(pack);
-  /** @type {Teriock.UUID<TeriockItem>} */
   const uuid = compendium.index.getName(name).uuid;
   const item = await foundry.utils.fromUuid(uuid);
-  if (options.clone) {
-    return item?.clone();
+  if (item && options.clone) {
+    return item.clone();
   }
   return item;
 }

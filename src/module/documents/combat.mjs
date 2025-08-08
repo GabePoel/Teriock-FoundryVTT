@@ -32,9 +32,16 @@ export default class TeriockCombat extends BaseTeriockCombat {
     ) {
       const user = selectUser(effect.actor);
       if (effect.system.expirations.combat.when.skip <= 0 && user) {
-        await user.query("teriock.inCombatExpiration", {
-          effectUuid: effect.uuid,
-        });
+        try {
+          await user.query("teriock.inCombatExpiration", {
+            effectUuid: effect.uuid,
+          });
+        } catch {
+          const activeGm = /** @type {TeriockUser} */ game.users.activeGM;
+          await activeGm.query("teriock.inCombatExpiration", {
+            effectUuid: effect.uuid,
+          });
+        }
       } else if (effect.system.expirations.combat.when.skip > 0) {
         updates.push({
           _id: effect.id,
@@ -72,7 +79,12 @@ export default class TeriockCombat extends BaseTeriockCombat {
 
   /** @inheritDoc */
   async nextTurn() {
+    // Turn change
+    const out = await super.nextTurn();
+
     // End of turn
+    // This happens after turn change so that the turn change doesn't get stuck
+    // waiting for effect expirations.
     /** @type {TeriockActor} */
     const previousActor = this.combatant?.actor;
     for (const actor of this.combatants.map(
@@ -81,14 +93,10 @@ export default class TeriockCombat extends BaseTeriockCombat {
       await this._tryAllEffectExpirations(actor, previousActor, "turn", "end");
     }
 
-    // Turn change
-    const out = await super.nextTurn();
-    for (const actor of this.combatants.map(
-      (combatant) => /** @type {TeriockActor} */ combatant.actor,
-    )) {
-      if (actor.system.attackPenalty !== 0)
-        await actor.update({ "system.attackPenalty": 0 });
-    }
+    const activeGm = /** @type {TeriockUser} */ game.users.activeGM;
+    await activeGm.query("teriock.resetAttackPenalties", {
+      actorUuids: this.combatants.map((c) => c.actor.uuid),
+    });
     this.updateCombatantActors();
 
     // Start of turn
@@ -130,14 +138,18 @@ export default class TeriockCombat extends BaseTeriockCombat {
   /** @inheritDoc */
   async nextRound() {
     let out = await super.nextRound();
-    await game.time.advance(5);
+    const activeGm = /** @type {TeriockUser} */ game.users.activeGM;
+    await activeGm.query("teriock.timeAdvance", { delta: 5 });
     return out;
   }
 
   /** @inheritDoc */
   async previousRound() {
     let out = await super.previousRound();
-    await game.time.advance(-5);
+    const activeGm = /** @type {TeriockUser} */ game.users.activeGM;
+    await activeGm.query("teriock.timeAdvance", {
+      delta: -5,
+    });
     return out;
   }
 }

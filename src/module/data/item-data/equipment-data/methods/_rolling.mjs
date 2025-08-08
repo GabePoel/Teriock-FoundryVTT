@@ -100,8 +100,29 @@ async function use(equipmentData, options) {
   if (onUseId) {
     /** @type {TeriockAbility} */
     const onUseAbility = equipmentData.parent.effects.get(onUseId);
+    if (onUseAbility.system.consumable && equipmentData.consumable) {
+      if (onUseAbility.system.quantity !== 1) {
+        await equipmentData.parent.setFlag("teriock", "dontConsume", true);
+      }
+    }
     if (onUseAbility) {
       await onUseAbility.use();
+    }
+    if (!(await equipmentData.parent.getFlag("teriock", "dontConsume"))) {
+      const updates = [];
+      for (const ability of equipmentData.parent.abilities) {
+        const update = {};
+        if (ability.system.maxQuantity.derived) {
+          update["_id"] = ability.id;
+          update["system.quantity"] = ability.system.maxQuantity.derived;
+          updates.push(update);
+        }
+      }
+      console.log(updates);
+      await equipmentData.parent.updateEmbeddedDocuments(
+        "ActiveEffect",
+        updates,
+      );
     }
   }
 }

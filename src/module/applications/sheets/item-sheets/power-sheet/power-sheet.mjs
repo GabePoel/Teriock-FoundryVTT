@@ -44,6 +44,12 @@ export default class TeriockPowerSheet extends TeriockBaseItemSheet {
 
   /** @inheritDoc */
   async _prepareContext(options) {
+    if (this.document.getFlag("teriock", "effectWrapper")) {
+      /** @type {TeriockEffect} */
+      const effect = this.document.effects.getName(this.document.name);
+      await effect.sheet.render(true);
+      await this.close();
+    }
     const context = await super._prepareContext(options);
     context.enrichedDescription = await this._editor(
       this.item.system.description,

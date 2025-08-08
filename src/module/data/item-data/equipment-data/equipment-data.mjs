@@ -1,4 +1,3 @@
-import { createProperty } from "../../../helpers/create-effects.mjs";
 import { getRollIcon } from "../../../helpers/utils.mjs";
 import { ConsumableDataMixin, WikiDataMixin } from "../../mixins/_module.mjs";
 import TeriockBaseItemData from "../base-item-data/base-item-data.mjs";
@@ -329,15 +328,5 @@ export default class TeriockEquipmentData extends WikiDataMixin(
   async unglue() {
     await this.actor?.hookCall("equipmentUnglue", this.parent);
     await this.parent.update({ "system.glued": false });
-  }
-
-  /**
-   * Adds the specified property to this.
-   *
-   * @param {string} name - The property to add.
-   * @returns {Promise<void>} Promise that resolves when the property is added.
-   */
-  async addProperty(name = "") {
-    await createProperty(this.parent, name);
   }
 }

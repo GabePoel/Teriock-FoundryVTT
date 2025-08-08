@@ -13,4 +13,7 @@ export function _prepareDerivedData(system) {
     0,
     smartEvaluateSync(system.tier.raw, system.parent),
   );
+  if (system.consumable && system.quantity === 0) {
+    system.equipped = false;
+  }
 }

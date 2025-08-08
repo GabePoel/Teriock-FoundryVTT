@@ -190,6 +190,8 @@ declare global {
     type QueryAddToSustainingData = Queries.QueryAddToSustainingData;
     type QueryInCombatExpirationData = Queries.QueryInCombatExpirationData;
     type QuerySustainedExpirationData = Queries.QuerySustainedExpirationData;
+    type QueryResetAttackPenaltiesData = Queries.QueryResetAttackPenaltiesData;
+    type QueryTimeAdvanceData = Queries.QueryTimeAdvanceData;
     type RankArchetype = Parameters.RankArchetype;
     type RankClass = Parameters.RankClass;
     type ReactiveExecutionTime = Parameters.ReactiveExecutionTime;

@@ -207,7 +207,9 @@ foundry.helpers.Hooks.once("init", function () {
   Object.assign(CONFIG.queries, {
     "teriock.addToSustaining": queries.addToSustainingQuery,
     "teriock.inCombatExpiration": queries.inCombatExpirationQuery,
+    "teriock.resetAttackPenalties": queries.resetAttackPenalties,
     "teriock.sustainedExpiration": queries.sustainedExpirationQuery,
+    "teriock.timeAdvance": queries.timeAdvanceQuery,
   });
 
   const packs =

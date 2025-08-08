@@ -23,7 +23,7 @@ export type CommandExecuteContext = {
   args: string[];
   /** Original chat message data */
   chatData: object;
-  /** Targeted actors */
+  /** Targeted actorsUuids */
   actors: TeriockActor[];
 };
 
@@ -40,7 +40,7 @@ export type CommandCallbackContext = {
     /** A `ChatSpeakerData` object which describes the origin of the {@link TeriockChatMessage} */
     speaker: Teriock.ChatSpeakerData;
   };
-  /** Targeted actors */
+  /** Targeted actorsUuids */
   actors: TeriockActor[];
   /** Parsed roll/command options */
   options: ChatOptions;

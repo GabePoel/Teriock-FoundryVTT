@@ -197,7 +197,7 @@ function appliesField() {
 }
 
 /**
- * Defines the applies fields for Teriock ability data schema.
+ * Defines the consequence fields for Teriock ability data schema.
  *
  * This function creates schema fields for data that applies to targets at different
  * proficiency levels:
@@ -209,19 +209,13 @@ function appliesField() {
  * Each level can have different status effects, damage formulas, drain effects,
  * and property changes applied to targets.
  *
- * @param {object} schema - The base schema object to extend
- * @returns {object} Schema object with applies fields added
+ * @param {object} schema - The base schema object to extend.
+ * @returns {object} Schema object with consequence fields added.
  * @private
  *
  * @example
- * // Add applies fields to a schema
- * const schema = _defineApplies({});
- *
- * @example
- * // Use in complete schema definition
- * let schema = {};
- * schema = _defineApplies(schema);
- * schema = _defineGeneral(schema);
+ * // Add consequence fields to a schema.
+ * const schema = _defineConsequences(schema);
  */
 export function _defineConsequences(schema) {
   schema.applies = new fields.SchemaField({
@@ -238,6 +232,5 @@ export function _defineConsequences(schema) {
   schema.sustaining = new fields.SetField(
     new fields.DocumentUUIDField({ type: "ActiveEffect" }),
   );
-
   return schema;
 }

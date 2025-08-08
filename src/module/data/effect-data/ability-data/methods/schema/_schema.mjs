@@ -1,16 +1,18 @@
 import { hierarchyField } from "../../../shared/shared-fields.mjs";
 import { _defineConsequences } from "./_define-consequences.mjs";
+import { _defineConsumable } from "./_define-consumable.mjs";
 import { _defineGeneral } from "./_define-general.mjs";
 
 /**
  * Defines the complete schema for Teriock ability data.
  *
  * This function orchestrates the creation of the ability data schema by combining
- * three main schema components:
+ * three main schema parts:
  *
  * 1. **General Fields**: Core ability properties like interaction type, delivery method,
- *    costs, and basic configuration
- * 2. **Applies**: Data that applies to different proficiency levels (base, proficient, fluent)
+ *    costs, and basic configuration.
+ * 2. **Consequences**: Data that applies to different proficiency levels (base, proficient, fluent).
+ * 3. **Consumable**: Data relating to consumable abilities.
  *
  * The schema defines the structure and validation rules for all ability data,
  * ensuring consistency and type safety across the system.
@@ -32,5 +34,6 @@ export function _defineSchema() {
   };
   schema = _defineConsequences(schema);
   schema = _defineGeneral(schema);
+  schema = _defineConsumable(schema);
   return schema;
 }

@@ -49,9 +49,9 @@ for (const abilityPage of allAbilityPages) {
   } else {
     abilityItem = await foundry.utils.fromUuid(abilityItem.uuid);
   }
-  let abilityEffect = abilityItem.abilities.find(
-    (a) => a.name === abilityName,
-  );
+  await abilityItem.setFlag("teriock", "abilityWrapper", true);
+  await abilityItem.setFlag("teriock", "effectWrapper", true);
+  let abilityEffect = abilityItem.abilities.find((a) => a.name === abilityName);
   console.log(abilityEffect);
 
   if (!abilityEffect) {

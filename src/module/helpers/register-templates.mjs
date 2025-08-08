@@ -33,6 +33,7 @@ export default async function registerTemplates () {
     'systems/teriock/src/templates/document-templates/actor-templates/character-template/tabs/ch-tab-resources.hbs',
     'systems/teriock/src/templates/document-templates/actor-templates/character-template/tabs/ch-tab-tradecrafts.hbs',
     'systems/teriock/src/templates/document-templates/effect-templates/ability-template/ability-template.hbs',
+    'systems/teriock/src/templates/document-templates/effect-templates/ability-template/bars/ab-consumable-bar.hbs',
     'systems/teriock/src/templates/document-templates/effect-templates/ability-template/bars/ab-costs-bar.hbs',
     'systems/teriock/src/templates/document-templates/effect-templates/ability-template/bars/ab-delivery-bar.hbs',
     'systems/teriock/src/templates/document-templates/effect-templates/ability-template/bars/ab-expansion-bar.hbs',

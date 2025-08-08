@@ -7,6 +7,14 @@
 - [x] Character lighting integration
 - [x] Transformation art change
 - [x] Synchronous basic effects
+- [x] Fix turn changing not updating actor attack penalties when done by non-GM
+- [x] Fix turn change not changing world time when done by non-GM
+- [x] Fix turn change glitching out if an actor controlled by at least one non-GM user needs effects to expire
+- [x] Fix impossible to drag/drop child abilities
+- [x] Fix drag/dropping abilities with child abilities not bringing the child abilities
+- [x] Hack to allow an `ActiveEffect` to be visible in compendiums when inside `TeriockPower` wrappers
+- [x] Drag/drop `TeriockPower` wrappers allows for ability and property import
+- [x] Easier dialog for importing abilities
 
 ## Medium Priority
 
@@ -17,9 +25,9 @@
 ## Low Priority
 
 - [ ] Species size integration
-- [ ] Tooltip/message text for attribute and feat save improvements
 - [ ] Better resistance/immunity tooltips
 - [ ] Condition toggling from character sheet
+- [x] Tooltip/message text for attribute and feat save improvements
 - [x] Journal entries pulled for rules
 
 # Complete(ish)
@@ -27,7 +35,7 @@
 - [x] Perception features
     - [x] Blind fighting/true sight/etc.
     - [x] Frozen and morganti vision modes
-    - [x] Automatic perception mode inherited from actors
+    - [x] Automatic perception mode inherited from actorsUuids
     - [x] ~~Properties and abilities for light sources~~
 - [x] Token features
     - [x] Better death/down displays
@@ -61,7 +69,7 @@
     - I decided the current implementation is good enough lol
 - [x] Better roll chat message button handling
 - [x] Ability usage modularization
-- [ ] ~~Take basic abilities off of each individual actors to speed up sorting and make for smaller database?~~
+- [ ] ~~Take basic abilities off of each individual actorsUuids to speed up sorting and make for smaller database?~~
     - Speed improvements were found elsewhere. Basic abilities shouldn't matter _too_ much?
 - [x] Better compendium building automation
 - [x] More wiki links in documentation

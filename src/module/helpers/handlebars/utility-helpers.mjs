@@ -280,7 +280,7 @@ export default function registerUiHelpers() {
     const parentIdAttr = parentId ? `data-parent-id="${parentId}"` : "";
     const typeAttr = type ? `data-type="${type}"` : "";
     const subtitleDiv = consumable
-      ? `<div class="tcard-subtitle tcard-clickable" data-action="useOneDoc" data-tooltip="Consume One">${amount}${max ? ` / ${max}` : " remaining"}</div>`
+      ? `<div class="tcard-subtitle tcard-clickable" data-action="useOneDoc" data-tooltip-direction="DOWN" data-tooltip-class="teriock" data-tooltip="Consume One">${amount}${max ? ` / ${max}` : " remaining"}</div>`
       : `<div class="tcard-subtitle">${subtitle}</div>`;
 
     return new Handlebars.SafeString(`

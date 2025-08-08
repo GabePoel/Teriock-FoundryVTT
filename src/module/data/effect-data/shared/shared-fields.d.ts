@@ -2,12 +2,26 @@ import type TeriockEffect from "../../../documents/effect.mjs";
 import type TeriockItem from "../../../documents/item.mjs";
 import type TeriockActor from "../../../documents/actor.mjs";
 
+export interface ConsumableInterface {
+  /** Is the equipment consumable? */
+  consumable: boolean;
+  /** Quantity (if consumable) */
+  quantity: number;
+  /** Max Quantity (if consumable) */
+  maxQuantity: {
+    /** Raw Max Quantity Value */
+    raw: string;
+    /** Derived Max Quantity Value */
+    derived: number;
+  };
+}
+
 export type HierarchyField = {
   /**
    * The UUID of the {@link TeriockActor} or {@link TeriockItem} this {@link TeriockAbility} is embedded in.
    * This is calculated when the {@link TeriockAbility} is created and should not be set manually.
    */
-  rootUuid: Teriock.UUID<TeriockItem>|Teriock.UUID<TeriockActor>;
+  rootUuid: Teriock.UUID<TeriockItem> | Teriock.UUID<TeriockActor>;
   /** The IDs for each {@link TeriockEffect} that could be descended from this. */
   subIds: Set<Teriock.ID<TeriockEffect>>;
   /** The ID of the {@link TeriockEffect} that this is descended from, if there is one. */

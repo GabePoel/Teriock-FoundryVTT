@@ -3,12 +3,13 @@ import { buildMessage } from "../../helpers/messages-builder/message-builder.mjs
 const { ux } = foundry.applications;
 
 /**
- * Mixin for common functions used across document classes embedded in actors.
+ * Mixin for common functions used across document classes embedded in actorsUuids.
  *
- * @param {ClientDocument} BaseDocument
+ * @param {CommonDocument} Base
+ * @mixin
  */
-export default (BaseDocument) => {
-  return class ChildDocument extends BaseDocument {
+export default (Base) => {
+  return class ChildDocument extends Base {
     /**
      * Checks if the document is fluent.
      *
@@ -42,27 +43,12 @@ export default (BaseDocument) => {
     }
 
     /**
-     * Calls a hook with the document as the first parameter.
-     *
-     * @param {string} incant - The hook incantation to call.
-     * @param {string[]} args - Additional arguments to pass to the hook.
-     */
-    hookCall(incant, args = []) {
-      incant =
-        "teriock." +
-        incant +
-        this.type.charAt(0).toUpperCase() +
-        this.type.slice(1);
-      Hooks.call(incant, this, ...args);
-    }
-
-    /**
      * Sends a chat message with the document's content.
      *
      * @returns {Promise<void>} Promise that resolves when the chat message is sent.
      */
     async chat() {
-      this.hookCall("chat");
+      await this.hookCall("chat");
       let content = await this.buildMessage();
       content = `<div class="teriock">${content}</div>`;
       await ChatMessage.create({
@@ -121,7 +107,7 @@ export default (BaseDocument) => {
         [copy],
       );
       await this.parent.forceUpdate();
-      this.hookCall("duplicate", [this, copyDocument[0]]);
+      await this.hookCall("duplicate", [this, copyDocument[0]]);
       return copyDocument[0];
     }
 

@@ -16,7 +16,10 @@ export function _prepareDerivedData(abilityData) {
   if (applyChanges) {
     abilityData.parent.changes = abilityData.changes;
   }
-  if (abilityData.parent.parent?.uuid) {
+  if (
+    abilityData.parent.parent?.uuid &&
+    abilityData.parent.parent.effects.has(abilityData.parent.id)
+  ) {
     abilityData.hierarchy.rootUuid = abilityData.parent.parent.uuid;
   }
 }

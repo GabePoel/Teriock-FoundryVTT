@@ -19,7 +19,10 @@ export default (Base) => {
      */
     async use(options) {
       await super.use(options);
-      await this.useOne();
+      if (!this.parent.getFlag("teriock", "dontConsume")) {
+        await this.useOne();
+      }
+      await this.parent.setFlag("teriock", "dontConsume", false);
     }
 
     /**

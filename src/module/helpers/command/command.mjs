@@ -49,7 +49,7 @@ export default class TeriockCommand {
    * @param {object} context
    * @param {string[]} context.args - The arguments from the chat message.
    * @param {object} context.chatData - The original chat message data.
-   * @param {TeriockActor[]} context.actors - Targeted actors.
+   * @param {TeriockActor[]} context.actors - Targeted actorsUuids.
    */
   async execute({ args, chatData, actors }) {
     if (this.requiresTarget && (!actors || actors.length === 0)) {

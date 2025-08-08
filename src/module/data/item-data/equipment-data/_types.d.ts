@@ -1,8 +1,11 @@
 import TeriockBaseItemData from "../base-item-data/base-item-data.mjs";
 import { TeriockEquipment } from "../../../documents/_documents.mjs";
+import type { ConsumableInterface } from "../../effect-data/shared/shared-fields";
 
 declare module "./equipment-data.mjs" {
-  export default interface TeriockEquipmentData extends TeriockBaseItemData {
+  export default interface TeriockEquipmentData
+    extends TeriockBaseItemData,
+      ConsumableInterface {
     /** Parent */
     parent: TeriockEquipment;
     /** Is the equipment equipped? */
@@ -13,17 +16,6 @@ declare module "./equipment-data.mjs" {
     shattered: boolean;
     /** Is the equipment dampened? */
     dampened: boolean;
-    /** Is the equipment consumable? */
-    consumable: boolean;
-    /** Quantity (if consumable) */
-    quantity: number;
-    /** Max Quantity (if consumable) */
-    maxQuantity: {
-      /** Raw Max Quantity Value */
-      raw: string;
-      /** Derived Max Quantity Value */
-      derived: number;
-    };
     /** Is the equipment ranged? */
     ranged: boolean;
     /** Damage Dice */
