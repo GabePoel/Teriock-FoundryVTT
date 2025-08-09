@@ -360,6 +360,7 @@ export const imageOverrides = {
   "Normal Sneak": "modules/game-icons-net/whitetransparent/walking-boot.svg",
   "Normal Strength": "modules/game-icons-net/whitetransparent/strong.svg",
   "Oblivious": "modules/game-icons-net/whitetransparent/blindfold.svg",
+  "Off-Hand Attack": "modules/game-icons-net/whitetransparent/scalpel-strike.svg",
   "Offensive Martial Arts": "modules/game-icons-net/whitetransparent/punch.svg",
   "Opportunity Attack": "modules/game-icons-net/whitetransparent/riposte.svg",
   "Oppressive Casting": "modules/game-icons-net/whitetransparent/abstract-013.svg",

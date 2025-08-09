@@ -4,7 +4,7 @@ const options = foundry.utils.deepClone({
 });
 const actor = scope.abilityData.actor;
 const abilities = {};
-actor.effectTypes?.ability
+actor.abilities
   .filter(
     (a) =>
       a.system.interaction === "attack" &&
@@ -18,8 +18,7 @@ const id = await game.teriock.api.dialog.select(abilities, {
   hint: "Please select an ability.",
   title: "Select Ability",
 });
-const ability = actor.effectTypes?.ability?.find((a) => a.id === id);
+const ability = actor.abilities.find((a) => a.id === id);
 Hooks.once("renderChatMessageHTML", async () => {
   await ability.system.roll(options);
-  await ability.delete();
 });
