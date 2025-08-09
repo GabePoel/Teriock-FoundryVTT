@@ -3,7 +3,7 @@
  * Creates formatted display elements for resource description.
  *
  * @param {TeriockResourceData} resourceData - The resource data to generate message parts for.
- * @returns {Partial<Teriock.MessageParts>} Object containing blocks for the resource message.
+ * @returns {Partial<Teriock.MessageData.Parts>} Object containing blocks for the resource message.
  * @private
  */
 export function _messageParts(resourceData) {

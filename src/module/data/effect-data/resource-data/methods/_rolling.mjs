@@ -4,7 +4,7 @@ import TeriockRoll from "../../../../documents/roll.mjs";
  * Initiates a resource roll with the specified options.
  *
  * @param {TeriockResourceData} resourceData - The resource data to roll for.
- * @param {Teriock.CommonRollOptions} options - Options for the roll including advantage/disadvantage.
+ * @param {Teriock.RollOptions.CommonRoll} options - Options for the roll including advantage/disadvantage.
  * @returns {Promise<void>} Promise that resolves when the roll is complete.
  * @private
  */
@@ -17,7 +17,7 @@ export async function _roll(resourceData, options) {
  * Handles advantage/disadvantage, function hooks, and fallback to chat if no roll formula.
  *
  * @param {TeriockResourceData} resourceData - The resource data to roll for.
- * @param {Teriock.CommonRollOptions} options - Options for the roll including advantage/disadvantage.
+ * @param {Teriock.RollOptions.CommonRoll} options - Options for the roll including advantage/disadvantage.
  * @returns {Promise<void>} Promise that resolves when the roll message is sent.
  * @private
  */

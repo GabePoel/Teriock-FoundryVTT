@@ -3,7 +3,7 @@
  * Creates formatted display elements for property type information and description.
  *
  * @param {TeriockPropertyData} propertyData - The property data to generate message parts for.
- * @returns {Partial<Teriock.MessageParts>} Object containing bars and blocks for the property message.
+ * @returns {Partial<Teriock.MessageData.Parts>} Object containing bars and blocks for the property message.
  * @private
  */
 export function _messageParts(propertyData) {

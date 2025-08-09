@@ -25,7 +25,7 @@ export default class TeriockAbilityData extends WikiDataMixin(
   /**
    * Metadata for this effect.
    *
-   * @type {Readonly<Teriock.EffectDataModelMetadata>}
+   * @type {Readonly<Teriock.Documents.EffectModelMetadata>}
    */
   static metadata = Object.freeze({
     consumable: false,
@@ -123,7 +123,7 @@ export default class TeriockAbilityData extends WikiDataMixin(
 
   /**
    * @inheritDoc
-   * @param {Teriock.CommonRollOptions} options
+   * @param {Teriock.RollOptions.CommonRoll} options
    */
   async roll(options) {
     return await _roll(this, options);

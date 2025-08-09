@@ -21,7 +21,7 @@ export default class TeriockConditionData extends WikiDataMixin(
   /**
    * Metadata for this effect.
    *
-   * @type {Readonly<Teriock.EffectDataModelMetadata>}
+   * @type {Readonly<Teriock.Documents.EffectModelMetadata>}
    */
   static metadata = Object.freeze({
     consumable: false,
@@ -49,7 +49,7 @@ export default class TeriockConditionData extends WikiDataMixin(
   /**
    * Context menu entries to display for cards that represent the parent document.
    *
-   * @returns {Teriock.ContextMenuEntry[]}
+   * @returns {Teriock.Foundry.ContextMenuEntry[]}
    */
   get cardContextMenuEntries() {
     return [

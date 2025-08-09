@@ -11,7 +11,7 @@ import { _stageUse } from "./_roll-stage-use.mjs";
 /**
  *
  * @param {TeriockAbilityData} abilityData
- * @param {Teriock.CommonRollOptions} options
+ * @param {Teriock.RollOptions.CommonRoll} options
  * @returns {Promise<void>}
  * @private
  */

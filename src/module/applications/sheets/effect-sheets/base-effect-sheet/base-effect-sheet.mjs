@@ -11,6 +11,7 @@ const { ActiveEffectConfig } = foundry.applications.sheets;
  * context preparation, and effect state handling.
  *
  * @extends ActiveEffectConfig
+ * @property {TeriockEffect} document
  */
 export default class TeriockBaseEffectSheet extends SheetMixin(
   ActiveEffectConfig,

@@ -1,7 +1,7 @@
 /**
  * Query that asks a {@link TeriockConsequence} to expire.
  *
- * @param {Teriock.QuerySustainedExpirationData} queryData
+ * @param {Teriock.QueryData.SustainedExpiration} queryData
  * @param {{timeout?: number}} timeout
  * @returns {Promise<void>}
  */

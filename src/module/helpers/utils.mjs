@@ -273,7 +273,7 @@ export function tokenDocument(token) {
  * Creates an HTML icon element using Font Awesome classes.
  *
  * @param {string} icon - The icon name to use.
- * @param {...Teriock.IconStyle} styles - One or more Font Awesome style names (e.g., "solid", "duotone").
+ * @param {...Teriock.UI.IconStyle} styles - One or more Font Awesome style names (e.g., "solid", "duotone").
  * @returns {string} The HTML string for the icon element.
  */
 export function makeIcon(icon, ...styles) {

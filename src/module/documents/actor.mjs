@@ -312,7 +312,7 @@ export default class TeriockActor extends BaseTeriockActor {
   /**
    * Performs post-update operations for the actor.
    *
-   * @param {Teriock.SkipFunctions} skipFunctions - Functions that should be skipped.
+   * @param {Teriock.Parameters.Actor.SkipFunctions} skipFunctions - Functions that should be skipped.
    * @returns {Promise<void>} Resolves when all post-update operations are complete
    * @returns {Promise<void>} Promise that resolves when post-update is complete.
    */
@@ -492,7 +492,7 @@ export default class TeriockActor extends BaseTeriockActor {
    * Relevant wiki pages:
    * - [Hack](https://wiki.teriock.com/index.php/Damage:Hack)
    *
-   * @param {Teriock.HackableBodyPart} part - The part to hack.
+   * @param {Teriock.Parameters.Actor.HackableBodyPart} part - The part to hack.
    * @returns {Promise<void>} Promise that resolves when hack is applied.
    */
   async takeHack(part) {
@@ -506,7 +506,7 @@ export default class TeriockActor extends BaseTeriockActor {
    * Relevant wiki pages:
    * - [Hack](https://wiki.teriock.com/index.php/Damage:Hack)
    *
-   * @param {Teriock.HackableBodyPart} part - The part to unhack.
+   * @param {Teriock.Parameters.Actor.HackableBodyPart} part - The part to unhack.
    * @returns {Promise<void>} Promise that resolves when unhack is applied.
    */
   async takeUnhack(part) {
@@ -546,8 +546,8 @@ export default class TeriockActor extends BaseTeriockActor {
    * Relevant wiki pages:
    * - [Feat Interaction](https://wiki.teriock.com/index.php/Core:Feat_Interaction)
    *
-   * @param {Teriock.Attribute} attribute - The attribute to roll a feat save for.
-   * @param {Teriock.CommonRollOptions} [options] - Options for the roll.
+   * @param {Teriock.Parameters.Actor.Attribute} attribute - The attribute to roll a feat save for.
+   * @param {Teriock.RollOptions.CommonRoll} [options] - Options for the roll.
    * @returns {Promise<void>}
    */
   async rollFeatSave(attribute, options = {}) {
@@ -561,7 +561,7 @@ export default class TeriockActor extends BaseTeriockActor {
    * Relevant wiki pages:
    * - [Resistance](https://wiki.teriock.com/index.php/Ability:Resist_Effects)
    *
-   * @param {Teriock.CommonRollOptions} [options] - Options for the roll.
+   * @param {Teriock.RollOptions.CommonRoll} [options] - Options for the roll.
    * @returns {Promise<void>}
    */
   async rollResistance(options = {}) {
@@ -575,7 +575,7 @@ export default class TeriockActor extends BaseTeriockActor {
    * Relevant wiki pages:
    * - [Immunity](https://wiki.teriock.com/index.php/Keyword:Immunity)
    *
-   * @param {Teriock.CommonRollOptions} [options] - Options for the roll.
+   * @param {Teriock.RollOptions.CommonRoll} [options] - Options for the roll.
    * @returns {Promise<void>}
    */
   async rollImmunity(options = {}) {
@@ -589,8 +589,8 @@ export default class TeriockActor extends BaseTeriockActor {
    * Relevant wiki pages:
    * - [Tradecrafts](https://wiki.teriock.com/index.php/Core:Tradecrafts)
    *
-   * @param {Teriock.Tradecraft} tradecraft - The tradecraft to roll for.
-   * @param {Teriock.CommonRollOptions} [options] - Options for the roll.
+   * @param {Teriock.Parameters.Fluency.Tradecraft} tradecraft - The tradecraft to roll for.
+   * @param {Teriock.RollOptions.CommonRoll} [options] - Options for the roll.
    * @returns {Promise<void>}
    */
   async rollTradecraft(tradecraft, options = {}) {
@@ -602,7 +602,7 @@ export default class TeriockActor extends BaseTeriockActor {
    * Uses an ability by name.
    *
    * @param {string} abilityName - The name of the ability to use.
-   * @param {Teriock.CommonRollOptions} [options] - Options for using the ability.
+   * @param {Teriock.RollOptions.CommonRoll} [options] - Options for using the ability.
    * @returns {Promise<void>}
    */
   async useAbility(abilityName, options = {}) {
@@ -622,7 +622,7 @@ export default class TeriockActor extends BaseTeriockActor {
    * Ends a condition with an optional roll.
    *
    * @todo Convert to using `ConditionRollOptions` type.
-   * @param {Teriock.CommonRollOptions} options - Options for ending the condition.
+   * @param {Teriock.RollOptions.CommonRoll} options - Options for ending the condition.
    * @returns {Promise<void>}
    */
   async endCondition(options = {}) {

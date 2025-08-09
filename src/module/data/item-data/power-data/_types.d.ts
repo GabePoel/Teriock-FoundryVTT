@@ -6,7 +6,7 @@ declare module "./power-data.mjs" {
     /** Parent */
     parent: TeriockPower;
     /** Power type */
-    type: Teriock.PowerType;
+    type: Teriock.Parameters.Power.PowerType;
     /** Flaws */
     flaws: string;
     /** Size (if species) */

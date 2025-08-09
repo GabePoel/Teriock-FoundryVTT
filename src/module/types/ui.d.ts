@@ -1,21 +1,21 @@
 import type { iconStyles } from "../helpers/constants/icon-styles.mjs";
 
-/**
- * Three-way toggle.
- */
-export type ThreeToggle = -1 | 0 | 1;
+declare global {
+  namespace Teriock.UI {
+    /** Three-way toggle */
+    export type ThreeToggle = -1 | 0 | 1;
 
-export type IconStyle = keyof typeof iconStyles;
+    /** Icon style */
+    export type IconStyle = keyof typeof iconStyles;
 
-export type ContextMenuCallback = (target: HTMLElement) => unknown;
-
-export type ContextMenuCondition = (html: HTMLElement) => boolean;
-
-export type ContextMenuEntry = {
-  callback: ContextMenuCallback;
-  classes?: string;
-  condition?: boolean | ContextMenuCondition;
-  group?: string;
-  icon?: string;
-  name: string;
-};
+    /** Parameters to construct an HTML button. */
+    export type HTMLButtonConfig = {
+      label?: string;
+      dataset?: Record<string, string>;
+      classes?: string[];
+      icon?: string;
+      type?: "button";
+      disabled?: boolean;
+    };
+  }
+}

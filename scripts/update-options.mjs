@@ -70,7 +70,7 @@ const processSimpleCategory = async (
   prefixRegex,
 ) => {
   const { fetchCategoryMembers } = await import(
-    "../src/module/helpers/wiki.mjs"
+    "../src/module/helpers/wiki/_module.mjs"
   );
   const members = await fetchCategoryMembers(category, options);
   const titles = cleanTitles(members, prefixRegex);
@@ -79,7 +79,7 @@ const processSimpleCategory = async (
 
 (async () => {
   const { fetchCategoryMembers } = await import(
-    "../src/module/helpers/wiki.mjs"
+    "../src/module/helpers/wiki/_module.mjs"
   );
 
   try {

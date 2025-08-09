@@ -51,12 +51,12 @@ type AbilityExpiration = {
  * Applies data for different proficiency levels
  */
 export interface AppliesData {
-  statuses: Set<Teriock.ConditionKey>;
-  startStatuses: Set<Teriock.ConditionKey>;
-  endStatuses: Set<Teriock.ConditionKey>;
+  statuses: Set<Teriock.Parameters.Condition.Key>;
+  startStatuses: Set<Teriock.Parameters.Condition.Key>;
+  endStatuses: Set<Teriock.Parameters.Condition.Key>;
   rolls: ConsequenceRolls;
-  hacks: Set<Teriock.HackableBodyPart>;
-  checks: Set<Teriock.Tradecraft>;
+  hacks: Set<Teriock.Parameters.Actor.HackableBodyPart>;
+  checks: Set<Teriock.Parameters.Fluency.Tradecraft>;
   duration: number;
   changes: EffectChangeData[];
   standardDamage: boolean;
@@ -77,7 +77,7 @@ export interface TeriockAbilityConsequenceSchema {
     proficient: AppliesData;
     fluent: AppliesData;
     heightened: AppliesData;
-    macros: Record<Teriock.SafeUUID<TeriockMacro>, Teriock.PseudoHook>;
+    macros: Record<Teriock.SafeUUID<TeriockMacro>, Teriock.Parameters.Actor.PseudoHook>;
   };
   sustaining: Set<Teriock.UUID<TeriockConsequence>>;
 }

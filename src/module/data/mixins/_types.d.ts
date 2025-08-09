@@ -1,6 +1,6 @@
 export interface ChildDataInterface {
   proficient: boolean;
   fluent: boolean;
-  font: Teriock.Font;
+  font: Teriock.Parameters.Shared.Font;
   description: string;
 }

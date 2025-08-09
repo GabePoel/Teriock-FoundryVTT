@@ -1,4 +1,4 @@
-import { TeriockEquipment } from "../../../../documents/_documents.mjs";
+import { TeriockAbility, TeriockEquipment } from "../../../../documents/_documents.mjs";
 
 /** Possible values to change for some category of equipment */
 type EquipmentChangeValues = {
@@ -44,13 +44,16 @@ type EquipmentChangeKeys = {
   types: Record<string, Partial<EquipmentChangeValues>>;
   /** Overrides by equipment property */
   properties: Record<
-    | Teriock.GenericPropertyKey
-    | Teriock.MaterialPropertyKey
-    | Teriock.MagicalPropertyKey,
+    | Teriock.Parameters.Equipment.GenericPropertyKey
+    | Teriock.Parameters.Equipment.MaterialPropertyKey
+    | Teriock.Parameters.Equipment.MagicalPropertyKey,
     Partial<EquipmentChangeValues>
   >;
   /** Overrides by equipment class */
-  classes: Record<Teriock.EquipmentClass, Partial<EquipmentChangeValues>>;
+  classes: Record<
+    Teriock.Parameters.Equipment.EquipmentClass,
+    Partial<EquipmentChangeValues>
+  >;
   /** Overrides by equipment name */
   names: Record<string, Partial<EquipmentChangeValues>>;
   /** Overrides by ID */
@@ -60,13 +63,19 @@ type EquipmentChangeKeys = {
 /** Possible keys to set some category of ability */
 type AbilityChangeKeys = {
   /** Overrides by element */
-  elements: Record<Teriock.Element, Partial<AbilityChangeValues>>;
+  elements: Record<
+    Teriock.Parameters.Ability.Element,
+    Partial<AbilityChangeValues>
+  >;
   /** Overrides by power source */
-  powers: Record<Teriock.PowerSource, Partial<AbilityChangeValues>>;
+  powers: Record<
+    Teriock.Parameters.Ability.PowerSource,
+    Partial<AbilityChangeValues>
+  >;
   /** Override by ability name */
   names: Record<string, Partial<AbilityChangeValues>>;
   /** Overrides by ID */
-  ids: Record<string, Partial<AbilityChangeValues>>;
+  ids: Record<Teriock.ID<TeriockAbility>, Partial<AbilityChangeValues>>;
 };
 
 // TODO: Implement more thoroughly

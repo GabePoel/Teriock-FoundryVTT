@@ -14,7 +14,7 @@ export default class TeriockCharacterData extends TeriockBaseActorData {
   /**
    * Metadata for this actor.
    *
-   * @type {Readonly<Teriock.ActorDataModelMetadata>}
+   * @type {Readonly<Teriock.Documents.ActorModelMetadata>}
    */
   static metadata = Object.freeze({
     type: "character",

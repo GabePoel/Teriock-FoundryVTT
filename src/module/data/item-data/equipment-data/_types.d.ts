@@ -31,11 +31,11 @@ declare module "./equipment-data.mjs" {
     /** Short Range (ft) (if ranged) */
     shortRange: number;
     /** Equipment Classes */
-    equipmentClasses: Set<Teriock.EquipmentClass>;
+    equipmentClasses: Set<Teriock.Parameters.Equipment.EquipmentClass>;
     /** Minimum STR */
     minStr: number;
     /** Style Bonus (Weapon Fighting Style) */
-    sb: Teriock.WeaponFightingStyle;
+    sb: Teriock.Parameters.Equipment.WeaponFightingStyle;
     /** Armor Value */
     av: number;
     /** Block Value */

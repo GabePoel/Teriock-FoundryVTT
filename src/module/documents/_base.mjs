@@ -36,9 +36,9 @@ const { WorldCollection } = foundry.documents.abstract;
  * @property {TeriockEffect[]} appliedEffects
  * @property {TeriockEffect[]} temporaryEffects
  * @property {() => Generator<TeriockEffect, void, void>} allApplicableEffects
- * @property {Set<Teriock.ConditionKey>} statuses
+ * @property {Set<Teriock.Parameters.Condition.Key>} statuses
  * @property {TeriockBaseActorData} system
- * @property {Teriock.ActorType} type
+ * @property {Teriock.Documents.ActorType} type
  * @property {"Actor"} documentName
  * @property {boolean} isOwner
  * @property {Teriock.UUID<TeriockActor>} uuid
@@ -57,7 +57,7 @@ export class BaseTeriockActor extends ParentDocument(CommonDocument(Actor)) {}
  * @property {EmbeddedCollection<string, TeriockEffect>} effects
  * @property {Readonly<TeriockEffect[]>} transferredEffects
  * @property {TeriockBaseItemData} system
- * @property {Teriock.ItemType} type
+ * @property {Teriock.Documents.ItemType} type
  * @property {"Item"} documentName
  * @property {boolean} isOwner
  * @property {Teriock.UUID<TeriockItem>} uuid
@@ -74,7 +74,7 @@ export class BaseTeriockItem extends ParentDocument(
  * @mixes ChildDocument
  * @implements {ActiveEffectData}
  * @property {TeriockBaseEffectData} system
- * @property {Teriock.EffectType} type
+ * @property {Teriock.Documents.EffectType} type
  * @property {"ActiveEffect"} documentName
  * @property {boolean} isOwner
  * @property {Teriock.UUID<TeriockEffect>} uuid

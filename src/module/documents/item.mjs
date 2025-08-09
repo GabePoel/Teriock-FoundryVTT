@@ -1,5 +1,5 @@
 import { createAbility } from "../helpers/create-effects.mjs";
-import { fetchCategoryMembers } from "../helpers/wiki.mjs";
+import { fetchCategoryMembers } from "../helpers/wiki/_module.mjs";
 import { BaseTeriockItem } from "./_base.mjs";
 
 const { api } = foundry.applications;

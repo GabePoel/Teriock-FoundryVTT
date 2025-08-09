@@ -2,17 +2,6 @@ import "./helpers/commands/_types";
 import "./data/_types";
 import "./applications/_types";
 import "./documents/_types";
-import * as Chat from "./types/chat";
-import * as Command from "./types/command";
-import * as DocumentTypes from "./types/document-types";
-import * as Messages from "./types/messages";
-import * as Metadata from "./types/metadata";
-import * as Parameters from "./types/parameters";
-import * as Queries from "./types/queries";
-import * as Rolls from "./types/rolls";
-import * as Ui from "./types/ui";
-import * as Updates from "./types/updates";
-import * as Wiki from "./types/wiki";
 
 declare global {
   // Base document classes
@@ -136,75 +125,6 @@ declare global {
   const TeriockResourceSheet: typeof import("./applications/sheets/_module.mjs").effect.ResourceSheet;
 
   namespace Teriock {
-    type Form = Parameters.Form;
-    type ActiveExecutionTime = Parameters.ActiveExecutionTime;
-    type ActorDataModelMetadata = DocumentTypes.ActorDataModelMetadata;
-    type ActorType = DocumentTypes.ActorType;
-    type Attribute = Parameters.Attribute;
-    type ChatOptions = Command.ChatOptions;
-    type ChatSpeakerData = Messages.ChatSpeakerData;
-    type CommandCallback = Command.CommandCallback;
-    type CommandExecuteContext = Command.CommandExecuteContext;
-    type CommandOptions = Command.CommandOptions;
-    type CommonRollOptions = Rolls.CommonRollOptions;
-    type Comparison = Parameters.Comparison;
-    type Comparator = Parameters.Comparator;
-    type ConditionKey = Parameters.ConditionKey;
-    type ConditionRollOptions = Rolls.ConditionRollOptions;
-    type ContextMenuEntry = Ui.ContextMenuEntry;
-    type CritRollOptions = Rolls.CritRollOptions;
-    type Delivery = Parameters.Delivery;
-    type EffectDataModelMetadata = DocumentTypes.EffectDataModelMetadata;
-    type EffectMetadata = Metadata.EffectMetadata;
-    type EffectTag = Parameters.EffectTag;
-    type EffectType = DocumentTypes.EffectType;
-    type Element = Parameters.Element;
-    type EquipmentClass = Parameters.EquipmentClass;
-    type EquipmentRollOptions = Rolls.EquipmentRollOptions;
-    type ExecutionTime = Parameters.ExecutionTime;
-    type Expansion = Parameters.Expansion;
-    type Field = Parameters.Field;
-    type Font = Parameters.Font;
-    type FunctionHook = Parameters.FunctionHook;
-    type GenericPropertyKey = Parameters.GenericPropertyKey;
-    type HTMLButtonConfig = Chat.HTMLButtonConfig;
-    type HackableBodyPart = Parameters.HackableBodyPart;
-    type IconStyle = Ui.IconStyle;
-    type Interaction = Parameters.Interaction;
-    type ItemDataModelMetadata = DocumentTypes.ItemDataModelMetadata;
-    type ItemType = DocumentTypes.ItemType;
-    type LightingAnimation = Parameters.LightingAnimation;
-    type MagicalPropertyKey = Parameters.MagicalPropertyKey;
-    type Maneuver = Parameters.Maneuver;
-    type MaterialPropertyKey = Parameters.MaterialPropertyKey;
-    type MessageBar = Messages.MessageBar;
-    type MessageBlock = Messages.MessageBlock;
-    type MessageOptions = Messages.MessageOptions;
-    type MessageParts = Messages.MessageParts;
-    type PassiveExecutionTime = Parameters.PassiveExecutionTime;
-    type Piercing = Parameters.Piercing;
-    type PolyhedralDie = Rolls.PolyhedralDie;
-    type PowerSource = Parameters.PowerSource;
-    type PowerType = Parameters.PowerType;
-    type PseudoHook = Parameters.PseudoHook;
-    type QueryAddToSustainingData = Queries.QueryAddToSustainingData;
-    type QueryInCombatExpirationData = Queries.QueryInCombatExpirationData;
-    type QuerySustainedExpirationData = Queries.QuerySustainedExpirationData;
-    type QueryResetAttackPenaltiesData = Queries.QueryResetAttackPenaltiesData;
-    type QueryTimeAdvanceData = Queries.QueryTimeAdvanceData;
-    type RankArchetype = Parameters.RankArchetype;
-    type RankClass = Parameters.RankClass;
-    type ReactiveExecutionTime = Parameters.ReactiveExecutionTime;
-    type SkipFunctions = Updates.SkipFunctions;
-    type SlowExecutionTime = Parameters.SlowExecutionTime;
-    type StatAttribute = Parameters.StatAttribute;
-    type Target = Parameters.Target;
-    type ThreeToggle = Ui.ThreeToggle;
-    type Tradecraft = Parameters.Tradecraft;
-    type WeaponClass = Parameters.WeaponClass;
-    type WeaponFightingStyle = Parameters.WeaponFightingStyle;
-    type WikiPullOptions = Wiki.WikiPullOptions;
-
     const __brand: unique symbol;
 
     /** FoundryVTT UUID */

@@ -19,7 +19,7 @@ export default class TeriockResourceData extends ConsumableDataMixin(
   /**
    * Metadata for this effect.
    *
-   * @type {Readonly<Teriock.EffectDataModelMetadata>}
+   * @type {Readonly<Teriock.Documents.EffectModelMetadata>}
    */
   static metadata = Object.freeze({
     consumable: true,

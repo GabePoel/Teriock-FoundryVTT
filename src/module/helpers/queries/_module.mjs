@@ -3,3 +3,4 @@ export { default as inCombatExpirationQuery } from "./in-combat-expiration-query
 export { default as resetAttackPenalties } from "./reset-attack-penalties-query.mjs";
 export { default as sustainedExpirationQuery } from "./sustained-expiration-query.mjs";
 export { default as timeAdvanceQuery } from "./time-advance-query.mjs";
+export { default as createHotbarFolderQuery } from "./create-hotbar-folder-query.mjs";

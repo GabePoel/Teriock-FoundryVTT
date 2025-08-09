@@ -19,6 +19,6 @@ declare module "./resource-data.mjs" {
     /** Roll Formula */
     rollFormula: string;
     /** Function Hook */
-    functionHook: Teriock.FunctionHook;
+    functionHook: Teriock.Parameters.Resource.FunctionHook;
   }
 }

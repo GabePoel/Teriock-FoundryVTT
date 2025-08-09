@@ -7,7 +7,7 @@ export type FeatSaveImprovementAmount = "proficiency" | "fluency";
  * Attribute improvement configuration
  */
 export interface AttributeImprovement {
-  attribute: Teriock.StatAttribute | null;
+  attribute: Teriock.Parameters.Actor.StatAttribute | null;
   minVal: number;
 }
 
@@ -15,7 +15,7 @@ export interface AttributeImprovement {
  * Feat save improvement configuration
  */
 export interface FeatSaveImprovement {
-  attribute: Teriock.Attribute | null;
+  attribute: Teriock.Parameters.Actor.Attribute | null;
   amount: FeatSaveImprovementAmount;
 }
 

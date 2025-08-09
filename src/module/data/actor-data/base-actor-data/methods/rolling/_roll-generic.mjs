@@ -7,8 +7,8 @@ import TeriockRoll from "../../../../../documents/roll.mjs";
  * - [Feat Interaction](https://wiki.teriock.com/index.php/Core:Feat_Interaction)
  *
  * @param {TeriockBaseActorData} actorData
- * @param {Teriock.Attribute} attribute - The attribute to roll a feat save for.
- * @param {Teriock.CommonRollOptions} [options] - Options for the roll.
+ * @param {Teriock.Parameters.Actor.Attribute} attribute - The attribute to roll a feat save for.
+ * @param {Teriock.RollOptions.CommonRoll} [options] - Options for the roll.
  * @private
  */
 export async function _rollFeatSave(actorData, attribute, options = {}) {
@@ -39,7 +39,7 @@ export async function _rollFeatSave(actorData, attribute, options = {}) {
  * - [Resistance](https://wiki.teriock.com/index.php/Ability:Resist_Effects)
  *
  * @param {TeriockBaseActorData} actorData
- * @param {Teriock.CommonRollOptions} [options] - Options for the roll.
+ * @param {Teriock.RollOptions.CommonRoll} [options] - Options for the roll.
  * @private
  */
 export async function _rollResistance(actorData, options = {}) {
@@ -76,7 +76,7 @@ export async function _rollResistance(actorData, options = {}) {
  * - [Immunity](https://wiki.teriock.com/index.php/Keyword:Immunity)
  *
  * @param {TeriockBaseActorData} actorData
- * @param {Teriock.CommonRollOptions} [options] - Options for the roll.
+ * @param {Teriock.RollOptions.CommonRoll} [options] - Options for the roll.
  * @private
  */
 export async function _rollImmunity(actorData, options = {}) {
@@ -98,8 +98,8 @@ export async function _rollImmunity(actorData, options = {}) {
  * - [Tradecrafts](https://wiki.teriock.com/index.php/Core:Tradecrafts)
  *
  * @param {TeriockBaseActorData} actorData
- * @param {Teriock.Tradecraft} tradecraft - The tradecraft to roll for.
- * @param {Teriock.CommonRollOptions} [options] - Options for the roll.
+ * @param {Teriock.Parameters.Fluency.Tradecraft} tradecraft - The tradecraft to roll for.
+ * @param {Teriock.RollOptions.CommonRoll} [options] - Options for the roll.
  * @private
  */
 export async function _rollTradecraft(actorData, tradecraft, options = {}) {

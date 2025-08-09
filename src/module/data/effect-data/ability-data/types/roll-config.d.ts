@@ -1,4 +1,3 @@
-import { CommonRollOptions } from "../../../../types/rolls";
 import type TeriockAbilityData from "../ability-data.mjs";
 import type TeriockActor from "../../../../documents/actor.mjs";
 import type TeriockBaseChatMessageSchema from "../../../message-data/base-message-data/_types";
@@ -8,7 +7,7 @@ export type AbilityUseData = {
   /** Actor using this ability. */
   actor: TeriockActor;
   /** Options for the ability roll. */
-  rollOptions: CommonRollOptions;
+  rollOptions: Teriock.RollOptions.CommonRoll;
   /** Costs spent on this use of the ability */
   costs: {
     /** Total amount of HP spent on this ability. */
@@ -43,7 +42,7 @@ export interface AbilityRollConfig {
     /** The HTML of the chat message. */
     content: string;
     /** Chat speaker data. */
-    speaker: Teriock.ChatSpeakerData;
+    speaker: Teriock.Foundry.ChatSpeakerData;
     /** Rolls to pass into the chat message. */
     rolls: TeriockRoll[];
     /** Chat Message Data */

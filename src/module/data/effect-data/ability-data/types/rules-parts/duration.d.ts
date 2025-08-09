@@ -14,7 +14,7 @@ export type Duration = {
   quantity: number;
   description: string;
   conditions: {
-    absent: Set<Teriock.ConditionKey>;
-    present: Set<Teriock.ConditionKey>;
+    absent: Set<Teriock.Parameters.Condition.Key>;
+    present: Set<Teriock.Parameters.Condition.Key>;
   };
 };

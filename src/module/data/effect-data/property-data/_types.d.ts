@@ -6,7 +6,7 @@ declare module "./property-data.mjs" {
     /** Parent */
     parent: TeriockProperty;
     /** Property Type */
-    form: Teriock.Form;
+    form: Teriock.Parameters.Shared.Form;
     /** Damage Type */
     damageType: string;
   }

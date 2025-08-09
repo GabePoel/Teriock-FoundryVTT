@@ -12,7 +12,7 @@ export class StandardDamageHandler extends ActionHandler {
   /**
    * @param {TeriockActor} actor
    * @param {string} formula - Roll formula
-   * @param {Teriock.EquipmentRollOptions} options
+   * @param {Teriock.RollOptions.EquipmentRoll} options
    * @private
    */
   async _makeRoll(actor, formula, options = {}) {

@@ -8,9 +8,9 @@ const { ItemSheetV2 } = foundry.applications.sheets;
  * Base item sheet for Teriock system items.
  * Provides common functionality for all item sheets.
  *
+ * @extends {ItemSheetV2}
  * @property {TeriockItem} document
  * @property {TeriockItem} item
- * @extends {ItemSheetV2}
  */
 export default class TeriockBaseItemSheet extends SheetMixin(ItemSheetV2) {
   /**

@@ -8,7 +8,7 @@ import { conditions } from "../src/module/helpers/constants/generated/conditions
 import { magicalProperties } from "../src/module/helpers/constants/generated/magical-properties.mjs";
 import { materialProperties } from "../src/module/helpers/constants/generated/material-properties.mjs";
 import { properties } from "../src/module/helpers/constants/generated/properties.mjs";
-import { fetchWikiPageHTML } from "../src/module/helpers/wiki.mjs";
+import { fetchWikiPageHTML } from "../src/module/helpers/wiki/_module.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);

@@ -1,7 +1,7 @@
 /**
  * A helper method for constructing an HTML button based on given parameters.
  *
- * @param {Teriock.HTMLButtonConfig} config Options forwarded to the button
+ * @param {Teriock.UI.HTMLButtonConfig} config Options forwarded to the button
  * @returns {HTMLButtonElement}
  */
 export function buildHTMLButton({

@@ -25,9 +25,9 @@ const { ActorSheetV2 } = foundry.applications.sheets;
  * Provides comprehensive character management including abilities, equipment, tradecrafts,
  * and various interactive features like rolling, damage tracking, and condition management.
  *
+ * @extends {ActorSheetV2}
  * @property {TeriockActor} actor
  * @property {TeriockActor} document
- * @extends {ActorSheetV2}
  */
 export default class TeriockBaseActorSheet extends SheetMixin(ActorSheetV2) {
   /** @inheritDoc */
@@ -749,7 +749,7 @@ export default class TeriockBaseActorSheet extends SheetMixin(ActorSheetV2) {
    */
   static async _takeHack(event, target) {
     event.stopPropagation();
-    const part = /** @type {Teriock.HackableBodyPart} */ target.dataset.part;
+    const part = /** @type {Teriock.Parameters.Actor.HackableBodyPart} */ target.dataset.part;
     await this.actor.takeHack(part);
   }
 
@@ -762,7 +762,7 @@ export default class TeriockBaseActorSheet extends SheetMixin(ActorSheetV2) {
    */
   static async _attack(event) {
     event.stopPropagation();
-    /** @type {Teriock.CommonRollOptions} */
+    /** @type {Teriock.RollOptions.CommonRoll} */
     const options = {
       advantage: Boolean(event.altKey),
       disadvantage: Boolean(event.shiftKey),
@@ -812,7 +812,7 @@ export default class TeriockBaseActorSheet extends SheetMixin(ActorSheetV2) {
         message = img.alt;
       }
     }
-    /** @type {Teriock.CommonRollOptions} */
+    /** @type {Teriock.RollOptions.CommonRoll} */
     const options = {
       advantage: event.altKey,
       disadvantage: event.shiftKey,
@@ -1106,7 +1106,7 @@ export default class TeriockBaseActorSheet extends SheetMixin(ActorSheetV2) {
       el.addEventListener("contextmenu", async (e) => {
         e.preventDefault();
         if (!(el instanceof HTMLElement)) return;
-        const part = /** @type {Teriock.HackableBodyPart} */ el.dataset.part;
+        const part = /** @type {Teriock.Parameters.Actor.HackableBodyPart} */ el.dataset.part;
         await this.actor.takeUnhack(part);
         e.stopPropagation();
       });

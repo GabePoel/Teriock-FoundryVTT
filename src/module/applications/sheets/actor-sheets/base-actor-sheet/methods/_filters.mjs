@@ -1,7 +1,7 @@
 /**
  * Applies a binary filter to a value based on filter criteria.
  * Handles boolean and numeric filter values with different logic.
- * @param {Teriock.ThreeToggle} filterVal - The filter value to apply.
+ * @param {Teriock.UI.ThreeToggle} filterVal - The filter value to apply.
  * @param {boolean|string|number} actualVal - The actual value to filter.
  * @returns {boolean} True if the value passes the filter, false otherwise.
  */

@@ -173,7 +173,7 @@ export interface TeriockBaseActorDefault {
   /** Presence */
   presence: BarData;
   /** Tradecrafts */
-  tradecrafts: Record<Teriock.Tradecraft, TradecraftData>;
+  tradecrafts: Record<Teriock.Parameters.Fluency.Tradecraft, TradecraftData>;
   /** Resistances */
   resistances: ProtectionData;
   /** Immunities */

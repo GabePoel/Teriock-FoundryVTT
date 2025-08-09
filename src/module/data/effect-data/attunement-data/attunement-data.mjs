@@ -15,7 +15,7 @@ export default class TeriockAttunementData extends TeriockBaseEffectData {
   /**
    * Metadata for this effect.
    *
-   * @type {Readonly<Teriock.EffectDataModelMetadata>}
+   * @type {Readonly<Teriock.Documents.EffectModelMetadata>}
    */
   static metadata = Object.freeze({
     consumable: false,

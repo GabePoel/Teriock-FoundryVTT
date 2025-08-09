@@ -6,8 +6,8 @@ declare module "./fluency-data.mjs" {
     /** Parent */
     parent: TeriockFluency;
     /** Tradecraft field */
-    field: Teriock.Field;
+    field: Teriock.Parameters.Fluency.Field;
     /** Tradecraft */
-    tradecraft: Teriock.Tradecraft;
+    tradecraft: Teriock.Parameters.Fluency.Tradecraft;
   }
 }

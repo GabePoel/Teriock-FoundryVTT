@@ -13,14 +13,14 @@ export interface TeriockAbilityRulesSchema {
   elderSorceryIncant: string;
 
   // Core ability properties
-  powerSources: Teriock.PowerSource[];
-  interaction: Teriock.Interaction;
-  featSaveAttribute: Teriock.Attribute;
-  maneuver: Teriock.Maneuver;
-  executionTime: Teriock.ExecutionTime;
+  powerSources: Teriock.Parameters.Ability.PowerSource[];
+  interaction: Teriock.Parameters.Ability.Interaction;
+  featSaveAttribute: Teriock.Parameters.Actor.Attribute;
+  maneuver: Teriock.Parameters.Ability.Maneuver;
+  executionTime: Teriock.Parameters.Ability.ExecutionTime;
   delivery: DeliveryConfig;
-  targets: Teriock.Target[];
-  elements: Teriock.Element[];
+  targets: Teriock.Parameters.Ability.Target[];
+  elements: Teriock.Parameters.Ability.Element[];
   duration: Duration;
   sustained: boolean;
   range: string | null;
@@ -36,7 +36,7 @@ export interface TeriockAbilityRulesSchema {
   trigger: string;
 
   // Combat properties
-  piercing: Teriock.Piercing;
+  piercing: Teriock.Parameters.Ability.Piercing;
   improvements: ImprovementsConfig;
 
   // Ability types
@@ -44,17 +44,17 @@ export interface TeriockAbilityRulesSchema {
   spell: boolean;
   standard: boolean;
   ritual: boolean;
-  class: Teriock.RankClass;
+  class: Teriock.Parameters.Rank.RankClass;
   rotator: boolean;
   invoked: boolean;
   basic: boolean;
-  form: Teriock.Form;
-  effects: Teriock.EffectTag[];
+  form: Teriock.Parameters.Shared.Form;
+  effects: Teriock.Parameters.Ability.EffectTag[];
 
   // Expansion
-  expansion: Teriock.Expansion | null;
+  expansion: Teriock.Parameters.Ability.Expansion | null;
   expansionRange: string | null;
-  expansionSaveAttribute: Teriock.Attribute;
+  expansionSaveAttribute: Teriock.Parameters.Actor.Attribute;
 
   // Costs
   costs: CostsConfig;

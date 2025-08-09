@@ -14,12 +14,13 @@ declare module "./base-effect-data.mjs" {
     /** Suppression */
     suppression: {
       statuses: {
-        active: Set<Teriock.ConditionKey>;
-        inactive: Set<Teriock.ConditionKey>;
+        active: Set<Teriock.Parameters.Condition.Key>;
+        inactive: Set<Teriock.Parameters.Condition.Key>;
       };
+      // Deprecated?
       comparisons: {
-        actor: Teriock.Comparator[];
-        item: Teriock.Comparator[];
+        actor: Teriock.Parameters.Shared.Comparator[];
+        item: Teriock.Parameters.Shared.Comparator[];
       };
     };
     hierarchy: Partial<HierarchyField>;

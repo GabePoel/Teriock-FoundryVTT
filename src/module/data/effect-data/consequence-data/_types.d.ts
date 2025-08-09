@@ -15,7 +15,7 @@ declare module "./consequence-data.mjs" {
     source: string;
     expirations: {
       condition: {
-        value: Teriock.ConditionKey | null;
+        value: Teriock.Parameters.Condition.Key | null;
         present: boolean;
       };
       /** Expirations based on combat timing. */

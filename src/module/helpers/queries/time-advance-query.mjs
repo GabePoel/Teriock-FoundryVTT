@@ -1,7 +1,7 @@
 /**
  * Query that gets the {@link TeriockUser} to advance game time.
  *
- * @param {Teriock.QueryTimeAdvanceData} queryData
+ * @param {Teriock.QueryData.TimeAdvance} queryData
  * @param {{timeout?: number}} timeout
  * @returns {Promise<void>}
  */

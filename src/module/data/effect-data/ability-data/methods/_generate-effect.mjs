@@ -282,7 +282,7 @@ export function _generateTakes(abilityData, heightenAmount = 0) {
 
   return {
     rolls: /** @type {ConsequenceRolls} */ rolls,
-    hacks: /** @type {Set<Teriock.HackableBodyPart>} */ hacks,
+    hacks: /** @type {Set<Teriock.Parameters.Actor.HackableBodyPart>} */ hacks,
     checks: /** @type {Set<string>} */ checks,
     startStatuses: /** @type {Set<string>} */ startStatuses,
     endStatuses: /** @type {Set<string>} */ endStatuses,

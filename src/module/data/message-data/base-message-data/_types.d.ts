@@ -5,7 +5,7 @@ export default interface TeriockBaseChatMessageSchema {
   parent: TeriockMessage;
   overlay: string;
   columns: number;
-  buttons: Teriock.HTMLButtonConfig[];
+  buttons: Teriock.UI.HTMLButtonConfig[];
   tags: string[];
   extraContent: string;
   source: Teriock.UUID<any>;

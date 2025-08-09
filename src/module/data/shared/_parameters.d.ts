@@ -1,0 +1,21 @@
+import type { abilityOptions } from "../../helpers/constants/ability-options.mjs";
+import type { fonts } from "../../helpers/constants/fonts.mjs";
+
+declare global {
+  namespace Teriock.Parameters.Shared {
+    /** Form */
+    export type Form = keyof typeof abilityOptions.form;
+    /** Font */
+    export type Font = keyof typeof fonts;
+
+    /** Comparison */
+    export type Comparison = "=" | "!=" | ">" | "<" | ">=" | "<=";
+
+    /** Comparator */
+    export type Comparator = {
+      key: string;
+      comparison: Teriock.Parameters.Shared.Comparison;
+      value: any;
+    };
+  }
+}

@@ -1,4 +1,4 @@
-import { TeriockFolder, TeriockMacro } from "../../documents/_module.mjs";
+import { TeriockMacro } from "../../documents/_module.mjs";
 import { hotbarDropDialog } from "../dialogs/_module.mjs";
 
 const { Hotbar } = foundry.applications.ui;
@@ -47,27 +47,15 @@ export default class TeriockHotbar extends Hotbar {
           await item.use(options);`;
       }
       command = game.teriock.api.utils.dedent(command);
+      const activeGm = /** @type {TeriockUser} */ game.users.activeGM;
+      await activeGm.query("teriock.createHotbarFolder", {
+        name: game.user.name,
+      });
       const folders =
         /** @type {Collection<string, TeriockFolder>} */ game.folders;
-      let macroFolder = folders.find(
-        (f) => f.name === "Player Macros" && f.type === "Macro",
-      );
-      if (!macroFolder) {
-        macroFolder = await TeriockFolder.create({
-          name: "Player Macros",
-          type: "Macro",
-        });
-      }
       let macroSubFolder = folders.find(
         (f) => f.name === `${game.user.name}'s Macros`,
       );
-      if (!macroSubFolder) {
-        macroSubFolder = await TeriockFolder.create({
-          name: `${game.user.name}'s Macros`,
-          type: "Macro",
-          folder: macroFolder,
-        });
-      }
       const macros =
         /** @type {Collection<string, TeriockMacro>} */ game.macros;
       let macro = macros.find(

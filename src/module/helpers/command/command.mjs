@@ -3,7 +3,7 @@
  * Strips known option flags and returns the rest as `rawArgs`.
  *
  * @param {string[]} args - Raw chat args
- * @returns {Teriock.ChatOptions} - Parsed options
+ * @returns {Teriock.Command.ChatOptions} - Parsed options
  */
 function parseRollOptions(args) {
   const optionFlags = ["advantage", "disadvantage", "twoHanded"];
@@ -31,8 +31,8 @@ export default class TeriockCommand {
    *
    * @param {string} id - Unique identifier for the command (e.g., "damage").
    * @param {string} docs - Help string for the command.
-   * @param {Teriock.CommandCallback} callback - Async function to run the command logic.
-   * @param {Teriock.CommandOptions} [options={}] - Additional options for the command.
+   * @param {Teriock.Command.Callback} callback - Async function to run the command logic.
+   * @param {Teriock.Command.Options} [options={}] - Additional options for the command.
    */
   constructor(id, docs, callback, options = {}) {
     this.id = id;
@@ -44,12 +44,9 @@ export default class TeriockCommand {
   }
 
   /**
-   * Execute the command, handling roll options and common checks.
+   * Execute the command, handling roll options, and common checks.
    *
-   * @param {object} context
-   * @param {string[]} context.args - The arguments from the chat message.
-   * @param {object} context.chatData - The original chat message data.
-   * @param {TeriockActor[]} context.actors - Targeted actorsUuids.
+   * @param {Teriock.Command.ExecuteContext} context
    */
   async execute({ args, chatData, actors }) {
     if (this.requiresTarget && (!actors || actors.length === 0)) {

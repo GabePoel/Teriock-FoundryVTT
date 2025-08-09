@@ -27,7 +27,7 @@ export default class TeriockEquipmentData extends WikiDataMixin(
   /**
    * Metadata for this item.
    *
-   * @type {Readonly<Teriock.ItemDataModelMetadata>}
+   * @type {Readonly<Teriock.Documents.ItemModelMetadata>}
    */
   static metadata = Object.freeze({
     consumable: true,

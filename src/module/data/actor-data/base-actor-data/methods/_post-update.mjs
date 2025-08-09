@@ -13,7 +13,7 @@ import { encumbranceData } from "../../../../content/encumbrance.mjs";
  * 5. **Expiration Monitoring**: Checks and processes expiration effects
  *
  * @param {TeriockBaseActorData} system - The actor's base data system object
- * @param {Teriock.SkipFunctions} skipFunctions - Functions that should be skipped
+ * @param {Teriock.Parameters.Actor.SkipFunctions} skipFunctions - Functions that should be skipped
  * @returns {Promise<void>} Resolves when all post-update operations are complete
  * @private
  */

@@ -3,7 +3,7 @@
  * Creates formatted display elements for tradecraft information and description.
  *
  * @param {TeriockFluencyData} fluencyData - The fluency data to generate message parts for.
- * @returns {Partial<Teriock.MessageParts>} Object containing bars and blocks for the fluency message.
+ * @returns {Partial<Teriock.MessageData.Parts>} Object containing bars and blocks for the fluency message.
  * @private
  */
 export function _messageParts(fluencyData) {

@@ -1,5 +1,5 @@
-import { TeriockActor } from "./documents/_module.mjs";
-import type { AbilityRollConfig } from "./data/effect-data/ability-data/types/roll-config";
+import { TeriockActor } from "../documents/_module.mjs";
+import type { AbilityRollConfig } from "../data/effect-data/ability-data/types/roll-config";
 
 declare global {
   // Definition for writing macros.

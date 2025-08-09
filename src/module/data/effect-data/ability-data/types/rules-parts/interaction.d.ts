@@ -23,7 +23,7 @@ export type DeliveryParent = "item" | null;
  * Delivery configuration
  */
 export interface DeliveryConfig {
-  base: Teriock.Delivery;
+  base: Teriock.Parameters.Ability.Delivery;
   parent: DeliveryParent;
   package: DeliveryPackage;
 }

@@ -6,7 +6,7 @@ import { secondsToReadable } from "../../../../helpers/utils.mjs";
  * Creates formatted display elements for tradecraft information and description.
  *
  * @param {TeriockConsequenceData} consequenceData - The fluency data to generate message parts for.
- * @returns {Partial<Teriock.MessageParts>} Object containing bars and blocks for the fluency message.
+ * @returns {Partial<Teriock.MessageData.Parts>} Object containing bars and blocks for the fluency message.
  * @private
  */
 export function _messageParts(consequenceData) {

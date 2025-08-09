@@ -31,7 +31,7 @@ export default (Base) => {
     /**
      * Execute all macros for a given pseudo-hook and call a regular hook with the same name.
      *
-     * @param {Teriock.PseudoHook} name - The name of the pseudo-hook and hook to call.
+     * @param {Teriock.Parameters.Actor.PseudoHook} name - The name of the pseudo-hook and hook to call.
      * @param {...any[]} args - Arguments to pass to the pseudo-hook macros and the hook.
      */
     async hookCall(name, ...args) {

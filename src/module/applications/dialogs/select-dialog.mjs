@@ -96,7 +96,7 @@ export async function selectDialog(choices, options = {}) {
 /**
  * Select equipment class dialog.
  *
- * @returns {Promise<Teriock.EquipmentClass>}
+ * @returns {Promise<Teriock.Parameters.Equipment.EquipmentClass>}
  */
 export async function selectEquipmentClassDialog() {
   return await selectDialog(equipmentclasses, {
@@ -109,7 +109,7 @@ export async function selectEquipmentClassDialog() {
 /**
  * Select weapon class dialog.
  *
- * @returns {Promise<Teriock.WeaponClass>}
+ * @returns {Promise<Teriock.Parameters.Equipment.WeaponClass>}
  */
 export async function selectWeaponClassDialog() {
   return await selectDialog(weaponclasses, {
@@ -122,7 +122,7 @@ export async function selectWeaponClassDialog() {
 /**
  * Select condition dialog.
  *
- * @returns {Promise<Teriock.ConditionKey>}
+ * @returns {Promise<Teriock.Parameters.Condition.Key>}
  */
 export async function selectConditionDialog() {
   return await selectDialog(conditions, {
@@ -135,7 +135,7 @@ export async function selectConditionDialog() {
 /**
  * Select property dialog.
  *
- * @returns {Promise<Teriock.GenericPropertyKey|Teriock.MaterialPropertyKey|Teriock.MagicalPropertyKey>}
+ * @returns {Promise<Teriock.Parameters.Equipment.PropertyKey>}
  */
 export async function selectPropertyDialog() {
   return await selectDialog(
@@ -156,7 +156,7 @@ export async function selectPropertyDialog() {
 /**
  * Select tradecraft dialog.
  *
- * @returns {Promise<Teriock.Tradecraft>}
+ * @returns {Promise<Teriock.Parameters.Fluency.Tradecraft>}
  */
 export async function selectTradecraftDialog() {
   return await selectDialog(CONFIG.TERIOCK.tradecraftOptionsList, {

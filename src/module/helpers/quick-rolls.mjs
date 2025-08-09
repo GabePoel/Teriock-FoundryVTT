@@ -12,7 +12,7 @@ import TeriockRoll from "../documents/roll.mjs";
 export async function harmRoll(formula, rollData = {}, message = "") {
   const roll = new TeriockRoll(formula, rollData);
   await roll.evaluate();
-  const buttons = /** @type {Teriock.HTMLButtonConfig[]} */ [
+  const buttons = /** @type {Teriock.UI.HTMLButtonConfig[]} */ [
     {
       label: "Damage",
       icon: "fas fa-heart",

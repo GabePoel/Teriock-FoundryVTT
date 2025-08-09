@@ -53,7 +53,7 @@ export interface BaseActorSheetSettings {
   equipmentSortAscending: boolean;
 
   /** Whether the rules text for a given condition is expanded or collapsed. */
-  conditionExpansions: Record<Teriock.ConditionKey, boolean>;
+  conditionExpansions: Record<Teriock.Parameters.Condition.Key, boolean>;
 }
 
 /**
@@ -63,53 +63,53 @@ export interface AbilityFilters {
   /** Currently applied search term. */
   search: string;
   /** Show, hide, or don't filter based on if basic. */
-  basic: Teriock.ThreeToggle;
+  basic: Teriock.UI.ThreeToggle;
   /** Show, hide, or don't filter based on if standard. */
-  standard: Teriock.ThreeToggle;
+  standard: Teriock.UI.ThreeToggle;
   /** Show, hide, or don't filter based on if a skill. */
-  skill: Teriock.ThreeToggle;
+  skill: Teriock.UI.ThreeToggle;
   /** Show, hide, or don't filter based on if a spell. */
-  spell: Teriock.ThreeToggle;
+  spell: Teriock.UI.ThreeToggle;
   /** Show, hide, or don't filter based on if a ritual. */
-  ritual: Teriock.ThreeToggle;
+  ritual: Teriock.UI.ThreeToggle;
   /** Show, hide, or don't filter based on if a rotator. */
-  rotator: Teriock.ThreeToggle;
+  rotator: Teriock.UI.ThreeToggle;
   /** Show, hide, or don't filter based on if verbal cost. */
-  verbal: Teriock.ThreeToggle;
+  verbal: Teriock.UI.ThreeToggle;
   /** Show, hide, or don't filter based on if somatic cost. */
-  somatic: Teriock.ThreeToggle;
+  somatic: Teriock.UI.ThreeToggle;
   /** Show, hide, or don't filter based on if material cost. */
-  material: Teriock.ThreeToggle;
+  material: Teriock.UI.ThreeToggle;
   /** Show, hide, or don't filter based on if invoked. */
-  invoked: Teriock.ThreeToggle;
+  invoked: Teriock.UI.ThreeToggle;
   /** Show, hide, or don't filter based on if sustained. */
-  sustained: Teriock.ThreeToggle;
+  sustained: Teriock.UI.ThreeToggle;
   /** Show, hide, or don't filter based on if break cost. */
-  broken: Teriock.ThreeToggle;
+  broken: Teriock.UI.ThreeToggle;
   /** Show, hide, or don't filter based on if HP cost. */
-  hp: Teriock.ThreeToggle;
+  hp: Teriock.UI.ThreeToggle;
   /** Show, hide, or don't filter based on if MP cost. */
-  mp: Teriock.ThreeToggle;
+  mp: Teriock.UI.ThreeToggle;
   /** Show, hide, or don't filter based on if heightenable. */
-  heightened: Teriock.ThreeToggle;
+  heightened: Teriock.UI.ThreeToggle;
   /** Show, hide, or don't filter based on if expansion. */
-  expansion: Teriock.ThreeToggle;
+  expansion: Teriock.UI.ThreeToggle;
   /** If filter is applied, which maneuver is displayed. */
-  maneuver: Teriock.Maneuver | null;
+  maneuver: Teriock.Parameters.Ability.Maneuver | null;
   /** If filter is applied, which interaction is displayed. */
-  interaction: Teriock.Interaction | null;
+  interaction: Teriock.Parameters.Ability.Interaction | null;
   /** If filter is applied, which power source type is displayed. */
-  powerSource: Teriock.PowerSource | null;
+  powerSource: Teriock.Parameters.Ability.PowerSource | null;
   /** If filter is applied, which element is displayed. */
-  element: Teriock.Element | null;
+  element: Teriock.Parameters.Ability.Element | null;
   /** If filter is applied, which effect type is displayed. */
-  effects: Teriock.EffectTag | null;
+  effects: Teriock.Parameters.Ability.EffectTag | null;
   /** If filter is applied, which delivery is displayed. */
-  delivery: Teriock.Delivery | null;
+  delivery: Teriock.Parameters.Ability.Delivery | null;
   /** If filter is applied, which piercing type is displayed. */
   piercing: string | null;
   /** If filter is applied, which target is displayed. */
-  target: Teriock.Target | null;
+  target: Teriock.Parameters.Ability.Target | null;
 }
 
 /**
@@ -119,23 +119,23 @@ export interface EquipmentFilters {
   /** Currently applied search term. */
   search: string;
   /** Show, hide, or don't filter based on if equipped. */
-  equipped: Teriock.ThreeToggle;
+  equipped: Teriock.UI.ThreeToggle;
   /** Show, hide, or don't filter based on if shattered. */
-  shattered: Teriock.ThreeToggle;
+  shattered: Teriock.UI.ThreeToggle;
   /** Show, hide, or don't filter based on if consumable. */
-  consumable: Teriock.ThreeToggle;
+  consumable: Teriock.UI.ThreeToggle;
   /** Show, hide, or don't filter based on if identified. */
-  identified: Teriock.ThreeToggle;
+  identified: Teriock.UI.ThreeToggle;
   /** If filter is applied, which property is displayed. */
-  properties: Teriock.GenericPropertyKey | null;
+  properties: Teriock.Parameters.Equipment.GenericPropertyKey | null;
   /** If filter is applied, which material property is displayed. */
-  materialProperties: Teriock.MaterialPropertyKey | null;
+  materialProperties: Teriock.Parameters.Equipment.MaterialPropertyKey | null;
   /** If filter is applied, which magical property is displayed. */
-  magicalProperties: Teriock.MagicalPropertyKey | null;
+  magicalProperties: Teriock.Parameters.Equipment.MagicalPropertyKey | null;
   /** If filter is applied, which weapon fighting style is displayed. */
-  weaponFightingStyles: Teriock.WeaponFightingStyle | null;
+  weaponFightingStyles: Teriock.Parameters.Equipment.WeaponFightingStyle | null;
   /** If filter is applied, which equipment class is displayed. */
-  equipmentClasses: Teriock.EquipmentClass | null;
+  equipmentClasses: Teriock.Parameters.Equipment.EquipmentClass | null;
   /** If filter is applied, which power level is displayed. */
   powerLevel: string | null;
 }

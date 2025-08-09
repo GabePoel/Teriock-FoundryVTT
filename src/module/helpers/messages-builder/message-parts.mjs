@@ -169,7 +169,7 @@ function barIcon(parent, iconClass, label, first = true) {
 /**
  * Adds an embedded block for a specific entity type to the blocks array.
  * @param {Array} entities - Array of entities to filter and process.
- * @param {Teriock.MessageBlock[]} blocks - Array to add the generated block to.
+ * @param {Teriock.MessageData.Block[]} blocks - Array to add the generated block to.
  * @param {string} name - The name/title for the block.
  * @param {string} typeKey - The type key to filter entities by.
  * @param {string} iconFallback - Fallback icon class if no specific icon is found.

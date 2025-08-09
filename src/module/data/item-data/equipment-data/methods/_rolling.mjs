@@ -19,7 +19,7 @@ export async function _roll(equipmentData, options) {
  * Handles damage formula construction, damage types, and roll options.
  *
  * @param {TeriockEquipmentData} equipmentData - The equipment data to roll for.
- * @param {Teriock.EquipmentRollOptions} options - Options for the equipment roll including twoHanded, bonusDamage,
+ * @param {Teriock.RollOptions.EquipmentRoll} options - Options for the equipment roll including twoHanded, bonusDamage,
  *   advantage, and secret.
  * @returns {Promise<void>} Promise that resolves when the roll message is sent.
  * @private

@@ -11,9 +11,9 @@ declare module "./action-handler.mjs" {
     dataset: DOMStringMap;
 
     /** Common Roll Options */
-    commonRollOptions: Teriock.CommonRollOptions;
+    commonRollOptions: Teriock.RollOptions.CommonRoll;
     /** Crit Roll Options */
-    critRollOptions: Teriock.CritRollOptions;
+    critRollOptions: Teriock.RollOptions.CritRoll;
 
     /** Selected Tokens */
     selectedTokens: TeriockTokenDocument[];

@@ -13,7 +13,7 @@ import * as hooks from "./helpers/hooks/_module.mjs";
 import * as queries from "./helpers/queries/_module.mjs";
 import registerTemplates from "./helpers/register-templates.mjs";
 import * as utils from "./helpers/utils.mjs";
-import * as wiki from "./helpers/wiki.mjs";
+import * as wiki from "./helpers/wiki/_module.mjs";
 
 const { ActorSheet, ItemSheet } = foundry.appv1.sheets;
 const { DocumentSheetConfig } = foundry.applications.apps;
@@ -210,6 +210,7 @@ foundry.helpers.Hooks.once("init", function () {
     "teriock.resetAttackPenalties": queries.resetAttackPenalties,
     "teriock.sustainedExpiration": queries.sustainedExpirationQuery,
     "teriock.timeAdvance": queries.timeAdvanceQuery,
+    "teriock.createHotbarFolder": queries.createHotbarFolderQuery,
   });
 
   const packs =

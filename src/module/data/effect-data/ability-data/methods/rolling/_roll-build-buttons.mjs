@@ -6,7 +6,7 @@ import { _generateEffect, _generateTakes } from "../_generate-effect.mjs";
  * Creates buttons for feat saves, effects, resistance, and various take actions.
  *
  * @param {AbilityRollConfig} rollConfig - Configurations for this ability usage.
- * @returns {Promise<Teriock.HTMLButtonConfig[]>} Promise that resolves to an array of button configurations.
+ * @returns {Promise<Teriock.UI.HTMLButtonConfig[]>} Promise that resolves to an array of button configurations.
  * @private
  */
 export async function _buildButtons(rollConfig) {
@@ -176,7 +176,7 @@ export async function _buildButtons(rollConfig) {
 /**
  * Button configurations for different rollable take types.
  *
- * @type {Record<string,Teriock.HTMLButtonConfig>}
+ * @type {Record<string,Teriock.UI.HTMLButtonConfig>}
  */
 const ROLL_BUTTON_CONFIGS = {
   damage: { label: "Roll Damage", icon: "fas fa-heart" },
@@ -196,7 +196,7 @@ const ROLL_BUTTON_CONFIGS = {
 /**
  * Button configurations for different hacks.
  *
- * @type {Record<string,Teriock.HTMLButtonConfig>}
+ * @type {Record<string,Teriock.UI.HTMLButtonConfig>}
  */
 const HACK_BUTTON_CONFIGS = {
   arm: { label: "Hack Arm", icon: "fas fa-hand" },

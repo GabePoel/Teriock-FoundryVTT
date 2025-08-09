@@ -6,7 +6,6 @@ import * as hacks from "./methods/consequences/_take-hacks.mjs";
 import * as numericals from "./methods/consequences/_take-numericals.mjs";
 import * as oneOffs from "./methods/consequences/_take-one-offs.mjs";
 import { _prepareDerivedData } from "./methods/derived-data/_derived-data.mjs";
-import { _rollCondition } from "./methods/rolling/_roll-condition.mjs";
 import * as rollGeneric from "./methods/rolling/_roll-generic.mjs";
 import { _defineSchema } from "./methods/schema/_schema.mjs";
 
@@ -41,7 +40,7 @@ export default class TeriockBaseActorData extends TypeDataModel {
   /**
    * Performs post-update operations for the actor.
    *
-   * @param {Teriock.SkipFunctions} skipFunctions - Functions that should be skipped.
+   * @param {Teriock.Parameters.Actor.SkipFunctions} skipFunctions - Functions that should be skipped.
    * @returns {Promise<void>} Resolves when all post-update operations are complete
    */
   async postUpdate(skipFunctions) {
@@ -207,7 +206,7 @@ export default class TeriockBaseActorData extends TypeDataModel {
    * Relevant wiki pages:
    * - [Hack](https://wiki.teriock.com/index.php/Damage:Hack)
    *
-   * @param {Teriock.HackableBodyPart} part - The part to hack.
+   * @param {Teriock.Parameters.Actor.HackableBodyPart} part - The part to hack.
    * @returns {Promise<void>} Promise that resolves when hack is applied.
    */
   async takeHack(part) {
@@ -220,7 +219,7 @@ export default class TeriockBaseActorData extends TypeDataModel {
    * Relevant wiki pages:
    * - [Hack](https://wiki.teriock.com/index.php/Damage:Hack)
    *
-   * @param {Teriock.HackableBodyPart} part - The part to unhack.
+   * @param {Teriock.Parameters.Actor.HackableBodyPart} part - The part to unhack.
    * @returns {Promise<void>} Promise that resolves when unhack is applied.
    */
   async takeUnhack(part) {
@@ -252,27 +251,13 @@ export default class TeriockBaseActorData extends TypeDataModel {
   }
 
   /**
-   * Rolls a condition check for the actor.
-   *
-   * Relevant wiki pages:
-   * - [Conditions](https://wiki.teriock.com/index.php/Category:Conditions)
-   *
-   * @param {Teriock.ConditionKey} condition - The condition to roll for.
-   * @param {Teriock.ConditionRollOptions} [options] - Options for the condition roll.
-   * @returns {Promise<void>} Promise that resolves when the condition roll is complete.
-   */
-  async rollCondition(condition, options) {
-    await _rollCondition(this, condition, options);
-  }
-
-  /**
    * Rolls a feat save for the specified attribute.
    *
    * Relevant wiki pages:
    * - [Feat Interaction](https://wiki.teriock.com/index.php/Core:Feat_Interaction)
    *
-   * @param {Teriock.Attribute} attribute - The attribute to roll a feat save for.
-   * @param {Teriock.CommonRollOptions} [options] - Options for the roll.
+   * @param {Teriock.Parameters.Actor.Attribute} attribute - The attribute to roll a feat save for.
+   * @param {Teriock.RollOptions.CommonRoll} [options] - Options for the roll.
    * @returns {Promise<void>}
    */
   async rollFeatSave(attribute, options = {}) {
@@ -285,7 +270,7 @@ export default class TeriockBaseActorData extends TypeDataModel {
    * Relevant wiki pages:
    * - [Resistance](https://wiki.teriock.com/index.php/Ability:Resist_Effects)
    *
-   * @param {Teriock.CommonRollOptions} [options] - Options for the roll.
+   * @param {Teriock.RollOptions.CommonRoll} [options] - Options for the roll.
    * @returns {Promise<void>}
    */
   async rollResistance(options = {}) {
@@ -298,7 +283,7 @@ export default class TeriockBaseActorData extends TypeDataModel {
    * Relevant wiki pages:
    * - [Immunity](https://wiki.teriock.com/index.php/Keyword:Immunity)
    *
-   * @param {Teriock.CommonRollOptions} [options] - Options for the roll.
+   * @param {Teriock.RollOptions.CommonRoll} [options] - Options for the roll.
    * @returns {Promise<void>}
    */
   async rollImmunity(options = {}) {
@@ -311,8 +296,8 @@ export default class TeriockBaseActorData extends TypeDataModel {
    * Relevant wiki pages:
    * - [Tradecrafts](https://wiki.teriock.com/index.php/Core:Tradecrafts)
    *
-   * @param {Teriock.Tradecraft} tradecraft - The tradecraft to roll for.
-   * @param {Teriock.CommonRollOptions} [options] - Options for the roll.
+   * @param {Teriock.Parameters.Fluency.Tradecraft} tradecraft - The tradecraft to roll for.
+   * @param {Teriock.RollOptions.CommonRoll} [options] - Options for the roll.
    * @returns {Promise<void>}
    */
   async rollTradecraft(tradecraft, options = {}) {

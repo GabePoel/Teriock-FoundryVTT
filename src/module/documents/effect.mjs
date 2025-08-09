@@ -24,7 +24,7 @@ export default class TeriockEffect extends BaseTeriockEffect {
   /**
    * Metadata for this effect.
    *
-   * @returns {Teriock.EffectDataModelMetadata}
+   * @returns {Teriock.Documents.EffectModelMetadata}
    */
   get metadata() {
     const defaultMetadata = {
