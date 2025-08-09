@@ -64,7 +64,7 @@ export default class TeriockImageSheet extends api.HandlebarsApplicationMixin(
 
   /**
    * Handles the render event for the image sheet.
-   * Sets up context menu for image interactions.
+   * Sets up the context menu for image interactions.
    * @param {object} context - The render context.
    * @param {object} options - Render options.
    * @override

@@ -56,7 +56,7 @@ export default class TeriockAbilitySheet extends TeriockBaseEffectSheet {
   }
 
   /**
-   * Toggles between overview and consequences tabs.
+   * Toggles between overview and consequence tabs.
    *
    * @returns {Promise<void>} Promise that resolves when tab is toggled.
    * @static

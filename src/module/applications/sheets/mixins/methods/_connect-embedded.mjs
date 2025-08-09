@@ -8,9 +8,8 @@ const { ux } = foundry.applications;
  * and other document-specific operations based on the document type and current state.
  * @param {TeriockActor|TeriockEffect|TeriockItem} document - The parent document containing the embedded documents.
  * @param {HTMLElement} element - The DOM element containing the embedded document cards.
- * @param {boolean} editable - Whether the document is editable by the current user. Defaults to true.
  */
-export default function connectEmbedded(document, element, editable = true) {
+export default function _connectEmbedded(document, element) {
   element.querySelectorAll(".tcard").forEach((el) => {
     const id = el.getAttribute("data-id");
     const parentId = el.getAttribute("data-parent-id");

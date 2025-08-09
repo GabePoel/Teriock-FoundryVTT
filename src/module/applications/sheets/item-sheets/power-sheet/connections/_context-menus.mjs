@@ -17,8 +17,8 @@ export function powerContextMenu(power) {
     const option = {
       name: typeName,
       icon: icon,
-      callback: () => {
-        power.update({
+      callback: async () => {
+        await power.update({
           system: {
             type: type,
           },

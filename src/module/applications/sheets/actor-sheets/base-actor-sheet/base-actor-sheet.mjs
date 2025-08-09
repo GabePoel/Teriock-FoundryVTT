@@ -8,6 +8,7 @@ import {
   selectEquipmentTypeDialog,
 } from "../../../dialogs/select-dialog.mjs";
 import { SheetMixin } from "../../mixins/_module.mjs";
+import _embeddedFromCard from "../../mixins/methods/_embedded-from-card.mjs";
 import {
   piercingContextMenu,
   primaryAttackContextMenu,
@@ -115,8 +116,6 @@ export default class TeriockBaseActorSheet extends SheetMixin(ActorSheetV2) {
    */
   constructor(...args) {
     super(...args);
-    this._filterMenuOpen = false;
-    this._displayMenuOpen = false;
     this._sidebarOpen = true;
     this._hitDrawerOpen = true;
     this._manaDrawerOpen = true;
@@ -126,13 +125,10 @@ export default class TeriockBaseActorSheet extends SheetMixin(ActorSheetV2) {
       blocker: [],
     };
     this._loadingSearch = true;
-    this._abilitySearchValue = "";
-    this._equipmentSearchValue = "";
-    this._powerSearchValue = "";
-    this._fluencySearchValue = "";
-    this._consequenceSearchValue = "";
-    this._rankSearchValue = "";
-    this._resourceSearchValue = "";
+    for (const { type } of this.constructor.SEARCH_CONFIGS) {
+      const key = `_${type}SearchValue`;
+      if (!(key in this)) this[key] = "";
+    }
     this._embeds = {
       effectTypes: {},
       itemTypes: {},
@@ -156,7 +152,7 @@ export default class TeriockBaseActorSheet extends SheetMixin(ActorSheetV2) {
   static async _toggleEquippedDoc(_event, target) {
     const embedded =
       /** @type {TeriockEquipment|null} */
-      await this._embeddedFromCard(target);
+      await _embeddedFromCard(this, target);
     if (embedded.system.equipped) {
       await embedded.system.unequip();
     } else {
@@ -175,7 +171,7 @@ export default class TeriockBaseActorSheet extends SheetMixin(ActorSheetV2) {
   static async _toggleAttunedDoc(_event, target) {
     const embedded =
       /** @type {TeriockEquipment|null} */
-      await this._embeddedFromCard(target);
+      await _embeddedFromCard(this, target);
     if (embedded.system.isAttuned) {
       await embedded.system.deattune();
     } else {
@@ -194,7 +190,7 @@ export default class TeriockBaseActorSheet extends SheetMixin(ActorSheetV2) {
   static async _toggleGluedDoc(_event, target) {
     const embedded =
       /** @type {TeriockEquipment|null} */
-      await this._embeddedFromCard(target);
+      await _embeddedFromCard(this, target);
     if (embedded.system.glued) {
       await embedded.system.unglue();
     } else {
@@ -213,7 +209,7 @@ export default class TeriockBaseActorSheet extends SheetMixin(ActorSheetV2) {
   static async _toggleDampenedDoc(_event, target) {
     const embedded =
       /** @type {TeriockEquipment|null} */
-      await this._embeddedFromCard(target);
+      await _embeddedFromCard(this, target);
     if (embedded.system.dampened) {
       await embedded.system.undampen();
     } else {
@@ -232,7 +228,7 @@ export default class TeriockBaseActorSheet extends SheetMixin(ActorSheetV2) {
   static async _toggleShatteredDoc(_event, target) {
     const embedded =
       /** @type {TeriockEquipment|null} */
-      await this._embeddedFromCard(target);
+      await _embeddedFromCard(this, target);
     if (embedded.system.shattered) {
       await embedded.system.repair();
     } else {
@@ -249,7 +245,7 @@ export default class TeriockBaseActorSheet extends SheetMixin(ActorSheetV2) {
    * @static
    */
   static async _toggleDisabledDoc(_event, target) {
-    const embedded = await this._embeddedFromCard(target);
+    const embedded = await _embeddedFromCard(this, target);
     embedded?.toggleDisabled();
   }
 
@@ -259,7 +255,7 @@ export default class TeriockBaseActorSheet extends SheetMixin(ActorSheetV2) {
    *
    * @param {MouseEvent} _event - The event object.
    * @param {HTMLElement} target - The target element.
-   * @returns {Promise<void>} Promise that resolves when document is created.
+   * @returns {Promise<void>} Promise that resolves when the document is created.
    * @static
    */
   static async _addEmbedded(_event, target) {
@@ -593,7 +589,7 @@ export default class TeriockBaseActorSheet extends SheetMixin(ActorSheetV2) {
    * Opens the primary attacker's sheet.
    *
    * @param {MouseEvent} event - The event object.
-   * @returns {Promise<void>} Promise that resolves when sheet is opened.
+   * @returns {Promise<void>} Promise that resolves when the sheet is opened.
    * @static
    */
   static async _openPrimaryAttacker(event) {
@@ -605,7 +601,7 @@ export default class TeriockBaseActorSheet extends SheetMixin(ActorSheetV2) {
    * Opens the primary blocker's sheet.
    *
    * @param {MouseEvent} event - The event object.
-   * @returns {Promise<void>} Promise that resolves when sheet is opened.
+   * @returns {Promise<void>} Promise that resolves when the sheet is opened.
    * @static
    */
   static async _openPrimaryBlocker(event) {
@@ -749,7 +745,9 @@ export default class TeriockBaseActorSheet extends SheetMixin(ActorSheetV2) {
    */
   static async _takeHack(event, target) {
     event.stopPropagation();
-    const part = /** @type {Teriock.Parameters.Actor.HackableBodyPart} */ target.dataset.part;
+    const part =
+      /** @type {Teriock.Parameters.Actor.HackableBodyPart} */ target.dataset
+        .part;
     await this.actor.takeHack(part);
   }
 
@@ -1106,7 +1104,9 @@ export default class TeriockBaseActorSheet extends SheetMixin(ActorSheetV2) {
       el.addEventListener("contextmenu", async (e) => {
         e.preventDefault();
         if (!(el instanceof HTMLElement)) return;
-        const part = /** @type {Teriock.Parameters.Actor.HackableBodyPart} */ el.dataset.part;
+        const part =
+          /** @type {Teriock.Parameters.Actor.HackableBodyPart} */ el.dataset
+            .part;
         await this.actor.takeUnhack(part);
         e.stopPropagation();
       });

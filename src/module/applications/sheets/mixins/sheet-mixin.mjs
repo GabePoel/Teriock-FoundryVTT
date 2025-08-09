@@ -1,4 +1,3 @@
-import connectEmbedded from "../../../helpers/connect-embedded.mjs";
 import * as createEffects from "../../../helpers/create-effects.mjs";
 import { buildMessage } from "../../../helpers/messages-builder/message-builder.mjs";
 import {
@@ -6,6 +5,9 @@ import {
   selectPropertyDialog,
 } from "../../dialogs/select-dialog.mjs";
 import { imageContextMenuOptions } from "../misc-sheets/image-sheet/connections/_context-menus.mjs";
+import _connectEmbedded from "./methods/_connect-embedded.mjs";
+import _embeddedFromCard from "./methods/_embedded-from-card.mjs";
+import _setupEventListeners from "./methods/_setup-handlers.mjs";
 
 const { DragDrop, TextEditor, ContextMenu } = foundry.applications.ux;
 const { DocumentSheetV2, HandlebarsApplicationMixin } =
@@ -17,7 +19,6 @@ const { DocumentSheetV2, HandlebarsApplicationMixin } =
  * drag and drop, context menus, and form management.
  *
  * @param {typeof DocumentSheetV2} Base - The base application class to mix in with.
- * @returns {typeof TeriockSheet & typeof Base}
  */
 export default (Base) => {
   return class TeriockSheet extends HandlebarsApplicationMixin(Base) {
@@ -209,10 +210,10 @@ export default (Base) => {
      *
      * @param {MouseEvent} _event - The event object.
      * @param {HTMLElement} target - The target element.
-     * @returns {Promise<void>} Promise that resolves when sheet is opened.
+     * @returns {Promise<void>} Promise that resolves when the sheet is opened.
      */
     static async _openDoc(_event, target) {
-      const embedded = await this._embeddedFromCard(target);
+      const embedded = await _embeddedFromCard(this, target);
       embedded?.sheet.render(true);
     }
 
@@ -224,7 +225,7 @@ export default (Base) => {
      * @returns {Promise<void>} Promise that resolves when chat is sent.
      */
     static async _chatDoc(_event, target) {
-      const embedded = await this._embeddedFromCard(target);
+      const embedded = await _embeddedFromCard(this, target);
       await embedded?.chat();
     }
 
@@ -236,7 +237,7 @@ export default (Base) => {
      * @returns {Promise<void>} Promise that resolves when use is complete.
      */
     static async _useOneDoc(_event, target) {
-      const embedded = await this._embeddedFromCard(target);
+      const embedded = await _embeddedFromCard(this, target);
       await embedded?.system.useOne();
     }
 
@@ -248,7 +249,7 @@ export default (Base) => {
      * @returns {Promise<void>} Promise that resolves when toggle is complete.
      */
     static async _toggleDisabledDoc(_event, target) {
-      const embedded = await this._embeddedFromCard(target);
+      const embedded = await _embeddedFromCard(this, target);
       await embedded?.toggleDisabled();
     }
 
@@ -265,7 +266,7 @@ export default (Base) => {
         : event?.shiftKey
           ? { disadvantage: true }
           : {};
-      const embedded = await this._embeddedFromCard(target);
+      const embedded = await _embeddedFromCard(this, target);
       if (embedded?.type === "equipment") {
         if (event?.shiftKey) {
           options.secret = true;
@@ -389,7 +390,7 @@ export default (Base) => {
     async _onRender(context, options) {
       await super._onRender(context, options);
       this.editable = this.isEditable && !this._locked;
-      connectEmbedded(this.document, this.element, this.editable);
+      _connectEmbedded(this.document, this.element, this.editable);
 
       new ContextMenu(this.element, ".timage", imageContextMenuOptions, {
         eventName: "contextmenu",
@@ -404,13 +405,24 @@ export default (Base) => {
       this.#dragDrop.forEach((d) => d.bind(this.element));
 
       this._activateMenu();
-      this._setupEventListeners();
+
+      // Sheet select handler
+      this._connect('[data-action="sheetSelect"]', "change", (e) => {
+        const { path } = e.currentTarget.dataset;
+        if (path) {
+          foundry.utils.setProperty(this, path, e.currentTarget.value);
+          this.render();
+        }
+      });
+
+      _setupEventListeners(this);
 
       for (const /** @type {HTMLElement} */ element of this.element.querySelectorAll(
         ".tcard",
       )) {
         const embedded =
-          /** @type {TeriockItem|TeriockEffect} */ await this._embeddedFromCard(
+          /** @type {TeriockItem|TeriockEffect} */ await _embeddedFromCard(
+            this,
             element,
           );
         if (embedded && embedded.type === "condition") {
@@ -468,192 +480,6 @@ export default (Base) => {
           }.bind(this),
         );
       });
-    }
-
-    /**
-     * Sets up all event listeners for the sheet.
-     * Configures handlers for form updates, record fields, set fields, array fields, and changes.
-     */
-    _setupEventListeners() {
-      // Sheet select handler
-      this._connect('[data-action="sheetSelect"]', "change", (e) => {
-        const { path } = e.currentTarget.dataset;
-        if (path) {
-          foundry.utils.setProperty(this, path, e.currentTarget.value);
-          this.render();
-        }
-      });
-
-      // Generic update handlers
-      this._setupUpdateHandlers();
-      this._setupRecordFieldHandlers();
-      this._setupSetFieldHandlers();
-      this._setupArrayFieldHandlers();
-      this._setupChangeHandlers();
-    }
-
-    /**
-     * Sets up update handlers for various input types.
-     * Configures change and click handlers for update inputs, selects, and checkboxes.
-     */
-    _setupUpdateHandlers() {
-      const handlers = [
-        { selector: ".teriock-update-input", event: "change" },
-        { selector: ".teriock-update-select", event: "change" },
-        {
-          selector: ".teriock-update-checkbox",
-          event: "click",
-          getValue: (el) => el.checked,
-        },
-      ];
-
-      handlers.forEach(({ selector, event, getValue }) => {
-        this.element.querySelectorAll(selector).forEach((el) => {
-          const name = el.getAttribute("name");
-          if (!name) return;
-
-          el.addEventListener(event, async (e) => {
-            if (event === "click") e.preventDefault();
-
-            const value = getValue
-              ? getValue(e.currentTarget)
-              : (e.currentTarget.value ??
-                e.currentTarget.getAttribute("data-value"));
-
-            await this.document.update({ [name]: value });
-          });
-        });
-      });
-    }
-
-    /**
-     * Sets up handlers for record field components.
-     * Configures multi-select inputs and remove buttons for record fields.
-     */
-    _setupRecordFieldHandlers() {
-      this.element
-        .querySelectorAll(".teriock-record-field")
-        .forEach((container) => {
-          const select = container.querySelector("select");
-          if (!select) return;
-
-          const name = container.getAttribute("name");
-          const allowedKeys = Array.from(select.options)
-            .map((option) => option.value)
-            .filter((value) => value !== "");
-
-          select.addEventListener("input", async () => {
-            await this.#addToRecordField(name, select.value, allowedKeys);
-          });
-
-          container.querySelectorAll(".remove").forEach((btn) => {
-            btn.addEventListener("click", async (e) => {
-              e.preventDefault();
-              e.stopPropagation();
-              const key = e.currentTarget.closest(".tag").dataset.key;
-              await this.#cleanRecordField(
-                name,
-                allowedKeys.filter((k) => k !== key),
-              );
-            });
-          });
-        });
-    }
-
-    /**
-     * Sets up handlers for set field components.
-     * Configures multi-select inputs and remove buttons for set fields.
-     */
-    _setupSetFieldHandlers() {
-      this.element
-        .querySelectorAll(".teriock-update-set")
-        .forEach((container) => {
-          const select = container.querySelector("select");
-          if (!select) return;
-
-          const name = container.getAttribute("name");
-          const getValues = () =>
-            Array.from(select.parentElement.querySelectorAll(".tag")).map(
-              (tag) => tag.dataset.key,
-            );
-
-          select.addEventListener("input", async () => {
-            const values = getValues();
-            const selectedValue = select.value;
-            if (selectedValue && !values.includes(selectedValue)) {
-              values.push(selectedValue);
-            }
-            await this.#updateSetField(name, values);
-          });
-
-          container.querySelectorAll(".remove").forEach((btn) => {
-            btn.addEventListener("click", async (e) => {
-              e.preventDefault();
-              e.stopPropagation();
-              const key = e.currentTarget.closest(".tag").dataset.key;
-              const values = getValues().filter((k) => k !== key);
-              await this.#updateSetField(name, values);
-            });
-          });
-        });
-    }
-
-    // Static Actions
-
-    /**
-     * Sets up handlers for array field components.
-     * Configures add buttons for array fields.
-     */
-    _setupArrayFieldHandlers() {
-      this.element
-        .querySelectorAll(".teriock-array-field-add")
-        .forEach((button) => {
-          button.addEventListener("click", async (e) => {
-            e.preventDefault();
-            await this.#addToArrayField(
-              button.getAttribute("name"),
-              button.dataset.path,
-            );
-          });
-        });
-    }
-
-    /**
-     * Sets up handlers for change field components.
-     * Configures change inputs and remove buttons for change arrays.
-     */
-    _setupChangeHandlers() {
-      // Change inputs
-      this.element.querySelectorAll(".teriock-change-input").forEach((el) => {
-        const { name } = el.attributes;
-        const { index, part } = el.dataset;
-        if (!name?.value) return;
-
-        el.addEventListener("change", async (e) => {
-          const existing = foundry.utils.getProperty(this.document, name.value);
-          const copy = foundry.utils.deepClone(existing) || [];
-          copy[index][part] = e.currentTarget.value;
-          await this.document.update({ [name.value]: copy });
-        });
-      });
-
-      // Remove change buttons
-      this.element
-        .querySelectorAll(".teriock-remove-change-button")
-        .forEach((button) => {
-          const { name } = button.attributes;
-          const { index } = button.dataset;
-
-          button.addEventListener("click", async () => {
-            const existing = foundry.utils.getProperty(
-              this.document,
-              name.value,
-            );
-            const copy = foundry.utils.deepClone(existing) || [];
-            copy.splice(index, 1);
-            await this.document.update({ [name.value]: copy });
-          });
-        });
     }
 
     /**
@@ -724,7 +550,6 @@ export default (Base) => {
      * @param {string} selector - The CSS selector for elements to connect.
      * @param {string} eventType - The event type to listen for.
      * @param {Function} handler - The event handler function.
-     * @private
      */
     _connect(selector, eventType, handler) {
       this.element.querySelectorAll(selector).forEach((el) =>
@@ -795,45 +620,6 @@ export default (Base) => {
     }
 
     /**
-     * Extracts an embedded document from a card element.
-     *
-     * @param {HTMLElement} target - The target element to extract from.
-     * @returns {Promise<ClientDocument|null>} The embedded document or null if not found.
-     */
-    async _embeddedFromCard(target) {
-      /** @type {HTMLElement} */
-      const card = target.closest(".tcard");
-      const { id, type, parentId } = card?.dataset ?? {};
-
-      if (type === "noneMacro") {
-        foundry.ui.notifications.warn("Drag a macro onto sheet to assign it.", {
-          console: false,
-        });
-      }
-
-      if (type === "macro") return foundry.utils.fromUuid(id);
-
-      if (type === "item") return this.document.items.get(id);
-
-      if (["effect", "conditionUnlocked"].includes(type)) {
-        if (
-          this.document.documentName === "Actor" &&
-          this.document._id !== parentId
-        ) {
-          return this.document.items.get(parentId)?.effects.get(id);
-        }
-        if (this.document.documentName === "ActiveEffect") {
-          return this.document.parent?.effects.get(id);
-        }
-        return this.document.effects.get(id);
-      }
-
-      if (type === "conditionLocked") {
-        return CONFIG.TERIOCK.content.conditions[id];
-      }
-    }
-
-    /**
      * Assigns overall rules to tooltips of tcard containers.
      *
      * @param {HTMLElement} target
@@ -860,7 +646,7 @@ export default (Base) => {
      * @private
      */
     async _onDragStart(event) {
-      const embedded = await this._embeddedFromCard(event.currentTarget);
+      const embedded = await _embeddedFromCard(this, event.currentTarget);
       const dragData = embedded?.toDragData();
       if (dragData) {
         event.dataTransfer.setData("text/plain", JSON.stringify(dragData));
@@ -881,7 +667,7 @@ export default (Base) => {
      * Handles drop events for documents.
      *
      * @param {DragEvent} event - The drop event.
-     * @returns {Promise<boolean>} Promise that resolves to true if drop was handled.
+     * @returns {Promise<boolean>} Promise that resolves to true if the drop was handled.
      * @private
      */
     async _onDrop(event) {
@@ -901,7 +687,7 @@ export default (Base) => {
      *
      * @param {DragEvent} _event - The drop event.
      * @param {object} data - The effect data.
-     * @returns {Promise<boolean>} Promise that resolves to true if drop was successful.
+     * @returns {Promise<boolean>} Promise that resolves to true if the drop was successful.
      * @private
      */
     async _onDropActiveEffect(_event, data) {
@@ -1062,89 +848,6 @@ export default (Base) => {
         };
         return new DragDrop(config);
       });
-    }
-
-    /**
-     * Adds a key to a record field with validation.
-     *
-     * @param {string} name - The field name.
-     * @param {string} key - The key to add.
-     * @param {Array} allowedKeys - Array of allowed keys.
-     * @returns {Promise<void>} Promise that resolves when the field is updated.
-     * @private
-     */
-    async #addToRecordField(name, key, allowedKeys = []) {
-      const existing = foundry.utils.getProperty(this.document, name);
-      const copy = foundry.utils.deepClone(existing) || {};
-      const updateData = {};
-
-      // Remove invalid keys
-      Object.keys(copy).forEach((k) => {
-        if (k !== key && !allowedKeys.includes(k)) {
-          updateData[`${name}.-=${k}`] = null;
-        }
-      });
-
-      updateData[`${name}.${key}`] = null;
-      await this.document.update(updateData);
-    }
-
-    /**
-     * Cleans a record field by removing invalid keys.
-     *
-     * @param {string} name - The field name.
-     * @param {Array} allowedKeys - Array of allowed keys to keep.
-     * @returns {Promise<void>} Promise that resolves when the field is cleaned.
-     * @private
-     */
-    async #cleanRecordField(name, allowedKeys = []) {
-      const existing = foundry.utils.getProperty(this.document, name);
-      const copy = foundry.utils.deepClone(existing) || {};
-      const updateData = {};
-
-      Object.keys(copy).forEach((k) => {
-        if (!allowedKeys.includes(k)) {
-          updateData[`${name}.-=${k}`] = null;
-        }
-      });
-
-      await this.document.update(updateData);
-    }
-
-    /**
-     * Adds an item to an array field.
-     *
-     * @param {string} name - The field name.
-     * @param {string} fieldPath - The path to the field schema.
-     * @returns {Promise<void>} Promise that resolves when the item is added.
-     * @private
-     */
-    async #addToArrayField(name, fieldPath) {
-      const cleanFieldPath = fieldPath.startsWith("system.")
-        ? fieldPath.slice(7)
-        : fieldPath;
-      const copy =
-        foundry.utils.deepClone(
-          foundry.utils.getProperty(this.document, name),
-        ) || [];
-      const field =
-        this.document.system.schema.getField(cleanFieldPath).element;
-      const initial = field.getInitialValue();
-
-      copy.push(initial);
-      await this.document.update({ [name]: copy });
-    }
-
-    /**
-     * Updates a set field with new values.
-     *
-     * @param {string} name - The field name.
-     * @param {Array} values - Array of values for the set.
-     * @returns {Promise<void>} Promise that resolves when the set is updated.
-     * @private
-     */
-    async #updateSetField(name, values = []) {
-      await this.document.update({ [name]: new Set(values) });
     }
   };
 };
