@@ -1,66 +1,49 @@
 {
-  "name": "Hunter",
+  "name": "Power Through",
   "type": "power",
   "system": {
-    "htmlFields": [
-      "description",
-      "flaws"
-    ],
     "type": "other",
-    "description": "This power is a wrapper for Hunter.",
+    "description": "This power is a wrapper for Power Through.",
     "proficient": true,
     "fluent": false,
     "font": "",
     "disabled": false,
     "updateCounter": true,
+    "onUse": [],
     "flaws": "<p>None.</p>",
     "size": 3,
     "lifespan": 100,
     "adult": 20
   },
   "folder": "bfJf41uuLLLbGOg7",
-  "_id": "PCeW3YduVAqVj10c",
-  "img": "modules/game-icons-net/whitetransparent/hunting-bolas.svg",
+  "_id": "nwac6sVSZ8fsDIuU",
+  "img": "modules/game-icons-net/whitetransparent/push.svg",
   "effects": [
     {
-      "name": "Hunter",
+      "name": "Power Through",
       "type": "ability",
-      "img": "modules/game-icons-net/whitetransparent/hunting-bolas.svg",
+      "img": "modules/game-icons-net/whitetransparent/push.svg",
       "system": {
-        "htmlFields": [
-          "elderSorceryIncant",
-          "overview.base",
-          "overview.proficient",
-          "overview.fluent",
-          "results.hit",
-          "results.critHit",
-          "results.miss",
-          "results.critMiss",
-          "results.save",
-          "results.critSave",
-          "results.fail",
-          "results.critFail",
-          "costs.mp.value.variable",
-          "costs.hp.value.variable",
-          "costs.gp.value.variable",
-          "costs.materialCost",
-          "heightened",
-          "endCondition",
-          "requirements",
-          "trigger",
-          "limitation",
-          "improvement"
-        ],
         "proficient": false,
         "fluent": false,
         "font": "",
         "description": "<p>None.</p>",
         "deleteOnExpire": false,
         "updateCounter": false,
+        "suppression": {
+          "statuses": {
+            "active": [],
+            "inactive": []
+          },
+          "comparisons": {
+            "actor": [],
+            "item": []
+          }
+        },
         "hierarchy": {
-          "supId": null,
+          "rootUuid": "Compendium.teriock.essentials.Item.nwac6sVSZ8fsDIuU",
           "subIds": [],
-          "rootUuid": "Compendium.teriock.essentials.Item.PCeW3YduVAqVj10c"
+          "supId": null
         },
         "applies": {
           "base": {
@@ -72,16 +55,20 @@
             "checks": [],
             "duration": 0,
             "changes": [],
+            "standardDamage": false,
             "expiration": {
               "normal": {
                 "combat": {
+                  "who": {
+                    "type": "everyone"
+                  },
                   "what": {
-                    "type": "none",
+                    "type": "forced",
                     "roll": "2d4kh1",
                     "threshold": 4
                   },
                   "when": {
-                    "time": "start",
+                    "time": "end",
                     "trigger": "turn",
                     "skip": 0
                   }
@@ -89,6 +76,9 @@
               },
               "crit": {
                 "combat": {
+                  "who": {
+                    "type": "target"
+                  },
                   "what": {
                     "type": "none",
                     "roll": "2d4kh1",
@@ -102,7 +92,7 @@
                 }
               },
               "changeOnCrit": false,
-              "doesExpire": false
+              "doesExpire": true
             }
           },
           "proficient": {
@@ -114,9 +104,13 @@
             "checks": [],
             "duration": 0,
             "changes": [],
+            "standardDamage": false,
             "expiration": {
               "normal": {
                 "combat": {
+                  "who": {
+                    "type": "target"
+                  },
                   "what": {
                     "type": "none",
                     "roll": "2d4kh1",
@@ -131,6 +125,9 @@
               },
               "crit": {
                 "combat": {
+                  "who": {
+                    "type": "target"
+                  },
                   "what": {
                     "type": "none",
                     "roll": "2d4kh1",
@@ -156,9 +153,13 @@
             "checks": [],
             "duration": 0,
             "changes": [],
+            "standardDamage": false,
             "expiration": {
               "normal": {
                 "combat": {
+                  "who": {
+                    "type": "target"
+                  },
                   "what": {
                     "type": "none",
                     "roll": "2d4kh1",
@@ -173,6 +174,9 @@
               },
               "crit": {
                 "combat": {
+                  "who": {
+                    "type": "target"
+                  },
                   "what": {
                     "type": "none",
                     "roll": "2d4kh1",
@@ -198,9 +202,13 @@
             "checks": [],
             "duration": 0,
             "changes": [],
+            "standardDamage": false,
             "expiration": {
               "normal": {
                 "combat": {
+                  "who": {
+                    "type": "target"
+                  },
                   "what": {
                     "type": "none",
                     "roll": "2d4kh1",
@@ -215,6 +223,9 @@
               },
               "crit": {
                 "combat": {
+                  "who": {
+                    "type": "target"
+                  },
                   "what": {
                     "type": "none",
                     "roll": "2d4kh1",
@@ -231,8 +242,9 @@
               "doesExpire": false
             }
           },
-          "macro": null
+          "macros": {}
         },
+        "sustaining": [],
         "wikiNamespace": "Ability",
         "elderSorcery": false,
         "elderSorceryIncant": "",
@@ -241,32 +253,32 @@
         ],
         "interaction": "manifest",
         "featSaveAttribute": "mov",
-        "maneuver": "passive",
-        "executionTime": "passive",
+        "maneuver": "active",
+        "executionTime": "a0",
         "delivery": {
-          "base": "self",
+          "base": "weapon",
           "parent": null,
           "package": null
         },
         "targets": [
-          "self"
+          "creature"
         ],
         "elements": [],
         "duration": {
-          "unit": "noLimit",
-          "quantity": 0,
+          "unit": "minute",
+          "quantity": 1,
           "conditions": {
             "present": [],
             "absent": []
           },
-          "description": "Always Active"
+          "description": "5 Seconds"
         },
         "sustained": false,
-        "range": "Self.",
+        "range": null,
         "overview": {
-          "base": "Choose 3 species. Your <a href=\"https://wiki.teriock.com/index.php/Core:Damage\" title=\"Core:Damage\" target=\"_blank\">damage</a> is <a href=\"https://wiki.teriock.com/index.php/Keyword:Boosted\" title=\"Keyword:Boosted\" target=\"_blank\">boosted</a> against them. You can change your chosen species during a <a href=\"https://wiki.teriock.com/index.php/Core:Long_Rest\" title=\"Core:Long Rest\" target=\"_blank\">long rest</a>.",
-          "proficient": "You may choose <a href=\"https://wiki.teriock.com/index.php/Core:Proficiency_Bonus\" title=\"Core:Proficiency Bonus\" target=\"_blank\">P</a> additional species.",
-          "fluent": "You may instead choose <a href=\"https://wiki.teriock.com/index.php/Core:Fluency_Bonus\" title=\"Core:Fluency Bonus\" target=\"_blank\">F</a> additional species."
+          "base": "You can treat a type of <a href=\"https://wiki.teriock.com/index.php/Damage:Hack\" title=\"Damage:Hack\" target=\"_blank\">hack damage</a> you've taken as though it is one step lower.",
+          "proficient": "",
+          "fluent": ""
         },
         "results": {
           "hit": "",
@@ -289,11 +301,11 @@
             "amount": "proficient"
           }
         },
-        "skill": true,
+        "skill": false,
         "spell": false,
-        "standard": true,
+        "standard": false,
         "ritual": false,
-        "class": "ranger",
+        "class": "",
         "rotator": false,
         "invoked": false,
         "costs": {
@@ -309,9 +321,9 @@
             }
           },
           "hp": {
-            "type": "none",
+            "type": "static",
             "value": {
-              "static": 0,
+              "static": 5,
               "formula": "",
               "variable": ""
             }
@@ -328,22 +340,28 @@
           "materialCost": ""
         },
         "heightened": "",
-        "endCondition": "",
+        "endCondition": "The turn ends.<span class=\"metadata\" data-type=\"combat-expiration\" data-who-type=\"everyone\" data-what-type=\"forced\" data-what-roll=\"2d4kh1\" data-what-threshold=\"4\" data-when-time=\"end\" data-when-trigger=\"turn\" data-when-skip=\"0\"></span>",
         "requirements": "",
         "effects": [],
         "expansion": null,
         "expansionRange": null,
         "expansionSaveAttribute": "mov",
         "trigger": "",
-        "basic": false,
-        "abilityType": "normal",
+        "basic": true,
+        "form": "intrinsic",
         "limitation": "",
         "improvement": "",
         "prepared": true,
         "warded": false,
-        "secret": false
+        "secret": false,
+        "consumable": false,
+        "quantity": 1,
+        "maxQuantity": {
+          "raw": "",
+          "derived": 0
+        }
       },
-      "_id": "nevnfzlr2dGlOmTB",
+      "_id": "n8r08XNgUgSF6RtJ",
       "changes": [],
       "disabled": false,
       "duration": {
@@ -364,17 +382,17 @@
         "coreVersion": "13.345",
         "systemId": "teriock",
         "systemVersion": "0.1.0",
-        "createdTime": 1753145859613,
-        "modifiedTime": 1754292714196,
-        "lastModifiedBy": "uxE8DDp7ujgsxtd2"
+        "createdTime": 1754702697057,
+        "modifiedTime": 1754702697142,
+        "lastModifiedBy": "MMeF1yfOcMgtpZFS"
       },
-      "_key": "!items.effects!PCeW3YduVAqVj10c.nevnfzlr2dGlOmTB"
+      "_key": "!items.effects!nwac6sVSZ8fsDIuU.n8r08XNgUgSF6RtJ"
     }
   ],
   "sort": 0,
   "ownership": {
     "default": 0,
-    "IIjfAJm5Tf1B6G7t": 3
+    "MMeF1yfOcMgtpZFS": 3
   },
   "flags": {
     "teriock": {
@@ -389,9 +407,9 @@
     "coreVersion": "13.345",
     "systemId": "teriock",
     "systemVersion": "0.1.0",
-    "createdTime": 1753145859606,
-    "modifiedTime": 1754688239405,
+    "createdTime": 1754702697009,
+    "modifiedTime": 1754702697170,
     "lastModifiedBy": "MMeF1yfOcMgtpZFS"
   },
-  "_key": "!items!PCeW3YduVAqVj10c"
+  "_key": "!items!nwac6sVSZ8fsDIuU"
 }

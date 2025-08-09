@@ -376,6 +376,7 @@ export const imageOverrides = {
   "Poison Strike": "modules/game-icons-net/whitetransparent/chemical-arrow.svg",
   "Polymorph": "modules/game-icons-net/whitetransparent/swan.svg",
   "Poor Perception": "modules/game-icons-net/whitetransparent/spectacle-lenses.svg",
+  "Power Through": "modules/game-icons-net/whitetransparent/push.svg",
   "Precision Shooting": "modules/game-icons-net/whitetransparent/middle-arrow.svg",
   "Prehensile Appendage": "modules/game-icons-net/whitetransparent/curled-tentacle.svg",
   "Prepare Aid": "modules/game-icons-net/whitetransparent/tarot-07-the-chariot.svg",
