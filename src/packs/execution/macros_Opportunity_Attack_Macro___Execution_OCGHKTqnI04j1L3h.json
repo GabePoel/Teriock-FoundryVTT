@@ -5,7 +5,7 @@
   "author": "qf5JYGZKzM588nE6",
   "img": "icons/svg/dice-target.svg",
   "scope": "global",
-  "command": "const options = foundry.utils.deepClone({\n  advantage: window.event?.altKey,\n  disadvantage: window.event?.shiftKey,\n});\nconst actor = scope.abilityData.actor;\nconst abilities = {};\nactor.effectTypes?.ability\n  .filter(\n    (a) =>\n      a.system.interaction === \"attack\" &&\n      a.system.maneuver === \"active\" &&\n      a.system.executionTime === \"a1\" &&\n      [\"weapon\", \"hand\"].includes(a.system.delivery.base),\n  )\n  .map((a) => (abilities[a.id] = a.name));\nconst id = await game.teriock.api.dialog.select(abilities, {\n  label: \"Ability\",\n  hint: \"Please select an ability.\",\n  title: \"Select Ability\",\n});\nconst ability = actor.effectTypes?.ability?.find((a) => a.id === id);\nHooks.once(\"renderChatMessageHTML\", async () => {\n  await ability.system.roll(options);\n  await ability.delete();\n});",
+  "command": "const options = foundry.utils.deepClone({\n  advantage: window.event?.altKey,\n  disadvantage: window.event?.shiftKey,\n});\nconst actor = scope.abilityData.actor;\nconst abilities = {};\nactor.abilities\n  .filter(\n    (a) =>\n      a.system.interaction === \"attack\" &&\n      a.system.maneuver === \"active\" &&\n      a.system.executionTime === \"a1\" &&\n      [\"weapon\", \"hand\"].includes(a.system.delivery.base),\n  )\n  .map((a) => (abilities[a.id] = a.name));\nconst id = await game.teriock.api.dialog.select(abilities, {\n  label: \"Ability\",\n  hint: \"Please select an ability.\",\n  title: \"Select Ability\",\n});\nconst ability = actor.abilities.find((a) => a.id === id);\nHooks.once(\"renderChatMessageHTML\", async () => {\n  await ability.system.roll(options);\n});",
   "folder": null,
   "sort": 0,
   "ownership": {
@@ -21,7 +21,7 @@
     "systemId": "teriock",
     "systemVersion": "0.1.0",
     "createdTime": 1753599982446,
-    "modifiedTime": 1754545144582,
+    "modifiedTime": 1754706042576,
     "lastModifiedBy": "MMeF1yfOcMgtpZFS"
   },
   "_key": "!macros!OCGHKTqnI04j1L3h"

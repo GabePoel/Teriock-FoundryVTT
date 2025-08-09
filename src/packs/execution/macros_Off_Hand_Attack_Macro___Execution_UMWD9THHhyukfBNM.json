@@ -1,0 +1,28 @@
+{
+  "name": "Off-Hand Attack Macro - Execution",
+  "type": "script",
+  "_id": "UMWD9THHhyukfBNM",
+  "author": "MMeF1yfOcMgtpZFS",
+  "img": "icons/svg/dice-target.svg",
+  "scope": "global",
+  "command": "const options = foundry.utils.deepClone({\n  advantage: window.event?.altKey,\n  disadvantage: window.event?.shiftKey,\n});\nconst actor = scope.abilityData.actor;\nconst abilities = {};\nactor.abilities\n  .filter(\n    (a) =>\n      a.system.interaction === \"attack\" &&\n      a.system.maneuver === \"active\" &&\n      a.system.executionTime === \"a1\" &&\n      [\"weapon\", \"hand\"].includes(a.system.delivery.base),\n  )\n  .map((a) => (abilities[a.id] = a.name));\nconst id = await game.teriock.api.dialog.select(abilities, {\n  label: \"Ability\",\n  hint: \"Please select an ability.\",\n  title: \"Select Ability\",\n});\nconst ability = actor.abilities.find((a) => a.id === id);\nawait actor.update({\n  \"system.attackPenalty\": Math.min(0, actor.system.attackPenalty + 3),\n});\nHooks.once(\"renderChatMessageHTML\", async () => {\n  await ability.system.roll(options);\n});",
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "MMeF1yfOcMgtpZFS": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null,
+    "coreVersion": "13.345",
+    "systemId": "teriock",
+    "systemVersion": "0.1.0",
+    "createdTime": 1754705501955,
+    "modifiedTime": 1754706036731,
+    "lastModifiedBy": "MMeF1yfOcMgtpZFS"
+  },
+  "_key": "!macros!UMWD9THHhyukfBNM"
+}
