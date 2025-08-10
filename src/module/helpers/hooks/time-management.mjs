@@ -29,8 +29,7 @@ export default function registerTimeManagementHooks() {
               "system.money.debt": Math.round(newDebt * 100) / 100, // Round to 2 decimal places
             });
           }
-
-          if (actor.sheet._activeTab === "conditions" && numConsequences > 0) {
+          if (numConsequences > 0) {
             await actor.forceUpdate();
           }
         }

@@ -175,7 +175,7 @@ export async function _generateEffect(
     statuses: Array.from(statuses),
     // description: description,
     system: {
-      source: abilityData.parent?._id,
+      source: abilityData.parent.uuid,
       deleteOnExpire: true,
       sourceDescription: description,
       expirations: {

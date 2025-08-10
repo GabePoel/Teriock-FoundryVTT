@@ -11,7 +11,6 @@ export function _shouldExpire(effectData) {
   if (!effect.isTemporary) return false;
   const duration = effect.duration;
   const currentTime = game.time.worldTime;
-  const combat = game.combat;
   if (
     !duration ||
     duration.startTime === undefined ||
@@ -19,14 +18,8 @@ export function _shouldExpire(effectData) {
   )
     return false;
   const expirationTime = duration.startTime + duration.seconds;
-  if (!combat || !combat.active) {
-    return currentTime >= expirationTime;
-  }
-  if (currentTime > expirationTime) return true;
-  if (currentTime < expirationTime) return false;
-  const currentTurn = combat.turn ?? 0;
-  const startTurn = duration.startTurn ?? 0;
-  return currentTurn > startTurn;
+  console.log(duration, currentTime > expirationTime);
+  return currentTime > expirationTime;
 }
 
 /**

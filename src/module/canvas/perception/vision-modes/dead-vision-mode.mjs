@@ -23,9 +23,6 @@ export default function deadVisionMode() {
         illumination: {
           visibility: TeriockVisionMode.LIGHTING_VISIBILITY.DISABLED,
         },
-        coloration: {
-          visibility: TeriockVisionMode.LIGHTING_VISIBILITY.DISABLED,
-        },
         darkness: {
           visibility: TeriockVisionMode.LIGHTING_VISIBILITY.DISABLED,
         },

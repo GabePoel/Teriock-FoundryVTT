@@ -1,4 +1,3 @@
-import TeriockActor from "../../../documents/actor.mjs";
 import TeriockBaseEffectData from "../base-effect-data/base-effect-data.mjs";
 import { TeriockConsequence } from "../../../documents/_documents.mjs";
 import {
@@ -7,12 +6,13 @@ import {
   CombatExpirationTiming,
   HierarchyField,
 } from "../shared/shared-fields";
+import { TeriockActor, TeriockEffect } from "../../../documents/_module.mjs";
 
 declare module "./consequence-data.mjs" {
   export default interface TeriockConsequenceData
     extends TeriockBaseEffectData {
     parent: TeriockConsequence;
-    source: string;
+    source: Teriock.UUID<TeriockEffect>;
     expirations: {
       condition: {
         value: Teriock.Parameters.Condition.Key | null;
