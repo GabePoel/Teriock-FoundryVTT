@@ -29,7 +29,7 @@ const { fields } = foundry.data;
  * @private
  *
  * @example
- * // Create rolls field
+ * // Create roll fields
  * const rollsField = consequenceRollsField();
  */
 export function consequenceRollsField() {
@@ -98,7 +98,7 @@ function abilityExpirationField() {
 }
 
 /**
- * Creates a field for applies data configuration.
+ * Creates a field for consequence data configuration.
  *
  * This field defines what effects apply to targets at different proficiency levels:
  * - **Statuses**: Conditions applied to the target
@@ -112,7 +112,7 @@ function abilityExpirationField() {
  * // Create applies field
  * const appliesField = appliesField();
  */
-function appliesField() {
+function consequenceField() {
   return new fields.SchemaField({
     statuses: new fields.SetField(
       new fields.StringField({
@@ -219,10 +219,10 @@ function appliesField() {
  */
 export function _defineConsequences(schema) {
   schema.applies = new fields.SchemaField({
-    base: appliesField(),
-    proficient: appliesField(),
-    fluent: appliesField(),
-    heightened: appliesField(),
+    base: consequenceField(),
+    proficient: consequenceField(),
+    fluent: consequenceField(),
+    heightened: consequenceField(),
     macros: new fields.TypedObjectField(
       new fields.StringField({
         choices: pseudoHooks,

@@ -10,7 +10,7 @@ import { _prepareTradecrafts } from "./_prepare-tradecrafts.mjs";
  *
  * This function orchestrates the calculation of all derived properties that depend
  * on base data, equipment, and other factors. It ensures that all computed values
- * are up-to-date and consistent.
+ * are up to date and consistent.
  *
  * The derived data includes:
  * - Attribute saves (`intSave`, `movSave`, etc.)

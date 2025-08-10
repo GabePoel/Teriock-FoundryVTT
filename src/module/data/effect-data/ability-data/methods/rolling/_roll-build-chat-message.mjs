@@ -2,7 +2,7 @@ import TeriockMessage from "../../../../../documents/chat-message.mjs";
 import { elderSorceryMask } from "../../../../../helpers/html.mjs";
 
 /**
- * Build chat message for the ability roll.
+ * Build the chat message for the ability roll.
  *
  * @param {AbilityRollConfig} rollConfig - Configurations for this ability usage.
  * @returns {Promise<void>} Promise that resolves to an array of button configurations.

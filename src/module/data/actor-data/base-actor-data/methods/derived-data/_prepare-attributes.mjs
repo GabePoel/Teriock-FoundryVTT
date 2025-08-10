@@ -9,7 +9,7 @@
 export function _prepareAttributes(actorData) {
   _preparePresence(actorData);
   const { attributes, size, f, p } = actorData;
-  Object.entries(attributes).forEach(([key, attr]) => {
+  Object.values(attributes).forEach((attr) => {
     const bonus = attr.saveFluent ? f : attr.saveProficient ? p : 0;
     attr.saveBonus = attr.value + bonus;
   });

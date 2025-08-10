@@ -16,7 +16,9 @@ export async function _executeMacros(rollConfig, pseudoHook) {
 
   for (const [safeUuid, macroPseudoHook] of macroEntries) {
     if (macroPseudoHook === pseudoHook) {
-      const macro = await foundry.utils.fromUuid(pureUuid(safeUuid));
+      const macro = /** @type {TeriockMacro} */ await foundry.utils.fromUuid(
+        pureUuid(safeUuid),
+      );
       if (macro) {
         try {
           await macro.execute({

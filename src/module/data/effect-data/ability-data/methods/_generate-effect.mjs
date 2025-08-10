@@ -3,7 +3,7 @@ import { parseTimeString } from "../../../../helpers/utils.mjs";
 
 /**
  * Generates an effect from ability data based on proficiency level and heightened amount.
- * Creates an effect with appropriate changes, statuses, and duration based on the ability's applies data.
+ * Creates an effect with appropriate changes, statuses, and duration based on the ability's consequence data.
  *
  * @param {TeriockAbilityData} abilityData - The ability data to generate effect from.
  * @param {TeriockActor} actor - The actor that owns the ability.
@@ -207,7 +207,7 @@ export async function _generateEffect(
 
 /**
  * Generates takes data from ability data based on proficiency level and heightened amount.
- * Creates rolls, hacks, checks, and status changes based on the ability's applies data.
+ * Creates rolls, hacks, checks, and status changes based on the ability's consequence data.
  *
  * @param {TeriockAbilityData} abilityData - The ability data to generate takes from.
  * @param {number} heightenAmount - The amount of heightening applied to the ability.

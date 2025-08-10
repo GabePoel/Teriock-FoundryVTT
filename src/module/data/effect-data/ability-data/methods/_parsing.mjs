@@ -57,9 +57,9 @@ function defaultConsequence() {
 
 /**
  * Creates the default applies structure for ability effects.
- * Provides base, proficient, fluent, and heightened effect containers.
+ * Provides base, proficient, fluent, and heightened consequence fields.
  *
- * @returns {object} The default applies structure with empty effect containers.
+ * @returns {object} The default applies structure with empty consequence fields.
  * @private
  */
 function defaultApplies() {
@@ -73,7 +73,7 @@ function defaultApplies() {
 
 /**
  * Parses raw HTML content for an ability, extracting properties and creating effects.
- * Handles tag processing, cost calculation, component parsing, and sub-ability creation.
+ * Handles tag processing, cost calculation, component parsing, and subability creation.
  *
  * @param {TeriockAbilityData} abilityData - The ability data to parse content for.
  * @param {string} rawHTML - The raw HTML content to parse.
@@ -107,7 +107,7 @@ export async function _parse(abilityData, rawHTML) {
     if (quickRoll) el.textContent = `[[/roll ${fullRoll}]]`;
   });
 
-  // Build tag tree
+  // Build the tag tree
   const tagTree = buildTagTree(doc);
 
   // Initialize parameters
@@ -138,7 +138,7 @@ export async function _parse(abilityData, rawHTML) {
   // Set remaining parameters
   setRemainingParameters(parameters, tagTree, doc);
 
-  // Clean up parameters
+  // Clean parameters
   delete parameters.improvement;
   delete parameters.limitation;
   delete parameters.hierarchy.supId;
@@ -156,14 +156,16 @@ export async function _parse(abilityData, rawHTML) {
   // Process sub-abilities
   await processSubAbilities(subs, abilityData);
 
-  // Check if parent name contains "warded"
+  // Check if the parent name contains "warded"
   if (abilityData.parent.name.toLowerCase().includes("warded")) {
     parameters.warded = true;
   }
 
-  const overrideImg = imageOverrides[abilityData.parent.name];
-  if (overrideImg) {
-    img = overrideImg;
+  if (Object.keys(imageOverrides).includes(abilityData.parent.name)) {
+    const overrideImg = `modules/game-icons-net/whitetransparent/${imageOverrides[abilityData.parent.name]}.svg`;
+    if (overrideImg) {
+      img = overrideImg;
+    }
   }
 
   delete parameters.results.endCondition;
@@ -662,7 +664,7 @@ function extractEndConditionsFromHTML(html) {
 
 /**
  * Extracts tradecraft check information from HTML content.
- * Finds tradecraft-check metadata elements and extracts their tradecraft types.
+ * Find tradecraft-check metadata elements and extract their tradecraft types.
  *
  * @param {string} html - The HTML content to extract tradecraft checks from.
  * @returns {Set} Set of tradecraft checks found in the content.
@@ -689,7 +691,7 @@ function extractTradecraftChecksFromHTML(html) {
  * Finds change metadata elements and extracts their key, mode, value, and priority.
  *
  * @param {string} html - The HTML content to extract changes from.
- * @returns {Array} Array of change objects with key, mode, value, and priority.
+ * @returns {Array} Array of change objects with a key, mode, value, and priority.
  * @private
  */
 function extractChangesFromHTML(html) {
@@ -991,7 +993,7 @@ function processDiceAndEffectExtraction(parameters) {
         resultStandardDamage = resultStandardDamage || currentStandardDamage;
       }
 
-      // Handle combat expiration based on result type
+      // Handle combat expiration based on the result type
       if (currentCombatExpiration) {
         if (critResultTypes.includes(resultType)) {
           critExpiration = currentCombatExpiration;
@@ -1087,7 +1089,7 @@ function selectImage(parameters) {
  * Processes sub-abilities from the document.
  * Creates sub-abilities and applies limitations or improvements as needed.
  *
- * @param {Array} subs - Array of sub-ability container elements.
+ * @param {Array} subs - Array of subability container elements.
  * @param {TeriockAbilityData} abilityData - The parent ability data.
  * @returns {Promise<void>} Promise that resolves when all sub-abilities are processed.
  * @private
