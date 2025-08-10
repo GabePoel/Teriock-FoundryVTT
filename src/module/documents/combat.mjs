@@ -73,7 +73,12 @@ export default class TeriockCombat extends BaseTeriockCombat {
       );
     }
     if (updates.length > 0) {
-      await effectActor.updateEmbeddedDocuments("ActiveEffect", updates);
+      const activeGm = /** @type {TeriockUser} */ game.users.activeGM;
+      await activeGm.query("teriock.updateEmbeddedDocuments", {
+        uuid: effectActor.uuid,
+        embeddedName: "ActiveEffect",
+        updates: updates,
+      });
     }
   }
 
@@ -108,6 +113,10 @@ export default class TeriockCombat extends BaseTeriockCombat {
       await this._tryAllEffectExpirations(actor, newActor, "action", "start");
       await this._tryAllEffectExpirations(actor, newActor, "turn", "start");
     }
+    await activeGm.query("teriock.update", {
+      uuid: newActor.uuid,
+      data: { "system.hasReaction": true },
+    });
 
     // Finish
     return out;

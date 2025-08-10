@@ -26,6 +26,7 @@ const { fields } = foundry.data;
  * @property {NumberField} wornAc - Worn Armor Class value (≥0, integer)
  * @property {NumberField} naturalAv - Natural Armor Value (≥0, integer)
  * @property {NumberField} attackPenalty - Attack penalty value (≤0, integer, step: 3)
+ * @property {BooleanField} hasReaction - Whether the actor has their reaction
  * @property {BooleanField} sb - Whether the actor has a style bonus
  * @property {StringField} piercing - Piercing ability type with choices:
  *   - "none": No piercing bonus
@@ -51,6 +52,10 @@ export function _defineCombat(schema) {
     label: "Attack Penalty",
     max: 0,
     step: 3,
+  });
+  schema.hasReaction = new fields.BooleanField({
+    initial: true,
+    label: "Has Reaction",
   });
   schema.sb = new fields.BooleanField({
     initial: false,

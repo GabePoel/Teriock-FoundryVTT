@@ -62,6 +62,7 @@ export default class TeriockBaseActorSheet extends SheetMixin(ActorSheetV2) {
       toggleEquippedDoc: this._toggleEquippedDoc,
       toggleGluedDoc: this._toggleGluedDoc,
       toggleSb: this._toggleSb,
+      toggleReaction: this._toggleReaction,
       toggleShatteredDoc: this._toggleShatteredDoc,
       tradecraftExtra: this._tradecraftExtra,
       unrollHitDie: this._unrollHitDie,
@@ -562,13 +563,23 @@ export default class TeriockBaseActorSheet extends SheetMixin(ActorSheetV2) {
   }
 
   /**
-   * Toggles the shield bash (sb) state.
+   * Toggles the style bonus (sb) state.
    *
    * @returns {Promise<void>} Promise that resolves when sb is toggled.
    * @static
    */
   static async _toggleSb() {
     await this.document.update({ "system.sb": !this.document.system.sb });
+  }
+
+  /**
+   * Toggles if the character still has a reaction.
+   *
+   * @returns {Promise<void>} Promise that resolves when sb is toggled.
+   * @static
+   */
+  static async _toggleReaction() {
+    await this.document.update({ "system.hasReaction": !this.document.system.hasReaction });
   }
 
   /**

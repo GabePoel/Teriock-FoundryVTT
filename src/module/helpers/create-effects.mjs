@@ -53,7 +53,12 @@ export async function createAbility(document, name = null, options = {}) {
     ];
     await sup.parent.updateEmbeddedDocuments("ActiveEffect", updateData);
   }
-  await embeddingDocument.forceUpdate();
+  if (
+    embeddingDocument.documentName !== "Actor" ||
+    embeddingDocument.sheet._activeTab === "abilities"
+  ) {
+    await embeddingDocument.forceUpdate();
+  }
   return ability;
 }
 
@@ -72,7 +77,12 @@ export async function createResource(document) {
     },
     { parent: document },
   );
-  await document.forceUpdate();
+  if (
+    document.documentName !== "Actor" ||
+    document.sheet._activeTab === "resources"
+  ) {
+    await document.forceUpdate();
+  }
   return resource;
 }
 
@@ -119,7 +129,9 @@ export async function createConsequence(document) {
     },
     { parent: document },
   );
-  await document.forceUpdate();
+  if (document.sheet._activeTab === "conditions") {
+    await document.forceUpdate();
+  }
   return effect;
 }
 
@@ -138,7 +150,12 @@ export async function createFluency(document) {
     },
     { parent: document },
   );
-  await document.forceUpdate();
+  if (
+    document.documentName === "Item" ||
+    document.sheet._activeTab === "tradecrafts"
+  ) {
+    await document.forceUpdate();
+  }
   return fluency;
 }
 

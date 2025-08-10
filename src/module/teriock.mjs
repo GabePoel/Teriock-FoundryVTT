@@ -206,11 +206,13 @@ foundry.helpers.Hooks.once("init", function () {
   // Registering custom queries
   Object.assign(CONFIG.queries, {
     "teriock.addToSustaining": queries.addToSustainingQuery,
+    "teriock.createHotbarFolder": queries.createHotbarFolderQuery,
     "teriock.inCombatExpiration": queries.inCombatExpirationQuery,
     "teriock.resetAttackPenalties": queries.resetAttackPenalties,
     "teriock.sustainedExpiration": queries.sustainedExpirationQuery,
     "teriock.timeAdvance": queries.timeAdvanceQuery,
-    "teriock.createHotbarFolder": queries.createHotbarFolderQuery,
+    "teriock.update": queries.updateQuery,
+    "teriock.updateEmbeddedDocuments": queries.updateEmbeddedDocumentsQuery,
   });
 
   const packs =

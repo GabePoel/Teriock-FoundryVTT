@@ -5,19 +5,17 @@ export default function registerTimeManagementHooks() {
       if (game.user.id === userId && game.user?.isActiveGM) {
         const scene = game.scenes.viewed;
         const tokens = scene.tokens;
+        /** @type {TeriockActor[]} */
         const actors = tokens.map((token) => token.actor);
-
         for (const actor of actors) {
-          // Handle temporary effects expiration
-          const effects = actor.temporaryEffects;
-          for (const effect of effects) {
-            if (typeof effect?.system?.checkExpiration === "function") {
-              await effect?.system?.checkExpiration();
-            }
+          const numConsequences = actor.consequences.length;
+          // Check if any consequences expire
+          for (const effect of actor.consequences) {
+            await effect.system.checkExpiration();
           }
 
           // Update debt with interest if the actor has debt and an interest rate
-          const currentDebt = actor.system.money?.debt || 0;
+          const currentDebt = actor.system.money.debt || 0;
           const dailyInterestRate = actor.system.interestRate || 0;
 
           if (currentDebt > 0 && dailyInterestRate > 0) {
@@ -32,7 +30,9 @@ export default function registerTimeManagementHooks() {
             });
           }
 
-          await actor.forceUpdate();
+          if (actor.sheet._activeTab === "conditions" && numConsequences > 0) {
+            await actor.forceUpdate();
+          }
         }
       }
     },

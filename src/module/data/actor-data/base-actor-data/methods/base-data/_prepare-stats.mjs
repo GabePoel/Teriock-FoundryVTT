@@ -11,7 +11,11 @@ import TeriockRankData from "../../../../item-data/rank-data/rank-data.mjs";
 export function _prepareBonuses(system) {
   const lvl = system.lvl;
   Object.assign(system, {
-    pres: Math.max(1, Math.floor(1 + (lvl + 1) / 5)),
+    presence: {
+      min: 0,
+      value: 0,
+      max: Math.max(1, Math.floor(1 + (lvl + 1) / 5)),
+    },
     rank: Math.max(0, Math.floor((lvl - 1) / 5)),
     p: Math.max(0, Math.floor(1 + (lvl - 7) / 10)),
     f: Math.max(0, Math.floor((lvl - 2) / 5)),
@@ -56,23 +60,6 @@ export function _prepareHpMp(system) {
   system.mp.min = -Math.floor(mpMax / 2);
   system.mp.value = Math.min(system.mp.value, mpMax);
   system.sheet.dieBox = { hitDice: hitDieBox, manaDice: manaDieBox };
-}
-
-/**
- * Prepares presence-related derived data.
- * Calculates presence overflow, maximum presence, and used/unused presence points.
- *
- * @param {TeriockBaseActorData} system - The actor's base data system object.
- * @returns {void} Modifies the system object in place.
- * @private
- */
-export function _preparePresence(system) {
-  system.presence.overflow = system.presence.value > system.pres;
-  system.presence.max = system.pres;
-  system.presence.value = Math.min(system.presence.value, system.pres);
-  system.usp = system.presence.value;
-  system.unp = system.presence.max - system.presence.value;
-  system.attributes.unp.value = system.unp;
 }
 
 /**

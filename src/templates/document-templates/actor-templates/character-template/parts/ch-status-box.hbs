@@ -35,29 +35,33 @@
         </div>
         <div class="character-bar-overlay">
           <div class="character-bar-overlay-row character-hit-bar-overlay-row">
-            <input
-              type="number"
-              name="system.hp.value"
-              value="{{system.hp.value}}"
-              class="thover character-bar-overlay-left character-bar-overlay-label"
-              max="{{system.hp.max}}"
-              min="{{system.hp.min}}"
-              data-tooltip="Current HP"
-              style="cursor: text;"
-            >
-            <div class="character-bar-overlay-max character-bar-overlay-label">
+            <label>
+              <input
+                type="number"
+                name="system.hp.value"
+                value="{{system.hp.value}}"
+                class="thover character-bar-overlay-left character-bar-overlay-label"
+                max="{{system.hp.max}}"
+                min="{{system.hp.min}}"
+                data-tooltip="Current HP"
+                style="cursor: text;"
+              >
+            </label>
+            <div class="character-bar-overlay-max character-bar-overlay-label" data-tooltip="Maximum HP">
               <span>/ {{system.hp.max}} +</span>
             </div>
-            <input
-              type="number"
-              name="system.hp.temp"
-              value="{{system.hp.temp}}"
-              class="thover character-bar-overlay-temp character-bar-overlay-label"
-              placeholder="0"
-              min="0"
-              data-tooltip="Temporary HP"
-              style="cursor: text;"
-            >
+            <label>
+              <input
+                type="number"
+                name="system.hp.temp"
+                value="{{system.hp.temp}}"
+                class="thover character-bar-overlay-temp character-bar-overlay-label"
+                placeholder="0"
+                min="0"
+                data-tooltip="Temporary HP"
+                style="cursor: text;"
+              >
+            </label>
           </div>
           <div
             class="take-harm-button thover take-damage-button"
@@ -108,29 +112,33 @@
         </div>
         <div class="character-bar-overlay">
           <div class="character-bar-overlay-row character-mana-bar-overlay-row">
-            <input
-              type="number"
-              name="system.mp.value"
-              value="{{system.mp.value}}"
-              class="thover character-bar-overlay-left character-bar-overlay-label"
-              max="{{system.mp.max}}"
-              min="{{system.mp.min}}"
-              data-tooltip="Current MP"
-              style="cursor: text;"
-            >
-            <div class="character-bar-overlay-max character-bar-overlay-label">
+            <label>
+              <input
+                type="number"
+                name="system.mp.value"
+                value="{{system.mp.value}}"
+                class="thover character-bar-overlay-left character-bar-overlay-label"
+                max="{{system.mp.max}}"
+                min="{{system.mp.min}}"
+                data-tooltip="Current MP"
+                style="cursor: text;"
+              >
+            </label>
+            <div class="character-bar-overlay-max character-bar-overlay-label" data-tooltip="Maximum MP">
               <span>/ {{system.mp.max}} +</span>
             </div>
-            <input
-              type="number"
-              name="system.mp.temp"
-              value="{{system.mp.temp}}"
-              class="thover character-bar-overlay-temp character-bar-overlay-label"
-              placeholder="0"
-              min="0"
-              data-tooltip="Temporary MP"
-              style="cursor: text;"
-            >
+            <label>
+              <input
+                type="number"
+                name="system.mp.temp"
+                value="{{system.mp.temp}}"
+                class="thover character-bar-overlay-temp character-bar-overlay-label"
+                placeholder="0"
+                min="0"
+                data-tooltip="Temporary MP"
+                style="cursor: text;"
+              >
+            </label>
           </div>
           <div
             class="take-harm-button thover take-damage-button"
@@ -174,17 +182,19 @@
           <div
             class="character-bar-overlay-row character-wither-bar-overlay-row"
           >
-            <input
-              type="number"
-              name="system.wither.value"
-              value="{{system.wither.value}}"
-              class="thover character-bar-overlay-left character-bar-overlay-label"
-              max="{{system.wither.max}}"
-              min="{{system.wither.min}}"
-              data-tooltip="Current Wither"
-              style="cursor: text;"
-            >
-            <div class="character-bar-overlay-max character-bar-overlay-label">
+            <label>
+              <input
+                type="number"
+                name="system.wither.value"
+                value="{{system.wither.value}}"
+                class="thover character-bar-overlay-left character-bar-overlay-label"
+                max="{{system.wither.max}}"
+                min="{{system.wither.min}}"
+                data-tooltip="Current Wither"
+                style="cursor: text;"
+              >
+            </label>
+            <div class="character-bar-overlay-max character-bar-overlay-label" data-tooltip="Maximum Wither">
               <span>/ {{system.wither.max}}</span>
             </div>
           </div>
@@ -203,18 +213,20 @@
       system.presence.overflow}}overflow{{/if}}">
       <div
         class="character-presence-bar"
-        style="grid-template-columns:{{repeat system.pres ' 1fr'}};"
+        style="grid-template-columns:{{repeat system.presence.max ' 1fr'}};"
+        data-tooltip="{{{system.presence.value}}} out of {{{system.presence.max}}} Presence Used"
       >
-        {{#if (geq system.usp 1)}}
+        {{#if (geq system.presence.value 1)}}
           <div
             class="presence-indicator used"
             style="grid-column: span {{{system.usp}}}; grid-template-columns:{{repeat system.usp
                                                                                       ' 1fr'}}; display: grid;"
           >
-            {{repeat system.usp '<div class="presence-indicator empty" style="background: transparent;"></div>'}}
+            {{repeat system.presence.value
+                     '<div class="presence-indicator empty" style="background: transparent;"></div>'}}
           </div>
         {{/if}}
-        {{repeat system.unp '<div class="presence-indicator unused"></div>'}}
+        {{repeat system.attributes.unp.value '<div class="presence-indicator unused"></div>'}}
       </div>
     </div>
   </div>

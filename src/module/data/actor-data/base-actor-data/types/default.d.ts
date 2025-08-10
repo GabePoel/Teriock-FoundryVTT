@@ -70,7 +70,7 @@ export interface TeriockBaseActorDefault {
   attackPenalty: number;
   /** Style bonus */
   sb: boolean;
-  /** Piercing bonus type */
+  /** Piercing type */
   piercing: string;
   /** Defined damage dice/expressions */
   damage: {
@@ -199,4 +199,6 @@ export interface TeriockBaseActorDefault {
       derived: TeriockEquipment | null;
     };
   };
+  /** Whether {@link TeriockActor} still has reaction */
+  hasReaction: boolean;
 }

@@ -3,21 +3,21 @@
     <div class="defense-box-main">
       <div class="character-shortbox character-ac-box">
         <div class="tsubtle tcenter">AC</div>
-        <div class="character-smallbox-value">
+        <div class="character-smallbox-value" data-tooltip="Armor Class">
           {{{system.ac}}}
         </div>
       </div>
 
       <div class="character-shortbox character-bv-box">
         <div class="tsubtle tcenter">BV</div>
-        <div class="character-smallbox-value">
+        <div class="character-smallbox-value" data-tooltip="Block Value">
           {{{system.bv}}}
         </div>
       </div>
 
       <div class="character-shortbox character-cc-box">
         <div class="tsubtle tcenter">AC + BV</div>
-        <div class="character-smallbox-value">
+        <div class="character-smallbox-value" data-tooltip="Combined AC and BV">
           {{{system.cc}}}
         </div>
       </div>
@@ -59,11 +59,24 @@
     </div>
   </div>
 
+  <div class="reaction-box defense-box" style="align-items: center; flex-direction: row;" data-action="toggleReaction">
+    <div class="title-left tsubtle">Has Reaction</div>
+    <div class="right-container" style="display: flex; align-items: center; justify-content: end; flex: 1;">
+      <div class="character-smallbox-value" data-tooltip="Toggle Reaction">
+        {{#if system.hasReaction}}
+          <i class="fa-solid fa-check thover"></i>
+        {{else}}
+          <i class="fa-solid fa-xmark thover"></i>
+        {{/if}}
+      </div>
+    </div>
+  </div>
+
   <div class="attack-box">
     <div class="attack-box-main">
       <div class="character-shortbox character-piercing-box">
         <div class="tsubtle tcenter" data-action="piercingChange">Piercing</div>
-        <div class="character-smallbox-value thover">
+        <div class="character-smallbox-value thover" data-tooltip="Override Piercing">
           {{#if (or (eq system.piercing "ub") system.wielding.attacker.derived.system.derivedUb)}}
             UB{{#if (eq system.piercing "ub")}}*{{/if}}
           {{else}}
@@ -78,7 +91,7 @@
 
       <div class="character-shortbox character-sb-box" data-action="toggleSb">
         <div class="tsubtle tcenter">SB</div>
-        <div class="character-smallbox-value">
+        <div class="character-smallbox-value" data-tooltip="Toggle Style Bonus">
           {{#if system.sb}}
             <i class="fa-solid fa-check thover"></i>
           {{else}}
@@ -93,6 +106,7 @@
           systemFields.attackPenalty
           value=system.attackPenalty
           classes="character-penalty-input character-smallbox-value"
+          dataset=(dataset tooltip="Change Attack Penalty")
         }}
       </div>
     </div>
