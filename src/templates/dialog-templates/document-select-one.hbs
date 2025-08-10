@@ -1,0 +1,27 @@
+<div class="teriock">
+  <div class="form-group">
+    {{#if (exists hint)}}
+      <p class="hint">
+        {{{hint}}}
+      </p>
+    {{/if}}
+    <div class="doc-list-container">
+      <ul class="doc-select tcard-container small">
+        {{#each documents as |doc uuid|}}
+          <label class="doc-select-row tcard" {{#if ../tooltip}}data-tooltip-html="{{doc.tooltip}}"
+                 data-tooltip-class="teriock teriock-rich-tooltip" data-tooltip-direction="RIGHT"{{/if}}>
+            <label class="doc-checkbox-container">
+              <input id="doc-{{uuid}}" type="radio" name="choice" value="{{uuid}}">
+            </label>
+            <label class="doc-image-container" for="doc-{{uuid}}">
+              <img src="{{doc.img}}" alt="{{doc.name}}">
+            </label>
+            <label class="doc-name-container" for="doc-{{uuid}}">
+              {{doc.name}}
+            </label>
+          </label>
+        {{/each}}
+      </ul>
+    </div>
+  </div>
+</div>

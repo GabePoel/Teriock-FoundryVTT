@@ -51,7 +51,7 @@ export class BaseTeriockActor extends ParentDocument(CommonDocument(Actor)) {}
  * @extends {Item}
  * @mixes ChildDocument
  * @mixes CommonDocument
- * @mixes ParentDocumentMixin
+ * @mixes ParentDocument
  * @implements {ItemData}
  * @property {TeriockActor|null} actor
  * @property {EmbeddedCollection<string, TeriockEffect>} effects

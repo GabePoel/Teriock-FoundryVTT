@@ -69,6 +69,9 @@ export async function _buildButtons(rollConfig) {
       icon: "fas fa-hammer-crash",
       dataset: {
         action: "standard-damage",
+        attacker:
+          safeUuid(abilityData.actor.system.wielding.attacker?.derived?.uuid) ||
+          null,
       },
     });
   }

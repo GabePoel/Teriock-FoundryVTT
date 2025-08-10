@@ -1,5 +1,3 @@
-import { secondsToReadable } from "../utils.mjs";
-
 export default function registerUiHelpers() {
   Handlebars.registerHelper("log", (...args) => {
     const options = args.pop();
@@ -344,13 +342,8 @@ export default function registerUiHelpers() {
               : ability.type === "property"
                 ? ability.system?.form
                 : "";
-          if (ability.isTemporary && ability.duration.seconds) {
-            subtitle =
-              secondsToReadable(
-                ability.duration.startTime +
-                  ability.duration.seconds -
-                  ability.duration._worldTime,
-              ) + " remaining";
+          if (ability.hasDuration) {
+            subtitle = ability.remainingString;
           }
           const marker = Handlebars.helpers.abilityMarker(ability);
           const chatIcon = Handlebars.helpers.ticon("comment", {

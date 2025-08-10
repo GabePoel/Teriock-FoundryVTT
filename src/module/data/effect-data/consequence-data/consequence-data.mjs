@@ -105,7 +105,6 @@ export default class TeriockConsequenceData extends TeriockBaseEffectData {
     }
     if (this.sustainedExpiration) {
       const source = fromUuidSync(this.source);
-      console.log(source);
       should = should || !source || source.disabled;
     }
     return should;

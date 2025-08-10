@@ -1,7 +1,38 @@
-.token-select {
+.doc-list-container {
+  /* you already had these */
+  max-height: 600px;
+  overflow: auto;
+  padding-inline: 6px;
+
+  /* NEW: fade mask */
+  --fade: 6px; /* height of faded zones */
+
+  /* optional: keep items from sitting under the fades */
+  padding-block: var(--fade);
+
+  /* mask that is opaque in the middle and fades at top/bottom */
+  -webkit-mask-image: linear-gradient(
+                  to bottom,
+                  transparent 0,
+                  #000 var(--fade),
+                  #000 calc(100% - var(--fade)),
+                  transparent 100%
+  );
+  mask-image: linear-gradient(
+                  to bottom,
+                  transparent 0,
+                  #000 var(--fade),
+                  #000 calc(100% - var(--fade)),
+                  transparent 100%
+  );
+}
+
+
+.doc-select {
   padding: 0;
   margin: 0;
-  .token-select-row {
+
+  .doc-select-row {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -9,7 +40,7 @@
     gap: 7px;
     cursor: pointer;
 
-    .token-checkbox-container {
+    .doc-checkbox-container {
       height: 28px;
       margin-left: 7px;
       margin-top: 4px;
@@ -17,18 +48,26 @@
       align-items: center;
       justify-content: center;
       flex-direction: column;
+
+      * {
+        margin-block: 0;
+      }
     }
 
-    .token-image-container {
+    .doc-image-container {
       height: 28px;
       width: 28px;
       display: flex;
       align-items: center;
       justify-content: center;
       flex-direction: column;
+
+      img {
+        filter: drop-shadow(0 0 2px rgba(0, 0, 0, .4));
+      }
     }
 
-    .token-name-container {
+    .doc-name-container {
       height: 28px;
       display: flex;
       flex-direction: row;

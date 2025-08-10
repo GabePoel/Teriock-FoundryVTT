@@ -1,13 +1,16 @@
+scope.chatData.system.buttons = [];
 const actor = scope.abilityData.actor;
-const equipment = {};
-actor.itemTypes?.equipment
-  .filter((e) => e.system.isAttuned)
-  .map((e) => (equipment[e.id] = e.name));
-const id = await game.teriock.api.dialog.select(
+const equipment = actor.equipment.filter((e) => e.system.isAttuned);
+const selectedEquipmentUuids = await game.teriock.api.dialog.selectDocument(
   equipment,
-  "Equipment",
-  "Please select an attuned item.",
-  "Select Attuned Item",
+  {
+    title: "Select Equipment",
+    hint: "Select equipment to deattune.",
+    multi: true,
+    tooltip: true,
+  },
 );
-const item = actor.items.get(id);
-await item.system.deattune();
+for (const uuid of selectedEquipmentUuids) {
+  const selectedEquipment = await foundry.utils.fromUuid(uuid);
+  await selectedEquipment.system.deattune();
+}

@@ -37,53 +37,45 @@ export default class TeriockActor extends BaseTeriockActor {
   /**
    * Gets effects that expire based on conditions.
    *
-   * @returns {TeriockEffect[]} Array of condition expiration effects.
+   * @returns {TeriockConsequence[]} Array of condition expiration effects.
    */
   get conditionExpirationEffects() {
     return (
-      this.effectTypes.consequence?.filter(
-        (effect) => effect.system.conditionExpiration,
-      ) || []
+      this.consequences.filter((effect) => effect.system.conditionExpiration) ||
+      []
     );
   }
 
   /**
    * Gets effects that expire based on movement.
    *
-   * @returns {TeriockEffect[]} Array of movement expiration effects.
+   * @returns {TeriockConsequence[]} Array of movement expiration effects.
    */
   get movementExpirationEffects() {
     return (
-      this.effectTypes.consequence?.filter(
-        (effect) => effect.system.movementExpiration,
-      ) || []
+      this.consequences.filter((effect) => effect.system.movementExpiration) ||
+      []
     );
   }
 
   /**
    * Gets effects that expire at dawn.
    *
-   * @returns {TeriockEffect[]} Array of dawn expiration effects.
+   * @returns {TeriockConsequence[]} Array of dawn expiration effects.
    */
   get dawnExpirationEffects() {
     return (
-      this.effectTypes.consequence?.filter(
-        (effect) => effect.system.dawnExpiration,
-      ) || []
+      this.consequences.filter((effect) => effect.system.dawnExpiration) || []
     );
   }
 
   /**
-   * Gets effects that expire when sustained abilities end.
+   * Get effects that expire with some duration.
    *
-   * @returns {TeriockEffect[]} Array of sustained expiration effects.
+   * @returns {TeriockConsequence[]}
    */
-  get sustainedExpirationEffects() {
-    return (
-      this.effectTypes.consequence?.filter(
-        (effect) => effect.system.sustainedExpiration,
-      ) || []
-    );
+  get durationExpirationEffects() {
+    return this.consequences.filter((effect) => effect.hasDuration);
   }
 
   /**
@@ -301,6 +293,7 @@ export default class TeriockActor extends BaseTeriockActor {
     Hooks.callAll(`teriock.${name}`, this, ...args);
     if (this.system.hookedMacros[name]) {
       for (const macroUuid of this.system.hookedMacros[name]) {
+        /** @type {TeriockMacro} */
         const macro = await foundry.utils.fromUuid(macroUuid);
         if (macro) {
           await macro.execute({ actor: this, args: [...args] });
@@ -425,7 +418,7 @@ export default class TeriockActor extends BaseTeriockActor {
    * Relevant wiki pages:
    * - [Temporary Hit Points](https://wiki.teriock.com/index.php/Core:Temporary_Hit_Points)
    *
-   * @param {number} amount - The amount of temporary hit points to gain.
+   * @param {number} amount - The number of temporary hit points to gain.
    * @returns {Promise<void>} Promise that resolves when temporary hit points are gained.
    */
   async takeGainTempHp(amount) {
@@ -439,7 +432,7 @@ export default class TeriockActor extends BaseTeriockActor {
    * Relevant wiki pages:
    * - [Temporary Mana Points](https://wiki.teriock.com/index.php/Core:Temporary_Mana_Points)
    *
-   * @param {number} amount - The amount of temporary mana points to gain.
+   * @param {number} amount - The number of temporary mana points to gain.
    * @returns {Promise<void>} Promise that resolves when temporary mana points are gained.
    */
   async takeGainTempMp(amount) {
@@ -479,7 +472,7 @@ export default class TeriockActor extends BaseTeriockActor {
    * Actor pays money.
    *
    * @param {number} amount - The amount of gold-equivalent money to pay.
-   * @param {"exact" | "greedy"} mode - Exact change or closest denomination, rounded up.
+   * @param {"exact" | "greedy"} mode - Exact change or the closest denomination, rounded up.
    */
   async takePay(amount, mode = "greedy") {
     await this.hookCall("takePay", amount);

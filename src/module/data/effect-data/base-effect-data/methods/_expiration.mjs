@@ -18,7 +18,6 @@ export function _shouldExpire(effectData) {
   )
     return false;
   const expirationTime = duration.startTime + duration.seconds;
-  console.log(duration, currentTime > expirationTime);
   return currentTime > expirationTime;
 }
 

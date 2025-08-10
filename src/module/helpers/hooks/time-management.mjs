@@ -1,39 +1,47 @@
+/**
+ * Get each {@link TeriockActor} in the current scene.
+ *
+ * @returns {TeriockActor[]}
+ */
+function getActors() {
+  return game.scenes.viewed.tokens
+    .filter((token) => token.actor)
+    .map((token) => token.actor);
+}
+
 export default function registerTimeManagementHooks() {
   foundry.helpers.Hooks.on(
     "updateWorldTime",
     async (_worldTime, dt, _options, userId) => {
       if (game.user.id === userId && game.user?.isActiveGM) {
-        const scene = game.scenes.viewed;
-        const tokens = scene.tokens;
-        /** @type {TeriockActor[]} */
-        const actors = tokens.map((token) => token.actor);
-        for (const actor of actors) {
-          const numConsequences = actor.consequences.length;
-          // Check if any consequences expire
-          for (const effect of actor.consequences) {
+        for (const actor of getActors()) {
+          for (const effect of actor.durationExpirationEffects) {
             await effect.system.checkExpiration();
           }
 
-          // Update debt with interest if the actor has debt and an interest rate
-          const currentDebt = actor.system.money.debt || 0;
-          const dailyInterestRate = actor.system.interestRate || 0;
-
-          if (currentDebt > 0 && dailyInterestRate > 0) {
-            // Calculate new debt after interest
-            const daysElapsed = dt / 86400; // Convert seconds to days
+          if (actor.system.money.debt > 0 && actor.system.interestRate > 0) {
+            const daysElapsed = dt / 86400;
             const newDebt =
-              currentDebt * Math.pow(1 + dailyInterestRate, daysElapsed);
+              actor.system.money.debt *
+              Math.pow(1 + actor.system.interestRate, daysElapsed);
 
-            // Update the actor's debt
             await actor.update({
-              "system.money.debt": Math.round(newDebt * 100) / 100, // Round to 2 decimal places
+              // Round to 2 decimal places
+              "system.money.debt": Math.round(newDebt * 100) / 100,
             });
-          }
-          if (numConsequences > 0) {
-            await actor.forceUpdate();
           }
         }
       }
     },
   );
+
+  foundry.helpers.Hooks.on("teriock.dawn", async () => {
+    if (game.user?.isActiveGM) {
+      for (const actor of getActors()) {
+        for (const effect of actor.dawnExpirationEffects) {
+          await effect.system.expire();
+        }
+      }
+    }
+  });
 }

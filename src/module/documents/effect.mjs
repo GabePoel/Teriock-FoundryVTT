@@ -1,3 +1,4 @@
+import { secondsToReadable } from "../helpers/utils.mjs";
 import { BaseTeriockEffect } from "./_base.mjs";
 
 /**
@@ -40,6 +41,42 @@ export default class TeriockEffect extends BaseTeriockEffect {
       defaultMetadata,
       this.system.constructor?.metadata,
     );
+  }
+
+  /**
+   * Alternative to {@link this.isTemporary} that only references duration.
+   *
+   * @returns {boolean}
+   */
+  get hasDuration() {
+    return !!this.duration.seconds;
+  }
+
+  /**
+   * The number of seconds remaining before this effect expires.
+   *
+   * @returns {number|null}
+   */
+  get remaining() {
+    if (this.hasDuration) {
+      return (
+        this.duration.startTime + this.duration.seconds - game.time.worldTime
+      );
+    }
+    return null;
+  }
+
+  /**
+   * The time remaining before this effect expires, as a string.
+   *
+   * @returns {string|null}
+   */
+  get remainingString() {
+    const remaining = this.remaining;
+    if (remaining !== null) {
+      return secondsToReadable(remaining);
+    }
+    return null;
   }
 
   /**

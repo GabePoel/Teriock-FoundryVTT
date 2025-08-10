@@ -1,3 +1,5 @@
+import selectDocumentDialog from "./select-document-dialog.mjs";
+
 const { DialogV2 } = foundry.applications.api;
 
 /**
@@ -6,7 +8,7 @@ const { DialogV2 } = foundry.applications.api;
  * @param {object} options
  * @param {string} options.[title] - Title for dialog.
  * @param {string} options.[hint] - Text for dialog.
- * @returns {Promise<Teriock.UUID<TeriockTokenDocument>>}
+ * @returns {Promise<Teriock.UUID<TeriockTokenDocument>[]>}
  */
 export async function selectTokensDialog(
   options = { title: "Select Tokens", hint: "" },
@@ -19,33 +21,26 @@ export async function selectTokensDialog(
   for (const id of visibleTokenIds) {
     visibleTokenDocuments.push(tokenLayer.documentCollection.get(id));
   }
-  const context = { tokens: {}, hint: options.hint };
-  for (const tokenDocument of visibleTokenDocuments) {
-    context.tokens[tokenDocument.uuid] = {
-      name: tokenDocument.name,
-      img: tokenDocument.texture.src,
-    };
-  }
-  const content = await foundry.applications.handlebars.renderTemplate(
-    "systems/teriock/src/templates/dialog-templates/token-select.hbs",
-    context,
-  );
-  return await DialogV2.prompt({
-    window: { title: options.title },
-    content: content,
-    ok: {
-      callback: (_event, button) =>
-        Array.from(button.form.elements)
-          .filter((e) => e?.checked)
-          .map((e) => e?.name),
-    },
+  const documents =
+    /** @type {TeriockTokenDocument[]} */ visibleTokenDocuments.map((t) => {
+      return {
+        uuid: t.uuid,
+        name: t.name,
+        img: t.texture.src,
+      };
+    });
+  return await selectDocumentDialog(documents, {
+    title: options.title,
+    hint: options.hint,
+    multi: true,
+    tooltip: false,
   });
 }
 
 /**
  * Select some number of visible tokens for target to be lighted to.
  *
- * @returns {Promise<Teriock.UUID<TeriockTokenDocument>>}
+ * @returns {Promise<Teriock.UUID<TeriockTokenDocument>[]>}
  */
 export async function lightedToDialog() {
   return await selectTokensDialog({
@@ -57,7 +52,7 @@ export async function lightedToDialog() {
 /**
  * Select some number of visible tokens for target to be goaded to.
  *
- * @returns {Promise<Teriock.UUID<TeriockTokenDocument>>}
+ * @returns {Promise<Teriock.UUID<TeriockTokenDocument>[]>}
  */
 export async function goadedToDialog() {
   return await selectTokensDialog({

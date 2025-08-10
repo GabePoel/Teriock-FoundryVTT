@@ -5,7 +5,7 @@
  * @param {string} sortKey - The key to sort by.
  * @param {boolean} ascending - Whether to sort in ascending order.
  * @param {Record<string, *>} sortMap - Map of sort keys to accessor functions.
- * @returns {TeriockAbility[]|TeriockEquipment[]} Sorted array of items.
+ * @returns {TeriockAbility[]|TeriockEquipment[]} A sorted array of items.
  */
 export function _sortEmbedded(items, sortKey, ascending, sortMap = {}) {
   if (!items || !Array.isArray(items) || items.length === 0) {
@@ -23,9 +23,9 @@ export function _sortEmbedded(items, sortKey, ascending, sortMap = {}) {
 
 /**
  * Sorts abilities based on actor sheet settings.
- * Uses the actor's ability sort configuration to determine sort criteria.
- * @param {TeriockActor} actor - The actor whose abilities to sort.
- * @returns {TeriockAbility[]} Sorted array of abilities.
+ * Uses the actor's ability sorting configuration to determine sort criteria.
+ * @param {TeriockActor} actor - The actor whose abilities should be sorted.
+ * @returns {TeriockAbility[]} A sorted array of abilities.
  */
 export function _sortAbilities(actor) {
   /** @type {TeriockBaseActorSheet} */
@@ -52,7 +52,7 @@ export function _sortAbilities(actor) {
 /**
  * Sorts equipment based on actor sheet settings.
  * Uses the actor's equipment sort configuration to determine sort criteria.
- * @param {TeriockActor} actor - The actor whose equipment to sort.
+ * @param {TeriockActor} actor - The actor whose equipment should be sorted.
  * @returns {TeriockEquipment[]} Sorted array of equipment.
  */
 export function _sortEquipment(actor) {

@@ -103,10 +103,10 @@ export async function createProperty(document, name = null) {
   if (name) {
     propertyData.name = name;
   }
-  /** @type {TeriockProperty} */
-  const property = (
-    await document.createEmbeddedDocuments("ActiveEffect", [propertyData])
-  )[0];
+
+  const property =
+    /** @type {TeriockProperty} */
+    (await document.createEmbeddedDocuments("ActiveEffect", [propertyData]))[0];
   if (propertyData.name !== "New Property") {
     await property.system.wikiPull({ notify: false });
   }

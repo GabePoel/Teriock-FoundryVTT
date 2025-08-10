@@ -16,12 +16,11 @@ export function _messageParts(equipmentData) {
   const ref = CONFIG.TERIOCK.equipmentOptions;
   const src = equipmentData;
   let damageString = "";
-  if (src.damage) {
-    damageString += src.damage;
+  if (src.derivedDamage) {
+    damageString += src.derivedDamage;
     if (src.twoHandedDamage !== "0") {
-      damageString += " / " + src.twoHandedDamage;
+      damageString += " / " + src.derivedTwoHandedDamage;
     }
-    damageString += " damage";
   }
   let rangeString = "";
   if (src.range) {
@@ -43,8 +42,16 @@ export function _messageParts(equipmentData) {
     },
     {
       icon: "fa-crosshairs-simple",
-      label: "Damage",
-      wrappers: [damageString, rangeString, src.sb, src.av, src.bv],
+      label: "Attack",
+      wrappers: [damageString, rangeString, src.sb],
+    },
+    {
+      icon: "fa-shield",
+      label: "Defense",
+      wrappers: [
+        src.derivedAv ? `${src.derivedAv} AV` : "",
+        src.derivedBv ? `${src.derivedBv} BV` : "",
+      ],
     },
     {
       icon: "fa-weight-hanging",

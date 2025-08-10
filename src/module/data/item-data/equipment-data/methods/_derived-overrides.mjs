@@ -192,7 +192,9 @@ export function _derivedDamage(equipmentData) {
     "damage",
     (data) =>
       data.damage +
-      (equipmentData?.actor.system.damage.standard
+      (equipmentData?.actor.system.damage.standard &&
+      data.damage &&
+      data.damage !== "0"
         ? " " + equipmentData.actor.system.damage.standard
         : ""),
     (current, override) => override || current,
@@ -214,7 +216,8 @@ export function _derivedTwoHandedDamage(equipmentData) {
       (data.twoHandedDamage && data.twoHandedDamage !== "0"
         ? data.twoHandedDamage
         : data.damage) +
-      (equipmentData?.actor.system.damage.standard
+      (equipmentData?.actor.system.damage.standard &&
+      (data.damage !== "0" || data.twoHandedDamage !== "0")
         ? " " + equipmentData.actor.system.damage.standard
         : ""),
     (current, override) => override || current,
