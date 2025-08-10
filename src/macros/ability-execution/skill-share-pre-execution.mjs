@@ -4,9 +4,9 @@ scope.chatData.system.buttons = buttons.filter(
 );
 const button = scope.chatData.system.buttons[0];
 const effectObject = JSON.parse(button.dataset.normal);
-const validAbilities = actor.abilities.filter(
-  (a) => !a.isReference && a.system.standard,
-);
+const validAbilities = actor.abilities
+  .filter((a) => !a.isReference && a.system.standard)
+  .sort((a, b) => a.name.localeCompare(b.name));
 const selectedAbilityUuids = await game.teriock.api.dialog.selectDocument(
   validAbilities,
   {

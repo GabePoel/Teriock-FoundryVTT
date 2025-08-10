@@ -24,13 +24,15 @@ const oldEquipmentId = actor.system.wielding.attacker.raw;
 await actor.update({
   "system.wielding.attacker.raw": selectedEquipmentId,
 });
-const abilities = actor.abilities.filter(
-  (a) =>
-    a.system.interaction === "attack" &&
-    a.system.maneuver === "active" &&
-    a.system.executionTime === "a1" &&
-    ["weapon", "hand"].includes(a.system.delivery.base),
-);
+const abilities = actor.abilities
+  .filter(
+    (a) =>
+      a.system.interaction === "attack" &&
+      a.system.maneuver === "active" &&
+      a.system.executionTime === "a1" &&
+      ["weapon", "hand"].includes(a.system.delivery.base),
+  )
+  .sort((a, b) => a.name.localeCompare(b.name));
 const selectedAbilities = await game.teriock.api.dialog.selectDocument(
   abilities,
   {
