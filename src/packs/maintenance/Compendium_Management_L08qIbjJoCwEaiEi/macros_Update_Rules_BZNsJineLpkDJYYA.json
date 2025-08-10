@@ -6,8 +6,8 @@
   "img": "icons/svg/book.svg",
   "scope": "global",
   "command": "const coreRulesPack = game.teriock.packs.rules();\n\nconst namespaceCategoryMap = {\n  Core: \"Core rules\",\n  Keyword: \"Keywords\",\n  Damage: \"Damage types\",\n  Drain: \"Drain types\",\n  Condition: \"Conditions\",\n  Property: \"Properties\",\n  Tradecraft: \"Tradecrafts\",\n};\n\nfor (const [namespace, category] of Object.entries(namespaceCategoryMap)) {\n  console.log(`Processing namespace: ${namespace} (category: ${category})`);\n\n  // Fetch all pages in the category\n  let allRulesPages =\n    await game.teriock.api.wiki.fetchCategoryMembers(category);\n  allRulesPages = allRulesPages.filter((page) =>\n    page.title.startsWith(`${namespace}:`),\n  );\n\n  // Attempt to load the journal from the pack\n  let rulesJournal = await foundry.utils.fromUuid(\n    coreRulesPack.index.getName(namespace)?.uuid ?? \"\",\n  );\n\n  // Create the journal if it's missing\n  if (!rulesJournal) {\n    console.warn(\n      `Journal for namespace '${namespace}' not found. Creating it...`,\n    );\n    rulesJournal = await JournalEntry.implementation.create(\n      { name: namespace },\n      { pack: \"teriock.rules\" },\n    );\n  }\n\n  for (const rulesPage of allRulesPages) {\n    const title = rulesPage.title;\n\n    // Extract rule name after the namespace prefix\n    const rulesName = title.slice(namespace.length + 1).trim();\n    if (!rulesName) {\n      console.warn(`Skipping page with empty rule name: \"${title}\"`);\n      continue;\n    }\n\n    // Fetch and clean HTML\n    let rawHtml = await game.teriock.api.wiki.fetchWikiPageHTML(title, {\n      transformDice: true,\n      enrichText: true,\n      removeSubContainers: true,\n    });\n    const parser = new DOMParser();\n    const doc = parser.parseFromString(rawHtml, \"text/html\");\n\n    // Remove unwanted elements\n    const selectorsToRemove = [\n      \"figure\",\n      \"#toc\",\n      \".mw-editsection-bracket\",\n      \".mw-editsection-visualeditor\",\n      \".citizen-editsection-icon\",\n      \".mw-ui-icon-wikimedia-edit\",\n      \".mw-editsection-divider\",\n      \".mw-file-description\",\n      \".mw-default-size\",\n    ];\n    selectorsToRemove.forEach((selector) => {\n      doc.querySelectorAll(selector).forEach((el) => el.remove());\n    });\n\n    const html = doc.body.innerHTML;\n\n    // Create or update journal page\n    let journalPage = rulesJournal.pages.getName(rulesName);\n\n    if (!journalPage) {\n      await rulesJournal.createEmbeddedDocuments(\"JournalEntryPage\", [\n        {\n          name: rulesName,\n          type: \"text\",\n          text: { content: html },\n        },\n      ]);\n      console.log(`Created: ${namespace}:${rulesName}`);\n    } else {\n      await journalPage.update({\n        text: { content: html },\n      });\n      console.log(`Updated: ${namespace}:${rulesName}`);\n    }\n  }\n}",
-  "folder": null,
-  "sort": 200000,
+  "folder": "L08qIbjJoCwEaiEi",
+  "sort": 250000,
   "ownership": {
     "default": 0,
     "uxE8DDp7ujgsxtd2": 3
@@ -21,8 +21,8 @@
     "systemId": "teriock",
     "systemVersion": "0.1.0",
     "createdTime": 1754273233127,
-    "modifiedTime": 1754584194942,
-    "lastModifiedBy": "qf5JYGZKzM588nE6"
+    "modifiedTime": 1754845052744,
+    "lastModifiedBy": "MMeF1yfOcMgtpZFS"
   },
   "_key": "!macros!BZNsJineLpkDJYYA"
 }

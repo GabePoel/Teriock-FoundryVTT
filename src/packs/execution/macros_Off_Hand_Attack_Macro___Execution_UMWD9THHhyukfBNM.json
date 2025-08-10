@@ -5,7 +5,7 @@
   "author": "MMeF1yfOcMgtpZFS",
   "img": "icons/svg/dice-target.svg",
   "scope": "global",
-  "command": "const options = foundry.utils.deepClone({\n  advantage: window.event?.altKey,\n  disadvantage: window.event?.shiftKey,\n});\nconst actor = scope.abilityData.actor;\nconst abilities = {};\nactor.abilities\n  .filter(\n    (a) =>\n      a.system.interaction === \"attack\" &&\n      a.system.maneuver === \"active\" &&\n      a.system.executionTime === \"a1\" &&\n      [\"weapon\", \"hand\"].includes(a.system.delivery.base),\n  )\n  .map((a) => (abilities[a.id] = a.name));\nconst id = await game.teriock.api.dialog.select(abilities, {\n  label: \"Ability\",\n  hint: \"Please select an ability.\",\n  title: \"Select Ability\",\n});\nconst ability = actor.abilities.find((a) => a.id === id);\nawait actor.update({\n  \"system.attackPenalty\": Math.min(0, actor.system.attackPenalty + 3),\n});\nHooks.once(\"renderChatMessageHTML\", async () => {\n  await ability.system.roll(options);\n});",
+  "command": "const options = foundry.utils.deepClone(scope.useData.rollOptions);\nconst actor = scope.abilityData.actor;\nconst equipment = actor.equipment.filter(\n  (e) =>\n    e.system.equipped &&\n    e.system.damage &&\n    e.system.damage !== \"0\" &&\n    actor.system.wielding.attacker.raw !== e.id,\n);\nconst selectedEquipmentUuids = await game.teriock.api.dialog.selectDocument(\n  equipment,\n  {\n    title: \"Select Equipment\",\n    hint: \"Select equipment to attack with.\",\n    multi: false,\n    tooltip: true,\n  },\n);\nconst selectedEquipment = await foundry.utils.fromUuid(\n  selectedEquipmentUuids[0],\n);\nconst selectedEquipmentId = selectedEquipment.id;\nconst oldEquipmentId = actor.system.wielding.attacker.raw;\nawait actor.update({\n  \"system.wielding.attacker.raw\": selectedEquipmentId,\n});\nconst abilities = actor.abilities\n  .filter(\n    (a) =>\n      a.system.interaction === \"attack\" &&\n      a.system.maneuver === \"active\" &&\n      a.system.executionTime === \"a1\" &&\n      [\"weapon\", \"hand\"].includes(a.system.delivery.base),\n  )\n  .sort((a, b) => a.name.localeCompare(b.name));\nconst selectedAbilities = await game.teriock.api.dialog.selectDocument(\n  abilities,\n  {\n    title: \"Select Ability\",\n    hint: \"Select an ability to use.\",\n    multi: false,\n    tooltip: true,\n  },\n);\nconst ability = await foundry.utils.fromUuid(selectedAbilities[0]);\nawait ability.system.roll(options);\nawait actor.update({\n  \"system.wielding.attacker.raw\": oldEquipmentId,\n});",
   "folder": null,
   "sort": 0,
   "ownership": {
@@ -21,7 +21,7 @@
     "systemId": "teriock",
     "systemVersion": "0.1.0",
     "createdTime": 1754705501955,
-    "modifiedTime": 1754706036731,
+    "modifiedTime": 1754856393581,
     "lastModifiedBy": "MMeF1yfOcMgtpZFS"
   },
   "_key": "!macros!UMWD9THHhyukfBNM"

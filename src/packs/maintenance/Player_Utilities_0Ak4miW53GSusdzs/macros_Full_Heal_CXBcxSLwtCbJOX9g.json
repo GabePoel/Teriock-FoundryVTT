@@ -1,0 +1,28 @@
+{
+  "folder": "0Ak4miW53GSusdzs",
+  "name": "Full Heal",
+  "type": "script",
+  "_id": "CXBcxSLwtCbJOX9g",
+  "author": "MMeF1yfOcMgtpZFS",
+  "img": "icons/svg/heal.svg",
+  "scope": "global",
+  "command": "if (actor) {\n  // Set HP and MP to max.\n  await actor.update({\n    \"system.hp.value\": actor.system.hp.max,\n    \"system.mp.value\": actor.system.mp.max,\n    \"system.attackPenalty\": 0,\n    \"system.hasReaction\": true,\n  });\n  // Remove all hacks.\n  for (const [part, value] of Object.entries(actor.system.hacks)) {\n    for (let i = 0; i < value.max; i++) {\n      await actor.takeUnhack(part);\n    }\n  }\n  // Remove all conditions.\n  for (const status of actor.statuses) {\n    await actor.toggleStatusEffect(status, false);\n  }\n  // Restore all hit dice and mana dice\n  const ranksToUpdate = [];\n  for (const rank of actor.ranks) {\n    ranksToUpdate.push({\n      _id: rank.id,\n      \"system.hitDieSpent\": false,\n      \"system.manaDieSpent\": false,\n    });\n  }\n  await actor.updateEmbeddedDocuments(\"Item\", ranksToUpdate);\n  ui.notifications.success(`Fully healed ${actor.name}.`);\n} else {\n  ui.notifications.warn(\"No actor selected.\");\n}",
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "MMeF1yfOcMgtpZFS": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null,
+    "coreVersion": "13.345",
+    "systemId": "teriock",
+    "systemVersion": "0.1.0",
+    "createdTime": 1754845749021,
+    "modifiedTime": 1754856112173,
+    "lastModifiedBy": "MMeF1yfOcMgtpZFS"
+  },
+  "_key": "!macros!CXBcxSLwtCbJOX9g"
+}

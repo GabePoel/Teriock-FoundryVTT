@@ -6,8 +6,8 @@
   "img": "systems/teriock/assets/rank.svg",
   "scope": "global",
   "command": "const classPack = game.teriock.packs.classes();\nconst classFolders = classPack.folders;\n\n/** @type {object} */\nconst progress = ui.notifications.info(`Pulling classes from wiki.`, {\n  progress: true,\n});\nlet pct = 0;\n\nfor (const [a, ao] of Object.entries(CONFIG.TERIOCK.rankOptions)) {\n  if (![\"Mage\", \"Semi\", \"Warrior\"].includes(ao.name)) {\n    continue;\n  }\n\n  // Find or create archetype folder\n  let archetypeFolder = classFolders.getName(ao.name);\n  if (!archetypeFolder) {\n    try {\n      archetypeFolder = await Folder.create(\n        {\n          name: ao.name,\n          type: \"Item\",\n        },\n        { pack: \"teriock.classes\" },\n      );\n    } catch (e) {\n      console.error(`Failed to create archetype folder '${ao.name}':`, e);\n    }\n  }\n\n  const classes = ao.classes;\n\n  for (const [c, co] of Object.entries(classes)) {\n    // Find or create class folder\n    let classFolder = classFolders.getName(co.name);\n    if (!classFolder) {\n      try {\n        classFolder = await Folder.create(\n          {\n            name: co.name,\n            type: \"Item\",\n            folder: archetypeFolder?.id,\n          },\n          { pack: \"teriock.classes\" },\n        );\n      } catch (e) {\n        console.error(`Failed to create class folder '${co.name}':`, e);\n      }\n    }\n\n    for (let r = 1; r < 6; r++) {\n      const name = `Rank ${r} ${co.name}`;\n\n      await classPack.getIndex();\n      let rank = classPack.index.find((e) => e.name === name);\n      rank = await foundry.utils.fromUuid(rank.uuid);\n\n      // Create new item\n      const itemData = {\n        name,\n        type: \"rank\",\n        folder: classFolder?.id,\n        system: {\n          archetype: a,\n          className: c,\n          classRank: r,\n        },\n      };\n\n      pct += 1 / (15 * 5);\n      progress.update({ pct: pct, message: `Pulling ${name} from wiki.` });\n\n      try {\n        const TeriockItem = CONFIG.Item.documentClass;\n        if (!rank) {\n          rank = /** @type {TeriockRank} */ await TeriockItem.create(itemData, {\n            pack: \"teriock.classes\",\n          });\n        }\n        await rank.system.wikiPull({\n          notify: false,\n        });\n      } catch (e) {\n        console.error(`Error creating or processing '${name}':`, e);\n      }\n    }\n  }\n}",
-  "folder": null,
-  "sort": 500000,
+  "folder": "L08qIbjJoCwEaiEi",
+  "sort": 75000,
   "ownership": {
     "default": 0,
     "IIjfAJm5Tf1B6G7t": 3
@@ -21,8 +21,8 @@
     "systemId": "teriock",
     "systemVersion": "0.1.0",
     "createdTime": 1753131250101,
-    "modifiedTime": 1754584194942,
-    "lastModifiedBy": "qf5JYGZKzM588nE6"
+    "modifiedTime": 1754845051211,
+    "lastModifiedBy": "MMeF1yfOcMgtpZFS"
   },
   "_key": "!macros!XZc2aJXX8vYFmW64"
 }
