@@ -7,9 +7,14 @@ const { fields } = foundry.data;
  * Dialog that allows for modifying a roll with boosts/deboosts.
  *
  * @param {string} rollFormula
+ * @param {object} [options]
+ * @param {boolean} [options.crit] Go critical?
  * @returns {Promise<string>} The roll formula with boost changes applied.
  */
-export default async function boostDialog(rollFormula) {
+export default async function boostDialog(
+  rollFormula,
+  options = { crit: false },
+) {
   let formula = rollFormula;
   const formulaField = new fields.StringField({
     initial: rollFormula,
@@ -30,7 +35,7 @@ export default async function boostDialog(rollFormula) {
   });
   const critField = new fields.BooleanField({
     label: "Go Critical",
-    initial: false,
+    initial: options.crit,
     hint: "Double the number of dice rolled. This applies after boosts and deboosts.",
   });
   const contentHtml = document.createElement("div");

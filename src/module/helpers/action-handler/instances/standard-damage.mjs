@@ -1,5 +1,5 @@
-import TeriockRoll from "../../../documents/roll.mjs";
 import boostDialog from "../../../applications/dialogs/boost-dialog.mjs";
+import TeriockRoll from "../../../documents/roll.mjs";
 import ActionHandler from "../action-handler.mjs";
 
 /**
@@ -15,15 +15,16 @@ export class StandardDamageHandler extends ActionHandler {
    * @param {Teriock.RollOptions.EquipmentRoll} options
    * @private
    */
-  async _makeRoll(actor, formula, options = {}) {
-    const roll = new TeriockRoll(formula);
-    if (this.critRollOptions.crit) {
-      roll.alter(2, 0, { multiplyNumeric: false });
-    }
-    await roll.evaluate();
+  async _makeRoll(actor, formula, options = { crit: false }) {
     options.secret = true;
     options.formula = formula;
-    await actor.system.wielding.attacker.derived?.roll(options);
+    const roll = new TeriockRoll(formula);
+    if (options.crit) {
+      roll.alter(2, 0, { multiplyNumeric: false });
+      options.formula = roll.formula;
+    }
+    await roll.evaluate();
+    await actor.system.wielding.attacker.derived.roll(options);
   }
 
   /**
@@ -32,9 +33,10 @@ export class StandardDamageHandler extends ActionHandler {
    * @private
    */
   _prepFormula(actor) {
-    let formula = actor.system.wielding.attacker.derived?.system.damage;
+    let formula = actor.system.wielding.attacker.derived.system.derivedDamage;
     if (this.event.ctrlKey) {
-      formula = actor.system.wielding.attacker.derived?.system.twoHandedDamage;
+      formula =
+        actor.system.wielding.attacker.derived.system.derivedTwoHandedDamage;
     }
     return formula;
   }
@@ -50,6 +52,7 @@ export class StandardDamageHandler extends ActionHandler {
       }
       await this._makeRoll(actor, this._prepFormula(actor), {
         twoHanded: this.event.ctrlKey,
+        crit: this.event.altKey,
       });
     }
   }
@@ -57,8 +60,16 @@ export class StandardDamageHandler extends ActionHandler {
   /** @inheritDoc */
   async secondaryAction() {
     for (const actor of this.selectedActors) {
-      const formula = await boostDialog(this._prepFormula(actor));
-      await this._makeRoll(actor, formula);
+      if (!actor.system.wielding.attacker.derived) {
+        ui.notifications.error(
+          `${actor.name} doesn't have a default attack weapon.`,
+        );
+        continue;
+      }
+      const formula = await boostDialog(this._prepFormula(actor), {
+        crit: this.event.altKey,
+      });
+      await this._makeRoll(actor, formula, { crit: false });
     }
   }
 }

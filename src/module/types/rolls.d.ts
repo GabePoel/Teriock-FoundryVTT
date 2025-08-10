@@ -34,6 +34,8 @@ declare global {
       advantage?: boolean;
       /** Override the default roll formula */
       formula?: string;
+      /** Go critical? */
+      crit?: boolean;
     };
 
     /**

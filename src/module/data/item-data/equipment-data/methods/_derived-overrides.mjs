@@ -190,7 +190,11 @@ export function _derivedDamage(equipmentData) {
   return deriveEquipmentDataValue(
     equipmentData,
     "damage",
-    (data) => data.damage,
+    (data) =>
+      data.damage +
+      (equipmentData?.actor.system.damage.standard
+        ? " " + equipmentData.actor.system.damage.standard
+        : ""),
     (current, override) => override || current,
     (current, upgrade) => formatStringUpgrade(current, upgrade),
   );
@@ -207,9 +211,12 @@ export function _derivedTwoHandedDamage(equipmentData) {
     equipmentData,
     "twoHandedDamage",
     (data) =>
-      data.twoHandedDamage && data.twoHandedDamage !== "0"
+      (data.twoHandedDamage && data.twoHandedDamage !== "0"
         ? data.twoHandedDamage
-        : data.damage,
+        : data.damage) +
+      (equipmentData?.actor.system.damage.standard
+        ? " " + equipmentData.actor.system.damage.standard
+        : ""),
     (current, override) => override || current,
     (current, upgrade) => formatStringUpgrade(current, upgrade),
   );

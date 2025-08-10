@@ -78,9 +78,6 @@ async function use(equipmentData, options) {
     if (options?.bonusDamage) {
       rollFormula = rollFormula + " + " + options.bonusDamage;
     }
-    if (equipmentData.actor?.system?.damage?.standard) {
-      rollFormula += equipmentData.actor.system.damage.standard;
-    }
     if (options?.advantage) {
       rollFormula = new TeriockRoll(rollFormula).alter(2, 0, {
         multiplyNumeric: false,
