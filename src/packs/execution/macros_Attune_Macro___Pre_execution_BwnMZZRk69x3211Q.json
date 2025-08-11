@@ -5,7 +5,7 @@
   "author": "qf5JYGZKzM588nE6",
   "img": "icons/svg/dice-target.svg",
   "scope": "global",
-  "command": "scope.chatData.system.buttons = [];\nconst actor = scope.abilityData.actor;\nconst equipment = actor.equipment\n  .filter((e) => !e.system.isAttuned)\n  .sort((a, b) => a.name.localeCompare(b.name));\nconst selectedEquipmentUuids = await game.teriock.api.dialog.selectDocument(\n  equipment,\n  {\n    title: \"Select Equipment\",\n    hint: \"Select equipment to attune.\",\n    multi: true,\n    tooltip: true,\n  },\n);\nfor (const uuid of selectedEquipmentUuids) {\n  const selectedEquipment = await foundry.utils.fromUuid(uuid);\n  await selectedEquipment.system.attune();\n}",
+  "command": "scope.chatData.system.buttons = [];\nconst actor = scope.abilityData.actor;\nconst equipment = actor.equipment\n  .filter((e) => !e.system.isAttuned)\n  .sort((a, b) => a.name.localeCompare(b.name));\nconst selectedEquipment = await game.teriock.api.dialog.selectDocuments(\n  equipment,\n  {\n    title: \"Select Equipment\",\n    hint: \"Select equipment to attune.\",\n    tooltip: true,\n  },\n);\nfor (const e of selectedEquipment) {\n  await e.system.attune();\n}",
   "folder": null,
   "sort": 0,
   "ownership": {
@@ -21,7 +21,7 @@
     "systemId": "teriock",
     "systemVersion": "0.1.0",
     "createdTime": 1753599358179,
-    "modifiedTime": 1754856378831,
+    "modifiedTime": 1754889307078,
     "lastModifiedBy": "MMeF1yfOcMgtpZFS"
   },
   "_key": "!macros!BwnMZZRk69x3211Q"
