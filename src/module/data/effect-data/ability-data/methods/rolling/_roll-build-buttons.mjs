@@ -64,16 +64,18 @@ export async function _buildButtons(rollConfig) {
       abilityData.applies.proficient.standardDamage) ||
     (abilityData.parent.isFluent && abilityData.applies.fluent.standardDamage)
   ) {
-    buttons.push({
+    const buttonData = {
       label: "Standard Roll",
       icon: "fas fa-hammer-crash",
       dataset: {
         action: "standard-damage",
-        attacker:
-          safeUuid(abilityData.actor.system.wielding.attacker?.derived?.uuid) ||
-          null,
       },
-    });
+    };
+    if (abilityData.actor.system.wielding.attacker.derived) {
+      buttonData.dataset.attacker =
+        abilityData.actor.system.wielding.attacker.derived.uuid;
+    }
+    buttons.push(buttonData);
   }
 
   // Resistance Button

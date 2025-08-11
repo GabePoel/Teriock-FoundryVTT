@@ -7,19 +7,12 @@ const effectObject = JSON.parse(button.dataset.normal);
 const validAbilities = actor.abilities
   .filter((a) => !a.isReference && a.system.standard)
   .sort((a, b) => a.name.localeCompare(b.name));
-const selectedAbilityUuids = await game.teriock.api.dialog.selectDocument(
-  validAbilities,
-  {
-    title: "Select Ability",
-    hint: "Select an ability to share.",
-    multi: false,
-    tooltip: true,
-  },
-);
-const chosenAbility = await foundry.utils.fromUuid(selectedAbilityUuids[0]);
-effectObject.system.hierarchy.rootUuid =
-  chosenAbility.system.hierarchy.rootUuid;
-effectObject.system.hierarchy.subIds = [chosenAbility.id];
+const ability = await game.teriock.api.dialog.selectDocument(validAbilities, {
+  title: "Select Ability",
+  hint: "Select an ability to share.",
+});
+effectObject.system.hierarchy.rootUuid = ability.system.hierarchy.rootUuid;
+effectObject.system.hierarchy.subIds = [ability.id];
 const effectString = JSON.stringify(effectObject);
 scope.chatData.system.buttons[0].dataset.normal = effectString;
 scope.chatData.system.buttons[0].dataset.crit = effectString;

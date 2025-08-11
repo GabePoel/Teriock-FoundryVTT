@@ -4,68 +4,110 @@ const { DialogV2 } = foundry.applications.api;
  * Select some number of documents.
  *
  * @template T
- * @param {T[]} documents - Documents to display. Each must have name, image, and uuid.
+ * @param {T[]} documents
  * @param {object} options
- * @param {string} options.[title] - Title for the dialog.
- * @param {string} options.[hint] - Text for the dialog.
- * @param {boolean} options.[multi] - Select multiple documents? Defaults to true.
- * @param {boolean} options.[tooltip] - Display tooltip for documents?
- * @returns {Promise<Teriock.UUID<T>[]>} Array of selected documents. Only includes one if not multi.
+ * @param {string} [options.title="Select Documents"]
+ * @param {string} [options.hint=""]
+ * @param {boolean} [options.multi=true]
+ * @param {boolean} [options.tooltip=true]
+ * @param {string} [options.idKey="uuid"]
+ * @param {string} [options.nameKey="name"]
+ * @param {string} [options.imgKey="img"]
+ * @returns {Promise<T[]|null>} Selected documents, or null if canceled.
  */
-export default async function selectDocumentDialog(
-  documents,
-  options = {
-    title: "Select Documents",
-    hint: "",
-    multi: true,
-    tooltip: true,
-  },
-) {
+export async function selectDocumentsDialog(documents, options = {}) {
+  options = foundry.utils.mergeObject(
+    {
+      title: "Select Documents",
+      hint: "",
+      multi: true,
+      tooltip: true,
+      idKey: "uuid",
+      imgKey: "img",
+      nameKey: "name",
+    },
+    options,
+  );
+  const idToDoc = new Map();
   const context = {
     documents: {},
     hint: options.hint,
     tooltip: options.tooltip,
   };
+
   for (const doc of documents) {
-    context.documents[doc.uuid] = {
-      name: doc.name,
-      img: doc.img,
+    const id = foundry.utils.getProperty(doc, options.idKey);
+    idToDoc.set(id, doc);
+    context.documents[id] = {
+      name: foundry.utils.getProperty(doc, options.nameKey),
+      img: foundry.utils.getProperty(doc, options.imgKey),
     };
   }
+
   if (options.tooltip) {
-    for (const doc of documents) {
-      context.documents[doc.uuid].tooltip = await doc.buildMessage();
-    }
-  }
-  let content;
-  if (options.multi) {
-    content = await foundry.applications.handlebars.renderTemplate(
-      "systems/teriock/src/templates/dialog-templates/document-select-multi.hbs",
-      context,
+    await Promise.all(
+      documents.map(async (doc) => {
+        const id = foundry.utils.getProperty(doc, options.idKey);
+        context.documents[id].tooltip = await doc.buildMessage?.();
+      }),
     );
-    return await DialogV2.prompt({
-      window: { title: options.title },
-      content: content,
-      ok: {
-        callback: (_event, button) =>
-          Array.from(button.form.elements)
+  }
+
+  const tmpl = options.multi
+    ? "systems/teriock/src/templates/dialog-templates/document-select-multi.hbs"
+    : "systems/teriock/src/templates/dialog-templates/document-select-one.hbs";
+
+  const content = await foundry.applications.handlebars.renderTemplate(
+    tmpl,
+    context,
+  );
+
+  const selectedIds = await DialogV2.prompt({
+    window: { title: options.title },
+    content,
+    ok: {
+      callback: (_event, button) => {
+        if (options.multi) {
+          return Array.from(button.form.elements)
             .filter((e) => e?.checked)
-            .map((e) => e?.name),
+            .map((e) => e?.name);
+        }
+        return [button.form.elements.namedItem("choice").value];
       },
-    });
-  } else {
-    content = await foundry.applications.handlebars.renderTemplate(
-      "systems/teriock/src/templates/dialog-templates/document-select-one.hbs",
-      context,
-    );
-    return await DialogV2.prompt({
-      window: { title: options.title },
-      content: content,
-      ok: {
-        callback: (_event, button) => [
-          button.form.elements.namedItem("choice").value,
-        ],
-      },
-    });
-  }
+    },
+  });
+  return selectedIds.map((id) => idToDoc.get(id)).filter(Boolean);
+}
+
+/**
+ * Select exactly one document.
+ *
+ * @template T
+ * @param {T[]} documents
+ * @param {object} options
+ * @param {string} [options.title="Select Document"]
+ * @param {string} [options.hint=""]
+ * @param {boolean} [options.tooltip=true]
+ * @param {string} [options.idKey="uuid"]
+ * @param {string} [options.nameKey="name"]
+ * @param {string} [options.imgKey="img"]
+ * @returns {Promise<T|null>} Selected document, or null if canceled.
+ */
+export async function selectDocumentDialog(documents, options = {}) {
+  options = foundry.utils.mergeObject(
+    {
+      title: "Select Document",
+      hint: "",
+      tooltip: true,
+      idKey: "uuid",
+      imgKey: "img",
+      nameKey: "name",
+    },
+    options,
+  );
+  const selected = await selectDocumentsDialog(documents, {
+    ...options,
+    multi: false,
+  });
+  return selected?.[0] ?? null;
 }

@@ -1,6 +1,4 @@
-import selectDocumentDialog from "./select-document-dialog.mjs";
-
-const { DialogV2 } = foundry.applications.api;
+import { selectDocumentsDialog } from "./select-document-dialog.mjs";
 
 /**
  * Select some number of visible tokens.
@@ -21,20 +19,13 @@ export async function selectTokensDialog(
   for (const id of visibleTokenIds) {
     visibleTokenDocuments.push(tokenLayer.documentCollection.get(id));
   }
-  const documents =
-    /** @type {TeriockTokenDocument[]} */ visibleTokenDocuments.map((t) => {
-      return {
-        uuid: t.uuid,
-        name: t.name,
-        img: t.texture.src,
-      };
-    });
-  return await selectDocumentDialog(documents, {
+  const selectedDocuments = await selectDocumentsDialog(visibleTokenDocuments, {
     title: options.title,
     hint: options.hint,
-    multi: true,
     tooltip: false,
+    imgKey: "texture.src",
   });
+  return selectedDocuments.map((d) => d.uuid);
 }
 
 /**

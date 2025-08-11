@@ -17,13 +17,10 @@ for (const name of spellNames) {
   const spell = await game.teriock.api.utils.getAbility(name);
   spells.push(spell);
 }
-const spellUuids = await game.teriock.api.dialog.selectDocument(spells, {
+const spell = await game.teriock.api.dialog.selectDocument(spells, {
   title: "Select Spell",
   hint: "Select a spell to cast",
-  multi: false,
-  tooltip: true,
 });
-const spell = await foundry.utils.fromUuid(spellUuids[0]);
 const actor = scope.abilityData.actor;
 const ability = await game.teriock.api.utils.importAbility(actor, spell.name);
 if (scope.abilityData.parent.isFluent) {

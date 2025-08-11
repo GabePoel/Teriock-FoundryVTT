@@ -9,14 +9,8 @@ const abilities = actor.abilities
       ["weapon", "hand"].includes(a.system.delivery.base),
   )
   .sort((a, b) => a.name.localeCompare(b.name));
-const selectedAbilities = await game.teriock.api.dialog.selectDocument(
-  abilities,
-  {
-    title: "Select Ability",
-    hint: "Select an ability to use.",
-    multi: false,
-    tooltip: true,
-  },
-);
-const ability = await foundry.utils.fromUuid(selectedAbilities[0]);
+const ability = await game.teriock.api.dialog.selectDocument(abilities, {
+  title: "Select Ability",
+  hint: "Select an ability to use.",
+});
 await ability.system.roll(options);

@@ -1,4 +1,4 @@
-export { default as cleanWikiHtml } from "./clean-wiki-html.mjs";
+export { default as cleanWikiHTML } from "./clean-wiki-html.mjs";
 export { default as fetchCategoryAbilities } from "./fetch-category-abilities.mjs";
 export { default as fetchCategoryMembers } from "./fetch-category-members.mjs";
 export { default as fetchNamespacePages } from "./fetch-namespace-pages.mjs";
