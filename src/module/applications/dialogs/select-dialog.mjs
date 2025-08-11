@@ -13,16 +13,15 @@ const { DialogV2 } = foundry.applications.api;
 /**
  * Dialog that lets you select something.
  *
- * @param {Record<string, string>} choices - Key and value pairs to select from.
- * @param {{
- *   initial?: string|null,
- *   label?: string,
- *   hint?: string,
- *   title?: string,
- *   other?: boolean,
- *   genericOther?: boolean
- * }} [options={}] - Dialog options.
- * @returns {Promise<string|null>} - The chosen value.
+ * @param {Record<string, string>} choices - Key/value pairs to select from.
+ * @param {object} [options] - Dialog options.
+ * @param {string|null} [options.initial=null] - The initially selected choice.
+ * @param {string} [options.label="Select"] - Label for the select field.
+ * @param {string} [options.hint="Please select an option above."] - Hint text.
+ * @param {string} [options.title="Select"] - Dialog title.
+ * @param {boolean} [options.other=false] - Whether to include an "Other" button.
+ * @param {boolean} [options.genericOther=true] - If true, "Other" returns `null` instead of prompting again.
+ * @returns {Promise<string|null>} The chosen value, or `null` if canceled or genericOther.
  */
 export async function selectDialog(choices, options = {}) {
   const {

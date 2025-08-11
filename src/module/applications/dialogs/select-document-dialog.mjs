@@ -5,7 +5,7 @@ const { DialogV2 } = foundry.applications.api;
  *
  * @template T
  * @param {T[]} documents
- * @param {object} options
+ * @param {object} [options]
  * @param {string} [options.title="Select Documents"]
  * @param {string} [options.hint=""]
  * @param {boolean} [options.multi=true]
@@ -13,7 +13,7 @@ const { DialogV2 } = foundry.applications.api;
  * @param {string} [options.idKey="uuid"]
  * @param {string} [options.nameKey="name"]
  * @param {string} [options.imgKey="img"]
- * @returns {Promise<T[]|null>} Selected documents, or null if canceled.
+ * @returns {Promise<T[]>} Selected documents.
  */
 export async function selectDocumentsDialog(documents, options = {}) {
   options = foundry.utils.mergeObject(
@@ -84,7 +84,7 @@ export async function selectDocumentsDialog(documents, options = {}) {
  *
  * @template T
  * @param {T[]} documents
- * @param {object} options
+ * @param {object} [options]
  * @param {string} [options.title="Select Document"]
  * @param {string} [options.hint=""]
  * @param {boolean} [options.tooltip=true]

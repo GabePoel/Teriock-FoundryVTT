@@ -190,7 +190,6 @@ export default (Base) => {
         this.document.toObject(),
       )?.img;
 
-      /** @type {*} */
       const options = {
         current,
         type: "image",
@@ -214,7 +213,7 @@ export default (Base) => {
      */
     static async _openDoc(_event, target) {
       const embedded = await _embeddedFromCard(this, target);
-      embedded?.sheet.render(true);
+      await embedded?.sheet.render(true);
     }
 
     /**

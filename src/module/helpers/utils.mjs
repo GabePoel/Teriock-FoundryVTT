@@ -385,7 +385,7 @@ export function evaluateSync(formula, data = {}, options = {}) {
 
 /**
  * Evaluates a die roll formula synchronously and returns the total result.
- * Avoids having to generate roll data if it's not needed.
+ * Avoids having to generate roll data if it's unnecessary.
  *
  * @param {string} formula - The dice roll formula to evaluate.
  * @param {TeriockActor|TeriockItem|TeriockEffect} document - The document to get roll data from.

@@ -8,9 +8,14 @@ import { selectDocumentsDialog } from "./select-document-dialog.mjs";
  * @param {string} options.[hint] - Text for dialog.
  * @returns {Promise<Teriock.UUID<TeriockTokenDocument>[]>}
  */
-export async function selectTokensDialog(
-  options = { title: "Select Tokens", hint: "" },
-) {
+export async function selectTokensDialog(options = {}) {
+  options = foundry.utils.mergeObject(
+    {
+      title: "Select Tokens",
+      hint: "",
+    },
+    options,
+  );
   const tokenLayer = /** @type {TokenLayer} */ game.canvas.tokens;
   const visibleTokenIds = tokenLayer.placeables
     .filter((t) => t.visible)
