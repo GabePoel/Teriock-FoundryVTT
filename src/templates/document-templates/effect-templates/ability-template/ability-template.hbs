@@ -27,29 +27,186 @@
             {{> "systems/teriock/src/templates/document-templates/effect-templates/ability-template/parts/ab-elder-sorcery.hbs"}}
           </div>
         {{/if}}
-        {{> "systems/teriock/src/templates/document-templates/effect-templates/ability-template/entries/ab-costs-entries.hbs"}}
-        {{#if (exists system.requirements)}}
-          {{> "systems/teriock/src/templates/document-templates/effect-templates/ability-template/entries/ab-requirements-entries.hbs"}}
-        {{/if}}
-        {{#if (exists system.trigger)}}
-          {{> "systems/teriock/src/templates/document-templates/effect-templates/ability-template/entries/ab-trigger-entries.hbs"}}
-        {{/if}}
-        {{> "systems/teriock/src/templates/document-templates/effect-templates/ability-template/entries/ab-alteration-entries.hbs"}}
-        {{> "systems/teriock/src/templates/document-templates/effect-templates/ability-template/entries/ab-overview-entries.hbs"}}
+        <!-- Costs -->
+        {{formGroup
+          systemFields.costs.fields.mp.fields.value.fields.variable
+          value=system.costs.mp.value.variable
+          enriched=enriched.mpCost
+          enabled=(not disabled)
+          hidden=(not (exists system.costs.mp.value.variable))
+        }}
+        {{formGroup
+          systemFields.costs.fields.hp.fields.value.fields.variable
+          value=system.costs.hp.value.variable
+          enriched=enriched.hpCost
+          enabled=(not disabled)
+          hidden=(not (exists system.costs.hp.value.variable))
+        }}
+        {{formGroup
+          systemFields.costs.fields.gp.fields.value.fields.variable
+          value=system.costs.gp.value.variable
+          enriched=enriched.gpCost
+          enabled=(not disabled)
+          hidden=(not (exists system.costs.gp.value.variable))
+        }}
+        {{formGroup
+          systemFields.costs.fields.materialCost
+          value=system.costs.materialCost
+          enriched=enriched.materialCost
+          enabled=(not disabled)
+          hidden=(not (exists system.costs.materialCost))
+        }}
+        <!-- Trigger -->
+        {{formGroup
+          systemFields.trigger
+          value=system.trigger
+          enriched=enriched.trigger
+          enabled=(not disabled)
+          hidden=(not (exists system.trigger))
+        }}
+        <!-- Requirements -->
+        {{formGroup
+          systemFields.requirements
+          value=system.requirements
+          enriched=enriched.requirements
+          enabled=(not disabled)
+          hidden=(not (exists system.requirements))
+        }}
+        <!-- Alterations  -->
+        {{formGroup
+          systemFields.limitation
+          value=system.limitation
+          enriched=enriched.limitation
+          enabled=(not disabled)
+          hidden=(not (exists system.limitation))
+        }}
+        {{formGroup
+          systemFields.improvement
+          value=system.improvement
+          enriched=enriched.improvement
+          enabled=(not disabled)
+          hidden=(not (exists system.improvement))
+        }}
+        <!-- Overview -->
+        {{formGroup
+          systemFields.overview.fields.base
+          value=system.overview.base
+          enriched=enriched.baseOverview
+          enabled=(not disabled)
+          hidden=(not (exists system.overview.base))
+        }}
+        {{formGroup
+          systemFields.overview.fields.proficient
+          value=system.overview.proficient
+          enriched=enriched.proficientOverview
+          enabled=(not disabled)
+          hidden=(not (exists system.overview.proficient))
+          classes=(ifThen (not isProficient) "faded" "")
+        }}
+        {{formGroup
+          systemFields.overview.fields.fluent
+          value=system.overview.fluent
+          enriched=enriched.fluentOverview
+          enabled=(not disabled)
+          hidden=(not (exists system.overview.fluent))
+          classes=(ifThen (not isFluent) "faded" "")
+        }}
+        <!-- Fields by interaction -->
         {{#if (eq system.interaction "attack")}}
-          {{> "systems/teriock/src/templates/document-templates/effect-templates/ability-template/entries/ab-attack-entries.hbs"}}
+          <!-- Show relevant attack fields in order -->
+          {{formGroup
+            systemFields.results.fields.critHit
+            value=system.results.critHit
+            enriched=enriched.onCriticalHit
+            enabled=(not disabled)
+            hidden=(not (exists system.results.critHit))
+          }}
+          {{formGroup
+            systemFields.results.fields.hit
+            value=system.results.hit
+            enriched=enriched.onHit
+            enabled=(not disabled)
+            hidden=(not (exists system.results.hit))
+          }}
+          {{formGroup
+            systemFields.results.fields.miss
+            value=system.results.miss
+            enriched=enriched.onMiss
+            enabled=(not disabled)
+            hidden=(not (exists system.results.miss))
+          }}
+          {{formGroup
+            systemFields.results.fields.critMiss
+            value=system.results.critMiss
+            enriched=enriched.onCriticalMiss
+            enabled=(not disabled)
+            hidden=(not (exists system.results.critMiss))
+          }}
         {{/if}}
         {{#if (eq system.interaction "feat")}}
-          {{> "systems/teriock/src/templates/document-templates/effect-templates/ability-template/entries/ab-feat-entries.hbs"}}
+          <!-- Show relevant feat fields in order -->
+          {{formGroup
+            systemFields.results.fields.critFail
+            value=system.results.critFail
+            enriched=enriched.onCriticalFail
+            enabled=(not disabled)
+            hidden=(not (exists system.results.critFail))
+          }}
+          {{formGroup
+            systemFields.results.fields.fail
+            value=system.results.fail
+            enriched=enriched.onFail
+            enabled=(not disabled)
+            hidden=(not (exists system.results.fail))
+          }}
+          {{formGroup
+            systemFields.results.fields.save
+            value=system.results.save
+            enriched=enriched.onSave
+            enabled=(not disabled)
+            hidden=(not (exists system.results.save))
+          }}
+          {{formGroup
+            systemFields.results.fields.critSave
+            value=system.results.critSave
+            enriched=enriched.onCriticalSave
+            enabled=(not disabled)
+            hidden=(not (exists system.results.critSave))
+          }}
         {{else}}
-          {{> "systems/teriock/src/templates/document-templates/effect-templates/ability-template/entries/ab-block-entries.hbs"}}
+          <!-- Show relevant manifest and block fields in order -->
+          {{formGroup
+            systemFields.results.fields.save
+            value=system.results.save
+            enriched=enriched.onSave
+            enabled=(not disabled)
+            hidden=(not (exists system.results.save))
+          }}
+          {{formGroup
+            systemFields.results.fields.fail
+            value=system.results.fail
+            enriched=enriched.onFail
+            enabled=(not disabled)
+            hidden=(not (exists system.results.fail))
+          }}
         {{/if}}
-        {{#if (exists system.heightened)}}
-          {{> "systems/teriock/src/templates/document-templates/effect-templates/ability-template/entries/ab-heightened-entries.hbs"}}
-        {{/if}}
-        {{#if (exists system.endCondition)}}
-          {{> "systems/teriock/src/templates/document-templates/effect-templates/ability-template/entries/ab-end-condition-entries.hbs"}}
-        {{/if}}
+        <!-- Heightened -->
+        {{formGroup
+          systemFields.heightened
+          value=system.heightened
+          enriched=enriched.heightened
+          enabled=(not disabled)
+          hidden=(not (exists system.heightened))
+        }}
+        <!-- End Condition -->
+        {{formGroup
+          systemFields.endCondition
+          value=system.endCondition
+          enriched=enriched.endCondition
+          enabled=(not disabled)
+          hidden=(not (exists system.endCondition))
+        }}
+        <!-- Improvements -->
         {{> "systems/teriock/src/templates/document-templates/effect-templates/ability-template/entries/ab-improvements-entries.hbs"}}
       </div>
       {{#if (or editable (exists childAbilities))}}

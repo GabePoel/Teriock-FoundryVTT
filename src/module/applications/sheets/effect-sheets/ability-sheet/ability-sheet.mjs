@@ -147,10 +147,10 @@ export default class TeriockAbilitySheet extends TeriockBaseEffectSheet {
         });
       }
     }
-    const editors = {
-      manaCost: system.costs.mp.value.variable,
-      hitCost: system.costs.hp.value.variable,
-      goldCost: system.costs.gp.value.variable,
+    await this._enrichAll(context, {
+      mpCost: system.costs.mp.value.variable,
+      hpCost: system.costs.hp.value.variable,
+      gpCost: system.costs.gp.value.variable,
       materialCost: system.costs.materialCost,
       trigger: system.trigger,
       baseOverview: system.overview.base,
@@ -172,12 +172,7 @@ export default class TeriockAbilitySheet extends TeriockBaseEffectSheet {
       improvement: system.improvement,
       attributeImprovement: system.attributeImprovementText,
       featSaveImprovement: system.featSaveImprovementText,
-    };
-
-    for (const [key, value] of Object.entries(editors)) {
-      context[key] = await this._editor(value);
-    }
-
+    });
     return context;
   }
 

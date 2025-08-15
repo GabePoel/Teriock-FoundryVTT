@@ -4,24 +4,6 @@
       {{> "systems/teriock/src/templates/document-templates/shared/header.hbs"}}
     </div>
     <div class="ab-main">
-      <div class="ab-section-container">
-        <div class="ab-section">
-          <span class="ab-section-title">Description</span>
-        </div>
-        {{#if editable}}
-          <prose-mirror
-            name="system.description"
-            value="{{system.description}}"
-            toggled="true"
-            editable="editable"
-          ><div class="text-preview">{{{enrichedDescription}}}</div></prose-mirror>
-        {{else}}
-          <div class="text-preview">{{{enrichedDescription}}}</div>
-        {{/if}}
-      </div>
-  </div>
-  {{#if (or editable (exists baseEffects))}}
-    <div class="ab-main">
       {{#if editable}}
         <button
           class="createBaseEffect"
@@ -30,5 +12,5 @@
         </button>{{/if}}
       {{abilityCards baseEffects system}}
     </div>
-  {{/if}}
+  </div>
 </div>

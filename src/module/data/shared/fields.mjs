@@ -1,6 +1,7 @@
 import { TeriockRoll } from "../../documents/_module.mjs";
 
-const { StringField, ArrayField, TypedObjectField } = foundry.data.fields;
+const { StringField, ArrayField, TypedObjectField, HTMLField } =
+  foundry.data.fields;
 
 /**
  * Utility function for creating DOM elements with common properties.
@@ -167,5 +168,42 @@ export class FormulaField extends StringField {
     if (terms.length === 1 && terms[0]?.fn === "min")
       return value.replace(/\)$/, `, ${delta})`);
     return `min(${value}, ${delta})`;
+  }
+}
+
+export class TextField extends HTMLField {
+  /** @inheritDoc */
+  _toInput(config) {
+    config.toggled = true;
+    const innerContent = document.createElement("div");
+    innerContent.classList.add("text-preview");
+    if (config.enriched) {
+      innerContent.innerHTML = config.enriched;
+      delete config.enriched;
+    } else {
+      innerContent.innerHTML = config.value;
+    }
+    /** @type {HTMLDivElement} */
+    const out = super._toInput(config);
+    out.append(innerContent);
+    return out;
+  }
+
+  /** @inheritDoc */
+  toFormGroup(groupConfig, inputConfig) {
+    console.log(groupConfig, inputConfig);
+    /** @type {HTMLDivElement} */
+    const out = super.toFormGroup(groupConfig, inputConfig);
+    out.classList.add("ab-section-container");
+    out.classList.remove("form-group");
+    /** @type {HTMLLabelElement|null} */
+    const label =
+      out.querySelector("label") || /** @type {any} */ (out.firstElementChild);
+    const labelContainer = document.createElement("div");
+    labelContainer.classList.add("ab-section");
+    label.classList.add("ab-section-title");
+    out.replaceChild(labelContainer, label);
+    labelContainer.appendChild(label);
+    return out;
   }
 }

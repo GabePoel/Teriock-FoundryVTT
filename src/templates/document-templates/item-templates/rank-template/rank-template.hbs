@@ -8,36 +8,20 @@
       </div>
     </div>
     <div class="ab-main">
-      <div class="ab-section-container">
-        <div class="ab-section">
-          <span class="ab-section-title">Description</span>
-        </div>
-        {{#if editable}}
-          <prose-mirror
-            name="system.description"
-            value="{{system.description}}"
-            toggled="true"
-            editable="editable"
-          ><div class="text-preview">{{{enrichedDescription}}}</div></prose-mirror>
-        {{else}}
-          <div class="text-preview">{{{enrichedDescription}}}</div>
-        {{/if}}
-      </div>
-      <div class="ab-section-container">
-        <div class="ab-section">
-          <span class="ab-section-title">Flaws</span>
-        </div>
-        {{#if editable}}
-          <prose-mirror
-            name="system.flaws"
-            value="{{system.flaws}}"
-            toggled="true"
-            editable="editable"
-          ><div class="text-preview">{{{enrichedFlaws}}}</div></prose-mirror>
-        {{else}}
-          <div class="text-preview">{{{enrichedFlaws}}}</div>
-        {{/if}}
-      </div>
+      {{formGroup
+        systemFields.description
+        value=system.description
+        enriched=enriched.description
+        enabled=(not disabled)
+        hidden=(not (exists system.description))
+      }}
+      {{formGroup
+        systemFields.flaws
+        value=system.flaws
+        enriched=enriched.flaws
+        enabled=(not disabled)
+        hidden=(not (exists system.flaws))
+      }}
     </div>
     {{> "systems/teriock/src/templates/document-templates/shared/effects.hbs"}}
   </div>

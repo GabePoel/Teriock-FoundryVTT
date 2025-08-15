@@ -74,18 +74,12 @@ export default class TeriockEquipmentSheet extends TeriockBaseItemSheet {
   /** @inheritDoc */
   async _prepareContext(options) {
     const context = await super._prepareContext(options);
-
-    const enrichments = {
-      enrichedSpecialRules: this.item.system.specialRules,
-      enrichedDescription: this.item.system.description,
-      enrichedFlaws: this.item.system.flaws,
-      enrichedNotes: this.item.system.notes,
-    };
-
-    for (const [key, value] of Object.entries(enrichments)) {
-      context[key] = await this._editor(value);
-    }
-
+    await this._enrichAll(context, {
+      specialRules: this.item.system.specialRules,
+      description: this.item.system.description,
+      flaws: this.item.system.flaws,
+      notes: this.item.system.notes,
+    });
     return context;
   }
 

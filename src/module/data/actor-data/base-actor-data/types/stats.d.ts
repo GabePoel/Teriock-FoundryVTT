@@ -9,7 +9,7 @@ export interface BarData {
 }
 
 /** Attribute data */
-export interface AttributeData {
+export interface ActorAttributeData {
   /** Value */
   value: number;
   /** Are you proficient in saves made with this attribute? */
@@ -21,7 +21,7 @@ export interface AttributeData {
 }
 
 /** Hack data */
-export interface HackData {
+export interface ActorHackData {
   /** Minimum */
   min: 0;
   /** Maximum */

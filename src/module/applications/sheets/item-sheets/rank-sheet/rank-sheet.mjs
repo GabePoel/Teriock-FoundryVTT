@@ -37,10 +37,10 @@ export default class TeriockRankSheet extends TeriockBaseItemSheet {
   /** @inheritDoc */
   async _prepareContext(options) {
     const context = await super._prepareContext(options);
-    context.enrichedDescription = await this._editor(
-      this.item.system.description,
-    );
-    context.enrichedFlaws = await this._editor(this.item.system.flaws);
+    await this._enrichAll(context, {
+      description: this.item.system.description,
+      flaws: this.item.system.flaws,
+    });
     return context;
   }
 

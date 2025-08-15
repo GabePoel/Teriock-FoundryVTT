@@ -100,13 +100,16 @@ export default class TeriockBaseEffectSheet extends SheetMixin(
   /** @inheritDoc */
   async _prepareContext(options) {
     const context = await super._prepareContext(options);
-    context.disabled = this.document.disabled;
-    context.isSuppressed = this.document.isSuppressed;
-    context.transfer = this.document.transfer;
-    const system = this.document.system;
-    context.enrichedDescription = await this._editor(system.description);
-    context.isProficient = this.document.isProficient;
-    context.isFluent = this.document.isFluent;
+    Object.assign(context, {
+      disabled: this.document.disabled,
+      transfer: this.document.transfer,
+      isSuppressed: this.document.isSuppressed,
+      isProficient: this.document.isProficient,
+      isFluent: this.document.isFluent,
+    });
+    await this._enrichAll(context, {
+      description: this.document.system.description,
+    });
     return context;
   }
 

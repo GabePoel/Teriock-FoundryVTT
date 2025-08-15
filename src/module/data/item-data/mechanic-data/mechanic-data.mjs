@@ -38,13 +38,23 @@ export default class TeriockMechanicData extends TeriockBaseItemData {
     if (!effect) return false;
     if (this.actor) {
       const hpUnconscious = this.actor.system.hp.value < 1;
+      const hpCriticallyWounded =
+        this.actor.system.hp.value ===
+        (this.actor.system.hp.min < 0 ? this.actor.system.hp.min + 1 : 0);
       const hpDead = this.actor.system.hp.value === this.actor.system.hp.min;
       const mpUnconscious = this.actor.system.mp.value < 1;
+      const mpCriticallyWounded =
+        this.actor.system.mp.value ===
+        (this.actor.system.mp.min < 0 ? this.actor.system.mp.min + 1 : 0);
       const mpDead = this.actor.system.mp.value === this.actor.system.mp.min;
       const unconsciousResistant =
         this.actor.system.resistances.statuses.has("unconscious");
       const unconsciousImmune =
         this.actor.system.immunities.statuses.has("unconscious");
+      const criticallyWoundedResistant =
+        this.actor.system.resistances.statuses.has("criticallyWounded");
+      const criticallyWoundedImmune =
+        this.actor.system.immunities.statuses.has("criticallyWounded");
       const deadResistant = this.actor.system.resistances.statuses.has("dead");
       const deadImmune = this.actor.system.immunities.statuses.has("dead");
       const downResistant = this.actor.system.resistances.statuses.has("down");
@@ -52,12 +62,30 @@ export default class TeriockMechanicData extends TeriockBaseItemData {
       if (effect.name === "Zero HP/MP") {
         return !(
           (hpUnconscious || mpUnconscious) &&
-          !(hpDead || mpDead || this.actor.statuses.has("dead")) &&
+          !(
+            hpCriticallyWounded ||
+            mpCriticallyWounded ||
+            this.actor.statuses.has("criticallyWounded") ||
+            hpDead ||
+            mpDead ||
+            this.actor.statuses.has("dead")
+          ) &&
           !(
             unconsciousResistant ||
             unconsciousImmune ||
             downResistant ||
             downImmune
+          )
+        );
+      } else if (effect.name === "Critical HP/MP") {
+        return !(
+          (hpCriticallyWounded || mpCriticallyWounded) &&
+          !(hpDead || mpDead || this.actor.statuses.has("dead")) &&
+          !(
+            criticallyWoundedResistant ||
+            criticallyWoundedImmune ||
+            downResistant ||
+            deadImmune
           )
         );
       } else if (effect.name === "Negative HP/MP") {

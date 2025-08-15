@@ -506,6 +506,7 @@ export default (Base) => {
         uuid: this.document.uuid,
         id: this.document.id,
         settings: this.settings,
+        enriched: {},
       };
     }
 
@@ -519,6 +520,21 @@ export default (Base) => {
       return parameter?.length
         ? await TextEditor.enrichHTML(parameter, { relativeTo: this.document })
         : undefined;
+    }
+
+    /**
+     * Enrich an object of HTML content for display.
+     *
+     * @param {object} context - Context object to put enrichments into.
+     * @param {Promise<Record<string, string>>} obj - Keys and values corresponding to text that needs enrichment.
+     * @returns {Promise<void>}
+     */
+    async _enrichAll(context, obj) {
+      if (Object.keys(context).includes("enriched")) {
+        for (const [key, value] of Object.entries(obj)) {
+          context.enriched[key] = await this._editor(value);
+        }
+      }
     }
 
     /**

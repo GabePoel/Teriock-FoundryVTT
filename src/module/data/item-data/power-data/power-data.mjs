@@ -1,3 +1,4 @@
+import { TextField } from "../../shared/fields.mjs";
 import TeriockBaseItemData from "../base-item-data/base-item-data.mjs";
 import { _messageParts } from "./methods/_messages.mjs";
 
@@ -32,7 +33,7 @@ export default class TeriockPowerData extends TeriockBaseItemData {
         initial: "other",
         label: "Power Type",
       }),
-      flaws: new fields.HTMLField({ initial: "<p>None.</p>" }),
+      flaws: new TextField({ initial: "<p>None.</p>", label: "Flaws" }),
       proficient: new fields.BooleanField({
         initial: true,
         label: "Proficient",

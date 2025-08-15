@@ -1,5 +1,5 @@
 import { TeriockActor } from "../../../../documents/_module.mjs";
-import { AttributeData, BarData, HackData } from "./stats";
+import { ActorAttributeData, BarData, ActorHackData } from "./stats";
 import { ProtectionData } from "./protections";
 import { TeriockEquipment } from "../../../../documents/_documents.mjs";
 import { TradecraftData } from "./tradecrafts";
@@ -7,19 +7,19 @@ import { TradecraftData } from "./tradecrafts";
 /** The types of hacks that could be applied. */
 export interface HackDataCollection {
   /** Arm hacks */
-  arm: HackData;
+  arm: ActorHackData;
   /** Leg hacks */
-  leg: HackData;
+  leg: ActorHackData;
   /** Body hacks */
-  body: HackData;
+  body: ActorHackData;
   /** Eye hacks */
-  eye: HackData;
+  eye: ActorHackData;
   /** Ear hacks */
-  ear: HackData;
+  ear: ActorHackData;
   /** Mouth hacks */
-  mouth: HackData;
+  mouth: ActorHackData;
   /** Nose hacks */
-  nose: HackData;
+  nose: ActorHackData;
 }
 
 export interface TeriockBaseActorDefault {
@@ -32,17 +32,17 @@ export interface TeriockBaseActorDefault {
   /** Attributes */
   attributes: {
     /** Intelligence */
-    int: AttributeData;
+    int: ActorAttributeData;
     /** Movement */
-    mov: AttributeData;
+    mov: ActorAttributeData;
     /** Perception */
-    per: AttributeData;
+    per: ActorAttributeData;
     /** Sneak */
-    snk: AttributeData;
+    snk: ActorAttributeData;
     /** Strength */
-    str: AttributeData;
+    str: ActorAttributeData;
     /** Unused presence */
-    unp: AttributeData;
+    unp: ActorAttributeData;
   };
   /** Movement speed */
   movementSpeed: {
@@ -188,14 +188,14 @@ export interface TeriockBaseActorDefault {
     attacker: {
       /** ID for primary attacker */
       raw: Teriock.ID<TeriockEquipment> | null;
-      /** Derived primary attacker item */
+      /** @derived Derived primary attacker item */
       derived: TeriockEquipment | null;
     };
     /** Primary blocker */
     blocker: {
       /** ID for primary attacker */
       raw: Teriock.ID<TeriockEquipment> | null;
-      /** Derived primary attacker item */
+      /** @derived Derived primary attacker item */
       derived: TeriockEquipment | null;
     };
   };

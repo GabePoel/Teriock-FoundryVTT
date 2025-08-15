@@ -8,8 +8,18 @@
       </div>
     </div>
     <div class="ab-main">
-      {{> "systems/teriock/src/templates/document-templates/item-templates/power-template/entries/pw-description.hbs" }}
-      {{> "systems/teriock/src/templates/document-templates/item-templates/power-template/entries/pw-flaws.hbs" }}
+      {{formGroup
+        systemFields.description
+        value=system.description
+        enriched=enriched.description
+        enabled=(not disabled)
+      }}
+      {{formGroup
+        systemFields.flaws
+        value=system.flaws
+        enriched=enriched.flaws
+        enabled=(not disabled)
+      }}
     </div>
     {{> "systems/teriock/src/templates/document-templates/shared/effects.hbs"}}
   </div>

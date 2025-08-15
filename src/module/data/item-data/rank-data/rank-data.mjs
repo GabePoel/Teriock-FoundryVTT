@@ -1,5 +1,6 @@
 import { getRollIcon, makeIcon } from "../../../helpers/utils.mjs";
 import WikiDataMixin from "../../mixins/wiki-mixin.mjs";
+import { TextField } from "../../shared/fields.mjs";
 import TeriockBaseItemData from "../base-item-data/base-item-data.mjs";
 import { _messageParts } from "./methods/_messages.mjs";
 import { _parse } from "./methods/_parsing.mjs";
@@ -93,12 +94,12 @@ export default class TeriockRankData extends WikiDataMixin(
       wikiNamespace: new fields.StringField({
         initial: "Class",
       }),
-      description: new fields.HTMLField({
+      description: new TextField({
         initial:
           "<p>Every adventurer is a journeyman before they join their first class.</p>",
         label: "Description",
       }),
-      flaws: new fields.HTMLField({
+      flaws: new TextField({
         initial: "<p>None.</p>",
         label: "Flaws",
       }),

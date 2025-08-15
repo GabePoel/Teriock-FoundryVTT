@@ -1,5 +1,6 @@
 import TeriockImageSheet from "../../applications/sheets/misc-sheets/image-sheet/image-sheet.mjs";
 import { makeIcon } from "../../helpers/utils.mjs";
+import { TextField } from "../shared/fields.mjs";
 
 const { fields } = foundry.data;
 
@@ -172,7 +173,10 @@ export default (Base) => {
             label: "Font",
             hint: "The font to be used for this document's name on its sheet and in chat messages.",
           }),
-          description: new fields.HTMLField({ initial: "<p>None.</p>" }),
+          description: new TextField({
+            initial: "<p>None.</p>",
+            label: "Description",
+          }),
         },
       );
     }

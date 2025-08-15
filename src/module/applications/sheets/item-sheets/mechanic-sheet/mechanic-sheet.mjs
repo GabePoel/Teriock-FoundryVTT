@@ -28,9 +28,9 @@ export default class TeriockMechanicSheet extends TeriockBaseItemSheet {
   /** @inheritDoc */
   async _prepareContext(options) {
     const context = await super._prepareContext(options);
-    context.enrichedDescription = await this._editor(
-      this.item.system.description,
-    );
+    await this._enrichAll(context, {
+      description: this.item.system.description,
+    });
     context.baseEffects = this.document.effectTypes.base;
     return context;
   }

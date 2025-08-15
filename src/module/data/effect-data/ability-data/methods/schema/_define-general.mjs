@@ -1,6 +1,6 @@
 import { abilityOptions } from "../../../../../helpers/constants/ability-options.mjs";
 import { conditions } from "../../../../../helpers/constants/generated/conditions.mjs";
-import { FormulaField } from "../../../../shared/fields.mjs";
+import { FormulaField, TextField } from "../../../../shared/fields.mjs";
 
 const { fields } = foundry.data;
 
@@ -144,19 +144,19 @@ export function _defineGeneral(schema) {
     }),
     range: new fields.StringField({ initial: null, nullable: true }),
     overview: new fields.SchemaField({
-      base: new fields.HTMLField({ initial: "" }),
-      proficient: new fields.HTMLField({ initial: "" }),
-      fluent: new fields.HTMLField({ initial: "" }),
+      base: new TextField({ initial: "", label: "Description" }),
+      proficient: new TextField({ initial: "", label: "If Proficient" }),
+      fluent: new TextField({ initial: "", label: "If Fluent" }),
     }),
     results: new fields.SchemaField({
-      hit: new fields.HTMLField({ initial: "" }),
-      critHit: new fields.HTMLField({ initial: "" }),
-      miss: new fields.HTMLField({ initial: "" }),
-      critMiss: new fields.HTMLField({ initial: "" }),
-      save: new fields.HTMLField({ initial: "" }),
-      critSave: new fields.HTMLField({ initial: "" }),
-      fail: new fields.HTMLField({ initial: "" }),
-      critFail: new fields.HTMLField({ initial: "" }),
+      hit: new TextField({ initial: "", label: "On Hit" }),
+      critHit: new TextField({ initial: "", label: "On Critical Hit" }),
+      miss: new TextField({ initial: "", label: "On Miss" }),
+      critMiss: new TextField({ initial: "", label: "On Critical Miss" }),
+      save: new TextField({ initial: "", label: "On Success" }),
+      critSave: new TextField({ initial: "", label: "On Critical Success" }),
+      fail: new TextField({ initial: "", label: "On Fail" }),
+      critFail: new TextField({ initial: "", label: "On Critical Fail" }),
     }),
     piercing: new fields.StringField({
       initial: "normal",
@@ -235,7 +235,7 @@ export function _defineGeneral(schema) {
             min: 0,
           }),
           formula: new FormulaField({ initial: "", deterministic: false }),
-          variable: new fields.HTMLField({ initial: "" }),
+          variable: new TextField({ initial: "", label: "Mana Cost" }),
         }),
       }),
       hp: new fields.SchemaField({
@@ -256,7 +256,7 @@ export function _defineGeneral(schema) {
             min: 0,
           }),
           formula: new FormulaField({ initial: "", deterministic: false }),
-          variable: new fields.HTMLField({ initial: "" }),
+          variable: new TextField({ initial: "", label: "Hit Cost" }),
         }),
       }),
       gp: new fields.SchemaField({
@@ -276,15 +276,15 @@ export function _defineGeneral(schema) {
             min: 0,
           }),
           formula: new FormulaField({ initial: "", deterministic: false }),
-          variable: new fields.HTMLField({ initial: "" }),
+          variable: new TextField({ initial: "", label: "Gold Cost" }),
         }),
       }),
       break: new fields.StringField({ initial: "" }),
-      materialCost: new fields.HTMLField({ initial: "" }),
+      materialCost: new TextField({ initial: "", label: "Material Cost" }),
     }),
-    heightened: new fields.HTMLField({ initial: "" }),
-    endCondition: new fields.HTMLField({ initial: "" }),
-    requirements: new fields.HTMLField({ initial: "" }),
+    heightened: new TextField({ initial: "", label: "Heightened" }),
+    endCondition: new TextField({ initial: "", label: "End Condition" }),
+    requirements: new TextField({ initial: "", label: "Requirements" }),
     effects: new fields.ArrayField(
       new fields.StringField({
         choices: abilityOptions.effects,
@@ -293,14 +293,14 @@ export function _defineGeneral(schema) {
     expansion: new fields.StringField({ initial: null, nullable: true }),
     expansionRange: new fields.StringField({ initial: null, nullable: true }),
     expansionSaveAttribute: new fields.StringField({ initial: "mov" }),
-    trigger: new fields.HTMLField({ initial: "" }),
+    trigger: new TextField({ initial: "", label: "Trigger" }),
     basic: new fields.BooleanField({
       initial: false,
       label: "Basic",
     }),
     form: new fields.StringField({ initial: "normal" }),
-    limitation: new fields.HTMLField({ initial: "" }),
-    improvement: new fields.HTMLField({ initial: "" }),
+    limitation: new TextField({ initial: "", label: "Limitation" }),
+    improvement: new TextField({ initial: "", label: "Improvement" }),
     prepared: new fields.BooleanField({
       initial: true,
       label: "Prepared",

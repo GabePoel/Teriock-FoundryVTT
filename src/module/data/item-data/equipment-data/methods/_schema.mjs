@@ -1,6 +1,6 @@
 import { equipmentOptions } from "../../../../helpers/constants/equipment-options.mjs";
 import { weaponFightingStyles } from "../../../../helpers/constants/generated/weapon-fighting-styles.mjs";
-import { FormulaField } from "../../../shared/fields.mjs";
+import { FormulaField, TextField } from "../../../shared/fields.mjs";
 
 const { fields } = foundry.data;
 
@@ -117,7 +117,7 @@ export function _defineSchema() {
       label: "Block Value",
       min: 0,
     }),
-    specialRules: new fields.HTMLField({
+    specialRules: new TextField({
       hint: "The conditions under which style bonus is granted.",
       initial: "",
       label: "Special Rules",
@@ -135,11 +135,11 @@ export function _defineSchema() {
       initial: "mundane",
       label: "Power Level",
     }),
-    flaws: new fields.HTMLField({
+    flaws: new TextField({
       initial: "",
       label: "Flaws",
     }),
-    notes: new fields.HTMLField({
+    notes: new TextField({
       initial: "",
       label: "Notes",
     }),
