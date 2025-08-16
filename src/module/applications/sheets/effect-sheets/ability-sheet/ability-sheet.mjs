@@ -39,7 +39,13 @@ export default class TeriockAbilitySheet extends TeriockBaseEffectSheet {
     all: {
       template:
         "systems/teriock/src/templates/document-templates/effect-templates/ability-template/ability-template.hbs",
-      scrollable: [".window-content", ".tsheet-page", ".ab-sheet-everything"],
+      scrollable: [
+        ".window-content",
+        ".tsheet-page",
+        ".ab-sheet-everything",
+        ".ab-consequences-tab",
+        ".es-mask-rotator",
+      ],
     },
   };
 

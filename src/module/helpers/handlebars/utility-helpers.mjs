@@ -343,7 +343,6 @@ export default function registerUiHelpers() {
         searchString = "",
         noResults = "No results found.",
       } = options.hash;
-      if (!Array.isArray(abilities) || abilities.length === 0) return "";
       const isGapless = tab ? system?.sheet?.display?.[tab]?.gapless : false;
       const sizeClass = tab ? system?.sheet?.display?.[tab]?.size || "" : "";
       const containerClass =
@@ -470,29 +469,6 @@ export default function registerUiHelpers() {
       return new Handlebars.SafeString(
         `<div class="${containerClass}">${renderedCards}<div class="no-results ${sizeClass}"><p>${noResults}</p></div></div>`,
       );
-    },
-  );
-
-  Handlebars.registerHelper(
-    "tcardsSearchResults",
-    function (documents, system, tab, plural) {
-      const tcardsContainer = Handlebars.helpers.abilityCards(
-        documents,
-        system,
-        tab,
-      );
-      const sizeClass = system?.sheet?.display?.[tab]?.size || "";
-      const hasResults = documents && documents.length > 0;
-      let output = `<div id="${tab}-results" class="tcard-results">`;
-      output += tcardsContainer;
-      if (!hasResults) {
-        output += `
-      <div class="no-results ${sizeClass}">
-        <p>No ${plural} found.</p>
-      </div>`;
-      }
-      output += "</div>";
-      return new Handlebars.SafeString(output);
     },
   );
 }
