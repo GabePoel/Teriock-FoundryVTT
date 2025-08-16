@@ -55,9 +55,23 @@ export class TeriockPower extends TeriockItem {}
  * @property {TeriockRankSheet} sheet
  * @property {"rank"} type
  * @property {Teriock.UUID<TeriockRank>} uuid
- * @property {Teriock.ID<TeriockCharacter>} id
+ * @property {Teriock.ID<TeriockRank>} id
  */
 export class TeriockRank extends TeriockItem {}
+
+/**
+ * Species-specific {@link TeriockItem} class.
+ *
+ * Relevant wiki pages:
+ * - [Creatures](https://wiki.teriock.com/index.php/Category:Creatures)
+ *
+ * @property {TeriockSpeciesData} system
+ * @property {TeriockSpeciesSheet} sheet
+ * @property {"species"} type
+ * @property {Teriock.UUID<TeriockSpecies>} uuid
+ * @property {Teriock.ID<TeriockSpecies>} id
+ */
+export class TeriockSpecies extends TeriockItem {}
 
 /**
  * Mechanic-specific {@link TeriockItem} class.

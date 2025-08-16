@@ -131,6 +131,7 @@
   --tcard-height: 56px;
   --tcard-outer-border-radius: 4px;
   --tcard-inner-border-width: 1px;
+  --tcard-outer-border-width: 1px;
   --tcard-title-font-size: 1em;
   --tcard-subtitle-font-size: 0.8em;
   --tcard-image-padding: 8px;
@@ -148,8 +149,8 @@
   --tcard-icons-gap: 4px;
   --tcard-box-shadow: 0 0 6px rgba(0, 0, 0, 0.4);
   --tcard-container-box-shadow: none;
+  --tcard-border-color: var(--color-border);
   --tcard-border-radius: var(--tcard-outer-border-radius);
-  --tcard-margin-top: 0;
   display: flex;
   flex-direction: column;
   box-shadow: var(--tcard-container-box-shadow);
@@ -219,11 +220,12 @@
 }
 .teriock .tcard-container.gapless {
   --tcard-border-radius: 0;
-  --tcard-box-shadow: none;
   --tcard-container-box-shadow: 0 0 6px rgba(0, 0, 0, 0.4);
-  --tcard-margin-top: -1px;
+  --tcard-outer-border-width: 0;
+  --tcard-box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+  overflow: hidden;
   gap: 0;
-  border-bottom-width: 0;
+  box-shadow: var(--tcard-container-box-shadow), inset 0 0 0 0.5px var(--color-border);
 }
 .teriock .tcard-container .tcard {
   --tcard-opacity: 1;
@@ -234,14 +236,14 @@
   align-items: center;
   justify-content: flex-start;
   width: 100%;
-  border: var(--tcard-inner-border-width) solid var(--color-border);
+  border: var(--tcard-outer-border-width) solid var(--color-border);
+  border-top-width: var(--tcard-inner-border-width);
   border-radius: var(--tcard-border-radius);
   transition: all 0.15s ease-in-out;
   position: relative;
   box-shadow: var(--tcard-box-shadow);
   overflow: hidden;
   cursor: default;
-  margin-top: var(--tcard-margin-top);
 }
 .teriock .tcard-container .tcard.inactive {
   --tcard-opacity: 0.5;
@@ -273,7 +275,7 @@
   text-decoration: line-through;
 }
 .teriock .tcard-container .tcard:hover {
-  box-shadow: 0 0 8px var(--color-shadow-primary);
+  box-shadow: var(--tcard-box-shadow), inset 0 0 8px var(--color-shadow-primary);
   background-color: rgba(255, 255, 255, 0.15);
 }
 .teriock .tcard-container .tcard:hover.inactive {
@@ -283,6 +285,7 @@
   width: 0;
   height: 100%;
   opacity: var(--tcard-opacity);
+  z-index: -1;
 }
 .teriock .tcard-container .tcard .tcard-image {
   width: var(--tcard-height);
@@ -373,7 +376,7 @@
   color: var(--color-text-subtle);
   text-transform: uppercase;
   display: flex;
-  flex: row;
+  flex-direction: row;
   gap: var(--tcard-icons-gap);
 }
 .teriock .tcard-container .tcard .tcard-body .tcard-content .tcard-icons i:hover {
@@ -385,9 +388,24 @@
 .teriock .tcard-container .tcard.hidden {
   display: none;
 }
-.teriock .tcard-container .tcard-container-start + .tcard {
-  border-top-left-radius: calc(var(--tcard-outer-border-radius) - 1px);
-  border-top-right-radius: calc(var(--tcard-outer-border-radius) - 1px);
+.teriock .tcard-container .no-results {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.075);
+  border-radius: var(--tcard-border-radius);
+  box-shadow: var(--tcard-box-shadow);
+  height: var(--tcard-height);
+  border: var(--tcard-inner-border-width) solid var(--color-border);
+  opacity: 0.5;
+}
+.teriock .tcard-container .tcard-container-start + .no-results {
+  display: flex;
+}
+.teriock .tcard-container > :nth-child(1 of :not(.hidden)) {
+  display: flex;
 }
 .teriock .tcard-results {
   width: 100%;
@@ -1954,32 +1972,6 @@
 .teriock .tcard-display .tcard-container {
   width: 100%;
   max-width: unset;
-}
-.teriock .tcard-display .no-results {
-  display: none;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 56px;
-}
-.teriock .tcard-display .no-results.large {
-  height: 84px;
-}
-.teriock .tcard-display .no-results.medium {
-  height: 56px;
-}
-.teriock .tcard-display .no-results.small {
-  height: 42px;
-}
-.teriock .tcard-display .no-results.tiny {
-  height: 28px;
-}
-.teriock .tcard-display .no-results.not-hidden {
-  display: flex;
-}
-.teriock .tcard-display .tcard-container-start + .no-results {
-  display: flex;
 }
 .teriock .character-tab-page {
   display: flex;

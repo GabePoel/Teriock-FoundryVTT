@@ -14,10 +14,17 @@ declare global {
       message?: string;
       /** Success Threshold */
       threshold?: number;
-      /** Turn of Heightening */
+    };
+
+    export type AbilityRoll = Teriock.RollOptions.CommonRoll & {
+      /** Turn off heightening */
       noHeighten?: boolean;
       /** Forced {@link TeriockActor} */
       actor?: TeriockActor;
+      /** Force proficiency on/off */
+      proficient?: boolean;
+      /** Force fluency on/off */
+      fluent?: boolean;
     };
 
     /**

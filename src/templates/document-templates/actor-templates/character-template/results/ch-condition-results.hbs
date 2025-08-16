@@ -1,8 +1,6 @@
 <div id="condition-results" class="tcard-results">
   <div class="tcard-container {{{system.sheet.display.consequence.size}}} {{#if
-    system.sheet.display.consequence.gapless}}gapless{{/if}}"
-       {{#if (not (exists conditions))}}style="box-shadow: none;"{{/if}}>
-    <div class="tcard-container-start" style="display: none;"></div>
+    system.sheet.display.consequence.gapless}}gapless{{/if}}">
     {{#each conditions as |condition|}}
       {{tcard
         img=(path ../config.content.conditions condition "img")
@@ -25,10 +23,8 @@
         usable=(includes ../removableConditions condition)
       }}
     {{/each}}
-    {{#if (not (exists conditions))}}
-      <div class="no-results {{{system.sheet.display.consequence.size}}}">
-        <p>No conditions found.</p>
-      </div>
-    {{/if}}
+    <div class="no-results {{{system.sheet.display.consequence.size}}}">
+      <p>No conditions found.</p>
+    </div>
   </div>
 </div>

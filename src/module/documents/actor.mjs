@@ -34,6 +34,11 @@ export default class TeriockActor extends BaseTeriockActor {
     return this.itemTypes?.power || [];
   }
 
+  /** @returns {TeriockSpecies[]} */
+  get species() {
+    return this.itemTypes?.species || [];
+  }
+
   /**
    * Gets effects that expire based on conditions.
    *

@@ -47,4 +47,10 @@ export function _prepareBaseData(actorData) {
   for (const pseudoHook of Object.keys(pseudoHooks)) {
     actorData.hookedMacros[pseudoHook] = [];
   }
+  actorData.orderings.ranks = actorData.orderings.ranks.filter((r) =>
+    actorData.parent.items.get(r),
+  );
+  actorData.orderings.species = actorData.orderings.species.filter((s) =>
+    actorData.parent.items.get(s),
+  );
 }

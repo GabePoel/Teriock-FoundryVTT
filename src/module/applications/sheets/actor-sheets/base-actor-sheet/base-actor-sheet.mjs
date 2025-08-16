@@ -1,12 +1,5 @@
 import { conditions } from "../../../../content/conditions.mjs";
 import { documentOptions } from "../../../../helpers/constants/document-options.mjs";
-import { copyRank, getItem, getRank } from "../../../../helpers/fetch.mjs";
-import { toTitleCase } from "../../../../helpers/utils.mjs";
-import {
-  selectClassDialog,
-  selectDialog,
-  selectEquipmentTypeDialog,
-} from "../../../dialogs/select-dialog.mjs";
 import { SheetMixin } from "../../mixins/_module.mjs";
 import _embeddedFromCard from "../../mixins/methods/_embedded-from-card.mjs";
 import {
@@ -14,7 +7,13 @@ import {
   primaryAttackContextMenu,
   primaryBlockerContextMenu,
 } from "./connections/character-context-menus.mjs";
+import {
+  _addEmbedded,
+  _addEquipment,
+  _addRank,
+} from "./methods/_add-embedded.mjs";
 import { _filterAbilities, _filterEquipment } from "./methods/_filters.mjs";
+import { _initSearchFilters } from "./methods/_search.mjs";
 import { _defaultSheetSettings } from "./methods/_settings.mjs";
 import { _sortAbilities, _sortEquipment } from "./methods/_sort.mjs";
 
@@ -94,22 +93,6 @@ export default class TeriockBaseActorSheet extends SheetMixin(ActorSheetV2) {
   };
 
   /**
-   * Search configurations for different document types.
-   *
-   * @type {Array}
-   * @static
-   */
-  static SEARCH_CONFIGS = [
-    { type: "ability", source: "effectTypes", method: "_getFilteredAbilities" },
-    { type: "equipment", source: "itemTypes", method: "_getFilteredEquipment" },
-    { type: "fluency", source: "effectTypes", method: null },
-    { type: "power", source: "itemTypes", method: null },
-    { type: "rank", source: "itemTypes", method: null },
-    { type: "resource", source: "effectTypes", method: null },
-    { type: "consequence", source: "effectTypes", method: null },
-  ];
-
-  /**
    * Creates a new base actor sheet instance.
    * Initializes sheet state including menus, drawers, search values, and settings.
    *
@@ -125,11 +108,6 @@ export default class TeriockBaseActorSheet extends SheetMixin(ActorSheetV2) {
       attacker: [],
       blocker: [],
     };
-    this._loadingSearch = true;
-    for (const { type } of this.constructor.SEARCH_CONFIGS) {
-      const key = `_${type}SearchValue`;
-      if (!(key in this)) this[key] = "";
-    }
     this._embeds = {
       effectTypes: {},
       itemTypes: {},
@@ -140,6 +118,9 @@ export default class TeriockBaseActorSheet extends SheetMixin(ActorSheetV2) {
       sheetSettings.conditionExpansions[key] = false;
     });
     this.settings = _defaultSheetSettings;
+
+    /** @type {Record<string, string>} */
+    this._searchStrings = {};
   }
 
   /**
@@ -247,7 +228,7 @@ export default class TeriockBaseActorSheet extends SheetMixin(ActorSheetV2) {
    */
   static async _toggleDisabledDoc(_event, target) {
     const embedded = await _embeddedFromCard(this, target);
-    embedded?.toggleDisabled();
+    await embedded?.toggleDisabled();
   }
 
   /**
@@ -260,72 +241,7 @@ export default class TeriockBaseActorSheet extends SheetMixin(ActorSheetV2) {
    * @static
    */
   static async _addEmbedded(_event, target) {
-    const tab = target.dataset.tab;
-    const tabMap = {
-      ability: {
-        data: {
-          img: "systems/teriock/assets/ability.svg",
-          name: "New Ability",
-          type: "ability",
-        },
-        docType: "ActiveEffect",
-      },
-      consequence: {
-        data: {
-          img: "systems/teriock/assets/effect.svg",
-          name: "New Consequence",
-          type: "consequence",
-        },
-        docType: "ActiveEffect",
-      },
-      equipment: {
-        data: {
-          img: "systems/teriock/assets/equipment.svg",
-          name: "New Equipment",
-          type: "equipment",
-        },
-        docType: "Item",
-      },
-      fluency: {
-        data: {
-          img: "systems/teriock/assets/fluency.svg",
-          name: "New Fluency",
-          type: "fluency",
-        },
-        docType: "ActiveEffect",
-      },
-      power: {
-        data: {
-          img: "systems/teriock/assets/power.svg",
-          name: "New Power",
-          type: "power",
-        },
-        docType: "Item",
-      },
-      rank: {
-        data: {
-          img: "systems/teriock/assets/rank.svg",
-          name: "New Rank",
-          type: "rank",
-        },
-        docType: "Item",
-      },
-      resource: {
-        data: {
-          img: "systems/teriock/assets/resource.svg",
-          name: "New Resource",
-          type: "resource",
-        },
-        docType: "ActiveEffect",
-      },
-    };
-    const entry = tabMap[tab];
-    if (!entry) return;
-    /** @type {(Document|ClientDocument)[]} */
-    const docs = await this.actor.createEmbeddedDocuments(entry.docType, [
-      entry.data,
-    ]);
-    await docs[0].sheet?.render(true);
+    await _addEmbedded(this, target);
   }
 
   /**
@@ -337,90 +253,7 @@ export default class TeriockBaseActorSheet extends SheetMixin(ActorSheetV2) {
    * @private
    */
   static async _addRank(_event, _target) {
-    const rankClass = await selectClassDialog();
-    if (!rankClass) return;
-    const rankNumber = Number(
-      await selectDialog(
-        { 1: "1", 2: "2", 3: "3", 4: "4", 5: "5" },
-        {
-          label: "Rank",
-          hint: `What rank ${CONFIG.TERIOCK.rankOptionsList[rankClass]} is this?`,
-          title: "Select Rank",
-        },
-      ),
-    );
-    if (!rankClass) return;
-    const referenceRank = await getRank(rankClass, rankNumber);
-    let rank = await copyRank(rankClass, rankNumber);
-    if (rankNumber <= 2) {
-      await this.document.createEmbeddedDocuments("Item", [rank]);
-      return;
-    }
-    const existingRanks = this.document.ranks.filter(
-      (r) => r.system.className === rankClass,
-    );
-    const combatAbilityNames = new Set(
-      referenceRank.abilities
-        .filter((a) => !a.sup)
-        .map((a) => a.name)
-        .slice(0, 3),
-    );
-    const availableCombatAbilityNames = new Set(combatAbilityNames);
-    const supportAbilityNames = new Set(
-      referenceRank.abilities
-        .filter((a) => !a.sup)
-        .map((a) => a.name)
-        .slice(3),
-    );
-    const availableSupportAbilityNames = new Set(supportAbilityNames);
-    for (const existingRank of existingRanks) {
-      for (const ability of existingRank.abilities) {
-        const existingAbility = rank.abilities.find(
-          (a) => a.name === ability.name,
-        );
-        if (existingAbility) {
-          availableCombatAbilityNames.delete(existingAbility.name);
-          availableSupportAbilityNames.delete(existingAbility.name);
-        }
-      }
-    }
-    const chosenAbilityNames = [];
-    if (availableCombatAbilityNames.size > 1) {
-      const combatAbilityChoices = {};
-      availableCombatAbilityNames.map((n) => (combatAbilityChoices[n] = n));
-      const chosenCombatAbilityName = await selectDialog(combatAbilityChoices, {
-        label: "Ability",
-        hint: "Select a combat ability.",
-        title: "Select Combat Ability",
-      });
-      chosenAbilityNames.push(chosenCombatAbilityName);
-    } else {
-      chosenAbilityNames.push(...availableCombatAbilityNames);
-    }
-    if (availableSupportAbilityNames.size > 1) {
-      const supportAbilityChoices = {};
-      availableSupportAbilityNames.map((n) => (supportAbilityChoices[n] = n));
-      const supportAbilityName = await selectDialog(supportAbilityChoices, {
-        label: "Support Ability",
-        hint: "Select a support ability.",
-        title: "Select Combat Ability",
-      });
-      chosenAbilityNames.push(supportAbilityName);
-    } else {
-      chosenAbilityNames.push(...availableSupportAbilityNames);
-    }
-    const abilities = rank.effects;
-    const allowedAbilityIds = new Set();
-    for (const chosenAbilityName of chosenAbilityNames) {
-      /** @type {TeriockAbility} */
-      const chosenAbility = abilities.getName(chosenAbilityName);
-      allowedAbilityIds.add(chosenAbility.id);
-      chosenAbility.allSubs.map((a) => allowedAbilityIds.add(a.id));
-    }
-    for (const ability of abilities) {
-      if (!allowedAbilityIds.has(ability.id)) abilities.delete(ability.id);
-    }
-    await this.document.createEmbeddedDocuments("Item", [rank]);
+    await _addRank(this);
   }
 
   /**
@@ -432,25 +265,7 @@ export default class TeriockBaseActorSheet extends SheetMixin(ActorSheetV2) {
    * @private
    */
   static async _addEquipment(_event, _target) {
-    let equipmentType = await selectEquipmentTypeDialog();
-    if (Object.keys(CONFIG.TERIOCK.equipmentType).includes(equipmentType)) {
-      const equipment = await getItem(
-        CONFIG.TERIOCK.equipmentType[equipmentType],
-        "equipment",
-      );
-      await this.document.createEmbeddedDocuments("Item", [equipment]);
-    } else {
-      equipmentType = toTitleCase(equipmentType);
-      await this.document.createEmbeddedDocuments("Item", [
-        {
-          name: equipmentType,
-          system: {
-            equipmentType: equipmentType,
-          },
-          type: "equipment",
-        },
-      ]);
-    }
+    await _addEquipment(this);
   }
 
   /**
@@ -579,7 +394,9 @@ export default class TeriockBaseActorSheet extends SheetMixin(ActorSheetV2) {
    * @static
    */
   static async _toggleReaction() {
-    await this.document.update({ "system.hasReaction": !this.document.system.hasReaction });
+    await this.document.update({
+      "system.hasReaction": !this.document.system.hasReaction,
+    });
   }
 
   /**
@@ -890,8 +707,19 @@ export default class TeriockBaseActorSheet extends SheetMixin(ActorSheetV2) {
     }
 
     const tab = this._activeTab || "classes";
+    // TODO: Remove `this._embeds` entirely.
+    // TODO: Finish resolving virtual abilities.
+    // const basicAbilitiesPower = await getItem("Basic Abilities", "essentials");
+    // const basicAbilities = basicAbilitiesPower.abilities;
     this._embeds.effectTypes = {
-      ability: tab === "abilities" ? this.actor.abilities : [],
+      ability:
+        tab === "abilities"
+          ? [
+              ...this.actor.abilities,
+              // Uncomment when bugs with virtual abilities are all resolved.
+              // ...basicAbilities
+            ]
+          : [],
       attunement: tab === "conditions" ? this.actor.attunements : [],
       consequence: tab === "conditions" ? this.actor.consequences : [],
       fluency: tab === "tradecrafts" ? this.actor.fluencies : [],
@@ -928,9 +756,13 @@ export default class TeriockBaseActorSheet extends SheetMixin(ActorSheetV2) {
     );
     context.editable = this.isEditable;
     context.actor = this.actor;
-    context.abilities = _sortAbilities(this.actor) || [];
+    context.abilities = this._getFilteredAbilities(
+      _sortAbilities(this.actor, this._embeds.effectTypes.ability) || [],
+    );
     context.resources = this.actor.resources;
-    context.equipment = _sortEquipment(this.actor) || [];
+    context.equipment = this._getFilteredEquipment(
+      _sortEquipment(this.actor, this._embeds.itemTypes.equipment) || [],
+    );
     context.powers = this.actor.powers;
     context.fluencies = this.actor.fluencies;
     context.consequences = this.actor.consequences;
@@ -946,6 +778,7 @@ export default class TeriockBaseActorSheet extends SheetMixin(ActorSheetV2) {
         label: "Classes",
       },
     };
+    context.searchStrings = foundry.utils.deepClone(this._searchStrings);
     context.enrichedNotes = await this._editor(
       this.document.system.sheet.notes,
     );
@@ -1150,17 +983,7 @@ export default class TeriockBaseActorSheet extends SheetMixin(ActorSheetV2) {
       "click",
     );
 
-    this._loadingSearch = true;
-    this.#runSearchFilters();
-    this.#initSearchFilters();
-
-    /** @type {NodeListOf<HTMLInputElement>} */
-    const searchInputs = this.element.querySelectorAll(".tcard-search");
-    searchInputs.forEach((input) => {
-      input.value = this[`_${input.dataset.type}SearchValue`];
-    });
-
-    // Add listeners for filter selects
+    _initSearchFilters(this);
 
     /** @type {NodeListOf<HTMLSelectElement>} */
     const filterSelects = this.element.querySelectorAll(
@@ -1221,129 +1044,6 @@ export default class TeriockBaseActorSheet extends SheetMixin(ActorSheetV2) {
       obj[key] = ((val + 2) % 3) - 1;
     } else {
       obj[key] = ((val + 3) % 3) - 1;
-    }
-  }
-
-  /**
-   * Initializes search filters for all document types.
-   *
-   * @private
-   */
-  #initSearchFilters() {
-    const configs = this.constructor.SEARCH_CONFIGS;
-    configs.forEach(({ type, source, method }) => {
-      const contentEl = this.element.querySelector(`#${type}-results`);
-      const inputEl = this.element.querySelector(`.${type}-search`);
-      if (!(contentEl && inputEl)) return;
-
-      const instance = new ux.SearchFilter({
-        callback: (_event, query, rgx) => {
-          if (!query && this._loadingSearch) {
-            const searchPath = `_${type}SearchValue`;
-            const value = this[searchPath] || "";
-            rgx = new RegExp(value, "i");
-          }
-          this.#handleSearchFilter(
-            type,
-            source,
-            method,
-            rgx,
-            contentEl,
-            inputEl,
-          );
-        },
-        contentSelector: `#${type}-results`,
-        inputSelector: `.${type}-search`,
-      });
-
-      instance.bind(this.element);
-
-      inputEl.addEventListener("focus", () => {
-        this._loadingSearch = false;
-      });
-    });
-  }
-
-  /**
-   * Runs search filters for all document types.
-   *
-   * @private
-   */
-  #runSearchFilters() {
-    const configs = this.constructor.SEARCH_CONFIGS;
-    configs.forEach(({ type, source, method }) => {
-      const contentEl = this.element.querySelector(`#${type}-results`);
-      if (!contentEl) return;
-
-      const inputValue = this[`_${type}SearchValue`] || "";
-      const rgx = new RegExp(inputValue, "i");
-      this.#applyFilter(type, source, method, rgx, contentEl);
-    });
-  }
-
-  /**
-   * Handles search filter changes for a specific type.
-   *
-   * @param {string} type - The document type.
-   * @param {string} sourceKey - The source key for the data.
-   * @param {string|null} filterMethodName - The filter method name.
-   * @param {RegExp} rgx - The search regex.
-   * @param {HTMLElement} content - The content element.
-   * @param {HTMLInputElement} input - The input element.
-   * @private
-   */
-  #handleSearchFilter(type, sourceKey, filterMethodName, rgx, content, input) {
-    this.#applyFilter(type, sourceKey, filterMethodName, rgx, content);
-    const searchPath = `_${type}SearchValue`;
-    if (!input) {
-      return;
-    }
-    this[searchPath] = input.value;
-    this._loadingSearch = false;
-  }
-
-  /**
-   * Applies a filter to content elements.
-   *
-   * @param {string} type - The document type.
-   * @param {string} sourceKey - The source key for the data.
-   * @param {string|null} filterMethodName - The filter method name.
-   * @param {RegExp} rgx - The search regex.
-   * @param {HTMLElement} content - The content element.
-   * @private
-   */
-  #applyFilter(type, sourceKey, filterMethodName, rgx, content) {
-    const noResults = this.element.querySelector(".no-results");
-    let filtered = this._embeds[sourceKey][type] || [];
-    if (filterMethodName) {
-      filtered = this[filterMethodName]?.(filtered) || filtered;
-    }
-    filtered = filtered.filter((i) => rgx.test(i.name));
-
-    const visibleIds = new Set(filtered.map((i) => i._id));
-    const allCards = Array.from(content?.querySelectorAll(".tcard") || []);
-
-    let visibleCount = 0;
-    let firstVisibleCard = null;
-    let lastVisibleCard = null;
-
-    allCards.forEach((card) => {
-      const isVisible = visibleIds.has(card.dataset.id);
-
-      card.classList.remove("visible-first", "visible-last");
-      card.classList.toggle("hidden", !isVisible);
-
-      if (isVisible) {
-        visibleCount++;
-        if (!firstVisibleCard) firstVisibleCard = card;
-        lastVisibleCard = card;
-      }
-    });
-
-    if (firstVisibleCard) firstVisibleCard.classList.add("visible-first");
-    if (lastVisibleCard) lastVisibleCard.classList.add("visible-last");
-    if (noResults) {
-      noResults.classList.toggle("not-hidden", visibleCount === 0);
     }
   }
 }

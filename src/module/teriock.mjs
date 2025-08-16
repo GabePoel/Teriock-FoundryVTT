@@ -90,6 +90,7 @@ foundry.helpers.Hooks.once("init", function () {
     power: data.item.PowerData,
     rank: data.item.RankData,
     mechanic: data.item.MechanicData,
+    species: data.item.SpeciesData,
   });
   Object.assign(CONFIG.ActiveEffect.dataModels, {
     ability: data.effect.AbilityData,
@@ -150,6 +151,12 @@ foundry.helpers.Hooks.once("init", function () {
       doc: documents.TeriockItem,
       label: "Mechanic",
       types: ["mechanic"],
+    },
+    {
+      cls: applications.sheets.item.SpeciesSheet,
+      doc: documents.TeriockItem,
+      label: "Species",
+      types: ["species"],
     },
     // Effects
     {

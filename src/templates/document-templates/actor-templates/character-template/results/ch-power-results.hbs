@@ -1,4 +1,4 @@
-<div id="power-results" class="tcard-results">
+<div id="power-results" class="tcard-results" data-search-key="powers">
   <div class="tcard-container {{#if
     system.sheet.display.power.gapless}}gapless{{/if}} {{system.sheet.display.power.size}}">
     {{#each powers as |item|}}
@@ -11,15 +11,15 @@
         struck=item.system.disabled
         text=""
         tooltip="Share to Chat"
+        hidden=(rgx ../searchStrings.powers item.name)
         icons=(concat
           (ticon "comment" action="chatDoc" id=rank._id tooltip="Send to Chat")
           (ticonToggle "circle-check" "circle" (not item.disabled) action="toggleDisabledDoc" id=item._id tooltipTrue="Enabled" tooltipFalse="Disabled")
         )
       }}
     {{/each}}
+    <div class="no-results {{{system.sheet.display.power.size}}}">
+      <p>No powers found.</p>
+    </div>
   </div>
-  <div class="no-results {{{system.sheet.display.power.size}}}">
-    <p>No powers found.</p>
-  </div>
-  <div id="hidden-tcards" style="display: none;"></div>
 </div>

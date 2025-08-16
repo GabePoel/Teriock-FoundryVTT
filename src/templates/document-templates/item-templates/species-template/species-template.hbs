@@ -1,0 +1,23 @@
+<div class="{{cssClass}} tsheet-page">
+  <div class="ab-sheet-everything">
+    <div class="ab-sheet-top">
+      {{> "systems/teriock/src/templates/document-templates/shared/header.hbs"}}
+    </div>
+    <div class="ab-main">
+      {{formGroup
+        systemFields.appearance
+        value=system.appearance
+        enriched=enriched.appearance
+        enabled=(not disabled)
+        hidden=(not (exists system.appearance))
+      }}
+      {{formGroup
+        systemFields.description
+        value=system.description
+        enriched=enriched.description
+        enabled=(not disabled)
+        hidden=(not (exists system.description))
+      }}
+    </div>
+  </div>
+</div>

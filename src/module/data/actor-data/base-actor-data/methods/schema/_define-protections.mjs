@@ -16,16 +16,6 @@ const { fields } = foundry.data;
  *
  * @param {string} name - The name of the protection type (e.g., "resist", "are immune to")
  * @returns {SchemaField}
- *
- * @typedef {Object} ProtectionSchema
- * @property {SetField} damageTypes - A list of damage types.
- * @property {SetField} drainTypes - A list of drain types.
- * @property {SetField} statuses - A list of conditions.
- * @property {SetField} elements - A list of elements.
- * @property {SetField} effects - A list of effects.
- * @property {SetField} powerSources - A list of power sources.
- * @property {SetField} abilities - A list of abilities.
- * @property {SetField} other - A list of other protections.
  */
 function protectionField(name) {
   return new fields.SchemaField({
@@ -119,15 +109,11 @@ function protectionField(name) {
  * @returns {Object} The modified schema object with resistances and immunities fields added
  *
  * @example
- * ```javascript
+ * ```JavaScript
  * const schema = {};
  * const protectionsSchema = _defineProtections(schema);
  * // protectionsSchema now contains: resistances and immunities fields
  * ```
- *
- * @typedef {Object} ProtectionsSchema
- * @property {SchemaField} resistances - A schema field for actor resistances.
- * @property {SchemaField} immunities - A schema field for actor immunities.
  */
 export function _defineProtections(schema) {
   schema.resistances = protectionField("resist");

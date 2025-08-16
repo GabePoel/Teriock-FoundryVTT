@@ -4,7 +4,13 @@ declare global {
   namespace Teriock.Documents {
     export type ActorType = "base" | "character";
 
-    export type ItemType = "base" | "equipment" | "rank" | "power" | "mechanic";
+    export type ItemType =
+      | "base"
+      | "equipment"
+      | "rank"
+      | "power"
+      | "mechanic"
+      | "species";
 
     export type EffectType =
       | "ability"

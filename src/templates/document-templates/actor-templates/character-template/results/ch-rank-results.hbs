@@ -1,4 +1,4 @@
-<div id="rank-results" class="tcard-results">
+<div id="rank-results" class="tcard-results" data-search-key="ranks">
   <div
     class="tcard-container {{#if system.sheet.display.rank.gapless}}gapless{{/if}} {{system.sheet.display.rank.size}}">
     {{#each ranks as |item|}}
@@ -11,6 +11,7 @@
         active=(not item.disabled)
         struck=item.system.disabled
         tooltip="Share to Chat"
+        hidden=(rgx ../searchStrings.ranks (className item.system.archetype item.system.className))
         icons=(concat
           (ticonToggle (firstDie item.system.hitDie) "rotate-left" (not item.system.hitDieSpent) action="rollHitDie" id=item._id falseAction="unrollHitDie" tooltipTrue="Hit Die" tooltipFalse="Recover Hit Die")
           (ticonToggle (firstDie item.system.manaDie) "rotate-left" (not item.system.manaDieSpent) action="rollManaDie" id=item._id falseAction="unrollManaDie" tooltipTrue="Mana Die" tooltipFalse="Recover Mana Die")
@@ -19,9 +20,8 @@
         )
       }}
     {{/each}}
+    <div class="no-results {{{system.sheet.display.rank.size}}}">
+      <p>No ranks found.</p>
+    </div>
   </div>
-  <div class="no-results {{{system.sheet.display.rank.size}}}">
-    <p>No ranks found.</p>
-  </div>
-  <div id="hidden-tcards" style="display: none;"></div>
 </div>

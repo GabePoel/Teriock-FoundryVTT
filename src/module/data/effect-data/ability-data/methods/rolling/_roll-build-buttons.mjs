@@ -29,18 +29,9 @@ export async function _buildButtons(rollConfig) {
   }
 
   // Apply Effect Button
-  const normalEffectData = await _generateEffect(
-    abilityData,
-    abilityData.actor,
-    useData.modifiers.heightened,
-  );
+  const normalEffectData = await _generateEffect(rollConfig);
   const normalEffectJSON = JSON.stringify(normalEffectData);
-  const critEffectData = await _generateEffect(
-    abilityData,
-    abilityData.actor,
-    useData.modifiers.heightened,
-    true,
-  );
+  const critEffectData = await _generateEffect(rollConfig, true);
   const critEffectJSON = JSON.stringify(critEffectData);
   if (normalEffectData || critEffectData) {
     buttons.push({
@@ -60,9 +51,9 @@ export async function _buildButtons(rollConfig) {
   // Standard Damage Button
   if (
     abilityData.applies.base.standardDamage ||
-    (abilityData.parent.isProficient &&
+    (rollConfig.useData.proficient &&
       abilityData.applies.proficient.standardDamage) ||
-    (abilityData.parent.isFluent && abilityData.applies.fluent.standardDamage)
+    (rollConfig.useData.fluent && abilityData.applies.fluent.standardDamage)
   ) {
     const buttonData = {
       label: "Standard Roll",
@@ -71,9 +62,9 @@ export async function _buildButtons(rollConfig) {
         action: "standard-damage",
       },
     };
-    if (abilityData.actor.system.wielding.attacker.derived) {
+    if (rollConfig.useData.actor.system.wielding.attacker.derived) {
       buttonData.dataset.attacker =
-        abilityData.actor.system.wielding.attacker.derived.uuid;
+        rollConfig.useData.actor.system.wielding.attacker.derived.uuid;
     }
     buttons.push(buttonData);
   }
@@ -112,7 +103,7 @@ export async function _buildButtons(rollConfig) {
   }
 
   // Take Data
-  const takeData = _generateTakes(abilityData, useData.modifiers.heightened);
+  const takeData = _generateTakes(rollConfig);
 
   // Rollable Take Buttons
   Object.entries(takeData.rolls).forEach(([rollType, formula]) => {

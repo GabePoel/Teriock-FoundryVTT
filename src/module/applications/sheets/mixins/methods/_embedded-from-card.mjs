@@ -8,7 +8,7 @@
 export default async function _embeddedFromCard(sheet, target) {
   /** @type {HTMLElement} */
   const card = target.closest(".tcard");
-  const { id, type, parentId } = card?.dataset ?? {};
+  const { id, type, parentId, uuid } = card?.dataset ?? {};
 
   if (type === "noneMacro") {
     foundry.ui.notifications.warn("Drag a macro onto sheet to assign it.", {
@@ -21,6 +21,10 @@ export default async function _embeddedFromCard(sheet, target) {
   if (type === "item") return sheet.document?.items.get(id);
 
   if (["effect", "conditionUnlocked"].includes(type)) {
+    // TODO: Uncomment when virtual abilities are implemented
+    // if (uuid) {
+    //   return await foundry.utils.fromUuid(uuid);
+    // }
     if (
       sheet.document.documentName === "Actor" &&
       sheet.document._id !== parentId

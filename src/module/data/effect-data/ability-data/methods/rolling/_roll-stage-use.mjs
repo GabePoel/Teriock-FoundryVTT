@@ -48,9 +48,8 @@ export async function _stageUse(rollConfig) {
 
   // Add proficiency modifiers
   if (["attack", "feat"].includes(rollConfig.abilityData.interaction)) {
-    if (rollConfig.abilityData.parent.isFluent)
-      rollConfig.useData.formula += " + @f";
-    else if (rollConfig.abilityData.parent.isProficient)
+    if (rollConfig.useData.fluent) rollConfig.useData.formula += " + @f";
+    else if (rollConfig.useData.proficient)
       rollConfig.useData.formula += " + @p";
     if (rollConfig.useData.modifiers.heightened > 0)
       rollConfig.useData.formula += " + @h";

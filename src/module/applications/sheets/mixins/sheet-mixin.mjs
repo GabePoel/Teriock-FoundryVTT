@@ -265,6 +265,11 @@ export default (Base) => {
         : event?.shiftKey
           ? { disadvantage: true }
           : {};
+      if (this.document.documentName === "Actor") {
+        options.actor = this.document;
+      } else if (this.document.actor) {
+        options.actor = this.document.actor;
+      }
       const embedded = await _embeddedFromCard(this, target);
       if (embedded?.type === "equipment") {
         if (event?.shiftKey) {

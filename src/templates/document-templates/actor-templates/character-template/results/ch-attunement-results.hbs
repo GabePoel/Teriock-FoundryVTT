@@ -1,8 +1,6 @@
 <div id="attunement-results" class="tcard-results">
   <div class="tcard-container {{{system.sheet.display.consequence.size}}} {{#if
-    system.sheet.display.consequence.gapless}}gapless{{/if}}"
-       {{#if (not (exists attunements))}}style="box-shadow: none;"{{/if}}>
-    <div class="tcard-container-start" style="display: none;"></div>
+    system.sheet.display.consequence.gapless}}gapless{{/if}}">
     {{#each attunements as |attunement|}}
       {{tcard
         img=attunement.img
@@ -19,16 +17,15 @@
         draggable=false
         parentId=attunement.parent._id
         tooltip="Share to Chat"
+        hidden=(rgx ../searchStrings.effects attunement.name)
         icons=(concat
           (ticon "handshake-simple-slash" action="deattuneDoc" id=attunement._id tooltip="Deattune")
           (ticonToggle "circle-check" "circle" (not item.disabled) action="toggleDisabledDoc" id=item._id tooltipTrue="Enabled" tooltipFalse="Disabled")
         )
       }}
     {{/each}}
-    {{#if (not (exists attunements))}}
-      <div class="no-results {{{system.sheet.display.consequence.size}}}">
-        <p>No attunements found.</p>
-      </div>
-    {{/if}}
+    <div class="no-results {{{system.sheet.display.consequence.size}}}">
+      <p>No attunements found.</p>
+    </div>
   </div>
 </div>

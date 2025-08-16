@@ -122,6 +122,7 @@ export default function registerUiHelpers() {
         sortOptions = {},
         sortValue = "",
         addAction = "addEmbedded",
+        key = null,
       } = options.hash;
       const context = options.data.root;
       const ttoggle = Handlebars.helpers.ttoggle;
@@ -130,6 +131,7 @@ export default function registerUiHelpers() {
       const optionsPath = `settings.menus.${tab}Options`;
       const filterPath = `settings.menus.${tab}Filters`;
       const sortPath = `settings.menus.${tab}Sort`;
+      const searchKey = key ? `data-search-key=${key}` : "";
 
       const gaplessPath = `system.sheet.display.${tab}.gapless`;
       const sizePath = `system.sheet.display.${tab}.size`;
@@ -192,7 +194,13 @@ export default function registerUiHelpers() {
             : ""
         }
         
-        <input class="${tab}-search tcard-search" type="text" placeholder="Search" data-type="${tab}">
+        <input
+          class="${tab}-search tcard-search"
+          type="text"
+          placeholder="Search"
+          data-type="${tab}"
+          ${searchKey}
+        >
 
         ${
           showAddButton
@@ -214,7 +222,12 @@ export default function registerUiHelpers() {
           <div class="tgrid g4">
             <div class="tgrid-item">
               <label for="${tab}-gapless">Gapless</label>
-              <input type="checkbox" name="${gaplessPath}" id="${tab}-gapless" ${checked(gaplessValue)}>
+              <input 
+                type="checkbox"
+                name="${gaplessPath}"
+                id="${tab}-gapless"
+                ${checked(gaplessValue)}
+              >
             </div>
             <div class="tgrid-item gi3">
               <select name="${sizePath}" id="${tab}-size">
@@ -258,6 +271,7 @@ export default function registerUiHelpers() {
       icons,
       id,
       parentId,
+      uuid,
       active = true,
       struck = false,
       marker = null,
@@ -271,10 +285,12 @@ export default function registerUiHelpers() {
       max = null,
       action = "rollDoc",
       tooltip = "Use",
+      hidden = false,
     } = options.hash;
     if (max === Infinity) max = null;
     const tooltipAttr = tooltip ? `data-tooltip="${tooltip}"` : "";
     const idAttr = id ? `data-id="${id}"` : "";
+    const uuidAttr = uuid ? `data-uuid="${uuid}"` : "";
     const parentIdAttr = parentId ? `data-parent-id="${parentId}"` : "";
     const typeAttr = type ? `data-type="${type}"` : "";
     const subtitleDiv = consumable
@@ -283,7 +299,7 @@ export default function registerUiHelpers() {
 
     return new Handlebars.SafeString(`
       <div 
-        class="tcard ${draggable ? "draggable" : ""} ${active ? "active" : "inactive"} ${struck ? "struck" : ""} ${shattered ? "shattered" : ""}" ${idAttr} ${parentIdAttr} ${typeAttr} 
+        class="tcard ${draggable ? "draggable" : ""} ${active ? "active" : "inactive"} ${struck ? "struck" : ""} ${shattered ? "shattered" : ""} ${hidden ? "hidden" : ""}" ${idAttr} ${parentIdAttr} ${uuidAttr} ${typeAttr} 
         data-action="${openable ? "openDoc" : ""}"
         data-img="${img}"
       >
@@ -324,6 +340,8 @@ export default function registerUiHelpers() {
         tooltip = "Use",
         draggable = true,
         onUseToggle = false,
+        searchString = "",
+        noResults = "No results found.",
       } = options.hash;
       if (!Array.isArray(abilities) || abilities.length === 0) return "";
       const isGapless = tab ? system?.sheet?.display?.[tab]?.gapless : false;
@@ -331,6 +349,7 @@ export default function registerUiHelpers() {
       const containerClass =
         `tcard-container ${isGapless ? "gapless" : ""} ${sizeClass}`.trim();
 
+      const rgx = new RegExp(searchString, "i");
       const renderedCards = abilities
         .map((ability) => {
           let subtitle =
@@ -411,6 +430,12 @@ export default function registerUiHelpers() {
           if (sup && skipDescendants) {
             return "";
           }
+
+          let hidden = false;
+          if (searchString) {
+            hidden = !rgx.test(ability.name);
+          }
+
           return Handlebars.helpers.tcard({
             hash: {
               img: ability.img,
@@ -423,6 +448,7 @@ export default function registerUiHelpers() {
                 chatIcon +
                 enableIcon,
               id: ability._id,
+              uuid: ability.uuid,
               parentId: ability.parent?._id,
               active: !ability.disabled && !ability.isSuppressed,
               struck: ability.disabled,
@@ -435,13 +461,14 @@ export default function registerUiHelpers() {
               action,
               tooltip,
               draggable,
+              hidden,
             },
           });
         })
         .join("\n");
 
       return new Handlebars.SafeString(
-        `<div class="${containerClass}">${renderedCards}</div>`,
+        `<div class="${containerClass}">${renderedCards}<div class="no-results ${sizeClass}"><p>${noResults}</p></div></div>`,
       );
     },
   );

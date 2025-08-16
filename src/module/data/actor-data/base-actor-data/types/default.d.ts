@@ -1,7 +1,7 @@
 import { TeriockActor } from "../../../../documents/_module.mjs";
-import { ActorAttributeData, BarData, ActorHackData } from "./stats";
+import { ActorAttributeData, ActorHackData, BarData } from "./stats";
 import { ProtectionData } from "./protections";
-import { TeriockEquipment } from "../../../../documents/_documents.mjs";
+import { TeriockEquipment, TeriockRank, TeriockSpecies } from "../../../../documents/_documents.mjs";
 import { TradecraftData } from "./tradecrafts";
 
 /** The types of hacks that could be applied. */
@@ -198,6 +198,11 @@ export interface TeriockBaseActorDefault {
       /** @derived Derived primary attacker item */
       derived: TeriockEquipment | null;
     };
+  };
+  /** Orderings */
+  orderings: {
+    ranks: Teriock.ID<TeriockRank>[];
+    species: Teriock.ID<TeriockSpecies>[];
   };
   /** Whether {@link TeriockActor} still has reaction */
   hasReaction: boolean;

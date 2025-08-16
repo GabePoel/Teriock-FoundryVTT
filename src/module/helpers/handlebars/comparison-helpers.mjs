@@ -29,4 +29,10 @@ export default function registerComparisonHelpers() {
   Handlebars.registerHelper("ternary", function (condition, valTrue, valFalse) {
     return condition ? valTrue : valFalse;
   });
+
+  Handlebars.registerHelper("rgx", function (referenceString, testString) {
+    if (!referenceString) return false;
+    const rgx = new RegExp(referenceString, "i");
+    return !rgx.test(testString);
+  });
 }

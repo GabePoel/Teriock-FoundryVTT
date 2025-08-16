@@ -5,27 +5,22 @@ import { parseTimeString } from "../../../../helpers/utils.mjs";
  * Generates an effect from ability data based on proficiency level and heightened amount.
  * Creates an effect with appropriate changes, statuses, and duration based on the ability's consequence data.
  *
- * @param {TeriockAbilityData} abilityData - The ability data to generate effect from.
- * @param {TeriockActor} actor - The actor that owns the ability.
- * @param {number} heightenAmount - The amount of heightening applied to the ability.
+ * @param {AbilityRollConfig} rollConfig - The roll config to generate the effect from.
  * @param {boolean} crit - If this should generate a critical version of the effect.
  * @returns {Promise<object|false>} Promise that resolves to the generated effect data or false if no effect should be
  *   created.
  * @private
  */
-export async function _generateEffect(
-  abilityData,
-  actor,
-  heightenAmount = 0,
-  crit = false,
-) {
+export async function _generateEffect(rollConfig, crit = false) {
+  const abilityData = rollConfig.abilityData;
+  const heightenAmount = rollConfig.useData.modifiers.heightened;
   let changes = abilityData.changes;
   let statuses =
     foundry.utils.deepClone(abilityData.applies.base.statuses) || new Set();
   let combatExpirations = foundry.utils.deepClone(
     abilityData.applies.base.expiration.normal.combat,
   );
-  combatExpirations.who.source = abilityData.actor?.uuid;
+  combatExpirations.who.source = rollConfig.useData.actor.uuid;
   if (crit && abilityData.applies.base.expiration.changeOnCrit) {
     combatExpirations = foundry.utils.mergeObject(
       combatExpirations,
@@ -36,7 +31,7 @@ export async function _generateEffect(
   // TODO: Switch parsing to unit based.
   let seconds = parseTimeString(abilityData.duration.description);
 
-  if (abilityData.parent.isProficient) {
+  if (rollConfig.useData.proficient) {
     if (abilityData.applies.proficient.statuses.size > 0) {
       statuses = foundry.utils.deepClone(
         abilityData.applies.proficient.statuses,
@@ -58,7 +53,7 @@ export async function _generateEffect(
       }
     }
   }
-  if (abilityData.parent.isFluent) {
+  if (rollConfig.useData.fluent) {
     if (abilityData.applies.fluent.statuses.size > 0) {
       statuses = foundry.utils.deepClone(abilityData.applies.fluent.statuses);
     }
@@ -86,7 +81,7 @@ export async function _generateEffect(
       for (const change of heightenedChanges) {
         const heightenEvaluateRoll = new TeriockRoll(
           change.value,
-          actor.getRollData(),
+          rollConfig.useData.actor.getRollData(),
         );
         heightenEvaluateRoll.alter(heightenAmount, 0, {
           multiplyNumeric: true,
@@ -209,12 +204,13 @@ export async function _generateEffect(
  * Generates takes data from ability data based on proficiency level and heightened amount.
  * Creates rolls, hacks, checks, and status changes based on the ability's consequence data.
  *
- * @param {TeriockAbilityData} abilityData - The ability data to generate takes from.
- * @param {number} heightenAmount - The amount of heightening applied to the ability.
+ * @param {AbilityRollConfig} rollConfig - The roll config data to generate takes from.
  * @returns {Object} Object containing rolls, hacks, checks, startStatuses, and endStatuses.
  * @private
  */
-export function _generateTakes(abilityData, heightenAmount = 0) {
+export function _generateTakes(rollConfig) {
+  const heightenAmount = rollConfig.useData.modifiers.heightened;
+  const abilityData = rollConfig.abilityData;
   let rolls = foundry.utils.deepClone(abilityData.applies.base.rolls) || {};
   let hacks =
     foundry.utils.deepClone(abilityData.applies.base.hacks) || new Set();
@@ -226,7 +222,7 @@ export function _generateTakes(abilityData, heightenAmount = 0) {
   let endStatuses =
     foundry.utils.deepClone(abilityData.applies.base.endStatuses) || new Set();
 
-  if (abilityData.parent.isProficient) {
+  if (rollConfig.useData.proficient) {
     rolls = { ...rolls, ...abilityData.applies.proficient.rolls };
     hacks = new Set([
       ...hacks,
@@ -245,7 +241,7 @@ export function _generateTakes(abilityData, heightenAmount = 0) {
       ...(abilityData.applies.proficient.endStatuses || []),
     ]);
   }
-  if (abilityData.parent.isFluent) {
+  if (rollConfig.useData.fluent) {
     rolls = { ...rolls, ...abilityData.applies.fluent.rolls };
     hacks = new Set([...hacks, ...(abilityData.applies.fluent.hacks || [])]);
     checks = new Set([...checks, ...(abilityData.applies.fluent.checks || [])]);
@@ -262,7 +258,10 @@ export function _generateTakes(abilityData, heightenAmount = 0) {
     for (const [key, value] of Object.entries(
       abilityData.applies.heightened.rolls || {},
     )) {
-      const rollRoll = new TeriockRoll(value, abilityData.actor.getRollData());
+      const rollRoll = new TeriockRoll(
+        value,
+        rollConfig.useData.actor.getRollData(),
+      );
       rollRoll.alter(heightenAmount, 0, { multiplyNumeric: true });
       rolls[key] = (rolls[key] ? rolls[key] + " + " : "") + rollRoll.formula;
     }

@@ -4,13 +4,13 @@ import TeriockRankData from "../../../../item-data/rank-data/rank-data.mjs";
  * Prepares level-based bonuses for the actor.
  * Calculates presence, rank, proficiency, and fluency bonuses based on level.
  *
- * @param {TeriockBaseActorData} system - The actor's base data system object.
+ * @param {TeriockBaseActorData} actorData - The actor's base data system object.
  * @returns {void} Modifies the system object in place.
  * @private
  */
-export function _prepareBonuses(system) {
-  const lvl = system.lvl;
-  Object.assign(system, {
+export function _prepareBonuses(actorData) {
+  const lvl = actorData.lvl;
+  Object.assign(actorData, {
     presence: {
       min: 0,
       value: 0,
@@ -26,16 +26,16 @@ export function _prepareBonuses(system) {
  * Prepares hit points and mana points derived data.
  * Calculates maximum HP/MP from base values and rank bonuses, including die boxes for the character sheet.
  *
- * @param {TeriockBaseActorData} system - The actor's base data system object.
+ * @param {TeriockBaseActorData} actorData - The actor's base data system object.
  * @returns {void} Modifies the system object in place.
  * @private
  */
-export function _prepareHpMp(system) {
-  const actor = system.parent;
+export function _prepareHpMp(actorData) {
+  const actor = actorData.parent;
   const items = actor.itemTypes.rank;
-  const diceLimit = Math.floor(system.lvl / 5);
-  let hpMax = system.hp.base,
-    mpMax = system.mp.base;
+  const diceLimit = Math.floor(actorData.lvl / 5);
+  let hpMax = actorData.hp.base,
+    mpMax = actorData.mp.base;
   let hitDieBox = "",
     manaDieBox = "";
   items.slice(0, diceLimit).forEach((rank) => {
@@ -53,13 +53,13 @@ export function _prepareHpMp(system) {
       }
     }
   });
-  system.hp.max = hpMax;
-  system.hp.min = -Math.floor(hpMax / 2);
-  system.hp.value = Math.min(system.hp.value, hpMax);
-  system.mp.max = mpMax;
-  system.mp.min = -Math.floor(mpMax / 2);
-  system.mp.value = Math.min(system.mp.value, mpMax);
-  system.sheet.dieBox = { hitDice: hitDieBox, manaDice: manaDieBox };
+  actorData.hp.max = hpMax;
+  actorData.hp.min = -Math.floor(hpMax / 2);
+  actorData.hp.value = Math.min(actorData.hp.value, hpMax);
+  actorData.mp.max = mpMax;
+  actorData.mp.min = -Math.floor(mpMax / 2);
+  actorData.mp.value = Math.min(actorData.mp.value, mpMax);
+  actorData.sheet.dieBox = { hitDice: hitDieBox, manaDice: manaDieBox };
 }
 
 /**

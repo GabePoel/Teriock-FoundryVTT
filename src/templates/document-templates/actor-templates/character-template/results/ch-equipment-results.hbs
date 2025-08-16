@@ -1,4 +1,4 @@
-<div id="equipment-results" class="tcard-results">
+<div id="equipment-results" class="tcard-results" data-search-key="equipment">
   <div class="tcard-container {{#if
     system.sheet.display.equipment.gapless}}gapless{{/if}} {{system.sheet.display.equipment.size}}">
     {{#each equipment as |item|}}
@@ -24,6 +24,7 @@
         consumable=item.system.consumable
         amount=item.system.quantity
         max=item.system.maxQuantity.derived
+        hidden=(rgx ../searchStrings.equipment item.name)
         icons=(concat
           (ticonToggle "handshake-simple" "handshake-simple-slash" item.system.isAttuned action="toggleAttunedDoc" id=item._id parentId=item.parent._id tooltipTrue="Attuned" tooltipFalse="Deattuned")
           (ticonToggle "link" "link-slash" item.system.glued action="toggleGluedDoc" id=item._id parentId=item.parent._id tooltipTrue="Glued" tooltipFalse="Unglued")
@@ -34,9 +35,8 @@
         )
       }}
     {{/each}}
+    <div class="no-results {{{system.sheet.display.equipment.size}}}">
+      <p>No equipment found.</p>
+    </div>
   </div>
-  <div class="no-results {{{system.sheet.display.equipment.size}}}">
-    <p>No equipment found.</p>
-  </div>
-  <div id="hidden-tcards" style="display: none;"></div>
 </div>

@@ -9,7 +9,8 @@ import {
   TeriockPower,
   TeriockProperty,
   TeriockRank,
-  TeriockResource
+  TeriockResource,
+  TeriockSpecies
 } from "../_documents.mjs";
 import type TeriockEffect from "../effect.mjs";
 
@@ -26,6 +27,7 @@ export type ParentItemTypes = {
   power?: TeriockPower[];
   rank?: TeriockRank[];
   mechanic?: TeriockMechanic[];
+  species?: TeriockSpecies[];
 };
 
 /** The names of each {@link TeriockEffect} this contains, in camel case, keyed by type. */

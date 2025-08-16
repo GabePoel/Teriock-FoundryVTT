@@ -13,10 +13,12 @@ export type BaseDerived = {
 };
 
 export type ActorStat = {
-  species: BaseDerived;
-  class: BaseDerived;
-  other: BaseDerived;
-  /** @base */
+  /** @derived */
+  species: number;
+  /** @derived */
+  class: number;
+  misc: BaseDerived;
+  /** @derived */
   max: number;
   /** @base */
   min: number;

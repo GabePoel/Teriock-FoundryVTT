@@ -34,6 +34,7 @@ declare global {
   const TeriockEquipment: typeof import("./documents/_documents.mjs").TeriockEquipment;
   const TeriockPower: typeof import("./documents/_documents.mjs").TeriockPower;
   const TeriockRank: typeof import("./documents/_documents.mjs").TeriockRank;
+  const TeriockSpecies: typeof import("./documents/_documents.mjs").TeriockSpecies;
 
   // Effect
   // ------

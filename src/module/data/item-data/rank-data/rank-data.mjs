@@ -88,12 +88,19 @@ export default class TeriockRankData extends WikiDataMixin(
     return { ...super.messageParts, ..._messageParts(this) };
   }
 
+  /**
+   * Index of this in parent order.
+   * @returns {number|null}
+   */
+  get order() {
+    return this.actor?.system.orderings.ranks.findIndex(
+      (id) => id === this.parent.id,
+    );
+  }
+
   /** @inheritDoc */
   static defineSchema() {
     return foundry.utils.mergeObject(super.defineSchema(), {
-      wikiNamespace: new fields.StringField({
-        initial: "Class",
-      }),
       description: new TextField({
         initial:
           "<p>Every adventurer is a journeyman before they join their first class.</p>",
