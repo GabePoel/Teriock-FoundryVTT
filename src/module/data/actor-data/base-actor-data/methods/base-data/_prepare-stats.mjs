@@ -1,5 +1,3 @@
-import TeriockRankData from "../../../../item-data/rank-data/rank-data.mjs";
-
 /**
  * Prepares level-based bonuses for the actor.
  * Calculates presence, rank, proficiency, and fluency bonuses based on level.
@@ -31,28 +29,30 @@ export function _prepareBonuses(actorData) {
  * @private
  */
 export function _prepareHpMp(actorData) {
-  const actor = actorData.parent;
-  const items = actor.itemTypes.rank;
   const diceLimit = Math.floor(actorData.lvl / 5);
-  let hpMax = actorData.hp.base,
-    mpMax = actorData.mp.base;
-  let hitDieBox = "",
-    manaDieBox = "";
-  items.slice(0, diceLimit).forEach((rank) => {
-    const rankData = rank.system;
-    if (rankData instanceof TeriockRankData) {
-      if (rankData.hp) {
-        hpMax += rankData.hp;
-        const spent = rankData.hitDieSpent;
-        hitDieBox += _renderDieBox(rankData, "hit", "hitDie", spent);
-      }
-      if (rankData.mp) {
-        mpMax += rankData.mp;
-        const spent = rankData.manaDieSpent;
-        manaDieBox += _renderDieBox(rankData, "mana", "manaDie", spent);
-      }
+  actorData.hp.base = 0;
+  actorData.mp.base = 0;
+  let hitDieBox = "";
+  let manaDieBox = "";
+  actorData.parent.species.forEach((species) => {
+    if (species.system.applyHp) {
+      actorData.hp.base += species.system.totalHp;
+      hitDieBox += species.system.renderedHitDice;
+    }
+    if (species.system.applyMp) {
+      actorData.mp.base += species.system.totalMp;
+      manaDieBox += species.system.renderedManaDice;
     }
   });
+  actorData.parent.ranks.slice(0, diceLimit).forEach((rank) => {
+    actorData.hp.base += rank.system.totalHp;
+    hitDieBox += rank.system.renderedHitDice;
+    actorData.mp.base += rank.system.totalMp;
+    manaDieBox += rank.system.renderedManaDice;
+  });
+
+  let hpMax = actorData.hp.base;
+  let mpMax = actorData.mp.base;
   actorData.hp.max = hpMax;
   actorData.hp.min = -Math.floor(hpMax / 2);
   actorData.hp.value = Math.min(actorData.hp.value, hpMax);
@@ -60,33 +60,4 @@ export function _prepareHpMp(actorData) {
   actorData.mp.min = -Math.floor(mpMax / 2);
   actorData.mp.value = Math.min(actorData.mp.value, mpMax);
   actorData.sheet.dieBox = { hitDice: hitDieBox, manaDice: manaDieBox };
-}
-
-/**
- * Renders a die box HTML element for the character sheet.
- * Creates a clickable die icon that shows whether the die has been spent or not.
- *
- * @param {TeriockRankData} rankData - The rank data containing die information.
- * @param {string} type - The type of die ("hit" or "mana").
- * @param {string} dieProp - The property name for the die value.
- * @param {boolean} spent - Whether the die has been spent.
- * @returns {string} HTML string for the die box element.
- * @private
- */
-function _renderDieBox(rankData, type, dieProp, spent) {
-  const iconClass = spent ? "fa-light" : "fa-solid";
-  const rollClass = spent ? "rolled" : "unrolled";
-  const action = spent
-    ? ""
-    : `data-action='roll${type === "hit" ? "Hit" : "Mana"}Die'`;
-  return `
-    <div
-      class="thover die-box ${rollClass}"
-      data-die="${type}"
-      data-id='${rankData.parent._id}'
-      ${action}
-      data-tooltip="${type === "hit" ? "Hit" : "Mana"} Die"
-    >
-      <i class="fa-fw ${iconClass} fa-dice-${rankData[dieProp]}"></i>
-    </div>`;
 }

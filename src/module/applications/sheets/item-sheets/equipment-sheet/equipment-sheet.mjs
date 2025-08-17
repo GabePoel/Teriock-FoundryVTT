@@ -118,8 +118,7 @@ export default class TeriockEquipmentSheet extends TeriockBaseItemSheet {
   }
 
   /**
-   * Activates tag management for equipment flags and properties.
-   * Sets up click handlers for boolean flags, array tags, and static updates.
+   * Activates tag management.
    */
   _activateTags() {
     const doc = this.document;
@@ -140,9 +139,6 @@ export default class TeriockEquipmentSheet extends TeriockBaseItemSheet {
 
     const arrayTags = {
       ".equipment-class-tag": "equipmentClasses",
-      ".property-tag": "properties",
-      ".magical-property-tag": "magicalProperties",
-      ".material-property-tag": "materialProperties",
     };
 
     for (const [selector, path] of Object.entries(arrayTags)) {

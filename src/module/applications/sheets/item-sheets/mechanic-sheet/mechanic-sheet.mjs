@@ -12,7 +12,7 @@ export default class TeriockMechanicSheet extends TeriockBaseItemSheet {
   static DEFAULT_OPTIONS = {
     classes: ["mechanic"],
     window: {
-      icon: "fa-solid fa-" + documentOptions.power.icon,
+      icon: "fa-solid fa-" + documentOptions.mechanic.icon,
     },
   };
 
@@ -31,7 +31,7 @@ export default class TeriockMechanicSheet extends TeriockBaseItemSheet {
     await this._enrichAll(context, {
       description: this.item.system.description,
     });
-    context.baseEffects = this.document.effectTypes.base;
+    context.baseEffects = this.document.effectTypes.base || [];
     return context;
   }
 }

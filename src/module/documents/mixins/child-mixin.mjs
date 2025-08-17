@@ -141,6 +141,18 @@ export default (Base) => {
     }
 
     /**
+     * @inheritDoc
+     * @param {ItemData|ActiveEffectData} data
+     * @param {object} options
+     * @param {TeriockUser} user
+     */
+    async _preCreate(data, options, user) {
+      super._preCreate(data, options, user);
+      if (!data.img)
+        this.updateSource({ img: `systems/teriock/assets/${data.type}.svg` });
+    }
+
+    /**
      * Attempts to pull content from the wiki (default implementation shows error).
      *
      * @returns {Promise<void>} Promise that resolves when the wiki pull is complete.

@@ -1,0 +1,40 @@
+{{#if (or (exists system.adult) (exists system.lifespan))}}
+  <div class="ab-bar">
+    <div class="ab-box-container">
+      <div class="ab-box" data-tooltip="Age of Maturity">
+        <div class="ab-box-icon">
+          <i class="fa-f fa-light fa-person"></i>
+        </div>
+        <div class="ab-box-content">
+          <div class="ability-bar-input unselected">
+            Adult at {{system.adult}} Years
+          </div>
+          {{formInput
+            systemFields.adult
+            value=system.adult
+            disabled=(not editable)
+            classes="ability-bar-input selected"
+          }}
+        </div>
+      </div>
+    </div>
+    <div class="ab-box-container">
+      <div class="ab-box" data-tooltip="Maximum Lifespan">
+        <div class="ab-box-icon">
+          <i class="fa-f fa-light fa-tombstone"></i>
+        </div>
+        <div class="ab-box-content">
+          <div class="ability-bar-input unselected">
+            {{#if (exists system.lifespan)}}Lives to {{system.lifespan}} Years{{else}}Infinite Lifespan{{/if}}
+          </div>
+          {{formInput
+            systemFields.lifespan
+            value=system.lifespan
+            disabled=(not editable)
+            classes="ability-bar-input selected"
+          }}
+        </div>
+      </div>
+    </div>
+  </div>
+{{/if}}

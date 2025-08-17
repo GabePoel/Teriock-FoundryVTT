@@ -38,21 +38,6 @@ export default class TeriockPowerData extends TeriockBaseItemData {
         initial: true,
         label: "Proficient",
       }),
-      size: new fields.NumberField({
-        initial: 3,
-        min: 0,
-        label: "Size",
-      }),
-      lifespan: new fields.NumberField({
-        initial: 100,
-        min: 0,
-        label: "Maximum Lifespan",
-      }),
-      adult: new fields.NumberField({
-        initial: 20,
-        min: 0,
-        label: "Age of Maturity",
-      }),
     });
   }
 }

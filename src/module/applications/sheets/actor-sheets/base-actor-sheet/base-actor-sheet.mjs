@@ -47,8 +47,7 @@ export default class TeriockBaseActorSheet extends SheetMixin(ActorSheetV2) {
       quickUse: this._quickUse,
       resist: this._resist,
       rollFeatSave: this._rollFeatSave,
-      rollHitDie: this._rollHitDie,
-      rollManaDie: this._rollManaDie,
+      rollStatDie: this._rollStatDie,
       rollTradecraft: this._rollTradecraft,
       takeDamage: this._takeDamage,
       takeDrain: this._takeDrain,
@@ -64,8 +63,6 @@ export default class TeriockBaseActorSheet extends SheetMixin(ActorSheetV2) {
       toggleReaction: this._toggleReaction,
       toggleShatteredDoc: this._toggleShatteredDoc,
       tradecraftExtra: this._tradecraftExtra,
-      unrollHitDie: this._unrollHitDie,
-      unrollManaDie: this._unrollManaDie,
     },
     form: {
       submitOnChange: true,
@@ -286,63 +283,20 @@ export default class TeriockBaseActorSheet extends SheetMixin(ActorSheetV2) {
   }
 
   /**
-   * Rolls a hit die for a rank item.
+   * Rolls a stat die.
    *
    * @param {MouseEvent} _event - The event object.
    * @param {HTMLElement} target - The target element.
    * @returns {Promise<void>} Promise that resolves when hit die is rolled.
    * @static
    */
-  static async _rollHitDie(_event, target) {
+  static async _rollStatDie(_event, target) {
     const id = target.dataset.id;
-    /** @type TeriockRank */
-    const rank = this.actor.items.get(id);
-    if (rank) await rank.system.rollHitDie();
-  }
-
-  /**
-   * Rolls a mana die for a rank item.
-   *
-   * @param {MouseEvent} _event - The event object.
-   * @param {HTMLElement} target - The target element.
-   * @returns {Promise<void>} Promise that resolves when mana die is rolled.
-   * @static
-   */
-  static async _rollManaDie(_event, target) {
-    const id = target.dataset.id;
-    /** @type {TeriockRank} */
-    const rank = this.actor.items.get(id);
-    if (rank) await rank.system.rollManaDie();
-  }
-
-  /**
-   * Rolls a hit die for a rank item.
-   *
-   * @param {MouseEvent} _event - The event object.
-   * @param {HTMLElement} target - The target element.
-   * @returns {Promise<void>} Promise that resolves when hit die is rolled.
-   * @static
-   */
-  static async _unrollHitDie(_event, target) {
-    const id = target.dataset.id;
-    /** @type TeriockRank */
-    const rank = this.actor.items.get(id);
-    if (rank) await rank.update({ "system.hitDieSpent": false });
-  }
-
-  /**
-   * Rolls a mana die for a rank item.
-   *
-   * @param {MouseEvent} _event - The event object.
-   * @param {HTMLElement} target - The target element.
-   * @returns {Promise<void>} Promise that resolves when mana die is rolled.
-   * @static
-   */
-  static async _unrollManaDie(_event, target) {
-    const id = target.dataset.id;
-    /** @type {TeriockRank} */
-    const rank = this.actor.items.get(id);
-    if (rank) await rank.update({ "system.manaDieSpent": false });
+    const parentId = target.dataset.parentId;
+    const stat = target.dataset.stat;
+    await this.document.items
+      .get(parentId)
+      ["system"][`${stat}Dice`][id].rollStatDie();
   }
 
   /**
@@ -673,6 +627,23 @@ export default class TeriockBaseActorSheet extends SheetMixin(ActorSheetV2) {
   }
 
   /**
+   * Unrolls a stat die.
+   *
+   * @param {MouseEvent} _event - The event object.
+   * @param {HTMLElement} target - The target element.
+   * @returns {Promise<void>} Promise that resolves when hit die is rolled.
+   * @static
+   */
+  async _unrollStatDie(_event, target) {
+    const id = target.dataset.id;
+    const parentId = target.dataset.parentId;
+    const stat = target.dataset.stat;
+    await this.document.items
+      .get(parentId)
+      ["system"][`${stat}Dice`][id].unrollStatDie();
+  }
+
+  /**
    * Gets filtered equipment based on current settings.
    *
    * @param {Array} equipment - Array of equipment to filter.
@@ -764,6 +735,7 @@ export default class TeriockBaseActorSheet extends SheetMixin(ActorSheetV2) {
       _sortEquipment(this.actor, this._embeds.itemTypes.equipment) || [],
     );
     context.powers = this.actor.powers;
+    context.species = this.actor.species;
     context.fluencies = this.actor.fluencies;
     context.consequences = this.actor.consequences;
     context.attunements = this.actor.attunements;
@@ -906,19 +878,11 @@ export default class TeriockBaseActorSheet extends SheetMixin(ActorSheetV2) {
         });
       });
 
-    this.element.querySelectorAll(".die-box").forEach((el) => {
-      el.addEventListener("contextmenu", (e) => {
+    this.element.querySelectorAll("[data-action=rollStatDie]").forEach((el) => {
+      el.addEventListener("contextmenu", async (e) => {
         e.preventDefault();
-        if (!(el instanceof HTMLElement)) return;
-        const id = el.dataset.id;
-        /** @type {TeriockRank} */
-        const rank = this.actor.items.get(id);
-        const die = el.dataset.die;
-        if (die === "hit") {
-          rank.update({ "system.hitDieSpent": !rank.system.hitDieSpent });
-        } else if (die === "mana") {
-          rank.update({ "system.manaDieSpent": !rank.system.manaDieSpent });
-        }
+        const target = e.currentTarget;
+        await this._unrollStatDie(e, target);
         e.stopPropagation();
       });
     });

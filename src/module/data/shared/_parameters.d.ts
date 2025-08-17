@@ -17,5 +17,8 @@ declare global {
       comparison: Teriock.Parameters.Shared.Comparison;
       value: any;
     };
+
+    /** Die Stat */
+    export type DieStat = "hp" | "mp";
   }
 }

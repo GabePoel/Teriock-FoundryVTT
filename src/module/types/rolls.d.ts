@@ -54,8 +54,13 @@ declare global {
     };
 
     /**
+     * Allowable number of dice faces.
+     */
+    export type PolyhedralDieFaces = 2 | 4 | 6 | 8 | 10 | 12 | 20;
+
+    /**
      * Allowable dice values.
      */
-    export type PolyhedralDie = "d4" | "d6" | "d8" | "d10" | "d12" | "d20";
+    export type PolyhedralDie = `d${PolyhedralDieFaces}`;
   }
 }

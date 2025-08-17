@@ -1,0 +1,40 @@
+{{#if (or (exists system.size.min) (exists system.size.max))}}
+  <div class="ab-bar">
+    <div class="ab-box-container">
+      <div class="ab-box" data-tooltip="Minimum Size">
+        <div class="ab-box-icon">
+          <i class="fa-fw fa-light fa-person-arrow-down-to-line"></i>
+        </div>
+        <div class="ab-box-content">
+          <div class="ability-bar-input unselected">
+            Size {{system.size.min}} Minimum
+          </div>
+          {{formInput
+            systemFields.size.fields.min
+            value=system.size.min
+            disabled=(not editable)
+            classes="ability-bar-input selected"
+          }}
+        </div>
+      </div>
+    </div>
+    <div class="ab-box-container">
+      <div class="ab-box" data-tooltip="Maximum Size">
+        <div class="ab-box-icon">
+          <i class="fa-fw fa-light fa-person-arrow-up-from-line"></i>
+        </div>
+        <div class="ab-box-content">
+          <div class="ability-bar-input unselected">
+            Size {{system.size.max}} Maximum
+          </div>
+          {{formInput
+            systemFields.size.fields.max
+            value=system.size.max
+            disabled=(not editable)
+            classes="ability-bar-input selected"
+          }}
+        </div>
+      </div>
+    </div>
+  </div>
+{{/if}}

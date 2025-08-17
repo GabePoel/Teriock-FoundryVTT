@@ -1,10 +1,9 @@
 import { getRollIcon, makeIcon } from "../../../helpers/utils.mjs";
-import WikiDataMixin from "../../mixins/wiki-mixin.mjs";
+import { StatDataMixin, WikiDataMixin } from "../../mixins/_module.mjs";
 import { TextField } from "../../shared/fields.mjs";
 import TeriockBaseItemData from "../base-item-data/base-item-data.mjs";
 import { _messageParts } from "./methods/_messages.mjs";
 import { _parse } from "./methods/_parsing.mjs";
-import { _rollHitDie, _rollManaDie } from "./methods/_rolling.mjs";
 
 const { fields } = foundry.data;
 
@@ -16,8 +15,8 @@ const { fields } = foundry.data;
  *
  * @extends {TeriockBaseItemData}
  */
-export default class TeriockRankData extends WikiDataMixin(
-  TeriockBaseItemData,
+export default class TeriockRankData extends StatDataMixin(
+  WikiDataMixin(TeriockBaseItemData),
 ) {
   /**
    * Metadata for this item.
@@ -39,32 +38,30 @@ export default class TeriockRankData extends WikiDataMixin(
       ...super.cardContextMenuEntries,
       {
         name: "Roll Hit Die",
-        icon: makeIcon(getRollIcon(this.hitDie), "contextMenu"),
-        callback: this.rollHitDie.bind(this),
-        condition: !this.hitDieSpent,
+        icon: makeIcon(getRollIcon(this.hitDie.polyhedral), "contextMenu"),
+        callback: async () => await this.hitDie.rollStatDie(),
+        condition: !this.hitDie.spent,
         group: "usage",
       },
       {
         name: "Recover Hit Die",
         icon: makeIcon("rotate-left", "contextMenu"),
-        callback: async () =>
-          await this.parent.update({ "system.hitDieSpent": false }),
-        condition: this.hitDieSpent,
+        callback: async () => await this.hitDie.unrollStatDie(),
+        condition: this.hitDie.spent,
         group: "usage",
       },
       {
         name: "Roll Mana Die",
-        icon: makeIcon(getRollIcon(this.manaDie), "contextMenu"),
-        callback: this.rollManaDie.bind(this),
-        condition: !this.manaDieSpent,
+        icon: makeIcon(getRollIcon(this.manaDie.polyhedral), "contextMenu"),
+        callback: async () => await this.manaDie.rollStatDie(),
+        condition: !this.manaDie.spent,
         group: "usage",
       },
       {
         name: "Recover Mana Die",
         icon: makeIcon("rotate-left", "contextMenu"),
-        callback: async () =>
-          await this.parent.update({ "system.manaDieSpent": false }),
-        condition: this.manaDieSpent,
+        callback: async () => await this.manaDie.unrollStatDie(),
+        condition: this.manaDie.spent,
         group: "usage",
       },
     ];
@@ -89,18 +86,27 @@ export default class TeriockRankData extends WikiDataMixin(
   }
 
   /**
-   * Index of this in parent order.
-   * @returns {number|null}
+   * The singular hit die.
+   *
+   * @returns {StatDieModel}
    */
-  get order() {
-    return this.actor?.system.orderings.ranks.findIndex(
-      (id) => id === this.parent.id,
-    );
+  get hitDie() {
+    return Object.values(this.hpDice)[0];
+  }
+
+  /**
+   * The singular mana die.
+   *
+   * @returns {StatDieModel}
+   */
+  get manaDie() {
+    return Object.values(this.mpDice)[0];
   }
 
   /** @inheritDoc */
   static defineSchema() {
-    return foundry.utils.mergeObject(super.defineSchema(), {
+    const schema = super.defineSchema();
+    Object.assign(schema, {
       description: new TextField({
         initial:
           "<p>Every adventurer is a journeyman before they join their first class.</p>",
@@ -124,50 +130,8 @@ export default class TeriockRankData extends WikiDataMixin(
         label: "Class Rank",
         min: 0,
       }),
-      hitDieSpent: new fields.BooleanField({
-        initial: false,
-        label: "Hit Die Spent",
-      }),
-      manaDieSpent: new fields.BooleanField({
-        initial: false,
-        label: "Mana Die Spent",
-      }),
-      hitDie: new fields.StringField({
-        initial: "d10",
-        label: "Hit Die",
-        choices: {
-          d4: "d4",
-          d6: "d6",
-          d8: "d8",
-          d10: "d10",
-          d12: "d12",
-          d20: "d20",
-        },
-      }),
-      manaDie: new fields.StringField({
-        initial: "d10",
-        label: "Mana Die",
-        choices: {
-          d4: "d4",
-          d6: "d6",
-          d8: "d8",
-          d10: "d10",
-          d12: "d12",
-          d20: "d20",
-        },
-      }),
-      hp: new fields.NumberField({
-        initial: 6,
-        integer: true,
-        label: "HP",
-        min: 0,
-      }),
-      mp: new fields.NumberField({
-        initial: 6,
-        integer: true,
-        label: "MP",
-        min: 0,
-      }),
+      hpDice: this.defineStatDieField("hp", { faces: 10, value: 6 }),
+      mpDice: this.defineStatDieField("mp", { faces: 10, value: 6 }),
       maxAv: new fields.NumberField({
         initial: 2,
         integer: true,
@@ -179,34 +143,11 @@ export default class TeriockRankData extends WikiDataMixin(
         label: "Proficient",
       }),
     });
+    return schema;
   }
 
   /** @inheritDoc */
   async parse(rawHTML) {
     return await _parse(this, rawHTML);
-  }
-
-  /**
-   * Rolls the hit die for the rank.
-   *
-   * Relevant wiki pages:
-   * - [Hit Points and Mana Points](https://wiki.teriock.com/index.php/Core:Hit_Points_and_Mana_Points)
-   *
-   * @returns {Promise<void>} Promise that resolves to the hit die roll result.
-   */
-  async rollHitDie() {
-    await _rollHitDie(this);
-  }
-
-  /**
-   * Rolls the mana die for the rank.
-   *
-   * Relevant wiki pages:
-   * - [Hit Points and Mana Points](https://wiki.teriock.com/index.php/Core:Hit_Points_and_Mana_Points)
-   *
-   * @returns {Promise<void>} Promise that resolves to the mana die roll result.
-   */
-  async rollManaDie() {
-    await _rollManaDie(this);
   }
 }

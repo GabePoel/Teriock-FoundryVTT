@@ -16,7 +16,6 @@ export async function _addEmbedded(sheet, target) {
   const tabMap = {
     ability: {
       data: {
-        img: "systems/teriock/assets/ability.svg",
         name: "New Ability",
         type: "ability",
       },
@@ -24,7 +23,6 @@ export async function _addEmbedded(sheet, target) {
     },
     consequence: {
       data: {
-        img: "systems/teriock/assets/effect.svg",
         name: "New Consequence",
         type: "consequence",
       },
@@ -32,7 +30,6 @@ export async function _addEmbedded(sheet, target) {
     },
     equipment: {
       data: {
-        img: "systems/teriock/assets/equipment.svg",
         name: "New Equipment",
         type: "equipment",
       },
@@ -40,7 +37,6 @@ export async function _addEmbedded(sheet, target) {
     },
     fluency: {
       data: {
-        img: "systems/teriock/assets/fluency.svg",
         name: "New Fluency",
         type: "fluency",
       },
@@ -48,7 +44,6 @@ export async function _addEmbedded(sheet, target) {
     },
     power: {
       data: {
-        img: "systems/teriock/assets/power.svg",
         name: "New Power",
         type: "power",
       },
@@ -56,7 +51,6 @@ export async function _addEmbedded(sheet, target) {
     },
     rank: {
       data: {
-        img: "systems/teriock/assets/rank.svg",
         name: "New Rank",
         type: "rank",
       },
@@ -64,7 +58,6 @@ export async function _addEmbedded(sheet, target) {
     },
     resource: {
       data: {
-        img: "systems/teriock/assets/resource.svg",
         name: "New Resource",
         type: "resource",
       },

@@ -145,6 +145,17 @@ const processSimpleCategory = async (
       .map((m) => m.title.replace(/^Category:/, "").replace(/ effects$/i, ""));
     await writeObjectToFile(effectGroups, "effects");
 
+    // Traits
+    const traitMembers = await fetchCategoryMembers("Creatures by trait", {
+      cmtype: "subcat",
+    });
+    const traitGroups = traitMembers
+      .filter((m) => m.title.startsWith("Category:"))
+      .map((m) =>
+        m.title.replace(/^Category:/, "").replace(/ creatures$/i, ""),
+      );
+    await writeObjectToFile(traitGroups, "traits");
+
     // Simple Categories
     await processSimpleCategory(
       "Equipment",

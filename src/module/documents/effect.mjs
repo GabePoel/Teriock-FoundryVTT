@@ -314,7 +314,6 @@ export default class TeriockEffect extends BaseTeriockEffect {
    */
   static async _preCreateOperation(documents, operation, user) {
     await super._preCreateOperation(documents, operation, user);
-    console.log(documents);
     /** @type {TeriockEffect[]} */
     const toCreate = [];
     for (const supEffect of documents) {

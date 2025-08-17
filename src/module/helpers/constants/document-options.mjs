@@ -43,4 +43,12 @@ export const documentOptions = {
     name: "Protection",
     icon: "shield-halved",
   },
+  mechanic: {
+    name: "Mechanic",
+    icon: "gears",
+  },
+  species: {
+    name: "Species",
+    icon: "octopus",
+  },
 };

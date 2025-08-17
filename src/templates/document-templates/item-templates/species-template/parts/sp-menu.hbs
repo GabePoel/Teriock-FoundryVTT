@@ -1,0 +1,44 @@
+<div class="ab-menu">
+  <div class="ab-menu-content">
+    <div class="ab-menu-bar">
+      <div class="tgrid g2">
+        <div class="tgrid-item gi2">
+          {{formInput
+            systemFields.traits
+            value=system.traits
+            disabled=(not editable)
+            classes="teriock-full-width ab-menu-inline"
+            dataset=(dataset tooltip="Traits")
+            rootId=(concat uuid)
+          }}
+        </div>
+        {{#if (not (or (exists system.size.min) (exists system.size.max)))}}
+          <div class="tgrid-item">
+            <button
+              class="ab-menu-button ab-size-button"
+              {{#if (not editable)}}
+              disabled="disabled"
+              {{/if}}
+            >
+              {{{config.icons.add}}}
+              Size Range
+            </button>
+          </div>
+        {{/if}}
+        {{#if (not (or (exists system.adult) (exists system.lifespan)))}}
+          <div class="tgrid-item">
+            <button
+              class="ab-menu-button ab-lifespan-button"
+              {{#if (not editable)}}
+              disabled="disabled"
+              {{/if}}
+            >
+              {{{config.icons.add}}}
+              Lifespan
+            </button>
+          </div>
+        {{/if}}
+      </div>
+    </div>
+  </div>
+</div>

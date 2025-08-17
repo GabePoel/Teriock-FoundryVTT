@@ -107,7 +107,7 @@ export default class TeriockActor extends BaseTeriockActor {
 
   /**
    * @inheritDoc
-   * @param {object} data
+   * @param {ActorData} data
    * @param {object} options
    * @param {TeriockUser} user
    * @returns {Promise<boolean|void>}

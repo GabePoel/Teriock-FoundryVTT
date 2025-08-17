@@ -22,6 +22,7 @@ import { powerOptions } from "./constants/power-options.mjs";
 import { pseudoHooks } from "./constants/pseudo-hooks.mjs";
 import { rankOptions } from "./constants/rank-options.mjs";
 import { resourceOptions } from "./constants/resource-options.mjs";
+import { speciesOptions } from "./constants/species-options.mjs";
 import { tradecraftOptions } from "./constants/tradecraft-options.mjs";
 import { mergeLevel } from "./utils.mjs";
 
@@ -97,6 +98,7 @@ const TERIOCK = {
     survivalist: tradecraftOptions.survivalist,
   },
   resourceOptions: resourceOptions,
+  speciesOptions: speciesOptions,
   pseudoHooks: pseudoHooks,
 };
 

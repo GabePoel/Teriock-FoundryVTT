@@ -63,16 +63,14 @@ export default class TeriockRankSheet extends TeriockBaseItemSheet {
         confirmText:
           "Are you sure you want to re-roll how much HP you gain from this rank?",
         dieKey: "hitDie",
-        updateKey: "hp",
       },
       {
         selector: ".mana-die-box",
         confirmText:
           "Are you sure you want to re-roll how much mana you gain from this rank?",
         dieKey: "manaDie",
-        updateKey: "mp",
       },
-    ].forEach(({ selector, confirmText, dieKey, updateKey }) => {
+    ].forEach(({ selector, confirmText, dieKey }) => {
       const el = this.element.querySelector(selector);
       if (el) {
         el.addEventListener("contextmenu", async () => {
@@ -82,10 +80,9 @@ export default class TeriockRankSheet extends TeriockBaseItemSheet {
             modal: true,
           });
           if (proceed) {
+            /** @type {StatDieModel} */
             const die = this.item.system[dieKey];
-            const maxRoll = parseInt(die.slice(1), 10);
-            const newValue = Math.floor(Math.random() * maxRoll) + 1;
-            await this.item.update({ [`system.${updateKey}`]: newValue });
+            await die.rollStatDieValue();
           }
         });
       }
