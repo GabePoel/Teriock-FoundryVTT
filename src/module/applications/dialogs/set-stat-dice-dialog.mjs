@@ -4,9 +4,8 @@ const { DialogV2 } = foundry.applications.api;
 const { fields } = foundry.data;
 
 /**
- * Dialog that sets {@link StatDieModel} values using {@link StatData.setDice}.
- *
- * @param {TeriockItem & {system: StatData}} statItem
+ * Dialog that sets {@link StatDieModel} values using {@link StatDataMixin.setDice}.
+ * @param {TeriockItem & {system: StatDataMixin}} statItem
  * @param {Teriock.Parameters.Shared.DieStat} stat
  * @param {number} initialNumber
  * @param {Teriock.RollOptions.PolyhedralDieFaces} initialFaces
@@ -45,7 +44,6 @@ export default async function setStatDiceDialog(
           1,
         );
         const faces = Number(button.form.elements.namedItem("faces").value);
-        console.log("Number: ", number, "Faces: ", faces);
         await statItem.system.setDice(stat, number, faces);
       },
     },

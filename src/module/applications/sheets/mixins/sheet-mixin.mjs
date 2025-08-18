@@ -19,10 +19,10 @@ const { DocumentSheetV2, HandlebarsApplicationMixin } =
  * drag and drop, context menus, and form management.
  *
  * @param {typeof DocumentSheetV2} Base - The base application class to mix in with.
- * @returns {typeof TeriockSheetMixin & Base}
+ * @returns {typeof SheetMixin & Base}
  */
 export default (Base) => {
-  return class TeriockSheetMixin extends HandlebarsApplicationMixin(Base) {
+  return class SheetMixin extends HandlebarsApplicationMixin(Base) {
     /**
      * Creates a new Teriock sheet instance.
      * Initializes sheet state including menu state, context menus, and settings.
@@ -106,10 +106,9 @@ export default (Base) => {
     static async _createAbility(_event, _target) {
       const abilityKey = await selectAbilityDialog();
       let abilityName = "New Ability";
-      console.log(abilityKey);
       if (abilityKey && abilityKey !== "other") {
         abilityName = CONFIG.TERIOCK.abilities[abilityKey];
-        await game.teriock.api.utils.importAbility(this.document, abilityName);
+        await game.teriock.api.fetch.importAbility(this.document, abilityName);
       } else {
         await createEffects.createAbility(this.document, abilityName);
       }
@@ -147,7 +146,7 @@ export default (Base) => {
       let propertyName = "New Property";
       if (propertyKey && propertyKey !== "other") {
         propertyName = CONFIG.TERIOCK.properties[propertyKey];
-        await game.teriock.api.utils.importProperty(
+        await game.teriock.api.fetch.importProperty(
           this.document,
           propertyName,
         );
@@ -694,7 +693,7 @@ export default (Base) => {
       });
 
       this._connect(".chat-button", "contextmenu", (e) => {
-        TeriockSheetMixin._debug.call(this, e, e.currentTarget);
+        SheetMixin._debug.call(this, e, e.currentTarget);
       });
 
       this.#dragDrop.forEach((d) => d.bind(this.element));

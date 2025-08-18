@@ -29,8 +29,8 @@ export function _messageParts(rankData) {
       icon: "fa-dice",
       label: "Stat Dice",
       wrappers: [
-        src.hitDie.polyhedral + " Hit Die",
-        src.manaDie.polyhedral + " Mana Die",
+        src.hpDie.polyhedral + " Hit Die",
+        src.mpDie.polyhedral + " Mana Die",
         src.maxAv + " Max AV",
       ],
     },

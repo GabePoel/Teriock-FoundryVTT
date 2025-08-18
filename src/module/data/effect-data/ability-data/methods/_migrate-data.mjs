@@ -82,7 +82,7 @@ export function _migrateData(data) {
 
     // Duration migration
     if (typeof data.duration == "string") {
-      data.durationDialog = parseDurationString(data.duration);
+      data.duration = parseDurationString(data.duration);
     }
   }
 

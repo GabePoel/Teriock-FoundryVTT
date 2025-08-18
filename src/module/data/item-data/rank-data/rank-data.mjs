@@ -14,6 +14,7 @@ const { fields } = foundry.data;
  * - [Classes](https://wiki.teriock.com/index.php/Category:Classes)
  *
  * @extends {TeriockBaseItemData}
+ * @mixes StatDataMixin
  * @mixes WikiDataMixin
  */
 export default class TeriockRankData extends StatDataMixin(
@@ -81,30 +82,30 @@ export default class TeriockRankData extends StatDataMixin(
       ...super.cardContextMenuEntries,
       {
         name: "Roll Hit Die",
-        icon: makeIcon(getRollIcon(this.hitDie.polyhedral), "contextMenu"),
-        callback: async () => await this.hitDie.rollStatDie(),
-        condition: !this.hitDie.spent,
+        icon: makeIcon(getRollIcon(this.hpDie.polyhedral), "contextMenu"),
+        callback: async () => await this.hpDie.rollStatDie(),
+        condition: !this.hpDie.spent,
         group: "usage",
       },
       {
         name: "Recover Hit Die",
         icon: makeIcon("rotate-left", "contextMenu"),
-        callback: async () => await this.hitDie.unrollStatDie(),
-        condition: this.hitDie.spent,
+        callback: async () => await this.hpDie.unrollStatDie(),
+        condition: this.hpDie.spent,
         group: "usage",
       },
       {
         name: "Roll Mana Die",
-        icon: makeIcon(getRollIcon(this.manaDie.polyhedral), "contextMenu"),
-        callback: async () => await this.manaDie.rollStatDie(),
-        condition: !this.manaDie.spent,
+        icon: makeIcon(getRollIcon(this.mpDie.polyhedral), "contextMenu"),
+        callback: async () => await this.mpDie.rollStatDie(),
+        condition: !this.mpDie.spent,
         group: "usage",
       },
       {
         name: "Recover Mana Die",
         icon: makeIcon("rotate-left", "contextMenu"),
-        callback: async () => await this.manaDie.unrollStatDie(),
-        condition: this.manaDie.spent,
+        callback: async () => await this.mpDie.unrollStatDie(),
+        condition: this.mpDie.spent,
         group: "usage",
       },
     ];
@@ -114,7 +115,7 @@ export default class TeriockRankData extends StatDataMixin(
    * The singular hit die.
    * @returns {StatDieModel}
    */
-  get hitDie() {
+  get hpDie() {
     return Object.values(this.hpDice)[0];
   }
 
@@ -122,7 +123,7 @@ export default class TeriockRankData extends StatDataMixin(
    * The singular mana die.
    * @returns {StatDieModel}
    */
-  get manaDie() {
+  get mpDie() {
     return Object.values(this.mpDice)[0];
   }
 

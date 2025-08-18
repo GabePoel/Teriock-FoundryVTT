@@ -5,7 +5,7 @@
   "author": "qf5JYGZKzM588nE6",
   "img": "icons/svg/dice-target.svg",
   "scope": "global",
-  "command": "const options = foundry.utils.deepClone({\n  advantage: window.event?.altKey,\n  disadvantage: window.event?.shiftKey,\n});\nconst actor = scope.abilityData.actor;\nconst tradecraft = await game.teriock.api.dialog.selectTradecraft();\nawait actor.rollTradecraft(tradecraft, options);",
+  "command": "const options = foundry.utils.deepClone(scope.useData.rollOptions);\nconst actor = scope.abilityData.actor;\nconst tradecraft = await game.teriock.api.dialogs.selectTradecraftDialog();\nawait actor.rollTradecraft(tradecraft, options);",
   "folder": null,
   "sort": 0,
   "ownership": {
@@ -21,8 +21,8 @@
     "systemId": "teriock",
     "systemVersion": "0.1.0",
     "createdTime": 1753598195229,
-    "modifiedTime": 1754544967090,
-    "lastModifiedBy": "MMeF1yfOcMgtpZFS"
+    "modifiedTime": 1755479283512,
+    "lastModifiedBy": "qf5JYGZKzM588nE6"
   },
   "_key": "!macros!PGg9Nnkx6IflvYUm"
 }

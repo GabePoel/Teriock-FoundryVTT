@@ -51,9 +51,9 @@ export interface TeriockBaseActorDerived {
     /** Die box display for hit and mana dice */
     dieBox: {
       /** Hit Dice @derived */
-      hitDice: string;
+      hpDice: string;
       /** Mana Dice @derived */
-      manaDice: string;
+      mpDice: string;
     };
   };
 

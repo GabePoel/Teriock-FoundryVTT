@@ -54,7 +54,6 @@ for (const propertyPage of allPropertyPages) {
   let propertyEffect = propertyItem.properties.find(
     (a) => a.name === propertyName,
   );
-  console.log(propertyEffect);
 
   if (!propertyEffect) {
     propertyEffect = await game.teriock.api.create.property(

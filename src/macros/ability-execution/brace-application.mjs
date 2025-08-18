@@ -21,7 +21,7 @@ if (ability?.isProficient) {
   formula = `(1 + @f)d${dieSize}`;
 }
 
-const roll = new Roll(formula, actor.getRollData());
+const roll = new game.teriock.Roll(formula, actor.getRollData());
 await roll.evaluate();
 await roll.toMessage({
   speaker: ChatMessage.getSpeaker({ actor: actor }),

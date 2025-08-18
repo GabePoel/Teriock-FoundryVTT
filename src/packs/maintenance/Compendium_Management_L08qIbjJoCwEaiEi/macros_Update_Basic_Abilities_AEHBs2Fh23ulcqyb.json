@@ -5,7 +5,7 @@
   "author": "qf5JYGZKzM588nE6",
   "img": "modules/game-icons-net/whitetransparent/skills.svg",
   "scope": "global",
-  "command": "const basicAbilitiesItem = await game.teriock.api.utils.getItem(\n  \"Basic Abilities\",\n  \"essentials\",\n);\n\nconst basicAbilityNames =\n  await game.teriock.api.wiki.fetchCategoryAbilities(\"Basic abilities\");\n\n/** @type {object} */\nconst progress = ui.notifications.info(`Pulling basic abilities from wiki.`, {\n  progress: true,\n});\nlet pct = 0;\n\nfor (const basicAbilityName of basicAbilityNames) {\n  let basicAbility = basicAbilitiesItem.abilities.find(\n    (a) => a.name === basicAbilityName,\n  );\n  if (!basicAbility) {\n    basicAbility = await game.teriock.api.create.ability(\n      basicAbilitiesItem,\n      basicAbilityName,\n    );\n  }\n  pct += 1 / basicAbilityNames.length;\n  progress.update({\n    pct: pct,\n    message: `Pulling ${basicAbilityName} from wiki.`,\n  });\n\n  await basicAbility.system.wikiPull({ notify: false });\n}\nconst toDelete = basicAbilitiesItem.abilities\n  .filter((a) => !basicAbilityNames.includes(a.name))\n  .map((a) => a.id);\nawait basicAbilitiesItem.deleteEmbeddedDocuments(\"ActiveEffect\", toDelete);",
+  "command": "const basicAbilitiesItem = await game.teriock.api.fetch.getItem(\n  \"Basic Abilities\",\n  \"essentials\",\n);\n\nconst basicAbilityNames =\n  await game.teriock.api.wiki.fetchCategoryAbilities(\"Basic abilities\");\n\n/** @type {object} */\nconst progress = ui.notifications.info(`Pulling basic abilities from wiki.`, {\n  progress: true,\n});\nlet pct = 0;\n\nfor (const basicAbilityName of basicAbilityNames) {\n  let basicAbility = basicAbilitiesItem.abilities.find(\n    (a) => a.name === basicAbilityName,\n  );\n  if (!basicAbility) {\n    basicAbility = await game.teriock.api.create.ability(\n      basicAbilitiesItem,\n      basicAbilityName,\n    );\n  }\n  pct += 1 / basicAbilityNames.length;\n  progress.update({\n    pct: pct,\n    message: `Pulling ${basicAbilityName} from wiki.`,\n  });\n\n  await basicAbility.system.wikiPull({ notify: false });\n}\nconst toDelete = basicAbilitiesItem.abilities\n  .filter((a) => !basicAbilityNames.includes(a.name))\n  .map((a) => a.id);\nawait basicAbilitiesItem.deleteEmbeddedDocuments(\"ActiveEffect\", toDelete);",
   "folder": "L08qIbjJoCwEaiEi",
   "sort": 100000,
   "ownership": {
@@ -21,8 +21,8 @@
     "systemId": "teriock",
     "systemVersion": "0.1.0",
     "createdTime": 1753659319940,
-    "modifiedTime": 1754845013689,
-    "lastModifiedBy": "MMeF1yfOcMgtpZFS"
+    "modifiedTime": 1755481423445,
+    "lastModifiedBy": "qf5JYGZKzM588nE6"
   },
   "_key": "!macros!AEHBs2Fh23ulcqyb"
 }

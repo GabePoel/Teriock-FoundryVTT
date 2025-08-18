@@ -3,11 +3,12 @@ import { TeriockRoll } from "../../documents/_module.mjs";
 import { dedent, getRollIcon, toTitleCase } from "../../helpers/utils.mjs";
 
 const { fields } = foundry.data;
+const { DataModel } = foundry.abstract;
 
 /**
  * A data model to represent a stat die.
  */
-export default class StatDieModel extends foundry.abstract.DataModel {
+export default class StatDieModel extends DataModel {
   /** @inheritDoc */
   static defineSchema() {
     const dieChoices = {};
@@ -42,8 +43,6 @@ export default class StatDieModel extends foundry.abstract.DataModel {
       }),
     };
   }
-
-  await;
 
   /**
    * The ID of this stat die.

@@ -5,7 +5,7 @@
   "author": "qf5JYGZKzM588nE6",
   "img": "icons/svg/dice-target.svg",
   "scope": "global",
-  "command": "const options = foundry.utils.deepClone(scope.useData.rollOptions);\nconst actor = scope.abilityData.actor;\nconst abilities = actor.abilities\n  .filter(\n    (a) =>\n      a.system.interaction === \"attack\" &&\n      a.system.maneuver === \"active\" &&\n      a.system.executionTime === \"a1\" &&\n      [\"weapon\", \"hand\"].includes(a.system.delivery.base),\n  )\n  .sort((a, b) => a.name.localeCompare(b.name));\nconst ability = await game.teriock.api.dialog.selectDocument(abilities, {\n  title: \"Select Ability\",\n  hint: \"Select an ability to use.\",\n});\nconsole.log(ability);\nawait ability.system.roll(options);",
+  "command": "const options = foundry.utils.deepClone(scope.useData.rollOptions);\nconst actor = scope.abilityData.actor;\nconst abilities = actor.abilities\n  .filter(\n    (a) =>\n      a.system.interaction === \"attack\" &&\n      a.system.maneuver === \"active\" &&\n      a.system.executionTime === \"a1\" &&\n      [\"weapon\", \"hand\"].includes(a.system.delivery.base),\n  )\n  .sort((a, b) => a.name.localeCompare(b.name));\nconst ability = await game.teriock.api.dialogs.selectDocumentDialog(abilities, {\n  title: \"Select Ability\",\n  hint: \"Select an ability to use.\",\n});\nawait ability.system.roll(options);",
   "folder": null,
   "sort": 0,
   "ownership": {
@@ -21,8 +21,8 @@
     "systemId": "teriock",
     "systemVersion": "0.1.0",
     "createdTime": 1753599982446,
-    "modifiedTime": 1754889660793,
-    "lastModifiedBy": "MMeF1yfOcMgtpZFS"
+    "modifiedTime": 1755479703320,
+    "lastModifiedBy": "qf5JYGZKzM588nE6"
   },
   "_key": "!macros!OCGHKTqnI04j1L3h"
 }

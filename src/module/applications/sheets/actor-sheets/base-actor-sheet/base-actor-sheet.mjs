@@ -17,7 +17,7 @@ import { _initSearchFilters } from "./methods/_search.mjs";
 import { _defaultSheetSettings } from "./methods/_settings.mjs";
 import { _sortAbilities, _sortEquipment } from "./methods/_sort.mjs";
 
-const { api, ux } = foundry.applications;
+const { DialogV2 } = foundry.applications.api;
 const { ActorSheetV2 } = foundry.applications.sheets;
 
 /**
@@ -38,8 +38,8 @@ export default class TeriockBaseActorSheet extends SheetMixin(ActorSheetV2) {
   constructor(...args) {
     super(...args);
     this._sidebarOpen = true;
-    this._hitDrawerOpen = true;
-    this._manaDrawerOpen = true;
+    this._hpDrawerOpen = true;
+    this._mpDrawerOpen = true;
     this._locked = false;
     this._dynamicContextMenus = {
       attacker: [],
@@ -367,7 +367,7 @@ export default class TeriockBaseActorSheet extends SheetMixin(ActorSheetV2) {
    */
   static async _takeDamage(event) {
     event.stopPropagation();
-    await api.DialogV2.prompt({
+    await DialogV2.prompt({
       window: { title: "Take Damage" },
       content:
         '<input type="number" name="damage" placeholder="Damage Amount">',
@@ -391,7 +391,7 @@ export default class TeriockBaseActorSheet extends SheetMixin(ActorSheetV2) {
    */
   static async _takeDrain(event) {
     event.stopPropagation();
-    await api.DialogV2.prompt({
+    await DialogV2.prompt({
       window: { title: "Take Drain" },
       content: '<input type="number" name="drain" placeholder="Drain Amount">',
       ok: {
@@ -429,7 +429,7 @@ export default class TeriockBaseActorSheet extends SheetMixin(ActorSheetV2) {
    */
   static async _takeWither(event) {
     event.stopPropagation();
-    await api.DialogV2.prompt({
+    await DialogV2.prompt({
       window: { title: "Take Wither" },
       content:
         '<input type="number" name="wither" placeholder="Wither Amount">',
@@ -656,29 +656,29 @@ export default class TeriockBaseActorSheet extends SheetMixin(ActorSheetV2) {
       ".character-sidebar-tabber-container",
     );
     /** @type {HTMLDivElement} */
-    const hitDrawer = this.element.querySelector(".hit-die-drawer");
+    const hpDrawer = this.element.querySelector(".hp-die-drawer");
     /** @type {HTMLDivElement} */
-    const manaDrawer = this.element.querySelector(".mana-die-drawer");
+    const mpDrawer = this.element.querySelector(".mp-die-drawer");
 
     sidebar.classList.add("no-transition");
     tabber.classList.add("no-transition");
-    hitDrawer.classList.add("no-transition");
-    manaDrawer.classList.add("no-transition");
+    hpDrawer.classList.add("no-transition");
+    mpDrawer.classList.add("no-transition");
 
     sidebar.classList.toggle("collapsed", !this._sidebarOpen);
     tabber.classList.toggle("collapsed", !this._sidebarOpen);
-    hitDrawer.classList.toggle("closed", !this._hitDrawerOpen);
-    manaDrawer.classList.toggle("closed", !this._manaDrawerOpen);
+    hpDrawer.classList.toggle("closed", !this._hpDrawerOpen);
+    mpDrawer.classList.toggle("closed", !this._mpDrawerOpen);
 
     sidebar.offsetHeight;
     tabber.offsetHeight;
-    hitDrawer.offsetHeight;
-    manaDrawer.offsetHeight;
+    hpDrawer.offsetHeight;
+    mpDrawer.offsetHeight;
 
     sidebar.classList.remove("no-transition");
     tabber.classList.remove("no-transition");
-    hitDrawer.classList.remove("no-transition");
-    manaDrawer.classList.remove("no-transition");
+    hpDrawer.classList.remove("no-transition");
+    mpDrawer.classList.remove("no-transition");
 
     this.element.querySelectorAll(".character-tabber").forEach((el) => {
       el.addEventListener("click", async (e) => {
@@ -703,8 +703,8 @@ export default class TeriockBaseActorSheet extends SheetMixin(ActorSheetV2) {
       .forEach((el) => {
         el.addEventListener("contextmenu", (e) => {
           e.preventDefault();
-          hitDrawer.classList.toggle("closed");
-          this._hitDrawerOpen = !this._hitDrawerOpen;
+          hpDrawer.classList.toggle("closed");
+          this._hpDrawerOpen = !this._hpDrawerOpen;
           e.stopPropagation();
         });
       });
@@ -714,8 +714,8 @@ export default class TeriockBaseActorSheet extends SheetMixin(ActorSheetV2) {
       .forEach((el) => {
         el.addEventListener("contextmenu", (e) => {
           e.preventDefault();
-          manaDrawer.classList.toggle("closed");
-          this._manaDrawerOpen = !this._manaDrawerOpen;
+          mpDrawer.classList.toggle("closed");
+          this._mpDrawerOpen = !this._mpDrawerOpen;
           e.stopPropagation();
         });
       });

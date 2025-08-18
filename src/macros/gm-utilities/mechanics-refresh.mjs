@@ -9,10 +9,7 @@ const existingMechanics = actor.itemTypes?.mechanic || [];
 const existingMechanicIds = existingMechanics.map((m) => m.id);
 
 if (existingMechanics.length > 0) {
-  await actor.deleteEmbeddedDocuments(
-    "Item",
-    existingMechanicIds
-  );
+  await actor.deleteEmbeddedDocuments("Item", existingMechanicIds);
 }
 
 await actor.createEmbeddedDocuments("Item", [actorMechanics]);

@@ -32,23 +32,23 @@ export function _prepareHpMp(actorData) {
   const diceLimit = Math.floor(actorData.lvl / 5);
   actorData.hp.base = 0;
   actorData.mp.base = 0;
-  let hitDieBox = "";
-  let manaDieBox = "";
+  let hpDieBox = "";
+  let mpDieBox = "";
   actorData.parent.species.forEach((species) => {
     if (species.system.applyHp) {
       actorData.hp.base += species.system.totalHp;
-      hitDieBox += species.system.renderedHitDice;
+      hpDieBox += species.system.renderedHitDice;
     }
     if (species.system.applyMp) {
       actorData.mp.base += species.system.totalMp;
-      manaDieBox += species.system.renderedManaDice;
+      mpDieBox += species.system.renderedManaDice;
     }
   });
   actorData.parent.ranks.slice(0, diceLimit).forEach((rank) => {
     actorData.hp.base += rank.system.totalHp;
-    hitDieBox += rank.system.renderedHitDice;
+    hpDieBox += rank.system.renderedHitDice;
     actorData.mp.base += rank.system.totalMp;
-    manaDieBox += rank.system.renderedManaDice;
+    mpDieBox += rank.system.renderedManaDice;
   });
 
   let hpMax = actorData.hp.base;
@@ -59,5 +59,5 @@ export function _prepareHpMp(actorData) {
   actorData.mp.max = mpMax;
   actorData.mp.min = -Math.floor(mpMax / 2);
   actorData.mp.value = Math.min(actorData.mp.value, mpMax);
-  actorData.sheet.dieBox = { hitDice: hitDieBox, manaDice: manaDieBox };
+  actorData.sheet.dieBox = { hpDice: hpDieBox, mpDice: mpDieBox };
 }

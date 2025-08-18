@@ -191,7 +191,6 @@ export class TextField extends HTMLField {
 
   /** @inheritDoc */
   toFormGroup(groupConfig, inputConfig) {
-    console.log(groupConfig, inputConfig);
     /** @type {HTMLDivElement} */
     const out = super.toFormGroup(groupConfig, inputConfig);
     out.classList.add("ab-section-container");

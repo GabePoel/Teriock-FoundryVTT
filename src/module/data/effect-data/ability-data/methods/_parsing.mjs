@@ -7,7 +7,6 @@ import { imageOverrides } from "./_image-overrides.mjs";
 /**
  * Cost value templates for different cost types.
  * Provides standardized cost structures for variable, static, formula, and hack costs.
- *
  * @type {object}
  * @private
  */
@@ -33,7 +32,6 @@ const COST_TEMPLATES = {
 /**
  * Creates the default consequence structure for ability effects.
  * Provides empty rolls, statuses, start/end statuses, hacks, checks, and duration.
- *
  * @returns {object} The default consequence structure.
  * @private
  */
@@ -58,7 +56,6 @@ function defaultConsequence() {
 /**
  * Creates the default applies structure for ability effects.
  * Provides base, proficient, fluent, and heightened consequence fields.
- *
  * @returns {object} The default applies structure with empty consequence fields.
  * @private
  */
@@ -74,7 +71,6 @@ function defaultApplies() {
 /**
  * Parses raw HTML content for an ability, extracting properties and creating effects.
  * Handles tag processing, cost calculation, component parsing, and subability creation.
- *
  * @param {TeriockAbilityData} abilityData - The ability data to parse content for.
  * @param {string} rawHTML - The raw HTML content to parse.
  * @returns {Promise<{ changes: object[], system: Partial<TeriockAbilityData>, img: string }>} Promise that resolves to
@@ -96,7 +92,6 @@ export async function _parse(abilityData, rawHTML) {
     doc.querySelectorAll(".expandable-container"),
   ).filter((el) => !el.closest(".expandable-container:not(:scope)"));
   subs.push(...expandableSubs);
-  console.log(expandableSubs);
 
   // Remove sub-containers and process dice
   doc.querySelectorAll(".ability-sub-container").forEach((el) => el.remove());
@@ -176,7 +171,6 @@ export async function _parse(abilityData, rawHTML) {
 /**
  * Builds a tag tree from tag containers in the document.
  * Extracts and organizes tags from CSS classes for processing.
- *
  * @param {Document} doc - The parsed HTML document.
  * @returns {object} Object containing organized tags by type.
  * @private
@@ -201,7 +195,6 @@ function buildTagTree(doc) {
 /**
  * Helper function to get bar text content from ability bars.
  * Optionally cleans and formats the text for display.
- *
  * @param {Document} doc - The parsed HTML document.
  * @param {string} selector - The selector for the bar content.
  * @param {boolean} clean - Whether to clean and format the text.
@@ -230,7 +223,6 @@ function getBarText(doc, selector, clean = false) {
 
 /**
  * Helper function to get text content from elements.
- *
  * @param {Document} doc - The parsed HTML document.
  * @param {string} selector - The CSS selector for the element.
  * @returns {string|null} The text content or null if not found.
@@ -243,7 +235,6 @@ function getText(doc, selector) {
 /**
  * Processes tags and builds ability parameters from the tag tree.
  * Handles power sources, basic tag assignments, maneuver types, and improvements.
- *
  * @param {object} parameters - The ability parameters to populate.
  * @param {Record<string, string[]>} tagTree - The tag tree extracted from the document.
  * @param {Document} doc - The parsed HTML document.
@@ -323,10 +314,9 @@ function processTags(parameters, tagTree, doc) {
   }
 
   // Set basic parameters
-  parameters.durationDialog = {
+  parameters.duration = {
     description: getBarText(doc, "duration", true),
   };
-  console.log(parameters);
   parameters.range = getBarText(doc, "range", true);
   if (parameters.delivery.base === "self") parameters.range = "Self.";
 
@@ -365,16 +355,12 @@ function processTags(parameters, tagTree, doc) {
   resultBars.forEach((bar) => {
     let result;
     for (const resultsBarOption of resultsBars[bar]) {
-      console.log(bar, resultsBarOption);
       if (!result) {
         result = getBarText(doc, resultsBarOption);
       }
     }
-    console.log(result);
     parameters.results[bar] = result;
   });
-
-  console.log(foundry.utils.deepClone(parameters.results));
 
   // Process improvements
   processImprovements(parameters, doc);
@@ -400,7 +386,6 @@ function processTags(parameters, tagTree, doc) {
 /**
  * Processes improvements from the document and adds them to parameters.
  * Handles attribute improvements and feat save improvements.
- *
  * @param {object} parameters - The ability parameters to populate.
  * @param {Document} doc - The parsed HTML document.
  * @private
@@ -450,7 +435,6 @@ function processImprovements(parameters, doc) {
 /**
  * Processes costs from the tag tree and document.
  * Handles MP, HP, and break costs using cost templates.
- *
  * @param {object} parameters - The ability parameters to populate.
  * @param {object} tagTree - The tag tree extracted from the document.
  * @param {Document} doc - The parsed HTML document.
@@ -509,7 +493,6 @@ function processCosts(parameters, tagTree, doc) {
 /**
  * Processes components from the tag tree and document.
  * Handles invoked, verbal, somatic, and material components.
- *
  * @param {object} parameters - The ability parameters to populate.
  * @param {object} tagTree - The tag tree extracted from the document.
  * @param {Document} doc - The parsed HTML document.
@@ -532,7 +515,6 @@ function processComponents(parameters, tagTree, doc) {
 /**
  * Sets remaining parameters from the tag tree and document.
  * Handles end conditions, requirements, effects, expansion range, triggers, and heightened effects.
- *
  * @param {object} parameters - The ability parameters to populate.
  * @param {object} tagTree - The tag tree extracted from the document.
  * @param {Document} doc - The parsed HTML document.
@@ -550,7 +532,6 @@ function setRemainingParameters(parameters, tagTree, doc) {
 /**
  * Extracts dice information from HTML content.
  * Finds dice elements and extracts their type and roll formula.
- *
  * @param {string} html - The HTML content to extract dice from.
  * @returns {object} Object containing dice types and their roll formulas.
  * @private
@@ -573,7 +554,6 @@ function extractDiceFromHTML(html) {
 /**
  * Extracts hack information from HTML content.
  * Finds hack metadata elements and extracts their parts.
- *
  * @param {string} html - The HTML content to extract hacks from.
  * @returns {Set} Set of hack parts found in the content.
  * @private
@@ -595,7 +575,6 @@ function extractHacksFromHTML(html) {
 /**
  * Extracts condition information from HTML content.
  * Finds condition metadata elements and extracts their conditions.
- *
  * @param {string} html - The HTML content to extract conditions from.
  * @returns {Set} Set of conditions found in the content.
  * @private
@@ -619,7 +598,6 @@ function extractConditionsFromHTML(html) {
 /**
  * Extracts start condition information from HTML content.
  * Finds start-condition metadata elements and extracts their conditions.
- *
  * @param {string} html - The HTML content to extract start conditions from.
  * @returns {Set} Set of start conditions found in the content.
  * @private
@@ -643,7 +621,6 @@ function extractStartConditionsFromHTML(html) {
 /**
  * Extracts end condition information from HTML content.
  * Finds end-condition metadata elements and extracts their conditions.
- *
  * @param {string} html - The HTML content to extract end conditions from.
  * @returns {Set} Set of end conditions found in the content.
  * @private
@@ -667,7 +644,6 @@ function extractEndConditionsFromHTML(html) {
 /**
  * Extracts tradecraft check information from HTML content.
  * Find tradecraft-check metadata elements and extract their tradecraft types.
- *
  * @param {string} html - The HTML content to extract tradecraft checks from.
  * @returns {Set} Set of tradecraft checks found in the content.
  * @private
@@ -691,7 +667,6 @@ function extractTradecraftChecksFromHTML(html) {
 /**
  * Extracts changes from HTML content.
  * Finds change metadata elements and extracts their key, mode, value, and priority.
- *
  * @param {string} html - The HTML content to extract changes from.
  * @returns {Array} Array of change objects with a key, mode, value, and priority.
  * @private
@@ -722,7 +697,6 @@ function extractChangesFromHTML(html) {
 
 /**
  * Extracts standard damage from HTML content.
- *
  * @param {string} html - The HTML content to extract standard damage from.
  * @returns {boolean} - Whether standard damage is dealt.
  */
@@ -734,14 +708,12 @@ function extractStandardDamageFromHTML(html) {
     .querySelectorAll("span.metadata[data-type='standard-damage']")
     .forEach(() => {
       standardDamage = true;
-      console.log(standardDamage);
     });
   return standardDamage;
 }
 
 /**
  * Extracts duration from HTML content. Finds duration metadata elements and extracts its number of seconds.
- *
  * @param html - The HTML content to extract changes from.
  * @returns {number} Number of seconds.
  * @private
@@ -756,15 +728,12 @@ function extractDurationFromHTML(html) {
 
 /**
  * Extracts macro from raw document content.
- *
  * @param doc - The raw document content to extract macro from.
  * @returns {Record<Teriock.SafeUUID<TeriockMacro>, string>} The macro name.
  */
 function extractMacroFromHTML(doc) {
   const elements = doc.querySelectorAll("span.metadata[data-type='macro']");
   const macroAssignments = {};
-  console.log(doc);
-  console.log(elements);
   for (const /** @type {HTMLElement} */ el of elements) {
     if (el instanceof HTMLElement && el.dataset.name) {
       const macroName = el.dataset.name;
@@ -788,7 +757,6 @@ function extractMacroFromHTML(doc) {
  /**
  * Extracts combat expiration information from HTML content.
  * Finds combat-expiration metadata elements and extracts their configuration.
- *
  * @param {string} html - The HTML content to extract combat expiration from.
  * @returns {object|null} Combat expiration object or null if not found.
  * @private
@@ -829,7 +797,6 @@ function extractCombatExpirationFromHTML(html) {
 /**
  * Processes dice and effect extraction from ability parameters.
  * Extracts dice, hacks, conditions, and changes from overviews and results.
- *
  * @param {object} parameters - The ability parameters to process.
  * @private
  */
@@ -898,7 +865,7 @@ function processDiceAndEffectExtraction(parameters) {
 
     const duration = extractDurationFromHTML(source);
     if (duration > 0) {
-      target.durationDialog = duration;
+      target.duration = duration;
     }
 
     // Extract combat expiration metadata
@@ -907,7 +874,6 @@ function processDiceAndEffectExtraction(parameters) {
       target.expiration.normal = combatExpiration;
       target.expiration.doesExpire = true;
     }
-    console.log(combatExpiration);
   });
 
   // Extract dice and effects from results
@@ -970,9 +936,6 @@ function processDiceAndEffectExtraction(parameters) {
       const currentCombatExpiration = extractCombatExpirationFromHTML(
         parameters.results[resultType],
       );
-      console.log(parameters.results);
-      console.log(resultType);
-      console.log(foundry.utils.deepClone(currentCombatExpiration));
 
       // Merge all results
       if (resultType !== "endCondition") {
@@ -1073,7 +1036,6 @@ function processDiceAndEffectExtraction(parameters) {
 /**
  * Selects the appropriate image for the ability based on its parameters.
  * Chooses between spell, skill, class-specific, or default ability icons.
- *
  * @param {object} parameters - The ability parameters to determine the image from.
  * @returns {string} The path to the selected image.
  * @private
@@ -1090,7 +1052,6 @@ function selectImage(parameters) {
 /**
  * Processes sub-abilities from the document.
  * Creates sub-abilities and applies limitations or improvements as needed.
- *
  * @param {Array} subs - Array of subability container elements.
  * @param {TeriockAbilityData} abilityData - The parent ability data.
  * @returns {Promise<void>} Promise that resolves when all sub-abilities are processed.

@@ -7,10 +7,13 @@ const effectObject = JSON.parse(button.dataset.normal);
 const validAbilities = actor.abilities
   .filter((a) => !a.isReference && a.system.standard)
   .sort((a, b) => a.name.localeCompare(b.name));
-const ability = await game.teriock.api.dialogs.selectDocumentDialog(validAbilities, {
-  title: "Select Ability",
-  hint: "Select an ability to share.",
-});
+const ability = await game.teriock.api.dialogs.selectDocumentDialog(
+  validAbilities,
+  {
+    title: "Select Ability",
+    hint: "Select an ability to share.",
+  },
+);
 effectObject.system.hierarchy.rootUuid = ability.system.hierarchy.rootUuid;
 effectObject.system.hierarchy.subIds = [ability.id];
 const effectString = JSON.stringify(effectObject);

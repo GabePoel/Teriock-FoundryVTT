@@ -17,8 +17,8 @@ export function archetypeContextMenu(rank) {
     const archetypeIcon = archetypes[archetype].icon;
     const icon = makeIcon(archetypeIcon, iconStyle);
     const firstClass = Object.keys(archetypes[archetype].classes)[0];
-    const hitDiePath = rank.system.hitDie.path;
-    const manaDiePath = rank.system.manaDie.path;
+    const hpDiePath = rank.system.hpDie.path;
+    const mpDiePath = rank.system.mpDie.path;
     let hpFaces = 10;
     let mpFaces = 10;
     if (archetype === "warrior") {
@@ -35,10 +35,10 @@ export function archetypeContextMenu(rank) {
       callback: async () => {
         await rank.update({
           system: { archetype: archetype, className: firstClass },
-          [`${hitDiePath}.faces`]: hpFaces,
-          [`${hitDiePath}.value`]: Math.ceil((hpFaces + 1) / 2),
-          [`${manaDiePath}.faces`]: mpFaces,
-          [`${manaDiePath}.value`]: Math.ceil((mpFaces + 1) / 2),
+          [`${hpDiePath}.faces`]: hpFaces,
+          [`${hpDiePath}.value`]: Math.ceil((hpFaces + 1) / 2),
+          [`${mpDiePath}.faces`]: mpFaces,
+          [`${mpDiePath}.value`]: Math.ceil((mpFaces + 1) / 2),
         });
       },
     };
@@ -128,7 +128,7 @@ function dieContextMenu(rank, stat = "hp") {
  * @param {TeriockRank} rank - The rank item to create the context menu for.
  * @returns {Array} Array of context menu options for hit die selection.
  */
-export function hitDieContextMenu(rank) {
+export function hpDieContextMenu(rank) {
   return dieContextMenu(rank, "hp");
 }
 
@@ -137,6 +137,6 @@ export function hitDieContextMenu(rank) {
  * @param {TeriockRank} rank - The rank item to create the context menu for.
  * @returns {Array} Array of context menu options for mana die selection.
  */
-export function manaDieContextMenu(rank) {
+export function mpDieContextMenu(rank) {
   return dieContextMenu(rank, "mp");
 }

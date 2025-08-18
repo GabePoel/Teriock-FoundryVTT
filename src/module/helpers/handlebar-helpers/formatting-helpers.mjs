@@ -4,7 +4,6 @@ import { getRollIcon } from "../utils.mjs";
 export default function registerFormattingHelpers() {
   Handlebars.registerHelper("firstDie", (str) => {
     if (typeof str !== "string") str = "";
-    console.log(str);
     return getRollIcon(str);
   });
 

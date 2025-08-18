@@ -52,7 +52,6 @@ for (const abilityPage of allAbilityPages) {
   await abilityItem.setFlag("teriock", "abilityWrapper", true);
   await abilityItem.setFlag("teriock", "effectWrapper", true);
   let abilityEffect = abilityItem.abilities.find((a) => a.name === abilityName);
-  console.log(abilityEffect);
 
   if (!abilityEffect) {
     abilityEffect = await game.teriock.api.create.ability(

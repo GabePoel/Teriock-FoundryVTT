@@ -268,7 +268,6 @@ export default class TeriockAbilitySheet extends TeriockBaseEffectSheet {
 
   /** @inheritDoc */
   async _onDropMacro(_event, data) {
-    console.log(data);
     const updateData = {
       [`system.applies.macros.${safeUuid(data?.uuid)}`]: "execution",
     };

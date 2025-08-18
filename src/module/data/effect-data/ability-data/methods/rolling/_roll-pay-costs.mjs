@@ -34,6 +34,5 @@ export async function _payCosts(rollConfig) {
   if (gpSpent > 0) {
     await actor.takePay(gpSpent);
   }
-  console.log(updates);
   await actor.update(updates);
 }

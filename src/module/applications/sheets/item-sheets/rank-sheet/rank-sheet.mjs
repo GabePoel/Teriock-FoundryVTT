@@ -3,8 +3,8 @@ import TeriockBaseItemSheet from "../base-item-sheet/base-item-sheet.mjs";
 import {
   archetypeContextMenu,
   classContextMenu,
-  hitDieContextMenu,
-  manaDieContextMenu,
+  hpDieContextMenu,
+  mpDieContextMenu,
   rankContextMenu,
 } from "./connections/_context-menus.mjs";
 
@@ -42,23 +42,23 @@ export default class TeriockRankSheet extends TeriockBaseItemSheet {
       { selector: ".rank-box", menu: rankContextMenu },
       { selector: ".class-box", menu: classContextMenu },
       { selector: ".archetype-box", menu: archetypeContextMenu },
-      { selector: ".hit-die-box", menu: hitDieContextMenu },
-      { selector: ".mana-die-box", menu: manaDieContextMenu },
+      { selector: ".hp-die-box", menu: hpDieContextMenu },
+      { selector: ".mp-die-box", menu: mpDieContextMenu },
     ].forEach(({ selector, menu }) => {
       this._connectContextMenu(selector, menu(this.item), "click");
     });
     [
       {
-        selector: ".hit-die-box",
+        selector: ".hp-die-box",
         confirmText:
           "Are you sure you want to re-roll how much HP you gain from this rank?",
-        dieKey: "hitDie",
+        dieKey: "hpDie",
       },
       {
-        selector: ".mana-die-box",
+        selector: ".mp-die-box",
         confirmText:
           "Are you sure you want to re-roll how much mana you gain from this rank?",
-        dieKey: "manaDie",
+        dieKey: "mpDie",
       },
     ].forEach(({ selector, confirmText, dieKey }) => {
       const el = this.element.querySelector(selector);

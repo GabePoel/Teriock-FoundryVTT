@@ -18,8 +18,8 @@ export interface SheetData {
   display: SheetDisplay;
   notes: string;
   dieBox: {
-    hitDice: string;
-    manaDice: string;
+    hpDice: string;
+    mpDice: string;
   };
   primaryBlocker: string | null;
   primaryAttacker: string | null;

@@ -9,13 +9,13 @@ import { createAbility } from "../../../../helpers/create-effects.mjs";
 const ARCHETYPE_FACES = {
   mage: { hp: 8, mp: 12 },
   warrior: { hp: 12, mp: 8 },
-  default: { hp: 10, mp: 10 },
+  semi: { hp: 10, mp: 10 },
+  everyman: { hp: 10, mp: 10 },
 };
 
 /**
  * Extracts ability names from metadata attributes.
  * Splits comma-separated values and filters out empty strings.
- *
  * @param {Element} metaData - The metadata element to extract from.
  * @param {string} attr - The attribute name to extract.
  * @returns {string[]} Array of ability names.
@@ -34,7 +34,6 @@ function extractAbilityNames(metaData, attr) {
 /**
  * Parses raw HTML content for a rank, extracting class information and abilities.
  * Creates abilities based on class rank and updates the rank with parsed data.
- *
  * @param {TeriockRankData} rankData - The rank data to parse content for.
  * @param {string} rawHTML - The raw HTML content to parse.
  * @returns {Promise<object>} Promise that resolves to the parsed parent data.
@@ -105,9 +104,14 @@ export async function _parse(rankData, rawHTML) {
     description: getHTML(".class-description") || "",
   };
 
+  let name = `Rank ${classRank} ${classValue}`;
+  if (name.includes("Journeyman")) {
+    name = "Journeyman";
+  }
+
   return {
     system: parameters,
     img: `systems/teriock/assets/classes/${className}.svg`,
-    name: `Rank ${classRank} ${classValue}`,
+    name: name,
   };
 }

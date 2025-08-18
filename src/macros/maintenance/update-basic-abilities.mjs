@@ -1,4 +1,4 @@
-const basicAbilitiesItem = await game.teriock.api.utils.getItem(
+const basicAbilitiesItem = await game.teriock.api.fetch.getItem(
   "Basic Abilities",
   "essentials",
 );

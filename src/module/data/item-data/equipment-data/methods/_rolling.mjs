@@ -115,7 +115,6 @@ async function use(equipmentData, options) {
           updates.push(update);
         }
       }
-      console.log(updates);
       await equipmentData.parent.updateEmbeddedDocuments(
         "ActiveEffect",
         updates,

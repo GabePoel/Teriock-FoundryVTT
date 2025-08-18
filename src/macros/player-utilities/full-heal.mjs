@@ -17,15 +17,25 @@ if (actor) {
     await actor.toggleStatusEffect(status, false);
   }
   // Restore all hit dice and mana dice
-  const ranksToUpdate = [];
+  const toUpdate = [];
   for (const rank of actor.ranks) {
-    ranksToUpdate.push({
+    toUpdate.push({
       _id: rank.id,
-      "system.hitDieSpent": false,
-      "system.manaDieSpent": false,
+      [rank.system.hpDie.path + ".spent"]: false,
+      [rank.system.mpDie.path + ".spent"]: false,
     });
   }
-  await actor.updateEmbeddedDocuments("Item", ranksToUpdate);
+  for (const species of actor.species) {
+    const speciesUpdates = { _id: species.id };
+    for (const hpDie of Object.values(species.system.hpDice)) {
+      speciesUpdates[hpDie.path + ".spent"] = false;
+    }
+    for (const mpDie of Object.values(species.system.mpDice)) {
+      speciesUpdates[mpDie.path + ".spent"] = false;
+    }
+    toUpdate.push(speciesUpdates);
+  }
+  await actor.updateEmbeddedDocuments("Item", toUpdate);
   ui.notifications.success(`Fully healed ${actor.name}.`);
 } else {
   ui.notifications.warn("No actor selected.");
