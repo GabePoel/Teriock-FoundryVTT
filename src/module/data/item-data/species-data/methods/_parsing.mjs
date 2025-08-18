@@ -16,14 +16,13 @@ export async function _parse(speciesData, rawHTML) {
   await speciesData.parent.deleteEmbeddedDocuments("ActiveEffect", toDelete);
 
   const doc = new DOMParser().parseFromString(rawHTML, "text/html");
+  doc
+    .querySelectorAll(".ability-bar-familiar-abilities")
+    .forEach((el) => el.remove());
 
-  const subs = Array.from(
-    doc.querySelectorAll(".ability-sub-container"),
-  ).filter((el) => !el.closest(".ability-sub-container:not(:scope)"));
-  const expandableSubs = Array.from(
-    doc.querySelectorAll(".expandable-container"),
-  ).filter((el) => !el.closest(".expandable-container:not(:scope)"));
-  subs.push(...expandableSubs);
+  const subs = Array.from(doc.querySelectorAll(".expandable-container")).filter(
+    (el) => !el.closest(".expandable-container:not(:scope)"),
+  );
 
   doc.querySelectorAll(".ability-sub-container").forEach((el) => el.remove());
   doc.querySelectorAll(".expandable-container").forEach((el) => el.remove());

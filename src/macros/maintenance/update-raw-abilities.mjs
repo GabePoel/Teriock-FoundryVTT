@@ -15,7 +15,6 @@ if (!rawAbilitiesFolder) {
   );
 }
 
-/** @type {object} */
 const progress = ui.notifications.info(`Pulling all abilities from wiki.`, {
   progress: true,
 });
