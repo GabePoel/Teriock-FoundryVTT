@@ -118,7 +118,6 @@ export default class TeriockActor extends BaseTeriockActor {
         (await copyItem("Foot", "equipment")).toObject(),
         (await copyItem("Hand", "equipment")).toObject(),
         (await copyItem("Mouth", "equipment")).toObject(),
-        (await copyItem("Human", "species")).toObject(),
         (await copyItem("Actor Mechanics", "essentials")).toObject(),
       ],
     });

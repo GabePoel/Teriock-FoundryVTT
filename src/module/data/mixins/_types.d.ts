@@ -1,15 +1,4 @@
-import type StatDieModel from "../shared/stat-die.mjs";
-
-export interface ChildDataInterface {
-  /** Forced Proficient */
-  proficient: boolean;
-  /** Forced Fluent */
-  fluent: boolean;
-  /** Font */
-  font: Teriock.Parameters.Shared.Font;
-  /** Description */
-  description: string;
-}
+import type StatDieModel from "../shared/stat-die-model.mjs";
 
 export interface StatDataInterface {
   /** HP Dice */

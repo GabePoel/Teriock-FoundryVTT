@@ -1,6 +1,6 @@
 import TeriockImageSheet from "../../applications/sheets/misc-sheets/image-sheet/image-sheet.mjs";
 import { makeIcon } from "../../helpers/utils.mjs";
-import { TextField } from "../shared/fields.mjs";
+import { TextField } from "./fields.mjs";
 
 const { fields } = foundry.data;
 const { TypeDataModel } = foundry.abstract;

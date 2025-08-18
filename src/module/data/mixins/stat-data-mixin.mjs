@@ -1,4 +1,4 @@
-import StatDieModel from "../shared/stat-die.mjs";
+import StatDieModel from "../shared/stat-die-model.mjs";
 
 const { fields } = foundry.data;
 

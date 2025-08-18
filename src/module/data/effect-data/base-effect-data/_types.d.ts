@@ -1,6 +1,6 @@
 import type { TeriockEffect } from "../../../documents/_module.mjs";
 import type { HierarchyField } from "../shared/shared-fields";
-import type { ChildDataInterface } from "../../mixins/_types";
+import type { ChildDataInterface } from "../../shared/_types";
 
 declare module "./base-effect-data.mjs" {
   /** Redundant extension is needed for intellisense. */

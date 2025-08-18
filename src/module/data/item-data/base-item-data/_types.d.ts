@@ -2,7 +2,7 @@ import type {
   TeriockEffect,
   TeriockItem,
 } from "../../../documents/_module.mjs";
-import type { ChildDataInterface } from "../../mixins/_types";
+import type { ChildDataInterface } from "../../shared/_types";
 
 declare module "./base-item-data.mjs" {
   /** Redundant extension is needed for intellisense. */

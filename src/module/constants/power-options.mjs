@@ -27,10 +27,6 @@ export const powerOptions = {
     name: "Pact",
     icon: "signature",
   },
-  species: {
-    name: "Species",
-    icon: "person-fairy",
-  },
   traits: {
     name: "Traits",
     icon: "ghost",

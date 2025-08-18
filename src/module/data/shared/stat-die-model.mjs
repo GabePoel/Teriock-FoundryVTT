@@ -61,6 +61,14 @@ export default class StatDieModel extends DataModel {
   }
 
   /**
+   * @inheritDoc
+   * @returns {TeriockBaseItemData}
+   */
+  get parent() {
+    return super.parent;
+  }
+
+  /**
    * This stat die's path within its parent document.
    * @returns {string}
    */
