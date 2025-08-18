@@ -1,4 +1,4 @@
-import { ChildDataModel } from "../../mixins/_module.mjs";
+import { ChildDataModel } from "../../shared/_module.mjs";
 
 const { fields } = foundry.data;
 

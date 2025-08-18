@@ -18,6 +18,7 @@ import { _defineSchema } from "./methods/schema/_schema.mjs";
  *
  * @extends {TeriockBaseEffectData}
  * @mixes ConsumableDataMixin
+ * @mixes WikiDataMixin
  */
 export default class TeriockAbilityData extends WikiDataMixin(
   ConsumableDataMixin(TeriockBaseEffectData),

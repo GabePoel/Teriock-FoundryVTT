@@ -5,7 +5,6 @@ import { smartEvaluateSync } from "../../helpers/utils.mjs";
  * Adds quantity management, automatic consumption, and quantity validation capabilities.
  *
  * @param {typeof ChildDataModel} Base - The base class to mix in with.
- * @returns {typeof ConsumableDataMixin & Base}
  */
 export default (Base) => {
   return class ConsumableDataMixin extends Base {

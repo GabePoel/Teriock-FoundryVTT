@@ -91,8 +91,8 @@ export default class TeriockActor extends BaseTeriockActor {
   }
 
   /**
-   * Gets the valid effects for this actor.
-   * @returns {TeriockEffect[]} Array of transferred effects.
+   * @inheritDoc
+   * @returns {TeriockEffect[]}
    */
   get validEffects() {
     return Array.from(this.allApplicableEffects());

@@ -1,6 +1,6 @@
 import { conditions } from "../../../constants/generated/conditions.mjs";
 import { makeIcon } from "../../../helpers/utils.mjs";
-import { ChildDataModel } from "../../mixins/_module.mjs";
+import { ChildDataModel } from "../../shared/_module.mjs";
 import { comparatorField } from "../shared/shared-fields.mjs";
 import { _expire, _shouldExpire } from "./methods/_expiration.mjs";
 

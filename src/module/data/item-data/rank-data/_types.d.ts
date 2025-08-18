@@ -6,8 +6,6 @@ declare module "./rank-data.mjs" {
   export default interface TeriockRankData
     extends TeriockBaseItemData,
       StatDataInterface {
-    get parent(): typeof TeriockRank;
-
     /** Flaws */
     flaws: string;
     /** Rank Class Archetype */
@@ -18,5 +16,7 @@ declare module "./rank-data.mjs" {
     classRank: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
     /** Max Armor Value */
     maxAv: 0 | 1 | 2 | 3 | 4;
+
+    get parent(): typeof TeriockRank;
   }
 }

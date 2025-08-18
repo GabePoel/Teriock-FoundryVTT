@@ -20,6 +20,7 @@ import * as schema from "./methods/_schema.mjs";
  *
  * @extends {TeriockBaseItemData}
  * @mixes ConsumableDataMixin
+ * @mixes WikiDataMixin
  */
 export default class TeriockEquipmentData extends WikiDataMixin(
   ConsumableDataMixin(TeriockBaseItemData),

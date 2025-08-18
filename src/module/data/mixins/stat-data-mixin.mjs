@@ -5,7 +5,6 @@ const { fields } = foundry.data;
 /**
  * Mixin that provides stat functionality.
  * @param {typeof ChildDataModel} Base
- * @returns {typeof StatDataMixin & Base}
  */
 export default (Base) => {
   return class StatDataMixin extends Base {

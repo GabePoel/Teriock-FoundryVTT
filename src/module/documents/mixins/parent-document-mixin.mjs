@@ -3,8 +3,9 @@ import { toCamelCase } from "../../helpers/utils.mjs";
 /**
  * Builds effect types and keys from a document's valid effects.
  *
- * @param {ParentDocument} document - The document to build effect types for.
- * @returns {BuiltEffectTypes} Each {@link TeriockEffect} this contains, keyed by type, in multiple formats.
+ * @param {ParentDocumentMixin} document - The document to build effect types for.
+ * @returns {Teriock.Parent.BuiltEffectTypes} Each {@link TeriockEffect} this contains, keyed by type, in multiple
+ *   formats.
  */
 function _buildEffectTypes(document) {
   /** @type ParentEffectTypes */
@@ -77,7 +78,7 @@ export default (Base) => {
     /**
      * Gets the list of all {@link TeriockEffect} documents that apply to this document.
      * This includes those that are not currently active.
-     * @returns {BuiltEffectTypes}
+     * @returns {Teriock.Parent.BuiltEffectTypes}
      */
     buildEffectTypes() {
       return _buildEffectTypes(this);

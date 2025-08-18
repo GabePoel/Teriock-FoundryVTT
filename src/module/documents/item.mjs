@@ -18,8 +18,8 @@ export default class TeriockItem extends BaseTeriockItem {
   }
 
   /**
-   * Gets the valid effects for this item.
-   * @returns {TeriockEffect[]} Array of transferred effects.
+   * @inheritDoc
+   * @returns {TeriockEffect[]}
    */
   get validEffects() {
     return this.transferredEffects;

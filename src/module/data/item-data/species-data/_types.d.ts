@@ -6,8 +6,6 @@ declare module "./species-data.mjs" {
   export default interface TeriockSpeciesData
     extends TeriockBaseItemData,
       StatDataInterface {
-    get parent(): typeof TeriockSpecies;
-
     appearance: string;
     size: {
       min: number;
@@ -23,5 +21,7 @@ declare module "./species-data.mjs" {
     /** Apply this size to parent {@link TeriockActor}. */
     applySize: boolean;
     traits: Set<Teriock.Parameters.Species.Trait>;
+
+    get parent(): typeof TeriockSpecies;
   }
 }

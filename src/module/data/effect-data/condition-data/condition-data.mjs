@@ -13,6 +13,7 @@ const { fields } = foundry.data;
  * - [Conditions](https://wiki.teriock.com/index.php/Category:Conditions)
  *
  * @extends {TeriockBaseEffectData}
+ * @mixes WikiDataMixin
  */
 export default class TeriockConditionData extends WikiDataMixin(
   TeriockBaseEffectData,

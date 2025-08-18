@@ -2,7 +2,6 @@
  * Mixing for common functions used across document classes.
  *
  * @param {ClientDocument} Base
- * @returns {{new(): CommonDocumentMixin, prototype: CommonDocumentMixin}}
  * @mixin
  */
 export default (Base) => {

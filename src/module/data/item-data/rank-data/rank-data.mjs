@@ -119,17 +119,17 @@ export default class TeriockRankData extends StatDataMixin(
     return Object.values(this.hpDice)[0];
   }
 
+  /** @inheritDoc */
+  get messageParts() {
+    return { ...super.messageParts, ..._messageParts(this) };
+  }
+
   /**
    * The singular mana die.
    * @returns {StatDieModel}
    */
   get mpDie() {
     return Object.values(this.mpDice)[0];
-  }
-
-  /** @inheritDoc */
-  get messageParts() {
-    return { ...super.messageParts, ..._messageParts(this) };
   }
 
   /** @inheritDoc */

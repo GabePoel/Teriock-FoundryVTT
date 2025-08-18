@@ -26,8 +26,8 @@ const { WorldCollection } = foundry.documents.abstract;
  * This class is a hack to get {@link Actor} intellisense without warnings for unimplemented methods.
  *
  * @extends {Actor}
- * @mixes CommonDocument
- * @mixes ParentDocument
+ * @mixes CommonDocumentMixin
+ * @mixes ParentDocumentMixin
  * @implements {ActorData}
  * @property {EmbeddedCollection<string, TeriockItem>} items
  * @property {EmbeddedCollection<string, TeriockEffect>} effects
@@ -51,9 +51,9 @@ export class BaseTeriockActor extends ParentDocumentMixin(
  * This class is a hack to get {@link Item} intellisense without warnings for unimplemented methods.
  *
  * @extends {Item}
- * @mixes ChildDocument
- * @mixes CommonDocument
- * @mixes ParentDocument
+ * @mixes ChildDocumentMixin
+ * @mixes CommonDocumentMixin
+ * @mixes ParentDocumentMixin
  * @implements {ItemData}
  * @property {TeriockActor|null} actor
  * @property {EmbeddedCollection<string, TeriockEffect>} effects
@@ -72,8 +72,8 @@ export class BaseTeriockItem extends ParentDocumentMixin(
  * This class is a hack to get {@link ActiveEffect} intellisense without warnings for unimplemented methods.
  *
  * @extends {ActiveEffect}
- * @mixes CommonDocument
- * @mixes ChildDocument
+ * @mixes CommonDocumentMixin
+ * @mixes ChildDocumentMixin
  * @implements {ActiveEffectData}
  * @property {TeriockBaseEffectData} system
  * @property {Teriock.Documents.EffectType} type

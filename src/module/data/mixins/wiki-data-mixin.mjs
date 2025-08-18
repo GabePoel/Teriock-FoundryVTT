@@ -5,7 +5,6 @@ import { fetchWikiPageHTML, openWikiPage } from "../../helpers/wiki/_module.mjs"
  * Adds wiki page fetching, parsing, and opening capabilities.
  *
  * @param {typeof ChildDataModel} Base - The base class to mix in with.
- * @returns {typeof WikiDataMixin & Base}
  */
 export default (Base) => {
   return class WikiDataMixin extends Base {

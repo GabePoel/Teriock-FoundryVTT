@@ -12,6 +12,7 @@ const { fields } = foundry.data;
  * - [Tradecraft Fluencies](https://wiki.teriock.com/index.php/Core:Tradecraft_Fluencies)
  *
  * @extends {TeriockBaseEffectData}
+ * @mixes WikiDataMixin
  */
 export default class TeriockFluencyData extends WikiDataMixin(
   TeriockBaseEffectData,
