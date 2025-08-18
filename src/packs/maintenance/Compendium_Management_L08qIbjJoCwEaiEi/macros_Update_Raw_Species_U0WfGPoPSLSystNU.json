@@ -1,0 +1,28 @@
+{
+  "folder": "L08qIbjJoCwEaiEi",
+  "name": "Update Raw Species",
+  "type": "script",
+  "_id": "U0WfGPoPSLSystNU",
+  "author": "qf5JYGZKzM588nE6",
+  "img": "systems/teriock/assets/species.svg",
+  "scope": "global",
+  "command": "const speciesPack = game.teriock.packs.species();\nconst speciesFolders = speciesPack.folders;\n\nconst allSpeciesFolderName = \"All Species\";\nlet allSpeciesFolder = speciesFolders.getName(allSpeciesFolderName);\nif (!allSpeciesFolder) {\n  await Folder.create(\n    {\n      name: allSpeciesFolderName,\n      type: \"Item\",\n    },\n    {\n      pack: \"teriock.species\",\n    },\n  );\n}\n\nconst progress = ui.notifications.info(\"Pulling all creatures from wiki.\", {\n  progress: true,\n});\nlet pct = 0;\n\nlet allSpeciesPages =\n  await game.teriock.api.wiki.fetchCategoryMembers(\"Creatures\");\nallSpeciesPages = allSpeciesPages.filter((page) =>\n  page.title.includes(\"Creature:\"),\n);\nfor (const speciesPage of allSpeciesPages) {\n  const speciesName = speciesPage.title.split(\"Creature:\")[1];\n\n  pct += 1 / allSpeciesPages.length;\n  progress.update({ pct: pct, message: `Pulling ${speciesName} from wiki.` });\n\n  let speciesItem = speciesPack.index.find((e) => e.name === speciesName);\n  if (!speciesItem) {\n    speciesItem = await game.teriock.Item.create(\n      {\n        name: speciesName,\n        type: \"species\",\n        folder: allSpeciesFolder.id,\n      },\n      { pack: \"teriock.species\" },\n    );\n  } else {\n    speciesItem = await foundry.utils.fromUuid(speciesItem.uuid);\n  }\n  console.log(speciesItem);\n  await speciesItem.system.wikiPull({ notify: false });\n}",
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "qf5JYGZKzM588nE6": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null,
+    "coreVersion": "13.345",
+    "systemId": "teriock",
+    "systemVersion": "0.1.0",
+    "createdTime": 1755506076847,
+    "modifiedTime": 1755506341561,
+    "lastModifiedBy": "qf5JYGZKzM588nE6"
+  },
+  "_key": "!macros!U0WfGPoPSLSystNU"
+}
