@@ -26,7 +26,7 @@ function _buildEffectTypes(document) {
 /**
  * Mixin for common functions used across document classes that embed children.
  *
- * @param {typeof CommonDocumentMixin} Base
+ * @param {CommonDocumentMixin} Base
  * @mixin
  */
 export default (Base) => {

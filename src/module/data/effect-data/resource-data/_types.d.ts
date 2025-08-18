@@ -19,6 +19,6 @@ declare module "./resource-data.mjs" {
     /** Function Hook */
     functionHook: Teriock.Parameters.Resource.FunctionHook;
 
-    get parent(): typeof TeriockResource;
+    get parent(): TeriockResource;
   }
 }

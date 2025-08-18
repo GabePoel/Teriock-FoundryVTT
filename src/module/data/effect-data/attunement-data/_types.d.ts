@@ -15,6 +15,6 @@ declare module "./attunement-data.mjs" {
     /** Presence tier of the target entity */
     tier: number;
 
-    get parent(): typeof TeriockAttunement;
+    get parent(): TeriockAttunement;
   }
 }

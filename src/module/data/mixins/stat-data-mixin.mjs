@@ -1,3 +1,4 @@
+import { TeriockRoll } from "../../documents/_module.mjs";
 import StatDieModel from "../shared/stat-die-model.mjs";
 
 const { fields } = foundry.data;
@@ -92,7 +93,7 @@ export default (Base) => {
     }
 
     /**
-     * Set the amount of stat dice.
+     * Set the stat dice.
      * @param {Teriock.Parameters.Shared.DieStat} stat
      * @param {number} number
      * @param {Teriock.RollOptions.PolyhedralDieFaces} faces
@@ -122,6 +123,19 @@ export default (Base) => {
         }
       }
       await this.parent.update(updateData);
+    }
+
+    /**
+     * Set the stat dice from a formula.
+     * @param {Teriock.Parameters.Shared.DieStat} stat
+     * @param {string} formula
+     * @returns {Promise<void>}
+     */
+    async setDiceFormula(stat, formula) {
+      const roll = new TeriockRoll(formula);
+      if (roll.dice.length === 0) return;
+      const die = roll.dice[0];
+      await this.setDice(stat, die.number, die.faces);
     }
   };
 };

@@ -43,15 +43,7 @@ export async function _parse(rankData, rawHTML) {
   const { className, classRank, archetype } = rankData;
   const classValue =
     CONFIG.TERIOCK.rankOptions[archetype].classes[className].name;
-  const toDelete = [];
-
-  // Remove existing abilities
-  for (const effect of rankData.parent.transferredEffects.filter(
-    (e) => e.type === "ability",
-  )) {
-    toDelete.push(effect._id);
-  }
-
+  const toDelete = rankData.parent.abilities.map((a) => a.id);
   await rankData.parent.deleteEmbeddedDocuments("ActiveEffect", toDelete);
 
   const doc = new DOMParser().parseFromString(rawHTML, "text/html");

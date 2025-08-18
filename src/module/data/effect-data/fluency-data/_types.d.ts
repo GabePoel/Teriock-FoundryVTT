@@ -8,6 +8,6 @@ declare module "./fluency-data.mjs" {
     /** Tradecraft */
     tradecraft: Teriock.Parameters.Fluency.Tradecraft;
 
-    get parent(): typeof TeriockFluency;
+    get parent(): TeriockFluency;
   }
 }

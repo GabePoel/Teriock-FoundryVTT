@@ -22,6 +22,6 @@ declare module "./species-data.mjs" {
     applySize: boolean;
     traits: Set<Teriock.Parameters.Species.Trait>;
 
-    get parent(): typeof TeriockSpecies;
+    get parent(): TeriockSpecies;
   }
 }

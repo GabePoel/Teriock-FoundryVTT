@@ -5,6 +5,7 @@ import { StatDataMixin, WikiDataMixin } from "../../mixins/_module.mjs";
 import { TextField } from "../../shared/fields.mjs";
 import TeriockBaseItemData from "../base-item-data/base-item-data.mjs";
 import { _messageParts } from "./methods/_messages.mjs";
+import { _parse } from "./methods/_parsing.mjs";
 
 const { fields } = foundry.data;
 
@@ -15,6 +16,8 @@ const { fields } = foundry.data;
  * - [Creatures](https://wiki.teriock.com/index.php/Category:Creatures)
  *
  * @extends {TeriockBaseItemData}
+ * @mixes StatDataMixin
+ * @mixes WikiDataMixin
  */
 export default class TeriockSpeciesData extends StatDataMixin(
   WikiDataMixin(TeriockBaseItemData),
@@ -25,7 +28,7 @@ export default class TeriockSpeciesData extends StatDataMixin(
    */
   static metadata = Object.freeze({
     consumable: false,
-    namespace: "Species",
+    namespace: "Creature",
     pageNameKey: "name",
     type: "species",
     usable: false,
@@ -148,6 +151,11 @@ export default class TeriockSpeciesData extends StatDataMixin(
       ],
     });
     return super._preCreate(data, options, user);
+  }
+
+  /** @inheritDoc */
+  async parse(rawHTML) {
+    return await _parse(this, rawHTML);
   }
 
   /**

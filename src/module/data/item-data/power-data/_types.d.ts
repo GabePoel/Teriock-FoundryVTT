@@ -1,4 +1,4 @@
-import TeriockBaseItemData from "../base-item-data/base-item-data.mjs";
+import type TeriockBaseItemData from "../base-item-data/base-item-data.mjs";
 import type { TeriockPower } from "../../../documents/_documents.mjs";
 
 declare module "./power-data.mjs" {
@@ -15,6 +15,6 @@ declare module "./power-data.mjs" {
     adult: number;
 
     /** Parent */
-    get parent(): typeof TeriockPower;
+    get parent(): TeriockPower;
   }
 }

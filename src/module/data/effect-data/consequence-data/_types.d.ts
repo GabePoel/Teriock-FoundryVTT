@@ -42,6 +42,6 @@ declare module "./consequence-data.mjs" {
     sourceDescription: string;
     hierarchy: HierarchyField;
 
-    get parent(): typeof TeriockConsequence;
+    get parent(): TeriockConsequence;
   }
 }

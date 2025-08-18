@@ -17,6 +17,6 @@ declare module "./rank-data.mjs" {
     /** Max Armor Value */
     maxAv: 0 | 1 | 2 | 3 | 4;
 
-    get parent(): typeof TeriockRank;
+    get parent(): TeriockRank;
   }
 }

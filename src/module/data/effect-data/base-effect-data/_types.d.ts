@@ -3,7 +3,7 @@ import type { HierarchyField } from "../shared/shared-fields";
 import type { ChildDataInterface } from "../../shared/_types";
 
 declare module "./base-effect-data.mjs" {
-  /** Redundant extension is needed for intellisense. */
+  // @ts-ignore
   export default interface TeriockBaseEffectData extends ChildDataInterface {
     /** If this effect should be deleted instead of disabled when it expires */
     deleteOnExpire: boolean;
@@ -24,6 +24,6 @@ declare module "./base-effect-data.mjs" {
     hierarchy: Partial<HierarchyField>;
 
     /** Parent effect */
-    get parent(): typeof TeriockEffect;
+    get parent(): TeriockEffect;
   }
 }

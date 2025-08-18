@@ -8,6 +8,6 @@ declare module "./property-data.mjs" {
     /** Damage Type */
     damageType: string;
 
-    get parent(): typeof TeriockProperty;
+    get parent(): TeriockProperty;
   }
 }

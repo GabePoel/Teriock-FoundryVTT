@@ -5,7 +5,7 @@ const { ux } = foundry.applications;
 /**
  * Mixin for common functions used across document classes embedded in actorsUuids.
  *
- * @param {CommonDocument} Base
+ * @param {CommonDocumentMixin} Base
  * @mixin
  */
 export default (Base) => {

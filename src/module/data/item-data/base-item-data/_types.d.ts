@@ -5,7 +5,7 @@ import type {
 import type { ChildDataInterface } from "../../shared/_types";
 
 declare module "./base-item-data.mjs" {
-  /** Redundant extension is needed for intellisense. */
+  // @ts-ignore
   export default interface TeriockBaseItemData extends ChildDataInterface {
     /** Update counter - used to force an update when adding/removing effects */
     updateCounter: boolean;
@@ -13,6 +13,6 @@ declare module "./base-item-data.mjs" {
     onUse: Set<Teriock.ID<TeriockEffect>>;
 
     /** Parent {@link TeriockItem} */
-    get parent(): typeof TeriockItem;
+    get parent(): TeriockItem;
   }
 }

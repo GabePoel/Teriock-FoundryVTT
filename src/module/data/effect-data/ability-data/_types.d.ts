@@ -10,6 +10,6 @@ declare module "./ability-data.mjs" {
       TeriockAbilityConsequenceSchema,
       TeriockBaseEffectData,
       ConsumableInterface {
-    get parent(): typeof TeriockAbility;
+    get parent(): TeriockAbility;
   }
 }

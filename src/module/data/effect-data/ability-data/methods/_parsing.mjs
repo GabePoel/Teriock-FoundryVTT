@@ -1,7 +1,9 @@
 import { abilityOptions } from "../../../../constants/ability-options.mjs";
-import { cleanFeet } from "../../../../helpers/clean.mjs";
-import { createAbility } from "../../../../helpers/create-effects.mjs";
 import { safeUuid } from "../../../../helpers/utils.mjs";
+import { extractChangesFromHTML } from "../../../shared/parsing/extract-changes.mjs";
+import { getBarText, getText } from "../../../shared/parsing/get-text.mjs";
+import { processSubAbilities } from "../../../shared/parsing/process-subs.mjs";
+import { buildTagTree } from "../../../shared/parsing/tag-tree.mjs";
 import { imageOverrides } from "./_image-overrides.mjs";
 
 /**
@@ -166,70 +168,6 @@ export async function _parse(abilityData, rawHTML) {
   delete parameters.results.endCondition;
 
   return { changes, system: parameters, img };
-}
-
-/**
- * Builds a tag tree from tag containers in the document.
- * Extracts and organizes tags from CSS classes for processing.
- * @param {Document} doc - The parsed HTML document.
- * @returns {object} Object containing organized tags by type.
- * @private
- */
-function buildTagTree(doc) {
-  const tagTree = {};
-  doc.querySelectorAll(".tag-container").forEach((el) => {
-    const tags = Array.from(el.classList)
-      .filter((cls) => cls.endsWith("-tagged"))
-      .map((cls) => cls.replace("-tagged", ""));
-    if (tags.length) {
-      if (tags.length === 1) tagTree[tags[0]] = true;
-      else {
-        tagTree[tags[0]] = tagTree[tags[0]] || [];
-        tagTree[tags[0]].push(...tags.slice(1));
-      }
-    }
-  });
-  return tagTree;
-}
-
-/**
- * Helper function to get bar text content from ability bars.
- * Optionally cleans and formats the text for display.
- * @param {Document} doc - The parsed HTML document.
- * @param {string} selector - The selector for the bar content.
- * @param {boolean} clean - Whether to clean and format the text.
- * @returns {string|null} The bar text content or null if not found.
- * @private
- */
-function getBarText(doc, selector, clean = false) {
-  const el = doc.querySelector(`.ability-bar-${selector} .ability-bar-content`);
-  el?.querySelectorAll(".ability-bar").forEach((el2) => el2.remove());
-  let text = el?.innerHTML || null;
-  if (text && clean) {
-    const tempDiv = document.createElement("div");
-    tempDiv.innerHTML = text;
-    tempDiv
-      .querySelectorAll("span")
-      .forEach((span) => span.replaceWith(document.createTextNode(" ")));
-    text = tempDiv.innerHTML
-      .trim()
-      .replace(/\.$/, "")
-      .replace(/\./g, ",")
-      .replace(/\b\w/g, (c) => c.toUpperCase());
-    text = cleanFeet(text).trim();
-  }
-  return text;
-}
-
-/**
- * Helper function to get text content from elements.
- * @param {Document} doc - The parsed HTML document.
- * @param {string} selector - The CSS selector for the element.
- * @returns {string|null} The text content or null if not found.
- * @private
- */
-function getText(doc, selector) {
-  return doc.querySelector(`.${selector}`)?.innerHTML || null;
 }
 
 /**
@@ -665,37 +603,6 @@ function extractTradecraftChecksFromHTML(html) {
 }
 
 /**
- * Extracts changes from HTML content.
- * Finds change metadata elements and extracts their key, mode, value, and priority.
- * @param {string} html - The HTML content to extract changes from.
- * @returns {Array} Array of change objects with a key, mode, value, and priority.
- * @private
- */
-function extractChangesFromHTML(html) {
-  const tempDiv = document.createElement("div");
-  tempDiv.innerHTML = html || "";
-  const changes = [];
-  tempDiv
-    .querySelectorAll("span.metadata[data-type='change']")
-    .forEach((el) => {
-      if (!(el instanceof HTMLElement)) return [];
-      const key = el.dataset.key;
-      const mode = el.dataset.mode;
-      const value = el.dataset.value;
-      const priority = el.dataset.priority;
-      if (key && mode !== undefined && value !== undefined) {
-        changes.push({
-          key,
-          mode: parseInt(mode, 10),
-          value: value === "true" ? true : value === "false" ? false : value,
-          priority: priority ? parseInt(priority, 10) : 20,
-        });
-      }
-    });
-  return changes;
-}
-
-/**
  * Extracts standard damage from HTML content.
  * @param {string} html - The HTML content to extract standard damage from.
  * @returns {boolean} - Whether standard damage is dealt.
@@ -1049,54 +956,3 @@ function selectImage(parameters) {
   return img;
 }
 
-/**
- * Processes sub-abilities from the document.
- * Creates sub-abilities and applies limitations or improvements as needed.
- * @param {Array} subs - Array of subability container elements.
- * @param {TeriockAbilityData} abilityData - The parent ability data.
- * @returns {Promise<void>} Promise that resolves when all sub-abilities are processed.
- * @private
- */
-async function processSubAbilities(subs, abilityData) {
-  for (const el of subs) {
-    let subNameEl = el.querySelector(".ability-sub-name");
-    if (el.className === "expandable-container") subNameEl = el;
-    const namespace = subNameEl?.getAttribute("data-namespace");
-    if (namespace === "Ability") {
-      const subName = subNameEl.getAttribute("data-name");
-      const subAbility = await createAbility(abilityData.parent, subName, {
-        notify: false,
-      });
-
-      const limitation = el.querySelector(".limited-modifier");
-      const improvement = el.querySelector(".improvement-modifier");
-      let limitationText = "";
-      let improvementText = "";
-      let newName = subName;
-
-      if (improvement) {
-        newName = "Improved " + subName;
-        const improvementSpan = improvement.querySelector(".improvement-text");
-        if (improvementSpan) {
-          improvementText = improvementSpan.textContent.trim();
-        }
-      }
-
-      if (limitation) {
-        newName = "Limited " + newName;
-        const limitationSpan = limitation.querySelector(".limitation-text");
-        if (limitationSpan) {
-          limitationText = limitationSpan.textContent.trim();
-        }
-      }
-
-      if (limitationText || improvementText) {
-        await subAbility.update({
-          name: newName,
-          "system.improvement": improvementText,
-          "system.limitation": limitationText,
-        });
-      }
-    }
-  }
-}

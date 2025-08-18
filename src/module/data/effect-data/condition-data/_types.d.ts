@@ -10,6 +10,6 @@ declare module "./condition-data.mjs" {
       description?: string;
     };
 
-    get parent(): typeof TeriockCondition;
+    get parent(): TeriockCondition;
   }
 }

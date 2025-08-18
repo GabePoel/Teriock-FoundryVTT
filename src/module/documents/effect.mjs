@@ -265,7 +265,7 @@ export default class TeriockEffect extends BaseTeriockEffect {
    */
   get rootSubIds() {
     if (this.metadata.hierarchy && this.system.hierarchy.subIds.size > 0) {
-      const root = foundry.utils.fromUuidSync(this.system.hierarchy.rootUuid);
+      const root = fromUuidSync(this.system.hierarchy.rootUuid);
       return this.system.hierarchy.subIds.filter((id) => root.effects.has(id));
     }
     return new Set();
@@ -279,7 +279,7 @@ export default class TeriockEffect extends BaseTeriockEffect {
     /** @type {TeriockEffect[]} */
     const subEffects = [];
     for (const id of this.rootSubIds) {
-      const root = foundry.utils.fromUuidSync(this.system.hierarchy.rootUuid);
+      const root = fromUuidSync(this.system.hierarchy.rootUuid);
       subEffects.push(root.effects.get(id));
     }
     return subEffects;
