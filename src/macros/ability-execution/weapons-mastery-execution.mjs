@@ -1,5 +1,5 @@
 const ability = scope.abilityData.parent;
-const equipmentClass = await game.teriock.api.dialog.selectWeaponClass();
+const equipmentClass = await game.teriock.api.dialogs.selectWeaponClassDialog();
 const changes = [
   {
     key: `system.equipmentChanges.overrides.classes.${equipmentClass}.av0`,

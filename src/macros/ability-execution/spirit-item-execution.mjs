@@ -4,7 +4,7 @@ let spiritItem = actor?.itemTypes?.equipment?.find(
 
 // Create a spirit item if one doesn't already exist
 if (!spiritItem) {
-  const equipmentType = await game.teriock.api.dialog.selectEquipmentType();
+  const equipmentType = await game.teriock.api.dialogs.selectEquipmentTypeDialog();
   let spiritItems;
   if (equipmentType in CONFIG.TERIOCK.equipmentOptions.equipmentType) {
     const equipmentTypeName =

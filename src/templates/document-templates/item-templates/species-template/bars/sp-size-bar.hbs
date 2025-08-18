@@ -1,5 +1,23 @@
-{{#if (or (exists system.size.min) (exists system.size.max))}}
-  <div class="ab-bar">
+<div class="ab-bar">
+  <div class="ab-box-container">
+    <div class="ab-box" data-tooltip="Size">
+      <div class="ab-box-icon">
+        <i class="fa-fw fa-light fa-child-reaching"></i>
+      </div>
+      <div class="ab-box-content">
+        <div class="ability-bar-input unselected">
+          Size {{system.size.value}}
+        </div>
+        {{formInput
+          systemFields.size.fields.value
+          value=system.size.value
+          disabled=(not editable)
+          classes="ability-bar-input selected"
+        }}
+      </div>
+    </div>
+  </div>
+  {{#if (and (exists system.size.min) (exists system.size.max))}}
     <div class="ab-box-container">
       <div class="ab-box" data-tooltip="Minimum Size">
         <div class="ab-box-icon">
@@ -36,5 +54,5 @@
         </div>
       </div>
     </div>
-  </div>
-{{/if}}
+  {{/if}}
+</div>

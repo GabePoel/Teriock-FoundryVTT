@@ -1,7 +1,7 @@
 import {
-  ChildDocument,
-  CommonDocument,
-  ParentDocument,
+  ChildDocumentMixin,
+  CommonDocumentMixin,
+  ParentDocumentMixin,
 } from "./mixins/_module.mjs";
 
 const {
@@ -43,7 +43,9 @@ const { WorldCollection } = foundry.documents.abstract;
  * @property {boolean} isOwner
  * @property {Teriock.UUID<TeriockActor>} uuid
  */
-export class BaseTeriockActor extends ParentDocument(CommonDocument(Actor)) {}
+export class BaseTeriockActor extends ParentDocumentMixin(
+  CommonDocumentMixin(Actor),
+) {}
 
 /**
  * This class is a hack to get {@link Item} intellisense without warnings for unimplemented methods.
@@ -62,8 +64,8 @@ export class BaseTeriockActor extends ParentDocument(CommonDocument(Actor)) {}
  * @property {boolean} isOwner
  * @property {Teriock.UUID<TeriockItem>} uuid
  */
-export class BaseTeriockItem extends ParentDocument(
-  ChildDocument(CommonDocument(Item)),
+export class BaseTeriockItem extends ParentDocumentMixin(
+  ChildDocumentMixin(CommonDocumentMixin(Item)),
 ) {}
 
 /**
@@ -79,8 +81,8 @@ export class BaseTeriockItem extends ParentDocument(
  * @property {boolean} isOwner
  * @property {Teriock.UUID<TeriockEffect>} uuid
  */
-export class BaseTeriockEffect extends ChildDocument(
-  CommonDocument(ActiveEffect),
+export class BaseTeriockEffect extends ChildDocumentMixin(
+  CommonDocumentMixin(ActiveEffect),
 ) {}
 
 /**

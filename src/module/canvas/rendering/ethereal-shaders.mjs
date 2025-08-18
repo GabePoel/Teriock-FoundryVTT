@@ -1,9 +1,16 @@
-const { shaders } = foundry.canvas.rendering;
+const { BackgroundVisionShader, ColorationVisionShader } =
+  foundry.canvas.rendering.shaders;
 
 /**
  * Simple spooky background vision shader
  */
-export class EtherealBackgroundVisionShader extends shaders.BackgroundVisionShader {
+export class EtherealBackgroundVisionShader extends BackgroundVisionShader {
+  /** @inheritdoc */
+  static defaultUniforms = {
+    ...super.defaultUniforms,
+    colorTint: [0.5, 0.6, 0.8], // Spooky blue tint
+  };
+
   /** @inheritdoc */
   static fragmentShader = `
   ${this.SHADER_HEADER}
@@ -40,12 +47,6 @@ export class EtherealBackgroundVisionShader extends shaders.BackgroundVisionShad
   }`;
 
   /** @inheritdoc */
-  static defaultUniforms = {
-    ...super.defaultUniforms,
-    colorTint: [0.5, 0.6, 0.8], // Spooky blue tint
-  };
-
-  /** @inheritdoc */
   get isRequired() {
     return true;
   }
@@ -54,7 +55,13 @@ export class EtherealBackgroundVisionShader extends shaders.BackgroundVisionShad
 /**
  * Simple spooky coloration vision shader
  */
-export class EtherealColorationVisionShader extends shaders.ColorationVisionShader {
+export class EtherealColorationVisionShader extends ColorationVisionShader {
+  /** @inheritdoc */
+  static defaultUniforms = {
+    ...super.defaultUniforms,
+    colorEffect: [0.4, 0.5, 0.8], // Ghostly blue
+  };
+
   /** @inheritdoc */
   static fragmentShader = `
   ${this.SHADER_HEADER}
@@ -88,12 +95,6 @@ export class EtherealColorationVisionShader extends shaders.ColorationVisionShad
     ${this.FALLOFF}
     ${this.FRAGMENT_END}
   }`;
-
-  /** @inheritdoc */
-  static defaultUniforms = {
-    ...super.defaultUniforms,
-    colorEffect: [0.4, 0.5, 0.8], // Ghostly blue
-  };
 
   /** @inheritdoc */
   get isRequired() {

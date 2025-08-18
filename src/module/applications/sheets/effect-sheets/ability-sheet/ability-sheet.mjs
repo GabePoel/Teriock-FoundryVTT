@@ -1,8 +1,7 @@
-import { documentOptions } from "../../../../helpers/constants/document-options.mjs";
-import { pseudoHooks } from "../../../../helpers/constants/pseudo-hooks.mjs";
+import { documentOptions } from "../../../../constants/document-options.mjs";
+import { pseudoHooks } from "../../../../constants/pseudo-hooks.mjs";
 import { pureUuid, safeUuid } from "../../../../helpers/utils.mjs";
-import durationDialog from "../../../dialogs/duration-dialog.mjs";
-import { selectDialog } from "../../../dialogs/select-dialog.mjs";
+import { durationDialog, selectDialog } from "../../../dialogs/_module.mjs";
 import TeriockBaseEffectSheet from "../base-effect-sheet/base-effect-sheet.mjs";
 import { contextMenus } from "./connections/_context-menus.mjs";
 
@@ -14,6 +13,17 @@ import { contextMenus } from "./connections/_context-menus.mjs";
  * @property {TeriockAbility} document
  */
 export default class TeriockAbilitySheet extends TeriockBaseEffectSheet {
+  /**
+   * Creates a new ability sheet instance.
+   * Initializes tab state for overview and consequences.
+   * @param {...any} args - Arguments to pass to the parent constructor.
+   */
+  constructor(...args) {
+    super(...args);
+    this._tab = "overview";
+    this._consequenceTab = "base";
+  }
+
   /** @inheritDoc */
   static DEFAULT_OPTIONS = {
     classes: ["ability"],
@@ -28,10 +38,8 @@ export default class TeriockAbilitySheet extends TeriockBaseEffectSheet {
       icon: `fa-solid fa-${documentOptions.ability.icon}`,
     },
   };
-
   /**
    * Template parts configuration for the ability sheet.
-   *
    * @type {object}
    * @static
    */
@@ -50,59 +58,7 @@ export default class TeriockAbilitySheet extends TeriockBaseEffectSheet {
   };
 
   /**
-   * Creates a new ability sheet instance.
-   * Initializes tab state for overview and consequences.
-   *
-   * @param {...any} args - Arguments to pass to the parent constructor.
-   */
-  constructor(...args) {
-    super(...args);
-    this._tab = "overview";
-    this._consequenceTab = "base";
-  }
-
-  /**
-   * Toggles between overview and consequence tabs.
-   *
-   * @returns {Promise<void>} Promise that resolves when tab is toggled.
-   * @static
-   */
-  static async _toggleConsequences() {
-    this._tab = this._tab === "consequences" ? "overview" : "consequences";
-    this.render();
-  }
-
-  /**
-   * Switches to a specific consequence tab.
-   *
-   * @param {Event} _event - The event object.
-   * @param {HTMLElement} target - The target element.
-   * @returns {Promise<void>} Promise that resolves when tab is switched.
-   * @static
-   */
-  static async _consequenceTab(_event, target) {
-    this._consequenceTab = target.dataset.tab;
-    this.render();
-  }
-
-  /**
-   * Disconnects the given macro from this ability.
-   *
-   * @param {Event} _event - The event object.
-   * @param {HTMLElement} target - The target element.
-   * @returns {Promise<void>}
-   * @private
-   */
-  static async _unlinkMacro(_event, target) {
-    const uuid = target.dataset.parentId;
-    const updateData = {};
-    updateData[`system.applies.macros.-=${safeUuid(uuid)}`] = null;
-    await this.document.update(updateData);
-  }
-
-  /**
    * Change the run pseudo-hook for a given macro
-   *
    * @param {Event} _event - The event object.
    * @param {HTMLElement} target - The target element.
    * @returns {Promise<void>}
@@ -122,8 +78,19 @@ export default class TeriockAbilitySheet extends TeriockBaseEffectSheet {
   }
 
   /**
+   * Switches to a specific consequence tab.
+   * @param {Event} _event - The event object.
+   * @param {HTMLElement} target - The target element.
+   * @returns {Promise<void>} Promise that resolves when tab is switched.
+   * @static
+   */
+  static async _consequenceTab(_event, target) {
+    this._consequenceTab = target.dataset.tab;
+    this.render();
+  }
+
+  /**
    * Set the duration for this ability.
-   *
    * @returns {Promise<void>}
    * @private
    */
@@ -132,122 +99,28 @@ export default class TeriockAbilitySheet extends TeriockBaseEffectSheet {
     await durationDialog(this.document);
   }
 
-  /** @inheritDoc */
-  async _prepareContext(options) {
-    const context = await super._prepareContext(options);
-    const system = this.document.system;
-    context.tab = this._tab;
-    context.consequenceTab = this._consequenceTab;
-    context.childAbilities = this.document.subs;
-    context.parentAbility = this.document.sup;
-    context.macros = [];
-    for (const [safeUuid, pseudoHook] of Object.entries(
-      this.document.system.applies.macros,
-    )) {
-      const macro = await foundry.utils.fromUuid(pureUuid(safeUuid));
-      if (macro) {
-        context.macros.push({
-          safeUuid: safeUuid,
-          macro: macro,
-          pseudoHook: pseudoHook,
-        });
-      }
-    }
-    await this._enrichAll(context, {
-      mpCost: system.costs.mp.value.variable,
-      hpCost: system.costs.hp.value.variable,
-      gpCost: system.costs.gp.value.variable,
-      materialCost: system.costs.materialCost,
-      trigger: system.trigger,
-      baseOverview: system.overview.base,
-      proficientOverview: system.overview.proficient,
-      fluentOverview: system.overview.fluent,
-      heightened: system.heightened,
-      onCriticalHit: system.results.critHit,
-      onHit: system.results.hit,
-      onMiss: system.results.miss,
-      onCriticalMiss: system.results.critMiss,
-      onCriticalFail: system.results.critFail,
-      onFail: system.results.fail,
-      onSave: system.results.save,
-      onCriticalSave: system.results.critSave,
-      endCondition: system.endCondition,
-      requirements: system.requirements,
-      elderSorceryIncant: system.elderSorceryIncant,
-      limitation: system.limitation,
-      improvement: system.improvement,
-      attributeImprovement: system.attributeImprovementText,
-      featSaveImprovement: system.featSaveImprovementText,
-    });
-    return context;
+  /**
+   * Toggles between overview and consequence tabs.
+   * @returns {Promise<void>} Promise that resolves when tab is toggled.
+   * @static
+   */
+  static async _toggleConsequences() {
+    this._tab = this._tab === "consequences" ? "overview" : "consequences";
+    this.render();
   }
 
   /**
-   * Handles the render event for the ability sheet.
-   * Sets up context menus, tag management, and button mappings.
-   *
-   * @param {object} context - The render context.
-   * @param {object} options - Render options.
-   * @override
+   * Disconnects the given macro from this ability.
+   * @param {Event} _event - The event object.
+   * @param {HTMLElement} target - The target element.
+   * @returns {Promise<void>}
+   * @private
    */
-  async _onRender(context, options) {
-    await super._onRender(context, options);
-    if (!this.editable) return;
-
-    this._activateContextMenus();
-    this._activateTags();
-    const buttonMap = {
-      ".ab-material-cost-button": "system.costs.materialCost",
-      ".ab-trigger-button": "system.trigger",
-      ".ab-limitation-button": "system.limitation",
-      ".ab-improvement-button": "system.improvement",
-      ".ab-base-button": "system.overview.base",
-      ".ab-proficient-button": "system.overview.proficient",
-      ".ab-fluent-button": "system.overview.fluent",
-      ".ab-heightened-button": "system.heightened",
-      ".ab-crit-hit-button": "system.results.critHit",
-      ".ab-hit-button": "system.results.hit",
-      ".ab-miss-button": "system.results.miss",
-      ".ab-crit-miss-button": "system.results.critMiss",
-      ".ab-crit-fail-button": "system.results.critFail",
-      ".ab-fail-button": "system.results.fail",
-      ".ab-save-button": "system.results.save",
-      ".ab-crit-save-button": "system.results.critSave",
-      ".ab-end-condition-button": "system.endCondition",
-      ".ab-requirements-button": "system.requirements",
-    };
-    this._connectButtonMap(buttonMap);
-
-    /** @type {NodeListOf<HTMLInputElement|HTMLSelectElement>} */
-    const elements = this.element.querySelectorAll(".change-box-entry");
-
-    elements.forEach((entry) => {
-      entry.addEventListener("change", async () => {
-        const index = parseInt(entry.dataset.index, 10);
-        const key = entry.dataset.key;
-        const application = entry.dataset.application;
-        const updateString = `system.applies.${application}.changes`;
-        let value = entry.value;
-        if (!isNaN(Number(value)) && value !== "") {
-          const intValue = parseInt(value, 10);
-          if (!isNaN(intValue) && intValue.toString() === value.trim()) {
-            value = intValue;
-          }
-        }
-        if (
-          typeof value === "string" &&
-          value.trim() !== "" &&
-          !isNaN(Number(value))
-        ) {
-          value = Number(value);
-        }
-        const changes = this.document.system.applies[application].changes;
-        if (index >= 0 && index < changes.length) {
-          changes[index][key] = value;
-          await this.document.update({ [updateString]: changes });
-        }
-      });
-    });
+  static async _unlinkMacro(_event, target) {
+    const uuid = target.dataset.parentId;
+    const updateData = {};
+    updateData[`system.applies.macros.-=${safeUuid(uuid)}`] = null;
+    await this.document.update(updateData);
   }
 
   /**
@@ -400,5 +273,122 @@ export default class TeriockAbilitySheet extends TeriockBaseEffectSheet {
       [`system.applies.macros.${safeUuid(data?.uuid)}`]: "execution",
     };
     await this.document.update(updateData);
+  }
+
+  /**
+   * Handles the render event for the ability sheet.
+   * Sets up context menus, tag management, and button mappings.
+   * @param {object} context - The render context.
+   * @param {object} options - Render options.
+   * @override
+   */
+  async _onRender(context, options) {
+    await super._onRender(context, options);
+    if (!this.editable) return;
+
+    this._activateContextMenus();
+    this._activateTags();
+    const buttonMap = {
+      ".ab-material-cost-button": "system.costs.materialCost",
+      ".ab-trigger-button": "system.trigger",
+      ".ab-limitation-button": "system.limitation",
+      ".ab-improvement-button": "system.improvement",
+      ".ab-base-button": "system.overview.base",
+      ".ab-proficient-button": "system.overview.proficient",
+      ".ab-fluent-button": "system.overview.fluent",
+      ".ab-heightened-button": "system.heightened",
+      ".ab-crit-hit-button": "system.results.critHit",
+      ".ab-hit-button": "system.results.hit",
+      ".ab-miss-button": "system.results.miss",
+      ".ab-crit-miss-button": "system.results.critMiss",
+      ".ab-crit-fail-button": "system.results.critFail",
+      ".ab-fail-button": "system.results.fail",
+      ".ab-save-button": "system.results.save",
+      ".ab-crit-save-button": "system.results.critSave",
+      ".ab-end-condition-button": "system.endCondition",
+      ".ab-requirements-button": "system.requirements",
+    };
+    this._connectButtonMap(buttonMap);
+
+    /** @type {NodeListOf<HTMLInputElement|HTMLSelectElement>} */
+    const elements = this.element.querySelectorAll(".change-box-entry");
+
+    elements.forEach((entry) => {
+      entry.addEventListener("change", async () => {
+        const index = parseInt(entry.dataset.index, 10);
+        const key = entry.dataset.key;
+        const application = entry.dataset.application;
+        const updateString = `system.applies.${application}.changes`;
+        let value = entry.value;
+        if (!isNaN(Number(value)) && value !== "") {
+          const intValue = parseInt(value, 10);
+          if (!isNaN(intValue) && intValue.toString() === value.trim()) {
+            value = intValue;
+          }
+        }
+        if (
+          typeof value === "string" &&
+          value.trim() !== "" &&
+          !isNaN(Number(value))
+        ) {
+          value = Number(value);
+        }
+        const changes = this.document.system.applies[application].changes;
+        if (index >= 0 && index < changes.length) {
+          changes[index][key] = value;
+          await this.document.update({ [updateString]: changes });
+        }
+      });
+    });
+  }
+
+  /** @inheritDoc */
+  async _prepareContext(options) {
+    const context = await super._prepareContext(options);
+    const system = this.document.system;
+    context.tab = this._tab;
+    context.consequenceTab = this._consequenceTab;
+    context.childAbilities = this.document.subs;
+    context.parentAbility = this.document.sup;
+    context.macros = [];
+    for (const [safeUuid, pseudoHook] of Object.entries(
+      this.document.system.applies.macros,
+    )) {
+      const macro = await foundry.utils.fromUuid(pureUuid(safeUuid));
+      if (macro) {
+        context.macros.push({
+          safeUuid: safeUuid,
+          macro: macro,
+          pseudoHook: pseudoHook,
+        });
+      }
+    }
+    await this._enrichAll(context, {
+      mpCost: system.costs.mp.value.variable,
+      hpCost: system.costs.hp.value.variable,
+      gpCost: system.costs.gp.value.variable,
+      materialCost: system.costs.materialCost,
+      trigger: system.trigger,
+      baseOverview: system.overview.base,
+      proficientOverview: system.overview.proficient,
+      fluentOverview: system.overview.fluent,
+      heightened: system.heightened,
+      onCriticalHit: system.results.critHit,
+      onHit: system.results.hit,
+      onMiss: system.results.miss,
+      onCriticalMiss: system.results.critMiss,
+      onCriticalFail: system.results.critFail,
+      onFail: system.results.fail,
+      onSave: system.results.save,
+      onCriticalSave: system.results.critSave,
+      endCondition: system.endCondition,
+      requirements: system.requirements,
+      elderSorceryIncant: system.elderSorceryIncant,
+      limitation: system.limitation,
+      improvement: system.improvement,
+      attributeImprovement: system.attributeImprovementText,
+      featSaveImprovement: system.featSaveImprovementText,
+    });
+    return context;
   }
 }

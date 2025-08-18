@@ -1,4 +1,4 @@
-import { documentOptions } from "../../../../helpers/constants/document-options.mjs";
+import { documentOptions } from "../../../../constants/document-options.mjs";
 import TeriockBaseItemSheet from "../base-item-sheet/base-item-sheet.mjs";
 import {
   archetypeContextMenu,
@@ -33,16 +33,6 @@ export default class TeriockRankSheet extends TeriockBaseItemSheet {
       scrollable: [".window-content", ".tsheet-page", ".ab-sheet-everything"],
     },
   };
-
-  /** @inheritDoc */
-  async _prepareContext(options) {
-    const context = await super._prepareContext(options);
-    await this._enrichAll(context, {
-      description: this.item.system.description,
-      flaws: this.item.system.flaws,
-    });
-    return context;
-  }
 
   /** @inheritDoc */
   async _onRender(context, options) {
@@ -87,5 +77,15 @@ export default class TeriockRankSheet extends TeriockBaseItemSheet {
         });
       }
     });
+  }
+
+  /** @inheritDoc */
+  async _prepareContext(options) {
+    const context = await super._prepareContext(options);
+    await this._enrichAll(context, {
+      description: this.item.system.description,
+      flaws: this.item.system.flaws,
+    });
+    return context;
   }
 }

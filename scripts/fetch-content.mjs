@@ -4,10 +4,10 @@ import path from "path";
 
 import { fileURLToPath } from "url";
 
-import { conditions } from "../src/module/helpers/constants/generated/conditions.mjs";
-import { magicalProperties } from "../src/module/helpers/constants/generated/magical-properties.mjs";
-import { materialProperties } from "../src/module/helpers/constants/generated/material-properties.mjs";
-import { properties } from "../src/module/helpers/constants/generated/properties.mjs";
+import { conditions } from "../src/module/constants/generated/conditions.mjs";
+import { magicalProperties } from "../src/module/constants/generated/magical-properties.mjs";
+import { materialProperties } from "../src/module/constants/generated/material-properties.mjs";
+import { properties } from "../src/module/constants/generated/properties.mjs";
 import { fetchWikiPageHTML } from "../src/module/helpers/wiki/_module.mjs";
 
 const __filename = fileURLToPath(import.meta.url);

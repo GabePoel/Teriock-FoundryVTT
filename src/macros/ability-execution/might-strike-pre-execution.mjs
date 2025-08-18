@@ -4,7 +4,7 @@ scope.chatData.system.buttons = buttons.filter(
 );
 const button = scope.chatData.system.buttons[0];
 const effectObject = JSON.parse(button.dataset.normal);
-const equipmentClass = await game.teriock.api.dialog.selectWeaponClass();
+const equipmentClass = await game.teriock.api.dialogs.selectWeaponClassDialog();
 effectObject.changes[0] = {
   key: `system.equipmentChanges.upgrades.classes.${equipmentClass}.damage`,
   value: "1d4[holy]",

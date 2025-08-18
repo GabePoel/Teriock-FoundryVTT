@@ -1,11 +1,11 @@
-import { abilities } from "../../helpers/constants/generated/abilities.mjs";
-import { conditions } from "../../helpers/constants/generated/conditions.mjs";
-import { equipmentclasses } from "../../helpers/constants/generated/equipment-classes.mjs";
-import { equipment } from "../../helpers/constants/generated/equipment.mjs";
-import { magicalProperties } from "../../helpers/constants/generated/magical-properties.mjs";
-import { materialProperties } from "../../helpers/constants/generated/material-properties.mjs";
-import { properties } from "../../helpers/constants/generated/properties.mjs";
-import { weaponclasses } from "../../helpers/constants/generated/weapon-classes.mjs";
+import { abilities } from "../../constants/generated/abilities.mjs";
+import { conditions } from "../../constants/generated/conditions.mjs";
+import { equipmentclasses } from "../../constants/generated/equipment-classes.mjs";
+import { equipment } from "../../constants/generated/equipment.mjs";
+import { magicalProperties } from "../../constants/generated/magical-properties.mjs";
+import { materialProperties } from "../../constants/generated/material-properties.mjs";
+import { properties } from "../../constants/generated/properties.mjs";
+import { weaponclasses } from "../../constants/generated/weapon-classes.mjs";
 
 const { fields } = foundry.data;
 const { DialogV2 } = foundry.applications.api;

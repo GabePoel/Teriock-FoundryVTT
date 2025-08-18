@@ -13,7 +13,6 @@ import TeriockBaseActorData from "../base-actor-data/base-actor-data.mjs";
 export default class TeriockCharacterData extends TeriockBaseActorData {
   /**
    * Metadata for this actor.
-   *
    * @type {Readonly<Teriock.Documents.ActorModelMetadata>}
    */
   static metadata = Object.freeze({

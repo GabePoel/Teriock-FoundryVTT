@@ -7,14 +7,10 @@ const { fields } = foundry.data;
  *
  * Relevant wiki pages:
  * - [Presence](https://wiki.teriock.com/index.php/Core:Presence)
- *
- * @extends {TeriockBaseEffectData}
- * @extends {ChildData}
  */
 export default class TeriockAttunementData extends TeriockBaseEffectData {
   /**
-   * Metadata for this effect.
-   *
+   * @inheritDoc
    * @type {Readonly<Teriock.Documents.EffectModelMetadata>}
    */
   static metadata = Object.freeze({
@@ -26,51 +22,6 @@ export default class TeriockAttunementData extends TeriockBaseEffectData {
     usable: false,
     wiki: false,
   });
-
-  /** @inheritDoc */
-  get messageParts() {
-    return {
-      ...super.messageParts,
-      ...(this.targetDocument?.system?.messageParts || {
-        bars: [
-          {
-            icon: "fa-weight-hanging",
-            label: "Tier",
-            wrappers: [`Tier ${this.tier}`],
-          },
-        ],
-      }),
-      name: this.parent.name,
-      image: this.parent.img,
-    };
-  }
-
-  /**
-   * Gets the target document for this attunement.
-   *
-   * @returns {TeriockEquipment|null} The target document or null if not found.
-   */
-  get targetDocument() {
-    return this.actor?.items.get(this.target);
-  }
-
-  /**
-   * Gets the usage status of the attunement target.
-   *
-   * @returns {string} The usage status ("Equipped", "Unequipped", or "Not on Character").
-   * @override
-   */
-  get usage() {
-    if (this.targetDocument) {
-      if (this.targetDocument.system.equipped) {
-        return "Equipped";
-      } else {
-        return "Unequipped";
-      }
-    } else {
-      return "Not on Character";
-    }
-  }
 
   /** @inheritDoc */
   static defineSchema() {
@@ -104,9 +55,66 @@ export default class TeriockAttunementData extends TeriockBaseEffectData {
   }
 
   /** @inheritDoc */
+  get messageParts() {
+    return {
+      ...super.messageParts,
+      ...(this.targetDocument?.system?.messageParts || {
+        bars: [
+          {
+            icon: "fa-weight-hanging",
+            label: "Tier",
+            wrappers: [`Tier ${this.tier}`],
+          },
+        ],
+      }),
+      name: this.parent.name,
+      image: this.parent.img,
+    };
+  }
+
+  /**
+   * Gets the target document for this attunement.
+   * @returns {TeriockEquipment|null} The target document or null if not found.
+   */
+  get targetDocument() {
+    return this.actor?.items.get(this.target);
+  }
+
+  /**
+   * Gets the usage status of the attunement target.
+   * @returns {string} The usage status ("Equipped", "Unequipped", or "Not on Character").
+   * @override
+   */
+  get usage() {
+    if (this.targetDocument) {
+      if (this.targetDocument.system.equipped) {
+        return "Equipped";
+      } else {
+        return "Unequipped";
+      }
+    } else {
+      return "Not on Character";
+    }
+  }
+
+  /** @inheritDoc */
   prepareDerivedData() {
     if (this.inheritTier && this.targetDocument) {
       this.tier = this.targetDocument.system.tier.derived;
     }
+    this.parent.changes = [
+      {
+        key: "system.attunements",
+        mode: 2,
+        value: this.target,
+        priority: 10,
+      },
+      {
+        key: "system.presence.value",
+        mode: 2,
+        value: this.tier,
+        priority: 10,
+      },
+    ];
   }
 }

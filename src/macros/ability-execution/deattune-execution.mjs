@@ -3,7 +3,7 @@ const actor = scope.abilityData.actor;
 const equipment = actor.equipment
   .filter((e) => e.system.isAttuned)
   .sort((a, b) => a.name.localeCompare(b.name));
-const selectedEquipment = await game.teriock.api.dialog.selectDocuments(
+const selectedEquipment = await game.teriock.api.dialogs.selectDocuments(
   equipment,
   {
     title: "Select Equipment",

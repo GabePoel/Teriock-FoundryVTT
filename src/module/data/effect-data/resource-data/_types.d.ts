@@ -1,10 +1,8 @@
-import TeriockBaseEffectData from "../base-effect-data/base-effect-data.mjs";
-import { TeriockResource } from "../../../documents/_documents.mjs";
+import type TeriockBaseEffectData from "../base-effect-data/base-effect-data.mjs";
+import type { TeriockResource } from "../../../documents/_documents.mjs";
 
 declare module "./resource-data.mjs" {
   export default interface TeriockResourceData extends TeriockBaseEffectData {
-    /** Parent */
-    parent: TeriockResource;
     /** Is the resource consumable? */
     consumable: true;
     /** Quantity (if consumable) */
@@ -20,5 +18,7 @@ declare module "./resource-data.mjs" {
     rollFormula: string;
     /** Function Hook */
     functionHook: Teriock.Parameters.Resource.FunctionHook;
+
+    get parent(): typeof TeriockResource;
   }
 }

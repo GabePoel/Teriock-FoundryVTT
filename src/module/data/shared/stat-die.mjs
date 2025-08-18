@@ -1,17 +1,52 @@
+import { dieOptions } from "../../constants/die-options.mjs";
 import { TeriockRoll } from "../../documents/_module.mjs";
-import { dedent } from "../../helpers/utils.mjs";
+import { dedent, getRollIcon, toTitleCase } from "../../helpers/utils.mjs";
 
-const fields = foundry.data.fields;
+const { fields } = foundry.data;
 
 /**
  * A data model to represent a stat die.
  */
 export default class StatDieModel extends foundry.abstract.DataModel {
+  /** @inheritDoc */
+  static defineSchema() {
+    const dieChoices = {};
+    for (const [key, value] of Object.entries(dieOptions.stats)) {
+      dieChoices[key] = toTitleCase(value) + " Die";
+    }
+    return {
+      _id: new fields.DocumentIdField({
+        initial: () => foundry.utils.randomID(),
+      }),
+      stat: new fields.StringField({
+        label: "Die Type",
+        hint: "What stat this die corresponds to.",
+        choices: dieChoices,
+        initial: "hp",
+      }),
+      faces: new fields.NumberField({
+        label: "Faces",
+        hint: "How many faces this die has.",
+        initial: 10,
+        choices: dieOptions.faces,
+      }),
+      spent: new fields.BooleanField({
+        label: "Spent",
+        hint: "Whether or not this die has been spent.",
+        initial: false,
+      }),
+      value: new fields.NumberField({
+        label: "Value",
+        hint: "The amount this die contributes to the total value of the stat it corresponds to.",
+        initial: 5,
+      }),
+    };
+  }
+
   await;
 
   /**
    * The ID of this stat die.
-   *
    * @type {string}
    */
   get id() {
@@ -19,17 +54,7 @@ export default class StatDieModel extends foundry.abstract.DataModel {
   }
 
   /**
-   * This stat die's path within its parent document.
-   *
-   * @returns {string}
-   */
-  get path() {
-    return `system.${this.stat}Dice.${this.id}`;
-  }
-
-  /**
    * A name for this type of die.
-   *
    * @returns {"Hit Die" | "Mana Die"}
    */
   get name() {
@@ -37,8 +62,15 @@ export default class StatDieModel extends foundry.abstract.DataModel {
   }
 
   /**
+   * This stat die's path within its parent document.
+   * @returns {string}
+   */
+  get path() {
+    return `system.${this.stat}Dice.${this.id}`;
+  }
+
+  /**
    * String representing this die.
-   *
    * @returns {Teriock.RollOptions.PolyhedralDie}
    */
   get polyhedral() {
@@ -49,7 +81,7 @@ export default class StatDieModel extends foundry.abstract.DataModel {
    * Render a die box HTML element. Creates a clickable die icon that shows whether the die has been used or not.
    */
   get rendered() {
-    const iconClass = `fa-fw fa-${this.spent ? "light" : "solid"} fa-dice-d${this.faces}`;
+    const iconClass = `fa-fw fa-${this.spent ? "light" : "solid"} fa-${getRollIcon(this.polyhedral)}`;
     return dedent(`
       <div
         class="thover die-box ${this.spent ? "rolled" : "unrolled"}"
@@ -65,51 +97,8 @@ export default class StatDieModel extends foundry.abstract.DataModel {
       </div>`);
   }
 
-  /** @inheritDoc */
-  static defineSchema() {
-    return {
-      _id: new fields.DocumentIdField({
-        initial: () => foundry.utils.randomID(),
-      }),
-      stat: new fields.StringField({
-        label: "Die Type",
-        hint: "What stat this die corresponds to.",
-        choices: {
-          hp: "Hit Die",
-          mp: "Mana Die",
-        },
-        initial: "hp",
-      }),
-      faces: new fields.NumberField({
-        label: "Faces",
-        hint: "How many faces this die has.",
-        initial: 10,
-        choices: {
-          2: "2",
-          4: "4",
-          6: "6",
-          8: "8",
-          10: "10",
-          12: "12",
-          20: "20",
-        },
-      }),
-      spent: new fields.BooleanField({
-        label: "Spent",
-        hint: "Whether or not this die has been spent.",
-        initial: false,
-      }),
-      value: new fields.NumberField({
-        label: "Value",
-        hint: "The amount this die contributes to the total value of the stat it corresponds to.",
-        initial: 5,
-      }),
-    };
-  }
-
   /**
    * Roll this stat die.
-   *
    * @param {boolean} [spend] - If this should consume the stat die.
    * @returns {Promise<void>}
    */
@@ -129,17 +118,7 @@ export default class StatDieModel extends foundry.abstract.DataModel {
   }
 
   /**
-   * Unroll this stat die.
-   *
-   * @returns {Promise<void>}
-   */
-  async unrollStatDie() {
-    await this.parent.parent.update({ [`${this.path}.spent`]: false });
-  }
-
-  /**
    * Roll the value of this stat die.
-   *
    * @returns {Promise<void>}
    */
   async rollStatDieValue() {
@@ -151,5 +130,13 @@ export default class StatDieModel extends foundry.abstract.DataModel {
       flavor: `Rolling ${this.stat.toUpperCase()}`,
     });
     await this.parent.parent.update({ [`${this.path}.value`]: roll.total });
+  }
+
+  /**
+   * Unroll this stat die.
+   * @returns {Promise<void>}
+   */
+  async unrollStatDie() {
+    await this.parent.parent.update({ [`${this.path}.spent`]: false });
   }
 }

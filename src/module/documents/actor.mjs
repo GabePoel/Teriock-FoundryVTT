@@ -1,5 +1,5 @@
-import { characterOptions } from "../helpers/constants/character-options.mjs";
-import { rankOptions } from "../helpers/constants/rank-options.mjs";
+import { characterOptions } from "../constants/character-options.mjs";
+import { rankOptions } from "../constants/rank-options.mjs";
 import { copyItem } from "../helpers/fetch.mjs";
 import { pureUuid, toCamelCase } from "../helpers/utils.mjs";
 import { BaseTeriockActor } from "./_base.mjs";
@@ -11,37 +11,19 @@ import TeriockRoll from "./roll.mjs";
  */
 export default class TeriockActor extends BaseTeriockActor {
   /**
-   * Gets the valid effects for this actor.
-   *
-   * @returns {TeriockEffect[]} Array of transferred effects.
+   * Figure out the name for a given size.
+   * @param {number} size
+   * @returns {string}
    */
-  get validEffects() {
-    return Array.from(this.allApplicableEffects());
-  }
-
-  /** @returns {TeriockEquipment[]} */
-  get equipment() {
-    return this.itemTypes?.equipment || [];
-  }
-
-  /** @returns {TeriockRank[]} */
-  get ranks() {
-    return this.itemTypes?.rank || [];
-  }
-
-  /** @returns {TeriockPower[]} */
-  get powers() {
-    return this.itemTypes?.power || [];
-  }
-
-  /** @returns {TeriockSpecies[]} */
-  get species() {
-    return this.itemTypes?.species || [];
+  static toNamedSize(size) {
+    const sizeKeys = Object.keys(characterOptions.namedSizes).map(Number);
+    const filteredSizeKeys = sizeKeys.filter((key) => key <= size);
+    const sizeKey = Math.max(...filteredSizeKeys, 0);
+    return characterOptions.namedSizes[sizeKey] || "Medium";
   }
 
   /**
    * Gets effects that expire based on conditions.
-   *
    * @returns {TeriockConsequence[]} Array of condition expiration effects.
    */
   get conditionExpirationEffects() {
@@ -52,20 +34,7 @@ export default class TeriockActor extends BaseTeriockActor {
   }
 
   /**
-   * Gets effects that expire based on movement.
-   *
-   * @returns {TeriockConsequence[]} Array of movement expiration effects.
-   */
-  get movementExpirationEffects() {
-    return (
-      this.consequences.filter((effect) => effect.system.movementExpiration) ||
-      []
-    );
-  }
-
-  /**
    * Gets effects that expire at dawn.
-   *
    * @returns {TeriockConsequence[]} Array of dawn expiration effects.
    */
   get dawnExpirationEffects() {
@@ -75,17 +44,7 @@ export default class TeriockActor extends BaseTeriockActor {
   }
 
   /**
-   * Get effects that expire with some duration.
-   *
-   * @returns {TeriockConsequence[]}
-   */
-  get durationExpirationEffects() {
-    return this.consequences.filter((effect) => effect.hasDuration);
-  }
-
-  /**
    * Checks if the actor is disabled (dead).
-   *
    * @returns {boolean} True if the actor is dead, false otherwise.
    */
   get disabled() {
@@ -93,16 +52,50 @@ export default class TeriockActor extends BaseTeriockActor {
   }
 
   /**
-   * Figure out the name for a given size.
-   *
-   * @param {number} size
-   * @returns {string}
+   * Get effects that expire with some duration.
+   * @returns {TeriockConsequence[]}
    */
-  static toNamedSize(size) {
-    const sizeKeys = Object.keys(characterOptions.namedSizes).map(Number);
-    const filteredSizeKeys = sizeKeys.filter((key) => key <= size);
-    const sizeKey = Math.max(...filteredSizeKeys, 0);
-    return characterOptions.namedSizes[sizeKey] || "Medium";
+  get durationExpirationEffects() {
+    return this.consequences.filter((effect) => effect.hasDuration);
+  }
+
+  /** @returns {TeriockEquipment[]} */
+  get equipment() {
+    return this.itemTypes?.equipment || [];
+  }
+
+  /**
+   * Gets effects that expire based on movement.
+   * @returns {TeriockConsequence[]} Array of movement expiration effects.
+   */
+  get movementExpirationEffects() {
+    return (
+      this.consequences.filter((effect) => effect.system.movementExpiration) ||
+      []
+    );
+  }
+
+  /** @returns {TeriockPower[]} */
+  get powers() {
+    return this.itemTypes?.power || [];
+  }
+
+  /** @returns {TeriockRank[]} */
+  get ranks() {
+    return this.itemTypes?.rank || [];
+  }
+
+  /** @returns {TeriockSpecies[]} */
+  get species() {
+    return this.itemTypes?.species || [];
+  }
+
+  /**
+   * Gets the valid effects for this actor.
+   * @returns {TeriockEffect[]} Array of transferred effects.
+   */
+  get validEffects() {
+    return Array.from(this.allApplicableEffects());
   }
 
   /**
@@ -173,33 +166,6 @@ export default class TeriockActor extends BaseTeriockActor {
     }
   }
 
-  /** @inheritDoc */
-  prepareDerivedData() {
-    super.prepareDerivedData();
-    this.itemKeys = {
-      equipment: new Set(
-        this.itemTypes?.equipment.map((e) => toCamelCase(e.name)),
-      ),
-      power: new Set(this.itemTypes?.power.map((e) => toCamelCase(e.name))),
-      rank: new Set(this.itemTypes?.rank.map((e) => toCamelCase(e.name))),
-    };
-  }
-
-  /**
-   * Prepare all embedded {@link TeriockMechanicSheet} instances which within this primary {@link TeriockActor}.
-   */
-  prepareMechanicalDocuments() {
-    for (const mechanic of this.itemTypes?.mechanic || []) {
-      mechanic.prepareData();
-    }
-  }
-
-  /** @inheritDoc */
-  prepareData() {
-    super.prepareData();
-    this.prepareMechanicalDocuments();
-  }
-
   /**
    * @inheritDoc
    * @param {string} embeddedName
@@ -254,7 +220,6 @@ export default class TeriockActor extends BaseTeriockActor {
 
   /**
    * Overridden with special handling to allow for archetype abilities.
-   *
    * @inheritDoc
    * @param {string} embeddedName - The name of the embedded Document type
    * @param {string[]} ids - An array of string ids for each Document to be deleted
@@ -286,6 +251,38 @@ export default class TeriockActor extends BaseTeriockActor {
   }
 
   /**
+   * Ends a condition with an optional roll.
+   * @todo Convert to using `ConditionRollOptions` type.
+   * @param {Teriock.RollOptions.CommonRoll} options - Options for ending the condition.
+   * @returns {Promise<void>}
+   */
+  async endCondition(options = {}) {
+    let message = null;
+    if (options.message) {
+      message = options.message;
+    }
+    let rollFormula = "2d4";
+    if (options.advantage) {
+      rollFormula = "3d4";
+    } else if (options.disadvantage) {
+      rollFormula = "1d4";
+    }
+    rollFormula += "kh1";
+    const rollData = this.getRollData();
+    const roll = new TeriockRoll(rollFormula, rollData, {
+      context: {
+        diceClass: "condition",
+        threshold: 4,
+      },
+      message: message,
+    });
+    await roll.toMessage({
+      flavor: "Condition Ending Roll",
+      speaker: ChatMessage.getSpeaker({ actor: this }),
+    });
+  }
+
+  /**
    * @inheritDoc
    * @returns {object}
    */
@@ -309,7 +306,6 @@ export default class TeriockActor extends BaseTeriockActor {
 
   /**
    * Performs post-update operations for the actor.
-   *
    * @param {Teriock.Parameters.Actor.SkipFunctions} skipFunctions - Functions that should be skipped.
    * @returns {Promise<void>} Resolves when all post-update operations are complete
    * @returns {Promise<void>} Promise that resolves when post-update is complete.
@@ -317,6 +313,104 @@ export default class TeriockActor extends BaseTeriockActor {
   async postUpdate(skipFunctions = {}) {
     await this.hookCall("postUpdate", skipFunctions);
     await this.system.postUpdate(skipFunctions);
+  }
+
+  /** @inheritDoc */
+  prepareData() {
+    super.prepareData();
+    this.prepareMechanicalDocuments();
+  }
+
+  /** @inheritDoc */
+  prepareDerivedData() {
+    super.prepareDerivedData();
+    this.itemKeys = {
+      equipment: new Set(
+        this.itemTypes?.equipment.map((e) => toCamelCase(e.name)),
+      ),
+      power: new Set(this.itemTypes?.power.map((e) => toCamelCase(e.name))),
+      rank: new Set(this.itemTypes?.rank.map((e) => toCamelCase(e.name))),
+    };
+  }
+
+  /**
+   * Prepare all embedded {@link TeriockMechanicSheet} instances which within this primary {@link TeriockActor}.
+   */
+  prepareMechanicalDocuments() {
+    for (const mechanic of this.itemTypes?.mechanic || []) {
+      mechanic.prepareData();
+    }
+  }
+
+  /**
+   * Rolls a feat save for the specified attribute.
+   *
+   * Relevant wiki pages:
+   * - [Feat Interaction](https://wiki.teriock.com/index.php/Core:Feat_Interaction)
+   *
+   * @param {Teriock.Parameters.Actor.Attribute} attribute - The attribute to roll a feat save for.
+   * @param {Teriock.RollOptions.CommonRoll} [options] - Options for the roll.
+   * @returns {Promise<void>}
+   */
+  async rollFeatSave(attribute, options = {}) {
+    await this.hookCall("rollFeatSave", attribute, options);
+    await this.system.rollFeatSave(attribute, options);
+  }
+
+  /**
+   * Rolls an immunity save (these always succeed).
+   *
+   * Relevant wiki pages:
+   * - [Immunity](https://wiki.teriock.com/index.php/Keyword:Immunity)
+   *
+   * @param {Teriock.RollOptions.CommonRoll} [options] - Options for the roll.
+   * @returns {Promise<void>}
+   */
+  async rollImmunity(options = {}) {
+    await this.hookCall("rollImmunity", options);
+    await this.system.rollImmunity(options);
+  }
+
+  /**
+   * Rolls a resistance save.
+   *
+   * Relevant wiki pages:
+   * - [Resistance](https://wiki.teriock.com/index.php/Ability:Resist_Effects)
+   *
+   * @param {Teriock.RollOptions.CommonRoll} [options] - Options for the roll.
+   * @returns {Promise<void>}
+   */
+  async rollResistance(options = {}) {
+    await this.hookCall("rollResistance", options);
+    await this.system.rollResistance(options);
+  }
+
+  /**
+   * Rolls a tradecraft check.
+   *
+   * Relevant wiki pages:
+   * - [Tradecrafts](https://wiki.teriock.com/index.php/Core:Tradecrafts)
+   *
+   * @param {Teriock.Parameters.Fluency.Tradecraft} tradecraft - The tradecraft to roll for.
+   * @param {Teriock.RollOptions.CommonRoll} [options] - Options for the roll.
+   * @returns {Promise<void>}
+   */
+  async rollTradecraft(tradecraft, options = {}) {
+    await this.hookCall("rollTradecraft", options);
+    await this.system.rollTradecraft(tradecraft, options);
+  }
+
+  /**
+   * Awakens the actor from sleep.
+   *
+   * Relevant wiki pages:
+   * - [Awaken](https://wiki.teriock.com/index.php/Keyword:Awaken)
+   *
+   * @returns {Promise<void>} Promise that resolves when the actor is awakened.
+   */
+  async takeAwaken() {
+    await this.hookCall("takeAwaken");
+    await this.system.takeAwaken();
   }
 
   /**
@@ -348,17 +442,45 @@ export default class TeriockActor extends BaseTeriockActor {
   }
 
   /**
-   * Applies wither to the actor's hit points.
+   * Gains temporary hit points for the actor.
    *
    * Relevant wiki pages:
-   * - [Wither](https://wiki.teriock.com/index.php/Drain:Wither)
+   * - [Temporary Hit Points](https://wiki.teriock.com/index.php/Core:Temporary_Hit_Points)
    *
-   * @param {number} amount - The amount of wither to apply.
-   * @returns {Promise<void>} Promise that resolves when wither is applied.
+   * @param {number} amount - The number of temporary hit points to gain.
+   * @returns {Promise<void>} Promise that resolves when temporary hit points are gained.
    */
-  async takeWither(amount) {
-    await this.hookCall("takeWither", amount);
-    await this.system.takeWither(amount);
+  async takeGainTempHp(amount) {
+    await this.hookCall("takeGainTempHp", amount);
+    await this.system.takeGainTempHp(amount);
+  }
+
+  /**
+   * Gains temporary mana points for the actor.
+   *
+   * Relevant wiki pages:
+   * - [Temporary Mana Points](https://wiki.teriock.com/index.php/Core:Temporary_Mana_Points)
+   *
+   * @param {number} amount - The number of temporary mana points to gain.
+   * @returns {Promise<void>} Promise that resolves when temporary mana points are gained.
+   */
+  async takeGainTempMp(amount) {
+    await this.hookCall("takeGainTempMp", amount);
+    await this.system.takeGainTempMp(amount);
+  }
+
+  /**
+   * Applies hack effect to a specific part of the actor.
+   *
+   * Relevant wiki pages:
+   * - [Hack](https://wiki.teriock.com/index.php/Damage:Hack)
+   *
+   * @param {Teriock.Parameters.Actor.HackableBodyPart} part - The part to hack.
+   * @returns {Promise<void>} Promise that resolves when hack is applied.
+   */
+  async takeHack(part) {
+    await this.hookCall("takeHack", part);
+    await this.system.takeHack(part);
   }
 
   /**
@@ -376,6 +498,30 @@ export default class TeriockActor extends BaseTeriockActor {
   }
 
   /**
+   * Applies kill effect to the actor.
+   *
+   * Relevant wiki pages:
+   * - [Death Ray](https://wiki.teriock.com/index.php/Ability:Death_Ray)
+   *
+   * @param {number} amount - The amount of kill effect to apply.
+   * @returns {Promise<void>} Promise that resolves when kill effect is applied.
+   */
+  async takeKill(amount) {
+    await this.hookCall("takeKill", amount);
+    await this.system.takeKill(amount);
+  }
+
+  /**
+   * Actor pays money.
+   * @param {number} amount - The amount of gold-equivalent money to pay.
+   * @param {"exact" | "greedy"} mode - Exact change or the closest denomination, rounded up.
+   */
+  async takePay(amount, mode = "greedy") {
+    await this.hookCall("takePay", amount);
+    await this.system.takePay(amount, mode);
+  }
+
+  /**
    * Applies revitalization to the actor's mana points.
    *
    * Relevant wiki pages:
@@ -387,6 +533,19 @@ export default class TeriockActor extends BaseTeriockActor {
   async takeRevitalize(amount) {
     await this.hookCall("takeRevitalize", amount);
     await this.system.takeRevitalize(amount);
+  }
+
+  /**
+   * Revives the actor from death.
+   *
+   * Relevant wiki pages:
+   * - [Revival Effects](https://wiki.teriock.com/index.php/Category:Revival_effects)
+   *
+   * @returns {Promise<void>} Promise that resolves when the actor is revived.
+   */
+  async takeRevive() {
+    await this.hookCall("takeRevive");
+    await this.system.takeRevive();
   }
 
   /**
@@ -418,34 +577,6 @@ export default class TeriockActor extends BaseTeriockActor {
   }
 
   /**
-   * Gains temporary hit points for the actor.
-   *
-   * Relevant wiki pages:
-   * - [Temporary Hit Points](https://wiki.teriock.com/index.php/Core:Temporary_Hit_Points)
-   *
-   * @param {number} amount - The number of temporary hit points to gain.
-   * @returns {Promise<void>} Promise that resolves when temporary hit points are gained.
-   */
-  async takeGainTempHp(amount) {
-    await this.hookCall("takeGainTempHp", amount);
-    await this.system.takeGainTempHp(amount);
-  }
-
-  /**
-   * Gains temporary mana points for the actor.
-   *
-   * Relevant wiki pages:
-   * - [Temporary Mana Points](https://wiki.teriock.com/index.php/Core:Temporary_Mana_Points)
-   *
-   * @param {number} amount - The number of temporary mana points to gain.
-   * @returns {Promise<void>} Promise that resolves when temporary mana points are gained.
-   */
-  async takeGainTempMp(amount) {
-    await this.hookCall("takeGainTempMp", amount);
-    await this.system.takeGainTempMp(amount);
-  }
-
-  /**
    * Applies sleep to the actor.
    *
    * Relevant wiki pages:
@@ -457,45 +588,6 @@ export default class TeriockActor extends BaseTeriockActor {
   async takeSleep(amount) {
     await this.hookCall("takeSleep", amount);
     await this.system.takeSleep(amount);
-  }
-
-  /**
-   * Applies kill effect to the actor.
-   *
-   * Relevant wiki pages:
-   * - [Death Ray](https://wiki.teriock.com/index.php/Ability:Death_Ray)
-   *
-   * @param {number} amount - The amount of kill effect to apply.
-   * @returns {Promise<void>} Promise that resolves when kill effect is applied.
-   */
-  async takeKill(amount) {
-    await this.hookCall("takeKill", amount);
-    await this.system.takeKill(amount);
-  }
-
-  /**
-   * Actor pays money.
-   *
-   * @param {number} amount - The amount of gold-equivalent money to pay.
-   * @param {"exact" | "greedy"} mode - Exact change or the closest denomination, rounded up.
-   */
-  async takePay(amount, mode = "greedy") {
-    await this.hookCall("takePay", amount);
-    await this.system.takePay(amount, mode);
-  }
-
-  /**
-   * Applies hack effect to a specific part of the actor.
-   *
-   * Relevant wiki pages:
-   * - [Hack](https://wiki.teriock.com/index.php/Damage:Hack)
-   *
-   * @param {Teriock.Parameters.Actor.HackableBodyPart} part - The part to hack.
-   * @returns {Promise<void>} Promise that resolves when hack is applied.
-   */
-  async takeHack(part) {
-    await this.hookCall("takeHack", part);
-    await this.system.takeHack(part);
   }
 
   /**
@@ -513,92 +605,21 @@ export default class TeriockActor extends BaseTeriockActor {
   }
 
   /**
-   * Awakens the actor from sleep.
+   * Applies wither to the actor's hit points.
    *
    * Relevant wiki pages:
-   * - [Awaken](https://wiki.teriock.com/index.php/Keyword:Awaken)
+   * - [Wither](https://wiki.teriock.com/index.php/Drain:Wither)
    *
-   * @returns {Promise<void>} Promise that resolves when the actor is awakened.
+   * @param {number} amount - The amount of wither to apply.
+   * @returns {Promise<void>} Promise that resolves when wither is applied.
    */
-  async takeAwaken() {
-    await this.hookCall("takeAwaken");
-    await this.system.takeAwaken();
-  }
-
-  /**
-   * Revives the actor from death.
-   *
-   * Relevant wiki pages:
-   * - [Revival Effects](https://wiki.teriock.com/index.php/Category:Revival_effects)
-   *
-   * @returns {Promise<void>} Promise that resolves when the actor is revived.
-   */
-  async takeRevive() {
-    await this.hookCall("takeRevive");
-    await this.system.takeRevive();
-  }
-
-  /**
-   * Rolls a feat save for the specified attribute.
-   *
-   * Relevant wiki pages:
-   * - [Feat Interaction](https://wiki.teriock.com/index.php/Core:Feat_Interaction)
-   *
-   * @param {Teriock.Parameters.Actor.Attribute} attribute - The attribute to roll a feat save for.
-   * @param {Teriock.RollOptions.CommonRoll} [options] - Options for the roll.
-   * @returns {Promise<void>}
-   */
-  async rollFeatSave(attribute, options = {}) {
-    await this.hookCall("rollFeatSave", attribute, options);
-    await this.system.rollFeatSave(attribute, options);
-  }
-
-  /**
-   * Rolls a resistance save.
-   *
-   * Relevant wiki pages:
-   * - [Resistance](https://wiki.teriock.com/index.php/Ability:Resist_Effects)
-   *
-   * @param {Teriock.RollOptions.CommonRoll} [options] - Options for the roll.
-   * @returns {Promise<void>}
-   */
-  async rollResistance(options = {}) {
-    await this.hookCall("rollResistance", options);
-    await this.system.rollResistance(options);
-  }
-
-  /**
-   * Rolls an immunity save (these always succeed).
-   *
-   * Relevant wiki pages:
-   * - [Immunity](https://wiki.teriock.com/index.php/Keyword:Immunity)
-   *
-   * @param {Teriock.RollOptions.CommonRoll} [options] - Options for the roll.
-   * @returns {Promise<void>}
-   */
-  async rollImmunity(options = {}) {
-    await this.hookCall("rollImmunity", options);
-    await this.system.rollImmunity(options);
-  }
-
-  /**
-   * Rolls a tradecraft check.
-   *
-   * Relevant wiki pages:
-   * - [Tradecrafts](https://wiki.teriock.com/index.php/Core:Tradecrafts)
-   *
-   * @param {Teriock.Parameters.Fluency.Tradecraft} tradecraft - The tradecraft to roll for.
-   * @param {Teriock.RollOptions.CommonRoll} [options] - Options for the roll.
-   * @returns {Promise<void>}
-   */
-  async rollTradecraft(tradecraft, options = {}) {
-    await this.hookCall("rollTradecraft", options);
-    await this.system.rollTradecraft(tradecraft, options);
+  async takeWither(amount) {
+    await this.hookCall("takeWither", amount);
+    await this.system.takeWither(amount);
   }
 
   /**
    * Uses an ability by name.
-   *
    * @param {string} abilityName - The name of the ability to use.
    * @param {Teriock.RollOptions.CommonRoll} [options] - Options for using the ability.
    * @returns {Promise<void>}
@@ -614,38 +635,5 @@ export default class TeriockActor extends BaseTeriockActor {
     } else {
       ui.notifications.warn(`${this.name} does not have ${abilityName}.`);
     }
-  }
-
-  /**
-   * Ends a condition with an optional roll.
-   *
-   * @todo Convert to using `ConditionRollOptions` type.
-   * @param {Teriock.RollOptions.CommonRoll} options - Options for ending the condition.
-   * @returns {Promise<void>}
-   */
-  async endCondition(options = {}) {
-    let message = null;
-    if (options.message) {
-      message = options.message;
-    }
-    let rollFormula = "2d4";
-    if (options.advantage) {
-      rollFormula = "3d4";
-    } else if (options.disadvantage) {
-      rollFormula = "1d4";
-    }
-    rollFormula += "kh1";
-    const rollData = this.getRollData();
-    const roll = new TeriockRoll(rollFormula, rollData, {
-      context: {
-        diceClass: "condition",
-        threshold: 4,
-      },
-      message: message,
-    });
-    await roll.toMessage({
-      flavor: "Condition Ending Roll",
-      speaker: ChatMessage.getSpeaker({ actor: this }),
-    });
   }
 }

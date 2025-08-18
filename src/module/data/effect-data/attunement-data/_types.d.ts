@@ -1,5 +1,5 @@
-import TeriockBaseEffectData from "../base-effect-data/base-effect-data.mjs";
-import {
+import type TeriockBaseEffectData from "../base-effect-data/base-effect-data.mjs";
+import type {
   TeriockAttunement,
   TeriockEquipment,
 } from "../../../documents/_documents.mjs";
@@ -14,7 +14,7 @@ declare module "./attunement-data.mjs" {
     inheritTier: boolean;
     /** Presence tier of the target entity */
     tier: number;
-    /** Parent */
-    parent: TeriockAttunement;
+
+    get parent(): typeof TeriockAttunement;
   }
 }

@@ -4,7 +4,6 @@ import { BaseTeriockCombat } from "./_base.mjs";
 export default class TeriockCombat extends BaseTeriockCombat {
   /**
    * Check if the effect might expire and send a dialog to some {@link TeriockUser}.
-   *
    * @param {TeriockConsequence} effect - Effect to check expiration for.
    * @param {"turn"|"combat"|"action"} trigger - What might trigger this effect to expire.
    * @param {"start"|"end"} time - When this effect might expire.
@@ -53,7 +52,6 @@ export default class TeriockCombat extends BaseTeriockCombat {
   }
 
   /**
-   *
    * @param {TeriockActor} effectActor
    * @param {TeriockActor} timeActor
    * @param {"turn"|"combat"|"action"} trigger
@@ -80,6 +78,25 @@ export default class TeriockCombat extends BaseTeriockCombat {
         updates: updates,
       });
     }
+  }
+
+  /** @inheritDoc */
+  async endCombat() {
+    let out = await super.endCombat();
+    for (const actor of this.combatants.map(
+      (combatant) => /** @type {TeriockActor} */ combatant.actor,
+    )) {
+      await this._tryAllEffectExpirations(actor, actor, "combat", "end");
+    }
+    return out;
+  }
+
+  /** @inheritDoc */
+  async nextRound() {
+    let out = await super.nextRound();
+    const activeGm = /** @type {TeriockUser} */ game.users.activeGM;
+    await activeGm.query("teriock.timeAdvance", { delta: 5 });
+    return out;
   }
 
   /** @inheritDoc */
@@ -123,6 +140,16 @@ export default class TeriockCombat extends BaseTeriockCombat {
   }
 
   /** @inheritDoc */
+  async previousRound() {
+    let out = await super.previousRound();
+    const activeGm = /** @type {TeriockUser} */ game.users.activeGM;
+    await activeGm.query("teriock.timeAdvance", {
+      delta: -5,
+    });
+    return out;
+  }
+
+  /** @inheritDoc */
   async startCombat() {
     let out = await super.startCombat();
     for (const actor of this.combatants.map(
@@ -130,35 +157,6 @@ export default class TeriockCombat extends BaseTeriockCombat {
     )) {
       await this._tryAllEffectExpirations(actor, actor, "combat", "start");
     }
-    return out;
-  }
-
-  /** @inheritDoc */
-  async endCombat() {
-    let out = await super.endCombat();
-    for (const actor of this.combatants.map(
-      (combatant) => /** @type {TeriockActor} */ combatant.actor,
-    )) {
-      await this._tryAllEffectExpirations(actor, actor, "combat", "end");
-    }
-    return out;
-  }
-
-  /** @inheritDoc */
-  async nextRound() {
-    let out = await super.nextRound();
-    const activeGm = /** @type {TeriockUser} */ game.users.activeGM;
-    await activeGm.query("teriock.timeAdvance", { delta: 5 });
-    return out;
-  }
-
-  /** @inheritDoc */
-  async previousRound() {
-    let out = await super.previousRound();
-    const activeGm = /** @type {TeriockUser} */ game.users.activeGM;
-    await activeGm.query("teriock.timeAdvance", {
-      delta: -5,
-    });
     return out;
   }
 }

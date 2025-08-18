@@ -1,4 +1,4 @@
-import { documentOptions } from "../../../../helpers/constants/document-options.mjs";
+import { documentOptions } from "../../../../constants/document-options.mjs";
 import TeriockBaseItemSheet from "../base-item-sheet/base-item-sheet.mjs";
 import { powerContextMenu } from "./connections/_context-menus.mjs";
 
@@ -43,6 +43,14 @@ export default class TeriockPowerSheet extends TeriockBaseItemSheet {
   }
 
   /** @inheritDoc */
+  async _onRender(context, options) {
+    await super._onRender(context, options);
+    if (!this.editable) return;
+    const powerContextMenuOptions = powerContextMenu(this.item);
+    this._connectContextMenu(".power-box", powerContextMenuOptions, "click");
+  }
+
+  /** @inheritDoc */
   async _prepareContext(options) {
     if (this.document.getFlag("teriock", "effectWrapper")) {
       /** @type {TeriockEffect} */
@@ -56,13 +64,5 @@ export default class TeriockPowerSheet extends TeriockBaseItemSheet {
       flaws: this.item.system.flaws,
     });
     return context;
-  }
-
-  /** @inheritDoc */
-  async _onRender(context, options) {
-    await super._onRender(context, options);
-    if (!this.editable) return;
-    const powerContextMenuOptions = powerContextMenu(this.item);
-    this._connectContextMenu(".power-box", powerContextMenuOptions, "click");
   }
 }

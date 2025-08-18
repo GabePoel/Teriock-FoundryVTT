@@ -1,6 +1,4 @@
-/** @import TeriockBaseActorData from "../base-actor-data.mjs"; */
-
-import config from "../../../../helpers/config.mjs";
+import { TERIOCK } from "../../../../constants/_module.mjs";
 
 /**
  * Gets roll data for an actor system, including basic stats, attack data, class ranks, and tradecrafts.
@@ -158,7 +156,7 @@ function attributeData(actorData, data) {
  * @param {object} data - The roll data object to populate.
  */
 function tradecraftData(actorData, data) {
-  for (const key of Object.keys(config.tradecraftOptionsList)) {
+  for (const key of Object.keys(TERIOCK.tradecraftOptionsList)) {
     const tc = actorData.tradecrafts[key];
     let short = key.slice(0, 3);
     if (tc) {
@@ -406,7 +404,7 @@ function moneyData(actorData, data) {
     hea: "heartstoneRuby",
   };
 
-  const currencyOptions = CONFIG.TERIOCK.currencyOptions || {};
+  const currencyOptions = TERIOCK.currencyOptions || {};
 
   for (const key of moneyKeys) {
     const systemKey = moneyMap[key];

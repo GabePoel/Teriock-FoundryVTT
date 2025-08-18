@@ -1,63 +1,25 @@
 <div class="ab-bar">
   <div class="ab-box-container">
-    <div class="ab-box" data-tooltip="Size">
+    <div class="ab-box" data-tooltip="Hit Dice">
       <div class="ab-box-icon">
-        <i class="fa-fw fa-light fa-child-reaching"></i>
+        <i class="fa-fw fa-light fa-{{firstDie system.hpDiceFormula}}"></i>
       </div>
       <div class="ab-box-content">
-        <div class="ability-bar-input unselected">
-          Size {{system.size.value}}
+        <div class="ability-bar-input" data-action="setHpDice">
+          {{system.hpDiceFormula}} Hit Di{{#if (gt system.hpDiceNumber 1)}}c{{/if}}e ({{system.totalHp}} HP)
         </div>
-        {{formInput
-          systemFields.size.fields.value
-          value=system.size.value
-          disabled=(not editable)
-          classes="ability-bar-input selected"
-        }}
       </div>
     </div>
   </div>
   <div class="ab-box-container">
-    <div class="ab-box" data-tooltip="Hit Points">
+    <div class="ab-box" data-tooltip="Mana Dice" data-action="setMpDice">
       <div class="ab-box-icon">
-        <i class="fa-fw fa-light fa-heart"></i>
+        <i class="fa-fw fa-light fa-{{firstDie system.mpDiceFormula}}"></i>
       </div>
       <div class="ab-box-content">
-        <div class="ability-bar-input unselected">
-          {{#if system.hp.value}}
-            {{system.hp.value}} HP
-          {{else}}
-            {{system.hp.raw}} HP
-          {{/if}}
+        <div class="ability-bar-input">
+          {{system.mpDiceFormula}} Mana Di{{#if (gt system.mpDiceNumber 1)}}c{{/if}}e ({{system.totalMp}} MP)
         </div>
-        {{formInput
-          systemFields.hp.fields.raw
-          value=system.hp.raw
-          disabled=(not editable)
-          classes="ability-bar-input selected"
-        }}
-      </div>
-    </div>
-  </div>
-  <div class="ab-box-container">
-    <div class="ab-box" data-tooltip="Mana Points">
-      <div class="ab-box-icon">
-        <i class="fa-fw fa-light fa-brain"></i>
-      </div>
-      <div class="ab-box-content">
-        <div class="ability-bar-input unselected">
-          {{#if system.mp.value}}
-            {{system.mp.value}} MP
-          {{else}}
-            {{system.mp.raw}} MP
-          {{/if}}
-        </div>
-        {{formInput
-          systemFields.mp.fields.raw
-          value=system.mp.raw
-          disabled=(not editable)
-          classes="ability-bar-input selected"
-        }}
       </div>
     </div>
   </div>

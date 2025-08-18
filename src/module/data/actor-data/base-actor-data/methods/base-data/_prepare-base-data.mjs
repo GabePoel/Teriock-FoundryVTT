@@ -1,4 +1,4 @@
-import { pseudoHooks } from "../../../../../helpers/constants/pseudo-hooks.mjs";
+import { pseudoHooks } from "../../../../../constants/pseudo-hooks.mjs";
 import { _prepareLighting } from "./_prepare-lighting.mjs";
 import { _prepareBonuses, _prepareHpMp } from "./_prepare-stats.mjs";
 

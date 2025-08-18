@@ -1,17 +1,19 @@
-import TeriockBaseEffectData from "../base-effect-data/base-effect-data.mjs";
-import { TeriockConsequence } from "../../../documents/_documents.mjs";
-import {
+import type TeriockBaseEffectData from "../base-effect-data/base-effect-data.mjs";
+import type { TeriockConsequence } from "../../../documents/_documents.mjs";
+import type {
   CombatExpirationMethod,
   CombatExpirationSourceType,
   CombatExpirationTiming,
   HierarchyField,
 } from "../shared/shared-fields";
-import { TeriockActor, TeriockEffect } from "../../../documents/_module.mjs";
+import type {
+  TeriockActor,
+  TeriockEffect,
+} from "../../../documents/_module.mjs";
 
 declare module "./consequence-data.mjs" {
   export default interface TeriockConsequenceData
     extends TeriockBaseEffectData {
-    parent: TeriockConsequence;
     source: Teriock.UUID<TeriockEffect>;
     expirations: {
       condition: {
@@ -39,5 +41,7 @@ declare module "./consequence-data.mjs" {
     sustainedExpiration: boolean;
     sourceDescription: string;
     hierarchy: HierarchyField;
+
+    get parent(): typeof TeriockConsequence;
   }
 }

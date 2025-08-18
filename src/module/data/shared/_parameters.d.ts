@@ -1,5 +1,5 @@
-import type { abilityOptions } from "../../helpers/constants/ability-options.mjs";
-import type { fonts } from "../../helpers/constants/fonts.mjs";
+import type { abilityOptions } from "../../constants/ability-options.mjs";
+import type { fonts } from "../../constants/fonts.mjs";
 
 declare global {
   namespace Teriock.Parameters.Shared {

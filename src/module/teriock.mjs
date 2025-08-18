@@ -1,25 +1,17 @@
 import * as applications from "./applications/_module.mjs";
-import * as dialogs from "./applications/dialogs/_module.mjs";
 import * as canvas from "./canvas/_module.mjs";
 import * as perception from "./canvas/perception/_module.mjs";
-import { conditions } from "./content/conditions.mjs";
+import * as constants from "./constants/_module.mjs";
+import * as content from "./content/_module.mjs";
 import * as data from "./data/_module.mjs";
 import * as documents from "./documents/_module.mjs";
-import TERIOCK from "./helpers/config.mjs";
-import * as createEffects from "./helpers/create-effects.mjs";
-import * as fetch from "./helpers/fetch.mjs";
-import * as handlebars from "./helpers/handlebars/_module.mjs";
-import * as hooks from "./helpers/hooks/_module.mjs";
-import * as queries from "./helpers/queries/_module.mjs";
-import registerTemplates from "./helpers/register-templates.mjs";
-import * as utils from "./helpers/utils.mjs";
-import * as wiki from "./helpers/wiki/_module.mjs";
+import * as helpers from "./helpers/_module.mjs";
 
 const { ActorSheet, ItemSheet } = foundry.appv1.sheets;
 const { DocumentSheetConfig } = foundry.applications.apps;
 
 foundry.helpers.Hooks.once("init", function () {
-  CONFIG.TERIOCK = TERIOCK;
+  CONFIG.TERIOCK = constants.TERIOCK;
 
   CONFIG.ui.hotbar = applications.ui.TeriockHotbar;
 
@@ -31,7 +23,7 @@ foundry.helpers.Hooks.once("init", function () {
   };
 
   CONFIG.statusEffects.length = 0;
-  for (const condition of Object.values(conditions)) {
+  for (const condition of Object.values(content.conditions)) {
     CONFIG.statusEffects.push(condition);
   }
   CONFIG.statusEffects.sort((a, b) => {
@@ -212,14 +204,15 @@ foundry.helpers.Hooks.once("init", function () {
 
   // Registering custom queries
   Object.assign(CONFIG.queries, {
-    "teriock.addToSustaining": queries.addToSustainingQuery,
-    "teriock.createHotbarFolder": queries.createHotbarFolderQuery,
-    "teriock.inCombatExpiration": queries.inCombatExpirationQuery,
-    "teriock.resetAttackPenalties": queries.resetAttackPenalties,
-    "teriock.sustainedExpiration": queries.sustainedExpirationQuery,
-    "teriock.timeAdvance": queries.timeAdvanceQuery,
-    "teriock.update": queries.updateQuery,
-    "teriock.updateEmbeddedDocuments": queries.updateEmbeddedDocumentsQuery,
+    "teriock.addToSustaining": helpers.queries.addToSustainingQuery,
+    "teriock.createHotbarFolder": helpers.queries.createHotbarFolderQuery,
+    "teriock.inCombatExpiration": helpers.queries.inCombatExpirationQuery,
+    "teriock.resetAttackPenalties": helpers.queries.resetAttackPenalties,
+    "teriock.sustainedExpiration": helpers.queries.sustainedExpirationQuery,
+    "teriock.timeAdvance": helpers.queries.timeAdvanceQuery,
+    "teriock.update": helpers.queries.updateQuery,
+    "teriock.updateEmbeddedDocuments":
+      helpers.queries.updateEmbeddedDocumentsQuery,
   });
 
   const packs =
@@ -238,61 +231,16 @@ foundry.helpers.Hooks.once("init", function () {
     User: documents.TeriockUser,
     api: {
       create: {
-        ability: createEffects.createAbility,
-        consequence: createEffects.createConsequence,
-        fluency: createEffects.createFluency,
-        property: createEffects.createProperty,
-        resource: createEffects.createResource,
+        ability: helpers.createEffects.createAbility,
+        consequence: helpers.createEffects.createConsequence,
+        fluency: helpers.createEffects.createFluency,
+        property: helpers.createEffects.createProperty,
+        resource: helpers.createEffects.createResource,
       },
-      dialog: {
-        boost: dialogs.boostDialog,
-        duration: dialogs.durationDialog,
-        goadedTo: dialogs.goadedToDialog,
-        hotbarDrop: dialogs.hotbarDropDialog,
-        inCombatExpiration: dialogs.inCombatExpirationDialog,
-        lightedTo: dialogs.lightedToDialog,
-        select: dialogs.selectDialog,
-        selectAbility: dialogs.selectAbilityDialog,
-        selectCondition: dialogs.selectConditionDialog,
-        selectDocument: dialogs.selectDocumentDialog,
-        selectDocuments: dialogs.selectDocumentsDialog,
-        selectEquipmentClass: dialogs.selectEquipmentClassDialog,
-        selectEquipmentType: dialogs.selectEquipmentTypeDialog,
-        selectProperty: dialogs.selectPropertyDialog,
-        selectTokens: dialogs.selectTokensDialog,
-        selectTradecraft: dialogs.selectTradecraftDialog,
-        selectWeaponClass: dialogs.selectWeaponClassDialog,
-      },
-      utils: {
-        convertUnits: utils.convertUnits,
-        copyAbility: fetch.copyAbility,
-        copyItem: fetch.copyItem,
-        copyProperty: fetch.copyProperty,
-        copyRank: fetch.copyRank,
-        dedent: utils.dedent,
-        fromFeet: utils.fromFeet,
-        getAbility: fetch.getAbility,
-        getItem: fetch.getItem,
-        getProperty: fetch.getProperty,
-        getRank: fetch.getRank,
-        importAbility: fetch.importAbility,
-        importProperty: fetch.importProperty,
-        pureUuid: utils.pureUuid,
-        refreshDocuments: utils.refreshDocuments,
-        safeUuid: utils.safeUuid,
-        toCamelCase: utils.toCamelCase,
-        toFeet: utils.toFeet,
-        toKebabCase: utils.toKebabCase,
-        toTitleCase: utils.toTitleCase,
-      },
-      wiki: {
-        cleanWikiHTML: wiki.cleanWikiHTML,
-        fetchCategoryAbilities: wiki.fetchCategoryAbilities,
-        fetchCategoryMembers: wiki.fetchCategoryMembers,
-        fetchNamespacePages: wiki.fetchNamespacePages,
-        fetchWikiPageHTML: wiki.fetchWikiPageHTML,
-        openWikiPage: wiki.openWikiPage,
-      },
+      dialogs: applications.dialogs,
+      utils: helpers.utils,
+      fetch: helpers.fetch,
+      wiki: helpers.wiki,
     },
     packs: {
       rules: () =>
@@ -323,16 +271,16 @@ foundry.helpers.Hooks.once("init", function () {
   };
 
   // Register custom handlebars templates
-  return registerTemplates();
+  return helpers.maintenance.registerTemplates();
 });
 
-for (const hook of Object.values(hooks)) {
+for (const hook of Object.values(helpers.hookManagement)) {
   if (typeof hook === "function") {
     hook();
   }
 }
 
-for (const helper of Object.values(handlebars)) {
+for (const helper of Object.values(helpers.handlebarHelpers)) {
   if (typeof helper === "function") {
     helper();
   }

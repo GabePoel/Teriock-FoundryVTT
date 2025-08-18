@@ -1,9 +1,16 @@
-const { shaders } = foundry.canvas.rendering;
+const { BackgroundVisionShader, ColorationVisionShader } =
+  foundry.canvas.rendering.shaders;
 
 /**
  * Wounded vision shader - creates red vignette effect for a down/dead {@link TeriockTokenDocument}
  */
-export class WoundedBackgroundVisionShader extends shaders.BackgroundVisionShader {
+export class WoundedBackgroundVisionShader extends BackgroundVisionShader {
+  /** @inheritdoc */
+  static defaultUniforms = {
+    ...super.defaultUniforms,
+    colorTint: [1.0, 1.0, 1.0], // No additional tint
+  };
+
   /** @inheritdoc */
   static fragmentShader = `
   ${this.SHADER_HEADER}
@@ -30,12 +37,6 @@ export class WoundedBackgroundVisionShader extends shaders.BackgroundVisionShade
   }`;
 
   /** @inheritdoc */
-  static defaultUniforms = {
-    ...super.defaultUniforms,
-    colorTint: [1.0, 1.0, 1.0], // No additional tint
-  };
-
-  /** @inheritdoc */
   get isRequired() {
     return true;
   }
@@ -44,7 +45,13 @@ export class WoundedBackgroundVisionShader extends shaders.BackgroundVisionShade
 /**
  * Wounded coloration vision shader - adds red overlay at edges
  */
-export class WoundedColorationVisionShader extends shaders.ColorationVisionShader {
+export class WoundedColorationVisionShader extends ColorationVisionShader {
+  /** @inheritdoc */
+  static defaultUniforms = {
+    ...super.defaultUniforms,
+    colorEffect: [1.0, 0.0, 0.0], // Pure red
+  };
+
   /** @inheritdoc */
   static fragmentShader = `
   ${this.SHADER_HEADER}
@@ -68,12 +75,6 @@ export class WoundedColorationVisionShader extends shaders.ColorationVisionShade
     ${this.FALLOFF}
     ${this.FRAGMENT_END}
   }`;
-
-  /** @inheritdoc */
-  static defaultUniforms = {
-    ...super.defaultUniforms,
-    colorEffect: [1.0, 0.0, 0.0], // Pure red
-  };
 
   /** @inheritdoc */
   get isRequired() {

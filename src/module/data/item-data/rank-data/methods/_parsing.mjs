@@ -6,10 +6,10 @@ import { createAbility } from "../../../../helpers/create-effects.mjs";
  * @type {object}
  * @private
  */
-const ARCHETYPE_STATS = {
-  mage: { hitDie: "d8", manaDie: "d12", hp: 5, mp: 7 },
-  warrior: { hitDie: "d12", manaDie: "d8", hp: 7, mp: 5 },
-  default: { hitDie: "d10", manaDie: "d10", hp: 6, mp: 6 },
+const ARCHETYPE_FACES = {
+  mage: { hp: 8, mp: 12 },
+  warrior: { hp: 12, mp: 8 },
+  default: { hp: 10, mp: 10 },
 };
 
 /**
@@ -92,8 +92,8 @@ export async function _parse(rankData, rawHTML) {
     progress.update({ pct: pct, message: `Pulling ${abilityName} from wiki.` });
   }
 
-  // Archetype stats
-  const stats = ARCHETYPE_STATS[archetype] || ARCHETYPE_STATS.default;
+  await rankData.setDice("hp", 1, ARCHETYPE_FACES[archetype]["hp"]);
+  await rankData.setDice("mp", 1, ARCHETYPE_FACES[archetype]["mp"]);
 
   // Helper for HTML/text extraction
   const getHTML = (sel) => doc.querySelector(sel)?.innerHTML.trim();
@@ -101,7 +101,6 @@ export async function _parse(rankData, rawHTML) {
   const parameters = {
     maxAv: metaData.getAttribute("data-av"),
     archetype: metaData.getAttribute("data-archetype"),
-    ...stats,
     flaws: getHTML(".class-flaws") || "None.",
     description: getHTML(".class-description") || "",
   };

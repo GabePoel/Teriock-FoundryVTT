@@ -4,15 +4,13 @@
       {{> "systems/teriock/src/templates/document-templates/shared/header.hbs"}}
       <div class="ab-bars">
         {{> "systems/teriock/src/templates/document-templates/item-templates/species-template/bars/sp-stats-bar.hbs"}}
-        {{> "systems/teriock/src/templates/document-templates/item-templates/species-template/bars/sp-size-bar.hbs"}}
         {{> "systems/teriock/src/templates/document-templates/item-templates/species-template/bars/sp-lifespan-bar.hbs"}}
+        {{> "systems/teriock/src/templates/document-templates/item-templates/species-template/bars/sp-size-bar.hbs"}}
       </div>
     </div>
     {{> "systems/teriock/src/templates/document-templates/item-templates/species-template/parts/sp-menu.hbs"}}
     <div class="ab-main">
       <div class="ab-tags-all">
-        <button data-action="addHitDie">Hit</button>
-        <button data-action="addManaDie">Mana</button>
         {{> "systems/teriock/src/templates/document-templates/item-templates/species-template/tags/sp-traits-tags.hbs"}}
       </div>
       {{formGroup
@@ -20,12 +18,14 @@
         value=system.appearance
         enriched=enriched.appearance
         enabled=(not disabled)
+        hidden=(not (exists system.appearance))
       }}
       {{formGroup
         systemFields.description
         value=system.description
         enriched=enriched.description
         enabled=(not disabled)
+        hidden=(not (exists system.description))
       }}
     </div>
     {{> "systems/teriock/src/templates/document-templates/shared/effects.hbs"}}

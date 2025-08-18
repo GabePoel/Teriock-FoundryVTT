@@ -1,4 +1,5 @@
 import type TeriockActor from "../documents/actor.mjs";
+import type { dieOptions } from "../constants/die-options.mjs";
 
 declare global {
   namespace Teriock.RollOptions {
@@ -56,7 +57,7 @@ declare global {
     /**
      * Allowable number of dice faces.
      */
-    export type PolyhedralDieFaces = 2 | 4 | 6 | 8 | 10 | 12 | 20;
+    export type PolyhedralDieFaces = keyof typeof dieOptions.faces;
 
     /**
      * Allowable dice values.

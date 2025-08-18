@@ -1,3 +1,3 @@
-export { default as ChildDocument } from "./child-mixin.mjs";
-export { default as ParentDocument } from "./parent-mixin.mjs";
-export { default as CommonDocument } from "./common-mixin.mjs";
+export { default as ChildDocumentMixin } from "./child-document-mixin.mjs";
+export { default as ParentDocumentMixin } from "./parent-document-mixin.mjs";
+export { default as CommonDocumentMixin } from "./common-document-mixin.mjs";

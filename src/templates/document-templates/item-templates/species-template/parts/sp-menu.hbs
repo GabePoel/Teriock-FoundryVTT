@@ -1,6 +1,29 @@
 <div class="ab-menu">
   <div class="ab-menu-content">
     <div class="ab-menu-bar">
+      <div class="tgrid ap-check-grid g3">
+        {{formGroup
+          systemFields.applySize
+          value=system.applySize
+          disabled=(not editable)
+          classes="tgrid-item"
+          rootId=uuid
+        }}
+        {{formGroup
+          systemFields.applyHp
+          value=system.applyHp
+          disabled=(not editable)
+          classes="tgrid-item"
+          rootId=uuid
+        }}
+        {{formGroup
+          systemFields.applyMp
+          value=system.applyMp
+          disabled=(not editable)
+          classes="tgrid-item"
+          rootId=uuid
+        }}
+      </div>
       <div class="tgrid g2">
         <div class="tgrid-item gi2">
           {{formInput
@@ -9,10 +32,10 @@
             disabled=(not editable)
             classes="teriock-full-width ab-menu-inline"
             dataset=(dataset tooltip="Traits")
-            rootId=(concat uuid)
+            rootId=uuid
           }}
         </div>
-        {{#if (not (or (exists system.size.min) (exists system.size.max)))}}
+        {{#if (not (and (exists system.size.min) (exists system.size.max)))}}
           <div class="tgrid-item">
             <button
               class="ab-menu-button ab-size-button"
@@ -25,7 +48,7 @@
             </button>
           </div>
         {{/if}}
-        {{#if (not (or (exists system.adult) (exists system.lifespan)))}}
+        {{#if (not (exists system.adult))}}
           <div class="tgrid-item">
             <button
               class="ab-menu-button ab-lifespan-button"
@@ -35,6 +58,32 @@
             >
               {{{config.icons.add}}}
               Lifespan
+            </button>
+          </div>
+        {{/if}}
+        {{#if (not (exists system.description))}}
+          <div class="tgrid-item">
+            <button
+              class="ab-menu-button ab-description-button"
+              {{#if (not editable)}}
+              disabled="disabled"
+              {{/if}}
+            >
+              {{{config.icons.add}}}
+              Description
+            </button>
+          </div>
+        {{/if}}
+        {{#if (not (exists system.appearance))}}
+          <div class="tgrid-item">
+            <button
+              class="ab-menu-button ab-appearance-button"
+              {{#if (not editable)}}
+              disabled="disabled"
+              {{/if}}
+            >
+              {{{config.icons.add}}}
+              Appearance
             </button>
           </div>
         {{/if}}

@@ -1,12 +1,10 @@
-import TeriockEffect from "../../../documents/effect.mjs";
-import { HierarchyField } from "../shared/shared-fields";
+import type { TeriockEffect } from "../../../documents/_module.mjs";
+import type { HierarchyField } from "../shared/shared-fields";
 import type { ChildDataInterface } from "../../mixins/_types";
 
 declare module "./base-effect-data.mjs" {
   /** Redundant extension is needed for intellisense. */
   export default interface TeriockBaseEffectData extends ChildDataInterface {
-    /** Parent effect */
-    parent: TeriockEffect;
     /** If this effect should be deleted instead of disabled when it expires */
     deleteOnExpire: boolean;
     /** Update counter - used to force an update when adding/removing effects */
@@ -24,5 +22,8 @@ declare module "./base-effect-data.mjs" {
       };
     };
     hierarchy: Partial<HierarchyField>;
+
+    /** Parent effect */
+    get parent(): typeof TeriockEffect;
   }
 }

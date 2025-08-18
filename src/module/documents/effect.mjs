@@ -9,261 +9,8 @@ import { BaseTeriockEffect } from "./_base.mjs";
  * @property {TeriockActor|TeriockItem} parent
  */
 export default class TeriockEffect extends BaseTeriockEffect {
-  /** @inheritDoc */
-  get isSuppressed() {
-    let suppressed = super.isSuppressed;
-    return this.system.suppressed || suppressed;
-  }
-
-  /** @inheritDoc */
-  get actor() {
-    const actor = super.actor;
-    if (actor) return actor;
-    else return this.parent.actor;
-  }
-
-  /**
-   * Metadata for this effect.
-   *
-   * @returns {Teriock.Documents.EffectModelMetadata}
-   */
-  get metadata() {
-    const defaultMetadata = {
-      type: "base",
-      usable: false,
-      consumable: false,
-      wiki: false,
-      namespace: "",
-      pageNameKey: "name",
-      hierarchy: false,
-    };
-    return foundry.utils.mergeObject(
-      defaultMetadata,
-      this.system.constructor?.metadata,
-    );
-  }
-
-  /**
-   * Alternative to {@link this.isTemporary} that only references duration.
-   *
-   * @returns {boolean}
-   */
-  get hasDuration() {
-    return !!this.duration.seconds;
-  }
-
-  /**
-   * The number of seconds remaining before this effect expires.
-   *
-   * @returns {number|null}
-   */
-  get remaining() {
-    if (this.hasDuration) {
-      return (
-        this.duration.startTime + this.duration.seconds - game.time.worldTime
-      );
-    }
-    return null;
-  }
-
-  /**
-   * The time remaining before this effect expires, as a string.
-   *
-   * @returns {string|null}
-   */
-  get remainingString() {
-    const remaining = this.remaining;
-    if (remaining !== null) {
-      return secondsToReadable(remaining);
-    }
-    return null;
-  }
-
-  /**
-   * Gets the effect that provides this effect if there is one.
-   *
-   * @returns {TeriockEffect|null}
-   */
-  get sup() {
-    if (this.supId) {
-      return /** @type {TeriockEffect} */ this.parent.getEmbeddedDocument(
-        "ActiveEffect",
-        this.supId,
-      );
-    }
-    return null;
-  }
-
-  /**
-   * Safely gets the ID of the effect that provides this effect if there is one.
-   *
-   * @returns {Teriock.ID<TeriockEffect>}
-   */
-  get supId() {
-    if (
-      this.metadata.hierarchy &&
-      this.system.hierarchy.supId &&
-      this.parent.effects.has(this.system.hierarchy.supId)
-    ) {
-      return this.system.hierarchy.supId;
-    }
-    return null;
-  }
-
-  /**
-   * Gets all effects that this effect is a sub-effect of.
-   *
-   * @returns {TeriockEffect[]} Array of super-effects, ordered from immediate sup to top level.
-   */
-  get allSups() {
-    const supEffects = [];
-    let supEffect = this.sup;
-    if (supEffect) {
-      supEffects.push(supEffect);
-      supEffects.push(...supEffect.allSups);
-    }
-    return supEffects;
-  }
-
-  /**
-   * Gets all sub-effects that are derived from this effect.
-   *
-   * @returns {TeriockEffect[]}
-   */
-  get subs() {
-    /** @type {TeriockEffect[]} */
-    const subEffects = [];
-    for (const id of this.subIds) {
-      const root = this.parent;
-      subEffects.push(root.effects.get(id));
-    }
-    return subEffects;
-  }
-
-  /**
-   * Gets all sub-effects that are derived from this effect via it's root.
-   *
-   * @returns {TeriockEffect[]}
-   */
-  get rootSubs() {
-    /** @type {TeriockEffect[]} */
-    const subEffects = [];
-    for (const id of this.rootSubIds) {
-      const root = foundry.utils.fromUuidSync(this.system.hierarchy.rootUuid);
-      subEffects.push(root.effects.get(id));
-    }
-    return subEffects;
-  }
-
-  /**
-   * Safely gets the IDS of all sub-effects that are derived from this effect.
-   *
-   * @returns {Set<string>}
-   */
-  get subIds() {
-    if (this.metadata.hierarchy && this.system.hierarchy.subIds.size > 0) {
-      const root = this.parent;
-      return this.system.hierarchy.subIds.filter((id) => root.effects.has(id));
-    }
-    return new Set();
-  }
-
-  /**
-   * Safely gets the IDS of all sub-effects that are derived from this effect via its root.
-   *
-   * @returns {Set<string>}
-   */
-  get rootSubIds() {
-    if (this.metadata.hierarchy && this.system.hierarchy.subIds.size > 0) {
-      const root = foundry.utils.fromUuidSync(this.system.hierarchy.rootUuid);
-      return this.system.hierarchy.subIds.filter((id) => root.effects.has(id));
-    }
-    return new Set();
-  }
-
-  /**
-   * Gets all sub-effect descendants from this effect recursively.
-   *
-   * @returns {TeriockEffect[]} Array of all descendant effects.
-   */
-  get allSubs() {
-    const allSubEffects = [];
-    const subEffects = this.subs;
-    for (const subEffect of subEffects) {
-      allSubEffects.push(subEffect);
-      allSubEffects.push(...subEffect.allSubs);
-    }
-    return allSubEffects;
-  }
-
-  /**
-   * Gets all sub-effect descendants from this effect recursively via its root.
-   *
-   * @returns {TeriockEffect[]} Array of all descendant effects.
-   */
-  get rootAllSubs() {
-    const allSubEffects = [];
-    const subEffects = this.rootSubs;
-    for (const subEffect of subEffects) {
-      allSubEffects.push(subEffect);
-      allSubEffects.push(...subEffect.allSubs);
-    }
-    return allSubEffects;
-  }
-
-  /**
-   * Gets the document that most directly applies this effect. If it's an effect, return that.
-   * Otherwise, gets what Foundry considers to be the parent.
-   *
-   * @returns {TeriockActor|TeriockEffect|TeriockItem} The source document that applies this effect.
-   */
-  get source() {
-    let source = this.sup;
-    if (!source) {
-      source = this.parent;
-    }
-    return source;
-  }
-
-  /**
-   * Checks if this effect is supposed to activate on the use of its parent {@link TeriockItem}.
-   *
-   * @returns {boolean}
-   */
-  get isOnUse() {
-    return (
-      this.parent.documentName === "Item" &&
-      this.parent.system.onUse.has(this.id)
-    );
-  }
-
-  /**
-   * Checks if this effect is a reference effect by examining its sups for non-passive maneuvers.
-   *
-   * @returns {boolean} True if this is a reference effect, false otherwise.
-   */
-  get isReference() {
-    const sups = this.allSups;
-    if (this.isOnUse) return true;
-    for (const sup of sups) {
-      if (sup.system.maneuver !== "passive") {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  /** @inheritDoc */
-  static migrateData(data) {
-    if (typeof data?.type === "string" && data.type === "effect") {
-      data.type = "consequence";
-    }
-    return data;
-  }
-
   /**
    * Change the IDs for many client effects consistently.
-   *
    * @param {TeriockEffect[]} effects - Client documents.
    * @param {Record<string,string>} idMap - Mapping of old IDs to new IDs.
    * @param {string} rootUuid - UUID for the parent {@link TeriockActor} or {@link TeriockItem} document.
@@ -299,13 +46,10 @@ export default class TeriockEffect extends BaseTeriockEffect {
   /**
    * Pre-process a creation operation, potentially altering its instructions or input data. Pre-operation events only
    * occur for the client which requested the operation.
-   *
    * This batch-wise workflow occurs after individual {@link _preCreate} workflows and provides a final pre-flight check
    * before a database operation occurs.
-   *
    * Modifications to pending documents must mutate the documents array or alter individual document instances using
    * {@link updateSource}.
-   *
    * @param {TeriockEffect[]} documents - Pending document instances to be created
    * @param {DatabaseCreateOperation} operation - Parameters of the database creation operation
    * @param {TeriockUser} user - The User requesting the creation operation
@@ -354,13 +98,10 @@ export default class TeriockEffect extends BaseTeriockEffect {
   /**
    * Pre-process a deletion operation, potentially altering its instructions or input data. Pre-operation events only
    * occur for the client which requested the operation.
-   *
    * This batch-wise workflow occurs after individual {@link _preDelete} workflows and provides a final pre-flight check
    * before a database operation occurs.
-   *
    * Modifications to the requested deletions are performed by mutating the operation object.
    * {@link updateSource}.
-   *
    * @param {TeriockEffect[]} documents - Document instances to be deleted
    * @param {DatabaseDeleteOperation} operation - Parameters of the database update operation
    * @param {TeriockUser} user - The User requesting the deletion operation
@@ -376,52 +117,244 @@ export default class TeriockEffect extends BaseTeriockEffect {
     }
   }
 
-  /**
-   * Prepares derived data for the effect, handling ability-specific logic and attunement changes.
-   *
-   * @todo Move this logic to {@link TeriockAttunementData} as appropriate.
-   * @inheritdoc
-   */
-  prepareDerivedData() {
-    super.prepareDerivedData();
-    if (this.type === "attunement") {
-      this.changes = [
-        {
-          key: "system.attunements",
-          mode: 2,
-          value: this.system.target,
-          priority: 10,
-        },
-        {
-          key: "system.presence.value",
-          mode: 2,
-          value: this.system.tier,
-          priority: 10,
-        },
-      ];
+  /** @inheritDoc */
+  static migrateData(data) {
+    if (typeof data?.type === "string" && data.type === "effect") {
+      data.type = "consequence";
     }
+    return data;
+  }
+
+  /** @inheritDoc */
+  get actor() {
+    const actor = super.actor;
+    if (actor) return actor;
+    else return this.parent.actor;
   }
 
   /**
-   * Deletes all sub-effects and clears the sub IDs from this effect.
-   *
-   * @returns {Promise<void>} Promise that resolves when all subs are deleted.
+   * Gets all sub-effect descendants from this effect recursively.
+   * @returns {TeriockEffect[]} Array of all descendant effects.
    */
-  async deleteSubs() {
-    if (this.subIds.size > 0) {
-      await this.parent?.deleteEmbeddedDocuments(
-        "ActiveEffect",
-        Array.from(this.subIds),
-      );
-      await this.update({
-        "system.hierarchy.subIds": new Set(),
-      });
+  get allSubs() {
+    const allSubEffects = [];
+    const subEffects = this.subs;
+    for (const subEffect of subEffects) {
+      allSubEffects.push(subEffect);
+      allSubEffects.push(...subEffect.allSubs);
     }
+    return allSubEffects;
+  }
+
+  /**
+   * Gets all effects that this effect is a sub-effect of.
+   * @returns {TeriockEffect[]} Array of super-effects, ordered from immediate sup to top level.
+   */
+  get allSups() {
+    const supEffects = [];
+    let supEffect = this.sup;
+    if (supEffect) {
+      supEffects.push(supEffect);
+      supEffects.push(...supEffect.allSups);
+    }
+    return supEffects;
+  }
+
+  /**
+   * Alternative to {@link this.isTemporary} that only references duration.
+   * @returns {boolean}
+   */
+  get hasDuration() {
+    return !!this.duration.seconds;
+  }
+
+  /**
+   * Checks if this effect is supposed to activate on the use of its parent {@link TeriockItem}.
+   * @returns {boolean}
+   */
+  get isOnUse() {
+    return (
+      this.parent.documentName === "Item" &&
+      this.parent.system.onUse.has(this.id)
+    );
+  }
+
+  /**
+   * Checks if this effect is a reference effect by examining its sups for non-passive maneuvers.
+   * @returns {boolean} True if this is a reference effect, false otherwise.
+   */
+  get isReference() {
+    const sups = this.allSups;
+    if (this.isOnUse) return true;
+    for (const sup of sups) {
+      if (sup.system.maneuver !== "passive") {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  /** @inheritDoc */
+  get isSuppressed() {
+    let suppressed = super.isSuppressed;
+    return this.system.suppressed || suppressed;
+  }
+
+  /**
+   * Metadata for this effect.
+   * @returns {Teriock.Documents.EffectModelMetadata}
+   */
+  get metadata() {
+    const defaultMetadata = {
+      type: "base",
+      usable: false,
+      consumable: false,
+      wiki: false,
+      namespace: "",
+      pageNameKey: "name",
+      hierarchy: false,
+    };
+    return foundry.utils.mergeObject(
+      defaultMetadata,
+      this.system.constructor?.metadata,
+    );
+  }
+
+  /**
+   * The number of seconds remaining before this effect expires.
+   * @returns {number|null}
+   */
+  get remaining() {
+    if (this.hasDuration) {
+      return (
+        this.duration.startTime + this.duration.seconds - game.time.worldTime
+      );
+    }
+    return null;
+  }
+
+  /**
+   * The time remaining before this effect expires, as a string.
+   * @returns {string|null}
+   */
+  get remainingString() {
+    const remaining = this.remaining;
+    if (remaining !== null) {
+      return secondsToReadable(remaining);
+    }
+    return null;
+  }
+
+  /**
+   * Gets all sub-effect descendants from this effect recursively via its root.
+   * @returns {TeriockEffect[]} Array of all descendant effects.
+   */
+  get rootAllSubs() {
+    const allSubEffects = [];
+    const subEffects = this.rootSubs;
+    for (const subEffect of subEffects) {
+      allSubEffects.push(subEffect);
+      allSubEffects.push(...subEffect.allSubs);
+    }
+    return allSubEffects;
+  }
+
+  /**
+   * Safely gets the IDS of all sub-effects that are derived from this effect via its root.
+   * @returns {Set<string>}
+   */
+  get rootSubIds() {
+    if (this.metadata.hierarchy && this.system.hierarchy.subIds.size > 0) {
+      const root = foundry.utils.fromUuidSync(this.system.hierarchy.rootUuid);
+      return this.system.hierarchy.subIds.filter((id) => root.effects.has(id));
+    }
+    return new Set();
+  }
+
+  /**
+   * Gets all sub-effects that are derived from this effect via it's root.
+   * @returns {TeriockEffect[]}
+   */
+  get rootSubs() {
+    /** @type {TeriockEffect[]} */
+    const subEffects = [];
+    for (const id of this.rootSubIds) {
+      const root = foundry.utils.fromUuidSync(this.system.hierarchy.rootUuid);
+      subEffects.push(root.effects.get(id));
+    }
+    return subEffects;
+  }
+
+  /**
+   * Gets the document that most directly applies this effect. If it's an effect, return that.
+   * Otherwise, gets what Foundry considers to be the parent.
+   * @returns {TeriockActor|TeriockEffect|TeriockItem} The source document that applies this effect.
+   */
+  get source() {
+    let source = this.sup;
+    if (!source) {
+      source = this.parent;
+    }
+    return source;
+  }
+
+  /**
+   * Safely gets the IDS of all sub-effects that are derived from this effect.
+   * @returns {Set<string>}
+   */
+  get subIds() {
+    if (this.metadata.hierarchy && this.system.hierarchy.subIds.size > 0) {
+      const root = this.parent;
+      return this.system.hierarchy.subIds.filter((id) => root.effects.has(id));
+    }
+    return new Set();
+  }
+
+  /**
+   * Gets all sub-effects that are derived from this effect.
+   * @returns {TeriockEffect[]}
+   */
+  get subs() {
+    /** @type {TeriockEffect[]} */
+    const subEffects = [];
+    for (const id of this.subIds) {
+      const root = this.parent;
+      subEffects.push(root.effects.get(id));
+    }
+    return subEffects;
+  }
+
+  /**
+   * Gets the effect that provides this effect if there is one.
+   * @returns {TeriockEffect|null}
+   */
+  get sup() {
+    if (this.supId) {
+      return /** @type {TeriockEffect} */ this.parent.getEmbeddedDocument(
+        "ActiveEffect",
+        this.supId,
+      );
+    }
+    return null;
+  }
+
+  /**
+   * Safely gets the ID of the effect that provides this effect if there is one.
+   * @returns {Teriock.ID<TeriockEffect>}
+   */
+  get supId() {
+    if (
+      this.metadata.hierarchy &&
+      this.system.hierarchy.supId &&
+      this.parent.effects.has(this.system.hierarchy.supId)
+    ) {
+      return this.system.hierarchy.supId;
+    }
+    return null;
   }
 
   /**
    * Add a sub-effect to this one.
-   *
    * @param {TeriockEffect} sub
    * @returns {Promise<void>}
    */
@@ -443,6 +376,27 @@ export default class TeriockEffect extends BaseTeriockEffect {
   }
 
   /**
+   * Deletes all sub-effects and clears the sub IDs from this effect.
+   * @returns {Promise<void>} Promise that resolves when all subs are deleted.
+   */
+  async deleteSubs() {
+    if (this.subIds.size > 0) {
+      await this.parent?.deleteEmbeddedDocuments(
+        "ActiveEffect",
+        Array.from(this.subIds),
+      );
+      await this.update({
+        "system.hierarchy.subIds": new Set(),
+      });
+    }
+  }
+
+  /** @inheritDoc */
+  async disable() {
+    await this.update({ disabled: true });
+  }
+
+  /**
    * @inheritDoc
    * @returns {Promise<TeriockEffect>}
    */
@@ -452,11 +406,6 @@ export default class TeriockEffect extends BaseTeriockEffect {
     if (sup) {
       await sup.addSub(copy);
     }
-  }
-
-  /** @inheritDoc */
-  async disable() {
-    await this.update({ disabled: true });
   }
 
   /** @inheritDoc */

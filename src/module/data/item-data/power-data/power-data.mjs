@@ -19,14 +19,6 @@ export default class TeriockPowerData extends TeriockBaseItemData {
   });
 
   /** @inheritDoc */
-  get messageParts() {
-    return {
-      ...super.messageParts,
-      ..._messageParts(this),
-    };
-  }
-
-  /** @inheritDoc */
   static defineSchema() {
     return foundry.utils.mergeObject(super.defineSchema(), {
       type: new fields.StringField({
@@ -39,5 +31,13 @@ export default class TeriockPowerData extends TeriockBaseItemData {
         label: "Proficient",
       }),
     });
+  }
+
+  /** @inheritDoc */
+  get messageParts() {
+    return {
+      ...super.messageParts,
+      ..._messageParts(this),
+    };
   }
 }

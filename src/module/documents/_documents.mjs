@@ -2,8 +2,6 @@ import TeriockActor from "./actor.mjs";
 import TeriockEffect from "./effect.mjs";
 import TeriockItem from "./item.mjs";
 
-const { Game } = foundry;
-
 /**
  * Character-specific {@link TeriockActor} class.
  *
@@ -175,8 +173,3 @@ export class TeriockProperty extends TeriockEffect {}
  * @property {Teriock.ID<TeriockResource>} id
  */
 export class TeriockResource extends TeriockEffect {}
-
-/**
- * @property {Collection<TeriockCompendiumCollection>} packs
- */
-export class TeriockGame extends Game {}

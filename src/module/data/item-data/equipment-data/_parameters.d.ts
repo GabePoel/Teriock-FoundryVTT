@@ -1,9 +1,9 @@
-import type { equipmentclasses } from "../../../helpers/constants/generated/equipment-classes.mjs";
-import type { weaponclasses } from "../../../helpers/constants/generated/weapon-classes.mjs";
-import type { weaponFightingStyles } from "../../../helpers/constants/generated/weapon-fighting-styles.mjs";
-import type { properties } from "../../../helpers/constants/generated/properties.mjs";
-import type { materialProperties } from "../../../helpers/constants/generated/material-properties.mjs";
-import type { magicalProperties } from "../../../helpers/constants/generated/magical-properties.mjs";
+import type { equipmentclasses } from "../../../constants/generated/equipment-classes.mjs";
+import type { weaponclasses } from "../../../constants/generated/weapon-classes.mjs";
+import type { weaponFightingStyles } from "../../../constants/generated/weapon-fighting-styles.mjs";
+import type { properties } from "../../../constants/generated/properties.mjs";
+import type { materialProperties } from "../../../constants/generated/material-properties.mjs";
+import type { magicalProperties } from "../../../constants/generated/magical-properties.mjs";
 
 declare global {
   namespace Teriock.Parameters.Equipment {

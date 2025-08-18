@@ -1,8 +1,10 @@
-import { traits } from "../../../helpers/constants/generated/traits.mjs";
-import { smartEvaluateSync } from "../../../helpers/utils.mjs";
+import { setStatDiceDialog } from "../../../applications/dialogs/_module.mjs";
+import { traits } from "../../../constants/generated/traits.mjs";
+import { copyAbility } from "../../../helpers/fetch.mjs";
 import { StatDataMixin, WikiDataMixin } from "../../mixins/_module.mjs";
-import { FormulaField, TextField } from "../../shared/fields.mjs";
+import { TextField } from "../../shared/fields.mjs";
 import TeriockBaseItemData from "../base-item-data/base-item-data.mjs";
+import { _messageParts } from "./methods/_messages.mjs";
 
 const { fields } = foundry.data;
 
@@ -19,7 +21,6 @@ export default class TeriockSpeciesData extends StatDataMixin(
 ) {
   /**
    * Metadata for this item.
-   *
    * @type {Readonly<Teriock.Documents.ItemModelMetadata>}
    */
   static metadata = Object.freeze({
@@ -36,11 +37,9 @@ export default class TeriockSpeciesData extends StatDataMixin(
     const schema = super.defineSchema();
     Object.assign(schema, {
       description: new TextField({
-        initial: "<p>None.</p>",
         label: "Description",
       }),
       appearance: new TextField({
-        initial: "<p>None.</p>",
         label: "Appearance",
       }),
       size: new fields.SchemaField({
@@ -50,22 +49,13 @@ export default class TeriockSpeciesData extends StatDataMixin(
           initial: 3,
         }),
       }),
-      hp: new fields.SchemaField({
-        raw: new FormulaField({
-          initial: "5",
-        }),
-      }),
-      mp: new fields.SchemaField({
-        raw: new FormulaField({
-          initial: "5",
-        }),
-      }),
       traits: new fields.SetField(
         new fields.StringField({
           choices: traits,
         }),
         {
           initial: ["humanoid"],
+          label: "Traits",
         },
       ),
       lifespan: new fields.NumberField({
@@ -94,30 +84,95 @@ export default class TeriockSpeciesData extends StatDataMixin(
   }
 
   /**
-   * Set a defined number of HP and automatically adjust hit dice to fit.
-   *
-   * @param {number} value
-   * @returns {Promise<void>}
+   * Faces of HP dice.
+   * @returns {Teriock.RollOptions.PolyhedralDieFaces}
    */
-  async setHp(value) {
-    const numDice = Math.ceil(value / 5);
-    await this.setDice("hp", 5, numDice);
+  get hpDiceFaces() {
+    return Object.values(this.hpDice)[0].faces;
   }
 
   /**
-   * Set a defined number of MP and automatically adjust mana dice to fit.
-   *
-   * @param {number} value
-   * @returns {Promise<void>}
+   * HP dice formula.
+   * @returns {string}
    */
-  async setMp(value) {
-    const numDice = Math.ceil(value / 5);
-    await this.setDice("hp", 5, numDice);
+  get hpDiceFormula() {
+    return `${this.hpDiceNumber}d${this.hpDiceFaces}`;
+  }
+
+  /**
+   * Number of HP dice.
+   * @returns {number}
+   */
+  get hpDiceNumber() {
+    return Object.keys(this.hpDice).length;
   }
 
   /** @inheritDoc */
-  prepareBaseData() {
-    this.hp.value = smartEvaluateSync(this.hp.raw);
-    this.mp.value = smartEvaluateSync(this.mp.raw);
+  get messageParts() {
+    return { ...super.messageParts, ..._messageParts(this) };
+  }
+
+  /**
+   * Faces of MP dice.
+   * @returns {Teriock.RollOptions.PolyhedralDieFaces}
+   */
+  get mpDiceFaces() {
+    return Object.values(this.mpDice)[0].faces;
+  }
+
+  /**
+   * MP dice formula.
+   * @returns {string}
+   */
+  get mpDiceFormula() {
+    return `${this.mpDiceNumber}d${this.mpDiceFaces}`;
+  }
+
+  /**
+   * Number of MP dice.
+   * @returns {number}
+   */
+  get mpDiceNumber() {
+    return Object.keys(this.mpDice).length;
+  }
+
+  /** @inheritDoc */
+  async _preCreate(data, options, user) {
+    this.parent.updateSource({
+      effects: [
+        (await copyAbility("Normal Intelligence")).toObject(),
+        (await copyAbility("Normal Movement")).toObject(),
+        (await copyAbility("Normal Perception")).toObject(),
+        (await copyAbility("Normal Sneak")).toObject(),
+        (await copyAbility("Normal Strength")).toObject(),
+      ],
+    });
+    return super._preCreate(data, options, user);
+  }
+
+  /**
+   * Set an HP dice formula.
+   * @returns {Promise<void>}
+   */
+  async setHpDice() {
+    await setStatDiceDialog(
+      this.parent,
+      "hp",
+      this.hpDiceNumber,
+      this.hpDiceFaces,
+    );
+  }
+
+  /**
+   * Set an MP dice formula.
+   * @returns {Promise<void>}
+   */
+  async setMpDice() {
+    await setStatDiceDialog(
+      this.parent,
+      "mp",
+      this.mpDiceNumber,
+      this.mpDiceFaces,
+    );
   }
 }

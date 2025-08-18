@@ -1,4 +1,4 @@
-const goadedToUuids = await game.teriock.api.dialog.goadedTo();
+const goadedToUuids = await game.teriock.api.dialogs.goadedToDialog();
 const buttons = scope.chatData.system.buttons;
 scope.chatData.system.buttons = buttons.filter(
   (button) => button.dataset.action === "apply-effect",

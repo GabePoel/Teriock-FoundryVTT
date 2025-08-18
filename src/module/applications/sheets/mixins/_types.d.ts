@@ -1,4 +1,4 @@
-export interface TeriockSheet {
+export interface TeriockSheetMixin {
   /** Is the menu open? */
   _menuOpen: boolean;
   /** Context Menus */

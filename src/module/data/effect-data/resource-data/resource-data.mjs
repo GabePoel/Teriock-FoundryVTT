@@ -9,16 +9,13 @@ const { fields } = foundry.data;
 
 /**
  * Resource-specific effect data model.
- *
  * @extends {TeriockBaseEffectData}
- * @extends {ChildData}
  */
 export default class TeriockResourceData extends ConsumableDataMixin(
   TeriockBaseEffectData,
 ) {
   /**
    * Metadata for this effect.
-   *
    * @type {Readonly<Teriock.Documents.EffectModelMetadata>}
    */
   static metadata = Object.freeze({
@@ -30,20 +27,6 @@ export default class TeriockResourceData extends ConsumableDataMixin(
     usable: true,
     wiki: false,
   });
-
-  /** @inheritDoc */
-  get suppressed() {
-    let suppressed = super.suppressed;
-    if (!suppressed && this.parent?.parent?.type === "equipment") {
-      suppressed = !this.parent.parent.system.isAttuned;
-    }
-    return suppressed;
-  }
-
-  /** @inheritDoc */
-  get messageParts() {
-    return { ...super.messageParts, ..._messageParts(this) };
-  }
 
   /** @inheritDoc */
   static defineSchema() {
@@ -91,6 +74,26 @@ export default class TeriockResourceData extends ConsumableDataMixin(
   }
 
   /** @inheritDoc */
+  get messageParts() {
+    return { ...super.messageParts, ..._messageParts(this) };
+  }
+
+  /** @inheritDoc */
+  get suppressed() {
+    let suppressed = super.suppressed;
+    if (!suppressed && this.parent?.parent?.type === "equipment") {
+      suppressed = !this.parent.parent.system.isAttuned;
+    }
+    return suppressed;
+  }
+
+  /** @inheritDoc */
+  async gainOne() {
+    await super.gainOne();
+    await this.parent.enable();
+  }
+
+  /** @inheritDoc */
   async roll(options) {
     await _roll(this, options);
   }
@@ -102,11 +105,5 @@ export default class TeriockResourceData extends ConsumableDataMixin(
     if (toDisable) {
       await this.parent.disable();
     }
-  }
-
-  /** @inheritDoc */
-  async gainOne() {
-    await super.gainOne();
-    await this.parent.enable();
   }
 }

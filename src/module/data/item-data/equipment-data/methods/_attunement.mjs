@@ -40,9 +40,7 @@ export async function _attune(equipmentData) {
   };
   if (equipmentData.parent.actor && (await _canAttune(equipmentData))) {
     if (equipmentData.reference && !equipmentData.identified) {
-      const ref = await foundry.utils.fromUuid(
-        equipmentData.reference,
-      );
+      const ref = await foundry.utils.fromUuid(equipmentData.reference);
       if (ref) {
         await equipmentData.parent.update({
           "system.tier.raw": ref.system.tier.raw,

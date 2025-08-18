@@ -1,4 +1,4 @@
-import { documentOptions } from "../../../../helpers/constants/document-options.mjs";
+import { documentOptions } from "../../../../constants/document-options.mjs";
 import * as createEffects from "../../../../helpers/create-effects.mjs";
 import { selectAbilityDialog } from "../../../dialogs/select-dialog.mjs";
 import { SheetMixin } from "../../mixins/_module.mjs";
@@ -32,7 +32,6 @@ export default class TeriockBaseEffectSheet extends SheetMixin(
 
   /**
    * Adds a new change to an effect application.
-   *
    * @param {Event} _event - The event object.
    * @param {HTMLElement} target - The target element.
    * @returns {Promise<void>} Promise that resolves when change is added.
@@ -71,7 +70,6 @@ export default class TeriockBaseEffectSheet extends SheetMixin(
 
   /**
    * Deletes a change from an effect application.
-   *
    * @param {Event} _event - The event object.
    * @param {HTMLElement} target - The target element.
    * @returns {Promise<void>} Promise that resolves when change is deleted.
@@ -98,6 +96,11 @@ export default class TeriockBaseEffectSheet extends SheetMixin(
   }
 
   /** @inheritDoc */
+  async _onRender(context, options) {
+    await super._onRender(context, options);
+  }
+
+  /** @inheritDoc */
   async _prepareContext(options) {
     const context = await super._prepareContext(options);
     Object.assign(context, {
@@ -111,10 +114,5 @@ export default class TeriockBaseEffectSheet extends SheetMixin(
       description: this.document.system.description,
     });
     return context;
-  }
-
-  /** @inheritDoc */
-  async _onRender(context, options) {
-    await super._onRender(context, options);
   }
 }

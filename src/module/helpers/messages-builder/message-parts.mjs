@@ -1,4 +1,4 @@
-import { abilityOptions } from "../constants/ability-options.mjs";
+import { abilityOptions } from "../../constants/ability-options.mjs";
 
 /**
  * Creates a DOM element with specified properties and children.
@@ -167,7 +167,7 @@ function barIcon(parent, iconClass, label, first = true) {
 }
 
 /**
- * Adds an embedded block for a specific entity type to the blocks array.
+ * Adds an embedded block for a specific entity type to the `blocks` array.
  * @param {Array} entities - Array of entities to filter and process.
  * @param {Teriock.MessageData.Block[]} blocks - Array to add the generated block to.
  * @param {string} name - The name/title for the block.
@@ -227,7 +227,7 @@ function addEmbeddedBlock(
 }
 
 /**
- * Adds an abilities block to the blocks array.
+ * Adds an abilities block to the `blocks` array.
  * @param {Array} abilities - Array of ability entities.
  * @param {Array} blocks - Array to add the abilities block to.
  * @param {string} name - The name/title for the abilities block. Defaults to "Abilities".
@@ -237,7 +237,7 @@ export function addAbilitiesBlock(abilities, blocks, name = "Abilities") {
 }
 
 /**
- * Adds a properties block to the blocks array.
+ * Adds a properties block to the `blocks` array.
  * @param {Array} properties - Array of property entities.
  * @param {Array} blocks - Array to add the properties block to.
  * @param {string} name - The name/title for the properties block. Defaults to "Properties".
@@ -247,11 +247,21 @@ export function addPropertiesBlock(properties, blocks, name = "Properties") {
 }
 
 /**
- * Adds a resources block to the blocks array.
+ * Adds a resources block to the ``blocks` array.
  * @param {Array} resources - Array of resource entities.
  * @param {Array} blocks - Array to add the resources block to.
  * @param {string} name - The name/title for the resources block. Defaults to "Resources".
  */
 export function addResourcesBlock(resources, blocks, name = "Resources") {
   addEmbeddedBlock(resources, blocks, name, "resource");
+}
+
+/**
+ * Adds a fluencies block to the `blocks` array.
+ * @param {Array} resources - Array of resource entities.
+ * @param {Array} blocks - Array to add the resources block to.
+ * @param {string} name - The name/title for the resources block. Defaults to "Resources".
+ */
+export function addFluenciesBlock(resources, blocks, name = "Fluencies") {
+  addEmbeddedBlock(resources, blocks, name, "fluency");
 }

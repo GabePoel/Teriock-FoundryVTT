@@ -1,7 +1,7 @@
 import {
   addAbilitiesBlock,
   addPropertiesBlock,
-  addResourcesBlock
+  addResourcesBlock,
 } from "../../../../helpers/messages-builder/message-parts.mjs";
 
 /**

@@ -17,6 +17,7 @@ const outputFile = path.resolve(
   "src",
   "module",
   "helpers",
+  "maintenance",
   "register-templates.mjs",
 );
 

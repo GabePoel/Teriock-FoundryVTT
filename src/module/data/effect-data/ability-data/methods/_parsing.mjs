@@ -1,5 +1,5 @@
+import { abilityOptions } from "../../../../constants/ability-options.mjs";
 import { cleanFeet } from "../../../../helpers/clean.mjs";
-import { abilityOptions } from "../../../../helpers/constants/ability-options.mjs";
 import { createAbility } from "../../../../helpers/create-effects.mjs";
 import { safeUuid } from "../../../../helpers/utils.mjs";
 import { imageOverrides } from "./_image-overrides.mjs";
@@ -323,7 +323,9 @@ function processTags(parameters, tagTree, doc) {
   }
 
   // Set basic parameters
-  parameters.duration = { description: getBarText(doc, "duration", true) };
+  parameters.durationDialog = {
+    description: getBarText(doc, "duration", true),
+  };
   console.log(parameters);
   parameters.range = getBarText(doc, "range", true);
   if (parameters.delivery.base === "self") parameters.range = "Self.";
@@ -896,7 +898,7 @@ function processDiceAndEffectExtraction(parameters) {
 
     const duration = extractDurationFromHTML(source);
     if (duration > 0) {
-      target.duration = duration;
+      target.durationDialog = duration;
     }
 
     // Extract combat expiration metadata

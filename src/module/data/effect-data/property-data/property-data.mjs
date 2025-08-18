@@ -14,14 +14,12 @@ const { fields } = foundry.data;
  * - [Properties](https://wiki.teriock.com/index.php/Category:Properties)
  *
  * @extends {TeriockBaseEffectData}
- * @extends {ChildData}
  */
 export default class TeriockPropertyData extends WikiDataMixin(
   TeriockBaseEffectData,
 ) {
   /**
    * Metadata for this effect.
-   *
    * @type {Readonly<Teriock.Documents.EffectModelMetadata>}
    */
   static metadata = Object.freeze({
@@ -35,15 +33,14 @@ export default class TeriockPropertyData extends WikiDataMixin(
   });
 
   /** @inheritDoc */
-  get suppressed() {
-    let suppressed = super.suppressed;
-    suppressed = suppressed || _suppressed(this);
-    return suppressed;
-  }
-
-  /** @inheritDoc */
-  get messageParts() {
-    return { ...super.messageParts, ..._messageParts(this) };
+  static defineSchema() {
+    return foundry.utils.mergeObject(super.defineSchema(), {
+      wikiNamespace: new fields.StringField({
+        initial: "Property",
+      }),
+      form: new fields.StringField({ initial: "normal" }),
+      damageType: new fields.StringField({ initial: "" }),
+    });
   }
 
   /** @inheritDoc */
@@ -53,14 +50,15 @@ export default class TeriockPropertyData extends WikiDataMixin(
   }
 
   /** @inheritDoc */
-  static defineSchema() {
-    return foundry.utils.mergeObject(super.defineSchema(), {
-      wikiNamespace: new fields.StringField({
-        initial: "Property",
-      }),
-      form: new fields.StringField({ initial: "normal" }),
-      damageType: new fields.StringField({ initial: "" }),
-    });
+  get messageParts() {
+    return { ...super.messageParts, ..._messageParts(this) };
+  }
+
+  /** @inheritDoc */
+  get suppressed() {
+    let suppressed = super.suppressed;
+    suppressed = suppressed || _suppressed(this);
+    return suppressed;
   }
 
   /** @inheritDoc */

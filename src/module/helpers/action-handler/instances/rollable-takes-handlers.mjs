@@ -1,6 +1,5 @@
-import TeriockMessage from "../../../documents/chat-message.mjs";
-import TeriockRoll from "../../../documents/roll.mjs";
-import boostDialog from "../../../applications/dialogs/boost-dialog.mjs";
+import { boostDialog } from "../../../applications/dialogs/_module.mjs";
+import { TeriockMessage, TeriockRoll } from "../../../documents/_module.mjs";
 import ActionHandler from "../action-handler.mjs";
 
 /**

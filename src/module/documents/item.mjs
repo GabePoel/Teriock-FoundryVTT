@@ -10,8 +10,15 @@ const { api } = foundry.applications;
  */
 export default class TeriockItem extends BaseTeriockItem {
   /**
+   * Checks if the item is disabled.
+   * @returns {boolean} True if the item is disabled, false otherwise.
+   */
+  get disabled() {
+    return this.system.disabled;
+  }
+
+  /**
    * Gets the valid effects for this item.
-   *
    * @returns {TeriockEffect[]} Array of transferred effects.
    */
   get validEffects() {
@@ -19,22 +26,7 @@ export default class TeriockItem extends BaseTeriockItem {
   }
 
   /**
-   * Checks if the item is disabled.
-   *
-   * @returns {boolean} True if the item is disabled, false otherwise.
-   */
-  get disabled() {
-    return this.system.disabled;
-  }
-
-  /** @inheritDoc */
-  async roll(options) {
-    await this.system.roll(options);
-  }
-
-  /**
    * Helper method for bulk wiki pulling operations.
-   *
    * @param {string} pullType - The type of pull operation ("pages" or "categories").
    * @returns {Promise<void>} Promise that resolves when the bulk pull is complete.
    * @private
@@ -87,7 +79,6 @@ export default class TeriockItem extends BaseTeriockItem {
 
   /**
    * Initiates a bulk wiki pull operation for supported item types.
-   *
    * @returns {Promise<void>} Promise that resolves when the bulk pull dialog is complete.
    */
   async bulkWikiPull() {
@@ -114,5 +105,10 @@ export default class TeriockItem extends BaseTeriockItem {
       });
       await dialog.render(true);
     }
+  }
+
+  /** @inheritDoc */
+  async roll(options) {
+    await this.system.roll(options);
   }
 }

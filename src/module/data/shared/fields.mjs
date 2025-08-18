@@ -122,26 +122,21 @@ export class FormulaField extends StringField {
     });
   }
 
-  /** @inheritdoc */
-  _validateType(value) {
-    if (this.deterministic) {
-      const roll = new TeriockRoll(value, {});
-      if (!roll.isDeterministic) throw new Error("must not contain dice terms");
-    }
-    super._validateType(value);
-  }
-
-  /** @override */
-  _castChangeDelta(delta) {
-    return this._cast(delta).trim();
-  }
-
   /** @override */
   _applyChangeAdd(value, delta, model, change) {
     if (!value) return delta;
     const operator = delta.startsWith("-") ? "-" : "+";
     delta = delta.replace(/^[+-]/, "").trim();
     return `${value} ${operator} ${delta}`;
+  }
+
+  /** @override */
+  _applyChangeDowngrade(value, delta, model, change) {
+    if (!value) return delta;
+    const terms = new TeriockRoll(value, {}).terms;
+    if (terms.length === 1 && terms[0]?.fn === "min")
+      return value.replace(/\)$/, `, ${delta})`);
+    return `min(${value}, ${delta})`;
   }
 
   /** @override */
@@ -162,12 +157,17 @@ export class FormulaField extends StringField {
   }
 
   /** @override */
-  _applyChangeDowngrade(value, delta, model, change) {
-    if (!value) return delta;
-    const terms = new TeriockRoll(value, {}).terms;
-    if (terms.length === 1 && terms[0]?.fn === "min")
-      return value.replace(/\)$/, `, ${delta})`);
-    return `min(${value}, ${delta})`;
+  _castChangeDelta(delta) {
+    return this._cast(delta).trim();
+  }
+
+  /** @inheritdoc */
+  _validateType(value) {
+    if (this.deterministic) {
+      const roll = new TeriockRoll(value, {});
+      if (!roll.isDeterministic) throw new Error("must not contain dice terms");
+    }
+    super._validateType(value);
   }
 }
 

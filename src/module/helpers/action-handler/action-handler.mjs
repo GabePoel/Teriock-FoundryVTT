@@ -5,13 +5,6 @@
  */
 export default class ActionHandler {
   /**
-   * Name of action to connect to listeners.
-   *
-   * @type {string}
-   */
-  static ACTION = "";
-
-  /**
    * @param {MouseEvent} event
    * @param {HTMLElement} element
    */
@@ -23,7 +16,8 @@ export default class ActionHandler {
     const tokenLayer = /** @type {TokenLayer} */ game.canvas.tokens;
     const user = /** @type {TeriockUser} */ game.user;
 
-    this.selectedTokens = /** @type {TeriockTokenDocument[]} */ tokenLayer.controlled;
+    this.selectedTokens =
+      /** @type {TeriockTokenDocument[]} */ tokenLayer.controlled;
     this.selectedActors = /** @type {TeriockActor[]} */ this.selectedTokens.map(
       (t) => t.actor,
     );
@@ -51,15 +45,19 @@ export default class ActionHandler {
   }
 
   /**
+   * Name of action to connect to listeners.
+   * @type {string}
+   */
+  static ACTION = "";
+
+  /**
    * Left-click action.
-   *
    * @returns {Promise<void>}
    */
   async primaryAction() {}
 
   /**
    * Right-click action.
-   *
    * @returns {Promise<void>}
    */
   async secondaryAction() {}

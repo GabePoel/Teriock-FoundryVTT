@@ -1,36 +1,24 @@
 import TeriockBaseItemData from "../base-item-data/base-item-data.mjs";
-import { TeriockSpecies } from "../../../documents/_documents.mjs";
-import type StatDieModel from "../../shared/stat-die.mjs";
+import type { TeriockSpecies } from "../../../documents/_documents.mjs";
 
 declare module "./species-data.mjs" {
   export default interface TeriockSpeciesData extends TeriockBaseItemData {
-    parent: TeriockSpecies;
-    description: string;
     appearance: string;
     size: {
       min: number;
       max: number;
       value: number;
     };
-    hp: {
-      /** @base */
-      raw: string;
-      /** @base */
-      value: number;
-    };
-    mp: {
-      /** @base */
-      raw: string;
-      /** @base */
-      value: number;
-    };
+    adult: number;
+    lifespan: number | null;
+    /** Add this HP to parent {@link TeriockActor}. */
     applyHp: boolean;
+    /** Add this MP to parent {@link TeriockActor}. */
     applyMp: boolean;
+    /** Apply this size to parent {@link TeriockActor}. */
     applySize: boolean;
     traits: Set<Teriock.Parameters.Species.Trait>;
-    /** Hit Dice */
-    hpDice: Record<Teriock.ID<StatDieModel>, StatDieModel>;
-    /** Mana Dice */
-    mpDice: Record<Teriock.ID<StatDieModel>, StatDieModel>;
+
+    get parent(): typeof TeriockSpecies;
   }
 }

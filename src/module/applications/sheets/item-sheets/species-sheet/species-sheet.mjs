@@ -1,4 +1,4 @@
-import { documentOptions } from "../../../../helpers/constants/document-options.mjs";
+import { documentOptions } from "../../../../constants/document-options.mjs";
 import TeriockBaseItemSheet from "../base-item-sheet/base-item-sheet.mjs";
 
 /**
@@ -15,8 +15,8 @@ export default class TeriockSpeciesSheet extends TeriockBaseItemSheet {
       icon: "fa-solid fa-" + documentOptions.species.icon,
     },
     actions: {
-      addHitDie: this._addHitDie,
-      addManaDie: this._addManaDie,
+      setHpDice: this._setHpDice,
+      setMpDice: this._setMpDice,
     },
   };
 
@@ -29,31 +29,22 @@ export default class TeriockSpeciesSheet extends TeriockBaseItemSheet {
     },
   };
 
-  /** Add hit die. */
-  static async _addHitDie() {
-    await this.document.system.addHitDie(8);
+  /**
+   * Set an HP dice formula.
+   * @returns {Promise<void>}
+   * @private
+   */
+  static async _setHpDice() {
+    await this.document.system.setHpDice();
   }
 
-  /** Add mana die. */
-  static async _addManaDie() {
-    await this.document.system.addManaDie(8);
-  }
-
-  /** @inheritDoc */
-  async _prepareContext(options) {
-    const context = await super._prepareContext(options);
-    await this._enrichAll(context, {
-      description: this.item.system.description,
-      appearance: this.item.system.appearance,
-    });
-    return context;
-  }
-
-  /** @inheritDoc */
-  async _onRender(context, options) {
-    await super._onRender(context, options);
-    if (!this.editable) return;
-    this._activateTags();
+  /**
+   * Set an MP dice formula.
+   * @returns {Promise<void>}
+   * @private
+   */
+  static async _setMpDice() {
+    await this.document.system.setMpDice();
   }
 
   /**
@@ -93,5 +84,27 @@ export default class TeriockSpeciesSheet extends TeriockBaseItemSheet {
         el.addEventListener("click", () => doc.update(update));
       });
     }
+  }
+
+  /** @inheritDoc */
+  async _onRender(context, options) {
+    await super._onRender(context, options);
+    if (!this.editable) return;
+    this._activateTags();
+    const buttonMap = {
+      ".ab-description-button": "system.description",
+      ".ab-appearance-button": "system.appearance",
+    };
+    this._connectButtonMap(buttonMap);
+  }
+
+  /** @inheritDoc */
+  async _prepareContext(options) {
+    const context = await super._prepareContext(options);
+    await this._enrichAll(context, {
+      description: this.item.system.description,
+      appearance: this.item.system.appearance,
+    });
+    return context;
   }
 }

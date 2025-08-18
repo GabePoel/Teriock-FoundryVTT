@@ -1,4 +1,4 @@
-import { pseudoHooks } from "../../../../../helpers/constants/pseudo-hooks.mjs";
+import { pseudoHooks } from "../../../../../constants/pseudo-hooks.mjs";
 import {
   FormulaField,
   TeriockArrayField,

@@ -1,4 +1,4 @@
-import { abilityOptions } from "../../../helpers/constants/ability-options.mjs";
+import { abilityOptions } from "../../../constants/ability-options.mjs";
 
 declare global {
   namespace Teriock.Parameters.Ability {

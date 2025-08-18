@@ -18,15 +18,14 @@ import * as schema from "./methods/_schema.mjs";
  * Relevant wiki pages:
  * - [Equipment](https://wiki.teriock.com/index.php/Category:Equipment)
  *
- * @extends {ChildData}
  * @extends {TeriockBaseItemData}
+ * @mixes ConsumableDataMixin
  */
 export default class TeriockEquipmentData extends WikiDataMixin(
   ConsumableDataMixin(TeriockBaseItemData),
 ) {
   /**
    * Metadata for this item.
-   *
    * @type {Readonly<Teriock.Documents.ItemModelMetadata>}
    */
   static metadata = Object.freeze({
@@ -37,6 +36,121 @@ export default class TeriockEquipmentData extends WikiDataMixin(
     usable: true,
     wiki: true,
   });
+
+  /** @inheritDoc */
+  static defineSchema() {
+    return foundry.utils.mergeObject(super.defineSchema(), {
+      ...schema._defineSchema(),
+    });
+  }
+
+  /** @inheritDoc */
+  static migrateData(data) {
+    data = migrate._migrateData(data);
+    return super.migrateData(data);
+  }
+
+  /**
+   * Gets the current attunement data for the equipment.
+   * @returns {TeriockAttunement|null} The attunement data or null if not attuned.
+   */
+  get attunement() {
+    return attunement._getAttunement(this);
+  }
+
+  /**
+   * Checks if equipping is a valid operation.
+   * @returns {boolean}
+   */
+  get canEquip() {
+    return (
+      ((this.consumable && this.quantity >= 1) || !this.consumable) &&
+      !this.isEquipped
+    );
+  }
+
+  /**
+   * Checks if unequipping is a valid operation.
+   * @returns {boolean}
+   */
+  get canUnequip() {
+    return (
+      ((this.consumable && this.quantity >= 1) || !this.consumable) &&
+      this.isEquipped
+    );
+  }
+
+  /** @inheritDoc */
+  get cardContextMenuEntries() {
+    return [...super.cardContextMenuEntries, ...contextMenus._entries(this)];
+  }
+
+  /**
+   * Derived armor value.
+   * @returns {number}
+   */
+  get derivedAv() {
+    return overrides._derivedAv(this);
+  }
+
+  /**
+   * Derived AV0 value.
+   * @returns {boolean}
+   */
+  get derivedAv0() {
+    return overrides._derivedAv0(this);
+  }
+
+  /**
+   * Derived block value.
+   * @returns {number}
+   */
+  get derivedBv() {
+    return overrides._derivedBv(this);
+  }
+
+  /**
+   * Derived damage dice.
+   * @returns {string}
+   */
+  get derivedDamage() {
+    return overrides._derivedDamage(this);
+  }
+
+  /**
+   * Derived two-handed damage dice.
+   */
+  get derivedTwoHandedDamage() {
+    return overrides._derivedTwoHandedDamage(this);
+  }
+
+  /**
+   * Derived UB value.
+   * @returns {boolean}
+   */
+  get derivedUb() {
+    return overrides._derivedUb(this);
+  }
+
+  /**
+   * Checks if the equipment is currently attuned.
+   * @returns {boolean} True if the equipment is attuned, false otherwise.
+   */
+  get isAttuned() {
+    return attunement._attuned(this);
+  }
+
+  /**
+   * Checks if the equipment is currently equipped.
+   * @returns {boolean} - True if the equipment is equipped, false otherwise.
+   */
+  get isEquipped() {
+    if (this.consumable) {
+      return this.quantity >= 1 && this.equipped;
+    } else {
+      return this.equipped;
+    }
+  }
 
   /** @inheritDoc */
   get messageParts() {
@@ -55,204 +169,12 @@ export default class TeriockEquipmentData extends WikiDataMixin(
   }
 
   /** @inheritDoc */
-  get cardContextMenuEntries() {
-    return [...super.cardContextMenuEntries, ...contextMenus._entries(this)];
-  }
-
-  /** @inheritDoc */
   get useIcon() {
     return getRollIcon(this.derivedDamage);
   }
 
   /**
-   * Gets the current attunement data for the equipment.
-   *
-   * @returns {TeriockAttunement|null} The attunement data or null if not attuned.
-   */
-  get attunement() {
-    return attunement._getAttunement(this);
-  }
-
-  /**
-   * Checks if the equipment is currently attuned.
-   *
-   * @returns {boolean} True if the equipment is attuned, false otherwise.
-   */
-  get isAttuned() {
-    return attunement._attuned(this);
-  }
-
-  /**
-   * Checks if the equipment is currently equipped.
-   *
-   * @returns {boolean} - True if the equipment is equipped, false otherwise.
-   */
-  get isEquipped() {
-    if (this.consumable) {
-      return this.quantity >= 1 && this.equipped;
-    } else {
-      return this.equipped;
-    }
-  }
-
-  /**
-   * Checks if equipping is a valid operation.
-   *
-   * @returns {boolean}
-   */
-  get canEquip() {
-    return (
-      ((this.consumable && this.quantity >= 1) || !this.consumable) &&
-      !this.isEquipped
-    );
-  }
-
-  /**
-   * Checks if unequipping is a valid operation.
-   *
-   * @returns {boolean}
-   */
-  get canUnequip() {
-    return (
-      ((this.consumable && this.quantity >= 1) || !this.consumable) &&
-      this.isEquipped
-    );
-  }
-
-  /**
-   * Derived AV0 value.
-   *
-   * @returns {boolean}
-   */
-  get derivedAv0() {
-    return overrides._derivedAv0(this);
-  }
-
-  /**
-   * Derived UB value.
-   *
-   * @returns {boolean}
-   */
-  get derivedUb() {
-    return overrides._derivedUb(this);
-  }
-
-  /**
-   * Derived armor value.
-   *
-   * @returns {number}
-   */
-  get derivedAv() {
-    return overrides._derivedAv(this);
-  }
-
-  /**
-   * Derived block value.
-   *
-   * @returns {number}
-   */
-  get derivedBv() {
-    return overrides._derivedBv(this);
-  }
-
-  /**
-   * Derived damage dice.
-   *
-   * @returns {string}
-   */
-  get derivedDamage() {
-    return overrides._derivedDamage(this);
-  }
-
-  /**
-   * Derived two-handed damage dice.
-   */
-  get derivedTwoHandedDamage() {
-    return overrides._derivedTwoHandedDamage(this);
-  }
-
-  /** @inheritDoc */
-  static defineSchema() {
-    return foundry.utils.mergeObject(super.defineSchema(), {
-      ...schema._defineSchema(),
-    });
-  }
-
-  /** @inheritDoc */
-  static migrateData(data) {
-    data = migrate._migrateData(data);
-    return super.migrateData(data);
-  }
-
-  /** @inheritDoc */
-  prepareDerivedData() {
-    super.prepareDerivedData();
-    deriving._prepareDerivedData(this);
-  }
-
-  /** @inheritDoc */
-  async parse(rawHTML) {
-    return await parsing._parse(this, rawHTML);
-  }
-
-  /** @inheritDoc */
-  async roll(options) {
-    await rolling._roll(this, options);
-  }
-
-  /**
-   * Equip this equipment.
-   *
-   * @returns {Promise<void>}
-   */
-  async equip() {
-    await this.actor?.hookCall("equipmentEquip", this.parent);
-    await this.parent.update({ "system.equipped": true });
-  }
-
-  /**
-   * Unequip this equipment.
-   *
-   * @returns {Promise<void>}
-   */
-  async unequip() {
-    await this.actor?.hookCall("equipmentUnequip", this.parent);
-    await this.parent.update({ "system.equipped": false });
-  }
-
-  /**
-   * Removes identification from the equipment.
-   *
-   * @returns {Promise<void>} Promise that resolves when the equipment is unidentified.
-   */
-  async unidentify() {
-    await this.actor?.hookCall("equipmentUnidentify", this.parent);
-    await identifying._unidentify(this);
-  }
-
-  /**
-   * Reads magic on the equipment to reveal its properties.
-   *
-   * @returns {Promise<void>} Promise that resolves when magic reading is complete.
-   */
-  async readMagic() {
-    await this.actor?.hookCall("equipmentReadMagic", this.parent);
-    await identifying._readMagic(this);
-  }
-
-  /**
-   * Identifies the equipment, revealing all its properties.
-   *
-   * @returns {Promise<void>} Promise that resolves when the equipment is identified.
-   */
-  async identify() {
-    await this.actor?.hookCall("equipmentIdentify", this.parent);
-    await identifying._identify(this);
-  }
-
-  /**
    * Attunes the equipment to the current character.
-   *
    * @returns {Promise<TeriockEffect | null>} Promise that resolves to the attunement effect or null.
    */
   async attune() {
@@ -261,38 +183,7 @@ export default class TeriockEquipmentData extends WikiDataMixin(
   }
 
   /**
-   * Removes attunement from the equipment.
-   *
-   * @returns {Promise<void>} Promise that resolves when the equipment is deattuned.
-   */
-  async deattune() {
-    await this.actor?.hookCall("equipmentDeattune", this.parent);
-    await attunement._deattune(this);
-  }
-
-  /**
-   * Shatter this equipment.
-   *
-   * @returns {Promise<void>}
-   */
-  async shatter() {
-    await this.actor?.hookCall("equipmentShatter", this.parent);
-    await this.parent.update({ "system.shattered": true });
-  }
-
-  /**
-   * Repair this equipment.
-   *
-   * @returns {Promise<void>}
-   */
-  async repair() {
-    await this.actor?.hookCall("equipmentRepair", this.parent);
-    await this.parent.update({ "system.shattered": false });
-  }
-
-  /**
    * Dampen this equipment.
-   *
    * @returns {Promise<void>}
    */
   async dampen() {
@@ -301,18 +192,25 @@ export default class TeriockEquipmentData extends WikiDataMixin(
   }
 
   /**
-   * Undampen this equipment.
-   *
+   * Removes attunement from the equipment.
+   * @returns {Promise<void>} Promise that resolves when the equipment is deattuned.
+   */
+  async deattune() {
+    await this.actor?.hookCall("equipmentDeattune", this.parent);
+    await attunement._deattune(this);
+  }
+
+  /**
+   * Equip this equipment.
    * @returns {Promise<void>}
    */
-  async undampen() {
-    await this.actor?.hookCall("equipmentUndampen", this.parent);
-    await this.parent.update({ "system.dampened": false });
+  async equip() {
+    await this.actor?.hookCall("equipmentEquip", this.parent);
+    await this.parent.update({ "system.equipped": true });
   }
 
   /**
    * Glue this equipment.
-   *
    * @returns {Promise<void>}
    */
   async glue() {
@@ -321,12 +219,90 @@ export default class TeriockEquipmentData extends WikiDataMixin(
   }
 
   /**
+   * Identifies the equipment, revealing all its properties.
+   * @returns {Promise<void>} Promise that resolves when the equipment is identified.
+   */
+  async identify() {
+    await this.actor?.hookCall("equipmentIdentify", this.parent);
+    await identifying._identify(this);
+  }
+
+  /** @inheritDoc */
+  async parse(rawHTML) {
+    return await parsing._parse(this, rawHTML);
+  }
+
+  /** @inheritDoc */
+  prepareDerivedData() {
+    super.prepareDerivedData();
+    deriving._prepareDerivedData(this);
+  }
+
+  /**
+   * Reads magic on the equipment to reveal its properties.
+   * @returns {Promise<void>} Promise that resolves when magic reading is complete.
+   */
+  async readMagic() {
+    await this.actor?.hookCall("equipmentReadMagic", this.parent);
+    await identifying._readMagic(this);
+  }
+
+  /**
+   * Repair this equipment.
+   * @returns {Promise<void>}
+   */
+  async repair() {
+    await this.actor?.hookCall("equipmentRepair", this.parent);
+    await this.parent.update({ "system.shattered": false });
+  }
+
+  /** @inheritDoc */
+  async roll(options) {
+    await rolling._roll(this, options);
+  }
+
+  /**
+   * Shatter this equipment.
+   * @returns {Promise<void>}
+   */
+  async shatter() {
+    await this.actor?.hookCall("equipmentShatter", this.parent);
+    await this.parent.update({ "system.shattered": true });
+  }
+
+  /**
+   * Undampen this equipment.
+   * @returns {Promise<void>}
+   */
+  async undampen() {
+    await this.actor?.hookCall("equipmentUndampen", this.parent);
+    await this.parent.update({ "system.dampened": false });
+  }
+
+  /**
+   * Unequip this equipment.
+   * @returns {Promise<void>}
+   */
+  async unequip() {
+    await this.actor?.hookCall("equipmentUnequip", this.parent);
+    await this.parent.update({ "system.equipped": false });
+  }
+
+  /**
    * Unglue this equipment.
-   *
    * @returns {Promise<void>}
    */
   async unglue() {
     await this.actor?.hookCall("equipmentUnglue", this.parent);
     await this.parent.update({ "system.glued": false });
+  }
+
+  /**
+   * Removes identification from the equipment.
+   * @returns {Promise<void>} Promise that resolves when the equipment is unidentified.
+   */
+  async unidentify() {
+    await this.actor?.hookCall("equipmentUnidentify", this.parent);
+    await identifying._unidentify(this);
   }
 }

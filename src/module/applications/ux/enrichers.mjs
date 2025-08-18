@@ -1,4 +1,4 @@
-import { documentOptions } from "../../helpers/constants/document-options.mjs";
+import { documentOptions } from "../../constants/document-options.mjs";
 
 const enricherIcons = {
   Core: "circle-info",

@@ -1,23 +1,20 @@
-import { conditions } from "../../../helpers/constants/generated/conditions.mjs";
+import { conditions } from "../../../constants/generated/conditions.mjs";
 import { makeIcon } from "../../../helpers/utils.mjs";
-import { ChildDataMixin } from "../../mixins/_module.mjs";
+import { ChildDataModel } from "../../mixins/_module.mjs";
 import { comparatorField } from "../shared/shared-fields.mjs";
 import { _expire, _shouldExpire } from "./methods/_expiration.mjs";
 
 const { fields } = foundry.data;
-const { TypeDataModel } = foundry.abstract;
 
 /**
  * Base effect data model.
  *
+ * @extends {ChildDataModel}
  * @extends {TypeDataModel}
  */
-export default class TeriockBaseEffectData extends ChildDataMixin(
-  TypeDataModel,
-) {
+export default class TeriockBaseEffectData extends ChildDataModel {
   /**
    * Metadata for this effect.
-   *
    * @type {Readonly<Teriock.Documents.EffectModelMetadata>}
    */
   static metadata = Object.freeze({
@@ -29,57 +26,6 @@ export default class TeriockBaseEffectData extends ChildDataMixin(
     usable: false,
     wiki: false,
   });
-
-  /**
-   * Checks if the effect is suppressed.
-   * Effects are suppressed if their parent item is disabled.
-   *
-   * @returns {boolean} True if the effect is suppressed, false otherwise.
-   */
-  get suppressed() {
-    if (
-      this.parent.parent?.documentName === "Item" &&
-      this.parent.parent.system.shouldSuppress(this.parent.id)
-    ) {
-      return true;
-    }
-    return !!(
-      this.parent.parent?.documentName === "Item" &&
-      this.parent.parent?.system.disabled
-    );
-  }
-
-  /**
-   * Get the actor associated with this effect data.
-   *
-   * @returns {TeriockActor|null}
-   */
-  get actor() {
-    return /** @type {TeriockActor} */ this.parent.actor;
-  }
-
-  /**
-   * Checks if the effect should expire based on its current state.
-   *
-   * @returns {boolean} True if the effect should expire, false otherwise.
-   */
-  get shouldExpire() {
-    return _shouldExpire(this);
-  }
-
-  /** @inheritDoc */
-  get cardContextMenuEntries() {
-    return [
-      ...super.cardContextMenuEntries,
-      {
-        name: "Open Source",
-        icon: makeIcon("arrow-up-right-from-square", "contextMenu"),
-        callback: async () => await this.parent.source.sheet.render(true),
-        condition: this.parent.source.documentName !== "Actor",
-        group: "open",
-      },
-    ];
-  }
 
   /** @inheritDoc */
   static defineSchema() {
@@ -114,23 +60,69 @@ export default class TeriockBaseEffectData extends ChildDataMixin(
   }
 
   /**
-   * Expires the effect, removing it from the parent document.
-   *
-   * @returns {Promise<void>} Promise that resolves when the effect is expired.
+   * Get the actor associated with this effect data.
+   * @returns {TeriockActor|null}
    */
-  async expire() {
-    await this.actor?.hookCall("effectExpiration");
-    return await _expire(this);
+  get actor() {
+    return /** @type {TeriockActor} */ this.parent.actor;
+  }
+
+  /** @inheritDoc */
+  get cardContextMenuEntries() {
+    return [
+      ...super.cardContextMenuEntries,
+      {
+        name: "Open Source",
+        icon: makeIcon("arrow-up-right-from-square", "contextMenu"),
+        callback: async () => await this.parent.source.sheet.render(true),
+        condition: this.parent.source.documentName !== "Actor",
+        group: "open",
+      },
+    ];
+  }
+
+  /**
+   * Checks if the effect should expire based on its current state.
+   * @returns {boolean} True if the effect should expire, false otherwise.
+   */
+  get shouldExpire() {
+    return _shouldExpire(this);
+  }
+
+  /**
+   * Checks if the effect is suppressed.
+   * Effects are suppressed if their parent item is disabled.
+   * @returns {boolean} True if the effect is suppressed, false otherwise.
+   */
+  get suppressed() {
+    if (
+      this.parent.parent?.documentName === "Item" &&
+      this.parent.parent.system.shouldSuppress(this.parent.id)
+    ) {
+      return true;
+    }
+    return !!(
+      this.parent.parent?.documentName === "Item" &&
+      this.parent.parent?.system.disabled
+    );
   }
 
   /**
    * Checks if the effect should expire and expires it if necessary.
-   *
    * @returns {Promise<void>} Promise that resolves when the expiration check is complete.
    */
   async checkExpiration() {
     if (this.shouldExpire) {
       await this.expire();
     }
+  }
+
+  /**
+   * Expires the effect, removing it from the parent document.
+   * @returns {Promise<void>} Promise that resolves when the effect is expired.
+   */
+  async expire() {
+    await this.actor?.hookCall("effectExpiration");
+    return await _expire(this);
   }
 }

@@ -7,7 +7,7 @@ const effectObject = JSON.parse(button.dataset.normal);
 const validAbilities = actor.abilities
   .filter((a) => !a.isReference && a.system.standard)
   .sort((a, b) => a.name.localeCompare(b.name));
-const ability = await game.teriock.api.dialog.selectDocument(validAbilities, {
+const ability = await game.teriock.api.dialogs.selectDocumentDialog(validAbilities, {
   title: "Select Ability",
   hint: "Select an ability to share.",
 });

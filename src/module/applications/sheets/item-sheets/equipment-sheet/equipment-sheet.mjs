@@ -1,5 +1,5 @@
+import { documentOptions } from "../../../../constants/document-options.mjs";
 import { cleanCapitalization } from "../../../../helpers/clean.mjs";
-import { documentOptions } from "../../../../helpers/constants/document-options.mjs";
 import TeriockBaseItemSheet from "../base-item-sheet/base-item-sheet.mjs";
 import { fontContextMenu, powerLevelContextMenu } from "./connections/_context-menus.mjs";
 
@@ -33,6 +33,19 @@ export default class TeriockEquipmentSheet extends TeriockBaseItemSheet {
   };
 
   /**
+   * Toggles the dampened state of the equipment.
+   * @returns {Promise<void>} Promise that resolves when dampened state is toggled.
+   * @static
+   */
+  static async _toggleDampened() {
+    if (this.document.system.dampened) {
+      await this.document.system.undampen();
+    } else {
+      await this.document.system.dampen();
+    }
+  }
+
+  /**
    * Toggles the equipped state of the equipment.
    * @returns {Promise<void>} Promise that resolves when equipped state is toggled.
    * @static
@@ -56,65 +69,6 @@ export default class TeriockEquipmentSheet extends TeriockBaseItemSheet {
     } else {
       await this.document.system.shatter();
     }
-  }
-
-  /**
-   * Toggles the dampened state of the equipment.
-   * @returns {Promise<void>} Promise that resolves when dampened state is toggled.
-   * @static
-   */
-  static async _toggleDampened() {
-    if (this.document.system.dampened) {
-      await this.document.system.undampen();
-    } else {
-      await this.document.system.dampen();
-    }
-  }
-
-  /** @inheritDoc */
-  async _prepareContext(options) {
-    const context = await super._prepareContext(options);
-    await this._enrichAll(context, {
-      specialRules: this.item.system.specialRules,
-      description: this.item.system.description,
-      flaws: this.item.system.flaws,
-      notes: this.item.system.notes,
-    });
-    return context;
-  }
-
-  /**
-   * Handles the render event for the equipment sheet.
-   * Sets up context menus, input cleaning, tag management, and button mappings.
-   * @param {object} context - The render context.
-   * @param {object} options - Render options.
-   * @override
-   */
-  async _onRender(context, options) {
-    await super._onRender(context, options);
-    if (!this.editable) return;
-
-    const item = this.item;
-
-    this._connectContextMenu(
-      ".power-level-box",
-      powerLevelContextMenu(item),
-      "click",
-    );
-    this._connectContextMenu(".ab-title", fontContextMenu(item), "contextmenu");
-
-    this.element.querySelectorAll(".capitalization-input").forEach((el) => {
-      this._connectInput(el, el.getAttribute("name"), cleanCapitalization);
-    });
-
-    this._activateTags();
-    const buttonMap = {
-      ".ab-special-rules-button": "system.specialRules",
-      ".ab-description-button": "system.description",
-      ".ab-flaws-button": "system.flaws",
-      ".ab-notes-button": "system.notes",
-    };
-    this._connectButtonMap(buttonMap);
   }
 
   /**
@@ -185,5 +139,45 @@ export default class TeriockEquipmentSheet extends TeriockBaseItemSheet {
         async () => await doc.update({ "system.shattered": false }),
       ),
     );
+  }
+
+  /** @inheritDoc */
+  async _onRender(context, options) {
+    await super._onRender(context, options);
+    if (!this.editable) return;
+
+    const item = this.item;
+
+    this._connectContextMenu(
+      ".power-level-box",
+      powerLevelContextMenu(item),
+      "click",
+    );
+    this._connectContextMenu(".ab-title", fontContextMenu(item), "contextmenu");
+
+    this.element.querySelectorAll(".capitalization-input").forEach((el) => {
+      this._connectInput(el, el.getAttribute("name"), cleanCapitalization);
+    });
+
+    this._activateTags();
+    const buttonMap = {
+      ".ab-special-rules-button": "system.specialRules",
+      ".ab-description-button": "system.description",
+      ".ab-flaws-button": "system.flaws",
+      ".ab-notes-button": "system.notes",
+    };
+    this._connectButtonMap(buttonMap);
+  }
+
+  /** @inheritDoc */
+  async _prepareContext(options) {
+    const context = await super._prepareContext(options);
+    await this._enrichAll(context, {
+      specialRules: this.item.system.specialRules,
+      description: this.item.system.description,
+      flaws: this.item.system.flaws,
+      notes: this.item.system.notes,
+    });
+    return context;
   }
 }

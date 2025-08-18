@@ -1,4 +1,5 @@
-import { makeIcon } from "../../../../../helpers/utils.mjs";
+import { dieOptions } from "../../../../../constants/die-options.mjs";
+import { getRollIcon, makeIcon, toTitleCase } from "../../../../../helpers/utils.mjs";
 
 /**
  * Creates a context menu for selecting archetypes within a rank item.
@@ -111,64 +112,15 @@ export function rankContextMenu(rank) {
  */
 function dieContextMenu(rank, stat = "hp") {
   const iconStyle = CONFIG.TERIOCK.iconStyles.contextMenu;
-  const statLong = stat === "hp" ? "hit" : "mana";
-  const path = rank.system[`${statLong}Die`].path;
-  return [
-    {
-      name: "d4",
-      icon: makeIcon("dice-d4", iconStyle),
-      callback: () =>
-        rank.update({
-          [`${path}.faces`]: 4,
-          [`${path}.value`]: 3,
-        }),
-    },
-    {
-      name: "d6",
-      icon: makeIcon("dice-d6", iconStyle),
-      callback: () =>
-        rank.update({
-          [`${path}.faces`]: 6,
-          [`${path}.value`]: 4,
-        }),
-    },
-    {
-      name: "d8",
-      icon: makeIcon("dice-d8", iconStyle),
-      callback: () =>
-        rank.update({
-          [`${path}.faces`]: 8,
-          [`${path}.value`]: 5,
-        }),
-    },
-    {
-      name: "d10",
-      icon: makeIcon("dice-d10", iconStyle),
-      callback: () =>
-        rank.update({
-          [`${path}.faces`]: 10,
-          [`${path}.value`]: 6,
-        }),
-    },
-    {
-      name: "d12",
-      icon: makeIcon("dice-d12", iconStyle),
-      callback: () =>
-        rank.update({
-          [`${path}.faces`]: 12,
-          [`${path}.value`]: 7,
-        }),
-    },
-    {
-      name: "d20",
-      icon: makeIcon("dice-d20", iconStyle),
-      callback: () =>
-        rank.update({
-          [`${path}.faces`]: 20,
-          [`${path}.value`]: 11,
-        }),
-    },
-  ];
+  const out = [];
+  for (const [key, value] of Object.entries(dieOptions.faces)) {
+    out.push({
+      name: `${value} ${toTitleCase(dieOptions.stats[stat])} Die`,
+      icon: makeIcon(getRollIcon(value), iconStyle),
+      callback: () => rank.system.setDice(stat, 1, Number(key)),
+    });
+  }
+  return out;
 }
 
 /**

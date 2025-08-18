@@ -1,8 +1,6 @@
 export * as mixins from "./mixins/_module.mjs";
 export { default as TeriockActor } from "./actor.mjs";
 export { default as TeriockCombat } from "./combat.mjs";
-export { default as TeriockCompendiumCollection } from "./collections/compendium-collection.mjs";
-export { default as TeriockCompendiumFolderCollection } from "./collections/compendium-folder-collection.mjs";
 export { default as TeriockEffect } from "./effect.mjs";
 export { default as TeriockFolder } from "./folder.mjs";
 export { default as TeriockItem } from "./item.mjs";

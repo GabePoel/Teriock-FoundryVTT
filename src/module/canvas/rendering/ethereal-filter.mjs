@@ -77,8 +77,6 @@ export default class EtherealFilter extends AbstractBaseFilter {
       vTextureCoord = aVertexPosition * (outputFrame.zw * inputSize.zw);
     }
   `;
-  padding = 10;
-  animated = true;
 
   static create(initialUniforms = {}) {
     const uniforms = { ...this.defaultUniforms, ...initialUniforms };
@@ -87,6 +85,10 @@ export default class EtherealFilter extends AbstractBaseFilter {
     return filter;
   }
 
+  animated = true;
+  padding = 10;
+
+  /** @inheritDoc */
   apply(filterManager, input, output, clear) {
     if (this.animated && !canvas.photosensitiveMode) {
       this.uniforms.time = canvas.app.ticker.lastTime;

@@ -1,4 +1,4 @@
-import { documentOptions } from "../../../../helpers/constants/document-options.mjs";
+import { documentOptions } from "../../../../constants/document-options.mjs";
 import TeriockBaseEffectSheet from "../base-effect-sheet/base-effect-sheet.mjs";
 import { fieldContextMenu, tradecraftContextMenu } from "./connections/_context-menus.mjs";
 

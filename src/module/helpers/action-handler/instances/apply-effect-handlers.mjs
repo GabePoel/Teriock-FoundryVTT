@@ -9,24 +9,7 @@ export class ApplyEffectHandler extends ActionHandler {
   static ACTION = "apply-effect";
 
   /**
-   * Convert to object.
-   *
-   * @param {string} jsonData
-   * @returns {object}
-   * @private
-   */
-  _toObj(jsonData) {
-    try {
-      return JSON.parse(jsonData);
-    } catch (e) {
-      ui.notifications.error("Failed to parse effect data.");
-      return null;
-    }
-  }
-
-  /**
    * Add each {@link TeriockConsequence} to the sustaining {@link TeriockAbility}.
-   *
    * @param {TeriockConsequence[]} createdConsequences
    * @returns {Promise<void>}
    * @private
@@ -40,6 +23,21 @@ export class ApplyEffectHandler extends ActionHandler {
           sustainedUuids: createdConsequences.map((c) => c.uuid),
         });
       }
+    }
+  }
+
+  /**
+   * Convert to object.
+   * @param {string} jsonData
+   * @returns {object}
+   * @private
+   */
+  _toObj(jsonData) {
+    try {
+      return JSON.parse(jsonData);
+    } catch (e) {
+      ui.notifications.error("Failed to parse effect data.");
+      return null;
     }
   }
 

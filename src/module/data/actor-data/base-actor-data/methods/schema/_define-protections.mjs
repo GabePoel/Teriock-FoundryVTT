@@ -1,5 +1,5 @@
-import { abilityOptions } from "../../../../../helpers/constants/ability-options.mjs";
-import { conditions as conditionsList } from "../../../../../helpers/constants/generated/conditions.mjs";
+import { abilityOptions } from "../../../../../constants/ability-options.mjs";
+import { conditions as conditionsList } from "../../../../../constants/generated/conditions.mjs";
 
 const { fields } = foundry.data;
 

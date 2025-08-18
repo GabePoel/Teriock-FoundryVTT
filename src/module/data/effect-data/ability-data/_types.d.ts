@@ -1,8 +1,8 @@
-import TeriockBaseEffectData from "../base-effect-data/base-effect-data.mjs";
-import { TeriockAbilityConsequenceSchema } from "./types/consequences";
-import { TeriockAbilityRulesSchema } from "./types/rules";
-import { TeriockAbility } from "../../../documents/_documents.mjs";
-import { ConsumableInterface } from "../shared/shared-fields";
+import type TeriockBaseEffectData from "../base-effect-data/base-effect-data.mjs";
+import type { TeriockAbilityConsequenceSchema } from "./types/consequences";
+import type { TeriockAbilityRulesSchema } from "./types/rules";
+import type { TeriockAbility } from "../../../documents/_documents.mjs";
+import type { ConsumableInterface } from "../shared/shared-fields";
 
 declare module "./ability-data.mjs" {
   export default interface TeriockAbilityData
@@ -10,7 +10,6 @@ declare module "./ability-data.mjs" {
       TeriockAbilityConsequenceSchema,
       TeriockBaseEffectData,
       ConsumableInterface {
-    /** Parent */
-    parent: TeriockAbility;
+    get parent(): typeof TeriockAbility;
   }
 }

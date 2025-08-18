@@ -1,7 +1,7 @@
 import {
   addAbilitiesBlock,
   addPropertiesBlock,
-  addResourcesBlock
+  addResourcesBlock,
 } from "../../../../helpers/messages-builder/message-parts.mjs";
 
 /**
@@ -26,11 +26,11 @@ export function _messageParts(rankData) {
       ],
     },
     {
-      icon: "fa-circle-info",
-      label: "Dice",
+      icon: "fa-dice",
+      label: "Stat Dice",
       wrappers: [
-        src.hitDie + " Hit Die",
-        src.manaDie + " Mana Die",
+        src.hitDie.polyhedral + " Hit Die",
+        src.manaDie.polyhedral + " Mana Die",
         src.maxAv + " Max AV",
       ],
     },

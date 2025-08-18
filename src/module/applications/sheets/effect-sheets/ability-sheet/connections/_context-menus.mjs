@@ -34,7 +34,6 @@ export function contextMenus(ability) {
 
   /**
    * Creates a quick menu from configuration options.
-   *
    * @param {string} keychain - The configuration keychain to use.
    * @param {string} updateKey - The system key to update when an option is selected.
    * @param {boolean|null} nullOption - Whether to include a "None" option.

@@ -1,4 +1,4 @@
-const lightedToUuids = await game.teriock.api.dialog.lightedTo();
+const lightedToUuids = await game.teriock.api.dialogs.lightedToDialog();
 const buttons = scope.chatData.system.buttons;
 scope.chatData.system.buttons = buttons.filter(
   (button) => button.dataset.action === "apply-effect",

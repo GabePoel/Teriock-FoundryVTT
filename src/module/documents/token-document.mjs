@@ -1,59 +1,23 @@
-import { characterOptions } from "../helpers/constants/character-options.mjs";
+import { characterOptions } from "../constants/character-options.mjs";
 import { convertUnits } from "../helpers/utils.mjs";
 import { BaseTeriockTokenDocument } from "./_base.mjs";
 
 export default class TeriockTokenDocument extends BaseTeriockTokenDocument {
   /**
-   * Ensures that vision is correctly set when the token is first created.
-   * Configures vision modes and detection ranges based on the {@link TeriockActor}'s senses.
-   *
-   * @inheritdoc
+   * Do not emit light if Ethereal.
    */
-  prepareDerivedData() {
-    super.prepareDerivedData();
-    this._derivedDetectionModes();
-    this._deriveVision();
-    this._deriveLighting();
-  }
-
-  /** @inheritDoc */
-  _prepareDetectionModes() {
-    super._prepareDetectionModes();
-    const basicMode = this.detectionModes.find((m) => m.id === "basicSight");
-    if (basicMode) basicMode.enabled = false;
-    const enabledIds = [
-      "materialMaterial",
-      "etherealMaterial",
-      "etherealEthereal",
-    ];
-    const disabledIds = [
-      "materialEthereal",
-      "scentPerception",
-      "soundPerception",
-      "trueSight",
-      "seeInvisible",
-      "blindFighting",
-      "darkVision",
-    ];
-    this.detectionModes.push(
-      ...enabledIds
-        .filter((id) => !this.detectionModes.find((mode) => mode.id === id))
-        .map((id) => {
-          return { id: id, enabled: true, range: Infinity };
-        }),
-    );
-    this.detectionModes.push(
-      ...disabledIds
-        .filter((id) => !this.detectionModes.find((mode) => mode.id === id))
-        .map((id) => {
-          return { id: id, enabled: false, range: 0 };
-        }),
-    );
+  _deriveLighting() {
+    if (this.hasStatusEffect("ethereal")) {
+      this.light.dim = 0;
+      this.light.bright = 0;
+    } else if (this.actor) {
+      for (const [key, value] of Object.entries(this.actor.system.light))
+        foundry.utils.setProperty(this.light, key, value);
+    }
   }
 
   /**
    * Derive vision from the {@link TeriockActor}.
-   *
    * @returns {{visionMode: string, range: null|number}}
    */
   _deriveVision() {
@@ -103,19 +67,6 @@ export default class TeriockTokenDocument extends BaseTeriockTokenDocument {
   }
 
   /**
-   * Do not emit light if Ethereal.
-   */
-  _deriveLighting() {
-    if (this.hasStatusEffect("ethereal")) {
-      this.light.dim = 0;
-      this.light.bright = 0;
-    } else if (this.actor) {
-      for (const [key, value] of Object.entries(this.actor.system.light))
-        foundry.utils.setProperty(this.light, key, value);
-    }
-  }
-
-  /**
    * Derive the detection modes from the {@link TeriockActor}.
    */
   _derivedDetectionModes() {
@@ -144,5 +95,52 @@ export default class TeriockTokenDocument extends BaseTeriockTokenDocument {
     this._deriveVision();
     super._onRelatedUpdate(update, operation);
     canvas.perception.initialize();
+  }
+
+  /** @inheritDoc */
+  _prepareDetectionModes() {
+    super._prepareDetectionModes();
+    const basicMode = this.detectionModes.find((m) => m.id === "basicSight");
+    if (basicMode) basicMode.enabled = false;
+    const enabledIds = [
+      "materialMaterial",
+      "etherealMaterial",
+      "etherealEthereal",
+    ];
+    const disabledIds = [
+      "materialEthereal",
+      "scentPerception",
+      "soundPerception",
+      "trueSight",
+      "seeInvisible",
+      "blindFighting",
+      "darkVision",
+    ];
+    this.detectionModes.push(
+      ...enabledIds
+        .filter((id) => !this.detectionModes.find((mode) => mode.id === id))
+        .map((id) => {
+          return { id: id, enabled: true, range: Infinity };
+        }),
+    );
+    this.detectionModes.push(
+      ...disabledIds
+        .filter((id) => !this.detectionModes.find((mode) => mode.id === id))
+        .map((id) => {
+          return { id: id, enabled: false, range: 0 };
+        }),
+    );
+  }
+
+  /**
+   * Ensures that vision is correctly set when the token is first created.
+   * Configures vision modes and detection ranges based on the {@link TeriockActor}'s senses.
+   * @inheritdoc
+   */
+  prepareDerivedData() {
+    super.prepareDerivedData();
+    this._derivedDetectionModes();
+    this._deriveVision();
+    this._deriveLighting();
   }
 }

@@ -28,7 +28,6 @@ function parseRollOptions(args) {
 export default class TeriockCommand {
   /**
    * Create a new TeriockCommand instance.
-   *
    * @param {string} id - Unique identifier for the command (e.g., "damage").
    * @param {string} docs - Help string for the command.
    * @param {Teriock.Command.Callback} callback - Async function to run the command logic.
@@ -45,7 +44,6 @@ export default class TeriockCommand {
 
   /**
    * Execute the command, handling roll options, and common checks.
-   *
    * @param {Teriock.Command.ExecuteContext} context
    */
   async execute({ args, chatData, actors }) {

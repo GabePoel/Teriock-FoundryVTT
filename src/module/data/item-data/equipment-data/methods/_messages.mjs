@@ -1,12 +1,12 @@
 import {
   addAbilitiesBlock,
+  addFluenciesBlock,
   addPropertiesBlock,
-  addResourcesBlock
+  addResourcesBlock,
 } from "../../../../helpers/messages-builder/message-parts.mjs";
 
 /**
- * Generates message parts for an equipment item, including bars and blocks for display.
- * Creates formatted display elements for equipment type, damage, load, and equipment classes.
+ * Generates message parts for a piece of equipment.
  *
  * @param {TeriockEquipmentData} equipmentData - The equipment data to generate message parts for.
  * @returns {Partial<Teriock.MessageData.Parts>} Object containing bars and blocks for the equipment message.
@@ -65,11 +65,7 @@ export function _messageParts(equipmentData) {
     {
       icon: "fa-flag",
       label: "Equipment Classes",
-      wrappers: [
-        ...src.equipmentClasses.map(
-          (equipmentClass) => ref.equipmentClasses[equipmentClass],
-        ),
-      ],
+      wrappers: [...src.equipmentClasses.map((ec) => ref.equipmentClasses[ec])],
     },
   ];
   const blocks = [
@@ -96,6 +92,7 @@ export function _messageParts(equipmentData) {
     blocks,
   );
   addResourcesBlock(equipmentData.parent.transferredEffects, blocks);
+  addFluenciesBlock(equipmentData.parent.transferredEffects, blocks);
   return {
     bars: bars,
     blocks: blocks,

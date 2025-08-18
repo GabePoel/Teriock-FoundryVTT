@@ -14,13 +14,13 @@ const { fields } = foundry.data;
  * - [Classes](https://wiki.teriock.com/index.php/Category:Classes)
  *
  * @extends {TeriockBaseItemData}
+ * @mixes WikiDataMixin
  */
 export default class TeriockRankData extends StatDataMixin(
   WikiDataMixin(TeriockBaseItemData),
 ) {
   /**
    * Metadata for this item.
-   *
    * @type {Readonly<Teriock.Documents.ItemModelMetadata>}
    */
   static metadata = Object.freeze({
@@ -31,77 +31,6 @@ export default class TeriockRankData extends StatDataMixin(
     usable: false,
     wiki: true,
   });
-
-  /** @inheritDoc */
-  get cardContextMenuEntries() {
-    return [
-      ...super.cardContextMenuEntries,
-      {
-        name: "Roll Hit Die",
-        icon: makeIcon(getRollIcon(this.hitDie.polyhedral), "contextMenu"),
-        callback: async () => await this.hitDie.rollStatDie(),
-        condition: !this.hitDie.spent,
-        group: "usage",
-      },
-      {
-        name: "Recover Hit Die",
-        icon: makeIcon("rotate-left", "contextMenu"),
-        callback: async () => await this.hitDie.unrollStatDie(),
-        condition: this.hitDie.spent,
-        group: "usage",
-      },
-      {
-        name: "Roll Mana Die",
-        icon: makeIcon(getRollIcon(this.manaDie.polyhedral), "contextMenu"),
-        callback: async () => await this.manaDie.rollStatDie(),
-        condition: !this.manaDie.spent,
-        group: "usage",
-      },
-      {
-        name: "Recover Mana Die",
-        icon: makeIcon("rotate-left", "contextMenu"),
-        callback: async () => await this.manaDie.unrollStatDie(),
-        condition: this.manaDie.spent,
-        group: "usage",
-      },
-    ];
-  }
-
-  /** @inheritDoc */
-  get wikiPage() {
-    const prefix = this.constructor.metadata.namespace;
-    const pageName =
-      CONFIG.TERIOCK.rankOptionsList[
-        foundry.utils.getProperty(
-          this.parent,
-          this.constructor.metadata.pageNameKey,
-        )
-      ];
-    return `${prefix}:${pageName}`;
-  }
-
-  /** @inheritDoc */
-  get messageParts() {
-    return { ...super.messageParts, ..._messageParts(this) };
-  }
-
-  /**
-   * The singular hit die.
-   *
-   * @returns {StatDieModel}
-   */
-  get hitDie() {
-    return Object.values(this.hpDice)[0];
-  }
-
-  /**
-   * The singular mana die.
-   *
-   * @returns {StatDieModel}
-   */
-  get manaDie() {
-    return Object.values(this.mpDice)[0];
-  }
 
   /** @inheritDoc */
   static defineSchema() {
@@ -144,6 +73,75 @@ export default class TeriockRankData extends StatDataMixin(
       }),
     });
     return schema;
+  }
+
+  /** @inheritDoc */
+  get cardContextMenuEntries() {
+    return [
+      ...super.cardContextMenuEntries,
+      {
+        name: "Roll Hit Die",
+        icon: makeIcon(getRollIcon(this.hitDie.polyhedral), "contextMenu"),
+        callback: async () => await this.hitDie.rollStatDie(),
+        condition: !this.hitDie.spent,
+        group: "usage",
+      },
+      {
+        name: "Recover Hit Die",
+        icon: makeIcon("rotate-left", "contextMenu"),
+        callback: async () => await this.hitDie.unrollStatDie(),
+        condition: this.hitDie.spent,
+        group: "usage",
+      },
+      {
+        name: "Roll Mana Die",
+        icon: makeIcon(getRollIcon(this.manaDie.polyhedral), "contextMenu"),
+        callback: async () => await this.manaDie.rollStatDie(),
+        condition: !this.manaDie.spent,
+        group: "usage",
+      },
+      {
+        name: "Recover Mana Die",
+        icon: makeIcon("rotate-left", "contextMenu"),
+        callback: async () => await this.manaDie.unrollStatDie(),
+        condition: this.manaDie.spent,
+        group: "usage",
+      },
+    ];
+  }
+
+  /**
+   * The singular hit die.
+   * @returns {StatDieModel}
+   */
+  get hitDie() {
+    return Object.values(this.hpDice)[0];
+  }
+
+  /**
+   * The singular mana die.
+   * @returns {StatDieModel}
+   */
+  get manaDie() {
+    return Object.values(this.mpDice)[0];
+  }
+
+  /** @inheritDoc */
+  get messageParts() {
+    return { ...super.messageParts, ..._messageParts(this) };
+  }
+
+  /** @inheritDoc */
+  get wikiPage() {
+    const prefix = this.constructor.metadata.namespace;
+    const pageName =
+      CONFIG.TERIOCK.rankOptionsList[
+        foundry.utils.getProperty(
+          this.parent,
+          this.constructor.metadata.pageNameKey,
+        )
+      ];
+    return `${prefix}:${pageName}`;
   }
 
   /** @inheritDoc */

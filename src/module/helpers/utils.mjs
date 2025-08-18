@@ -1,6 +1,6 @@
+import { abilityOptions } from "../constants/ability-options.mjs";
+import { conditions } from "../constants/generated/conditions.mjs";
 import TeriockRoll from "../documents/roll.mjs";
-import { abilityOptions } from "./constants/ability-options.mjs";
-import { conditions } from "./constants/generated/conditions.mjs";
 
 /**
  * Convert the given unit to feet.
@@ -327,13 +327,15 @@ export function toKebabCase(str) {
  * @returns {string} The Font Awesome class for the appropriate dice icon.
  */
 export function getRollIcon(rollFormula) {
-  const validDice = [4, 6, 8, 10, 12, 20];
+  const polyhedralDice = [4, 6, 8, 10, 12, 20];
   const roll = new TeriockRoll(rollFormula, {});
   const dice = roll.dice;
   dice.sort((a, b) => b.faces - a.faces);
   for (const die of dice) {
-    if (validDice.includes(die.faces)) {
+    if (polyhedralDice.includes(die.faces)) {
       return `dice-d${die.faces}`;
+    } else if (die.faces === 2) {
+      return "coin";
     }
   }
   return "dice";

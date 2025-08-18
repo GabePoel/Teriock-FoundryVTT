@@ -1,13 +1,11 @@
 import TeriockBaseItemData from "../base-item-data/base-item-data.mjs";
-import { TeriockEquipment } from "../../../documents/_documents.mjs";
+import type { TeriockEquipment } from "../../../documents/_documents.mjs";
 import type { ConsumableInterface } from "../../effect-data/shared/shared-fields";
 
 declare module "./equipment-data.mjs" {
   export default interface TeriockEquipmentData
     extends TeriockBaseItemData,
       ConsumableInterface {
-    /** Parent */
-    parent: TeriockEquipment;
     /** Is the equipment equipped? */
     equipped: boolean;
     /** Is the equipment glued? */
@@ -63,5 +61,7 @@ declare module "./equipment-data.mjs" {
     identified: boolean;
     /** Identification Reference Equipment UUID */
     reference: Teriock.UUID<TeriockEquipment>;
+
+    get parent(): typeof TeriockEquipment;
   }
 }

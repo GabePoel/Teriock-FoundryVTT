@@ -77,7 +77,10 @@ export interface TeriockAbilityConsequenceSchema {
     proficient: AppliesData;
     fluent: AppliesData;
     heightened: AppliesData;
-    macros: Record<Teriock.SafeUUID<TeriockMacro>, Teriock.Parameters.Actor.PseudoHook>;
+    macros: Record<
+      Teriock.SafeUUID<TeriockMacro>,
+      Teriock.Parameters.Actor.PseudoHook
+    >;
   };
   sustaining: Set<Teriock.UUID<TeriockConsequence>>;
 }

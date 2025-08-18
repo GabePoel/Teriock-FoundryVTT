@@ -10,10 +10,6 @@ const { Roll } = foundry.dice;
  * - [Deboosted](https://wiki.teriock.com/index.php/Keyword:Deboosted)
  */
 export default class TeriockRoll extends Roll {
-  /** @inheritDoc */
-  static CHAT_TEMPLATE =
-    "systems/teriock/src/templates/document-templates/roll-templates/roll.hbs";
-
   /**
    * Creates a new TeriockRoll instance with enforced parsing and enrichment options.
    * @override
@@ -27,17 +23,134 @@ export default class TeriockRoll extends Roll {
     this.context = options.context || {};
   }
 
+  /** @inheritDoc */
+  static CHAT_TEMPLATE =
+    "systems/teriock/src/templates/document-templates/roll-templates/roll.hbs";
+
+  /**
+   * Evaluates a boost or deboost function by creating a temporary roll,
+   * applying the boost/deboost, and returning the resulting formula.
+   * @param {string} innerFormula - The formula inside the boost/deboost function
+   * @param {boolean} isBoost - True for boost, false for deboost
+   * @returns {string} The resulting formula after boost/deboost is applied
+   * @private
+   */
+  static #evaluateBoostFunction(innerFormula, isBoost) {
+    try {
+      // Create a temporary regular Roll to avoid circular dependency
+      const tempRoll = new foundry.dice.Roll(innerFormula);
+
+      // Apply boost or deboost logic directly
+      if (isBoost) {
+        TeriockRoll._boost(tempRoll);
+      } else {
+        TeriockRoll._deboost(tempRoll);
+      }
+
+      // Return the modified formula
+      return tempRoll.formula;
+    } catch (error) {
+      console.warn(
+        `Failed to evaluate ${isBoost ? "boost" : "deboost"} function:`,
+        error,
+      );
+      return innerFormula; // Return original formula if evaluation fails
+    }
+  }
+
+  /**
+   * Evaluates a setboost function by creating a temporary roll,
+   * applying the specified number of boosts/deboosts, and returning the resulting formula.
+   * @param {string} innerFormula - The formula inside the setboost function (e.g., "1d6, 1")
+   * @returns {string} The resulting formula after setboost is applied
+   * @private
+   */
+  static #evaluateSetboostFunction(innerFormula) {
+    try {
+      // Parse the parameters: "formula, number"
+      const commaIndex = innerFormula.lastIndexOf(",");
+      if (commaIndex === -1) {
+        foundry.ui.notifications.error(
+          `Invalid setboost function: missing comma separator`,
+        );
+        return innerFormula;
+      }
+
+      const formulaPart = innerFormula.substring(0, commaIndex).trim();
+      const numberPart = innerFormula.substring(commaIndex + 1).trim();
+
+      // Parse the number
+      const boostNumber = parseInt(numberPart, 10);
+      if (isNaN(boostNumber)) {
+        foundry.ui.notifications.error(
+          `Invalid setboost function: invalid number parameter "${numberPart}"`,
+        );
+        return innerFormula;
+      }
+
+      // Create a temporary regular Roll to avoid circular dependency
+      const tempRoll = new foundry.dice.Roll(formulaPart);
+
+      // Apply the specified number of boosts/deboosts
+      if (boostNumber > 0) {
+        for (let i = 0; i < boostNumber; i++) {
+          TeriockRoll._boost(tempRoll);
+        }
+      } else if (boostNumber < 0) {
+        for (let i = 0; i < Math.abs(boostNumber); i++) {
+          TeriockRoll._deboost(tempRoll);
+        }
+      }
+      // If boostNumber is 0, no changes are made
+
+      // Return the modified formula
+      return tempRoll.formula;
+    } catch (error) {
+      console.warn(`Failed to evaluate setboost function:`, error);
+      return innerFormula; // Return original formula if evaluation fails
+    }
+  }
+
+  /**
+   * Extracts the content of a function call, handling nested parentheses.
+   * @param {string} functionCall - The function call starting with function name
+   * @returns {string} The content inside the function parentheses
+   * @private
+   */
+  static #extractFunctionContent(functionCall) {
+    const openParenIndex = functionCall.indexOf("(");
+    if (openParenIndex === -1) {
+      foundry.ui.notifications.error(
+        `Invalid function call: missing opening parenthesis`,
+      );
+    }
+
+    let parenCount = 0;
+    let contentStart = openParenIndex + 1;
+
+    for (let i = contentStart; i < functionCall.length; i++) {
+      const char = functionCall[i];
+      if (char === "(") {
+        parenCount++;
+      } else if (char === ")") {
+        if (parenCount === 0) {
+          return functionCall.substring(contentStart, i);
+        }
+        parenCount--;
+      }
+    }
+
+    foundry.ui.notifications.error(
+      `Invalid function call: missing closing parenthesis`,
+    );
+  }
+
   /**
    * Parses a roll formula and pre-evaluates boost/deboost functions.
-   *
    * Recursively processes the formula to find boost() and deboost() functions,
    * evaluates the dice within those functions, applies the boost/deboost logic,
    * and replaces the function calls with the resulting formula.
-   *
    * Supports both full function names (boost/deboost/setboost) and short aliases (b/db/sb).
-   *
-   * @param {string} formula - The roll formula to parse
-   * @returns {string} The parsed formula with boost/deboost functions evaluated
    *
    * @example
    * // Simple formula remains unchanged
@@ -64,6 +177,9 @@ export default class TeriockRoll extends Roll {
    * // Cancelling boost/deboost functions
    * TeriockRoll.parseFormula("boost(deboost(2d4 + 1d6))") // -> "2d4 + 1d6"
    * TeriockRoll.parseFormula("b(db(2d4 + 1d6))") // -> "2d4 + 1d6"
+   *
+   * @param {string} formula - The roll formula to parse
+   * @returns {string} The parsed formula with boost/deboost functions evaluated
    */
   static #parseFormula(formula) {
     return TeriockRoll.#parseFormulaRecursive(formula);
@@ -71,7 +187,6 @@ export default class TeriockRoll extends Roll {
 
   /**
    * Recursively parses a formula to handle nested boost/deboost functions.
-   *
    * @param {string} formula - The formula to parse
    * @returns {string} The parsed formula
    * @private
@@ -134,127 +249,6 @@ export default class TeriockRoll extends Roll {
       TeriockRoll.#parseFormulaRecursive(afterFunction);
 
     return beforeFunction + evaluatedFormula + parsedAfterFunction;
-  }
-
-  /**
-   * Extracts the content of a function call, handling nested parentheses.
-   *
-   * @param {string} functionCall - The function call starting with function name
-   * @returns {string} The content inside the function parentheses
-   * @private
-   */
-  static #extractFunctionContent(functionCall) {
-    const openParenIndex = functionCall.indexOf("(");
-    if (openParenIndex === -1) {
-      foundry.ui.notifications.error(
-        `Invalid function call: missing opening parenthesis`,
-      );
-    }
-
-    let parenCount = 0;
-    let contentStart = openParenIndex + 1;
-
-    for (let i = contentStart; i < functionCall.length; i++) {
-      const char = functionCall[i];
-      if (char === "(") {
-        parenCount++;
-      } else if (char === ")") {
-        if (parenCount === 0) {
-          return functionCall.substring(contentStart, i);
-        }
-        parenCount--;
-      }
-    }
-
-    foundry.ui.notifications.error(
-      `Invalid function call: missing closing parenthesis`,
-    );
-  }
-
-  /**
-   * Evaluates a boost or deboost function by creating a temporary roll,
-   * applying the boost/deboost, and returning the resulting formula.
-   *
-   * @param {string} innerFormula - The formula inside the boost/deboost function
-   * @param {boolean} isBoost - True for boost, false for deboost
-   * @returns {string} The resulting formula after boost/deboost is applied
-   * @private
-   */
-  static #evaluateBoostFunction(innerFormula, isBoost) {
-    try {
-      // Create a temporary regular Roll to avoid circular dependency
-      const tempRoll = new foundry.dice.Roll(innerFormula);
-
-      // Apply boost or deboost logic directly
-      if (isBoost) {
-        TeriockRoll._boost(tempRoll);
-      } else {
-        TeriockRoll._deboost(tempRoll);
-      }
-
-      // Return the modified formula
-      return tempRoll.formula;
-    } catch (error) {
-      console.warn(
-        `Failed to evaluate ${isBoost ? "boost" : "deboost"} function:`,
-        error,
-      );
-      return innerFormula; // Return original formula if evaluation fails
-    }
-  }
-
-  /**
-   * Evaluates a setboost function by creating a temporary roll,
-   * applying the specified number of boosts/deboosts, and returning the resulting formula.
-   *
-   * @param {string} innerFormula - The formula inside the setboost function (e.g., "1d6, 1")
-   * @returns {string} The resulting formula after setboost is applied
-   * @private
-   */
-  static #evaluateSetboostFunction(innerFormula) {
-    try {
-      // Parse the parameters: "formula, number"
-      const commaIndex = innerFormula.lastIndexOf(",");
-      if (commaIndex === -1) {
-        foundry.ui.notifications.error(
-          `Invalid setboost function: missing comma separator`,
-        );
-        return innerFormula;
-      }
-
-      const formulaPart = innerFormula.substring(0, commaIndex).trim();
-      const numberPart = innerFormula.substring(commaIndex + 1).trim();
-
-      // Parse the number
-      const boostNumber = parseInt(numberPart, 10);
-      if (isNaN(boostNumber)) {
-        foundry.ui.notifications.error(
-          `Invalid setboost function: invalid number parameter "${numberPart}"`,
-        );
-        return innerFormula;
-      }
-
-      // Create a temporary regular Roll to avoid circular dependency
-      const tempRoll = new foundry.dice.Roll(formulaPart);
-
-      // Apply the specified number of boosts/deboosts
-      if (boostNumber > 0) {
-        for (let i = 0; i < boostNumber; i++) {
-          TeriockRoll._boost(tempRoll);
-        }
-      } else if (boostNumber < 0) {
-        for (let i = 0; i < Math.abs(boostNumber); i++) {
-          TeriockRoll._deboost(tempRoll);
-        }
-      }
-      // If boostNumber is 0, no changes are made
-
-      // Return the modified formula
-      return tempRoll.formula;
-    } catch (error) {
-      console.warn(`Failed to evaluate setboost function:`, error);
-      return innerFormula; // Return original formula if evaluation fails
-    }
   }
 
   /**
@@ -326,8 +320,6 @@ export default class TeriockRoll extends Roll {
   }
 }
 
-/**
- */
 function selectWeightedMaxFaceDie(diceTerms) {
   const maxFaces = Math.max(...diceTerms.map((term) => term.faces));
   const maxFaceTerms = diceTerms.filter((term) => term.faces === maxFaces);

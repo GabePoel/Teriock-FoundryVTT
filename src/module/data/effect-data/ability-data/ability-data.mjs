@@ -17,14 +17,13 @@ import { _defineSchema } from "./methods/schema/_schema.mjs";
  * - [Ability Rules](https://wiki.teriock.com/index.php/Category:Ability_rules)
  *
  * @extends {TeriockBaseEffectData}
- * @extends {ChildData}
+ * @mixes ConsumableDataMixin
  */
 export default class TeriockAbilityData extends WikiDataMixin(
   ConsumableDataMixin(TeriockBaseEffectData),
 ) {
   /**
    * Metadata for this effect.
-   *
    * @type {Readonly<Teriock.Documents.EffectModelMetadata>}
    */
   static metadata = Object.freeze({
@@ -38,45 +37,20 @@ export default class TeriockAbilityData extends WikiDataMixin(
   });
 
   /** @inheritDoc */
-  get suppressed() {
-    let suppressed = super.suppressed;
-    suppressed = suppressed || _suppressed(this);
-    return suppressed;
+  static defineSchema() {
+    const schema = super.defineSchema();
+    Object.assign(schema, _defineSchema());
+    return schema;
   }
 
   /** @inheritDoc */
-  get useText() {
-    if (this.spell) return `Cast ${this.parent.name}`;
-    return super.useText;
-  }
-
-  /** @inheritDoc */
-  get useIcon() {
-    if (this.interaction === "attack") return "dice-d20";
-    if (this.interaction === "block") return "shield";
-    return CONFIG.TERIOCK.documentOptions.ability.icon;
-  }
-
-  /** @inheritDoc */
-  get messageParts() {
-    return {
-      ...super.messageParts,
-      ..._messageParts(this),
-    };
-  }
-
-  /**
-   * Gets the changes this ability would provide.
-   *
-   * @returns {EffectChangeData[]}
-   */
-  get changes() {
-    return _generateChanges(this);
+  static migrateData(data) {
+    data = _migrateData(data);
+    return super.migrateData(data);
   }
 
   /**
    * Gets this ability's attribute improvement text.
-   *
    * @returns {string}
    */
   get attributeImprovementText() {
@@ -89,8 +63,15 @@ export default class TeriockAbilityData extends WikiDataMixin(
   }
 
   /**
+   * Gets the changes this ability would provide.
+   * @returns {EffectChangeData[]}
+   */
+  get changes() {
+    return _generateChanges(this);
+  }
+
+  /**
    * Gets this ability's feat save improvement text.
-   *
    * @returns {string}
    */
   get featSaveImprovementText() {
@@ -105,38 +86,42 @@ export default class TeriockAbilityData extends WikiDataMixin(
   }
 
   /** @inheritDoc */
-  static defineSchema() {
-    return foundry.utils.mergeObject(super.defineSchema(), _defineSchema());
+  get messageParts() {
+    return {
+      ...super.messageParts,
+      ..._messageParts(this),
+    };
   }
 
   /** @inheritDoc */
-  static migrateData(data) {
-    data = _migrateData(data);
-    return super.migrateData(data);
+  get suppressed() {
+    let suppressed = super.suppressed;
+    suppressed = suppressed || _suppressed(this);
+    return suppressed;
   }
 
   /** @inheritDoc */
-  prepareDerivedData() {
-    super.prepareDerivedData();
-    _prepareDerivedData(this);
-  }
-
-  /**
-   * @inheritDoc
-   * @param {Teriock.RollOptions.CommonRoll} options
-   */
-  async roll(options) {
-    return await _roll(this, options);
+  get useIcon() {
+    if (this.interaction === "attack") return "dice-d20";
+    if (this.interaction === "block") return "shield";
+    return CONFIG.TERIOCK.documentOptions.ability.icon;
   }
 
   /** @inheritDoc */
-  async parse(rawHTML) {
-    return await _parse(this, rawHTML);
+  get useText() {
+    if (this.spell) return `Cast ${this.parent.name}`;
+    return super.useText;
+  }
+
+  /** @inheritDoc */
+  adjustMessage(messageElement) {
+    messageElement = super.adjustMessage(messageElement);
+    messageElement = insertElderSorceryMask(messageElement, this.parent);
+    return messageElement;
   }
 
   /**
    * Cause all consequences this is sustaining to expire.
-   *
    * @param {boolean} force - Force consequences to expire even if this isn't suppressed.
    */
   async expireSustainedConsequences(force = false) {
@@ -154,9 +139,21 @@ export default class TeriockAbilityData extends WikiDataMixin(
   }
 
   /** @inheritDoc */
-  adjustMessage(messageElement) {
-    messageElement = super.adjustMessage(messageElement);
-    messageElement = insertElderSorceryMask(messageElement, this.parent);
-    return messageElement;
+  async parse(rawHTML) {
+    return await _parse(this, rawHTML);
+  }
+
+  /** @inheritDoc */
+  prepareDerivedData() {
+    super.prepareDerivedData();
+    _prepareDerivedData(this);
+  }
+
+  /**
+   * @inheritDoc
+   * @param {Teriock.RollOptions.CommonRoll} options
+   */
+  async roll(options) {
+    return await _roll(this, options);
   }
 }

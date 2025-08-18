@@ -10,7 +10,7 @@ import {
   TeriockProperty,
   TeriockRank,
   TeriockResource,
-  TeriockSpecies
+  TeriockSpecies,
 } from "../_documents.mjs";
 import type TeriockEffect from "../effect.mjs";
 
