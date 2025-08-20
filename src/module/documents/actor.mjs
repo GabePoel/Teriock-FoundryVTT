@@ -6,6 +6,7 @@ import { BaseTeriockActor } from "./_base.mjs";
 import TeriockRoll from "./roll.mjs";
 
 /**
+ * @implements {CommonDocumentInterface}
  * @property {TeriockBaseActorData} system
  * @property {TeriockBaseActorSheet} sheet
  */
@@ -20,6 +21,11 @@ export default class TeriockActor extends BaseTeriockActor {
     const filteredSizeKeys = sizeKeys.filter((key) => key <= size);
     const sizeKey = Math.max(...filteredSizeKeys, 0);
     return characterOptions.namedSizes[sizeKey] || "Medium";
+  }
+
+  /** @inheritDoc */
+  get actor() {
+    return this;
   }
 
   /**

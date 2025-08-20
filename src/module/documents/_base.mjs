@@ -28,7 +28,7 @@ const { WorldCollection } = foundry.documents.abstract;
  * @extends {Actor}
  * @mixes CommonDocumentMixin
  * @mixes ParentDocumentMixin
- * @implements {ActorData}
+ * @implements {CommonDocumentInterface}
  * @property {EmbeddedCollection<string, TeriockItem>} items
  * @property {EmbeddedCollection<string, TeriockEffect>} effects
  * @property {ParentItemTypes} itemTypes
@@ -54,8 +54,7 @@ export class BaseTeriockActor extends ParentDocumentMixin(
  * @mixes ChildDocumentMixin
  * @mixes CommonDocumentMixin
  * @mixes ParentDocumentMixin
- * @implements {ItemData}
- * @property {TeriockActor|null} actor
+ * @implements {CommonDocumentInterface}
  * @property {EmbeddedCollection<string, TeriockEffect>} effects
  * @property {Readonly<TeriockEffect[]>} transferredEffects
  * @property {TeriockBaseItemData} system
@@ -74,7 +73,7 @@ export class BaseTeriockItem extends ParentDocumentMixin(
  * @extends {ActiveEffect}
  * @mixes CommonDocumentMixin
  * @mixes ChildDocumentMixin
- * @implements {ActiveEffectData}
+ * @implements {CommonDocumentInterface}
  * @property {TeriockBaseEffectData} system
  * @property {Teriock.Documents.EffectType} type
  * @property {"ActiveEffect"} documentName
@@ -90,7 +89,6 @@ export class BaseTeriockEffect extends ChildDocumentMixin(
  *
  * @extends {TokenDocument}
  * @extends {ClientDocument}
- * @implements {TokenData}
  * @property {Token} token
  * @property {TeriockActor} actor
  * @property {"TokenDocument"} documentName
@@ -103,7 +101,6 @@ export class BaseTeriockTokenDocument extends TokenDocument {}
  *
  * @extends {Macro}
  * @extends {ClientDocument}
- * @implements {MacroData}
  * @property {"Macro"} documentName
  * @property {boolean} isOwner
  */
@@ -114,7 +111,6 @@ export class BaseTeriockMacro extends Macro {}
  *
  * @extends {JournalEntry}
  * @extends {ClientDocument}
- * @implements {JournalEntryData}
  * @property {"JournalEntry"} documentName
  * @property {boolean} isOwner
  */
@@ -124,7 +120,6 @@ export class BaseTeriockJournal extends JournalEntry {}
  * This class is a hack to get {@link User} intellisense without warnings for unimplemented methods.
  *
  * @extends {User}
- * @implements {UserData}
  * @property {"User"} documentName
  */
 export class BaseTeriockUser extends User {}
@@ -133,7 +128,6 @@ export class BaseTeriockUser extends User {}
  * This class is a hack to get {@link Scene} intellisense without warnings for unimplemented methods.
  *
  * @extends {Scene}
- * @implements {SceneData}
  * @property {"Scene"} documentName
  */
 export class BaseTeriockScene extends Scene {}
@@ -142,7 +136,6 @@ export class BaseTeriockScene extends Scene {}
  * This class is a hack to get {@link Folder} intellisense without warnings for unimplemented methods.
  *
  * @extends {Folder}
- * @implements {FolderData}
  * @property {"Folder"} documentName
  */
 export class BaseTeriockFolder extends Folder {}
@@ -151,7 +144,6 @@ export class BaseTeriockFolder extends Folder {}
  * This class is a hack to get {@link ChatMessage} intellisense without warnings for unimplemented methods.
  *
  * @extends {ChatMessage}
- * @implements {ChatMessageData}
  * @property {TeriockBaseMessageData} system
  * @property {"ChatMessage"} documentName
  */
@@ -161,7 +153,6 @@ export class BaseTeriockMessage extends ChatMessage {}
  * This class is a hack to get {@link Combat} intellisense without warnings for unimplemented methods.
  *
  * @extends {Combat}
- * @implements {CombatData}
  * @property {"Combat"} documentName
  */
 export class BaseTeriockCombat extends Combat {}

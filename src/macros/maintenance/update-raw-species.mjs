@@ -46,3 +46,4 @@ for (const speciesPage of allSpeciesPages) {
   }
   await speciesItem.system.wikiPull({ notify: false });
 }
+progress.update({ pct: 1 });

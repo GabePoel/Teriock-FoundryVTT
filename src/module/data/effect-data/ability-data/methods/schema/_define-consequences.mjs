@@ -174,11 +174,15 @@ function consequenceField() {
       label: "Duration",
     }),
     changes: consequenceChangesField(),
-    standardDamage: new fields.BooleanField({
-      initial: false,
-      label: "Standard Damage",
-      hint: "Can this deal standard damage?",
-    }),
+    common: new fields.SetField(
+      new fields.StringField({
+        choices: CONFIG.TERIOCK.consequenceOptions.common,
+      }),
+      {
+        label: "Common Consequences",
+        hint: "Common consequences shared by lots of abilities.",
+      },
+    ),
     expiration: new fields.SchemaField({
       normal: abilityExpirationField(),
       crit: abilityExpirationField(),

@@ -9,7 +9,12 @@ const { TypeDataModel } = foundry.abstract;
  * Mixin that provides child document functionality for embedded documents.
  * Adds proficiency tracking, font customization, and message generation capabilities.
  *
+ * @implements {ChildDataInterface}
  * @property {TeriockItem|TeriockEffect} parent
+ * @property {string} description
+ * @property {boolean} proficient
+ * @property {boolean} fluent
+ * @property {Teriock.Parameters.Shared.Font} font
  */
 export default class ChildDataModel extends TypeDataModel {
   /**
@@ -43,6 +48,13 @@ export default class ChildDataModel extends TypeDataModel {
   /** @inheritDoc */
   static migrateData(data) {
     return super.migrateData(data);
+  }
+
+  /**
+   * @returns {TeriockActor|null}
+   */
+  get actor() {
+    return this.parent.actor;
   }
 
   /**

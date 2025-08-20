@@ -1,4 +1,5 @@
 import { traits } from "../../../../constants/generated/traits.mjs";
+import { TeriockRoll } from "../../../../documents/_module.mjs";
 import { getBarText, getText } from "../../../shared/parsing/get-text.mjs";
 import { processSubAbilities } from "../../../shared/parsing/process-subs.mjs";
 import { buildTagTree } from "../../../shared/parsing/tag-tree.mjs";
@@ -32,13 +33,32 @@ export async function _parse(speciesData, rawHTML) {
     if (quickRoll) el.textContent = `[[/roll ${fullRoll}]]`;
   });
 
-  const tagTree = buildTagTree(doc);
-  await speciesData.setDiceFormula("hp", tagTree["hp-dice"][0]);
-  await speciesData.setDiceFormula("mp", tagTree["mp-dice"][0]);
   const parameters = {
     lifespan: null,
     adult: null,
   };
+
+  const tagTree = buildTagTree(doc);
+  const hpDiceFormula = tagTree["hp-dice"][0];
+  const mpDiceFormula = tagTree["mp-dice"][0];
+  const hpRoll = new TeriockRoll(hpDiceFormula, {});
+  const mpRoll = new TeriockRoll(mpDiceFormula, {});
+  if (hpRoll.dice.length > 0) {
+    const number = hpRoll.dice[0].number;
+    const faces = hpRoll.dice[0].faces;
+    parameters.hpDiceBase = {
+      number: number,
+      faces: faces,
+    };
+  }
+  if (mpRoll.dice.length > 0) {
+    const number = mpRoll.dice[0].number;
+    const faces = mpRoll.dice[0].faces;
+    parameters.mpDiceBase = {
+      number: number,
+      faces: faces,
+    };
+  }
   if (tagTree["traits"]) parameters.traits = tagTree["traits"];
   parameters.traits = parameters.traits.filter((t) =>
     Object.keys(traits).includes(t),
@@ -46,6 +66,7 @@ export async function _parse(speciesData, rawHTML) {
   parameters.appearance = getBarText(doc, "looks");
   parameters.description = getText(doc, "creature-description");
   parameters.size = {
+    min: Number(tagTree["size"][0].split("size")[1]),
     value: Number(tagTree["size"][0].split("size")[1]),
   };
   const lifespanText = getBarText(doc, "lifespan");
@@ -57,6 +78,19 @@ export async function _parse(speciesData, rawHTML) {
       parameters.lifespan = Number(lifespanText.split(" years")[0]);
     }
   }
+  const sizeStepHpText = getBarText(doc, "hp-increase");
+  console.log(sizeStepHpText);
+  if (sizeStepHpText) {
+    parameters.sizeStepHp = Number(
+      sizeStepHpText.split("every ")[1].split(" additional")[0],
+    );
+  } else parameters.sizeStepHp = null;
+  const sizeStepMpText = getBarText(doc, "mp-increase");
+  if (sizeStepMpText) {
+    parameters.sizeStepMpText = Number(
+      sizeStepMpText.split("every ")[1].split(" additional")[0],
+    );
+  } else parameters.sizeStepMp = null;
   await processSubAbilities(subs, speciesData);
   return { system: parameters };
 }

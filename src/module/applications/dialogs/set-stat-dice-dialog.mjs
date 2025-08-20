@@ -24,7 +24,7 @@ export default async function setStatDiceDialog(
     label: "Number",
     hint: `Number of ${dieOptions.stats[stat]} dice.`,
   });
-  const facesField = new fields.StringField({
+  const facesField = new fields.NumberField({
     initial: initialFaces,
     label: "Faces",
     hint: `How many faces the ${dieOptions.stats[stat]} dice have.`,
@@ -44,7 +44,10 @@ export default async function setStatDiceDialog(
           1,
         );
         const faces = Number(button.form.elements.namedItem("faces").value);
-        await statItem.system.setDice(stat, number, faces);
+        await statItem.update({
+          [`system.${stat}DiceBase.number`]: number,
+          [`system.${stat}DiceBase.faces`]: faces,
+        });
       },
     },
   });

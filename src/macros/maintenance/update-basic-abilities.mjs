@@ -6,7 +6,6 @@ const basicAbilitiesItem = await game.teriock.api.fetch.getItem(
 const basicAbilityNames =
   await game.teriock.api.wiki.fetchCategoryAbilities("Basic abilities");
 
-/** @type {object} */
 const progress = ui.notifications.info(`Pulling basic abilities from wiki.`, {
   progress: true,
 });
@@ -34,3 +33,4 @@ const toDelete = basicAbilitiesItem.abilities
   .filter((a) => !basicAbilityNames.includes(a.name))
   .map((a) => a.id);
 await basicAbilitiesItem.deleteEmbeddedDocuments("ActiveEffect", toDelete);
+progress.update({ pct: 1 });

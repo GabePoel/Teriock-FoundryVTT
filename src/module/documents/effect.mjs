@@ -127,9 +127,7 @@ export default class TeriockEffect extends BaseTeriockEffect {
 
   /** @inheritDoc */
   get actor() {
-    const actor = super.actor;
-    if (actor) return actor;
-    else return this.parent.actor;
+    return this.parent.actor;
   }
 
   /**

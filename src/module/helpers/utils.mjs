@@ -4,7 +4,6 @@ import TeriockRoll from "../documents/roll.mjs";
 
 /**
  * Convert the given unit to feet.
- *
  * @param {number} range
  * @param {string} units
  * @returns {number}
@@ -36,7 +35,6 @@ export function fromFeet(range, units) {
 
 /**
  * Convert from feet to the given unit.
- *
  * @param {number} range
  * @param {string} units
  * @returns {number}
@@ -68,7 +66,6 @@ export function toFeet(range, units) {
 
 /**
  * Convert between two units.
- *
  * @param {number} range
  * @param {string} fromUnits
  * @param {string} toUnits
@@ -80,7 +77,6 @@ export function convertUnits(range, fromUnits, toUnits) {
 
 /**
  * Remove indentation from code block.
- *
  * @param {string} str
  * @returns {string}
  */
@@ -97,7 +93,6 @@ export function dedent(str) {
 
 /**
  * Convert a UUID to a string that can be safely used as a key in some document's system data.
- *
  * @template T
  * @param {Teriock.UUID<T>} uuid - The UUID to convert.
  * @returns {Teriock.SafeUUID<T>} The converted safe UUID.
@@ -108,7 +103,6 @@ export function safeUuid(uuid) {
 
 /**
  * Convert a UUID to a string that can be safely used as a key in some document's system data.
- *
  * @template T
  * @param {Teriock.SafeUUID<T>} safeUuid - The safe UUID to convert.
  * @returns {Teriock.UUID<T>} The original UUID.
@@ -119,7 +113,6 @@ export function pureUuid(safeUuid) {
 
 /**
  * Re-pull each provided {@link ChildDocument} from the wiki.
- *
  * @param {TeriockEffect[]|TeriockItem[]} docs - An array of {@link ChildDocument}s to pull.
  * @param {object} [options]
  * @param {boolean} [options.skipSubs] - Skip any {@link TeriockEffect} subs.
@@ -146,11 +139,11 @@ export async function refreshDocuments(docs, options = { skipSubs: true }) {
       pct: pct,
     });
   }
+  progress.update({ pct: 1 });
 }
 
 /**
  * Designates a specific {@link TeriockUser} for a given {@link TeriockActor}.
- *
  * @param {TeriockActor} actor
  * @returns {TeriockUser|null}
  */
@@ -194,7 +187,6 @@ export function selectUser(actor) {
 
 /**
  * Get the image for a {@link Token}.
- *
  * @param {Token} token
  * @returns {string}
  */
@@ -216,7 +208,6 @@ export function tokenImage(token) {
 
 /**
  * Get the name for a {@link Token}.
- *
  * @param {Token} token
  * @returns {string}
  */
@@ -236,7 +227,6 @@ export function tokenName(token) {
 
 /**
  * Get the token for a {@link TeriockActor}.
- *
  * @param {TeriockActor} actor
  * @returns {TeriockTokenDocument|null}
  */
@@ -251,7 +241,6 @@ export function actorToken(actor) {
 
 /**
  * Get the actor for a {@link Token}.
- *
  * @param {Token} token
  * @returns {TeriockActor}
  */
@@ -261,7 +250,6 @@ export function tokenActor(token) {
 
 /**
  * Get the document for a {@link Token}.
- *
  * @param {Token} token
  * @returns {TeriockTokenDocument}
  */
@@ -271,7 +259,6 @@ export function tokenDocument(token) {
 
 /**
  * Creates an HTML icon element using Font Awesome classes.
- *
  * @param {string} icon - The icon name to use.
  * @param {...Teriock.UI.IconStyle} styles - One or more Font Awesome style names (e.g., "solid", "duotone").
  * @returns {string} The HTML string for the icon element.
@@ -284,7 +271,6 @@ export function makeIcon(icon, ...styles) {
 
 /**
  * Converts a string to camelCase format.
- *
  * @param {string} str - The string to convert.
  * @returns {string} The camelCase version of the string.
  */
@@ -297,7 +283,6 @@ export function toCamelCase(str) {
 
 /**
  * Converts a string to Title Case format.
- *
  * @param {string} str - The string to convert.
  * @returns {string} The Title Case version of the string.
  */
@@ -309,7 +294,6 @@ export function toTitleCase(str) {
 
 /**
  * Converts a string to kebab-case format.
- *
  * @param {string} str - The string to convert.
  * @returns {string} The kebab-case version of the string.
  */
@@ -322,7 +306,6 @@ export function toKebabCase(str) {
 
 /**
  * Determines the appropriate dice icon based on the roll formula.
- *
  * @param {string} rollFormula - The dice roll formula to analyze.
  * @returns {string} The Font Awesome class for the appropriate dice icon.
  */
@@ -343,7 +326,6 @@ export function getRollIcon(rollFormula) {
 
 /**
  * Creates a chat message with an image.
- *
  * @param {string} img - The image URL to display in chat.
  * @returns {Promise<void>}
  */
@@ -364,7 +346,6 @@ export async function chatImage(img) {
 
 /**
  * Evaluates a die roll formula synchronously and returns the total result.
- *
  * @param {string} formula - The dice roll formula to evaluate.
  * @param {Object} data - The roll data to use for the evaluation.
  * @param {Object} options - Options that get passed to the roll.
@@ -388,7 +369,6 @@ export function evaluateSync(formula, data = {}, options = {}) {
 /**
  * Evaluates a die roll formula synchronously and returns the total result.
  * Avoids having to generate roll data if it's unnecessary.
- *
  * @param {string} formula - The dice roll formula to evaluate.
  * @param {TeriockActor|TeriockItem|TeriockEffect} document - The document to get roll data from.
  * @param {Object} options - Options that get passed to the roll.
@@ -414,7 +394,6 @@ export function smartEvaluateSync(formula, document, options = { fail: 0 }) {
 
 /**
  * Evaluates a die roll formula asynchronously and returns the total result.
- *
  * @param {string} formula - The dice roll formula to evaluate.
  * @param {Object} data - The roll data to use for the evaluation.
  * @param {Object} options - Options that get passed to the roll.
@@ -437,7 +416,6 @@ export async function evaluateAsync(formula, data = {}, options = {}) {
 
 /**
  * Parses a duration string and returns a duration.
- *
  * @param durationString
  * @returns {Duration}
  */
@@ -486,7 +464,6 @@ export function parseDurationString(durationString) {
 
 /**
  * Parses a time string and returns a number of seconds.
- *
  * @param {string} timeString - The time string to parse.
  * @returns {number|null} A number of seconds corresponding to the duration, or null if invalid.
  */
@@ -610,7 +587,6 @@ export function mergeLevel(obj, path, key) {
 
 /**
  * Check if the {@link TeriockUser} owns and uses the given document.
- *
  * @param {ClientDocument} document
  * @param {string} userId
  * @returns {boolean}

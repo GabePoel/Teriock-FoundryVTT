@@ -1,6 +1,15 @@
 import type StatDieModel from "../shared/stat-die-model.mjs";
 
+type BaseDice = {
+  faces: number;
+  number: number;
+};
+
 export interface StatDataInterface {
+  /** Base HP dice */
+  hpDiceBase: BaseDice;
+  /** Base MP dice */
+  mpDiceBase: BaseDice;
   /** HP Dice */
   hpDice: Record<Teriock.ID<StatDieModel>, StatDieModel>;
   /** MP Dice */

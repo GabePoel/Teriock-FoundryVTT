@@ -71,7 +71,6 @@ export async function _parse(rankData, rawHTML) {
     for (const name of rankNames["3s"]) toCreate.push(name);
   }
 
-  /** @type {object} */
   const progress = ui.notifications.info(`Pulling Rank from wiki.`, {
     progress: true,
   });
@@ -82,9 +81,7 @@ export async function _parse(rankData, rawHTML) {
     pct += 1 / toCreate.length;
     progress.update({ pct: pct, message: `Pulling ${abilityName} from wiki.` });
   }
-
-  await rankData.setDice("hp", 1, ARCHETYPE_FACES[archetype]["hp"]);
-  await rankData.setDice("mp", 1, ARCHETYPE_FACES[archetype]["mp"]);
+  progress.update({ pct: 1 });
 
   // Helper for HTML/text extraction
   const getHTML = (sel) => doc.querySelector(sel)?.innerHTML.trim();
@@ -94,6 +91,14 @@ export async function _parse(rankData, rawHTML) {
     archetype: metaData.getAttribute("data-archetype"),
     flaws: getHTML(".class-flaws") || "None.",
     description: getHTML(".class-description") || "",
+    hpDiceBase: {
+      number: 1,
+      faces: ARCHETYPE_FACES[archetype],
+    },
+    mpDiceBase: {
+      number: 1,
+      faces: ARCHETYPE_FACES[archetype],
+    },
   };
 
   let name = `Rank ${classRank} ${classValue}`;

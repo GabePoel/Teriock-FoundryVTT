@@ -11,7 +11,6 @@ import { _generateEffect, _generateTakes } from "../_generate-effect.mjs";
  */
 export async function _buildButtons(rollConfig) {
   const abilityData = rollConfig.abilityData;
-  const useData = rollConfig.useData;
   const buttons = [];
 
   // Feat Save Button
@@ -50,10 +49,10 @@ export async function _buildButtons(rollConfig) {
 
   // Standard Damage Button
   if (
-    abilityData.applies.base.standardDamage ||
+    abilityData.applies.base.common.has("standardDamage") ||
     (rollConfig.useData.proficient &&
-      abilityData.applies.proficient.standardDamage) ||
-    (rollConfig.useData.fluent && abilityData.applies.fluent.standardDamage)
+      abilityData.applies.proficient.common.has("standardDamage")) ||
+    (rollConfig.useData.fluent && abilityData.applies.fluent.common.has("standardDamage"))
   ) {
     const buttonData = {
       label: "Standard Roll",

@@ -18,25 +18,6 @@ export type EffectChangeData = {
 };
 
 /**
- * Consequence rolls for different effect types
- */
-export interface ConsequenceRolls {
-  damage: string;
-  drain: string;
-  wither: string;
-  heal: string;
-  revitalize: string;
-  setTempHp: string;
-  setTempMp: string;
-  gainTempHp: string;
-  gainTempMp: string;
-  sleep: string;
-  kill: string;
-  pay: string;
-  other: string;
-}
-
-/**
  * Ability-specific expiration data.
  */
 type AbilityExpiration = {
@@ -50,22 +31,22 @@ type AbilityExpiration = {
 /**
  * Applies data for different proficiency levels
  */
-export interface AppliesData {
-  statuses: Set<Teriock.Parameters.Condition.Key>;
-  startStatuses: Set<Teriock.Parameters.Condition.Key>;
-  endStatuses: Set<Teriock.Parameters.Condition.Key>;
-  rolls: ConsequenceRolls;
-  hacks: Set<Teriock.Parameters.Actor.HackableBodyPart>;
-  checks: Set<Teriock.Parameters.Fluency.Tradecraft>;
-  duration: number;
+export interface AbilityConsequence {
   changes: EffectChangeData[];
-  standardDamage: boolean;
+  checks: Set<Teriock.Parameters.Fluency.Tradecraft>;
+  common: Set<Teriock.Parameters.Consequence.CommonConsequenceKey>;
+  duration: number;
+  endStatuses: Set<Teriock.Parameters.Condition.Key>;
   expiration: {
     normal: AbilityExpiration;
     crit: AbilityExpiration;
     changeOnCrit: boolean;
     doesExpire: boolean;
   };
+  hacks: Set<Teriock.Parameters.Actor.HackableBodyPart>;
+  rolls: Record<Teriock.Parameters.Consequence.RollConsequenceKey, string>;
+  startStatuses: Set<Teriock.Parameters.Condition.Key>;
+  statuses: Set<Teriock.Parameters.Condition.Key>;
 }
 
 /**
@@ -73,10 +54,10 @@ export interface AppliesData {
  */
 export interface TeriockAbilityConsequenceSchema {
   applies: {
-    base: AppliesData;
-    proficient: AppliesData;
-    fluent: AppliesData;
-    heightened: AppliesData;
+    base: AbilityConsequence;
+    proficient: AbilityConsequence;
+    fluent: AbilityConsequence;
+    heightened: AbilityConsequence;
     macros: Record<
       Teriock.SafeUUID<TeriockMacro>,
       Teriock.Parameters.Actor.PseudoHook

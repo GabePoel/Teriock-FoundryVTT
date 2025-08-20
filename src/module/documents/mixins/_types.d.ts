@@ -12,7 +12,7 @@ import {
   TeriockResource,
   TeriockSpecies,
 } from "../_documents.mjs";
-import type TeriockEffect from "../effect.mjs";
+import type { TeriockActor, TeriockEffect } from "../_module.mjs";
 
 declare global {
   namespace Teriock.Parent {
@@ -62,4 +62,9 @@ declare global {
       effectKeys: ParentEffectKeys;
     };
   }
+}
+
+export interface CommonDocumentInterface {
+  /** The actor associated with this document if there is one */
+  get actor(): TeriockActor | null;
 }

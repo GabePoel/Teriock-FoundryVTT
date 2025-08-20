@@ -6,6 +6,13 @@
  * @private
  */
 export function _prepareDerivedData(abilityData) {
+  // Derived costs
+  if (abilityData.invoked) {
+    abilityData.costs.somatic = true;
+    abilityData.costs.verbal = true;
+  }
+
+  // Compute changes
   let applyChanges = abilityData.maneuver === "passive";
   for (const status of abilityData.duration.conditions.present) {
     if (!abilityData.actor?.statuses.has(status)) applyChanges = false;

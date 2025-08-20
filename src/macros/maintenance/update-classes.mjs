@@ -1,7 +1,6 @@
 const classPack = game.teriock.packs.classes();
 const classFolders = classPack.folders;
 
-/** @type {object} */
 const progress = ui.notifications.info(`Pulling classes from wiki.`, {
   progress: true,
 });
@@ -86,3 +85,4 @@ for (const [a, ao] of Object.entries(CONFIG.TERIOCK.rankOptions)) {
     }
   }
 }
+progress.update({ pct: 1 });

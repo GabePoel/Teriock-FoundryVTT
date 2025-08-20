@@ -7,19 +7,6 @@
 export default (Base) => {
   return class CommonDocumentMixin extends Base {
     /**
-     * Returns the actor that this effect is associated with if there is one.
-     * @returns {TeriockActor|null}
-     */
-    get actor() {
-      if (this.documentName === "Actor") {
-        return /** @type {TeriockActor} */ this;
-      } else if (this.parent) {
-        return this.parent.actor;
-      }
-      return null;
-    }
-
-    /**
      * @returns {Teriock.UUID<TeriockActor|TeriockItem|TeriockEffect>}
      */
     get uuid() {

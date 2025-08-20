@@ -25,7 +25,6 @@ const propertyMap = {
   "Basic Equipment": [],
 };
 
-/** @type {object} */
 const progress = ui.notifications.info(`Pulling equipment from wiki.`, {
   progress: true,
 });
@@ -113,3 +112,4 @@ for (const [folderName, properties] of Object.entries(propertyMap)) {
     }
   }
 }
+progress.update({ pct: 1 });

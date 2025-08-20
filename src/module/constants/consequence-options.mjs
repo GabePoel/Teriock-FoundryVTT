@@ -40,4 +40,9 @@ export const consequenceOptions = {
       fail: "On Fail",
     },
   },
+  common: {
+    standardDamage: "Standard Damage",
+    heal: "Heal",
+    revitalize: "Revitalize",
+  },
 };

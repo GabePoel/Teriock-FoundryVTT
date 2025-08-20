@@ -280,7 +280,8 @@ export function _generateTakes(rollConfig) {
   }
 
   return {
-    rolls: /** @type {ConsequenceRolls} */ rolls,
+    rolls:
+      /** @type {Record<Teriock.Parameters.Consequence.RollConsequenceKey, string>} */ rolls,
     hacks: /** @type {Set<Teriock.Parameters.Actor.HackableBodyPart>} */ hacks,
     checks: /** @type {Set<string>} */ checks,
     startStatuses: /** @type {Set<string>} */ startStatuses,

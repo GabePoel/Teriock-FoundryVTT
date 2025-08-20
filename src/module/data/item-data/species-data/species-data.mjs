@@ -1,6 +1,8 @@
 import { setStatDiceDialog } from "../../../applications/dialogs/_module.mjs";
+import { dieOptions } from "../../../constants/die-options.mjs";
 import { traits } from "../../../constants/generated/traits.mjs";
 import { copyAbility } from "../../../helpers/fetch.mjs";
+import { toTitleCase } from "../../../helpers/utils.mjs";
 import { StatDataMixin, WikiDataMixin } from "../../mixins/_module.mjs";
 import { TextField } from "../../shared/fields.mjs";
 import TeriockBaseItemData from "../base-item-data/base-item-data.mjs";
@@ -39,11 +41,44 @@ export default class TeriockSpeciesData extends StatDataMixin(
   static defineSchema() {
     const schema = super.defineSchema();
     Object.assign(schema, {
-      description: new TextField({
-        label: "Description",
+      adult: new fields.NumberField({
+        initial: 20,
       }),
       appearance: new TextField({
         label: "Appearance",
+      }),
+      applyHp: new fields.BooleanField({
+        hint: "Add this species' HP to its parent actor.",
+        initial: true,
+        label: "Apply HP",
+      }),
+      applyMp: new fields.BooleanField({
+        hint: "Add this species' MP to its parent actor.",
+        initial: true,
+        label: "Apply MP",
+      }),
+      applySize: new fields.BooleanField({
+        label: "Apply Size",
+        hint: "Apply this species' size to its parent actor.",
+        initial: true,
+      }),
+      description: new TextField({
+        label: "Description",
+      }),
+      sizeStepHp: new fields.NumberField({
+        hint: "Size interval at which this species' HP increases.",
+        initial: null,
+        label: "HP Size Interval",
+        nullable: true,
+      }),
+      sizeStepMp: new fields.NumberField({
+        hint: "Size interval at which this species' MP increases.",
+        initial: null,
+        label: "MP Size Interval",
+        nullable: true,
+      }),
+      lifespan: new fields.NumberField({
+        initial: 100,
       }),
       size: new fields.SchemaField({
         min: new fields.NumberField(),
@@ -61,82 +96,13 @@ export default class TeriockSpeciesData extends StatDataMixin(
           label: "Traits",
         },
       ),
-      lifespan: new fields.NumberField({
-        initial: 100,
-      }),
-      adult: new fields.NumberField({
-        initial: 20,
-      }),
-      applySize: new fields.BooleanField({
-        label: "Apply Size",
-        hint: "Apply this species' size to its parent actor.",
-        initial: true,
-      }),
-      applyHp: new fields.BooleanField({
-        label: "Apply HP",
-        hint: "Add this species' HP to its parent actor.",
-        initial: true,
-      }),
-      applyMp: new fields.BooleanField({
-        label: "Apply MP",
-        hint: "Add this species' MP to its parent actor.",
-        initial: true,
-      }),
     });
     return schema;
-  }
-
-  /**
-   * Faces of HP dice.
-   * @returns {Teriock.RollOptions.PolyhedralDieFaces}
-   */
-  get hpDiceFaces() {
-    return Object.values(this.hpDice)[0].faces;
-  }
-
-  /**
-   * HP dice formula.
-   * @returns {string}
-   */
-  get hpDiceFormula() {
-    return `${this.hpDiceNumber}d${this.hpDiceFaces}`;
-  }
-
-  /**
-   * Number of HP dice.
-   * @returns {number}
-   */
-  get hpDiceNumber() {
-    return Object.keys(this.hpDice).length;
   }
 
   /** @inheritDoc */
   get messageParts() {
     return { ...super.messageParts, ..._messageParts(this) };
-  }
-
-  /**
-   * Faces of MP dice.
-   * @returns {Teriock.RollOptions.PolyhedralDieFaces}
-   */
-  get mpDiceFaces() {
-    return Object.values(this.mpDice)[0].faces;
-  }
-
-  /**
-   * MP dice formula.
-   * @returns {string}
-   */
-  get mpDiceFormula() {
-    return `${this.mpDiceNumber}d${this.mpDiceFaces}`;
-  }
-
-  /**
-   * Number of MP dice.
-   * @returns {number}
-   */
-  get mpDiceNumber() {
-    return Object.keys(this.mpDice).length;
   }
 
   /** @inheritDoc */
@@ -151,6 +117,37 @@ export default class TeriockSpeciesData extends StatDataMixin(
       ],
     });
     return super._preCreate(data, options, user);
+  }
+
+  /** @inheritDoc */
+  async _preUpdate(changes, options, user) {
+    // Handle variable size stat dice
+    await super._preUpdate(changes, options, user);
+    for (const stat of Object.keys(dieOptions.stats)) {
+      const sizeStepKey = `sizeStep${toTitleCase(stat)}`;
+      const sizeStep =
+        foundry.utils.getProperty(changes, `system.${sizeStepKey}`) ||
+        this[sizeStepKey];
+      if (sizeStep) {
+        const size =
+          foundry.utils.getProperty(changes, "system.size.value") ||
+          this.size.value;
+        const minSize =
+          foundry.utils.getProperty(changes, "system.size.min") ||
+          this.size.min;
+        const numberBase =
+          foundry.utils.getProperty(changes, `system.${stat}DiceBase.number`) ||
+          this[`${stat}DiceBase`].number;
+        const faces =
+          foundry.utils.getProperty(changes, `system.${stat}DiceBase.faces`) ||
+          this[`${stat}DiceBase`].faces;
+        let number = numberBase;
+        const sizeDelta = size - minSize;
+        const numSteps = Math.floor(sizeDelta / sizeStep);
+        if (numSteps && numSteps > 0) number += numSteps;
+        this._setDice(stat, number, faces);
+      }
+    }
   }
 
   /** @inheritDoc */

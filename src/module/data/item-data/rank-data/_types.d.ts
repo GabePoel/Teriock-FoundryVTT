@@ -1,4 +1,4 @@
-import TeriockBaseItemData from "../base-item-data/base-item-data.mjs";
+import type TeriockBaseItemData from "../base-item-data/base-item-data.mjs";
 import type { TeriockRank } from "../../../documents/_documents.mjs";
 import type { StatDataInterface } from "../../mixins/_types";
 

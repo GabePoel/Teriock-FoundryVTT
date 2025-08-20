@@ -65,3 +65,4 @@ for (const abilityPage of allAbilityPages) {
     await abilityItem.update({ img: abilityEffect.img });
   }
 }
+progress.update({ pct: 1 });

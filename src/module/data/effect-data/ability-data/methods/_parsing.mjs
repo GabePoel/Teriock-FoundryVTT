@@ -34,24 +34,26 @@ const COST_TEMPLATES = {
 /**
  * Creates the default consequence structure for ability effects.
  * Provides empty rolls, statuses, start/end statuses, hacks, checks, and duration.
- * @returns {object} The default consequence structure.
+ * @returns {AbilityConsequence} The default consequence structure.
  * @private
  */
 function defaultConsequence() {
   return {
-    rolls: {},
-    statuses: new Set(),
-    startStatuses: new Set(),
-    endStatuses: new Set(),
-    hacks: new Set(),
+    changes: [],
     checks: new Set(),
+    common: new Set(),
     duration: 0,
+    endStatuses: new Set(),
     expiration: {
       normal: null,
       crit: null,
       changeOnCrit: false,
       doesExpire: false,
     },
+    hacks: new Set(),
+    rolls: {},
+    startStatuses: new Set(),
+    statuses: new Set(),
   };
 }
 
@@ -923,7 +925,7 @@ function processDiceAndEffectExtraction(parameters) {
   }
 
   if (resultStandardDamage) {
-    parameters.applies.base.standardDamage = resultStandardDamage;
+    parameters.applies.base.common.add("standardDamage");
   }
 
   // Apply combat expiration results
@@ -955,4 +957,3 @@ function selectImage(parameters) {
     img = `systems/teriock/assets/classes/${parameters.class}.svg`;
   return img;
 }
-

@@ -10,6 +10,14 @@ const { api } = foundry.applications;
  */
 export default class TeriockItem extends BaseTeriockItem {
   /**
+   * @inheritDoc
+   * @returns {TeriockActor|null}
+   */
+  get actor() {
+    return super.actor;
+  }
+
+  /**
    * Checks if the item is disabled.
    * @returns {boolean} True if the item is disabled, false otherwise.
    */
@@ -50,7 +58,6 @@ export default class TeriockItem extends BaseTeriockItem {
     });
     if (pullType === "categories") {
       const pages = await fetchCategoryMembers(toPull);
-      /** @type {object} */
       const progress = ui.notifications.info(
         `Pulling Category:${toPull} from wiki.`,
         { progress: true },
@@ -72,6 +79,7 @@ export default class TeriockItem extends BaseTeriockItem {
           pct: pct,
         });
       }
+      progress.update({ pct: 1 });
     } else {
       await createAbility(this, toPull.replace(/^Ability:/, ""));
     }

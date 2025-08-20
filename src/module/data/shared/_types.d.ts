@@ -17,7 +17,3 @@ export interface ChildDataInterface {
   /** Description */
   description: string;
 }
-
-declare module "./child-data-model.mjs" {
-  export default interface ChildDataModel {}
-}

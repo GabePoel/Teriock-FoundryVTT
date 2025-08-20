@@ -15,7 +15,6 @@ if (!rawPropertiesFolder) {
   );
 }
 
-/** @type {object} */
 const progress = ui.notifications.info(`Pulling all properties from wiki.`, {
   progress: true,
 });
@@ -68,3 +67,4 @@ for (const propertyPage of allPropertyPages) {
     await propertyItem.update({ img: propertyEffect.img });
   }
 }
+progress.update({ pct: 1 });
