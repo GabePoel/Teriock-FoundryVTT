@@ -526,7 +526,7 @@ export default (Base) => {
      * @param {string} parameter - The HTML content to enrich.
      * @returns {Promise<string|undefined>} Promise that resolves to the enriched HTML or undefined.
      */
-    async _editor(parameter) {
+    async _enrich(parameter) {
       return parameter?.length
         ? await TextEditor.enrichHTML(parameter, { relativeTo: this.document })
         : undefined;
@@ -541,7 +541,7 @@ export default (Base) => {
     async _enrichAll(context, obj) {
       if (Object.keys(context).includes("enriched")) {
         for (const [key, value] of Object.entries(obj)) {
-          context.enriched[key] = await this._editor(value);
+          context.enriched[key] = await this._enrich(value);
         }
       }
     }
@@ -683,24 +683,19 @@ export default (Base) => {
      */
     async _onRender(context, options) {
       await super._onRender(context, options);
+
       this.editable = this.isEditable && !this._locked;
       _connectEmbedded(this.document, this.element, this.editable);
-
       new ContextMenu(this.element, ".timage", imageContextMenuOptions, {
         eventName: "contextmenu",
         jQuery: false,
         fixed: true,
       });
-
       this._connect(".chat-button", "contextmenu", (e) => {
         SheetMixin._debug.call(this, e, e.currentTarget);
       });
-
       this.#dragDrop.forEach((d) => d.bind(this.element));
-
       this._activateMenu();
-
-      // Sheet select handler
       this._connect('[data-action="sheetSelect"]', "change", (e) => {
         const { path } = e.currentTarget.dataset;
         if (path) {
@@ -708,63 +703,88 @@ export default (Base) => {
           this.render();
         }
       });
-
       _setupEventListeners(this);
 
-      for (const /** @type {HTMLElement} */ element of this.element.querySelectorAll(
-        ".tcard",
-      )) {
-        const embedded =
-          /** @type {TeriockItem|TeriockEffect} */ await _embeddedFromCard(
-            this,
-            element,
-          );
-        if (embedded && embedded.type === "condition") {
+      const elements = Array.from(this.element.querySelectorAll(".tcard"));
+      const embeddedResults = await Promise.all(
+        elements.map((element) => _embeddedFromCard(this, element)),
+      );
+      const tooltipPromises = embeddedResults.map(async (embedded, index) => {
+        const element = elements[index];
+
+        if (!embedded) return;
+
+        if (embedded?.type === "condition") {
           const messageParts = {
-            image: embedded.img,
-            name: embedded.name,
+            image: embedded?.img,
+            name: embedded?.name,
             bars: [],
             blocks: [
               {
                 title: "Description",
-                text: embedded.system.description,
+                text: embedded?.system.description,
               },
             ],
           };
-          if (embedded.id === "lighted") {
-            let lightedToText = "<ul>";
-            for (const uuid of this.document.system.lightedTo) {
-              const token = await foundry.utils.fromUuid(uuid);
-              lightedToText += `<li>@UUID[${uuid}]{${token.name}}</li>`;
-            }
-            lightedToText += "</ul>";
-            messageParts.blocks.push({
-              title: "Lighted to",
-              text: lightedToText,
-            });
+
+          const uuidPromises = [];
+
+          if (embedded?.id === "lighted") {
+            uuidPromises.push(
+              Promise.all(
+                this.document.system.lightedTo.map((uuid) =>
+                  foundry.utils.fromUuid(uuid),
+                ),
+              ).then((tokens) => {
+                let lightedToText = "<ul>";
+                tokens.forEach((token, idx) => {
+                  const uuid = this.document.system.lightedTo[idx];
+                  lightedToText += `<li>@UUID[${uuid}]{${token?.name}}</li>`;
+                });
+                lightedToText += "</ul>";
+                messageParts.blocks.push({
+                  title: "Lighted to",
+                  text: lightedToText,
+                });
+              }),
+            );
           }
-          if (embedded.id === "goaded") {
-            let goadedToText = "<ul>";
-            for (const uuid of this.document.system.goadedTo) {
-              const token = await foundry.utils.fromUuid(uuid);
-              goadedToText += `<li>@UUID[${uuid}]{${token.name}}</li>`;
-            }
-            goadedToText += "</ul>";
-            messageParts.blocks.push({
-              title: "Goaded to",
-              text: goadedToText,
-            });
+
+          if (embedded?.id === "goaded") {
+            uuidPromises.push(
+              Promise.all(
+                this.document.system.goadedTo.map((uuid) =>
+                  foundry.utils.fromUuid(uuid),
+                ),
+              ).then((tokens) => {
+                let goadedToText = "<ul>";
+                tokens.forEach((token, idx) => {
+                  const uuid = this.document.system.goadedTo[idx];
+                  goadedToText += `<li>@UUID[${uuid}]{${token?.name}}</li>`;
+                });
+                goadedToText += "</ul>";
+                messageParts.blocks.push({
+                  title: "Goaded to",
+                  text: goadedToText,
+                });
+              }),
+            );
           }
+
+          // Wait for all UUID resolutions, then enrich HTML
+          await Promise.all(uuidPromises);
           const rawMessage = buildMessage(messageParts);
           element.dataset.tooltipHtml = await TextEditor.enrichHTML(
             rawMessage.outerHTML,
           );
           element.dataset.tooltipClass = "teriock teriock-rich-tooltip";
-        } else if (embedded && typeof embedded.buildMessage === "function") {
-          element.dataset.tooltipHtml = await embedded.buildMessage();
+        } else if (typeof embedded?.buildMessage === "function") {
+          element.dataset.tooltipHtml = await embedded?.buildMessage();
           element.dataset.tooltipClass = "teriock teriock-rich-tooltip";
         }
-      }
+      });
+
+      await Promise.all(tooltipPromises);
 
       this.element.querySelectorAll(".tcard-container").forEach((element) => {
         element.addEventListener(

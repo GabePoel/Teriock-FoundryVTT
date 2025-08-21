@@ -23,10 +23,10 @@ declare module "./species-data.mjs" {
     applyMp: boolean;
     /** Apply this size to parent {@link TeriockActor}. */
     applySize: boolean;
-    /** Size interval to add another HP die at */
-    sizeStepHp: number | null;
-    /** Size interval to add another MP die at */
-    sizeStepMp: number | null;
+    /** Battle rating */
+    br: number;
+    /** Innate ranks */
+    innateRanks: string;
     /** Maximum lifespan */
     lifespan: number | null;
     /** Size constraints */
@@ -40,6 +40,10 @@ declare module "./species-data.mjs" {
     };
     /** Size adjustments */
     sizeAdjustments: SizeAdjustment[];
+    /** Size interval to add another HP die at */
+    sizeStepHp: number | null;
+    /** Size interval to add another MP die at */
+    sizeStepMp: number | null;
     /** Traits */
     traits: Set<Teriock.Parameters.Species.Trait>;
 

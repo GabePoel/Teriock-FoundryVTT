@@ -59,6 +59,10 @@ export function _messageParts(speciesData) {
       text: speciesData.appearance,
     },
     {
+      title: "Innate ranks",
+      text: speciesData.innateRanks,
+    },
+    {
       title: "Description",
       text: speciesData.description,
     },

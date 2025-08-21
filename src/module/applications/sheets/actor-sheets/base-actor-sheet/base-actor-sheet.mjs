@@ -909,10 +909,10 @@ export default class TeriockBaseActorSheet extends SheetMixin(ActorSheetV2) {
       },
     };
     context.searchStrings = foundry.utils.deepClone(this._searchStrings);
-    context.enrichedNotes = await this._editor(
+    context.enrichedNotes = await this._enrich(
       this.document.system.sheet.notes,
     );
-    context.enrichedSpecialRules = await this._editor(
+    context.enrichedSpecialRules = await this._enrich(
       this.document.system.wielding.attacker.derived?.system?.specialRules,
     );
     context.settings = this.settings;

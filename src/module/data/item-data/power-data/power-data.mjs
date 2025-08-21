@@ -34,6 +34,16 @@ export default class TeriockPowerData extends TeriockBaseItemData {
   }
 
   /** @inheritDoc */
+  static migrateData(data) {
+    if (
+      foundry.utils.hasProperty(data, "type") &&
+      foundry.utils.getProperty(data, "type") === "species"
+    ) {
+      foundry.utils.setProperty(data, "type", "other");
+    }
+  }
+
+  /** @inheritDoc */
   get messageParts() {
     return {
       ...super.messageParts,

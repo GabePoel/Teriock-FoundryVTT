@@ -104,6 +104,7 @@ export default class TeriockSpeciesSheet extends TeriockBaseItemSheet {
     await this._enrichAll(context, {
       description: this.item.system.description,
       appearance: this.item.system.appearance,
+      innateRanks: this.item.system.innateRanks,
     });
     return context;
   }

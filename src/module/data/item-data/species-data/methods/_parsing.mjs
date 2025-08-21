@@ -39,6 +39,7 @@ export async function _parse(speciesData, rawHTML) {
   };
 
   const tagTree = buildTagTree(doc);
+  console.log(tagTree);
   const hpDiceFormula = tagTree["hp-dice"][0];
   const mpDiceFormula = tagTree["mp-dice"][0];
   const hpRoll = new TeriockRoll(hpDiceFormula, {});
@@ -65,10 +66,31 @@ export async function _parse(speciesData, rawHTML) {
   );
   parameters.appearance = getBarText(doc, "looks");
   parameters.description = getText(doc, "creature-description");
-  parameters.size = {
-    min: Number(tagTree["size"][0].split("size")[1]),
-    value: Number(tagTree["size"][0].split("size")[1]),
-  };
+  parameters.innateRanks = getBarText(doc, "innate-ranks");
+  const sizeString = tagTree["size"][0].split("size")[1];
+  if (sizeString.includes("-")) {
+    const sizeParts = sizeString.split("-");
+    console.log(sizeParts);
+    parameters.size = {
+      min: Number(sizeParts[0]),
+      value: Number(sizeParts[0]),
+      max: Number(sizeParts[1]),
+    };
+  } else if (sizeString.includes("+")) {
+    const sizeNumber = Number(sizeString.split("+")[0]);
+    parameters.size = {
+      min: sizeNumber,
+      value: sizeNumber,
+      max: null,
+    };
+  } else {
+    parameters.size = {
+      min: null,
+      value: Number(sizeString),
+      max: null,
+    };
+  }
+  parameters.br = Number(tagTree["br"][0].split("br")[1]);
   const lifespanText = getBarText(doc, "lifespan");
   if (lifespanText) {
     parameters.adult = Number(

@@ -62,8 +62,26 @@ export default class TeriockSpeciesData extends StatDataMixin(
         hint: "Apply this species' size to its parent actor.",
         initial: true,
       }),
+      br: new fields.NumberField({ initial: 1, label: "Battle Rating" }),
       description: new TextField({
         label: "Description",
+      }),
+      innateRanks: new TextField({
+        label: "Innate ranks",
+      }),
+      lifespan: new fields.NumberField({
+        initial: 100,
+      }),
+      proficient: new fields.BooleanField({
+        initial: true,
+        label: "Proficient",
+      }),
+      size: new fields.SchemaField({
+        min: new fields.NumberField(),
+        max: new fields.NumberField(),
+        value: new fields.NumberField({
+          initial: 3,
+        }),
       }),
       sizeStepHp: new fields.NumberField({
         hint: "Size interval at which this species' HP increases.",
@@ -76,16 +94,6 @@ export default class TeriockSpeciesData extends StatDataMixin(
         initial: null,
         label: "MP Size Interval",
         nullable: true,
-      }),
-      lifespan: new fields.NumberField({
-        initial: 100,
-      }),
-      size: new fields.SchemaField({
-        min: new fields.NumberField(),
-        max: new fields.NumberField(),
-        value: new fields.NumberField({
-          initial: 3,
-        }),
       }),
       traits: new fields.SetField(
         new fields.StringField({
