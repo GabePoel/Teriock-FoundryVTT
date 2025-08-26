@@ -18,18 +18,15 @@ if (!rawAbilitiesFolder) {
 const progress = ui.notifications.info(`Pulling all abilities from wiki.`, {
   progress: true,
 });
-let pct = 0;
 
 let allAbilityPages =
   await game.teriock.api.wiki.fetchCategoryMembers("Abilities");
 allAbilityPages = allAbilityPages.filter((page) =>
   page.title.includes("Ability:"),
 );
-for (const abilityPage of allAbilityPages) {
-  const abilityName = abilityPage.title.split("Ability:")[1];
 
-  pct += 1 / allAbilityPages.length;
-  progress.update({ pct: pct, message: `Pulling ${abilityName} from wiki.` });
+async function processAbility(abilityPage, _index, _total) {
+  const abilityName = abilityPage.title.split("Ability:")[1];
 
   let abilityItem = essentialsPack.index.find((e) => e.name === abilityName);
   if (!abilityItem) {
@@ -48,6 +45,7 @@ for (const abilityPage of allAbilityPages) {
   } else {
     abilityItem = await foundry.utils.fromUuid(abilityItem.uuid);
   }
+
   await abilityItem.setFlag("teriock", "abilityWrapper", true);
   await abilityItem.setFlag("teriock", "effectWrapper", true);
   let abilityEffect = abilityItem.abilities.find((a) => a.name === abilityName);
@@ -61,8 +59,39 @@ for (const abilityPage of allAbilityPages) {
   } else {
     await abilityEffect.system.wikiPull({ notify: false });
   }
+
   if (abilityItem.img !== abilityEffect.img) {
     await abilityItem.update({ img: abilityEffect.img });
   }
+
+  return { abilityName, success: true };
 }
-progress.update({ pct: 1 });
+
+const abilityPromises = allAbilityPages.map((abilityPage, index) =>
+  processAbility(abilityPage, index, allAbilityPages.length),
+);
+
+progress.update({
+  pct: 0.1,
+  message: `Processing ${allAbilityPages.length} abilities in parallel...`,
+});
+
+try {
+  const results = await Promise.all(abilityPromises);
+
+  progress.update({
+    pct: 1,
+    message: `Successfully processed ${results.length} abilities.`,
+  });
+
+  console.log(
+    `Completed processing ${results.length} abilities:`,
+    results.map((r) => r.abilityName),
+  );
+} catch (error) {
+  progress.update({
+    pct: 1,
+    message: `Error occurred during processing: ${error.message}`,
+  });
+  console.error("Error processing abilities:", error);
+}

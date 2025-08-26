@@ -18,18 +18,15 @@ if (!allSpeciesFolder) {
 const progress = ui.notifications.info("Pulling all creatures from wiki.", {
   progress: true,
 });
-let pct = 0;
 
 let allSpeciesPages =
   await game.teriock.api.wiki.fetchCategoryMembers("Creatures");
 allSpeciesPages = allSpeciesPages.filter((page) =>
   page.title.includes("Creature:"),
 );
-for (const speciesPage of allSpeciesPages) {
-  const speciesName = speciesPage.title.split("Creature:")[1];
 
-  pct += 1 / allSpeciesPages.length;
-  progress.update({ pct: pct, message: `Pulling ${speciesName} from wiki.` });
+async function processSpecies(speciesPage, _index, _total) {
+  const speciesName = speciesPage.title.split("Creature:")[1];
 
   let speciesItem = speciesPack.index.find((e) => e.name === speciesName);
   if (!speciesItem) {
@@ -44,6 +41,37 @@ for (const speciesPage of allSpeciesPages) {
   } else {
     speciesItem = await foundry.utils.fromUuid(speciesItem.uuid);
   }
+
   await speciesItem.system.wikiPull({ notify: false });
+
+  return { speciesName, success: true };
 }
-progress.update({ pct: 1 });
+
+const speciesPromises = allSpeciesPages.map((speciesPage, index) =>
+  processSpecies(speciesPage, index, allSpeciesPages.length),
+);
+
+progress.update({
+  pct: 0.1,
+  message: `Processing ${allSpeciesPages.length} species in parallel...`,
+});
+
+try {
+  const results = await Promise.all(speciesPromises);
+
+  progress.update({
+    pct: 1,
+    message: `Successfully processed ${results.length} species.`,
+  });
+
+  console.log(
+    `Completed processing ${results.length} species:`,
+    results.map((r) => r.speciesName),
+  );
+} catch (error) {
+  progress.update({
+    pct: 1,
+    message: `Error occurred during processing: ${error.message}`,
+  });
+  console.error("Error processing species:", error);
+}

@@ -200,6 +200,7 @@ export default (Base) => {
      * @param {Teriock.RollOptions.PolyhedralDieFaces} faces
      */
     _setDice(stat, number, faces) {
+      console.log(stat, number, faces);
       const currentQuantity = Object.keys(this[`${stat}Dice`]).length;
       const keys = Object.keys(this[`${stat}Dice`]);
       const updateData = {};

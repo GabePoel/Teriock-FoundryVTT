@@ -1,5 +1,5 @@
 import { abilityOptions } from "../../../../constants/ability-options.mjs";
-import { safeUuid } from "../../../../helpers/utils.mjs";
+import { safeUuid, toKebabCase } from "../../../../helpers/utils.mjs";
 import { extractChangesFromHTML } from "../../../shared/parsing/extract-changes.mjs";
 import { getBarText, getText } from "../../../shared/parsing/get-text.mjs";
 import { processSubAbilities } from "../../../shared/parsing/process-subs.mjs";
@@ -165,6 +165,10 @@ export async function _parse(abilityData, rawHTML) {
     if (overrideImg) {
       img = overrideImg;
     }
+    img =
+      "systems/teriock/src/icons/abilities/" +
+      toKebabCase(abilityData.parent.name) +
+      ".webp";
   }
 
   delete parameters.results.endCondition;

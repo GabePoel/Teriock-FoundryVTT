@@ -5,3 +5,4 @@ export { default as fetchNamespacePages } from "./fetch-namespace-pages.mjs";
 export { default as fetchWikiPageContent } from "./fetch-wiki-page-content.mjs";
 export { default as fetchWikiPageHTML } from "./fetch-wiki-page-html.mjs";
 export { default as openWikiPage } from "./open-wiki-page.mjs";
+export { default as fetchPageCategories } from "./fetch-page-categories.mjs";

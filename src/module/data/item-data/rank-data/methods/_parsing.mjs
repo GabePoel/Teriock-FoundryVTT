@@ -74,14 +74,50 @@ export async function _parse(rankData, rawHTML) {
   const progress = ui.notifications.info(`Pulling Rank from wiki.`, {
     progress: true,
   });
-  let pct = 0;
-  for (const abilityName of toCreate) {
-    progress.update({ pct: pct, message: `Pulling ${abilityName} from wiki.` });
+
+  /**
+   * Creates a single ability
+   * @param {string} abilityName - The name of the ability to create
+   * @returns {Promise<Object>} Promise that resolves with ability creation result
+   */
+  async function createSingleAbility(abilityName) {
     await createAbility(rankData.parent, abilityName, { notify: false });
-    pct += 1 / toCreate.length;
-    progress.update({ pct: pct, message: `Pulling ${abilityName} from wiki.` });
+    return { abilityName, success: true };
   }
-  progress.update({ pct: 1 });
+
+  // Create array of promises for parallel processing
+  const abilityPromises = toCreate.map((abilityName) =>
+    createSingleAbility(abilityName),
+  );
+
+  // Update progress to show processing has started
+  progress.update({
+    pct: 0.1,
+    message: `Creating ${toCreate.length} abilities in parallel...`,
+  });
+
+  // Execute all ability creation in parallel
+  try {
+    const results = await Promise.all(abilityPromises);
+
+    // Update progress to completion
+    progress.update({
+      pct: 0.9,
+      message: `Successfully created ${results.length} abilities.`,
+    });
+
+    console.log(
+      `Created abilities for rank:`,
+      results.map((r) => r.abilityName),
+    );
+  } catch (error) {
+    progress.update({
+      pct: 0.9,
+      message: `Error occurred during ability creation: ${error.message}`,
+    });
+    console.error("Error creating abilities:", error);
+    throw error; // Re-throw to maintain original error handling behavior
+  }
 
   // Helper for HTML/text extraction
   const getHTML = (sel) => doc.querySelector(sel)?.innerHTML.trim();
@@ -93,11 +129,11 @@ export async function _parse(rankData, rawHTML) {
     description: getHTML(".class-description") || "",
     hpDiceBase: {
       number: 1,
-      faces: ARCHETYPE_FACES[archetype],
+      faces: ARCHETYPE_FACES[archetype]["hp"],
     },
     mpDiceBase: {
       number: 1,
-      faces: ARCHETYPE_FACES[archetype],
+      faces: ARCHETYPE_FACES[archetype]["mp"],
     },
   };
 
@@ -105,6 +141,8 @@ export async function _parse(rankData, rawHTML) {
   if (name.includes("Journeyman")) {
     name = "Journeyman";
   }
+
+  progress.update({ pct: 1 });
 
   return {
     system: parameters,
