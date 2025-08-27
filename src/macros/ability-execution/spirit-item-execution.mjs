@@ -39,5 +39,5 @@ if (!spiritItem) {
     "system.tier.raw": "1",
     "system.weight": 0,
   });
-  await spiritItem.system.addProperty("masterCrafted");
+  await game.teriock.api.fetch.importProperty(spiritItem, "Master Crafted");
 }
