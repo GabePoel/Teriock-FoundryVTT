@@ -9,6 +9,7 @@ import { magicalProperties } from "../src/module/constants/generated/magical-pro
 import { materialProperties } from "../src/module/constants/generated/material-properties.mjs";
 import { properties } from "../src/module/constants/generated/properties.mjs";
 import { fetchWikiPageHTML } from "../src/module/helpers/wiki/_module.mjs";
+import { toKebabCase } from "./update-options.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -23,7 +24,7 @@ const writeModuleFile = (fileName, exportName, entries) => {
       `  ${key}: {\n` +
         `    name: ${JSON.stringify(value.name)},\n` +
         `    id: ${JSON.stringify(key)},\n` +
-        `    img: ${JSON.stringify(`systems/teriock/assets/${exportName}/${key}.svg`)},\n` +
+        `    img: ${JSON.stringify(`systems/teriock/src/icons/${exportName}/${toKebabCase(value.name)}.webp`)},\n` +
         (value._id ? `    _id: ${JSON.stringify(value._id)},\n` : "") +
         (value.statuses
           ? `    statuses: ${JSON.stringify(value.statuses)},\n`

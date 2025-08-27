@@ -1,6 +1,7 @@
 import { copyRank, getItem, getRank } from "../../../../../helpers/fetch.mjs";
 import { toTitleCase } from "../../../../../helpers/utils.mjs";
-import { selectClassDialog, selectDialog, selectEquipmentTypeDialog } from "../../../../dialogs/select-dialog.mjs";
+import { selectClassDialog, selectEquipmentTypeDialog } from "../../../../dialogs/select-dialog.mjs";
+import { selectDocumentDialog } from "../../../../dialogs/select-document-dialog.mjs";
 
 /**
  * Adds a new embedded document to {@link TeriockActor}.
@@ -83,18 +84,17 @@ export async function _addEmbedded(sheet, target) {
 export async function _addRank(sheet) {
   const rankClass = await selectClassDialog();
   if (!rankClass) return;
-  const rankNumber = Number(
-    await selectDialog(
-      { 1: "1", 2: "2", 3: "3", 4: "4", 5: "5" },
-      {
-        label: "Rank",
-        hint: `What rank ${CONFIG.TERIOCK.rankOptionsList[rankClass]} is this?`,
-        title: "Select Rank",
-      },
-    ),
-  );
-  if (!rankClass) return;
-  const referenceRank = await getRank(rankClass, rankNumber);
+  const possibleRanks = await Promise.all([
+    getRank(rankClass, 1),
+    getRank(rankClass, 2),
+    getRank(rankClass, 3),
+    getRank(rankClass, 4),
+    getRank(rankClass, 5),
+  ]);
+  const referenceRank = await selectDocumentDialog(possibleRanks, {
+    title: "Select Rank",
+  });
+  const rankNumber = referenceRank.system.classRank;
   let rank = await copyRank(rankClass, rankNumber);
   if (rankNumber <= 2) {
     await sheet.document.createEmbeddedDocuments("Item", [rank]);
@@ -130,25 +130,27 @@ export async function _addRank(sheet) {
   }
   const chosenAbilityNames = [];
   if (availableCombatAbilityNames.size > 1) {
-    const combatAbilityChoices = {};
-    availableCombatAbilityNames.map((n) => (combatAbilityChoices[n] = n));
-    const chosenCombatAbilityName = await selectDialog(combatAbilityChoices, {
-      label: "Ability",
-      hint: "Select a combat ability.",
-      title: "Select Combat Ability",
-    });
+    const availableCombatAbilities = referenceRank.abilities.filter((a) =>
+      availableCombatAbilityNames.has(a.name),
+    );
+    const chosenCombatAbility = await selectDocumentDialog(
+      availableCombatAbilities,
+      { title: "Select Combat Ability" },
+    );
+    const chosenCombatAbilityName = chosenCombatAbility.name;
     chosenAbilityNames.push(chosenCombatAbilityName);
   } else {
     chosenAbilityNames.push(...availableCombatAbilityNames);
   }
   if (availableSupportAbilityNames.size > 1) {
-    const supportAbilityChoices = {};
-    availableSupportAbilityNames.map((n) => (supportAbilityChoices[n] = n));
-    const supportAbilityName = await selectDialog(supportAbilityChoices, {
-      label: "Support Ability",
-      hint: "Select a support ability.",
-      title: "Select Combat Ability",
-    });
+    const availableSupportAbilities = referenceRank.abilities.filter((a) =>
+      availableSupportAbilityNames.has(a.name),
+    );
+    const chosenSupportAbility = await selectDocumentDialog(
+      availableSupportAbilities,
+      { title: "Select Support Ability" },
+    );
+    const supportAbilityName = chosenSupportAbility.name;
     chosenAbilityNames.push(supportAbilityName);
   } else {
     chosenAbilityNames.push(...availableSupportAbilityNames);

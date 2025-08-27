@@ -1,4 +1,5 @@
 import { createAbility } from "../../../../helpers/create-effects.mjs";
+import { toKebabCase } from "../../../../helpers/utils.mjs";
 
 /**
  * Default statistics for different archetypes.
@@ -85,7 +86,7 @@ export async function _parse(rankData, rawHTML) {
     return { abilityName, success: true };
   }
 
-  // Create array of promises for parallel processing
+  // Create an array of promises for parallel processing
   const abilityPromises = toCreate.map((abilityName) =>
     createSingleAbility(abilityName),
   );
@@ -146,7 +147,7 @@ export async function _parse(rankData, rawHTML) {
 
   return {
     system: parameters,
-    img: `systems/teriock/assets/classes/${className}.svg`,
+    img: `systems/teriock/src/icons/ranks/${toKebabCase(name)}.webp`,
     name: name,
   };
 }

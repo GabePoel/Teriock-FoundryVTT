@@ -1,6 +1,6 @@
 import { cleanValue } from "../../../../helpers/clean.mjs";
 import { createProperty } from "../../../../helpers/create-effects.mjs";
-import { toCamelCase } from "../../../../helpers/utils.mjs";
+import { toCamelCase, toKebabCase } from "../../../../helpers/utils.mjs";
 import { _override } from "./_overrides.mjs";
 
 /**
@@ -102,10 +102,11 @@ export async function _parse(equipmentData, rawHTML) {
   let newImg = oldImg;
   if (
     oldImg?.startsWith("systems/teriock/assets") ||
+    oldImg?.startsWith("systems/teriock/src/icons/equipment") ||
     oldImg?.startsWith("icons/svg")
   ) {
-    newImg = "systems/teriock/assets/searchable.svg";
-    newImg = `systems/teriock/assets/equipment/${equipmentData.equipmentType?.toLowerCase().replace(/\s+/g, "-")}.svg`;
+    newImg = `systems/teriock/src/icons/equipment/${toKebabCase(equipmentData.equipmentType)}.webp`;
+    newImg = newImg.replace("ō", "o");
   }
 
   // Remove unused parameters

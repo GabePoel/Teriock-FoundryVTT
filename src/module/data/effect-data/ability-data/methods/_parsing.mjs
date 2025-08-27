@@ -4,7 +4,6 @@ import { extractChangesFromHTML } from "../../../shared/parsing/extract-changes.
 import { getBarText, getText } from "../../../shared/parsing/get-text.mjs";
 import { processSubAbilities } from "../../../shared/parsing/process-subs.mjs";
 import { buildTagTree } from "../../../shared/parsing/tag-tree.mjs";
-import { imageOverrides } from "./_image-overrides.mjs";
 
 /**
  * Cost value templates for different cost types.
@@ -149,9 +148,6 @@ export async function _parse(abilityData, rawHTML) {
   // Add macro if appropriate
   parameters.applies.macros = extractMacroFromHTML(doc);
 
-  // Select image
-  let img = selectImage(parameters);
-
   // Process sub-abilities
   await processSubAbilities(subs, abilityData);
 
@@ -159,17 +155,7 @@ export async function _parse(abilityData, rawHTML) {
   if (abilityData.parent.name.toLowerCase().includes("warded")) {
     parameters.warded = true;
   }
-
-  if (Object.keys(imageOverrides).includes(abilityData.parent.name)) {
-    const overrideImg = `modules/game-icons-net/whitetransparent/${imageOverrides[abilityData.parent.name]}.svg`;
-    if (overrideImg) {
-      img = overrideImg;
-    }
-    img =
-      "systems/teriock/src/icons/abilities/" +
-      toKebabCase(abilityData.parent.name) +
-      ".webp";
-  }
+  const img = `systems/teriock/src/icons/abilities/${toKebabCase(abilityData.parent.name)}.webp`;
 
   delete parameters.results.endCondition;
 
@@ -944,20 +930,4 @@ function processDiceAndEffectExtraction(parameters) {
       parameters.applies.base.expiration.doesExpire = true;
     }
   }
-}
-
-/**
- * Selects the appropriate image for the ability based on its parameters.
- * Chooses between spell, skill, class-specific, or default ability icons.
- * @param {object} parameters - The ability parameters to determine the image from.
- * @returns {string} The path to the selected image.
- * @private
- */
-function selectImage(parameters) {
-  let img = "systems/teriock/assets/ability.svg";
-  if (parameters.spell) img = "systems/teriock/assets/spell.svg";
-  else if (parameters.skill) img = "systems/teriock/assets/skill.svg";
-  if (parameters.class)
-    img = `systems/teriock/assets/classes/${parameters.class}.svg`;
-  return img;
 }

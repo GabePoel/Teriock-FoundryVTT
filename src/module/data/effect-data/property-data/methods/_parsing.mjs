@@ -1,4 +1,4 @@
-import { toCamelCase } from "../../../../helpers/utils.mjs";
+import { toCamelCase, toKebabCase } from "../../../../helpers/utils.mjs";
 import { extractChangesFromHTML } from "../../../shared/parsing/extract-changes.mjs";
 
 /**
@@ -48,6 +48,6 @@ export async function _parse(propertyData, rawHTML) {
   if (material) {
     parameters.system.damageType = name;
   }
+  parameters.img = `systems/teriock/src/icons/properties/${toKebabCase(name)}.webp`;
   return parameters;
 }
-
