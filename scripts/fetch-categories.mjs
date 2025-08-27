@@ -5,6 +5,7 @@ import {
   fetchCategoryMembers,
   fetchPageCategories,
 } from "../src/module/helpers/wiki/_module.mjs";
+import { toKebabCase } from "./update-options.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -14,9 +15,11 @@ const CATEGORIES = [
   "Abilities",
   "Classes",
   "Conditions",
+  "Creatures",
+  "Damage types",
+  "Drain types",
   "Equipment",
   "Properties",
-  "Creatures",
   "Tradecrafts",
 ];
 
@@ -24,7 +27,7 @@ const run = async () => {
   for (const category of CATEGORIES) {
     const OUTPUT_JSON = path.resolve(
       __dirname,
-      `../src/icons/build/categories/${category.toLowerCase()}.json`,
+      `../src/icons/build/categories/${toKebabCase(category)}.json`,
     );
     let pages = await fetchCategoryMembers(category);
     pages = pages.filter((page) => !page.title.includes("Category:"));
