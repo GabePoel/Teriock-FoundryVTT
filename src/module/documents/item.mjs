@@ -27,6 +27,14 @@ export default class TeriockItem extends BaseTeriockItem {
 
   /**
    * @inheritDoc
+   * @returns {Readonly<Teriock.Documents.ItemModelMetadata>}
+   */
+  get metadata() {
+    return super.metadata;
+  }
+
+  /**
+   * @inheritDoc
    * @returns {TeriockEffect[]}
    */
   get validEffects() {

@@ -586,6 +586,32 @@ export function mergeLevel(obj, path, key) {
 }
 
 /**
+ * Unfreeze, merge, and refreeze two objects.
+ * @template T
+ * @param {Readonly<T>} original
+ * @param {Partial<T>} other
+ * @returns Readonly<T>
+ */
+export function mergeFreeze(original, other) {
+  return foundry.utils.deepFreeze(
+    foundry.utils.mergeObject(
+      foundry.utils.deepClone(original),
+      foundry.utils.deepClone(other),
+    ),
+  );
+}
+
+/**
+ * Wrapper to freeze an object with proper typing.
+ * @template T
+ * @param {T} obj
+ * @returns {Readonly<T>}
+ */
+export function freeze(obj) {
+  return foundry.utils.deepFreeze(obj);
+}
+
+/**
  * Check if the {@link TeriockUser} owns and uses the given document.
  * @param {ClientDocument} document
  * @param {string} userId

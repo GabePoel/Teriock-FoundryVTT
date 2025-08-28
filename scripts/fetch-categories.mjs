@@ -15,10 +15,12 @@ const CATEGORIES = [
   "Abilities",
   "Classes",
   "Conditions",
+  "Core rules",
   "Creatures",
   "Damage types",
   "Drain types",
   "Equipment",
+  "Keywords",
   "Properties",
   "Tradecrafts",
 ];

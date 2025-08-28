@@ -52,6 +52,7 @@ declare global {
   const TeriockCharacterCompendium: typeof import("./documents/collections/_documents.mjs").TeriockCharacterCompendium;
   const TeriockEquipmentCompendium: typeof import("./documents/collections/_documents.mjs").TeriockEquipmentCompendium;
   const TeriockPowerCompendium: typeof import("./documents/collections/_documents.mjs").TeriockPowerCompendium;
+  const TeriockWrapperCompendium: typeof import("./documents/collections/_documents.mjs").TeriockWrapperCompendium;
   const TeriockRankCompendium: typeof import("./documents/collections/_documents.mjs").TeriockRankCompendium;
   const TeriockMacroCompendium: typeof import("./documents/collections/_documents.mjs").TeriockMacroCompendium;
 

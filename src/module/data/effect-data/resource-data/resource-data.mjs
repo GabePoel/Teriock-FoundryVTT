@@ -1,3 +1,4 @@
+import { mergeFreeze } from "../../../helpers/utils.mjs";
 import { ConsumableDataMixin } from "../../mixins/_module.mjs";
 import { FormulaField } from "../../shared/fields.mjs";
 import TeriockBaseEffectData from "../base-effect-data/base-effect-data.mjs";
@@ -15,17 +16,12 @@ export default class TeriockResourceData extends ConsumableDataMixin(
   TeriockBaseEffectData,
 ) {
   /**
-   * Metadata for this effect.
+   * @inheritDoc
    * @type {Readonly<Teriock.Documents.EffectModelMetadata>}
    */
-  static metadata = Object.freeze({
-    consumable: true,
-    hierarchy: false,
-    namespace: "",
-    pageNameKey: "name",
+  static metadata = mergeFreeze(super.metadata, {
     type: "resource",
     usable: true,
-    wiki: false,
   });
 
   /** @inheritDoc */

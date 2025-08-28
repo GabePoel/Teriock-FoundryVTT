@@ -1,3 +1,4 @@
+import { mergeFreeze } from "../../../helpers/utils.mjs";
 import TeriockBaseActorData from "../base-actor-data/base-actor-data.mjs";
 
 /**
@@ -12,10 +13,10 @@ import TeriockBaseActorData from "../base-actor-data/base-actor-data.mjs";
  */
 export default class TeriockCharacterData extends TeriockBaseActorData {
   /**
-   * Metadata for this actor.
+   * @inheritDoc
    * @type {Readonly<Teriock.Documents.ActorModelMetadata>}
    */
-  static metadata = Object.freeze({
+  static metadata = mergeFreeze(super.metadata, {
     type: "character",
   });
 }

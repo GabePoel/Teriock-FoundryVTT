@@ -10,7 +10,8 @@ declare global {
       | "rank"
       | "power"
       | "mechanic"
-      | "species";
+      | "species"
+      | "wrapper";
 
     export type EffectType =
       | "ability"
@@ -22,8 +23,13 @@ declare global {
       | "property"
       | "resource";
 
+    export type MacroType = "script" | "chat";
+
     export type ModelMetadata = {
       type: string;
+      childEffectTypes: Teriock.Documents.EffectType[];
+      childItemTypes: Teriock.Documents.ItemType[];
+      childMacroTypes: Teriock.Documents.MacroType[];
     };
 
     export type ChildModelMetadata = Teriock.Documents.ModelMetadata & {
@@ -39,6 +45,7 @@ declare global {
     };
 
     export type ItemModelMetadata = Teriock.Documents.ChildModelMetadata & {
+      stats: boolean;
       type: Teriock.Documents.ItemType;
     };
 

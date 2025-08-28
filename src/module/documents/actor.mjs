@@ -71,6 +71,14 @@ export default class TeriockActor extends BaseTeriockActor {
   }
 
   /**
+   * @inheritDoc
+   * @returns {Teriock.Documents.ActorModelMetadata}
+   */
+  get metadata() {
+    return super.metadata;
+  }
+
+  /**
    * Gets effects that expire based on movement.
    * @returns {TeriockConsequence[]} Array of movement expiration effects.
    */

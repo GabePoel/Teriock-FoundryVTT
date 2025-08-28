@@ -1,3 +1,4 @@
+import { mergeFreeze } from "../../../helpers/utils.mjs";
 import TeriockBaseEffectData from "../base-effect-data/base-effect-data.mjs";
 
 const { fields } = foundry.data;
@@ -13,14 +14,8 @@ export default class TeriockAttunementData extends TeriockBaseEffectData {
    * @inheritDoc
    * @type {Readonly<Teriock.Documents.EffectModelMetadata>}
    */
-  static metadata = Object.freeze({
-    consumable: false,
-    hierarchy: false,
-    namespace: "",
-    pageNameKey: "name",
+  static metadata = mergeFreeze(super.metadata, {
     type: "attunement",
-    usable: false,
-    wiki: false,
   });
 
   /** @inheritDoc */

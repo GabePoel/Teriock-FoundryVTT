@@ -1,4 +1,5 @@
 import { documentOptions } from "../../constants/document-options.mjs";
+import { getAbility } from "../../helpers/fetch.mjs";
 
 const enricherIcons = {
   Core: "circle-info",
@@ -42,11 +43,7 @@ const abilityEnricher = {
   enricher: async (match, _options) => {
     const fileName = match[1];
     const title = match[2];
-    const itemWrapper = await foundry.utils.fromUuid(
-      game.teriock.packs.essentials().index.getName(fileName).uuid,
-    );
-    if (!itemWrapper) return null;
-    const ability = itemWrapper.effects.getName(fileName);
+    const ability = await getAbility(fileName);
     if (!ability) return null;
     const uuid = ability.uuid;
     if (!uuid) return null;

@@ -1,4 +1,5 @@
 import { dieOptions } from "../../constants/die-options.mjs";
+import { mergeFreeze } from "../../helpers/utils.mjs";
 import StatDieModel from "../shared/stat-die-model.mjs";
 
 const { fields } = foundry.data;
@@ -9,6 +10,11 @@ const { fields } = foundry.data;
  */
 export default (Base) => {
   return class StatDataMixin extends Base {
+    /** @inheritDoc */
+    static metadata = mergeFreeze(super.metadata, {
+      stats: true,
+    });
+
     /** @inheritDoc */
     static defineSchema() {
       const schema = super.defineSchema();

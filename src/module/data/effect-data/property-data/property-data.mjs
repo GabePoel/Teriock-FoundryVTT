@@ -1,3 +1,4 @@
+import { mergeFreeze } from "../../../helpers/utils.mjs";
 import { WikiDataMixin } from "../../mixins/_module.mjs";
 import TeriockBaseEffectData from "../base-effect-data/base-effect-data.mjs";
 import { _messageParts } from "./methods/_messages.mjs";
@@ -19,17 +20,12 @@ export default class TeriockPropertyData extends WikiDataMixin(
   TeriockBaseEffectData,
 ) {
   /**
-   * Metadata for this effect.
+   * @inheritDoc
    * @type {Readonly<Teriock.Documents.EffectModelMetadata>}
    */
-  static metadata = Object.freeze({
-    consumable: false,
-    hierarchy: false,
+  static metadata = mergeFreeze(super.metadata, {
     namespace: "Property",
-    pageNameKey: "name",
     type: "property",
-    usable: false,
-    wiki: true,
   });
 
   /** @inheritDoc */

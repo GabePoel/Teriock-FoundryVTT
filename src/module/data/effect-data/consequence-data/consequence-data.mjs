@@ -1,5 +1,5 @@
 import { inCombatExpirationDialog } from "../../../applications/dialogs/_module.mjs";
-import { getRollIcon } from "../../../helpers/utils.mjs";
+import { getRollIcon, mergeFreeze } from "../../../helpers/utils.mjs";
 import { migrateHierarchy } from "../../shared/migrations.mjs";
 import TeriockBaseEffectData from "../base-effect-data/base-effect-data.mjs";
 import * as sharedFields from "../shared/shared-fields.mjs";
@@ -15,14 +15,11 @@ export default class TeriockConsequenceData extends TeriockBaseEffectData {
    * @inheritDoc
    * @type {Readonly<Teriock.Documents.EffectModelMetadata>}
    */
-  static metadata = Object.freeze({
-    consumable: false,
+  static metadata = mergeFreeze(super.metadata, {
+    childEffectTypes: ["ability", "property", "fluency"],
     hierarchy: true,
-    namespace: "",
-    pageNameKey: "name",
     type: "consequence",
     usable: true,
-    wiki: false,
   });
 
   /** @inheritDoc */

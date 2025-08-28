@@ -1,3 +1,4 @@
+import { freeze } from "../../../helpers/utils.mjs";
 import { _migrateData } from "./methods/_migrate-data.mjs";
 import * as postUpdate from "./methods/_post-update.mjs";
 import { _getRollData } from "./methods/_roll-data.mjs";
@@ -16,6 +17,25 @@ const { TypeDataModel } = foundry.abstract;
  * Handles all core actor functionality including damage, healing, rolling, and data management.
  */
 export default class TeriockBaseActorData extends TypeDataModel {
+  /**
+   * Metadata for this actor.
+   * @type {Readonly<Teriock.Documents.ActorModelMetadata>}
+   */
+  static metadata = freeze({
+    type: "base",
+    childEffectTypes: [
+      "ability",
+      "attunement",
+      "base",
+      "condition",
+      "consequence",
+      "fluency",
+      "resource",
+    ],
+    childItemTypes: ["equipment", "mechanic", "power", "rank", "species"],
+    childMacroTypes: [],
+  });
+
   /** @inheritDoc */
   static defineSchema() {
     return _defineSchema();

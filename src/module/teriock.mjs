@@ -83,6 +83,7 @@ foundry.helpers.Hooks.once("init", function () {
     rank: data.item.RankData,
     mechanic: data.item.MechanicData,
     species: data.item.SpeciesData,
+    wrapper: data.item.WrapperData,
   });
   Object.assign(CONFIG.ActiveEffect.dataModels, {
     ability: data.effect.AbilityData,
@@ -149,6 +150,12 @@ foundry.helpers.Hooks.once("init", function () {
       doc: documents.TeriockItem,
       label: "Species",
       types: ["species"],
+    },
+    {
+      cls: applications.sheets.item.WrapperSheet,
+      doc: documents.TeriockItem,
+      label: "Wrapper",
+      types: ["wrapper"],
     },
     // Effects
     {
@@ -258,6 +265,12 @@ foundry.helpers.Hooks.once("init", function () {
       essentials: () =>
         /** @type {TeriockPowerCompendium} */
         packs.get("teriock.essentials"),
+      abilities: () =>
+        /** @type {TeriockWrapperCompendium} */
+        packs.get("teriock.abilities"),
+      properties: () =>
+        /** @type {TeriockWrapperCompendium} */
+        packs.get("teriock.properties"),
       execution: () =>
         /** @type {TeriockMacroCompendium} */
         packs.get("teriock.execution"),

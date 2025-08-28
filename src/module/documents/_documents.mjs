@@ -78,9 +78,20 @@ export class TeriockSpecies extends TeriockItem {}
  * @property {TeriockMechanicSheet} sheet
  * @property {"rank"} type
  * @property {Teriock.UUID<TeriockMechanic>} uuid
- * @property {Teriock.ID<TeriockCharacter>} id
+ * @property {Teriock.ID<TeriockMechanic>} id
  */
 export class TeriockMechanic extends TeriockItem {}
+
+/**
+ * Wrapper-specific {@link TeriockItem} class.
+ *
+ * @property {TeriockWrapperData} system
+ * @property {TeriockWrapperSheet} sheet
+ * @property {"wrapper"} type
+ * @property {Teriock.UUID<TeriockWrapper>} uuid
+ * @property {Teriock.ID<TeriockWrapper>} id
+ */
+export class TeriockWrapper extends TeriockItem {}
 
 /**
  * Ability-specific {@link TeriockEffect} class.

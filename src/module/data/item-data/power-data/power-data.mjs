@@ -1,3 +1,4 @@
+import { mergeFreeze } from "../../../helpers/utils.mjs";
 import { TextField } from "../../shared/fields.mjs";
 import TeriockBaseItemData from "../base-item-data/base-item-data.mjs";
 import { _messageParts } from "./methods/_messages.mjs";
@@ -9,13 +10,8 @@ const { fields } = foundry.data;
  */
 export default class TeriockPowerData extends TeriockBaseItemData {
   /** @inheritDoc */
-  static metadata = Object.freeze({
-    consumable: false,
-    namespace: "",
-    pageNameKey: "name",
+  static metadata = mergeFreeze(super.metadata, {
     type: "power",
-    usable: false,
-    wiki: false,
   });
 
   /** @inheritDoc */

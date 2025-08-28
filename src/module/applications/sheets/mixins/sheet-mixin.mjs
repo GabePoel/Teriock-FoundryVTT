@@ -417,36 +417,24 @@ export default (Base) => {
     }
 
     /**
-     * Checks if an effect can be dropped on this document.
-     * @param {TeriockEffect} effect - The effect to check.
-     * @returns {boolean} True if the effect can be dropped.
+     * Checks if some other document can be dropped on this document.
+     * @param {TeriockItem|TeriockEffect|TeriockMacro} doc - The document to check.
+     * @returns {boolean} True if the document can be dropped.
      * @private
      */
-    _canDropEffect(effect) {
+    _canDrop(doc) {
+      const childTypes = new Set([
+        ...this.document.metadata.childEffectTypes,
+        ...this.document.metadata.childItemTypes,
+        ...this.document.metadata.childMacroTypes,
+      ]);
+      console.log(childTypes);
       return (
         this.document.isOwner &&
-        effect &&
-        effect.parent !== this.document &&
-        effect.target !== this.document &&
-        effect !== this.document &&
-        (["Actor", "Item"].includes(this.document.documentName) ||
-          (this.document.documentName === "ActiveEffect" &&
-            this.document.system.constructor.metadata.hierarchy))
-      );
-    }
-
-    /**
-     * Checks if an item can be dropped on this document.
-     * @param {TeriockItem} item - The item to check.
-     * @returns {boolean} True if the item can be dropped.
-     * @private
-     */
-    _canDropItem(item) {
-      return (
-        this.document.isOwner &&
-        item &&
-        item.parent !== this.document &&
-        this.document.documentName === "Actor"
+        doc &&
+        doc.parent !== this.document &&
+        doc !== this.document &&
+        childTypes.has(doc.type)
       );
     }
 
@@ -590,7 +578,7 @@ export default (Base) => {
      * Handles dropping of active effects.
      * @param {DragEvent} _event - The drop event.
      * @param {object} data - The effect data.
-     * @returns {Promise<boolean>} Promise that resolves to true if the drop was successful.
+     * @returns {Promise<TeriockEffect|boolean>} Promise that resolves to true if the drop was successful.
      * @private
      */
     async _onDropActiveEffect(_event, data) {
@@ -598,7 +586,7 @@ export default (Base) => {
       const EffectClass = await getDocumentClass("ActiveEffect");
       const effect =
         /** @type {TeriockEffect} */ await EffectClass.fromDropData(data);
-      if (!this._canDropEffect(effect)) return false;
+      if (!this._canDrop(effect)) return false;
 
       if (this.document.documentName === "ActiveEffect") {
         effect.updateSource({ "system.hierarchy.supId": this.document.id });
@@ -629,13 +617,13 @@ export default (Base) => {
       const ItemClass = await getDocumentClass("Item");
       const item =
         /** @type {TeriockItem} */ await ItemClass.fromDropData(data);
-      if (item.getFlag("teriock", "abilityWrapper")) {
+      if (item.type === "wrapper") {
         /** @type {ClientDocument} */
-        const ability = item.effects.getName(item.name);
-        await this._onDropActiveEffect(_event, ability.toDragData());
+        const effect = item.system.effect;
+        await this._onDropActiveEffect(_event, effect.toDragData());
         return false;
       }
-      if (!this._canDropItem(item)) return false;
+      if (!this._canDrop(item)) return false;
 
       const source = await foundry.utils.fromUuid(data.uuid);
       if (item.parent?.documentName === "Actor" && item.type === "equipment") {

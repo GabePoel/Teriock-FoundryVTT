@@ -1,4 +1,4 @@
-import { getRollIcon, makeIcon } from "../../../helpers/utils.mjs";
+import { getRollIcon, makeIcon, mergeFreeze } from "../../../helpers/utils.mjs";
 import { StatDataMixin, WikiDataMixin } from "../../mixins/_module.mjs";
 import { TextField } from "../../shared/fields.mjs";
 import TeriockBaseItemData from "../base-item-data/base-item-data.mjs";
@@ -21,16 +21,13 @@ export default class TeriockRankData extends StatDataMixin(
   WikiDataMixin(TeriockBaseItemData),
 ) {
   /**
-   * Metadata for this item.
+   * @inheritDoc
    * @type {Readonly<Teriock.Documents.ItemModelMetadata>}
    */
-  static metadata = Object.freeze({
-    consumable: false,
+  static metadata = mergeFreeze(super.metadata, {
     namespace: "Class",
     pageNameKey: "system.className",
     type: "rank",
-    usable: false,
-    wiki: true,
   });
 
   /** @inheritDoc */
@@ -61,6 +58,7 @@ export default class TeriockRankData extends StatDataMixin(
         min: 0,
       }),
       hpDice: this.defineStatDieField("hp", { faces: 10, value: 6 }),
+      innate: new fields.BooleanField({ initial: false, label: "Innate" }),
       mpDice: this.defineStatDieField("mp", { faces: 10, value: 6 }),
       maxAv: new fields.NumberField({
         initial: 2,

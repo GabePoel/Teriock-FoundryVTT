@@ -1,4 +1,4 @@
-import { smartEvaluateSync } from "../../helpers/utils.mjs";
+import { mergeFreeze, smartEvaluateSync } from "../../helpers/utils.mjs";
 
 /**
  * Mixin that provides consumable document functionality.
@@ -8,6 +8,11 @@ import { smartEvaluateSync } from "../../helpers/utils.mjs";
  */
 export default (Base) => {
   return class ConsumableDataMixin extends Base {
+    /** @inheritDoc */
+    static metadata = mergeFreeze(super.metadata, {
+      consumable: true,
+    });
+
     /**
      * Adds one unit to the consumable item.
      * Increments the quantity by 1, respecting maximum quantity limits.

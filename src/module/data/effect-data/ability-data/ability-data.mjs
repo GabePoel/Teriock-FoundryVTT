@@ -1,4 +1,5 @@
 import { insertElderSorceryMask } from "../../../helpers/html.mjs";
+import { mergeFreeze } from "../../../helpers/utils.mjs";
 import { ConsumableDataMixin, WikiDataMixin } from "../../mixins/_module.mjs";
 import TeriockBaseEffectData from "../base-effect-data/base-effect-data.mjs";
 import { _generateChanges } from "./methods/_generate-changes.mjs";
@@ -24,17 +25,15 @@ export default class TeriockAbilityData extends ConsumableDataMixin(
   WikiDataMixin(TeriockBaseEffectData),
 ) {
   /**
-   * Metadata for this effect.
+   * @inheritDoc
    * @type {Readonly<Teriock.Documents.EffectModelMetadata>}
    */
-  static metadata = Object.freeze({
-    consumable: false,
+  static metadata = mergeFreeze(super.metadata, {
+    childEffectTypes: ["ability"],
     hierarchy: true,
     namespace: "Ability",
-    pageNameKey: "name",
     type: "ability",
     usable: true,
-    wiki: true,
   });
 
   /** @inheritDoc */

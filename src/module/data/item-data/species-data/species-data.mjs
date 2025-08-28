@@ -2,7 +2,7 @@ import { setStatDiceDialog } from "../../../applications/dialogs/_module.mjs";
 import { dieOptions } from "../../../constants/die-options.mjs";
 import { traits } from "../../../constants/generated/traits.mjs";
 import { copyAbility } from "../../../helpers/fetch.mjs";
-import { toTitleCase } from "../../../helpers/utils.mjs";
+import { mergeFreeze, toTitleCase } from "../../../helpers/utils.mjs";
 import { StatDataMixin, WikiDataMixin } from "../../mixins/_module.mjs";
 import { TextField } from "../../shared/fields.mjs";
 import TeriockBaseItemData from "../base-item-data/base-item-data.mjs";
@@ -25,16 +25,12 @@ export default class TeriockSpeciesData extends StatDataMixin(
   WikiDataMixin(TeriockBaseItemData),
 ) {
   /**
-   * Metadata for this item.
-   * @type {Readonly<Teriock.Documents.ItemModelMetadata>}
+   * @inheritDoc
+   * @type {Teriock.Documents.ItemModelMetadata}
    */
-  static metadata = Object.freeze({
-    consumable: false,
+  static metadata = mergeFreeze(super.metadata, {
     namespace: "Creature",
-    pageNameKey: "name",
     type: "species",
-    usable: false,
-    wiki: true,
   });
 
   /** @inheritDoc */

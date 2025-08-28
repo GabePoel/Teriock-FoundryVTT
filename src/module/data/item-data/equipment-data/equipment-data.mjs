@@ -1,4 +1,4 @@
-import { getRollIcon } from "../../../helpers/utils.mjs";
+import { getRollIcon, mergeFreeze } from "../../../helpers/utils.mjs";
 import { ConsumableDataMixin, WikiDataMixin } from "../../mixins/_module.mjs";
 import TeriockBaseItemData from "../base-item-data/base-item-data.mjs";
 import * as attunement from "./methods/_attunement.mjs";
@@ -26,16 +26,15 @@ export default class TeriockEquipmentData extends ConsumableDataMixin(
   WikiDataMixin(TeriockBaseItemData),
 ) {
   /**
-   * Metadata for this item.
+   * @inheritDoc
    * @type {Readonly<Teriock.Documents.ItemModelMetadata>}
    */
-  static metadata = Object.freeze({
-    consumable: true,
+  static metadata = mergeFreeze(super.metadata, {
     namespace: "Equipment",
     pageNameKey: "system.equipmentType",
     type: "equipment",
     usable: true,
-    wiki: true,
+    childEffectTypes: ["ability", "fluency", "property", "resource"],
   });
 
   /** @inheritDoc */

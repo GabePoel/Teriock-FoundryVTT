@@ -7,6 +7,14 @@
 export default (Base) => {
   return class CommonDocumentMixin extends Base {
     /**
+     * Metadata.
+     * @returns {Readonly<Teriock.Documents.ModelMetadata>}
+     */
+    get metadata() {
+      return this.system.constructor.metadata;
+    }
+
+    /**
      * @returns {Teriock.UUID<TeriockActor|TeriockItem|TeriockEffect>}
      */
     get uuid() {

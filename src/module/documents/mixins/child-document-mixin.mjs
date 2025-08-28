@@ -48,7 +48,7 @@ export default (Base) => {
      */
     async _preCreate(data, options, user) {
       if (!data.img)
-        this.updateSource({ img: `systems/teriock/assets/${data.type}.svg` });
+        this.updateSource({ img: `systems/teriock/src/icons/documents/${data.type}.svg` });
       return super._preCreate(data, options, user);
     }
 

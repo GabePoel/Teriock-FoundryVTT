@@ -1,19 +1,4 @@
-const essentialsPack = game.teriock.packs.essentials();
-const essentialsFolders = essentialsPack.folders;
-
-const rawAbilitiesFolderName = "Raw Abilities";
-let rawAbilitiesFolder = essentialsFolders.getName(rawAbilitiesFolderName);
-if (!rawAbilitiesFolder) {
-  await Folder.create(
-    {
-      name: rawAbilitiesFolderName,
-      type: "Item",
-    },
-    {
-      pack: "teriock.essentials",
-    },
-  );
-}
+const abilitiesPack = game.teriock.packs.abilities();
 
 const progress = ui.notifications.info(`Pulling all abilities from wiki.`, {
   progress: true,
@@ -28,26 +13,18 @@ allAbilityPages = allAbilityPages.filter((page) =>
 async function processAbility(abilityPage, _index, _total) {
   const abilityName = abilityPage.title.split("Ability:")[1];
 
-  let abilityItem = essentialsPack.index.find((e) => e.name === abilityName);
+  let abilityItem = abilitiesPack.index.find((e) => e.name === abilityName);
   if (!abilityItem) {
     abilityItem = await game.teriock.Item.create(
       {
         name: abilityName,
-        type: "power",
-        system: {
-          type: "other",
-          description: `This power is a wrapper for ${abilityName}.`,
-        },
-        folder: rawAbilitiesFolder.id,
+        type: "wrapper",
       },
-      { pack: "teriock.essentials" },
+      { pack: "teriock.abilities" },
     );
   } else {
     abilityItem = await foundry.utils.fromUuid(abilityItem.uuid);
   }
-
-  await abilityItem.setFlag("teriock", "abilityWrapper", true);
-  await abilityItem.setFlag("teriock", "effectWrapper", true);
   let abilityEffect = abilityItem.abilities.find((a) => a.name === abilityName);
 
   if (!abilityEffect) {
@@ -67,17 +44,34 @@ async function processAbility(abilityPage, _index, _total) {
   return { abilityName, success: true };
 }
 
-const abilityPromises = allAbilityPages.map((abilityPage, index) =>
-  processAbility(abilityPage, index, allAbilityPages.length),
-);
+const BATCH_SIZE = 50;
+const total = allAbilityPages.length;
+const results = [];
 
 progress.update({
   pct: 0.1,
-  message: `Processing ${allAbilityPages.length} abilities in parallel...`,
+  message: `Processing ${total} abilities in batches of ${BATCH_SIZE}...`,
 });
 
 try {
-  const results = await Promise.all(abilityPromises);
+  for (let start = 0; start < total; start += BATCH_SIZE) {
+    const batch = allAbilityPages.slice(start, start + BATCH_SIZE);
+
+    const batchPromises = batch.map((abilityPage, i) =>
+      processAbility(abilityPage, start + i, total),
+    );
+
+    const batchResults = await Promise.all(batchPromises);
+    results.push(...batchResults);
+
+    const processed = Math.min(start + batch.length, total);
+    const pct = 0.1 + 0.9 * (processed / total);
+
+    progress.update({
+      pct: Math.min(pct, 1),
+      message: `Processed ${processed}/${total} abilities (batch ${Math.floor(start / BATCH_SIZE) + 1}/${Math.ceil(total / BATCH_SIZE)}).`,
+    });
+  }
 
   progress.update({
     pct: 1,

@@ -1,5 +1,5 @@
 import { conditions } from "../../../constants/generated/conditions.mjs";
-import { makeIcon } from "../../../helpers/utils.mjs";
+import { makeIcon, mergeFreeze } from "../../../helpers/utils.mjs";
 import { ChildDataModel } from "../../shared/_module.mjs";
 import { comparatorField } from "../shared/shared-fields.mjs";
 import { _expire, _shouldExpire } from "./methods/_expiration.mjs";
@@ -14,18 +14,15 @@ const { fields } = foundry.data;
  */
 export default class TeriockBaseEffectData extends ChildDataModel {
   /**
-   * Metadata for this effect.
-   * @type {Readonly<Teriock.Documents.EffectModelMetadata>}
+   * @inheritDoc
+   * @type {Teriock.Documents.EffectModelMetadata}
    */
-  static metadata = Object.freeze({
-    consumable: false,
-    hierarchy: false,
-    namespace: "",
-    pageNameKey: "name",
-    type: "base",
-    usable: false,
-    wiki: false,
-  });
+  static metadata = mergeFreeze(
+    /** @type {Teriock.Documents.EffectModelMetadata} */ (super.metadata),
+    {
+      hierarchy: false,
+    },
+  );
 
   /** @inheritDoc */
   static defineSchema() {

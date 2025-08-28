@@ -1,5 +1,5 @@
 import TeriockImageSheet from "../../applications/sheets/misc-sheets/image-sheet/image-sheet.mjs";
-import { makeIcon } from "../../helpers/utils.mjs";
+import { freeze, makeIcon } from "../../helpers/utils.mjs";
 import { TextField } from "./fields.mjs";
 
 const { fields } = foundry.data;
@@ -17,6 +17,22 @@ const { TypeDataModel } = foundry.abstract;
  * @property {Teriock.Parameters.Shared.Font} font
  */
 export default class ChildDataModel extends TypeDataModel {
+  /**
+   * Metadata.
+   * @type {Readonly<Teriock.Documents.ChildModelMetadata>}
+   */
+  static metadata = freeze({
+    usable: false,
+    consumable: false,
+    wiki: false,
+    namespace: "",
+    pageNameKey: "name",
+    type: "base",
+    childEffectTypes: [],
+    childItemTypes: [],
+    childMacroTypes: [],
+  });
+
   /**
    * @inheritDoc
    * @returns {Record<string, DataField>}

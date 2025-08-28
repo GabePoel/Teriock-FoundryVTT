@@ -1,5 +1,5 @@
 import { inCombatExpirationDialog } from "../../../applications/dialogs/_module.mjs";
-import { makeIcon } from "../../../helpers/utils.mjs";
+import { makeIcon, mergeFreeze } from "../../../helpers/utils.mjs";
 import { WikiDataMixin } from "../../mixins/_module.mjs";
 import TeriockBaseEffectData from "../base-effect-data/base-effect-data.mjs";
 import { combatExpirationMethodField } from "../shared/shared-fields.mjs";
@@ -19,17 +19,12 @@ export default class TeriockConditionData extends WikiDataMixin(
   TeriockBaseEffectData,
 ) {
   /**
-   * Metadata for this effect.
+   * @inheritDoc
    * @type {Readonly<Teriock.Documents.EffectModelMetadata>}
    */
-  static metadata = Object.freeze({
-    consumable: false,
-    hierarchy: false,
+  static metadata = mergeFreeze(super.metadata, {
     namespace: "Condition",
-    pageNameKey: "name",
     type: "condition",
-    usable: true,
-    wiki: true,
   });
 
   /** @inheritDoc */

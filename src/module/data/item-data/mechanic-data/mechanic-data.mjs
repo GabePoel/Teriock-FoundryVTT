@@ -1,3 +1,4 @@
+import { mergeFreeze } from "../../../helpers/utils.mjs";
 import TeriockBaseItemData from "../base-item-data/base-item-data.mjs";
 
 /**
@@ -5,13 +6,8 @@ import TeriockBaseItemData from "../base-item-data/base-item-data.mjs";
  */
 export default class TeriockMechanicData extends TeriockBaseItemData {
   /** @inheritDoc */
-  static metadata = Object.freeze({
-    consumable: false,
-    namespace: "",
-    pageNameKey: "name",
+  static metadata = mergeFreeze(super.metadata, {
     type: "mechanic",
-    usable: false,
-    wiki: false,
   });
 
   /** @inheritDoc */

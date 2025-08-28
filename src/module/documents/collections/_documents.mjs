@@ -25,6 +25,12 @@ export class TeriockPowerCompendium extends BaseTeriockCompendiumCollection {}
 export class TeriockRankCompendium extends BaseTeriockCompendiumCollection {}
 
 /**
+ * @property {Collection<string,TeriockWrapper>} index
+ * @property {(name: string, options?: { strict?: boolean }) => TeriockWrapper} getName
+ */
+export class TeriockWrapperCompendium extends BaseTeriockCompendiumCollection {}
+
+/**
  * @property {Collection<string,TeriockMacro>} index
  * @property {(name: string, options?: { strict?: boolean }) => TeriockMacro} getName
  */

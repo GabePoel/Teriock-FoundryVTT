@@ -40,7 +40,7 @@ export async function copyItem(name, pack) {
  * @returns {Promise<TeriockAbility>}
  */
 export async function getAbility(name, options = {}) {
-  const item = await getItem(name, "essentials", options);
+  const item = await getItem(name, "abilities", options);
   return item.effects.getName(name);
 }
 
@@ -81,7 +81,7 @@ export async function importAbility(document, name) {
  * @returns {Promise<TeriockProperty>}
  */
 export async function getProperty(name, options = {}) {
-  const item = await getItem(name, "essentials", options);
+  const item = await getItem(name, "properties", options);
   return item.effects.getName(name);
 }
 

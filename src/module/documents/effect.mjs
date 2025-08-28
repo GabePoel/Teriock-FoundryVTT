@@ -199,23 +199,11 @@ export default class TeriockEffect extends BaseTeriockEffect {
   }
 
   /**
-   * Metadata for this effect.
-   * @returns {Teriock.Documents.EffectModelMetadata}
+   * @inheritDoc
+   * @returns {Readonly<Teriock.Documents.EffectModelMetadata>}
    */
   get metadata() {
-    const defaultMetadata = {
-      type: "base",
-      usable: false,
-      consumable: false,
-      wiki: false,
-      namespace: "",
-      pageNameKey: "name",
-      hierarchy: false,
-    };
-    return foundry.utils.mergeObject(
-      defaultMetadata,
-      this.system.constructor?.metadata,
-    );
+    return super.metadata;
   }
 
   /**
@@ -351,6 +339,32 @@ export default class TeriockEffect extends BaseTeriockEffect {
     return null;
   }
 
+  /** @inheritDoc */
+  async _preUpdate(changes, options, user) {
+    await super._preUpdate(changes, options, user);
+    if (this.parent.type === "wrapper") {
+      const wrapperKeys = ["name", "img"];
+      const wrapperUpdates = {};
+      for (const key of wrapperKeys) {
+        console.log(key);
+        console.log(foundry.utils.getProperty(changes, key));
+        console.log(foundry.utils.getProperty(this.parent, key));
+        if (
+          foundry.utils.hasProperty(changes, key) &&
+          foundry.utils.getProperty(changes, key) !==
+            foundry.utils.getProperty(this.parent, key)
+        ) {
+          wrapperUpdates[key] = foundry.utils.getProperty(changes, key);
+        }
+      }
+      console.log(wrapperUpdates);
+      console.log(changes);
+      if (Object.keys(wrapperUpdates).length > 0) {
+        await this.parent.update(wrapperUpdates);
+      }
+    }
+  }
+
   /**
    * Add a sub-effect to this one.
    * @param {TeriockEffect} sub
@@ -360,7 +374,7 @@ export default class TeriockEffect extends BaseTeriockEffect {
     if (this.metadata.hierarchy && sub.metadata.hierarchy) {
       const newSubIds = this.subIds;
       newSubIds.add(sub.id);
-      await this.parent.updateEmbeddedDocuments("ActiveEffect", [
+      await this.parent.updateEmbeddedDocuments(this.documentName, [
         {
           _id: this.id,
           "system.hierarchy.subIds": newSubIds,

@@ -1,3 +1,4 @@
+import { mergeFreeze } from "../../helpers/utils.mjs";
 import { fetchWikiPageHTML, openWikiPage } from "../../helpers/wiki/_module.mjs";
 
 /**
@@ -8,6 +9,11 @@ import { fetchWikiPageHTML, openWikiPage } from "../../helpers/wiki/_module.mjs"
  */
 export default (Base) => {
   return class WikiDataMixin extends Base {
+    /** @inheritDoc */
+    static metadata = mergeFreeze(super.metadata, {
+      wiki: true,
+    });
+
     /**
      * Gets the full wiki page path including namespace.
      * Constructs the wiki page identifier from namespace and parent name.

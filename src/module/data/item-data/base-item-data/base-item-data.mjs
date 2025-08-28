@@ -1,3 +1,4 @@
+import { mergeFreeze } from "../../../helpers/utils.mjs";
 import { ChildDataModel } from "../../shared/_module.mjs";
 
 const { fields } = foundry.data;
@@ -8,17 +9,16 @@ const { fields } = foundry.data;
  */
 export default class TeriockBaseItemData extends ChildDataModel {
   /**
-   * Metadata for this item.
+   * @inheritDoc
    * @type {Readonly<Teriock.Documents.ItemModelMetadata>}
    */
-  static metadata = Object.freeze({
-    consumable: true,
-    namespace: "",
-    pageNameKey: "name",
-    type: "base",
-    usable: false,
-    wiki: false,
-  });
+  static metadata = mergeFreeze(
+    /** @type {Teriock.Documents.ItemModelMetadata} */ (super.metadata),
+    {
+      childEffectTypes: ["ability", "fluency", "resource"],
+      stats: false,
+    },
+  );
 
   /** @inheritDoc */
   static defineSchema() {
