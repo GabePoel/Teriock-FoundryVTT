@@ -19,6 +19,6 @@ export default class TeriockWrapperData extends TeriockBaseItemData {
    * @returns {TeriockEffect}
    */
   get effect() {
-    return this.parent.effects.getName(this.parent.name);
+    return this.parent.validEffects[0];
   }
 }

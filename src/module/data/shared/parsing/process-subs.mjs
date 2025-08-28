@@ -12,8 +12,7 @@ export async function processSubAbilities(subs, effectData) {
   for (const el of subs) {
     let subNameEl = el.querySelector(".ability-sub-name");
     if (el.className.includes("expandable-container")) subNameEl = el;
-    // const namespace = subNameEl?.getAttribute("data-namespace");
-    // if (namespace === "Ability") {
+    if (subNameEl.dataset.namespace === "Condition") return;
     const subName = subNameEl.getAttribute("data-name");
     const subAbility = await createAbility(effectData.parent, subName, {
       notify: false,
@@ -21,23 +20,32 @@ export async function processSubAbilities(subs, effectData) {
 
     const limitation = el.querySelector(".limited-modifier");
     const improvement = el.querySelector(".improvement-modifier");
+    console.log(limitation);
+    console.log(improvement);
     let limitationText = "";
     let improvementText = "";
     let newName = subName;
 
     if (improvement) {
       newName = "Improved " + subName;
-      const improvementSpan = improvement.querySelector(".improvement-text");
-      if (improvementSpan) {
-        improvementText = improvementSpan.textContent.trim();
+      const improvementSpans =
+        improvement.querySelectorAll(".improvement-text");
+      if (improvementSpans) {
+        const improvementSpan = improvementSpans[0];
+        if (improvementSpan) {
+          improvementText = improvementSpan.textContent.trim();
+        }
       }
     }
 
     if (limitation) {
       newName = "Limited " + newName;
-      const limitationSpan = limitation.querySelector(".limitation-text");
-      if (limitationSpan) {
-        limitationText = limitationSpan.textContent.trim();
+      const limitationSpans = limitation.querySelectorAll(".limitation-text");
+      if (limitationSpans) {
+        const limitationSpan = limitationSpans[0];
+        if (limitationSpan) {
+          limitationText = limitationSpan.textContent.trim();
+        }
       }
     }
 

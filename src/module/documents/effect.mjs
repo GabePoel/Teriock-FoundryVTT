@@ -342,13 +342,13 @@ export default class TeriockEffect extends BaseTeriockEffect {
   /** @inheritDoc */
   async _preUpdate(changes, options, user) {
     await super._preUpdate(changes, options, user);
-    if (this.parent.type === "wrapper") {
+    if (
+      this.parent.type === "wrapper" &&
+      this.parent.system.effect.id === this.id
+    ) {
       const wrapperKeys = ["name", "img"];
       const wrapperUpdates = {};
       for (const key of wrapperKeys) {
-        console.log(key);
-        console.log(foundry.utils.getProperty(changes, key));
-        console.log(foundry.utils.getProperty(this.parent, key));
         if (
           foundry.utils.hasProperty(changes, key) &&
           foundry.utils.getProperty(changes, key) !==
