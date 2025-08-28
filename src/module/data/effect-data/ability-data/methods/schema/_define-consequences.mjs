@@ -1,9 +1,9 @@
 import { pseudoHooks } from "../../../../../constants/pseudo-hooks.mjs";
 import {
   FormulaField,
-  TeriockArrayField,
-  TeriockRecordField,
-} from "../../../../shared/fields.mjs";
+  RecordField,
+  ListField,
+} from "../../../../shared/fields/_module.mjs";
 import {
   combatExpirationMethodField,
   combatExpirationSourceTypeField,
@@ -25,7 +25,7 @@ const { fields } = foundry.data;
  * - [Damage types](https://wiki.teriock.com/index.php/Category:Damage_types)
  * - [Drain types](https://wiki.teriock.com/index.php/Category:Drain_types)
  *
- * @returns {TeriockRecordField} Field for configuring consequence rolls
+ * @returns {RecordField} Field for configuring consequence rolls
  * @private
  *
  * @example
@@ -33,7 +33,7 @@ const { fields } = foundry.data;
  * const rollsField = consequenceRollsField();
  */
 export function consequenceRollsField() {
-  return new TeriockRecordField(
+  return new RecordField(
     new FormulaField({ nullable: true, deterministic: false }),
     {
       label: "Rolls",
@@ -48,7 +48,7 @@ export function consequenceRollsField() {
  *
  * This field defines changes that are applied to the target as part of the consequence.
  *
- * @returns {TeriockArrayField} Field for configuring consequence changes
+ * @returns {ListField} Field for configuring consequence changes
  * @private
  *
  * @example
@@ -56,7 +56,7 @@ export function consequenceRollsField() {
  * const changesField = consequenceChangesField();
  */
 export function consequenceChangesField() {
-  return new TeriockArrayField(
+  return new ListField(
     new fields.SchemaField({
       key: new fields.StringField({ initial: "" }),
       mode: new fields.NumberField({

@@ -1,5 +1,5 @@
 import { mergeFreeze } from "../../../helpers/utils.mjs";
-import { ChildDataModel } from "../../shared/_module.mjs";
+import { ChildTypeModel } from "../../models/_module.mjs";
 
 const { fields } = foundry.data;
 
@@ -7,7 +7,7 @@ const { fields } = foundry.data;
  * Base item data model for all Teriock items.
  * Provides common functionality for disabled state and update tracking.
  */
-export default class TeriockBaseItemData extends ChildDataModel {
+export default class TeriockBaseItemData extends ChildTypeModel {
   /**
    * @inheritDoc
    * @type {Readonly<Teriock.Documents.ItemModelMetadata>}

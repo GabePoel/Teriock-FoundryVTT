@@ -1,6 +1,6 @@
 import { conditions } from "../../../constants/generated/conditions.mjs";
 import { makeIcon, mergeFreeze } from "../../../helpers/utils.mjs";
-import { ChildDataModel } from "../../shared/_module.mjs";
+import { ChildTypeModel } from "../../models/_module.mjs";
 import { comparatorField } from "../shared/shared-fields.mjs";
 import { _expire, _shouldExpire } from "./methods/_expiration.mjs";
 
@@ -9,10 +9,10 @@ const { fields } = foundry.data;
 /**
  * Base effect data model.
  *
- * @extends {ChildDataModel}
+ * @extends {ChildTypeModel}
  * @extends {TypeDataModel}
  */
-export default class TeriockBaseEffectData extends ChildDataModel {
+export default class TeriockBaseEffectData extends ChildTypeModel {
   /**
    * @inheritDoc
    * @type {Teriock.Documents.EffectModelMetadata}

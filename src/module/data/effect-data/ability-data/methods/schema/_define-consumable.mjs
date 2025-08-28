@@ -1,4 +1,4 @@
-import { FormulaField } from "../../../../shared/fields.mjs";
+import { FormulaField } from "../../../../shared/fields/_module.mjs";
 
 const { fields } = foundry.data;
 

@@ -154,10 +154,7 @@ export function selectUser(actor) {
   // See if any user has the actor as a character
   users.forEach(
     /** @param {TeriockUser} user */ (user) => {
-      if (
-        user.character?.uuid === actor.uuid &&
-        user.lastActivityTime - game.time.serverTime < 120
-      ) {
+      if (user.character?.uuid === actor.uuid && user.isActive) {
         selectedUser = user;
       }
     },

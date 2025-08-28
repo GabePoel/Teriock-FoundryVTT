@@ -328,11 +328,11 @@ export default function registerUiHelpers() {
   Handlebars.registerHelper(
     "abilityCards",
     /**
-     * @param {TeriockEffect[]} abilities
+     * @param {TeriockEffect[]} effects
      * @param {TeriockBaseItemData} system
      * @param {object} options
      */
-    function (abilities, system, options) {
+    function (effects, system, options) {
       const {
         tab = "ability",
         skipDescendants = false,
@@ -349,38 +349,38 @@ export default function registerUiHelpers() {
         `tcard-container ${isGapless ? "gapless" : ""} ${sizeClass}`.trim();
 
       const rgx = new RegExp(searchString, "i");
-      const renderedCards = abilities
-        .map((ability) => {
+      const renderedCards = effects
+        .map((effect) => {
           let subtitle =
-            ability.type === "ability"
+            effect.type === "ability"
               ? Handlebars.helpers.executionTime(
-                  ability.system?.maneuver,
-                  ability.system?.executionTime,
+                  effect.system?.maneuver,
+                  effect.system?.executionTime,
                 )
-              : ability.type === "property"
-                ? ability.system?.form
+              : effect.type === "property"
+                ? effect.system?.form
                 : "";
-          if (ability.hasDuration) {
-            subtitle = ability.remainingString;
+          if (effect.hasDuration) {
+            subtitle = effect.remainingString;
           }
-          const marker = Handlebars.helpers.abilityMarker(ability);
+          const marker = Handlebars.helpers.abilityMarker(effect);
           const chatIcon = Handlebars.helpers.ticon("comment", {
             hash: {
               action: "chatDoc",
-              id: ability._id,
-              parentId: ability.parent?._id,
+              id: effect._id,
+              parentId: effect.parent?._id,
               tooltip: "Send to Chat",
             },
           });
           const enableIcon = Handlebars.helpers.ticonToggle(
             "circle",
             "circle-check",
-            ability.disabled,
+            effect.disabled,
             {
               hash: {
                 action: "toggleDisabledDoc",
-                id: ability._id,
-                parentId: ability.parent?._id,
+                id: effect._id,
+                parentId: effect.parent?._id,
                 tooltipTrue: "Disabled",
                 tooltipFalse: "Enabled",
               },
@@ -398,30 +398,30 @@ export default function registerUiHelpers() {
           });
 
           let masteryIcon = baseIcon;
-          if (ability.isProficient) {
+          if (effect.isProficient) {
             masteryIcon = proficientIcon;
           }
-          if (ability.isFluent) {
+          if (effect.isFluent) {
             masteryIcon = fluentIcon;
           }
 
           const onUseIcon = Handlebars.helpers.ticonToggle(
             "bolt",
             "bolt-slash",
-            ability.isOnUse,
+            effect.isOnUse,
             {
               hash: {
                 action: "toggleOnUseDoc",
-                id: ability._id,
-                parentId: ability.parent?._id,
+                id: effect._id,
+                parentId: effect.parent?._id,
                 tooltipTrue: "Activates Only On Use",
                 tooltipFalse: "Always Active",
               },
             },
           );
 
-          let text = ability.parent?.name;
-          const sup = ability.sup;
+          let text = effect.parent?.name;
+          const sup = effect.sup;
           if (sup) {
             text = sup.name;
           }
@@ -432,13 +432,13 @@ export default function registerUiHelpers() {
 
           let hidden = false;
           if (searchString) {
-            hidden = !rgx.test(ability.name);
+            hidden = !rgx.test(effect.name);
           }
-
+          
           return Handlebars.helpers.tcard({
             hash: {
-              img: ability.img,
-              title: ability.name,
+              img: effect.img,
+              title: effect.nameString,
               subtitle,
               text: text,
               icons:
@@ -446,16 +446,16 @@ export default function registerUiHelpers() {
                 masteryIcon +
                 chatIcon +
                 enableIcon,
-              id: ability._id,
-              uuid: ability.uuid,
-              parentId: ability.parent?._id,
-              active: !ability.disabled && !ability.isSuppressed,
-              struck: ability.disabled,
+              id: effect._id,
+              uuid: effect.uuid,
+              parentId: effect.parent?._id,
+              active: !effect.disabled && !effect.isSuppressed,
+              struck: effect.disabled,
               marker,
               shattered: false,
-              consumable: ability.system.consumable,
-              amount: ability.system.quantity,
-              max: ability.system.maxQuantity?.derived,
+              consumable: effect.system.consumable,
+              amount: effect.system.quantity,
+              max: effect.system.maxQuantity?.derived,
               type: "effect",
               action,
               tooltip,

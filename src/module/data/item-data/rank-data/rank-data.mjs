@@ -1,6 +1,6 @@
 import { getRollIcon, makeIcon, mergeFreeze } from "../../../helpers/utils.mjs";
 import { StatDataMixin, WikiDataMixin } from "../../mixins/_module.mjs";
-import { TextField } from "../../shared/fields.mjs";
+import { TextField } from "../../shared/fields/_module.mjs";
 import TeriockBaseItemData from "../base-item-data/base-item-data.mjs";
 import { _messageParts } from "./methods/_messages.mjs";
 import { _parse } from "./methods/_parsing.mjs";

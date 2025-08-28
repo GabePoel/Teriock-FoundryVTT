@@ -28,7 +28,6 @@ const { WorldCollection } = foundry.documents.abstract;
  * @extends {Actor}
  * @mixes CommonDocumentMixin
  * @mixes ParentDocumentMixin
- * @implements {CommonDocumentInterface}
  * @property {EmbeddedCollection<string, TeriockItem>} items
  * @property {EmbeddedCollection<string, TeriockEffect>} effects
  * @property {ParentItemTypes} itemTypes
@@ -54,7 +53,6 @@ export class BaseTeriockActor extends ParentDocumentMixin(
  * @mixes ChildDocumentMixin
  * @mixes CommonDocumentMixin
  * @mixes ParentDocumentMixin
- * @implements {CommonDocumentInterface}
  * @property {EmbeddedCollection<string, TeriockEffect>} effects
  * @property {Readonly<TeriockEffect[]>} transferredEffects
  * @property {TeriockBaseItemData} system
@@ -73,7 +71,6 @@ export class BaseTeriockItem extends ParentDocumentMixin(
  * @extends {ActiveEffect}
  * @mixes CommonDocumentMixin
  * @mixes ChildDocumentMixin
- * @implements {CommonDocumentInterface}
  * @property {TeriockBaseEffectData} system
  * @property {Teriock.Documents.EffectType} type
  * @property {"ActiveEffect"} documentName

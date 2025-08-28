@@ -1,9 +1,9 @@
-import TeriockImageSheet from "../../applications/sheets/misc-sheets/image-sheet/image-sheet.mjs";
-import { freeze, makeIcon } from "../../helpers/utils.mjs";
-import { TextField } from "./fields.mjs";
+import TeriockImageSheet from "../../../applications/sheets/misc-sheets/image-sheet/image-sheet.mjs";
+import { freeze, makeIcon } from "../../../helpers/utils.mjs";
+import { TextField } from "../../shared/fields/_module.mjs";
+import CommonTypeModel from "../common-type-model/common-type-model.mjs";
 
 const { fields } = foundry.data;
-const { TypeDataModel } = foundry.abstract;
 
 /**
  * Mixin that provides child document functionality for embedded documents.
@@ -16,7 +16,7 @@ const { TypeDataModel } = foundry.abstract;
  * @property {boolean} fluent
  * @property {Teriock.Parameters.Shared.Font} font
  */
-export default class ChildDataModel extends TypeDataModel {
+export default class ChildTypeModel extends CommonTypeModel {
   /**
    * Metadata.
    * @type {Readonly<Teriock.Documents.ChildModelMetadata>}
@@ -64,13 +64,6 @@ export default class ChildDataModel extends TypeDataModel {
   /** @inheritDoc */
   static migrateData(data) {
     return super.migrateData(data);
-  }
-
-  /**
-   * @returns {TeriockActor|null}
-   */
-  get actor() {
-    return this.parent.actor;
   }
 
   /**
@@ -156,7 +149,7 @@ export default class ChildDataModel extends TypeDataModel {
   get messageParts() {
     return {
       image: this.parent.img,
-      name: this.parent.name,
+      name: this.parent.nameString,
       bars: [],
       blocks: [],
       font: this.font,

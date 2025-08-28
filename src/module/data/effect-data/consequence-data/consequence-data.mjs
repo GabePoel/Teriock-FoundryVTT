@@ -1,6 +1,6 @@
 import { inCombatExpirationDialog } from "../../../applications/dialogs/_module.mjs";
 import { getRollIcon, mergeFreeze } from "../../../helpers/utils.mjs";
-import { migrateHierarchy } from "../../shared/migrations.mjs";
+import { migrateHierarchy } from "../../shared/migrations/migrate-hierarchy.mjs";
 import TeriockBaseEffectData from "../base-effect-data/base-effect-data.mjs";
 import * as sharedFields from "../shared/shared-fields.mjs";
 import { _messageParts } from "./methods/_messages.mjs";

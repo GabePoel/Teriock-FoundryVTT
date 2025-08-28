@@ -1,6 +1,6 @@
 import { abilityOptions } from "../../../../../constants/ability-options.mjs";
 import { conditions } from "../../../../../constants/generated/conditions.mjs";
-import { FormulaField, TextField } from "../../../../shared/fields.mjs";
+import { FormulaField, TextField } from "../../../../shared/fields/_module.mjs";
 
 const { fields } = foundry.data;
 

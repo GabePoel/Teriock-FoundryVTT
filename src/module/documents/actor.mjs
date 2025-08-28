@@ -6,7 +6,6 @@ import { BaseTeriockActor } from "./_base.mjs";
 import TeriockRoll from "./roll.mjs";
 
 /**
- * @implements {CommonDocumentInterface}
  * @property {TeriockBaseActorData} system
  * @property {TeriockBaseActorSheet} sheet
  */
@@ -23,7 +22,10 @@ export default class TeriockActor extends BaseTeriockActor {
     return characterOptions.namedSizes[sizeKey] || "Medium";
   }
 
-  /** @inheritDoc */
+  /**
+   * @inheritDoc
+   * @returns {TeriockActor}
+   */
   get actor() {
     return this;
   }
@@ -72,10 +74,11 @@ export default class TeriockActor extends BaseTeriockActor {
 
   /**
    * @inheritDoc
-   * @returns {Teriock.Documents.ActorModelMetadata}
+   * @returns {Readonly<Teriock.Documents.ActorModelMetadata>}
    */
   get metadata() {
-    return super.metadata;
+    return /** @type {Readonly<Teriock.Documents.ActorModelMetadata>} */ super
+      .metadata;
   }
 
   /**

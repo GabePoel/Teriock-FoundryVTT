@@ -24,10 +24,8 @@ export async function processSubAbilities(subs, effectData) {
     console.log(improvement);
     let limitationText = "";
     let improvementText = "";
-    let newName = subName;
 
     if (improvement) {
-      newName = "Improved " + subName;
       const improvementSpans =
         improvement.querySelectorAll(".improvement-text");
       if (improvementSpans) {
@@ -39,7 +37,6 @@ export async function processSubAbilities(subs, effectData) {
     }
 
     if (limitation) {
-      newName = "Limited " + newName;
       const limitationSpans = limitation.querySelectorAll(".limitation-text");
       if (limitationSpans) {
         const limitationSpan = limitationSpans[0];
@@ -51,7 +48,6 @@ export async function processSubAbilities(subs, effectData) {
 
     if (limitationText || improvementText) {
       await subAbility.update({
-        name: newName,
         "system.improvement": improvementText,
         "system.limitation": limitationText,
       });

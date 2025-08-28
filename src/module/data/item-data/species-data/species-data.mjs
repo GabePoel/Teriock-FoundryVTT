@@ -4,7 +4,7 @@ import { traits } from "../../../constants/generated/traits.mjs";
 import { copyAbility } from "../../../helpers/fetch.mjs";
 import { mergeFreeze, toTitleCase } from "../../../helpers/utils.mjs";
 import { StatDataMixin, WikiDataMixin } from "../../mixins/_module.mjs";
-import { TextField } from "../../shared/fields.mjs";
+import { TextField } from "../../shared/fields/_module.mjs";
 import TeriockBaseItemData from "../base-item-data/base-item-data.mjs";
 import { _messageParts } from "./methods/_messages.mjs";
 import { _parse } from "./methods/_parsing.mjs";

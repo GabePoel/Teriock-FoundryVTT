@@ -1,6 +1,6 @@
 import { mergeFreeze } from "../../../helpers/utils.mjs";
 import { ConsumableDataMixin } from "../../mixins/_module.mjs";
-import { FormulaField } from "../../shared/fields.mjs";
+import { FormulaField } from "../../shared/fields/_module.mjs";
 import TeriockBaseEffectData from "../base-effect-data/base-effect-data.mjs";
 import { _messageParts } from "./methods/_messages.mjs";
 import { _migrateData } from "./methods/_migrate-data.mjs";

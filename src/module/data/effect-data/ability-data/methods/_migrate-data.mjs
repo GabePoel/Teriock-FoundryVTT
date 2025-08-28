@@ -1,5 +1,5 @@
 import { parseDurationString } from "../../../../helpers/utils.mjs";
-import { migrateHierarchy } from "../../../shared/migrations.mjs";
+import { migrateHierarchy } from "../../../shared/migrations/migrate-hierarchy.mjs";
 
 /**
  * Migrates ability data to the current schema version.

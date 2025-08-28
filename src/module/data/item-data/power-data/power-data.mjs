@@ -1,5 +1,5 @@
 import { mergeFreeze } from "../../../helpers/utils.mjs";
-import { TextField } from "../../shared/fields.mjs";
+import { TextField } from "../../shared/fields/_module.mjs";
 import TeriockBaseItemData from "../base-item-data/base-item-data.mjs";
 import { _messageParts } from "./methods/_messages.mjs";
 

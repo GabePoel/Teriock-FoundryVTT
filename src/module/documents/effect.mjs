@@ -125,7 +125,10 @@ export default class TeriockEffect extends BaseTeriockEffect {
     return data;
   }
 
-  /** @inheritDoc */
+  /**
+   * @inheritDoc
+   * @returns {TeriockActor|null}
+   */
   get actor() {
     return this.parent.actor;
   }
@@ -203,7 +206,8 @@ export default class TeriockEffect extends BaseTeriockEffect {
    * @returns {Readonly<Teriock.Documents.EffectModelMetadata>}
    */
   get metadata() {
-    return super.metadata;
+    return /** @type {Readonly<Teriock.Documents.EffectModelMetadata>} */ super
+      .metadata;
   }
 
   /**

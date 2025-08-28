@@ -1,4 +1,5 @@
 import { freeze } from "../../../helpers/utils.mjs";
+import { CommonTypeModel } from "../../models/_module.mjs";
 import { _migrateData } from "./methods/_migrate-data.mjs";
 import * as postUpdate from "./methods/_post-update.mjs";
 import { _getRollData } from "./methods/_roll-data.mjs";
@@ -10,13 +11,11 @@ import { _prepareDerivedData } from "./methods/derived-data/_derived-data.mjs";
 import * as rollGeneric from "./methods/rolling/_roll-generic.mjs";
 import { _defineSchema } from "./methods/schema/_schema.mjs";
 
-const { TypeDataModel } = foundry.abstract;
-
 /**
  * Base actor data model for the Teriock system.
  * Handles all core actor functionality including damage, healing, rolling, and data management.
  */
-export default class TeriockBaseActorData extends TypeDataModel {
+export default class TeriockBaseActorData extends CommonTypeModel {
   /**
    * Metadata for this actor.
    * @type {Readonly<Teriock.Documents.ActorModelMetadata>}

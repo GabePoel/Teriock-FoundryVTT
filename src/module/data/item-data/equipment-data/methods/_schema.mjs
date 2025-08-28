@@ -1,6 +1,6 @@
 import { equipmentOptions } from "../../../../constants/equipment-options.mjs";
 import { weaponFightingStyles } from "../../../../constants/generated/weapon-fighting-styles.mjs";
-import { FormulaField, TextField } from "../../../shared/fields.mjs";
+import { FormulaField, TextField } from "../../../shared/fields/_module.mjs";
 
 const { fields } = foundry.data;
 

@@ -30,7 +30,8 @@ export default class TeriockItem extends BaseTeriockItem {
    * @returns {Readonly<Teriock.Documents.ItemModelMetadata>}
    */
   get metadata() {
-    return super.metadata;
+    return /** @type {Readonly<Teriock.Documents.ItemModelMetadata>} */ super
+      .metadata;
   }
 
   /**
