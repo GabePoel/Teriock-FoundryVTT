@@ -111,15 +111,17 @@ export default class TeriockSpeciesData extends StatDataMixin(
 
   /** @inheritDoc */
   async _preCreate(data, options, user) {
-    this.parent.updateSource({
-      effects: [
-        (await copyAbility("Normal Intelligence")).toObject(),
-        (await copyAbility("Normal Movement")).toObject(),
-        (await copyAbility("Normal Perception")).toObject(),
-        (await copyAbility("Normal Sneak")).toObject(),
-        (await copyAbility("Normal Strength")).toObject(),
-      ],
-    });
+    if (this.parent.name === "New Species") {
+      this.parent.updateSource({
+        effects: [
+          (await copyAbility("Normal Intelligence")).toObject(),
+          (await copyAbility("Normal Movement")).toObject(),
+          (await copyAbility("Normal Perception")).toObject(),
+          (await copyAbility("Normal Sneak")).toObject(),
+          (await copyAbility("Normal Strength")).toObject(),
+        ],
+      });
+    }
     return super._preCreate(data, options, user);
   }
 

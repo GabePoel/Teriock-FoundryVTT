@@ -2,7 +2,7 @@
 
 ## High Priority
 
-- [ ] Transformation system
+- [x] Transformation system
 - [x] Asynchronous subs
 - [x] Character lighting integration
 - [x] Transformation art change

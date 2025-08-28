@@ -316,6 +316,8 @@ export function getRollIcon(rollFormula) {
       return `dice-d${die.faces}`;
     } else if (die.faces === 2) {
       return "coin";
+    } else if (die.faces === 100) {
+      return "hundred-points";
     }
   }
   return "dice";

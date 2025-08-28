@@ -21,6 +21,7 @@ declare global {
       equipment?: Set<string>;
       power?: Set<string>;
       rank?: Set<string>;
+      species?: Set<string>;
     };
 
     /** Each {@link TeriockItem} this contains, keyed by type. */

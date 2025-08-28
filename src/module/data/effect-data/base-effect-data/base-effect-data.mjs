@@ -104,6 +104,12 @@ export default class TeriockBaseEffectData extends ChildTypeModel {
     );
   }
 
+  /** @inheritDoc */
+  async _preDelete(options, user) {
+    await this.actor?.hookCall("effectExpiration", this.parent);
+    await super._preDelete(options, user);
+  }
+
   /**
    * Checks if the effect should expire and expires it if necessary.
    * @returns {Promise<void>} Promise that resolves when the expiration check is complete.
@@ -119,7 +125,9 @@ export default class TeriockBaseEffectData extends ChildTypeModel {
    * @returns {Promise<void>} Promise that resolves when the effect is expired.
    */
   async expire() {
-    await this.actor?.hookCall("effectExpiration");
+    if (!this.deleteOnExpire) {
+      await this.actor?.hookCall("effectExpiration", this.parent);
+    }
     return await _expire(this);
   }
 }

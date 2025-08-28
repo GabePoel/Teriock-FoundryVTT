@@ -7,6 +7,7 @@ export const dieOptions = {
     10: "d10",
     12: "d12",
     20: "d20",
+    100: "d100",
   },
   stats: {
     hp: "hit",

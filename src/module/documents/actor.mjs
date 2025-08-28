@@ -346,6 +346,7 @@ export default class TeriockActor extends BaseTeriockActor {
       ),
       power: new Set(this.itemTypes?.power.map((e) => toCamelCase(e.name))),
       rank: new Set(this.itemTypes?.rank.map((e) => toCamelCase(e.name))),
+      species: new Set(this.itemTypes?.species.map((e) => toCamelCase(e.name))),
     };
   }
 

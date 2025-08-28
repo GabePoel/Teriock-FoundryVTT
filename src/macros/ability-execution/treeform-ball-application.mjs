@@ -1,0 +1,36 @@
+if (!actor.effectKeys.consequence?.has("treeformBallEffect")) {
+  const hp = actor.system.hp.value;
+  if (!actor.itemKeys.species.has("tree")) {
+    const treeSpecies = await game.teriock.api.fetch.getItem(
+      "Tree",
+      "species",
+      {
+        clone: true,
+      },
+    );
+    const created = await actor.createEmbeddedDocuments("Item", [treeSpecies]);
+    const createdTree = created[0];
+    await createdTree.update({
+      "system.size.value": actor.system.size,
+      "system.applyMp": false,
+    });
+  }
+  const notTree = actor.species.filter((s) => s.name !== "Tree");
+  const disabledSpeciesArray = notTree.map((s) => {
+    return {
+      _id: s.id,
+      "system.applyHp": false,
+      "system.disabled": true,
+    };
+  });
+  const disabledRanksArray = actor.ranks.map((r) => {
+    return {
+      _id: r.id,
+      "system.disabled": true,
+    };
+  });
+  const itemsToDisable = [...disabledSpeciesArray, ...disabledRanksArray];
+  await actor.updateEmbeddedDocuments("Item", itemsToDisable);
+  await actor.setFlag("teriock", "preTransformHp", hp);
+  await actor.update({ "system.hp.value": actor.system.hp.max });
+}

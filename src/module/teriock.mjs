@@ -43,6 +43,7 @@ foundry.helpers.Hooks.once("init", function () {
   });
   CONFIG.specialStatusEffects["ETHEREAL"] = "ethereal";
   CONFIG.specialStatusEffects["TRANSFORMED"] = "transformed";
+  CONFIG.specialStatusEffects["DEFEATED"] = "down";
 
   CONFIG.Canvas.visionModes = {
     ...CONFIG.Canvas.visionModes,
