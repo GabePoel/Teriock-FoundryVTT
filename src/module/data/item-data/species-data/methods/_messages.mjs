@@ -55,12 +55,20 @@ export function _messageParts(speciesData) {
   ];
   const blocks = [
     {
-      title: "Appearance",
-      text: speciesData.appearance,
+      title: "Hit increase",
+      text: speciesData.hpIncrease,
+    },
+    {
+      title: "Attribute increase",
+      text: speciesData.attributeIncrease,
     },
     {
       title: "Innate ranks",
       text: speciesData.innateRanks,
+    },
+    {
+      title: "Appearance",
+      text: speciesData.appearance,
     },
     {
       title: "Description",
