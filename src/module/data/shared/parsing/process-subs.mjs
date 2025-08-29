@@ -20,8 +20,6 @@ export async function processSubAbilities(subs, effectData) {
 
     const limitation = el.querySelector(".limited-modifier");
     const improvement = el.querySelector(".improvement-modifier");
-    console.log(limitation);
-    console.log(improvement);
     let limitationText = "";
     let improvementText = "";
 

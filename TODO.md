@@ -2,6 +2,7 @@
 
 ## High Priority
 
+- [ ] _Better_ transformation system.
 - [x] Transformation system
 - [x] Asynchronous subs
 - [x] Character lighting integration
@@ -18,15 +19,20 @@
 
 ## Medium Priority
 
+- [ ] Gifted abilities
+- [ ] GUI to change abilities added/removed by species per size change
 - [ ] Refined duration integration
 - [x] Italic attribute and feat save improvement text in ability previews
 - [x] Custom enrichers
 
 ## Low Priority
 
-- [ ] Species size integration
+- [ ] Light mode conditions
+- [ ] Remove buggy display in ability `pseudoHook` macro list
+- [ ] Better down/dead/criticially wounded displays
 - [ ] Better resistance/immunity tooltips
 - [ ] Condition toggling from character sheet
+- [x] Species size integration
 - [x] Tooltip/message text for attribute and feat save improvements
 - [x] Journal entries pulled for rules
 

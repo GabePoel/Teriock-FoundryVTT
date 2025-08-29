@@ -12,6 +12,7 @@ export const traits = {
     monstrous: "Monstrous",
     outsider: "Outsider",
     partialHumanoid: "Partial humanoid",
+    plant: "Plant",
     playerCharacter: "Player character",
     undead: "Undead"
 };
