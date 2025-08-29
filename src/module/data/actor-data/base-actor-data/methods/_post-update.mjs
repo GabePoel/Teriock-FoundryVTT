@@ -21,7 +21,7 @@ export async function _postUpdate(system, skipFunctions = {}) {
   }
   if (!skipFunctions.prepareTokens) {
     for (const token of /** @type {TeriockTokenDocument[]} */ system.parent.getDependentTokens()) {
-      const { visionMode, range } = token._deriveVision();
+      const { visionMode, range } = token.deriveVision();
       await token.update({ light: system.light, "sight.range": range });
       await token.updateVisionMode(visionMode);
     }

@@ -22,6 +22,8 @@ export default class TeriockToken extends Token {
     switch (statusId) {
       case CONFIG.specialStatusEffects.TRANSFORMED:
         this.renderFlags.set({ redraw: true });
+      case CONFIG.specialStatusEffects.DEFEATED:
+        this.renderFlags.set({ redraw: true });
     }
     super._onApplyStatusEffect(statusId, active);
   }

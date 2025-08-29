@@ -6,7 +6,7 @@ export default class TeriockTokenDocument extends BaseTeriockTokenDocument {
   /**
    * Do not emit light if Ethereal.
    */
-  _deriveLighting() {
+  deriveLighting() {
     if (this.hasStatusEffect("ethereal")) {
       this.light.dim = 0;
       this.light.bright = 0;
@@ -17,10 +17,21 @@ export default class TeriockTokenDocument extends BaseTeriockTokenDocument {
   }
 
   /**
+   * Change token tint if down or dead.
+   */
+  deriveTint() {
+    if (this.hasStatusEffect("down")) {
+      this.texture.tint = "#ff0000";
+    } else {
+      this.texture.tint = "#ffffff";
+    }
+  }
+
+  /**
    * Derive vision from the {@link TeriockActor}.
    * @returns {{visionMode: string, range: null|number}}
    */
-  _deriveVision() {
+  deriveVision() {
     let visionMode = "basic";
     let range = 0;
 
@@ -69,7 +80,7 @@ export default class TeriockTokenDocument extends BaseTeriockTokenDocument {
   /**
    * Derive the detection modes from the {@link TeriockActor}.
    */
-  _derivedDetectionModes() {
+  derivedDetectionModes() {
     if (this.actor) {
       for (const [sense, id] of Object.entries(characterOptions.senseMap)) {
         const mode = this.detectionModes.find((m) => m.id === id);
@@ -87,12 +98,11 @@ export default class TeriockTokenDocument extends BaseTeriockTokenDocument {
 
   /**
    * @inheritDoc
-   * @param {object|object[]} [update]
-   * @param {Partial<DatabaseOperation>} [operation]
    */
   _onRelatedUpdate(update = {}, operation = {}) {
-    this._derivedDetectionModes();
-    this._deriveVision();
+    this.derivedDetectionModes();
+    this.deriveVision();
+    this.deriveTint();
     super._onRelatedUpdate(update, operation);
     canvas.perception.initialize();
   }
@@ -139,8 +149,9 @@ export default class TeriockTokenDocument extends BaseTeriockTokenDocument {
    */
   prepareDerivedData() {
     super.prepareDerivedData();
-    this._derivedDetectionModes();
-    this._deriveVision();
-    this._deriveLighting();
+    this.derivedDetectionModes();
+    this.deriveVision();
+    this.deriveLighting();
+    this.deriveTint();
   }
 }
