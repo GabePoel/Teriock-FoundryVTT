@@ -1,3 +1,4 @@
+/** @deprecated */
 export const imageOverrides = {
   "Access Stored Mana": "crystal-shine",
   Accuracy: "bullseye",

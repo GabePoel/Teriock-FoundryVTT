@@ -115,10 +115,10 @@ function rankData(actorData, data) {
 /**
  * Adds age data to the roll data object.
  *
- * @param {TeriockBaseActorData} actorData - The actor system to get data from.
+ * @param {TeriockBaseActorData} _actorData - The actor system to get data from.
  * @param {object} data - The roll data object to populate.
  */
-function ageData(actorData, data) {
+function ageData(_actorData, data) {
   // Age data would need to be added to the actor schema
   // For now, using placeholder values
   Object.assign(data, {
@@ -483,20 +483,20 @@ function equipmentData(actorData, data) {
  * @param {TeriockEquipment|null} equipment - The equipment item.
  */
 function addEquipmentData(data, slot, equipment) {
-  const sys = equipment?.system;
-  data[`${slot}.dmg`] = sys.derivedDamage || "0";
-  data[`${slot}.dmg.2h`] = sys.derivedTwoHandedDamage || "0";
-  data[`${slot}.range`] = sys.range || 0;
-  data[`${slot}.range.short`] = sys.shortRange || 0;
-  data[`${slot}.weight`] = sys.weight || 0;
-  data[`${slot}.tier`] = sys.tier?.derived || 0;
-  data[`${slot}.av`] = sys.derivedAv || 0;
-  data[`${slot}.bv`] = sys.derivedBv || 0;
-  data[`${slot}.str`] = sys.minStr || -3;
-  data[`${slot}.shattered`] = sys.shattered ? 1 : 0;
-  data[`${slot}.dampened`] = sys.dampened ? 1 : 0;
-  data[`${slot}.consumable`] = sys.consumable ? 1 : 0;
-  data[`${slot}.quantity`] = sys.quantity || 1;
+  const equipmentData = equipment?.system;
+  data[`${slot}.dmg`] = equipmentData.derivedDamage || "0";
+  data[`${slot}.dmg.2h`] = equipmentData.derivedTwoHandedDamage || "0";
+  data[`${slot}.range`] = equipmentData.range || 0;
+  data[`${slot}.range.short`] = equipmentData.shortRange || 0;
+  data[`${slot}.weight`] = equipmentData.weight || 0;
+  data[`${slot}.tier`] = equipmentData.tier?.derived || 0;
+  data[`${slot}.av`] = equipmentData.derivedAv || 0;
+  data[`${slot}.bv`] = equipmentData.derivedBv || 0;
+  data[`${slot}.str`] = equipmentData.minStr || -3;
+  data[`${slot}.shattered`] = equipmentData.shattered ? 1 : 0;
+  data[`${slot}.dampened`] = equipmentData.dampened ? 1 : 0;
+  data[`${slot}.consumable`] = equipmentData.consumable ? 1 : 0;
+  data[`${slot}.quantity`] = equipmentData.quantity || 1;
 }
 
 /**

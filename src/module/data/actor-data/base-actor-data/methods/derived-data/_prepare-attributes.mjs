@@ -32,11 +32,11 @@ export function _prepareAttributes(actorData) {
  * Prepares presence-related derived data.
  * Calculates presence overflow, maximum presence, and used/unused presence points.
  *
- * @param {TeriockBaseActorData} system - The actor's base data system object.
+ * @param {TeriockBaseActorData} actorData - The actor's base data system object.
  * @returns {void} Modifies the system object in place.
  */
-export function _preparePresence(system) {
-  system.presence.overflow = system.presence.value > system.presence.max;
-  system.presence.value = Math.min(system.presence.value, system.presence.max);
-  system.attributes.unp.value = system.presence.max - system.presence.value;
+export function _preparePresence(actorData) {
+  actorData.presence.overflow = actorData.presence.value > actorData.presence.max;
+  actorData.presence.value = Math.min(actorData.presence.value, actorData.presence.max);
+  actorData.attributes.unp.value = actorData.presence.max - actorData.presence.value;
 }

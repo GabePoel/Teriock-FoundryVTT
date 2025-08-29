@@ -39,12 +39,12 @@ export function _prepareEncumbrance(actorData) {
  * Prepares money-related derived data.
  * Calculates total money value and weight based on currency amounts and configuration.
  *
- * @param {TeriockBaseActorData} system - The actor's base data system object.
+ * @param {TeriockBaseActorData} actorData - The actor's base data system object.
  * @returns {void} Modifies the system object in place.
  * @private
  */
-export function _prepareMoney(system) {
-  const money = system.money;
+export function _prepareMoney(actorData) {
+  const money = actorData.money;
   const currencyOptions = CONFIG.TERIOCK.currencyOptions;
   const total = Object.keys(currencyOptions).reduce((sum, key) => {
     money[key] = Math.max(0, money[key] || 0);
@@ -55,20 +55,20 @@ export function _prepareMoney(system) {
     const value = (money[key] || 0) * currencyOptions[key].weight;
     return sum + value;
   }, 0);
-  system.money.total = total - system.money.debt;
-  system.moneyWeight = Math.round(totalWeight * 100) / 100 || 0;
+  actorData.money.total = total - actorData.money.debt;
+  actorData.moneyWeight = Math.round(totalWeight * 100) / 100 || 0;
 }
 
 /**
  * Calculates the total weight carried by the actor.
  * Includes equipped equipment weight and money weight.
  *
- * @param {TeriockBaseActorData} system - The actor's base data system object.
+ * @param {TeriockBaseActorData} actorData - The actor's base data system object.
  * @returns {void} Modifies the system object in place.
  * @private
  */
-export function _prepareWeightCarried(system) {
-  const actor = system.parent;
+export function _prepareWeightCarried(actorData) {
+  const actor = actorData.parent;
   const weight = actor.itemTypes.equipment.reduce((sum, i) => {
     let newWeight = i.system.weight || 0;
     if (i.system.consumable) {
@@ -76,6 +76,6 @@ export function _prepareWeightCarried(system) {
     }
     return sum + newWeight;
   }, 0);
-  const moneyWeight = Number(system.moneyWeight) || 0;
-  system.weightCarried = Math.ceil(weight + moneyWeight);
+  const moneyWeight = Number(actorData.moneyWeight) || 0;
+  actorData.weightCarried = Math.ceil(weight + moneyWeight);
 }

@@ -41,16 +41,16 @@ export function _prepareDefenses(actorData) {
 /**
  * Prepares offensive combat values for the actor.
  * Validates and sets the primary attacker equipment.
- * @param {TeriockBaseActorData} system - The actor's base data system object.
+ * @param {TeriockBaseActorData} actorData - The actor's base data system object.
  * @returns {void} Modifies the system object in place.
  * @private
  */
-export function _prepareOffenses(system) {
-  const actor = system.parent;
-  const attacker = actor.items.get(system.wielding.attacker.raw);
+export function _prepareOffenses(actorData) {
+  const actor = actorData.parent;
+  const attacker = actor.items.get(actorData.wielding.attacker.raw);
   if (attacker?.system.isEquipped) {
-    system.wielding.attacker.derived = attacker;
+    actorData.wielding.attacker.derived = attacker;
   } else {
-    system.wielding.attacker.derived = null;
+    actorData.wielding.attacker.derived = null;
   }
 }

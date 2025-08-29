@@ -4,16 +4,16 @@ import { smartEvaluateSync } from "../../../../helpers/utils.mjs";
  * Prepares derived data for equipment by calculating the derived tier value.
  * Uses smart evaluation to compute the tier based on the raw tier formula and parent context.
  *
- * @param {TeriockEquipmentData} system - The equipment data system to prepare derived data for.
+ * @param {TeriockEquipmentData} equipmentData - The equipment data system to prepare derived data for.
  * @returns {void}
  * @private
  */
-export function _prepareDerivedData(system) {
-  system.tier.derived = Math.max(
+export function _prepareDerivedData(equipmentData) {
+  equipmentData.tier.derived = Math.max(
     0,
-    smartEvaluateSync(system.tier.raw, system.parent),
+    smartEvaluateSync(equipmentData.tier.raw, equipmentData.parent),
   );
-  if (system.consumable && system.quantity === 0) {
-    system.equipped = false;
+  if (equipmentData.consumable && equipmentData.quantity === 0) {
+    equipmentData.equipped = false;
   }
 }

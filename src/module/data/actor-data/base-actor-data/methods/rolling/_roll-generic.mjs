@@ -75,11 +75,11 @@ export async function _rollResistance(actorData, options = {}) {
  * Relevant wiki pages:
  * - [Immunity](https://wiki.teriock.com/index.php/Keyword:Immunity)
  *
- * @param {TeriockBaseActorData} actorData
+ * @param {TeriockBaseActorData} _actorData
  * @param {Teriock.RollOptions.CommonRoll} [options] - Options for the roll.
  * @private
  */
-export async function _rollImmunity(actorData, options = {}) {
+export async function _rollImmunity(_actorData, options = {}) {
   let message = null;
   if (options.message) {
     message = options.message;
