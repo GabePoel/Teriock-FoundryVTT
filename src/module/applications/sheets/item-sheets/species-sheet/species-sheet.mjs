@@ -94,6 +94,9 @@ export default class TeriockSpeciesSheet extends TeriockBaseItemSheet {
     const buttonMap = {
       ".ab-description-button": "system.description",
       ".ab-appearance-button": "system.appearance",
+      ".ab-attribute-increase-button": "system.attributeIncrease",
+      ".ab-hp-increase-button": "system.hpIncrease",
+      ".ab-innate-ranks-button": "system.innateRanks",
     };
     this._connectButtonMap(buttonMap);
   }
@@ -105,6 +108,8 @@ export default class TeriockSpeciesSheet extends TeriockBaseItemSheet {
       description: this.item.system.description,
       appearance: this.item.system.appearance,
       innateRanks: this.item.system.innateRanks,
+      hpIncrease: this.item.system.hpIncrease,
+      attributeIncrease: this.item.system.attributeIncrease,
     });
     return context;
   }

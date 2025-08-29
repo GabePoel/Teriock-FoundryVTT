@@ -36,7 +36,22 @@ export async function _parse(speciesData, rawHTML) {
   const parameters = {
     lifespan: null,
     adult: null,
+    sizeStepAbilities: {},
   };
+
+  doc
+    .querySelectorAll("span.metadata[data-type='size-attribute-increase']")
+    .forEach(
+      /** @param {HTMLSpanElement} el */ (el) => {
+        const gainAbilities = new Set([el.dataset.gain]);
+        const loseAbilities = new Set([el.dataset.lose]);
+        const size = Number(el.dataset.size);
+        parameters.sizeStepAbilities[size] = {
+          gain: gainAbilities,
+          lose: loseAbilities,
+        };
+      },
+    );
 
   const tagTree = buildTagTree(doc);
   console.log(tagTree);
@@ -66,6 +81,8 @@ export async function _parse(speciesData, rawHTML) {
   );
   parameters.appearance = getBarText(doc, "looks");
   parameters.description = getText(doc, "creature-description");
+  parameters.hpIncrease = getBarText(doc, "hp-increase");
+  parameters.attributeIncrease = getBarText(doc, "attribute-increase");
   parameters.innateRanks = getBarText(doc, "innate-ranks");
   const sizeString = tagTree["size"][0].split("size")[1];
   if (sizeString.includes("-")) {

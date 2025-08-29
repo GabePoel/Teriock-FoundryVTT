@@ -33,11 +33,11 @@ const __dirname = path.dirname(__filename);
 
 const outputDir = path.resolve(
   __dirname,
-  "../src/module/helpers/constants/generated",
+  "../src/module/constants/generated",
 );
 const manualDir = path.resolve(
   __dirname,
-  "../src/module/helpers/constants/manual",
+  "../src/module/constants/manual",
 );
 
 const fileHeader = `// This file was auto-generated on ${new Date().toISOString().split("T")[0]} by scripts/update-options.mjs.\n// Do not edit manually.\n\n`;

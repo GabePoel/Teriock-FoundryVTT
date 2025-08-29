@@ -13,6 +13,7 @@ import { currencyOptions } from "./currency-options.mjs";
 import { dieOptions } from "./die-options.mjs";
 import { displayOptions } from "./display-options.mjs";
 import { documentOptions } from "./document-options.mjs";
+import { documentTypes } from "./document-types.mjs";
 import { equipmentOptions } from "./equipment-options.mjs";
 import { fonts } from "./fonts.mjs";
 import { abilities } from "./generated/abilities.mjs";
@@ -102,4 +103,5 @@ export const TERIOCK = {
   speciesOptions: speciesOptions,
   dieOptions: dieOptions,
   pseudoHooks: pseudoHooks,
+  documentTypes: documentTypes,
 };

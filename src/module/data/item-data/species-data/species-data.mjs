@@ -37,12 +37,8 @@ export default class TeriockSpeciesData extends StatDataMixin(
   static defineSchema() {
     const schema = super.defineSchema();
     Object.assign(schema, {
-      adult: new fields.NumberField({
-        initial: 20,
-      }),
-      appearance: new TextField({
-        label: "Appearance",
-      }),
+      adult: new fields.NumberField({ initial: 20 }),
+      appearance: new TextField({ label: "Appearance" }),
       applyHp: new fields.BooleanField({
         hint: "Add this species' HP to its parent actor.",
         initial: true,
@@ -58,16 +54,12 @@ export default class TeriockSpeciesData extends StatDataMixin(
         hint: "Apply this species' size to its parent actor.",
         initial: true,
       }),
+      attributeIncrease: new TextField({ label: "Attribute increase" }),
       br: new fields.NumberField({ initial: 1, label: "Battle Rating" }),
-      description: new TextField({
-        label: "Description",
-      }),
-      innateRanks: new TextField({
-        label: "Innate ranks",
-      }),
-      lifespan: new fields.NumberField({
-        initial: 100,
-      }),
+      description: new TextField({ label: "Description" }),
+      hpIncrease: new TextField({ label: "Hit increase" }),
+      innateRanks: new TextField({ label: "Innate ranks" }),
+      lifespan: new fields.NumberField({ initial: 100 }),
       proficient: new fields.BooleanField({
         initial: true,
         label: "Proficient",
@@ -79,6 +71,12 @@ export default class TeriockSpeciesData extends StatDataMixin(
           initial: 3,
         }),
       }),
+      sizeStepAbilities: new fields.TypedObjectField(
+        new fields.SchemaField({
+          gain: new fields.SetField(new fields.StringField()),
+          lose: new fields.SetField(new fields.StringField()),
+        }),
+      ),
       sizeStepHp: new fields.NumberField({
         hint: "Size interval at which this species' HP increases.",
         initial: null,
@@ -91,15 +89,10 @@ export default class TeriockSpeciesData extends StatDataMixin(
         label: "MP Size Interval",
         nullable: true,
       }),
-      traits: new fields.SetField(
-        new fields.StringField({
-          choices: traits,
-        }),
-        {
-          initial: ["humanoid"],
-          label: "Traits",
-        },
-      ),
+      traits: new fields.SetField(new fields.StringField({ choices: traits }), {
+        initial: ["humanoid"],
+        label: "Traits",
+      }),
     });
     return schema;
   }
@@ -127,17 +120,65 @@ export default class TeriockSpeciesData extends StatDataMixin(
 
   /** @inheritDoc */
   async _preUpdate(changes, options, user) {
-    // Handle variable size stat dice
     await super._preUpdate(changes, options, user);
+    const size =
+      foundry.utils.getProperty(changes, "system.size.value") ||
+      this.size.value;
+
+    // Handle variable size abilities
+    if (Object.keys(this.sizeStepAbilities).length > 0) {
+      const gainAbilities = new Set();
+      const loseAbilities = new Set();
+      const minSizeStep = Math.min(
+        ...Object.keys(this.sizeStepAbilities).map((k) => Number(k)),
+      );
+      this.sizeStepAbilities[minSizeStep].lose.forEach((a) =>
+        gainAbilities.add(a),
+      );
+      for (const sizeStep of Object.keys(this.sizeStepAbilities)) {
+        if (size >= sizeStep) {
+          this.sizeStepAbilities[sizeStep].lose.forEach((a) => {
+            gainAbilities.delete(a);
+            loseAbilities.add(a);
+          });
+          this.sizeStepAbilities[sizeStep].gain.forEach((a) => {
+            gainAbilities.add(a);
+          });
+        } else {
+          this.sizeStepAbilities[sizeStep].gain.forEach((a) => {
+            loseAbilities.add(a);
+          });
+        }
+      }
+
+      const toDelete = [];
+      for (const abilityName of loseAbilities) {
+        const ids = this.parent.abilities
+          .filter((a) => a.name === abilityName && !a.sup)
+          .map((a) => a.id);
+        toDelete.push(...ids);
+      }
+      await this.parent.deleteEmbeddedDocuments("ActiveEffect", toDelete);
+      const newAbilities = [];
+      for (const abilityName of gainAbilities) {
+        if (
+          !this.parent.abilities.find((a) => a.name === abilityName && !a.sup)
+        ) {
+          const ability = await copyAbility(abilityName);
+          const abilityObject = ability.toObject();
+          newAbilities.push(abilityObject);
+        }
+      }
+      await this.parent.createEmbeddedDocuments("ActiveEffect", newAbilities);
+    }
+
+    // Handle variable size stat dice
     for (const stat of Object.keys(dieOptions.stats)) {
       const sizeStepKey = `sizeStep${toTitleCase(stat)}`;
       const sizeStep =
         foundry.utils.getProperty(changes, `system.${sizeStepKey}`) ||
         this[sizeStepKey];
       if (sizeStep) {
-        const size =
-          foundry.utils.getProperty(changes, "system.size.value") ||
-          this.size.value;
         const minSize =
           foundry.utils.getProperty(changes, "system.size.min") ||
           this.size.min;

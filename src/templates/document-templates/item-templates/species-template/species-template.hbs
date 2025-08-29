@@ -14,11 +14,18 @@
         {{> "systems/teriock/src/templates/document-templates/item-templates/species-template/tags/sp-traits-tags.hbs"}}
       </div>
       {{formGroup
-        systemFields.appearance
-        value=system.appearance
-        enriched=enriched.appearance
+        systemFields.hpIncrease
+        value=system.hpIncrease
+        enriched=enriched.hpIncrease
         enabled=(not disabled)
-        hidden=(not (exists system.appearance))
+        hidden=(not (exists system.hpIncrease))
+      }}
+      {{formGroup
+        systemFields.attributeIncrease
+        value=system.attributeIncrease
+        enriched=enriched.attributeIncrease
+        enabled=(not disabled)
+        hidden=(not (exists system.attributeIncrease))
       }}
       {{formGroup
         systemFields.innateRanks
@@ -26,6 +33,13 @@
         enriched=enriched.innateRanks
         enabled=(not disabled)
         hidden=(not (exists system.innateRanks))
+      }}
+      {{formGroup
+        systemFields.appearance
+        value=system.appearance
+        enriched=enriched.appearance
+        enabled=(not disabled)
+        hidden=(not (exists system.appearance))
       }}
       {{formGroup
         systemFields.description

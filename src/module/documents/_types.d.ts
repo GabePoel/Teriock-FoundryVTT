@@ -1,29 +1,15 @@
 import "./mixins/_types";
+import type { documentTypes } from "../constants/document-types.mjs";
 
 declare global {
   namespace Teriock.Documents {
-    export type ActorType = "base" | "character";
+    export type ActorType = keyof typeof documentTypes.actors;
 
-    export type ItemType =
-      | "base"
-      | "equipment"
-      | "rank"
-      | "power"
-      | "mechanic"
-      | "species"
-      | "wrapper";
+    export type ItemType = keyof typeof documentTypes.items;
 
-    export type EffectType =
-      | "ability"
-      | "attunement"
-      | "base"
-      | "condition"
-      | "consequence"
-      | "fluency"
-      | "property"
-      | "resource";
+    export type EffectType = keyof typeof documentTypes.effects;
 
-    export type MacroType = "script" | "chat";
+    export type MacroType = keyof typeof documentTypes.macros;
 
     export type ModelMetadata = {
       type: string;

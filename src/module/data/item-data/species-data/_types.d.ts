@@ -2,11 +2,9 @@ import type TeriockBaseItemData from "../base-item-data/base-item-data.mjs";
 import type { TeriockSpecies } from "../../../documents/_documents.mjs";
 import type { StatDataMixinInterface } from "../../mixins/stat-data-mixin/_types";
 
-type SizeAdjustment = {
-  min: number;
-  max: number;
-  add: string;
-  remove: string;
+export type SizeAbilityStep = {
+  gain: Set<string>;
+  lose: Set<string>;
 };
 
 declare module "./species-data.mjs" {
@@ -38,8 +36,12 @@ declare module "./species-data.mjs" {
       /** Size */
       value: number;
     };
+    /** HP increase */
+    hpIncrease: string;
+    /** Attribute increase */
+    attributeIncrease: string;
     /** Size adjustments */
-    sizeAdjustments: SizeAdjustment[];
+    sizeStepAbilities: Record<number, SizeAbilityStep>;
     /** Size interval to add another HP die at */
     sizeStepHp: number | null;
     /** Size interval to add another MP die at */

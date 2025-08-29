@@ -1,3 +1,4 @@
+import { documentTypes } from "../../../constants/document-types.mjs";
 import { toCamelCase } from "../../../helpers/utils.mjs";
 
 /**
@@ -13,10 +14,12 @@ function _buildEffectTypes(document) {
   /** @type ParentEffectKeys */
   const effectKeys = {};
   const effects = document.validEffects;
+  for (const key of Object.keys(documentTypes.effects)) {
+    effectKeys[key] = new Set();
+    effectTypes[key] = [];
+  }
   for (const effect of effects) {
     const type = effect.type;
-    if (!effectTypes[type]) effectTypes[type] = [];
-    if (!effectKeys[type]) effectKeys[type] = new Set();
     effectTypes[type].push(effect);
     effectKeys[type].add(toCamelCase(effect.name));
   }
