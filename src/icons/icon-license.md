@@ -25,3 +25,4 @@ The icons in [`./documents`]() are from [game-icons.net]() ([License](https://cr
 - [`./documents/species.svg`](https://game-icons.net/1x1/delapouite/brute.html)
 - [`./documents/uncertainty.svg`](https://game-icons.net/1x1/lorc/uncertainty.html)
 - [`./documents/wrapper.svg`](https://game-icons.net/1x1/delapouite/nested-hexagons.html)
+- [`./documents/consequence.svg`](https://game-icons.net/1x1/lorc/ball-glow.html)
