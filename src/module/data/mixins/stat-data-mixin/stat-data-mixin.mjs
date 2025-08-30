@@ -28,6 +28,16 @@ export default (Base) => {
           mpDice: this.defineStatDieField("mp"),
           hpDiceBase: this.defineStatDieBaseField(),
           mpDiceBase: this.defineStatDieBaseField(),
+          applyHp: new fields.BooleanField({
+            hint: "Add HP to the parent actor.",
+            initial: true,
+            label: "Apply HP",
+          }),
+          applyMp: new fields.BooleanField({
+            hint: "Add MP to the parent actor.",
+            initial: true,
+            label: "Apply MP",
+          }),
         });
         return schema;
       }

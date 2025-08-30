@@ -3,6 +3,7 @@
 ## High Priority
 
 - [ ] _Better_ transformation system.
+- [x] Generalized hook calls for things other than just actors
 - [x] Transformation system
 - [x] Asynchronous subs
 - [x] Character lighting integration
@@ -27,11 +28,11 @@
 
 ## Low Priority
 
-- [ ] Light mode conditions
-- [ ] Remove buggy display in ability `pseudoHook` macro list
-- [ ] Better down/dead/criticially wounded displays
+- [ ] Better down/dead/critically wounded displays
 - [ ] Better resistance/immunity tooltips
 - [ ] Condition toggling from character sheet
+- [x] Remove buggy display in ability `pseudoHook` macro list
+- [x] Light mode conditions
 - [x] Species size integration
 - [x] Tooltip/message text for attribute and feat save improvements
 - [x] Journal entries pulled for rules

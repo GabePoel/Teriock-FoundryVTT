@@ -1,8 +1,9 @@
-const buttons = scope.chatData.system.buttons;
-scope.chatData.system.buttons = buttons.filter(
+const data = /** @type {Teriock.HookData.UseAbility} */ scope.data;
+const buttons = data.rollConfig.chatData.system.buttons;
+data.rollConfig.chatData.system.buttons = buttons.filter(
   (button) => button.dataset.action === "apply-effect",
 );
-const button = scope.chatData.system.buttons[0];
+const button = data.rollConfig.chatData.system.buttons[0];
 const effectObject = JSON.parse(button.dataset.normal);
 const validAbilities = actor.abilities
   .filter((a) => !a.isReference && a.system.standard)
@@ -17,7 +18,7 @@ const ability = await game.teriock.api.dialogs.selectDocumentDialog(
 effectObject.system.hierarchy.rootUuid = ability.system.hierarchy.rootUuid;
 effectObject.system.hierarchy.subIds = [ability.id];
 const effectString = JSON.stringify(effectObject);
-scope.chatData.system.buttons[0].dataset.normal = effectString;
-scope.chatData.system.buttons[0].dataset.crit = effectString;
-scope.chatData.system.proficient = false;
-scope.chatData.system.fluent = false;
+data.rollConfig.chatData.system.buttons[0].dataset.normal = effectString;
+data.rollConfig.chatData.system.buttons[0].dataset.crit = effectString;
+data.rollConfig.chatData.system.proficient = false;
+data.rollConfig.chatData.system.fluent = false;

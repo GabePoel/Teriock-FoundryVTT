@@ -47,14 +47,16 @@ export interface CommonDocumentMixinInterface {
 
   /**
    * Execute all macros for a given pseudo-hook and call a regular hook with the same name.
-   * @param name - The name of the pseudo-hook and hook to call
-   * @param args - Arguments to pass to the pseudo-hook macros and the hook
-   * @returns Promise that resolves when the hook call is complete
+   * @param {Teriock.Parameters.Actor.PseudoHook} pseudoHook - What pseudo-hook to call.
+   * @param {Partial<Teriock.HookData.BaseHookData>} [data] - Data to call in the macro.
+   * @param {TeriockEffect} [effect] - If included, only call macros provided by this effect.
+   * @returns {Promise<Teriock.HookData.BaseHookData>} The mutated data.
    */
   hookCall(
-    name: Teriock.Parameters.Actor.PseudoHook,
-    ...args: any[]
-  ): Promise<any>;
+    pseudoHook: Teriock.Parameters.Actor.PseudoHook,
+    data?: Partial<Teriock.HookData.BaseHookData>,
+    effect?: TeriockEffect,
+  ): Promise<Teriock.HookData.BaseHookData>;
 
   /**
    * Toggles the disabled state of the document.

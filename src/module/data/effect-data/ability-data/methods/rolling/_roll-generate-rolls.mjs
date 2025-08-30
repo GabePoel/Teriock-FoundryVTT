@@ -11,6 +11,7 @@ export async function _generateRolls(rollConfig) {
   /** @type {TeriockRoll[]} */
   const rolls = [];
   if (rollConfig.abilityData.interaction === "attack") {
+    const flavor = "Attack Roll";
     for (const target of rollConfig.useData.targets) {
       const rollContext = {
         targetImg: tokenImage(target),
@@ -27,7 +28,7 @@ export async function _generateRolls(rollConfig) {
         new TeriockRoll(
           rollConfig.useData.formula,
           rollConfig.useData.rollData,
-          { context: rollContext },
+          { context: rollContext, flavor },
         ),
       );
     }
@@ -41,11 +42,12 @@ export async function _generateRolls(rollConfig) {
         new TeriockRoll(
           rollConfig.useData.formula,
           rollConfig.useData.rollData,
-          { context: rollContext },
+          { context: rollContext, flavor },
         ),
       );
     }
   } else if (rollConfig.abilityData.interaction === "feat") {
+    const flavor = "Feat Save DC";
     for (const target of rollConfig.useData.targets) {
       const rollContext = {
         targetImg: tokenImage(target),
@@ -62,6 +64,7 @@ export async function _generateRolls(rollConfig) {
     rolls.push(
       new TeriockRoll(rollConfig.useData.formula, rollConfig.useData.rollData, {
         context: rollContext,
+        flavor,
       }),
     );
   } else {

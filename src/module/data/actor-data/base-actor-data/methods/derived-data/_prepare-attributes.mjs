@@ -11,7 +11,7 @@ export function _prepareAttributes(actorData) {
   const { attributes, size, f, p } = actorData;
   Object.values(attributes).forEach((attr) => {
     const bonus = attr.saveFluent ? f : attr.saveProficient ? p : 0;
-    attr.saveBonus = attr.value + bonus;
+    attr.saveBonus = attr.value * 2 + bonus;
   });
   const mov = attributes.mov.value;
   const str = attributes.str.value;

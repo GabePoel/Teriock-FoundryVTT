@@ -69,7 +69,9 @@ export default (Base) => {
 
       /** @inheritDoc */
       async chat() {
-        await this.hookCall("chat");
+        const data = { doc: this.parent };
+        await this.hookCall("documentChat", data);
+        if (data.cancel) return;
         let content = await this.buildMessage();
         content = `<div class="teriock">${content}</div>`;
         await ChatMessage.create({
@@ -95,12 +97,14 @@ export default (Base) => {
       /** @inheritDoc */
       async duplicate() {
         const copy = foundry.utils.duplicate(this);
+        const data = { doc: this.parent, copy: copy };
+        await this.hookCall("documentDuplicate", data);
+        if (data.cancel) return data.copy;
         const copyDocument = await this.parent.createEmbeddedDocuments(
           this.documentName,
-          [copy],
+          [data.copy],
         );
         await this.parent.forceUpdate();
-        await this.hookCall("duplicate", [this, copyDocument[0]]);
         return copyDocument[0];
       }
 

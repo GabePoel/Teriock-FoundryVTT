@@ -43,9 +43,17 @@ export default (Base) => {
         });
       }
 
-      /** @inheritDoc */
-      async hookCall(name, ...args) {
-        if (this.actor) return await this.actor.hookCall(name, ...args);
+      /**
+       * @inheritDoc
+       * @param {Teriock.Parameters.Actor.PseudoHook} pseudoHook
+       * @param {Partial<Teriock.HookData.BaseHookData>} [data]
+       * @param {TeriockEffect} [effect]
+       * @returns {Promise<Teriock.HookData.BaseHookData>}
+       */
+      async hookCall(pseudoHook, data = {}, effect = null) {
+        data.cancel = false;
+        if (this.actor) return await this.actor.hookCall(pseudoHook, data, effect);
+        else return /** @type {Teriock.HookData.BaseHookData} */ data;
       }
 
       /** @inheritDoc */

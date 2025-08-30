@@ -39,6 +39,8 @@ export const unsortedPseudoHooks = {
   equipmentUnglue: "Equipment Ungluing",
   postUpdate: "Post-actor Updating",
   rollImmunity: "Rolling an Immunity Save",
+  documentChat: "Document Sharing to Chat",
+  documentDuplicate: "Document Duplication",
 };
 
 export const pseudoHooks = Object.fromEntries(

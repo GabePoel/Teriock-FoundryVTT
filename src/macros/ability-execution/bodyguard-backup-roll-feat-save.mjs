@@ -1,6 +1,6 @@
-const args = scope.args;
-if (["mov", "str"].includes(args[0])) {
-  args[1]["advantage"] = true;
+const data = /** @type {Teriock.HookData.RollFeatSave} */ scope.data;
+if (["mov", "str"].includes(data.attribute)) {
+  data.options.advantage = true;
   const effect = actor.effects.getName("Bodyguard Backup Effect");
   await effect.delete();
 }

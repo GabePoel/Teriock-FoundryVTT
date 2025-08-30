@@ -65,7 +65,7 @@ export async function _parse(equipmentData, rawHTML) {
 
   // Add piercing property if present
   const piercing = getValue(".piercing");
-  if (piercing) properties.add(piercing);
+  if (piercing) properties.add(piercing.toUpperCase());
 
   // Parse sb, av, bv
   parameters.sb = toCamelCase(getValue(".sb") || "") ?? parameters.sb;

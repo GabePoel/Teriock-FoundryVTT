@@ -1,9 +1,10 @@
+const data = /** @type {Teriock.HookData.UseAbility} */ scope.data;
 const goadedToUuids = await game.teriock.api.dialogs.goadedToDialog();
-const buttons = scope.chatData.system.buttons;
-scope.chatData.system.buttons = buttons.filter(
+const buttons = data.rollConfig.chatData.system.buttons;
+data.rollConfig.chatData.system.buttons = buttons.filter(
   (button) => button.dataset.action === "apply-effect",
 );
-const button = scope.chatData.system.buttons[0];
+const button = data.rollConfig.chatData.system.buttons[0];
 
 async function modifyData(data) {
   const effectObject = JSON.parse(data);

@@ -356,6 +356,8 @@ function offenseData(actorData, data) {
   const weaponUb = actorData?.wielding.attacker.derived?.system.derivedUb;
   const naturalUb = actorData.piercing === "ub";
   const hasUb = weaponUb || naturalUb;
+  const weaponWarded =
+    actorData?.wielding.attacker.derived?.system.derivedWarded;
   Object.assign(data, {
     sb: actorData.sb ? 1 : 0,
     av0: hasAv0 ? 2 : 0,
@@ -366,6 +368,9 @@ function offenseData(actorData, data) {
     "ub.wep": weaponUb ? 1 : 0,
     "ub.abi": 0, // Determined by ability used.
     "ub.nat": naturalUb ? 1 : 0,
+    ward: weaponWarded ? 1 : 0,
+    "ward.wep": weaponWarded ? 1 : 0,
+    "ward.abi": 0, // Determined by ability used.
     atkPen: actorData.attackPenalty,
   });
 }

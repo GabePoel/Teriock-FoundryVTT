@@ -67,9 +67,9 @@ declare global {
 
 export interface ParentDocumentMixinInterface {
   /** Effect types organized by type */
-  effectTypes?: Teriock.Parent.ParentEffectTypes;
+  effectTypes: Teriock.Parent.ParentEffectTypes;
   /** Effect keys organized by type */
-  effectKeys?: Teriock.Parent.ParentEffectKeys;
+  effectKeys: Teriock.Parent.ParentEffectKeys;
 
   /**
    * Gets all ability effects.

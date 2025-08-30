@@ -1,5 +1,11 @@
-import type TeriockActor from "../documents/actor.mjs";
 import type { dieOptions } from "../constants/die-options.mjs";
+import type { TeriockToken } from "../canvas/placeables/_module.mjs";
+import type { TeriockActor } from "../documents/_module.mjs";
+import type {
+  AbilityChatData,
+  AbilityUseData,
+} from "../data/effect-data/ability-data/types/roll-config";
+import type TeriockAbilityData from "../data/effect-data/ability-data/ability-data.mjs";
 
 declare global {
   namespace Teriock.RollOptions {
@@ -63,5 +69,16 @@ declare global {
      * Allowable dice values.
      */
     export type PolyhedralDie = `d${PolyhedralDieFaces}`;
+
+    export type MacroScope = {
+      speaker?: Teriock.Foundry.ChatSpeakerData;
+      actor?: TeriockActor;
+      token?: TeriockToken;
+      event?: Event;
+      data?: Teriock.HookData.BaseHookData;
+      useData?: AbilityUseData;
+      abilityData?: TeriockAbilityData;
+      chatData?: AbilityChatData;
+    };
   }
 }

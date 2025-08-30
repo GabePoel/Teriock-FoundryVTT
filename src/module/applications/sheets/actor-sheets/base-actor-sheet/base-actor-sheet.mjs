@@ -881,7 +881,7 @@ export default class TeriockBaseActorSheet extends SheetMixin(ActorSheetV2) {
     context.activeTab = this._activeTab;
     context.conditions = conditions;
     context.removableConditions = conditions.filter((c) =>
-      this.actor.effectKeys.condition?.has(c),
+      this.actor.effectKeys.condition.has(c),
     );
     context.editable = this.isEditable;
     context.actor = this.actor;

@@ -1,10 +1,9 @@
 import { TeriockActor } from "../documents/_module.mjs";
-import type { AbilityRollConfig } from "../data/effect-data/ability-data/types/roll-config";
 
 declare global {
   // Definition for writing macros.
   let actor: TeriockActor;
-  let scope: AbilityRollConfig & { args: any[] };
+  let scope: Teriock.RollOptions.MacroScope;
   // Global overrides that improve Teriock typing.
   namespace globalThis {
     function fromUuidSync<T>(uuid: Teriock.UUID<T>): T | undefined;

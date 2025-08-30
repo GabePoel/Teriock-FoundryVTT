@@ -1,7 +1,5 @@
 const toRemove = [];
-const abilities = actor.effectTypes?.ability || [];
-const consequences = actor.effectTypes?.consequence || [];
-consequences.map((c) => {
+actor.consequences.map((c) => {
   if (c.name === "Brace Effect") {
     toRemove.push(c.id);
   }
@@ -10,9 +8,9 @@ if (toRemove.length > 0) {
   await actor.deleteEmbeddedDocuments("ActiveEffect", toRemove);
 }
 
-const dieSize = actor?.system?.abilityFlags.braceDieSize || 6;
+const dieSize = actor.system?.abilityFlags.braceDieSize || 6;
 
-const ability = abilities.find((a) => a.name === "Brace");
+const ability = actor.abilities.find((a) => a.name === "Brace");
 
 let formula = `1d${dieSize}`;
 if (ability?.isProficient) {

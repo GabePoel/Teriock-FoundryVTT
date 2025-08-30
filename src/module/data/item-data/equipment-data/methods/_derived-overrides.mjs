@@ -31,8 +31,7 @@ function deriveEquipmentDataValue(
       }
     }
 
-    for (const propertyKey of equipmentData.parent?.effectKeys?.property ||
-      []) {
+    for (const propertyKey of equipmentData.parent.effectKeys.property || []) {
       const propertyOverride = overrides.properties[propertyKey]?.[dataKey];
       if (propertyOverride !== undefined) {
         value = combineValues(value, propertyOverride);
@@ -64,7 +63,7 @@ function deriveEquipmentDataValue(
         }
       }
 
-      for (const propertyKey of equipmentData.parent?.effectKeys?.property ||
+      for (const propertyKey of equipmentData.parent.effectKeys.property ||
         []) {
         const propertyUpgrade = upgrades.properties[propertyKey]?.[dataKey];
         if (propertyUpgrade !== undefined) {
@@ -125,10 +124,28 @@ export function _derivedAv0(equipmentData) {
     deriveEquipmentDataValue(
       equipmentData,
       "av0",
-      (data) => data.parent.effectKeys?.property?.has("av0"),
+      (data) => data.parent.effectKeys.property.has("av0"),
       (current, override) => override || current,
       null,
     ) || _derivedUb(equipmentData)
+  );
+}
+
+/**
+ * Derived warded value.
+ *
+ * @param {TeriockEquipmentData} equipmentData
+ * @returns {boolean}
+ */
+export function _derivedWarded(equipmentData) {
+  return deriveEquipmentDataValue(
+    equipmentData,
+    "ub",
+    (data) =>
+      data.parent.effectKeys.property.has("warded") ||
+      data.parent.effectKeys.property.has("passivelyWarded"),
+    (current, override) => override || current,
+    null,
   );
 }
 
@@ -142,7 +159,7 @@ export function _derivedUb(equipmentData) {
   return deriveEquipmentDataValue(
     equipmentData,
     "ub",
-    (data) => data.parent.effectKeys?.property?.has("ub"),
+    (data) => data.parent.effectKeys.property.has("ub"),
     (current, override) => override || current,
     null,
   );

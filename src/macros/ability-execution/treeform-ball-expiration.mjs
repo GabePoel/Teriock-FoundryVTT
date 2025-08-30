@@ -1,6 +1,6 @@
-const args = scope.args;
+const data = /** @type {Teriock.HookData.EffectActivity} */ scope.data;
 if (
-  args[0].name === "Treeform Ball Effect" &&
+  data.doc.name === "Treeform Ball Effect" &&
   actor.itemKeys.species.has("tree")
 ) {
   let hp = actor.getFlag("teriock", "preTransformHp") || 0;
@@ -16,13 +16,15 @@ if (
   const speciesUpdates = actor.species.map((s) => {
     return {
       _id: s.id,
-      "system.disabled": false,
+      "system.applyHp": s.getFlag("teriock", "preTreeformApplyHp"),
+      "system.disabled": s.getFlag("teriock", "preTreeformDisabled"),
     };
   });
   const rankUpdates = actor.ranks.map((r) => {
     return {
       _id: r.id,
-      "system.disabled": false,
+      "system.applyHp": r.getFlag("teriock", "preTreeformApplyHp"),
+      "system.disabled": r.getFlag("teriock", "preTreeformDisabled"),
     };
   });
   await actor.updateEmbeddedDocuments("Item", [

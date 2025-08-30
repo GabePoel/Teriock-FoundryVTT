@@ -30,6 +30,7 @@ export async function _executeMacros(rollConfig, pseudoHook) {
             useData: rollConfig.useData,
             abilityData: rollConfig.abilityData,
             chatData: rollConfig.chatData,
+            data: { rollConfig },
           });
         } catch (error) {
           console.error(
@@ -40,5 +41,6 @@ export async function _executeMacros(rollConfig, pseudoHook) {
       }
     }
   }
-  await rollConfig.useData.actor.hookCall("useAbility", rollConfig);
+  const data = { rollConfig };
+  await rollConfig.useData.actor.hookCall("useAbility", data);
 }

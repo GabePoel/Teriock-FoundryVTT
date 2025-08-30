@@ -15,10 +15,6 @@ declare module "./species-data.mjs" {
     adult: number;
     /** Appearance */
     appearance: string;
-    /** Add this HP to parent {@link TeriockActor}. */
-    applyHp: boolean;
-    /** Add this MP to parent {@link TeriockActor}. */
-    applyMp: boolean;
     /** Apply this size to parent {@link TeriockActor}. */
     applySize: boolean;
     /** Battle rating */

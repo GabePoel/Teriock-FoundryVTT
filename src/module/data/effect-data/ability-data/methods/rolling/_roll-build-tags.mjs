@@ -6,6 +6,15 @@
  */
 export function _buildTags(rollConfig) {
   const heightened = rollConfig.useData.modifiers.heightened;
+  if (
+    rollConfig.useData.rollData["ub"] &&
+    rollConfig.abilityData.interaction === "attack"
+  ) {
+    rollConfig.chatData.system.tags.push("Unblockable");
+  }
+  if (rollConfig.useData.modifiers.warded) {
+    rollConfig.chatData.system.tags.push("Warded");
+  }
   if (heightened > 0)
     rollConfig.chatData.system.tags.push(
       `Heightened ${heightened} Time${heightened === 1 ? "" : "s"}`,

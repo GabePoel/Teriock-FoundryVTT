@@ -6,6 +6,10 @@ type BaseDice = {
 };
 
 export interface StatDataMixinInterface {
+  /** Add this HP to parent {@link TeriockActor}. */
+  applyHp: boolean;
+  /** Add this MP to parent {@link TeriockActor}. */
+  applyMp: boolean;
   /** Base HP dice */
   hpDiceBase: BaseDice;
   /** Base MP dice */

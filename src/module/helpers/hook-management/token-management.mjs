@@ -5,7 +5,8 @@ export default function registerTokenManagementHooks() {
     "moveToken",
     async (document, _movement, _operation, user) => {
       if (isOwnerAndCurrentUser(document, user._id) && document.actor) {
-        await document.actor.hookCall("movement");
+        const data = await document.actor.hookCall("movement");
+        if (data.cancel) return false;
         for (const e of document.actor.movementExpirationEffects) {
           await e.system.expire();
         }

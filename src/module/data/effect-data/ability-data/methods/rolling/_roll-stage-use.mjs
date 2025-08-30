@@ -25,6 +25,21 @@ export async function _stageUse(rollConfig) {
     rollConfig.useData.rollData,
   );
 
+  // Check if known to be warded
+  if (rollConfig.abilityData.warded) {
+    rollConfig.useData.modifiers.warded = true;
+    rollConfig.useData.rollData["warded.abi"] = 1;
+    rollConfig.useData.rollData["warded"] = 1;
+  }
+  if (
+    rollConfig.abilityData.interaction === "attack" &&
+    rollConfig.abilityData.delivery.base === "weapon" &&
+    rollConfig.useData.rollData["ward.wep"]
+  ) {
+    rollConfig.useData.modifiers.warded = true;
+    rollConfig.useData.rollData["warded"] = 1;
+  }
+
   // Build initial formula
   rollConfig.useData.formula = buildFormula(rollConfig);
 

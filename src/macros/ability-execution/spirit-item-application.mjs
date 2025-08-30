@@ -1,6 +1,4 @@
-const spiritItem = actor?.itemTypes?.equipment?.find(
-  (e) => e.name === "Spirit Item",
-);
+const spiritItem = actor.equipment.find((e) => e.name === "Spirit Item");
 
 if (spiritItem) {
   const updateData = { "system.disabled": false };
@@ -12,6 +10,7 @@ if (spiritItem) {
   }
 
   await spiritItem.update(updateData);
+  await spiritItem.system.repair();
   await spiritItem.system.equip();
   await spiritItem.system.attune();
 }

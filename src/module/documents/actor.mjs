@@ -215,8 +215,10 @@ export default class TeriockActor extends BaseTeriockActor {
       embeddedName === "ActiveEffect" &&
       data.find((d) => d.type === "consequence")
     ) {
-      for (const abilityData of data.filter((d) => d.type === "consequence")) {
-        const changes = abilityData?.changes;
+      for (const consequenceData of data.filter(
+        (d) => d.type === "consequence",
+      )) {
+        const changes = consequenceData?.changes;
         if (changes && changes.length > 0) {
           for (const change of changes) {
             if (change.key === "system.hookedMacros.effectApplication") {
@@ -224,7 +226,10 @@ export default class TeriockActor extends BaseTeriockActor {
               /** @type {TeriockMacro|null} */
               const macro = await foundry.utils.fromUuid(uuid);
               if (macro) {
-                await macro.execute({ actor: this });
+                await macro.execute({
+                  actor: this,
+                  data: { cancel: false, docData: consequenceData },
+                });
               }
             }
           }
@@ -307,17 +312,29 @@ export default class TeriockActor extends BaseTeriockActor {
   }
 
   /** @inheritDoc */
-  async hookCall(name, ...args) {
-    Hooks.callAll(`teriock.${name}`, this, ...args);
-    if (this.system.hookedMacros[name]) {
-      for (const macroUuid of this.system.hookedMacros[name]) {
+  async hookCall(pseudoHook, data, effect) {
+    if (!data) data = {};
+    data.cancel = false;
+    Hooks.callAll(`teriock.${pseudoHook}`, this, data);
+    let macroUuids = this.system.hookedMacros[pseudoHook];
+    if (macroUuids) {
+      if (effect) {
+        macroUuids = macroUuids.filter((uuid) =>
+          effect.changes
+            .filter((c) => c.key === `system.hookedMacros.${pseudoHook}`)
+            .map((c) => c.value)
+            .includes(uuid),
+        );
+      }
+      for (const macroUuid of macroUuids) {
         /** @type {TeriockMacro} */
         const macro = await foundry.utils.fromUuid(macroUuid);
         if (macro) {
-          await macro.execute({ actor: this, args: [...args] });
+          await macro.execute({ actor: this, data: data });
         }
       }
     }
+    return /** @type {Teriock.HookData.BaseHookData} */ data;
   }
 
   /**
@@ -327,8 +344,9 @@ export default class TeriockActor extends BaseTeriockActor {
    * @returns {Promise<void>} Promise that resolves when post-update is complete.
    */
   async postUpdate(skipFunctions = {}) {
-    await this.hookCall("postUpdate", skipFunctions);
-    await this.system.postUpdate(skipFunctions);
+    const data = { skipFunctions };
+    await this.hookCall("postUpdate", data);
+    if (!data.cancel) await this.system.postUpdate(data.skipFunctions);
   }
 
   /** @inheritDoc */
@@ -370,8 +388,10 @@ export default class TeriockActor extends BaseTeriockActor {
    * @returns {Promise<void>}
    */
   async rollFeatSave(attribute, options = {}) {
-    await this.hookCall("rollFeatSave", attribute, options);
-    await this.system.rollFeatSave(attribute, options);
+    const data = { attribute, options };
+    await this.hookCall("rollFeatSave", data);
+    if (!data.cancel)
+      await this.system.rollFeatSave(data.attribute, data.options);
   }
 
   /**
@@ -384,8 +404,9 @@ export default class TeriockActor extends BaseTeriockActor {
    * @returns {Promise<void>}
    */
   async rollImmunity(options = {}) {
-    await this.hookCall("rollImmunity", options);
-    await this.system.rollImmunity(options);
+    const data = { options };
+    await this.hookCall("rollImmunity", data);
+    if (!data.cancel) await this.system.rollImmunity(data.options);
   }
 
   /**
@@ -398,8 +419,9 @@ export default class TeriockActor extends BaseTeriockActor {
    * @returns {Promise<void>}
    */
   async rollResistance(options = {}) {
-    await this.hookCall("rollResistance", options);
-    await this.system.rollResistance(options);
+    const data = { options };
+    await this.hookCall("rollResistance", data);
+    if (!data.cancel) await this.system.rollResistance(data.options);
   }
 
   /**
@@ -413,8 +435,10 @@ export default class TeriockActor extends BaseTeriockActor {
    * @returns {Promise<void>}
    */
   async rollTradecraft(tradecraft, options = {}) {
-    await this.hookCall("rollTradecraft", options);
-    await this.system.rollTradecraft(tradecraft, options);
+    const data = { tradecraft, options };
+    await this.hookCall("rollTradecraft", data);
+    if (!data.cancel)
+      await this.system.rollTradecraft(data.tradecraft, data.options);
   }
 
   /**
@@ -426,8 +450,8 @@ export default class TeriockActor extends BaseTeriockActor {
    * @returns {Promise<void>} Promise that resolves when the actor is awakened.
    */
   async takeAwaken() {
-    await this.hookCall("takeAwaken");
-    await this.system.takeAwaken();
+    const data = await this.hookCall("takeAwaken");
+    if (!data.cancel) await this.system.takeAwaken();
   }
 
   /**
@@ -440,8 +464,9 @@ export default class TeriockActor extends BaseTeriockActor {
    * @returns {Promise<void>} Promise that resolves when damage is applied.
    */
   async takeDamage(amount) {
-    await this.hookCall("takeDamage", amount);
-    await this.system.takeDamage(amount);
+    const data = { amount };
+    await this.hookCall("takeDamage", data);
+    if (!data.cancel) await this.system.takeDamage(data.amount);
   }
 
   /**
@@ -454,8 +479,9 @@ export default class TeriockActor extends BaseTeriockActor {
    * @returns {Promise<void>} Promise that resolves when drain is applied.
    */
   async takeDrain(amount) {
-    await this.hookCall("takeDrain", amount);
-    await this.system.takeDrain(amount);
+    const data = { amount };
+    await this.hookCall("takeDrain", data);
+    if (!data.cancel) await this.system.takeDrain(data.amount);
   }
 
   /**
@@ -468,8 +494,9 @@ export default class TeriockActor extends BaseTeriockActor {
    * @returns {Promise<void>} Promise that resolves when temporary hit points are gained.
    */
   async takeGainTempHp(amount) {
-    await this.hookCall("takeGainTempHp", amount);
-    await this.system.takeGainTempHp(amount);
+    const data = { amount };
+    await this.hookCall("takeGainTempHp", data);
+    if (!data.cancel) await this.system.takeGainTempHp(data.amount);
   }
 
   /**
@@ -482,8 +509,9 @@ export default class TeriockActor extends BaseTeriockActor {
    * @returns {Promise<void>} Promise that resolves when temporary mana points are gained.
    */
   async takeGainTempMp(amount) {
-    await this.hookCall("takeGainTempMp", amount);
-    await this.system.takeGainTempMp(amount);
+    const data = { amount };
+    await this.hookCall("takeGainTempMp", data);
+    if (!data.cancel) await this.system.takeGainTempMp(data.amount);
   }
 
   /**
@@ -496,8 +524,9 @@ export default class TeriockActor extends BaseTeriockActor {
    * @returns {Promise<void>} Promise that resolves when hack is applied.
    */
   async takeHack(part) {
-    await this.hookCall("takeHack", part);
-    await this.system.takeHack(part);
+    const data = { part };
+    await this.hookCall("takeHack", data);
+    if (!data.cancel) await this.system.takeHack(data.part);
   }
 
   /**
@@ -510,8 +539,9 @@ export default class TeriockActor extends BaseTeriockActor {
    * @returns {Promise<void>} Promise that resolves when healing is applied.
    */
   async takeHeal(amount) {
-    await this.hookCall("takeHeal", amount);
-    await this.system.takeHeal(amount);
+    const data = { amount };
+    await this.hookCall("takeHeal", data);
+    if (!data.cancel) await this.system.takeHeal(data.amount);
   }
 
   /**
@@ -524,18 +554,20 @@ export default class TeriockActor extends BaseTeriockActor {
    * @returns {Promise<void>} Promise that resolves when kill effect is applied.
    */
   async takeKill(amount) {
-    await this.hookCall("takeKill", amount);
-    await this.system.takeKill(amount);
+    const data = { amount };
+    await this.hookCall("takeKill", data);
+    if (!data.cancel) await this.system.takeKill(data.amount);
   }
 
   /**
    * Actor pays money.
    * @param {number} amount - The amount of gold-equivalent money to pay.
-   * @param {"exact" | "greedy"} mode - Exact change or the closest denomination, rounded up.
+   * @param {Teriock.Parameters.Actor.PayMode} mode - Exact change or the closest denomination, rounded up.
    */
   async takePay(amount, mode = "greedy") {
-    await this.hookCall("takePay", amount);
-    await this.system.takePay(amount, mode);
+    const data = { amount, mode };
+    await this.hookCall("takePay", data);
+    if (!data.cancel) await this.system.takePay(data.amount, data.mode);
   }
 
   /**
@@ -548,8 +580,9 @@ export default class TeriockActor extends BaseTeriockActor {
    * @returns {Promise<void>} Promise that resolves when revitalization is applied.
    */
   async takeRevitalize(amount) {
-    await this.hookCall("takeRevitalize", amount);
-    await this.system.takeRevitalize(amount);
+    const data = { amount };
+    await this.hookCall("takeRevitalize", data);
+    if (!data.cancel) await this.system.takeRevitalize(data.amount);
   }
 
   /**
@@ -561,8 +594,8 @@ export default class TeriockActor extends BaseTeriockActor {
    * @returns {Promise<void>} Promise that resolves when the actor is revived.
    */
   async takeRevive() {
-    await this.hookCall("takeRevive");
-    await this.system.takeRevive();
+    const data = await this.hookCall("takeRevive");
+    if (!data.cancel) await this.system.takeRevive();
   }
 
   /**
@@ -575,8 +608,9 @@ export default class TeriockActor extends BaseTeriockActor {
    * @returns {Promise<void>} Promise that resolves when temporary hit points are set.
    */
   async takeSetTempHp(amount) {
-    await this.hookCall("takeSetTempHp", amount);
-    await this.system.takeSetTempHp(amount);
+    const data = { amount };
+    await this.hookCall("takeSetTempHp", data);
+    if (!data.cancel) await this.system.takeSetTempHp(data.amount);
   }
 
   /**
@@ -589,8 +623,9 @@ export default class TeriockActor extends BaseTeriockActor {
    * @returns {Promise<void>} Promise that resolves when temporary mana points are set.
    */
   async takeSetTempMp(amount) {
-    await this.hookCall("takeSetTempMp", amount);
-    await this.system.takeSetTempMp(amount);
+    const data = { amount };
+    await this.hookCall("takeSetTempMp", data);
+    if (!data.cancel) await this.system.takeSetTempMp(data.amount);
   }
 
   /**
@@ -603,8 +638,9 @@ export default class TeriockActor extends BaseTeriockActor {
    * @returns {Promise<void>} Promise that resolves when sleep is applied.
    */
   async takeSleep(amount) {
-    await this.hookCall("takeSleep", amount);
-    await this.system.takeSleep(amount);
+    const data = { amount };
+    await this.hookCall("takeSleep", data);
+    if (!data.cancel) await this.system.takeSleep(data.amount);
   }
 
   /**
@@ -617,8 +653,9 @@ export default class TeriockActor extends BaseTeriockActor {
    * @returns {Promise<void>} Promise that resolves when unhack is applied.
    */
   async takeUnhack(part) {
-    await this.hookCall("takeUnhack", part);
-    await this.system.takeUnhack(part);
+    const data = { part };
+    await this.hookCall("takeUnhack", data);
+    if (!data.cancel) await this.system.takeUnhack(data.part);
   }
 
   /**
@@ -631,8 +668,9 @@ export default class TeriockActor extends BaseTeriockActor {
    * @returns {Promise<void>} Promise that resolves when wither is applied.
    */
   async takeWither(amount) {
-    await this.hookCall("takeWither", amount);
-    await this.system.takeWither(amount);
+    const data = { amount };
+    await this.hookCall("takeWither", data);
+    if (!data.cancel) await this.system.takeWither(data.amount);
   }
 
   /**

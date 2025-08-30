@@ -9,7 +9,7 @@ export class FeatSaveHandler extends ActionHandler {
 
   /** @inheritDoc */
   async primaryAction() {
-    if (typeof this.dataset.dc === "number") {
+    if (!isNaN(Number(this.dataset.dc))) {
       this.commonRollOptions.threshold = Number(this.dataset.dc);
     }
     for (const actor of this.actors) {

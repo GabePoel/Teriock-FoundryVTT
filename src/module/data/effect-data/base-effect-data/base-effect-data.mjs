@@ -106,7 +106,9 @@ export default class TeriockBaseEffectData extends ChildTypeModel {
 
   /** @inheritDoc */
   async _preDelete(options, user) {
-    await this.actor?.hookCall("effectExpiration", this.parent);
+    const data = { doc: this.parent };
+    await this.parent.hookCall("effectExpiration", data, this.parent);
+    if (data.cancel) return false;
     await super._preDelete(options, user);
   }
 
@@ -126,7 +128,9 @@ export default class TeriockBaseEffectData extends ChildTypeModel {
    */
   async expire() {
     if (!this.deleteOnExpire) {
-      await this.actor?.hookCall("effectExpiration", this.parent);
+      const data = { doc: this.parent };
+      await this.parent.hookCall("effectExpiration", data, this.parent);
+      if (data.cancel) return;
     }
     return await _expire(this);
   }

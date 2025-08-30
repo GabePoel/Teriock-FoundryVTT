@@ -1,6 +1,4 @@
-let spiritItem = actor?.itemTypes?.equipment?.find(
-  (e) => e.name === "Spirit Item",
-);
+let spiritItem = actor.equipment.find((e) => e.name === "Spirit Item");
 
 // Create a spirit item if one doesn't already exist
 if (!spiritItem) {
@@ -38,6 +36,7 @@ if (!spiritItem) {
   await spiritItem.update({
     "system.tier.raw": "1",
     "system.weight": 0,
+    "system.disabled": true,
   });
   await game.teriock.api.fetch.importProperty(spiritItem, "Master Crafted");
 }

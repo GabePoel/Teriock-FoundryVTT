@@ -13,6 +13,7 @@ const DEFAULT_USE_DATA = {
   modifiers: {
     heightened: 0,
     noHeighten: false,
+    warded: false,
   },
   formula: "",
   rollData: {},

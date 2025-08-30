@@ -133,6 +133,14 @@ export default class TeriockEquipmentData extends ConsumableDataMixin(
   }
 
   /**
+   * Derived warded value.
+   * @returns {boolean}
+   */
+  get derivedWarded() {
+    return overrides._derivedWarded(this);
+  }
+
+  /**
    * Checks if the equipment is currently attuned.
    * @returns {boolean} True if the equipment is attuned, false otherwise.
    */
@@ -178,8 +186,9 @@ export default class TeriockEquipmentData extends ConsumableDataMixin(
    * @returns {Promise<TeriockEffect | null>} Promise that resolves to the attunement effect or null.
    */
   async attune() {
-    await this.actor?.hookCall("equipmentAttune", this.parent);
-    return await attunement._attune(this);
+    const data = { doc: this.parent };
+    await this.parent.hookCall("equipmentAttune", data);
+    if (!data.cancel) return await attunement._attune(this);
   }
 
   /**
@@ -187,8 +196,9 @@ export default class TeriockEquipmentData extends ConsumableDataMixin(
    * @returns {Promise<void>}
    */
   async dampen() {
-    await this.actor?.hookCall("equipmentDampen", this.parent);
-    await this.parent.update({ "system.dampened": true });
+    const data = { doc: this.parent };
+    await this.parent.hookCall("equipmentDampen", data);
+    if (!data.cancel) await this.parent.update({ "system.dampened": true });
   }
 
   /**
@@ -196,8 +206,9 @@ export default class TeriockEquipmentData extends ConsumableDataMixin(
    * @returns {Promise<void>} Promise that resolves when the equipment is deattuned.
    */
   async deattune() {
-    await this.actor?.hookCall("equipmentDeattune", this.parent);
-    await attunement._deattune(this);
+    const data = { doc: this.parent };
+    await this.parent.hookCall("equipmentDeattune", data);
+    if (!data.cancel) await attunement._deattune(this);
   }
 
   /**
@@ -205,8 +216,9 @@ export default class TeriockEquipmentData extends ConsumableDataMixin(
    * @returns {Promise<void>}
    */
   async equip() {
-    await this.actor?.hookCall("equipmentEquip", this.parent);
-    await this.parent.update({ "system.equipped": true });
+    const data = { doc: this.parent };
+    await this.parent.hookCall("equipmentEquip", data);
+    if (!data.cancel) await this.parent.update({ "system.equipped": true });
   }
 
   /**
@@ -214,8 +226,9 @@ export default class TeriockEquipmentData extends ConsumableDataMixin(
    * @returns {Promise<void>}
    */
   async glue() {
-    await this.actor?.hookCall("equipmentGlue", this.parent);
-    await this.parent.update({ "system.glued": true });
+    const data = { doc: this.parent };
+    await this.parent.hookCall("equipmentGlue", data);
+    if (!data.cancel) await this.parent.update({ "system.glued": true });
   }
 
   /**
@@ -223,8 +236,9 @@ export default class TeriockEquipmentData extends ConsumableDataMixin(
    * @returns {Promise<void>} Promise that resolves when the equipment is identified.
    */
   async identify() {
-    await this.actor?.hookCall("equipmentIdentify", this.parent);
-    await identifying._identify(this);
+    const data = { doc: this.parent };
+    await this.parent.hookCall("equipmentIdentify", data);
+    if (!data.cancel) await identifying._identify(this);
   }
 
   /** @inheritDoc */
@@ -243,8 +257,9 @@ export default class TeriockEquipmentData extends ConsumableDataMixin(
    * @returns {Promise<void>} Promise that resolves when magic reading is complete.
    */
   async readMagic() {
-    await this.actor?.hookCall("equipmentReadMagic", this.parent);
-    await identifying._readMagic(this);
+    const data = { doc: this.parent };
+    await this.parent.hookCall("equipmentReadMagic", data);
+    if (!data.cancel) await identifying._readMagic(this);
   }
 
   /**
@@ -252,8 +267,9 @@ export default class TeriockEquipmentData extends ConsumableDataMixin(
    * @returns {Promise<void>}
    */
   async repair() {
-    await this.actor?.hookCall("equipmentRepair", this.parent);
-    await this.parent.update({ "system.shattered": false });
+    const data = { doc: this.parent };
+    await this.parent.hookCall("equipmentRepair", data);
+    if (!data.cancel) await this.parent.update({ "system.shattered": false });
   }
 
   /** @inheritDoc */
@@ -266,8 +282,9 @@ export default class TeriockEquipmentData extends ConsumableDataMixin(
    * @returns {Promise<void>}
    */
   async shatter() {
-    await this.actor?.hookCall("equipmentShatter", this.parent);
-    await this.parent.update({ "system.shattered": true });
+    const data = { doc: this.parent };
+    await this.parent.hookCall("equipmentShatter", data);
+    if (!data.cancel) await this.parent.update({ "system.shattered": true });
   }
 
   /**
@@ -275,8 +292,9 @@ export default class TeriockEquipmentData extends ConsumableDataMixin(
    * @returns {Promise<void>}
    */
   async undampen() {
-    await this.actor?.hookCall("equipmentUndampen", this.parent);
-    await this.parent.update({ "system.dampened": false });
+    const data = { doc: this.parent };
+    await this.parent.hookCall("equipmentUndampen", data);
+    if (!data.cancel) await this.parent.update({ "system.dampened": false });
   }
 
   /**
@@ -284,8 +302,9 @@ export default class TeriockEquipmentData extends ConsumableDataMixin(
    * @returns {Promise<void>}
    */
   async unequip() {
-    await this.actor?.hookCall("equipmentUnequip", this.parent);
-    await this.parent.update({ "system.equipped": false });
+    const data = { doc: this.parent };
+    await this.parent.hookCall("equipmentUnequip", data);
+    if (!data.cancel) await this.parent.update({ "system.equipped": false });
   }
 
   /**
@@ -293,8 +312,9 @@ export default class TeriockEquipmentData extends ConsumableDataMixin(
    * @returns {Promise<void>}
    */
   async unglue() {
-    await this.actor?.hookCall("equipmentUnglue", this.parent);
-    await this.parent.update({ "system.glued": false });
+    const data = { doc: this.parent };
+    await this.parent.hookCall("equipmentUnglue", data);
+    if (!data.cancel) await this.parent.update({ "system.glued": false });
   }
 
   /**
@@ -302,7 +322,8 @@ export default class TeriockEquipmentData extends ConsumableDataMixin(
    * @returns {Promise<void>} Promise that resolves when the equipment is unidentified.
    */
   async unidentify() {
-    await this.actor?.hookCall("equipmentUnidentify", this.parent);
-    await identifying._unidentify(this);
+    const data = { doc: this.parent };
+    await this.parent.hookCall("equipmentUnidentify", data);
+    if (!data.cancel) await identifying._unidentify(this);
   }
 }

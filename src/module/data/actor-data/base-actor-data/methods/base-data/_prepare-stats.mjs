@@ -49,12 +49,14 @@ export function _prepareHpMp(actorData) {
     }
   });
   actorData.parent.ranks.slice(0, diceLimit).forEach((rank) => {
-    if (!rank.disabled) {
+    if (rank.system.applyHp) {
       actorData.hp.base += rank.system.totalHp;
       hpDieBox += rank.system.renderedHitDice;
+      Object.assign(actorData.hpDice, rank.system.hpDice);
+    }
+    if (rank.system.applyMp) {
       actorData.mp.base += rank.system.totalMp;
       mpDieBox += rank.system.renderedManaDice;
-      Object.assign(actorData.hpDice, rank.system.hpDice);
       Object.assign(actorData.mpDice, rank.system.mpDice);
     }
   });

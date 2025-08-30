@@ -28,8 +28,8 @@ const { WorldCollection } = foundry.documents.abstract;
  * @extends {Actor}
  * @mixes CommonDocumentMixin
  * @mixes ParentDocumentMixin
- * @property {EmbeddedCollection<string, TeriockItem>} items
- * @property {EmbeddedCollection<string, TeriockEffect>} effects
+ * @property {Collection<string, TeriockItem>} items
+ * @property {Collection<string, TeriockEffect>} effects
  * @property {ParentItemTypes} itemTypes
  * @property {ParentItemKeys} itemKeys
  * @property {TeriockEffect[]} appliedEffects

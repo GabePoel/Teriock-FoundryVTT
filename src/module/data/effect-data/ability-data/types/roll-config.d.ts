@@ -29,6 +29,8 @@ export type AbilityUseData = {
     heightened: number;
     /** Prevent this ability from being heightened. */
     noHeighten: boolean;
+    /** If this is warded */
+    warded: boolean;
   };
   /** Formula used for this ability's dice roll. */
   formula: string;

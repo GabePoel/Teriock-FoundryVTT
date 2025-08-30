@@ -61,5 +61,7 @@ declare global {
 
     /** Valid pseudo-hooks */
     export type PseudoHook = keyof typeof unsortedPseudoHooks;
+
+    export type PayMode = "exact" | "greedy";
   }
 }

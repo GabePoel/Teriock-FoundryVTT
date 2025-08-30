@@ -39,16 +39,6 @@ export default class TeriockSpeciesData extends StatDataMixin(
     Object.assign(schema, {
       adult: new fields.NumberField({ initial: 20 }),
       appearance: new TextField({ label: "Appearance" }),
-      applyHp: new fields.BooleanField({
-        hint: "Add this species' HP to its parent actor.",
-        initial: true,
-        label: "Apply HP",
-      }),
-      applyMp: new fields.BooleanField({
-        hint: "Add this species' MP to its parent actor.",
-        initial: true,
-        label: "Apply MP",
-      }),
       applySize: new fields.BooleanField({
         label: "Apply Size",
         hint: "Apply this species' size to its parent actor.",

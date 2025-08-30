@@ -110,7 +110,7 @@ await Promise.all(
         if (properties.length >= 1) {
           for (const property of properties) {
             if (
-              !equipment.effectKeys?.property?.has(
+              !equipment.effectKeys.property.has(
                 game.teriock.api.utils.toCamelCase(property),
               )
             ) {

@@ -13,16 +13,20 @@ import TeriockRoll from "../../../../../documents/roll.mjs";
  */
 export async function _rollFeatSave(actorData, attribute, options = {}) {
   const actor = actorData.parent;
-  const adv = options.advantage ? "kh1" : options.disadvantage ? "kl1" : "";
-  const formula =
-    `2d20${adv || ""}`.replace(/^2d20$/, "1d20") + ` + @att.${attribute}.save`;
+  let rollFormula = "1d20";
+  if (options.advantage && !options.disadvantage) {
+    rollFormula = "2d20kh1";
+  } else if (options.disadvantage && !options.advantage) {
+    rollFormula = "2d20kl1";
+  }
+  rollFormula += ` + @att.${attribute}.save`;
   const context = {
     diceClass: "feat",
   };
   if (typeof options.threshold === "number") {
     context.threshold = options.threshold;
   }
-  const roll = new TeriockRoll(formula, actor.getRollData(), { context });
+  const roll = new TeriockRoll(rollFormula, actor.getRollData(), { context });
   await roll.toMessage({
     speaker: ChatMessage.getSpeaker({ actor: actor }),
     flavor:
@@ -49,9 +53,9 @@ export async function _rollResistance(actorData, options = {}) {
     message = options.message;
   }
   let rollFormula = "1d20";
-  if (options.advantage) {
+  if (options.advantage && !options.disadvantage) {
     rollFormula = "2d20kh1";
-  } else if (options.disadvantage) {
+  } else if (options.disadvantage && !options.advantage) {
     rollFormula = "2d20kl1";
   }
   rollFormula += " + @p";
@@ -105,17 +109,19 @@ export async function _rollImmunity(_actorData, options = {}) {
 export async function _rollTradecraft(actorData, tradecraft, options = {}) {
   const actor = actorData.parent;
   const { proficient, extra } = actorData.tradecrafts[tradecraft] || {};
-  let formula = options.advantage
-    ? "2d20kh1"
-    : options.disadvantage
-      ? "2d20kl1"
-      : "1d20";
-  if (extra) formula += ` + @tc.${tradecraft.slice(0, 3)}`;
+  let rollFormula = "1d20";
+  if (options.advantage && !options.disadvantage) {
+    rollFormula = "2d20kh1";
+  } else if (options.disadvantage && !options.advantage) {
+    rollFormula = "2d20kl1";
+  }
+  if (extra) rollFormula += ` + @tc.${tradecraft.slice(0, 3)}`;
+  if (proficient) rollFormula += " + @p";
   const context = {};
   if (typeof options.threshold === "number") {
     context.threshold = options.threshold;
   }
-  const roll = new TeriockRoll(formula, actor.getRollData(), { context });
+  const roll = new TeriockRoll(rollFormula, actor.getRollData(), { context });
   await roll.toMessage({
     speaker: ChatMessage.getSpeaker({ actor: actor }),
     flavor: `${tradecraft.charAt(0).toUpperCase() + tradecraft.slice(1)} Check`,

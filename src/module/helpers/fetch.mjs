@@ -69,6 +69,7 @@ export async function importAbility(document, name) {
   const abilities =
     /** @type {TeriockAbility[]} */
     await document.createEmbeddedDocuments("ActiveEffect", [ability]);
+  await document.forceUpdate();
   return abilities[0];
 }
 
@@ -110,6 +111,7 @@ export async function importProperty(document, name) {
   const properties =
     /** @type {TeriockProperty[]} */
     await document.createEmbeddedDocuments("ActiveEffect", [property]);
+  await document.forceUpdate();
   return properties[0];
 }
 
