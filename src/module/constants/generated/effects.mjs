@@ -1,15 +1,12 @@
-// This file was auto-generated on 2025-08-30 by scripts/update-options.mjs.
+// This file was auto-generated on 2025-08-31 by scripts/update-options.mjs.
 // Do not edit manually.
 
 export const effects = {
-    alchemical: "Alchemical",
     awakening: "Awakening",
     control: "Control",
     damaging: "Damaging",
     displacement: "Displacement",
-    divine: "Divine",
     duelModifying: "Duel modifying",
-    financial: "Financial",
     healing: "Healing",
     hexseal: "Hexseal",
     immunity: "Immunity",
@@ -17,7 +14,6 @@ export const effects = {
     knockout: "Knockout",
     longRange: "Long range",
     loud: "Loud",
-    magical: "Magical",
     mental: "Mental",
     movement: "Movement",
     poison: "Poison",
@@ -28,7 +24,6 @@ export const effects = {
     revitalization: "Revitalization",
     revival: "Revival",
     sensory: "Sensory",
-    spiritual: "Spiritual",
     stealing: "Stealing",
     summoning: "Summoning",
     temporal: "Temporal",

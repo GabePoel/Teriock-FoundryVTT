@@ -48,7 +48,7 @@ const loadManualOverrides = async (name) => {
   if (fs.existsSync(fullPath)) {
     try {
       const mod = await import(
-        `../src/module/helpers/constants/manual/${file}?t=${Date.now()}`
+        `../src/module/constants/manual/${file}?t=${Date.now()}`
       );
       const override = mod[toCamelCase(name)] || {};
       const remove = mod.remove || [];

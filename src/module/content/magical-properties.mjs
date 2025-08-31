@@ -1,4 +1,4 @@
-// This file was auto-generated on 2025-08-27 by scripts/fetch-content.mjs.
+// This file was auto-generated on 2025-08-31 by scripts/fetch-content.mjs.
 // Do not edit manually.
 
 export const magicalProperties = {
@@ -30,6 +30,15 @@ export const magicalProperties = {
     },
     content: "<p><span class=\"property-box\">A <b>mana storing</b> item has some latent energy held within it that creatures can use to power their own <a href=\"https://wiki.teriock.com/index.php/Category:Abilities\" title=\"Category:Abilities\" target=\"_blank\">abilities</a>. Mana storing items will always have a number N associated with them (1, by default, if no number is listed). This number refers to a \"mana die\" analogous to those that creatures have. It is always <span class=\"dice\" data-full-roll=\"1d4\" data-quick-roll=\"@1d4\"><a target=\"_blank\" rel=\"nofollow noreferrer noopener\" class=\"external text\" href=\"https://dice.run/#/d/1d4\">1d4</a></span> (3 MP), which means the item stores a maximum of N × 3 <a href=\"https://wiki.teriock.com/index.php/Core:MP\" class=\"mw-redirect\" title=\"Core:MP\" target=\"_blank\">MP</a>. At dawn, if <a href=\"https://wiki.teriock.com/index.php/Ability:Attune\" title=\"Ability:Attune\" target=\"_blank\">attuned</a> to the mana storing item, roll <span class=\"dice\" data-full-roll=\"d4\" data-quick-roll=\"@n\">N<a target=\"_blank\" rel=\"nofollow noreferrer noopener\" class=\"external text\" href=\"https://dice.run/#/d/d4\">d4</a></span>. The item regains up to this much spent <a href=\"https://wiki.teriock.com/index.php/Core:MP\" class=\"mw-redirect\" title=\"Core:MP\" target=\"_blank\">MP</a>. If dawn comes and nobody is <a href=\"https://wiki.teriock.com/index.php/Ability:Attune\" title=\"Ability:Attune\" target=\"_blank\">attuned</a> to a Mana Storing item, it releases all <a href=\"https://wiki.teriock.com/index.php/Core:MP\" class=\"mw-redirect\" title=\"Core:MP\" target=\"_blank\">MP</a> it had stored.</span>\n</p>"
   },
+  passivelyWarded: {
+    name: "Passively Warded",
+    id: "passivelyWarded",
+    img: "systems/teriock/src/icons/magicalProperties/passively-warded.webp",
+    system: {
+      description: "<p><span class=\"property-box\">All <a href=\"https://wiki.teriock.com/index.php/Category:Attack_abilities\" title=\"Category:Attack abilities\" target=\"_blank\">attacks</a> made with a <b>passively warded</b> item are <a href=\"https://wiki.teriock.com/index.php/Keyword:Warded\" title=\"Keyword:Warded\" target=\"_blank\">warded</a>.</span>\n</p>"
+    },
+    content: "<p><span class=\"property-box\">All <a href=\"https://wiki.teriock.com/index.php/Category:Attack_abilities\" title=\"Category:Attack abilities\" target=\"_blank\">attacks</a> made with a <b>passively warded</b> item are <a href=\"https://wiki.teriock.com/index.php/Keyword:Warded\" title=\"Keyword:Warded\" target=\"_blank\">warded</a>.</span>\n</p>"
+  },
   runic: {
     name: "Runic",
     id: "runic",
@@ -47,5 +56,14 @@ export const magicalProperties = {
       description: "<p><span class=\"property-box\"></span>A <b>sentient</b> item has some form of conscious thought, feelings, and emotions. It can perceive and sense its user and <a href=\"https://wiki.teriock.com/index.php/Category:Creatures\" title=\"Category:Creatures\" target=\"_blank\">creatures</a> that it hits, although it is not necessarily able to communicate with them. Sentient items are not necessarily intelligent, but they can be affected by <a href=\"https://wiki.teriock.com/index.php/Category:Mental_effects\" title=\"Category:Mental effects\" target=\"_blank\">mental effects</a> and can choose to not follow their user's commands. Some sentient items may have a personality, greater senses of their surroundings, and be able to act on their own.\n</p>"
     },
     content: "<p><span class=\"property-box\"></span>A <b>sentient</b> item has some form of conscious thought, feelings, and emotions. It can perceive and sense its user and <a href=\"https://wiki.teriock.com/index.php/Category:Creatures\" title=\"Category:Creatures\" target=\"_blank\">creatures</a> that it hits, although it is not necessarily able to communicate with them. Sentient items are not necessarily intelligent, but they can be affected by <a href=\"https://wiki.teriock.com/index.php/Category:Mental_effects\" title=\"Category:Mental effects\" target=\"_blank\">mental effects</a> and can choose to not follow their user's commands. Some sentient items may have a personality, greater senses of their surroundings, and be able to act on their own.\n</p>"
+  },
+  warded: {
+    name: "Warded",
+    id: "warded",
+    img: "systems/teriock/src/icons/magicalProperties/warded.webp",
+    system: {
+      description: "<p><span class=\"property-box\">The <i>next</i> <a href=\"https://wiki.teriock.com/index.php/Category:Attack_abilities\" title=\"Category:Attack abilities\" target=\"_blank\">attack</a> made with a <b>warded</b> item is <a href=\"https://wiki.teriock.com/index.php/Keyword:Warded\" title=\"Keyword:Warded\" target=\"_blank\">warded</a>.</span>\n</p>"
+    },
+    content: "<p><span class=\"property-box\">The <i>next</i> <a href=\"https://wiki.teriock.com/index.php/Category:Attack_abilities\" title=\"Category:Attack abilities\" target=\"_blank\">attack</a> made with a <b>warded</b> item is <a href=\"https://wiki.teriock.com/index.php/Keyword:Warded\" title=\"Keyword:Warded\" target=\"_blank\">warded</a>.</span>\n</p>"
   }
 };

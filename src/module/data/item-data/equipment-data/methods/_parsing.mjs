@@ -101,6 +101,7 @@ export async function _parse(equipmentData, rawHTML) {
   let newImg = oldImg;
   if (
     oldImg?.startsWith("systems/teriock/assets") ||
+    oldImg?.startsWith("systems/teriock/src/icons/documents") ||
     oldImg?.startsWith("systems/teriock/src/icons/equipment") ||
     oldImg?.startsWith("icons/svg")
   ) {

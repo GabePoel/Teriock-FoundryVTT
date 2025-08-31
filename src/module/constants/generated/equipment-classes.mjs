@@ -1,4 +1,4 @@
-// This file was auto-generated on 2025-08-30 by scripts/update-options.mjs.
+// This file was auto-generated on 2025-08-31 by scripts/update-options.mjs.
 // Do not edit manually.
 
 export const equipmentclasses = {
@@ -14,6 +14,5 @@ export const equipmentclasses = {
     shields: "Shields",
     specialtySwords: "Specialty swords",
     supplies: "Supplies",
-    swords: "Swords",
-    weaponClasses: "Weapon classes"
+    swords: "Swords"
 };

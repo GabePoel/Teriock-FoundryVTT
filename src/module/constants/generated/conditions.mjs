@@ -1,15 +1,13 @@
-// This file was auto-generated on 2025-08-30 by scripts/update-options.mjs.
+// This file was auto-generated on 2025-08-31 by scripts/update-options.mjs.
 // Do not edit manually.
 
 export const conditions = {
-    alive: "Alive",
     anosmatic: "Anosmatic",
     asleep: "Asleep",
     blind: "Blind",
     bound: "Bound",
     burned: "Burned",
     charmed: "Charmed",
-    conscious: "Conscious",
     criticallyWounded: "Critically Wounded",
     dead: "Dead",
     deaf: "Deaf",
@@ -46,6 +44,5 @@ export const conditions = {
     terrored: "Terrored",
     transformed: "Transformed",
     unconscious: "Unconscious",
-    up: "Up",
     wisping: "Wisping"
 };

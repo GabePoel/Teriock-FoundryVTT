@@ -1,4 +1,4 @@
-// This file was auto-generated on 2025-08-30 by scripts/update-options.mjs.
+// This file was auto-generated on 2025-08-31 by scripts/update-options.mjs.
 // Do not edit manually.
 
 export const properties = {
@@ -13,13 +13,11 @@ export const properties = {
     flaming: "Flaming",
     fragile: "Fragile",
     glowing: "Glowing",
-    glued: "Glued",
     loading: "Loading",
     masterCrafted: "Master Crafted",
     ranged: "Ranged",
     reach: "Reach",
     searchable: "Searchable",
-    shattered: "Shattered",
     small: "Small",
     snagging: "Snagging",
     special: "Special",
