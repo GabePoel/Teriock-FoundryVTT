@@ -5,7 +5,7 @@
   "author": "uxE8DDp7ujgsxtd2",
   "img": "icons/svg/dice-target.svg",
   "scope": "global",
-  "command": "const hp = actor.system.hp.max + actor.system.hp.temp;\nconst equipment = scope.args[0];\nif (equipment.name === \"Spirit Item\") await actor.takeKill(hp);",
+  "command": "const data = /** @type {Teriock.HookData.EquipmentActivity} */ scope.data;\nconst equipment = data.doc;\nif (equipment.name === \"Spirit Item\")\n  await actor.toggleStatusEffect(\"dead\", { active: true });",
   "folder": null,
   "sort": 0,
   "ownership": {
@@ -21,8 +21,8 @@
     "systemId": "teriock",
     "systemVersion": "0.1.0",
     "createdTime": 1754031968033,
-    "modifiedTime": 1754032602996,
-    "lastModifiedBy": "uxE8DDp7ujgsxtd2"
+    "modifiedTime": 1756588295219,
+    "lastModifiedBy": "Z8sCTHO0edFF1hYo"
   },
   "_key": "!macros!WJUQE8VvIMxe9Gm5"
 }

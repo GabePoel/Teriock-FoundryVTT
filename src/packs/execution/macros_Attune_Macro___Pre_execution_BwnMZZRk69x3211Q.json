@@ -5,7 +5,7 @@
   "author": "qf5JYGZKzM588nE6",
   "img": "icons/svg/dice-target.svg",
   "scope": "global",
-  "command": "scope.chatData.system.buttons = [];\nconst actor = scope.abilityData.actor;\nconst equipment = actor.equipment\n  .filter((e) => !e.system.isAttuned)\n  .sort((a, b) => a.name.localeCompare(b.name));\nconst selectedEquipment = await game.teriock.api.dialogs.selectDocumentsDialog(\n  equipment,\n  {\n    title: \"Select Equipment\",\n    hint: \"Select equipment to attune.\",\n    tooltip: true,\n  },\n);\nawait Promise.all(selectedEquipment.map((e) => e.system.attune()));",
+  "command": "const data = /** @type {Teriock.HookData.UseAbility} */ scope.data;\ndata.rollConfig.chatData.system.buttons = [];\nconst actor = data.rollConfig.abilityData.actor;\nconst equipment = actor.equipment\n  .filter((e) => !e.system.isAttuned)\n  .sort((a, b) => a.name.localeCompare(b.name));\nconst selectedEquipment = await game.teriock.api.dialogs.selectDocumentsDialog(\n  equipment,\n  {\n    title: \"Select Equipment\",\n    hint: \"Select equipment to attune.\",\n    tooltip: true,\n  },\n);\nawait Promise.all(selectedEquipment.map((e) => e.system.attune()));",
   "folder": null,
   "sort": 0,
   "ownership": {
@@ -21,8 +21,8 @@
     "systemId": "teriock",
     "systemVersion": "0.1.0",
     "createdTime": 1753599358179,
-    "modifiedTime": 1755479392524,
-    "lastModifiedBy": "qf5JYGZKzM588nE6"
+    "modifiedTime": 1756583219340,
+    "lastModifiedBy": "Z8sCTHO0edFF1hYo"
   },
   "_key": "!macros!BwnMZZRk69x3211Q"
 }

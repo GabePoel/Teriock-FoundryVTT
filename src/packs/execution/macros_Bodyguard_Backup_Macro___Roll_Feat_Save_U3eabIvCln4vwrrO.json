@@ -5,7 +5,7 @@
   "author": "uxE8DDp7ujgsxtd2",
   "img": "icons/svg/dice-target.svg",
   "scope": "global",
-  "command": "const args = scope.args;\nif ([\"mov\", \"str\"].includes(args[0])) {\n  args[1][\"advantage\"] = true;\n  const effect = actor.effects.getName(\"Bodyguard Backup Effect\");\n  await effect.delete();\n}",
+  "command": "const data = /** @type {Teriock.HookData.RollFeatSave} */ scope.data;\nif ([\"mov\", \"str\"].includes(data.attribute)) {\n  data.options.advantage = true;\n  const effect = actor.effects.getName(\"Bodyguard Backup Effect\");\n  await effect.delete();\n}",
   "folder": null,
   "sort": 0,
   "ownership": {
@@ -21,8 +21,8 @@
     "systemId": "teriock",
     "systemVersion": "0.1.0",
     "createdTime": 1754238846530,
-    "modifiedTime": 1754239737727,
-    "lastModifiedBy": "uxE8DDp7ujgsxtd2"
+    "modifiedTime": 1756583326039,
+    "lastModifiedBy": "Z8sCTHO0edFF1hYo"
   },
   "_key": "!macros!U3eabIvCln4vwrrO"
 }

@@ -5,7 +5,7 @@
   "author": "qf5JYGZKzM588nE6",
   "img": "icons/svg/dice-target.svg",
   "scope": "global",
-  "command": "const buttons = scope.chatData.system.buttons;\nscope.chatData.system.buttons = buttons.filter(\n  (button) => button.dataset.action === \"apply-effect\",\n);\nconst button = scope.chatData.system.buttons[0];\nconst effectObject = JSON.parse(button.dataset.normal);\nconst validAbilities = actor.abilities\n  .filter((a) => !a.isReference && a.system.standard)\n  .sort((a, b) => a.name.localeCompare(b.name));\nconst ability = await game.teriock.api.dialogs.selectDocumentDialog(\n  validAbilities,\n  {\n    title: \"Select Ability\",\n    hint: \"Select an ability to share.\",\n  },\n);\neffectObject.system.hierarchy.rootUuid = ability.system.hierarchy.rootUuid;\neffectObject.system.hierarchy.subIds = [ability.id];\nconst effectString = JSON.stringify(effectObject);\nscope.chatData.system.buttons[0].dataset.normal = effectString;\nscope.chatData.system.buttons[0].dataset.crit = effectString;\nscope.chatData.system.proficient = false;\nscope.chatData.system.fluent = false;",
+  "command": "const data = /** @type {Teriock.HookData.UseAbility} */ scope.data;\nconst buttons = data.rollConfig.chatData.system.buttons;\ndata.rollConfig.chatData.system.buttons = buttons.filter(\n  (button) => button.dataset.action === \"apply-effect\",\n);\nconst button = data.rollConfig.chatData.system.buttons[0];\nconst effectObject = JSON.parse(button.dataset.normal);\nconst validAbilities = actor.abilities\n  .filter((a) => !a.isReference && a.system.standard)\n  .sort((a, b) => a.name.localeCompare(b.name));\nconst ability = await game.teriock.api.dialogs.selectDocumentDialog(\n  validAbilities,\n  {\n    title: \"Select Ability\",\n    hint: \"Select an ability to share.\",\n  },\n);\neffectObject.system.hierarchy.rootUuid = ability.system.hierarchy.rootUuid;\neffectObject.system.hierarchy.subIds = [ability.id];\nconst effectString = JSON.stringify(effectObject);\ndata.rollConfig.chatData.system.buttons[0].dataset.normal = effectString;\ndata.rollConfig.chatData.system.buttons[0].dataset.crit = effectString;\ndata.rollConfig.chatData.system.proficient = false;\ndata.rollConfig.chatData.system.fluent = false;",
   "folder": null,
   "sort": 0,
   "ownership": {
@@ -21,8 +21,8 @@
     "systemId": "teriock",
     "systemVersion": "0.1.0",
     "createdTime": 1753651322708,
-    "modifiedTime": 1755479716741,
-    "lastModifiedBy": "qf5JYGZKzM588nE6"
+    "modifiedTime": 1756584327881,
+    "lastModifiedBy": "Z8sCTHO0edFF1hYo"
   },
   "_key": "!macros!xERvcMl0jyZHu960"
 }

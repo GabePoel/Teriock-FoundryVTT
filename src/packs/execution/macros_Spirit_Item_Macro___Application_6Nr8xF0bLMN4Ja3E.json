@@ -5,7 +5,7 @@
   "author": "uxE8DDp7ujgsxtd2",
   "img": "icons/svg/dice-target.svg",
   "scope": "global",
-  "command": "const spiritItem = actor?.itemTypes?.equipment?.find(\n  (e) => e.name === \"Spirit Item\",\n);\n\nif (spiritItem) {\n  const updateData = { \"system.disabled\": false };\n\n  if (spiritItem.system.weight > 0) {\n    await spiritItem.setFlag(\"teriock\", \"weight\", spiritItem.system.weight);\n  } else if (spiritItem.getFlag(\"teriock\", \"weight\")) {\n    updateData[\"system.weight\"] = spiritItem.getFlag(\"teriock\", \"weight\");\n  }\n\n  await spiritItem.update(updateData);\n  await spiritItem.system.equip();\n  await spiritItem.system.attune();\n}",
+  "command": "const spiritItem = actor.equipment.find((e) => e.name === \"Spirit Item\");\n\nif (spiritItem) {\n  const updateData = { \"system.disabled\": false };\n\n  if (spiritItem.system.weight > 0) {\n    await spiritItem.setFlag(\"teriock\", \"weight\", spiritItem.system.weight);\n  } else if (spiritItem.getFlag(\"teriock\", \"weight\")) {\n    updateData[\"system.weight\"] = spiritItem.getFlag(\"teriock\", \"weight\");\n  }\n\n  await spiritItem.update(updateData);\n  await spiritItem.system.repair();\n  await spiritItem.system.equip();\n  await spiritItem.system.attune();\n}",
   "folder": null,
   "sort": 0,
   "ownership": {
@@ -21,8 +21,8 @@
     "systemId": "teriock",
     "systemVersion": "0.1.0",
     "createdTime": 1754123672311,
-    "modifiedTime": 1754544835674,
-    "lastModifiedBy": "MMeF1yfOcMgtpZFS"
+    "modifiedTime": 1756588259448,
+    "lastModifiedBy": "Z8sCTHO0edFF1hYo"
   },
   "_key": "!macros!6Nr8xF0bLMN4Ja3E"
 }
