@@ -1,8 +1,65 @@
 import { characterOptions } from "../constants/character-options.mjs";
 import { convertUnits } from "../helpers/utils.mjs";
-import { BaseTeriockTokenDocument } from "./_base.mjs";
 
-export default class TeriockTokenDocument extends BaseTeriockTokenDocument {
+const { TokenDocument } = foundry.documents;
+
+// noinspection JSClosureCompilerSyntax
+/**
+ * The Teriock {@link TokenDocument} implementation.
+ * @extends {TokenDocument}
+ * @mixes ClientDocumentMixin
+ * @property {"TokenDocument"} documentName
+ * @property {TeriockActor} actor
+ * @property {Token} token
+ * @property {boolean} isOwner
+ */
+export default class TeriockTokenDocument extends TokenDocument {
+  /**
+   * @inheritDoc
+   */
+  _onRelatedUpdate(update = {}, operation = {}) {
+    this.derivedDetectionModes();
+    this.deriveVision();
+    this.deriveTint();
+    super._onRelatedUpdate(update, operation);
+    canvas.perception.initialize();
+  }
+
+  /** @inheritDoc */
+  _prepareDetectionModes() {
+    super._prepareDetectionModes();
+    const basicMode = this.detectionModes.find((m) => m.id === "basicSight");
+    if (basicMode) basicMode.enabled = false;
+    const enabledIds = [
+      "materialMaterial",
+      "etherealMaterial",
+      "etherealEthereal",
+    ];
+    const disabledIds = [
+      "materialEthereal",
+      "scentPerception",
+      "soundPerception",
+      "trueSight",
+      "seeInvisible",
+      "blindFighting",
+      "darkVision",
+    ];
+    this.detectionModes.push(
+      ...enabledIds
+        .filter((id) => !this.detectionModes.find((mode) => mode.id === id))
+        .map((id) => {
+          return { id: id, enabled: true, range: Infinity };
+        }),
+    );
+    this.detectionModes.push(
+      ...disabledIds
+        .filter((id) => !this.detectionModes.find((mode) => mode.id === id))
+        .map((id) => {
+          return { id: id, enabled: false, range: 0 };
+        }),
+    );
+  }
+
   /**
    * Do not emit light if Ethereal.
    */
@@ -94,52 +151,6 @@ export default class TeriockTokenDocument extends BaseTeriockTokenDocument {
         }
       }
     }
-  }
-
-  /**
-   * @inheritDoc
-   */
-  _onRelatedUpdate(update = {}, operation = {}) {
-    this.derivedDetectionModes();
-    this.deriveVision();
-    this.deriveTint();
-    super._onRelatedUpdate(update, operation);
-    canvas.perception.initialize();
-  }
-
-  /** @inheritDoc */
-  _prepareDetectionModes() {
-    super._prepareDetectionModes();
-    const basicMode = this.detectionModes.find((m) => m.id === "basicSight");
-    if (basicMode) basicMode.enabled = false;
-    const enabledIds = [
-      "materialMaterial",
-      "etherealMaterial",
-      "etherealEthereal",
-    ];
-    const disabledIds = [
-      "materialEthereal",
-      "scentPerception",
-      "soundPerception",
-      "trueSight",
-      "seeInvisible",
-      "blindFighting",
-      "darkVision",
-    ];
-    this.detectionModes.push(
-      ...enabledIds
-        .filter((id) => !this.detectionModes.find((mode) => mode.id === id))
-        .map((id) => {
-          return { id: id, enabled: true, range: Infinity };
-        }),
-    );
-    this.detectionModes.push(
-      ...disabledIds
-        .filter((id) => !this.detectionModes.find((mode) => mode.id === id))
-        .map((id) => {
-          return { id: id, enabled: false, range: 0 };
-        }),
-    );
   }
 
   /**

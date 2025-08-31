@@ -1,3 +1,10 @@
-import { BaseTeriockFolder } from "./_base.mjs";
+const { Folder } = foundry.documents;
 
-export default class TeriockFolder extends BaseTeriockFolder {}
+// noinspection JSClosureCompilerSyntax
+/**
+ * The Teriock {@link Folder} implementation.
+ * @mixes ClientDocumentMixin
+ * @extends {Folder}
+ * @property {"Folder"} documentName
+ */
+export default class TeriockFolder extends Folder {}

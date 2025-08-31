@@ -1,6 +1,13 @@
-import { BaseTeriockUser } from "./_base.mjs";
+const { User } = foundry.documents;
 
-export default class TeriockUser extends BaseTeriockUser {
+// noinspection JSClosureCompilerSyntax
+/**
+ * The Teriock {@link User} implementation.
+ * @extends {JournalEntry}
+ * @mixes ClientDocumentMixin
+ * @property {"User"} documentName
+ */
+export default class TeriockUser extends User {
   /**
    * Is this user currently active?
    * @returns {boolean}

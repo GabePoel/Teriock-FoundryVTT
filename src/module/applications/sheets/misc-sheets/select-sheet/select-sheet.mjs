@@ -1,6 +1,7 @@
 const { HandlebarsApplicationMixin, ApplicationV2 } = foundry.applications.api;
 const { SearchFilter } = foundry.applications.ux;
 
+// noinspection JSClosureCompilerSyntax
 /**
  * @extends {ApplicationV2}
  * @mixes HandlebarsApplicationMixin
@@ -18,6 +19,7 @@ export default class TeriockSelectSheet extends HandlebarsApplicationMixin(
     this.multi = multi;
     this.hint = hint;
     this.tooltip = tooltip;
+    // this.title = title;
 
     this._resolve = null;
     this._result = new Promise((resolve) => (this._resolve = resolve));
@@ -46,6 +48,7 @@ export default class TeriockSelectSheet extends HandlebarsApplicationMixin(
 
   static async _cancel(event) {
     event?.preventDefault();
+    // noinspection JSUnresolvedReference
     this._finish(this.multi ? [] : null);
     await this.close();
   }
@@ -68,6 +71,7 @@ export default class TeriockSelectSheet extends HandlebarsApplicationMixin(
     const byId = new Map(this.docs.map((d) => [d.uuid, d]));
     const selected = ids.map((id) => byId.get(id)).filter(Boolean);
 
+    // noinspection JSUnresolvedReference
     this._finish(this.multi ? selected : (selected[0] ?? null));
     await this.close();
   }
@@ -142,6 +146,7 @@ export default class TeriockSelectSheet extends HandlebarsApplicationMixin(
       multi: this.multi,
       hint: this.hint,
       tooltip: this.tooltip,
+      // title: this.title,
     });
     console.log(context);
     return context;

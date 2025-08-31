@@ -2,14 +2,37 @@ import { characterOptions } from "../constants/character-options.mjs";
 import { rankOptions } from "../constants/rank-options.mjs";
 import { copyItem } from "../helpers/fetch.mjs";
 import { pureUuid, toCamelCase } from "../helpers/utils.mjs";
-import { BaseTeriockActor } from "./_base.mjs";
+import { CommonDocumentMixin, ParentDocumentMixin } from "./mixins/_module.mjs";
 import TeriockRoll from "./roll.mjs";
 
+const { Actor } = foundry.documents;
+
+// noinspection JSClosureCompilerSyntax
 /**
+ * The Teriock {@link Actor} implementation.
+ * @extends {Actor}
+ * @mixes ClientDocumentMixin
+ * @mixes CommonDocumentMixin
+ * @mixes ParentDocumentMixin
+ * @property {"Actor"} documentName
+ * @property {() => Generator<TeriockEffect, void, void>} allApplicableEffects
+ * @property {Collection<Teriock.UUID<TeriockEffect>, TeriockEffect>} effects
+ * @property {Collection<Teriock.UUID<TeriockItem>, TeriockItem>} items
+ * @property {ParentItemKeys} itemKeys
+ * @property {ParentItemTypes} itemTypes
+ * @property {Set<Teriock.Parameters.Condition.Key>} statuses
+ * @property {Teriock.Documents.ActorType} type
+ * @property {Teriock.UUID<TeriockActor>} uuid
  * @property {TeriockBaseActorData} system
  * @property {TeriockBaseActorSheet} sheet
+ * @property {TeriockEffect[]} appliedEffects
+ * @property {TeriockEffect[]} temporaryEffects
+ * @property {boolean} isOwner
+ * @property {boolean} limited
  */
-export default class TeriockActor extends BaseTeriockActor {
+export default class TeriockActor extends ParentDocumentMixin(
+  CommonDocumentMixin(Actor),
+) {
   /**
    * Figure out the name for a given size.
    * @param {number} size

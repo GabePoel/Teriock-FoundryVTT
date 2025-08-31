@@ -1,5 +1,5 @@
 import { boostDialog } from "../../../applications/dialogs/_module.mjs";
-import { TeriockMessage, TeriockRoll } from "../../../documents/_module.mjs";
+import { TeriockChatMessage, TeriockRoll } from "../../../documents/_module.mjs";
 import { makeDamageTypeButtons } from "../../html.mjs";
 import ActionHandler from "../action-handler.mjs";
 
@@ -39,7 +39,7 @@ export class RollRollableTakeHandler extends ActionHandler {
         buttons: buttons,
       },
     };
-    await TeriockMessage.create(messageData);
+    await TeriockChatMessage.create(messageData);
   }
 
   /** @inheritDoc */

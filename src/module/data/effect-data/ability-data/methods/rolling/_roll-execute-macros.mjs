@@ -1,4 +1,4 @@
-import TeriockMessage from "../../../../../documents/chat-message.mjs";
+import TeriockChatMessage from "../../../../../documents/chat-message.mjs";
 import { pureUuid } from "../../../../../helpers/utils.mjs";
 
 /**
@@ -23,7 +23,7 @@ export async function _executeMacros(rollConfig, pseudoHook) {
         try {
           await macro.execute({
             actor: rollConfig.useData.actor,
-            speaker: TeriockMessage.getSpeaker({
+            speaker: TeriockChatMessage.getSpeaker({
               actor: rollConfig.useData.actor,
             }),
             args: [rollConfig],

@@ -1,7 +1,15 @@
 import { selectUser } from "../helpers/utils.mjs";
-import { BaseTeriockCombat } from "./_base.mjs";
 
-export default class TeriockCombat extends BaseTeriockCombat {
+const { Combat } = foundry.documents;
+
+// noinspection JSClosureCompilerSyntax
+/**
+ * The Teriock {@link Combat} implementation.
+ * @mixes ClientDocumentMixin
+ * @extends {Combat}
+ * @property {"Combat"} documentName
+ */
+export default class TeriockCombat extends Combat {
   /**
    * Check if the effect might expire and send a dialog to some {@link TeriockUser}.
    * @param {TeriockConsequence} effect - Effect to check expiration for.

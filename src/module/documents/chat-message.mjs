@@ -1,6 +1,13 @@
-import { BaseTeriockMessage } from "./_base.mjs";
+const { ChatMessage } = foundry.documents;
 
-export default class TeriockMessage extends BaseTeriockMessage {
+// noinspection JSClosureCompilerSyntax
+/**
+ * The Teriock {@link ChatMessage} implementation.
+ * @mixes ClientDocumentMixin
+ * @extends {ChatMessage}
+ * @property {"ChatMessage"} documentName
+ */
+export default class TeriockChatMessage extends ChatMessage {
   /** @inheritDoc */
   async renderHTML(options) {
     const html = await super.renderHTML(options);

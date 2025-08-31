@@ -45,6 +45,7 @@ foundry.helpers.Hooks.once("init", function () {
   CONFIG.specialStatusEffects["TRANSFORMED"] = "transformed";
   CONFIG.specialStatusEffects["DEFEATED"] = "down";
 
+  // noinspection JSValidateTypes
   CONFIG.Canvas.visionModes = {
     ...CONFIG.Canvas.visionModes,
     ...perception.visionModes,
@@ -55,6 +56,7 @@ foundry.helpers.Hooks.once("init", function () {
       delete CONFIG.Canvas.detectionModes[key];
     }
   }
+  // noinspection JSValidateTypes
   CONFIG.Canvas.detectionModes = {
     ...CONFIG.Canvas.detectionModes,
     ...perception.detectionModes,
@@ -66,9 +68,10 @@ foundry.helpers.Hooks.once("init", function () {
   // Register custom core documents
   CONFIG.ActiveEffect.documentClass = documents.TeriockEffect;
   CONFIG.Actor.documentClass = documents.TeriockActor;
-  CONFIG.ChatMessage.documentClass = documents.TeriockMessage;
+  CONFIG.ChatMessage.documentClass = documents.TeriockChatMessage;
   CONFIG.Combat.documentClass = documents.TeriockCombat;
   CONFIG.Item.documentClass = documents.TeriockItem;
+  CONFIG.JournalEntry.documentClass = documents.TeriockJournalEntry;
   CONFIG.Macro.documentClass = documents.TeriockMacro;
   CONFIG.Scene.documentClass = documents.TeriockScene;
   CONFIG.Token.documentClass = documents.TeriockTokenDocument;
@@ -224,7 +227,7 @@ foundry.helpers.Hooks.once("init", function () {
   });
 
   const packs =
-    /** @type {Collection<string,TeriockCompendiumCollection>} */ game.packs;
+    /** @type {Collection<string,CompendiumCollection>} */ game.packs;
 
   game.teriock = {
     Actor: documents.TeriockActor,
@@ -232,11 +235,12 @@ foundry.helpers.Hooks.once("init", function () {
     Effect: documents.TeriockEffect,
     Item: documents.TeriockItem,
     Macro: documents.TeriockMacro,
-    Message: documents.TeriockMessage,
+    ChatMessage: documents.TeriockChatMessage,
     Roll: documents.TeriockRoll,
     Scene: documents.TeriockScene,
     Token: documents.TeriockTokenDocument,
     User: documents.TeriockUser,
+    JournalEntry: documents.TeriockJournalEntry,
     api: {
       create: {
         ability: helpers.createEffects.createAbility,

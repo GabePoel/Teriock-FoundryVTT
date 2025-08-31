@@ -9,15 +9,12 @@ declare global {
 
   const TeriockActor: typeof import("./documents/actor.mjs").default;
   const TeriockChatMessage: typeof import("./documents/chat-message.mjs").default;
-  const TeriockCompendiumCollection: typeof import("./documents/collections/compendium-collection.mjs").default;
-  const TeriockCompendiumFolderCollection: typeof import("./documents/collections/compendium-folder-collection.mjs").default;
   const TeriockEffect: typeof import("./documents/effect.mjs").default;
   const TeriockItem: typeof import("./documents/item.mjs").default;
   const TeriockMacro: typeof import("./documents/macro.mjs").default;
   const TeriockScene: typeof import("./documents/scene.mjs").default;
   const TeriockTokenDocument: typeof import("./documents/token-document.mjs").default;
   const TeriockUser: typeof import("./documents/user.mjs").default;
-  const TeriockWorldCollection: typeof import("./documents/collections/world-collection.mjs").default;
 
   // Virtual document classes
   // ========================
@@ -49,12 +46,13 @@ declare global {
   // Compendium collections
   // ----------------------
 
-  const TeriockCharacterCompendium: typeof import("./documents/collections/_documents.mjs").TeriockCharacterCompendium;
-  const TeriockEquipmentCompendium: typeof import("./documents/collections/_documents.mjs").TeriockEquipmentCompendium;
-  const TeriockPowerCompendium: typeof import("./documents/collections/_documents.mjs").TeriockPowerCompendium;
-  const TeriockWrapperCompendium: typeof import("./documents/collections/_documents.mjs").TeriockWrapperCompendium;
-  const TeriockRankCompendium: typeof import("./documents/collections/_documents.mjs").TeriockRankCompendium;
-  const TeriockMacroCompendium: typeof import("./documents/collections/_documents.mjs").TeriockMacroCompendium;
+  const TeriockCompendiumCollection: typeof import("./documents/_collections.mjs").TeriockCompendiumCollection;
+  const TeriockCharacterCompendium: typeof import("./documents/_collections.mjs").TeriockCharacterCompendium;
+  const TeriockEquipmentCompendium: typeof import("./documents/_collections.mjs").TeriockEquipmentCompendium;
+  const TeriockPowerCompendium: typeof import("./documents/_collections.mjs").TeriockPowerCompendium;
+  const TeriockWrapperCompendium: typeof import("./documents/_collections.mjs").TeriockWrapperCompendium;
+  const TeriockRankCompendium: typeof import("./documents/_collections.mjs").TeriockRankCompendium;
+  const TeriockMacroCompendium: typeof import("./documents/_collections.mjs").TeriockMacroCompendium;
 
   // Data Models
   // ===========
@@ -132,6 +130,8 @@ declare global {
     type UUID<T = unknown> = string & {
       [__brand]: T;
     };
+
+    // noinspection JSClassNamingConvention
     /** FoundryVTT ID */
     type ID<T = unknown> = string & {
       [__brand]: T;

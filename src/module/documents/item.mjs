@@ -1,14 +1,35 @@
 import { createAbility } from "../helpers/create-effects.mjs";
 import { fetchCategoryMembers } from "../helpers/wiki/_module.mjs";
-import { BaseTeriockItem } from "./_base.mjs";
+import {
+  ChildDocumentMixin,
+  CommonDocumentMixin,
+  ParentDocumentMixin,
+} from "./mixins/_module.mjs";
 
 const { api } = foundry.applications;
+const { Item } = foundry.documents;
 
+// noinspection JSClosureCompilerSyntax
 /**
+ * The Teriock {@link Item} implementation.
+ * @extends {Item}
+ * @mixes ChildDocumentMixin
+ * @mixes ClientDocumentMixin
+ * @mixes CommonDocumentMixin
+ * @mixes ParentDocumentMixin
+ * @property {"Item"} documentName
+ * @property {EmbeddedCollection<string, TeriockEffect>} effects
+ * @property {Readonly<TeriockEffect[]>} transferredEffects
+ * @property {Teriock.Documents.ItemType} type
+ * @property {Teriock.UUID<TeriockItem>} uuid
  * @property {TeriockBaseItemData} system
  * @property {TeriockBaseItemSheet} sheet
+ * @property {boolean} isOwner
+ * @property {boolean} limited
  */
-export default class TeriockItem extends BaseTeriockItem {
+export default class TeriockItem extends ParentDocumentMixin(
+  ChildDocumentMixin(CommonDocumentMixin(Item)),
+) {
   /**
    * @inheritDoc
    * @returns {TeriockActor|null}

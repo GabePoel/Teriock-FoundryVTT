@@ -1,3 +1,10 @@
-import { BaseTeriockScene } from "./_base.mjs";
+const { Scene } = foundry.documents;
 
-export default class TeriockScene extends BaseTeriockScene {}
+// noinspection JSClosureCompilerSyntax
+/**
+ * The Teriock {@link Scene} implementation.
+ * @mixes ClientDocumentMixin
+ * @extends {Scene}
+ * @property {"Scene"} documentName
+ */
+export default class TeriockScene extends Scene {}

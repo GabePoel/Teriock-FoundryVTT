@@ -1,14 +1,27 @@
 import { secondsToReadable } from "../helpers/utils.mjs";
-import { BaseTeriockEffect } from "./_base.mjs";
+import { ChildDocumentMixin, CommonDocumentMixin } from "./mixins/_module.mjs";
 
+const { ActiveEffect } = foundry.documents;
+
+// noinspection JSClosureCompilerSyntax
 /**
  * The Teriock {@link ActiveEffect} implementation.
- *
+ * @extends {ActiveEffect}
+ * @mixes ClientDocumentMixin
+ * @mixes ChildDocumentMixin
+ * @mixes CommonDocumentMixin
+ * @property {"ActiveEffect"} documentName
+ * @property {Teriock.Documents.EffectType} type
+ * @property {Teriock.UUID<TeriockEffect>} uuid
+ * @property {TeriockActor|TeriockItem} parent
  * @property {TeriockBaseEffectData} system
  * @property {TeriockBaseEffectSheet} sheet
- * @property {TeriockActor|TeriockItem} parent
+ * @property {boolean} isOwner
+ * @property {boolean} limited
  */
-export default class TeriockEffect extends BaseTeriockEffect {
+export default class TeriockEffect extends ChildDocumentMixin(
+  CommonDocumentMixin(ActiveEffect),
+) {
   /**
    * Change the IDs for many client effects consistently.
    * @param {TeriockEffect[]} effects - Client documents.

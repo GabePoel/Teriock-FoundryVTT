@@ -1,6 +1,14 @@
-import { BaseTeriockMacro } from "./_base.mjs";
+const { Macro } = foundry.documents;
 
-export default class TeriockMacro extends BaseTeriockMacro {
+// noinspection JSClosureCompilerSyntax
+/**
+ * The Teriock {@link Macro} implementation.
+ * @extends {Macro}
+ * @mixes ClientDocumentMixin
+ * @property {"Macro"} documentName
+ * @property {boolean} isOwner
+ */
+export default class TeriockMacro extends Macro {
   /**
    * @inheritDoc
    * @param {Teriock.RollOptions.MacroScope} scope

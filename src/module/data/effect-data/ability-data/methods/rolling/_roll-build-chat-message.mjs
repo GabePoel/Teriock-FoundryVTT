@@ -1,4 +1,4 @@
-import TeriockMessage from "../../../../../documents/chat-message.mjs";
+import TeriockChatMessage from "../../../../../documents/chat-message.mjs";
 import { elderSorceryMask } from "../../../../../helpers/html.mjs";
 
 /**
@@ -14,10 +14,10 @@ export async function _buildChatMessage(rollConfig) {
   element.innerHTML = content;
   if (rollConfig.useData.formula)
     rollConfig.chatData.system.extraContent = element.outerHTML;
-  rollConfig.chatData.speaker = TeriockMessage.getSpeaker({
+  rollConfig.chatData.speaker = TeriockChatMessage.getSpeaker({
     actor: rollConfig.useData.actor,
   });
-  TeriockMessage.applyRollMode(
+  TeriockChatMessage.applyRollMode(
     rollConfig.chatData,
     game.settings.get("core", "rollMode"),
   );
@@ -28,5 +28,5 @@ export async function _buildChatMessage(rollConfig) {
     rollConfig.abilityData.parent,
   )?.outerHTML;
   rollConfig.chatData.system.source = rollConfig.abilityData.parent.uuid;
-  await TeriockMessage.create(rollConfig.chatData);
+  await TeriockChatMessage.create(rollConfig.chatData);
 }

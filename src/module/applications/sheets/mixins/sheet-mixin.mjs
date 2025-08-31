@@ -462,9 +462,9 @@ export default (Base) => {
       for (const [selector, path] of Object.entries(map)) {
         const elements = container.querySelectorAll(selector);
         elements.forEach((el) => {
-          el.addEventListener("click", (e) => {
+          el.addEventListener("click", async (e) => {
             e.preventDefault();
-            this.document.update({ [path]: "Insert text here." });
+            await this.document.update({ [path]: "Insert text here." });
           });
         });
       }
@@ -595,9 +595,11 @@ export default (Base) => {
         this.document.documentName === "ActiveEffect"
           ? this.document.parent
           : this.document;
-      const newEffects = await target.createEmbeddedDocuments("ActiveEffect", [
-        effect,
-      ]);
+      const newEffects =
+        /** @type {TeriockEffect[]} */ await target.createEmbeddedDocuments(
+          "ActiveEffect",
+          [effect],
+        );
       const newEffect = newEffects[0];
       if (this.document.documentName === "ActiveEffect") {
         await this.document.addSub(newEffect);
@@ -642,14 +644,15 @@ export default (Base) => {
           await source.delete();
         }
       }
-      const newItems = await this.document.createEmbeddedDocuments(
-        "Item",
-        [item],
-        {
-          keepId: true,
-          keepEmbeddedIds: true,
-        },
-      );
+      const newItems =
+        /** @type {TeriockItem[]} */ await this.document.createEmbeddedDocuments(
+          "Item",
+          [item],
+          {
+            keepId: true,
+            keepEmbeddedIds: true,
+          },
+        );
       return newItems[0];
     }
 
