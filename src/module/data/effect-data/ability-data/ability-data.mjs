@@ -102,6 +102,9 @@ export default class TeriockAbilityData extends ConsumableDataMixin(
     if (this.improvement && this.improvement.length > 0) {
       additions.push("Improved");
     }
+    if (this.gifted.enabled) {
+      additions.push("Gifted");
+    }
     let nameAddition = "";
     if (additions.length > 0) {
       nameAddition = ` (${additions.join(", ")})`;

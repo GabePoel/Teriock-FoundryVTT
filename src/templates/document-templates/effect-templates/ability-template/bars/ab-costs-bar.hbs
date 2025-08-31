@@ -44,6 +44,27 @@
         </div>
       </div>
     {{/if}}
+    {{#if system.gifted.enabled}}
+      <div class="ab-box-container">
+        <div class="ab-box">
+          <div class="ab-box-icon">
+            <i class="fa-light fa-plus"></i>
+          </div>
+          <div class="ab-box-content">
+            {{formInput
+              systemFields.gifted.fields.amount
+              value=system.gifted.amount
+              disabled=(not editable)
+              classes="ability-bar-input gifted-amount-input"
+              dataset=(dataset tooltip="Gifted Mana Cost")
+            }}
+          </div>
+          <div class="ab-box-label">
+            MP
+          </div>
+        </div>
+      </div>
+    {{/if}}
     {{#if (not (eq system.costs.hp.type "none"))}}
       <div class="ab-box-container">
         <div class="ab-box {{#if editable}}hit-cost-box{{/if}}" data-tooltip="Hit Cost">

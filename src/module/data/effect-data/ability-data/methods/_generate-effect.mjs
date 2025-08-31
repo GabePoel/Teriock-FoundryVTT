@@ -121,51 +121,11 @@ export async function _generateEffect(rollConfig, crit = false) {
 
   description = tempDiv.innerHTML;
 
-  const condition = {
-    value: null,
-    present: false,
-  };
-  let dawn = false;
-  let movement = false;
-  let sustained = false;
-  if (
-    abilityData.duration.description.toLowerCase().includes("while dueling")
-  ) {
-    condition.value = "dueling";
-    condition.present = false;
-  } else if (
-    abilityData.duration.description.toLowerCase().includes("while up")
-  ) {
-    condition.value = "down";
-    condition.present = true;
-  } else if (
-    abilityData.duration.description.toLowerCase().includes("while down")
-  ) {
-    condition.value = "down";
-    condition.present = false;
-  } else if (
-    abilityData.duration.description.toLowerCase().includes("while alive")
-  ) {
-    condition.value = "dead";
-    condition.present = true;
-  } else if (
-    abilityData.duration.description.toLowerCase().includes("while stationary")
-  ) {
-    movement = true;
-  } else if (
-    abilityData.duration.description.toLowerCase().includes("until dawn")
-  ) {
-    dawn = true;
-  }
-  if (abilityData.sustained) {
-    sustained = true;
-  }
-
   /** @type {Partial<TeriockConsequenceData>} */
   const effectData = {
     name: `${abilityData.parent?.name} Effect${crit ? " (Crit)" : ""}`,
     type: "consequence",
-    img: abilityData.parent?.img,
+    img: abilityData.parent.img,
     changes: changes,
     statuses: Array.from(statuses),
     // description: description,
@@ -175,10 +135,10 @@ export async function _generateEffect(rollConfig, crit = false) {
       sourceDescription: description,
       expirations: {
         combat: combatExpirations,
-        condition: condition,
-        movement: movement,
-        dawn: dawn,
-        sustained: sustained,
+        conditions: abilityData.duration.conditions,
+        movement: abilityData.duration.stationary,
+        dawn: abilityData.duration.unit === "untilDawn",
+        sustained: abilityData.sustained,
         description: abilityData.endCondition,
       },
       hierarchy: {

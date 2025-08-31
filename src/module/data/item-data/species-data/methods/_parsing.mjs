@@ -130,6 +130,6 @@ export async function _parse(speciesData, rawHTML) {
       sizeStepMpText.split("every ")[1].split(" additional")[0],
     );
   } else parameters.sizeStepMp = null;
-  await processSubAbilities(subs, speciesData);
+  await processSubAbilities(subs, speciesData.parent);
   return { system: parameters };
 }

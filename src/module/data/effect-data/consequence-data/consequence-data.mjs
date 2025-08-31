@@ -27,18 +27,21 @@ export default class TeriockConsequenceData extends TeriockBaseEffectData {
     return foundry.utils.mergeObject(super.defineSchema(), {
       source: new fields.StringField({ initial: "", nullable: true }),
       expirations: new fields.SchemaField({
-        condition: new fields.SchemaField({
-          value: new fields.StringField({
-            label: "Condition Expiration",
-            nullable: true,
-            initial: null,
-            hint: "If specified, effect expires if condition is/isn't present.",
-          }),
-          present: new fields.BooleanField({
-            initial: false,
-            label: "Condition Present",
-            hint: "If true, effect expires if condition is present. If false, effect expires if condition is not present.",
-          }),
+        conditions: new fields.SchemaField({
+          present: new fields.SetField(
+            new fields.StringField({ choices: CONFIG.TERIOCK.conditions }),
+            {
+              label: "Present Conditions",
+              hint: "What conditions must be present in order for this ability to be active?",
+            },
+          ),
+          absent: new fields.SetField(
+            new fields.StringField({ choices: CONFIG.TERIOCK.conditions }),
+            {
+              label: "Absent Conditions",
+              hint: "What conditions must be absent in order for this ability to be active?",
+            },
+          ),
         }),
         movement: new fields.BooleanField({
           initial: false,
@@ -89,7 +92,11 @@ export default class TeriockConsequenceData extends TeriockBaseEffectData {
    * @returns {boolean} True if the effect expires based on a condition, false otherwise.
    */
   get conditionExpiration() {
-    return !!this.expirations.condition.value;
+    return (
+      this.expirations.conditions.present.size +
+        this.expirations.conditions.absent.size >
+      0
+    );
   }
 
   /**
@@ -128,11 +135,14 @@ export default class TeriockConsequenceData extends TeriockBaseEffectData {
   /** @inheritDoc */
   get shouldExpire() {
     let should = super.shouldExpire;
-    if (this.conditionExpiration) {
-      const condition = this.expirations.condition.value;
-      const present = this.expirations.condition.present;
-      const hasCondition = this.actor?.statuses.has(condition);
-      should = should || (present ? hasCondition : !hasCondition);
+    if (this.conditionExpiration && this.actor) {
+      const conditions = this.actor.statuses;
+      for (const condition of this.expirations.conditions.present) {
+        should = should || !conditions.has(condition);
+      }
+      for (const condition of this.expirations.conditions.absent) {
+        should = should || conditions.has(condition);
+      }
     }
     if (this.sustainedExpiration) {
       const source = fromUuidSync(this.source);

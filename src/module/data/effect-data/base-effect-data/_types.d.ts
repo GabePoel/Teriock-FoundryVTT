@@ -1,10 +1,10 @@
 import type { TeriockEffect } from "../../../documents/_module.mjs";
 import type { HierarchyField } from "../shared/shared-fields";
-import type { ChildDataModel } from "../../shared/_module.mjs";
+import { ChildTypeModel } from "../../models/_module.mjs";
 
 declare module "./base-effect-data.mjs" {
   // @ts-ignore
-  export default interface TeriockBaseEffectData extends ChildDataModel {
+  export default interface TeriockBaseEffectData extends ChildTypeModel {
     /** If this effect should be deleted instead of disabled when it expires */
     deleteOnExpire: boolean;
     /** Update counter - used to force an update when adding/removing effects */

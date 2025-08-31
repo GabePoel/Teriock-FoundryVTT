@@ -4,22 +4,24 @@ import { createAbility } from "../../../helpers/create-effects.mjs";
  * Processes sub-abilities from the document.
  * Creates sub-abilities and applies limitations or improvements as needed.
  * @param {Array} subs - Array of subability container elements.
- * @param {TeriockBaseEffectData} effectData - The parent ability data.
+ * @param {TeriockItem | TeriockEffect} doc - The parent document.
  * @returns {Promise<void>} Promise that resolves when all sub-abilities are processed.
  * @private
  */
-export async function processSubAbilities(subs, effectData) {
+export async function processSubAbilities(subs, doc) {
   for (const el of subs) {
+    el.querySelectorAll(".expandable-sub-main").forEach((e) => e.remove());
     let subNameEl = el.querySelector(".ability-sub-name");
     if (el.className.includes("expandable-container")) subNameEl = el;
     if (subNameEl.dataset.namespace === "Condition") return;
     const subName = subNameEl.getAttribute("data-name");
-    const subAbility = await createAbility(effectData.parent, subName, {
+    const subAbility = await createAbility(doc, subName, {
       notify: false,
     });
 
     const limitation = el.querySelector(".limited-modifier");
     const improvement = el.querySelector(".improvement-modifier");
+    const gifted = el.querySelector(".gifted-modifier");
     let limitationText = "";
     let improvementText = "";
 
@@ -44,11 +46,16 @@ export async function processSubAbilities(subs, effectData) {
       }
     }
 
-    if (limitationText || improvementText) {
-      await subAbility.update({
+    if (limitationText || improvementText || gifted) {
+      const updateData = {
         "system.improvement": improvementText,
         "system.limitation": limitationText,
-      });
+      };
+      if (gifted) {
+        updateData["system.gifted.enabled"] = true;
+        updateData["system.gifted.amount"] = 1;
+      }
+      await subAbility.update(updateData);
     }
   }
   // }

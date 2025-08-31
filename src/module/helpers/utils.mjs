@@ -112,8 +112,8 @@ export function pureUuid(safeUuid) {
 }
 
 /**
- * Re-pull each provided {@link ChildDocument} from the wiki.
- * @param {TeriockEffect[]|TeriockItem[]} docs - An array of {@link ChildDocument}s to pull.
+ * Re-pull each provided {@link ChildDocumentMixin} from the wiki.
+ * @param {TeriockEffect[]|TeriockItem[]} docs - An array of {@link ChildDocumentMixin}s to pull.
  * @param {object} [options]
  * @param {boolean} [options.skipSubs] - Skip any {@link TeriockEffect} subs.
  * @returns {Promise<void>}
@@ -431,6 +431,8 @@ export function parseDurationString(durationString) {
     parsedAbsentConditions.add("dead");
   } else if (parsingString === "instant") {
     parsedUnit = "instant";
+  } else if (parsingString === "until dawn") {
+    parsedUnit = "untilDawn";
   } else {
     // General condition parsing
     for (const condition of Object.keys(conditions)) {
@@ -441,6 +443,7 @@ export function parseDurationString(durationString) {
       }
     }
   }
+  const parsedStationary = parsingString.includes("stationary");
   // Use word boundaries for unit matching to avoid partial matches
   for (const unit of Object.keys(abilityOptions.duration.unit)) {
     const regex = new RegExp(`\\b${unit}s?\\b`);
@@ -458,6 +461,7 @@ export function parseDurationString(durationString) {
       absent: parsedAbsentConditions,
       present: parsedPresentConditions,
     },
+    stationary: parsedStationary,
   };
 }
 

@@ -250,6 +250,7 @@ foundry.helpers.Hooks.once("init", function () {
       fetch: helpers.fetch,
       wiki: helpers.wiki,
     },
+    data: data,
     packs: {
       rules: () =>
         /** @type {TeriockJournalCompendium} */
@@ -266,6 +267,9 @@ foundry.helpers.Hooks.once("init", function () {
       essentials: () =>
         /** @type {TeriockPowerCompendium} */
         packs.get("teriock.essentials"),
+      powers: () =>
+        /** @type {TeriockPowerCompendium} */
+        packs.get("teriock.powers"),
       abilities: () =>
         /** @type {TeriockWrapperCompendium} */
         packs.get("teriock.abilities"),

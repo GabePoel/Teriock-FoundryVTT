@@ -132,6 +132,10 @@ export function _defineGeneral(schema) {
           },
         ),
       }),
+      stationary: new fields.BooleanField({
+        label: "Stationary",
+        hint: "Do you need to be stationary for this ability to be active?",
+      }),
       description: new fields.StringField({
         label: "Description",
         hint: "Custom description. Leave blank in order for the duration to be automatically generated.",
@@ -312,6 +316,10 @@ export function _defineGeneral(schema) {
     secret: new fields.BooleanField({
       initial: false,
       label: "Secret",
+    }),
+    gifted: new fields.SchemaField({
+      enabled: new fields.BooleanField({ label: "Gifted" }),
+      amount: new fields.NumberField({ initial: 1, min: 1, integer: true }),
     }),
   };
 }

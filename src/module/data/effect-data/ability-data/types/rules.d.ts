@@ -63,4 +63,8 @@ export interface TeriockAbilityRulesSchema {
   prepared: boolean;
   warded: boolean;
   secret: boolean;
+  gifted: {
+    enabled: boolean;
+    amount: number;
+  };
 }

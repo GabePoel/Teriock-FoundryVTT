@@ -12,6 +12,18 @@ export function _prepareDerivedData(abilityData) {
     abilityData.costs.verbal = true;
   }
 
+  // Gifted modifications
+  if (abilityData.gifted.enabled) {
+    abilityData.form = "gifted";
+    if (abilityData.maneuver === "passive") {
+      abilityData.maneuver = "active";
+      abilityData.executionTime = "a1";
+      abilityData.duration.unit = "minute";
+      abilityData.duration.quantity = 1;
+      abilityData.duration.description = "1 Minute";
+    }
+  }
+
   // Compute changes
   let applyChanges = abilityData.maneuver === "passive";
   for (const status of abilityData.duration.conditions.present) {

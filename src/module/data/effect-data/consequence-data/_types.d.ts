@@ -16,9 +16,9 @@ declare module "./consequence-data.mjs" {
     extends TeriockBaseEffectData {
     source: Teriock.UUID<TeriockEffect>;
     expirations: {
-      condition: {
-        value: Teriock.Parameters.Condition.Key | null;
-        present: boolean;
+      conditions: {
+        present: Set<Teriock.Parameters.Condition.Key>;
+        absent: Set<Teriock.Parameters.Condition.Key>;
       };
       /** Expirations based on combat timing. */
       combat: {

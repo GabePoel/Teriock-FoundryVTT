@@ -18,9 +18,12 @@ export async function _handleDialogs(rollConfig) {
 
   // Variable MP cost dialog
   if (abilityData.costs.mp?.type === "variable") {
-    const mpDescription = await ux.TextEditor.enrichHTML(
+    let mpDescription = await ux.TextEditor.enrichHTML(
       abilityData.costs.mp.value.variable,
     );
+    if (abilityData.gifted.enabled) {
+      mpDescription += `<div><p>This ability is gifted and this cost will automatically be increased by ${abilityData.gifted.amount}.</p></div>`;
+    }
     const maxMp = actor.system.mp.value - actor.system.mp.min;
     dialogs.push(
       createDialogFieldset("Variable Mana Cost", mpDescription, "mp", maxMp),

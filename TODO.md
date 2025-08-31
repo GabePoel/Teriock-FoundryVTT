@@ -2,7 +2,6 @@
 
 ## High Priority
 
-- [ ] _Better_ transformation system.
 - [x] Generalized hook calls for things other than just actors
 - [x] Transformation system
 - [x] Asynchronous subs
@@ -20,9 +19,9 @@
 
 ## Medium Priority
 
-- [ ] Gifted abilities
 - [ ] GUI to change abilities added/removed by species per size change
-- [ ] Refined duration integration
+- [x] Gifted abilities
+- [x] Refined duration integration
 - [x] Italic attribute and feat save improvement text in ability previews
 - [x] Custom enrichers
 
@@ -31,6 +30,8 @@
 - [ ] Better down/dead/critically wounded displays
 - [ ] Better resistance/immunity tooltips
 - [ ] Condition toggling from character sheet
+- [ ] _Better_ transformation system.
+- [x] Familiar parsing
 - [x] Remove buggy display in ability `pseudoHook` macro list
 - [x] Light mode conditions
 - [x] Species size integration

@@ -1,5 +1,5 @@
 import { abilityOptions } from "../../../../constants/ability-options.mjs";
-import { safeUuid, toKebabCase } from "../../../../helpers/utils.mjs";
+import { parseDurationString, safeUuid, toKebabCase } from "../../../../helpers/utils.mjs";
 import { extractChangesFromHTML } from "../../../shared/parsing/extract-changes.mjs";
 import { getBarText, getText } from "../../../shared/parsing/get-text.mjs";
 import { processSubAbilities } from "../../../shared/parsing/process-subs.mjs";
@@ -149,7 +149,7 @@ export async function _parse(abilityData, rawHTML) {
   parameters.applies.macros = extractMacroFromHTML(doc);
 
   // Process sub-abilities
-  await processSubAbilities(subs, abilityData);
+  await processSubAbilities(subs, abilityData.parent);
 
   // Check if the parent name contains "warded"
   if (abilityData.parent.name.toLowerCase().includes("warded")) {
@@ -244,9 +244,8 @@ function processTags(parameters, tagTree, doc) {
   }
 
   // Set basic parameters
-  parameters.duration = {
-    description: getBarText(doc, "duration", true),
-  };
+  const durationDescription = getBarText(doc, "duration", true);
+  parameters.duration = parseDurationString(durationDescription);
   parameters.range = getBarText(doc, "range", true);
   if (parameters.delivery.base === "self") parameters.range = "Self.";
 

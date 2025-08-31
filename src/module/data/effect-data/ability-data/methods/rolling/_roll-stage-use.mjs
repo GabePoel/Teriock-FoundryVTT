@@ -45,6 +45,10 @@ export async function _stageUse(rollConfig) {
 
   // Handle dialogs for variable costs and heightened
   await _handleDialogs(rollConfig);
+  if (rollConfig.abilityData.gifted.enabled) {
+    rollConfig.useData.costs.mp =
+      rollConfig.useData.costs.mp + rollConfig.abilityData.gifted.amount;
+  }
 
   // Update the roll data
   rollConfig.useData.rollData["h"] = rollConfig.useData.modifiers.heightened;

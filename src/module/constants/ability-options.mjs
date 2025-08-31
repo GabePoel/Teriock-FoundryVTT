@@ -172,6 +172,7 @@ export const abilityOptions = {
       month: "Month",
       year: "Year",
       noLimit: "No Limit",
+      untilDawn: "Until Dawn",
     },
   },
   form: {
@@ -187,7 +188,7 @@ export const abilityOptions = {
     },
     gifted: {
       name: "Gifted",
-      icon: "square",
+      icon: "plus",
       color: "#3584e4",
     },
     echo: {
