@@ -285,7 +285,7 @@ export default class TeriockBaseActorSheet extends SheetMixin(ActorSheetV2) {
       if (event.altKey) options.advantage = true;
       if (event.shiftKey) options.disadvantage = true;
       if (event.ctrlKey) options.twoHanded = true;
-      item.use(options);
+      await item.use(options);
     }
   }
 

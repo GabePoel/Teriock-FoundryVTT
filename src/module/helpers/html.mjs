@@ -115,3 +115,41 @@ export function addClickHandler(elements, handler) {
     }
   });
 }
+
+/**
+ * Make buttons for damage types done by some roll.
+ * @param {TeriockRoll} roll
+ * @returns {Teriock.UI.HTMLButtonConfig[]}
+ */
+export function makeDamageTypeButtons(roll) {
+  const damage = {
+    fire: ["burned"],
+    holy: ["hollied"],
+    ice: ["frozen"],
+    terror: ["terrored"],
+    vine: ["snared"],
+    financial: ["hollied", "terrored"],
+  };
+  const buttons = [];
+  let statuses = new Set();
+  for (const term of roll.terms) {
+    for (const type of Object.keys(damage)) {
+      if (term.flavor.includes(type)) {
+        for (const status of damage[type]) {
+          statuses.add(status);
+        }
+      }
+    }
+  }
+  for (const status of statuses) {
+    buttons.push({
+      label: `Apply ${CONFIG.TERIOCK.conditions[status]}`,
+      icon: "fas fa-plus",
+      dataset: {
+        action: "apply-status",
+        status: status,
+      },
+    });
+  }
+  return buttons;
+}

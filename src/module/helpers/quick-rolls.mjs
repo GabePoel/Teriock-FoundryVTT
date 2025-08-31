@@ -1,5 +1,6 @@
 import TeriockMessage from "../documents/chat-message.mjs";
 import TeriockRoll from "../documents/roll.mjs";
+import { makeDamageTypeButtons } from "./html.mjs";
 
 /**
  * Roll with harm buttons.
@@ -44,13 +45,15 @@ export async function harmRoll(formula, rollData = {}, message = "") {
       },
     },
   ];
+  const damageTypeButtons = makeDamageTypeButtons(roll);
+  buttons.push(...damageTypeButtons);
   return await TeriockMessage.create({
     speaker: TeriockMessage.speaker,
     flavor: "Harm Roll",
     rolls: [roll],
     system: {
       buttons: buttons,
-      columns: 3,
+      columns: damageTypeButtons.length > 0 ? 2 : 3,
       extraContent: message,
     },
   });

@@ -1,4 +1,4 @@
-import TeriockImageSheet from "../../../applications/sheets/misc-sheets/image-sheet/image-sheet.mjs";
+import { ImageSheet } from "../../../applications/sheets/misc-sheets/_module.mjs";
 import { freeze, makeIcon } from "../../../helpers/utils.mjs";
 import { TextField } from "../../shared/fields/_module.mjs";
 import CommonTypeModel from "../common-type-model/common-type-model.mjs";
@@ -97,7 +97,7 @@ export default class ChildTypeModel extends CommonTypeModel {
         name: "Open Image",
         icon: makeIcon("image", "contextMenu"),
         callback: async () => {
-          await new TeriockImageSheet(this.parent.img).render(true);
+          await new ImageSheet(this.parent.img).render(true);
         },
         group: "open",
       },

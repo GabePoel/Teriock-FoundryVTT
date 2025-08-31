@@ -1,0 +1,52 @@
+<form class="dialog-form standard-form teriock dynamic-select"
+      style="display:flex; flex-direction:column; height:100%; min-height:0; overflow:hidden;">
+
+  {{#if (exists hint)}}<p class="hint">{{{hint}}}</p>{{/if}}
+
+  <div class="tcard-searchbar">
+    <label><input type="text" class="search-input" placeholder="Search..." autocomplete="off"></label>
+  </div>
+
+  <div class="form-group"
+       style="
+         display:block;
+         flex:1 1 auto; min-height:0;
+         overflow:auto;
+         --fade:10px; padding-block:var(--fade);
+         -webkit-mask-image:linear-gradient(to bottom, transparent 0, #000 var(--fade), #000 calc(100% - var(--fade)), transparent 100%);
+         mask-image:linear-gradient(to bottom, transparent 0, #000 var(--fade), #000 calc(100% - var(--fade)), transparent 100%);
+       ">
+
+    <div class="doc-list-container" tabindex="0">
+      <ul class="doc-select tcard-container small" role="listbox"
+          aria-multiselectable="{{#if multi}}true{{else}}false{{/if}}">
+        {{#each documents as |doc uuid|}}
+          <li class="doc-select-item">
+            <label class="doc-select-row tcard"
+              {{#if ../tooltip}}
+                   data-tooltip-html="{{doc.tooltip}}"
+                   data-tooltip-class="teriock teriock-rich-tooltip"
+                   data-tooltip-direction="RIGHT"
+              {{/if}}>
+              <div class="doc-checkbox-container">
+                {{#if ../multi}}
+                  <input id="doc-{{uuid}}" type="checkbox" name="{{uuid}}">
+                {{else}}
+                  <input id="doc-{{uuid}}" type="radio" name="choice" value="{{uuid}}">
+                {{/if}}
+              </div>
+              <div class="doc-image-container"><img src="{{doc.img}}" alt="{{doc.name}}"></div>
+              <div class="doc-name-container">{{doc.name}}</div>
+            </label>
+          </li>
+        {{/each}}
+      </ul>
+    </div>
+  </div>
+
+  <footer class="form-footer" style="margin-top:auto;">
+    <button type="submit" data-action="ok" autofocus>
+      <i class="fa-solid fa-check"></i><span>Confirm</span>
+    </button>
+  </footer>
+</form>

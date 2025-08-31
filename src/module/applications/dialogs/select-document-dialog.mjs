@@ -1,8 +1,6 @@
-const { DialogV2 } = foundry.applications.api;
+import { SelectSheet } from "../sheets/misc-sheets/_module.mjs";
 
 /**
- * Select some number of documents.
- *
  * @template T
  * @param {T[]} documents
  * @param {object} [options]
@@ -10,101 +8,32 @@ const { DialogV2 } = foundry.applications.api;
  * @param {string} [options.hint=""]
  * @param {boolean} [options.multi=true]
  * @param {boolean} [options.tooltip=true]
- * @param {string} [options.idKey="uuid"]
- * @param {string} [options.nameKey="name"]
- * @param {string} [options.imgKey="img"]
- * @returns {Promise<T[]>} Selected documents.
+ * @returns {Promise<T[]>}
  */
 export async function selectDocumentsDialog(documents, options = {}) {
   options = foundry.utils.mergeObject(
-    {
-      title: "Select Documents",
-      hint: "",
-      multi: true,
-      tooltip: true,
-      idKey: "uuid",
-      imgKey: "img",
-      nameKey: "name",
-    },
+    { title: "Select Documents", hint: "", multi: true, tooltip: true },
     options,
   );
-  const idToDoc = new Map();
-  const context = {
-    documents: {},
+
+  const sheet = new SelectSheet(documents, {
+    multi: options.multi,
     hint: options.hint,
     tooltip: options.tooltip,
-  };
-
-  for (const doc of documents) {
-    const id = foundry.utils.getProperty(doc, options.idKey);
-    idToDoc.set(id, doc);
-    context.documents[id] = {
-      name: foundry.utils.getProperty(doc, options.nameKey),
-      img: foundry.utils.getProperty(doc, options.imgKey),
-    };
-  }
-
-  if (options.tooltip) {
-    await Promise.all(
-      documents.map(async (doc) => {
-        const id = foundry.utils.getProperty(doc, options.idKey);
-        context.documents[id].tooltip = await doc.buildMessage?.();
-      }),
-    );
-  }
-
-  const tmpl = options.multi
-    ? "systems/teriock/src/templates/dialog-templates/document-select-multi.hbs"
-    : "systems/teriock/src/templates/dialog-templates/document-select-one.hbs";
-
-  const content = await foundry.applications.handlebars.renderTemplate(
-    tmpl,
-    context,
-  );
-
-  const selectedIds = await DialogV2.prompt({
-    window: { title: options.title },
-    content,
-    ok: {
-      callback: (_event, button) => {
-        if (options.multi) {
-          return Array.from(button.form.elements)
-            .filter((e) => e?.checked)
-            .map((e) => e?.name);
-        }
-        return [button.form.elements.namedItem("choice").value];
-      },
-    },
+    title: options.title,
   });
-  return selectedIds.map((id) => idToDoc.get(id)).filter(Boolean);
+
+  const result = await sheet.select();
+  return options.multi ? result : result ? [result] : [];
 }
 
 /**
- * Select exactly one document.
- *
  * @template T
  * @param {T[]} documents
  * @param {object} [options]
- * @param {string} [options.title="Select Document"]
- * @param {string} [options.hint=""]
- * @param {boolean} [options.tooltip=true]
- * @param {string} [options.idKey="uuid"]
- * @param {string} [options.nameKey="name"]
- * @param {string} [options.imgKey="img"]
- * @returns {Promise<T|null>} Selected document, or null if canceled.
+ * @returns {Promise<T|null>}
  */
 export async function selectDocumentDialog(documents, options = {}) {
-  options = foundry.utils.mergeObject(
-    {
-      title: "Select Document",
-      hint: "",
-      tooltip: true,
-      idKey: "uuid",
-      imgKey: "img",
-      nameKey: "name",
-    },
-    options,
-  );
   const selected = await selectDocumentsDialog(documents, {
     ...options,
     multi: false,

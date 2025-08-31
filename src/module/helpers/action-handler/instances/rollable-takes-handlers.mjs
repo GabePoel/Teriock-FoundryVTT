@@ -1,5 +1,6 @@
 import { boostDialog } from "../../../applications/dialogs/_module.mjs";
 import { TeriockMessage, TeriockRoll } from "../../../documents/_module.mjs";
+import { makeDamageTypeButtons } from "../../html.mjs";
 import ActionHandler from "../action-handler.mjs";
 
 /**
@@ -18,21 +19,24 @@ export class RollRollableTakeHandler extends ActionHandler {
       roll.alter(2, 0, { multiplyNumeric: false });
     }
     await roll.evaluate();
+    const buttons = [
+      {
+        label: ROLL_TYPES[this.dataset.type].label || "Apply",
+        icon: `fa-solid fa-${ROLL_TYPES[this.dataset.type].icon || "plus"}`,
+        classes: ["teriock-chat-button", `${this.dataset.type}-button`],
+        dataset: {
+          action: "take-rollable-take",
+          type: this.dataset.type,
+          amount: roll.total,
+        },
+      },
+    ];
+    const damageTypeButtons = makeDamageTypeButtons(roll);
+    buttons.push(...damageTypeButtons);
     const messageData = {
       rolls: [roll],
       system: {
-        buttons: [
-          {
-            label: ROLL_TYPES[this.dataset.type].label || "Apply",
-            icon: `fa-solid fa-${ROLL_TYPES[this.dataset.type].icon || "plus"}`,
-            classes: ["teriock-chat-button", `${this.dataset.type}-button`],
-            dataset: {
-              action: "take-rollable-take",
-              type: this.dataset.type,
-              amount: roll.total,
-            },
-          },
-        ],
+        buttons: buttons,
       },
     };
     await TeriockMessage.create(messageData);

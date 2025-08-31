@@ -1,0 +1,154 @@
+const { HandlebarsApplicationMixin, ApplicationV2 } = foundry.applications.api;
+const { SearchFilter } = foundry.applications.ux;
+
+/**
+ * @extends {ApplicationV2}
+ * @mixes HandlebarsApplicationMixin
+ */
+export default class TeriockSelectSheet extends HandlebarsApplicationMixin(
+  ApplicationV2,
+) {
+  constructor(
+    docs,
+    { multi = true, hint = "", tooltip = true, title = "Select Document" } = {},
+    ...args
+  ) {
+    super(...args);
+    this.docs = docs;
+    this.multi = multi;
+    this.hint = hint;
+    this.tooltip = tooltip;
+
+    this._resolve = null;
+    this._result = new Promise((resolve) => (this._resolve = resolve));
+    console.log(this);
+  }
+
+  static DEFAULT_OPTIONS = {
+    classes: ["teriock", "dynamic-select", "dialog"],
+    actions: { ok: this._getSelected, cancel: this._cancel },
+    window: {
+      icon: "fa-solid fa-circle-check",
+      title: "Select Document",
+      resizable: true,
+    },
+    position: {
+      width: 450,
+    },
+  };
+
+  static PARTS = {
+    all: {
+      template: "systems/teriock/src/templates/dialog-templates/select.hbs",
+      scrollable: [".doc-list-container"],
+    },
+  };
+
+  static async _cancel(event) {
+    event?.preventDefault();
+    this._finish(this.multi ? [] : null);
+    await this.close();
+  }
+
+  static async _getSelected(event) {
+    event?.preventDefault();
+
+    const root = this.element;
+    let ids = [];
+
+    if (this.multi) {
+      ids = Array.from(
+        root.querySelectorAll('input[type="checkbox"]:checked'),
+      ).map((el) => el.name);
+    } else {
+      const radio = root.querySelector('input[name="choice"]:checked');
+      if (radio) ids = [radio.value];
+    }
+
+    const byId = new Map(this.docs.map((d) => [d.uuid, d]));
+    const selected = ids.map((id) => byId.get(id)).filter(Boolean);
+
+    this._finish(this.multi ? selected : (selected[0] ?? null));
+    await this.close();
+  }
+
+  _finish(value) {
+    if (this._resolve) {
+      const r = this._resolve;
+      this._resolve = null;
+      r(value);
+    }
+  }
+
+  _initSearchFilter() {
+    const root = this.element;
+    if (!root) return;
+
+    const input = root.querySelector(".search-input");
+    const content = root.querySelector(".doc-select");
+    if (!input || !content) return;
+
+    const searchFilter = new SearchFilter({
+      inputSelector: ".search-input",
+      contentSelector: ".doc-select",
+      initial: "",
+      callback: (_e, _q, rgx, container) => {
+        container.querySelectorAll(".doc-select-item").forEach(
+          /** @param {HTMLLIElement} card */ (card) => {
+            const title =
+              card.querySelector(".doc-name-container")?.textContent ?? "";
+            const match = rgx ? rgx.test(title) : true;
+            card.style.display = match ? "block" : "none";
+          },
+        );
+      },
+    });
+
+    searchFilter.bind(root);
+  }
+
+  /** @inheritDoc */
+  _onClose() {
+    this._finish(this.multi ? [] : null);
+  }
+
+  /** @inheritDoc */
+  async _onRender(options) {
+    await super._onRender(options);
+    this._initSearchFilter();
+  }
+
+  /** @inheritDoc */
+  async _prepareContext(options) {
+    const context = await super._prepareContext(options);
+
+    const documents = {};
+    for (const doc of this.docs) {
+      documents[doc.uuid] = { name: doc.name, img: doc.img };
+    }
+
+    if (this.tooltip) {
+      await Promise.all(
+        this.docs.map(async (doc) => {
+          try {
+            documents[doc.uuid].tooltip = await doc.buildMessage?.();
+          } catch {}
+        }),
+      );
+    }
+
+    Object.assign(context, {
+      documents,
+      multi: this.multi,
+      hint: this.hint,
+      tooltip: this.tooltip,
+    });
+    console.log(context);
+    return context;
+  }
+
+  async select() {
+    await this.render(true);
+    return this._result;
+  }
+}
