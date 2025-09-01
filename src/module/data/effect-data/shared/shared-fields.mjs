@@ -127,3 +127,26 @@ export function combatExpirationTimingField() {
     }),
   });
 }
+
+/**
+ * Field that represents a change.
+ * @returns {SchemaField}
+ */
+export function changeField() {
+  return new fields.SchemaField({
+    key: new fields.StringField({ initial: "" }),
+    mode: new fields.NumberField({
+      initial: 4,
+      choices: {
+        0: "Custom",
+        1: "Multiply",
+        2: "Add",
+        3: "Downgrade",
+        4: "Upgrade",
+        5: "Override",
+      },
+    }),
+    value: new fields.StringField({ initial: "" }),
+    priority: new fields.NumberField({ initial: 20 }),
+  });
+}

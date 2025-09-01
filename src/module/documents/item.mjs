@@ -30,6 +30,13 @@ const { Item } = foundry.documents;
 export default class TeriockItem extends ParentDocumentMixin(
   ChildDocumentMixin(CommonDocumentMixin(Item)),
 ) {
+  // noinspection ES6ClassMemberInitializationOrder
+  /**
+   * An object that tracks which tracks the changes to the data model which were applied by active effects
+   * @type {object}
+   */
+  overrides = this.overrides ?? {};
+
   /**
    * @inheritDoc
    * @returns {TeriockActor|null}
@@ -116,8 +123,53 @@ export default class TeriockItem extends ParentDocumentMixin(
   }
 
   /**
+   * Get all ActiveEffects that may apply to this Item.
+   * @yields {TeriockEffect}
+   * @returns {Generator<TeriockEffect, void, void>}
+   */
+  *allApplicableEffects() {
+    for (const effect of this.effects) {
+      if (effect.system.modifies !== this.documentName) continue;
+      yield effect;
+    }
+  }
+
+  /**
+   * Apply any transformation to the Item data which are caused by ActiveEffects.
+   */
+  applyActiveEffects() {
+    const overrides = {};
+
+    // Organize non-disabled effects by their application priority
+    const changes = [];
+    for (const effect of this.allApplicableEffects()) {
+      if (!effect.active) continue;
+      changes.push(
+        ...effect.changes.map((change) => {
+          const c = foundry.utils.deepClone(change);
+          c.effect = effect;
+          c.priority ??= c.mode * 10;
+          return c;
+        }),
+      );
+    }
+    changes.sort((a, b) => a.priority - b.priority);
+
+    // Apply all changes
+    for (const change of changes) {
+      if (!change.key) continue;
+      const changes = change.effect.apply(this, change);
+      Object.assign(overrides, changes);
+    }
+
+    // Expand the set of final overrides
+    this.overrides = foundry.utils.expandObject(overrides);
+  }
+
+  /**
    * Initiates a bulk wiki pull operation for supported item types.
    * @returns {Promise<void>} Promise that resolves when the bulk pull dialog is complete.
+   * @deprecated
    */
   async bulkWikiPull() {
     if (["ability", "equipment", "rank", "power"].includes(this.type)) {
@@ -143,6 +195,25 @@ export default class TeriockItem extends ParentDocumentMixin(
       });
       await dialog.render(true);
     }
+  }
+
+  /**
+   * @inheritDoc
+   * @param {"ActiveEffect"} embeddedName
+   * @param {object[]} data
+   * @param {DatabaseCreateOperation} [operation={}]
+   * @returns {Promise<TeriockEffect[]>}
+   */
+  async createEmbeddedDocuments(embeddedName, data = [], operation = {}) {
+    this._filterDocumentCreationData(embeddedName, data);
+    return await super.createEmbeddedDocuments(embeddedName, data, operation);
+  }
+
+  /** @inheritDoc */
+  prepareEmbeddedDocuments() {
+    super.prepareEmbeddedDocuments();
+    if (!this.actor || this.actor._embeddedPreparation)
+      this.applyActiveEffects();
   }
 
   /** @inheritDoc */

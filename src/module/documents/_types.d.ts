@@ -38,6 +38,7 @@ declare global {
     export type EffectModelMetadata = Teriock.Documents.ChildModelMetadata & {
       type: Teriock.Documents.EffectType;
       hierarchy: boolean;
+      modifies: "Actor" | "Item";
     };
   }
 }

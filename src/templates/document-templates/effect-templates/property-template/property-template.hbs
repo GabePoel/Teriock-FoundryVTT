@@ -1,18 +1,27 @@
 <div class="{{cssClass}} tsheet-page">
-  <div class="ab-sheet-everything">
-    <div class="ab-sheet-top">
-      {{> "systems/teriock/src/templates/document-templates/shared/header.hbs"}}
-      <div class="ab-bars">
-        {{> "systems/teriock/src/templates/document-templates/effect-templates/property-template/bars/pr-status-bar.hbs"}}
+  {{#if (eq tab "overview")}}
+    <div class="ab-sheet-everything">
+      <div class="ab-sheet-top">
+        {{> "systems/teriock/src/templates/document-templates/shared/header.hbs"}}
+        <div class="ab-bars">
+          {{> "systems/teriock/src/templates/document-templates/effect-templates/property-template/bars/pr-status-bar.hbs"}}
+        </div>
+      </div>
+      {{> "systems/teriock/src/templates/document-templates/effect-templates/property-template/parts/pr-menu.hbs"}}
+      <div class="ab-main">
+        <div class="ab-tags-all">
+          {{> "systems/teriock/src/templates/document-templates/effect-templates/property-template/tags/pr-tags.hbs"}}
+        </div>
+        {{formGroup
+          systemFields.description
+          value=system.description
+          enriched=enriched.description
+          enabled=(not disabled)
+        }}
       </div>
     </div>
-    <div class="ab-main">
-      {{formGroup
-        systemFields.description
-        value=system.description
-        enriched=enriched.description
-        enabled=(not disabled)
-      }}
-    </div>
-  </div>
+  {{/if}}
+  {{#if (eq tab "impacts")}}
+    {{> "systems/teriock/src/templates/document-templates/effect-templates/property-template/parts/pr-impacts.hbs"}}
+  {{/if}}
 </div>

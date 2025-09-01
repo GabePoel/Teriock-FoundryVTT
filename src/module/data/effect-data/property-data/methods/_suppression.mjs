@@ -9,20 +9,21 @@
 export function _suppressed(propertyData) {
   let suppressed = false;
   if (!suppressed && propertyData.parent.parent.type === "equipment") {
-    if (!suppressed && !propertyData.parent.parent.system.equipped) {
-      suppressed = true;
-    }
     if (
       !suppressed &&
       propertyData.parent.parent.system.dampened &&
-      propertyData.form !== "intrinsic"
+      propertyData.form !== "intrinsic" &&
+      !propertyData.applyIfDampened
     ) {
       suppressed = true;
     }
-    if (!suppressed && propertyData.form !== "intrinsic") {
-      const isAttuned = propertyData.parent.parent.system.isAttuned;
-      suppressed = !isAttuned;
-    }
+  }
+  if (
+    !suppressed &&
+    propertyData.parent.parent.system.shattered &&
+    !propertyData.applyIfShattered
+  ) {
+    suppressed = true;
   }
   return suppressed;
 }

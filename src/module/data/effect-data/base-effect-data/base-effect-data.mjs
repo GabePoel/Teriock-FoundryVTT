@@ -21,6 +21,7 @@ export default class TeriockBaseEffectData extends ChildTypeModel {
     /** @type {Teriock.Documents.EffectModelMetadata} */ (super.metadata),
     {
       hierarchy: false,
+      modifies: "Actor",
     },
   );
 
@@ -76,6 +77,14 @@ export default class TeriockBaseEffectData extends ChildTypeModel {
         group: "open",
       },
     ];
+  }
+
+  /**
+   * What this modifies.
+   * @returns {"Actor" | "Item"}
+   */
+  get modifies() {
+    return this.constructor.metadata.modifies;
   }
 
   /**

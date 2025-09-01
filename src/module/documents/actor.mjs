@@ -15,7 +15,6 @@ const { Actor } = foundry.documents;
  * @mixes CommonDocumentMixin
  * @mixes ParentDocumentMixin
  * @property {"Actor"} documentName
- * @property {() => Generator<TeriockEffect, void, void>} allApplicableEffects
  * @property {Collection<Teriock.UUID<TeriockEffect>, TeriockEffect>} effects
  * @property {Collection<Teriock.UUID<TeriockItem>, TeriockItem>} items
  * @property {ParentItemKeys} itemKeys
@@ -207,32 +206,37 @@ export default class TeriockActor extends ParentDocumentMixin(
 
   /**
    * @inheritDoc
-   * @param {string} embeddedName
+   * @yields {TeriockEffect}
+   * @returns {Generator<TeriockEffect, void, void>}
+   */
+  *allApplicableEffects() {
+    for (const effect of super.allApplicableEffects()) {
+      if (effect.system.modifies !== this.documentName) continue;
+      yield effect;
+    }
+  }
+
+  /**
+   * @inheritDoc
+   * @param {"Item"|"ActiveEffect"} embeddedName
    * @param {object[]} data
    * @param {DatabaseCreateOperation} [operation={}]
-   * @returns {Promise<Document[]>}
+   * @returns {Promise<TeriockChild[]>}
    */
   async createEmbeddedDocuments(embeddedName, data = [], operation = {}) {
-    if (
-      embeddedName === "Item" &&
-      data.find((d) => d.type === "rank" && d.system?.archetype === "mage")
-    ) {
-      if (!this.itemKeys?.power.has("mage"))
-        data.push(await copyItem("Mage", "classes"));
-    }
-    if (
-      embeddedName === "Item" &&
-      data.find((d) => d.type === "rank" && d.system?.archetype === "semi")
-    ) {
-      if (!this.itemKeys?.power.has("semi"))
-        data.push(await copyItem("Semi", "classes"));
-    }
-    if (
-      embeddedName === "Item" &&
-      data.find((d) => d.type === "rank" && d.system?.archetype === "warrior")
-    ) {
-      if (!this.itemKeys?.power.has("warrior"))
-        data.push(await copyItem("Warrior", "classes"));
+    console.log(this.metadata);
+    this._filterDocumentCreationData(embeddedName, data);
+    if (embeddedName === "Item") {
+      for (const archetype of ["mage", "semi", "warrior"]) {
+        if (
+          data.find(
+            (d) => d.type === "rank" && d.system?.archetype === archetype,
+          )
+        ) {
+          if (!this.itemKeys.power.has(archetype))
+            data.push(await copyItem(rankOptions[archetype].name, "classes"));
+        }
+      }
     }
     if (
       embeddedName === "ActiveEffect" &&
@@ -265,28 +269,27 @@ export default class TeriockActor extends ParentDocumentMixin(
   /**
    * Overridden with special handling to allow for archetype abilities.
    * @inheritDoc
-   * @param {string} embeddedName - The name of the embedded Document type
-   * @param {string[]} ids - An array of string ids for each Document to be deleted
+   * @template T
+   * @param {"Item"|"ActiveEffect"} embeddedName - The name of the embedded Document type
+   * @param {Teriock.ID<T>[]} ids - An array of string ids for each Document to be deleted
    * @param {DatabaseDeleteOperation} [operation={}] - Parameters of the database deletion workflow
-   * @returns {Promise<Document[]>} - An array of deleted Document instances
+   * @returns {Promise<T[]>} - An array of deleted Document instances
    */
   async deleteEmbeddedDocuments(embeddedName, ids = [], operation = {}) {
     if (embeddedName === "Item") {
       const ranksBeingDeleted =
-        this.itemTypes?.rank?.filter((i) => ids.includes(i.id)) ?? [];
+        this.ranks.filter((i) => ids.includes(i.id)) ?? [];
       const archetypesDeleted = new Set(
-        ranksBeingDeleted.map((i) => i.system?.archetype).filter(Boolean),
+        ranksBeingDeleted.map((i) => i.system.archetype).filter(Boolean),
       );
       for (const archetype of ["mage", "semi", "warrior"]) {
         if (!archetypesDeleted.has(archetype)) continue;
-        const remaining = this.itemTypes?.rank?.some(
-          (i) => i.system?.archetype === archetype && !ids.includes(i.id),
+        const remaining = this.ranks.some(
+          (i) => i.system.archetype === archetype && !ids.includes(i.id),
         );
         if (!remaining) {
           const powerName = rankOptions[archetype].name;
-          const powerItem = this.itemTypes?.power?.find(
-            (i) => i.name === powerName,
-          );
+          const powerItem = this.powers.find((i) => i.name === powerName);
           if (powerItem && !ids.includes(powerItem.id)) ids.push(powerItem.id);
         }
       }
@@ -389,6 +392,13 @@ export default class TeriockActor extends ParentDocumentMixin(
       rank: new Set(this.itemTypes?.rank.map((e) => toCamelCase(e.name))),
       species: new Set(this.itemTypes?.species.map((e) => toCamelCase(e.name))),
     };
+  }
+
+  /** @inheritDoc */
+  prepareEmbeddedDocuments() {
+    this._embeddedPreparation = true;
+    super.prepareEmbeddedDocuments();
+    delete this._embeddedPreparation;
   }
 
   /**

@@ -1,137 +1,67 @@
-<div
-  class="changes-container tgrid g12"
-  style="margin-top: 0.5em;"
->
-  {{#each system.applies as |application key|}}
-    <div
-      class="change-box tgrid-item gi4"
-      style="justify-content: start;"
-    >
-      <div class="change-key">{{ucFirst key}} Key</div>
-    </div>
-    <div
-      class="change-box tgrid-item gi3"
-      style="justify-content: start;"
-    >
-      <div class="change-mode">Mode</div>
-    </div>
-    <div
-      class="change-box tgrid-item gi2"
-      style="justify-content: start;"
-    >
-      <div class="change-value">Value</div>
-    </div>
-    <div
-      class="change-box tgrid-item gi2"
-      style="justify-content: start;"
-    >
-      <div class="change-priority">Priority</div>
-    </div>
-    <div
-      class="change-box tgrid-item gi1"
-      style="justify-content: center;"
-    >
+<section class="tab generic-changes active">
+  <header>
+    <div class="key">{{localize "EFFECT.ChangeKey"}}</div>
+    <div class="mode">{{localize "EFFECT.ChangeMode"}}</div>
+    <div class="value">{{localize "EFFECT.ChangeValue"}}</div>
+    <div class="priority">{{localize "EFFECT.ChangePriority"}}</div>
+    <div class="controls">
       <a
-        class="add-change-button"
-        style="display: flex; justify-content: center; align-items: center;"
-        data-action="addChange"
-        data-tooltip="Add"
-        data-application="{{key}}"
-        {{#if (not ../editable)}}
-        disabled="true"
-        {{/if}}
+        data-action="addRootChange"
+        {{#if (not @root.editable)}}disabled="true"{{/if}}
       >
-        <i class="fa-solid fa-square-plus"></i>
+        <i class="fa-regular fa-square-plus"></i>
       </a>
     </div>
-    {{#each application.changes as |change i|}}
-      <div class="change-box tgrid-item gi4">
-        <div class="change-box">
-          <label>
-            <input
-              class="change-box-entry"
-              type="text"
+  </header>
+  <ol class="scrollable" data-changes>
+    {{#each document.changes as |change i|}}
+      {{#with ../fields.changes.element.fields as |changeFields|}}
+        <li data-index="{{i}}">
+          <div class="key">
+            {{formInput
+              changeFields.key
+              name=(concat "changes." i ".key")
+              value=change.key
+              disabled=(not @root.editable)
+            }}
+          </div>
+          <div class="mode">
+            {{formInput
+              changeFields.mode
+              name=(concat "changes." i ".mode")
+              value=change.mode
+              choices=@root.modes
+              disabled=(not @root.editable)
+            }}
+          </div>
+          <div class="value">
+            {{formInput
+              changeFields.value
+              name=(concat "changes." i ".value")
+              value=change.value
+              disabled=(not @root.editable)
+            }}
+          </div>
+          <div class="priority">
+            {{formInput
+              changeFields.priority
+              name=(concat "changes." i ".priority")
+              value=change.priority
+              placeholder=(lookup ../../priorities change.mode)
+              disabled=(not @root.editable)
+            }}
+          </div>
+          <div class="controls">
+            <a
+              data-action="deleteRootChange"
               data-index="{{i}}"
-              data-application="{{key}}"
-              data-key="key"
-              value="{{change.key}}"
-              {{#if (not ../../editable)}}
-              disabled="disabled"
-              {{/if}}
-            />
-          </label>
-        </div>
-      </div>
-      {{log change}}
-      {{log change.mode}}
-      <div class="change-box tgrid-item gi3">
-        <label>
-          <select
-            class="change-box-entry"
-            data-index="{{i}}"
-            data-application="{{key}}"
-            data-key="mode"
-            {{#if (not ../../editable)}}
-            disabled="disabled"
-            {{/if}}
-          >
-            <option value="0" {{#if (eq change.mode 0)}}selected{{/if}}>Custom</option>
-            <option value="1" {{#if (eq change.mode 1)}}selected{{/if}}>Multiply</option>
-            <option value="2" {{#if (eq change.mode 2)}}selected{{/if}}>Add</option>
-            <option value="3" {{#if (eq change.mode 3)}}selected{{/if}}>Downgrade</option>
-            <option value="4" {{#if (eq change.mode 4)}}selected{{/if}}>Upgrade</option>
-            <option value="5" {{#if (eq change.mode 5)}}selected{{/if}}>Override</option>
-          </select>
-        </label>
-      </div>
-      <div class="change-box tgrid-item gi2">
-        <label>
-          <input
-            class="change-box-entry"
-            type="text"
-            data-index="{{i}}"
-            data-application="{{key}}"
-            data-key="value"
-            value="{{change.value}}"
-            {{#if (not ../../editable)}}
-            disabled="disabled"
-            {{/if}}
-          />
-        </label>
-      </div>
-      <div class="change-box tgrid-item gi2">
-        <label>
-          <input
-            class="change-box-entry"
-            type="number"
-            data-index="{{i}}"
-            data-application="{{key}}"
-            data-key="priority"
-            value="{{change.priority}}"
-            {{#if (not ../../editable)}}
-            disabled="disabled"
-            {{/if}}
-          />
-        </label>
-      </div>
-      <div
-        class="change-box tgrid-item gi1"
-        style="justify-content: center;"
-      >
-        <a
-          class="delete-change-button"
-          style="display: flex; justify-content: center; align-items: center;"
-          data-action="deleteChange"
-          data-tooltip="Delete"
-          data-index="{{i}}"
-          data-application="{{key}}"
-          {{#if (not ../../editable)}}
-          disabled="true"
-          {{/if}}
-        >
-          <i class="fa-solid fa-trash"></i>
-        </a>
-      </div>
+              {{#if (not @root.editable)}}disabled="true"{{/if}}
+            >
+              <i class="fa-solid fa-trash"></i>
+            </a>
+          </div>
+        </li>
+      {{/with}}
     {{/each}}
-  {{/each}}
-</div>
+  </ol>
+</section>

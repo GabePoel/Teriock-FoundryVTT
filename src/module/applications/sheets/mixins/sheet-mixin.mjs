@@ -33,11 +33,13 @@ export default (Base) => {
      */
     constructor(...args) {
       super(...args);
-      this._menuOpen = false;
-      this._contextMenus = [];
-      this._locked = true;
-      this.settings = {};
       this.#dragDrop = this.#createDragDropHandlers();
+      this._contextMenus = [];
+      this._impactTab = "base";
+      this._locked = true;
+      this._menuOpen = false;
+      this._tab = "overview";
+      this.settings = {};
     }
 
     /**
@@ -47,6 +49,8 @@ export default (Base) => {
     static DEFAULT_OPTIONS = {
       classes: ["teriock", "ability"],
       actions: {
+        toggleImpacts: this._toggleImpacts,
+        changeImpactTab: this._changeImpactTab,
         debug: this._debug,
         editImage: this._editImage,
         openDoc: this._openDoc,
@@ -78,6 +82,18 @@ export default (Base) => {
      * @type {object}
      */
     static PARTS = {};
+
+    /**
+     * Switches to a specific impacts tab.
+     * @param {Event} _event - The event object.
+     * @param {HTMLElement} target - The target element.
+     * @returns {Promise<void>} Promise that resolves when tab is switched.
+     * @static
+     */
+    static async _changeImpactTab(_event, target) {
+      this._impactTab = target.dataset.tab;
+      this.render();
+    }
 
     /**
      * Sends an embedded document to chat.
@@ -305,6 +321,16 @@ export default (Base) => {
     static async _toggleDisabledDoc(_event, target) {
       const embedded = await _embeddedFromCard(this, target);
       await embedded?.toggleDisabled();
+    }
+
+    /**
+     * Toggles between overview and impacts tabs.
+     * @returns {Promise<void>} Promise that resolves when tab is toggled.
+     * @static
+     */
+    static async _toggleImpacts() {
+      this._tab = this._tab === "impacts" ? "overview" : "impacts";
+      this.render();
     }
 
     /**
@@ -810,7 +836,9 @@ export default (Base) => {
         fields: this.document.schema.fields,
         system: this.document.system,
         systemFields: this.document.system.schema.fields,
+        impactTab: this._impactTab,
         name: this.document.name,
+        tab: this._tab,
         img: this.document.img,
         flags: this.document.flags,
         uuid: this.document.uuid,

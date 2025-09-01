@@ -53,7 +53,7 @@
     disabled=(not editable)
   }}
   <!-- Changes UI -->
-  {{> "systems/teriock/src/templates/document-templates/effect-templates/ability-template/parts/_consequence-changes.hbs"}}
+  {{> "systems/teriock/src/templates/document-templates/effect-templates/ability-template/parts/_impact-changes.hbs"}}
   <!-- Expiration UI -->
   {{formGroup
     (path systemFields "applies.fields" typeKey "fields.expiration.fields.doesExpire")
@@ -65,7 +65,7 @@
   {{#if (path system "applies" typeKey "expiration.doesExpire")}}
     <fieldset class="teriock-full-width" style="margin-top: 6px;">
       <legend>Normal Combat Expiration</legend>
-      {{> "systems/teriock/src/templates/document-templates/effect-templates/ability-template/parts/_consequence-expiration.hbs"
+      {{> "systems/teriock/src/templates/document-templates/effect-templates/ability-template/parts/_impact-expiration.hbs"
         editable=editable
         expirationKey="normal"
         system=system
@@ -84,7 +84,7 @@
   {{#if (path system "applies" typeKey "expiration.changeOnCrit")}}
     <fieldset class="teriock-full-width" style="margin-top: 6px;">
       <legend>Crit Combat Expiration</legend>
-      {{> "systems/teriock/src/templates/document-templates/effect-templates/ability-template/parts/_consequence-expiration.hbs"
+      {{> "systems/teriock/src/templates/document-templates/effect-templates/ability-template/parts/_impact-expiration.hbs"
         editable=editable
         expirationKey="crit"
         system=system

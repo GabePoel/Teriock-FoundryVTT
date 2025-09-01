@@ -90,6 +90,13 @@ export default function registerDocumentManagementHooks() {
 
   foundry.helpers.Hooks.on(
     "updateActiveEffect",
+    /**
+     * @param {TeriockEffect} document
+     * @param _updateData
+     * @param _options
+     * @param userId
+     * @returns {Promise<void>}
+     */
     async (document, _updateData, _options, userId) => {
       if (isOwnerAndCurrentUser(document, userId)) {
         await document.actor?.postUpdate();
@@ -99,7 +106,12 @@ export default function registerDocumentManagementHooks() {
         document.type === "ability"
       ) {
         await document.system.expireSustainedConsequences();
-        if (document.sup) await document.sup.sheet.render();
+        if (document.sup && document.sup.sheet.rendered)
+          await document.sup.sheet.render();
+      }
+      if (document.parent.documentName === "Item") {
+        if (document.parent.sheet.rendered)
+          await document.parent.sheet.render();
       }
     },
   );

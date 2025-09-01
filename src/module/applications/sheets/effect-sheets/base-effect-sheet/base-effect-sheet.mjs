@@ -24,9 +24,11 @@ export default class TeriockBaseEffectSheet extends SheetMixin(
     },
     actions: {
       addChange: this._addChange,
-      deleteChange: this._deleteChange,
-      toggleDisabledThis: this._toggledDisabledThis,
+      addRootChange: this._addRootChange,
       createAbility: this._createAbility,
+      deleteChange: this._deleteChange,
+      deleteRootChange: this._deleteRootChange,
+      toggleDisabledThis: this._toggledDisabledThis,
     },
   };
 
@@ -49,6 +51,25 @@ export default class TeriockBaseEffectSheet extends SheetMixin(
     };
     changes.push(newChange);
     await this.document.update({ [updateString]: changes });
+  }
+
+  /**
+   * Adds a new change to an effect.
+   * @param {Event} _event - The event object.
+   * @param {HTMLElement} _target - The target element.
+   * @returns {Promise<void>} Promise that resolves when change is added.
+   * @static
+   */
+  static async _addRootChange(_event, _target) {
+    const changes = this.document.changes;
+    const newChange = {
+      key: "",
+      mode: 0,
+      value: "",
+      priority: 0,
+    };
+    changes.push(newChange);
+    await this.document.update({ changes: changes });
   }
 
   /** @inheritDoc */
@@ -86,6 +107,23 @@ export default class TeriockBaseEffectSheet extends SheetMixin(
   }
 
   /**
+   * Deletes a change from an effect.
+   * @param {Event} _event - The event object.
+   * @param {HTMLElement} target - The target element.
+   * @returns {Promise<void>} Promise that resolves when change is deleted.
+   * @static
+   */
+  static async _deleteRootChange(_event, target) {
+    const index = parseInt(target.dataset.index, 10);
+    const changes = this.document.changes;
+    console.log(changes);
+    if (index >= 0 && index < changes.length) {
+      changes.splice(index, 1);
+      await this.document.update({ changes: changes });
+    }
+  }
+
+  /**
    * Toggles the disabled state of the current effect.
    * @returns {Promise<void>} Promise that resolves when disabled state is toggled.
    * @static
@@ -108,6 +146,14 @@ export default class TeriockBaseEffectSheet extends SheetMixin(
       isSuppressed: this.document.isSuppressed,
       isProficient: this.document.isProficient,
       isFluent: this.document.isFluent,
+      modes: {
+        0: "Custom",
+        1: "Multiply",
+        2: "Add",
+        3: "Downgrade",
+        4: "Upgrade",
+        5: "Override",
+      },
     });
     await this._enrichAll(context, {
       description: this.document.system.description,

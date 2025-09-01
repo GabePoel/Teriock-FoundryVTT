@@ -16,6 +16,11 @@ declare global {
   const TeriockTokenDocument: typeof import("./documents/token-document.mjs").default;
   const TeriockUser: typeof import("./documents/user.mjs").default;
 
+  // General document types
+  // ======================
+  export type TeriockParent = typeof TeriockActor | typeof TeriockItem;
+  export type TeriockChild = typeof TeriockItem | typeof TeriockEffect;
+
   // Virtual document classes
   // ========================
 

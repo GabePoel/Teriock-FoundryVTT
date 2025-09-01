@@ -1,10 +1,11 @@
 import { pseudoHooks } from "../../../../../constants/pseudo-hooks.mjs";
 import {
   FormulaField,
-  RecordField,
   ListField,
+  RecordField,
 } from "../../../../shared/fields/_module.mjs";
 import {
+  changeField,
   combatExpirationMethodField,
   combatExpirationSourceTypeField,
   combatExpirationTimingField,
@@ -56,28 +57,10 @@ export function consequenceRollsField() {
  * const changesField = consequenceChangesField();
  */
 export function consequenceChangesField() {
-  return new ListField(
-    new fields.SchemaField({
-      key: new fields.StringField({ initial: "" }),
-      mode: new fields.NumberField({
-        initial: 4,
-        choices: {
-          0: "Custom",
-          1: "Multiply",
-          2: "Add",
-          3: "Downgrade",
-          4: "Upgrade",
-          5: "Override",
-        },
-      }),
-      value: new fields.StringField({ initial: "" }),
-      priority: new fields.NumberField({ initial: 20 }),
-    }),
-    {
-      label: "Changes",
-      hint: "Changes made to the target's attributes as part of the ability's ongoing effect.",
-    },
-  );
+  return new ListField(changeField(), {
+    label: "Changes",
+    hint: "Changes made to the target actor as part of the ability's ongoing effect.",
+  });
 }
 
 /**

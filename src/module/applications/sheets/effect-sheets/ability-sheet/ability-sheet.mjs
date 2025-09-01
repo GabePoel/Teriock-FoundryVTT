@@ -13,23 +13,10 @@ import { contextMenus } from "./connections/_context-menus.mjs";
  * @property {TeriockAbility} document
  */
 export default class TeriockAbilitySheet extends TeriockBaseEffectSheet {
-  /**
-   * Creates a new ability sheet instance.
-   * Initializes tab state for overview and consequences.
-   * @param {...any} args - Arguments to pass to the parent constructor.
-   */
-  constructor(...args) {
-    super(...args);
-    this._tab = "overview";
-    this._consequenceTab = "base";
-  }
-
   /** @inheritDoc */
   static DEFAULT_OPTIONS = {
     classes: ["ability"],
     actions: {
-      toggleConsequences: this._toggleConsequences,
-      consequenceTab: this._consequenceTab,
       unlinkMacro: this._unlinkMacro,
       changeMacroRunHook: this._changeMacroRunHook,
       setDuration: this._setDuration,
@@ -51,7 +38,7 @@ export default class TeriockAbilitySheet extends TeriockBaseEffectSheet {
         ".window-content",
         ".tsheet-page",
         ".ab-sheet-everything",
-        ".ab-consequences-tab",
+        ".ab-impacts-tab",
         ".es-mask-rotator",
       ],
     },
@@ -78,18 +65,6 @@ export default class TeriockAbilitySheet extends TeriockBaseEffectSheet {
   }
 
   /**
-   * Switches to a specific consequence tab.
-   * @param {Event} _event - The event object.
-   * @param {HTMLElement} target - The target element.
-   * @returns {Promise<void>} Promise that resolves when tab is switched.
-   * @static
-   */
-  static async _consequenceTab(_event, target) {
-    this._consequenceTab = target.dataset.tab;
-    this.render();
-  }
-
-  /**
    * Set the duration for this ability.
    * @returns {Promise<void>}
    * @private
@@ -97,16 +72,6 @@ export default class TeriockAbilitySheet extends TeriockBaseEffectSheet {
   static async _setDuration() {
     if (!this.editable) return;
     await durationDialog(this.document);
-  }
-
-  /**
-   * Toggles between overview and consequence tabs.
-   * @returns {Promise<void>} Promise that resolves when tab is toggled.
-   * @static
-   */
-  static async _toggleConsequences() {
-    this._tab = this._tab === "consequences" ? "overview" : "consequences";
-    this.render();
   }
 
   /**
@@ -346,7 +311,6 @@ export default class TeriockAbilitySheet extends TeriockBaseEffectSheet {
     const context = await super._prepareContext(options);
     const system = this.document.system;
     context.tab = this._tab;
-    context.consequenceTab = this._consequenceTab;
     context.childAbilities = this.document.subs;
     context.parentAbility = this.document.sup;
     context.macros = [];

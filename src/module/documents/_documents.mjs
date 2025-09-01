@@ -73,18 +73,17 @@ export class TeriockSpecies extends TeriockItem {}
 
 /**
  * Mechanic-specific {@link TeriockItem} class.
- *
+ * @property {"rank"} type
+ * @property {Teriock.ID<TeriockMechanic>} id
+ * @property {Teriock.UUID<TeriockMechanic>} uuid
+ * @property {TeriockActor} parent
  * @property {TeriockMechanicData} system
  * @property {TeriockMechanicSheet} sheet
- * @property {"rank"} type
- * @property {Teriock.UUID<TeriockMechanic>} uuid
- * @property {Teriock.ID<TeriockMechanic>} id
  */
 export class TeriockMechanic extends TeriockItem {}
 
 /**
  * Wrapper-specific {@link TeriockItem} class.
- *
  * @property {TeriockWrapperData} system
  * @property {TeriockWrapperSheet} sheet
  * @property {"wrapper"} type
@@ -109,12 +108,12 @@ export class TeriockAbility extends TeriockEffect {}
 
 /**
  * Consequence-specific {@link TeriockEffect} class.
- *
+ * @property {"consequence"} type
+ * @property {Teriock.ID<TeriockConsequence>} id
+ * @property {Teriock.UUID<TeriockConsequence>} uuid
+ * @property {TeriockActor} parent
  * @property {TeriockConsequenceData} system
  * @property {TeriockConsequenceSheet} sheet
- * @property {"consequence"} type
- * @property {Teriock.UUID<TeriockConsequence>} uuid
- * @property {Teriock.ID<TeriockConsequence>} id
  */
 export class TeriockConsequence extends TeriockEffect {}
 
@@ -166,17 +165,17 @@ export class TeriockFluency extends TeriockEffect {}
  * Relevant wiki pages:
  * - [Properties](https://wiki.teriock.com/index.php/Category:Properties)
  *
+ * @property {"property"} type
+ * @property {Teriock.ID<TeriockProperty>} id
+ * @property {Teriock.UUID<TeriockProperty>} uuid
+ * @property {TeriockEquipment} parent
  * @property {TeriockPropertyData} system
  * @property {TeriockPropertySheet} sheet
- * @property {"property"} type
- * @property {Teriock.UUID<TeriockProperty>} uuid
- * @property {Teriock.ID<TeriockProperty>} id
  */
 export class TeriockProperty extends TeriockEffect {}
 
 /**
  * Resource-specific {@link TeriockEffect} class.
- *
  * @property {TeriockResourceData} system
  * @property {TeriockResourceSheet} sheet
  * @property {"resource"} type
