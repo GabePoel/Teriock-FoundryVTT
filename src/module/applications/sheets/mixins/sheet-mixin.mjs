@@ -4,7 +4,10 @@ import {
   selectAbilityDialog,
   selectPropertyDialog,
 } from "../../dialogs/select-dialog.mjs";
-import { imageContextMenuOptions } from "../misc-sheets/image-sheet/connections/_context-menus.mjs";
+import {
+  bindCommonActions,
+  imageContextMenuOptions,
+} from "../../shared/_module.mjs";
 import _connectEmbedded from "./methods/_connect-embedded.mjs";
 import _embeddedFromCard from "./methods/_embedded-from-card.mjs";
 import _setupEventListeners from "./methods/_setup-handlers.mjs";
@@ -785,6 +788,8 @@ export default (Base) => {
           }.bind(this),
         );
       });
+
+      bindCommonActions(this.element);
     }
 
     /**

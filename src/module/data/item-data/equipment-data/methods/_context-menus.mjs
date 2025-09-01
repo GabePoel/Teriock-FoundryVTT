@@ -1,8 +1,9 @@
+// noinspection JSValidateTypes
+
 import { getRollIcon, makeIcon } from "../../../../helpers/utils.mjs";
 
 /**
  * Context menu entries.
- *
  * @param {TeriockEquipmentData} equipmentData
  * @returns {Teriock.Foundry.ContextMenuEntry[]}
  * @private

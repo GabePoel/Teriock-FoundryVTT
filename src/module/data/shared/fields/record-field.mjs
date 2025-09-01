@@ -7,6 +7,7 @@ const { TypedObjectField, StringField } = foundry.data.fields;
 export default class RecordField extends TypedObjectField {
   /** @inheritDoc */
   _toInput(config) {
+    // noinspection JSValidateTypes
     config.value = Object.keys(config.value ?? {});
     config.classes = "teriock-record-field";
     StringField._prepareChoiceConfig(config);

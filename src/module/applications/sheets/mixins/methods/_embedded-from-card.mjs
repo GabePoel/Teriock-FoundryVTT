@@ -8,7 +8,7 @@
 export default async function _embeddedFromCard(sheet, target) {
   /** @type {HTMLElement} */
   const card = target.closest(".tcard");
-  const { id, type, parentId, uuid } = card?.dataset ?? {};
+  const { id, type, parentId /** uuid */ } = card?.dataset ?? {};
 
   if (type === "noneMacro") {
     foundry.ui.notifications.warn("Drag a macro onto sheet to assign it.", {

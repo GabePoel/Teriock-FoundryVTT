@@ -19,34 +19,15 @@ function currencyField(label, integer = true) {
 /**
  * Defines the money schema fields for actor data including various currency types and weight tracking.
  *
- * @param {Object} schema - The schema object to extend with money fields
- * @returns {Object} The modified schema object with money fields added
- *
  * @example
- * ```javascript
+ * ```js
  * const schema = {};
  * const moneySchema = _defineMoney(schema);
  * // moneySchema now contains: money and moneyWeight fields
  * ```
  *
- * @typedef {Object} CurrencyField
- * @property {NumberField} copper - Copper coins (coin)
- * @property {NumberField} silver - Silver coins (coin)
- * @property {NumberField} gold - Gold coins (coin)
- * @property {NumberField} entTearAmber - Ent Tear Amber (gem)
- * @property {NumberField} fireEyeRuby - Fire Eye Rubies (gem)
- * @property {NumberField} pixiePlumAmethyst - Pixie Plum Amethysts (gem)
- * @property {NumberField} snowDiamond - Snow Diamonds (gem)
- * @property {NumberField} dragonEmerald - Dragon Emeralds (gem)
- * @property {NumberField} moonOpal - Moon Opals (gem)
- * @property {NumberField} magusQuartz - Magus Quartz (gem)
- * @property {NumberField} heartstoneRuby - Heartstone Rubies (gem)
- * @property {NumberField} debt - Debt (no weight)
- * @property {NumberField} total - Total money value (calculated field)
- *
- * @typedef {Object} MoneySchema
- * @property {SchemaField} money - {@link CurrencyField} Object containing all currency types
- * @property {NumberField} moneyWeight - Weight of carried money (≥0)
+ * @param {Object} schema - The schema object to extend with money fields
+ * @returns {Object} The modified schema object with money fields added
  */
 export function _defineMoney(schema) {
   schema.money = new fields.SchemaField({

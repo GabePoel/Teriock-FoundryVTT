@@ -17,8 +17,8 @@ declare module "./consequence-data.mjs" {
     source: Teriock.UUID<TeriockEffect>;
     expirations: {
       conditions: {
-        present: Set<Teriock.Parameters.Condition.Key>;
-        absent: Set<Teriock.Parameters.Condition.Key>;
+        present: Set<Teriock.Parameters.Condition.ConditionKey>;
+        absent: Set<Teriock.Parameters.Condition.ConditionKey>;
       };
       /** Expirations based on combat timing. */
       combat: {

@@ -12,26 +12,15 @@ const { fields } = foundry.data;
  * - [AV0](https://wiki.teriock.com/index.php/Keyword:AV0)
  * - [UB](https://wiki.teriock.com/index.php/Keyword:UB)
  *
- * @param {Object} schema - The schema object to extend with combat fields
- * @returns {Object} The modified schema object with combat fields added
- *
  * @example
- * ```javascript
+ * ```js
  * const schema = {};
  * const combatSchema = _defineCombat(schema);
  * // combatSchema now contains: wornAc, naturalAv, attackPenalty, sb, and piercing fields
  * ```
  *
- * @typedef {Object} CombatSchema
- * @property {NumberField} wornAc - Worn Armor Class value (≥0, integer)
- * @property {NumberField} naturalAv - Natural Armor Value (≥0, integer)
- * @property {NumberField} attackPenalty - Attack penalty value (≤0, integer, step: 3)
- * @property {BooleanField} hasReaction - Whether the actor has their reaction
- * @property {BooleanField} sb - Whether the actor has a style bonus
- * @property {StringField} piercing - Piercing ability type with choices:
- *   - "none": No piercing bonus
- *   - "av0": [AV0](https://wiki.teriock.com/index.php/Keyword:AV0)
- *   - "ub": [UB](https://wiki.teriock.com/index.php/Keyword:UB)
+ * @param {Object} schema - The schema object to extend with combat fields
+ * @returns {Object} The modified schema object with combat fields added
  */
 export function _defineCombat(schema) {
   schema.wornAc = new fields.NumberField({

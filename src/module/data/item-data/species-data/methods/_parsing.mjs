@@ -1,5 +1,6 @@
 import { traits } from "../../../../constants/generated/traits.mjs";
 import { TeriockRoll } from "../../../../documents/_module.mjs";
+import { cleanHTMLDoc } from "../../../shared/parsing/clean-html-doc.mjs";
 import { getBarText, getText } from "../../../shared/parsing/get-text.mjs";
 import { processSubAbilities } from "../../../shared/parsing/process-subs.mjs";
 import { buildTagTree } from "../../../shared/parsing/tag-tree.mjs";
@@ -25,13 +26,8 @@ export async function _parse(speciesData, rawHTML) {
     (el) => !el.closest(".expandable-container:not(:scope)"),
   );
 
-  doc.querySelectorAll(".ability-sub-container").forEach((el) => el.remove());
-  doc.querySelectorAll(".expandable-container").forEach((el) => el.remove());
-  doc.querySelectorAll(".dice").forEach((el) => {
-    const fullRoll = el.getAttribute("data-full-roll");
-    const quickRoll = el.getAttribute("data-quick-roll");
-    if (quickRoll) el.textContent = `[[/roll ${fullRoll}]]`;
-  });
+  // Remove sub-containers and process dice
+  cleanHTMLDoc(doc);
 
   const parameters = {
     lifespan: null,

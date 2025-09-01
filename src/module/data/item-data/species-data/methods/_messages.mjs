@@ -7,9 +7,8 @@ import {
 
 /**
  * Generates message parts for a species.
- *
  * @param {TeriockSpeciesData} speciesData
- * @returns {Partial<Teriock.MessageData.Parts>}
+ * @returns {Partial<Teriock.MessageData.MessageParts>}
  * @private
  */
 export function _messageParts(speciesData) {

@@ -1,10 +1,10 @@
 /**
- * Mixing for common functions used across document classes.
- *
+ * Mixin for common functions used across document classes.
  * @param {ClientDocument} Base
  * @mixin
  */
 export default (Base) => {
+  // noinspection JSClosureCompilerSyntax
   return (
     /**
      * @implements {CommonDocumentMixinInterface}

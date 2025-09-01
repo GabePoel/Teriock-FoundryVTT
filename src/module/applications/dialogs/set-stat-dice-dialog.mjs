@@ -1,10 +1,10 @@
 import { dieOptions } from "../../constants/die-options.mjs";
+import { TeriockDialog } from "../api/_module.mjs";
 
-const { DialogV2 } = foundry.applications.api;
 const { fields } = foundry.data;
 
 /**
- * Dialog that sets {@link StatDieModel} values using {@link StatDataMixin.setDice}.
+ * Dialog that sets {@link StatDieModel} values.
  * @param {TeriockItem & {system: StatDataMixin}} statItem
  * @param {Teriock.Parameters.Shared.DieStat} stat
  * @param {number} initialNumber
@@ -32,7 +32,7 @@ export default async function setStatDiceDialog(
   });
   content.append(numberField.toFormGroup({}, { name: "number" }));
   content.append(facesField.toFormGroup({}, { name: "faces" }));
-  await DialogV2.prompt({
+  await TeriockDialog.prompt({
     window: { title: `Set ${dieOptions.stats[stat]} Dice` },
     modal: true,
     content: content,

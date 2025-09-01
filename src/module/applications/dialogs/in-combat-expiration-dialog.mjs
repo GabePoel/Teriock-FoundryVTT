@@ -1,10 +1,10 @@
 import TeriockRoll from "../../documents/roll.mjs";
+import { TeriockDialog } from "../api/_module.mjs";
 
-const { api, ux } = foundry.applications;
+const { TextEditor } = foundry.applications.ux;
 
 /**
  * Dialog that asks the {@link TeriockUser} if their effect should expire.
- *
  * @param {TeriockConsequence|TeriockCondition} effect - The consequence to make the dialog for.
  * @param {boolean} [forceDialog] - Force a dialog to show up.
  * @returns {Promise<void>}
@@ -17,7 +17,7 @@ export default async function inCombatExpirationDialog(
     return;
   let expire = false;
   if (effect.system.expirations.combat.what.type === "forced" && !forceDialog) {
-    expire = await api.DialogV2.confirm({
+    expire = await TeriockDialog.confirm({
       window: { title: `${effect.name} Expiration` },
       content: `Should ${effect.name} expire?`,
       modal: true,
@@ -34,7 +34,7 @@ export default async function inCombatExpirationDialog(
       const descriptionLegend = document.createElement("legend");
       descriptionLegend.innerText = "End Condition";
       descriptionElement.append(descriptionLegend);
-      const descriptionText = await ux.TextEditor.enrichHTML(
+      const descriptionText = await TextEditor.enrichHTML(
         effect.system.expirations.description,
       );
       const descriptionDiv = document.createElement("div");
@@ -61,7 +61,7 @@ export default async function inCombatExpirationDialog(
       ),
     );
     try {
-      await new api.DialogV2({
+      await new TeriockDialog({
         window: { title: `${effect.name} Expiration` },
         content: contentHtml,
         buttons: [

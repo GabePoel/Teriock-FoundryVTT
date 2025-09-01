@@ -1,11 +1,11 @@
+import { TeriockDialog } from "../../../../../applications/api/_module.mjs";
 import { createDialogFieldset } from "../../../../../helpers/html.mjs";
 
-const { api, ux } = foundry.applications;
+const { TextEditor } = foundry.applications.ux;
 
 /**
  * Handles dialogs for variable costs and heightened effects.
  * Prompts user for variable MP/HP costs and heightened amounts.
- *
  * @param {object} rollConfig
  * @returns {Promise<void>} Promise that resolves when dialogs are handled.
  * @private
@@ -18,7 +18,7 @@ export async function _handleDialogs(rollConfig) {
 
   // Variable MP cost dialog
   if (abilityData.costs.mp?.type === "variable") {
-    let mpDescription = await ux.TextEditor.enrichHTML(
+    let mpDescription = await TextEditor.enrichHTML(
       abilityData.costs.mp.value.variable,
     );
     if (abilityData.gifted.enabled) {
@@ -32,7 +32,7 @@ export async function _handleDialogs(rollConfig) {
 
   // Variable HP cost dialog
   if (abilityData.costs.hp?.type === "variable") {
-    const hpDescription = await ux.TextEditor.enrichHTML(
+    const hpDescription = await TextEditor.enrichHTML(
       abilityData.costs.hp.value.variable,
     );
     const maxHp = actor.system.hp.value - actor.system.hp.min;
@@ -48,7 +48,7 @@ export async function _handleDialogs(rollConfig) {
 
   // Variable GP cost dialog
   if (abilityData.costs.gp?.type === "variable") {
-    const gpDescription = await ux.TextEditor.enrichHTML(
+    const gpDescription = await TextEditor.enrichHTML(
       abilityData.costs.gp.value.variable,
     );
     dialogs.push(
@@ -63,7 +63,7 @@ export async function _handleDialogs(rollConfig) {
     !rollConfig.useData.modifiers.noHeighten
   ) {
     const p = actor.system.p;
-    const heightenedDescription = await ux.TextEditor.enrichHTML(
+    const heightenedDescription = await TextEditor.enrichHTML(
       abilityData.heightened,
     );
     dialogs.push(
@@ -79,7 +79,7 @@ export async function _handleDialogs(rollConfig) {
   if (dialogs.length > 0) {
     const action = abilityData.spell ? "Casting" : "Executing";
     const title = `${action} ${abilityData.parent.name}`;
-    await api.DialogV2.prompt({
+    await TeriockDialog.prompt({
       window: { title },
       content: dialogs.join(""),
       modal: true,

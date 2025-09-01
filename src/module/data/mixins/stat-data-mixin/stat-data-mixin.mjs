@@ -9,6 +9,7 @@ const { fields } = foundry.data;
  * @param {typeof ChildTypeModel} Base
  */
 export default (Base) => {
+  // noinspection JSClosureCompilerSyntax
   return (
     /**
      * @implements {StatDataMixinInterface}

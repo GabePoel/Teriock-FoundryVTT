@@ -4,7 +4,6 @@ import { _generateEffect, _generateTakes } from "../_generate-effect.mjs";
 /**
  * Builds buttons for the ability roll based on the ability's effects and takes.
  * Creates buttons for feat saves, effects, resistance, and various take actions.
- *
  * @param {AbilityRollConfig} rollConfig - Configurations for this ability usage.
  * @returns {Promise<Teriock.UI.HTMLButtonConfig[]>} Promise that resolves to an array of button configurations.
  * @private
@@ -52,7 +51,8 @@ export async function _buildButtons(rollConfig) {
     abilityData.applies.base.common.has("standardDamage") ||
     (rollConfig.useData.proficient &&
       abilityData.applies.proficient.common.has("standardDamage")) ||
-    (rollConfig.useData.fluent && abilityData.applies.fluent.common.has("standardDamage"))
+    (rollConfig.useData.fluent &&
+      abilityData.applies.fluent.common.has("standardDamage"))
   ) {
     const buttonData = {
       label: "Standard Roll",
@@ -107,7 +107,7 @@ export async function _buildButtons(rollConfig) {
   // Rollable Take Buttons
   Object.entries(takeData.rolls).forEach(([rollType, formula]) => {
     if (formula && ROLL_BUTTON_CONFIGS[rollType]) {
-      const buttonConfig = ROLL_BUTTON_CONFIGS[rollType];
+      const buttonConfig = foundry.utils.deepClone(ROLL_BUTTON_CONFIGS[rollType]);
       buttonConfig.icon = `fas fa-${getRollIcon(formula)}`;
       buttonConfig.dataset = {
         action: "roll-rollable-take",
@@ -173,27 +173,27 @@ export async function _buildButtons(rollConfig) {
  *
  * @type {Record<string,Teriock.UI.HTMLButtonConfig>}
  */
-const ROLL_BUTTON_CONFIGS = {
-  damage: { label: "Roll Damage", icon: "fas fa-heart" },
-  drain: { label: "Roll Drain", icon: "fas fa-brain" },
+export const ROLL_BUTTON_CONFIGS = foundry.utils.deepFreeze({
+  damage: { label: "Roll Damage", icon: "fas fa-heart-crack" },
+  drain: { label: "Roll Drain", icon: "fas fa-droplet-slash" },
   wither: { label: "Roll Wither", icon: "fas fa-hourglass-half" },
-  heal: { label: "Roll Heal", icon: "fas fa-heart" },
-  revitalize: { label: "Roll Revitalize", icon: "fas fa-heart" },
+  heal: { label: "Roll Heal", icon: "fas fa-hand-holding-heart" },
+  revitalize: { label: "Roll Revitalize", icon: "fas fa-hand-holding-droplet" },
   setTempHp: { label: "Roll Temp HP", icon: "fas fa-heart" },
-  setTempMp: { label: "Roll Temp MP", icon: "fas fa-brain" },
+  setTempMp: { label: "Roll Temp MP", icon: "fas fa-droplet" },
   gainTempHp: { label: "Roll Temp HP", icon: "fas fa-heart" },
-  gainTempMp: { label: "Roll Temp MP", icon: "fas fa-brain" },
+  gainTempMp: { label: "Roll Temp MP", icon: "fas fa-droplet" },
   sleep: { label: "Roll Sleep", icon: "fas fa-bed" },
   kill: { label: "Roll Kill", icon: "fas fa-skull" },
   pay: { label: "Roll Pay", icon: "fas fa-coin" },
-};
+});
 
 /**
  * Button configurations for different hacks.
  *
  * @type {Record<string,Teriock.UI.HTMLButtonConfig>}
  */
-const HACK_BUTTON_CONFIGS = {
+const HACK_BUTTON_CONFIGS = foundry.utils.deepFreeze({
   arm: { label: "Hack Arm", icon: "fas fa-hand" },
   leg: { label: "Hack Leg", icon: "fas fa-boot" },
   body: { label: "Hack Body", icon: "fas fa-kidneys" },
@@ -201,4 +201,4 @@ const HACK_BUTTON_CONFIGS = {
   ear: { label: "Hack Ear", icon: "fas fa-ear" },
   mouth: { label: "Hack Mouth", icon: "fas fa-lips" },
   nose: { label: "Hack Nose", icon: "fas fa-nose" },
-};
+});

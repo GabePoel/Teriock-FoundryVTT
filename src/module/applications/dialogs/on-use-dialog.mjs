@@ -1,8 +1,9 @@
 import { selectDialog } from "./select-dialog.mjs";
 
+// TODO: Convert to document selection.
+
 /**
  * Dialog that lets you select a {@link TeriockEffect} to activate on use of a {@link TeriockItem}.
- *
  * @param {TeriockItem} item
  * @returns {Promise<null|Teriock.ID<TeriockEffect>>}
  */

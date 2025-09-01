@@ -1,7 +1,6 @@
 import { abilityOptions } from "../../constants/ability-options.mjs";
 import { conditions } from "../../constants/generated/conditions.mjs";
-
-const { DialogV2 } = foundry.applications.api;
+import { TeriockDialog } from "../api/_module.mjs";
 
 /**
  * Dialog that sets the duration for an ability.
@@ -66,7 +65,7 @@ export default async function durationDialog(ability) {
     ),
   );
   try {
-    await DialogV2.prompt({
+    await TeriockDialog.prompt({
       window: { title: "Set Duration" },
       modal: true,
       content: contentHtml,
@@ -78,11 +77,11 @@ export default async function durationDialog(ability) {
           const quantity = button.form.elements.namedItem("quantity").value;
           const unit = button.form.elements.namedItem("unit").value;
           const present =
-            /** @type {Teriock.Parameters.Condition.Key[]} */ button.form.elements.namedItem(
+            /** @type {Teriock.Parameters.Condition.ConditionKey[]} */ button.form.elements.namedItem(
               "present",
             ).value;
           const absent =
-            /** @type {Teriock.Parameters.Condition.Key[]} */ button.form.elements.namedItem(
+            /** @type {Teriock.Parameters.Condition.ConditionKey[]} */ button.form.elements.namedItem(
               "absent",
             ).value;
           const stationaryElement =

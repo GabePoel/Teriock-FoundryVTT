@@ -18,13 +18,13 @@ import { _defineTradecrafts } from "./_define-tradecrafts.mjs";
  * This function orchestrates the creation of a comprehensive actor data schema by
  * calling all the individual schema definition functions in the correct order.
  *
- * @returns {Object} The complete base actor schema containing all defined fields
- *
  * @example
- * ```JavaScript
+ * ```js
  * const baseActorSchema = _defineSchema();
  * // baseActorSchema now contains all actor fields from all schema components
  * ```
+ *
+ * @returns {Object} The complete base actor schema containing all defined fields
  */
 export function _defineSchema() {
   let schema = {};

@@ -37,30 +37,15 @@ function hackField(max, name) {
  * Relevant wiki pages:
  * - [Hacks](https://wiki.teriock.com/index.php/Damage:Hack)
  *
- * @param {Object} schema - The schema object to extend with hack fields
- * @returns {Object} The modified schema object with hack fields added
- *
  * @example
- * ```javascript
+ * ```js
  * const schema = {};
  * const hacksSchema = _defineHacks(schema);
- * // hacksSchema now contains: hacks field with all body part modifications
+ * // hacksSchema now contains: `hacks` field with all body part modifications
  * ```
  *
- * @typedef {Object} HackField
- * @property {NumberField} min - Minimum hack value for this body part (≥0, integer)
- * @property {NumberField} max - Maximum hack value for this body part (≥0, integer)
- * @property {NumberField} value - Current hack value for this body part (≥0, integer)
- *
- * @typedef {Object} HacksSchema
- * @property {SchemaField} hacks - Object containing all body part hack fields:
- *   - arm: {@link HackField} Arm hacks (max: 2)
- *   - leg: {@link HackField} Leg hacks (max: 2)
- *   - body: {@link HackField} Body hacks (max: 1)
- *   - eye: {@link HackField} Eye hacks (max: 1)
- *   - ear: {@link HackField} Ear hacks (max: 1)
- *   - mouth: {@link HackField} Mouth hacks (max: 1)
- *   - nose: {@link HackField} Nose hacks (max: 1)
+ * @param {Object} schema - The schema object to extend with hack fields
+ * @returns {Object} The modified schema object with hack fields added
  */
 export function _defineHacks(schema) {
   schema.hacks = new fields.SchemaField({

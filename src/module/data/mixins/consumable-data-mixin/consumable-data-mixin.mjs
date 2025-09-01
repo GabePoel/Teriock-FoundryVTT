@@ -3,10 +3,10 @@ import { mergeFreeze, smartEvaluateSync } from "../../../helpers/utils.mjs";
 /**
  * Mixin that provides consumable document functionality.
  * Adds quantity management, automatic consumption, and quantity validation capabilities.
- *
  * @param {typeof ChildTypeModel} Base - The base class to mix in with.
  */
 export default (Base) => {
+  // noinspection JSClosureCompilerSyntax
   return (
     /**
      * @implements {ConsumableDataMixinInterface}

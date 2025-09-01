@@ -103,6 +103,9 @@ foundry.helpers.Hooks.once("init", function () {
     base: data.message.BaseChatMessageData,
   });
 
+  // UX
+  CONFIG.ux.TooltipManager = helpers.interaction.TeriockTooltipManager;
+
   // Unregister V1 sheets
   DocumentSheetConfig.unregisterSheet(
     documents.TeriockActor,
@@ -295,6 +298,14 @@ foundry.helpers.Hooks.once("init", function () {
   // Register custom handlebars templates
   return helpers.maintenance.registerTemplates();
 });
+
+// foundry.helpers.Hooks.once("ready", function () {
+//   Object.setPrototypeOf(
+//     game.tooltip,
+//     helpers.interaction.TeriockTooltipManager.prototype,
+//   );
+//   console.log(game.tooltip);
+// });
 
 for (const hook of Object.values(helpers.hookManagement)) {
   if (typeof hook === "function") {

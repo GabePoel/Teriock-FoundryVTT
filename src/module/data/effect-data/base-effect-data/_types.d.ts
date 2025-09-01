@@ -12,8 +12,8 @@ declare module "./base-effect-data.mjs" {
     /** Suppression */
     suppression: {
       statuses: {
-        active: Set<Teriock.Parameters.Condition.Key>;
-        inactive: Set<Teriock.Parameters.Condition.Key>;
+        active: Set<Teriock.Parameters.Condition.ConditionKey>;
+        inactive: Set<Teriock.Parameters.Condition.ConditionKey>;
       };
       // Deprecated?
       comparisons: {

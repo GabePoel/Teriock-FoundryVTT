@@ -1,11 +1,12 @@
 import { documentOptions } from "../../constants/document-options.mjs";
+import { ROLL_BUTTON_CONFIGS } from "../../data/effect-data/ability-data/methods/rolling/_roll-build-buttons.mjs";
 import { getAbility } from "../../helpers/fetch.mjs";
 
 const enricherIcons = {
   Core: "circle-info",
   Keyword: "quote-left",
-  Damage: "heart",
-  Drain: "brain",
+  Damage: "heart-circle-bolt",
+  Drain: "droplet-degree",
   Condition: documentOptions.effect.icon,
   Property: documentOptions.property.icon,
   Tradecraft: documentOptions.fluency.icon,
@@ -84,6 +85,42 @@ const rankEnricher = {
   replaceParent: false,
 };
 
+/** Generic enricher for `[[/<take> <formula>]]` */
+const escapeRx = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+
+/**
+ * Create a roll enricher that recognizes all takes in `ROLL_BUTTON_CONFIGS`.
+ */
+export const makeRollEnricher = (BUTTONS) => {
+  const keys = Object.keys(BUTTONS);
+  const lookup = Object.fromEntries(keys.map((k) => [k.toLowerCase(), k]));
+  const keyAlt = keys.map(escapeRx).join("|");
+  const any = "([^]*)";
+  const source = String.raw`\[\[\s*\/(${keyAlt})\s+${any}?\s*\]\]`;
+  const pattern = new RegExp(source, "gi");
+  return {
+    pattern,
+    enricher: async (match) => {
+      const typeKey = lookup[match[1].toLowerCase()];
+      if (!typeKey) return null;
+      const formula = (match[2] ?? "").trim();
+      const { label, icon } = BUTTONS[typeKey];
+      const a = document.createElement("a");
+      a.className = "content-link";
+      a.draggable = false;
+      a.dataset.action = "roll-rollable-take";
+      a.dataset.type = typeKey;
+      a.dataset.formula = formula;
+      a.dataset.tooltip = label;
+      const i = document.createElement("i");
+      i.className = icon;
+      a.append(i, " ", formula);
+      return a;
+    },
+    replaceParent: false,
+  };
+};
+
 const equipmentEnricher = {
   pattern: /@Equipment\[(.+?)\](?:\{(.+?)\})?/g,
   enricher: async (match, _options) => {
@@ -131,7 +168,6 @@ const wikiLinkEnricher = {
   },
   replaceParent: false,
 };
-
 /**
  * Register all enrichers.
  */
@@ -143,4 +179,5 @@ export default function registerEnrichers() {
   CONFIG.TextEditor.enrichers.push(rankEnricher);
   CONFIG.TextEditor.enrichers.push(wikiEnricher);
   CONFIG.TextEditor.enrichers.push(wikiLinkEnricher);
+  CONFIG.TextEditor.enrichers.push(makeRollEnricher(ROLL_BUTTON_CONFIGS));
 }

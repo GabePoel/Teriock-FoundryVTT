@@ -3,9 +3,8 @@ import { addAbilitiesBlock } from "../../../../helpers/messages-builder/message-
 /**
  * Generates message parts for an ability, including bars and blocks for display.
  * Creates formatted display elements for execution, targeting, expansion, costs, effects, and ability type.
- *
  * @param {TeriockAbilityData} abilityData - The ability data to generate message parts for.
- * @returns {Partial<Teriock.MessageData.Parts>} Object containing bars and blocks for the ability message.
+ * @returns {Partial<Teriock.MessageData.MessageParts>} Object containing bars and blocks for the ability message.
  * @private
  */
 export function _messageParts(abilityData) {

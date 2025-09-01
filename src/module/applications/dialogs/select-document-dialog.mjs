@@ -1,36 +1,74 @@
-import { SelectSheet } from "../sheets/misc-sheets/_module.mjs";
+import { TeriockDocumentSelector } from "../api/_module.mjs";
 
 /**
+ * Select any number of documents.
  * @template T
  * @param {T[]} documents
- * @param {object} [options]
- * @param {string} [options.title="Select Documents"]
- * @param {string} [options.hint=""]
- * @param {boolean} [options.multi=true]
- * @param {boolean} [options.tooltip=true]
+ * @param {Teriock.SelectOptions.DocumentsSelect} [options]
  * @returns {Promise<T[]>}
  */
 export async function selectDocumentsDialog(documents, options = {}) {
   options = foundry.utils.mergeObject(
-    { title: "Select Documents", hint: "", multi: true, tooltip: true },
+    {
+      title: "Select Documents",
+      hint: "",
+      multi: true,
+      tooltip: true,
+      idKey: "uuid",
+      imgKey: "img",
+      nameKey: "name",
+      tooltipKey: null,
+    },
     options,
   );
 
-  const sheet = new SelectSheet(documents, {
+  const idToDoc = new Map();
+  const context = {
+    documents: {},
+    hint: options.hint,
+    tooltip: options.tooltip,
+  };
+
+  for (const doc of documents) {
+    const id = foundry.utils.getProperty(doc, options.idKey);
+    idToDoc.set(id, doc);
+    context.documents[id] = {
+      name: foundry.utils.getProperty(doc, options.nameKey),
+      img: foundry.utils.getProperty(doc, options.imgKey),
+    };
+    if (options.tooltipKey && options.tooltip) {
+      context.documents[id].tooltip = foundry.utils.getProperty(
+        doc,
+        options.tooltipKey,
+      );
+    }
+  }
+
+  if (options.tooltip && !options.tooltipKey) {
+    await Promise.all(
+      documents.map(async (doc) => {
+        const id = foundry.utils.getProperty(doc, options.idKey);
+        context.documents[id].tooltip = await doc.buildMessage?.();
+      }),
+    );
+  }
+
+  const sheet = new TeriockDocumentSelector(context.documents, {
     multi: options.multi,
     hint: options.hint,
     tooltip: options.tooltip,
     title: options.title,
   });
 
-  const result = await sheet.select();
-  return options.multi ? result : result ? [result] : [];
+  const selected = await sheet.select();
+  return selected.map((id) => idToDoc.get(id)).filter(Boolean);
 }
 
 /**
+ * Select one document.
  * @template T
  * @param {T[]} documents
- * @param {object} [options]
+ * @param {Teriock.SelectOptions.DocumentSelect} [options]
  * @returns {Promise<T|null>}
  */
 export async function selectDocumentDialog(documents, options = {}) {

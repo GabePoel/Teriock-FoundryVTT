@@ -5,7 +5,7 @@ export interface ProtectionData {
   /** Drain Types */
   drainTypes: Set<string>;
   /** Statuses */
-  statuses: Set<Teriock.Parameters.Condition.Key>;
+  statuses: Set<Teriock.Parameters.Condition.ConditionKey>;
   /** Elements */
   elements: Set<Teriock.Parameters.Ability.Element>;
   /** Effects */

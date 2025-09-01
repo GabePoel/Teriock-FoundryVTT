@@ -4,7 +4,6 @@ import { makeDamageTypeButtons } from "./html.mjs";
 
 /**
  * Roll with harm buttons.
- *
  * @param {string} formula
  * @param {object} rollData
  * @param {string} message
@@ -16,7 +15,7 @@ export async function harmRoll(formula, rollData = {}, message = "") {
   const buttons = /** @type {Teriock.UI.HTMLButtonConfig[]} */ [
     {
       label: "Damage",
-      icon: "fas fa-heart",
+      icon: "fas fa-heart-crack",
       classes: ["teriock-chat-button", "damage-button"],
       dataset: {
         action: "take-rollable-take",
@@ -26,7 +25,7 @@ export async function harmRoll(formula, rollData = {}, message = "") {
     },
     {
       label: "Drain",
-      icon: "fas fa-brain",
+      icon: "fas fa-droplet-slash",
       classes: ["teriock-chat-button", "drain-button"],
       dataset: {
         action: "take-rollable-take",

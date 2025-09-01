@@ -1,11 +1,10 @@
 import { TeriockRoll } from "../../documents/_module.mjs";
+import { TeriockDialog } from "../api/_module.mjs";
 
-const { DialogV2 } = foundry.applications.api;
 const { fields } = foundry.data;
 
 /**
  * Dialog that allows for modifying a roll with boosts/deboosts.
- *
  * @param {string} rollFormula
  * @param {object} [options]
  * @param {boolean} [options.crit] Go critical?
@@ -44,7 +43,7 @@ export default async function boostDialog(
   contentHtml.append(deboostsField.toFormGroup({}, { name: "deboosts" }));
   contentHtml.append(critField.toFormGroup({}, { name: "crit" }));
   try {
-    await DialogV2.prompt({
+    await TeriockDialog.prompt({
       window: { title: "Modify Roll Formula" },
       modal: true,
       content: contentHtml,

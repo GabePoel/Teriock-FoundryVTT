@@ -1,4 +1,4 @@
-import { ImageSheet } from "../../../applications/sheets/misc-sheets/_module.mjs";
+import { TeriockImagePreviewer } from "../../../applications/api/_module.mjs";
 import { freeze, makeIcon } from "../../../helpers/utils.mjs";
 import { TextField } from "../../shared/fields/_module.mjs";
 import CommonTypeModel from "../common-type-model/common-type-model.mjs";
@@ -8,8 +8,7 @@ const { fields } = foundry.data;
 /**
  * Mixin that provides child document functionality for embedded documents.
  * Adds proficiency tracking, font customization, and message generation capabilities.
- *
- * @implements {ChildDataInterface}
+ * @implements {ChildTypeModelInterface}
  * @property {TeriockItem|TeriockEffect} parent
  * @property {string} description
  * @property {boolean} proficient
@@ -97,7 +96,7 @@ export default class ChildTypeModel extends CommonTypeModel {
         name: "Open Image",
         icon: makeIcon("image", "contextMenu"),
         callback: async () => {
-          await new ImageSheet(this.parent.img).render(true);
+          await new TeriockImagePreviewer(this.parent.img).render(true);
         },
         group: "open",
       },
@@ -144,7 +143,7 @@ export default class ChildTypeModel extends CommonTypeModel {
   /**
    * Gets the message rules-parts for displaying the child document in chat.
    * Includes image, name, and font information from the parent document.
-   * @returns {Teriock.MessageData.Parts} Object containing message display components.
+   * @returns {Teriock.MessageData.MessageParts} Object containing message display components.
    */
   get messageParts() {
     return {
@@ -167,7 +166,7 @@ export default class ChildTypeModel extends CommonTypeModel {
   /**
    * Gets the secret message rules-parts for displaying hidden child documents.
    * Uses generic uncertainty image and type-based name for privacy.
-   * @returns {Teriock.MessageData.Parts} Object containing secret message display components.
+   * @returns {Teriock.MessageData.MessageParts} Object containing secret message display components.
    */
   get secretMessageParts() {
     return {

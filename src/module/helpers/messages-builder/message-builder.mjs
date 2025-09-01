@@ -5,7 +5,7 @@ import { messageBar, messageBlock, messageBox, messageHeader, messageWrapper } f
  *
  * This function takes an object containing message parts (image, name, bars, blocks, font)
  * and constructs a complete DOM element with proper structure and styling.
- * @param {Teriock.MessageData.Parts} messageParts - Object containing the message parts.
+ * @param {Teriock.MessageData.MessageParts} messageParts - Object containing the message parts.
  * @returns {HTMLDivElement} The complete message element.
  */
 export function buildMessage(messageParts) {

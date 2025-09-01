@@ -1,9 +1,9 @@
-const { DialogV2 } = foundry.applications.api;
+import { TeriockDialog } from "../api/_module.mjs";
+
 const { TextEditor } = foundry.applications.ux;
 
 /**
  * Dialog to select what type of macro to make.
- *
  * @param {TeriockItem|TeriockEffect} doc
  * @returns {Promise<string>} Type of macro to be made.
  */
@@ -19,7 +19,7 @@ export default async function hotbarDropDialog(doc) {
       context,
     );
     macroType = "general";
-    macroType = await DialogV2.prompt({
+    macroType = await TeriockDialog.prompt({
       window: { title: `Macro Type Selection` },
       modal: true,
       content: content,

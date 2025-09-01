@@ -1,6 +1,6 @@
-import TeriockImageSheet from "../../applications/sheets/misc-sheets/image-sheet/image-sheet.mjs";
-import { dispatch } from "../command/dispatch.mjs";
+import { TeriockImagePreviewer } from "../../applications/api/_module.mjs";
 import { addClickHandler } from "../html.mjs";
+import { dispatch } from "../interaction/command/_module.mjs";
 
 export default function registerChatManagementHooks() {
   foundry.helpers.Hooks.on("chatMessage", (_chatLog, message, chatData) => {
@@ -18,7 +18,7 @@ export default function registerChatManagementHooks() {
         event.preventDefault();
         const img = imgEl.getAttribute("data-src");
         if (img && img.length > 0) {
-          const image = new TeriockImageSheet(img);
+          const image = new TeriockImagePreviewer(img);
           await image.render(true);
         }
       });

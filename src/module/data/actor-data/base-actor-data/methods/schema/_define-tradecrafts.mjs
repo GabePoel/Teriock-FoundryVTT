@@ -34,24 +34,15 @@ const tradecrafts = mergeLevel(tradecraftOptions, "*", "tradecrafts");
  * - [Talented](https://wiki.teriock.com/index.php/Keyword:Talented)
  * - [Expertise](https://wiki.teriock.com/index.php/Keyword:Expertise)
  *
- * @param {Object} schema - The schema object to extend with tradecraft fields
- * @returns {Object} The modified schema object with tradecraft fields added
- *
  * @example
- * ```javascript
+ * ```js
  * const schema = {};
  * const tradecraftsSchema = _defineTradecrafts(schema);
- * // tradecraftsSchema now contains: tradecrafts field with all available tradecrafts
+ * // tradecraftsSchema now contains: `tradecrafts` field with all available tradecrafts
  * ```
  *
- * @typedef {Object} TradecraftField
- * @property {BooleanField} proficient - Whether proficient in this tradecraft
- * @property {NumberField} extra - Additional modifier for this tradecraft (≥0)
- * @property {NumberField} bonus - Calculated bonus value for this tradecraft (≥0)
- *
- * @typedef {Object} TradecraftsSchema
- * @property {SchemaField} tradecrafts - Object containing all available tradecraft fields,
- *   where each key is a tradecraft name and each value is a {@link TradecraftField}
+ * @param {Object} schema - The schema object to extend with tradecraft fields
+ * @returns {Object} The modified schema object with tradecraft fields added
  */
 export function _defineTradecrafts(schema) {
   const tradecraftData = {};

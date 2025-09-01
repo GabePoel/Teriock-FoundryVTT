@@ -36,7 +36,7 @@ export interface AbilityConsequence {
   checks: Set<Teriock.Parameters.Fluency.Tradecraft>;
   common: Set<Teriock.Parameters.Consequence.CommonConsequenceKey>;
   duration: number;
-  endStatuses: Set<Teriock.Parameters.Condition.Key>;
+  endStatuses: Set<Teriock.Parameters.Condition.ConditionKey>;
   expiration: {
     normal: AbilityExpiration;
     crit: AbilityExpiration;
@@ -45,8 +45,8 @@ export interface AbilityConsequence {
   };
   hacks: Set<Teriock.Parameters.Actor.HackableBodyPart>;
   rolls: Record<Teriock.Parameters.Consequence.RollConsequenceKey, string>;
-  startStatuses: Set<Teriock.Parameters.Condition.Key>;
-  statuses: Set<Teriock.Parameters.Condition.Key>;
+  startStatuses: Set<Teriock.Parameters.Condition.ConditionKey>;
+  statuses: Set<Teriock.Parameters.Condition.ConditionKey>;
 }
 
 /**

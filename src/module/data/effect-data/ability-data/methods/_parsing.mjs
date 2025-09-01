@@ -1,5 +1,6 @@
 import { abilityOptions } from "../../../../constants/ability-options.mjs";
 import { parseDurationString, safeUuid, toKebabCase } from "../../../../helpers/utils.mjs";
+import { cleanHTMLDoc } from "../../../shared/parsing/clean-html-doc.mjs";
 import { extractChangesFromHTML } from "../../../shared/parsing/extract-changes.mjs";
 import { getBarText, getText } from "../../../shared/parsing/get-text.mjs";
 import { processSubAbilities } from "../../../shared/parsing/process-subs.mjs";
@@ -50,7 +51,8 @@ function defaultConsequence() {
       doesExpire: false,
     },
     hacks: new Set(),
-    rolls: {},
+    rolls:
+      /** @type {Record<Teriock.Parameters.Consequence.RollConsequenceKey, string>} */ {},
     startStatuses: new Set(),
     statuses: new Set(),
   };
@@ -97,13 +99,7 @@ export async function _parse(abilityData, rawHTML) {
   subs.push(...expandableSubs);
 
   // Remove sub-containers and process dice
-  doc.querySelectorAll(".ability-sub-container").forEach((el) => el.remove());
-  doc.querySelectorAll(".expandable-container").forEach((el) => el.remove());
-  doc.querySelectorAll(".dice").forEach((el) => {
-    const fullRoll = el.getAttribute("data-full-roll");
-    const quickRoll = el.getAttribute("data-quick-roll");
-    if (quickRoll) el.textContent = `[[/roll ${fullRoll}]]`;
-  });
+  cleanHTMLDoc(doc);
 
   // Build the tag tree
   const tagTree = buildTagTree(doc);

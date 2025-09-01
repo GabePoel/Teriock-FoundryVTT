@@ -31,7 +31,7 @@ export type HierarchyField = {
 /** What actor is the source who triggers expirations? */
 export type CombatExpirationSourceType = "target" | "executor" | "everyone";
 
-/**  What is the type of method of this expiration? */
+/**  What is the method of this expiration? */
 export type CombatExpirationMethod = {
   /** If this expires on a roll, what is the roll that needs to be made? */
   roll: "2d4kh1";
@@ -41,7 +41,7 @@ export type CombatExpirationMethod = {
   type: "forced" | "rolled" | "none";
 };
 
-/** When in the combat this effect expires. */
+/** When in the combat does this effect expire? */
 export type CombatExpirationTiming = {
   /** A number of instances of the trigger firing to skip before this effect expires. */
   skip: number;

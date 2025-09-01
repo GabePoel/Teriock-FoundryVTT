@@ -1,6 +1,6 @@
-import { imageContextMenuOptions } from "../../../applications/sheets/misc-sheets/image-sheet/connections/_context-menus.mjs";
-import { handlers } from "../../../helpers/action-handler/instances/_handlers.mjs";
+import { imageContextMenuOptions } from "../../../applications/shared/_module.mjs";
 import { buildHTMLButton } from "../../../helpers/html.mjs";
+import { handlers } from "../../../helpers/interaction/_module.mjs";
 
 const { ux } = foundry.applications;
 const { fields } = foundry.data;
@@ -182,6 +182,7 @@ export default class TeriockBaseMessageData extends TypeDataModel {
       }
 
       element.addEventListener("click", async (event) => {
+        // noinspection JSValidateTypes
         const handler = /** @type {ActionHandler} */ new HandlerClass(
           event,
           element,
@@ -191,6 +192,7 @@ export default class TeriockBaseMessageData extends TypeDataModel {
 
       element.addEventListener("contextmenu", async (event) => {
         event.preventDefault();
+        // noinspection JSValidateTypes
         const handler = /** @type {ActionHandler} */ new HandlerClass(
           event,
           element,

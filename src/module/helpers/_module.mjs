@@ -9,3 +9,4 @@ export * as queries from "./queries/_module.mjs";
 export * as quickRolls from "./quick-rolls.mjs";
 export * as utils from "./utils.mjs";
 export * as wiki from "./wiki/_module.mjs";
+export * as interaction from "./interaction/_module.mjs";

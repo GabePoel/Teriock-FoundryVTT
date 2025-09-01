@@ -7,6 +7,7 @@
     <label><input type="text" class="search-input" placeholder="Search..." autocomplete="off"></label>
   </div>
 
+  <!--suppress CssInvalidPropertyValue -->
   <div class="form-group"
        style="
          display:block;
@@ -20,7 +21,7 @@
     <div class="doc-list-container" tabindex="0">
       <ul class="doc-select tcard-container small" role="listbox"
           aria-multiselectable="{{#if multi}}true{{else}}false{{/if}}">
-        {{#each documents as |doc uuid|}}
+        {{#each documents as |doc id|}}
           <li class="doc-select-item">
             <label class="doc-select-row tcard"
               {{#if ../tooltip}}
@@ -30,9 +31,9 @@
               {{/if}}>
               <div class="doc-checkbox-container">
                 {{#if ../multi}}
-                  <input id="doc-{{uuid}}" type="checkbox" name="{{uuid}}">
+                  <input id="doc-{{id}}" type="checkbox" name="{{id}}">
                 {{else}}
-                  <input id="doc-{{uuid}}" type="radio" name="choice" value="{{uuid}}">
+                  <input id="doc-{{id}}" type="radio" name="choice" value="{{id}}">
                 {{/if}}
               </div>
               <div class="doc-image-container"><img src="{{doc.img}}" alt="{{doc.name}}"></div>

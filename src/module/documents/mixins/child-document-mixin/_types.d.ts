@@ -16,14 +16,14 @@ export interface ChildDocumentMixinInterface {
    * @param options - Options for building the message
    * @returns Promise that resolves to the enriched message HTML
    */
-  buildMessage(options?: Teriock.MessageData.Options): Promise<string>;
+  buildMessage(options?: Teriock.MessageData.MessageOptions): Promise<string>;
 
   /**
    * Builds a raw message string from the document's message parts.
    * @param options - Options for building the message
    * @returns The raw message HTML
    */
-  buildRawMessage(options?: Teriock.MessageData.Options): HTMLDivElement;
+  buildRawMessage(options?: Teriock.MessageData.MessageOptions): HTMLDivElement;
 
   /**
    * Sends a chat message with the document's content.

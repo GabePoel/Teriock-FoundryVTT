@@ -20,7 +20,7 @@ const { Actor } = foundry.documents;
  * @property {Collection<Teriock.UUID<TeriockItem>, TeriockItem>} items
  * @property {ParentItemKeys} itemKeys
  * @property {ParentItemTypes} itemTypes
- * @property {Set<Teriock.Parameters.Condition.Key>} statuses
+ * @property {Set<Teriock.Parameters.Condition.ConditionKey>} statuses
  * @property {Teriock.Documents.ActorType} type
  * @property {Teriock.UUID<TeriockActor>} uuid
  * @property {TeriockBaseActorData} system

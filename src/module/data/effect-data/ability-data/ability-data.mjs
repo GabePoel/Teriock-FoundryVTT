@@ -157,7 +157,10 @@ export default class TeriockAbilityData extends ConsumableDataMixin(
     }
   }
 
-  /** @inheritDoc */
+  /**
+   * @inheritDoc
+   * @returns {Promise<object>}
+   */
   async parse(rawHTML) {
     return await _parse(this, rawHTML);
   }

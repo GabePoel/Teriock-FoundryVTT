@@ -13,7 +13,7 @@ export const resourceOptions = {
     none: {
       name: "None",
       icon: "xmark-large",
-      callback: (resource, result) => {},
+      callback: (_resource, _result) => {},
     },
     takeHeal: {
       name: "Heal",
@@ -47,7 +47,7 @@ export const resourceOptions = {
     },
     takeDrain: {
       name: "Drain",
-      icon: "brain",
+      icon: "droplet-slash",
       callback: async (resource, amount) => {
         const actor = resource.actor;
         if (actor) {

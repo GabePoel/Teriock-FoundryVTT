@@ -55,15 +55,15 @@ function statField(name, options = {}) {
  * - [Wither](https://wiki.teriock.com/index.php/Drain:Wither)
  * - [Presence](https://wiki.teriock.com/index.php/Core:Presence)
  *
- * @param {Object} schema - The schema object to extend with stat fields
- * @returns {Object} The modified schema object with stat fields added
- *
  * @example
- * ```JavaScript
+ * ```js
  * const schema = {};
  * const statsSchema = _defineStats(schema);
  * // statsSchema now contains: hp, mp, wither, and presence fields
  * ```
+ *
+ * @param {Object} schema - The schema object to extend with stat fields
+ * @returns {Object} The modified schema object with stat fields added
  */
 export function _defineStats(schema) {
   schema.hp = statField("HP", { base: true, temp: true });

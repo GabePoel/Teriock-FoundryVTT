@@ -27,28 +27,15 @@ function speedField(initial, name) {
  * Relevant wiki pages:
  * - [Movement Speed](https://wiki.teriock.com/index.php/Core:Movement_Speed)
  *
- * @param {Object} schema - The schema object to extend with speed adjustment fields
- * @returns {Object} The modified schema object with speed adjustment fields added
- *
  * @example
- * ```javascript
+ * ```js
  * const schema = {};
  * const speedSchema = _defineSpeed(schema);
  * // speedSchema now contains: speedAdjustments field
  * ```
  *
- * @typedef {Object} SpeedAdjustmentsSchema
- * @property {NumberField} walk - Walking speed adjustment (0-4)
- * @property {NumberField} climb - Climbing speed adjustment (0-4)
- * @property {NumberField} crawl - Crawling speed adjustment (0-4)
- * @property {NumberField} difficultTerrain - Movement in difficult terrain adjustment (0-4)
- * @property {NumberField} dig - Digging speed adjustment (0-4)
- * @property {NumberField} dive - Diving/swimming underwater adjustment (0-4)
- * @property {NumberField} fly - Flying speed adjustment (0-4)
- * @property {NumberField} hidden - Movement while hidden adjustment (0-4)
- * @property {NumberField} leapHorizontal - Horizontal jumping distance adjustment (0-4)
- * @property {NumberField} leapVertical - Vertical jumping height adjustment (0-4)
- * @property {NumberField} swim - Swimming speed adjustment (0-4)
+ * @param {Object} schema - The schema object to extend with speed adjustment fields
+ * @returns {Object} The modified schema object with speed adjustment fields added
  */
 export function _defineSpeed(schema) {
   schema.speedAdjustments = new fields.SchemaField({

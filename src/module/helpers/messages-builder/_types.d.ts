@@ -1,7 +1,7 @@
 declare global {
   namespace Teriock.MessageData {
     /** Pieces of a bar within a chat message. */
-    export type Bar = {
+    export type MessageBar = {
       /** Name of FontAwesome icon to display in the message bar. */
       icon: string;
       /** The label of the message bar. */
@@ -11,7 +11,7 @@ declare global {
     };
 
     /** Pieces of a block within a chat message. */
-    export type Block = {
+    export type MessageBlock = {
       /** The title of the message block. */
       title: string;
       /** The main text content of the message block. */
@@ -25,19 +25,19 @@ declare global {
     };
 
     /** Represents the individual rules-parts that make up a message. */
-    export type Parts = {
+    export type MessageParts = {
       /** The URL or path to the image associated with the message. */
       image?: string;
       /** The name or title to display in the message. */
       name?: string;
-      bars?: Teriock.MessageData.Bar[];
-      blocks?: Teriock.MessageData.Block[];
+      bars?: Teriock.MessageData.MessageBar[];
+      blocks?: Teriock.MessageData.MessageBlock[];
       /** Font used for a message, or `null` for default font. */
       font?: string | null;
     };
 
     /** Options for automatically configuring a message. */
-    export type Options = {
+    export type MessageOptions = {
       /** If true, the content of the message is obfuscated. */
       secret?: boolean;
     };
