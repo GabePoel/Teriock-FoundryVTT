@@ -50,10 +50,19 @@
   {{formGroup
     (path systemFields "applies.fields" typeKey "fields.duration")
     value=(path system "applies" typeKey "duration")
+    classes="teriock-full-width"
     disabled=(not editable)
   }}
   <!-- Changes UI -->
-  {{> "systems/teriock/src/templates/document-templates/effect-templates/ability-template/parts/_impact-changes.hbs"}}
+  <fieldset class="teriock-full-width">
+    <legend>Changes</legend>
+    {{> "systems/teriock/src/templates/document-templates/shared/changes.hbs"
+      changesPath=(concat "system.applies." typeKey ".changes")
+      changesData=(path system "applies" typeKey "changes")
+      fieldDefs=(path systemFields "applies.fields" typeKey "fields.changes.element.fields")
+      additionalAttrs=(hash application=typeKey)
+    }}
+  </fieldset>
   <!-- Expiration UI -->
   {{formGroup
     (path systemFields "applies.fields" typeKey "fields.expiration.fields.doesExpire")

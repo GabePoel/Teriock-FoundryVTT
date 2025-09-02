@@ -20,13 +20,22 @@
         <i class="fa-fw fa-light fa-hammer-crash"></i>
       </div>
       <div class="ab-box-content">
-        {{formInput
-          systemFields.damageType
-          value=system.damageType
-          classes="ability-bar-input damage-type-input"
-          disabled=(not editable)
-          dataset=(dataset tooltip="Damage Type")
-        }}
+        {{#if (not (exists system.damageType))}}
+          <div class="ability-bar-input damage-type-input unselected">No Damage Type</div>
+          {{formInput
+            systemFields.damageType
+            value=system.damageType
+            classes="ability-bar-input damage-type-input selected"
+            disabled=(not editable)
+          }}
+        {{else}}
+          {{formInput
+            systemFields.damageType
+            value=system.damageType
+            classes="ability-bar-input damage-type-input"
+            disabled=(not editable)
+          }}
+        {{/if}}
       </div>
     </div>
   </div>

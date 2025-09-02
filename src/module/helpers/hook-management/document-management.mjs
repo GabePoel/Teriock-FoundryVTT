@@ -101,13 +101,14 @@ export default function registerDocumentManagementHooks() {
       if (isOwnerAndCurrentUser(document, userId)) {
         await document.actor?.postUpdate();
       }
-      if (
-        isOwnerAndCurrentUser(document, userId) &&
-        document.type === "ability"
-      ) {
-        await document.system.expireSustainedConsequences();
-        if (document.sup && document.sup.sheet.rendered)
-          await document.sup.sheet.render();
+      if (document.documentName === "ActiveEffect") {
+        if (document.sup && document.sup.sheet.rendered) await document.sup.sheet.render();
+        if (
+          isOwnerAndCurrentUser(document, userId) &&
+          document.type === "ability"
+        ) {
+          await document.system.expireSustainedConsequences();
+        }
       }
       if (document.parent.documentName === "Item") {
         if (document.parent.sheet.rendered)

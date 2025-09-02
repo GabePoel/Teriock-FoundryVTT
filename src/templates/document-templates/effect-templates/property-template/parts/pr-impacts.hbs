@@ -3,7 +3,11 @@
     {{> "systems/teriock/src/templates/document-templates/shared/header.hbs"}}
   </div>
   <div class="ab-impacts" style="padding: 1rem; width: 100%;">
-    {{> "systems/teriock/src/templates/document-templates/shared/changes.hbs"}}
+    {{> "systems/teriock/src/templates/document-templates/shared/changes.hbs"
+      changesPath="system.changes"
+      changesData=(path system "changes")
+      fieldDefs=(path systemFields "changes.element.fields")
+    }}
     <button
       class="ab-impacts-close"
       data-action="toggleImpacts"

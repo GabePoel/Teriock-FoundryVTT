@@ -85,7 +85,10 @@ export function _messageParts(equipmentData) {
       text: src.flaws,
     },
   ];
-  addPropertiesBlock(equipmentData.parent.transferredEffects, blocks);
+  addPropertiesBlock(
+    equipmentData.parent.transferredEffects.filter((e) => !e.sup),
+    blocks
+  );
   addAbilitiesBlock(
     equipmentData.parent.transferredEffects.filter((e) => !e.sup),
     blocks,
@@ -93,7 +96,7 @@ export function _messageParts(equipmentData) {
   addResourcesBlock(equipmentData.parent.transferredEffects, blocks);
   addFluenciesBlock(equipmentData.parent.transferredEffects, blocks);
   return {
-    bars: bars,
+  bars: bars,
     blocks: blocks,
   };
 }
@@ -102,7 +105,8 @@ export function _messageParts(equipmentData) {
  * Generates secret message parts for an equipment item, showing only noticeable properties.
  * Used when equipment is not fully identified.
  * @param {TeriockEquipmentData} equipmentData - The equipment data to generate secret message parts for.
- * @returns {Partial<Teriock.MessageData.MessageParts>} Object containing bars and blocks for the secret equipment message.
+ * @returns {Partial<Teriock.MessageData.MessageParts>} Object containing bars and blocks for the secret equipment
+ *   message.
  * @private
  */
 export function _secretMessageParts(equipmentData) {

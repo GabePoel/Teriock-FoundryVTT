@@ -1,9 +1,9 @@
-import { documentOptions } from "../../../../constants/document-options.mjs";
+import {documentOptions} from "../../../../constants/document-options.mjs";
 import * as createEffects from "../../../../helpers/create-effects.mjs";
-import { selectAbilityDialog } from "../../../dialogs/select-dialog.mjs";
-import { SheetMixin } from "../../mixins/_module.mjs";
+import {selectAbilityDialog} from "../../../dialogs/select-dialog.mjs";
+import {SheetMixin} from "../../mixins/_module.mjs";
 
-const { ActiveEffectConfig } = foundry.applications.sheets;
+const {ActiveEffectConfig} = foundry.applications.sheets;
 
 /**
  * Base effect sheet for Teriock system active effects.
@@ -24,33 +24,34 @@ export default class TeriockBaseEffectSheet extends SheetMixin(
     },
     actions: {
       addChange: this._addChange,
-      addRootChange: this._addRootChange,
       createAbility: this._createAbility,
       deleteChange: this._deleteChange,
-      deleteRootChange: this._deleteRootChange,
       toggleDisabledThis: this._toggledDisabledThis,
     },
   };
 
   /**
-   * Adds a new change to an effect application.
+   * Adds a new change at any specified path.
    * @param {Event} _event - The event object.
    * @param {HTMLElement} target - The target element.
    * @returns {Promise<void>} Promise that resolves when change is added.
    * @static
    */
   static async _addChange(_event, target) {
-    const application = target.dataset.application;
-    const updateString = `system.applies.${application}.changes`;
-    const changes = this.document.system.applies[application].changes;
+    const path = target.dataset.path;
+    if (!path) {
+      console.error("No path specified for addChange action");
+      return;
+    }
+    const currentChanges = foundry.utils.getProperty(this.document, path) || [];
     const newChange = {
       key: "",
       mode: 0,
       value: "",
       priority: 0,
     };
-    changes.push(newChange);
-    await this.document.update({ [updateString]: changes });
+    currentChanges.push(newChange);
+    await this.document.update({[path]: currentChanges});
   }
 
   /**
@@ -69,7 +70,7 @@ export default class TeriockBaseEffectSheet extends SheetMixin(
       priority: 0,
     };
     changes.push(newChange);
-    await this.document.update({ changes: changes });
+    await this.document.update({changes: changes});
   }
 
   /** @inheritDoc */
@@ -87,9 +88,9 @@ export default class TeriockBaseEffectSheet extends SheetMixin(
       await createEffects.createAbility(this.document, abilityName);
     }
   }
-
+  
   /**
-   * Deletes a change from an effect application.
+   * Deletes a change at any specified path.
    * @param {Event} _event - The event object.
    * @param {HTMLElement} target - The target element.
    * @returns {Promise<void>} Promise that resolves when change is deleted.
@@ -97,29 +98,19 @@ export default class TeriockBaseEffectSheet extends SheetMixin(
    */
   static async _deleteChange(_event, target) {
     const index = parseInt(target.dataset.index, 10);
-    const application = target.dataset.application;
-    const updateString = `system.applies.${application}.changes`;
-    const changes = this.document.system.applies[application].changes;
-    if (index >= 0 && index < changes.length) {
-      changes.splice(index, 1);
-      await this.document.update({ [updateString]: changes });
+    const path = target.dataset.path;
+    if (!path) {
+      console.error("No path specified for deleteChange action");
+      return;
     }
-  }
-
-  /**
-   * Deletes a change from an effect.
-   * @param {Event} _event - The event object.
-   * @param {HTMLElement} target - The target element.
-   * @returns {Promise<void>} Promise that resolves when change is deleted.
-   * @static
-   */
-  static async _deleteRootChange(_event, target) {
-    const index = parseInt(target.dataset.index, 10);
-    const changes = this.document.changes;
-    console.log(changes);
+    const changes = foundry.utils.getProperty(this.document, path);
+    if (!changes || !Array.isArray(changes)) {
+      console.error(`No changes array found at path: ${path}`);
+      return;
+    }
     if (index >= 0 && index < changes.length) {
       changes.splice(index, 1);
-      await this.document.update({ changes: changes });
+      await this.document.update({[path]: changes});
     }
   }
 
@@ -129,7 +120,7 @@ export default class TeriockBaseEffectSheet extends SheetMixin(
    * @static
    */
   static async _toggledDisabledThis() {
-    await this.document.update({ disabled: !this.document.disabled });
+    await this.document.update({disabled: !this.document.disabled});
   }
 
   /** @inheritDoc */

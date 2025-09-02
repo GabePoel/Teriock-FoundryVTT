@@ -2,7 +2,7 @@ import { mergeFreeze } from "../../../helpers/utils.mjs";
 import { WikiDataMixin } from "../../mixins/_module.mjs";
 import { FormulaField, ListField } from "../../shared/fields/_module.mjs";
 import TeriockBaseEffectData from "../base-effect-data/base-effect-data.mjs";
-import { changeField } from "../shared/shared-fields.mjs";
+import { changeField, hierarchyField } from "../shared/shared-fields.mjs";
 import { _messageParts } from "./methods/_messages.mjs";
 import { _migrateData } from "./methods/_migrate-data.mjs";
 import * as parsing from "./methods/_parsing.mjs";
@@ -18,17 +18,17 @@ const { fields } = foundry.data;
  *
  * @extends {TeriockBaseEffectData}
  */
-export default class TeriockPropertyData extends WikiDataMixin(
-  TeriockBaseEffectData,
-) {
+export default class TeriockPropertyData extends WikiDataMixin(TeriockBaseEffectData,) {
   /**
    * @inheritDoc
    * @type {Readonly<Teriock.Documents.EffectModelMetadata>}
    */
   static metadata = mergeFreeze(super.metadata, {
+    childEffectTypes: ["property"],
+    hierarchy: true,
+    modifies: "Item",
     namespace: "Property",
     type: "property",
-    modifies: "Item",
   });
 
   /** @inheritDoc */
@@ -38,21 +38,18 @@ export default class TeriockPropertyData extends WikiDataMixin(
       damageType: new fields.StringField({ initial: "" }),
       extraDamage: new FormulaField({ deterministic: false }),
       applyIfShattered: new fields.BooleanField({
-        initial: false,
-        label: "Apply if Shattered",
+        initial: false, label: "Apply if Shattered",
       }),
       applyIfDampened: new fields.BooleanField({
-        initial: false,
-        label: "Apply if Dampened",
+        initial: false, label: "Apply if Dampened",
       }),
       modifiesActor: new fields.BooleanField({
-        initial: false,
-        label: "Modifies Actor",
+        initial: false, label: "Modifies Actor",
       }),
       changes: new ListField(changeField(), {
-        label: "Changes",
-        hint: "Changes made to the target equipment as part of the property's ongoing effect.",
+        label: "Changes", hint: "Changes made to the target equipment as part of the property's ongoing effect.",
       }),
+      hierarchy: hierarchyField(),
     });
   }
 
@@ -60,6 +57,20 @@ export default class TeriockPropertyData extends WikiDataMixin(
   static migrateData(data) {
     data = _migrateData(data);
     return super.migrateData(data);
+  }
+
+  /** @inheritDoc */
+  prepareDerivedData() {
+    super.prepareDerivedData();
+    this.parent.changes = foundry.utils.deepClone(this.changes);
+    if (this.damageType && this.damageType.length > 0) {
+      this.parent.changes.push({
+        key: "system.damageTypes",
+        value: this.damageType.toLowerCase(),
+        priority: 10,
+        mode: 2,
+      })
+    }
   }
 
   /** @inheritDoc */

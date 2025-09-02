@@ -2,7 +2,6 @@ import TeriockEffect from "../documents/effect.mjs";
 
 /**
  * Creates a new ability effect and optionally pulls content from the wiki.
- *
  * @param {TeriockActor|TeriockEffect|TeriockItem} document - The document to create the ability in.
  * @param {string|null} name - The name for the new ability. If not provided, defaults to "New Ability".
  * @param {Object} options - Additional options for the ability creation.
@@ -29,9 +28,9 @@ export async function createAbility(document, name = null, options = {}) {
   }
   const abilities =
     /** @type {TeriockAbility[]} */ await embeddingDocument.createEmbeddedDocuments(
-      "ActiveEffect",
-      [abilityData],
-    );
+    "ActiveEffect",
+    [abilityData],
+  );
   const ability = abilities[0];
   if (ability.name !== "New Ability") {
     await ability.system.wikiPull(options);
@@ -88,8 +87,7 @@ export async function createResource(document) {
 
 /**
  * Creates a new property effect with optional predefined content.
- *
- * @param {TeriockItem} document - The document to create the property in.
+ * @param {TeriockItem|TeriockEffect} document - The document to create the property in.
  * @param {string|null} name - The name for the new property. If not provided, defaults to "New Property".
  * @returns {Promise<TeriockProperty>} The created property effect.
  */
@@ -103,14 +101,40 @@ export async function createProperty(document, name = null) {
   if (name) {
     propertyData.name = name;
   }
+  /** @type {TeriockEffect|null} */
+  let sup = null;
+  const supId = document._id;
+  let embeddingDocument = document;
+  if (document.documentName === "ActiveEffect") {
+    sup = /** @type {TeriockEffect} */ document;
+    embeddingDocument = document.parent;
+    propertyData.system["hierarchy"] = { supId: supId };
+  }
 
   const property =
     /** @type {TeriockProperty} */
-    (await document.createEmbeddedDocuments("ActiveEffect", [propertyData]))[0];
+    (await embeddingDocument.createEmbeddedDocuments("ActiveEffect", [propertyData]))[0];
   if (propertyData.name !== "New Property") {
     await property.system.wikiPull({ notify: false });
   }
-  await document.forceUpdate();
+  if (sup) {
+    const updateData = [
+      {
+        _id: property._id,
+        "system.hierarchy.supId": supId,
+        "system.proficient": sup.isProficient,
+        "system.fluent": sup.isFluent,
+      },
+      {
+        _id: supId,
+        "system.hierarchy.subIds": foundry.utils
+          .deepClone(sup.system.hierarchy.subIds)
+          .add(property._id),
+      },
+    ];
+    await sup.parent.updateEmbeddedDocuments("ActiveEffect", updateData);
+  }
+  await embeddingDocument.forceUpdate();
   return property;
 }
 

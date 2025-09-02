@@ -209,7 +209,7 @@ export function _derivedDamage(equipmentData) {
     "damage",
     (data) =>
       data.damage +
-      (equipmentData?.actor.system.damage.standard &&
+      (equipmentData?.actor?.system.damage.standard || "" &&
       data.damage &&
       data.damage !== "0"
         ? " " + equipmentData.actor.system.damage.standard

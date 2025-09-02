@@ -311,8 +311,8 @@ export default class TeriockAbilitySheet extends TeriockBaseEffectSheet {
     const context = await super._prepareContext(options);
     const system = this.document.system;
     context.tab = this._tab;
-    context.childAbilities = this.document.subs;
-    context.parentAbility = this.document.sup;
+    context.subAbilities = this.document.subs;
+    context.supAbility = this.document.sup;
     context.macros = [];
     for (const [safeUuid, pseudoHook] of Object.entries(
       this.document.system.applies.macros,

@@ -1,4 +1,15 @@
-<section class="tab generic-changes active">
+{{!--
+  Reusable changes template. This is generalized so that it works for the default `ActiveEffect` changes as well as
+  custom arrays that have the same basic format.
+
+  Parameters (and default values for normal `ActiveEffect` changes):
+  - changesPath: "changes"
+  - changesData: (path document "changes")
+  - fieldDefs: (path fields "changes.element.fields")
+  - additionalAttrs: Not actually needed for default changes. This is for abilities mainly.
+--}}
+
+<section class="tab generic-changes active teriock-full-width">
   <header>
     <div class="key">{{localize "EFFECT.ChangeKey"}}</div>
     <div class="mode">{{localize "EFFECT.ChangeMode"}}</div>
@@ -6,7 +17,9 @@
     <div class="priority">{{localize "EFFECT.ChangePriority"}}</div>
     <div class="controls">
       <a
-        data-action="addRootChange"
+        data-action="addChange"
+        data-path="{{changesPath}}"
+        {{#each additionalAttrs as |value key|}}data-{{key}}="{{value}}" {{/each}}
         {{#if (not @root.editable)}}disabled="true"{{/if}}
       >
         <i class="fa-regular fa-square-plus"></i>
@@ -14,13 +27,13 @@
     </div>
   </header>
   <ol class="scrollable" data-changes>
-    {{#each document.changes as |change i|}}
-      {{#with ../fields.changes.element.fields as |changeFields|}}
+    {{#each changesData as |change i|}}
+      {{#with ../fieldDefs as |changeFields|}}
         <li data-index="{{i}}">
           <div class="key">
             {{formInput
               changeFields.key
-              name=(concat "changes." i ".key")
+              name=(concat ../../changesPath "." i ".key")
               value=change.key
               disabled=(not @root.editable)
             }}
@@ -28,7 +41,7 @@
           <div class="mode">
             {{formInput
               changeFields.mode
-              name=(concat "changes." i ".mode")
+              name=(concat ../../changesPath "." i ".mode")
               value=change.mode
               choices=@root.modes
               disabled=(not @root.editable)
@@ -37,7 +50,7 @@
           <div class="value">
             {{formInput
               changeFields.value
-              name=(concat "changes." i ".value")
+              name=(concat ../../changesPath "." i ".value")
               value=change.value
               disabled=(not @root.editable)
             }}
@@ -45,7 +58,7 @@
           <div class="priority">
             {{formInput
               changeFields.priority
-              name=(concat "changes." i ".priority")
+              name=(concat ../../changesPath "." i ".priority")
               value=change.priority
               placeholder=(lookup ../../priorities change.mode)
               disabled=(not @root.editable)
@@ -53,8 +66,10 @@
           </div>
           <div class="controls">
             <a
-              data-action="deleteRootChange"
+              data-action="deleteChange"
               data-index="{{i}}"
+              data-path="{{../../changesPath}}"
+              {{#each ../additionalAttrs as |value key|}}data-{{key}}="{{value}}" {{/each}}
               {{#if (not @root.editable)}}disabled="true"{{/if}}
             >
               <i class="fa-solid fa-trash"></i>

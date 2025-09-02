@@ -45,4 +45,12 @@ export default class TeriockPropertySheet extends TeriockBaseEffectSheet {
       "click",
     );
   }
+
+  /** @inheritDoc */
+  async _prepareContext(options) {
+    const context = await super._prepareContext(options);
+    context.subProperties = this.document.subs;
+    context.supProperty = this.document.sup;
+    return context;
+  }
 }

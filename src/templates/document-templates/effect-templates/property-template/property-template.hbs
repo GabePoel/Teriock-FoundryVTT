@@ -19,6 +19,13 @@
           disabled=(not editable)
         }}
       </div>
+      {{#if (or editable (exists subProperties))}}
+        <div class="ab-main">
+          {{#if editable}}
+            <button class="createProperty" data-action="createProperty">Add Child Property</button>{{/if}}
+          {{abilityCards subProperties system}}
+        </div>
+      {{/if}}
     </div>
   {{/if}}
   {{#if (eq tab "impacts")}}
