@@ -1,8 +1,9 @@
+import { tidyHTML } from "../../../../helpers/html.mjs";
 import { toKebabCase } from "../../../../helpers/utils.mjs";
-import { extractChangesFromHTML } from "../../../shared/parsing/extract-changes.mjs";
-import { processSubProperties } from "../../../shared/parsing/process-subs.mjs";
-import { getCategoriesFromHTML } from "../../../shared/parsing/get-categories.mjs";
 import { cleanHTMLDoc } from "../../../shared/parsing/clean-html-doc.mjs";
+import { extractChangesFromHTML } from "../../../shared/parsing/extract-changes.mjs";
+import { getCategoriesFromHTML } from "../../../shared/parsing/get-categories.mjs";
+import { processSubProperties } from "../../../shared/parsing/process-subs.mjs";
 
 /**
  * Parse raw HTML content for a property.
@@ -29,11 +30,8 @@ export async function _parse(propertyData, rawHTML) {
 
   rawHTML = doc.querySelector("body").innerHTML;
 
-  doc.querySelectorAll(".ability-sub-container").forEach((el) => el.remove());
-
   const name = propertyData.parent.name;
   const categories = getCategoriesFromHTML(rawHTML);
-
 
   const referenceProperty = new ActiveEffect({
     name: "Reference Property",
@@ -52,7 +50,6 @@ export async function _parse(propertyData, rawHTML) {
 
   await processSubProperties(subs, propertyData.parent);
 
-  parameters.system.damageType = extractDamageType(doc);
   parameters.system.form = "intrinsic";
   if (categories.has("Magical properties")) {
     parameters.system.form = "normal";
@@ -66,8 +63,12 @@ export async function _parse(propertyData, rawHTML) {
   if (categories.has("Material properties")) {
     parameters.system.damageType = name;
   }
+  const extractedDamageType = extractDamageType(doc);
+  if (typeof extractedDamageType === "string") {
+    parameters.system.damageType = extractedDamageType;
+  }
 
-  parameters.description = doc.querySelector("body").innerHTML;
+  parameters.description = tidyHTML(rawHTML);
   parameters.system.changes = extractChangesFromHTML(rawHTML);
   parameters.system.modifiesActor = extractDocument(doc);
   parameters.system.description = parameters.description;
@@ -80,7 +81,10 @@ export async function _parse(propertyData, rawHTML) {
  * @returns {boolean} True if the target document is `Actor`.
  */
 function extractDocument(doc) {
-  const documentMetadata = /** @type {HTMLSpanElement|undefined} */ doc.querySelector("span.metadata[data-type='document']");
+  const documentMetadata =
+    /** @type {HTMLSpanElement|undefined} */ doc.querySelector(
+      "span.metadata[data-type='document']",
+    );
   if (documentMetadata) {
     const targetDocument = documentMetadata.dataset.document;
     if (targetDocument === "actor") return true;
@@ -90,12 +94,15 @@ function extractDocument(doc) {
 
 /**
  * @param {Document} doc
- * @returns {string} Damage type.
+ * @returns {string|null} Damage type.
  */
 function extractDamageType(doc) {
-  const documentMetadata = /** @type {HTMLSpanElement|undefined} */ doc.querySelector("span.metadata[data-type='damage-type']");
+  const documentMetadata =
+    /** @type {HTMLSpanElement|undefined} */ doc.querySelector(
+      "span.metadata[data-type='damage-type']",
+    );
   if (documentMetadata) {
     return documentMetadata.dataset.value || "";
   }
-  return "";
+  return null;
 }

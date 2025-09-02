@@ -7,7 +7,6 @@ import { ROLL_BUTTON_CONFIGS } from "../../effect-data/ability-data/methods/roll
  * @returns {Document}
  */
 export function cleanHTMLDoc(doc) {
-  // Remove unwanted wrappers
   doc
     .querySelectorAll(".ability-sub-container, .expandable-container")
     .forEach((el) => el.remove());

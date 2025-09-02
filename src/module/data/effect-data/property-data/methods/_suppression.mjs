@@ -11,6 +11,13 @@ export function _suppressed(propertyData) {
   if (!suppressed && propertyData.parent.parent.type === "equipment") {
     if (
       !suppressed &&
+      !propertyData.parent.parent.system.equipped &&
+      propertyData.modifies === "Actor"
+    ) {
+      suppressed = true;
+    }
+    if (
+      !suppressed &&
       propertyData.parent.parent.system.dampened &&
       propertyData.form !== "intrinsic" &&
       !propertyData.applyIfDampened
@@ -24,6 +31,12 @@ export function _suppressed(propertyData) {
     !propertyData.applyIfShattered
   ) {
     suppressed = true;
+  }
+  if (!suppressed && propertyData.actor && propertyData.parent.sup) {
+    const sups = propertyData.parent.allSups;
+    if (sups.some((sup) => !sup.modifiesActor)) {
+      suppressed = true;
+    }
   }
   return suppressed;
 }

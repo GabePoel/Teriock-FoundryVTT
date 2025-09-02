@@ -18,7 +18,9 @@ const { fields } = foundry.data;
  *
  * @extends {TeriockBaseEffectData}
  */
-export default class TeriockPropertyData extends WikiDataMixin(TeriockBaseEffectData,) {
+export default class TeriockPropertyData extends WikiDataMixin(
+  TeriockBaseEffectData,
+) {
   /**
    * @inheritDoc
    * @type {Readonly<Teriock.Documents.EffectModelMetadata>}
@@ -38,16 +40,20 @@ export default class TeriockPropertyData extends WikiDataMixin(TeriockBaseEffect
       damageType: new fields.StringField({ initial: "" }),
       extraDamage: new FormulaField({ deterministic: false }),
       applyIfShattered: new fields.BooleanField({
-        initial: false, label: "Apply if Shattered",
+        initial: false,
+        label: "Apply if Shattered",
       }),
       applyIfDampened: new fields.BooleanField({
-        initial: false, label: "Apply if Dampened",
+        initial: false,
+        label: "Apply if Dampened",
       }),
       modifiesActor: new fields.BooleanField({
-        initial: false, label: "Modifies Actor",
+        initial: false,
+        label: "Modifies Actor",
       }),
       changes: new ListField(changeField(), {
-        label: "Changes", hint: "Changes made to the target equipment as part of the property's ongoing effect.",
+        label: "Changes",
+        hint: "Changes made to the target equipment as part of the property's ongoing effect.",
       }),
       hierarchy: hierarchyField(),
     });
@@ -60,25 +66,14 @@ export default class TeriockPropertyData extends WikiDataMixin(TeriockBaseEffect
   }
 
   /** @inheritDoc */
-  prepareDerivedData() {
-    super.prepareDerivedData();
-    this.parent.changes = foundry.utils.deepClone(this.changes);
-    if (this.damageType && this.damageType.length > 0) {
-      this.parent.changes.push({
-        key: "system.damageTypes",
-        value: this.damageType.toLowerCase(),
-        priority: 10,
-        mode: 2,
-      })
-    }
-  }
-
-  /** @inheritDoc */
   get messageParts() {
     return { ...super.messageParts, ..._messageParts(this) };
   }
 
-  /** @inheritDoc */
+  /**
+   * @inheritDoc
+   * @returns {"Actor"|"Item"}
+   */
   get modifies() {
     if (this.modifiesActor) return "Actor";
     return super.modifies;
@@ -94,5 +89,24 @@ export default class TeriockPropertyData extends WikiDataMixin(TeriockBaseEffect
   /** @inheritDoc */
   async parse(rawHTML) {
     return await parsing._parse(this, rawHTML);
+  }
+
+  /** @inheritDoc */
+  prepareDerivedData() {
+    super.prepareDerivedData();
+    this.parent.changes = foundry.utils.deepClone(this.changes);
+    if (
+      this.damageType &&
+      this.damageType.length > 0 &&
+      this.parent.allSups.filter((p) => p.system.damageType?.trim().length > 0)
+        .length === 0
+    ) {
+      this.parent.changes.push({
+        key: "system.damageTypes",
+        value: this.damageType.toLowerCase(),
+        priority: 10,
+        mode: 2,
+      });
+    }
   }
 }

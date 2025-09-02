@@ -31,38 +31,15 @@ async function use(equipmentData, options) {
     if (options.formula) rollFormula = options.formula;
     rollFormula = rollFormula.trim();
 
-    // let damageTypes = equipmentData.damageTypes || [];
-    let damageTypes = [];
+    let damageTypes = equipmentData.damageTypes;
     if (equipmentData.powerLevel === "magic") {
-      damageTypes.push("magic");
-    }
-    const effectDamageTypes = equipmentData.parent.effects
-      .filter((effect) => {
-        return (
-          effect.type === "property" &&
-          !effect.disabled &&
-          effect.system.damageType
-        );
-      })
-      .map((effect) =>
-        effect.system.damageType
-          ? effect.system.damageType.toLowerCase()
-          : effect.system.damageType,
-      );
-    if (
-      equipmentData.parent.effects.some(
-        (effect) =>
-          effect.type === "property" &&
-          !effect.disabled &&
-          (effect.name === "Flaming" || effect.name === "Burning"),
-      )
-    ) {
-      effectDamageTypes.push("fire");
+      damageTypes.add("magic");
     }
     // Ensure all damage types are lower case
-    damageTypes = [...new Set([...damageTypes, ...effectDamageTypes])].map(
-      (dt) => (dt && typeof dt === "string" ? dt.toLowerCase() : dt),
+    damageTypes = [...new Set([...damageTypes])].map((dt) =>
+      dt && typeof dt === "string" ? dt.toLowerCase() : dt,
     );
+    // Sort the damage types
     if (
       damageTypes.length > 0 &&
       rollFormula.length > 0 &&

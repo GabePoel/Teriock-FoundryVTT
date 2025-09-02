@@ -16,4 +16,10 @@ export function _prepareDerivedData(equipmentData) {
   if (equipmentData.consumable && equipmentData.quantity === 0) {
     equipmentData.equipped = false;
   }
+  if (equipmentData.av === 0) {
+    equipmentData.baseAv = 0;
+  }
+  if (equipmentData.baseBv === 0) {
+    equipmentData.baseBv = 0;
+  }
 }

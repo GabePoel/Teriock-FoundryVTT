@@ -247,6 +247,12 @@ export default class TeriockEquipmentData extends ConsumableDataMixin(
   }
 
   /** @inheritDoc */
+  prepareBaseData() {
+    this.baseAv = 0;
+    this.baseBv = 0;
+  }
+
+  /** @inheritDoc */
   prepareDerivedData() {
     super.prepareDerivedData();
     deriving._prepareDerivedData(this);

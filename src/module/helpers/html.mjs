@@ -153,3 +153,51 @@ export function makeDamageTypeButtons(roll) {
   }
   return buttons;
 }
+
+/**
+ * Remove trailing lines from HTML.
+ * @param {string} html
+ * @returns {string}
+ */
+export function trimTrailingLinesHTML(html) {
+  const box = document.createElement("div");
+  box.innerHTML = html;
+  const isBlank = (n) => {
+    if (n.nodeType === 3) {
+      return !n.nodeValue.replace(/\u00A0/g, " ").trim();
+    }
+    if (n.nodeType === 1) {
+      if (n.matches("br")) return true;
+      if (n.matches("p,div")) {
+        const txt = n.textContent.replace(/\u00A0/g, " ").trim();
+        return !txt || n.classList.contains("mw-empty-elt");
+      }
+    }
+    return false;
+  };
+  while (box.lastChild && isBlank(box.lastChild)) {
+    box.removeChild(box.lastChild);
+  }
+  return box.innerHTML;
+}
+
+/**
+ * Turn spans into normal text.
+ * @param {string} html
+ * @returns {string}
+ */
+export function unspanHTML(html) {
+  const d = document.createElement("div");
+  d.innerHTML = html;
+  d.querySelectorAll("span").forEach((s) => s.replaceWith(...s.childNodes));
+  return d.innerHTML;
+}
+
+/**
+ * Make HTML more tidy.
+ * @param {string} html
+ * @returns {string}
+ */
+export function tidyHTML(html) {
+  return trimTrailingLinesHTML(unspanHTML(html));
+}

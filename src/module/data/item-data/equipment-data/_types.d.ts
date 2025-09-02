@@ -38,6 +38,10 @@ declare module "./equipment-data.mjs" {
     av: number;
     /** Block Value */
     bv: number;
+    /** Armor value for effects to modify */
+    baseAv: number;
+    /** Black value for effects to modify */
+    baseBv: number;
     /** Special Rules (Weapon Fighting Style) */
     specialRules: string;
     /** Canonical Equipment Type */
