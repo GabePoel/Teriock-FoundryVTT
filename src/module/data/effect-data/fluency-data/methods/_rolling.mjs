@@ -1,3 +1,4 @@
+import { TeriockChatMessage } from "../../../../documents/_module.mjs";
 import TeriockRoll from "../../../../documents/roll.mjs";
 
 /**
@@ -30,13 +31,15 @@ async function use(fluencyData, options) {
     rollFormula = "2d20kl1";
   }
   rollFormula += " + @f + @" + fluencyData.tradecraft;
-  message = await foundry.applications.ux.TextEditor.enrichHTML(message);
   const roll = new TeriockRoll(rollFormula, fluencyData.actor.getRollData(), {
-    message: message,
+    flavor: `${CONFIG.TERIOCK.tradecraftOptionsList[fluencyData.tradecraft]} Check`,
   });
-  await roll.toMessage({
-    speaker: ChatMessage.getSpeaker({
-      actor: fluencyData.actor,
-    }),
+  await roll.evaluate();
+  TeriockChatMessage.create({
+    speaker: TeriockChatMessage.getSpeaker({ actor: fluencyData.actor }),
+    rolls: [roll],
+    system: {
+      extraContent: message,
+    },
   });
 }

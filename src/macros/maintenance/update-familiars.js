@@ -19,15 +19,28 @@ for (const page of commonAnimalPages) {
   console.log(subs);
   const name = animal + " Familiar";
   let familiarItem = powersPack.index.find((p) => p.name === name);
+  const familiarItemSystem = {
+    type: "familiar",
+    description:
+      "<p>Select one ability from this to gain and delete the other one.</p>",
+  };
+  const familiarItemFluencyData = {
+    name: `${animal} Tamer`,
+    type: "fluency",
+    img: "systems/teriock/src/icons/tradecrafts/tamer.webp",
+    system: {
+      field: "survivalist",
+      tradecraft: "tamer",
+      description: `<p>You know the way of the @L[Creature:${animal}]{${animal.toLowerCase()}}.</p>`,
+    },
+  };
   if (!familiarItem) {
     familiarItem = await game.teriock.Item.create(
       {
         folder: familiarsFolder.id,
         img: "systems/teriock/src/icons/abilities/familiar-bond.webp",
         name: name,
-        system: {
-          type: "familiar",
-        },
+        system: familiarItemSystem,
         type: "power",
       },
       { pack: "teriock.powers" },
@@ -39,7 +52,16 @@ for (const page of commonAnimalPages) {
     "ActiveEffect",
     familiarItem.abilities.map((a) => a.id),
   );
-  console.log(familiarItem);
+  let fluency = familiarItem.fluencies.find(
+    (f) => f.name === animal + " Tamer",
+  );
+  if (!fluency) {
+    await familiarItem.createEmbeddedDocuments("ActiveEffect", [
+      familiarItemFluencyData,
+    ]);
+  } else {
+    await fluency.update(familiarItemFluencyData);
+  }
   await game.teriock.data.shared.parsing.processSubAbilities(
     subs,
     familiarItem,

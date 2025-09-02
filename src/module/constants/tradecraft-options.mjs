@@ -139,8 +139,8 @@ export const tradecraftOptions = {
     name: "Prestige",
     icon: "sparkle",
     tradecrafts: {
-      metaphysics: {
-        name: "Metaphysics",
+      metaphysicist: {
+        name: "Metaphysicist",
         icon: "book-sparkles",
       },
     },

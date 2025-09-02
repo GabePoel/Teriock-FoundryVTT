@@ -20,12 +20,13 @@ export function tradecraftContextMenu(fluency) {
         name: tradecraftName,
         icon: icon,
         callback: async () => {
-          await fluency.update({
+          const updateData = {
             system: {
               field: field,
               tradecraft: tradecraft,
             },
-          });
+          };
+          await fluency.update(updateData);
         },
         condition: () => {
           return foundry.utils.getProperty(fluency.system, "field") === field;
@@ -55,12 +56,13 @@ export function fieldContextMenu(fluency) {
       name: fieldName,
       icon: icon,
       callback: async () => {
-        await fluency.update({
+        const updateData = {
           system: {
             field: field,
             tradecraft: firstTradecraft,
           },
-        });
+        };
+        await fluency.update(updateData);
       },
     };
     options.push(option);

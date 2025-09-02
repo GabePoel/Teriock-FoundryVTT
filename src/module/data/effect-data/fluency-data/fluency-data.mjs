@@ -32,9 +32,6 @@ export default class TeriockFluencyData extends WikiDataMixin(
   /** @inheritDoc */
   static defineSchema() {
     return foundry.utils.mergeObject(super.defineSchema(), {
-      wikiNamespace: new fields.StringField({
-        initial: "Tradecraft",
-      }),
       field: new fields.StringField({
         initial: "artisan",
         label: "Field",
@@ -71,6 +68,32 @@ export default class TeriockFluencyData extends WikiDataMixin(
   /** @inheritDoc */
   get wikiPage() {
     return `${this.constructor.metadata.namespace}:${CONFIG.TERIOCK.tradecraftOptions[this.field].tradecrafts[this.tradecraft].name}`;
+  }
+
+  /** @inheritDoc */
+  _preCreate(data, options, user) {
+    if (!foundry.utils.hasProperty(data, "img")) {
+      this.parent.updateSource({
+        img: "systems/teriock/src/icons/tradecrafts/artist.webp",
+      });
+    }
+  }
+
+  /** @inheritDoc */
+  _preUpdate(data, options, user) {
+    super._preUpdate(data, options, user);
+    if (
+      this.parent.img.includes("systems/teriock/src/icons/tradecrafts") &&
+      !foundry.utils.hasProperty(data, "img")
+    ) {
+      let tradecraft = this.tradecraft;
+      if (foundry.utils.hasProperty(data, "system.tradecraft")) {
+        tradecraft = foundry.utils.getProperty(data, "system.tradecraft");
+      }
+      this.parent.updateSource({
+        img: `systems/teriock/src/icons/tradecrafts/${tradecraft}.webp`,
+      });
+    }
   }
 
   /** @inheritDoc */
