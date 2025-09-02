@@ -22,7 +22,7 @@ for (const page of commonAnimalPages) {
   const familiarItemSystem = {
     type: "familiar",
     description:
-      "<p>Select one ability from this to gain and delete the other one.</p>",
+      "<p>Select one @L[Category:Abilities]{ability} from this to gain and delete the other one.</p>",
   };
   const familiarItemFluencyData = {
     name: `${animal} Tamer`,
@@ -47,6 +47,9 @@ for (const page of commonAnimalPages) {
     );
   } else {
     familiarItem = await foundry.utils.fromUuid(familiarItem.uuid);
+    await familiarItem.update({
+      system: familiarItemSystem,
+    });
   }
   await familiarItem.deleteEmbeddedDocuments(
     "ActiveEffect",
