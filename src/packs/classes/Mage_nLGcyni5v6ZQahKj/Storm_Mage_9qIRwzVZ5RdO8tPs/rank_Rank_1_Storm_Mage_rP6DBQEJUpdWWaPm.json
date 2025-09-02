@@ -15,7 +15,7 @@
     "font": "",
     "description": "The true wonder seeker, these mages are the philosophers of the world, always seeking out more knowledge and more wisdom. The Storm Mage is a logician, a tactical intellectual who prefers to neutralize opponents rather than destroy them. Often cold, the Storm Mage is also tumultuous and crafty. If you are playing a Storm Mage, be curious, hungry for information, always in the clouds, tricky and clever, eluding rather than confronting.",
     "disabled": false,
-    "updateCounter": true,
+    "updateCounter": false,
     "wikiNamespace": "Class",
     "flaws": "None.",
     "hitDieSpent": false,
@@ -284,12 +284,13 @@
           "storm"
         ],
         "duration": {
-          "unit": "minute",
-          "quantity": 1,
+          "unit": "instant",
+          "quantity": 0,
           "conditions": {
             "present": [],
             "absent": []
           },
+          "stationary": false,
           "description": "Instant"
         },
         "sustained": false,
@@ -300,7 +301,7 @@
           "fluent": ""
         },
         "results": {
-          "hit": "Deal <span class=\"dice\" data-full-roll=\"1d8[magic]\" data-quick-roll=\"1d8\" data-type=\"damage\">[[/roll 1d8[magic]]]</span> <a href=\"https://wiki.teriock.com/index.php/Core:Damage\" title=\"Core:Damage\" target=\"_blank\">damage</a> to target.",
+          "hit": "Deal <span class=\"dice\" data-full-roll=\"1d8[magic]\" data-quick-roll=\"1d8\" data-type=\"damage\">[[/damage 1d8[magic]]]</span> <a href=\"https://wiki.teriock.com/index.php/Core:Damage\" title=\"Core:Damage\" target=\"_blank\">damage</a> to target.",
           "critHit": "Double the <a href=\"https://wiki.teriock.com/index.php/Core:Damage\" title=\"Core:Damage\" target=\"_blank\">damage dice</a> dealt by this <a href=\"https://wiki.teriock.com/index.php/Category:Abilities\" title=\"Category:Abilities\" target=\"_blank\">ability</a>.",
           "miss": "",
           "critMiss": "",
@@ -358,7 +359,7 @@
           "break": "",
           "materialCost": ""
         },
-        "heightened": "For each additional <a href=\"https://wiki.teriock.com/index.php/Core:MP\" class=\"mw-redirect\" title=\"Core:MP\" target=\"_blank\">MP</a> spent, deal an additional <span class=\"dice\" data-full-roll=\"1d8[magic]\" data-quick-roll=\"1d8\" data-type=\"damage\">[[/roll 1d8[magic]]]</span> <a href=\"https://wiki.teriock.com/index.php/Core:Damage\" title=\"Core:Damage\" target=\"_blank\">damage</a>.",
+        "heightened": "For each additional <a href=\"https://wiki.teriock.com/index.php/Core:MP\" class=\"mw-redirect\" title=\"Core:MP\" target=\"_blank\">MP</a> spent, deal an additional <span class=\"dice\" data-full-roll=\"1d8[magic]\" data-quick-roll=\"1d8\" data-type=\"damage\">[[/damage 1d8[magic]]]</span> <a href=\"https://wiki.teriock.com/index.php/Core:Damage\" title=\"Core:Damage\" target=\"_blank\">damage</a>.",
         "endCondition": "",
         "requirements": "",
         "effects": [
@@ -375,6 +376,10 @@
         "prepared": true,
         "warded": false,
         "secret": false,
+        "gifted": {
+          "enabled": false,
+          "amount": 1
+        },
         "consumable": false,
         "quantity": 1,
         "maxQuantity": {
@@ -382,7 +387,7 @@
           "derived": 0
         }
       },
-      "_id": "5AE4z0P2311stENH",
+      "_id": "ZMxBX9AroDG8tcHb",
       "changes": [],
       "disabled": false,
       "duration": {
@@ -403,11 +408,11 @@
         "coreVersion": "13.345",
         "systemId": "teriock",
         "systemVersion": "0.1.0",
-        "createdTime": 1756597545265,
-        "modifiedTime": 1756597553026,
+        "createdTime": 1756854066444,
+        "modifiedTime": 1756854076359,
         "lastModifiedBy": "Z8sCTHO0edFF1hYo"
       },
-      "_key": "!items.effects!rP6DBQEJUpdWWaPm.5AE4z0P2311stENH"
+      "_key": "!items.effects!rP6DBQEJUpdWWaPm.ZMxBX9AroDG8tcHb"
     },
     {
       "name": "Ice Ball",
@@ -669,6 +674,7 @@
             "present": [],
             "absent": []
           },
+          "stationary": false,
           "description": "1 Minute"
         },
         "sustained": false,
@@ -737,7 +743,7 @@
           "break": "",
           "materialCost": ""
         },
-        "heightened": "For each additional <a href=\"https://wiki.teriock.com/index.php/Core:MP\" class=\"mw-redirect\" title=\"Core:MP\" target=\"_blank\">MP</a> spent, deal an additional <span class=\"dice\" data-full-roll=\"1d4[magic ice]\" data-quick-roll=\"1d4\" data-type=\"damage\">[[/roll 1d4[magic ice]]]</span> <a href=\"https://wiki.teriock.com/index.php/Core:Damage\" title=\"Core:Damage\" target=\"_blank\">damage</a><span class=\"nowrap\"> </span>as well.",
+        "heightened": "For each additional <a href=\"https://wiki.teriock.com/index.php/Core:MP\" class=\"mw-redirect\" title=\"Core:MP\" target=\"_blank\">MP</a> spent, deal an additional <span class=\"dice\" data-full-roll=\"1d4[magic ice]\" data-quick-roll=\"1d4\" data-type=\"damage\">[[/damage 1d4[magic ice]]]</span> <a href=\"https://wiki.teriock.com/index.php/Core:Damage\" title=\"Core:Damage\" target=\"_blank\">damage</a><span class=\"nowrap\"> </span>as well.",
         "endCondition": "At the start of each of the target's actions, they roll <span class=\"dice\" data-full-roll=\"2d4\" data-quick-roll=\"2d4\" data-type=\"endCon\">[[/roll 2d4]]</span>. If either of these dice roll a 4, this effect ends.<span class=\"metadata\" data-type=\"combat-expiration\" data-who-type=\"target\" data-what-type=\"rolled\" data-what-roll=\"2d4kh1\" data-what-threshold=\"4\" data-when-time=\"start\" data-when-trigger=\"action\" data-when-skip=\"0\"></span>",
         "requirements": "",
         "effects": [
@@ -754,6 +760,10 @@
         "prepared": true,
         "warded": false,
         "secret": false,
+        "gifted": {
+          "enabled": false,
+          "amount": 1
+        },
         "consumable": false,
         "quantity": 1,
         "maxQuantity": {
@@ -761,7 +771,7 @@
           "derived": 0
         }
       },
-      "_id": "jPG86Wt7yfTIs5vn",
+      "_id": "gZnAa2NtLn1Qw7rj",
       "changes": [],
       "disabled": false,
       "duration": {
@@ -782,11 +792,11 @@
         "coreVersion": "13.345",
         "systemId": "teriock",
         "systemVersion": "0.1.0",
-        "createdTime": 1756597545267,
-        "modifiedTime": 1756597553030,
+        "createdTime": 1756854066445,
+        "modifiedTime": 1756854076310,
         "lastModifiedBy": "Z8sCTHO0edFF1hYo"
       },
-      "_key": "!items.effects!rP6DBQEJUpdWWaPm.jPG86Wt7yfTIs5vn"
+      "_key": "!items.effects!rP6DBQEJUpdWWaPm.gZnAa2NtLn1Qw7rj"
     },
     {
       "name": "Identify",
@@ -1037,12 +1047,13 @@
           "storm"
         ],
         "duration": {
-          "unit": "minute",
-          "quantity": 1,
+          "unit": "instant",
+          "quantity": 0,
           "conditions": {
             "present": [],
             "absent": []
           },
+          "stationary": false,
           "description": "Instant"
         },
         "sustained": false,
@@ -1128,6 +1139,10 @@
         "prepared": true,
         "warded": false,
         "secret": false,
+        "gifted": {
+          "enabled": false,
+          "amount": 1
+        },
         "consumable": false,
         "quantity": 1,
         "maxQuantity": {
@@ -1135,7 +1150,7 @@
           "derived": 0
         }
       },
-      "_id": "Irm6BElnm7HmcZpS",
+      "_id": "hTR0wZfywSlzA7Fu",
       "changes": [],
       "disabled": false,
       "duration": {
@@ -1156,11 +1171,11 @@
         "coreVersion": "13.345",
         "systemId": "teriock",
         "systemVersion": "0.1.0",
-        "createdTime": 1756597545269,
-        "modifiedTime": 1756597552586,
+        "createdTime": 1756854066446,
+        "modifiedTime": 1756854076041,
         "lastModifiedBy": "Z8sCTHO0edFF1hYo"
       },
-      "_key": "!items.effects!rP6DBQEJUpdWWaPm.Irm6BElnm7HmcZpS"
+      "_key": "!items.effects!rP6DBQEJUpdWWaPm.hTR0wZfywSlzA7Fu"
     },
     {
       "name": "Illusionary Arts",
@@ -1186,8 +1201,8 @@
         "hierarchy": {
           "rootUuid": "Compendium.teriock.classes.Item.rP6DBQEJUpdWWaPm",
           "subIds": [
-            "1lAxaunSZU2a0Fw9",
-            "DgnNckHz25y1AqxF"
+            "euJHHQvKzMwRRzk3",
+            "mst8xXYPqytSk65K"
           ],
           "supId": null
         },
@@ -1411,12 +1426,13 @@
         ],
         "elements": [],
         "duration": {
-          "unit": "minute",
-          "quantity": 1,
+          "unit": "noLimit",
+          "quantity": 0,
           "conditions": {
             "present": [],
             "absent": []
           },
+          "stationary": false,
           "description": "Always Active"
         },
         "sustained": false,
@@ -1500,6 +1516,10 @@
         "prepared": true,
         "warded": false,
         "secret": false,
+        "gifted": {
+          "enabled": false,
+          "amount": 1
+        },
         "consumable": false,
         "quantity": 1,
         "maxQuantity": {
@@ -1507,7 +1527,7 @@
           "derived": 0
         }
       },
-      "_id": "5qsQFPWmEveThbDf",
+      "_id": "5SerkxVJBntJZ2vg",
       "changes": [],
       "disabled": false,
       "duration": {
@@ -1528,11 +1548,11 @@
         "coreVersion": "13.345",
         "systemId": "teriock",
         "systemVersion": "0.1.0",
-        "createdTime": 1756597545272,
-        "modifiedTime": 1756597564836,
+        "createdTime": 1756854066448,
+        "modifiedTime": 1756854133816,
         "lastModifiedBy": "Z8sCTHO0edFF1hYo"
       },
-      "_key": "!items.effects!rP6DBQEJUpdWWaPm.5qsQFPWmEveThbDf"
+      "_key": "!items.effects!rP6DBQEJUpdWWaPm.5SerkxVJBntJZ2vg"
     },
     {
       "name": "Simple Illusion Creation",
@@ -1540,7 +1560,7 @@
       "img": "systems/teriock/src/icons/abilities/simple-illusion-creation.webp",
       "system": {
         "hierarchy": {
-          "supId": "5qsQFPWmEveThbDf",
+          "supId": "5SerkxVJBntJZ2vg",
           "rootUuid": "Compendium.teriock.classes.Item.rP6DBQEJUpdWWaPm",
           "subIds": []
         },
@@ -1788,6 +1808,7 @@
             "present": [],
             "absent": []
           },
+          "stationary": false,
           "description": "1 Minute"
         },
         "sustained": false,
@@ -1873,6 +1894,10 @@
         "prepared": true,
         "warded": false,
         "secret": false,
+        "gifted": {
+          "enabled": false,
+          "amount": 1
+        },
         "consumable": false,
         "quantity": 1,
         "maxQuantity": {
@@ -1880,7 +1905,7 @@
           "derived": 0
         }
       },
-      "_id": "1lAxaunSZU2a0Fw9",
+      "_id": "euJHHQvKzMwRRzk3",
       "changes": [],
       "disabled": false,
       "duration": {
@@ -1901,11 +1926,11 @@
         "coreVersion": "13.345",
         "systemId": "teriock",
         "systemVersion": "0.1.0",
-        "createdTime": 1756597553544,
-        "modifiedTime": 1756597557937,
+        "createdTime": 1756854076175,
+        "modifiedTime": 1756854081783,
         "lastModifiedBy": "Z8sCTHO0edFF1hYo"
       },
-      "_key": "!items.effects!rP6DBQEJUpdWWaPm.1lAxaunSZU2a0Fw9"
+      "_key": "!items.effects!rP6DBQEJUpdWWaPm.euJHHQvKzMwRRzk3"
     },
     {
       "name": "Detect Illusion",
@@ -1913,7 +1938,7 @@
       "img": "systems/teriock/src/icons/abilities/detect-illusion.webp",
       "system": {
         "hierarchy": {
-          "supId": "5qsQFPWmEveThbDf",
+          "supId": "5SerkxVJBntJZ2vg",
           "rootUuid": "Compendium.teriock.classes.Item.rP6DBQEJUpdWWaPm",
           "subIds": []
         },
@@ -2157,12 +2182,13 @@
           "storm"
         ],
         "duration": {
-          "unit": "minute",
-          "quantity": 1,
+          "unit": "instant",
+          "quantity": 0,
           "conditions": {
             "present": [],
             "absent": []
           },
+          "stationary": false,
           "description": "Instant"
         },
         "sustained": false,
@@ -2248,6 +2274,10 @@
         "prepared": true,
         "warded": false,
         "secret": false,
+        "gifted": {
+          "enabled": false,
+          "amount": 1
+        },
         "consumable": false,
         "quantity": 1,
         "maxQuantity": {
@@ -2255,7 +2285,7 @@
           "derived": 0
         }
       },
-      "_id": "DgnNckHz25y1AqxF",
+      "_id": "mst8xXYPqytSk65K",
       "changes": [],
       "disabled": false,
       "duration": {
@@ -2276,11 +2306,11 @@
         "coreVersion": "13.345",
         "systemId": "teriock",
         "systemVersion": "0.1.0",
-        "createdTime": 1756597557967,
-        "modifiedTime": 1756597564820,
+        "createdTime": 1756854081871,
+        "modifiedTime": 1756854133788,
         "lastModifiedBy": "Z8sCTHO0edFF1hYo"
       },
-      "_key": "!items.effects!rP6DBQEJUpdWWaPm.DgnNckHz25y1AqxF"
+      "_key": "!items.effects!rP6DBQEJUpdWWaPm.mst8xXYPqytSk65K"
     }
   ],
   "sort": 0,
@@ -2297,7 +2327,7 @@
     "systemId": "teriock",
     "systemVersion": "0.1.0",
     "createdTime": 1753157006038,
-    "modifiedTime": 1756597564843,
+    "modifiedTime": 1756854133826,
     "lastModifiedBy": "Z8sCTHO0edFF1hYo"
   },
   "_key": "!items!rP6DBQEJUpdWWaPm"
