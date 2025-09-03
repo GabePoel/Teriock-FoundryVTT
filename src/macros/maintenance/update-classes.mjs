@@ -6,7 +6,7 @@ const progress = ui.notifications.info(`Pulling classes from wiki.`, {
 });
 let pct = 0;
 
-for (const [a, ao] of Object.entries(CONFIG.TERIOCK.rankOptions)) {
+for (const [a, ao] of Object.entries(CONFIG.TERIOCK.options.rank)) {
   if (!["Mage", "Semi", "Warrior"].includes(ao.name)) {
     continue;
   }

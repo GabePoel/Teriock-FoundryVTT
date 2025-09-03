@@ -125,7 +125,7 @@ export async function _unidentify(equipmentData) {
     const description = "This item has not been identified.";
     const effects = copy.transferredEffects;
     const unidentifiedProperties =
-      CONFIG.TERIOCK.equipmentOptions.unidentifiedProperties;
+      CONFIG.TERIOCK.options.equipment.unidentifiedProperties;
     const idsToRemove = effects
       .filter(
         (e) =>

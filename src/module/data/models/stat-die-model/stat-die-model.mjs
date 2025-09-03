@@ -1,6 +1,7 @@
-import { dieOptions } from "../../../constants/die-options.mjs";
+import { dieOptions } from "../../../constants/options/die-options.mjs";
 import { TeriockRoll } from "../../../documents/_module.mjs";
-import { dedent, getRollIcon, toTitleCase } from "../../../helpers/utils.mjs";
+import { dedent, getRollIcon } from "../../../helpers/utils.mjs";
+import {toTitleCase} from "../../../helpers/string.mjs";
 
 const { fields } = foundry.data;
 const { DataModel } = foundry.abstract;

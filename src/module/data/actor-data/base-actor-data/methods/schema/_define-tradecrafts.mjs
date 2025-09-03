@@ -1,4 +1,4 @@
-import { tradecraftOptions } from "../../../../../constants/tradecraft-options.mjs";
+import { tradecraftOptions } from "../../../../../constants/options/tradecraft-options.mjs";
 import { mergeLevel } from "../../../../../helpers/utils.mjs";
 
 const { fields } = foundry.data;

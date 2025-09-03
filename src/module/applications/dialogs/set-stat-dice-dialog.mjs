@@ -1,4 +1,4 @@
-import { dieOptions } from "../../constants/die-options.mjs";
+import { dieOptions } from "../../constants/options/die-options.mjs";
 import { TeriockDialog } from "../api/_module.mjs";
 
 const { fields } = foundry.data;

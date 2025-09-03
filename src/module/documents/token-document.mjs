@@ -1,4 +1,4 @@
-import { characterOptions } from "../constants/character-options.mjs";
+import { characterOptions } from "../constants/options/character-options.mjs";
 import { convertUnits } from "../helpers/utils.mjs";
 
 const { TokenDocument } = foundry.documents;

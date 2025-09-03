@@ -6,7 +6,7 @@
  * @private
  */
 export function _messageParts(fluencyData) {
-  const ref = CONFIG.TERIOCK.tradecraftOptions;
+  const ref = CONFIG.TERIOCK.options.tradecraft;
   const src = fluencyData;
   const bars = [
     {

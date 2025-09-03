@@ -132,7 +132,7 @@ export async function _buildButtons(rollConfig) {
   // Apply Condition Buttons
   for (const status of takeData.startStatuses) {
     buttons.push({
-      label: `Apply ${CONFIG.TERIOCK.conditions[status]}`,
+      label: `Apply ${CONFIG.TERIOCK.index.conditions[status]}`,
       icon: "fas fa-plus",
       dataset: {
         action: "apply-status",
@@ -144,7 +144,7 @@ export async function _buildButtons(rollConfig) {
   // Remove Condition Buttons
   for (const status of takeData.endStatuses) {
     buttons.push({
-      label: `Remove ${CONFIG.TERIOCK.conditions[status]}`,
+      label: `Remove ${CONFIG.TERIOCK.index.conditions[status]}`,
       icon: "fas fa-xmark",
       dataset: {
         action: "remove-status",
@@ -156,7 +156,7 @@ export async function _buildButtons(rollConfig) {
   // Tradecraft Check Buttons
   for (const tradecraft of takeData.checks) {
     buttons.push({
-      label: `${CONFIG.TERIOCK.tradecraftOptionsList[tradecraft]} Check`,
+      label: `${CONFIG.TERIOCK.index.tradecrafts[tradecraft]} Check`,
       icon: "fas fa-compass-drafting",
       dataset: {
         action: "tradecraft-check",

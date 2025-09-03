@@ -7,9 +7,9 @@ import { makeIcon } from "../../../../../helpers/utils.mjs";
  * @returns {Array} Array of context menu options for power type selection.
  */
 export function powerContextMenu(power) {
-  const iconStyle = CONFIG.TERIOCK.iconStyles.contextMenu;
+  const iconStyle = CONFIG.TERIOCK.display.iconStyles.contextMenu;
   const options = [];
-  let types = CONFIG.TERIOCK.powerOptions;
+  let types = CONFIG.TERIOCK.options.power;
   for (const type in types) {
     const typeName = types[type].name;
     const typeIcon = types[type].icon;

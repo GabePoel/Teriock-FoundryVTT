@@ -1,5 +1,6 @@
-import { documentTypes } from "../../../constants/document-types.mjs";
-import { toCamelCase } from "../../../helpers/utils.mjs";
+import { documentTypes } from "../../../constants/system/document-types.mjs";
+
+import {toCamelCase} from "../../../helpers/string.mjs";
 
 /**
  * Builds effect types and keys from a document's valid effects.

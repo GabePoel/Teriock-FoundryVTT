@@ -4,16 +4,13 @@ import path from "path";
 
 import { fileURLToPath } from "url";
 
-import { conditions } from "../src/module/constants/generated/conditions.mjs";
-import { magicalProperties } from "../src/module/constants/generated/magical-properties.mjs";
-import { materialProperties } from "../src/module/constants/generated/material-properties.mjs";
-import { properties } from "../src/module/constants/generated/properties.mjs";
+import { conditions } from "../src/module/constants/index/_module.mjs";
 import { fetchWikiPageHTML } from "../src/module/helpers/wiki/_module.mjs";
-import { toKebabCase } from "./update-options.mjs";
+import { toKebabCase } from "../src/module/helpers/string.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const contentDir = path.resolve(__dirname, "../src/module/content");
+const contentDir = path.resolve(__dirname, "../src/module/constants/content");
 
 const writeModuleFile = (fileName, exportName, entries) => {
   const fileHeader = `// This file was auto-generated on ${new Date().toISOString().split("T")[0]} by scripts/fetch-content.mjs.\n// Do not edit manually.\n\n`;
@@ -141,33 +138,6 @@ const run = async () => {
         staticId: true,
         statuses: true,
         type: "condition",
-      },
-      {
-        data: magicalProperties,
-        namespace: "Property",
-        exportName: "magicalProperties",
-        file: "magical-properties.mjs",
-        staticId: false,
-        statuses: false,
-        type: null,
-      },
-      {
-        data: materialProperties,
-        namespace: "Property",
-        exportName: "materialProperties",
-        file: "material-properties.mjs",
-        staticId: false,
-        statuses: false,
-        type: null,
-      },
-      {
-        data: properties,
-        namespace: "Property",
-        exportName: "properties",
-        file: "properties.mjs",
-        staticId: false,
-        statuses: false,
-        type: null,
       },
     ];
 

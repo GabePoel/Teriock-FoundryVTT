@@ -1,4 +1,3 @@
-import { conditions } from "../../../constants/generated/conditions.mjs";
 import { makeIcon, mergeFreeze } from "../../../helpers/utils.mjs";
 import { ChildTypeModel } from "../../models/_module.mjs";
 import { comparatorField } from "../shared/shared-fields.mjs";
@@ -40,12 +39,12 @@ export default class TeriockBaseEffectData extends ChildTypeModel {
         statuses: new fields.SchemaField({
           active: new fields.SetField(
             new fields.StringField({
-              choices: conditions,
+              choices: CONFIG.TERIOCK.index.conditions,
             }),
           ),
           inactive: new fields.SetField(
             new fields.StringField({
-              choices: conditions,
+              choices: CONFIG.TERIOCK.index.conditions,
             }),
           ),
         }),

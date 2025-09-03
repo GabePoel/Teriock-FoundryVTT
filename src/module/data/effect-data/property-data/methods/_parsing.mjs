@@ -1,5 +1,5 @@
 import { tidyHTML } from "../../../../helpers/html.mjs";
-import { toKebabCase } from "../../../../helpers/utils.mjs";
+import { toKebabCase } from "../../../../helpers/string.mjs";
 import { cleanHTMLDoc } from "../../../shared/parsing/clean-html-doc.mjs";
 import { extractChangesFromHTML } from "../../../shared/parsing/extract-changes.mjs";
 import { getCategoriesFromHTML } from "../../../shared/parsing/get-categories.mjs";

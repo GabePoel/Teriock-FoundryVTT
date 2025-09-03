@@ -5,9 +5,9 @@ if (!spiritItem) {
   const equipmentType =
     await game.teriock.api.dialogs.selectEquipmentTypeDialog();
   let spiritItems;
-  if (equipmentType in CONFIG.TERIOCK.equipmentOptions.equipmentType) {
+  if (equipmentType in CONFIG.TERIOCK.options.equipment.equipmentType) {
     const equipmentTypeName =
-      CONFIG.TERIOCK.equipmentOptions.equipmentType[equipmentType];
+      CONFIG.TERIOCK.options.equipment.equipmentType[equipmentType];
     const spiritItemReference = await fromUuid(
       game.teriock.packs.equipment().index.getName(equipmentTypeName).uuid,
     );

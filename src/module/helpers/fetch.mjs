@@ -128,10 +128,10 @@ export async function getRank(classKey, number, options = {}) {
   if (
     number > 5 ||
     number < 1 ||
-    !Object.keys(CONFIG.TERIOCK.rankOptionsList).includes(classKey)
+    !Object.keys(CONFIG.TERIOCK.index.classes).includes(classKey)
   )
     return null;
-  const name = `Rank ${number} ${CONFIG.TERIOCK.rankOptionsList[classKey]}`;
+  const name = `Rank ${number} ${CONFIG.TERIOCK.index.classes[classKey]}`;
   return await getItem(name, "classes", options);
 }
 

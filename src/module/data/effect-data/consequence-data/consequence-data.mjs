@@ -29,14 +29,14 @@ export default class TeriockConsequenceData extends TeriockBaseEffectData {
       expirations: new fields.SchemaField({
         conditions: new fields.SchemaField({
           present: new fields.SetField(
-            new fields.StringField({ choices: CONFIG.TERIOCK.conditions }),
+            new fields.StringField({ choices: CONFIG.TERIOCK.index.conditions }),
             {
               label: "Present Conditions",
               hint: "What conditions must be present in order for this ability to be active?",
             },
           ),
           absent: new fields.SetField(
-            new fields.StringField({ choices: CONFIG.TERIOCK.conditions }),
+            new fields.StringField({ choices: CONFIG.TERIOCK.index.conditions }),
             {
               label: "Absent Conditions",
               hint: "What conditions must be absent in order for this ability to be active?",

@@ -1,6 +1,6 @@
-import { toTitleCase } from "../../../../helpers/utils.mjs";
 import { selectDialog } from "../../../dialogs/select-dialog.mjs";
 import TeriockBaseItemSheet from "../base-item-sheet/base-item-sheet.mjs";
+import {toTitleCase} from "../../../../helpers/string.mjs";
 
 /**
  * Sheet for a {@link TeriockWrapper}.

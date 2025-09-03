@@ -1,43 +1,8 @@
-import { conditions as conditionsContent } from "../content/conditions.mjs";
-import { magicalProperties } from "../content/magical-properties.mjs";
-import { materialProperties } from "../content/material-properties.mjs";
-import {
-  properties,
-  properties as propertiesContent,
-} from "../content/properties.mjs";
-import { mergeLevel } from "../helpers/utils.mjs";
-import { abilityOptions } from "./ability-options.mjs";
-import { characterOptions } from "./character-options.mjs";
-import { consequenceOptions } from "./consequence-options.mjs";
-import { currencyOptions } from "./currency-options.mjs";
-import { dieOptions } from "./die-options.mjs";
-import { displayOptions } from "./display-options.mjs";
-import { documentOptions } from "./document-options.mjs";
-import { documentTypes } from "./document-types.mjs";
-import { equipmentOptions } from "./equipment-options.mjs";
-import { fonts } from "./fonts.mjs";
-import { abilities } from "./generated/abilities.mjs";
-import { conditions as conditionsList } from "./generated/conditions.mjs";
-import { equipment } from "./generated/equipment.mjs";
-import { iconStyles } from "./icon-styles.mjs";
-import { icons } from "./icons.mjs";
-import { powerOptions } from "./power-options.mjs";
-import { pseudoHooks } from "./pseudo-hooks.mjs";
-import { rankOptions } from "./rank-options.mjs";
-import { resourceOptions } from "./resource-options.mjs";
-import { speciesOptions } from "./species-options.mjs";
-import { tradecraftOptions } from "./tradecraft-options.mjs";
-
-const allProperties = {};
-for (const [key, value] of Object.entries(properties)) {
-  allProperties[key] = value.name;
-}
-for (const [key, value] of Object.entries(magicalProperties)) {
-  allProperties[key] = value.name;
-}
-for (const [key, value] of Object.entries(materialProperties)) {
-  allProperties[key] = value.name;
-}
+import * as index from "./index/_module.mjs";
+import * as content from "./content/_module.mjs";
+import * as options from "./options/_module.mjs";
+import * as system from "./system/_module.mjs";
+import * as display from "./display/_module.mjs";
 
 /**
  * Main configuration object containing all system options, constants, and content.
@@ -68,40 +33,9 @@ for (const [key, value] of Object.entries(materialProperties)) {
  * @property {Object} resourceOptions - Resource configuration options
  */
 export const TERIOCK = {
-  abilities: abilities,
-  properties: allProperties,
-  abilityOptions: abilityOptions,
-  characterOptions: characterOptions,
-  conditions: conditionsList,
-  content: {
-    conditions: conditionsContent,
-    properties: propertiesContent,
-    materialProperties: materialProperties,
-    magicalProperties: magicalProperties,
-  },
-  consequenceOptions: consequenceOptions,
-  currencyOptions: currencyOptions,
-  displayOptions: displayOptions,
-  documentOptions: documentOptions,
-  equipmentType: equipment,
-  equipmentOptions: equipmentOptions,
-  fonts: fonts,
-  icons: icons,
-  iconStyles: iconStyles,
-  powerOptions: powerOptions,
-  rankOptions: rankOptions,
-  rankOptionsList: mergeLevel(rankOptions, "*.classes", "name"),
-  tradecraftOptions: tradecraftOptions,
-  tradecraftOptionsList: mergeLevel(tradecraftOptions, "*.tradecrafts", "name"),
-  tradecraftOptionsMain: {
-    artisan: tradecraftOptions.artisan,
-    mediator: tradecraftOptions.mediator,
-    scholar: tradecraftOptions.scholar,
-    survivalist: tradecraftOptions.survivalist,
-  },
-  resourceOptions: resourceOptions,
-  speciesOptions: speciesOptions,
-  dieOptions: dieOptions,
-  pseudoHooks: pseudoHooks,
-  documentTypes: documentTypes,
+  index: index,
+  content: content,
+  options: options,
+  system: system,
+  display: display,
 };

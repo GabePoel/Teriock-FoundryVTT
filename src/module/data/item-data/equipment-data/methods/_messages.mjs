@@ -12,7 +12,7 @@ import {
  * @private
  */
 export function _messageParts(equipmentData) {
-  const ref = CONFIG.TERIOCK.equipmentOptions;
+  const ref = CONFIG.TERIOCK.options.equipment;
   const src = equipmentData;
   let damageString = "";
   if (src.derivedDamage) {

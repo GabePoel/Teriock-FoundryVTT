@@ -1,4 +1,4 @@
-import type { iconStyles } from "../constants/icon-styles.mjs";
+import type { iconStyles } from "../constants/style/icon-styles.mjs";
 
 declare global {
   namespace Teriock.UI {

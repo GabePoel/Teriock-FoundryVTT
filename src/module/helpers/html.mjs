@@ -143,7 +143,7 @@ export function makeDamageTypeButtons(roll) {
   }
   for (const status of statuses) {
     buttons.push({
-      label: `Apply ${CONFIG.TERIOCK.conditions[status]}`,
+      label: `Apply ${CONFIG.TERIOCK.index.conditions[status]}`,
       icon: "fas fa-plus",
       dataset: {
         action: "apply-status",

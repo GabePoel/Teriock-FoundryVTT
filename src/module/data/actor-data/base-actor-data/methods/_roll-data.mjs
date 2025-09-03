@@ -156,7 +156,7 @@ function attributeData(actorData, data) {
  * @param {object} data - The roll data object to populate.
  */
 function tradecraftData(actorData, data) {
-  for (const key of Object.keys(TERIOCK.tradecraftOptionsList)) {
+  for (const key of Object.keys(TERIOCK.index.tradecrafts)) {
     const tc = actorData.tradecrafts[key];
     let short = key.slice(0, 3);
     if (tc) {
@@ -409,7 +409,7 @@ function moneyData(actorData, data) {
     hea: "heartstoneRuby",
   };
 
-  const currencyOptions = TERIOCK.currencyOptions || {};
+  const currencyOptions = TERIOCK.options.currency || {};
 
   for (const key of moneyKeys) {
     const systemKey = moneyMap[key];

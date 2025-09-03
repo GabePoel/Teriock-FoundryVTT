@@ -45,7 +45,7 @@ export function _prepareEncumbrance(actorData) {
  */
 export function _prepareMoney(actorData) {
   const money = actorData.money;
-  const currencyOptions = CONFIG.TERIOCK.currencyOptions;
+  const currencyOptions = CONFIG.TERIOCK.options.currency;
   const total = Object.keys(currencyOptions).reduce((sum, key) => {
     money[key] = Math.max(0, money[key] || 0);
     const value = (money[key] || 0) * currencyOptions[key].value;

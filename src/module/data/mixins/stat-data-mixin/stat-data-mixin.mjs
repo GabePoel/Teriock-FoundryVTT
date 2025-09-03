@@ -1,4 +1,4 @@
-import { dieOptions } from "../../../constants/die-options.mjs";
+import { dieOptions } from "../../../constants/options/die-options.mjs";
 import { mergeFreeze } from "../../../helpers/utils.mjs";
 import StatDieModel from "../../models/stat-die-model/stat-die-model.mjs";
 

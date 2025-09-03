@@ -1,6 +1,3 @@
-import { abilityOptions } from "../../../../../constants/ability-options.mjs";
-import { conditions as conditionsList } from "../../../../../constants/generated/conditions.mjs";
-
 const { fields } = foundry.data;
 
 /**
@@ -43,7 +40,7 @@ function protectionField(name) {
       new fields.StringField({
         initial: "",
         label: `Condition`,
-        choices: conditionsList,
+        choices: CONFIG.TERIOCK.index.conditions,
       }),
       {
         label: `Conditions`,
@@ -54,7 +51,7 @@ function protectionField(name) {
       new fields.StringField({
         initial: "",
         label: `Element`,
-        choices: abilityOptions.elements,
+        choices: CONFIG.TERIOCK.index.elements,
       }),
       {
         label: `Elements`,
@@ -65,7 +62,7 @@ function protectionField(name) {
       new fields.StringField({
         initial: "",
         label: `Effect`,
-        choices: abilityOptions.effects,
+        choices: CONFIG.TERIOCK.index.effectTypes,
       }),
       {
         label: `Effects`,
@@ -76,7 +73,7 @@ function protectionField(name) {
       new fields.StringField({
         initial: "",
         label: `Power Source`,
-        choices: abilityOptions.powerSources,
+        choices: CONFIG.TERIOCK.index.powerSources,
       }),
       {
         label: `Power Sources`,

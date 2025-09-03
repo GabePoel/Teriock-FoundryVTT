@@ -1,4 +1,3 @@
-import { traits } from "../../../../constants/generated/traits.mjs";
 import { TeriockRoll } from "../../../../documents/_module.mjs";
 import { cleanHTMLDoc } from "../../../shared/parsing/clean-html-doc.mjs";
 import { getBarText, getText } from "../../../shared/parsing/get-text.mjs";
@@ -73,7 +72,7 @@ export async function _parse(speciesData, rawHTML) {
   }
   if (tagTree["traits"]) parameters.traits = tagTree["traits"];
   parameters.traits = parameters.traits.filter((t) =>
-    Object.keys(traits).includes(t),
+    Object.keys(CONFIG.TERIOCK.index.traits).includes(t),
   );
   parameters.appearance = getBarText(doc, "looks");
   parameters.description = getText(doc, "creature-description");

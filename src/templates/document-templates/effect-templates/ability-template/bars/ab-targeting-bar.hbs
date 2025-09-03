@@ -11,7 +11,7 @@
     <div class="ab-box-container">
       <div class="ab-box {{#if editable}}ab-input-box range-box{{/if}}" data-tooltip="Range">
         <div class="ab-box-icon">
-          {{{config.icons.range}}}
+          {{{config.display.icons.range}}}
         </div>
         <div class="ab-box-content">
           {{formInput
@@ -31,10 +31,10 @@
   <div class="ab-box-container">
     <div class="ab-box {{#if editable}}target-box{{/if}}" data-tooltip="Targets">
       <div class="ab-box-icon">
-        {{{config.icons.target}}}
+        {{{config.display.icons.target}}}
       </div>
       <div class="ab-box-content">{{#each system.targets as |key index|}}{{#if index}}, {{/if}}{{lookup
-        ../config.abilityOptions.targets key}}{{/each}}
+        ../config.options.ability.targets key}}{{/each}}
       </div>
     </div>
   </div>
@@ -43,7 +43,7 @@
     <div class="ab-box {{#if editable}}ab-input-box duration-box{{/if}}" data-tooltip="Duration"
          data-action="setDuration">
       <div class="ab-box-icon">
-        {{{config.icons.duration}}}
+        {{{config.display.icons.duration}}}
       </div>
       <div class="ab-box-content">
         {{{system.duration.description}}}

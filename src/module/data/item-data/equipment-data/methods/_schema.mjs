@@ -1,5 +1,3 @@
-import { equipmentOptions } from "../../../../constants/equipment-options.mjs";
-import { weaponFightingStyles } from "../../../../constants/generated/weapon-fighting-styles.mjs";
 import { FormulaField, TextField } from "../../../shared/fields/_module.mjs";
 
 const { fields } = foundry.data;
@@ -90,7 +88,7 @@ export function _defineSchema() {
     }),
     equipmentClasses: new fields.SetField(
       new fields.StringField({
-        choices: equipmentOptions.equipmentClasses,
+        choices: CONFIG.TERIOCK.index.equipmentClasses,
       }),
     ),
     minStr: new fields.NumberField({
@@ -103,7 +101,7 @@ export function _defineSchema() {
       initial: null,
       label: "Style Bonus",
       nullable: true,
-      choices: weaponFightingStyles,
+      choices: CONFIG.TERIOCK.index.weaponFightingStyles,
     }),
     av: new fields.NumberField({
       initial: 0,
@@ -131,7 +129,7 @@ export function _defineSchema() {
       label: "Price",
     }),
     powerLevel: new fields.StringField({
-      choices: equipmentOptions.powerLevelShort,
+      choices: CONFIG.TERIOCK.options.equipment.powerLevelShort,
       initial: "mundane",
       label: "Power Level",
     }),

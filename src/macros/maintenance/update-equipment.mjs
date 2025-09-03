@@ -56,7 +56,7 @@ const limiter = (limit) => {
 };
 
 const TeriockItem = CONFIG.Item.documentClass;
-const equipmentTypes = Object.values(CONFIG.TERIOCK.equipmentType);
+const equipmentTypes = Object.values(CONFIG.TERIOCK.index.equipment);
 const totalJobs = equipmentTypes.length * Object.keys(propertyMap).length;
 let completed = 0;
 
@@ -111,7 +111,7 @@ await Promise.all(
           for (const property of properties) {
             if (
               !equipment.effectKeys.property.has(
-                game.teriock.api.utils.toCamelCase(property),
+                game.teriock.api.string.toCamelCase(property),
               )
             ) {
               await game.teriock.api.fetch.importProperty(equipment, property);

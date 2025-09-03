@@ -1,5 +1,5 @@
-import type { rankOptions } from "../../../constants/rank-options.mjs";
-import type { abilityOptions } from "../../../constants/ability-options.mjs";
+import type { rankOptions } from "../../../constants/options/rank-options.mjs";
+import type { abilityOptions } from "../../../constants/options/ability-options.mjs";
 
 declare global {
   namespace Teriock.Parameters.Rank {

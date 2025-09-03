@@ -1,4 +1,3 @@
-import { traits } from "../../../../constants/generated/traits.mjs";
 import {
   addAbilitiesBlock,
   addFluenciesBlock,
@@ -49,7 +48,7 @@ export function _messageParts(speciesData) {
     {
       icon: "fa-flag",
       label: "Traits",
-      wrappers: [...speciesData.traits.map((t) => traits[t])],
+      wrappers: [...speciesData.traits.map((t) => CONFIG.TERIOCK.index.traits[t])],
     },
   ];
   const blocks = [

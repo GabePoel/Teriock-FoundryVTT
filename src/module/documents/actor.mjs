@@ -1,9 +1,8 @@
-import { characterOptions } from "../constants/character-options.mjs";
-import { rankOptions } from "../constants/rank-options.mjs";
 import { copyItem } from "../helpers/fetch.mjs";
-import { pureUuid, toCamelCase } from "../helpers/utils.mjs";
+import { pureUuid } from "../helpers/utils.mjs";
 import { CommonDocumentMixin, ParentDocumentMixin } from "./mixins/_module.mjs";
 import TeriockRoll from "./roll.mjs";
+import {toCamelCase} from "../helpers/string.mjs";
 
 const { Actor } = foundry.documents;
 
@@ -38,10 +37,10 @@ export default class TeriockActor extends ParentDocumentMixin(
    * @returns {string}
    */
   static toNamedSize(size) {
-    const sizeKeys = Object.keys(characterOptions.namedSizes).map(Number);
+    const sizeKeys = Object.keys(CONFIG.TERIOCK.options.character.namedSizes).map(Number);
     const filteredSizeKeys = sizeKeys.filter((key) => key <= size);
     const sizeKey = Math.max(...filteredSizeKeys, 0);
-    return characterOptions.namedSizes[sizeKey] || "Medium";
+    return CONFIG.TERIOCK.options.character.namedSizes[sizeKey] || "Medium";
   }
 
   /**
@@ -164,7 +163,7 @@ export default class TeriockActor extends ParentDocumentMixin(
     // Update Prototype Token
     const prototypeToken = {};
     const size =
-      characterOptions.tokenSizes[TeriockActor.toNamedSize(this.system.size)] ||
+      CONFIG.TERIOCK.options.character.tokenSizes[TeriockActor.toNamedSize(this.system.size)] ||
       1;
     if (!foundry.utils.hasProperty(data, "prototypeToken.sight.enabled"))
       prototypeToken.sight = { enabled: true, range: 0 };
@@ -186,7 +185,7 @@ export default class TeriockActor extends ParentDocumentMixin(
     super._preUpdate(changed, options, user);
     if (foundry.utils.hasProperty(changed, "system.size")) {
       const tokenSize =
-        characterOptions.tokenSizes[
+        CONFIG.TERIOCK.options.character.tokenSizes[
           TeriockActor.toNamedSize(changed.system.size)
         ] || 1;
       if (!foundry.utils.hasProperty(changed, "prototypeToken.width")) {
@@ -234,7 +233,7 @@ export default class TeriockActor extends ParentDocumentMixin(
           )
         ) {
           if (!this.itemKeys.power.has(archetype))
-            data.push(await copyItem(rankOptions[archetype].name, "classes"));
+            data.push(await copyItem(CONFIG.TERIOCK.options.rank[archetype].name, "classes"));
         }
       }
     }
@@ -288,7 +287,7 @@ export default class TeriockActor extends ParentDocumentMixin(
           (i) => i.system.archetype === archetype && !ids.includes(i.id),
         );
         if (!remaining) {
-          const powerName = rankOptions[archetype].name;
+          const powerName = CONFIG.TERIOCK.options.rank[archetype].name;
           const powerItem = this.powers.find((i) => i.name === powerName);
           if (powerItem && !ids.includes(powerItem.id)) ids.push(powerItem.id);
         }

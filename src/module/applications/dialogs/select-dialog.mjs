@@ -1,11 +1,3 @@
-import { abilities } from "../../constants/generated/abilities.mjs";
-import { conditions } from "../../constants/generated/conditions.mjs";
-import { equipmentclasses } from "../../constants/generated/equipment-classes.mjs";
-import { equipment } from "../../constants/generated/equipment.mjs";
-import { magicalProperties } from "../../constants/generated/magical-properties.mjs";
-import { materialProperties } from "../../constants/generated/material-properties.mjs";
-import { properties } from "../../constants/generated/properties.mjs";
-import { weaponclasses } from "../../constants/generated/weapon-classes.mjs";
 import { TeriockDialog } from "../api/_module.mjs";
 
 const { fields } = foundry.data;
@@ -96,7 +88,7 @@ export async function selectDialog(choices, options = {}) {
  * @returns {Promise<Teriock.Parameters.Equipment.EquipmentClass>}
  */
 export async function selectEquipmentClassDialog() {
-  return await selectDialog(equipmentclasses, {
+  return await selectDialog(CONFIG.TERIOCK.index.equipmentClasses, {
     label: "Equipment Class",
     hint: "Please select an equipment class.",
     title: "Select Equipment Class",
@@ -108,7 +100,7 @@ export async function selectEquipmentClassDialog() {
  * @returns {Promise<Teriock.Parameters.Equipment.WeaponClass>}
  */
 export async function selectWeaponClassDialog() {
-  return await selectDialog(weaponclasses, {
+  return await selectDialog(CONFIG.TERIOCK.index.weaponClasses, {
     label: "Weapon Class",
     hint: "Please select a weapon class.",
     title: "Select Weapon Class",
@@ -120,7 +112,7 @@ export async function selectWeaponClassDialog() {
  * @returns {Promise<Teriock.Parameters.Condition.ConditionKey>}
  */
 export async function selectConditionDialog() {
-  return await selectDialog(conditions, {
+  return await selectDialog(CONFIG.TERIOCK.index.conditions, {
     label: "Condition",
     hint: "Please select a condition.",
     title: "Select Condition",
@@ -132,11 +124,7 @@ export async function selectConditionDialog() {
  * @returns {Promise<Teriock.Parameters.Equipment.PropertyKey>}
  */
 export async function selectPropertyDialog() {
-  return await selectDialog(
-    foundry.utils.mergeObject(
-      foundry.utils.mergeObject(properties, magicalProperties),
-      materialProperties,
-    ),
+  return await selectDialog(CONFIG.TERIOCK.index.properties,
     {
       label: "Property",
       hint: "Please select a property.",
@@ -152,7 +140,7 @@ export async function selectPropertyDialog() {
  * @returns {Promise<Teriock.Parameters.Fluency.Tradecraft>}
  */
 export async function selectTradecraftDialog() {
-  return await selectDialog(CONFIG.TERIOCK.tradecraftOptionsList, {
+  return await selectDialog(CONFIG.TERIOCK.index.tradecrafts, {
     label: "Tradecraft",
     hint: "Please select a tradecraft.",
     title: "Select Tradecraft",
@@ -164,7 +152,7 @@ export async function selectTradecraftDialog() {
  * @returns {Promise<string>}
  */
 export async function selectAbilityDialog() {
-  return await selectDialog(abilities, {
+  return await selectDialog(CONFIG.TERIOCK.index.abilities, {
     label: "Ability",
     hint: "Please select an ability.",
     title: "Select Ability",
@@ -178,7 +166,7 @@ export async function selectAbilityDialog() {
  * @returns {Promise<string>}
  */
 export async function selectEquipmentTypeDialog() {
-  return await selectDialog(equipment, {
+  return await selectDialog(CONFIG.TERIOCK.index.equipment, {
     label: "Equipment Type",
     hint: "Please select an equipment type.",
     title: "Select Equipment Type",
@@ -192,7 +180,7 @@ export async function selectEquipmentTypeDialog() {
  * @returns {Promise<string>}
  */
 export async function selectClassDialog() {
-  return await selectDialog(CONFIG.TERIOCK.rankOptionsList, {
+  return await selectDialog(CONFIG.TERIOCK.index.classes, {
     label: "Class",
     hint: "Please select a class.",
     title: "Select Class",

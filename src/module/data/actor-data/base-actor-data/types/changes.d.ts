@@ -43,12 +43,7 @@ type EquipmentChangeKeys = {
   /** Overrides by equipment type */
   types: Record<string, Partial<EquipmentChangeValues>>;
   /** Overrides by equipment property */
-  properties: Record<
-    | Teriock.Parameters.Equipment.GenericPropertyKey
-    | Teriock.Parameters.Equipment.MaterialPropertyKey
-    | Teriock.Parameters.Equipment.MagicalPropertyKey,
-    Partial<EquipmentChangeValues>
-  >;
+  properties: Record<Teriock.Parameters.Equipment.PropertyKey, Partial<EquipmentChangeValues>>;
   /** Overrides by equipment class */
   classes: Record<
     Teriock.Parameters.Equipment.EquipmentClass,

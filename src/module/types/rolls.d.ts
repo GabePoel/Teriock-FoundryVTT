@@ -1,4 +1,4 @@
-import type { dieOptions } from "../constants/die-options.mjs";
+import type { dieOptions } from "../constants/options/die-options.mjs";
 import type { TeriockToken } from "../canvas/placeables/_module.mjs";
 import type { TeriockActor } from "../documents/_module.mjs";
 import type {

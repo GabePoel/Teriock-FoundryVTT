@@ -2,22 +2,22 @@
   <div class="ab-box-container">
     <div
       class="ab-box {{#if editable}}execution-box{{/if}} ab-input-box"
-      data-maneuver="{{lookup config.abilityOptions.maneuver system.maneuver}}"
+      data-maneuver="{{lookup config.options.ability.maneuver system.maneuver}}"
       data-tooltip="Execution Time"
     >
       <div class="ab-box-icon">
-        {{{config.icons.execution}}}
+        {{{config.display.icons.execution}}}
       </div>
       <div class="ab-box-content">
         {{#if (eq system.maneuver "active")}}
           {{lookup
-            config.abilityOptions.executionTime.active
+            config.options.ability.executionTime.active
             system.executionTime
           }}
         {{/if}}
         {{#if (eq system.maneuver "reactive")}}
           {{lookup
-            config.abilityOptions.executionTime.reactive
+            config.options.ability.executionTime.reactive
             system.executionTime
           }}
         {{/if}}
@@ -39,11 +39,11 @@
   <div class="ab-box-container">
     <div class="ab-box {{#if editable}}delivery-box{{/if}}" data-tooltip="Delivery">
       <div class="ab-box-icon">
-        {{{config.icons.delivery}}}
+        {{{config.display.icons.delivery}}}
       </div>
       <div class="ab-box-content">
-        {{lookup config.abilityOptions.piercing system.piercing}}
-        {{lookup config.abilityOptions.delivery system.delivery.base}}
+        {{lookup config.options.ability.piercing system.piercing}}
+        {{lookup config.options.ability.delivery system.delivery.base}}
       </div>
     </div>
   </div>
@@ -54,16 +54,16 @@
       data-tooltip="Interaction"
     >
       <div class="ab-box-icon">
-        {{{config.icons.interaction}}}
+        {{{config.display.icons.interaction}}}
       </div>
       <div class="ab-box-content">
         {{#if (eq system.interaction "feat")}}
           {{lookup
-            config.abilityOptions.featSaveAttribute
+            config.options.ability.featSaveAttribute
             system.featSaveAttribute
           }}
         {{/if}}
-        {{lookup config.abilityOptions.interaction system.interaction}}
+        {{lookup config.options.ability.interaction system.interaction}}
       </div>
     </div>
   </div>

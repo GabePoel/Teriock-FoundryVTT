@@ -1,4 +1,4 @@
-import { abilityOptions } from "../../constants/ability-options.mjs";
+import { abilityOptions } from "../../constants/options/ability-options.mjs";
 
 /**
  * Creates a DOM element with specified properties and children.

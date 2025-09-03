@@ -134,7 +134,7 @@ export default class TeriockRankData extends StatDataMixin(
   get wikiPage() {
     const prefix = this.constructor.metadata.namespace;
     const pageName =
-      CONFIG.TERIOCK.rankOptionsList[
+      CONFIG.TERIOCK.index.classes[
         foundry.utils.getProperty(
           this.parent,
           this.constructor.metadata.pageNameKey,

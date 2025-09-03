@@ -1,4 +1,4 @@
-import { pseudoHooks } from "../../../../../constants/pseudo-hooks.mjs";
+import { pseudoHooks } from "../../../../../constants/system/pseudo-hooks.mjs";
 import {
   FormulaField,
   ListField,
@@ -99,7 +99,7 @@ function consequenceField() {
   return new fields.SchemaField({
     statuses: new fields.SetField(
       new fields.StringField({
-        choices: CONFIG.TERIOCK.conditions,
+        choices: CONFIG.TERIOCK.index.conditions,
       }),
       {
         label: "Conditions",
@@ -108,7 +108,7 @@ function consequenceField() {
     ),
     startStatuses: new fields.SetField(
       new fields.StringField({
-        choices: CONFIG.TERIOCK.conditions,
+        choices: CONFIG.TERIOCK.index.conditions,
       }),
       {
         label: "Apply Conditions",
@@ -117,7 +117,7 @@ function consequenceField() {
     ),
     endStatuses: new fields.SetField(
       new fields.StringField({
-        choices: CONFIG.TERIOCK.conditions,
+        choices: CONFIG.TERIOCK.index.conditions,
       }),
       {
         label: "Remove Conditions",
@@ -144,7 +144,7 @@ function consequenceField() {
     ),
     checks: new fields.SetField(
       new fields.StringField({
-        choices: CONFIG.TERIOCK.tradecraftOptionsList,
+        choices: CONFIG.TERIOCK.index.tradecrafts,
       }),
       {
         label: "Tradecraft Checks",
@@ -159,7 +159,7 @@ function consequenceField() {
     changes: consequenceChangesField(),
     common: new fields.SetField(
       new fields.StringField({
-        choices: CONFIG.TERIOCK.consequenceOptions.common,
+        choices: CONFIG.TERIOCK.options.consequence.common,
       }),
       {
         label: "Common Consequences",

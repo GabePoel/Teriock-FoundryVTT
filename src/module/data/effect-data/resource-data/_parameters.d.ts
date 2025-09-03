@@ -1,4 +1,4 @@
-import type { resourceOptions } from "../../../constants/resource-options.mjs";
+import type { resourceOptions } from "../../../constants/options/resource-options.mjs";
 
 declare global {
   namespace Teriock.Parameters.Resource {

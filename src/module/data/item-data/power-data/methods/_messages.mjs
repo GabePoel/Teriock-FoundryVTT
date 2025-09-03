@@ -12,7 +12,7 @@ import {
  * @private
  */
 export function _messageParts(powerData) {
-  const ref = CONFIG.TERIOCK.powerOptions;
+  const ref = CONFIG.TERIOCK.options.power;
   const src = powerData;
   const bars = [
     {

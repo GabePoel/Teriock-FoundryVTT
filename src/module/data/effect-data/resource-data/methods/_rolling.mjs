@@ -46,7 +46,7 @@ async function use(resourceData, options) {
     const functionHook = resourceData.functionHook;
     if (functionHook) {
       const hookFunction =
-        CONFIG.TERIOCK.resourceOptions.functionHooks[functionHook]?.callback;
+        CONFIG.TERIOCK.options.resource.functionHooks[functionHook]?.callback;
       await hookFunction?.(resourceData.parent, result);
     }
   } else {

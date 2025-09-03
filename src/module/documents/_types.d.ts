@@ -1,5 +1,5 @@
 import "./mixins/_types";
-import type { documentTypes } from "../constants/document-types.mjs";
+import type { documentTypes } from "../constants/system/document-types.mjs";
 
 declare global {
   namespace Teriock.Documents {

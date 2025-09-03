@@ -1,4 +1,4 @@
-import type { traits } from "../../../constants/generated/traits.mjs";
+import type {traits} from "../../../constants/index/_module.mjs";
 
 declare global {
   namespace Teriock.Parameters.Species {

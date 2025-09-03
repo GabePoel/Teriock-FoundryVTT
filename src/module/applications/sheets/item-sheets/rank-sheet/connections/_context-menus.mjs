@@ -1,5 +1,6 @@
-import { dieOptions } from "../../../../../constants/die-options.mjs";
-import { getRollIcon, makeIcon, toTitleCase } from "../../../../../helpers/utils.mjs";
+import { dieOptions } from "../../../../../constants/options/die-options.mjs";
+import { getRollIcon, makeIcon } from "../../../../../helpers/utils.mjs";
+import {toTitleCase} from "../../../../../helpers/string.mjs";
 
 /**
  * Creates a context menu for selecting archetypes within a rank item.
@@ -9,9 +10,9 @@ import { getRollIcon, makeIcon, toTitleCase } from "../../../../../helpers/utils
  * @returns {Array} Array of context menu options for archetype selection.
  */
 export function archetypeContextMenu(rank) {
-  const iconStyle = CONFIG.TERIOCK.iconStyles.contextMenu;
+  const iconStyle = CONFIG.TERIOCK.display.iconStyles.contextMenu;
   const options = [];
-  let archetypes = CONFIG.TERIOCK.rankOptions;
+  let archetypes = CONFIG.TERIOCK.options.rank;
   for (const archetype in archetypes) {
     const archetypeName = archetypes[archetype].name;
     const archetypeIcon = archetypes[archetype].icon;
@@ -54,9 +55,9 @@ export function archetypeContextMenu(rank) {
  * @returns {Array} Array of context menu options for class selection.
  */
 export function classContextMenu(rank) {
-  const iconStyle = CONFIG.TERIOCK.iconStyles.contextMenu;
+  const iconStyle = CONFIG.TERIOCK.display.iconStyles.contextMenu;
   const options = [];
-  let archetypes = CONFIG.TERIOCK.rankOptions;
+  let archetypes = CONFIG.TERIOCK.options.rank;
   for (const archetype in archetypes) {
     const classes = archetypes[archetype].classes;
     for (const className in classes) {
@@ -92,7 +93,7 @@ export function classContextMenu(rank) {
  * @returns {Array} Array of context menu options for rank selection.
  */
 export function rankContextMenu(rank) {
-  const iconStyle = CONFIG.TERIOCK.iconStyles.contextMenu;
+  const iconStyle = CONFIG.TERIOCK.display.iconStyles.contextMenu;
   const options = [];
   for (let i = 0; i <= 9; i++) {
     options.push({
@@ -111,7 +112,7 @@ export function rankContextMenu(rank) {
  * @returns {Array} Array of context menu options for die selection.
  */
 function dieContextMenu(rank, stat = "hp") {
-  const iconStyle = CONFIG.TERIOCK.iconStyles.contextMenu;
+  const iconStyle = CONFIG.TERIOCK.display.iconStyles.contextMenu;
   const out = [];
   for (const [key, value] of Object.entries(dieOptions.faces)) {
     out.push({

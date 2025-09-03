@@ -1,4 +1,4 @@
-import { currencyOptions } from "../../../../../constants/currency-options.mjs";
+import { currencyOptions } from "../../../../../constants/options/currency-options.mjs";
 
 /**
  * Relevant wiki pages:

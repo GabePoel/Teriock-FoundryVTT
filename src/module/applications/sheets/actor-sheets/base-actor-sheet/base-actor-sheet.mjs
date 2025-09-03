@@ -1,5 +1,5 @@
-import { documentOptions } from "../../../../constants/document-options.mjs";
-import { conditions } from "../../../../content/conditions.mjs";
+import { documentOptions } from "../../../../constants/options/document-options.mjs";
+import { conditions } from "../../../../constants/content/conditions.mjs";
 import { SheetMixin } from "../../mixins/_module.mjs";
 import _embeddedFromCard from "../../mixins/methods/_embedded-from-card.mjs";
 import {
@@ -920,7 +920,7 @@ export default class TeriockBaseActorSheet extends SheetMixin(ActorSheetV2) {
     context.conditionProviders = {};
 
     if (tab === "conditions") {
-      for (const condition of Object.keys(CONFIG.TERIOCK.conditions)) {
+      for (const condition of Object.keys(CONFIG.TERIOCK.index.conditions)) {
         context.conditionProviders[condition] = new Set();
         for (const e of this.document.effectTypes?.base || []) {
           if (e.statuses.has(condition) && e.active) {

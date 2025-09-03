@@ -1,5 +1,3 @@
-import { abilityOptions } from "../../../../../constants/ability-options.mjs";
-import { conditions } from "../../../../../constants/generated/conditions.mjs";
 import { FormulaField, TextField } from "../../../../shared/fields/_module.mjs";
 
 const { fields } = foundry.data;
@@ -58,41 +56,41 @@ export function _defineGeneral(schema) {
     elderSorceryIncant: new fields.HTMLField({ initial: "" }),
     powerSources: new fields.ArrayField(
       new fields.StringField({
-        choices: abilityOptions.powerSources,
+        choices: CONFIG.TERIOCK.index.powerSources,
       }),
     ),
     interaction: new fields.StringField({
       initial: "attack",
-      choices: abilityOptions.interaction,
+      choices: CONFIG.TERIOCK.options.ability.interaction,
     }),
     featSaveAttribute: new fields.StringField({
       initial: "mov",
-      choices: abilityOptions.featSaveAttribute,
+      choices: CONFIG.TERIOCK.index.attributes,
     }),
     maneuver: new fields.StringField({
       initial: "active",
-      choices: abilityOptions.maneuver,
+      choices: CONFIG.TERIOCK.options.ability.maneuver,
     }),
     executionTime: new fields.StringField({ initial: "a1" }),
     delivery: new fields.SchemaField({
       base: new fields.StringField({
         initial: "weapon",
-        choices: abilityOptions.delivery,
+        choices: CONFIG.TERIOCK.options.ability.delivery,
       }),
       parent: new fields.StringField({
         initial: null,
         nullable: true,
-        choices: abilityOptions.deliveryParent,
+        choices: CONFIG.TERIOCK.options.ability.deliveryParent,
       }),
       package: new fields.StringField({
         initial: null,
         nullable: true,
-        choices: abilityOptions.deliveryPackage,
+        choices: CONFIG.TERIOCK.options.ability.deliveryPackage,
       }),
     }),
     targets: new fields.ArrayField(
       new fields.StringField({
-        choices: abilityOptions.targets,
+        choices: CONFIG.TERIOCK.options.ability.targets,
       }),
       {
         initial: ["creature"],
@@ -100,12 +98,12 @@ export function _defineGeneral(schema) {
     ),
     elements: new fields.ArrayField(
       new fields.StringField({
-        choices: abilityOptions.elements,
+        choices: CONFIG.TERIOCK.index.elements,
       }),
     ),
     duration: new fields.SchemaField({
       unit: new fields.StringField({
-        choices: abilityOptions.duration.unit,
+        choices: CONFIG.TERIOCK.options.ability.duration.unit,
         initial: "minute",
         label: "Unit",
         hint: "Unit of time for this ability's duration.",
@@ -118,14 +116,14 @@ export function _defineGeneral(schema) {
       }),
       conditions: new fields.SchemaField({
         present: new fields.SetField(
-          new fields.StringField({ choices: conditions }),
+          new fields.StringField({ choices: CONFIG.TERIOCK.index.conditions }),
           {
             label: "Present Conditions",
             hint: "What conditions must be present in order for this ability to be active?",
           },
         ),
         absent: new fields.SetField(
-          new fields.StringField({ choices: conditions }),
+          new fields.StringField({ choices: CONFIG.TERIOCK.index.conditions }),
           {
             label: "Absent Conditions",
             hint: "What conditions must be absent in order for this ability to be active?",
@@ -164,14 +162,14 @@ export function _defineGeneral(schema) {
     }),
     piercing: new fields.StringField({
       initial: "normal",
-      choices: abilityOptions.piercing,
+      choices: CONFIG.TERIOCK.options.ability.piercing,
     }),
     improvements: new fields.SchemaField({
       attributeImprovement: new fields.SchemaField({
         attribute: new fields.StringField({
           initial: null,
           nullable: true,
-          choices: abilityOptions.attribute,
+          choices: CONFIG.TERIOCK.index.statAttributes,
         }),
         minVal: new fields.NumberField({ initial: 0 }),
       }),
@@ -179,7 +177,7 @@ export function _defineGeneral(schema) {
         attribute: new fields.StringField({
           initial: null,
           nullable: true,
-          choices: abilityOptions.featSaveAttribute,
+          choices: CONFIG.TERIOCK.index.attributes,
         }),
         amount: new fields.StringField({ initial: "proficient" }),
       }),
@@ -291,7 +289,7 @@ export function _defineGeneral(schema) {
     requirements: new TextField({ initial: "", label: "Requirements" }),
     effects: new fields.ArrayField(
       new fields.StringField({
-        choices: abilityOptions.effects,
+        choices: CONFIG.TERIOCK.index.effectTypes,
       }),
     ),
     expansion: new fields.StringField({ initial: null, nullable: true }),

@@ -1,5 +1,3 @@
-import { abilityOptions } from "../../constants/ability-options.mjs";
-import { conditions } from "../../constants/generated/conditions.mjs";
 import { TeriockDialog } from "../api/_module.mjs";
 
 /**
@@ -90,13 +88,13 @@ export default async function durationDialog(ability) {
             );
           const stationary = stationaryElement.checked;
           if (description.length === 0) {
-            description = `${abilityOptions.duration.unit[unit]}${quantity !== 1 && !["instant", "noLimit", "untilDawn"].includes(unit) ? "s" : ""}`;
+            description = `${CONFIG.TERIOCK.options.ability.duration.unit[unit]}${quantity !== 1 && !["instant", "noLimit", "untilDawn"].includes(unit) ? "s" : ""}`;
             if (!["instant", "noLimit", "untilDawn"].includes(unit)) {
               description = `${quantity} ${description}`;
             }
             let conditionTerms = [
-              ...present.map((k) => conditions[k]),
-              ...absent.map((k) => "Not " + conditions[k]),
+              ...present.map((k) => CONFIG.TERIOCK.index.conditions[k]),
+              ...absent.map((k) => "Not " + CONFIG.TERIOCK.index.conditions[k]),
             ];
             conditionTerms = conditionTerms.map((c) => {
               if (c === "Not Down") return "Up";

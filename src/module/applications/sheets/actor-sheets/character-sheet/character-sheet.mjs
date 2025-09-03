@@ -1,4 +1,4 @@
-import { documentOptions } from "../../../../constants/document-options.mjs";
+import { documentOptions } from "../../../../constants/options/document-options.mjs";
 import TeriockBaseActorSheet from "../base-actor-sheet/base-actor-sheet.mjs";
 
 /**

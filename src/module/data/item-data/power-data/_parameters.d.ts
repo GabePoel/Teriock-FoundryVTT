@@ -1,4 +1,4 @@
-import type { powerOptions } from "../../../constants/power-options.mjs";
+import type { powerOptions } from "../../../constants/options/power-options.mjs";
 
 declare global {
   namespace Teriock.Parameters.Power {

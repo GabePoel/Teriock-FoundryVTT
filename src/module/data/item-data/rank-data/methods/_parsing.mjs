@@ -1,5 +1,5 @@
 import { createAbility } from "../../../../helpers/create-effects.mjs";
-import { toKebabCase } from "../../../../helpers/utils.mjs";
+import { toKebabCase } from "../../../../helpers/string.mjs";
 
 /**
  * Default statistics for different archetypes.
@@ -43,7 +43,7 @@ function extractAbilityNames(metaData, attr) {
 export async function _parse(rankData, rawHTML) {
   const { className, classRank, archetype } = rankData;
   const classValue =
-    CONFIG.TERIOCK.rankOptions[archetype].classes[className].name;
+    CONFIG.TERIOCK.options.rank[archetype].classes[className].name;
   const toDelete = rankData.parent.abilities.map((a) => a.id);
   await rankData.parent.deleteEmbeddedDocuments("ActiveEffect", toDelete);
 

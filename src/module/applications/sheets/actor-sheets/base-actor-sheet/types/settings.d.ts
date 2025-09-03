@@ -116,7 +116,7 @@ export type EquipmentFilters = {
   /** If the filter is applied, which power level is displayed */
   powerLevel: string | null;
   /** If the filter is applied, which property is displayed */
-  properties: Teriock.Parameters.Equipment.GenericPropertyKey | null;
+  properties: Teriock.Parameters.Equipment.PropertyKey | null;
   /** Currently applied search term */
   search: string;
   /** Show, hide, or don't filter based on if shattered */

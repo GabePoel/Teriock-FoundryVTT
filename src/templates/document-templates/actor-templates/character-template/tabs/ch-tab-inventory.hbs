@@ -3,7 +3,7 @@
   <div class="character-tab-page">
     <div class="tcard-display">
       <div class="money-panels tgrid g3">
-        {{#each config.currencyOptions as |currency id|}}
+        {{#each config.options.currency as |currency id|}}
           <div class="money-panel tgrid g4">
             {{formInput
               (path ../systemFields.money "fields" id)
@@ -45,7 +45,7 @@
       <div class="tcard-options">
         {{tcardOptions settings.menus.equipmentOptions settings.menus.equipmentFilters settings.menus.equipmentSort
                        settings.equipmentFilters.search "equipment"
-                       sortOptions=config.displayOptions.equipmentSortOrders sortValue=settings.equipmentSortOption
+                       sortOptions=config.options.display.equipmentSortOrders sortValue=settings.equipmentSortOption
                        addAction="addEquipment" key="equipment"}}
         {{#if settings.menus.equipmentFilters}}
           <div class="tcard-options-content">

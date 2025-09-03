@@ -1,4 +1,4 @@
-import type { tradecraftOptions } from "../../../constants/tradecraft-options.mjs";
+import type { tradecraftOptions } from "../../../constants/options/tradecraft-options.mjs";
 
 declare global {
   namespace Teriock.Parameters.Fluency {

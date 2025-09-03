@@ -2,7 +2,6 @@ import * as applications from "./applications/_module.mjs";
 import * as canvas from "./canvas/_module.mjs";
 import * as perception from "./canvas/perception/_module.mjs";
 import * as constants from "./constants/_module.mjs";
-import * as content from "./content/_module.mjs";
 import * as data from "./data/_module.mjs";
 import * as documents from "./documents/_module.mjs";
 import * as helpers from "./helpers/_module.mjs";
@@ -23,7 +22,7 @@ foundry.helpers.Hooks.once("init", function () {
   };
 
   CONFIG.statusEffects.length = 0;
-  for (const condition of Object.values(content.conditions)) {
+  for (const condition of Object.values(CONFIG.TERIOCK.content.conditionsData)) {
     CONFIG.statusEffects.push(condition);
   }
   CONFIG.statusEffects.sort((a, b) => {
@@ -232,6 +231,7 @@ foundry.helpers.Hooks.once("init", function () {
   const packs =
     /** @type {Collection<string,CompendiumCollection>} */ game.packs;
 
+  // noinspection JSUndefinedPropertyAssignment
   game.teriock = {
     Actor: documents.TeriockActor,
     Combat: documents.TeriockCombat,
@@ -256,6 +256,7 @@ foundry.helpers.Hooks.once("init", function () {
       utils: helpers.utils,
       fetch: helpers.fetch,
       wiki: helpers.wiki,
+      string: helpers.string,
     },
     data: data,
     packs: {

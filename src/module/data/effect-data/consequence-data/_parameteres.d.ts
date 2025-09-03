@@ -1,4 +1,4 @@
-import type { consequenceOptions } from "../../../constants/consequence-options.mjs";
+import type { consequenceOptions } from "../../../constants/options/consequence-options.mjs";
 
 declare global {
   namespace Teriock.Parameters.Consequence {

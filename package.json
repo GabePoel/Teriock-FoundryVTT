@@ -3,19 +3,16 @@
   "version": "2.0.0",
   "description": "CSS compiler for the Teriock system. Based on the systemless one by Asacolips.",
   "scripts": {
-    "build": "sass src/style/teriock.scss css/teriock.css --style=expanded && node scripts/fetch-content.mjs && node scripts/update-templates.mjs && node scripts/update-options.mjs",
-    "fetch": "node scripts/fetch-content.mjs",
-    "style": "sass src/style/teriock.scss css/teriock.css --style=expanded",
-    "update": "node scripts/update-templates.mjs && node scripts/update-options.mjs",
-    "symlink": "node scripts/create-symlinks.mjs",
-    "lint": "eslint src/module/**/* src/templates/**/*",
-    "lint:fix": "eslint --fix src/module/**/* src/templates/**/*",
+    "content": "node scripts/fetch-content.mjs",
     "format": "prettier --write \"**/*.{js,mjs,ts}\"",
     "format:all": "npm run format && npm run lint:fix",
-    "sort": "node scripts/fetch-categories.mjs",
-    "toJSON": "node scripts/pack-to-json.mjs",
     "fromJSON": "node scripts/pack-from-json.mjs",
-    "docs": "jsdoc -c ./jsdoc.json --verbose"
+    "index": "node scripts/fetch-index.mjs",
+    "lint": "eslint src/module/**/* src/templates/**/*",
+    "lint:fix": "eslint --fix src/module/**/* src/templates/**/*",
+    "style": "sass src/style/teriock.scss css/teriock.css --style=expanded",
+    "templates": "node scripts/update-templates.mjs",
+    "toJSON": "node scripts/pack-to-json.mjs"
   },
   "browserslist": [
     "last 3 versions"
@@ -37,7 +34,6 @@
     "prettier": "^3.5.3",
     "sass": "^1.89.1",
     "typescript": "^5.8.3",
-    "typescript-eslint": "^8.32.1",
-    "jsdoc": "^4.0.4"
+    "typescript-eslint": "^8.32.1"
   }
 }

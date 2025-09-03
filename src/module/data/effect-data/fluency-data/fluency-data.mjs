@@ -67,7 +67,7 @@ export default class TeriockFluencyData extends WikiDataMixin(
 
   /** @inheritDoc */
   get wikiPage() {
-    return `${this.constructor.metadata.namespace}:${CONFIG.TERIOCK.tradecraftOptions[this.field].tradecrafts[this.tradecraft].name}`;
+    return `${this.constructor.metadata.namespace}:${CONFIG.TERIOCK.options.tradecraft[this.field].tradecrafts[this.tradecraft].name}`;
   }
 
   /** @inheritDoc */

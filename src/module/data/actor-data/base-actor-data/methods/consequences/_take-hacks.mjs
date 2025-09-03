@@ -1,4 +1,4 @@
-import { hacksData } from "../../../../../content/hacks.mjs";
+import { hacksData } from "../../../../../constants/content/hacks.mjs";
 
 /**
  * Increases the hack level for a specific body part and applies corresponding effects.

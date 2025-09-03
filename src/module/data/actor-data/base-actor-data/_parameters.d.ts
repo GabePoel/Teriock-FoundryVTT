@@ -1,5 +1,5 @@
-import type { abilityOptions } from "../../../constants/ability-options.mjs";
-import type { unsortedPseudoHooks } from "../../../constants/pseudo-hooks.mjs";
+import type { abilityOptions } from "../../../constants/options/ability-options.mjs";
+import type { unsortedPseudoHooks } from "../../../constants/system/pseudo-hooks.mjs";
 
 declare global {
   namespace Teriock.Parameters.Actor {

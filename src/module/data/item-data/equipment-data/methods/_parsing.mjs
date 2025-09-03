@@ -1,6 +1,6 @@
 import { cleanValue } from "../../../../helpers/clean.mjs";
 import { createProperty } from "../../../../helpers/create-effects.mjs";
-import { toCamelCase, toKebabCase } from "../../../../helpers/utils.mjs";
+import { toCamelCase, toKebabCase } from "../../../../helpers/string.mjs";
 import { _override } from "./_overrides.mjs";
 
 /**

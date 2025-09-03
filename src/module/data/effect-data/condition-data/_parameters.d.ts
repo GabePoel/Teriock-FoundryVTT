@@ -1,4 +1,4 @@
-import type { conditions } from "../../../constants/generated/conditions.mjs";
+import type {conditions} from "../../../constants/index/_module.mjs";
 
 declare global {
   namespace Teriock.Parameters.Condition {

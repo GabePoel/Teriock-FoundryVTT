@@ -1,5 +1,3 @@
-import { abilityOptions } from "../constants/ability-options.mjs";
-import { conditions } from "../constants/generated/conditions.mjs";
 import TeriockRoll from "../documents/roll.mjs";
 
 /**
@@ -261,44 +259,9 @@ export function tokenDocument(token) {
  * @returns {string} The HTML string for the icon element.
  */
 export function makeIcon(icon, ...styles) {
-  const styleClasses = styles.map((s) => CONFIG.TERIOCK.iconStyles[s] || s);
+  const styleClasses = styles.map((s) => CONFIG.TERIOCK.display.iconStyles[s] || s);
   const classString = styleClasses.map((s) => `fa-${s}`).join(" ");
   return `<i class="${classString} fa-${icon}"></i>`;
-}
-
-/**
- * Converts a string to camelCase format.
- * @param {string} str - The string to convert.
- * @returns {string} The camelCase version of the string.
- */
-export function toCamelCase(str) {
-  return str
-    .toLowerCase()
-    .replace(/[-\s]+(.)/g, (_, c) => c.toUpperCase())
-    .replace(/^[a-z]/, (c) => c.toLowerCase());
-}
-
-/**
- * Converts a string to Title Case format.
- * @param {string} str - The string to convert.
- * @returns {string} The Title Case version of the string.
- */
-export function toTitleCase(str) {
-  return str
-    .toLowerCase()
-    .replace(/(?:^|\s|-)\w/g, (match) => match.toUpperCase());
-}
-
-/**
- * Converts a string to kebab-case format.
- * @param {string} str - The string to convert.
- * @returns {string} The kebab-case version of the string.
- */
-export function toKebabCase(str) {
-  return str
-    .replace(/\s+/g, "-")
-    .replace(/([a-z])([A-Z])/g, "$1-$2")
-    .toLowerCase();
 }
 
 /**
@@ -435,7 +398,7 @@ export function parseDurationString(durationString) {
     parsedUnit = "untilDawn";
   } else {
     // General condition parsing
-    for (const condition of Object.keys(conditions)) {
+    for (const condition of Object.keys(CONFIG.TERIOCK.index.conditions)) {
       if (parsingString.includes("not " + condition)) {
         parsedAbsentConditions.add(condition);
       } else if (parsingString.includes(condition)) {
@@ -445,7 +408,7 @@ export function parseDurationString(durationString) {
   }
   const parsedStationary = parsingString.includes("stationary");
   // Use word boundaries for unit matching to avoid partial matches
-  for (const unit of Object.keys(abilityOptions.duration.unit)) {
+  for (const unit of Object.keys(CONFIG.TERIOCK.options.ability.duration.unit)) {
     const regex = new RegExp(`\\b${unit}s?\\b`);
     if (regex.test(parsingString)) {
       parsedUnit = unit;

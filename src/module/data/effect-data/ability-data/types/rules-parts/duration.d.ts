@@ -1,4 +1,4 @@
-import type { abilityOptions } from "../../../../../constants/ability-options.mjs";
+import type { abilityOptions } from "../../../../../constants/options/ability-options.mjs";
 
 export type NormalDurationUnit = keyof typeof abilityOptions.duration.unit;
 

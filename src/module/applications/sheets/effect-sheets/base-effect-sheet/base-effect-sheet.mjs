@@ -1,4 +1,4 @@
-import {documentOptions} from "../../../../constants/document-options.mjs";
+import {documentOptions} from "../../../../constants/options/document-options.mjs";
 import * as createEffects from "../../../../helpers/create-effects.mjs";
 import {selectAbilityDialog} from "../../../dialogs/select-dialog.mjs";
 import {SheetMixin} from "../../mixins/_module.mjs";

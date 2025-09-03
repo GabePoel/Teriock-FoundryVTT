@@ -1,5 +1,5 @@
-import { documentOptions } from "../../../../constants/document-options.mjs";
-import { pseudoHooks } from "../../../../constants/pseudo-hooks.mjs";
+import { documentOptions } from "../../../../constants/options/document-options.mjs";
+import { pseudoHooks } from "../../../../constants/system/pseudo-hooks.mjs";
 import { pureUuid, safeUuid } from "../../../../helpers/utils.mjs";
 import { durationDialog, selectDialog } from "../../../dialogs/_module.mjs";
 import TeriockBaseEffectSheet from "../base-effect-sheet/base-effect-sheet.mjs";

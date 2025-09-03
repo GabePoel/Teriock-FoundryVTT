@@ -1,7 +1,7 @@
 import { copyRank, getItem, getRank } from "../../../../../helpers/fetch.mjs";
-import { toTitleCase } from "../../../../../helpers/utils.mjs";
 import { selectClassDialog, selectEquipmentTypeDialog } from "../../../../dialogs/select-dialog.mjs";
 import { selectDocumentDialog } from "../../../../dialogs/select-document-dialog.mjs";
+import {toTitleCase} from "../../../../../helpers/string.mjs";
 
 /**
  * Adds a new embedded document to {@link TeriockActor}.
@@ -178,9 +178,9 @@ export async function _addRank(sheet) {
  */
 export async function _addEquipment(sheet) {
   let equipmentType = await selectEquipmentTypeDialog();
-  if (Object.keys(CONFIG.TERIOCK.equipmentType).includes(equipmentType)) {
+  if (Object.keys(CONFIG.TERIOCK.index.equipment).includes(equipmentType)) {
     const equipment = await getItem(
-      CONFIG.TERIOCK.equipmentType[equipmentType],
+      CONFIG.TERIOCK.index.equipment[equipmentType],
       "equipment",
     );
     await sheet.document.createEmbeddedDocuments("Item", [equipment]);
