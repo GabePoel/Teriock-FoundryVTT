@@ -77,7 +77,7 @@ for template_file in "${TEMPLATE_FILES[@]}"; do
         
         # Create dark version
         dark_output="${base_name/ELEMENT/${element}_dark}.${extension}"
-        dark_path="../src/icons/general/$dark_output"
+        dark_path="../../src/icons/general/$dark_output"
         echo "  Creating: ${element}_dark ($dark_color) -> $dark_output"
         
         # Create gradient for colorization that preserves blacks and whites

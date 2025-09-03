@@ -1,13 +1,13 @@
 import { setStatDiceDialog } from "../../../applications/dialogs/_module.mjs";
 import { dieOptions } from "../../../constants/options/die-options.mjs";
 import { copyAbility } from "../../../helpers/fetch.mjs";
+import { toTitleCase } from "../../../helpers/string.mjs";
 import { mergeFreeze } from "../../../helpers/utils.mjs";
 import { StatDataMixin, WikiDataMixin } from "../../mixins/_module.mjs";
 import { TextField } from "../../shared/fields/_module.mjs";
 import TeriockBaseItemData from "../base-item-data/base-item-data.mjs";
 import { _messageParts } from "./methods/_messages.mjs";
 import { _parse } from "./methods/_parsing.mjs";
-import {toTitleCase} from "../../../helpers/string.mjs";
 
 const { fields } = foundry.data;
 
@@ -79,10 +79,13 @@ export default class TeriockSpeciesData extends StatDataMixin(
         label: "MP Size Interval",
         nullable: true,
       }),
-      traits: new fields.SetField(new fields.StringField({ choices: CONFIG.TERIOCK.index.traits }), {
-        initial: ["humanoid"],
-        label: "Traits",
-      }),
+      traits: new fields.SetField(
+        new fields.StringField({ choices: CONFIG.TERIOCK.index.traits }),
+        {
+          initial: ["humanoid"],
+          label: "Traits",
+        },
+      ),
     });
     return schema;
   }

@@ -51,9 +51,10 @@ export async function getAbility(name, options = {}) {
  * @returns {Promise<TeriockAbility>}
  */
 export async function copyAbility(name) {
-  if (Object.keys(CONFIG.TERIOCK.abilities).includes(name))
-    name = Object.keys(CONFIG.TERIOCK.abilities)[name];
-  if (!Object.values(CONFIG.TERIOCK.abilities).includes(name)) return null;
+  if (Object.keys(CONFIG.TERIOCK.index.abilities).includes(name))
+    name = Object.keys(CONFIG.TERIOCK.index.abilities)[name];
+  if (!Object.values(CONFIG.TERIOCK.index.abilities).includes(name))
+    return null;
   return await getAbility(name, { clone: true });
 }
 
@@ -93,9 +94,10 @@ export async function getProperty(name, options = {}) {
  * @returns {Promise<TeriockProperty>}
  */
 export async function copyProperty(name) {
-  if (Object.keys(CONFIG.TERIOCK.properties).includes(name))
-    name = Object.keys(CONFIG.TERIOCK.properties)[name];
-  if (!Object.values(CONFIG.TERIOCK.properties).includes(name)) return null;
+  if (Object.keys(CONFIG.TERIOCK.index.properties).includes(name))
+    name = Object.keys(CONFIG.TERIOCK.index.properties)[name];
+  if (!Object.values(CONFIG.TERIOCK.index.properties).includes(name))
+    return null;
   return await getProperty(name, { clone: true });
 }
 

@@ -4,15 +4,7 @@ const progress = ui.notifications.info(`Pulling all properties from wiki.`, {
   progress: true,
 });
 
-let allPropertyPages =
-  await game.teriock.api.wiki.fetchCategoryMembers("Properties");
-allPropertyPages = allPropertyPages.filter((page) =>
-  page.title.includes("Property:"),
-);
-
-async function processProperty(propertyPage, _index, _total) {
-  const propertyName = propertyPage.title.split("Property:")[1];
-
+async function processProperty(propertyName, _index, _total) {
   let propertyItem = propertiesPack.index.find((e) => e.name === propertyName);
   if (!propertyItem) {
     propertyItem = await game.teriock.Item.create(
@@ -47,7 +39,7 @@ async function processProperty(propertyPage, _index, _total) {
 }
 
 const BATCH_SIZE = 50;
-const total = allPropertyPages.length;
+const total = Object.values(CONFIG.TERIOCK.index.properties).length;
 const results = [];
 
 progress.update({
@@ -57,10 +49,13 @@ progress.update({
 
 try {
   for (let start = 0; start < total; start += BATCH_SIZE) {
-    const batch = allPropertyPages.slice(start, start + BATCH_SIZE);
+    const batch = Object.values(CONFIG.TERIOCK.index.properties).slice(
+      start,
+      start + BATCH_SIZE,
+    );
 
-    const batchPromises = batch.map((propertyPage, i) =>
-      processProperty(propertyPage, start + i, total),
+    const batchPromises = batch.map((propertyName, i) =>
+      processProperty(propertyName, start + i, total),
     );
 
     const batchResults = await Promise.all(batchPromises);

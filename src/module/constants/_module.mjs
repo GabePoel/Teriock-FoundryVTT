@@ -1,8 +1,8 @@
-import * as index from "./index/_module.mjs";
 import * as content from "./content/_module.mjs";
+import * as display from "./display/_module.mjs";
+import * as index from "./index/_module.mjs";
 import * as options from "./options/_module.mjs";
 import * as system from "./system/_module.mjs";
-import * as display from "./display/_module.mjs";
 
 /**
  * Main configuration object containing all system options, constants, and content.

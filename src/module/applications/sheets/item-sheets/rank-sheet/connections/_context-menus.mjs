@@ -1,6 +1,6 @@
 import { dieOptions } from "../../../../../constants/options/die-options.mjs";
+import { toTitleCase } from "../../../../../helpers/string.mjs";
 import { getRollIcon, makeIcon } from "../../../../../helpers/utils.mjs";
-import {toTitleCase} from "../../../../../helpers/string.mjs";
 
 /**
  * Creates a context menu for selecting archetypes within a rank item.

@@ -259,7 +259,9 @@ export function tokenDocument(token) {
  * @returns {string} The HTML string for the icon element.
  */
 export function makeIcon(icon, ...styles) {
-  const styleClasses = styles.map((s) => CONFIG.TERIOCK.display.iconStyles[s] || s);
+  const styleClasses = styles.map(
+    (s) => CONFIG.TERIOCK.display.iconStyles[s] || s,
+  );
   const classString = styleClasses.map((s) => `fa-${s}`).join(" ");
   return `<i class="${classString} fa-${icon}"></i>`;
 }
@@ -408,7 +410,9 @@ export function parseDurationString(durationString) {
   }
   const parsedStationary = parsingString.includes("stationary");
   // Use word boundaries for unit matching to avoid partial matches
-  for (const unit of Object.keys(CONFIG.TERIOCK.options.ability.duration.unit)) {
+  for (const unit of Object.keys(
+    CONFIG.TERIOCK.options.ability.duration.unit,
+  )) {
     const regex = new RegExp(`\\b${unit}s?\\b`);
     if (regex.test(parsingString)) {
       parsedUnit = unit;

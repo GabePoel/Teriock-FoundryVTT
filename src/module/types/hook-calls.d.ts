@@ -62,6 +62,6 @@ declare global {
 
     export type EffectApplication = Teriock.HookData.BaseHookData & {
       docData: object;
-    }
+    };
   }
 }

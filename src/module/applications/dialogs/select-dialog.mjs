@@ -124,15 +124,13 @@ export async function selectConditionDialog() {
  * @returns {Promise<Teriock.Parameters.Equipment.PropertyKey>}
  */
 export async function selectPropertyDialog() {
-  return await selectDialog(CONFIG.TERIOCK.index.properties,
-    {
-      label: "Property",
-      hint: "Please select a property.",
-      title: "Select Property",
-      other: true,
-      genericOther: true,
-    },
-  );
+  return await selectDialog(CONFIG.TERIOCK.index.properties, {
+    label: "Property",
+    hint: "Please select a property.",
+    title: "Select Property",
+    other: true,
+    genericOther: true,
+  });
 }
 
 /**

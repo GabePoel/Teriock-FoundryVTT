@@ -1,4 +1,4 @@
-import * as index from "../index/_module.mjs"
+import * as index from "../index/_module.mjs";
 
 export const abilityOptions = {
   maneuver: {

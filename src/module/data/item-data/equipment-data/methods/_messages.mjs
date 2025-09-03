@@ -87,7 +87,7 @@ export function _messageParts(equipmentData) {
   ];
   addPropertiesBlock(
     equipmentData.parent.transferredEffects.filter((e) => !e.sup),
-    blocks
+    blocks,
   );
   addAbilitiesBlock(
     equipmentData.parent.transferredEffects.filter((e) => !e.sup),
@@ -96,7 +96,7 @@ export function _messageParts(equipmentData) {
   addResourcesBlock(equipmentData.parent.transferredEffects, blocks);
   addFluenciesBlock(equipmentData.parent.transferredEffects, blocks);
   return {
-  bars: bars,
+    bars: bars,
     blocks: blocks,
   };
 }

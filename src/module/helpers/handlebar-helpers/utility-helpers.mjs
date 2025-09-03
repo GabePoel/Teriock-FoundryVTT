@@ -165,8 +165,8 @@ export default function registerUiHelpers() {
         </button>
         
         ${
-        sortToggle !== null && sortToggle !== undefined
-          ? `
+          sortToggle !== null && sortToggle !== undefined
+            ? `
           <button
             class="${tab}-sort-menu-toggle sort-menu-toggle ${ttoggle(sortToggle)}"
             data-bool="${sortToggle}"
@@ -176,12 +176,12 @@ export default function registerUiHelpers() {
           >
             <i class="fa-fw fa-solid fa-bars-sort"></i>
           </button>`
-          : ""
-      }
+            : ""
+        }
   
         ${
-        filterToggle !== null && filterToggle !== undefined
-          ? `
+          filterToggle !== null && filterToggle !== undefined
+            ? `
           <button
             class="${tab}-filter-menu-toggle filter-menu-toggle ${ttoggle(filterToggle)}"
             data-bool="${filterToggle}"
@@ -191,8 +191,8 @@ export default function registerUiHelpers() {
           >
             <i class="fa-fw fa-solid fa-filter"></i>
           </button>`
-          : ""
-      }
+            : ""
+        }
         
         <input
           class="${tab}-search tcard-search"
@@ -203,16 +203,16 @@ export default function registerUiHelpers() {
         >
 
         ${
-        showAddButton
-          ? `
+          showAddButton
+            ? `
           <button class="ttoggle-button ${tab}-add-button add-button" data-tab="${tab}"
             data-action="${addAction}"
             data-tooltip="New ${tabDisplay}"
           >
             <i class="fa-fw fa-solid fa-plus"></i>
           </button>`
-          : ""
-      }
+            : ""
+        }
       </div>
 
       ${
@@ -354,9 +354,9 @@ export default function registerUiHelpers() {
           let subtitle =
             effect.type === "ability"
               ? Handlebars.helpers.executionTime(
-                effect.system?.maneuver,
-                effect.system?.executionTime,
-              )
+                  effect.system?.maneuver,
+                  effect.system?.executionTime,
+                )
               : effect.type === "property"
                 ? effect.system?.form
                 : "";

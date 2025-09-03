@@ -13,8 +13,9 @@ import { _override } from "./_overrides.mjs";
  * @private
  */
 export async function _parse(equipmentData, rawHTML) {
-  const allValidProperties = foundry.utils.deepClone(CONFIG.TERIOCK.properties);
-  allValidProperties["weapon"] = "Weapon";
+  const allValidProperties = foundry.utils.deepClone(
+    CONFIG.TERIOCK.index.properties,
+  );
 
   // Remove existing properties
   const toRemove = [];
@@ -125,6 +126,7 @@ export async function _parse(equipmentData, rawHTML) {
     "disabled",
     "glued",
     "font",
+    "equipped",
   ].forEach((key) => delete parameters[key]);
 
   return { system: parameters, img: newImg };

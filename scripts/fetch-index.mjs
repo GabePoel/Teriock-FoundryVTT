@@ -1,12 +1,11 @@
-import {writeFile} from "fs/promises";
+import { writeFile } from "fs/promises";
 import path from "path";
-import {fileURLToPath} from "url";
+import { fileURLToPath } from "url";
+import { toCamelCase, toKebabCase } from "../src/module/helpers/string.mjs";
 import {
   fetchCategoryMembers,
   fetchPageCategories,
 } from "../src/module/helpers/wiki/_module.mjs";
-
-import {toCamelCase, toKebabCase} from "../src/module/helpers/string.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -68,7 +67,7 @@ async function getCategoryMembers(category, options) {
   } else {
     members = members.map((member) => member.title.split(":")[1]);
   }
-  members = members = members.filter((member) => filterTitle(member))
+  members = members = members.filter((member) => filterTitle(member));
   return members.map((member) => processTitle(member));
 }
 
@@ -80,7 +79,7 @@ async function getCategoryMembers(category, options) {
 async function getCategoryMembersObject(category, options) {
   const members = await getCategoryMembers(category, options);
   const obj = {};
-  members.forEach((member) => obj[toCamelCase(member)] = member);
+  members.forEach((member) => (obj[toCamelCase(member)] = member));
   return obj;
 }
 
@@ -112,7 +111,7 @@ const createSimpleCategoriesAndNames = async () => {
     const NAME_OUTPUT_JSON = path.resolve(
       __dirname,
       `../src/index/names/${toKebabCase(category)}.json`,
-    )
+    );
     let pages = await fetchCategoryMembers(category);
     pages = pages.filter((page) => !page.title.includes("Category:"));
     const namespace = pages[0].title.split(":")[0];
@@ -154,7 +153,9 @@ const createSimpleCategoriesAndNames = async () => {
     // Write JSON
     await saveObject(categories, CATEGORY_OUTPUT_JSON);
     await saveObject(names, NAME_OUTPUT_JSON);
-    console.log(`JSONs saved to ${CATEGORY_OUTPUT_JSON} and ${NAME_OUTPUT_JSON}`);
+    console.log(
+      `JSONs saved to ${CATEGORY_OUTPUT_JSON} and ${NAME_OUTPUT_JSON}`,
+    );
   }
 };
 
@@ -162,11 +163,11 @@ const createCustomNames = async () => {
   const equipmentClasses = await getCategoryMembersObject("Equipment classes", {
     includePages: false,
     includeCategories: true,
-  })
+  });
   const weaponClasses = await getCategoryMembersObject("Weapon classes", {
     includePages: false,
     includeCategories: true,
-  })
+  });
   Object.assign(equipmentClasses, weaponClasses);
   await saveObject(equipmentClasses, quickPath("equipment-classes"));
   await saveObject(weaponClasses, quickPath("weapon-classes"));
@@ -174,50 +175,55 @@ const createCustomNames = async () => {
     includePages: false,
     includeCategories: true,
     filterTitle: (title) => title.includes("powered abilities"),
-    processTitle: (title) => title.replace("ly", "").replace(" powered abilities", ""),
-  })
+    processTitle: (title) =>
+      title.replace("ly", "").replace(" powered abilities", ""),
+  });
   await quickSaveCategoryMembers("Effects", "effect-types", {
     includePages: false,
     includeCategories: true,
     processTitle: (title) => title.replace(" effects", ""),
-  })
+  });
   await quickSaveCategoryMembers("Creatures by trait", "traits", {
     includePages: false,
     includeCategories: true,
     processTitle: (title) => title.replace(" creatures", ""),
-  })
+  });
   await quickSaveCategoryMembers("Elemental abilities", "elements", {
     includePages: false,
     includeCategories: true,
     filterTitle: (title) => title.includes("abilities"),
     processTitle: (title) => title.replace(" element abilities", ""),
-  })
+  });
   await quickSaveCategoryMembers("Common animal creatures", "common-animals", {
     includePages: true,
     includeCategories: false,
-  })
+  });
   await quickSaveCategoryMembers("Undead creatures", "undead", {
     includePages: true,
     includeCategories: false,
-  })
+  });
   await quickSaveCategoryMembers("Player character creatures", "humanoids", {
     includePages: true,
     includeCategories: false,
-  })
-  await quickSaveCategoryMembers("Weapon fighting styles", "weapon-fighting-styles", {
-    includePages: true,
-    includeCategories: false,
-    processTitle: (title) => title.replace(" Fighting Style", ""),
-  })
+  });
+  await quickSaveCategoryMembers(
+    "Weapon fighting styles",
+    "weapon-fighting-styles",
+    {
+      includePages: true,
+      includeCategories: false,
+      processTitle: (title) => title.replace(" Fighting Style", ""),
+    },
+  );
   await quickSaveCategoryMembers("Material properties", "material-properties", {
     includePages: true,
     includeCategories: false,
-  })
+  });
   await quickSaveCategoryMembers("Magical properties", "magical-properties", {
     includePages: true,
     includeCategories: false,
-  })
-}
+  });
+};
 
 await createCustomNames();
 await createSimpleCategoriesAndNames();

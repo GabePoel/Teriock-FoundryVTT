@@ -1,5 +1,5 @@
-import { documentOptions } from "../../../../constants/options/document-options.mjs";
 import { conditions } from "../../../../constants/content/conditions.mjs";
+import { documentOptions } from "../../../../constants/options/document-options.mjs";
 import { SheetMixin } from "../../mixins/_module.mjs";
 import _embeddedFromCard from "../../mixins/methods/_embedded-from-card.mjs";
 import {

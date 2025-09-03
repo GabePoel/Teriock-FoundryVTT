@@ -5,9 +5,9 @@
 set -euo pipefail
 shopt -s nullglob
 
-CLASSES_DIR="../src/icons/classes"
+CLASSES_DIR="../../src/icons/classes"
 NUMBERS_DIR="./numbers"
-OUT_DIR="../src/icons/ranks"
+OUT_DIR="../../src/icons/ranks"
 GRAVITY="center"
 GEOMETRY="+0+0"
 

@@ -1,12 +1,10 @@
 import fs from "fs";
 import { JSDOM } from "jsdom";
 import path from "path";
-
 import { fileURLToPath } from "url";
-
 import { conditions } from "../src/module/constants/index/_module.mjs";
-import { fetchWikiPageHTML } from "../src/module/helpers/wiki/_module.mjs";
 import { toKebabCase } from "../src/module/helpers/string.mjs";
+import { fetchWikiPageHTML } from "../src/module/helpers/wiki/_module.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);

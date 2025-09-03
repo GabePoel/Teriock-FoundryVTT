@@ -102,7 +102,8 @@ export default function registerDocumentManagementHooks() {
         await document.actor?.postUpdate();
       }
       if (document.documentName === "ActiveEffect") {
-        if (document.sup && document.sup.sheet.rendered) await document.sup.sheet.render();
+        if (document.sup && document.sup.sheet.rendered)
+          await document.sup.sheet.render();
         if (
           isOwnerAndCurrentUser(document, userId) &&
           document.type === "ability"

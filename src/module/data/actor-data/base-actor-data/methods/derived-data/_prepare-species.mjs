@@ -1,6 +1,6 @@
 import TeriockActor from "../../../../../documents/actor.mjs";
 
-import {toCamelCase} from "../../../../../helpers/string.mjs";
+import { toCamelCase } from "../../../../../helpers/string.mjs";
 
 /**
  * Prepares the species attributes.

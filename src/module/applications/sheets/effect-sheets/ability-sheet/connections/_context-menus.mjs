@@ -19,7 +19,7 @@ function capitalize(str) {
  */
 export function contextMenus(ability) {
   /**
-   * Fetches configuration values from CONFIG.TERIOCK.abilityOptions.
+   * Fetches configuration values from `CONFIG.TERIOCK.options.ability`.
    * @param {string} keychain - Dot-separated keychain to traverse.
    * @returns {*} The configuration value at the specified path.
    */

@@ -52,7 +52,8 @@ export default (Base) => {
        */
       async hookCall(pseudoHook, data = {}, effect = null) {
         data.cancel = false;
-        if (this.actor) return await this.actor.hookCall(pseudoHook, data, effect);
+        if (this.actor)
+          return await this.actor.hookCall(pseudoHook, data, effect);
         else return /** @type {Teriock.HookData.BaseHookData} */ data;
       }
 

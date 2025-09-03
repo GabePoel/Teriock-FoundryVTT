@@ -28,9 +28,9 @@ export async function createAbility(document, name = null, options = {}) {
   }
   const abilities =
     /** @type {TeriockAbility[]} */ await embeddingDocument.createEmbeddedDocuments(
-    "ActiveEffect",
-    [abilityData],
-  );
+      "ActiveEffect",
+      [abilityData],
+    );
   const ability = abilities[0];
   if (ability.name !== "New Ability") {
     await ability.system.wikiPull(options);
@@ -113,7 +113,11 @@ export async function createProperty(document, name = null) {
 
   const property =
     /** @type {TeriockProperty} */
-    (await embeddingDocument.createEmbeddedDocuments("ActiveEffect", [propertyData]))[0];
+    (
+      await embeddingDocument.createEmbeddedDocuments("ActiveEffect", [
+        propertyData,
+      ])
+    )[0];
   if (propertyData.name !== "New Property") {
     await property.system.wikiPull({ notify: false });
   }

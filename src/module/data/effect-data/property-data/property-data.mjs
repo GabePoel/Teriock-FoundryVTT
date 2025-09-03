@@ -94,6 +94,12 @@ export default class TeriockPropertyData extends WikiDataMixin(
   /** @inheritDoc */
   prepareDerivedData() {
     super.prepareDerivedData();
+    if (
+      this.parent.parent?.uuid &&
+      this.parent.parent.effects.has(this.parent.id)
+    ) {
+      this.hierarchy.rootUuid = this.parent.parent.uuid;
+    }
     this.parent.changes = foundry.utils.deepClone(this.changes);
     if (
       this.damageType &&

@@ -40,7 +40,7 @@ function getHandlebarsFiles(dir, fileList = []) {
         .relative(actualDir, fullPath)
         .replace(/\\/g, "/");
       const virtualPath = `${virtualBase}/${relativePath}`;
-      fileList.push(`'${virtualPath}'`);
+      fileList.push(`"${virtualPath}"`);
     }
   }
 

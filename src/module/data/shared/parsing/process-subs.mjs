@@ -13,11 +13,7 @@ import { createAbility, createProperty } from "../../../helpers/create-effects.m
  * @private
  */
 async function processSubEffects(subs, doc, config) {
-  const {
-    createFn,
-    nameSelector,
-    skipNamespace = "Condition"
-  } = config;
+  const { createFn, nameSelector, skipNamespace = "Condition" } = config;
 
   for (const el of subs) {
     el.querySelectorAll(".expandable-sub-main").forEach((e) => e.remove());
@@ -38,7 +34,8 @@ async function processSubEffects(subs, doc, config) {
     let improvementText = "";
 
     if (improvement) {
-      const improvementSpans = improvement.querySelectorAll(".improvement-text");
+      const improvementSpans =
+        improvement.querySelectorAll(".improvement-text");
       if (improvementSpans) {
         const improvementSpan = improvementSpans[0];
         if (improvementSpan) {
@@ -83,7 +80,7 @@ export async function processSubAbilities(subs, doc) {
   return processSubEffects(subs, doc, {
     createFn: createAbility,
     nameSelector: ".ability-sub-name",
-    skipNamespace: "Condition"
+    skipNamespace: "Condition",
   });
 }
 
@@ -99,6 +96,6 @@ export async function processSubProperties(subs, doc) {
   return processSubEffects(subs, doc, {
     createFn: createProperty,
     nameSelector: ".ability-sub-name",
-    skipNamespace: "Condition"
+    skipNamespace: "Condition",
   });
 }

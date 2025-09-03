@@ -1,11 +1,11 @@
 import { abilityOptions } from "../../../../constants/options/ability-options.mjs";
+import { toKebabCase } from "../../../../helpers/string.mjs";
 import { parseDurationString, safeUuid } from "../../../../helpers/utils.mjs";
 import { cleanHTMLDoc } from "../../../shared/parsing/clean-html-doc.mjs";
 import { extractChangesFromHTML } from "../../../shared/parsing/extract-changes.mjs";
 import { getBarText, getText } from "../../../shared/parsing/get-text.mjs";
 import { processSubAbilities } from "../../../shared/parsing/process-subs.mjs";
 import { buildTagTree } from "../../../shared/parsing/tag-tree.mjs";
-import {toKebabCase} from "../../../../helpers/string.mjs";
 
 /**
  * Cost value templates for different cost types.

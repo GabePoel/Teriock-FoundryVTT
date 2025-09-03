@@ -6,7 +6,8 @@ import type { WikiDataMixinInterface } from "../../mixins/wiki-data-mixin/_types
 declare module "./rank-data.mjs" {
   export default interface TeriockRankData
     extends TeriockBaseItemData,
-      StatDataMixinInterface, WikiDataMixinInterface {
+      StatDataMixinInterface,
+      WikiDataMixinInterface {
     /** Flaws */
     flaws: string;
     /** Rank Class Archetype */

@@ -107,7 +107,9 @@ export async function _buildButtons(rollConfig) {
   // Rollable Take Buttons
   Object.entries(takeData.rolls).forEach(([rollType, formula]) => {
     if (formula && ROLL_BUTTON_CONFIGS[rollType]) {
-      const buttonConfig = foundry.utils.deepClone(ROLL_BUTTON_CONFIGS[rollType]);
+      const buttonConfig = foundry.utils.deepClone(
+        ROLL_BUTTON_CONFIGS[rollType],
+      );
       buttonConfig.icon = `fas fa-${getRollIcon(formula)}`;
       buttonConfig.dataset = {
         action: "roll-rollable-take",

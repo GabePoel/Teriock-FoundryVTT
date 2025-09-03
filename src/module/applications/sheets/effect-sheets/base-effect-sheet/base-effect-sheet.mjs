@@ -1,9 +1,9 @@
-import {documentOptions} from "../../../../constants/options/document-options.mjs";
+import { documentOptions } from "../../../../constants/options/document-options.mjs";
 import * as createEffects from "../../../../helpers/create-effects.mjs";
-import {selectAbilityDialog} from "../../../dialogs/select-dialog.mjs";
-import {SheetMixin} from "../../mixins/_module.mjs";
+import { selectAbilityDialog } from "../../../dialogs/select-dialog.mjs";
+import { SheetMixin } from "../../mixins/_module.mjs";
 
-const {ActiveEffectConfig} = foundry.applications.sheets;
+const { ActiveEffectConfig } = foundry.applications.sheets;
 
 /**
  * Base effect sheet for Teriock system active effects.
@@ -51,7 +51,7 @@ export default class TeriockBaseEffectSheet extends SheetMixin(
       priority: 0,
     };
     currentChanges.push(newChange);
-    await this.document.update({[path]: currentChanges});
+    await this.document.update({ [path]: currentChanges });
   }
 
   /**
@@ -70,7 +70,7 @@ export default class TeriockBaseEffectSheet extends SheetMixin(
       priority: 0,
     };
     changes.push(newChange);
-    await this.document.update({changes: changes});
+    await this.document.update({ changes: changes });
   }
 
   /** @inheritDoc */
@@ -78,7 +78,7 @@ export default class TeriockBaseEffectSheet extends SheetMixin(
     const abilityKey = await selectAbilityDialog();
     let abilityName = "New Ability";
     if (abilityKey && abilityKey !== "other") {
-      abilityName = CONFIG.TERIOCK.abilities[abilityKey];
+      abilityName = CONFIG.TERIOCK.index.abilities[abilityKey];
       const ability = await game.teriock.api.fetch.importAbility(
         this.document.parent,
         abilityName,
@@ -88,7 +88,7 @@ export default class TeriockBaseEffectSheet extends SheetMixin(
       await createEffects.createAbility(this.document, abilityName);
     }
   }
-  
+
   /**
    * Deletes a change at any specified path.
    * @param {Event} _event - The event object.
@@ -110,7 +110,7 @@ export default class TeriockBaseEffectSheet extends SheetMixin(
     }
     if (index >= 0 && index < changes.length) {
       changes.splice(index, 1);
-      await this.document.update({[path]: changes});
+      await this.document.update({ [path]: changes });
     }
   }
 
@@ -120,7 +120,7 @@ export default class TeriockBaseEffectSheet extends SheetMixin(
    * @static
    */
   static async _toggledDisabledThis() {
-    await this.document.update({disabled: !this.document.disabled});
+    await this.document.update({ disabled: !this.document.disabled });
   }
 
   /** @inheritDoc */

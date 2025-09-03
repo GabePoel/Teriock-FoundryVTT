@@ -10,9 +10,7 @@ allAbilityPages = allAbilityPages.filter((page) =>
   page.title.includes("Ability:"),
 );
 
-async function processAbility(abilityPage, _index, _total) {
-  const abilityName = abilityPage.title.split("Ability:")[1];
-
+async function processAbility(abilityName, _index, _total) {
   let abilityItem = abilitiesPack.index.find((e) => e.name === abilityName);
   if (!abilityItem) {
     abilityItem = await game.teriock.Item.create(
@@ -45,7 +43,7 @@ async function processAbility(abilityPage, _index, _total) {
 }
 
 const BATCH_SIZE = 50;
-const total = allAbilityPages.length;
+const total = Object.values(CONFIG.TERIOCK.index.abilities).length;
 const results = [];
 
 progress.update({
@@ -55,10 +53,13 @@ progress.update({
 
 try {
   for (let start = 0; start < total; start += BATCH_SIZE) {
-    const batch = allAbilityPages.slice(start, start + BATCH_SIZE);
+    const batch = Object.values(CONFIG.TERIOCK.index.abilities).slice(
+      start,
+      start + BATCH_SIZE,
+    );
 
-    const batchPromises = batch.map((abilityPage, i) =>
-      processAbility(abilityPage, start + i, total),
+    const batchPromises = batch.map((abilityName, i) =>
+      processAbility(abilityName, start + i, total),
     );
 
     const batchResults = await Promise.all(batchPromises);

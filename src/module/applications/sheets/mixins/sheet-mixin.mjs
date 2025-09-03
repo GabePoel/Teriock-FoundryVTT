@@ -126,7 +126,7 @@ export default (Base) => {
       const abilityKey = await selectAbilityDialog();
       let abilityName = "New Ability";
       if (abilityKey && abilityKey !== "other") {
-        abilityName = CONFIG.TERIOCK.abilities[abilityKey];
+        abilityName = CONFIG.TERIOCK.index.abilities[abilityKey];
         await game.teriock.api.fetch.importAbility(this.document, abilityName);
       } else {
         await createEffects.createAbility(this.document, abilityName);
@@ -164,7 +164,7 @@ export default (Base) => {
       const propertyKey = await selectPropertyDialog();
       let propertyName = "New Property";
       if (propertyKey && propertyKey !== "other") {
-        propertyName = CONFIG.TERIOCK.properties[propertyKey];
+        propertyName = CONFIG.TERIOCK.index.properties[propertyKey];
         await game.teriock.api.fetch.importProperty(
           this.document,
           propertyName,

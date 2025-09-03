@@ -1,8 +1,8 @@
 import { copyItem } from "../helpers/fetch.mjs";
+import { toCamelCase } from "../helpers/string.mjs";
 import { pureUuid } from "../helpers/utils.mjs";
 import { CommonDocumentMixin, ParentDocumentMixin } from "./mixins/_module.mjs";
 import TeriockRoll from "./roll.mjs";
-import {toCamelCase} from "../helpers/string.mjs";
 
 const { Actor } = foundry.documents;
 
@@ -37,7 +37,9 @@ export default class TeriockActor extends ParentDocumentMixin(
    * @returns {string}
    */
   static toNamedSize(size) {
-    const sizeKeys = Object.keys(CONFIG.TERIOCK.options.character.namedSizes).map(Number);
+    const sizeKeys = Object.keys(
+      CONFIG.TERIOCK.options.character.namedSizes,
+    ).map(Number);
     const filteredSizeKeys = sizeKeys.filter((key) => key <= size);
     const sizeKey = Math.max(...filteredSizeKeys, 0);
     return CONFIG.TERIOCK.options.character.namedSizes[sizeKey] || "Medium";
@@ -163,8 +165,9 @@ export default class TeriockActor extends ParentDocumentMixin(
     // Update Prototype Token
     const prototypeToken = {};
     const size =
-      CONFIG.TERIOCK.options.character.tokenSizes[TeriockActor.toNamedSize(this.system.size)] ||
-      1;
+      CONFIG.TERIOCK.options.character.tokenSizes[
+        TeriockActor.toNamedSize(this.system.size)
+      ] || 1;
     if (!foundry.utils.hasProperty(data, "prototypeToken.sight.enabled"))
       prototypeToken.sight = { enabled: true, range: 0 };
     if (!foundry.utils.hasProperty(data, "prototypeToken.width"))
@@ -233,7 +236,12 @@ export default class TeriockActor extends ParentDocumentMixin(
           )
         ) {
           if (!this.itemKeys.power.has(archetype))
-            data.push(await copyItem(CONFIG.TERIOCK.options.rank[archetype].name, "classes"));
+            data.push(
+              await copyItem(
+                CONFIG.TERIOCK.options.rank[archetype].name,
+                "classes",
+              ),
+            );
         }
       }
     }

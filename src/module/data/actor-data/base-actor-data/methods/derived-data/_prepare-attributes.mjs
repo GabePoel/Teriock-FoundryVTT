@@ -36,7 +36,12 @@ export function _prepareAttributes(actorData) {
  * @returns {void} Modifies the system object in place.
  */
 export function _preparePresence(actorData) {
-  actorData.presence.overflow = actorData.presence.value > actorData.presence.max;
-  actorData.presence.value = Math.min(actorData.presence.value, actorData.presence.max);
-  actorData.attributes.unp.value = actorData.presence.max - actorData.presence.value;
+  actorData.presence.overflow =
+    actorData.presence.value > actorData.presence.max;
+  actorData.presence.value = Math.min(
+    actorData.presence.value,
+    actorData.presence.max,
+  );
+  actorData.attributes.unp.value =
+    actorData.presence.max - actorData.presence.value;
 }

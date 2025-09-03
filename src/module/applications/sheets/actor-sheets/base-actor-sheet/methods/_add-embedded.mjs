@@ -1,7 +1,7 @@
 import { copyRank, getItem, getRank } from "../../../../../helpers/fetch.mjs";
+import { toTitleCase } from "../../../../../helpers/string.mjs";
 import { selectClassDialog, selectEquipmentTypeDialog } from "../../../../dialogs/select-dialog.mjs";
 import { selectDocumentDialog } from "../../../../dialogs/select-document-dialog.mjs";
-import {toTitleCase} from "../../../../../helpers/string.mjs";
 
 /**
  * Adds a new embedded document to {@link TeriockActor}.

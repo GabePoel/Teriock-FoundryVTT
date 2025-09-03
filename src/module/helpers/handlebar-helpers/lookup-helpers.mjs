@@ -30,7 +30,8 @@ export default function registerLookupHelpers() {
   Handlebars.registerHelper(
     "equipmentMarker",
     (item) =>
-      CONFIG.TERIOCK.options.equipment.powerLevel[item.system.powerLevel]?.color,
+      CONFIG.TERIOCK.options.equipment.powerLevel[item.system.powerLevel]
+        ?.color,
   );
 
   Handlebars.registerHelper("abilityMarker", (effect) => {
