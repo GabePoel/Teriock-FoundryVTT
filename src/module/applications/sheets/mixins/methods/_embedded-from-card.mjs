@@ -38,6 +38,6 @@ export default async function _embeddedFromCard(sheet, target) {
   }
 
   if (type === "conditionLocked") {
-    return CONFIG.TERIOCK.content.conditions[id];
+    return CONFIG.TERIOCK.content.conditionsData[id];
   }
 }

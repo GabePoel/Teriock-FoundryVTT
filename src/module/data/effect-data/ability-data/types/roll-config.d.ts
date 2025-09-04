@@ -1,7 +1,7 @@
 import type TeriockAbilityData from "../ability-data.mjs";
 import type TeriockActor from "../../../../documents/actor.mjs";
 import type TeriockBaseChatMessageSchema from "../../../message-data/base-message-data/_types";
-import type TeriockRoll from "../../../../documents/roll.mjs";
+import type TeriockRoll from "../../../../dice/roll.mjs";
 
 export type AbilityUseData = {
   /** Actor using this ability. */

@@ -1,5 +1,5 @@
+import { TeriockRoll } from "../../../../dice/_module.mjs";
 import { TeriockChatMessage } from "../../../../documents/_module.mjs";
-import TeriockRoll from "../../../../documents/roll.mjs";
 
 /**
  * Initiates a fluency roll with the specified options.

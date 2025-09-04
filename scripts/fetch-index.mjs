@@ -26,6 +26,15 @@ const SIMPLE_CATEGORIES = [
 ];
 
 /**
+ * @param {object} obj
+ * @param {string} path
+ * @returns {Promise<void>}
+ */
+export async function saveObject(obj, path) {
+  await writeFile(path, JSON.stringify(obj, null, 2), "utf-8");
+}
+
+/**
  * @param {string} name
  * @returns {string}
  */
@@ -91,15 +100,6 @@ async function getCategoryMembersObject(category, options) {
 async function quickSaveCategoryMembers(category, name, options) {
   const obj = await getCategoryMembersObject(category, options);
   await saveObject(obj, quickPath(name));
-}
-
-/**
- * @param {object} obj
- * @param {string} path
- * @returns {Promise<void>}
- */
-async function saveObject(obj, path) {
-  await writeFile(path, JSON.stringify(obj, null, 2), "utf-8");
 }
 
 const createSimpleCategoriesAndNames = async () => {

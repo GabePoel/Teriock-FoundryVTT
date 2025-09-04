@@ -1,9 +1,12 @@
 import type TeriockBaseEffectData from "../base-effect-data/base-effect-data.mjs";
 import type { TeriockProperty } from "../../../documents/_documents.mjs";
 import type { EffectChangeData } from "../ability-data/types/consequences";
+import type { HierarchyDataMixinInterface } from "../../mixins/hierarchy-data-mixin/_types";
 
 declare module "./property-data.mjs" {
-  export default interface TeriockPropertyData extends TeriockBaseEffectData {
+  export default interface TeriockPropertyData
+    extends TeriockBaseEffectData,
+      HierarchyDataMixinInterface {
     /** Property form */
     form: Teriock.Parameters.Shared.Form;
     /** Power sources */
@@ -20,6 +23,10 @@ declare module "./property-data.mjs" {
     modifiesActor: boolean;
     /** Changes merged into overall changes */
     changes: EffectChangeData[];
+    /** Limitation description */
+    limitation: string;
+    /** Improvement description */
+    improvement: string;
 
     get parent(): TeriockProperty;
   }

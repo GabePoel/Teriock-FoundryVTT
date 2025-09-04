@@ -1,5 +1,5 @@
 import { tidyHTML } from "../../../../helpers/html.mjs";
-import { toKebabCase } from "../../../../helpers/string.mjs";
+import { getIcon } from "../../../../helpers/path.mjs";
 import { cleanHTMLDoc } from "../../../shared/parsing/clean-html-doc.mjs";
 import { extractChangesFromHTML } from "../../../shared/parsing/extract-changes.mjs";
 import { getCategoriesFromHTML } from "../../../shared/parsing/get-categories.mjs";
@@ -72,7 +72,7 @@ export async function _parse(propertyData, rawHTML) {
   parameters.system.changes = extractChangesFromHTML(rawHTML);
   parameters.system.modifiesActor = extractDocument(doc);
   parameters.system.description = parameters.description;
-  parameters.img = `systems/teriock/src/icons/properties/${toKebabCase(name)}.webp`;
+  parameters.img = getIcon("properties", propertyData.parent.name);
   return parameters;
 }
 

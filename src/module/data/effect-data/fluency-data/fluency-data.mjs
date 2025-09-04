@@ -1,3 +1,5 @@
+import { iconManifest } from "../../../constants/display/_module.mjs";
+import { getIcon } from "../../../helpers/path.mjs";
 import { mergeFreeze } from "../../../helpers/utils.mjs";
 import { WikiDataMixin } from "../../mixins/_module.mjs";
 import TeriockBaseEffectData from "../base-effect-data/base-effect-data.mjs";
@@ -74,7 +76,7 @@ export default class TeriockFluencyData extends WikiDataMixin(
   _preCreate(data, options, user) {
     if (!foundry.utils.hasProperty(data, "img")) {
       this.parent.updateSource({
-        img: "systems/teriock/src/icons/tradecrafts/artist.webp",
+        img: getIcon("tradecrafts", "Artist"),
       });
     }
   }
@@ -83,7 +85,7 @@ export default class TeriockFluencyData extends WikiDataMixin(
   _preUpdate(data, options, user) {
     super._preUpdate(data, options, user);
     if (
-      this.parent.img.includes("systems/teriock/src/icons/tradecrafts") &&
+      Object.values(iconManifest.tradecrafts).includes(this.parent.img) &&
       !foundry.utils.hasProperty(data, "img")
     ) {
       let tradecraft = this.tradecraft;
@@ -91,7 +93,10 @@ export default class TeriockFluencyData extends WikiDataMixin(
         tradecraft = foundry.utils.getProperty(data, "system.tradecraft");
       }
       this.parent.updateSource({
-        img: `systems/teriock/src/icons/tradecrafts/${tradecraft}.webp`,
+        img: getIcon(
+          "tradecrafts",
+          CONFIG.TERIOCK.index.tradecrafts[tradecraft],
+        ),
       });
     }
   }

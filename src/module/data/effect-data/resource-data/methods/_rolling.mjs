@@ -1,4 +1,4 @@
-import TeriockRoll from "../../../../documents/roll.mjs";
+import { TeriockRoll } from "../../../../dice/_module.mjs";
 
 /**
  * Initiates a resource roll with the specified options.

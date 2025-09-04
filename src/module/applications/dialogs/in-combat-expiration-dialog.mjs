@@ -1,4 +1,4 @@
-import TeriockRoll from "../../documents/roll.mjs";
+import { TeriockRoll } from "../../dice/_module.mjs";
 import { TeriockDialog } from "../api/_module.mjs";
 
 const { TextEditor } = foundry.applications.ux;

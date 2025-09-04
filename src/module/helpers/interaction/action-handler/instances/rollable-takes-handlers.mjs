@@ -1,5 +1,6 @@
 import { boostDialog } from "../../../../applications/dialogs/_module.mjs";
-import { TeriockChatMessage, TeriockRoll } from "../../../../documents/_module.mjs";
+import { TeriockRoll } from "../../../../dice/_module.mjs";
+import { TeriockChatMessage } from "../../../../documents/_module.mjs";
 import { makeDamageTypeButtons } from "../../../html.mjs";
 import ActionHandler from "../action-handler.mjs";
 

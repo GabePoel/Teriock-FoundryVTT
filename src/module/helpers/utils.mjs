@@ -1,4 +1,4 @@
-import TeriockRoll from "../documents/roll.mjs";
+import { TeriockRoll } from "../dice/_module.mjs";
 
 /**
  * Convert the given unit to feet.
@@ -96,7 +96,7 @@ export function dedent(str) {
  * @returns {Teriock.SafeUUID<T>} The converted safe UUID.
  */
 export function safeUuid(uuid) {
-  return /** @type {Teriock.SafeUUID<T>} */ (uuid.replace(/\./g, "_"));
+  return /** @type {Teriock.SafeUUID<*>} */ (uuid.replace(/\./g, "_"));
 }
 
 /**
@@ -467,7 +467,6 @@ export function parseTimeString(timeString) {
 
 /**
  * Converts a number of seconds to a human-readable time string.
- *
  * @param {number} totalSeconds - The total number of seconds to convert.
  * @returns {string} A human-readable time string.
  */
@@ -494,65 +493,6 @@ export function secondsToReadable(totalSeconds) {
     }
   }
   return parts.length > 0 ? parts.join(", ") : "0 sec";
-}
-
-/**
- * Merges values from a nested object structure based on a dot-separated path and an optional key.
- *
- * Traverses the given object (`obj`) following the specified `path`, which can include wildcards (`*`)
- * to match any key at that level. If a `key` is provided, only values associated with that key are merged
- * into the result. If no `key` is provided, all values at the target path are merged.
- *
- * @param {Object} obj - The source object to traverse and merge values from.
- * @param {string} path - Dot-separated path string, supports wildcards (`*`) for matching any key.
- * @param {string} [key] - Optional key to extract values from objects at the target path.
- * @returns {Object} The merged result object containing values found at the specified path and key.
- */
-export function mergeLevel(obj, path, key) {
-  const result = {};
-
-  function processPath(object, pathSegments, currentIndex = 0) {
-    if (currentIndex >= pathSegments.length) {
-      if (key) {
-        if (typeof object === "object" && object !== null) {
-          if (key in object) {
-            Object.assign(result, object[key]);
-          } else {
-            Object.keys(object).forEach((itemKey) => {
-              if (
-                object[itemKey] &&
-                typeof object[itemKey] === "object" &&
-                key in object[itemKey]
-              ) {
-                result[itemKey] = object[itemKey][key];
-              }
-            });
-          }
-        }
-      } else {
-        Object.assign(result, object);
-      }
-      return;
-    }
-
-    const currentSegment = pathSegments[currentIndex];
-
-    if (currentSegment === "*") {
-      if (typeof object === "object" && object !== null) {
-        Object.keys(object).forEach((objKey) => {
-          processPath(object[objKey], pathSegments, currentIndex + 1);
-        });
-      }
-    } else {
-      if (object && typeof object === "object" && currentSegment in object) {
-        processPath(object[currentSegment], pathSegments, currentIndex + 1);
-      }
-    }
-  }
-
-  const pathSegments = path.split(".");
-  processPath(obj, pathSegments);
-  return result;
 }
 
 /**

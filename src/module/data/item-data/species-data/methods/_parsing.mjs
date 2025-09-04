@@ -1,4 +1,4 @@
-import { TeriockRoll } from "../../../../documents/_module.mjs";
+import { TeriockRoll } from "../../../../dice/_module.mjs";
 import { cleanHTMLDoc } from "../../../shared/parsing/clean-html-doc.mjs";
 import { getBarText, getText } from "../../../shared/parsing/get-text.mjs";
 import { processSubAbilities } from "../../../shared/parsing/process-subs.mjs";

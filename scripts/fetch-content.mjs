@@ -3,7 +3,7 @@ import { JSDOM } from "jsdom";
 import path from "path";
 import { fileURLToPath } from "url";
 import { conditions } from "../src/module/constants/index/_module.mjs";
-import { toKebabCase } from "../src/module/helpers/string.mjs";
+import { getIcon } from "../src/module/helpers/path.mjs";
 import { fetchWikiPageHTML } from "../src/module/helpers/wiki/_module.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -19,7 +19,7 @@ const writeModuleFile = (fileName, exportName, entries) => {
       `  ${key}: {\n` +
         `    name: ${JSON.stringify(value.name)},\n` +
         `    id: ${JSON.stringify(key)},\n` +
-        `    img: ${JSON.stringify(`systems/teriock/src/icons/${exportName}/${toKebabCase(value.name)}.webp`)},\n` +
+        `    img: ${JSON.stringify(getIcon("conditions", value.name))},\n` +
         (value._id ? `    _id: ${JSON.stringify(value._id)},\n` : "") +
         (value.statuses
           ? `    statuses: ${JSON.stringify(value.statuses)},\n`

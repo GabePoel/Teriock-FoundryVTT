@@ -1,8 +1,12 @@
 import { mergeFreeze } from "../../../helpers/utils.mjs";
-import { WikiDataMixin } from "../../mixins/_module.mjs";
-import { FormulaField, ListField } from "../../shared/fields/_module.mjs";
+import { HierarchyDataMixin, WikiDataMixin } from "../../mixins/_module.mjs";
+import {
+  FormulaField,
+  ListField,
+  TextField,
+} from "../../shared/fields/_module.mjs";
 import TeriockBaseEffectData from "../base-effect-data/base-effect-data.mjs";
-import { changeField, hierarchyField } from "../shared/shared-fields.mjs";
+import { changeField } from "../shared/shared-fields.mjs";
 import { _messageParts } from "./methods/_messages.mjs";
 import { _migrateData } from "./methods/_migrate-data.mjs";
 import * as parsing from "./methods/_parsing.mjs";
@@ -17,9 +21,11 @@ const { fields } = foundry.data;
  * - [Properties](https://wiki.teriock.com/index.php/Category:Properties)
  *
  * @extends {TeriockBaseEffectData}
+ * @mixes WikiDataMixin
+ * @mixes HierarchyDataMixin
  */
-export default class TeriockPropertyData extends WikiDataMixin(
-  TeriockBaseEffectData,
+export default class TeriockPropertyData extends HierarchyDataMixin(
+  WikiDataMixin(TeriockBaseEffectData),
 ) {
   /**
    * @inheritDoc
@@ -27,7 +33,6 @@ export default class TeriockPropertyData extends WikiDataMixin(
    */
   static metadata = mergeFreeze(super.metadata, {
     childEffectTypes: ["property"],
-    hierarchy: true,
     modifies: "Item",
     namespace: "Property",
     type: "property",
@@ -55,7 +60,8 @@ export default class TeriockPropertyData extends WikiDataMixin(
         label: "Changes",
         hint: "Changes made to the target equipment as part of the property's ongoing effect.",
       }),
-      hierarchy: hierarchyField(),
+      limitation: new TextField({ initial: "", label: "Limitation" }),
+      improvement: new TextField({ initial: "", label: "Improvement" }),
     });
   }
 
@@ -80,6 +86,22 @@ export default class TeriockPropertyData extends WikiDataMixin(
   }
 
   /** @inheritDoc */
+  get nameString() {
+    const additions = [];
+    if (this.limitation && this.limitation.length > 0) {
+      additions.push("Limited");
+    }
+    if (this.improvement && this.improvement.length > 0) {
+      additions.push("Improved");
+    }
+    let nameAddition = "";
+    if (additions.length > 0) {
+      nameAddition = ` (${additions.join(", ")})`;
+    }
+    return this.parent.name + nameAddition;
+  }
+
+  /** @inheritDoc */
   get suppressed() {
     let suppressed = super.suppressed;
     suppressed = suppressed || _suppressed(this);
@@ -94,12 +116,6 @@ export default class TeriockPropertyData extends WikiDataMixin(
   /** @inheritDoc */
   prepareDerivedData() {
     super.prepareDerivedData();
-    if (
-      this.parent.parent?.uuid &&
-      this.parent.parent.effects.has(this.parent.id)
-    ) {
-      this.hierarchy.rootUuid = this.parent.parent.uuid;
-    }
     this.parent.changes = foundry.utils.deepClone(this.changes);
     if (
       this.damageType &&

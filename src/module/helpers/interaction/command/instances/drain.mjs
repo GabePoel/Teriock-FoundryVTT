@@ -1,4 +1,4 @@
-import TeriockRoll from "../../../../documents/roll.mjs";
+import { TeriockRoll } from "../../../../dice/_module.mjs";
 import TeriockCommand from "../command.mjs";
 
 export const drain = new TeriockCommand(

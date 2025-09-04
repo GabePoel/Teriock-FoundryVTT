@@ -1,5 +1,5 @@
-import TeriockChatMessage from "../documents/chat-message.mjs";
-import TeriockRoll from "../documents/roll.mjs";
+import { TeriockRoll } from "../dice/_module.mjs";
+import { TeriockChatMessage } from "../documents/_module.mjs";
 import { makeDamageTypeButtons } from "./html.mjs";
 
 /**

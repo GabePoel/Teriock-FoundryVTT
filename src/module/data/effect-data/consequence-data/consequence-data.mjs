@@ -1,5 +1,6 @@
 import { inCombatExpirationDialog } from "../../../applications/dialogs/_module.mjs";
 import { getRollIcon, mergeFreeze } from "../../../helpers/utils.mjs";
+import { HierarchyDataMixin } from "../../mixins/_module.mjs";
 import { migrateHierarchy } from "../../shared/migrations/migrate-hierarchy.mjs";
 import TeriockBaseEffectData from "../base-effect-data/base-effect-data.mjs";
 import * as sharedFields from "../shared/shared-fields.mjs";
@@ -9,15 +10,17 @@ const { fields } = foundry.data;
 
 /**
  * Effect-specific effect data model.
+ * @extends TeriockBaseEffectData
+ * @mixes HierarchyDataMixin
  */
-export default class TeriockConsequenceData extends TeriockBaseEffectData {
+export default class TeriockConsequenceData extends HierarchyDataMixin(
+  TeriockBaseEffectData,
+) {
   /**
    * @inheritDoc
    * @type {Readonly<Teriock.Documents.EffectModelMetadata>}
    */
   static metadata = mergeFreeze(super.metadata, {
-    childEffectTypes: ["ability", "property", "fluency"],
-    hierarchy: true,
     type: "consequence",
     usable: true,
   });
@@ -81,7 +84,6 @@ export default class TeriockConsequenceData extends TeriockBaseEffectData {
         }),
       }),
       sourceDescription: new fields.HTMLField(),
-      hierarchy: sharedFields.hierarchyField(),
     });
   }
 

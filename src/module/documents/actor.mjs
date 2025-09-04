@@ -1,8 +1,8 @@
+import { TeriockRoll } from "../dice/_module.mjs";
 import { copyItem } from "../helpers/fetch.mjs";
 import { toCamelCase } from "../helpers/string.mjs";
 import { pureUuid } from "../helpers/utils.mjs";
 import { CommonDocumentMixin, ParentDocumentMixin } from "./mixins/_module.mjs";
-import TeriockRoll from "./roll.mjs";
 
 const { Actor } = foundry.documents;
 

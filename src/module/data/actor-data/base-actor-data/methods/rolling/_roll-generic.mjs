@@ -1,4 +1,4 @@
-import TeriockRoll from "../../../../../documents/roll.mjs";
+import { TeriockRoll } from "../../../../../dice/_module.mjs";
 
 /**
  * Rolls a feat save for the specified attribute.

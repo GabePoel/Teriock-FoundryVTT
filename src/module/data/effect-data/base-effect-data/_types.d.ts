@@ -1,5 +1,4 @@
 import type { TeriockEffect } from "../../../documents/_module.mjs";
-import type { HierarchyField } from "../shared/shared-fields";
 import { ChildTypeModel } from "../../models/_module.mjs";
 
 declare module "./base-effect-data.mjs" {
@@ -21,7 +20,6 @@ declare module "./base-effect-data.mjs" {
         item: Teriock.Parameters.Shared.Comparator[];
       };
     };
-    hierarchy: Partial<HierarchyField>;
 
     /** Parent effect */
     get parent(): TeriockEffect;

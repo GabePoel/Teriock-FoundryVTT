@@ -23,7 +23,7 @@ async function processSubEffects(subs, doc, config) {
     if (subNameEl?.dataset.namespace === skipNamespace) return;
 
     const subName = subNameEl.getAttribute("data-name");
-    const subItem = await createFn(doc, subName, {
+    const subEffect = await createFn(doc, subName, {
       notify: false,
     });
 
@@ -63,7 +63,11 @@ async function processSubEffects(subs, doc, config) {
         updateData["system.gifted.enabled"] = true;
         updateData["system.gifted.amount"] = 1;
       }
-      await subItem.update(updateData);
+      try {
+        await subEffect.update(updateData);
+      } catch {
+        await subEffect.delete();
+      }
     }
   }
 }

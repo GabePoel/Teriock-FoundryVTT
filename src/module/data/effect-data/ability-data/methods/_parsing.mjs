@@ -1,5 +1,5 @@
 import { abilityOptions } from "../../../../constants/options/ability-options.mjs";
-import { toKebabCase } from "../../../../helpers/string.mjs";
+import { getIcon } from "../../../../helpers/path.mjs";
 import { parseDurationString, safeUuid } from "../../../../helpers/utils.mjs";
 import { cleanHTMLDoc } from "../../../shared/parsing/clean-html-doc.mjs";
 import { extractChangesFromHTML } from "../../../shared/parsing/extract-changes.mjs";
@@ -152,7 +152,7 @@ export async function _parse(abilityData, rawHTML) {
   if (abilityData.parent.name.toLowerCase().includes("warded")) {
     parameters.warded = true;
   }
-  const img = `systems/teriock/src/icons/abilities/${toKebabCase(abilityData.parent.name)}.webp`;
+  const img = getIcon("abilities", abilityData.parent.name);
 
   delete parameters.results.endCondition;
 

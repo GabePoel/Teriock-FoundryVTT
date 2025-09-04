@@ -6,13 +6,18 @@
     "content": "node scripts/fetch-content.mjs",
     "format": "prettier --write \"**/*.{js,mjs,ts}\"",
     "format:all": "npm run format && npm run lint:fix",
-    "fromJSON": "node scripts/pack-from-json.mjs",
+    "from-JSON": "node scripts/pack-from-json.mjs",
+    "icon-tool:assign": "cd scripts/icon-assignment && node assign-icons.mjs",
+    "icon-tool:build-use-manifest": "node scripts/icon-assignment/manifest-icons.mjs",
+    "icon-tool:dev": "nodemon scripts/icon-assignment/server.js",
+    "icon-tool:start": "node scripts/icon-assignment/server.js",
+    "icon-tool:status": "curl -s http://localhost:3000/api/health || echo 'Icon tool not running'",
     "index": "node scripts/fetch-index.mjs",
     "lint": "eslint src/module/**/* src/templates/**/*",
     "lint:fix": "eslint --fix src/module/**/* src/templates/**/*",
     "style": "sass src/style/teriock.scss css/teriock.css --style=expanded",
     "templates": "node scripts/update-templates.mjs",
-    "toJSON": "node scripts/pack-to-json.mjs"
+    "to-JSON": "node scripts/pack-to-json.mjs"
   },
   "browserslist": [
     "last 3 versions"
@@ -34,6 +39,12 @@
     "prettier": "^3.5.3",
     "sass": "^1.89.1",
     "typescript": "^5.8.3",
-    "typescript-eslint": "^8.32.1"
+    "typescript-eslint": "^8.32.1",
+    "nodemon": "^3.0.1"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "process": "^0.11.10"
   }
 }

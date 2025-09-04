@@ -1,5 +1,5 @@
 import { boostDialog } from "../../../../applications/dialogs/_module.mjs";
-import { TeriockRoll } from "../../../../documents/_module.mjs";
+import { TeriockRoll } from "../../../../dice/_module.mjs";
 import { pureUuid } from "../../../utils.mjs";
 import ActionHandler from "../action-handler.mjs";
 

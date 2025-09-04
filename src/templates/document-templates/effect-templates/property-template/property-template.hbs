@@ -13,6 +13,20 @@
           {{> "systems/teriock/src/templates/document-templates/effect-templates/property-template/tags/pr-tags.hbs"}}
         </div>
         {{formGroup
+          systemFields.limitation
+          value=system.limitation
+          enriched=enriched.limitation
+          disabled=(not editable)
+          hidden=(not (exists system.limitation))
+        }}
+        {{formGroup
+          systemFields.improvement
+          value=system.improvement
+          enriched=enriched.improvement
+          disabled=(not editable)
+          hidden=(not (exists system.improvement))
+        }}
+        {{formGroup
           systemFields.description
           value=system.description
           enriched=enriched.description

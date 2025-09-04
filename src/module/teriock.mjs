@@ -1,8 +1,8 @@
 import * as applications from "./applications/_module.mjs";
 import * as canvas from "./canvas/_module.mjs";
-import * as perception from "./canvas/perception/_module.mjs";
 import * as constants from "./constants/_module.mjs";
 import * as data from "./data/_module.mjs";
+import * as dice from "./dice/_module.mjs";
 import * as documents from "./documents/_module.mjs";
 import * as helpers from "./helpers/_module.mjs";
 
@@ -49,7 +49,7 @@ foundry.helpers.Hooks.once("init", function () {
   // noinspection JSValidateTypes
   CONFIG.Canvas.visionModes = {
     ...CONFIG.Canvas.visionModes,
-    ...perception.visionModes,
+    ...canvas.perception.visionModes,
   };
   for (const key of Object.keys(CONFIG.Canvas.detectionModes)) {
     const id = CONFIG.Canvas.detectionModes[key].id;
@@ -60,7 +60,7 @@ foundry.helpers.Hooks.once("init", function () {
   // noinspection JSValidateTypes
   CONFIG.Canvas.detectionModes = {
     ...CONFIG.Canvas.detectionModes,
-    ...perception.detectionModes,
+    ...canvas.perception.detectionModes,
   };
 
   // Register custom core placeables
@@ -208,7 +208,7 @@ foundry.helpers.Hooks.once("init", function () {
 
   // Registering custom dice rolls and functions
   CONFIG.Dice.rolls.length = 0;
-  CONFIG.Dice.rolls.push(documents.TeriockRoll);
+  CONFIG.Dice.rolls.push(dice.TeriockRoll);
 
   // Modifying index fields
   CONFIG.ActiveEffect.IndexFields = [
@@ -241,11 +241,11 @@ foundry.helpers.Hooks.once("init", function () {
     Item: documents.TeriockItem,
     Macro: documents.TeriockMacro,
     ChatMessage: documents.TeriockChatMessage,
-    Roll: documents.TeriockRoll,
     Scene: documents.TeriockScene,
     Token: documents.TeriockTokenDocument,
     User: documents.TeriockUser,
     JournalEntry: documents.TeriockJournalEntry,
+    Roll: dice.TeriockRoll,
     api: {
       create: {
         ability: helpers.createEffects.createAbility,
@@ -259,6 +259,7 @@ foundry.helpers.Hooks.once("init", function () {
       fetch: helpers.fetch,
       wiki: helpers.wiki,
       string: helpers.string,
+      path: helpers.path,
     },
     data: data,
     packs: {
@@ -299,16 +300,8 @@ foundry.helpers.Hooks.once("init", function () {
   };
 
   // Register custom handlebars templates
-  return helpers.maintenance.registerTemplates();
+  helpers.maintenance.registerTemplates();
 });
-
-// foundry.helpers.Hooks.once("ready", function () {
-//   Object.setPrototypeOf(
-//     game.tooltip,
-//     helpers.interaction.TeriockTooltipManager.prototype,
-//   );
-//   console.log(game.tooltip);
-// });
 
 for (const hook of Object.values(helpers.hookManagement)) {
   if (typeof hook === "function") {

@@ -1,5 +1,5 @@
 import { onUseDialog } from "../../../../applications/dialogs/on-use-dialog.mjs";
-import TeriockRoll from "../../../../documents/roll.mjs";
+import { TeriockRoll } from "../../../../dice/_module.mjs";
 import { harmRoll } from "../../../../helpers/quick-rolls.mjs";
 
 /**

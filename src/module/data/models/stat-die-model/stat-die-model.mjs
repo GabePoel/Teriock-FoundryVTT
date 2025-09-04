@@ -1,5 +1,5 @@
 import { dieOptions } from "../../../constants/options/die-options.mjs";
-import { TeriockRoll } from "../../../documents/_module.mjs";
+import { TeriockRoll } from "../../../dice/_module.mjs";
 import { toTitleCase } from "../../../helpers/string.mjs";
 import { dedent, getRollIcon } from "../../../helpers/utils.mjs";
 

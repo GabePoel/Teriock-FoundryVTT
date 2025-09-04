@@ -44,6 +44,11 @@ export default class TeriockPropertySheet extends TeriockBaseEffectSheet {
       propertyContextMenuOptions,
       "click",
     );
+    const buttonMap = {
+      ".ab-limitation-button": "system.limitation",
+      ".ab-improvement-button": "system.improvement",
+    };
+    this._connectButtonMap(buttonMap);
   }
 
   /** @inheritDoc */
@@ -51,6 +56,10 @@ export default class TeriockPropertySheet extends TeriockBaseEffectSheet {
     const context = await super._prepareContext(options);
     context.subProperties = this.document.subs;
     context.supProperty = this.document.sup;
+    await this._enrichAll(context, {
+      limitation: this.document.system.limitation,
+      improvement: this.document.system.improvement,
+    });
     return context;
   }
 }

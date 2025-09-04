@@ -1,4 +1,3 @@
-import { hierarchyField } from "../../../shared/shared-fields.mjs";
 import { _defineConsequences } from "./_define-consequences.mjs";
 import { _defineConsumable } from "./_define-consumable.mjs";
 import { _defineGeneral } from "./_define-general.mjs";
@@ -29,9 +28,7 @@ import { _defineGeneral } from "./_define-general.mjs";
  * const abilityData = new foundry.data.DataModel(schema, data);
  */
 export function _defineSchema() {
-  let schema = {
-    hierarchy: hierarchyField(),
-  };
+  let schema = {};
   schema = _defineConsequences(schema);
   schema = _defineGeneral(schema);
   schema = _defineConsumable(schema);

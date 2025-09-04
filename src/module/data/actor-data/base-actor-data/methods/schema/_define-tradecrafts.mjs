@@ -1,6 +1,3 @@
-import { tradecraftOptions } from "../../../../../constants/options/tradecraft-options.mjs";
-import { mergeLevel } from "../../../../../helpers/utils.mjs";
-
 const { fields } = foundry.data;
 
 /**
@@ -24,8 +21,6 @@ function tradecraftField() {
   });
 }
 
-const tradecrafts = mergeLevel(tradecraftOptions, "*", "tradecrafts");
-
 /**
  * Defines the tradecrafts' schema.
  *
@@ -46,7 +41,7 @@ const tradecrafts = mergeLevel(tradecraftOptions, "*", "tradecrafts");
  */
 export function _defineTradecrafts(schema) {
   const tradecraftData = {};
-  for (const key of Object.keys(tradecrafts)) {
+  for (const key of Object.keys(CONFIG.TERIOCK.index.tradecrafts)) {
     tradecraftData[key] = tradecraftField();
   }
   schema.tradecrafts = new fields.SchemaField(tradecraftData);

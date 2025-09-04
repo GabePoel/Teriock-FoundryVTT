@@ -4,16 +4,17 @@ import type {
   CombatExpirationMethod,
   CombatExpirationSourceType,
   CombatExpirationTiming,
-  HierarchyField,
 } from "../shared/shared-fields";
 import type {
   TeriockActor,
   TeriockEffect,
 } from "../../../documents/_module.mjs";
+import type { HierarchyDataMixinInterface } from "../../mixins/hierarchy-data-mixin/_types";
 
 declare module "./consequence-data.mjs" {
   export default interface TeriockConsequenceData
-    extends TeriockBaseEffectData {
+    extends TeriockBaseEffectData,
+      HierarchyDataMixinInterface {
     source: Teriock.UUID<TeriockEffect>;
     expirations: {
       conditions: {
@@ -40,7 +41,6 @@ declare module "./consequence-data.mjs" {
     dawnExpiration: boolean;
     sustainedExpiration: boolean;
     sourceDescription: string;
-    hierarchy: HierarchyField;
 
     get parent(): TeriockConsequence;
   }

@@ -1,10 +1,9 @@
-import { TeriockRoll } from "../../../documents/_module.mjs";
+import { TeriockRoll } from "../../../dice/_module.mjs";
 
 const { StringField } = foundry.data.fields;
 
 /**
  * Special case {@link StringField} which represents a formula.
- *
  * @param {StringFieldOptions & { deterministic?: boolean; }} [options={}] - Options which configure field behavior.
  * @property {boolean} deterministic=false - Is this formula not allowed to have dice values?
  */

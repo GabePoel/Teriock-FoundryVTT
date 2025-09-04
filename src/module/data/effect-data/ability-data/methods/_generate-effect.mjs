@@ -1,4 +1,4 @@
-import { TeriockRoll } from "../../../../documents/_module.mjs";
+import { TeriockRoll } from "../../../../dice/_module.mjs";
 import { parseTimeString } from "../../../../helpers/utils.mjs";
 
 /**
