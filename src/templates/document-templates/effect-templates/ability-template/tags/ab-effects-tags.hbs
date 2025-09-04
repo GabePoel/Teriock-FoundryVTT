@@ -1,10 +1,10 @@
-{{#if (or (exists system.effects) system.elderSorcery)}}
+{{#if (or (exists effectTags) system.elderSorcery)}}
   <div class="ab-tags-container">
     <div class="ab-tags">
       {{#if system.elderSorcery}}
         <span class="ab-tag tsubtle flag-tag flag-elder-sorcery" data-tooltip="Remove Tag">Elder Sorcery</span>
       {{/if}}
-      {{#each system.effects as |key index|}}
+      {{#each effectTags as |key index|}}
         <span class="ab-tag tsubtle effect-tag" data-value="{{key}}" data-tooltip="Remove Tag">{{lookup
           ../config.options.ability.effects key}}</span>
       {{/each}}

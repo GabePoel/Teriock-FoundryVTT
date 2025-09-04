@@ -3,6 +3,7 @@ import { buildMessage } from "../../../helpers/messages-builder/message-builder.
 import {
   selectAbilityDialog,
   selectPropertyDialog,
+  selectTradecraftDialog,
 } from "../../dialogs/select-dialog.mjs";
 import {
   bindCommonActions,
@@ -150,7 +151,8 @@ export default (Base) => {
      * @returns {Promise<ActiveEffect>} Promise that resolves to the created fluency.
      */
     static async _createFluency(_event, _target) {
-      return await createEffects.createFluency(this.document);
+      const tradecraft = await selectTradecraftDialog();
+      return await createEffects.createFluency(this.document, tradecraft);
     }
 
     /**

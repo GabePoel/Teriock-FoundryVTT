@@ -44,10 +44,11 @@ export default async function setStatDiceDialog(
           1,
         );
         const faces = Number(button.form.elements.namedItem("faces").value);
-        await statItem.update({
-          [`system.${stat}DiceBase.number`]: number,
-          [`system.${stat}DiceBase.faces`]: faces,
-        });
+        // await statItem.update({
+        //   [`system.${stat}DiceBase.number`]: number,
+        //   [`system.${stat}DiceBase.faces`]: faces,
+        // });
+        await statItem.system.setDice(stat, number, faces);
       },
     },
   });

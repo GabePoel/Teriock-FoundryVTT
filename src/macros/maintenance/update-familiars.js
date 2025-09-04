@@ -27,7 +27,7 @@ for (const page of commonAnimalPages) {
   const familiarItemFluencyData = {
     name: `${animal} Tamer`,
     type: "fluency",
-    img: "systems/teriock/src/icons/tradecrafts/tamer.webp",
+    img: game.teriock.api.path.getIcon("tradecrafts", "Tamer"),
     system: {
       field: "survivalist",
       tradecraft: "tamer",

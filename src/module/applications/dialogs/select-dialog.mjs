@@ -1,4 +1,8 @@
+import { getAbility, getItem, getProperty } from "../../helpers/fetch.mjs";
+import { getIcon } from "../../helpers/path.mjs";
+import { toCamelCase } from "../../helpers/string.mjs";
 import { TeriockDialog } from "../api/_module.mjs";
+import { selectDocumentDialog } from "./select-document-dialog.mjs";
 
 const { fields } = foundry.data;
 
@@ -124,13 +128,16 @@ export async function selectConditionDialog() {
  * @returns {Promise<Teriock.Parameters.Equipment.PropertyKey>}
  */
 export async function selectPropertyDialog() {
-  return await selectDialog(CONFIG.TERIOCK.index.properties, {
-    label: "Property",
+  const choices = await Promise.all(
+    Object.values(CONFIG.TERIOCK.index.properties).map((name) =>
+      getProperty(name),
+    ),
+  );
+  const chosen = await selectDocumentDialog(choices, {
     hint: "Please select a property.",
     title: "Select Property",
-    other: true,
-    genericOther: true,
   });
+  return toCamelCase(chosen.name);
 }
 
 /**
@@ -138,11 +145,18 @@ export async function selectPropertyDialog() {
  * @returns {Promise<Teriock.Parameters.Fluency.Tradecraft>}
  */
 export async function selectTradecraftDialog() {
-  return await selectDialog(CONFIG.TERIOCK.index.tradecrafts, {
-    label: "Tradecraft",
+  const choices = Object.keys(CONFIG.TERIOCK.index.tradecrafts).map((tc) => {
+    return {
+      name: CONFIG.TERIOCK.index.tradecrafts[tc],
+      uuid: tc,
+      img: getIcon("tradecrafts", CONFIG.TERIOCK.index.tradecrafts[tc]),
+    };
+  });
+  const chosen = await selectDocumentDialog(choices, {
     hint: "Please select a tradecraft.",
     title: "Select Tradecraft",
   });
+  return chosen.uuid;
 }
 
 /**
@@ -150,13 +164,16 @@ export async function selectTradecraftDialog() {
  * @returns {Promise<string>}
  */
 export async function selectAbilityDialog() {
-  return await selectDialog(CONFIG.TERIOCK.index.abilities, {
-    label: "Ability",
+  const choices = await Promise.all(
+    Object.values(CONFIG.TERIOCK.index.abilities).map((name) =>
+      getAbility(name),
+    ),
+  );
+  const chosen = await selectDocumentDialog(choices, {
     hint: "Please select an ability.",
     title: "Select Ability",
-    other: true,
-    genericOther: true,
   });
+  return toCamelCase(chosen.name);
 }
 
 /**
@@ -164,13 +181,16 @@ export async function selectAbilityDialog() {
  * @returns {Promise<string>}
  */
 export async function selectEquipmentTypeDialog() {
-  return await selectDialog(CONFIG.TERIOCK.index.equipment, {
-    label: "Equipment Type",
-    hint: "Please select an equipment type.",
+  const choices = await Promise.all(
+    Object.values(CONFIG.TERIOCK.index.equipment).map((name) =>
+      getItem(name, "equipment"),
+    ),
+  );
+  const chosen = await selectDocumentDialog(choices, {
+    hint: "Please select an equipment type",
     title: "Select Equipment Type",
-    other: true,
-    genericOther: false,
   });
+  return toCamelCase(chosen.system.equipmentType);
 }
 
 /**
@@ -178,9 +198,20 @@ export async function selectEquipmentTypeDialog() {
  * @returns {Promise<string>}
  */
 export async function selectClassDialog() {
-  return await selectDialog(CONFIG.TERIOCK.index.classes, {
-    label: "Class",
+  const choices = [
+    ...Object.keys(CONFIG.TERIOCK.options.rank.mage.classes),
+    ...Object.keys(CONFIG.TERIOCK.options.rank.semi.classes),
+    ...Object.keys(CONFIG.TERIOCK.options.rank.warrior.classes),
+  ].map((c) => {
+    return {
+      name: CONFIG.TERIOCK.index.classes[c],
+      uuid: c,
+      img: getIcon("classes", CONFIG.TERIOCK.index.classes[c]),
+    };
+  });
+  const chosen = await selectDocumentDialog(choices, {
     hint: "Please select a class.",
     title: "Select Class",
   });
+  return chosen.uuid;
 }

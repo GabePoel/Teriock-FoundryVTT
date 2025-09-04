@@ -70,6 +70,16 @@ export async function _parse(speciesData, rawHTML) {
       faces: faces,
     };
   }
+  await speciesData.setDice(
+    "hp",
+    parameters.hpDiceBase.number,
+    parameters.hpDiceBase.faces,
+  );
+  await speciesData.setDice(
+    "mp",
+    parameters.mpDiceBase.number,
+    parameters.mpDiceBase.faces,
+  );
   if (tagTree["traits"]) parameters.traits = tagTree["traits"];
   parameters.traits = parameters.traits.filter((t) =>
     Object.keys(CONFIG.TERIOCK.index.traits).includes(t),

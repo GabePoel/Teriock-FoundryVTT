@@ -226,7 +226,6 @@ export default class TeriockActor extends ParentDocumentMixin(
    * @returns {Promise<TeriockChild[]>}
    */
   async createEmbeddedDocuments(embeddedName, data = [], operation = {}) {
-    console.log(this.metadata);
     this._filterDocumentCreationData(embeddedName, data);
     if (embeddedName === "Item") {
       for (const archetype of ["mage", "semi", "warrior"]) {

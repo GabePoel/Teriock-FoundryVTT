@@ -9,7 +9,10 @@ export function _prepareDefenses(actorData) {
   const actor = actorData.parent;
   const equipment = actor.itemTypes.equipment;
   const equipped = equipment.filter((i) => i.system.isEquipped);
-
+  const armor = equipped.filter((e) => e.system.equipmentClasses.has("armor"));
+  if (armor.length > 0) {
+    actorData.wornAc = Math.max(armor.map((e) => e.system.derivedAv));
+  }
   // Find and validate primary blocker
 
   const blocker = actor.items.get(actorData.wielding.blocker.raw);

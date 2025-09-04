@@ -41,7 +41,7 @@ export async function copyItem(name, pack) {
  */
 export async function getAbility(name, options = {}) {
   const item = await getItem(name, "abilities", options);
-  return item.effects.getName(name);
+  return item.system.effect;
 }
 
 /**

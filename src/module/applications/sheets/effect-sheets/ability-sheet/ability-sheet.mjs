@@ -326,6 +326,10 @@ export default class TeriockAbilitySheet extends TeriockBaseEffectSheet {
         });
       }
     }
+    const effectsSet = new Set(system.effects);
+    context.effectTags = Array.from(
+      effectsSet.difference(new Set(system.powerSources)),
+    );
     await this._enrichAll(context, {
       mpCost: system.costs.mp.value.variable,
       hpCost: system.costs.hp.value.variable,

@@ -102,4 +102,16 @@ export interface StatDataMixinInterface {
     number: number,
     faces: Teriock.RollOptions.PolyhedralDieFaces,
   ): void;
+
+  /**
+   * Set the stat dice.
+   * @param stat - The stat type (hp or mp)
+   * @param number - Number of dice
+   * @param faces - Number of faces on each die
+   */
+  setDice(
+    stat: Teriock.Parameters.Shared.DieStat,
+    number: number,
+    faces: Teriock.RollOptions.PolyhedralDieFaces,
+  ): void;
 }

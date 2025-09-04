@@ -174,7 +174,7 @@ export default (Base) => {
                 changes,
                 `system.${stat}DiceBase.faces`,
               ) || this[`${stat}DiceBase`].faces;
-            this._setDice(stat, number, faces);
+            // this.setDice(stat, number, faces);
           }
         }
       }
@@ -204,6 +204,38 @@ export default (Base) => {
           }
         }
         this.parent.updateSource(updateData);
+      }
+
+      /** @inheritDoc */
+      async setDice(stat, number, faces) {
+        if (
+          this[`${stat}Dice`].number === number &&
+          this[`${stat}Dice`].faces === faces
+        )
+          return;
+        const currentQuantity = Object.keys(this[`${stat}Dice`]).length;
+        const keys = Object.keys(this[`${stat}Dice`]);
+        const updateData = {};
+        for (let i = 0; i < Math.max(number, currentQuantity); i++) {
+          if (i < currentQuantity && i < number) {
+            updateData[`system.${stat}Dice.${keys[i]}.faces`] = faces;
+            updateData[`system.${stat}Dice.${keys[i]}.value`] = Math.ceil(
+              (faces + 1) / 2,
+            );
+          } else if (i < currentQuantity && i >= number) {
+            updateData[`system.${stat}Dice.-=${keys[i]}`] = null;
+          } else if (i >= currentQuantity && i < number) {
+            const id = foundry.utils.randomID();
+            updateData[`system.${stat}Dice.${id}`] = {
+              _id: id,
+              stat: stat,
+              faces: faces,
+              spent: false,
+              value: Math.ceil((faces + 1) / 2),
+            };
+          }
+        }
+        await this.parent.update(updateData);
       }
 
       // /**

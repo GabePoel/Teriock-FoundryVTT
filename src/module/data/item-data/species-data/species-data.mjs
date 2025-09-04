@@ -185,7 +185,7 @@ export default class TeriockSpeciesData extends StatDataMixin(
         const sizeDelta = size - minSize;
         const numSteps = Math.floor(sizeDelta / sizeStep);
         if (numSteps && numSteps > 0) number += numSteps;
-        this._setDice(stat, number, faces);
+        // await this.setDice(stat, number, faces);
       }
     }
   }

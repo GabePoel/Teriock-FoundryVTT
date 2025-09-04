@@ -1,4 +1,5 @@
 import TeriockEffect from "../documents/effect.mjs";
+import { getIcon } from "./path.mjs";
 
 /**
  * Creates a new ability effect and optionally pulls content from the wiki.
@@ -167,14 +168,29 @@ export async function createConsequence(document) {
  * Creates a new fluency effect.
  *
  * @param {TeriockActor|TeriockItem} document - The document to create the fluency in.
+ * @param {Teriock.Parameters.Fluency.Tradecraft} tradecraft
  * @returns {Promise<TeriockFluency>} The created fluency effect.
  */
-export async function createFluency(document) {
+export async function createFluency(document, tradecraft = artist) {
+  let field;
+  for (const f of Object.keys(CONFIG.TERIOCK.options.tradecraft)) {
+    if (
+      Object.keys(CONFIG.TERIOCK.options.tradecraft[f].tradecrafts).includes(
+        tradecraft,
+      )
+    ) {
+      field = f;
+    }
+  }
   const fluency = await TeriockEffect.create(
     {
-      name: "New Fluency",
+      name: `New ${CONFIG.TERIOCK.index.tradecrafts[tradecraft]} Fluency`,
       type: "fluency",
-      img: "systems/teriock/assets/fluency.svg",
+      img: getIcon("tradecrafts", CONFIG.TERIOCK.index.tradecrafts[tradecraft]),
+      system: {
+        tradecraft: tradecraft,
+        field: field,
+      },
     },
     { parent: document },
   );
