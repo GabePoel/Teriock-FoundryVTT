@@ -9,7 +9,7 @@ import { messageBar, messageBlock, messageBox, messageHeader, messageWrapper } f
  * @returns {HTMLDivElement} The complete message element.
  */
 export function buildMessage(messageParts) {
-  const { image, name, bars, blocks, font } = messageParts;
+  const { image, name, bars = [], blocks = [], font } = messageParts;
   let fontClass = "tfont";
   if (font) {
     fontClass = "tfont-" + font;

@@ -1,4 +1,3 @@
-import { tradecraftMessage } from "../html.mjs";
 import { getIcon } from "../path.mjs";
 import { toCamelCase } from "../string.mjs";
 
@@ -47,10 +46,6 @@ export default function registerLookupHelpers() {
     const segments = pathSegments.slice(0, -1);
     const fullPath = segments.join(".");
     return foundry.utils.getProperty(obj, fullPath);
-  });
-
-  Handlebars.registerHelper("tradecraftMessage", function (tradecraft) {
-    return new Handlebars.SafeString(tradecraftMessage(tradecraft));
   });
 
   Handlebars.registerHelper("getIconKey", (category, key) => {

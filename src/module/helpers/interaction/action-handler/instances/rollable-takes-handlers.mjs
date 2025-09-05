@@ -1,7 +1,9 @@
 import { boostDialog } from "../../../../applications/dialogs/_module.mjs";
 import { TeriockRoll } from "../../../../dice/_module.mjs";
 import { TeriockChatMessage } from "../../../../documents/_module.mjs";
-import { makeDamageTypeButtons } from "../../../html.mjs";
+import { makeDamageDrainTypeMessage, makeDamageTypeButtons } from "../../../html.mjs";
+import { buildMessage } from "../../../messages-builder/message-builder.mjs";
+import { getIcon } from "../../../path.mjs";
 import ActionHandler from "../action-handler.mjs";
 
 /**
@@ -15,7 +17,18 @@ export class RollRollableTakeHandler extends ActionHandler {
    * @property {string} formula - Roll formula
    */
   async _makeRoll(formula) {
-    const roll = new TeriockRoll(formula);
+    let flavor = ROLL_TYPES[this.dataset.type].label;
+    for (const s of ["Apply", "Set", "Gain", "Pay"]) {
+      flavor = flavor.replace(s, "").trim();
+    }
+    flavor = flavor + " Roll";
+    const roll = new TeriockRoll(
+      formula,
+      {},
+      {
+        flavor: flavor,
+      },
+    );
     if (this.critRollOptions.crit) {
       roll.alter(2, 0, { multiplyNumeric: false });
     }
@@ -33,11 +46,30 @@ export class RollRollableTakeHandler extends ActionHandler {
       },
     ];
     const damageTypeButtons = makeDamageTypeButtons(roll);
+    const damageDrainTypeMessage = await makeDamageDrainTypeMessage(roll);
     buttons.push(...damageTypeButtons);
+    let messageStart = "";
+    if (damageDrainTypeMessage.length > 0) {
+      let image;
+      let name;
+      if (this.dataset.type === "damage") {
+        image = getIcon("effect-types", "Damaging");
+        name = "Damage";
+      } else if (this.dataset.type === "drain") {
+        image = getIcon("abilities", "Mana Drain Touch");
+        name = "Drain";
+      }
+      const messageStartRaw = buildMessage({
+        image: image,
+        name: name,
+      });
+      messageStart = `<div class="teriock">${messageStartRaw.outerHTML}</div>`;
+    }
     const messageData = {
       rolls: [roll],
       system: {
         buttons: buttons,
+        extraContent: messageStart + damageDrainTypeMessage,
       },
     };
     await TeriockChatMessage.create(messageData);

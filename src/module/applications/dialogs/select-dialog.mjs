@@ -146,14 +146,16 @@ export async function selectPropertyDialog() {
  * @returns {Promise<Teriock.Parameters.Fluency.Tradecraft>}
  */
 export async function selectTradecraftDialog() {
-  const choices = Object.keys(CONFIG.TERIOCK.index.tradecrafts).map((tc) => {
-    return {
-      name: CONFIG.TERIOCK.index.tradecrafts[tc],
-      uuid: tc,
-      img: getIcon("tradecrafts", CONFIG.TERIOCK.index.tradecrafts[tc]),
-      tooltip: tradecraftMessage(tc),
-    };
-  });
+  const choices = await Promise.all(
+    Object.keys(CONFIG.TERIOCK.index.tradecrafts).map(async (tc) => {
+      return {
+        name: CONFIG.TERIOCK.index.tradecrafts[tc],
+        uuid: tc,
+        img: getIcon("tradecrafts", CONFIG.TERIOCK.index.tradecrafts[tc]),
+        tooltip: await tradecraftMessage(tc),
+      };
+    }),
+  );
   const chosen = await selectDocumentDialog(choices, {
     hint: "Please select a tradecraft.",
     title: "Select Tradecraft",
@@ -201,18 +203,20 @@ export async function selectEquipmentTypeDialog() {
  * @returns {Promise<string>}
  */
 export async function selectClassDialog() {
-  const choices = [
-    ...Object.keys(CONFIG.TERIOCK.options.rank.mage.classes),
-    ...Object.keys(CONFIG.TERIOCK.options.rank.semi.classes),
-    ...Object.keys(CONFIG.TERIOCK.options.rank.warrior.classes),
-  ].map((c) => {
-    return {
-      name: CONFIG.TERIOCK.index.classes[c],
-      uuid: c,
-      img: getIcon("classes", CONFIG.TERIOCK.index.classes[c]),
-      tooltip: classMessage(c),
-    };
-  });
+  const choices = await Promise.all(
+    [
+      ...Object.keys(CONFIG.TERIOCK.options.rank.mage.classes),
+      ...Object.keys(CONFIG.TERIOCK.options.rank.semi.classes),
+      ...Object.keys(CONFIG.TERIOCK.options.rank.warrior.classes),
+    ].map(async (c) => {
+      return {
+        name: CONFIG.TERIOCK.index.classes[c],
+        uuid: c,
+        img: getIcon("classes", CONFIG.TERIOCK.index.classes[c]),
+        tooltip: await classMessage(c),
+      };
+    }),
+  );
   const chosen = await selectDocumentDialog(choices, {
     hint: "Please select a class.",
     title: "Select Class",

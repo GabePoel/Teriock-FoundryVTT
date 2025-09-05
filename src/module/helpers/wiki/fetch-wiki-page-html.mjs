@@ -20,20 +20,23 @@ if (isNode) {
  * @param {boolean} [options.transformDice] - Should dice be converted to inline rolls?
  * @param {boolean} [options.removeSubContainers] - Should sub containers be removed?
  * @param {boolean} [options.enrichText] - Should text enrichments be applied?
+ * @param {boolean} [options.noSubs] - Remove all sub and expandable content.
+ * @param {boolean} [options.simplifyWikiLinks] - Replace wiki links with enriched equivalents.
+ * @param {boolean} [options.cleanSpans] - Replace spans with plain text.
  * @returns {Promise<string|null>} The cleaned HTML content as a string, or null if the request fails.
  */
-export default async function fetchWikiPageHTML(
-  title,
-  options = {
-    transformDice: false,
-    removeSubContainers: false,
-    enrichText: false,
-  },
-) {
+export default async function fetchWikiPageHTML(title, options = {}) {
   const endpoint = "https://wiki.teriock.com/api.php";
   const baseWikiUrl = "https://wiki.teriock.com";
 
-  const { transformDice, removeSubContainers, enrichText = false } = options;
+  const {
+    transformDice = false,
+    removeSubContainers = false,
+    enrichText = false,
+    noSubs = false,
+    simplifyWikiLinks = true,
+    cleanSpans = false,
+  } = options;
 
   let enricherKeys = [];
 
@@ -81,6 +84,13 @@ export default async function fetchWikiPageHTML(
     }
 
     const html = data.parse.text["*"];
+    let domDocument;
+    if (isNode) {
+      const { JSDOM } = await import("jsdom");
+      const dom = new JSDOM(html);
+      const { document } = dom.window;
+      domDocument = document;
+    }
     const doc = parseHTML(html);
 
     if (transformDice) {
@@ -107,6 +117,16 @@ export default async function fetchWikiPageHTML(
       if (isWikiLink) {
         link.setAttribute("href", baseWikiUrl + href);
         link.setAttribute("target", "_blank");
+        if (titleAttr && simplifyWikiLinks) {
+          const display = textContent || titleAttr;
+          const enricherTag = `@L[${titleAttr}]{${display}}`;
+          if (isNode) {
+            link.replaceWith(domDocument.createTextNode(enricherTag));
+          } else {
+            link.replaceWith(document.createTextNode(enricherTag));
+          }
+          continue;
+        }
       }
 
       if (!titleAttr) {
@@ -116,7 +136,11 @@ export default async function fetchWikiPageHTML(
           ).replace(/_/g, " ");
           const display = textContent || pageName;
           const enricherTag = `@Wiki[${pageName}]{${display}}`;
-          link.replaceWith(document.createTextNode(enricherTag));
+          if (isNode) {
+            link.replaceWith(domDocument.createTextNode(enricherTag));
+          } else {
+            link.replaceWith(document.createTextNode(enricherTag));
+          }
         }
         continue;
       }
@@ -168,7 +192,13 @@ export default async function fetchWikiPageHTML(
       }
     }
 
-    return cleanWikiHTML(doc.body.innerHTML);
+    if (cleanSpans) {
+      [...doc.querySelectorAll("span")]
+        .reverse()
+        .forEach((s) => s.replaceWith(s.textContent));
+    }
+
+    return cleanWikiHTML(doc.body.innerHTML, { noSubs });
   } catch (error) {
     console.error("Error fetching HTML:", error);
     return null;

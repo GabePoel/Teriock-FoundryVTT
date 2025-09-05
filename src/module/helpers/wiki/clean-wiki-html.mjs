@@ -1,9 +1,12 @@
 /**
  * Cleans and processes HTML content from the wiki by removing comments and extracting the main content.
  * @param {string} html - The raw HTML content to clean.
+ * @param {object} [options]
+ * @param {boolean} [options.noSubs]
  * @returns {Promise<string>} The cleaned HTML content.
  */
-export default async function cleanWikiHTML(html) {
+export default async function cleanWikiHTML(html, options = {}) {
+  const { noSubs = false } = options;
   let doc;
 
   if (typeof window === "undefined") {
@@ -18,11 +21,15 @@ export default async function cleanWikiHTML(html) {
   const container = doc.querySelector(".mw-parser-output");
   if (!container) return "";
 
-  doc.querySelectorAll("img").forEach((img) => img.remove());
-  doc
-    .querySelectorAll("figcaption")
-    .forEach((figCaption) => figCaption.remove());
-  doc.querySelectorAll("figure").forEach((figure) => figure.remove());
+  const toRemove = ["img", "figcaption", "figure"];
+  if (noSubs) {
+    toRemove.push(
+      ...[".expandable-container", ".ability-sub-container", ".metadata"],
+    );
+  }
+  for (const el of toRemove) {
+    doc.querySelectorAll(el).forEach((el) => el.remove());
+  }
 
   const removeComments = (node) => {
     for (let child of Array.from(node.childNodes)) {

@@ -1,5 +1,7 @@
 import { conditions } from "../../../../constants/content/conditions.mjs";
 import { documentOptions } from "../../../../constants/options/document-options.mjs";
+import { tradecraftMessage } from "../../../../helpers/html.mjs";
+import { buildMessage } from "../../../../helpers/messages-builder/message-builder.mjs";
 import { SheetMixin } from "../../mixins/_module.mjs";
 import _embeddedFromCard from "../../mixins/methods/_embedded-from-card.mjs";
 import {
@@ -19,6 +21,7 @@ import { _sortAbilities, _sortEquipment } from "./methods/_sort.mjs";
 
 const { DialogV2 } = foundry.applications.api;
 const { ActorSheetV2 } = foundry.applications.sheets;
+const TextEditor = foundry.applications.ux.TextEditor.implementation;
 
 /**
  * Base actor sheet for actorsUuids.
@@ -218,10 +221,31 @@ export default class TeriockBaseActorSheet extends SheetMixin(ActorSheetV2) {
     event.stopPropagation();
     let message = null;
     if (target.classList.contains("tcard-image")) {
+      const messageParts = {};
+      const tcard = target.closest(".tcard");
       const img = target.querySelector("img");
-      if (img) {
-        message = img.alt;
-      }
+      messageParts.image = img.src;
+      messageParts.name = "Immunity";
+      messageParts.bars = [
+        {
+          icon: "fa-shield",
+          label: "Immunity",
+          wrappers: [
+            tcard.querySelector(".tcard-title").textContent,
+            tcard.querySelector(".tcard-subtitle").textContent,
+          ],
+        },
+      ];
+      messageParts.blocks = [
+        {
+          title: "Immunity",
+          text: CONFIG.TERIOCK.content.keywords.immunity,
+        },
+      ];
+      const content = buildMessage(messageParts).outerHTML;
+      message = await TextEditor.enrichHTML(
+        `<div class="teriock">${content}</div>`,
+      );
     }
     /** @type {Teriock.RollOptions.CommonRoll} */
     const options = {
@@ -290,30 +314,6 @@ export default class TeriockBaseActorSheet extends SheetMixin(ActorSheetV2) {
   }
 
   /**
-   * Rolls resistance with optional advantage/disadvantage.
-   * @param {MouseEvent} event - The event object.
-   * @param {HTMLElement} target - The target element.
-   * @returns {Promise<void>} Promise that resolves when resistance is rolled.
-   * @static
-   */
-  static async _rollResistance(event, target) {
-    event.stopPropagation();
-    let message = null;
-    if (target.classList.contains("tcard-image")) {
-      const img = target.querySelector("img");
-      if (img) {
-        message = img.alt;
-      }
-    }
-    const options = {
-      advantage: event.altKey,
-      disadvantage: event.shiftKey,
-      message: message,
-    };
-    await this.actor.rollResistance(options);
-  }
-
-  /**
    * Rolls a feat save with optional advantage/disadvantage.
    * @param {MouseEvent} event - The event object.
    * @param {HTMLElement} target - The target element.
@@ -326,6 +326,52 @@ export default class TeriockBaseActorSheet extends SheetMixin(ActorSheetV2) {
     if (event.altKey) options.advantage = true;
     if (event.shiftKey) options.disadvantage = true;
     await this.actor.rollFeatSave(attribute, options);
+  }
+
+  /**
+   * Rolls resistance with optional advantage/disadvantage.
+   * @param {MouseEvent} event - The event object.
+   * @param {HTMLElement} target - The target element.
+   * @returns {Promise<void>} Promise that resolves when resistance is rolled.
+   * @static
+   */
+  static async _rollResistance(event, target) {
+    event.stopPropagation();
+    let message = null;
+    /** @type {Teriock.MessageData.MessageParts} */
+    if (target.classList.contains("tcard-image")) {
+      const messageParts = {};
+      const tcard = target.closest(".tcard");
+      const img = target.querySelector("img");
+      messageParts.image = img.src;
+      messageParts.name = "Resistance";
+      messageParts.bars = [
+        {
+          icon: "fa-shield",
+          label: "Resistance",
+          wrappers: [
+            tcard.querySelector(".tcard-title").textContent,
+            tcard.querySelector(".tcard-subtitle").textContent,
+          ],
+        },
+      ];
+      messageParts.blocks = [
+        {
+          title: "Resistance",
+          text: CONFIG.TERIOCK.content.keywords.resistance,
+        },
+      ];
+      const content = buildMessage(messageParts).outerHTML;
+      message = await TextEditor.enrichHTML(
+        `<div class="teriock">${content}</div>`,
+      );
+    }
+    const options = {
+      advantage: event.altKey,
+      disadvantage: event.shiftKey,
+      message: message,
+    };
+    await this.actor.rollResistance(options);
   }
 
   /**
@@ -918,6 +964,11 @@ export default class TeriockBaseActorSheet extends SheetMixin(ActorSheetV2) {
     context.settings = this.settings;
 
     context.conditionProviders = {};
+
+    context.tradecraftTooltips = {};
+    for (const tc of Object.keys(CONFIG.TERIOCK.index.tradecrafts)) {
+      context.tradecraftTooltips[tc] = await tradecraftMessage(tc);
+    }
 
     if (tab === "conditions") {
       for (const condition of Object.keys(CONFIG.TERIOCK.index.conditions)) {

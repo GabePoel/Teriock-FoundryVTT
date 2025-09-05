@@ -5,6 +5,7 @@ import {
   classes,
   damageTypes,
   drainTypes,
+  keywords,
   tradecrafts,
   weaponFightingStyles,
 } from "../src/module/constants/index/_module.mjs";
@@ -264,6 +265,7 @@ async function quickSaveContent(choices, namespace, name, suffix = "") {
   for (const pageName of pageNames) {
     obj[toCamelCase(pageName)] = await fetchWikiPageHTML(
       `${namespace}:${pageName}${suffix}`,
+      { noSubs: true, cleanSpans: true },
     );
   }
   await saveObject(obj, relPath(`index/content/${name}`));
@@ -274,6 +276,7 @@ const createCustomContent = async () => {
   await quickSaveContent(tradecrafts, "Tradecraft", "tradecrafts");
   await quickSaveContent(damageTypes, "Damage", "damage-types");
   await quickSaveContent(drainTypes, "Drain", "drain-types");
+  await quickSaveContent(keywords, "Keyword", "keywords");
   await quickSaveContent(
     weaponFightingStyles,
     "Property",

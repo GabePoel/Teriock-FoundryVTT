@@ -1,6 +1,8 @@
 import { buildMessage } from "./messages-builder/message-builder.mjs";
 import { getIcon } from "./path.mjs";
 
+const { TextEditor } = foundry.applications.ux;
+
 /**
  * A helper method for constructing an HTML button based on given parameters.
  *
@@ -134,7 +136,7 @@ export function makeDamageTypeButtons(roll) {
     financial: ["hollied", "terrored"],
   };
   const buttons = [];
-  let statuses = new Set();
+  const statuses = new Set();
   for (const term of roll.terms) {
     for (const type of Object.keys(damage)) {
       if (term.flavor.includes(type)) {
@@ -155,6 +157,50 @@ export function makeDamageTypeButtons(roll) {
     });
   }
   return buttons;
+}
+
+/**
+ * Make text for damage and drain types done by some roll.
+ * @param roll
+ * @returns {Promise<string>}
+ */
+export async function makeDamageDrainTypeMessage(roll) {
+  const damageTypes = new Set();
+  const drainTypes = new Set();
+  for (const term of roll.terms) {
+    for (const type of Object.keys(CONFIG.TERIOCK.index.damageTypes)) {
+      if (term.flavor.includes(type)) {
+        damageTypes.add(type);
+      }
+    }
+    for (const type of Object.keys(CONFIG.TERIOCK.index.drainTypes)) {
+      if (term.flavor.includes(type)) {
+        drainTypes.add(type);
+      }
+    }
+  }
+  if (damageTypes.has("lethal")) drainTypes.delete("lethal");
+  const blocks = [];
+  for (const damageType of damageTypes) {
+    blocks.push({
+      title: CONFIG.TERIOCK.index.damageTypes[damageType] + " Damage",
+      text: CONFIG.TERIOCK.content.damageTypes[damageType],
+      italic: true,
+    });
+  }
+  for (const drainType of drainTypes) {
+    blocks.push({
+      title: CONFIG.TERIOCK.index.drainTypes[drainType] + " Drain",
+      text: CONFIG.TERIOCK.content.drainTypes[drainType],
+      italic: true,
+    });
+  }
+  const messageParts = {
+    blocks: blocks,
+  };
+  const content = buildMessage(messageParts);
+  const messageRaw = `<div class="teriock">${content.outerHTML}</div>`;
+  return await TextEditor.enrichHTML(messageRaw);
 }
 
 /**
@@ -208,9 +254,9 @@ export function tidyHTML(html) {
 /**
  * Get the message for a tradecraft.
  * @param {Teriock.Parameters.Fluency.Tradecraft} tradecraft
- * @returns {string}
+ * @returns {Promise<string>}
  */
-export function tradecraftMessage(tradecraft) {
+export async function tradecraftMessage(tradecraft) {
   let field;
   for (const [key, value] of Object.entries(
     CONFIG.TERIOCK.options.tradecraft,
@@ -239,15 +285,16 @@ export function tradecraftMessage(tradecraft) {
   const message = document.createElement("div");
   message.append(messageContent);
   message.classList.add("teriock");
-  return message.innerHTML;
+
+  return await TextEditor.enrichHTML(message.innerHTML);
 }
 
 /**
  * Get the message for a class.
  * @param {Teriock.Parameters.Rank.RankClass} className
- * @returns {string}
+ * @returns {Promise<string>}
  */
-export function classMessage(className) {
+export async function classMessage(className) {
   let archetype;
   for (const [key, value] of Object.entries(CONFIG.TERIOCK.options.rank)) {
     if (Object.keys(value.classes).includes(className)) {
@@ -274,5 +321,5 @@ export function classMessage(className) {
   const message = document.createElement("div");
   message.append(messageContent);
   message.classList.add("teriock");
-  return message.innerHTML;
+  return await TextEditor.enrichHTML(message.innerHTML);
 }

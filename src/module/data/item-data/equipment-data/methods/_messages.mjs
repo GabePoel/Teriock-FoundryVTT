@@ -87,7 +87,6 @@ export function _messageParts(equipmentData) {
         CONFIG.TERIOCK.index.weaponFightingStyles[equipmentData.sb] +
         " Fighting Style",
       text: equipmentData.specialRules,
-      italic: true,
     });
   }
   addPropertiesBlock(

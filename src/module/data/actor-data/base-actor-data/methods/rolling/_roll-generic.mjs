@@ -50,10 +50,7 @@ export async function _rollFeatSave(actorData, attribute, options = {}) {
  */
 export async function _rollResistance(actorData, options = {}) {
   const actor = actorData.parent;
-  let message = null;
-  if (options.message) {
-    message = options.message;
-  }
+  console.log(options.message);
   let rollFormula = "1d20";
   if (options.advantage && !options.disadvantage) {
     rollFormula = "2d20kh1";
@@ -62,16 +59,20 @@ export async function _rollResistance(actorData, options = {}) {
   }
   rollFormula += " + @p";
   const roll = new TeriockRoll(rollFormula, actor.getRollData(), {
-    message: message,
+    flavor: "Resistance Save",
     context: {
       isResistance: true,
       diceClass: "resist",
       threshold: 10,
     },
   });
-  await roll.toMessage({
-    speaker: ChatMessage.getSpeaker({ actor: actor }),
-    flavor: "Resistance Save",
+  await roll.evaluate();
+  TeriockChatMessage.create({
+    speaker: TeriockChatMessage.getSpeaker({ actor: actor }),
+    rolls: [roll],
+    system: {
+      extraContent: options.message,
+    },
   });
 }
 
@@ -81,16 +82,15 @@ export async function _rollResistance(actorData, options = {}) {
  * Relevant wiki pages:
  * - [Immunity](https://wiki.teriock.com/index.php/Keyword:Immunity)
  *
- * @param {TeriockBaseActorData} _actorData
+ * @param {TeriockBaseActorData} actorData
  * @param {Teriock.RollOptions.CommonRoll} [_options] - Options for the roll.
  * @private
  */
-export async function _rollImmunity(_actorData, _options = {}) {
-  await ChatMessage.create({
+export async function _rollImmunity(actorData, _options = {}) {
+  await TeriockChatMessage.create({
+    speaker: TeriockChatMessage.getSpeaker({ actor: actorData.parent }),
     title: "Immune",
-    flavor: "Immune",
-    // content: _options.message || "No effect.",
-    content: "No effect.",
+    content: _options.message || "No effect.",
   });
 }
 
@@ -129,7 +129,7 @@ export async function _rollTradecraft(actorData, tradecraft, options = {}) {
     speaker: TeriockChatMessage.getSpeaker({ actor: actorData.parent }),
     rolls: [roll],
     system: {
-      extraContent: tradecraftMessage(tradecraft),
+      extraContent: await tradecraftMessage(tradecraft),
     },
   });
 }
