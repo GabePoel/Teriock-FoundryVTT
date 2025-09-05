@@ -272,12 +272,12 @@ async function quickSaveContent(choices, namespace, name, suffix = "") {
 const createCustomContent = async () => {
   await quickSaveContent(classes, "Class", "classes", "/Description");
   await quickSaveContent(tradecrafts, "Tradecraft", "tradecrafts");
-  await quickSaveContent(damageTypes, "Damage", "damageTypes");
-  await quickSaveContent(drainTypes, "Drain", "drainTypes");
+  await quickSaveContent(damageTypes, "Damage", "damage-types");
+  await quickSaveContent(drainTypes, "Drain", "drain-types");
   await quickSaveContent(
     weaponFightingStyles,
     "Property",
-    "weaponFightingStyles",
+    "weapon-fighting-styles",
     " Fighting Style",
   );
 };
