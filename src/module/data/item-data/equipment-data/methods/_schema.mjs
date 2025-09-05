@@ -115,11 +115,6 @@ export function _defineSchema() {
       label: "Block Value",
       min: 0,
     }),
-    specialRules: new TextField({
-      hint: "The conditions under which style bonus is granted.",
-      initial: "",
-      label: "Special Rules",
-    }),
     equipmentType: new fields.StringField({
       initial: "Equipment Type",
       label: "Equipment Type",

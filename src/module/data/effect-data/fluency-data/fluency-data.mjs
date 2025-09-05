@@ -73,7 +73,7 @@ export default class TeriockFluencyData extends WikiDataMixin(
   }
 
   /** @inheritDoc */
-  _preCreate(data, options, user) {
+  async _preCreate(data, options, user) {
     if (!foundry.utils.hasProperty(data, "img")) {
       this.parent.updateSource({
         img: getIcon("tradecrafts", "Artist"),
@@ -82,22 +82,22 @@ export default class TeriockFluencyData extends WikiDataMixin(
   }
 
   /** @inheritDoc */
-  _preUpdate(data, options, user) {
-    super._preUpdate(data, options, user);
+  async _preUpdate(changes, options, user) {
+    if ((await super._preUpdate(changes, options, user)) === false)
+      return false;
     if (
       Object.values(iconManifest.tradecrafts).includes(this.parent.img) &&
-      !foundry.utils.hasProperty(data, "img")
+      !foundry.utils.hasProperty(changes, "img")
     ) {
       let tradecraft = this.tradecraft;
-      if (foundry.utils.hasProperty(data, "system.tradecraft")) {
-        tradecraft = foundry.utils.getProperty(data, "system.tradecraft");
+      if (foundry.utils.hasProperty(changes, "system.tradecraft")) {
+        tradecraft = foundry.utils.getProperty(changes, "system.tradecraft");
       }
-      this.parent.updateSource({
-        img: getIcon(
-          "tradecrafts",
-          CONFIG.TERIOCK.index.tradecrafts[tradecraft],
-        ),
-      });
+      foundry.utils.setProperty(
+        changes,
+        "img",
+        getIcon("tradecrafts", CONFIG.TERIOCK.index.tradecrafts[tradecraft]),
+      );
     }
   }
 

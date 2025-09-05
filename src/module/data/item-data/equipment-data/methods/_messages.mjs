@@ -77,14 +77,19 @@ export function _messageParts(equipmentData) {
       text: src.notes,
     },
     {
-      title: "Equipment type rules",
-      text: src.specialRules,
-    },
-    {
       title: "Flaws",
       text: src.flaws,
     },
   ];
+  if (equipmentData.sb && equipmentData.sb.length > 0) {
+    blocks.push({
+      title:
+        CONFIG.TERIOCK.index.weaponFightingStyles[equipmentData.sb] +
+        " Fighting Style",
+      text: equipmentData.specialRules,
+      italic: true,
+    });
+  }
   addPropertiesBlock(
     equipmentData.parent.transferredEffects.filter((e) => !e.sup),
     blocks,

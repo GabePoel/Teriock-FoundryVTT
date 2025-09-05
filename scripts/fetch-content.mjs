@@ -116,17 +116,18 @@ const fetchContent = async (map, namespace, staticId, statuses, type) => {
   return results;
 };
 
+/**
+ * @typedef {object} ContentDataset
+ * @property {Record<string,string>} data
+ * @property {string} namespace
+ * @property {string} exportName
+ * @property {boolean} staticId
+ * @property {boolean} statuses
+ * @property {string|null} type
+ */
+
 const run = async () => {
   try {
-    /**
-     * @typedef {object} ContentDataset
-     * @property {Record<string,string>} data
-     * @property {string} namespace
-     * @property {string} exportName
-     * @property {boolean} staticId
-     * @property {boolean} statuses
-     * @property {string|null} type
-     */
     const datasets = /** @type {ContentDataset[]} */ [
       {
         data: conditions,

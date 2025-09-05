@@ -73,11 +73,7 @@ async function processSubEffects(subs, doc, config) {
         updateData["system.gifted.enabled"] = true;
         updateData["system.gifted.amount"] = 1;
       }
-      try {
-        await subEffect.update(updateData);
-      } catch {
-        await subEffect.delete();
-      }
+      await subEffect.update(updateData);
     }
   }
 }

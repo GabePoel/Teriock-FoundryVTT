@@ -17,10 +17,6 @@ export default function registerDocumentManagementHooks() {
             });
           }
         }
-        // if (document.type === "species") {
-        //
-        //   const size = foundry.utils.getProperty(updateData, "system.size.value") || document.s
-        // }
         for (const ability of document.abilities) {
           await ability.system.expireSustainedConsequences();
         }

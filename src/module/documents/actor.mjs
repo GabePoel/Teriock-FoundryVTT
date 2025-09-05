@@ -185,7 +185,8 @@ export default class TeriockActor extends ParentDocumentMixin(
    * @returns {Promise<boolean|void>}
    */
   async _preUpdate(changed, options, user) {
-    super._preUpdate(changed, options, user);
+    if ((await super._preUpdate(changed, options, user)) === false)
+      return false;
     if (foundry.utils.hasProperty(changed, "system.size")) {
       const tokenSize =
         CONFIG.TERIOCK.options.character.tokenSizes[

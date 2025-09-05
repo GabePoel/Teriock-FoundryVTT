@@ -1,3 +1,6 @@
+import { buildMessage } from "./messages-builder/message-builder.mjs";
+import { getIcon } from "./path.mjs";
+
 /**
  * A helper method for constructing an HTML button based on given parameters.
  *
@@ -200,4 +203,76 @@ export function unspanHTML(html) {
  */
 export function tidyHTML(html) {
   return trimTrailingLinesHTML(unspanHTML(html));
+}
+
+/**
+ * Get the message for a tradecraft.
+ * @param {Teriock.Parameters.Fluency.Tradecraft} tradecraft
+ * @returns {string}
+ */
+export function tradecraftMessage(tradecraft) {
+  let field;
+  for (const [key, value] of Object.entries(
+    CONFIG.TERIOCK.options.tradecraft,
+  )) {
+    if (Object.keys(value.tradecrafts).includes(tradecraft)) {
+      field = key;
+    }
+  }
+  const messageContent = buildMessage({
+    image: getIcon("tradecrafts", CONFIG.TERIOCK.index.tradecrafts[tradecraft]),
+    name: CONFIG.TERIOCK.index.tradecrafts[tradecraft],
+    bars: [
+      {
+        icon: "fa-" + CONFIG.TERIOCK.options.tradecraft[field].icon,
+        label: "Field",
+        wrappers: [CONFIG.TERIOCK.options.tradecraft[field].name],
+      },
+    ],
+    blocks: [
+      {
+        title: "Description",
+        text: CONFIG.TERIOCK.content.tradecrafts[tradecraft],
+      },
+    ],
+  });
+  const message = document.createElement("div");
+  message.append(messageContent);
+  message.classList.add("teriock");
+  return message.innerHTML;
+}
+
+/**
+ * Get the message for a class.
+ * @param {Teriock.Parameters.Rank.RankClass} className
+ * @returns {string}
+ */
+export function classMessage(className) {
+  let archetype;
+  for (const [key, value] of Object.entries(CONFIG.TERIOCK.options.rank)) {
+    if (Object.keys(value.classes).includes(className)) {
+      archetype = key;
+    }
+  }
+  const messageContent = buildMessage({
+    image: getIcon("classes", CONFIG.TERIOCK.index.classes[className]),
+    name: CONFIG.TERIOCK.index.classes[className],
+    bars: [
+      {
+        icon: "fa-" + CONFIG.TERIOCK.options.rank[archetype].icon,
+        label: "Archetype",
+        wrappers: [CONFIG.TERIOCK.options.rank[archetype].name],
+      },
+    ],
+    blocks: [
+      {
+        title: "Description",
+        text: CONFIG.TERIOCK.content.classes[className],
+      },
+    ],
+  });
+  const message = document.createElement("div");
+  message.append(messageContent);
+  message.classList.add("teriock");
+  return message.innerHTML;
 }

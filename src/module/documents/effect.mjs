@@ -357,8 +357,9 @@ export default class TeriockEffect extends ChildDocumentMixin(
   }
 
   /** @inheritDoc */
-  async _preUpdate(changes, options, user) {
-    await super._preUpdate(changes, options, user);
+  async _preUpdate(changed, options, user) {
+    if ((await super._preUpdate(changed, options, user)) === false)
+      return false;
     if (
       this.parent.type === "wrapper" &&
       this.parent.system.effect.id === this.id
@@ -367,15 +368,13 @@ export default class TeriockEffect extends ChildDocumentMixin(
       const wrapperUpdates = {};
       for (const key of wrapperKeys) {
         if (
-          foundry.utils.hasProperty(changes, key) &&
-          foundry.utils.getProperty(changes, key) !==
+          foundry.utils.hasProperty(changed, key) &&
+          foundry.utils.getProperty(changed, key) !==
             foundry.utils.getProperty(this.parent, key)
         ) {
-          wrapperUpdates[key] = foundry.utils.getProperty(changes, key);
+          wrapperUpdates[key] = foundry.utils.getProperty(changed, key);
         }
       }
-      console.log(wrapperUpdates);
-      console.log(changes);
       if (Object.keys(wrapperUpdates).length > 0) {
         await this.parent.update(wrapperUpdates);
       }

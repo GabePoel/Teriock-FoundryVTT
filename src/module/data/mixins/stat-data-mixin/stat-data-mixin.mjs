@@ -161,7 +161,8 @@ export default (Base) => {
 
       /** @inheritDoc */
       async _preUpdate(changes, options, user) {
-        await super._preUpdate(changes, options, user);
+        if ((await super._preUpdate(changes, options, user)) === false)
+          return false;
         for (const stat of Object.keys(dieOptions.stats)) {
           if (foundry.utils.getProperty(changes, `system.${stat}DiceBase`)) {
             const number =
@@ -174,36 +175,44 @@ export default (Base) => {
                 changes,
                 `system.${stat}DiceBase.faces`,
               ) || this[`${stat}DiceBase`].faces;
-            // this.setDice(stat, number, faces);
+            this._setDice(changes, stat, number, faces);
           }
         }
       }
 
       /** @inheritDoc */
-      _setDice(stat, number, faces) {
+      _setDice(changeData, stat, number, faces) {
         const currentQuantity = Object.keys(this[`${stat}Dice`]).length;
         const keys = Object.keys(this[`${stat}Dice`]);
-        const updateData = {};
         for (let i = 0; i < Math.max(number, currentQuantity); i++) {
           if (i < currentQuantity && i < number) {
-            updateData[`system.${stat}Dice.${keys[i]}.faces`] = faces;
-            updateData[`system.${stat}Dice.${keys[i]}.value`] = Math.ceil(
-              (faces + 1) / 2,
+            foundry.utils.setProperty(
+              changeData,
+              `system.${stat}Dice.${keys[i]}.faces`,
+              faces,
+            );
+            foundry.utils.setProperty(
+              changeData,
+              `system.${stat}Dice.${keys[i]}.value`,
+              Math.ceil((faces + 1) / 2),
             );
           } else if (i < currentQuantity && i >= number) {
-            updateData[`system.${stat}Dice.-=${keys[i]}`] = null;
+            foundry.utils.setProperty(
+              changeData,
+              `system.${stat}Dice.-=${keys[i]}`,
+              null,
+            );
           } else if (i >= currentQuantity && i < number) {
             const id = foundry.utils.randomID();
-            updateData[`system.${stat}Dice.${id}`] = {
+            foundry.utils.setProperty(changeData, `system.${stat}Dice.${id}`, {
               _id: id,
               stat: stat,
               faces: faces,
               spent: false,
               value: Math.ceil((faces + 1) / 2),
-            };
+            });
           }
         }
-        this.parent.updateSource(updateData);
       }
 
       /** @inheritDoc */

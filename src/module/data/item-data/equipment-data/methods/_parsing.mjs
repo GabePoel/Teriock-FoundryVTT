@@ -34,7 +34,6 @@ export async function _parse(equipmentData, rawHTML) {
   const getText = (s) => q(s)?.textContent.trim();
   const getTextAll = (s) =>
     Array.from(doc.querySelectorAll(s), (el) => el.textContent.trim());
-  const getHTML = (s) => q(s)?.innerHTML.trim();
 
   const referenceEquipment = new Item({
     name: "Reference Equipment",
@@ -73,10 +72,6 @@ export async function _parse(equipmentData, rawHTML) {
   parameters.sb = toCamelCase(getValue(".sb") || "") ?? parameters.sb;
   parameters.av = cleanValue(getValue(".av")) || 0;
   parameters.bv = cleanValue(getValue(".bv")) || 0;
-
-  // Special rules
-  parameters.specialRules =
-    getHTML(".special-rules") ?? parameters.specialRules;
 
   // Sort and filter properties and equipment classes
   parameters.equipmentClasses = new Set(

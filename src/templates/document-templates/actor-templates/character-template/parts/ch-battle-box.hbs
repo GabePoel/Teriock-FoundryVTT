@@ -149,8 +149,11 @@
       </div>
 
       {{#if (exists system.wielding.attacker.derived.system.specialRules)}}
-        <div class="tsubtle little-title" style="margin-top: 0.5em;">Special
-          rules
+        <div class="tsubtle little-title" style="margin-top: 0.5em;">
+          {{path
+            config.index.weaponFightingStyles
+            system.wielding.attacker.derived.system.sb
+          }} Fighting Style
         </div>
         <div>
           {{editor enrichedSpecialRules button=false editable=false}}

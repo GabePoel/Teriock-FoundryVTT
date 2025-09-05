@@ -54,4 +54,14 @@ export default function registerStringHelpers() {
     }
     return out;
   });
+
+  Handlebars.registerHelper("escapeAttr", function (html) {
+    if (html == null) return "";
+    return new Handlebars.SafeString(
+      String(html)
+        .replace(/&/g, "&amp;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;"),
+    );
+  });
 }

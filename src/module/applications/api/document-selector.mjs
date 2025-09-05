@@ -18,7 +18,6 @@ export default class TeriockDocumentSelector extends HandlebarsApplicationMixin(
 
     this._resolve = null;
     this._result = new Promise((resolve) => (this._resolve = resolve));
-    console.log(this);
   }
 
   static DEFAULT_OPTIONS = {
@@ -124,7 +123,6 @@ export default class TeriockDocumentSelector extends HandlebarsApplicationMixin(
       hint: this.hint,
       tooltip: this.tooltip,
     });
-    console.log(context);
     return context;
   }
 

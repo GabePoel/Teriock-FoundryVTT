@@ -93,11 +93,13 @@ export interface StatDataMixinInterface {
 
   /**
    * Set the stat dice.
+   * @param changeData - Data to mutate.
    * @param stat - The stat type (hp or mp)
    * @param number - Number of dice
    * @param faces - Number of faces on each die
    */
   _setDice(
+    changeData: object,
     stat: Teriock.Parameters.Shared.DieStat,
     number: number,
     faces: Teriock.RollOptions.PolyhedralDieFaces,

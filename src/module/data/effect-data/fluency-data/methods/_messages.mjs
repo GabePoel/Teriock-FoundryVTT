@@ -24,6 +24,11 @@ export function _messageParts(fluencyData) {
       title: "Description",
       text: src.description,
     },
+    {
+      title: CONFIG.TERIOCK.index.tradecrafts[fluencyData.tradecraft],
+      text: CONFIG.TERIOCK.content.tradecrafts[fluencyData.tradecraft],
+      italic: true,
+    },
   ];
   return {
     bars: bars,

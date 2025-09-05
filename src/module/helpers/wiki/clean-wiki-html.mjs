@@ -18,6 +18,12 @@ export default async function cleanWikiHTML(html) {
   const container = doc.querySelector(".mw-parser-output");
   if (!container) return "";
 
+  doc.querySelectorAll("img").forEach((img) => img.remove());
+  doc
+    .querySelectorAll("figcaption")
+    .forEach((figCaption) => figCaption.remove());
+  doc.querySelectorAll("figure").forEach((figure) => figure.remove());
+
   const removeComments = (node) => {
     for (let child of Array.from(node.childNodes)) {
       if (child.nodeType === 8) {

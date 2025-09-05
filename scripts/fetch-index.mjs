@@ -1,10 +1,18 @@
 import { writeFile } from "fs/promises";
 import path from "path";
 import { fileURLToPath } from "url";
+import {
+  classes,
+  damageTypes,
+  drainTypes,
+  tradecrafts,
+  weaponFightingStyles,
+} from "../src/module/constants/index/_module.mjs";
 import { toCamelCase, toKebabCase } from "../src/module/helpers/string.mjs";
 import {
   fetchCategoryMembers,
   fetchPageCategories,
+  fetchWikiPageHTML,
 } from "../src/module/helpers/wiki/_module.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -40,6 +48,14 @@ export async function saveObject(obj, path) {
  */
 function quickPath(name) {
   return path.resolve(__dirname, "../src/index/names/" + name + ".json");
+}
+
+/**
+ * @param {string} name
+ * @returns {string}
+ */
+function relPath(name) {
+  return path.resolve(__dirname, "../src/" + name + ".json");
 }
 
 /**
@@ -225,5 +241,37 @@ const createCustomNames = async () => {
   });
 };
 
+/**
+ * @param {Record<string, string>} choices
+ * @param {string} namespace
+ * @param {string} name
+ * @param {string} [suffix]
+ * @returns {Promise<void>}
+ */
+async function quickSaveContent(choices, namespace, name, suffix = "") {
+  const pageNames = Object.values(choices);
+  const obj = {};
+  for (const pageName of pageNames) {
+    obj[toCamelCase(pageName)] = await fetchWikiPageHTML(
+      `${namespace}:${pageName}${suffix}`,
+    );
+  }
+  await saveObject(obj, relPath(`index/content/${name}`));
+}
+
+const createCustomContent = async () => {
+  await quickSaveContent(classes, "Class", "classes", "/Description");
+  await quickSaveContent(tradecrafts, "Tradecraft", "tradecrafts");
+  await quickSaveContent(damageTypes, "Damage", "damageTypes");
+  await quickSaveContent(drainTypes, "Drain", "drainTypes");
+  await quickSaveContent(
+    weaponFightingStyles,
+    "Property",
+    "weaponFightingStyles",
+    " Fighting Style",
+  );
+};
+
+await createCustomContent();
 await createCustomNames();
 await createSimpleCategoriesAndNames();

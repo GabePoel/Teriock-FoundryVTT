@@ -113,7 +113,8 @@ export default class TeriockSpeciesData extends StatDataMixin(
 
   /** @inheritDoc */
   async _preUpdate(changes, options, user) {
-    await super._preUpdate(changes, options, user);
+    if ((await super._preUpdate(changes, options, user)) === false)
+      return false;
     const size =
       foundry.utils.getProperty(changes, "system.size.value") ||
       this.size.value;
@@ -185,7 +186,7 @@ export default class TeriockSpeciesData extends StatDataMixin(
         const sizeDelta = size - minSize;
         const numSteps = Math.floor(sizeDelta / sizeStep);
         if (numSteps && numSteps > 0) number += numSteps;
-        // await this.setDice(stat, number, faces);
+        this._setDice(changes, stat, number, faces);
       }
     }
   }

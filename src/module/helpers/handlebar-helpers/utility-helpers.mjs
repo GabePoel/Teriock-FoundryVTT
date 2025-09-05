@@ -1,12 +1,4 @@
 export default function registerUiHelpers() {
-  Handlebars.registerHelper("log", (...args) => {
-    const options = args.pop();
-    if (options) {
-      console.log(...args);
-    }
-    return "";
-  });
-
   Handlebars.registerHelper("tabActive", (active, tab) =>
     active === tab ? "active" : "inactive",
   );
@@ -144,7 +136,7 @@ export default function registerUiHelpers() {
       const sizeValue = get(sizePath);
       const ascendingValue = get(ascendingPath);
 
-      const sizeOptions = context.config?.displayOptions?.sizes ?? {};
+      const sizeOptions = CONFIG.TERIOCK.options.display.sizes ?? {};
       const sortSelectHTML =
         selectOptions(sortOptions, {
           hash: { selected: sortValue },

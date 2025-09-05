@@ -1,4 +1,6 @@
 import { TeriockRoll } from "../../../../../dice/_module.mjs";
+import { TeriockChatMessage } from "../../../../../documents/_module.mjs";
+import { tradecraftMessage } from "../../../../../helpers/html.mjs";
 
 /**
  * Rolls a feat save for the specified attribute.
@@ -121,9 +123,16 @@ export async function _rollTradecraft(actorData, tradecraft, options = {}) {
   if (typeof options.threshold === "number") {
     context.threshold = options.threshold;
   }
-  const roll = new TeriockRoll(rollFormula, actor.getRollData(), { context });
-  await roll.toMessage({
-    speaker: ChatMessage.getSpeaker({ actor: actor }),
-    flavor: `${tradecraft.charAt(0).toUpperCase() + tradecraft.slice(1)} Check`,
+  const roll = new TeriockRoll(rollFormula, actor.getRollData(), {
+    flavor: `${CONFIG.TERIOCK.index.tradecrafts[tradecraft]} Check`,
+    context,
+  });
+  await roll.evaluate();
+  TeriockChatMessage.create({
+    speaker: TeriockChatMessage.getSpeaker({ actor: actorData.parent }),
+    rolls: [roll],
+    system: {
+      extraContent: tradecraftMessage(tradecraft),
+    },
   });
 }

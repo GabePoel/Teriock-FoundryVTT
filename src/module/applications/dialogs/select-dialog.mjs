@@ -1,4 +1,5 @@
 import { getAbility, getItem, getProperty } from "../../helpers/fetch.mjs";
+import { classMessage, tradecraftMessage } from "../../helpers/html.mjs";
 import { getIcon } from "../../helpers/path.mjs";
 import { toCamelCase } from "../../helpers/string.mjs";
 import { TeriockDialog } from "../api/_module.mjs";
@@ -150,11 +151,13 @@ export async function selectTradecraftDialog() {
       name: CONFIG.TERIOCK.index.tradecrafts[tc],
       uuid: tc,
       img: getIcon("tradecrafts", CONFIG.TERIOCK.index.tradecrafts[tc]),
+      tooltip: tradecraftMessage(tc),
     };
   });
   const chosen = await selectDocumentDialog(choices, {
     hint: "Please select a tradecraft.",
     title: "Select Tradecraft",
+    tooltipKey: "tooltip",
   });
   return chosen.uuid;
 }
@@ -207,11 +210,13 @@ export async function selectClassDialog() {
       name: CONFIG.TERIOCK.index.classes[c],
       uuid: c,
       img: getIcon("classes", CONFIG.TERIOCK.index.classes[c]),
+      tooltip: classMessage(c),
     };
   });
   const chosen = await selectDocumentDialog(choices, {
     hint: "Please select a class.",
     title: "Select Class",
+    tooltipKey: "tooltip",
   });
   return chosen.uuid;
 }

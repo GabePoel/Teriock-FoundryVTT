@@ -22,4 +22,8 @@ export function _prepareDerivedData(equipmentData) {
   if (equipmentData.baseBv === 0) {
     equipmentData.baseBv = 0;
   }
+  if (equipmentData.sb && equipmentData.sb.length > 0) {
+    equipmentData.specialRules =
+      CONFIG.TERIOCK.content.weaponFightingStyles[equipmentData.sb];
+  }
 }

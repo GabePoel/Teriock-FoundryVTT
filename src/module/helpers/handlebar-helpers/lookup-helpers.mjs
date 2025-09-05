@@ -1,3 +1,5 @@
+import { tradecraftMessage } from "../html.mjs";
+
 export default function registerLookupHelpers() {
   Handlebars.registerHelper(
     "className",
@@ -43,5 +45,9 @@ export default function registerLookupHelpers() {
     const segments = pathSegments.slice(0, -1);
     const fullPath = segments.join(".");
     return foundry.utils.getProperty(obj, fullPath);
+  });
+
+  Handlebars.registerHelper("tradecraftMessage", function (tradecraft) {
+    return new Handlebars.SafeString(tradecraftMessage(tradecraft));
   });
 }

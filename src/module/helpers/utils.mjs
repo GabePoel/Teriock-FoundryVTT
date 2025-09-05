@@ -223,7 +223,7 @@ export function tokenName(token) {
 /**
  * Get the token for a {@link TeriockActor}.
  * @param {TeriockActor} actor
- * @returns {TeriockTokenDocument|null}
+ * @returns {TeriockToken|null}
  */
 export function actorToken(actor) {
   return (

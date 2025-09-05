@@ -1,8 +1,6 @@
-import { imageContextMenuOptions } from "../../../applications/shared/_module.mjs";
+import { bindCommonActions } from "../../../applications/shared/_module.mjs";
 import { buildHTMLButton } from "../../../helpers/html.mjs";
-import { handlers } from "../../../helpers/interaction/_module.mjs";
 
-const { ux } = foundry.applications;
 const { fields } = foundry.data;
 const { TypeDataModel } = foundry.abstract;
 
@@ -159,50 +157,6 @@ export default class TeriockBaseMessageData extends TypeDataModel {
   }
 
   /**
-   * Add event listeners. Guaranteed to run after all alterations in {@link alterMessageHTML}.
-   * @param {HTMLLIElement} html The pending HTML
-   */
-  addListeners(html) {
-    new ux.ContextMenu(html, ".timage", imageContextMenuOptions, {
-      eventName: "contextmenu",
-      jQuery: false,
-      fixed: true,
-    });
-
-    const actionElements = html.querySelectorAll("[data-action]");
-    for (const /** @type {HTMLElement} */ element of actionElements) {
-      const action = element.dataset.action;
-
-      const HandlerClass = Object.values(handlers).find(
-        (cls) => cls.ACTION === action,
-      );
-
-      if (!HandlerClass) {
-        continue;
-      }
-
-      element.addEventListener("click", async (event) => {
-        // noinspection JSValidateTypes
-        const handler = /** @type {ActionHandler} */ new HandlerClass(
-          event,
-          element,
-        );
-        await handler.primaryAction();
-      });
-
-      element.addEventListener("contextmenu", async (event) => {
-        event.preventDefault();
-        // noinspection JSValidateTypes
-        const handler = /** @type {ActionHandler} */ new HandlerClass(
-          event,
-          element,
-        );
-        await handler.secondaryAction();
-      });
-    }
-  }
-
-  /**
    * Perform subtype-specific alterations to the final chat message html
    * @param {HTMLLIElement} html The pending HTML
    */
@@ -234,6 +188,6 @@ export default class TeriockBaseMessageData extends TypeDataModel {
       html.style.position = "relative";
     }
 
-    this.addListeners(html);
+    bindCommonActions(html);
   }
 }

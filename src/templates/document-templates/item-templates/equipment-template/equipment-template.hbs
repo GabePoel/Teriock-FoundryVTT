@@ -29,19 +29,23 @@
         hidden=(not (exists system.notes))
       }}
       {{formGroup
-        systemFields.specialRules
-        value=system.specialRules
-        enriched=enriched.specialRules
-        disabled=(not editable)
-        hidden=(not (exists system.specialRules))
-      }}
-      {{formGroup
         systemFields.flaws
         value=system.flaws
         enriched=enriched.flaws
         disabled=(not editable)
         hidden=(not (exists system.flaws))
       }}
+      {{#if (exists system.sb)}}
+        <div class="ab-section-container">
+          <div class="ab-section">
+            <span class="ab-section-title ab-section-title-dynamic">{{path config.index.weaponFightingStyles system.sb}}
+              Fighting Style</span>
+          </div>
+          <div class="ab-improvement-bar ab-fighting-style">
+            {{{system.specialRules}}}
+          </div>
+        </div>
+      {{/if}}
     </div>
     {{#if (or editable (exists properties))}}
       <div class="ab-main">
