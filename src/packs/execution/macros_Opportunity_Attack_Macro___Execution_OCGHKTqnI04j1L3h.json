@@ -7,7 +7,7 @@
   "scope": "global",
   "command": "const data = /** @type {Teriock.HookData.UseAbility} */ scope.data;\nconst options = foundry.utils.deepClone(data.rollConfig.useData.rollOptions);\nconst actor = data.rollConfig.abilityData.actor;\nconst abilities = actor.abilities\n  .filter(\n    (a) =>\n      a.system.interaction === \"attack\" &&\n      a.system.maneuver === \"active\" &&\n      a.system.executionTime === \"a1\" &&\n      [\"weapon\", \"hand\"].includes(a.system.delivery.base),\n  )\n  .sort((a, b) => a.name.localeCompare(b.name));\nconst ability = await game.teriock.api.dialogs.selectDocumentDialog(abilities, {\n  title: \"Select Ability\",\n  hint: \"Select an ability to use.\",\n});\nawait ability.system.roll(options);",
   "folder": null,
-  "sort": 0,
+  "sort": 900000,
   "ownership": {
     "default": 0,
     "qf5JYGZKzM588nE6": 3
@@ -21,7 +21,7 @@
     "systemId": "teriock",
     "systemVersion": "0.1.0",
     "createdTime": 1753599982446,
-    "modifiedTime": 1756584322058,
+    "modifiedTime": 1757058247252,
     "lastModifiedBy": "Z8sCTHO0edFF1hYo"
   },
   "_key": "!macros!OCGHKTqnI04j1L3h"

@@ -7,7 +7,7 @@
   "scope": "global",
   "command": "const toRemove = [];\nactor.consequences.map((c) => {\n  if (c.name === \"Brace Effect\") {\n    toRemove.push(c.id);\n  }\n});\nif (toRemove.length > 0) {\n  await actor.deleteEmbeddedDocuments(\"ActiveEffect\", toRemove);\n}\n\nconst dieSize = actor.system?.abilityFlags.braceDieSize || 6;\n\nconst ability = actor.abilities.find((a) => a.name === \"Brace\");\n\nlet formula = `1d${dieSize}`;\nif (ability?.isProficient) {\n  formula = `(1 + @p)d${dieSize}`;\n} else if (ability?.isFluent) {\n  formula = `(1 + @f)d${dieSize}`;\n}\n\nconst roll = new game.teriock.Roll(formula, actor.getRollData());\nawait roll.evaluate();\nawait roll.toMessage({\n  speaker: ChatMessage.getSpeaker({ actor: actor }),\n  flavor: \"Braced Temp HP\",\n  rollMode: game.settings.get(\"core\", \"rollMode\"),\n  create: true,\n});\n\nawait actor.takeSetTempHp(roll.total);",
   "folder": null,
-  "sort": 0,
+  "sort": 100000,
   "ownership": {
     "default": 0,
     "qf5JYGZKzM588nE6": 3
@@ -21,7 +21,7 @@
     "systemId": "teriock",
     "systemVersion": "0.1.0",
     "createdTime": 1753647521215,
-    "modifiedTime": 1756584113390,
+    "modifiedTime": 1757058247252,
     "lastModifiedBy": "Z8sCTHO0edFF1hYo"
   },
   "_key": "!macros!0Gb7QPmgAotusvVQ"

@@ -7,7 +7,7 @@
   "scope": "global",
   "command": "const data = /** @type {Teriock.HookData.TakeNumeric} */ scope.data;\nif (data.amount >= actor.system.hp.value + actor.system.hp.temp) {\n  const carry = data.amount - actor.system.hp.value - actor.system.hp.temp;\n  if (actor.effectKeys.consequence.has(\"treeformBallEffect\")) {\n    const treeformConsequences = actor.consequences.filter(\n      (c) => c.name === \"Treeform Ball Effect\",\n    );\n    for (const c of treeformConsequences) {\n      await c.system.expire();\n    }\n    data.amount = 0;\n    await actor.takeDamage(carry);\n  }\n}",
   "folder": null,
-  "sort": 0,
+  "sort": 1800000,
   "ownership": {
     "default": 0,
     "Z8sCTHO0edFF1hYo": 3
@@ -21,7 +21,7 @@
     "systemId": "teriock",
     "systemVersion": "0.1.0",
     "createdTime": 1756588583898,
-    "modifiedTime": 1756588586019,
+    "modifiedTime": 1757058247252,
     "lastModifiedBy": "Z8sCTHO0edFF1hYo"
   },
   "_key": "!macros!h08D6cBKJ37Rz8UD"
