@@ -115,6 +115,11 @@ await Promise.all(
               )
             ) {
               await game.teriock.api.fetch.importProperty(equipment, property);
+              if (property === "Runic") {
+                await equipment.update({
+                  "system.powerLevel": "enchanted",
+                });
+              }
             }
           }
           if (equipment.system.equipmentClasses.has("bodyParts")) {

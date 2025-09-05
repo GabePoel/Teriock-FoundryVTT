@@ -1,5 +1,5 @@
 import { createAbility } from "../../../../helpers/create-effects.mjs";
-import { getIcon } from "../../../../helpers/path.mjs";
+import { getRankIcon } from "../../../../helpers/path.mjs";
 
 /**
  * Default statistics for different archetypes.
@@ -147,7 +147,7 @@ export async function _parse(rankData, rawHTML) {
 
   return {
     system: parameters,
-    img: getIcon("property", name),
+    img: getRankIcon(rankData.className, rankData.classRank),
     name: name,
   };
 }

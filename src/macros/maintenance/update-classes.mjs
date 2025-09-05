@@ -4,85 +4,209 @@ const classFolders = classPack.folders;
 const progress = ui.notifications.info(`Pulling classes from wiki.`, {
   progress: true,
 });
-let pct = 0;
 
-for (const [a, ao] of Object.entries(CONFIG.TERIOCK.options.rank)) {
-  if (!["Mage", "Semi", "Warrior"].includes(ao.name)) {
-    continue;
+/**
+ * Processes a single rank item
+ * @param {Teriock.Parameters.Rank.RankArchetype} archetype - The archetype key
+ * @param {Teriock.Parameters.Rank.RankClass} className - The class key
+ * @param {Object} classObj - The class object
+ * @param {number} rank - The rank number
+ * @param {TeriockFolder} classFolder - The class folder object
+ * @returns {Promise<Object>} Promise that resolves with processing result
+ */
+async function processRank(archetype, className, classObj, rank, classFolder) {
+  const name = `Rank ${rank} ${classObj.name}`;
+
+  await classPack.getIndex();
+  let rankItem = classPack.index.find((e) => e.name === name);
+
+  if (rankItem) {
+    rankItem = await foundry.utils.fromUuid(rankItem.uuid);
   }
 
+  // Create new item
+  const itemData = {
+    name,
+    type: "rank",
+    folder: classFolder.id,
+    system: {
+      archetype: archetype,
+      className: className,
+      classRank: rank,
+    },
+  };
+
+  try {
+    const TeriockItem = CONFIG.Item.documentClass;
+    if (!rankItem) {
+      rankItem = /** @type {TeriockRank} */ await TeriockItem.create(itemData, {
+        pack: "teriock.classes",
+      });
+    }
+    await rankItem.system.wikiPull({
+      notify: false,
+    });
+    return { name, success: true };
+  } catch (e) {
+    console.error(`Error creating or processing '${name}':`, e);
+    return { name, success: false, error: e.message };
+  }
+}
+
+/**
+ * Processes all ranks for a single class in parallel
+ * @param {Teriock.Parameters.Rank.RankArchetype} archetype - The archetype key
+ * @param {Teriock.Parameters.Rank.RankClass} className - The class key
+ * @param {TeriockRank} classObj - The class object
+ * @param {TeriockFolder} archetypeFolder - The archetype folder object
+ * @returns {Promise<Object>} Promise that resolves with processing results
+ */
+async function processClass(archetype, className, classObj, archetypeFolder) {
+  // Find or create class folder
+  let classFolder = classFolders.getName(classObj.name);
+  if (!classFolder) {
+    try {
+      classFolder = await Folder.create(
+        {
+          name: classObj.name,
+          type: "Item",
+          folder: archetypeFolder?.id,
+        },
+        { pack: "teriock.classes" },
+      );
+    } catch (e) {
+      console.error(`Failed to create class folder '${classObj.name}':`, e);
+      return { className: classObj.name, success: false, error: e.message };
+    }
+  }
+
+  // Create promises for all ranks (1-5) in parallel
+  const rankPromises = [];
+  for (let r = 1; r < 6; r++) {
+    rankPromises.push(
+      processRank(archetype, className, classObj, r, classFolder),
+    );
+  }
+
+  try {
+    const rankResults = await Promise.all(rankPromises);
+    return {
+      className: classObj.name,
+      success: true,
+      ranks: rankResults,
+    };
+  } catch (e) {
+    console.error(`Error processing ranks for class '${classObj.name}':`, e);
+    return { className: classObj.name, success: false, error: e.message };
+  }
+}
+
+/**
+ * Processes all classes for a single archetype in parallel
+ * @param {string} archetype - The archetype key
+ * @param {Object} archetypeObj - The archetype object
+ * @returns {Promise<Object>} Promise that resolves with processing results
+ */
+async function processArchetype(archetype, archetypeObj) {
   // Find or create archetype folder
-  let archetypeFolder = classFolders.getName(ao.name);
+  let archetypeFolder = classFolders.getName(archetypeObj.name);
   if (!archetypeFolder) {
     try {
       archetypeFolder = await Folder.create(
         {
-          name: ao.name,
+          name: archetypeObj.name,
           type: "Item",
         },
         { pack: "teriock.classes" },
       );
     } catch (e) {
-      console.error(`Failed to create archetype folder '${ao.name}':`, e);
+      console.error(
+        `Failed to create archetype folder '${archetypeObj.name}':`,
+        e,
+      );
+      return { archetype: archetypeObj.name, success: false, error: e.message };
     }
   }
 
-  const classes = ao.classes;
+  const classes = archetypeObj.classes;
 
-  for (const [c, co] of Object.entries(classes)) {
-    // Find or create class folder
-    let classFolder = classFolders.getName(co.name);
-    if (!classFolder) {
-      try {
-        classFolder = await Folder.create(
-          {
-            name: co.name,
-            type: "Item",
-            folder: archetypeFolder?.id,
-          },
-          { pack: "teriock.classes" },
-        );
-      } catch (e) {
-        console.error(`Failed to create class folder '${co.name}':`, e);
-      }
-    }
+  // Create promises for all classes in parallel
+  const classPromises = Object.entries(classes).map(([className, classObj]) =>
+    processClass(archetype, className, classObj, archetypeFolder),
+  );
 
-    for (let r = 1; r < 6; r++) {
-      const name = `Rank ${r} ${co.name}`;
-
-      await classPack.getIndex();
-      let rank = classPack.index.find((e) => e.name === name);
-      rank = await foundry.utils.fromUuid(rank.uuid);
-
-      // Create new item
-      const itemData = {
-        name,
-        type: "rank",
-        folder: classFolder?.id,
-        system: {
-          archetype: a,
-          className: c,
-          classRank: r,
-        },
-      };
-
-      pct += 1 / (15 * 5);
-      progress.update({ pct: pct, message: `Pulling ${name} from wiki.` });
-
-      try {
-        const TeriockItem = CONFIG.Item.documentClass;
-        if (!rank) {
-          rank = /** @type {TeriockRank} */ await TeriockItem.create(itemData, {
-            pack: "teriock.classes",
-          });
-        }
-        await rank.system.wikiPull({
-          notify: false,
-        });
-      } catch (e) {
-        console.error(`Error creating or processing '${name}':`, e);
-      }
-    }
+  try {
+    const classResults = await Promise.all(classPromises);
+    return {
+      archetype: archetypeObj.name,
+      success: true,
+      classes: classResults,
+    };
+  } catch (e) {
+    console.error(
+      `Error processing classes for archetype '${archetypeObj.name}':`,
+      e,
+    );
+    return { archetype: archetypeObj.name, success: false, error: e.message };
   }
 }
-progress.update({ pct: 1 });
+
+// Filter valid archetypes and create processing promises
+const validArchetypes = Object.entries(CONFIG.TERIOCK.options.rank).filter(
+  ([_archetype, archetypeObj]) =>
+    ["Mage", "Semi", "Warrior"].includes(archetypeObj.name),
+);
+
+progress.update({
+  pct: 0.1,
+  message: `Processing ${validArchetypes.length} archetypes in parallel...`,
+});
+
+try {
+  // Process all archetypes in parallel
+  const archetypePromises = validArchetypes.map(([archetype, archetypeObj]) =>
+    processArchetype(archetype, archetypeObj),
+  );
+
+  const results = await Promise.all(archetypePromises);
+
+  // Calculate total successful operations
+  let totalProcessed = 0;
+  const archetypeResults = [];
+
+  for (const result of results) {
+    if (result.success) {
+      const successfulRanks = result.classes
+        .flatMap((c) => c.ranks || [])
+        .filter((r) => r.success);
+      totalProcessed += successfulRanks.length;
+      archetypeResults.push({
+        archetype: result.archetype,
+        ranksProcessed: successfulRanks.length,
+      });
+    } else {
+      console.error(
+        `Failed to process archetype ${result.archetype}:`,
+        result.error,
+      );
+      archetypeResults.push({
+        archetype: result.archetype,
+        ranksProcessed: 0,
+        error: result.error,
+      });
+    }
+  }
+
+  progress.update({
+    pct: 1,
+    message: `Successfully processed ${totalProcessed} ranks across ${archetypeResults.length} archetypes.`,
+  });
+
+  console.log("Archetype processing results:", archetypeResults);
+} catch (error) {
+  progress.update({
+    pct: 1,
+    message: `Error occurred during processing: ${error.message}`,
+  });
+  console.error("Error processing classes:", error);
+}

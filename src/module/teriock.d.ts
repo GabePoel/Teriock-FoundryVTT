@@ -10,6 +10,7 @@ declare global {
   const TeriockActor: typeof import("./documents/actor.mjs").default;
   const TeriockChatMessage: typeof import("./documents/chat-message.mjs").default;
   const TeriockEffect: typeof import("./documents/effect.mjs").default;
+  const TeriockFolder: typeof import("./documents/folder.mjs").default;
   const TeriockItem: typeof import("./documents/item.mjs").default;
   const TeriockMacro: typeof import("./documents/macro.mjs").default;
   const TeriockScene: typeof import("./documents/scene.mjs").default;
