@@ -38,6 +38,10 @@ const app = {
       "resources",
       "creatures",
       "archetypes",
+      "damage-types",
+      "drain-types",
+      "effect-types",
+      "elements",
     ];
 
     console.log("🔄 Loading categories directly from files...");

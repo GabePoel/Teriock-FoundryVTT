@@ -44,10 +44,11 @@ export async function saveObject(obj, path) {
 
 /**
  * @param {string} name
+ * @param {string} [baseDir]
  * @returns {string}
  */
-function quickPath(name) {
-  return path.resolve(__dirname, "../src/index/names/" + name + ".json");
+function quickPath(name, baseDir = "names") {
+  return relPath(`index/${baseDir}/${name}`);
 }
 
 /**
@@ -65,6 +66,7 @@ function relPath(name) {
  * @property {boolean} [fullName]
  * @property {function} [processTitle]
  * @property {function} [filterTitle]
+ * @property {boolean} [buildCategories]
  */
 
 /**
@@ -115,6 +117,13 @@ async function getCategoryMembersObject(category, options) {
  */
 async function quickSaveCategoryMembers(category, name, options) {
   const obj = await getCategoryMembersObject(category, options);
+  if (options.buildCategories) {
+    const categoriesObj = {};
+    for (const val of Object.values(obj)) {
+      categoriesObj[val] = [];
+    }
+    await saveObject(categoriesObj, quickPath(name, "categories"));
+  }
   await saveObject(obj, quickPath(name));
 }
 
@@ -198,6 +207,7 @@ const createCustomNames = async () => {
     includePages: false,
     includeCategories: true,
     processTitle: (title) => title.replace(" effects", ""),
+    buildCategories: true,
   });
   await quickSaveCategoryMembers("Creatures by trait", "traits", {
     includePages: false,

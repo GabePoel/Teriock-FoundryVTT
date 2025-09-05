@@ -1,4 +1,6 @@
 import { tradecraftMessage } from "../html.mjs";
+import { getIcon } from "../path.mjs";
+import { toCamelCase } from "../string.mjs";
 
 export default function registerLookupHelpers() {
   Handlebars.registerHelper(
@@ -49,5 +51,19 @@ export default function registerLookupHelpers() {
 
   Handlebars.registerHelper("tradecraftMessage", function (tradecraft) {
     return new Handlebars.SafeString(tradecraftMessage(tradecraft));
+  });
+
+  Handlebars.registerHelper("getIconKey", (category, key) => {
+    if (
+      CONFIG.TERIOCK.index[toCamelCase(category)] &&
+      CONFIG.TERIOCK.index[toCamelCase(category)][key]
+    ) {
+      return getIcon(
+        category,
+        CONFIG.TERIOCK.index[toCamelCase(category)][key],
+      );
+    } else {
+      return getIcon("effect-types", "Resistance");
+    }
   });
 }

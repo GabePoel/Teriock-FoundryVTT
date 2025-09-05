@@ -1,4 +1,5 @@
 import { TeriockImagePreviewer } from "../../../applications/api/_module.mjs";
+import { systemPath } from "../../../helpers/path.mjs";
 import { freeze, makeIcon } from "../../../helpers/utils.mjs";
 import { TextField } from "../../shared/fields/_module.mjs";
 import CommonTypeModel from "../common-type-model/common-type-model.mjs";
@@ -170,7 +171,7 @@ export default class ChildTypeModel extends CommonTypeModel {
    */
   get secretMessageParts() {
     return {
-      image: "systems/teriock/assets/uncertainty.svg",
+      image: systemPath("icons/documents/uncertainty.svg"),
       name:
         this.parent.type.charAt(0).toUpperCase() + this.parent.type.slice(1),
       bars: [],

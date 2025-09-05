@@ -75,7 +75,7 @@ export default class TeriockBaseActorSheet extends SheetMixin(ActorSheetV2) {
       openPrimaryAttacker: this._openPrimaryAttacker,
       openPrimaryBlocker: this._openPrimaryBlocker,
       quickUse: this._quickUse,
-      resist: this._resist,
+      rollResistance: this._rollResistance,
       rollFeatSave: this._rollFeatSave,
       rollStatDie: this._rollStatDie,
       rollTradecraft: this._rollTradecraft,
@@ -296,7 +296,7 @@ export default class TeriockBaseActorSheet extends SheetMixin(ActorSheetV2) {
    * @returns {Promise<void>} Promise that resolves when resistance is rolled.
    * @static
    */
-  static async _resist(event, target) {
+  static async _rollResistance(event, target) {
     event.stopPropagation();
     let message = null;
     if (target.classList.contains("tcard-image")) {

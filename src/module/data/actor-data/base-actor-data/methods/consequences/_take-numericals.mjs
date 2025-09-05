@@ -159,20 +159,6 @@ export async function _takeSleep(actorData, amount) {
  */
 export async function _takeKill(actorData, amount) {
   if (actorData.hp.value <= amount) {
-    // const effectData = {
-    //   name: "Forced Dead",
-    //   statuses: ["dead", "down", "prone", "anosmatic", "mute"],
-    //   type: "consequence",
-    //   img: "systems/teriock/assets/conditions/dead.svg",
-    //   flags: {
-    //     core: {
-    //       overlay: true,
-    //     },
-    //   },
-    // };
-    // await actorData.parent.createEmbeddedDocuments("ActiveEffect", [
-    //   effectData,
-    // ]);
     await actorData.parent.toggleStatusEffect("dead", {
       active: true,
       overlay: true,

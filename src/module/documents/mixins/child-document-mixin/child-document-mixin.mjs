@@ -1,4 +1,5 @@
 import { buildMessage } from "../../../helpers/messages-builder/message-builder.mjs";
+import { systemPath } from "../../../helpers/path.mjs";
 
 const { ux } = foundry.applications;
 
@@ -43,7 +44,7 @@ export default (Base) => {
       async _preCreate(data, options, user) {
         if (!data.img)
           this.updateSource({
-            img: `systems/teriock/src/icons/documents/${data.type}.svg`,
+            img: systemPath(`icons/documents/${data.type}.svg`),
           });
         return super._preCreate(data, options, user);
       }

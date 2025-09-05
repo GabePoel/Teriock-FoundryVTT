@@ -82,18 +82,15 @@ export async function _rollResistance(actorData, options = {}) {
  * - [Immunity](https://wiki.teriock.com/index.php/Keyword:Immunity)
  *
  * @param {TeriockBaseActorData} _actorData
- * @param {Teriock.RollOptions.CommonRoll} [options] - Options for the roll.
+ * @param {Teriock.RollOptions.CommonRoll} [_options] - Options for the roll.
  * @private
  */
-export async function _rollImmunity(_actorData, options = {}) {
-  let message = null;
-  if (options.message) {
-    message = options.message;
-  }
+export async function _rollImmunity(_actorData, _options = {}) {
   await ChatMessage.create({
     title: "Immune",
     flavor: "Immune",
-    content: message || "No effect.",
+    // content: _options.message || "No effect.",
+    content: "No effect.",
   });
 }
 

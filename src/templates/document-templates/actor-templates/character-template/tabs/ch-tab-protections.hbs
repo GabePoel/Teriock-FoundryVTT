@@ -6,7 +6,7 @@
         <div class="tcard-container-start" style="display: none;"></div>
         {{#each system.immunities.damageTypes as |damageType|}}
           {{tcard
-            img="systems/teriock/assets/protections/damage.svg"
+            img=(getIconKey "damage-types" damageType)
             title=(ucFirst damageType)
             subtitle="Damage type"
             text="Immunity"
@@ -16,7 +16,7 @@
         {{/each}}
         {{#each system.immunities.drainTypes as |drainType|}}
           {{tcard
-            img="systems/teriock/assets/protections/drain.svg"
+            img=(getIconKey "drain-types" drainType)
             title=(ucFirst drainType)
             subtitle="Drain type"
             text="Immunity"
@@ -26,7 +26,7 @@
         {{/each}}
         {{#each system.immunities.statuses as |condition|}}
           {{tcard
-            img=(path ../config.content.conditionsData condition "img")
+            img=(getIconKey "conditions" condition)
             title=(path ../config.index.conditions condition)
             subtitle="Condition"
             text="Immunity"
@@ -36,7 +36,7 @@
         {{/each}}
         {{#each system.immunities.elements as |element|}}
           {{tcard
-            img=(concat "systems/teriock/assets/protections/element/" element ".svg")
+            img=(getIconKey "elements" element)
             title=(path ../config.options.ability.elements element)
             subtitle="Element"
             text="Immunity"
@@ -46,7 +46,7 @@
         {{/each}}
         {{#each system.immunities.effects as |effect|}}
           {{tcard
-            img="systems/teriock/assets/protections/effect.svg"
+            img=(getIconKey "effect-types" effect)
             title=(path ../config.options.ability.effects effect)
             subtitle="Effect"
             text="Immunity"
@@ -56,7 +56,7 @@
         {{/each}}
         {{#each system.immunities.powerSources as |powerSource|}}
           {{tcard
-            img=(concat "systems/teriock/assets/protections/power/" powerSource ".svg")
+            img=(getIconKey "effect-types" powerSource)
             title=(path ../config.options.ability.powerSources powerSource)
             subtitle="Power source"
             text="Immunity"
@@ -66,7 +66,7 @@
         {{/each}}
         {{#each system.immunities.other as |other|}}
           {{tcard
-            img="systems/teriock/assets/protections/other.svg"
+            img=(getIconKey "effect-types" "Immunity")
             title=other
             subtitle="Other"
             text="Immunity"
@@ -76,71 +76,71 @@
         {{/each}}
         {{#each system.resistances.damageTypes as |damageType|}}
           {{tcard
-            img="systems/teriock/assets/protections/damage.svg"
+            img=(getIconKey "damage-types" damageType)
             title=(ucFirst damageType)
             subtitle="Damage type"
             text="Resistance"
-            action="resist"
+            action="rollResistance"
             draggable=false
           }}
         {{/each}}
         {{#each system.resistances.drainTypes as |drainType|}}
           {{tcard
-            img="systems/teriock/assets/protections/drain.svg"
+            img=(getIconKey "drain-types" drainType)
             title=(ucFirst drainType)
             subtitle="Drain type"
             text="Resistance"
-            action="resist"
+            action="rollResistance"
             draggable=false
           }}
         {{/each}}
         {{#each system.resistances.statuses as |condition|}}
           {{tcard
-            img=(path ../config.content.conditionsData condition "img")
+            img=(getIconKey "conditions" condition)
             title=(path ../config.conditions condition)
             subtitle="Condition"
             text="Resistance"
-            action="resist"
+            action="rollResistance"
             draggable=false
           }}
         {{/each}}
         {{#each system.resistances.elements as |element|}}
           {{tcard
-            img=(concat "systems/teriock/assets/protections/element/" element ".svg")
+            img=(getIconKey "elements" element)
             title=(path ../config.options.ability.elements element)
             subtitle="Element"
             text="Resistance"
-            action="resist"
+            action="rollResistance"
             draggable=false
           }}
         {{/each}}
         {{#each system.resistances.effects as |effect|}}
           {{tcard
-            img="systems/teriock/assets/protections/effect.svg"
+            img=(getIconKey "effect-types" effect)
             title=(path ../config.options.ability.effects effect)
             subtitle="Effect"
             text="Resistance"
-            action="resist"
+            action="rollResistance"
             draggable=false
           }}
         {{/each}}
         {{#each system.resistances.powerSources as |powerSource|}}
           {{tcard
-            img=(concat "systems/teriock/assets/protections/power/" powerSource ".svg")
+            img=(getIconKey "effect-types" powerSource)
             title=(path ../config.options.ability.powerSources powerSource)
             subtitle="Power source"
             text="Resistance"
-            action="resist"
+            action="rollResistance"
             draggable=false
           }}
         {{/each}}
         {{#each system.resistances.other as |other|}}
           {{tcard
-            img="systems/teriock/assets/protections/other.svg"
+            img=(getIconKey "effect-types" "Resistance")
             title=other
             subtitle="Other"
             text="Resistance"
-            action="resist"
+            action="rollResistance"
             draggable=false
           }}
         {{/each}}

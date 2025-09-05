@@ -175,7 +175,7 @@ export const conditions = {
   dueling: {
     name: "Dueling",
     id: "dueling",
-    img: "systems/teriock/src/icons/conditions/dueling.webp",
+    img: "icons/magic/control/energy-stream-link-white.webp",
     _id: "dueling000000000",
     statuses: [],
     changes: [],

@@ -12,7 +12,6 @@ export async function createAbility(document, name = null, options = {}) {
   const abilityData = {
     name: "New Ability",
     type: "ability",
-    img: "systems/teriock/assets/ability.svg",
     system: {},
   };
   if (name) {
@@ -73,7 +72,6 @@ export async function createResource(document) {
     {
       name: "New Resource",
       type: "resource",
-      img: "systems/teriock/assets/resource.svg",
     },
     { parent: document },
   );
@@ -96,7 +94,6 @@ export async function createProperty(document, name = null) {
   const propertyData = {
     name: "New Property",
     type: "property",
-    img: "systems/teriock/assets/property.svg",
     system: {},
   };
   if (name) {
@@ -154,7 +151,6 @@ export async function createConsequence(document) {
     {
       name: "New Effect",
       type: "consequence",
-      img: "systems/teriock/assets/effect.svg",
     },
     { parent: document },
   );
@@ -213,7 +209,6 @@ export async function createBaseEffect(document) {
   const baseEffect = await TeriockEffect.create(
     {
       name: "New Base Effect",
-      img: "icons/svg/clockwork.svg",
     },
     { parent: document },
   );
