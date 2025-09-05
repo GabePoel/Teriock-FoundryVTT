@@ -48,7 +48,6 @@ const { fields } = foundry.data;
 export function _defineGeneral(schema) {
   return {
     ...schema,
-    wikiNamespace: new fields.StringField({ initial: "Ability" }),
     elderSorcery: new fields.BooleanField({
       initial: false,
       label: "Elder Sorcery",

@@ -11,8 +11,9 @@ const { fields } = foundry.data;
  */
 export function _defineSchema() {
   return {
-    wikiNamespace: new fields.StringField({
-      initial: "Equipment",
+    description: new TextField({
+      initial: "",
+      label: "Description",
     }),
     equipped: new fields.BooleanField({
       initial: true,

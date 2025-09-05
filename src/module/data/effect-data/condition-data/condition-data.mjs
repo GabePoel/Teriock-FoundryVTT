@@ -30,9 +30,6 @@ export default class TeriockConditionData extends WikiDataMixin(
   /** @inheritDoc */
   static defineSchema() {
     return foundry.utils.mergeObject(super.defineSchema(), {
-      wikiNamespace: new fields.StringField({
-        initial: "Condition",
-      }),
       expirations: new fields.SchemaField({
         combat: new fields.SchemaField({
           what: combatExpirationMethodField(),
