@@ -9,18 +9,28 @@ import { createAbility, createProperty } from "../../../helpers/create-effects.m
  * @param {Function} config.createFn - Function to create the sub effect (e.g., createAbility, createProperty).
  * @param {string} config.nameSelector - CSS selector for the sub effect name element.
  * @param {string} [config.skipNamespace] - Namespace to skip processing for.
+ * @param {string} [config.includeNamespace] - Namespace to process.
  * @returns {Promise<void>} Promise that resolves when all sub effects are processed.
  * @private
  */
 async function processSubEffects(subs, doc, config) {
-  const { createFn, nameSelector, skipNamespace = "Condition" } = config;
+  const {
+    createFn,
+    nameSelector,
+    skipNamespace = "Condition",
+    includeNamespace = "Ability",
+  } = config;
 
   for (const el of subs) {
     el.querySelectorAll(".expandable-sub-main").forEach((e) => e.remove());
 
     let subNameEl = el.querySelector(nameSelector);
     if (el.className.includes("expandable-container")) subNameEl = el;
-    if (subNameEl?.dataset.namespace === skipNamespace) return;
+    if (
+      subNameEl?.dataset.namespace === skipNamespace ||
+      subNameEl?.dataset.namespace !== includeNamespace
+    )
+      return;
 
     const subName = subNameEl.getAttribute("data-name");
     const subEffect = await createFn(doc, subName, {
@@ -85,6 +95,7 @@ export async function processSubAbilities(subs, doc) {
     createFn: createAbility,
     nameSelector: ".ability-sub-name",
     skipNamespace: "Condition",
+    includeNamespace: "Ability",
   });
 }
 
@@ -101,5 +112,6 @@ export async function processSubProperties(subs, doc) {
     createFn: createProperty,
     nameSelector: ".ability-sub-name",
     skipNamespace: "Condition",
+    includeNamespace: "Property",
   });
 }
