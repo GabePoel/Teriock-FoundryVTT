@@ -15,7 +15,7 @@
     "font": "",
     "description": "Almost as shady as the <a href=\"https://wiki.teriock.com/index.php/Class:Assassin\" title=\"Class:Assassin\" target=\"_blank\">Assassin</a>, a Thief is a bit more socially oriented and has a much greater care for her own life. Thieves are the flip side of the Samurai and tend to follow laws and tell the truth only if it serves their purpose. Always trying to make a profit, thieves are the businessmen of the world and will cheat you without blinking an eyelash, that is their job. If you are playing a thief, lie and make up stories, be ever watchful for a chance to search or loot and look for the profit angle, never doing anything for free.",
     "disabled": false,
-    "updateCounter": true,
+    "updateCounter": false,
     "wikiNamespace": "Class",
     "flaws": "None.",
     "hitDieSpent": false,
@@ -30,6 +30,18 @@
     },
     "mpDiceBase": {
       "faces": 10
+    },
+    "hpDice": {
+      "E4TZW3dgg3AXR82o": {
+        "faces": 10,
+        "value": 6
+      }
+    },
+    "mpDice": {
+      "s2866jVjnsoip9cu": {
+        "faces": 10,
+        "value": 6
+      }
     }
   },
   "_id": "gSFiJrrtQ9pUnVI6",
@@ -390,7 +402,7 @@
           "derived": 0
         }
       },
-      "_id": "CqoAeKVViab432kS",
+      "_id": "yxX7IqY0QLKL7lCY",
       "changes": [],
       "disabled": false,
       "duration": {
@@ -411,11 +423,11 @@
         "coreVersion": "13.345",
         "systemId": "teriock",
         "systemVersion": "0.1.0",
-        "createdTime": 1756854071799,
-        "modifiedTime": 1756854078979,
+        "createdTime": 1757047550491,
+        "modifiedTime": 1757047553919,
         "lastModifiedBy": "Z8sCTHO0edFF1hYo"
       },
-      "_key": "!items.effects!gSFiJrrtQ9pUnVI6.CqoAeKVViab432kS"
+      "_key": "!items.effects!gSFiJrrtQ9pUnVI6.yxX7IqY0QLKL7lCY"
     },
     {
       "name": "Disable Ray",
@@ -448,7 +460,9 @@
             "statuses": [],
             "startStatuses": [],
             "endStatuses": [],
-            "rolls": {},
+            "rolls": {
+              "endCon": "2d4"
+            },
             "hacks": [],
             "checks": [],
             "duration": 0,
@@ -461,12 +475,12 @@
                     "type": "target"
                   },
                   "what": {
-                    "type": "none",
+                    "type": "rolled",
                     "roll": "2d4kh1",
                     "threshold": 4
                   },
                   "when": {
-                    "time": "start",
+                    "time": "end",
                     "trigger": "turn",
                     "skip": 0
                   }
@@ -490,7 +504,7 @@
                 }
               },
               "changeOnCrit": false,
-              "doesExpire": false
+              "doesExpire": true
             }
           },
           "proficient": {
@@ -651,8 +665,8 @@
         ],
         "interaction": "attack",
         "featSaveAttribute": "mov",
-        "maneuver": "active",
-        "executionTime": "a1",
+        "maneuver": "reactive",
+        "executionTime": "r1",
         "delivery": {
           "base": "missile",
           "parent": null,
@@ -675,12 +689,12 @@
         "sustained": false,
         "range": "60",
         "overview": {
-          "base": "Choose a <a href=\"https://wiki.teriock.com/index.php/Category:Standard_abilities\" title=\"Category:Standard abilities\" target=\"_blank\">standard ability</a> as you use Disable Ray. You must choose the same <a href=\"https://wiki.teriock.com/index.php/Category:Standard_abilities\" title=\"Category:Standard abilities\" target=\"_blank\">ability</a> each time you use it, unless at least 10 minutes has passed since the last time you used Disable Ray.",
-          "proficient": "",
+          "base": "",
+          "proficient": "This also makes the effect of that <a href=\"https://wiki.teriock.com/index.php/Category:Abilities\" title=\"Category:Abilities\" target=\"_blank\">ability</a> <a href=\"https://wiki.teriock.com/index.php/Core:Fizzles\" title=\"Core:Fizzles\" target=\"_blank\">fizzle</a>.",
           "fluent": ""
         },
         "results": {
-          "hit": "Target becomes <a href=\"https://wiki.teriock.com/index.php/Keyword:Incapable\" title=\"Keyword:Incapable\" target=\"_blank\">incapable</a> of the chosen <a href=\"https://wiki.teriock.com/index.php/Category:Standard_abilities\" title=\"Category:Standard abilities\" target=\"_blank\">standard ability</a>.",
+          "hit": "Target becomes <a href=\"https://wiki.teriock.com/index.php/Keyword:Incapable\" title=\"Keyword:Incapable\" target=\"_blank\">incapable</a> of the <a href=\"https://wiki.teriock.com/index.php/Category:Abilities\" title=\"Category:Abilities\" target=\"_blank\">ability</a> they were using.",
           "critHit": "",
           "miss": "",
           "critMiss": "",
@@ -712,11 +726,11 @@
           "somatic": false,
           "material": false,
           "mp": {
-            "type": "none",
+            "type": "variable",
             "value": {
               "static": 0,
               "formula": "",
-              "variable": ""
+              "variable": "This costs 0 <a href=\"https://wiki.teriock.com/index.php/Core:MP\" class=\"mw-redirect\" title=\"Core:MP\" target=\"_blank\">MP</a> if the triggering <a href=\"https://wiki.teriock.com/index.php/Category:Abilities\" title=\"Category:Abilities\" target=\"_blank\">ability</a> was used on you or some <a href=\"https://wiki.teriock.com/index.php/Category:Equipment\" title=\"Category:Equipment\" target=\"_blank\">equipment</a> you <a href=\"https://wiki.teriock.com/index.php/Keyword:Bearing\" title=\"Keyword:Bearing\" target=\"_blank\">bear</a>. It costs 1 <a href=\"https://wiki.teriock.com/index.php/Core:MP\" class=\"mw-redirect\" title=\"Core:MP\" target=\"_blank\">MP</a> otherwise."
             }
           },
           "hp": {
@@ -739,13 +753,13 @@
           "materialCost": ""
         },
         "heightened": "",
-        "endCondition": "",
-        "requirements": "",
+        "endCondition": "At the end of each of the target's <a href=\"https://wiki.teriock.com/index.php/Core:Turn\" class=\"mw-redirect\" title=\"Core:Turn\" target=\"_blank\">turns</a>, they roll <span class=\"dice\" data-full-roll=\"2d4\" data-quick-roll=\"2d4\" data-type=\"endCon\">[[/roll 2d4]]</span>. If either of these dice roll a 4, this effect ends.<span class=\"metadata\" data-type=\"combat-expiration\" data-who-type=\"target\" data-what-type=\"rolled\" data-what-roll=\"2d4kh1\" data-what-threshold=\"4\" data-when-time=\"end\" data-when-trigger=\"turn\" data-when-skip=\"0\"></span>",
+        "requirements": "You may only target the triggering creature.",
         "effects": [],
         "expansion": null,
         "expansionRange": null,
         "expansionSaveAttribute": "mov",
-        "trigger": "",
+        "trigger": "Another creature uses a non-<a href=\"https://wiki.teriock.com/index.php/Category:Basic_abilities\" title=\"Category:Basic abilities\" target=\"_blank\">basic</a> <a href=\"https://wiki.teriock.com/index.php/Category:Active_abilities\" title=\"Category:Active abilities\" target=\"_blank\">active</a> or <a href=\"https://wiki.teriock.com/index.php/Category:Reactive_abilities\" title=\"Category:Reactive abilities\" target=\"_blank\">reactive ability</a> that isn't a <a href=\"https://wiki.teriock.com/index.php/Category:Spells\" title=\"Category:Spells\" target=\"_blank\">spell</a> against a different creature or some <a href=\"https://wiki.teriock.com/index.php/Category:Equipment\" title=\"Category:Equipment\" target=\"_blank\">equipment</a> that different creature <a href=\"https://wiki.teriock.com/index.php/Keyword:Bearing\" title=\"Keyword:Bearing\" target=\"_blank\">bares</a>.",
         "basic": false,
         "form": "normal",
         "limitation": "",
@@ -764,7 +778,7 @@
           "derived": 0
         }
       },
-      "_id": "vMrI8RCM4rDHK3Sz",
+      "_id": "5nHwgAPVcVanHzeS",
       "changes": [],
       "disabled": false,
       "duration": {
@@ -785,11 +799,11 @@
         "coreVersion": "13.345",
         "systemId": "teriock",
         "systemVersion": "0.1.0",
-        "createdTime": 1756854071802,
-        "modifiedTime": 1756854078035,
+        "createdTime": 1757047550493,
+        "modifiedTime": 1757047553910,
         "lastModifiedBy": "Z8sCTHO0edFF1hYo"
       },
-      "_key": "!items.effects!gSFiJrrtQ9pUnVI6.vMrI8RCM4rDHK3Sz"
+      "_key": "!items.effects!gSFiJrrtQ9pUnVI6.5nHwgAPVcVanHzeS"
     },
     {
       "name": "Glue",
@@ -1147,7 +1161,7 @@
           "derived": 0
         }
       },
-      "_id": "jl2V6Bm32ZmWtJgb",
+      "_id": "lk9tlzilcveaA9DJ",
       "changes": [],
       "disabled": false,
       "duration": {
@@ -1168,11 +1182,11 @@
         "coreVersion": "13.345",
         "systemId": "teriock",
         "systemVersion": "0.1.0",
-        "createdTime": 1756854071803,
-        "modifiedTime": 1756854078554,
+        "createdTime": 1757047550494,
+        "modifiedTime": 1757047553928,
         "lastModifiedBy": "Z8sCTHO0edFF1hYo"
       },
-      "_key": "!items.effects!gSFiJrrtQ9pUnVI6.jl2V6Bm32ZmWtJgb"
+      "_key": "!items.effects!gSFiJrrtQ9pUnVI6.lk9tlzilcveaA9DJ"
     },
     {
       "name": "Unglue",
@@ -1523,7 +1537,7 @@
           "derived": 0
         }
       },
-      "_id": "8llBsoqQWvYPVZRp",
+      "_id": "IXeQLh0DF0HRWHQv",
       "changes": [],
       "disabled": false,
       "duration": {
@@ -1544,16 +1558,16 @@
         "coreVersion": "13.345",
         "systemId": "teriock",
         "systemVersion": "0.1.0",
-        "createdTime": 1756854071805,
-        "modifiedTime": 1756854078376,
+        "createdTime": 1757047550496,
+        "modifiedTime": 1757047553925,
         "lastModifiedBy": "Z8sCTHO0edFF1hYo"
       },
-      "_key": "!items.effects!gSFiJrrtQ9pUnVI6.8llBsoqQWvYPVZRp"
+      "_key": "!items.effects!gSFiJrrtQ9pUnVI6.IXeQLh0DF0HRWHQv"
     },
     {
       "name": "Talented Locksmith",
       "type": "ability",
-      "img": "systems/teriock/src/icons/abilities/talented-locksmith.webp",
+      "img": "icons/skills/trades/security-locksmith-key-gray.webp",
       "system": {
         "proficient": false,
         "fluent": false,
@@ -1904,7 +1918,7 @@
           "derived": 0
         }
       },
-      "_id": "JiX30VdPJ0pXgD6Z",
+      "_id": "g4W5VWnshgWbMwZo",
       "changes": [],
       "disabled": false,
       "duration": {
@@ -1925,11 +1939,11 @@
         "coreVersion": "13.345",
         "systemId": "teriock",
         "systemVersion": "0.1.0",
-        "createdTime": 1756854071807,
-        "modifiedTime": 1756854078761,
+        "createdTime": 1757047550498,
+        "modifiedTime": 1757047554017,
         "lastModifiedBy": "Z8sCTHO0edFF1hYo"
       },
-      "_key": "!items.effects!gSFiJrrtQ9pUnVI6.JiX30VdPJ0pXgD6Z"
+      "_key": "!items.effects!gSFiJrrtQ9pUnVI6.g4W5VWnshgWbMwZo"
     }
   ],
   "sort": 0,
@@ -1946,7 +1960,7 @@
     "systemId": "teriock",
     "systemVersion": "0.1.0",
     "createdTime": 1753157035506,
-    "modifiedTime": 1756854079582,
+    "modifiedTime": 1757047555430,
     "lastModifiedBy": "Z8sCTHO0edFF1hYo"
   },
   "_key": "!items!gSFiJrrtQ9pUnVI6"

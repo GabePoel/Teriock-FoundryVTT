@@ -44,7 +44,9 @@
             "statuses": [],
             "startStatuses": [],
             "endStatuses": [],
-            "rolls": {},
+            "rolls": {
+              "endCon": "2d4"
+            },
             "hacks": [],
             "checks": [],
             "duration": 0,
@@ -57,12 +59,12 @@
                     "type": "target"
                   },
                   "what": {
-                    "type": "none",
+                    "type": "rolled",
                     "roll": "2d4kh1",
                     "threshold": 4
                   },
                   "when": {
-                    "time": "start",
+                    "time": "end",
                     "trigger": "turn",
                     "skip": 0
                   }
@@ -86,7 +88,7 @@
                 }
               },
               "changeOnCrit": false,
-              "doesExpire": false
+              "doesExpire": true
             }
           },
           "proficient": {
@@ -247,8 +249,8 @@
         ],
         "interaction": "attack",
         "featSaveAttribute": "mov",
-        "maneuver": "active",
-        "executionTime": "a1",
+        "maneuver": "reactive",
+        "executionTime": "r1",
         "delivery": {
           "base": "missile",
           "parent": null,
@@ -270,12 +272,12 @@
         "sustained": false,
         "range": "30",
         "overview": {
-          "base": "Choose a <a href=\"https://wiki.teriock.com/index.php/Category:Standard_abilities\" title=\"Category:Standard abilities\" target=\"_blank\">standard ability</a> as you use Disruption Ball. You must choose the same <a href=\"https://wiki.teriock.com/index.php/Category:Standard_abilities\" title=\"Category:Standard abilities\" target=\"_blank\">ability</a> each time you use it, unless at least 10 minutes has passed since the last time you used Disruption Ball.",
-          "proficient": "",
+          "base": "",
+          "proficient": "This may be triggered by <a href=\"https://wiki.teriock.com/index.php/Category:Basic_abilities\" title=\"Category:Basic abilities\" target=\"_blank\">basic abilities</a> as well.",
           "fluent": ""
         },
         "results": {
-          "hit": "Target becomes <a href=\"https://wiki.teriock.com/index.php/Keyword:Incapable\" title=\"Keyword:Incapable\" target=\"_blank\">incapable</a> of the chosen <a href=\"https://wiki.teriock.com/index.php/Category:Standard_abilities\" title=\"Category:Standard abilities\" target=\"_blank\">standard ability</a>.",
+          "hit": "Target becomes <a href=\"https://wiki.teriock.com/index.php/Keyword:Incapable\" title=\"Keyword:Incapable\" target=\"_blank\">incapable</a> of the <a href=\"https://wiki.teriock.com/index.php/Category:Abilities\" title=\"Category:Abilities\" target=\"_blank\">ability</a> they were using.",
           "critHit": "",
           "miss": "",
           "critMiss": "",
@@ -307,11 +309,11 @@
           "somatic": false,
           "material": false,
           "mp": {
-            "type": "none",
+            "type": "variable",
             "value": {
               "static": 0,
               "formula": "",
-              "variable": ""
+              "variable": "This costs 0 <a href=\"https://wiki.teriock.com/index.php/Core:MP\" class=\"mw-redirect\" title=\"Core:MP\" target=\"_blank\">MP</a> if the triggering <a href=\"https://wiki.teriock.com/index.php/Category:Active_abilities\" title=\"Category:Active abilities\" target=\"_blank\">ability</a> was used on you or some <a href=\"https://wiki.teriock.com/index.php/Category:Equipment\" title=\"Category:Equipment\" target=\"_blank\">equipment</a> you <a href=\"https://wiki.teriock.com/index.php/Keyword:Bearing\" title=\"Keyword:Bearing\" target=\"_blank\">bear</a>. It costs 1 <a href=\"https://wiki.teriock.com/index.php/Core:MP\" class=\"mw-redirect\" title=\"Core:MP\" target=\"_blank\">MP</a> otherwise."
             }
           },
           "hp": {
@@ -334,13 +336,13 @@
           "materialCost": ""
         },
         "heightened": "",
-        "endCondition": "",
-        "requirements": "",
+        "endCondition": "At the end of each of the target's <a href=\"https://wiki.teriock.com/index.php/Core:Turn\" class=\"mw-redirect\" title=\"Core:Turn\" target=\"_blank\">turns</a>, they roll <span class=\"dice\" data-full-roll=\"2d4\" data-quick-roll=\"2d4\" data-type=\"endCon\">[[/roll 2d4]]</span>. If either of these dice roll a 4, this effect ends.<span class=\"metadata\" data-type=\"combat-expiration\" data-who-type=\"target\" data-what-type=\"rolled\" data-what-roll=\"2d4kh1\" data-what-threshold=\"4\" data-when-time=\"end\" data-when-trigger=\"turn\" data-when-skip=\"0\"></span>",
+        "requirements": "You may only target the triggering creature.",
         "effects": [],
         "expansion": null,
         "expansionRange": null,
         "expansionSaveAttribute": "mov",
-        "trigger": "",
+        "trigger": "Another creature uses a non-<a href=\"https://wiki.teriock.com/index.php/Category:Basic_abilities\" title=\"Category:Basic abilities\" target=\"_blank\">basic</a> <a href=\"https://wiki.teriock.com/index.php/Category:Active_abilities\" title=\"Category:Active abilities\" target=\"_blank\">active</a> or <a href=\"https://wiki.teriock.com/index.php/Category:Reactive_abilities\" title=\"Category:Reactive abilities\" target=\"_blank\">reactive ability</a> that isn't a <a href=\"https://wiki.teriock.com/index.php/Category:Spells\" title=\"Category:Spells\" target=\"_blank\">spell</a> against a different creature or some <a href=\"https://wiki.teriock.com/index.php/Category:Equipment\" title=\"Category:Equipment\" target=\"_blank\">equipment</a> that different creature <a href=\"https://wiki.teriock.com/index.php/Keyword:Bearing\" title=\"Keyword:Bearing\" target=\"_blank\">bares</a>.",
         "basic": false,
         "form": "normal",
         "limitation": "",
@@ -377,7 +379,7 @@
         "systemId": "teriock",
         "systemVersion": "0.1.0",
         "createdTime": 1756340806642,
-        "modifiedTime": 1756854181115,
+        "modifiedTime": 1757035482577,
         "lastModifiedBy": "Z8sCTHO0edFF1hYo"
       },
       "_key": "!items.effects!vm91Tjw5gqkBnzOX.YRk6TiAtGyFfVqQX"

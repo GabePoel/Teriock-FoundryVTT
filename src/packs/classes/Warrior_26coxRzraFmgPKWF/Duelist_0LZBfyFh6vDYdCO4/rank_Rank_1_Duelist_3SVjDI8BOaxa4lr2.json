@@ -60,7 +60,9 @@
         },
         "applies": {
           "base": {
-            "statuses": [],
+            "statuses": [
+              "lighted"
+            ],
             "startStatuses": [
               "dueling"
             ],
@@ -78,12 +80,12 @@
                     "type": "target"
                   },
                   "what": {
-                    "type": "none",
+                    "type": "forced",
                     "roll": "2d4kh1",
                     "threshold": 4
                   },
                   "when": {
-                    "time": "start",
+                    "time": "end",
                     "trigger": "turn",
                     "skip": 0
                   }
@@ -107,7 +109,7 @@
                 }
               },
               "changeOnCrit": false,
-              "doesExpire": false
+              "doesExpire": true
             }
           },
           "proficient": {
@@ -257,7 +259,9 @@
               "doesExpire": false
             }
           },
-          "macros": {}
+          "macros": {
+            "Compendium_teriock_execution_Macro_joj6xtjHNn2lD67k": "preExecution"
+          }
         },
         "sustaining": [],
         "wikiNamespace": "Ability",
@@ -280,20 +284,20 @@
         ],
         "elements": [],
         "duration": {
-          "unit": "instant",
+          "unit": "noLimit",
           "quantity": 0,
           "conditions": {
             "present": [],
             "absent": []
           },
           "stationary": false,
-          "description": "Instant"
+          "description": "No Limit"
         },
         "sustained": false,
         "range": "30",
         "overview": {
-          "base": "You and the target begin <a href=\"https://wiki.teriock.com/index.php/Condition:Dueling\" title=\"Condition:Dueling\" target=\"_blank\">dueling</a> each other.<span class=\"metadata\" data-type=\"start-condition\" data-condition=\"dueling\"></span>",
-          "proficient": "You may also make <a href=\"https://wiki.teriock.com/index.php/Ability:Move\" title=\"Ability:Move\" target=\"_blank\">Move</a> or make a <a href=\"https://wiki.teriock.com/index.php/Category:Single_action_abilities\" title=\"Category:Single action abilities\" target=\"_blank\">single action</a> <a href=\"https://wiki.teriock.com/index.php/Category:Duelist_class_abilities\" title=\"Category:Duelist class abilities\" target=\"_blank\">Duelist ability</a> as a <a href=\"https://wiki.teriock.com/index.php/Core:Reactive_Maneuvers\" title=\"Core:Reactive Maneuvers\" target=\"_blank\">free reaction</a>.",
+          "base": "You challenge the target to advance and fight you. They may immediately <a href=\"https://wiki.teriock.com/index.php/Ability:Move\" title=\"Ability:Move\" target=\"_blank\">Move</a> towards you as a <a href=\"https://wiki.teriock.com/index.php/Core:Reactive_Maneuvers\" title=\"Core:Reactive Maneuvers\" target=\"_blank\">free reaction</a> to this and begin <a href=\"https://wiki.teriock.com/index.php/Condition:Dueling\" title=\"Condition:Dueling\" target=\"_blank\">dueling</a> with you. If they choose not to or are unable to do so, then they are considered to have \"forfeited\" the duel (but are not considered to have \"lost\" it) and become <a href=\"https://wiki.teriock.com/index.php/Condition:Lighted\" title=\"Condition:Lighted\" target=\"_blank\">lighted</a> to you until the end of your next <a href=\"https://wiki.teriock.com/index.php/Core:Turns\" title=\"Core:Turns\" target=\"_blank\">turn</a>.<span class=\"metadata\" data-type=\"start-condition\" data-condition=\"dueling\"></span><span class=\"metadata\" data-type=\"condition\" data-condition=\"lighted\"></span><span class=\"metadata\" data-type=\"combat-expiration\" data-who-type=\"target\" data-what-type=\"forced\" data-what-roll=\"2d4kh1\" data-what-threshold=\"4\" data-when-time=\"end\" data-when-trigger=\"turn\" data-when-skip=\"0\"></span><span class=\"metadata\" data-type=\"macro\" data-name=\"Duel Macro - Pre-execution\" data-pseudo-hook=\"preExecution\"></span>",
+          "proficient": "You may also make <a href=\"https://wiki.teriock.com/index.php/Ability:Move\" title=\"Ability:Move\" target=\"_blank\">Move</a> or make a <a href=\"https://wiki.teriock.com/index.php/Category:Single_action_abilities\" title=\"Category:Single action abilities\" target=\"_blank\">single action</a> <a href=\"https://wiki.teriock.com/index.php/Category:Duelist_class_abilities\" title=\"Category:Duelist class abilities\" target=\"_blank\">Duelist ability</a> as a <a href=\"https://wiki.teriock.com/index.php/Core:Reactive_Maneuvers\" title=\"Core:Reactive Maneuvers\" target=\"_blank\">free reaction</a> to the target's decision and subsequent movement.",
           "fluent": ""
         },
         "results": {
@@ -381,7 +385,7 @@
           "derived": 0
         }
       },
-      "_id": "NGVOY2oBPFPT7UIV",
+      "_id": "Spvn2oldu4jueijf",
       "changes": [],
       "disabled": false,
       "duration": {
@@ -402,11 +406,11 @@
         "coreVersion": "13.345",
         "systemId": "teriock",
         "systemVersion": "0.1.0",
-        "createdTime": 1756854071035,
-        "modifiedTime": 1756854077982,
+        "createdTime": 1757047550686,
+        "modifiedTime": 1757047554650,
         "lastModifiedBy": "Z8sCTHO0edFF1hYo"
       },
-      "_key": "!items.effects!3SVjDI8BOaxa4lr2.NGVOY2oBPFPT7UIV"
+      "_key": "!items.effects!3SVjDI8BOaxa4lr2.Spvn2oldu4jueijf"
     },
     {
       "name": "Defy Death",
@@ -441,9 +445,7 @@
             ],
             "startStatuses": [],
             "endStatuses": [],
-            "rolls": {
-              "endCon": "2d4"
-            },
+            "rolls": {},
             "hacks": [],
             "checks": [],
             "duration": 0,
@@ -456,12 +458,12 @@
                     "type": "target"
                   },
                   "what": {
-                    "type": "rolled",
+                    "type": "none",
                     "roll": "2d4kh1",
                     "threshold": 4
                   },
                   "when": {
-                    "time": "end",
+                    "time": "start",
                     "trigger": "turn",
                     "skip": 0
                   }
@@ -485,7 +487,7 @@
                 }
               },
               "changeOnCrit": false,
-              "doesExpire": true
+              "doesExpire": false
             }
           },
           "proficient": {
@@ -670,7 +672,7 @@
         "sustained": true,
         "range": "Self.",
         "overview": {
-          "base": "You begin <a href=\"https://wiki.teriock.com/index.php/Condition:Defying_Death\" title=\"Condition:Defying Death\" target=\"_blank\">Defying Death</a>. When this condition ends, you <a href=\"https://wiki.teriock.com/index.php/Condition:Dead\" title=\"Condition:Dead\" target=\"_blank\">die</a>.<span class=\"metadata\" data-type=\"condition\" data-condition=\"defyingDeath\"></span>",
+          "base": "You begin <a href=\"https://wiki.teriock.com/index.php/Condition:Defying_Death\" title=\"Condition:Defying Death\" target=\"_blank\">defying death</a>.<span class=\"metadata\" data-type=\"condition\" data-condition=\"defyingDeath\"></span>",
           "proficient": "",
           "fluent": ""
         },
@@ -734,7 +736,7 @@
           "materialCost": ""
         },
         "heightened": "",
-        "endCondition": "<span class=\"metadata\" data-type=\"combat-expiration\" data-who-type=\"target\" data-what-type=\"rolled\" data-what-roll=\"2d4kh1\" data-what-threshold=\"4\" data-when-time=\"end\" data-when-trigger=\"turn\" data-when-skip=\"0\"></span>At the end of each of your <a href=\"https://wiki.teriock.com/index.php/Core:Turn\" class=\"mw-redirect\" title=\"Core:Turn\" target=\"_blank\">turns</a>, you roll <span class=\"dice\" data-full-roll=\"2d4\" data-quick-roll=\"2d4\" data-type=\"endCon\">[[/roll 2d4]]</span>. If either of these dice roll a 4, this effect ends.<span class=\"metadata\" data-type=\"combat-expiration\" data-who-type=\"executor\" data-what-type=\"rolled\" data-what-roll=\"2d4kh1\" data-what-threshold=\"4\" data-when-time=\"end\" data-when-trigger=\"turn\" data-when-skip=\"0\"></span>",
+        "endCondition": "",
         "requirements": "",
         "effects": [
           "resistance"
@@ -742,7 +744,7 @@
         "expansion": null,
         "expansionRange": null,
         "expansionSaveAttribute": "mov",
-        "trigger": "You would <a href=\"https://wiki.teriock.com/index.php/Condition:Down\" title=\"Condition:Down\" target=\"_blank\">Drop</a>.",
+        "trigger": "You would <a href=\"https://wiki.teriock.com/index.php/Condition:Down\" title=\"Condition:Down\" target=\"_blank\">drop</a>.",
         "basic": false,
         "form": "normal",
         "limitation": "",
@@ -761,7 +763,7 @@
           "derived": 0
         }
       },
-      "_id": "6eCE1t8Iw6UsXp1I",
+      "_id": "W0kaLxLCJ27ifBe1",
       "changes": [],
       "disabled": false,
       "duration": {
@@ -782,11 +784,11 @@
         "coreVersion": "13.345",
         "systemId": "teriock",
         "systemVersion": "0.1.0",
-        "createdTime": 1756854071037,
-        "modifiedTime": 1756854078466,
+        "createdTime": 1757047550688,
+        "modifiedTime": 1757047554696,
         "lastModifiedBy": "Z8sCTHO0edFF1hYo"
       },
-      "_key": "!items.effects!3SVjDI8BOaxa4lr2.6eCE1t8Iw6UsXp1I"
+      "_key": "!items.effects!3SVjDI8BOaxa4lr2.W0kaLxLCJ27ifBe1"
     },
     {
       "name": "Resolve Conflict",
@@ -812,7 +814,7 @@
         "hierarchy": {
           "rootUuid": "Compendium.teriock.classes.Item.3SVjDI8BOaxa4lr2",
           "subIds": [
-            "xFitSErmMA706OPm"
+            "VZj2W8PiiCeI5U9p"
           ],
           "supId": null
         },
@@ -1144,7 +1146,7 @@
           "derived": 0
         }
       },
-      "_id": "zPa4SmlaK4sXB4yM",
+      "_id": "na2kaw1QiOklvTpb",
       "changes": [],
       "disabled": false,
       "duration": {
@@ -1165,11 +1167,11 @@
         "coreVersion": "13.345",
         "systemId": "teriock",
         "systemVersion": "0.1.0",
-        "createdTime": 1756854071039,
-        "modifiedTime": 1756854125285,
+        "createdTime": 1757047550689,
+        "modifiedTime": 1757047560029,
         "lastModifiedBy": "Z8sCTHO0edFF1hYo"
       },
-      "_key": "!items.effects!3SVjDI8BOaxa4lr2.zPa4SmlaK4sXB4yM"
+      "_key": "!items.effects!3SVjDI8BOaxa4lr2.na2kaw1QiOklvTpb"
     },
     {
       "name": "Detect Lie",
@@ -1177,7 +1179,7 @@
       "img": "systems/teriock/src/icons/abilities/detect-lie.webp",
       "system": {
         "hierarchy": {
-          "supId": "zPa4SmlaK4sXB4yM",
+          "supId": "na2kaw1QiOklvTpb",
           "rootUuid": "Compendium.teriock.classes.Item.3SVjDI8BOaxa4lr2",
           "subIds": []
         },
@@ -1520,7 +1522,7 @@
           "derived": 0
         }
       },
-      "_id": "xFitSErmMA706OPm",
+      "_id": "VZj2W8PiiCeI5U9p",
       "changes": [],
       "disabled": false,
       "duration": {
@@ -1541,11 +1543,11 @@
         "coreVersion": "13.345",
         "systemId": "teriock",
         "systemVersion": "0.1.0",
-        "createdTime": 1756854078425,
-        "modifiedTime": 1756854125257,
+        "createdTime": 1757047554683,
+        "modifiedTime": 1757047558200,
         "lastModifiedBy": "Z8sCTHO0edFF1hYo"
       },
-      "_key": "!items.effects!3SVjDI8BOaxa4lr2.xFitSErmMA706OPm"
+      "_key": "!items.effects!3SVjDI8BOaxa4lr2.VZj2W8PiiCeI5U9p"
     }
   ],
   "sort": 0,
@@ -1562,7 +1564,7 @@
     "systemId": "teriock",
     "systemVersion": "0.1.0",
     "createdTime": 1753157045228,
-    "modifiedTime": 1756854125295,
+    "modifiedTime": 1757047561073,
     "lastModifiedBy": "Z8sCTHO0edFF1hYo"
   },
   "_key": "!items!3SVjDI8BOaxa4lr2"

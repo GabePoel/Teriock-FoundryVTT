@@ -30,6 +30,18 @@
     },
     "mpDiceBase": {
       "faces": 10
+    },
+    "hpDice": {
+      "E4TZW3dgg3AXR82o": {
+        "faces": 10,
+        "value": 6
+      }
+    },
+    "mpDice": {
+      "s2866jVjnsoip9cu": {
+        "faces": 10,
+        "value": 6
+      }
     }
   },
   "_id": "t01RC7gg9n0FcT76",
@@ -66,7 +78,9 @@
             "statuses": [],
             "startStatuses": [],
             "endStatuses": [],
-            "rolls": {},
+            "rolls": {
+              "endCon": "2d4"
+            },
             "hacks": [],
             "checks": [],
             "duration": 0,
@@ -79,12 +93,12 @@
                     "type": "target"
                   },
                   "what": {
-                    "type": "none",
+                    "type": "rolled",
                     "roll": "2d4kh1",
                     "threshold": 4
                   },
                   "when": {
-                    "time": "start",
+                    "time": "end",
                     "trigger": "turn",
                     "skip": 0
                   }
@@ -108,7 +122,7 @@
                 }
               },
               "changeOnCrit": false,
-              "doesExpire": false
+              "doesExpire": true
             }
           },
           "proficient": {
@@ -269,8 +283,8 @@
         ],
         "interaction": "attack",
         "featSaveAttribute": "mov",
-        "maneuver": "active",
-        "executionTime": "a1",
+        "maneuver": "reactive",
+        "executionTime": "r1",
         "delivery": {
           "base": "missile",
           "parent": null,
@@ -293,12 +307,12 @@
         "sustained": false,
         "range": "30",
         "overview": {
-          "base": "Choose a <a href=\"https://wiki.teriock.com/index.php/Category:Standard_abilities\" title=\"Category:Standard abilities\" target=\"_blank\">standard ability</a> as you use Disruption Ball. You must choose the same <a href=\"https://wiki.teriock.com/index.php/Category:Standard_abilities\" title=\"Category:Standard abilities\" target=\"_blank\">ability</a> each time you use it, unless at least 10 minutes has passed since the last time you used Disruption Ball.",
-          "proficient": "",
+          "base": "",
+          "proficient": "This may be triggered by <a href=\"https://wiki.teriock.com/index.php/Category:Basic_abilities\" title=\"Category:Basic abilities\" target=\"_blank\">basic abilities</a> as well.",
           "fluent": ""
         },
         "results": {
-          "hit": "Target becomes <a href=\"https://wiki.teriock.com/index.php/Keyword:Incapable\" title=\"Keyword:Incapable\" target=\"_blank\">incapable</a> of the chosen <a href=\"https://wiki.teriock.com/index.php/Category:Standard_abilities\" title=\"Category:Standard abilities\" target=\"_blank\">standard ability</a>.",
+          "hit": "Target becomes <a href=\"https://wiki.teriock.com/index.php/Keyword:Incapable\" title=\"Keyword:Incapable\" target=\"_blank\">incapable</a> of the <a href=\"https://wiki.teriock.com/index.php/Category:Abilities\" title=\"Category:Abilities\" target=\"_blank\">ability</a> they were using.",
           "critHit": "",
           "miss": "",
           "critMiss": "",
@@ -330,11 +344,11 @@
           "somatic": false,
           "material": false,
           "mp": {
-            "type": "none",
+            "type": "variable",
             "value": {
               "static": 0,
               "formula": "",
-              "variable": ""
+              "variable": "This costs 0 <a href=\"https://wiki.teriock.com/index.php/Core:MP\" class=\"mw-redirect\" title=\"Core:MP\" target=\"_blank\">MP</a> if the triggering <a href=\"https://wiki.teriock.com/index.php/Category:Active_abilities\" title=\"Category:Active abilities\" target=\"_blank\">ability</a> was used on you or some <a href=\"https://wiki.teriock.com/index.php/Category:Equipment\" title=\"Category:Equipment\" target=\"_blank\">equipment</a> you <a href=\"https://wiki.teriock.com/index.php/Keyword:Bearing\" title=\"Keyword:Bearing\" target=\"_blank\">bear</a>. It costs 1 <a href=\"https://wiki.teriock.com/index.php/Core:MP\" class=\"mw-redirect\" title=\"Core:MP\" target=\"_blank\">MP</a> otherwise."
             }
           },
           "hp": {
@@ -357,13 +371,13 @@
           "materialCost": ""
         },
         "heightened": "",
-        "endCondition": "",
-        "requirements": "",
+        "endCondition": "At the end of each of the target's <a href=\"https://wiki.teriock.com/index.php/Core:Turn\" class=\"mw-redirect\" title=\"Core:Turn\" target=\"_blank\">turns</a>, they roll <span class=\"dice\" data-full-roll=\"2d4\" data-quick-roll=\"2d4\" data-type=\"endCon\">[[/roll 2d4]]</span>. If either of these dice roll a 4, this effect ends.<span class=\"metadata\" data-type=\"combat-expiration\" data-who-type=\"target\" data-what-type=\"rolled\" data-what-roll=\"2d4kh1\" data-what-threshold=\"4\" data-when-time=\"end\" data-when-trigger=\"turn\" data-when-skip=\"0\"></span>",
+        "requirements": "You may only target the triggering creature.",
         "effects": [],
         "expansion": null,
         "expansionRange": null,
         "expansionSaveAttribute": "mov",
-        "trigger": "",
+        "trigger": "Another creature uses a non-<a href=\"https://wiki.teriock.com/index.php/Category:Basic_abilities\" title=\"Category:Basic abilities\" target=\"_blank\">basic</a> <a href=\"https://wiki.teriock.com/index.php/Category:Active_abilities\" title=\"Category:Active abilities\" target=\"_blank\">active</a> or <a href=\"https://wiki.teriock.com/index.php/Category:Reactive_abilities\" title=\"Category:Reactive abilities\" target=\"_blank\">reactive ability</a> that isn't a <a href=\"https://wiki.teriock.com/index.php/Category:Spells\" title=\"Category:Spells\" target=\"_blank\">spell</a> against a different creature or some <a href=\"https://wiki.teriock.com/index.php/Category:Equipment\" title=\"Category:Equipment\" target=\"_blank\">equipment</a> that different creature <a href=\"https://wiki.teriock.com/index.php/Keyword:Bearing\" title=\"Keyword:Bearing\" target=\"_blank\">bares</a>.",
         "basic": false,
         "form": "normal",
         "limitation": "",
@@ -382,7 +396,7 @@
           "derived": 0
         }
       },
-      "_id": "eBCHLSdhljtuVTtm",
+      "_id": "jB5xakDIgy12zcNT",
       "changes": [],
       "disabled": false,
       "duration": {
@@ -403,11 +417,11 @@
         "coreVersion": "13.345",
         "systemId": "teriock",
         "systemVersion": "0.1.0",
-        "createdTime": 1756854130516,
-        "modifiedTime": 1756854149670,
+        "createdTime": 1757047550673,
+        "modifiedTime": 1757047556576,
         "lastModifiedBy": "Z8sCTHO0edFF1hYo"
       },
-      "_key": "!items.effects!t01RC7gg9n0FcT76.eBCHLSdhljtuVTtm"
+      "_key": "!items.effects!t01RC7gg9n0FcT76.jB5xakDIgy12zcNT"
     },
     {
       "name": "Combo",
@@ -758,7 +772,7 @@
           "derived": 0
         }
       },
-      "_id": "z7dzgvsSNPMEP1RA",
+      "_id": "6XoIrXzerbFexhre",
       "changes": [],
       "disabled": false,
       "duration": {
@@ -779,11 +793,11 @@
         "coreVersion": "13.345",
         "systemId": "teriock",
         "systemVersion": "0.1.0",
-        "createdTime": 1756854130518,
-        "modifiedTime": 1756854150136,
+        "createdTime": 1757047550675,
+        "modifiedTime": 1757047556595,
         "lastModifiedBy": "Z8sCTHO0edFF1hYo"
       },
-      "_key": "!items.effects!t01RC7gg9n0FcT76.z7dzgvsSNPMEP1RA"
+      "_key": "!items.effects!t01RC7gg9n0FcT76.6XoIrXzerbFexhre"
     },
     {
       "name": "Discard",
@@ -1132,7 +1146,7 @@
           "derived": 0
         }
       },
-      "_id": "Crl9lgMkHrB9MvOQ",
+      "_id": "aPu8OKIxIhya0unt",
       "changes": [],
       "disabled": false,
       "duration": {
@@ -1153,11 +1167,11 @@
         "coreVersion": "13.345",
         "systemId": "teriock",
         "systemVersion": "0.1.0",
-        "createdTime": 1756854130520,
-        "modifiedTime": 1756854150073,
+        "createdTime": 1757047550678,
+        "modifiedTime": 1757047556618,
         "lastModifiedBy": "Z8sCTHO0edFF1hYo"
       },
-      "_key": "!items.effects!t01RC7gg9n0FcT76.Crl9lgMkHrB9MvOQ"
+      "_key": "!items.effects!t01RC7gg9n0FcT76.aPu8OKIxIhya0unt"
     },
     {
       "name": "Death Grip",
@@ -1521,7 +1535,7 @@
           "derived": 0
         }
       },
-      "_id": "efrZnH4kHAeE6XHx",
+      "_id": "Mah86JatLQ3SyeUD",
       "changes": [],
       "disabled": false,
       "duration": {
@@ -1542,11 +1556,11 @@
         "coreVersion": "13.345",
         "systemId": "teriock",
         "systemVersion": "0.1.0",
-        "createdTime": 1756854130524,
-        "modifiedTime": 1756854150054,
+        "createdTime": 1757047550680,
+        "modifiedTime": 1757047556552,
         "lastModifiedBy": "Z8sCTHO0edFF1hYo"
       },
-      "_key": "!items.effects!t01RC7gg9n0FcT76.efrZnH4kHAeE6XHx"
+      "_key": "!items.effects!t01RC7gg9n0FcT76.Mah86JatLQ3SyeUD"
     },
     {
       "name": "Hide Other",
@@ -1903,7 +1917,7 @@
           "derived": 0
         }
       },
-      "_id": "CzVsAkLyZ5GhoWJz",
+      "_id": "EPgz7deHdbgK9G7M",
       "changes": [],
       "disabled": false,
       "duration": {
@@ -1924,11 +1938,11 @@
         "coreVersion": "13.345",
         "systemId": "teriock",
         "systemVersion": "0.1.0",
-        "createdTime": 1756854130526,
-        "modifiedTime": 1756854149741,
+        "createdTime": 1757047550682,
+        "modifiedTime": 1757047556709,
         "lastModifiedBy": "Z8sCTHO0edFF1hYo"
       },
-      "_key": "!items.effects!t01RC7gg9n0FcT76.CzVsAkLyZ5GhoWJz"
+      "_key": "!items.effects!t01RC7gg9n0FcT76.EPgz7deHdbgK9G7M"
     },
     {
       "name": "Disarm Knockback",
@@ -2277,7 +2291,7 @@
           "derived": 0
         }
       },
-      "_id": "kySVV7B1bzVddU8P",
+      "_id": "PC4GZoVoj6nmqA97",
       "changes": [],
       "disabled": false,
       "duration": {
@@ -2298,11 +2312,11 @@
         "coreVersion": "13.345",
         "systemId": "teriock",
         "systemVersion": "0.1.0",
-        "createdTime": 1756854130531,
-        "modifiedTime": 1756854150213,
+        "createdTime": 1757047550684,
+        "modifiedTime": 1757047556715,
         "lastModifiedBy": "Z8sCTHO0edFF1hYo"
       },
-      "_key": "!items.effects!t01RC7gg9n0FcT76.kySVV7B1bzVddU8P"
+      "_key": "!items.effects!t01RC7gg9n0FcT76.PC4GZoVoj6nmqA97"
     }
   ],
   "sort": 0,
@@ -2319,7 +2333,7 @@
     "systemId": "teriock",
     "systemVersion": "0.1.0",
     "createdTime": 1753157037995,
-    "modifiedTime": 1756854150229,
+    "modifiedTime": 1757047558582,
     "lastModifiedBy": "Z8sCTHO0edFF1hYo"
   },
   "_key": "!items!t01RC7gg9n0FcT76"

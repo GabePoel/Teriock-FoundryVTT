@@ -27,6 +27,18 @@
     "maxAv": 4,
     "hpDiceBase": {
       "faces": 12
+    },
+    "hpDice": {
+      "E4TZW3dgg3AXR82o": {
+        "faces": 12,
+        "value": 7
+      }
+    },
+    "mpDice": {
+      "s2866jVjnsoip9cu": {
+        "faces": 8,
+        "value": 5
+      }
     }
   },
   "_id": "aGy1Ck4HUsaR495p",
@@ -383,7 +395,7 @@
           "derived": 0
         }
       },
-      "_id": "B8FaqJnvS9uNQvZ6",
+      "_id": "SMP3n9nAjGcghiXW",
       "changes": [],
       "disabled": false,
       "duration": {
@@ -404,11 +416,11 @@
         "coreVersion": "13.345",
         "systemId": "teriock",
         "systemVersion": "0.1.0",
-        "createdTime": 1756854084596,
-        "modifiedTime": 1756854140015,
+        "createdTime": 1757047550878,
+        "modifiedTime": 1757047555346,
         "lastModifiedBy": "Z8sCTHO0edFF1hYo"
       },
-      "_key": "!items.effects!aGy1Ck4HUsaR495p.B8FaqJnvS9uNQvZ6"
+      "_key": "!items.effects!aGy1Ck4HUsaR495p.SMP3n9nAjGcghiXW"
     },
     {
       "name": "Rebuke",
@@ -441,7 +453,9 @@
             "statuses": [],
             "startStatuses": [],
             "endStatuses": [],
-            "rolls": {},
+            "rolls": {
+              "damage": "1d6[spiritual]"
+            },
             "hacks": [],
             "checks": [],
             "duration": 0,
@@ -451,15 +465,15 @@
               "normal": {
                 "combat": {
                   "who": {
-                    "type": "target"
+                    "type": "executor"
                   },
                   "what": {
-                    "type": "none",
+                    "type": "forced",
                     "roll": "2d4kh1",
                     "threshold": 4
                   },
                   "when": {
-                    "time": "start",
+                    "time": "end",
                     "trigger": "turn",
                     "skip": 0
                   }
@@ -483,7 +497,7 @@
                 }
               },
               "changeOnCrit": false,
-              "doesExpire": false
+              "doesExpire": true
             }
           },
           "proficient": {
@@ -633,7 +647,9 @@
               "doesExpire": false
             }
           },
-          "macros": {}
+          "macros": {
+            "Compendium_teriock_execution_Macro_BJdPDE0aULbyEKrB": "preExecution"
+          }
         },
         "sustaining": [],
         "wikiNamespace": "Ability",
@@ -656,19 +672,19 @@
         ],
         "elements": [],
         "duration": {
-          "unit": "instant",
-          "quantity": 0,
+          "unit": "second",
+          "quantity": 5,
           "conditions": {
             "present": [],
             "absent": []
           },
           "stationary": false,
-          "description": "Instant"
+          "description": "5 Seconds"
         },
         "sustained": false,
-        "range": null,
+        "range": "90",
         "overview": {
-          "base": "Target loses the <a href=\"https://wiki.teriock.com/index.php/Category:Standard_abilities\" title=\"Category:Standard abilities\" target=\"_blank\">standard ability</a> that triggered Rebuke.\n<div class=\"note design-note\"><b>Design Note:</b> As written, this means you can Rebuke a <a href=\"https://wiki.teriock.com/index.php/Ability:Duel\" title=\"Ability:Duel\" target=\"_blank\">Duel</a> that's been <a href=\"https://wiki.teriock.com/index.php/Keyword:Resistance\" title=\"Keyword:Resistance\" target=\"_blank\">resisted</a> <i>even if</i> the <a href=\"https://wiki.teriock.com/index.php/Keyword:Resistance\" title=\"Keyword:Resistance\" target=\"_blank\">resistance</a> failed to stop it. Is that good or nah?</div>",
+          "base": "The triggering creature takes <span class=\"dice\" data-full-roll=\"1d6[spiritual]\" data-quick-roll=\"1d6\" data-type=\"damage\">[[/damage 1d6[spiritual]]]</span> <a href=\"https://wiki.teriock.com/index.php/Core:Damage\" title=\"Core:Damage\" target=\"_blank\">damage</a> and is <a href=\"https://wiki.teriock.com/index.php/Condition:Lighted\" title=\"Condition:Lighted\" target=\"_blank\">lighted</a> towards a creature of your choice.<span class=\"metadata\" data-type=\"combat-expiration\" data-who-type=\"executor\" data-what-type=\"forced\" data-what-roll=\"2d4kh1\" data-what-threshold=\"4\" data-when-time=\"end\" data-when-trigger=\"turn\" data-when-skip=\"0\"></span><span class=\"metadata\" data-type=\"macro\" data-name=\"Generic Light Macro - Pre-execution\" data-pseudo-hook=\"preExecution\"></span>",
           "proficient": "",
           "fluent": ""
         },
@@ -732,13 +748,13 @@
           "materialCost": ""
         },
         "heightened": "",
-        "endCondition": "",
+        "endCondition": "Your next <a href=\"https://wiki.teriock.com/index.php/Core:Turns\" title=\"Core:Turns\" target=\"_blank\">turn</a> ends.",
         "requirements": "",
         "effects": [],
         "expansion": null,
         "expansionRange": null,
         "expansionSaveAttribute": "mov",
-        "trigger": "A <a href=\"https://wiki.teriock.com/index.php/Condition:Dueling\" title=\"Condition:Dueling\" target=\"_blank\">duel</a> you initiate is <a href=\"https://wiki.teriock.com/index.php/Core:Fizzles\" title=\"Core:Fizzles\" target=\"_blank\">fizzled</a>, <a href=\"https://wiki.teriock.com/index.php/Keyword:Resistance\" title=\"Keyword:Resistance\" target=\"_blank\">resisted</a>, or somehow ended by another creature's <a href=\"https://wiki.teriock.com/index.php/Category:Standard_abilities\" title=\"Category:Standard abilities\" target=\"_blank\">standard ability</a> without that creature having lost the <a href=\"https://wiki.teriock.com/index.php/Condition:Dueling\" title=\"Condition:Dueling\" target=\"_blank\">duel</a>.",
+        "trigger": "A creature forfeits a <a href=\"https://wiki.teriock.com/index.php/Condition:Dueling\" title=\"Condition:Dueling\" target=\"_blank\">duel</a> with you.",
         "basic": false,
         "form": "normal",
         "limitation": "",
@@ -757,7 +773,7 @@
           "derived": 0
         }
       },
-      "_id": "ZZ7iPt6Rwffxqszo",
+      "_id": "AABKrPVA8Sh6bgUS",
       "changes": [],
       "disabled": false,
       "duration": {
@@ -778,11 +794,11 @@
         "coreVersion": "13.345",
         "systemId": "teriock",
         "systemVersion": "0.1.0",
-        "createdTime": 1756854084597,
-        "modifiedTime": 1756854140205,
+        "createdTime": 1757047550880,
+        "modifiedTime": 1757047555305,
         "lastModifiedBy": "Z8sCTHO0edFF1hYo"
       },
-      "_key": "!items.effects!aGy1Ck4HUsaR495p.ZZ7iPt6Rwffxqszo"
+      "_key": "!items.effects!aGy1Ck4HUsaR495p.AABKrPVA8Sh6bgUS"
     },
     {
       "name": "Final Fury",
@@ -1135,7 +1151,7 @@
           "derived": 0
         }
       },
-      "_id": "MRizfL6mCus5lnZ1",
+      "_id": "xqE7aOeg2RUpYv47",
       "changes": [],
       "disabled": false,
       "duration": {
@@ -1156,11 +1172,11 @@
         "coreVersion": "13.345",
         "systemId": "teriock",
         "systemVersion": "0.1.0",
-        "createdTime": 1756854084599,
-        "modifiedTime": 1756854139611,
+        "createdTime": 1757047550882,
+        "modifiedTime": 1757047555360,
         "lastModifiedBy": "Z8sCTHO0edFF1hYo"
       },
-      "_key": "!items.effects!aGy1Ck4HUsaR495p.MRizfL6mCus5lnZ1"
+      "_key": "!items.effects!aGy1Ck4HUsaR495p.xqE7aOeg2RUpYv47"
     },
     {
       "name": "Iaido",
@@ -1511,7 +1527,7 @@
           "derived": 0
         }
       },
-      "_id": "o8ydlNjVxq09G9m6",
+      "_id": "VB3zhmh0kPibsawA",
       "changes": [],
       "disabled": false,
       "duration": {
@@ -1532,11 +1548,11 @@
         "coreVersion": "13.345",
         "systemId": "teriock",
         "systemVersion": "0.1.0",
-        "createdTime": 1756854084602,
-        "modifiedTime": 1756854139816,
+        "createdTime": 1757047550884,
+        "modifiedTime": 1757047555341,
         "lastModifiedBy": "Z8sCTHO0edFF1hYo"
       },
-      "_key": "!items.effects!aGy1Ck4HUsaR495p.o8ydlNjVxq09G9m6"
+      "_key": "!items.effects!aGy1Ck4HUsaR495p.VB3zhmh0kPibsawA"
     },
     {
       "name": "Hara-Kiri",
@@ -1885,7 +1901,7 @@
           "derived": 0
         }
       },
-      "_id": "05kKEOUQF03VEGBT",
+      "_id": "WMDFNXeFfnLsRZbD",
       "changes": [],
       "disabled": false,
       "duration": {
@@ -1906,11 +1922,11 @@
         "coreVersion": "13.345",
         "systemId": "teriock",
         "systemVersion": "0.1.0",
-        "createdTime": 1756854084606,
-        "modifiedTime": 1756854140225,
+        "createdTime": 1757047550888,
+        "modifiedTime": 1757047555350,
         "lastModifiedBy": "Z8sCTHO0edFF1hYo"
       },
-      "_key": "!items.effects!aGy1Ck4HUsaR495p.05kKEOUQF03VEGBT"
+      "_key": "!items.effects!aGy1Ck4HUsaR495p.WMDFNXeFfnLsRZbD"
     },
     {
       "name": "Clan Fealty",
@@ -2259,7 +2275,7 @@
           "derived": 0
         }
       },
-      "_id": "qH2WHVhHQjIqDq8X",
+      "_id": "I47Zs3GS7qWIiCiM",
       "changes": [],
       "disabled": false,
       "duration": {
@@ -2280,11 +2296,11 @@
         "coreVersion": "13.345",
         "systemId": "teriock",
         "systemVersion": "0.1.0",
-        "createdTime": 1756854084608,
-        "modifiedTime": 1756854140243,
+        "createdTime": 1757047550890,
+        "modifiedTime": 1757047555406,
         "lastModifiedBy": "Z8sCTHO0edFF1hYo"
       },
-      "_key": "!items.effects!aGy1Ck4HUsaR495p.qH2WHVhHQjIqDq8X"
+      "_key": "!items.effects!aGy1Ck4HUsaR495p.I47Zs3GS7qWIiCiM"
     }
   ],
   "sort": 0,
@@ -2301,7 +2317,7 @@
     "systemId": "teriock",
     "systemVersion": "0.1.0",
     "createdTime": 1753157046517,
-    "modifiedTime": 1756854140253,
+    "modifiedTime": 1757047556929,
     "lastModifiedBy": "Z8sCTHO0edFF1hYo"
   },
   "_key": "!items!aGy1Ck4HUsaR495p"
