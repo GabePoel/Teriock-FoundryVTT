@@ -1,7 +1,7 @@
 import { abilityOptions } from "../../../../constants/options/ability-options.mjs";
 import { getIcon } from "../../../../helpers/path.mjs";
 import { parseDurationString, safeUuid } from "../../../../helpers/utils.mjs";
-import { cleanHTMLDoc } from "../../../shared/parsing/clean-html-doc.mjs";
+import { cleanHTMLDoc, cleanObject } from "../../../shared/parsing/clean-html-doc.mjs";
 import { extractChangesFromHTML } from "../../../shared/parsing/extract-changes.mjs";
 import { getBarText, getText } from "../../../shared/parsing/get-text.mjs";
 import { processSubAbilities } from "../../../shared/parsing/process-subs.mjs";
@@ -155,6 +155,32 @@ export async function _parse(abilityData, rawHTML) {
   const img = getIcon("abilities", abilityData.parent.name);
 
   delete parameters.results.endCondition;
+
+  const toClean = [
+    "elderSorceryIncant",
+    "overview.base",
+    "overview.proficient",
+    "overview.fluent",
+    "results.hit",
+    "results.critHit",
+    "results.miss",
+    "results.critMiss",
+    "results.save",
+    "results.critSave",
+    "results.fail",
+    "results.critFail",
+    "costs.mp.value.variable",
+    "costs.hp.value.variable",
+    "costs.gp.value.variable",
+    "costs.materialCost",
+    "heightened",
+    "endCondition",
+    "requirements",
+    "trigger",
+    "limitation",
+    "improvement",
+  ];
+  cleanObject(parameters, toClean);
 
   return { changes, system: parameters, img };
 }

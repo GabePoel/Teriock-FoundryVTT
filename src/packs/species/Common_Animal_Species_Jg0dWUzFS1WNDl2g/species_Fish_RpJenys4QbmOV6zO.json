@@ -10,15 +10,15 @@
     "font": "",
     "description": "",
     "disabled": false,
-    "updateCounter": false,
+    "updateCounter": true,
     "onUse": [],
     "hpDice": {
       "jEGP9tXUBaZmSEZ3": {
         "_id": "jEGP9tXUBaZmSEZ3",
         "stat": "hp",
-        "faces": 8,
+        "faces": 4,
         "spent": false,
-        "value": 5
+        "value": 3
       }
     },
     "mpDice": {
@@ -43,7 +43,7 @@
     "adult": null,
     "appearance": "",
     "applySize": true,
-    "attributeIncrease": "<span class=\"metadata\" data-type=\"size-attribute-increase\" data-size=\"1\" data-gain=\"Low Strength\" data-lose=\"Tiny Strength\"><a href=\"https://wiki.teriock.com/index.php/Ability:Low_Strength\" title=\"Ability:Low Strength\" target=\"_blank\">Low Strength</a> if at least <a href=\"https://wiki.teriock.com/index.php/Core:Size\" title=\"Core:Size\" target=\"_blank\">size</a> 1.</span> <span class=\"metadata\" data-type=\"size-attribute-increase\" data-size=\"2\" data-gain=\"Normal Strength\" data-lose=\"Low Strength\"><a href=\"https://wiki.teriock.com/index.php/Ability:Normal_Strength\" title=\"Ability:Normal Strength\" target=\"_blank\">Normal Strength</a> if at least <a href=\"https://wiki.teriock.com/index.php/Core:Size\" title=\"Core:Size\" target=\"_blank\">size</a> 2.</span> <span class=\"metadata\" data-type=\"size-attribute-increase\" data-size=\"4\" data-gain=\"Beastly Strength\" data-lose=\"Normal Strength\"><a href=\"https://wiki.teriock.com/index.php/Ability:Beastly_Strength\" title=\"Ability:Beastly Strength\" target=\"_blank\">Beastly Strength</a> if at least <a href=\"https://wiki.teriock.com/index.php/Core:Size\" title=\"Core:Size\" target=\"_blank\">size</a> 4.</span>\n<span class=\"metadata\" data-type=\"size-attribute-increase\" data-size=\"5\" data-gain=\"Improved Strength\" data-lose=\"Beastly Strength\"><a href=\"https://wiki.teriock.com/index.php/Ability:Improved_Strength\" title=\"Ability:Improved Strength\" target=\"_blank\">Improved Strength</a> if at least <a href=\"https://wiki.teriock.com/index.php/Core:Size\" title=\"Core:Size\" target=\"_blank\">size</a> 5.</span>",
+    "attributeIncrease": "@L[Ability:Low Strength]{Low Strength} if at least @L[Core:Size]{size} 1. @L[Ability:Normal Strength]{Normal Strength} if at least @L[Core:Size]{size} 2. @L[Ability:Beastly Strength]{Beastly Strength} if at least @L[Core:Size]{size} 4.\n@L[Ability:Improved Strength]{Improved Strength} if at least @L[Core:Size]{size} 5.",
     "br": 1,
     "hpIncrease": "Gain another hit die for every 1 additional size above 1.",
     "innateRanks": "",
@@ -94,6 +94,406 @@
     ]
   },
   "effects": [
+    {
+      "name": "Bite",
+      "type": "ability",
+      "system": {
+        "proficient": false,
+        "fluent": false,
+        "font": "",
+        "description": "<p>None.</p>",
+        "deleteOnExpire": false,
+        "updateCounter": false,
+        "suppression": {
+          "statuses": {
+            "active": [],
+            "inactive": []
+          },
+          "comparisons": {
+            "actor": [],
+            "item": []
+          }
+        },
+        "hierarchy": {
+          "rootUuid": "Compendium.teriock.species.Item.RpJenys4QbmOV6zO",
+          "subIds": [],
+          "supId": null
+        },
+        "applies": {
+          "base": {
+            "statuses": [],
+            "startStatuses": [],
+            "endStatuses": [],
+            "rolls": {
+              "damage": "1d4"
+            },
+            "hacks": [],
+            "checks": [],
+            "duration": 0,
+            "changes": [
+              {
+                "key": "system.damage.mouth",
+                "mode": 4,
+                "value": "4",
+                "priority": 10
+              }
+            ],
+            "common": [],
+            "expiration": {
+              "normal": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "crit": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "changeOnCrit": false,
+              "doesExpire": false
+            }
+          },
+          "proficient": {
+            "statuses": [],
+            "startStatuses": [],
+            "endStatuses": [],
+            "rolls": {
+              "damage": "1d6"
+            },
+            "hacks": [],
+            "checks": [],
+            "duration": 0,
+            "changes": [
+              {
+                "key": "system.damage.mouth",
+                "mode": 4,
+                "value": "6",
+                "priority": 10
+              }
+            ],
+            "common": [],
+            "expiration": {
+              "normal": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "crit": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "changeOnCrit": false,
+              "doesExpire": false
+            }
+          },
+          "fluent": {
+            "statuses": [],
+            "startStatuses": [],
+            "endStatuses": [],
+            "rolls": {
+              "damage": "1d8"
+            },
+            "hacks": [],
+            "checks": [],
+            "duration": 0,
+            "changes": [
+              {
+                "key": "system.damage.mouth",
+                "mode": 4,
+                "value": "8",
+                "priority": 20
+              }
+            ],
+            "common": [],
+            "expiration": {
+              "normal": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "crit": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "changeOnCrit": false,
+              "doesExpire": false
+            }
+          },
+          "heightened": {
+            "statuses": [],
+            "startStatuses": [],
+            "endStatuses": [],
+            "rolls": {},
+            "hacks": [],
+            "checks": [],
+            "duration": 0,
+            "changes": [],
+            "common": [],
+            "expiration": {
+              "normal": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "crit": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "changeOnCrit": false,
+              "doesExpire": false
+            }
+          },
+          "macros": {}
+        },
+        "sustaining": [],
+        "elderSorcery": false,
+        "elderSorceryIncant": "",
+        "powerSources": [
+          "martial"
+        ],
+        "interaction": "manifest",
+        "featSaveAttribute": "mov",
+        "maneuver": "passive",
+        "executionTime": "passive",
+        "delivery": {
+          "base": "self",
+          "parent": null,
+          "package": null
+        },
+        "targets": [
+          "self"
+        ],
+        "elements": [],
+        "duration": {
+          "unit": "noLimit",
+          "quantity": 0,
+          "conditions": {
+            "present": [],
+            "absent": []
+          },
+          "stationary": false,
+          "description": "Always Active"
+        },
+        "sustained": false,
+        "range": "Self.",
+        "overview": {
+          "base": "Your @L[Equipment:Mouth]{mouth} counts as a @L[Category:Weapons]{weapon} for the purposes of abilities that target or are delivered by it (although it cannot be @L[Property:Shattered]{shattered} or @L[Property:Destroyed]{destroyed}). You may @L[Core:Attack Interaction]{attack} with it and its damage die is now [[/damage 1d4]].",
+          "proficient": "The damage die is instead [[/damage 1d6]].",
+          "fluent": "The damage die is instead [[/damage 1d8]]."
+        },
+        "results": {
+          "hit": "",
+          "critHit": "",
+          "miss": "",
+          "critMiss": "",
+          "save": "",
+          "critSave": "",
+          "fail": "",
+          "critFail": ""
+        },
+        "piercing": "normal",
+        "improvements": {
+          "attributeImprovement": {
+            "attribute": null,
+            "minVal": 0
+          },
+          "featSaveImprovement": {
+            "attribute": null,
+            "amount": "proficient"
+          }
+        },
+        "skill": false,
+        "spell": false,
+        "standard": false,
+        "ritual": false,
+        "class": "",
+        "rotator": false,
+        "invoked": false,
+        "costs": {
+          "verbal": false,
+          "somatic": false,
+          "material": false,
+          "mp": {
+            "type": "none",
+            "value": {
+              "static": 0,
+              "formula": "",
+              "variable": ""
+            }
+          },
+          "hp": {
+            "type": "none",
+            "value": {
+              "static": 0,
+              "formula": "",
+              "variable": ""
+            }
+          },
+          "gp": {
+            "type": "none",
+            "value": {
+              "static": 0,
+              "formula": "",
+              "variable": ""
+            }
+          },
+          "break": "",
+          "materialCost": ""
+        },
+        "heightened": "",
+        "endCondition": "",
+        "requirements": "",
+        "effects": [],
+        "expansion": null,
+        "expansionRange": null,
+        "expansionSaveAttribute": "mov",
+        "trigger": "",
+        "basic": false,
+        "form": "normal",
+        "limitation": "",
+        "improvement": "",
+        "prepared": true,
+        "warded": false,
+        "secret": false,
+        "gifted": {
+          "enabled": false,
+          "amount": 1
+        },
+        "consumable": false,
+        "quantity": 1,
+        "maxQuantity": {
+          "raw": "",
+          "derived": 0
+        }
+      },
+      "_id": "f7xSuJIMhqBb8DZb",
+      "img": "systems/teriock/src/icons/abilities/bite.webp",
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.345",
+        "systemId": "teriock",
+        "systemVersion": "0.1.0",
+        "createdTime": 1757099786030,
+        "modifiedTime": 1757099821852,
+        "lastModifiedBy": "Z8sCTHO0edFF1hYo"
+      },
+      "_key": "!items.effects!RpJenys4QbmOV6zO.f7xSuJIMhqBb8DZb"
+    },
     {
       "name": "Tiny Strength",
       "type": "ability",
@@ -320,7 +720,6 @@
           "macros": {}
         },
         "sustaining": [],
-        "wikiNamespace": "Ability",
         "elderSorcery": false,
         "elderSorceryIncant": "",
         "powerSources": [
@@ -441,7 +840,7 @@
           "amount": 1
         }
       },
-      "_id": "D1lEz9MqN73sqgeB",
+      "_id": "Bhwnm02ThESddhHJ",
       "changes": [],
       "disabled": false,
       "duration": {
@@ -462,11 +861,4514 @@
         "coreVersion": "13.345",
         "systemId": "teriock",
         "systemVersion": "0.1.0",
-        "createdTime": 1756961149205,
-        "modifiedTime": 1756961149205,
+        "createdTime": 1757099821939,
+        "modifiedTime": 1757099821939,
         "lastModifiedBy": "Z8sCTHO0edFF1hYo"
       },
-      "_key": "!items.effects!RpJenys4QbmOV6zO.D1lEz9MqN73sqgeB"
+      "_key": "!items.effects!RpJenys4QbmOV6zO.Bhwnm02ThESddhHJ"
+    },
+    {
+      "name": "Dense Intelligence",
+      "type": "ability",
+      "system": {
+        "proficient": false,
+        "fluent": false,
+        "font": "",
+        "description": "<p>None.</p>",
+        "deleteOnExpire": false,
+        "updateCounter": false,
+        "suppression": {
+          "statuses": {
+            "active": [],
+            "inactive": []
+          },
+          "comparisons": {
+            "actor": [],
+            "item": []
+          }
+        },
+        "hierarchy": {
+          "rootUuid": "Compendium.teriock.species.Item.RpJenys4QbmOV6zO",
+          "subIds": [],
+          "supId": null
+        },
+        "applies": {
+          "base": {
+            "statuses": [],
+            "startStatuses": [],
+            "endStatuses": [],
+            "rolls": {},
+            "hacks": [],
+            "checks": [],
+            "duration": 0,
+            "changes": [],
+            "common": [],
+            "expiration": {
+              "normal": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "crit": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "changeOnCrit": false,
+              "doesExpire": false
+            }
+          },
+          "proficient": {
+            "statuses": [],
+            "startStatuses": [],
+            "endStatuses": [],
+            "rolls": {},
+            "hacks": [],
+            "checks": [],
+            "duration": 0,
+            "changes": [],
+            "common": [],
+            "expiration": {
+              "normal": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "crit": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "changeOnCrit": false,
+              "doesExpire": false
+            }
+          },
+          "fluent": {
+            "statuses": [],
+            "startStatuses": [],
+            "endStatuses": [],
+            "rolls": {},
+            "hacks": [],
+            "checks": [],
+            "duration": 0,
+            "changes": [],
+            "common": [],
+            "expiration": {
+              "normal": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "crit": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "changeOnCrit": false,
+              "doesExpire": false
+            }
+          },
+          "heightened": {
+            "statuses": [],
+            "startStatuses": [],
+            "endStatuses": [],
+            "rolls": {},
+            "hacks": [],
+            "checks": [],
+            "duration": 0,
+            "changes": [],
+            "common": [],
+            "expiration": {
+              "normal": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "crit": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "changeOnCrit": false,
+              "doesExpire": false
+            }
+          },
+          "macros": {}
+        },
+        "sustaining": [],
+        "elderSorcery": false,
+        "elderSorceryIncant": "",
+        "powerSources": [
+          "martial"
+        ],
+        "interaction": "manifest",
+        "featSaveAttribute": "mov",
+        "maneuver": "passive",
+        "executionTime": "passive",
+        "delivery": {
+          "base": "self",
+          "parent": null,
+          "package": null
+        },
+        "targets": [
+          "self"
+        ],
+        "elements": [],
+        "duration": {
+          "unit": "noLimit",
+          "quantity": 0,
+          "conditions": {
+            "present": [],
+            "absent": []
+          },
+          "stationary": false,
+          "description": "Always Active"
+        },
+        "sustained": false,
+        "range": "Self.",
+        "overview": {
+          "base": "",
+          "proficient": "",
+          "fluent": ""
+        },
+        "results": {
+          "hit": "",
+          "critHit": "",
+          "miss": "",
+          "critMiss": "",
+          "save": "",
+          "critSave": "",
+          "fail": "",
+          "critFail": ""
+        },
+        "piercing": "normal",
+        "improvements": {
+          "attributeImprovement": {
+            "attribute": "int",
+            "minVal": -2
+          },
+          "featSaveImprovement": {
+            "attribute": null,
+            "amount": "proficient"
+          }
+        },
+        "skill": false,
+        "spell": false,
+        "standard": false,
+        "ritual": false,
+        "class": "",
+        "rotator": false,
+        "invoked": false,
+        "costs": {
+          "verbal": false,
+          "somatic": false,
+          "material": false,
+          "mp": {
+            "type": "none",
+            "value": {
+              "static": 0,
+              "formula": "",
+              "variable": ""
+            }
+          },
+          "hp": {
+            "type": "none",
+            "value": {
+              "static": 0,
+              "formula": "",
+              "variable": ""
+            }
+          },
+          "gp": {
+            "type": "none",
+            "value": {
+              "static": 0,
+              "formula": "",
+              "variable": ""
+            }
+          },
+          "break": "",
+          "materialCost": ""
+        },
+        "heightened": "",
+        "endCondition": "",
+        "requirements": "",
+        "effects": [],
+        "expansion": null,
+        "expansionRange": null,
+        "expansionSaveAttribute": "mov",
+        "trigger": "",
+        "basic": false,
+        "form": "flaw",
+        "limitation": "",
+        "improvement": "",
+        "prepared": true,
+        "warded": false,
+        "secret": false,
+        "gifted": {
+          "enabled": false,
+          "amount": 1
+        },
+        "consumable": false,
+        "quantity": 1,
+        "maxQuantity": {
+          "raw": "",
+          "derived": 0
+        }
+      },
+      "_id": "loJTH4TvPvgsZsYt",
+      "img": "systems/teriock/src/icons/abilities/dense-intelligence.webp",
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.345",
+        "systemId": "teriock",
+        "systemVersion": "0.1.0",
+        "createdTime": 1757099822008,
+        "modifiedTime": 1757099827495,
+        "lastModifiedBy": "Z8sCTHO0edFF1hYo"
+      },
+      "_key": "!items.effects!RpJenys4QbmOV6zO.loJTH4TvPvgsZsYt"
+    },
+    {
+      "name": "Escape",
+      "type": "ability",
+      "system": {
+        "proficient": false,
+        "fluent": false,
+        "font": "",
+        "description": "<p>None.</p>",
+        "deleteOnExpire": false,
+        "updateCounter": false,
+        "suppression": {
+          "statuses": {
+            "active": [],
+            "inactive": []
+          },
+          "comparisons": {
+            "actor": [],
+            "item": []
+          }
+        },
+        "hierarchy": {
+          "rootUuid": "Compendium.teriock.species.Item.RpJenys4QbmOV6zO",
+          "subIds": [],
+          "supId": null
+        },
+        "applies": {
+          "base": {
+            "statuses": [],
+            "startStatuses": [],
+            "endStatuses": [],
+            "rolls": {},
+            "hacks": [],
+            "checks": [],
+            "duration": 0,
+            "changes": [],
+            "common": [],
+            "expiration": {
+              "normal": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "crit": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "changeOnCrit": false,
+              "doesExpire": false
+            }
+          },
+          "proficient": {
+            "statuses": [],
+            "startStatuses": [],
+            "endStatuses": [],
+            "rolls": {},
+            "hacks": [],
+            "checks": [],
+            "duration": 0,
+            "changes": [],
+            "common": [],
+            "expiration": {
+              "normal": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "crit": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "changeOnCrit": false,
+              "doesExpire": false
+            }
+          },
+          "fluent": {
+            "statuses": [],
+            "startStatuses": [],
+            "endStatuses": [],
+            "rolls": {},
+            "hacks": [],
+            "checks": [],
+            "duration": 0,
+            "changes": [],
+            "common": [],
+            "expiration": {
+              "normal": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "crit": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "changeOnCrit": false,
+              "doesExpire": false
+            }
+          },
+          "heightened": {
+            "statuses": [],
+            "startStatuses": [],
+            "endStatuses": [],
+            "rolls": {},
+            "hacks": [],
+            "checks": [],
+            "duration": 0,
+            "changes": [],
+            "common": [],
+            "expiration": {
+              "normal": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "crit": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "changeOnCrit": false,
+              "doesExpire": false
+            }
+          },
+          "macros": {}
+        },
+        "sustaining": [],
+        "elderSorcery": false,
+        "elderSorceryIncant": "",
+        "powerSources": [
+          "martial"
+        ],
+        "interaction": "manifest",
+        "featSaveAttribute": "mov",
+        "maneuver": "reactive",
+        "executionTime": "r1",
+        "delivery": {
+          "base": "self",
+          "parent": null,
+          "package": null
+        },
+        "targets": [
+          "self"
+        ],
+        "elements": [],
+        "duration": {
+          "unit": "instant",
+          "quantity": 0,
+          "conditions": {
+            "present": [],
+            "absent": []
+          },
+          "stationary": false,
+          "description": "Instant"
+        },
+        "sustained": false,
+        "range": "Self.",
+        "overview": {
+          "base": "You move on a distance up to your @L[Core:Movement Speed]{movement speed} on the ground. If you have a @L[Core:Movement Speed]{fly speed} or @L[Core:Movement Speed]{swim speed} then you may move in the air or in water accordingly. This movement doesn't trigger @L[Category:Reactive abilities]{reactive abilities}.",
+          "proficient": "",
+          "fluent": ""
+        },
+        "results": {
+          "hit": "",
+          "critHit": "",
+          "miss": "",
+          "critMiss": "",
+          "save": "",
+          "critSave": "",
+          "fail": "",
+          "critFail": ""
+        },
+        "piercing": "normal",
+        "improvements": {
+          "attributeImprovement": {
+            "attribute": null,
+            "minVal": 0
+          },
+          "featSaveImprovement": {
+            "attribute": "mov",
+            "amount": "fluency"
+          }
+        },
+        "skill": true,
+        "spell": false,
+        "standard": true,
+        "ritual": false,
+        "class": "assassin",
+        "rotator": false,
+        "invoked": false,
+        "costs": {
+          "verbal": false,
+          "somatic": false,
+          "material": false,
+          "mp": {
+            "type": "none",
+            "value": {
+              "static": 0,
+              "formula": "",
+              "variable": ""
+            }
+          },
+          "hp": {
+            "type": "none",
+            "value": {
+              "static": 0,
+              "formula": "",
+              "variable": ""
+            }
+          },
+          "gp": {
+            "type": "none",
+            "value": {
+              "static": 0,
+              "formula": "",
+              "variable": ""
+            }
+          },
+          "break": "",
+          "materialCost": ""
+        },
+        "heightened": "",
+        "endCondition": "",
+        "requirements": "",
+        "effects": [],
+        "expansion": null,
+        "expansionRange": null,
+        "expansionSaveAttribute": "mov",
+        "trigger": "You @L[Category:Attack abilities]{attack} another creature.",
+        "basic": false,
+        "form": "normal",
+        "limitation": "",
+        "improvement": "",
+        "prepared": true,
+        "warded": false,
+        "secret": false,
+        "gifted": {
+          "enabled": false,
+          "amount": 1
+        },
+        "consumable": false,
+        "quantity": 1,
+        "maxQuantity": {
+          "raw": "",
+          "derived": 0
+        }
+      },
+      "_id": "OdDAKYOldyPjIXU1",
+      "img": "systems/teriock/src/icons/abilities/escape.webp",
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.345",
+        "systemId": "teriock",
+        "systemVersion": "0.1.0",
+        "createdTime": 1757099828538,
+        "modifiedTime": 1757099829635,
+        "lastModifiedBy": "Z8sCTHO0edFF1hYo"
+      },
+      "_key": "!items.effects!RpJenys4QbmOV6zO.OdDAKYOldyPjIXU1"
+    },
+    {
+      "name": "Hide",
+      "type": "ability",
+      "system": {
+        "proficient": false,
+        "fluent": false,
+        "font": "",
+        "description": "<p>None.</p>",
+        "deleteOnExpire": false,
+        "updateCounter": false,
+        "suppression": {
+          "statuses": {
+            "active": [],
+            "inactive": []
+          },
+          "comparisons": {
+            "actor": [],
+            "item": []
+          }
+        },
+        "hierarchy": {
+          "rootUuid": "Compendium.teriock.species.Item.RpJenys4QbmOV6zO",
+          "subIds": [],
+          "supId": null
+        },
+        "applies": {
+          "base": {
+            "statuses": [],
+            "startStatuses": [
+              "hidden"
+            ],
+            "endStatuses": [],
+            "rolls": {
+              "hide": "10 + @snk"
+            },
+            "hacks": [],
+            "checks": [],
+            "duration": 0,
+            "changes": [],
+            "common": [],
+            "expiration": {
+              "normal": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "crit": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "changeOnCrit": false,
+              "doesExpire": false
+            }
+          },
+          "proficient": {
+            "statuses": [],
+            "startStatuses": [],
+            "endStatuses": [],
+            "rolls": {
+              "hide": "1d20 + @snk + @p"
+            },
+            "hacks": [],
+            "checks": [],
+            "duration": 0,
+            "changes": [],
+            "common": [],
+            "expiration": {
+              "normal": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "crit": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "changeOnCrit": false,
+              "doesExpire": false
+            }
+          },
+          "fluent": {
+            "statuses": [],
+            "startStatuses": [],
+            "endStatuses": [],
+            "rolls": {
+              "hide": "1d20 + @snk + @f"
+            },
+            "hacks": [],
+            "checks": [],
+            "duration": 0,
+            "changes": [],
+            "common": [],
+            "expiration": {
+              "normal": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "crit": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "changeOnCrit": false,
+              "doesExpire": false
+            }
+          },
+          "heightened": {
+            "statuses": [],
+            "startStatuses": [],
+            "endStatuses": [],
+            "rolls": {},
+            "hacks": [],
+            "checks": [],
+            "duration": 0,
+            "changes": [],
+            "common": [],
+            "expiration": {
+              "normal": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "crit": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "changeOnCrit": false,
+              "doesExpire": false
+            }
+          },
+          "macros": {}
+        },
+        "sustaining": [],
+        "elderSorcery": false,
+        "elderSorceryIncant": "",
+        "powerSources": [
+          "martial"
+        ],
+        "interaction": "manifest",
+        "featSaveAttribute": "mov",
+        "maneuver": "active",
+        "executionTime": "a1",
+        "delivery": {
+          "base": "self",
+          "parent": null,
+          "package": null
+        },
+        "targets": [
+          "self"
+        ],
+        "elements": [],
+        "duration": {
+          "unit": "instant",
+          "quantity": 0,
+          "conditions": {
+            "present": [],
+            "absent": []
+          },
+          "stationary": false,
+          "description": "Instant"
+        },
+        "sustained": false,
+        "range": "Self.",
+        "overview": {
+          "base": "You become @L[Condition:Hidden]{hidden}. As you do this, you may roll [[/roll 1d20 + @snk]]. If this is greater than your @L[Core:Passive Attributes]{passive} @L[Core:Sneak]{sneak} ([[/roll 10 + @snk]]), then you use it as your hidden DC. If not, use your @L[Core:Passive Attributes]{passive} @L[Core:Sneak]{sneak}.",
+          "proficient": "Instead roll [[/roll 1d20 + @snk + @p]] for your hidden DC (if it's greater than your @L[Core:Passive Attributes]{passive} @L[Core:Sneak]{sneak}).",
+          "fluent": "Instead roll [[/roll 1d20 + @snk + @f]] for your hidden DC (if it's greater than your @L[Core:Passive Attributes]{passive} @L[Core:Sneak]{sneak})."
+        },
+        "results": {
+          "hit": "",
+          "critHit": "",
+          "miss": "",
+          "critMiss": "",
+          "save": "",
+          "critSave": "",
+          "fail": "",
+          "critFail": ""
+        },
+        "piercing": "normal",
+        "improvements": {
+          "attributeImprovement": {
+            "attribute": "snk",
+            "minVal": 2
+          },
+          "featSaveImprovement": {
+            "attribute": "snk",
+            "amount": "proficiency"
+          }
+        },
+        "skill": true,
+        "spell": false,
+        "standard": true,
+        "ritual": false,
+        "class": "thief",
+        "rotator": false,
+        "invoked": false,
+        "costs": {
+          "verbal": false,
+          "somatic": false,
+          "material": false,
+          "mp": {
+            "type": "none",
+            "value": {
+              "static": 0,
+              "formula": "",
+              "variable": ""
+            }
+          },
+          "hp": {
+            "type": "none",
+            "value": {
+              "static": 0,
+              "formula": "",
+              "variable": ""
+            }
+          },
+          "gp": {
+            "type": "none",
+            "value": {
+              "static": 0,
+              "formula": "",
+              "variable": ""
+            }
+          },
+          "break": "",
+          "materialCost": ""
+        },
+        "heightened": "",
+        "endCondition": "",
+        "requirements": "You are in a location with shadows, dim light, @L[Core:Cover]{three-quarters cover}, or some other feature which the @L[Core:GM]{GM} determines is appropriate for being @L[Condition:Hidden]{hidden}. You must remain in areas that maintain these conditions to stay @L[Condition:Hidden]{hidden}.",
+        "effects": [],
+        "expansion": null,
+        "expansionRange": null,
+        "expansionSaveAttribute": "mov",
+        "trigger": "",
+        "basic": false,
+        "form": "normal",
+        "limitation": "",
+        "improvement": "",
+        "prepared": true,
+        "warded": false,
+        "secret": false,
+        "gifted": {
+          "enabled": false,
+          "amount": 1
+        },
+        "consumable": false,
+        "quantity": 1,
+        "maxQuantity": {
+          "raw": "",
+          "derived": 0
+        }
+      },
+      "_id": "yfyOLTtbt9m7rTYa",
+      "img": "systems/teriock/src/icons/abilities/hide.webp",
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.345",
+        "systemId": "teriock",
+        "systemVersion": "0.1.0",
+        "createdTime": 1757099830871,
+        "modifiedTime": 1757099832079,
+        "lastModifiedBy": "Z8sCTHO0edFF1hYo"
+      },
+      "_key": "!items.effects!RpJenys4QbmOV6zO.yfyOLTtbt9m7rTYa"
+    },
+    {
+      "name": "Leaping",
+      "type": "ability",
+      "system": {
+        "proficient": false,
+        "fluent": false,
+        "font": "",
+        "description": "<p>None.</p>",
+        "deleteOnExpire": false,
+        "updateCounter": false,
+        "suppression": {
+          "statuses": {
+            "active": [],
+            "inactive": []
+          },
+          "comparisons": {
+            "actor": [],
+            "item": []
+          }
+        },
+        "hierarchy": {
+          "rootUuid": "Compendium.teriock.species.Item.RpJenys4QbmOV6zO",
+          "subIds": [],
+          "supId": null
+        },
+        "applies": {
+          "base": {
+            "statuses": [],
+            "startStatuses": [],
+            "endStatuses": [],
+            "rolls": {},
+            "hacks": [],
+            "checks": [],
+            "duration": 0,
+            "changes": [],
+            "common": [],
+            "expiration": {
+              "normal": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "crit": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "changeOnCrit": false,
+              "doesExpire": false
+            }
+          },
+          "proficient": {
+            "statuses": [],
+            "startStatuses": [],
+            "endStatuses": [],
+            "rolls": {},
+            "hacks": [],
+            "checks": [],
+            "duration": 0,
+            "changes": [],
+            "common": [],
+            "expiration": {
+              "normal": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "crit": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "changeOnCrit": false,
+              "doesExpire": false
+            }
+          },
+          "fluent": {
+            "statuses": [],
+            "startStatuses": [],
+            "endStatuses": [],
+            "rolls": {},
+            "hacks": [],
+            "checks": [],
+            "duration": 0,
+            "changes": [],
+            "common": [],
+            "expiration": {
+              "normal": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "crit": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "changeOnCrit": false,
+              "doesExpire": false
+            }
+          },
+          "heightened": {
+            "statuses": [],
+            "startStatuses": [],
+            "endStatuses": [],
+            "rolls": {},
+            "hacks": [],
+            "checks": [],
+            "duration": 0,
+            "changes": [],
+            "common": [],
+            "expiration": {
+              "normal": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "crit": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "changeOnCrit": false,
+              "doesExpire": false
+            }
+          },
+          "macros": {}
+        },
+        "sustaining": [],
+        "elderSorcery": false,
+        "elderSorceryIncant": "",
+        "powerSources": [
+          "martial"
+        ],
+        "interaction": "manifest",
+        "featSaveAttribute": "mov",
+        "maneuver": "passive",
+        "executionTime": "passive",
+        "delivery": {
+          "base": "self",
+          "parent": null,
+          "package": null
+        },
+        "targets": [
+          "self"
+        ],
+        "elements": [],
+        "duration": {
+          "unit": "noLimit",
+          "quantity": 0,
+          "conditions": {
+            "present": [],
+            "absent": []
+          },
+          "stationary": false,
+          "description": "Always Active"
+        },
+        "sustained": false,
+        "range": "Self.",
+        "overview": {
+          "base": "You vertically leap at @L[Core:Movement Speed]{quarter speed} and horizontally leap at @L[Core:Movement Speed]{half speed}.",
+          "proficient": "You instead vertically leap at @L[Core:Movement Speed]{half speed} and horizontally leap at @L[Core:Movement Speed]{full speed}.",
+          "fluent": ""
+        },
+        "results": {
+          "hit": "",
+          "critHit": "",
+          "miss": "",
+          "critMiss": "",
+          "save": "",
+          "critSave": "",
+          "fail": "",
+          "critFail": ""
+        },
+        "piercing": "normal",
+        "improvements": {
+          "attributeImprovement": {
+            "attribute": null,
+            "minVal": 0
+          },
+          "featSaveImprovement": {
+            "attribute": null,
+            "amount": "proficient"
+          }
+        },
+        "skill": true,
+        "spell": false,
+        "standard": true,
+        "ritual": false,
+        "class": "assassin",
+        "rotator": false,
+        "invoked": false,
+        "costs": {
+          "verbal": false,
+          "somatic": false,
+          "material": false,
+          "mp": {
+            "type": "none",
+            "value": {
+              "static": 0,
+              "formula": "",
+              "variable": ""
+            }
+          },
+          "hp": {
+            "type": "none",
+            "value": {
+              "static": 0,
+              "formula": "",
+              "variable": ""
+            }
+          },
+          "gp": {
+            "type": "none",
+            "value": {
+              "static": 0,
+              "formula": "",
+              "variable": ""
+            }
+          },
+          "break": "",
+          "materialCost": ""
+        },
+        "heightened": "",
+        "endCondition": "",
+        "requirements": "",
+        "effects": [
+          "movement"
+        ],
+        "expansion": null,
+        "expansionRange": null,
+        "expansionSaveAttribute": "mov",
+        "trigger": "",
+        "basic": false,
+        "form": "normal",
+        "limitation": "",
+        "improvement": "",
+        "prepared": true,
+        "warded": false,
+        "secret": false,
+        "gifted": {
+          "enabled": false,
+          "amount": 1
+        },
+        "consumable": false,
+        "quantity": 1,
+        "maxQuantity": {
+          "raw": "",
+          "derived": 0
+        }
+      },
+      "_id": "VWrJ7lvDuYIsq3Ke",
+      "img": "systems/teriock/src/icons/abilities/leaping.webp",
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.345",
+        "systemId": "teriock",
+        "systemVersion": "0.1.0",
+        "createdTime": 1757099833297,
+        "modifiedTime": 1757099834855,
+        "lastModifiedBy": "Z8sCTHO0edFF1hYo"
+      },
+      "_key": "!items.effects!RpJenys4QbmOV6zO.VWrJ7lvDuYIsq3Ke"
+    },
+    {
+      "name": "No Hands",
+      "type": "ability",
+      "system": {
+        "proficient": false,
+        "fluent": false,
+        "font": "",
+        "description": "<p>None.</p>",
+        "deleteOnExpire": false,
+        "updateCounter": false,
+        "suppression": {
+          "statuses": {
+            "active": [],
+            "inactive": []
+          },
+          "comparisons": {
+            "actor": [],
+            "item": []
+          }
+        },
+        "hierarchy": {
+          "rootUuid": "Compendium.teriock.species.Item.RpJenys4QbmOV6zO",
+          "subIds": [],
+          "supId": null
+        },
+        "applies": {
+          "base": {
+            "statuses": [],
+            "startStatuses": [],
+            "endStatuses": [],
+            "rolls": {},
+            "hacks": [],
+            "checks": [],
+            "duration": 0,
+            "changes": [],
+            "common": [],
+            "expiration": {
+              "normal": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "crit": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "changeOnCrit": false,
+              "doesExpire": false
+            }
+          },
+          "proficient": {
+            "statuses": [],
+            "startStatuses": [],
+            "endStatuses": [],
+            "rolls": {},
+            "hacks": [],
+            "checks": [],
+            "duration": 0,
+            "changes": [],
+            "common": [],
+            "expiration": {
+              "normal": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "crit": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "changeOnCrit": false,
+              "doesExpire": false
+            }
+          },
+          "fluent": {
+            "statuses": [],
+            "startStatuses": [],
+            "endStatuses": [],
+            "rolls": {},
+            "hacks": [],
+            "checks": [],
+            "duration": 0,
+            "changes": [],
+            "common": [],
+            "expiration": {
+              "normal": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "crit": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "changeOnCrit": false,
+              "doesExpire": false
+            }
+          },
+          "heightened": {
+            "statuses": [],
+            "startStatuses": [],
+            "endStatuses": [],
+            "rolls": {},
+            "hacks": [],
+            "checks": [],
+            "duration": 0,
+            "changes": [],
+            "common": [],
+            "expiration": {
+              "normal": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "crit": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "changeOnCrit": false,
+              "doesExpire": false
+            }
+          },
+          "macros": {}
+        },
+        "sustaining": [],
+        "elderSorcery": false,
+        "elderSorceryIncant": "",
+        "powerSources": [
+          "martial"
+        ],
+        "interaction": "manifest",
+        "featSaveAttribute": "mov",
+        "maneuver": "passive",
+        "executionTime": "passive",
+        "delivery": {
+          "base": "self",
+          "parent": null,
+          "package": null
+        },
+        "targets": [
+          "self"
+        ],
+        "elements": [],
+        "duration": {
+          "unit": "noLimit",
+          "quantity": 0,
+          "conditions": {
+            "present": [],
+            "absent": []
+          },
+          "stationary": false,
+          "description": "Always Active"
+        },
+        "sustained": false,
+        "range": "Self.",
+        "overview": {
+          "base": "You cannot use items in your @L[Equipment:Hand]{hands}.",
+          "proficient": "",
+          "fluent": ""
+        },
+        "results": {
+          "hit": "",
+          "critHit": "",
+          "miss": "",
+          "critMiss": "",
+          "save": "",
+          "critSave": "",
+          "fail": "",
+          "critFail": ""
+        },
+        "piercing": "normal",
+        "improvements": {
+          "attributeImprovement": {
+            "attribute": null,
+            "minVal": 0
+          },
+          "featSaveImprovement": {
+            "attribute": null,
+            "amount": "proficient"
+          }
+        },
+        "skill": false,
+        "spell": false,
+        "standard": false,
+        "ritual": false,
+        "class": "",
+        "rotator": false,
+        "invoked": false,
+        "costs": {
+          "verbal": false,
+          "somatic": false,
+          "material": false,
+          "mp": {
+            "type": "none",
+            "value": {
+              "static": 0,
+              "formula": "",
+              "variable": ""
+            }
+          },
+          "hp": {
+            "type": "none",
+            "value": {
+              "static": 0,
+              "formula": "",
+              "variable": ""
+            }
+          },
+          "gp": {
+            "type": "none",
+            "value": {
+              "static": 0,
+              "formula": "",
+              "variable": ""
+            }
+          },
+          "break": "",
+          "materialCost": ""
+        },
+        "heightened": "",
+        "endCondition": "",
+        "requirements": "",
+        "effects": [],
+        "expansion": null,
+        "expansionRange": null,
+        "expansionSaveAttribute": "mov",
+        "trigger": "",
+        "basic": false,
+        "form": "flaw",
+        "limitation": "",
+        "improvement": "",
+        "prepared": true,
+        "warded": false,
+        "secret": false,
+        "gifted": {
+          "enabled": false,
+          "amount": 1
+        },
+        "consumable": false,
+        "quantity": 1,
+        "maxQuantity": {
+          "raw": "",
+          "derived": 0
+        }
+      },
+      "_id": "71REfaWaJVEZFYyC",
+      "img": "systems/teriock/src/icons/abilities/no-hands.webp",
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.345",
+        "systemId": "teriock",
+        "systemVersion": "0.1.0",
+        "createdTime": 1757099836293,
+        "modifiedTime": 1757099837575,
+        "lastModifiedBy": "Z8sCTHO0edFF1hYo"
+      },
+      "_key": "!items.effects!RpJenys4QbmOV6zO.71REfaWaJVEZFYyC"
+    },
+    {
+      "name": "Normal Movement",
+      "type": "ability",
+      "system": {
+        "proficient": false,
+        "fluent": false,
+        "font": "",
+        "description": "<p>None.</p>",
+        "deleteOnExpire": false,
+        "updateCounter": false,
+        "suppression": {
+          "statuses": {
+            "active": [],
+            "inactive": []
+          },
+          "comparisons": {
+            "actor": [],
+            "item": []
+          }
+        },
+        "hierarchy": {
+          "rootUuid": "Compendium.teriock.species.Item.RpJenys4QbmOV6zO",
+          "subIds": [],
+          "supId": null
+        },
+        "applies": {
+          "base": {
+            "statuses": [],
+            "startStatuses": [],
+            "endStatuses": [],
+            "rolls": {},
+            "hacks": [],
+            "checks": [],
+            "duration": 0,
+            "changes": [],
+            "common": [],
+            "expiration": {
+              "normal": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "crit": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "changeOnCrit": false,
+              "doesExpire": false
+            }
+          },
+          "proficient": {
+            "statuses": [],
+            "startStatuses": [],
+            "endStatuses": [],
+            "rolls": {},
+            "hacks": [],
+            "checks": [],
+            "duration": 0,
+            "changes": [],
+            "common": [],
+            "expiration": {
+              "normal": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "crit": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "changeOnCrit": false,
+              "doesExpire": false
+            }
+          },
+          "fluent": {
+            "statuses": [],
+            "startStatuses": [],
+            "endStatuses": [],
+            "rolls": {},
+            "hacks": [],
+            "checks": [],
+            "duration": 0,
+            "changes": [],
+            "common": [],
+            "expiration": {
+              "normal": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "crit": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "changeOnCrit": false,
+              "doesExpire": false
+            }
+          },
+          "heightened": {
+            "statuses": [],
+            "startStatuses": [],
+            "endStatuses": [],
+            "rolls": {},
+            "hacks": [],
+            "checks": [],
+            "duration": 0,
+            "changes": [],
+            "common": [],
+            "expiration": {
+              "normal": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "crit": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "changeOnCrit": false,
+              "doesExpire": false
+            }
+          },
+          "macros": {}
+        },
+        "sustaining": [],
+        "elderSorcery": false,
+        "elderSorceryIncant": "",
+        "powerSources": [
+          "martial"
+        ],
+        "interaction": "manifest",
+        "featSaveAttribute": "mov",
+        "maneuver": "passive",
+        "executionTime": "passive",
+        "delivery": {
+          "base": "self",
+          "parent": null,
+          "package": null
+        },
+        "targets": [
+          "self"
+        ],
+        "elements": [],
+        "duration": {
+          "unit": "noLimit",
+          "quantity": 0,
+          "conditions": {
+            "present": [],
+            "absent": []
+          },
+          "stationary": false,
+          "description": "Always Active"
+        },
+        "sustained": false,
+        "range": "Self.",
+        "overview": {
+          "base": "",
+          "proficient": "",
+          "fluent": ""
+        },
+        "results": {
+          "hit": "",
+          "critHit": "",
+          "miss": "",
+          "critMiss": "",
+          "save": "",
+          "critSave": "",
+          "fail": "",
+          "critFail": ""
+        },
+        "piercing": "normal",
+        "improvements": {
+          "attributeImprovement": {
+            "attribute": "mov",
+            "minVal": 0
+          },
+          "featSaveImprovement": {
+            "attribute": null,
+            "amount": "proficient"
+          }
+        },
+        "skill": false,
+        "spell": false,
+        "standard": false,
+        "ritual": false,
+        "class": "",
+        "rotator": false,
+        "invoked": false,
+        "costs": {
+          "verbal": false,
+          "somatic": false,
+          "material": false,
+          "mp": {
+            "type": "none",
+            "value": {
+              "static": 0,
+              "formula": "",
+              "variable": ""
+            }
+          },
+          "hp": {
+            "type": "none",
+            "value": {
+              "static": 0,
+              "formula": "",
+              "variable": ""
+            }
+          },
+          "gp": {
+            "type": "none",
+            "value": {
+              "static": 0,
+              "formula": "",
+              "variable": ""
+            }
+          },
+          "break": "",
+          "materialCost": ""
+        },
+        "heightened": "",
+        "endCondition": "",
+        "requirements": "",
+        "effects": [],
+        "expansion": null,
+        "expansionRange": null,
+        "expansionSaveAttribute": "mov",
+        "trigger": "",
+        "basic": false,
+        "form": "normal",
+        "limitation": "",
+        "improvement": "",
+        "prepared": true,
+        "warded": false,
+        "secret": false,
+        "gifted": {
+          "enabled": false,
+          "amount": 1
+        },
+        "consumable": false,
+        "quantity": 1,
+        "maxQuantity": {
+          "raw": "",
+          "derived": 0
+        }
+      },
+      "_id": "J9r5huoCQXmbscSe",
+      "img": "systems/teriock/src/icons/abilities/normal-movement.webp",
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.345",
+        "systemId": "teriock",
+        "systemVersion": "0.1.0",
+        "createdTime": 1757099838915,
+        "modifiedTime": 1757099840217,
+        "lastModifiedBy": "Z8sCTHO0edFF1hYo"
+      },
+      "_key": "!items.effects!RpJenys4QbmOV6zO.J9r5huoCQXmbscSe"
+    },
+    {
+      "name": "Normal Perception",
+      "type": "ability",
+      "system": {
+        "proficient": false,
+        "fluent": false,
+        "font": "",
+        "description": "<p>None.</p>",
+        "deleteOnExpire": false,
+        "updateCounter": false,
+        "suppression": {
+          "statuses": {
+            "active": [],
+            "inactive": []
+          },
+          "comparisons": {
+            "actor": [],
+            "item": []
+          }
+        },
+        "hierarchy": {
+          "rootUuid": "Compendium.teriock.species.Item.RpJenys4QbmOV6zO",
+          "subIds": [],
+          "supId": null
+        },
+        "applies": {
+          "base": {
+            "statuses": [],
+            "startStatuses": [],
+            "endStatuses": [],
+            "rolls": {},
+            "hacks": [],
+            "checks": [],
+            "duration": 0,
+            "changes": [],
+            "common": [],
+            "expiration": {
+              "normal": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "crit": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "changeOnCrit": false,
+              "doesExpire": false
+            }
+          },
+          "proficient": {
+            "statuses": [],
+            "startStatuses": [],
+            "endStatuses": [],
+            "rolls": {},
+            "hacks": [],
+            "checks": [],
+            "duration": 0,
+            "changes": [],
+            "common": [],
+            "expiration": {
+              "normal": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "crit": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "changeOnCrit": false,
+              "doesExpire": false
+            }
+          },
+          "fluent": {
+            "statuses": [],
+            "startStatuses": [],
+            "endStatuses": [],
+            "rolls": {},
+            "hacks": [],
+            "checks": [],
+            "duration": 0,
+            "changes": [],
+            "common": [],
+            "expiration": {
+              "normal": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "crit": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "changeOnCrit": false,
+              "doesExpire": false
+            }
+          },
+          "heightened": {
+            "statuses": [],
+            "startStatuses": [],
+            "endStatuses": [],
+            "rolls": {},
+            "hacks": [],
+            "checks": [],
+            "duration": 0,
+            "changes": [],
+            "common": [],
+            "expiration": {
+              "normal": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "crit": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "changeOnCrit": false,
+              "doesExpire": false
+            }
+          },
+          "macros": {}
+        },
+        "sustaining": [],
+        "elderSorcery": false,
+        "elderSorceryIncant": "",
+        "powerSources": [
+          "martial"
+        ],
+        "interaction": "manifest",
+        "featSaveAttribute": "mov",
+        "maneuver": "passive",
+        "executionTime": "passive",
+        "delivery": {
+          "base": "self",
+          "parent": null,
+          "package": null
+        },
+        "targets": [
+          "self"
+        ],
+        "elements": [],
+        "duration": {
+          "unit": "noLimit",
+          "quantity": 0,
+          "conditions": {
+            "present": [],
+            "absent": []
+          },
+          "stationary": false,
+          "description": "Always Active"
+        },
+        "sustained": false,
+        "range": "Self.",
+        "overview": {
+          "base": "",
+          "proficient": "",
+          "fluent": ""
+        },
+        "results": {
+          "hit": "",
+          "critHit": "",
+          "miss": "",
+          "critMiss": "",
+          "save": "",
+          "critSave": "",
+          "fail": "",
+          "critFail": ""
+        },
+        "piercing": "normal",
+        "improvements": {
+          "attributeImprovement": {
+            "attribute": "per",
+            "minVal": 0
+          },
+          "featSaveImprovement": {
+            "attribute": null,
+            "amount": "proficient"
+          }
+        },
+        "skill": false,
+        "spell": false,
+        "standard": false,
+        "ritual": false,
+        "class": "",
+        "rotator": false,
+        "invoked": false,
+        "costs": {
+          "verbal": false,
+          "somatic": false,
+          "material": false,
+          "mp": {
+            "type": "none",
+            "value": {
+              "static": 0,
+              "formula": "",
+              "variable": ""
+            }
+          },
+          "hp": {
+            "type": "none",
+            "value": {
+              "static": 0,
+              "formula": "",
+              "variable": ""
+            }
+          },
+          "gp": {
+            "type": "none",
+            "value": {
+              "static": 0,
+              "formula": "",
+              "variable": ""
+            }
+          },
+          "break": "",
+          "materialCost": ""
+        },
+        "heightened": "",
+        "endCondition": "",
+        "requirements": "",
+        "effects": [],
+        "expansion": null,
+        "expansionRange": null,
+        "expansionSaveAttribute": "mov",
+        "trigger": "",
+        "basic": false,
+        "form": "normal",
+        "limitation": "",
+        "improvement": "",
+        "prepared": true,
+        "warded": false,
+        "secret": false,
+        "gifted": {
+          "enabled": false,
+          "amount": 1
+        },
+        "consumable": false,
+        "quantity": 1,
+        "maxQuantity": {
+          "raw": "",
+          "derived": 0
+        }
+      },
+      "_id": "4T2VCa5bCQMmk3NX",
+      "img": "systems/teriock/src/icons/abilities/normal-perception.webp",
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.345",
+        "systemId": "teriock",
+        "systemVersion": "0.1.0",
+        "createdTime": 1757099841643,
+        "modifiedTime": 1757099843386,
+        "lastModifiedBy": "Z8sCTHO0edFF1hYo"
+      },
+      "_key": "!items.effects!RpJenys4QbmOV6zO.4T2VCa5bCQMmk3NX"
+    },
+    {
+      "name": "Normal Sneak",
+      "type": "ability",
+      "system": {
+        "proficient": false,
+        "fluent": false,
+        "font": "",
+        "description": "<p>None.</p>",
+        "deleteOnExpire": false,
+        "updateCounter": false,
+        "suppression": {
+          "statuses": {
+            "active": [],
+            "inactive": []
+          },
+          "comparisons": {
+            "actor": [],
+            "item": []
+          }
+        },
+        "hierarchy": {
+          "rootUuid": "Compendium.teriock.species.Item.RpJenys4QbmOV6zO",
+          "subIds": [],
+          "supId": null
+        },
+        "applies": {
+          "base": {
+            "statuses": [],
+            "startStatuses": [],
+            "endStatuses": [],
+            "rolls": {},
+            "hacks": [],
+            "checks": [],
+            "duration": 0,
+            "changes": [],
+            "common": [],
+            "expiration": {
+              "normal": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "crit": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "changeOnCrit": false,
+              "doesExpire": false
+            }
+          },
+          "proficient": {
+            "statuses": [],
+            "startStatuses": [],
+            "endStatuses": [],
+            "rolls": {},
+            "hacks": [],
+            "checks": [],
+            "duration": 0,
+            "changes": [],
+            "common": [],
+            "expiration": {
+              "normal": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "crit": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "changeOnCrit": false,
+              "doesExpire": false
+            }
+          },
+          "fluent": {
+            "statuses": [],
+            "startStatuses": [],
+            "endStatuses": [],
+            "rolls": {},
+            "hacks": [],
+            "checks": [],
+            "duration": 0,
+            "changes": [],
+            "common": [],
+            "expiration": {
+              "normal": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "crit": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "changeOnCrit": false,
+              "doesExpire": false
+            }
+          },
+          "heightened": {
+            "statuses": [],
+            "startStatuses": [],
+            "endStatuses": [],
+            "rolls": {},
+            "hacks": [],
+            "checks": [],
+            "duration": 0,
+            "changes": [],
+            "common": [],
+            "expiration": {
+              "normal": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "crit": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "changeOnCrit": false,
+              "doesExpire": false
+            }
+          },
+          "macros": {}
+        },
+        "sustaining": [],
+        "elderSorcery": false,
+        "elderSorceryIncant": "",
+        "powerSources": [
+          "martial"
+        ],
+        "interaction": "manifest",
+        "featSaveAttribute": "mov",
+        "maneuver": "passive",
+        "executionTime": "passive",
+        "delivery": {
+          "base": "self",
+          "parent": null,
+          "package": null
+        },
+        "targets": [
+          "self"
+        ],
+        "elements": [],
+        "duration": {
+          "unit": "noLimit",
+          "quantity": 0,
+          "conditions": {
+            "present": [],
+            "absent": []
+          },
+          "stationary": false,
+          "description": "Always Active"
+        },
+        "sustained": false,
+        "range": "Self.",
+        "overview": {
+          "base": "",
+          "proficient": "",
+          "fluent": ""
+        },
+        "results": {
+          "hit": "",
+          "critHit": "",
+          "miss": "",
+          "critMiss": "",
+          "save": "",
+          "critSave": "",
+          "fail": "",
+          "critFail": ""
+        },
+        "piercing": "normal",
+        "improvements": {
+          "attributeImprovement": {
+            "attribute": "snk",
+            "minVal": 0
+          },
+          "featSaveImprovement": {
+            "attribute": null,
+            "amount": "proficient"
+          }
+        },
+        "skill": false,
+        "spell": false,
+        "standard": false,
+        "ritual": false,
+        "class": "",
+        "rotator": false,
+        "invoked": false,
+        "costs": {
+          "verbal": false,
+          "somatic": false,
+          "material": false,
+          "mp": {
+            "type": "none",
+            "value": {
+              "static": 0,
+              "formula": "",
+              "variable": ""
+            }
+          },
+          "hp": {
+            "type": "none",
+            "value": {
+              "static": 0,
+              "formula": "",
+              "variable": ""
+            }
+          },
+          "gp": {
+            "type": "none",
+            "value": {
+              "static": 0,
+              "formula": "",
+              "variable": ""
+            }
+          },
+          "break": "",
+          "materialCost": ""
+        },
+        "heightened": "",
+        "endCondition": "",
+        "requirements": "",
+        "effects": [],
+        "expansion": null,
+        "expansionRange": null,
+        "expansionSaveAttribute": "mov",
+        "trigger": "",
+        "basic": false,
+        "form": "normal",
+        "limitation": "",
+        "improvement": "",
+        "prepared": true,
+        "warded": false,
+        "secret": false,
+        "gifted": {
+          "enabled": false,
+          "amount": 1
+        },
+        "consumable": false,
+        "quantity": 1,
+        "maxQuantity": {
+          "raw": "",
+          "derived": 0
+        }
+      },
+      "_id": "psuEkisxSfAWDzeT",
+      "img": "systems/teriock/src/icons/abilities/normal-sneak.webp",
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.345",
+        "systemId": "teriock",
+        "systemVersion": "0.1.0",
+        "createdTime": 1757099845443,
+        "modifiedTime": 1757099846881,
+        "lastModifiedBy": "Z8sCTHO0edFF1hYo"
+      },
+      "_key": "!items.effects!RpJenys4QbmOV6zO.psuEkisxSfAWDzeT"
+    },
+    {
+      "name": "Tiny Strength",
+      "type": "ability",
+      "system": {
+        "proficient": false,
+        "fluent": false,
+        "font": "",
+        "description": "<p>None.</p>",
+        "deleteOnExpire": false,
+        "updateCounter": false,
+        "suppression": {
+          "statuses": {
+            "active": [],
+            "inactive": []
+          },
+          "comparisons": {
+            "actor": [],
+            "item": []
+          }
+        },
+        "hierarchy": {
+          "rootUuid": "Compendium.teriock.species.Item.RpJenys4QbmOV6zO",
+          "subIds": [],
+          "supId": null
+        },
+        "applies": {
+          "base": {
+            "statuses": [],
+            "startStatuses": [],
+            "endStatuses": [],
+            "rolls": {},
+            "hacks": [],
+            "checks": [],
+            "duration": 0,
+            "changes": [],
+            "common": [],
+            "expiration": {
+              "normal": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "crit": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "changeOnCrit": false,
+              "doesExpire": false
+            }
+          },
+          "proficient": {
+            "statuses": [],
+            "startStatuses": [],
+            "endStatuses": [],
+            "rolls": {},
+            "hacks": [],
+            "checks": [],
+            "duration": 0,
+            "changes": [],
+            "common": [],
+            "expiration": {
+              "normal": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "crit": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "changeOnCrit": false,
+              "doesExpire": false
+            }
+          },
+          "fluent": {
+            "statuses": [],
+            "startStatuses": [],
+            "endStatuses": [],
+            "rolls": {},
+            "hacks": [],
+            "checks": [],
+            "duration": 0,
+            "changes": [],
+            "common": [],
+            "expiration": {
+              "normal": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "crit": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "changeOnCrit": false,
+              "doesExpire": false
+            }
+          },
+          "heightened": {
+            "statuses": [],
+            "startStatuses": [],
+            "endStatuses": [],
+            "rolls": {},
+            "hacks": [],
+            "checks": [],
+            "duration": 0,
+            "changes": [],
+            "common": [],
+            "expiration": {
+              "normal": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "crit": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "changeOnCrit": false,
+              "doesExpire": false
+            }
+          },
+          "macros": {}
+        },
+        "sustaining": [],
+        "elderSorcery": false,
+        "elderSorceryIncant": "",
+        "powerSources": [
+          "martial"
+        ],
+        "interaction": "manifest",
+        "featSaveAttribute": "mov",
+        "maneuver": "passive",
+        "executionTime": "passive",
+        "delivery": {
+          "base": "self",
+          "parent": null,
+          "package": null
+        },
+        "targets": [
+          "self"
+        ],
+        "elements": [],
+        "duration": {
+          "unit": "noLimit",
+          "quantity": 0,
+          "conditions": {
+            "present": [],
+            "absent": []
+          },
+          "stationary": false,
+          "description": "Always Active"
+        },
+        "sustained": false,
+        "range": "Self.",
+        "overview": {
+          "base": "",
+          "proficient": "",
+          "fluent": ""
+        },
+        "results": {
+          "hit": "",
+          "critHit": "",
+          "miss": "",
+          "critMiss": "",
+          "save": "",
+          "critSave": "",
+          "fail": "",
+          "critFail": ""
+        },
+        "piercing": "normal",
+        "improvements": {
+          "attributeImprovement": {
+            "attribute": "str",
+            "minVal": -2
+          },
+          "featSaveImprovement": {
+            "attribute": null,
+            "amount": "proficient"
+          }
+        },
+        "skill": false,
+        "spell": false,
+        "standard": false,
+        "ritual": false,
+        "class": "",
+        "rotator": false,
+        "invoked": false,
+        "costs": {
+          "verbal": false,
+          "somatic": false,
+          "material": false,
+          "mp": {
+            "type": "none",
+            "value": {
+              "static": 0,
+              "formula": "",
+              "variable": ""
+            }
+          },
+          "hp": {
+            "type": "none",
+            "value": {
+              "static": 0,
+              "formula": "",
+              "variable": ""
+            }
+          },
+          "gp": {
+            "type": "none",
+            "value": {
+              "static": 0,
+              "formula": "",
+              "variable": ""
+            }
+          },
+          "break": "",
+          "materialCost": ""
+        },
+        "heightened": "",
+        "endCondition": "",
+        "requirements": "",
+        "effects": [],
+        "expansion": null,
+        "expansionRange": null,
+        "expansionSaveAttribute": "mov",
+        "trigger": "",
+        "basic": false,
+        "form": "flaw",
+        "limitation": "",
+        "improvement": "",
+        "prepared": true,
+        "warded": false,
+        "secret": false,
+        "gifted": {
+          "enabled": false,
+          "amount": 1
+        },
+        "consumable": false,
+        "quantity": 1,
+        "maxQuantity": {
+          "raw": "",
+          "derived": 0
+        }
+      },
+      "_id": "zYwFQlNjjG6IzT9l",
+      "img": "systems/teriock/src/icons/abilities/tiny-strength.webp",
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.345",
+        "systemId": "teriock",
+        "systemVersion": "0.1.0",
+        "createdTime": 1757099848428,
+        "modifiedTime": 1757099850015,
+        "lastModifiedBy": "Z8sCTHO0edFF1hYo"
+      },
+      "_key": "!items.effects!RpJenys4QbmOV6zO.zYwFQlNjjG6IzT9l"
+    },
+    {
+      "name": "Water Home",
+      "type": "ability",
+      "system": {
+        "proficient": false,
+        "fluent": false,
+        "font": "",
+        "description": "<p>None.</p>",
+        "deleteOnExpire": false,
+        "updateCounter": false,
+        "suppression": {
+          "statuses": {
+            "active": [],
+            "inactive": []
+          },
+          "comparisons": {
+            "actor": [],
+            "item": []
+          }
+        },
+        "hierarchy": {
+          "rootUuid": "Compendium.teriock.species.Item.RpJenys4QbmOV6zO",
+          "subIds": [
+            "rkVjRXjLvKRCSgDJ",
+            "spCsDQ79J3PyLdAU"
+          ],
+          "supId": null
+        },
+        "applies": {
+          "base": {
+            "statuses": [],
+            "startStatuses": [],
+            "endStatuses": [],
+            "rolls": {},
+            "hacks": [],
+            "checks": [],
+            "duration": 0,
+            "changes": [
+              {
+                "key": "system.speedAdjustments.walk",
+                "mode": 5,
+                "value": "0",
+                "priority": 30
+              }
+            ],
+            "common": [],
+            "expiration": {
+              "normal": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "crit": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "changeOnCrit": false,
+              "doesExpire": false
+            }
+          },
+          "proficient": {
+            "statuses": [],
+            "startStatuses": [],
+            "endStatuses": [],
+            "rolls": {},
+            "hacks": [],
+            "checks": [],
+            "duration": 0,
+            "changes": [],
+            "common": [],
+            "expiration": {
+              "normal": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "crit": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "changeOnCrit": false,
+              "doesExpire": false
+            }
+          },
+          "fluent": {
+            "statuses": [],
+            "startStatuses": [],
+            "endStatuses": [],
+            "rolls": {},
+            "hacks": [],
+            "checks": [],
+            "duration": 0,
+            "changes": [],
+            "common": [],
+            "expiration": {
+              "normal": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "crit": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "changeOnCrit": false,
+              "doesExpire": false
+            }
+          },
+          "heightened": {
+            "statuses": [],
+            "startStatuses": [],
+            "endStatuses": [],
+            "rolls": {},
+            "hacks": [],
+            "checks": [],
+            "duration": 0,
+            "changes": [],
+            "common": [],
+            "expiration": {
+              "normal": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "crit": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "changeOnCrit": false,
+              "doesExpire": false
+            }
+          },
+          "macros": {}
+        },
+        "sustaining": [],
+        "elderSorcery": false,
+        "elderSorceryIncant": "",
+        "powerSources": [
+          "martial"
+        ],
+        "interaction": "manifest",
+        "featSaveAttribute": "mov",
+        "maneuver": "passive",
+        "executionTime": "passive",
+        "delivery": {
+          "base": "self",
+          "parent": null,
+          "package": null
+        },
+        "targets": [
+          "self"
+        ],
+        "elements": [],
+        "duration": {
+          "unit": "noLimit",
+          "quantity": 0,
+          "conditions": {
+            "present": [],
+            "absent": []
+          },
+          "stationary": false,
+          "description": "Always Active"
+        },
+        "sustained": false,
+        "range": "Self.",
+        "overview": {
+          "base": "You have @L[Ability:Swimming]{Swimming} and @L[Ability:Diving]{Diving} but have @L[Core:Movement Speed]{no walk speed}.",
+          "proficient": "",
+          "fluent": ""
+        },
+        "results": {
+          "hit": "",
+          "critHit": "",
+          "miss": "",
+          "critMiss": "",
+          "save": "",
+          "critSave": "",
+          "fail": "",
+          "critFail": ""
+        },
+        "piercing": "normal",
+        "improvements": {
+          "attributeImprovement": {
+            "attribute": null,
+            "minVal": 0
+          },
+          "featSaveImprovement": {
+            "attribute": null,
+            "amount": "proficient"
+          }
+        },
+        "skill": false,
+        "spell": false,
+        "standard": false,
+        "ritual": false,
+        "class": "",
+        "rotator": false,
+        "invoked": false,
+        "costs": {
+          "verbal": false,
+          "somatic": false,
+          "material": false,
+          "mp": {
+            "type": "none",
+            "value": {
+              "static": 0,
+              "formula": "",
+              "variable": ""
+            }
+          },
+          "hp": {
+            "type": "none",
+            "value": {
+              "static": 0,
+              "formula": "",
+              "variable": ""
+            }
+          },
+          "gp": {
+            "type": "none",
+            "value": {
+              "static": 0,
+              "formula": "",
+              "variable": ""
+            }
+          },
+          "break": "",
+          "materialCost": ""
+        },
+        "heightened": "",
+        "endCondition": "",
+        "requirements": "",
+        "effects": [],
+        "expansion": null,
+        "expansionRange": null,
+        "expansionSaveAttribute": "mov",
+        "trigger": "",
+        "basic": false,
+        "form": "normal",
+        "limitation": "",
+        "improvement": "",
+        "prepared": true,
+        "warded": false,
+        "secret": false,
+        "gifted": {
+          "enabled": false,
+          "amount": 1
+        },
+        "consumable": false,
+        "quantity": 1,
+        "maxQuantity": {
+          "raw": "",
+          "derived": 0
+        }
+      },
+      "_id": "OyUyokSFonhHGR09",
+      "img": "systems/teriock/src/icons/abilities/water-home.webp",
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.345",
+        "systemId": "teriock",
+        "systemVersion": "0.1.0",
+        "createdTime": 1757099851665,
+        "modifiedTime": 1757099859106,
+        "lastModifiedBy": "Z8sCTHO0edFF1hYo"
+      },
+      "_key": "!items.effects!RpJenys4QbmOV6zO.OyUyokSFonhHGR09"
+    },
+    {
+      "name": "Swimming",
+      "type": "ability",
+      "system": {
+        "hierarchy": {
+          "supId": "OyUyokSFonhHGR09",
+          "rootUuid": "Compendium.teriock.species.Item.RpJenys4QbmOV6zO",
+          "subIds": []
+        },
+        "proficient": true,
+        "fluent": false,
+        "font": "",
+        "description": "<p>None.</p>",
+        "deleteOnExpire": false,
+        "updateCounter": false,
+        "suppression": {
+          "statuses": {
+            "active": [],
+            "inactive": []
+          },
+          "comparisons": {
+            "actor": [],
+            "item": []
+          }
+        },
+        "applies": {
+          "base": {
+            "statuses": [],
+            "startStatuses": [],
+            "endStatuses": [],
+            "rolls": {},
+            "hacks": [],
+            "checks": [],
+            "duration": 0,
+            "changes": [
+              {
+                "key": "system.speedAdjustments.swim",
+                "mode": 4,
+                "value": "3",
+                "priority": 10
+              }
+            ],
+            "common": [],
+            "expiration": {
+              "normal": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "crit": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "changeOnCrit": false,
+              "doesExpire": false
+            }
+          },
+          "proficient": {
+            "statuses": [],
+            "startStatuses": [],
+            "endStatuses": [],
+            "rolls": {},
+            "hacks": [],
+            "checks": [],
+            "duration": 0,
+            "changes": [],
+            "common": [],
+            "expiration": {
+              "normal": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "crit": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "changeOnCrit": false,
+              "doesExpire": false
+            }
+          },
+          "fluent": {
+            "statuses": [],
+            "startStatuses": [],
+            "endStatuses": [],
+            "rolls": {},
+            "hacks": [],
+            "checks": [],
+            "duration": 0,
+            "changes": [],
+            "common": [],
+            "expiration": {
+              "normal": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "crit": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "changeOnCrit": false,
+              "doesExpire": false
+            }
+          },
+          "heightened": {
+            "statuses": [],
+            "startStatuses": [],
+            "endStatuses": [],
+            "rolls": {},
+            "hacks": [],
+            "checks": [],
+            "duration": 0,
+            "changes": [],
+            "common": [],
+            "expiration": {
+              "normal": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "crit": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "changeOnCrit": false,
+              "doesExpire": false
+            }
+          },
+          "macros": {}
+        },
+        "sustaining": [],
+        "elderSorcery": false,
+        "elderSorceryIncant": "",
+        "powerSources": [
+          "martial"
+        ],
+        "interaction": "manifest",
+        "featSaveAttribute": "mov",
+        "maneuver": "passive",
+        "executionTime": "passive",
+        "delivery": {
+          "base": "self",
+          "parent": null,
+          "package": null
+        },
+        "targets": [
+          "self"
+        ],
+        "elements": [],
+        "duration": {
+          "unit": "noLimit",
+          "quantity": 0,
+          "conditions": {
+            "present": [],
+            "absent": []
+          },
+          "stationary": false,
+          "description": "Always Active"
+        },
+        "sustained": false,
+        "range": "Self.",
+        "overview": {
+          "base": "You swim at @L[Core:Movement Speed]{full speed}.",
+          "proficient": "",
+          "fluent": ""
+        },
+        "results": {
+          "hit": "",
+          "critHit": "",
+          "miss": "",
+          "critMiss": "",
+          "save": "",
+          "critSave": "",
+          "fail": "",
+          "critFail": ""
+        },
+        "piercing": "normal",
+        "improvements": {
+          "attributeImprovement": {
+            "attribute": null,
+            "minVal": 0
+          },
+          "featSaveImprovement": {
+            "attribute": null,
+            "amount": "proficient"
+          }
+        },
+        "skill": true,
+        "spell": false,
+        "standard": true,
+        "ritual": false,
+        "class": "corsair",
+        "rotator": false,
+        "invoked": false,
+        "costs": {
+          "verbal": false,
+          "somatic": false,
+          "material": false,
+          "mp": {
+            "type": "none",
+            "value": {
+              "static": 0,
+              "formula": "",
+              "variable": ""
+            }
+          },
+          "hp": {
+            "type": "none",
+            "value": {
+              "static": 0,
+              "formula": "",
+              "variable": ""
+            }
+          },
+          "gp": {
+            "type": "none",
+            "value": {
+              "static": 0,
+              "formula": "",
+              "variable": ""
+            }
+          },
+          "break": "",
+          "materialCost": ""
+        },
+        "heightened": "",
+        "endCondition": "",
+        "requirements": "",
+        "effects": [],
+        "expansion": null,
+        "expansionRange": null,
+        "expansionSaveAttribute": "mov",
+        "trigger": "",
+        "basic": false,
+        "form": "normal",
+        "limitation": "",
+        "improvement": "",
+        "prepared": true,
+        "warded": false,
+        "secret": false,
+        "gifted": {
+          "enabled": false,
+          "amount": 1
+        },
+        "consumable": false,
+        "quantity": 1,
+        "maxQuantity": {
+          "raw": "",
+          "derived": 0
+        }
+      },
+      "_id": "rkVjRXjLvKRCSgDJ",
+      "img": "systems/teriock/src/icons/abilities/swimming.webp",
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.345",
+        "systemId": "teriock",
+        "systemVersion": "0.1.0",
+        "createdTime": 1757099853187,
+        "modifiedTime": 1757099855060,
+        "lastModifiedBy": "Z8sCTHO0edFF1hYo"
+      },
+      "_key": "!items.effects!RpJenys4QbmOV6zO.rkVjRXjLvKRCSgDJ"
+    },
+    {
+      "name": "Diving",
+      "type": "ability",
+      "system": {
+        "hierarchy": {
+          "supId": "OyUyokSFonhHGR09",
+          "rootUuid": "Compendium.teriock.species.Item.RpJenys4QbmOV6zO",
+          "subIds": []
+        },
+        "proficient": true,
+        "fluent": false,
+        "font": "",
+        "description": "<p>None.</p>",
+        "deleteOnExpire": false,
+        "updateCounter": false,
+        "suppression": {
+          "statuses": {
+            "active": [],
+            "inactive": []
+          },
+          "comparisons": {
+            "actor": [],
+            "item": []
+          }
+        },
+        "applies": {
+          "base": {
+            "statuses": [],
+            "startStatuses": [],
+            "endStatuses": [],
+            "rolls": {},
+            "hacks": [],
+            "checks": [],
+            "duration": 0,
+            "changes": [],
+            "common": [],
+            "expiration": {
+              "normal": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "crit": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "changeOnCrit": false,
+              "doesExpire": false
+            }
+          },
+          "proficient": {
+            "statuses": [],
+            "startStatuses": [],
+            "endStatuses": [],
+            "rolls": {},
+            "hacks": [],
+            "checks": [],
+            "duration": 0,
+            "changes": [],
+            "common": [],
+            "expiration": {
+              "normal": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "crit": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "changeOnCrit": false,
+              "doesExpire": false
+            }
+          },
+          "fluent": {
+            "statuses": [],
+            "startStatuses": [],
+            "endStatuses": [],
+            "rolls": {},
+            "hacks": [],
+            "checks": [],
+            "duration": 0,
+            "changes": [],
+            "common": [],
+            "expiration": {
+              "normal": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "crit": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "changeOnCrit": false,
+              "doesExpire": false
+            }
+          },
+          "heightened": {
+            "statuses": [],
+            "startStatuses": [],
+            "endStatuses": [],
+            "rolls": {},
+            "hacks": [],
+            "checks": [],
+            "duration": 0,
+            "changes": [],
+            "common": [],
+            "expiration": {
+              "normal": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "crit": {
+                "combat": {
+                  "who": {
+                    "type": "target"
+                  },
+                  "what": {
+                    "type": "none",
+                    "roll": "2d4kh1",
+                    "threshold": 4
+                  },
+                  "when": {
+                    "time": "start",
+                    "trigger": "turn",
+                    "skip": 0
+                  }
+                }
+              },
+              "changeOnCrit": false,
+              "doesExpire": false
+            }
+          },
+          "macros": {}
+        },
+        "sustaining": [],
+        "elderSorcery": false,
+        "elderSorceryIncant": "",
+        "powerSources": [
+          "martial"
+        ],
+        "interaction": "manifest",
+        "featSaveAttribute": "mov",
+        "maneuver": "passive",
+        "executionTime": "passive",
+        "delivery": {
+          "base": "self",
+          "parent": null,
+          "package": null
+        },
+        "targets": [
+          "self"
+        ],
+        "elements": [],
+        "duration": {
+          "unit": "noLimit",
+          "quantity": 0,
+          "conditions": {
+            "present": [],
+            "absent": []
+          },
+          "stationary": false,
+          "description": "Always Active"
+        },
+        "sustained": false,
+        "range": "Self.",
+        "overview": {
+          "base": "You no longer have to stay on the surface of water while @L[Ability:Swimming]{Swimming}.",
+          "proficient": "",
+          "fluent": ""
+        },
+        "results": {
+          "hit": "",
+          "critHit": "",
+          "miss": "",
+          "critMiss": "",
+          "save": "",
+          "critSave": "",
+          "fail": "",
+          "critFail": ""
+        },
+        "piercing": "normal",
+        "improvements": {
+          "attributeImprovement": {
+            "attribute": null,
+            "minVal": 0
+          },
+          "featSaveImprovement": {
+            "attribute": null,
+            "amount": "proficient"
+          }
+        },
+        "skill": true,
+        "spell": false,
+        "standard": true,
+        "ritual": false,
+        "class": "corsair",
+        "rotator": false,
+        "invoked": false,
+        "costs": {
+          "verbal": false,
+          "somatic": false,
+          "material": false,
+          "mp": {
+            "type": "none",
+            "value": {
+              "static": 0,
+              "formula": "",
+              "variable": ""
+            }
+          },
+          "hp": {
+            "type": "none",
+            "value": {
+              "static": 0,
+              "formula": "",
+              "variable": ""
+            }
+          },
+          "gp": {
+            "type": "none",
+            "value": {
+              "static": 0,
+              "formula": "",
+              "variable": ""
+            }
+          },
+          "break": "",
+          "materialCost": ""
+        },
+        "heightened": "",
+        "endCondition": "",
+        "requirements": "",
+        "effects": [],
+        "expansion": null,
+        "expansionRange": null,
+        "expansionSaveAttribute": "mov",
+        "trigger": "",
+        "basic": false,
+        "form": "normal",
+        "limitation": "",
+        "improvement": "",
+        "prepared": true,
+        "warded": false,
+        "secret": false,
+        "gifted": {
+          "enabled": false,
+          "amount": 1
+        },
+        "consumable": false,
+        "quantity": 1,
+        "maxQuantity": {
+          "raw": "",
+          "derived": 0
+        }
+      },
+      "_id": "spCsDQ79J3PyLdAU",
+      "img": "systems/teriock/src/icons/abilities/diving.webp",
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.345",
+        "systemId": "teriock",
+        "systemVersion": "0.1.0",
+        "createdTime": 1757099856324,
+        "modifiedTime": 1757099857926,
+        "lastModifiedBy": "Z8sCTHO0edFF1hYo"
+      },
+      "_key": "!items.effects!RpJenys4QbmOV6zO.spCsDQ79J3PyLdAU"
     }
   ],
   "sort": 0,
@@ -483,7 +5385,7 @@
     "systemId": "teriock",
     "systemVersion": "0.1.0",
     "createdTime": 1756880755023,
-    "modifiedTime": 1756960599905,
+    "modifiedTime": 1757099861311,
     "lastModifiedBy": "Z8sCTHO0edFF1hYo"
   },
   "_key": "!items!RpJenys4QbmOV6zO"

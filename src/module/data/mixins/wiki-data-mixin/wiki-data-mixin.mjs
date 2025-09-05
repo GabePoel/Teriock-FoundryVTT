@@ -50,7 +50,9 @@ export default (Base) => {
           ui.notifications.info(`Pulling ${pageTitle} from wiki.`);
         }
 
-        const wikiPage = await fetchWikiPageHTML(pageTitle);
+        const wikiPage = await fetchWikiPageHTML(pageTitle, {
+          simplifyWikiLinks: false,
+        });
         if (wikiPage) {
           const parsed = await this.parse(wikiPage);
           await this.parent.update(parsed);

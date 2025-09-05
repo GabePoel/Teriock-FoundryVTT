@@ -1,6 +1,6 @@
 import { tidyHTML } from "../../../../helpers/html.mjs";
 import { getIcon } from "../../../../helpers/path.mjs";
-import { cleanHTMLDoc } from "../../../shared/parsing/clean-html-doc.mjs";
+import { cleanHTMLDoc, cleanObject } from "../../../shared/parsing/clean-html-doc.mjs";
 import { extractChangesFromHTML } from "../../../shared/parsing/extract-changes.mjs";
 import { getCategoriesFromHTML } from "../../../shared/parsing/get-categories.mjs";
 import { processSubProperties } from "../../../shared/parsing/process-subs.mjs";
@@ -68,11 +68,14 @@ export async function _parse(propertyData, rawHTML) {
     parameters.system.damageType = extractedDamageType;
   }
 
+
   parameters.description = tidyHTML(rawHTML);
   parameters.system.changes = extractChangesFromHTML(rawHTML);
   parameters.system.modifiesActor = extractDocument(doc);
   parameters.system.description = parameters.description;
   parameters.img = getIcon("properties", propertyData.parent.name);
+  const toClean = ["description", "limitation", "improvement"];
+  cleanObject(parameters.system, toClean);
   return parameters;
 }
 

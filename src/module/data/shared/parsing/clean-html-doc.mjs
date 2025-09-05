@@ -28,3 +28,47 @@ export function cleanHTMLDoc(doc) {
 
   return doc;
 }
+
+/**
+ * @param {string} html
+ * @returns {string}
+ */
+export function cleanHTML(html) {
+  const doc = document.createElement("div");
+  doc.innerHTML = html;
+  const links = doc.querySelectorAll("a");
+  for (const link of links) {
+    const href = link.getAttribute("href");
+    const titleAttr = link.getAttribute("title");
+    const textContent = link.textContent || "";
+    const isWikiLink = href?.includes("wiki.teriock.com");
+    if (isWikiLink) {
+      if (titleAttr) {
+        const display = textContent || titleAttr;
+        const enricherTag = `@L[${titleAttr}]{${display}}`;
+        link.replaceWith(document.createTextNode(enricherTag));
+      }
+    }
+  }
+
+  [...doc.querySelectorAll("span")]
+    .reverse()
+    .forEach((s) => s.replaceWith(s.textContent));
+  return doc.innerHTML;
+}
+
+/**
+ * @param {object} obj
+ * @param {string[]} keys
+ */
+export function cleanObject(obj, keys) {
+  for (const key of keys) {
+    if (foundry.utils.getProperty(obj, key)) {
+      foundry.utils.setProperty(
+        obj,
+        key,
+        cleanHTML(foundry.utils.getProperty(obj, key)),
+      );
+    }
+  }
+}

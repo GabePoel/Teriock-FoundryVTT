@@ -1,5 +1,6 @@
 import { createAbility } from "../../../../helpers/create-effects.mjs";
 import { getRankIcon } from "../../../../helpers/path.mjs";
+import { cleanObject } from "../../../shared/parsing/clean-html-doc.mjs";
 
 /**
  * Default statistics for different archetypes.
@@ -144,6 +145,8 @@ export async function _parse(rankData, rawHTML) {
   }
 
   progress.update({ pct: 1 });
+
+  cleanObject(parameters, ["description", "flaws"]);
 
   return {
     system: parameters,

@@ -112,7 +112,6 @@ export default async function fetchWikiPageHTML(title, options = {}) {
       const href = link.getAttribute("href");
       const titleAttr = link.getAttribute("title");
       const textContent = link.textContent || "";
-
       const isWikiLink = href?.startsWith("/index.php/");
       if (isWikiLink) {
         link.setAttribute("href", baseWikiUrl + href);

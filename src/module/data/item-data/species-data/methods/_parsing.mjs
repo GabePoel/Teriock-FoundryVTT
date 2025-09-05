@@ -1,5 +1,5 @@
 import { TeriockRoll } from "../../../../dice/_module.mjs";
-import { cleanHTMLDoc } from "../../../shared/parsing/clean-html-doc.mjs";
+import { cleanHTMLDoc, cleanObject } from "../../../shared/parsing/clean-html-doc.mjs";
 import { getBarText, getText } from "../../../shared/parsing/get-text.mjs";
 import { processSubAbilities } from "../../../shared/parsing/process-subs.mjs";
 import { buildTagTree } from "../../../shared/parsing/tag-tree.mjs";
@@ -24,6 +24,7 @@ export async function _parse(speciesData, rawHTML) {
   const subs = Array.from(doc.querySelectorAll(".expandable-container")).filter(
     (el) => !el.closest(".expandable-container:not(:scope)"),
   );
+  await processSubAbilities(subs, speciesData.parent);
 
   // Remove sub-containers and process dice
   cleanHTMLDoc(doc);
@@ -123,7 +124,6 @@ export async function _parse(speciesData, rawHTML) {
     }
   }
   const sizeStepHpText = getBarText(doc, "hp-increase");
-  console.log(sizeStepHpText);
   if (sizeStepHpText) {
     parameters.sizeStepHp = Number(
       sizeStepHpText.split("every ")[1].split(" additional")[0],
@@ -135,6 +135,12 @@ export async function _parse(speciesData, rawHTML) {
       sizeStepMpText.split("every ")[1].split(" additional")[0],
     );
   } else parameters.sizeStepMp = null;
-  await processSubAbilities(subs, speciesData.parent);
+  cleanObject(parameters, [
+    "appearance",
+    "attributeIncrease",
+    "description",
+    "hpIncrease",
+    "innateRanks",
+  ]);
   return { system: parameters };
 }
