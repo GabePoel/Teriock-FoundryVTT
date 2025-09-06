@@ -47,14 +47,16 @@
       </div>
       <div class="tgrid g2">
         <div class="tgrid-item gi2">
-          {{formInput
-            systemFields.traits
-            value=system.traits
-            disabled=(not editable)
-            classes="teriock-full-width ab-menu-inline"
-            dataset=(dataset tooltip="Traits")
-            rootId=uuid
-          }}
+          <div class="ab-multi-select-label ab-multi-select-traits">
+            {{formInput
+              systemFields.traits
+              value=system.traits
+              disabled=(not editable)
+              classes="teriock-full-width ab-menu-inline"
+              dataset=(dataset tooltip="Traits")
+              rootId=uuid
+            }}
+          </div>
         </div>
         {{#if (not (and (exists system.size.min) (exists system.size.max)))}}
           <div class="tgrid-item">

@@ -19,7 +19,6 @@
 
 ## Medium Priority
 
-- [ ] GUI to change abilities added/removed by species per size change
 - [x] Gifted abilities
 - [x] Refined duration integration
 - [x] Italic attribute and feat save improvement text in ability previews
@@ -27,10 +26,9 @@
 
 ## Low Priority
 
-- [ ] Better down/dead/critically wounded displays
-- [ ] Better resistance/immunity tooltips
-- [ ] Condition toggling from character sheet
-- [ ] _Better_ transformation system.
+- [x] Condition toggling from character sheet
+- [x] Better down/dead/critically wounded displays
+- [x] Better resistance/immunity tooltips
 - [x] Familiar parsing
 - [x] Remove buggy display in ability `pseudoHook` macro list
 - [x] Light mode conditions
