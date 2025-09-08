@@ -1,4 +1,5 @@
 import { TeriockMacro } from "../../documents/_module.mjs";
+import { dedent } from "../../helpers/utils.mjs";
 import { hotbarDropDialog } from "../dialogs/_module.mjs";
 
 const { Hotbar } = foundry.applications.ui;
@@ -46,7 +47,7 @@ export default class TeriockHotbar extends Hotbar {
           };
           await item.use(options);`;
       }
-      command = game.teriock.api.utils.dedent(command);
+      command = dedent(command);
       const activeGm = /** @type {TeriockUser} */ game.users.activeGM;
       await activeGm.query("teriock.createHotbarFolder", {
         name: game.user.name,

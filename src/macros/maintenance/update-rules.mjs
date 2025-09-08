@@ -15,7 +15,7 @@ for (const [namespace, category] of Object.entries(namespaceCategoryMap)) {
 
   // Fetch all pages in the category
   let allRulesPages =
-    await game.teriock.api.wiki.fetchCategoryMembers(category);
+    await teriock.helpers.wiki.fetchCategoryMembers(category);
   allRulesPages = allRulesPages.filter((page) =>
     page.title.startsWith(`${namespace}:`),
   );
@@ -47,7 +47,7 @@ for (const [namespace, category] of Object.entries(namespaceCategoryMap)) {
     }
 
     // Fetch and clean HTML
-    let rawHtml = await game.teriock.api.wiki.fetchWikiPageHTML(title, {
+    let rawHtml = await teriock.helpers.wiki.fetchWikiPageHTML(title, {
       transformDice: true,
       enrichText: true,
       removeSubContainers: true,

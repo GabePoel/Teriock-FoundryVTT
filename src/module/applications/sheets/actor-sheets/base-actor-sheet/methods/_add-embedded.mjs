@@ -178,9 +178,9 @@ export async function _addRank(sheet) {
  */
 export async function _addEquipment(sheet) {
   let equipmentType = await selectEquipmentTypeDialog();
-  if (Object.keys(CONFIG.TERIOCK.index.equipment).includes(equipmentType)) {
+  if (Object.keys(TERIOCK.index.equipment).includes(equipmentType)) {
     const equipment = await getItem(
-      CONFIG.TERIOCK.index.equipment[equipmentType],
+      TERIOCK.index.equipment[equipmentType],
       "equipment",
     );
     await sheet.document.createEmbeddedDocuments("Item", [equipment]);

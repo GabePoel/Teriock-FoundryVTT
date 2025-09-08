@@ -38,11 +38,11 @@ export default class TeriockActor extends ParentDocumentMixin(
    */
   static toNamedSize(size) {
     const sizeKeys = Object.keys(
-      CONFIG.TERIOCK.options.character.namedSizes,
+      TERIOCK.options.character.namedSizes,
     ).map(Number);
     const filteredSizeKeys = sizeKeys.filter((key) => key <= size);
     const sizeKey = Math.max(...filteredSizeKeys, 0);
-    return CONFIG.TERIOCK.options.character.namedSizes[sizeKey] || "Medium";
+    return TERIOCK.options.character.namedSizes[sizeKey] || "Medium";
   }
 
   /**
@@ -165,7 +165,7 @@ export default class TeriockActor extends ParentDocumentMixin(
     // Update Prototype Token
     const prototypeToken = {};
     const size =
-      CONFIG.TERIOCK.options.character.tokenSizes[
+      TERIOCK.options.character.tokenSizes[
         TeriockActor.toNamedSize(this.system.size)
       ] || 1;
     if (!foundry.utils.hasProperty(data, "prototypeToken.sight.enabled"))
@@ -189,7 +189,7 @@ export default class TeriockActor extends ParentDocumentMixin(
       return false;
     if (foundry.utils.hasProperty(changed, "system.size")) {
       const tokenSize =
-        CONFIG.TERIOCK.options.character.tokenSizes[
+        TERIOCK.options.character.tokenSizes[
           TeriockActor.toNamedSize(changed.system.size)
         ] || 1;
       if (!foundry.utils.hasProperty(changed, "prototypeToken.width")) {
@@ -238,7 +238,7 @@ export default class TeriockActor extends ParentDocumentMixin(
           if (!this.itemKeys.power.has(archetype))
             data.push(
               await copyItem(
-                CONFIG.TERIOCK.options.rank[archetype].name,
+                TERIOCK.options.rank[archetype].name,
                 "classes",
               ),
             );
@@ -295,7 +295,7 @@ export default class TeriockActor extends ParentDocumentMixin(
           (i) => i.system.archetype === archetype && !ids.includes(i.id),
         );
         if (!remaining) {
-          const powerName = CONFIG.TERIOCK.options.rank[archetype].name;
+          const powerName = TERIOCK.options.rank[archetype].name;
           const powerItem = this.powers.find((i) => i.name === powerName);
           if (powerItem && !ids.includes(powerItem.id)) ids.push(powerItem.id);
         }

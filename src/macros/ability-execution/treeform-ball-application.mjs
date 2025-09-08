@@ -1,7 +1,7 @@
 if (!actor.effectKeys.consequence.has("treeformBallEffect")) {
   const hp = actor.system.hp.value;
   if (!actor.itemKeys.species.has("tree")) {
-    const treeSpecies = await game.teriock.api.fetch.getItem(
+    const treeSpecies = await tm.fetch.getItem(
       "Tree",
       "species",
       {

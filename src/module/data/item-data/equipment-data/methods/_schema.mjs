@@ -89,7 +89,7 @@ export function _defineSchema() {
     }),
     equipmentClasses: new fields.SetField(
       new fields.StringField({
-        choices: CONFIG.TERIOCK.index.equipmentClasses,
+        choices: TERIOCK.index.equipmentClasses,
       }),
     ),
     minStr: new fields.NumberField({
@@ -102,7 +102,7 @@ export function _defineSchema() {
       initial: null,
       label: "Style Bonus",
       nullable: true,
-      choices: CONFIG.TERIOCK.index.weaponFightingStyles,
+      choices: TERIOCK.index.weaponFightingStyles,
     }),
     av: new fields.NumberField({
       initial: 0,
@@ -125,7 +125,7 @@ export function _defineSchema() {
       label: "Price",
     }),
     powerLevel: new fields.StringField({
-      choices: CONFIG.TERIOCK.options.equipment.powerLevelShort,
+      choices: TERIOCK.options.equipment.powerLevelShort,
       initial: "mundane",
       label: "Power Level",
     }),

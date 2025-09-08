@@ -80,7 +80,7 @@ export default class TeriockAbilityData extends HierarchyDataMixin(
       const att = this.improvements.featSaveImprovement.attribute;
       const amount = this.improvements.featSaveImprovement.amount;
       const amountVal =
-        CONFIG.TERIOCK.options.ability.featSaveImprovementAmount[amount];
+        TERIOCK.options.ability.featSaveImprovementAmount[amount];
       return `This ability gives you @L[Core:${amountVal} Bonus]{${amount}} in @L[Core:${att.toUpperCase()}] @L[Core:Feat Interaction]{feat saves}.`;
     }
     return "";
@@ -124,7 +124,7 @@ export default class TeriockAbilityData extends HierarchyDataMixin(
   get useIcon() {
     if (this.interaction === "attack") return "dice-d20";
     if (this.interaction === "block") return "shield";
-    return CONFIG.TERIOCK.options.document.ability.icon;
+    return TERIOCK.options.document.ability.icon;
   }
 
   /** @inheritDoc */

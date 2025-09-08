@@ -152,7 +152,7 @@ async function processArchetype(archetype, archetypeObj) {
 }
 
 // Filter valid archetypes and create processing promises
-const validArchetypes = Object.entries(CONFIG.TERIOCK.options.rank).filter(
+const validArchetypes = Object.entries(TERIOCK.options.rank).filter(
   ([_archetype, archetypeObj]) =>
     ["Mage", "Semi", "Warrior"].includes(archetypeObj.name),
 );

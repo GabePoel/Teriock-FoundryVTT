@@ -16,10 +16,10 @@ const spellNames = [
 /** @type {TeriockAbility[]} */
 const spells = [];
 for (const name of spellNames) {
-  const spell = await game.teriock.api.fetch.getAbility(name);
+  const spell = await tm.fetch.getAbility(name);
   spells.push(spell);
 }
-const spell = await game.teriock.api.dialogs.selectDocumentDialog(spells, {
+const spell = await tm.dialogs.selectDocumentDialog(spells, {
   title: "Select Spell",
   hint: "Select a spell to cast",
 });

@@ -4,7 +4,7 @@ const actor = data.rollConfig.abilityData.actor;
 const equipment = actor.equipment
   .filter((e) => e.system.isAttuned)
   .sort((a, b) => a.name.localeCompare(b.name));
-const selectedEquipment = await game.teriock.api.dialogs.selectDocumentsDialog(
+const selectedEquipment = await tm.dialogs.selectDocumentsDialog(
   equipment,
   {
     title: "Select Equipment",

@@ -5,7 +5,7 @@ const progress = ui.notifications.info(`Pulling all abilities from wiki.`, {
 });
 
 let allAbilityPages =
-  await game.teriock.api.wiki.fetchCategoryMembers("Abilities");
+  await teriock.helpers.wiki.fetchCategoryMembers("Abilities");
 allAbilityPages = allAbilityPages.filter((page) =>
   page.title.includes("Ability:"),
 );
@@ -26,7 +26,7 @@ async function processAbility(abilityName, _index, _total) {
   let abilityEffect = abilityItem.abilities.find((a) => a.name === abilityName);
 
   if (!abilityEffect) {
-    abilityEffect = await game.teriock.api.create.ability(
+    abilityEffect = await tm.create.ability(
       abilityItem,
       abilityName,
       { notify: false },
@@ -43,7 +43,7 @@ async function processAbility(abilityName, _index, _total) {
 }
 
 const BATCH_SIZE = 50;
-const total = Object.values(CONFIG.TERIOCK.index.abilities).length;
+const total = Object.values(TERIOCK.index.abilities).length;
 const results = [];
 
 progress.update({
@@ -53,7 +53,7 @@ progress.update({
 
 try {
   for (let start = 0; start < total; start += BATCH_SIZE) {
-    const batch = Object.values(CONFIG.TERIOCK.index.abilities).slice(
+    const batch = Object.values(TERIOCK.index.abilities).slice(
       start,
       start + BATCH_SIZE,
     );

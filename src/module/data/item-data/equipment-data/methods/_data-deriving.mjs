@@ -24,6 +24,6 @@ export function _prepareDerivedData(equipmentData) {
   }
   if (equipmentData.sb && equipmentData.sb.length > 0) {
     equipmentData.specialRules =
-      CONFIG.TERIOCK.content.weaponFightingStyles[equipmentData.sb];
+      TERIOCK.content.weaponFightingStyles[equipmentData.sb];
   }
 }

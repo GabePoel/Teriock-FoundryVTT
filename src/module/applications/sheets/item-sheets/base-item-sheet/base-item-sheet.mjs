@@ -108,7 +108,7 @@ export default class TeriockBaseItemSheet extends SheetMixin(ItemSheetV2) {
   /** @inheritDoc */
   async _prepareContext(options) {
     const abilityFormOrder = Object.keys(
-      CONFIG.TERIOCK.options.ability.form || {},
+      TERIOCK.options.ability.form || {},
     );
     this.item.buildEffectTypes();
     const abilities = this.item.abilities.sort((a, b) => {
@@ -121,7 +121,7 @@ export default class TeriockBaseItemSheet extends SheetMixin(ItemSheetV2) {
     });
 
     const propertyFormOrder = Object.keys(
-      CONFIG.TERIOCK.options.ability.form || {},
+      TERIOCK.options.ability.form || {},
     );
     const properties = this.item.properties.sort((a, b) => {
       const typeA = a.system?.form || "";

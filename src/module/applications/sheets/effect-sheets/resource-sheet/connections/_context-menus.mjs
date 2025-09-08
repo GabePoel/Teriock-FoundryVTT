@@ -7,9 +7,9 @@ import { makeIcon } from "../../../../../helpers/utils.mjs";
  * @returns {Array} Array of context menu options for function hook selection.
  */
 export function callbackContextMenu(resource) {
-  const iconStyle = CONFIG.TERIOCK.display.iconStyles.contextMenu;
+  const iconStyle = TERIOCK.display.iconStyles.contextMenu;
   const options = [];
-  const functionHooks = CONFIG.TERIOCK.options.resource.functionHooks;
+  const functionHooks = TERIOCK.options.resource.functionHooks;
   for (const hook in functionHooks) {
     const hookName = functionHooks[hook].name;
     const hookIcon = functionHooks[hook].icon;

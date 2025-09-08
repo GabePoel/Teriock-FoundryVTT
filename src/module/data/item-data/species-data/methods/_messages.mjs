@@ -49,7 +49,7 @@ export function _messageParts(speciesData) {
       icon: "fa-flag",
       label: "Traits",
       wrappers: [
-        ...speciesData.traits.map((t) => CONFIG.TERIOCK.index.traits[t]),
+        ...speciesData.traits.map((t) => TERIOCK.index.traits[t]),
       ],
     },
   ];

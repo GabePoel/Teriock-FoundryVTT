@@ -1,7 +1,7 @@
 const powersPack = game.teriock.packs.powers();
 const familiarsFolder = powersPack.folders.getName("Familiars");
 
-let commonAnimalPages = await game.teriock.api.wiki.fetchCategoryMembers(
+let commonAnimalPages = await teriock.helpers.wiki.fetchCategoryMembers(
   "Common animal creatures",
 );
 commonAnimalPages = commonAnimalPages.filter((page) =>
@@ -10,7 +10,7 @@ commonAnimalPages = commonAnimalPages.filter((page) =>
 
 for (const page of commonAnimalPages) {
   const animal = page.title.split("Creature:")[1];
-  const html = await game.teriock.api.wiki.fetchWikiPageHTML(page.title);
+  const html = await teriock.helpers.wiki.fetchWikiPageHTML(page.title);
   const doc = new DOMParser().parseFromString(html, "text/html");
   doc.querySelector(".expandable-table").remove();
   const subs = Array.from(doc.querySelectorAll(".expandable-container")).filter(
@@ -27,7 +27,7 @@ for (const page of commonAnimalPages) {
   const familiarItemFluencyData = {
     name: `${animal} Tamer`,
     type: "fluency",
-    img: game.teriock.api.path.getIcon("tradecrafts", "Tamer"),
+    img: tm.path.getIcon("tradecrafts", "Tamer"),
     system: {
       field: "survivalist",
       tradecraft: "tamer",
@@ -65,7 +65,7 @@ for (const page of commonAnimalPages) {
   } else {
     await fluency.update(familiarItemFluencyData);
   }
-  await game.teriock.data.shared.parsing.processSubAbilities(
+  await teriock.data.shared.parsing.processSubAbilities(
     subs,
     familiarItem,
   );

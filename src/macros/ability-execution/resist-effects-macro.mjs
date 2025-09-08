@@ -27,13 +27,13 @@ const choices = {
 
 const documents = Object.keys(choices).map((key) => {
   return {
-    img: game.teriock.api.path.getIcon("effect-types", choices[key]),
+    img: tm.path.getIcon("effect-types", choices[key]),
     name: choices[key],
     uuid: key,
   };
 });
 
-const choice = await game.teriock.api.dialogs.selectDocumentDialog(documents, {
+const choice = await tm.dialogs.selectDocumentDialog(documents, {
   hint: "Select an effect type to resist.",
 });
 

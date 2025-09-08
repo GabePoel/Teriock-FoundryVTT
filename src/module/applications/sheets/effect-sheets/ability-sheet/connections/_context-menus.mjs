@@ -19,12 +19,12 @@ function capitalize(str) {
  */
 export function contextMenus(ability) {
   /**
-   * Fetches configuration values from `CONFIG.TERIOCK.options.ability`.
+   * Fetches configuration values from `TERIOCK.options.ability`.
    * @param {string} keychain - Dot-separated keychain to traverse.
    * @returns {*} The configuration value at the specified path.
    */
   function fetch(keychain) {
-    let keys = CONFIG.TERIOCK.options.ability;
+    let keys = TERIOCK.options.ability;
     const keysArray = keychain.split(".");
     for (const key of keysArray) {
       keys = keys[key];
@@ -43,13 +43,13 @@ export function contextMenus(ability) {
     const keys = fetch(keychain);
     const out = Object.entries(keys).map(([key, value]) => ({
       name: value,
-      icon: CONFIG.TERIOCK.display.icons[key],
+      icon: TERIOCK.display.icons[key],
       callback: () => ability.update({ [updateKey]: key }),
     }));
     if (nullOption) {
       out.unshift({
         name: "None",
-        icon: CONFIG.TERIOCK.display.icons.remove,
+        icon: TERIOCK.display.icons.remove,
         callback: () => ability.update({ [updateKey]: null }),
       });
     }
@@ -61,24 +61,24 @@ export function contextMenus(ability) {
     piercing: [
       {
         name: "Normal",
-        icon: CONFIG.TERIOCK.display.icons.remove,
+        icon: TERIOCK.display.icons.remove,
         callback: () => ability.update({ "system.piercing": "normal" }),
       },
       {
         name: "AV0",
-        icon: CONFIG.TERIOCK.display.icons.av0,
+        icon: TERIOCK.display.icons.av0,
         callback: () => ability.update({ "system.piercing": "av0" }),
       },
       {
         name: "UB",
-        icon: CONFIG.TERIOCK.display.icons.ub,
+        icon: TERIOCK.display.icons.ub,
         callback: () => ability.update({ "system.piercing": "ub" }),
       },
     ],
     maneuver: [
       {
         name: "Active",
-        icon: CONFIG.TERIOCK.display.icons.active,
+        icon: TERIOCK.display.icons.active,
         callback: async () => {
           await ability.update({
             "system.maneuver": "active",
@@ -89,7 +89,7 @@ export function contextMenus(ability) {
       },
       {
         name: "Reactive",
-        icon: CONFIG.TERIOCK.display.icons.reactive,
+        icon: TERIOCK.display.icons.reactive,
         callback: async () => {
           await ability.update({
             "system.maneuver": "reactive",
@@ -100,7 +100,7 @@ export function contextMenus(ability) {
       },
       {
         name: "Passive",
-        icon: CONFIG.TERIOCK.display.icons.passive,
+        icon: TERIOCK.display.icons.passive,
         callback: async () =>
           await ability.update({
             "system.maneuver": "passive",
@@ -109,7 +109,7 @@ export function contextMenus(ability) {
       },
       {
         name: "Slow",
-        icon: CONFIG.TERIOCK.display.icons.slow,
+        icon: TERIOCK.display.icons.slow,
         callback: async () => {
           await ability.update({
             "system.maneuver": "slow",
@@ -129,7 +129,7 @@ export function contextMenus(ability) {
     targets: Object.entries(fetch("targets")).flatMap(([key, value]) => [
       {
         name: value,
-        icon: CONFIG.TERIOCK.display.icons.unchecked,
+        icon: TERIOCK.display.icons.unchecked,
         callback: async () => {
           const currentTargets =
             foundry.utils.getProperty(ability.system, "targets") || [];
@@ -144,7 +144,7 @@ export function contextMenus(ability) {
       },
       {
         name: value,
-        icon: CONFIG.TERIOCK.display.icons.checked,
+        icon: TERIOCK.display.icons.checked,
         callback: async () => {
           const currentTargets =
             foundry.utils.getProperty(ability.system, "targets") || [];
@@ -161,7 +161,7 @@ export function contextMenus(ability) {
     manaCost: [
       {
         name: "No Mana Cost",
-        icon: CONFIG.TERIOCK.display.icons.remove,
+        icon: TERIOCK.display.icons.remove,
         callback: () =>
           ability.update({
             "system.costs.mp": {
@@ -176,7 +176,7 @@ export function contextMenus(ability) {
       },
       {
         name: "Static Cost",
-        icon: CONFIG.TERIOCK.display.icons.numerical,
+        icon: TERIOCK.display.icons.numerical,
         callback: () =>
           ability.update({
             "system.costs.mp": {
@@ -191,7 +191,7 @@ export function contextMenus(ability) {
       },
       {
         name: "Formula Cost",
-        icon: CONFIG.TERIOCK.display.icons.formula,
+        icon: TERIOCK.display.icons.formula,
         callback: () =>
           ability.update({
             "system.costs.mp": {
@@ -206,7 +206,7 @@ export function contextMenus(ability) {
       },
       {
         name: "Variable Cost",
-        icon: CONFIG.TERIOCK.display.icons.variable,
+        icon: TERIOCK.display.icons.variable,
         callback: () =>
           ability.update({
             "system.costs.mp": {
@@ -223,7 +223,7 @@ export function contextMenus(ability) {
     hitCost: [
       {
         name: "No Hit Cost",
-        icon: CONFIG.TERIOCK.display.icons.remove,
+        icon: TERIOCK.display.icons.remove,
         callback: () =>
           ability.update({
             "system.costs.hp": {
@@ -238,7 +238,7 @@ export function contextMenus(ability) {
       },
       {
         name: "Static Cost",
-        icon: CONFIG.TERIOCK.display.icons.numerical,
+        icon: TERIOCK.display.icons.numerical,
         callback: () =>
           ability.update({
             "system.costs.hp": {
@@ -253,7 +253,7 @@ export function contextMenus(ability) {
       },
       {
         name: "Hack Cost",
-        icon: CONFIG.TERIOCK.display.icons.hack,
+        icon: TERIOCK.display.icons.hack,
         callback: () =>
           ability.update({
             "system.costs.hp": {
@@ -268,7 +268,7 @@ export function contextMenus(ability) {
       },
       {
         name: "Formula Cost",
-        icon: CONFIG.TERIOCK.display.icons.formula,
+        icon: TERIOCK.display.icons.formula,
         callback: () =>
           ability.update({
             "system.costs.hp": {
@@ -283,7 +283,7 @@ export function contextMenus(ability) {
       },
       {
         name: "Variable Cost",
-        icon: CONFIG.TERIOCK.display.icons.variable,
+        icon: TERIOCK.display.icons.variable,
         callback: () =>
           ability.update({
             "system.costs.hp": {
@@ -300,7 +300,7 @@ export function contextMenus(ability) {
     goldCost: [
       {
         name: "No Gold Cost",
-        icon: CONFIG.TERIOCK.display.icons.remove,
+        icon: TERIOCK.display.icons.remove,
         callback: () =>
           ability.update({
             "system.costs.gp": {
@@ -315,7 +315,7 @@ export function contextMenus(ability) {
       },
       {
         name: "Static Cost",
-        icon: CONFIG.TERIOCK.display.icons.numerical,
+        icon: TERIOCK.display.icons.numerical,
         callback: () =>
           ability.update({
             "system.costs.gp": {
@@ -330,7 +330,7 @@ export function contextMenus(ability) {
       },
       {
         name: "Formula Cost",
-        icon: CONFIG.TERIOCK.display.icons.formula,
+        icon: TERIOCK.display.icons.formula,
         callback: () =>
           ability.update({
             "system.costs.gp": {
@@ -345,7 +345,7 @@ export function contextMenus(ability) {
       },
       {
         name: "Variable Cost",
-        icon: CONFIG.TERIOCK.display.icons.variable,
+        icon: TERIOCK.display.icons.variable,
         callback: () =>
           ability.update({
             "system.costs.gp": {
@@ -362,7 +362,7 @@ export function contextMenus(ability) {
     breakCost: [
       {
         name: "No Break Cost",
-        icon: CONFIG.TERIOCK.display.icons.remove,
+        icon: TERIOCK.display.icons.remove,
         callback: () =>
           ability.update({
             "system.costs.break": null,
@@ -370,7 +370,7 @@ export function contextMenus(ability) {
       },
       {
         name: "Shatter Cost",
-        icon: CONFIG.TERIOCK.display.icons.shatter,
+        icon: TERIOCK.display.icons.shatter,
         callback: () =>
           ability.update({
             "system.costs.break": "shatter",
@@ -378,7 +378,7 @@ export function contextMenus(ability) {
       },
       {
         name: "Destroy Cost",
-        icon: CONFIG.TERIOCK.display.icons.destroy,
+        icon: TERIOCK.display.icons.destroy,
         callback: () =>
           ability.update({
             "system.costs.break": "destroy",
@@ -394,7 +394,7 @@ export function contextMenus(ability) {
     attributeImprovement: ["int", "mov", "per", "snk", "str", "unp"].map(
       (attr) => ({
         name: attr.toUpperCase(),
-        icon: CONFIG.TERIOCK.display.icons[attr],
+        icon: TERIOCK.display.icons[attr],
         callback: async () => {
           await ability.update({
             "system.improvements.attributeImprovement.attribute": attr,
@@ -405,7 +405,7 @@ export function contextMenus(ability) {
     attributeImprovementMinVal: Array.from({ length: 9 }, (_, i) => i - 3).map(
       (i) => ({
         name: i.toString(),
-        icon: CONFIG.TERIOCK.display.icons.numerical,
+        icon: TERIOCK.display.icons.numerical,
         callback: async () => {
           await ability.update({
             "system.improvements.attributeImprovement.minVal": i,
@@ -416,7 +416,7 @@ export function contextMenus(ability) {
     featSaveImprovement: ["int", "mov", "per", "snk", "str", "unp"].map(
       (attr) => ({
         name: attr.toUpperCase(),
-        icon: CONFIG.TERIOCK.display.icons[attr],
+        icon: TERIOCK.display.icons[attr],
         callback: async () => {
           await ability.update({
             "system.improvements.featSaveImprovement.attribute": attr,
@@ -426,7 +426,7 @@ export function contextMenus(ability) {
     ),
     featSaveImprovementAmount: ["proficiency", "fluency"].map((level) => ({
       name: capitalize(level),
-      icon: CONFIG.TERIOCK.display.icons[level],
+      icon: TERIOCK.display.icons[level],
       callback: async () => {
         await ability.update({
           "system.improvements.featSaveImprovement.amount": level,
@@ -435,7 +435,7 @@ export function contextMenus(ability) {
     })),
     form: Object.entries(fetch("form")).map(([key, value]) => ({
       name: value.name,
-      icon: makeIcon(value.icon, CONFIG.TERIOCK.display.iconStyles.contextMenu),
+      icon: makeIcon(value.icon, TERIOCK.display.iconStyles.contextMenu),
       callback: async () => {
         await ability.update({
           "system.form": key,

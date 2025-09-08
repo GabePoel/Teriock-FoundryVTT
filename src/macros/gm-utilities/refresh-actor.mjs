@@ -1,2 +1,2 @@
-await game.teriock.api.utils.refreshDocuments(actor.abilities);
-await game.teriock.api.utils.refreshDocuments(actor.equipment);
+await tm.utils.refreshDocuments(actor.abilities.filter((a) => !a.sup));
+await tm.utils.refreshDocuments(actor.equipment);

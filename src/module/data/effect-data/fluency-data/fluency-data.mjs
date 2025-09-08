@@ -69,7 +69,7 @@ export default class TeriockFluencyData extends WikiDataMixin(
 
   /** @inheritDoc */
   get wikiPage() {
-    return `${this.constructor.metadata.namespace}:${CONFIG.TERIOCK.options.tradecraft[this.field].tradecrafts[this.tradecraft].name}`;
+    return `${this.constructor.metadata.namespace}:${TERIOCK.options.tradecraft[this.field].tradecrafts[this.tradecraft].name}`;
   }
 
   /** @inheritDoc */
@@ -96,7 +96,7 @@ export default class TeriockFluencyData extends WikiDataMixin(
       foundry.utils.setProperty(
         changes,
         "img",
-        getIcon("tradecrafts", CONFIG.TERIOCK.index.tradecrafts[tradecraft]),
+        getIcon("tradecrafts", TERIOCK.index.tradecrafts[tradecraft]),
       );
     }
   }

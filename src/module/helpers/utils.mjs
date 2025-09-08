@@ -260,7 +260,7 @@ export function tokenDocument(token) {
  */
 export function makeIcon(icon, ...styles) {
   const styleClasses = styles.map(
-    (s) => CONFIG.TERIOCK.display.iconStyles[s] || s,
+    (s) => TERIOCK.display.iconStyles[s] || s,
   );
   const classString = styleClasses.map((s) => `fa-${s}`).join(" ");
   return `<i class="${classString} fa-${icon}"></i>`;
@@ -400,7 +400,7 @@ export function parseDurationString(durationString) {
     parsedUnit = "untilDawn";
   } else {
     // General condition parsing
-    for (const condition of Object.keys(CONFIG.TERIOCK.index.conditions)) {
+    for (const condition of Object.keys(TERIOCK.index.conditions)) {
       if (parsingString.includes("not " + condition)) {
         parsedAbsentConditions.add(condition);
       } else if (parsingString.includes(condition)) {
@@ -411,7 +411,7 @@ export function parseDurationString(durationString) {
   const parsedStationary = parsingString.includes("stationary");
   // Use word boundaries for unit matching to avoid partial matches
   for (const unit of Object.keys(
-    CONFIG.TERIOCK.options.ability.duration.unit,
+    TERIOCK.options.ability.duration.unit,
   )) {
     const regex = new RegExp(`\\b${unit}s?\\b`);
     if (regex.test(parsingString)) {

@@ -22,7 +22,7 @@ async function processProperty(propertyName, _index, _total) {
   );
 
   if (!propertyEffect) {
-    propertyEffect = await game.teriock.api.create.property(
+    propertyEffect = await tm.create.property(
       propertyItem,
       propertyName,
       { notify: false },
@@ -39,7 +39,7 @@ async function processProperty(propertyName, _index, _total) {
 }
 
 const BATCH_SIZE = 50;
-const total = Object.values(CONFIG.TERIOCK.index.properties).length;
+const total = Object.values(TERIOCK.index.properties).length;
 const results = [];
 
 progress.update({
@@ -49,7 +49,7 @@ progress.update({
 
 try {
   for (let start = 0; start < total; start += BATCH_SIZE) {
-    const batch = Object.values(CONFIG.TERIOCK.index.properties).slice(
+    const batch = Object.values(TERIOCK.index.properties).slice(
       start,
       start + BATCH_SIZE,
     );

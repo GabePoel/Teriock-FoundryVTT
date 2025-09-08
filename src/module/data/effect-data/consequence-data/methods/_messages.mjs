@@ -30,7 +30,7 @@ export function _messageParts(consequenceData) {
       /** @type string[] */
       wrappers: Array.from(
         consequenceData.parent.statuses.map(
-          (status) => CONFIG.TERIOCK.index.conditions[status],
+          (status) => TERIOCK.index.conditions[status],
         ),
       ),
     },

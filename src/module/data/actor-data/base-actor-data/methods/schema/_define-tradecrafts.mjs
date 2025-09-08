@@ -41,7 +41,7 @@ function tradecraftField() {
  */
 export function _defineTradecrafts(schema) {
   const tradecraftData = {};
-  for (const key of Object.keys(CONFIG.TERIOCK.index.tradecrafts)) {
+  for (const key of Object.keys(TERIOCK.index.tradecrafts)) {
     tradecraftData[key] = tradecraftField();
   }
   schema.tradecrafts = new fields.SchemaField(tradecraftData);

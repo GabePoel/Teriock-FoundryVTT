@@ -239,7 +239,7 @@ export default class TeriockBaseActorSheet extends SheetMixin(ActorSheetV2) {
       messageParts.blocks = [
         {
           title: "Immunity",
-          text: CONFIG.TERIOCK.content.keywords.immunity,
+          text: TERIOCK.content.keywords.immunity,
         },
       ];
       const content = buildMessage(messageParts).outerHTML;
@@ -358,7 +358,7 @@ export default class TeriockBaseActorSheet extends SheetMixin(ActorSheetV2) {
       messageParts.blocks = [
         {
           title: "Resistance",
-          text: CONFIG.TERIOCK.content.keywords.resistance,
+          text: TERIOCK.content.keywords.resistance,
         },
       ];
       const content = buildMessage(messageParts).outerHTML;
@@ -966,12 +966,12 @@ export default class TeriockBaseActorSheet extends SheetMixin(ActorSheetV2) {
     context.conditionProviders = {};
 
     context.tradecraftTooltips = {};
-    for (const tc of Object.keys(CONFIG.TERIOCK.index.tradecrafts)) {
+    for (const tc of Object.keys(TERIOCK.index.tradecrafts)) {
       context.tradecraftTooltips[tc] = await tradecraftMessage(tc);
     }
 
     if (tab === "conditions") {
-      for (const condition of Object.keys(CONFIG.TERIOCK.index.conditions)) {
+      for (const condition of Object.keys(TERIOCK.index.conditions)) {
         context.conditionProviders[condition] = new Set();
         for (const e of this.document.effectTypes?.base || []) {
           if (e.statuses.has(condition) && e.active) {

@@ -129,6 +129,11 @@ declare global {
   const TeriockPropertySheet: typeof import("./applications/sheets/_module.mjs").effect.PropertySheet;
   const TeriockResourceSheet: typeof import("./applications/sheets/_module.mjs").effect.ResourceSheet;
 
+  // Placeables
+  // ==========
+
+  const TeriockToken: typeof import("./canvas/placeables/token.mjs").default;
+
   namespace Teriock {
     const __brand: unique symbol;
 

@@ -12,7 +12,7 @@ import {
  * @private
  */
 export function _messageParts(equipmentData) {
-  const ref = CONFIG.TERIOCK.options.equipment;
+  const ref = TERIOCK.options.equipment;
   const src = equipmentData;
   let damageString = "";
   if (src.derivedDamage) {
@@ -84,7 +84,7 @@ export function _messageParts(equipmentData) {
   if (equipmentData.sb && equipmentData.sb.length > 0) {
     blocks.push({
       title:
-        CONFIG.TERIOCK.index.weaponFightingStyles[equipmentData.sb] +
+        TERIOCK.index.weaponFightingStyles[equipmentData.sb] +
         " Fighting Style",
       text: equipmentData.specialRules,
     });

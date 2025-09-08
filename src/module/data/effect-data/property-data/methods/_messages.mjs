@@ -8,7 +8,7 @@ import { addPropertiesBlock } from "../../../../helpers/messages-builder/message
  * @private
  */
 export function _messageParts(propertyData) {
-  const ref = CONFIG.TERIOCK.options.ability;
+  const ref = TERIOCK.options.ability;
   const blocks = [
     {
       title: "Description",

@@ -1,6 +1,6 @@
 const data = /** @type {Teriock.HookData.UseAbility} */ scope.data;
 const ability = data.rollConfig.abilityData.parent;
-const equipmentClass = await game.teriock.api.dialogs.selectWeaponClassDialog();
+const equipmentClass = await tm.dialogs.selectWeaponClassDialog();
 const changes = [
   {
     key: `system.equipmentChanges.overrides.classes.${equipmentClass}.av0`,

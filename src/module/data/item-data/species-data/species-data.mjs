@@ -80,7 +80,7 @@ export default class TeriockSpeciesData extends StatDataMixin(
         nullable: true,
       }),
       traits: new fields.SetField(
-        new fields.StringField({ choices: CONFIG.TERIOCK.index.traits }),
+        new fields.StringField({ choices: TERIOCK.index.traits }),
         {
           initial: ["humanoid"],
           label: "Traits",

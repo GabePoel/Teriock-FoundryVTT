@@ -7,9 +7,9 @@ import { makeIcon } from "../../../../../helpers/utils.mjs";
  * @returns {Array} Array of context menu options for property type selection.
  */
 export function propertyContextMenu(property) {
-  const iconStyle = CONFIG.TERIOCK.display.iconStyles.contextMenu;
+  const iconStyle = TERIOCK.display.iconStyles.contextMenu;
   const options = [];
-  let types = CONFIG.TERIOCK.options.ability.form;
+  let types = TERIOCK.options.ability.form;
   for (const type in types) {
     const typeName = types[type].name;
     const typeIcon = types[type].icon;

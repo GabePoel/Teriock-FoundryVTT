@@ -32,7 +32,7 @@ async function use(fluencyData, options) {
   }
   rollFormula += " + @f + @" + fluencyData.tradecraft;
   const roll = new TeriockRoll(rollFormula, fluencyData.actor.getRollData(), {
-    flavor: `${CONFIG.TERIOCK.index.tradecrafts[fluencyData.tradecraft]} Check`,
+    flavor: `${TERIOCK.index.tradecrafts[fluencyData.tradecraft]} Check`,
   });
   await roll.evaluate();
   TeriockChatMessage.create({

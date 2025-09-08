@@ -63,11 +63,11 @@ const progress = ui.notifications.info("Pulling all creatures from wiki.", {
 async function processSpecies(speciesName, _index, _total) {
   let speciesItem = speciesPack.index.find((e) => e.name === speciesName);
   let folder = allSpeciesFolder;
-  if (Object.values(CONFIG.TERIOCK.index.humanoids).includes(speciesName))
+  if (Object.values(TERIOCK.index.humanoids).includes(speciesName))
     folder = characterSpeciesFolder;
-  if (Object.values(CONFIG.TERIOCK.index.commonAnimals).includes(speciesName))
+  if (Object.values(TERIOCK.index.commonAnimals).includes(speciesName))
     folder = commonAnimalSpeciesFolder;
-  if (Object.values(CONFIG.TERIOCK.index.undead).includes(speciesName))
+  if (Object.values(TERIOCK.index.undead).includes(speciesName))
     folder = undeadSpeciesFolder;
   if (!speciesItem) {
     speciesItem = await game.teriock.Item.create(
@@ -87,18 +87,18 @@ async function processSpecies(speciesName, _index, _total) {
   return { speciesName, success: true };
 }
 
-const speciesPromises = Object.values(CONFIG.TERIOCK.index.creatures).map(
+const speciesPromises = Object.values(TERIOCK.index.creatures).map(
   (speciesName, index) =>
     processSpecies(
       speciesName,
       index,
-      Object.values(CONFIG.TERIOCK.index.creatures).length,
+      Object.values(TERIOCK.index.creatures).length,
     ),
 );
 
 progress.update({
   pct: 0.1,
-  message: `Processing ${Object.values(CONFIG.TERIOCK.index.creatures).length} species in parallel...`,
+  message: `Processing ${Object.values(TERIOCK.index.creatures).length} species in parallel...`,
 });
 
 try {

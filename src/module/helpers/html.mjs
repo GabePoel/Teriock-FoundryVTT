@@ -148,7 +148,7 @@ export function makeDamageTypeButtons(roll) {
   }
   for (const status of statuses) {
     buttons.push({
-      label: `Apply ${CONFIG.TERIOCK.index.conditions[status]}`,
+      label: `Apply ${TERIOCK.index.conditions[status]}`,
       icon: "fas fa-plus",
       dataset: {
         action: "apply-status",
@@ -168,12 +168,12 @@ export async function makeDamageDrainTypeMessage(roll) {
   const damageTypes = new Set();
   const drainTypes = new Set();
   for (const term of roll.terms) {
-    for (const type of Object.keys(CONFIG.TERIOCK.index.damageTypes)) {
+    for (const type of Object.keys(TERIOCK.index.damageTypes)) {
       if (term.flavor.includes(type)) {
         damageTypes.add(type);
       }
     }
-    for (const type of Object.keys(CONFIG.TERIOCK.index.drainTypes)) {
+    for (const type of Object.keys(TERIOCK.index.drainTypes)) {
       if (term.flavor.includes(type)) {
         drainTypes.add(type);
       }
@@ -183,15 +183,15 @@ export async function makeDamageDrainTypeMessage(roll) {
   const blocks = [];
   for (const damageType of damageTypes) {
     blocks.push({
-      title: CONFIG.TERIOCK.index.damageTypes[damageType] + " Damage",
-      text: CONFIG.TERIOCK.content.damageTypes[damageType],
+      title: TERIOCK.index.damageTypes[damageType] + " Damage",
+      text: TERIOCK.content.damageTypes[damageType],
       italic: true,
     });
   }
   for (const drainType of drainTypes) {
     blocks.push({
-      title: CONFIG.TERIOCK.index.drainTypes[drainType] + " Drain",
-      text: CONFIG.TERIOCK.content.drainTypes[drainType],
+      title: TERIOCK.index.drainTypes[drainType] + " Drain",
+      text: TERIOCK.content.drainTypes[drainType],
       italic: true,
     });
   }
@@ -259,26 +259,26 @@ export function tidyHTML(html) {
 export async function tradecraftMessage(tradecraft) {
   let field;
   for (const [key, value] of Object.entries(
-    CONFIG.TERIOCK.options.tradecraft,
+    TERIOCK.options.tradecraft,
   )) {
     if (Object.keys(value.tradecrafts).includes(tradecraft)) {
       field = key;
     }
   }
   const messageContent = buildMessage({
-    image: getIcon("tradecrafts", CONFIG.TERIOCK.index.tradecrafts[tradecraft]),
-    name: CONFIG.TERIOCK.index.tradecrafts[tradecraft],
+    image: getIcon("tradecrafts", TERIOCK.index.tradecrafts[tradecraft]),
+    name: TERIOCK.index.tradecrafts[tradecraft],
     bars: [
       {
-        icon: "fa-" + CONFIG.TERIOCK.options.tradecraft[field].icon,
+        icon: "fa-" + TERIOCK.options.tradecraft[field].icon,
         label: "Field",
-        wrappers: [CONFIG.TERIOCK.options.tradecraft[field].name],
+        wrappers: [TERIOCK.options.tradecraft[field].name],
       },
     ],
     blocks: [
       {
         title: "Description",
-        text: CONFIG.TERIOCK.content.tradecrafts[tradecraft],
+        text: TERIOCK.content.tradecrafts[tradecraft],
       },
     ],
   });
@@ -296,25 +296,25 @@ export async function tradecraftMessage(tradecraft) {
  */
 export async function classMessage(className) {
   let archetype;
-  for (const [key, value] of Object.entries(CONFIG.TERIOCK.options.rank)) {
+  for (const [key, value] of Object.entries(TERIOCK.options.rank)) {
     if (Object.keys(value.classes).includes(className)) {
       archetype = key;
     }
   }
   const messageContent = buildMessage({
-    image: getIcon("classes", CONFIG.TERIOCK.index.classes[className]),
-    name: CONFIG.TERIOCK.index.classes[className],
+    image: getIcon("classes", TERIOCK.index.classes[className]),
+    name: TERIOCK.index.classes[className],
     bars: [
       {
-        icon: "fa-" + CONFIG.TERIOCK.options.rank[archetype].icon,
+        icon: "fa-" + TERIOCK.options.rank[archetype].icon,
         label: "Archetype",
-        wrappers: [CONFIG.TERIOCK.options.rank[archetype].name],
+        wrappers: [TERIOCK.options.rank[archetype].name],
       },
     ],
     blocks: [
       {
         title: "Description",
-        text: CONFIG.TERIOCK.content.classes[className],
+        text: TERIOCK.content.classes[className],
       },
     ],
   });

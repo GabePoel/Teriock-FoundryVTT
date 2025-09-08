@@ -4,11 +4,13 @@ const transformationLevels = {
   full: "Full Transformation",
   greater: "Greater Transformation",
 };
-const chosenTransformationLevel = await game.teriock.api.dialogs.selectDialog(
+const chosenTransformationLevel = await tm.dialogs.selectDialog(
   transformationLevels,
   {
     label: "Level",
     hint: "If known, select the level of transformation you are attempting to revert from.",
+    hintHtml: TERIOCK.content.conditionsData.transformed.content,
+    hintTitle: "Transformed",
     title: "Select Transformation Level",
     other: true,
     initial: "minor",

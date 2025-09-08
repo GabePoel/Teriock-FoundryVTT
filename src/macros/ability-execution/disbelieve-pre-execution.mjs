@@ -4,11 +4,13 @@ const illusionLevels = {
   full: "Full Illusion",
   greater: "Greater Illusion",
 };
-const chosenIllusionLevel = await game.teriock.api.dialogs.selectDialog(
+const chosenIllusionLevel = await tm.dialogs.selectDialog(
   illusionLevels,
   {
     label: "Level",
     hint: "If known, select the level of illusion you are attempting to disbelieve.",
+    hintHtml: TERIOCK.content.keywords.illusionary,
+    hintTitle: "Illusionary",
     title: "Select Illusion Level",
     other: true,
     initial: "minor",

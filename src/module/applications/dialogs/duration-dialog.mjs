@@ -88,13 +88,13 @@ export default async function durationDialog(ability) {
             );
           const stationary = stationaryElement.checked;
           if (description.length === 0) {
-            description = `${CONFIG.TERIOCK.options.ability.duration.unit[unit]}${quantity !== 1 && !["instant", "noLimit", "untilDawn"].includes(unit) ? "s" : ""}`;
+            description = `${TERIOCK.options.ability.duration.unit[unit]}${quantity !== 1 && !["instant", "noLimit", "untilDawn"].includes(unit) ? "s" : ""}`;
             if (!["instant", "noLimit", "untilDawn"].includes(unit)) {
               description = `${quantity} ${description}`;
             }
             let conditionTerms = [
-              ...present.map((k) => CONFIG.TERIOCK.index.conditions[k]),
-              ...absent.map((k) => "Not " + CONFIG.TERIOCK.index.conditions[k]),
+              ...present.map((k) => TERIOCK.index.conditions[k]),
+              ...absent.map((k) => "Not " + TERIOCK.index.conditions[k]),
             ];
             conditionTerms = conditionTerms.map((c) => {
               if (c === "Not Down") return "Up";

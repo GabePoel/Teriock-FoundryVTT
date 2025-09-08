@@ -136,7 +136,7 @@ export default function registerUiHelpers() {
       const sizeValue = get(sizePath);
       const ascendingValue = get(ascendingPath);
 
-      const sizeOptions = CONFIG.TERIOCK.options.display.sizes ?? {};
+      const sizeOptions = TERIOCK.options.display.sizes ?? {};
       const sortSelectHTML =
         selectOptions(sortOptions, {
           hash: { selected: sortValue },

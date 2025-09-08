@@ -13,7 +13,7 @@ import {
  * @private
  */
 export function _messageParts(rankData) {
-  const ref = CONFIG.TERIOCK.options.rank;
+  const ref = TERIOCK.options.rank;
   const src = rankData;
   const bars = [
     {

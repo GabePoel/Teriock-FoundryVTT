@@ -39,12 +39,12 @@ export default class TeriockBaseEffectData extends ChildTypeModel {
         statuses: new fields.SchemaField({
           active: new fields.SetField(
             new fields.StringField({
-              choices: CONFIG.TERIOCK.index.conditions,
+              choices: TERIOCK.index.conditions,
             }),
           ),
           inactive: new fields.SetField(
             new fields.StringField({
-              choices: CONFIG.TERIOCK.index.conditions,
+              choices: TERIOCK.index.conditions,
             }),
           ),
         }),

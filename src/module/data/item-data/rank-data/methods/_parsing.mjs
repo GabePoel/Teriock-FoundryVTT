@@ -44,7 +44,7 @@ function extractAbilityNames(metaData, attr) {
 export async function _parse(rankData, rawHTML) {
   const { className, classRank, archetype } = rankData;
   const classValue =
-    CONFIG.TERIOCK.options.rank[archetype].classes[className].name;
+    TERIOCK.options.rank[archetype].classes[className].name;
   const toDelete = rankData.parent.abilities.map((a) => a.id);
   await rankData.parent.deleteEmbeddedDocuments("ActiveEffect", toDelete);
 

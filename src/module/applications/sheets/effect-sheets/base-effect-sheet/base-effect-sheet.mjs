@@ -78,8 +78,8 @@ export default class TeriockBaseEffectSheet extends SheetMixin(
     const abilityKey = await selectAbilityDialog();
     let abilityName = "New Ability";
     if (abilityKey && abilityKey !== "other") {
-      abilityName = CONFIG.TERIOCK.index.abilities[abilityKey];
-      const ability = await game.teriock.api.fetch.importAbility(
+      abilityName = TERIOCK.index.abilities[abilityKey];
+      const ability = await tm.fetch.importAbility(
         this.document.parent,
         abilityName,
       );

@@ -8,7 +8,7 @@ const equipment = actor.equipment.filter(
     e.system.damage !== "0" &&
     actor.system.wielding.attacker.raw !== e.id,
 );
-const selectedEquipment = await game.teriock.api.dialogs.selectDocumentDialog(
+const selectedEquipment = await tm.dialogs.selectDocumentDialog(
   equipment,
   {
     title: "Select Equipment",
@@ -28,7 +28,7 @@ const abilities = actor.abilities
       ["weapon", "hand"].includes(a.system.delivery.base),
   )
   .sort((a, b) => a.name.localeCompare(b.name));
-const ability = await game.teriock.api.dialogs.selectDocumentDialog(abilities, {
+const ability = await tm.dialogs.selectDocumentDialog(abilities, {
   title: "Select Ability",
   hint: "Select an ability to use.",
 });

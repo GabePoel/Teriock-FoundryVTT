@@ -1,5 +1,3 @@
-import { TERIOCK } from "../../../../constants/_module.mjs";
-
 /**
  * Gets roll data for an actor system, including basic stats, attack data, class ranks, and tradecrafts.
  *

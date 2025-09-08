@@ -3,11 +3,11 @@ let spiritItem = actor.equipment.find((e) => e.name === "Spirit Item");
 // Create a spirit item if one doesn't already exist
 if (!spiritItem) {
   const equipmentType =
-    await game.teriock.api.dialogs.selectEquipmentTypeDialog();
+    await tm.dialogs.selectEquipmentTypeDialog();
   let spiritItems;
-  if (equipmentType in CONFIG.TERIOCK.options.equipment.equipmentType) {
+  if (equipmentType in TERIOCK.options.equipment.equipmentType) {
     const equipmentTypeName =
-      CONFIG.TERIOCK.options.equipment.equipmentType[equipmentType];
+      TERIOCK.options.equipment.equipmentType[equipmentType];
     const spiritItemReference = await fromUuid(
       game.teriock.packs.equipment().index.getName(equipmentTypeName).uuid,
     );
@@ -38,5 +38,5 @@ if (!spiritItem) {
     "system.weight": 0,
     "system.disabled": true,
   });
-  await game.teriock.api.fetch.importProperty(spiritItem, "Master Crafted");
+  await tm.fetch.importProperty(spiritItem, "Master Crafted");
 }

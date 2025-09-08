@@ -1,10 +1,10 @@
-const basicAbilitiesItem = await game.teriock.api.fetch.getItem(
+const basicAbilitiesItem = await tm.fetch.getItem(
   "Basic Abilities",
   "essentials",
 );
 
 const basicAbilityNames =
-  await game.teriock.api.wiki.fetchCategoryAbilities("Basic abilities");
+  await teriock.helpers.wiki.fetchCategoryAbilities("Basic abilities");
 
 const progress = ui.notifications.info(`Pulling basic abilities from wiki.`, {
   progress: true,
@@ -16,7 +16,7 @@ for (const basicAbilityName of basicAbilityNames) {
     (a) => a.name === basicAbilityName,
   );
   if (!basicAbility) {
-    basicAbility = await game.teriock.api.create.ability(
+    basicAbility = await tm.create.ability(
       basicAbilitiesItem,
       basicAbilityName,
     );

@@ -15,7 +15,7 @@ import { _override } from "./_overrides.mjs";
  */
 export async function _parse(equipmentData, rawHTML) {
   const allValidProperties = foundry.utils.deepClone(
-    CONFIG.TERIOCK.index.properties,
+    TERIOCK.index.properties,
   );
 
   // Remove existing properties

@@ -169,9 +169,9 @@ export async function createConsequence(document) {
  */
 export async function createFluency(document, tradecraft = artist) {
   let field;
-  for (const f of Object.keys(CONFIG.TERIOCK.options.tradecraft)) {
+  for (const f of Object.keys(TERIOCK.options.tradecraft)) {
     if (
-      Object.keys(CONFIG.TERIOCK.options.tradecraft[f].tradecrafts).includes(
+      Object.keys(TERIOCK.options.tradecraft[f].tradecrafts).includes(
         tradecraft,
       )
     ) {
@@ -180,9 +180,9 @@ export async function createFluency(document, tradecraft = artist) {
   }
   const fluency = await TeriockEffect.create(
     {
-      name: `New ${CONFIG.TERIOCK.index.tradecrafts[tradecraft]} Fluency`,
+      name: `New ${TERIOCK.index.tradecrafts[tradecraft]} Fluency`,
       type: "fluency",
-      img: getIcon("tradecrafts", CONFIG.TERIOCK.index.tradecrafts[tradecraft]),
+      img: getIcon("tradecrafts", TERIOCK.index.tradecrafts[tradecraft]),
       system: {
         tradecraft: tradecraft,
         field: field,

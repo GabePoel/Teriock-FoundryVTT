@@ -40,7 +40,7 @@ function protectionField(name) {
       new fields.StringField({
         initial: "",
         label: `Condition`,
-        choices: CONFIG.TERIOCK.index.conditions,
+        choices: TERIOCK.index.conditions,
       }),
       {
         label: `Conditions`,
@@ -51,7 +51,7 @@ function protectionField(name) {
       new fields.StringField({
         initial: "",
         label: `Element`,
-        choices: CONFIG.TERIOCK.index.elements,
+        choices: TERIOCK.index.elements,
       }),
       {
         label: `Elements`,
@@ -62,7 +62,7 @@ function protectionField(name) {
       new fields.StringField({
         initial: "",
         label: `Effect`,
-        choices: CONFIG.TERIOCK.index.effectTypes,
+        choices: TERIOCK.index.effectTypes,
       }),
       {
         label: `Effects`,
@@ -73,7 +73,7 @@ function protectionField(name) {
       new fields.StringField({
         initial: "",
         label: `Power Source`,
-        choices: CONFIG.TERIOCK.index.powerSources,
+        choices: TERIOCK.index.powerSources,
       }),
       {
         label: `Power Sources`,

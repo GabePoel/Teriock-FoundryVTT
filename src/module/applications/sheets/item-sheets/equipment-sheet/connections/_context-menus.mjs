@@ -7,9 +7,9 @@ import { makeIcon } from "../../../../../helpers/utils.mjs";
  * @returns {Array} Array of context menu options for power level selection.
  */
 export function powerLevelContextMenu(item) {
-  const iconStyle = CONFIG.TERIOCK.display.iconStyles.contextMenu;
+  const iconStyle = TERIOCK.display.iconStyles.contextMenu;
   const options = [];
-  let powerLevels = CONFIG.TERIOCK.options.equipment.powerLevel;
+  let powerLevels = TERIOCK.options.equipment.powerLevel;
   for (const powerLevel in powerLevels) {
     if (powerLevel === "unknown") continue;
     const powerLevelName = powerLevels[powerLevel].name;
@@ -38,9 +38,9 @@ export function powerLevelContextMenu(item) {
  * @returns {Array} Array of context menu options for font selection.
  */
 export function fontContextMenu(item) {
-  const iconStyle = CONFIG.TERIOCK.display.iconStyles.contextMenu;
+  const iconStyle = TERIOCK.display.iconStyles.contextMenu;
   const options = [];
-  let fonts = CONFIG.TERIOCK.display.fonts;
+  let fonts = TERIOCK.display.fonts;
   for (const font in fonts) {
     const fontName = fonts[font].name;
     const fontIcon = fontName.charAt(0).toLowerCase();

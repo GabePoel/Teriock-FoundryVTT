@@ -7,9 +7,9 @@ import { makeIcon } from "../../../../../helpers/utils.mjs";
  * @returns {Array} Array of context menu options for tradecraft selection.
  */
 export function tradecraftContextMenu(fluency) {
-  const iconStyle = CONFIG.TERIOCK.display.iconStyles.contextMenu;
+  const iconStyle = TERIOCK.display.iconStyles.contextMenu;
   const options = [];
-  let fields = CONFIG.TERIOCK.options.tradecraft;
+  let fields = TERIOCK.options.tradecraft;
   for (const field in fields) {
     const tradecrafts = fields[field].tradecrafts;
     for (const tradecraft in tradecrafts) {
@@ -45,9 +45,9 @@ export function tradecraftContextMenu(fluency) {
  * @returns {Array} Array of context menu options for field selection.
  */
 export function fieldContextMenu(fluency) {
-  const iconStyle = CONFIG.TERIOCK.display.iconStyles.contextMenu;
+  const iconStyle = TERIOCK.display.iconStyles.contextMenu;
   const options = [];
-  let fields = CONFIG.TERIOCK.options.tradecraft;
+  let fields = TERIOCK.options.tradecraft;
   for (const field in fields) {
     const fieldName = fields[field].name;
     const icon = makeIcon(fields[field].icon, iconStyle);

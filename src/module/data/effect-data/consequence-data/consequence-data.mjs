@@ -33,7 +33,7 @@ export default class TeriockConsequenceData extends HierarchyDataMixin(
         conditions: new fields.SchemaField({
           present: new fields.SetField(
             new fields.StringField({
-              choices: CONFIG.TERIOCK.index.conditions,
+              choices: TERIOCK.index.conditions,
             }),
             {
               label: "Present Conditions",
@@ -42,7 +42,7 @@ export default class TeriockConsequenceData extends HierarchyDataMixin(
           ),
           absent: new fields.SetField(
             new fields.StringField({
-              choices: CONFIG.TERIOCK.index.conditions,
+              choices: TERIOCK.index.conditions,
             }),
             {
               label: "Absent Conditions",

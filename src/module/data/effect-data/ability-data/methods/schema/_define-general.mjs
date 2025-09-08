@@ -55,41 +55,41 @@ export function _defineGeneral(schema) {
     elderSorceryIncant: new fields.HTMLField({ initial: "" }),
     powerSources: new fields.ArrayField(
       new fields.StringField({
-        choices: CONFIG.TERIOCK.index.powerSources,
+        choices: TERIOCK.index.powerSources,
       }),
     ),
     interaction: new fields.StringField({
       initial: "attack",
-      choices: CONFIG.TERIOCK.options.ability.interaction,
+      choices: TERIOCK.options.ability.interaction,
     }),
     featSaveAttribute: new fields.StringField({
       initial: "mov",
-      choices: CONFIG.TERIOCK.index.attributes,
+      choices: TERIOCK.index.attributes,
     }),
     maneuver: new fields.StringField({
       initial: "active",
-      choices: CONFIG.TERIOCK.options.ability.maneuver,
+      choices: TERIOCK.options.ability.maneuver,
     }),
     executionTime: new fields.StringField({ initial: "a1" }),
     delivery: new fields.SchemaField({
       base: new fields.StringField({
         initial: "weapon",
-        choices: CONFIG.TERIOCK.options.ability.delivery,
+        choices: TERIOCK.options.ability.delivery,
       }),
       parent: new fields.StringField({
         initial: null,
         nullable: true,
-        choices: CONFIG.TERIOCK.options.ability.deliveryParent,
+        choices: TERIOCK.options.ability.deliveryParent,
       }),
       package: new fields.StringField({
         initial: null,
         nullable: true,
-        choices: CONFIG.TERIOCK.options.ability.deliveryPackage,
+        choices: TERIOCK.options.ability.deliveryPackage,
       }),
     }),
     targets: new fields.ArrayField(
       new fields.StringField({
-        choices: CONFIG.TERIOCK.options.ability.targets,
+        choices: TERIOCK.options.ability.targets,
       }),
       {
         initial: ["creature"],
@@ -97,12 +97,12 @@ export function _defineGeneral(schema) {
     ),
     elements: new fields.ArrayField(
       new fields.StringField({
-        choices: CONFIG.TERIOCK.index.elements,
+        choices: TERIOCK.index.elements,
       }),
     ),
     duration: new fields.SchemaField({
       unit: new fields.StringField({
-        choices: CONFIG.TERIOCK.options.ability.duration.unit,
+        choices: TERIOCK.options.ability.duration.unit,
         initial: "minute",
         label: "Unit",
         hint: "Unit of time for this ability's duration.",
@@ -115,14 +115,14 @@ export function _defineGeneral(schema) {
       }),
       conditions: new fields.SchemaField({
         present: new fields.SetField(
-          new fields.StringField({ choices: CONFIG.TERIOCK.index.conditions }),
+          new fields.StringField({ choices: TERIOCK.index.conditions }),
           {
             label: "Present Conditions",
             hint: "What conditions must be present in order for this ability to be active?",
           },
         ),
         absent: new fields.SetField(
-          new fields.StringField({ choices: CONFIG.TERIOCK.index.conditions }),
+          new fields.StringField({ choices: TERIOCK.index.conditions }),
           {
             label: "Absent Conditions",
             hint: "What conditions must be absent in order for this ability to be active?",
@@ -161,14 +161,14 @@ export function _defineGeneral(schema) {
     }),
     piercing: new fields.StringField({
       initial: "normal",
-      choices: CONFIG.TERIOCK.options.ability.piercing,
+      choices: TERIOCK.options.ability.piercing,
     }),
     improvements: new fields.SchemaField({
       attributeImprovement: new fields.SchemaField({
         attribute: new fields.StringField({
           initial: null,
           nullable: true,
-          choices: CONFIG.TERIOCK.index.statAttributes,
+          choices: TERIOCK.index.statAttributes,
         }),
         minVal: new fields.NumberField({ initial: 0 }),
       }),
@@ -176,7 +176,7 @@ export function _defineGeneral(schema) {
         attribute: new fields.StringField({
           initial: null,
           nullable: true,
-          choices: CONFIG.TERIOCK.index.attributes,
+          choices: TERIOCK.index.attributes,
         }),
         amount: new fields.StringField({ initial: "proficient" }),
       }),
@@ -288,7 +288,7 @@ export function _defineGeneral(schema) {
     requirements: new TextField({ initial: "", label: "Requirements" }),
     effects: new fields.ArrayField(
       new fields.StringField({
-        choices: CONFIG.TERIOCK.index.effectTypes,
+        choices: TERIOCK.index.effectTypes,
       }),
     ),
     expansion: new fields.StringField({ initial: null, nullable: true }),

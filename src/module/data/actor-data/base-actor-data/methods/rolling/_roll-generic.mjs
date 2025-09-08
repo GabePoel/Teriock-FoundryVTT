@@ -121,7 +121,7 @@ export async function _rollTradecraft(actorData, tradecraft, options = {}) {
     context.threshold = options.threshold;
   }
   const roll = new TeriockRoll(rollFormula, actor.getRollData(), {
-    flavor: `${CONFIG.TERIOCK.index.tradecrafts[tradecraft]} Check`,
+    flavor: `${TERIOCK.index.tradecrafts[tradecraft]} Check`,
     context,
   });
   await roll.evaluate();

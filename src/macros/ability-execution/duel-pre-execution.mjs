@@ -3,7 +3,7 @@ const buttons = data.rollConfig.chatData.system.buttons;
 const applyButton = buttons.find((b) => b.label === "Apply Effect");
 applyButton.label = "Apply Lighted";
 
-const token = game.teriock.api.utils.actorToken(actor).document || actor;
+const token = tm.utils.actorToken(actor).document || actor;
 
 function modifyData(data) {
   const effectObject = JSON.parse(data);

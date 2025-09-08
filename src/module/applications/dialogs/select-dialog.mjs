@@ -6,6 +6,7 @@ import { TeriockDialog } from "../api/_module.mjs";
 import { selectDocumentDialog } from "./select-document-dialog.mjs";
 
 const { fields } = foundry.data;
+const TextEditor = foundry.applications.ux.TextEditor.implementation;
 
 /**
  * Dialog that lets you select something.
@@ -14,6 +15,8 @@ const { fields } = foundry.data;
  * @param {string|null} [options.initial=null] - The initially selected choice.
  * @param {string} [options.label="Select"] - Label for the select field.
  * @param {string} [options.hint="Please select an option above."] - Hint text.
+ * @param {string} [options.hintHtml=""] - Additional hint with more complex HTML.
+ * @param {string} [options.hintTitle=""] - Title for the additional hint.
  * @param {string} [options.title="Select"] - Dialog title.
  * @param {boolean} [options.other=false] - Whether to include an "Other" button.
  * @param {boolean} [options.genericOther=true] - If true, "Other" returns `null` instead of prompting again.
@@ -24,6 +27,8 @@ export async function selectDialog(choices, options = {}) {
     initial = null,
     label = "Select",
     hint = "Please select an option above.",
+    hintHtml = "",
+    hintTitle = "",
     title = "Select",
     other = false,
     genericOther = true,
@@ -37,6 +42,21 @@ export async function selectDialog(choices, options = {}) {
     initial,
   });
   selectContentHtml.append(selectField.toFormGroup({}, { name: "selected" }));
+  if (hintHtml.length > 0) {
+    const appendHtmlString = await TextEditor.enrichHTML(hintHtml);
+    const appendHtmlElement = document.createElement("div");
+    appendHtmlElement.innerHTML = appendHtmlString;
+    if (hintTitle.length > 0) {
+      const fieldsetElement = document.createElement("fieldset");
+      const fieldsetLegend = document.createElement("legend");
+      fieldsetLegend.innerText = hintTitle;
+      fieldsetElement.append(fieldsetLegend);
+      fieldsetElement.append(appendHtmlElement);
+      selectContentHtml.append(fieldsetElement);
+    } else {
+      selectContentHtml.append(appendHtmlElement);
+    }
+  }
 
   if (!other) {
     return await TeriockDialog.prompt({
@@ -93,7 +113,7 @@ export async function selectDialog(choices, options = {}) {
  * @returns {Promise<Teriock.Parameters.Equipment.EquipmentClass>}
  */
 export async function selectEquipmentClassDialog() {
-  return await selectDialog(CONFIG.TERIOCK.index.equipmentClasses, {
+  return await selectDialog(TERIOCK.index.equipmentClasses, {
     label: "Equipment Class",
     hint: "Please select an equipment class.",
     title: "Select Equipment Class",
@@ -105,7 +125,7 @@ export async function selectEquipmentClassDialog() {
  * @returns {Promise<Teriock.Parameters.Equipment.WeaponClass>}
  */
 export async function selectWeaponClassDialog() {
-  return await selectDialog(CONFIG.TERIOCK.index.weaponClasses, {
+  return await selectDialog(TERIOCK.index.weaponClasses, {
     label: "Weapon Class",
     hint: "Please select a weapon class.",
     title: "Select Weapon Class",
@@ -117,7 +137,7 @@ export async function selectWeaponClassDialog() {
  * @returns {Promise<Teriock.Parameters.Condition.ConditionKey>}
  */
 export async function selectConditionDialog() {
-  return await selectDialog(CONFIG.TERIOCK.index.conditions, {
+  return await selectDialog(TERIOCK.index.conditions, {
     label: "Condition",
     hint: "Please select a condition.",
     title: "Select Condition",
@@ -130,7 +150,7 @@ export async function selectConditionDialog() {
  */
 export async function selectPropertyDialog() {
   const choices = await Promise.all(
-    Object.values(CONFIG.TERIOCK.index.properties).map((name) =>
+    Object.values(TERIOCK.index.properties).map((name) =>
       getProperty(name),
     ),
   );
@@ -147,11 +167,11 @@ export async function selectPropertyDialog() {
  */
 export async function selectTradecraftDialog() {
   const choices = await Promise.all(
-    Object.keys(CONFIG.TERIOCK.index.tradecrafts).map(async (tc) => {
+    Object.keys(TERIOCK.index.tradecrafts).map(async (tc) => {
       return {
-        name: CONFIG.TERIOCK.index.tradecrafts[tc],
+        name: TERIOCK.index.tradecrafts[tc],
         uuid: tc,
-        img: getIcon("tradecrafts", CONFIG.TERIOCK.index.tradecrafts[tc]),
+        img: getIcon("tradecrafts", TERIOCK.index.tradecrafts[tc]),
         tooltip: await tradecraftMessage(tc),
       };
     }),
@@ -170,7 +190,7 @@ export async function selectTradecraftDialog() {
  */
 export async function selectAbilityDialog() {
   const choices = await Promise.all(
-    Object.values(CONFIG.TERIOCK.index.abilities).map((name) =>
+    Object.values(TERIOCK.index.abilities).map((name) =>
       getAbility(name),
     ),
   );
@@ -187,7 +207,7 @@ export async function selectAbilityDialog() {
  */
 export async function selectEquipmentTypeDialog() {
   const choices = await Promise.all(
-    Object.values(CONFIG.TERIOCK.index.equipment).map((name) =>
+    Object.values(TERIOCK.index.equipment).map((name) =>
       getItem(name, "equipment"),
     ),
   );
@@ -205,14 +225,14 @@ export async function selectEquipmentTypeDialog() {
 export async function selectClassDialog() {
   const choices = await Promise.all(
     [
-      ...Object.keys(CONFIG.TERIOCK.options.rank.mage.classes),
-      ...Object.keys(CONFIG.TERIOCK.options.rank.semi.classes),
-      ...Object.keys(CONFIG.TERIOCK.options.rank.warrior.classes),
+      ...Object.keys(TERIOCK.options.rank.mage.classes),
+      ...Object.keys(TERIOCK.options.rank.semi.classes),
+      ...Object.keys(TERIOCK.options.rank.warrior.classes),
     ].map(async (c) => {
       return {
-        name: CONFIG.TERIOCK.index.classes[c],
+        name: TERIOCK.index.classes[c],
         uuid: c,
-        img: getIcon("classes", CONFIG.TERIOCK.index.classes[c]),
+        img: getIcon("classes", TERIOCK.index.classes[c]),
         tooltip: await classMessage(c),
       };
     }),

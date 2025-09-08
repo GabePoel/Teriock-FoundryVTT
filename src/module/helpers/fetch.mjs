@@ -51,9 +51,9 @@ export async function getAbility(name, options = {}) {
  * @returns {Promise<TeriockAbility>}
  */
 export async function copyAbility(name) {
-  if (Object.keys(CONFIG.TERIOCK.index.abilities).includes(name))
-    name = Object.keys(CONFIG.TERIOCK.index.abilities)[name];
-  if (!Object.values(CONFIG.TERIOCK.index.abilities).includes(name))
+  if (Object.keys(TERIOCK.index.abilities).includes(name))
+    name = Object.keys(TERIOCK.index.abilities)[name];
+  if (!Object.values(TERIOCK.index.abilities).includes(name))
     return null;
   return await getAbility(name, { clone: true });
 }
@@ -94,9 +94,9 @@ export async function getProperty(name, options = {}) {
  * @returns {Promise<TeriockProperty>}
  */
 export async function copyProperty(name) {
-  if (Object.keys(CONFIG.TERIOCK.index.properties).includes(name))
-    name = Object.keys(CONFIG.TERIOCK.index.properties)[name];
-  if (!Object.values(CONFIG.TERIOCK.index.properties).includes(name))
+  if (Object.keys(TERIOCK.index.properties).includes(name))
+    name = Object.keys(TERIOCK.index.properties)[name];
+  if (!Object.values(TERIOCK.index.properties).includes(name))
     return null;
   return await getProperty(name, { clone: true });
 }
@@ -130,10 +130,10 @@ export async function getRank(classKey, number, options = {}) {
   if (
     number > 5 ||
     number < 1 ||
-    !Object.keys(CONFIG.TERIOCK.index.classes).includes(classKey)
+    !Object.keys(TERIOCK.index.classes).includes(classKey)
   )
     return null;
-  const name = `Rank ${number} ${CONFIG.TERIOCK.index.classes[classKey]}`;
+  const name = `Rank ${number} ${TERIOCK.index.classes[classKey]}`;
   return await getItem(name, "classes", options);
 }
 

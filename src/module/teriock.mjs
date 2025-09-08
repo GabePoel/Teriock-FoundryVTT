@@ -9,8 +9,35 @@ import * as helpers from "./helpers/_module.mjs";
 const { ActorSheet, ItemSheet } = foundry.appv1.sheets;
 const { DocumentSheetConfig } = foundry.applications.apps;
 
-foundry.helpers.Hooks.once("init", function () {
-  CONFIG.TERIOCK = constants.TERIOCK;
+/** Global Teriock config */
+globalThis.TERIOCK = constants;
+/** Global Teriock system module. */
+globalThis.teriock = {
+  applications: applications,
+  canvas: canvas,
+  data: data,
+  dice: dice,
+  documents: documents,
+  helpers: helpers,
+};
+/** Useful helpers brought to the top level for easy access by macros. */
+globalThis.tm = {
+  dialogs: applications.dialogs,
+  utils: helpers.utils,
+  fetch: helpers.fetch,
+  string: helpers.string,
+  path: helpers.path,
+  create: {
+    ability: helpers.createEffects.createAbility,
+    consequence: helpers.createEffects.createConsequence,
+    fluency: helpers.createEffects.createFluency,
+    property: helpers.createEffects.createProperty,
+    resource: helpers.createEffects.createResource,
+  },
+};
+
+foundry.helpers.Hooks.once("init", function() {
+  CONFIG.TERIOCK = constants;
 
   CONFIG.ui.hotbar = applications.ui.TeriockHotbar;
 
@@ -23,7 +50,7 @@ foundry.helpers.Hooks.once("init", function () {
 
   CONFIG.statusEffects.length = 0;
   for (const condition of Object.values(
-    CONFIG.TERIOCK.content.conditionsData,
+    TERIOCK.content.conditionsData,
   )) {
     CONFIG.statusEffects.push(condition);
   }
@@ -227,7 +254,7 @@ foundry.helpers.Hooks.once("init", function () {
     "teriock.timeAdvance": helpers.queries.timeAdvanceQuery,
     "teriock.update": helpers.queries.updateQuery,
     "teriock.updateEmbeddedDocuments":
-      helpers.queries.updateEmbeddedDocumentsQuery,
+    helpers.queries.updateEmbeddedDocumentsQuery,
   });
 
   const packs =
@@ -246,21 +273,6 @@ foundry.helpers.Hooks.once("init", function () {
     User: documents.TeriockUser,
     JournalEntry: documents.TeriockJournalEntry,
     Roll: dice.TeriockRoll,
-    api: {
-      create: {
-        ability: helpers.createEffects.createAbility,
-        consequence: helpers.createEffects.createConsequence,
-        fluency: helpers.createEffects.createFluency,
-        property: helpers.createEffects.createProperty,
-        resource: helpers.createEffects.createResource,
-      },
-      dialogs: applications.dialogs,
-      utils: helpers.utils,
-      fetch: helpers.fetch,
-      wiki: helpers.wiki,
-      string: helpers.string,
-      path: helpers.path,
-    },
     data: data,
     packs: {
       rules: () =>

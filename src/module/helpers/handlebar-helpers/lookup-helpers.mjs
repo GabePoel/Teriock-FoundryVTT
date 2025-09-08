@@ -4,42 +4,42 @@ import { toCamelCase } from "../string.mjs";
 export default function registerLookupHelpers() {
   Handlebars.registerHelper(
     "className",
-    (arch, name) => CONFIG.TERIOCK.options.rank[arch].classes[name].name,
+    (arch, name) => TERIOCK.options.rank[arch].classes[name].name,
   );
 
   Handlebars.registerHelper(
     "classArchetype",
-    (arch) => CONFIG.TERIOCK.options.rank[arch].name,
+    (arch) => TERIOCK.options.rank[arch].name,
   );
 
   Handlebars.registerHelper(
     "executionTime",
     (maneuver, execTime) =>
-      CONFIG.TERIOCK.options.ability.executionTime[maneuver]?.[execTime] ??
+      TERIOCK.options.ability.executionTime[maneuver]?.[execTime] ??
       execTime,
   );
 
   Handlebars.registerHelper(
     "tradecraft",
     (field, name) =>
-      CONFIG.TERIOCK.options.tradecraft[field].tradecrafts[name].name,
+      TERIOCK.options.tradecraft[field].tradecrafts[name].name,
   );
 
   Handlebars.registerHelper(
     "field",
-    (field) => CONFIG.TERIOCK.options.tradecraft[field].name,
+    (field) => TERIOCK.options.tradecraft[field].name,
   );
 
   Handlebars.registerHelper(
     "equipmentMarker",
     (item) =>
-      CONFIG.TERIOCK.options.equipment.powerLevel[item.system.powerLevel]
+      TERIOCK.options.equipment.powerLevel[item.system.powerLevel]
         ?.color,
   );
 
   Handlebars.registerHelper("abilityMarker", (effect) => {
     const type = effect.system.form || effect.system.form;
-    return CONFIG.TERIOCK.options.ability.form[type]?.color;
+    return TERIOCK.options.ability.form[type]?.color;
   });
 
   Handlebars.registerHelper("path", function (obj, ...pathSegments) {
@@ -50,12 +50,12 @@ export default function registerLookupHelpers() {
 
   Handlebars.registerHelper("getIconKey", (category, key) => {
     if (
-      CONFIG.TERIOCK.index[toCamelCase(category)] &&
-      CONFIG.TERIOCK.index[toCamelCase(category)][key]
+      TERIOCK.index[toCamelCase(category)] &&
+      TERIOCK.index[toCamelCase(category)][key]
     ) {
       return getIcon(
         category,
-        CONFIG.TERIOCK.index[toCamelCase(category)][key],
+        TERIOCK.index[toCamelCase(category)][key],
       );
     } else {
       return getIcon("effect-types", "Resistance");

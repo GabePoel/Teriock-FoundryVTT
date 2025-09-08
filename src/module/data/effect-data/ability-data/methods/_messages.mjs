@@ -9,7 +9,7 @@ import { addAbilitiesBlock } from "../../../../helpers/messages-builder/message-
  */
 export function _messageParts(abilityData) {
   const src = abilityData;
-  const ref = CONFIG.TERIOCK.options.ability;
+  const ref = TERIOCK.options.ability;
   let mpCost = "";
   if (src.costs.mp.type === "variable") {
     mpCost = "Variable MP";

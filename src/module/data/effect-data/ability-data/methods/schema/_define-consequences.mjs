@@ -99,7 +99,7 @@ function consequenceField() {
   return new fields.SchemaField({
     statuses: new fields.SetField(
       new fields.StringField({
-        choices: CONFIG.TERIOCK.index.conditions,
+        choices: TERIOCK.index.conditions,
       }),
       {
         label: "Conditions",
@@ -108,7 +108,7 @@ function consequenceField() {
     ),
     startStatuses: new fields.SetField(
       new fields.StringField({
-        choices: CONFIG.TERIOCK.index.conditions,
+        choices: TERIOCK.index.conditions,
       }),
       {
         label: "Apply Conditions",
@@ -117,7 +117,7 @@ function consequenceField() {
     ),
     endStatuses: new fields.SetField(
       new fields.StringField({
-        choices: CONFIG.TERIOCK.index.conditions,
+        choices: TERIOCK.index.conditions,
       }),
       {
         label: "Remove Conditions",
@@ -144,7 +144,7 @@ function consequenceField() {
     ),
     checks: new fields.SetField(
       new fields.StringField({
-        choices: CONFIG.TERIOCK.index.tradecrafts,
+        choices: TERIOCK.index.tradecrafts,
       }),
       {
         label: "Tradecraft Checks",
@@ -159,7 +159,7 @@ function consequenceField() {
     changes: consequenceChangesField(),
     common: new fields.SetField(
       new fields.StringField({
-        choices: CONFIG.TERIOCK.options.consequence.common,
+        choices: TERIOCK.options.consequence.common,
       }),
       {
         label: "Common Consequences",
