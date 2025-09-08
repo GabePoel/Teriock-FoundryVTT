@@ -120,12 +120,15 @@ await Promise.all(
                   "system.powerLevel": "enchanted",
                 });
               }
+            } else {
+              await equipment.getProperties().find(property).system.wikiPull();
             }
           }
           if (equipment.system.equipmentClasses.has("bodyParts")) {
             try {
               await equipment.delete();
-            } catch {}
+            } catch {
+            }
           }
         }
 

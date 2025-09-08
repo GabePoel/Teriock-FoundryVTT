@@ -175,7 +175,7 @@ export default class TeriockEffect extends ChildDocumentMixin(
   }
 
   /**
-   * Alternative to {@link this.isTemporary} that only references duration.
+   * Alternative to {@link TeriockEffect.isTemporary} that only references duration.
    * @returns {boolean}
    */
   get hasDuration() {
@@ -370,7 +370,7 @@ export default class TeriockEffect extends ChildDocumentMixin(
         if (
           foundry.utils.hasProperty(changed, key) &&
           foundry.utils.getProperty(changed, key) !==
-            foundry.utils.getProperty(this.parent, key)
+          foundry.utils.getProperty(this.parent, key)
         ) {
           wrapperUpdates[key] = foundry.utils.getProperty(changed, key);
         }
@@ -439,6 +439,16 @@ export default class TeriockEffect extends ChildDocumentMixin(
   /** @inheritDoc */
   async enable() {
     await this.update({ disabled: false });
+  }
+
+  /** @inheritDoc */
+  getAbilities() {
+    return this.subs.filter((s) => s.type === "ability");
+  }
+
+  /** @inheritDoc */
+  getProperties() {
+    return this.subs.filter((s) => s.type === "property");
   }
 
   /** @inheritDoc */

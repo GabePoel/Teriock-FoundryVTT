@@ -3,6 +3,7 @@ import type {
   TeriockEffect,
   TeriockItem,
 } from "../../_module.mjs";
+import { type TeriockAbility, TeriockProperty } from "../../_documents.mjs";
 
 export interface CommonDocumentMixinInterface {
   /** The actor associated with this document if there is one */
@@ -63,4 +64,16 @@ export interface CommonDocumentMixinInterface {
    * @returns Promise that resolves when the disabled state is toggled
    */
   toggleDisabled(): Promise<void>;
+
+  /**
+   * Get the abilities that are directly descendent from this.
+   * @returns {TeriockAbility[]}
+   */
+  getAbilities(): TeriockAbility[];
+
+  /**
+   * Get the properties that are directly descendent from this.
+   * @returns {TeriockProperty[]}
+   */
+  getProperties(): TeriockProperty[];
 }

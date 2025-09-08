@@ -27,9 +27,9 @@ function extractAbilityNames(metaData, attr) {
   const val = metaData.getAttribute(attr);
   return val
     ? val
-        .split(",")
-        .map((a) => a.trim())
-        .filter(Boolean)
+      .split(",")
+      .map((a) => a.trim())
+      .filter(Boolean)
     : [];
 }
 
@@ -45,8 +45,8 @@ export async function _parse(rankData, rawHTML) {
   const { className, classRank, archetype } = rankData;
   const classValue =
     TERIOCK.options.rank[archetype].classes[className].name;
-  const toDelete = rankData.parent.abilities.map((a) => a.id);
-  await rankData.parent.deleteEmbeddedDocuments("ActiveEffect", toDelete);
+  // const toDelete = rankData.parent.abilities.map((a) => a.id);
+  // await rankData.parent.deleteEmbeddedDocuments("ActiveEffect", toDelete);
 
   const doc = new DOMParser().parseFromString(rawHTML, "text/html");
   const metaData = doc.querySelector(".class-metadata");
@@ -83,7 +83,12 @@ export async function _parse(rankData, rawHTML) {
    * @returns {Promise<Object>} Promise that resolves with ability creation result
    */
   async function createSingleAbility(abilityName) {
-    await createAbility(rankData.parent, abilityName, { notify: false });
+    let ability = rankData.parent.getAbilities().find((a) => a.name === abilityName);
+    if (ability) {
+      await ability.system.wikiPull();
+    } else {
+      await createAbility(rankData.parent, abilityName, { notify: false });
+    }
     return { abilityName, success: true };
   }
 
@@ -102,6 +107,9 @@ export async function _parse(rankData, rawHTML) {
   try {
     const results = await Promise.all(abilityPromises);
 
+    const toDelete = rankData.parent.getAbilities().filter((a) => !toCreate.includes(a.name)).map((a) => a.id);
+    await rankData.parent.deleteEmbeddedDocuments("ActiveEffect", toDelete);
+
     // Update progress to completion
     progress.update({
       pct: 0.9,
@@ -118,7 +126,7 @@ export async function _parse(rankData, rawHTML) {
       message: `Error occurred during ability creation: ${error.message}`,
     });
     console.error("Error creating abilities:", error);
-    throw error; // Re-throw to maintain original error handling behavior
+    throw error;
   }
 
   // Helper for HTML/text extraction

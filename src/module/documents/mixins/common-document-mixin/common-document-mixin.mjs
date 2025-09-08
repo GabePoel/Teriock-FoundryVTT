@@ -43,6 +43,14 @@ export default (Base) => {
         });
       }
 
+      /** @inheritDoc */
+      getAbilities() {
+      }
+
+      /** @inheritDoc */
+      getProperties() {
+      }
+
       /**
        * @inheritDoc
        * @param {Teriock.Parameters.Actor.PseudoHook} pseudoHook

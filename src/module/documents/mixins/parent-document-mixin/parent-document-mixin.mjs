@@ -143,6 +143,16 @@ export default (Base) => {
       }
 
       /** @inheritDoc */
+      getAbilities() {
+        return this.abilities.filter((a) => !a.sup);
+      }
+
+      /** @inheritDoc */
+      getProperties() {
+        return this.properties.filter((p) => !p.sup);
+      }
+
+      /** @inheritDoc */
       prepareDerivedData() {
         super.prepareDerivedData();
         const { effectTypes, effectKeys } = this.buildEffectTypes();

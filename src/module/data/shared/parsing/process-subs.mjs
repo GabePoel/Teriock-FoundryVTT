@@ -7,6 +7,7 @@ import { createAbility, createProperty } from "../../../helpers/create-effects.m
  * @param {TeriockItem | TeriockEffect} doc - The parent document.
  * @param {Object} config - Configuration object for processing.
  * @param {Function} config.createFn - Function to create the sub effect (e.g., createAbility, createProperty).
+ * @param {string} config.getMethod - Method to get existing sub effects (e.g., getAbilities, getProperties).
  * @param {string} config.nameSelector - CSS selector for the sub effect name element.
  * @param {string} [config.skipNamespace] - Namespace to skip processing for.
  * @param {string} [config.includeNamespace] - Namespace to process.
@@ -19,7 +20,14 @@ async function processSubEffects(subs, doc, config) {
     nameSelector,
     skipNamespace = "Condition",
     includeNamespace = "Ability",
+    getMethod = "getAbilities",
   } = config;
+
+  /** @type {() => TeriockEffect[]} */
+    // const getFunction = doc[getMethod];
+  const existingSubs = doc[getMethod]();
+  /** @type {Set<string>} */
+  const newSubNames = new Set();
 
   for (const el of subs) {
     el.querySelectorAll(".expandable-sub-main").forEach((e) => e.remove());
@@ -33,9 +41,16 @@ async function processSubEffects(subs, doc, config) {
       return;
 
     const subName = subNameEl.getAttribute("data-name");
-    const subEffect = await createFn(doc, subName, {
-      notify: false,
-    });
+    newSubNames.add(subName);
+    let subEffect = existingSubs.find((s) => s.name === subName);
+    if (subEffect) {
+      console.log(subEffect);
+      await subEffect.system.wikiPull();
+    } else {
+      subEffect = await createFn(doc, subName, {
+        notify: false,
+      });
+    }
 
     const limitation = el.querySelector(".limited-modifier");
     const improvement = el.querySelector(".improvement-modifier");
@@ -76,6 +91,15 @@ async function processSubEffects(subs, doc, config) {
       await subEffect.update(updateData);
     }
   }
+
+  const toDelete = [];
+  for (const sub of existingSubs) {
+    if (!newSubNames.has(sub.name)) {
+      toDelete.push(sub.id);
+    }
+  }
+  if (doc.documentName === "Item") await doc.deleteEmbeddedDocuments("ActiveEffect", toDelete);
+  else if (doc.documentName === "ActiveEffect") await doc.parent.deleteEmbeddedDocuments("ActiveEffect", toDelete);
 }
 
 /**
@@ -92,6 +116,7 @@ export async function processSubAbilities(subs, doc) {
     nameSelector: ".ability-sub-name",
     skipNamespace: "Condition",
     includeNamespace: "Ability",
+    getMethod: "getAbilities",
   });
 }
 
@@ -109,5 +134,6 @@ export async function processSubProperties(subs, doc) {
     nameSelector: ".ability-sub-name",
     skipNamespace: "Condition",
     includeNamespace: "Property",
+    getMethod: "getProperties",
   });
 }

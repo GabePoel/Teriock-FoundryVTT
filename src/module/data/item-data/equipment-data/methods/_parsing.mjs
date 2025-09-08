@@ -19,15 +19,15 @@ export async function _parse(equipmentData, rawHTML) {
   );
 
   // Remove existing properties
-  const toRemove = [];
-  for (const effect of equipmentData.parent.transferredEffects.filter(
-    (e) => e.type === "property",
-  )) {
-    if (Object.values(allValidProperties).includes(effect.name)) {
-      toRemove.push(effect._id);
-    }
-  }
-  await equipmentData.parent.deleteEmbeddedDocuments("ActiveEffect", toRemove);
+  // const toRemove = [];
+  // for (const effect of equipmentData.parent.transferredEffects.filter(
+  //   (e) => e.type === "property",
+  // )) {
+  //   if (Object.values(allValidProperties).includes(effect.name)) {
+  //     toRemove.push(effect._id);
+  //   }
+  // }
+  // await equipmentData.parent.deleteEmbeddedDocuments("ActiveEffect", toRemove);
   const doc = new DOMParser().parseFromString(rawHTML, "text/html");
   const q = (s) => doc.querySelector(s);
   const getValue = (s) => q(s)?.getAttribute("data-val");
@@ -77,15 +77,41 @@ export async function _parse(equipmentData, rawHTML) {
   parameters.equipmentClasses = new Set(
     Array.from(equipmentClasses).map((s) => toCamelCase(s)),
   );
-  const candidateProperties = Array.from(properties);
-  const filteredProperties = candidateProperties.filter((p) =>
+  const toCreate = Array.from(properties);
+  const filteredProperties = toCreate.filter((p) =>
     Object.values(allValidProperties).includes(p),
   );
-  candidateProperties.length = 0;
-  candidateProperties.push(...filteredProperties);
+  toCreate.length = 0;
+  toCreate.push(...filteredProperties);
 
-  for (const name of candidateProperties) {
-    await createProperty(equipmentData.parent, name);
+  /**
+   * Creates a single property.
+   * @param {string} propertyName - The name of the property to create
+   * @returns {Promise<Object>} Promise that resolves with property creation result
+   */
+  async function createSingleProperty(propertyName) {
+    let property = equipmentData.parent.getProperties().find((a) => a.name === propertyName);
+    if (property) {
+      await property.system.wikiPull();
+    } else {
+      await createProperty(equipmentData.parent, propertyName, { notify: false });
+    }
+    return { propertyName: propertyName, success: true };
+  }
+
+  const propertyPromises = toCreate.map((propertyName) => createSingleProperty(propertyName));
+  try {
+    await Promise.all(propertyPromises);
+    // Optional property deletion.
+    // const toDelete = equipmentData.parent.getProperties().filter((p) => !toCreate.includes(p.name)).map((p) => p.id);
+    // await equipmentData.parent.deleteEmbeddedDocuments("ActiveEffect", toDelete);
+  } catch (error) {
+    progress.update({
+      pct: 0.9,
+      message: `Error occurred during property creation: ${error.message}`,
+    });
+    console.error("Error creating properties:", error);
+    throw error;
   }
 
   parameters.properties = [];
