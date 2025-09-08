@@ -44,8 +44,7 @@ async function processSubEffects(subs, doc, config) {
     newSubNames.add(subName);
     let subEffect = existingSubs.find((s) => s.name === subName);
     if (subEffect) {
-      console.log(subEffect);
-      await subEffect.system.wikiPull();
+      await subEffect.system.wikiPull({ notify: false });
     } else {
       subEffect = await createFn(doc, subName, {
         notify: false,
