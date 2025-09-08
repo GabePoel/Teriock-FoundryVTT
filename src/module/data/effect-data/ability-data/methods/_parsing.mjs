@@ -13,7 +13,7 @@ import { buildTagTree } from "../../../shared/parsing/tag-tree.mjs";
  * @type {object}
  * @private
  */
-const COST_TEMPLATES = {
+const COST_TEMPLATES = Object.freeze({
   variable: (variable) => ({
     type: "variable",
     value: { variable, static: 0, formula: "" },
@@ -30,7 +30,7 @@ const COST_TEMPLATES = {
     type: "hack",
     value: { static: 0, formula: "", variable: "" },
   }),
-};
+});
 
 /**
  * Creates the default consequence structure for ability effects.
@@ -53,7 +53,7 @@ function defaultConsequence() {
     },
     hacks: new Set(),
     rolls:
-      /** @type {Record<Teriock.Parameters.Consequence.RollConsequenceKey, string>} */ {},
+    /** @type {Record<Teriock.Parameters.Consequence.RollConsequenceKey, string>} */ {},
     startStatuses: new Set(),
     statuses: new Set(),
   };
@@ -667,7 +667,8 @@ function extractMacroFromHTML(doc) {
             const macroSafeUuid = safeUuid(macroUuid);
             macroAssignments[macroSafeUuid] = pseudoHook;
           }
-        } catch {}
+        } catch {
+        }
       }
     }
   }

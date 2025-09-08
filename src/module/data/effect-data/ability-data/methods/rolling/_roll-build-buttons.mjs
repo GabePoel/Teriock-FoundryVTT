@@ -123,7 +123,7 @@ export async function _buildButtons(rollConfig) {
 
   // Hack Buttons
   for (const hackType of takeData.hacks) {
-    const buttonConfig = HACK_BUTTON_CONFIGS[hackType];
+    const buttonConfig = foundry.utils.deepClone(HACK_BUTTON_CONFIGS[hackType]);
     buttonConfig.dataset = {
       action: "take-hack",
       part: hackType,

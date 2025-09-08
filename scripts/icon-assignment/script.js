@@ -28,8 +28,8 @@ const app = {
   // -------- Load categories directly from files
   async loadCategoriesDirectly() {
     const categoryFiles = [
-      "abilities",
       "classes",
+      "abilities",
       "conditions",
       "properties",
       "powers",
@@ -42,6 +42,7 @@ const app = {
       "drain-types",
       "effect-types",
       "elements",
+      "hacks",
     ];
 
     console.log("🔄 Loading categories directly from files...");
@@ -184,7 +185,8 @@ const app = {
     if (!p) return "";
     try {
       p = decodeURI(p);
-    } catch {}
+    } catch {
+    }
     p = p.replace(/^https?:\/\/[^/]+\/?/i, "");
     return p
       .replace(/\\/g, "/")
