@@ -33,7 +33,7 @@ effects:
       systemVersion: 0.1.0
       lastModifiedBy: teriockBuilder00
     _key: '!items.effects!xxgNX9uazbyWN2BP.gTjgqgoeW5isVtoY'
-  - name: Sense Ambush
+  - name: Alert
     type: ability
     system:
       hierarchy:
@@ -49,7 +49,11 @@ effects:
           hacks: []
           checks: []
           duration: 0
-          changes: []
+          changes:
+            - key: system.resistances.other
+              mode: 2
+              value: Being Surprised
+              priority: 10
           common: []
           expiration:
             normal:
@@ -192,30 +196,33 @@ effects:
         macros: {}
       elderSorcery: false
       elderSorceryIncant: ''
-      powerSources: []
-      interaction: attack
+      powerSources:
+        - martial
+      interaction: manifest
       featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
+      maneuver: passive
+      executionTime: passive
       delivery:
-        base: weapon
+        base: self
         parent: null
         package: null
       targets:
-        - creature
+        - self
       elements: []
       duration:
-        unit: minute
-        quantity: 1
+        unit: noLimit
+        quantity: 0
         conditions:
           present: []
           absent: []
         stationary: false
-        description: 1 Minute
+        description: Always Active
       sustained: false
-      range: null
+      range: Self.
       overview:
-        base: ''
+        base: >-
+          You @L[Keyword:Resistance]{resist} being @L[Core:Surprise
+          Rounds]{surprised}.
         proficient: ''
         fluent: ''
       results:
@@ -233,8 +240,8 @@ effects:
           attribute: null
           minVal: 0
         featSaveImprovement:
-          attribute: null
-          amount: proficient
+          attribute: per
+          amount: proficiency
       skill: false
       spell: false
       standard: false
@@ -269,7 +276,9 @@ effects:
       heightened: ''
       endCondition: ''
       requirements: ''
-      effects: []
+      effects:
+        - resistance
+        - sensory
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
@@ -289,8 +298,8 @@ effects:
       maxQuantity:
         raw: ''
         derived: 0
-    _id: AXPDrrG8Us5v0sSH
-    img: systems/teriock/src/icons/documents/ability.svg
+    _id: 8DYfLg6nlftDD9sl
+    img: systems/teriock/src/icons/abilities/alert.webp
     changes: []
     disabled: false
     duration:
@@ -303,9 +312,9 @@ effects:
     _stats:
       coreVersion: '13.345'
       systemId: teriock
-      systemVersion: 0.1.0
+      systemVersion: 0.9.0
       lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!xxgNX9uazbyWN2BP.AXPDrrG8Us5v0sSH'
+    _key: '!items.effects!xxgNX9uazbyWN2BP.8DYfLg6nlftDD9sl'
   - name: Talented Courtier
     type: ability
     system:
@@ -569,7 +578,7 @@ effects:
       maxQuantity:
         raw: ''
         derived: 0
-    _id: w0pClCosbZvTWp0G
+    _id: szU85bQSvfUB2bg5
     img: icons/skills/social/diplomacy-handshake-blue.webp
     changes: []
     disabled: false
@@ -583,15 +592,15 @@ effects:
     _stats:
       coreVersion: '13.345'
       systemId: teriock
-      systemVersion: 0.1.0
+      systemVersion: 0.9.0
       lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!xxgNX9uazbyWN2BP.w0pClCosbZvTWp0G'
+    _key: '!items.effects!xxgNX9uazbyWN2BP.szU85bQSvfUB2bg5'
 ownership:
   default: 0
 flags: {}
 _stats:
   coreVersion: '13.345'
   systemId: teriock
-  systemVersion: 0.1.0
+  systemVersion: 0.9.0
   lastModifiedBy: teriockBuilder00
 _key: '!items!xxgNX9uazbyWN2BP'
