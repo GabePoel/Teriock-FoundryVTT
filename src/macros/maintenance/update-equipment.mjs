@@ -86,25 +86,32 @@ await Promise.all(
       limit(async () => {
         const generatedName = `${properties.join(" ")} ${eo}`.trim();
 
-        const matches = equipmentPack.index.filter(
+        let matches = equipmentPack.index.filter(
           (e) => e.name === generatedName,
         );
-        await Promise.all(
-          matches.map(async (m) => {
-            const entry = await foundry.utils.fromUuid(m.uuid);
-            if (entry) await entry.delete();
-          }),
-        );
+        matches = matches.map((m) => foundry.utils.fromUuid(m.uuid));
+        matches = await Promise.all(matches);
+        let equipment;
+        if (matches.length > 0) {
+          equipment = matches[0];
+        }
+        if (matches.length > 1) {
+          for (const m of matches.splice(1)) {
+            await m.delete();
+          }
+        }
+        if (!equipment) {
+          equipment = await TeriockItem.create(
+            {
+              name: generatedName,
+              type: "equipment",
+              folder: id,
+              system: { equipmentType: eo },
+            },
+            { pack: "teriock.equipment" },
+          );
+        }
 
-        const equipment = await TeriockItem.create(
-          {
-            name: generatedName,
-            type: "equipment",
-            folder: id,
-            system: { equipmentType: eo },
-          },
-          { pack: "teriock.equipment" },
-        );
         await equipment.system.wikiPull({ notify: false });
 
         if (properties.length >= 1) {

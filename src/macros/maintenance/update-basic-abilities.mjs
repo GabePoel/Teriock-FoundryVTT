@@ -20,6 +20,8 @@ for (const basicAbilityName of basicAbilityNames) {
       basicAbilitiesItem,
       basicAbilityName,
     );
+  } else {
+    await basicAbility.system.wikiPull({ notify: false });
   }
   pct += 1 / basicAbilityNames.length;
   progress.update({
@@ -27,7 +29,6 @@ for (const basicAbilityName of basicAbilityNames) {
     message: `Pulling ${basicAbilityName} from wiki.`,
   });
 
-  await basicAbility.system.wikiPull({ notify: false });
 }
 const toDelete = basicAbilitiesItem.abilities
   .filter((a) => !basicAbilityNames.includes(a.name))
