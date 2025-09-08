@@ -4,17 +4,19 @@ import path from "path";
 import { toKebabCase } from "../src/module/helpers/string.mjs";
 
 const MODULE_ID = process.cwd();
-const yaml = false;
+const yaml = true;
 const expandAdventures = true;
 const folders = true;
 const BUILDER_NAME = "teriockBuilder00";
 
-const packs = await fs.readdir("./packs");
+// noinspection JSVoidFunctionReturnValueUsed
+const packs = /** @type {string[]} */ await fs.readdir("./packs");
 for (const pack of packs) {
   console.log("Unpacking " + pack);
   const directory = `./src/packs/${pack}`;
   try {
-    for (const file of await fs.readdir(directory)) {
+    // noinspection JSVoidFunctionReturnValueUsed
+    for (const file of /** @type {string[]} */ await fs.readdir(directory)) {
       const filePath = path.join(directory, file);
       if (file.endsWith(yaml ? ".yml" : ".json")) await fs.unlink(filePath);
       else fs.rm(filePath, { recursive: true });
@@ -38,34 +40,32 @@ for (const pack of packs) {
 }
 
 /**
- * Prefaces the document with its type
- * @param {object} doc - The document data
+ * Transform document file name.
+ * @param {object} doc - The document to reference.
+ * @param {object} context - Additional context.
+ * @returns {string}
  */
 function transformName(doc, context) {
-  // const safeFileName = doc.name.replace(/[^a-zA-Z0-9А-я]/g, "_");
   const safeFileName = toKebabCase(doc.name);
-  let type = doc._key?.split("!")[1];
-  if (!type) {
-    if ("playing" in doc) type = "playlist";
-    else if (doc.sorting) type = `folder_${doc.type}`;
-    else if (doc.walls) type = "scene";
-    else if (doc.results) type = "rollTable";
-    else if (doc.pages) type = "journal";
-    else type = doc.type;
-  }
-  // const prefix = ["actors", "items"].includes(type) ? doc.type : type;
-
   let name = `${doc.name ? `${safeFileName}` : doc._id}.${yaml ? "yml" : "json"}`;
   name = name.replace("---", "-");
   if (context.folder) name = path.join(context.folder, name);
   return name;
 }
 
-function transformFolderName(doc, context) {
-  const safeFileName = toKebabCase(doc.name);
-  return safeFileName;
+/**
+ * Transform folder file name.
+ * @param {object} doc - The document to reference/
+ * @returns {string}
+ */
+function transformFolderName(doc) {
+  return toKebabCase(doc.name);
 }
 
+/**
+ * Clean a document.
+ * @param {object} doc - The document to clean.
+ */
 function cleanEntry(doc) {
   delete doc.sort;
   if (doc.author) {
@@ -98,11 +98,17 @@ function cleanEntry(doc) {
     if (doc.type === "wrapper") {
       delete doc.system;
     }
+    if (doc.type !== "base") {
+      delete doc.system.deleteOnExpire;
+      delete doc.system.suppression;
+    }
     if (doc.type === "ability") {
       delete doc.description;
       delete doc.system.description;
       delete doc.system.deleteOnExpire;
       delete doc.system.suppression;
+      // Delete values that are only relevant in game
+      delete doc.system.sustaining;
     }
     if (doc.type === "equipment") {
       // Delete values that are only relevant in game
@@ -126,7 +132,11 @@ function cleanEntry(doc) {
   }
 }
 
-function transformEntry(doc, context) {
+/**
+ * Clean a document recursively.
+ * @param {object} doc - The document to transform.
+ */
+function transformEntry(doc) {
   cleanEntry(doc);
   if (doc.effects) doc.effects.forEach((d) => cleanEntry(d));
   if (doc.items) doc.items.forEach((d) => cleanEntry(d));

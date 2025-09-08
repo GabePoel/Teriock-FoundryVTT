@@ -2,9 +2,10 @@ import { compilePack } from "@foundryvtt/foundryvtt-cli";
 import { promises as fs } from "fs";
 
 const MODULE_ID = process.cwd();
-const yaml = false;
+const yaml = true;
 const folders = true;
 
+// noinspection JSVoidFunctionReturnValueUsed
 const packs = await fs.readdir("./src/packs");
 for (const pack of packs) {
   if (pack === ".gitattributes") continue;

@@ -4,16 +4,16 @@
   "description": "Scripts to manage Teriock Foundry VTT system.",
   "scripts": {
     "build:style": "sass src/style/teriock.scss css/teriock.css --style=expanded",
-    "build:templates": "node scripts/update-templates.mjs",
+    "build:templates": "node scripts/build-templates.mjs",
+    "compendium:pack": "node scripts/compendium-pack.mjs",
+    "compendium:unpack": "node scripts/compendium-unpack.mjs",
     "fetch:content": "node scripts/fetch-content.mjs",
     "fetch:index": "node scripts/fetch-index.mjs",
     "icon:start": "node scripts/icon-assignment/server.js",
     "icon:status": "curl -s http://localhost:3000/api/health || echo 'Icon tool not running'",
     "icons:assign": "cd scripts/icon-assignment && node assign-icons.mjs",
     "icons:make-use-manifest": "node scripts/icon-assignment/manifest-icons.mjs",
-    "icons:server": "nodemon scripts/icon-assignment/server.js",
-    "pack:from-JSON": "node scripts/pack-from-json.mjs",
-    "pack:to-JSON": "node scripts/pack-to-json.mjs"
+    "icons:server": "nodemon scripts/icon-assignment/server.js"
   },
   "browserslist": [
     "last 3 versions"
