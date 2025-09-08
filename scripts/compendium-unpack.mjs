@@ -95,9 +95,6 @@ function cleanEntry(doc) {
       // Change this once we have powers with flaws
       delete doc.system.flaws;
     }
-    if (doc.type === "wrapper") {
-      delete doc.system;
-    }
     if (doc.type !== "base") {
       delete doc.system.deleteOnExpire;
       delete doc.system.suppression;
@@ -109,6 +106,15 @@ function cleanEntry(doc) {
       delete doc.system.suppression;
       // Delete values that are only relevant in game
       delete doc.system.sustaining;
+    }
+    if (doc.type === "property") {
+      delete doc.description;
+    }
+    if (doc.type === "fluency") {
+      delete doc.description;
+    }
+    if (doc.type === "resource") {
+      delete doc.description;
     }
     if (doc.type === "equipment") {
       // Delete values that are only relevant in game
@@ -123,6 +129,9 @@ function cleanEntry(doc) {
       delete doc.system.tier;
       delete doc.system.description;
       delete doc.system.onUse;
+    }
+    if (doc.type === "wrapper") {
+      delete doc.system;
     }
   }
   if (doc.ownership) {

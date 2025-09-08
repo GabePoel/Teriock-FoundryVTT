@@ -9,14 +9,15 @@ const { TextEditor } = foundry.applications.ux;
  * @param {Teriock.UI.HTMLButtonConfig} config Options forwarded to the button
  * @returns {HTMLButtonElement}
  */
-export function buildHTMLButton({
-  label,
-  dataset = {},
-  classes = [],
-  icon = "",
-  type = "button",
-  disabled = false,
-}) {
+export function buildHTMLButton(config) {
+  let {
+    label,
+    dataset = {},
+    classes = [],
+    icon = "",
+    type = "button",
+    disabled = false,
+  } = config;
   const button = document.createElement("button");
   button.type = type;
   for (const [key, value] of Object.entries(dataset)) {
@@ -227,7 +228,10 @@ export function trimTrailingLinesHTML(html) {
   while (box.lastChild && isBlank(box.lastChild)) {
     box.removeChild(box.lastChild);
   }
-  return box.innerHTML;
+  if (box.querySelector("p")) {
+    return box.querySelector("p").innerHTML.trim();
+  }
+  return box.innerHTML.trim();
 }
 
 /**

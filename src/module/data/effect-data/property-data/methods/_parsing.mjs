@@ -69,10 +69,9 @@ export async function _parse(propertyData, rawHTML) {
   }
 
 
-  parameters.description = tidyHTML(rawHTML);
+  parameters.system.description = tidyHTML(rawHTML);
   parameters.system.changes = extractChangesFromHTML(rawHTML);
   parameters.system.modifiesActor = extractDocument(doc);
-  parameters.system.description = parameters.description;
   parameters.img = getIcon("properties", propertyData.parent.name);
   const toClean = ["description", "limitation", "improvement"];
   cleanObject(parameters.system, toClean);
@@ -86,8 +85,8 @@ export async function _parse(propertyData, rawHTML) {
 function extractDocument(doc) {
   const documentMetadata =
     /** @type {HTMLSpanElement|undefined} */ doc.querySelector(
-      "span.metadata[data-type='document']",
-    );
+    "span.metadata[data-type='document']",
+  );
   if (documentMetadata) {
     const targetDocument = documentMetadata.dataset.document;
     if (targetDocument === "actor") return true;
@@ -102,8 +101,8 @@ function extractDocument(doc) {
 function extractDamageType(doc) {
   const documentMetadata =
     /** @type {HTMLSpanElement|undefined} */ doc.querySelector(
-      "span.metadata[data-type='damage-type']",
-    );
+    "span.metadata[data-type='damage-type']",
+  );
   if (documentMetadata) {
     return documentMetadata.dataset.value || "";
   }
