@@ -1,0 +1,59 @@
+name: Spirit Item Macro - Execution
+type: script
+_id: xj5VKgc42MSucl5v
+author: teriockBuilder00
+img: icons/svg/dice-target.svg
+scope: global
+command: |-
+  let spiritItem = actor.equipment.find((e) => e.name === "Spirit Item");
+
+  // Create a spirit item if one doesn't already exist
+  if (!spiritItem) {
+    const equipmentType =
+      await tm.dialogs.selectEquipmentTypeDialog();
+    let spiritItems;
+    if (equipmentType in TERIOCK.options.equipment.equipmentType) {
+      const equipmentTypeName =
+        TERIOCK.options.equipment.equipmentType[equipmentType];
+      const spiritItemReference = await fromUuid(
+        game.teriock.packs.equipment().index.getName(equipmentTypeName).uuid,
+      );
+      const spiritItemCopy = spiritItemReference.clone();
+      spiritItemCopy.updateSource({
+        name: "Spirit Item",
+        "system.powerLevel": "magic",
+        "system.consumable": false,
+      });
+      spiritItems = await actor.createEmbeddedDocuments("Item", [spiritItemCopy]);
+    } else {
+      spiritItems = await actor.createEmbeddedDocuments("Item", [
+        {
+          name: "Spirit Item",
+          type: "equipment",
+          system: {
+            powerLevel: "magic",
+            equipmentType: equipmentType,
+            tier: { raw: "1" },
+          },
+        },
+      ]);
+    }
+    spiritItem = spiritItems[0];
+    await spiritItem.setFlag("teriock", "weight", spiritItem.system.weight);
+    await spiritItem.update({
+      "system.tier.raw": "1",
+      "system.weight": 0,
+      "system.disabled": true,
+    });
+    await tm.fetch.importProperty(spiritItem, "Master Crafted");
+  }
+folder: null
+ownership:
+  default: 0
+flags: {}
+_stats:
+  coreVersion: '13.345'
+  systemId: teriock
+  systemVersion: 0.1.0
+  lastModifiedBy: teriockBuilder00
+_key: '!macros!xj5VKgc42MSucl5v'

@@ -1,0 +1,69 @@
+name: Resist Effects Macro - Pre-execution
+type: script
+_id: 5AsyrTgmr9NrD3XS
+author: teriockBuilder00
+img: icons/svg/dice-target.svg
+scope: global
+command: |-
+  const data = /** @type {Teriock.HookData.UseAbility} */ scope.data;
+  const buttons = data.rollConfig.chatData.system.buttons;
+  const applyButton = buttons.find((b) => b.label === "Apply Effect");
+
+  const choices = {
+    awakening: "Awakening",
+    control: "Control",
+    displacement: "Displacement",
+    duelModifying: "Duel modifying",
+    financial: "Financial",
+    healing: "Healing",
+    killing: "Killing",
+    knockout: "Knockout",
+    loud: "Loud",
+    mental: "Mental",
+    poison: "Poison",
+    reanimation: "Reanimation",
+    regeneration: "Regeneration",
+    revitalization: "Revitalization",
+    revival: "Revival",
+    stealing: "Stealing",
+    summoning: "Summoning",
+    temporal: "Temporal",
+    transformation: "Transformation",
+    truthDetecting: "Truth detecting",
+  };
+
+  const documents = Object.keys(choices).map((key) => {
+    return {
+      img: tm.path.getIcon("effect-types", choices[key]),
+      name: choices[key],
+      uuid: key,
+    };
+  });
+
+  const choice = await tm.dialogs.selectDocumentDialog(documents, {
+    hint: "Select an effect type to resist.",
+  });
+
+  function modifyData(data) {
+    const effectObject = JSON.parse(data);
+    effectObject.changes.push({
+      key: "system.resistances.effects",
+      value: choice.uuid,
+      mode: 2,
+      priority: 10,
+    });
+    return JSON.stringify(effectObject);
+  }
+
+  applyButton.dataset.normal = modifyData(applyButton.dataset.normal);
+  applyButton.dataset.crit = modifyData(applyButton.dataset.crit);
+folder: null
+ownership:
+  default: 0
+flags: {}
+_stats:
+  coreVersion: '13.345'
+  systemId: teriock
+  systemVersion: 0.1.0
+  lastModifiedBy: teriockBuilder00
+_key: '!macros!5AsyrTgmr9NrD3XS'

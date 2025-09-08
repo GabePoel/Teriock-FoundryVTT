@@ -1,0 +1,31 @@
+name: Weapons Mastery Macro - Execution
+type: script
+_id: BGmnfUMxPw2BZeCI
+author: teriockBuilder00
+img: icons/svg/dice-target.svg
+scope: global
+command: |-
+  const data = /** @type {Teriock.HookData.UseAbility} */ scope.data;
+  const ability = data.rollConfig.abilityData.parent;
+  const equipmentClass = await tm.dialogs.selectWeaponClassDialog();
+  const changes = [
+    {
+      key: `system.equipmentChanges.overrides.classes.${equipmentClass}.av0`,
+      value: "true",
+      mode: 5,
+      priority: 10,
+    },
+  ];
+  await ability.update({
+    "system.applies.base.changes": changes,
+  });
+folder: null
+ownership:
+  default: 0
+flags: {}
+_stats:
+  coreVersion: '13.345'
+  systemId: teriock
+  systemVersion: 0.1.0
+  lastModifiedBy: teriockBuilder00
+_key: '!macros!BGmnfUMxPw2BZeCI'

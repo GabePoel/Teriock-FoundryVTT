@@ -1,0 +1,34 @@
+name: Opportunity Attack Macro - Execution
+type: script
+_id: OCGHKTqnI04j1L3h
+author: teriockBuilder00
+img: icons/svg/dice-target.svg
+scope: global
+command: |-
+  const data = /** @type {Teriock.HookData.UseAbility} */ scope.data;
+  const options = foundry.utils.deepClone(data.rollConfig.useData.rollOptions);
+  const actor = data.rollConfig.abilityData.actor;
+  const abilities = actor.abilities
+    .filter(
+      (a) =>
+        a.system.interaction === "attack" &&
+        a.system.maneuver === "active" &&
+        a.system.executionTime === "a1" &&
+        ["weapon", "hand"].includes(a.system.delivery.base),
+    )
+    .sort((a, b) => a.name.localeCompare(b.name));
+  const ability = await tm.dialogs.selectDocumentDialog(abilities, {
+    title: "Select Ability",
+    hint: "Select an ability to use.",
+  });
+  await ability.system.roll(options);
+folder: null
+ownership:
+  default: 0
+flags: {}
+_stats:
+  coreVersion: '13.345'
+  systemId: teriock
+  systemVersion: 0.1.0
+  lastModifiedBy: teriockBuilder00
+_key: '!macros!OCGHKTqnI04j1L3h'

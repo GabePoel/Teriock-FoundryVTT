@@ -1,0 +1,25 @@
+folder: JgA6RKyTPtfQ7yXf
+name: Clean Default Item Pile
+type: script
+_id: CS1DYC6icQUXVxDf
+author: teriockBuilder00
+img: icons/svg/dice-target.svg
+scope: global
+command: |-
+  /** @type {TeriockActor} */
+  const defaultItemPile = game.actors.getName("Default Item Pile");
+  if (defaultItemPile) {
+    await defaultItemPile.deleteEmbeddedDocuments(
+      "Item",
+      defaultItemPile.items.map((i) => i.id),
+    );
+  }
+ownership:
+  default: 0
+flags: {}
+_stats:
+  coreVersion: '13.345'
+  systemId: teriock
+  systemVersion: 0.1.0
+  lastModifiedBy: teriockBuilder00
+_key: '!macros!CS1DYC6icQUXVxDf'

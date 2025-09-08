@@ -1,0 +1,31 @@
+name: Treeform Ball - Damage
+type: script
+_id: h08D6cBKJ37Rz8UD
+author: teriockBuilder00
+img: icons/svg/dice-target.svg
+scope: global
+command: |-
+  const data = /** @type {Teriock.HookData.TakeNumeric} */ scope.data;
+  if (data.amount >= actor.system.hp.value + actor.system.hp.temp) {
+    const carry = data.amount - actor.system.hp.value - actor.system.hp.temp;
+    if (actor.effectKeys.consequence.has("treeformBallEffect")) {
+      const treeformConsequences = actor.consequences.filter(
+        (c) => c.name === "Treeform Ball Effect",
+      );
+      for (const c of treeformConsequences) {
+        await c.system.expire();
+      }
+      data.amount = 0;
+      await actor.takeDamage(carry);
+    }
+  }
+folder: null
+ownership:
+  default: 0
+flags: {}
+_stats:
+  coreVersion: '13.345'
+  systemId: teriock
+  systemVersion: 0.1.0
+  lastModifiedBy: teriockBuilder00
+_key: '!macros!h08D6cBKJ37Rz8UD'

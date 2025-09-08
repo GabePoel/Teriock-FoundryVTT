@@ -1,0 +1,53 @@
+name: Treeform Ball - Expiration
+type: script
+_id: j5Jp2JxJu7C9TUIL
+author: teriockBuilder00
+img: icons/svg/dice-target.svg
+scope: global
+command: |-
+  const data = /** @type {Teriock.HookData.EffectActivity} */ scope.data;
+  if (
+    data.doc.name === "Treeform Ball Effect" &&
+    actor.itemKeys.species.has("tree")
+  ) {
+    let hp = actor.getFlag("teriock", "preTransformHp") || 0;
+    if (hp) {
+      if (actor.system.hp.value < 0) {
+        hp += actor.system.hp.value;
+      }
+    }
+    const tree = actor.species.find((s) => s.name === "Tree");
+    if (tree) {
+      await tree.delete();
+    }
+    const speciesUpdates = actor.species.map((s) => {
+      return {
+        _id: s.id,
+        "system.applyHp": s.getFlag("teriock", "preTreeformApplyHp"),
+        "system.disabled": s.getFlag("teriock", "preTreeformDisabled"),
+      };
+    });
+    const rankUpdates = actor.ranks.map((r) => {
+      return {
+        _id: r.id,
+        "system.applyHp": r.getFlag("teriock", "preTreeformApplyHp"),
+        "system.disabled": r.getFlag("teriock", "preTreeformDisabled"),
+      };
+    });
+    await actor.updateEmbeddedDocuments("Item", [
+      ...speciesUpdates,
+      ...rankUpdates,
+    ]);
+    await actor.update({ "system.hp.value": hp });
+    await actor.unsetFlag("teriock", "preTransformHp");
+  }
+folder: null
+ownership:
+  default: 0
+flags: {}
+_stats:
+  coreVersion: '13.345'
+  systemId: teriock
+  systemVersion: 0.1.0
+  lastModifiedBy: teriockBuilder00
+_key: '!macros!j5Jp2JxJu7C9TUIL'

@@ -1,0 +1,48 @@
+name: Brace Macro - Application
+type: script
+_id: 0Gb7QPmgAotusvVQ
+author: teriockBuilder00
+img: icons/svg/dice-target.svg
+scope: global
+command: |-
+  const toRemove = [];
+  actor.consequences.map((c) => {
+    if (c.name === "Brace Effect") {
+      toRemove.push(c.id);
+    }
+  });
+  if (toRemove.length > 0) {
+    await actor.deleteEmbeddedDocuments("ActiveEffect", toRemove);
+  }
+
+  const dieSize = actor.system?.abilityFlags.braceDieSize || 6;
+
+  const ability = actor.abilities.find((a) => a.name === "Brace");
+
+  let formula = `1d${dieSize}`;
+  if (ability?.isProficient) {
+    formula = `(1 + @p)d${dieSize}`;
+  } else if (ability?.isFluent) {
+    formula = `(1 + @f)d${dieSize}`;
+  }
+
+  const roll = new game.teriock.Roll(formula, actor.getRollData());
+  await roll.evaluate();
+  await roll.toMessage({
+    speaker: ChatMessage.getSpeaker({ actor: actor }),
+    flavor: "Braced Temp HP",
+    rollMode: game.settings.get("core", "rollMode"),
+    create: true,
+  });
+
+  await actor.takeSetTempHp(roll.total);
+folder: null
+ownership:
+  default: 0
+flags: {}
+_stats:
+  coreVersion: '13.345'
+  systemId: teriock
+  systemVersion: 0.1.0
+  lastModifiedBy: teriockBuilder00
+_key: '!macros!0Gb7QPmgAotusvVQ'

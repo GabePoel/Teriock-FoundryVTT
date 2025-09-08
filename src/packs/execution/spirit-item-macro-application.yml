@@ -1,0 +1,33 @@
+name: Spirit Item Macro - Application
+type: script
+_id: 6Nr8xF0bLMN4Ja3E
+author: teriockBuilder00
+img: icons/svg/dice-target.svg
+scope: global
+command: |-
+  const spiritItem = actor.equipment.find((e) => e.name === "Spirit Item");
+
+  if (spiritItem) {
+    const updateData = { "system.disabled": false };
+
+    if (spiritItem.system.weight > 0) {
+      await spiritItem.setFlag("teriock", "weight", spiritItem.system.weight);
+    } else if (spiritItem.getFlag("teriock", "weight")) {
+      updateData["system.weight"] = spiritItem.getFlag("teriock", "weight");
+    }
+
+    await spiritItem.update(updateData);
+    await spiritItem.system.repair();
+    await spiritItem.system.equip();
+    await spiritItem.system.attune();
+  }
+folder: null
+ownership:
+  default: 0
+flags: {}
+_stats:
+  coreVersion: '13.345'
+  systemId: teriock
+  systemVersion: 0.1.0
+  lastModifiedBy: teriockBuilder00
+_key: '!macros!6Nr8xF0bLMN4Ja3E'

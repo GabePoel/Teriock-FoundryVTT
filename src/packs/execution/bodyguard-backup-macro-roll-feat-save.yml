@@ -1,0 +1,23 @@
+name: Bodyguard Backup Macro - Roll Feat Save
+type: script
+_id: U3eabIvCln4vwrrO
+author: teriockBuilder00
+img: icons/svg/dice-target.svg
+scope: global
+command: |-
+  const data = /** @type {Teriock.HookData.RollFeatSave} */ scope.data;
+  if (["mov", "str"].includes(data.attribute)) {
+    data.options.advantage = true;
+    const effect = actor.effects.getName("Bodyguard Backup Effect");
+    await effect.delete();
+  }
+folder: null
+ownership:
+  default: 0
+flags: {}
+_stats:
+  coreVersion: '13.345'
+  systemId: teriock
+  systemVersion: 0.1.0
+  lastModifiedBy: teriockBuilder00
+_key: '!macros!U3eabIvCln4vwrrO'

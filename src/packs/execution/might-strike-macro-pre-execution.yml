@@ -1,0 +1,34 @@
+name: Might Strike Macro - Pre-execution
+type: script
+_id: 0nUlKerGkkdmEuVW
+author: teriockBuilder00
+img: icons/svg/dice-target.svg
+scope: global
+command: |-
+  const data = /** @type {Teriock.HookData.UseAbility} */ scope.data;
+  const buttons = data.rollConfig.chatData.system.buttons;
+  data.rollConfig.chatData.system.buttons = buttons.filter(
+    (button) => button.dataset.action === "apply-effect",
+  );
+  const button = data.rollConfig.chatData.system.buttons[0];
+  const effectObject = JSON.parse(button.dataset.normal);
+  const equipmentClass = await tm.dialogs.selectWeaponClassDialog();
+  effectObject.changes[0] = {
+    key: `system.equipmentChanges.upgrades.classes.${equipmentClass}.damage`,
+    value: "1d4[holy]",
+    mode: 2,
+    priority: 10,
+  };
+  const effectString = JSON.stringify(effectObject);
+  data.rollConfig.chatData.system.buttons[0].dataset.normal = effectString;
+  data.rollConfig.chatData.system.buttons[0].dataset.crit = effectString;
+folder: null
+ownership:
+  default: 0
+flags: {}
+_stats:
+  coreVersion: '13.345'
+  systemId: teriock
+  systemVersion: 0.1.0
+  lastModifiedBy: teriockBuilder00
+_key: '!macros!0nUlKerGkkdmEuVW'

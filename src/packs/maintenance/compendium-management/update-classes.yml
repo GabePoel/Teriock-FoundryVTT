@@ -1,0 +1,239 @@
+name: Update Classes
+type: script
+_id: XZc2aJXX8vYFmW64
+author: teriockBuilder00
+img: systems/teriock/src/icons/documents/rank.svg
+scope: global
+command: >-
+  const classPack = game.teriock.packs.classes();
+
+  const classFolders = classPack.folders;
+
+
+  const progress = ui.notifications.info(`Pulling classes from wiki.`, {
+    progress: true,
+  });
+
+
+  /**
+   * Processes a single rank item
+   * @param {Teriock.Parameters.Rank.RankArchetype} archetype - The archetype key
+   * @param {Teriock.Parameters.Rank.RankClass} className - The class key
+   * @param {Object} classObj - The class object
+   * @param {number} rank - The rank number
+   * @param {TeriockFolder} classFolder - The class folder object
+   * @returns {Promise<Object>} Promise that resolves with processing result
+   */
+  async function processRank(archetype, className, classObj, rank, classFolder)
+  {
+    const name = `Rank ${rank} ${classObj.name}`;
+
+    await classPack.getIndex();
+    let rankItem = classPack.index.find((e) => e.name === name);
+
+    if (rankItem) {
+      rankItem = await foundry.utils.fromUuid(rankItem.uuid);
+    }
+
+    // Create new item
+    const itemData = {
+      name,
+      type: "rank",
+      folder: classFolder.id,
+      system: {
+        archetype: archetype,
+        className: className,
+        classRank: rank,
+      },
+    };
+
+    try {
+      const TeriockItem = CONFIG.Item.documentClass;
+      if (!rankItem) {
+        rankItem = /** @type {TeriockRank} */ await TeriockItem.create(itemData, {
+          pack: "teriock.classes",
+        });
+      }
+      await rankItem.system.wikiPull({
+        notify: false,
+      });
+      return { name, success: true };
+    } catch (e) {
+      console.error(`Error creating or processing '${name}':`, e);
+      return { name, success: false, error: e.message };
+    }
+  }
+
+
+  /**
+   * Processes all ranks for a single class in parallel
+   * @param {Teriock.Parameters.Rank.RankArchetype} archetype - The archetype key
+   * @param {Teriock.Parameters.Rank.RankClass} className - The class key
+   * @param {TeriockRank} classObj - The class object
+   * @param {TeriockFolder} archetypeFolder - The archetype folder object
+   * @returns {Promise<Object>} Promise that resolves with processing results
+   */
+  async function processClass(archetype, className, classObj, archetypeFolder) {
+    // Find or create class folder
+    let classFolder = classFolders.getName(classObj.name);
+    if (!classFolder) {
+      try {
+        classFolder = await Folder.create(
+          {
+            name: classObj.name,
+            type: "Item",
+            folder: archetypeFolder?.id,
+          },
+          { pack: "teriock.classes" },
+        );
+      } catch (e) {
+        console.error(`Failed to create class folder '${classObj.name}':`, e);
+        return { className: classObj.name, success: false, error: e.message };
+      }
+    }
+
+    // Create promises for all ranks (1-5) in parallel
+    const rankPromises = [];
+    for (let r = 1; r < 6; r++) {
+      rankPromises.push(
+        processRank(archetype, className, classObj, r, classFolder),
+      );
+    }
+
+    try {
+      const rankResults = await Promise.all(rankPromises);
+      return {
+        className: classObj.name,
+        success: true,
+        ranks: rankResults,
+      };
+    } catch (e) {
+      console.error(`Error processing ranks for class '${classObj.name}':`, e);
+      return { className: classObj.name, success: false, error: e.message };
+    }
+  }
+
+
+  /**
+   * Processes all classes for a single archetype in parallel
+   * @param {string} archetype - The archetype key
+   * @param {Object} archetypeObj - The archetype object
+   * @returns {Promise<Object>} Promise that resolves with processing results
+   */
+  async function processArchetype(archetype, archetypeObj) {
+    // Find or create archetype folder
+    let archetypeFolder = classFolders.getName(archetypeObj.name);
+    if (!archetypeFolder) {
+      try {
+        archetypeFolder = await Folder.create(
+          {
+            name: archetypeObj.name,
+            type: "Item",
+          },
+          { pack: "teriock.classes" },
+        );
+      } catch (e) {
+        console.error(
+          `Failed to create archetype folder '${archetypeObj.name}':`,
+          e,
+        );
+        return { archetype: archetypeObj.name, success: false, error: e.message };
+      }
+    }
+
+    const classes = archetypeObj.classes;
+
+    // Create promises for all classes in parallel
+    const classPromises = Object.entries(classes).map(([className, classObj]) =>
+      processClass(archetype, className, classObj, archetypeFolder),
+    );
+
+    try {
+      const classResults = await Promise.all(classPromises);
+      return {
+        archetype: archetypeObj.name,
+        success: true,
+        classes: classResults,
+      };
+    } catch (e) {
+      console.error(
+        `Error processing classes for archetype '${archetypeObj.name}':`,
+        e,
+      );
+      return { archetype: archetypeObj.name, success: false, error: e.message };
+    }
+  }
+
+
+  // Filter valid archetypes and create processing promises
+
+  const validArchetypes = Object.entries(TERIOCK.options.rank).filter(
+    ([_archetype, archetypeObj]) =>
+      ["Mage", "Semi", "Warrior"].includes(archetypeObj.name),
+  );
+
+
+  progress.update({
+    pct: 0.1,
+    message: `Processing ${validArchetypes.length} archetypes in parallel...`,
+  });
+
+
+  try {
+    // Process all archetypes in parallel
+    const archetypePromises = validArchetypes.map(([archetype, archetypeObj]) =>
+      processArchetype(archetype, archetypeObj),
+    );
+
+    const results = await Promise.all(archetypePromises);
+
+    // Calculate total successful operations
+    let totalProcessed = 0;
+    const archetypeResults = [];
+
+    for (const result of results) {
+      if (result.success) {
+        const successfulRanks = result.classes
+          .flatMap((c) => c.ranks || [])
+          .filter((r) => r.success);
+        totalProcessed += successfulRanks.length;
+        archetypeResults.push({
+          archetype: result.archetype,
+          ranksProcessed: successfulRanks.length,
+        });
+      } else {
+        console.error(
+          `Failed to process archetype ${result.archetype}:`,
+          result.error,
+        );
+        archetypeResults.push({
+          archetype: result.archetype,
+          ranksProcessed: 0,
+          error: result.error,
+        });
+      }
+    }
+
+    progress.update({
+      pct: 1,
+      message: `Successfully processed ${totalProcessed} ranks across ${archetypeResults.length} archetypes.`,
+    });
+
+    console.log("Archetype processing results:", archetypeResults);
+  } catch (error) {
+    progress.update({
+      pct: 1,
+      message: `Error occurred during processing: ${error.message}`,
+    });
+    console.error("Error processing classes:", error);
+  }
+folder: L08qIbjJoCwEaiEi
+ownership:
+  default: 0
+flags: {}
+_stats:
+  coreVersion: '13.345'
+  systemId: teriock
+  systemVersion: 0.1.0
+  lastModifiedBy: teriockBuilder00
+_key: '!macros!XZc2aJXX8vYFmW64'
