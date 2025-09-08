@@ -51,10 +51,10 @@ for (const page of commonAnimalPages) {
       system: familiarItemSystem,
     });
   }
-  await familiarItem.deleteEmbeddedDocuments(
-    "ActiveEffect",
-    familiarItem.abilities.map((a) => a.id),
-  );
+  // await familiarItem.deleteEmbeddedDocuments(
+  //   "ActiveEffect",
+  //   familiarItem.abilities.map((a) => a.id),
+  // );
   let fluency = familiarItem.fluencies.find(
     (f) => f.name === animal + " Tamer",
   );

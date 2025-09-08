@@ -92,7 +92,7 @@ export async function _parse(equipmentData, rawHTML) {
   async function createSingleProperty(propertyName) {
     let property = equipmentData.parent.getProperties().find((a) => a.name === propertyName);
     if (property) {
-      await property.system.wikiPull();
+      await property.system.wikiPull({ notify: false });
     } else {
       await createProperty(equipmentData.parent, propertyName, { notify: false });
     }

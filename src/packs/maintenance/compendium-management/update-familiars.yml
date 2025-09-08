@@ -59,10 +59,10 @@ command: |-
         system: familiarItemSystem,
       });
     }
-    await familiarItem.deleteEmbeddedDocuments(
-      "ActiveEffect",
-      familiarItem.abilities.map((a) => a.id),
-    );
+    // await familiarItem.deleteEmbeddedDocuments(
+    //   "ActiveEffect",
+    //   familiarItem.abilities.map((a) => a.id),
+    // );
     let fluency = familiarItem.fluencies.find(
       (f) => f.name === animal + " Tamer",
     );
@@ -73,7 +73,7 @@ command: |-
     } else {
       await fluency.update(familiarItemFluencyData);
     }
-    await game.teriock.data.shared.parsing.processSubAbilities(
+    await teriock.data.shared.parsing.processSubAbilities(
       subs,
       familiarItem,
     );

@@ -85,7 +85,7 @@ export async function _parse(rankData, rawHTML) {
   async function createSingleAbility(abilityName) {
     let ability = rankData.parent.getAbilities().find((a) => a.name === abilityName);
     if (ability) {
-      await ability.system.wikiPull();
+      await ability.system.wikiPull({ notify: false });
     } else {
       await createAbility(rankData.parent, abilityName, { notify: false });
     }
