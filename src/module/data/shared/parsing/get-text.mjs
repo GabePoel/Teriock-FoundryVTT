@@ -1,4 +1,5 @@
 import { cleanFeet } from "../../../helpers/clean.mjs";
+import { toTitleCase } from "../../../helpers/string.mjs";
 
 /**
  * Helper function to get bar text content from ability bars.
@@ -22,8 +23,8 @@ export function getBarText(doc, selector, clean = false) {
     text = tempDiv.innerHTML
       .trim()
       .replace(/\.$/, "")
-      .replace(/\./g, ",")
-      .replace(/\b\w/g, (c) => c.toUpperCase());
+      .replace(/\./g, ",");
+    text = toTitleCase(text);
     text = cleanFeet(text).trim();
   }
   return text;
