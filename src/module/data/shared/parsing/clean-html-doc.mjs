@@ -33,6 +33,17 @@ export function cleanHTMLDoc(doc) {
  * @param {string} html
  * @returns {string}
  */
+function cleanDoubleLineBreaks(html) {
+  while (html.includes("\n")) {
+    html = html.replace("\n", "");
+  }
+  return html;
+}
+
+/**
+ * @param {string} html
+ * @returns {string}
+ */
 export function cleanHTML(html) {
   const doc = document.createElement("div");
   doc.innerHTML = html;
@@ -54,7 +65,7 @@ export function cleanHTML(html) {
   [...doc.querySelectorAll("span")]
     .reverse()
     .forEach((s) => s.replaceWith(s.textContent));
-  return doc.innerHTML;
+  return cleanDoubleLineBreaks(doc.innerHTML);
 }
 
 /**
