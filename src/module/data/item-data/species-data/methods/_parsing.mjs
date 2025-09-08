@@ -13,8 +13,8 @@ import { buildTagTree } from "../../../shared/parsing/tag-tree.mjs";
  */
 export async function _parse(speciesData, rawHTML) {
   // Remove existing abilities
-  const toDelete = speciesData.parent.abilities.map((a) => a.id);
-  await speciesData.parent.deleteEmbeddedDocuments("ActiveEffect", toDelete);
+  // const toDelete = speciesData.parent.abilities.map((a) => a.id);
+  // await speciesData.parent.deleteEmbeddedDocuments("ActiveEffect", toDelete);
 
   const doc = new DOMParser().parseFromString(rawHTML, "text/html");
   doc
