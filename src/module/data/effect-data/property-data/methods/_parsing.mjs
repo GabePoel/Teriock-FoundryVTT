@@ -18,7 +18,7 @@ export async function _parse(propertyData, rawHTML) {
   const doc = parser.parseFromString(rawHTML, "text/html");
 
   // Clean up old subs
-  await propertyData.parent.deleteSubs();
+  // await propertyData.parent.deleteSubs();
 
   // Get new subs
   const subs = Array.from(

@@ -128,7 +128,7 @@ await Promise.all(
                 });
               }
             } else {
-              await equipment.getProperties().find(property).system.wikiPull();
+              await equipment.getProperties().find(property).system.wikiPull({ notify: false });
             }
           }
           if (equipment.system.equipmentClasses.has("bodyParts")) {
