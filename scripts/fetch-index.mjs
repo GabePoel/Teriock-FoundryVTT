@@ -1,9 +1,11 @@
 import { writeFile } from "fs/promises";
+import { JSDOM } from "jsdom";
 import path from "path";
 import { fileURLToPath } from "url";
 import {
   classes, conditions, damageTypes, drainTypes, keywords, tradecrafts, weaponFightingStyles,
 } from "../src/module/constants/index/_module.mjs";
+import { getIcon } from "../src/module/helpers/path.mjs";
 import { toCamelCase, toKebabCase } from "../src/module/helpers/string.mjs";
 import { fetchCategoryMembers, fetchPageCategories, fetchWikiPageHTML } from "../src/module/helpers/wiki/_module.mjs";
 
@@ -222,6 +224,36 @@ const createCustomNames = async () => {
   });
 };
 
+const createCustomData = async () => {
+  const obj = {};
+  for (const [ key, value ] of Object.entries(conditions)) {
+    const pageTitle = `Condition:${value}`;
+    const html = await fetchWikiPageHTML(pageTitle, {
+      noSubs: true,
+    });
+    const cleanHtml = await fetchWikiPageHTML(pageTitle, {
+      noSubs: true,
+      cleanSpans: true,
+    });
+    const dom = new JSDOM(html);
+    const document = dom.window.document;
+    const statuses = document.querySelector(".condition-box")
+      ?.getAttribute("data-children")
+      .split(",")
+      .map((s) => s.trim())
+      .filter(Boolean) || [];
+    obj[key] = {
+      description: cleanHtml,
+      name: value,
+      img: getIcon("conditions", value),
+      _id: (key + "000000000000000").slice(0, 16),
+      type: "condition",
+      statuses: statuses,
+    };
+  }
+  await saveObject(obj, relPath("index/data/conditions"));
+};
+
 /**
  * @param {Record<string, string>} choices
  * @param {string} namespace
@@ -233,13 +265,10 @@ async function quickSaveContent(choices, namespace, name, suffix = "") {
   const pageNames = Object.values(choices);
   const obj = {};
   for (const pageName of pageNames) {
-    obj[toCamelCase(pageName)] = await fetchWikiPageHTML(
-      `${namespace}:${pageName}${suffix}`,
-      {
-        noSubs: true,
-        cleanSpans: true,
-      },
-    );
+    obj[toCamelCase(pageName)] = await fetchWikiPageHTML(`${namespace}:${pageName}${suffix}`, {
+      noSubs: true,
+      cleanSpans: true,
+    });
   }
   await saveObject(obj, relPath(`index/content/${name}`));
 }
@@ -257,3 +286,4 @@ const createCustomContent = async () => {
 await createCustomContent();
 await createCustomNames();
 await createSimpleCategoriesAndNames();
+await createCustomData();
