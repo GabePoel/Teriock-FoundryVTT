@@ -11,7 +11,7 @@ import { powerContextMenu } from "./connections/_context-menus.mjs";
 export default class TeriockPowerSheet extends TeriockBaseItemSheet {
   /** @inheritDoc */
   static DEFAULT_OPTIONS = {
-    classes: ["power"],
+    classes: [ "power" ],
     actions: {
       toggleProficient: this._toggleProficient,
     },
@@ -23,9 +23,12 @@ export default class TeriockPowerSheet extends TeriockBaseItemSheet {
   /** @inheritDoc */
   static PARTS = {
     all: {
-      template:
-        "systems/teriock/src/templates/document-templates/item-templates/power-template/power-template.hbs",
-      scrollable: [".window-content", ".tsheet-page", ".ab-sheet-everything"],
+      template: "systems/teriock/src/templates/document-templates/item-templates/power-template/power-template.hbs",
+      scrollable: [
+        ".window-content",
+        ".tsheet-page",
+        ".ab-sheet-everything",
+      ],
     },
   };
 
@@ -45,7 +48,9 @@ export default class TeriockPowerSheet extends TeriockBaseItemSheet {
   /** @inheritDoc */
   async _onRender(context, options) {
     await super._onRender(context, options);
-    if (!this.editable) return;
+    if (!this.editable) {
+      return;
+    }
     const powerContextMenuOptions = powerContextMenu(this.item);
     this._connectContextMenu(".power-box", powerContextMenuOptions, "click");
   }

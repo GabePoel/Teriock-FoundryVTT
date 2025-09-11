@@ -11,8 +11,9 @@ export function buildTagTree(doc) {
       .filter((cls) => cls.endsWith("-tagged"))
       .map((cls) => cls.replace("-tagged", ""));
     if (tags.length) {
-      if (tags.length === 1) tagTree[tags[0]] = true;
-      else {
+      if (tags.length === 1) {
+        tagTree[tags[0]] = true;
+      } else {
         tagTree[tags[0]] = tagTree[tags[0]] || [];
         tagTree[tags[0]].push(...tags.slice(1));
       }

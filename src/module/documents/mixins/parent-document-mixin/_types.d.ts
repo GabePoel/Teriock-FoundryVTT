@@ -66,10 +66,10 @@ declare global {
 }
 
 export interface ParentDocumentMixinInterface {
-  /** Effect types organized by type */
-  effectTypes: Teriock.Parent.ParentEffectTypes;
   /** Effect keys organized by type */
   effectKeys: Teriock.Parent.ParentEffectKeys;
+  /** Effect types organized by type */
+  effectTypes: Teriock.Parent.ParentEffectTypes;
 
   /**
    * Gets all ability effects.
@@ -82,6 +82,13 @@ export interface ParentDocumentMixinInterface {
    * @returns Array of attunement effects
    */
   get attunements(): TeriockAttunement[];
+
+  /**
+   * Gets the list of all TeriockEffect documents that apply to this document.
+   * This includes those that are not currently active.
+   * @returns Built effect types and keys
+   */
+  buildEffectTypes(): Teriock.Parent.BuiltEffectTypes;
 
   /**
    * Gets all condition effects.
@@ -102,6 +109,11 @@ export interface ParentDocumentMixinInterface {
   get fluencies(): TeriockFluency[];
 
   /**
+   * Prepares derived data including effect types and keys.
+   */
+  prepareDerivedData(): void;
+
+  /**
    * Gets all property effects.
    * @returns Array of property effects
    */
@@ -119,16 +131,4 @@ export interface ParentDocumentMixinInterface {
    * @returns Array of valid effects
    */
   get validEffects(): TeriockEffect[];
-
-  /**
-   * Gets the list of all TeriockEffect documents that apply to this document.
-   * This includes those that are not currently active.
-   * @returns Built effect types and keys
-   */
-  buildEffectTypes(): Teriock.Parent.BuiltEffectTypes;
-
-  /**
-   * Prepares derived data including effect types and keys.
-   */
-  prepareDerivedData(): void;
 }

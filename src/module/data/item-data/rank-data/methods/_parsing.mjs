@@ -9,10 +9,22 @@ import { cleanObject } from "../../../shared/parsing/clean-html-doc.mjs";
  * @private
  */
 const ARCHETYPE_FACES = {
-  mage: { hp: 8, mp: 12 },
-  warrior: { hp: 12, mp: 8 },
-  semi: { hp: 10, mp: 10 },
-  everyman: { hp: 10, mp: 10 },
+  mage: {
+    hp: 8,
+    mp: 12,
+  },
+  warrior: {
+    hp: 12,
+    mp: 8,
+  },
+  semi: {
+    hp: 10,
+    mp: 10,
+  },
+  everyman: {
+    hp: 10,
+    mp: 10,
+  },
 };
 
 /**
@@ -25,12 +37,10 @@ const ARCHETYPE_FACES = {
  */
 function extractAbilityNames(metaData, attr) {
   const val = metaData.getAttribute(attr);
-  return val
-    ? val
-      .split(",")
-      .map((a) => a.trim())
-      .filter(Boolean)
-    : [];
+  return val ? val
+    .split(",")
+    .map((a) => a.trim())
+    .filter(Boolean) : [];
 }
 
 /**
@@ -42,9 +52,12 @@ function extractAbilityNames(metaData, attr) {
  * @private
  */
 export async function _parse(rankData, rawHTML) {
-  const { className, classRank, archetype } = rankData;
-  const classValue =
-    TERIOCK.options.rank[archetype].classes[className].name;
+  const {
+    className,
+    classRank,
+    archetype,
+  } = rankData;
+  const classValue = TERIOCK.options.rank[archetype].classes[className].name;
   // const toDelete = rankData.parent.abilities.map((a) => a.id);
   // await rankData.parent.deleteEmbeddedDocuments("ActiveEffect", toDelete);
 
@@ -63,14 +76,24 @@ export async function _parse(rankData, rawHTML) {
   const toCreate = [];
 
   // Create abilities
-  for (const rank of [0, 1, 2]) {
+  for (const rank of [
+    0,
+    1,
+    2,
+  ]) {
     if (classRank === rank) {
-      for (const name of rankNames[rank]) toCreate.push(name);
+      for (const name of rankNames[rank]) {
+        toCreate.push(name);
+      }
     }
   }
   if (classRank >= 3) {
-    for (const name of rankNames["3c"]) toCreate.push(name);
-    for (const name of rankNames["3s"]) toCreate.push(name);
+    for (const name of rankNames["3c"]) {
+      toCreate.push(name);
+    }
+    for (const name of rankNames["3s"]) {
+      toCreate.push(name);
+    }
   }
 
   const progress = ui.notifications.info(`Pulling Rank from wiki.`, {
@@ -89,13 +112,14 @@ export async function _parse(rankData, rawHTML) {
     } else {
       await createAbility(rankData.parent, abilityName, { notify: false });
     }
-    return { abilityName, success: true };
+    return {
+      abilityName,
+      success: true,
+    };
   }
 
   // Create an array of promises for parallel processing
-  const abilityPromises = toCreate.map((abilityName) =>
-    createSingleAbility(abilityName),
-  );
+  const abilityPromises = toCreate.map((abilityName) => createSingleAbility(abilityName));
 
   // Update progress to show processing has started
   progress.update({
@@ -116,10 +140,7 @@ export async function _parse(rankData, rawHTML) {
       message: `Successfully created ${results.length} abilities.`,
     });
 
-    console.log(
-      `Created abilities for rank:`,
-      results.map((r) => r.abilityName),
-    );
+    console.log(`Created abilities for rank:`, results.map((r) => r.abilityName));
   } catch (error) {
     progress.update({
       pct: 0.9,
@@ -154,7 +175,10 @@ export async function _parse(rankData, rawHTML) {
 
   progress.update({ pct: 1 });
 
-  cleanObject(parameters, ["description", "flaws"]);
+  cleanObject(parameters, [
+    "description",
+    "flaws",
+  ]);
 
   return {
     system: parameters,

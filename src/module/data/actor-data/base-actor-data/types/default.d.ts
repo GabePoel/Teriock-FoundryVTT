@@ -8,14 +8,14 @@ import { TradecraftData } from "./tradecrafts";
 export interface HackDataCollection {
   /** Arm hacks */
   arm: ActorHackData;
-  /** Leg hacks */
-  leg: ActorHackData;
   /** Body hacks */
   body: ActorHackData;
-  /** Eye hacks */
-  eye: ActorHackData;
   /** Ear hacks */
   ear: ActorHackData;
+  /** Eye hacks */
+  eye: ActorHackData;
+  /** Leg hacks */
+  leg: ActorHackData;
   /** Mouth hacks */
   mouth: ActorHackData;
   /** Nose hacks */
@@ -23,12 +23,8 @@ export interface HackDataCollection {
 }
 
 export interface TeriockBaseActorDefault {
-  /** Parent actor */
-  parent: TeriockActor;
-  /** Level */
-  lvl: number;
-  /** Size */
-  size: number;
+  /** Attack penalty */
+  attackPenalty: number;
   /** Attributes */
   attributes: {
     /** Intelligence */
@@ -44,13 +40,8 @@ export interface TeriockBaseActorDefault {
     /** Unused presence */
     unp: ActorAttributeData;
   };
-  /** Movement speed */
-  movementSpeed: {
-    /** Base movement speed */
-    base: number;
-    /** Current movement speed */
-    value: number;
-  };
+  /** Attunements - IDs of attuned equipment */
+  attunements: Set<Teriock.ID<TeriockEquipment>>;
   /** Carrying capacity */
   carryingCapacity: {
     /** Light carrying capacity */
@@ -60,18 +51,6 @@ export interface TeriockBaseActorDefault {
     /** Maximum carrying capacity */
     max: number;
   };
-  /** Weight */
-  weight: number;
-  /** Worn armor class */
-  wornAc: number;
-  /** Natural armor value */
-  naturalAv: number;
-  /** Attack penalty */
-  attackPenalty: number;
-  /** Style bonus */
-  sb: boolean;
-  /** Piercing type */
-  piercing: string;
   /** Defined damage dice/expressions */
   damage: {
     /** Standard damage */
@@ -79,6 +58,19 @@ export interface TeriockBaseActorDefault {
   };
   /** Hacks */
   hacks: HackDataCollection;
+  /** Whether {@link TeriockActor} still has reaction */
+  hasReaction: boolean;
+  /** Hit points */
+  hp: BarData & {
+    /** Base hit points */
+    base: number;
+    /** Temporary hit points */
+    temp: number;
+  };
+  /** Immunities */
+  immunities: ProtectionData;
+  /** Level */
+  lvl: number;
   /** Money */
   money: {
     /** Copper coins */
@@ -108,6 +100,37 @@ export interface TeriockBaseActorDefault {
     /** Total money in gold */
     total: number;
   };
+  /** Movement speed */
+  movementSpeed: {
+    /** Base movement speed */
+    base: number;
+    /** Current movement speed */
+    value: number;
+  };
+  /** Mana points */
+  mp: BarData & {
+    /** Base mana points */
+    base: number;
+    /** Temporary mana points */
+    temp: number;
+  };
+  /** Natural armor value */
+  naturalAv: number;
+  /** Orderings */
+  orderings: {
+    ranks: Teriock.ID<TeriockRank>[];
+    species: Teriock.ID<TeriockSpecies>[];
+  };
+  /** Parent actor */
+  parent: TeriockActor;
+  /** Piercing type */
+  piercing: string;
+  /** Presence */
+  presence: BarData;
+  /** Resistances */
+  resistances: ProtectionData;
+  /** Style bonus */
+  sb: boolean;
   /** Senses */
   senses: {
     /** Night vision */
@@ -129,6 +152,8 @@ export interface TeriockBaseActorDefault {
     /** See invisible */
     invisible: number;
   };
+  /** Size */
+  size: number;
   /** Speed adjustments */
   speedAdjustments: {
     /** Walk speed */
@@ -154,34 +179,12 @@ export interface TeriockBaseActorDefault {
     /** Swim speed */
     swim: number;
   };
-  /** Hit points */
-  hp: BarData & {
-    /** Base hit points */
-    base: number;
-    /** Temporary hit points */
-    temp: number;
-  };
-  /** Mana points */
-  mp: BarData & {
-    /** Base mana points */
-    base: number;
-    /** Temporary mana points */
-    temp: number;
-  };
-  /** Wither */
-  wither: BarData;
-  /** Presence */
-  presence: BarData;
   /** Tradecrafts */
   tradecrafts: Record<Teriock.Parameters.Fluency.Tradecraft, TradecraftData>;
-  /** Resistances */
-  resistances: ProtectionData;
-  /** Immunities */
-  immunities: ProtectionData;
   /** Update counter - used to force an update when adding/removing effects */
   updateCounter: boolean;
-  /** Attunements - IDs of attuned equipment */
-  attunements: Set<Teriock.ID<TeriockEquipment>>;
+  /** Weight */
+  weight: number;
   /** Wielding */
   wielding: {
     /** Primary attacker */
@@ -199,11 +202,8 @@ export interface TeriockBaseActorDefault {
       derived: TeriockEquipment | null;
     };
   };
-  /** Orderings */
-  orderings: {
-    ranks: Teriock.ID<TeriockRank>[];
-    species: Teriock.ID<TeriockSpecies>[];
-  };
-  /** Whether {@link TeriockActor} still has reaction */
-  hasReaction: boolean;
+  /** Wither */
+  wither: BarData;
+  /** Worn armor class */
+  wornAc: number;
 }

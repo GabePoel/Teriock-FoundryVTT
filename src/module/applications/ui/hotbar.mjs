@@ -10,7 +10,10 @@ export default class TeriockHotbar extends Hotbar {
    * @param {TeriockItem|TeriockEffect} doc
    */
   async _createDocumentSheetToggle(doc) {
-    if (["Item", "ActiveEffect"].includes(doc.documentName)) {
+    if ([
+      "Item",
+      "ActiveEffect",
+    ].includes(doc.documentName)) {
       const macroType = await hotbarDropDialog(doc);
       let searchTerm;
       let command;
@@ -52,16 +55,10 @@ export default class TeriockHotbar extends Hotbar {
       await activeGm.query("teriock.createHotbarFolder", {
         name: game.user.name,
       });
-      const folders =
-        /** @type {Collection<string, TeriockFolder>} */ game.folders;
-      let macroSubFolder = folders.find(
-        (f) => f.name === `${game.user.name}'s Macros`,
-      );
-      const macros =
-        /** @type {Collection<string, TeriockMacro>} */ game.macros;
-      let macro = macros.find(
-        (m) => m.name === macroName && m.command.startsWith(searchTerm),
-      );
+      const folders = /** @type {Collection<string, TeriockFolder>} */ game.folders;
+      let macroSubFolder = folders.find((f) => f.name === `${game.user.name}'s Macros`);
+      const macros = /** @type {Collection<string, TeriockMacro>} */ game.macros;
+      let macro = macros.find((m) => m.name === macroName && m.command.startsWith(searchTerm));
       if (!macro) {
         macro = TeriockMacro.create({
           name: macroName,

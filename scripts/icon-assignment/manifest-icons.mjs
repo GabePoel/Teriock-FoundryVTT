@@ -23,14 +23,22 @@ const isLink = (v) => typeof v === "string" && v.startsWith("@");
 
 const parseLink = (raw, defaultCategory) => {
   const s = (raw || "").trim().replace(/^@/, "");
-  if (!s) return null;
+  if (!s) {
+    return null;
+  }
   const idx = s.indexOf(":");
   if (idx > -1) {
     const cat = s.slice(0, idx).trim().toLowerCase();
     const name = s.slice(idx + 1).trim();
-    return { category: cat || defaultCategory, name };
+    return {
+      category: cat || defaultCategory,
+      name,
+    };
   }
-  return { category: defaultCategory, name: s };
+  return {
+    category: defaultCategory,
+    name: s,
+  };
 };
 
 const keyOf = (cat, name) => `${cat}||${name}`;
@@ -41,14 +49,19 @@ const linkMap = new Map();
 const allItems = [];
 const categories = assignments;
 
-for (const [cat, section] of Object.entries(categories)) {
-  for (const [name, val] of Object.entries(section)) {
-    allItems.push({ category: cat, name });
+for (const [ cat, section ] of Object.entries(categories)) {
+  for (const [ name, val ] of Object.entries(section)) {
+    allItems.push({
+      category: cat,
+      name,
+    });
     if (isDirect(val)) {
       directPath.set(keyOf(cat, name), val);
     } else if (isLink(val)) {
       const link = parseLink(val, cat);
-      if (link) linkMap.set(keyOf(cat, name), link);
+      if (link) {
+        linkMap.set(keyOf(cat, name), link);
+      }
     }
   }
 }
@@ -56,8 +69,7 @@ for (const [cat, section] of Object.entries(categories)) {
 // Resolve the first ancestor that has a direct image (cross-category allowed)
 const resolveRootKey = (startCat, startName) => {
   const seen = new Set();
-  let curCat = startCat,
-    curName = startName;
+  let curCat = startCat, curName = startName;
   while (curCat && curName && !directPath.has(keyOf(curCat, curName))) {
     const k = keyOf(curCat, curName);
     if (seen.has(k)) {
@@ -66,7 +78,9 @@ const resolveRootKey = (startCat, startName) => {
     }
     seen.add(k);
     const link = linkMap.get(k);
-    if (!link) return null;
+    if (!link) {
+      return null;
+    }
     curCat = link.category || curCat;
     curName = link.name;
   }
@@ -80,7 +94,7 @@ for (const dirKey of dirKeys) {
   /** @type {Record<string,string>} */
   const dirObj = assignments[dirKey];
   iconManifest[dirKey] = {};
-  for (const [key, value] of Object.entries(dirObj)) {
+  for (const [ key, value ] of Object.entries(dirObj)) {
     let finalPath;
 
     if (isLink(value)) {
@@ -112,7 +126,4 @@ for (const dirKey of dirKeys) {
   }
 }
 
-await saveObject(
-  iconManifest,
-  path.resolve(__dirname, "../../src/icons/icon-manifest.json"),
-);
+await saveObject(iconManifest, path.resolve(__dirname, "../../src/icons/icon-manifest.json"),);

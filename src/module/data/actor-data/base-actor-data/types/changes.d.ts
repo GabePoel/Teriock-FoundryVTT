@@ -43,15 +43,9 @@ type EquipmentChangeKeys = {
   /** Overrides by equipment type */
   types: Record<string, Partial<EquipmentChangeValues>>;
   /** Overrides by equipment property */
-  properties: Record<
-    Teriock.Parameters.Equipment.PropertyKey,
-    Partial<EquipmentChangeValues>
-  >;
+  properties: Record<Teriock.Parameters.Equipment.PropertyKey, Partial<EquipmentChangeValues>>;
   /** Overrides by equipment class */
-  classes: Record<
-    Teriock.Parameters.Equipment.EquipmentClass,
-    Partial<EquipmentChangeValues>
-  >;
+  classes: Record<Teriock.Parameters.Equipment.EquipmentClass, Partial<EquipmentChangeValues>>;
   /** Overrides by equipment name */
   names: Record<string, Partial<EquipmentChangeValues>>;
   /** Overrides by ID */
@@ -61,15 +55,9 @@ type EquipmentChangeKeys = {
 /** Possible keys to set some category of ability */
 type AbilityChangeKeys = {
   /** Overrides by element */
-  elements: Record<
-    Teriock.Parameters.Ability.Element,
-    Partial<AbilityChangeValues>
-  >;
+  elements: Record<Teriock.Parameters.Ability.Element, Partial<AbilityChangeValues>>;
   /** Overrides by power source */
-  powers: Record<
-    Teriock.Parameters.Ability.PowerSource,
-    Partial<AbilityChangeValues>
-  >;
+  powers: Record<Teriock.Parameters.Ability.PowerSource, Partial<AbilityChangeValues>>;
   /** Override by ability name */
   names: Record<string, Partial<AbilityChangeValues>>;
   /** Overrides by ID */
@@ -78,12 +66,12 @@ type AbilityChangeKeys = {
 
 // TODO: Implement more thoroughly
 export interface ActorChanges {
-  equipment: {
-    upgrades: EquipmentChangeKeys;
-    overrides: EquipmentChangeKeys;
-  };
   abilities: {
     upgrades: AbilityChangeKeys;
+    overrides: EquipmentChangeKeys;
+  };
+  equipment: {
+    upgrades: EquipmentChangeKeys;
     overrides: EquipmentChangeKeys;
   };
 }

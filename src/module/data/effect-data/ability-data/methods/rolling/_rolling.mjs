@@ -17,7 +17,9 @@ import { _stageUse } from "./_roll-stage-use.mjs";
  */
 export async function _roll(abilityData, options = {}) {
   const rollConfig = _defaultConfig(abilityData, options);
-  if (rollConfig.useData.dontUse) return;
+  if (rollConfig.useData.dontUse) {
+    return;
+  }
   await _setTargets(rollConfig);
   await _stageUse(rollConfig);
   await _payCosts(rollConfig);

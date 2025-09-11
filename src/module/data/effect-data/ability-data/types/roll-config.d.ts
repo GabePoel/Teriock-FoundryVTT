@@ -52,10 +52,10 @@ export type AbilityChatData = {
 };
 
 export interface AbilityRollConfig {
-  /** Data that describes this specific use of the ability. */
-  useData: AbilityUseData;
   /** The data of the ability being rolled for. This should not be mutated. */
   abilityData: TeriockAbilityData;
   /** Data relevant for generating this ability's chat message. */
   chatData: AbilityChatData;
+  /** Data that describes this specific use of the ability. */
+  useData: AbilityUseData;
 }

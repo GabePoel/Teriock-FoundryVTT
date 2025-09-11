@@ -1,14 +1,10 @@
 if (!actor.effectKeys.consequence.has("treeformBallEffect")) {
   const hp = actor.system.hp.value;
   if (!actor.itemKeys.species.has("tree")) {
-    const treeSpecies = await tm.fetch.getItem(
-      "Tree",
-      "species",
-      {
-        clone: true,
-      },
-    );
-    const created = await actor.createEmbeddedDocuments("Item", [treeSpecies]);
+    const treeSpecies = await tm.fetch.getItem("Tree", "species", {
+      clone: true,
+    });
+    const created = await actor.createEmbeddedDocuments("Item", [ treeSpecies ]);
     const createdTree = created[0];
     await createdTree.update({
       "system.size.value": actor.system.size,
@@ -16,7 +12,11 @@ if (!actor.effectKeys.consequence.has("treeformBallEffect")) {
     });
   }
   const notTree = actor.species.filter((s) => s.name !== "Tree");
-  for (const i of [...notTree, ...actor.ranks]) {
+  for (const i of
+    [
+      ...notTree,
+      ...actor.ranks,
+    ]) {
     await i.setFlag("teriock", "preTreeformApplyHp", i.system.applyHp);
     await i.setFlag("teriock", "preTreeformDisabled", i.disabled);
   }
@@ -34,7 +34,10 @@ if (!actor.effectKeys.consequence.has("treeformBallEffect")) {
       "system.disabled": true,
     };
   });
-  const itemsToDisable = [...disabledSpeciesArray, ...disabledRanksArray];
+  const itemsToDisable = [
+    ...disabledSpeciesArray,
+    ...disabledRanksArray,
+  ];
   await actor.updateEmbeddedDocuments("Item", itemsToDisable);
   await actor.setFlag("teriock", "preTransformHp", hp);
   await actor.update({ "system.hp.value": actor.system.hp.max });

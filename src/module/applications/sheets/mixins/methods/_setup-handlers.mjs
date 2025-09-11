@@ -1,7 +1,6 @@
 /**
  * Sets up all event listeners for the sheet.
  * Configures handlers for form updates, record fields, set fields, array fields, and changes.
- *
  * @param {DocumentSheetV2} sheet
  */
 export default async function _setupEventListeners(sheet) {
@@ -15,13 +14,18 @@ export default async function _setupEventListeners(sheet) {
 /**
  * Sets up update handlers for various input types.
  * Configures change and click handlers for update inputs, select elements, and checkboxes.
- *
  * @param {DocumentSheetV2} sheet
  */
 function setupUpdateHandlers(sheet) {
   const handlers = [
-    { selector: ".teriock-update-input", event: "change" },
-    { selector: ".teriock-update-select", event: "change" },
+    {
+      selector: ".teriock-update-input",
+      event: "change",
+    },
+    {
+      selector: ".teriock-update-select",
+      event: "change",
+    },
     {
       selector: ".teriock-update-checkbox",
       event: "click",
@@ -29,18 +33,24 @@ function setupUpdateHandlers(sheet) {
     },
   ];
 
-  handlers.forEach(({ selector, event, getValue }) => {
+  handlers.forEach(({
+    selector,
+    event,
+    getValue,
+  }) => {
     sheet.element.querySelectorAll(selector).forEach((el) => {
       const name = el.getAttribute("name");
-      if (!name) return;
+      if (!name) {
+        return;
+      }
 
       el.addEventListener(event, async (e) => {
-        if (event === "click") e.preventDefault();
+        if (event === "click") {
+          e.preventDefault();
+        }
         const target = /** @type {HTMLFormElement} */ e.currentTarget;
 
-        const value = getValue
-          ? getValue(target)
-          : (target.value ?? target.getAttribute("data-value"));
+        const value = getValue ? getValue(target) : (target.value ?? target.getAttribute("data-value"));
 
         await sheet.document.update({ [name]: value });
       });
@@ -51,7 +61,6 @@ function setupUpdateHandlers(sheet) {
 /**
  * Sets up handlers for record field components.
  * Configures multi-select inputs and remove buttons for record fields.
- *
  * @param {DocumentSheetV2} sheet
  */
 function setupRecordFieldHandlers(sheet) {
@@ -59,7 +68,9 @@ function setupRecordFieldHandlers(sheet) {
     .querySelectorAll(".teriock-record-field")
     .forEach((container) => {
       const select = container.querySelector("select");
-      if (!select) return;
+      if (!select) {
+        return;
+      }
 
       const name = container.getAttribute("name");
       const allowedKeys = Array.from(select.options)
@@ -77,11 +88,7 @@ function setupRecordFieldHandlers(sheet) {
           const target = /** @type {HTMLElement} */ e.currentTarget;
           const closest = /** @type {HTMLElement} */ target.closest(".tag");
           const key = closest.dataset.key;
-          await cleanRecordField(
-            sheet,
-            name,
-            allowedKeys.filter((k) => k !== key),
-          );
+          await cleanRecordField(sheet, name, allowedKeys.filter((k) => k !== key));
         });
       });
     });
@@ -90,19 +97,17 @@ function setupRecordFieldHandlers(sheet) {
 /**
  * Sets up handlers for set field components.
  * Configures multi-select inputs and remove buttons for set fields.
- *
  * @param {DocumentSheetV2} sheet
  */
 function setupSetFieldHandlers(sheet) {
   sheet.element.querySelectorAll(".teriock-update-set").forEach((container) => {
     const select = container.querySelector("select");
-    if (!select) return;
+    if (!select) {
+      return;
+    }
 
     const name = container.getAttribute("name");
-    const getValues = () =>
-      Array.from(select.parentElement.querySelectorAll(".tag")).map(
-        (tag) => tag.dataset.key,
-      );
+    const getValues = () => Array.from(select.parentElement.querySelectorAll(".tag")).map((tag) => tag.dataset.key);
 
     select.addEventListener("input", async () => {
       const values = getValues();
@@ -130,50 +135,46 @@ function setupSetFieldHandlers(sheet) {
 /**
  * Sets up handlers for array field components.
  * Configures add buttons for array fields.
- *
  * @param {DocumentSheetV2} sheet
  */
 function setupArrayFieldHandlers(sheet) {
-  sheet.element.querySelectorAll(".teriock-array-field-add").forEach(
-    /** @param {HTMLButtonElement} button */ (button) => {
+  sheet.element.querySelectorAll(".teriock-array-field-add")
+    .forEach(/** @param {HTMLButtonElement} button */(button) => {
       button.addEventListener("click", async (e) => {
         e.preventDefault();
-        await addToArrayField(
-          sheet,
-          button.getAttribute("name"),
-          button.dataset.path,
-        );
+        await addToArrayField(sheet, button.getAttribute("name"), button.dataset.path);
       });
-    },
-  );
+    });
 }
 
 /**
  * Sets up handlers for change field components.
  * Configures change inputs and remove buttons for change arrays.
- *
  * @param {DocumentSheetV2} sheet
  */
 function setupChangeHandlers(sheet) {
   // Change inputs
-  sheet.element.querySelectorAll(".teriock-change-input").forEach(
-    /** @param {HTMLElement} el */ (el) => {
-      const { name } = el.attributes;
-      const { index, part } = el.dataset;
-      if (!name?.value) return;
+  sheet.element.querySelectorAll(".teriock-change-input").forEach(/** @param {HTMLElement} el */(el) => {
+    const { name } = el.attributes;
+    const {
+      index,
+      part,
+    } = el.dataset;
+    if (!name?.value) {
+      return;
+    }
 
-      el.addEventListener("change", async (e) => {
-        const existing = foundry.utils.getProperty(sheet.document, name.value);
-        const copy = foundry.utils.deepClone(existing) || [];
-        copy[index][part] = e.currentTarget.value;
-        await sheet.document.update({ [name.value]: copy });
-      });
-    },
-  );
+    el.addEventListener("change", async (e) => {
+      const existing = foundry.utils.getProperty(sheet.document, name.value);
+      const copy = foundry.utils.deepClone(existing) || [];
+      copy[index][part] = e.currentTarget.value;
+      await sheet.document.update({ [name.value]: copy });
+    });
+  });
 
   // Remove change buttons
-  sheet.element.querySelectorAll(".teriock-remove-change-button").forEach(
-    /** @param {HTMLButtonElement} button */ (button) => {
+  sheet.element.querySelectorAll(".teriock-remove-change-button")
+    .forEach(/** @param {HTMLButtonElement} button */(button) => {
       const { name } = button.attributes;
       const { index } = button.dataset;
 
@@ -183,13 +184,11 @@ function setupChangeHandlers(sheet) {
         copy.splice(index, 1);
         await sheet.document.update({ [name.value]: copy });
       });
-    },
-  );
+    });
 }
 
 /**
  * Adds a key to a record field with validation.
- *
  * @param {DocumentSheetV2} sheet
  * @param {string} name - The field name.
  * @param {string} key - The key to add.
@@ -214,7 +213,6 @@ async function addToRecordField(sheet, name, key, allowedKeys = []) {
 
 /**
  * Cleans a record field by removing invalid keys.
- *
  * @param {DocumentSheetV2} sheet
  * @param {string} name - The field name.
  * @param {Array} allowedKeys - Array of allowed keys to keep.
@@ -236,19 +234,14 @@ async function cleanRecordField(sheet, name, allowedKeys = []) {
 
 /**
  * Adds an item to an array field.
- *
  * @param {DocumentSheetV2} sheet
  * @param {string} name - The field name.
  * @param {string} fieldPath - The path to the field schema.
  * @returns {Promise<void>} Promise that resolves when the item is added.
  */
 async function addToArrayField(sheet, name, fieldPath) {
-  const cleanFieldPath = fieldPath.startsWith("system.")
-    ? fieldPath.slice(7)
-    : fieldPath;
-  const copy =
-    foundry.utils.deepClone(foundry.utils.getProperty(sheet.document, name)) ||
-    [];
+  const cleanFieldPath = fieldPath.startsWith("system.") ? fieldPath.slice(7) : fieldPath;
+  const copy = foundry.utils.deepClone(foundry.utils.getProperty(sheet.document, name)) || [];
   const field = sheet.document.system.schema.getField(cleanFieldPath).element;
   const initial = field.getInitialValue();
 
@@ -258,7 +251,6 @@ async function addToArrayField(sheet, name, fieldPath) {
 
 /**
  * Updates a set field with new values.
- *
  * @param {DocumentSheetV2} sheet
  * @param {string} name - The field name.
  * @param {Array} values - Array of values for the set.

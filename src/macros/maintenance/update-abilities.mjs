@@ -4,33 +4,23 @@ const progress = ui.notifications.info(`Pulling all abilities from wiki.`, {
   progress: true,
 });
 
-let allAbilityPages =
-  await teriock.helpers.wiki.fetchCategoryMembers("Abilities");
-allAbilityPages = allAbilityPages.filter((page) =>
-  page.title.includes("Ability:"),
-);
+let allAbilityPages = await teriock.helpers.wiki.fetchCategoryMembers("Abilities");
+allAbilityPages = allAbilityPages.filter((page) => page.title.includes("Ability:"));
 
 async function processAbility(abilityName, _index, _total) {
   let abilityItem = abilitiesPack.index.find((e) => e.name === abilityName);
   if (!abilityItem) {
-    abilityItem = await game.teriock.Item.create(
-      {
-        name: abilityName,
-        type: "wrapper",
-      },
-      { pack: "teriock.abilities" },
-    );
+    abilityItem = await game.teriock.Item.create({
+      name: abilityName,
+      type: "wrapper",
+    }, { pack: "teriock.abilities" });
   } else {
     abilityItem = await foundry.utils.fromUuid(abilityItem.uuid);
   }
   let abilityEffect = abilityItem.abilities.find((a) => a.name === abilityName);
 
   if (!abilityEffect) {
-    abilityEffect = await tm.create.ability(
-      abilityItem,
-      abilityName,
-      { notify: false },
-    );
+    abilityEffect = await tm.create.ability(abilityItem, abilityName, { notify: false });
   } else {
     await abilityEffect.system.wikiPull({ notify: false });
   }
@@ -39,7 +29,10 @@ async function processAbility(abilityName, _index, _total) {
     await abilityItem.update({ img: abilityEffect.img });
   }
 
-  return { abilityName, success: true };
+  return {
+    abilityName,
+    success: true,
+  };
 }
 
 const BATCH_SIZE = 50;
@@ -53,14 +46,9 @@ progress.update({
 
 try {
   for (let start = 0; start < total; start += BATCH_SIZE) {
-    const batch = Object.values(TERIOCK.index.abilities).slice(
-      start,
-      start + BATCH_SIZE,
-    );
+    const batch = Object.values(TERIOCK.index.abilities).slice(start, start + BATCH_SIZE);
 
-    const batchPromises = batch.map((abilityName, i) =>
-      processAbility(abilityName, start + i, total),
-    );
+    const batchPromises = batch.map((abilityName, i) => processAbility(abilityName, start + i, total));
 
     const batchResults = await Promise.all(batchPromises);
     results.push(...batchResults);
@@ -70,7 +58,8 @@ try {
 
     progress.update({
       pct: Math.min(pct, 1),
-      message: `Processed ${processed}/${total} abilities (batch ${Math.floor(start / BATCH_SIZE) + 1}/${Math.ceil(total / BATCH_SIZE)}).`,
+      message: `Processed ${processed}/${total} abilities (batch ${Math.floor(start / BATCH_SIZE) + 1}/${Math.ceil(total
+        / BATCH_SIZE)}).`,
     });
   }
 
@@ -79,10 +68,7 @@ try {
     message: `Successfully processed ${results.length} abilities.`,
   });
 
-  console.log(
-    `Completed processing ${results.length} abilities:`,
-    results.map((r) => r.abilityName),
-  );
+  console.log(`Completed processing ${results.length} abilities:`, results.map((r) => r.abilityName));
 } catch (error) {
   progress.update({
     pct: 1,

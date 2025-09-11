@@ -41,11 +41,12 @@ export function contextMenus(ability) {
    */
   function quickMenu(keychain, updateKey, nullOption = null) {
     const keys = fetch(keychain);
-    const out = Object.entries(keys).map(([key, value]) => ({
-      name: value,
-      icon: TERIOCK.display.icons[key],
-      callback: () => ability.update({ [updateKey]: key }),
-    }));
+    const out = Object.entries(keys)
+      .map(([ key, value ]) => ({
+        name: value,
+        icon: TERIOCK.display.icons[key],
+        callback: () => ability.update({ [updateKey]: key }),
+      }));
     if (nullOption) {
       out.unshift({
         name: "None",
@@ -101,11 +102,10 @@ export function contextMenus(ability) {
       {
         name: "Passive",
         icon: TERIOCK.display.icons.passive,
-        callback: async () =>
-          await ability.update({
-            "system.maneuver": "passive",
-            "system.executionTime": "passive",
-          }),
+        callback: async () => await ability.update({
+          "system.maneuver": "passive",
+          "system.executionTime": "passive",
+        }),
       },
       {
         name: "Slow",
@@ -122,23 +122,21 @@ export function contextMenus(ability) {
     active: quickMenu("executionTime.active", "system.executionTime"),
     reactive: quickMenu("executionTime.reactive", "system.executionTime"),
     interaction: quickMenu("interaction", "system.interaction"),
-    featSaveAttribute: quickMenu(
-      "featSaveAttribute",
-      "system.featSaveAttribute",
-    ),
-    targets: Object.entries(fetch("targets")).flatMap(([key, value]) => [
+    featSaveAttribute: quickMenu("featSaveAttribute", "system.featSaveAttribute"),
+    targets: Object.entries(TERIOCK.options.ability.targets).flatMap(([ key, value ]) => [
       {
         name: value,
         icon: TERIOCK.display.icons.unchecked,
         callback: async () => {
-          const currentTargets =
-            foundry.utils.getProperty(ability.system, "targets") || [];
-          const newTargets = [...currentTargets, key];
+          const currentTargets = foundry.utils.getProperty(ability.system, "targets") || [];
+          const newTargets = [
+            ...currentTargets,
+            key,
+          ];
           await ability.update({ "system.targets": newTargets });
         },
         condition: () => {
-          const currentTargets =
-            foundry.utils.getProperty(ability.system, "targets") || [];
+          const currentTargets = foundry.utils.getProperty(ability.system, "targets") || [];
           return !currentTargets.includes(key);
         },
       },
@@ -146,14 +144,12 @@ export function contextMenus(ability) {
         name: value,
         icon: TERIOCK.display.icons.checked,
         callback: async () => {
-          const currentTargets =
-            foundry.utils.getProperty(ability.system, "targets") || [];
+          const currentTargets = foundry.utils.getProperty(ability.system, "targets") || [];
           const newTargets = currentTargets.filter((t) => t !== key);
           await ability.update({ "system.targets": newTargets });
         },
         condition: () => {
-          const currentTargets =
-            foundry.utils.getProperty(ability.system, "targets") || [];
+          const currentTargets = foundry.utils.getProperty(ability.system, "targets") || [];
           return currentTargets.includes(key);
         },
       },
@@ -162,237 +158,218 @@ export function contextMenus(ability) {
       {
         name: "No Mana Cost",
         icon: TERIOCK.display.icons.remove,
-        callback: () =>
-          ability.update({
-            "system.costs.mp": {
-              type: "none",
-              value: {
-                static: 0,
-                formula: "",
-                variable: "",
-              },
+        callback: () => ability.update({
+          "system.costs.mp": {
+            type: "none",
+            value: {
+              static: 0,
+              formula: "",
+              variable: "",
             },
-          }),
+          },
+        }),
       },
       {
         name: "Static Cost",
         icon: TERIOCK.display.icons.numerical,
-        callback: () =>
-          ability.update({
-            "system.costs.mp": {
-              type: "static",
-              value: {
-                static: 1,
-                formula: "",
-                variable: "",
-              },
+        callback: () => ability.update({
+          "system.costs.mp": {
+            type: "static",
+            value: {
+              static: 1,
+              formula: "",
+              variable: "",
             },
-          }),
+          },
+        }),
       },
       {
         name: "Formula Cost",
         icon: TERIOCK.display.icons.formula,
-        callback: () =>
-          ability.update({
-            "system.costs.mp": {
-              type: "formula",
-              value: {
-                static: 0,
-                formula: "1d4",
-                variable: "",
-              },
+        callback: () => ability.update({
+          "system.costs.mp": {
+            type: "formula",
+            value: {
+              static: 0,
+              formula: "1d4",
+              variable: "",
             },
-          }),
+          },
+        }),
       },
       {
         name: "Variable Cost",
         icon: TERIOCK.display.icons.variable,
-        callback: () =>
-          ability.update({
-            "system.costs.mp": {
-              type: "variable",
-              value: {
-                static: 0,
-                formula: "",
-                variable: "<p>Enter cost here.</p>",
-              },
+        callback: () => ability.update({
+          "system.costs.mp": {
+            type: "variable",
+            value: {
+              static: 0,
+              formula: "",
+              variable: "<p>Enter cost here.</p>",
             },
-          }),
+          },
+        }),
       },
     ],
     hitCost: [
       {
         name: "No Hit Cost",
         icon: TERIOCK.display.icons.remove,
-        callback: () =>
-          ability.update({
-            "system.costs.hp": {
-              type: "none",
-              value: {
-                static: 0,
-                formula: "",
-                variable: "",
-              },
+        callback: () => ability.update({
+          "system.costs.hp": {
+            type: "none",
+            value: {
+              static: 0,
+              formula: "",
+              variable: "",
             },
-          }),
+          },
+        }),
       },
       {
         name: "Static Cost",
         icon: TERIOCK.display.icons.numerical,
-        callback: () =>
-          ability.update({
-            "system.costs.hp": {
-              type: "static",
-              value: {
-                static: 1,
-                formula: "",
-                variable: "",
-              },
+        callback: () => ability.update({
+          "system.costs.hp": {
+            type: "static",
+            value: {
+              static: 1,
+              formula: "",
+              variable: "",
             },
-          }),
+          },
+        }),
       },
       {
         name: "Hack Cost",
         icon: TERIOCK.display.icons.hack,
-        callback: () =>
-          ability.update({
-            "system.costs.hp": {
-              type: "hack",
-              value: {
-                static: 0,
-                formula: "",
-                variable: "",
-              },
+        callback: () => ability.update({
+          "system.costs.hp": {
+            type: "hack",
+            value: {
+              static: 0,
+              formula: "",
+              variable: "",
             },
-          }),
+          },
+        }),
       },
       {
         name: "Formula Cost",
         icon: TERIOCK.display.icons.formula,
-        callback: () =>
-          ability.update({
-            "system.costs.hp": {
-              type: "formula",
-              value: {
-                static: 0,
-                formula: "1d4",
-                variable: "",
-              },
+        callback: () => ability.update({
+          "system.costs.hp": {
+            type: "formula",
+            value: {
+              static: 0,
+              formula: "1d4",
+              variable: "",
             },
-          }),
+          },
+        }),
       },
       {
         name: "Variable Cost",
         icon: TERIOCK.display.icons.variable,
-        callback: () =>
-          ability.update({
-            "system.costs.hp": {
-              type: "variable",
-              value: {
-                static: 0,
-                formula: "",
-                variable: "<p>Enter cost here.</p>",
-              },
+        callback: () => ability.update({
+          "system.costs.hp": {
+            type: "variable",
+            value: {
+              static: 0,
+              formula: "",
+              variable: "<p>Enter cost here.</p>",
             },
-          }),
+          },
+        }),
       },
     ],
     goldCost: [
       {
         name: "No Gold Cost",
         icon: TERIOCK.display.icons.remove,
-        callback: () =>
-          ability.update({
-            "system.costs.gp": {
-              type: "none",
-              value: {
-                static: 0,
-                formula: "",
-                variable: "",
-              },
+        callback: () => ability.update({
+          "system.costs.gp": {
+            type: "none",
+            value: {
+              static: 0,
+              formula: "",
+              variable: "",
             },
-          }),
+          },
+        }),
       },
       {
         name: "Static Cost",
         icon: TERIOCK.display.icons.numerical,
-        callback: () =>
-          ability.update({
-            "system.costs.gp": {
-              type: "static",
-              value: {
-                static: 50,
-                formula: "",
-                variable: "",
-              },
+        callback: () => ability.update({
+          "system.costs.gp": {
+            type: "static",
+            value: {
+              static: 50,
+              formula: "",
+              variable: "",
             },
-          }),
+          },
+        }),
       },
       {
         name: "Formula Cost",
         icon: TERIOCK.display.icons.formula,
-        callback: () =>
-          ability.update({
-            "system.costs.gp": {
-              type: "formula",
-              value: {
-                static: 0,
-                formula: "1d100",
-                variable: "",
-              },
+        callback: () => ability.update({
+          "system.costs.gp": {
+            type: "formula",
+            value: {
+              static: 0,
+              formula: "1d100",
+              variable: "",
             },
-          }),
+          },
+        }),
       },
       {
         name: "Variable Cost",
         icon: TERIOCK.display.icons.variable,
-        callback: () =>
-          ability.update({
-            "system.costs.gp": {
-              type: "variable",
-              value: {
-                static: 0,
-                formula: "",
-                variable: "<p>Enter cost here.</p>",
-              },
+        callback: () => ability.update({
+          "system.costs.gp": {
+            type: "variable",
+            value: {
+              static: 0,
+              formula: "",
+              variable: "<p>Enter cost here.</p>",
             },
-          }),
+          },
+        }),
       },
     ],
     breakCost: [
       {
         name: "No Break Cost",
         icon: TERIOCK.display.icons.remove,
-        callback: () =>
-          ability.update({
-            "system.costs.break": null,
-          }),
+        callback: () => ability.update({
+          "system.costs.break": null,
+        }),
       },
       {
         name: "Shatter Cost",
         icon: TERIOCK.display.icons.shatter,
-        callback: () =>
-          ability.update({
-            "system.costs.break": "shatter",
-          }),
+        callback: () => ability.update({
+          "system.costs.break": "shatter",
+        }),
       },
       {
         name: "Destroy Cost",
         icon: TERIOCK.display.icons.destroy,
-        callback: () =>
-          ability.update({
-            "system.costs.break": "destroy",
-          }),
+        callback: () => ability.update({
+          "system.costs.break": "destroy",
+        }),
       },
     ],
     expansion: quickMenu("expansion", "system.expansion", true),
-    expansionSaveAttribute: quickMenu(
-      "featSaveAttribute",
-      "system.expansionSaveAttribute",
-    ),
+    expansionSaveAttribute: quickMenu("featSaveAttribute", "system.expansionSaveAttribute"),
 
-    attributeImprovement: ["int", "mov", "per", "snk", "str", "unp"].map(
-      (attr) => ({
+    attributeImprovement: Object.keys(TERIOCK.index.statAttributes)
+      .map((attr) => ({
         name: attr.toUpperCase(),
         icon: TERIOCK.display.icons[attr],
         callback: async () => {
@@ -400,10 +377,9 @@ export function contextMenus(ability) {
             "system.improvements.attributeImprovement.attribute": attr,
           });
         },
-      }),
-    ),
-    attributeImprovementMinVal: Array.from({ length: 9 }, (_, i) => i - 3).map(
-      (i) => ({
+      })),
+    attributeImprovementMinVal: Array.from({ length: 9 }, (_, i) => i - 3)
+      .map((i) => ({
         name: i.toString(),
         icon: TERIOCK.display.icons.numerical,
         callback: async () => {
@@ -411,10 +387,9 @@ export function contextMenus(ability) {
             "system.improvements.attributeImprovement.minVal": i,
           });
         },
-      }),
-    ),
-    featSaveImprovement: ["int", "mov", "per", "snk", "str", "unp"].map(
-      (attr) => ({
+      })),
+    featSaveImprovement: Object.keys(TERIOCK.index.attributes)
+      .map((attr) => ({
         name: attr.toUpperCase(),
         icon: TERIOCK.display.icons[attr],
         callback: async () => {
@@ -422,25 +397,26 @@ export function contextMenus(ability) {
             "system.improvements.featSaveImprovement.attribute": attr,
           });
         },
-      }),
-    ),
-    featSaveImprovementAmount: ["proficiency", "fluency"].map((level) => ({
-      name: capitalize(level),
-      icon: TERIOCK.display.icons[level],
-      callback: async () => {
-        await ability.update({
-          "system.improvements.featSaveImprovement.amount": level,
-        });
-      },
-    })),
-    form: Object.entries(fetch("form")).map(([key, value]) => ({
-      name: value.name,
-      icon: makeIcon(value.icon, TERIOCK.display.iconStyles.contextMenu),
-      callback: async () => {
-        await ability.update({
-          "system.form": key,
-        });
-      },
-    })),
+      })),
+    featSaveImprovementAmount: Object.keys(TERIOCK.options.ability.featSaveImprovementAmount)
+      .map((level) => ({
+        name: capitalize(level),
+        icon: TERIOCK.display.icons[level],
+        callback: async () => {
+          await ability.update({
+            "system.improvements.featSaveImprovement.amount": level,
+          });
+        },
+      })),
+    form: Object.entries(TERIOCK.options.ability.form)
+      .map(([ key, value ]) => ({
+        name: value.name,
+        icon: makeIcon(value.icon, TERIOCK.display.iconStyles.contextMenu),
+        callback: async () => {
+          await ability.update({
+            "system.form": key,
+          });
+        },
+      })),
   };
 }

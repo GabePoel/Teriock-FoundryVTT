@@ -22,9 +22,7 @@ import * as schema from "./methods/_schema.mjs";
  * @mixes ConsumableDataMixin
  * @mixes WikiDataMixin
  */
-export default class TeriockEquipmentData extends ConsumableDataMixin(
-  WikiDataMixin(TeriockBaseItemData),
-) {
+export default class TeriockEquipmentData extends ConsumableDataMixin(WikiDataMixin(TeriockBaseItemData)) {
   /**
    * @inheritDoc
    * @type {Readonly<Teriock.Documents.ItemModelMetadata>}
@@ -34,7 +32,12 @@ export default class TeriockEquipmentData extends ConsumableDataMixin(
     pageNameKey: "system.equipmentType",
     type: "equipment",
     usable: true,
-    childEffectTypes: ["ability", "fluency", "property", "resource"],
+    childEffectTypes: [
+      "ability",
+      "fluency",
+      "property",
+      "resource",
+    ],
   });
 
   /** @inheritDoc */
@@ -63,10 +66,7 @@ export default class TeriockEquipmentData extends ConsumableDataMixin(
    * @returns {boolean}
    */
   get canEquip() {
-    return (
-      ((this.consumable && this.quantity >= 1) || !this.consumable) &&
-      !this.isEquipped
-    );
+    return (((this.consumable && this.quantity >= 1) || !this.consumable) && !this.isEquipped);
   }
 
   /**
@@ -74,15 +74,15 @@ export default class TeriockEquipmentData extends ConsumableDataMixin(
    * @returns {boolean}
    */
   get canUnequip() {
-    return (
-      ((this.consumable && this.quantity >= 1) || !this.consumable) &&
-      this.isEquipped
-    );
+    return (((this.consumable && this.quantity >= 1) || !this.consumable) && this.isEquipped);
   }
 
   /** @inheritDoc */
   get cardContextMenuEntries() {
-    return [...super.cardContextMenuEntries, ...contextMenus._entries(this)];
+    return [
+      ...super.cardContextMenuEntries,
+      ...contextMenus._entries(this),
+    ];
   }
 
   /**
@@ -163,16 +163,14 @@ export default class TeriockEquipmentData extends ConsumableDataMixin(
   /** @inheritDoc */
   get messageParts() {
     return {
-      ...super.messageParts,
-      ...messages._messageParts(this),
+      ...super.messageParts, ...messages._messageParts(this),
     };
   }
 
   /** @inheritDoc */
   get secretMessageParts() {
     return {
-      ...super.secretMessageParts,
-      ...messages._secretMessageParts(this),
+      ...super.secretMessageParts, ...messages._secretMessageParts(this),
     };
   }
 
@@ -188,7 +186,9 @@ export default class TeriockEquipmentData extends ConsumableDataMixin(
   async attune() {
     const data = { doc: this.parent };
     await this.parent.hookCall("equipmentAttune", data);
-    if (!data.cancel) return await attunement._attune(this);
+    if (!data.cancel) {
+      return await attunement._attune(this);
+    }
   }
 
   /**
@@ -198,7 +198,9 @@ export default class TeriockEquipmentData extends ConsumableDataMixin(
   async dampen() {
     const data = { doc: this.parent };
     await this.parent.hookCall("equipmentDampen", data);
-    if (!data.cancel) await this.parent.update({ "system.dampened": true });
+    if (!data.cancel) {
+      await this.parent.update({ "system.dampened": true });
+    }
   }
 
   /**
@@ -208,7 +210,9 @@ export default class TeriockEquipmentData extends ConsumableDataMixin(
   async deattune() {
     const data = { doc: this.parent };
     await this.parent.hookCall("equipmentDeattune", data);
-    if (!data.cancel) await attunement._deattune(this);
+    if (!data.cancel) {
+      await attunement._deattune(this);
+    }
   }
 
   /**
@@ -218,7 +222,9 @@ export default class TeriockEquipmentData extends ConsumableDataMixin(
   async equip() {
     const data = { doc: this.parent };
     await this.parent.hookCall("equipmentEquip", data);
-    if (!data.cancel) await this.parent.update({ "system.equipped": true });
+    if (!data.cancel) {
+      await this.parent.update({ "system.equipped": true });
+    }
   }
 
   /**
@@ -228,7 +234,9 @@ export default class TeriockEquipmentData extends ConsumableDataMixin(
   async glue() {
     const data = { doc: this.parent };
     await this.parent.hookCall("equipmentGlue", data);
-    if (!data.cancel) await this.parent.update({ "system.glued": true });
+    if (!data.cancel) {
+      await this.parent.update({ "system.glued": true });
+    }
   }
 
   /**
@@ -238,7 +246,9 @@ export default class TeriockEquipmentData extends ConsumableDataMixin(
   async identify() {
     const data = { doc: this.parent };
     await this.parent.hookCall("equipmentIdentify", data);
-    if (!data.cancel) await identifying._identify(this);
+    if (!data.cancel) {
+      await identifying._identify(this);
+    }
   }
 
   /** @inheritDoc */
@@ -265,7 +275,9 @@ export default class TeriockEquipmentData extends ConsumableDataMixin(
   async readMagic() {
     const data = { doc: this.parent };
     await this.parent.hookCall("equipmentReadMagic", data);
-    if (!data.cancel) await identifying._readMagic(this);
+    if (!data.cancel) {
+      await identifying._readMagic(this);
+    }
   }
 
   /**
@@ -275,7 +287,9 @@ export default class TeriockEquipmentData extends ConsumableDataMixin(
   async repair() {
     const data = { doc: this.parent };
     await this.parent.hookCall("equipmentRepair", data);
-    if (!data.cancel) await this.parent.update({ "system.shattered": false });
+    if (!data.cancel) {
+      await this.parent.update({ "system.shattered": false });
+    }
   }
 
   /** @inheritDoc */
@@ -290,7 +304,9 @@ export default class TeriockEquipmentData extends ConsumableDataMixin(
   async shatter() {
     const data = { doc: this.parent };
     await this.parent.hookCall("equipmentShatter", data);
-    if (!data.cancel) await this.parent.update({ "system.shattered": true });
+    if (!data.cancel) {
+      await this.parent.update({ "system.shattered": true });
+    }
   }
 
   /**
@@ -300,7 +316,9 @@ export default class TeriockEquipmentData extends ConsumableDataMixin(
   async undampen() {
     const data = { doc: this.parent };
     await this.parent.hookCall("equipmentUndampen", data);
-    if (!data.cancel) await this.parent.update({ "system.dampened": false });
+    if (!data.cancel) {
+      await this.parent.update({ "system.dampened": false });
+    }
   }
 
   /**
@@ -310,7 +328,9 @@ export default class TeriockEquipmentData extends ConsumableDataMixin(
   async unequip() {
     const data = { doc: this.parent };
     await this.parent.hookCall("equipmentUnequip", data);
-    if (!data.cancel) await this.parent.update({ "system.equipped": false });
+    if (!data.cancel) {
+      await this.parent.update({ "system.equipped": false });
+    }
   }
 
   /**
@@ -320,7 +340,9 @@ export default class TeriockEquipmentData extends ConsumableDataMixin(
   async unglue() {
     const data = { doc: this.parent };
     await this.parent.hookCall("equipmentUnglue", data);
-    if (!data.cancel) await this.parent.update({ "system.glued": false });
+    if (!data.cancel) {
+      await this.parent.update({ "system.glued": false });
+    }
   }
 
   /**
@@ -330,6 +352,8 @@ export default class TeriockEquipmentData extends ConsumableDataMixin(
   async unidentify() {
     const data = { doc: this.parent };
     await this.parent.hookCall("equipmentUnidentify", data);
-    if (!data.cancel) await identifying._unidentify(this);
+    if (!data.cancel) {
+      await identifying._unidentify(this);
+    }
   }
 }

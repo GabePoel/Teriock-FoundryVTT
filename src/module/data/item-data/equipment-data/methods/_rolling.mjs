@@ -17,7 +17,6 @@ export async function _roll(equipmentData, options) {
 /**
  * Performs the actual equipment roll, creating a harm roll with damage types and modifiers.
  * Handles damage formula construction, damage types, and roll options.
- *
  * @param {TeriockEquipmentData} equipmentData - The equipment data to roll for.
  * @param {Teriock.RollOptions.EquipmentRoll} options - Options for the equipment roll including twoHanded, bonusDamage,
  *   advantage, and secret.
@@ -28,7 +27,9 @@ async function use(equipmentData, options) {
   let message = await equipmentData.parent.buildMessage();
   if (equipmentData.derivedDamage) {
     let rollFormula = equipmentData.derivedDamage || "";
-    if (options.formula) rollFormula = options.formula;
+    if (options.formula) {
+      rollFormula = options.formula;
+    }
     rollFormula = rollFormula.trim();
 
     let damageTypes = equipmentData.damageTypes;
@@ -36,19 +37,12 @@ async function use(equipmentData, options) {
       damageTypes.add("magic");
     }
     // Ensure all damage types are lower case
-    damageTypes = [...new Set([...damageTypes])].map((dt) =>
-      dt && typeof dt === "string" ? dt.toLowerCase() : dt,
-    );
+    damageTypes = [ ...new Set([ ...damageTypes ]) ].map((dt) => dt && typeof dt === "string" ? dt.toLowerCase() : dt);
     // Sort the damage types
-    if (
-      damageTypes.length > 0 &&
-      rollFormula.length > 0 &&
-      rollFormula !== "0"
-    ) {
+    if (damageTypes.length > 0 && rollFormula.length > 0 && rollFormula !== "0") {
       damageTypes.sort((a, b) => a.localeCompare(b));
       rollFormula += "[" + damageTypes.join(" ") + "]";
     }
-
     if (options?.twoHanded && equipmentData.derivedTwoHandedDamage) {
       rollFormula = equipmentData.derivedTwoHandedDamage || rollFormula;
     }
@@ -92,10 +86,7 @@ async function use(equipmentData, options) {
           updates.push(update);
         }
       }
-      await equipmentData.parent.updateEmbeddedDocuments(
-        "ActiveEffect",
-        updates,
-      );
+      await equipmentData.parent.updateEmbeddedDocuments("ActiveEffect", updates);
     }
   }
 }

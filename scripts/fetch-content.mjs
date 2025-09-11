@@ -11,26 +11,21 @@ const __dirname = path.dirname(__filename);
 const contentDir = path.resolve(__dirname, "../src/module/constants/content");
 
 const writeModuleFile = (fileName, exportName, entries) => {
-  const fileHeader = `// This file was auto-generated on ${new Date().toISOString().split("T")[0]} by scripts/fetch-content.mjs.\n// Do not edit manually.\n\n`;
-  const lines = [`${fileHeader}export const ${exportName} = {\n`];
+  const fileHeader = `// This file was auto-generated on ${new Date().toISOString()
+    .split("T")[0]} by scripts/fetch-content.mjs.\n// Do not edit manually.\n\n`;
+  const lines = [ `${fileHeader}export const ${exportName} = {\n` ];
 
-  for (const [key, value] of Object.entries(entries)) {
-    lines.push(
-      `  ${key}: {\n` +
-        `    name: ${JSON.stringify(value.name)},\n` +
-        `    id: ${JSON.stringify(key)},\n` +
-        `    img: ${JSON.stringify(getIcon("conditions", value.name))},\n` +
-        (value._id ? `    _id: ${JSON.stringify(value._id)},\n` : "") +
-        (value.statuses
-          ? `    statuses: ${JSON.stringify(value.statuses)},\n`
-          : "") +
-        (value.changes
-          ? `    changes: ${JSON.stringify(value.changes)},\n`
-          : "") +
-        (value.type ? `    type: ${JSON.stringify(value.type)},\n` : "") +
-        `    system: {\n      description: ${JSON.stringify(value.content)}\n    },\n` +
-        `    content: ${JSON.stringify(value.content)}\n  },`,
-    );
+  for (const [ key, value ] of Object.entries(entries)) {
+    lines.push(`  ${key}: {\n`
+      + `    name: ${JSON.stringify(value.name)},\n`
+      + `    id: ${JSON.stringify(key)},\n`
+      + `    img: ${JSON.stringify(getIcon("conditions", value.name))},\n`
+      + (value._id ? `    _id: ${JSON.stringify(value._id)},\n` : "")
+      + (value.statuses ? `    statuses: ${JSON.stringify(value.statuses)},\n` : "")
+      + (value.changes ? `    changes: ${JSON.stringify(value.changes)},\n` : "")
+      + (value.type ? `    type: ${JSON.stringify(value.type)},\n` : "")
+      + `    system: {\n      description: ${JSON.stringify(value.content)}\n    },\n`
+      + `    content: ${JSON.stringify(value.content)}\n  },`);
   }
 
   // Remove trailing comma on the last entry
@@ -47,7 +42,7 @@ const fetchContent = async (map, namespace, staticId, statuses, type) => {
   console.log(`Fetching content for namespace "${namespace}"...`);
   console.log(`Static ID: ${staticId}, statuses: ${statuses}`);
 
-  for (const [key, name] of Object.entries(map)) {
+  for (const [ key, name ] of Object.entries(map)) {
     const pageTitle = `${namespace}:${name}`;
     console.log(`Fetching HTML for "${pageTitle}"...`);
     const html = await fetchWikiPageHTML(pageTitle);
@@ -82,17 +77,14 @@ const fetchContent = async (map, namespace, staticId, statuses, type) => {
             .map((s) => s.trim())
             .filter(Boolean);
         }
-        const changesMetadata = document.querySelectorAll(
-          '.metadata[data-type="change"]',
-        );
+        const changesMetadata = document.querySelectorAll(".metadata[data-type=\"change\"]");
         console.log(changesMetadata);
         changesMetadata.forEach((change) => {
           const changeKey = change.getAttribute("data-key");
           let changeValueRaw = change.getAttribute("data-value");
-          let changeValue =
-            !isNaN(changeValueRaw) && changeValueRaw.trim() !== ""
-              ? Number(changeValueRaw)
-              : changeValueRaw;
+          let changeValue = !isNaN(changeValueRaw) && changeValueRaw.trim() !== ""
+            ? Number(changeValueRaw)
+            : changeValueRaw;
           console.log(changeKey);
           results[key].changes.push({
             key: changeKey,
@@ -149,13 +141,7 @@ const run = async () => {
       statuses,
       type,
     } of datasets) {
-      const content = await fetchContent(
-        data,
-        namespace,
-        staticId,
-        statuses,
-        type,
-      );
+      const content = await fetchContent(data, namespace, staticId, statuses, type);
       writeModuleFile(file, exportName, content);
     }
   } catch (err) {

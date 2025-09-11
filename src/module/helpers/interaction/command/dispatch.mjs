@@ -23,7 +23,9 @@ const commandList = [
 ];
 const commandMap = {};
 for (const command of commandList) {
-  if (!command || typeof command.execute !== "function") continue;
+  if (!command || typeof command.execute !== "function") {
+    continue;
+  }
 
   commandMap[command.id] = command;
   for (const alias of command.aliases || []) {
@@ -40,18 +42,24 @@ commandMap["help"] = cmd.createHelpCommand(commandMap);
  * @returns {boolean} `false` if a command handled the message, otherwise `true`
  */
 export default function dispatch(message, chatData, sender) {
-  if (!message.startsWith("/")) return true;
+  if (!message.startsWith("/")) {
+    return true;
+  }
 
   const targets = sender?.targets || new Set();
   const actors = Array.from(targets)
     .map((t) => t.actor)
     .filter(Boolean);
 
-  const [rawCommand, ...args] = message.slice(1).trim().split(/\s+/);
+  const [ rawCommand, ...args ] = message.slice(1).trim().split(/\s+/);
   const command = commandMap[rawCommand.toLowerCase()];
 
   if (command) {
-    command.execute({ args, chatData, actors }).catch(console.error);
+    command.execute({
+      args,
+      chatData,
+      actors,
+    }).catch(console.error);
     return false;
   }
 }

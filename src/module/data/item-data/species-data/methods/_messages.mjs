@@ -1,7 +1,5 @@
 import {
-  addAbilitiesBlock,
-  addFluenciesBlock,
-  addResourcesBlock,
+  addAbilitiesBlock, addFluenciesBlock, addResourcesBlock,
 } from "../../../../helpers/messages-builder/message-parts.mjs";
 
 /**
@@ -25,11 +23,7 @@ export function _messageParts(speciesData) {
       label: "Lifespan",
       wrappers: [
         speciesData.adult ? `Adult at ${speciesData.adult} Years` : "",
-        speciesData.adult
-          ? speciesData.lifespan
-            ? `Lives to ${speciesData.lifespan} Years`
-            : "Infinite Lifespan"
-          : "",
+        speciesData.adult ? speciesData.lifespan ? `Lives to ${speciesData.lifespan} Years` : "Infinite Lifespan" : "",
       ],
     },
     {
@@ -37,12 +31,8 @@ export function _messageParts(speciesData) {
       label: "Size",
       wrappers: [
         `Size ${speciesData.size.value}`,
-        speciesData.size.min && speciesData.size.max
-          ? `Size ${speciesData.size.min} Minimum`
-          : "",
-        speciesData.size.min && speciesData.size.max
-          ? `Size ${speciesData.size.max} Maximum`
-          : "",
+        speciesData.size.min && speciesData.size.max ? `Size ${speciesData.size.min} Minimum` : "",
+        speciesData.size.min && speciesData.size.max ? `Size ${speciesData.size.max} Maximum` : "",
       ],
     },
     {
@@ -75,10 +65,7 @@ export function _messageParts(speciesData) {
       text: speciesData.description,
     },
   ];
-  addAbilitiesBlock(
-    speciesData.parent.transferredEffects.filter((e) => !e.sup),
-    blocks,
-  );
+  addAbilitiesBlock(speciesData.parent.transferredEffects.filter((e) => !e.sup), blocks);
   addResourcesBlock(speciesData.parent.transferredEffects, blocks);
   addFluenciesBlock(speciesData.parent.transferredEffects, blocks);
   return {

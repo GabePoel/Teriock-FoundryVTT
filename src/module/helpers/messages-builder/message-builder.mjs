@@ -9,7 +9,13 @@ import { messageBar, messageBlock, messageBox, messageHeader, messageWrapper } f
  * @returns {HTMLDivElement} The complete message element.
  */
 export function buildMessage(messageParts) {
-  const { image, name, bars = [], blocks = [], font } = messageParts;
+  const {
+    image,
+    name,
+    bars = [],
+    blocks = [],
+    font,
+  } = messageParts;
   let fontClass = "tfont";
   if (font) {
     fontClass = "tfont-" + font;
@@ -42,19 +48,18 @@ export function buildMessage(messageParts) {
   blocks
     .filter((block) => block.text !== "")
     .forEach((block) => {
-      messageBlock(
-        blockBox,
-        block.title,
-        block.text,
-        block.italic,
-        block.special,
-        block.elements,
-      );
+      messageBlock(blockBox, block.title, block.text, block.italic, block.special, block.elements);
     });
 
   // Append non-empty sections
-  [headerBox, barBox, blockBox].forEach((box) => {
-    if (box.childNodes.length > 0) message.appendChild(box);
+  [
+    headerBox,
+    barBox,
+    blockBox,
+  ].forEach((box) => {
+    if (box.childNodes.length > 0) {
+      message.appendChild(box);
+    }
   });
 
   return message;
@@ -67,12 +72,12 @@ export function buildMessage(messageParts) {
  * @returns {number} The number of non-empty wrappers in the bar.
  */
 function barLength(bar) {
-  bar.wrappers = bar.wrappers.filter(
-    (wrapper) =>
-      wrapper &&
-      typeof wrapper === "string" &&
-      wrapper.length > 0 &&
-      wrapper !== "0",
-  );
+  bar.wrappers = bar.wrappers.filter((wrapper) => wrapper
+    && typeof wrapper
+    === "string"
+    && wrapper.length
+    > 0
+    && wrapper
+    !== "0");
   return bar.wrappers.length;
 }

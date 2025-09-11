@@ -6,9 +6,7 @@
  * @returns {Array} The populated options array with blocker selection items.
  */
 export function primaryBlockerContextMenu(actor, options) {
-  const equipped = actor.itemTypes.equipment.filter(
-    (i) => i.system.isEquipped && i.system.bv,
-  );
+  const equipped = actor.itemTypes.equipment.filter((i) => i.system.isEquipped && i.system.bv);
   equipped.sort((a, b) => (b.system.bv ?? 0) - (a.system.bv ?? 0));
   const blockerOptions = [];
   for (const item of equipped) {
@@ -37,16 +35,17 @@ export function primaryBlockerContextMenu(actor, options) {
  * @returns {Array} The populated options array with attacker selection items.
  */
 export function primaryAttackContextMenu(actor, options) {
-  const equipped = actor.itemTypes.equipment.filter(
-    (i) => i.system.equipped && i.system.damage && i.system.damage !== "0",
-  );
+  const equipped = actor.itemTypes.equipment.filter((i) => i.system.equipped
+    && i.system.damage
+    && i.system.damage
+    !== "0");
   const attackOptions = [];
   for (const item of equipped) {
     let icon = "";
     if (item.system.damage !== "1") {
-      icon = '<i class="fa-solid fa-sword"></i>';
+      icon = "<i class=\"fa-solid fa-sword\"></i>";
     } else {
-      icon = '<i class="fa-solid fa-staff"></i>';
+      icon = "<i class=\"fa-solid fa-staff\"></i>";
     }
     attackOptions.push({
       name: item.name,
@@ -73,7 +72,7 @@ export function piercingContextMenu(actor) {
   return [
     {
       name: "None",
-      icon: '<i class="fa-solid fa-xmark"></i>',
+      icon: "<i class=\"fa-solid fa-xmark\"></i>",
       callback: async () => {
         await actor.update({
           "system.piercing": "none",
@@ -82,7 +81,7 @@ export function piercingContextMenu(actor) {
     },
     {
       name: "AV0",
-      icon: '<i class="fa-solid fa-a"></i>',
+      icon: "<i class=\"fa-solid fa-a\"></i>",
       callback: async () => {
         await actor.update({
           "system.piercing": "av0",
@@ -91,7 +90,7 @@ export function piercingContextMenu(actor) {
     },
     {
       name: "UB",
-      icon: '<i class="fa-solid fa-u"></i>',
+      icon: "<i class=\"fa-solid fa-u\"></i>",
       callback: async () => {
         await actor.update({
           "system.piercing": "ub",

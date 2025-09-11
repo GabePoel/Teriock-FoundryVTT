@@ -12,21 +12,19 @@ export async function _buildChatMessage(rollConfig) {
   let content = await rollConfig.abilityData.parent.buildMessage();
   const element = document.createElement("div");
   element.innerHTML = content;
-  if (rollConfig.useData.formula)
+  if (rollConfig.useData.formula) {
     rollConfig.chatData.system.extraContent = element.outerHTML;
+  }
   rollConfig.chatData.speaker = TeriockChatMessage.getSpeaker({
     actor: rollConfig.useData.actor,
   });
-  TeriockChatMessage.applyRollMode(
-    rollConfig.chatData,
-    game.settings.get("core", "rollMode"),
-  );
+  TeriockChatMessage.applyRollMode(rollConfig.chatData, game.settings.get("core", "rollMode"));
   for (const roll of rollConfig.chatData.rolls) {
-    if (!roll._evaluated) await roll.evaluate();
+    if (!roll._evaluated) {
+      await roll.evaluate();
+    }
   }
-  rollConfig.chatData.system.overlay = elderSorceryMask(
-    rollConfig.abilityData.parent,
-  )?.outerHTML;
+  rollConfig.chatData.system.overlay = elderSorceryMask(rollConfig.abilityData.parent)?.outerHTML;
   rollConfig.chatData.system.source = rollConfig.abilityData.parent.uuid;
   await TeriockChatMessage.create(rollConfig.chatData);
 }

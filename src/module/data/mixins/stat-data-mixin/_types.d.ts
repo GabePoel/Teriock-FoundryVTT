@@ -10,14 +10,28 @@ export interface StatDataMixinInterface {
   applyHp: boolean;
   /** Add this MP to parent {@link TeriockActor}. */
   applyMp: boolean;
-  /** Base HP dice */
-  hpDiceBase: BaseDice;
-  /** Base MP dice */
-  mpDiceBase: BaseDice;
   /** HP Dice */
   hpDice: Record<Teriock.ID<StatDieModel>, StatDieModel>;
+  /** Base HP dice */
+  hpDiceBase: BaseDice;
   /** MP Dice */
   mpDice: Record<Teriock.ID<StatDieModel>, StatDieModel>;
+  /** Base MP dice */
+  mpDiceBase: BaseDice;
+
+  /**
+   * Set the stat dice.
+   * @param changeData - Data to mutate.
+   * @param stat - The stat type (hp or mp)
+   * @param number - Number of dice
+   * @param faces - Number of faces on each die
+   */
+  _setDice(
+    changeData: object,
+    stat: Teriock.Parameters.Shared.DieStat,
+    number: number,
+    faces: Teriock.RollOptions.PolyhedralDieFaces,
+  ): void;
 
   /**
    * Base HP dice formula.
@@ -80,32 +94,6 @@ export interface StatDataMixinInterface {
   get renderedManaDice(): string;
 
   /**
-   * Total HP provided by all stat dice.
-   * @returns The sum of all HP dice values
-   */
-  get totalHp(): number;
-
-  /**
-   * Total MP provided by all stat dice.
-   * @returns The sum of all MP dice values
-   */
-  get totalMp(): number;
-
-  /**
-   * Set the stat dice.
-   * @param changeData - Data to mutate.
-   * @param stat - The stat type (hp or mp)
-   * @param number - Number of dice
-   * @param faces - Number of faces on each die
-   */
-  _setDice(
-    changeData: object,
-    stat: Teriock.Parameters.Shared.DieStat,
-    number: number,
-    faces: Teriock.RollOptions.PolyhedralDieFaces,
-  ): void;
-
-  /**
    * Set the stat dice.
    * @param stat - The stat type (hp or mp)
    * @param number - Number of dice
@@ -116,4 +104,16 @@ export interface StatDataMixinInterface {
     number: number,
     faces: Teriock.RollOptions.PolyhedralDieFaces,
   ): void;
+
+  /**
+   * Total HP provided by all stat dice.
+   * @returns The sum of all HP dice values
+   */
+  get totalHp(): number;
+
+  /**
+   * Total MP provided by all stat dice.
+   * @returns The sum of all MP dice values
+   */
+  get totalMp(): number;
 }

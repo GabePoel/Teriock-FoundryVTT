@@ -12,9 +12,7 @@ const { fields } = foundry.data;
  * Resource-specific effect data model.
  * @extends {TeriockBaseEffectData}
  */
-export default class TeriockResourceData extends ConsumableDataMixin(
-  TeriockBaseEffectData,
-) {
+export default class TeriockResourceData extends ConsumableDataMixin(TeriockBaseEffectData) {
   /**
    * @inheritDoc
    * @type {Readonly<Teriock.Documents.EffectModelMetadata>}

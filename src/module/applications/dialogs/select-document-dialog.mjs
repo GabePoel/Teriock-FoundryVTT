@@ -8,19 +8,16 @@ import { TeriockDocumentSelector } from "../api/_module.mjs";
  * @returns {Promise<T[]>}
  */
 export async function selectDocumentsDialog(documents, options = {}) {
-  options = foundry.utils.mergeObject(
-    {
-      title: "Select Documents",
-      hint: "",
-      multi: true,
-      tooltip: true,
-      idKey: "uuid",
-      imgKey: "img",
-      nameKey: "name",
-      tooltipKey: null,
-    },
-    options,
-  );
+  options = foundry.utils.mergeObject({
+    title: "Select Documents",
+    hint: "",
+    multi: true,
+    tooltip: true,
+    idKey: "uuid",
+    imgKey: "img",
+    nameKey: "name",
+    tooltipKey: null,
+  }, options);
 
   const idToDoc = new Map();
   const context = {
@@ -37,20 +34,15 @@ export async function selectDocumentsDialog(documents, options = {}) {
       img: foundry.utils.getProperty(doc, options.imgKey),
     };
     if (options.tooltipKey && options.tooltip) {
-      context.documents[id].tooltip = foundry.utils.getProperty(
-        doc,
-        options.tooltipKey,
-      );
+      context.documents[id].tooltip = foundry.utils.getProperty(doc, options.tooltipKey);
     }
   }
 
   if (options.tooltip && !options.tooltipKey) {
-    await Promise.all(
-      documents.map(async (doc) => {
-        const id = foundry.utils.getProperty(doc, options.idKey);
-        context.documents[id].tooltip = await doc.buildMessage?.();
-      }),
-    );
+    await Promise.all(documents.map(async (doc) => {
+      const id = foundry.utils.getProperty(doc, options.idKey);
+      context.documents[id].tooltip = await doc.buildMessage?.();
+    }));
   }
 
   const sheet = new TeriockDocumentSelector(context.documents, {

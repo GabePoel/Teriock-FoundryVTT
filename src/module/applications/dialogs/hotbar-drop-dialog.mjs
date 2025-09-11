@@ -1,3 +1,4 @@
+import { systemPath } from "../../helpers/path.mjs";
 import { TeriockDialog } from "../api/_module.mjs";
 
 const { TextEditor } = foundry.applications.ux;
@@ -14,10 +15,8 @@ export default async function hotbarDropDialog(doc) {
       ability: await TextEditor.enrichHTML(`@UUID[${doc.uuid}]`),
       actor: await TextEditor.enrichHTML(`@UUID[${doc.actor.uuid}]`),
     };
-    const content = await foundry.applications.handlebars.renderTemplate(
-      "systems/teriock/src/templates/dialog-templates/hotbar-drop.hbs",
-      context,
-    );
+    const content = await foundry.applications.handlebars.renderTemplate(systemPath(
+      "templates/dialog-templates/hotbar-drop.hbs"), context);
     macroType = "general";
     macroType = await TeriockDialog.prompt({
       window: { title: `Macro Type Selection` },

@@ -8,17 +8,19 @@ export type SizeAbilityStep = {
 };
 
 declare module "./species-data.mjs" {
-  export default interface TeriockSpeciesData
-    extends TeriockBaseItemData,
-      StatDataMixinInterface {
+  export default interface TeriockSpeciesData extends TeriockBaseItemData, StatDataMixinInterface {
     /** Age of maturity */
     adult: number;
     /** Appearance */
     appearance: string;
     /** Apply this size to parent {@link TeriockActor}. */
     applySize: boolean;
+    /** Attribute increase */
+    attributeIncrease: string;
     /** Battle rating */
     br: number;
+    /** HP increase */
+    hpIncrease: string;
     /** Innate ranks */
     innateRanks: string;
     /** Maximum lifespan */
@@ -32,10 +34,6 @@ declare module "./species-data.mjs" {
       /** Size */
       value: number;
     };
-    /** HP increase */
-    hpIncrease: string;
-    /** Attribute increase */
-    attributeIncrease: string;
     /** Size adjustments */
     sizeStepAbilities: Record<number, SizeAbilityStep>;
     /** Size interval to add another HP die at */

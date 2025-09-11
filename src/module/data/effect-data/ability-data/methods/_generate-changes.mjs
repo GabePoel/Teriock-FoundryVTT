@@ -14,16 +14,10 @@ export function _generateChanges(abilityData) {
   if (abilityData.applies.base.changes.length > 0) {
     changes.push(...abilityData.applies.base.changes);
   }
-  if (
-    abilityData.parent.isProficient &&
-    abilityData.applies.proficient.changes.length > 0
-  ) {
+  if (abilityData.parent.isProficient && abilityData.applies.proficient.changes.length > 0) {
     changes.push(...abilityData.applies.proficient.changes);
   }
-  if (
-    abilityData.parent.isFluent &&
-    abilityData.applies.fluent.changes.length > 0
-  ) {
+  if (abilityData.parent.isFluent && abilityData.applies.fluent.changes.length > 0) {
     changes.push(...abilityData.applies.fluent.changes);
   }
   if (abilityData.improvements.attributeImprovement.attribute) {
@@ -46,9 +40,7 @@ export function _generateChanges(abilityData) {
     };
     changes.push(featSaveImprovementChange);
   }
-  for (const [safeUuid, pseudoHook] of Object.entries(
-    abilityData.applies.macros,
-  )) {
+  for (const [ safeUuid, pseudoHook ] of Object.entries(abilityData.applies.macros)) {
     const change = {
       key: `system.hookedMacros.${pseudoHook}`,
       value: pureUuid(safeUuid),

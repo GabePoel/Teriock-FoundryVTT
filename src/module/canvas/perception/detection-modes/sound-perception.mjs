@@ -17,12 +17,20 @@ export default class DetectionModeSoundPerception extends BaseDetectionMode {
     "deaf",
     "ethereal",
   ];
-  static BLOCKING_TGT_STATUS_EFFECTS = ["silent", "ethereal"];
+  static BLOCKING_TGT_STATUS_EFFECTS = [
+    "silent",
+    "ethereal",
+  ];
 
   /** @inheritDoc */
   static getDetectionFilter() {
     return (this._detectionFilter ??= OutlineOverlayFilter.create({
-      outlineColor: [0.5, 0.5, 0, 1],
+      outlineColor: [
+        0.5,
+        0.5,
+        0,
+        1,
+      ],
       knockout: true,
       wave: true,
     }));

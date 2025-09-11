@@ -9,13 +9,7 @@
  *   strings, etc.)
  * @returns {any}
  */
-function deriveEquipmentDataValue(
-  equipmentData,
-  dataKey,
-  getInitialValue,
-  combineValues,
-  applyUpgrade,
-) {
+function deriveEquipmentDataValue(equipmentData, dataKey, getInitialValue, combineValues, applyUpgrade) {
   let value = getInitialValue(equipmentData);
   let actor = /** @type {TeriockActor|null} */ equipmentData.actor;
 
@@ -38,8 +32,7 @@ function deriveEquipmentDataValue(
       }
     }
 
-    const typeOverride =
-      overrides.types[equipmentData.equipmentType]?.[dataKey];
+    const typeOverride = overrides.types[equipmentData.equipmentType]?.[dataKey];
     if (typeOverride !== undefined) {
       value = combineValues(value, typeOverride);
     }
@@ -63,16 +56,14 @@ function deriveEquipmentDataValue(
         }
       }
 
-      for (const propertyKey of equipmentData.parent.effectKeys.property ||
-        []) {
+      for (const propertyKey of equipmentData.parent.effectKeys.property || []) {
         const propertyUpgrade = upgrades.properties[propertyKey]?.[dataKey];
         if (propertyUpgrade !== undefined) {
           value = combineValues(value, propertyUpgrade);
         }
       }
 
-      const typeUpgrade =
-        upgrades.types[equipmentData.equipmentType]?.[dataKey];
+      const typeUpgrade = upgrades.types[equipmentData.equipmentType]?.[dataKey];
       if (typeUpgrade !== undefined) {
         value = applyUpgrade(value, typeUpgrade);
       }
@@ -100,7 +91,9 @@ function deriveEquipmentDataValue(
  * @returns {string}
  */
 function formatStringUpgrade(current, upgrade) {
-  if (!upgrade) return current;
+  if (!upgrade) {
+    return current;
+  }
 
   if (upgrade.startsWith("-")) {
     return `${current} - ${upgrade.slice(1)}`;
@@ -120,15 +113,13 @@ function formatStringUpgrade(current, upgrade) {
  * @returns {boolean}
  */
 export function _derivedAv0(equipmentData) {
-  return (
-    deriveEquipmentDataValue(
-      equipmentData,
-      "av0",
-      (data) => data.parent.effectKeys.property.has("av0"),
-      (current, override) => override || current,
-      null,
-    ) || _derivedUb(equipmentData)
-  );
+  return (deriveEquipmentDataValue(
+    equipmentData,
+    "av0",
+    (data) => data.parent.effectKeys.property.has("av0"),
+    (current, override) => override || current,
+    null,
+  ) || _derivedUb(equipmentData));
 }
 
 /**
@@ -141,9 +132,7 @@ export function _derivedWarded(equipmentData) {
   return deriveEquipmentDataValue(
     equipmentData,
     "ub",
-    (data) =>
-      data.parent.effectKeys.property.has("warded") ||
-      data.parent.effectKeys.property.has("passivelyWarded"),
+    (data) => data.parent.effectKeys.property.has("warded") || data.parent.effectKeys.property.has("passivelyWarded"),
     (current, override) => override || current,
     null,
   );
@@ -207,12 +196,9 @@ export function _derivedDamage(equipmentData) {
   return deriveEquipmentDataValue(
     equipmentData,
     "damage",
-    (data) =>
-      data.damage +
-      (equipmentData?.actor?.system.damage.standard ||
-      ("" && data.damage && data.damage !== "0")
-        ? " " + (equipmentData?.actor?.system.damage.standard || "")
-        : ""),
+    (data) => data.damage + (equipmentData?.actor?.system.damage.standard || ("" && data.damage && data.damage !== "0")
+      ? " " + (equipmentData?.actor?.system.damage.standard || "")
+      : ""),
     (current, override) => override || current,
     (current, upgrade) => formatStringUpgrade(current, upgrade),
   );
@@ -228,12 +214,8 @@ export function _derivedTwoHandedDamage(equipmentData) {
   return deriveEquipmentDataValue(
     equipmentData,
     "twoHandedDamage",
-    (data) =>
-      (data.twoHandedDamage && data.twoHandedDamage !== "0"
-        ? data.twoHandedDamage
-        : data.damage) +
-      ((equipmentData?.actor?.system.damage.standard || "") &&
-      (data.damage !== "0" || data.twoHandedDamage !== "0")
+    (data) => (data.twoHandedDamage && data.twoHandedDamage !== "0" ? data.twoHandedDamage : data.damage)
+      + ((equipmentData?.actor?.system.damage.standard || "") && (data.damage !== "0" || data.twoHandedDamage !== "0")
         ? " " + (equipmentData?.actor?.system.damage.standard || "")
         : ""),
     (current, override) => override || current,

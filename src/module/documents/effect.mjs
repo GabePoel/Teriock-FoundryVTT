@@ -19,9 +19,7 @@ const { ActiveEffect } = foundry.documents;
  * @property {boolean} isOwner
  * @property {boolean} limited
  */
-export default class TeriockEffect extends ChildDocumentMixin(
-  CommonDocumentMixin(ActiveEffect),
-) {
+export default class TeriockEffect extends ChildDocumentMixin(CommonDocumentMixin(ActiveEffect)) {
   /**
    * Change the IDs for many client effects consistently.
    * @param {TeriockEffect[]} effects - Client documents.
@@ -42,8 +40,7 @@ export default class TeriockEffect extends ChildDocumentMixin(
       }
       if (oldEffect.metadata.hierarchy) {
         if (oldIds.includes(oldEffect.system.hierarchy.supId)) {
-          updateData["system.hierarchy.supId"] =
-            idMap[oldEffect.system.hierarchy.supId];
+          updateData["system.hierarchy.supId"] = idMap[oldEffect.system.hierarchy.supId];
         }
         const newSubIds = new Set();
         for (const oldId of oldEffect.system.hierarchy.subIds) {
@@ -86,15 +83,9 @@ export default class TeriockEffect extends ChildDocumentMixin(
             idMap[id] = foundry.utils.randomID();
           }
           idMap[oldSupId] = newSupId;
-          const newSubs = this._changeEffectIds(
-            subEffects,
-            idMap,
-            operation.parent.uuid,
-          );
+          const newSubs = this._changeEffectIds(subEffects, idMap, operation.parent.uuid);
           supEffect.updateSource({
-            "system.hierarchy.subIds": supEffect.rootSubIds.map(
-              (oldId) => idMap[oldId],
-            ),
+            "system.hierarchy.subIds": supEffect.rootSubIds.map((oldId) => idMap[oldId]),
           });
           toCreate.push(...newSubs);
         }
@@ -187,10 +178,7 @@ export default class TeriockEffect extends ChildDocumentMixin(
    * @returns {boolean}
    */
   get isOnUse() {
-    return (
-      this.parent.documentName === "Item" &&
-      this.parent.system.onUse.has(this.id)
-    );
+    return (this.parent.documentName === "Item" && this.parent.system.onUse.has(this.id));
   }
 
   /**
@@ -199,7 +187,9 @@ export default class TeriockEffect extends ChildDocumentMixin(
    */
   get isReference() {
     const sups = this.allSups;
-    if (this.isOnUse) return true;
+    if (this.isOnUse) {
+      return true;
+    }
     for (const sup of sups) {
       if (sup.system.maneuver !== "passive") {
         return true;
@@ -219,8 +209,7 @@ export default class TeriockEffect extends ChildDocumentMixin(
    * @returns {Readonly<Teriock.Documents.EffectModelMetadata>}
    */
   get metadata() {
-    return /** @type {Readonly<Teriock.Documents.EffectModelMetadata>} */ super
-      .metadata;
+    return /** @type {Readonly<Teriock.Documents.EffectModelMetadata>} */ super.metadata;
   }
 
   /**
@@ -229,9 +218,7 @@ export default class TeriockEffect extends ChildDocumentMixin(
    */
   get remaining() {
     if (this.hasDuration) {
-      return (
-        this.duration.startTime + this.duration.seconds - game.time.worldTime
-      );
+      return (this.duration.startTime + this.duration.seconds - game.time.worldTime);
     }
     return null;
   }
@@ -333,10 +320,7 @@ export default class TeriockEffect extends ChildDocumentMixin(
    */
   get sup() {
     if (this.supId) {
-      return /** @type {TeriockEffect} */ this.parent.getEmbeddedDocument(
-        "ActiveEffect",
-        this.supId,
-      );
+      return /** @type {TeriockEffect} */ this.parent.getEmbeddedDocument("ActiveEffect", this.supId);
     }
     return null;
   }
@@ -346,11 +330,9 @@ export default class TeriockEffect extends ChildDocumentMixin(
    * @returns {Teriock.ID<TeriockEffect>}
    */
   get supId() {
-    if (
-      this.metadata.hierarchy &&
-      this.system.hierarchy.supId &&
-      this.parent.effects.has(this.system.hierarchy.supId)
-    ) {
+    if (this.metadata.hierarchy
+      && this.system.hierarchy.supId
+      && this.parent.effects.has(this.system.hierarchy.supId)) {
       return this.system.hierarchy.supId;
     }
     return null;
@@ -358,20 +340,19 @@ export default class TeriockEffect extends ChildDocumentMixin(
 
   /** @inheritDoc */
   async _preUpdate(changed, options, user) {
-    if ((await super._preUpdate(changed, options, user)) === false)
+    if ((await super._preUpdate(changed, options, user)) === false) {
       return false;
-    if (
-      this.parent.type === "wrapper" &&
-      this.parent.system.effect.id === this.id
-    ) {
-      const wrapperKeys = ["name", "img"];
+    }
+    if (this.parent.type === "wrapper" && this.parent.system.effect.id === this.id) {
+      const wrapperKeys = [
+        "name",
+        "img",
+      ];
       const wrapperUpdates = {};
       for (const key of wrapperKeys) {
-        if (
-          foundry.utils.hasProperty(changed, key) &&
-          foundry.utils.getProperty(changed, key) !==
-          foundry.utils.getProperty(this.parent, key)
-        ) {
+        if (foundry.utils.hasProperty(changed, key)
+          && foundry.utils.getProperty(changed, key)
+          !== foundry.utils.getProperty(this.parent, key)) {
           wrapperUpdates[key] = foundry.utils.getProperty(changed, key);
         }
       }
@@ -409,10 +390,7 @@ export default class TeriockEffect extends ChildDocumentMixin(
    */
   async deleteSubs() {
     if (this.subIds.size > 0) {
-      await this.parent?.deleteEmbeddedDocuments(
-        "ActiveEffect",
-        Array.from(this.subIds),
-      );
+      await this.parent?.deleteEmbeddedDocuments("ActiveEffect", Array.from(this.subIds));
       await this.update({
         "system.hierarchy.subIds": new Set(),
       });

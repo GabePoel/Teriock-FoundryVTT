@@ -8,36 +8,35 @@
 export default async function _embeddedFromCard(sheet, target) {
   /** @type {HTMLElement} */
   const card = target.closest(".tcard");
-  const { id, type, parentId /** uuid */ } = card?.dataset ?? {};
-
+  const {
+    id,
+    type,
+    parentId, /** uuid */
+  } = card?.dataset ?? {};
   if (type === "noneMacro") {
     foundry.ui.notifications.warn("Drag a macro onto sheet to assign it.", {
       console: false,
     });
-  }
-
-  if (type === "macro") return foundry.utils.fromUuid(id);
-
-  if (type === "item") return sheet.document?.items.get(id);
-
-  if (["effect", "conditionUnlocked"].includes(type)) {
+  } else if (type === "macro") {
+    return foundry.utils.fromUuid(id);
+  } else if (type === "item") {
+    return sheet.document?.items.get(id);
+  } else if ([
+    "effect",
+    "conditionUnlocked",
+  ].includes(type)) {
     // TODO: Uncomment when virtual abilities are implemented
     // if (uuid) {
     //   return await foundry.utils.fromUuid(uuid);
     // }
-    if (
-      sheet.document.documentName === "Actor" &&
-      sheet.document._id !== parentId
-    ) {
+    if (sheet.document.documentName === "Actor" && sheet.document._id !== parentId) {
       return sheet.document?.items.get(parentId)?.effects.get(id);
     }
     if (sheet.document.documentName === "ActiveEffect") {
       return sheet.document.parent?.effects.get(id);
     }
     return sheet.document?.effects.get(id);
-  }
-
-  if (type === "conditionLocked") {
+  } else if (type === "conditionLocked") {
     return TERIOCK.content.conditionsData[id];
   }
 }

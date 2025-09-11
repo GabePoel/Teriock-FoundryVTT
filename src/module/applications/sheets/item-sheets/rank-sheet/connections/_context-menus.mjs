@@ -35,7 +35,10 @@ export function archetypeContextMenu(rank) {
       icon: icon,
       callback: async () => {
         await rank.update({
-          system: { archetype: archetype, className: firstClass },
+          system: {
+            archetype: archetype,
+            className: firstClass,
+          },
           [`${hpDiePath}.faces`]: hpFaces,
           [`${hpDiePath}.value`]: Math.ceil((hpFaces + 1) / 2),
           [`${mpDiePath}.faces`]: mpFaces,
@@ -75,9 +78,7 @@ export function classContextMenu(rank) {
           });
         },
         condition: () => {
-          return (
-            foundry.utils.getProperty(rank.system, "archetype") === archetype
-          );
+          return (foundry.utils.getProperty(rank.system, "archetype") === archetype);
         },
       };
       options.push(option);
@@ -114,7 +115,7 @@ export function rankContextMenu(rank) {
 function dieContextMenu(rank, stat = "hp") {
   const iconStyle = TERIOCK.display.iconStyles.contextMenu;
   const out = [];
-  for (const [key, value] of Object.entries(dieOptions.faces)) {
+  for (const [ key, value ] of Object.entries(dieOptions.faces)) {
     out.push({
       name: `${value} ${toTitleCase(dieOptions.stats[stat])} Die`,
       icon: makeIcon(getRollIcon(value), iconStyle),

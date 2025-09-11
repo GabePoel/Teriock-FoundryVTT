@@ -22,12 +22,9 @@ export function _prepareEncumbrance(actorData) {
   if (actorData.weightCarried >= actorData.carryingCapacity.max) {
     encumbranceLevel = 3;
   }
-  const hasCumbersome = actor.itemTypes.equipment.some(
-    (item) =>
-      item.system.equipped &&
-      Array.isArray(item.system.properties) &&
-      item.system.properties.includes("cumbersome"),
-  );
+  const hasCumbersome = actor.itemTypes.equipment.some((item) => item.system.equipped
+    && Array.isArray(item.system.properties)
+    && item.system.properties.includes("cumbersome"));
   if (hasCumbersome) {
     encumbranceLevel += 1;
   }

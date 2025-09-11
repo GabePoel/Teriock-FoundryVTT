@@ -37,7 +37,7 @@ async function use(fluencyData, options) {
   await roll.evaluate();
   TeriockChatMessage.create({
     speaker: TeriockChatMessage.getSpeaker({ actor: fluencyData.actor }),
-    rolls: [roll],
+    rolls: [ roll ],
     system: {
       extraContent: message,
     },

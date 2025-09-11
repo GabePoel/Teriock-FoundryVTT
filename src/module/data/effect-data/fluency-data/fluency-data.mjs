@@ -17,9 +17,7 @@ const { fields } = foundry.data;
  * @extends {TeriockBaseEffectData}
  * @mixes WikiDataMixin
  */
-export default class TeriockFluencyData extends WikiDataMixin(
-  TeriockBaseEffectData,
-) {
+export default class TeriockFluencyData extends WikiDataMixin(TeriockBaseEffectData) {
   /**
    * @inheritDoc
    * @type {Readonly<Teriock.Documents.EffectModelMetadata>}
@@ -83,21 +81,18 @@ export default class TeriockFluencyData extends WikiDataMixin(
 
   /** @inheritDoc */
   async _preUpdate(changes, options, user) {
-    if ((await super._preUpdate(changes, options, user)) === false)
+    if ((await super._preUpdate(changes, options, user)) === false) {
       return false;
-    if (
-      Object.values(iconManifest.tradecrafts).includes(this.parent.img) &&
-      !foundry.utils.hasProperty(changes, "img")
-    ) {
+    }
+    if (Object.values(iconManifest.tradecrafts).includes(this.parent.img) && !foundry.utils.hasProperty(
+      changes,
+      "img",
+    )) {
       let tradecraft = this.tradecraft;
       if (foundry.utils.hasProperty(changes, "system.tradecraft")) {
         tradecraft = foundry.utils.getProperty(changes, "system.tradecraft");
       }
-      foundry.utils.setProperty(
-        changes,
-        "img",
-        getIcon("tradecrafts", TERIOCK.index.tradecrafts[tradecraft]),
-      );
+      foundry.utils.setProperty(changes, "img", getIcon("tradecrafts", TERIOCK.index.tradecrafts[tradecraft]));
     }
   }
 

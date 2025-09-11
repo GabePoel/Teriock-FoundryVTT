@@ -50,9 +50,7 @@ declare global {
     /**
      * Function signature for command callbacks
      */
-    export type Callback = (
-      context: Teriock.Command.CallbackContext,
-    ) => Promise<void>;
+    export type Callback = (context: Teriock.Command.CallbackContext) => Promise<void>;
 
     /**
      * Valid command categories.
@@ -75,11 +73,11 @@ declare global {
 
 declare module "./command.mjs" {
   export default interface TeriockCommand {
-    id: string;
-    docs: string;
-    callback: Teriock.Command.Callback;
     aliases: string[];
+    callback: Teriock.Command.Callback;
     category: string;
+    docs: string;
+    id: string;
     requiresTarget: boolean;
   }
 }

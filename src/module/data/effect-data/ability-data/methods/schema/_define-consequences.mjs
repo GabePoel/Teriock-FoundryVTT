@@ -1,14 +1,7 @@
 import { pseudoHooks } from "../../../../../constants/system/pseudo-hooks.mjs";
+import { FormulaField, ListField, RecordField } from "../../../../shared/fields/_module.mjs";
 import {
-  FormulaField,
-  ListField,
-  RecordField,
-} from "../../../../shared/fields/_module.mjs";
-import {
-  changeField,
-  combatExpirationMethodField,
-  combatExpirationSourceTypeField,
-  combatExpirationTimingField,
+  changeField, combatExpirationMethodField, combatExpirationSourceTypeField, combatExpirationTimingField,
 } from "../../../shared/shared-fields.mjs";
 
 const { fields } = foundry.data;
@@ -34,14 +27,13 @@ const { fields } = foundry.data;
  * const rollsField = consequenceRollsField();
  */
 export function consequenceRollsField() {
-  return new RecordField(
-    new FormulaField({ nullable: true, deterministic: false }),
-    {
-      label: "Rolls",
-      hint: "The rolls that are made as part of the consequence.",
-    },
-    undefined,
-  );
+  return new RecordField(new FormulaField({
+    nullable: true,
+    deterministic: false,
+  }), {
+    label: "Rolls",
+    hint: "The rolls that are made as part of the consequence.",
+  }, undefined);
 }
 
 /**
@@ -97,75 +89,57 @@ function abilityExpirationField() {
  */
 function consequenceField() {
   return new fields.SchemaField({
-    statuses: new fields.SetField(
-      new fields.StringField({
-        choices: TERIOCK.index.conditions,
-      }),
-      {
-        label: "Conditions",
-        hint: "Conditions applied as part of the ability's ongoing effect. These are not applied as separate conditions, but merged into an ongoing effect.",
-      },
-    ),
-    startStatuses: new fields.SetField(
-      new fields.StringField({
-        choices: TERIOCK.index.conditions,
-      }),
-      {
-        label: "Apply Conditions",
-        hint: "Conditions that may be immediately applied when the ability is used. They exist independently of the ability.",
-      },
-    ),
-    endStatuses: new fields.SetField(
-      new fields.StringField({
-        choices: TERIOCK.index.conditions,
-      }),
-      {
-        label: "Remove Conditions",
-        hint: "Conditions that may be immediately removed when the ability is used This only works on conditions that exist independently of the ability.",
-      },
-    ),
+    statuses: new fields.SetField(new fields.StringField({
+      choices: TERIOCK.index.conditions,
+    }), {
+      label: "Conditions",
+      hint: "Conditions applied as part of the ability's ongoing effect. These are not applied as separate conditions, but merged into an ongoing effect.",
+    }),
+    startStatuses: new fields.SetField(new fields.StringField({
+      choices: TERIOCK.index.conditions,
+    }), {
+      label: "Apply Conditions",
+      hint: "Conditions that may be immediately applied when the ability is used. They exist independently of the ability.",
+    }),
+    endStatuses: new fields.SetField(new fields.StringField({
+      choices: TERIOCK.index.conditions,
+    }), {
+      label: "Remove Conditions",
+      hint: "Conditions that may be immediately removed when the ability is used This only works on conditions that exist independently of the ability.",
+    }),
     rolls: consequenceRollsField(),
-    hacks: new fields.SetField(
-      new fields.StringField({
-        choices: {
-          arm: "Arm",
-          leg: "Leg",
-          body: "Body",
-          eye: "Eye",
-          ear: "Ear",
-          mouth: "Mouth",
-          nose: "Nose",
-        },
-      }),
-      {
-        label: "Hacks",
-        hint: "Types of hack damage that may be applied by the ability.",
+    hacks: new fields.SetField(new fields.StringField({
+      choices: {
+        arm: "Arm",
+        leg: "Leg",
+        body: "Body",
+        eye: "Eye",
+        ear: "Ear",
+        mouth: "Mouth",
+        nose: "Nose",
       },
-    ),
-    checks: new fields.SetField(
-      new fields.StringField({
-        choices: TERIOCK.index.tradecrafts,
-      }),
-      {
-        label: "Tradecraft Checks",
-        hint: "Tradecraft checks that may be made as part of the ability.",
-      },
-    ),
+    }), {
+      label: "Hacks",
+      hint: "Types of hack damage that may be applied by the ability.",
+    }),
+    checks: new fields.SetField(new fields.StringField({
+      choices: TERIOCK.index.tradecrafts,
+    }), {
+      label: "Tradecraft Checks",
+      hint: "Tradecraft checks that may be made as part of the ability.",
+    }),
     duration: new fields.NumberField({
       hint: "Increase in the duration (in seconds) of an effect made as part of the ability. If this is nonzero, it overrides the default duration.",
       initial: 0,
       label: "Duration",
     }),
     changes: consequenceChangesField(),
-    common: new fields.SetField(
-      new fields.StringField({
-        choices: TERIOCK.options.consequence.common,
-      }),
-      {
-        label: "Common Consequences",
-        hint: "Common consequences shared by lots of abilities.",
-      },
-    ),
+    common: new fields.SetField(new fields.StringField({
+      choices: TERIOCK.options.consequence.common,
+    }), {
+      label: "Common Consequences",
+      hint: "Common consequences shared by lots of abilities.",
+    }),
     expiration: new fields.SchemaField({
       normal: abilityExpirationField(),
       crit: abilityExpirationField(),
@@ -210,14 +184,10 @@ export function _defineConsequences(schema) {
     proficient: consequenceField(),
     fluent: consequenceField(),
     heightened: consequenceField(),
-    macros: new fields.TypedObjectField(
-      new fields.StringField({
-        choices: pseudoHooks,
-      }),
-    ),
+    macros: new fields.TypedObjectField(new fields.StringField({
+      choices: pseudoHooks,
+    })),
   });
-  schema.sustaining = new fields.SetField(
-    new fields.DocumentUUIDField({ type: "ActiveEffect" }),
-  );
+  schema.sustaining = new fields.SetField(new fields.DocumentUUIDField({ type: "ActiveEffect" }));
   return schema;
 }

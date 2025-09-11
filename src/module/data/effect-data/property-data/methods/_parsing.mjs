@@ -21,9 +21,8 @@ export async function _parse(propertyData, rawHTML) {
   // await propertyData.parent.deleteSubs();
 
   // Get new subs
-  const subs = Array.from(
-    doc.querySelectorAll(".ability-sub-container"),
-  ).filter((el) => !el.closest(".ability-sub-container:not(:scope)"));
+  const subs = Array.from(doc.querySelectorAll(".ability-sub-container"))
+    .filter((el) => !el.closest(".ability-sub-container:not(:scope)"));
 
   // Remove sub-containers and process dice
   cleanHTMLDoc(doc);
@@ -73,7 +72,11 @@ export async function _parse(propertyData, rawHTML) {
   parameters.system.changes = extractChangesFromHTML(rawHTML);
   parameters.system.modifiesActor = extractDocument(doc);
   parameters.img = getIcon("properties", propertyData.parent.name);
-  const toClean = ["description", "limitation", "improvement"];
+  const toClean = [
+    "description",
+    "limitation",
+    "improvement",
+  ];
   cleanObject(parameters.system, toClean);
   return parameters;
 }
@@ -83,13 +86,13 @@ export async function _parse(propertyData, rawHTML) {
  * @returns {boolean} True if the target document is `Actor`.
  */
 function extractDocument(doc) {
-  const documentMetadata =
-    /** @type {HTMLSpanElement|undefined} */ doc.querySelector(
-    "span.metadata[data-type='document']",
-  );
+  const documentMetadata = /** @type {HTMLSpanElement|undefined} */ doc.querySelector(
+    "span.metadata[data-type='document']");
   if (documentMetadata) {
     const targetDocument = documentMetadata.dataset.document;
-    if (targetDocument === "actor") return true;
+    if (targetDocument === "actor") {
+      return true;
+    }
   }
   return false;
 }
@@ -99,10 +102,8 @@ function extractDocument(doc) {
  * @returns {string|null} Damage type.
  */
 function extractDamageType(doc) {
-  const documentMetadata =
-    /** @type {HTMLSpanElement|undefined} */ doc.querySelector(
-    "span.metadata[data-type='damage-type']",
-  );
+  const documentMetadata = /** @type {HTMLSpanElement|undefined} */ doc.querySelector(
+    "span.metadata[data-type='damage-type']");
   if (documentMetadata) {
     return documentMetadata.dataset.value || "";
   }

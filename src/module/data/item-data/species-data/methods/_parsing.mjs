@@ -21,9 +21,8 @@ export async function _parse(speciesData, rawHTML) {
     .querySelectorAll(".ability-bar-familiar-abilities")
     .forEach((el) => el.remove());
 
-  const subs = Array.from(doc.querySelectorAll(".expandable-container")).filter(
-    (el) => !el.closest(".expandable-container:not(:scope)"),
-  );
+  const subs = Array.from(doc.querySelectorAll(".expandable-container"))
+    .filter((el) => !el.closest(".expandable-container:not(:scope)"));
   await processSubAbilities(subs, speciesData.parent);
 
   // Remove sub-containers and process dice
@@ -37,17 +36,15 @@ export async function _parse(speciesData, rawHTML) {
 
   doc
     .querySelectorAll("span.metadata[data-type='size-attribute-increase']")
-    .forEach(
-      /** @param {HTMLSpanElement} el */ (el) => {
-        const gainAbilities = new Set([el.dataset.gain]);
-        const loseAbilities = new Set([el.dataset.lose]);
-        const size = Number(el.dataset.size);
-        parameters.sizeStepAbilities[size] = {
-          gain: gainAbilities,
-          lose: loseAbilities,
-        };
-      },
-    );
+    .forEach(/** @param {HTMLSpanElement} el */(el) => {
+      const gainAbilities = new Set([ el.dataset.gain ]);
+      const loseAbilities = new Set([ el.dataset.lose ]);
+      const size = Number(el.dataset.size);
+      parameters.sizeStepAbilities[size] = {
+        gain: gainAbilities,
+        lose: loseAbilities,
+      };
+    });
 
   const tagTree = buildTagTree(doc);
   console.log(tagTree);
@@ -71,20 +68,12 @@ export async function _parse(speciesData, rawHTML) {
       faces: faces,
     };
   }
-  await speciesData.setDice(
-    "hp",
-    parameters.hpDiceBase.number,
-    parameters.hpDiceBase.faces,
-  );
-  await speciesData.setDice(
-    "mp",
-    parameters.mpDiceBase.number,
-    parameters.mpDiceBase.faces,
-  );
-  if (tagTree["traits"]) parameters.traits = tagTree["traits"];
-  parameters.traits = parameters.traits.filter((t) =>
-    Object.keys(TERIOCK.index.traits).includes(t),
-  );
+  await speciesData.setDice("hp", parameters.hpDiceBase.number, parameters.hpDiceBase.faces);
+  await speciesData.setDice("mp", parameters.mpDiceBase.number, parameters.mpDiceBase.faces);
+  if (tagTree["traits"]) {
+    parameters.traits = tagTree["traits"];
+  }
+  parameters.traits = parameters.traits.filter((t) => Object.keys(TERIOCK.index.traits).includes(t));
   parameters.appearance = getBarText(doc, "looks");
   parameters.description = getText(doc, "creature-description");
   parameters.hpIncrease = getBarText(doc, "hp-increase");
@@ -116,25 +105,23 @@ export async function _parse(speciesData, rawHTML) {
   parameters.br = Number(tagTree["br"][0].split("br")[1]);
   const lifespanText = getBarText(doc, "lifespan");
   if (lifespanText) {
-    parameters.adult = Number(
-      lifespanText.split("Adult at age ")[1].split(".")[0],
-    );
+    parameters.adult = Number(lifespanText.split("Adult at age ")[1].split(".")[0]);
     if (!lifespanText.includes("Infinite")) {
       parameters.lifespan = Number(lifespanText.split(" years")[0]);
     }
   }
   const sizeStepHpText = getBarText(doc, "hp-increase");
   if (sizeStepHpText) {
-    parameters.sizeStepHp = Number(
-      sizeStepHpText.split("every ")[1].split(" additional")[0],
-    );
-  } else parameters.sizeStepHp = null;
+    parameters.sizeStepHp = Number(sizeStepHpText.split("every ")[1].split(" additional")[0]);
+  } else {
+    parameters.sizeStepHp = null;
+  }
   const sizeStepMpText = getBarText(doc, "mp-increase");
   if (sizeStepMpText) {
-    parameters.sizeStepMpText = Number(
-      sizeStepMpText.split("every ")[1].split(" additional")[0],
-    );
-  } else parameters.sizeStepMp = null;
+    parameters.sizeStepMpText = Number(sizeStepMpText.split("every ")[1].split(" additional")[0]);
+  } else {
+    parameters.sizeStepMp = null;
+  }
   cleanObject(parameters, [
     "appearance",
     "attributeIncrease",

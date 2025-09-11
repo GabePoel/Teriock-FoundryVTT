@@ -6,20 +6,19 @@ declare module "./base-effect-data.mjs" {
   export default interface TeriockBaseEffectData extends ChildTypeModel {
     /** If this effect should be deleted instead of disabled when it expires */
     deleteOnExpire: boolean;
-    /** Update counter - used to force an update when adding/removing effects */
-    updateCounter: boolean;
     /** Suppression */
     suppression: {
       statuses: {
         active: Set<Teriock.Parameters.Condition.ConditionKey>;
         inactive: Set<Teriock.Parameters.Condition.ConditionKey>;
-      };
-      // Deprecated?
+      }; // Deprecated?
       comparisons: {
         actor: Teriock.Parameters.Shared.Comparator[];
         item: Teriock.Parameters.Shared.Comparator[];
       };
     };
+    /** Update counter - used to force an update when adding/removing effects */
+    updateCounter: boolean;
 
     /** Parent effect */
     get parent(): TeriockEffect;

@@ -4,14 +4,7 @@ import type { unsortedPseudoHooks } from "../../../constants/system/pseudo-hooks
 declare global {
   namespace Teriock.Parameters.Actor {
     /** Valid hackable body parts */
-    export type HackableBodyPart =
-      | "arm"
-      | "leg"
-      | "body"
-      | "ear"
-      | "eye"
-      | "mouth"
-      | "nose";
+    export type HackableBodyPart = | "arm" | "leg" | "body" | "ear" | "eye" | "mouth" | "nose";
 
     /** Valid stat attributes */
     export type StatAttribute = keyof typeof abilityOptions.attribute;

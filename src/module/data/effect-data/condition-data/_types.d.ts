@@ -6,7 +6,9 @@ declare module "./condition-data.mjs" {
   export default interface TeriockConditionData extends TeriockBaseEffectData {
     /** Expirations */
     expirations: {
-      combat: { what: CombatExpirationMethod };
+      combat: {
+        what: CombatExpirationMethod
+      };
       description?: string;
     };
 

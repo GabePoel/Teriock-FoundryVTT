@@ -6,7 +6,9 @@ export default function registerChatManagementHooks() {
   foundry.helpers.Hooks.on("chatMessage", (_chatLog, message, chatData) => {
     const users = /** @type {WorldCollection<TeriockUser>} */ game.users;
     const sender = users.get(chatData.user);
-    if (message.startsWith("/")) return dispatch(message, chatData, sender);
+    if (message.startsWith("/")) {
+      return dispatch(message, chatData, sender);
+    }
   });
 
   foundry.helpers.Hooks.on("renderChatMessageHTML", (_message, html) => {
@@ -26,19 +28,17 @@ export default function registerChatManagementHooks() {
 
     // Open tags
     /** TODO: Move to {@link TeriockBaseMessageData} */
-    addClickHandler(
-      html.querySelectorAll('[data-action="open"]'),
-      async (event) => {
-        event.preventDefault();
-        const uuid = event.currentTarget.getAttribute("data-uuid");
-        if (!uuid) return;
-        const doc =
-          /** @type{ClientDocument} */ await foundry.utils.fromUuid(uuid);
-        if (doc && typeof doc.sheet?.render === "function") {
-          await doc.sheet.render(true);
-        }
-      },
-    );
+    addClickHandler(html.querySelectorAll("[data-action=\"open\"]"), async (event) => {
+      event.preventDefault();
+      const uuid = event.currentTarget.getAttribute("data-uuid");
+      if (!uuid) {
+        return;
+      }
+      const doc = /** @type{ClientDocument} */ await foundry.utils.fromUuid(uuid);
+      if (doc && typeof doc.sheet?.render === "function") {
+        await doc.sheet.render(true);
+      }
+    });
 
     /** TODO: Move to {@link TeriockBaseMessageData} */
     html.querySelectorAll(".teriock-target-container").forEach((container) => {
@@ -48,7 +48,9 @@ export default function registerChatManagementHooks() {
         event.stopPropagation();
         /** @type {Teriock.UUID<TeriockTokenDocument>} */
         const uuid = container.getAttribute("data-uuid");
-        if (!uuid) return;
+        if (!uuid) {
+          return;
+        }
 
         if (clickTimeout) {
           clearTimeout(clickTimeout);
@@ -73,7 +75,9 @@ export default function registerChatManagementHooks() {
         event.stopPropagation();
         /** @type {Teriock.UUID<TeriockActor>} */
         const uuid = container.getAttribute("data-uuid");
-        if (!uuid) return;
+        if (!uuid) {
+          return;
+        }
 
         if (clickTimeout) {
           clearTimeout(clickTimeout);
@@ -81,12 +85,7 @@ export default function registerChatManagementHooks() {
         }
 
         const doc = await foundry.utils.fromUuid(uuid);
-        if (
-          doc &&
-          doc.sheet &&
-          doc.isOwner &&
-          typeof doc.sheet.render === "function"
-        ) {
+        if (doc && doc.sheet && doc.isOwner && typeof doc.sheet.render === "function") {
           await doc.sheet.render(true);
         }
       });

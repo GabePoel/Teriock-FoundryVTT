@@ -1,10 +1,6 @@
 import { mergeFreeze } from "../../../helpers/utils.mjs";
 import { HierarchyDataMixin, WikiDataMixin } from "../../mixins/_module.mjs";
-import {
-  FormulaField,
-  ListField,
-  TextField,
-} from "../../shared/fields/_module.mjs";
+import { FormulaField, ListField, TextField } from "../../shared/fields/_module.mjs";
 import TeriockBaseEffectData from "../base-effect-data/base-effect-data.mjs";
 import { changeField } from "../shared/shared-fields.mjs";
 import { _messageParts } from "./methods/_messages.mjs";
@@ -24,15 +20,13 @@ const { fields } = foundry.data;
  * @mixes WikiDataMixin
  * @mixes HierarchyDataMixin
  */
-export default class TeriockPropertyData extends HierarchyDataMixin(
-  WikiDataMixin(TeriockBaseEffectData),
-) {
+export default class TeriockPropertyData extends HierarchyDataMixin(WikiDataMixin(TeriockBaseEffectData)) {
   /**
    * @inheritDoc
    * @type {Readonly<Teriock.Documents.EffectModelMetadata>}
    */
   static metadata = mergeFreeze(super.metadata, {
-    childEffectTypes: ["property"],
+    childEffectTypes: [ "property" ],
     modifies: "Item",
     namespace: "Property",
     type: "property",
@@ -60,8 +54,14 @@ export default class TeriockPropertyData extends HierarchyDataMixin(
         label: "Changes",
         hint: "Changes made to the target equipment as part of the property's ongoing effect.",
       }),
-      limitation: new TextField({ initial: "", label: "Limitation" }),
-      improvement: new TextField({ initial: "", label: "Improvement" }),
+      limitation: new TextField({
+        initial: "",
+        label: "Limitation",
+      }),
+      improvement: new TextField({
+        initial: "",
+        label: "Improvement",
+      }),
     });
   }
 
@@ -81,7 +81,9 @@ export default class TeriockPropertyData extends HierarchyDataMixin(
    * @returns {"Actor"|"Item"}
    */
   get modifies() {
-    if (this.modifiesActor) return "Actor";
+    if (this.modifiesActor) {
+      return "Actor";
+    }
     return super.modifies;
   }
 
@@ -117,12 +119,11 @@ export default class TeriockPropertyData extends HierarchyDataMixin(
   prepareDerivedData() {
     super.prepareDerivedData();
     this.parent.changes = foundry.utils.deepClone(this.changes);
-    if (
-      this.damageType &&
-      this.damageType.length > 0 &&
-      this.parent.allSups.filter((p) => p.system.damageType?.trim().length > 0)
-        .length === 0
-    ) {
+    if (this.damageType
+      && this.damageType.length
+      > 0
+      && this.parent.allSups.filter((p) => p.system.damageType?.trim().length > 0).length
+      === 0) {
       this.parent.changes.push({
         key: "system.damageTypes",
         value: this.damageType.toLowerCase(),

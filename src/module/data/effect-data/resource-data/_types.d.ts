@@ -5,8 +5,8 @@ declare module "./resource-data.mjs" {
   export default interface TeriockResourceData extends TeriockBaseEffectData {
     /** Is the resource consumable? */
     consumable: true;
-    /** Quantity (if consumable) */
-    quantity: number;
+    /** Function Hook */
+    functionHook: Teriock.Parameters.Resource.FunctionHook;
     /** Max Quantity (if consumable) */
     maxQuantity: {
       /** Raw Max Quantity Value */
@@ -14,10 +14,10 @@ declare module "./resource-data.mjs" {
       /** Derived Max Quantity Value */
       derived: number;
     };
+    /** Quantity (if consumable) */
+    quantity: number;
     /** Roll Formula */
     rollFormula: string;
-    /** Function Hook */
-    functionHook: Teriock.Parameters.Resource.FunctionHook;
 
     get parent(): TeriockResource;
   }

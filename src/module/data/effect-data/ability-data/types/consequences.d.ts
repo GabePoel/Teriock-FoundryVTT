@@ -1,8 +1,6 @@
 import type TeriockMacro from "../../../../documents/macro.mjs";
 import type {
-  CombatExpirationMethod,
-  CombatExpirationSourceType,
-  CombatExpirationTiming,
+  CombatExpirationMethod, CombatExpirationSourceType, CombatExpirationTiming,
 } from "../../shared/shared-fields";
 import type { TeriockConsequence } from "../../../../documents/_documents.mjs";
 
@@ -22,7 +20,9 @@ export type EffectChangeData = {
  */
 type AbilityExpiration = {
   combat: {
-    who: { type: CombatExpirationSourceType };
+    who: {
+      type: CombatExpirationSourceType
+    };
     what: CombatExpirationMethod;
     when: CombatExpirationTiming;
   };
@@ -58,10 +58,7 @@ export interface TeriockAbilityConsequenceSchema {
     proficient: AbilityConsequence;
     fluent: AbilityConsequence;
     heightened: AbilityConsequence;
-    macros: Record<
-      Teriock.SafeUUID<TeriockMacro>,
-      Teriock.Parameters.Actor.PseudoHook
-    >;
+    macros: Record<Teriock.SafeUUID<TeriockMacro>, Teriock.Parameters.Actor.PseudoHook>;
   };
   sustaining: Set<Teriock.UUID<TeriockConsequence>>;
 }

@@ -12,9 +12,13 @@ const { ArrayField } = foundry.data.fields;
  */
 const createElement = (tag, className, styles = {}, content = "") => {
   const el = document.createElement(tag);
-  if (className) el.className = className;
+  if (className) {
+    el.className = className;
+  }
   Object.assign(el.style, styles);
-  if (content) el.innerHTML = content;
+  if (content) {
+    el.innerHTML = content;
+  }
   return el;
 };
 /**
@@ -40,14 +44,12 @@ const createButton = (className, content, dataset = {}) => {
 export default class ListField extends ArrayField {
   /** @inheritDoc */
   _toInput(config) {
-    const btn = createButton(
-      "teriock-array-field-add",
-      '<i class="fa-solid fa-plus"></i> Add Item',
-      {
-        path: this.fieldPath,
-      },
-    );
-    if (config.name) btn.setAttribute("name", config.name);
+    const btn = createButton("teriock-array-field-add", "<i class=\"fa-solid fa-plus\"></i> Add Item", {
+      path: this.fieldPath,
+    });
+    if (config.name) {
+      btn.setAttribute("name", config.name);
+    }
     return btn;
   }
 }

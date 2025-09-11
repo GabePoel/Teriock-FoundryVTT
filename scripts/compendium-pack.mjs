@@ -8,11 +8,12 @@ const folders = true;
 // noinspection JSVoidFunctionReturnValueUsed
 const packs = await fs.readdir("./src/packs");
 for (const pack of packs) {
-  if (pack === ".gitattributes") continue;
+  if (pack === ".gitattributes") {
+    continue;
+  }
   console.log("Packing " + pack);
-  await compilePack(
-    `${MODULE_ID}/src/packs/${pack}`,
-    `${MODULE_ID}/packs/${pack}`,
-    { yaml, recursive: folders },
-  );
+  await compilePack(`${MODULE_ID}/src/packs/${pack}`, `${MODULE_ID}/packs/${pack}`, {
+    yaml,
+    recursive: folders,
+  });
 }

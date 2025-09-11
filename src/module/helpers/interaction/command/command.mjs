@@ -5,7 +5,11 @@
  * @returns {Teriock.Command.ChatOptions} - Parsed options
  */
 function parseRollOptions(args) {
-  const optionFlags = ["advantage", "disadvantage", "twoHanded"];
+  const optionFlags = [
+    "advantage",
+    "disadvantage",
+    "twoHanded",
+  ];
   const options = {
     advantage: false,
     disadvantage: false,
@@ -45,11 +49,13 @@ export default class TeriockCommand {
    * Execute the command, handling roll options, and common checks.
    * @param {Teriock.Command.ExecuteContext} context
    */
-  async execute({ args, chatData, actors }) {
+  async execute({
+    args,
+    chatData,
+    actors,
+  }) {
     if (this.requiresTarget && (!actors || actors.length === 0)) {
-      ui.notifications.warn(
-        `The "${this.id}" command requires at least one targeted token.`,
-      );
+      ui.notifications.warn(`The "${this.id}" command requires at least one targeted token.`);
       return;
     }
 

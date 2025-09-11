@@ -3,8 +3,8 @@ import TeriockBaseItemSheet from "../base-item-sheet/base-item-sheet.mjs";
 
 declare module "./power-sheet.mjs" {
   export default interface TeriockPowerSheet extends TeriockBaseItemSheet {
-    get item(): TeriockPower;
-
     get document(): TeriockPower;
+
+    get item(): TeriockPower;
   }
 }

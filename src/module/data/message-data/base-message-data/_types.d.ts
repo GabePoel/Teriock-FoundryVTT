@@ -1,18 +1,17 @@
 import TeriockChatMessage from "../../../documents/chat-message.mjs";
 
 export default interface TeriockBaseChatMessageSchema {
+  buttons: Teriock.UI.HTMLButtonConfig[];
+  columns: number;
+  extraContent: string;
+  overlay: string;
   /** Parent chat message */
   parent: TeriockChatMessage;
-  overlay: string;
-  columns: number;
-  buttons: Teriock.UI.HTMLButtonConfig[];
-  tags: string[];
-  extraContent: string;
   source: Teriock.UUID<any>;
+  tags: string[];
 }
 
 declare module "./base-message-data.mjs" {
   /** Redundant declaration is needed for intellisense. */
-  export default interface TeriockBaseMessageData
-    extends TeriockBaseChatMessageSchema {}
+  export default interface TeriockBaseMessageData extends TeriockBaseChatMessageSchema {}
 }

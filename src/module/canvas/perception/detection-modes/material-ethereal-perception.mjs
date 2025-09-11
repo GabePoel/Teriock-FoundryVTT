@@ -27,9 +27,7 @@ export default class DetectionModeMaterialEthereal extends BaseDetectionMode {
     const src = visionSource.object.document;
     if (target instanceof Token) {
       const tgt = target.document;
-      if (
-        !(!src.hasStatusEffect("ethereal") && tgt.hasStatusEffect("ethereal"))
-      ) {
+      if (!(!src.hasStatusEffect("ethereal") && tgt.hasStatusEffect("ethereal"))) {
         return false;
       }
     }

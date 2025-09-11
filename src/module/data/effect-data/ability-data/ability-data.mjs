@@ -22,15 +22,14 @@ import { _defineSchema } from "./methods/schema/_schema.mjs";
  * @mixes HierarchyDataMixin
  * @mixes WikiDataMixin
  */
-export default class TeriockAbilityData extends HierarchyDataMixin(
-  ConsumableDataMixin(WikiDataMixin(TeriockBaseEffectData)),
-) {
+export default class TeriockAbilityData extends HierarchyDataMixin(ConsumableDataMixin(WikiDataMixin(
+  TeriockBaseEffectData))) {
   /**
    * @inheritDoc
    * @type {Readonly<Teriock.Documents.EffectModelMetadata>}
    */
   static metadata = mergeFreeze(super.metadata, {
-    childEffectTypes: ["ability"],
+    childEffectTypes: [ "ability" ],
     hierarchy: true,
     namespace: "Ability",
     type: "ability",
@@ -79,8 +78,7 @@ export default class TeriockAbilityData extends HierarchyDataMixin(
     if (this.improvements.featSaveImprovement.attribute) {
       const att = this.improvements.featSaveImprovement.attribute;
       const amount = this.improvements.featSaveImprovement.amount;
-      const amountVal =
-        TERIOCK.options.ability.featSaveImprovementAmount[amount];
+      const amountVal = TERIOCK.options.ability.featSaveImprovementAmount[amount];
       return `This ability gives you @L[Core:${amountVal} Bonus]{${amount}} in @L[Core:${att.toUpperCase()}] @L[Core:Feat Interaction]{feat saves}.`;
     }
     return "";
@@ -89,8 +87,7 @@ export default class TeriockAbilityData extends HierarchyDataMixin(
   /** @inheritDoc */
   get messageParts() {
     return {
-      ...super.messageParts,
-      ..._messageParts(this),
+      ...super.messageParts, ..._messageParts(this),
     };
   }
 
@@ -122,14 +119,20 @@ export default class TeriockAbilityData extends HierarchyDataMixin(
 
   /** @inheritDoc */
   get useIcon() {
-    if (this.interaction === "attack") return "dice-d20";
-    if (this.interaction === "block") return "shield";
+    if (this.interaction === "attack") {
+      return "dice-d20";
+    }
+    if (this.interaction === "block") {
+      return "shield";
+    }
     return TERIOCK.options.document.ability.icon;
   }
 
   /** @inheritDoc */
   get useText() {
-    if (this.spell) return `Cast ${this.parent.name}`;
+    if (this.spell) {
+      return `Cast ${this.parent.name}`;
+    }
     return super.useText;
   }
 

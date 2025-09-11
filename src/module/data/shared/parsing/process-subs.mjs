@@ -33,12 +33,12 @@ async function processSubEffects(subs, doc, config) {
     el.querySelectorAll(".expandable-sub-main").forEach((e) => e.remove());
 
     let subNameEl = el.querySelector(nameSelector);
-    if (el.className.includes("expandable-container")) subNameEl = el;
-    if (
-      subNameEl?.dataset.namespace === skipNamespace ||
-      subNameEl?.dataset.namespace !== includeNamespace
-    )
+    if (el.className.includes("expandable-container")) {
+      subNameEl = el;
+    }
+    if (subNameEl?.dataset.namespace === skipNamespace || subNameEl?.dataset.namespace !== includeNamespace) {
       return;
+    }
 
     const subName = subNameEl.getAttribute("data-name");
     newSubNames.add(subName);
@@ -58,8 +58,7 @@ async function processSubEffects(subs, doc, config) {
     let improvementText = "";
 
     if (improvement) {
-      const improvementSpans =
-        improvement.querySelectorAll(".improvement-text");
+      const improvementSpans = improvement.querySelectorAll(".improvement-text");
       if (improvementSpans) {
         const improvementSpan = improvementSpans[0];
         if (improvementSpan) {
@@ -97,8 +96,11 @@ async function processSubEffects(subs, doc, config) {
       toDelete.push(sub.id);
     }
   }
-  if (doc.documentName === "Item") await doc.deleteEmbeddedDocuments("ActiveEffect", toDelete);
-  else if (doc.documentName === "ActiveEffect") await doc.parent.deleteEmbeddedDocuments("ActiveEffect", toDelete);
+  if (doc.documentName === "Item") {
+    await doc.deleteEmbeddedDocuments("ActiveEffect", toDelete);
+  } else if (doc.documentName === "ActiveEffect") {
+    await doc.parent.deleteEmbeddedDocuments("ActiveEffect", toDelete);
+  }
 }
 
 /**

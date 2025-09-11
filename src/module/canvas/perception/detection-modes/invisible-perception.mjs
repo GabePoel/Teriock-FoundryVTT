@@ -7,7 +7,7 @@ const { Token } = foundry.canvas.placeables;
  * - [See Invisible](https://wiki.teriock.com/index.php/Ability:See_Invisible)
  */
 export default class DetectionModeInvisiblePerception extends BaseDetectionMode {
-  static BLOCKING_TGT_STATUS_EFFECTS = ["hidden"];
+  static BLOCKING_TGT_STATUS_EFFECTS = [ "hidden" ];
 
   /** @inheritDoc */
   _canDetect(visionSource, target) {
@@ -17,10 +17,7 @@ export default class DetectionModeInvisiblePerception extends BaseDetectionMode 
     const src = visionSource.object.document;
     if (target instanceof Token) {
       const tgt = target.document;
-      if (
-        !src.hasStatusEffect("ethereal") &&
-        tgt.hasStatusEffect("invisible")
-      ) {
+      if (!src.hasStatusEffect("ethereal") && tgt.hasStatusEffect("invisible")) {
         return true;
       }
     }

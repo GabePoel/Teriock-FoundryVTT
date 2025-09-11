@@ -14,18 +14,16 @@ export default function _connectEmbedded(document, element) {
     const id = el.getAttribute("data-id");
     const parentId = el.getAttribute("data-parent-id");
     /** @type {TeriockItem|TeriockEffect} */
-    const embedded =
-      document.items?.get(id) ||
-      document.effects?.get(id) ||
-      document.items?.get(parentId)?.effects.get(id) ||
-      document.parent?.getEmbeddedDocument("ActiveEffect", id);
+    const embedded = document.items?.get(id) || document.effects?.get(id) || document.items?.get(parentId)
+      ?.effects
+      .get(id) || document.parent?.getEmbeddedDocument("ActiveEffect", id);
     if (embedded) {
       new ux.ContextMenu(el, ".tcard", embedded.system.cardContextMenuEntries, {
         eventName: "contextmenu",
         jQuery: false,
         fixed: true,
       });
-      el.querySelectorAll('[data-action="useOneDoc"]').forEach((actionEl) => {
+      el.querySelectorAll("[data-action=\"useOneDoc\"]").forEach((actionEl) => {
         actionEl.addEventListener("contextmenu", (event) => {
           event.stopPropagation();
           embedded.system.gainOne();

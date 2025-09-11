@@ -13,9 +13,7 @@ const { fields } = foundry.data;
  * @extends TeriockBaseEffectData
  * @mixes HierarchyDataMixin
  */
-export default class TeriockConsequenceData extends HierarchyDataMixin(
-  TeriockBaseEffectData,
-) {
+export default class TeriockConsequenceData extends HierarchyDataMixin(TeriockBaseEffectData) {
   /**
    * @inheritDoc
    * @type {Readonly<Teriock.Documents.EffectModelMetadata>}
@@ -28,27 +26,24 @@ export default class TeriockConsequenceData extends HierarchyDataMixin(
   /** @inheritDoc */
   static defineSchema() {
     return foundry.utils.mergeObject(super.defineSchema(), {
-      source: new fields.StringField({ initial: "", nullable: true }),
+      source: new fields.StringField({
+        initial: "",
+        nullable: true,
+      }),
       expirations: new fields.SchemaField({
         conditions: new fields.SchemaField({
-          present: new fields.SetField(
-            new fields.StringField({
-              choices: TERIOCK.index.conditions,
-            }),
-            {
-              label: "Present Conditions",
-              hint: "What conditions must be present in order for this ability to be active?",
-            },
-          ),
-          absent: new fields.SetField(
-            new fields.StringField({
-              choices: TERIOCK.index.conditions,
-            }),
-            {
-              label: "Absent Conditions",
-              hint: "What conditions must be absent in order for this ability to be active?",
-            },
-          ),
+          present: new fields.SetField(new fields.StringField({
+            choices: TERIOCK.index.conditions,
+          }), {
+            label: "Present Conditions",
+            hint: "What conditions must be present in order for this ability to be active?",
+          }),
+          absent: new fields.SetField(new fields.StringField({
+            choices: TERIOCK.index.conditions,
+          }), {
+            label: "Absent Conditions",
+            hint: "What conditions must be absent in order for this ability to be active?",
+          }),
         }),
         movement: new fields.BooleanField({
           initial: false,
@@ -98,11 +93,7 @@ export default class TeriockConsequenceData extends HierarchyDataMixin(
    * @returns {boolean} True if the effect expires based on a condition, false otherwise.
    */
   get conditionExpiration() {
-    return (
-      this.expirations.conditions.present.size +
-        this.expirations.conditions.absent.size >
-      0
-    );
+    return (this.expirations.conditions.present.size + this.expirations.conditions.absent.size > 0);
   }
 
   /**
@@ -125,8 +116,7 @@ export default class TeriockConsequenceData extends HierarchyDataMixin(
   /** @inheritDoc */
   get messageParts() {
     return {
-      ...super.messageParts,
-      ..._messageParts(this),
+      ...super.messageParts, ..._messageParts(this),
     };
   }
 

@@ -1,31 +1,9 @@
-import type {
-  TeriockActor,
-  TeriockEffect,
-  TeriockItem,
-} from "../../_module.mjs";
-import { type TeriockAbility, TeriockProperty } from "../../_documents.mjs";
+import type { TeriockActor, TeriockEffect, TeriockItem } from "../../_module.mjs";
+import type { TeriockAbility, TeriockProperty } from "../../_documents.mjs";
 
 export interface CommonDocumentMixinInterface {
   /** The actor associated with this document if there is one */
   get actor(): TeriockActor | null;
-
-  /**
-   * Metadata.
-   * @returns The document metadata
-   */
-  get metadata(): Readonly<Teriock.Documents.ModelMetadata>;
-
-  /**
-   * A modified version of this document's name that displays additional text if needed.
-   * @returns The formatted name string
-   */
-  get nameString(): string;
-
-  /**
-   * The document's UUID.
-   * @returns The unique identifier for this document
-   */
-  get uuid(): Teriock.UUID<TeriockActor | TeriockItem | TeriockEffect>;
 
   /**
    * Disables the document by setting its disabled property to true.
@@ -47,6 +25,18 @@ export interface CommonDocumentMixinInterface {
   forceUpdate(): Promise<void>;
 
   /**
+   * Get the abilities that are directly descendent from this.
+   * @returns {TeriockAbility[]}
+   */
+  getAbilities(): TeriockAbility[];
+
+  /**
+   * Get the properties that are directly descendent from this.
+   * @returns {TeriockProperty[]}
+   */
+  getProperties(): TeriockProperty[];
+
+  /**
    * Execute all macros for a given pseudo-hook and call a regular hook with the same name.
    * @param {Teriock.Parameters.Actor.PseudoHook} pseudoHook - What pseudo-hook to call.
    * @param {Partial<Teriock.HookData.BaseHookData>} [data] - Data to call in the macro.
@@ -60,20 +50,26 @@ export interface CommonDocumentMixinInterface {
   ): Promise<Teriock.HookData.BaseHookData>;
 
   /**
+   * Metadata.
+   * @returns The document metadata
+   */
+  get metadata(): Readonly<Teriock.Documents.ModelMetadata>;
+
+  /**
+   * A modified version of this document's name that displays additional text if needed.
+   * @returns The formatted name string
+   */
+  get nameString(): string;
+
+  /**
    * Toggles the disabled state of the document.
    * @returns Promise that resolves when the disabled state is toggled
    */
   toggleDisabled(): Promise<void>;
 
   /**
-   * Get the abilities that are directly descendent from this.
-   * @returns {TeriockAbility[]}
+   * The document's UUID.
+   * @returns The unique identifier for this document
    */
-  getAbilities(): TeriockAbility[];
-
-  /**
-   * Get the properties that are directly descendent from this.
-   * @returns {TeriockProperty[]}
-   */
-  getProperties(): TeriockProperty[];
+  get uuid(): Teriock.UUID<TeriockActor | TeriockItem | TeriockEffect>;
 }

@@ -12,13 +12,15 @@ export default class TeriockBaseItemData extends ChildTypeModel {
    * @inheritDoc
    * @type {Readonly<Teriock.Documents.ItemModelMetadata>}
    */
-  static metadata = mergeFreeze(
-    /** @type {Teriock.Documents.ItemModelMetadata} */ (super.metadata),
-    {
-      childEffectTypes: ["ability", "fluency", "resource"],
+  static metadata = mergeFreeze(/** @type {Teriock.Documents.ItemModelMetadata} */
+    (super.metadata), {
+      childEffectTypes: [
+        "ability",
+        "fluency",
+        "resource",
+      ],
       stats: false,
-    },
-  );
+    });
 
   /** @inheritDoc */
   static defineSchema() {

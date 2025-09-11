@@ -12,7 +12,7 @@ import { fontContextMenu, powerLevelContextMenu } from "./connections/_context-m
 export default class TeriockEquipmentSheet extends TeriockBaseItemSheet {
   /** @inheritDoc */
   static DEFAULT_OPTIONS = {
-    classes: ["equipment"],
+    classes: [ "equipment" ],
     actions: {
       toggleEquipped: this._toggleEquipped,
       toggleShattered: this._toggleShattered,
@@ -26,9 +26,12 @@ export default class TeriockEquipmentSheet extends TeriockBaseItemSheet {
   /** @inheritDoc */
   static PARTS = {
     all: {
-      template:
-        "systems/teriock/src/templates/document-templates/item-templates/equipment-template/equipment-template.hbs",
-      scrollable: [".window-content", ".tsheet-page", ".ab-sheet-everything"],
+      template: "systems/teriock/src/templates/document-templates/item-templates/equipment-template/equipment-template.hbs",
+      scrollable: [
+        ".window-content",
+        ".tsheet-page",
+        ".ab-sheet-everything",
+      ],
     },
   };
 
@@ -82,7 +85,7 @@ export default class TeriockEquipmentSheet extends TeriockBaseItemSheet {
       ".flag-tag-glued": "system.glued",
     };
 
-    for (const [selector, path] of Object.entries(flagTags)) {
+    for (const [ selector, path ] of Object.entries(flagTags)) {
       root.querySelectorAll(selector).forEach((el) => {
         el.addEventListener("click", async (e) => {
           e.preventDefault();
@@ -95,7 +98,7 @@ export default class TeriockEquipmentSheet extends TeriockBaseItemSheet {
       ".equipment-class-tag": "equipmentClasses",
     };
 
-    for (const [selector, path] of Object.entries(arrayTags)) {
+    for (const [ selector, path ] of Object.entries(arrayTags)) {
       root.querySelectorAll(selector).forEach((el) => {
         el.addEventListener("click", async () => {
           const val = el.getAttribute("value");
@@ -118,41 +121,35 @@ export default class TeriockEquipmentSheet extends TeriockBaseItemSheet {
       ".ab-tier-button": { "system.tier.raw": "1" },
     };
 
-    for (const [selector, update] of Object.entries(staticUpdates)) {
+    for (const [ selector, update ] of Object.entries(staticUpdates)) {
       root.querySelectorAll(selector).forEach((el) => {
         el.addEventListener("click", () => doc.update(update));
       });
     }
 
     const dampenedEls = root.querySelectorAll(".flag-tag-dampened");
-    dampenedEls.forEach((el) =>
-      el.addEventListener(
-        "click",
-        async () => await doc.update({ "system.dampened": false }),
-      ),
-    );
+    dampenedEls.forEach((el) => el.addEventListener(
+      "click",
+      async () => await doc.update({ "system.dampened": false }),
+    ));
 
     const shatteredEls = root.querySelectorAll(".flag-tag-shattered");
-    shatteredEls.forEach((el) =>
-      el.addEventListener(
-        "click",
-        async () => await doc.update({ "system.shattered": false }),
-      ),
-    );
+    shatteredEls.forEach((el) => el.addEventListener(
+      "click",
+      async () => await doc.update({ "system.shattered": false }),
+    ));
   }
 
   /** @inheritDoc */
   async _onRender(context, options) {
     await super._onRender(context, options);
-    if (!this.editable) return;
+    if (!this.editable) {
+      return;
+    }
 
     const item = this.item;
 
-    this._connectContextMenu(
-      ".power-level-box",
-      powerLevelContextMenu(item),
-      "click",
-    );
+    this._connectContextMenu(".power-level-box", powerLevelContextMenu(item), "click");
     this._connectContextMenu(".ab-title", fontContextMenu(item), "contextmenu");
 
     this.element.querySelectorAll(".capitalization-input").forEach((el) => {

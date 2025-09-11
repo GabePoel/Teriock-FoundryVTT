@@ -50,10 +50,7 @@ export class ApplyEffectHandler extends ActionHandler {
     /** @type {TeriockConsequence[]} */
     const createdConsequences = [];
     for (const actor of this.actors) {
-      const newConsequences = await actor.createEmbeddedDocuments(
-        "ActiveEffect",
-        [effectObj],
-      );
+      const newConsequences = await actor.createEmbeddedDocuments("ActiveEffect", [ effectObj ]);
       createdConsequences.push(...newConsequences);
       ui.notifications.info(`Applied ${effectObj.name}`);
     }
@@ -69,9 +66,7 @@ export class ApplyEffectHandler extends ActionHandler {
     /** @type {TeriockConsequence[]} */
     const createdConsequences = [];
     for (const actor of this.actors) {
-      const foundEffects = actor.effects.filter(
-        (effect) => effect.name === effectObj.name,
-      );
+      const foundEffects = actor.effects.filter((effect) => effect.name === effectObj.name);
       for (const effect of foundEffects) {
         await effect.delete();
       }

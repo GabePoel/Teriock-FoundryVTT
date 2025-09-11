@@ -4,7 +4,9 @@
  * @returns {number} The cleaned integer value.
  */
 export function cleanValue(value) {
-  if (typeof value !== "string") return value;
+  if (typeof value !== "string") {
+    return value;
+  }
   value = value.replace("+", "").trim();
   return parseInt(value, 10);
 }
@@ -15,7 +17,12 @@ export function cleanValue(value) {
  * @returns {string} The cleaned feet measurement string.
  */
 export function cleanFeet(feet) {
-  const synonyms = ["foot", "feet", "ft", "ft."];
+  const synonyms = [
+    "foot",
+    "feet",
+    "ft",
+    "ft.",
+  ];
   synonyms.forEach((synonym) => {
     const regex = new RegExp(synonym, "gi");
     feet = feet.replace(regex, "");

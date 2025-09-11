@@ -1,10 +1,6 @@
-const basicAbilitiesItem = await tm.fetch.getItem(
-  "Basic Abilities",
-  "essentials",
-);
+const basicAbilitiesItem = await tm.fetch.getItem("Basic Abilities", "essentials");
 
-const basicAbilityNames =
-  await teriock.helpers.wiki.fetchCategoryAbilities("Basic abilities");
+const basicAbilityNames = await teriock.helpers.wiki.fetchCategoryAbilities("Basic abilities");
 
 const progress = ui.notifications.info(`Pulling basic abilities from wiki.`, {
   progress: true,
@@ -12,14 +8,9 @@ const progress = ui.notifications.info(`Pulling basic abilities from wiki.`, {
 let pct = 0;
 
 for (const basicAbilityName of basicAbilityNames) {
-  let basicAbility = basicAbilitiesItem.abilities.find(
-    (a) => a.name === basicAbilityName,
-  );
+  let basicAbility = basicAbilitiesItem.abilities.find((a) => a.name === basicAbilityName);
   if (!basicAbility) {
-    basicAbility = await tm.create.ability(
-      basicAbilitiesItem,
-      basicAbilityName,
-    );
+    basicAbility = await tm.create.ability(basicAbilitiesItem, basicAbilityName);
   } else {
     await basicAbility.system.wikiPull({ notify: false });
   }

@@ -22,9 +22,7 @@ export default class DetectionModeEtherealMaterial extends BaseDetectionMode {
     const src = visionSource.object.document;
     if (target instanceof Token) {
       const tgt = target.document;
-      if (
-        !(src.hasStatusEffect("ethereal") && !tgt.hasStatusEffect("ethereal"))
-      ) {
+      if (!(src.hasStatusEffect("ethereal") && !tgt.hasStatusEffect("ethereal"))) {
         return false;
       }
     }
@@ -33,7 +31,9 @@ export default class DetectionModeEtherealMaterial extends BaseDetectionMode {
 
   /** @inheritDoc */
   _testPoint(visionSource, mode, target, test) {
-    if (!super._testPoint(visionSource, mode, target, test)) return false;
+    if (!super._testPoint(visionSource, mode, target, test)) {
+      return false;
+    }
     return canvas.effects.testInsideLight(test.point);
   }
 }

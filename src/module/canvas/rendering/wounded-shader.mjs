@@ -1,5 +1,7 @@
-const { BackgroundVisionShader, ColorationVisionShader } =
-  foundry.canvas.rendering.shaders;
+const {
+  BackgroundVisionShader,
+  ColorationVisionShader,
+} = foundry.canvas.rendering.shaders;
 
 /**
  * Wounded vision shader - creates red vignette effect for a down/dead {@link TeriockTokenDocument}
@@ -8,7 +10,11 @@ export class WoundedBackgroundVisionShader extends BackgroundVisionShader {
   /** @inheritdoc */
   static defaultUniforms = {
     ...super.defaultUniforms,
-    colorTint: [1.0, 1.0, 1.0], // No additional tint
+    colorTint: [
+      1.0,
+      1.0,
+      1.0,
+    ], // No additional tint
   };
 
   /** @inheritdoc */
@@ -49,7 +55,11 @@ export class WoundedColorationVisionShader extends ColorationVisionShader {
   /** @inheritdoc */
   static defaultUniforms = {
     ...super.defaultUniforms,
-    colorEffect: [1.0, 0.0, 0.0], // Pure red
+    colorEffect: [
+      1.0,
+      0.0,
+      0.0,
+    ], // Pure red
   };
 
   /** @inheritdoc */

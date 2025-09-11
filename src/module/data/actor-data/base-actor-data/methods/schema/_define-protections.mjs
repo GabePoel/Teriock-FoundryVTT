@@ -16,82 +16,60 @@ const { fields } = foundry.data;
  */
 function protectionField(name) {
   return new fields.SchemaField({
-    damageTypes: new fields.SetField(
-      new fields.StringField({
-        initial: "",
-        label: `Damage Type`,
-      }),
-      {
-        label: `Damage Types`,
-        hint: `A list of damage types you ${name}.`,
-      },
-    ),
-    drainTypes: new fields.SetField(
-      new fields.StringField({
-        initial: "",
-        label: `Drain Type`,
-      }),
-      {
-        label: `Drain Types`,
-        hint: `A list of drain types you ${name}.`,
-      },
-    ),
-    statuses: new fields.SetField(
-      new fields.StringField({
-        initial: "",
-        label: `Condition`,
-        choices: TERIOCK.index.conditions,
-      }),
-      {
-        label: `Conditions`,
-        hint: `A list of conditions you ${name}.`,
-      },
-    ),
-    elements: new fields.SetField(
-      new fields.StringField({
-        initial: "",
-        label: `Element`,
-        choices: TERIOCK.index.elements,
-      }),
-      {
-        label: `Elements`,
-        hint: `A list of elements you ${name}.`,
-      },
-    ),
-    effects: new fields.SetField(
-      new fields.StringField({
-        initial: "",
-        label: `Effect`,
-        choices: TERIOCK.index.effectTypes,
-      }),
-      {
-        label: `Effects`,
-        hint: `A list of effects you ${name}.`,
-      },
-    ),
-    powerSources: new fields.SetField(
-      new fields.StringField({
-        initial: "",
-        label: `Power Source`,
-        choices: TERIOCK.index.powerSources,
-      }),
-      {
-        label: `Power Sources`,
-        hint: `A list of power sources you ${name}.`,
-      },
-    ),
-    abilities: new fields.SetField(
-      new fields.StringField({
-        initial: "",
-        label: `Ability`,
-      }),
-    ),
-    other: new fields.SetField(
-      new fields.StringField({
-        initial: "",
-        label: `Other`,
-      }),
-    ),
+    damageTypes: new fields.SetField(new fields.StringField({
+      initial: "",
+      label: `Damage Type`,
+    }), {
+      label: `Damage Types`,
+      hint: `A list of damage types you ${name}.`,
+    }),
+    drainTypes: new fields.SetField(new fields.StringField({
+      initial: "",
+      label: `Drain Type`,
+    }), {
+      label: `Drain Types`,
+      hint: `A list of drain types you ${name}.`,
+    }),
+    statuses: new fields.SetField(new fields.StringField({
+      initial: "",
+      label: `Condition`,
+      choices: TERIOCK.index.conditions,
+    }), {
+      label: `Conditions`,
+      hint: `A list of conditions you ${name}.`,
+    }),
+    elements: new fields.SetField(new fields.StringField({
+      initial: "",
+      label: `Element`,
+      choices: TERIOCK.index.elements,
+    }), {
+      label: `Elements`,
+      hint: `A list of elements you ${name}.`,
+    }),
+    effects: new fields.SetField(new fields.StringField({
+      initial: "",
+      label: `Effect`,
+      choices: TERIOCK.index.effectTypes,
+    }), {
+      label: `Effects`,
+      hint: `A list of effects you ${name}.`,
+    }),
+    powerSources: new fields.SetField(new fields.StringField({
+      initial: "",
+      label: `Power Source`,
+      choices: TERIOCK.index.powerSources,
+    }), {
+      label: `Power Sources`,
+      hint: `A list of power sources you ${name}.`,
+    }),
+    abilities: new fields.SetField(new fields.StringField({
+      initial: "",
+      label: `Ability`,
+    })),
+    other: new fields.SetField(new fields.StringField({
+      initial: "",
+      label: `Other`,
+    })),
   });
 }
 

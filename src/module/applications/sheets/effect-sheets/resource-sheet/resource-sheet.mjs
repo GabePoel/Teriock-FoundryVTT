@@ -11,7 +11,7 @@ import { callbackContextMenu } from "./connections/_context-menus.mjs";
 export default class TeriockResourceSheet extends TeriockBaseEffectSheet {
   /** @inheritDoc */
   static DEFAULT_OPTIONS = {
-    classes: ["resource"],
+    classes: [ "resource" ],
     window: {
       icon: "fa-solid fa-" + documentOptions.resource.icon,
     },
@@ -20,19 +20,18 @@ export default class TeriockResourceSheet extends TeriockBaseEffectSheet {
   /** @inheritDoc */
   static PARTS = {
     all: {
-      template:
-        "systems/teriock/src/templates/document-templates/effect-templates/resource-template/resource-template.hbs",
-      scrollable: [".window-content", ".tsheet-page", ".ab-sheet-everything"],
+      template: "systems/teriock/src/templates/document-templates/effect-templates/resource-template/resource-template.hbs",
+      scrollable: [
+        ".window-content",
+        ".tsheet-page",
+        ".ab-sheet-everything",
+      ],
     },
   };
 
   /** @inheritDoc */
   async _onRender(options, context) {
     await super._onRender(options, context);
-    this._connectContextMenu(
-      ".function-box",
-      callbackContextMenu(this.document),
-      "click",
-    );
+    this._connectContextMenu(".function-box", callbackContextMenu(this.document), "click");
   }
 }

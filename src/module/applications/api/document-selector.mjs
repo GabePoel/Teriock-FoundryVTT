@@ -1,4 +1,7 @@
-const { HandlebarsApplicationMixin, ApplicationV2 } = foundry.applications.api;
+const {
+  HandlebarsApplicationMixin,
+  ApplicationV2,
+} = foundry.applications.api;
 const { SearchFilter } = foundry.applications.ux;
 
 // noinspection JSClosureCompilerSyntax
@@ -6,23 +9,17 @@ const { SearchFilter } = foundry.applications.ux;
  * @extends {ApplicationV2}
  * @mixes HandlebarsApplicationMixin
  */
-export default class TeriockDocumentSelector extends HandlebarsApplicationMixin(
-  ApplicationV2,
-) {
-  constructor(docs, { multi = true, hint = "", tooltip = true } = {}, ...args) {
-    super(...args);
-    this.docs = docs;
-    this.multi = multi;
-    this.hint = hint;
-    this.tooltip = tooltip;
-
-    this._resolve = null;
-    this._result = new Promise((resolve) => (this._resolve = resolve));
-  }
-
+export default class TeriockDocumentSelector extends HandlebarsApplicationMixin(ApplicationV2) {
   static DEFAULT_OPTIONS = {
-    classes: ["teriock", "dynamic-select", "dialog"],
-    actions: { ok: this._getSelected, cancel: this._cancel },
+    classes: [
+      "teriock",
+      "dynamic-select",
+      "dialog",
+    ],
+    actions: {
+      ok: this._getSelected,
+      cancel: this._cancel,
+    },
     window: {
       icon: "fa-solid fa-circle-check",
       title: "Select Document",
@@ -32,11 +29,10 @@ export default class TeriockDocumentSelector extends HandlebarsApplicationMixin(
       width: 450,
     },
   };
-
   static PARTS = {
     all: {
       template: "systems/teriock/src/templates/dialog-templates/select.hbs",
-      scrollable: [".doc-list-container"],
+      scrollable: [ ".doc-list-container" ],
     },
   };
 
@@ -54,17 +50,32 @@ export default class TeriockDocumentSelector extends HandlebarsApplicationMixin(
     let ids = [];
 
     if (this.multi) {
-      ids = Array.from(
-        root.querySelectorAll('input[type="checkbox"]:checked'),
-      ).map((el) => el.name);
+      ids = Array.from(root.querySelectorAll("input[type=\"checkbox\"]:checked")).map((el) => el.name);
     } else {
-      const radio = root.querySelector('input[name="choice"]:checked');
-      if (radio) ids = [radio.value];
+      const radio = root.querySelector("input[name=\"choice\"]:checked");
+      if (radio) {
+        ids = [ radio.value ];
+      }
     }
 
     // noinspection JSUnresolvedReference
     this._finish(ids);
     await this.close();
+  }
+
+  constructor(docs, {
+    multi = true,
+    hint = "",
+    tooltip = true,
+  } = {}, ...args) {
+    super(...args);
+    this.docs = docs;
+    this.multi = multi;
+    this.hint = hint;
+    this.tooltip = tooltip;
+
+    this._resolve = null;
+    this._result = new Promise((resolve) => (this._resolve = resolve));
   }
 
   _finish(value) {
@@ -77,25 +88,26 @@ export default class TeriockDocumentSelector extends HandlebarsApplicationMixin(
 
   _initSearchFilter() {
     const root = this.element;
-    if (!root) return;
+    if (!root) {
+      return;
+    }
 
     const input = root.querySelector(".search-input");
     const content = root.querySelector(".doc-select");
-    if (!input || !content) return;
+    if (!input || !content) {
+      return;
+    }
 
     const searchFilter = new SearchFilter({
       inputSelector: ".search-input",
       contentSelector: ".doc-select",
       initial: "",
       callback: (_e, _q, rgx, container) => {
-        container.querySelectorAll(".doc-select-item").forEach(
-          /** @param {HTMLLIElement} card */ (card) => {
-            const title =
-              card.querySelector(".doc-name-container")?.textContent ?? "";
-            const match = rgx ? rgx.test(title) : true;
-            card.style.display = match ? "block" : "none";
-          },
-        );
+        container.querySelectorAll(".doc-select-item").forEach(/** @param {HTMLLIElement} card */(card) => {
+          const title = card.querySelector(".doc-name-container")?.textContent ?? "";
+          const match = rgx ? rgx.test(title) : true;
+          card.style.display = match ? "block" : "none";
+        });
       },
     });
 

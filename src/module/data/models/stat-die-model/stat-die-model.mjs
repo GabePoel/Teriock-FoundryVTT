@@ -13,7 +13,7 @@ export default class StatDieModel extends DataModel {
   /** @inheritDoc */
   static defineSchema() {
     const dieChoices = {};
-    for (const [key, value] of Object.entries(dieOptions.stats)) {
+    for (const [ key, value ] of Object.entries(dieOptions.stats)) {
       dieChoices[key] = toTitleCase(value) + " Die";
     }
     return {
@@ -112,17 +112,24 @@ export default class StatDieModel extends DataModel {
    */
   async rollStatDie(spend = true) {
     const actor = this.parent.parent.actor;
-    if (!actor) return;
+    if (!actor) {
+      return;
+    }
     const roll = new TeriockRoll(`1d${this.faces}`, {});
     await roll.evaluate();
     await roll.toMessage({
       speaker: ChatMessage.getSpeaker({ actor: actor }),
       flavor: `Rolling ${this.name}`,
     });
-    if (this.stat === "hp") await actor.takeHeal(roll.total);
-    if (this.stat === "mp") await actor.takeRevitalize(roll.total);
-    if (spend)
+    if (this.stat === "hp") {
+      await actor.takeHeal(roll.total);
+    }
+    if (this.stat === "mp") {
+      await actor.takeRevitalize(roll.total);
+    }
+    if (spend) {
       await this.parent.parent.update({ [`${this.path}.spent`]: true });
+    }
   }
 
   /**

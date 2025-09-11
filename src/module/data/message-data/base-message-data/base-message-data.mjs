@@ -20,19 +20,20 @@ export default class TeriockBaseMessageData extends TypeDataModel {
   static defineSchema() {
     const schema = {};
     schema.columns = new fields.NumberField({ initial: 2 });
-    schema.overlay = new fields.HTMLField({ nullable: true, initial: null });
-    schema.buttons = new fields.ArrayField(
-      new fields.SchemaField({
-        label: new fields.StringField(),
-        dataset: new fields.TypedObjectField(new fields.StringField()),
-        classes: new fields.SetField(new fields.StringField(), {
-          initial: ["teriock-chat-button"],
-        }),
-        icon: new fields.StringField(),
-        type: new fields.StringField(),
-        disabled: new fields.BooleanField(),
+    schema.overlay = new fields.HTMLField({
+      nullable: true,
+      initial: null,
+    });
+    schema.buttons = new fields.ArrayField(new fields.SchemaField({
+      label: new fields.StringField(),
+      dataset: new fields.TypedObjectField(new fields.StringField()),
+      classes: new fields.SetField(new fields.StringField(), {
+        initial: [ "teriock-chat-button" ],
       }),
-    );
+      icon: new fields.StringField(),
+      type: new fields.StringField(),
+      disabled: new fields.BooleanField(),
+    }));
     schema.tags = new fields.ArrayField(new fields.StringField());
     schema.extraContent = new fields.HTMLField();
     schema.source = new fields.DocumentUUIDField({ nullable: true });
@@ -79,7 +80,9 @@ export default class TeriockBaseMessageData extends TypeDataModel {
    */
   _createButtonContainer() {
     const buttons = this._constructFooterButtons();
-    if (buttons.length === 0) return null;
+    if (buttons.length === 0) {
+      return null;
+    }
 
     const buttonContainer = document.createElement("div");
     buttonContainer.classList.add("teriock-buttons");
@@ -128,7 +131,9 @@ export default class TeriockBaseMessageData extends TypeDataModel {
    * @protected
    */
   _createTagContainer() {
-    if (!this.tags || this.tags.length === 0) return null;
+    if (!this.tags || this.tags.length === 0) {
+      return null;
+    }
 
     const messageElement = document.createElement("div");
     messageElement.className = "tmessage teriock-bottom-tags";
@@ -174,8 +179,7 @@ export default class TeriockBaseMessageData extends TypeDataModel {
       }
     }
 
-    const hasContent =
-      (this.tags && this.tags.length > 0) || this.buttons.length > 0;
+    const hasContent = (this.tags && this.tags.length > 0) || this.buttons.length > 0;
     if (hasContent) {
       const footer = this._constructFooter();
       html.insertAdjacentElement("beforeend", footer);

@@ -24,12 +24,12 @@ export interface NumberCost {
  * Complete costs configuration.
  */
 export interface CostsConfig {
-  verbal: boolean;
-  somatic: boolean;
-  material: boolean;
-  mp: NumberCost;
-  hp: NumberCost;
-  gp: NumberCost;
   break: BreakCost;
+  gp: NumberCost;
+  hp: NumberCost;
+  material: boolean;
   materialCost: string;
+  mp: NumberCost;
+  somatic: boolean;
+  verbal: boolean;
 }

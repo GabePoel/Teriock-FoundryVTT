@@ -1,10 +1,6 @@
 import { createAbility } from "../helpers/create-effects.mjs";
 import { fetchCategoryMembers } from "../helpers/wiki/_module.mjs";
-import {
-  ChildDocumentMixin,
-  CommonDocumentMixin,
-  ParentDocumentMixin,
-} from "./mixins/_module.mjs";
+import { ChildDocumentMixin, CommonDocumentMixin, ParentDocumentMixin } from "./mixins/_module.mjs";
 
 const { api } = foundry.applications;
 const { Item } = foundry.documents;
@@ -27,9 +23,7 @@ const { Item } = foundry.documents;
  * @property {boolean} isOwner
  * @property {boolean} limited
  */
-export default class TeriockItem extends ParentDocumentMixin(
-  ChildDocumentMixin(CommonDocumentMixin(Item)),
-) {
+export default class TeriockItem extends ParentDocumentMixin(ChildDocumentMixin(CommonDocumentMixin(Item))) {
   // noinspection ES6ClassMemberInitializationOrder
   /**
    * An object that tracks which tracks the changes to the data model which were applied by active effects
@@ -58,8 +52,7 @@ export default class TeriockItem extends ParentDocumentMixin(
    * @returns {Readonly<Teriock.Documents.ItemModelMetadata>}
    */
   get metadata() {
-    return /** @type {Readonly<Teriock.Documents.ItemModelMetadata>} */ super
-      .metadata;
+    return /** @type {Readonly<Teriock.Documents.ItemModelMetadata>} */ super.metadata;
   }
 
   /**
@@ -95,10 +88,7 @@ export default class TeriockItem extends ParentDocumentMixin(
     });
     if (pullType === "categories") {
       const pages = await fetchCategoryMembers(toPull);
-      const progress = ui.notifications.info(
-        `Pulling Category:${toPull} from wiki.`,
-        { progress: true },
-      );
+      const progress = ui.notifications.info(`Pulling Category:${toPull} from wiki.`, { progress: true });
       let pct = 0;
       for (const page of pages) {
         progress.update({
@@ -127,9 +117,11 @@ export default class TeriockItem extends ParentDocumentMixin(
    * @yields {TeriockEffect}
    * @returns {Generator<TeriockEffect, void, void>}
    */
-  *allApplicableEffects() {
+  * allApplicableEffects() {
     for (const effect of this.effects) {
-      if (effect.system.modifies !== this.documentName) continue;
+      if (effect.system.modifies !== this.documentName) {
+        continue;
+      }
       yield effect;
     }
   }
@@ -143,21 +135,23 @@ export default class TeriockItem extends ParentDocumentMixin(
     // Organize non-disabled effects by their application priority
     const changes = [];
     for (const effect of this.allApplicableEffects()) {
-      if (!effect.active) continue;
-      changes.push(
-        ...effect.changes.map((change) => {
-          const c = foundry.utils.deepClone(change);
-          c.effect = effect;
-          c.priority ??= c.mode * 10;
-          return c;
-        }),
-      );
+      if (!effect.active) {
+        continue;
+      }
+      changes.push(...effect.changes.map((change) => {
+        const c = foundry.utils.deepClone(change);
+        c.effect = effect;
+        c.priority ??= c.mode * 10;
+        return c;
+      }));
     }
     changes.sort((a, b) => a.priority - b.priority);
 
     // Apply all changes
     for (const change of changes) {
-      if (!change.key) continue;
+      if (!change.key) {
+        continue;
+      }
       const changes = change.effect.apply(this, change);
       Object.assign(overrides, changes);
     }
@@ -172,7 +166,12 @@ export default class TeriockItem extends ParentDocumentMixin(
    * @deprecated
    */
   async bulkWikiPull() {
-    if (["ability", "equipment", "rank", "power"].includes(this.type)) {
+    if ([
+      "ability",
+      "equipment",
+      "rank",
+      "power",
+    ].includes(this.type)) {
       const dialog = new api.DialogV2({
         buttons: [
           {
@@ -212,8 +211,9 @@ export default class TeriockItem extends ParentDocumentMixin(
   /** @inheritDoc */
   prepareEmbeddedDocuments() {
     super.prepareEmbeddedDocuments();
-    if (!this.actor || this.actor._embeddedPreparation)
+    if (!this.actor || this.actor._embeddedPreparation) {
       this.applyActiveEffects();
+    }
   }
 
   /** @inheritDoc */

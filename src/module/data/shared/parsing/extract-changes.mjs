@@ -13,7 +13,9 @@ export function extractChangesFromHTML(html) {
   tempDiv
     .querySelectorAll("span.metadata[data-type='change']")
     .forEach((el) => {
-      if (!(el instanceof HTMLElement)) return [];
+      if (!(el instanceof HTMLElement)) {
+        return [];
+      }
       const key = el.dataset.key;
       const mode = el.dataset.mode;
       const value = el.dataset.value;

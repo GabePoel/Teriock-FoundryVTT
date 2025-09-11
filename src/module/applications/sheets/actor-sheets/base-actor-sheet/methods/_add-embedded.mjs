@@ -66,7 +66,9 @@ export async function _addEmbedded(sheet, target) {
     },
   };
   const entry = tabMap[tab];
-  if (!entry) return;
+  if (!entry) {
+    return;
+  }
   /** @type {(Document|ClientDocument)[]} */
   const docs = await sheet.actor.createEmbeddedDocuments(entry.docType, [
     entry.data,
@@ -83,7 +85,9 @@ export async function _addEmbedded(sheet, target) {
  */
 export async function _addRank(sheet) {
   const rankClass = await selectClassDialog();
-  if (!rankClass) return;
+  if (!rankClass) {
+    return;
+  }
   const possibleRanks = await Promise.all([
     getRank(rankClass, 1),
     getRank(rankClass, 2),
@@ -97,31 +101,23 @@ export async function _addRank(sheet) {
   const rankNumber = referenceRank.system.classRank;
   let rank = await copyRank(rankClass, rankNumber);
   if (rankNumber <= 2) {
-    await sheet.document.createEmbeddedDocuments("Item", [rank]);
+    await sheet.document.createEmbeddedDocuments("Item", [ rank ]);
     return;
   }
-  const existingRanks = sheet.document.ranks.filter(
-    (r) => r.system.className === rankClass,
-  );
-  const combatAbilityNames = new Set(
-    referenceRank.abilities
-      .filter((a) => !a.sup)
-      .map((a) => a.name)
-      .slice(0, 3),
-  );
+  const existingRanks = sheet.document.ranks.filter((r) => r.system.className === rankClass);
+  const combatAbilityNames = new Set(referenceRank.abilities
+    .filter((a) => !a.sup)
+    .map((a) => a.name)
+    .slice(0, 3));
   const availableCombatAbilityNames = new Set(combatAbilityNames);
-  const supportAbilityNames = new Set(
-    referenceRank.abilities
-      .filter((a) => !a.sup)
-      .map((a) => a.name)
-      .slice(3),
-  );
+  const supportAbilityNames = new Set(referenceRank.abilities
+    .filter((a) => !a.sup)
+    .map((a) => a.name)
+    .slice(3));
   const availableSupportAbilityNames = new Set(supportAbilityNames);
   for (const existingRank of existingRanks) {
     for (const ability of existingRank.abilities) {
-      const existingAbility = rank.abilities.find(
-        (a) => a.name === ability.name,
-      );
+      const existingAbility = rank.abilities.find((a) => a.name === ability.name);
       if (existingAbility) {
         availableCombatAbilityNames.delete(existingAbility.name);
         availableSupportAbilityNames.delete(existingAbility.name);
@@ -130,9 +126,7 @@ export async function _addRank(sheet) {
   }
   const chosenAbilityNames = [];
   if (availableCombatAbilityNames.size > 1) {
-    const availableCombatAbilities = referenceRank.abilities.filter((a) =>
-      availableCombatAbilityNames.has(a.name),
-    );
+    const availableCombatAbilities = referenceRank.abilities.filter((a) => availableCombatAbilityNames.has(a.name));
     const chosenCombatAbility = await selectDocumentDialog(
       availableCombatAbilities,
       { title: "Select Combat Ability" },
@@ -143,9 +137,7 @@ export async function _addRank(sheet) {
     chosenAbilityNames.push(...availableCombatAbilityNames);
   }
   if (availableSupportAbilityNames.size > 1) {
-    const availableSupportAbilities = referenceRank.abilities.filter((a) =>
-      availableSupportAbilityNames.has(a.name),
-    );
+    const availableSupportAbilities = referenceRank.abilities.filter((a) => availableSupportAbilityNames.has(a.name));
     const chosenSupportAbility = await selectDocumentDialog(
       availableSupportAbilities,
       { title: "Select Support Ability" },
@@ -164,9 +156,11 @@ export async function _addRank(sheet) {
     chosenAbility.allSubs.map((a) => allowedAbilityIds.add(a.id));
   }
   for (const ability of abilities) {
-    if (!allowedAbilityIds.has(ability.id)) abilities.delete(ability.id);
+    if (!allowedAbilityIds.has(ability.id)) {
+      abilities.delete(ability.id);
+    }
   }
-  await sheet.document.createEmbeddedDocuments("Item", [rank]);
+  await sheet.document.createEmbeddedDocuments("Item", [ rank ]);
 }
 
 /**
@@ -179,11 +173,8 @@ export async function _addRank(sheet) {
 export async function _addEquipment(sheet) {
   let equipmentType = await selectEquipmentTypeDialog();
   if (Object.keys(TERIOCK.index.equipment).includes(equipmentType)) {
-    const equipment = await getItem(
-      TERIOCK.index.equipment[equipmentType],
-      "equipment",
-    );
-    await sheet.document.createEmbeddedDocuments("Item", [equipment]);
+    const equipment = await getItem(TERIOCK.index.equipment[equipmentType], "equipment");
+    await sheet.document.createEmbeddedDocuments("Item", [ equipment ]);
   } else {
     equipmentType = toTitleCase(equipmentType);
     await sheet.document.createEmbeddedDocuments("Item", [

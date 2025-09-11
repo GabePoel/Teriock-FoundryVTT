@@ -14,9 +14,7 @@ import { _override } from "./_overrides.mjs";
  * @private
  */
 export async function _parse(equipmentData, rawHTML) {
-  const allValidProperties = foundry.utils.deepClone(
-    TERIOCK.index.properties,
-  );
+  const allValidProperties = foundry.utils.deepClone(TERIOCK.index.properties);
 
   // Remove existing properties
   // const toRemove = [];
@@ -32,8 +30,7 @@ export async function _parse(equipmentData, rawHTML) {
   const q = (s) => doc.querySelector(s);
   const getValue = (s) => q(s)?.getAttribute("data-val");
   const getText = (s) => q(s)?.textContent.trim();
-  const getTextAll = (s) =>
-    Array.from(doc.querySelectorAll(s), (el) => el.textContent.trim());
+  const getTextAll = (s) => Array.from(doc.querySelectorAll(s), (el) => el.textContent.trim());
 
   const referenceEquipment = new Item({
     name: "Reference Equipment",
@@ -49,13 +46,14 @@ export async function _parse(equipmentData, rawHTML) {
   if (damageText) {
     const match = damageText.match(/^([^(]+)\s*\(([^)]+)\)/);
     parameters.damage = match ? match[1].trim() : damageText;
-    if (match) parameters.twoHandedDamage = match[2].trim();
+    if (match) {
+      parameters.twoHandedDamage = match[2].trim();
+    }
   }
 
   // Parse numeric and range values
   parameters.weight = cleanValue(getValue(".weight")) ?? parameters.weight;
-  parameters.shortRange =
-    cleanValue(getText(".short-range")) ?? parameters.shortRange;
+  parameters.shortRange = cleanValue(getText(".short-range")) ?? parameters.shortRange;
   parameters.range = cleanValue(getText(".normal-range")) ?? parameters.range;
   parameters.range = cleanValue(getText(".long-range")) ?? parameters.range;
   parameters.minStr = cleanValue(getValue(".min-str")) ?? parameters.minStr;
@@ -66,7 +64,9 @@ export async function _parse(equipmentData, rawHTML) {
 
   // Add piercing property if present
   const piercing = getValue(".piercing");
-  if (piercing) properties.add(piercing.toUpperCase());
+  if (piercing) {
+    properties.add(piercing.toUpperCase());
+  }
 
   // Parse sb, av, bv
   parameters.sb = toCamelCase(getValue(".sb") || "") ?? parameters.sb;
@@ -74,13 +74,9 @@ export async function _parse(equipmentData, rawHTML) {
   parameters.bv = cleanValue(getValue(".bv")) || 0;
 
   // Sort and filter properties and equipment classes
-  parameters.equipmentClasses = new Set(
-    Array.from(equipmentClasses).map((s) => toCamelCase(s)),
-  );
+  parameters.equipmentClasses = new Set(Array.from(equipmentClasses).map((s) => toCamelCase(s)));
   const toCreate = Array.from(properties);
-  const filteredProperties = toCreate.filter((p) =>
-    Object.values(allValidProperties).includes(p),
-  );
+  const filteredProperties = toCreate.filter((p) => Object.values(allValidProperties).includes(p));
   toCreate.length = 0;
   toCreate.push(...filteredProperties);
 
@@ -96,7 +92,10 @@ export async function _parse(equipmentData, rawHTML) {
     } else {
       await createProperty(equipmentData.parent, propertyName, { notify: false });
     }
-    return { propertyName: propertyName, success: true };
+    return {
+      propertyName: propertyName,
+      success: true,
+    };
   }
 
   const propertyPromises = toCreate.map((propertyName) => createSingleProperty(propertyName));
@@ -122,12 +121,10 @@ export async function _parse(equipmentData, rawHTML) {
 
   const oldImg = equipmentData.parent.img;
   let newImg = oldImg;
-  if (
-    oldImg?.startsWith("systems/teriock/assets") ||
-    oldImg?.startsWith("systems/teriock/src/icons/documents") ||
-    oldImg?.startsWith("systems/teriock/src/icons/equipment") ||
-    oldImg?.startsWith("icons/svg")
-  ) {
+  if (oldImg?.startsWith("systems/teriock/assets")
+    || oldImg?.startsWith("systems/teriock/src/icons/documents")
+    || oldImg?.startsWith("systems/teriock/src/icons/equipment")
+    || oldImg?.startsWith("icons/svg")) {
     newImg = getIcon("equipment", equipmentData.equipmentType);
     newImg = newImg.replace("ō", "o");
   }
@@ -151,5 +148,8 @@ export async function _parse(equipmentData, rawHTML) {
     "equipped",
   ].forEach((key) => delete parameters[key]);
 
-  return { system: parameters, img: newImg };
+  return {
+    system: parameters,
+    img: newImg,
+  };
 }

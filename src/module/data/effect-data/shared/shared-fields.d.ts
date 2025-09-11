@@ -5,8 +5,6 @@ import type TeriockActor from "../../../documents/actor.mjs";
 export interface ConsumableInterface {
   /** Is the equipment consumable? */
   consumable: boolean;
-  /** Quantity (if consumable) */
-  quantity: number;
   /** Max Quantity (if consumable) */
   maxQuantity: {
     /** Raw Max Quantity Value */
@@ -14,6 +12,8 @@ export interface ConsumableInterface {
     /** Derived Max Quantity Value */
     derived: number;
   };
+  /** Quantity (if consumable) */
+  quantity: number;
 }
 
 export type HierarchyField = {

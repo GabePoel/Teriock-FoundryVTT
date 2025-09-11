@@ -5,15 +5,9 @@ import { buildMessage } from "../../../../helpers/messages-builder/message-build
 import { SheetMixin } from "../../mixins/_module.mjs";
 import _embeddedFromCard from "../../mixins/methods/_embedded-from-card.mjs";
 import {
-  piercingContextMenu,
-  primaryAttackContextMenu,
-  primaryBlockerContextMenu,
+  piercingContextMenu, primaryAttackContextMenu, primaryBlockerContextMenu,
 } from "./connections/character-context-menus.mjs";
-import {
-  _addEmbedded,
-  _addEquipment,
-  _addRank,
-} from "./methods/_add-embedded.mjs";
+import { _addEmbedded, _addEquipment, _addRank } from "./methods/_add-embedded.mjs";
 import { _filterAbilities, _filterEquipment } from "./methods/_filters.mjs";
 import { _initSearchFilters } from "./methods/_search.mjs";
 import { _defaultSheetSettings } from "./methods/_settings.mjs";
@@ -33,39 +27,12 @@ const TextEditor = foundry.applications.ux.TextEditor.implementation;
  * @property {TeriockActor} document
  */
 export default class TeriockBaseActorSheet extends SheetMixin(ActorSheetV2) {
-  /**
-   * Creates a new base actor sheet instance.
-   * Initializes sheet state including menus, drawers, search values, and settings.
-   * @param {...any} args - Arguments to pass to the parent constructor.
-   */
-  constructor(...args) {
-    super(...args);
-    this._sidebarOpen = true;
-    this._hpDrawerOpen = true;
-    this._mpDrawerOpen = true;
-    this._locked = false;
-    this._dynamicContextMenus = {
-      attacker: [],
-      blocker: [],
-    };
-    this._embeds = {
-      effectTypes: {},
-      itemTypes: {},
-    };
-    this._activeTab = "tradecrafts";
-    const sheetSettings = _defaultSheetSettings;
-    Object.keys(conditions).forEach((key) => {
-      sheetSettings.conditionExpansions[key] = false;
-    });
-    this.settings = _defaultSheetSettings;
-
-    /** @type {Record<string, string>} */
-    this._searchStrings = {};
-  }
-
   /** @inheritDoc */
   static DEFAULT_OPTIONS = {
-    classes: ["teriock", "character"],
+    classes: [
+      "teriock",
+      "character",
+    ],
     actions: {
       addEmbedded: this._addEmbedded,
       addEquipment: this._addEquipment,
@@ -100,7 +67,10 @@ export default class TeriockBaseActorSheet extends SheetMixin(ActorSheetV2) {
     form: {
       submitOnChange: true,
     },
-    position: { width: 800, height: 600 },
+    position: {
+      width: 800,
+      height: 600,
+    },
     window: {
       icon: `fa-solid fa-${documentOptions.character.icon}`,
       controls: [
@@ -115,9 +85,11 @@ export default class TeriockBaseActorSheet extends SheetMixin(ActorSheetV2) {
   /** @inheritDoc */
   static PARTS = {
     all: {
-      template:
-        "systems/teriock/src/templates/document-templates/actor-templates/character-template/character-template.hbs",
-      scrollable: [".character-sidebar", ".character-tab-content"],
+      template: "systems/teriock/src/templates/document-templates/actor-templates/character-template/character-template.hbs",
+      scrollable: [
+        ".character-sidebar",
+        ".character-tab-content",
+      ],
     },
   };
 
@@ -243,9 +215,7 @@ export default class TeriockBaseActorSheet extends SheetMixin(ActorSheetV2) {
         },
       ];
       const content = buildMessage(messageParts).outerHTML;
-      message = await TextEditor.enrichHTML(
-        `<div class="teriock">${content}</div>`,
-      );
+      message = await TextEditor.enrichHTML(`<div class="teriock">${content}</div>`);
     }
     /** @type {Teriock.RollOptions.CommonRoll} */
     const options = {
@@ -306,9 +276,15 @@ export default class TeriockBaseActorSheet extends SheetMixin(ActorSheetV2) {
       const options = {
         secret: true,
       };
-      if (event.altKey) options.advantage = true;
-      if (event.shiftKey) options.disadvantage = true;
-      if (event.ctrlKey) options.twoHanded = true;
+      if (event.altKey) {
+        options.advantage = true;
+      }
+      if (event.shiftKey) {
+        options.disadvantage = true;
+      }
+      if (event.ctrlKey) {
+        options.twoHanded = true;
+      }
       await item.use(options);
     }
   }
@@ -323,8 +299,12 @@ export default class TeriockBaseActorSheet extends SheetMixin(ActorSheetV2) {
   static async _rollFeatSave(event, target) {
     const attribute = target.dataset.attribute;
     const options = {};
-    if (event.altKey) options.advantage = true;
-    if (event.shiftKey) options.disadvantage = true;
+    if (event.altKey) {
+      options.advantage = true;
+    }
+    if (event.shiftKey) {
+      options.disadvantage = true;
+    }
     await this.actor.rollFeatSave(attribute, options);
   }
 
@@ -362,9 +342,7 @@ export default class TeriockBaseActorSheet extends SheetMixin(ActorSheetV2) {
         },
       ];
       const content = buildMessage(messageParts).outerHTML;
-      message = await TextEditor.enrichHTML(
-        `<div class="teriock">${content}</div>`,
-      );
+      message = await TextEditor.enrichHTML(`<div class="teriock">${content}</div>`);
     }
     const options = {
       advantage: event.altKey,
@@ -400,8 +378,12 @@ export default class TeriockBaseActorSheet extends SheetMixin(ActorSheetV2) {
   static async _rollTradecraft(event, target) {
     const tradecraft = target.dataset.tradecraft;
     const options = {};
-    if (event.altKey) options.advantage = true;
-    if (event.shiftKey) options.disadvantage = true;
+    if (event.altKey) {
+      options.advantage = true;
+    }
+    if (event.shiftKey) {
+      options.disadvantage = true;
+    }
     await this.actor.rollTradecraft(tradecraft, options);
   }
 
@@ -415,8 +397,7 @@ export default class TeriockBaseActorSheet extends SheetMixin(ActorSheetV2) {
     event.stopPropagation();
     await DialogV2.prompt({
       window: { title: "Take Damage" },
-      content:
-        '<input type="number" name="damage" placeholder="Damage Amount">',
+      content: "<input type=\"number\" name=\"damage\" placeholder=\"Damage Amount\">",
       ok: {
         label: "Confirm",
         callback: (_event, button) => {
@@ -439,7 +420,7 @@ export default class TeriockBaseActorSheet extends SheetMixin(ActorSheetV2) {
     event.stopPropagation();
     await DialogV2.prompt({
       window: { title: "Take Drain" },
-      content: '<input type="number" name="drain" placeholder="Drain Amount">',
+      content: "<input type=\"number\" name=\"drain\" placeholder=\"Drain Amount\">",
       ok: {
         label: "Confirm",
         callback: (_event, button) => {
@@ -461,9 +442,7 @@ export default class TeriockBaseActorSheet extends SheetMixin(ActorSheetV2) {
    */
   static async _takeHack(event, target) {
     event.stopPropagation();
-    const part =
-      /** @type {Teriock.Parameters.Actor.HackableBodyPart} */ target.dataset
-        .part;
+    const part = /** @type {Teriock.Parameters.Actor.HackableBodyPart} */ target.dataset.part;
     await this.actor.takeHack(part);
   }
 
@@ -477,8 +456,7 @@ export default class TeriockBaseActorSheet extends SheetMixin(ActorSheetV2) {
     event.stopPropagation();
     await DialogV2.prompt({
       window: { title: "Take Wither" },
-      content:
-        '<input type="number" name="wither" placeholder="Wither Amount">',
+      content: "<input type=\"number\" name=\"wither\" placeholder=\"Wither Amount\">",
       ok: {
         label: "Confirm",
         callback: (_event, button) => {
@@ -499,8 +477,7 @@ export default class TeriockBaseActorSheet extends SheetMixin(ActorSheetV2) {
    * @static
    */
   static async _toggleAttunedDoc(_event, target) {
-    const embedded =
-      /** @type {TeriockEquipment|null} */
+    const embedded = /** @type {TeriockEquipment|null} */
       await _embeddedFromCard(this, target);
     if (embedded.system.isAttuned) {
       await embedded.system.deattune();
@@ -511,15 +488,9 @@ export default class TeriockBaseActorSheet extends SheetMixin(ActorSheetV2) {
 
   static async _toggleConditionExpansion(_event, target) {
     const condition = target.dataset.condition;
-    this.settings.conditionExpansions[condition] =
-      !this.settings.conditionExpansions[condition];
-    const conditionBodyEl = this.element.querySelector(
-      `.condition-body.${condition}`,
-    );
-    conditionBodyEl.classList.toggle(
-      "expanded",
-      this.settings.conditionExpansions[condition],
-    );
+    this.settings.conditionExpansions[condition] = !this.settings.conditionExpansions[condition];
+    const conditionBodyEl = this.element.querySelector(`.condition-body.${condition}`);
+    conditionBodyEl.classList.toggle("expanded", this.settings.conditionExpansions[condition]);
   }
 
   /**
@@ -530,8 +501,7 @@ export default class TeriockBaseActorSheet extends SheetMixin(ActorSheetV2) {
    * @static
    */
   static async _toggleDampenedDoc(_event, target) {
-    const embedded =
-      /** @type {TeriockEquipment|null} */
+    const embedded = /** @type {TeriockEquipment|null} */
       await _embeddedFromCard(this, target);
     if (embedded.system.dampened) {
       await embedded.system.undampen();
@@ -560,8 +530,7 @@ export default class TeriockBaseActorSheet extends SheetMixin(ActorSheetV2) {
    * @static
    */
   static async _toggleEquippedDoc(_event, target) {
-    const embedded =
-      /** @type {TeriockEquipment|null} */
+    const embedded = /** @type {TeriockEquipment|null} */
       await _embeddedFromCard(this, target);
     if (embedded.system.equipped) {
       await embedded.system.unequip();
@@ -578,8 +547,7 @@ export default class TeriockBaseActorSheet extends SheetMixin(ActorSheetV2) {
    * @static
    */
   static async _toggleGluedDoc(_event, target) {
-    const embedded =
-      /** @type {TeriockEquipment|null} */
+    const embedded = /** @type {TeriockEquipment|null} */
       await _embeddedFromCard(this, target);
     if (embedded.system.glued) {
       await embedded.system.unglue();
@@ -616,8 +584,7 @@ export default class TeriockBaseActorSheet extends SheetMixin(ActorSheetV2) {
    * @static
    */
   static async _toggleShatteredDoc(_event, target) {
-    const embedded =
-      /** @type {TeriockEquipment|null} */
+    const embedded = /** @type {TeriockEquipment|null} */
       await _embeddedFromCard(this, target);
     if (embedded.system.shattered) {
       await embedded.system.repair();
@@ -643,6 +610,36 @@ export default class TeriockBaseActorSheet extends SheetMixin(ActorSheetV2) {
   }
 
   /**
+   * Creates a new base actor sheet instance.
+   * Initializes sheet state including menus, drawers, search values, and settings.
+   * @param {...any} args - Arguments to pass to the parent constructor.
+   */
+  constructor(...args) {
+    super(...args);
+    this._sidebarOpen = true;
+    this._hpDrawerOpen = true;
+    this._mpDrawerOpen = true;
+    this._locked = false;
+    this._dynamicContextMenus = {
+      attacker: [],
+      blocker: [],
+    };
+    this._embeds = {
+      effectTypes: {},
+      itemTypes: {},
+    };
+    this._activeTab = "tradecrafts";
+    const sheetSettings = _defaultSheetSettings;
+    Object.keys(conditions).forEach((key) => {
+      sheetSettings.conditionExpansions[key] = false;
+    });
+    this.settings = _defaultSheetSettings;
+
+    /** @type {Record<string, string>} */
+    this._searchStrings = {};
+  }
+
+  /**
    * Cycle the value of a three-way switch either forwards or backwards.
    * @param {HTMLButtonElement} toggleSwitch
    * @param {boolean} forward
@@ -650,7 +647,9 @@ export default class TeriockBaseActorSheet extends SheetMixin(ActorSheetV2) {
    */
   #cycleToggleSwitch(toggleSwitch, forward = true) {
     const name = toggleSwitch.getAttribute("data-name");
-    if (!name) return;
+    if (!name) {
+      return;
+    }
     const path = name.split(".").slice(1);
     let obj = this.settings;
     for (let i = 0; i < path.length - 1; i++) {
@@ -671,11 +670,7 @@ export default class TeriockBaseActorSheet extends SheetMixin(ActorSheetV2) {
    * @returns {Array} Filtered abilities array.
    */
   _getFilteredAbilities(abilities = []) {
-    return _filterAbilities(
-      this.actor,
-      abilities,
-      this.settings.abilityFilters,
-    );
+    return _filterAbilities(this.actor, abilities, this.settings.abilityFilters);
   }
 
   /**
@@ -684,11 +679,7 @@ export default class TeriockBaseActorSheet extends SheetMixin(ActorSheetV2) {
    * @returns {Array} Filtered equipment array.
    */
   _getFilteredEquipment(equipment = []) {
-    return _filterEquipment(
-      this.actor,
-      equipment,
-      this.settings.equipmentFilters,
-    );
+    return _filterEquipment(this.actor, equipment, this.settings.equipmentFilters);
   }
 
   /** @inheritDoc */
@@ -698,9 +689,7 @@ export default class TeriockBaseActorSheet extends SheetMixin(ActorSheetV2) {
     /** @type {HTMLDivElement} */
     const sidebar = this.element.querySelector(".character-sidebar");
     /** @type {HTMLDivElement} */
-    const tabber = this.element.querySelector(
-      ".character-sidebar-tabber-container",
-    );
+    const tabber = this.element.querySelector(".character-sidebar-tabber-container");
     /** @type {HTMLDivElement} */
     const hpDrawer = this.element.querySelector(".hp-die-drawer");
     /** @type {HTMLDivElement} */
@@ -778,7 +767,9 @@ export default class TeriockBaseActorSheet extends SheetMixin(ActorSheetV2) {
     this.element.querySelectorAll(".ch-attribute-save-box").forEach((el) => {
       el.addEventListener("contextmenu", async (e) => {
         e.preventDefault();
-        if (!(el instanceof HTMLElement)) return;
+        if (!(el instanceof HTMLElement)) {
+          return;
+        }
         const attr = el.dataset.attribute;
         const current = this.document.system.attributes[attr].saveFluent;
         await this.document.update({
@@ -799,10 +790,10 @@ export default class TeriockBaseActorSheet extends SheetMixin(ActorSheetV2) {
     this.element.querySelectorAll(".hack-marker-box").forEach((el) => {
       el.addEventListener("contextmenu", async (e) => {
         e.preventDefault();
-        if (!(el instanceof HTMLElement)) return;
-        const part =
-          /** @type {Teriock.Parameters.Actor.HackableBodyPart} */ el.dataset
-            .part;
+        if (!(el instanceof HTMLElement)) {
+          return;
+        }
+        const part = /** @type {Teriock.Parameters.Actor.HackableBodyPart} */ el.dataset.part;
         await this.actor.takeUnhack(part);
         e.stopPropagation();
       });
@@ -819,34 +810,23 @@ export default class TeriockBaseActorSheet extends SheetMixin(ActorSheetV2) {
     primaryBlockerContextMenu(this.actor, this._dynamicContextMenus.blocker);
     primaryAttackContextMenu(this.actor, this._dynamicContextMenus.attacker);
 
-    this._connectContextMenu(
-      ".character-primary-blocker-select",
-      this._dynamicContextMenus.blocker,
-      "click",
-    );
-    this._connectContextMenu(
-      ".character-primary-attacker-select",
-      this._dynamicContextMenus.attacker,
-      "click",
-    );
-    this._connectContextMenu(
-      ".character-piercing-box",
-      piercingContextMenu(this.actor),
-      "click",
-    );
+    this._connectContextMenu(".character-primary-blocker-select", this._dynamicContextMenus.blocker, "click");
+    this._connectContextMenu(".character-primary-attacker-select", this._dynamicContextMenus.attacker, "click");
+    this._connectContextMenu(".character-piercing-box", piercingContextMenu(this.actor), "click");
 
     _initSearchFilters(this);
 
     /** @type {NodeListOf<HTMLSelectElement>} */
     const filterSelects = this.element.querySelectorAll(
-      'select[name^="settings.abilityFilters"], select[name^="settings.equipmentFilters"]',
-    );
+      "select[name^=\"settings.abilityFilters\"], select[name^=\"settings.equipmentFilters\"]");
     filterSelects.forEach((el) => {
       el.addEventListener("change", async (e) => {
         /** @type {HTMLSelectElement} */
         const filterSelect = e.target;
         const name = filterSelect.name;
-        if (!name) return;
+        if (!name) {
+          return;
+        }
         const path = name.split(".").slice(1);
         let obj = this.settings;
         for (let i = 0; i < path.length - 1; i++) {
@@ -858,9 +838,7 @@ export default class TeriockBaseActorSheet extends SheetMixin(ActorSheetV2) {
     });
 
     /** @type {NodeListOf<HTMLButtonElement>} */
-    const toggleSwitches = this.element.querySelectorAll(
-      'button[data-action="toggleSwitch"]',
-    );
+    const toggleSwitches = this.element.querySelectorAll("button[data-action=\"toggleSwitch\"]");
     toggleSwitches.forEach((el) => {
       // Left click: forward cycle
       el.addEventListener("click", async () => {
@@ -887,14 +865,11 @@ export default class TeriockBaseActorSheet extends SheetMixin(ActorSheetV2) {
     // const basicAbilitiesPower = await getItem("Basic Abilities", "essentials");
     // const basicAbilities = basicAbilitiesPower.abilities;
     this._embeds.effectTypes = {
-      ability:
-        tab === "abilities"
-          ? [
-              ...this.actor.abilities,
-              // Uncomment when bugs with virtual abilities are all resolved.
-              // ...basicAbilities
-            ]
-          : [],
+      ability: tab === "abilities" ? [
+        ...this.actor.abilities,
+        // Uncomment when bugs with virtual abilities are all resolved.
+        // ...basicAbilities
+      ] : [],
       attunement: tab === "conditions" ? this.actor.attunements : [],
       consequence: tab === "conditions" ? this.actor.consequences : [],
       fluency: tab === "tradecrafts" ? this.actor.fluencies : [],
@@ -908,16 +883,28 @@ export default class TeriockBaseActorSheet extends SheetMixin(ActorSheetV2) {
     let conditions = Array.from(this.actor.statuses || []);
     // Sort: 'down' first, 'dead' second, rest alphabetical
     conditions.sort((a, b) => {
-      if (a === "dead") return -1;
-      if (b === "dead") return 1;
-      if (a === "unconscious") return b === "dead" ? 1 : -1;
-      if (b === "unconscious") return a === "dead" ? -1 : 1;
+      if (a === "dead") {
+        return -1;
+      }
+      if (b === "dead") {
+        return 1;
+      }
+      if (a === "unconscious") {
+        return b === "dead" ? 1 : -1;
+      }
+      if (b === "unconscious") {
+        return a === "dead" ? -1 : 1;
+      }
       if (a === "down") {
-        if (b === "dead" || b === "unconscious") return 1;
+        if (b === "dead" || b === "unconscious") {
+          return 1;
+        }
         return -1;
       }
       if (b === "down") {
-        if (a === "dead" || a === "unconscious") return -1;
+        if (a === "dead" || a === "unconscious") {
+          return -1;
+        }
         return 1;
       }
       return a.localeCompare(b);
@@ -926,18 +913,12 @@ export default class TeriockBaseActorSheet extends SheetMixin(ActorSheetV2) {
     const context = await super._prepareContext(options);
     context.activeTab = this._activeTab;
     context.conditions = conditions;
-    context.removableConditions = conditions.filter((c) =>
-      this.actor.effectKeys.condition.has(c),
-    );
+    context.removableConditions = conditions.filter((c) => this.actor.effectKeys.condition.has(c));
     context.editable = this.isEditable;
     context.actor = this.actor;
-    context.abilities = this._getFilteredAbilities(
-      _sortAbilities(this.actor, this._embeds.effectTypes.ability) || [],
-    );
+    context.abilities = this._getFilteredAbilities(_sortAbilities(this.actor, this._embeds.effectTypes.ability) || []);
     context.resources = this.actor.resources;
-    context.equipment = this._getFilteredEquipment(
-      _sortEquipment(this.actor, this._embeds.itemTypes.equipment) || [],
-    );
+    context.equipment = this._getFilteredEquipment(_sortEquipment(this.actor, this._embeds.itemTypes.equipment) || []);
     context.powers = this.actor.powers;
     context.species = this.actor.species;
     context.fluencies = this.actor.fluencies;
@@ -955,12 +936,9 @@ export default class TeriockBaseActorSheet extends SheetMixin(ActorSheetV2) {
       },
     };
     context.searchStrings = foundry.utils.deepClone(this._searchStrings);
-    context.enrichedNotes = await this._enrich(
-      this.document.system.sheet.notes,
-    );
-    context.enrichedSpecialRules = await this._enrich(
-      this.document.system.wielding.attacker.derived?.system?.specialRules,
-    );
+    context.enrichedNotes = await this._enrich(this.document.system.sheet.notes);
+    context.enrichedSpecialRules
+      = await this._enrich(this.document.system.wielding.attacker.derived?.system?.specialRules);
     context.settings = this.settings;
 
     context.conditionProviders = {};
@@ -983,18 +961,12 @@ export default class TeriockBaseActorSheet extends SheetMixin(ActorSheetV2) {
               context.conditionProviders[condition].delete("1st Leg Hack");
             }
             if (e.name === "Heavily Encumbered") {
-              context.conditionProviders[condition].delete(
-                "Lightly Encumbered",
-              );
+              context.conditionProviders[condition].delete("Lightly Encumbered");
             }
           }
         }
         for (const c of this.document.conditions) {
-          if (
-            !c.id.includes(condition) &&
-            c.statuses.has(condition) &&
-            c.active
-          ) {
+          if (!c.id.includes(condition) && c.statuses.has(condition) && c.active) {
             context.conditionProviders[condition].add(c.name);
           }
         }
@@ -1003,9 +975,7 @@ export default class TeriockBaseActorSheet extends SheetMixin(ActorSheetV2) {
             context.conditionProviders[condition].add(c.name);
           }
         }
-        context.conditionProviders[condition] = Array.from(
-          context.conditionProviders[condition],
-        );
+        context.conditionProviders[condition] = Array.from(context.conditionProviders[condition]);
       }
     }
 

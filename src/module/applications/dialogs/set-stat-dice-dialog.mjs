@@ -10,12 +10,7 @@ const { fields } = foundry.data;
  * @param {number} initialNumber
  * @param {Teriock.RollOptions.PolyhedralDieFaces} initialFaces
  */
-export default async function setStatDiceDialog(
-  statItem,
-  stat,
-  initialNumber,
-  initialFaces,
-) {
+export default async function setStatDiceDialog(statItem, stat, initialNumber, initialFaces) {
   const content = document.createElement("div");
   const numberField = new fields.NumberField({
     initial: initialNumber,
@@ -39,10 +34,7 @@ export default async function setStatDiceDialog(
     ok: {
       label: "Apply",
       callback: async (_event, button) => {
-        const number = Math.max(
-          Math.floor(Number(button.form.elements.namedItem("number").value)),
-          1,
-        );
+        const number = Math.max(Math.floor(Number(button.form.elements.namedItem("number").value)), 1);
         const faces = Number(button.form.elements.namedItem("faces").value);
         // await statItem.update({
         //   [`system.${stat}DiceBase.number`]: number,

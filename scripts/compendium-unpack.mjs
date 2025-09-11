@@ -18,25 +18,27 @@ for (const pack of packs) {
     // noinspection JSVoidFunctionReturnValueUsed
     for (const file of /** @type {string[]} */ await fs.readdir(directory)) {
       const filePath = path.join(directory, file);
-      if (file.endsWith(yaml ? ".yml" : ".json")) await fs.unlink(filePath);
-      else fs.rm(filePath, { recursive: true });
+      if (file.endsWith(yaml ? ".yml" : ".json")) {
+        await fs.unlink(filePath);
+      } else {
+        await fs.rm(filePath, { recursive: true });
+      }
     }
   } catch (error) {
-    if (error.code === "ENOENT") console.log("No files inside of " + pack);
-    else console.log(error);
+    if (error.code === "ENOENT") {
+      console.log("No files inside of " + pack);
+    } else {
+      console.log(error);
+    }
   }
-  await extractPack(
-    `${MODULE_ID}/packs/${pack}`,
-    `${MODULE_ID}/src/packs/${pack}`,
-    {
-      yaml,
-      transformName,
-      transformFolderName,
-      transformEntry,
-      expandAdventures,
-      folders,
-    },
-  );
+  await extractPack(`${MODULE_ID}/packs/${pack}`, `${MODULE_ID}/src/packs/${pack}`, {
+    yaml,
+    transformName,
+    transformFolderName,
+    transformEntry,
+    expandAdventures,
+    folders,
+  });
 }
 
 /**
@@ -49,7 +51,9 @@ function transformName(doc, context) {
   const safeFileName = toKebabCase(doc.name);
   let name = `${doc.name ? `${safeFileName}` : doc._id}.${yaml ? "yml" : "json"}`;
   name = name.replace("---", "-");
-  if (context.folder) name = path.join(context.folder, name);
+  if (context.folder) {
+    name = path.join(context.folder, name);
+  }
   return name;
 }
 
@@ -147,7 +151,13 @@ function cleanEntry(doc) {
  */
 function transformEntry(doc) {
   cleanEntry(doc);
-  if (doc.effects) doc.effects.forEach((d) => cleanEntry(d));
-  if (doc.items) doc.items.forEach((d) => cleanEntry(d));
-  if (doc.pages) doc.pages.forEach((d) => cleanEntry(d));
+  if (doc.effects) {
+    doc.effects.forEach((d) => cleanEntry(d));
+  }
+  if (doc.items) {
+    doc.items.forEach((d) => cleanEntry(d));
+  }
+  if (doc.pages) {
+    doc.pages.forEach((d) => cleanEntry(d));
+  }
 }

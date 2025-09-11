@@ -15,8 +15,8 @@ export interface AttributeImprovement {
  * Feat save improvement configuration
  */
 export interface FeatSaveImprovement {
-  attribute: Teriock.Parameters.Actor.Attribute | null;
   amount: FeatSaveImprovementAmount;
+  attribute: Teriock.Parameters.Actor.Attribute | null;
 }
 
 /**

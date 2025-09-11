@@ -1,9 +1,14 @@
 /**
  * Handler for calling actions when clicking on buttons in chat messages.
- *
  * @template {DOMStringMap} [TDataset=DOMStringMap]
  */
 export default class ActionHandler {
+  /**
+   * Name of action to connect to listeners.
+   * @type {string}
+   */
+  static ACTION = "";
+
   /**
    * @param {MouseEvent} event
    * @param {HTMLElement} element
@@ -16,17 +21,10 @@ export default class ActionHandler {
     const tokenLayer = /** @type {TokenLayer} */ game.canvas.tokens;
     const user = /** @type {TeriockUser} */ game.user;
 
-    this.selectedTokens =
-      /** @type {TeriockTokenDocument[]} */ tokenLayer.controlled;
-    this.selectedActors = /** @type {TeriockActor[]} */ this.selectedTokens.map(
-      (t) => t.actor,
-    );
-    this.targetedTokens = /** @type {TeriockTokenDocument[]} */ Array.from(
-      user.targets,
-    );
-    this.targetedActors = /** @type {TeriockActor[]} */ this.targetedTokens.map(
-      (t) => t.actor,
-    );
+    this.selectedTokens = /** @type {TeriockTokenDocument[]} */ tokenLayer.controlled;
+    this.selectedActors = /** @type {TeriockActor[]} */ this.selectedTokens.map((t) => t.actor);
+    this.targetedTokens = /** @type {TeriockTokenDocument[]} */ Array.from(user.targets);
+    this.targetedActors = /** @type {TeriockActor[]} */ this.targetedTokens.map((t) => t.actor);
     this.tokens = this.selectedTokens;
     this.actors = this.selectedActors;
     if (event.ctrlKey) {
@@ -43,12 +41,6 @@ export default class ActionHandler {
       crit: event.altKey,
     };
   }
-
-  /**
-   * Name of action to connect to listeners.
-   * @type {string}
-   */
-  static ACTION = "";
 
   /**
    * Left-click action.

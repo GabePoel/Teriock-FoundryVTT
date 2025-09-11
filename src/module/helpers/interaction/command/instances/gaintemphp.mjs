@@ -3,7 +3,11 @@ import TeriockCommand from "../command.mjs";
 export const gaintemphp = new TeriockCommand(
   "gaintemphp",
   "Gain temporary HP on targeted tokens. Usage: /gaintemphp <amount>",
-  async ({ args, _chatData, actors }) => {
+  async ({
+    args,
+    _chatData,
+    actors,
+  }) => {
     if (args.length === 0) {
       ui.notifications.warn("Usage: /gaintemphp <amount>");
       return;
@@ -19,12 +23,10 @@ export const gaintemphp = new TeriockCommand(
       await actor.takeGainTempHp(amount);
     }
 
-    ui.notifications.info(
-      `Gained ${amount} temporary HP on ${actors.length} target(s).`,
-    );
+    ui.notifications.info(`Gained ${amount} temporary HP on ${actors.length} target(s).`);
   },
   {
-    aliases: ["gthp"],
+    aliases: [ "gthp" ],
     category: "#support",
     requiresTarget: true,
   },

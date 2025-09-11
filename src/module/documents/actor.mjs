@@ -28,18 +28,14 @@ const { Actor } = foundry.documents;
  * @property {boolean} isOwner
  * @property {boolean} limited
  */
-export default class TeriockActor extends ParentDocumentMixin(
-  CommonDocumentMixin(Actor),
-) {
+export default class TeriockActor extends ParentDocumentMixin(CommonDocumentMixin(Actor)) {
   /**
    * Figure out the name for a given size.
    * @param {number} size
    * @returns {string}
    */
   static toNamedSize(size) {
-    const sizeKeys = Object.keys(
-      TERIOCK.options.character.namedSizes,
-    ).map(Number);
+    const sizeKeys = Object.keys(TERIOCK.options.character.namedSizes).map(Number);
     const filteredSizeKeys = sizeKeys.filter((key) => key <= size);
     const sizeKey = Math.max(...filteredSizeKeys, 0);
     return TERIOCK.options.character.namedSizes[sizeKey] || "Medium";
@@ -58,10 +54,7 @@ export default class TeriockActor extends ParentDocumentMixin(
    * @returns {TeriockConsequence[]} Array of condition expiration effects.
    */
   get conditionExpirationEffects() {
-    return (
-      this.consequences.filter((effect) => effect.system.conditionExpiration) ||
-      []
-    );
+    return (this.consequences.filter((effect) => effect.system.conditionExpiration) || []);
   }
 
   /**
@@ -69,9 +62,7 @@ export default class TeriockActor extends ParentDocumentMixin(
    * @returns {TeriockConsequence[]} Array of dawn expiration effects.
    */
   get dawnExpirationEffects() {
-    return (
-      this.consequences.filter((effect) => effect.system.dawnExpiration) || []
-    );
+    return (this.consequences.filter((effect) => effect.system.dawnExpiration) || []);
   }
 
   /**
@@ -100,8 +91,7 @@ export default class TeriockActor extends ParentDocumentMixin(
    * @returns {Readonly<Teriock.Documents.ActorModelMetadata>}
    */
   get metadata() {
-    return /** @type {Readonly<Teriock.Documents.ActorModelMetadata>} */ super
-      .metadata;
+    return /** @type {Readonly<Teriock.Documents.ActorModelMetadata>} */ super.metadata;
   }
 
   /**
@@ -109,10 +99,7 @@ export default class TeriockActor extends ParentDocumentMixin(
    * @returns {TeriockConsequence[]} Array of movement expiration effects.
    */
   get movementExpirationEffects() {
-    return (
-      this.consequences.filter((effect) => effect.system.movementExpiration) ||
-      []
-    );
+    return (this.consequences.filter((effect) => effect.system.movementExpiration) || []);
   }
 
   /** @returns {TeriockPower[]} */
@@ -164,16 +151,19 @@ export default class TeriockActor extends ParentDocumentMixin(
 
     // Update Prototype Token
     const prototypeToken = {};
-    const size =
-      TERIOCK.options.character.tokenSizes[
-        TeriockActor.toNamedSize(this.system.size)
-      ] || 1;
-    if (!foundry.utils.hasProperty(data, "prototypeToken.sight.enabled"))
-      prototypeToken.sight = { enabled: true, range: 0 };
-    if (!foundry.utils.hasProperty(data, "prototypeToken.width"))
+    const size = TERIOCK.options.character.tokenSizes[TeriockActor.toNamedSize(this.system.size)] || 1;
+    if (!foundry.utils.hasProperty(data, "prototypeToken.sight.enabled")) {
+      prototypeToken.sight = {
+        enabled: true,
+        range: 0,
+      };
+    }
+    if (!foundry.utils.hasProperty(data, "prototypeToken.width")) {
       prototypeToken.width = size;
-    if (!foundry.utils.hasProperty(data, "prototypeToken.height"))
+    }
+    if (!foundry.utils.hasProperty(data, "prototypeToken.height")) {
       prototypeToken.height = size;
+    }
     this.updateSource({ prototypeToken: prototypeToken });
   }
 
@@ -185,13 +175,11 @@ export default class TeriockActor extends ParentDocumentMixin(
    * @returns {Promise<boolean|void>}
    */
   async _preUpdate(changed, options, user) {
-    if ((await super._preUpdate(changed, options, user)) === false)
+    if ((await super._preUpdate(changed, options, user)) === false) {
       return false;
+    }
     if (foundry.utils.hasProperty(changed, "system.size")) {
-      const tokenSize =
-        TERIOCK.options.character.tokenSizes[
-          TeriockActor.toNamedSize(changed.system.size)
-        ] || 1;
+      const tokenSize = TERIOCK.options.character.tokenSizes[TeriockActor.toNamedSize(changed.system.size)] || 1;
       if (!foundry.utils.hasProperty(changed, "prototypeToken.width")) {
         changed.prototypeToken ||= {};
         changed.prototypeToken.height = tokenSize;
@@ -199,9 +187,15 @@ export default class TeriockActor extends ParentDocumentMixin(
       }
       for (const token of /** @type {TeriockTokenDocument[]} */ this.getDependentTokens()) {
         if (token.parent?.grid?.type === 0) {
-          await token.resize({ width: tokenSize, height: tokenSize });
+          await token.resize({
+            width: tokenSize,
+            height: tokenSize,
+          });
         } else {
-          await token.update({ width: tokenSize, height: tokenSize });
+          await token.update({
+            width: tokenSize,
+            height: tokenSize,
+          });
         }
       }
     }
@@ -212,9 +206,11 @@ export default class TeriockActor extends ParentDocumentMixin(
    * @yields {TeriockEffect}
    * @returns {Generator<TeriockEffect, void, void>}
    */
-  *allApplicableEffects() {
+  * allApplicableEffects() {
     for (const effect of super.allApplicableEffects()) {
-      if (effect.system.modifies !== this.documentName) continue;
+      if (effect.system.modifies !== this.documentName) {
+        continue;
+      }
       yield effect;
     }
   }
@@ -229,29 +225,20 @@ export default class TeriockActor extends ParentDocumentMixin(
   async createEmbeddedDocuments(embeddedName, data = [], operation = {}) {
     this._filterDocumentCreationData(embeddedName, data);
     if (embeddedName === "Item") {
-      for (const archetype of ["mage", "semi", "warrior"]) {
-        if (
-          data.find(
-            (d) => d.type === "rank" && d.system?.archetype === archetype,
-          )
-        ) {
-          if (!this.itemKeys.power.has(archetype))
-            data.push(
-              await copyItem(
-                TERIOCK.options.rank[archetype].name,
-                "classes",
-              ),
-            );
+      for (const archetype of [
+        "mage",
+        "semi",
+        "warrior",
+      ]) {
+        if (data.find((d) => d.type === "rank" && d.system?.archetype === archetype)) {
+          if (!this.itemKeys.power.has(archetype)) {
+            data.push(await copyItem(TERIOCK.options.rank[archetype].name, "classes"));
+          }
         }
       }
     }
-    if (
-      embeddedName === "ActiveEffect" &&
-      data.find((d) => d.type === "consequence")
-    ) {
-      for (const consequenceData of data.filter(
-        (d) => d.type === "consequence",
-      )) {
+    if (embeddedName === "ActiveEffect" && data.find((d) => d.type === "consequence")) {
+      for (const consequenceData of data.filter((d) => d.type === "consequence")) {
         const changes = consequenceData?.changes;
         if (changes && changes.length > 0) {
           for (const change of changes) {
@@ -262,7 +249,10 @@ export default class TeriockActor extends ParentDocumentMixin(
               if (macro) {
                 await macro.execute({
                   actor: this,
-                  data: { cancel: false, docData: consequenceData },
+                  data: {
+                    cancel: false,
+                    docData: consequenceData,
+                  },
                 });
               }
             }
@@ -284,20 +274,23 @@ export default class TeriockActor extends ParentDocumentMixin(
    */
   async deleteEmbeddedDocuments(embeddedName, ids = [], operation = {}) {
     if (embeddedName === "Item") {
-      const ranksBeingDeleted =
-        this.ranks.filter((i) => ids.includes(i.id)) ?? [];
-      const archetypesDeleted = new Set(
-        ranksBeingDeleted.map((i) => i.system.archetype).filter(Boolean),
-      );
-      for (const archetype of ["mage", "semi", "warrior"]) {
-        if (!archetypesDeleted.has(archetype)) continue;
-        const remaining = this.ranks.some(
-          (i) => i.system.archetype === archetype && !ids.includes(i.id),
-        );
+      const ranksBeingDeleted = this.ranks.filter((i) => ids.includes(i.id)) ?? [];
+      const archetypesDeleted = new Set(ranksBeingDeleted.map((i) => i.system.archetype).filter(Boolean));
+      for (const archetype of [
+        "mage",
+        "semi",
+        "warrior",
+      ]) {
+        if (!archetypesDeleted.has(archetype)) {
+          continue;
+        }
+        const remaining = this.ranks.some((i) => i.system.archetype === archetype && !ids.includes(i.id));
         if (!remaining) {
           const powerName = TERIOCK.options.rank[archetype].name;
           const powerItem = this.powers.find((i) => i.name === powerName);
-          if (powerItem && !ids.includes(powerItem.id)) ids.push(powerItem.id);
+          if (powerItem && !ids.includes(powerItem.id)) {
+            ids.push(powerItem.id);
+          }
         }
       }
     }
@@ -346,24 +339,27 @@ export default class TeriockActor extends ParentDocumentMixin(
 
   /** @inheritDoc */
   async hookCall(pseudoHook, data, effect) {
-    if (!data) data = {};
+    if (!data) {
+      data = {};
+    }
     data.cancel = false;
     Hooks.callAll(`teriock.${pseudoHook}`, this, data);
     let macroUuids = this.system.hookedMacros[pseudoHook];
     if (macroUuids) {
       if (effect) {
-        macroUuids = macroUuids.filter((uuid) =>
-          effect.changes
-            .filter((c) => c.key === `system.hookedMacros.${pseudoHook}`)
-            .map((c) => c.value)
-            .includes(uuid),
-        );
+        macroUuids = macroUuids.filter((uuid) => effect.changes
+          .filter((c) => c.key === `system.hookedMacros.${pseudoHook}`)
+          .map((c) => c.value)
+          .includes(uuid));
       }
       for (const macroUuid of macroUuids) {
         /** @type {TeriockMacro} */
         const macro = await foundry.utils.fromUuid(macroUuid);
         if (macro) {
-          await macro.execute({ actor: this, data: data });
+          await macro.execute({
+            actor: this,
+            data: data,
+          });
         }
       }
     }
@@ -379,7 +375,9 @@ export default class TeriockActor extends ParentDocumentMixin(
   async postUpdate(skipFunctions = {}) {
     const data = { skipFunctions };
     await this.hookCall("postUpdate", data);
-    if (!data.cancel) await this.system.postUpdate(data.skipFunctions);
+    if (!data.cancel) {
+      await this.system.postUpdate(data.skipFunctions);
+    }
   }
 
   /** @inheritDoc */
@@ -392,9 +390,7 @@ export default class TeriockActor extends ParentDocumentMixin(
   prepareDerivedData() {
     super.prepareDerivedData();
     this.itemKeys = {
-      equipment: new Set(
-        this.itemTypes?.equipment.map((e) => toCamelCase(e.name)),
-      ),
+      equipment: new Set(this.itemTypes?.equipment.map((e) => toCamelCase(e.name))),
       power: new Set(this.itemTypes?.power.map((e) => toCamelCase(e.name))),
       rank: new Set(this.itemTypes?.rank.map((e) => toCamelCase(e.name))),
       species: new Set(this.itemTypes?.species.map((e) => toCamelCase(e.name))),
@@ -428,10 +424,14 @@ export default class TeriockActor extends ParentDocumentMixin(
    * @returns {Promise<void>}
    */
   async rollFeatSave(attribute, options = {}) {
-    const data = { attribute, options };
+    const data = {
+      attribute,
+      options,
+    };
     await this.hookCall("rollFeatSave", data);
-    if (!data.cancel)
+    if (!data.cancel) {
       await this.system.rollFeatSave(data.attribute, data.options);
+    }
   }
 
   /**
@@ -446,7 +446,9 @@ export default class TeriockActor extends ParentDocumentMixin(
   async rollImmunity(options = {}) {
     const data = { options };
     await this.hookCall("rollImmunity", data);
-    if (!data.cancel) await this.system.rollImmunity(data.options);
+    if (!data.cancel) {
+      await this.system.rollImmunity(data.options);
+    }
   }
 
   /**
@@ -461,7 +463,9 @@ export default class TeriockActor extends ParentDocumentMixin(
   async rollResistance(options = {}) {
     const data = { options };
     await this.hookCall("rollResistance", data);
-    if (!data.cancel) await this.system.rollResistance(data.options);
+    if (!data.cancel) {
+      await this.system.rollResistance(data.options);
+    }
   }
 
   /**
@@ -475,10 +479,14 @@ export default class TeriockActor extends ParentDocumentMixin(
    * @returns {Promise<void>}
    */
   async rollTradecraft(tradecraft, options = {}) {
-    const data = { tradecraft, options };
+    const data = {
+      tradecraft,
+      options,
+    };
     await this.hookCall("rollTradecraft", data);
-    if (!data.cancel)
+    if (!data.cancel) {
       await this.system.rollTradecraft(data.tradecraft, data.options);
+    }
   }
 
   /**
@@ -491,7 +499,9 @@ export default class TeriockActor extends ParentDocumentMixin(
    */
   async takeAwaken() {
     const data = await this.hookCall("takeAwaken");
-    if (!data.cancel) await this.system.takeAwaken();
+    if (!data.cancel) {
+      await this.system.takeAwaken();
+    }
   }
 
   /**
@@ -506,7 +516,9 @@ export default class TeriockActor extends ParentDocumentMixin(
   async takeDamage(amount) {
     const data = { amount };
     await this.hookCall("takeDamage", data);
-    if (!data.cancel) await this.system.takeDamage(data.amount);
+    if (!data.cancel) {
+      await this.system.takeDamage(data.amount);
+    }
   }
 
   /**
@@ -521,7 +533,9 @@ export default class TeriockActor extends ParentDocumentMixin(
   async takeDrain(amount) {
     const data = { amount };
     await this.hookCall("takeDrain", data);
-    if (!data.cancel) await this.system.takeDrain(data.amount);
+    if (!data.cancel) {
+      await this.system.takeDrain(data.amount);
+    }
   }
 
   /**
@@ -536,7 +550,9 @@ export default class TeriockActor extends ParentDocumentMixin(
   async takeGainTempHp(amount) {
     const data = { amount };
     await this.hookCall("takeGainTempHp", data);
-    if (!data.cancel) await this.system.takeGainTempHp(data.amount);
+    if (!data.cancel) {
+      await this.system.takeGainTempHp(data.amount);
+    }
   }
 
   /**
@@ -551,7 +567,9 @@ export default class TeriockActor extends ParentDocumentMixin(
   async takeGainTempMp(amount) {
     const data = { amount };
     await this.hookCall("takeGainTempMp", data);
-    if (!data.cancel) await this.system.takeGainTempMp(data.amount);
+    if (!data.cancel) {
+      await this.system.takeGainTempMp(data.amount);
+    }
   }
 
   /**
@@ -566,7 +584,9 @@ export default class TeriockActor extends ParentDocumentMixin(
   async takeHack(part) {
     const data = { part };
     await this.hookCall("takeHack", data);
-    if (!data.cancel) await this.system.takeHack(data.part);
+    if (!data.cancel) {
+      await this.system.takeHack(data.part);
+    }
   }
 
   /**
@@ -581,7 +601,9 @@ export default class TeriockActor extends ParentDocumentMixin(
   async takeHeal(amount) {
     const data = { amount };
     await this.hookCall("takeHeal", data);
-    if (!data.cancel) await this.system.takeHeal(data.amount);
+    if (!data.cancel) {
+      await this.system.takeHeal(data.amount);
+    }
   }
 
   /**
@@ -596,7 +618,9 @@ export default class TeriockActor extends ParentDocumentMixin(
   async takeKill(amount) {
     const data = { amount };
     await this.hookCall("takeKill", data);
-    if (!data.cancel) await this.system.takeKill(data.amount);
+    if (!data.cancel) {
+      await this.system.takeKill(data.amount);
+    }
   }
 
   /**
@@ -605,9 +629,14 @@ export default class TeriockActor extends ParentDocumentMixin(
    * @param {Teriock.Parameters.Actor.PayMode} mode - Exact change or the closest denomination, rounded up.
    */
   async takePay(amount, mode = "greedy") {
-    const data = { amount, mode };
+    const data = {
+      amount,
+      mode,
+    };
     await this.hookCall("takePay", data);
-    if (!data.cancel) await this.system.takePay(data.amount, data.mode);
+    if (!data.cancel) {
+      await this.system.takePay(data.amount, data.mode);
+    }
   }
 
   /**
@@ -622,7 +651,9 @@ export default class TeriockActor extends ParentDocumentMixin(
   async takeRevitalize(amount) {
     const data = { amount };
     await this.hookCall("takeRevitalize", data);
-    if (!data.cancel) await this.system.takeRevitalize(data.amount);
+    if (!data.cancel) {
+      await this.system.takeRevitalize(data.amount);
+    }
   }
 
   /**
@@ -635,7 +666,9 @@ export default class TeriockActor extends ParentDocumentMixin(
    */
   async takeRevive() {
     const data = await this.hookCall("takeRevive");
-    if (!data.cancel) await this.system.takeRevive();
+    if (!data.cancel) {
+      await this.system.takeRevive();
+    }
   }
 
   /**
@@ -650,7 +683,9 @@ export default class TeriockActor extends ParentDocumentMixin(
   async takeSetTempHp(amount) {
     const data = { amount };
     await this.hookCall("takeSetTempHp", data);
-    if (!data.cancel) await this.system.takeSetTempHp(data.amount);
+    if (!data.cancel) {
+      await this.system.takeSetTempHp(data.amount);
+    }
   }
 
   /**
@@ -665,7 +700,9 @@ export default class TeriockActor extends ParentDocumentMixin(
   async takeSetTempMp(amount) {
     const data = { amount };
     await this.hookCall("takeSetTempMp", data);
-    if (!data.cancel) await this.system.takeSetTempMp(data.amount);
+    if (!data.cancel) {
+      await this.system.takeSetTempMp(data.amount);
+    }
   }
 
   /**
@@ -680,7 +717,9 @@ export default class TeriockActor extends ParentDocumentMixin(
   async takeSleep(amount) {
     const data = { amount };
     await this.hookCall("takeSleep", data);
-    if (!data.cancel) await this.system.takeSleep(data.amount);
+    if (!data.cancel) {
+      await this.system.takeSleep(data.amount);
+    }
   }
 
   /**
@@ -695,7 +734,9 @@ export default class TeriockActor extends ParentDocumentMixin(
   async takeUnhack(part) {
     const data = { part };
     await this.hookCall("takeUnhack", data);
-    if (!data.cancel) await this.system.takeUnhack(data.part);
+    if (!data.cancel) {
+      await this.system.takeUnhack(data.part);
+    }
   }
 
   /**
@@ -710,7 +751,9 @@ export default class TeriockActor extends ParentDocumentMixin(
   async takeWither(amount) {
     const data = { amount };
     await this.hookCall("takeWither", data);
-    if (!data.cancel) await this.system.takeWither(data.amount);
+    if (!data.cancel) {
+      await this.system.takeWither(data.amount);
+    }
   }
 
   /**
@@ -720,9 +763,7 @@ export default class TeriockActor extends ParentDocumentMixin(
    * @returns {Promise<void>}
    */
   async useAbility(abilityName, options = {}) {
-    const abilities = Array.from(this.allApplicableEffects()).filter(
-      (i) => i.type === "ability",
-    );
+    const abilities = Array.from(this.allApplicableEffects()).filter((i) => i.type === "ability");
     /** @type TeriockAbility */
     const ability = abilities.find((i) => i.name === abilityName);
     if (ability) {

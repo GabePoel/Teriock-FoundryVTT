@@ -1,12 +1,4 @@
-import {
-  access,
-  copyFile,
-  lstat,
-  mkdir,
-  readFile,
-  rm,
-  symlink,
-} from "fs/promises";
+import { access, copyFile, lstat, mkdir, readFile, rm, symlink } from "fs/promises";
 import { basename, dirname, extname, join, relative, resolve } from "path";
 import { argv, cwd, exit, platform } from "process";
 
@@ -20,10 +12,15 @@ const opts = {
 };
 for (let i = 0; i < args.length; i++) {
   const a = args[i];
-  if (a === "--assignments" || a === "-a") opts.assignments = args[++i];
-  else if (a === "--images-root" || a === "-i") opts.imagesRoot = args[++i];
-  else if (a === "--out" || a === "-o") opts.out = args[++i];
-  else if (a === "--dry-run") opts.dryRun = true;
+  if (a === "--assignments" || a === "-a") {
+    opts.assignments = args[++i];
+  } else if (a === "--images-root" || a === "-i") {
+    opts.imagesRoot = args[++i];
+  } else if (a === "--out" || a === "-o") {
+    opts.out = args[++i];
+  } else if (a === "--dry-run") {
+    opts.dryRun = true;
+  }
 }
 
 /* ---------------- Helpers ---------------- */
@@ -38,7 +35,9 @@ const fileExists = async (p) => {
 };
 
 const normalizePath = (p) => {
-  if (!p) return "";
+  if (!p) {
+    return "";
+  }
   try {
     p = decodeURI(p);
   } catch {}
@@ -51,15 +50,14 @@ const normalizePath = (p) => {
     .replace(/\/{2,}/g, "/");
 };
 
-const kebabCase = (s) =>
-  (s ?? "")
-    .normalize("NFKD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .toLowerCase()
-    .replace(/&/g, " and ")
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-+|-+$/g, "")
-    .replace(/--+/g, "-") || "unnamed";
+const kebabCase = (s) => (s ?? "")
+  .normalize("NFKD")
+  .replace(/[\u0300-\u036f]/g, "")
+  .toLowerCase()
+  .replace(/&/g, " and ")
+  .replace(/[^a-z0-9]+/g, "-")
+  .replace(/^-+|-+$/g, "")
+  .replace(/--+/g, "-") || "unnamed";
 
 const uniqueName = (base, ext, usedSet) => {
   let name = base + ext;
@@ -77,14 +75,22 @@ const isLink = (v) => typeof v === "string" && v.startsWith("@");
 
 const parseLink = (raw, defaultCategory) => {
   const s = (raw || "").trim().replace(/^@/, "");
-  if (!s) return null;
+  if (!s) {
+    return null;
+  }
   const idx = s.indexOf(":");
   if (idx > -1) {
     const cat = s.slice(0, idx).trim().toLowerCase();
     const name = s.slice(idx + 1).trim();
-    return { category: cat || defaultCategory, name };
+    return {
+      category: cat || defaultCategory,
+      name,
+    };
   }
-  return { category: defaultCategory, name: s };
+  return {
+    category: defaultCategory,
+    name: s,
+  };
 };
 
 const keyOf = (cat, name) => `${cat}||${name}`;
@@ -100,11 +106,13 @@ const keyOf = (cat, name) => `${cat}||${name}`;
   let categories = {};
   if (data && typeof data === "object") {
     const objectSections = Object.entries(data)
-      .filter(([, v]) => v && typeof v === "object" && !Array.isArray(v))
-      .map(([k]) => k);
+      .filter(([ , v ]) => v && typeof v === "object" && !Array.isArray(v))
+      .map(([ k ]) => k);
     if (objectSections.length > 0) {
       // unified: keep all object sections (don’t hardcode list so it’s future-proof)
-      for (const k of objectSections) categories[k] = data[k];
+      for (const k of objectSections) {
+        categories[k] = data[k];
+      }
     } else {
       // legacy: assume the entire file is abilities
       console.log("Legacy format detected; treating as { abilities: ... }");
@@ -115,7 +123,9 @@ const keyOf = (cat, name) => `${cat}||${name}`;
   }
 
   // Ensure base out dir
-  if (!opts.dryRun) await mkdir(opts.out, { recursive: true });
+  if (!opts.dryRun) {
+    await mkdir(opts.out, { recursive: true });
+  }
 
   // Build global maps:
   // directPath: Map<cat||name, normalized image path>
@@ -123,14 +133,19 @@ const keyOf = (cat, name) => `${cat}||${name}`;
   const directPath = new Map();
   const linkMap = new Map();
   const allItems = []; // [{category, name}]
-  for (const [cat, section] of Object.entries(categories)) {
-    for (const [name, val] of Object.entries(section)) {
-      allItems.push({ category: cat, name });
+  for (const [ cat, section ] of Object.entries(categories)) {
+    for (const [ name, val ] of Object.entries(section)) {
+      allItems.push({
+        category: cat,
+        name,
+      });
       if (isDirect(val)) {
         directPath.set(keyOf(cat, name), normalizePath(val));
       } else if (isLink(val)) {
         const link = parseLink(val, cat);
-        if (link) linkMap.set(keyOf(cat, name), link);
+        if (link) {
+          linkMap.set(keyOf(cat, name), link);
+        }
       }
     }
   }
@@ -138,15 +153,17 @@ const keyOf = (cat, name) => `${cat}||${name}`;
   // Resolve the first ancestor that has a direct image (cross-category allowed)
   const resolveRootKey = (startCat, startName) => {
     const seen = new Set();
-    let curCat = startCat,
-      curName = startName;
+    let curCat = startCat, curName = startName;
     while (curCat && curName && !directPath.has(keyOf(curCat, curName))) {
       const k = keyOf(curCat, curName);
-      if (seen.has(k))
+      if (seen.has(k)) {
         throw new Error(`Circular link detected at "${startCat}:${startName}"`);
+      }
       seen.add(k);
       const link = linkMap.get(k);
-      if (!link) return null; // chain ended without a direct image
+      if (!link) {
+        return null;
+      } // chain ended without a direct image
       // follow
       curCat = link.category || curCat;
       curName = link.name;
@@ -159,7 +176,10 @@ const keyOf = (cat, name) => `${cat}||${name}`;
   const rootExt = new Map(); // Map<rootKey, ".png"|".webp"|...>
   // New: precompute roots that point to Foundry images
   const foundryRoots = new Set();
-  for (const { category, name } of allItems) {
+  for (const {
+    category,
+    name
+  } of allItems) {
     const rKey = resolveRootKey(category, name);
     rootOf.set(keyOf(category, name), rKey);
     if (rKey) {
@@ -177,8 +197,12 @@ const keyOf = (cat, name) => `${cat}||${name}`;
   const usedNamesByCat = new Map(); // Map<category, Set<filename>>
   const ensureCatDir = async (cat) => {
     const dir = resolve(opts.out, cat);
-    if (!opts.dryRun) await mkdir(dir, { recursive: true });
-    if (!usedNamesByCat.has(cat)) usedNamesByCat.set(cat, new Set());
+    if (!opts.dryRun) {
+      await mkdir(dir, { recursive: true });
+    }
+    if (!usedNamesByCat.has(cat)) {
+      usedNamesByCat.set(cat, new Set());
+    }
     return dir;
   };
   for (const cat of Object.keys(categories)) {
@@ -187,13 +211,13 @@ const keyOf = (cat, name) => `${cat}||${name}`;
 
   // Allocate filenames for each root (copy destination lives in its OWN category)
   const destNameForRoot = new Map(); // Map<rootKey, filename>
-  for (const rKey of new Set([...rootOf.values()].filter(Boolean))) {
+  for (const rKey of new Set([ ...rootOf.values() ].filter(Boolean))) {
     // New: skip Foundry roots
     if (foundryRoots.has(rKey)) {
       continue;
     }
 
-    const [rCat, rName] = rKey.split("||");
+    const [ rCat, rName ] = rKey.split("||");
     const ext = rootExt.get(rKey) || "";
     const base = kebabCase(rName);
     const used = usedNamesByCat.get(rCat);
@@ -202,8 +226,8 @@ const keyOf = (cat, name) => `${cat}||${name}`;
   }
 
   // COPY each root image to its category folder
-  for (const [rKey, outName] of destNameForRoot.entries()) {
-    const [rCat, rName] = rKey.split("||");
+  for (const [ rKey, outName ] of destNameForRoot.entries()) {
+    const [ rCat, rName ] = rKey.split("||");
     const srcRel = directPath.get(rKey);
     const srcAbs = resolve(opts.imagesRoot, srcRel);
 
@@ -229,7 +253,10 @@ const keyOf = (cat, name) => `${cat}||${name}`;
   // For every item:
   // - If direct: already copied as a root (or allocate now if somehow missing)
   // - If link : create a symlink in the ITEM's category pointing to the ROOT's copied file
-  for (const { category: cat, name } of allItems) {
+  for (const {
+    category: cat,
+    name
+  } of allItems) {
     const v = categories[cat][name];
     const rKey = rootOf.get(keyOf(cat, name));
 
@@ -270,12 +297,10 @@ const keyOf = (cat, name) => `${cat}||${name}`;
         continue;
       }
 
-      const [rootCat, rootName] = rKey.split("||");
+      const [ rootCat, rootName ] = rKey.split("||");
       const rootOutName = destNameForRoot.get(rKey);
       if (!rootOutName) {
-        console.warn(
-          `ℹRoot output for "${cat}:${name}" (${rootCat}:${rootName}) not created. Skipping link.`,
-        );
+        console.warn(`ℹRoot output for "${cat}:${name}" (${rootCat}:${rootName}) not created. Skipping link.`);
         continue;
       }
 
@@ -288,8 +313,7 @@ const keyOf = (cat, name) => `${cat}||${name}`;
       const linkDir = resolve(opts.out, cat);
       const rootPath = resolve(opts.out, rootCat, rootOutName);
       const linkPath = resolve(linkDir, linkName);
-      const targetRel =
-        relative(dirname(linkPath), rootPath) || basename(rootPath);
+      const targetRel = relative(dirname(linkPath), rootPath) || basename(rootPath);
 
       if (opts.dryRun) {
         console.log(`[dry] SYMLINK ${join(cat, linkName)} -> ${targetRel}`);
@@ -306,14 +330,15 @@ const keyOf = (cat, name) => `${cat}||${name}`;
           }
           console.log(`SYMLINK ${join(cat, linkName)} -> ${targetRel}`);
         } catch (err) {
-          const canFallback =
-            isWindows &&
-            ["EPERM", "EACCES", "ENOTSUP", "UNKNOWN"].includes(err.code || "");
+          const canFallback = isWindows && [
+            "EPERM",
+            "EACCES",
+            "ENOTSUP",
+            "UNKNOWN",
+          ].includes(err.code || "");
           if (canFallback) {
             await copyFile(rootPath, linkPath);
-            console.warn(
-              `Symlink failed (${err.code}). Fallback COPY -> ${join(cat, linkName)}`,
-            );
+            console.warn(`Symlink failed (${err.code}). Fallback COPY -> ${join(cat, linkName)}`);
           } else {
             throw err; // POSIX: fail loudly to avoid accidental duplicates
           }

@@ -19,13 +19,21 @@ export default async function cleanWikiHTML(html, options = {}) {
   }
 
   const container = doc.querySelector(".mw-parser-output");
-  if (!container) return "";
+  if (!container) {
+    return "";
+  }
 
-  const toRemove = ["img", "figcaption", "figure"];
+  const toRemove = [
+    "img",
+    "figcaption",
+    "figure",
+  ];
   if (noSubs) {
-    toRemove.push(
-      ...[".expandable-container", ".ability-sub-container", ".metadata"],
-    );
+    toRemove.push(...[
+      ".expandable-container",
+      ".ability-sub-container",
+      ".metadata",
+    ]);
   }
   for (const el of toRemove) {
     doc.querySelectorAll(el).forEach((el) => el.remove());

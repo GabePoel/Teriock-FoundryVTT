@@ -53,11 +53,9 @@ export function _defineGeneral(schema) {
       label: "Elder Sorcery",
     }),
     elderSorceryIncant: new fields.HTMLField({ initial: "" }),
-    powerSources: new fields.ArrayField(
-      new fields.StringField({
-        choices: TERIOCK.index.powerSources,
-      }),
-    ),
+    powerSources: new fields.ArrayField(new fields.StringField({
+      choices: TERIOCK.index.powerSources,
+    })),
     interaction: new fields.StringField({
       initial: "attack",
       choices: TERIOCK.options.ability.interaction,
@@ -87,19 +85,14 @@ export function _defineGeneral(schema) {
         choices: TERIOCK.options.ability.deliveryPackage,
       }),
     }),
-    targets: new fields.ArrayField(
-      new fields.StringField({
-        choices: TERIOCK.options.ability.targets,
-      }),
-      {
-        initial: ["creature"],
-      },
-    ),
-    elements: new fields.ArrayField(
-      new fields.StringField({
-        choices: TERIOCK.index.elements,
-      }),
-    ),
+    targets: new fields.ArrayField(new fields.StringField({
+      choices: TERIOCK.options.ability.targets,
+    }), {
+      initial: [ "creature" ],
+    }),
+    elements: new fields.ArrayField(new fields.StringField({
+      choices: TERIOCK.index.elements,
+    })),
     duration: new fields.SchemaField({
       unit: new fields.StringField({
         choices: TERIOCK.options.ability.duration.unit,
@@ -111,23 +104,17 @@ export function _defineGeneral(schema) {
         initial: 1,
         min: 0,
         label: "Quantity",
-        hint: 'How many of the aforementioned unit should this unit be active for? Irrelevant for "Instant" and "No Limit" units.',
+        hint: "How many of the aforementioned unit should this unit be active for? Irrelevant for \"Instant\" and \"No Limit\" units.",
       }),
       conditions: new fields.SchemaField({
-        present: new fields.SetField(
-          new fields.StringField({ choices: TERIOCK.index.conditions }),
-          {
-            label: "Present Conditions",
-            hint: "What conditions must be present in order for this ability to be active?",
-          },
-        ),
-        absent: new fields.SetField(
-          new fields.StringField({ choices: TERIOCK.index.conditions }),
-          {
-            label: "Absent Conditions",
-            hint: "What conditions must be absent in order for this ability to be active?",
-          },
-        ),
+        present: new fields.SetField(new fields.StringField({ choices: TERIOCK.index.conditions }), {
+          label: "Present Conditions",
+          hint: "What conditions must be present in order for this ability to be active?",
+        }),
+        absent: new fields.SetField(new fields.StringField({ choices: TERIOCK.index.conditions }), {
+          label: "Absent Conditions",
+          hint: "What conditions must be absent in order for this ability to be active?",
+        }),
       }),
       stationary: new fields.BooleanField({
         label: "Stationary",
@@ -143,21 +130,57 @@ export function _defineGeneral(schema) {
       initial: false,
       label: "Sustained",
     }),
-    range: new fields.StringField({ initial: null, nullable: true }),
+    range: new fields.StringField({
+      initial: null,
+      nullable: true,
+    }),
     overview: new fields.SchemaField({
-      base: new TextField({ initial: "", label: "Description" }),
-      proficient: new TextField({ initial: "", label: "If Proficient" }),
-      fluent: new TextField({ initial: "", label: "If Fluent" }),
+      base: new TextField({
+        initial: "",
+        label: "Description",
+      }),
+      proficient: new TextField({
+        initial: "",
+        label: "If Proficient",
+      }),
+      fluent: new TextField({
+        initial: "",
+        label: "If Fluent",
+      }),
     }),
     results: new fields.SchemaField({
-      hit: new TextField({ initial: "", label: "On Hit" }),
-      critHit: new TextField({ initial: "", label: "On Critical Hit" }),
-      miss: new TextField({ initial: "", label: "On Miss" }),
-      critMiss: new TextField({ initial: "", label: "On Critical Miss" }),
-      save: new TextField({ initial: "", label: "On Success" }),
-      critSave: new TextField({ initial: "", label: "On Critical Success" }),
-      fail: new TextField({ initial: "", label: "On Fail" }),
-      critFail: new TextField({ initial: "", label: "On Critical Fail" }),
+      hit: new TextField({
+        initial: "",
+        label: "On Hit",
+      }),
+      critHit: new TextField({
+        initial: "",
+        label: "On Critical Hit",
+      }),
+      miss: new TextField({
+        initial: "",
+        label: "On Miss",
+      }),
+      critMiss: new TextField({
+        initial: "",
+        label: "On Critical Miss",
+      }),
+      save: new TextField({
+        initial: "",
+        label: "On Success",
+      }),
+      critSave: new TextField({
+        initial: "",
+        label: "On Critical Success",
+      }),
+      fail: new TextField({
+        initial: "",
+        label: "On Fail",
+      }),
+      critFail: new TextField({
+        initial: "",
+        label: "On Critical Fail",
+      }),
     }),
     piercing: new fields.StringField({
       initial: "normal",
@@ -235,8 +258,14 @@ export function _defineGeneral(schema) {
             integer: true,
             min: 0,
           }),
-          formula: new FormulaField({ initial: "", deterministic: false }),
-          variable: new TextField({ initial: "", label: "Mana Cost" }),
+          formula: new FormulaField({
+            initial: "",
+            deterministic: false,
+          }),
+          variable: new TextField({
+            initial: "",
+            label: "Mana Cost",
+          }),
         }),
       }),
       hp: new fields.SchemaField({
@@ -256,8 +285,14 @@ export function _defineGeneral(schema) {
             integer: true,
             min: 0,
           }),
-          formula: new FormulaField({ initial: "", deterministic: false }),
-          variable: new TextField({ initial: "", label: "Hit Cost" }),
+          formula: new FormulaField({
+            initial: "",
+            deterministic: false,
+          }),
+          variable: new TextField({
+            initial: "",
+            label: "Hit Cost",
+          }),
         }),
       }),
       gp: new fields.SchemaField({
@@ -276,32 +311,63 @@ export function _defineGeneral(schema) {
             integer: true,
             min: 0,
           }),
-          formula: new FormulaField({ initial: "", deterministic: false }),
-          variable: new TextField({ initial: "", label: "Gold Cost" }),
+          formula: new FormulaField({
+            initial: "",
+            deterministic: false,
+          }),
+          variable: new TextField({
+            initial: "",
+            label: "Gold Cost",
+          }),
         }),
       }),
       break: new fields.StringField({ initial: "" }),
-      materialCost: new TextField({ initial: "", label: "Material Cost" }),
-    }),
-    heightened: new TextField({ initial: "", label: "Heightened" }),
-    endCondition: new TextField({ initial: "", label: "End Condition" }),
-    requirements: new TextField({ initial: "", label: "Requirements" }),
-    effects: new fields.ArrayField(
-      new fields.StringField({
-        choices: TERIOCK.index.effectTypes,
+      materialCost: new TextField({
+        initial: "",
+        label: "Material Cost",
       }),
-    ),
-    expansion: new fields.StringField({ initial: null, nullable: true }),
-    expansionRange: new fields.StringField({ initial: null, nullable: true }),
+    }),
+    heightened: new TextField({
+      initial: "",
+      label: "Heightened",
+    }),
+    endCondition: new TextField({
+      initial: "",
+      label: "End Condition",
+    }),
+    requirements: new TextField({
+      initial: "",
+      label: "Requirements",
+    }),
+    effects: new fields.ArrayField(new fields.StringField({
+      choices: TERIOCK.index.effectTypes,
+    })),
+    expansion: new fields.StringField({
+      initial: null,
+      nullable: true,
+    }),
+    expansionRange: new fields.StringField({
+      initial: null,
+      nullable: true,
+    }),
     expansionSaveAttribute: new fields.StringField({ initial: "mov" }),
-    trigger: new TextField({ initial: "", label: "Trigger" }),
+    trigger: new TextField({
+      initial: "",
+      label: "Trigger",
+    }),
     basic: new fields.BooleanField({
       initial: false,
       label: "Basic",
     }),
     form: new fields.StringField({ initial: "normal" }),
-    limitation: new TextField({ initial: "", label: "Limitation" }),
-    improvement: new TextField({ initial: "", label: "Improvement" }),
+    limitation: new TextField({
+      initial: "",
+      label: "Limitation",
+    }),
+    improvement: new TextField({
+      initial: "",
+      label: "Improvement",
+    }),
     prepared: new fields.BooleanField({
       initial: true,
       label: "Prepared",
@@ -316,7 +382,11 @@ export function _defineGeneral(schema) {
     }),
     gifted: new fields.SchemaField({
       enabled: new fields.BooleanField({ label: "Gifted" }),
-      amount: new fields.NumberField({ initial: 1, min: 1, integer: true }),
+      amount: new fields.NumberField({
+        initial: 1,
+        min: 1,
+        integer: true,
+      }),
     }),
   };
 }

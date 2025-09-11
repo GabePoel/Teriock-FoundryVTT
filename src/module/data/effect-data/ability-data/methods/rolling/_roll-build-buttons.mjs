@@ -39,21 +39,15 @@ export async function _buildButtons(rollConfig) {
         action: "apply-effect",
         normal: normalEffectJSON || critEffectJSON,
         crit: critEffectJSON || normalEffectJSON,
-        sustaining: rollConfig.abilityData.sustained
-          ? safeUuid(rollConfig.abilityData.parent.uuid)
-          : "null",
+        sustaining: rollConfig.abilityData.sustained ? safeUuid(rollConfig.abilityData.parent.uuid) : "null",
       },
     });
   }
 
   // Standard Damage Button
-  if (
-    abilityData.applies.base.common.has("standardDamage") ||
-    (rollConfig.useData.proficient &&
-      abilityData.applies.proficient.common.has("standardDamage")) ||
-    (rollConfig.useData.fluent &&
-      abilityData.applies.fluent.common.has("standardDamage"))
-  ) {
+  if (abilityData.applies.base.common.has("standardDamage") || (rollConfig.useData.proficient
+    && abilityData.applies.proficient.common.has("standardDamage")) || (rollConfig.useData.fluent
+    && abilityData.applies.fluent.common.has("standardDamage"))) {
     const buttonData = {
       label: "Standard Roll",
       icon: "fas fa-hammer-crash",
@@ -62,8 +56,7 @@ export async function _buildButtons(rollConfig) {
       },
     };
     if (rollConfig.useData.actor.system.wielding.attacker.derived) {
-      buttonData.dataset.attacker =
-        rollConfig.useData.actor.system.wielding.attacker.derived.uuid;
+      buttonData.dataset.attacker = rollConfig.useData.actor.system.wielding.attacker.derived.uuid;
     }
     buttons.push(buttonData);
   }
@@ -105,11 +98,9 @@ export async function _buildButtons(rollConfig) {
   const takeData = _generateTakes(rollConfig);
 
   // Rollable Take Buttons
-  Object.entries(takeData.rolls).forEach(([rollType, formula]) => {
+  Object.entries(takeData.rolls).forEach(([ rollType, formula ]) => {
     if (formula && ROLL_BUTTON_CONFIGS[rollType]) {
-      const buttonConfig = foundry.utils.deepClone(
-        ROLL_BUTTON_CONFIGS[rollType],
-      );
+      const buttonConfig = foundry.utils.deepClone(ROLL_BUTTON_CONFIGS[rollType]);
       buttonConfig.icon = `fas fa-${getRollIcon(formula)}`;
       buttonConfig.dataset = {
         action: "roll-rollable-take",
@@ -176,18 +167,54 @@ export async function _buildButtons(rollConfig) {
  * @type {Record<string,Teriock.UI.HTMLButtonConfig>}
  */
 export const ROLL_BUTTON_CONFIGS = foundry.utils.deepFreeze({
-  damage: { label: "Roll Damage", icon: "fas fa-heart-crack" },
-  drain: { label: "Roll Drain", icon: "fas fa-droplet-slash" },
-  wither: { label: "Roll Wither", icon: "fas fa-hourglass-half" },
-  heal: { label: "Roll Heal", icon: "fas fa-hand-holding-heart" },
-  revitalize: { label: "Roll Revitalize", icon: "fas fa-hand-holding-droplet" },
-  setTempHp: { label: "Roll Temp HP", icon: "fas fa-heart" },
-  setTempMp: { label: "Roll Temp MP", icon: "fas fa-droplet" },
-  gainTempHp: { label: "Roll Temp HP", icon: "fas fa-heart" },
-  gainTempMp: { label: "Roll Temp MP", icon: "fas fa-droplet" },
-  sleep: { label: "Roll Sleep", icon: "fas fa-bed" },
-  kill: { label: "Roll Kill", icon: "fas fa-skull" },
-  pay: { label: "Roll Pay", icon: "fas fa-coin" },
+  damage: {
+    label: "Roll Damage",
+    icon: "fas fa-heart-crack",
+  },
+  drain: {
+    label: "Roll Drain",
+    icon: "fas fa-droplet-slash",
+  },
+  wither: {
+    label: "Roll Wither",
+    icon: "fas fa-hourglass-half",
+  },
+  heal: {
+    label: "Roll Heal",
+    icon: "fas fa-hand-holding-heart",
+  },
+  revitalize: {
+    label: "Roll Revitalize",
+    icon: "fas fa-hand-holding-droplet",
+  },
+  setTempHp: {
+    label: "Roll Temp HP",
+    icon: "fas fa-heart",
+  },
+  setTempMp: {
+    label: "Roll Temp MP",
+    icon: "fas fa-droplet",
+  },
+  gainTempHp: {
+    label: "Roll Temp HP",
+    icon: "fas fa-heart",
+  },
+  gainTempMp: {
+    label: "Roll Temp MP",
+    icon: "fas fa-droplet",
+  },
+  sleep: {
+    label: "Roll Sleep",
+    icon: "fas fa-bed",
+  },
+  kill: {
+    label: "Roll Kill",
+    icon: "fas fa-skull",
+  },
+  pay: {
+    label: "Roll Pay",
+    icon: "fas fa-coin",
+  },
 });
 
 /**
@@ -196,11 +223,32 @@ export const ROLL_BUTTON_CONFIGS = foundry.utils.deepFreeze({
  * @type {Record<string,Teriock.UI.HTMLButtonConfig>}
  */
 const HACK_BUTTON_CONFIGS = foundry.utils.deepFreeze({
-  arm: { label: "Hack Arm", icon: "fas fa-hand" },
-  leg: { label: "Hack Leg", icon: "fas fa-boot" },
-  body: { label: "Hack Body", icon: "fas fa-kidneys" },
-  eye: { label: "Hack Eye", icon: "fas fa-eye" },
-  ear: { label: "Hack Ear", icon: "fas fa-ear" },
-  mouth: { label: "Hack Mouth", icon: "fas fa-lips" },
-  nose: { label: "Hack Nose", icon: "fas fa-nose" },
+  arm: {
+    label: "Hack Arm",
+    icon: "fas fa-hand",
+  },
+  leg: {
+    label: "Hack Leg",
+    icon: "fas fa-boot",
+  },
+  body: {
+    label: "Hack Body",
+    icon: "fas fa-kidneys",
+  },
+  eye: {
+    label: "Hack Eye",
+    icon: "fas fa-eye",
+  },
+  ear: {
+    label: "Hack Ear",
+    icon: "fas fa-ear",
+  },
+  mouth: {
+    label: "Hack Mouth",
+    icon: "fas fa-lips",
+  },
+  nose: {
+    label: "Hack Nose",
+    icon: "fas fa-nose",
+  },
 });

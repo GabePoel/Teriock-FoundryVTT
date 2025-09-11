@@ -31,7 +31,13 @@ export default class TeriockBaseActorData extends CommonTypeModel {
       "fluency",
       "resource",
     ],
-    childItemTypes: ["equipment", "mechanic", "power", "rank", "species"],
+    childItemTypes: [
+      "equipment",
+      "mechanic",
+      "power",
+      "rank",
+      "species",
+    ],
     childMacroTypes: [],
   });
 

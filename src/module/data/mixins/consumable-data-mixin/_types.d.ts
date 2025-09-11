@@ -1,8 +1,6 @@
 export interface ConsumableDataMixinInterface {
   /** Whether this item is consumable */
   consumable: boolean;
-  /** Current quantity of the item */
-  quantity: number;
   /** Maximum quantity configuration */
   maxQuantity: {
     /** Raw maximum quantity expression */
@@ -10,6 +8,8 @@ export interface ConsumableDataMixinInterface {
     /** Computed maximum quantity value */
     derived: number;
   };
+  /** Current quantity of the item */
+  quantity: number;
 
   /**
    * Adds one unit to the consumable item.
@@ -19,11 +19,10 @@ export interface ConsumableDataMixinInterface {
   gainOne(): Promise<void>;
 
   /**
-   * Consumes one unit of the consumable item.
-   * Decrements the quantity by 1, ensuring it doesn't go below 0.
-   * @returns Promise that resolves when consumption is complete.
+   * Prepares derived data for the consumable item.
+   * Calculates maximum quantity and validates current quantity.
    */
-  useOne(): Promise<void>;
+  prepareDerivedData(): void;
 
   /**
    * Uses the item, automatically consuming one unit unless flagged otherwise.
@@ -33,8 +32,9 @@ export interface ConsumableDataMixinInterface {
   use(options?: any): Promise<void>;
 
   /**
-   * Prepares derived data for the consumable item.
-   * Calculates maximum quantity and validates current quantity.
+   * Consumes one unit of the consumable item.
+   * Decrements the quantity by 1, ensuring it doesn't go below 0.
+   * @returns Promise that resolves when consumption is complete.
    */
-  prepareDerivedData(): void;
+  useOne(): Promise<void>;
 }

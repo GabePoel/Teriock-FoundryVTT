@@ -3,7 +3,7 @@ export const encumbranceData = {
     name: "Lightly Encumbered",
     id: "lightlyEncumbered",
     _id: "encumbranceL1000",
-    statuses: ["encumbered"],
+    statuses: [ "encumbered" ],
     changes: [
       {
         key: "system.movementSpeed.base",
@@ -17,12 +17,15 @@ export const encumbranceData = {
     name: "Heavily Encumbered",
     id: "heavilyEncumbered",
     _id: "encumbranceL2000",
-    statuses: ["encumbered", "slowed"],
+    statuses: [
+      "encumbered",
+      "slowed",
+    ],
   },
   level3: {
     name: "Overburdened",
     id: "cannotCarryMore",
     _id: "encumbranceL3000",
-    statuses: ["immobilized"],
+    statuses: [ "immobilized" ],
   },
 };

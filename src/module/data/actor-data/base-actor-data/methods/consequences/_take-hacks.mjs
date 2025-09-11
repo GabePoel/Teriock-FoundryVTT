@@ -99,7 +99,7 @@ async function updateHackStatus(actorData, newStats) {
     for (const wanted of hackDataWanted) {
       const effect = actor.effects.getName(wanted.name);
       if (!effect) {
-        await actor.createEmbeddedDocuments("ActiveEffect", [wanted]);
+        await actor.createEmbeddedDocuments("ActiveEffect", [ wanted ]);
       }
     }
     for (const unwanted of hackDataUnwanted) {

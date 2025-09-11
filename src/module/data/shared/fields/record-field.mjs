@@ -1,4 +1,7 @@
-const { TypedObjectField, StringField } = foundry.data.fields;
+const {
+  TypedObjectField,
+  StringField,
+} = foundry.data.fields;
 
 /**
  * Custom record field for the Teriock system with multi-select and individual item inputs.
@@ -29,21 +32,15 @@ export default class RecordField extends TypedObjectField {
     const items = document.createElement("div");
     items.classList.add("teriock-record-field-items", "form-group");
     for (const item of Object.keys(inputConfig.value ?? {})) {
-      const itemInput = this.element.toFormGroup(
-        {
-          label: inputConfig.choices[item],
-        },
-        {
-          name: `${this.fieldPath}.${item}`,
-          value: inputConfig.value[item],
-          classes: "teriock-update-input",
-          disabled: inputConfig.disabled,
-        },
-      );
-      itemInput.classList.add(
-        "teriock-record-field-item",
-        "teriock-full-width",
-      );
+      const itemInput = this.element.toFormGroup({
+        label: inputConfig.choices[item],
+      }, {
+        name: `${this.fieldPath}.${item}`,
+        value: inputConfig.value[item],
+        classes: "teriock-update-input",
+        disabled: inputConfig.disabled,
+      });
+      itemInput.classList.add("teriock-record-field-item", "teriock-full-width");
       items.appendChild(itemInput);
     }
     out.appendChild(items);

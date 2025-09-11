@@ -127,7 +127,9 @@ export async function refreshDocuments(docs, options = { skipSubs: true }) {
       message: `Refreshing ${doc.name}.`,
       pct: pct,
     });
-    if (skipSubs && doc.documentName === "ActiveEffect" && doc.sup) continue;
+    if (skipSubs && doc.documentName === "ActiveEffect" && doc.sup) {
+      continue;
+    }
     if (doc.system.constructor.metadata.wiki) {
       await doc.system.wikiPull({ notify: false });
     }
@@ -150,32 +152,26 @@ export function selectUser(actor) {
   /** @type {TeriockUser|null} */
   let selectedUser = null;
   // See if any user has the actor as a character
-  users.forEach(
-    /** @param {TeriockUser} user */ (user) => {
-      if (user.character?.uuid === actor.uuid && user.isActive) {
-        selectedUser = user;
-      }
-    },
-  );
+  users.forEach(/** @param {TeriockUser} user */(user) => {
+    if (user.character?.uuid === actor.uuid && user.isActive) {
+      selectedUser = user;
+    }
+  });
   // See if any players have control over the actor
   if (!selectedUser) {
-    users.forEach(
-      /** @param {TeriockUser} user */ (user) => {
-        if (!user.isActiveGM && actor.canUserModify(user, "update")) {
-          selectedUser = user;
-        }
-      },
-    );
+    users.forEach(/** @param {TeriockUser} user */(user) => {
+      if (!user.isActiveGM && actor.canUserModify(user, "update")) {
+        selectedUser = user;
+      }
+    });
   }
   // See if anyone has control over the actor
   if (!selectedUser) {
-    users.forEach(
-      /** @param {TeriockUser} user */ (user) => {
-        if (actor.canUserModify(user, "update")) {
-          selectedUser = user;
-        }
-      },
-    );
+    users.forEach(/** @param {TeriockUser} user */(user) => {
+      if (actor.canUserModify(user, "update")) {
+        selectedUser = user;
+      }
+    });
   }
   return selectedUser;
 }
@@ -187,18 +183,16 @@ export function selectUser(actor) {
  */
 export function tokenImage(token) {
   const tokenDoc = tokenDocument(token);
-  return (
-    tokenDoc?.texture?.src ||
-    tokenDoc?.actor.token?.texture?.src ||
-    tokenDoc?.actor.getActiveTokens()[0]?.texture?.src ||
-    tokenDoc?.actor.prototypeToken?.texture?.src ||
-    tokenDoc?.actor.img ||
-    token?.texture?.src ||
-    token?.actor.token?.texture?.src ||
-    token?.actor.getActiveTokens()[0]?.texture?.src ||
-    token?.actor.prototypeToken?.texture?.src ||
-    token.actor.img
-  );
+  return (tokenDoc?.texture?.src
+    || tokenDoc?.actor.token?.texture?.src
+    || tokenDoc?.actor.getActiveTokens()[0]?.texture?.src
+    || tokenDoc?.actor.prototypeToken?.texture?.src
+    || tokenDoc?.actor.img
+    || token?.texture?.src
+    || token?.actor.token?.texture?.src
+    || token?.actor.getActiveTokens()[0]?.texture?.src
+    || token?.actor.prototypeToken?.texture?.src
+    || token.actor.img);
 }
 
 /**
@@ -208,16 +202,14 @@ export function tokenImage(token) {
  */
 export function tokenName(token) {
   const tokenDoc = tokenDocument(token);
-  return (
-    tokenDoc?.name ||
-    tokenDoc?.actor.token?.name ||
-    tokenDoc?.actor.prototypeToken?.name ||
-    tokenDoc?.actor.name ||
-    token?.name ||
-    token?.actor.token?.name ||
-    token?.actor.prototypeToken?.name ||
-    token.actor.name
-  );
+  return (tokenDoc?.name
+    || tokenDoc?.actor.token?.name
+    || tokenDoc?.actor.prototypeToken?.name
+    || tokenDoc?.actor.name
+    || token?.name
+    || token?.actor.token?.name
+    || token?.actor.prototypeToken?.name
+    || token.actor.name);
 }
 
 /**
@@ -226,12 +218,7 @@ export function tokenName(token) {
  * @returns {TeriockToken|null}
  */
 export function actorToken(actor) {
-  return (
-    actor.token ||
-    actor.getActiveTokens?.()?.[0] ||
-    actor.prototypeToken ||
-    null
-  );
+  return (actor.token || actor.getActiveTokens?.()?.[0] || actor.prototypeToken || null);
 }
 
 /**
@@ -259,9 +246,7 @@ export function tokenDocument(token) {
  * @returns {string} The HTML string for the icon element.
  */
 export function makeIcon(icon, ...styles) {
-  const styleClasses = styles.map(
-    (s) => TERIOCK.display.iconStyles[s] || s,
-  );
+  const styleClasses = styles.map((s) => TERIOCK.display.iconStyles[s] || s);
   const classString = styleClasses.map((s) => `fa-${s}`).join(" ");
   return `<i class="${classString} fa-${icon}"></i>`;
 }
@@ -272,7 +257,14 @@ export function makeIcon(icon, ...styles) {
  * @returns {string} The Font Awesome class for the appropriate dice icon.
  */
 export function getRollIcon(rollFormula) {
-  const polyhedralDice = [4, 6, 8, 10, 12, 20];
+  const polyhedralDice = [
+    4,
+    6,
+    8,
+    10,
+    12,
+    20,
+  ];
   const roll = new TeriockRoll(rollFormula, {});
   const dice = roll.dice;
   dice.sort((a, b) => b.faces - a.faces);
@@ -410,9 +402,7 @@ export function parseDurationString(durationString) {
   }
   const parsedStationary = parsingString.includes("stationary");
   // Use word boundaries for unit matching to avoid partial matches
-  for (const unit of Object.keys(
-    TERIOCK.options.ability.duration.unit,
-  )) {
+  for (const unit of Object.keys(TERIOCK.options.ability.duration.unit)) {
     const regex = new RegExp(`\\b${unit}s?\\b`);
     if (regex.test(parsingString)) {
       parsedUnit = unit;
@@ -446,19 +436,51 @@ export function parseTimeString(timeString) {
   const value = parseFloat(match[1]);
   const unit = match[2];
   const units = {
-    1: ["s", "sec", "secs", "second", "seconds"],
-    60: ["m", "min", "mins", "minute", "minutes"],
-    3600: ["h", "hr", "hrs", "hour", "hours"],
-    86400: ["d", "day", "days"],
-    604800: ["w", "week", "weeks"],
-    31557600: ["y", "yr", "yrs", "year", "years"],
+    1: [
+      "s",
+      "sec",
+      "secs",
+      "second",
+      "seconds",
+    ],
+    60: [
+      "m",
+      "min",
+      "mins",
+      "minute",
+      "minutes",
+    ],
+    3600: [
+      "h",
+      "hr",
+      "hrs",
+      "hour",
+      "hours",
+    ],
+    86400: [
+      "d",
+      "day",
+      "days",
+    ],
+    604800: [
+      "w",
+      "week",
+      "weeks",
+    ],
+    31557600: [
+      "y",
+      "yr",
+      "yrs",
+      "year",
+      "years",
+    ],
   };
 
-  const conversions = Object.fromEntries(
-    Object.entries(units).flatMap(([seconds, aliases]) =>
-      aliases.map((alias) => [alias, parseInt(seconds)]),
-    ),
-  );
+  const conversions = Object.fromEntries(Object.entries(units)
+    .flatMap(([ seconds, aliases ]) => aliases.map((alias) => [
+      alias,
+      parseInt(seconds),
+    ])));
   if (!(unit in conversions)) {
     return null;
   }
@@ -475,12 +497,30 @@ export function secondsToReadable(totalSeconds) {
     return "0 seconds";
   }
   const units = [
-    { name: "year", seconds: 365.25 * 24 * 60 * 60 },
-    { name: "week", seconds: 7 * 24 * 60 * 60 },
-    { name: "day", seconds: 24 * 60 * 60 },
-    { name: "hr", seconds: 60 * 60 },
-    { name: "min", seconds: 60 },
-    { name: "sec", seconds: 1 },
+    {
+      name: "year",
+      seconds: 365.25 * 24 * 60 * 60,
+    },
+    {
+      name: "week",
+      seconds: 7 * 24 * 60 * 60,
+    },
+    {
+      name: "day",
+      seconds: 24 * 60 * 60,
+    },
+    {
+      name: "hr",
+      seconds: 60 * 60,
+    },
+    {
+      name: "min",
+      seconds: 60,
+    },
+    {
+      name: "sec",
+      seconds: 1,
+    },
   ];
   const parts = [];
   let remaining = Math.floor(totalSeconds);
@@ -503,12 +543,10 @@ export function secondsToReadable(totalSeconds) {
  * @returns Readonly<T>
  */
 export function mergeFreeze(original, other) {
-  return foundry.utils.deepFreeze(
-    foundry.utils.mergeObject(
-      foundry.utils.deepClone(original),
-      foundry.utils.deepClone(other),
-    ),
-  );
+  return foundry.utils.deepFreeze(foundry.utils.mergeObject(
+    foundry.utils.deepClone(original),
+    foundry.utils.deepClone(other),
+  ));
 }
 
 /**

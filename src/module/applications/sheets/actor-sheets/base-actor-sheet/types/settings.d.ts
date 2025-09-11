@@ -7,10 +7,7 @@ export type BaseActorSheetSettings = {
   /** Key used to determine how abilities are sorted */
   abilitySortOption: string;
   /** Whether the rules text for a given condition is expanded or collapsed */
-  conditionExpansions: Record<
-    Teriock.Parameters.Condition.ConditionKey,
-    boolean
-  >;
+  conditionExpansions: Record<Teriock.Parameters.Condition.ConditionKey, boolean>;
   /** Filters to change what equipment is displayed */
   equipmentFilters: EquipmentFilters;
   /** Equipment sort direction */

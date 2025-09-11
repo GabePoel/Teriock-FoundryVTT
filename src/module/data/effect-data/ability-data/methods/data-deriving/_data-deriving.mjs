@@ -26,10 +26,7 @@ export function _prepareDerivedData(abilityData) {
 
   // Effect match power sources
   for (const ps of abilityData.powerSources) {
-    if (
-      Object.keys(TERIOCK.index.effectTypes).includes(ps) &&
-      !abilityData.effects.includes(ps)
-    ) {
+    if (Object.keys(TERIOCK.index.effectTypes).includes(ps) && !abilityData.effects.includes(ps)) {
       abilityData.effects.push(ps);
     }
   }
@@ -37,10 +34,14 @@ export function _prepareDerivedData(abilityData) {
   // Compute changes
   let applyChanges = abilityData.maneuver === "passive";
   for (const status of abilityData.duration.conditions.present) {
-    if (!abilityData.actor?.statuses.has(status)) applyChanges = false;
+    if (!abilityData.actor?.statuses.has(status)) {
+      applyChanges = false;
+    }
   }
   for (const status of abilityData.duration.conditions.absent) {
-    if (abilityData.actor?.statuses.has(status)) applyChanges = false;
+    if (abilityData.actor?.statuses.has(status)) {
+      applyChanges = false;
+    }
   }
   if (applyChanges) {
     abilityData.parent.changes = abilityData.changes;

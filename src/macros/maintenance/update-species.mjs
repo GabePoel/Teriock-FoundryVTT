@@ -7,53 +7,39 @@ const commonAnimalSpeciesFolderName = "Common Animal Species";
 const undeadSpeciesFolderName = "Undead Species";
 let allSpeciesFolder = speciesFolders.getName(allSpeciesFolderName);
 let characterSpeciesFolder = speciesFolders.getName(characterSpeciesFolderName);
-let commonAnimalSpeciesFolder = speciesFolders.getName(
-  commonAnimalSpeciesFolderName,
-);
+let commonAnimalSpeciesFolder = speciesFolders.getName(commonAnimalSpeciesFolderName);
 let undeadSpeciesFolder = speciesFolders.getName(undeadSpeciesFolderName);
 if (!allSpeciesFolder) {
-  await Folder.create(
-    {
-      name: allSpeciesFolderName,
-      type: "Item",
-    },
-    {
-      pack: "teriock.species",
-    },
-  );
+  await Folder.create({
+    name: allSpeciesFolderName,
+    type: "Item",
+  }, {
+    pack: "teriock.species",
+  });
 }
 if (!characterSpeciesFolder) {
-  await Folder.create(
-    {
-      name: characterSpeciesFolderName,
-      type: "Item",
-    },
-    {
-      pack: "teriock.species",
-    },
-  );
+  await Folder.create({
+    name: characterSpeciesFolderName,
+    type: "Item",
+  }, {
+    pack: "teriock.species",
+  });
 }
 if (!commonAnimalSpeciesFolder) {
-  await Folder.create(
-    {
-      name: commonAnimalSpeciesFolderName,
-      type: "Item",
-    },
-    {
-      pack: "teriock.species",
-    },
-  );
+  await Folder.create({
+    name: commonAnimalSpeciesFolderName,
+    type: "Item",
+  }, {
+    pack: "teriock.species",
+  });
 }
 if (!undeadSpeciesFolder) {
-  await Folder.create(
-    {
-      name: undeadSpeciesFolderName,
-      type: "Item",
-    },
-    {
-      pack: "teriock.species",
-    },
-  );
+  await Folder.create({
+    name: undeadSpeciesFolderName,
+    type: "Item",
+  }, {
+    pack: "teriock.species",
+  });
 }
 
 const progress = ui.notifications.info("Pulling all creatures from wiki.", {
@@ -63,38 +49,35 @@ const progress = ui.notifications.info("Pulling all creatures from wiki.", {
 async function processSpecies(speciesName, _index, _total) {
   let speciesItem = speciesPack.index.find((e) => e.name === speciesName);
   let folder = allSpeciesFolder;
-  if (Object.values(TERIOCK.index.humanoids).includes(speciesName))
+  if (Object.values(TERIOCK.index.humanoids).includes(speciesName)) {
     folder = characterSpeciesFolder;
-  if (Object.values(TERIOCK.index.commonAnimals).includes(speciesName))
+  }
+  if (Object.values(TERIOCK.index.commonAnimals).includes(speciesName)) {
     folder = commonAnimalSpeciesFolder;
-  if (Object.values(TERIOCK.index.undead).includes(speciesName))
+  }
+  if (Object.values(TERIOCK.index.undead).includes(speciesName)) {
     folder = undeadSpeciesFolder;
+  }
   if (!speciesItem) {
-    speciesItem = await game.teriock.Item.create(
-      {
-        name: speciesName,
-        type: "species",
-        folder: folder.id,
-      },
-      { pack: "teriock.species" },
-    );
+    speciesItem = await game.teriock.Item.create({
+      name: speciesName,
+      type: "species",
+      folder: folder.id,
+    }, { pack: "teriock.species" });
   } else {
     speciesItem = await foundry.utils.fromUuid(speciesItem.uuid);
   }
 
   await speciesItem.system.wikiPull({ notify: false });
 
-  return { speciesName, success: true };
+  return {
+    speciesName,
+    success: true,
+  };
 }
 
-const speciesPromises = Object.values(TERIOCK.index.creatures).map(
-  (speciesName, index) =>
-    processSpecies(
-      speciesName,
-      index,
-      Object.values(TERIOCK.index.creatures).length,
-    ),
-);
+const speciesPromises = Object.values(TERIOCK.index.creatures)
+  .map((speciesName, index) => processSpecies(speciesName, index, Object.values(TERIOCK.index.creatures).length));
 
 progress.update({
   pct: 0.1,
@@ -109,10 +92,7 @@ try {
     message: `Successfully processed ${results.length} species.`,
   });
 
-  console.log(
-    `Completed processing ${results.length} species:`,
-    results.map((r) => r.speciesName),
-  );
+  console.log(`Completed processing ${results.length} species:`, results.map((r) => r.speciesName));
 } catch (error) {
   progress.update({
     pct: 1,

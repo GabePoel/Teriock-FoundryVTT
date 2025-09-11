@@ -3,57 +3,55 @@ import type { TeriockEquipment } from "../../../documents/_documents.mjs";
 import type { ConsumableInterface } from "../../effect-data/shared/shared-fields";
 
 declare module "./equipment-data.mjs" {
-  export default interface TeriockEquipmentData
-    extends TeriockBaseItemData,
-      ConsumableInterface {
-    /** Is the equipment equipped? */
-    equipped: boolean;
-    /** Is the equipment glued? */
-    glued: boolean;
-    /** Is the equipment shattered? */
-    shattered: boolean;
-    /** Is the equipment dampened? */
-    dampened: boolean;
-    /** Is the equipment ranged? */
-    ranged: boolean;
-    /** Damage Dice */
-    damage: string;
-    /** Two-handed Damage Dice */
-    twoHandedDamage: string;
-    /** Damage Types */
-    damageTypes: Set<string>;
-    /** Weight (lb) */
-    weight: number;
-    /** Range (ft) (if ranged) */
-    range: number;
-    /** Short Range (ft) (if ranged) */
-    shortRange: number;
-    /** Equipment Classes */
-    equipmentClasses: Set<Teriock.Parameters.Equipment.EquipmentClass>;
-    /** Minimum STR */
-    minStr: number;
-    /** Style Bonus (Weapon Fighting Style) */
-    sb: Teriock.Parameters.Equipment.WeaponFightingStyle;
+  export default interface TeriockEquipmentData extends TeriockBaseItemData, ConsumableInterface {
     /** Armor Value */
     av: number;
-    /** Block Value */
-    bv: number;
     /** Armor value for effects to modify */
     baseAv: number;
     /** Black value for effects to modify */
     baseBv: number;
-    /** Special Rules (Weapon Fighting Style) */
-    specialRules: string;
+    /** Block Value */
+    bv: number;
+    /** Damage Dice */
+    damage: string;
+    /** Damage Types */
+    damageTypes: Set<string>;
+    /** Is the equipment dampened? */
+    dampened: boolean;
+    /** Equipment Classes */
+    equipmentClasses: Set<Teriock.Parameters.Equipment.EquipmentClass>;
     /** Canonical Equipment Type */
     equipmentType: string;
-    /** Price */
-    price: number;
-    /** Power Level */
-    powerLevel: string;
+    /** Is the equipment equipped? */
+    equipped: boolean;
     /** Flaws */
     flaws: string;
+    /** Is the equipment glued? */
+    glued: boolean;
+    /** Is the equipment identified? */
+    identified: boolean;
+    /** Minimum STR */
+    minStr: number;
     /** Notes */
     notes: string;
+    /** Power Level */
+    powerLevel: string;
+    /** Price */
+    price: number;
+    /** Range (ft) (if ranged) */
+    range: number;
+    /** Is the equipment ranged? */
+    ranged: boolean;
+    /** Identification Reference Equipment UUID */
+    reference: Teriock.UUID<TeriockEquipment>;
+    /** Style Bonus (Weapon Fighting Style) */
+    sb: Teriock.Parameters.Equipment.WeaponFightingStyle;
+    /** Is the equipment shattered? */
+    shattered: boolean;
+    /** Short Range (ft) (if ranged) */
+    shortRange: number;
+    /** Special Rules (Weapon Fighting Style) */
+    specialRules: string;
     /** Presence Tier */
     tier: {
       /** Raw Presence Tier */
@@ -61,10 +59,10 @@ declare module "./equipment-data.mjs" {
       /** Derived Presence Tier */
       derived: number;
     };
-    /** Is the equipment identified? */
-    identified: boolean;
-    /** Identification Reference Equipment UUID */
-    reference: Teriock.UUID<TeriockEquipment>;
+    /** Two-handed Damage Dice */
+    twoHandedDamage: string;
+    /** Weight (lb) */
+    weight: number;
 
     get parent(): TeriockEquipment;
   }

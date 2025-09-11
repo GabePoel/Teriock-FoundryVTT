@@ -6,11 +6,17 @@ import TeriockCommand from "../command.mjs";
  * @returns {boolean}
  */
 function checkBodyPart(bodyPart) {
-  const validParts = ["arm", "leg", "body", "eye", "ear", "mouth", "nose"];
+  const validParts = [
+    "arm",
+    "leg",
+    "body",
+    "eye",
+    "ear",
+    "mouth",
+    "nose",
+  ];
   if (!validParts.includes(bodyPart)) {
-    ui.notifications.warn(
-      `Invalid body part. Valid parts: ${validParts.join(", ")}`,
-    );
+    ui.notifications.warn(`Invalid body part. Valid parts: ${validParts.join(", ")}`);
     return false;
   }
   return true;
@@ -19,11 +25,13 @@ function checkBodyPart(bodyPart) {
 export const hack = new TeriockCommand(
   "hack",
   "Increase hack level on a specific body part of targeted tokens. Usage: /hack <body_part> [amount]",
-  async ({ args, _chatData, actors }) => {
+  async ({
+    args,
+    _chatData,
+    actors,
+  }) => {
     if (args.length === 0) {
-      ui.notifications.warn(
-        "Usage: /hack <body_part> [amount]. Body parts: arm, leg, body, eye, ear, mouth, nose",
-      );
+      ui.notifications.warn("Usage: /hack <body_part> [amount]. Body parts: arm, leg, body, eye, ear, mouth, nose");
       return;
     }
     const bodyPart = args[0].toLowerCase();
@@ -37,9 +45,7 @@ export const hack = new TeriockCommand(
       }
     }
 
-    ui.notifications.info(
-      `Applied ${amount} hack(s) to ${bodyPart} on ${actors.length} target(s).`,
-    );
+    ui.notifications.info(`Applied ${amount} hack(s) to ${bodyPart} on ${actors.length} target(s).`);
   },
   {
     category: "#damage",
@@ -50,11 +56,13 @@ export const hack = new TeriockCommand(
 export const unhack = new TeriockCommand(
   "unhack",
   "Decrease hack level on a specific body part of targeted tokens. Usage: /unhack <body_part> [amount]",
-  async ({ args, _chatData, actors }) => {
+  async ({
+    args,
+    _chatData,
+    actors,
+  }) => {
     if (args.length === 0) {
-      ui.notifications.warn(
-        "Usage: /unhack <body_part> [amount]. Body parts: arm, leg, body, eye, ear, mouth, nose",
-      );
+      ui.notifications.warn("Usage: /unhack <body_part> [amount]. Body parts: arm, leg, body, eye, ear, mouth, nose");
       return;
     }
     const bodyPart = args[0].toLowerCase();
@@ -68,9 +76,7 @@ export const unhack = new TeriockCommand(
       }
     }
 
-    ui.notifications.info(
-      `Removed ${amount} hack(s) from ${bodyPart} on ${actors.length} target(s).`,
-    );
+    ui.notifications.info(`Removed ${amount} hack(s) from ${bodyPart} on ${actors.length} target(s).`);
   },
   {
     category: "#support",

@@ -16,7 +16,10 @@ export async function harmRoll(formula, rollData = {}, message = "") {
     {
       label: "Damage",
       icon: "fas fa-heart-crack",
-      classes: ["teriock-chat-button", "damage-button"],
+      classes: [
+        "teriock-chat-button",
+        "damage-button",
+      ],
       dataset: {
         action: "take-rollable-take",
         type: "damage",
@@ -26,7 +29,10 @@ export async function harmRoll(formula, rollData = {}, message = "") {
     {
       label: "Drain",
       icon: "fas fa-droplet-slash",
-      classes: ["teriock-chat-button", "drain-button"],
+      classes: [
+        "teriock-chat-button",
+        "drain-button",
+      ],
       dataset: {
         action: "take-rollable-take",
         type: "drain",
@@ -36,7 +42,10 @@ export async function harmRoll(formula, rollData = {}, message = "") {
     {
       label: "Wither",
       icon: "fas fa-hourglass-half",
-      classes: ["teriock-chat-button", "wither-button"],
+      classes: [
+        "teriock-chat-button",
+        "wither-button",
+      ],
       dataset: {
         action: "take-rollable-take",
         type: "wither",
@@ -49,7 +58,7 @@ export async function harmRoll(formula, rollData = {}, message = "") {
   const damageDrainTypeMessage = await makeDamageDrainTypeMessage(roll);
   return await TeriockChatMessage.create({
     speaker: TeriockChatMessage.speaker,
-    rolls: [roll],
+    rolls: [ roll ],
     system: {
       buttons: buttons,
       columns: damageTypeButtons.length > 0 ? 2 : 3,

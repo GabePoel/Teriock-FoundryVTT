@@ -7,26 +7,17 @@ const progress = ui.notifications.info(`Pulling all properties from wiki.`, {
 async function processProperty(propertyName, _index, _total) {
   let propertyItem = propertiesPack.index.find((e) => e.name === propertyName);
   if (!propertyItem) {
-    propertyItem = await game.teriock.Item.create(
-      {
-        name: propertyName,
-        type: "wrapper",
-      },
-      { pack: "teriock.properties" },
-    );
+    propertyItem = await game.teriock.Item.create({
+      name: propertyName,
+      type: "wrapper",
+    }, { pack: "teriock.properties" });
   } else {
     propertyItem = await foundry.utils.fromUuid(propertyItem.uuid);
   }
-  let propertyEffect = propertyItem.properties.find(
-    (a) => a.name === propertyName,
-  );
+  let propertyEffect = propertyItem.properties.find((a) => a.name === propertyName);
 
   if (!propertyEffect) {
-    propertyEffect = await tm.create.property(
-      propertyItem,
-      propertyName,
-      { notify: false },
-    );
+    propertyEffect = await tm.create.property(propertyItem, propertyName, { notify: false });
   } else {
     await propertyEffect.system.wikiPull({ notify: false });
   }
@@ -35,7 +26,10 @@ async function processProperty(propertyName, _index, _total) {
     await propertyItem.update({ img: propertyEffect.img });
   }
 
-  return { propertyName: propertyName, success: true };
+  return {
+    propertyName: propertyName,
+    success: true,
+  };
 }
 
 const BATCH_SIZE = 50;
@@ -49,14 +43,9 @@ progress.update({
 
 try {
   for (let start = 0; start < total; start += BATCH_SIZE) {
-    const batch = Object.values(TERIOCK.index.properties).slice(
-      start,
-      start + BATCH_SIZE,
-    );
+    const batch = Object.values(TERIOCK.index.properties).slice(start, start + BATCH_SIZE);
 
-    const batchPromises = batch.map((propertyName, i) =>
-      processProperty(propertyName, start + i, total),
-    );
+    const batchPromises = batch.map((propertyName, i) => processProperty(propertyName, start + i, total));
 
     const batchResults = await Promise.all(batchPromises);
     results.push(...batchResults);
@@ -66,7 +55,8 @@ try {
 
     progress.update({
       pct: Math.min(pct, 1),
-      message: `Processed ${processed}/${total} properties (batch ${Math.floor(start / BATCH_SIZE) + 1}/${Math.ceil(total / BATCH_SIZE)}).`,
+      message: `Processed ${processed}/${total} properties (batch ${Math.floor(start / BATCH_SIZE) + 1}/${Math.ceil(
+        total / BATCH_SIZE)}).`,
     });
   }
 
@@ -75,10 +65,7 @@ try {
     message: `Successfully processed ${results.length} properties.`,
   });
 
-  console.log(
-    `Completed processing ${results.length} properties:`,
-    results.map((r) => r.propertyName),
-  );
+  console.log(`Completed processing ${results.length} properties:`, results.map((r) => r.propertyName));
 } catch (error) {
   progress.update({
     pct: 1,

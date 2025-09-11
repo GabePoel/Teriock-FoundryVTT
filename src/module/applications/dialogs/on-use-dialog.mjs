@@ -16,7 +16,9 @@ export async function onUseDialog(item) {
       choices[effect.id] = effect.name;
     }
   }
-  if (Object.keys(choices).length === 0) return null;
+  if (Object.keys(choices).length === 0) {
+    return null;
+  }
   return await selectDialog(choices, {
     label: "Ability",
     hint: `${item.name} has abilities that can activate on use. You may select one to activate.`,

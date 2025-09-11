@@ -23,7 +23,7 @@ export function _messageParts(propertyData) {
       {
         icon: "fa-" + ref.form[propertyData.form].icon,
         label: "Property Type",
-        wrappers: [ref.form[propertyData.form].name],
+        wrappers: [ ref.form[propertyData.form].name ],
       },
     ],
     blocks: blocks,

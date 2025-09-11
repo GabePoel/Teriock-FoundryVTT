@@ -10,10 +10,7 @@ const { fields } = foundry.data;
  * @param {boolean} [options.crit] Go critical?
  * @returns {Promise<string>} The roll formula with boost changes applied.
  */
-export default async function boostDialog(
-  rollFormula,
-  options = { crit: false },
-) {
+export default async function boostDialog(rollFormula, options = { crit: false }) {
   let formula = rollFormula;
   const formulaField = new fields.StringField({
     initial: rollFormula,
@@ -50,20 +47,16 @@ export default async function boostDialog(
       ok: {
         label: "Apply",
         callback: (_event, button) => {
-          const updatedFormula =
-            button.form.elements.namedItem("formula").value;
+          const updatedFormula = button.form.elements.namedItem("formula").value;
           const boosts = Number(button.form.elements.namedItem("boosts").value);
-          const deboosts = Number(
-            button.form.elements.namedItem("deboosts").value,
-          );
-          const critButton =
-            /** @type {HTMLInputElement} */ button.form.elements.namedItem(
-              "crit",
-            );
+          const deboosts = Number(button.form.elements.namedItem("deboosts").value);
+          const critButton = /** @type {HTMLInputElement} */ button.form.elements.namedItem("crit");
           const crit = critButton.checked;
           const roll = new TeriockRoll(updatedFormula, {});
           roll.setBoost(boosts - deboosts);
-          if (crit) roll.alter(2, 0, { multiplyNumeric: false });
+          if (crit) {
+            roll.alter(2, 0, { multiplyNumeric: false });
+          }
           formula = roll.formula;
         },
       },

@@ -12,7 +12,7 @@ export function _sortEmbedded(items, sortKey, ascending, sortMap = {}) {
     return [];
   }
   const accessor = sortMap[sortKey] ?? ((i) => i.name ?? "");
-  const sorted = [...items];
+  const sorted = [ ...items ];
   sorted.sort((a, b) => {
     const aVal = accessor(a) ?? "";
     const bVal = accessor(b) ?? "";

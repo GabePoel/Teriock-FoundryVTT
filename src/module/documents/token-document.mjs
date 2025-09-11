@@ -29,7 +29,9 @@ export default class TeriockTokenDocument extends TokenDocument {
   _prepareDetectionModes() {
     super._prepareDetectionModes();
     const basicMode = this.detectionModes.find((m) => m.id === "basicSight");
-    if (basicMode) basicMode.enabled = false;
+    if (basicMode) {
+      basicMode.enabled = false;
+    }
     const enabledIds = [
       "materialMaterial",
       "etherealMaterial",
@@ -44,20 +46,24 @@ export default class TeriockTokenDocument extends TokenDocument {
       "blindFighting",
       "darkVision",
     ];
-    this.detectionModes.push(
-      ...enabledIds
-        .filter((id) => !this.detectionModes.find((mode) => mode.id === id))
-        .map((id) => {
-          return { id: id, enabled: true, range: Infinity };
-        }),
-    );
-    this.detectionModes.push(
-      ...disabledIds
-        .filter((id) => !this.detectionModes.find((mode) => mode.id === id))
-        .map((id) => {
-          return { id: id, enabled: false, range: 0 };
-        }),
-    );
+    this.detectionModes.push(...enabledIds
+      .filter((id) => !this.detectionModes.find((mode) => mode.id === id))
+      .map((id) => {
+        return {
+          id: id,
+          enabled: true,
+          range: Infinity,
+        };
+      }));
+    this.detectionModes.push(...disabledIds
+      .filter((id) => !this.detectionModes.find((mode) => mode.id === id))
+      .map((id) => {
+        return {
+          id: id,
+          enabled: false,
+          range: 0,
+        };
+      }));
   }
 
   /**
@@ -68,8 +74,9 @@ export default class TeriockTokenDocument extends TokenDocument {
       this.light.dim = 0;
       this.light.bright = 0;
     } else if (this.actor) {
-      for (const [key, value] of Object.entries(this.actor.system.light))
+      for (const [ key, value ] of Object.entries(this.actor.system.light)) {
         foundry.utils.setProperty(this.light, key, value);
+      }
     }
   }
 
@@ -96,19 +103,13 @@ export default class TeriockTokenDocument extends TokenDocument {
       if (this.actor?.system.senses.dark > 0) {
         visionMode = "darkvision";
       }
-      if (
-        this.actor?.system.senses.night > 0 &&
-        this.actor?.system.senses.night >= this.actor?.system.senses.dark
-      ) {
+      if (this.actor?.system.senses.night > 0 && this.actor?.system.senses.night >= this.actor?.system.senses.dark) {
         visionMode = "lightAmplification";
       }
       if (this.actor?.statuses?.has("ethereal")) {
         visionMode = "ethereal";
       }
-      if (
-        this.actor?.statuses?.has("ethereal") &&
-        this.actor?.statuses?.has("invisible")
-      ) {
+      if (this.actor?.statuses?.has("ethereal") && this.actor?.statuses?.has("invisible")) {
         visionMode = "invisibleEthereal";
       }
 
@@ -127,11 +128,18 @@ export default class TeriockTokenDocument extends TokenDocument {
       );
 
       this.sight.visionMode = visionMode;
-      if (!["down", "dead", "invisibleEthereal"].includes(visionMode)) {
+      if (![
+        "down",
+        "dead",
+        "invisibleEthereal",
+      ].includes(visionMode)) {
         this.sight.color = "";
       }
     }
-    return { visionMode, range };
+    return {
+      visionMode,
+      range,
+    };
   }
 
   /**
@@ -139,14 +147,10 @@ export default class TeriockTokenDocument extends TokenDocument {
    */
   derivedDetectionModes() {
     if (this.actor) {
-      for (const [sense, id] of Object.entries(characterOptions.senseMap)) {
+      for (const [ sense, id ] of Object.entries(characterOptions.senseMap)) {
         const mode = this.detectionModes.find((m) => m.id === id);
         if (mode) {
-          mode.range = convertUnits(
-            this.actor.system.senses[sense],
-            "ft",
-            this.parent?.grid.units || "",
-          );
+          mode.range = convertUnits(this.actor.system.senses[sense], "ft", this.parent?.grid.units || "");
           mode.enabled = this.actor.system.senses[sense] > 0;
         }
       }

@@ -9,7 +9,7 @@ import { TeriockImagePreviewer } from "../api/_module.mjs";
 const imageContextMenuOptions = [
   {
     name: "Open Image",
-    icon: '<i class="fa-solid fa-image"></i>',
+    icon: "<i class=\"fa-solid fa-image\"></i>",
     callback: async (target) => {
       const img = target.getAttribute("data-src");
       const image = new TeriockImagePreviewer(img);
@@ -22,7 +22,7 @@ const imageContextMenuOptions = [
   },
   {
     name: "Share Image",
-    icon: '<i class="fa-solid fa-share"></i>',
+    icon: "<i class=\"fa-solid fa-share\"></i>",
     callback: async (target) => {
       const img = target.getAttribute("data-src");
       await chatImage(img);

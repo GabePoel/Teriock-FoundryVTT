@@ -1,20 +1,16 @@
 export default function registerStringHelpers() {
-  Handlebars.registerHelper("lc", (str) =>
-    typeof str === "string" ? str.toLowerCase() : "",
-  );
+  Handlebars.registerHelper("lc", (str) => typeof str === "string" ? str.toLowerCase() : "");
 
-  Handlebars.registerHelper("uc", (str) =>
-    typeof str === "string" ? str.toUpperCase() : "",
-  );
+  Handlebars.registerHelper("uc", (str) => typeof str === "string" ? str.toUpperCase() : "");
 
   Handlebars.registerHelper("ucFirst", (str) => {
-    if (typeof str !== "string") return "";
+    if (typeof str !== "string") {
+      return "";
+    }
     return str.charAt(0).toUpperCase() + str.slice(1);
   });
 
-  Handlebars.registerHelper("length", (str) =>
-    typeof str === "string" ? str.length : 0,
-  );
+  Handlebars.registerHelper("length", (str) => typeof str === "string" ? str.length : 0);
 
   Handlebars.registerHelper("prefix", (str, prefix) => {
     if (str && str !== "0" && str !== "+0") {
@@ -35,7 +31,9 @@ export default function registerStringHelpers() {
     let out = "";
     for (const arg of args) {
       if (arg && arg !== "0") {
-        if (out.length > 0) out += " · ";
+        if (out.length > 0) {
+          out += " · ";
+        }
         out += arg;
       }
     }
@@ -56,12 +54,12 @@ export default function registerStringHelpers() {
   });
 
   Handlebars.registerHelper("escapeAttr", function (html) {
-    if (html == null) return "";
-    return new Handlebars.SafeString(
-      String(html)
-        .replace(/&/g, "&amp;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#39;"),
-    );
+    if (html == null) {
+      return "";
+    }
+    return new Handlebars.SafeString(String(html)
+      .replace(/&/g, "&amp;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#39;"));
   });
 }

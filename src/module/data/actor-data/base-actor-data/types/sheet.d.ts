@@ -1,26 +1,26 @@
 interface DisplayField {
-  size: string;
   gapless: boolean;
+  size: string;
 }
 
 interface SheetDisplay {
   ability: DisplayField;
-  fluency: DisplayField;
-  rank: DisplayField;
-  equipment: DisplayField;
-  power: DisplayField;
-  resource: DisplayField;
   condition: DisplayField;
   effect: DisplayField;
+  equipment: DisplayField;
+  fluency: DisplayField;
+  power: DisplayField;
+  rank: DisplayField;
+  resource: DisplayField;
 }
 
 export interface SheetData {
-  display: SheetDisplay;
-  notes: string;
   dieBox: {
     hpDice: string;
     mpDice: string;
   };
-  primaryBlocker: string | null;
+  display: SheetDisplay;
+  notes: string;
   primaryAttacker: string | null;
+  primaryBlocker: string | null;
 }

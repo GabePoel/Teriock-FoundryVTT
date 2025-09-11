@@ -9,10 +9,7 @@ import { smartEvaluateSync } from "../../../../helpers/utils.mjs";
  * @private
  */
 export function _prepareDerivedData(equipmentData) {
-  equipmentData.tier.derived = Math.max(
-    0,
-    smartEvaluateSync(equipmentData.tier.raw, equipmentData.parent),
-  );
+  equipmentData.tier.derived = Math.max(0, smartEvaluateSync(equipmentData.tier.raw, equipmentData.parent));
   if (equipmentData.consumable && equipmentData.quantity === 0) {
     equipmentData.equipped = false;
   }
@@ -23,7 +20,6 @@ export function _prepareDerivedData(equipmentData) {
     equipmentData.baseBv = 0;
   }
   if (equipmentData.sb && equipmentData.sb.length > 0) {
-    equipmentData.specialRules =
-      TERIOCK.content.weaponFightingStyles[equipmentData.sb];
+    equipmentData.specialRules = TERIOCK.content.weaponFightingStyles[equipmentData.sb];
   }
 }

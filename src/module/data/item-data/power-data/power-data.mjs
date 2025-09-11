@@ -21,7 +21,10 @@ export default class TeriockPowerData extends TeriockBaseItemData {
         initial: "other",
         label: "Power Type",
       }),
-      flaws: new TextField({ initial: "<p>None.</p>", label: "Flaws" }),
+      flaws: new TextField({
+        initial: "<p>None.</p>",
+        label: "Flaws",
+      }),
       proficient: new fields.BooleanField({
         initial: true,
         label: "Proficient",
@@ -31,10 +34,7 @@ export default class TeriockPowerData extends TeriockBaseItemData {
 
   /** @inheritDoc */
   static migrateData(data) {
-    if (
-      foundry.utils.hasProperty(data, "type") &&
-      foundry.utils.getProperty(data, "type") === "species"
-    ) {
+    if (foundry.utils.hasProperty(data, "type") && foundry.utils.getProperty(data, "type") === "species") {
       foundry.utils.setProperty(data, "type", "other");
     }
   }
@@ -42,8 +42,7 @@ export default class TeriockPowerData extends TeriockBaseItemData {
   /** @inheritDoc */
   get messageParts() {
     return {
-      ...super.messageParts,
-      ..._messageParts(this),
+      ...super.messageParts, ..._messageParts(this),
     };
   }
 }

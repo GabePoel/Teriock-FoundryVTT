@@ -169,7 +169,6 @@ export async function _takeKill(actorData, amount) {
 /**
  * Pays the specified amount from an actor, using exact change if requested.
  * Falls back to debt if funds are insufficient.
- *
  * @param {TeriockBaseActorData} actorData
  * @param {number} amount - Gold-equivalent amount to pay.
  * @param {"exact" | "greedy"} mode
@@ -181,9 +180,7 @@ export async function _takePay(actorData, amount, mode = "greedy") {
 
   // Calculate total available wealth in gold value
   const totalWealth = Object.keys(currencyOptions).reduce((total, currency) => {
-    return (
-      total + (currentMoney[currency] || 0) * currencyOptions[currency].value
-    );
+    return (total + (currentMoney[currency] || 0) * currencyOptions[currency].value);
   }, 0);
 
   // If not enough money, add to debt and exit
@@ -197,10 +194,9 @@ export async function _takePay(actorData, amount, mode = "greedy") {
 
   // Create array of currencies sorted by value (highest first)
   const currencies = Object.entries(currencyOptions)
-    .sort(([, a], [, b]) => b.value - a.value)
-    .map(([key, config]) => ({
-      key,
-      ...config,
+    .sort(([ , a ], [ , b ]) => b.value - a.value)
+    .map(([ key, config ]) => ({
+      key, ...config,
       current: currentMoney[key] || 0,
     }));
 
@@ -209,12 +205,11 @@ export async function _takePay(actorData, amount, mode = "greedy") {
 
   // First pass: Deduct currencies starting from the highest value
   for (const currency of currencies) {
-    if (remainingAmount <= 0) break;
+    if (remainingAmount <= 0) {
+      break;
+    }
 
-    const canTake = Math.min(
-      currency.current,
-      Math.floor(remainingAmount / currency.value),
-    );
+    const canTake = Math.min(currency.current, Math.floor(remainingAmount / currency.value));
     if (canTake > 0) {
       toDeduct[currency.key] = canTake;
       remainingAmount -= canTake * currency.value;
@@ -224,7 +219,9 @@ export async function _takePay(actorData, amount, mode = "greedy") {
   // If we still need to pay more, take higher denominations for change
   if (remainingAmount > 0) {
     for (const currency of currencies) {
-      if (remainingAmount <= 0) break;
+      if (remainingAmount <= 0) {
+        break;
+      }
 
       const alreadyTaken = toDeduct[currency.key] || 0;
       const stillHave = currency.current - alreadyTaken;
@@ -244,9 +241,8 @@ export async function _takePay(actorData, amount, mode = "greedy") {
   const updateData = {};
 
   // Deduct the currencies we're spending
-  for (const [currencyKey, amountToDeduct] of Object.entries(toDeduct)) {
-    updateData[`system.money.${currencyKey}`] =
-      currentMoney[currencyKey] - amountToDeduct;
+  for (const [ currencyKey, amountToDeduct ] of Object.entries(toDeduct)) {
+    updateData[`system.money.${currencyKey}`] = currentMoney[currencyKey] - amountToDeduct;
   }
 
   // Handle change for exact mode
@@ -255,17 +251,17 @@ export async function _takePay(actorData, amount, mode = "greedy") {
 
     // Give change using the largest denominations possible
     for (const currency of currencies) {
-      if (changeRemaining <= 0) break;
+      if (changeRemaining <= 0) {
+        break;
+      }
 
       const changeAmount = Math.floor(changeRemaining / currency.value);
       if (changeAmount > 0) {
-        const currentAmount =
-          updateData[`system.money.${currency.key}`] !== undefined
-            ? updateData[`system.money.${currency.key}`]
-            : currentMoney[currency.key];
+        const currentAmount = updateData[`system.money.${currency.key}`] !== undefined
+          ? updateData[`system.money.${currency.key}`]
+          : currentMoney[currency.key];
 
-        updateData[`system.money.${currency.key}`] =
-          currentAmount + changeAmount;
+        updateData[`system.money.${currency.key}`] = currentAmount + changeAmount;
         changeRemaining -= changeAmount * currency.value;
       }
     }

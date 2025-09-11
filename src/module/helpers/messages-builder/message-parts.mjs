@@ -9,7 +9,9 @@ import { abilityOptions } from "../../constants/options/ability-options.mjs";
  */
 function createElement(tag, props = {}, ...children) {
   const el = Object.assign(document.createElement(tag), props);
-  for (const child of children) el.append(child);
+  for (const child of children) {
+    el.append(child);
+  }
   return el;
 }
 
@@ -36,7 +38,9 @@ export function messageBar(parent, icon = null, label = null) {
   bar.append(iconContainer, tagsContainer);
   parent.appendChild(bar);
 
-  if (icon) barIcon(bar, icon, label);
+  if (icon) {
+    barIcon(bar, icon, label);
+  }
 
   return bar;
 }
@@ -48,7 +52,9 @@ export function messageBar(parent, icon = null, label = null) {
  * @returns {HTMLDivElement|null} The created wrapper element, or null if no content provided.
  */
 export function messageWrapper(parent, content) {
-  if (!content) return null;
+  if (!content) {
+    return null;
+  }
   const wrapper = createElement("div", {
     className: "abm-label tsubtle",
     innerHTML: content,
@@ -68,32 +74,32 @@ export function messageWrapper(parent, content) {
  * @param {string|null} elements - Additional elements for special formatting.
  * @returns {HTMLDivElement|null} The created block element, or null if no text provided.
  */
-export function messageBlock(
-  parent,
-  title,
-  text,
-  italic = false,
-  special = null,
-  elements = null,
-) {
-  if (!text) return null;
+export function messageBlock(parent, title, text, italic = false, special = null, elements = null) {
+  if (!text) {
+    return null;
+  }
 
   const block = createElement("div", { className: "abm-block" });
   const titleElement = createElement("div", {
     className: "abm-block-title",
-    innerHTML:
-      special === "ES" ? `With the Elder Sorcery of ${elements}...` : title,
+    innerHTML: special === "ES" ? `With the Elder Sorcery of ${elements}...` : title,
   });
   const textElement = createElement("div", {
     className: "abm-block-text",
     innerHTML: text,
   });
 
-  if (special === "ES") block.classList.add("abm-es-block");
-  if (special === "embedded-block") block.classList.add("abm-embedded-block");
+  if (special === "ES") {
+    block.classList.add("abm-es-block");
+  }
+  if (special === "embedded-block") {
+    block.classList.add("abm-embedded-block");
+  }
 
   textElement.querySelectorAll("table").forEach((t) => t.remove());
-  if (italic) textElement.style.fontStyle = "italic";
+  if (italic) {
+    textElement.style.fontStyle = "italic";
+  }
 
   block.append(titleElement, textElement);
   parent.appendChild(block);
@@ -113,13 +119,9 @@ export function messageHeader(parent, image, text, fontClass = "tfont") {
     className: "tmessage-header-image",
     src: image,
   });
-  const imageContainer = createElement(
-    "div",
-    {
-      className: "tmessage-header-image-container timage",
-    },
-    headerImage,
-  );
+  const imageContainer = createElement("div", {
+    className: "tmessage-header-image-container timage",
+  }, headerImage);
   imageContainer.setAttribute("data-tooltip", "Open Image");
   imageContainer.setAttribute("data-src", image);
   const headerText = createElement("div", {
@@ -127,12 +129,7 @@ export function messageHeader(parent, image, text, fontClass = "tfont") {
     innerHTML: text,
   });
 
-  const header = createElement(
-    "div",
-    { className: "tmessage-header" },
-    imageContainer,
-    headerText,
-  );
+  const header = createElement("div", { className: "tmessage-header" }, imageContainer, headerText);
   parent.appendChild(header);
   return header;
 }
@@ -151,11 +148,7 @@ function barIcon(parent, iconClass, label, first = true) {
     style: "font-size: 1em;",
   });
 
-  const wrapper = createElement(
-    "div",
-    { className: "abm-icon-wrapper tsubtle" },
-    icon,
-  );
+  const wrapper = createElement("div", { className: "abm-icon-wrapper tsubtle" }, icon);
   if (label) {
     wrapper.setAttribute("data-tooltip", label);
     wrapper.setAttribute("data-tooltip-direction", "LEFT");
@@ -174,13 +167,7 @@ function barIcon(parent, iconClass, label, first = true) {
  * @param {string} typeKey - The type key to filter entities by.
  * @param {string} iconFallback - Fallback icon class if no specific icon is found.
  */
-function addEmbeddedBlock(
-  entities,
-  blocks,
-  name,
-  typeKey,
-  iconFallback = "hashtag",
-) {
+function addEmbeddedBlock(entities, blocks, name, typeKey, iconFallback = "hashtag") {
   const config = abilityOptions.form;
   const typeOrder = Object.keys(config);
 
@@ -192,23 +179,32 @@ function addEmbeddedBlock(
       const indexA = typeOrder.indexOf(typeA);
       const indexB = typeOrder.indexOf(typeB);
 
-      if (indexA !== indexB) return indexA - indexB;
+      if (indexA !== indexB) {
+        return indexA - indexB;
+      }
       return (a.name || "").localeCompare(b.name || "");
     });
 
-  if (!filtered.length) return;
+  if (!filtered.length) {
+    return;
+  }
 
   const listItems = filtered
     .map((e) => {
-      const { name, uuid, system } = e;
-      const { color = "", icon = iconFallback } = config[system["form"]] || {};
-      const quantity = system.quantity,
-        maxQuantity = system.maxQuantity?.derived;
+      const {
+        name,
+        uuid,
+        system,
+      } = e;
+      const {
+        color = "",
+        icon = iconFallback,
+      } = config[system["form"]] || {};
+      const quantity = system.quantity, maxQuantity = system.maxQuantity?.derived;
 
-      const suffix =
-        typeKey === "resource" && quantity !== undefined
-          ? `&nbsp;(${quantity}${maxQuantity ? `/${maxQuantity}` : ""})`
-          : "";
+      const suffix = typeKey === "resource" && quantity !== undefined ? `&nbsp;(${quantity}${maxQuantity
+        ? `/${maxQuantity}`
+        : ""})` : "";
 
       return `
         <li class="tmessage-embedded-li" data-tooltip-direction="LEFT">

@@ -6,10 +6,7 @@
  * @returns {Promise<void>}
  */
 export async function _takeAwaken(actorData) {
-  if (
-    actorData.parent.statuses.has("unconscious") &&
-    !actorData.parent.statuses.has("dead")
-  ) {
+  if (actorData.parent.statuses.has("unconscious") && !actorData.parent.statuses.has("dead")) {
     if (actorData.hp.value <= 0) {
       await actorData.parent.update({ "system.hp.value": 1 });
     }

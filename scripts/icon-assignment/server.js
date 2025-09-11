@@ -1,7 +1,7 @@
-const express = require('express');
-const fs = require('fs').promises;
-const path = require('path');
-const cors = require('cors');
+const express = require("express");
+const fs = require("fs").promises;
+const path = require("path");
+const cors = require("cors");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -9,10 +9,10 @@ const PORT = process.env.PORT || 3000;
 // Define paths - server runs from project root via: node scripts/icon-assignment/server.js
 const PROJECT_ROOT = process.cwd(); // Project root directory
 const TOOL_DIR = __dirname; // scripts/icon-assignment directory
-const CATEGORIES_PATH = path.join(PROJECT_ROOT, 'src', 'index', 'categories');
-const ASSIGNMENTS_PATH = path.join(TOOL_DIR, 'assignments.json');
-const MANIFEST_PATH = path.join(TOOL_DIR, 'manifest.json');
-const BACKUPS_PATH = path.join(TOOL_DIR, 'backups');
+const CATEGORIES_PATH = path.join(PROJECT_ROOT, "src", "index", "categories");
+const ASSIGNMENTS_PATH = path.join(TOOL_DIR, "assignments.json");
+const MANIFEST_PATH = path.join(TOOL_DIR, "manifest.json");
+const BACKUPS_PATH = path.join(TOOL_DIR, "backups");
 
 // Middleware
 app.use(cors());
@@ -22,7 +22,7 @@ app.use(express.static(TOOL_DIR)); // Serve static files from scripts/icon-assig
 // API Routes
 
 // Get assignments
-app.get('/api/assignments', async (_req, res) => {
+app.get("/api/assignments", async (_req, res) => {
   try {
     // Check if the file exists
     try {
@@ -32,60 +32,63 @@ app.get('/api/assignments', async (_req, res) => {
       return res.json({});
     }
 
-    const data = await fs.readFile(ASSIGNMENTS_PATH, 'utf8');
+    const data = await fs.readFile(ASSIGNMENTS_PATH, "utf8");
     const assignments = JSON.parse(data);
     res.json(assignments);
   } catch (error) {
-    console.error('Error reading assignments:', error);
-    res.status(500).json({ error: 'Failed to read assignments' });
+    console.error("Error reading assignments:", error);
+    res.status(500).json({ error: "Failed to read assignments" });
   }
 });
 
 // Save assignments
-app.post('/api/assignments', async (req, res) => {
+app.post("/api/assignments", async (req, res) => {
   try {
     const assignmentsData = JSON.stringify(req.body, null, 2);
 
-    await fs.writeFile(ASSIGNMENTS_PATH, assignmentsData, 'utf8');
+    await fs.writeFile(ASSIGNMENTS_PATH, assignmentsData, "utf8");
 
-    console.log('Assignments saved successfully to:', ASSIGNMENTS_PATH);
-    res.json({ success: true, message: 'Assignments saved successfully' });
+    console.log("Assignments saved successfully to:", ASSIGNMENTS_PATH);
+    res.json({
+      success: true,
+      message: "Assignments saved successfully",
+    });
   } catch (error) {
-    console.error('Error saving assignments:', error);
-    res.status(500).json({ error: 'Failed to save assignments' });
+    console.error("Error saving assignments:", error);
+    res.status(500).json({ error: "Failed to save assignments" });
   }
 });
 
 // Get manifest
-app.get('/api/manifest', async (_req, res) => {
+app.get("/api/manifest", async (_req, res) => {
   try {
-    const data = await fs.readFile(MANIFEST_PATH, 'utf8');
+    const data = await fs.readFile(MANIFEST_PATH, "utf8");
     const manifest = JSON.parse(data);
     res.json(manifest);
   } catch (error) {
-    console.error('Error reading manifest:', error);
-    res.status(500).json({ error: 'Failed to read manifest' });
+    console.error("Error reading manifest:", error);
+    res.status(500).json({ error: "Failed to read manifest" });
   }
 });
 
 // Get list of available categories
-app.get('/api/categories', async (_req, res) => {
+app.get("/api/categories", async (_req, res) => {
   try {
     const files = await fs.readdir(CATEGORIES_PATH);
     const categories = files
-      .filter(file => file.endsWith('.json'))
-      .map(file => file.replace('.json', ''))
+      .filter(file => file.endsWith(".json"))
+      .map(file => file.replace(".json", ""))
       .sort();
 
     res.json({ categories });
   } catch (error) {
-    console.error('Error reading categories directory:', error);
-    res.status(500).json({ error: 'Failed to read categories directory' });
+    console.error("Error reading categories directory:", error);
+    res.status(500).json({ error: "Failed to read categories directory" });
   }
 });
 
 // Get category data (reads from src/index/categories)
-app.get('/api/categories/:category', async (req, res) => {
+app.get("/api/categories/:category", async (req, res) => {
   try {
     const category = req.params.category;
     const categoryPath = path.join(CATEGORIES_PATH, `${category}.json`);
@@ -101,7 +104,7 @@ app.get('/api/categories/:category', async (req, res) => {
       return res.status(404).json({ error: `Category ${category} not found at ${categoryPath}` });
     }
 
-    const data = await fs.readFile(categoryPath, 'utf8');
+    const data = await fs.readFile(categoryPath, "utf8");
     console.log(`Read ${data.length} characters from ${category}.json`);
     console.log(`First 100 characters:`, JSON.stringify(data.slice(0, 100)));
 
@@ -114,7 +117,7 @@ app.get('/api/categories/:category', async (req, res) => {
       console.error(`Full content:`, JSON.stringify(data));
       res.status(500).json({
         error: `Invalid JSON in ${category}.json: ${parseError.message}`,
-        rawContent: data.slice(0, 200)
+        rawContent: data.slice(0, 200),
       });
     }
   } catch (error) {
@@ -124,9 +127,9 @@ app.get('/api/categories/:category', async (req, res) => {
 });
 
 // Create assignments backup endpoint
-app.post('/api/backup-assignments', async (req, res) => {
+app.post("/api/backup-assignments", async (req, res) => {
   try {
-    const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+    const timestamp = new Date().toISOString().replace(/[:.]/g, "-");
     const backupPath = path.join(BACKUPS_PATH, `assignments-backup-${timestamp}.json`);
 
     // Ensure backup directory exists
@@ -137,20 +140,24 @@ app.post('/api/backup-assignments', async (req, res) => {
     }
 
     const assignmentsData = JSON.stringify(req.body, null, 2);
-    await fs.writeFile(backupPath, assignmentsData, 'utf8');
+    await fs.writeFile(backupPath, assignmentsData, "utf8");
 
     console.log(`Backup created: ${backupPath}`);
-    res.json({ success: true, message: 'Backup created successfully', backupPath });
+    res.json({
+      success: true,
+      message: "Backup created successfully",
+      backupPath,
+    });
   } catch (error) {
-    console.error('Error creating backup:', error);
-    res.status(500).json({ error: 'Failed to create backup' });
+    console.error("Error creating backup:", error);
+    res.status(500).json({ error: "Failed to create backup" });
   }
 });
 
 // Health check endpoint
-app.get('/api/health', (_req, res) => {
+app.get("/api/health", (_req, res) => {
   res.json({
-    status: 'ok',
+    status: "ok",
     timestamp: new Date().toISOString(),
     paths: {
       projectRoot: PROJECT_ROOT,
@@ -158,28 +165,28 @@ app.get('/api/health', (_req, res) => {
       categoriesPath: CATEGORIES_PATH,
       assignmentsPath: ASSIGNMENTS_PATH,
       manifestPath: MANIFEST_PATH,
-      backupsPath: BACKUPS_PATH
-    }
+      backupsPath: BACKUPS_PATH,
+    },
   });
 });
 
 // Serve images from project root (assuming images are relative to project root)
-app.use('/images', express.static(PROJECT_ROOT));
+app.use("/images", express.static(PROJECT_ROOT));
 
 // Serve category files directly (for direct import in client)
-app.use('/src/index/categories', express.static(CATEGORIES_PATH));
+app.use("/src/index/categories", express.static(CATEGORIES_PATH));
 
 // Catch-all handler: send back index.html for any non-API routes
-app.get('*', (req, res) => {
-  if (!req.url.startsWith('/api')) {
-    res.sendFile(path.join(TOOL_DIR, 'index.html'));
+app.get("*", (req, res) => {
+  if (!req.url.startsWith("/api")) {
+    res.sendFile(path.join(TOOL_DIR, "index.html"));
   }
 });
 
 // Error handling middleware
 app.use((error, _req, res, _next) => {
-  console.error('Server error:', error);
-  res.status(500).json({ error: 'Internal server error' });
+  console.error("Server error:", error);
+  res.status(500).json({ error: "Internal server error" });
 });
 
 // Start server

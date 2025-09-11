@@ -15,9 +15,7 @@ const { fields } = foundry.data;
  * @extends {TeriockBaseEffectData}
  * @mixes WikiDataMixin
  */
-export default class TeriockConditionData extends WikiDataMixin(
-  TeriockBaseEffectData,
-) {
+export default class TeriockConditionData extends WikiDataMixin(TeriockBaseEffectData) {
   /**
    * @inheritDoc
    * @type {Readonly<Teriock.Documents.EffectModelMetadata>}
@@ -55,13 +53,9 @@ export default class TeriockConditionData extends WikiDataMixin(
         name: "Delete",
         icon: makeIcon("trash", "contextMenu"),
         callback: async () => {
-          await this.parent.parent.deleteEmbeddedDocuments(
-            this.parent.documentName,
-            [this.parent.id],
-          );
+          await this.parent.parent.deleteEmbeddedDocuments(this.parent.documentName, [ this.parent.id ]);
         },
-        condition: () =>
-          this.parent.parent.sheet?.editable && this.parent.isOwner,
+        condition: () => this.parent.parent.sheet?.editable && this.parent.isOwner,
         group: "document",
       },
     ];

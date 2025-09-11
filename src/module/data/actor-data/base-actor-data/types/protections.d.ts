@@ -1,19 +1,19 @@
 /** Protection Data */
 export interface ProtectionData {
+  /** Abilities */
+  abilities: Set<string>;
   /** Damage Types */
   damageTypes: Set<string>;
   /** Drain Types */
   drainTypes: Set<string>;
-  /** Statuses */
-  statuses: Set<Teriock.Parameters.Condition.ConditionKey>;
-  /** Elements */
-  elements: Set<Teriock.Parameters.Ability.Element>;
   /** Effects */
   effects: Set<Teriock.Parameters.Ability.EffectTag>;
-  /** Power Sources */
-  powerSources: Set<Teriock.Parameters.Ability.PowerSource>;
-  /** Abilities */
-  abilities: Set<string>;
+  /** Elements */
+  elements: Set<Teriock.Parameters.Ability.Element>;
   /** Other */
   other: Set<string>;
+  /** Power Sources */
+  powerSources: Set<Teriock.Parameters.Ability.PowerSource>;
+  /** Statuses */
+  statuses: Set<Teriock.Parameters.Condition.ConditionKey>;
 }

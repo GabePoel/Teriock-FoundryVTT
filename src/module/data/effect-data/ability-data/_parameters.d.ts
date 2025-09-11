@@ -9,21 +9,16 @@ declare global {
     export type Interaction = keyof typeof abilityOptions.interaction;
 
     /** Valid execution times for active maneuvers */
-    export type ActiveExecutionTime =
-      keyof typeof abilityOptions.executionTime.active;
+    export type ActiveExecutionTime = keyof typeof abilityOptions.executionTime.active;
 
     /** Valid execution times for reactive maneuvers */
-    export type ReactiveExecutionTime =
-      keyof typeof abilityOptions.executionTime.reactive;
+    export type ReactiveExecutionTime = keyof typeof abilityOptions.executionTime.reactive;
 
     /** Valid execution times for passive maneuvers */
-    export type PassiveExecutionTime =
-      keyof typeof abilityOptions.executionTime.passive;
+    export type PassiveExecutionTime = keyof typeof abilityOptions.executionTime.passive;
 
     /** Valid execution times for slow maneuvers */
-    export type SlowExecutionTime =
-      | keyof typeof abilityOptions.executionTime.slow
-      | string;
+    export type SlowExecutionTime = | keyof typeof abilityOptions.executionTime.slow | string;
 
     /** Valid execution times */
     export type ExecutionTime =

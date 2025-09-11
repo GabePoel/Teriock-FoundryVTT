@@ -3,20 +3,20 @@
  */
 export interface OverviewText {
   base: string;
-  proficient: string;
   fluent: string;
+  proficient: string;
 }
 
 /**
  * Results text for different outcomes
  */
 export interface ResultsText {
-  hit: string;
+  critFail: string;
   critHit: string;
-  miss: string;
   critMiss: string;
-  save: string;
   critSave: string;
   fail: string;
-  critFail: string;
+  hit: string;
+  miss: string;
+  save: string;
 }

@@ -3,7 +3,11 @@ import TeriockCommand from "../command.mjs";
 export const settempmp = new TeriockCommand(
   "settempmp",
   "Set temporary MP on targeted tokens. Usage: /settempmp <amount>",
-  async ({ args, _chatData, actors }) => {
+  async ({
+    args,
+    _chatData,
+    actors,
+  }) => {
     if (args.length === 0) {
       ui.notifications.warn("Usage: /settempmp <amount>");
       return;
@@ -19,12 +23,10 @@ export const settempmp = new TeriockCommand(
       await actor.takeSetTempMp(amount);
     }
 
-    ui.notifications.info(
-      `Set ${amount} temporary MP on ${actors.length} target(s).`,
-    );
+    ui.notifications.info(`Set ${amount} temporary MP on ${actors.length} target(s).`);
   },
   {
-    aliases: ["stmp"],
+    aliases: [ "stmp" ],
     category: "#support",
     requiresTarget: true,
   },

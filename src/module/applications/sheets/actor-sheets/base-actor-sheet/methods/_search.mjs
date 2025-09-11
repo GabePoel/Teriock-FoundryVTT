@@ -4,18 +4,18 @@ const { SearchFilter } = foundry.applications.ux;
  * @param {TeriockBaseActorSheet} sheet
  */
 export function _initSearchFilters(sheet) {
-  sheet.element.querySelectorAll(".tcard-search[data-search-key]").forEach(
-    /** @param {HTMLInputElement} input */ (input) => {
+  sheet.element.querySelectorAll(".tcard-search[data-search-key]")
+    .forEach(/** @param {HTMLInputElement} input */(input) => {
       const searchKey = input.dataset.searchKey;
-      if (!searchKey) return;
+      if (!searchKey) {
+        return;
+      }
 
-      const resultsContainer = sheet.element.querySelector(
-        `.tcard-results[data-search-key="${searchKey}"]`,
-      );
-      if (!resultsContainer) return;
-
+      const resultsContainer = sheet.element.querySelector(`.tcard-results[data-search-key="${searchKey}"]`);
+      if (!resultsContainer) {
+        return;
+      }
       const initial = sheet._searchStrings[searchKey] || "";
-
       const searchFilter = new SearchFilter({
         inputSelector: `.tcard-search[data-search-key="${searchKey}"]`,
         contentSelector: `.tcard-results[data-search-key="${searchKey}"]`,
@@ -30,6 +30,5 @@ export function _initSearchFilters(sheet) {
         },
       });
       searchFilter.bind(sheet.element);
-    },
-  );
+    });
 }

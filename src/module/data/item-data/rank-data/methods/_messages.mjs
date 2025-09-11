@@ -1,7 +1,5 @@
 import {
-  addAbilitiesBlock,
-  addPropertiesBlock,
-  addResourcesBlock,
+  addAbilitiesBlock, addPropertiesBlock, addResourcesBlock,
 } from "../../../../helpers/messages-builder/message-parts.mjs";
 
 /**
@@ -46,10 +44,7 @@ export function _messageParts(rankData) {
     },
   ];
   addPropertiesBlock(rankData.parent.transferredEffects, blocks);
-  addAbilitiesBlock(
-    rankData.parent.transferredEffects.filter((e) => !e.sup),
-    blocks,
-  );
+  addAbilitiesBlock(rankData.parent.transferredEffects.filter((e) => !e.sup), blocks);
   addResourcesBlock(rankData.parent.transferredEffects, blocks);
   return {
     bars: bars,

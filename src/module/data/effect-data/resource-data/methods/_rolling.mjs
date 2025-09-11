@@ -25,18 +25,11 @@ async function use(resourceData, options) {
   let message = await resourceData.parent.buildMessage();
   if (resourceData.rollFormula) {
     let rollFormula = resourceData.rollFormula;
-
     message = await foundry.applications.ux.TextEditor.enrichHTML(message);
-    const roll = new TeriockRoll(
-      rollFormula,
-      resourceData.actor?.getRollData(),
-      { message: message },
-    );
-
+    const roll = new TeriockRoll(rollFormula, resourceData.actor?.getRollData(), { message: message });
     if (options?.advantage) {
       roll.alter(2, 0);
     }
-
     await roll.toMessage({
       speaker: ChatMessage.getSpeaker({
         actor: resourceData.actor,
@@ -45,8 +38,7 @@ async function use(resourceData, options) {
     const result = roll.total;
     const functionHook = resourceData.functionHook;
     if (functionHook) {
-      const hookFunction =
-        TERIOCK.options.resource.functionHooks[functionHook]?.callback;
+      const hookFunction = TERIOCK.options.resource.functionHooks[functionHook]?.callback;
       await hookFunction?.(resourceData.parent, result);
     }
   } else {

@@ -18,7 +18,7 @@ export default class TeriockBaseItemSheet extends SheetMixin(ItemSheetV2) {
    * @type {object}
    */
   static DEFAULT_OPTIONS = {
-    classes: ["teriock"],
+    classes: [ "teriock" ],
     actions: {
       toggleOnUseDoc: this._toggleOnUseDoc,
       refreshThis: this._refreshThis,
@@ -40,7 +40,10 @@ export default class TeriockBaseItemSheet extends SheetMixin(ItemSheetV2) {
    * @private
    */
   static async _refreshThis() {
-    const toRefresh = [...this.document.abilities, ...this.document.properties];
+    const toRefresh = [
+      ...this.document.abilities,
+      ...this.document.properties,
+    ];
     await refreshDocuments(toRefresh);
   }
 
@@ -71,7 +74,7 @@ export default class TeriockBaseItemSheet extends SheetMixin(ItemSheetV2) {
       ".range-input": cleanFeet,
     };
 
-    for (const [selector, cleaner] of Object.entries(cleanMap)) {
+    for (const [ selector, cleaner ] of Object.entries(cleanMap)) {
       this.element.querySelectorAll(selector).forEach((el) => {
         this._connectInput(el, el.getAttribute("name"), cleaner);
       });
@@ -99,7 +102,9 @@ export default class TeriockBaseItemSheet extends SheetMixin(ItemSheetV2) {
   /** @inheritDoc */
   async _onRender(context, options) {
     await super._onRender(context, options);
-    if (!this.editable) return;
+    if (!this.editable) {
+      return;
+    }
 
     this._bindStaticEvents();
     this._bindCleanInputs();
@@ -107,38 +112,34 @@ export default class TeriockBaseItemSheet extends SheetMixin(ItemSheetV2) {
 
   /** @inheritDoc */
   async _prepareContext(options) {
-    const abilityFormOrder = Object.keys(
-      TERIOCK.options.ability.form || {},
-    );
+    const abilityFormOrder = Object.keys(TERIOCK.options.ability.form || {});
     this.item.buildEffectTypes();
     const abilities = this.item.abilities.sort((a, b) => {
       const typeA = a.system?.form || "";
       const typeB = b.system?.form || "";
       const indexA = abilityFormOrder.indexOf(typeA);
       const indexB = abilityFormOrder.indexOf(typeB);
-      if (indexA !== indexB) return indexA - indexB;
+      if (indexA !== indexB) {
+        return indexA - indexB;
+      }
       return (a.name || "").localeCompare(b.name || "");
     });
 
-    const propertyFormOrder = Object.keys(
-      TERIOCK.options.ability.form || {},
-    );
+    const propertyFormOrder = Object.keys(TERIOCK.options.ability.form || {});
     const properties = this.item.properties.sort((a, b) => {
       const typeA = a.system?.form || "";
       const typeB = b.system?.form || "";
       const indexA = propertyFormOrder.indexOf(typeA);
       const indexB = propertyFormOrder.indexOf(typeB);
-      if (indexA !== indexB) return indexA - indexB;
+      if (indexA !== indexB) {
+        return indexA - indexB;
+      }
       return (a.name || "").localeCompare(b.name || "");
     });
 
-    const fluencies = this.item.fluencies.sort((a, b) =>
-      (a.name || "").localeCompare(b.name || ""),
-    );
+    const fluencies = this.item.fluencies.sort((a, b) => (a.name || "").localeCompare(b.name || ""));
 
-    const resources = this.item.resources.sort((a, b) =>
-      (a.name || "").localeCompare(b.name || ""),
-    );
+    const resources = this.item.resources.sort((a, b) => (a.name || "").localeCompare(b.name || ""));
 
     const context = await super._prepareContext(options);
     context.item = this.item;

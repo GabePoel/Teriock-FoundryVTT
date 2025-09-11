@@ -4,18 +4,15 @@ import type { StatDataMixinInterface } from "../../mixins/stat-data-mixin/_types
 import type { WikiDataMixinInterface } from "../../mixins/wiki-data-mixin/_types";
 
 declare module "./rank-data.mjs" {
-  export default interface TeriockRankData
-    extends TeriockBaseItemData,
-      StatDataMixinInterface,
-      WikiDataMixinInterface {
-    /** Flaws */
-    flaws: string;
+  export default interface TeriockRankData extends TeriockBaseItemData, StatDataMixinInterface, WikiDataMixinInterface {
     /** Rank Class Archetype */
     archetype: Teriock.Parameters.Rank.RankArchetype;
     /** Rank Class Name */
     className: Teriock.Parameters.Rank.RankClass;
     /** What number rank this is, with respect to its class */
     classRank: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
+    /** Flaws */
+    flaws: string;
     /** If this rank is innage */
     innate: boolean;
     /** Max Armor Value */

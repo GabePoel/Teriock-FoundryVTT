@@ -11,7 +11,9 @@ export function powerLevelContextMenu(item) {
   const options = [];
   let powerLevels = TERIOCK.options.equipment.powerLevel;
   for (const powerLevel in powerLevels) {
-    if (powerLevel === "unknown") continue;
+    if (powerLevel === "unknown") {
+      continue;
+    }
     const powerLevelName = powerLevels[powerLevel].name;
     const powerLevelIcon = powerLevels[powerLevel].icon;
     const icon = makeIcon(powerLevelIcon, iconStyle);

@@ -11,7 +11,7 @@ import { fieldContextMenu, tradecraftContextMenu } from "./connections/_context-
 export default class TeriockFluencySheet extends TeriockBaseEffectSheet {
   /** @inheritDoc */
   static DEFAULT_OPTIONS = {
-    classes: ["fluency"],
+    classes: [ "fluency" ],
     window: {
       icon: "fa-solid fa-" + documentOptions.fluency.icon,
     },
@@ -24,9 +24,12 @@ export default class TeriockFluencySheet extends TeriockBaseEffectSheet {
    */
   static PARTS = {
     all: {
-      template:
-        "systems/teriock/src/templates/document-templates/effect-templates/fluency-template/fluency-template.hbs",
-      scrollable: [".window-content", ".tsheet-page", ".ab-sheet-everything"],
+      template: "systems/teriock/src/templates/document-templates/effect-templates/fluency-template/fluency-template.hbs",
+      scrollable: [
+        ".window-content",
+        ".tsheet-page",
+        ".ab-sheet-everything",
+      ],
     },
   };
 
@@ -34,9 +37,18 @@ export default class TeriockFluencySheet extends TeriockBaseEffectSheet {
   async _onRender(context, options) {
     await super._onRender(context, options);
     [
-      { selector: ".field-box", menu: fieldContextMenu },
-      { selector: ".tradecraft-box", menu: tradecraftContextMenu },
-    ].forEach(({ selector, menu }) => {
+      {
+        selector: ".field-box",
+        menu: fieldContextMenu,
+      },
+      {
+        selector: ".tradecraft-box",
+        menu: tradecraftContextMenu,
+      },
+    ].forEach(({
+      selector,
+      menu,
+    }) => {
       this._connectContextMenu(selector, menu(this.document), "click");
     });
   }

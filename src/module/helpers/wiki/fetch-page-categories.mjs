@@ -6,10 +6,7 @@
  * @returns {Promise<Array<{ ns: number, title: string, hidden?: string }>>}
  *          An array of category objects (same shape as the API), or [] on failure.
  */
-export default async function fetchPageCategories(
-  title,
-  { includeHidden = false } = {},
-) {
+export default async function fetchPageCategories(title, { includeHidden = false } = {}) {
   const endpoint = "https://wiki.teriock.com/api.php";
   const LIMIT = 500;
   let categories = [];
@@ -23,16 +20,20 @@ export default async function fetchPageCategories(
         titles: title,
         format: "json",
         origin: "*",
-        cllimit: LIMIT.toString(),
-        // Return 'hidden' flag in each item if present (the API includes a key 'hidden': '' when hidden)
+        cllimit: LIMIT.toString(), // Return 'hidden' flag in each item if present (the API includes a key 'hidden': ''
+                                   // when hidden)
         clprop: "hidden",
         redirects: "1", // follow redirects to the target page
       });
 
       // Exclude hidden categories unless explicitly requested
-      if (!includeHidden) params.set("clshow", "!hidden");
+      if (!includeHidden) {
+        params.set("clshow", "!hidden");
+      }
 
-      if (clcontinue) params.set("clcontinue", clcontinue);
+      if (clcontinue) {
+        params.set("clcontinue", clcontinue);
+      }
 
       const url = `${endpoint}?${params.toString()}`;
       const res = await fetch(url);

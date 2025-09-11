@@ -1,8 +1,6 @@
 const data = /** @type {Teriock.HookData.UseAbility} */ scope.data;
 const buttons = data.rollConfig.chatData.system.buttons;
-data.rollConfig.chatData.system.buttons = buttons.filter(
-  (button) => button.dataset.action === "apply-effect",
-);
+data.rollConfig.chatData.system.buttons = buttons.filter((button) => button.dataset.action === "apply-effect");
 const button = data.rollConfig.chatData.system.buttons[0];
 const effectObject = JSON.parse(button.dataset.normal);
 const equipmentClass = await tm.dialogs.selectWeaponClassDialog();

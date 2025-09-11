@@ -15,7 +15,7 @@ export default class TeriockPropertySheet extends TeriockBaseEffectSheet {
    * @static
    */
   static DEFAULT_OPTIONS = {
-    classes: ["property"],
+    classes: [ "property" ],
     window: {
       icon: "fa-solid fa-" + documentOptions.property.icon,
     },
@@ -28,22 +28,23 @@ export default class TeriockPropertySheet extends TeriockBaseEffectSheet {
    */
   static PARTS = {
     all: {
-      template:
-        "systems/teriock/src/templates/document-templates/effect-templates/property-template/property-template.hbs",
-      scrollable: [".window-content", ".tsheet-page", ".ab-sheet-everything"],
+      template: "systems/teriock/src/templates/document-templates/effect-templates/property-template/property-template.hbs",
+      scrollable: [
+        ".window-content",
+        ".tsheet-page",
+        ".ab-sheet-everything",
+      ],
     },
   };
 
   /** @inheritDoc */
   async _onRender(context, options) {
     await super._onRender(context, options);
-    if (!this.editable) return;
+    if (!this.editable) {
+      return;
+    }
     const propertyContextMenuOptions = propertyContextMenu(this.document);
-    this._connectContextMenu(
-      ".property-type-box",
-      propertyContextMenuOptions,
-      "click",
-    );
+    this._connectContextMenu(".property-type-box", propertyContextMenuOptions, "click");
     const buttonMap = {
       ".ab-limitation-button": "system.limitation",
       ".ab-improvement-button": "system.improvement",

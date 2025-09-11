@@ -12,32 +12,42 @@ const enricherIcons = {
   Tradecraft: documentOptions.fluency.icon,
 };
 
-const rulesEnrichers = Object.keys(enricherIcons).map((type) => ({
-  pattern: new RegExp(`@${type}\\[(.+?)\\](?:\\{(.+?)\\})?`, "g"),
-  enricher: async (match, _options) => {
-    const fileName = match[1];
-    const title = match[2];
+const rulesEnrichers = Object.keys(enricherIcons)
+  .map((type) => ({
+    pattern: new RegExp(`@${type}\\[(.+?)\\](?:\\{(.+?)\\})?`, "g"),
+    enricher: async (match, _options) => {
+      const fileName = match[1];
+      const title = match[2];
 
-    const compendiumIndex = game.teriock.packs.rules().index.getName(type);
-    if (!compendiumIndex) return null;
+      const compendiumIndex = game.teriock.packs.rules().index.getName(type);
+      if (!compendiumIndex) {
+        return null;
+      }
 
-    const compendium = await foundry.utils.fromUuid(compendiumIndex.uuid);
-    if (!compendium) return null;
+      const compendium = await foundry.utils.fromUuid(compendiumIndex.uuid);
+      if (!compendium) {
+        return null;
+      }
 
-    const page = compendium.pages.getName(fileName);
-    if (!page) return null;
+      const page = compendium.pages.getName(fileName);
+      if (!page) {
+        return null;
+      }
 
-    const uuid = page.uuid;
-    if (!uuid) return null;
+      const uuid = page.uuid;
+      if (!uuid) {
+        return null;
+      }
 
-    const wrapper = document.createElement("div");
-    wrapper.innerHTML = `<a class="content-link" draggable="true" data-link="" data-uuid="${uuid}" data-id="${uuid.slice(-16)}" data-tooltip="${fileName}">
+      const wrapper = document.createElement("div");
+      wrapper.innerHTML
+        = `<a class="content-link" draggable="true" data-link="" data-uuid="${uuid}" data-id="${uuid.slice(-16)}" data-tooltip="${fileName}">
       <i class="fa-solid fa-${enricherIcons[type]}"></i>${title || fileName}</a>`;
 
-    return wrapper.firstElementChild;
-  },
-  replaceParent: false,
-}));
+      return wrapper.firstElementChild;
+    },
+    replaceParent: false,
+  }));
 
 const abilityEnricher = {
   pattern: /@Ability\[(.+?)\](?:\{(.+?)\})?/g,
@@ -45,11 +55,17 @@ const abilityEnricher = {
     const fileName = match[1];
     const title = match[2];
     const ability = await getAbility(fileName);
-    if (!ability) return null;
+    if (!ability) {
+      return null;
+    }
     const uuid = ability.uuid;
-    if (!uuid) return null;
+    if (!uuid) {
+      return null;
+    }
     const wrapper = document.createElement("div");
-    wrapper.innerHTML = `<a class="content-link" draggable="true" data-link="" data-uuid="${uuid}" data-id="${uuid.slice(-16)}" data-tooltip="${fileName}"><i class="fa-solid fa-${documentOptions.ability.icon}"></i>${title || fileName}</a>`;
+    wrapper.innerHTML
+      = `<a class="content-link" draggable="true" data-link="" data-uuid="${uuid}" data-id="${uuid.slice(-16)}" data-tooltip="${fileName}"><i class="fa-solid fa-${documentOptions.ability.icon}"></i>${title
+    || fileName}</a>`;
     return wrapper.firstElementChild;
   },
   replaceParent: false,
@@ -60,12 +76,16 @@ const classEnricher = {
   enricher: async (match, _options) => {
     const fileName = match[1];
     let title = match[2];
-    if (!title) title = fileName;
+    if (!title) {
+      title = fileName;
+    }
     const uuid = game.teriock.packs
       .classes()
       .index.getName(`Rank 1 ${fileName}`).uuid;
     const wrapper = document.createElement("div");
-    wrapper.innerHTML = `<a class="content-link" draggable="true" data-link="" data-uuid="${uuid}" data-id="${uuid.slice(-16)}" data-tooltip="${fileName}"><i class="fa-solid fa-${documentOptions.rank.icon}"></i>${title || fileName}</a>`;
+    wrapper.innerHTML
+      = `<a class="content-link" draggable="true" data-link="" data-uuid="${uuid}" data-id="${uuid.slice(-16)}" data-tooltip="${fileName}"><i class="fa-solid fa-${documentOptions.rank.icon}"></i>${title
+    || fileName}</a>`;
     return wrapper.firstElementChild;
   },
   replaceParent: false,
@@ -76,10 +96,14 @@ const rankEnricher = {
   enricher: async (match, _options) => {
     let fileName = match[1];
     const title = match[2];
-    if (!fileName.includes("Rank")) fileName = `Rank 1 ${fileName}`;
+    if (!fileName.includes("Rank")) {
+      fileName = `Rank 1 ${fileName}`;
+    }
     const uuid = game.teriock.packs.classes().index.getName(fileName).uuid;
     const wrapper = document.createElement("div");
-    wrapper.innerHTML = `<a class="content-link" draggable="true" data-link="" data-uuid="${uuid}" data-id="${uuid.slice(-16)}" data-tooltip="${fileName}"><i class="fa-solid fa-${documentOptions.rank.icon}"></i>${title || fileName}</a>`;
+    wrapper.innerHTML
+      = `<a class="content-link" draggable="true" data-link="" data-uuid="${uuid}" data-id="${uuid.slice(-16)}" data-tooltip="${fileName}"><i class="fa-solid fa-${documentOptions.rank.icon}"></i>${title
+    || fileName}</a>`;
     return wrapper.firstElementChild;
   },
   replaceParent: false,
@@ -93,7 +117,10 @@ const escapeRx = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
  */
 export const makeRollEnricher = (BUTTONS) => {
   const keys = Object.keys(BUTTONS);
-  const lookup = Object.fromEntries(keys.map((k) => [k.toLowerCase(), k]));
+  const lookup = Object.fromEntries(keys.map((k) => [
+    k.toLowerCase(),
+    k,
+  ]));
   const keyAlt = keys.map(escapeRx).join("|");
   const any = "([^]*)";
   const source = String.raw`\[\[\s*\/(${keyAlt})\s+${any}?\s*\]\]`;
@@ -102,9 +129,14 @@ export const makeRollEnricher = (BUTTONS) => {
     pattern,
     enricher: async (match) => {
       const typeKey = lookup[match[1].toLowerCase()];
-      if (!typeKey) return null;
+      if (!typeKey) {
+        return null;
+      }
       const formula = (match[2] ?? "").trim();
-      const { label, icon } = BUTTONS[typeKey];
+      const {
+        label,
+        icon,
+      } = BUTTONS[typeKey];
       const a = document.createElement("a");
       a.className = "content-link";
       a.draggable = false;
@@ -128,7 +160,9 @@ const equipmentEnricher = {
     const title = match[2];
     const uuid = game.teriock.packs.equipment().index.getName(fileName).uuid;
     const wrapper = document.createElement("div");
-    wrapper.innerHTML = `<a class="content-link" draggable="true" data-link="" data-uuid="${uuid}" data-id="${uuid.slice(-16)}" data-tooltip="${fileName}"><i class="fa-solid fa-${documentOptions.equipment.icon}"></i>${title || fileName}</a>`;
+    wrapper.innerHTML
+      = `<a class="content-link" draggable="true" data-link="" data-uuid="${uuid}" data-id="${uuid.slice(-16)}" data-tooltip="${fileName}"><i class="fa-solid fa-${documentOptions.equipment.icon}"></i>${title
+    || fileName}</a>`;
     return wrapper.firstElementChild;
   },
   replaceParent: false,
@@ -158,7 +192,9 @@ const wikiLinkEnricher = {
   enricher: async (match, _options) => {
     const pageName = match[1];
     let displayText = match[2];
-    if (!displayText) displayText = pageName.split(":")[1];
+    if (!displayText) {
+      displayText = pageName.split(":")[1];
+    }
     const urlPageName = pageName.replace(/ /g, "_");
     const link = document.createElement("a");
     link.href = `https://wiki.teriock.com/index.php/${urlPageName}`;

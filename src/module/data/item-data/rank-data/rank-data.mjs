@@ -17,9 +17,7 @@ const { fields } = foundry.data;
  * @mixes StatDataMixin
  * @mixes WikiDataMixin
  */
-export default class TeriockRankData extends StatDataMixin(
-  WikiDataMixin(TeriockBaseItemData),
-) {
+export default class TeriockRankData extends StatDataMixin(WikiDataMixin(TeriockBaseItemData)) {
   /**
    * @inheritDoc
    * @type {Readonly<Teriock.Documents.ItemModelMetadata>}
@@ -35,8 +33,7 @@ export default class TeriockRankData extends StatDataMixin(
     const schema = super.defineSchema();
     Object.assign(schema, {
       description: new TextField({
-        initial:
-          "<p>Every adventurer is a journeyman before they join their first class.</p>",
+        initial: "<p>Every adventurer is a journeyman before they join their first class.</p>",
         label: "Description",
       }),
       flaws: new TextField({
@@ -57,9 +54,18 @@ export default class TeriockRankData extends StatDataMixin(
         label: "Class Rank",
         min: 0,
       }),
-      hpDice: this.defineStatDieField("hp", { faces: 10, value: 6 }),
-      innate: new fields.BooleanField({ initial: false, label: "Innate" }),
-      mpDice: this.defineStatDieField("mp", { faces: 10, value: 6 }),
+      hpDice: this.defineStatDieField("hp", {
+        faces: 10,
+        value: 6,
+      }),
+      innate: new fields.BooleanField({
+        initial: false,
+        label: "Innate",
+      }),
+      mpDice: this.defineStatDieField("mp", {
+        faces: 10,
+        value: 6,
+      }),
       maxAv: new fields.NumberField({
         initial: 2,
         integer: true,
@@ -133,13 +139,10 @@ export default class TeriockRankData extends StatDataMixin(
   /** @inheritDoc */
   get wikiPage() {
     const prefix = this.constructor.metadata.namespace;
-    const pageName =
-      TERIOCK.index.classes[
-        foundry.utils.getProperty(
-          this.parent,
-          this.constructor.metadata.pageNameKey,
-        )
-      ];
+    const pageName = TERIOCK.index.classes[foundry.utils.getProperty(
+      this.parent,
+      this.constructor.metadata.pageNameKey,
+    )];
     return `${prefix}:${pageName}`;
   }
 

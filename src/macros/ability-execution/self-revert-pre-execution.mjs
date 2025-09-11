@@ -4,25 +4,29 @@ const transformationLevels = {
   full: "Full Transformation",
   greater: "Greater Transformation",
 };
-const chosenTransformationLevel = await tm.dialogs.selectDialog(
-  transformationLevels,
-  {
-    label: "Level",
-    hint: "If known, select the level of transformation you are attempting to revert from.",
-    hintHtml: TERIOCK.content.conditionsData.transformed.content,
-    hintTitle: "Transformed",
-    title: "Select Transformation Level",
-    other: true,
-    initial: "minor",
-  },
-);
+const chosenTransformationLevel = await tm.dialogs.selectDialog(transformationLevels, {
+  label: "Level",
+  hint: "If known, select the level of transformation you are attempting to revert from.",
+  hintHtml: TERIOCK.content.conditionsData.transformed.content,
+  hintTitle: "Transformed",
+  title: "Select Transformation Level",
+  other: true,
+  initial: "minor",
+});
 let dc = "none";
-if (chosenTransformationLevel === "minor") dc = 6;
-if (chosenTransformationLevel === "full") dc = 12;
-if (chosenTransformationLevel === "greater") dc = 18;
-const buttons = data.rollConfig.chatData.system.buttons.filter(
-  (b) => b.dataset?.action === "feat-save" && b.dataset?.attribute === "int",
-);
+if (chosenTransformationLevel === "minor") {
+  dc = 6;
+}
+if (chosenTransformationLevel === "full") {
+  dc = 12;
+}
+if (chosenTransformationLevel === "greater") {
+  dc = 18;
+}
+const buttons = data.rollConfig.chatData.system.buttons.filter((b) => b.dataset?.action
+  === "feat-save"
+  && b.dataset?.attribute
+  === "int");
 for (const b of buttons) {
   b.dataset.dc = dc;
 }
@@ -30,17 +34,13 @@ for (let i = 0; i < data.rollConfig.chatData.rolls.length; i++) {
   const r = data.rollConfig.chatData.rolls[i];
   if (r.context?.diceClass === "feat") {
     if (typeof dc === "number") {
-      const newRoll = new game.teriock.Roll(
-        `${dc}`,
-        {},
-        {
-          flavor: transformationLevels[chosenTransformationLevel] + " DC",
-          context: {
-            diceClass: "feat",
-            totalClass: "feat",
-          },
+      const newRoll = new game.teriock.Roll(`${dc}`, {}, {
+        flavor: transformationLevels[chosenTransformationLevel] + " DC",
+        context: {
+          diceClass: "feat",
+          totalClass: "feat",
         },
-      );
+      });
       await newRoll.evaluate();
       data.rollConfig.chatData.rolls[i] = newRoll;
     } else {

@@ -12,7 +12,12 @@ export default class DetectionModeTrueSightPerception extends BaseDetectionMode 
   /** @inheritDoc */
   static getDetectionFilter() {
     return (this._detectionFilter ??= OutlineOverlayFilter.create({
-      outlineColor: [1, 1, 1, 1],
+      outlineColor: [
+        1,
+        1,
+        1,
+        1,
+      ],
       knockout: true,
     }));
   }

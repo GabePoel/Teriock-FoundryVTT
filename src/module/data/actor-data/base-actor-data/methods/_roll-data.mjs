@@ -135,7 +135,14 @@ function ageData(_actorData, data) {
  */
 function attributeData(actorData, data) {
   const attr = actorData.attributes;
-  const attrKeys = ["int", "mov", "per", "snk", "str", "unp"];
+  const attrKeys = [
+    "int",
+    "mov",
+    "per",
+    "snk",
+    "str",
+    "unp",
+  ];
 
   for (const key of attrKeys) {
     const attribute = attr[key];
@@ -224,7 +231,15 @@ function witherData(actorData, data) {
  * @param {object} data - The roll data object to populate.
  */
 function hackData(actorData, data) {
-  const hackKeys = ["arm", "leg", "bod", "eye", "ear", "mou", "nos"];
+  const hackKeys = [
+    "arm",
+    "leg",
+    "bod",
+    "eye",
+    "ear",
+    "mou",
+    "nos",
+  ];
 
   for (const key of hackKeys) {
     const hack = actorData.hacks[key];
@@ -348,14 +363,12 @@ function defenseData(actorData, data) {
  */
 function offenseData(actorData, data) {
   const weaponAv0 = actorData?.wielding.attacker.derived?.system.derivedAv0;
-  const naturalAv0 =
-    actorData.piercing === "av0" || actorData.piercing === "ub";
+  const naturalAv0 = actorData.piercing === "av0" || actorData.piercing === "ub";
   const hasAv0 = weaponAv0 || naturalAv0;
   const weaponUb = actorData?.wielding.attacker.derived?.system.derivedUb;
   const naturalUb = actorData.piercing === "ub";
   const hasUb = weaponUb || naturalUb;
-  const weaponWarded =
-    actorData?.wielding.attacker.derived?.system.derivedWarded;
+  const weaponWarded = actorData?.wielding.attacker.derived?.system.derivedWarded;
   Object.assign(data, {
     sb: actorData.sb ? 1 : 0,
     av0: hasAv0 ? 2 : 0,
@@ -420,41 +433,35 @@ function moneyData(actorData, data) {
   }
 
   // Combined currency values
-  data["money.all.num"] =
-    Object.values(actorData.money).reduce((sum, val) => sum + (val || 0), 0) -
-    actorData.money.total;
+  data["money.all.num"] = Object.values(actorData.money)
+    .reduce((sum, val) => sum + (val || 0), 0) - actorData.money.total;
   data["money.all.val"] = actorData.money.total || 0;
   data["money.all.weight"] = actorData.moneyWeight || 0;
 
   // Coins only
-  const coinKeys = ["cop", "sil", "gol"];
-  data["money.coi.num"] = coinKeys.reduce(
-    (sum, key) => sum + (data[`money.${key}.num`] || 0),
-    0,
-  );
-  data["money.coi.val"] = coinKeys.reduce(
-    (sum, key) => sum + (data[`money.${key}.val`] || 0),
-    0,
-  );
-  data["money.coi.weight"] = coinKeys.reduce(
-    (sum, key) => sum + (data[`money.${key}.weight`] || 0),
-    0,
-  );
+  const coinKeys = [
+    "cop",
+    "sil",
+    "gol",
+  ];
+  data["money.coi.num"] = coinKeys.reduce((sum, key) => sum + (data[`money.${key}.num`] || 0), 0);
+  data["money.coi.val"] = coinKeys.reduce((sum, key) => sum + (data[`money.${key}.val`] || 0), 0);
+  data["money.coi.weight"] = coinKeys.reduce((sum, key) => sum + (data[`money.${key}.weight`] || 0), 0);
 
   // Gemstones only
-  const gemKeys = ["ent", "fir", "pix", "sno", "dra", "moo", "mag", "hea"];
-  data["money.gem.num"] = gemKeys.reduce(
-    (sum, key) => sum + (data[`money.${key}.num`] || 0),
-    0,
-  );
-  data["money.gem.val"] = gemKeys.reduce(
-    (sum, key) => sum + (data[`money.${key}.val`] || 0),
-    0,
-  );
-  data["money.gem.weight"] = gemKeys.reduce(
-    (sum, key) => sum + (data[`money.${key}.weight`] || 0),
-    0,
-  );
+  const gemKeys = [
+    "ent",
+    "fir",
+    "pix",
+    "sno",
+    "dra",
+    "moo",
+    "mag",
+    "hea",
+  ];
+  data["money.gem.num"] = gemKeys.reduce((sum, key) => sum + (data[`money.${key}.num`] || 0), 0);
+  data["money.gem.val"] = gemKeys.reduce((sum, key) => sum + (data[`money.${key}.val`] || 0), 0);
+  data["money.gem.weight"] = gemKeys.reduce((sum, key) => sum + (data[`money.${key}.weight`] || 0), 0);
 }
 
 /**

@@ -18,62 +18,33 @@ export async function _handleDialogs(rollConfig) {
 
   // Variable MP cost dialog
   if (abilityData.costs.mp?.type === "variable") {
-    let mpDescription = await TextEditor.enrichHTML(
-      abilityData.costs.mp.value.variable,
-    );
+    let mpDescription = await TextEditor.enrichHTML(abilityData.costs.mp.value.variable);
     if (abilityData.gifted.enabled) {
-      mpDescription += `<div><p>This ability is gifted and this cost will automatically be increased by ${abilityData.gifted.amount}.</p></div>`;
+      mpDescription
+        += `<div><p>This ability is gifted and this cost will automatically be increased by ${abilityData.gifted.amount}.</p></div>`;
     }
     const maxMp = actor.system.mp.value - actor.system.mp.min;
-    dialogs.push(
-      createDialogFieldset("Variable Mana Cost", mpDescription, "mp", maxMp),
-    );
+    dialogs.push(createDialogFieldset("Variable Mana Cost", mpDescription, "mp", maxMp));
   }
 
   // Variable HP cost dialog
   if (abilityData.costs.hp?.type === "variable") {
-    const hpDescription = await TextEditor.enrichHTML(
-      abilityData.costs.hp.value.variable,
-    );
+    const hpDescription = await TextEditor.enrichHTML(abilityData.costs.hp.value.variable);
     const maxHp = actor.system.hp.value - actor.system.hp.min;
-    dialogs.push(
-      createDialogFieldset(
-        "Variable Hit Point Cost",
-        hpDescription,
-        "hp",
-        maxHp,
-      ),
-    );
+    dialogs.push(createDialogFieldset("Variable Hit Point Cost", hpDescription, "hp", maxHp));
   }
 
   // Variable GP cost dialog
   if (abilityData.costs.gp?.type === "variable") {
-    const gpDescription = await TextEditor.enrichHTML(
-      abilityData.costs.gp.value.variable,
-    );
-    dialogs.push(
-      createDialogFieldset("Variable Gold Cost", gpDescription, "gp", Infinity),
-    );
+    const gpDescription = await TextEditor.enrichHTML(abilityData.costs.gp.value.variable);
+    dialogs.push(createDialogFieldset("Variable Gold Cost", gpDescription, "gp", Infinity));
   }
 
   // Heightened dialog
-  if (
-    abilityData.parent.isProficient &&
-    abilityData.heightened &&
-    !rollConfig.useData.modifiers.noHeighten
-  ) {
+  if (abilityData.parent.isProficient && abilityData.heightened && !rollConfig.useData.modifiers.noHeighten) {
     const p = actor.system.p;
-    const heightenedDescription = await TextEditor.enrichHTML(
-      abilityData.heightened,
-    );
-    dialogs.push(
-      createDialogFieldset(
-        "Heightened Amount",
-        heightenedDescription,
-        "heightened",
-        p,
-      ),
-    );
+    const heightenedDescription = await TextEditor.enrichHTML(abilityData.heightened);
+    dialogs.push(createDialogFieldset("Heightened Amount", heightenedDescription, "heightened", p));
   }
 
   if (dialogs.length > 0) {
@@ -87,24 +58,16 @@ export async function _handleDialogs(rollConfig) {
         label: "Confirm",
         callback: (_event, button) => {
           if (abilityData.costs.mp?.type === "variable") {
-            useData.costs.mp = Number(
-              button.form.elements.namedItem("mp").value,
-            );
+            useData.costs.mp = Number(button.form.elements.namedItem("mp").value);
           }
           if (abilityData.costs.hp?.type === "variable") {
-            useData.costs.hp = Number(
-              button.form.elements.namedItem("hp").value,
-            );
+            useData.costs.hp = Number(button.form.elements.namedItem("hp").value);
           }
           if (abilityData.costs.gp?.type === "variable") {
-            useData.costs.gp = Number(
-              button.form.elements.namedItem("gp").value,
-            );
+            useData.costs.gp = Number(button.form.elements.namedItem("gp").value);
           }
           if (abilityData.parent.isProficient && abilityData.heightened) {
-            useData.modifiers.heightened = Number(
-              button.form.elements.namedItem("heightened").value,
-            );
+            useData.modifiers.heightened = Number(button.form.elements.namedItem("heightened").value);
             useData.costs.mp += useData.modifiers.heightened;
           }
         },

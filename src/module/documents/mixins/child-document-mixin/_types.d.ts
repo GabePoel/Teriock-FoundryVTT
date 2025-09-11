@@ -1,17 +1,5 @@
 export interface ChildDocumentMixinInterface {
   /**
-   * Checks if the document is fluent.
-   * @returns True if the document is fluent, false otherwise.
-   */
-  get isFluent(): boolean;
-
-  /**
-   * Checks if the document is proficient.
-   * @returns True if the document is proficient, false otherwise.
-   */
-  get isProficient(): boolean;
-
-  /**
    * Builds an enriched message from the document's message parts.
    * @param options - Options for building the message
    * @returns Promise that resolves to the enriched message HTML
@@ -42,6 +30,18 @@ export interface ChildDocumentMixinInterface {
    * @returns Promise that resolves to the duplicated document
    */
   duplicate(): Promise<ChildDocumentMixinInterface>;
+
+  /**
+   * Checks if the document is fluent.
+   * @returns True if the document is fluent, false otherwise.
+   */
+  get isFluent(): boolean;
+
+  /**
+   * Checks if the document is proficient.
+   * @returns True if the document is proficient, false otherwise.
+   */
+  get isProficient(): boolean;
 
   /**
    * Rolls the item, delegating to the system's roll method.

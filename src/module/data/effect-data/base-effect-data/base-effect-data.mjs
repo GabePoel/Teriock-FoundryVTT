@@ -16,13 +16,11 @@ export default class TeriockBaseEffectData extends ChildTypeModel {
    * @inheritDoc
    * @type {Teriock.Documents.EffectModelMetadata}
    */
-  static metadata = mergeFreeze(
-    /** @type {Teriock.Documents.EffectModelMetadata} */ (super.metadata),
-    {
+  static metadata = mergeFreeze(/** @type {Teriock.Documents.EffectModelMetadata} */
+    (super.metadata), {
       hierarchy: false,
       modifies: "Actor",
-    },
-  );
+    });
 
   /** @inheritDoc */
   static defineSchema() {
@@ -37,16 +35,12 @@ export default class TeriockBaseEffectData extends ChildTypeModel {
       }),
       suppression: new fields.SchemaField({
         statuses: new fields.SchemaField({
-          active: new fields.SetField(
-            new fields.StringField({
-              choices: TERIOCK.index.conditions,
-            }),
-          ),
-          inactive: new fields.SetField(
-            new fields.StringField({
-              choices: TERIOCK.index.conditions,
-            }),
-          ),
+          active: new fields.SetField(new fields.StringField({
+            choices: TERIOCK.index.conditions,
+          })),
+          inactive: new fields.SetField(new fields.StringField({
+            choices: TERIOCK.index.conditions,
+          })),
         }),
         comparisons: new fields.SchemaField({
           actor: new fields.ArrayField(comparatorField()),
@@ -100,23 +94,19 @@ export default class TeriockBaseEffectData extends ChildTypeModel {
    * @returns {boolean} True if the effect is suppressed, false otherwise.
    */
   get suppressed() {
-    if (
-      this.parent.parent?.documentName === "Item" &&
-      this.parent.parent.system.shouldSuppress(this.parent.id)
-    ) {
+    if (this.parent.parent?.documentName === "Item" && this.parent.parent.system.shouldSuppress(this.parent.id)) {
       return true;
     }
-    return !!(
-      this.parent.parent?.documentName === "Item" &&
-      this.parent.parent?.system.disabled
-    );
+    return !!(this.parent.parent?.documentName === "Item" && this.parent.parent?.system.disabled);
   }
 
   /** @inheritDoc */
   async _preDelete(options, user) {
     const data = { doc: this.parent };
     await this.parent.hookCall("effectExpiration", data, this.parent);
-    if (data.cancel) return false;
+    if (data.cancel) {
+      return false;
+    }
     await super._preDelete(options, user);
   }
 
@@ -138,7 +128,9 @@ export default class TeriockBaseEffectData extends ChildTypeModel {
     if (!this.deleteOnExpire) {
       const data = { doc: this.parent };
       await this.parent.hookCall("effectExpiration", data, this.parent);
-      if (data.cancel) return;
+      if (data.cancel) {
+        return;
+      }
     }
     return await _expire(this);
   }

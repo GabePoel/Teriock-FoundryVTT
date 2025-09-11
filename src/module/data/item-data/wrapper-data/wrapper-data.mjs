@@ -11,7 +11,12 @@ export default class TeriockWrapperData extends TeriockBaseItemData {
    */
   static metadata = mergeFreeze(super.metadata, {
     type: "wrapper",
-    childEffectTypes: ["ability", "property", "resource", "fluency"],
+    childEffectTypes: [
+      "ability",
+      "property",
+      "resource",
+      "fluency",
+    ],
   });
 
   /**

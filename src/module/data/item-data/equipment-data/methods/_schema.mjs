@@ -87,11 +87,9 @@ export function _defineSchema() {
       label: "Short Range",
       min: 0,
     }),
-    equipmentClasses: new fields.SetField(
-      new fields.StringField({
-        choices: TERIOCK.index.equipmentClasses,
-      }),
-    ),
+    equipmentClasses: new fields.SetField(new fields.StringField({
+      choices: TERIOCK.index.equipmentClasses,
+    })),
     minStr: new fields.NumberField({
       initial: -3,
       integer: true,

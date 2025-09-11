@@ -1,8 +1,5 @@
 import {
-  addAbilitiesBlock,
-  addFluenciesBlock,
-  addPropertiesBlock,
-  addResourcesBlock,
+  addAbilitiesBlock, addFluenciesBlock, addPropertiesBlock, addResourcesBlock,
 } from "../../../../helpers/messages-builder/message-parts.mjs";
 
 /**
@@ -42,7 +39,11 @@ export function _messageParts(equipmentData) {
     {
       icon: "fa-crosshairs-simple",
       label: "Attack",
-      wrappers: [damageString, rangeString, src.sb],
+      wrappers: [
+        damageString,
+        rangeString,
+        src.sb,
+      ],
     },
     {
       icon: "fa-shield",
@@ -64,7 +65,7 @@ export function _messageParts(equipmentData) {
     {
       icon: "fa-flag",
       label: "Equipment Classes",
-      wrappers: [...src.equipmentClasses.map((ec) => ref.equipmentClasses[ec])],
+      wrappers: [ ...src.equipmentClasses.map((ec) => ref.equipmentClasses[ec]) ],
     },
   ];
   const blocks = [
@@ -83,20 +84,12 @@ export function _messageParts(equipmentData) {
   ];
   if (equipmentData.sb && equipmentData.sb.length > 0) {
     blocks.push({
-      title:
-        TERIOCK.index.weaponFightingStyles[equipmentData.sb] +
-        " Fighting Style",
+      title: TERIOCK.index.weaponFightingStyles[equipmentData.sb] + " Fighting Style",
       text: equipmentData.specialRules,
     });
   }
-  addPropertiesBlock(
-    equipmentData.parent.transferredEffects.filter((e) => !e.sup),
-    blocks,
-  );
-  addAbilitiesBlock(
-    equipmentData.parent.transferredEffects.filter((e) => !e.sup),
-    blocks,
-  );
+  addPropertiesBlock(equipmentData.parent.transferredEffects.filter((e) => !e.sup), blocks);
+  addAbilitiesBlock(equipmentData.parent.transferredEffects.filter((e) => !e.sup), blocks);
   addResourcesBlock(equipmentData.parent.transferredEffects, blocks);
   addFluenciesBlock(equipmentData.parent.transferredEffects, blocks);
   return {

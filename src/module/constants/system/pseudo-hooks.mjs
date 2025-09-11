@@ -43,8 +43,5 @@ export const unsortedPseudoHooks = {
   documentDuplicate: "Document Duplication",
 };
 
-export const pseudoHooks = Object.fromEntries(
-  Object.entries(unsortedPseudoHooks).sort(([, a], [, b]) =>
-    a.localeCompare(b),
-  ),
-);
+export const pseudoHooks = Object.fromEntries(Object.entries(unsortedPseudoHooks)
+  .sort(([ , a ], [ , b ]) => a.localeCompare(b)));

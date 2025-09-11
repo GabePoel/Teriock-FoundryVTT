@@ -64,17 +64,17 @@ export async function selectDialog(choices, options = {}) {
       modal: true,
       content: selectContentHtml,
       ok: {
-        callback: (_event, button) =>
-          button.form.elements.namedItem("selected").value,
+        callback: (_event, button) => button.form.elements.namedItem("selected").value,
       },
     });
   }
 
   const otherContentHtml = document.createElement("div");
-  const otherField = new fields.StringField({ label, hint });
-  otherContentHtml.append(
-    otherField.toFormGroup({ units: "other" }, { name: "other" }),
-  );
+  const otherField = new fields.StringField({
+    label,
+    hint,
+  });
+  otherContentHtml.append(otherField.toFormGroup({ units: "other" }, { name: "other" }));
 
   return await TeriockDialog.prompt({
     window: { title },
@@ -82,8 +82,7 @@ export async function selectDialog(choices, options = {}) {
     content: selectContentHtml,
     ok: {
       default: true,
-      callback: (_event, button) =>
-        button.form.elements.namedItem("selected").value,
+      callback: (_event, button) => button.form.elements.namedItem("selected").value,
     },
     buttons: [
       {
@@ -91,15 +90,16 @@ export async function selectDialog(choices, options = {}) {
         label: "Other",
         callback: async (_event, _button, dialog) => {
           dialog.classList.add("force-hidden");
-          if (genericOther) return null;
+          if (genericOther) {
+            return null;
+          }
 
           return await TeriockDialog.prompt({
             window: { title },
             modal: true,
             content: otherContentHtml,
             ok: {
-              callback: (_event, button) =>
-                button.form.elements.namedItem("other").value,
+              callback: (_event, button) => button.form.elements.namedItem("other").value,
             },
           });
         },
@@ -149,11 +149,7 @@ export async function selectConditionDialog() {
  * @returns {Promise<Teriock.Parameters.Equipment.PropertyKey>}
  */
 export async function selectPropertyDialog() {
-  const choices = await Promise.all(
-    Object.values(TERIOCK.index.properties).map((name) =>
-      getProperty(name),
-    ),
-  );
+  const choices = await Promise.all(Object.values(TERIOCK.index.properties).map((name) => getProperty(name)));
   const chosen = await selectDocumentDialog(choices, {
     hint: "Please select a property.",
     title: "Select Property",
@@ -166,16 +162,14 @@ export async function selectPropertyDialog() {
  * @returns {Promise<Teriock.Parameters.Fluency.Tradecraft>}
  */
 export async function selectTradecraftDialog() {
-  const choices = await Promise.all(
-    Object.keys(TERIOCK.index.tradecrafts).map(async (tc) => {
-      return {
-        name: TERIOCK.index.tradecrafts[tc],
-        uuid: tc,
-        img: getIcon("tradecrafts", TERIOCK.index.tradecrafts[tc]),
-        tooltip: await tradecraftMessage(tc),
-      };
-    }),
-  );
+  const choices = await Promise.all(Object.keys(TERIOCK.index.tradecrafts).map(async (tc) => {
+    return {
+      name: TERIOCK.index.tradecrafts[tc],
+      uuid: tc,
+      img: getIcon("tradecrafts", TERIOCK.index.tradecrafts[tc]),
+      tooltip: await tradecraftMessage(tc),
+    };
+  }));
   const chosen = await selectDocumentDialog(choices, {
     hint: "Please select a tradecraft.",
     title: "Select Tradecraft",
@@ -189,11 +183,7 @@ export async function selectTradecraftDialog() {
  * @returns {Promise<string>}
  */
 export async function selectAbilityDialog() {
-  const choices = await Promise.all(
-    Object.values(TERIOCK.index.abilities).map((name) =>
-      getAbility(name),
-    ),
-  );
+  const choices = await Promise.all(Object.values(TERIOCK.index.abilities).map((name) => getAbility(name)));
   const chosen = await selectDocumentDialog(choices, {
     hint: "Please select an ability.",
     title: "Select Ability",
@@ -206,11 +196,7 @@ export async function selectAbilityDialog() {
  * @returns {Promise<string>}
  */
 export async function selectEquipmentTypeDialog() {
-  const choices = await Promise.all(
-    Object.values(TERIOCK.index.equipment).map((name) =>
-      getItem(name, "equipment"),
-    ),
-  );
+  const choices = await Promise.all(Object.values(TERIOCK.index.equipment).map((name) => getItem(name, "equipment")));
   const chosen = await selectDocumentDialog(choices, {
     hint: "Please select an equipment type",
     title: "Select Equipment Type",
@@ -223,20 +209,18 @@ export async function selectEquipmentTypeDialog() {
  * @returns {Promise<string>}
  */
 export async function selectClassDialog() {
-  const choices = await Promise.all(
-    [
-      ...Object.keys(TERIOCK.options.rank.mage.classes),
-      ...Object.keys(TERIOCK.options.rank.semi.classes),
-      ...Object.keys(TERIOCK.options.rank.warrior.classes),
-    ].map(async (c) => {
-      return {
-        name: TERIOCK.index.classes[c],
-        uuid: c,
-        img: getIcon("classes", TERIOCK.index.classes[c]),
-        tooltip: await classMessage(c),
-      };
-    }),
-  );
+  const choices = await Promise.all([
+    ...Object.keys(TERIOCK.options.rank.mage.classes),
+    ...Object.keys(TERIOCK.options.rank.semi.classes),
+    ...Object.keys(TERIOCK.options.rank.warrior.classes),
+  ].map(async (c) => {
+    return {
+      name: TERIOCK.index.classes[c],
+      uuid: c,
+      img: getIcon("classes", TERIOCK.index.classes[c]),
+      tooltip: await classMessage(c),
+    };
+  }));
   const chosen = await selectDocumentDialog(choices, {
     hint: "Please select a class.",
     title: "Select Class",

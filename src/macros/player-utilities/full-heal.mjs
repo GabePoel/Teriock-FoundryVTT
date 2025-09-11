@@ -7,7 +7,7 @@ if (actor) {
     "system.hasReaction": true,
   });
   // Remove all hacks.
-  for (const [part, value] of Object.entries(actor.system.hacks)) {
+  for (const [ part, value ] of Object.entries(actor.system.hacks)) {
     for (let i = 0; i < value.max; i++) {
       await actor.takeUnhack(part);
     }

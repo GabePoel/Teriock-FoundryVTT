@@ -9,13 +9,12 @@ import { contextMenus } from "./connections/_context-menus.mjs";
  * Ability sheet for Teriock system abilities.
  * Provides comprehensive ability management including consequences, context menus,
  * tag management, and rich text editing for various ability components.
- *
  * @property {TeriockAbility} document
  */
 export default class TeriockAbilitySheet extends TeriockBaseEffectSheet {
   /** @inheritDoc */
   static DEFAULT_OPTIONS = {
-    classes: ["ability"],
+    classes: [ "ability" ],
     actions: {
       unlinkMacro: this._unlinkMacro,
       changeMacroRunHook: this._changeMacroRunHook,
@@ -32,8 +31,7 @@ export default class TeriockAbilitySheet extends TeriockBaseEffectSheet {
    */
   static PARTS = {
     all: {
-      template:
-        "systems/teriock/src/templates/document-templates/effect-templates/ability-template/ability-template.hbs",
+      template: "systems/teriock/src/templates/document-templates/effect-templates/ability-template/ability-template.hbs",
       scrollable: [
         ".window-content",
         ".tsheet-page",
@@ -70,7 +68,9 @@ export default class TeriockAbilitySheet extends TeriockBaseEffectSheet {
    * @private
    */
   static async _setDuration() {
-    if (!this.editable) return;
+    if (!this.editable) {
+      return;
+    }
     await durationDialog(this.document);
   }
 
@@ -95,37 +95,109 @@ export default class TeriockAbilitySheet extends TeriockBaseEffectSheet {
   _activateContextMenus() {
     const cm = contextMenus(this.document);
     const contextMap = [
-      [".delivery-box", cm.delivery, "click"],
-      [".delivery-box", cm.piercing, "contextmenu"],
-      [".execution-box", cm.maneuver, "contextmenu"],
-      ['.execution-box[data-maneuver="Active"]', cm.active, "click"],
-      ['.execution-box[data-maneuver="Reactive"]', cm.reactive, "click"],
-      [".interaction-box", cm.interaction, "click"],
-      [".interaction-box-feat", cm.featSaveAttribute, "contextmenu"],
-      [".target-box", cm.targets, "click"],
-      [".mana-cost-box", cm.manaCost, "contextmenu"],
-      [".hit-cost-box", cm.hitCost, "contextmenu"],
-      [".gold-cost-box", cm.goldCost, "contextmenu"],
-      [".break-cost-box", cm.breakCost, "contextmenu"],
-      [".expansion-box", cm.expansion, "click"],
-      [".expansion-box-detonate", cm.expansionSaveAttribute, "contextmenu"],
-      [".expansion-box-ripple", cm.expansionSaveAttribute, "contextmenu"],
-      [".ab-improvement-attribute", cm.attributeImprovement, "click"],
+      [
+        ".delivery-box",
+        cm.delivery,
+        "click",
+      ],
+      [
+        ".delivery-box",
+        cm.piercing,
+        "contextmenu",
+      ],
+      [
+        ".execution-box",
+        cm.maneuver,
+        "contextmenu",
+      ],
+      [
+        ".execution-box[data-maneuver=\"Active\"]",
+        cm.active,
+        "click",
+      ],
+      [
+        ".execution-box[data-maneuver=\"Reactive\"]",
+        cm.reactive,
+        "click",
+      ],
+      [
+        ".interaction-box",
+        cm.interaction,
+        "click",
+      ],
+      [
+        ".interaction-box-feat",
+        cm.featSaveAttribute,
+        "contextmenu",
+      ],
+      [
+        ".target-box",
+        cm.targets,
+        "click",
+      ],
+      [
+        ".mana-cost-box",
+        cm.manaCost,
+        "contextmenu",
+      ],
+      [
+        ".hit-cost-box",
+        cm.hitCost,
+        "contextmenu",
+      ],
+      [
+        ".gold-cost-box",
+        cm.goldCost,
+        "contextmenu",
+      ],
+      [
+        ".break-cost-box",
+        cm.breakCost,
+        "contextmenu",
+      ],
+      [
+        ".expansion-box",
+        cm.expansion,
+        "click",
+      ],
+      [
+        ".expansion-box-detonate",
+        cm.expansionSaveAttribute,
+        "contextmenu",
+      ],
+      [
+        ".expansion-box-ripple",
+        cm.expansionSaveAttribute,
+        "contextmenu",
+      ],
+      [
+        ".ab-improvement-attribute",
+        cm.attributeImprovement,
+        "click",
+      ],
       [
         ".ab-improvement-attribute",
         cm.attributeImprovementMinVal,
         "contextmenu",
       ],
-      [".ab-improvement-feat-save", cm.featSaveImprovement, "click"],
+      [
+        ".ab-improvement-feat-save",
+        cm.featSaveImprovement,
+        "click",
+      ],
       [
         ".ab-improvement-feat-save",
         cm.featSaveImprovementAmount,
         "contextmenu",
       ],
-      [".ability-type-box", cm.form, "click"],
+      [
+        ".ability-type-box",
+        cm.form,
+        "click",
+      ],
     ];
 
-    for (const [selector, opts, evt] of contextMap) {
+    for (const [ selector, opts, evt ] of contextMap) {
       this._connectContextMenu(selector, opts, evt);
     }
   }
@@ -152,7 +224,7 @@ export default class TeriockAbilitySheet extends TeriockBaseEffectSheet {
       ".flag-elder-sorcery": "system.elderSorcery",
     };
 
-    for (const [selector, param] of Object.entries(tags)) {
+    for (const [ selector, param ] of Object.entries(tags)) {
       root.querySelectorAll(selector).forEach((el) => {
         el.addEventListener("click", async () => {
           await doc.update({ [param]: false });
@@ -166,17 +238,15 @@ export default class TeriockAbilitySheet extends TeriockBaseEffectSheet {
       ".effect-tag": "system.effects",
     };
 
-    for (const [selector, param] of Object.entries(arrayTags)) {
-      root.querySelectorAll(selector).forEach(
-        /** @param {HTMLElement} el */ (el) => {
-          el.addEventListener("click", async () => {
-            const value = el.dataset.value;
-            const pathKey = param.split(".")[1];
-            const list = doc.system[pathKey].filter((entry) => entry !== value);
-            await doc.update({ [param]: list });
-          });
-        },
-      );
+    for (const [ selector, param ] of Object.entries(arrayTags)) {
+      root.querySelectorAll(selector).forEach(/** @param {HTMLElement} el */(el) => {
+        el.addEventListener("click", async () => {
+          const value = el.dataset.value;
+          const pathKey = param.split(".")[1];
+          const list = doc.system[pathKey].filter((entry) => entry !== value);
+          await doc.update({ [param]: list });
+        });
+      });
     }
 
     const staticUpdates = {
@@ -224,7 +294,7 @@ export default class TeriockAbilitySheet extends TeriockBaseEffectSheet {
       },
     };
 
-    for (const [selector, update] of Object.entries(staticUpdates)) {
+    for (const [ selector, update ] of Object.entries(staticUpdates)) {
       root.querySelectorAll(selector).forEach((el) => {
         el.addEventListener("click", () => doc.update(update));
       });
@@ -248,7 +318,9 @@ export default class TeriockAbilitySheet extends TeriockBaseEffectSheet {
    */
   async _onRender(context, options) {
     await super._onRender(context, options);
-    if (!this.editable) return;
+    if (!this.editable) {
+      return;
+    }
 
     this._activateContextMenus();
     this._activateTags();
@@ -290,11 +362,7 @@ export default class TeriockAbilitySheet extends TeriockBaseEffectSheet {
             value = intValue;
           }
         }
-        if (
-          typeof value === "string" &&
-          value.trim() !== "" &&
-          !isNaN(Number(value))
-        ) {
+        if (typeof value === "string" && value.trim() !== "" && !isNaN(Number(value))) {
           value = Number(value);
         }
         const changes = this.document.system.applies[application].changes;
@@ -314,9 +382,7 @@ export default class TeriockAbilitySheet extends TeriockBaseEffectSheet {
     context.subAbilities = this.document.subs;
     context.supAbility = this.document.sup;
     context.macros = [];
-    for (const [safeUuid, pseudoHook] of Object.entries(
-      this.document.system.applies.macros,
-    )) {
+    for (const [ safeUuid, pseudoHook ] of Object.entries(this.document.system.applies.macros)) {
       const macro = await foundry.utils.fromUuid(pureUuid(safeUuid));
       if (macro) {
         context.macros.push({
@@ -327,9 +393,7 @@ export default class TeriockAbilitySheet extends TeriockBaseEffectSheet {
       }
     }
     const effectsSet = new Set(system.effects);
-    context.effectTags = Array.from(
-      effectsSet.difference(new Set(system.powerSources)),
-    );
+    context.effectTags = Array.from(effectsSet.difference(new Set(system.powerSources)));
     await this._enrichAll(context, {
       mpCost: system.costs.mp.value.variable,
       hpCost: system.costs.hp.value.variable,

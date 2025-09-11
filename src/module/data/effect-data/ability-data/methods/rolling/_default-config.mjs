@@ -67,19 +67,13 @@ export function _defaultConfig(abilityData, options = {}) {
   // Determine if ability is proficient
   if (options.proficient !== undefined) {
     rollConfig.useData.proficient = options.proficient;
-  } else if (
-    abilityData.actor &&
-    abilityData.actor.uuid === rollConfig.useData.actor.uuid
-  ) {
+  } else if (abilityData.actor && abilityData.actor.uuid === rollConfig.useData.actor.uuid) {
     rollConfig.useData.proficient = abilityData.parent.isProficient;
   }
   // Determine if ability is fluent
   if (options.fluent !== undefined) {
     rollConfig.useData.fluent = options.fluent;
-  } else if (
-    abilityData.actor &&
-    abilityData.actor.uuid === rollConfig.useData.actor.uuid
-  ) {
+  } else if (abilityData.actor && abilityData.actor.uuid === rollConfig.useData.actor.uuid) {
     rollConfig.useData.fluent = abilityData.parent.isFluent;
   }
   // Determine if ability should not be heightened

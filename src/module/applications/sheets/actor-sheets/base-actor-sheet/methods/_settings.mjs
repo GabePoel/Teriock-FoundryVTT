@@ -34,8 +34,7 @@ export const _defaultSheetSettings = {
   },
   abilitySortAscending: true,
   abilitySortOption: "name",
-  conditionExpansions:
-    /** @type {Record<Teriock.Parameters.Condition.ConditionKey, boolean>} */ {},
+  conditionExpansions: /** @type {Record<Teriock.Parameters.Condition.ConditionKey, boolean>} */ {},
   equipmentFilters: {
     consumable: threeToggleInitial,
     equipmentClasses: null,

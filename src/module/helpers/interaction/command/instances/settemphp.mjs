@@ -3,7 +3,11 @@ import TeriockCommand from "../command.mjs";
 export const settemphp = new TeriockCommand(
   "settemphp",
   "Set temporary HP on targeted tokens. Usage: /settemphp <amount>",
-  async ({ args, _chatData, actors }) => {
+  async ({
+    args,
+    _chatData,
+    actors,
+  }) => {
     if (args.length === 0) {
       ui.notifications.warn("Usage: /settemphp <amount>");
       return;
@@ -19,12 +23,10 @@ export const settemphp = new TeriockCommand(
       await actor.takeSetTempHp(amount);
     }
 
-    ui.notifications.info(
-      `Set ${amount} temporary HP on ${actors.length} target(s).`,
-    );
+    ui.notifications.info(`Set ${amount} temporary HP on ${actors.length} target(s).`);
   },
   {
-    aliases: ["sthp"],
+    aliases: [ "sthp" ],
     category: "#support",
     requiresTarget: true,
   },

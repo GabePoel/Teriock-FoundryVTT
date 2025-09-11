@@ -5,10 +5,7 @@ import type { EquipmentChanges } from "./types/changes";
 
 declare module "./base-actor-data.mjs" {
   export default // @ts-ignore
-  interface TeriockBaseActorData
-    extends TeriockBaseActorDefault,
-      TeriockBaseActorDerived,
-      EquipmentChanges {
+  interface TeriockBaseActorData extends TeriockBaseActorDefault, TeriockBaseActorDerived, EquipmentChanges {
     /** Parent Actor */
     get parent(): TeriockActor;
   }

@@ -18,17 +18,18 @@ export class RollRollableTakeHandler extends ActionHandler {
    */
   async _makeRoll(formula) {
     let flavor = ROLL_TYPES[this.dataset.type].label;
-    for (const s of ["Apply", "Set", "Gain", "Pay"]) {
+    for (const s of [
+      "Apply",
+      "Set",
+      "Gain",
+      "Pay",
+    ]) {
       flavor = flavor.replace(s, "").trim();
     }
     flavor = flavor + " Roll";
-    const roll = new TeriockRoll(
-      formula,
-      {},
-      {
-        flavor: flavor,
-      },
-    );
+    const roll = new TeriockRoll(formula, {}, {
+      flavor: flavor,
+    });
     if (this.critRollOptions.crit) {
       roll.alter(2, 0, { multiplyNumeric: false });
     }
@@ -37,7 +38,10 @@ export class RollRollableTakeHandler extends ActionHandler {
       {
         label: ROLL_TYPES[this.dataset.type].label || "Apply",
         icon: `fa-solid fa-${ROLL_TYPES[this.dataset.type].icon || "plus"}`,
-        classes: ["teriock-chat-button", `${this.dataset.type}-button`],
+        classes: [
+          "teriock-chat-button",
+          `${this.dataset.type}-button`,
+        ],
         dataset: {
           action: "take-rollable-take",
           type: this.dataset.type,
@@ -66,7 +70,7 @@ export class RollRollableTakeHandler extends ActionHandler {
       messageStart = `<div class="teriock">${messageStartRaw.outerHTML}</div>`;
     }
     const messageData = {
-      rolls: [roll],
+      rolls: [ roll ],
       system: {
         buttons: buttons,
         extraContent: messageStart + damageDrainTypeMessage,

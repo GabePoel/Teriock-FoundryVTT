@@ -20,8 +20,14 @@ export function _defineSheet(schema) {
     }),
     notes: new fields.HTMLField({ initial: "Notes can be added here." }),
     dieBox: new fields.HTMLField({ initial: "" }),
-    primaryBlocker: new fields.StringField({ initial: null, nullable: true }),
-    primaryAttacker: new fields.StringField({ initial: null, nullable: true }),
+    primaryBlocker: new fields.StringField({
+      initial: null,
+      nullable: true,
+    }),
+    primaryAttacker: new fields.StringField({
+      initial: null,
+      nullable: true,
+    }),
   });
   return schema;
 }

@@ -8,20 +8,6 @@ const { fields } = foundry.data;
  * @implements {BaseChatButtonInterface}
  */
 export default class BaseChatButton extends TypeDataModel {
-  constructor() {
-    super();
-    this.commonRollOptions = {
-      advantage: false,
-      disadvantage: false,
-    };
-    this.critRollOptions = {
-      crit: false,
-    };
-    this.targeted = false;
-    /** @type {MouseEvent} */
-    this.event = undefined;
-  }
-
   /** @inheritDoc */
   static defineSchema() {
     return {
@@ -36,11 +22,27 @@ export default class BaseChatButton extends TypeDataModel {
     };
   }
 
+  constructor() {
+    super();
+    this.commonRollOptions = {
+      advantage: false,
+      disadvantage: false,
+    };
+    this.critRollOptions = {
+      crit: false,
+    };
+    this.targeted = false;
+    /** @type {MouseEvent} */
+    this.event = undefined;
+  }
+
   /**
    * @returns {TeriockActor[]}
    */
   get actors() {
-    if (this.targeted) return this.targetedActors;
+    if (this.targeted) {
+      return this.targetedActors;
+    }
     return this.selectedActors;
   }
 
@@ -78,7 +80,9 @@ export default class BaseChatButton extends TypeDataModel {
    * @returns {TeriockToken[]}
    */
   get tokens() {
-    if (this.targeted) return this.targetedTokens;
+    if (this.targeted) {
+      return this.targetedTokens;
+    }
     return this.selectedTokens;
   }
 
@@ -108,10 +112,15 @@ export default class BaseChatButton extends TypeDataModel {
    */
   async handleEvent(event) {
     this._setup(event);
-    if (event.type === "click") await this.primaryAction();
-    else if (event.type === "contextmenu") await this.secondaryAction();
-    else if (event.type === "auxclick") await this.secondaryAction();
-    else if (event.type === "dblclick") await this.doubleClickAction();
+    if (event.type === "click") {
+      await this.primaryAction();
+    } else if (event.type === "contextmenu") {
+      await this.secondaryAction();
+    } else if (event.type === "auxclick") {
+      await this.secondaryAction();
+    } else if (event.type === "dblclick") {
+      await this.doubleClickAction();
+    }
   }
 
   /**

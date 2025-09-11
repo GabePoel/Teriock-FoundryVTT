@@ -8,7 +8,12 @@
  */
 export function _prepareAttributes(actorData) {
   _preparePresence(actorData);
-  const { attributes, size, f, p } = actorData;
+  const {
+    attributes,
+    size,
+    f,
+    p,
+  } = actorData;
   Object.values(attributes).forEach((attr) => {
     const bonus = attr.saveFluent ? f : attr.saveProficient ? p : 0;
     attr.saveBonus = attr.value * 2 + bonus;
@@ -17,10 +22,7 @@ export function _prepareAttributes(actorData) {
   const str = attributes.str.value;
   const strFactor = size < 5 ? str : str + Math.pow(size - 5, 2);
   const base = 65 + 20 * strFactor;
-  actorData.movementSpeed.value = Math.max(
-    30 + 10 * mov + actorData.movementSpeed.base,
-    0,
-  );
+  actorData.movementSpeed.value = Math.max(30 + 10 * mov + actorData.movementSpeed.base, 0);
   actorData.carryingCapacity = {
     light: base,
     heavy: base * 2,
@@ -36,12 +38,7 @@ export function _prepareAttributes(actorData) {
  * @returns {void} Modifies the system object in place.
  */
 export function _preparePresence(actorData) {
-  actorData.presence.overflow =
-    actorData.presence.value > actorData.presence.max;
-  actorData.presence.value = Math.min(
-    actorData.presence.value,
-    actorData.presence.max,
-  );
-  actorData.attributes.unp.value =
-    actorData.presence.max - actorData.presence.value;
+  actorData.presence.overflow = actorData.presence.value > actorData.presence.max;
+  actorData.presence.value = Math.min(actorData.presence.value, actorData.presence.max);
+  actorData.attributes.unp.value = actorData.presence.max - actorData.presence.value;
 }

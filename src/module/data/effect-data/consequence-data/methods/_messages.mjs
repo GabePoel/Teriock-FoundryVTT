@@ -17,22 +17,16 @@ export function _messageParts(consequenceData) {
       wrappers: [
         !consequenceData.parent.isTemporary
           ? "No Time Limit"
-          : secondsToReadable(
-              consequenceData.parent.duration.startTime +
-                consequenceData.parent.duration.seconds -
-                consequenceData.parent.duration._worldTime,
-            ) + " Remaining",
+          : secondsToReadable(consequenceData.parent.duration.startTime
+          + consequenceData.parent.duration.seconds
+          - consequenceData.parent.duration._worldTime) + " Remaining",
       ],
     },
     {
       icon: "fa-disease",
       label: "Conditions",
       /** @type string[] */
-      wrappers: Array.from(
-        consequenceData.parent.statuses.map(
-          (status) => TERIOCK.index.conditions[status],
-        ),
-      ),
+      wrappers: Array.from(consequenceData.parent.statuses.map((status) => TERIOCK.index.conditions[status])),
     },
   ];
   const blocks = [

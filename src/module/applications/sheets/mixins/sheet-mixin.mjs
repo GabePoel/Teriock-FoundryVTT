@@ -1,21 +1,20 @@
 import * as createEffects from "../../../helpers/create-effects.mjs";
 import { buildMessage } from "../../../helpers/messages-builder/message-builder.mjs";
-import {
-  selectAbilityDialog,
-  selectPropertyDialog,
-  selectTradecraftDialog,
-} from "../../dialogs/select-dialog.mjs";
-import {
-  bindCommonActions,
-  imageContextMenuOptions,
-} from "../../shared/_module.mjs";
+import { selectAbilityDialog, selectPropertyDialog, selectTradecraftDialog } from "../../dialogs/select-dialog.mjs";
+import { bindCommonActions, imageContextMenuOptions } from "../../shared/_module.mjs";
 import _connectEmbedded from "./methods/_connect-embedded.mjs";
 import _embeddedFromCard from "./methods/_embedded-from-card.mjs";
 import _setupEventListeners from "./methods/_setup-handlers.mjs";
 
-const { DragDrop, TextEditor, ContextMenu } = foundry.applications.ux;
-const { DocumentSheetV2, HandlebarsApplicationMixin } =
-  foundry.applications.api;
+const {
+  DragDrop,
+  TextEditor,
+  ContextMenu,
+} = foundry.applications.ux;
+const {
+  DocumentSheetV2,
+  HandlebarsApplicationMixin,
+} = foundry.applications.api;
 
 /**
  * Base sheet mixin for Teriock system applications.
@@ -28,27 +27,14 @@ const { DocumentSheetV2, HandlebarsApplicationMixin } =
 export default (Base) => {
   return class SheetMixin extends HandlebarsApplicationMixin(Base) {
     /**
-     * Creates a new Teriock sheet instance.
-     * Initializes sheet state including menu state, context menus, and settings.
-     * @param {...any} args - Arguments to pass to the base constructor.
-     */
-    constructor(...args) {
-      super(...args);
-      this.#dragDrop = this.#createDragDropHandlers();
-      this._contextMenus = [];
-      this._impactTab = "base";
-      this._locked = true;
-      this._menuOpen = false;
-      this._tab = "overview";
-      this.settings = {};
-    }
-
-    /**
      * Default sheet options.
      * @type {object}
      */
     static DEFAULT_OPTIONS = {
-      classes: ["teriock", "ability"],
+      classes: [
+        "teriock",
+        "ability",
+      ],
       actions: {
         toggleImpacts: this._toggleImpacts,
         changeImpactTab: this._changeImpactTab,
@@ -73,10 +59,21 @@ export default (Base) => {
         createFluency: this._createFluency,
         createBaseEffect: this._createBaseEffect,
       },
-      form: { submitOnChange: true, closeOnSubmit: false },
+      form: {
+        submitOnChange: true,
+        closeOnSubmit: false,
+      },
       window: { resizable: true },
-      position: { width: 560, height: 600 },
-      dragDrop: [{ dragSelector: ".draggable", dropSelector: null }],
+      position: {
+        width: 560,
+        height: 600,
+      },
+      dragDrop: [
+        {
+          dragSelector: ".draggable",
+          dropSelector: null,
+        },
+      ],
     };
     /**
      * Template parts configuration.
@@ -167,10 +164,7 @@ export default (Base) => {
       let propertyName = "New Property";
       if (propertyKey && propertyKey !== "other") {
         propertyName = TERIOCK.index.properties[propertyKey];
-        await tm.fetch.importProperty(
-          this.document,
-          propertyName,
-        );
+        await tm.fetch.importProperty(this.document, propertyName);
       } else {
         await createEffects.createProperty(this.document, propertyName);
       }
@@ -205,22 +199,18 @@ export default (Base) => {
     static async _editImage(_event, target) {
       const attr = target.dataset.edit;
       const current = foundry.utils.getProperty(this.document, attr);
-      const defaultImg = this.document.constructor.getDefaultArtwork?.(
-        this.document.toObject(),
-      )?.img;
+      const defaultImg = this.document.constructor.getDefaultArtwork?.(this.document.toObject())?.img;
 
       const options = {
         current,
         type: "image",
-        redirectToRoot: defaultImg ? [defaultImg] : [],
+        redirectToRoot: defaultImg ? [ defaultImg ] : [],
         callback: (path) => this.document.update({ [attr]: path }),
         top: this.position.top + 40,
         left: this.position.left + 10,
       };
 
-      return /** @type {FilePicker} */ new foundry.applications.apps.FilePicker(
-        options,
-      ).browse();
+      return /** @type {FilePicker} */ new foundry.applications.apps.FilePicker(options).browse();
     }
 
     /**
@@ -264,11 +254,7 @@ export default (Base) => {
      * @returns {Promise<void>} Promise that resolves when roll is complete.
      */
     static async _rollDoc(event, target) {
-      const options = event?.altKey
-        ? { advantage: true }
-        : event?.shiftKey
-          ? { disadvantage: true }
-          : {};
+      const options = event?.altKey ? { advantage: true } : event?.shiftKey ? { disadvantage: true } : {};
       if (this.document.documentName === "Actor") {
         options.actor = this.document;
       } else if (this.document.actor) {
@@ -293,11 +279,7 @@ export default (Base) => {
      * @returns {Promise<void>} Promise that resolves when roll is complete.
      */
     static async _rollThis(event, _target) {
-      const options = event?.altKey
-        ? { advantage: true }
-        : event?.shiftKey
-          ? { disadvantage: true }
-          : {};
+      const options = event?.altKey ? { advantage: true } : event?.shiftKey ? { disadvantage: true } : {};
       this.document.use(options);
     }
 
@@ -375,11 +357,29 @@ export default (Base) => {
      * @returns {Promise<void>} Promise that resolves when wiki pull is complete.
      */
     static async _wikiPullThis(_event, _target) {
-      if (this.editable) this.document.system.wikiPull();
+      if (this.editable) {
+        this.document.system.wikiPull();
+      }
     }
 
     /** @type {DragDrop[]} */
     #dragDrop;
+
+    /**
+     * Creates a new Teriock sheet instance.
+     * Initializes sheet state including menu state, context menus, and settings.
+     * @param {...any} args - Arguments to pass to the base constructor.
+     */
+    constructor(...args) {
+      super(...args);
+      this.#dragDrop = this.#createDragDropHandlers();
+      this._contextMenus = [];
+      this._impactTab = "base";
+      this._locked = true;
+      this._menuOpen = false;
+      this._tab = "overview";
+      this.settings = {};
+    }
 
     /**
      * Gets the drag and drop handlers for this sheet.
@@ -460,13 +460,8 @@ export default (Base) => {
         ...this.document.metadata.childMacroTypes,
       ]);
       console.log(childTypes);
-      return (
-        this.document.isOwner &&
-        doc &&
-        doc.parent !== this.document &&
-        doc !== this.document &&
-        childTypes.has(doc.type)
-      );
+      return (this.document.isOwner && doc && doc.parent !== this.document && doc !== this.document && childTypes.has(
+        doc.type));
     }
 
     /**
@@ -476,12 +471,10 @@ export default (Base) => {
      * @param {Function} handler - The event handler function.
      */
     _connect(selector, eventType, handler) {
-      this.element.querySelectorAll(selector).forEach((el) =>
-        el.addEventListener(eventType, (e) => {
-          e.preventDefault();
-          handler(e);
-        }),
-      );
+      this.element.querySelectorAll(selector).forEach((el) => el.addEventListener(eventType, (e) => {
+        e.preventDefault();
+        handler(e);
+      }));
     }
 
     /**
@@ -490,7 +483,7 @@ export default (Base) => {
      */
     _connectButtonMap(map) {
       const container = this.element;
-      for (const [selector, path] of Object.entries(map)) {
+      for (const [ selector, path ] of Object.entries(map)) {
         const elements = container.querySelectorAll(selector);
         elements.forEach((el) => {
           el.addEventListener("click", async (e) => {
@@ -509,16 +502,11 @@ export default (Base) => {
      * @returns {ContextMenu} The created context menu.
      */
     _connectContextMenu(cssClass, menuItems, eventName) {
-      return /** @type {ContextMenu} */ new ContextMenu(
-        this.element,
-        cssClass,
-        menuItems,
-        {
-          eventName,
-          jQuery: false,
-          fixed: false,
-        },
-      );
+      return /** @type {ContextMenu} */ new ContextMenu(this.element, cssClass, menuItems, {
+        eventName,
+        jQuery: false,
+        fixed: false,
+      });
     }
 
     /**
@@ -532,11 +520,14 @@ export default (Base) => {
         const newValue = transformer(e.currentTarget.value);
         this.item.update({ [attribute]: newValue });
       };
-      ["focusout", "change"].forEach((evt) =>
-        element.addEventListener(evt, update),
-      );
+      [
+        "focusout",
+        "change",
+      ].forEach((evt) => element.addEventListener(evt, update));
       element.addEventListener("keyup", (e) => {
-        if (e.key === "Enter") update(e);
+        if (e.key === "Enter") {
+          update(e);
+        }
       });
     }
 
@@ -546,9 +537,7 @@ export default (Base) => {
      * @returns {Promise<string|undefined>} Promise that resolves to the enriched HTML or undefined.
      */
     async _enrich(parameter) {
-      return parameter?.length
-        ? await TextEditor.enrichHTML(parameter, { relativeTo: this.document })
-        : undefined;
+      return parameter?.length ? await TextEditor.enrichHTML(parameter, { relativeTo: this.document }) : undefined;
     }
 
     /**
@@ -559,7 +548,7 @@ export default (Base) => {
      */
     async _enrichAll(context, obj) {
       if (Object.keys(context).includes("enriched")) {
-        for (const [key, value] of Object.entries(obj)) {
+        for (const [ key, value ] of Object.entries(obj)) {
           context.enriched[key] = await this._enrich(value);
         }
       }
@@ -615,22 +604,19 @@ export default (Base) => {
     async _onDropActiveEffect(_event, data) {
       /** @type {typeof ClientDocument} */
       const EffectClass = await getDocumentClass("ActiveEffect");
-      const effect =
-        /** @type {TeriockEffect} */ await EffectClass.fromDropData(data);
-      if (!this._canDrop(effect)) return false;
+      const effect = /** @type {TeriockEffect} */ await EffectClass.fromDropData(data);
+      if (!this._canDrop(effect)) {
+        return false;
+      }
 
       if (this.document.documentName === "ActiveEffect") {
         effect.updateSource({ "system.hierarchy.supId": this.document.id });
       }
-      const target =
-        this.document.documentName === "ActiveEffect"
-          ? this.document.parent
-          : this.document;
-      const newEffects =
-        /** @type {TeriockEffect[]} */ await target.createEmbeddedDocuments(
-          "ActiveEffect",
-          [effect],
-        );
+      const target = this.document.documentName === "ActiveEffect" ? this.document.parent : this.document;
+      const newEffects = /** @type {TeriockEffect[]} */ await target.createEmbeddedDocuments(
+        "ActiveEffect",
+        [ effect ],
+      );
       const newEffect = newEffects[0];
       if (this.document.documentName === "ActiveEffect") {
         await this.document.addSub(newEffect);
@@ -648,15 +634,16 @@ export default (Base) => {
     async _onDropItem(_event, data) {
       /** @type {typeof ClientDocument} */
       const ItemClass = await getDocumentClass("Item");
-      const item =
-        /** @type {TeriockItem} */ await ItemClass.fromDropData(data);
+      const item = /** @type {TeriockItem} */ await ItemClass.fromDropData(data);
       if (item.type === "wrapper") {
         /** @type {ClientDocument} */
         const effect = item.system.effect;
         await this._onDropActiveEffect(_event, effect.toDragData());
         return false;
       }
-      if (!this._canDrop(item)) return false;
+      if (!this._canDrop(item)) {
+        return false;
+      }
 
       const source = await foundry.utils.fromUuid(data.uuid);
       if (item.parent?.documentName === "Actor" && item.type === "equipment") {
@@ -664,8 +651,7 @@ export default (Base) => {
           const targetItem = this.document.items.getName(item.name);
           if (targetItem && targetItem.system.consumable) {
             targetItem.update({
-              "system.quantity":
-                targetItem.system.quantity + item.system.quantity,
+              "system.quantity": targetItem.system.quantity + item.system.quantity,
             });
             await source.delete();
             return targetItem;
@@ -675,15 +661,10 @@ export default (Base) => {
           await source.delete();
         }
       }
-      const newItems =
-        /** @type {TeriockItem[]} */ await this.document.createEmbeddedDocuments(
-          "Item",
-          [item],
-          {
-            keepId: true,
-            keepEmbeddedIds: true,
-          },
-        );
+      const newItems = /** @type {TeriockItem[]} */ await this.document.createEmbeddedDocuments("Item", [ item ], {
+        keepId: true,
+        keepEmbeddedIds: true,
+      });
       return newItems[0];
     }
 
@@ -718,7 +699,7 @@ export default (Base) => {
       });
       this.#dragDrop.forEach((d) => d.bind(this.element));
       this._activateMenu();
-      this._connect('[data-action="sheetSelect"]', "change", (e) => {
+      this._connect("[data-action=\"sheetSelect\"]", "change", (e) => {
         const { path } = e.currentTarget.dataset;
         if (path) {
           foundry.utils.setProperty(this, path, e.currentTarget.value);
@@ -728,13 +709,13 @@ export default (Base) => {
       _setupEventListeners(this);
 
       const elements = Array.from(this.element.querySelectorAll(".tcard"));
-      const embeddedResults = await Promise.all(
-        elements.map((element) => _embeddedFromCard(this, element)),
-      );
+      const embeddedResults = await Promise.all(elements.map((element) => _embeddedFromCard(this, element)));
       const tooltipPromises = embeddedResults.map(async (embedded, index) => {
         const element = elements[index];
 
-        if (!embedded) return;
+        if (!embedded) {
+          return;
+        }
 
         if (embedded?.type === "condition") {
           const messageParts = {
@@ -752,12 +733,8 @@ export default (Base) => {
           const uuidPromises = [];
 
           if (embedded?.id === "lighted") {
-            uuidPromises.push(
-              Promise.all(
-                this.document.system.lightedTo.map((uuid) =>
-                  foundry.utils.fromUuid(uuid),
-                ),
-              ).then((tokens) => {
+            uuidPromises.push(Promise.all(this.document.system.lightedTo.map((uuid) => foundry.utils.fromUuid(uuid)))
+              .then((tokens) => {
                 let lightedToText = "<ul>";
                 tokens.forEach((token, idx) => {
                   const uuid = this.document.system.lightedTo[idx];
@@ -768,17 +745,12 @@ export default (Base) => {
                   title: "Lighted to",
                   text: lightedToText,
                 });
-              }),
-            );
+              }));
           }
 
           if (embedded?.id === "goaded") {
-            uuidPromises.push(
-              Promise.all(
-                this.document.system.goadedTo.map((uuid) =>
-                  foundry.utils.fromUuid(uuid),
-                ),
-              ).then((tokens) => {
+            uuidPromises.push(Promise.all(this.document.system.goadedTo.map((uuid) => foundry.utils.fromUuid(uuid)))
+              .then((tokens) => {
                 let goadedToText = "<ul>";
                 tokens.forEach((token, idx) => {
                   const uuid = this.document.system.goadedTo[idx];
@@ -789,16 +761,13 @@ export default (Base) => {
                   title: "Goaded to",
                   text: goadedToText,
                 });
-              }),
-            );
+              }));
           }
 
           // Wait for all UUID resolutions, then enrich HTML
           await Promise.all(uuidPromises);
           const rawMessage = buildMessage(messageParts);
-          element.dataset.tooltipHtml = await TextEditor.enrichHTML(
-            rawMessage.outerHTML,
-          );
+          element.dataset.tooltipHtml = await TextEditor.enrichHTML(rawMessage.outerHTML);
           element.dataset.tooltipClass = "teriock teriock-rich-tooltip";
         } else if (typeof embedded?.buildMessage === "function") {
           element.dataset.tooltipHtml = await embedded?.buildMessage();
@@ -809,12 +778,9 @@ export default (Base) => {
       await Promise.all(tooltipPromises);
 
       this.element.querySelectorAll(".tcard-container").forEach((element) => {
-        element.addEventListener(
-          "pointerenter",
-          async function () {
-            await this._richTooltipContainer(element);
-          }.bind(this),
-        );
+        element.addEventListener("pointerenter", async function () {
+          await this._richTooltipContainer(element);
+        }.bind(this));
       });
 
       bindCommonActions(this.element);
@@ -866,8 +832,7 @@ export default (Base) => {
       if (rightSpace >= 350) {
         target.dataset.tooltipDirection = "RIGHT";
       } else {
-        target.dataset.tooltipDirection =
-          leftSpace > rightSpace ? "LEFT" : "RIGHT";
+        target.dataset.tooltipDirection = leftSpace > rightSpace ? "LEFT" : "RIGHT";
       }
     }
   };

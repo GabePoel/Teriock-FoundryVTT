@@ -26,11 +26,10 @@ export async function createAbility(document, name = null, options = {}) {
     embeddingDocument = document.parent;
     abilityData.system["hierarchy"] = { supId: supId };
   }
-  const abilities =
-    /** @type {TeriockAbility[]} */ await embeddingDocument.createEmbeddedDocuments(
-      "ActiveEffect",
-      [abilityData],
-    );
+  const abilities = /** @type {TeriockAbility[]} */ await embeddingDocument.createEmbeddedDocuments(
+    "ActiveEffect",
+    [ abilityData ],
+  );
   const ability = abilities[0];
   if (ability.name !== "New Ability") {
     await ability.system.wikiPull(options);
@@ -52,10 +51,7 @@ export async function createAbility(document, name = null, options = {}) {
     ];
     await sup.parent.updateEmbeddedDocuments("ActiveEffect", updateData);
   }
-  if (
-    embeddingDocument.documentName !== "Actor" ||
-    embeddingDocument.sheet._activeTab === "abilities"
-  ) {
+  if (embeddingDocument.documentName !== "Actor" || embeddingDocument.sheet._activeTab === "abilities") {
     await embeddingDocument.forceUpdate();
   }
   return ability;
@@ -68,17 +64,11 @@ export async function createAbility(document, name = null, options = {}) {
  * @returns {Promise<TeriockResource>} The created resource effect.
  */
 export async function createResource(document) {
-  const resource = await TeriockEffect.create(
-    {
-      name: "New Resource",
-      type: "resource",
-    },
-    { parent: document },
-  );
-  if (
-    document.documentName !== "Actor" ||
-    document.sheet._activeTab === "resources"
-  ) {
+  const resource = await TeriockEffect.create({
+    name: "New Resource",
+    type: "resource",
+  }, { parent: document });
+  if (document.documentName !== "Actor" || document.sheet._activeTab === "resources") {
     await document.forceUpdate();
   }
   return resource;
@@ -109,13 +99,10 @@ export async function createProperty(document, name = null) {
     propertyData.system["hierarchy"] = { supId: supId };
   }
 
-  const property =
-    /** @type {TeriockProperty} */
-    (
-      await embeddingDocument.createEmbeddedDocuments("ActiveEffect", [
-        propertyData,
-      ])
-    )[0];
+  const property = /** @type {TeriockProperty} */
+    (await embeddingDocument.createEmbeddedDocuments("ActiveEffect", [
+      propertyData,
+    ]))[0];
   if (propertyData.name !== "New Property") {
     await property.system.wikiPull({ notify: false });
   }
@@ -147,13 +134,10 @@ export async function createProperty(document, name = null) {
  * @returns {Promise<TeriockConsequence>} The created effect.
  */
 export async function createConsequence(document) {
-  const effect = await TeriockEffect.create(
-    {
-      name: "New Effect",
-      type: "consequence",
-    },
-    { parent: document },
-  );
+  const effect = await TeriockEffect.create({
+    name: "New Effect",
+    type: "consequence",
+  }, { parent: document });
   if (document.sheet._activeTab === "conditions") {
     await document.forceUpdate();
   }
@@ -170,30 +154,20 @@ export async function createConsequence(document) {
 export async function createFluency(document, tradecraft = artist) {
   let field;
   for (const f of Object.keys(TERIOCK.options.tradecraft)) {
-    if (
-      Object.keys(TERIOCK.options.tradecraft[f].tradecrafts).includes(
-        tradecraft,
-      )
-    ) {
+    if (Object.keys(TERIOCK.options.tradecraft[f].tradecrafts).includes(tradecraft)) {
       field = f;
     }
   }
-  const fluency = await TeriockEffect.create(
-    {
-      name: `New ${TERIOCK.index.tradecrafts[tradecraft]} Fluency`,
-      type: "fluency",
-      img: getIcon("tradecrafts", TERIOCK.index.tradecrafts[tradecraft]),
-      system: {
-        tradecraft: tradecraft,
-        field: field,
-      },
+  const fluency = await TeriockEffect.create({
+    name: `New ${TERIOCK.index.tradecrafts[tradecraft]} Fluency`,
+    type: "fluency",
+    img: getIcon("tradecrafts", TERIOCK.index.tradecrafts[tradecraft]),
+    system: {
+      tradecraft: tradecraft,
+      field: field,
     },
-    { parent: document },
-  );
-  if (
-    document.documentName === "Item" ||
-    document.sheet._activeTab === "tradecrafts"
-  ) {
+  }, { parent: document });
+  if (document.documentName === "Item" || document.sheet._activeTab === "tradecrafts") {
     await document.forceUpdate();
   }
   return fluency;
@@ -206,12 +180,9 @@ export async function createFluency(document, tradecraft = artist) {
  * @returns {Promise<TeriockEffect>} The created base effect.
  */
 export async function createBaseEffect(document) {
-  const baseEffect = await TeriockEffect.create(
-    {
-      name: "New Base Effect",
-    },
-    { parent: document },
-  );
+  const baseEffect = await TeriockEffect.create({
+    name: "New Base Effect",
+  }, { parent: document });
   await document.forceUpdate();
   return baseEffect;
 }

@@ -7,11 +7,14 @@ import TeriockBaseActorSheet from "../base-actor-sheet/base-actor-sheet.mjs";
 export default class TeriockCharacterSheet extends TeriockBaseActorSheet {
   /** @inheritDoc */
   static DEFAULT_OPTIONS = {
-    classes: ["character"],
+    classes: [ "character" ],
     form: {
       submitOnChange: true,
     },
-    position: { width: 800, height: 600 },
+    position: {
+      width: 800,
+      height: 600,
+    },
     window: {
       icon: `fa-solid fa-${documentOptions.character.icon}`,
     },
@@ -20,9 +23,11 @@ export default class TeriockCharacterSheet extends TeriockBaseActorSheet {
   /** @inheritDoc */
   static PARTS = {
     all: {
-      template:
-        "systems/teriock/src/templates/document-templates/actor-templates/character-template/character-template.hbs",
-      scrollable: [".character-sidebar", ".character-tab-content"],
+      template: "systems/teriock/src/templates/document-templates/actor-templates/character-template/character-template.hbs",
+      scrollable: [
+        ".character-sidebar",
+        ".character-tab-content",
+      ],
     },
   };
 }

@@ -21,8 +21,14 @@ export async function _postUpdate(actorData, skipFunctions = {}) {
   }
   if (!skipFunctions.prepareTokens) {
     for (const token of /** @type {TeriockTokenDocument[]} */ actorData.parent.getDependentTokens()) {
-      const { visionMode, range } = token.deriveVision();
-      await token.update({ light: actorData.light, "sight.range": range });
+      const {
+        visionMode,
+        range,
+      } = token.deriveVision();
+      await token.update({
+        light: actorData.light,
+        "sight.range": range,
+      });
       await token.updateVisionMode(visionMode);
     }
   }
@@ -42,22 +48,12 @@ export async function _postUpdate(actorData, skipFunctions = {}) {
 async function checkDown(actorData) {
   // Handle financial damage
   if (actorData.parent.statuses.has("down") && actorData.money.debt > 0) {
-    if (
-      !(
-        actorData.resistances.effects.has("hollied") ||
-        actorData.immunities.effects.has("hollied")
-      )
-    ) {
+    if (!(actorData.resistances.effects.has("hollied") || actorData.immunities.effects.has("hollied"))) {
       try {
         await actorData.parent.toggleStatusEffect("hollied", { active: true });
       } catch {}
     }
-    if (
-      !(
-        actorData.resistances.effects.has("terrored") ||
-        actorData.immunities.effects.has("terrored")
-      )
-    ) {
+    if (!(actorData.resistances.effects.has("terrored") || actorData.immunities.effects.has("terrored"))) {
       try {
         await actorData.parent.toggleStatusEffect("terrored", { active: true });
       } catch {}

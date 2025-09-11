@@ -8,15 +8,14 @@
  */
 export function _shouldExpire(effectData) {
   const effect = effectData.parent;
-  if (!effect.isTemporary) return false;
+  if (!effect.isTemporary) {
+    return false;
+  }
   const duration = effect.duration;
   const currentTime = game.time.worldTime;
-  if (
-    !duration ||
-    duration.startTime === undefined ||
-    duration.seconds === undefined
-  )
+  if (!duration || duration.startTime === undefined || duration.seconds === undefined) {
     return false;
+  }
   const expirationTime = duration.startTime + duration.seconds;
   return currentTime > expirationTime;
 }

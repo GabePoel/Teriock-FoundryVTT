@@ -68,5 +68,8 @@ export function _prepareHpMp(actorData) {
   actorData.mp.max = mpMax;
   actorData.mp.min = -Math.floor(mpMax / 2);
   actorData.mp.value = Math.min(actorData.mp.value, mpMax);
-  actorData.sheet.dieBox = { hpDice: hpDieBox, mpDice: mpDieBox };
+  actorData.sheet.dieBox = {
+    hpDice: hpDieBox,
+    mpDice: mpDieBox,
+  };
 }

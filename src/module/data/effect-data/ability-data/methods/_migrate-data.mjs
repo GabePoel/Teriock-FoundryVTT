@@ -12,18 +12,17 @@ import { migrateHierarchy } from "../../../shared/migrations/migrate-hierarchy.m
 export function _migrateData(data) {
   // Effect key migration
   if (data.effects?.includes("truth")) {
-    data.effects = data.effects.map((effect) =>
-      effect === "truth" ? "truthDetecting" : effect,
-    );
+    data.effects = data.effects.map((effect) => effect === "truth" ? "truthDetecting" : effect);
   }
   if (data.effects?.includes("duelMod")) {
-    data.effects = data.effects.map((effect) =>
-      effect === "duelMod" ? "duelModifying" : effect,
-    );
+    data.effects = data.effects.map((effect) => effect === "duelMod" ? "duelModifying" : effect);
   }
 
   // HP and MP cost migration
-  for (const pointCost of ["mp", "hp"]) {
+  for (const pointCost of [
+    "mp",
+    "hp",
+  ]) {
     if (data.costs) {
       if (data.costs[pointCost] === null) {
         data.costs[pointCost] = {
@@ -36,9 +35,7 @@ export function _migrateData(data) {
         };
       }
       if (typeof data.costs[pointCost] == "string") {
-        const variableCost = String(
-          pointCost === "mp" ? "manaCost" : "hitCost",
-        );
+        const variableCost = String(pointCost === "mp" ? "manaCost" : "hitCost");
         data.costs[pointCost] = {
           type: "variable",
           value: {
@@ -91,11 +88,7 @@ export function _migrateData(data) {
 
   // Form migration
   if (foundry.utils.getProperty(data, "abilityType")) {
-    foundry.utils.setProperty(
-      data,
-      "form",
-      foundry.utils.getProperty(data, "abilityType"),
-    );
+    foundry.utils.setProperty(data, "form", foundry.utils.getProperty(data, "abilityType"));
   }
   return data;
 }
