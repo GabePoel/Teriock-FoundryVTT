@@ -30,19 +30,21 @@ const app = {
     const categoryFiles = [
       "classes",
       "abilities",
-      "conditions",
-      "properties",
-      "powers",
-      "equipment",
-      "tradecrafts",
-      "resources",
-      "creatures",
       "archetypes",
+      "conditions",
+      "creatures",
+      "currency",
       "damage-types",
+      "death-bag-stones",
       "drain-types",
       "effect-types",
       "elements",
+      "equipment",
       "hacks",
+      "powers",
+      "properties",
+      "resources",
+      "tradecrafts",
     ];
 
     console.log("🔄 Loading categories directly from files...");
