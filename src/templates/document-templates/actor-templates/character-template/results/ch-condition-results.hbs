@@ -8,8 +8,8 @@
         subtitle=""
         text=(dotJoinArray (lookup ../conditionProviders condition))
         id=(ternary (includes ../removableConditions condition) (path ../TERIOCK.data.conditions condition "_id") condition)
-        action=(ternary (includes ../removableConditions condition) "rollDoc" "")
-        tooltip=(ternary (includes ../removableConditions condition) "Roll to Remove" "")
+        action=(ternary (eq "dead" condition) "deathBagPull" (ternary (includes ../removableConditions condition) "rollDoc" ""))
+        tooltip=(ternary (eq "dead" condition) "Pull from Death Bag" (ternary (includes ../removableConditions condition) "Roll to Remove" ""))
         icons=(concat
           (ternary (includes ../removableConditions condition)
             (ticon "dice-d4" action="rollDoc" tooltip="Roll to Remove")
@@ -20,7 +20,7 @@
         parentId=../id
         draggable=false
         openable=false
-        usable=(includes ../removableConditions condition)
+        usable=(or (eq "dead" condition) (includes ../removableConditions condition))
       }}
     {{/each}}
     <div class="no-results {{{system.sheet.display.consequence.size}}}">

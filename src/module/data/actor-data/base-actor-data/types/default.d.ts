@@ -206,4 +206,15 @@ export interface TeriockBaseActorDefault {
   wither: BarData;
   /** Worn armor class */
   wornAc: number;
+  /** Death Bag */
+  deathBag: {
+    /** How many stones to pull from the Death Bag */
+    pull: string;
+    /** The colors of stones in the Death Bag */
+    stones: {
+      black: string;
+      red: string;
+      white: string;
+    }
+  };
 }

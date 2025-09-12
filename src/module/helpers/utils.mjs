@@ -367,7 +367,7 @@ export async function evaluateAsync(formula, data = {}, options = {}) {
   }
   const roll = new TeriockRoll(formula, data);
   await roll.evaluate(options);
-  return Number(roll.result);
+  return roll.total;
 }
 
 /**

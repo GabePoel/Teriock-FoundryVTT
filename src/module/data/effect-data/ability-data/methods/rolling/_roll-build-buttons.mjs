@@ -61,8 +61,10 @@ export async function _buildButtons(rollConfig) {
     buttons.push(buttonData);
   }
 
+  const effects = /** @type {Set<Teriock.Parameters.Condition.ConditionKey>} */ new Set(abilityData.effects || []);
+
   // Resistance Button
-  if (Array(abilityData.effects)?.includes("resistance")) {
+  if (effects.has("resistance")) {
     buttons.push({
       label: "Roll Resistance",
       icon: "fas fa-shield-alt",
@@ -73,7 +75,7 @@ export async function _buildButtons(rollConfig) {
   }
 
   // Awaken Button
-  if (Array(abilityData.effects)?.includes("awakening")) {
+  if (effects.has("awakening")) {
     buttons.push({
       label: "Awaken",
       icon: "fas fa-sunrise",
@@ -83,13 +85,20 @@ export async function _buildButtons(rollConfig) {
     });
   }
 
-  // Revive Button
-  if (Array(abilityData.effects)?.includes("revival")) {
+  // Revive Buttons
+  if (effects.has("revival")) {
     buttons.push({
       label: "Revive",
       icon: "fas fa-heart-pulse",
       dataset: {
         action: "revive",
+      },
+    });
+    buttons.push({
+      label: "Death Bag",
+      icon: "fas fa-sack",
+      dataset: {
+        action: "death-bag",
       },
     });
   }

@@ -13,4 +13,11 @@ export const dieOptions = {
     hp: "hit",
     mp: "mana",
   },
+  deathBagStoneColor: {
+    black: "Black",
+    blue: "Blue",
+    green: "Green",
+    red: "Red",
+    white: "White",
+  },
 };

@@ -37,6 +37,7 @@ export default class TeriockBaseActorSheet extends SheetMixin(ActorSheetV2) {
       addEquipment: this._addEquipment,
       addRank: this._addRank,
       attack: this._attack,
+      deathBagPull: this._deathBagPull,
       deattuneDoc: this._deattuneDoc,
       endCondition: this._endCondition,
       immune: this._immune,
@@ -44,8 +45,8 @@ export default class TeriockBaseActorSheet extends SheetMixin(ActorSheetV2) {
       openPrimaryAttacker: this._openPrimaryAttacker,
       openPrimaryBlocker: this._openPrimaryBlocker,
       quickUse: this._quickUse,
-      rollResistance: this._rollResistance,
       rollFeatSave: this._rollFeatSave,
+      rollResistance: this._rollResistance,
       rollStatDie: this._rollStatDie,
       rollTradecraft: this._rollTradecraft,
       takeDamage: this._takeDamage,
@@ -58,8 +59,8 @@ export default class TeriockBaseActorSheet extends SheetMixin(ActorSheetV2) {
       toggleDisabledDoc: this._toggleDisabledDoc,
       toggleEquippedDoc: this._toggleEquippedDoc,
       toggleGluedDoc: this._toggleGluedDoc,
-      toggleSb: this._toggleSb,
       toggleReaction: this._toggleReaction,
+      toggleSb: this._toggleSb,
       toggleShatteredDoc: this._toggleShatteredDoc,
       tradecraftExtra: this._tradecraftExtra,
     },
@@ -247,6 +248,15 @@ export default class TeriockBaseActorSheet extends SheetMixin(ActorSheetV2) {
   static async _openPrimaryAttacker(event) {
     event.stopPropagation();
     await this.document.system.wielding.attacker.derived?.sheet.render(true);
+  }
+
+  /**
+   * Pull from the Death Bag.
+   * @returns {Promise<void>}
+   * @static
+   */
+  static async _deathBagPull() {
+    await this.actor.system.deathBagPull();
   }
 
   /**

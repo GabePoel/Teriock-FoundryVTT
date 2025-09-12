@@ -2,7 +2,6 @@ import { TeriockRoll } from "../../../../dice/_module.mjs";
 
 /**
  * Initiates a resource roll with the specified options.
- *
  * @param {TeriockResourceData} resourceData - The resource data to roll for.
  * @param {Teriock.RollOptions.CommonRoll} options - Options for the roll including advantage/disadvantage.
  * @returns {Promise<void>} Promise that resolves when the roll is complete.
@@ -15,7 +14,6 @@ export async function _roll(resourceData, options) {
 /**
  * Performs the actual resource roll, creating a message with the roll result.
  * Handles advantage/disadvantage, function hooks, and fallback to chat if no roll formula.
- *
  * @param {TeriockResourceData} resourceData - The resource data to roll for.
  * @param {Teriock.RollOptions.CommonRoll} options - Options for the roll including advantage/disadvantage.
  * @returns {Promise<void>} Promise that resolves when the roll message is sent.

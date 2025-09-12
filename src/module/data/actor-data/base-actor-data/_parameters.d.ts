@@ -55,5 +55,7 @@ declare global {
     export type PseudoHook = keyof typeof unsortedPseudoHooks;
 
     export type PayMode = "exact" | "greedy";
+
+    export type DeathBagStoneColor = keyof typeof TERIOCK.options.die.deathBagStoneColor;
   }
 }

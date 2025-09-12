@@ -1,4 +1,5 @@
 import { ApplyEffectHandler } from "./instances/apply-effect-handlers.mjs";
+import { DeathBagHandler } from "./instances/death-bag-handlers.mjs";
 import { FeatSaveHandler } from "./instances/feat-save-handlers.mjs";
 import { TakeHackHandler, TakeUnhackHandler } from "./instances/hack-handlers.mjs";
 import { AwakenHandler, ReviveHandler } from "./instances/one-off-handlers.mjs";
@@ -14,6 +15,7 @@ const handlers = {
   [ApplyEffectHandler.ACTION]: ApplyEffectHandler,
   [ApplyStatusHandler.ACTION]: ApplyStatusHandler,
   [AwakenHandler.ACTION]: AwakenHandler,
+  [DeathBagHandler.ACTION]: DeathBagHandler,
   [FeatSaveHandler.ACTION]: FeatSaveHandler,
   [RemoveStatusHandler.ACTION]: RemoveStatusHandler,
   [ResistHandler.ACTION]: ResistHandler,

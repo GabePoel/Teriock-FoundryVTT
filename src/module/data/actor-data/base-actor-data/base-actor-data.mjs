@@ -1,3 +1,4 @@
+import { deathBagDialog } from "../../../applications/dialogs/_module.mjs";
 import { freeze } from "../../../helpers/utils.mjs";
 import { CommonTypeModel } from "../../models/_module.mjs";
 import { _migrateData } from "./methods/_migrate-data.mjs";
@@ -295,5 +296,13 @@ export default class TeriockBaseActorData extends CommonTypeModel {
    */
   async takeWither(amount) {
     await numericals._takeWither(this, amount);
+  }
+
+  /**
+   * Pull from the Death Bag.
+   * @returns {Promise<void>}
+   */
+  async deathBagPull() {
+    await deathBagDialog(this.actor);
   }
 }

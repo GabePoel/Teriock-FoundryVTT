@@ -8,6 +8,15 @@ const { StringField } = foundry.data.fields;
  * @property {boolean} deterministic=false - Is this formula not allowed to have dice values?
  */
 export default class FormulaField extends StringField {
+  /**
+   * @param {StringFieldOptions & Teriock.Options.Fields._FormulaFieldOptions} [options] - Options which configure
+   * the behavior of the field.
+   * @param {DataFieldContext} [context] - Additional context which describes the field.
+   */
+  constructor(options = {}, context = {}) {
+    super(options, context);
+  }
+
   /** @inheritdoc */
   static get _defaults() {
     return foundry.utils.mergeObject(super._defaults, {
@@ -16,7 +25,7 @@ export default class FormulaField extends StringField {
     });
   }
 
-  /** @override */
+  /** @inheritDoc */
   _applyChangeAdd(value, delta, _model, _change) {
     if (!value) {
       return delta;
@@ -26,7 +35,7 @@ export default class FormulaField extends StringField {
     return `${value} ${operator} ${delta}`;
   }
 
-  /** @override */
+  /** @inheritDoc */
   _applyChangeDowngrade(value, delta, _model, _change) {
     if (!value) {
       return delta;
@@ -38,7 +47,7 @@ export default class FormulaField extends StringField {
     return `min(${value}, ${delta})`;
   }
 
-  /** @override */
+  /** @inheritDoc */
   _applyChangeMultiply(value, delta, _model, _change) {
     if (!value) {
       return delta;
@@ -50,7 +59,7 @@ export default class FormulaField extends StringField {
     return `${value} * ${delta}`;
   }
 
-  /** @override */
+  /** @inheritDoc */
   _applyChangeUpgrade(value, delta, _model, _change) {
     if (!value) {
       return delta;
@@ -62,7 +71,7 @@ export default class FormulaField extends StringField {
     return `max(${value}, ${delta})`;
   }
 
-  /** @override */
+  /** @inheritDoc */
   _castChangeDelta(delta) {
     return this._cast(delta).trim();
   }
