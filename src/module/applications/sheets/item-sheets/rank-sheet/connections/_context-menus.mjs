@@ -1,4 +1,3 @@
-import { dieOptions } from "../../../../../constants/options/die-options.mjs";
 import { toTitleCase } from "../../../../../helpers/string.mjs";
 import { getRollIcon, makeIcon } from "../../../../../helpers/utils.mjs";
 
@@ -115,9 +114,9 @@ export function rankContextMenu(rank) {
 function dieContextMenu(rank, stat = "hp") {
   const iconStyle = TERIOCK.display.iconStyles.contextMenu;
   const out = [];
-  for (const [ key, value ] of Object.entries(dieOptions.faces)) {
+  for (const [ key, value ] of Object.entries(TERIOCK.options.die.faces)) {
     out.push({
-      name: `${value} ${toTitleCase(dieOptions.stats[stat])} Die`,
+      name: `${value} ${toTitleCase(TERIOCK.options.die.stats[stat])} Die`,
       icon: makeIcon(getRollIcon(value), iconStyle),
       callback: () => rank.system.setDice(stat, 1, Number(key)),
     });

@@ -1,5 +1,3 @@
-import { abilityOptions } from "../../constants/options/ability-options.mjs";
-
 /**
  * Creates a DOM element with specified properties and children.
  * @param {string} tag - The HTML tag name for the element.
@@ -168,7 +166,7 @@ function barIcon(parent, iconClass, label, first = true) {
  * @param {string} iconFallback - Fallback icon class if no specific icon is found.
  */
 function addEmbeddedBlock(entities, blocks, name, typeKey, iconFallback = "hashtag") {
-  const config = abilityOptions.form;
+  const config = TERIOCK.options.ability.form;
   const typeOrder = Object.keys(config);
 
   const filtered = (entities || [])

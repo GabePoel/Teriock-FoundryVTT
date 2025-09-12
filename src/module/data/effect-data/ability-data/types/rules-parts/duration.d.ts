@@ -1,6 +1,4 @@
-import type { abilityOptions } from "../../../../../constants/options/ability-options.mjs";
-
-export type NormalDurationUnit = keyof typeof abilityOptions.duration.unit;
+export type NormalDurationUnit = keyof typeof TERIOCK.options.ability.duration.unit;
 
 export type Duration = {
   unit: NormalDurationUnit;

@@ -4,6 +4,8 @@ import "./applications/_types";
 import "./documents/_types";
 
 declare global {
+  const TERIOCK: typeof import("./constants/_module.mjs");
+
   // Base document classes
   // =====================
 

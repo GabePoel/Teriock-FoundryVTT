@@ -11,8 +11,8 @@ function currencyField(label, integer = true) {
   return new fields.NumberField({
     initial: 0,
     integer: integer,
-    min: 0,
     label: label,
+    min: 0,
   });
 }
 
@@ -47,14 +47,14 @@ export function _defineMoney(schema) {
   });
   schema.interestRate = new fields.NumberField({
     initial: 1,
-    label: "Interest Rate",
     integer: false,
+    label: "Interest Rate",
   });
   schema.moneyWeight = new fields.NumberField({
     initial: 0,
+    integer: false,
     label: "Money Weight",
     min: 0,
-    integer: false,
   });
   return schema;
 }

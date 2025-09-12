@@ -22,8 +22,8 @@ declare global {
     };
 
     export type RollTradecraft = Teriock.HookData.BaseHookData & {
-      tradecraft: Teriock.Parameters.Fluency.Tradecraft;
       options: Teriock.RollOptions.CommonRoll;
+      tradecraft: Teriock.Parameters.Fluency.Tradecraft;
     };
 
     export type TakeNumeric = Teriock.HookData.BaseHookData & {
@@ -48,8 +48,8 @@ declare global {
     };
 
     export type DocDuplicate = Teriock.HookData.BaseHookData & {
-      doc: TeriockEffect | TeriockItem;
       copy: TeriockEffect | TeriockItem;
+      doc: TeriockEffect | TeriockItem;
     };
 
     export type EffectActivity = Teriock.HookData.BaseHookData & {

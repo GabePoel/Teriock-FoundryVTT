@@ -1,12 +1,9 @@
-import type { abilityOptions } from "../../constants/options/ability-options.mjs";
-import type { fonts } from "../../constants/display/fonts.mjs";
-
 declare global {
   namespace Teriock.Parameters.Shared {
     /** Form */
-    export type Form = keyof typeof abilityOptions.form;
+    export type Form = keyof typeof TERIOCK.options.ability.form;
     /** Font */
-    export type Font = keyof typeof fonts;
+    export type Font = keyof typeof TERIOCK.display.fonts;
 
     /** Comparison */
     export type Comparison = "=" | "!=" | ">" | "<" | ">=" | "<=";
@@ -22,3 +19,5 @@ declare global {
     export type DieStat = "hp" | "mp";
   }
 }
+
+export {};

@@ -1,4 +1,3 @@
-import { dieOptions } from "../../constants/options/die-options.mjs";
 import { TeriockDialog } from "../api/_module.mjs";
 
 const { fields } = foundry.data;
@@ -17,18 +16,18 @@ export default async function setStatDiceDialog(statItem, stat, initialNumber, i
     min: 1,
     integer: true,
     label: "Number",
-    hint: `Number of ${dieOptions.stats[stat]} dice.`,
+    hint: `Number of ${TERIOCK.options.die.stats[stat]} dice.`,
   });
   const facesField = new fields.NumberField({
     initial: initialFaces,
     label: "Faces",
-    hint: `How many faces the ${dieOptions.stats[stat]} dice have.`,
-    choices: dieOptions.faces,
+    hint: `How many faces the ${TERIOCK.options.die.stats[stat]} dice have.`,
+    choices: TERIOCK.options.die.faces,
   });
   content.append(numberField.toFormGroup({}, { name: "number" }));
   content.append(facesField.toFormGroup({}, { name: "faces" }));
   await TeriockDialog.prompt({
-    window: { title: `Set ${dieOptions.stats[stat]} Dice` },
+    window: { title: `Set ${TERIOCK.options.die.stats[stat]} Dice` },
     modal: true,
     content: content,
     ok: {

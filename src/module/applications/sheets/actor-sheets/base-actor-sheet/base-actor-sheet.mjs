@@ -1,4 +1,3 @@
-import { conditions } from "../../../../constants/content/_module.mjs";
 import { documentOptions } from "../../../../constants/options/document-options.mjs";
 import { tradecraftMessage } from "../../../../helpers/html.mjs";
 import { buildMessage } from "../../../../helpers/messages-builder/message-builder.mjs";
@@ -630,7 +629,7 @@ export default class TeriockBaseActorSheet extends SheetMixin(ActorSheetV2) {
     };
     this._activeTab = "tradecrafts";
     const sheetSettings = _defaultSheetSettings;
-    Object.keys(conditions).forEach((key) => {
+    Object.keys(TERIOCK.content.conditions).forEach((key) => {
       sheetSettings.conditionExpansions[key] = false;
     });
     this.settings = _defaultSheetSettings;

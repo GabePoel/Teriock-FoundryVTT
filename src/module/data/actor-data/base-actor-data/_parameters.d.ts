@@ -1,4 +1,3 @@
-import type { abilityOptions } from "../../../constants/options/ability-options.mjs";
 import type { unsortedPseudoHooks } from "../../../constants/system/pseudo-hooks.mjs";
 
 declare global {
@@ -7,7 +6,7 @@ declare global {
     export type HackableBodyPart = | "arm" | "leg" | "body" | "ear" | "eye" | "mouth" | "nose";
 
     /** Valid stat attributes */
-    export type StatAttribute = keyof typeof abilityOptions.attribute;
+    export type StatAttribute = keyof typeof TERIOCK.options.ability.attribute;
 
     /** Valid attributes */
     export type Attribute = Teriock.Parameters.Actor.StatAttribute | "unp";

@@ -1,7 +1,13 @@
 import TeriockRoll from "./roll.mjs";
 
+// TODO: Reimplement pulling with RollTerm.
+// TODO: Custom template for Death Bag.
+
 /**
  * The Death Bag.
+ *
+ * Relevant wiki pages:
+ * - [Dead](https://wiki.teriock.com/index.php/Condition:Dead)
  *
  * @example
  * ```
@@ -10,81 +16,75 @@ import TeriockRoll from "./roll.mjs";
  *  ```
  */
 export default class DeathBag extends TeriockRoll {
-  /** @type {Object|null} */
-  pullResult = null;
-
   /**
-   * Captured at construction; resolved during evaluate().
-   * @type {Teriock.RollOptions.PendingPullData|null}
+   * Convert a pull result to a plain dice-style formula.
+   * @param {object} pullResult - The pull result.
+   * @returns {string} Formula like "3[white] + 2[black]".
    */
-  _pendingPull = null;
-
-  /**
-   * Construct a new DeathBag instance.
-   * @param {string} formula - The input formula, possibly containing a pull() function.
-   * @param {object} data - Roll data context.
-   * @param {object} [options={}] - Roll options.
-   */
-  constructor(formula, data, options = {}) {
-    const spec = DeathBag.#scanForPull(formula);
-    const safeFormula = spec ? (spec.before + "0" + spec.after) : formula;
-    super(safeFormula, data, options);
-
-    if (spec) {
-      this._pendingPull = spec;
+  static #createPullResultFormula(pullResult) {
+    if (!pullResult) {
+      return "0";
     }
+    const terms = [];
+    for (const [ color, count ] of Object.entries(pullResult.pullCounts)) {
+      terms.push(`${count}[${color}]`);
+    }
+    return terms.length ? terms.join(" + ") : "0[empty]";
   }
 
   /**
-   * Detect a `pull(<countExpr>, <bagFormula>)` call in a formula.
-   * @param {string} formula - The formula string to scan.
-   * @returns {null | { before: string, after: string, pullCountExpr: string, bagFormula: string }}
+   * Perform a pull without replacement from a bag of stones.
+   * @param {object} params
+   * @param {number} params.pullCount - Number of stones requested.
+   * @param {Teriock.RollOptions.BagComposition[]} params.bag - Bag composition.
+   * @param {TeriockRoll} params.bagRoll - The evaluated bag roll.
+   * @returns {object} Pull result with requested, actual, pulled stones, and metadata.
    */
-  static #scanForPull(formula) {
-    const m = formula.match(/pull\s*\(/);
-    if (!m) {
-      return null;
-    }
-
-    const pullIdx = m.index;
-    const before = formula.substring(0, pullIdx);
-    const tail = formula.substring(pullIdx);
-
-    const content = DeathBag.#extractFunctionContent(tail);
-    const after = tail.substring(tail.indexOf(content) + content.length + 1);
-
-    // find first top-level comma
-    let depth = 0, comma = -1;
-    for (let i = 0; i < content.length; i++) {
-      const ch = content[i];
-      if (ch === "(") {
-        depth++;
-      } else if (ch === ")") {
-        depth--;
-      } else if (ch === "," && depth === 0) {
-        comma = i;
-        break;
+  static #executePull({
+    pullCount,
+    bag,
+    bagRoll,
+  }) {
+    const all = [];
+    for (const s of bag) {
+      for (let i = 0; i < s.count; i++) {
+        all.push(s.color);
       }
     }
-    if (comma === -1) {
-      throw new Error("Invalid pull() function: missing comma separator");
+
+    if (pullCount > all.length) {
+      console.warn(
+        `Attempting to pull ${pullCount} stones from a bag with only ${all.length} stones. Bag composition:`,
+        bag,
+      );
     }
 
-    const pullCountExpr = content.substring(0, comma).trim();
-    if (!pullCountExpr) {
-      throw new Error("Invalid pull() function: empty pull count expression");
+    const remaining = [ ...all ];
+    const pulled = [];
+    const actual = Math.min(pullCount, all.length);
+
+    for (let i = 0; i < actual; i++) {
+      const idx = Math.floor(Math.random() * remaining.length);
+      pulled.push(remaining[idx]);
+      remaining.splice(idx, 1);
     }
 
-    const bagFormula = content.substring(comma + 1).trim();
-    if (!bagFormula) {
-      throw new Error("Invalid pull() function: empty bag formula");
+    const pullCounts = {};
+    for (const c of pulled) {
+      pullCounts[c] = (pullCounts[c] || 0) + 1;
     }
 
     return {
-      before,
-      after,
-      pullCountExpr,
-      bagFormula,
+      actualPulled: actual,
+      bagComposition: bag,
+      bagFormula: bagRoll.formula,
+      bagRollDetails: bagRoll._formula,
+      bagTotal: bagRoll.total,
+      pullCounts,
+      pulledStones: pulled,
+      remaining: remaining.length,
+      requested: pullCount,
+      totalInBag: all.length,
     };
   }
 
@@ -113,44 +113,6 @@ export default class DeathBag extends TeriockRoll {
       }
     }
     throw new Error("Invalid function call: missing closing parenthesis");
-  }
-
-  /** @inheritDoc */
-  async evaluate(options = {}) {
-    if (this._pendingPull) {
-      const {
-        pullCountExpr,
-        bagFormula,
-        before,
-        after,
-      } = this._pendingPull;
-
-      const countRoll = new foundry.dice.Roll(pullCountExpr, this.data);
-      await countRoll.evaluate(options);
-      const pullCount = Math.max(0, Math.floor(Number(countRoll.total ?? 0)));
-
-      const bagRoll = new foundry.dice.Roll(bagFormula, this.data);
-      await bagRoll.evaluate(options);
-
-      const bag = DeathBag.#extractStonesFromRoll(bagRoll);
-      const pullResult = DeathBag.#executePull({
-        pullCount,
-        bag,
-        bagRoll,
-      });
-
-      this.pullResult = {
-        ...pullResult,
-        countRoll: countRoll._formula,
-        countTotal: countRoll.total,
-      };
-
-      const resultFormula = DeathBag.#createPullResultFormula(pullResult);
-      this._formula = `${before}${resultFormula}${after}`;
-      this._pendingPull = null;
-    }
-
-    return await super.evaluate(options);
   }
 
   /**
@@ -228,75 +190,56 @@ export default class DeathBag extends TeriockRoll {
   }
 
   /**
-   * Perform a pull without replacement from a bag of stones.
-   * @param {object} params
-   * @param {number} params.pullCount - Number of stones requested.
-   * @param {Teriock.RollOptions.BagComposition[]} params.bag - Bag composition.
-   * @param {TeriockRoll} params.bagRoll - The evaluated bag roll.
-   * @returns {object} Pull result with requested, actual, pulled stones, and metadata.
+   * Detect a `pull(<countExpr>, <bagFormula>)` call in a formula.
+   * @param {string} formula - The formula string to scan.
+   * @returns {null | { before: string, after: string, pullCountExpr: string, bagFormula: string }}
    */
-  static #executePull({
-    pullCount,
-    bag,
-    bagRoll,
-  }) {
-    const all = [];
-    for (const s of bag) {
-      for (let i = 0; i < s.count; i++) {
-        all.push(s.color);
+  static #scanForPull(formula) {
+    const m = formula.match(/pull\s*\(/);
+    if (!m) {
+      return null;
+    }
+
+    const pullIdx = m.index;
+    const before = formula.substring(0, pullIdx);
+    const tail = formula.substring(pullIdx);
+
+    const content = DeathBag.#extractFunctionContent(tail);
+    const after = tail.substring(tail.indexOf(content) + content.length + 1);
+
+    // find first top-level comma
+    let depth = 0, comma = -1;
+    for (let i = 0; i < content.length; i++) {
+      const ch = content[i];
+      if (ch === "(") {
+        depth++;
+      } else if (ch === ")") {
+        depth--;
+      } else if (ch === "," && depth === 0) {
+        comma = i;
+        break;
       }
     }
-
-    if (pullCount > all.length) {
-      console.warn(
-        `Attempting to pull ${pullCount} stones from a bag with only ${all.length} stones. Bag composition:`,
-        bag,
-      );
+    if (comma === -1) {
+      throw new Error("Invalid pull() function: missing comma separator");
     }
 
-    const remaining = [ ...all ];
-    const pulled = [];
-    const actual = Math.min(pullCount, all.length);
-
-    for (let i = 0; i < actual; i++) {
-      const idx = Math.floor(Math.random() * remaining.length);
-      pulled.push(remaining[idx]);
-      remaining.splice(idx, 1);
+    const pullCountExpr = content.substring(0, comma).trim();
+    if (!pullCountExpr) {
+      throw new Error("Invalid pull() function: empty pull count expression");
     }
 
-    const pullCounts = {};
-    for (const c of pulled) {
-      pullCounts[c] = (pullCounts[c] || 0) + 1;
+    const bagFormula = content.substring(comma + 1).trim();
+    if (!bagFormula) {
+      throw new Error("Invalid pull() function: empty bag formula");
     }
 
     return {
-      requested: pullCount,
-      actualPulled: actual,
-      totalInBag: all.length,
-      bagComposition: bag,
-      bagFormula: bagRoll.formula,
-      bagTotal: bagRoll.total,
-      bagRollDetails: bagRoll._formula,
-      pulledStones: pulled,
-      pullCounts,
-      remaining: remaining.length,
+      before,
+      after,
+      pullCountExpr,
+      bagFormula,
     };
-  }
-
-  /**
-   * Convert a pull result to a plain dice-style formula.
-   * @param {object} pullResult - The pull result.
-   * @returns {string} Formula like "3[white] + 2[black]".
-   */
-  static #createPullResultFormula(pullResult) {
-    if (!pullResult) {
-      return "0";
-    }
-    const terms = [];
-    for (const [ color, count ] of Object.entries(pullResult.pullCounts)) {
-      terms.push(`${count}[${color}]`);
-    }
-    return terms.length ? terms.join(" + ") : "0[empty]";
   }
 
   /**
@@ -310,5 +253,67 @@ export default class DeathBag extends TeriockRoll {
     const roll = new DeathBag(`pull(${pullCountExpr}, ${bagFormula})`, data);
     await roll.evaluate();
     return roll.pullResult;
+  }
+
+  /**
+   * Captured at construction; resolved during evaluate().
+   * @type {Teriock.RollOptions.PendingPullData|null}
+   */
+  _pendingPull = null;
+  /** @type {Object|null} */
+  pullResult = null;
+
+  /**
+   * Construct a new DeathBag instance.
+   * @param {string} formula - The input formula, possibly containing a pull() function.
+   * @param {object} data - Roll data context.
+   * @param {object} [options={}] - Roll options.
+   */
+  constructor(formula, data, options = {}) {
+    const spec = DeathBag.#scanForPull(formula);
+    const safeFormula = spec ? (spec.before + "0" + spec.after) : formula;
+    super(safeFormula, data, options);
+
+    if (spec) {
+      this._pendingPull = spec;
+    }
+  }
+
+  /** @inheritDoc */
+  async evaluate(options = {}) {
+    if (this._pendingPull) {
+      const {
+        pullCountExpr,
+        bagFormula,
+        before,
+        after,
+      } = this._pendingPull;
+
+      const countRoll = new foundry.dice.Roll(pullCountExpr, this.data);
+      await countRoll.evaluate(options);
+      const pullCount = Math.max(0, Math.floor(Number(countRoll.total ?? 0)));
+
+      const bagRoll = new foundry.dice.Roll(bagFormula, this.data);
+      await bagRoll.evaluate(options);
+
+      const bag = DeathBag.#extractStonesFromRoll(bagRoll);
+      const pullResult = DeathBag.#executePull({
+        pullCount,
+        bag,
+        bagRoll,
+      });
+
+      this.pullResult = {
+        ...pullResult,
+        countRoll: countRoll._formula,
+        countTotal: countRoll.total,
+      };
+
+      const resultFormula = DeathBag.#createPullResultFormula(pullResult);
+      this._formula = `${before}${resultFormula}${after}`;
+      this._pendingPull = null;
+    }
+
+    return await super.evaluate(options);
   }
 }

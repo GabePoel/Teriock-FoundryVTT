@@ -10,12 +10,12 @@ declare global {
 
     /** Parameters to construct an HTML button. */
     export type HTMLButtonConfig = {
-      label?: string;
-      dataset?: Record<string, string>;
       classes?: string[];
-      icon?: string;
-      type?: "button";
+      dataset?: Record<string, string>;
       disabled?: boolean;
+      icon?: string;
+      label?: string;
+      type?: "button";
     };
   }
 }

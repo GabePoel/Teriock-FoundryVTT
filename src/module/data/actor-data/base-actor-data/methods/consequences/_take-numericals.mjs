@@ -1,5 +1,3 @@
-import { currencyOptions } from "../../../../../constants/options/currency-options.mjs";
-
 /**
  * Relevant wiki pages:
  * - [Damage](https://wiki.teriock.com/index.php/Core:Damage)
@@ -179,8 +177,8 @@ export async function _takePay(actorData, amount, mode = "greedy") {
   const currentMoney = { ...actorData.money };
 
   // Calculate total available wealth in gold value
-  const totalWealth = Object.keys(currencyOptions).reduce((total, currency) => {
-    return (total + (currentMoney[currency] || 0) * currencyOptions[currency].value);
+  const totalWealth = Object.keys(TERIOCK.options.currency).reduce((total, currency) => {
+    return (total + (currentMoney[currency] || 0) * TERIOCK.options.currency[currency].value);
   }, 0);
 
   // If not enough money, add to debt and exit
@@ -193,7 +191,7 @@ export async function _takePay(actorData, amount, mode = "greedy") {
   }
 
   // Create array of currencies sorted by value (highest first)
-  const currencies = Object.entries(currencyOptions)
+  const currencies = Object.entries(TERIOCK.options.currency)
     .sort(([ , a ], [ , b ]) => b.value - a.value)
     .map(([ key, config ]) => ({
       key, ...config,

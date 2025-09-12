@@ -1,4 +1,3 @@
-import { characterOptions } from "../constants/options/character-options.mjs";
 import { convertUnits } from "../helpers/utils.mjs";
 
 const { TokenDocument } = foundry.documents;
@@ -147,7 +146,7 @@ export default class TeriockTokenDocument extends TokenDocument {
    */
   derivedDetectionModes() {
     if (this.actor) {
-      for (const [ sense, id ] of Object.entries(characterOptions.senseMap)) {
+      for (const [ sense, id ] of Object.entries(TERIOCK.options.character.senseMap)) {
         const mode = this.detectionModes.find((m) => m.id === id);
         if (mode) {
           mode.range = convertUnits(this.actor.system.senses[sense], "ft", this.parent?.grid.units || "");

@@ -1,4 +1,3 @@
-import { dieOptions } from "../../../constants/options/die-options.mjs";
 import { mergeFreeze } from "../../../helpers/utils.mjs";
 import StatDieModel from "../../models/stat-die-model/stat-die-model.mjs";
 
@@ -166,7 +165,7 @@ export default (Base) => {
       if ((await super._preUpdate(changes, options, user)) === false) {
         return false;
       }
-      for (const stat of Object.keys(dieOptions.stats)) {
+      for (const stat of Object.keys(TERIOCK.options.die.stats)) {
         if (foundry.utils.getProperty(changes, `system.${stat}DiceBase`)) {
           const number = foundry.utils.getProperty(changes, `system.${stat}DiceBase.number`)
             || this[`${stat}DiceBase`].number;

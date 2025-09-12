@@ -1,4 +1,3 @@
-import { abilityOptions } from "../../../../constants/options/ability-options.mjs";
 import { getIcon } from "../../../../helpers/path.mjs";
 import { parseDurationString, safeUuid } from "../../../../helpers/utils.mjs";
 import { cleanHTMLDoc, cleanObject } from "../../../shared/parsing/clean-html-doc.mjs";
@@ -259,9 +258,9 @@ function processTags(parameters, tagTree, doc) {
   // Determine maneuver type
   if (parameters.executionTime === "passive") {
     parameters.maneuver = "passive";
-  } else if (parameters.executionTime && abilityOptions.executionTime.active[parameters.executionTime]) {
+  } else if (parameters.executionTime && TERIOCK.options.ability.executionTime.active[parameters.executionTime]) {
     parameters.maneuver = "active";
-  } else if (parameters.executionTime && abilityOptions.executionTime.reactive[parameters.executionTime]) {
+  } else if (parameters.executionTime && TERIOCK.options.ability.executionTime.reactive[parameters.executionTime]) {
     parameters.maneuver = "reactive";
   } else {
     parameters.maneuver = "slow";

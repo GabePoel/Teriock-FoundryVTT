@@ -11,8 +11,8 @@ function senseField(initial, name) {
   return new fields.NumberField({
     initial: initial,
     integer: true,
-    min: 0,
     label: `${name} Range`,
+    min: 0,
   });
 }
 
@@ -23,15 +23,15 @@ function senseField(initial, name) {
  */
 export function _defineSenses(schema) {
   schema.senses = new fields.SchemaField({
-    night: senseField(0, "Night Vision"),
+    blind: senseField(0, "Blind Fighting"),
     dark: senseField(0, "Dark Vision"),
     ethereal: senseField(0, "Ethereal Vision"),
-    blind: senseField(0, "Blind Fighting"),
-    truth: senseField(0, "True Sight"),
-    smell: senseField(0, "Advanced Smell"),
     hearing: senseField(0, "Advanced Hearing"),
-    sight: senseField(0, "Advanced Sight"),
     invisible: senseField(0, "See Invisible"),
+    night: senseField(0, "Night Vision"),
+    sight: senseField(0, "Advanced Sight"),
+    smell: senseField(0, "Advanced Smell"),
+    truth: senseField(0, "True Sight"),
   });
   return schema;
 }

@@ -11,13 +11,13 @@ const { fields } = foundry.data;
  */
 function attributeField(name) {
   return new fields.SchemaField({
-    saveProficient: new fields.BooleanField({
-      initial: false,
-      label: `Proficient in ${name} Saves`,
-    }),
     saveFluent: new fields.BooleanField({
       initial: false,
       label: `Fluent in ${name} Saves`,
+    }),
+    saveProficient: new fields.BooleanField({
+      initial: false,
+      label: `Proficient in ${name} Saves`,
     }),
     value: new fields.NumberField({
       initial: -3,

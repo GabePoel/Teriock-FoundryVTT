@@ -15,9 +15,9 @@ const { fields } = foundry.data;
  */
 function tradecraftField() {
   return new fields.SchemaField({
-    proficient: new fields.BooleanField({ initial: false }),
-    extra: new fields.NumberField({ initial: 0 }),
     bonus: new fields.NumberField({ initial: 0 }),
+    extra: new fields.NumberField({ initial: 0 }),
+    proficient: new fields.BooleanField({ initial: false }),
   });
 }
 

@@ -25,11 +25,6 @@ globalThis.teriock = {
 };
 /** Useful helpers brought to the top level for easy access by macros. */
 globalThis.tm = {
-  dialogs: applications.dialogs,
-  utils: helpers.utils,
-  fetch: helpers.fetch,
-  string: helpers.string,
-  path: helpers.path,
   create: {
     ability: helpers.createEffects.createAbility,
     consequence: helpers.createEffects.createConsequence,
@@ -37,6 +32,11 @@ globalThis.tm = {
     property: helpers.createEffects.createProperty,
     resource: helpers.createEffects.createResource,
   },
+  dialogs: applications.dialogs,
+  fetch: helpers.fetch,
+  path: helpers.path,
+  string: helpers.string,
+  utils: helpers.utils,
 };
 
 foundry.helpers.Hooks.once("init", function () {
@@ -47,8 +47,8 @@ foundry.helpers.Hooks.once("init", function () {
   applications.ux.registerEnrichers();
 
   CONFIG.Combat.initiative = {
-    formula: "1d20 + @mov",
     decimals: 2,
+    formula: "1d20 + @mov",
   };
 
   CONFIG.statusEffects.length = 0;
@@ -125,9 +125,9 @@ foundry.helpers.Hooks.once("init", function () {
   });
   Object.assign(CONFIG.Item.dataModels, {
     equipment: data.item.EquipmentData,
+    mechanic: data.item.MechanicData,
     power: data.item.PowerData,
     rank: data.item.RankData,
-    mechanic: data.item.MechanicData,
     species: data.item.SpeciesData,
     wrapper: data.item.WrapperData,
   });

@@ -1,6 +1,9 @@
 import { documentOptions } from "../../constants/options/document-options.mjs";
 import { ROLL_BUTTON_CONFIGS } from "../../data/effect-data/ability-data/methods/rolling/_roll-build-buttons.mjs";
 import { getAbility } from "../../helpers/fetch.mjs";
+import { dedent } from "../../helpers/utils.mjs";
+
+//TODO: Unify `ROLL_BUTTON_CONFIGS` and similar rollable takes options.
 
 const enricherIcons = {
   Core: "circle-info",
@@ -63,9 +66,15 @@ const abilityEnricher = {
       return null;
     }
     const wrapper = document.createElement("div");
-    wrapper.innerHTML
-      = `<a class="content-link" draggable="true" data-link="" data-uuid="${uuid}" data-id="${uuid.slice(-16)}" data-tooltip="${fileName}"><i class="fa-solid fa-${documentOptions.ability.icon}"></i>${title
-    || fileName}</a>`;
+    wrapper.innerHTML = dedent(`
+      <a
+        class="content-link"
+        draggable="true"
+        data-link=""
+        data-uuid="${uuid}"
+        data-id="${uuid.slice(-16)}"
+        data-tooltip="${fileName}"
+      ><i class="fa-solid fa-${TERIOCK.options.document.ability.icon}"></i>${title || fileName}</a>`);
     return wrapper.firstElementChild;
   },
   replaceParent: false,
@@ -83,9 +92,15 @@ const classEnricher = {
       .classes()
       .index.getName(`Rank 1 ${fileName}`).uuid;
     const wrapper = document.createElement("div");
-    wrapper.innerHTML
-      = `<a class="content-link" draggable="true" data-link="" data-uuid="${uuid}" data-id="${uuid.slice(-16)}" data-tooltip="${fileName}"><i class="fa-solid fa-${documentOptions.rank.icon}"></i>${title
-    || fileName}</a>`;
+    wrapper.innerHTML = dedent(`
+      <a
+        class="content-link"
+        draggable="true"
+        data-link=""
+        data-uuid="${uuid}"
+        data-id="${uuid.slice(-16)}"
+        data-tooltip="${fileName}"
+      ><i class="fa-solid fa-${TERIOCK.options.document.rank.icon}"></i>${title || fileName}</a>`);
     return wrapper.firstElementChild;
   },
   replaceParent: false,
@@ -101,9 +116,15 @@ const rankEnricher = {
     }
     const uuid = game.teriock.packs.classes().index.getName(fileName).uuid;
     const wrapper = document.createElement("div");
-    wrapper.innerHTML
-      = `<a class="content-link" draggable="true" data-link="" data-uuid="${uuid}" data-id="${uuid.slice(-16)}" data-tooltip="${fileName}"><i class="fa-solid fa-${documentOptions.rank.icon}"></i>${title
-    || fileName}</a>`;
+    wrapper.innerHTML = dedent(`
+      <a
+        class="content-link"
+        draggable="true"
+        data-link=""
+        data-uuid="${uuid}"
+        data-id="${uuid.slice(-16)}"
+        data-tooltip="${fileName}"
+      ><i class="fa-solid fa-${TERIOCK.options.document.rank.icon}"></i>${title || fileName}</a>`);
     return wrapper.firstElementChild;
   },
   replaceParent: false,
@@ -160,9 +181,15 @@ const equipmentEnricher = {
     const title = match[2];
     const uuid = game.teriock.packs.equipment().index.getName(fileName).uuid;
     const wrapper = document.createElement("div");
-    wrapper.innerHTML
-      = `<a class="content-link" draggable="true" data-link="" data-uuid="${uuid}" data-id="${uuid.slice(-16)}" data-tooltip="${fileName}"><i class="fa-solid fa-${documentOptions.equipment.icon}"></i>${title
-    || fileName}</a>`;
+    wrapper.innerHTML = dedent(`
+      <a
+        class="content-link"
+        draggable="true"
+        data-link=""
+        data-uuid="${uuid}"
+        data-id="${uuid.slice(-16)}"
+        data-tooltip="${fileName}"
+      ><i class="fa-solid fa-${TERIOCK.options.document.equipment.icon}"></i>${title || fileName}</a>`);
     return wrapper.firstElementChild;
   },
   replaceParent: false,

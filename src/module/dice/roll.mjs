@@ -1,5 +1,7 @@
 const { Roll } = foundry.dice;
 
+//TODO: Reimplement boost/deboost with roll terms.
+
 /**
  * A custom Roll class which enriches the provided flavor and uses a custom
  * chat template to display the flavor as enriched HTML. Also allows for custom

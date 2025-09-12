@@ -1,5 +1,4 @@
 import { setStatDiceDialog } from "../../../applications/dialogs/_module.mjs";
-import { dieOptions } from "../../../constants/options/die-options.mjs";
 import { copyAbility } from "../../../helpers/fetch.mjs";
 import { toTitleCase } from "../../../helpers/string.mjs";
 import { mergeFreeze } from "../../../helpers/utils.mjs";
@@ -38,9 +37,9 @@ export default class TeriockSpeciesData extends StatDataMixin(WikiDataMixin(Teri
       adult: new fields.NumberField({ initial: 20 }),
       appearance: new TextField({ label: "Appearance" }),
       applySize: new fields.BooleanField({
-        label: "Apply Size",
         hint: "Apply this species' size to its parent actor.",
         initial: true,
+        label: "Apply Size",
       }),
       attributeIncrease: new TextField({ label: "Attribute increase" }),
       br: new fields.NumberField({
@@ -56,8 +55,8 @@ export default class TeriockSpeciesData extends StatDataMixin(WikiDataMixin(Teri
         label: "Proficient",
       }),
       size: new fields.SchemaField({
-        min: new fields.NumberField(),
         max: new fields.NumberField(),
+        min: new fields.NumberField(),
         value: new fields.NumberField({
           initial: 3,
         }),
@@ -156,7 +155,7 @@ export default class TeriockSpeciesData extends StatDataMixin(WikiDataMixin(Teri
     }
 
     // Handle variable size stat dice
-    for (const stat of Object.keys(dieOptions.stats)) {
+    for (const stat of Object.keys(TERIOCK.options.die.stats)) {
       const sizeStepKey = `sizeStep${toTitleCase(stat)}`;
       const sizeStep = foundry.utils.getProperty(changes, `system.${sizeStepKey}`) || this[sizeStepKey];
       if (sizeStep) {

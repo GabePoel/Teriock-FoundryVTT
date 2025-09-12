@@ -21,32 +21,32 @@ declare global {
     };
 
     export type AbilityRoll = Teriock.RollOptions.CommonRoll & {
-      /** Turn off heightening */
-      noHeighten?: boolean;
       /** Forced {@link TeriockActor} */
       actor?: TeriockActor;
-      /** Force proficiency on/off */
-      proficient?: boolean;
       /** Force fluency on/off */
       fluent?: boolean;
+      /** Turn off heightening */
+      noHeighten?: boolean;
+      /** Force proficiency on/off */
+      proficient?: boolean;
     };
 
     /**
      * Options for performing an equipment roll.
      */
     export type EquipmentRoll = {
-      /** Should this deal two-handed damage? */
-      twoHanded?: boolean;
-      /** Bonus damage that should be added */
-      bonusDamage?: string;
-      /** Should this hide information about the equipment? */
-      secret?: boolean;
       /** Should this be a crit? */
       advantage?: boolean;
-      /** Override the default roll formula */
-      formula?: string;
+      /** Bonus damage that should be added */
+      bonusDamage?: string;
       /** Go critical? */
       crit?: boolean;
+      /** Override the default roll formula */
+      formula?: string;
+      /** Should this hide information about the equipment? */
+      secret?: boolean;
+      /** Should this deal two-handed damage? */
+      twoHanded?: boolean;
     };
 
     /**
@@ -68,14 +68,14 @@ declare global {
     export type PolyhedralDie = `d${PolyhedralDieFaces}`;
 
     export type MacroScope = {
-      speaker?: Teriock.Foundry.ChatSpeakerData;
-      actor?: TeriockActor;
-      token?: TeriockToken;
-      event?: Event;
-      data?: Teriock.HookData.BaseHookData;
-      useData?: AbilityUseData;
       abilityData?: TeriockAbilityData;
+      actor?: TeriockActor;
       chatData?: AbilityChatData;
+      data?: Teriock.HookData.BaseHookData;
+      event?: Event;
+      speaker?: Teriock.Foundry.ChatSpeakerData;
+      token?: TeriockToken;
+      useData?: AbilityUseData;
     };
 
     export type BagComposition = {
@@ -85,10 +85,10 @@ declare global {
     }
 
     export type PendingPullData = {
-      before: string;
       after: string;
-      pullCountExpr: string;
       bagFormula: string;
+      before: string;
+      pullCountExpr: string;
     }
   }
 }

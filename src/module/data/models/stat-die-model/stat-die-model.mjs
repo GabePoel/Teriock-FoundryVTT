@@ -1,4 +1,3 @@
-import { dieOptions } from "../../../constants/options/die-options.mjs";
 import { TeriockRoll } from "../../../dice/_module.mjs";
 import { toTitleCase } from "../../../helpers/string.mjs";
 import { dedent, getRollIcon } from "../../../helpers/utils.mjs";
@@ -13,7 +12,7 @@ export default class StatDieModel extends DataModel {
   /** @inheritDoc */
   static defineSchema() {
     const dieChoices = {};
-    for (const [ key, value ] of Object.entries(dieOptions.stats)) {
+    for (const [ key, value ] of Object.entries(TERIOCK.options.die.stats)) {
       dieChoices[key] = toTitleCase(value) + " Die";
     }
     return {
@@ -30,7 +29,7 @@ export default class StatDieModel extends DataModel {
         label: "Faces",
         hint: "How many faces this die has.",
         initial: 10,
-        choices: dieOptions.faces,
+        choices: TERIOCK.options.die.faces,
       }),
       spent: new fields.BooleanField({
         label: "Spent",
@@ -82,6 +81,7 @@ export default class StatDieModel extends DataModel {
    * @returns {Teriock.RollOptions.PolyhedralDie}
    */
   get polyhedral() {
+    /** @type {Teriock.RollOptions.PolyhedralDie} */
     return /** @type {Teriock.RollOptions.PolyhedralDie} */ `d${this.faces}`;
   }
 

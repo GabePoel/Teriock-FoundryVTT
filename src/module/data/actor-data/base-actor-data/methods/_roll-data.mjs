@@ -36,11 +36,11 @@ export function _getRollData(actorData) {
  */
 function basicData(actorData, data) {
   Object.assign(data, {
+    f: actorData.f,
     lvl: actorData.lvl,
+    p: actorData.p,
     size: actorData.size,
     weight: actorData.weight,
-    p: actorData.p,
-    f: actorData.f,
   });
 }
 
@@ -233,10 +233,10 @@ function witherData(actorData, data) {
 function hackData(actorData, data) {
   const hackKeys = [
     "arm",
-    "leg",
     "bod",
-    "eye",
     "ear",
+    "eye",
+    "leg",
     "mou",
     "nos",
   ];
@@ -272,17 +272,17 @@ function speedData(actorData, data) {
     "div",
   ];
   const speedMap = {
-    wal: "walk",
-    dif: "difficultTerrain",
-    cra: "crawl",
-    swi: "swim",
     cli: "climb",
+    cra: "crawl",
+    dif: "difficultTerrain",
+    dig: "dig",
+    div: "dive",
+    fly: "fly",
     hid: "hidden",
     leh: "leapHorizontal",
     lev: "leapVertical",
-    fly: "fly",
-    dig: "dig",
-    div: "dive",
+    swi: "swim",
+    wal: "walk",
   };
 
   for (const key of speedKeys) {

@@ -14,10 +14,10 @@ function speedField(initial, name) {
   return new fields.NumberField({
     initial: initial,
     integer: true,
+    label: `${name} Speed Adjustment`,
     max: 4,
     min: 0,
     step: 1,
-    label: `${name} Speed Adjustment`,
   });
 }
 
@@ -39,7 +39,6 @@ function speedField(initial, name) {
  */
 export function _defineSpeed(schema) {
   schema.speedAdjustments = new fields.SchemaField({
-    walk: speedField(3, "Walk"),
     climb: speedField(1, "Climb"),
     crawl: speedField(1, "Crawl"),
     difficultTerrain: speedField(2, "Difficult Terrain"),
@@ -50,6 +49,7 @@ export function _defineSpeed(schema) {
     leapHorizontal: speedField(1, "Horizontal Leap"),
     leapVertical: speedField(0, "Vertical Leap"),
     swim: speedField(1, "Swim"),
+    walk: speedField(3, "Walk"),
   });
   return schema;
 }
