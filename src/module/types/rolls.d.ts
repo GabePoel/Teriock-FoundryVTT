@@ -77,5 +77,18 @@ declare global {
       abilityData?: TeriockAbilityData;
       chatData?: AbilityChatData;
     };
+
+    export type BagComposition = {
+      color: string;
+      count: number;
+      originalTerm: string;
+    }
+
+    export type PendingPullData = {
+      before: string;
+      after: string;
+      pullCountExpr: string;
+      bagFormula: string;
+    }
   }
 }
