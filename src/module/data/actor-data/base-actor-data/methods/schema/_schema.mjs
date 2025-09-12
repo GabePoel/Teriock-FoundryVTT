@@ -24,7 +24,7 @@ import { _defineTradecrafts } from "./_define-tradecrafts.mjs";
  * // baseActorSchema now contains all actor fields from all schema components
  * ```
  *
- * @returns {Object} The complete base actor schema containing all defined fields
+ * @returns {object} The complete base actor schema containing all defined fields
  */
 export function _defineSchema() {
   let schema = {};

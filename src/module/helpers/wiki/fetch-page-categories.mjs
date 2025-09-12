@@ -1,7 +1,7 @@
 /**
  * Fetches all categories that a wiki page belongs to via the MediaWiki API.
  * @param {string} title - The page title (without namespace prefix unless needed), e.g. "Apple".
- * @param {Object} [options]
+ * @param {object} [options]
  * @param {boolean} [options.includeHidden=false] - Include hidden categories as well.
  * @returns {Promise<Array<{ ns: number, title: string, hidden?: string }>>}
  *          An array of category objects (same shape as the API), or [] on failure.

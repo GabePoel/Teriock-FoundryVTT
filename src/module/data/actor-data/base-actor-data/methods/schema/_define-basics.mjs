@@ -35,8 +35,8 @@ function attributeField(name) {
  * - [Size](https://wiki.teriock.com/index.php/Core:Size)
  * - [Attributes](https://wiki.teriock.com/index.php/Core:Attributes)
  *
- * @param {Object} schema - The schema object to extend with basic actor fields
- * @returns {Object} The modified schema object with basic actor fields added
+ * @param {object} schema - The schema object to extend with basic actor fields
+ * @returns {object} The modified schema object with basic actor fields added
  *
  * @example
  * ```javascript

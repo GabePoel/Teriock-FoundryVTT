@@ -44,8 +44,8 @@ function hackField(max, name) {
  * // hacksSchema now contains: `hacks` field with all body part modifications
  * ```
  *
- * @param {Object} schema - The schema object to extend with hack fields
- * @returns {Object} The modified schema object with hack fields added
+ * @param {object} schema - The schema object to extend with hack fields
+ * @returns {object} The modified schema object with hack fields added
  */
 export function _defineHacks(schema) {
   schema.hacks = new fields.SchemaField({

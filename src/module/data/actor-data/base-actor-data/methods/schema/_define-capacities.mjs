@@ -15,8 +15,8 @@ const { fields } = foundry.data;
  * // capacitiesSchema now contains: movementSpeed, carryingCapacity, and weight fields
  * ```
  *
- * @param {Object} schema - The schema object to extend with capacity fields
- * @returns {Object} The modified schema object with capacity fields added
+ * @param {object} schema - The schema object to extend with capacity fields
+ * @returns {object} The modified schema object with capacity fields added
  */
 export function _defineCapacities(schema) {
   schema.movementSpeed = new fields.SchemaField({

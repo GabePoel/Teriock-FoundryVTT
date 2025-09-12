@@ -26,8 +26,8 @@ function currencyField(label, integer = true) {
  * // moneySchema now contains: money and moneyWeight fields
  * ```
  *
- * @param {Object} schema - The schema object to extend with money fields
- * @returns {Object} The modified schema object with money fields added
+ * @param {object} schema - The schema object to extend with money fields
+ * @returns {object} The modified schema object with money fields added
  */
 export function _defineMoney(schema) {
   schema.money = new fields.SchemaField({

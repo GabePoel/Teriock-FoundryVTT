@@ -18,8 +18,8 @@ function senseField(initial, name) {
 
 /**
  * Defines the senses schema for an actor by adding various sense fields.
- * @param {Object} schema - The schema object to extend with senses.
- * @returns {Object} The updated schema object with the senses field added.
+ * @param {object} schema - The schema object to extend with senses.
+ * @returns {object} The updated schema object with the senses field added.
  */
 export function _defineSenses(schema) {
   schema.senses = new fields.SchemaField({

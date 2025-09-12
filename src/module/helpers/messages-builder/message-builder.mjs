@@ -67,7 +67,7 @@ export function buildMessage(messageParts) {
 
 /**
  * Calculates the effective length of a bar by filtering out empty wrappers.
- * @param {Object} bar - The bar object to calculate length for.
+ * @param {object} bar - The bar object to calculate length for.
  * @param {string[]} bar.wrappers - Array of wrapper content strings.
  * @returns {number} The number of non-empty wrappers in the bar.
  */

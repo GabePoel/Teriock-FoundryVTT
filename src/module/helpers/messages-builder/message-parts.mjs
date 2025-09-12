@@ -3,7 +3,7 @@ import { abilityOptions } from "../../constants/options/ability-options.mjs";
 /**
  * Creates a DOM element with specified properties and children.
  * @param {string} tag - The HTML tag name for the element.
- * @param {Object} props - Properties to assign to the element.
+ * @param {object} props - Properties to assign to the element.
  * @param {...any} children - Child elements or text to append.
  * @returns {HTMLElement} The created DOM element.
  */

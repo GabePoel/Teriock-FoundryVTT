@@ -5,7 +5,7 @@ import { getIcon } from "./path.mjs";
  * Creates a new ability effect and optionally pulls content from the wiki.
  * @param {TeriockActor|TeriockEffect|TeriockItem} document - The document to create the ability in.
  * @param {string|null} name - The name for the new ability. If not provided, defaults to "New Ability".
- * @param {Object} options - Additional options for the ability creation.
+ * @param {object} options - Additional options for the ability creation.
  * @returns {Promise<TeriockAbility>} The created ability effect.
  */
 export async function createAbility(document, name = null, options = {}) {

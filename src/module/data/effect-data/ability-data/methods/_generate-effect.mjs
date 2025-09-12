@@ -150,7 +150,7 @@ export async function _generateEffect(rollConfig, crit = false) {
  * Creates rolls, hacks, checks, and status changes based on the ability's consequence data.
  *
  * @param {AbilityRollConfig} rollConfig - The roll config data to generate takes from.
- * @returns {Object} Object containing rolls, hacks, checks, startStatuses, and endStatuses.
+ * @returns {object} Object containing rolls, hacks, checks, startStatuses, and endStatuses.
  * @private
  */
 export function _generateTakes(rollConfig) {

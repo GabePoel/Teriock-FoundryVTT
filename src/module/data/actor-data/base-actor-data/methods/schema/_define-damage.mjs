@@ -13,8 +13,8 @@ const { fields } = foundry.data;
  * // damageSchema now contains: damage field with various damage types
  * ```
  *
- * @param {Object} schema - The schema object to extend with damage fields
- * @returns {Object} The modified schema object with damage fields added
+ * @param {object} schema - The schema object to extend with damage fields
+ * @returns {object} The modified schema object with damage fields added
  */
 export function _defineDamage(schema) {
   schema.damage = new fields.SchemaField({

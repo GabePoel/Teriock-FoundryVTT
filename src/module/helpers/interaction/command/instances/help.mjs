@@ -3,7 +3,7 @@ import TeriockCommand from "../command.mjs";
 /**
  * Creates a dynamic help command based on all registered commands.
  * Filters out aliases to avoid duplicate entries.
- * @param {Object} allCommands - An object containing all registered commands.
+ * @param {object} allCommands - An object containing all registered commands.
  * @returns {TeriockCommand} - The help command instance.
  */
 export function createHelpCommand(allCommands) {

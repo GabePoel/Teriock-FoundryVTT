@@ -303,8 +303,8 @@ export async function chatImage(img) {
 /**
  * Evaluates a die roll formula synchronously and returns the total result.
  * @param {string} formula - The dice roll formula to evaluate.
- * @param {Object} data - The roll data to use for the evaluation.
- * @param {Object} options - Options that get passed to the roll.
+ * @param {object} data - The roll data to use for the evaluation.
+ * @param {object} options - Options that get passed to the roll.
  * @returns {number} The total result of the evaluated roll.
  */
 export function evaluateSync(formula, data = {}, options = {}) {
@@ -327,7 +327,7 @@ export function evaluateSync(formula, data = {}, options = {}) {
  * Avoids having to generate roll data if it's unnecessary.
  * @param {string} formula - The dice roll formula to evaluate.
  * @param {TeriockActor|TeriockItem|TeriockEffect} document - The document to get roll data from.
- * @param {Object} options - Options that get passed to the roll.
+ * @param {object} options - Options that get passed to the roll.
  * @returns {number} The total result of the evaluated roll.
  */
 export function smartEvaluateSync(formula, document, options = { fail: 0 }) {
@@ -351,8 +351,8 @@ export function smartEvaluateSync(formula, document, options = { fail: 0 }) {
 /**
  * Evaluates a die roll formula asynchronously and returns the total result.
  * @param {string} formula - The dice roll formula to evaluate.
- * @param {Object} data - The roll data to use for the evaluation.
- * @param {Object} options - Options that get passed to the roll.
+ * @param {object} data - The roll data to use for the evaluation.
+ * @param {object} options - Options that get passed to the roll.
  * @returns {Promise<number>} The total result of the evaluated roll.
  */
 export async function evaluateAsync(formula, data = {}, options = {}) {

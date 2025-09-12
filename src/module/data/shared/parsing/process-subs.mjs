@@ -5,7 +5,7 @@ import { createAbility, createProperty } from "../../../helpers/create-effects.m
  * Creates sub effects and applies limitations or improvements as needed.
  * @param {Array} subs - Array of sub effect container elements.
  * @param {TeriockItem | TeriockEffect} doc - The parent document.
- * @param {Object} config - Configuration object for processing.
+ * @param {object} config - Configuration object for processing.
  * @param {Function} config.createFn - Function to create the sub effect (e.g., createAbility, createProperty).
  * @param {string} config.getMethod - Method to get existing sub effects (e.g., getAbilities, getProperties).
  * @param {string} config.nameSelector - CSS selector for the sub effect name element.

@@ -19,8 +19,8 @@ const { fields } = foundry.data;
  * // combatSchema now contains: wornAc, naturalAv, attackPenalty, sb, and piercing fields
  * ```
  *
- * @param {Object} schema - The schema object to extend with combat fields
- * @returns {Object} The modified schema object with combat fields added
+ * @param {object} schema - The schema object to extend with combat fields
+ * @returns {object} The modified schema object with combat fields added
  */
 export function _defineCombat(schema) {
   schema.wornAc = new fields.NumberField({

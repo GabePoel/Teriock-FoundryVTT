@@ -34,8 +34,8 @@ function speedField(initial, name) {
  * // speedSchema now contains: speedAdjustments field
  * ```
  *
- * @param {Object} schema - The schema object to extend with speed adjustment fields
- * @returns {Object} The modified schema object with speed adjustment fields added
+ * @param {object} schema - The schema object to extend with speed adjustment fields
+ * @returns {object} The modified schema object with speed adjustment fields added
  */
 export function _defineSpeed(schema) {
   schema.speedAdjustments = new fields.SchemaField({

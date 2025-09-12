@@ -36,8 +36,8 @@ function tradecraftField() {
  * // tradecraftsSchema now contains: `tradecrafts` field with all available tradecrafts
  * ```
  *
- * @param {Object} schema - The schema object to extend with tradecraft fields
- * @returns {Object} The modified schema object with tradecraft fields added
+ * @param {object} schema - The schema object to extend with tradecraft fields
+ * @returns {object} The modified schema object with tradecraft fields added
  */
 export function _defineTradecrafts(schema) {
   const tradecraftData = {};

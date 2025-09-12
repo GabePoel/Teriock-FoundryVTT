@@ -87,8 +87,8 @@ function protectionField(name) {
  * // protectionsSchema now contains: resistances and immunities fields
  * ```
  *
- * @param {Object} schema - The schema object to extend with resistances and immunities fields
- * @returns {Object} The modified schema object with resistances and immunities fields added
+ * @param {object} schema - The schema object to extend with resistances and immunities fields
+ * @returns {object} The modified schema object with resistances and immunities fields added
  */
 export function _defineProtections(schema) {
   schema.resistances = protectionField("resist");

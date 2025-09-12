@@ -37,7 +37,7 @@ commandMap["help"] = cmd.createHelpCommand(commandMap);
 /**
  * Dispatches a chat command message to the appropriate TeriockCommand.
  * @param {string} message - The raw chat input (e.g., "/harm 1d6").
- * @param {Object} chatData - Foundry chat message data.
+ * @param {object} chatData - Foundry chat message data.
  * @param {TeriockUser} sender - The user sending the message.
  * @returns {boolean} `false` if a command handled the message, otherwise `true`
  */

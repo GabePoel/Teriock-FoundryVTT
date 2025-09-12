@@ -4,7 +4,7 @@ const { fields } = foundry.data;
  * Creates a stat field definition with min, max, and current values, plus optional base and temp fields.
  *
  * @param {string} name - The name of the stat (e.g., "HP", "MP", "Wither")
- * @param {Object} [options] - Configuration options for the stat field
+ * @param {object} [options] - Configuration options for the stat field
  * @param {number} [options.min=0] - Initial minimum value for the stat
  * @param {number} [options.max=1] - Initial maximum value for the stat
  * @param {number} [options.value=1] - Initial current value for the stat
@@ -62,8 +62,8 @@ function statField(name, options = {}) {
  * // statsSchema now contains: hp, mp, wither, and presence fields
  * ```
  *
- * @param {Object} schema - The schema object to extend with stat fields
- * @returns {Object} The modified schema object with stat fields added
+ * @param {object} schema - The schema object to extend with stat fields
+ * @returns {object} The modified schema object with stat fields added
  */
 export function _defineStats(schema) {
   schema.hp = statField("HP", {

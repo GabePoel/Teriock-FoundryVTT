@@ -9,7 +9,7 @@ const progress = ui.notifications.info(`Pulling classes from wiki.`, {
  * Processes a single rank item
  * @param {Teriock.Parameters.Rank.RankArchetype} archetype - The archetype key
  * @param {Teriock.Parameters.Rank.RankClass} className - The class key
- * @param {Object} classObj - The class object
+ * @param {object} classObj - The class object
  * @param {number} rank - The rank number
  * @param {TeriockFolder} classFolder - The class folder object
  * @returns {Promise<Object>} Promise that resolves with processing result
@@ -114,7 +114,7 @@ async function processClass(archetype, className, classObj, archetypeFolder) {
 /**
  * Processes all classes for a single archetype in parallel
  * @param {string} archetype - The archetype key
- * @param {Object} archetypeObj - The archetype object
+ * @param {object} archetypeObj - The archetype object
  * @returns {Promise<Object>} Promise that resolves with processing results
  */
 async function processArchetype(archetype, archetypeObj) {
