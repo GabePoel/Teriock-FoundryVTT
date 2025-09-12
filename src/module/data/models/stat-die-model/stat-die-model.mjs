@@ -81,7 +81,6 @@ export default class StatDieModel extends DataModel {
    * @returns {Teriock.RollOptions.PolyhedralDie}
    */
   get polyhedral() {
-    /** @type {Teriock.RollOptions.PolyhedralDie} */
     return /** @type {Teriock.RollOptions.PolyhedralDie} */ `d${this.faces}`;
   }
 
