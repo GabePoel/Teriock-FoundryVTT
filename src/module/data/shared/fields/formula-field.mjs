@@ -4,12 +4,10 @@ const { StringField } = foundry.data.fields;
 
 /**
  * Special case {@link StringField} which represents a formula.
- * @param {StringFieldOptions & { deterministic?: boolean; }} [options={}] - Options which configure field behavior.
- * @property {boolean} deterministic=false - Is this formula not allowed to have dice values?
  */
 export default class FormulaField extends StringField {
   /**
-   * @param {StringFieldOptions & Teriock.Options.Fields._FormulaFieldOptions} [options] - Options which configure
+   * @param {StringFieldOptions & Teriock.Fields._FormulaFieldOptions} [options] - Options which configure
    * the behavior of the field.
    * @param {DataFieldContext} [context] - Additional context which describes the field.
    */

@@ -15,6 +15,7 @@ export { default as commonAnimals } from "../../../index/names/common-animals.js
 export { allConditions as conditions };
 export { default as coreRules } from "../../../index/names/core-rules.json" with { type: "json" };
 export { default as creatures } from "../../../index/names/creatures.json" with { type: "json" };
+export { default as currency } from "../../../index/names/currency.json" with { type: "json" };
 export { default as damageTypes } from "../../../index/names/damage-types.json" with { type: "json" };
 export { default as drainTypes } from "../../../index/names/drain-types.json" with { type: "json" };
 export { default as effectTypes } from "../../../index/names/effect-types.json" with { type: "json" };

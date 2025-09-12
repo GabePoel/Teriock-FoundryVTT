@@ -17,7 +17,7 @@ import TeriockRoll from "./roll.mjs";
  */
 export default class DeathBag extends TeriockRoll {
   /** @inheritDoc */
-  static CHAT_TEMPLATE = "systems/teriock/src/templates/document-templates/roll-templates/death-bag.hbs";
+  static CHAT_TEMPLATE = "systems/teriock/src/templates/message-templates/death-bag.hbs";
 
   /**
    * Convert a pull result to a plain dice-style formula.

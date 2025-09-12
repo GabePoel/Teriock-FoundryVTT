@@ -77,11 +77,11 @@ export default async function registerTemplates () {
     "systems/teriock/src/templates/document-templates/item-templates/species-template/parts/sp-menu.hbs",
     "systems/teriock/src/templates/document-templates/item-templates/species-template/species-template.hbs",
     "systems/teriock/src/templates/document-templates/item-templates/species-template/tags/sp-traits-tags.hbs",
-    "systems/teriock/src/templates/document-templates/roll-templates/death-bag.hbs",
-    "systems/teriock/src/templates/document-templates/roll-templates/roll.hbs",
     "systems/teriock/src/templates/document-templates/shared/changes.hbs",
     "systems/teriock/src/templates/document-templates/shared/effects.hbs",
     "systems/teriock/src/templates/document-templates/shared/header.hbs",
-    "systems/teriock/src/templates/document-templates/shared/image.hbs"
+    "systems/teriock/src/templates/document-templates/shared/image.hbs",
+    "systems/teriock/src/templates/message-templates/death-bag.hbs",
+    "systems/teriock/src/templates/message-templates/roll.hbs"
   ]);
 };

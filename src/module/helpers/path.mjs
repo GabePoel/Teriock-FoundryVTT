@@ -12,7 +12,7 @@ export function systemPath(path) {
 
 /**
  * Get the Foundry file path for some icon.
- * @param {string} category
+ * @param {Teriock.UI.IconCategory} category
  * @param {string} name
  * @returns {string}
  */

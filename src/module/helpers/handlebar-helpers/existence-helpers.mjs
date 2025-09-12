@@ -15,8 +15,16 @@ export default function registerExistenceHelpers() {
     return true;
   });
 
-  Handlebars.registerHelper("repeat", (n, block) => {
+  Handlebars.registerHelper("repeatStr", (n, block) => {
     return new Handlebars.SafeString(block.repeat(n));
+  });
+
+  Handlebars.registerHelper("repeat", function (n, options) {
+    let result = "";
+    for (let i = 0; i < n; i++) {
+      result += options.fn(this);
+    }
+    return new Handlebars.SafeString(result);
   });
 
   Handlebars.registerHelper("dataset", function (options) {

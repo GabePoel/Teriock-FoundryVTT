@@ -13,7 +13,7 @@ const { Roll } = foundry.dice;
  */
 export default class TeriockRoll extends Roll {
   /** @inheritDoc */
-  static CHAT_TEMPLATE = "systems/teriock/src/templates/document-templates/roll-templates/roll.hbs";
+  static CHAT_TEMPLATE = "systems/teriock/src/templates/message-templates/roll.hbs";
 
   /**
    * Evaluates a boost or deboost function by creating a temporary roll,

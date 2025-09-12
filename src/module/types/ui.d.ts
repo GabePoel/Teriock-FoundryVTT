@@ -17,5 +17,8 @@ declare global {
       label?: string;
       type?: "button";
     };
+
+    /** Icon category */
+    export type IconCategory = keyof typeof TERIOCK.display.iconManifest;
   }
 }

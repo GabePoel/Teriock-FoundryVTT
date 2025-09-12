@@ -213,20 +213,23 @@
       system.presence.overflow}}overflow{{/if}}">
       <div
         class="character-presence-bar"
-        style="grid-template-columns:{{repeat system.presence.max ' 1fr'}};"
+        style="grid-template-columns:{{repeatStr system.presence.max ' 1fr'}};"
         data-tooltip="{{{system.presence.value}}} out of {{{system.presence.max}}} Presence Used"
       >
         {{#if (geq system.presence.value 1)}}
           <div
             class="presence-indicator used"
-            style="grid-column: span {{{system.usp}}}; grid-template-columns:{{repeat system.usp
+            style="grid-column: span {{{system.usp}}}; grid-template-columns:{{repeatStr system.usp
                                                                                       ' 1fr'}}; display: grid;"
           >
-            {{repeat system.presence.value
-                     '<div class="presence-indicator empty" style="background: transparent;"></div>'}}
+            {{#repeat system.presence.value}}
+              <div class="presence-indicator empty" style="background: transparent;"></div>
+            {{/repeat}}
           </div>
         {{/if}}
-        {{repeat system.attributes.unp.value '<div class="presence-indicator unused"></div>'}}
+        {{#repeat system.attributes.unp.value}}
+          <div class="presence-indicator unused"></div>
+        {{/repeat}}
       </div>
     </div>
   </div>

@@ -1,8 +1,8 @@
 declare global {
-  namespace Teriock.Options.Fields {
+  namespace Teriock.Fields {
     export type _FormulaFieldOptions = {
       /** Is this formula deterministic? */
-      deterministic: boolean;
+      deterministic?: boolean;
     }
   }
 }
