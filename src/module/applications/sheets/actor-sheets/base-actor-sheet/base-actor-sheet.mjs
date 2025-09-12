@@ -1,4 +1,4 @@
-import { conditions } from "../../../../constants/content/conditions.mjs";
+import { conditions } from "../../../../constants/content/_module.mjs";
 import { documentOptions } from "../../../../constants/options/document-options.mjs";
 import { tradecraftMessage } from "../../../../helpers/html.mjs";
 import { buildMessage } from "../../../../helpers/messages-builder/message-builder.mjs";

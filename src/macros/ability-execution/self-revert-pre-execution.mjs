@@ -5,13 +5,13 @@ const transformationLevels = {
   greater: "Greater Transformation",
 };
 const chosenTransformationLevel = await tm.dialogs.selectDialog(transformationLevels, {
-  label: "Level",
   hint: "If known, select the level of transformation you are attempting to revert from.",
-  hintHtml: TERIOCK.content.conditionsData.transformed.content,
+  hintHtml: TERIOCK.content.conditions.transformed,
   hintTitle: "Transformed",
-  title: "Select Transformation Level",
-  other: true,
   initial: "minor",
+  label: "Level",
+  other: true,
+  title: "Select Transformation Level",
 });
 let dc = "none";
 if (chosenTransformationLevel === "minor") {
@@ -35,11 +35,11 @@ for (let i = 0; i < data.rollConfig.chatData.rolls.length; i++) {
   if (r.context?.diceClass === "feat") {
     if (typeof dc === "number") {
       const newRoll = new game.teriock.Roll(`${dc}`, {}, {
-        flavor: transformationLevels[chosenTransformationLevel] + " DC",
         context: {
           diceClass: "feat",
           totalClass: "feat",
         },
+        flavor: transformationLevels[chosenTransformationLevel] + " DC",
       });
       await newRoll.evaluate();
       data.rollConfig.chatData.rolls[i] = newRoll;

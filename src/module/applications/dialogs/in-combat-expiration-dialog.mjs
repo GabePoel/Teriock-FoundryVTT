@@ -1,7 +1,7 @@
 import { TeriockRoll } from "../../dice/_module.mjs";
 import { TeriockDialog } from "../api/_module.mjs";
 
-const { TextEditor } = foundry.applications.ux;
+const TextEditor = foundry.applications.ux.TextEditor.implementation;
 
 /**
  * Dialog that asks the {@link TeriockUser} if their effect should expire.

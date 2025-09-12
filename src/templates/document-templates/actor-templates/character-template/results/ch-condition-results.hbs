@@ -3,11 +3,11 @@
     system.sheet.display.consequence.gapless}}gapless{{/if}}">
     {{#each conditions as |condition|}}
       {{tcard
-        img=(path ../TERIOCK.content.conditionsData condition "img")
-        title=(path ../TERIOCK.content.conditionsData condition "name")
+        img=(path ../TERIOCK.data.conditions condition "img")
+        title=(path ../TERIOCK.data.conditions condition "name")
         subtitle=""
         text=(dotJoinArray (lookup ../conditionProviders condition))
-        id=(ternary (includes ../removableConditions condition) (path ../TERIOCK.content.conditionsData condition "_id") condition)
+        id=(ternary (includes ../removableConditions condition) (path ../TERIOCK.data.conditions condition "_id") condition)
         action=(ternary (includes ../removableConditions condition) "rollDoc" "")
         tooltip=(ternary (includes ../removableConditions condition) "Roll to Remove" "")
         icons=(concat

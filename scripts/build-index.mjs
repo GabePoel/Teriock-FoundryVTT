@@ -243,12 +243,13 @@ const createCustomData = async () => {
       .map((s) => s.trim())
       .filter(Boolean) || [];
     obj[key] = {
-      description: cleanHtml,
-      name: value,
-      img: getIcon("conditions", value),
       _id: (key + "000000000000000").slice(0, 16),
-      type: "condition",
+      description: cleanHtml,
+      id: key,
+      img: getIcon("conditions", value),
+      name: value,
       statuses: statuses,
+      type: "condition",
     };
   }
   await saveObject(obj, relPath("index/data/conditions"));

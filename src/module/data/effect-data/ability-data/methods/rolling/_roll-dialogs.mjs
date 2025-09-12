@@ -1,7 +1,7 @@
 import { TeriockDialog } from "../../../../../applications/api/_module.mjs";
 import { createDialogFieldset } from "../../../../../helpers/html.mjs";
 
-const { TextEditor } = foundry.applications.ux;
+const TextEditor = foundry.applications.ux.TextEditor.implementation;
 
 /**
  * Handles dialogs for variable costs and heightened effects.

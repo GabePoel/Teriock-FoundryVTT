@@ -52,7 +52,7 @@ foundry.helpers.Hooks.once("init", function () {
   };
 
   CONFIG.statusEffects.length = 0;
-  for (const condition of Object.values(TERIOCK.content.conditionsData)) {
+  for (const condition of Object.values(TERIOCK.data.conditions)) {
     CONFIG.statusEffects.push(condition);
   }
   CONFIG.statusEffects.sort((a, b) => {

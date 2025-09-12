@@ -1,7 +1,7 @@
 import { buildMessage } from "./messages-builder/message-builder.mjs";
 import { getIcon } from "./path.mjs";
 
-const { TextEditor } = foundry.applications.ux;
+const TextEditor = foundry.applications.ux.TextEditor.implementation;
 
 /**
  * A helper method for constructing an HTML button based on given parameters.

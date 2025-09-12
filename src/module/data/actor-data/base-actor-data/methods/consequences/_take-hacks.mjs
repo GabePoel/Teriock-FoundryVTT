@@ -1,4 +1,4 @@
-import { hacksData } from "../../../../../constants/content/hacks.mjs";
+import { hacks } from "../../../../../constants/data/_module.mjs";
 
 /**
  * Increases the hack level for a specific body part and applies corresponding effects.
@@ -82,14 +82,14 @@ export async function _takeUnhack(actorData, part) {
  */
 async function updateHackStatus(actorData, newStats) {
   const actor = actorData.parent;
-  const hacks = newStats;
-  for (const part in hacks) {
-    const value = hacks[part].value || 0;
-    const max = hacks[part].max || 2;
+  const hacksStats = newStats;
+  for (const part in hacksStats) {
+    const value = hacksStats[part].value || 0;
+    const max = hacksStats[part].max || 2;
     const hackDataWanted = [];
     const hackDataUnwanted = [];
     for (let i = 1; i <= max; i++) {
-      const hackData = hacksData[part + i];
+      const hackData = hacks[part + i];
       if (value >= i && hackData) {
         hackDataWanted.push(hackData);
       } else if (value < i && hackData) {

@@ -37,6 +37,6 @@ export default async function _embeddedFromCard(sheet, target) {
     }
     return sheet.document?.effects.get(id);
   } else if (type === "conditionLocked") {
-    return TERIOCK.content.conditionsData[id];
+    return TERIOCK.data.conditions[id];
   }
 }

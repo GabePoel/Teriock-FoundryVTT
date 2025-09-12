@@ -1,7 +1,7 @@
 import { systemPath } from "../../helpers/path.mjs";
 import { TeriockDialog } from "../api/_module.mjs";
 
-const { TextEditor } = foundry.applications.ux;
+const TextEditor = foundry.applications.ux.TextEditor.implementation;
 
 /**
  * Dialog to select what type of macro to make.

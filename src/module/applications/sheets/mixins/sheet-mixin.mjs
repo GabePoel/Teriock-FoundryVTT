@@ -7,14 +7,14 @@ import _embeddedFromCard from "./methods/_embedded-from-card.mjs";
 import _setupEventListeners from "./methods/_setup-handlers.mjs";
 
 const {
-  DragDrop,
-  TextEditor,
   ContextMenu,
+  DragDrop,
 } = foundry.applications.ux;
 const {
   DocumentSheetV2,
   HandlebarsApplicationMixin,
 } = foundry.applications.api;
+const TextEditor = foundry.applications.ux.TextEditor.implementation;
 
 /**
  * Base sheet mixin for Teriock system applications.
@@ -31,49 +31,49 @@ export default (Base) => {
      * @type {object}
      */
     static DEFAULT_OPTIONS = {
+      actions: {
+        changeImpactTab: this._changeImpactTab,
+        chatDoc: this._chatDoc,
+        chatThis: this._chatThis,
+        createAbility: this._createAbility,
+        createBaseEffect: this._createBaseEffect,
+        createFluency: this._createFluency,
+        createProperty: this._createProperty,
+        createResource: this._createResource,
+        debug: this._debug,
+        editImage: this._editImage,
+        openDoc: this._openDoc,
+        quickToggle: this._quickToggle,
+        reloadThis: this._reloadThis,
+        rollDoc: this._rollDoc,
+        rollThis: this._rollThis,
+        sheetToggle: this._sheetToggle,
+        toggleDisabledDoc: this._toggleDisabledDoc,
+        toggleImpacts: this._toggleImpacts,
+        toggleLockThis: this._toggleLockThis,
+        useOneDoc: this._useOneDoc,
+        wikiOpenThis: this._wikiOpenThis,
+        wikiPullThis: this._wikiPullThis,
+      },
       classes: [
         "teriock",
         "ability",
       ],
-      actions: {
-        toggleImpacts: this._toggleImpacts,
-        changeImpactTab: this._changeImpactTab,
-        debug: this._debug,
-        editImage: this._editImage,
-        openDoc: this._openDoc,
-        rollDoc: this._rollDoc,
-        chatDoc: this._chatDoc,
-        chatThis: this._chatThis,
-        rollThis: this._rollThis,
-        reloadThis: this._reloadThis,
-        toggleLockThis: this._toggleLockThis,
-        wikiPullThis: this._wikiPullThis,
-        wikiOpenThis: this._wikiOpenThis,
-        toggleDisabledDoc: this._toggleDisabledDoc,
-        quickToggle: this._quickToggle,
-        sheetToggle: this._sheetToggle,
-        useOneDoc: this._useOneDoc,
-        createAbility: this._createAbility,
-        createResource: this._createResource,
-        createProperty: this._createProperty,
-        createFluency: this._createFluency,
-        createBaseEffect: this._createBaseEffect,
-      },
-      form: {
-        submitOnChange: true,
-        closeOnSubmit: false,
-      },
-      window: { resizable: true },
-      position: {
-        width: 560,
-        height: 600,
-      },
       dragDrop: [
         {
           dragSelector: ".draggable",
           dropSelector: null,
         },
       ],
+      form: {
+        closeOnSubmit: false,
+        submitOnChange: true,
+      },
+      position: {
+        height: 600,
+        width: 560,
+      },
+      window: { resizable: true },
     };
     /**
      * Template parts configuration.
@@ -719,15 +719,15 @@ export default (Base) => {
 
         if (embedded?.type === "condition") {
           const messageParts = {
-            image: embedded?.img,
-            name: embedded?.name,
             bars: [],
             blocks: [
               {
+                text: embedded?.description,
                 title: "Description",
-                text: embedded?.system.description,
               },
             ],
+            image: embedded?.img,
+            name: embedded?.name,
           };
 
           const uuidPromises = [];
@@ -742,8 +742,8 @@ export default (Base) => {
                 });
                 lightedToText += "</ul>";
                 messageParts.blocks.push({
-                  title: "Lighted to",
                   text: lightedToText,
+                  title: "Lighted to",
                 });
               }));
           }
@@ -758,8 +758,8 @@ export default (Base) => {
                 });
                 goadedToText += "</ul>";
                 messageParts.blocks.push({
-                  title: "Goaded to",
                   text: goadedToText,
+                  title: "Goaded to",
                 });
               }));
           }
@@ -795,24 +795,24 @@ export default (Base) => {
     async _prepareContext() {
       return {
         TERIOCK: TERIOCK,
+        document: this.document,
         editable: this.editable,
+        enriched: {},
+        fields: this.document.schema.fields,
+        flags: this.document.flags,
+        id: this.document.id,
+        img: this.document.img,
+        impactTab: this._impactTab,
         isEditable: this.isEditable,
         isGm: game.user.isGM,
-        document: this.document,
         limited: this.document.limited,
+        name: this.document.name,
         owner: this.document.isOwner,
-        fields: this.document.schema.fields,
+        settings: this.settings,
         system: this.document.system,
         systemFields: this.document.system.schema.fields,
-        impactTab: this._impactTab,
-        name: this.document.name,
         tab: this._tab,
-        img: this.document.img,
-        flags: this.document.flags,
         uuid: this.document.uuid,
-        id: this.document.id,
-        settings: this.settings,
-        enriched: {},
       };
     }
 
