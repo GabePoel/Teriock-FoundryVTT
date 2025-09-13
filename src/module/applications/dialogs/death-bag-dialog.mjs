@@ -75,13 +75,16 @@ async function deathBagPull(pullFormula, stonesFormulas, actor) {
   const pulledStones = {};
   /** @type {Teriock.Parameters.Actor.DeathBagStoneColor[]} */
   const bag = [];
+  const wrappers = [];
   for (const [ color, formula ] of Object.entries(stonesFormulas)) {
     startingStones[color] = await evaluateAsync(formula, rollData);
     pulledStones[color] = 0;
+    wrappers.push(`${startingStones[color]} ${TERIOCK.index.deathBag[color]}`);
     for (let i = 0; i < startingStones[color]; i++) {
       bag.push(color);
     }
   }
+  wrappers.push(`${bag.length} total`);
   if (bag.length < toPullCount) {
     foundry.ui.notifications.error(`Bag has ${bag.length} stones. Cannot pull ${toPullCount} stones from it.`);
   } else {
@@ -104,6 +107,22 @@ async function deathBagPull(pullFormula, stonesFormulas, actor) {
     const messageParts = {
       image: getIcon("conditions", "Dead"),
       name: "Death Bag",
+      bars: [
+        {
+          label: "Initial Stones in Bag",
+          icon: "fa-sack",
+          wrappers: wrappers,
+        },
+      ],
+      blocks: [
+        {
+          title: "Description",
+          text: "You are surrounded by darkness, but aren't alone. Something is reaching out to you. Something?"
+            + " Several things? It's not clear. You reach back, grasp something, and start to pull. It pulls you as"
+            + " well.",
+          italic: true,
+        },
+      ],
     };
     const contentStart = buildMessage(messageParts);
     let content = contentStart.outerHTML;
@@ -114,7 +133,7 @@ async function deathBagPull(pullFormula, stonesFormulas, actor) {
       speaker: TeriockChatMessage.getSpeaker({ actor: actor }),
       system: {
         extraContent: content,
-        tags: [`Pulled ${toPullCount} Stones`]
+        tags: [ `Pulled ${toPullCount} Stones` ],
       },
     };
     await TeriockChatMessage.create(chatMessageData);
