@@ -1,8 +1,8 @@
 import { access, copyFile, lstat, mkdir, readFile, rm, symlink } from "fs/promises";
 import { basename, dirname, extname, join, relative, resolve } from "path";
 import { argv, cwd, exit, platform } from "process";
+import { toKebabCase } from "../../src/module/helpers/string.mjs";
 
-/* ---------------- CLI options ---------------- */
 const args = argv.slice(2);
 const opts = {
   assignments: "assignments.json",
@@ -23,7 +23,10 @@ for (let i = 0; i < args.length; i++) {
   }
 }
 
-/* ---------------- Helpers ---------------- */
+const SKIP_DIRS = [
+  "death-bag-stones",
+];
+
 const isWindows = platform === "win32";
 const fileExists = async (p) => {
   try {
@@ -49,15 +52,6 @@ const normalizePath = (p) => {
     .replace(/^\/+/, "")
     .replace(/\/{2,}/g, "/");
 };
-
-const kebabCase = (s) => (s ?? "")
-  .normalize("NFKD")
-  .replace(/[\u0300-\u036f]/g, "")
-  .toLowerCase()
-  .replace(/&/g, " and ")
-  .replace(/[^a-z0-9]+/g, "-")
-  .replace(/^-+|-+$/g, "")
-  .replace(/--+/g, "-") || "unnamed";
 
 const uniqueName = (base, ext, usedSet) => {
   let name = base + ext;
@@ -219,7 +213,7 @@ const keyOf = (cat, name) => `${cat}||${name}`;
 
     const [ rCat, rName ] = rKey.split("||");
     const ext = rootExt.get(rKey) || "";
-    const base = kebabCase(rName);
+    const base = toKebabCase(rName);
     const used = usedNamesByCat.get(rCat);
     const name = uniqueName(base, ext, used);
     destNameForRoot.set(rKey, name);
@@ -238,21 +232,29 @@ const keyOf = (cat, name) => `${cat}||${name}`;
     const outDir = resolve(opts.out, rCat);
     const destAbs = resolve(outDir, outName);
 
-    if (!(await fileExists(srcAbs))) {
-      console.warn(`Missing file for "${rCat}:${rName}": ${srcRel}`);
-      continue;
+    let toSkip = false;
+    for (const d of SKIP_DIRS) {
+      if (outDir.includes(d)) {
+        toSkip = true;
+      }
     }
-    if (opts.dryRun) {
-      console.log(`[dry] COPY ${srcRel} -> ${join(rCat, outName)}`);
-    } else {
-      await copyFile(srcAbs, destAbs);
-      console.log(`COPY ${srcRel} -> ${join(rCat, outName)}`);
+    if (!toSkip) {
+      if (!(await fileExists(srcAbs))) {
+        console.warn(`Missing file for "${rCat}:${rName}": ${srcRel}`);
+        continue;
+      }
+      if (opts.dryRun) {
+        console.log(`[dry] COPY ${srcRel} -> ${join(rCat, outName)}`);
+      } else {
+        await copyFile(srcAbs, destAbs);
+        console.log(`COPY ${srcRel} -> ${join(rCat, outName)}`);
+      }
     }
   }
 
   // For every item:
   // - If direct: already copied as a root (or allocate now if somehow missing)
-  // - If link : create a symlink in the ITEM's category pointing to the ROOT's copied file
+  // - If link: create a symlink in the ITEM's category pointing to the ROOT's copied file
   for (const {
     category: cat,
     name
@@ -260,7 +262,7 @@ const keyOf = (cat, name) => `${cat}||${name}`;
     const v = categories[cat][name];
     const rKey = rootOf.get(keyOf(cat, name));
 
-    // New: skip items that resolve to a Foundry icon
+    // Skip items that resolve to a Foundry icon
     if (rKey && foundryRoots.has(rKey)) {
       console.warn(`Skipping "${cat}:${name}" as it links to a Foundry icon.`);
       continue;
@@ -271,20 +273,29 @@ const keyOf = (cat, name) => `${cat}||${name}`;
       if (!rKey || !destNameForRoot.get(rKey)) {
         const srcRel = normalizePath(v);
         const ext = extname(srcRel) || ".png";
-        const base = kebabCase(name);
+        const base = toKebabCase(name);
         const used = usedNamesByCat.get(cat);
         const outName = uniqueName(base, ext, used);
         const outDir = resolve(opts.out, cat);
+        console.log(srcRel, ext, base, used, outName, outDir);
 
-        if (opts.dryRun) {
-          console.log(`[dry] COPY ${srcRel} -> ${join(cat, outName)} (late)`);
-        } else {
-          const srcAbs = resolve(opts.imagesRoot, srcRel);
-          if (!(await fileExists(srcAbs))) {
-            console.warn(`Missing file for "${cat}:${name}": ${srcRel}`);
+        let toSkip = false;
+        for (const d of SKIP_DIRS) {
+          if (outDir.includes(d)) {
+            toSkip = true;
+          }
+        }
+        if (!toSkip) {
+          if (opts.dryRun) {
+            console.log(`[dry] COPY ${srcRel} -> ${join(cat, outName)} (late)`);
           } else {
-            await copyFile(srcAbs, resolve(outDir, outName));
-            console.log(`COPY ${srcRel} -> ${join(cat, outName)} (late)`);
+            const srcAbs = resolve(opts.imagesRoot, srcRel);
+            if (!(await fileExists(srcAbs))) {
+              console.warn(`Missing file for "${cat}:${name}": ${srcRel}`);
+            } else {
+              await copyFile(srcAbs, resolve(outDir, outName));
+              console.log(`COPY ${srcRel} -> ${join(cat, outName)} (late)`);
+            }
           }
         }
       }
@@ -306,7 +317,7 @@ const keyOf = (cat, name) => `${cat}||${name}`;
 
       // The linked item's filename lives in ITS OWN category, with same ext as root file
       const ext = extname(rootOutName) || "";
-      const base = kebabCase(name);
+      const base = toKebabCase(name);
       const used = usedNamesByCat.get(cat);
       const linkName = uniqueName(base, ext, used);
 
@@ -324,9 +335,7 @@ const keyOf = (cat, name) => `${cat}||${name}`;
           await symlink(targetRel, linkPath, type);
           const st = await lstat(linkPath);
           if (!st.isSymbolicLink()) {
-            throw Object.assign(new Error("Created output is not a symlink"), {
-              code: "NOSYMLINK",
-            });
+            console.error("Created output is not a symlink.");
           }
           console.log(`SYMLINK ${join(cat, linkName)} -> ${targetRel}`);
         } catch (err) {
@@ -340,7 +349,7 @@ const keyOf = (cat, name) => `${cat}||${name}`;
             await copyFile(rootPath, linkPath);
             console.warn(`Symlink failed (${err.code}). Fallback COPY -> ${join(cat, linkName)}`);
           } else {
-            throw err; // POSIX: fail loudly to avoid accidental duplicates
+            throw err;
           }
         }
       }
