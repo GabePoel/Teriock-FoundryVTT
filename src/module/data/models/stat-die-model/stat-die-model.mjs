@@ -85,6 +85,14 @@ export default class StatDieModel extends DataModel {
   }
 
   /**
+   * Formula representing rolling this die.
+   * @returns {string}
+   */
+  get formula() {
+    return `1${this.polyhedral}`;
+  }
+
+  /**
    * Render a die box HTML element. Creates a clickable die icon that shows whether the die has been used or not.
    */
   get rendered() {

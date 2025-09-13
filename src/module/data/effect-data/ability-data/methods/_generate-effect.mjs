@@ -122,7 +122,10 @@ export async function _generateEffect(rollConfig, crit = false) {
       sourceDescription: description,
       expirations: {
         combat: combatExpirations,
-        conditions: abilityData.duration.conditions,
+        conditions: {
+          absent: Array.from(abilityData.duration.conditions.absent),
+          present: Array.from(abilityData.duration.conditions.present),
+        },
         movement: abilityData.duration.stationary,
         dawn: abilityData.duration.unit === "untilDawn",
         sustained: abilityData.sustained,

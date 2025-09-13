@@ -17,16 +17,7 @@ export class RollRollableTakeHandler extends ActionHandler {
    * @property {string} formula - Roll formula
    */
   async _makeRoll(formula) {
-    let flavor = ROLL_TYPES[this.dataset.type].label;
-    for (const s of [
-      "Apply",
-      "Set",
-      "Gain",
-      "Pay",
-    ]) {
-      flavor = flavor.replace(s, "").trim();
-    }
-    flavor = flavor + " Roll";
+    const flavor = this._makeFlavor();
     const roll = new TeriockRoll(formula, {}, {
       flavor: flavor,
     });
@@ -79,6 +70,24 @@ export class RollRollableTakeHandler extends ActionHandler {
     await TeriockChatMessage.create(messageData);
   }
 
+  /**
+   * @returns {string}
+   * @private
+   */
+  _makeFlavor() {
+    let flavor = ROLL_TYPES[this.dataset.type].label;
+    for (const s of [
+      "Apply",
+      "Set",
+      "Gain",
+      "Pay",
+    ]) {
+      flavor = flavor.replace(s, "").trim();
+    }
+    flavor = flavor + " Roll";
+    return flavor;
+  }
+
   /** @inheritDoc */
   async primaryAction() {
     await this._makeRoll(this.dataset.formula);
@@ -86,7 +95,9 @@ export class RollRollableTakeHandler extends ActionHandler {
 
   /** @inheritDoc */
   async secondaryAction() {
-    const formula = await boostDialog(this.dataset.formula);
+    const formula = await boostDialog(this.dataset.formula, {
+      label: "Make " + this._makeFlavor(),
+    });
     await this._makeRoll(formula);
   }
 }

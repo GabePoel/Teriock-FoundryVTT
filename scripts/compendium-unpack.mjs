@@ -1,6 +1,7 @@
 import { extractPack } from "@foundryvtt/foundryvtt-cli";
 import { promises as fs } from "fs";
 import path from "path";
+import { dieOptions } from "../src/module/constants/options/die-options.mjs";
 import { toKebabCase } from "../src/module/helpers/string.mjs";
 
 const MODULE_ID = process.cwd();
@@ -139,6 +140,17 @@ function cleanEntry(doc) {
     }
     if (doc.type === "wrapper") {
       delete doc.system;
+    }
+    if (doc.type === "rank") {
+      for (const stat of Object.keys(dieOptions.stats)) {
+        const statDice = doc.system[`${stat}Dice`];
+        if (statDice) {
+          for (const [ id, die ] of Object.entries(statDice)) {
+            die._id = id;
+            die.stat = stat;
+          }
+        }
+      }
     }
   }
   if (doc.ownership) {

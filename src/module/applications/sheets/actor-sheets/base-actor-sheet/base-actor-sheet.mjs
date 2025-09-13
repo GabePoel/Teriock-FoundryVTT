@@ -1,6 +1,7 @@
 import { documentOptions } from "../../../../constants/options/document-options.mjs";
 import { tradecraftMessage } from "../../../../helpers/html.mjs";
 import { buildMessage } from "../../../../helpers/messages-builder/message-builder.mjs";
+import { HackStatMixin } from "../../../shared/mixins/_module.mjs";
 import { SheetMixin } from "../../mixins/_module.mjs";
 import _embeddedFromCard from "../../mixins/methods/_embedded-from-card.mjs";
 import {
@@ -20,12 +21,11 @@ const TextEditor = foundry.applications.ux.TextEditor.implementation;
  * Base actor sheet for actorsUuids.
  * Provides comprehensive character management including abilities, equipment, tradecrafts,
  * and various interactive features like rolling, damage tracking, and condition management.
- *
  * @extends {ActorSheetV2}
  * @property {TeriockActor} actor
  * @property {TeriockActor} document
  */
-export default class TeriockBaseActorSheet extends SheetMixin(ActorSheetV2) {
+export default class TeriockBaseActorSheet extends HackStatMixin(SheetMixin(ActorSheetV2)) {
   /** @inheritDoc */
   static DEFAULT_OPTIONS = {
     classes: [
@@ -362,22 +362,6 @@ export default class TeriockBaseActorSheet extends SheetMixin(ActorSheetV2) {
   }
 
   /**
-   * Rolls a stat die.
-   * @param {MouseEvent} _event - The event object.
-   * @param {HTMLElement} target - The target element.
-   * @returns {Promise<void>} Promise that resolves when hit die is rolled.
-   * @static
-   */
-  static async _rollStatDie(_event, target) {
-    const id = target.dataset.id;
-    const parentId = target.dataset.parentId;
-    const stat = target.dataset.stat;
-    await this.document.items
-      .get(parentId)
-      ["system"][`${stat}Dice`][id].rollStatDie();
-  }
-
-  /**
    * Rolls a tradecraft check with optional advantage/disadvantage.
    * @param {MouseEvent} event - The event object.
    * @param {HTMLElement} target - The target element.
@@ -440,19 +424,6 @@ export default class TeriockBaseActorSheet extends SheetMixin(ActorSheetV2) {
         },
       },
     });
-  }
-
-  /**
-   * Applies a hack to a specific body part.
-   * @param {MouseEvent} event - The event object.
-   * @param {HTMLElement} target - The target element.
-   * @returns {Promise<void>} Promise that resolves when hack is applied.
-   * @static
-   */
-  static async _takeHack(event, target) {
-    event.stopPropagation();
-    const part = /** @type {Teriock.Parameters.Actor.HackableBodyPart} */ target.dataset.part;
-    await this.actor.takeHack(part);
   }
 
   /**
@@ -764,15 +735,6 @@ export default class TeriockBaseActorSheet extends SheetMixin(ActorSheetV2) {
         });
       });
 
-    this.element.querySelectorAll("[data-action=rollStatDie]").forEach((el) => {
-      el.addEventListener("contextmenu", async (e) => {
-        e.preventDefault();
-        const target = e.currentTarget;
-        await this._unrollStatDie(e, target);
-        e.stopPropagation();
-      });
-    });
-
     this.element.querySelectorAll(".ch-attribute-save-box").forEach((el) => {
       el.addEventListener("contextmenu", async (e) => {
         e.preventDefault();
@@ -989,21 +951,5 @@ export default class TeriockBaseActorSheet extends SheetMixin(ActorSheetV2) {
     }
 
     return context;
-  }
-
-  /**
-   * Unrolls a stat die.
-   * @param {MouseEvent} _event - The event object.
-   * @param {HTMLElement} target - The target element.
-   * @returns {Promise<void>} Promise that resolves when hit die is rolled.
-   * @static
-   */
-  async _unrollStatDie(_event, target) {
-    const id = target.dataset.id;
-    const parentId = target.dataset.parentId;
-    const stat = target.dataset.stat;
-    await this.document.items
-      .get(parentId)
-      ["system"][`${stat}Dice`][id].unrollStatDie();
   }
 }

@@ -1,0 +1,26 @@
+<form class="dialog-form standard-form heal-dialog">
+  <p class="hint">Click on the mana dice you want to spend. You are at {{system.mp.value}} / {{system.mp.max}} MP.</p>
+  <fieldset class="heal-dialog-dice">
+    <legend>Mana Dice</legend>
+    <div class="tgrid g7">
+      {{{system.sheet.dieBox.mpDice}}}
+    </div>
+  </fieldset>
+  {{formGroup
+    forHarmField
+    value=forHarm
+    rootId=uuid
+    name="for-harm"
+  }}
+  {{formGroup
+    consumeStatDiceField
+    value=consumeStatDice
+    rootId=uuid
+    name="consume-dice"
+  }}
+  <footer class="form-footer" style="margin-top:auto;">
+    <button type="submit" data-action="ok" autofocus>
+      <i class="fa-solid fa-check"></i><span>Done</span>
+    </button>
+  </footer>
+</form>

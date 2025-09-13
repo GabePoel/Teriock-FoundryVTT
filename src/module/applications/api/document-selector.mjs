@@ -29,6 +29,7 @@ export default class TeriockDocumentSelector extends HandlebarsApplicationMixin(
       width: 450,
     },
   };
+
   static PARTS = {
     all: {
       template: "systems/teriock/src/templates/dialog-templates/select.hbs",
@@ -36,6 +37,11 @@ export default class TeriockDocumentSelector extends HandlebarsApplicationMixin(
     },
   };
 
+  /**
+   * @param {MouseEvent} event
+   * @returns {Promise<void>}
+   * @private
+   */
   static async _cancel(event) {
     event?.preventDefault();
     // noinspection JSUnresolvedReference
@@ -43,12 +49,15 @@ export default class TeriockDocumentSelector extends HandlebarsApplicationMixin(
     await this.close();
   }
 
+  /**
+   * @param {MouseEvent} event
+   * @returns {Promise<void>}
+   * @private
+   */
   static async _getSelected(event) {
     event?.preventDefault();
-
     const root = this.element;
     let ids = [];
-
     if (this.multi) {
       ids = Array.from(root.querySelectorAll("input[type=\"checkbox\"]:checked")).map((el) => el.name);
     } else {
@@ -57,7 +66,6 @@ export default class TeriockDocumentSelector extends HandlebarsApplicationMixin(
         ids = [ radio.value ];
       }
     }
-
     // noinspection JSUnresolvedReference
     this._finish(ids);
     await this.close();
@@ -86,18 +94,20 @@ export default class TeriockDocumentSelector extends HandlebarsApplicationMixin(
     }
   }
 
+  /**
+   * Initialize the search filter.
+   * @private
+   */
   _initSearchFilter() {
     const root = this.element;
     if (!root) {
       return;
     }
-
     const input = root.querySelector(".search-input");
     const content = root.querySelector(".doc-select");
     if (!input || !content) {
       return;
     }
-
     const searchFilter = new SearchFilter({
       inputSelector: ".search-input",
       contentSelector: ".doc-select",
@@ -110,7 +120,6 @@ export default class TeriockDocumentSelector extends HandlebarsApplicationMixin(
         });
       },
     });
-
     searchFilter.bind(root);
   }
 
@@ -138,6 +147,9 @@ export default class TeriockDocumentSelector extends HandlebarsApplicationMixin(
     return context;
   }
 
+  /**
+   * @returns {Promise<object>}
+   */
   async select() {
     await this.render(true);
     return this._result;

@@ -7,15 +7,20 @@ const { fields } = foundry.data;
  * Dialog that allows for modifying a roll with boosts/deboosts.
  * @param {string} rollFormula
  * @param {object} [options]
- * @param {boolean} [options.crit] Go critical?
+ * @param {boolean} [options.crit] - Go critical?
+ * @param {string} [options.label] - Custom button label
  * @returns {Promise<string>} The roll formula with boost changes applied.
  */
-export default async function boostDialog(rollFormula, options = { crit: false }) {
+export default async function boostDialog(rollFormula, options = {}) {
+  const {
+    crit = false,
+    label = "Make Roll",
+  } = options;
   let formula = rollFormula;
   const formulaField = new fields.StringField({
     initial: rollFormula,
     label: "Roll Formula",
-    hint: "The original formula. Make changes as needed, but do not directly apply boosts or deboots.",
+    hint: "The original formula. Make changes as needed, but do not directly apply boosts or deboosts.",
   });
   const boostsField = new fields.NumberField({
     min: 0,
@@ -31,7 +36,7 @@ export default async function boostDialog(rollFormula, options = { crit: false }
   });
   const critField = new fields.BooleanField({
     label: "Go Critical",
-    initial: options.crit,
+    initial: crit,
     hint: "Double the number of dice rolled. This applies after boosts and deboosts.",
   });
   const contentHtml = document.createElement("div");
@@ -45,7 +50,7 @@ export default async function boostDialog(rollFormula, options = { crit: false }
       modal: true,
       content: contentHtml,
       ok: {
-        label: "Apply",
+        label: label,
         callback: (_event, button) => {
           const updatedFormula = button.form.elements.namedItem("formula").value;
           const boosts = Number(button.form.elements.namedItem("boosts").value);

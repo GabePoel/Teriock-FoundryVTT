@@ -20,7 +20,6 @@ const TextEditor = foundry.applications.ux.TextEditor.implementation;
  * Base sheet mixin for Teriock system applications.
  * Provides common functionality for all Teriock sheets including event handling,
  * drag and drop, context menus, and form management.
- *
  * @param {typeof DocumentSheetV2} Base - The base application class to mix in with.
  * @returns {typeof SheetMixin & Base}
  */

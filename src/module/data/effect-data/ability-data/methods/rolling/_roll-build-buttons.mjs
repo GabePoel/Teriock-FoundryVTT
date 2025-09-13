@@ -61,7 +61,7 @@ export async function _buildButtons(rollConfig) {
     buttons.push(buttonData);
   }
 
-  const effects = /** @type {Set<Teriock.Parameters.Condition.ConditionKey>} */ new Set(abilityData.effects || []);
+  const effects = /** @type {Set<Teriock.Parameters.Ability.EffectTag>} */ new Set(abilityData.effects || []);
 
   // Resistance Button
   if (effects.has("resistance")) {
@@ -99,6 +99,28 @@ export async function _buildButtons(rollConfig) {
       icon: "fas fa-sack",
       dataset: {
         action: "death-bag",
+      },
+    });
+  }
+
+  // Heal Buttons
+  if (effects.has("healing")) {
+    buttons.push({
+      label: "Heal",
+      icon: "fas fa-hand-holding-heart",
+      dataset: {
+        action: "heal",
+      },
+    });
+  }
+
+  // Heal Buttons
+  if (effects.has("revitalization")) {
+    buttons.push({
+      label: "Revitalize",
+      icon: "fas fa-hand-holding-droplet",
+      dataset: {
+        action: "revitalize",
       },
     });
   }
