@@ -49,7 +49,7 @@ export default async function deathBagDialog(actor) {
             ]) {
               stonesFormulas[color] = button.form.elements.namedItem(color).value;
             }
-            await deathBagPull(button.form.elements.namedItem("pull").value, stonesFormulas);
+            await deathBagPull(button.form.elements.namedItem("pull").value, stonesFormulas, actor);
           },
         },
       ],
