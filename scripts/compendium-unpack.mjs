@@ -81,6 +81,9 @@ function cleanEntry(doc) {
     delete doc._stats.compendiumSource;
     delete doc._stats.duplicateSource;
     delete doc._stats.exportSource;
+    if (doc._stats.coreVersion) {
+      doc._stats.coreVersion = doc._stats.coreVersion.split(".")[0];
+    }
     doc._stats.lastModifiedBy = BUILDER_NAME;
   }
   if (doc.system) {
