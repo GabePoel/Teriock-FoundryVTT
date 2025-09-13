@@ -114,6 +114,7 @@ async function deathBagPull(pullFormula, stonesFormulas, actor) {
       speaker: TeriockChatMessage.getSpeaker({ actor: actor }),
       system: {
         extraContent: content,
+        tags: [`Pulled ${toPullCount} Stones`]
       },
     };
     await TeriockChatMessage.create(chatMessageData);

@@ -1,11 +1,11 @@
-<div class="teriock death-bag-pull">
+<div class="teriock death-bag-pull dice-roll">
   {{#each pulledStones as |number color|}}
     <div class="death-bag-stones-container">
       {{#if (gt number 0)}}
         <header class="message-header">
-          <span class="flavor-text">{{path @root/TERIOCK.index.deathBag color}}</span>
+          <span class="flavor-text">{{path @root/TERIOCK.index.deathBag color}} Stones</span>
         </header>
-        <div class="death-bag-stones">
+        <div class="death-bag-stones dice-formula">
           {{#repeat number}}
             <div
               class="death-bag-stone"
@@ -17,6 +17,9 @@
               >
             </div>
           {{/repeat}}
+        </div>
+        <div class="dice-result">
+          <h4 class="dice-total">{{number}}</h4>
         </div>
       {{/if}}
     </div>
