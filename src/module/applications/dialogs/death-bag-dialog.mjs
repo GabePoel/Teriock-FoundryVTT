@@ -68,7 +68,7 @@ async function deathBagPull(pullFormula, stonesFormulas, actor) {
   if (actor) {
     rollData = actor.getRollData();
   }
-  const toPullCount = await evaluateAsync(pullFormula, rollData);
+  const toPullCount = Math.floor(Math.max(await evaluateAsync(pullFormula, rollData), 0));
   /** @type {Record<Teriock.Parameters.Actor.DeathBagStoneColor, number>} */
   const startingStones = {};
   /** @type {Record<Teriock.Parameters.Actor.DeathBagStoneColor, number>} */
@@ -78,7 +78,7 @@ async function deathBagPull(pullFormula, stonesFormulas, actor) {
   let totalStonesCount = 0;
   const wrappers = [];
   for (const [ color, formula ] of Object.entries(stonesFormulas)) {
-    startingStones[color] = await evaluateAsync(formula, rollData);
+    startingStones[color] = Math.floor(Math.max(await evaluateAsync(formula, rollData), 0));
     totalStonesCount += startingStones[color];
     pulledStones[color] = 0;
     wrappers.push(`${startingStones[color]} ${TERIOCK.index.deathBag[color]}`);
