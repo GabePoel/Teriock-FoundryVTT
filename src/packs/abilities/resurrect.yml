@@ -188,18 +188,23 @@ effects:
       sustained: false
       range: '5'
       overview:
-        base: ''
+        base: >-
+          If target is @L[Condition:Dead]{dead}, they are brought back to life
+          with 1 @L[Core:HP]{HP}. If target is @L[Category:Undead
+          creatures]{undead}, you can choose to have them be
+          @L[Core:Healing]{healed} for @L[Core:Damage]{damage}. Resurrect does
+          not count as a @L[Category:Healing effects]{healing effect} unless you
+          choose to @L[Core:Healing]{heal} with it.
         proficient: >-
-          If target is undead, they are @L[Core:Healing]{healed} for Damage
+          If target is @L[Category:Undead creatures]{undead}, they are
+          @L[Core:Healing]{healed} for @L[Core:Damage]{damage}
           @L[Core:Proficiency Bonus]{P} times.
         fluent: >-
-          If target is undead, they are @L[Core:Healing]{healed} for Damage
-          @L[Core:Fluency Bonus]{F} times.
+          If target is @L[Category:Undead creatures]{undead}, they are
+          @L[Core:Healing]{healed} for @L[Core:Damage]{damage} @L[Core:Fluency
+          Bonus]{F} times.
       results:
-        hit: >-
-          If target is @L[Condition:Dead]{dead}, they are brought back to life
-          with 1 hit point. If target is undead, you can choose to have them be
-          @L[Core:Healing]{healed} for Damage.
+        hit: ''
         critHit: ''
         miss: ''
         critMiss: ''
@@ -249,13 +254,15 @@ effects:
       heightened: >-
         For each additional @L[Core:MP]{MP} spent, target can have been
         @L[Condition:Dead]{dead} for an additional 24 hours. If target is
-        undead, they are @L[Core:Healing]{healed} an additional time.
+        @L[Category:Undead creatures]{undead}, they are @L[Core:Healing]{healed}
+        an additional time.
       endCondition: ''
       requirements: >-
-        Target is undead or has @L[Condition:Dead]{died} within the last 24
-        hours.
+        Target is @L[Category:Undead creatures]{undead} or has
+        @L[Condition:Dead]{died} within the last 24 hours.
       effects:
         - revival
+        - healing
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
@@ -285,7 +292,7 @@ effects:
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.1.0
+      systemVersion: 0.9.0
       lastModifiedBy: teriockBuilder00
     _key: '!items.effects!bfp5m5K3bUnLwhob.DuPrz66O8MibMz5a'
 folder: null

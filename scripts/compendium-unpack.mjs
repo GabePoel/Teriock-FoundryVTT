@@ -166,6 +166,12 @@ function cleanEntry(doc) {
  */
 function transformEntry(doc) {
   cleanEntry(doc);
+  if (doc.pages) {
+    doc.pages.forEach((d) => cleanEntry(d));
+  }
+  if (doc.results) {
+    doc.results.forEach((d) => cleanEntry(d));
+  }
   if (doc.effects) {
     doc.effects.forEach((d) => cleanEntry(d));
   }

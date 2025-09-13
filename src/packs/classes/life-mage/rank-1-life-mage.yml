@@ -32,10 +32,14 @@ system:
     E4TZW3dgg3AXR82o:
       faces: 8
       value: 5
+      _id: E4TZW3dgg3AXR82o
+      stat: hp
   mpDice:
     s2866jVjnsoip9cu:
       faces: 12
       value: 7
+      _id: s2866jVjnsoip9cu
+      stat: mp
 _id: n0xZUhC0shcXMbAy
 img: systems/teriock/src/icons/ranks/rank-1-life-mage.webp
 effects:
@@ -785,18 +789,23 @@ effects:
       sustained: false
       range: '5'
       overview:
-        base: ''
+        base: >-
+          If target is @L[Condition:Dead]{dead}, they are brought back to life
+          with 1 @L[Core:HP]{HP}. If target is @L[Category:Undead
+          creatures]{undead}, you can choose to have them be
+          @L[Core:Healing]{healed} for @L[Core:Damage]{damage}. Resurrect does
+          not count as a @L[Category:Healing effects]{healing effect} unless you
+          choose to @L[Core:Healing]{heal} with it.
         proficient: >-
-          If target is undead, they are @L[Core:Healing]{healed} for Damage
+          If target is @L[Category:Undead creatures]{undead}, they are
+          @L[Core:Healing]{healed} for @L[Core:Damage]{damage}
           @L[Core:Proficiency Bonus]{P} times.
         fluent: >-
-          If target is undead, they are @L[Core:Healing]{healed} for Damage
-          @L[Core:Fluency Bonus]{F} times.
+          If target is @L[Category:Undead creatures]{undead}, they are
+          @L[Core:Healing]{healed} for @L[Core:Damage]{damage} @L[Core:Fluency
+          Bonus]{F} times.
       results:
-        hit: >-
-          If target is @L[Condition:Dead]{dead}, they are brought back to life
-          with 1 hit point. If target is undead, you can choose to have them be
-          @L[Core:Healing]{healed} for Damage.
+        hit: ''
         critHit: ''
         miss: ''
         critMiss: ''
@@ -846,13 +855,15 @@ effects:
       heightened: >-
         For each additional @L[Core:MP]{MP} spent, target can have been
         @L[Condition:Dead]{dead} for an additional 24 hours. If target is
-        undead, they are @L[Core:Healing]{healed} an additional time.
+        @L[Category:Undead creatures]{undead}, they are @L[Core:Healing]{healed}
+        an additional time.
       endCondition: ''
       requirements: >-
-        Target is undead or has @L[Condition:Dead]{died} within the last 24
-        hours.
+        Target is @L[Category:Undead creatures]{undead} or has
+        @L[Condition:Dead]{died} within the last 24 hours.
       effects:
         - revival
+        - healing
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
@@ -894,7 +905,8 @@ effects:
     system:
       hierarchy:
         rootUuid: Compendium.teriock.classes.Item.n0xZUhC0shcXMbAy
-        subIds: []
+        subIds:
+          - aAebrqXqK06fC0wX
         supId: null
       applies:
         base:
@@ -1063,20 +1075,20 @@ effects:
       elements:
         - life
       duration:
-        unit: untilDawn
+        unit: noLimit
         quantity: 0
         conditions:
-          present: []
+          present:
+            - down
           absent: []
         stationary: false
-        description: Until Dawn
+        description: Until Dawn While Down
       sustained: false
       range: '10'
       overview:
         base: >-
-          Target gains @L[Ability:Hibernation]{Hibernation}.<div
-          class="note"><b>Note:</b> You can target yourself with Hibernation
-          Shield.</div>
+          Target gains @L[Ability:Hibernation]{Hibernation}. You may target
+          yourself with this as you go @L[Condition:Down]{down}.
         proficient: You may target up to @L[Core:Proficiency Bonus]{P} creatures.
         fluent: You may target up to @L[Core:Fluency Bonus]{F} creatures.
       results:
@@ -1167,6 +1179,281 @@ effects:
       systemVersion: 0.9.0
       lastModifiedBy: teriockBuilder00
     _key: '!items.effects!n0xZUhC0shcXMbAy.6gNSactwSf8SLPjN'
+  - name: Hibernation
+    type: ability
+    system:
+      hierarchy:
+        supId: 6gNSactwSf8SLPjN
+        rootUuid: Compendium.teriock.classes.Item.n0xZUhC0shcXMbAy
+        subIds: []
+      applies:
+        base:
+          statuses: []
+          startStatuses: []
+          endStatuses: []
+          rolls: {}
+          hacks: []
+          checks: []
+          duration: 0
+          changes: []
+          common: []
+          expiration:
+            normal:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            crit:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            changeOnCrit: false
+            doesExpire: false
+        proficient:
+          statuses: []
+          startStatuses: []
+          endStatuses: []
+          rolls: {}
+          hacks: []
+          checks: []
+          duration: 0
+          changes: []
+          common: []
+          expiration:
+            normal:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            crit:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            changeOnCrit: false
+            doesExpire: false
+        fluent:
+          statuses: []
+          startStatuses: []
+          endStatuses: []
+          rolls: {}
+          hacks: []
+          checks: []
+          duration: 0
+          changes: []
+          common: []
+          expiration:
+            normal:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            crit:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            changeOnCrit: false
+            doesExpire: false
+        heightened:
+          statuses: []
+          startStatuses: []
+          endStatuses: []
+          rolls: {}
+          hacks: []
+          checks: []
+          duration: 0
+          changes: []
+          common: []
+          expiration:
+            normal:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            crit:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            changeOnCrit: false
+            doesExpire: false
+        macros: {}
+      elderSorcery: false
+      elderSorceryIncant: ''
+      powerSources:
+        - primal
+      interaction: manifest
+      featSaveAttribute: mov
+      maneuver: passive
+      executionTime: passive
+      delivery:
+        base: self
+        parent: null
+        package: null
+      targets:
+        - self
+      elements: []
+      duration:
+        unit: noLimit
+        quantity: 0
+        conditions:
+          present:
+            - down
+          absent: []
+        stationary: false
+        description: While Down
+      sustained: false
+      range: Self.
+      overview:
+        base: All damage is @L[Keyword:Deboosted]{deboosted} against you.
+        proficient: ''
+        fluent: ''
+      results:
+        hit: ''
+        critHit: ''
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      piercing: normal
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+      skill: true
+      spell: false
+      standard: true
+      ritual: false
+      class: ranger
+      rotator: false
+      invoked: false
+      costs:
+        verbal: false
+        somatic: false
+        material: false
+        mp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        hp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        gp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        break: ''
+        materialCost: ''
+      heightened: ''
+      endCondition: ''
+      requirements: ''
+      effects: []
+      expansion: null
+      expansionRange: null
+      expansionSaveAttribute: mov
+      trigger: ''
+      basic: false
+      form: normal
+      limitation: ''
+      improvement: ''
+      prepared: true
+      warded: false
+      secret: false
+      gifted:
+        enabled: false
+        amount: 1
+      consumable: false
+      quantity: 1
+      maxQuantity:
+        raw: ''
+        derived: 0
+    _id: aAebrqXqK06fC0wX
+    img: systems/teriock/src/icons/abilities/hibernation.webp
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+    origin: null
+    transfer: true
+    statuses: []
+    flags: {}
+    _stats:
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.0
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!n0xZUhC0shcXMbAy.aAebrqXqK06fC0wX'
 ownership:
   default: 0
 flags: {}

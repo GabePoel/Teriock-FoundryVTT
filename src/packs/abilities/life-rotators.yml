@@ -2486,19 +2486,23 @@ effects:
       overview:
         base: ''
         proficient: >-
-          If target is undead, they are @L[Core:Healing]{healed} for Damage
+          If target is @L[Category:Undead creatures]{undead}, they are
+          @L[Core:Healing]{healed} for @L[Core:Damage]{damage}
           @L[Core:Proficiency Bonus]{P} times.
         fluent: >-
-          If target is undead, they are @L[Core:Healing]{healed} for Damage
-          @L[Core:Fluency Bonus]{F} times.
+          If target is @L[Category:Undead creatures]{undead}, they are
+          @L[Core:Healing]{healed} for @L[Core:Damage]{damage} @L[Core:Fluency
+          Bonus]{F} times.
       results:
         hit: >-
           If target is @L[Condition:Dead]{dead}, they are brought back to life.
           If they had less than 1 @L[Core:HP]{HP}, they have 1 @L[Core:HP]{HP}.
           If they had less than 1 @L[Core:MP]{MP}, they have 1 @L[Core:MP]{MP}.
           Otherwise, their @L[Core:HP]{HP} and @L[Core:MP]{MP} do not change. If
-          target is undead, you can choose to have them be
-          @L[Core:Healing]{healed} for Damage.
+          target is @L[Category:Undead creatures]{undead}, you can choose to
+          have them be @L[Core:Healing]{healed} for @L[Core:Damage]{damage}.
+          Rebirth does not count as a @L[Category:Healing effects]{healing
+          effect} unless you choose to @L[Core:Healing]{heal} with it.
         critHit: ''
         miss: ''
         critMiss: ''
@@ -2548,13 +2552,15 @@ effects:
       heightened: >-
         For each additional @L[Core:MP]{MP} spent, target can have been
         @L[Condition:Dead]{dead} for an additional 10 minutes. If target is
-        undead, they are @L[Core:Healing]{healed} an additional time.
+        @L[Category:Undead creatures]{undead}, they are @L[Core:Healing]{healed}
+        an additional time.
       endCondition: ''
       requirements: >-
-        Target is undead or has @L[Condition:Dead]{died} within the last 10
-        minutes.
+        Target is @L[Category:Undead creatures]{undead} or has
+        @L[Condition:Dead]{died} within the last 10 minutes.
       effects:
         - revival
+        - healing
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
