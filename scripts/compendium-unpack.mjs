@@ -167,18 +167,18 @@ function cleanEntry(doc) {
 function transformEntry(doc) {
   cleanEntry(doc);
   if (doc.pages) {
-    doc.pages.forEach((d) => cleanEntry(d));
+    doc.pages.forEach((d) => transformEntry(d));
   }
   if (doc.results) {
-    doc.results.forEach((d) => cleanEntry(d));
+    doc.results.forEach((d) => transformEntry(d));
   }
   if (doc.effects) {
-    doc.effects.forEach((d) => cleanEntry(d));
+    doc.effects.forEach((d) => transformEntry(d));
   }
   if (doc.items) {
-    doc.items.forEach((d) => cleanEntry(d));
+    doc.items.forEach((d) => transformEntry(d));
   }
   if (doc.pages) {
-    doc.pages.forEach((d) => cleanEntry(d));
+    doc.pages.forEach((d) => transformEntry(d));
   }
 }
