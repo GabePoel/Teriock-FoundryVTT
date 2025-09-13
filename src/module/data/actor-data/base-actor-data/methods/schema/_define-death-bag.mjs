@@ -39,7 +39,7 @@ export function _defineDeathBag(schema) {
     stones: new fields.SchemaField({
       black: stoneField("black", 3),
       red: stoneField("red", 10),
-      white: stoneField("white", 10),
+      white: stoneField("white", 20),
     }),
   });
   return schema;

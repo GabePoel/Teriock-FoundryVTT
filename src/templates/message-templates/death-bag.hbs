@@ -1,45 +1,24 @@
-<div
-  class="teriock dice-roll"
-  data-action="expandRoll"
->
-  {{#if flavor}}
-    <div class="teriock-flavor-text">{{flavor}}</div>
-  {{/if}}
-  <div
-    class="dice-result"
-    {{#if (exists targetUuid)}}
-    data-uuid="{{targetUuid}}"
-    {{/if}}
-    {{#if (exists targetName)}}
-    data-name="{{targetName}}"
-    {{/if}}
-    data-tooltip-direction="LEFT"
-  >
-    {{#if (or (exists targetImg) (exists targetName))}}
-      <div class="teriock-target-container dice-formula" data-tooltip="Select Target"
-        {{#if (exists noDice)}}style="margin-bottom: 0;" {{/if}} {{#if
-        (exists targetUuid)}}data-uuid="{{targetUuid}}"{{/if}}>
-        {{#if (exists targetImg)}}
-          <div class="teriock-target-img"
-               {{#if (exists targetUuid)}}data-uuid="{{targetUuid}}"{{/if}} data-action="selectTarget">
-            <img src="{{targetImg}}" alt="{{targetName}}">
-          </div>
-        {{/if}}
-        {{#if (exists targetName)}}
-          <h6 class="teriock-target-name">{{targetName}}</h6>
-        {{/if}}
-      </div>
-    {{/if}}
-    {{#if (not (exists noDice))}}
-      <div
-        class="dice-formula teriock-dice-formula {{#if diceClass}}{{diceClass}}{{/if}}"
-        style="word-break: auto-phrase; margin-bottom: 0;"
-        {{#if diceTooltip}}
-        data-tooltip="{{diceTooltip}}"
-        {{/if}}
-      >
-        {{formula}}
-      </div>
-    {{/if}}
-  </div>
+<div class="teriock death-bag-pull">
+  {{#each pulledStones as |number color|}}
+    <div class="death-bag-stones-container">
+      {{#if (gt number 0)}}
+        <header class="message-header">
+          <span class="flavor-text">{{path @root/TERIOCK.index.deathBag color}}</span>
+        </header>
+        <div class="death-bag-stones">
+          {{#repeat number}}
+            <div
+              class="death-bag-stone"
+              data-tooltip="{{path @root/TERIOCK.index.deathBag color}} Stone"
+            >
+              <img
+                src="systems/teriock/src/icons/death-bag-stones/{{color}}.webp"
+                alt="{{path @root/TERIOCK.index.deathBag color}}"
+              >
+            </div>
+          {{/repeat}}
+        </div>
+      {{/if}}
+    </div>
+  {{/each}}
 </div>

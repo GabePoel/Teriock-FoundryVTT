@@ -17,6 +17,7 @@ export { default as coreRules } from "../../../index/names/core-rules.json" with
 export { default as creatures } from "../../../index/names/creatures.json" with { type: "json" };
 export { default as currency } from "../../../index/names/currency.json" with { type: "json" };
 export { default as damageTypes } from "../../../index/names/damage-types.json" with { type: "json" };
+export { default as deathBag } from "../../../index/names/death-bag.json" with { type: "json" };
 export { default as drainTypes } from "../../../index/names/drain-types.json" with { type: "json" };
 export { default as effectTypes } from "../../../index/names/effect-types.json" with { type: "json" };
 export { default as elements } from "../../../index/names/elements.json" with { type: "json" };

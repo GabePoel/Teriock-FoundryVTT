@@ -246,7 +246,6 @@ foundry.helpers.Hooks.once("init", function () {
   // Registering custom dice rolls and functions
   CONFIG.Dice.rolls.length = 0;
   CONFIG.Dice.rolls.push(dice.TeriockRoll);
-  CONFIG.Dice.rolls.push(dice.DeathBag);
 
   // Modifying index fields
   CONFIG.ActiveEffect.IndexFields = [

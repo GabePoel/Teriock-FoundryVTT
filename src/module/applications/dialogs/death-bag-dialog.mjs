@@ -1,5 +1,7 @@
-import { DeathBag } from "../../dice/_module.mjs";
+import { TeriockRoll } from "../../dice/_module.mjs";
 import { TeriockChatMessage } from "../../documents/_module.mjs";
+import { buildMessage } from "../../helpers/messages-builder/message-builder.mjs";
+import { getIcon, systemPath } from "../../helpers/path.mjs";
 import { evaluateAsync } from "../../helpers/utils.mjs";
 import { TeriockDialog } from "../api/_module.mjs";
 
@@ -39,26 +41,81 @@ export default async function deathBagDialog(actor) {
           label: "Make Pull",
           default: true,
           callback: async (_event, button) => {
-            const rollData = actor.getRollData();
-            const pullFormula = button.form.elements.namedItem("pull").value;
-            const blackFormula = button.form.elements.namedItem("black").value;
-            const redFormula = button.form.elements.namedItem("red").value;
-            const whiteFormula = button.form.elements.namedItem("white").value;
-            const pull = await evaluateAsync(pullFormula, rollData);
-            const black = await evaluateAsync(blackFormula, rollData);
-            const red = await evaluateAsync(redFormula, rollData);
-            const white = await evaluateAsync(whiteFormula, rollData);
-            let rollFormula = `pull(${pull}, ${black}[black] + ${red}[red] + ${white}[white])`;
-            const deathBag = new DeathBag(rollFormula, actor.getRollData());
-            await deathBag.evaluate();
-            await deathBag.toMessage({
-              speaker: TeriockChatMessage.getSpeaker({ actor: actor }),
-              flavor: "Death Bag Pull",
-              rollMode: game.settings.get("core", "rollMode"),
-            });
+            const stonesFormulas = {};
+            for (const color of [
+              "black",
+              "red",
+              "white",
+            ]) {
+              stonesFormulas[color] = button.form.elements.namedItem(color).value;
+            }
+            await deathBagPull(button.form.elements.namedItem("pull").value, stonesFormulas);
           },
         },
       ],
     }).render(true);
   } catch {}
+}
+
+/**
+ * Pull from the Death Bag.
+ * @param {string} pullFormula
+ * @param {Record<Teriock.Parameters.Actor.DeathBagStoneColor, string>} stonesFormulas
+ * @param {TeriockActor} [actor]
+ */
+async function deathBagPull(pullFormula, stonesFormulas, actor) {
+  let rollData = {};
+  if (actor) {
+    rollData = actor.getRollData();
+  }
+  const toPullCount = await evaluateAsync(pullFormula, rollData);
+  /** @type {Record<Teriock.Parameters.Actor.DeathBagStoneColor, number>} */
+  const startingStones = {};
+  /** @type {Record<Teriock.Parameters.Actor.DeathBagStoneColor, number>} */
+  const pulledStones = {};
+  /** @type {Teriock.Parameters.Actor.DeathBagStoneColor[]} */
+  const bag = [];
+  for (const [ color, formula ] of Object.entries(stonesFormulas)) {
+    startingStones[color] = await evaluateAsync(formula, rollData);
+    pulledStones[color] = 0;
+    for (let i = 0; i < startingStones[color]; i++) {
+      bag.push(color);
+    }
+  }
+  if (bag.length < toPullCount) {
+    foundry.ui.notifications.error(`Bag has ${bag.length} stones. Cannot pull ${toPullCount} stones from it.`);
+  } else {
+
+    let pulledCount = 0;
+    while (pulledCount < toPullCount) {
+      pulledCount++;
+      const roll = new TeriockRoll(`1d${bag.length}`, {});
+      await roll.evaluate();
+      const pulledIndex = roll.total - 1;
+      const pulledColor = bag.splice(pulledIndex, 1)[0];
+      pulledStones[pulledColor] = pulledStones[pulledColor] + 1;
+    }
+    const context = {
+      TERIOCK: TERIOCK,
+      pulledCount,
+      pulledStones,
+    };
+    /** @type {Teriock.MessageData.MessageParts} */
+    const messageParts = {
+      image: getIcon("conditions", "Dead"),
+      name: "Death Bag",
+    };
+    const contentStart = buildMessage(messageParts);
+    let content = contentStart.outerHTML;
+    const pullContent = await foundry.applications.handlebars.renderTemplate(systemPath(
+      "templates/message-templates/death-bag.hbs"), context);
+    content = content + pullContent;
+    const chatMessageData = {
+      speaker: TeriockChatMessage.getSpeaker({ actor: actor }),
+      system: {
+        extraContent: content,
+      },
+    };
+    await TeriockChatMessage.create(chatMessageData);
+  }
 }
