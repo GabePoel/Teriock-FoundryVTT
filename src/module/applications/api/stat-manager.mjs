@@ -31,14 +31,18 @@ export default class TeriockStatManager extends HackStatMixin(HandlebarsApplicat
    * Creates a new stat manager instance.
    * @param {TeriockActor} actor
    * @param {Teriock.Dialog.StatDialogOptions} [options]
-   * @param {...any} args
+   * @param {applicationOptions} [options]
    */
-  constructor(actor, options, ...args) {
-    super(...args);
+  constructor(actor, options, applicationOptions = {}) {
     const {
       forHarm = false,
       consumeStatDice = true,
+      title = "",
     } = options;
+    if (title.length > 0) {
+      applicationOptions.title = title;
+    }
+    super(applicationOptions);
     this._forHarm = forHarm;
     this._consumeStatDice = consumeStatDice;
     this.actor = actor;
@@ -53,6 +57,15 @@ export default class TeriockStatManager extends HackStatMixin(HandlebarsApplicat
   static async _done(event) {
     event.preventDefault();
     await this.close();
+  }
+
+  /** @inheritDoc */
+  _initializeApplicationOptions(options) {
+    const applicationOptions = super._initializeApplicationOptions(options);
+    if (options.title) {
+      applicationOptions.window.title = options.title;
+    }
+    return applicationOptions;
   }
 
   /** @inheritDoc */
@@ -87,14 +100,18 @@ export default class TeriockStatManager extends HackStatMixin(HandlebarsApplicat
     await super._onRender(context, options);
     /** @type {HTMLInputElement} */
     const forHarmCheckbox = this.element.querySelector("[name='for-harm']");
-    forHarmCheckbox.addEventListener("change", () => {
-      this._forHarm = forHarmCheckbox.checked;
-    });
+    if (forHarmCheckbox) {
+      forHarmCheckbox.addEventListener("change", () => {
+        this._forHarm = forHarmCheckbox.checked;
+      });
+    }
     /** @type {HTMLInputElement} */
     const consumeDiceCheckbox = this.element.querySelector("[name='consume-dice']");
-    consumeDiceCheckbox.addEventListener("change", () => {
-      this._consumeStatDice = consumeDiceCheckbox.checked;
-    });
+    if (consumeDiceCheckbox) {
+      consumeDiceCheckbox.addEventListener("change", () => {
+        this._consumeStatDice = consumeDiceCheckbox.checked;
+      });
+    }
   }
 
   /** @inheritDoc */

@@ -3,7 +3,7 @@ import { TeriockHealManager } from "../api/_module.mjs";
 /**
  * Show a healing dialog.
  * @param {TeriockActor} actor
- * @param {Teriock.Dialog.StatDialogOptions} [options]
+ * @param {Teriock.Dialog.HealDialogOptions} [options]
  * @returns {Promise<void>}
  */
 export default async function healDialog(actor, options = {}) {

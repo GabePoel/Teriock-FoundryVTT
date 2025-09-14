@@ -705,7 +705,8 @@ function extractMacroFromHTML(doc) {
   const macroAssignments = {};
   for (const /** @type {HTMLElement} */ el of elements) {
     if (el instanceof HTMLElement && el.dataset.name) {
-      const macroName = el.dataset.name;
+      let macroName = el.dataset.name;
+      macroName = macroName.replace(" Macro", "");
       const pseudoHook = el.dataset.pseudoHook;
       if (macroName && pseudoHook) {
         try {

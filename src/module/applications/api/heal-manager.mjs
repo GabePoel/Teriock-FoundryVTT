@@ -28,11 +28,15 @@ export default class TeriockHealManager extends TeriockStatManager {
   /**
    * Creates a new healing manager instance.
    * @param {TeriockActor} actor
-   * @param {Teriock.Dialog.StatDialogOptions} [options]
+   * @param {Teriock.Dialog.HealDialogOptions} [options]
    * @param {...any} args
    */
   constructor(actor, options, ...args) {
     super(actor, options, ...args);
+    const {
+      noStatDice = false,
+    } = options;
+    this._noDice = noStatDice;
     this._forHarmField = new fields.BooleanField({
       initial: false,
       label: "For Damage",
@@ -87,5 +91,12 @@ export default class TeriockHealManager extends TeriockStatManager {
         e.stopPropagation();
       });
     });
+  }
+
+  /** @inheritDoc */
+  async _prepareContext(options) {
+    const context = await super._prepareContext(options);
+    context.noDice = this._noDice;
+    return context;
   }
 }

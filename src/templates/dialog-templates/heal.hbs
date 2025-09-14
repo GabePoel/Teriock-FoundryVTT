@@ -1,27 +1,32 @@
 <form class="dialog-form standard-form heal-dialog">
-  <p class="hint">Click on the hacks you want to heal and the hit dice you want to spend. You are at {{system.hp.value}} / {{system.hp.max}} HP.</p>
+  <p class="hint">Click on the hacks you want to heal{{#if (not noDice)}}
+    and the hit dice you want to spend. You are at {{system.hp.value}} / {{system.hp.max}} HP.{{/if}}</p>
   <fieldset class="heal-dialog-hacks">
     <legend>Hacks</legend>
     {{> 'systems/teriock/src/templates/document-templates/actor-templates/character-template/parts/ch-hack-box.hbs' }}
   </fieldset>
-  <fieldset class="heal-dialog-dice">
-    <legend>Hit Dice</legend>
-    <div class="tgrid g7">
-      {{{system.sheet.dieBox.hpDice}}}
-    </div>
-  </fieldset>
-  {{formGroup
-    forHarmField
-    value=forHarm
-    rootId=uuid
-    name="for-harm"
-  }}
-  {{formGroup
-    consumeStatDiceField
-    value=consumeStatDice
-    rootId=uuid
-    name="consume-dice"
-  }}
+  {{#if (not noDice)}}
+    <fieldset class="heal-dialog-dice">
+      <legend>Hit Dice</legend>
+      <div class="tgrid g7">
+        {{{system.sheet.dieBox.hpDice}}}
+      </div>
+    </fieldset>
+  {{/if}}
+  {{#if (not noDice)}}
+    {{formGroup
+      forHarmField
+      value=forHarm
+      rootId=uuid
+      name="for-harm"
+    }}
+    {{formGroup
+      consumeStatDiceField
+      value=consumeStatDice
+      rootId=uuid
+      name="consume-dice"
+    }}
+  {{/if}}
   <footer class="form-footer" style="margin-top:auto;">
     <button type="submit" data-action="ok" autofocus>
       <i class="fa-solid fa-check"></i><span>Done</span>

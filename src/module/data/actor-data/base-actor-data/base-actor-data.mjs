@@ -308,7 +308,7 @@ export default class TeriockBaseActorData extends CommonTypeModel {
 
   /**
    * Heal normally.
-   * @param {Teriock.Dialog.StatDialogOptions} [options]
+   * @param {Teriock.Dialog.HealDialogOptions} [options]
    * @returns {Promise<void>}
    */
   async takeNormalHeal(options = {}) {
