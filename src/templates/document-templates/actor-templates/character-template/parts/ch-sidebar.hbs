@@ -11,47 +11,43 @@
       >
     </div>
     <div class="character-name">
-      <input name="name" type="text" value="{{name}}" class="character-name-text"></input>
+      {{formInput
+        fields.name
+        value=name
+        classes="character-name-text"
+      }}
     </div>
     <div class="character-basics">
       <div class="character-shortbox character-level-box">
-        <input
-          type="number"
-          name="system.lvl"
-          value="{{system.lvl}}"
-          class="character-level-input character-shortbox-value"
-          min="1"
-        >
+        {{formInput
+          systemFields.lvl
+          value=system.lvl
+          classes="character-level-input character-shortbox-value"
+        }}
         <div class="character-level-label character-shortbox-label">LVL</div>
       </div>
       <div class="character-shortbox character-rank-box">
-        <input
-          type="text"
-          name="system.rank"
-          value="{{system.rank}}"
-          class="character-class-input character-shortbox-value"
-          readonly="readonly"
-        >
+        {{numberInput
+          system.rank
+          class="character-fluency-input character-shortbox-value"
+          disabled=true
+        }}
         <div class="character-class-label character-shortbox-label">RANK</div>
       </div>
       <div class="character-shortbox character-proficiency-box">
-        <input
-          type="number"
-          name="system.p"
-          value="{{system.p}}"
-          class="character-proficiency-input character-shortbox-value"
-          readonly="readonly"
-        >
+        {{numberInput
+          system.p
+          class="character-fluency-input character-shortbox-value"
+          disabled=true
+        }}
         <div class="character-level-label character-shortbox-label">PRO</div>
       </div>
       <div class="character-shortbox character-fluency-box">
-        <input
-          type="number"
-          name="system.f"
-          value="{{system.f}}"
+        {{numberInput
+          system.f
           class="character-fluency-input character-shortbox-value"
-          readonly="readonly"
-        >
+          disabled=true
+        }}
         <div class="character-fluency-label character-shortbox-label">FLU</div>
       </div>
     </div>

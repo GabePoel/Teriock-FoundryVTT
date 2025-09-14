@@ -42,6 +42,7 @@ function statField(name, options = {}) {
       initial: 0,
       integer: true,
       label: `Temporary ${name}`,
+      min: 0,
     });
   }
   return new fields.SchemaField(schema);

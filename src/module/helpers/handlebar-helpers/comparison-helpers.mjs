@@ -43,10 +43,6 @@ export default function registerComparisonHelpers() {
     return set.has(item);
   });
 
-  Handlebars.registerHelper("ternary", function (condition, valTrue, valFalse) {
-    return condition ? valTrue : valFalse;
-  });
-
   Handlebars.registerHelper("rgx", function (referenceString, testString) {
     if (!referenceString) {
       return false;

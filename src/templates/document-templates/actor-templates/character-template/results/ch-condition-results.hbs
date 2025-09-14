@@ -7,16 +7,16 @@
         title=(path ../TERIOCK.data.conditions condition "name")
         subtitle=""
         text=(dotJoinArray (lookup ../conditionProviders condition))
-        id=(ternary (includes ../removableConditions condition) (path ../TERIOCK.data.conditions condition "_id") condition)
-        action=(ternary (eq "dead" condition) "deathBagPull" (ternary (includes ../removableConditions condition) "rollDoc" ""))
-        tooltip=(ternary (eq "dead" condition) "Pull from Death Bag" (ternary (includes ../removableConditions condition) "Roll to Remove" ""))
+        id=(ifThen (includes ../removableConditions condition) (path ../TERIOCK.data.conditions condition "_id") condition)
+        action=(ifThen (eq "dead" condition) "deathBagPull" (ifThen (includes ../removableConditions condition) "rollDoc" ""))
+        tooltip=(ifThen (eq "dead" condition) "Pull from Death Bag" (ifThen (includes ../removableConditions condition) "Roll to Remove" ""))
         icons=(concat
-          (ternary (includes ../removableConditions condition)
+          (ifThen (includes ../removableConditions condition)
             (ticon "dice-d4" action="rollDoc" tooltip="Roll to Remove")
             (ticon "lock" tooltip="Locked")
           )
         )
-        type=(ternary (includes ../removableConditions condition) "conditionUnlocked" "conditionLocked")
+        type=(ifThen (includes ../removableConditions condition) "conditionUnlocked" "conditionLocked")
         parentId=../id
         draggable=false
         openable=false

@@ -26,8 +26,4 @@ export default function registerExistenceHelpers() {
     }
     return new Handlebars.SafeString(result);
   });
-
-  Handlebars.registerHelper("dataset", function (options) {
-    return options.hash;
-  });
 }

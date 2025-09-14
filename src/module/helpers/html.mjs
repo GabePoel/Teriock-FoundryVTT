@@ -12,7 +12,7 @@ const TextEditor = foundry.applications.ux.TextEditor.implementation;
 export function buildHTMLButton(config) {
   let {
     label,
-    dataset = {},
+    dataset = /** @type {Record<string, string>} */ {},
     classes = [],
     icon = "",
     type = "button",
@@ -86,6 +86,7 @@ export function createDialogFieldset(legend, description, name, max) {
 export function insertElderSorceryMask(element, ability) {
   const esMask = elderSorceryMask(ability);
   if (esMask) {
+    //noinspection SpellCheckingInspection
     element.insertAdjacentElement("afterbegin", esMask);
   }
   return element;
@@ -252,7 +253,7 @@ export function trimTrailingLinesHTML(html) {
  * @param {string} html
  * @returns {string}
  */
-export function unspanHTML(html) {
+export function removeSpansFromHTML(html) {
   const d = document.createElement("div");
   d.innerHTML = html;
   d.querySelectorAll("span").forEach((s) => s.replaceWith(...s.childNodes));
@@ -265,7 +266,7 @@ export function unspanHTML(html) {
  * @returns {string}
  */
 export function tidyHTML(html) {
-  return trimTrailingLinesHTML(unspanHTML(html));
+  return trimTrailingLinesHTML(removeSpansFromHTML(html));
 }
 
 /**
