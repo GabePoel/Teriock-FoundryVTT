@@ -1,6 +1,6 @@
-name: Skill Share Macro - Pre-execution
+name: Might Strike - Pre-execution
 type: script
-_id: xERvcMl0jyZHu960
+_id: 0nUlKerGkkdmEuVW
 author: teriockBuilder00
 img: icons/svg/dice-target.svg
 scope: global
@@ -12,23 +12,16 @@ command: |-
   );
   const button = data.rollConfig.chatData.system.buttons[0];
   const effectObject = JSON.parse(button.dataset.normal);
-  const validAbilities = actor.abilities
-    .filter((a) => !a.isReference && a.system.standard)
-    .sort((a, b) => a.name.localeCompare(b.name));
-  const ability = await tm.dialogs.selectDocumentDialog(
-    validAbilities,
-    {
-      title: "Select Ability",
-      hint: "Select an ability to share.",
-    },
-  );
-  effectObject.system.hierarchy.rootUuid = ability.system.hierarchy.rootUuid;
-  effectObject.system.hierarchy.subIds = [ability.id];
+  const equipmentClass = await tm.dialogs.selectWeaponClassDialog();
+  effectObject.changes[0] = {
+    key: `system.equipmentChanges.upgrades.classes.${equipmentClass}.damage`,
+    value: "1d4[holy]",
+    mode: 2,
+    priority: 10,
+  };
   const effectString = JSON.stringify(effectObject);
   data.rollConfig.chatData.system.buttons[0].dataset.normal = effectString;
   data.rollConfig.chatData.system.buttons[0].dataset.crit = effectString;
-  data.rollConfig.chatData.system.proficient = false;
-  data.rollConfig.chatData.system.fluent = false;
 folder: null
 ownership:
   default: 0
@@ -38,4 +31,4 @@ _stats:
   systemId: teriock
   systemVersion: 0.1.0
   lastModifiedBy: teriockBuilder00
-_key: '!macros!xERvcMl0jyZHu960'
+_key: '!macros!0nUlKerGkkdmEuVW'

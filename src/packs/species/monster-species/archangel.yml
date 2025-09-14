@@ -3071,7 +3071,8 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
-        macros: {}
+        macros:
+          Compendium_teriock_execution_Macro_vaxmVYJBt9cB84QO: turnStart
       elderSorcery: false
       elderSorceryIncant: ''
       powerSources:
@@ -3102,11 +3103,10 @@ effects:
           At the start of each of your @L[Core:Turns]{turns}, you
           @L[Keyword:Warded]{warded} @L[Core:Revitalizing]{revitalize} and
           regain that many @L[Core:MP]{MP}. This does <i>not</i> consume your
-          @L[Core:MP]{mana die}. If you were @L[Condition:Dead]{dead}, this
-          brings you @L[Condition:Alive]{back to life} with the number of
-          @L[Core:MP]{MP} you rolled and 1 @L[Core:HP]{HP}.  You only
-          @L[Condition:Dead]{die} due to @L[Core:MP]{MP} loss if you start your
-          @L[Core:Turns]{turn} without successfully regenerating
+          @L[Core:MP]{mana die}. If you were @L[Condition:Dead]{dead} due to
+          @L[Core:MP]{MP} loss, this brings you @L[Condition:Alive]{back to
+          life}. You only @L[Condition:Dead]{die} due to @L[Core:MP]{MP} loss if
+          you start your @L[Core:Turns]{turn} without successfully regenerating
           @L[Core:MP]{MP}.
         proficient: ''
         fluent: ''
@@ -3357,7 +3357,8 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
-        macros: {}
+        macros:
+          Compendium_teriock_execution_Macro_5ObHOfAGjqqdVKPH: turnStart
       elderSorcery: false
       elderSorceryIncant: ''
       powerSources:
@@ -3388,11 +3389,12 @@ effects:
           At the start of each of your @L[Core:Turns]{turns}, you
           @L[Keyword:Warded]{warded} @L[Core:Healing]{heal} and regain that many
           @L[Core:HP]{HP}. This does <i>not</i> consume your @L[Core:HP]{hit
-          die}. If you were @L[Condition:Dead]{dead}, this brings you
-          @L[Condition:Alive]{back to life} with the number of @L[Core:HP]{HP}
-          you rolled and 1 @L[Core:MP]{MP}.  You only @L[Condition:Dead]{die}
-          due to @L[Core:HP]{HP} loss if you start your @L[Core:Turns]{turn}
-          without successfully regenerating @L[Core:HP]{HP}.
+          die}. If you were @L[Condition:Dead]{dead} due to @L[Core:MP]{MP}
+          loss, this brings you @L[Condition:Alive]{back to life}. You only
+          @L[Condition:Dead]{die} due to @L[Core:HP]{HP} loss if you start your
+          @L[Core:Turns]{turn} without successfully regenerating
+          @L[Core:HP]{HP}. You may do this <i>even if you are
+          @L[Condition:Burned]{burned}</i>.
         proficient: ''
         fluent: ''
       results:
@@ -4227,19 +4229,23 @@ effects:
       overview:
         base: ''
         proficient: >-
-          If target is undead, they are @L[Core:Healing]{healed} for Damage
+          If target is @L[Category:Undead creatures]{undead}, they are
+          @L[Core:Healing]{healed} for @L[Core:Damage]{damage}
           @L[Core:Proficiency Bonus]{P} times.
         fluent: >-
-          If target is undead, they are @L[Core:Healing]{healed} for Damage
-          @L[Core:Fluency Bonus]{F} times.
+          If target is @L[Category:Undead creatures]{undead}, they are
+          @L[Core:Healing]{healed} for @L[Core:Damage]{damage} @L[Core:Fluency
+          Bonus]{F} times.
       results:
         hit: >-
           If target is @L[Condition:Dead]{dead}, they are brought back to life.
           If they had less than 1 @L[Core:HP]{HP}, they have 1 @L[Core:HP]{HP}.
           If they had less than 1 @L[Core:MP]{MP}, they have 1 @L[Core:MP]{MP}.
           Otherwise, their @L[Core:HP]{HP} and @L[Core:MP]{MP} do not change. If
-          target is undead, you can choose to have them be
-          @L[Core:Healing]{healed} for Damage.
+          target is @L[Category:Undead creatures]{undead}, you can choose to
+          have them be @L[Core:Healing]{healed} for @L[Core:Damage]{damage}.
+          Rebirth does not count as a @L[Category:Healing effects]{healing
+          effect} unless you choose to @L[Core:Healing]{heal} with it.
         critHit: ''
         miss: ''
         critMiss: ''
@@ -4289,13 +4295,15 @@ effects:
       heightened: >-
         For each additional @L[Core:MP]{MP} spent, target can have been
         @L[Condition:Dead]{dead} for an additional 10 minutes. If target is
-        undead, they are @L[Core:Healing]{healed} an additional time.
+        @L[Category:Undead creatures]{undead}, they are @L[Core:Healing]{healed}
+        an additional time.
       endCondition: ''
       requirements: >-
-        Target is undead or has @L[Condition:Dead]{died} within the last 10
-        minutes.
+        Target is @L[Category:Undead creatures]{undead} or has
+        @L[Condition:Dead]{died} within the last 10 minutes.
       effects:
         - revival
+        - healing
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov

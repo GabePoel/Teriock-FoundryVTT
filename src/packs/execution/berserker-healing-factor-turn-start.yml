@@ -1,0 +1,24 @@
+folder: null
+name: Berserker Healing Factor - Turn Start
+type: script
+_id: 7Kae2klQGEeDaA7B
+author: teriockBuilder00
+img: icons/svg/dice-target.svg
+scope: global
+command: >-
+  if (actor.statuses.has("hacked") && !actor.statuses.has("dead") &&
+  !actor.statuses.has("burned")) {
+    await actor.system.takeNormalHeal({
+      noStatDice: true,
+      title: "Berserker Healing Factor",
+    });
+  }
+ownership:
+  default: 0
+flags: {}
+_stats:
+  coreVersion: '13'
+  systemId: teriock
+  systemVersion: 0.9.0
+  lastModifiedBy: teriockBuilder00
+_key: '!macros!7Kae2klQGEeDaA7B'
