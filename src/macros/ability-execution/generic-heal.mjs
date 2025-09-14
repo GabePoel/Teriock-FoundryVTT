@@ -1,0 +1,1 @@
+await actor.system.takeNormalHeal();

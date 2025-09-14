@@ -28,17 +28,16 @@ export default class TeriockHealManager extends TeriockStatManager {
   /**
    * Creates a new healing manager instance.
    * @param {TeriockActor} actor
+   * @param {Teriock.Dialog.StatDialogOptions} [options]
    * @param {...any} args
    */
-  constructor(actor, ...args) {
-    super(actor, ...args);
-    this._forHarm = false;
+  constructor(actor, options, ...args) {
+    super(actor, options, ...args);
     this._forHarmField = new fields.BooleanField({
       initial: false,
       label: "For Damage",
       hint: "Check this is the healing should be done for damage.",
     });
-    this._consumeStatDice = true;
     this._consumeStatDiceField = new fields.BooleanField({
       initial: true,
       label: "Consume Hit Dice",

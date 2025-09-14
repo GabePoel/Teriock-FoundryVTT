@@ -1,6 +1,8 @@
 export const unsortedPseudoHooks = {
   execution: "Ability Execution",
   preExecution: "Ability Pre-execution",
+  turnStart: "Actor Turn Starting",
+  turnEnd: "Actor Turn Ending",
   effectApplication: "Effect Application",
   effectExpiration: "Effect Expiration",
   movement: "Movement",
@@ -37,7 +39,7 @@ export const unsortedPseudoHooks = {
   equipmentUndampen: "Equipment Undampening",
   equipmentGlue: "Equipment Gluing",
   equipmentUnglue: "Equipment Ungluing",
-  postUpdate: "Post-actor Updating",
+  postUpdate: "Actor Post-updating",
   rollImmunity: "Rolling an Immunity Save",
   documentChat: "Document Sharing to Chat",
   documentDuplicate: "Document Duplication",

@@ -108,12 +108,17 @@ export default class TeriockCombat extends Combat {
     for (const actor of this.combatants.map((combatant) => /** @type {TeriockActor} */ combatant.actor)) {
       await this._tryAllEffectExpirations(actor, previousActor, "turn", "end");
     }
-
     const activeGm = /** @type {TeriockUser} */ game.users.activeGM;
     await activeGm.query("teriock.resetAttackPenalties", {
       actorUuids: this.combatants.map((c) => c.actor.uuid),
     });
     this.updateCombatantActors();
+    const previousUser = selectUser(previousActor);
+    await previousUser.query("teriock.callPseudoHook", {
+      uuid: previousActor.uuid,
+      pseudoHook: "turnEnd",
+      data: {},
+    });
 
     // Start of turn
     /** @type {TeriockActor} */
@@ -125,6 +130,12 @@ export default class TeriockCombat extends Combat {
     await activeGm.query("teriock.update", {
       uuid: newActor.uuid,
       data: { "system.hasReaction": true },
+    });
+    const newUser = selectUser(newActor);
+    await newUser.query("teriock.callPseudoHook", {
+      uuid: newActor.uuid,
+      pseudoHook: "turnStart",
+      data: {},
     });
 
     // Finish

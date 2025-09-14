@@ -257,6 +257,7 @@ foundry.helpers.Hooks.once("init", function () {
   // Registering custom queries
   Object.assign(CONFIG.queries, {
     "teriock.addToSustaining": helpers.queries.addToSustainingQuery,
+    "teriock.callPseudoHook": helpers.queries.callPseudoHookQuery,
     "teriock.createHotbarFolder": helpers.queries.createHotbarFolderQuery,
     "teriock.inCombatExpiration": helpers.queries.inCombatExpirationQuery,
     "teriock.resetAttackPenalties": helpers.queries.resetAttackPenalties,

@@ -1,4 +1,4 @@
-import { deathBagDialog } from "../../../applications/dialogs/_module.mjs";
+import { deathBagDialog, healDialog, revitalizeDialog } from "../../../applications/dialogs/_module.mjs";
 import { freeze } from "../../../helpers/utils.mjs";
 import { CommonTypeModel } from "../../models/_module.mjs";
 import { _migrateData } from "./methods/_migrate-data.mjs";
@@ -304,5 +304,23 @@ export default class TeriockBaseActorData extends CommonTypeModel {
    */
   async deathBagPull() {
     await deathBagDialog(this.actor);
+  }
+
+  /**
+   * Heal normally.
+   * @param {Teriock.Dialog.StatDialogOptions} [options]
+   * @returns {Promise<void>}
+   */
+  async takeNormalHeal(options = {}) {
+    await healDialog(this.actor, options);
+  }
+
+  /**
+   * Revitalize normally.
+   * @param {Teriock.Dialog.StatDialogOptions} [options]
+   * @returns {Promise<void>}
+   */
+  async takeNormalRevitalize(options = {}) {
+    await revitalizeDialog(this.actor, options);
   }
 }

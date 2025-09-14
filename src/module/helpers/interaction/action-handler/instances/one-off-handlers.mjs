@@ -1,5 +1,3 @@
-import { healDialog } from "../../../../applications/dialogs/_module.mjs";
-import revitalizeDialog from "../../../../applications/dialogs/revitalize-dialog.mjs";
 import ActionHandler from "../action-handler.mjs";
 
 /**
@@ -41,7 +39,7 @@ export class HealHandler extends ActionHandler {
   /** @inheritDoc */
   async primaryAction() {
     for (const actor of this.actors) {
-      await healDialog(actor);
+      await actor.system.takeNormalHeal();
     }
   }
 }
@@ -56,7 +54,7 @@ export class RevitalizeHandler extends ActionHandler {
   /** @inheritDoc */
   async primaryAction() {
     for (const actor of this.actors) {
-      await revitalizeDialog(actor);
+      await actor.system.takeNormalRevitalize();
     }
   }
 }

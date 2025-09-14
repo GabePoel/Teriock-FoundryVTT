@@ -30,10 +30,17 @@ export default class TeriockStatManager extends HackStatMixin(HandlebarsApplicat
   /**
    * Creates a new stat manager instance.
    * @param {TeriockActor} actor
+   * @param {Teriock.Dialog.StatDialogOptions} [options]
    * @param {...any} args
    */
-  constructor(actor, ...args) {
+  constructor(actor, options, ...args) {
     super(...args);
+    const {
+      forHarm = false,
+      consumeStatDice = true,
+    } = options;
+    this._forHarm = forHarm;
+    this._consumeStatDice = consumeStatDice;
     this.actor = actor;
   }
 

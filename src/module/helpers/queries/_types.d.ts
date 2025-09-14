@@ -12,6 +12,12 @@ declare global {
       sustainedUuids: Teriock.UUID<TeriockConsequence>[];
     };
 
+    export type CallPseudoHook = {
+      uuid: Teriock.UUID<TeriockActor|TeriockItem|TeriockEffect>;
+      pseudoHook: Teriock.Parameters.Actor.PseudoHook;
+      data: object;
+    }
+
     export type SustainedExpiration = {
       sustainedUuid: Teriock.UUID<TeriockConsequence>;
     };
