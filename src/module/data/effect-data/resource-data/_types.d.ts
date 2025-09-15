@@ -1,12 +1,10 @@
-import type TeriockBaseEffectData from "../base-effect-data/base-effect-data.mjs";
+import type TeriockBaseEffectModel from "../base-effect-data/base-effect-data.mjs";
 import type { TeriockResource } from "../../../documents/_documents.mjs";
 
 declare module "./resource-data.mjs" {
-  export default interface TeriockResourceData extends TeriockBaseEffectData {
+  export default interface TeriockResourceModel extends TeriockBaseEffectModel {
     /** Is the resource consumable? */
     consumable: true;
-    /** Function Hook */
-    functionHook: Teriock.Parameters.Resource.FunctionHook;
     /** Max Quantity (if consumable) */
     maxQuantity: {
       /** Raw Max Quantity Value */
@@ -16,8 +14,6 @@ declare module "./resource-data.mjs" {
     };
     /** Quantity (if consumable) */
     quantity: number;
-    /** Roll Formula */
-    rollFormula: string;
 
     get parent(): TeriockResource;
   }

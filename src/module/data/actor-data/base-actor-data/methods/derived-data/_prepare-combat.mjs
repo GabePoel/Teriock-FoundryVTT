@@ -1,7 +1,7 @@
 /**
  * Prepares defensive combat values for the actor.
  * Calculates block value, armor value, armor class, and combined class based on equipped equipment.
- * @param {TeriockBaseActorData} actorData - The actor's base data system object.
+ * @param {TeriockBaseActorModel} actorData - The actor's base data system object.
  * @returns {void} Modifies the system object in place.
  * @private
  */
@@ -40,7 +40,7 @@ export function _prepareDefenses(actorData) {
 /**
  * Prepares offensive combat values for the actor.
  * Validates and sets the primary attacker equipment.
- * @param {TeriockBaseActorData} actorData - The actor's base data system object.
+ * @param {TeriockBaseActorModel} actorData - The actor's base data system object.
  * @returns {void} Modifies the system object in place.
  * @private
  */

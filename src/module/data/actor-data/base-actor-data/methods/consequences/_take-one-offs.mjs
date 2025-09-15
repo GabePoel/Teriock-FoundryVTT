@@ -2,7 +2,7 @@
  * Relevant wiki pages:
  * - [Awaken](https://wiki.teriock.com/index.php/Keyword:Awaken)
  *
- * @param {TeriockBaseActorData} actorData
+ * @param {TeriockBaseActorModel} actorData
  * @returns {Promise<void>}
  */
 export async function _takeAwaken(actorData) {
@@ -25,7 +25,7 @@ export async function _takeAwaken(actorData) {
  * Relevant wiki pages:
  * - [Revival Effects](https://wiki.teriock.com/index.php/Category:Revival_effects)
  *
- * @param {TeriockBaseActorData} actorData
+ * @param {TeriockBaseActorModel} actorData
  * @returns {Promise<void>}
  */
 export async function _takeRevive(actorData) {

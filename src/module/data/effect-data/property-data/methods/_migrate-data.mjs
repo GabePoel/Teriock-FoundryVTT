@@ -1,9 +1,8 @@
 /**
  * Migrates property data to the current schema version.
  * Handles data format conversions for effects, costs, and other property properties.
- *
  * @param {object} data - The property data to migrate.
- * @returns {Partial<TeriockPropertyData>} The migrated property data.
+ * @returns {Partial<TeriockPropertyModel>} The migrated property data.
  * @private
  */
 export function _migrateData(data) {

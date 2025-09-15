@@ -1,7 +1,7 @@
 import { inCombatExpirationDialog } from "../../../applications/dialogs/_module.mjs";
 import { makeIcon, mergeFreeze } from "../../../helpers/utils.mjs";
 import { WikiDataMixin } from "../../mixins/_module.mjs";
-import TeriockBaseEffectData from "../base-effect-data/base-effect-data.mjs";
+import TeriockBaseEffectModel from "../base-effect-data/base-effect-data.mjs";
 import { combatExpirationMethodField } from "../shared/shared-fields.mjs";
 
 const { fields } = foundry.data;
@@ -12,10 +12,10 @@ const { fields } = foundry.data;
  * Relevant wiki pages:
  * - [Conditions](https://wiki.teriock.com/index.php/Category:Conditions)
  *
- * @extends {TeriockBaseEffectData}
+ * @extends {TeriockBaseEffectModel}
  * @mixes WikiDataMixin
  */
-export default class TeriockConditionData extends WikiDataMixin(TeriockBaseEffectData) {
+export default class TeriockConditionModel extends WikiDataMixin(TeriockBaseEffectModel) {
   /**
    * @inheritDoc
    * @type {Readonly<Teriock.Documents.EffectModelMetadata>}

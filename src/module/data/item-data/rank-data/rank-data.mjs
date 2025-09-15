@@ -1,7 +1,7 @@
 import { getRollIcon, makeIcon, mergeFreeze } from "../../../helpers/utils.mjs";
 import { StatDataMixin, WikiDataMixin } from "../../mixins/_module.mjs";
 import { TextField } from "../../shared/fields/_module.mjs";
-import TeriockBaseItemData from "../base-item-data/base-item-data.mjs";
+import TeriockBaseItemModel from "../base-item-data/base-item-data.mjs";
 import { _messageParts } from "./methods/_messages.mjs";
 import { _parse } from "./methods/_parsing.mjs";
 
@@ -13,11 +13,11 @@ const { fields } = foundry.data;
  * Relevant wiki pages:
  * - [Classes](https://wiki.teriock.com/index.php/Category:Classes)
  *
- * @extends {TeriockBaseItemData}
+ * @extends {TeriockBaseItemModel}
  * @mixes StatDataMixin
  * @mixes WikiDataMixin
  */
-export default class TeriockRankData extends StatDataMixin(WikiDataMixin(TeriockBaseItemData)) {
+export default class TeriockRankModel extends StatDataMixin(WikiDataMixin(TeriockBaseItemModel)) {
   /**
    * @inheritDoc
    * @type {Readonly<Teriock.Documents.ItemModelMetadata>}

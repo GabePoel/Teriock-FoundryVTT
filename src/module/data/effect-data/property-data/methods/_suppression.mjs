@@ -1,7 +1,7 @@
 /**
  * Checks if a property should be suppressed based on various conditions.
  * Considers equipment state, attunement, and sup effect modifications.
- * @param {TeriockPropertyData} propertyData - The property data to check for suppression.
+ * @param {TeriockPropertyModel} propertyData - The property data to check for suppression.
  * @returns {boolean} True if the ability should be suppressed, false otherwise.
  * @private
  */

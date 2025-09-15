@@ -1,1 +1,1 @@
-export { default as CharacterData } from "./character-data/character-data.mjs";
+export { default as TeriockCharacterModel } from "./character-data/character-data.mjs";

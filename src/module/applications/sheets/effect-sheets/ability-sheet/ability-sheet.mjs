@@ -1,7 +1,7 @@
 import { documentOptions } from "../../../../constants/options/document-options.mjs";
-import { pseudoHooks } from "../../../../constants/system/pseudo-hooks.mjs";
-import { pureUuid, safeUuid } from "../../../../helpers/utils.mjs";
-import { durationDialog, selectDialog } from "../../../dialogs/_module.mjs";
+import { safeUuid } from "../../../../helpers/utils.mjs";
+import { durationDialog } from "../../../dialogs/_module.mjs";
+import { PassiveSheetMixin } from "../../mixins/_module.mjs";
 import TeriockBaseEffectSheet from "../base-effect-sheet/base-effect-sheet.mjs";
 import { contextMenus } from "./connections/_context-menus.mjs";
 
@@ -10,14 +10,15 @@ import { contextMenus } from "./connections/_context-menus.mjs";
  * Provides comprehensive ability management including consequences, context menus,
  * tag management, and rich text editing for various ability components.
  * @property {TeriockAbility} document
+ * @extends {TeriockBaseEffectSheet}
+ * @mixes PassiveSheetMixin
+ * @mixes CommonSheetMixin
  */
-export default class TeriockAbilitySheet extends TeriockBaseEffectSheet {
+export default class TeriockAbilitySheet extends PassiveSheetMixin(TeriockBaseEffectSheet) {
   /** @inheritDoc */
   static DEFAULT_OPTIONS = {
     classes: [ "ability" ],
     actions: {
-      unlinkMacro: this._unlinkMacro,
-      changeMacroRunHook: this._changeMacroRunHook,
       setDuration: this._setDuration,
     },
     window: {
@@ -43,26 +44,6 @@ export default class TeriockAbilitySheet extends TeriockBaseEffectSheet {
   };
 
   /**
-   * Change the run pseudo-hook for a given macro
-   * @param {Event} _event - The event object.
-   * @param {HTMLElement} target - The target element.
-   * @returns {Promise<void>}
-   * @private
-   */
-  static async _changeMacroRunHook(_event, target) {
-    const uuid = target.dataset.parentId;
-    const pseudoHook = await selectDialog(pseudoHooks, {
-      label: "Event",
-      hint: "Please select an event that triggers this macro to run.",
-      title: "Select Event",
-      initial: this.document.system.applies.macros[safeUuid(uuid)],
-    });
-    const updateData = {};
-    updateData[`system.applies.macros.${safeUuid(uuid)}`] = pseudoHook;
-    await this.document.update(updateData);
-  }
-
-  /**
    * Set the duration for this ability.
    * @returns {Promise<void>}
    * @private
@@ -72,20 +53,6 @@ export default class TeriockAbilitySheet extends TeriockBaseEffectSheet {
       return;
     }
     await durationDialog(this.document);
-  }
-
-  /**
-   * Disconnects the given macro from this ability.
-   * @param {Event} _event - The event object.
-   * @param {HTMLElement} target - The target element.
-   * @returns {Promise<void>}
-   * @private
-   */
-  static async _unlinkMacro(_event, target) {
-    const uuid = target.dataset.parentId;
-    const updateData = {};
-    updateData[`system.applies.macros.-=${safeUuid(uuid)}`] = null;
-    await this.document.update(updateData);
   }
 
   /**
@@ -309,13 +276,7 @@ export default class TeriockAbilitySheet extends TeriockBaseEffectSheet {
     await this.document.update(updateData);
   }
 
-  /**
-   * Handles the render event for the ability sheet.
-   * Sets up context menus, tag management, and button mappings.
-   * @param {object} context - The render context.
-   * @param {object} options - Render options.
-   * @override
-   */
+  /** @inheritDoc */
   async _onRender(context, options) {
     await super._onRender(context, options);
     if (!this.editable) {
@@ -381,17 +342,6 @@ export default class TeriockAbilitySheet extends TeriockBaseEffectSheet {
     context.tab = this._tab;
     context.subAbilities = this.document.subs;
     context.supAbility = this.document.sup;
-    context.macros = [];
-    for (const [ safeUuid, pseudoHook ] of Object.entries(this.document.system.applies.macros)) {
-      const macro = await foundry.utils.fromUuid(pureUuid(safeUuid));
-      if (macro) {
-        context.macros.push({
-          safeUuid: safeUuid,
-          macro: macro,
-          pseudoHook: pseudoHook,
-        });
-      }
-    }
     const effectsSet = new Set(system.effects);
     context.effectTags = Array.from(effectsSet.difference(new Set(system.powerSources)));
     await this._enrichAll(context, {

@@ -10,7 +10,7 @@ import TeriockItem from "./item.mjs";
  * - [Leveling Up](https://wiki.teriock.com/index.php/Core:Leveling_Up)
  * - [Size](https://wiki.teriock.com/index.php/Core:Size)
  *
- * @property {TeriockCharacterData} system
+ * @property {TeriockCharacterModel} system
  * @property {TeriockCharacterSheet} sheet
  * @property {"actor"} type
  * @property {Teriock.UUID<TeriockCharacter>} uuid
@@ -24,7 +24,7 @@ export class TeriockCharacter extends TeriockActor {}
  * Relevant wiki pages:
  * - [Equipment](https://wiki.teriock.com/index.php/Category:Equipment)
  *
- * @property {TeriockEquipmentData} system
+ * @property {TeriockEquipmentModel} system
  * @property {TeriockEquipmentSheet} sheet
  * @property {"equipment"} type
  * @property {Teriock.UUID<TeriockEquipment>} uuid
@@ -35,7 +35,7 @@ export class TeriockEquipment extends TeriockItem {}
 /**
  * Power-specific {@link TeriockItem} class.
  *
- * @property {TeriockPowerData} system
+ * @property {TeriockPowerModel} system
  * @property {TeriockPowerSheet} sheet
  * @property {"power"} type
  * @property {Teriock.UUID<TeriockPower>} uuid
@@ -49,7 +49,7 @@ export class TeriockPower extends TeriockItem {}
  * Relevant wiki pages:
  * - [Classes](https://wiki.teriock.com/index.php/Category:Classes)
  *
- * @property {TeriockRankData} system
+ * @property {TeriockRankModel} system
  * @property {TeriockRankSheet} sheet
  * @property {"rank"} type
  * @property {Teriock.UUID<TeriockRank>} uuid
@@ -63,7 +63,7 @@ export class TeriockRank extends TeriockItem {}
  * Relevant wiki pages:
  * - [Creatures](https://wiki.teriock.com/index.php/Category:Creatures)
  *
- * @property {TeriockSpeciesData} system
+ * @property {TeriockSpeciesModel} system
  * @property {TeriockSpeciesSheet} sheet
  * @property {"species"} type
  * @property {Teriock.UUID<TeriockSpecies>} uuid
@@ -77,14 +77,14 @@ export class TeriockSpecies extends TeriockItem {}
  * @property {Teriock.ID<TeriockMechanic>} id
  * @property {Teriock.UUID<TeriockMechanic>} uuid
  * @property {TeriockActor} parent
- * @property {TeriockMechanicData} system
+ * @property {TeriockMechanicModel} system
  * @property {TeriockMechanicSheet} sheet
  */
 export class TeriockMechanic extends TeriockItem {}
 
 /**
  * Wrapper-specific {@link TeriockItem} class.
- * @property {TeriockWrapperData} system
+ * @property {TeriockWrapperModel} system
  * @property {TeriockWrapperSheet} sheet
  * @property {"wrapper"} type
  * @property {Teriock.UUID<TeriockWrapper>} uuid
@@ -98,7 +98,7 @@ export class TeriockWrapper extends TeriockItem {}
  * Relevant wiki pages:
  * - [Ability Rules](https://wiki.teriock.com/index.php/Category:Ability_rules)
  *
- * @property {TeriockAbilityData} system
+ * @property {TeriockAbilityModel} system
  * @property {TeriockAbilitySheet} sheet
  * @property {"ability"} type
  * @property {Teriock.UUID<TeriockAbility>} uuid
@@ -112,7 +112,7 @@ export class TeriockAbility extends TeriockEffect {}
  * @property {Teriock.ID<TeriockConsequence>} id
  * @property {Teriock.UUID<TeriockConsequence>} uuid
  * @property {TeriockActor} parent
- * @property {TeriockConsequenceData} system
+ * @property {TeriockConsequenceModel} system
  * @property {TeriockConsequenceSheet} sheet
  */
 export class TeriockConsequence extends TeriockEffect {}
@@ -123,7 +123,7 @@ export class TeriockConsequence extends TeriockEffect {}
  * Relevant wiki pages:
  * - [Presence](https://wiki.teriock.com/index.php/Core:Presence)
  *
- * @property {TeriockAttunementData}
+ * @property {TeriockAttunementModel}
  * @property {TeriockAttunementSheet} sheet
  * @property {"attunement"} type
  * @property {Teriock.UUID<TeriockAttunement>} uuid
@@ -137,7 +137,7 @@ export class TeriockAttunement extends TeriockEffect {}
  * Relevant wiki pages:
  * - [Conditions](https://wiki.teriock.com/index.php/Category:Conditions)
  *
- * @property {TeriockConditionData} system
+ * @property {TeriockConditionModel} system
  * @property {TeriockConditionSheet} sheet
  * @property {"condition"} type
  * @property {Teriock.UUID<TeriockCondition>} uuid
@@ -151,7 +151,7 @@ export class TeriockCondition extends TeriockEffect {}
  * Relevant wiki pages:
  * - [Tradecraft Fluencies](https://wiki.teriock.com/index.php/Core:Tradecraft_Fluencies)
  *
- * @property {TeriockFluencyData} system
+ * @property {TeriockFluencyModel} system
  * @property {TeriockFluencySheet} sheet
  * @property {"fluency"} type
  * @property {Teriock.UUID<TeriockFluency>} uuid
@@ -169,14 +169,14 @@ export class TeriockFluency extends TeriockEffect {}
  * @property {Teriock.ID<TeriockProperty>} id
  * @property {Teriock.UUID<TeriockProperty>} uuid
  * @property {TeriockEquipment} parent
- * @property {TeriockPropertyData} system
+ * @property {TeriockPropertyModel} system
  * @property {TeriockPropertySheet} sheet
  */
 export class TeriockProperty extends TeriockEffect {}
 
 /**
  * Resource-specific {@link TeriockEffect} class.
- * @property {TeriockResourceData} system
+ * @property {TeriockResourceModel} system
  * @property {TeriockResourceSheet} sheet
  * @property {"resource"} type
  * @property {Teriock.UUID<TeriockResource>} uuid

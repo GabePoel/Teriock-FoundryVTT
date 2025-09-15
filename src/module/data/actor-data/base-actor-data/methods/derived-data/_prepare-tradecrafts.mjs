@@ -2,7 +2,7 @@
  * Prepares a single tradecraft's bonus value.
  * Calculates the total bonus based on proficiency and extra modifiers.
  *
- * @param {TeriockBaseActorData} actorData - The actor's base data system object.
+ * @param {TeriockBaseActorModel} actorData - The actor's base data system object.
  * @param {string} key - The tradecraft key to prepare.
  * @returns {void} Modifies the system object in place.
  * @private
@@ -16,7 +16,7 @@ function _prepareTradecraft(actorData, key) {
  * Prepares all tradecraft bonuses for the actor.
  * Iterates through all tradecrafts and calculates their bonus values.
  *
- * @param {TeriockBaseActorData} actorData - The actor's base data system object.
+ * @param {TeriockBaseActorModel} actorData - The actor's base data system object.
  * @returns {void} Modifies the system object in place.
  * @private
  */

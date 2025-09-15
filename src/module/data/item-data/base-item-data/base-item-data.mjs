@@ -7,7 +7,7 @@ const { fields } = foundry.data;
  * Base item data model for all Teriock items.
  * Provides common functionality for disabled state and update tracking.
  */
-export default class TeriockBaseItemData extends ChildTypeModel {
+export default class TeriockBaseItemModel extends ChildTypeModel {
   /**
    * @inheritDoc
    * @type {Readonly<Teriock.Documents.ItemModelMetadata>}

@@ -16,7 +16,7 @@ import { _defineSchema } from "./methods/schema/_schema.mjs";
  * Base actor data model for the Teriock system.
  * Handles all core actor functionality including damage, healing, rolling, and data management.
  */
-export default class TeriockBaseActorData extends CommonTypeModel {
+export default class TeriockBaseActorModel extends CommonTypeModel {
   /**
    * Metadata for this actor.
    * @type {Readonly<Teriock.Documents.ActorModelMetadata>}

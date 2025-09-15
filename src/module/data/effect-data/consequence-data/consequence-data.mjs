@@ -2,7 +2,7 @@ import { inCombatExpirationDialog } from "../../../applications/dialogs/_module.
 import { getRollIcon, mergeFreeze } from "../../../helpers/utils.mjs";
 import { HierarchyDataMixin } from "../../mixins/_module.mjs";
 import { migrateHierarchy } from "../../shared/migrations/migrate-hierarchy.mjs";
-import TeriockBaseEffectData from "../base-effect-data/base-effect-data.mjs";
+import TeriockBaseEffectModel from "../base-effect-data/base-effect-data.mjs";
 import * as sharedFields from "../shared/shared-fields.mjs";
 import { _messageParts } from "./methods/_messages.mjs";
 
@@ -10,10 +10,10 @@ const { fields } = foundry.data;
 
 /**
  * Effect-specific effect data model.
- * @extends TeriockBaseEffectData
+ * @extends TeriockBaseEffectModel
  * @mixes HierarchyDataMixin
  */
-export default class TeriockConsequenceData extends HierarchyDataMixin(TeriockBaseEffectData) {
+export default class TeriockConsequenceModel extends HierarchyDataMixin(TeriockBaseEffectModel) {
   /**
    * @inheritDoc
    * @type {Readonly<Teriock.Documents.EffectModelMetadata>}

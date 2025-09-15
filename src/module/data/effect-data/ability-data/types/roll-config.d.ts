@@ -1,4 +1,4 @@
-import type TeriockAbilityData from "../ability-data.mjs";
+import type TeriockAbilityModel from "../ability-data.mjs";
 import type TeriockActor from "../../../../documents/actor.mjs";
 import type TeriockBaseChatMessageSchema from "../../../message-data/base-message-data/_types";
 import type TeriockRoll from "../../../../dice/roll.mjs";
@@ -53,7 +53,7 @@ export type AbilityChatData = {
 
 export interface AbilityRollConfig {
   /** The data of the ability being rolled for. This should not be mutated. */
-  abilityData: TeriockAbilityData;
+  abilityData: TeriockAbilityModel;
   /** Data relevant for generating this ability's chat message. */
   chatData: AbilityChatData;
   /** Data that describes this specific use of the ability. */

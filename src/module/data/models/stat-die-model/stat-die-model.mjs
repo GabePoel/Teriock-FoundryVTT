@@ -62,7 +62,7 @@ export default class StatDieModel extends DataModel {
 
   /**
    * @inheritDoc
-   * @returns {TeriockBaseItemData}
+   * @returns {TeriockBaseItemModel}
    */
   get parent() {
     return super.parent;

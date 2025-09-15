@@ -7,7 +7,7 @@
  * 3. **Down Checks**: Set whatever type of "down" is appropriate
  * 5. **Expiration Monitoring**: Checks and processes expiration effects
  *
- * @param {TeriockBaseActorData} actorData - The actor's base data system object
+ * @param {TeriockBaseActorModel} actorData - The actor's base data system object
  * @param {Teriock.Parameters.Actor.SkipFunctions} skipFunctions - Functions that should be skipped
  * @returns {Promise<void>} Resolves when all post-update operations are complete
  * @private
@@ -42,7 +42,7 @@ export async function _postUpdate(actorData, skipFunctions = {}) {
  * - [Dead](https://wiki.teriock.com/index.php/Condition:Dead)
  * - [Unconscious](https://wiki.teriock.com/index.php/Condition:Unconscious)
  *
- * @param {TeriockBaseActorData} actorData - The actor's base data system object
+ * @param {TeriockBaseActorModel} actorData - The actor's base data system object
  * @returns {Promise<void>} Resolves when the status effects are updated
  */
 async function checkDown(actorData) {
@@ -64,7 +64,7 @@ async function checkDown(actorData) {
 /**
  * Checks and processes expiration for all effects on the actor.
  *
- * @param {TeriockBaseActorData} actorData - The actor's base data system object
+ * @param {TeriockBaseActorModel} actorData - The actor's base data system object
  * @returns {Promise<void>} Resolves when all expiration checks are complete
  *
  * @example

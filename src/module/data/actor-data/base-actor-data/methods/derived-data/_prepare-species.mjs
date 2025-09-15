@@ -5,7 +5,7 @@ import { toCamelCase } from "../../../../../helpers/string.mjs";
 /**
  * Prepares the species attributes.
  *
- * @param {TeriockBaseActorData} actorData - The actor's base data system object.
+ * @param {TeriockBaseActorModel} actorData - The actor's base data system object.
  * @returns {void} Modifies the system object in place.
  * @private
  */

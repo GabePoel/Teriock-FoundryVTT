@@ -8,7 +8,7 @@ import { _override } from "./_overrides.mjs";
  * Parses raw HTML content for equipment, extracting properties and creating effects.
  * Handles damage parsing, numeric values, arrays, and property creation.
  *
- * @param {TeriockEquipmentData} equipmentData - The equipment data to parse content for.
+ * @param {TeriockEquipmentModel} equipmentData - The equipment data to parse content for.
  * @param {string} rawHTML - The raw HTML content to parse.
  * @returns {Promise<object>} Promise that resolves to the parsed equipment data.
  * @private
@@ -36,7 +36,7 @@ export async function _parse(equipmentData, rawHTML) {
     name: "Reference Equipment",
     type: "equipment",
   });
-  /** @type {Partial<TeriockEquipmentData>} */
+  /** @type {Partial<TeriockEquipmentModel>} */
   const parameters = foundry.utils
     .deepClone(referenceEquipment.system)
     .toObject();

@@ -8,7 +8,7 @@ import { tradecraftMessage } from "../../../../../helpers/html.mjs";
  * Relevant wiki pages:
  * - [Feat Interaction](https://wiki.teriock.com/index.php/Core:Feat_Interaction)
  *
- * @param {TeriockBaseActorData} actorData
+ * @param {TeriockBaseActorModel} actorData
  * @param {Teriock.Parameters.Actor.Attribute} attribute - The attribute to roll a feat save for.
  * @param {Teriock.RollOptions.CommonRoll} [options] - Options for the roll.
  * @private
@@ -42,7 +42,7 @@ export async function _rollFeatSave(actorData, attribute, options = {}) {
  * Relevant wiki pages:
  * - [Resistance](https://wiki.teriock.com/index.php/Ability:Resist_Effects)
  *
- * @param {TeriockBaseActorData} actorData
+ * @param {TeriockBaseActorModel} actorData
  * @param {Teriock.RollOptions.CommonRoll} [options] - Options for the roll.
  * @private
  */
@@ -80,7 +80,7 @@ export async function _rollResistance(actorData, options = {}) {
  * Relevant wiki pages:
  * - [Immunity](https://wiki.teriock.com/index.php/Keyword:Immunity)
  *
- * @param {TeriockBaseActorData} actorData
+ * @param {TeriockBaseActorModel} actorData
  * @param {Teriock.RollOptions.CommonRoll} [_options] - Options for the roll.
  * @private
  */
@@ -98,7 +98,7 @@ export async function _rollImmunity(actorData, _options = {}) {
  * Relevant wiki pages:
  * - [Tradecrafts](https://wiki.teriock.com/index.php/Core:Tradecrafts)
  *
- * @param {TeriockBaseActorData} actorData
+ * @param {TeriockBaseActorModel} actorData
  * @param {Teriock.Parameters.Fluency.Tradecraft} tradecraft - The tradecraft to roll for.
  * @param {Teriock.RollOptions.CommonRoll} [options] - Options for the roll.
  * @private

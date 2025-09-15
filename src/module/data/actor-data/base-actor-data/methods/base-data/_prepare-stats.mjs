@@ -2,7 +2,7 @@
  * Prepares level-based bonuses for the actor.
  * Calculates presence, rank, proficiency, and fluency bonuses based on level.
  *
- * @param {TeriockBaseActorData} actorData - The actor's base data system object.
+ * @param {TeriockBaseActorModel} actorData - The actor's base data system object.
  * @returns {void} Modifies the system object in place.
  * @private
  */
@@ -24,7 +24,7 @@ export function _prepareBonuses(actorData) {
  * Prepares hit points and mana points derived data.
  * Calculates maximum HP/MP from base values and rank bonuses, including die boxes for the character sheet.
  *
- * @param {TeriockBaseActorData} actorData - The actor's base data system object.
+ * @param {TeriockBaseActorModel} actorData - The actor's base data system object.
  * @returns {void} Modifies the system object in place.
  * @private
  */

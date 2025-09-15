@@ -1,18 +1,18 @@
 import { mergeFreeze } from "../../../helpers/utils.mjs";
-import { ConsumableDataMixin } from "../../mixins/_module.mjs";
+import { ConsumableDataMixin, ExecutableDataMixin } from "../../mixins/_module.mjs";
 import { FormulaField } from "../../shared/fields/_module.mjs";
-import TeriockBaseEffectData from "../base-effect-data/base-effect-data.mjs";
+import TeriockBaseEffectModel from "../base-effect-data/base-effect-data.mjs";
 import { _messageParts } from "./methods/_messages.mjs";
 import { _migrateData } from "./methods/_migrate-data.mjs";
-import { _roll } from "./methods/_rolling.mjs";
 
 const { fields } = foundry.data;
 
 /**
  * Resource-specific effect data model.
- * @extends {TeriockBaseEffectData}
+ * @extends {TeriockBaseEffectModel}
+ * @mixes ExecutableDataMixin
  */
-export default class TeriockResourceData extends ConsumableDataMixin(TeriockBaseEffectData) {
+export default class TeriockResourceModel extends ConsumableDataMixin(ExecutableDataMixin(TeriockBaseEffectModel)) {
   /**
    * @inheritDoc
    * @type {Readonly<Teriock.Documents.EffectModelMetadata>}
@@ -49,15 +49,6 @@ export default class TeriockResourceData extends ConsumableDataMixin(TeriockBase
           min: 0,
         }),
       }),
-      rollFormula: new FormulaField({
-        initial: "",
-        label: "Roll Formula",
-        deterministic: false,
-      }),
-      functionHook: new fields.StringField({
-        initial: "none",
-        label: "Function Hook",
-      }),
     });
   }
 
@@ -75,7 +66,7 @@ export default class TeriockResourceData extends ConsumableDataMixin(TeriockBase
   /** @inheritDoc */
   get suppressed() {
     let suppressed = super.suppressed;
-    if (!suppressed && this.parent?.parent?.type === "equipment") {
+    if (!suppressed && this.parent.parent.type === "equipment") {
       suppressed = !this.parent.parent.system.isAttuned;
     }
     return suppressed;
@@ -85,11 +76,6 @@ export default class TeriockResourceData extends ConsumableDataMixin(TeriockBase
   async gainOne() {
     await super.gainOne();
     await this.parent.enable();
-  }
-
-  /** @inheritDoc */
-  async roll(options) {
-    await _roll(this, options);
   }
 
   /** @inheritDoc */

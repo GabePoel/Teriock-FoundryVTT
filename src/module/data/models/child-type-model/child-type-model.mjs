@@ -31,6 +31,7 @@ export default class ChildTypeModel extends CommonTypeModel {
     childEffectTypes: [],
     childItemTypes: [],
     childMacroTypes: [],
+    passive: false,
   });
 
   /**

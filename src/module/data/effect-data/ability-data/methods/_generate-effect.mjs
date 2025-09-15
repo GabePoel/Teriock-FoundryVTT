@@ -109,7 +109,7 @@ export async function _generateEffect(rollConfig, crit = false) {
 
   description = tempDiv.innerHTML;
 
-  /** @type {Partial<TeriockConsequenceData>} */
+  /** @type {Partial<TeriockConsequenceModel>} */
   const effectData = {
     name: `${abilityData.parent?.name} Effect${crit ? " (Crit)" : ""}`,
     type: "consequence",

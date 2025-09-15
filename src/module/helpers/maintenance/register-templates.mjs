@@ -4,6 +4,7 @@ export default async function registerTemplates () {
   return foundry.applications.handlebars.loadTemplates([
     "systems/teriock/src/templates/dialog-templates/heal.hbs",
     "systems/teriock/src/templates/dialog-templates/hotbar-drop.hbs",
+    "systems/teriock/src/templates/dialog-templates/revitalize.hbs",
     "systems/teriock/src/templates/dialog-templates/select.hbs",
     "systems/teriock/src/templates/document-templates/actor-templates/character-template/character-template.hbs",
     "systems/teriock/src/templates/document-templates/actor-templates/character-template/filters/ch-ability-filter.hbs",
@@ -57,7 +58,6 @@ export default async function registerTemplates () {
     "systems/teriock/src/templates/document-templates/effect-templates/property-template/property-template.hbs",
     "systems/teriock/src/templates/document-templates/effect-templates/property-template/tags/pr-tags.hbs",
     "systems/teriock/src/templates/document-templates/effect-templates/resource-template/bars/rs-consumable-bar.hbs",
-    "systems/teriock/src/templates/document-templates/effect-templates/resource-template/bars/rs-use-bar.hbs",
     "systems/teriock/src/templates/document-templates/effect-templates/resource-template/resource-template.hbs",
     "systems/teriock/src/templates/document-templates/item-templates/equipment-template/bars/eq-attack-bar.hbs",
     "systems/teriock/src/templates/document-templates/item-templates/equipment-template/bars/eq-consumable-bar.hbs",
@@ -82,6 +82,7 @@ export default async function registerTemplates () {
     "systems/teriock/src/templates/document-templates/shared/effects.hbs",
     "systems/teriock/src/templates/document-templates/shared/header.hbs",
     "systems/teriock/src/templates/document-templates/shared/image.hbs",
+    "systems/teriock/src/templates/document-templates/shared/macros.hbs",
     "systems/teriock/src/templates/message-templates/death-bag.hbs",
     "systems/teriock/src/templates/message-templates/roll.hbs"
   ]);

@@ -21,10 +21,9 @@ const TextEditor = foundry.applications.ux.TextEditor.implementation;
  * Provides common functionality for all Teriock sheets including event handling,
  * drag and drop, context menus, and form management.
  * @param {typeof DocumentSheetV2} Base - The base application class to mix in with.
- * @returns {typeof SheetMixin & Base}
  */
 export default (Base) => {
-  return class SheetMixin extends HandlebarsApplicationMixin(Base) {
+  return class CommonSheetMixin extends HandlebarsApplicationMixin(Base) {
     /**
      * Default sheet options.
      * @type {object}
@@ -50,6 +49,7 @@ export default (Base) => {
         toggleDisabledDoc: this._toggleDisabledDoc,
         toggleImpacts: this._toggleImpacts,
         toggleLockThis: this._toggleLockThis,
+        unlinkMacro: this._unlinkMacro,
         useOneDoc: this._useOneDoc,
         wikiOpenThis: this._wikiOpenThis,
         wikiPullThis: this._wikiPullThis,
@@ -668,13 +668,42 @@ export default (Base) => {
     }
 
     /**
+     * Unlink a macro from this document.
+     * @param {MouseEvent} _event
+     * @param {HTMLElement} target
+     * @returns {Promise<void>}
+     * @private
+     */
+    static async _unlinkMacro(_event, target) {
+      if (this.editable) {
+        if (this.document.system.macros) {
+          const uuid = target.dataset.parentId;
+          await this.document.system.unlinkMacro(uuid);
+        } else {
+          foundry.ui.notifications.warn("Sheet must be editable to unlink macro.");
+        }
+      }
+    }
+
+    /**
      * Handles dropping of a macro on this document.
      * @param {DragEvent} _event - The drop event.
-     * @param {object} _data - The macro data.
+     * @param {object} data - The macro data.
      * @returns {Promise<TeriockMacro|void>} Promise that resolves to the dropped macro if successful.
      * @private
      */
-    async _onDropMacro(_event, _data) {}
+    async _onDropMacro(_event, data) {
+      if (this.document.system.macros) {
+        const macroUuids = Array.from(this.document.system.macros);
+        if (data.uuid) {
+          macroUuids.push(data.uuid);
+          const updateData = {
+            "system.macros": macroUuids,
+          };
+          await this.document.update(updateData);
+        }
+      }
+    }
 
     /**
      * Handles the render event for the sheet.
@@ -694,7 +723,7 @@ export default (Base) => {
         fixed: true,
       });
       this._connect(".chat-button", "contextmenu", (e) => {
-        SheetMixin._debug.call(this, e, e.currentTarget);
+        CommonSheetMixin._debug.call(this, e, e.currentTarget);
       });
       this.#dragDrop.forEach((d) => d.bind(this.element));
       this._activateMenu();
@@ -786,13 +815,28 @@ export default (Base) => {
     }
 
     /**
+     * Prepare any macros that should be part of the context.
+     * @param {object} context
+     * @returns {Promise<void>}
+     * @private
+     */
+    async _prepareMacroContext(context) {
+      if (this.document.system.macros) {
+        context.macros = await Promise.all(Array.from(this.document.system.macros.map((uuid) => foundry.utils.fromUuid(
+          uuid))));
+      } else {
+        context.macros = [];
+      }
+    }
+
+    /**
      * Prepares the context data for template rendering.
      * Provides common data including config, editable state, document info, and settings.
      * @returns {Promise<object>} Promise that resolves to the context object.
      * @override
      */
     async _prepareContext() {
-      return {
+      const context = {
         TERIOCK: TERIOCK,
         document: this.document,
         editable: this.editable,
@@ -813,6 +857,8 @@ export default (Base) => {
         tab: this._tab,
         uuid: this.document.uuid,
       };
+      await this._prepareMacroContext(context);
+      return context;
     }
 
     // Private helper methods

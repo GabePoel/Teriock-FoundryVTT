@@ -11,7 +11,7 @@ export interface TeriockSheetMixin {
   editable: boolean;
 }
 
-declare module "./sheet-mixin.mjs" {
+declare module "./common-sheet-mixin.mjs" {
   export default interface SheetMixin {
     document: TeriockActor | TeriockItem | TeriockEffect;
   }

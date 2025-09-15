@@ -19,9 +19,9 @@ const equipmentMap = {
  * Applies equipment type-specific overrides to equipment parameters.
  * Checks if the equipment type has predefined overrides and applies them.
  *
- * @param {TeriockEquipmentData} equipmentData - The equipment data to apply overrides to.
- * @param {Partial<TeriockEquipmentData>} parameters - The parameters to override.
- * @returns {Partial<TeriockEquipmentData>} The parameters with overrides applied.
+ * @param {TeriockEquipmentModel} equipmentData - The equipment data to apply overrides to.
+ * @param {Partial<TeriockEquipmentModel>} parameters - The parameters to override.
+ * @returns {Partial<TeriockEquipmentModel>} The parameters with overrides applied.
  * @private
  */
 export function _override(equipmentData, parameters) {

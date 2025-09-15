@@ -11,7 +11,7 @@ import { _prepareBonuses, _prepareHpMp } from "./_prepare-stats.mjs";
  * - [Bite](https://wiki.teriock.com/index.php/Ability:Bite)
  * - [Shield Bash](https://wiki.teriock.com/index.php/Ability:Shield_Bash)
  *
- * @param {TeriockBaseActorData} actorData
+ * @param {TeriockBaseActorModel} actorData
  * @private
  */
 export function _prepareBaseData(actorData) {

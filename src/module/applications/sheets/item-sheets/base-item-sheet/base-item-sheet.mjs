@@ -1,18 +1,17 @@
 import { cleanFeet } from "../../../../helpers/clean.mjs";
 import { refreshDocuments } from "../../../../helpers/utils.mjs";
-import { SheetMixin } from "../../mixins/_module.mjs";
+import { CommonSheetMixin } from "../../mixins/_module.mjs";
 
 const { ItemSheetV2 } = foundry.applications.sheets;
 
 /**
  * Base item sheet for Teriock system items.
  * Provides common functionality for all item sheets.
- *
  * @extends {ItemSheetV2}
  * @property {TeriockItem} document
  * @property {TeriockItem} item
  */
-export default class TeriockBaseItemSheet extends SheetMixin(ItemSheetV2) {
+export default class TeriockBaseItemSheet extends CommonSheetMixin(ItemSheetV2) {
   /**
    * Default sheet options.
    * @type {object}

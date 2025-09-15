@@ -1,7 +1,7 @@
 /**
  * Gets roll data for an actor system, including basic stats, attack data, class ranks, and tradecrafts.
  *
- * @param {TeriockBaseActorData} actorData - The actor system to get roll data for.
+ * @param {TeriockBaseActorModel} actorData - The actor system to get roll data for.
  * @returns {object} Object containing all roll data for the actor.
  */
 export function _getRollData(actorData) {
@@ -31,7 +31,7 @@ export function _getRollData(actorData) {
  * Adds basic actor data to the roll data object.
  * Includes level, size, weight, proficiency, and fluency bonuses.
  *
- * @param {TeriockBaseActorData} actorData - The actor system to get data from.
+ * @param {TeriockBaseActorModel} actorData - The actor system to get data from.
  * @param {object} data - The roll data object to populate.
  */
 function basicData(actorData, data) {
@@ -48,7 +48,7 @@ function basicData(actorData, data) {
  * Adds presence data to the roll data object.
  * Includes total presence, used presence, and unused presence.
  *
- * @param {TeriockBaseActorData} actorData - The actor system to get data from.
+ * @param {TeriockBaseActorModel} actorData - The actor system to get data from.
  * @param {object} data - The roll data object to populate.
  */
 function presenceData(actorData, data) {
@@ -63,7 +63,7 @@ function presenceData(actorData, data) {
  * Adds rank data to the roll data object.
  * Includes total rank and individual class/archetype ranks.
  *
- * @param {TeriockBaseActorData} actorData - The actor system to get data from.
+ * @param {TeriockBaseActorModel} actorData - The actor system to get data from.
  * @param {object} data - The roll data object to populate.
  */
 function rankData(actorData, data) {
@@ -113,7 +113,7 @@ function rankData(actorData, data) {
 /**
  * Adds age data to the roll data object.
  *
- * @param {TeriockBaseActorData} _actorData - The actor system to get data from.
+ * @param {TeriockBaseActorModel} _actorData - The actor system to get data from.
  * @param {object} data - The roll data object to populate.
  */
 function ageData(_actorData, data) {
@@ -130,7 +130,7 @@ function ageData(_actorData, data) {
  * Adds attribute data to the roll data object.
  * Includes attribute values, save proficiency, fluency, and save bonuses.
  *
- * @param {TeriockBaseActorData} actorData - The actor system to get data from.
+ * @param {TeriockBaseActorModel} actorData - The actor system to get data from.
  * @param {object} data - The roll data object to populate.
  */
 function attributeData(actorData, data) {
@@ -157,7 +157,7 @@ function attributeData(actorData, data) {
  * Adds tradecraft data to the roll data object.
  * Includes tradecraft check values, proficiency, talent, and expertise flags.
  *
- * @param {TeriockBaseActorData} actorData - The actor system to get data from.
+ * @param {TeriockBaseActorModel} actorData - The actor system to get data from.
  * @param {object} data - The roll data object to populate.
  */
 function tradecraftData(actorData, data) {
@@ -181,7 +181,7 @@ function tradecraftData(actorData, data) {
 /**
  * Adds HP data to the roll data object.
  *
- * @param {TeriockBaseActorData} actorData - The actor system to get data from.
+ * @param {TeriockBaseActorModel} actorData - The actor system to get data from.
  * @param {object} data - The roll data object to populate.
  */
 function hpData(actorData, data) {
@@ -197,7 +197,7 @@ function hpData(actorData, data) {
 /**
  * Adds MP data to the roll data object.
  *
- * @param {TeriockBaseActorData} actorData - The actor system to get data from.
+ * @param {TeriockBaseActorModel} actorData - The actor system to get data from.
  * @param {object} data - The roll data object to populate.
  */
 function mpData(actorData, data) {
@@ -213,7 +213,7 @@ function mpData(actorData, data) {
 /**
  * Adds wither data to the roll data object.
  *
- * @param {TeriockBaseActorData} actorData - The actor system to get data from.
+ * @param {TeriockBaseActorModel} actorData - The actor system to get data from.
  * @param {object} data - The roll data object to populate.
  */
 function witherData(actorData, data) {
@@ -227,7 +227,7 @@ function witherData(actorData, data) {
 /**
  * Adds hack data to the roll data object.
  *
- * @param {TeriockBaseActorData} actorData - The actor system to get data from.
+ * @param {TeriockBaseActorModel} actorData - The actor system to get data from.
  * @param {object} data - The roll data object to populate.
  */
 function hackData(actorData, data) {
@@ -254,7 +254,7 @@ function hackData(actorData, data) {
 /**
  * Adds speed data to the roll data object.
  *
- * @param {TeriockBaseActorData} actorData - The actor system to get data from.
+ * @param {TeriockBaseActorModel} actorData - The actor system to get data from.
  * @param {object} data - The roll data object to populate.
  */
 function speedData(actorData, data) {
@@ -316,7 +316,7 @@ function speedData(actorData, data) {
 /**
  * Adds carrying capacity data to the roll data object.
  *
- * @param {TeriockBaseActorData} actorData - The actor system to get data from.
+ * @param {TeriockBaseActorModel} actorData - The actor system to get data from.
  * @param {object} data - The roll data object to populate.
  */
 function carryingData(actorData, data) {
@@ -339,7 +339,7 @@ function carryingData(actorData, data) {
 /**
  * Adds defense data to the roll data object.
  *
- * @param {TeriockBaseActorData} actorData - The actor system to get data from.
+ * @param {TeriockBaseActorModel} actorData - The actor system to get data from.
  * @param {object} data - The roll data object to populate.
  */
 function defenseData(actorData, data) {
@@ -358,7 +358,7 @@ function defenseData(actorData, data) {
 /**
  * Adds offense data to the roll data object.
  *
- * @param {TeriockBaseActorData} actorData - The actor system to get data from.
+ * @param {TeriockBaseActorModel} actorData - The actor system to get data from.
  * @param {object} data - The roll data object to populate.
  */
 function offenseData(actorData, data) {
@@ -389,7 +389,7 @@ function offenseData(actorData, data) {
 /**
  * Adds money data to the roll data object.
  *
- * @param {TeriockBaseActorData} actorData - The actor system to get data from.
+ * @param {TeriockBaseActorModel} actorData - The actor system to get data from.
  * @param {object} data - The roll data object to populate.
  */
 function moneyData(actorData, data) {
@@ -467,7 +467,7 @@ function moneyData(actorData, data) {
 /**
  * Adds equipment data to the roll data object.
  *
- * @param {TeriockBaseActorData} actorData - The actor system to get data from.
+ * @param {TeriockBaseActorModel} actorData - The actor system to get data from.
  * @param {object} data - The roll data object to populate.
  */
 function equipmentData(actorData, data) {
@@ -512,7 +512,7 @@ function addEquipmentData(data, slot, equipment) {
 /**
  * Adds species data to the roll data object.
  *
- * @param {TeriockBaseActorData} actorData
+ * @param {TeriockBaseActorModel} actorData
  * @param {object} data
  */
 function speciesData(actorData, data) {

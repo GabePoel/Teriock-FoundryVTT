@@ -21,12 +21,8 @@ import { _prepareTradecrafts } from "./_prepare-tradecrafts.mjs";
  * - Presence management
  * - Speed adjustments
  *
- * @param {TeriockBaseActorData} actorData - The actor's base data system object
+ * @param {TeriockBaseActorModel} actorData - The actor's base data system object
  * @returns {void} Modifies the system object in place with derived data
- *
- * @example
- * // Calculate all derived data for an actor
- * _prepareDerivedData(actor.system);
  */
 export function _prepareDerivedData(actorData) {
   _prepareSpecies(actorData);

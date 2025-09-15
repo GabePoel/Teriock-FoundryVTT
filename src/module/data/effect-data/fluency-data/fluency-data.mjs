@@ -1,8 +1,8 @@
 import { iconManifest } from "../../../constants/display/_module.mjs";
 import { getIcon } from "../../../helpers/path.mjs";
 import { mergeFreeze } from "../../../helpers/utils.mjs";
-import { WikiDataMixin } from "../../mixins/_module.mjs";
-import TeriockBaseEffectData from "../base-effect-data/base-effect-data.mjs";
+import { ExecutableDataMixin, WikiDataMixin } from "../../mixins/_module.mjs";
+import TeriockBaseEffectModel from "../base-effect-data/base-effect-data.mjs";
 import { _messageParts } from "./methods/_messages.mjs";
 import { _roll } from "./methods/_rolling.mjs";
 
@@ -14,10 +14,11 @@ const { fields } = foundry.data;
  * Relevant wiki pages:
  * - [Tradecraft Fluencies](https://wiki.teriock.com/index.php/Core:Tradecraft_Fluencies)
  *
- * @extends {TeriockBaseEffectData}
+ * @extends {TeriockBaseEffectModel}
+ * @mixes ExecutableDataMixin
  * @mixes WikiDataMixin
  */
-export default class TeriockFluencyData extends WikiDataMixin(TeriockBaseEffectData) {
+export default class TeriockFluencyModel extends WikiDataMixin(ExecutableDataMixin(TeriockBaseEffectModel)) {
   /**
    * @inheritDoc
    * @type {Readonly<Teriock.Documents.EffectModelMetadata>}

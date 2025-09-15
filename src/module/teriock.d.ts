@@ -68,34 +68,34 @@ declare global {
   // Base Data Models
   // ----------------
 
-  const TeriockBaseActorData: typeof import("./data/actor-data/base-actor-data/base-actor-data.mjs").default;
-  const TeriockBaseItemData: typeof import("./data/item-data/base-item-data/base-item-data.mjs").default;
-  const TeriockBaseEffectData: typeof import("./data/effect-data/base-effect-data/base-effect-data.mjs").default;
-  const TeriockBaseMessageData: typeof import("./data/message-data/base-message-data/base-message-data.mjs").default;
+  const TeriockBaseActorModel: typeof import("./data/actor-data/base-actor-data/base-actor-data.mjs").default;
+  const TeriockBaseItemModel: typeof import("./data/item-data/base-item-data/base-item-data.mjs").default;
+  const TeriockBaseEffectModel: typeof import("./data/effect-data/base-effect-data/base-effect-data.mjs").default;
+  const TeriockBaseMessageModel: typeof import("./data/message-data/base-message-data/base-message-data.mjs").default;
 
   // Actor
   // -----
 
-  const TeriockCharacterData: typeof import("./data/_module.mjs").actor.CharacterData;
+  const TeriockCharacterModel: typeof import("./data/_module.mjs").actor.TeriockCharacterModel;
 
   // Item
   // ----
 
-  const TeriockEquipmentData: typeof import("./data/_module.mjs").item.EquipmentData;
-  const TeriockMechanicData: typeof import("./data/_module.mjs").item.MechanicData;
-  const TeriockPowerData: typeof import("./data/_module.mjs").item.PowerData;
-  const TeriockRankData: typeof import("./data/_module.mjs").item.RankData;
+  const TeriockEquipmentModel: typeof import("./data/_module.mjs").item.TeriockEquipmentModel;
+  const TeriockMechanicModel: typeof import("./data/_module.mjs").item.TeriockMechanicModel;
+  const TeriockPowerModel: typeof import("./data/_module.mjs").item.TeriockPowerModel;
+  const TeriockRankModel: typeof import("./data/_module.mjs").item.TeriockRankModel;
 
   // Effect
   // ------
 
-  const TeriockAbilityData: typeof import("./data/_module.mjs").effect.AbilityData;
-  const TeriockAttunementData: typeof import("./data/_module.mjs").effect.AttunementData;
-  const TeriockConsequenceData: typeof import("./data/_module.mjs").effect.ConsequenceData;
-  const TeriockConditionData: typeof import("./data/_module.mjs").effect.ConditionData;
-  const TeriockFluencyData: typeof import("./data/_module.mjs").effect.FluencyData;
-  const TeriockPropertyData: typeof import("./data/_module.mjs").effect.PropertyData;
-  const TeriockResourceData: typeof import("./data/_module.mjs").effect.ResourceData;
+  const TeriockAbilityModel: typeof import("./data/_module.mjs").effect.TeriockAbilityModel;
+  const TeriockAttunementModel: typeof import("./data/_module.mjs").effect.TeriockAttunementModel;
+  const TeriockConsequenceModel: typeof import("./data/_module.mjs").effect.TeriockConsequenceModel;
+  const TeriockConditionModel: typeof import("./data/_module.mjs").effect.TeriockConditionModel;
+  const TeriockFluencyModel: typeof import("./data/_module.mjs").effect.TeriockFluencyModel;
+  const TeriockPropertyModel: typeof import("./data/_module.mjs").effect.TeriockPropertyModel;
+  const TeriockResourceModel: typeof import("./data/_module.mjs").effect.TeriockResourceModel;
 
   // Sheets
   // ======

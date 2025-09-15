@@ -91,9 +91,9 @@ function defaultApplies() {
 /**
  * Parses raw HTML content for an ability, extracting properties and creating effects.
  * Handles tag processing, cost calculation, component parsing, and subability creation.
- * @param {TeriockAbilityData} abilityData - The ability data to parse content for.
+ * @param {TeriockAbilityModel} abilityData - The ability data to parse content for.
  * @param {string} rawHTML - The raw HTML content to parse.
- * @returns {Promise<{ changes: object[], system: Partial<TeriockAbilityData>, img: string }>} Promise that resolves to
+ * @returns {Promise<{ changes: object[], system: Partial<TeriockAbilityModel>, img: string }>} Promise that resolves to
  *   the parsed ability data.
  * @private
  */

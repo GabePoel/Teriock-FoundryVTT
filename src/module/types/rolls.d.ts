@@ -2,7 +2,7 @@ import type { dieOptions } from "../constants/options/die-options.mjs";
 import type { TeriockToken } from "../canvas/placeables/_module.mjs";
 import type { TeriockActor } from "../documents/_module.mjs";
 import type { AbilityChatData, AbilityUseData } from "../data/effect-data/ability-data/types/roll-config";
-import type TeriockAbilityData from "../data/effect-data/ability-data/ability-data.mjs";
+import type TeriockAbilityModel from "../data/effect-data/ability-data/ability-data.mjs";
 
 declare global {
   namespace Teriock.RollOptions {
@@ -68,7 +68,7 @@ declare global {
     export type PolyhedralDie = `d${PolyhedralDieFaces}`;
 
     export type MacroScope = {
-      abilityData?: TeriockAbilityData;
+      abilityData?: TeriockAbilityModel;
       actor?: TeriockActor;
       chatData?: AbilityChatData;
       data?: Teriock.HookData.BaseHookData;
@@ -76,6 +76,7 @@ declare global {
       speaker?: Teriock.Foundry.ChatSpeakerData;
       token?: TeriockToken;
       useData?: AbilityUseData;
+      document?: TeriockChild;
     };
 
     export type BagComposition = {

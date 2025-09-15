@@ -5,8 +5,7 @@ import {
 /**
  * Generates message parts for a rank item, including bars and blocks for display.
  * Creates formatted display elements for archetype, class information, dice, and description.
- *
- * @param {TeriockRankData} rankData - The rank item to generate message parts for.
+ * @param {TeriockRankModel} rankData - The rank item to generate message parts for.
  * @returns {object} Object containing bars and blocks for the rank message.
  * @private
  */

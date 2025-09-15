@@ -4,7 +4,7 @@ import { getRollIcon, makeIcon } from "../../../../helpers/utils.mjs";
 
 /**
  * Context menu entries.
- * @param {TeriockEquipmentData} equipmentData
+ * @param {TeriockEquipmentModel} equipmentData
  * @returns {Teriock.Foundry.ContextMenuEntry[]}
  * @private
  */

@@ -1,7 +1,9 @@
+import { selectDialog } from "../../../applications/dialogs/select-dialog.mjs";
+import { pseudoHooks } from "../../../constants/system/pseudo-hooks.mjs";
 import { insertElderSorceryMask } from "../../../helpers/html.mjs";
-import { mergeFreeze } from "../../../helpers/utils.mjs";
+import { mergeFreeze, safeUuid } from "../../../helpers/utils.mjs";
 import { ConsumableDataMixin, HierarchyDataMixin, WikiDataMixin } from "../../mixins/_module.mjs";
-import TeriockBaseEffectData from "../base-effect-data/base-effect-data.mjs";
+import TeriockBaseEffectModel from "../base-effect-data/base-effect-data.mjs";
 import { _generateChanges } from "./methods/_generate-changes.mjs";
 import { _messageParts } from "./methods/_messages.mjs";
 import { _migrateData } from "./methods/_migrate-data.mjs";
@@ -17,13 +19,13 @@ import { _defineSchema } from "./methods/schema/_schema.mjs";
  * Relevant wiki pages:
  * - [Ability Rules](https://wiki.teriock.com/index.php/Category:Ability_rules)
  *
- * @extends {TeriockBaseEffectData}
+ * @extends {TeriockBaseEffectModel}
  * @mixes ConsumableDataMixin
  * @mixes HierarchyDataMixin
  * @mixes WikiDataMixin
  */
-export default class TeriockAbilityData extends HierarchyDataMixin(ConsumableDataMixin(WikiDataMixin(
-  TeriockBaseEffectData))) {
+export default class TeriockAbilityModel extends HierarchyDataMixin(ConsumableDataMixin(WikiDataMixin(
+  TeriockBaseEffectModel))) {
   /**
    * @inheritDoc
    * @type {Readonly<Teriock.Documents.EffectModelMetadata>}
@@ -34,6 +36,7 @@ export default class TeriockAbilityData extends HierarchyDataMixin(ConsumableDat
     namespace: "Ability",
     type: "ability",
     usable: true,
+    passive: true,
   });
 
   /** @inheritDoc */
@@ -141,6 +144,34 @@ export default class TeriockAbilityData extends HierarchyDataMixin(ConsumableDat
     messageElement = super.adjustMessage(messageElement);
     messageElement = insertElderSorceryMask(messageElement, this.parent);
     return messageElement;
+  }
+
+  /**
+   * Unlink a macro.
+   * @param {Teriock.UUID<TeriockMacro>} uuid
+   * @returns {Promise<void>}
+   */
+  async unlinkMacro(uuid) {
+    const updateData = {};
+    updateData[`system.applies.macros.-=${safeUuid(uuid)}`] = null;
+    await this.parent.update(updateData);
+  }
+
+  /**
+   * Change a macro's run hook.
+   * @param {Teriock.UUID<TeriockMacro>} uuid
+   * @returns {Promise<void>}
+   */
+  async changeMacroRunHook(uuid) {
+    const pseudoHook = await selectDialog(pseudoHooks, {
+      label: "Event",
+      hint: "Please select an event that triggers this macro to run.",
+      title: "Select Event",
+      initial: this.applies.macros[safeUuid(uuid)],
+    });
+    const updateData = {};
+    updateData[`system.applies.macros.${safeUuid(uuid)}`] = pseudoHook;
+    await this.parent.update(updateData);
   }
 
   /**

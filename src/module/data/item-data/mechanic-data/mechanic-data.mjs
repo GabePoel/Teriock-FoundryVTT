@@ -1,10 +1,10 @@
 import { mergeFreeze } from "../../../helpers/utils.mjs";
-import TeriockBaseItemData from "../base-item-data/base-item-data.mjs";
+import TeriockBaseItemModel from "../base-item-data/base-item-data.mjs";
 
 /**
  * Effect that handles automatic synchronous effect handling of a {@link TeriockActor}.
  */
-export default class TeriockMechanicData extends TeriockBaseItemData {
+export default class TeriockMechanicModel extends TeriockBaseItemModel {
   /** @inheritDoc */
   static metadata = mergeFreeze(super.metadata, {
     type: "mechanic",

@@ -10,7 +10,7 @@ const {
  * Relevant wiki pages:
  * - [Read Magic](https://wiki.teriock.com/index.php/Ability:Read_Magic)
  *
- * @param {TeriockEquipmentData} equipmentData - The equipment data to read magic on.
+ * @param {TeriockEquipmentModel} equipmentData - The equipment data to read magic on.
  * @returns {Promise<void>} Promise that resolves when the magic reading is complete.
  * @private
  */
@@ -47,7 +47,7 @@ export async function _readMagic(equipmentData) {
  * Relevant wiki pages:
  * - [Identify](https://wiki.teriock.com/index.php/Ability:Identify)
  *
- * @param {TeriockEquipmentData} equipmentData - The equipment data to identify.
+ * @param {TeriockEquipmentModel} equipmentData - The equipment data to identify.
  * @returns {Promise<void>} Promise that resolves when the identification is complete.
  * @private
  */
@@ -90,7 +90,7 @@ export async function _identify(equipmentData) {
  * Removes identification from equipment, making it unidentified again.
  * Creates a copy with limited properties and removes most effects.
  *
- * @param {TeriockEquipmentData} equipmentData - The equipment data to unidentify.
+ * @param {TeriockEquipmentModel} equipmentData - The equipment data to unidentify.
  * @returns {Promise<void>} Promise that resolves when the unidentification is complete.
  * @private
  */

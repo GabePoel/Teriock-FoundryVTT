@@ -1,7 +1,7 @@
 /**
  * Generates message parts for a resource effect, including blocks for display.
  * Creates formatted display elements for resource description.
- * @param {TeriockResourceData} resourceData - The resource data to generate message parts for.
+ * @param {TeriockResourceModel} resourceData - The resource data to generate message parts for.
  * @returns {Partial<Teriock.MessageData.MessageParts>} Object containing blocks for the resource message.
  * @private
  */

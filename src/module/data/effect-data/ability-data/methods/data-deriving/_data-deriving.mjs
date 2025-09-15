@@ -1,7 +1,6 @@
 /**
  * Poor workaround to allow for subs to be accessible for effect duplication.
- *
- * @param {TeriockAbilityData} abilityData
+ * @param {TeriockAbilityModel} abilityData
  * @returns {void}
  * @private
  */

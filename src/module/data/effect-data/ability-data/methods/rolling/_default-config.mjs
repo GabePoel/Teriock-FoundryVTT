@@ -33,8 +33,7 @@ const DEFAULT_CHAT_DATA = {
 
 /**
  * Build the default config for this roll.
- *
- * @param {TeriockAbilityData} abilityData
+ * @param {TeriockAbilityModel} abilityData
  * @param {Teriock.RollOptions.AbilityRoll} options
  * @returns {AbilityRollConfig}
  * @private

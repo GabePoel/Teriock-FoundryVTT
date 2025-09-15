@@ -1,6 +1,6 @@
 import { getRollIcon, mergeFreeze } from "../../../helpers/utils.mjs";
-import { ConsumableDataMixin, WikiDataMixin } from "../../mixins/_module.mjs";
-import TeriockBaseItemData from "../base-item-data/base-item-data.mjs";
+import { ConsumableDataMixin, ExecutableDataMixin, WikiDataMixin } from "../../mixins/_module.mjs";
+import TeriockBaseItemModel from "../base-item-data/base-item-data.mjs";
 import * as attunement from "./methods/_attunement.mjs";
 import * as contextMenus from "./methods/_context-menus.mjs";
 import * as deriving from "./methods/_data-deriving.mjs";
@@ -18,11 +18,13 @@ import * as schema from "./methods/_schema.mjs";
  * Relevant wiki pages:
  * - [Equipment](https://wiki.teriock.com/index.php/Category:Equipment)
  *
- * @extends {TeriockBaseItemData}
+ * @extends {TeriockBaseItemModel}
  * @mixes ConsumableDataMixin
+ * @mixes ExecutableDataMixin
  * @mixes WikiDataMixin
  */
-export default class TeriockEquipmentData extends ConsumableDataMixin(WikiDataMixin(TeriockBaseItemData)) {
+export default class TeriockEquipmentModel extends ConsumableDataMixin(WikiDataMixin(ExecutableDataMixin(
+  TeriockBaseItemModel))) {
   /**
    * @inheritDoc
    * @type {Readonly<Teriock.Documents.ItemModelMetadata>}

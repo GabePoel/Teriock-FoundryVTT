@@ -21,7 +21,7 @@ const { Actor } = foundry.documents;
  * @property {Set<Teriock.Parameters.Condition.ConditionKey>} statuses
  * @property {Teriock.Documents.ActorType} type
  * @property {Teriock.UUID<TeriockActor>} uuid
- * @property {TeriockBaseActorData} system
+ * @property {TeriockBaseActorModel} system
  * @property {TeriockBaseActorSheet} sheet
  * @property {TeriockEffect[]} appliedEffects
  * @property {TeriockEffect[]} temporaryEffects

@@ -6,7 +6,7 @@
  * - [Carrying Capacity](https://wiki.teriock.com/index.php/Core:Carrying_Capacity)
  * - [Encumbered](https://wiki.teriock.com/index.php/Condition:Encumbered)
  *
- * @param {TeriockBaseActorData} actorData - The actor's base data system object.
+ * @param {TeriockBaseActorModel} actorData - The actor's base data system object.
  * @returns {void} Modifies the system object in place.
  * @private
  */
@@ -36,7 +36,7 @@ export function _prepareEncumbrance(actorData) {
  * Prepares money-related derived data.
  * Calculates total money value and weight based on currency amounts and configuration.
  *
- * @param {TeriockBaseActorData} actorData - The actor's base data system object.
+ * @param {TeriockBaseActorModel} actorData - The actor's base data system object.
  * @returns {void} Modifies the system object in place.
  * @private
  */
@@ -60,7 +60,7 @@ export function _prepareMoney(actorData) {
  * Calculates the total weight carried by the actor.
  * Includes equipped equipment weight and money weight.
  *
- * @param {TeriockBaseActorData} actorData - The actor's base data system object.
+ * @param {TeriockBaseActorModel} actorData - The actor's base data system object.
  * @returns {void} Modifies the system object in place.
  * @private
  */

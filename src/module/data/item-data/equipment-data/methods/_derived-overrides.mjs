@@ -1,7 +1,6 @@
 /**
  * Generic function to derive equipment property values with actor overrides and upgrades
- *
- * @param {TeriockEquipmentData} equipmentData
+ * @param {TeriockEquipmentModel} equipmentData
  * @param {string} dataKey - The data key to check overrides for
  * @param {function} getInitialValue - Function to extract initial value from equipmentData
  * @param {function} combineValues - Function to combine current and override values
@@ -109,7 +108,7 @@ function formatStringUpgrade(current, upgrade) {
 /**
  * Derived AV0 value.
  *
- * @param {TeriockEquipmentData} equipmentData
+ * @param {TeriockEquipmentModel} equipmentData
  * @returns {boolean}
  */
 export function _derivedAv0(equipmentData) {
@@ -125,7 +124,7 @@ export function _derivedAv0(equipmentData) {
 /**
  * Derived warded value.
  *
- * @param {TeriockEquipmentData} equipmentData
+ * @param {TeriockEquipmentModel} equipmentData
  * @returns {boolean}
  */
 export function _derivedWarded(equipmentData) {
@@ -141,7 +140,7 @@ export function _derivedWarded(equipmentData) {
 /**
  * Derived UB value.
  *
- * @param {TeriockEquipmentData} equipmentData
+ * @param {TeriockEquipmentModel} equipmentData
  * @returns {boolean}
  */
 export function _derivedUb(equipmentData) {
@@ -157,7 +156,7 @@ export function _derivedUb(equipmentData) {
 /**
  * Derived armor value.
  *
- * @param {TeriockEquipmentData} equipmentData
+ * @param {TeriockEquipmentModel} equipmentData
  * @returns {number}
  */
 export function _derivedAv(equipmentData) {
@@ -173,7 +172,7 @@ export function _derivedAv(equipmentData) {
 /**
  * Derived block value.
  *
- * @param {TeriockEquipmentData} equipmentData
+ * @param {TeriockEquipmentModel} equipmentData
  * @returns {number}
  */
 export function _derivedBv(equipmentData) {
@@ -189,7 +188,7 @@ export function _derivedBv(equipmentData) {
 /**
  * Derived damage dice.
  *
- * @param {TeriockEquipmentData} equipmentData
+ * @param {TeriockEquipmentModel} equipmentData
  * @returns {string}
  */
 export function _derivedDamage(equipmentData) {
@@ -207,7 +206,7 @@ export function _derivedDamage(equipmentData) {
 /**
  * Derived two-handed damage dice.
  *
- * @param {TeriockEquipmentData} equipmentData
+ * @param {TeriockEquipmentModel} equipmentData
  * @returns {string}
  */
 export function _derivedTwoHandedDamage(equipmentData) {

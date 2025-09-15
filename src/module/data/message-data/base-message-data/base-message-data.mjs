@@ -4,7 +4,7 @@ import { buildHTMLButton } from "../../../helpers/html.mjs";
 const { fields } = foundry.data;
 const { TypeDataModel } = foundry.abstract;
 
-export default class TeriockBaseMessageData extends TypeDataModel {
+export default class TeriockBaseMessageModel extends TypeDataModel {
   /**
    * Blank metadata.
    * @returns {object} The metadata object.

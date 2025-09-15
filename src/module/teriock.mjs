@@ -121,28 +121,28 @@ foundry.helpers.Hooks.once("init", function () {
 
   // Data models
   Object.assign(CONFIG.Actor.dataModels, {
-    character: data.actor.CharacterData,
+    character: data.actor.TeriockCharacterModel,
   });
   Object.assign(CONFIG.Item.dataModels, {
-    equipment: data.item.EquipmentData,
-    mechanic: data.item.MechanicData,
-    power: data.item.PowerData,
-    rank: data.item.RankData,
-    species: data.item.SpeciesData,
-    wrapper: data.item.WrapperData,
+    equipment: data.item.TeriockEquipmentModel,
+    mechanic: data.item.TeriockMechanicModel,
+    power: data.item.TeriockPowerModel,
+    rank: data.item.TeriockRankModel,
+    species: data.item.TeriockSpeciesModel,
+    wrapper: data.item.TeriockWrapperModel,
   });
   Object.assign(CONFIG.ActiveEffect.dataModels, {
-    ability: data.effect.AbilityData,
-    attunement: data.effect.AttunementData,
-    base: data.effect.BaseEffectData,
-    condition: data.effect.ConditionData,
-    consequence: data.effect.ConsequenceData,
-    fluency: data.effect.FluencyData,
-    property: data.effect.PropertyData,
-    resource: data.effect.ResourceData,
+    ability: data.effect.TeriockAbilityModel,
+    attunement: data.effect.TeriockAttunementModel,
+    base: data.effect.TeriockBaseEffectModel,
+    condition: data.effect.TeriockConditionModel,
+    consequence: data.effect.TeriockConsequenceModel,
+    fluency: data.effect.TeriockFluencyModel,
+    property: data.effect.TeriockPropertyModel,
+    resource: data.effect.TeriockResourceModel,
   });
   Object.assign(CONFIG.ChatMessage.dataModels, {
-    base: data.message.BaseChatMessageData,
+    base: data.message.TeriockBaseMessageModel,
   });
 
   // UX

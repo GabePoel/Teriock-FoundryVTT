@@ -13,13 +13,14 @@
           )
           type="macro"
           id=(pureUuid val.safeUuid)
+          classes="macro-card hooked-macro-card"
         }}
       {{/each}}
+      {{#if (not (exists macros))}}
+        <div class="no-results medium not-hidden">
+          <p>No macros found. Drag a macro here to add it.</p>
+        </div>
+      {{/if}}
     </div>
   </div>
-  {{#if (not (exists macros))}}
-    <div class="no-results medium not-hidden">
-      <p>No macros found. Drag a macro here to add it.</p>
-    </div>
-  {{/if}}
 </div>

@@ -4,7 +4,7 @@ import { TeriockChatMessage } from "../../../../documents/_module.mjs";
 /**
  * Initiates a fluency roll with the specified options.
  *
- * @param {TeriockFluencyData} fluencyData - The fluency data to roll for.
+ * @param {TeriockFluencyModel} fluencyData - The fluency data to roll for.
  * @param {Teriock.RollOptions.CommonRoll} options - Options for the roll including advantage/disadvantage.
  * @returns {Promise<void>} Promise that resolves when the roll is complete.
  * @private
@@ -17,7 +17,7 @@ export async function _roll(fluencyData, options) {
  * Performs the actual fluency roll, creating a message with the roll result.
  * Handles advantage/disadvantage and applies tradecraft modifiers.
  *
- * @param {TeriockFluencyData} fluencyData - The fluency data to roll for.
+ * @param {TeriockFluencyModel} fluencyData - The fluency data to roll for.
  * @param {Teriock.RollOptions.CommonRoll} options - Options for the roll including advantage/disadvantage.
  * @returns {Promise<void>} Promise that resolves when the roll message is sent.
  * @private

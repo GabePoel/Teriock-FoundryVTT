@@ -1,7 +1,7 @@
 import { mergeFreeze } from "../../../helpers/utils.mjs";
 import { HierarchyDataMixin, WikiDataMixin } from "../../mixins/_module.mjs";
 import { FormulaField, ListField, TextField } from "../../shared/fields/_module.mjs";
-import TeriockBaseEffectData from "../base-effect-data/base-effect-data.mjs";
+import TeriockBaseEffectModel from "../base-effect-data/base-effect-data.mjs";
 import { changeField } from "../shared/shared-fields.mjs";
 import { _messageParts } from "./methods/_messages.mjs";
 import { _migrateData } from "./methods/_migrate-data.mjs";
@@ -16,11 +16,11 @@ const { fields } = foundry.data;
  * Relevant wiki pages:
  * - [Properties](https://wiki.teriock.com/index.php/Category:Properties)
  *
- * @extends {TeriockBaseEffectData}
+ * @extends {TeriockBaseEffectModel}
  * @mixes WikiDataMixin
  * @mixes HierarchyDataMixin
  */
-export default class TeriockPropertyData extends HierarchyDataMixin(WikiDataMixin(TeriockBaseEffectData)) {
+export default class TeriockPropertyModel extends HierarchyDataMixin(WikiDataMixin(TeriockBaseEffectModel)) {
   /**
    * @inheritDoc
    * @type {Readonly<Teriock.Documents.EffectModelMetadata>}
@@ -30,6 +30,7 @@ export default class TeriockPropertyData extends HierarchyDataMixin(WikiDataMixi
     modifies: "Item",
     namespace: "Property",
     type: "property",
+    passive: true,
   });
 
   /** @inheritDoc */

@@ -1,5 +1,5 @@
 import { mergeFreeze } from "../../../helpers/utils.mjs";
-import TeriockBaseEffectData from "../base-effect-data/base-effect-data.mjs";
+import TeriockBaseEffectModel from "../base-effect-data/base-effect-data.mjs";
 
 const { fields } = foundry.data;
 
@@ -9,7 +9,7 @@ const { fields } = foundry.data;
  * Relevant wiki pages:
  * - [Presence](https://wiki.teriock.com/index.php/Core:Presence)
  */
-export default class TeriockAttunementData extends TeriockBaseEffectData {
+export default class TeriockAttunementModel extends TeriockBaseEffectModel {
   /**
    * @inheritDoc
    * @type {Readonly<Teriock.Documents.EffectModelMetadata>}

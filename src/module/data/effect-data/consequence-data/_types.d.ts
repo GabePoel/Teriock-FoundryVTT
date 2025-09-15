@@ -1,4 +1,4 @@
-import type TeriockBaseEffectData from "../base-effect-data/base-effect-data.mjs";
+import type TeriockBaseEffectModel from "../base-effect-data/base-effect-data.mjs";
 import type { TeriockConsequence } from "../../../documents/_documents.mjs";
 import type {
   CombatExpirationMethod, CombatExpirationSourceType, CombatExpirationTiming,
@@ -7,7 +7,7 @@ import type { TeriockActor, TeriockEffect } from "../../../documents/_module.mjs
 import type { HierarchyDataMixinInterface } from "../../mixins/hierarchy-data-mixin/_types";
 
 declare module "./consequence-data.mjs" {
-  export default interface TeriockConsequenceData extends TeriockBaseEffectData, HierarchyDataMixinInterface {
+  export default interface TeriockConsequenceModel extends TeriockBaseEffectModel, HierarchyDataMixinInterface {
     conditionExpiration: boolean;
     dawnExpiration: boolean;
     expirations: {

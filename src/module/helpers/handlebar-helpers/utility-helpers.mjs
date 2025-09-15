@@ -234,6 +234,7 @@ export default function registerUiHelpers() {
       action = "rollDoc",
       tooltip = "Use",
       hidden = false,
+      classes = "",
     } = options.hash;
     if (max === Infinity) {
       max = null;
@@ -251,7 +252,7 @@ export default function registerUiHelpers() {
 
     return new Handlebars.SafeString(`
       <div 
-        class="tcard ${draggable ? "draggable" : ""} ${active ? "active" : "inactive"} ${struck
+        class="tcard ${classes} ${draggable ? "draggable" : ""} ${active ? "active" : "inactive"} ${struck
       ? "struck"
       : ""} ${shattered ? "shattered" : ""} ${hidden ? "hidden" : ""}" ${idAttr} ${parentIdAttr} ${uuidAttr} ${typeAttr} 
         data-action="${openable ? "openDoc" : ""}"
@@ -281,7 +282,7 @@ export default function registerUiHelpers() {
 
   Handlebars.registerHelper("abilityCards", /**
    * @param {TeriockEffect[]} effects
-   * @param {TeriockBaseItemData} system
+   * @param {TeriockBaseItemModel} system
    * @param {object} options
    */
   function (effects, system, options) {

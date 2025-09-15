@@ -2,7 +2,7 @@
  * Relevant wiki pages:
  * - [Damage](https://wiki.teriock.com/index.php/Core:Damage)
  *
- * @param {TeriockBaseActorData} actorData
+ * @param {TeriockBaseActorModel} actorData
  * @param {number} amount
  * @returns {Promise<void>}
  */
@@ -21,7 +21,7 @@ export async function _takeDamage(actorData, amount) {
  * Relevant wiki pages:
  * - [Mana Drain](https://wiki.teriock.com/index.php/Drain:Mana)
  *
- * @param {TeriockBaseActorData} actorData
+ * @param {TeriockBaseActorModel} actorData
  * @param {number} amount
  * @returns {Promise<void>}
  */
@@ -40,7 +40,7 @@ export async function _takeDrain(actorData, amount) {
  * Relevant wiki pages:
  * - [Wither](https://wiki.teriock.com/index.php/Drain:Wither)
  *
- * @param {TeriockBaseActorData} actorData
+ * @param {TeriockBaseActorModel} actorData
  * @param {number} amount
  * @returns {Promise<void>}
  */
@@ -54,7 +54,7 @@ export async function _takeWither(actorData, amount) {
  * Relevant wiki pages:
  * - [Healing](https://wiki.teriock.com/index.php/Core:Healing)
  *
- * @param {TeriockBaseActorData} actorData
+ * @param {TeriockBaseActorModel} actorData
  * @param {number} amount
  * @returns {Promise<void>}
  */
@@ -68,7 +68,7 @@ export async function _takeHeal(actorData, amount) {
  * Relevant wiki pages:
  * - [Revitalizing](https://wiki.teriock.com/index.php/Core:Revitalizing)
  *
- * @param {TeriockBaseActorData} actorData
+ * @param {TeriockBaseActorModel} actorData
  * @param {number} amount
  * @returns {Promise<void>}
  */
@@ -82,7 +82,7 @@ export async function _takeRevitalize(actorData, amount) {
  * Relevant wiki pages:
  * - [Temporary Hit Points](https://wiki.teriock.com/index.php/Core:Temporary_Hit_Points)
  *
- * @param {TeriockBaseActorData} actorData
+ * @param {TeriockBaseActorModel} actorData
  * @param {number} amount
  * @returns {Promise<void>}
  */
@@ -94,7 +94,7 @@ export async function _takeSetTempHp(actorData, amount) {
  * Relevant wiki pages:
  * - [Temporary Mana Points](https://wiki.teriock.com/index.php/Core:Temporary_Mana_Points)
  *
- * @param {TeriockBaseActorData} actorData
+ * @param {TeriockBaseActorModel} actorData
  * @param {number} amount
  * @returns {Promise<void>}
  */
@@ -106,7 +106,7 @@ export async function _takeSetTempMp(actorData, amount) {
  * Relevant wiki pages:
  * - [Temporary Hit Points](https://wiki.teriock.com/index.php/Core:Temporary_Hit_Points)
  *
- * @param {TeriockBaseActorData} actorData
+ * @param {TeriockBaseActorModel} actorData
  * @param {number} amount
  * @returns {Promise<void>}
  */
@@ -120,7 +120,7 @@ export async function _takeGainTempHp(actorData, amount) {
  * Relevant wiki pages:
  * - [Temporary Mana Points](https://wiki.teriock.com/index.php/Core:Temporary_Mana_Points)
  *
- * @param {TeriockBaseActorData} actorData
+ * @param {TeriockBaseActorModel} actorData
  * @param {number} amount
  * @returns {Promise<void>}
  */
@@ -134,7 +134,7 @@ export async function _takeGainTempMp(actorData, amount) {
  * Relevant wiki pages:
  * - [Swift Sleep Aura](https://wiki.teriock.com/index.php/Ability:Swift_Sleep_Aura)
  *
- * @param {TeriockBaseActorData} actorData
+ * @param {TeriockBaseActorModel} actorData
  * @param {number} amount
  * @returns {Promise<void>}
  */
@@ -151,7 +151,7 @@ export async function _takeSleep(actorData, amount) {
  * Relevant wiki pages:
  * - [Death Ray](https://wiki.teriock.com/index.php/Ability:Death_Ray)
  *
- * @param {TeriockBaseActorData} actorData
+ * @param {TeriockBaseActorModel} actorData
  * @param {number} amount
  * @returns {Promise<void>}
  */
@@ -167,7 +167,7 @@ export async function _takeKill(actorData, amount) {
 /**
  * Pays the specified amount from an actor, using exact change if requested.
  * Falls back to debt if funds are insufficient.
- * @param {TeriockBaseActorData} actorData
+ * @param {TeriockBaseActorModel} actorData
  * @param {number} amount - Gold-equivalent amount to pay.
  * @param {"exact" | "greedy"} mode
  * @returns {Promise<void>}

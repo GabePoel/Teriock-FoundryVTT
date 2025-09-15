@@ -52,4 +52,13 @@ export default class TeriockFluencySheet extends TeriockBaseEffectSheet {
       this._connectContextMenu(selector, menu(this.document), "click");
     });
   }
+
+  /** @inheritDoc */
+  async _prepareContext(options) {
+    const context = await super._prepareContext(options);
+    await this._enrichAll(context, {
+      tradecraft: TERIOCK.content.tradecrafts[this.document.system.tradecraft],
+    });
+    return context;
+  }
 }

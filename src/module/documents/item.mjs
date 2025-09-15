@@ -18,7 +18,7 @@ const { Item } = foundry.documents;
  * @property {Readonly<TeriockEffect[]>} transferredEffects
  * @property {Teriock.Documents.ItemType} type
  * @property {Teriock.UUID<TeriockItem>} uuid
- * @property {TeriockBaseItemData} system
+ * @property {TeriockBaseItemModel} system
  * @property {TeriockBaseItemSheet} sheet
  * @property {boolean} isOwner
  * @property {boolean} limited

@@ -24,6 +24,7 @@ declare global {
       wiki: boolean;
       namespace: string;
       pageNameKey: string;
+      passive: boolean;
     };
 
     export type ActorModelMetadata = Teriock.Documents.ModelMetadata & {

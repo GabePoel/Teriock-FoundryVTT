@@ -1,9 +1,9 @@
-import type TeriockBaseItemData from "../base-item-data/base-item-data.mjs";
+import type TeriockBaseItemModel from "../base-item-data/base-item-data.mjs";
 import type { TeriockEquipment } from "../../../documents/_documents.mjs";
 import type { ConsumableInterface } from "../../effect-data/shared/shared-fields";
 
 declare module "./equipment-data.mjs" {
-  export default interface TeriockEquipmentData extends TeriockBaseItemData, ConsumableInterface {
+  export default interface TeriockEquipmentModel extends TeriockBaseItemModel, ConsumableInterface {
     /** Armor Value */
     av: number;
     /** Armor value for effects to modify */

@@ -1,10 +1,10 @@
-import type TeriockBaseEffectData from "../base-effect-data/base-effect-data.mjs";
+import type TeriockBaseEffectModel from "../base-effect-data/base-effect-data.mjs";
 import type { TeriockProperty } from "../../../documents/_documents.mjs";
 import type { EffectChangeData } from "../ability-data/types/consequences";
 import type { HierarchyDataMixinInterface } from "../../mixins/hierarchy-data-mixin/_types";
 
 declare module "./property-data.mjs" {
-  export default interface TeriockPropertyData extends TeriockBaseEffectData, HierarchyDataMixinInterface {
+  export default interface TeriockPropertyModel extends TeriockBaseEffectModel, HierarchyDataMixinInterface {
     /** Applies even if the parent {@link TeriockEquipment} is dampened */
     applyIfDampened: boolean;
     /** Applies even if the parent {@link TeriockEquipment} is shattered */

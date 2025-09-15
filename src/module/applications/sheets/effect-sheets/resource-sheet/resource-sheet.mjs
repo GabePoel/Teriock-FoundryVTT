@@ -1,6 +1,5 @@
 import { documentOptions } from "../../../../constants/options/document-options.mjs";
 import TeriockBaseEffectSheet from "../base-effect-sheet/base-effect-sheet.mjs";
-import { callbackContextMenu } from "./connections/_context-menus.mjs";
 
 /**
  * Resource sheet for Teriock system resources.
@@ -28,10 +27,4 @@ export default class TeriockResourceSheet extends TeriockBaseEffectSheet {
       ],
     },
   };
-
-  /** @inheritDoc */
-  async _onRender(options, context) {
-    await super._onRender(options, context);
-    this._connectContextMenu(".function-box", callbackContextMenu(this.document), "click");
-  }
 }

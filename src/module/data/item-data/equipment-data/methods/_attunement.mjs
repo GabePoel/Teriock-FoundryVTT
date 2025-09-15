@@ -3,8 +3,7 @@ import { evaluateSync } from "../../../../helpers/utils.mjs";
 /**
  * Attunes equipment to the current character, creating an attunement effect.
  * Checks if the character has enough unused presence and handles reference equipment.
- *
- * @param {TeriockEquipmentData} equipmentData - The equipment data to attune.
+ * @param {TeriockEquipmentModel} equipmentData - The equipment data to attune.
  * @returns {Promise<TeriockEffect | null>} Promise that resolves to the attunement effect or null.
  * @private
  */
@@ -58,7 +57,7 @@ export async function _attune(equipmentData) {
 /**
  * Removes attunement from equipment by deleting the attunement effect.
  *
- * @param {TeriockEquipmentData} equipmentData - The equipment data to deattune.
+ * @param {TeriockEquipmentModel} equipmentData - The equipment data to deattune.
  * @returns {Promise<void>} Promise that resolves when the attunement is removed.
  * @private
  */
@@ -72,7 +71,7 @@ export async function _deattune(equipmentData) {
 /**
  * Checks if equipment is currently attuned to the character.
  *
- * @param {TeriockEquipmentData} equipmentData - The equipment data to check.
+ * @param {TeriockEquipmentModel} equipmentData - The equipment data to check.
  * @returns {boolean} True if the equipment is attuned, false otherwise.
  * @private
  */
@@ -86,7 +85,7 @@ export function _attuned(equipmentData) {
 /**
  * Gets the current attunement effect for the equipment.
  *
- * @param {TeriockEquipmentData} equipmentData - The equipment data to get attunement for.
+ * @param {TeriockEquipmentModel} equipmentData - The equipment data to get attunement for.
  * @returns {TeriockAttunement | null} The attunement effect or null if not attuned.
  * @private
  */
@@ -101,7 +100,7 @@ export function _getAttunement(equipmentData) {
  * Checks if the character can attune to the equipment based on available presence.
  * Considers reference equipment tier if the equipment is not identified.
  *
- * @param {TeriockEquipmentData} equipmentData - The equipment data to check attunement for.
+ * @param {TeriockEquipmentModel} equipmentData - The equipment data to check attunement for.
  * @returns {Promise<boolean>} Promise that resolves to true if attunement is possible, false otherwise.
  * @private
  */

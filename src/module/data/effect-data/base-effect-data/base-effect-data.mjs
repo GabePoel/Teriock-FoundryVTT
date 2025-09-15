@@ -7,11 +7,10 @@ const { fields } = foundry.data;
 
 /**
  * Base effect data model.
- *
  * @extends {ChildTypeModel}
  * @extends {TypeDataModel}
  */
-export default class TeriockBaseEffectData extends ChildTypeModel {
+export default class TeriockBaseEffectModel extends ChildTypeModel {
   /**
    * @inheritDoc
    * @type {Teriock.Documents.EffectModelMetadata}

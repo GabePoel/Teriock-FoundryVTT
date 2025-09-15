@@ -3,7 +3,7 @@ import { ChildTypeModel } from "../../models/_module.mjs";
 
 declare module "./base-effect-data.mjs" {
   // @ts-ignore
-  export default interface TeriockBaseEffectData extends ChildTypeModel {
+  export default interface TeriockBaseEffectModel extends ChildTypeModel {
     /** If this effect should be deleted instead of disabled when it expires */
     deleteOnExpire: boolean;
     /** Suppression */

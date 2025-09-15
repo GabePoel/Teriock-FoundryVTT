@@ -1,4 +1,4 @@
-import type TeriockBaseItemData from "../base-item-data/base-item-data.mjs";
+import type TeriockBaseItemModel from "../base-item-data/base-item-data.mjs";
 import type { TeriockSpecies } from "../../../documents/_documents.mjs";
 import type { StatDataMixinInterface } from "../../mixins/stat-data-mixin/_types";
 
@@ -8,7 +8,7 @@ export type SizeAbilityStep = {
 };
 
 declare module "./species-data.mjs" {
-  export default interface TeriockSpeciesData extends TeriockBaseItemData, StatDataMixinInterface {
+  export default interface TeriockSpeciesModel extends TeriockBaseItemModel, StatDataMixinInterface {
     /** Age of maturity */
     adult: number;
     /** Appearance */

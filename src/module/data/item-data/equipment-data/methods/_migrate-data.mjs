@@ -2,7 +2,7 @@
  * Migrates equipment data from older versions to the current format.
  * Converts numeric tier and maxQuantity values to the new schema format with raw and derived fields.
  * @param {object} data - The equipment data to migrate.
- * @returns {Partial<TeriockEquipmentData>} The migrated equipment data.
+ * @returns {Partial<TeriockEquipmentModel>} The migrated equipment data.
  * @private
  */
 export function _migrateData(data) {

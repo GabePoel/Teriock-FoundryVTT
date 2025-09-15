@@ -8,7 +8,7 @@ import { processSubProperties } from "../../../shared/parsing/process-subs.mjs";
 /**
  * Parse raw HTML content for a property.
  *
- * @param {TeriockPropertyData} propertyData
+ * @param {TeriockPropertyModel} propertyData
  * @param {string} rawHTML
  * @returns {Promise<object>}
  * @private
@@ -37,7 +37,7 @@ export async function _parse(propertyData, rawHTML) {
     type: "property",
   });
   const parameters = {
-    /** @type {TeriockPropertyData} */
+    /** @type {TeriockPropertyModel} */
     system: foundry.utils.deepClone(referenceProperty.system).toObject(),
   };
   // Clean parameters

@@ -5,7 +5,7 @@ import {
 /**
  * Generates message parts for a power item, including bars and blocks for display.
  * Creates formatted display elements for power type, species information, description, and flaws.
- * @param {TeriockPowerData} powerData - The power data to generate message parts for.
+ * @param {TeriockPowerModel} powerData - The power data to generate message parts for.
  * @returns {Partial<Teriock.MessageData.MessageParts>} Object containing bars and blocks for the power message.
  * @private
  */

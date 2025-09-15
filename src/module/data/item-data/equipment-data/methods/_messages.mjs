@@ -4,7 +4,7 @@ import {
 
 /**
  * Generates message parts for a piece of equipment.
- * @param {TeriockEquipmentData} equipmentData - The equipment data to generate message parts for.
+ * @param {TeriockEquipmentModel} equipmentData - The equipment data to generate message parts for.
  * @returns {Partial<Teriock.MessageData.MessageParts>} Object containing bars and blocks for the equipment message.
  * @private
  */
@@ -101,7 +101,7 @@ export function _messageParts(equipmentData) {
 /**
  * Generates secret message parts for an equipment item, showing only noticeable properties.
  * Used when equipment is not fully identified.
- * @param {TeriockEquipmentData} equipmentData - The equipment data to generate secret message parts for.
+ * @param {TeriockEquipmentModel} equipmentData - The equipment data to generate secret message parts for.
  * @returns {Partial<Teriock.MessageData.MessageParts>} Object containing bars and blocks for the secret equipment
  *   message.
  * @private

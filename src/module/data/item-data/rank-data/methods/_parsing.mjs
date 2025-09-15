@@ -46,7 +46,7 @@ function extractAbilityNames(metaData, attr) {
 /**
  * Parses raw HTML content for a rank, extracting class information and abilities.
  * Creates abilities based on class rank and updates the rank with parsed data.
- * @param {TeriockRankData} rankData - The rank data to parse content for.
+ * @param {TeriockRankModel} rankData - The rank data to parse content for.
  * @param {string} rawHTML - The raw HTML content to parse.
  * @returns {Promise<object>} Promise that resolves to the parsed parent data.
  * @private

@@ -1,3 +1,5 @@
+import { makeIcon } from "../../../../helpers/utils.mjs";
+
 const { ux } = foundry.applications;
 
 /**
@@ -10,7 +12,7 @@ const { ux } = foundry.applications;
  * @param {HTMLElement} element - The DOM element containing the embedded document cards.
  */
 export default function _connectEmbedded(document, element) {
-  element.querySelectorAll(".tcard").forEach((el) => {
+  element.querySelectorAll(".tcard").forEach(/** @param {HTMLElement} el */(el) => {
     const id = el.getAttribute("data-id");
     const parentId = el.getAttribute("data-parent-id");
     /** @type {TeriockItem|TeriockEffect} */
@@ -28,6 +30,33 @@ export default function _connectEmbedded(document, element) {
           event.stopPropagation();
           embedded.system.gainOne();
         });
+      });
+    } else if (el.classList.contains("macro-card")) {
+      new ux.ContextMenu(el, ".tcard", [
+        {
+          name: "Unlink",
+          icon: makeIcon("link-slash", "contextMenu"),
+          callback: async () => {
+            const uuid = el.dataset.id;
+            await document.system.unlinkMacro(uuid);
+          },
+          condition: () => document.sheet.editable && document.isOwner,
+          group: "document",
+        },
+        {
+          name: "Change Run Hook",
+          icon: makeIcon("gear-code", "contextMenu"),
+          callback: async () => {
+            const uuid = el.dataset.id;
+            await document.system.changeMacroRunHook(uuid);
+          },
+          condition: () => document.sheet.editable && document.isOwner && el.classList.contains("hooked-macro-card"),
+          group: "document",
+        },
+      ], {
+        eventName: "contextmenu",
+        jQuery: false,
+        fixed: true,
       });
     }
   });

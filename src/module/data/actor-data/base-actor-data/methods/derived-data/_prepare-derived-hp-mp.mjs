@@ -1,6 +1,6 @@
 /**
  * Bound actor HP and MP.
- * @param {TeriockBaseActorData} actorData
+ * @param {TeriockBaseActorModel} actorData
  * @private
  */
 export function _prepareDerivedHpMp(actorData) {

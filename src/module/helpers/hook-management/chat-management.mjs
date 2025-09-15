@@ -13,7 +13,7 @@ export default function registerChatManagementHooks() {
 
   foundry.helpers.Hooks.on("renderChatMessageHTML", (_message, html) => {
     // Image click handler
-    /** TODO: Fix and move to {@link TeriockBaseMessageData} */
+    /** TODO: Fix and move to {@link TeriockBaseMessageModel} */
     html.querySelectorAll(".timage").forEach((imgEl) => {
       imgEl.addEventListener("click", async (event) => {
         event.stopPropagation();
@@ -27,7 +27,7 @@ export default function registerChatManagementHooks() {
     });
 
     // Open tags
-    /** TODO: Move to {@link TeriockBaseMessageData} */
+    /** TODO: Move to {@link TeriockBaseMessageModel} */
     addClickHandler(html.querySelectorAll("[data-action=\"open\"]"), async (event) => {
       event.preventDefault();
       const uuid = event.currentTarget.getAttribute("data-uuid");
@@ -40,7 +40,7 @@ export default function registerChatManagementHooks() {
       }
     });
 
-    /** TODO: Move to {@link TeriockBaseMessageData} */
+    /** TODO: Move to {@link TeriockBaseMessageModel} */
     html.querySelectorAll(".teriock-target-container").forEach((container) => {
       let clickTimeout = null;
 

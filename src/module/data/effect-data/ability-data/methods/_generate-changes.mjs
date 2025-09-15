@@ -3,8 +3,7 @@ import { pureUuid } from "../../../../helpers/utils.mjs";
 /**
  * Generates an array of changes from ability data based on proficiency level.
  * Does not include heightened change data.
- *
- * @param {TeriockAbilityData} abilityData - The ability data to generate the changes from.
+ * @param {TeriockAbilityModel} abilityData - The ability data to generate the changes from.
  * @returns {EffectChangeData[]}
  * @private
  */

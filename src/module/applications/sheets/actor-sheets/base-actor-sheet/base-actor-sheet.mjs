@@ -2,7 +2,7 @@ import { documentOptions } from "../../../../constants/options/document-options.
 import { tradecraftMessage } from "../../../../helpers/html.mjs";
 import { buildMessage } from "../../../../helpers/messages-builder/message-builder.mjs";
 import { HackStatMixin } from "../../../shared/mixins/_module.mjs";
-import { SheetMixin } from "../../mixins/_module.mjs";
+import { CommonSheetMixin } from "../../mixins/_module.mjs";
 import _embeddedFromCard from "../../mixins/methods/_embedded-from-card.mjs";
 import {
   piercingContextMenu, primaryAttackContextMenu, primaryBlockerContextMenu,
@@ -25,7 +25,7 @@ const TextEditor = foundry.applications.ux.TextEditor.implementation;
  * @property {TeriockActor} actor
  * @property {TeriockActor} document
  */
-export default class TeriockBaseActorSheet extends HackStatMixin(SheetMixin(ActorSheetV2)) {
+export default class TeriockBaseActorSheet extends HackStatMixin(CommonSheetMixin(ActorSheetV2)) {
   /** @inheritDoc */
   static DEFAULT_OPTIONS = {
     classes: [

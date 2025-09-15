@@ -1,7 +1,7 @@
 /**
  * Lighting for the {@link TeriockTokenDocument} to inherit.
  *
- * @param {TeriockBaseActorData} actorData
+ * @param {TeriockBaseActorModel} actorData
  * @private
  */
 export function _prepareLighting(actorData) {

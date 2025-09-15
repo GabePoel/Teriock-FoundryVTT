@@ -1,7 +1,7 @@
 import { documentOptions } from "../../../../constants/options/document-options.mjs";
 import * as createEffects from "../../../../helpers/create-effects.mjs";
 import { selectAbilityDialog } from "../../../dialogs/select-dialog.mjs";
-import { SheetMixin } from "../../mixins/_module.mjs";
+import { CommonSheetMixin } from "../../mixins/_module.mjs";
 
 const { ActiveEffectConfig } = foundry.applications.sheets;
 
@@ -9,11 +9,10 @@ const { ActiveEffectConfig } = foundry.applications.sheets;
  * Base effect sheet for Teriock system active effects.
  * Provides common functionality for all effect sheets including change management,
  * context preparation, and effect state handling.
- *
  * @extends ActiveEffectConfig
  * @property {TeriockEffect} document
  */
-export default class TeriockBaseEffectSheet extends SheetMixin(ActiveEffectConfig) {
+export default class TeriockBaseEffectSheet extends CommonSheetMixin(ActiveEffectConfig) {
   /** @inheritDoc */
   static DEFAULT_OPTIONS = {
     classes: [ "effect" ],

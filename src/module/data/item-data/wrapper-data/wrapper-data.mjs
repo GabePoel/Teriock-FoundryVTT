@@ -1,10 +1,10 @@
 import { mergeFreeze } from "../../../helpers/utils.mjs";
-import TeriockBaseItemData from "../base-item-data/base-item-data.mjs";
+import TeriockBaseItemModel from "../base-item-data/base-item-data.mjs";
 
 /**
  * Wrapper-specific item data model.
  */
-export default class TeriockWrapperData extends TeriockBaseItemData {
+export default class TeriockWrapperModel extends TeriockBaseItemModel {
   /**
    * @inheritDoc
    * @type {Readonly<Teriock.Documents.ItemModelMetadata>}
