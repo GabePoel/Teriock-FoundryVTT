@@ -260,7 +260,6 @@ export interface TeriockBaseActorData {
   };
   /** <schema> Update counter - used to force an update when adding/removing effects */
   updateCounter: boolean;
-  // <base> Enhanced sheet data
   /** <derived> Weight */
   weight: number;
   /** <derived> Total weight carried by the actor */
