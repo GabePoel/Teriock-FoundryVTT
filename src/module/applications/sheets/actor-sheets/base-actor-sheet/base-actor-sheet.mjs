@@ -663,6 +663,14 @@ export default class TeriockBaseActorSheet extends HackStatMixin(CommonSheetMixi
   }
 
   /** @inheritDoc */
+  async _onFirstRender(context, options) {
+    await super._onFirstRender(context, options);
+    if (this.document.species.length === 0) {
+      foundry.ui.notifications.warn(`${this.document.name} has no species. Add one from the "Species" compendium.`);
+    }
+  }
+
+  /** @inheritDoc */
   async _onRender(context, options) {
     await super._onRender(context, options);
 

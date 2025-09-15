@@ -146,7 +146,7 @@ export async function selectConditionDialog() {
 
 /**
  * Select property dialog.
- * @returns {Promise<Teriock.Parameters.Equipment.PropertyKey>}
+ * @returns {Promise<Teriock.Parameters.Equipment.PropertyKey|null>}
  */
 export async function selectPropertyDialog() {
   const choices = await Promise.all(Object.values(TERIOCK.index.properties).map((name) => getProperty(name)));
@@ -154,12 +154,16 @@ export async function selectPropertyDialog() {
     hint: "Please select a property.",
     title: "Select Property",
   });
-  return toCamelCase(chosen.name);
+  if (chosen) {
+    return toCamelCase(chosen.name);
+  } else {
+    return null;
+  }
 }
 
 /**
  * Select tradecraft dialog.
- * @returns {Promise<Teriock.Parameters.Fluency.Tradecraft>}
+ * @returns {Promise<Teriock.Parameters.Fluency.Tradecraft|null>}
  */
 export async function selectTradecraftDialog() {
   const choices = await Promise.all(Object.keys(TERIOCK.index.tradecrafts).map(async (tc) => {
@@ -175,12 +179,16 @@ export async function selectTradecraftDialog() {
     title: "Select Tradecraft",
     tooltipKey: "tooltip",
   });
-  return chosen.uuid;
+  if (chosen) {
+    return chosen.uuid;
+  } else {
+    return null;
+  }
 }
 
 /**
  * Select ability dialog.
- * @returns {Promise<string>}
+ * @returns {Promise<string|null>}
  */
 export async function selectAbilityDialog() {
   const choices = await Promise.all(Object.values(TERIOCK.index.abilities).map((name) => getAbility(name)));
@@ -188,12 +196,16 @@ export async function selectAbilityDialog() {
     hint: "Please select an ability.",
     title: "Select Ability",
   });
-  return toCamelCase(chosen.name);
+  if (chosen) {
+    return toCamelCase(chosen.name);
+  } else {
+    return null;
+  }
 }
 
 /**
  * Select equipment dialog.
- * @returns {Promise<string>}
+ * @returns {Promise<string|null>}
  */
 export async function selectEquipmentTypeDialog() {
   const choices = await Promise.all(Object.values(TERIOCK.index.equipment).map((name) => getItem(name, "equipment")));
@@ -201,12 +213,16 @@ export async function selectEquipmentTypeDialog() {
     hint: "Please select an equipment type",
     title: "Select Equipment Type",
   });
-  return toCamelCase(chosen.system.equipmentType);
+  if (chosen) {
+    return toCamelCase(chosen.system.equipmentType);
+  } else {
+    return null;
+  }
 }
 
 /**
  * Select class dialog.
- * @returns {Promise<string>}
+ * @returns {Promise<string|null>}
  */
 export async function selectClassDialog() {
   const choices = await Promise.all([
@@ -226,5 +242,9 @@ export async function selectClassDialog() {
     title: "Select Class",
     tooltipKey: "tooltip",
   });
-  return chosen.uuid;
+  if (chosen) {
+    return chosen.uuid;
+  } else {
+    return null;
+  }
 }

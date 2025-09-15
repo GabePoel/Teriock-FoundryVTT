@@ -60,8 +60,8 @@ export function _prepareHpMp(actorData) {
       Object.assign(actorData.mpDice, rank.system.mpDice);
     }
   });
-  let hpMax = actorData.hp.base;
-  let mpMax = actorData.mp.base;
+  let hpMax = Math.max(1, actorData.hp.base);
+  let mpMax = Math.max(1, actorData.mp.base);
   actorData.hp.max = hpMax;
   actorData.hp.min = -Math.floor(hpMax / 2);
   actorData.hp.value = Math.min(actorData.hp.value, hpMax);

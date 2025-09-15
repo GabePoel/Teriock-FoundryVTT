@@ -117,16 +117,20 @@ export default (Base) => {
      * Creates a new ability for the current document.
      * @param {MouseEvent} _event - The event object.
      * @param {HTMLElement} _target - The target element.
-     * @returns {Promise<ActiveEffect>} Promise that resolves to the created ability.
+     * @returns {Promise<ActiveEffect|null>} Promise that resolves to the created ability.
      */
     static async _createAbility(_event, _target) {
       const abilityKey = await selectAbilityDialog();
       let abilityName = "New Ability";
-      if (abilityKey && abilityKey !== "other") {
-        abilityName = TERIOCK.index.abilities[abilityKey];
-        await tm.fetch.importAbility(this.document, abilityName);
+      if (abilityKey) {
+        if (abilityKey !== "other") {
+          abilityName = TERIOCK.index.abilities[abilityKey];
+          await tm.fetch.importAbility(this.document, abilityName);
+        } else {
+          await createEffects.createAbility(this.document, abilityName);
+        }
       } else {
-        await createEffects.createAbility(this.document, abilityName);
+        return null;
       }
     }
 
@@ -144,11 +148,15 @@ export default (Base) => {
      * Creates new fluency for the current document.
      * @param {MouseEvent} _event - The event object.
      * @param {HTMLElement} _target - The target element.
-     * @returns {Promise<ActiveEffect>} Promise that resolves to the created fluency.
+     * @returns {Promise<ActiveEffect|null>} Promise that resolves to the created fluency.
      */
     static async _createFluency(_event, _target) {
       const tradecraft = await selectTradecraftDialog();
-      return await createEffects.createFluency(this.document, tradecraft);
+      if (tradecraft) {
+        return await createEffects.createFluency(this.document, tradecraft);
+      } else {
+        return null;
+      }
     }
 
     /**
@@ -161,11 +169,15 @@ export default (Base) => {
     static async _createProperty(_event, _target) {
       const propertyKey = await selectPropertyDialog();
       let propertyName = "New Property";
-      if (propertyKey && propertyKey !== "other") {
-        propertyName = TERIOCK.index.properties[propertyKey];
-        await tm.fetch.importProperty(this.document, propertyName);
+      if (propertyKey) {
+        if (propertyKey !== "other") {
+          propertyName = TERIOCK.index.properties[propertyKey];
+          await tm.fetch.importProperty(this.document, propertyName);
+        } else {
+          await createEffects.createProperty(this.document, propertyName);
+        }
       } else {
-        await createEffects.createProperty(this.document, propertyName);
+        return null;
       }
     }
 
