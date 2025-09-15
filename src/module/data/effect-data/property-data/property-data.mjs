@@ -135,6 +135,17 @@ export default class TeriockPropertyModel extends HierarchyDataMixin(WikiDataMix
     return suppressed;
   }
 
+  /**
+   * Unlink a macro.
+   * @param {Teriock.UUID<TeriockMacro>} uuid
+   * @returns {Promise<void>}
+   */
+  async unlinkMacro(uuid) {
+    const updateData = {};
+    updateData[`system.applies.macros.-=${safeUuid(uuid)}`] = null;
+    await this.parent.update(updateData);
+  }
+
   /** @inheritDoc */
   async parse(rawHTML) {
     return await parsing._parse(this, rawHTML);
