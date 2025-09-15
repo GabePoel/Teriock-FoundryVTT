@@ -6,7 +6,7 @@
  * @returns {void} Modifies the system object in place.
  * @private
  */
-export function _prepareAttributes(actorData) {
+export function _prepareDerivedAttributes(actorData) {
   _preparePresence(actorData);
   const {
     attributes,

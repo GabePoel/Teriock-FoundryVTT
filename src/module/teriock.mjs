@@ -55,6 +55,12 @@ foundry.helpers.Hooks.once("init", function () {
   for (const condition of Object.values(TERIOCK.data.conditions)) {
     CONFIG.statusEffects.push(condition);
   }
+  for (const hack of Object.values(TERIOCK.data.hacks)) {
+    CONFIG.statusEffects.push(hack);
+  }
+  for (const transformation of Object.values(TERIOCK.data.transformations)) {
+    CONFIG.statusEffects.push(transformation);
+  }
   CONFIG.statusEffects.sort((a, b) => {
     if (a.id === "dead") {
       return -1;

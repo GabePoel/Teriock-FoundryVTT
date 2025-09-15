@@ -862,7 +862,8 @@ export default class TeriockBaseActorSheet extends HackStatMixin(CommonSheetMixi
       power: tab === "powers" ? this.actor.powers : [],
       rank: tab === "classes" ? this.actor.ranks : [],
     };
-    let conditions = Array.from(this.actor.statuses || []);
+    let conditions = Array.from(this.actor.statuses || [])
+      .filter((c) => Object.keys(TERIOCK.index.conditions).includes(c));
     // Sort: 'down' first, 'dead' second, rest alphabetical
     conditions.sort((a, b) => {
       if (a === "dead") {

@@ -1,7 +1,5 @@
 import TeriockActor from "../../../../../documents/actor.mjs";
 
-import { toCamelCase } from "../../../../../helpers/string.mjs";
-
 /**
  * Prepares the species attributes.
  *
@@ -11,10 +9,4 @@ import { toCamelCase } from "../../../../../helpers/string.mjs";
  */
 export function _prepareSpecies(actorData) {
   actorData.namedSize = TeriockActor.toNamedSize(actorData.size);
-  actorData.species = new Set();
-  actorData.parent.itemTypes?.power
-    .filter((p) => p.system.type === "species")
-    .map((p) => {
-      actorData.species.add(toCamelCase(p.name));
-    });
 }

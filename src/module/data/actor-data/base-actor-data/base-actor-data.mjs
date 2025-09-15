@@ -4,7 +4,7 @@ import { CommonTypeModel } from "../../models/_module.mjs";
 import { _migrateData } from "./methods/_migrate-data.mjs";
 import * as postUpdate from "./methods/_post-update.mjs";
 import { _getRollData } from "./methods/_roll-data.mjs";
-import { _prepareBaseData } from "./methods/base-data/_prepare-base-data.mjs";
+import { _baseData } from "./methods/base-data/_base-data.mjs";
 import * as hacks from "./methods/consequences/_take-hacks.mjs";
 import * as numericals from "./methods/consequences/_take-numericals.mjs";
 import * as oneOffs from "./methods/consequences/_take-one-offs.mjs";
@@ -80,7 +80,7 @@ export default class TeriockBaseActorModel extends CommonTypeModel {
 
   /** @inheritDoc */
   prepareBaseData() {
-    _prepareBaseData(this);
+    _baseData(this);
   }
 
   /** @inheritDoc */

@@ -30,7 +30,6 @@ export function _getRollData(actorData) {
 /**
  * Adds basic actor data to the roll data object.
  * Includes level, size, weight, proficiency, and fluency bonuses.
- *
  * @param {TeriockBaseActorModel} actorData - The actor system to get data from.
  * @param {object} data - The roll data object to populate.
  */
@@ -47,22 +46,22 @@ function basicData(actorData, data) {
 /**
  * Adds presence data to the roll data object.
  * Includes total presence, used presence, and unused presence.
- *
  * @param {TeriockBaseActorModel} actorData - The actor system to get data from.
  * @param {object} data - The roll data object to populate.
  */
 function presenceData(actorData, data) {
   Object.assign(data, {
-    pres: actorData.pres,
-    "pres.used": actorData.usp,
-    "pres.unused": actorData.unp,
+    pres: actorData.presence.max,
+    "pres.used": actorData.presence.value,
+    "pres.unused": actorData.attributes.unp.value,
+    "unp": actorData.attributes.unp.value,
+    "usp": actorData.presence.value,
   });
 }
 
 /**
  * Adds rank data to the roll data object.
  * Includes total rank and individual class/archetype ranks.
- *
  * @param {TeriockBaseActorModel} actorData - The actor system to get data from.
  * @param {object} data - The roll data object to populate.
  */
@@ -112,7 +111,6 @@ function rankData(actorData, data) {
 
 /**
  * Adds age data to the roll data object.
- *
  * @param {TeriockBaseActorModel} _actorData - The actor system to get data from.
  * @param {object} data - The roll data object to populate.
  */
@@ -129,7 +127,6 @@ function ageData(_actorData, data) {
 /**
  * Adds attribute data to the roll data object.
  * Includes attribute values, save proficiency, fluency, and save bonuses.
- *
  * @param {TeriockBaseActorModel} actorData - The actor system to get data from.
  * @param {object} data - The roll data object to populate.
  */
@@ -156,7 +153,6 @@ function attributeData(actorData, data) {
 /**
  * Adds tradecraft data to the roll data object.
  * Includes tradecraft check values, proficiency, talent, and expertise flags.
- *
  * @param {TeriockBaseActorModel} actorData - The actor system to get data from.
  * @param {object} data - The roll data object to populate.
  */
@@ -180,7 +176,6 @@ function tradecraftData(actorData, data) {
 
 /**
  * Adds HP data to the roll data object.
- *
  * @param {TeriockBaseActorModel} actorData - The actor system to get data from.
  * @param {object} data - The roll data object to populate.
  */
@@ -196,7 +191,6 @@ function hpData(actorData, data) {
 
 /**
  * Adds MP data to the roll data object.
- *
  * @param {TeriockBaseActorModel} actorData - The actor system to get data from.
  * @param {object} data - The roll data object to populate.
  */
@@ -212,7 +206,6 @@ function mpData(actorData, data) {
 
 /**
  * Adds wither data to the roll data object.
- *
  * @param {TeriockBaseActorModel} actorData - The actor system to get data from.
  * @param {object} data - The roll data object to populate.
  */
@@ -226,7 +219,6 @@ function witherData(actorData, data) {
 
 /**
  * Adds hack data to the roll data object.
- *
  * @param {TeriockBaseActorModel} actorData - The actor system to get data from.
  * @param {object} data - The roll data object to populate.
  */
@@ -253,7 +245,6 @@ function hackData(actorData, data) {
 
 /**
  * Adds speed data to the roll data object.
- *
  * @param {TeriockBaseActorModel} actorData - The actor system to get data from.
  * @param {object} data - The roll data object to populate.
  */
@@ -315,7 +306,6 @@ function speedData(actorData, data) {
 
 /**
  * Adds carrying capacity data to the roll data object.
- *
  * @param {TeriockBaseActorModel} actorData - The actor system to get data from.
  * @param {object} data - The roll data object to populate.
  */
@@ -338,7 +328,6 @@ function carryingData(actorData, data) {
 
 /**
  * Adds defense data to the roll data object.
- *
  * @param {TeriockBaseActorModel} actorData - The actor system to get data from.
  * @param {object} data - The roll data object to populate.
  */
@@ -357,7 +346,6 @@ function defenseData(actorData, data) {
 
 /**
  * Adds offense data to the roll data object.
- *
  * @param {TeriockBaseActorModel} actorData - The actor system to get data from.
  * @param {object} data - The roll data object to populate.
  */
@@ -388,7 +376,6 @@ function offenseData(actorData, data) {
 
 /**
  * Adds money data to the roll data object.
- *
  * @param {TeriockBaseActorModel} actorData - The actor system to get data from.
  * @param {object} data - The roll data object to populate.
  */
@@ -466,7 +453,6 @@ function moneyData(actorData, data) {
 
 /**
  * Adds equipment data to the roll data object.
- *
  * @param {TeriockBaseActorModel} actorData - The actor system to get data from.
  * @param {object} data - The roll data object to populate.
  */
@@ -480,14 +466,12 @@ function equipmentData(actorData, data) {
   // Primary block weapon
   const primaryBlocker = actorData.wielding.blocker.derived;
   if (primaryBlocker) {
-    addEquipmentData(data, "blo", primaryBlocker);
+    addEquipmentData(data, "blk", primaryBlocker);
   }
 }
 
 /**
  * Helper function to add equipment data for a specific slot.
- *
- * @todo Add properties.
  * @param {object} data - The roll data object to populate.
  * @param {string} slot - The equipment slot (atk, blo).
  * @param {TeriockEquipment|null} equipment - The equipment item.
@@ -507,16 +491,22 @@ function addEquipmentData(data, slot, equipment) {
   data[`${slot}.dampened`] = equipmentData.dampened ? 1 : 0;
   data[`${slot}.consumable`] = equipmentData.consumable ? 1 : 0;
   data[`${slot}.quantity`] = equipmentData.quantity || 1;
+  if (equipment?.effectKeys?.property) {
+    for (const p of equipment.effectKeys.property) {
+      data[`${slot}.prop.${p}`] = 1;
+    }
+  }
 }
 
 /**
  * Adds species data to the roll data object.
- *
  * @param {TeriockBaseActorModel} actorData
  * @param {object} data
  */
 function speciesData(actorData, data) {
-  for (const species of actorData.species) {
-    data[`species.${species}`] = 1;
+  if (actorData.parent.itemKeys && actorData.parent.itemKeys.species) {
+    for (const species of actorData.parent.itemKeys.species) {
+      data[`species.${species}`] = 1;
+    }
   }
 }

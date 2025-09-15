@@ -6,28 +6,36 @@ import type TeriockMacro from "../../../documents/macro.mjs";
 
 declare module "./property-data.mjs" {
   export default interface TeriockPropertyModel extends TeriockBaseEffectModel, HierarchyDataMixinInterface {
-    /** Applies */
+    /** <schema> Applies */
     applies: {
+      /**
+       * <schema> Changes made to the parent {@link TeriockEquipment} or {@link TeriockActor} if {@link modifiesActor}
+       * is set to `true`.
+       */
       changes: EffectChangeData[];
+      /**
+       * <schema> {@link TeriockMacro}s hooked to the parent {@link TeriockEquipment} or {@link TeriockActor} if
+       * {@link modifiesActor} is set to `true`.
+       */
       macros: Record<Teriock.SafeUUID<TeriockMacro>, Teriock.Parameters.Shared.PropertyPseudoHook>;
     };
-    /** Applies even if the parent {@link TeriockEquipment} is dampened */
+    /** <schema> Applies even if the parent {@link TeriockEquipment} is dampened */
     applyIfDampened: boolean;
-    /** Applies even if the parent {@link TeriockEquipment} is shattered */
+    /** <schema> Applies even if the parent {@link TeriockEquipment} is shattered */
     applyIfShattered: boolean;
-    /** Damage type */
+    /** <schema> Damage type */
     damageType: string;
-    /** Extra damage dealt by the parent {@link TeriockEquipment} */
+    /** <schema> Extra damage dealt by the parent {@link TeriockEquipment} */
     extraDamage: string;
-    /** Property form */
+    /** <schema> Property form */
     form: Teriock.Parameters.Shared.Form;
-    /** Improvement description */
+    /** <schema> Improvement description */
     improvement: string;
-    /** Limitation description */
+    /** <schema> Limitation description */
     limitation: string;
-    /** Modifies the {@link TeriockActor} instead of the {@link TeriockEquipment} */
+    /** <schema> Modifies the {@link TeriockActor} instead of the {@link TeriockEquipment} */
     modifiesActor: boolean;
-    /** Power sources */
+    /** <schema> Power sources */
     powerSources: Teriock.Parameters.Ability.PowerSource[];
 
     get parent(): TeriockProperty;

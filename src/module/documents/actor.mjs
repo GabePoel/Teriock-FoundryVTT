@@ -377,10 +377,10 @@ export default class TeriockActor extends ParentDocumentMixin(CommonDocumentMixi
   prepareDerivedData() {
     super.prepareDerivedData();
     this.itemKeys = {
-      equipment: new Set(this.itemTypes?.equipment.map((e) => toCamelCase(e.name))),
-      power: new Set(this.itemTypes?.power.map((e) => toCamelCase(e.name))),
-      rank: new Set(this.itemTypes?.rank.map((e) => toCamelCase(e.name))),
-      species: new Set(this.itemTypes?.species.map((e) => toCamelCase(e.name))),
+      equipment: new Set(this.itemTypes?.equipment.map((e) => toCamelCase(e.name)) || []),
+      power: new Set(this.itemTypes?.power.map((e) => toCamelCase(e.name)) || []),
+      rank: new Set(this.itemTypes?.rank.map((e) => toCamelCase(e.name)) || []),
+      species: new Set(this.itemTypes?.species.map((e) => toCamelCase(e.name)) || []),
     };
   }
 

@@ -67,21 +67,19 @@ function statField(name, options = {}) {
  * @returns {object} The modified schema object with stat fields added
  */
 export function _defineStats(schema) {
-  schema.hp = statField("HP", {
-    base: true,
-    temp: true,
+  schema.hp = new fields.SchemaField({
+    value: new fields.NumberField({ initial: 1 }),
+    morganti: new fields.NumberField({ initial: 0 }),
+    temp: new fields.NumberField({ initial: 0 }),
   });
-  schema.mp = statField("MP", {
-    base: true,
-    temp: true,
+  schema.mp = new fields.SchemaField({
+    value: new fields.NumberField({ initial: 1 }),
+    morganti: new fields.NumberField({ initial: 0 }),
+    temp: new fields.NumberField({ initial: 0 }),
   });
   schema.wither = statField("Wither", {
     max: 100,
     value: 20,
-  });
-  schema.presence = statField("Presence", {
-    max: 1,
-    value: 0,
   });
   return schema;
 }

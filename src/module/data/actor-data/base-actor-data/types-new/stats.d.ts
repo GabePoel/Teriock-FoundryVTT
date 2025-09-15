@@ -1,3 +1,5 @@
+// noinspection JSUnusedGlobalSymbols
+
 export type Derived = {
   /** @base */
   raw: string;

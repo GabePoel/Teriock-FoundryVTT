@@ -1,3 +1,5 @@
+// noinspection JSUnusedGlobalSymbols
+
 export type ActorScaling = {
   /** @base Proficiency bonus */
   p: number;

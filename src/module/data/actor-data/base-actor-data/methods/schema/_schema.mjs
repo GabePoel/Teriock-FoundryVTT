@@ -1,11 +1,9 @@
-import { _defineBasics } from "./_define-basics.mjs";
+import { _defineAttributes } from "./_define-attributes.mjs";
 import { _defineCapacities } from "./_define-capacities.mjs";
 import { _defineCombat } from "./_define-combat.mjs";
 import { _defineDamage } from "./_define-damage.mjs";
 import { _defineDeathBag } from "./_define-death-bag.mjs";
-import { _defineHacks } from "./_define-hacks.mjs";
 import { _defineMoney } from "./_define-money.mjs";
-import { _defineOrderings } from "./_define-orderings.mjs";
 import { _defineProtections } from "./_define-protections.mjs";
 import { _defineSenses } from "./_define-senses.mjs";
 import { _defineSheet } from "./_define-sheet.mjs";
@@ -29,14 +27,13 @@ import { _defineTradecrafts } from "./_define-tradecrafts.mjs";
  */
 export function _defineSchema() {
   let schema = {};
-  schema = _defineBasics(schema);
+  schema = _defineAttributes(schema);
   schema = _defineCapacities(schema);
   schema = _defineCombat(schema);
   schema = _defineDamage(schema);
   schema = _defineDeathBag(schema);
-  schema = _defineHacks(schema);
   schema = _defineMoney(schema);
-  schema = _defineOrderings(schema);
+  //schema = _defineOrderings(schema);
   schema = _defineProtections(schema);
   schema = _defineSenses(schema);
   schema = _defineSheet(schema);

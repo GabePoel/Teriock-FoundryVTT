@@ -4,7 +4,7 @@
  * @param {TeriockBaseActorModel} actorData
  * @private
  */
-export function _prepareLighting(actorData) {
+export function _prepBaseLighting(actorData) {
   actorData.light = {
     negative: false,
     priority: 0,

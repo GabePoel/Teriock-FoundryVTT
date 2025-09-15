@@ -1,3 +1,5 @@
+// noinspection JSUnusedGlobalSymbols
+
 export type ActorArmorValue = {
   natural: {
     /** @base Base natural AV */

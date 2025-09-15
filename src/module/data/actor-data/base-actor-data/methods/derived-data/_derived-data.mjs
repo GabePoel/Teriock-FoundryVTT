@@ -1,10 +1,10 @@
-import { _prepareAttributes } from "./_prepare-attributes.mjs";
-import { _prepareDefenses, _prepareOffenses } from "./_prepare-combat.mjs";
-import { _prepareDerivedHpMp } from "./_prepare-derived-hp-mp.mjs";
-import { _prepareEncumbrance, _prepareMoney, _prepareWeightCarried } from "./_prepare-load.mjs";
-import { _prepareSpecies } from "./_prepare-species.mjs";
-import { _prepareSpeed } from "./_prepare-speed.mjs";
-import { _prepareTradecrafts } from "./_prepare-tradecrafts.mjs";
+import { _prepareDerivedAttributes } from "./_prep-derived-attributes.mjs";
+import { _prepareDefenses, _prepareOffenses } from "./_prep-derived-combat.mjs";
+import { _prepareDerivedHpMp } from "./_prep-derived-hp-mp.mjs";
+import { _prepareEncumbrance, _prepareMoney, _prepareWeightCarried } from "./_prep-derived-load.mjs";
+import { _prepareSpecies } from "./_prep-derived-species.mjs";
+import { _prepareSpeed } from "./_prep-derived-speed.mjs";
+import { _prepareTradecrafts } from "./_prep-derived-tradecrafts.mjs";
 
 /**
  * Prepares all derived system data from other data.
@@ -26,7 +26,7 @@ import { _prepareTradecrafts } from "./_prepare-tradecrafts.mjs";
  */
 export function _prepareDerivedData(actorData) {
   _prepareSpecies(actorData);
-  _prepareAttributes(actorData);
+  _prepareDerivedAttributes(actorData);
   _prepareTradecrafts(actorData);
   _prepareMoney(actorData);
   _prepareWeightCarried(actorData);

@@ -10,13 +10,13 @@ export interface BarData {
 
 /** Attribute data */
 export interface ActorAttributeData {
-  /** Total bonus to saves made with this attribute */
+  /** (derived) Total bonus to saves made with this attribute */
   saveBonus: number;
-  /** Are you fluent in saves made with this attribute? */
+  /** (schema) Are you fluent in saves made with this attribute? */
   saveFluent: boolean;
-  /** Are you proficient in saves made with this attribute? */
+  /** (schema) Are you proficient in saves made with this attribute? */
   saveProficient: boolean;
-  /** Value */
+  /** (schema) Value */
   value: number;
 }
 
@@ -28,4 +28,22 @@ export interface ActorHackData {
   min: 0;
   /** Value */
   value: 0 | 1 | 2;
+}
+
+/** The types of hacks that could be applied. */
+export interface HackDataCollection {
+  /** Arm hacks */
+  arm: ActorHackData;
+  /** Body hacks */
+  body: ActorHackData;
+  /** Ear hacks */
+  ear: ActorHackData;
+  /** Eye hacks */
+  eye: ActorHackData;
+  /** Leg hacks */
+  leg: ActorHackData;
+  /** Mouth hacks */
+  mouth: ActorHackData;
+  /** Nose hacks */
+  nose: ActorHackData;
 }

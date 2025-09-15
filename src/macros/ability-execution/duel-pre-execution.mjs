@@ -9,7 +9,7 @@ function modifyData(data) {
   const effectObject = JSON.parse(data);
   effectObject.description = "<ul>";
   effectObject.changes.push({
-    key: "system.lightedTo",
+    key: "system.trackers.lightedTo",
     value: token.uuid || actor.uuid,
     mode: 2,
     priority: 10,

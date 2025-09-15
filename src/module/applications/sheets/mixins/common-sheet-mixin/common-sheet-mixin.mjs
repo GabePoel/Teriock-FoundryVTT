@@ -769,11 +769,11 @@ export default (Base) => {
           const uuidPromises = [];
 
           if (embedded?.id === "lighted") {
-            uuidPromises.push(Promise.all(this.document.system.lightedTo.map((uuid) => foundry.utils.fromUuid(uuid)))
+            uuidPromises.push(Promise.all(this.document.system.trackers.lightedTo.map((uuid) => foundry.utils.fromUuid(uuid)))
               .then((tokens) => {
                 let lightedToText = "<ul>";
                 tokens.forEach((token, idx) => {
-                  const uuid = this.document.system.lightedTo[idx];
+                  const uuid = this.document.system.trackers.lightedTo[idx];
                   lightedToText += `<li>@UUID[${uuid}]{${token?.name}}</li>`;
                 });
                 lightedToText += "</ul>";

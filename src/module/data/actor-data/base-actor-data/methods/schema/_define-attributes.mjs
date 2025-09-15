@@ -37,15 +37,8 @@ function attributeField(name) {
  *
  * @param {object} schema - The schema object to extend with basic actor fields
  * @returns {object} The modified schema object with basic actor fields added
- *
- * @example
- * ```javascript
- * const schema = {};
- * const basicSchema = _defineBasics(schema);
- * // basicSchema now contains: lvl, size, and attributes fields
- * ```
  */
-export function _defineBasics(schema) {
+export function _defineAttributes(schema) {
   schema.lvl = new fields.NumberField({
     initial: 1,
     integer: true,

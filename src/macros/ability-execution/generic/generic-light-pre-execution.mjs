@@ -7,7 +7,7 @@ async function modifyData(data) {
   effectObject.description = "<ul>";
   for (const uuid of lightedToUuids) {
     effectObject.changes.push({
-      key: "system.lightedTo",
+      key: "system.trackers.lightedTo",
       value: uuid,
       mode: 2,
       priority: 10,

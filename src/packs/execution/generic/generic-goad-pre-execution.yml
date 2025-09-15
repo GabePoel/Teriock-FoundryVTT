@@ -4,21 +4,25 @@ _id: R54099tFLeLMmBAw
 author: teriockBuilder00
 img: icons/svg/dice-target.svg
 scope: global
-command: |-
+command: >-
   const data = /** @type {Teriock.HookData.UseAbility} */ scope.data;
+
   const goadedToUuids = await tm.dialogs.goadedToDialog();
+
   const buttons = data.rollConfig.chatData.system.buttons;
-  data.rollConfig.chatData.system.buttons = buttons.filter(
-    (button) => button.dataset.action === "apply-effect",
-  );
+
+  data.rollConfig.chatData.system.buttons = buttons.filter((button) =>
+  button.dataset.action === "apply-effect");
+
   const button = data.rollConfig.chatData.system.buttons[0];
+
 
   async function modifyData(data) {
     const effectObject = JSON.parse(data);
     effectObject.description = "<ul>";
     for (const uuid of goadedToUuids) {
       effectObject.changes.push({
-        key: "system.goadedTo",
+        key: "system.trackers.goadedTo",
         value: uuid,
         mode: 2,
         priority: 10,
@@ -30,7 +34,9 @@ command: |-
     return JSON.stringify(effectObject);
   }
 
+
   button.dataset.normal = await modifyData(button.dataset.normal);
+
   button.dataset.crit = await modifyData(button.dataset.crit);
 folder: T1HL9IwE6uoaEeOZ
 ownership:

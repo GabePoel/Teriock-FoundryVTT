@@ -1,11 +1,296 @@
-import type { TeriockActor } from "../../../documents/_module.mjs";
-import type { TeriockBaseActorDefault } from "./types/default";
-import type { TeriockBaseActorDerived } from "./types/derived";
-import type { EquipmentChanges } from "./types/changes";
+import type { TeriockActor, TeriockTokenDocument } from "../../../documents/_module.mjs";
+import type { ActorAttributeData, BarData, HackDataCollection } from "./types/stats";
+import type { TeriockEquipment } from "../../../documents/_documents.mjs";
+import type { ProtectionData } from "./types/protections";
+import type { SheetData } from "./types/sheet";
+import type { TradecraftData } from "./types/tradecrafts";
+import type { StatDieModel } from "../../models/_module.mjs";
+
+export interface TeriockBaseActorData {
+  /** <base> Ability flags */
+  abilityFlags: Record<string, string>;
+  /** <derived> Armor class (10 + av + wornAc if wearing armor) */
+  ac: number;
+  /** <schema> Attack penalty @todo move to combat */
+  attackPenalty: number;
+  /** <schema> Attributes */
+  attributes: {
+    /** <schema> Intelligence */
+    int: ActorAttributeData;
+    /** <schema> Movement */
+    mov: ActorAttributeData;
+    /** <schema> Perception */
+    per: ActorAttributeData;
+    /** <schema> Sneak */
+    snk: ActorAttributeData;
+    /** <schema> Strength */
+    str: ActorAttributeData;
+    /** <schema> Unused presence */
+    unp: ActorAttributeData;
+  };
+  /** Attunements - IDs of attuned equipment */
+  attunements: Set<Teriock.ID<TeriockEquipment>>;
+  /** <derived> Armor value (highest of equipped armor or natural armor) */
+  av: number;
+  /** <derived> Block value from primary blocker */
+  bv: number;
+  /** <derived> Carrying capacity */
+  carryingCapacity: {
+    /** <derived> Light carrying capacity */
+    light: number;
+    /** <derived> Heavy carrying capacity */
+    heavy: number;
+    /** <derived> Maximum carrying capacity */
+    max: number;
+  };
+  /** <derived> Combat class (ac + bv) */
+  cc: number;
+  /** Defined damage dice/expressions */
+  damage: {
+    /** Standard damage */
+    standard: string;
+  };
+  /** <schema> Death Bag */
+  deathBag: {
+    /** <schema> How many stones to pull from the Death Bag */
+    pull: string;
+    /** <schema> The colors of stones in the Death Bag */
+    stones: {
+      /** <schema> Black */
+      black: string;
+      /** <schema> Red */
+      red: string;
+      /** <schema> White */
+      white: string;
+    }
+  };
+  /** <derived> The calculated encumbrance level (0-3) based on carried weight vs capacity */
+  encumbranceLevel: number;
+  /** <base> Equipment changes */
+  equipmentChanges: {
+    /** <base> Equipment upgrades */
+    upgrades: Teriock.Parameters.Actor.EquipmentChangeKeys;
+    /** <base> Equipment overrides */
+    overrides: Teriock.Parameters.Actor.EquipmentChangeKeys;
+  };
+  /** <derived> Fluency bonus derived from level */
+  f: number;
+  /** <schema> Hacks */
+  hacks: HackDataCollection;
+  /** <derived> Whether the actor is wearing armor */
+  hasArmor: boolean;
+  /** <schema> Whether {@link TeriockActor} still has reaction */
+  hasReaction: boolean;
+  /** <base> Registered pseudo-hook macros to fire */
+  hookedMacros: Teriock.Parameters.Actor.HookedActorMacros;
+  /** <schema> Hit points */
+  hp: {
+    /** <base> Base HP */
+    base: number;
+    /** <base> Maximum HP */
+    max: number;
+    /** <derived> Minimum HP */
+    min: number;
+    /** <schema> Morganti damaged HP */
+    morganti: number;
+    /** <schema> Temp HP */
+    temp: number;
+    /** <schema> Current HP */
+    value: number;
+  };
+  /** HP Dice */
+  hpDice: Record<Teriock.ID<StatDieModel>, StatDieModel>;
+  /** Immunities @todo */
+  immunities: ProtectionData;
+  /** <base> Light */
+  light: object;
+  /** <schema> Level */
+  lvl: number;
+  /** <schema> Money */
+  money: {
+    /** <schema> Copper coins */
+    copper: number;
+    /** <schema> Silver coins */
+    silver: number;
+    /** <schema> Gold coins */
+    gold: number;
+    /** <schema> Ent tear amber */
+    entTearAmber: number;
+    /** <schema> Fire eye rubies */
+    fireEyeRuby: number;
+    /** <schema> Pixie plum amethysts */
+    pixiePlumAmethyst: number;
+    /** <schema> Snow diamonds */
+    snowDiamond: number;
+    /** <schema> Dragon emeralds */
+    dragonEmerald: number;
+    /** <schema> Moon opals */
+    moonOpal: number;
+    /** <schema> Magus quartz */
+    magusQuartz: number;
+    /** <schema> Heartstone rubies */
+    heartstoneRuby: number;
+    /** <schema> Debt */
+    debt: number;
+    /** <schema> Total money in gold */
+    total: number;
+  };
+  /** <derived> Weight of carried money */
+  moneyWeight: number;
+  /** <derived> Movement speed */
+  movementSpeed: {
+    /** <derived> Base movement speed */
+    base: number;
+    /** <derived> Current movement speed */
+    value: number;
+  };
+  /** <schema> Mana points */
+  mp: {
+    /** <base> Base MP */
+    base: number;
+    /** <base> Maximum MP */
+    max: number;
+    /** <derived> Minimum MP */
+    min: number;
+    /** <schema> Morganti drained MP */
+    morganti: number;
+    /** <schema> Temp MP */
+    temp: number;
+    /** <schema> Current MP */
+    value: number;
+  };
+  /** MP Dice */
+  mpDice: Record<Teriock.ID<StatDieModel>, StatDieModel>;
+  /** <derived> The named size category (Tiny, Small, Medium, Large, Huge, Gargantuan, Colossal) */
+  namedSize: string;
+  /** <derived> Natural armor value @todo move to defense or combat? */
+  naturalAv: number;
+  /** <base> Proficiency bonus derived from level */
+  p: number;
+  /** <schema> Piercing type @todo move to offense or combat? */
+  piercing: string;
+  /** <base> Presence @todo */
+  presence: {
+    /** <base> Maximum presence tier */
+    max: number;
+    /** <base> Minimum presence tier */
+    min: number;
+    /** <derived> Currently used presence tier */
+    value: number;
+    /** <derived> Too much presence being used */
+    overflow: boolean;
+  };
+  /** <base> Total rank derived from level */
+  rank: number;
+  /** <base> Resistances */
+  resistances: ProtectionData;
+  /** <schema> Style bonus */
+  sb: boolean;
+  /** <schema> Senses */
+  senses: {
+    /** <schema> Blind fighting */
+    blind: number;
+    /** <schema> Dark vision */
+    dark: number;
+    /** <schema> Ethereal vision */
+    ethereal: number;
+    /** <schema> Advanced hearing */
+    hearing: number;
+    /** <schema> See invisible */
+    invisible: number;
+    /** <schema> Night vision */
+    night: number;
+    /** <schema> Advanced sight */
+    sight: number;
+    /** <schema> Advanced smell */
+    smell: number;
+    /** <schema> True sight */
+    truth: number;
+  };
+  /** <base> HTML strings that get displayed on the sheet */
+  sheet: SheetData & {
+    /** <base> Die box display for hit and mana dice */
+    dieBox: {
+      /** <base> Hit dice box */
+      hpDice: string;
+      /** <base> Mana dice box */
+      mpDice: string;
+    };
+  };
+  /** <schema> Size */
+  size: number;
+  /** <base> Speed adjustments */
+  speedAdjustments: {
+    /** <base> Climb speed */
+    climb: number;
+    /** <base> Crawl speed */
+    crawl: number;
+    /** <base> Difficult terrain speed */
+    difficultTerrain: number;
+    /** <base> Dig speed */
+    dig: number;
+    /** <base> Dive speed */
+    dive: number;
+    /** <base> Fly speed */
+    fly: number;
+    /** <base> Hidden speed */
+    hidden: number;
+    /** <base> Horizontal leap speed */
+    leapHorizontal: number;
+    /** <base> Vertical leap speed */
+    leapVertical: number;
+    /** <base> Swim speed */
+    swim: number;
+    /** <base> Walk speed */
+    walk: number;
+  };
+  /** <base> Trackers */
+  trackers: {
+    /** <base> Lighted to */
+    lightedTo: Teriock.UUID<TeriockTokenDocument>[];
+    /** <derived> Goaded to */
+    goadedTo: Teriock.UUID<TeriockTokenDocument>[];
+  };
+  /** <schema> Tradecrafts */
+  tradecrafts: Record<Teriock.Parameters.Fluency.Tradecraft, TradecraftData>;
+  /** <base> Transformation */
+  transformation: {
+    /** <base> Transformed token art */
+    img: string | null;
+  };
+  /** <schema> Update counter - used to force an update when adding/removing effects */
+  updateCounter: boolean;
+  // <base> Enhanced sheet data
+  /** <derived> Weight */
+  weight: number;
+  /** <derived> Total weight carried by the actor */
+  weightCarried: number;
+  /** <schema> Wielding */
+  wielding: {
+    /** <schema> Primary attacker */
+    attacker: {
+      /** <derived> Derived primary attacker item */
+      derived: TeriockEquipment | null;
+      /** <schema> ID for primary attacker */
+      raw: Teriock.ID<TeriockEquipment> | null;
+    };
+    /** <schema> Primary blocker */
+    blocker: {
+      /** <derived> Derived primary attacker item */
+      derived: TeriockEquipment | null;
+      /** <schema> ID for primary attacker */
+      raw: Teriock.ID<TeriockEquipment> | null;
+    };
+  };
+  /** <schema> Wither */
+  wither: BarData;
+  /** <derived> Worn armor class */
+  wornAc: number;
+}
 
 declare module "./base-actor-data.mjs" {
   export default // @ts-ignore
-  interface TeriockBaseActorModel extends TeriockBaseActorDefault, TeriockBaseActorDerived, EquipmentChanges {
+  interface TeriockBaseActorModel extends TeriockBaseActorData {
     /** Parent Actor */
     get parent(): TeriockActor;
   }

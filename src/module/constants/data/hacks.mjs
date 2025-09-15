@@ -7,6 +7,15 @@ export const hacksData = {
     img: getIcon("hacks", "1st Arm Hack"),
     name: "1st Arm Hack",
     statuses: [ "hacked" ],
+    hud: false,
+    changes: [
+      {
+        key: "system.hacks.arm.value",
+        value: "1",
+        mode: 4,
+        priority: 5,
+      },
+    ],
   },
   arm2: {
     _id: "armHack200000000",
@@ -14,6 +23,15 @@ export const hacksData = {
     img: getIcon("hacks", "2nd Arm Hack"),
     name: "2nd Arm Hack",
     statuses: [ "hacked" ],
+    hud: false,
+    changes: [
+      {
+        key: "system.hacks.arm.value",
+        value: "2",
+        mode: 4,
+        priority: 5,
+      },
+    ],
   },
   body1: {
     _id: "bodyHack00000000",
@@ -23,6 +41,15 @@ export const hacksData = {
     statuses: [
       "hacked",
       "immobilized",
+    ],
+    hud: false,
+    changes: [
+      {
+        key: "system.hacks.body.value",
+        value: "1",
+        mode: 4,
+        priority: 5,
+      },
     ],
   },
   ear1: {
@@ -34,6 +61,15 @@ export const hacksData = {
       "deaf",
       "hacked",
     ],
+    hud: false,
+    changes: [
+      {
+        key: "system.hacks.ear.value",
+        value: "1",
+        mode: 4,
+        priority: 5,
+      },
+    ],
   },
   eye1: {
     _id: "eyeHack000000000",
@@ -43,6 +79,15 @@ export const hacksData = {
     statuses: [
       "blind",
       "hacked",
+    ],
+    hud: false,
+    changes: [
+      {
+        key: "system.hacks.eye.value",
+        value: "1",
+        mode: 4,
+        priority: 5,
+      },
     ],
   },
   leg1: {
@@ -54,6 +99,15 @@ export const hacksData = {
       "hacked",
       "slowed",
     ],
+    hud: false,
+    changes: [
+      {
+        key: "system.hacks.leg.value",
+        value: "1",
+        mode: 4,
+        priority: 5,
+      },
+    ],
   },
   leg2: {
     _id: "legHack200000000",
@@ -63,6 +117,15 @@ export const hacksData = {
     statuses: [
       "hacked",
       "immobilized",
+    ],
+    hud: false,
+    changes: [
+      {
+        key: "system.hacks.leg.value",
+        value: "1",
+        mode: 2,
+        priority: 5,
+      },
     ],
   },
   mouth1: {
@@ -74,6 +137,15 @@ export const hacksData = {
       "hacked",
       "mute",
     ],
+    hud: false,
+    changes: [
+      {
+        key: "system.hacks.mouth.value",
+        value: "1",
+        mode: 4,
+        priority: 5,
+      },
+    ],
   },
   nose1: {
     _id: "noseHack00000000",
@@ -83,6 +155,15 @@ export const hacksData = {
     statuses: [
       "hacked",
       "anosmatic",
+    ],
+    hud: false,
+    changes: [
+      {
+        key: "system.hacks.nose.value",
+        value: "1",
+        mode: 4,
+        priority: 5,
+      },
     ],
   },
 };

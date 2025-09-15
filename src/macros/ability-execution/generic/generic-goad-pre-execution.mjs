@@ -9,7 +9,7 @@ async function modifyData(data) {
   effectObject.description = "<ul>";
   for (const uuid of goadedToUuids) {
     effectObject.changes.push({
-      key: "system.goadedTo",
+      key: "system.trackers.goadedTo",
       value: uuid,
       mode: 2,
       priority: 10,

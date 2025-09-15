@@ -1,3 +1,5 @@
+import type { TeriockMacro } from "../../../documents/_module.mjs";
+
 declare global {
   namespace Teriock.Parameters.Actor {
     /** Valid hackable body parts */
@@ -23,6 +25,7 @@ declare global {
       checkExpirations?: boolean;
     };
 
+    // noinspection JSUnusedGlobalSymbols
     export type LightingAnimation =
       | ""
       | "witchwave"
@@ -48,6 +51,8 @@ declare global {
       | "rainbowswirl"
       | "flame"
       | "vortex";
+
+    export type HookedActorMacros = Record<Teriock.Parameters.Shared.PseudoHook, Teriock.UUID<TeriockMacro>[]>
 
     export type PayMode = "exact" | "greedy";
 
