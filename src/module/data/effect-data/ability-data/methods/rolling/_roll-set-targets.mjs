@@ -16,12 +16,13 @@ export async function _setTargets(rollConfig) {
       rollConfig.useData.targets = new Set([ token ]);
     }
   }
-  await auraMeasure(rollConfig);
+  //await auraMeasure(rollConfig);
 }
 
+//noinspection JSUnusedLocalSymbols
 /**
  * Update targets in case of aura.
- *
+ * @todo Fix this maybe.
  * @param {AbilityRollConfig} rollConfig
  */
 async function auraMeasure(rollConfig) {
@@ -57,15 +58,15 @@ async function auraMeasure(rollConfig) {
         });
       } catch {}
       if (placeTemplate && autoTarget) {
-        const x = token.x;
-        const y = token.y;
+        const x = token.document.x;
+        const y = token.document.y;
         const templateData = {
           t: "circle",
-          x: x + (token.width * canvas.scene.grid.sizeX) / 2,
-          y: y + (token.height * canvas.scene.grid.sizeY) / 2,
+          x: x + (token.w) / 2,
+          y: y + (token.h) / 2,
           distance: radius,
         };
-        const isEthereal = token?.hasStatusEffect("ethereal");
+        const isEthereal = token.document.hasStatusEffect("ethereal");
         /** @type {MeasuredTemplateDocument} template */
         const template = await MeasuredTemplateDocument.create(templateData, {
           parent: canvas.scene,

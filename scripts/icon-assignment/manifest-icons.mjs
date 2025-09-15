@@ -126,4 +126,4 @@ for (const dirKey of dirKeys) {
   }
 }
 
-await saveObject(iconManifest, path.resolve(__dirname, "../../src/icons/icon-manifest.json"),);
+await saveObject(iconManifest, path.resolve(__dirname, "../../src/icons/icon-manifest.json"));

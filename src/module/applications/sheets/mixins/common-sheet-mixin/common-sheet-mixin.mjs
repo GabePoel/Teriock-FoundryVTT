@@ -491,7 +491,6 @@ export default (Base) => {
         ...this.document.metadata.childItemTypes,
         ...this.document.metadata.childMacroTypes,
       ]);
-      console.log(childTypes);
       return (this.document.isOwner && doc && doc.parent !== this.document && doc !== this.document && childTypes.has(
         doc.type));
     }

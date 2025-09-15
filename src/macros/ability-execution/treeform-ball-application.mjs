@@ -12,11 +12,10 @@ if (!actor.effectKeys.consequence.has("treeformBallEffect")) {
     });
   }
   const notTree = actor.species.filter((s) => s.name !== "Tree");
-  for (const i of
-    [
-      ...notTree,
-      ...actor.ranks,
-    ]) {
+  for (const i of [
+    ...notTree,
+    ...actor.ranks,
+  ]) {
     await i.setFlag("teriock", "preTreeformApplyHp", i.system.applyHp);
     await i.setFlag("teriock", "preTreeformDisabled", i.disabled);
   }

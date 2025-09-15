@@ -153,6 +153,6 @@ await Promise.all(Object.entries(folders)
       pct,
       message: `Pulling ${generatedName} from wiki.`,
     });
-  })),),);
+  }))));
 
 progress.update({ pct: 1 });

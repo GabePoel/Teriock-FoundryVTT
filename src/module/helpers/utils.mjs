@@ -218,7 +218,7 @@ export function tokenName(token) {
  * @returns {TeriockToken|null}
  */
 export function actorToken(actor) {
-  return (actor.token || actor.getActiveTokens?.()?.[0] || actor.prototypeToken || null);
+  return (actor.token?.object || actor.getActiveTokens?.()?.[0] || actor.prototypeToken || null);
 }
 
 /**
