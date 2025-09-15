@@ -353,35 +353,6 @@ export default class TeriockActor extends ParentDocumentMixin(CommonDocumentMixi
     return this.system.getRollData();
   }
 
-  /** @inheritDoc */
-  async hookCall(pseudoHook, data, effect) {
-    if (!data) {
-      data = {};
-    }
-    data.cancel = false;
-    Hooks.callAll(`teriock.${pseudoHook}`, this, data);
-    let macroUuids = this.system.hookedMacros[pseudoHook];
-    if (macroUuids) {
-      if (effect) {
-        macroUuids = macroUuids.filter((uuid) => effect.changes
-          .filter((c) => c.key === `system.hookedMacros.${pseudoHook}`)
-          .map((c) => c.value)
-          .includes(uuid));
-      }
-      for (const macroUuid of macroUuids) {
-        /** @type {TeriockMacro} */
-        const macro = await foundry.utils.fromUuid(macroUuid);
-        if (macro) {
-          await macro.execute({
-            actor: this,
-            data: data,
-          });
-        }
-      }
-    }
-    return /** @type {Teriock.HookData.BaseHookData} */ data;
-  }
-
   /**
    * Performs post-update operations for the actor.
    * @param {Teriock.Parameters.Actor.SkipFunctions} skipFunctions - Functions that should be skipped.

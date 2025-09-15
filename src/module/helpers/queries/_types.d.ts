@@ -14,7 +14,7 @@ declare global {
 
     export type CallPseudoHook = {
       uuid: Teriock.UUID<TeriockActor|TeriockItem|TeriockEffect>;
-      pseudoHook: Teriock.Parameters.Actor.PseudoHook;
+      pseudoHook: Teriock.Parameters.Shared.PseudoHook;
       data: object;
     }
 

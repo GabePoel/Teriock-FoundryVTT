@@ -1,6 +1,7 @@
 import type TeriockBaseItemModel from "../base-item-data/base-item-data.mjs";
 import type { TeriockEquipment } from "../../../documents/_documents.mjs";
 import type { ConsumableInterface } from "../../effect-data/shared/shared-fields";
+import type { TeriockMacro } from "../../../documents/_module.mjs";
 
 declare module "./equipment-data.mjs" {
   export default interface TeriockEquipmentModel extends TeriockBaseItemModel, ConsumableInterface {
@@ -63,6 +64,8 @@ declare module "./equipment-data.mjs" {
     twoHandedDamage: string;
     /** Weight (lb) */
     weight: number;
+    /** Registered pseudo-hook macros to fire */
+    hookedMacros: Record<Teriock.Parameters.Shared.PropertyPseudoHook, Teriock.UUID<TeriockMacro>[]>;
 
     get parent(): TeriockEquipment;
   }

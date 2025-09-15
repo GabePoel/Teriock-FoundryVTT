@@ -1,5 +1,3 @@
-import type { unsortedPseudoHooks } from "../../../constants/system/pseudo-hooks.mjs";
-
 declare global {
   namespace Teriock.Parameters.Actor {
     /** Valid hackable body parts */
@@ -51,11 +49,10 @@ declare global {
       | "flame"
       | "vortex";
 
-    /** Valid pseudo-hooks */
-    export type PseudoHook = keyof typeof unsortedPseudoHooks;
-
     export type PayMode = "exact" | "greedy";
 
     export type DeathBagStoneColor = keyof typeof TERIOCK.options.die.deathBagStoneColor;
   }
 }
+
+export {};

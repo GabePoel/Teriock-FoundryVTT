@@ -1,4 +1,6 @@
-import { mergeFreeze } from "../../../helpers/utils.mjs";
+import { selectDialog } from "../../../applications/dialogs/select-dialog.mjs";
+import { propertyPseudoHooks } from "../../../constants/system/pseudo-hooks.mjs";
+import { mergeFreeze, pureUuid, safeUuid } from "../../../helpers/utils.mjs";
 import { HierarchyDataMixin, WikiDataMixin } from "../../mixins/_module.mjs";
 import { FormulaField, ListField, TextField } from "../../shared/fields/_module.mjs";
 import TeriockBaseEffectModel from "../base-effect-data/base-effect-data.mjs";
@@ -51,10 +53,6 @@ export default class TeriockPropertyModel extends HierarchyDataMixin(WikiDataMix
         initial: false,
         label: "Modifies Actor",
       }),
-      changes: new ListField(changeField(), {
-        label: "Changes",
-        hint: "Changes made to the target equipment as part of the property's ongoing effect.",
-      }),
       limitation: new TextField({
         initial: "",
         label: "Limitation",
@@ -63,7 +61,33 @@ export default class TeriockPropertyModel extends HierarchyDataMixin(WikiDataMix
         initial: "",
         label: "Improvement",
       }),
+      applies: new fields.SchemaField({
+        changes: new ListField(changeField(), {
+          label: "Changes",
+          hint: "Changes made to the target equipment as part of the property's ongoing effect.",
+        }),
+        macros: new fields.TypedObjectField(new fields.StringField({
+          choices: propertyPseudoHooks,
+        })),
+      }),
     });
+  }
+
+  /**
+   * Change a macro's run hook.
+   * @param {Teriock.UUID<TeriockMacro>} uuid
+   * @returns {Promise<void>}
+   */
+  async changeMacroRunHook(uuid) {
+    const pseudoHook = await selectDialog(propertyPseudoHooks, {
+      label: "Event",
+      hint: "Please select an event that triggers this macro to run.",
+      title: "Select Event",
+      initial: this.applies.macros[safeUuid(uuid)],
+    });
+    const updateData = {};
+    updateData[`system.applies.macros.${safeUuid(uuid)}`] = pseudoHook;
+    await this.parent.update(updateData);
   }
 
   /** @inheritDoc */
@@ -119,7 +143,17 @@ export default class TeriockPropertyModel extends HierarchyDataMixin(WikiDataMix
   /** @inheritDoc */
   prepareDerivedData() {
     super.prepareDerivedData();
-    this.parent.changes = foundry.utils.deepClone(this.changes);
+    const changes = foundry.utils.deepClone(this.applies.changes);
+    for (const [ safeUuid, pseudoHook ] of Object.entries(this.applies.macros)) {
+      const change = {
+        key: `system.hookedMacros.${pseudoHook}`,
+        value: pureUuid(safeUuid),
+        mode: 2,
+        priority: 5,
+      };
+      changes.push(change);
+    }
+    this.parent.changes = foundry.utils.deepClone(changes);
     if (this.damageType
       && this.damageType.length
       > 0

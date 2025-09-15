@@ -67,9 +67,9 @@ export async function _parse(propertyData, rawHTML) {
     parameters.system.damageType = extractedDamageType;
   }
 
-
+  parameters.system.applies = {};
   parameters.system.description = tidyHTML(rawHTML);
-  parameters.system.changes = extractChangesFromHTML(rawHTML);
+  parameters.system.applies.changes = extractChangesFromHTML(rawHTML);
   parameters.system.modifiesActor = extractDocument(doc);
   parameters.img = getIcon("properties", propertyData.parent.name);
   const toClean = [

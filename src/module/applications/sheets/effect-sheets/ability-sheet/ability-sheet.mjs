@@ -1,5 +1,4 @@
 import { documentOptions } from "../../../../constants/options/document-options.mjs";
-import { safeUuid } from "../../../../helpers/utils.mjs";
 import { durationDialog } from "../../../dialogs/_module.mjs";
 import { PassiveSheetMixin } from "../../mixins/_module.mjs";
 import TeriockBaseEffectSheet from "../base-effect-sheet/base-effect-sheet.mjs";
@@ -15,7 +14,11 @@ import { contextMenus } from "./connections/_context-menus.mjs";
  * @mixes CommonSheetMixin
  */
 export default class TeriockAbilitySheet extends PassiveSheetMixin(TeriockBaseEffectSheet) {
-  /** @inheritDoc */
+  /**
+   * Default options for the ability sheet.
+   * @type {object}
+   * @static
+   */
   static DEFAULT_OPTIONS = {
     classes: [ "ability" ],
     actions: {
@@ -266,14 +269,6 @@ export default class TeriockAbilitySheet extends PassiveSheetMixin(TeriockBaseEf
         el.addEventListener("click", () => doc.update(update));
       });
     }
-  }
-
-  /** @inheritDoc */
-  async _onDropMacro(_event, data) {
-    const updateData = {
-      [`system.applies.macros.${safeUuid(data?.uuid)}`]: "execution",
-    };
-    await this.document.update(updateData);
   }
 
   /** @inheritDoc */

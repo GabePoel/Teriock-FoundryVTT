@@ -1,4 +1,5 @@
 import { documentOptions } from "../../../../constants/options/document-options.mjs";
+import { PassiveSheetMixin } from "../../mixins/_module.mjs";
 import TeriockBaseEffectSheet from "../base-effect-sheet/base-effect-sheet.mjs";
 import { propertyContextMenu } from "./connections/_context-menus.mjs";
 
@@ -7,8 +8,11 @@ import { propertyContextMenu } from "./connections/_context-menus.mjs";
  * Provides property management with context menus for property types.
  *
  * @property {TeriockProperty} document
+ * @extends {TeriockBaseEffectSheet}
+ * @mixes PassiveSheetMixin
+ * @mixes CommonSheetMixin
  */
-export default class TeriockPropertySheet extends TeriockBaseEffectSheet {
+export default class TeriockPropertySheet extends PassiveSheetMixin(TeriockBaseEffectSheet) {
   /**
    * Default options for the property sheet.
    * @type {object}

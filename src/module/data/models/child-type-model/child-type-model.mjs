@@ -216,10 +216,14 @@ export default class ChildTypeModel extends CommonTypeModel {
    * @returns {Promise<void>} Promise that resolves when the use is complete.
    */
   async use(options) {
-    Hooks.callAll(
-      "teriock.use" + this.parent.type.charAt(0).toUpperCase() + this.parent.type.slice(1),
-      [ this.parent ],
-    );
-    await this.roll(options);
+    const data = { doc: this.parent };
+    await this.parent.hookCall("use", data);
+    if (!data.cancel) {
+      Hooks.callAll(
+        "teriock.use" + this.parent.type.charAt(0).toUpperCase() + this.parent.type.slice(1),
+        [ this.parent ],
+      );
+      await this.roll(options);
+    }
   }
 }

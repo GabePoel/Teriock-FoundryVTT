@@ -58,7 +58,7 @@ export interface TeriockAbilityConsequenceSchema {
     proficient: AbilityConsequence;
     fluent: AbilityConsequence;
     heightened: AbilityConsequence;
-    macros: Record<Teriock.SafeUUID<TeriockMacro>, Teriock.Parameters.Actor.PseudoHook>;
+    macros: Record<Teriock.SafeUUID<TeriockMacro>, Teriock.Parameters.Shared.PseudoHook>;
   };
   sustaining: Set<Teriock.UUID<TeriockConsequence>>;
 }

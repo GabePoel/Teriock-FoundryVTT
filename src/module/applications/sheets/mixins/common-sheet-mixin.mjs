@@ -861,8 +861,6 @@ export default (Base) => {
       return context;
     }
 
-    // Private helper methods
-
     /**
      * Assigns overall rules to tooltips of tcard containers.
      * @param {HTMLElement} target

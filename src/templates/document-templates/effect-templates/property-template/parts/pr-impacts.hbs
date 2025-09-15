@@ -3,11 +3,30 @@
     {{> "systems/teriock/src/templates/document-templates/shared/header.hbs"}}
   </div>
   <div class="ab-impacts" style="padding: 1rem; width: 100%;">
-    {{> "systems/teriock/src/templates/document-templates/shared/changes.hbs"
-      changesPath="system.changes"
-      changesData=(path system "changes")
-      fieldDefs=(path systemFields "changes.element.fields")
-    }}
+    <nav class="sheet-tabs tabs">
+      <a data-action="changeImpactTab" data-group="sheet" data-tab="base"
+         class="{{#if (eq impactTab "base")}}active{{/if}}">
+        <i class="fa-solid fa-certificate" inert=""></i>
+        <span>Base</span>
+      </a>
+      <a data-action="changeImpactTab" data-group="sheet" data-tab="custom"
+         class="{{#if (eq impactTab "custom")}}active{{/if}}">
+        <i class="fa-solid fa-code" inert=""></i>
+        <span>Macros</span>
+      </a>
+    </nav>
+    <div class="ab-impacts-config" style="display: flex; flex-direction: column; gap: 1rem; margin-top: 1rem;">
+      {{#if (eq impactTab "base")}}
+        {{> "systems/teriock/src/templates/document-templates/shared/changes.hbs"
+          changesPath="system.applies.changes"
+          changesData=(path system "applies" "changes")
+          fieldDefs=(path systemFields "applies.fields.changes.element.fields")
+        }}
+      {{/if}}
+      {{#if (eq impactTab "custom")}}
+        {{> "systems/teriock/src/templates/document-templates/shared/_impact-macros.hbs"}}
+      {{/if}}
+    </div>
     <button
       class="ab-impacts-close"
       data-action="toggleImpacts"

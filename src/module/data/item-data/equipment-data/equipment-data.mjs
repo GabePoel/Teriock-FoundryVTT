@@ -1,3 +1,4 @@
+import { propertyPseudoHooks } from "../../../constants/system/pseudo-hooks.mjs";
 import { getRollIcon, mergeFreeze } from "../../../helpers/utils.mjs";
 import { ConsumableDataMixin, ExecutableDataMixin, WikiDataMixin } from "../../mixins/_module.mjs";
 import TeriockBaseItemModel from "../base-item-data/base-item-data.mjs";
@@ -262,6 +263,11 @@ export default class TeriockEquipmentModel extends ConsumableDataMixin(WikiDataM
   prepareBaseData() {
     this.baseAv = 0;
     this.baseBv = 0;
+    this.hookedMacros
+      = /** @type {Record<Teriock.Parameters.Shared.PropertyPseudoHook, Teriock.UUID<TeriockMacro>[]>} */ {};
+    for (const pseudoHook of Object.keys(propertyPseudoHooks)) {
+      this.hookedMacros[pseudoHook] = [];
+    }
   }
 
   /** @inheritDoc */

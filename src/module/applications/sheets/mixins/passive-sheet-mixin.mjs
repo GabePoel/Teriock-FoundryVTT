@@ -1,4 +1,4 @@
-import { pureUuid } from "../../../helpers/utils.mjs";
+import { pureUuid, safeUuid } from "../../../helpers/utils.mjs";
 
 /**
  * Mixin for documents that passively modify other documents.
@@ -41,6 +41,14 @@ export default (Base) => {
       } else {
         foundry.ui.notifications.warn("Sheet must be editable to change when a macro runs.");
       }
+    }
+
+    /** @inheritDoc */
+    async _onDropMacro(_event, data) {
+      const updateData = {
+        [`system.applies.macros.${safeUuid(data?.uuid)}`]: "use",
+      };
+      await this.document.update(updateData);
     }
 
     /** @inheritDoc */

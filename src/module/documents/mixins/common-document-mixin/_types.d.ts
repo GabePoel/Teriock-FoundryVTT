@@ -38,15 +38,17 @@ export interface CommonDocumentMixinInterface {
 
   /**
    * Execute all macros for a given pseudo-hook and call a regular hook with the same name.
-   * @param {Teriock.Parameters.Actor.PseudoHook} pseudoHook - What pseudo-hook to call.
+   * @param {Teriock.Parameters.Shared.PseudoHook} pseudoHook - What pseudo-hook to call.
    * @param {Partial<Teriock.HookData.BaseHookData>} [data] - Data to call in the macro.
    * @param {TeriockEffect} [effect] - If included, only call macros provided by this effect.
+   * @param {boolean} [skipCall] - Whether to skip calling normal Foundry hooks.
    * @returns {Promise<Teriock.HookData.BaseHookData>} The mutated data.
    */
   hookCall(
-    pseudoHook: Teriock.Parameters.Actor.PseudoHook,
+    pseudoHook: Teriock.Parameters.Shared.PseudoHook,
     data?: Partial<Teriock.HookData.BaseHookData>,
     effect?: TeriockEffect,
+    skipCall?: boolean,
   ): Promise<Teriock.HookData.BaseHookData>;
 
   /**

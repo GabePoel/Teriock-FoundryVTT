@@ -27,7 +27,7 @@
       <a data-action="changeImpactTab" data-group="sheet" data-tab="custom"
          class="{{#if (eq impactTab "custom")}}active{{/if}}">
         <i class="fa-solid fa-code" inert=""></i>
-        <span>Custom</span>
+        <span>Macros</span>
       </a>
     </nav>
     <div class="ab-impacts-config" style="display: flex; flex-direction: column; gap: 1rem; margin-top: 1rem;">
@@ -72,31 +72,7 @@
         }}
       {{/if}}
       {{#if (eq impactTab "custom")}}
-        {{> "systems/teriock/src/templates/document-templates/effect-templates/ability-template/parts/_impact-macros.hbs"}}
-      {{/if}}
-      {{#if (eq impactTab "customNOT")}}
-        <dev class="tcard-container">
-          {{#if (exists macro)}}
-            {{tcard
-              img=macro.img
-              title=macro.name
-              subtitle="Custom Ability Execution"
-              text="Macro"
-              icons=(ticon "link-slash" tooltip="Unlink Macro" action="unlinkMacro")
-              type="macro"
-              id=macro.uuid
-            }}
-          {{else}}
-            {{tcard
-              img="systems/teriock/src/icons/documents/uncertainty.svg"
-              title="No Macro Set"
-              subtitle="Custom Ability Execution"
-              text="Macro"
-              icons=""
-              draggable=false
-            }}
-          {{/if}}
-        </dev>
+        {{> "systems/teriock/src/templates/document-templates/shared/_impact-macros.hbs"}}
       {{/if}}
     </div>
     <button

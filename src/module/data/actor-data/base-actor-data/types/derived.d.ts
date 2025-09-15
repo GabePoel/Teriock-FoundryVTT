@@ -28,7 +28,7 @@ export interface TeriockBaseActorDerived {
   /** Whether the actor is wearing armor @derived */
   hasArmor: boolean;
   /** Registered pseudo-hook macros to fire */
-  hookedMacros: Record<Teriock.Parameters.Actor.PseudoHook, Teriock.UUID<TeriockMacro>[]>;
+  hookedMacros: Record<Teriock.Parameters.Shared.PseudoHook, Teriock.UUID<TeriockMacro>[]>;
   /** Light */
   light: object;
   /** Lighted to */

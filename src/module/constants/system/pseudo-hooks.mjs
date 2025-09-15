@@ -1,4 +1,4 @@
-export const unsortedPseudoHooks = {
+export const abilityPseudoHooks = {
   execution: "Ability Execution",
   preExecution: "Ability Pre-execution",
   turnStart: "Actor Turn Starting",
@@ -26,24 +26,31 @@ export const unsortedPseudoHooks = {
   rollResistance: "Rolling a Resistance Save",
   rollTradecraft: "Rolling a Tradecraft Check",
   useAbility: "Using an Ability",
-  equipmentEquip: "Equipment Equipping",
-  equipmentUnequip: "Equipment Unequipping",
-  equipmentAttune: "Equipment Attunement",
-  equipmentDeattune: "Equipment Deattunement",
-  equipmentIdentify: "Equipment Identification",
-  equipmentReadMagic: "Equipment Reading Magic",
-  equipmentUnidentify: "Equipment Unidentification",
-  equipmentShatter: "Equipment Shattering",
-  equipmentRepair: "Equipment Repairing",
-  equipmentDampen: "Equipment Dampening",
-  equipmentUndampen: "Equipment Undampening",
-  equipmentGlue: "Equipment Gluing",
-  equipmentUnglue: "Equipment Ungluing",
   postUpdate: "Actor Post-updating",
   rollImmunity: "Rolling an Immunity Save",
   documentChat: "Document Sharing to Chat",
   documentDuplicate: "Document Duplication",
 };
 
+export const propertyPseudoHooks = {
+  equipmentAttune: "Equipment Attunement",
+  equipmentDampen: "Equipment Dampening",
+  equipmentDeattune: "Equipment Deattunement",
+  equipmentEquip: "Equipment Equipping",
+  equipmentGlue: "Equipment Gluing",
+  equipmentIdentify: "Equipment Identification",
+  equipmentReadMagic: "Equipment Reading Magic",
+  equipmentRepair: "Equipment Repairing",
+  equipmentShatter: "Equipment Shattering",
+  equipmentUndampen: "Equipment Undampening",
+  equipmentUnequip: "Equipment Unequipping",
+  equipmentUnglue: "Equipment Ungluing",
+  equipmentUnidentify: "Equipment Unidentification",
+  use: "Using Parent",
+};
+
+export const unsortedPseudoHooks = foundry.utils.mergeObject(abilityPseudoHooks, propertyPseudoHooks);
+
 export const pseudoHooks = Object.fromEntries(Object.entries(unsortedPseudoHooks)
   .sort(([ , a ], [ , b ]) => a.localeCompare(b)));
+

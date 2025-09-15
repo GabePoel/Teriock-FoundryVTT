@@ -52,18 +52,47 @@ export default (Base) => {
 
     /**
      * @inheritDoc
-     * @param {Teriock.Parameters.Actor.PseudoHook} pseudoHook
+     * @param {Teriock.Parameters.Shared.PseudoHook} pseudoHook
      * @param {Partial<Teriock.HookData.BaseHookData>} [data]
      * @param {TeriockEffect} [effect]
+     * @param {boolean} [skipCall]
      * @returns {Promise<Teriock.HookData.BaseHookData>}
      */
-    async hookCall(pseudoHook, data = {}, effect = null) {
+    async hookCall(pseudoHook, data = {}, effect = null, skipCall = false) {
       data.cancel = false;
-      if (this.actor) {
-        return await this.actor.hookCall(pseudoHook, data, effect);
-      } else {
-        return /** @type {Teriock.HookData.BaseHookData} */ data;
+      if (this.system.hookedMacros) {
+        if (!data) {
+          data = {};
+        }
+        data.cancel = false;
+        if (!skipCall) {
+          Hooks.callAll(`teriock.${pseudoHook}`, this, data);
+          skipCall = true;
+        }
+        let macroUuids = this.system.hookedMacros[pseudoHook];
+        if (macroUuids) {
+          if (effect) {
+            macroUuids = macroUuids.filter((uuid) => effect.changes
+              .filter((c) => c.key === `system.hookedMacros.${pseudoHook}`)
+              .map((c) => c.value)
+              .includes(uuid));
+          }
+          for (const macroUuid of macroUuids) {
+            /** @type {TeriockMacro} */
+            const macro = await foundry.utils.fromUuid(macroUuid);
+            if (macro) {
+              await macro.execute({
+                actor: this,
+                data: data,
+              });
+            }
+          }
+        }
       }
+      if (this.documentName !== "Actor") {
+        await this.actor.hookCall(pseudoHook, data, effect, skipCall);
+      }
+      return /** @type {Teriock.HookData.BaseHookData} */ data;
     }
 
     /** @inheritDoc */

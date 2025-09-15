@@ -2,6 +2,7 @@ import type TeriockBaseEffectModel from "../base-effect-data/base-effect-data.mj
 import type { TeriockProperty } from "../../../documents/_documents.mjs";
 import type { EffectChangeData } from "../ability-data/types/consequences";
 import type { HierarchyDataMixinInterface } from "../../mixins/hierarchy-data-mixin/_types";
+import type TeriockMacro from "../../../documents/macro.mjs";
 
 declare module "./property-data.mjs" {
   export default interface TeriockPropertyModel extends TeriockBaseEffectModel, HierarchyDataMixinInterface {
@@ -9,8 +10,6 @@ declare module "./property-data.mjs" {
     applyIfDampened: boolean;
     /** Applies even if the parent {@link TeriockEquipment} is shattered */
     applyIfShattered: boolean;
-    /** Changes merged into overall changes */
-    changes: EffectChangeData[];
     /** Damage type */
     damageType: string;
     /** Extra damage dealt by the parent {@link TeriockEquipment} */
@@ -25,6 +24,11 @@ declare module "./property-data.mjs" {
     modifiesActor: boolean;
     /** Power sources */
     powerSources: Teriock.Parameters.Ability.PowerSource[];
+    /** Applies */
+    applies: {
+      changes: EffectChangeData[];
+      macros: Record<Teriock.SafeUUID<TeriockMacro>, Teriock.Parameters.Shared.PropertyPseudoHook>;
+    };
 
     get parent(): TeriockProperty;
   }
