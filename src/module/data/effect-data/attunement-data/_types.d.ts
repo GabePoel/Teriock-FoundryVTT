@@ -3,14 +3,14 @@ import type { TeriockAttunement, TeriockEquipment } from "../../../documents/_do
 
 declare module "./attunement-data.mjs" {
   export default interface TeriockAttunementModel extends TeriockBaseEffectModel {
-    /** Should this inherit the tier of the target entity? */
+    /** <schema> Should this inherit the tier of the target entity? */
     inheritTier: boolean;
-    /** The entity that this attunement corresponds to */
+    /** <schema> The entity that this attunement corresponds to */
     target: Teriock.ID<TeriockEquipment> | null;
-    /** Presence tier of the target entity */
+    /** <schema> Presence tier of the target entity */
     tier: number;
-    /** What type of entity this attunement corresponds to */
-    type: "equipment" | "mount";
+    /** <schema> What type of entity this attunement corresponds to */
+    type: Teriock.Parameters.Attunement.AttunementType;
 
     get parent(): TeriockAttunement;
   }

@@ -1,3 +1,4 @@
+import { attunementOptions } from "../../../constants/options/attunement-options.mjs";
 import { mergeFreeze } from "../../../helpers/utils.mjs";
 import TeriockBaseEffectModel from "../base-effect-data/base-effect-data.mjs";
 
@@ -25,10 +26,7 @@ export default class TeriockAttunementModel extends TeriockBaseEffectModel {
         initial: "equipment",
         label: "Attunement Type",
         hint: "What type of entity this attunement corresponds to.",
-        choices: {
-          equipment: "Equipment",
-          mount: "Mount",
-        },
+        choices: attunementOptions.attunementType,
       }),
       target: new fields.DocumentIdField({
         label: "Attunement Target",

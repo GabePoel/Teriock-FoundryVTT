@@ -3,9 +3,9 @@ import type { TeriockFluency } from "../../../documents/_documents.mjs";
 
 declare module "./fluency-data.mjs" {
   export default interface TeriockFluencyModel extends TeriockBaseEffectModel {
-    /** Tradecraft field */
+    /** <schema> Tradecraft field */
     field: Teriock.Parameters.Fluency.Field;
-    /** Tradecraft */
+    /** <schema> Tradecraft */
     tradecraft: Teriock.Parameters.Fluency.Tradecraft;
 
     get parent(): TeriockFluency;

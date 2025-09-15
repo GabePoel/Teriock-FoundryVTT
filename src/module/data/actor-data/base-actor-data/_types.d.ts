@@ -293,7 +293,6 @@ export interface TeriockBaseActorData {
 declare module "./base-actor-data.mjs" {
   export default // @ts-ignore
   interface TeriockBaseActorModel extends TeriockBaseActorData {
-    /** Parent Actor */
     get parent(): TeriockActor;
   }
 }

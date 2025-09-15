@@ -1,70 +1,69 @@
 import type TeriockBaseItemModel from "../base-item-data/base-item-data.mjs";
 import type { TeriockEquipment } from "../../../documents/_documents.mjs";
 import type { ConsumableInterface } from "../../effect-data/shared/shared-fields";
-import type { TeriockMacro } from "../../../documents/_module.mjs";
 
 declare module "./equipment-data.mjs" {
   export default interface TeriockEquipmentModel extends TeriockBaseItemModel, ConsumableInterface {
-    /** Armor Value */
+    /** <schema> Armor Value */
     av: number;
-    /** Armor value for effects to modify */
+    /** <base> Armor value for effects to modify */
     baseAv: number;
-    /** Black value for effects to modify */
+    /** <base> Black value for effects to modify */
     baseBv: number;
-    /** Block Value */
+    /** <schema> Block Value */
     bv: number;
-    /** Damage Dice */
+    /** <schema> Damage Dice */
     damage: string;
-    /** Damage Types */
+    /** <schema> Damage Types */
     damageTypes: Set<string>;
-    /** Is the equipment dampened? */
+    /** <schema> Is the equipment dampened? */
     dampened: boolean;
-    /** Equipment Classes */
+    /** <schema> Equipment Classes */
     equipmentClasses: Set<Teriock.Parameters.Equipment.EquipmentClass>;
-    /** Canonical Equipment Type */
+    /** <schema> Canonical Equipment Type */
     equipmentType: string;
-    /** Is the equipment equipped? */
+    /** <schema> Is the equipment equipped? */
     equipped: boolean;
-    /** Flaws */
+    /** <schema> Flaws */
     flaws: string;
-    /** Is the equipment glued? */
+    /** <schema> Is the equipment glued? */
     glued: boolean;
-    /** Registered pseudo-hook macros to fire */
-    hookedMacros: Record<Teriock.Parameters.Shared.PropertyPseudoHook, Teriock.UUID<TeriockMacro>[]>;
-    /** Is the equipment identified? */
+    /** <base> Registered pseudo-hook macros to fire */
+    hookedMacros: Teriock.Parameters.Equipment.HookedEquipmentMacros;
+    /** <schema> Is the equipment identified? */
     identified: boolean;
-    /** Minimum STR */
+    /** <schema> Minimum STR */
     minStr: number;
-    /** Notes */
+    /** <schema> Notes */
     notes: string;
-    /** Power Level */
+    /** <schema> Power Level */
     powerLevel: string;
-    /** Price */
+    /** <schema> Price */
     price: number;
-    /** Range (ft) (if ranged) */
+    /** <schema> Range (ft) (if ranged) */
     range: number;
-    /** Is the equipment ranged? */
+    /** <schema> Is the equipment ranged? */
     ranged: boolean;
-    /** Identification Reference Equipment UUID */
+    /** <schema> Identification Reference Equipment UUID */
     reference: Teriock.UUID<TeriockEquipment>;
-    /** Style Bonus (Weapon Fighting Style) */
+    /** <schema> Style Bonus (Weapon Fighting Style) */
     sb: Teriock.Parameters.Equipment.WeaponFightingStyle;
-    /** Is the equipment shattered? */
+    /** <schema> Is the equipment shattered? */
     shattered: boolean;
-    /** Short Range (ft) (if ranged) */
+    /** <schema> Short Range (ft) (if ranged) */
     shortRange: number;
-    /** Special Rules (Weapon Fighting Style) */
+    /** <derived> Special Rules (Weapon Fighting Style) */
     specialRules: string;
-    /** Presence Tier */
+    /** <schema> Presence Tier */
     tier: {
-      /** Raw Presence Tier */
+      /** <schema> Raw Presence Tier */
       raw: string;
-      /** Derived Presence Tier */
+      /** <derived> Derived Presence Tier */
       derived: number;
     };
-    /** Two-handed Damage Dice */
+    /** <schema> Two-handed Damage Dice */
     twoHandedDamage: string;
-    /** Weight (lb) */
+    /** <schema> Weight (lb) */
     weight: number;
 
     get parent(): TeriockEquipment;

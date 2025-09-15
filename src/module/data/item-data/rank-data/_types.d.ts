@@ -7,17 +7,17 @@ declare module "./rank-data.mjs" {
   export default interface TeriockRankModel extends TeriockBaseItemModel,
     StatDataMixinInterface,
     WikiDataMixinInterface {
-    /** Rank Class Archetype */
+    /** <schema> Rank Class Archetype */
     archetype: Teriock.Parameters.Rank.RankArchetype;
-    /** Rank Class Name */
+    /** <schema> Rank Class Name */
     className: Teriock.Parameters.Rank.RankClass;
-    /** What number rank this is, with respect to its class */
+    /** <schema> What number rank this is, with respect to its class */
     classRank: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
-    /** Flaws */
+    /** <schema> Flaws */
     flaws: string;
-    /** If this rank is innage */
+    /** <schema> If this rank is innage */
     innate: boolean;
-    /** Max Armor Value */
+    /** <schema> Max Armor Value */
     maxAv: 0 | 1 | 2 | 3 | 4;
 
     get parent(): TeriockRank;

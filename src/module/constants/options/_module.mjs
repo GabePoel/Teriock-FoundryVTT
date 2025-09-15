@@ -1,4 +1,5 @@
 export { abilityOptions as ability } from "./ability-options.mjs";
+export { attunementOptions as attunement } from "./attunement-options.mjs";
 export { characterOptions as character } from "./character-options.mjs";
 export { consequenceOptions as consequence } from "./consequence-options.mjs";
 export { currencyOptions as currency } from "./currency-options.mjs";

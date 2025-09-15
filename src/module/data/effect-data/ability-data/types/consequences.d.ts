@@ -1,29 +1,22 @@
-import type TeriockMacro from "../../../../documents/macro.mjs";
 import type {
   CombatExpirationMethod, CombatExpirationSourceType, CombatExpirationTiming,
 } from "../../shared/shared-fields";
 import type { TeriockConsequence } from "../../../../documents/_documents.mjs";
 
-export type EffectChangeData = {
-  /** The attribute path in the {@link TeriockActor} or {@link TeriockItem} data which the change modifies */
-  key: string;
-  /** The value of the change effect */
-  value: string;
-  /** The modification mode with which the change is applied */
-  mode: number;
-  /** The priority level with which this change is applied */
-  priority: number;
-};
-
 /**
- * Ability-specific expiration data.
+ * Ability-specific expiration data
  */
 type AbilityExpiration = {
+  /** <schema> Expirations based on combat timing. */
   combat: {
+    /** <schema> Who triggers effect expiration? */
     who: {
+      /** <schema> What is the relationship of the {@link TeriockActor} that triggers expirations? */
       type: CombatExpirationSourceType
     };
+    /** <schema> What is the method of this expiration? */
     what: CombatExpirationMethod;
+    /** <schema> When in the combat does this effect expire? */
     when: CombatExpirationTiming;
   };
 };
@@ -31,34 +24,55 @@ type AbilityExpiration = {
 /**
  * Applies data for different proficiency levels
  */
-export interface AbilityConsequence {
-  changes: EffectChangeData[];
+export interface AbilityImpact {
+  /** <schema> Changes made to the parent {@link TeriockActor} */
+  changes: Teriock.Foundry.EffectChangeData[];
+  /** <schema> Tradecraft checks the ability can cause */
   checks: Set<Teriock.Parameters.Fluency.Tradecraft>;
-  common: Set<Teriock.Parameters.Consequence.CommonConsequenceKey>;
+  /** <schema> Possible common impacts of using an ability */
+  common: Set<Teriock.Parameters.Consequence.CommonImpactKey>;
+  /** <schema> Duration of the impact of this ability in seconds */
   duration: number;
+  /** <schema> Conditions that this ability could end */
   endStatuses: Set<Teriock.Parameters.Condition.ConditionKey>;
+  /** <schema> Expiration data for the {@link TeriockConsequence} created by this ability */
   expiration: {
+    /** <schema> How this effect normally expires */
     normal: AbilityExpiration;
+    /** <schema> How this effect expires on a crit */
     crit: AbilityExpiration;
+    /** <schema> If how this effect expires changes on a crit */
     changeOnCrit: boolean;
+    /** <schema> If this effect expires */
     doesExpire: boolean;
   };
+  /** <schema> Hacks that could be caused by this ability */
   hacks: Set<Teriock.Parameters.Actor.HackableBodyPart>;
+  /** <schema> Rolls that could be caused by this ability */
   rolls: Record<Teriock.Parameters.Consequence.RollConsequenceKey, string>;
+  /** <schema> Conditions that this ability could start */
   startStatuses: Set<Teriock.Parameters.Condition.ConditionKey>;
+  /** <schema> Conditions caused by the {@link TeriockConsequence} created by this ability */
   statuses: Set<Teriock.Parameters.Condition.ConditionKey>;
 }
 
 /**
  * Consequences that are applied to the target.
  */
-export interface TeriockAbilityConsequenceSchema {
+export interface TeriockAbilityImpactSchema {
+  /** <schema> Impacts of using this ability */
   applies: {
-    base: AbilityConsequence;
-    proficient: AbilityConsequence;
-    fluent: AbilityConsequence;
-    heightened: AbilityConsequence;
-    macros: Record<Teriock.SafeUUID<TeriockMacro>, Teriock.Parameters.Shared.PseudoHook>;
+    /** <schema> Base impact of using this ability */
+    base: AbilityImpact;
+    /** <schema> How the impacts change if proficient in this ability */
+    proficient: AbilityImpact;
+    /** <schema> How the impacts change if fluent in this ability */
+    fluent: AbilityImpact;
+    /** <schema> How the impacts change if this ability is heightened */
+    heightened: AbilityImpact;
+    /** <schema> {@link TeriockMacro}s hooked to the parent {@link TeriockActor} */
+    macros: Teriock.Parameters.Shared.MacroHookRecord;
   };
+  /** <schema> What consequences this is ability is currently sustaining */
   sustaining: Set<Teriock.UUID<TeriockConsequence>>;
 }

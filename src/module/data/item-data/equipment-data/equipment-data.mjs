@@ -263,8 +263,7 @@ export default class TeriockEquipmentModel extends ConsumableDataMixin(WikiDataM
   prepareBaseData() {
     this.baseAv = 0;
     this.baseBv = 0;
-    this.hookedMacros
-      = /** @type {Record<Teriock.Parameters.Shared.PropertyPseudoHook, Teriock.UUID<TeriockMacro>[]>} */ {};
+    this.hookedMacros = /** @type {Teriock.Parameters.Equipment.HookedEquipmentMacros} */ {};
     for (const pseudoHook of Object.keys(propertyPseudoHooks)) {
       this.hookedMacros[pseudoHook] = [];
     }

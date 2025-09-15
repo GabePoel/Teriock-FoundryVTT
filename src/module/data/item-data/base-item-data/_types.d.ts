@@ -10,7 +10,6 @@ declare module "./base-item-data.mjs" {
     /** Update counter - used to force an update when adding/removing effects */
     updateCounter: boolean;
 
-    /** Parent {@link TeriockItem} */
     get parent(): TeriockItem;
   }
 }

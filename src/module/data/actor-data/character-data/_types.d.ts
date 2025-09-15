@@ -3,7 +3,6 @@ import { TeriockCharacter } from "../../../documents/_documents.mjs";
 
 declare module "./character-data.mjs" {
   export default interface TeriockCharacterModel extends TeriockBaseActorModel {
-    /** Parent */
-    parent: TeriockCharacter;
+    get parent(): TeriockCharacter;
   }
 }

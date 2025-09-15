@@ -4,11 +4,14 @@ import type { CombatExpirationMethod } from "../shared/shared-fields";
 
 declare module "./condition-data.mjs" {
   export default interface TeriockConditionModel extends TeriockBaseEffectModel {
-    /** Expirations */
+    /** <schema> Expirations */
     expirations: {
+      /** <schema> Combat expirations */
       combat: {
+        /** <schema> Method of combat expiration */
         what: CombatExpirationMethod
       };
+      /** <schema> Expiration description */
       description?: string;
     };
 

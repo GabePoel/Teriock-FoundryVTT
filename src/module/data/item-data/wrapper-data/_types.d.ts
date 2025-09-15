@@ -3,7 +3,6 @@ import type { TeriockWrapper } from "../../../documents/_documents.mjs";
 
 declare module "./wrapper-data.mjs" {
   export default interface TeriockWrapperModel extends TeriockBaseItemModel {
-    /** Parent */
     get parent(): TeriockWrapper;
   }
 }

@@ -9,38 +9,38 @@ export type SizeAbilityStep = {
 
 declare module "./species-data.mjs" {
   export default interface TeriockSpeciesModel extends TeriockBaseItemModel, StatDataMixinInterface {
-    /** Age of maturity */
+    /** <schema> Age of maturity */
     adult: number;
-    /** Appearance */
+    /** <schema> Appearance */
     appearance: string;
-    /** Apply this size to parent {@link TeriockActor}. */
+    /** <schema> Apply this size to parent {@link TeriockActor}. */
     applySize: boolean;
-    /** Attribute increase */
+    /** <schema> Attribute increase */
     attributeIncrease: string;
-    /** Battle rating */
+    /** <schema> Battle rating */
     br: number;
-    /** HP increase */
+    /** <schema> HP increase */
     hpIncrease: string;
-    /** Innate ranks */
+    /** <schema> Innate ranks */
     innateRanks: string;
-    /** Maximum lifespan */
+    /** <schema> Maximum lifespan */
     lifespan: number | null;
-    /** Size constraints */
+    /** <schema> Size constraints */
     size: {
-      /** Maximum size */
+      /** <schema> Maximum size */
       max: number;
-      /** Minimum size */
+      /** <schema> Minimum size */
       min: number;
-      /** Size */
+      /** <schema> Size */
       value: number;
     };
-    /** Size adjustments */
+    /** <schema> Size adjustments */
     sizeStepAbilities: Record<number, SizeAbilityStep>;
-    /** Size interval to add another HP die at */
+    /** <schema> Size interval to add another HP die at */
     sizeStepHp: number | null;
-    /** Size interval to add another MP die at */
+    /** <schema> Size interval to add another MP die at */
     sizeStepMp: number | null;
-    /** Traits */
+    /** <schema> Traits */
     traits: Set<Teriock.Parameters.Species.Trait>;
 
     get parent(): TeriockSpecies;

@@ -3,18 +3,11 @@ import type { TeriockPower } from "../../../documents/_documents.mjs";
 
 declare module "./power-data.mjs" {
   export default interface TeriockPowerModel extends TeriockBaseItemModel {
-    /** Age of adulthood (if species) */
-    adult: number;
-    /** Flaws */
+    /** <schema> Flaws */
     flaws: string;
-    /** Lifespan (if species) */
-    lifespan: number;
-    /** Size (if species) */
-    size: number;
-    /** Power type */
+    /** <schema> Power type */
     type: Teriock.Parameters.Power.PowerType;
 
-    /** Parent */
     get parent(): TeriockPower;
   }
 }

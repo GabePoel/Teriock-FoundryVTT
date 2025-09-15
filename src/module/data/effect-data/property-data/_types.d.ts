@@ -1,8 +1,6 @@
 import type TeriockBaseEffectModel from "../base-effect-data/base-effect-data.mjs";
 import type { TeriockProperty } from "../../../documents/_documents.mjs";
-import type { EffectChangeData } from "../ability-data/types/consequences";
 import type { HierarchyDataMixinInterface } from "../../mixins/hierarchy-data-mixin/_types";
-import type TeriockMacro from "../../../documents/macro.mjs";
 
 declare module "./property-data.mjs" {
   export default interface TeriockPropertyModel extends TeriockBaseEffectModel, HierarchyDataMixinInterface {
@@ -12,12 +10,12 @@ declare module "./property-data.mjs" {
        * <schema> Changes made to the parent {@link TeriockEquipment} or {@link TeriockActor} if {@link modifiesActor}
        * is set to `true`.
        */
-      changes: EffectChangeData[];
+      changes: Teriock.Foundry.EffectChangeData[];
       /**
        * <schema> {@link TeriockMacro}s hooked to the parent {@link TeriockEquipment} or {@link TeriockActor} if
        * {@link modifiesActor} is set to `true`.
        */
-      macros: Record<Teriock.SafeUUID<TeriockMacro>, Teriock.Parameters.Shared.PropertyPseudoHook>;
+      macros: Teriock.Parameters.Shared.MacroHookRecord;
     };
     /** <schema> Applies even if the parent {@link TeriockEquipment} is dampened */
     applyIfDampened: boolean;

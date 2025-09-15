@@ -141,6 +141,7 @@ export default class TeriockConsequenceModel extends HierarchyDataMixin(TeriockB
       }
     }
     if (this.sustainedExpiration) {
+      /** @type {TeriockEffect} */
       const source = fromUuidSync(this.source);
       should = should || !source || source.disabled;
     }

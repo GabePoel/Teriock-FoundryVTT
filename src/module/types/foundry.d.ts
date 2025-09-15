@@ -26,6 +26,17 @@ declare global {
       icon?: string;
       name: string;
     };
+
+    export type EffectChangeData = {
+      /** <schema> The attribute path in the {@link TeriockActor} or {@link TeriockItem} data which the change modifies */
+      key: string;
+      /** <schema> The value of the change effect */
+      value: string;
+      /** <schema> The modification mode with which the change is applied */
+      mode: number;
+      /** <schema> The priority level with which this change is applied */
+      priority: number;
+    };
   }
 }
 
