@@ -74,6 +74,25 @@ export function convertUnits(range, fromUnits, toUnits) {
 }
 
 /**
+ * Sort documents.
+ * @template T
+ * @param {T[]} docs
+ * @param {object} [options]
+ * @param {boolean} [options.alphabetical]
+ * @returns {T[]}
+ */
+export function docSort(docs, options = {}) {
+  return docs.sort((a, b) => {
+    if (!options.alphabetical) {
+      if (a.sort !== b.sort) {
+        return a.sort - b.sort;
+      }
+    }
+    return a.name.localeCompare(b.name);
+  });
+}
+
+/**
  * Remove indentation from code block.
  * @param {string} str
  * @returns {string}

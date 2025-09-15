@@ -1,6 +1,7 @@
 import { documentOptions } from "../../../../constants/options/document-options.mjs";
 import { tradecraftMessage } from "../../../../helpers/html.mjs";
 import { buildMessage } from "../../../../helpers/messages-builder/message-builder.mjs";
+import { docSort } from "../../../../helpers/utils.mjs";
 import { HackStatMixin } from "../../../shared/mixins/_module.mjs";
 import { CommonSheetMixin } from "../../mixins/_module.mjs";
 import _embeddedFromCard from "../../mixins/common-sheet-mixin/methods/_embedded-from-card.mjs";
@@ -900,14 +901,14 @@ export default class TeriockBaseActorSheet extends HackStatMixin(CommonSheetMixi
     context.editable = this.isEditable;
     context.actor = this.actor;
     context.abilities = this._getFilteredAbilities(_sortAbilities(this.actor, this._embeds.effectTypes.ability) || []);
-    context.resources = this.actor.resources;
+    context.resources = docSort(this.actor.resources, { alphabetical: true });
     context.equipment = this._getFilteredEquipment(_sortEquipment(this.actor, this._embeds.itemTypes.equipment) || []);
-    context.powers = this.actor.powers;
-    context.species = this.actor.species;
-    context.fluencies = this.actor.fluencies;
-    context.consequences = this.actor.consequences;
-    context.attunements = this.actor.attunements;
-    context.ranks = this.actor.ranks;
+    context.powers = docSort(this.actor.powers);
+    context.species = docSort(this.actor.species);
+    context.fluencies = docSort(this.actor.fluencies);
+    context.consequences = docSort(this.actor.consequences, { alphabetical: true });
+    context.attunements = docSort(this.actor.attunements, { alphabetical: true });
+    context.ranks = docSort(this.actor.ranks);
     context.sidebarOpen = this._sidebarOpen;
     context.tabs = {
       classes: {

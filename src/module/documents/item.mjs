@@ -126,6 +126,12 @@ export default class TeriockItem extends ParentDocumentMixin(ChildDocumentMixin(
     }
   }
 
+  /** @inheritDoc */
+  async _preCreate(data, operations, user) {
+    this.updateSource({ sort: game.time.serverTime });
+    return await super._preCreate(data, operations, user);
+  }
+
   /**
    * Get all ActiveEffects that may apply to this Item.
    * @yields {TeriockEffect}

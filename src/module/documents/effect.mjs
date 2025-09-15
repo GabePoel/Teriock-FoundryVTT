@@ -339,6 +339,12 @@ export default class TeriockEffect extends ChildDocumentMixin(CommonDocumentMixi
   }
 
   /** @inheritDoc */
+  async _preCreate(data, operations, user) {
+    this.updateSource({ sort: game.time.serverTime });
+    return await super._preCreate(data, operations, user);
+  }
+
+  /** @inheritDoc */
   async _preUpdate(changed, options, user) {
     if ((await super._preUpdate(changed, options, user)) === false) {
       return false;

@@ -35,9 +35,9 @@ export function _getRollData(actorData) {
  */
 function basicData(actorData, data) {
   Object.assign(data, {
-    f: actorData.f,
+    f: actorData.scaling.f,
     lvl: actorData.lvl,
-    p: actorData.p,
+    p: actorData.scaling.p,
     size: actorData.size,
     weight: actorData.weight,
   });
@@ -70,34 +70,31 @@ function rankData(actorData, data) {
   const rankKeys = [
     "mag",
     "sem",
-    "war", // Base classes
+    "war",
     "fla",
     "lif",
     "nat",
     "nec",
-    "sto", // Mage classes
+    "sto",
     "arc",
     "ass",
     "cor",
     "ran",
-    "thi", // Rogue classes
+    "thi",
     "ber",
     "due",
     "kni",
     "pal",
-    "vet", // Warrior classes
+    "vet",
   ];
-
   // Initialize all rank values to 0
   for (const key of rankKeys) {
     data[`rank.${key}`] = 0;
   }
-
   // Count ranks from actor's rank items
   for (const rank of actor.itemTypes.rank) {
     const classKey = rank.system.className?.slice(0, 3).toLowerCase();
     const archetypeKey = rank.system.archetype?.slice(0, 3).toLowerCase();
-
     if (classKey && rankKeys.includes(classKey)) {
       data[`rank.${classKey}`]++;
     }
@@ -105,7 +102,6 @@ function rankData(actorData, data) {
       data[`rank.${archetypeKey}`]++;
     }
   }
-
   data.rank = actorData.rank;
 }
 
@@ -232,7 +228,6 @@ function hackData(actorData, data) {
     "mou",
     "nos",
   ];
-
   for (const key of hackKeys) {
     const hack = actorData.hacks[key];
     if (hack) {
@@ -275,12 +270,10 @@ function speedData(actorData, data) {
     swi: "swim",
     wal: "walk",
   };
-
   for (const key of speedKeys) {
     const systemKey = speedMap[key];
     const adjustment = actorData.speedAdjustments[systemKey] || 0;
     data[`speed.${key}`] = adjustment;
-
     // Calculate feet per turn based on adjustment level
     let feetPerTurn = 0;
     switch (adjustment) {

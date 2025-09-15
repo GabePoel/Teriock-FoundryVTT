@@ -73,8 +73,6 @@ export interface TeriockBaseActorData {
     /** <base> Equipment overrides */
     overrides: Teriock.Parameters.Actor.EquipmentChangeKeys;
   };
-  /** <derived> Fluency bonus derived from level */
-  f: number;
   /** <schema> Hacks */
   hacks: HackDataCollection;
   /** <derived> Whether the actor is wearing armor */
@@ -165,8 +163,6 @@ export interface TeriockBaseActorData {
   namedSize: string;
   /** <derived> Natural armor value @todo move to defense or combat? */
   naturalAv: number;
-  /** <base> Proficiency bonus derived from level */
-  p: number;
   /** <schema> Piercing type @todo move to offense or combat? */
   piercing: string;
   /** <base> Presence @todo */
@@ -180,12 +176,19 @@ export interface TeriockBaseActorData {
     /** <derived> Too much presence being used */
     overflow: boolean;
   };
-  /** <base> Total rank derived from level */
-  rank: number;
   /** <base> Resistances */
   resistances: ProtectionData;
   /** <schema> Style bonus */
   sb: boolean;
+  /** <base> Scaling bonuses */
+  scaling: {
+    /** <base> Proficiency bonus derived from level */
+    p: number;
+    /** <derived> Fluency bonus derived from level */
+    f: number;
+    /** <base> Total rank derived from level */
+    rank: number;
+  };
   /** <schema> Senses */
   senses: {
     /** <schema> Blind fighting */
@@ -260,7 +263,7 @@ export interface TeriockBaseActorData {
   };
   /** <schema> Update counter - used to force an update when adding/removing effects */
   updateCounter: boolean;
-  /** <derived> Weight */
+  /** <schema> Weight of the actor */
   weight: number;
   /** <derived> Total weight carried by the actor */
   weightCarried: number;

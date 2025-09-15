@@ -1,7 +1,6 @@
 /**
  * Prepares attribute saves and movement-related derived data.
  * Calculates save bonuses based on proficiency and fluency, movement speed, and carrying capacity.
- *
  * @param {TeriockBaseActorModel} actorData - The actor's base data system object.
  * @returns {void} Modifies the system object in place.
  * @private
@@ -11,11 +10,10 @@ export function _prepareDerivedAttributes(actorData) {
   const {
     attributes,
     size,
-    f,
-    p,
+    scaling,
   } = actorData;
   Object.values(attributes).forEach((attr) => {
-    const bonus = attr.saveFluent ? f : attr.saveProficient ? p : 0;
+    const bonus = attr.saveFluent ? scaling.f : attr.saveProficient ? scaling.p : 0;
     attr.saveBonus = attr.value * 2 + bonus;
   });
   const mov = attributes.mov.value;
@@ -33,9 +31,9 @@ export function _prepareDerivedAttributes(actorData) {
 /**
  * Prepares presence-related derived data.
  * Calculates presence overflow, maximum presence, and used/unused presence points.
- *
  * @param {TeriockBaseActorModel} actorData - The actor's base data system object.
  * @returns {void} Modifies the system object in place.
+ * @private
  */
 export function _preparePresence(actorData) {
   actorData.presence.overflow = actorData.presence.value > actorData.presence.max;

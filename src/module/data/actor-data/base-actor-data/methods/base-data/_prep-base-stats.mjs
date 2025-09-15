@@ -14,9 +14,11 @@ export function _prepareBonuses(actorData) {
       value: 0,
       max: Math.max(1, Math.floor(1 + (lvl + 1) / 5)),
     },
-    rank: Math.max(0, Math.floor((lvl - 1) / 5)),
-    p: Math.max(0, Math.floor(1 + (lvl - 7) / 10)),
-    f: Math.max(0, Math.floor((lvl - 2) / 5)),
+    scaling: {
+      rank: Math.max(0, Math.floor((lvl - 1) / 5)),
+      p: Math.max(0, Math.floor(1 + (lvl - 7) / 10)),
+      f: Math.max(0, Math.floor((lvl - 2) / 5)),
+    }
   });
 }
 

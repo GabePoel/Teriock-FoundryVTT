@@ -147,13 +147,6 @@ export default class TeriockRankModel extends StatDataMixin(WikiDataMixin(Terioc
   }
 
   /** @inheritDoc */
-  async _preCreate(data, options, user) {
-    this.parent.updateSource({
-      sort: game.time.serverTime,
-    });
-  }
-
-  /** @inheritDoc */
   async parse(rawHTML) {
     return await _parse(this, rawHTML);
   }
