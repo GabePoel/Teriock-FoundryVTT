@@ -28,7 +28,7 @@ export interface TeriockBaseActorData {
     /** <schema> Unused presence */
     unp: ActorAttributeData;
   };
-  /** Attunements - IDs of attuned equipment */
+  /** <base> Attunements - IDs of attuned equipment */
   attunements: Set<Teriock.ID<TeriockEquipment>>;
   /** <derived> Armor value (highest of equipped armor or natural armor) */
   av: number;
