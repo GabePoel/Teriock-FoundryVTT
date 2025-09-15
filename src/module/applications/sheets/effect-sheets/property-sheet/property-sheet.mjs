@@ -10,13 +10,11 @@ import { propertyContextMenu } from "./connections/_context-menus.mjs";
  * @property {TeriockProperty} document
  * @extends {TeriockBaseEffectSheet}
  * @mixes PassiveSheetMixin
- * @mixes CommonSheetMixin
  */
 export default class TeriockPropertySheet extends PassiveSheetMixin(TeriockBaseEffectSheet) {
   /**
-   * Default options for the property sheet.
-   * @type {object}
-   * @static
+   * @inheritDoc
+   * @type {Partial<ApplicationConfiguration>}
    */
   static DEFAULT_OPTIONS = {
     classes: [ "property" ],

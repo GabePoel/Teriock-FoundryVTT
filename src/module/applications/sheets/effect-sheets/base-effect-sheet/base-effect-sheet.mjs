@@ -13,7 +13,10 @@ const { ActiveEffectConfig } = foundry.applications.sheets;
  * @property {TeriockEffect} document
  */
 export default class TeriockBaseEffectSheet extends CommonSheetMixin(ActiveEffectConfig) {
-  /** @inheritDoc */
+  /**
+   * @inheritDoc
+   * @type {Partial<ApplicationConfiguration>}
+   */
   static DEFAULT_OPTIONS = {
     classes: [ "effect" ],
     window: {

@@ -1,6 +1,6 @@
 import { elementClass } from "../html.mjs";
 import { getRollIcon } from "../utils.mjs";
-``
+
 export default function registerFormattingHelpers() {
   Handlebars.registerHelper("firstDie", (str) => {
     if (typeof str !== "string") {

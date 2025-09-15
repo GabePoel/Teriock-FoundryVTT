@@ -10,6 +10,7 @@ export default class BaseDetectionMode extends DetectionMode {
     "unconscious",
     "dead",
   ];
+
   static BLOCKING_TGT_STATUS_EFFECTS = [
     "invisible",
     "hidden",

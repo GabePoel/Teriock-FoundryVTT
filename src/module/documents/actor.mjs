@@ -50,22 +50,6 @@ export default class TeriockActor extends ParentDocumentMixin(CommonDocumentMixi
   }
 
   /**
-   * Is this actor damaged?
-   * @returns {boolean}
-   */
-  get isDamaged() {
-    return this.system.hp.value < this.system.hp.max || this.statuses.has("hacked");
-  }
-
-  /**
-   * Is this actor drained?
-   * @returns {boolean}
-   */
-  get isDrained() {
-    return this.system.mp.value < this.system.mp.max;
-  }
-
-  /**
    * Gets effects that expire based on conditions.
    * @returns {TeriockConsequence[]} Array of condition expiration effects.
    */
@@ -100,6 +84,22 @@ export default class TeriockActor extends ParentDocumentMixin(CommonDocumentMixi
   /** @returns {TeriockEquipment[]} */
   get equipment() {
     return this.itemTypes?.equipment || [];
+  }
+
+  /**
+   * Is this actor damaged?
+   * @returns {boolean}
+   */
+  get isDamaged() {
+    return this.system.hp.value < this.system.hp.max || this.statuses.has("hacked");
+  }
+
+  /**
+   * Is this actor drained?
+   * @returns {boolean}
+   */
+  get isDrained() {
+    return this.system.mp.value < this.system.mp.max;
   }
 
   /**

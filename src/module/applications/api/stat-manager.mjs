@@ -14,6 +14,10 @@ const {
  * @property {TeriockActor} document
  */
 export default class TeriockStatManager extends HackStatMixin(HandlebarsApplicationMixin(ApplicationV2)) {
+  /**
+   * @inheritDoc
+   * @type {Partial<ApplicationConfiguration>}
+   */
   static DEFAULT_OPTIONS = {
     classes: [
       "teriock",
@@ -31,7 +35,7 @@ export default class TeriockStatManager extends HackStatMixin(HandlebarsApplicat
    * Creates a new stat manager instance.
    * @param {TeriockActor} actor
    * @param {Teriock.Dialog.StatDialogOptions} [options]
-   * @param {applicationOptions} [options]
+   * @param {object} [applicationOptions]
    */
   constructor(actor, options, applicationOptions = {}) {
     const {
@@ -69,6 +73,13 @@ export default class TeriockStatManager extends HackStatMixin(HandlebarsApplicat
   }
 
   /** @inheritDoc */
+  _onClose(options) {
+    super._onClose(options);
+    foundry.helpers.Hooks.off("updateActor", this._actorHook);
+    foundry.helpers.Hooks.off("updateItem", this._itemHook);
+  }
+
+  /** @inheritDoc */
   async _onFirstRender(context, options) {
     await super._onFirstRender(context, options);
     this._actorHook = foundry.helpers.Hooks.on("updateActor", async (document) => {
@@ -81,18 +92,6 @@ export default class TeriockStatManager extends HackStatMixin(HandlebarsApplicat
         await this.render();
       }
     });
-  }
-
-  /** @inheritDoc */
-  async _prepareContext(options) {
-    const context = await super._prepareContext(options);
-    context.forHarm = this._forHarm;
-    context.forHarmField = this._forHarmField;
-    context.consumeStatDice = this._consumeStatDice;
-    context.consumeStatDiceField = this._consumeStatDiceField;
-    context.system = this.actor.system;
-    context.uuid = this.actor.uuid;
-    return context;
   }
 
   /** @inheritDoc */
@@ -115,9 +114,14 @@ export default class TeriockStatManager extends HackStatMixin(HandlebarsApplicat
   }
 
   /** @inheritDoc */
-  _onClose(options) {
-    super._onClose(options);
-    foundry.helpers.Hooks.off("updateActor", this._actorHook);
-    foundry.helpers.Hooks.off("updateItem", this._itemHook);
+  async _prepareContext(options) {
+    const context = await super._prepareContext(options);
+    context.forHarm = this._forHarm;
+    context.forHarmField = this._forHarmField;
+    context.consumeStatDice = this._consumeStatDice;
+    context.consumeStatDiceField = this._consumeStatDiceField;
+    context.system = this.actor.system;
+    context.uuid = this.actor.uuid;
+    return context;
   }
 }

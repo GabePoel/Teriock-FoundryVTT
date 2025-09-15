@@ -13,8 +13,8 @@ const { ItemSheetV2 } = foundry.applications.sheets;
  */
 export default class TeriockBaseItemSheet extends CommonSheetMixin(ItemSheetV2) {
   /**
-   * Default sheet options.
-   * @type {object}
+   * @inheritDoc
+   * @type {Partial<ApplicationConfiguration>}
    */
   static DEFAULT_OPTIONS = {
     classes: [ "teriock" ],
@@ -90,6 +90,7 @@ export default class TeriockBaseItemSheet extends CommonSheetMixin(ItemSheetV2) 
 
     importBtn?.addEventListener("contextmenu", async (event) => {
       event.preventDefault();
+      //noinspection JSDeprecatedSymbols
       await this.item.bulkWikiPull();
     });
 

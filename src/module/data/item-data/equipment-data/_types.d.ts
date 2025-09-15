@@ -29,6 +29,8 @@ declare module "./equipment-data.mjs" {
     flaws: string;
     /** Is the equipment glued? */
     glued: boolean;
+    /** Registered pseudo-hook macros to fire */
+    hookedMacros: Record<Teriock.Parameters.Shared.PropertyPseudoHook, Teriock.UUID<TeriockMacro>[]>;
     /** Is the equipment identified? */
     identified: boolean;
     /** Minimum STR */
@@ -64,8 +66,6 @@ declare module "./equipment-data.mjs" {
     twoHandedDamage: string;
     /** Weight (lb) */
     weight: number;
-    /** Registered pseudo-hook macros to fire */
-    hookedMacros: Record<Teriock.Parameters.Shared.PropertyPseudoHook, Teriock.UUID<TeriockMacro>[]>;
 
     get parent(): TeriockEquipment;
   }

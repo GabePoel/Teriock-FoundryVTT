@@ -11,13 +11,11 @@ import { contextMenus } from "./connections/_context-menus.mjs";
  * @property {TeriockAbility} document
  * @extends {TeriockBaseEffectSheet}
  * @mixes PassiveSheetMixin
- * @mixes CommonSheetMixin
  */
 export default class TeriockAbilitySheet extends PassiveSheetMixin(TeriockBaseEffectSheet) {
   /**
-   * Default options for the ability sheet.
-   * @type {object}
-   * @static
+   * @inheritDoc
+   * @type {Partial<ApplicationConfiguration>}
    */
   static DEFAULT_OPTIONS = {
     classes: [ "ability" ],
@@ -28,6 +26,7 @@ export default class TeriockAbilitySheet extends PassiveSheetMixin(TeriockBaseEf
       icon: `fa-solid fa-${documentOptions.ability.icon}`,
     },
   };
+
   /**
    * Template parts configuration for the ability sheet.
    * @type {object}
@@ -338,6 +337,7 @@ export default class TeriockAbilitySheet extends PassiveSheetMixin(TeriockBaseEf
     context.subAbilities = this.document.subs;
     context.supAbility = this.document.sup;
     const effectsSet = new Set(system.effects);
+    //noinspection JSUnresolvedReference
     context.effectTags = Array.from(effectsSet.difference(new Set(system.powerSources)));
     await this._enrichAll(context, {
       mpCost: system.costs.mp.value.variable,

@@ -24,6 +24,20 @@ const { Item } = foundry.documents;
  * @property {boolean} limited
  */
 export default class TeriockItem extends ParentDocumentMixin(ChildDocumentMixin(CommonDocumentMixin(Item))) {
+  /**
+   * Modified to prevent {@link TeriockMechanic} and {@link TeriockWrapper} creation.
+   * @inheritDoc
+   * @todo Make a less destructive way to accomplish this.
+   */
+  static get TYPES() {
+    /** @type {string[]} */
+    const types = super.TYPES;
+    return types.filter((t) => ![
+      "mechanic",
+      "wrapper",
+    ].includes(t));
+  }
+
   // noinspection ES6ClassMemberInitializationOrder
   /**
    * An object that tracks which tracks the changes to the data model which were applied by active effects

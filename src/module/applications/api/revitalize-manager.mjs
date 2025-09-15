@@ -6,6 +6,10 @@ import TeriockStatManager from "./stat-manager.mjs";
 const { fields } = foundry.data;
 
 export default class TeriockRevitalizeManager extends TeriockStatManager {
+  /**
+   * @inheritDoc
+   * @type {Partial<ApplicationConfiguration>}
+   */
   static DEFAULT_OPTIONS = {
     actions: {
       rollStatDie: this._rollStatDie,

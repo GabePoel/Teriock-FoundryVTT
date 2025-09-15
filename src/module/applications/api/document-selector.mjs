@@ -10,6 +10,10 @@ const { SearchFilter } = foundry.applications.ux;
  * @mixes HandlebarsApplicationMixin
  */
 export default class TeriockDocumentSelector extends HandlebarsApplicationMixin(ApplicationV2) {
+  /**
+   * @inheritDoc
+   * @type {Partial<ApplicationConfiguration>}
+   */
   static DEFAULT_OPTIONS = {
     classes: [
       "teriock",
@@ -36,6 +40,21 @@ export default class TeriockDocumentSelector extends HandlebarsApplicationMixin(
       scrollable: [ ".doc-list-container" ],
     },
   };
+
+  constructor(docs, {
+    multi = true,
+    hint = "",
+    tooltip = true,
+  } = {}, ...args) {
+    super(...args);
+    this.docs = docs;
+    this.multi = multi;
+    this.hint = hint;
+    this.tooltip = tooltip;
+
+    this._resolve = null;
+    this._result = new Promise((resolve) => (this._resolve = resolve));
+  }
 
   /**
    * @param {MouseEvent} event
@@ -69,21 +88,6 @@ export default class TeriockDocumentSelector extends HandlebarsApplicationMixin(
     // noinspection JSUnresolvedReference
     this._finish(ids);
     await this.close();
-  }
-
-  constructor(docs, {
-    multi = true,
-    hint = "",
-    tooltip = true,
-  } = {}, ...args) {
-    super(...args);
-    this.docs = docs;
-    this.multi = multi;
-    this.hint = hint;
-    this.tooltip = tooltip;
-
-    this._resolve = null;
-    this._result = new Promise((resolve) => (this._resolve = resolve));
   }
 
   _finish(value) {

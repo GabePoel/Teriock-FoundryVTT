@@ -1,31 +1,27 @@
-import { pureUuid, safeUuid } from "../../../helpers/utils.mjs";
+import { pureUuid, safeUuid } from "../../../../helpers/utils.mjs";
 
 /**
  * Mixin for documents that passively modify other documents.
- * @param {DocumentSheetV2} Base
+ * @param {TeriockBaseEffectSheet} Base
  */
 export default (Base) => {
+  //noinspection JSClosureCompilerSyntax
   return (/**
    * @extends {TeriockBaseEffectSheet}
+   * @mixes CommonSheetMixin
    */
   class PassiveSheetMixin extends Base {
-    /** @inheritDoc */
+    /**
+     * @inheritDoc
+     * Default sheet options.
+     * @type {Partial<ApplicationConfiguration>}
+     */
     static DEFAULT_OPTIONS = {
       actions: {
         unlinkMacro: this._unlinkMacro,
         changeMacroRunHook: this._changeMacroRunHook,
       },
     };
-
-    /** @inheritDoc */
-    static async _unlinkMacro(_event, target) {
-      if (this.editable) {
-        const uuid = target.dataset.parentId;
-        await this.document.system.unlinkMacro(uuid);
-      } else {
-        foundry.ui.notifications.warn("Sheet must be editable to unlink macro.");
-      }
-    }
 
     /**
      * Change the run pseudo-hook for a given macro
@@ -44,6 +40,17 @@ export default (Base) => {
     }
 
     /** @inheritDoc */
+    static async _unlinkMacro(_event, target) {
+      if (this.editable) {
+        const uuid = target.dataset.parentId;
+        await this.document.system.unlinkMacro(uuid);
+      } else {
+        foundry.ui.notifications.warn("Sheet must be editable to unlink macro.");
+      }
+    }
+
+    //noinspection JSUnusedGlobalSymbols
+    /** @inheritDoc */
     async _onDropMacro(_event, data) {
       const updateData = {
         [`system.applies.macros.${safeUuid(data?.uuid)}`]: "use",
@@ -51,6 +58,7 @@ export default (Base) => {
       await this.document.update(updateData);
     }
 
+    //noinspection JSUnusedGlobalSymbols
     /** @inheritDoc */
     async _prepareMacroContext(context) {
       context.macros = [];

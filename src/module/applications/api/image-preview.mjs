@@ -32,6 +32,7 @@ export default class TeriockImagePreviewer extends api.HandlebarsApplicationMixi
       height: 250,
     },
   };
+
   /**
    * Template parts configuration for the image sheet.
    * @type {object}

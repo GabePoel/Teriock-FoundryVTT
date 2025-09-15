@@ -3,6 +3,7 @@
  * @param {typeof DocumentSheetV2} Base
  */
 export default (Base) => {
+  //noinspection JSClosureCompilerSyntax
   return (/**
    * @property {TeriockActor} actor
    * @extends {DocumentSheetV2}
@@ -52,6 +53,19 @@ export default (Base) => {
       await this.actor.takeUnhack(part);
     }
 
+    /** @inheritDoc */
+    async _onRender(context, options) {
+      await super._onRender(context, options);
+      this.element.querySelectorAll("[data-action=rollStatDie]").forEach((el) => {
+        el.addEventListener("contextmenu", async (e) => {
+          e.preventDefault();
+          const target = e.currentTarget;
+          await this._unrollStatDie(e, target);
+          e.stopPropagation();
+        });
+      });
+    }
+
     /**
      * Unrolls a stat die.
      * @param {MouseEvent} _event - The event object.
@@ -66,19 +80,6 @@ export default (Base) => {
       await this.actor.items
         .get(parentId)
         ["system"][`${stat}Dice`][id].unrollStatDie();
-    }
-
-    /** @inheritDoc */
-    async _onRender(context, options) {
-      await super._onRender(context, options);
-      this.element.querySelectorAll("[data-action=rollStatDie]").forEach((el) => {
-        el.addEventListener("contextmenu", async (e) => {
-          e.preventDefault();
-          const target = e.currentTarget;
-          await this._unrollStatDie(e, target);
-          e.stopPropagation();
-        });
-      });
     }
   });
 }

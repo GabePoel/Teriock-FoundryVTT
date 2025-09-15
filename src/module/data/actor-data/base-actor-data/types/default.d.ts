@@ -56,6 +56,20 @@ export interface TeriockBaseActorDefault {
     /** Standard damage */
     standard: string;
   };
+  /** Death Bag */
+  deathBag: {
+    /** How many stones to pull from the Death Bag */
+    pull: string;
+    /** The colors of stones in the Death Bag */
+    stones: {
+      /** Black */
+      black: string;
+      /** Red */
+      red: string;
+      /** White */
+      white: string;
+    }
+  };
   /** Hacks */
   hacks: HackDataCollection;
   /** Whether {@link TeriockActor} still has reaction */
@@ -206,15 +220,4 @@ export interface TeriockBaseActorDefault {
   wither: BarData;
   /** Worn armor class */
   wornAc: number;
-  /** Death Bag */
-  deathBag: {
-    /** How many stones to pull from the Death Bag */
-    pull: string;
-    /** The colors of stones in the Death Bag */
-    stones: {
-      black: string;
-      red: string;
-      white: string;
-    }
-  };
 }

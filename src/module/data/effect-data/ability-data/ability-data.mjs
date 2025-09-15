@@ -147,17 +147,6 @@ export default class TeriockAbilityModel extends HierarchyDataMixin(ConsumableDa
   }
 
   /**
-   * Unlink a macro.
-   * @param {Teriock.UUID<TeriockMacro>} uuid
-   * @returns {Promise<void>}
-   */
-  async unlinkMacro(uuid) {
-    const updateData = {};
-    updateData[`system.applies.macros.-=${safeUuid(uuid)}`] = null;
-    await this.parent.update(updateData);
-  }
-
-  /**
    * Change a macro's run hook.
    * @param {Teriock.UUID<TeriockMacro>} uuid
    * @returns {Promise<void>}
@@ -212,5 +201,16 @@ export default class TeriockAbilityModel extends HierarchyDataMixin(ConsumableDa
    */
   async roll(options) {
     return await _roll(this, options);
+  }
+
+  /**
+   * Unlink a macro.
+   * @param {Teriock.UUID<TeriockMacro>} uuid
+   * @returns {Promise<void>}
+   */
+  async unlinkMacro(uuid) {
+    const updateData = {};
+    updateData[`system.applies.macros.-=${safeUuid(uuid)}`] = null;
+    await this.parent.update(updateData);
   }
 }

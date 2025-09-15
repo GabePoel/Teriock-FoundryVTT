@@ -6,6 +6,11 @@ import type TeriockMacro from "../../../documents/macro.mjs";
 
 declare module "./property-data.mjs" {
   export default interface TeriockPropertyModel extends TeriockBaseEffectModel, HierarchyDataMixinInterface {
+    /** Applies */
+    applies: {
+      changes: EffectChangeData[];
+      macros: Record<Teriock.SafeUUID<TeriockMacro>, Teriock.Parameters.Shared.PropertyPseudoHook>;
+    };
     /** Applies even if the parent {@link TeriockEquipment} is dampened */
     applyIfDampened: boolean;
     /** Applies even if the parent {@link TeriockEquipment} is shattered */
@@ -24,11 +29,6 @@ declare module "./property-data.mjs" {
     modifiesActor: boolean;
     /** Power sources */
     powerSources: Teriock.Parameters.Ability.PowerSource[];
-    /** Applies */
-    applies: {
-      changes: EffectChangeData[];
-      macros: Record<Teriock.SafeUUID<TeriockMacro>, Teriock.Parameters.Shared.PropertyPseudoHook>;
-    };
 
     get parent(): TeriockProperty;
   }

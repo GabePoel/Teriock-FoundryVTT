@@ -1,7 +1,7 @@
-import * as createEffects from "../../../helpers/create-effects.mjs";
-import { buildMessage } from "../../../helpers/messages-builder/message-builder.mjs";
-import { selectAbilityDialog, selectPropertyDialog, selectTradecraftDialog } from "../../dialogs/select-dialog.mjs";
-import { bindCommonActions, imageContextMenuOptions } from "../../shared/_module.mjs";
+import * as createEffects from "../../../../helpers/create-effects.mjs";
+import { buildMessage } from "../../../../helpers/messages-builder/message-builder.mjs";
+import { selectAbilityDialog, selectPropertyDialog, selectTradecraftDialog } from "../../../dialogs/select-dialog.mjs";
+import { bindCommonActions, imageContextMenuOptions } from "../../../shared/_module.mjs";
 import _connectEmbedded from "./methods/_connect-embedded.mjs";
 import _embeddedFromCard from "./methods/_embedded-from-card.mjs";
 import _setupEventListeners from "./methods/_setup-handlers.mjs";
@@ -23,10 +23,17 @@ const TextEditor = foundry.applications.ux.TextEditor.implementation;
  * @param {typeof DocumentSheetV2} Base - The base application class to mix in with.
  */
 export default (Base) => {
-  return class CommonSheetMixin extends HandlebarsApplicationMixin(Base) {
+  //noinspection JSClosureCompilerSyntax
+  return (/**
+   * @implements {CommonSheetMixinInterface}
+   * @extends {DocumentSheetV2}
+   * @param {TeriockActor|TeriockItem|TeriockEffect} document
+   */
+  class CommonSheetMixin extends HandlebarsApplicationMixin(Base) {
+    //noinspection JSValidateTypes
     /**
      * Default sheet options.
-     * @type {object}
+     * @type {Partial<ApplicationConfiguration & { dragDrop: object[] }>}
      */
     static DEFAULT_OPTIONS = {
       actions: {
@@ -74,6 +81,7 @@ export default (Base) => {
       },
       window: { resizable: true },
     };
+
     /**
      * Template parts configuration.
      * @type {object}
@@ -81,8 +89,23 @@ export default (Base) => {
     static PARTS = {};
 
     /**
+     * Creates a new Teriock sheet instance.
+     * Initializes sheet state including menu state, context menus, and settings.
+     * @param {...any} args - Arguments to pass to the base constructor.
+     */
+    constructor(...args) {
+      super(...args);
+      this.#dragDrop = this.#createDragDropHandlers();
+      this._impactTab = "base";
+      this._locked = true;
+      this._menuOpen = false;
+      this._tab = "overview";
+      this.settings = {};
+    }
+
+    /**
      * Switches to a specific impacts tab.
-     * @param {Event} _event - The event object.
+     * @param {PointerEvent} _event - The event object.
      * @param {HTMLElement} target - The target element.
      * @returns {Promise<void>} Promise that resolves when tab is switched.
      * @static
@@ -94,7 +117,7 @@ export default (Base) => {
 
     /**
      * Sends an embedded document to chat.
-     * @param {MouseEvent} _event - The event object.
+     * @param {PointerEvent} _event - The event object.
      * @param {HTMLElement} target - The target element.
      * @returns {Promise<void>} Promise that resolves when chat is sent.
      */
@@ -105,7 +128,7 @@ export default (Base) => {
 
     /**
      * Sends the current document to chat.
-     * @param {MouseEvent} _event - The event object.
+     * @param {PointerEvent} _event - The event object.
      * @param {HTMLElement} _target - The target element.
      * @returns {Promise<void>} Promise that resolves when chat is sent.
      */
@@ -115,9 +138,9 @@ export default (Base) => {
 
     /**
      * Creates a new ability for the current document.
-     * @param {MouseEvent} _event - The event object.
+     * @param {PointerEvent} _event - The event object.
      * @param {HTMLElement} _target - The target element.
-     * @returns {Promise<ActiveEffect|null>} Promise that resolves to the created ability.
+     * @returns {Promise<void>} Promise that resolves to the created ability.
      */
     static async _createAbility(_event, _target) {
       const abilityKey = await selectAbilityDialog();
@@ -129,42 +152,38 @@ export default (Base) => {
         } else {
           await createEffects.createAbility(this.document, abilityName);
         }
-      } else {
-        return null;
       }
     }
 
     /**
      * Creates a new base effect for the current document.
-     * @param {MouseEvent} _event - The event object.
+     * @param {PointerEvent} _event - The event object.
      * @param {HTMLElement} _target - The target element.
-     * @returns {Promise<ActiveEffect>} Promise that resolves to the created fluency.
+     * @returns {Promise<void>} Promise that resolves to the created fluency.
      */
     static async _createBaseEffect(_event, _target) {
-      return await createEffects.createBaseEffect(this.document);
+      await createEffects.createBaseEffect(this.document);
     }
 
     /**
      * Creates new fluency for the current document.
-     * @param {MouseEvent} _event - The event object.
+     * @param {PointerEvent} _event - The event object.
      * @param {HTMLElement} _target - The target element.
-     * @returns {Promise<ActiveEffect|null>} Promise that resolves to the created fluency.
+     * @returns {Promise<void>} Promise that resolves to the created fluency.
      */
     static async _createFluency(_event, _target) {
       const tradecraft = await selectTradecraftDialog();
       if (tradecraft) {
-        return await createEffects.createFluency(this.document, tradecraft);
-      } else {
-        return null;
+        await createEffects.createFluency(this.document, tradecraft);
       }
     }
 
     /**
      * Creates a new property for the current document.
      * Shows a dialog to select a property type or create a new one.
-     * @param {MouseEvent} _event - The event object.
+     * @param {PointerEvent} _event - The event object.
      * @param {HTMLElement} _target - The target element.
-     * @returns {Promise<ActiveEffect>} Promise that resolves to the created property.
+     * @returns {Promise<void>} Promise that resolves to the created property.
      */
     static async _createProperty(_event, _target) {
       const propertyKey = await selectPropertyDialog();
@@ -176,24 +195,22 @@ export default (Base) => {
         } else {
           await createEffects.createProperty(this.document, propertyName);
         }
-      } else {
-        return null;
       }
     }
 
     /**
      * Creates a new resource for the current document.
-     * @param {MouseEvent} _event - The event object.
+     * @param {PointerEvent} _event - The event object.
      * @param {HTMLElement} _target - The target element.
-     * @returns {Promise<ActiveEffect>} Promise that resolves to the created resource.
+     * @returns {Promise<void>} Promise that resolves to the created resource.
      */
     static async _createResource(_event, _target) {
-      return await createEffects.createResource(this.document);
+      await createEffects.createResource(this.document);
     }
 
     /**
      * Debug action for development purposes.
-     * @param {MouseEvent} _event - The event object.
+     * @param {PointerEvent} _event - The event object.
      * @param {HTMLElement} _target - The target element.
      * @returns {Promise<void>} Promise that resolves when debug is complete.
      */
@@ -203,15 +220,14 @@ export default (Base) => {
 
     /**
      * Opens image picker for editing document images.
-     * @param {MouseEvent} _event - The event object.
+     * @param {PointerEvent} _event - The event object.
      * @param {HTMLElement} target - The target element.
-     * @returns {Promise<FilePicker>} Promise that resolves when image picker is opened.
+     * @returns {Promise<void>} Promise that resolves when image picker is opened.
      */
     static async _editImage(_event, target) {
       const attr = target.dataset.edit;
       const current = foundry.utils.getProperty(this.document, attr);
       const defaultImg = this.document.constructor.getDefaultArtwork?.(this.document.toObject())?.img;
-
       const options = {
         current,
         type: "image",
@@ -220,13 +236,12 @@ export default (Base) => {
         top: this.position.top + 40,
         left: this.position.left + 10,
       };
-
-      return /** @type {FilePicker} */ new foundry.applications.apps.FilePicker(options).browse();
+      await new foundry.applications.apps.FilePicker(options).browse();
     }
 
     /**
      * Opens the sheet for an embedded document.
-     * @param {MouseEvent} _event - The event object.
+     * @param {PointerEvent} _event - The event object.
      * @param {HTMLElement} target - The target element.
      * @returns {Promise<void>} Promise that resolves when the sheet is opened.
      */
@@ -237,7 +252,7 @@ export default (Base) => {
 
     /**
      * Toggles a boolean field on the current document.
-     * @param {MouseEvent} _event - The event object.
+     * @param {PointerEvent} _event - The event object.
      * @param {HTMLElement} target - The target element.
      * @returns {Promise<void>} Promise that resolves when toggle is complete.
      */
@@ -249,7 +264,7 @@ export default (Base) => {
 
     /**
      * Reloads the current document and re-renders the sheet.
-     * @param {MouseEvent} _event - The event object.
+     * @param {PointerEvent} _event - The event object.
      * @param {HTMLElement} _target - The target element.
      * @returns {Promise<void>} Promise that resolves when reload is complete.
      */
@@ -260,7 +275,7 @@ export default (Base) => {
 
     /**
      * Rolls an embedded document with optional advantage/disadvantage.
-     * @param {MouseEvent} event - The event object.
+     * @param {PointerEvent} event - The event object.
      * @param {HTMLElement} target - The target element.
      * @returns {Promise<void>} Promise that resolves when roll is complete.
      */
@@ -285,7 +300,7 @@ export default (Base) => {
 
     /**
      * Rolls the current document with optional advantage/disadvantage.
-     * @param {MouseEvent} event - The event object.
+     * @param {PointerEvent} event - The event object.
      * @param {HTMLElement} _target - The target element.
      * @returns {Promise<void>} Promise that resolves when roll is complete.
      */
@@ -296,7 +311,7 @@ export default (Base) => {
 
     /**
      * Toggles a boolean field on the sheet and re-renders.
-     * @param {MouseEvent} _event - The event object.
+     * @param {PointerEvent} _event - The event object.
      * @param {HTMLElement} target - The target element.
      * @returns {Promise<void>} Promise that resolves when toggle is complete.
      */
@@ -309,7 +324,7 @@ export default (Base) => {
 
     /**
      * Toggles the disabled state of an embedded document.
-     * @param {MouseEvent} _event - The event object.
+     * @param {PointerEvent} _event - The event object.
      * @param {HTMLElement} target - The target element.
      * @returns {Promise<void>} Promise that resolves when toggle is complete.
      */
@@ -330,7 +345,7 @@ export default (Base) => {
 
     /**
      * Toggles the lock state of the current sheet.
-     * @param {MouseEvent} _event - The event object.
+     * @param {PointerEvent} _event - The event object.
      * @param {HTMLElement} _target - The target element.
      * @returns {Promise<void>} Promise that resolves when lock is toggled.
      */
@@ -341,8 +356,26 @@ export default (Base) => {
     }
 
     /**
+     * Unlink a macro from this document.
+     * @param {PointerEvent} _event
+     * @param {HTMLElement} target
+     * @returns {Promise<void>}
+     * @private
+     */
+    static async _unlinkMacro(_event, target) {
+      if (this.editable) {
+        if (this.document.system.macros) {
+          const uuid = target.dataset.parentId;
+          await this.document.system.unlinkMacro(uuid);
+        } else {
+          foundry.ui.notifications.warn("Sheet must be editable to unlink macro.");
+        }
+      }
+    }
+
+    /**
      * Uses one unit of an embedded consumable document.
-     * @param {MouseEvent} _event - The event object.
+     * @param {PointerEvent} _event - The event object.
      * @param {HTMLElement} target - The target element.
      * @returns {Promise<void>} Promise that resolves when use is complete.
      */
@@ -353,7 +386,7 @@ export default (Base) => {
 
     /**
      * Opens the wiki page for the current document.
-     * @param {MouseEvent} _event - The event object.
+     * @param {PointerEvent} _event - The event object.
      * @param {HTMLElement} _target - The target element.
      * @returns {Promise<void>} Promise that resolves when wiki page is opened.
      */
@@ -363,7 +396,7 @@ export default (Base) => {
 
     /**
      * Pulls data from wiki for the current document.
-     * @param {MouseEvent} _event - The event object.
+     * @param {PointerEvent} _event - The event object.
      * @param {HTMLElement} _target - The target element.
      * @returns {Promise<void>} Promise that resolves when wiki pull is complete.
      */
@@ -376,22 +409,7 @@ export default (Base) => {
     /** @type {DragDrop[]} */
     #dragDrop;
 
-    /**
-     * Creates a new Teriock sheet instance.
-     * Initializes sheet state including menu state, context menus, and settings.
-     * @param {...any} args - Arguments to pass to the base constructor.
-     */
-    constructor(...args) {
-      super(...args);
-      this.#dragDrop = this.#createDragDropHandlers();
-      this._contextMenus = [];
-      this._impactTab = "base";
-      this._locked = true;
-      this._menuOpen = false;
-      this._tab = "overview";
-      this.settings = {};
-    }
-
+    //noinspection JSUnusedGlobalSymbols
     /**
      * Gets the drag and drop handlers for this sheet.
      * @returns {DragDrop[]} Array of drag and drop handlers.
@@ -406,6 +424,7 @@ export default (Base) => {
      * @private
      */
     #createDragDropHandlers() {
+      //noinspection JSUnresolvedReference
       return this.options.dragDrop.map((config) => {
         config.permissions = {
           dragstart: this._canDragStart.bind(this),
@@ -425,20 +444,22 @@ export default (Base) => {
      * Sets up menu toggle behavior and initial state.
      */
     _activateMenu() {
+      /** @type {HTMLElement} */
       const menu = this.element.querySelector(".ab-menu");
+      /** @type {HTMLElement} */
       const toggle = this.element.querySelector(".ab-menu-toggle");
 
       if (menu && this._menuOpen) {
         menu.classList.add("no-transition", "ab-menu-open");
         menu.offsetHeight;
         menu.classList.remove("no-transition");
-        toggle?.classList.add("ab-menu-toggle-open");
+        toggle.classList.add("ab-menu-toggle-open");
       }
 
       this._connect(".ab-menu-toggle", "click", () => {
         this._menuOpen = !this._menuOpen;
-        menu?.classList.toggle("ab-menu-open", this._menuOpen);
-        toggle?.classList.toggle("ab-menu-toggle-open", this._menuOpen);
+        menu.classList.toggle("ab-menu-open", this._menuOpen);
+        toggle.classList.toggle("ab-menu-toggle-open", this._menuOpen);
       });
     }
 
@@ -680,24 +701,6 @@ export default (Base) => {
     }
 
     /**
-     * Unlink a macro from this document.
-     * @param {MouseEvent} _event
-     * @param {HTMLElement} target
-     * @returns {Promise<void>}
-     * @private
-     */
-    static async _unlinkMacro(_event, target) {
-      if (this.editable) {
-        if (this.document.system.macros) {
-          const uuid = target.dataset.parentId;
-          await this.document.system.unlinkMacro(uuid);
-        } else {
-          foundry.ui.notifications.warn("Sheet must be editable to unlink macro.");
-        }
-      }
-    }
-
-    /**
      * Handles dropping of a macro on this document.
      * @param {DragEvent} _event - The drop event.
      * @param {object} data - The macro data.
@@ -717,13 +720,7 @@ export default (Base) => {
       }
     }
 
-    /**
-     * Handles the render event for the sheet.
-     * Sets up editable state, connects embedded documents, and initializes UI components.
-     * @param {object} context - The render context.
-     * @param {object} options - Render options.
-     * @override
-     */
+    /** @inheritDoc */
     async _onRender(context, options) {
       await super._onRender(context, options);
 
@@ -827,28 +824,11 @@ export default (Base) => {
     }
 
     /**
-     * Prepare any macros that should be part of the context.
-     * @param {object} context
-     * @returns {Promise<void>}
-     * @private
+     * @inheritDoc
      */
-    async _prepareMacroContext(context) {
-      if (this.document.system.macros) {
-        context.macros = await Promise.all(Array.from(this.document.system.macros.map((uuid) => foundry.utils.fromUuid(
-          uuid))));
-      } else {
-        context.macros = [];
-      }
-    }
-
-    /**
-     * Prepares the context data for template rendering.
-     * Provides common data including config, editable state, document info, and settings.
-     * @returns {Promise<object>} Promise that resolves to the context object.
-     * @override
-     */
-    async _prepareContext() {
-      const context = {
+    async _prepareContext(options) {
+      const context = await super._prepareContext(options);
+      Object.assign(context, {
         TERIOCK: TERIOCK,
         document: this.document,
         editable: this.editable,
@@ -868,9 +848,24 @@ export default (Base) => {
         systemFields: this.document.system.schema.fields,
         tab: this._tab,
         uuid: this.document.uuid,
-      };
+      });
       await this._prepareMacroContext(context);
       return context;
+    }
+
+    /**
+     * Prepare any macros that should be part of the context.
+     * @param {object} context
+     * @returns {Promise<void>}
+     * @private
+     */
+    async _prepareMacroContext(context) {
+      if (this.document.system.macros) {
+        context.macros = await Promise.all(Array.from(this.document.system.macros.map((uuid) => foundry.utils.fromUuid(
+          uuid))));
+      } else {
+        context.macros = [];
+      }
     }
 
     /**
@@ -890,5 +885,5 @@ export default (Base) => {
         target.dataset.tooltipDirection = leftSpace > rightSpace ? "LEFT" : "RIGHT";
       }
     }
-  };
+  });
 };

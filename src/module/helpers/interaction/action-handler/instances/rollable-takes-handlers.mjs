@@ -14,6 +14,24 @@ export class RollRollableTakeHandler extends ActionHandler {
   static ACTION = "roll-rollable-take";
 
   /**
+   * @returns {string}
+   * @private
+   */
+  _makeFlavor() {
+    let flavor = ROLL_TYPES[this.dataset.type].label;
+    for (const s of [
+      "Apply",
+      "Set",
+      "Gain",
+      "Pay",
+    ]) {
+      flavor = flavor.replace(s, "").trim();
+    }
+    flavor = flavor + " Roll";
+    return flavor;
+  }
+
+  /**
    * @property {string} formula - Roll formula
    */
   async _makeRoll(formula) {
@@ -68,24 +86,6 @@ export class RollRollableTakeHandler extends ActionHandler {
       },
     };
     await TeriockChatMessage.create(messageData);
-  }
-
-  /**
-   * @returns {string}
-   * @private
-   */
-  _makeFlavor() {
-    let flavor = ROLL_TYPES[this.dataset.type].label;
-    for (const s of [
-      "Apply",
-      "Set",
-      "Gain",
-      "Pay",
-    ]) {
-      flavor = flavor.replace(s, "").trim();
-    }
-    flavor = flavor + " Roll";
-    return flavor;
   }
 
   /** @inheritDoc */

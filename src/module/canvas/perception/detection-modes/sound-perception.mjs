@@ -17,6 +17,7 @@ export default class DetectionModeSoundPerception extends BaseDetectionMode {
     "deaf",
     "ethereal",
   ];
+
   static BLOCKING_TGT_STATUS_EFFECTS = [
     "silent",
     "ethereal",

@@ -13,7 +13,10 @@ const { DialogV2 } = foundry.applications.api;
  * @property {TeriockRank} item
  */
 export default class TeriockRankSheet extends TeriockBaseItemSheet {
-  /** @inheritDoc */
+  /**
+   * @inheritDoc
+   * @type {Partial<ApplicationConfiguration>}
+   */
   static DEFAULT_OPTIONS = {
     classes: [ "rank" ],
     window: {

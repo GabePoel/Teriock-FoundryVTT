@@ -9,7 +9,10 @@ import { fieldContextMenu, tradecraftContextMenu } from "./connections/_context-
  * @property {TeriockFluency} document
  */
 export default class TeriockFluencySheet extends TeriockBaseEffectSheet {
-  /** @inheritDoc */
+  /**
+   * @inheritDoc
+   * @type {Partial<ApplicationConfiguration>}
+   */
   static DEFAULT_OPTIONS = {
     classes: [ "fluency" ],
     window: {
@@ -17,11 +20,7 @@ export default class TeriockFluencySheet extends TeriockBaseEffectSheet {
     },
   };
 
-  /**
-   * Template parts configuration for the fluency sheet.
-   * @type {object}
-   * @static
-   */
+  /** @inheritDoc */
   static PARTS = {
     all: {
       template: "systems/teriock/src/templates/document-templates/effect-templates/fluency-template/fluency-template.hbs",

@@ -3,7 +3,7 @@ import { tradecraftMessage } from "../../../../helpers/html.mjs";
 import { buildMessage } from "../../../../helpers/messages-builder/message-builder.mjs";
 import { HackStatMixin } from "../../../shared/mixins/_module.mjs";
 import { CommonSheetMixin } from "../../mixins/_module.mjs";
-import _embeddedFromCard from "../../mixins/methods/_embedded-from-card.mjs";
+import _embeddedFromCard from "../../mixins/common-sheet-mixin/methods/_embedded-from-card.mjs";
 import {
   piercingContextMenu, primaryAttackContextMenu, primaryBlockerContextMenu,
 } from "./connections/character-context-menus.mjs";
@@ -22,11 +22,16 @@ const TextEditor = foundry.applications.ux.TextEditor.implementation;
  * Provides comprehensive character management including abilities, equipment, tradecrafts,
  * and various interactive features like rolling, damage tracking, and condition management.
  * @extends {ActorSheetV2}
+ * @mixes HackStatMixin
+ * @mixes CommonSheetMixin
  * @property {TeriockActor} actor
  * @property {TeriockActor} document
  */
 export default class TeriockBaseActorSheet extends HackStatMixin(CommonSheetMixin(ActorSheetV2)) {
-  /** @inheritDoc */
+  /**
+   * @inheritDoc
+   * @type {Partial<ApplicationConfiguration>}
+   */
   static DEFAULT_OPTIONS = {
     classes: [
       "teriock",
@@ -64,9 +69,6 @@ export default class TeriockBaseActorSheet extends HackStatMixin(CommonSheetMixi
       toggleShatteredDoc: this._toggleShatteredDoc,
       tradecraftExtra: this._tradecraftExtra,
     },
-    form: {
-      submitOnChange: true,
-    },
     position: {
       width: 800,
       height: 600,
@@ -82,6 +84,7 @@ export default class TeriockBaseActorSheet extends HackStatMixin(CommonSheetMixi
       ],
     },
   };
+
   /** @inheritDoc */
   static PARTS = {
     all: {
@@ -92,6 +95,36 @@ export default class TeriockBaseActorSheet extends HackStatMixin(CommonSheetMixi
       ],
     },
   };
+
+  /**
+   * Creates a new base actor sheet instance.
+   * Initializes sheet state including menus, drawers, search values, and settings.
+   * @param {...any} args - Arguments to pass to the parent constructor.
+   */
+  constructor(...args) {
+    super(...args);
+    this._sidebarOpen = true;
+    this._hpDrawerOpen = true;
+    this._mpDrawerOpen = true;
+    this._locked = false;
+    this._dynamicContextMenus = {
+      attacker: [],
+      blocker: [],
+    };
+    this._embeds = {
+      effectTypes: {},
+      itemTypes: {},
+    };
+    this._activeTab = "tradecrafts";
+    const sheetSettings = _defaultSheetSettings;
+    Object.keys(TERIOCK.content.conditions).forEach((key) => {
+      sheetSettings.conditionExpansions[key] = false;
+    });
+    this.settings = _defaultSheetSettings;
+
+    /** @type {Record<string, string>} */
+    this._searchStrings = {};
+  }
 
   /**
    * Adds a new embedded document to the actor.
@@ -141,6 +174,15 @@ export default class TeriockBaseActorSheet extends HackStatMixin(CommonSheetMixi
       disadvantage: Boolean(event.shiftKey),
     };
     await this.actor.useAbility("Basic Attack", options);
+  }
+
+  /**
+   * Pull from the Death Bag.
+   * @returns {Promise<void>}
+   * @static
+   */
+  static async _deathBagPull() {
+    await this.actor.system.deathBagPull();
   }
 
   /**
@@ -248,15 +290,6 @@ export default class TeriockBaseActorSheet extends HackStatMixin(CommonSheetMixi
   static async _openPrimaryAttacker(event) {
     event.stopPropagation();
     await this.document.system.wielding.attacker.derived?.sheet.render(true);
-  }
-
-  /**
-   * Pull from the Death Bag.
-   * @returns {Promise<void>}
-   * @static
-   */
-  static async _deathBagPull() {
-    await this.actor.system.deathBagPull();
   }
 
   /**
@@ -587,36 +620,6 @@ export default class TeriockBaseActorSheet extends HackStatMixin(CommonSheetMixi
     await this.document.update({
       [`system.tradecrafts.${tradecraft}.extra`]: newExtra,
     });
-  }
-
-  /**
-   * Creates a new base actor sheet instance.
-   * Initializes sheet state including menus, drawers, search values, and settings.
-   * @param {...any} args - Arguments to pass to the parent constructor.
-   */
-  constructor(...args) {
-    super(...args);
-    this._sidebarOpen = true;
-    this._hpDrawerOpen = true;
-    this._mpDrawerOpen = true;
-    this._locked = false;
-    this._dynamicContextMenus = {
-      attacker: [],
-      blocker: [],
-    };
-    this._embeds = {
-      effectTypes: {},
-      itemTypes: {},
-    };
-    this._activeTab = "tradecrafts";
-    const sheetSettings = _defaultSheetSettings;
-    Object.keys(TERIOCK.content.conditions).forEach((key) => {
-      sheetSettings.conditionExpansions[key] = false;
-    });
-    this.settings = _defaultSheetSettings;
-
-    /** @type {Record<string, string>} */
-    this._searchStrings = {};
   }
 
   /**

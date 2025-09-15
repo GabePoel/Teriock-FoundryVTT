@@ -9,7 +9,10 @@ import { powerContextMenu } from "./connections/_context-menus.mjs";
  * @property {TeriockPower} item
  */
 export default class TeriockPowerSheet extends TeriockBaseItemSheet {
-  /** @inheritDoc */
+  /**
+   * @inheritDoc
+   * @type {Partial<ApplicationConfiguration>}
+   */
   static DEFAULT_OPTIONS = {
     classes: [ "power" ],
     actions: {

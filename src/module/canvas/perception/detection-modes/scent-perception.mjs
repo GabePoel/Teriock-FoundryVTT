@@ -17,6 +17,7 @@ export default class DetectionModeScentPerception extends BaseDetectionMode {
     "anosmatic",
     "ethereal",
   ];
+
   static BLOCKING_TGT_STATUS_EFFECTS = [
     "odorless",
     "ethereal",

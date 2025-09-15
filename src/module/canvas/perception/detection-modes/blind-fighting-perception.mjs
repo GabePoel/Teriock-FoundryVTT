@@ -14,6 +14,7 @@ export default class DetectionModeBlindFighting extends BaseDetectionMode {
     "dead",
     "ethereal",
   ];
+
   static BLOCKING_TGT_STATUS_EFFECTS = [
     "ethereal",
     "hidden",

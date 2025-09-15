@@ -5,7 +5,10 @@ import TeriockBaseActorSheet from "../base-actor-sheet/base-actor-sheet.mjs";
  * Sheet for a {@link TeriockCharacter}.
  */
 export default class TeriockCharacterSheet extends TeriockBaseActorSheet {
-  /** @inheritDoc */
+  /**
+   * @inheritDoc
+   * @type {Partial<ApplicationConfiguration>}
+   */
   static DEFAULT_OPTIONS = {
     classes: [ "character" ],
     form: {

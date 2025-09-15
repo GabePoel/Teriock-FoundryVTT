@@ -10,7 +10,10 @@ import { fontContextMenu, powerLevelContextMenu } from "./connections/_context-m
  * @property {TeriockEquipment} item
  */
 export default class TeriockEquipmentSheet extends TeriockBaseItemSheet {
-  /** @inheritDoc */
+  /**
+   * @inheritDoc
+   * @type {Partial<ApplicationConfiguration>}
+   */
   static DEFAULT_OPTIONS = {
     classes: [ "equipment" ],
     actions: {

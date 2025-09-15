@@ -7,11 +7,14 @@ const { AbstractBaseFilter } = foundry.canvas.rendering.filters;
  * - [Ethereal](https://wiki.teriock.com/index.php/Condition:Ethereal)
  */
 export default class EtherealFilter extends AbstractBaseFilter {
+  /** @inheritDoc */
   static defaultUniforms = {
     blur: 1.0,
     desaturate: 1.0,
     time: 0,
   };
+
+  /** @inheritDoc */
   static fragmentShader = `
     precision mediump float;
     varying vec2 vTextureCoord;
@@ -63,6 +66,8 @@ export default class EtherealFilter extends AbstractBaseFilter {
       gl_FragColor = result;
     }
   `;
+
+  /** @inheritDoc */
   static vertexShader = `
     precision mediump float;
     attribute vec2 aVertexPosition;
@@ -78,21 +83,27 @@ export default class EtherealFilter extends AbstractBaseFilter {
     }
   `;
 
+  /** @inheritDoc */
   static create(initialUniforms = {}) {
     const uniforms = { ...this.defaultUniforms, ...initialUniforms };
     const filter = new this(this.vertexShader, this.fragmentShader, uniforms);
+    //noinspection JSUnresolvedReference
     filter.blendMode = PIXI.BLEND_MODES.NORMAL;
     return filter;
   }
 
   animated = true;
+
   padding = 10;
 
+  //noinspection JSUnusedGlobalSymbols
   /** @inheritDoc */
   apply(filterManager, input, output, clear) {
     if (this.animated && !canvas.photosensitiveMode) {
+      //noinspection JSUnresolvedReference
       this.uniforms.time = canvas.app.ticker.lastTime;
     }
+    //noinspection JSUnresolvedReference
     filterManager.applyFilter(this, input, output, clear);
   }
 }

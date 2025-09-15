@@ -45,6 +45,14 @@ export default class StatDieModel extends DataModel {
   }
 
   /**
+   * Formula representing rolling this die.
+   * @returns {string}
+   */
+  get formula() {
+    return `1${this.polyhedral}`;
+  }
+
+  /**
    * The ID of this stat die.
    * @type {string}
    */
@@ -82,14 +90,6 @@ export default class StatDieModel extends DataModel {
    */
   get polyhedral() {
     return /** @type {Teriock.RollOptions.PolyhedralDie} */ `d${this.faces}`;
-  }
-
-  /**
-   * Formula representing rolling this die.
-   * @returns {string}
-   */
-  get formula() {
-    return `1${this.polyhedral}`;
   }
 
   /**

@@ -8,7 +8,10 @@ import TeriockBaseItemSheet from "../base-item-sheet/base-item-sheet.mjs";
  * @property {TeriockSpecies} item
  */
 export default class TeriockSpeciesSheet extends TeriockBaseItemSheet {
-  /** @inheritDoc */
+  /**
+   * @inheritDoc
+   * @type {Partial<ApplicationConfiguration>}
+   */
   static DEFAULT_OPTIONS = {
     classes: [ "species" ],
     window: {

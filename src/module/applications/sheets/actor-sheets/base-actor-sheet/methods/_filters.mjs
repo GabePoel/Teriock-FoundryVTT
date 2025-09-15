@@ -35,11 +35,11 @@ export function _filterAbilities(actor, abilities, filters = {}) {
     )
     && binaryFilter(filters.skill, a.system.skill)
     && binaryFilter(filters.spell, a.system.spell)
+    && binaryFilter(filters.ritual, a.system.ritual)
     && binaryFilter(
-      filters.ritual,
-      a.system.ritual,
+      filters.rotator,
+      a.system.rotator,
     )
-    && binaryFilter(filters.rotator, a.system.rotator)
     && binaryFilter(filters.sustained, a.system.sustained)
     && binaryFilter(filters.heightened, a.system.heightened)
     && binaryFilter(filters.expansion, a.system.expansion)

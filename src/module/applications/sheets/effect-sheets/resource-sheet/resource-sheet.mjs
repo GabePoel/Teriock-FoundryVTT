@@ -8,7 +8,10 @@ import TeriockBaseEffectSheet from "../base-effect-sheet/base-effect-sheet.mjs";
  * @property {TeriockResource} document
  */
 export default class TeriockResourceSheet extends TeriockBaseEffectSheet {
-  /** @inheritDoc */
+  /**
+   * @inheritDoc
+   * @type {Partial<ApplicationConfiguration>}
+   */
   static DEFAULT_OPTIONS = {
     classes: [ "resource" ],
     window: {

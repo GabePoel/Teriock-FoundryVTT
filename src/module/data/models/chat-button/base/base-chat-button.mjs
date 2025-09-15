@@ -8,20 +8,6 @@ const { fields } = foundry.data;
  * @implements {BaseChatButtonInterface}
  */
 export default class BaseChatButton extends TypeDataModel {
-  /** @inheritDoc */
-  static defineSchema() {
-    return {
-      _id: new fields.DocumentIdField({
-        initial: () => foundry.utils.randomID(),
-      }),
-      classList: new fields.SetField(new fields.StringField()),
-      color: new fields.ColorField(),
-      data: new fields.ObjectField(),
-      icon: new fields.StringField(),
-      label: new fields.StringField(),
-    };
-  }
-
   constructor() {
     super();
     this.commonRollOptions = {
@@ -34,6 +20,20 @@ export default class BaseChatButton extends TypeDataModel {
     this.targeted = false;
     /** @type {MouseEvent} */
     this.event = undefined;
+  }
+
+  /** @inheritDoc */
+  static defineSchema() {
+    return {
+      _id: new fields.DocumentIdField({
+        initial: () => foundry.utils.randomID(),
+      }),
+      classList: new fields.SetField(new fields.StringField()),
+      color: new fields.ColorField(),
+      data: new fields.ObjectField(),
+      icon: new fields.StringField(),
+      label: new fields.StringField(),
+    };
   }
 
   /**

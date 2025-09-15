@@ -54,6 +54,14 @@ export default class TeriockBaseActorModel extends CommonTypeModel {
   }
 
   /**
+   * Pull from the Death Bag.
+   * @returns {Promise<void>}
+   */
+  async deathBagPull() {
+    await deathBagDialog(this.actor);
+  }
+
+  /**
    * Gets roll data for this actor, including all relevant stats and modifiers.
    * @returns {object} The roll data object containing actor stats and modifiers.
    */
@@ -214,6 +222,24 @@ export default class TeriockBaseActorModel extends CommonTypeModel {
   }
 
   /**
+   * Heal normally.
+   * @param {Teriock.Dialog.HealDialogOptions} [options]
+   * @returns {Promise<void>}
+   */
+  async takeNormalHeal(options = {}) {
+    await healDialog(this.actor, options);
+  }
+
+  /**
+   * Revitalize normally.
+   * @param {Teriock.Dialog.StatDialogOptions} [options]
+   * @returns {Promise<void>}
+   */
+  async takeNormalRevitalize(options = {}) {
+    await revitalizeDialog(this.actor, options);
+  }
+
+  /**
    * Actor pays money.
    * @param {number} amount - The amount of gold-equivalent money to pay.
    * @param {"exact" | "greedy"} mode - Exact change or the closest denomination, rounded up.
@@ -296,31 +322,5 @@ export default class TeriockBaseActorModel extends CommonTypeModel {
    */
   async takeWither(amount) {
     await numericals._takeWither(this, amount);
-  }
-
-  /**
-   * Pull from the Death Bag.
-   * @returns {Promise<void>}
-   */
-  async deathBagPull() {
-    await deathBagDialog(this.actor);
-  }
-
-  /**
-   * Heal normally.
-   * @param {Teriock.Dialog.HealDialogOptions} [options]
-   * @returns {Promise<void>}
-   */
-  async takeNormalHeal(options = {}) {
-    await healDialog(this.actor, options);
-  }
-
-  /**
-   * Revitalize normally.
-   * @param {Teriock.Dialog.StatDialogOptions} [options]
-   * @returns {Promise<void>}
-   */
-  async takeNormalRevitalize(options = {}) {
-    await revitalizeDialog(this.actor, options);
   }
 }

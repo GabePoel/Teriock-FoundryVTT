@@ -73,23 +73,6 @@ export default class TeriockPropertyModel extends HierarchyDataMixin(WikiDataMix
     });
   }
 
-  /**
-   * Change a macro's run hook.
-   * @param {Teriock.UUID<TeriockMacro>} uuid
-   * @returns {Promise<void>}
-   */
-  async changeMacroRunHook(uuid) {
-    const pseudoHook = await selectDialog(propertyPseudoHooks, {
-      label: "Event",
-      hint: "Please select an event that triggers this macro to run.",
-      title: "Select Event",
-      initial: this.applies.macros[safeUuid(uuid)],
-    });
-    const updateData = {};
-    updateData[`system.applies.macros.${safeUuid(uuid)}`] = pseudoHook;
-    await this.parent.update(updateData);
-  }
-
   /** @inheritDoc */
   static migrateData(data) {
     data = _migrateData(data);
@@ -136,13 +119,19 @@ export default class TeriockPropertyModel extends HierarchyDataMixin(WikiDataMix
   }
 
   /**
-   * Unlink a macro.
+   * Change a macro's run hook.
    * @param {Teriock.UUID<TeriockMacro>} uuid
    * @returns {Promise<void>}
    */
-  async unlinkMacro(uuid) {
+  async changeMacroRunHook(uuid) {
+    const pseudoHook = await selectDialog(propertyPseudoHooks, {
+      label: "Event",
+      hint: "Please select an event that triggers this macro to run.",
+      title: "Select Event",
+      initial: this.applies.macros[safeUuid(uuid)],
+    });
     const updateData = {};
-    updateData[`system.applies.macros.-=${safeUuid(uuid)}`] = null;
+    updateData[`system.applies.macros.${safeUuid(uuid)}`] = pseudoHook;
     await this.parent.update(updateData);
   }
 
@@ -177,5 +166,16 @@ export default class TeriockPropertyModel extends HierarchyDataMixin(WikiDataMix
         mode: 2,
       });
     }
+  }
+
+  /**
+   * Unlink a macro.
+   * @param {Teriock.UUID<TeriockMacro>} uuid
+   * @returns {Promise<void>}
+   */
+  async unlinkMacro(uuid) {
+    const updateData = {};
+    updateData[`system.applies.macros.-=${safeUuid(uuid)}`] = null;
+    await this.parent.update(updateData);
   }
 }

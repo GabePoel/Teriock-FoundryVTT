@@ -13,7 +13,7 @@ const { ActiveEffect } = foundry.documents;
  * @property {"ActiveEffect"} documentName
  * @property {Teriock.Documents.EffectType} type
  * @property {Teriock.UUID<TeriockEffect>} uuid
- * @property {TeriockActor|TeriockItem} parent
+ * @property {TeriockParent} parent
  * @property {TeriockBaseEffectModel} system
  * @property {TeriockBaseEffectSheet} sheet
  * @property {boolean} isOwner

@@ -16,6 +16,19 @@ export default class TeriockRoll extends Roll {
   static CHAT_TEMPLATE = "systems/teriock/src/templates/message-templates/roll.hbs";
 
   /**
+   * Creates a new TeriockRoll instance with enforced parsing and enrichment options.
+   * @override
+   * @param {string} formula - The roll formula to parse.
+   * @param {object} data - Data to use for the roll.
+   * @param {object} options - Options for the roll, including enrichment settings.
+   */
+  constructor(formula, data, options = {}) {
+    const parsedFormula = TeriockRoll.#parseFormula(formula);
+    super(parsedFormula, data, options);
+    this.context = options.context || {};
+  }
+
+  /**
    * Evaluates a boost or deboost function by creating a temporary roll,
    * applying the boost/deboost, and returning the resulting formula.
    * @param {string} innerFormula - The formula inside the boost/deboost function
@@ -230,19 +243,6 @@ export default class TeriockRoll extends Roll {
     const die = selectWeightedMaxFaceDie(roll.dice);
     die._number = Math.max(0, die._number - 1);
     roll.resetFormula();
-  }
-
-  /**
-   * Creates a new TeriockRoll instance with enforced parsing and enrichment options.
-   * @override
-   * @param {string} formula - The roll formula to parse.
-   * @param {object} data - Data to use for the roll.
-   * @param {object} options - Options for the roll, including enrichment settings.
-   */
-  constructor(formula, data, options = {}) {
-    const parsedFormula = TeriockRoll.#parseFormula(formula);
-    super(parsedFormula, data, options);
-    this.context = options.context || {};
   }
 
   /** @inheritDoc */
