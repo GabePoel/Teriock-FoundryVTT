@@ -33,7 +33,10 @@ export default async function deathBagDialog(actor) {
   contentHTML.append(stonesHTML);
   try {
     await new TeriockDialog({
-      window: { title: "Death Bag" },
+      window: {
+        icon: "fa-solid fa-sack",
+        title: "Death Bag",
+      },
       content: contentHTML,
       buttons: [
         {

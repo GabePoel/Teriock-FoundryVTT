@@ -51,7 +51,10 @@ export async function _handleDialogs(rollConfig) {
     const action = abilityData.spell ? "Casting" : "Executing";
     const title = `${action} ${abilityData.parent.name}`;
     await TeriockDialog.prompt({
-      window: { title },
+      window: {
+        icon: "fa-solid fa-burst",
+        title,
+      },
       content: dialogs.join(""),
       modal: true,
       ok: {

@@ -46,7 +46,10 @@ export default async function boostDialog(rollFormula, options = {}) {
   contentHtml.append(critField.toFormGroup({}, { name: "crit" }));
   try {
     await TeriockDialog.prompt({
-      window: { title: "Modify Roll Formula" },
+      window: {
+        icon: "fa-solid fa-dice",
+        title: "Modify Roll Formula",
+      },
       modal: true,
       content: contentHtml,
       ok: {

@@ -16,7 +16,10 @@ export default async function inCombatExpirationDialog(effect, forceDialog = fal
   let expire = false;
   if (effect.system.expirations.combat.what.type === "forced" && !forceDialog) {
     expire = await TeriockDialog.confirm({
-      window: { title: `${effect.name} Expiration` },
+      window: {
+        title: `${effect.name} Expiration`,
+        icon: "fa-solid fa-circle-question",
+      },
       content: `Should ${effect.name} expire?`,
       modal: true,
       rejectClose: false,
@@ -50,7 +53,10 @@ export default async function inCombatExpirationDialog(effect, forceDialog = fal
     ));
     try {
       await new TeriockDialog({
-        window: { title: `${effect.name} Expiration` },
+        window: {
+          title: `${effect.name} Expiration`,
+          icon: "fa-solid fa-dice-d4",
+        },
         content: contentHtml,
         buttons: [
           {

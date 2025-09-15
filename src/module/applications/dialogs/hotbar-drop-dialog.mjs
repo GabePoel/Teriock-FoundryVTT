@@ -19,7 +19,10 @@ export default async function hotbarDropDialog(doc) {
       "templates/dialog-templates/hotbar-drop.hbs"), context);
     macroType = "general";
     macroType = await TeriockDialog.prompt({
-      window: { title: `Macro Type Selection` },
+      window: {
+        icon: "fa-solid fa-circle-question",
+        title: `Macro Type Selection`,
+      },
       modal: true,
       content: content,
       ok: {

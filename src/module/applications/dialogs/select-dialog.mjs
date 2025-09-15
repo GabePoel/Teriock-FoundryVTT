@@ -60,7 +60,10 @@ export async function selectDialog(choices, options = {}) {
 
   if (!other) {
     return await TeriockDialog.prompt({
-      window: { title },
+      window: {
+        icon: "fa-solid fa-circle-check",
+        title,
+      },
       modal: true,
       content: selectContentHtml,
       ok: {
@@ -77,7 +80,10 @@ export async function selectDialog(choices, options = {}) {
   otherContentHtml.append(otherField.toFormGroup({ units: "other" }, { name: "other" }));
 
   return await TeriockDialog.prompt({
-    window: { title },
+    window: {
+      icon: "fa-solid fa-circle-check",
+      title,
+    },
     modal: true,
     content: selectContentHtml,
     ok: {
@@ -95,7 +101,10 @@ export async function selectDialog(choices, options = {}) {
           }
 
           return await TeriockDialog.prompt({
-            window: { title },
+            window: {
+              icon: "fa-solid fa-circle-check",
+              title,
+            },
             modal: true,
             content: otherContentHtml,
             ok: {
