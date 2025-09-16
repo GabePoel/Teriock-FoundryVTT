@@ -2,7 +2,6 @@ import { freeze } from "../../../helpers/utils.mjs";
 
 const { TypeDataModel } = foundry.abstract;
 
-/** @implements {CommonTypeModelInterface} */
 export default class CommonTypeModel extends TypeDataModel {
   /**
    * Metadata.
@@ -32,9 +31,9 @@ export default class CommonTypeModel extends TypeDataModel {
 
   /**
    * @inheritDoc
-   * @returns {TeriockActor|TeriockItem|TeriockEffect}
+   * @returns {TeriockCommon}
    */
   get parent() {
-    return super.parent;
+    return /** @type {TeriockCommon} */ super.parent;
   }
 }

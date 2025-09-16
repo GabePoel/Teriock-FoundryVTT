@@ -1,10 +1,10 @@
 export interface ChildTypeModelInterface {
-  /** Description */
+  /** <schema> Description */
   description: string;
-  /** Forced Fluent */
+  /** <schema> If this is forced to be fluent */
   fluent: boolean;
-  /** Font */
+  /** <schema> Font */
   font: Teriock.Parameters.Shared.Font;
-  /** Forced Proficient */
+  /** <schema> If this is forced to be proficient */
   proficient: boolean;
 }

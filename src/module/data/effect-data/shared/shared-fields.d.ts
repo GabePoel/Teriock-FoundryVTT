@@ -1,28 +1,12 @@
-import type TeriockEffect from "../../../documents/effect.mjs";
-import type TeriockItem from "../../../documents/item.mjs";
-import type TeriockActor from "../../../documents/actor.mjs";
-
-export interface ConsumableInterface {
-  /** <schema> Is the equipment consumable? */
-  consumable: boolean;
-  /** <schema> Max Quantity (if consumable) */
-  maxQuantity: {
-    /** <schema> Raw Max Quantity Value */
-    raw: string;
-    /** <derived> Derived Max Quantity Value */
-    derived: number;
-  };
-  /** <schema> Quantity (if consumable) */
-  quantity: number;
-}
+import { TeriockEffect } from "../../../documents/_module.mjs";
 
 /** <schema> {@link TeriockEffect} hierarchy */
 export type HierarchyField = {
   /**
-   * <schema> <derived> The UUID of the {@link TeriockActor} or {@link TeriockItem} this {@link TeriockAbility} is
+   * <schema> <derived> The UUID of the {@link TeriockParent} this {@link TeriockAbility} is
    * embedded in. This is calculated when the {@link TeriockAbility} is created and should not be set manually.
    */
-  rootUuid: Teriock.UUID<TeriockItem> | Teriock.UUID<TeriockActor>;
+  rootUuid: Teriock.UUID<TeriockParent>;
   /** <schema> The IDs for each {@link TeriockEffect} that could be descended from this. */
   subIds: Set<Teriock.ID<TeriockEffect>>;
   /** <schema> The ID of the {@link TeriockEffect} that this is descended from, if there is one. */

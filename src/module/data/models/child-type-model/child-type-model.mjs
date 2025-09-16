@@ -10,7 +10,7 @@ const { fields } = foundry.data;
  * Mixin that provides child document functionality for embedded documents.
  * Adds proficiency tracking, font customization, and message generation capabilities.
  * @implements {ChildTypeModelInterface}
- * @property {TeriockItem|TeriockEffect} parent
+ * @property {TeriockChild} parent
  * @property {string} description
  * @property {boolean} proficient
  * @property {boolean} fluent
@@ -18,7 +18,7 @@ const { fields } = foundry.data;
  */
 export default class ChildTypeModel extends CommonTypeModel {
   /**
-   * Metadata.
+   * @inheritDoc
    * @type {Readonly<Teriock.Documents.ChildModelMetadata>}
    */
   static metadata = freeze({
@@ -153,10 +153,10 @@ export default class ChildTypeModel extends CommonTypeModel {
 
   /**
    * @inheritDoc
-   * @returns {TeriockItem|TeriockEffect}
+   * @returns {TeriockChild}
    */
   get parent() {
-    return super.parent;
+    return /** @type {TeriockChild} */ super.parent;
   }
 
   /**

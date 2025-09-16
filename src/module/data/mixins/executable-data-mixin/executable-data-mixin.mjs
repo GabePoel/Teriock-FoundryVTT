@@ -20,11 +20,7 @@ export default (Base) => {
       return schema;
     }
 
-    /**
-     * Unlink a macro.
-     * @param {Teriock.UUID<TeriockMacro>} uuid
-     * @returns {Promise<void>}
-     */
+    /** @inheritDoc */
     async unlinkMacro(uuid) {
       const macroUuids = new Set(Array.from(this.macros));
       macroUuids.delete(uuid);

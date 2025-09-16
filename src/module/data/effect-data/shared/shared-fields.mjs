@@ -1,30 +1,7 @@
 const { fields } = foundry.data;
 
 /**
- * Field for comparisons.
- *
- * @returns {SchemaField} comparison field.
- */
-export function comparatorField() {
-  return new fields.SchemaField({
-    key: new fields.StringField(),
-    comparison: new fields.StringField({
-      choices: {
-        "=": "=",
-        "!=": "!=",
-        ">": ">",
-        "<": "<",
-        ">=": ">=",
-        "<=": "<=",
-      },
-    }),
-    value: new fields.AnyField(),
-  });
-}
-
-/**
  * Field for an effect hierarchy.
- *
  * @returns {SchemaField} Hierarchy field.
  */
 export function hierarchyField() {
@@ -48,7 +25,6 @@ export function hierarchyField() {
 
 /**
  * Field for source portion of combat expiration.
- *
  * @returns {StringField}
  */
 export function combatExpirationSourceTypeField() {
@@ -66,7 +42,6 @@ export function combatExpirationSourceTypeField() {
 
 /**
  * Field for method portion of combat expiration.
- *
  * @returns {SchemaField} Timing field.
  */
 export function combatExpirationMethodField() {
@@ -96,7 +71,6 @@ export function combatExpirationMethodField() {
 
 /**
  * Field for timing portion of combat expiration.
- *
  * @returns {SchemaField} Method field.
  */
 export function combatExpirationTimingField() {
@@ -137,14 +111,7 @@ export function changeField() {
     key: new fields.StringField({ initial: "" }),
     mode: new fields.NumberField({
       initial: 4,
-      choices: {
-        0: "Custom",
-        1: "Multiply",
-        2: "Add",
-        3: "Downgrade",
-        4: "Upgrade",
-        5: "Override",
-      },
+      choices: TERIOCK.options.effect.changeMode,
     }),
     value: new fields.StringField({ initial: "" }),
     priority: new fields.NumberField({ initial: 20 }),

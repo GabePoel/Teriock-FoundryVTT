@@ -1,9 +1,12 @@
 import type TeriockBaseItemModel from "../base-item-data/base-item-data.mjs";
 import type { TeriockEquipment } from "../../../documents/_documents.mjs";
-import type { ConsumableInterface } from "../../effect-data/shared/shared-fields";
+import type { ExecutableDataMixinInterface } from "../../mixins/executable-data-mixin/_types";
+import type { ConsumableDataMixinInterface } from "../../mixins/consumable-data-mixin/_types";
 
 declare module "./equipment-data.mjs" {
-  export default interface TeriockEquipmentModel extends TeriockBaseItemModel, ConsumableInterface {
+  export default interface TeriockEquipmentModel extends TeriockBaseItemModel,
+    ConsumableDataMixinInterface,
+    ExecutableDataMixinInterface {
     /** <schema> Armor Value */
     av: number;
     /** <base> Armor value for effects to modify */

@@ -1,14 +1,14 @@
 export interface ConsumableDataMixinInterface {
-  /** Whether this item is consumable */
+  /** <schema> Whether this item is consumable */
   consumable: boolean;
-  /** Maximum quantity configuration */
+  /** <schema> Maximum quantity configuration */
   maxQuantity: {
-    /** Raw maximum quantity expression */
+    /** <schema> Raw maximum quantity expression */
     raw: string | number;
-    /** Computed maximum quantity value */
+    /** <schema> Computed maximum quantity value */
     derived: number;
   };
-  /** Current quantity of the item */
+  /** <schema> Current quantity of the item */
   quantity: number;
 
   /**
@@ -17,19 +17,6 @@ export interface ConsumableDataMixinInterface {
    * @returns Promise that resolves when the gain is complete.
    */
   gainOne(): Promise<void>;
-
-  /**
-   * Prepares derived data for the consumable item.
-   * Calculates maximum quantity and validates current quantity.
-   */
-  prepareDerivedData(): void;
-
-  /**
-   * Uses the item, automatically consuming one unit unless flagged otherwise.
-   * @param options - Options for the use operation
-   * @returns Promise that resolves when the use is complete
-   */
-  use(options?: any): Promise<void>;
 
   /**
    * Consumes one unit of the consumable item.

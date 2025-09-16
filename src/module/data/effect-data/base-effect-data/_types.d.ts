@@ -14,10 +14,6 @@ declare module "./base-effect-data.mjs" {
         active: Set<Teriock.Parameters.Condition.ConditionKey>;
         /** <schema> Statuses that suppress this if inactive */
         inactive: Set<Teriock.Parameters.Condition.ConditionKey>;
-      }; // Deprecated?
-      comparisons: {
-        actor: Teriock.Parameters.Shared.Comparator[];
-        item: Teriock.Parameters.Shared.Comparator[];
       };
     };
     /** <schema> Update counter - used to force an update when adding/removing effects */

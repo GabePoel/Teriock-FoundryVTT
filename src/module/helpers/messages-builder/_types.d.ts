@@ -33,7 +33,7 @@ declare global {
       bars?: Teriock.MessageData.MessageBar[];
       blocks?: Teriock.MessageData.MessageBlock[];
       /** Font used for a message, or `null` for default font. */
-      font?: string | null;
+      font?: Teriock.Parameters.Shared.Font;
     };
 
     /** Options for automatically configuring a message. */

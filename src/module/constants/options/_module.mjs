@@ -6,6 +6,7 @@ export { currencyOptions as currency } from "./currency-options.mjs";
 export { dieOptions as die } from "./die-options.mjs";
 export { displayOptions as display } from "./display-options.mjs";
 export { documentOptions as document } from "./document-options.mjs";
+export { effectOptions as effect } from "./effect-options.mjs";
 export { equipmentOptions as equipment } from "./equipment-options.mjs";
 export { powerOptions as power } from "./power-options.mjs";
 export { rankOptions as rank } from "./rank-options.mjs";

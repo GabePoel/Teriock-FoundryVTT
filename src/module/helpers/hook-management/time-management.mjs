@@ -1,6 +1,5 @@
 /**
  * Get each {@link TeriockActor} in the current scene.
- *
  * @returns {TeriockActor[]}
  */
 function getActors() {
@@ -11,7 +10,8 @@ function getActors() {
 
 export default function registerTimeManagementHooks() {
   foundry.helpers.Hooks.on("updateWorldTime", async (_worldTime, dt, _options, userId) => {
-    if (game.user.id === userId && game.user?.isActiveGM) {
+    const user = /** @type {TeriockUser} */ game.user;
+    if (user.id === userId && user.isActiveGM) {
       for (const actor of getActors()) {
         const num = actor.durationExpirationEffects.length;
         for (const effect of actor.durationExpirationEffects) {
@@ -35,7 +35,8 @@ export default function registerTimeManagementHooks() {
   });
 
   foundry.helpers.Hooks.on("teriock.dawn", async () => {
-    if (game.user?.isActiveGM) {
+    const user = /** @type {TeriockUser} */ game.user;
+    if (user.isActiveGM) {
       for (const actor of getActors()) {
         for (const effect of actor.dawnExpirationEffects) {
           await effect.system.expire();

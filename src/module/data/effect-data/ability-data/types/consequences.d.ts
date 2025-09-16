@@ -56,23 +56,3 @@ export interface AbilityImpact {
   statuses: Set<Teriock.Parameters.Condition.ConditionKey>;
 }
 
-/**
- * Consequences that are applied to the target.
- */
-export interface TeriockAbilityImpactSchema {
-  /** <schema> Impacts of using this ability */
-  applies: {
-    /** <schema> Base impact of using this ability */
-    base: AbilityImpact;
-    /** <schema> How the impacts change if proficient in this ability */
-    proficient: AbilityImpact;
-    /** <schema> How the impacts change if fluent in this ability */
-    fluent: AbilityImpact;
-    /** <schema> How the impacts change if this ability is heightened */
-    heightened: AbilityImpact;
-    /** <schema> {@link TeriockMacro}s hooked to the parent {@link TeriockActor} */
-    macros: Teriock.Parameters.Shared.MacroHookRecord;
-  };
-  /** <schema> What consequences this is ability is currently sustaining */
-  sustaining: Set<Teriock.UUID<TeriockConsequence>>;
-}

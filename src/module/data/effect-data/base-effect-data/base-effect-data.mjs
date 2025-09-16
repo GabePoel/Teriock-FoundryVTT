@@ -1,6 +1,5 @@
 import { makeIcon, mergeFreeze } from "../../../helpers/utils.mjs";
 import { ChildTypeModel } from "../../models/_module.mjs";
-import { comparatorField } from "../shared/shared-fields.mjs";
 import { _expire, _shouldExpire } from "./methods/_expiration.mjs";
 
 const { fields } = foundry.data;
@@ -40,10 +39,6 @@ export default class TeriockBaseEffectModel extends ChildTypeModel {
           inactive: new fields.SetField(new fields.StringField({
             choices: TERIOCK.index.conditions,
           })),
-        }),
-        comparisons: new fields.SchemaField({
-          actor: new fields.ArrayField(comparatorField()),
-          item: new fields.ArrayField(comparatorField()),
         }),
       }),
     });

@@ -202,6 +202,7 @@ export function selectUser(actor) {
  */
 export function tokenImage(token) {
   const tokenDoc = tokenDocument(token);
+  //noinspection JSUnresolvedReference
   return (tokenDoc?.texture?.src
     || tokenDoc?.actor.token?.texture?.src
     || tokenDoc?.actor.getActiveTokens()[0]?.texture?.src

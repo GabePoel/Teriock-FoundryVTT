@@ -6,16 +6,8 @@ const { TypeDataModel } = foundry.abstract;
 
 export default class TeriockBaseMessageModel extends TypeDataModel {
   /**
-   * Blank metadata.
-   * @returns {object} The metadata object.
-   */
-  static get metadata() {
-    return foundry.utils.mergeObject({}, { type: "base" });
-  }
-
-  /**
-   * No default schema.
-   * @returns {object}
+   * @inheritDoc
+   * @returns {Record<string, DataField>}
    */
   static defineSchema() {
     const schema = {};

@@ -1,24 +1,28 @@
 import type StatDieModel from "../../models/stat-die-model/stat-die-model.mjs";
 
 type BaseDice = {
+  /** <schema> Number of faces on each die */
   faces: number;
+  /** <schema> Number of dice */
   number: number;
 };
 
-export interface StatDataMixinInterface {
-  /** Add this HP to parent {@link TeriockActor}. */
+export interface StatDataMixinFields {
+  /** <schema> Add this HP to parent {@link TeriockActor}. */
   applyHp: boolean;
-  /** Add this MP to parent {@link TeriockActor}. */
+  /** <schema> Add this MP to parent {@link TeriockActor}. */
   applyMp: boolean;
-  /** HP Dice */
+  /** <schema> HP Dice */
   hpDice: Record<Teriock.ID<StatDieModel>, StatDieModel>;
-  /** Base HP dice */
+  /** <schema> Base HP dice */
   hpDiceBase: BaseDice;
-  /** MP Dice */
+  /** <schema> MP Dice */
   mpDice: Record<Teriock.ID<StatDieModel>, StatDieModel>;
-  /** Base MP dice */
+  /** <schema> Base MP dice */
   mpDiceBase: BaseDice;
+}
 
+export interface StatDataMixinInterface extends StatDataMixinFields {
   /**
    * Set the stat dice.
    * @param changeData - Data to mutate.
