@@ -224,9 +224,6 @@ export default class TeriockActor extends ParentDocumentMixin(CommonDocumentMixi
    */
   * allApplicableEffects() {
     for (const effect of super.allApplicableEffects()) {
-      if (effect.system.modifies !== this.documentName) {
-        continue;
-      }
       yield effect;
     }
   }

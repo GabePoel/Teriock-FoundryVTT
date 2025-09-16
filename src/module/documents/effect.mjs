@@ -1,4 +1,4 @@
-import { secondsToReadable } from "../helpers/utils.mjs";
+import { modifyChangePrefix, secondsToReadable } from "../helpers/utils.mjs";
 import { ChildDocumentMixin, CommonDocumentMixin } from "./mixins/_module.mjs";
 
 const { ActiveEffect } = foundry.documents;
@@ -13,9 +13,9 @@ const { ActiveEffect } = foundry.documents;
  * @property {"ActiveEffect"} documentName
  * @property {Teriock.Documents.EffectType} type
  * @property {Teriock.UUID<TeriockEffect>} uuid
- * @property {TeriockParent} parent
  * @property {TeriockBaseEffectModel} system
  * @property {TeriockBaseEffectSheet} sheet
+ * @property {TeriockParent} parent
  * @property {boolean} isOwner
  * @property {boolean} limited
  */
@@ -128,6 +128,18 @@ export default class TeriockEffect extends ChildDocumentMixin(CommonDocumentMixi
     }
     return data;
   }
+
+  /**
+   * Changes that apply to {@link TeriockItem}s.
+   * @type {EffectChangeData[]}
+   */
+  itemChanges = [];
+
+  /**
+   * Changes that apply to {@link TeriockItem}s.
+   * @type {EffectChangeData[]}
+   */
+  tokenChanges = [];
 
   /**
    * @inheritDoc
@@ -433,6 +445,28 @@ export default class TeriockEffect extends ChildDocumentMixin(CommonDocumentMixi
   /** @inheritDoc */
   getProperties() {
     return this.subs.filter((s) => s.type === "property");
+  }
+
+  /** @inheritDoc */
+  prepareDerivedData() {
+    super.prepareDerivedData();
+    // Effects can change Actors, Items, and TokenDocuments. By default, they change actors. But if the change key is
+    // prefixed by "item" or "token" then it changes "Items" and "TokenDocuments" respectively.
+    const actorChanges = [];
+    const itemChanges = [];
+    const tokenChanges = [];
+    for (const change of this.changes) {
+      if (change.key.startsWith("item")) {
+        itemChanges.push(modifyChangePrefix(change, "item.", ""));
+      } else if (change.key.startsWith("token")) {
+        tokenChanges.push(modifyChangePrefix(change, "token.", ""));
+      } else {
+        actorChanges.push(change);
+      }
+    }
+    this.changes = actorChanges;
+    this.itemChanges = itemChanges;
+    this.tokenChanges = tokenChanges;
   }
 
   /** @inheritDoc */

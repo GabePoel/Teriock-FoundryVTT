@@ -144,9 +144,13 @@ export default class TeriockPropertyModel extends HierarchyDataMixin(WikiDataMix
   prepareDerivedData() {
     super.prepareDerivedData();
     const changes = foundry.utils.deepClone(this.applies.changes);
+    let macroPrefix = "system.hookedMacros.";
+    if (this.modifies === "Item") {
+      macroPrefix = "item." + macroPrefix;
+    }
     for (const [ safeUuid, pseudoHook ] of Object.entries(this.applies.macros)) {
       const change = {
-        key: `system.hookedMacros.${pseudoHook}`,
+        key: `${macroPrefix}${pseudoHook}`,
         value: pureUuid(safeUuid),
         mode: 2,
         priority: 5,
@@ -160,7 +164,7 @@ export default class TeriockPropertyModel extends HierarchyDataMixin(WikiDataMix
       && this.parent.allSups.filter((p) => p.system.damageType?.trim().length > 0).length
       === 0) {
       this.parent.changes.push({
-        key: "system.damageTypes",
+        key: "item.system.damageTypes",
         value: this.damageType.toLowerCase(),
         priority: 10,
         mode: 2,

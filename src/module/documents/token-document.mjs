@@ -1,4 +1,5 @@
 import { convertUnits } from "../helpers/utils.mjs";
+import { ChangeableDocumentMixin } from "./mixins/_module.mjs";
 
 const { TokenDocument } = foundry.documents;
 
@@ -6,13 +7,22 @@ const { TokenDocument } = foundry.documents;
 /**
  * The Teriock {@link TokenDocument} implementation.
  * @extends {TokenDocument}
+ * @mixes ChangeableDocumentMixin
  * @mixes ClientDocumentMixin
  * @property {"TokenDocument"} documentName
  * @property {TeriockActor} actor
  * @property {Token} token
  * @property {boolean} isOwner
  */
-export default class TeriockTokenDocument extends TokenDocument {
+export default class TeriockTokenDocument extends ChangeableDocumentMixin(TokenDocument) {
+  /** @inheritDoc */
+  changesField = "tokenChanges";
+
+  /** @inheritDoc */
+  _checkPreparation() {
+    return this.actor;
+  }
+
   /**
    * @inheritDoc
    */

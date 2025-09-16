@@ -233,6 +233,22 @@ export function tokenName(token) {
 }
 
 /**
+ * Modify a change's prefix.
+ * @param {EffectChangeData} change
+ * @param {string} searchValue
+ * @param {string} replaceValue
+ * @returns {EffectChangeData}
+ */
+export function modifyChangePrefix(change, searchValue, replaceValue) {
+  return {
+    key: change.key.replace(searchValue, replaceValue),
+    mode: change.mode,
+    priority: change.priority,
+    value: change.value,
+  };
+}
+
+/**
  * Get the token for a {@link TeriockActor}.
  * @param {TeriockActor} actor
  * @returns {TeriockToken|null}

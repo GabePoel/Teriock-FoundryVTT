@@ -1,6 +1,8 @@
 import { createAbility } from "../helpers/create-effects.mjs";
 import { fetchCategoryMembers } from "../helpers/wiki/_module.mjs";
-import { ChildDocumentMixin, CommonDocumentMixin, ParentDocumentMixin } from "./mixins/_module.mjs";
+import {
+  ChangeableDocumentMixin, ChildDocumentMixin, CommonDocumentMixin, ParentDocumentMixin,
+} from "./mixins/_module.mjs";
 
 const { api } = foundry.applications;
 const { Item } = foundry.documents;
@@ -9,6 +11,7 @@ const { Item } = foundry.documents;
 /**
  * The Teriock {@link Item} implementation.
  * @extends {Item}
+ * @mixes ChangeableDocumentMixin
  * @mixes ChildDocumentMixin
  * @mixes ClientDocumentMixin
  * @mixes CommonDocumentMixin
@@ -23,7 +26,8 @@ const { Item } = foundry.documents;
  * @property {boolean} isOwner
  * @property {boolean} limited
  */
-export default class TeriockItem extends ParentDocumentMixin(ChildDocumentMixin(CommonDocumentMixin(Item))) {
+export default class TeriockItem extends ChangeableDocumentMixin(ParentDocumentMixin(ChildDocumentMixin(
+  CommonDocumentMixin(Item)))) {
   /**
    * Modified to prevent {@link TeriockMechanic} and {@link TeriockWrapper} creation.
    * @inheritDoc
@@ -38,12 +42,8 @@ export default class TeriockItem extends ParentDocumentMixin(ChildDocumentMixin(
     ].includes(t));
   }
 
-  // noinspection ES6ClassMemberInitializationOrder
-  /**
-   * An object that tracks which tracks the changes to the data model which were applied by active effects
-   * @type {object}
-   */
-  overrides = this.overrides ?? {};
+  /** @inheritDoc */
+  changesField = "itemChanges";
 
   /**
    * @inheritDoc
@@ -133,51 +133,14 @@ export default class TeriockItem extends ParentDocumentMixin(ChildDocumentMixin(
   }
 
   /**
-   * Get all ActiveEffects that may apply to this Item.
+   * @inheritDoc
    * @yields {TeriockEffect}
    * @returns {Generator<TeriockEffect, void, void>}
    */
   * allApplicableEffects() {
     for (const effect of this.effects) {
-      if (effect.system.modifies !== this.documentName) {
-        continue;
-      }
       yield effect;
     }
-  }
-
-  /**
-   * Apply any transformation to the Item data which are caused by ActiveEffects.
-   */
-  applyActiveEffects() {
-    const overrides = {};
-
-    // Organize non-disabled effects by their application priority
-    const changes = [];
-    for (const effect of this.allApplicableEffects()) {
-      if (!effect.active) {
-        continue;
-      }
-      changes.push(...effect.changes.map((change) => {
-        const c = foundry.utils.deepClone(change);
-        c.effect = effect;
-        c.priority ??= c.mode * 10;
-        return c;
-      }));
-    }
-    changes.sort((a, b) => a.priority - b.priority);
-
-    // Apply all changes
-    for (const change of changes) {
-      if (!change.key) {
-        continue;
-      }
-      const changes = change.effect.apply(this, change);
-      Object.assign(overrides, changes);
-    }
-
-    // Expand the set of final overrides
-    this.overrides = foundry.utils.expandObject(overrides);
   }
 
   /**
@@ -192,6 +155,7 @@ export default class TeriockItem extends ParentDocumentMixin(ChildDocumentMixin(
       "rank",
       "power",
     ].includes(this.type)) {
+      //noinspection JSUnusedGlobalSymbols
       const dialog = new api.DialogV2({
         buttons: [
           {
@@ -226,14 +190,6 @@ export default class TeriockItem extends ParentDocumentMixin(ChildDocumentMixin(
   async createEmbeddedDocuments(embeddedName, data = [], operation = {}) {
     this._filterDocumentCreationData(embeddedName, data);
     return await super.createEmbeddedDocuments(embeddedName, data, operation);
-  }
-
-  /** @inheritDoc */
-  prepareEmbeddedDocuments() {
-    super.prepareEmbeddedDocuments();
-    if (!this.actor || this.actor._embeddedPreparation) {
-      this.applyActiveEffects();
-    }
   }
 
   /** @inheritDoc */
