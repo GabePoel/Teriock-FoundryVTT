@@ -2,6 +2,7 @@ export * from "./select-dialog.mjs";
 export * from "./select-document-dialog.mjs";
 export * from "./select-token-dialog.mjs";
 export { default as boostDialog } from "./boost-dialog.mjs";
+export { default as changeSizeDialog } from "./change-size-dialog.mjs";
 export { default as deathBagDialog } from "./death-bag-dialog.mjs";
 export { default as durationDialog } from "./duration-dialog.mjs";
 export { default as healDialog } from "./heal-dialog.mjs";

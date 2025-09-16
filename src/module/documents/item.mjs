@@ -36,10 +36,7 @@ export default class TeriockItem extends ChangeableDocumentMixin(ParentDocumentM
   static get TYPES() {
     /** @type {string[]} */
     const types = super.TYPES;
-    return types.filter((t) => ![
-      "mechanic",
-      "wrapper",
-    ].includes(t));
+    return types.filter((t) => t !== "mechanic");
   }
 
   /** @inheritDoc */

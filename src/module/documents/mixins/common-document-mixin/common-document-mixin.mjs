@@ -89,7 +89,7 @@ export default (Base) => {
           }
         }
       }
-      if (this.documentName !== "Actor") {
+      if (this.documentName !== "Actor" && this.actor) {
         await this.actor.hookCall(pseudoHook, data, effect, skipCall);
       }
       return /** @type {Teriock.HookData.BaseHookData} */ data;

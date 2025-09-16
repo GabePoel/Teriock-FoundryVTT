@@ -2,6 +2,7 @@ import { documentOptions } from "../../../../constants/options/document-options.
 import { tradecraftMessage } from "../../../../helpers/html.mjs";
 import { buildMessage } from "../../../../helpers/messages-builder/message-builder.mjs";
 import { docSort } from "../../../../helpers/utils.mjs";
+import { changeSizeDialog } from "../../../dialogs/_module.mjs";
 import { HackStatMixin } from "../../../shared/mixins/_module.mjs";
 import { CommonSheetMixin } from "../../mixins/_module.mjs";
 import _embeddedFromCard from "../../mixins/common-sheet-mixin/methods/_embedded-from-card.mjs";
@@ -664,6 +665,14 @@ export default class TeriockBaseActorSheet extends HackStatMixin(CommonSheetMixi
    */
   _getFilteredEquipment(equipment = []) {
     return _filterEquipment(this.actor, equipment, this.settings.equipmentFilters);
+  }
+
+  /** @inheritDoc */
+  async _onDropItem(event, data) {
+    const item = await super._onDropItem(event, data);
+    if (item?.type === "species") {
+      await changeSizeDialog(this.actor, item);
+    }
   }
 
   /** @inheritDoc */
