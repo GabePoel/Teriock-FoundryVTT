@@ -7,107 +7,70 @@
   )
 }}
   <div class="ab-bar">
-    {{#if (exists system.damage)}}
-      <div class="ab-box-container">
-        <div class="ab-box">
-          <div class="ab-box-icon">
-            <i class="fa-fw fa-light fa-{{firstDie system.damage}}"></i>
-          </div>
-          <div class="ab-box-content {{#if (exists system.twoHandedDamage)}}ab-split-input{{/if}}">
-            {{formInput
-              systemFields.damage
-              value=system.damage
-              disabled=(not editable)
-              classes="ability-bar-input damage-input"
-              dataset=(object tooltip="Damage")
-            }}
-            {{#if (exists system.twoHandedDamage)}}
-              &nbsp;/&nbsp;
-              {{formInput
-                systemFields.twoHandedDamage
-                value=system.twoHandedDamage
-                disabled=(not editable)
-                classes="ability-bar-input two-handed-damage-input"
-                dataset=(object tooltip="Two-Handed Damage")
-              }}
-            {{/if}}
-          </div>
-          <div class="ab-box-label">
-            DMG
-          </div>
-        </div>
-      </div>
-    {{/if}}
-    {{#if (exists system.range)}}
-      <div class="ab-box-container">
-        <div class="ab-box">
-          <div class="ab-box-icon">
-            {{{TERIOCK.display.icons.range}}}
-          </div>
-          <div class="ab-box-content {{#if (exists system.shortRange)}}ab-split-input{{/if}}">
-            {{#if (exists system.shortRange)}}
-              {{formInput
-                systemFields.shortRange
-                value=system.shortRange
-                disabled=(not editable)
-                classes="ability-bar-input range-input"
-                dataset=(object tooltip="Short Range")
-              }}
-              &nbsp;/&nbsp;
-            {{/if}}
-            {{formInput
-              systemFields.range
-              value=system.range
-              disabled=(not editable)
-              classes="ability-bar-input range-input"
-              dataset=(object tooltip="Range")
-            }}
-          </div>
-          <div class="ab-box-label" style="text-transform: none;">
-            ft
-          </div>
-        </div>
-      </div>
-    {{/if}}
-    {{#if (exists system.av)}}
-      <div class="ab-box-container">
-        <div class="ab-box" data-tooltip="Armor Value">
-          <div class="ab-box-icon">
-            {{{TERIOCK.display.icons.av}}}
-          </div>
-          <div class="ab-box-content">
-            {{formInput
-              systemFields.av
-              value=system.av
-              disabled=(not editable)
-              classes="ability-bar-input av-input"
-            }}
-          </div>
-          <div class="ab-box-label">
-            AV
-          </div>
-        </div>
-      </div>
-    {{/if}}
-    {{#if (exists system.bv)}}
-      <div class="ab-box-container">
-        <div class="ab-box" data-tooltip="Block Value">
-          <div class="ab-box-icon">
-            {{{TERIOCK.display.icons.bv}}}
-          </div>
-          <div class="ab-box-content">
-            {{formInput
-              systemFields.bv
-              value=system.bv
-              disabled=(not editable)
-              classes="ability-bar-input bv-input"
-            }}
-          </div>
-          <div class="ab-box-label">
-            BV
-          </div>
-        </div>
-      </div>
-    {{/if}}
+    {{formBox
+      (formInput
+        systemFields.damage
+        value=system.damage
+        disabled=(not editable)
+        classes="ability-bar-input damage-input"
+        dataset=(object tooltip="Damage")
+      )
+      secondary=(formInput
+        systemFields.twoHandedDamage
+        value=system.twoHandedDamage
+        disabled=(not editable)
+        classes="ability-bar-input two-handed-damage-input"
+        dataset=(object tooltip="Two-Handed Damage")
+      )
+      label="DMG"
+      icon=(firstDie system.damage)
+      include=system.damage
+      includeSecondary=(exists system.twoHandedDamage)
+    }}
+    {{formBox
+      (formInput
+        systemFields.range
+        value=system.range
+        disabled=(not editable)
+        classes="ability-bar-input range-input"
+        dataset=(object tooltip="Range")
+      )
+      secondary=(formInput
+        systemFields.shortRange
+        value=system.shortRange
+        disabled=(not editable)
+        classes="ability-bar-input range-input"
+        dataset=(object tooltip="Short Range")
+      )
+      after=false
+      label="ft"
+      icon=(path TERIOCK.display.icons "range")
+      include=(exists system.range)
+      includeSecondary=(exists system.shortRange)
+    }}
+    {{formBox
+      (formInput
+        systemFields.av
+        value=system.av
+        disabled=(not editable)
+        classes="ability-bar-input av-input"
+        dataset=(object tooltip="Armor Value")
+      )
+      label="AV"
+      icon=(path TERIOCK.display.icons "av")
+      include=(exists system.av)
+    }}
+    {{formBox
+      (formInput
+        systemFields.bv
+        value=system.bv
+        disabled=(not editable)
+        classes="ability-bar-input bv-input"
+        dataset=(object tooltip="Block Value")
+      )
+      include=(exists system.bv)
+      icon=(path TERIOCK.display.icons "bv")
+      label="BV"
+    }}
   </div>
 {{/if}}
