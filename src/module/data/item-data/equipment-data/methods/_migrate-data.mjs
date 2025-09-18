@@ -29,5 +29,17 @@ export function _migrateData(data) {
       derived: derivedMaxQuantity,
     };
   }
+  if (typeof data.weight === "number") {
+    data.weight = { saved: data.weight };
+  }
+  if (typeof data.av === "number") {
+    data.av = { saved: data.av };
+  }
+  if (typeof data.bv === "number") {
+    data.bv = { saved: data.bv };
+  }
+  if (typeof data.minStr === "number") {
+    data.minStr = { saved: data.minStr };
+  }
   return data;
 }

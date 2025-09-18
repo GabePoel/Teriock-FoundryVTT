@@ -3,27 +3,9 @@
     system.sheet.display.equipment.gapless}}gapless{{/if}} {{system.sheet.display.equipment.size}}">
     {{#each equipment as |item|}}
       {{tcard
-        img=item.img
-        title=item.name
-        subtitle=(dotJoin
-          item.system.equipmentType
-          (lookup ../TERIOCK.options.equipment.weaponFightingStyles item.system.sb)
-        )
-        text=(dotJoin
-          (suffix item.system.derivedDamage 'Damage')
-          (suffix item.system.derivedBv 'BV')
-          (suffix item.system.derivedAv 'AV')
-          (prefix item.system.tier.derived 'Tier')
-          (suffix item.system.weight 'lb')
-        )
-        id=item._id
         active=item.system.equipped
-        marker=(equipmentMarker item)
-        shattered=item.system.shattered
-        struck=item.system.disabled
-        consumable=item.system.consumable
         amount=item.system.quantity
-        max=item.system.maxQuantity.derived
+        consumable=item.system.consumable
         hidden=(rgx ../searchStrings.equipment item.name)
         icons=(concat
           (ticonToggle "handshake-simple" "handshake-simple-slash" item.system.isAttuned action="toggleAttunedDoc" id=item._id parentId=item.parent._id tooltipTrue="Attuned" tooltipFalse="Deattuned")
@@ -33,6 +15,24 @@
           (ticon "comment" action="chatDoc" id=item._id tooltip="Send to Chat")
           (ticonToggle "circle-check" "circle" item.system.equipped action="toggleEquippedDoc" id=item._id parentId=item.parent._id tooltipTrue="Equipped" tooltipFalse="Unequipped")
         )
+        id=item._id
+        img=item.img
+        marker=(equipmentMarker item)
+        max=item.system.maxQuantity.derived
+        shattered=item.system.shattered
+        struck=item.system.disabled
+        subtitle=(dotJoin
+          item.system.equipmentType
+          (lookup ../TERIOCK.options.equipment.weaponFightingStyles item.system.sb)
+        )
+        text=(dotJoin
+          (suffix item.system.derivedDamage 'Damage')
+          (suffix item.system.derivedBv 'BV')
+          (suffix item.system.derivedAv 'AV')
+          (prefix item.system.tier.value 'Tier')
+          (suffix item.system.weight.value 'lb')
+        )
+        title=item.name
       }}
     {{/each}}
     <div class="no-results {{{system.sheet.display.equipment.size}}}">

@@ -121,7 +121,7 @@ export default class TeriockEquipmentSheet extends TeriockBaseItemSheet {
       ".ab-av-button": { "system.av": 1 },
       ".ab-bv-button": { "system.bv": 1 },
       ".ab-weight-button": { "system.weight": 1 },
-      ".ab-tier-button": { "system.tier.raw": "1" },
+      ".ab-tier-button": { "system.tier.saved": "1" },
     };
 
     for (const [ selector, update ] of Object.entries(staticUpdates)) {

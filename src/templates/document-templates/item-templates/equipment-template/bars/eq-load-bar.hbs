@@ -1,33 +1,35 @@
 <div class="ab-bar">
   {{formBox
     (formInput
-      systemFields.tier.fields.raw
-      value=system.tier.raw
+      systemFields.tier.fields.saved
+      value=system.tier.saved
       disabled=(not editable)
       dataset=(object tooltip="Presence Tier")
     )
     icon=(path TERIOCK.display.icons "tier")
-    unselected=(ifThen system.tier.raw system.tier.raw 0)
     label="TIER"
+    unselected=(ifThen system.tier.raw system.tier.raw 0)
   }}
   {{formBox
     (formInput
-      systemFields.weight
-      value=system.weight
+      systemFields.weight.fields.saved
+      value=system.weight.saved
       disabled=(not editable)
       dataset=(object tooltip="Weight")
     )
     icon=(path TERIOCK.display.icons "weight")
     label="lb"
+    unselected=system.weight.value
   }}
   {{formBox
     (formInput
-      systemFields.minStr
-      value=system.minStr
+      systemFields.minStr.fields.saved
+      value=system.minStr.saved
       disabled=(not editable)
       dataset=(object tooltip="Minimum STR")
     )
-    label="STR"
     icon=(path TERIOCK.display.icons "minStr")
+    label="STR"
+    unselected=system.minStr.value
   }}
 </div>

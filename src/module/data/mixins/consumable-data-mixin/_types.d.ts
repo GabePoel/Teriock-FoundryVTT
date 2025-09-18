@@ -2,12 +2,7 @@ export interface ConsumableDataMixinInterface {
   /** <schema> Whether this item is consumable */
   consumable: boolean;
   /** <schema> Maximum quantity configuration */
-  maxQuantity: {
-    /** <schema> Raw maximum quantity expression */
-    raw: string | number;
-    /** <schema> Computed maximum quantity value */
-    derived: number;
-  };
+  maxQuantity: Teriock.Fields.ModifiableDeterministic;
   /** <schema> Current quantity of the item */
   quantity: number;
 

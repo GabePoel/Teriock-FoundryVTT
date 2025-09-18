@@ -163,7 +163,7 @@ export function _derivedAv(equipmentData) {
   return deriveEquipmentDataValue(
     equipmentData,
     "av",
-    (data) => (data.av || 0) + (data.baseAv || 0),
+    (data) => (data.av.value),
     (current, override) => Math.max(override || 0, current),
     (current, upgrade) => current + (upgrade || 0),
   );
@@ -179,7 +179,7 @@ export function _derivedBv(equipmentData) {
   return deriveEquipmentDataValue(
     equipmentData,
     "bv",
-    (data) => data.bv + data.baseBv,
+    (data) => data.bv.value,
     (current, override) => Math.max(override || 0, current),
     (current, upgrade) => current + (upgrade || 0),
   );

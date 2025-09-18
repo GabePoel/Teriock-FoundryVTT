@@ -92,7 +92,7 @@ export default class TeriockAttunementModel extends TeriockBaseEffectModel {
   /** @inheritDoc */
   prepareDerivedData() {
     if (this.inheritTier && this.targetDocument) {
-      this.tier = this.targetDocument.system.tier.derived;
+      this.tier = this.targetDocument.system.tier.value;
     }
     this.parent.changes = [
       {

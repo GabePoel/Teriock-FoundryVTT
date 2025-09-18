@@ -1,4 +1,5 @@
 import { FormulaField, TextField } from "../../../shared/fields/_module.mjs";
+import { modifiableFormula, modifiableNumber } from "../../../shared/fields/modifiable.mjs";
 
 const { fields } = foundry.data;
 
@@ -35,25 +36,6 @@ export function _defineSchema() {
       initial: false,
       label: "Consumable",
     }),
-    quantity: new fields.NumberField({
-      initial: 1,
-      integer: true,
-      label: "Quantity",
-      min: 0,
-    }),
-    maxQuantity: new fields.SchemaField({
-      raw: new FormulaField({
-        label: "Max Quantity (Raw)",
-        initial: "",
-        deterministic: true,
-      }),
-      derived: new fields.NumberField({
-        initial: 0,
-        integer: true,
-        label: "Max Quantity (Derived)",
-        min: 0,
-      }),
-    }),
     ranged: new fields.BooleanField({
       initial: false,
       label: "Ranged",
@@ -69,12 +51,7 @@ export function _defineSchema() {
       deterministic: false,
     }),
     damageTypes: new fields.SetField(new fields.StringField()),
-    weight: new fields.NumberField({
-      initial: 0,
-      integer: true,
-      label: "Weight",
-      min: 0,
-    }),
+    weight: modifiableNumber(),
     range: new fields.NumberField({
       initial: 0,
       integer: true,
@@ -90,11 +67,9 @@ export function _defineSchema() {
     equipmentClasses: new fields.SetField(new fields.StringField({
       choices: TERIOCK.index.equipmentClasses,
     })),
-    minStr: new fields.NumberField({
-      initial: -3,
-      integer: true,
+    minStr: modifiableNumber({
       min: -3,
-      label: "Min Strength",
+      initial: -3,
     }),
     sb: new fields.StringField({
       initial: null,
@@ -102,18 +77,8 @@ export function _defineSchema() {
       nullable: true,
       choices: TERIOCK.index.weaponFightingStyles,
     }),
-    av: new fields.NumberField({
-      initial: 0,
-      integer: true,
-      label: "Armor Value",
-      min: 0,
-    }),
-    bv: new fields.NumberField({
-      initial: 0,
-      integer: true,
-      label: "Block Value",
-      min: 0,
-    }),
+    av: modifiableNumber(),
+    bv: modifiableNumber(),
     equipmentType: new fields.StringField({
       initial: "Equipment Type",
       label: "Equipment Type",
@@ -135,17 +100,7 @@ export function _defineSchema() {
       initial: "",
       label: "Notes",
     }),
-    tier: new fields.SchemaField({
-      raw: new FormulaField({
-        initial: "",
-        label: "Tier (Raw)",
-        deterministic: true,
-      }),
-      derived: new fields.NumberField({
-        initial: 0,
-        label: "Tier (Derived)",
-      }),
-    }),
+    tier: modifiableFormula(),
     identified: new fields.BooleanField({
       initial: true,
       label: "Identified",

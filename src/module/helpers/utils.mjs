@@ -377,7 +377,7 @@ export function smartEvaluateSync(formula, document, options = { fail: 0 }) {
   if (!isNaN(Number(formula))) {
     return Number(formula);
   }
-  if (document.actor) {
+  if (document?.actor) {
     return evaluateSync(formula, document.actor, options);
   } else {
     return evaluateSync(formula, {}, options);

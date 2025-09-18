@@ -7,7 +7,7 @@ export default function registerDocumentManagementHooks() {
         const attunement = document.system.attunement;
         if (attunement) {
           await attunement.update({
-            "system.tier": document.system.tier.derived,
+            "system.tier": document.system.tier.value,
           });
         }
       }

@@ -475,11 +475,11 @@ function addEquipmentData(data, slot, equipment) {
   data[`${slot}.dmg.2h`] = equipmentData.derivedTwoHandedDamage || "0";
   data[`${slot}.range`] = equipmentData.range || 0;
   data[`${slot}.range.short`] = equipmentData.shortRange || 0;
-  data[`${slot}.weight`] = equipmentData.weight || 0;
+  data[`${slot}.weight`] = equipmentData.weight.value || 0;
   data[`${slot}.tier`] = equipmentData.tier?.derived || 0;
   data[`${slot}.av`] = equipmentData.derivedAv || 0;
   data[`${slot}.bv`] = equipmentData.derivedBv || 0;
-  data[`${slot}.str`] = equipmentData.minStr || -3;
+  data[`${slot}.str`] = equipmentData.minStr.value || -3;
   data[`${slot}.shattered`] = equipmentData.shattered ? 1 : 0;
   data[`${slot}.dampened`] = equipmentData.dampened ? 1 : 0;
   data[`${slot}.consumable`] = equipmentData.consumable ? 1 : 0;

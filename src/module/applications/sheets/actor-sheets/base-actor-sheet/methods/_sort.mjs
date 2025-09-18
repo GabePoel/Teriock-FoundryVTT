@@ -66,9 +66,9 @@ export function _sortEquipment(actor, equipment) {
     /** @param {TeriockEquipment} e */
     name: (e) => e.name,
     /** @param {TeriockEquipment} e */
-    av: (e) => e.system.av ?? 0,
+    av: (e) => e.system.av.value ?? 0,
     /** @param {TeriockEquipment} e */
-    bv: (e) => e.system.bv ?? 0,
+    bv: (e) => e.system.bv.value ?? 0,
     /** @param {TeriockEquipment} e */
     consumable: (e) => Number(e.system.consumable),
     /** @param {TeriockEquipment} e */
@@ -80,15 +80,15 @@ export function _sortEquipment(actor, equipment) {
     /** @param {TeriockEquipment} e */
     equipped: (e) => Number(e.system.equipped),
     /** @param {TeriockEquipment} e */
-    minStr: (e) => e.system.minStr ?? 0,
+    minStr: (e) => e.system.minStr.value ?? 0,
     /** @param {TeriockEquipment} e */
     powerLevel: (e) => e.system.powerLevel ?? 0,
     /** @param {TeriockEquipment} e */
     shattered: (e) => Number(e.system.shattered),
     /** @param {TeriockEquipment} e */
-    tier: (e) => e.system.tier.derived ?? 0,
+    tier: (e) => e.system.tier.value ?? 0,
     /** @param {TeriockEquipment} e */
-    weight: (e) => e.system.weight ?? 0,
+    weight: (e) => e.system.weight.value ?? 0,
   };
   return _sortEmbedded(equipment, sortKey, ascending, sortMap);
 }

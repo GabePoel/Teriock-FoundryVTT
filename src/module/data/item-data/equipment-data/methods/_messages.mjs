@@ -14,7 +14,7 @@ export function _messageParts(equipmentData) {
   let damageString = "";
   if (src.derivedDamage) {
     damageString += src.derivedDamage;
-    if (src.twoHandedDamage !== "0") {
+    if (src.twoHandedDamage !== "0" && src.derivedTwoHandedDamage !== src.derivedDamage) {
       damageString += " / " + src.derivedTwoHandedDamage;
     }
   }
@@ -57,8 +57,8 @@ export function _messageParts(equipmentData) {
       icon: "fa-weight-hanging",
       label: "Load",
       wrappers: [
-        src.weight + " lb",
-        src.minStr + " min STR",
+        src.weight.value + " lb",
+        src.minStr.value + " min STR",
         src.tier.raw ? "Tier " + src.tier.raw : "",
       ],
     },

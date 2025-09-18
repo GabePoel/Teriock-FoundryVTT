@@ -1,5 +1,9 @@
-import { mergeFreeze, smartEvaluateSync } from "../../../helpers/utils.mjs";
+import { mergeFreeze } from "../../../helpers/utils.mjs";
+import {
+  deriveModifiableDeterministic, modifiableFormula, prepareModifiableBase,
+} from "../../shared/fields/modifiable.mjs";
 
+const { fields } = foundry.data;
 /**
  * Mixin that provides consumable document functionality.
  * Adds quantity management, automatic consumption, and quantity validation capabilities.
@@ -18,34 +22,48 @@ export default (Base) => {
     });
 
     /** @inheritDoc */
+    static defineSchema() {
+      const schema = super.defineSchema();
+      Object.assign(schema, {
+        consumable: new fields.BooleanField({
+          initial: true,
+          label: "Consumable",
+        }),
+        maxQuantity: modifiableFormula(),
+        quantity: new fields.NumberField({
+          integer: true,
+          initial: 1,
+          min: 0,
+        }),
+      });
+      return schema;
+    }
+
+    /** @inheritDoc */
     async gainOne() {
       if (this.consumable) {
-        let quantity = this.quantity;
-        if (!quantity) {
-          quantity = 0;
-        }
-        let maxQuantity = this.maxQuantity.derived;
-        if (maxQuantity) {
-          quantity = Math.min(maxQuantity, quantity + 1);
-        } else {
-          quantity = Math.max(0, quantity + 1);
-        }
         await this.parent.update({
-          "system.quantity": quantity,
+          "system.quantity": Math.max(Math.min(this.maxQuantity.value, this.quantity + 1), 0),
         });
       }
     }
 
     /** @inheritDoc */
+    prepareBaseData() {
+      super.prepareBaseData();
+      prepareModifiableBase(this.maxQuantity);
+    }
+
+    /** @inheritDoc */
     prepareDerivedData() {
       super.prepareDerivedData();
+      deriveModifiableDeterministic(this.maxQuantity, this.actor, {
+        blank: Infinity,
+        floor: true,
+        min: 0,
+      });
       if (this.consumable) {
-        if (!this.maxQuantity.raw) {
-          this.maxQuantity.derived = Infinity;
-        } else {
-          this.maxQuantity.derived = smartEvaluateSync(this.maxQuantity.raw, this.parent);
-        }
-        this.quantity = Math.max(Math.min(this.maxQuantity.derived, this.quantity), 0);
+        this.quantity = Math.max(Math.min(this.maxQuantity.value, this.quantity), 0);
       }
     }
 
@@ -61,9 +79,8 @@ export default (Base) => {
     /** @inheritDoc */
     async useOne() {
       if (this.consumable) {
-        const quantity = this.quantity;
         await this.parent.update({
-          "system.quantity": Math.max(0, quantity - 1),
+          "system.quantity": Math.max(0, this.quantity - 1),
         });
       }
     }

@@ -1,70 +1,72 @@
 {{#if
   (or
-    (exists system.damage)
-    (exists system.range)
     (exists system.av)
     (exists system.bv)
+    (exists system.damage)
+    (exists system.range)
   )
 }}
   <div class="ab-bar">
     {{formBox
       (formInput
         systemFields.damage
-        value=system.damage
-        disabled=(not editable)
         dataset=(object tooltip="Damage")
+        disabled=(not editable)
+        value=system.damage
       )
       secondary=(formInput
         systemFields.twoHandedDamage
-        value=system.twoHandedDamage
-        disabled=(not editable)
         dataset=(object tooltip="Two-Handed Damage")
+        disabled=(not editable)
+        value=system.twoHandedDamage
       )
-      label="DMG"
       icon=(firstDie system.damage)
       include=(exists system.damage)
       includeSecondary=(exists system.twoHandedDamage)
+      label="DMG"
     }}
     {{formBox
       (formInput
         systemFields.range
-        value=system.range
-        disabled=(not editable)
         dataset=(object tooltip="Range")
+        disabled=(not editable)
+        value=system.range
       )
       secondary=(formInput
         systemFields.shortRange
-        value=system.shortRange
-        disabled=(not editable)
         dataset=(object tooltip="Short Range")
+        disabled=(not editable)
+        value=system.shortRange
       )
       after=false
-      label="ft"
       icon=(path TERIOCK.display.icons "range")
       include=(exists system.range)
       includeSecondary=(exists system.shortRange)
+      label="ft"
     }}
     {{formBox
       (formInput
-        systemFields.av
-        value=system.av
-        disabled=(not editable)
+        systemFields.av.fields.saved
         dataset=(object tooltip="Armor Value")
+        disabled=(not editable)
+        value=system.av.saved
       )
-      label="AV"
       icon=(path TERIOCK.display.icons "av")
-      include=(exists system.av)
+      include=(exists system.av.saved)
+      label="AV"
+      unselected=system.av.value
     }}
     {{formBox
       (formInput
-        systemFields.bv
-        value=system.bv
-        disabled=(not editable)
+        systemFields.bv.fields.saved
         dataset=(object tooltip="Block Value")
+        disabled=(not editable)
+        value=system.bv.saved
       )
-      include=(exists system.bv)
       icon=(path TERIOCK.display.icons "bv")
+      include=(exists system.bv.saved)
       label="BV"
+      unselected=system.bv.value
     }}
   </div>
 {{/if}}

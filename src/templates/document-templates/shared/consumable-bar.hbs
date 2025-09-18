@@ -2,21 +2,21 @@
     {{formBox
       (formInput
         systemFields.quantity
-        value=system.quantity
-        disabled=(not editable)
         dataset=(object tooltip="Quantity")
+        disabled=(not editable)
+        value=system.quantity
       )
-      unselected=(concat system.quantity " Remaining")
       icon="hashtag"
+      unselected=(concat system.quantity " Remaining")
     }}
     {{formBox
       (formInput
-        systemFields.maxQuantity.fields.raw
-        value=system.maxQuantity.raw
-        disabled=(not editable)
+        systemFields.maxQuantity.fields.saved
         dataset=(object tooltip="Maximum Quantity")
+        disabled=(not editable)
+        value=system.maxQuantity.saved
       )
       icon="infinity"
-      unselected=(concat (ifThen system.maxQuantity.raw system.maxQuantity.derived "No") " Maximum")
+      unselected=(concat (ifThen system.maxQuantity.saved system.maxQuantity.value "No") " Maximum")
     }}
   </div>

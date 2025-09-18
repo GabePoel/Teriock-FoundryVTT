@@ -1,5 +1,3 @@
-import { evaluateSync } from "../../../../helpers/utils.mjs";
-
 /**
  * Attunes equipment to the current character, creating an attunement effect.
  * Checks if the character has enough unused presence and handles reference equipment.
@@ -20,7 +18,7 @@ export async function _attune(equipmentData) {
       type: "equipment",
       target: equipmentData.parent._id,
       inheritTier: true,
-      tier: equipmentData.tier.derived,
+      tier: equipmentData.tier.value,
     },
     changes: [
       {
@@ -32,7 +30,7 @@ export async function _attune(equipmentData) {
       {
         key: "system.presence.value",
         mode: 2,
-        value: equipmentData.tier.derived,
+        value: equipmentData.tier.value,
         priority: 10,
       },
     ],
@@ -42,7 +40,7 @@ export async function _attune(equipmentData) {
       const ref = await foundry.utils.fromUuid(equipmentData.reference);
       if (ref) {
         await equipmentData.parent.update({
-          "system.tier.raw": ref.system.tier.raw,
+          "system.tier.saved": ref.system.tier.saved,
         });
       }
     }
@@ -76,7 +74,7 @@ export async function _deattune(equipmentData) {
  * @private
  */
 export function _attuned(equipmentData) {
-  if (equipmentData.parent?.actor) {
+  if (equipmentData.parent.actor) {
     return equipmentData.parent.actor.system.attunements.has(equipmentData.parent._id);
   }
   return false;
@@ -90,7 +88,7 @@ export function _attuned(equipmentData) {
  * @private
  */
 export function _getAttunement(equipmentData) {
-  if (equipmentData.parent?.actor) {
+  if (equipmentData.parent.actor) {
     return equipmentData.parent.actor.attunements.find((effect) => effect.system.target === equipmentData.parent._id);
   }
   return null;
@@ -105,12 +103,11 @@ export function _getAttunement(equipmentData) {
  * @private
  */
 export async function _canAttune(equipmentData) {
-  if (equipmentData.parent?.actor) {
-    let tierDerived = equipmentData.tier.derived;
+  if (equipmentData.parent.actor) {
+    let tierDerived = equipmentData.tier.value;
     if (equipmentData.reference && !equipmentData.identified) {
-      const ref = await foundry.utils.fromUuid(equipmentData.reference);
-      const tierRaw = ref.system.tier.raw;
-      tierDerived = evaluateSync(tierRaw);
+      const ref = /** @type {TeriockEquipment} */ await foundry.utils.fromUuid(equipmentData.reference);
+      tierDerived = ref.system.tier.value;
     }
     const unp = equipmentData.parent.actor.system.presence.max - equipmentData.parent.actor.system.presence.value;
     return tierDerived <= unp;

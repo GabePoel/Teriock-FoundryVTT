@@ -8,13 +8,9 @@ declare module "./equipment-data.mjs" {
     ConsumableDataMixinInterface,
     ExecutableDataMixinInterface {
     /** <schema> Armor Value */
-    av: number;
-    /** <base> Armor value for effects to modify */
-    baseAv: number;
-    /** <base> Black value for effects to modify */
-    baseBv: number;
+    av: Teriock.Fields.ModifiableNumber;
     /** <schema> Block Value */
-    bv: number;
+    bv: Teriock.Fields.ModifiableNumber;
     /** <schema> Damage Dice */
     damage: string;
     /** <schema> Damage Types */
@@ -36,7 +32,7 @@ declare module "./equipment-data.mjs" {
     /** <schema> Is the equipment identified? */
     identified: boolean;
     /** <schema> Minimum STR */
-    minStr: number;
+    minStr: Teriock.Fields.ModifiableNumber;
     /** <schema> Notes */
     notes: string;
     /** <schema> Power Level */
@@ -58,16 +54,11 @@ declare module "./equipment-data.mjs" {
     /** <derived> Special Rules (Weapon Fighting Style) */
     specialRules: string;
     /** <schema> Presence Tier */
-    tier: {
-      /** <schema> Raw Presence Tier */
-      raw: string;
-      /** <derived> Derived Presence Tier */
-      derived: number;
-    };
+    tier: Teriock.Fields.ModifiableDeterministic;
     /** <schema> Two-handed Damage Dice */
     twoHandedDamage: string;
     /** <schema> Weight (lb) */
-    weight: number;
+    weight: Teriock.Fields.ModifiableNumber;
 
     get parent(): TeriockEquipment;
   }

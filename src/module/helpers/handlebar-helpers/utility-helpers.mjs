@@ -390,7 +390,7 @@ export default function registerUiHelpers() {
             shattered: false,
             consumable: effect.system.consumable,
             amount: effect.system.quantity,
-            max: effect.system.maxQuantity?.derived,
+            max: effect.system.maxQuantity?.value,
             type: "effect",
             action,
             tooltip,

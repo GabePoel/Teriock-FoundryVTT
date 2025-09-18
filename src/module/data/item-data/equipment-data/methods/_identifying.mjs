@@ -54,7 +54,7 @@ export async function _readMagic(equipmentData) {
 export async function _identify(equipmentData) {
   if (equipmentData.reference && !equipmentData.identified) {
     const activeGm = game.users.activeGM;
-    const ref = await foundry.utils.fromUuid(equipmentData.reference);
+    const ref = /** @type {TeriockEquipment} */ await foundry.utils.fromUuid(equipmentData.reference);
     const referenceName = ref ? ref.name : "Unknown";
     const referenceUuid = ref ? ref.uuid : "Unknown";
     ui.notifications.info(`Asking GMs to approve identification of ${equipmentData.parent.name}.`);
@@ -110,8 +110,7 @@ export async function _unidentify(equipmentData) {
       "system.reference": reference,
       "system.description": description,
       "system.powerLevel": "unknown",
-      "system.tier.raw": "",
-      "system.tier.derived": 0,
+      "system.tier.saved": "",
       "system.identified": false,
       "system.flaws": "",
       "system.notes": "",

@@ -36,7 +36,7 @@ export default interface NewTeriockEquipmentModel extends TeriockBaseItemModel,
   /** <schema> Is the equipment identified? */
   identified: boolean;
   /** <schema> Minimum STR */
-  minStr: number;
+  minStr: Teriock.Fields.ModifiableNumber;
   /** <schema> Notes */
   notes: string;
   /** <schema> Power Level */
