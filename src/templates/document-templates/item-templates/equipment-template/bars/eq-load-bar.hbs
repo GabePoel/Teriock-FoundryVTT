@@ -1,61 +1,33 @@
 <div class="ab-bar">
-  {{#if (exists system.tier)}}
-    <div class="ab-box-container">
-      <div class="ab-box {{#if editable}}tier-box{{/if}}" data-tooltip="Tier">
-        <div class="ab-box-icon">
-          {{{TERIOCK.display.icons.tier}}}
-        </div>
-        <div class="ab-box-content">
-          <div class="ability-bar-input tier-input unselected">
-            {{system.tier.derived}}
-          </div>
-          {{formInput
-            systemFields.tier.fields.raw
-            value=system.tier.raw
-            disabled=(not editable)
-            classes="ability-bar-input tier-input selected"
-          }}
-        </div>
-        <div class="ab-box-label">
-          Tier
-        </div>
-      </div>
-    </div>
-  {{/if}}
-  <div class="ab-box-container">
-    <div class="ab-box {{#if editable}}weight-box{{/if}}" data-tooltip="Weight">
-      <div class="ab-box-icon">
-        {{{TERIOCK.display.icons.weight}}}
-      </div>
-      <div class="ab-box-content">
-        {{formInput
-          systemFields.weight
-          value=system.weight
-          disabled=(not editable)
-          classes="ability-bar-input weight-input"
-        }}
-      </div>
-      <div class="ab-box-label" style="text-transform: none;">
-        lb
-      </div>
-    </div>
-  </div>
-  <div class="ab-box-container">
-    <div class="ab-box {{#if editable}}str-box{{/if}}" data-tooltip="Minimum Strength">
-      <div class="ab-box-icon str-input">
-        {{{TERIOCK.display.icons.minStr}}}
-      </div>
-      <div class="ab-box-content">
-        {{formInput
-          systemFields.minStr
-          value=system.minStr
-          disabled=(not editable)
-          classes="ability-bar-input str-input"
-        }}
-      </div>
-      <div class="ab-box-label">
-        Str
-      </div>
-    </div>
-  </div>
+  {{formBox
+    (formInput
+      systemFields.tier.fields.raw
+      value=system.tier.raw
+      disabled=(not editable)
+      dataset=(object tooltip="Presence Tier")
+    )
+    icon=(path TERIOCK.display.icons "tier")
+    unselected=(ifThen system.tier.raw system.tier.raw 0)
+    label="TIER"
+  }}
+  {{formBox
+    (formInput
+      systemFields.weight
+      value=system.weight
+      disabled=(not editable)
+      dataset=(object tooltip="Weight")
+    )
+    icon=(path TERIOCK.display.icons "weight")
+    label="lb"
+  }}
+  {{formBox
+    (formInput
+      systemFields.minStr
+      value=system.minStr
+      disabled=(not editable)
+      dataset=(object tooltip="Minimum STR")
+    )
+    label="STR"
+    icon=(path TERIOCK.display.icons "minStr")
+  }}
 </div>

@@ -1,42 +1,25 @@
 <div class="ab-bar">
-  <div class="ab-box-container">
-    <div class="ab-box {{#if editable}}property-type-box{{/if}}" data-tooltip="Property Type">
-      <div
-        class="ab-box-icon"
-        style="color: {{path TERIOCK.options.ability.form system.form 'color'}};"
-      >
-        <i
-          class="fa-fw fa-light fa-{{path TERIOCK.options.ability.form system.form 'icon'}}"
-        ></i>
-      </div>
-      <div class="ab-box-content">
-        {{{path TERIOCK.options.ability.form system.form "name"}}}
-      </div>
-    </div>
-  </div>
-  <div class="ab-box-container">
-    <div class="ab-box {{#if editable}}damage-type-box{{/if}}" data-tooltip="Damage Type">
-      <div class="ab-box-icon">
-        <i class="fa-fw fa-light fa-hammer-crash"></i>
-      </div>
-      <div class="ab-box-content">
-        {{#if (not (exists system.damageType))}}
-          <div class="ability-bar-input damage-type-input unselected">No Damage Type</div>
-          {{formInput
-            systemFields.damageType
-            value=system.damageType
-            classes="ability-bar-input damage-type-input selected"
-            disabled=(not editable)
-          }}
-        {{else}}
-          {{formInput
-            systemFields.damageType
-            value=system.damageType
-            classes="ability-bar-input damage-type-input"
-            disabled=(not editable)
-          }}
-        {{/if}}
-      </div>
-    </div>
-  </div>
+  {{formBox
+    (path TERIOCK.options.ability.form system.form "name")
+    icon=(path TERIOCK.options.ability.form system.form "icon")
+    iconColor=(path TERIOCK.options.ability.form system.form "color")
+    tooltip="Property Form"
+    classes=(ifThen editable "property-type-box" "")
+  }}
+  {{formBox
+    (formInput
+      systemFields.damageType
+      value=system.damageType
+      disabled=(not editable)
+    )
+    unselected=(ifThen (not (exists system.damageType)) "No Damage Type" "")
+    tooltip="Damage Type"
+    icon="hammer-crash"
+  }}
+  {{formBox
+    (ifThen disabled "Disabled" "Enabled")
+    icon=(ifThen disabled "xmark" "check")
+    tooltip="Disabled?"
+    action=(ifThen editable "toggleDisabledThis")
+  }}
 </div>

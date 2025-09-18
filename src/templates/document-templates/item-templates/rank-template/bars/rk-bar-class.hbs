@@ -1,37 +1,20 @@
-<div class="ab-bar ab-bar-1">
-  <div class="ab-box-container">
-    <div class="ab-box {{#if editable}}archetype-box{{/if}}" data-tooltip="Archetype">
-      <div class="ab-box-icon">
-        <i
-          class="fa-fw fa-light fa-{{path TERIOCK.options.rank system.archetype "icon"}}"
-        ></i>
-      </div>
-      <div class="ab-box-content">
-        {{path TERIOCK.options.rank system.archetype "name"}}
-      </div>
-    </div>
-  </div>
-  <div class="ab-box-container">
-    <div class="ab-box {{#if editable}}class-box{{/if}}" data-tooltip="Class">
-      <div class="ab-box-icon">
-        <i
-          class="fa-fw fa-light fa-{{path TERIOCK.options.rank system.archetype "classes" system.className "icon"}}"
-        ></i>
-      </div>
-      <div class="ab-box-content">
-        {{path TERIOCK.options.rank system.archetype "classes" system.className "name"}}
-      </div>
-    </div>
-  </div>
-  <div class="ab-box-container">
-    <div class="ab-box {{#if editable}}rank-box{{/if}}" data-tooltip="Rank">
-      <div class="ab-box-icon">
-        <i class="fa-fw fa-light fa-{{system.classRank}}"></i>
-      </div>
-      <div class="ab-box-content">
-        Rank
-        {{system.classRank}}
-      </div>
-    </div>
-  </div>
+<div class="ab-bar">
+  {{formBox
+    (path TERIOCK.options.rank system.archetype "name")
+    icon=(path TERIOCK.options.rank system.archetype "icon")
+    tooltip="Archetype"
+    classes=(ifThen editable "archetype-box" "")
+  }}
+  {{formBox
+    (path TERIOCK.options.rank system.archetype "classes" system.className "name")
+    icon=(path TERIOCK.options.rank system.archetype "classes" system.className "icon")
+    tooltip="Class"
+    classes=(ifThen editable "class-box" "")
+  }}
+  {{formBox
+    (concat "Rank " system.classRank)
+    icon=system.classRank
+    tooltip="Rank"
+    classes=(ifThen editable "rank-box" "")
+  }}
 </div>

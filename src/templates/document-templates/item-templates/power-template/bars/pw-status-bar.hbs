@@ -1,32 +1,13 @@
-<div class="ab-bar ab-status-bar">
-  <div class="ab-box-container">
-    <div class="ab-box {{#if editable}}power-box{{/if}}" data-tooltip="Power Type">
-      <div class="ab-box-icon">
-        <i
-          class="fa-fw fa-light fa-{{path TERIOCK.options.power system.type 'icon'}}"
-        ></i>
-      </div>
-      <div class="ab-box-content">
-        {{path TERIOCK.options.power system.type "name"}}
-      </div>
-    </div>
-  </div>
-  <div class="ab-box-container">
-    <div
-      class="ab-box {{#if editable}}proficient-box{{/if}}"
-      data-action="toggleProficient"
-      data-tooltip="Proficient?"
-    >
-      <div class="ab-box-icon">
-        {{#if system.proficient}}
-          <i class="fa-solid fa-check"></i>
-        {{else}}
-          <i class="fa-solid fa-xmark"></i>
-        {{/if}}
-      </div>
-      <div class="ab-box-content">
-        {{#if system.proficient}}Proficient{{else}}Not Proficient{{/if}}
-      </div>
-    </div>
-  </div>
+<div class="ab-bar">
+  {{formBox
+    (path TERIOCK.options.power system.type "name")
+    icon=(path TERIOCK.options.power system.type "icon")
+    tooltip="Power Type"
+  }}
+  {{formBox
+    (ifThen system.proficient "Proficient" "Not Proficient")
+    action=(ifThen editable "toggleProficient" "")
+    tooltip="Proficient?"
+    icon=(ifThen system.proficient "check" "xmark")
+  }}
 </div>

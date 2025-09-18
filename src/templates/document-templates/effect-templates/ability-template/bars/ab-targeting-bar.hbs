@@ -1,6 +1,13 @@
-<div class="ab-bar ab-bar-2">
-  {{#if
-    (or
+<div class="ab-bar">
+  {{formBox
+    (formInput
+      systemFields.range
+      value=system.range
+      disabled=(not editable)
+    )
+    icon=(lookup TERIOCK.display.icons "range")
+    label="ft"
+    include=(or
       (eq system.delivery.base "area")
       (eq system.delivery.base "missile")
       (eq system.delivery.base "aura")
@@ -8,53 +15,16 @@
       (eq system.delivery.base "sight")
     )
   }}
-    <div class="ab-box-container">
-      <div class="ab-box {{#if editable}}ab-input-box range-box{{/if}}" data-tooltip="Range">
-        <div class="ab-box-icon">
-          {{{TERIOCK.display.icons.range}}}
-        </div>
-        <div class="ab-box-content">
-          {{formInput
-            systemFields.range
-            value=system.range
-            disabled=(not editable)
-            classes="ability-bar-input range-input"
-          }}
-        </div>
-        <div class="ab-box-label" style="text-transform: none;">
-          ft
-        </div>
-      </div>
-    </div>
-  {{/if}}
-
-  <div class="ab-box-container">
-    <div class="ab-box {{#if editable}}target-box{{/if}}" data-tooltip="Targets">
-      <div class="ab-box-icon">
-        {{{TERIOCK.display.icons.target}}}
-      </div>
-      <div class="ab-box-content">{{#each system.targets as |key index|}}{{#if index}}, {{/if}}{{lookup
-        ../TERIOCK.options.ability.targets key}}{{/each}}
-      </div>
-    </div>
-  </div>
-
-  <div class="ab-box-container">
-    <div class="ab-box {{#if editable}}ab-input-box duration-box{{/if}}" data-tooltip="Duration"
-         data-action="setDuration">
-      <div class="ab-box-icon">
-        {{{TERIOCK.display.icons.duration}}}
-      </div>
-      <div class="ab-box-content">
-        {{{system.duration.description}}}
-        {{!
-        {{formInput
-                systemFields.duration
-                value=system.duration
-                disabled=(not editable)
-                classes="ability-bar-input"
-        }}
-      </div>
-    </div>
-  </div>
+  {{formBox
+    system.targetString
+    icon=(lookup TERIOCK.display.icons "target")
+    tooltip="Targets"
+    classes=(ifThen editable "target-box" "")
+  }}
+  {{formBox
+    system.duration.description
+    icon=(lookup TERIOCK.display.icons "duration")
+    action=(ifThen editable "setDuration" "")
+    tooltip="Duration"
+  }}
 </div>

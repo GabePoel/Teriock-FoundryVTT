@@ -4,156 +4,131 @@
     (not (eq system.costs.hp.type "none"))
     (not (eq system.costs.gp.type "none"))
     (exists system.costs.break)
+    system.gifted.enabled
   )
 }}
-  <div class="ab-bar ab-bar-3">
-    {{#if (not (eq system.costs.mp.type "none"))}}
-      <div class="ab-box-container">
-        <div class="ab-box {{#if editable}}mana-cost-box{{/if}}">
-          <div class="ab-box-icon">
-            {{{TERIOCK.display.icons.mp}}}
-          </div>
-          <div class="ab-box-content">
-            {{#if (eq system.costs.mp.type "static")}}
-              {{formInput
-                systemFields.costs.fields.mp.fields.value.fields.static
-                value=system.costs.mp.value.static
-                disabled=(not editable)
-                classes="ability-bar-input mp-input"
-                dataset=(object tooltip="Static Mana Cost")
-              }}
-            {{else}}
-              {{#if (eq system.costs.mp.type "formula")}}
-                {{formInput
-                  systemFields.costs.fields.mp.fields.value.fields.formula
-                  value=system.costs.mp.value.formula
-                  disabled=(not editable)
-                  classes="ability-bar-input mp-input"
-                  dataset=(object tooltip="Formula Mana Cost")
-                }}
-              {{else}}
-                {{#if (eq system.costs.mp.type "variable")}}
-                  <span class="teriock-full-width" data-tooltip="Variable Mana Cost">Variable</span>
-                {{/if}}
-              {{/if}}
-            {{/if}}
-            <div class="ab-box-label">
-              MP
-            </div>
-          </div>
-        </div>
-      </div>
-    {{/if}}
-    {{#if system.gifted.enabled}}
-      <div class="ab-box-container">
-        <div class="ab-box">
-          <div class="ab-box-icon">
-            <i class="fa-light fa-plus"></i>
-          </div>
-          <div class="ab-box-content">
-            {{formInput
-              systemFields.gifted.fields.amount
-              value=system.gifted.amount
-              disabled=(not editable)
-              classes="ability-bar-input gifted-amount-input"
-              dataset=(object tooltip="Gifted Mana Cost")
-            }}
-          </div>
-          <div class="ab-box-label">
-            MP
-          </div>
-        </div>
-      </div>
-    {{/if}}
-    {{#if (not (eq system.costs.hp.type "none"))}}
-      <div class="ab-box-container">
-        <div class="ab-box {{#if editable}}hit-cost-box{{/if}}">
-          <div class="ab-box-icon">
-            {{{TERIOCK.display.icons.hp}}}
-          </div>
-          <div class="ab-box-content">
-            {{#if (eq system.costs.hp.type "static")}}
-              {{formInput
-                systemFields.costs.fields.hp.fields.value.fields.static
-                value=system.costs.hp.value.static
-                disabled=(not editable)
-                classes="ability-bar-input hp-input"
-                dataset=(object tooltip="Static Hit Cost")
-              }}
-            {{else}}
-              {{#if (eq system.costs.hp.type "formula")}}
-                {{formInput
-                  systemFields.costs.fields.hp.fields.value.fields.formula
-                  value=system.costs.hp.value.formula
-                  disabled=(not editable)
-                  classes="ability-bar-input hp-input"
-                  dataset=(object tooltip="Formula Hit Cost")
-                }}
-              {{else}}
-                {{#if (eq system.costs.hp.type "variable")}}
-                  <span class="teriock-full-width" data-tooltip="Variable Hit Cost">Variable</span>
-                {{else}}
-                  {{#if (eq system.costs.hp.type "hack")}}
-                    <span data-tooltip="Hack Hit Cost">Hack</span>
-                  {{/if}}
-                {{/if}}
-              {{/if}}
-            {{/if}}
-            <div class="ab-box-label">
-              HP
-            </div>
-          </div>
-        </div>
-      </div>
-    {{/if}}
-    {{#if (not (eq system.costs.gp.type "none"))}}
-      <div class="ab-box-container">
-        <div class="ab-box {{#if editable}}gold-cost-box{{/if}}" data-tooltip="Gold Cost">
-          <div class="ab-box-icon">
-            {{{TERIOCK.display.icons.gp}}}
-          </div>
-          <div class="ab-box-content">
-            {{#if (eq system.costs.gp.type "static")}}
-              {{formInput
-                systemFields.costs.fields.gp.fields.value.fields.static
-                value=system.costs.gp.value.static
-                disabled=(not editable)
-                classes="ability-bar-input gp-input"
-                dataset=(object tooltip="Static Gold Cost")
-              }}
-            {{else}}
-              {{#if (eq system.costs.gp.type "formula")}}
-                {{formInput
-                  systemFields.costs.fields.gp.fields.value.fields.formula
-                  value=system.costs.gp.value.formula
-                  disabled=(not editable)
-                  classes="ability-bar-input gp-input"
-                  dataset=(object tooltip="Formula Gold Cost")
-                }}
-              {{else}}
-                {{#if (eq system.costs.gp.type "variable")}}
-                  <span class="teriock-full-width" data-tooltip="Variable Gold Cost">Variable</span>
-                {{/if}}
-              {{/if}}
-            {{/if}}
-            <div class="ab-box-label">
-              ₲
-            </div>
-          </div>
-        </div>
-      </div>
-    {{/if}}
-    {{#if (exists system.costs.break)}}
-      <div class="ab-box-container">
-        <div class="ab-box {{#if editable}}break-cost-box{{/if}}" data-tooltip="Break Cost">
-          <div class="ab-box-icon">
-            {{{TERIOCK.display.icons.break}}}
-          </div>
-          <div class="ab-box-content">
-            {{lookup TERIOCK.options.ability.breakCost system.costs.break}}
-          </div>
-        </div>
-      </div>
-    {{/if}}
+  <div class="ab-bar">
+    {{formBox
+      (ifThen
+        (eq system.costs.mp.type "static")
+        (formInput
+          systemFields.costs.fields.mp.fields.value.fields.static
+          value=system.costs.mp.value.static
+          disabled=(not editable)
+        )
+        (ifThen
+          (eq system.costs.mp.type "formula")
+          (formInput
+            systemFields.costs.fields.mp.fields.value.fields.formula
+            value=system.costs.mp.value.formula
+            disabled=(not editable)
+          )
+          "Variable"
+        )
+      )
+      tooltip=(ifThen
+        (eq system.costs.mp.type "static")
+        "Static Mana Cost"
+        (ifThen
+          (eq system.costs.mp.type "formula")
+          "Formula Mana Cost"
+          "Variable Mana Cost"
+        )
+      )
+      icon=(path TERIOCK.display.icons "mp")
+      label="MP"
+      include=(not (eq system.costs.mp.type "none"))
+      classes=(ifThen editable "mana-cost-box" "")
+    }}
+    {{formBox
+      (formInput
+        systemFields.gifted.fields.amount
+        value=system.gifted.amount
+        disabled=(not editable)
+      )
+      tooltip="Gifted Mana Cost"
+      label="MP"
+      icon="plus"
+      include=system.gifted.enabled
+    }}
+    {{formBox
+      (ifThen
+        (eq system.costs.hp.type "static")
+        (formInput
+          systemFields.costs.fields.hp.fields.value.fields.static
+          value=system.costs.hp.value.static
+          disabled=(not editable)
+        )
+        (ifThen
+          (eq system.costs.hp.type "formula")
+          (formInput
+            systemFields.costs.fields.hp.fields.value.fields.formula
+            value=system.costs.hp.value.formula
+            disabled=(not editable)
+          )
+          (ifThen
+            (eq system.costs.hp.type "hack")
+            "Hack"
+            "Variable"
+          )
+        )
+      )
+      tooltip=(ifThen
+        (eq system.costs.hp.type "static")
+        "Static Hit Cost"
+        (ifThen
+          (eq system.costs.hp.type "formula")
+          "Formula Hit Cost"
+          (ifThen
+            (eq system.costs.hp.type "hack")
+            "Hack Hit Cost"
+            "Variable Hit Cost"
+          )
+        )
+      )
+      icon=(path TERIOCK.display.icons "hp")
+      label="HP"
+      classes=(ifThen editable "hit-cost-box" "")
+      include=(not (eq system.costs.hp.type "none"))
+    }}
+    {{formBox
+      (ifThen
+        (eq system.costs.gp.type "static")
+        (formInput
+          systemFields.costs.fields.gp.fields.value.fields.static
+          value=system.costs.gp.value.static
+          disabled=(not editable)
+        )
+        (ifThen
+          (eq system.costs.gp.type "formula")
+          (formInput
+            systemFields.costs.fields.gp.fields.value.fields.formula
+            value=system.costs.gp.value.formula
+            disabled=(not editable)
+          )
+          "Variable"
+        )
+      )
+      tooltip=(ifThen
+        (eq system.costs.gp.type "static")
+        "Static Gold Cost"
+        (ifThen
+          (eq system.costs.gp.type "formula")
+          "Formula Gold Cost"
+          "Variable Gold Cost"
+        )
+      )
+      icon=(path TERIOCK.display.icons "gp")
+      label="₲"
+      classes=(ifThen editable "gold-cost-box" "")
+      include=(not (eq system.costs.gp.type "none"))
+    }}
+    {{formBox
+      (path TERIOCK.options.ability.breakCost system.costs.break)
+      icon=(path TERIOCK.display.icons "break")
+      tooltip="Break Cost"
+      classes=(ifThen editable "break-cost-box" "")
+      include=(exists system.costs.break)
+    }}
   </div>
 {{/if}}

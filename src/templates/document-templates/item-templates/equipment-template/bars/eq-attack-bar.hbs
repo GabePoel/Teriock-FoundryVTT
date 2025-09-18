@@ -12,19 +12,17 @@
         systemFields.damage
         value=system.damage
         disabled=(not editable)
-        classes="ability-bar-input damage-input"
         dataset=(object tooltip="Damage")
       )
       secondary=(formInput
         systemFields.twoHandedDamage
         value=system.twoHandedDamage
         disabled=(not editable)
-        classes="ability-bar-input two-handed-damage-input"
         dataset=(object tooltip="Two-Handed Damage")
       )
       label="DMG"
       icon=(firstDie system.damage)
-      include=system.damage
+      include=(exists system.damage)
       includeSecondary=(exists system.twoHandedDamage)
     }}
     {{formBox
@@ -32,14 +30,12 @@
         systemFields.range
         value=system.range
         disabled=(not editable)
-        classes="ability-bar-input range-input"
         dataset=(object tooltip="Range")
       )
       secondary=(formInput
         systemFields.shortRange
         value=system.shortRange
         disabled=(not editable)
-        classes="ability-bar-input range-input"
         dataset=(object tooltip="Short Range")
       )
       after=false
@@ -53,7 +49,6 @@
         systemFields.av
         value=system.av
         disabled=(not editable)
-        classes="ability-bar-input av-input"
         dataset=(object tooltip="Armor Value")
       )
       label="AV"
@@ -65,7 +60,6 @@
         systemFields.bv
         value=system.bv
         disabled=(not editable)
-        classes="ability-bar-input bv-input"
         dataset=(object tooltip="Block Value")
       )
       include=(exists system.bv)

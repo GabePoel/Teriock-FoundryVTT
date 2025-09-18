@@ -1,0 +1,22 @@
+  <div class="ab-bar">
+    {{formBox
+      (formInput
+        systemFields.quantity
+        value=system.quantity
+        disabled=(not editable)
+        dataset=(object tooltip="Quantity")
+      )
+      unselected=(concat system.quantity " Remaining")
+      icon="hashtag"
+    }}
+    {{formBox
+      (formInput
+        systemFields.maxQuantity.fields.raw
+        value=system.maxQuantity.raw
+        disabled=(not editable)
+        dataset=(object tooltip="Maximum Quantity")
+      )
+      icon="infinity"
+      unselected=(concat (ifThen system.maxQuantity.raw system.maxQuantity.derived "No") " Maximum")
+    }}
+  </div>

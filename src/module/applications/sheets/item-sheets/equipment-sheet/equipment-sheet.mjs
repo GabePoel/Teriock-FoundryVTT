@@ -104,7 +104,7 @@ export default class TeriockEquipmentSheet extends TeriockBaseItemSheet {
     for (const [ selector, path ] of Object.entries(arrayTags)) {
       root.querySelectorAll(selector).forEach((el) => {
         el.addEventListener("click", async () => {
-          const val = el.getAttribute("value");
+          const val = el.getAttribute("data-value");
           const current = doc.system[path].filter((v) => v !== val);
           await doc.update({ [`system.${path}`]: current });
         });

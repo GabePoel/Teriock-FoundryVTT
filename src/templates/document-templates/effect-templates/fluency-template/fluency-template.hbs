@@ -3,37 +3,19 @@
     <div class="ab-sheet-top">
       {{> "systems/teriock/src/templates/document-templates/shared/header.hbs"}}
       <div class="ab-bars">
-        <div class="ab-bar ab-bar-1">
-          <div class="ab-box-container">
-            <div class="ab-box {{#if editable}}field-box{{/if}}" data-tooltip="Discipline">
-              <div class="ab-box-icon">
-                <i
-                  class="fa-fw fa-light fa-{{path TERIOCK.options.tradecraft system.field "icon"}}"
-                ></i>
-              </div>
-              <div class="ab-box-content">
-                {{path TERIOCK.options.tradecraft system.field "name"}}
-              </div>
-            </div>
-          </div>
-          <div class="ab-box-container">
-            <div class="ab-box {{#if editable}}tradecraft-box{{/if}}" data-tooltip="Tradecraft">
-              <div class="ab-box-icon">
-                <i
-                  class="fa-fw fa-light fa-{{path
-                    TERIOCK.options.tradecraft
-                    system.field
-                    "tradecrafts"
-                    system.tradecraft
-                    "icon"
-                  }}"
-                ></i>
-              </div>
-              <div class="ab-box-content">
-                {{path TERIOCK.options.tradecraft system.field "tradecrafts" system.tradecraft "name"}}
-              </div>
-            </div>
-          </div>
+        <div class="ab-bar">
+          {{formBox
+            (path TERIOCK.options.tradecraft system.field "name")
+            icon=(path TERIOCK.options.tradecraft system.field "icon")
+            classes=(ifThen editable "field-box" "")
+            tooltip="Discipline"
+          }}
+          {{formBox
+            (path TERIOCK.index.tradecrafts system.tradecraft)
+            icon=(path TERIOCK.options.tradecraft system.field "tradecrafts" system.tradecraft "icon")
+            classes=(ifThen editable "tradecraft-box" "")
+            tooltip="Tradecraft"
+          }}
         </div>
       </div>
     </div>

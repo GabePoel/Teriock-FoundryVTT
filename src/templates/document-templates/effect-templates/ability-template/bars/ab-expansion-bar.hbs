@@ -1,43 +1,27 @@
 {{#if system.expansion}}
-  <div class="ab-bar ab-bar-4">
-    <div class="ab-box-container">
-      <div
-        class="ab-box {{#if editable}}expansion-box expansion-box-{{system.expansion}}{{/if}}"
-        data-tooltip="Expansion Delivery"
-      >
-        <div class="ab-box-icon">
-          {{{TERIOCK.display.icons.expansion}}}
-        </div>
-        <div class="ab-box-content">
-          {{#if
-            (or (eq system.expansion "detonate") (eq system.expansion "ripple"))
-          }}
-            {{lookup
-              TERIOCK.options.ability.featSaveAttribute
-              system.expansionSaveAttribute
-            }}
-          {{/if}}
-          {{lookup TERIOCK.options.ability.expansion system.expansion}}
-        </div>
-      </div>
-    </div>
-    <div class="ab-box-container">
-      <div
-        class="ab-box {{#if editable}}ab-input-box expansion-range-box{{/if}}"
-        data-tooltip="Expansion Range"
-      >
-        <div class="ab-box-icon">
-          {{{TERIOCK.display.icons.expansionRange}}}
-        </div>
-        <div class="ab-box-content">
-          {{formInput
-            systemFields.expansionRange
-            value=system.expansionRange
-            disabled=(not editable)
-            classes="ability-bar-input range-input"
-          }}
-        </div>
-      </div>
-    </div>
+  <div class="ab-bar">
+    {{formBox
+      (concat
+        (ifThen
+          (or (eq system.expansion "detonate") (eq system.expansion "ripple"))
+          (concat (lookup TERIOCK.options.ability.featSaveAttribute system.expansionSaveAttribute) " ")
+          ""
+        )
+        (lookup TERIOCK.options.ability.expansion system.expansion)
+      )
+      classes=(ifThen editable (concat "expansion-box expansion-box-" system.expansion) "")
+      tooltip="Expansion Delivery"
+      icon=(lookup TERIOCK.display.icons "expansion")
+    }}
+    {{formBox
+      (formInput
+        systemFields.expansionRange
+        value=system.expansionRange
+        disabled=(not editable)
+      )
+      icon=(lookup TERIOCK.display.icons "expansionRange")
+      tooltip="Expansion Range"
+      label="ft"
+    }}
   </div>
 {{/if}}

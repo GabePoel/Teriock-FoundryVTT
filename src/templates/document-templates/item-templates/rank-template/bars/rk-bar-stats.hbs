@@ -1,24 +1,14 @@
-<div class="ab-bar ab-bar-2">
-  <div class="ab-box-container">
-    <div class="ab-box {{#if editable}}hp-die-box{{/if}}" data-tooltip="Hit Die">
-      <div class="ab-box-icon">
-        <i class="fa-fw fa-light fa-{{firstDie system.hpDie.polyhedral}}"></i>
-      </div>
-      <div class="ab-box-content">
-        {{system.hpDie.polyhedral}}
-        Hit Die ({{system.totalHp}} HP)
-      </div>
-    </div>
-  </div>
-  <div class="ab-box-container">
-    <div class="ab-box {{#if editable}}mp-die-box{{/if}}" data-tooltip="Mana Die">
-      <div class="ab-box-icon">
-        <i class="fa-fw fa-light fa-{{firstDie system.mpDie.polyhedral}}"></i>
-      </div>
-      <div class="ab-box-content">
-        {{system.mpDie.polyhedral}}
-        Mana Die ({{system.totalMp}} MP)
-      </div>
-    </div>
-  </div>
+<div class="ab-bar">
+  {{formBox
+    (concat system.hpDie.polyhedral " (Hit Die " system.totalHp " HP)")
+    icon=(firstDie system.hpDie.polyhedral)
+    tooltip="Hit Die"
+    classes=(ifThen editable "hp-die-box" "")
+  }}
+  {{formBox
+    (concat system.hpDie.polyhedral " (Mana Die " system.totalMp " MP)")
+    icon=(firstDie system.mpDie.polyhedral)
+    tooltip="Mana Die"
+    classes=(ifThen editable "mp-die-box" "")
+  }}
 </div>

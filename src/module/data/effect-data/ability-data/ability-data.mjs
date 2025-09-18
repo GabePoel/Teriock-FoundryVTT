@@ -120,6 +120,17 @@ export default class TeriockAbilityModel extends HierarchyDataMixin(ConsumableDa
     return suppressed;
   }
 
+  /**
+   * String that represents all the valid targets.
+   * @returns {string}
+   */
+  get targetString() {
+    return Array.from(this.targets)
+      .map((t) => TERIOCK.options.ability.targets[t])
+      .sort((a, b) => a.localeCompare(b))
+      .join(", ");
+  }
+
   /** @inheritDoc */
   get useIcon() {
     if (this.interaction === "attack") {

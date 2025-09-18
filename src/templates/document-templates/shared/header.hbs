@@ -1,5 +1,5 @@
 <div class="ab-header {{#if (eq item.type "equipment")}}{{#if system.shattered}}shattered{{/if}}{{/if}}">
-  <div class="ab-profile-img timage" data-src="{{img}}">
+  <div class="ab-profile-img {{#if (not editable)}}timage{{/if}}" data-src="{{img}}">
     <img
       class="profile-img"
       src="{{img}}"
@@ -11,11 +11,13 @@
   </div>
   <div class="ab-title affix">
     <label>
-      <div class="ab-title-text tfont-{{system.font}} unselected">
-        {{system.nameString}}
-      </div>
+      {{#if (not (eq name system.nameString))}}
+        <span class="ab-title-text tfont-{{system.font}} unselected">
+          {{system.nameString}}
+        </span>
+      {{/if}}
       <input
-        class="tfont-{{system.font}} selected"
+        class="tfont-{{system.font}} {{#if (not (eq name system.nameString))}}selected{{/if}}"
         type="text"
         name="name"
         value="{{name}}"

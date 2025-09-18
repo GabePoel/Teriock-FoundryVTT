@@ -1,65 +1,25 @@
 <div class="ab-bar">
-  <div class="ab-box-container">
-    <div class="ab-box {{#if editable}}power-level-box{{/if}}" data-tooltip="Power Level">
-      <div
-        class="ab-box-icon"
-        style="color: {{lookup
-          (lookup TERIOCK.options.equipment.powerLevel system.powerLevel)
-          'color'
-        }};"
-      >
-        <i
-          class="fa-fw fa-light fa-{{lookup
-            (lookup TERIOCK.options.equipment.powerLevel system.powerLevel)
-            'icon'
-          }}"
-        ></i>
-      </div>
-      <div class="ab-box-content">
-        {{{lookup
-          (lookup TERIOCK.options.equipment.powerLevel system.powerLevel)
-          "name"
-        }}}
-      </div>
-    </div>
-  </div>
-  <div class="ab-box-container">
-    <div class="ab-box {{#if editable}}equipment-type-box{{/if}}" data-tooltip="Equipment Type">
-      <div class="ab-box-icon">
-        <i class="fa-fw fa-light fa-staff"></i>
-      </div>
-      <div class="ab-box-content">
-        {{formInput
-          systemFields.equipmentType
-          value=system.equipmentType
-          disabled=(not editable)
-          classes="ability-bar-input equipment-type-input"
-        }}
-      </div>
-    </div>
-  </div>
-  {{#if (or system.canEquip system.canUnequip)}}
-    <div class="ab-box-container">
-      <div
-        class="ab-box {{#if editable}}equipped-box{{/if}}"
-        data-action="toggleEquipped"
-        data-tooltip="Equipped?"
-      >
-        <div class="ab-box-icon">
-          {{#if system.equipped}}
-            <i class="fa-fw fa-light fa-check"></i>
-          {{else}}
-            <i class="fa-fw fa-light fa-xmark"></i>
-          {{/if}}
-        </div>
-        <div class="ab-box-content">
-          {{#if system.equipped}}
-            Equipped
-          {{else}}
-            Unequipped
-          {{/if}}
-        </div>
-      </div>
-    </div>
+  {{formBox
+    (path TERIOCK.options.equipment.powerLevel system.powerLevel "name")
+    icon=(path TERIOCK.options.equipment.powerLevel system.powerLevel "icon")
+    iconColor=(path TERIOCK.options.equipment.powerLevel system.powerLevel "color")
+    tooltip="Power Level"
+  }}
+  {{formBox
+    (formInput
+      systemFields.equipmentType
+      value=system.equipmentType
+      disabled=(not editable)
+    )
+    tooltip="Equipment Type"
+    icon="staff"
+  }}
+  {{#if document.actor}}
+    {{formBox
+      (ifThen system.equipped "Equipped" "Unequipped")
+      icon=(ifThen system.equipped "check" "xmark")
+      tooltip="Equipped?"
+      action=(ifThen editable "toggleEquipped")
+    }}
   {{/if}}
 </div>

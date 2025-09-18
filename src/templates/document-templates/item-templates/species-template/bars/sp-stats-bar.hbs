@@ -1,26 +1,14 @@
 <div class="ab-bar">
-  <div class="ab-box-container">
-    <div class="ab-box" data-tooltip="Hit Dice">
-      <div class="ab-box-icon">
-        <i class="fa-fw fa-light fa-{{firstDie system.hpDiceFormula}}"></i>
-      </div>
-      <div class="ab-box-content">
-        <div class="ability-bar-input" data-action="setHpDice">
-          {{system.hpDiceFormula}} Hit Di{{#if (gt system.hpDiceNumber 1)}}c{{/if}}e ({{system.totalHp}} HP)
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="ab-box-container">
-    <div class="ab-box" data-tooltip="Mana Dice" data-action="setMpDice">
-      <div class="ab-box-icon">
-        <i class="fa-fw fa-light fa-{{firstDie system.mpDiceFormula}}"></i>
-      </div>
-      <div class="ab-box-content">
-        <div class="ability-bar-input">
-          {{system.mpDiceFormula}} Mana Di{{#if (gt system.mpDiceNumber 1)}}c{{/if}}e ({{system.totalMp}} MP)
-        </div>
-      </div>
-    </div>
-  </div>
+  {{formBox
+    (concat system.hpDiceFormula " Hit Di" (ifThen (gt system.hpDiceNumber 1) "c" "") "e (" system.totalHp " HP)")
+    action="setHpDice"
+    icon=(firstDie system.hpDiceFormula)
+    tooltip="Hit Dice"
+  }}
+  {{formBox
+    (concat system.mpDiceFormula " Mana Di" (ifThen (gt system.mpDiceNumber 1) "c" "") "e (" system.totalMp " MP)")
+    action="setMpDice"
+    icon=(firstDie system.mpDiceFormula)
+    tooltip="Mana Dice"
+  }}
 </div>
