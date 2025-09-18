@@ -204,39 +204,9 @@ export default (Base) => {
       if (this[`${stat}Dice`].number === number && this[`${stat}Dice`].faces === faces) {
         return;
       }
-      const currentQuantity = Object.keys(this[`${stat}Dice`]).length;
-      const keys = Object.keys(this[`${stat}Dice`]);
       const updateData = {};
-      for (let i = 0; i < Math.max(number, currentQuantity); i++) {
-        if (i < currentQuantity && i < number) {
-          updateData[`system.${stat}Dice.${keys[i]}.faces`] = faces;
-          updateData[`system.${stat}Dice.${keys[i]}.value`] = Math.ceil((faces + 1) / 2);
-        } else if (i < currentQuantity && i >= number) {
-          updateData[`system.${stat}Dice.-=${keys[i]}`] = null;
-        } else if (i >= currentQuantity && i < number) {
-          const id = foundry.utils.randomID();
-          updateData[`system.${stat}Dice.${id}`] = {
-            _id: id,
-            stat: stat,
-            faces: faces,
-            spent: false,
-            value: Math.ceil((faces + 1) / 2),
-          };
-        }
-      }
+      this._setDice(updateData, stat, number, faces);
       await this.parent.update(updateData);
     }
-
-    // /**
-    //  * Set the stat dice from a formula.
-    //  * @param {Teriock.Parameters.Shared.DieStat} stat
-    //  * @param {string} formula
-    //  */
-    // _setDiceFormula(stat, formula) {
-    //   const roll = new TeriockRoll(formula);
-    //   if (roll.dice.length === 0) return;
-    //   const die = roll.dice[0];
-    //   this._setDice(stat, die.number, die.faces);
-    // }
   });
 };

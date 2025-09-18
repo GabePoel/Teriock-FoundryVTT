@@ -1,10 +1,11 @@
+import { toTitleCase } from "../../helpers/string.mjs";
 import { TeriockDialog } from "../api/_module.mjs";
 
 const { fields } = foundry.data;
 
 /**
  * Dialog that sets {@link StatDieModel} values.
- * @param {TeriockItem & {system: StatDataMixin}} statItem
+ * @param {TeriockSpecies} statItem
  * @param {Teriock.Parameters.Shared.DieStat} stat
  * @param {number} initialNumber
  * @param {Teriock.RollOptions.PolyhedralDieFaces} initialFaces
@@ -27,7 +28,7 @@ export default async function setStatDiceDialog(statItem, stat, initialNumber, i
   content.append(numberField.toFormGroup({}, { name: "number" }));
   content.append(facesField.toFormGroup({}, { name: "faces" }));
   await TeriockDialog.prompt({
-    window: { title: `Set ${TERIOCK.options.die.stats[stat]} Dice` },
+    window: { title: `Set ${toTitleCase(TERIOCK.options.die.stats[stat])} Dice` },
     modal: true,
     content: content,
     ok: {
@@ -35,10 +36,13 @@ export default async function setStatDiceDialog(statItem, stat, initialNumber, i
       callback: async (_event, button) => {
         const number = Math.max(Math.floor(Number(button.form.elements.namedItem("number").value)), 1);
         const faces = Number(button.form.elements.namedItem("faces").value);
-        // await statItem.update({
-        //   [`system.${stat}DiceBase.number`]: number,
-        //   [`system.${stat}DiceBase.faces`]: faces,
-        // });
+        await statItem.update({
+          [`system.${stat}DiceBase.number`]: Math.max(
+            1,
+            number - (statItem.system.size.value - (statItem.system.size.min || 0)),
+          ),
+          [`system.${stat}DiceBase.faces`]: faces,
+        });
         await statItem.system.setDice(stat, number, faces);
       },
     },
