@@ -1,5 +1,5 @@
 import { _prepareDerivedAttributes } from "./_prep-derived-attributes.mjs";
-import { _prepareDefenses, _prepareOffenses } from "./_prep-derived-combat.mjs";
+import { _prepareDefenses } from "./_prep-derived-combat.mjs";
 import { _prepareDerivedHpMp } from "./_prep-derived-hp-mp.mjs";
 import { _prepareEncumbrance, _prepareMoney, _prepareWeightCarried } from "./_prep-derived-load.mjs";
 import { _prepareSpecies } from "./_prep-derived-species.mjs";
@@ -31,7 +31,6 @@ export function _prepareDerivedData(actorData) {
   _prepareMoney(actorData);
   _prepareWeightCarried(actorData);
   _prepareDefenses(actorData);
-  _prepareOffenses(actorData);
   _prepareEncumbrance(actorData);
   _prepareSpeed(actorData);
   _prepareDerivedHpMp(actorData);

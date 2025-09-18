@@ -41,5 +41,8 @@ export function _migrateData(data) {
   if (typeof data.minStr === "number") {
     data.minStr = { saved: data.minStr };
   }
+  if (foundry.utils.hasProperty(data, "sb")) {
+    data.fightingStyle = data.sb;
+  }
   return data;
 }

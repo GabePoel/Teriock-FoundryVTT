@@ -55,8 +55,8 @@ export async function _buildButtons(rollConfig) {
         action: "standard-damage",
       },
     };
-    if (rollConfig.useData.actor.system.wielding.attacker.derived) {
-      buttonData.dataset.attacker = rollConfig.useData.actor.system.wielding.attacker.derived.uuid;
+    if (rollConfig.useData.actor.system.primaryAttacker) {
+      buttonData.dataset.attacker = rollConfig.useData.actor.system.primaryAttacker.uuid;
     }
     buttons.push(buttonData);
   }

@@ -343,13 +343,13 @@ function defenseData(actorData, data) {
  * @param {object} data - The roll data object to populate.
  */
 function offenseData(actorData, data) {
-  const weaponAv0 = actorData?.wielding.attacker.derived?.system.derivedAv0;
+  const weaponAv0 = actorData.primaryAttacker?.system.derivedAv0;
   const naturalAv0 = actorData.piercing === "av0" || actorData.piercing === "ub";
   const hasAv0 = weaponAv0 || naturalAv0;
-  const weaponUb = actorData?.wielding.attacker.derived?.system.derivedUb;
+  const weaponUb = actorData.primaryAttacker?.system.derivedUb;
   const naturalUb = actorData.piercing === "ub";
   const hasUb = weaponUb || naturalUb;
-  const weaponWarded = actorData?.wielding.attacker.derived?.system.derivedWarded;
+  const weaponWarded = actorData.primaryAttacker?.system.derivedWarded;
   Object.assign(data, {
     sb: actorData.sb ? 1 : 0,
     av0: hasAv0 ? 2 : 0,
@@ -451,13 +451,13 @@ function moneyData(actorData, data) {
  */
 function equipmentData(actorData, data) {
   // Primary attack weapon
-  const primaryAttacker = actorData.wielding.attacker.derived;
+  const primaryAttacker = actorData.primaryAttacker;
   if (primaryAttacker) {
     addEquipmentData(data, "atk", primaryAttacker);
   }
 
   // Primary block weapon
-  const primaryBlocker = actorData.wielding.blocker.derived;
+  const primaryBlocker = actorData.primaryBlocker;
   if (primaryBlocker) {
     addEquipmentData(data, "blk", primaryBlocker);
   }

@@ -9,7 +9,7 @@ export function _prepareDerivedData(equipmentData) {
   if (equipmentData.consumable && equipmentData.quantity === 0) {
     equipmentData.equipped = false;
   }
-  if (equipmentData.sb && equipmentData.sb.length > 0) {
-    equipmentData.specialRules = TERIOCK.content.weaponFightingStyles[equipmentData.sb];
+  if (equipmentData.fightingStyle && equipmentData.fightingStyle.length > 0) {
+    equipmentData.specialRules = TERIOCK.content.weaponFightingStyles[equipmentData.fightingStyle];
   }
 }

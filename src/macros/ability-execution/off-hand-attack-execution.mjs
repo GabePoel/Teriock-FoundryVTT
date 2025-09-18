@@ -5,15 +5,15 @@ const equipment = actor.equipment.filter((e) => e.system.equipped
   && e.system.damage
   && e.system.damage
   !== "0"
-  && actor.system.wielding.attacker.raw
+  && actor.system.primaryAttacker
   !== e.id);
 const selectedEquipment = await tm.dialogs.selectDocumentDialog(equipment, {
   title: "Select Equipment",
   hint: "Select equipment to attack with.",
 });
-const oldEquipmentId = actor.system.wielding.attacker.raw;
+const oldEquipmentId = actor.system.primaryAttacker.id;
 await actor.update({
-  "system.wielding.attacker.raw": selectedEquipment.id,
+  "system.wielding.attacker": selectedEquipment.id,
 });
 const abilities = actor.abilities
   .filter((a) => a.system.interaction
@@ -33,5 +33,5 @@ const ability = await tm.dialogs.selectDocumentDialog(abilities, {
 });
 await ability.system.roll(options);
 await actor.update({
-  "system.wielding.attacker.raw": oldEquipmentId,
+  "system.wielding.attacker": oldEquipmentId,
 });

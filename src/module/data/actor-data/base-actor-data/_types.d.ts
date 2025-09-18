@@ -269,20 +269,10 @@ export interface TeriockBaseActorData {
   weightCarried: number;
   /** <schema> Wielding */
   wielding: {
-    /** <schema> Primary attacker */
-    attacker: {
-      /** <derived> Derived primary attacker item */
-      derived: TeriockEquipment | null;
-      /** <schema> ID for primary attacker */
-      raw: Teriock.ID<TeriockEquipment> | null;
-    };
-    /** <schema> Primary blocker */
-    blocker: {
-      /** <derived> Derived primary attacker item */
-      derived: TeriockEquipment | null;
-      /** <schema> ID for primary attacker */
-      raw: Teriock.ID<TeriockEquipment> | null;
-    };
+    /** <schema> Primary attacker ID */
+    attacker: Teriock.ID<TeriockEquipment> | null
+    /** <schema> Primary blocker ID */
+    blocker: Teriock.ID<TeriockEquipment> | null
   };
   /** <schema> Wither */
   wither: BarData;

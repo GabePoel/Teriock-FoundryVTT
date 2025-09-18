@@ -67,7 +67,7 @@ export function _prepareMoney(actorData) {
 export function _prepareWeightCarried(actorData) {
   const actor = actorData.parent;
   const weight = actor.itemTypes.equipment.reduce((sum, i) => {
-    let newWeight = i.system.weight || 0;
+    let newWeight = i.system.weight.value || 0;
     if (i.system.consumable) {
       newWeight = newWeight * i.system.quantity;
     }

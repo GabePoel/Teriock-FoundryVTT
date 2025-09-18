@@ -23,6 +23,8 @@ declare module "./equipment-data.mjs" {
     equipmentType: string;
     /** <schema> Is the equipment equipped? */
     equipped: boolean;
+    /** <schema> Style Bonus (Weapon Fighting Style) */
+    fightingStyle: Teriock.Parameters.Equipment.WeaponFightingStyle;
     /** <schema> Flaws */
     flaws: string;
     /** <schema> Is the equipment glued? */
@@ -45,8 +47,6 @@ declare module "./equipment-data.mjs" {
     ranged: boolean;
     /** <schema> Identification Reference Equipment UUID */
     reference: Teriock.UUID<TeriockEquipment>;
-    /** <schema> Style Bonus (Weapon Fighting Style) */
-    sb: Teriock.Parameters.Equipment.WeaponFightingStyle;
     /** <schema> Is the equipment shattered? */
     shattered: boolean;
     /** <schema> Short Range (ft) (if ranged) */

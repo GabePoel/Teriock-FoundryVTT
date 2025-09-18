@@ -71,7 +71,7 @@ export function _defineSchema() {
       min: -3,
       initial: -3,
     }),
-    sb: new fields.StringField({
+    fightingStyle: new fields.StringField({
       initial: null,
       label: "Style Bonus",
       nullable: true,

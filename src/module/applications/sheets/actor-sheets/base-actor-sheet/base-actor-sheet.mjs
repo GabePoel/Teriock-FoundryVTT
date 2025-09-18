@@ -2,13 +2,11 @@ import { documentOptions } from "../../../../constants/options/document-options.
 import { tradecraftMessage } from "../../../../helpers/html.mjs";
 import { buildMessage } from "../../../../helpers/messages-builder/message-builder.mjs";
 import { docSort } from "../../../../helpers/utils.mjs";
-import { changeSizeDialog } from "../../../dialogs/_module.mjs";
+import { changeSizeDialog, selectDocumentDialog } from "../../../dialogs/_module.mjs";
 import { HackStatMixin } from "../../../shared/mixins/_module.mjs";
 import { CommonSheetMixin } from "../../mixins/_module.mjs";
 import _embeddedFromCard from "../../mixins/common-sheet-mixin/methods/_embedded-from-card.mjs";
-import {
-  piercingContextMenu, primaryAttackContextMenu, primaryBlockerContextMenu,
-} from "./connections/character-context-menus.mjs";
+import { piercingContextMenu } from "./connections/character-context-menus.mjs";
 import { _addEmbedded, _addEquipment, _addRank } from "./methods/_add-embedded.mjs";
 import { _filterAbilities, _filterEquipment } from "./methods/_filters.mjs";
 import { _initSearchFilters } from "./methods/_search.mjs";
@@ -56,6 +54,8 @@ export default class TeriockBaseActorSheet extends HackStatMixin(CommonSheetMixi
       rollResistance: this._rollResistance,
       rollStatDie: this._rollStatDie,
       rollTradecraft: this._rollTradecraft,
+      selectAttacker: this._selectAttacker,
+      selectBlocker: this._selectBlocker,
       takeDamage: this._takeDamage,
       takeDrain: this._takeDrain,
       takeHack: this._takeHack,
@@ -109,10 +109,6 @@ export default class TeriockBaseActorSheet extends HackStatMixin(CommonSheetMixi
     this._hpDrawerOpen = true;
     this._mpDrawerOpen = true;
     this._locked = false;
-    this._dynamicContextMenus = {
-      attacker: [],
-      blocker: [],
-    };
     this._embeds = {
       effectTypes: {},
       itemTypes: {},
@@ -291,7 +287,7 @@ export default class TeriockBaseActorSheet extends HackStatMixin(CommonSheetMixi
    */
   static async _openPrimaryAttacker(event) {
     event.stopPropagation();
-    await this.document.system.wielding.attacker.derived?.sheet.render(true);
+    await this.document.system.primaryAttacker?.sheet.render(true);
   }
 
   /**
@@ -302,7 +298,7 @@ export default class TeriockBaseActorSheet extends HackStatMixin(CommonSheetMixi
    */
   static async _openPrimaryBlocker(event) {
     event.stopPropagation();
-    await this.document.system.wielding.blocker.derived?.sheet.render(true);
+    await this.document.system.primaryBlocker?.sheet.render(true);
   }
 
   /**
@@ -413,6 +409,40 @@ export default class TeriockBaseActorSheet extends HackStatMixin(CommonSheetMixi
       options.disadvantage = true;
     }
     await this.actor.rollTradecraft(tradecraft, options);
+  }
+
+  /**
+   * Select a primary attacker.
+   * @returns {Promise<void>}
+   * @private
+   */
+  static async _selectAttacker() {
+    const attacker = await selectDocumentDialog(this.document.equipment.filter((e) => e.system.isEquipped), {
+      hint: "Select the default equipment you attack with.",
+      label: "Select Primary Attacker",
+    });
+    if (attacker) {
+      await this.document.update({
+        "system.wielding.attacker": attacker.id,
+      });
+    }
+  }
+
+  /**
+   * Select a primary blocker.
+   * @returns {Promise<void>}
+   * @private
+   */
+  static async _selectBlocker() {
+    const attacker = await selectDocumentDialog(this.document.equipment.filter((e) => e.system.isEquipped), {
+      hint: "Select the default equipment you block with.",
+      label: "Select Primary Blocker",
+    });
+    if (attacker) {
+      await this.document.update({
+        "system.wielding.blocker": attacker.id,
+      });
+    }
   }
 
   /**
@@ -799,11 +829,6 @@ export default class TeriockBaseActorSheet extends HackStatMixin(CommonSheetMixi
         e.stopPropagation();
       });
 
-    primaryBlockerContextMenu(this.actor, this._dynamicContextMenus.blocker);
-    primaryAttackContextMenu(this.actor, this._dynamicContextMenus.attacker);
-
-    this._connectContextMenu(".character-primary-blocker-select", this._dynamicContextMenus.blocker, "click");
-    this._connectContextMenu(".character-primary-attacker-select", this._dynamicContextMenus.attacker, "click");
     this._connectContextMenu(".character-piercing-box", piercingContextMenu(this.actor), "click");
 
     _initSearchFilters(this);
@@ -930,8 +955,7 @@ export default class TeriockBaseActorSheet extends HackStatMixin(CommonSheetMixi
     };
     context.searchStrings = foundry.utils.deepClone(this._searchStrings);
     context.enrichedNotes = await this._enrich(this.document.system.sheet.notes);
-    context.enrichedSpecialRules
-      = await this._enrich(this.document.system.wielding.attacker.derived?.system?.specialRules);
+    context.enrichedSpecialRules = await this._enrich(this.document.system.primaryAttacker?.system?.specialRules);
     context.settings = this.settings;
 
     context.conditionProviders = {};

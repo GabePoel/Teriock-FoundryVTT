@@ -3,7 +3,10 @@ import { isOwnerAndCurrentUser } from "../utils.mjs";
 export default function registerDocumentManagementHooks() {
   foundry.helpers.Hooks.on("updateItem", async (document, updateData, _options, userId) => {
     if (isOwnerAndCurrentUser(document, userId)) {
-      if (document.type === "equipment" && document.system.isAttuned && updateData.system.tier) {
+      if (document.type === "equipment" && document.system.isAttuned && foundry.utils.hasProperty(
+        updateData,
+        "system.tier",
+      )) {
         const attunement = document.system.attunement;
         if (attunement) {
           await attunement.update({

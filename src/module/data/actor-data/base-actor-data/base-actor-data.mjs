@@ -54,6 +54,34 @@ export default class TeriockBaseActorModel extends CommonTypeModel {
   }
 
   /**
+   * Primary attacking item.
+   * @returns {TeriockEquipment|null}
+   */
+  get primaryAttacker() {
+    if (this.wielding.attacker) {
+      const item = /** @type {TeriockEquipment} */ this.parent.items.get(this.wielding.attacker);
+      if (item?.system.isEquipped) {
+        return item;
+      }
+    }
+    return null;
+  }
+
+  /**
+   * Primary blocking item.
+   * @returns {TeriockEquipment|null}
+   */
+  get primaryBlocker() {
+    if (this.wielding.blocker) {
+      const item = /** @type {TeriockEquipment} */ this.parent.items.get(this.wielding.blocker);
+      if (item?.system.isEquipped) {
+        return item;
+      }
+    }
+    return null;
+  }
+
+  /**
    * Pull from the Death Bag.
    * @returns {Promise<void>}
    */

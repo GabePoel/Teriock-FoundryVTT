@@ -292,6 +292,7 @@ export default class TeriockEquipmentModel extends ConsumableDataMixin(WikiDataM
     deriveModifiableDeterministic(this.tier, this.actor, {
       floor: true,
       min: 0,
+      blank: 0,
     });
     deriving._prepareDerivedData(this);
   }

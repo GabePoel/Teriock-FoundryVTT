@@ -62,18 +62,7 @@ export function prepareModifiableBase(field) {
  */
 export function deriveModifiableNumber(field, options = {}) {
   let rawValue = foundry.utils.deepClone(field.raw);
-  if (options.floor) {
-    rawValue = Math.floor(rawValue);
-  }
-  if (options.ceil) {
-    rawValue = Math.ceil(rawValue);
-  }
-  if (typeof options.max === "number") {
-    rawValue = Math.min(rawValue, options.max);
-  }
-  if (typeof options.min === "number") {
-    rawValue = Math.max(rawValue, options.min);
-  }
+  rawValue = clamp(rawValue, options);
   field.value = rawValue;
 }
 
@@ -90,23 +79,12 @@ export function deriveModifiableNumber(field, options = {}) {
  */
 export function deriveModifiableDeterministic(field, doc, options = {}) {
   let rawValue;
-  if (options.blank && !field.raw) {
+  if (typeof options.blank === "number" && !field.raw) {
     rawValue = options.blank;
   } else {
     rawValue = evaluateSync(field.raw, doc?.actor?.getRollData());
   }
-  if (options.floor) {
-    rawValue = options.floor;
-  }
-  if (options.ceil) {
-    rawValue = options.ceil;
-  }
-  if (typeof options.max === "number") {
-    rawValue = Math.min(rawValue, options.max);
-  }
-  if (typeof options.min === "number") {
-    rawValue = Math.max(rawValue, options.min);
-  }
+  rawValue = clamp(rawValue, options);
   field.value = rawValue;
 }
 
@@ -116,4 +94,30 @@ export function deriveModifiableDeterministic(field, doc, options = {}) {
  */
 export function deriveModifiableIndeterministic(field) {
   field.value = foundry.utils.deepClone(field.raw);
+}
+
+/**
+ *
+ * @param value
+ * @param options
+ * @param {object} options
+ * @param {boolean} options.[floor]
+ * @param {boolean} options.[ceil]
+ * @param {number} options.[min]
+ * @param {number} options.[max]
+ */
+function clamp(value, options) {
+  if (options.floor) {
+    value = Math.floor(value);
+  }
+  if (options.ceil) {
+    value = Math.ceil(value);
+  }
+  if (typeof options.max === "number") {
+    value = Math.min(value, options.max);
+  }
+  if (typeof options.min === "number") {
+    value = Math.max(value, options.min);
+  }
+  return value;
 }

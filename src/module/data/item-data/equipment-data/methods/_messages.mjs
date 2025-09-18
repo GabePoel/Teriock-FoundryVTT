@@ -82,9 +82,9 @@ export function _messageParts(equipmentData) {
       text: src.flaws,
     },
   ];
-  if (equipmentData.sb && equipmentData.sb.length > 0) {
+  if (equipmentData.fightingStyle && equipmentData.fightingStyle.length > 0) {
     blocks.push({
-      title: TERIOCK.index.weaponFightingStyles[equipmentData.sb] + " Fighting Style",
+      title: TERIOCK.index.weaponFightingStyles[equipmentData.fightingStyle] + " Fighting Style",
       text: equipmentData.specialRules,
     });
   }

@@ -69,7 +69,7 @@ export async function _parse(equipmentData, rawHTML) {
   }
 
   // Parse sb, av, bv
-  parameters.sb = toCamelCase(getValue(".sb") || "") ?? parameters.sb;
+  parameters.fightingStyle = toCamelCase(getValue(".sb") || "") ?? parameters.fightingStyle;
   parameters.av = cleanValue(getValue(".av")) || 0;
   parameters.bv = cleanValue(getValue(".bv")) || 0;
 

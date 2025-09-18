@@ -1,5 +1,3 @@
-import TeriockItem from "../../../../../documents/item.mjs";
-
 const { fields } = foundry.data;
 
 /**
@@ -60,14 +58,8 @@ export function _defineCombat(schema) {
     },
   });
   schema.wielding = new fields.SchemaField({
-    attacker: new fields.SchemaField({
-      raw: new fields.DocumentIdField({ nullable: true }),
-      derived: new fields.EmbeddedDataField(TeriockItem, { nullable: true }),
-    }),
-    blocker: new fields.SchemaField({
-      raw: new fields.DocumentIdField({ nullable: true }),
-      derived: new fields.EmbeddedDataField(TeriockItem, { nullable: true }),
-    }),
+    attacker: new fields.DocumentIdField({ nullable: true }),
+    blocker: new fields.DocumentIdField({ nullable: true }),
   });
   return schema;
 }

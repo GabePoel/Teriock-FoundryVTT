@@ -17,7 +17,7 @@ export class StandardDamageHandler extends ActionHandler {
    * @private
    */
   async _makeRoll(actor, formula, options = { crit: false }) {
-    let attacker = actor.system.wielding.attacker.derived;
+    let attacker = actor.system.primaryAttacker;
     if (this.dataset.attacker) {
       attacker = await foundry.utils.fromUuid(pureUuid(this.dataset.attacker));
     }
@@ -38,7 +38,7 @@ export class StandardDamageHandler extends ActionHandler {
    * @private
    */
   async _prepFormula(actor) {
-    let attacker = actor.system.wielding.attacker.derived;
+    let attacker = actor.system.primaryAttacker;
     if (this.dataset.attacker) {
       attacker = await foundry.utils.fromUuid(pureUuid(this.dataset.attacker));
     }
@@ -52,7 +52,7 @@ export class StandardDamageHandler extends ActionHandler {
   /** @inheritDoc */
   async primaryAction() {
     for (const actor of this.selectedActors) {
-      if (!(actor.system.wielding.attacker.derived || this.dataset.attacker)) {
+      if (!(actor.system.primaryAttacker || this.dataset.attacker)) {
         ui.notifications.error(`${actor.name} doesn't have a default attack weapon.`);
         continue;
       }
@@ -67,7 +67,7 @@ export class StandardDamageHandler extends ActionHandler {
   /** @inheritDoc */
   async secondaryAction() {
     for (const actor of this.selectedActors) {
-      if (!(actor.system.wielding.attacker.derived || this.dataset.attacker)) {
+      if (!(actor.system.primaryAttacker || this.dataset.attacker)) {
         ui.notifications.error(`${actor.name} doesn't have a default attack weapon.`);
         continue;
       }
