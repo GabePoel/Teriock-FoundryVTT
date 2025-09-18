@@ -7,14 +7,6 @@
  * @param {TeriockBaseActorModel} actorData - The actor's base data system object
  * @param {Teriock.Parameters.Actor.HackableBodyPart} part - The body part to hack
  * @returns {Promise<void>} Resolves when the hack is applied and effects are updated
- *
- * @example
- * // Hack an actor's arm
- * await _takeHack(actor.system, "arm");
- *
- * @example
- * // Hack an actor's leg (will apply slowed status)
- * await _takeHack(actor.system, "leg");
  */
 export async function _takeHack(actorData, part) {
   let statusName = part + "Hack";
@@ -46,14 +38,6 @@ export async function _takeHack(actorData, part) {
  * @param {TeriockBaseActorModel} actorData - The actor's base data system object
  * @param {Teriock.Parameters.Actor.HackableBodyPart} part - The body part to unhack
  * @returns {Promise<void>} Resolves when the unhack is applied and effects are updated
- *
- * @example
- * // Reduce an actor's arm hack
- * await _takeUnhack(actor.system, "arm");
- *
- * @example
- * // Reduce an actor's leg hack (may remove slowed status)
- * await _takeUnhack(actor.system, "leg");
  */
 export async function _takeUnhack(actorData, part) {
   let statusName = part + "Hack";

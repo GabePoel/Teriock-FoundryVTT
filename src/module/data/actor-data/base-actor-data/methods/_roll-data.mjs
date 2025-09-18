@@ -450,16 +450,11 @@ function moneyData(actorData, data) {
  * @param {object} data - The roll data object to populate.
  */
 function equipmentData(actorData, data) {
-  // Primary attack weapon
-  const primaryAttacker = actorData.primaryAttacker;
-  if (primaryAttacker) {
-    addEquipmentData(data, "atk", primaryAttacker);
+  if (actorData.primaryAttacker) {
+    addEquipmentData(data, "atk", actorData.primaryAttacker);
   }
-
-  // Primary block weapon
-  const primaryBlocker = actorData.primaryBlocker;
-  if (primaryBlocker) {
-    addEquipmentData(data, "blk", primaryBlocker);
+  if (actorData.primaryBlocker) {
+    addEquipmentData(data, "blk", actorData.primaryBlocker);
   }
 }
 

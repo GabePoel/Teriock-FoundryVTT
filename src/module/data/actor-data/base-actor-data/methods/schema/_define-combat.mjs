@@ -10,13 +10,6 @@ const { fields } = foundry.data;
  * - [AV0](https://wiki.teriock.com/index.php/Keyword:AV0)
  * - [UB](https://wiki.teriock.com/index.php/Keyword:UB)
  *
- * @example
- * ```js
- * const schema = {};
- * const combatSchema = _defineCombat(schema);
- * // combatSchema now contains: wornAc, naturalAv, attackPenalty, sb, and piercing fields
- * ```
- *
  * @param {object} schema - The schema object to extend with combat fields
  * @returns {object} The modified schema object with combat fields added
  */

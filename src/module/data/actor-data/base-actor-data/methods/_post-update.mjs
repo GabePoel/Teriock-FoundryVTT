@@ -63,15 +63,8 @@ async function checkDown(actorData) {
 
 /**
  * Checks and processes expiration for all effects on the actor.
- *
  * @param {TeriockBaseActorModel} actorData - The actor's base data system object
  * @returns {Promise<void>} Resolves when all expiration checks are complete
- *
- * @example
- * ```js
- * // Check for expired effects on an actor
- * await checkExpirations(actor.system);
- * ```
  */
 async function checkExpirations(actorData) {
   const actor = actorData.parent;

@@ -6,13 +6,6 @@ const { fields } = foundry.data;
  * Relevant wiki pages:
  * - [Damage](https://wiki.teriock.com/index.php/Core:Damage)
  *
- * @example
- * ```js
- * const schema = {};
- * const damageSchema = _defineDamage(schema);
- * // damageSchema now contains: damage field with various damage types
- * ```
- *
  * @param {object} schema - The schema object to extend with damage fields
  * @returns {object} The modified schema object with damage fields added
  */

@@ -27,13 +27,6 @@ function speedField(initial, name) {
  * Relevant wiki pages:
  * - [Movement Speed](https://wiki.teriock.com/index.php/Core:Movement_Speed)
  *
- * @example
- * ```js
- * const schema = {};
- * const speedSchema = _defineSpeed(schema);
- * // speedSchema now contains: speedAdjustments field
- * ```
- *
  * @param {object} schema - The schema object to extend with speed adjustment fields
  * @returns {object} The modified schema object with speed adjustment fields added
  */

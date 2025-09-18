@@ -29,13 +29,6 @@ function tradecraftField() {
  * - [Talented](https://wiki.teriock.com/index.php/Keyword:Talented)
  * - [Expertise](https://wiki.teriock.com/index.php/Keyword:Expertise)
  *
- * @example
- * ```js
- * const schema = {};
- * const tradecraftsSchema = _defineTradecrafts(schema);
- * // tradecraftsSchema now contains: `tradecrafts` field with all available tradecrafts
- * ```
- *
  * @param {object} schema - The schema object to extend with tradecraft fields
  * @returns {object} The modified schema object with tradecraft fields added
  */

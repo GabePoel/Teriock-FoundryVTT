@@ -2,7 +2,6 @@ const { fields } = foundry.data;
 
 /**
  * Creates a currency field definition for tracking different types of money.
- *
  * @param {string} label - The display label for this currency type
  * @param {boolean} [integer] - If value must be an integer.
  * @returns {NumberField} A number field for tracking currency amounts
@@ -18,14 +17,6 @@ function currencyField(label, integer = true) {
 
 /**
  * Defines the money schema fields for actor data including various currency types and weight tracking.
- *
- * @example
- * ```js
- * const schema = {};
- * const moneySchema = _defineMoney(schema);
- * // moneySchema now contains: money and moneyWeight fields
- * ```
- *
  * @param {object} schema - The schema object to extend with money fields
  * @returns {object} The modified schema object with money fields added
  */

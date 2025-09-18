@@ -80,13 +80,6 @@ function protectionField(name) {
  * - [Resistance](https://wiki.teriock.com/index.php/Keyword:Resistance)
  * - [Immunity](https://wiki.teriock.com/index.php/Keyword:Immunity)
  *
- * @example
- * ```js
- * const schema = {};
- * const protectionsSchema = _defineProtections(schema);
- * // protectionsSchema now contains: resistances and immunities fields
- * ```
- *
  * @param {object} schema - The schema object to extend with resistances and immunities fields
  * @returns {object} The modified schema object with resistances and immunities fields added
  */

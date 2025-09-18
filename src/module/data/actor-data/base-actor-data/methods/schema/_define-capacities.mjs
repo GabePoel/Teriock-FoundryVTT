@@ -8,13 +8,6 @@ const { fields } = foundry.data;
  * - [Carrying Capacity](https://wiki.teriock.com/index.php/Core:Carrying_Capacity)
  * - [Weight](https://wiki.teriock.com/index.php/Core:Weight)
  *
- * @example
- * ```js
- * const schema = {};
- * const capacitiesSchema = _defineCapacities(schema);
- * // capacitiesSchema now contains: movementSpeed, carryingCapacity, and weight fields
- * ```
- *
  * @param {object} schema - The schema object to extend with capacity fields
  * @returns {object} The modified schema object with capacity fields added
  */
