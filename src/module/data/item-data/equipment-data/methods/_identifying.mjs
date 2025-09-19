@@ -23,9 +23,12 @@ export async function _readMagic(equipmentData) {
     ui.notifications.info(`Asking GMs to approve reading magic on ${equipmentData.parent.name}.`);
     const content = await ux.TextEditor.enrichHTML(`<p>Should ${game.user.name} read magic on @UUID[${referenceUuid}]{${referenceName}}?</p>`);
     const doReadMagic = await api.DialogV2.query(activeGm, "confirm", {
-      title: "Read Magic",
       content: content,
       modal: false,
+      window: {
+        icon: "fa-solid fa-magnifying-glass",
+        title: "Read Magic",
+      },
     });
     if (doReadMagic) {
       if (ref) {
@@ -60,9 +63,12 @@ export async function _identify(equipmentData) {
     ui.notifications.info(`Asking GMs to approve identification of ${equipmentData.parent.name}.`);
     const content = await ux.TextEditor.enrichHTML(`<p>Should ${game.user.name} identify @UUID[${referenceUuid}]{${referenceName}}?</p>`);
     const doIdentify = await api.DialogV2.query(activeGm, "confirm", {
-      title: "Identify Item",
       content: content,
       modal: false,
+      window: {
+        icon: "fa-solid fa-magnifying-glass",
+        title: "Identify Item",
+      },
     });
     if (doIdentify) {
       const knownEffectNames = equipmentData.parent.transferredEffects.map((e) => e.name);
