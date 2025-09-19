@@ -95,16 +95,16 @@
         }}
         {{
         formGroup
-          systemFields.gifted.fields.enabled
-          value=system.gifted.enabled
+          systemFields.adept.fields.enabled
+          value=system.adept.enabled
           disabled=(not editable)
           classes="tgrid-item"
           rootId=uuid
         }}
         {{
         formGroup
-          systemFields.warded
-          value=system.warded
+          systemFields.gifted.fields.enabled
+          value=system.gifted.enabled
           disabled=(not editable)
           classes="tgrid-item"
           rootId=uuid
@@ -122,60 +122,44 @@
     <div class="ab-menu-bar">
       <div class="tgrid ab-select-grid">
         <div class="tgrid-item">
-          <div class="ab-multi-select-label ab-multi-select-power">
-            <multi-select
-              name="system.powerSources"
-              data-edit="system.powerSources"
-              {{#if (not editable)}}
-              disabled="disabled"
-              {{/if}}
-            >
-              {{selectOptions
-                TERIOCK.options.ability.powerSources
-                selected=system.powerSources
-              }}
-            </multi-select>
+          <div class="ab-multi-select-label">
+            <label class="tsubtle">Power Sources</label>
+            {{formInput
+              systemFields.powerSources
+              value=system.powerSources
+              disabled=(not editable)
+            }}
           </div>
         </div>
         <div class="tgrid-item">
-          <div class="ab-multi-select-label ab-multi-select-element">
-            <multi-select name="system.elements" data-edit="system.elements"
-              {{#if (not editable)}}
-                          disabled="disabled"
-              {{/if}}
-            >
-              {{selectOptions
-                TERIOCK.options.ability.elements
-                selected=system.elements
-              }}
-            </multi-select>
+          <div class="ab-multi-select-label">
+            <label class="tsubtle">Elements</label>
+            {{formInput
+              systemFields.elements
+              value=system.elements
+              disabled=(not editable)
+            }}
           </div>
         </div>
         <div class="tgrid-item">
-          <div class="ab-multi-select-label ab-multi-select-effects">
-            <multi-select name="system.effects" data-edit="system.effects"
-              {{#if (not editable)}}
-                          disabled="disabled"
-              {{/if}}
-            >
-              {{selectOptions
-                TERIOCK.options.ability.effects
-                selected=system.effects
-              }}
-            </multi-select>
+          <div class="ab-multi-select-label">
+            <label class="tsubtle">Effect Types</label>
+            {{formInput
+              systemFields.effectTypes
+              value=system.effectTypes
+              disabled=(not editable)
+            }}
           </div>
         </div>
         <div class="tgrid-item">
-          <label>
-            <select name="system.class" data-edit="system.class"
-              {{#if (not editable)}}
-                    disabled="disabled"
-              {{/if}}
-            >
-              <option value="" selected>Class</option>
-              {{selectOptions TERIOCK.options.ability.class selected=system.class}}
-            </select>
-          </label>
+          <div class="ab-multi-select-label">
+            <label class="tsubtle">Class</label>
+            {{formInput
+              systemFields.class
+              value=system.class
+              disabled=(not editable)
+            }}
+          </div>
         </div>
       </div>
     </div>

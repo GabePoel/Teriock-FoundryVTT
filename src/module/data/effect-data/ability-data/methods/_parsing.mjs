@@ -508,7 +508,7 @@ function setRemainingParameters(parameters, tagTree, doc) {
   parameters.endCondition = getBarText(doc, "end-condition");
   parameters.requirements = getBarText(doc, "requirements");
   if (tagTree.effect) {
-    parameters.effects = tagTree.effect;
+    parameters.effectTypes = tagTree.effect;
   }
   parameters.expansionRange = getBarText(doc, "expansion-range", true);
   parameters.trigger = getBarText(doc, "trigger");

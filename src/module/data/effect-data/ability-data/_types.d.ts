@@ -7,7 +7,7 @@ import type { OverviewText, ResultsText } from "./types/summary";
 import type { ImprovementsConfig } from "./types/improvements";
 import type { Duration } from "./types/duration";
 import type { DeliveryConfig } from "./types/interaction";
-import type { CostsConfig } from "./types/costs";
+import type { CostAdjustment, CostsConfig } from "./types/costs";
 import type { ExecutableDataMixinInterface } from "../../mixins/executable-data-mixin/_types";
 
 declare module "./ability-data.mjs" {
@@ -15,6 +15,8 @@ declare module "./ability-data.mjs" {
     ConsumableDataMixinInterface,
     ExecutableDataMixinInterface,
     HierarchyDataMixinInterface {
+    /** <schema> If this ability is adept and how much it costs if so */
+    adept: CostAdjustment;
     /** <schema> Impacts of using this ability */
     applies: {
       /** <schema> Base impact of using this ability */
@@ -42,7 +44,7 @@ declare module "./ability-data.mjs" {
      * <schema> Tags that describe what type of effect this ability is
      * ("effect" in the Teriock rules sense, not in the Foundry VTT sense)
      */
-    effects: Set<Teriock.Parameters.Ability.EffectTag>;
+    effectTypes: Set<Teriock.Parameters.Ability.EffectTag>;
     /** <schema> If this ability is considered to be Elder Sorcery */
     elderSorcery: boolean;
     /** <schema> Wording of this ability's Elder Sorcery incant */
@@ -64,12 +66,7 @@ declare module "./ability-data.mjs" {
     /** <schema> The "form" of this ability (what color it would be printed on a card) */
     form: Teriock.Parameters.Shared.Form;
     /** <schema> If this ability is gifted and how much it costs if so */
-    gifted: {
-      /** <schema> If this ability gifted */
-      enabled: boolean;
-      /** <schema> How much extra MP this ability costs if gifted */
-      amount: number;
-    };
+    gifted: CostAdjustment;
     /** <schema> Description of how this ability changes if heightened */
     heightened: string;
     /**

@@ -35,7 +35,7 @@ export const abilityOptions = {
       custom: "Custom",
     },
   },
-  effects: index.effectTypes,
+  effectTypes: index.effectTypes,
   piercing: {
     normal: "",
     av0: "AV0",

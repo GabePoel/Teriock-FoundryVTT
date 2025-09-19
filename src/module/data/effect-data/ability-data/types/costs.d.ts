@@ -33,3 +33,13 @@ export interface CostsConfig {
   somatic: boolean;
   verbal: boolean;
 }
+
+/**
+ * Const adjustment.
+ */
+export type CostAdjustment = {
+  /** <schema> If the MP cost is changed */
+  enabled: boolean;
+  /** <schema> Mow much the MP cost is changed */
+  amount: number;
+}

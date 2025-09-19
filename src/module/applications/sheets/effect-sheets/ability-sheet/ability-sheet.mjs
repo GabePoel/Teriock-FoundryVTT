@@ -36,8 +36,6 @@ export default class TeriockAbilitySheet extends PassiveSheetMixin(TeriockBaseEf
     all: {
       template: "systems/teriock/src/templates/document-templates/effect-templates/ability-template/ability-template.hbs",
       scrollable: [
-        ".window-content",
-        ".tsheet-page",
         ".ab-sheet-everything",
         ".ab-impacts-tab",
         ".es-mask-rotator",
@@ -204,7 +202,7 @@ export default class TeriockAbilitySheet extends PassiveSheetMixin(TeriockBaseEf
     const arrayTags = {
       ".element-tag": "system.elements",
       ".power-tag": "system.powerSources",
-      ".effect-tag": "system.effects",
+      ".effect-tag": "system.effectTypes",
     };
 
     for (const [ selector, param ] of Object.entries(arrayTags)) {
@@ -336,7 +334,7 @@ export default class TeriockAbilitySheet extends PassiveSheetMixin(TeriockBaseEf
     context.tab = this._tab;
     context.subAbilities = this.document.subs;
     context.supAbility = this.document.sup;
-    const effectsSet = new Set(system.effects);
+    const effectsSet = new Set(system.effectTypes);
     //noinspection JSUnresolvedReference
     context.effectTags = Array.from(effectsSet.difference(new Set(system.powerSources)));
     await this._enrichAll(context, {

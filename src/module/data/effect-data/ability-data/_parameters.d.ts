@@ -28,7 +28,7 @@ declare global {
     /**
      * Effect types
      */
-    export type EffectTag = keyof typeof TERIOCK.options.ability.effects;
+    export type EffectTag = keyof typeof TERIOCK.options.ability.effectTypes;
 
     /**
      * Targets

@@ -19,6 +19,10 @@ export async function _handleDialogs(rollConfig) {
   // Variable MP cost dialog
   if (abilityData.costs.mp?.type === "variable") {
     let mpDescription = await TextEditor.enrichHTML(abilityData.costs.mp.value.variable);
+    if (abilityData.adept.enabled) {
+      mpDescription
+        += `<div><p>This ability is adept and this cost will automatically be decreased by ${abilityData.adept.amount}.</p></div>`;
+    }
     if (abilityData.gifted.enabled) {
       mpDescription
         += `<div><p>This ability is gifted and this cost will automatically be increased by ${abilityData.gifted.amount}.</p></div>`;

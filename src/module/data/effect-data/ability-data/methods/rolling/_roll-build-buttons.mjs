@@ -61,7 +61,7 @@ export async function _buildButtons(rollConfig) {
     buttons.push(buttonData);
   }
 
-  const effects = /** @type {Set<Teriock.Parameters.Ability.EffectTag>} */ new Set(abilityData.effects || []);
+  const effects = /** @type {Set<Teriock.Parameters.Ability.EffectTag>} */ new Set(abilityData.effectTypes || []);
 
   // Resistance Button
   if (effects.has("resistance")) {

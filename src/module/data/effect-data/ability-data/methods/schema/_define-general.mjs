@@ -211,7 +211,7 @@ export function _defineGeneral(schema) {
       initial: false,
       label: "Ritual",
     }),
-    class: new fields.StringField({ initial: "" }),
+    class: new fields.StringField({ choices: TERIOCK.options.ability.class }),
     rotator: new fields.BooleanField({
       initial: false,
       label: "Rotator",
@@ -330,7 +330,7 @@ export function _defineGeneral(schema) {
       initial: "",
       label: "Requirements",
     }),
-    effects: new fields.SetField(new fields.StringField({
+    effectTypes: new fields.SetField(new fields.StringField({
       choices: TERIOCK.index.effectTypes,
     })),
     expansion: new fields.StringField({
@@ -373,6 +373,14 @@ export function _defineGeneral(schema) {
     }),
     gifted: new fields.SchemaField({
       enabled: new fields.BooleanField({ label: "Gifted" }),
+      amount: new fields.NumberField({
+        initial: 1,
+        min: 1,
+        integer: true,
+      }),
+    }),
+    adept: new fields.SchemaField({
+      enabled: new fields.BooleanField({ label: "Adept" }),
       amount: new fields.NumberField({
         initial: 1,
         min: 1,

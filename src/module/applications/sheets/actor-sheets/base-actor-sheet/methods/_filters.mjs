@@ -57,7 +57,7 @@ export function _filterAbilities(actor, abilities, filters = {}) {
     && (!filters.target || (a.system.targets || new Set()).has(filters.target))
     && (!filters.powerSource || (a.system.powerSources || new Set()).has(filters.powerSource))
     && (!filters.element || (a.system.elements || new Set()).has(filters.element))
-    && (!filters.effects || (a.system.effects || new Set()).some((e) => filters.effects.includes(e))));
+    && (!filters.effectTypes || (a.system.effectTypes || new Set()).some((e) => filters.effectTypes.includes(e))));
   return abilities;
 }
 

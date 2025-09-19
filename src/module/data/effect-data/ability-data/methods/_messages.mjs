@@ -111,9 +111,9 @@ export function _messageParts(abilityData) {
       wrappers: [
         ref.form[src.form].name,
         src.elderSorcery ? "Elder Sorcery" : "",
-        ...src.effects
+        ...src.effectTypes
           .filter((e) => !src.powerSources.has(e))
-          .map((effect) => ref.effects[effect]),
+          .map((effect) => ref.effectTypes[effect]),
       ],
     },
   ];

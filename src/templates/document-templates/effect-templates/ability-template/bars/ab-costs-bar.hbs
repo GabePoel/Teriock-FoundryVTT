@@ -5,6 +5,7 @@
     (not (eq system.costs.gp.type "none"))
     (exists system.costs.break)
     system.gifted.enabled
+    system.adept.enabled
   )
 }}
   <div class="ab-bar">
@@ -39,6 +40,17 @@
       label="MP"
       include=(not (eq system.costs.mp.type "none"))
       classes=(ifThen editable "mana-cost-box" "")
+    }}
+    {{formBox
+      (formInput
+        systemFields.adept.fields.amount
+        value=system.adept.amount
+        disabled=(not editable)
+      )
+      tooltip="Adept Mana Cost"
+      label="MP"
+      icon="minus"
+      include=system.adept.enabled
     }}
     {{formBox
       (formInput

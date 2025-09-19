@@ -52,7 +52,7 @@ export type AbilityFilters = {
   /** If the filter is applied, which delivery is displayed */
   delivery: Teriock.Parameters.Ability.Delivery | null;
   /** If the filter is applied, which effect type is displayed */
-  effects: Teriock.Parameters.Ability.EffectTag | null;
+  effectTypes: Teriock.Parameters.Ability.EffectTag | null;
   /** If the filter is applied, which element is displayed */
   element: Teriock.Parameters.Ability.Element | null;
   /** Show, hide, or don't filter based on if expansion */

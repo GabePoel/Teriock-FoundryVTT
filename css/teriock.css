@@ -1,3 +1,6 @@
+.teriock {
+  @import url("https://fonts.googleapis.com/css2?family=Bonheur+Royale&family=Cinzel:wght@400..900&family=Great+Vibes&family=Quintessential&family=Tagesschrift&display=swap");
+}
 .teriock .heal-dialog .heal-dialog-hacks .hack-marker-box {
   display: flex;
   flex-direction: column;
@@ -61,9 +64,6 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-}
-.teriock {
-  @import url("https://fonts.googleapis.com/css2?family=Bonheur+Royale&family=Cinzel:wght@400..900&family=Great+Vibes&family=Quintessential&family=Tagesschrift&display=swap");
 }
 @font-face {
   font-family: "XMasterpieceSwashes";
@@ -164,6 +164,11 @@
   --tcard-box-shadow: 0 0 6px rgba(0, 0, 0, 0.4);
   --tcard-container-box-shadow: none;
   --tcard-border-color: var(--color-border);
+  --tcard-border-radius: var(--tcard-outer-border-radius);
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--tcard-container-box-shadow);
+  border-radius: var(--tcard-outer-border-radius);
 }
 @container (max-width: 274px) {
   .teriock .tcard-container:not(.large):not(.small):not(.tiny) .tcard-image, .teriock .tcard-container.medium .tcard-image {
@@ -227,9 +232,6 @@
     display: none;
   }
 }
-.teriock .tcard-container {
-  --tcard-border-radius: var(--tcard-outer-border-radius);
-}
 .teriock .tcard-container.gapless {
   --tcard-border-radius: 0;
   --tcard-container-box-shadow: 0 0 6px rgba(0, 0, 0, 0.4);
@@ -239,21 +241,9 @@
   gap: 0;
   box-shadow: var(--tcard-container-box-shadow), inset 0 0 0 1px var(--color-border);
 }
-.teriock .tcard-container {
-  display: flex;
-  flex-direction: column;
-  box-shadow: var(--tcard-container-box-shadow);
-  border-radius: var(--tcard-outer-border-radius);
-}
 .teriock .tcard-container .tcard {
   --tcard-opacity: 1;
   background-color: rgba(255, 255, 255, 0.1);
-}
-.teriock .tcard-container .tcard.inactive {
-  --tcard-opacity: 0.5;
-  background-color: rgba(255, 255, 255, 0.05);
-}
-.teriock .tcard-container .tcard {
   height: var(--tcard-height);
   display: flex;
   flex-direction: row;
@@ -268,6 +258,10 @@
   box-shadow: var(--tcard-box-shadow);
   overflow: hidden;
   cursor: default;
+}
+.teriock .tcard-container .tcard.inactive {
+  --tcard-opacity: 0.5;
+  background-color: rgba(255, 255, 255, 0.05);
 }
 .teriock .tcard-container .tcard.visible-first, .teriock .tcard-container .tcard:first-child {
   border-top-left-radius: calc(var(--tcard-outer-border-radius) - 1px);
@@ -483,7 +477,6 @@
 .teriock .tgrid .tgrid-item {
   display: flex;
   flex-direction: row;
-  align-items: center;
   justify-content: right;
 }
 .teriock .tgrid .tgrid-item .hint {
@@ -1010,43 +1003,9 @@
   font-size: unset;
 }
 .teriock .ab-menu .ab-menu-content .ab-menu-bar .ab-multi-select-label {
-  position: relative;
-  display: inline-block;
   width: 100%;
 }
-.teriock .ab-menu .ab-menu-content .ab-menu-bar .ab-multi-select-label ::after {
-  position: absolute;
-  top: 0;
-  left: 1em;
-  right: 0;
-  display: flex;
-  align-items: center;
-  justify-content: left;
-  height: 100%;
-  pointer-events: none;
-  overflow: hidden;
-  color: var(--color-text-secondary);
-}
-.teriock .ab-menu .ab-menu-content .ab-menu-bar .ab-multi-select-label.ab-multi-select-power ::after {
-  content: "Power Sources";
-}
-.teriock .ab-menu .ab-menu-content .ab-menu-bar .ab-multi-select-label.ab-multi-select-element ::after {
-  content: "Elements";
-}
-.teriock .ab-menu .ab-menu-content .ab-menu-bar .ab-multi-select-label.ab-multi-select-effects ::after {
-  content: "Effects";
-}
-.teriock .ab-menu .ab-menu-content .ab-menu-bar .ab-multi-select-label.ab-multi-select-equipment-classes ::after {
-  content: "Equipment Classes";
-}
-.teriock .ab-menu .ab-menu-content .ab-menu-bar .ab-multi-select-label.ab-multi-select-traits ::after {
-  content: "Traits";
-}
-.teriock .ab-menu .ab-menu-content .ab-menu-bar .ab-multi-select-label multi-select {
-  width: 100%;
-  position: relative;
-}
-.teriock .ab-menu .ab-menu-content .ab-menu-bar .ab-multi-select-label multi-select .tags {
+.teriock .ab-menu .ab-menu-content .ab-menu-bar .ab-multi-select-label .input-element-tags {
   display: none;
 }
 .teriock .ab-main {
@@ -1696,11 +1655,6 @@
   z-index: 1;
   border-bottom-left-radius: 4px;
   transition: all 0.2s ease-in-out;
-}
-.teriock .character-window .character-page .character-sidebar.no-transition {
-  transition: none;
-}
-.teriock .character-window .character-page .character-sidebar {
   background: var(--color-cool-5);
   color: var(--color-light-3);
   --color-text: var(--color-light-3);
@@ -1708,6 +1662,9 @@
   --input-text-color: var(--color-light-3);
   --color-text-subtle: var(--color-light-5);
   --color-border: var(--color-light-4);
+}
+.teriock .character-window .character-page .character-sidebar.no-transition {
+  transition: none;
 }
 .teriock .character-window .character-page .character-sidebar input {
   color: var(--color-light-3);
@@ -1749,18 +1706,14 @@
   align-items: center;
   justify-content: center;
   width: 100%;
+  margin-bottom: 0.5em;
+  padding-bottom: 0.25em;
 }
 .teriock .character-window .character-page .character-sidebar .defense-box-main input,
 .teriock .character-window .character-page .character-sidebar .attack-box-main input,
 .teriock .character-window .character-page .character-sidebar .carrying-box-main input {
   line-height: unset;
   height: unset;
-}
-.teriock .character-window .character-page .character-sidebar .defense-box-main,
-.teriock .character-window .character-page .character-sidebar .attack-box-main,
-.teriock .character-window .character-page .character-sidebar .carrying-box-main {
-  margin-bottom: 0.5em;
-  padding-bottom: 0.25em;
 }
 .teriock .character-window .character-page .character-sidebar .ch-battle-box {
   display: flex;
@@ -1967,13 +1920,6 @@
   --color-presence-bar: #b48b1a;
   --color-presence-bar-dark: #7d6114;
   --color-presence-bar-darkest: rgb(50, 40, 0);
-}
-.teriock .character-presence-container.overflow {
-  --color-presence-bar: var(--color-level-error);
-  --color-presence-bar-dark: var(--color-level-error-bg);
-  --color-presence-bar-darkest: var(--color-level-error-border);
-}
-.teriock .character-presence-container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1984,6 +1930,11 @@
   overflow: hidden;
   border: 2px solid var(--color-presence-bar);
 }
+.teriock .character-presence-container.overflow {
+  --color-presence-bar: var(--color-level-error);
+  --color-presence-bar-dark: var(--color-level-error-bg);
+  --color-presence-bar-darkest: var(--color-level-error-border);
+}
 .teriock .character-presence-container .character-presence-bar {
   display: grid;
   width: 100%;
@@ -1992,15 +1943,13 @@
 .teriock .character-presence-container .character-presence-bar .presence-indicator {
   width: 100%;
   height: 100%;
+  background-color: black;
 }
 .teriock .character-presence-container .character-presence-bar .presence-indicator:not(:first-child) {
   border-left: 1px solid var(--color-presence-bar);
 }
 .teriock .character-presence-container .character-presence-bar .presence-indicator:not(:last-child) {
   border-right: 1px solid var(--color-presence-bar);
-}
-.teriock .character-presence-container .character-presence-bar .presence-indicator {
-  background-color: black;
 }
 .teriock .character-presence-container .character-presence-bar .presence-indicator.used {
   background-image: repeating-linear-gradient(135deg, var(--color-presence-bar) 0px, var(--color-presence-bar) 2px, var(--color-presence-bar-dark) 2px, var(--color-presence-bar-dark) 8px);
@@ -2143,6 +2092,11 @@
 .teriock .die-drawer.no-transition {
   transition: none;
 }
+.teriock .condition-display {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
 .teriock .condition-display .condition-header {
   width: 100%;
   position: relative;
@@ -2169,11 +2123,6 @@
 .teriock .condition-display .condition-header img.removable:active {
   background-color: rgba(0, 0, 0, 0.7);
   border-color: var(--color-warm-2);
-}
-.teriock .condition-display {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
 }
 .teriock .condition-display .mw-editsection {
   display: none;

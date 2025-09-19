@@ -31,8 +31,6 @@ export default class TeriockEquipmentSheet extends TeriockBaseItemSheet {
     all: {
       template: "systems/teriock/src/templates/document-templates/item-templates/equipment-template/equipment-template.hbs",
       scrollable: [
-        ".window-content",
-        ".tsheet-page",
         ".ab-sheet-everything",
       ],
     },

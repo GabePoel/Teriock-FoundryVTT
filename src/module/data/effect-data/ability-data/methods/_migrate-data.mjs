@@ -89,5 +89,10 @@ export function _migrateData(data) {
   if (foundry.utils.getProperty(data, "abilityType")) {
     foundry.utils.setProperty(data, "form", foundry.utils.getProperty(data, "abilityType"));
   }
+
+  if (data.effects) {
+    data.effectTypes = data.effects;
+    delete data.effects;
+  }
   return data;
 }

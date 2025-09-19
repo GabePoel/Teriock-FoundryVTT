@@ -54,6 +54,7 @@ async function processSubEffects(subs, doc, config) {
     const limitation = el.querySelector(".limited-modifier");
     const improvement = el.querySelector(".improvement-modifier");
     const gifted = el.querySelector(".gifted-modifier");
+    const adept = el.querySelector(".adept-modifier");
     let limitationText = "";
     let improvementText = "";
 
@@ -77,7 +78,7 @@ async function processSubEffects(subs, doc, config) {
       }
     }
 
-    if (limitationText || improvementText || gifted) {
+    if (limitationText || improvementText || gifted || adept) {
       const updateData = {
         "system.improvement": improvementText,
         "system.limitation": limitationText,
@@ -85,6 +86,10 @@ async function processSubEffects(subs, doc, config) {
       if (gifted) {
         updateData["system.gifted.enabled"] = true;
         updateData["system.gifted.amount"] = 1;
+      }
+      if (adept) {
+        updateData["system.adept.enabled"] = true;
+        updateData["system.adept.amount"] = 1;
       }
       await subEffect.update(updateData);
     }

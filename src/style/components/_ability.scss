@@ -21,6 +21,7 @@
   position: relative;
 
   &.shattered {
+    //noinspection CssUnknownTarget
     background: url("../src/assets/shattered.png") no-repeat center center;
     background-size: cover;
   }
@@ -351,70 +352,16 @@
       }
 
       .ab-multi-select-label {
-        position: relative;
-        display: inline-block;
         width: 100%;
 
-        ::after {
-          position: absolute;
-          top: 0;
-          left: 1em;
-          right: 0;
-          display: flex;
-          align-items: center;
-          justify-content: left;
-          height: 100%;
-          pointer-events: none;
-          overflow: hidden;
-          color: var(--color-text-secondary);
-        }
-
-        &.ab-multi-select-power {
-          ::after {
-            content: "Power Sources";
-          }
-        }
-
-        &.ab-multi-select-element {
-          ::after {
-            content: "Elements";
-          }
-        }
-
-        &.ab-multi-select-effects {
-          ::after {
-            content: "Effects";
-          }
-        }
-
-        &.ab-multi-select-equipment-classes {
-          ::after {
-            content: "Equipment Classes";
-          }
-        }
-
-        &.ab-multi-select-traits {
-          ::after {
-            content: "Traits";
-          }
-        }
-
-        multi-select {
-          width: 100%;
-          position: relative;
-
-          .tags {
-            display: none;
-          }
+        .input-element-tags {
+          display: none;
         }
       }
     }
   }
 }
 
-// .sheet-main-container {
-//   margin-top: 0.5em;
-// }
 .ab-main {
   display: flex;
   flex-direction: column;
