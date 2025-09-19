@@ -92,7 +92,8 @@ effects:
           - LV0OTSOdp0rxvBOv
           - fkU2Qwrx1AcqYRLa
       description: >-
-        <b>Mithril</b> items are @L[Property:Durable]{durable}, and are
+        <b>Mithril</b> items are @L[Property:Durable]{durable}, weigh half as
+        much, have their minimum @L[Core:Strength]{STR} decreased by 1, and are
         @L[Property:Unbreachable]{unbreachable} if they are
         @L[Category:Armor]{armor}.
       form: intrinsic
@@ -104,6 +105,16 @@ effects:
       changes: []
       limitation: ''
       improvement: ''
+      applies:
+        changes:
+          - key: item.system.weight.raw
+            mode: 1
+            value: '0.5'
+            priority: 10
+          - key: item.system.minStr.raw
+            mode: 2
+            value: '-1'
+            priority: 10
     _id: hvixUYjDLO7RfDoT
     img: systems/teriock/src/icons/properties/mithril.webp
     changes: []
@@ -184,7 +195,7 @@ effects:
       improvement: ''
       applies:
         changes:
-          - key: item.system.baseAv
+          - key: item.system.av.raw
             mode: 2
             value: '1'
             priority: 10

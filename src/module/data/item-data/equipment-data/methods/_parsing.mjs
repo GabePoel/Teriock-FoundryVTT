@@ -1,7 +1,7 @@
 import { cleanValue } from "../../../../helpers/clean.mjs";
 import { createProperty } from "../../../../helpers/create-effects.mjs";
 import { getIcon } from "../../../../helpers/path.mjs";
-import { toCamelCase } from "../../../../helpers/string.mjs";
+import { toCamelCase, toInt } from "../../../../helpers/string.mjs";
 import { _override } from "./_overrides.mjs";
 
 /**
@@ -15,17 +15,6 @@ import { _override } from "./_overrides.mjs";
  */
 export async function _parse(equipmentData, rawHTML) {
   const allValidProperties = foundry.utils.deepClone(TERIOCK.index.properties);
-
-  // Remove existing properties
-  // const toRemove = [];
-  // for (const effect of equipmentData.parent.transferredEffects.filter(
-  //   (e) => e.type === "property",
-  // )) {
-  //   if (Object.values(allValidProperties).includes(effect.name)) {
-  //     toRemove.push(effect._id);
-  //   }
-  // }
-  // await equipmentData.parent.deleteEmbeddedDocuments("ActiveEffect", toRemove);
   const doc = new DOMParser().parseFromString(rawHTML, "text/html");
   const q = (s) => doc.querySelector(s);
   const getValue = (s) => q(s)?.getAttribute("data-val");
@@ -43,12 +32,12 @@ export async function _parse(equipmentData, rawHTML) {
 
   // Parse damage
   const damageText = getText(".damage");
+  parameters.damage = {
+    base: {},
+    twoHanded: {},
+  };
   if (damageText) {
     const match = damageText.match(/^([^(]+)\s*\(([^)]+)\)/);
-    parameters.damage = {
-      base: {},
-      twoHanded: {},
-    }
     parameters.damage.base.saved = match ? match[1].trim() : damageText;
     if (match) {
       parameters.damage.twoHanded.saved = match[2].trim();
@@ -59,14 +48,13 @@ export async function _parse(equipmentData, rawHTML) {
   parameters.range = {
     long: {},
     short: {},
-  }
-  parameters.weight = {};
-  parameters.minStr = {};
-  parameters.weight.saved = cleanValue(getValue(".weight")) ?? parameters.weight.saved;
-  parameters.range.short.saved = cleanValue(getText(".short-range")) ?? parameters.range.short.saved;
-  parameters.range.long.saved = cleanValue(getText(".normal-range")) ?? parameters.range.long.saved;
-  parameters.range.long.saved = cleanValue(getText(".long-range")) ?? parameters.range.long.saved;
-  parameters.minStr.saved = cleanValue(getValue(".min-str")) ?? parameters.minStr.saved;
+    ranged: false,
+  };
+  parameters.weight = { saved: cleanValue(getValue(".weight")) };
+  parameters.range.short = { saved: cleanValue(getText(".short-range")) };
+  parameters.range.long = { saved: cleanValue(getText(".normal-range")) };
+  parameters.range.long = { saved: cleanValue(getText(".long-range")) };
+  parameters.minStr = { saved: cleanValue(getValue(".min-str")) };
 
   // Parse arrays
   let equipmentClasses = new Set(getTextAll(".equipment-class"));
@@ -80,8 +68,8 @@ export async function _parse(equipmentData, rawHTML) {
 
   // Parse sb, av, bv
   parameters.fightingStyle = toCamelCase(getValue(".sb") || "") ?? parameters.fightingStyle;
-  parameters.av = cleanValue(getValue(".av")) || 0;
-  parameters.bv = cleanValue(getValue(".bv")) || 0;
+  parameters.av = { saved: toInt(cleanValue(getValue(".av"))) || 0 };
+  parameters.bv = { saved: toInt(cleanValue(getValue(".bv"))) || 0 };
 
   // Sort and filter properties and equipment classes
   parameters.equipmentClasses = new Set(Array.from(equipmentClasses).map((s) => toCamelCase(s)));
@@ -128,6 +116,7 @@ export async function _parse(equipmentData, rawHTML) {
   parameters.editable = false;
 
   _override(equipmentData, parameters);
+
 
   const oldImg = equipmentData.parent.img;
   let newImg = oldImg;

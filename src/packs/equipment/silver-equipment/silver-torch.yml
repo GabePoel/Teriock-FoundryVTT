@@ -9,17 +9,22 @@ system:
   maxQuantity:
     raw: ''
     derived: 0
-  ranged: false
-  damage: '1'
-  twoHandedDamage: '0'
-  damageTypes:
-    - Fire
-  weight: 1
-  range: 5
-  shortRange: 0
+  damage:
+    base:
+      saved: '1'
+    twoHanded:
+      saved: ''
+  weight:
+    saved: 1
+  range:
+    long:
+      saved: ''
+    short:
+      saved: ''
   equipmentClasses:
     - supplies
-  minStr: -3
+  minStr:
+    saved: -3
   sb: null
   av: 0
   bv: 0
@@ -215,6 +220,20 @@ effects:
           priority: 5
       limitation: ''
       improvement: ''
+      applies:
+        changes:
+          - key: system.light.dim
+            mode: 4
+            value: '10'
+            priority: 5
+          - key: system.light.color
+            mode: 5
+            value: '#C64600'
+            priority: 5
+          - key: system.light.animation.type
+            mode: 5
+            value: torch
+            priority: 5
     _id: DaGS6NY3SiuU1xmf
     img: systems/teriock/src/icons/properties/glowing.webp
     changes: []

@@ -137,6 +137,10 @@ function cleanEntry(doc) {
       delete doc.system.tier;
       delete doc.system.description;
       delete doc.system.onUse;
+      delete doc.system.shortRange;
+      delete doc.system.damageTypes;
+      delete doc.system.ranged;
+      delete doc.system.twoHandedDamage;
     }
     if (doc.type === "wrapper") {
       delete doc.system;

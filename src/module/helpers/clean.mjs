@@ -1,14 +1,21 @@
 /**
  * Cleans a value by removing plus signs and converting to integer.
  * @param {string|number} value - The value to clean.
- * @returns {number} The cleaned integer value.
+ * @returns {string} The cleaned integer value.
  */
 export function cleanValue(value) {
   if (typeof value !== "string") {
-    return value;
+    if (value) {
+      return `${value}`;
+    } else {
+      return "";
+    }
   }
   value = value.replace("+", "").trim();
-  return parseInt(value, 10);
+  value = value.replace("×", "*");
+  value = value.replace("STR", "@str");
+  console.log(value);
+  return value;
 }
 
 /**

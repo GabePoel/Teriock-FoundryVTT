@@ -9,21 +9,29 @@ system:
   maxQuantity:
     raw: ''
     derived: 0
-  ranged: false
-  damage: 1d8
-  twoHandedDamage: '0'
-  damageTypes: []
-  weight: 75
-  range: 45
-  shortRange: 15
+  damage:
+    base:
+      saved: 1d8
+    twoHanded:
+      saved: ''
+  weight:
+    saved: 75
+  range:
+    long:
+      saved: '@str * 15'
+    short:
+      saved: '@str * 5'
   equipmentClasses:
     - boulders
-  minStr: 3
+  minStr:
+    saved: 3
   sb: gladiator
   av: 0
-  bv: 1
+  bv:
+    saved: 1
   price: 0
   powerLevel: mundane
+  fightingStyle: gladiator
 _id: vOfCZOjYb6CH9ru9
 img: systems/teriock/src/icons/equipment/boulder.webp
 effects:
@@ -252,6 +260,49 @@ effects:
       systemVersion: 0.9.0
       lastModifiedBy: teriockBuilder00
     _key: '!items.effects!vOfCZOjYb6CH9ru9.PLvDrXUd60Mwete8'
+  - name: Small
+    type: property
+    system:
+      description: >-
+        An item with this property is easily concealed and can be used in the
+        same hand as a @L[Category:Shields]{shield}. If not used with a
+        @L[Category:Shields]{shield}, a second @L[Category:Attack
+        abilities]{attack} made with a small item per @L[Core:Turns]{turn} does
+        not suffer from an @L[Core:Attack Penalty]{attack penalty}. In order to
+        not incur an @L[Core:Attack Penalty]{attack penalty}, this item must not
+        be used in the same hand as a @L[Category:Shields]{shield}.
+      hierarchy:
+        rootUuid: Compendium.teriock.equipment.Item.vOfCZOjYb6CH9ru9
+        subIds: []
+        supId: null
+      form: intrinsic
+      damageType: ''
+      extraDamage: ''
+      applyIfShattered: false
+      applyIfDampened: false
+      modifiesActor: false
+      limitation: ''
+      improvement: ''
+      applies:
+        changes: []
+        macros: {}
+    _id: oQhzx2SSRs9XRBLE
+    img: systems/teriock/src/icons/properties/small.webp
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+    origin: null
+    transfer: true
+    statuses: []
+    flags: {}
+    _stats:
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.0
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!vOfCZOjYb6CH9ru9.oQhzx2SSRs9XRBLE'
 ownership:
   default: 0
 flags: {}

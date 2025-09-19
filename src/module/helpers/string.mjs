@@ -32,3 +32,16 @@ export function toKebabCase(str) {
     .replace(/([a-z])([A-Z])/g, "$1-$2")
     .toLowerCase();
 }
+
+/**
+ * Converts a string to an integer.
+ * @param {string} str
+ * @returns {number}
+ */
+export function toInt(str) {
+  const result = parseInt(str, 10);
+  if (isNaN(result)) {
+    return 0;
+  }
+  return result;
+}
