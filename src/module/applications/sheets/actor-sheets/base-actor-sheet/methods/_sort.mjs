@@ -72,7 +72,7 @@ export function _sortEquipment(actor, equipment) {
     /** @param {TeriockEquipment} e */
     consumable: (e) => Number(e.system.consumable),
     /** @param {TeriockEquipment} e */
-    damage: (e) => e.system.damage ?? 0,
+    damage: (e) => e.system.derivedDamage ?? 0,
     /** @param {TeriockEquipment} e */
     identified: (e) => Number(e.system.identified),
     /** @param {TeriockEquipment} e */

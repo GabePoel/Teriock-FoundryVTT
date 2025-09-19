@@ -1,48 +1,52 @@
 {{#if
   (or
-    (exists system.av)
-    (exists system.bv)
-    (exists system.damage)
-    (exists system.range)
+    (exists system.av.saved)
+    (exists system.bv.saved)
+    (exists system.damage.base.saved)
+    (exists system.range.long.saved)
   )
 }}
   <div class="ab-bar">
     {{formBox
       (formInput
-        systemFields.damage
+        systemFields.damage.fields.base.fields.saved
         dataset=(object tooltip="Damage")
         disabled=(not editable)
-        value=system.damage
+        value=system.damage.base.saved
       )
       secondary=(formInput
-        systemFields.twoHandedDamage
+        systemFields.damage.fields.twoHanded.fields.saved
         dataset=(object tooltip="Two-Handed Damage")
         disabled=(not editable)
-        value=system.twoHandedDamage
+        value=system.damage.twoHanded.saved
       )
-      icon=(firstDie system.damage)
-      include=(exists system.damage)
-      includeSecondary=(exists system.twoHandedDamage)
+      icon=(firstDie system.damage.base.saved)
+      include=(exists system.damage.base.saved)
+      includeSecondary=(exists system.damage.twoHanded.saved)
       label="DMG"
+      unselected=system.damage.base.raw
+      unselectedSecondary=system.damage.twoHanded.raw
     }}
     {{formBox
       (formInput
-        systemFields.range
+        systemFields.range.fields.long.fields.saved
         dataset=(object tooltip="Range")
         disabled=(not editable)
-        value=system.range
+        value=system.range.long.saved
       )
       secondary=(formInput
-        systemFields.shortRange
+        systemFields.range.fields.short.fields.saved
         dataset=(object tooltip="Short Range")
         disabled=(not editable)
-        value=system.shortRange
+        value=system.range.short.saved
       )
       after=false
       icon=(path TERIOCK.display.icons "range")
-      include=(exists system.range)
-      includeSecondary=(exists system.shortRange)
+      include=(exists system.range.long.saved)
+      includeSecondary=(exists system.range.short.saved)
       label="ft"
+      unselected=system.range.long.raw
+      unselectedSecondary=system.range.short.raw
     }}
     {{formBox
       (formInput

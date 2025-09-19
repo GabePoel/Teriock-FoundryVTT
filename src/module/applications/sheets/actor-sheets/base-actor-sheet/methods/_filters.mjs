@@ -54,10 +54,10 @@ export function _filterAbilities(actor, abilities, filters = {}) {
     && (!filters.interaction || a.system.interaction === filters.interaction)
     && (!filters.delivery || a.system.delivery.base === filters.delivery)
     && (!filters.piercing || a.system.piercing === filters.piercing)
-    && (!filters.target || (a.system.targets || []).includes(filters.target))
-    && (!filters.powerSource || (a.system.powerSources || []).includes(filters.powerSource))
-    && (!filters.element || (a.system.elements || []).includes(filters.element))
-    && (!filters.effects || (a.system.effects || []).some((e) => filters.effects.includes(e))));
+    && (!filters.target || (a.system.targets || new Set()).has(filters.target))
+    && (!filters.powerSource || (a.system.powerSources || new Set()).has(filters.powerSource))
+    && (!filters.element || (a.system.elements || new Set()).has(filters.element))
+    && (!filters.effects || (a.system.effects || new Set()).some((e) => filters.effects.includes(e))));
   return abilities;
 }
 

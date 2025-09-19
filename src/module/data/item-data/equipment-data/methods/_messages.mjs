@@ -14,15 +14,15 @@ export function _messageParts(equipmentData) {
   let damageString = "";
   if (src.derivedDamage) {
     damageString += src.derivedDamage;
-    if (src.twoHandedDamage !== "0" && src.derivedTwoHandedDamage !== src.derivedDamage) {
+    if (src.damage.twoHanded.raw !== "0" && src.derivedTwoHandedDamage !== src.derivedDamage) {
       damageString += " / " + src.derivedTwoHandedDamage;
     }
   }
   let rangeString = "";
-  if (src.range) {
-    rangeString += src.range;
-    if (src.shortRange) {
-      rangeString = src.shortRange + " / " + rangeString;
+  if (src.range.long.raw) {
+    rangeString += src.range.long.raw;
+    if (src.range.short.raw) {
+      rangeString = src.range.short.raw + " / " + rangeString;
     }
     rangeString += " ft";
   }
@@ -42,7 +42,7 @@ export function _messageParts(equipmentData) {
       wrappers: [
         damageString,
         rangeString,
-        src.sb,
+        TERIOCK.index.weaponFightingStyles[src.fightingStyle],
       ],
     },
     {

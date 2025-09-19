@@ -1,4 +1,4 @@
-import { FormulaField, TextField } from "../../../shared/fields/_module.mjs";
+import { TextField } from "../../../shared/fields/_module.mjs";
 import { modifiableFormula, modifiableNumber } from "../../../shared/fields/modifiable.mjs";
 
 const { fields } = foundry.data;
@@ -36,33 +36,23 @@ export function _defineSchema() {
       initial: false,
       label: "Consumable",
     }),
-    ranged: new fields.BooleanField({
-      initial: false,
-      label: "Ranged",
+    damage: new fields.SchemaField({
+      base: modifiableFormula({
+        deterministic: false,
+      }),
+      twoHanded: modifiableFormula({
+        deterministic: false,
+      }),
+      types: new fields.SetField(new fields.StringField()),
     }),
-    damage: new FormulaField({
-      initial: "0",
-      label: "Damage",
-      deterministic: false,
-    }),
-    twoHandedDamage: new FormulaField({
-      initial: "0",
-      label: "Two-Handed Damage",
-      deterministic: false,
-    }),
-    damageTypes: new fields.SetField(new fields.StringField()),
     weight: modifiableNumber(),
-    range: new fields.NumberField({
-      initial: 0,
-      integer: true,
-      label: "Range",
-      min: 0,
-    }),
-    shortRange: new fields.NumberField({
-      initial: 0,
-      integer: true,
-      label: "Short Range",
-      min: 0,
+    range: new fields.SchemaField({
+      short: modifiableFormula(),
+      long: modifiableFormula(),
+      ranged: new fields.BooleanField({
+        initial: false,
+        label: "Ranged",
+      }),
     }),
     equipmentClasses: new fields.SetField(new fields.StringField({
       choices: TERIOCK.index.equipmentClasses,

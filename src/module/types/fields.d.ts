@@ -32,11 +32,6 @@ declare global {
     export type ModifiableNumber = Modifiable<number, number>
 
     /**
-     * Modifiable field that is always handled as a boolean.
-     */
-    export type ModifiableBoolean = Modifiable<boolean, boolean>
-
-    /**
      * Modifiable field that is edited as a formula but evaluates to a number.
      */
     export type ModifiableDeterministic = Modifiable<string, number>

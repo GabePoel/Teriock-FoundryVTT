@@ -465,13 +465,13 @@ function equipmentData(actorData, data) {
  * @param {TeriockEquipment|null} equipment - The equipment item.
  */
 function addEquipmentData(data, slot, equipment) {
-  const equipmentData = equipment?.system;
+  const equipmentData = equipment.system;
   data[`${slot}.dmg`] = equipmentData.derivedDamage || "0";
   data[`${slot}.dmg.2h`] = equipmentData.derivedTwoHandedDamage || "0";
-  data[`${slot}.range`] = equipmentData.range || 0;
-  data[`${slot}.range.short`] = equipmentData.shortRange || 0;
+  data[`${slot}.range`] = equipmentData.range.long.value || 0;
+  data[`${slot}.range.short`] = equipmentData.range.short.value || 0;
   data[`${slot}.weight`] = equipmentData.weight.value || 0;
-  data[`${slot}.tier`] = equipmentData.tier?.derived || 0;
+  data[`${slot}.tier`] = equipmentData.tier.value || 0;
   data[`${slot}.av`] = equipmentData.derivedAv || 0;
   data[`${slot}.bv`] = equipmentData.derivedBv || 0;
   data[`${slot}.str`] = equipmentData.minStr.value || -3;

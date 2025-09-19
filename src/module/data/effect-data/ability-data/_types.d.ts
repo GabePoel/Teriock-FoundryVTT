@@ -42,13 +42,13 @@ declare module "./ability-data.mjs" {
      * <schema> Tags that describe what type of effect this ability is
      * ("effect" in the Teriock rules sense, not in the Foundry VTT sense)
      */
-    effects: Teriock.Parameters.Ability.EffectTag[];
+    effects: Set<Teriock.Parameters.Ability.EffectTag>;
     /** <schema> If this ability is considered to be Elder Sorcery */
     elderSorcery: boolean;
     /** <schema> Wording of this ability's Elder Sorcery incant */
     elderSorceryIncant: string;
     /** <schema> Elements of this ability */
-    elements: Teriock.Parameters.Ability.Element[];
+    elements: Set<Teriock.Parameters.Ability.Element>;
     /** <schema> Circumstances in which this ability's effect ends */
     endCondition: string;
     /** <schema> This ability's execution time */
@@ -95,7 +95,7 @@ declare module "./ability-data.mjs" {
     /** <schema> How well this ability pierces armor and equipment */
     piercing: Teriock.Parameters.Ability.Piercing;
     /** <schema> Power sources that must be available in order for this ability to work */
-    powerSources: Teriock.Parameters.Ability.PowerSource[];
+    powerSources: Set<Teriock.Parameters.Ability.PowerSource>;
     /** <schema> If this ability needs to be prepared */
     prepared: boolean;
     /** <schema> The maximum range at which this ability can be used */
@@ -121,7 +121,7 @@ declare module "./ability-data.mjs" {
     /** <schema> What consequences this is ability is currently sustaining */
     sustaining: Set<Teriock.UUID<TeriockConsequence>>;
     /** <schema> Appropriate targets */
-    targets: Teriock.Parameters.Ability.Target[];
+    targets: Set<Teriock.Parameters.Ability.Target>;
     /** <schema> Description of this ability's trigger */
     trigger: string;
     /** <schema> If this ability is automatically warded */

@@ -2,8 +2,8 @@ const data = /** @type {Teriock.HookData.UseAbility} */ scope.data;
 const options = foundry.utils.deepClone(data.rollConfig.useData.rollOptions);
 const actor = data.rollConfig.abilityData.actor;
 const equipment = actor.equipment.filter((e) => e.system.equipped
-  && e.system.damage
-  && e.system.damage
+  && e.system.derivedDamage
+  && e.system.derivedDamage
   !== "0"
   && actor.system.primaryAttacker
   !== e.id);

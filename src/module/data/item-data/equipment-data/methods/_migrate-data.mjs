@@ -44,5 +44,38 @@ export function _migrateData(data) {
   if (foundry.utils.hasProperty(data, "sb")) {
     data.fightingStyle = data.sb;
   }
+  if (foundry.utils.hasProperty(data, "damage") && foundry.utils.getType(data.damage) === "string") {
+    data.damage = { base: { saved: data.damage } };
+  }
+  if (foundry.utils.hasProperty(data, "twoHandedDamage") && foundry.utils.getType(data.twoHandedDamage) === "string") {
+    if (typeof data.damage !== "object") {
+      data.damage = {};
+    }
+    data.damage.twoHanded = { saved: data.twoHandedDamage };
+    foundry.utils.deleteProperty(data, "twoHandedDamage");
+  }
+  if (foundry.utils.hasProperty(data, "damageTypes")) {
+    if (typeof data.damage !== "object") {
+      data.damage = {};
+      data.damage.types = data.damageTypes;
+    }
+  }
+  if (typeof data.range === "string" || typeof data.range === "number") {
+    data.range = { long: { saved: data.range } };
+  }
+  if (typeof data.shortRange === "string" || typeof data.shortRange === "number") {
+    if (!typeof data.range !== "object") {
+      data.range = {};
+    }
+    data.range.short = { saved: data.shortRange };
+    foundry.utils.deleteProperty(data, "shortRange");
+  }
+  if (typeof data.ranged === "boolean") {
+    if (!typeof data.range !== "object") {
+      data.range = {};
+    }
+    data.range.ranged = data.ranged;
+    foundry.utils.deleteProperty(data, "ranged");
+  }
   return data;
 }

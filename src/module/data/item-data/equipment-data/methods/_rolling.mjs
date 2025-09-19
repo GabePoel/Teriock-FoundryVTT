@@ -32,7 +32,7 @@ async function use(equipmentData, options) {
     }
     rollFormula = rollFormula.trim();
 
-    let damageTypes = equipmentData.damageTypes;
+    let damageTypes = equipmentData.damage.types;
     if (equipmentData.powerLevel === "magic") {
       damageTypes.add("magic");
     }

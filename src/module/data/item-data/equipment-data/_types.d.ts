@@ -12,9 +12,14 @@ declare module "./equipment-data.mjs" {
     /** <schema> Block Value */
     bv: Teriock.Fields.ModifiableNumber;
     /** <schema> Damage Dice */
-    damage: string;
-    /** <schema> Damage Types */
-    damageTypes: Set<string>;
+    damage: {
+      /** <schema> Damage this always deals */
+      base: Teriock.Fields.ModifiableIndeterministic;
+      /** <schema> Damage this deals in two hands */
+      twoHanded: Teriock.Fields.ModifiableIndeterministic;
+      /** <schema> Additional damage types to be added to all the base damage */
+      types: Set<string>;
+    };
     /** <schema> Is the equipment dampened? */
     dampened: boolean;
     /** <schema> Equipment Classes */
@@ -42,21 +47,22 @@ declare module "./equipment-data.mjs" {
     /** <schema> Price */
     price: number;
     /** <schema> Range (ft) (if ranged) */
-    range: number;
-    /** <schema> Is the equipment ranged? */
-    ranged: boolean;
+    range: {
+      /** <schema> Long range (this is the default range) */
+      long: Teriock.Fields.ModifiableDeterministic;
+      /** <schema> Is the equipment ranged? */
+      ranged: boolean;
+      /** <schema> Short range */
+      short: Teriock.Fields.ModifiableDeterministic;
+    };
     /** <schema> Identification Reference Equipment UUID */
     reference: Teriock.UUID<TeriockEquipment>;
     /** <schema> Is the equipment shattered? */
     shattered: boolean;
-    /** <schema> Short Range (ft) (if ranged) */
-    shortRange: number;
     /** <derived> Special Rules (Weapon Fighting Style) */
     specialRules: string;
     /** <schema> Presence Tier */
     tier: Teriock.Fields.ModifiableDeterministic;
-    /** <schema> Two-handed Damage Dice */
-    twoHandedDamage: string;
     /** <schema> Weight (lb) */
     weight: Teriock.Fields.ModifiableNumber;
 

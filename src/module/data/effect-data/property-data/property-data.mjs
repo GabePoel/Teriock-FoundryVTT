@@ -164,7 +164,7 @@ export default class TeriockPropertyModel extends HierarchyDataMixin(WikiDataMix
       && this.parent.allSups.filter((p) => p.system.damageType?.trim().length > 0).length
       === 0) {
       this.parent.changes.push({
-        key: "item.system.damageTypes",
+        key: "item.system.damage.types.raw",
         value: this.damageType.toLowerCase(),
         priority: 10,
         mode: 2,

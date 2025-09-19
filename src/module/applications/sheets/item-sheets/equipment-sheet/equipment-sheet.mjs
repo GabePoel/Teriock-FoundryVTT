@@ -112,14 +112,14 @@ export default class TeriockEquipmentSheet extends TeriockBaseItemSheet {
     }
 
     const staticUpdates = {
-      ".ab-damage-button": { "system.damage": 2 },
+      ".ab-damage-button": { "system.damage.base.saved": 1 },
       ".ab-two-handed-damage-button": {
-        "system.twoHandedDamage": this.item.system.damage,
+        "system.damage.twoHanded.saved": this.item.system.damage.base.saved,
       },
-      ".ab-short-range-button": { "system.shortRange": 5 },
-      ".ab-range-button": { "system.range": 5 },
-      ".ab-av-button": { "system.av": 1 },
-      ".ab-bv-button": { "system.bv": 1 },
+      ".ab-short-range-button": { "system.range.short.saved": 5 },
+      ".ab-range-button": { "system.range.long.saved": 5 },
+      ".ab-av-button": { "system.av.saved": 1 },
+      ".ab-bv-button": { "system.bv.saved": 1 },
       ".ab-weight-button": { "system.weight": 1 },
       ".ab-tier-button": { "system.tier.saved": "1" },
     };

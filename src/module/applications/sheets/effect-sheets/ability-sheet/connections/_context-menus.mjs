@@ -128,7 +128,7 @@ export function contextMenus(ability) {
         name: value,
         icon: TERIOCK.display.icons.unchecked,
         callback: async () => {
-          const currentTargets = foundry.utils.getProperty(ability.system, "targets") || [];
+          const currentTargets = ability.system.targets;
           const newTargets = [
             ...currentTargets,
             key,
@@ -136,21 +136,21 @@ export function contextMenus(ability) {
           await ability.update({ "system.targets": newTargets });
         },
         condition: () => {
-          const currentTargets = foundry.utils.getProperty(ability.system, "targets") || [];
-          return !currentTargets.includes(key);
+          const currentTargets = ability.system.targets;
+          return !currentTargets.has(key);
         },
       },
       {
         name: value,
         icon: TERIOCK.display.icons.checked,
         callback: async () => {
-          const currentTargets = foundry.utils.getProperty(ability.system, "targets") || [];
+          const currentTargets = ability.system.targets;
           const newTargets = currentTargets.filter((t) => t !== key);
           await ability.update({ "system.targets": newTargets });
         },
         condition: () => {
-          const currentTargets = foundry.utils.getProperty(ability.system, "targets") || [];
-          return currentTargets.includes(key);
+          const currentTargets = ability.system.targets;
+          return currentTargets.has(key);
         },
       },
     ]),

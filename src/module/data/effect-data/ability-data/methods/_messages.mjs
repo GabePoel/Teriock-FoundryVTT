@@ -58,7 +58,7 @@ export function _messageParts(abilityData) {
           "sight",
           "aura",
         ].includes(src.delivery.base) ? src.range + " ft" : "",
-        src.targets.map((target) => ref.targets[target]).join(", "),
+        Array.from(src.targets.map((target) => ref.targets[target])).join(", "),
         src.duration,
       ],
     },
@@ -112,14 +112,14 @@ export function _messageParts(abilityData) {
         ref.form[src.form].name,
         src.elderSorcery ? "Elder Sorcery" : "",
         ...src.effects
-          .filter((e) => !src.powerSources.includes(e))
+          .filter((e) => !src.powerSources.has(e))
           .map((effect) => ref.effects[effect]),
       ],
     },
   ];
   let elderSorceryElementString = "";
   if (src.elderSorcery) {
-    const elderSorceryElements = src.elements
+    const elderSorceryElements = Array.from(src.elements)
       .slice()
       .sort((a, b) => a.localeCompare(b))
       .map((e) => e.charAt(0).toUpperCase() + e.slice(1));

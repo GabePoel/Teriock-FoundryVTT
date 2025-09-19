@@ -2,7 +2,7 @@ import { propertyPseudoHooks } from "../../../constants/system/pseudo-hooks.mjs"
 import { getRollIcon, mergeFreeze } from "../../../helpers/utils.mjs";
 import { ConsumableDataMixin, ExecutableDataMixin, WikiDataMixin } from "../../mixins/_module.mjs";
 import {
-  deriveModifiableDeterministic, deriveModifiableNumber, prepareModifiableBase,
+  deriveModifiableDeterministic, deriveModifiableIndeterministic, deriveModifiableNumber, prepareModifiableBase,
 } from "../../shared/fields/modifiable.mjs";
 import TeriockBaseItemModel from "../base-item-data/base-item-data.mjs";
 import * as attunement from "./methods/_attunement.mjs";
@@ -270,6 +270,10 @@ export default class TeriockEquipmentModel extends ConsumableDataMixin(WikiDataM
     prepareModifiableBase(this.bv);
     prepareModifiableBase(this.minStr);
     prepareModifiableBase(this.tier);
+    prepareModifiableBase(this.damage.base);
+    prepareModifiableBase(this.damage.twoHanded);
+    prepareModifiableBase(this.range.long);
+    prepareModifiableBase(this.range.short);
     this.hookedMacros = /** @type {Teriock.Parameters.Equipment.HookedEquipmentMacros} */ {};
     for (const pseudoHook of Object.keys(propertyPseudoHooks)) {
       this.hookedMacros[pseudoHook] = [];
@@ -289,11 +293,11 @@ export default class TeriockEquipmentModel extends ConsumableDataMixin(WikiDataM
       min: 0,
     });
     deriveModifiableNumber(this.minStr, { min: -3 });
-    deriveModifiableDeterministic(this.tier, this.actor, {
-      floor: true,
-      min: 0,
-      blank: 0,
-    });
+    deriveModifiableDeterministic(this.tier, this.actor);
+    deriveModifiableIndeterministic(this.damage.base);
+    deriveModifiableIndeterministic(this.damage.twoHanded);
+    deriveModifiableDeterministic(this.range.long, this.actor);
+    deriveModifiableDeterministic(this.range.short, this.actor);
     deriving._prepareDerivedData(this);
   }
 

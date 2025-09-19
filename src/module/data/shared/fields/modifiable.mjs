@@ -78,6 +78,12 @@ export function deriveModifiableNumber(field, options = {}) {
  * @param {number} [options.blank]
  */
 export function deriveModifiableDeterministic(field, doc, options = {}) {
+  const defaultOptions = {
+    floor: true,
+    min: 0,
+    blank: 0,
+  };
+  options = foundry.utils.mergeObject(defaultOptions, options);
   let rawValue;
   if (typeof options.blank === "number" && !field.raw) {
     rawValue = options.blank;

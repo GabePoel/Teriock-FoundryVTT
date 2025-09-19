@@ -10,7 +10,7 @@ const { api } = foundry.applications;
 export async function _setTargets(rollConfig) {
   const user = /** @type {TeriockUser} */ game.user;
   rollConfig.useData.targets = user.targets;
-  if (rollConfig.abilityData.targets.length === 1 && rollConfig.abilityData.targets.includes("self")) {
+  if (rollConfig.abilityData.targets.size === 1 && rollConfig.abilityData.targets.has("self")) {
     const token = actorToken(rollConfig.useData.actor);
     if (token) {
       rollConfig.useData.targets = new Set([ token ]);

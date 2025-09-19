@@ -195,9 +195,10 @@ export function _derivedDamage(equipmentData) {
   return deriveEquipmentDataValue(
     equipmentData,
     "damage",
-    (data) => data.damage + (equipmentData?.actor?.system.damage.standard || ("" && data.damage && data.damage !== "0")
-      ? " " + (equipmentData?.actor?.system.damage.standard || "")
-      : ""),
+    (data) => data.damage.base.value + (equipmentData?.actor?.system.damage.standard || (""
+      && data.damage.base.value
+      && data.damage.base.value
+      !== "0") ? " " + (equipmentData?.actor?.system.damage.standard || "") : ""),
     (current, override) => override || current,
     (current, upgrade) => formatStringUpgrade(current, upgrade),
   );
@@ -213,10 +214,12 @@ export function _derivedTwoHandedDamage(equipmentData) {
   return deriveEquipmentDataValue(
     equipmentData,
     "twoHandedDamage",
-    (data) => (data.twoHandedDamage && data.twoHandedDamage !== "0" ? data.twoHandedDamage : data.damage)
-      + ((equipmentData?.actor?.system.damage.standard || "") && (data.damage !== "0" || data.twoHandedDamage !== "0")
-        ? " " + (equipmentData?.actor?.system.damage.standard || "")
-        : ""),
+    (data) => (data.damage.twoHanded.value && data.damage.twoHanded.value !== "0"
+      ? data.damage.twoHanded.value
+      : data.damage.base.value) + ((equipmentData?.actor?.system.damage.standard || "") && (data.damage.base.value
+      !== "0"
+      || data.damage.twoHanded.value
+      !== "0") ? " " + (equipmentData?.actor?.system.damage.standard || "") : ""),
     (current, override) => override || current,
     (current, upgrade) => formatStringUpgrade(current, upgrade),
   );

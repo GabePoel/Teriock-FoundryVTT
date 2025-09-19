@@ -45,18 +45,28 @@ export async function _parse(equipmentData, rawHTML) {
   const damageText = getText(".damage");
   if (damageText) {
     const match = damageText.match(/^([^(]+)\s*\(([^)]+)\)/);
-    parameters.damage = match ? match[1].trim() : damageText;
+    parameters.damage = {
+      base: {},
+      twoHanded: {},
+    }
+    parameters.damage.base.saved = match ? match[1].trim() : damageText;
     if (match) {
-      parameters.twoHandedDamage = match[2].trim();
+      parameters.damage.twoHanded.saved = match[2].trim();
     }
   }
 
   // Parse numeric and range values
-  parameters.weight = cleanValue(getValue(".weight")) ?? parameters.weight;
-  parameters.shortRange = cleanValue(getText(".short-range")) ?? parameters.shortRange;
-  parameters.range = cleanValue(getText(".normal-range")) ?? parameters.range;
-  parameters.range = cleanValue(getText(".long-range")) ?? parameters.range;
-  parameters.minStr = cleanValue(getValue(".min-str")) ?? parameters.minStr;
+  parameters.range = {
+    long: {},
+    short: {},
+  }
+  parameters.weight = {};
+  parameters.minStr = {};
+  parameters.weight.saved = cleanValue(getValue(".weight")) ?? parameters.weight.saved;
+  parameters.range.short.saved = cleanValue(getText(".short-range")) ?? parameters.range.short.saved;
+  parameters.range.long.saved = cleanValue(getText(".normal-range")) ?? parameters.range.long.saved;
+  parameters.range.long.saved = cleanValue(getText(".long-range")) ?? parameters.range.long.saved;
+  parameters.minStr.saved = cleanValue(getValue(".min-str")) ?? parameters.minStr.saved;
 
   // Parse arrays
   let equipmentClasses = new Set(getTextAll(".equipment-class"));

@@ -35,15 +35,6 @@ const { fields } = foundry.data;
  * @param {object} schema - The base schema object to extend
  * @returns {object} Schema object with general ability fields added
  * @private
- *
- * @example
- * // Add general fields to a schema
- * const schema = _defineGeneral({});
- *
- * @example
- * // Use in complete schema definition
- * let schema = {};
- * schema = _defineGeneral(schema);
  */
 export function _defineGeneral(schema) {
   return {
@@ -53,7 +44,7 @@ export function _defineGeneral(schema) {
       label: "Elder Sorcery",
     }),
     elderSorceryIncant: new fields.HTMLField({ initial: "" }),
-    powerSources: new fields.ArrayField(new fields.StringField({
+    powerSources: new fields.SetField(new fields.StringField({
       choices: TERIOCK.index.powerSources,
     })),
     interaction: new fields.StringField({
@@ -85,12 +76,12 @@ export function _defineGeneral(schema) {
         choices: TERIOCK.options.ability.deliveryPackage,
       }),
     }),
-    targets: new fields.ArrayField(new fields.StringField({
+    targets: new fields.SetField(new fields.StringField({
       choices: TERIOCK.options.ability.targets,
     }), {
       initial: [ "creature" ],
     }),
-    elements: new fields.ArrayField(new fields.StringField({
+    elements: new fields.SetField(new fields.StringField({
       choices: TERIOCK.index.elements,
     })),
     duration: new fields.SchemaField({
@@ -339,7 +330,7 @@ export function _defineGeneral(schema) {
       initial: "",
       label: "Requirements",
     }),
-    effects: new fields.ArrayField(new fields.StringField({
+    effects: new fields.SetField(new fields.StringField({
       choices: TERIOCK.index.effectTypes,
     })),
     expansion: new fields.StringField({

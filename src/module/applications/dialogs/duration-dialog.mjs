@@ -34,7 +34,7 @@ export default async function durationDialog(ability) {
   }));
   try {
     await TeriockDialog.prompt({
-      window: { title: "Set Duration" },
+      window: { title: `Set ${ability.system.nameString} Duration` },
       modal: true,
       content: contentHtml,
       ok: {

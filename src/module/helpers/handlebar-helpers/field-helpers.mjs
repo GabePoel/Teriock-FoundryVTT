@@ -9,6 +9,7 @@ export default function registerFieldHelpers() {
       include = true,
       includeSecondary = true,
       unselected = "",
+      unselectedSecondary = "",
       tooltip = "",
       action = "",
       classes = "",
@@ -16,10 +17,17 @@ export default function registerFieldHelpers() {
     } = options.hash;
     let content = input;
     const hasSecondaryContent = includeSecondary && (secondary.toString() ? secondary.toString().length > 0 : false);
-    let unselectedContent = "";
+    let unselectedContent = unselected;
     const hasUnselected = unselected.toString() ? unselected.toString().length > 0 : false;
     if (hasUnselected) {
-      unselectedContent = `<div class="unselected">${unselected}</div>`;
+      if (hasSecondaryContent) {
+        if (after) {
+          unselectedContent = unselected + "&nbsp;/&nbsp;" + unselectedSecondary;
+        } else {
+          unselectedContent = unselectedSecondary + "&nbsp;/&nbsp;" + unselected;
+        }
+      }
+      unselectedContent = `<div class="unselected">${unselectedContent}</div>`;
     }
     const hasLabel = label ? label.length > 0 : false;
     const labelText = `<div class="ab-box-label" style="text-transform: none;">${label}</div>`;
