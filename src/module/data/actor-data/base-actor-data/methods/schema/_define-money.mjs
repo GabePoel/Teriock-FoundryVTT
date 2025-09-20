@@ -41,11 +41,5 @@ export function _defineMoney(schema) {
     integer: false,
     label: "Interest Rate",
   });
-  schema.moneyWeight = new fields.NumberField({
-    initial: 0,
-    integer: false,
-    label: "Money Weight",
-    min: 0,
-  });
   return schema;
 }

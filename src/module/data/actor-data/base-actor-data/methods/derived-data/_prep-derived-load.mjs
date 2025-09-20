@@ -10,26 +10,19 @@
  * @returns {void} Modifies the system object in place.
  * @private
  */
-export function _prepareEncumbrance(actorData) {
-  const actor = actorData.parent;
-  let encumbranceLevel = 0;
-  if (actorData.weightCarried >= actorData.carryingCapacity.light) {
-    encumbranceLevel = 1;
+export function _prepDerivedEncumbrance(actorData) {
+  let newEncumbranceLevel = 0;
+  if (actorData.weight.carried >= actorData.carryingCapacity.light) {
+    newEncumbranceLevel = 1;
   }
-  if (actorData.weightCarried >= actorData.carryingCapacity.heavy) {
-    encumbranceLevel = 2;
+  if (actorData.weight.carried >= actorData.carryingCapacity.heavy) {
+    newEncumbranceLevel = 2;
   }
-  if (actorData.weightCarried >= actorData.carryingCapacity.max) {
-    encumbranceLevel = 3;
+  if (actorData.weight.carried >= actorData.carryingCapacity.max) {
+    newEncumbranceLevel = 3;
   }
-  const hasCumbersome = actor.itemTypes.equipment.some((item) => item.system.equipped
-    && Array.isArray(item.system.properties)
-    && item.system.properties.includes("cumbersome"));
-  if (hasCumbersome) {
-    encumbranceLevel += 1;
-  }
-  encumbranceLevel = Math.min(encumbranceLevel, 3);
-  actorData.encumbranceLevel = encumbranceLevel;
+  newEncumbranceLevel = Math.min(actorData.encumbranceLevel + newEncumbranceLevel, 3);
+  actorData.encumbranceLevel = newEncumbranceLevel;
 }
 
 /**
@@ -40,7 +33,7 @@ export function _prepareEncumbrance(actorData) {
  * @returns {void} Modifies the system object in place.
  * @private
  */
-export function _prepareMoney(actorData) {
+export function _prepDerivedMoney(actorData) {
   const money = actorData.money;
   const currencyOptions = TERIOCK.options.currency;
   const total = Object.keys(currencyOptions).reduce((sum, key) => {
@@ -53,7 +46,7 @@ export function _prepareMoney(actorData) {
     return sum + value;
   }, 0);
   actorData.money.total = total - actorData.money.debt;
-  actorData.moneyWeight = Math.round(totalWeight * 100) / 100 || 0;
+  actorData.weight.money = Math.round(totalWeight * 100) / 100 || 0;
 }
 
 /**
@@ -64,15 +57,15 @@ export function _prepareMoney(actorData) {
  * @returns {void} Modifies the system object in place.
  * @private
  */
-export function _prepareWeightCarried(actorData) {
+export function _prepDerivedWeightCarried(actorData) {
   const actor = actorData.parent;
-  const weight = actor.itemTypes.equipment.reduce((sum, i) => {
+  actorData.weight.equipment = actor.itemTypes.equipment.reduce((sum, i) => {
     let newWeight = i.system.weight.value || 0;
     if (i.system.consumable) {
       newWeight = newWeight * i.system.quantity;
     }
     return sum + newWeight;
   }, 0);
-  const moneyWeight = Number(actorData.moneyWeight) || 0;
-  actorData.weightCarried = Math.ceil(weight + moneyWeight);
+  actorData.weight.carried = Math.ceil(actorData.weight.equipment + actorData.weight.money);
+  actorData.weight.value = actorData.weight.equipment + actorData.weight.money + actorData.weight.self;
 }

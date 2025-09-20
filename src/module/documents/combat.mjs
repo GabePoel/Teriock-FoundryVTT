@@ -129,7 +129,7 @@ export default class TeriockCombat extends Combat {
     }
     await activeGm.query("teriock.update", {
       uuid: newActor.uuid,
-      data: { "system.hasReaction": true },
+      data: { "system.combat.hasReaction": true },
     });
     const newUser = selectUser(newActor);
     await newUser.query("teriock.callPseudoHook", {

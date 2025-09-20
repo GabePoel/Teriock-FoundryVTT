@@ -101,7 +101,7 @@ function formatStringUpgrade(current, upgrade) {
   } else if (upgrade.startsWith("/")) {
     return `${current} / ${upgrade.slice(1)}`;
   } else {
-    return `${current} + ${upgrade}`;
+    return `${current} ${upgrade}`;
   }
 }
 

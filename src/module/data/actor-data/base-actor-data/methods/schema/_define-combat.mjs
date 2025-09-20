@@ -14,41 +14,33 @@ const { fields } = foundry.data;
  * @returns {object} The modified schema object with combat fields added
  */
 export function _defineCombat(schema) {
-  schema.wornAc = new fields.NumberField({
-    initial: 0,
-    integer: true,
-    label: "Worn Armor Class",
-    min: 0,
+  schema.combat = new fields.SchemaField({
+    attackPenalty: new fields.NumberField({
+      initial: 0,
+      integer: true,
+      label: "Attack Penalty",
+      max: 0,
+      step: 3,
+    }),
+    hasReaction: new fields.BooleanField({
+      initial: true,
+      label: "Has Reaction",
+    }),
   });
-  schema.naturalAv = new fields.NumberField({
-    initial: 0,
-    integer: true,
-    label: "Natural Armor Value",
-    min: 0,
-  });
-  schema.attackPenalty = new fields.NumberField({
-    initial: 0,
-    integer: true,
-    label: "Attack Penalty",
-    max: 0,
-    step: 3,
-  });
-  schema.hasReaction = new fields.BooleanField({
-    initial: true,
-    label: "Has Reaction",
-  });
-  schema.sb = new fields.BooleanField({
-    initial: false,
-    label: "Style Bonus",
-  });
-  schema.piercing = new fields.StringField({
-    initial: "none",
-    label: "Piercing",
-    choices: {
-      none: "None",
-      av0: "AV0",
-      ub: "UB",
-    },
+  schema.offense = new fields.SchemaField({
+    sb: new fields.BooleanField({
+      initial: false,
+      label: "Style Bonus",
+    }),
+    piercing: new fields.StringField({
+      initial: "none",
+      label: "Piercing",
+      choices: {
+        none: "None",
+        av0: "AV0",
+        ub: "UB",
+      },
+    }),
   });
   schema.wielding = new fields.SchemaField({
     attacker: new fields.DocumentIdField({ nullable: true }),

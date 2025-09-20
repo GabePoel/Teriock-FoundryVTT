@@ -42,30 +42,23 @@ export default class TeriockMechanicModel extends TeriockBaseItemModel {
         ? this.actor.system.mp.min + 1
         : 0);
       const mpDead = this.actor.system.mp.value === this.actor.system.mp.min;
-      const unconsciousResistant = this.actor.system.resistances.statuses.has("unconscious");
-      const unconsciousImmune = this.actor.system.immunities.statuses.has("unconscious");
-      const criticallyWoundedResistant = this.actor.system.resistances.statuses.has("criticallyWounded");
-      const criticallyWoundedImmune = this.actor.system.immunities.statuses.has("criticallyWounded");
-      const deadResistant = this.actor.system.resistances.statuses.has("dead");
-      const deadImmune = this.actor.system.immunities.statuses.has("dead");
-      const downResistant = this.actor.system.resistances.statuses.has("down");
-      const downImmune = this.actor.system.immunities.statuses.has("down");
+      const unconsciousProtected = conditionProtected(this.actor, "unconscious");
+      const criticallyWoundedProtected = conditionProtected(this.actor, "criticallyWounded");
+      const deadProtected = conditionProtected(this.actor, "dead");
+      const downProtected = conditionProtected(this.actor, "down");
       if (effect.name === "Zero HP/MP") {
         return !((hpUnconscious || mpUnconscious) && !(hpCriticallyWounded
           || mpCriticallyWounded
           || this.actor.statuses.has("criticallyWounded")
           || hpDead
           || mpDead
-          || this.actor.statuses.has("dead")) && !(unconsciousResistant
-          || unconsciousImmune
-          || downResistant
-          || downImmune));
+          || this.actor.statuses.has("dead")) && !(unconsciousProtected || downProtected));
       } else if (effect.name === "Critical HP/MP") {
         return !((hpCriticallyWounded || mpCriticallyWounded)
           && !(hpDead || mpDead || this.actor.statuses.has("dead"))
-          && !(criticallyWoundedResistant || criticallyWoundedImmune || downResistant || deadImmune));
+          && !(criticallyWoundedProtected || downProtected));
       } else if (effect.name === "Negative HP/MP") {
-        return !((hpDead || mpDead) && !(downResistant || deadImmune || deadResistant || downImmune));
+        return !((hpDead || mpDead) && !(deadProtected || downProtected));
       } else if (effect.name === "Lightly Encumbered") {
         return this.actor.system.encumbranceLevel !== 1;
       } else if (effect.name === "Heavily Encumbered") {
@@ -78,4 +71,21 @@ export default class TeriockMechanicModel extends TeriockBaseItemModel {
     }
     return false;
   }
+}
+
+/**
+ * Check if there's a protection for the given condition.
+ * @param {TeriockActor|null} actor
+ * @param {Teriock.Parameters.Condition.ConditionKey} condition
+ */
+function conditionProtected(actor, condition) {
+  let out = false;
+  if (actor) {
+    for (const protection of Object.values(actor.system.protections)) {
+      if (protection.statuses.has(condition)) {
+        out = true;
+      }
+    }
+  }
+  return out;
 }

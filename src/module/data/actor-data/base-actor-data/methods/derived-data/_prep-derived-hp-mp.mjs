@@ -3,7 +3,7 @@
  * @param {TeriockBaseActorModel} actorData
  * @private
  */
-export function _prepareDerivedHpMp(actorData) {
+export function _prepDerivedHpMp(actorData) {
   actorData.hp.max -= actorData.hp.morganti;
   actorData.mp.max -= actorData.mp.morganti;
   actorData.hp.value = Math.min(Math.max(actorData.hp.value, actorData.hp.min), actorData.hp.max);

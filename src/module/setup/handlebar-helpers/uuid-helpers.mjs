@@ -1,4 +1,4 @@
-import { pureUuid, safeUuid } from "../utils.mjs";
+import { pureUuid, safeUuid } from "../../helpers/utils.mjs";
 
 export default function registerUuidHelpers() {
   Handlebars.registerHelper("fromUuid", async (str) => await foundry.utils.fromUuid(str));

@@ -5,6 +5,7 @@ import * as data from "./data/_module.mjs";
 import * as dice from "./dice/_module.mjs";
 import * as documents from "./documents/_module.mjs";
 import * as helpers from "./helpers/_module.mjs";
+import * as setup from "./setup/_module.mjs";
 
 const {
   ActorSheet,
@@ -315,17 +316,20 @@ foundry.helpers.Hooks.once("init", function () {
     },
   };
 
+  // Register settings
+  setup.systemSettings.registerSettings();
+
   // Register custom handlebars templates
   helpers.maintenance.registerTemplates();
 });
 
-for (const hook of Object.values(helpers.hookManagement)) {
+for (const hook of Object.values(setup.hookManagement)) {
   if (typeof hook === "function") {
     hook();
   }
 }
 
-for (const helper of Object.values(helpers.handlebarHelpers)) {
+for (const helper of Object.values(setup.handlebarHelpers)) {
   if (typeof helper === "function") {
     helper();
   }

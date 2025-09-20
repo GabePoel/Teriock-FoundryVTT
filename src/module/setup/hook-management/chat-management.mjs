@@ -1,6 +1,6 @@
 import { TeriockImagePreviewer } from "../../applications/api/_module.mjs";
-import { addClickHandler } from "../html.mjs";
-import { dispatch } from "../interaction/command/_module.mjs";
+import { addClickHandler } from "../../helpers/html.mjs";
+import { dispatch } from "../../helpers/interaction/command/_module.mjs";
 
 export default function registerChatManagementHooks() {
   foundry.helpers.Hooks.on("chatMessage", (_chatLog, message, chatData) => {

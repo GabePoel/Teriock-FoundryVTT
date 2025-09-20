@@ -82,6 +82,6 @@ export function _filterEquipment(actor, equipment, filters = {}) {
     && binaryFilter(filters.consumable, e.system.consumable)
     && (!filters.powerLevel || e.system.powerLevel === filters.powerLevel)
     && (!filters.equipmentClasses || (e.system.equipmentClasses || new Set()).has(filters.equipmentClasses))
-    && (!filters.weaponFightingStyles || e.system.sb === filters.weaponFightingStyles));
+    && (!filters.weaponFightingStyles || e.system.fightingStyle === filters.weaponFightingStyles));
   return equipment;
 }

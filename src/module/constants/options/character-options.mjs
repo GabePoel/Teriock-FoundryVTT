@@ -33,4 +33,22 @@ export const characterOptions = {
     15: "Gargantuan",
     20: "Colossal",
   },
+  protectionMap: {
+    immunities: {
+      action: "immune",
+      text: "Immunity",
+    },
+    resistances: {
+      action: "rollResistance",
+      text: "Resistance",
+    },
+    hexproofs: {
+      action: "rollResistance",
+      text: "Hexproof",
+    },
+    hexseals: {
+      action: "immune",
+      text: "Hexseal",
+    },
+  },
 };

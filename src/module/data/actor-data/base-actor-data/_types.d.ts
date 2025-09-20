@@ -9,10 +9,6 @@ import type { StatDieModel } from "../../models/_module.mjs";
 export interface TeriockBaseActorData {
   /** <base> Ability flags */
   abilityFlags: Record<string, string>;
-  /** <derived> Armor class (10 + av + wornAc if wearing armor) */
-  ac: number;
-  /** <schema> Attack penalty @todo move to combat */
-  attackPenalty: number;
   /** <schema> Attributes */
   attributes: {
     /** <schema> Intelligence */
@@ -30,10 +26,6 @@ export interface TeriockBaseActorData {
   };
   /** <base> Attunements - IDs of attuned equipment */
   attunements: Set<Teriock.ID<TeriockEquipment>>;
-  /** <derived> Armor value (highest of equipped armor or natural armor) */
-  av: number;
-  /** <derived> Block value from primary blocker */
-  bv: number;
   /** <derived> Carrying capacity */
   carryingCapacity: {
     /** <derived> Light carrying capacity */
@@ -43,8 +35,13 @@ export interface TeriockBaseActorData {
     /** <derived> Maximum carrying capacity */
     max: number;
   };
-  /** <derived> Combat class (ac + bv) */
-  cc: number;
+  /** <schema> Stuff that changes during combat */
+  combat: {
+    /** <schema> Attack penalty */
+    attackPenalty: number;
+    /** <schema> Whether {@link TeriockActor} still has reaction */
+    hasReaction: boolean;
+  };
   /** Defined damage dice/expressions */
   damage: {
     /** Standard damage */
@@ -64,7 +61,32 @@ export interface TeriockBaseActorData {
       white: string;
     }
   };
-  /** <derived> The calculated encumbrance level (0-3) based on carried weight vs capacity */
+  /** <base> Defense */
+  defense: {
+    /** <base> Armor value */
+    av: {
+      /** <base> Natural armor value */
+      natural: number;
+      /** <derived> Armor value */
+      value: number;
+      /** <derived> Worn armor value */
+      worn: number;
+    };
+    /** <derived> Armor class (av + 10) */
+    ac: number;
+    /** <derived> Block value of primary blocker */
+    bv: number;
+    /** <derived> Combat class (ac + bv) */
+    cc: number;
+  };
+  /** <schema> Offense */
+  offense: {
+    /** <schema> Style bonus */
+    sb: boolean;
+    /** <schema> Piercing type */
+    piercing: string;
+  };
+  /** <base> <derived> The calculated encumbrance level (0-3) based on carried weight vs capacity */
   encumbranceLevel: number;
   /** <base> Equipment changes */
   equipmentChanges: {
@@ -75,10 +97,6 @@ export interface TeriockBaseActorData {
   };
   /** <schema> Hacks */
   hacks: HackDataCollection;
-  /** <derived> Whether the actor is wearing armor */
-  hasArmor: boolean;
-  /** <schema> Whether {@link TeriockActor} still has reaction */
-  hasReaction: boolean;
   /** <base> Registered pseudo-hook macros to fire */
   hookedMacros: Teriock.Parameters.Actor.HookedActorMacros;
   /** <schema> Hit points */
@@ -98,8 +116,6 @@ export interface TeriockBaseActorData {
   };
   /** HP Dice */
   hpDice: Record<Teriock.ID<StatDieModel>, StatDieModel>;
-  /** Immunities @todo */
-  immunities: ProtectionData;
   /** <base> Light */
   light: object;
   /** <schema> Level */
@@ -133,8 +149,6 @@ export interface TeriockBaseActorData {
     /** <schema> Total money in gold */
     total: number;
   };
-  /** <derived> Weight of carried money */
-  moneyWeight: number;
   /** <derived> Movement speed */
   movementSpeed: {
     /** <derived> Base movement speed */
@@ -161,11 +175,7 @@ export interface TeriockBaseActorData {
   mpDice: Record<Teriock.ID<StatDieModel>, StatDieModel>;
   /** <derived> The named size category (Tiny, Small, Medium, Large, Huge, Gargantuan, Colossal) */
   namedSize: string;
-  /** <derived> Natural armor value @todo move to defense or combat? */
-  naturalAv: number;
-  /** <schema> Piercing type @todo move to offense or combat? */
-  piercing: string;
-  /** <base> Presence @todo */
+  /** <base> Presence */
   presence: {
     /** <base> Maximum presence tier */
     max: number;
@@ -176,10 +186,17 @@ export interface TeriockBaseActorData {
     /** <derived> Too much presence being used */
     overflow: boolean;
   };
-  /** <base> Resistances */
-  resistances: ProtectionData;
-  /** <schema> Style bonus */
-  sb: boolean;
+  /** <base> Protections */
+  protections: {
+    /** <base> Hexproofs */
+    hexproofs: ProtectionData;
+    /** <base> Hexseals */
+    hexseals: ProtectionData;
+    /** <base> Immunities */
+    immunities: ProtectionData;
+    /** <base> Resistances */
+    resistances: ProtectionData;
+  };
   /** <base> Scaling bonuses */
   scaling: {
     /** <base> Proficiency bonus derived from level */
@@ -263,10 +280,19 @@ export interface TeriockBaseActorData {
   };
   /** <schema> Update counter - used to force an update when adding/removing effects */
   updateCounter: boolean;
-  /** <schema> Weight of the actor */
-  weight: number;
-  /** <derived> Total weight carried by the actor */
-  weightCarried: number;
+  /** <schema> Weight of the actor and what they carry */
+  weight: {
+    /** <derived> Total weight carried by the actor (equipment + money) */
+    carried: number;
+    /** <derived> Weight of the actor's equipment */
+    equipment: number;
+    /** <derived> Weight of the actor's money */
+    money: number;
+    /** <schema> Weight of the actor */
+    self: number;
+    /** <derived> Total weight of the actor and everything they carry (self + carried) */
+    value: number;
+  };
   /** <schema> Wielding */
   wielding: {
     /** <schema> Primary attacker ID */
@@ -276,8 +302,6 @@ export interface TeriockBaseActorData {
   };
   /** <schema> Wither */
   wither: BarData;
-  /** <derived> Worn armor class */
-  wornAc: number;
 }
 
 declare module "./base-actor-data.mjs" {

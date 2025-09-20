@@ -1,5 +1,5 @@
-import { getIcon } from "../path.mjs";
-import { toCamelCase } from "../string.mjs";
+import { getIcon } from "../../helpers/path.mjs";
+import { toCamelCase } from "../../helpers/string.mjs";
 
 export default function registerLookupHelpers() {
   Handlebars.registerHelper("className", (arch, name) => TERIOCK.options.rank[arch].classes[name].name);

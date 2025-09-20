@@ -8,8 +8,8 @@
 export default async function resetAttackPenaltiesQuery(queryData, { timeout }) {
   for (const actorUuid of queryData.actorUuids) {
     const actor = await foundry.utils.fromUuid(actorUuid);
-    if (actor.system.attackPenalty !== 0) {
-      await actor.update({ "system.attackPenalty": 0 });
+    if (actor.system.combat.attackPenalty !== 0) {
+      await actor.update({ "system.combat.attackPenalty": 0 });
     }
   }
 }

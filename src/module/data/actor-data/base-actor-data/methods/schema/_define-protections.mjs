@@ -84,7 +84,11 @@ function protectionField(name) {
  * @returns {object} The modified schema object with resistances and immunities fields added
  */
 export function _defineProtections(schema) {
-  schema.resistances = protectionField("resist");
-  schema.immunities = protectionField("are immune to");
+  schema.protections = new fields.SchemaField({
+    resistances: protectionField("resist"),
+    immunities: protectionField("are immune to"),
+    hexproofs: protectionField("hexproof"),
+    hexseals: protectionField("hexseal"),
+  });
   return schema;
 }

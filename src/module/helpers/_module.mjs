@@ -1,8 +1,6 @@
 export * as clean from "./clean.mjs";
 export * as createEffects from "./create-effects.mjs";
 export * as fetch from "./fetch.mjs";
-export * as handlebarHelpers from "./handlebar-helpers/_module.mjs";
-export * as hookManagement from "./hook-management/_module.mjs";
 export * as html from "./html.mjs";
 export * as maintenance from "./maintenance/_module.mjs";
 export * as queries from "./queries/_module.mjs";

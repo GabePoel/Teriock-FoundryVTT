@@ -1,5 +1,5 @@
 /** Protection Data */
-export interface ProtectionData {
+export type ProtectionData = {
   /** Abilities */
   abilities: Set<string>;
   /** Damage Types */

@@ -158,7 +158,12 @@ export async function selectConditionDialog() {
  * @returns {Promise<Teriock.Parameters.Equipment.PropertyKey|null>}
  */
 export async function selectPropertyDialog() {
-  const choices = await Promise.all(Object.values(TERIOCK.index.properties).map((name) => getProperty(name)));
+  let choices;
+  if (game.settings.get("teriock", "quickIndexProperties")) {
+    choices = game.teriock.packs.properties().index.contents;
+  } else {
+    choices = await Promise.all(Object.values(TERIOCK.index.properties).map((name) => getProperty(name)));
+  }
   const chosen = await selectDocumentDialog(choices, {
     hint: "Please select a property.",
     title: "Select Property",
@@ -200,7 +205,12 @@ export async function selectTradecraftDialog() {
  * @returns {Promise<string|null>}
  */
 export async function selectAbilityDialog() {
-  const choices = await Promise.all(Object.values(TERIOCK.index.abilities).map((name) => getAbility(name)));
+  let choices;
+  if (game.settings.get("teriock", "quickIndexAbilities")) {
+    choices = game.teriock.packs.abilities().index.contents;
+  } else {
+    choices = await Promise.all(Object.values(TERIOCK.index.abilities).map((name) => getAbility(name)));
+  }
   const chosen = await selectDocumentDialog(choices, {
     hint: "Please select an ability.",
     title: "Select Ability",
@@ -217,12 +227,20 @@ export async function selectAbilityDialog() {
  * @returns {Promise<string|null>}
  */
 export async function selectEquipmentTypeDialog() {
-  const choices = await Promise.all(Object.values(TERIOCK.index.equipment).map((name) => getItem(name, "equipment")));
-  const chosen = await selectDocumentDialog(choices, {
+  let choices;
+  if (game.settings.get("teriock", "quickIndexEquipment")) {
+    const equipmentPack = game.teriock.packs.equipment();
+    const basicFolder = equipmentPack.folders.getName("Basic Equipment");
+    choices = equipmentPack.index.contents.filter((e) => e.folder === basicFolder.id);
+  } else {
+    choices = await Promise.all(Object.values(TERIOCK.index.equipment).map((name) => getItem(name, "equipment")));
+  }
+  let chosen = await selectDocumentDialog(choices, {
     hint: "Please select an equipment type",
     title: "Select Equipment Type",
   });
   if (chosen) {
+    chosen = await fromUuid(chosen.uuid);
     return toCamelCase(chosen.system.equipmentType);
   } else {
     return null;

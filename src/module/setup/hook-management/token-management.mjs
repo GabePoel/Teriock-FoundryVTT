@@ -1,4 +1,4 @@
-import { isOwnerAndCurrentUser } from "../utils.mjs";
+import { isOwnerAndCurrentUser } from "../../helpers/utils.mjs";
 
 export default function registerTokenManagementHooks() {
   foundry.helpers.Hooks.on("moveToken", async (document, _movement, _operation, user) => {

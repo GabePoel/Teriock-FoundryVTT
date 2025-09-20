@@ -20,7 +20,7 @@
         data-action="addChange"
         data-path="{{changesPath}}"
         {{#each additionalAttrs as |value key|}}data-{{key}}="{{value}}" {{/each}}
-        {{#if (not @root.editable)}}disabled="true"{{/if}}
+        {{#if (not @root/editable)}}disabled="true"{{/if}}
       >
         <i class="fa-regular fa-square-plus"></i>
       </a>
@@ -35,7 +35,7 @@
               changeFields.key
               name=(concat ../../changesPath "." i ".key")
               value=change.key
-              disabled=(not @root.editable)
+              disabled=(not @root/editable)
             }}
           </div>
           <div class="mode">
@@ -43,8 +43,8 @@
               changeFields.mode
               name=(concat ../../changesPath "." i ".mode")
               value=change.mode
-              choices=@root.modes
-              disabled=(not @root.editable)
+              choices=@root/modes
+              disabled=(not @root/editable)
             }}
           </div>
           <div class="value">
@@ -52,7 +52,7 @@
               changeFields.value
               name=(concat ../../changesPath "." i ".value")
               value=change.value
-              disabled=(not @root.editable)
+              disabled=(not @root/editable)
             }}
           </div>
           <div class="priority">
@@ -61,7 +61,7 @@
               name=(concat ../../changesPath "." i ".priority")
               value=change.priority
               placeholder=(lookup ../../priorities change.mode)
-              disabled=(not @root.editable)
+              disabled=(not @root/editable)
             }}
           </div>
           <div class="controls">
@@ -70,7 +70,7 @@
               data-index="{{i}}"
               data-path="{{../../changesPath}}"
               {{#each ../additionalAttrs as |value key|}}data-{{key}}="{{value}}" {{/each}}
-              {{#if (not @root.editable)}}disabled="true"{{/if}}
+              {{#if (not @root/editable)}}disabled="true"{{/if}}
             >
               <i class="fa-solid fa-trash"></i>
             </a>

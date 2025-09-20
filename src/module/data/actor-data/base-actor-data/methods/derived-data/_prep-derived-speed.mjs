@@ -6,7 +6,7 @@
  * @returns {void} Modifies the system object in place.
  * @private
  */
-export function _prepareSpeed(actorData) {
+export function _prepDerivedSpeed(actorData) {
   if (actorData.speedAdjustments && typeof actorData.speedAdjustments === "object") {
     for (const key of Object.keys(actorData.speedAdjustments)) {
       if (actorData.parent.statuses.has("slowed")) {

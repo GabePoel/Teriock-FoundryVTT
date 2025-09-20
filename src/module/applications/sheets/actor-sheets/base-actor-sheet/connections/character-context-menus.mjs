@@ -11,7 +11,7 @@ export function piercingContextMenu(actor) {
       icon: "<i class=\"fa-solid fa-xmark\"></i>",
       callback: async () => {
         await actor.update({
-          "system.piercing": "none",
+          "system.offense.piercing": "none",
         });
       },
     },
@@ -20,7 +20,7 @@ export function piercingContextMenu(actor) {
       icon: "<i class=\"fa-solid fa-a\"></i>",
       callback: async () => {
         await actor.update({
-          "system.piercing": "av0",
+          "system.offense.piercing": "av0",
         });
       },
     },
@@ -29,7 +29,7 @@ export function piercingContextMenu(actor) {
       icon: "<i class=\"fa-solid fa-u\"></i>",
       callback: async () => {
         await actor.update({
-          "system.piercing": "ub",
+          "system.offense.piercing": "ub",
         });
       },
     },

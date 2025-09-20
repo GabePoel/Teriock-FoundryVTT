@@ -1,8 +1,8 @@
 if (actor) {
   await actor.update({
-    "system.sb": !actor.system.sb,
+    "system.offense.sb": !actor.system.offense.sb,
   });
-  if (actor.system.sb) {
+  if (actor.system.offense.sb) {
     ui.notifications.success(`Style bonus enabled for ${actor.name}.`);
   } else {
     ui.notifications.info(`Style bonus disabled for ${actor.name}.`);

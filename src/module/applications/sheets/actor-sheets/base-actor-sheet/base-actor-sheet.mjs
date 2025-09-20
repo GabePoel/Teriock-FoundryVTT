@@ -608,7 +608,7 @@ export default class TeriockBaseActorSheet extends HackStatMixin(CommonSheetMixi
    */
   static async _toggleReaction() {
     await this.document.update({
-      "system.hasReaction": !this.document.system.hasReaction,
+      "system.combat.hasReaction": !this.document.system.combat.hasReaction,
     });
   }
 
@@ -618,7 +618,7 @@ export default class TeriockBaseActorSheet extends HackStatMixin(CommonSheetMixi
    * @static
    */
   static async _toggleSb() {
-    await this.document.update({ "system.sb": !this.document.system.sb });
+    await this.document.update({ "system.offense.sb": !this.document.system.offense.sb });
   }
 
   /**
@@ -676,6 +676,15 @@ export default class TeriockBaseActorSheet extends HackStatMixin(CommonSheetMixi
       obj[key] = ((val + 2) % 3) - 1;
     } else {
       obj[key] = ((val + 3) % 3) - 1;
+    }
+  }
+
+  /** @inheritDoc */
+  _canDrop(doc) {
+    if (doc.type === "ability") {
+      return false;
+    } else {
+      return super._canDrop(doc);
     }
   }
 
@@ -805,7 +814,7 @@ export default class TeriockBaseActorSheet extends HackStatMixin(CommonSheetMixi
       .querySelector(".character-penalty-box")
       .addEventListener("contextmenu", async (e) => {
         e.preventDefault();
-        await this.document.update({ "system.attackPenalty": 0 });
+        await this.document.update({ "system.combat.attackPenalty": 0 });
         e.stopPropagation();
       });
 

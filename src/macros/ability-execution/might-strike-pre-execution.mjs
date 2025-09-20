@@ -6,7 +6,7 @@ const effectObject = JSON.parse(button.dataset.normal);
 const equipmentClass = await tm.dialogs.selectWeaponClassDialog();
 effectObject.changes[0] = {
   key: `system.equipmentChanges.upgrades.classes.${equipmentClass}.damage`,
-  value: "1d4[holy]",
+  value: "+ 1d4[holy]",
   mode: 2,
   priority: 10,
 };

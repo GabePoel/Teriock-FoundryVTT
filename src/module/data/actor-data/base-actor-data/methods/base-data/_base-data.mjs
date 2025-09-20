@@ -1,4 +1,5 @@
 import { pseudoHooks } from "../../../../../constants/system/pseudo-hooks.mjs";
+import { _prepBaseDefense } from "./_prep-base-defense.mjs";
 import { _prepBaseLighting } from "./_prep-base-lighting.mjs";
 import { _prepareBonuses, _prepareHpMp } from "./_prep-base-stats.mjs";
 
@@ -18,6 +19,7 @@ export function _baseData(actorData) {
   _prepareBonuses(actorData);
   _prepareHpMp(actorData);
   _prepBaseLighting(actorData);
+  _prepBaseDefense(actorData);
   actorData.transformation = {
     img: null,
   };
@@ -33,6 +35,7 @@ export function _baseData(actorData) {
     lightedTo: [],
     goadedTo: [],
   };
+  actorData.encumbranceLevel = 0;
   actorData.hookedMacros = /** @type {Teriock.Parameters.Actor.HookedActorMacros} */ {};
   for (const pseudoHook of Object.keys(pseudoHooks)) {
     actorData.hookedMacros[pseudoHook] = [];

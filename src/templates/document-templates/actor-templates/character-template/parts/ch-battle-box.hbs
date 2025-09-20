@@ -4,21 +4,21 @@
       <div class="character-shortbox character-ac-box">
         <div class="tsubtle tcenter">AC</div>
         <div class="character-smallbox-value" data-tooltip="Armor Class">
-          {{{system.ac}}}
+          {{{system.defense.ac}}}
         </div>
       </div>
 
       <div class="character-shortbox character-bv-box">
         <div class="tsubtle tcenter">BV</div>
         <div class="character-smallbox-value" data-tooltip="Block Value">
-          {{{system.bv}}}
+          {{{system.defense.bv}}}
         </div>
       </div>
 
       <div class="character-shortbox character-cc-box">
         <div class="tsubtle tcenter">AC + BV</div>
         <div class="character-smallbox-value" data-tooltip="Combined AC and BV">
-          {{{system.cc}}}
+          {{{system.defense.cc}}}
         </div>
       </div>
     </div>
@@ -63,7 +63,7 @@
     <div class="title-left tsubtle">Has Reaction</div>
     <div class="right-container" style="display: flex; align-items: center; justify-content: end; flex: 1;">
       <div class="character-smallbox-value" data-tooltip="Toggle Reaction">
-        {{#if system.hasReaction}}
+        {{#if system.combat.hasReaction}}
           <i class="fa-solid fa-check thover"></i>
         {{else}}
           <i class="fa-solid fa-xmark thover"></i>
@@ -77,11 +77,11 @@
       <div class="character-shortbox character-piercing-box">
         <div class="tsubtle tcenter" data-action="piercingChange">Piercing</div>
         <div class="character-smallbox-value thover" data-tooltip="Override Piercing">
-          {{#if (or (eq system.piercing "ub") system.primaryAttacker.system.derivedUb)}}
-            UB{{#if (eq system.piercing "ub")}}*{{/if}}
+          {{#if (or (eq system.offense.piercing "ub") system.primaryAttacker.system.derivedUb)}}
+            UB{{#if (eq system.offense.piercing "ub")}}*{{/if}}
           {{else}}
-            {{#if (or (eq system.piercing "av0") system.primaryAttacker.system.derivedAv0)}}
-              AV0{{#if (eq system.piercing "av0")}}*{{/if}}
+            {{#if (or (eq system.offense.piercing "av0") system.primaryAttacker.system.derivedAv0)}}
+              AV0{{#if (eq system.offense.piercing "av0")}}*{{/if}}
             {{else}}
               <i class="fa-solid fa-xmark thover"></i>
             {{/if}}
@@ -92,7 +92,7 @@
       <div class="character-shortbox character-sb-box" data-action="toggleSb">
         <div class="tsubtle tcenter">SB</div>
         <div class="character-smallbox-value" data-tooltip="Toggle Style Bonus">
-          {{#if system.sb}}
+          {{#if system.offense.sb}}
             <i class="fa-solid fa-check thover"></i>
           {{else}}
             <i class="fa-solid fa-xmark thover"></i>
@@ -103,8 +103,8 @@
       <div class="character-shortbox character-penalty-box">
         <div class="tsubtle tcenter">Penalty</div>
         {{formInput
-          systemFields.attackPenalty
-          value=system.attackPenalty
+          systemFields.combat.fields.attackPenalty
+          value=system.combat.attackPenalty
           classes="character-penalty-input character-smallbox-value"
           dataset=(object tooltip="Change Attack Penalty")
         }}

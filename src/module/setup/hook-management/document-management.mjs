@@ -1,4 +1,4 @@
-import { isOwnerAndCurrentUser } from "../utils.mjs";
+import { isOwnerAndCurrentUser } from "../../helpers/utils.mjs";
 
 export default function registerDocumentManagementHooks() {
   foundry.helpers.Hooks.on("updateItem", async (document, updateData, _options, userId) => {

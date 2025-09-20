@@ -1,5 +1,5 @@
-import { elementClass } from "../html.mjs";
-import { getRollIcon } from "../utils.mjs";
+import { elementClass } from "../../helpers/html.mjs";
+import { getRollIcon } from "../../helpers/utils.mjs";
 
 export default function registerFormattingHelpers() {
   Handlebars.registerHelper("firstDie", (str) => {

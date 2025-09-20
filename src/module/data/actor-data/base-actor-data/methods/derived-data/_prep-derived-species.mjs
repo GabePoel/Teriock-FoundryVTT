@@ -7,6 +7,6 @@ import TeriockActor from "../../../../../documents/actor.mjs";
  * @returns {void} Modifies the system object in place.
  * @private
  */
-export function _prepareSpecies(actorData) {
+export function _prepDerivedSpecies(actorData) {
   actorData.namedSize = TeriockActor.toNamedSize(actorData.size);
 }

@@ -41,11 +41,13 @@ export function _defineCapacities(schema) {
       min: 0,
     }),
   });
-  schema.weight = new fields.NumberField({
-    initial: 216,
-    integer: true,
-    label: "Weight",
-    min: 0,
+  schema.weight = new fields.SchemaField({
+    self: new fields.NumberField({
+      initial: 216,
+      integer: true,
+      label: "Weight",
+      min: 0,
+    }),
   });
   schema.attunements = new fields.SetField(new fields.DocumentIdField(), {
     label: "Attunements",

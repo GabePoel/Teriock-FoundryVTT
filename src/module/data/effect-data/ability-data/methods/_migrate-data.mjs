@@ -94,5 +94,36 @@ export function _migrateData(data) {
     data.effectTypes = data.effects;
     delete data.effects;
   }
+
+  migrateProtections(data);
   return data;
+}
+
+/**
+ * @param {EffectChangeData} change
+ */
+function migrateProtection(change) {
+  change.key = change.key.replace("system.resistances", "system.protections.resistances");
+  change.key = change.key.replace("system.immunities", "system.protections.immunities");
+  change.key = change.key.replace("system.hexproofs", "system.protections.hexproofs");
+  change.key = change.key.replace("system.hexseals", "system.protections.hexseals");
+}
+
+/**
+ * @param {TeriockAbilityModel} data
+ */
+function migrateProtections(data) {
+  for (const application of [
+    "base",
+    "proficient",
+    "fluent",
+    "heightened",
+  ]) {
+    if (foundry.utils.hasProperty(data, `applies.${application}.changes`)) {
+      const changes = foundry.utils.getProperty(data, `applies.${application}.changes`);
+      for (const change of changes) {
+        migrateProtection(change);
+      }
+    }
+  }
 }

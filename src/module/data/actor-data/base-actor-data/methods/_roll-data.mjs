@@ -303,7 +303,7 @@ function speedData(actorData, data) {
  * @param {object} data - The roll data object to populate.
  */
 function carryingData(actorData, data) {
-  const weightCarried = actorData.weightCarried || 0;
+  const weightCarried = actorData.weight.carried || 0;
   const lightCap = actorData.carryingCapacity.light;
   const heavyCap = actorData.carryingCapacity.heavy;
   const maxCap = actorData.carryingCapacity.max;
@@ -326,14 +326,12 @@ function carryingData(actorData, data) {
  */
 function defenseData(actorData, data) {
   Object.assign(data, {
-    av: actorData.av,
-    "av.worn": actorData.wornAc,
-    "av.worn.bonus": 0, // Would need to be calculated from effects
-    "av.nat": actorData.naturalAv,
-    "av.nat.bonus": 0, // Would need to be calculated from effects
-    ac: actorData.ac,
-    bv: actorData.bv,
-    def: actorData.ac + actorData.bv,
+    av: actorData.defense.av.value,
+    "av.worn": actorData.defense.av.worn,
+    "av.nat": actorData.defense.av.natural,
+    ac: actorData.defense.ac,
+    bv: actorData.defense.bv,
+    cc: actorData.defense.cc,
   });
 }
 
@@ -344,14 +342,14 @@ function defenseData(actorData, data) {
  */
 function offenseData(actorData, data) {
   const weaponAv0 = actorData.primaryAttacker?.system.derivedAv0;
-  const naturalAv0 = actorData.piercing === "av0" || actorData.piercing === "ub";
+  const naturalAv0 = actorData.offense.piercing === "av0" || actorData.piercing === "ub";
   const hasAv0 = weaponAv0 || naturalAv0;
   const weaponUb = actorData.primaryAttacker?.system.derivedUb;
-  const naturalUb = actorData.piercing === "ub";
+  const naturalUb = actorData.offense.piercing === "ub";
   const hasUb = weaponUb || naturalUb;
   const weaponWarded = actorData.primaryAttacker?.system.derivedWarded;
   Object.assign(data, {
-    sb: actorData.sb ? 1 : 0,
+    sb: actorData.offense.sb ? 1 : 0,
     av0: hasAv0 ? 2 : 0,
     "av0.wep": weaponAv0 ? 2 : 0,
     "av0.abi": 0, // Determined by ability used.
@@ -363,7 +361,7 @@ function offenseData(actorData, data) {
     ward: weaponWarded ? 1 : 0,
     "ward.wep": weaponWarded ? 1 : 0,
     "ward.abi": 0, // Determined by ability used.
-    atkPen: actorData.attackPenalty,
+    atkPen: actorData.combat.attackPenalty,
   });
 }
 
@@ -416,7 +414,7 @@ function moneyData(actorData, data) {
   data["money.all.num"] = Object.values(actorData.money)
     .reduce((sum, val) => sum + (val || 0), 0) - actorData.money.total;
   data["money.all.val"] = actorData.money.total || 0;
-  data["money.all.weight"] = actorData.moneyWeight || 0;
+  data["money.all.weight"] = actorData.weight.money || 0;
 
   // Coins only
   const coinKeys = [

@@ -18,7 +18,7 @@ function _prepareTradecraft(actorData, key) {
  * @returns {void} Modifies the system object in place.
  * @private
  */
-export function _prepareTradecrafts(actorData) {
+export function _prepDerivedTradecrafts(actorData) {
   for (const key of Object.keys(actorData.tradecrafts)) {
     _prepareTradecraft(actorData, key);
   }

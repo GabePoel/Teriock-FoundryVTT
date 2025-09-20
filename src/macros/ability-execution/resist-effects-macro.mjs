@@ -40,7 +40,7 @@ const choice = await tm.dialogs.selectDocumentDialog(documents, {
 function modifyData(data) {
   const effectObject = JSON.parse(data);
   effectObject.changes.push({
-    key: "system.resistances.effects",
+    key: "system.protections.resistances.effects",
     value: choice.uuid,
     mode: 2,
     priority: 10,

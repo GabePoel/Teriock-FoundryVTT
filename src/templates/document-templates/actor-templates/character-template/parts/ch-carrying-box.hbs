@@ -8,6 +8,7 @@
         systemFields.size
         value=system.size
         classes="character-size-input character-smallbox-value selected"
+        dataset=(object tooltip=system.namedSize)
       }}
     </div>
     <div class="character-shortbox character-weight-box">
@@ -16,12 +17,13 @@
       </div>
       <div class="affix">
         <div class="unselected">
-          <span class="character-weight-input character-smallbox-value">{{{system.weight}}} lb</span>
+          <span class="character-weight-input character-smallbox-value">{{{system.weight.self}}} lb</span>
         </div>
         {{formInput
-          systemFields.weight
-          value=system.weight
+          systemFields.weight.fields.self
+          value=system.weight.self
           classes="character-weight-input character-smallbox-value selected"
+          dataset=(object tooltip=(concat "Including Equipment: " system.weight.self " lb"))
         }}
       </div>
     </div>
@@ -29,7 +31,9 @@
       <div class="tsubtle tcenter">
         Carrying
       </div>
-      <div class="character-smallbox-value">{{{system.weightCarried}}} lb</div>
+      <div class="character-smallbox-value"
+           data-tooltip="Including Self: {{{system.weight.value}}} lb">{{{system.weight.carried}}} lb
+      </div>
     </div>
   </div>
   <div class="tgrid g3" style="gap: 0;">
@@ -42,15 +46,18 @@
     <div class="tsubtle tcenter">
       Max
     </div>
-    <div class="tcenter tround {{#if (geq system.weightCarried system.carryingCapacity.light)}}tred{{/if}}">
+    <div class="tcenter tround {{#if (geq system.weight.carried system.carryingCapacity.light)}}tred{{/if}}"
+         data-tooltip="Light Carrying Capacity">
       {{{system.carryingCapacity.light}}}
       lb
     </div>
-    <div class="tcenter tround {{#if (geq system.weightCarried system.carryingCapacity.heavy)}}tred{{/if}}">
+    <div class="tcenter tround {{#if (geq system.weight.carried system.carryingCapacity.heavy)}}tred{{/if}}"
+         data-tooltip="Heavy Carrying Capacity">
       {{{system.carryingCapacity.heavy}}}
       lb
     </div>
-    <div class="tcenter tround {{#if (geq system.weightCarried system.carryingCapacity.max)}}tred{{/if}}">
+    <div class="tcenter tround {{#if (geq system.weight.carried system.carryingCapacity.max)}}tred{{/if}}"
+         data-tooltip="Maximum Carrying Capacity">
       {{{system.carryingCapacity.max}}}
       lb
     </div>

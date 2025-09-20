@@ -48,12 +48,18 @@ export async function _postUpdate(actorData, skipFunctions = {}) {
 async function checkDown(actorData) {
   // Handle financial damage
   if (actorData.parent.statuses.has("down") && actorData.money.debt > 0) {
-    if (!(actorData.resistances.effects.has("hollied") || actorData.immunities.effects.has("hollied"))) {
+    if (!(actorData.protections.resistances.statuses.has("hollied")
+      || actorData.protections.immunities.statuses.has("hollied")
+      || actorData.protections.hexproofs.statuses.has("hollied")
+      || actorData.protections.hexseals.statuses.has("hollied"))) {
       try {
         await actorData.parent.toggleStatusEffect("hollied", { active: true });
       } catch {}
     }
-    if (!(actorData.resistances.effects.has("terrored") || actorData.immunities.effects.has("terrored"))) {
+    if (!(actorData.protections.resistances.statuses.has("terrored")
+      || actorData.protections.immunities.statuses.has("terrored")
+      || actorData.protections.hexproofs.statuses.has("terrored")
+      || actorData.protections.hexseals.statuses.has("terrored"))) {
       try {
         await actorData.parent.toggleStatusEffect("terrored", { active: true });
       } catch {}

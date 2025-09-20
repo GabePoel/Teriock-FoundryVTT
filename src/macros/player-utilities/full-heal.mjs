@@ -3,8 +3,8 @@ if (actor) {
   await actor.update({
     "system.hp.value": actor.system.hp.max,
     "system.mp.value": actor.system.mp.max,
-    "system.attackPenalty": 0,
-    "system.hasReaction": true,
+    "system.combat.attackPenalty": 0,
+    "system.combat.hasReaction": true,
   });
   // Remove all hacks.
   for (const [ part, value ] of Object.entries(actor.system.hacks)) {
