@@ -112,6 +112,9 @@ function cleanEntry(doc) {
       delete doc.system.description;
       delete doc.system.deleteOnExpire;
       delete doc.system.suppression;
+      if (doc.system.effectTypes) {
+        delete doc.system.effects;
+      }
       // Delete values that are only relevant in game
       delete doc.system.sustaining;
     }

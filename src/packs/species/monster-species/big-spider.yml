@@ -294,8 +294,6 @@ effects:
       heightened: ''
       endCondition: ''
       requirements: ''
-      effects:
-        - movement
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
@@ -315,6 +313,8 @@ effects:
       maxQuantity:
         raw: ''
         derived: 0
+      effectTypes:
+        - movement
     _id: I7aDzmt6y6AtcLLK
     img: systems/teriock/src/icons/abilities/acrobatics.webp
     changes: []
@@ -577,8 +577,6 @@ effects:
       heightened: ''
       endCondition: ''
       requirements: ''
-      effects:
-        - movement
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
@@ -598,6 +596,8 @@ effects:
       maxQuantity:
         raw: ''
         derived: 0
+      effectTypes:
+        - movement
     _id: w5RsaO3oaYdNx5E1
     img: systems/teriock/src/icons/abilities/climbing.webp
     changes: []
@@ -872,8 +872,6 @@ effects:
       heightened: ''
       endCondition: ''
       requirements: ''
-      effects:
-        - movement
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
@@ -893,6 +891,8 @@ effects:
       maxQuantity:
         raw: ''
         derived: 0
+      effectTypes:
+        - movement
     _id: KwRFkPdUbe7Mzh1g
     img: systems/teriock/src/icons/abilities/leaping.webp
     changes: []
@@ -1160,8 +1160,6 @@ effects:
       heightened: ''
       endCondition: ''
       requirements: ''
-      effects:
-        - resistance
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
@@ -1181,6 +1179,8 @@ effects:
       maxQuantity:
         raw: ''
         derived: 0
+      effectTypes:
+        - resistance
     _id: lOurUEdrF2GNP7Iy
     img: systems/teriock/src/icons/abilities/adrenaline.webp
     changes: []
@@ -1735,8 +1735,6 @@ effects:
       heightened: ''
       endCondition: ''
       requirements: ''
-      effects:
-        - sensory
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
@@ -1756,6 +1754,8 @@ effects:
       maxQuantity:
         raw: ''
         derived: 0
+      effectTypes:
+        - sensory
     _id: 0MsIlIW66JmAfCAU
     img: systems/teriock/src/icons/abilities/dark-vision.webp
     changes: []
@@ -4503,8 +4503,6 @@ effects:
       heightened: ''
       endCondition: Target @L[Condition:Dead]{dies}.
       requirements: ''
-      effects:
-        - poison
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
@@ -4524,6 +4522,8 @@ effects:
       maxQuantity:
         raw: ''
         derived: 0
+      effectTypes:
+        - poison
     _id: qBz8VGxh2brz7m7Q
     img: systems/teriock/src/icons/abilities/poison-strike.webp
     changes: []
@@ -5109,7 +5109,11 @@ effects:
           checks: []
           duration: 0
           changes:
-            - key: system.wornAc
+            - key: system.equipmentChanges.upgrades.classes.armor.av
+              mode: 2
+              value: '0'
+              priority: 0
+            - key: system.equipmentChanges.upgrades.classes.armor.av
               mode: 4
               value: '1'
               priority: 10

@@ -293,8 +293,6 @@ effects:
         At the start of each of your @L[Core:Turn]{turns}, you roll [[/roll
         2d4]]. If either of these dice roll a 4, this effect ends.
       requirements: ''
-      effects:
-        - movement
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
@@ -314,6 +312,8 @@ effects:
       maxQuantity:
         raw: ''
         derived: 0
+      effectTypes:
+        - movement
     _id: oUIgsh14OU9naofi
     img: systems/teriock/src/icons/abilities/tumble.webp
     changes: []
@@ -348,7 +348,11 @@ effects:
           checks: []
           duration: 0
           changes:
-            - key: system.wornAc
+            - key: system.equipmentChanges.upgrades.classes.armor.av
+              mode: 2
+              value: '0'
+              priority: 0
+            - key: system.equipmentChanges.upgrades.classes.armor.av
               mode: 4
               value: '1'
               priority: 10
