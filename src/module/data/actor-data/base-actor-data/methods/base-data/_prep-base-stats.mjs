@@ -1,3 +1,5 @@
+import { docSort } from "../../../../../helpers/utils.mjs";
+
 /**
  * Prepares level-based bonuses for the actor.
  * Calculates presence, rank, proficiency, and fluency bonuses based on level.
@@ -38,7 +40,7 @@ export function _prepareHpMp(actorData) {
   let mpDieBox = "";
   actorData.hpDice = {};
   actorData.mpDice = {};
-  actorData.parent.species.forEach((species) => {
+  docSort(actorData.parent.species).forEach((species) => {
     if (species.system.applyHp) {
       actorData.hp.base += species.system.totalHp;
       hpDieBox += species.system.renderedHitDice;
@@ -50,7 +52,7 @@ export function _prepareHpMp(actorData) {
       Object.assign(actorData.mpDice, species.system.mpDice);
     }
   });
-  actorData.parent.ranks.slice(0, diceLimit).forEach((rank) => {
+  docSort(actorData.parent.ranks).slice(0, diceLimit).forEach((rank) => {
     if (rank.system.applyHp) {
       actorData.hp.base += rank.system.totalHp;
       hpDieBox += rank.system.renderedHitDice;
