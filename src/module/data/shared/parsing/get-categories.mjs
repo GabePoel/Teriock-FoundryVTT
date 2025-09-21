@@ -1,13 +1,14 @@
+import { safeParseHTML } from "../../../helpers/html.mjs";
+
 /**
  * Extracts categories from HTML.
- * @param {string} html
+ * @param {string} htmlString
  * @returns {Set<string>}
  */
-export function getCategoriesFromHTML(html) {
-  const tempDiv = document.createElement("div");
-  tempDiv.innerHTML = html;
+export function getCategoriesFromHTML(htmlString) {
+  const htmlElement = safeParseHTML(htmlString);
   const categories = new Set();
-  tempDiv
+  htmlElement
     .querySelectorAll("span.metadata[data-type='category']")
     .forEach((el) => {
       if (el instanceof HTMLElement) {

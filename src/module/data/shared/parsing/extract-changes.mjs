@@ -1,16 +1,16 @@
+import { safeParseHTML } from "../../../helpers/html.mjs";
+
 /**
  * Extracts changes from HTML content.
  * Finds change metadata elements and extracts their key, mode, value, and priority.
  *
- * @param {string} html - The HTML content to extract changes from.
+ * @param {string} htmlString - The HTML content to extract changes from.
  * @returns {EffectChangeData[]} Array of change objects with a key, mode, value, and priority.
- * @private
  */
-export function extractChangesFromHTML(html) {
-  const tempDiv = document.createElement("div");
-  tempDiv.innerHTML = html || "";
+export function extractChangesFromHTML(htmlString) {
+  const htmlElement = safeParseHTML(htmlString);
   const changes = [];
-  tempDiv
+  htmlElement
     .querySelectorAll("span.metadata[data-type='change']")
     .forEach((el) => {
       if (!(el instanceof HTMLElement)) {

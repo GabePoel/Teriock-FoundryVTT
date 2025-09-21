@@ -230,8 +230,7 @@ export async function selectEquipmentTypeDialog() {
   let choices;
   if (game.settings.get("teriock", "quickIndexEquipment")) {
     const equipmentPack = game.teriock.packs.equipment();
-    const basicFolder = equipmentPack.folders.getName("Basic Equipment");
-    choices = equipmentPack.index.contents.filter((e) => e.folder === basicFolder.id);
+    choices = equipmentPack.index.contents;
   } else {
     choices = await Promise.all(Object.values(TERIOCK.index.equipment).map((name) => getItem(name, "equipment")));
   }

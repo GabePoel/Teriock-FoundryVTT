@@ -12,7 +12,8 @@
           {{> "systems/teriock/src/templates/document-templates/effect-templates/ability-template/bars/ab-targeting-bar.hbs"}}
           {{> "systems/teriock/src/templates/document-templates/effect-templates/ability-template/bars/ab-expansion-bar.hbs"}}
           {{> "systems/teriock/src/templates/document-templates/effect-templates/ability-template/bars/ab-costs-bar.hbs"}}
-          {{#if system.consumable}}{{> "systems/teriock/src/templates/document-templates/shared/consumable-bar.hbs"}}{{/if}}
+          {{#if
+            system.consumable}}{{> "systems/teriock/src/templates/document-templates/shared/consumable-bar.hbs"}}{{/if}}
         </div>
       </div>
       {{> "systems/teriock/src/templates/document-templates/effect-templates/ability-template/parts/ab-menu.hbs"}}
@@ -79,6 +80,14 @@
           disabled=(not editable)
           hidden=(not (exists system.limitation))
         }}
+        <div class="ab-section-container">
+          <div class="ab-section">
+            <span class="ab-section-title ab-section-title-dynamic">Granter Only</span>
+          </div>
+          <div>
+            {{{enriched.grantOnly}}}
+          </div>
+        </div>
         {{formGroup
           systemFields.improvement
           value=system.improvement

@@ -163,6 +163,10 @@ export function _messageParts(abilityData) {
       text: src.limitation,
     },
     {
+      title: "Granter Only",
+      text: src.grantOnlyText,
+    },
+    {
       title: "Improvement",
       text: src.improvement,
     },

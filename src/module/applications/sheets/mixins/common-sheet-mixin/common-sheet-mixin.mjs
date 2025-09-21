@@ -769,7 +769,8 @@ export default (Base) => {
           const uuidPromises = [];
 
           if (embedded?.id === "lighted") {
-            uuidPromises.push(Promise.all(this.document.system.trackers.lightedTo.map((uuid) => foundry.utils.fromUuid(uuid)))
+            uuidPromises.push(Promise.all(this.document.system.trackers.lightedTo.map((uuid) => foundry.utils.fromUuid(
+                uuid)))
               .then((tokens) => {
                 let lightedToText = "<ul>";
                 tokens.forEach((token, idx) => {
@@ -860,8 +861,17 @@ export default (Base) => {
      */
     async _prepareMacroContext(context) {
       if (this.document.system.macros) {
-        context.macros = await Promise.all(Array.from(this.document.system.macros.map((uuid) => foundry.utils.fromUuid(
-          uuid))));
+        context.macros = await Promise.all(Array.from(this.document.system.macros.map(async (uuid) => {
+          let macro = await foundry.utils.fromUuid(uuid);
+          if (!macro) {
+            macro = {
+              name: "Broken Macro",
+              uuid: uuid,
+              img: "icons/svg/hazard.svg",
+            };
+          }
+          return macro;
+        })));
       } else {
         context.macros = [];
       }

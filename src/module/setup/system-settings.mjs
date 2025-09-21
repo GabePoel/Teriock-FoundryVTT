@@ -2,7 +2,17 @@ import { toTitleCase } from "../helpers/string.mjs";
 
 export function registerSettings() {
   /** @type {Record<string, Partial<SettingConfig>>} */
-  const settings = {};
+  const settings = {
+    developerMode: {
+      name: "Developer Mode",
+      hint: "Check this if you are a developer of the Teriock system and need additional features. Do not check this "
+        + "otherwise. It is likely to break your game. Even module developers shouldn't check this.",
+      scope: "world",
+      config: true,
+      type: Boolean,
+      default: false,
+    }
+  };
   const quickIndexDefaults = {
     abilities: true,
     equipment: false,

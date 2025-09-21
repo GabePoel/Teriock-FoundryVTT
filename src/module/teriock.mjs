@@ -291,8 +291,8 @@ foundry.helpers.Hooks.once("init", function () {
     Roll: dice.TeriockRoll,
     data: data,
     packs: {
-      rules: () => /** @type {TeriockJournalCompendium} */
-        packs.get("teriock.rules"),
+      abilities: () => /** @type {TeriockWrapperCompendium} */
+        packs.get("teriock.abilities"),
       classes: () => /** @type {TeriockRankCompendium} */
         packs.get("teriock.classes"),
       creatures: () => /** @type {TeriockCharacterCompendium} */
@@ -301,16 +301,16 @@ foundry.helpers.Hooks.once("init", function () {
         packs.get("teriock.equipment"),
       essentials: () => /** @type {TeriockPowerCompendium} */
         packs.get("teriock.essentials"),
-      powers: () => /** @type {TeriockPowerCompendium} */
-        packs.get("teriock.powers"),
-      abilities: () => /** @type {TeriockWrapperCompendium} */
-        packs.get("teriock.abilities"),
-      properties: () => /** @type {TeriockWrapperCompendium} */
-        packs.get("teriock.properties"),
       execution: () => /** @type {TeriockMacroCompendium} */
         packs.get("teriock.execution"),
       maintenance: () => /** @type {TeriockMacroCompendium} */
         packs.get("teriock.maintenance"),
+      powers: () => /** @type {TeriockPowerCompendium} */
+        packs.get("teriock.powers"),
+      properties: () => /** @type {TeriockWrapperCompendium} */
+        packs.get("teriock.properties"),
+      rules: () => /** @type {TeriockJournalCompendium} */
+        packs.get("teriock.rules"),
       species: () => /** @type {TeriockPowerCompendium} */
         packs.get("teriock.species"),
     },

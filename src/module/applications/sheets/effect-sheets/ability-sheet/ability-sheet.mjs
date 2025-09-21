@@ -359,6 +359,7 @@ export default class TeriockAbilitySheet extends PassiveSheetMixin(TeriockBaseEf
       requirements: system.requirements,
       elderSorceryIncant: system.elderSorceryIncant,
       limitation: system.limitation,
+      grantOnly: system.grantOnlyText,
       improvement: system.improvement,
       attributeImprovement: system.attributeImprovementText,
       featSaveImprovement: system.featSaveImprovementText,

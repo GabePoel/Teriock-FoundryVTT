@@ -67,6 +67,8 @@ declare module "./ability-data.mjs" {
     form: Teriock.Parameters.Shared.Form;
     /** <schema> If this ability is gifted and how much it costs if so */
     gifted: CostAdjustment;
+    /** <schema> Can only be used with the item that grants it. */
+    grantOnly: boolean;
     /** <schema> Description of how this ability changes if heightened */
     heightened: string;
     /**

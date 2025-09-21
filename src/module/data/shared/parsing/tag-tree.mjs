@@ -1,12 +1,12 @@
 /**
  * Builds a tag tree from tag containers in the document.
  * Extracts and organizes tags from CSS classes for processing.
- * @param {Document} doc - The parsed HTML document.
+ * @param {HTMLElement} htmlElement - The parsed HTML document.
  * @returns {object} Object containing organized tags by type.
  */
-export function buildTagTree(doc) {
+export function buildTagTree(htmlElement) {
   const tagTree = {};
-  doc.querySelectorAll(".tag-container").forEach((el) => {
+  htmlElement.querySelectorAll(".tag-container").forEach((el) => {
     const tags = Array.from(el.classList)
       .filter((cls) => cls.endsWith("-tagged"))
       .map((cls) => cls.replace("-tagged", ""));

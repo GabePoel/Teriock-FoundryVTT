@@ -84,7 +84,7 @@ export interface TeriockBaseActorData {
     /** <schema> Style bonus */
     sb: boolean;
     /** <schema> Piercing type */
-    piercing: string;
+    piercing: "av0" | "ub" | "none";
   };
   /** <base> <derived> The calculated encumbrance level (0-3) based on carried weight vs capacity */
   encumbranceLevel: number;

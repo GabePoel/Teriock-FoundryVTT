@@ -148,8 +148,11 @@ export async function _parse(abilityData, rawHTML) {
   // Clean parameters
   delete parameters.improvement;
   delete parameters.limitation;
+  delete parameters.gifted;
+  delete parameters.adept;
   delete parameters.hierarchy.supId;
   delete parameters.hierarchy.subIds;
+  delete parameters.grantOnly;
 
   // Process dice and effect extraction
   processDiceAndEffectExtraction(parameters);

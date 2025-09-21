@@ -31,7 +31,6 @@ export default (Base) => {
 
     /** @inheritDoc */
     wikiOpen() {
-      // this.parent.hookCall?.("wikiOpen");
       const pageTitle = this.wikiPage;
       ui.notifications.info(`Opening ${pageTitle}.`);
       openWikiPage(pageTitle);
@@ -40,25 +39,28 @@ export default (Base) => {
     /** @inheritDoc */
     async wikiPull(options = {}) {
       const notify = options.notify !== false;
-      // this.parent.hookCall?.("wikiPull");
-      const pageTitle = this.wikiPage;
-      if (notify) {
-        ui.notifications.info(`Pulling ${pageTitle} from wiki.`);
-      }
+      if (game.settings.get("teriock", "developerMode")) {
+        const pageTitle = this.wikiPage;
+        if (notify) {
+          ui.notifications.info(`Pulling ${pageTitle} from wiki.`);
+        }
 
-      const wikiPage = await fetchWikiPageHTML(pageTitle, {
-        simplifyWikiLinks: false,
-      });
-      if (wikiPage) {
-        const parsed = await this.parse(wikiPage);
-        await this.parent.update(parsed);
-        if (notify) {
-          ui.notifications.success(`Updated ${this.parent.name} with ${pageTitle} wiki data.`);
+        const wikiPage = await fetchWikiPageHTML(pageTitle, {
+          simplifyWikiLinks: false,
+        });
+        if (wikiPage) {
+          const parsed = await this.parse(wikiPage);
+          await this.parent.update(parsed);
+          if (notify) {
+            ui.notifications.success(`Updated ${this.parent.name} with ${pageTitle} wiki data.`);
+          }
+        } else {
+          if (notify) {
+            ui.notifications.error(`${pageTitle} not found on wiki.`);
+          }
         }
-      } else {
-        if (notify) {
-          ui.notifications.error(`${pageTitle} not found on wiki.`);
-        }
+      } else if (notify) {
+        ui.notifications.error(`Only developers can pull from the wiki.`);
       }
     }
   });

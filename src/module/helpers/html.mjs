@@ -339,3 +339,18 @@ export async function classMessage(className) {
   message.classList.add("teriock");
   return await TextEditor.enrichHTML(message.innerHTML);
 }
+
+/**
+ * Parse a string of HTML as an element.
+ * @param {string} htmlString
+ * @returns {HTMLElement}
+ */
+export function safeParseHTML(htmlString) {
+  htmlString = htmlString || "";
+  let htmlElement = foundry.utils.parseHTML(htmlString);
+  if (!(htmlElement instanceof HTMLElement)) {
+    htmlElement = document.createElement("div");
+    htmlElement.innerHTML = htmlString;
+  }
+  return htmlElement;
+}

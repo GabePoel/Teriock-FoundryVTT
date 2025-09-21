@@ -39,187 +39,19 @@ const { fields } = foundry.data;
 export function _defineGeneral(schema) {
   return {
     ...schema,
-    elderSorcery: new fields.BooleanField({
-      initial: false,
-      label: "Elder Sorcery",
-    }),
-    elderSorceryIncant: new fields.HTMLField({ initial: "" }),
-    powerSources: new fields.SetField(new fields.StringField({
-      choices: TERIOCK.index.powerSources,
-    })),
-    interaction: new fields.StringField({
-      initial: "attack",
-      choices: TERIOCK.options.ability.interaction,
-    }),
-    featSaveAttribute: new fields.StringField({
-      initial: "mov",
-      choices: TERIOCK.index.attributes,
-    }),
-    maneuver: new fields.StringField({
-      initial: "active",
-      choices: TERIOCK.options.ability.maneuver,
-    }),
-    executionTime: new fields.StringField({ initial: "a1" }),
-    delivery: new fields.SchemaField({
-      base: new fields.StringField({
-        initial: "weapon",
-        choices: TERIOCK.options.ability.delivery,
-      }),
-      parent: new fields.StringField({
-        initial: null,
-        nullable: true,
-        choices: TERIOCK.options.ability.deliveryParent,
-      }),
-      package: new fields.StringField({
-        initial: null,
-        nullable: true,
-        choices: TERIOCK.options.ability.deliveryPackage,
-      }),
-    }),
-    targets: new fields.SetField(new fields.StringField({
-      choices: TERIOCK.options.ability.targets,
-    }), {
-      initial: [ "creature" ],
-    }),
-    elements: new fields.SetField(new fields.StringField({
-      choices: TERIOCK.index.elements,
-    })),
-    duration: new fields.SchemaField({
-      unit: new fields.StringField({
-        choices: TERIOCK.options.ability.duration.unit,
-        initial: "minute",
-        label: "Unit",
-        hint: "Unit of time for this ability's duration.",
-      }),
-      quantity: new fields.NumberField({
+    adept: new fields.SchemaField({
+      enabled: new fields.BooleanField({ label: "Adept" }),
+      amount: new fields.NumberField({
         initial: 1,
-        min: 0,
-        label: "Quantity",
-        hint: "How many of the aforementioned unit should this unit be active for? Irrelevant for \"Instant\" and \"No Limit\" units.",
-      }),
-      conditions: new fields.SchemaField({
-        present: new fields.SetField(new fields.StringField({ choices: TERIOCK.index.conditions }), {
-          label: "Present Conditions",
-          hint: "What conditions must be present in order for this ability to be active?",
-        }),
-        absent: new fields.SetField(new fields.StringField({ choices: TERIOCK.index.conditions }), {
-          label: "Absent Conditions",
-          hint: "What conditions must be absent in order for this ability to be active?",
-        }),
-      }),
-      stationary: new fields.BooleanField({
-        label: "Stationary",
-        hint: "Do you need to be stationary for this ability to be active?",
-      }),
-      description: new fields.StringField({
-        label: "Description",
-        hint: "Custom description. Leave blank in order for the duration to be automatically generated.",
-        initial: "1 Minute",
+        min: 1,
+        integer: true,
       }),
     }),
-    sustained: new fields.BooleanField({
+    basic: new fields.BooleanField({
       initial: false,
-      label: "Sustained",
-    }),
-    range: new fields.StringField({
-      initial: null,
-      nullable: true,
-    }),
-    overview: new fields.SchemaField({
-      base: new TextField({
-        initial: "",
-        label: "Description",
-      }),
-      proficient: new TextField({
-        initial: "",
-        label: "If Proficient",
-      }),
-      fluent: new TextField({
-        initial: "",
-        label: "If Fluent",
-      }),
-    }),
-    results: new fields.SchemaField({
-      hit: new TextField({
-        initial: "",
-        label: "On Hit",
-      }),
-      critHit: new TextField({
-        initial: "",
-        label: "On Critical Hit",
-      }),
-      miss: new TextField({
-        initial: "",
-        label: "On Miss",
-      }),
-      critMiss: new TextField({
-        initial: "",
-        label: "On Critical Miss",
-      }),
-      save: new TextField({
-        initial: "",
-        label: "On Success",
-      }),
-      critSave: new TextField({
-        initial: "",
-        label: "On Critical Success",
-      }),
-      fail: new TextField({
-        initial: "",
-        label: "On Fail",
-      }),
-      critFail: new TextField({
-        initial: "",
-        label: "On Critical Fail",
-      }),
-    }),
-    piercing: new fields.StringField({
-      initial: "normal",
-      choices: TERIOCK.options.ability.piercing,
-    }),
-    improvements: new fields.SchemaField({
-      attributeImprovement: new fields.SchemaField({
-        attribute: new fields.StringField({
-          initial: null,
-          nullable: true,
-          choices: TERIOCK.index.statAttributes,
-        }),
-        minVal: new fields.NumberField({ initial: 0 }),
-      }),
-      featSaveImprovement: new fields.SchemaField({
-        attribute: new fields.StringField({
-          initial: null,
-          nullable: true,
-          choices: TERIOCK.index.attributes,
-        }),
-        amount: new fields.StringField({ initial: "proficient" }),
-      }),
-    }),
-    skill: new fields.BooleanField({
-      initial: false,
-      label: "Skill",
-    }),
-    spell: new fields.BooleanField({
-      initial: false,
-      label: "Spell",
-    }),
-    standard: new fields.BooleanField({
-      initial: false,
-      label: "Standard",
-    }),
-    ritual: new fields.BooleanField({
-      initial: false,
-      label: "Ritual",
+      label: "Basic",
     }),
     class: new fields.StringField({ choices: TERIOCK.options.ability.class }),
-    rotator: new fields.BooleanField({
-      initial: false,
-      label: "Rotator",
-    }),
-    invoked: new fields.BooleanField({
-      initial: false,
-      label: "Invoked",
-    }),
     costs: new fields.SchemaField({
       verbal: new fields.BooleanField({
         initial: false,
@@ -318,21 +150,71 @@ export function _defineGeneral(schema) {
         label: "Material Cost",
       }),
     }),
-    heightened: new TextField({
-      initial: "",
-      label: "Heightened",
+    delivery: new fields.SchemaField({
+      base: new fields.StringField({
+        initial: "weapon",
+        choices: TERIOCK.options.ability.delivery,
+      }),
+      parent: new fields.StringField({
+        initial: null,
+        nullable: true,
+        choices: TERIOCK.options.ability.deliveryParent,
+      }),
+      package: new fields.StringField({
+        initial: null,
+        nullable: true,
+        choices: TERIOCK.options.ability.deliveryPackage,
+      }),
     }),
-    endCondition: new TextField({
-      initial: "",
-      label: "End Condition",
-    }),
-    requirements: new TextField({
-      initial: "",
-      label: "Requirements",
+    duration: new fields.SchemaField({
+      unit: new fields.StringField({
+        choices: TERIOCK.options.ability.duration.unit,
+        initial: "minute",
+        label: "Unit",
+        hint: "Unit of time for this ability's duration.",
+      }),
+      quantity: new fields.NumberField({
+        initial: 1,
+        min: 0,
+        label: "Quantity",
+        hint: "How many of the aforementioned unit should this unit be active for? Irrelevant for \"Instant\" and \"No Limit\" units.",
+      }),
+      conditions: new fields.SchemaField({
+        present: new fields.SetField(new fields.StringField({ choices: TERIOCK.index.conditions }), {
+          label: "Present Conditions",
+          hint: "What conditions must be present in order for this ability to be active?",
+        }),
+        absent: new fields.SetField(new fields.StringField({ choices: TERIOCK.index.conditions }), {
+          label: "Absent Conditions",
+          hint: "What conditions must be absent in order for this ability to be active?",
+        }),
+      }),
+      stationary: new fields.BooleanField({
+        label: "Stationary",
+        hint: "Do you need to be stationary for this ability to be active?",
+      }),
+      description: new fields.StringField({
+        label: "Description",
+        hint: "Custom description. Leave blank in order for the duration to be automatically generated.",
+        initial: "1 Minute",
+      }),
     }),
     effectTypes: new fields.SetField(new fields.StringField({
       choices: TERIOCK.index.effectTypes,
     })),
+    elderSorcery: new fields.BooleanField({
+      initial: false,
+      label: "Elder Sorcery",
+    }),
+    elderSorceryIncant: new fields.HTMLField({ initial: "" }),
+    elements: new fields.SetField(new fields.StringField({
+      choices: TERIOCK.index.elements,
+    })),
+    endCondition: new TextField({
+      initial: "",
+      label: "End Condition",
+    }),
+    executionTime: new fields.StringField({ initial: "a1" }),
     expansion: new fields.StringField({
       initial: null,
       nullable: true,
@@ -342,35 +224,11 @@ export function _defineGeneral(schema) {
       nullable: true,
     }),
     expansionSaveAttribute: new fields.StringField({ initial: "mov" }),
-    trigger: new TextField({
-      initial: "",
-      label: "Trigger",
-    }),
-    basic: new fields.BooleanField({
-      initial: false,
-      label: "Basic",
+    featSaveAttribute: new fields.StringField({
+      initial: "mov",
+      choices: TERIOCK.index.attributes,
     }),
     form: new fields.StringField({ initial: "normal" }),
-    limitation: new TextField({
-      initial: "",
-      label: "Limitation",
-    }),
-    improvement: new TextField({
-      initial: "",
-      label: "Improvement",
-    }),
-    prepared: new fields.BooleanField({
-      initial: true,
-      label: "Prepared",
-    }),
-    warded: new fields.BooleanField({
-      initial: false,
-      label: "Warded",
-    }),
-    secret: new fields.BooleanField({
-      initial: false,
-      label: "Secret",
-    }),
     gifted: new fields.SchemaField({
       enabled: new fields.BooleanField({ label: "Gifted" }),
       amount: new fields.NumberField({
@@ -379,13 +237,159 @@ export function _defineGeneral(schema) {
         integer: true,
       }),
     }),
-    adept: new fields.SchemaField({
-      enabled: new fields.BooleanField({ label: "Adept" }),
-      amount: new fields.NumberField({
-        initial: 1,
-        min: 1,
-        integer: true,
+    grantOnly: new fields.BooleanField({
+      initial: false,
+      label: "Granter Only",
+    }),
+    heightened: new TextField({
+      initial: "",
+      label: "Heightened",
+    }),
+    improvement: new TextField({
+      initial: "",
+      label: "Improvement",
+    }),
+    improvements: new fields.SchemaField({
+      attributeImprovement: new fields.SchemaField({
+        attribute: new fields.StringField({
+          initial: null,
+          nullable: true,
+          choices: TERIOCK.index.statAttributes,
+        }),
+        minVal: new fields.NumberField({ initial: 0 }),
       }),
+      featSaveImprovement: new fields.SchemaField({
+        attribute: new fields.StringField({
+          initial: null,
+          nullable: true,
+          choices: TERIOCK.index.attributes,
+        }),
+        amount: new fields.StringField({ initial: "proficient" }),
+      }),
+    }),
+    interaction: new fields.StringField({
+      initial: "attack",
+      choices: TERIOCK.options.ability.interaction,
+    }),
+    invoked: new fields.BooleanField({
+      initial: false,
+      label: "Invoked",
+    }),
+    limitation: new TextField({
+      initial: "",
+      label: "Limitation",
+    }),
+    maneuver: new fields.StringField({
+      initial: "active",
+      choices: TERIOCK.options.ability.maneuver,
+    }),
+    overview: new fields.SchemaField({
+      base: new TextField({
+        initial: "",
+        label: "Description",
+      }),
+      proficient: new TextField({
+        initial: "",
+        label: "If Proficient",
+      }),
+      fluent: new TextField({
+        initial: "",
+        label: "If Fluent",
+      }),
+    }),
+    piercing: new fields.StringField({
+      initial: "normal",
+      choices: TERIOCK.options.ability.piercing,
+    }),
+    powerSources: new fields.SetField(new fields.StringField({
+      choices: TERIOCK.index.powerSources,
+    })),
+    prepared: new fields.BooleanField({
+      initial: true,
+      label: "Prepared",
+    }),
+    range: new fields.StringField({
+      initial: null,
+      nullable: true,
+    }),
+    requirements: new TextField({
+      initial: "",
+      label: "Requirements",
+    }),
+    results: new fields.SchemaField({
+      hit: new TextField({
+        initial: "",
+        label: "On Hit",
+      }),
+      critHit: new TextField({
+        initial: "",
+        label: "On Critical Hit",
+      }),
+      miss: new TextField({
+        initial: "",
+        label: "On Miss",
+      }),
+      critMiss: new TextField({
+        initial: "",
+        label: "On Critical Miss",
+      }),
+      save: new TextField({
+        initial: "",
+        label: "On Success",
+      }),
+      critSave: new TextField({
+        initial: "",
+        label: "On Critical Success",
+      }),
+      fail: new TextField({
+        initial: "",
+        label: "On Fail",
+      }),
+      critFail: new TextField({
+        initial: "",
+        label: "On Critical Fail",
+      }),
+    }),
+    ritual: new fields.BooleanField({
+      initial: false,
+      label: "Ritual",
+    }),
+    rotator: new fields.BooleanField({
+      initial: false,
+      label: "Rotator",
+    }),
+    secret: new fields.BooleanField({
+      initial: false,
+      label: "Secret",
+    }),
+    skill: new fields.BooleanField({
+      initial: false,
+      label: "Skill",
+    }),
+    spell: new fields.BooleanField({
+      initial: false,
+      label: "Spell",
+    }),
+    standard: new fields.BooleanField({
+      initial: false,
+      label: "Standard",
+    }),
+    sustained: new fields.BooleanField({
+      initial: false,
+      label: "Sustained",
+    }),
+    targets: new fields.SetField(new fields.StringField({
+      choices: TERIOCK.options.ability.targets,
+    }), {
+      initial: [ "creature" ],
+    }),
+    trigger: new TextField({
+      initial: "",
+      label: "Trigger",
+    }),
+    warded: new fields.BooleanField({
+      initial: false,
+      label: "Warded",
     }),
   };
 }

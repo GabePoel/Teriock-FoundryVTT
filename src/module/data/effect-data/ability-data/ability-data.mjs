@@ -87,6 +87,17 @@ export default class TeriockAbilityModel extends HierarchyDataMixin(ConsumableDa
     return "";
   }
 
+  /**
+   * Gets the grant only text.
+   * @returns {string}
+   */
+  get grantOnlyText() {
+    if (this.grantOnly) {
+      return `This ability can only be used with @UUID[${this.parent.parent.uuid}].`;
+    }
+    return "";
+  }
+
   /** @inheritDoc */
   get messageParts() {
     return {
@@ -97,6 +108,9 @@ export default class TeriockAbilityModel extends HierarchyDataMixin(ConsumableDa
   /** @inheritDoc */
   get nameString() {
     const additions = [];
+    if (this.grantOnly) {
+      additions.push("Granted");
+    }
     if (this.limitation && this.limitation.length > 0) {
       additions.push("Limited");
     }

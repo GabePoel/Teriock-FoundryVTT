@@ -4,14 +4,14 @@ import { toTitleCase } from "../../../helpers/string.mjs";
 /**
  * Helper function to get bar text content from ability bars.
  * Optionally cleans and formats the text for display.
- * @param {Document} doc - The parsed HTML document.
+ * @param {HTMLElement} htmlElement - The parsed HTML document.
  * @param {string} selector - The selector for the bar content.
  * @param {boolean} clean - Whether to clean and format the text.
  * @returns {string|null} The bar text content or null if not found.
  * @private
  */
-export function getBarText(doc, selector, clean = false) {
-  const el = doc.querySelector(`.ability-bar-${selector} .ability-bar-content`);
+export function getBarText(htmlElement, selector, clean = false) {
+  const el = htmlElement.querySelector(`.ability-bar-${selector} .ability-bar-content`);
   el?.querySelectorAll(".ability-bar").forEach((el2) => el2.remove());
   let text = el?.innerHTML || null;
   if (text && clean) {
