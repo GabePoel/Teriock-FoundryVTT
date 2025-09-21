@@ -1,14 +1,23 @@
 The icons in the following directories are licensed
 from [CraftPix.net](https://craftpix.net/) ([License](https://craftpix.net/file-licenses/)).
 
-- [`./abilities`]()
-- [`./archetypes`]()
-- [`./classes`]()
-- [`./conditions`]()
-- [`./equipment`]()
-- [`./powers`]()
-- [`./powers`]()
-- [`./ranks`]()
+- [`./abilities`](./abilities)
+- [`./archetypes`](./archetypes)
+- [`./classes`](./classes)
+- [`./conditions`](./conditions)
+- [`./currency`](./currency)
+- [`./damage-types`](./damage-types)
+- [`./death-bag-stones`](./death-bag-stones)
+- [`./drain-types`](./drain-types)
+- [`./effect-types`](./effect-types)
+- [`./elements`](./elements)
+- [`./equipment`](./equipment)
+- [`./general`](./general)
+- [`./hacks`](./hacks)
+- [`./powers`](./powers)
+- [`./properties`](./properties)
+- [`./ranks`](./ranks)
+- [`./tradecrafts`](./tradecrafts)
 
 The icons in [`./documents`]() are from [game-icons.net]() ([License](https://creativecommons.org/licenses/by/3.0/)). Links to the original pages with the authors can be found below.
 

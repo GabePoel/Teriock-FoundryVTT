@@ -1,0 +1,1274 @@
+name: Blade of Ice and Fire
+type: equipment
+system:
+  equipmentType: Scimitar
+  macros: []
+  consumable: false
+  maxQuantity:
+    saved: ''
+    raw: ''
+  quantity: 1
+  equipped: true
+  damage:
+    base:
+      saved: 1d8
+      raw: ''
+    twoHanded:
+      saved: ''
+      raw: ''
+    types: []
+  weight:
+    saved: 3
+    raw: 0
+  range:
+    short:
+      saved: ''
+      raw: ''
+    long:
+      saved: ''
+      raw: ''
+    ranged: false
+  equipmentClasses:
+    - swords
+  minStr:
+    saved: -2
+    raw: -3
+  fightingStyle: swordsman
+  av:
+    saved: 0
+    raw: 0
+  bv:
+    saved: 2
+    raw: 0
+  price: 0
+  powerLevel: magic
+img: systems/teriock/src/assets/items/blade-of-ice-and-fire.webp
+effects:
+  - name: Weapon
+    type: property
+    system:
+      description: >-
+        A <b>weapon</b> is an item that can be used to @L[Category:Attack
+        abilities]{attack}.
+      hierarchy:
+        rootUuid: Compendium.teriock.equipment.Item.Cc9Tz3mYOEBCmfwU
+        subIds: []
+        supId: null
+      form: intrinsic
+      damageType: ''
+      extraDamage: ''
+      applyIfShattered: false
+      applyIfDampened: false
+      modifiesActor: false
+      limitation: ''
+      improvement: ''
+      applies:
+        changes: []
+        macros: {}
+    _id: r0F6Mrn2OAvrpOGd
+    img: systems/teriock/src/icons/properties/weapon.webp
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+    origin: null
+    transfer: true
+    statuses: []
+    flags: {}
+    _stats:
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.0
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!izzWMHef8IUPUKZI.r0F6Mrn2OAvrpOGd'
+  - name: Burning
+    type: property
+    img: systems/teriock/src/icons/properties/burning.webp
+    system:
+      description: >-
+        An item that is <b>burning</b>, deals @L[Damage:Fire]{fire damage} and
+        can be used to deliver @L[Ability:Burn]{Burn}.
+      form: intrinsic
+      damageType: Fire
+      extraDamage: ''
+      applyIfShattered: false
+      applyIfDampened: false
+      modifiesActor: false
+      hierarchy:
+        rootUuid: Compendium.teriock.magicItems.Item.izzWMHef8IUPUKZI
+        subIds: []
+        supId: null
+      limitation: ''
+      improvement: ''
+      applies:
+        changes: []
+        macros: {}
+    _id: ohAGT8be0rjcl9um
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+    origin: null
+    transfer: true
+    statuses: []
+    flags: {}
+    _stats:
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.0
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!izzWMHef8IUPUKZI.ohAGT8be0rjcl9um'
+  - name: Ice Ball
+    type: ability
+    img: systems/teriock/src/icons/abilities/ice-ball.webp
+    system:
+      hierarchy:
+        rootUuid: Compendium.teriock.magicItems.Item.izzWMHef8IUPUKZI
+        subIds: []
+        supId: null
+      applies:
+        base:
+          statuses:
+            - frozen
+          startStatuses: []
+          endStatuses: []
+          rolls:
+            endCon: 2d4
+          hacks: []
+          checks: []
+          duration: 0
+          changes: []
+          common: []
+          expiration:
+            normal:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: rolled
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: action
+                  skip: 0
+            crit:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: rolled
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: action
+                  skip: 1
+            changeOnCrit: true
+            doesExpire: true
+        proficient:
+          statuses: []
+          startStatuses: []
+          endStatuses: []
+          rolls: {}
+          hacks: []
+          checks: []
+          duration: 0
+          changes: []
+          common: []
+          expiration:
+            normal:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            crit:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            changeOnCrit: false
+            doesExpire: false
+        fluent:
+          statuses: []
+          startStatuses: []
+          endStatuses: []
+          rolls: {}
+          hacks: []
+          checks: []
+          duration: 0
+          changes: []
+          common: []
+          expiration:
+            normal:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            crit:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            changeOnCrit: false
+            doesExpire: false
+        heightened:
+          statuses: []
+          startStatuses: []
+          endStatuses: []
+          rolls:
+            damage: 1d4[magic ice]
+          hacks: []
+          checks: []
+          duration: 0
+          changes: []
+          common: []
+          expiration:
+            normal:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            crit:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            changeOnCrit: false
+            doesExpire: false
+        macros: {}
+      elderSorcery: false
+      elderSorceryIncant: ''
+      powerSources:
+        - magical
+      interaction: attack
+      featSaveAttribute: mov
+      maneuver: active
+      executionTime: a1
+      delivery:
+        base: missile
+        parent: null
+        package: ball
+      targets:
+        - creature
+      elements:
+        - storm
+      duration:
+        unit: minute
+        quantity: 1
+        conditions:
+          present: []
+          absent: []
+        description: 1 Minute
+        stationary: false
+      sustained: false
+      range: '30'
+      overview:
+        base: ''
+        proficient: ''
+        fluent: ''
+      results:
+        hit: Target is @L[Condition:Frozen]{frozen}.
+        critHit: The target automatically fails the first [[/roll 2d4]] roll.
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      piercing: ub
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+      skill: false
+      spell: true
+      standard: true
+      ritual: false
+      class: stormMage
+      rotator: false
+      invoked: false
+      costs:
+        verbal: false
+        somatic: false
+        material: false
+        mp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        hp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        gp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        break: ''
+        materialCost: ''
+      heightened: "For each additional @L[Core:MP]{MP} spent, deal an additional [[/damage 1d4[magic ice]]] @L[Core:Damage]{damage}\_as well."
+      endCondition: >-
+        At the start of each of the target's actions, they roll [[/roll 2d4]].
+        If either of these dice roll a 4, this effect ends.
+      requirements: ''
+      expansion: null
+      expansionRange: null
+      expansionSaveAttribute: mov
+      trigger: ''
+      basic: false
+      form: normal
+      limitation: ''
+      improvement: ''
+      prepared: true
+      warded: false
+      secret: false
+      consumable: false
+      quantity: 1
+      maxQuantity:
+        raw: ''
+        derived: 0
+      effectTypes:
+        - magical
+        - temporal
+      gifted:
+        enabled: true
+        amount: 1
+      adept:
+        enabled: false
+        amount: 1
+    _id: affM4Lt512RmbNEC
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+    origin: null
+    transfer: true
+    statuses: []
+    flags: {}
+    _stats:
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.0
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!izzWMHef8IUPUKZI.affM4Lt512RmbNEC'
+  - name: Fire Ball
+    type: ability
+    img: systems/teriock/src/icons/abilities/fire-ball.webp
+    system:
+      hierarchy:
+        rootUuid: Compendium.teriock.magicItems.Item.izzWMHef8IUPUKZI
+        subIds: []
+        supId: null
+      applies:
+        base:
+          statuses: []
+          startStatuses: []
+          endStatuses: []
+          rolls:
+            damage: 1d6[magic fire]
+          hacks: []
+          checks: []
+          duration: 0
+          changes: []
+          common: []
+          expiration:
+            normal:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            crit:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            changeOnCrit: false
+            doesExpire: false
+        proficient:
+          statuses: []
+          startStatuses: []
+          endStatuses: []
+          rolls: {}
+          hacks: []
+          checks: []
+          duration: 0
+          changes: []
+          common: []
+          expiration:
+            normal:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            crit:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            changeOnCrit: false
+            doesExpire: false
+        fluent:
+          statuses: []
+          startStatuses: []
+          endStatuses: []
+          rolls: {}
+          hacks: []
+          checks: []
+          duration: 0
+          changes: []
+          common: []
+          expiration:
+            normal:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            crit:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            changeOnCrit: false
+            doesExpire: false
+        heightened:
+          statuses: []
+          startStatuses: []
+          endStatuses: []
+          rolls:
+            damage: 1d6[magic fire]
+          hacks: []
+          checks: []
+          duration: 0
+          changes: []
+          common: []
+          expiration:
+            normal:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            crit:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            changeOnCrit: false
+            doesExpire: false
+        macros: {}
+      elderSorcery: false
+      elderSorceryIncant: ''
+      powerSources:
+        - magical
+      interaction: attack
+      featSaveAttribute: mov
+      maneuver: active
+      executionTime: a1
+      delivery:
+        base: missile
+        parent: null
+        package: ball
+      targets:
+        - creature
+      elements:
+        - flame
+      duration:
+        unit: instant
+        quantity: 0
+        conditions:
+          present: []
+          absent: []
+        description: Instant
+        stationary: false
+      sustained: false
+      range: '30'
+      overview:
+        base: ''
+        proficient: ''
+        fluent: ''
+      results:
+        hit: Deal [[/damage 1d6[magic fire]]] @L[Core:Damage]{damage} to target.
+        critHit: >-
+          Double the @L[Core:Damage]{damage dice} dealt by this
+          @L[Category:Abilities]{ability}.
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      piercing: ub
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+      skill: false
+      spell: true
+      standard: true
+      ritual: false
+      class: flameMage
+      rotator: false
+      invoked: false
+      costs:
+        verbal: false
+        somatic: false
+        material: false
+        mp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        hp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        gp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        break: ''
+        materialCost: ''
+      heightened: >-
+        For each additional @L[Core:MP]{MP} spent, deal an additional [[/damage
+        1d6[magic fire]]] @L[Core:Damage]{damage}.
+      endCondition: ''
+      requirements: ''
+      expansion: null
+      expansionRange: null
+      expansionSaveAttribute: mov
+      trigger: ''
+      basic: false
+      form: normal
+      limitation: ''
+      improvement: ''
+      prepared: true
+      warded: false
+      secret: false
+      consumable: false
+      quantity: 1
+      maxQuantity:
+        raw: ''
+        derived: 0
+      effectTypes:
+        - damaging
+        - magical
+      gifted:
+        enabled: true
+        amount: 1
+      adept:
+        enabled: false
+        amount: 1
+    _id: IoTrrCnoDENu0KbJ
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+    origin: null
+    transfer: true
+    statuses: []
+    flags: {}
+    _stats:
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.0
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!izzWMHef8IUPUKZI.IoTrrCnoDENu0KbJ'
+  - name: Spell Turning Weapons
+    type: ability
+    img: systems/teriock/src/icons/abilities/spell-turning-weapons.webp
+    system:
+      hierarchy:
+        rootUuid: Compendium.teriock.magicItems.Item.izzWMHef8IUPUKZI
+        subIds: []
+        supId: null
+      applies:
+        base:
+          statuses: []
+          startStatuses: []
+          endStatuses: []
+          rolls: {}
+          hacks: []
+          checks: []
+          duration: 0
+          changes: []
+          common: []
+          expiration:
+            normal:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            crit:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            changeOnCrit: false
+            doesExpire: false
+        proficient:
+          statuses: []
+          startStatuses: []
+          endStatuses: []
+          rolls: {}
+          hacks: []
+          checks: []
+          duration: 0
+          changes: []
+          common: []
+          expiration:
+            normal:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            crit:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            changeOnCrit: false
+            doesExpire: false
+        fluent:
+          statuses: []
+          startStatuses: []
+          endStatuses: []
+          rolls: {}
+          hacks: []
+          checks: []
+          duration: 0
+          changes: []
+          common: []
+          expiration:
+            normal:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            crit:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            changeOnCrit: false
+            doesExpire: false
+        heightened:
+          statuses: []
+          startStatuses: []
+          endStatuses: []
+          rolls: {}
+          hacks: []
+          checks: []
+          duration: 0
+          changes: []
+          common: []
+          expiration:
+            normal:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            crit:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            changeOnCrit: false
+            doesExpire: false
+        macros: {}
+      elderSorcery: false
+      elderSorceryIncant: ''
+      powerSources:
+        - divine
+      interaction: manifest
+      featSaveAttribute: mov
+      maneuver: passive
+      executionTime: passive
+      delivery:
+        base: self
+        parent: null
+        package: null
+      targets:
+        - self
+      elements: []
+      duration:
+        unit: noLimit
+        quantity: 0
+        conditions:
+          present: []
+          absent: []
+        description: Always Active
+        stationary: false
+      sustained: false
+      range: Self.
+      overview:
+        base: >-
+          You can @L[Category:Block abilities]{block}
+          non-@L[Keyword:Warded]{warded} @L[Keyword:UB]{UB} @L[Category:Attack
+          abilities]{attacks} with your @L[Category:Weapons]{weapons}. Any
+          effects that would turn off or cut through
+          @L[Keyword:Resistance]{resistances} affect this as well.
+        proficient: ''
+        fluent: ''
+      results:
+        hit: ''
+        critHit: ''
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      piercing: normal
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+      skill: true
+      spell: false
+      standard: true
+      ritual: false
+      class: ranger
+      rotator: false
+      invoked: false
+      costs:
+        verbal: false
+        somatic: false
+        material: false
+        mp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        hp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        gp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        break: ''
+        materialCost: ''
+      heightened: ''
+      endCondition: ''
+      requirements: ''
+      expansion: null
+      expansionRange: null
+      expansionSaveAttribute: mov
+      trigger: ''
+      basic: false
+      form: normal
+      limitation: >-
+        <p>Can only be used on @L[Category:Storm element abilities]{storm} and
+        @L[Category:Flame element abilities]{flame} abilities.</p>
+      improvement: ''
+      prepared: true
+      warded: false
+      secret: false
+      consumable: false
+      quantity: 1
+      maxQuantity:
+        raw: ''
+        derived: 0
+      effectTypes:
+        - divine
+        - resistance
+      gifted:
+        enabled: false
+        amount: 1
+      adept:
+        enabled: false
+        amount: 1
+      grantOnly: true
+    _id: B9VhH9YdxK5DYCMx
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+    origin: null
+    transfer: true
+    statuses: []
+    flags: {}
+    _stats:
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.0
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!izzWMHef8IUPUKZI.B9VhH9YdxK5DYCMx'
+  - name: Damaged by Nature and Life Spells
+    type: ability
+    _id: qiHq9J5Sr1DhQRfv
+    img: icons/skills/wounds/blood-spurt-spray-red.webp
+    system:
+      consumable: false
+      maxQuantity:
+        raw: ''
+        derived: 0
+      quantity: 1
+      hierarchy:
+        rootUuid: Compendium.teriock.magicItems.Item.izzWMHef8IUPUKZI
+        subIds: []
+        supId: null
+      applies:
+        base:
+          statuses: []
+          startStatuses: []
+          endStatuses: []
+          rolls: {}
+          hacks: []
+          checks: []
+          duration: 0
+          changes: []
+          common: []
+          expiration:
+            normal:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            crit:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            changeOnCrit: false
+            doesExpire: false
+        proficient:
+          statuses: []
+          startStatuses: []
+          endStatuses: []
+          rolls: {}
+          hacks: []
+          checks: []
+          duration: 0
+          changes: []
+          common: []
+          expiration:
+            normal:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            crit:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            changeOnCrit: false
+            doesExpire: false
+        fluent:
+          statuses: []
+          startStatuses: []
+          endStatuses: []
+          rolls: {}
+          hacks: []
+          checks: []
+          duration: 0
+          changes: []
+          common: []
+          expiration:
+            normal:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            crit:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            changeOnCrit: false
+            doesExpire: false
+        heightened:
+          statuses: []
+          startStatuses: []
+          endStatuses: []
+          rolls: {}
+          hacks: []
+          checks: []
+          duration: 0
+          changes: []
+          common: []
+          expiration:
+            normal:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            crit:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            changeOnCrit: false
+            doesExpire: false
+        macros: {}
+      elderSorcery: false
+      elderSorceryIncant: ''
+      powerSources:
+        - magical
+      interaction: manifest
+      featSaveAttribute: mov
+      maneuver: passive
+      executionTime: passive
+      delivery:
+        base: self
+        parent: null
+        package: null
+      targets:
+        - self
+      elements: []
+      duration:
+        unit: noLimit
+        quantity: 1
+        conditions:
+          present: []
+          absent: []
+        stationary: false
+        description: Always Active
+      sustained: false
+      range: null
+      overview:
+        base: >-
+          <p>@L[Category:Nature element spells]{Nature spells} deal you an
+          additional [[/damage 1d10[vine]]] @L[Core:Damage]{damage} and
+          @L[Category:Life element spells]{life spells} deal you an additional
+          [[/damage 1d10[holy]]] @L[Core:Damage]{damage}.</p>
+        proficient: ''
+        fluent: ''
+      results:
+        hit: ''
+        critHit: ''
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      piercing: normal
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+      skill: false
+      spell: false
+      standard: false
+      ritual: false
+      rotator: false
+      invoked: false
+      costs:
+        verbal: false
+        somatic: false
+        material: false
+        mp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        hp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        gp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        break: ''
+        materialCost: ''
+      heightened: ''
+      endCondition: ''
+      requirements: ''
+      effectTypes:
+        - magical
+      expansion: null
+      expansionRange: null
+      expansionSaveAttribute: mov
+      trigger: ''
+      basic: false
+      form: flaw
+      limitation: ''
+      improvement: ''
+      prepared: true
+      warded: false
+      secret: false
+      gifted:
+        enabled: false
+        amount: 1
+      adept:
+        enabled: false
+        amount: 1
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+    origin: null
+    transfer: true
+    statuses: []
+    flags: {}
+    _stats:
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.0
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!izzWMHef8IUPUKZI.qiHq9J5Sr1DhQRfv'
+folder: null
+ownership:
+  default: 0
+flags:
+  teriock:
+    dontConsume: false
+_stats:
+  coreVersion: '13'
+  systemId: teriock
+  systemVersion: 0.9.0
+  lastModifiedBy: teriockBuilder00
+_id: izzWMHef8IUPUKZI
+_key: '!items!izzWMHef8IUPUKZI'

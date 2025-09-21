@@ -1,0 +1,29 @@
+folder: null
+name: Toggle Style Bonus
+type: script
+author: teriockBuilder00
+img: icons/svg/sword.svg
+scope: global
+command: |-
+  if (actor) {
+    await actor.update({
+      "system.offense.sb": !actor.system.offense.sb,
+    });
+    if (actor.system.offense.sb) {
+      ui.notifications.success(`Style bonus enabled for ${actor.name}.`);
+    } else {
+      ui.notifications.info(`Style bonus disabled for ${actor.name}.`);
+    }
+  } else {
+    ui.notifications.warn("No actor selected.");
+  }
+ownership:
+  default: 0
+flags: {}
+_stats:
+  coreVersion: '13'
+  systemId: teriock
+  systemVersion: 0.9.0
+  lastModifiedBy: teriockBuilder00
+_id: vPfr6I9Jaq0uniNm
+_key: '!macros!vPfr6I9Jaq0uniNm'
