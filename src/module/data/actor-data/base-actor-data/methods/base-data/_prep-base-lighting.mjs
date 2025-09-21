@@ -1,6 +1,5 @@
 /**
  * Lighting for the {@link TeriockTokenDocument} to inherit.
- *
  * @param {TeriockBaseActorModel} actorData
  * @private
  */

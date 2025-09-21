@@ -95,7 +95,6 @@ export async function _identify(equipmentData) {
 /**
  * Removes identification from equipment, making it unidentified again.
  * Creates a copy with limited properties and removes most effects.
- *
  * @param {TeriockEquipmentModel} equipmentData - The equipment data to unidentify.
  * @returns {Promise<void>} Promise that resolves when the unidentification is complete.
  * @private

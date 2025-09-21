@@ -1,7 +1,6 @@
 /**
  * Ensures all speed adjustments are non-negative and applies status-based modifiers.
  * Applies slowed and immobilized status effects to speed adjustments.
- *
  * @param {TeriockBaseActorModel} actorData - The actor's base data system object.
  * @returns {void} Modifies the system object in place.
  * @private

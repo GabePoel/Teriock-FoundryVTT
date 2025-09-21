@@ -28,7 +28,6 @@ export function _prepDerivedEncumbrance(actorData) {
 /**
  * Prepares money-related derived data.
  * Calculates total money value and weight based on currency amounts and configuration.
- *
  * @param {TeriockBaseActorModel} actorData - The actor's base data system object.
  * @returns {void} Modifies the system object in place.
  * @private
@@ -52,7 +51,6 @@ export function _prepDerivedMoney(actorData) {
 /**
  * Calculates the total weight carried by the actor.
  * Includes equipped equipment weight and money weight.
- *
  * @param {TeriockBaseActorModel} actorData - The actor's base data system object.
  * @returns {void} Modifies the system object in place.
  * @private

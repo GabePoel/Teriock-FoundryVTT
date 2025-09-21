@@ -5,7 +5,6 @@ import { processSubAbilities } from "../../../shared/parsing/process-subs.mjs";
 import { buildTagTree } from "../../../shared/parsing/tag-tree.mjs";
 
 /**
- *
  * @param {TeriockSpeciesData} speciesData
  * @param {string} rawHTML
  * @returns {Promise<object>}

@@ -3,8 +3,7 @@ import { getRankIcon } from "../../../../helpers/path.mjs";
 import { cleanObject } from "../../../shared/parsing/clean-html-doc.mjs";
 
 /**
- * Default statistics for different archetypes.
- *
+ * Default stats for different archetypes.
  * @type {object}
  * @private
  */

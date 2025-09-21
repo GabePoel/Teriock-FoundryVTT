@@ -1,6 +1,5 @@
 /**
  * Gets roll data for an actor system, including basic stats, attack data, class ranks, and tradecrafts.
- *
  * @param {TeriockBaseActorModel} actorData - The actor system to get roll data for.
  * @returns {object} Object containing all roll data for the actor.
  */

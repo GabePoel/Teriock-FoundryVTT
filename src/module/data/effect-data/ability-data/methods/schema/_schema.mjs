@@ -18,14 +18,6 @@ import { _defineGeneral } from "./_define-general.mjs";
  *
  * @returns {object} Complete ability data schema with all field definitions
  * @private
- *
- * @example
- * // Get the complete ability schema
- * const schema = _defineSchema();
- *
- * @example
- * // Use schema for validation
- * const abilityData = new foundry.data.DataModel(schema, data);
  */
 export function _defineSchema() {
   let schema = {};

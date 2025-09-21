@@ -84,7 +84,6 @@ function deriveEquipmentDataValue(equipmentData, dataKey, getInitialValue, combi
 
 /**
  * Helper function to format string upgrades with appropriate operators
- *
  * @param {string} current - Current value
  * @param {string} upgrade - Upgrade value
  * @returns {string}
@@ -107,7 +106,6 @@ function formatStringUpgrade(current, upgrade) {
 
 /**
  * Derived AV0 value.
- *
  * @param {TeriockEquipmentModel} equipmentData
  * @returns {boolean}
  */
@@ -123,7 +121,6 @@ export function _derivedAv0(equipmentData) {
 
 /**
  * Derived warded value.
- *
  * @param {TeriockEquipmentModel} equipmentData
  * @returns {boolean}
  */
@@ -139,7 +136,6 @@ export function _derivedWarded(equipmentData) {
 
 /**
  * Derived UB value.
- *
  * @param {TeriockEquipmentModel} equipmentData
  * @returns {boolean}
  */
@@ -155,7 +151,6 @@ export function _derivedUb(equipmentData) {
 
 /**
  * Derived armor value.
- *
  * @param {TeriockEquipmentModel} equipmentData
  * @returns {number}
  */
@@ -171,7 +166,6 @@ export function _derivedAv(equipmentData) {
 
 /**
  * Derived block value.
- *
  * @param {TeriockEquipmentModel} equipmentData
  * @returns {number}
  */
@@ -187,7 +181,6 @@ export function _derivedBv(equipmentData) {
 
 /**
  * Derived damage dice.
- *
  * @param {TeriockEquipmentModel} equipmentData
  * @returns {string}
  */
@@ -206,7 +199,6 @@ export function _derivedDamage(equipmentData) {
 
 /**
  * Derived two-handed damage dice.
- *
  * @param {TeriockEquipmentModel} equipmentData
  * @returns {string}
  */

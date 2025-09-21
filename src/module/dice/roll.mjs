@@ -259,8 +259,6 @@ export default class TeriockRoll extends Roll {
    *
    * Relevant wiki pages:
    * - [Boosted](https://wiki.teriock.com/index.php/Keyword:Boosted)
-   *
-   * @returns {void}
    */
   boost() {
     TeriockRoll._boost(this);
@@ -271,8 +269,6 @@ export default class TeriockRoll extends Roll {
    *
    * Relevant wiki pages:
    * - [Deboosted](https://wiki.teriock.com/index.php/Keyword:Deboosted)
-   *
-   * @returns {void}
    */
   deboost() {
     TeriockRoll._deboost(this);
@@ -283,7 +279,6 @@ export default class TeriockRoll extends Roll {
    * Positive numbers apply boosts, negative numbers apply deboosts.
    * @param {number} number - The number of boosts or deboosts to apply. Positive numbers boost, negative numbers
    *   deboost.
-   * @returns {void}
    */
   setBoost(number) {
     if (number === 0) {

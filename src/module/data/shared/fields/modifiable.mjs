@@ -103,7 +103,6 @@ export function deriveModifiableIndeterministic(field) {
 }
 
 /**
- *
  * @param value
  * @param options
  * @param {object} options

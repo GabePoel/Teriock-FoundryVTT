@@ -2,7 +2,6 @@ const { ArrayField } = foundry.data.fields;
 /**
  * Utility function for creating DOM elements with common properties.
  * Creates an element with specified tag, class, styles, and content.
- *
  * @param {string} tag - The HTML tag name for the element.
  * @param {string} className - The CSS class name to apply to the element.
  * @param {object} styles - Object containing CSS styles to apply.
@@ -24,7 +23,6 @@ const createElement = (tag, className, styles = {}, content = "") => {
 /**
  * Utility function for creating button elements with dataset attributes.
  * Creates a button with specified class, content, and data attributes.
- *
  * @param {string} className - The CSS class name for the button.
  * @param {string} content - The inner HTML content for the button.
  * @param {object} dataset - Object containing data attributes to set.

@@ -14,8 +14,8 @@ import { _prepDerivedTradecrafts } from "./_prep-derived-tradecrafts.mjs";
  * are up to date and consistent.
  *
  * The derived data includes:
- * - Attribute saves (`intSave`, `movSave`, etc.)
- * - Combat values (`av`, `bv`, `ac`, `cc`)
+ * - Attribute saves
+ * - Combat relevant values (`av`, `bv`, `ac`, `cc`)
  * - Load and encumbrance calculations
  * - Token size and vision information
  * - Presence management

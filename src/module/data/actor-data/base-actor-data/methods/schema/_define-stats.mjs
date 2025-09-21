@@ -2,7 +2,6 @@ const { fields } = foundry.data;
 
 /**
  * Creates a stat field definition with min, max, and current values, plus optional base and temp fields.
- *
  * @param {string} name - The name of the stat (e.g., "HP", "MP", "Wither")
  * @param {object} [options] - Configuration options for the stat field
  * @param {number} [options.min=0] - Initial minimum value for the stat

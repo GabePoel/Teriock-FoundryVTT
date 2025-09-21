@@ -59,7 +59,6 @@ export async function createAbility(document, name = null, options = {}) {
 
 /**
  * Creates a new resource effect.
- *
  * @param {TeriockActor|TeriockItem} document - The document to create the resource in.
  * @returns {Promise<TeriockResource>} The created resource effect.
  */
@@ -129,7 +128,6 @@ export async function createProperty(document, name = null) {
 
 /**
  * Creates a new effect.
- *
  * @param {TeriockActor|TeriockItem} document - The document to create the effect in.
  * @returns {Promise<TeriockConsequence>} The created effect.
  */
@@ -146,7 +144,6 @@ export async function createConsequence(document) {
 
 /**
  * Creates a new fluency effect.
- *
  * @param {TeriockActor|TeriockItem} document - The document to create the fluency in.
  * @param {Teriock.Parameters.Fluency.Tradecraft} tradecraft
  * @returns {Promise<TeriockFluency>} The created fluency effect.
@@ -175,7 +172,6 @@ export async function createFluency(document, tradecraft = artist) {
 
 /**
  * Creates a new base effect.
- *
  * @param {TeriockActor|TeriockItem} document - The document to create the base in.
  * @returns {Promise<TeriockEffect>} The created base effect.
  */

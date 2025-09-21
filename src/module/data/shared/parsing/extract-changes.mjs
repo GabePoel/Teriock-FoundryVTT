@@ -3,7 +3,6 @@ import { safeParseHTML } from "../../../helpers/html.mjs";
 /**
  * Extracts changes from HTML content.
  * Finds change metadata elements and extracts their key, mode, value, and priority.
- *
  * @param {string} htmlString - The HTML content to extract changes from.
  * @returns {EffectChangeData[]} Array of change objects with a key, mode, value, and priority.
  */

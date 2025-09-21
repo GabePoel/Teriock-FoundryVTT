@@ -1,6 +1,5 @@
 /**
  * Get a {@link TeriockItem} from a {@link CompendiumCollection}.
- *
  * @param {string} name - Name of the {@link TeriockItem}.
  * @param {string} pack - Key corresponding to some {@link CompendiumCollection}.
  * @param {object} options - Options.
@@ -23,7 +22,6 @@ export async function getItem(name, pack, options = {}) {
 
 /**
  * Copy a {@link TeriockItem} from a {@link CompendiumCollection}.
- *
  * @param {string} name - Name of the {@link TeriockItem}.
  * @param {string} pack - Key corresponding to some {@link CompendiumCollection}.
  * @returns {Promise<TeriockItem|null>}
@@ -34,7 +32,6 @@ export async function copyItem(name, pack) {
 
 /**
  * Get a {@link TeriockAbility} from a {@link CompendiumCollection}.
- *
  * @param {string} name - Name of the {@link TeriockAbility}.
  * @param {object} options - Options.
  * @param {boolean} [options.clone] - Fetch a clone instead of the raw {@link TeriockAbility}.
@@ -47,7 +44,6 @@ export async function getAbility(name, options = {}) {
 
 /**
  * Copy a {@link TeriockAbility} from the default {@link CompendiumCollection}.
- *
  * @param {string} name - Name of the {@link TeriockAbility}.
  * @returns {Promise<TeriockAbility>}
  */
@@ -63,7 +59,6 @@ export async function copyAbility(name) {
 
 /**
  * Import a {@link TeriockAbility} from the default {@link CompendiumCollection} to the given document.
- *
  * @param {TeriockActor|TeriockItem} document - Document to give the {@link TeriockAbility} to.
  * @param {string} name - Name of the {@link TeriockAbility}.
  * @returns {Promise<TeriockAbility>}
@@ -78,7 +73,6 @@ export async function importAbility(document, name) {
 
 /**
  * Get a {@link TeriockProperty} from a {@link CompendiumCollection}.
- *
  * @param {string} name - Name of the {@link TeriockProperty}.
  * @param {object} options - Options.
  * @param {boolean} [options.clone] - Fetch a clone instead of the raw {@link TeriockProperty}.
@@ -91,7 +85,6 @@ export async function getProperty(name, options = {}) {
 
 /**
  * Copy a {@link TeriockProperty} from the default {@link CompendiumCollection}.
- *
  * @param {string} name - Name of the {@link TeriockProperty}.
  * @returns {Promise<TeriockProperty>}
  */
@@ -107,7 +100,6 @@ export async function copyProperty(name) {
 
 /**
  * Import a {@link TeriockProperty} from the default {@link CompendiumCollection} to the given document.
- *
  * @param {TeriockActor|TeriockItem} document - Document to give the {@link TeriockProperty} to.
  * @param {string} name - Name of the {@link TeriockProperty}.
  * @returns {Promise<TeriockProperty>}
@@ -122,7 +114,6 @@ export async function importProperty(document, name) {
 
 /**
  * Get a {@link TeriockRank} from the default {@link CompendiumCollection}.
- *
  * @param {string} classKey - Key for the class of the {@link TeriockRank}.
  * @param {number} number - Number of the {@link TeriockRank} in the class.
  * @param {object} options - Options.
@@ -139,7 +130,6 @@ export async function getRank(classKey, number, options = {}) {
 
 /**
  * Copy a {@link TeriockRank} from the default {@link CompendiumCollection}.
- *
  * @param {string} classKey - Key for the class of the {@link TeriockRank}.
  * @param {number} number - Number of the {@link TeriockRank} in the class.
  * @returns {Promise<TeriockRank|null>}

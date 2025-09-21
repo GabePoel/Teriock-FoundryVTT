@@ -1,6 +1,5 @@
 /**
  * Migrate the hierarchy of some {@link TeriockEffect}'s system data.
- *
  * @param {object} data - The data to migrate.
  */
 export function migrateHierarchy(data) {

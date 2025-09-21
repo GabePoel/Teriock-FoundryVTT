@@ -4,7 +4,6 @@ import { harmRoll } from "../../../../helpers/quick-rolls.mjs";
 
 /**
  * Initiates an equipment roll with the specified options.
- *
  * @param {TeriockEquipmentModel} equipmentData - The equipment data to roll for.
  * @param {object} options - Options for the equipment roll including twoHanded, bonusDamage, advantage, and secret.
  * @returns {Promise<void>} Promise that resolves when the roll is complete.

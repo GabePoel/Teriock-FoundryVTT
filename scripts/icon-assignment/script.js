@@ -28,6 +28,7 @@ const app = {
   // -------- Load categories directly from files
   async loadCategoriesDirectly() {
     const categoryFiles = [
+      "consumables",
       "classes",
       "abilities",
       "archetypes",
