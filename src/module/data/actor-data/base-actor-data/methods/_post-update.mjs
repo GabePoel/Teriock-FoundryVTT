@@ -25,10 +25,13 @@ export async function _postUpdate(actorData, skipFunctions = {}) {
         visionMode,
         range,
       } = token.deriveVision();
-      await token.update({
+      const tokenUpdateData = {
         light: actorData.light,
         "sight.range": range,
-      });
+        "width": actorData.size.length,
+        "height": actorData.size.length,
+      };
+      await token.update(tokenUpdateData);
       await token.updateVisionMode(visionMode);
     }
   }

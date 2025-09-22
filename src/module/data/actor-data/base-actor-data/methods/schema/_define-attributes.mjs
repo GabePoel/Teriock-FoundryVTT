@@ -1,3 +1,5 @@
+import { modifiableNumber } from "../../../../shared/fields/modifiable.mjs";
+
 const { fields } = foundry.data;
 
 /**
@@ -45,11 +47,13 @@ export function _defineAttributes(schema) {
     label: "Level",
     min: 1,
   });
-  schema.size = new fields.NumberField({
-    initial: 3,
-    label: "Size",
-    max: 30,
-    min: 0,
+  schema.size = new fields.SchemaField({
+    number: modifiableNumber({
+      initial: 3,
+      label: "Size",
+      min: 0,
+      max: 30,
+    }),
   });
   schema.attributes = new fields.SchemaField({
     int: attributeField("INT"),

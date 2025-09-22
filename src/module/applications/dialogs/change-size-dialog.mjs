@@ -9,8 +9,8 @@ const TextEditor = foundry.applications.ux.TextEditor.implementation;
  * @returns {Promise<void>}
  */
 export default async function changeSizeDialog(actor, species) {
-  if (actor.system.size !== species.system.size.value) {
-    let content = `<p>@UUID[${actor.uuid}] is size ${actor.system.size} and @UUID[${species.uuid}] is size`
+  if (actor.system.size.number.saved !== species.system.size.value) {
+    let content = `<p>@UUID[${actor.uuid}] is size ${actor.system.size.number.saved} and @UUID[${species.uuid}] is size`
       + ` ${species.system.size.value} be default. Would you like to update the actor's size?</p>`;
     content = await TextEditor.enrichHTML(content);
     const dialog = new TeriockDialog({
@@ -26,7 +26,7 @@ export default async function changeSizeDialog(actor, species) {
           default: true,
           callback: async () => {
             await actor.update({
-              "system.size": species.system.size.value,
+              "system.size.number.saved": species.system.size.value,
             });
           },
         },

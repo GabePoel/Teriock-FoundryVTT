@@ -1,17 +1,17 @@
-name: Tordil's Spellmace
+name: Glow Bulb
 type: equipment
-folder: null
+folder: EAXfBtYX8GFp5gBt
 system:
-  equipmentType: Short Flail
+  equipmentType: Bottle
   equipped: true
-  consumable: false
+  consumable: true
   quantity: 1
   maxQuantity:
     raw: ''
     saved: ''
   damage:
     base:
-      saved: 1d6
+      saved: '0'
       raw: ''
     twoHanded:
       saved: ''
@@ -29,30 +29,30 @@ system:
       raw: ''
     ranged: false
   equipmentClasses:
-    - impactWeapons
+    - knickknacks
   minStr:
-    saved: -2
+    saved: -3
     raw: -3
   av:
     saved: 0
     raw: 0
   bv:
-    saved: 1
+    saved: 0
     raw: 0
   price: 0
-  powerLevel: magic
-  fightingStyle: wraparound
+  powerLevel: enchanted
+  fightingStyle: null
   macros: []
-img: systems/teriock/src/assets/items/tordils-spellmace.webp
+img: systems/teriock/src/icons/consumables/glow-bulb.webp
 effects:
-  - name: Weapon
+  - name: Searchable
     type: property
     system:
       description: >-
-        A <b>weapon</b> is an item that can be used to @L[Category:Attack
-        abilities]{attack}.
+        A <b>searchable</b> item is something that is easy to steal through
+        @L[Category:Abilities]{abilities} like @L[Ability:Search]{Search}.
       hierarchy:
-        rootUuid: Compendium.teriock.equipment.Item.iKtN8izwpTjOfD38
+        rootUuid: Compendium.teriock.equipment.Item.RWSY8iijkU6Kv9SQ
         subIds: []
         supId: null
       form: intrinsic
@@ -66,8 +66,8 @@ effects:
       applies:
         changes: []
         macros: {}
-    _id: QfYIvnVdhSo69Db6
-    img: systems/teriock/src/icons/properties/weapon.webp
+    _id: x6sjcsIVaOkVZOFD
+    img: systems/teriock/src/icons/properties/searchable.webp
     changes: []
     disabled: false
     duration:
@@ -82,13 +82,60 @@ effects:
       systemId: teriock
       systemVersion: 0.9.0
       lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!6fdbPzpMRicQCiT7.QfYIvnVdhSo69Db6'
-  - name: Spell Turning Weapons
-    type: ability
-    img: systems/teriock/src/icons/abilities/spell-turning-weapons.webp
+    _key: '!items.effects!XulEbO8Db240HloN.x6sjcsIVaOkVZOFD'
+  - name: Small
+    type: property
     system:
+      description: >-
+        An item with this property is easily concealed and can be used in the
+        same hand as a @L[Category:Shields]{shield}. If not used with a
+        @L[Category:Shields]{shield}, a second @L[Category:Attack
+        abilities]{attack} made with a small item per @L[Core:Turns]{turn} does
+        not suffer from an @L[Core:Attack Penalty]{attack penalty}. In order to
+        not incur an @L[Core:Attack Penalty]{attack penalty}, this item must not
+        be used in the same hand as a @L[Category:Shields]{shield}.
       hierarchy:
-        rootUuid: Compendium.teriock.magicItems.Item.6fdbPzpMRicQCiT7
+        rootUuid: Compendium.teriock.equipment.Item.RWSY8iijkU6Kv9SQ
+        subIds: []
+        supId: null
+      form: intrinsic
+      damageType: ''
+      extraDamage: ''
+      applyIfShattered: false
+      applyIfDampened: false
+      modifiesActor: false
+      limitation: ''
+      improvement: ''
+      applies:
+        changes: []
+        macros: {}
+    _id: VQDFXr0oJQZ7Waxe
+    img: systems/teriock/src/icons/properties/small.webp
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+    origin: null
+    transfer: true
+    statuses: []
+    flags: {}
+    _stats:
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.0
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!XulEbO8Db240HloN.VQDFXr0oJQZ7Waxe'
+  - name: Smash Glow Bulb
+    type: ability
+    system:
+      consumable: false
+      maxQuantity:
+        saved: ''
+        raw: ''
+      quantity: 1
+      hierarchy:
+        rootUuid: Compendium.teriock.magicItems.Item.XulEbO8Db240HloN
         subIds: []
         supId: null
       applies:
@@ -241,68 +288,14 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
-      elderSorcery: false
-      elderSorceryIncant: ''
-      powerSources:
-        - divine
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-        parent: null
-        package: null
-      targets:
-        - self
-      elements: []
-      duration:
-        unit: noLimit
-        quantity: 0
-        conditions:
-          present: []
-          absent: []
-        description: Always Active
-        stationary: false
-      sustained: false
-      range: Self.
-      overview:
-        base: >-
-          You can @L[Category:Block abilities]{block}
-          non-@L[Keyword:Warded]{warded} @L[Keyword:UB]{UB} @L[Category:Attack
-          abilities]{attacks} with your @L[Category:Weapons]{weapons}. Any
-          effects that would turn off or cut through
-          @L[Keyword:Resistance]{resistances} affect this as well.
-        proficient: ''
-        fluent: ''
-      results:
-        hit: ''
-        critHit: ''
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
-      skill: true
-      spell: false
-      standard: true
-      ritual: false
-      class: ranger
-      rotator: false
-      invoked: false
+      adept:
+        enabled: false
+        amount: 1
+      basic: false
       costs:
         verbal: false
         somatic: false
-        material: false
+        material: true
         mp:
           type: none
           value:
@@ -322,245 +315,65 @@ effects:
             formula: ''
             variable: ''
         break: ''
-        materialCost: ''
-      heightened: ''
-      endCondition: ''
-      requirements: ''
-      expansion: null
-      expansionRange: null
-      expansionSaveAttribute: mov
-      trigger: ''
-      basic: false
-      form: normal
-      limitation: >-
-        <p>This only applies to Tordil's Spellmace and can only be used for
-        @L[Category:Spells]{spells}.</p>
-      improvement: <p>This works on @L[Core:UB] @L[Category:Spells]{spells}.</p>
-      prepared: true
-      warded: false
-      secret: false
-      consumable: false
-      quantity: 1
-      maxQuantity:
-        raw: ''
-        derived: 0
-      effectTypes:
-        - divine
-        - resistance
-      gifted:
-        enabled: false
-        amount: 1
-      adept:
-        enabled: false
-        amount: 1
-    _id: nTkh55Y6cQyVd33m
-    changes: []
-    disabled: false
-    duration:
-      startTime: null
-      combat: null
-    origin: null
-    transfer: true
-    statuses: []
-    flags: {}
-    _stats:
-      coreVersion: '13'
-      systemId: teriock
-      systemVersion: 0.9.0
-      lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!6fdbPzpMRicQCiT7.nTkh55Y6cQyVd33m'
-  - name: Spell Strike
-    type: ability
-    img: systems/teriock/src/icons/abilities/spell-strike.webp
-    system:
-      hierarchy:
-        rootUuid: Compendium.teriock.magicItems.Item.6fdbPzpMRicQCiT7
-        subIds: []
-        supId: null
-      applies:
-        base:
-          statuses: []
-          startStatuses: []
-          endStatuses: []
-          rolls: {}
-          hacks: []
-          checks: []
-          duration: 0
-          changes: []
-          common: []
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            crit:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            changeOnCrit: false
-            doesExpire: false
-        proficient:
-          statuses: []
-          startStatuses: []
-          endStatuses: []
-          rolls: {}
-          hacks: []
-          checks: []
-          duration: 0
-          changes: []
-          common: []
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            crit:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            changeOnCrit: false
-            doesExpire: false
-        fluent:
-          statuses: []
-          startStatuses: []
-          endStatuses: []
-          rolls: {}
-          hacks: []
-          checks: []
-          duration: 0
-          changes: []
-          common: []
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            crit:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            changeOnCrit: false
-            doesExpire: false
-        heightened:
-          statuses: []
-          startStatuses: []
-          endStatuses: []
-          rolls: {}
-          hacks: []
-          checks: []
-          duration: 0
-          changes: []
-          common: []
-          expiration:
-            normal:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            crit:
-              combat:
-                who:
-                  type: target
-                what:
-                  type: none
-                  roll: 2d4kh1
-                  threshold: 4
-                when:
-                  time: start
-                  trigger: turn
-                  skip: 0
-            changeOnCrit: false
-            doesExpire: false
-        macros: {}
-      elderSorcery: false
-      elderSorceryIncant: ''
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: reactive
-      executionTime: r0
+        materialCost: >-
+          Using this ability consumes the @L[Category:Equipment]{equipment} that
+          provides it.
       delivery:
-        base: weapon
+        base: item
         parent: null
         package: null
-      targets:
-        - creature
-      elements: []
       duration:
-        unit: instant
-        quantity: 0
+        unit: minute
+        quantity: 10
         conditions:
           present: []
           absent: []
-        description: Instant
         stationary: false
-      sustained: false
+        description: 10 Minutes
+      effectTypes: []
+      elderSorcery: false
+      elderSorceryIncant: ''
+      elements: []
+      endCondition: ''
+      executionTime: a1
+      expansion: null
+      expansionRange: null
+      expansionSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      gifted:
+        enabled: false
+        amount: 1
+      grantOnly: false
+      heightened: ''
+      improvement: ''
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+      interaction: manifest
+      invoked: false
+      limitation: ''
+      maneuver: active
+      overview:
+        base: >-
+          The spot on the ground where the source of this ability was smashed
+          starts @L[Property:Glowing]{glowing} (50 feet)..
+        proficient: ''
+        fluent: ''
+      piercing: normal
+      powerSources:
+        - alchemical
+      prepared: true
       range: null
-      overview:
-        base: >-
-          Target takes the "on hit" effect of a @L[Category:Conjured
-          spells]{conjured} @L[Category:Missile delivery spells]{missile spell}
-          that you are @L[Core:Proficiency Bonus]{proficient} in. If the
-          triggering hit was a critical hit, then the target takes the "on
-          critical hit" effect instead.
-        proficient: ''
-        fluent: ''
+      requirements: >-
+        Use this ability by interacting with the
+        @L[Category:Equipment]{equipment} that provides it. That counts as the
+        @L[Core:Maneuvers]{maneuver} and @L[Core:Abilities]{execution time} for
+        the ability.
       results:
         hit: ''
         critHit: ''
@@ -570,28 +383,208 @@ effects:
         critSave: ''
         fail: ''
         critFail: ''
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
-      skill: true
-      spell: false
-      standard: true
       ritual: false
       rotator: false
-      invoked: false
+      secret: false
+      skill: false
+      spell: false
+      standard: false
+      sustained: false
+      targets:
+        - area
+      trigger: ''
+      warded: false
+    _id: 3tRBJEOyF2iqoSWP
+    img: systems/teriock/src/icons/abilities/smash-glow-bulb.webp
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+    origin: null
+    transfer: true
+    statuses: []
+    flags: {}
+    _stats:
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.0
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!XulEbO8Db240HloN.3tRBJEOyF2iqoSWP'
+  - name: Shake Glow Bulb
+    type: ability
+    system:
+      consumable: false
+      maxQuantity:
+        saved: ''
+        raw: ''
+      quantity: 1
+      hierarchy:
+        rootUuid: Compendium.teriock.magicItems.Item.XulEbO8Db240HloN
+        subIds: []
+        supId: null
+      applies:
+        base:
+          statuses: []
+          startStatuses: []
+          endStatuses: []
+          rolls: {}
+          hacks: []
+          checks: []
+          duration: 0
+          changes: []
+          common: []
+          expiration:
+            normal:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            crit:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            changeOnCrit: false
+            doesExpire: false
+        proficient:
+          statuses: []
+          startStatuses: []
+          endStatuses: []
+          rolls: {}
+          hacks: []
+          checks: []
+          duration: 0
+          changes: []
+          common: []
+          expiration:
+            normal:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            crit:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            changeOnCrit: false
+            doesExpire: false
+        fluent:
+          statuses: []
+          startStatuses: []
+          endStatuses: []
+          rolls: {}
+          hacks: []
+          checks: []
+          duration: 0
+          changes: []
+          common: []
+          expiration:
+            normal:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            crit:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            changeOnCrit: false
+            doesExpire: false
+        heightened:
+          statuses: []
+          startStatuses: []
+          endStatuses: []
+          rolls: {}
+          hacks: []
+          checks: []
+          duration: 0
+          changes: []
+          common: []
+          expiration:
+            normal:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            crit:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            changeOnCrit: false
+            doesExpire: false
+        macros: {}
+      adept:
+        enabled: false
+        amount: 1
+      basic: false
       costs:
         verbal: false
         somatic: false
-        material: false
+        material: true
         mp:
-          type: static
+          type: none
           value:
-            static: 1
+            static: 0
             formula: ''
             variable: ''
         hp:
@@ -607,56 +600,136 @@ effects:
             formula: ''
             variable: ''
         break: ''
-        materialCost: ''
-      heightened: ''
+        materialCost: >-
+          Using this ability consumes the @L[Category:Equipment]{equipment} that
+          provides it.
+      delivery:
+        base: item
+        parent: null
+        package: null
+      duration:
+        unit: minute
+        quantity: 10
+        conditions:
+          present: []
+          absent: []
+        stationary: false
+        description: 10 Minutes
+      effectTypes: []
+      elderSorcery: false
+      elderSorceryIncant: ''
+      elements: []
       endCondition: ''
-      requirements: ''
+      executionTime: a1
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
-      trigger: >-
-        You have just landed a hit with a @L[Category:Weapon delivery
-        abilities]{weapon} or @L[Category:Bite delivery abilities]{bite}
-        @L[Category:Attack abilities]{attack} on another creature and the effect
-        has successfully applied.
-      basic: false
+      featSaveAttribute: mov
       form: normal
-      limitation: >-
-        <p>Can only be used with one specific @L[Category:Spells]{missile spell}
-        blocked by Tordil's Spellmace or with one specific
-        @L[Category:Spells]{missile spell} of yours. To put one of your
-        @L[Category:Spells]{missile spells} in, you @L[Ability:Interact] with
-        Tordil's Spellmace and spend [[/drain 1d4]] @L[Core:MP]. The
-        @L[Category:Spells]{spell} is then "suspended" in Tordil's Spellmace and
-        you are @L[Keyword:Incapable]{incapable} of casting it other than
-        through Spell Strike. Only one @L[Category:Spells]{spell} can be
-        "suspended" in Tordil's Spellmace at a time.</p>
-      improvement: >-
-        <p>Can be used with @L[Category:Spells]{spells} you don't have and
-        aren't @L[Core:Proficiency Bonus]{proficient} in! You must block them
-        with Tordil's Spellmace. You then have 1 minute to strike with that
-        @L[Category:Spells]{spell}. You are @L[Keyword:Adept]{adept} at caught
-        spell strikes and do not need to pay the original cost. It maintains all
-        @L[Core:Heightening]{heightening} of its original casting. Caught
-        @L[Category:Spells]{spells} must be caught from an opponent.</p>
-      prepared: true
-      warded: false
-      secret: false
-      consumable: false
-      quantity: 1
-      maxQuantity:
-        raw: ''
-        derived: 0
-      effectTypes:
-        - magical
       gifted:
         enabled: false
         amount: 1
-      adept:
-        enabled: false
-        amount: 1
-      grantOnly: true
-    _id: Nwo1X4lQAIcUHede
+      grantOnly: false
+      heightened: ''
+      improvement: ''
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+      interaction: manifest
+      invoked: false
+      limitation: ''
+      maneuver: active
+      overview:
+        base: >-
+          The source of this ability starts @L[Property:Glowing]{glowing} (10
+          feet). This doesn't @L[Property:Destroyed]{destroy} the item, but
+          renders it <a
+          href="/index.php?title=Property:Mundane&amp;action=edit&amp;redlink=1"
+          class="new" title="Property:Mundane (page does not
+          exist)">mundane</a>..
+        proficient: ''
+        fluent: ''
+      piercing: normal
+      powerSources:
+        - alchemical
+      prepared: true
+      range: null
+      requirements: >-
+        Use this ability by interacting with the
+        @L[Category:Equipment]{equipment} that provides it. That counts as the
+        @L[Core:Maneuvers]{maneuver} and @L[Core:Abilities]{execution time} for
+        the ability.
+      results:
+        hit: ''
+        critHit: ''
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      ritual: false
+      rotator: false
+      secret: false
+      skill: false
+      spell: false
+      standard: false
+      sustained: false
+      targets:
+        - item
+      trigger: ''
+      warded: false
+    _id: ggtGhVK8MhJkniZo
+    img: systems/teriock/src/icons/abilities/shake-glow-bulb.webp
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+    origin: null
+    transfer: true
+    statuses: []
+    flags:
+      teriock:
+        dontConsume: false
+    _stats:
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.0
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!XulEbO8Db240HloN.ggtGhVK8MhJkniZo'
+  - name: Fragile
+    type: property
+    system:
+      description: >-
+        An item that's <b>fragile</b> is easily broken. It becomes
+        @L[Property:Shattered]{shattered} if it is used to @L[Core:Block
+        Interaction]{block} or if it is the @L[Category:Item target
+        abilities]{target of an ability} that deals it @L[Category:Damaging
+        effects]{damage}. If it would become @L[Property:Shattered]{shattered}
+        through some other means, it is instead
+        @L[Property:Destroyed]{destroyed}.
+      hierarchy:
+        rootUuid: Compendium.teriock.magicItems.Item.XulEbO8Db240HloN
+        subIds: []
+        supId: null
+      form: intrinsic
+      damageType: ''
+      extraDamage: ''
+      applyIfShattered: false
+      applyIfDampened: false
+      modifiesActor: false
+      limitation: ''
+      improvement: ''
+      applies:
+        changes: []
+        macros: {}
+    _id: noKdZjPi2sibwmHs
+    img: systems/teriock/src/icons/properties/fragile.webp
     changes: []
     disabled: false
     duration:
@@ -671,14 +744,16 @@ effects:
       systemId: teriock
       systemVersion: 0.9.0
       lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!6fdbPzpMRicQCiT7.Nwo1X4lQAIcUHede'
+    _key: '!items.effects!XulEbO8Db240HloN.noKdZjPi2sibwmHs'
 ownership:
   default: 0
-flags: {}
+flags:
+  teriock:
+    dontConsume: false
 _stats:
   coreVersion: '13'
   systemId: teriock
   systemVersion: 0.9.0
   lastModifiedBy: teriockBuilder00
-_id: 6fdbPzpMRicQCiT7
-_key: '!items!6fdbPzpMRicQCiT7'
+_id: XulEbO8Db240HloN
+_key: '!items!XulEbO8Db240HloN'

@@ -15,24 +15,6 @@ export const characterOptions = {
     invisible: "seeInvisible",
     dark: "darkVision",
   },
-  tokenSizes: {
-    Tiny: 0.5,
-    Small: 1,
-    Medium: 1,
-    Large: 2,
-    Huge: 3,
-    Gargantuan: 4,
-    Colossal: 6,
-  },
-  namedSizes: {
-    0: "Tiny",
-    1: "Small",
-    3: "Medium",
-    5: "Large",
-    10: "Huge",
-    15: "Gargantuan",
-    20: "Colossal",
-  },
   protectionMap: {
     immunities: {
       action: "immune",

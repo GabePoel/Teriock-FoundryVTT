@@ -4,12 +4,17 @@
       <div class="tsubtle tcenter">
         Size
       </div>
-      {{formInput
-        systemFields.size
-        value=system.size
-        classes="character-size-input character-smallbox-value selected"
-        dataset=(object tooltip=system.namedSize)
-      }}
+      <div class="affix">
+        <div class="unselected">
+          <span class="character-size-input character-smallbox-value">{{{system.size.number.value}}}</span>
+        </div>
+        {{formInput
+          systemFields.size.fields.number.fields.saved
+          value=system.size.number.saved
+          classes="character-size-input character-smallbox-value selected"
+          dataset=(object tooltip=(ucFirst system.size.category))
+        }}
+      </div>
     </div>
     <div class="character-shortbox character-weight-box">
       <div class="tsubtle tcenter">

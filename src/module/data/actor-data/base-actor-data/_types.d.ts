@@ -173,8 +173,6 @@ export interface TeriockBaseActorData {
   };
   /** MP Dice */
   mpDice: Record<Teriock.ID<StatDieModel>, StatDieModel>;
-  /** <derived> The named size category (Tiny, Small, Medium, Large, Huge, Gargantuan, Colossal) */
-  namedSize: string;
   /** <base> Presence */
   presence: {
     /** <base> Maximum presence tier */
@@ -238,7 +236,16 @@ export interface TeriockBaseActorData {
     };
   };
   /** <schema> Size */
-  size: number;
+  size: {
+    /** <schema> Numbered size */
+    number: Teriock.Fields.ModifiableDeterministic;
+    /** <derived> Named size category */
+    category: string;
+    /** <derived> */
+    reach: number;
+    /** <derived> */
+    length: number;
+  };
   /** <base> Speed adjustments */
   speedAdjustments: {
     /** <base> Climb speed */

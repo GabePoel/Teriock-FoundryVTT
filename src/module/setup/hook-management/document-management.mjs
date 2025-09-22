@@ -29,13 +29,8 @@ export default function registerDocumentManagementHooks() {
         === "number"
         || typeof changed.system?.money?.debt
         === "number";
-      const doPrepareTokens = typeof changed.system?.hp?.value
-        === "number"
-        || typeof changed.system?.mp?.value
-        === "number";
       await document.postUpdate({
         checkDown: !doCheckDown,
-        prepareTokens: !doPrepareTokens,
       });
     }
   });

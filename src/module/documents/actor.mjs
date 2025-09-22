@@ -1,3 +1,6 @@
+import {
+  _getSizeDefinition,
+} from "../data/actor-data/base-actor-data/methods/derived-data/_prep-derived-attributes.mjs";
 import { TeriockRoll } from "../dice/_module.mjs";
 import { copyItem } from "../helpers/fetch.mjs";
 import { toCamelCase } from "../helpers/string.mjs";
@@ -29,18 +32,6 @@ const { Actor } = foundry.documents;
  * @property {boolean} limited
  */
 export default class TeriockActor extends ParentDocumentMixin(CommonDocumentMixin(Actor)) {
-  /**
-   * Figure out the name for a given size.
-   * @param {number} size
-   * @returns {string}
-   */
-  static toNamedSize(size) {
-    const sizeKeys = Object.keys(TERIOCK.options.character.namedSizes).map(Number);
-    const filteredSizeKeys = sizeKeys.filter((key) => key <= size);
-    const sizeKey = Math.max(...filteredSizeKeys, 0);
-    return TERIOCK.options.character.namedSizes[sizeKey] || "Medium";
-  }
-
   /**
    * @inheritDoc
    * @returns {TeriockActor}
@@ -167,7 +158,7 @@ export default class TeriockActor extends ParentDocumentMixin(CommonDocumentMixi
 
     // Update Prototype Token
     const prototypeToken = {};
-    const size = TERIOCK.options.character.tokenSizes[TeriockActor.toNamedSize(this.system.size)] || 1;
+    const size = this.system.size.length;
     if (!foundry.utils.hasProperty(data, "prototypeToken.sight.enabled")) {
       prototypeToken.sight = {
         enabled: true,
@@ -194,8 +185,8 @@ export default class TeriockActor extends ParentDocumentMixin(CommonDocumentMixi
     if ((await super._preUpdate(changed, options, user)) === false) {
       return false;
     }
-    if (foundry.utils.hasProperty(changed, "system.size")) {
-      const tokenSize = TERIOCK.options.character.tokenSizes[TeriockActor.toNamedSize(changed.system.size)] || 1;
+    if (foundry.utils.hasProperty(changed, "system.size.saved")) {
+      const tokenSize = _getSizeDefinition(changed.size.saved).length;
       if (!foundry.utils.hasProperty(changed, "prototypeToken.width")) {
         changed.prototypeToken ||= {};
         changed.prototypeToken.height = tokenSize;

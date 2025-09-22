@@ -7,7 +7,7 @@ if (!actor.effectKeys.consequence.has("treeformBallEffect")) {
     const created = await actor.createEmbeddedDocuments("Item", [ treeSpecies ]);
     const createdTree = created[0];
     await createdTree.update({
-      "system.size.value": actor.system.size,
+      "system.size.value": actor.system.size.number.value,
       "system.applyMp": false,
     });
   }

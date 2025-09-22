@@ -28,6 +28,12 @@ export async function _parse(equipmentData, rawHTML) {
   const parameters = foundry.utils
     .deepClone(referenceEquipment.system)
     .toObject();
+  delete parameters.consumable;
+  delete parameters.notes;
+  delete parameters.description;
+  delete parameters.powerLevel;
+  delete parameters.quantity;
+  delete parameters.maxQuantity;
 
   // Parse damage
   const damageText = getText(".damage");

@@ -2,7 +2,6 @@ import { _prepDerivedAttributes } from "./_prep-derived-attributes.mjs";
 import { _prepDerivedDefense } from "./_prep-derived-defense.mjs";
 import { _prepDerivedHpMp } from "./_prep-derived-hp-mp.mjs";
 import { _prepDerivedEncumbrance, _prepDerivedMoney, _prepDerivedWeightCarried } from "./_prep-derived-load.mjs";
-import { _prepDerivedSpecies } from "./_prep-derived-species.mjs";
 import { _prepDerivedSpeed } from "./_prep-derived-speed.mjs";
 import { _prepDerivedTradecrafts } from "./_prep-derived-tradecrafts.mjs";
 
@@ -25,7 +24,6 @@ import { _prepDerivedTradecrafts } from "./_prep-derived-tradecrafts.mjs";
  * @returns {void} Modifies the system object in place with derived data
  */
 export function _prepareDerivedData(actorData) {
-  _prepDerivedSpecies(actorData);
   _prepDerivedAttributes(actorData);
   _prepDerivedTradecrafts(actorData);
   _prepDerivedMoney(actorData);
