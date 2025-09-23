@@ -51,9 +51,10 @@ effects:
           checks: []
           duration: 0
           changes:
-            - key: system.damage.mouth
-              mode: 4
-              value: '4'
+            - key: >-
+                !equipment__system.equipmentType__eq__Mouth__system.damage.base.raw
+              mode: 5
+              value: 1d4
               priority: 10
           common: []
           expiration:
@@ -93,9 +94,10 @@ effects:
           checks: []
           duration: 0
           changes:
-            - key: system.damage.mouth
-              mode: 4
-              value: '6'
+            - key: >-
+                !equipment__system.equipmentType__eq__Mouth__system.damage.base.raw
+              mode: 5
+              value: 1d6
               priority: 10
           common: []
           expiration:
@@ -135,10 +137,11 @@ effects:
           checks: []
           duration: 0
           changes:
-            - key: system.damage.mouth
-              mode: 4
-              value: '8'
-              priority: 20
+            - key: >-
+                !equipment__system.equipmentType__eq__Mouth__system.damage.base.raw
+              mode: 5
+              value: 1d8
+              priority: 10
           common: []
           expiration:
             normal:
@@ -326,7 +329,7 @@ effects:
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.0
+      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
     _key: '!items.effects!Q8v9ejeyJjZbxKrg.x6829QxcrFaHoc9Z'
   - name: Fear Touch
@@ -572,8 +575,6 @@ effects:
         At the end of each of the target's @L[Core:Turn]{turns}, they roll
         [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.
       requirements: ''
-      effects:
-        - mental
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
@@ -593,6 +594,8 @@ effects:
       maxQuantity:
         raw: ''
         derived: 0
+      effectTypes:
+        - mental
     _id: 9xExlLtnMJVfOkp5
     img: systems/teriock/src/icons/abilities/fear-touch.webp
     changes: []
@@ -607,7 +610,7 @@ effects:
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.0
+      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
     _key: '!items.effects!Q8v9ejeyJjZbxKrg.9xExlLtnMJVfOkp5'
 ownership:

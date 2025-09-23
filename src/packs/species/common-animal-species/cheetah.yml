@@ -1472,7 +1472,7 @@ effects:
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.0
+      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
     _key: '!items.effects!QxDBDkex38ymZ7Gs.2L11HSxP3U2wgnRl'
   - name: Reactive Hide
@@ -3717,10 +3717,15 @@ effects:
           checks: []
           duration: 0
           changes:
-            - key: system.damage.mouth
-              mode: 4
-              value: '8'
-              priority: 15
+            - key: >-
+                !equipment__system.equipmentType__eq__Mouth__system.damage.base.raw
+              mode: 5
+              value: 1d8
+              priority: 10
+            - key: '!ability__name__eq__Bite__system.fluent'
+              mode: 5
+              value: 'true'
+              priority: 10
           common: []
           expiration:
             normal:
@@ -3978,7 +3983,7 @@ effects:
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.0
+      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
     _key: '!items.effects!QxDBDkex38ymZ7Gs.KbaOwpQyLM5hpcaw'
   - name: Bite
@@ -3999,9 +4004,10 @@ effects:
           checks: []
           duration: 0
           changes:
-            - key: system.damage.mouth
-              mode: 4
-              value: '4'
+            - key: >-
+                !equipment__system.equipmentType__eq__Mouth__system.damage.base.raw
+              mode: 5
+              value: 1d4
               priority: 10
           common: []
           expiration:
@@ -4041,9 +4047,10 @@ effects:
           checks: []
           duration: 0
           changes:
-            - key: system.damage.mouth
-              mode: 4
-              value: '6'
+            - key: >-
+                !equipment__system.equipmentType__eq__Mouth__system.damage.base.raw
+              mode: 5
+              value: 1d6
               priority: 10
           common: []
           expiration:
@@ -4083,10 +4090,11 @@ effects:
           checks: []
           duration: 0
           changes:
-            - key: system.damage.mouth
-              mode: 4
-              value: '8'
-              priority: 20
+            - key: >-
+                !equipment__system.equipmentType__eq__Mouth__system.damage.base.raw
+              mode: 5
+              value: 1d8
+              priority: 10
           common: []
           expiration:
             normal:
@@ -4274,7 +4282,7 @@ effects:
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.0
+      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
     _key: '!items.effects!QxDBDkex38ymZ7Gs.G1Y6VwYBU3SmB88I'
   - name: Vicious Claws
@@ -4295,16 +4303,30 @@ effects:
           checks: []
           duration: 0
           changes:
-            - key: system.equipmentChanges.overrides.types.Hand.damage
+            - key: >-
+                !equipment__system.equipmentType__eq__Hand__system.damage.base.raw
               mode: 5
               value: 1d8
-              priority: 15
-            - key: system.equipmentChanges.overrides.types.Hand.av0
-              mode: 4
+              priority: 20
+            - key: '!equipment__system.equipmentType__eq__Hand__system.piercing.av0'
+              mode: 5
               value: 'true'
               priority: 10
-            - key: system.equipmentChanges.overrides.types.Foot.av0
-              mode: 4
+            - key: '!equipment__system.equipmentType__eq__Foot__system.piercing.av0'
+              mode: 5
+              value: 'true'
+              priority: 10
+            - key: >-
+                !equipment__system.equipmentType__eq__Foot__system.damage.base.raw
+              mode: 5
+              value: 1d8
+              priority: 20
+            - key: '!ability__name__eq__Hand__system.fluent'
+              mode: 5
+              value: 'true'
+              priority: 10
+            - key: '!ability__name__eq__Foot__system.fluent'
+              mode: 5
               value: 'true'
               priority: 10
           common: []
@@ -4567,7 +4589,7 @@ effects:
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.0
+      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
     _key: '!items.effects!QxDBDkex38ymZ7Gs.hTy8X9tJSj0vhzlx'
   - name: Offensive Martial Arts
@@ -4588,7 +4610,8 @@ effects:
           checks: []
           duration: 0
           changes:
-            - key: system.equipmentChanges.overrides.types.Hand.damage
+            - key: >-
+                !equipment__system.equipmentType__eq__Hand__system.damage.base.raw
               mode: 5
               value: 1d4
               priority: 10
@@ -4630,7 +4653,8 @@ effects:
           checks: []
           duration: 0
           changes:
-            - key: system.equipmentChanges.overrides.types.Hand.damage
+            - key: >-
+                !equipment__system.equipmentType__eq__Hand__system.damage.base.raw
               mode: 5
               value: 1d6
               priority: 15
@@ -4672,7 +4696,8 @@ effects:
           checks: []
           duration: 0
           changes:
-            - key: system.equipmentChanges.overrides.types.Hand.damage
+            - key: >-
+                !equipment__system.equipmentType__eq__Hand__system.damage.base.raw
               mode: 5
               value: 1d8
               priority: 20
@@ -4862,7 +4887,7 @@ effects:
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.0
+      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
     _key: '!items.effects!QxDBDkex38ymZ7Gs.5gTaJuv9VkvgsfER'
 ownership:

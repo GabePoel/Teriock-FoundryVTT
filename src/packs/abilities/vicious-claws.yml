@@ -22,16 +22,30 @@ effects:
           checks: []
           duration: 0
           changes:
-            - key: system.equipmentChanges.overrides.types.Hand.damage
+            - key: >-
+                !equipment__system.equipmentType__eq__Hand__system.damage.base.raw
               mode: 5
               value: 1d8
-              priority: 15
-            - key: system.equipmentChanges.overrides.types.Hand.av0
-              mode: 4
+              priority: 20
+            - key: '!equipment__system.equipmentType__eq__Hand__system.piercing.av0'
+              mode: 5
               value: 'true'
               priority: 10
-            - key: system.equipmentChanges.overrides.types.Foot.av0
-              mode: 4
+            - key: '!equipment__system.equipmentType__eq__Foot__system.piercing.av0'
+              mode: 5
+              value: 'true'
+              priority: 10
+            - key: >-
+                !equipment__system.equipmentType__eq__Foot__system.damage.base.raw
+              mode: 5
+              value: 1d8
+              priority: 20
+            - key: '!ability__name__eq__Hand__system.fluent'
+              mode: 5
+              value: 'true'
+              priority: 10
+            - key: '!ability__name__eq__Foot__system.fluent'
+              mode: 5
               value: 'true'
               priority: 10
           common: []
@@ -290,7 +304,7 @@ effects:
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.0
+      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
     _key: '!items.effects!58b9vbvBtNIHfm0X.9GFMKzWFrjzqtH15'
   - name: Offensive Martial Arts
@@ -311,7 +325,8 @@ effects:
           checks: []
           duration: 0
           changes:
-            - key: system.equipmentChanges.overrides.types.Hand.damage
+            - key: >-
+                !equipment__system.equipmentType__eq__Hand__system.damage.base.raw
               mode: 5
               value: 1d4
               priority: 10
@@ -353,7 +368,8 @@ effects:
           checks: []
           duration: 0
           changes:
-            - key: system.equipmentChanges.overrides.types.Hand.damage
+            - key: >-
+                !equipment__system.equipmentType__eq__Hand__system.damage.base.raw
               mode: 5
               value: 1d6
               priority: 15
@@ -395,7 +411,8 @@ effects:
           checks: []
           duration: 0
           changes:
-            - key: system.equipmentChanges.overrides.types.Hand.damage
+            - key: >-
+                !equipment__system.equipmentType__eq__Hand__system.damage.base.raw
               mode: 5
               value: 1d8
               priority: 20
@@ -585,7 +602,7 @@ effects:
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.0
+      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
     _key: '!items.effects!58b9vbvBtNIHfm0X.FUSTd2ZFGbspqEdv'
 folder: null

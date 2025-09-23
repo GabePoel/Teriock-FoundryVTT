@@ -1195,7 +1195,7 @@ effects:
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.0
+      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
     _key: '!items.effects!C4uU8VlpvVcXPzsV.lOurUEdrF2GNP7Iy'
   - name: Bite
@@ -1216,9 +1216,10 @@ effects:
           checks: []
           duration: 0
           changes:
-            - key: system.damage.mouth
-              mode: 4
-              value: '4'
+            - key: >-
+                !equipment__system.equipmentType__eq__Mouth__system.damage.base.raw
+              mode: 5
+              value: 1d4
               priority: 10
           common: []
           expiration:
@@ -1258,9 +1259,10 @@ effects:
           checks: []
           duration: 0
           changes:
-            - key: system.damage.mouth
-              mode: 4
-              value: '6'
+            - key: >-
+                !equipment__system.equipmentType__eq__Mouth__system.damage.base.raw
+              mode: 5
+              value: 1d6
               priority: 10
           common: []
           expiration:
@@ -1300,10 +1302,11 @@ effects:
           checks: []
           duration: 0
           changes:
-            - key: system.damage.mouth
-              mode: 4
-              value: '8'
-              priority: 20
+            - key: >-
+                !equipment__system.equipmentType__eq__Mouth__system.damage.base.raw
+              mode: 5
+              value: 1d8
+              priority: 10
           common: []
           expiration:
             normal:
@@ -1491,7 +1494,7 @@ effects:
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.0
+      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
     _key: '!items.effects!C4uU8VlpvVcXPzsV.ppI0vaoPyd8D5T9L'
   - name: Dark Vision
@@ -1681,7 +1684,9 @@ effects:
       sustained: false
       range: Self.
       overview:
-        base: You can see in the dark up to 60 feet as though it is dim light.
+        base: >-
+          You can see in the dark up to 60 feet as though it is dim
+          light.<p></p>
         proficient: ''
         fluent: ''
       results:
@@ -1770,7 +1775,7 @@ effects:
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.0
+      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
     _key: '!items.effects!C4uU8VlpvVcXPzsV.0MsIlIW66JmAfCAU'
   - name: Dense Intelligence
@@ -5109,12 +5114,8 @@ effects:
           checks: []
           duration: 0
           changes:
-            - key: system.equipmentChanges.upgrades.classes.armor.av
+            - key: '!equipment__system.equipmentClasses__has__armor__system.av.raw'
               mode: 2
-              value: '0'
-              priority: 0
-            - key: system.equipmentChanges.upgrades.classes.armor.av
-              mode: 4
               value: '1'
               priority: 10
           common: []
@@ -5371,7 +5372,7 @@ effects:
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.0
+      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
     _key: '!items.effects!C4uU8VlpvVcXPzsV.z5zunqrjGxcAnTXB'
   - name: Web Ball

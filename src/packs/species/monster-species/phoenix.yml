@@ -917,7 +917,7 @@ effects:
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.0
+      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
     _key: '!items.effects!ZXSZMHbhV7VMD3eh.lnhCstHapiVLLr4W'
   - name: Flame Magic Adept
@@ -2307,7 +2307,7 @@ effects:
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.0
+      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
     _key: '!items.effects!ZXSZMHbhV7VMD3eh.9iwBeWy6cHregWpT'
   - name: Martial Arts
@@ -2605,7 +2605,8 @@ effects:
           checks: []
           duration: 0
           changes:
-            - key: system.equipmentChanges.overrides.types.Hand.damage
+            - key: >-
+                !equipment__system.equipmentType__eq__Hand__system.damage.base.raw
               mode: 5
               value: 1d4
               priority: 10
@@ -2647,7 +2648,8 @@ effects:
           checks: []
           duration: 0
           changes:
-            - key: system.equipmentChanges.overrides.types.Hand.damage
+            - key: >-
+                !equipment__system.equipmentType__eq__Hand__system.damage.base.raw
               mode: 5
               value: 1d6
               priority: 15
@@ -2689,7 +2691,8 @@ effects:
           checks: []
           duration: 0
           changes:
-            - key: system.equipmentChanges.overrides.types.Hand.damage
+            - key: >-
+                !equipment__system.equipmentType__eq__Hand__system.damage.base.raw
               mode: 5
               value: 1d8
               priority: 20
@@ -2879,7 +2882,7 @@ effects:
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.0
+      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
     _key: '!items.effects!ZXSZMHbhV7VMD3eh.cbireVAJMwLF4o1c'
   - name: Defensive Martial Arts
@@ -6790,7 +6793,7 @@ effects:
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.0
+      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
     _key: '!items.effects!ZXSZMHbhV7VMD3eh.DNfDikr9EpHG91Ba'
   - name: Outsider Regenerating
@@ -7372,10 +7375,15 @@ effects:
           checks: []
           duration: 0
           changes:
-            - key: system.damage.mouth
-              mode: 4
-              value: '8'
-              priority: 15
+            - key: >-
+                !equipment__system.equipmentType__eq__Mouth__system.damage.base.raw
+              mode: 5
+              value: 1d8
+              priority: 10
+            - key: '!ability__name__eq__Bite__system.fluent'
+              mode: 5
+              value: 'true'
+              priority: 10
           common: []
           expiration:
             normal:
@@ -7633,7 +7641,7 @@ effects:
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.0
+      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
     _key: '!items.effects!ZXSZMHbhV7VMD3eh.7XejGT3RDqRRQ3HF'
   - name: Bite
@@ -7654,9 +7662,10 @@ effects:
           checks: []
           duration: 0
           changes:
-            - key: system.damage.mouth
-              mode: 4
-              value: '4'
+            - key: >-
+                !equipment__system.equipmentType__eq__Mouth__system.damage.base.raw
+              mode: 5
+              value: 1d4
               priority: 10
           common: []
           expiration:
@@ -7696,9 +7705,10 @@ effects:
           checks: []
           duration: 0
           changes:
-            - key: system.damage.mouth
-              mode: 4
-              value: '6'
+            - key: >-
+                !equipment__system.equipmentType__eq__Mouth__system.damage.base.raw
+              mode: 5
+              value: 1d6
               priority: 10
           common: []
           expiration:
@@ -7738,10 +7748,11 @@ effects:
           checks: []
           duration: 0
           changes:
-            - key: system.damage.mouth
-              mode: 4
-              value: '8'
-              priority: 20
+            - key: >-
+                !equipment__system.equipmentType__eq__Mouth__system.damage.base.raw
+              mode: 5
+              value: 1d8
+              priority: 10
           common: []
           expiration:
             normal:
@@ -7929,7 +7940,7 @@ effects:
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.0
+      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
     _key: '!items.effects!ZXSZMHbhV7VMD3eh.Aow0owouGXSDy0JD'
 ownership:
