@@ -83,13 +83,18 @@ effects:
       systemVersion: 0.9.0
       lastModifiedBy: teriockBuilder00
     _key: '!items.effects!6fdbPzpMRicQCiT7.QfYIvnVdhSo69Db6'
-  - name: Spell Turning Weapons
+  - name: Spell Catch
     type: ability
-    img: systems/teriock/src/icons/abilities/spell-turning-weapons.webp
     system:
+      consumable: false
+      maxQuantity:
+        saved: ''
+        raw: ''
+      quantity: 1
       hierarchy:
         rootUuid: Compendium.teriock.magicItems.Item.6fdbPzpMRicQCiT7
-        subIds: []
+        subIds:
+          - F7zUMAqJGbRIDIcu
         supId: null
       applies:
         base:
@@ -241,64 +246,10 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
-      elderSorcery: false
-      elderSorceryIncant: ''
-      powerSources:
-        - divine
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-        parent: null
-        package: null
-      targets:
-        - self
-      elements: []
-      duration:
-        unit: noLimit
-        quantity: 0
-        conditions:
-          present: []
-          absent: []
-        description: Always Active
-        stationary: false
-      sustained: false
-      range: Self.
-      overview:
-        base: >-
-          You can @L[Category:Block abilities]{block}
-          non-@L[Keyword:Warded]{warded} @L[Keyword:UB]{UB} @L[Category:Attack
-          abilities]{attacks} with your @L[Category:Weapons]{weapons}. Any
-          effects that would turn off or cut through
-          @L[Keyword:Resistance]{resistances} affect this as well.
-        proficient: ''
-        fluent: ''
-      results:
-        hit: ''
-        critHit: ''
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
-      skill: true
-      spell: false
-      standard: true
-      ritual: false
-      class: ranger
-      rotator: false
-      invoked: false
+      adept:
+        enabled: false
+        amount: 1
+      basic: false
       costs:
         verbal: false
         somatic: false
@@ -323,37 +274,88 @@ effects:
             variable: ''
         break: ''
         materialCost: ''
-      heightened: ''
+      delivery:
+        base: weapon
+        parent: null
+        package: null
+      duration:
+        unit: hour
+        quantity: 1
+        conditions:
+          present: []
+          absent: []
+        stationary: false
+        description: 1 Hour
+      effectTypes: []
+      elderSorcery: false
+      elderSorceryIncant: ''
+      elements: []
       endCondition: ''
-      requirements: ''
+      executionTime: r1
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
-      trigger: ''
-      basic: false
-      form: normal
-      limitation: >-
-        <p>This only applies to Tordil's Spellmace and can only be used for
-        @L[Category:Spells]{spells}.</p>
-      improvement: <p>This works on @L[Core:UB] @L[Category:Spells]{spells}.</p>
-      prepared: true
-      warded: false
-      secret: false
-      consumable: false
-      quantity: 1
-      maxQuantity:
-        raw: ''
-        derived: 0
-      effectTypes:
-        - divine
-        - resistance
+      featSaveAttribute: mov
+      form: special
       gifted:
         enabled: false
         amount: 1
-      adept:
-        enabled: false
-        amount: 1
-    _id: nTkh55Y6cQyVd33m
+      grantOnly: true
+      heightened: ''
+      improvement: ''
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+      interaction: block
+      invoked: false
+      limitation: ''
+      maneuver: reactive
+      overview:
+        base: ''
+        proficient: ''
+        fluent: ''
+      piercing: normal
+      powerSources:
+        - magical
+      prepared: true
+      range: null
+      requirements: >-
+        Target is a @L[Category:Missile delivery spells]{missile attack spell}
+        being cast by an opponent.
+      results:
+        hit: ''
+        critHit: ''
+        miss: ''
+        critMiss: ''
+        save: >-
+          The target @L[Core:Interactions]{attack} @L[Category:Missile delivery
+          spells]{spell} @L[Core:Fizzles]{fizzles} and gets "stored" in the
+          @L[Category:Weapons]{weapon} used to deliver Spell Catch. For the
+          duration of Spell Catch, you gain @L[Keyword:Adept]{Adept}
+          @L[Keyword:Limited]{Limited} @L[Keyword:Improved]{Improved}
+          @L[Ability:Spell Strike]{Spell Strike}. Only one @L[Category:Missile
+          delivery spells]{spell} can be stored in the
+          @L[Category:Weapons]{weapon} at a time.
+        critSave: ''
+        fail: ''
+        critFail: ''
+      ritual: false
+      rotator: false
+      secret: false
+      skill: false
+      spell: false
+      standard: false
+      sustained: false
+      targets:
+        - spell
+      trigger: ''
+      warded: false
+    _id: SIUxrmEEQoRaXZDg
+    img: icons/magic/defensive/shield-barrier-flaming-pentagon-purple-orange.webp
     changes: []
     disabled: false
     duration:
@@ -366,17 +368,21 @@ effects:
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.0
+      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!6fdbPzpMRicQCiT7.nTkh55Y6cQyVd33m'
+    _key: '!items.effects!6fdbPzpMRicQCiT7.SIUxrmEEQoRaXZDg'
   - name: Spell Strike
     type: ability
-    img: systems/teriock/src/icons/abilities/spell-strike.webp
     system:
       hierarchy:
+        supId: SIUxrmEEQoRaXZDg
         rootUuid: Compendium.teriock.magicItems.Item.6fdbPzpMRicQCiT7
         subIds: []
-        supId: null
+      consumable: false
+      maxQuantity:
+        saved: ''
+        raw: ''
+      quantity: 1
       applies:
         base:
           statuses: []
@@ -527,63 +533,10 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
-      elderSorcery: false
-      elderSorceryIncant: ''
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: reactive
-      executionTime: r0
-      delivery:
-        base: weapon
-        parent: null
-        package: null
-      targets:
-        - creature
-      elements: []
-      duration:
-        unit: instant
-        quantity: 0
-        conditions:
-          present: []
-          absent: []
-        description: Instant
-        stationary: false
-      sustained: false
-      range: null
-      overview:
-        base: >-
-          Target takes the "on hit" effect of a @L[Category:Conjured
-          spells]{conjured} @L[Category:Missile delivery spells]{missile spell}
-          that you are @L[Core:Proficiency Bonus]{proficient} in. If the
-          triggering hit was a critical hit, then the target takes the "on
-          critical hit" effect instead.
-        proficient: ''
-        fluent: ''
-      results:
-        hit: ''
-        critHit: ''
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
-      skill: true
-      spell: false
-      standard: true
-      ritual: false
-      rotator: false
-      invoked: false
+      adept:
+        enabled: true
+        amount: 1
+      basic: false
       costs:
         verbal: false
         somatic: false
@@ -608,55 +561,88 @@ effects:
             variable: ''
         break: ''
         materialCost: ''
-      heightened: ''
+      delivery:
+        base: weapon
+        parent: null
+        package: null
+      duration:
+        unit: instant
+        quantity: 0
+        conditions:
+          present: []
+          absent: []
+        stationary: false
+        description: Instant
+      effectTypes: []
+      elderSorcery: false
+      elderSorceryIncant: ''
+      elements: []
       endCondition: ''
-      requirements: ''
+      executionTime: r0
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      gifted:
+        enabled: false
+        amount: 1
+      grantOnly: false
+      heightened: ''
+      improvement: >-
+        You are considered to have and be proficient in the stored spell for
+        this purpose.
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+      interaction: manifest
+      invoked: false
+      limitation: Can only be used with the stored spell and the item it is stored in.
+      maneuver: reactive
+      overview:
+        base: >-
+          Target takes the "on hit" effect of a @L[Category:Conjured
+          spells]{conjured} @L[Category:Missile delivery spells]{missile spell}
+          that you are @L[Core:Proficiency Bonus]{proficient} in. If the
+          triggering hit was a critical hit, then the target takes the "on
+          critical hit" effect instead.
+        proficient: ''
+        fluent: ''
+      piercing: normal
+      powerSources:
+        - magical
+      prepared: true
+      range: null
+      requirements: ''
+      results:
+        hit: ''
+        critHit: ''
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      ritual: false
+      rotator: false
+      secret: false
+      skill: true
+      spell: false
+      standard: true
+      sustained: false
+      targets:
+        - creature
       trigger: >-
         You have just landed a hit with a @L[Category:Weapon delivery
         abilities]{weapon} or @L[Category:Bite delivery abilities]{bite}
         @L[Category:Attack abilities]{attack} on another creature and the effect
         has successfully applied.
-      basic: false
-      form: normal
-      limitation: >-
-        <p>Can only be used with one specific @L[Category:Spells]{missile spell}
-        blocked by Tordil's Spellmace or with one specific
-        @L[Category:Spells]{missile spell} of yours. To put one of your
-        @L[Category:Spells]{missile spells} in, you @L[Ability:Interact] with
-        Tordil's Spellmace and spend [[/drain 1d4]] @L[Core:MP]. The
-        @L[Category:Spells]{spell} is then "suspended" in Tordil's Spellmace and
-        you are @L[Keyword:Incapable]{incapable} of casting it other than
-        through Spell Strike. Only one @L[Category:Spells]{spell} can be
-        "suspended" in Tordil's Spellmace at a time.</p>
-      improvement: >-
-        <p>Can be used with @L[Category:Spells]{spells} you don't have and
-        aren't @L[Core:Proficiency Bonus]{proficient} in! You must block them
-        with Tordil's Spellmace. You then have 1 minute to strike with that
-        @L[Category:Spells]{spell}. You are @L[Keyword:Adept]{adept} at caught
-        spell strikes and do not need to pay the original cost. It maintains all
-        @L[Core:Heightening]{heightening} of its original casting. Caught
-        @L[Category:Spells]{spells} must be caught from an opponent.</p>
-      prepared: true
       warded: false
-      secret: false
-      consumable: false
-      quantity: 1
-      maxQuantity:
-        raw: ''
-        derived: 0
-      effectTypes:
-        - magical
-      gifted:
-        enabled: false
-        amount: 1
-      adept:
-        enabled: false
-        amount: 1
-      grantOnly: true
-    _id: Nwo1X4lQAIcUHede
+    img: systems/teriock/src/icons/abilities/spell-strike.webp
     changes: []
     disabled: false
     duration:
@@ -669,16 +655,593 @@ effects:
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.0
+      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!6fdbPzpMRicQCiT7.Nwo1X4lQAIcUHede'
+    _id: F7zUMAqJGbRIDIcu
+    _key: '!items.effects!6fdbPzpMRicQCiT7.F7zUMAqJGbRIDIcu'
+  - name: Spell Store
+    type: ability
+    system:
+      consumable: false
+      maxQuantity:
+        saved: ''
+        raw: ''
+      quantity: 1
+      hierarchy:
+        rootUuid: Compendium.teriock.magicItems.Item.6fdbPzpMRicQCiT7
+        subIds:
+          - dL1FAbCNb1BVBcKo
+        supId: null
+      applies:
+        base:
+          statuses: []
+          startStatuses: []
+          endStatuses: []
+          rolls: {}
+          hacks: []
+          checks: []
+          duration: 0
+          changes: []
+          common: []
+          expiration:
+            normal:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            crit:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            changeOnCrit: false
+            doesExpire: false
+        proficient:
+          statuses: []
+          startStatuses: []
+          endStatuses: []
+          rolls: {}
+          hacks: []
+          checks: []
+          duration: 0
+          changes: []
+          common: []
+          expiration:
+            normal:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            crit:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            changeOnCrit: false
+            doesExpire: false
+        fluent:
+          statuses: []
+          startStatuses: []
+          endStatuses: []
+          rolls: {}
+          hacks: []
+          checks: []
+          duration: 0
+          changes: []
+          common: []
+          expiration:
+            normal:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            crit:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            changeOnCrit: false
+            doesExpire: false
+        heightened:
+          statuses: []
+          startStatuses: []
+          endStatuses: []
+          rolls: {}
+          hacks: []
+          checks: []
+          duration: 0
+          changes: []
+          common: []
+          expiration:
+            normal:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            crit:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            changeOnCrit: false
+            doesExpire: false
+        macros: {}
+      adept:
+        enabled: false
+        amount: 1
+      basic: false
+      costs:
+        verbal: false
+        somatic: false
+        material: false
+        mp:
+          type: static
+          value:
+            static: 1
+            formula: ''
+            variable: ''
+        hp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        gp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        break: ''
+        materialCost: ''
+      delivery:
+        base: sight
+        parent: null
+        package: ritual
+      duration:
+        unit: hour
+        quantity: 1
+        conditions:
+          present: []
+          absent: []
+        stationary: false
+        description: 1 Hour
+      effectTypes:
+        - magical
+      elderSorcery: false
+      elderSorceryIncant: ''
+      elements: []
+      endCondition: ''
+      executionTime: 10 Minutes
+      expansion: null
+      expansionRange: null
+      expansionSaveAttribute: mov
+      featSaveAttribute: mov
+      form: special
+      gifted:
+        enabled: false
+        amount: 1
+      grantOnly: true
+      heightened: ''
+      improvement: ''
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+      interaction: manifest
+      invoked: false
+      limitation: ''
+      maneuver: slow
+      overview:
+        base: >-
+          You "store" a @L[Category:Missile delivery spells]{missile attack
+          spell} that you can cast and are @L[Core:Proficiency
+          Bonus]{proficient} in in the target @L[Category:Weapons]{weapon}. For
+          the duration of Spell Store, you gain @L[Keyword:Limited]{Limited}
+          @L[Keyword:Improved]{Improved} @L[Ability:Spell Strike]{Spell Strike}.
+          Only one <a
+          href="/index.php?title=Category:Spell&amp;action=edit&amp;redlink=1"
+          class="new" title="Category:Spell (page does not exist)">spell</a> can
+          be stored in the target @L[Category:Weapons]{weapon} at a time.
+        proficient: ''
+        fluent: ''
+      piercing: normal
+      powerSources:
+        - magical
+      prepared: true
+      range: '5'
+      requirements: ''
+      results:
+        hit: ''
+        critHit: ''
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      ritual: true
+      rotator: false
+      secret: false
+      skill: false
+      spell: false
+      standard: false
+      sustained: false
+      targets:
+        - weapon
+      trigger: ''
+      warded: false
+    _id: PbTALsVOnIbGA00t
+    img: icons/magic/symbols/runes-star-pentagon-orange-purple.webp
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+    origin: null
+    transfer: true
+    statuses: []
+    flags: {}
+    _stats:
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.1
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!6fdbPzpMRicQCiT7.PbTALsVOnIbGA00t'
+  - name: Spell Strike
+    type: ability
+    system:
+      hierarchy:
+        supId: PbTALsVOnIbGA00t
+        rootUuid: Compendium.teriock.magicItems.Item.6fdbPzpMRicQCiT7
+        subIds: []
+      consumable: false
+      maxQuantity:
+        saved: ''
+        raw: ''
+      quantity: 1
+      applies:
+        base:
+          statuses: []
+          startStatuses: []
+          endStatuses: []
+          rolls: {}
+          hacks: []
+          checks: []
+          duration: 0
+          changes: []
+          common: []
+          expiration:
+            normal:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            crit:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            changeOnCrit: false
+            doesExpire: false
+        proficient:
+          statuses: []
+          startStatuses: []
+          endStatuses: []
+          rolls: {}
+          hacks: []
+          checks: []
+          duration: 0
+          changes: []
+          common: []
+          expiration:
+            normal:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            crit:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            changeOnCrit: false
+            doesExpire: false
+        fluent:
+          statuses: []
+          startStatuses: []
+          endStatuses: []
+          rolls: {}
+          hacks: []
+          checks: []
+          duration: 0
+          changes: []
+          common: []
+          expiration:
+            normal:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            crit:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            changeOnCrit: false
+            doesExpire: false
+        heightened:
+          statuses: []
+          startStatuses: []
+          endStatuses: []
+          rolls: {}
+          hacks: []
+          checks: []
+          duration: 0
+          changes: []
+          common: []
+          expiration:
+            normal:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            crit:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            changeOnCrit: false
+            doesExpire: false
+        macros: {}
+      adept:
+        enabled: false
+        amount: 1
+      basic: false
+      costs:
+        verbal: false
+        somatic: false
+        material: false
+        mp:
+          type: static
+          value:
+            static: 1
+            formula: ''
+            variable: ''
+        hp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        gp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        break: ''
+        materialCost: ''
+      delivery:
+        base: weapon
+        parent: null
+        package: null
+      duration:
+        unit: instant
+        quantity: 0
+        conditions:
+          present: []
+          absent: []
+        stationary: false
+        description: Instant
+      effectTypes: []
+      elderSorcery: false
+      elderSorceryIncant: ''
+      elements: []
+      endCondition: ''
+      executionTime: r0
+      expansion: null
+      expansionRange: null
+      expansionSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      gifted:
+        enabled: false
+        amount: 1
+      grantOnly: false
+      heightened: ''
+      improvement: >-
+        You are considered to have and be proficient in the stored spell for
+        this purpose.
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+      interaction: manifest
+      invoked: false
+      limitation: Can only be used with the stored spell and the item it is stored in.
+      maneuver: reactive
+      overview:
+        base: >-
+          Target takes the "on hit" effect of a @L[Category:Conjured
+          spells]{conjured} @L[Category:Missile delivery spells]{missile spell}
+          that you are @L[Core:Proficiency Bonus]{proficient} in. If the
+          triggering hit was a critical hit, then the target takes the "on
+          critical hit" effect instead.
+        proficient: ''
+        fluent: ''
+      piercing: normal
+      powerSources:
+        - magical
+      prepared: true
+      range: null
+      requirements: ''
+      results:
+        hit: ''
+        critHit: ''
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      ritual: false
+      rotator: false
+      secret: false
+      skill: true
+      spell: false
+      standard: true
+      sustained: false
+      targets:
+        - creature
+      trigger: >-
+        You have just landed a hit with a @L[Category:Weapon delivery
+        abilities]{weapon} or @L[Category:Bite delivery abilities]{bite}
+        @L[Category:Attack abilities]{attack} on another creature and the effect
+        has successfully applied.
+      warded: false
+    img: systems/teriock/src/icons/abilities/spell-strike.webp
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+    origin: null
+    transfer: true
+    statuses: []
+    flags: {}
+    _stats:
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.1
+      lastModifiedBy: teriockBuilder00
+    _id: dL1FAbCNb1BVBcKo
+    _key: '!items.effects!6fdbPzpMRicQCiT7.dL1FAbCNb1BVBcKo'
 ownership:
   default: 0
 flags: {}
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.0
+  systemVersion: 0.9.1
   lastModifiedBy: teriockBuilder00
 _id: 6fdbPzpMRicQCiT7
 _key: '!items!6fdbPzpMRicQCiT7'

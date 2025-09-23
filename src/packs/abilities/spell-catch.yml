@@ -1,9 +1,9 @@
-name: Drink Burning Liquid
+name: Spell Catch
 type: wrapper
-_id: bWGyKY6M5TvX60Rs
-img: systems/teriock/src/icons/abilities/drink-burning-liquid.webp
+_id: dMkPlCaOy3RLKkbe
+img: icons/magic/defensive/shield-barrier-flaming-pentagon-purple-orange.webp
 effects:
-  - name: Drink Burning Liquid
+  - name: Spell Catch
     type: ability
     system:
       consumable: false
@@ -12,9 +12,9 @@ effects:
         raw: ''
       quantity: 1
       hierarchy:
-        rootUuid: Compendium.teriock.abilities.Item.bWGyKY6M5TvX60Rs
+        rootUuid: Compendium.teriock.abilities.Item.dMkPlCaOy3RLKkbe
         subIds:
-          - XNReH5csuZkOH7d1
+          - NTPjNlDYTHlyQ7m9
         supId: null
       applies:
         base:
@@ -195,23 +195,23 @@ effects:
         break: ''
         materialCost: ''
       delivery:
-        base: self
+        base: weapon
         parent: null
         package: null
       duration:
-        unit: minute
+        unit: hour
         quantity: 1
         conditions:
           present: []
           absent: []
         stationary: false
-        description: 1 Minute
+        description: 1 Hour
       effectTypes: []
       elderSorcery: false
       elderSorceryIncant: ''
       elements: []
       endCondition: ''
-      executionTime: a1
+      executionTime: r1
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
@@ -230,28 +230,36 @@ effects:
         featSaveImprovement:
           attribute: null
           amount: proficient
-      interaction: manifest
+      interaction: block
       invoked: false
       limitation: ''
-      maneuver: active
+      maneuver: reactive
       overview:
-        base: >-
-          You gain @L[Keyword:Gifted]{Gifted} @L[Ability:Burning Touch]{Burning
-          Touch}.
+        base: ''
         proficient: ''
         fluent: ''
       piercing: normal
       powerSources:
-        - alchemical
+        - magical
       prepared: true
-      range: Self.
-      requirements: ''
+      range: null
+      requirements: >-
+        Target is a @L[Category:Missile delivery spells]{missile attack spell}
+        being cast by an opponent.
       results:
         hit: ''
         critHit: ''
         miss: ''
         critMiss: ''
-        save: ''
+        save: >-
+          The target @L[Core:Interactions]{attack} @L[Category:Missile delivery
+          spells]{spell} @L[Core:Fizzles]{fizzles} and gets "stored" in the
+          @L[Category:Weapons]{weapon} used to deliver Spell Catch. For the
+          duration of Spell Catch, you gain @L[Keyword:Adept]{Adept}
+          @L[Keyword:Limited]{Limited} @L[Keyword:Improved]{Improved}
+          @L[Ability:Spell Strike]{Spell Strike}. Only one @L[Category:Missile
+          delivery spells]{spell} can be stored in the
+          @L[Category:Weapons]{weapon} at a time.
         critSave: ''
         fail: ''
         critFail: ''
@@ -263,11 +271,11 @@ effects:
       standard: false
       sustained: false
       targets:
-        - self
+        - spell
       trigger: ''
       warded: false
-    _id: i50CChvism4ZzNwi
-    img: systems/teriock/src/icons/abilities/drink-burning-liquid.webp
+    _id: ZIsN4c5OrvbHrcNp
+    img: icons/magic/defensive/shield-barrier-flaming-pentagon-purple-orange.webp
     changes: []
     disabled: false
     duration:
@@ -280,15 +288,15 @@ effects:
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.0
+      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!bWGyKY6M5TvX60Rs.i50CChvism4ZzNwi'
-  - name: Burning Touch
+    _key: '!items.effects!dMkPlCaOy3RLKkbe.ZIsN4c5OrvbHrcNp'
+  - name: Spell Strike
     type: ability
     system:
       hierarchy:
-        supId: i50CChvism4ZzNwi
-        rootUuid: Compendium.teriock.abilities.Item.bWGyKY6M5TvX60Rs
+        supId: ZIsN4c5OrvbHrcNp
+        rootUuid: Compendium.teriock.abilities.Item.dMkPlCaOy3RLKkbe
         subIds: []
       consumable: false
       maxQuantity:
@@ -300,8 +308,7 @@ effects:
           statuses: []
           startStatuses: []
           endStatuses: []
-          rolls:
-            damage: 1d6[fire magic]
+          rolls: {}
           hacks: []
           checks: []
           duration: 0
@@ -412,8 +419,7 @@ effects:
           statuses: []
           startStatuses: []
           endStatuses: []
-          rolls:
-            damage: 1d6[magic fire]
+          rolls: {}
           hacks: []
           checks: []
           duration: 0
@@ -448,17 +454,17 @@ effects:
             doesExpire: false
         macros: {}
       adept:
-        enabled: true
+        enabled: false
         amount: 1
       basic: false
       costs:
-        verbal: true
-        somatic: true
+        verbal: false
+        somatic: false
         material: false
         mp:
-          type: none
+          type: static
           value:
-            static: 0
+            static: 1
             formula: ''
             variable: ''
         hp:
@@ -476,9 +482,9 @@ effects:
         break: ''
         materialCost: ''
       delivery:
-        base: hand
+        base: weapon
         parent: null
-        package: touch
+        package: null
       duration:
         unit: instant
         quantity: 0
@@ -487,26 +493,22 @@ effects:
           absent: []
         stationary: false
         description: Instant
-      effectTypes:
-        - damaging
+      effectTypes: []
       elderSorcery: false
       elderSorceryIncant: ''
-      elements:
-        - flame
+      elements: []
       endCondition: ''
-      executionTime: a1
+      executionTime: r0
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
       featSaveAttribute: mov
       form: normal
       gifted:
-        enabled: true
+        enabled: false
         amount: 1
       grantOnly: false
-      heightened: >-
-        For each additional @L[Core:MP]{MP} spent, deal an additional [[/damage
-        1d6[magic fire]]] @L[Core:Damage]{damage}.
+      heightened: ''
       improvement: ''
       improvements:
         attributeImprovement:
@@ -515,25 +517,28 @@ effects:
         featSaveImprovement:
           attribute: null
           amount: proficient
-      interaction: attack
+      interaction: manifest
       invoked: false
-      limitation: ''
-      maneuver: active
+      limitation: Can only be used with the stored spell and the item it is stored in.
+      maneuver: reactive
       overview:
-        base: ''
+        base: >-
+          Target takes the "on hit" effect of a @L[Category:Conjured
+          spells]{conjured} @L[Category:Missile delivery spells]{missile spell}
+          that you are @L[Core:Proficiency Bonus]{proficient} in. If the
+          triggering hit was a critical hit, then the target takes the "on
+          critical hit" effect instead.
         proficient: ''
         fluent: ''
-      piercing: ub
+      piercing: normal
       powerSources:
         - magical
       prepared: true
-      range: Your Hand's Range
+      range: null
       requirements: ''
       results:
-        hit: Deal [[/damage 1d6[fire magic]]] @L[Core:Damage]{damage} to target.
-        critHit: >-
-          Double the @L[Core:Damage]{damage dice} dealt by this
-          @L[Category:Abilities]{ability}.
+        hit: ''
+        critHit: ''
         miss: ''
         critMiss: ''
         save: ''
@@ -543,17 +548,20 @@ effects:
       ritual: false
       rotator: false
       secret: false
-      skill: false
-      spell: true
+      skill: true
+      spell: false
       standard: true
       sustained: false
       targets:
         - creature
-      trigger: ''
+      trigger: >-
+        You have just landed a hit with a @L[Category:Weapon delivery
+        abilities]{weapon} or @L[Category:Bite delivery abilities]{bite}
+        @L[Category:Attack abilities]{attack} on another creature and the effect
+        has successfully applied.
       warded: false
-      class: flameMage
-    _id: XNReH5csuZkOH7d1
-    img: systems/teriock/src/icons/abilities/burning-touch.webp
+    _id: NTPjNlDYTHlyQ7m9
+    img: systems/teriock/src/icons/abilities/spell-strike.webp
     changes: []
     disabled: false
     duration:
@@ -568,7 +576,7 @@ effects:
       systemId: teriock
       systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!bWGyKY6M5TvX60Rs.XNReH5csuZkOH7d1'
+    _key: '!items.effects!dMkPlCaOy3RLKkbe.NTPjNlDYTHlyQ7m9'
 folder: null
 ownership:
   default: 0
@@ -576,6 +584,6 @@ flags: {}
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.0
+  systemVersion: 0.9.1
   lastModifiedBy: teriockBuilder00
-_key: '!items!bWGyKY6M5TvX60Rs'
+_key: '!items!dMkPlCaOy3RLKkbe'

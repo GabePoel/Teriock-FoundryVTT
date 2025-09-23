@@ -80,14 +80,16 @@
           disabled=(not editable)
           hidden=(not (exists system.limitation))
         }}
-        <div class="ab-section-container">
-          <div class="ab-section">
-            <span class="ab-section-title ab-section-title-dynamic">Granter Only</span>
+        {{#if system.grantOnly}}
+          <div class="ab-section-container">
+            <div class="ab-section">
+              <span class="ab-section-title ab-section-title-dynamic">Granter Only</span>
+            </div>
+            <div>
+              {{{enriched.grantOnly}}}
+            </div>
           </div>
-          <div>
-            {{{enriched.grantOnly}}}
-          </div>
-        </div>
+        {{/if}}
         {{formGroup
           systemFields.improvement
           value=system.improvement

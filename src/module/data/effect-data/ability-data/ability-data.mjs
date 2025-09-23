@@ -108,8 +108,11 @@ export default class TeriockAbilityModel extends HierarchyDataMixin(ConsumableDa
   /** @inheritDoc */
   get nameString() {
     const additions = [];
-    if (this.grantOnly) {
-      additions.push("Granted");
+    if (this.adept.enabled) {
+      additions.push("Adept");
+    }
+    if (this.gifted.enabled) {
+      additions.push("Gifted");
     }
     if (this.limitation && this.limitation.length > 0) {
       additions.push("Limited");
@@ -117,11 +120,8 @@ export default class TeriockAbilityModel extends HierarchyDataMixin(ConsumableDa
     if (this.improvement && this.improvement.length > 0) {
       additions.push("Improved");
     }
-    if (this.adept.enabled) {
-      additions.push("Adept");
-    }
-    if (this.gifted.enabled) {
-      additions.push("Gifted");
+    if (this.grantOnly) {
+      additions.push("Granted");
     }
     let nameAddition = "";
     if (additions.length > 0) {
