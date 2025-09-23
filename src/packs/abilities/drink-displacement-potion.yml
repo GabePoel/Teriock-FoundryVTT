@@ -1,9 +1,9 @@
-name: Spell Store
+name: Drink Displacement Potion
 type: wrapper
-_id: XjBu6GNSGd38o1NM
-img: icons/magic/symbols/runes-star-pentagon-orange-purple.webp
+_id: szSuv5CtcLSnRvCt
+img: systems/teriock/src/icons/abilities/drink-displacement-potion.webp
 effects:
-  - name: Spell Store
+  - name: Drink Displacement Potion
     type: ability
     system:
       consumable: false
@@ -12,9 +12,9 @@ effects:
         raw: ''
       quantity: 1
       hierarchy:
-        rootUuid: Compendium.teriock.abilities.Item.XjBu6GNSGd38o1NM
+        rootUuid: Compendium.teriock.abilities.Item.szSuv5CtcLSnRvCt
         subIds:
-          - 77x5RZUwGbcX8Ulf
+          - 4skQkE8z0I3xmc4B
         supId: null
       applies:
         base:
@@ -173,11 +173,11 @@ effects:
       costs:
         verbal: false
         somatic: false
-        material: false
+        material: true
         mp:
-          type: static
+          type: none
           value:
-            static: 1
+            static: 0
             formula: ''
             variable: ''
         hp:
@@ -193,30 +193,33 @@ effects:
             formula: ''
             variable: ''
         break: ''
-        materialCost: ''
+        materialCost: >-
+          Using this ability consumes the @L[Category:Equipment]{equipment} that
+          provides it.
       delivery:
-        base: sight
+        base: item
         parent: null
-        package: ritual
+        package: null
       duration:
-        unit: hour
+        unit: minute
         quantity: 1
         conditions:
           present: []
           absent: []
         stationary: false
-        description: 1 Hour
-      effectTypes: []
+        description: 1 Minute
+      effectTypes:
+        - displacement
       elderSorcery: false
       elderSorceryIncant: ''
       elements: []
       endCondition: ''
-      executionTime: 10 Minutes
+      executionTime: a1
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
       featSaveAttribute: mov
-      form: special
+      form: normal
       gifted:
         enabled: false
         amount: 1
@@ -233,24 +236,25 @@ effects:
       interaction: manifest
       invoked: false
       limitation: ''
-      maneuver: slow
+      maneuver: active
       overview:
         base: >-
-          You "store" a @L[Category:Missile delivery spells]{missile attack
-          spell} that you can cast and are @L[Core:Proficiency
-          Bonus]{proficient} in in the target @L[Category:Weapons]{weapon}. For
-          the duration of Spell Store, you gain @L[Keyword:Limited]{Limited}
-          @L[Keyword:Improved]{Improved} @L[Ability:Spell Strike]{Spell Strike}.
-          Only one @L[Category:Missile delivery spells]{spell} can be stored in
-          the target @L[Category:Weapons]{weapon} at a time.
+          You immediately use @L[Ability:Displace]{Displace} as a free action.
+          It is not @L[Core:Proficiency Bonus]{proficient} nor @L[Core:Fluency
+          Bonus]{fluent}. You also gain @L[Ability:Quivering Vitals]{Quivering
+          Vitals}.
         proficient: ''
         fluent: ''
       piercing: normal
       powerSources:
-        - magical
+        - alchemical
       prepared: true
-      range: '5'
-      requirements: ''
+      range: null
+      requirements: >-
+        Use this ability by interacting with the
+        @L[Category:Equipment]{equipment} that provides it. That counts as the
+        @L[Core:Maneuvers]{maneuver} and @L[Core:Abilities]{execution time} for
+        the ability.
       results:
         hit: ''
         critHit: ''
@@ -260,7 +264,7 @@ effects:
         critSave: ''
         fail: ''
         critFail: ''
-      ritual: true
+      ritual: false
       rotator: false
       secret: false
       skill: false
@@ -268,11 +272,11 @@ effects:
       standard: false
       sustained: false
       targets:
-        - weapon
+        - self
       trigger: ''
       warded: false
-    _id: 7Ikdmn1uPyDFJiNk
-    img: icons/magic/symbols/runes-star-pentagon-orange-purple.webp
+    _id: vLhYHuyud2e5kJU2
+    img: systems/teriock/src/icons/abilities/drink-displacement-potion.webp
     changes: []
     disabled: false
     duration:
@@ -287,13 +291,13 @@ effects:
       systemId: teriock
       systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!XjBu6GNSGd38o1NM.7Ikdmn1uPyDFJiNk'
-  - name: Spell Strike
+    _key: '!items.effects!szSuv5CtcLSnRvCt.vLhYHuyud2e5kJU2'
+  - name: Quivering Vitals
     type: ability
     system:
       hierarchy:
-        supId: 7Ikdmn1uPyDFJiNk
-        rootUuid: Compendium.teriock.abilities.Item.XjBu6GNSGd38o1NM
+        supId: vLhYHuyud2e5kJU2
+        rootUuid: Compendium.teriock.abilities.Item.szSuv5CtcLSnRvCt
         subIds: []
       consumable: false
       maxQuantity:
@@ -305,7 +309,8 @@ effects:
           statuses: []
           startStatuses: []
           endStatuses: []
-          rolls: {}
+          rolls:
+            damage: 1d4[lethal]
           hacks: []
           checks: []
           duration: 0
@@ -459,9 +464,9 @@ effects:
         somatic: false
         material: false
         mp:
-          type: static
+          type: none
           value:
-            static: 1
+            static: 0
             formula: ''
             variable: ''
         hp:
@@ -479,36 +484,35 @@ effects:
         break: ''
         materialCost: ''
       delivery:
-        base: weapon
+        base: self
         parent: null
         package: null
       duration:
-        unit: instant
+        unit: noLimit
         quantity: 0
         conditions:
           present: []
           absent: []
         stationary: false
-        description: Instant
-      effectTypes: []
+        description: Always Active
+      effectTypes:
+        - displacement
       elderSorcery: false
       elderSorceryIncant: ''
       elements: []
       endCondition: ''
-      executionTime: r0
+      executionTime: passive
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
       featSaveAttribute: mov
-      form: normal
+      form: flaw
       gifted:
         enabled: false
         amount: 1
       grantOnly: false
       heightened: ''
-      improvement: >-
-        You are considered to have and be proficient in the stored spell for
-        this purpose.
+      improvement: ''
       improvements:
         attributeImprovement:
           attribute: null
@@ -518,22 +522,22 @@ effects:
           amount: proficient
       interaction: manifest
       invoked: false
-      limitation: Can only be used with the stored spell and the item it is stored in.
-      maneuver: reactive
+      limitation: ''
+      maneuver: passive
       overview:
         base: >-
-          Target takes the "on hit" effect of a @L[Category:Conjured
-          spells]{conjured} @L[Category:Missile delivery spells]{missile spell}
-          that you are @L[Core:Proficiency Bonus]{proficient} in. If the
-          triggering hit was a critical hit, then the target takes the "on
-          critical hit" effect instead.
+          @L[Category:Vitals target abilities]{Vitals target abilities} that
+          deal @L[Core:Damage]{damage} are @L[Keyword:Boosted Damage]{boosted}
+          against you @L[Core:Damage]{damage} they deal is
+          @L[Damage:Lethal]{lethal} in addition to its other types. Those that
+          don't normally deal @L[Core:Damage]{damage} deal [[/damage
+          1d4[lethal]]] @L[Core:Damage]{damage}.
         proficient: ''
         fluent: ''
       piercing: normal
-      powerSources:
-        - magical
+      powerSources: []
       prepared: true
-      range: null
+      range: Self.
       requirements: ''
       results:
         hit: ''
@@ -547,20 +551,16 @@ effects:
       ritual: false
       rotator: false
       secret: false
-      skill: true
+      skill: false
       spell: false
-      standard: true
+      standard: false
       sustained: false
       targets:
-        - creature
-      trigger: >-
-        You have just landed a hit with a @L[Category:Weapon delivery
-        abilities]{weapon} or @L[Category:Bite delivery abilities]{bite}
-        @L[Category:Attack abilities]{attack} on another creature and the effect
-        has successfully applied.
+        - self
+      trigger: ''
       warded: false
-    _id: 77x5RZUwGbcX8Ulf
-    img: systems/teriock/src/icons/abilities/spell-strike.webp
+    _id: 4skQkE8z0I3xmc4B
+    img: systems/teriock/src/icons/abilities/quivering-vitals.webp
     changes: []
     disabled: false
     duration:
@@ -575,7 +575,7 @@ effects:
       systemId: teriock
       systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!XjBu6GNSGd38o1NM.77x5RZUwGbcX8Ulf'
+    _key: '!items.effects!szSuv5CtcLSnRvCt.4skQkE8z0I3xmc4B'
 folder: null
 ownership:
   default: 0
@@ -585,4 +585,4 @@ _stats:
   systemId: teriock
   systemVersion: 0.9.1
   lastModifiedBy: teriockBuilder00
-_key: '!items!XjBu6GNSGd38o1NM'
+_key: '!items!szSuv5CtcLSnRvCt'

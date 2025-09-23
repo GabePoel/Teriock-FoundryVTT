@@ -1,9 +1,9 @@
-name: Shake Glow Bulb
+name: Drink Gooseege Vial
 type: wrapper
-_id: kImRJY2L1ibB39Cz
-img: systems/teriock/src/icons/abilities/shake-glow-bulb.webp
+_id: dfnK2SOx0GJeLTHM
+img: systems/teriock/src/icons/abilities/drink-gooseege-vial.webp
 effects:
-  - name: Shake Glow Bulb
+  - name: Drink Gooseege Vial
     type: ability
     system:
       consumable: false
@@ -12,12 +12,13 @@ effects:
         raw: ''
       quantity: 1
       hierarchy:
-        rootUuid: Compendium.teriock.abilities.Item.kImRJY2L1ibB39Cz
+        rootUuid: Compendium.teriock.abilities.Item.dfnK2SOx0GJeLTHM
         subIds: []
         supId: null
       applies:
         base:
-          statuses: []
+          statuses:
+            - slowed
           startStatuses: []
           endStatuses: []
           rolls: {}
@@ -25,10 +26,10 @@ effects:
           checks: []
           duration: 0
           changes:
-            - key: system.light.dim
-              mode: 4
-              value: '30'
-              priority: 5
+            - key: system.size.number.raw
+              mode: 2
+              value: '1'
+              priority: 10
           common: []
           expiration:
             normal:
@@ -241,12 +242,8 @@ effects:
       maneuver: active
       overview:
         base: >-
-          The source of this ability starts @L[Property:Glowing]{glowing} (30
-          feet). This doesn't @L[Property:Destroyed]{destroy} the item, but
-          renders it <a
-          href="/index.php?title=Property:Mundane&amp;action=edit&amp;redlink=1"
-          class="new" title="Property:Mundane (page does not
-          exist)">mundane</a>..
+          Your @L[Core:Size]{SIZE} is increased by 1, but you are
+          @L[Condition:Slowed]{slowed}.
         proficient: ''
         fluent: ''
       piercing: normal
@@ -276,11 +273,11 @@ effects:
       standard: false
       sustained: false
       targets:
-        - item
+        - self
       trigger: ''
       warded: false
-    _id: ISrHaIW4Qxv8aw7Y
-    img: systems/teriock/src/icons/abilities/shake-glow-bulb.webp
+    _id: drNbwuQzSeaMCPlQ
+    img: systems/teriock/src/icons/abilities/drink-gooseege-vial.webp
     changes: []
     disabled: false
     duration:
@@ -295,7 +292,7 @@ effects:
       systemId: teriock
       systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!kImRJY2L1ibB39Cz.ISrHaIW4Qxv8aw7Y'
+    _key: '!items.effects!dfnK2SOx0GJeLTHM.drNbwuQzSeaMCPlQ'
 folder: null
 ownership:
   default: 0
@@ -303,6 +300,6 @@ flags: {}
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.0
+  systemVersion: 0.9.1
   lastModifiedBy: teriockBuilder00
-_key: '!items!kImRJY2L1ibB39Cz'
+_key: '!items!dfnK2SOx0GJeLTHM'

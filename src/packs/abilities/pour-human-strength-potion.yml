@@ -1,9 +1,9 @@
-name: Shake Glow Bulb
+name: Pour Human Strength Potion
 type: wrapper
-_id: kImRJY2L1ibB39Cz
-img: systems/teriock/src/icons/abilities/shake-glow-bulb.webp
+_id: yHA1tZYBDYTz9Bji
+img: systems/teriock/src/icons/abilities/pour-human-strength-potion.webp
 effects:
-  - name: Shake Glow Bulb
+  - name: Pour Human Strength Potion
     type: ability
     system:
       consumable: false
@@ -12,7 +12,7 @@ effects:
         raw: ''
       quantity: 1
       hierarchy:
-        rootUuid: Compendium.teriock.abilities.Item.kImRJY2L1ibB39Cz
+        rootUuid: Compendium.teriock.abilities.Item.yHA1tZYBDYTz9Bji
         subIds: []
         supId: null
       applies:
@@ -25,10 +25,10 @@ effects:
           checks: []
           duration: 0
           changes:
-            - key: system.light.dim
-              mode: 4
-              value: '30'
-              priority: 5
+            - key: system.attributes.str.value
+              mode: 5
+              value: '0'
+              priority: 50
           common: []
           expiration:
             normal:
@@ -205,13 +205,14 @@ effects:
         package: null
       duration:
         unit: minute
-        quantity: 10
+        quantity: 1
         conditions:
           present: []
           absent: []
         stationary: false
-        description: 10 Minutes
-      effectTypes: []
+        description: 1 Minute
+      effectTypes:
+        - transformation
       elderSorcery: false
       elderSorceryIncant: ''
       elements: []
@@ -235,18 +236,14 @@ effects:
         featSaveImprovement:
           attribute: null
           amount: proficient
-      interaction: manifest
+      interaction: attack
       invoked: false
       limitation: ''
       maneuver: active
       overview:
         base: >-
-          The source of this ability starts @L[Property:Glowing]{glowing} (30
-          feet). This doesn't @L[Property:Destroyed]{destroy} the item, but
-          renders it <a
-          href="/index.php?title=Property:Mundane&amp;action=edit&amp;redlink=1"
-          class="new" title="Property:Mundane (page does not
-          exist)">mundane</a>..
+          Target's @L[Core:Strength]{STR} is set to 0. This applies regardless
+          of what it was prior.
         proficient: ''
         fluent: ''
       piercing: normal
@@ -276,11 +273,11 @@ effects:
       standard: false
       sustained: false
       targets:
-        - item
+        - creature
       trigger: ''
       warded: false
-    _id: ISrHaIW4Qxv8aw7Y
-    img: systems/teriock/src/icons/abilities/shake-glow-bulb.webp
+    _id: 7fAQ574ysx5BFWpD
+    img: systems/teriock/src/icons/abilities/pour-human-strength-potion.webp
     changes: []
     disabled: false
     duration:
@@ -295,7 +292,7 @@ effects:
       systemId: teriock
       systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!kImRJY2L1ibB39Cz.ISrHaIW4Qxv8aw7Y'
+    _key: '!items.effects!yHA1tZYBDYTz9Bji.7fAQ574ysx5BFWpD'
 folder: null
 ownership:
   default: 0
@@ -303,6 +300,6 @@ flags: {}
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.0
+  systemVersion: 0.9.1
   lastModifiedBy: teriockBuilder00
-_key: '!items!kImRJY2L1ibB39Cz'
+_key: '!items!yHA1tZYBDYTz9Bji'

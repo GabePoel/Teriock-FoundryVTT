@@ -59,7 +59,7 @@ export function _messageParts(abilityData) {
           "aura",
         ].includes(src.delivery.base) ? src.range + " ft" : "",
         Array.from(src.targets.map((target) => ref.targets[target])).join(", "),
-        src.duration,
+        src.duration.description,
       ],
     },
     {

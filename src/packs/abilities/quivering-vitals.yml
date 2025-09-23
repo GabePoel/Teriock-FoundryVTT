@@ -1,9 +1,9 @@
-name: Shake Glow Bulb
+name: Quivering Vitals
 type: wrapper
-_id: kImRJY2L1ibB39Cz
-img: systems/teriock/src/icons/abilities/shake-glow-bulb.webp
+_id: JWxBGQ2Ngi9QXX3S
+img: systems/teriock/src/icons/abilities/quivering-vitals.webp
 effects:
-  - name: Shake Glow Bulb
+  - name: Quivering Vitals
     type: ability
     system:
       consumable: false
@@ -12,7 +12,7 @@ effects:
         raw: ''
       quantity: 1
       hierarchy:
-        rootUuid: Compendium.teriock.abilities.Item.kImRJY2L1ibB39Cz
+        rootUuid: Compendium.teriock.abilities.Item.JWxBGQ2Ngi9QXX3S
         subIds: []
         supId: null
       applies:
@@ -20,15 +20,12 @@ effects:
           statuses: []
           startStatuses: []
           endStatuses: []
-          rolls: {}
+          rolls:
+            damage: 1d4[lethal]
           hacks: []
           checks: []
           duration: 0
-          changes:
-            - key: system.light.dim
-              mode: 4
-              value: '30'
-              priority: 5
+          changes: []
           common: []
           expiration:
             normal:
@@ -176,7 +173,7 @@ effects:
       costs:
         verbal: false
         somatic: false
-        material: true
+        material: false
         mp:
           type: none
           value:
@@ -196,32 +193,31 @@ effects:
             formula: ''
             variable: ''
         break: ''
-        materialCost: >-
-          Using this ability consumes the @L[Category:Equipment]{equipment} that
-          provides it.
+        materialCost: ''
       delivery:
-        base: item
+        base: self
         parent: null
         package: null
       duration:
-        unit: minute
-        quantity: 10
+        unit: noLimit
+        quantity: 0
         conditions:
           present: []
           absent: []
         stationary: false
-        description: 10 Minutes
-      effectTypes: []
+        description: Always Active
+      effectTypes:
+        - displacement
       elderSorcery: false
       elderSorceryIncant: ''
       elements: []
       endCondition: ''
-      executionTime: a1
+      executionTime: passive
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
       featSaveAttribute: mov
-      form: normal
+      form: flaw
       gifted:
         enabled: false
         amount: 1
@@ -238,27 +234,22 @@ effects:
       interaction: manifest
       invoked: false
       limitation: ''
-      maneuver: active
+      maneuver: passive
       overview:
         base: >-
-          The source of this ability starts @L[Property:Glowing]{glowing} (30
-          feet). This doesn't @L[Property:Destroyed]{destroy} the item, but
-          renders it <a
-          href="/index.php?title=Property:Mundane&amp;action=edit&amp;redlink=1"
-          class="new" title="Property:Mundane (page does not
-          exist)">mundane</a>..
+          @L[Category:Vitals target abilities]{Vitals target abilities} that
+          deal @L[Core:Damage]{damage} are @L[Keyword:Boosted Damage]{boosted}
+          against you @L[Core:Damage]{damage} they deal is
+          @L[Damage:Lethal]{lethal} in addition to its other types. Those that
+          don't normally deal @L[Core:Damage]{damage} deal [[/damage
+          1d4[lethal]]] @L[Core:Damage]{damage}.
         proficient: ''
         fluent: ''
       piercing: normal
-      powerSources:
-        - alchemical
+      powerSources: []
       prepared: true
-      range: null
-      requirements: >-
-        Use this ability by interacting with the
-        @L[Category:Equipment]{equipment} that provides it. That counts as the
-        @L[Core:Maneuvers]{maneuver} and @L[Core:Abilities]{execution time} for
-        the ability.
+      range: Self.
+      requirements: ''
       results:
         hit: ''
         critHit: ''
@@ -276,11 +267,11 @@ effects:
       standard: false
       sustained: false
       targets:
-        - item
+        - self
       trigger: ''
       warded: false
-    _id: ISrHaIW4Qxv8aw7Y
-    img: systems/teriock/src/icons/abilities/shake-glow-bulb.webp
+    _id: 3zFYFwIYnqPxGRht
+    img: systems/teriock/src/icons/abilities/quivering-vitals.webp
     changes: []
     disabled: false
     duration:
@@ -295,7 +286,7 @@ effects:
       systemId: teriock
       systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!kImRJY2L1ibB39Cz.ISrHaIW4Qxv8aw7Y'
+    _key: '!items.effects!JWxBGQ2Ngi9QXX3S.3zFYFwIYnqPxGRht'
 folder: null
 ownership:
   default: 0
@@ -303,6 +294,6 @@ flags: {}
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.0
+  systemVersion: 0.9.1
   lastModifiedBy: teriockBuilder00
-_key: '!items!kImRJY2L1ibB39Cz'
+_key: '!items!JWxBGQ2Ngi9QXX3S'
