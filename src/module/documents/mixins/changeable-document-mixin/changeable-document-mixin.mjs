@@ -11,10 +11,12 @@ export default (Base) => {
     //noinspection ES6ClassMemberInitializationOrder
     overrides = this.overrides ?? {};
 
+    /** @inheritDoc */
     _checkPreparation() {
       return !this.actor || this.actor?._embeddedPreparation;
     }
 
+    /** @inheritDoc */
     * allApplicableEffects() {
       if (this.actor) {
         for (const effect of this.actor.allApplicableEffects()) {
@@ -23,6 +25,7 @@ export default (Base) => {
       }
     }
 
+    /** @inheritDoc */
     applyActiveEffects() {
       const overrides = {};
 

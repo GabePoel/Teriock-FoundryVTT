@@ -95,6 +95,7 @@ export default (Base) => {
       return /** @type {Teriock.HookData.BaseHookData} */ data;
     }
 
+    /** @inheritDoc */
     prepareSpecialData() {
       this.system.prepareSpecialData();
     }

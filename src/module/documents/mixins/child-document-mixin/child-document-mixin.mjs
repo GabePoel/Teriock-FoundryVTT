@@ -52,6 +52,7 @@ export default (Base) => {
       return super._preCreate(data, options, user);
     }
 
+    /** @inheritDoc */
     * allSpecialEffects() {
       if (this.actor) {
         for (const effect of this.actor.specialEffects) {

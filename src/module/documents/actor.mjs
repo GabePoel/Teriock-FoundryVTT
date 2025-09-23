@@ -377,6 +377,7 @@ export default class TeriockActor extends ParentDocumentMixin(CommonDocumentMixi
   /** @inheritDoc */
   prepareData() {
     super.prepareData();
+    this.prepareSpecialData();
     this.prepareMechanicalDocuments();
   }
 
@@ -389,7 +390,6 @@ export default class TeriockActor extends ParentDocumentMixin(CommonDocumentMixi
       rank: new Set(this.itemTypes?.rank.map((e) => toCamelCase(e.name)) || []),
       species: new Set(this.itemTypes?.species.map((e) => toCamelCase(e.name)) || []),
     };
-    this.prepareSpecialData();
   }
 
   /** @inheritDoc */
@@ -408,6 +408,7 @@ export default class TeriockActor extends ParentDocumentMixin(CommonDocumentMixi
     }
   }
 
+  /** @inheritDoc */
   prepareSpecialData() {
     this.specialEffects = /** @type {TeriockEffect[]} */ Array.from(this.allSpecialEffects());
     super.prepareSpecialData();

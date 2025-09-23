@@ -1,4 +1,19 @@
+import type { TeriockEffect } from "../../_module.mjs";
+
 export interface ChildDocumentMixinInterface {
+  /**
+   * Generator that gives every {@link TeriockEffect} that applies to {@link TeriockChild} documents.
+   * @yields {TeriockEffect}
+   * @returns {Generator<TeriockEffect, void, void>}
+   */
+  allSpecialEffects(): Generator<TeriockEffect, void, void>;
+
+  /**
+   * Apply the special {@link TeriockEffect}s found by {@link ChildDocumentMixinInterface.allSpecialEffects} that this
+   * document matches.
+   */
+  applySpecialEffects(): void;
+
   /**
    * Builds an enriched message from the document's message parts.
    * @param options - Options for building the message
