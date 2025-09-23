@@ -18,14 +18,14 @@
         id=item._id
         img=item.img
         marker=(equipmentMarker item)
-        max=item.system.maxQuantity.derived
+        max=item.system.maxQuantity.value
         shattered=item.system.shattered
         struck=item.system.disabled
         subtitle=item.system.equipmentType
         text=(dotJoin
-          (suffix item.system.derivedDamage 'Damage')
-          (suffix item.system.derivedBv 'BV')
-          (suffix item.system.derivedAv 'AV')
+          (suffix item.system.damage.base.value 'Damage')
+          (suffix item.system.bv.value 'BV')
+          (suffix item.system.av.value 'AV')
           (prefix item.system.tier.value 'Tier')
           (suffix item.system.weight.value 'lb')
         )

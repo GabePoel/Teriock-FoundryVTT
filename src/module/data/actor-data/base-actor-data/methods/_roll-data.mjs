@@ -340,13 +340,13 @@ function defenseData(actorData, data) {
  * @param {object} data - The roll data object to populate.
  */
 function offenseData(actorData, data) {
-  const weaponAv0 = actorData.primaryAttacker?.system.derivedAv0;
-  const naturalAv0 = actorData.offense.piercing === "av0" || actorData.piercing === "ub";
+  const weaponAv0 = actorData.primaryAttacker ? actorData.primaryAttacker.system.piercing.av0 : false;
+  const naturalAv0 = actorData.offense.piercing === "av0" || actorData.offense.piercing === "ub";
   const hasAv0 = weaponAv0 || naturalAv0;
-  const weaponUb = actorData.primaryAttacker?.system.derivedUb;
+  const weaponUb = actorData.primaryAttacker ? actorData.primaryAttacker.system.piercing.ub : false;
   const naturalUb = actorData.offense.piercing === "ub";
   const hasUb = weaponUb || naturalUb;
-  const weaponWarded = actorData.primaryAttacker?.system.derivedWarded;
+  const weaponWarded = actorData.primaryAttacker ? actorData.primaryAttacker.system.warded : false;
   Object.assign(data, {
     sb: actorData.offense.sb ? 1 : 0,
     av0: hasAv0 ? 2 : 0,
@@ -463,14 +463,14 @@ function equipmentData(actorData, data) {
  */
 function addEquipmentData(data, slot, equipment) {
   const equipmentData = equipment.system;
-  data[`${slot}.dmg`] = equipmentData.derivedDamage || "0";
-  data[`${slot}.dmg.2h`] = equipmentData.derivedTwoHandedDamage || "0";
+  data[`${slot}.dmg`] = equipmentData.damage.base.value || "0";
+  data[`${slot}.dmg.2h`] = equipmentData.damage.twoHanded.value || "0";
   data[`${slot}.range`] = equipmentData.range.long.value || 0;
   data[`${slot}.range.short`] = equipmentData.range.short.value || 0;
   data[`${slot}.weight`] = equipmentData.weight.value || 0;
   data[`${slot}.tier`] = equipmentData.tier.value || 0;
-  data[`${slot}.av`] = equipmentData.derivedAv || 0;
-  data[`${slot}.bv`] = equipmentData.derivedBv || 0;
+  data[`${slot}.av`] = equipmentData.av.value || 0;
+  data[`${slot}.bv`] = equipmentData.bv.value || 0;
   data[`${slot}.str`] = equipmentData.minStr.value || -3;
   data[`${slot}.shattered`] = equipmentData.shattered ? 1 : 0;
   data[`${slot}.dampened`] = equipmentData.dampened ? 1 : 0;

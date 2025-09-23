@@ -33,6 +33,12 @@ const { Actor } = foundry.documents;
  */
 export default class TeriockActor extends ParentDocumentMixin(CommonDocumentMixin(Actor)) {
   /**
+   * The {@link TeriockEffect}s that have special changes.
+   * @type {TeriockEffect[]}
+   */
+  specialEffects = [];
+
+  /**
    * @inheritDoc
    * @returns {TeriockActor}
    */
@@ -220,6 +226,19 @@ export default class TeriockActor extends ParentDocumentMixin(CommonDocumentMixi
   }
 
   /**
+   * The {@link TeriockEffect}s with special changes.
+   * @yields {TeriockEffect}
+   * @returns {Generator<TeriockEffect, void, void>}
+   */
+  * allSpecialEffects() {
+    for (const effect of this.allApplicableEffects()) {
+      if (effect.specialChanges.length > 0) {
+        yield effect;
+      }
+    }
+  }
+
+  /**
    * @inheritDoc
    * @param {"Item"|"ActiveEffect"} embeddedName
    * @param {object[]} data
@@ -370,6 +389,7 @@ export default class TeriockActor extends ParentDocumentMixin(CommonDocumentMixi
       rank: new Set(this.itemTypes?.rank.map((e) => toCamelCase(e.name)) || []),
       species: new Set(this.itemTypes?.species.map((e) => toCamelCase(e.name)) || []),
     };
+    this.prepareSpecialData();
   }
 
   /** @inheritDoc */
@@ -386,6 +406,14 @@ export default class TeriockActor extends ParentDocumentMixin(CommonDocumentMixi
     for (const mechanic of this.itemTypes?.mechanic || []) {
       mechanic.prepareData();
     }
+  }
+
+  prepareSpecialData() {
+    this.specialEffects = /** @type {TeriockEffect[]} */ Array.from(this.allSpecialEffects());
+    super.prepareSpecialData();
+    this.items.forEach((i) => {
+      i.prepareSpecialData();
+    });
   }
 
   /**

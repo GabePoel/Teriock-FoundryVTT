@@ -12,10 +12,10 @@ export function _messageParts(equipmentData) {
   const ref = TERIOCK.options.equipment;
   const src = equipmentData;
   let damageString = "";
-  if (src.derivedDamage) {
-    damageString += src.derivedDamage;
-    if (src.damage.twoHanded.raw !== "0" && src.derivedTwoHandedDamage !== src.derivedDamage) {
-      damageString += " / " + src.derivedTwoHandedDamage;
+  if (src.damage.base.value) {
+    damageString += src.damage.base.value;
+    if (src.damage.twoHanded.raw !== "0" && src.damage.twoHanded.value !== src.damage.base.value) {
+      damageString += " / " + src.damage.twoHanded.value;
     }
   }
   let rangeString = "";
@@ -49,8 +49,8 @@ export function _messageParts(equipmentData) {
       icon: "fa-shield",
       label: "Defense",
       wrappers: [
-        src.derivedAv ? `${src.derivedAv} AV` : "",
-        src.derivedBv ? `${src.derivedBv} BV` : "",
+        src.av.value ? `${src.av.value} AV` : "",
+        src.bv.value ? `${src.bv.value} BV` : "",
       ],
     },
     {

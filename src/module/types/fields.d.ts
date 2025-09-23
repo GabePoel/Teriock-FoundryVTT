@@ -40,6 +40,23 @@ declare global {
      * Modifiable field that does not need to be evaluated deterministically.
      */
     export type ModifiableIndeterministic = Modifiable<string, string>
+
+    /**
+     * Valid change key comparison operations.
+     */
+    export type SpecialChangeCheck = "eq" | "ne" | "has" | "includes" | "gt" | "lt" | "gte" | "lte" | "exists"
+
+    /**
+     * Original special change keys are of the format: `![type]__[key]__[operation]__[value]__[originalKey]`
+     */
+    export type SpecialChange = Teriock.Foundry.EffectChangeData & {
+      reference: {
+        type: string;
+        key: string;
+        check: Teriock.Fields.SpecialChangeCheck;
+        value: string;
+      }
+    }
   }
 }
 

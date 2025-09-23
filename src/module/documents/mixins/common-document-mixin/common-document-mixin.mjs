@@ -95,6 +95,10 @@ export default (Base) => {
       return /** @type {Teriock.HookData.BaseHookData} */ data;
     }
 
+    prepareSpecialData() {
+      this.system.prepareSpecialData();
+    }
+
     /** @inheritDoc */
     async toggleDisabled() {
       await this.update({ "system.disabled": !this.system.disabled });

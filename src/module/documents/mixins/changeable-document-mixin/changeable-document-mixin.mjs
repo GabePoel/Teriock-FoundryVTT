@@ -1,3 +1,5 @@
+import { applyCertainChanges } from "../shared/_module.mjs";
+
 export default (Base) => {
   return (/**
    * @implements {ChangeableDocumentMixinInterface}
@@ -39,20 +41,7 @@ export default (Base) => {
           return c;
         }));
       }
-      changes.sort((a, b) => a.priority - b.priority);
-
-      // Apply all changes
-      for (const change of changes) {
-        if (!change.key) {
-          continue;
-        }
-        const changes = change.effect.apply(this, change);
-        Object.assign(overrides, changes);
-      }
-
-      // Expand the set of final overrides
-      //noinspection JSPotentiallyInvalidUsageOfThis
-      this.overrides = foundry.utils.expandObject(overrides);
+      applyCertainChanges(this, changes, overrides);
     }
 
     /** @inheritDoc */

@@ -42,11 +42,6 @@ export interface TeriockBaseActorData {
     /** <schema> Whether {@link TeriockActor} still has reaction */
     hasReaction: boolean;
   };
-  /** Defined damage dice/expressions */
-  damage: {
-    /** Standard damage */
-    standard: string;
-  };
   /** <schema> Death Bag */
   deathBag: {
     /** <schema> How many stones to pull from the Death Bag */
@@ -88,13 +83,6 @@ export interface TeriockBaseActorData {
   };
   /** <base> <derived> The calculated encumbrance level (0-3) based on carried weight vs capacity */
   encumbranceLevel: number;
-  /** <base> Equipment changes */
-  equipmentChanges: {
-    /** <base> Equipment upgrades */
-    upgrades: Teriock.Parameters.Actor.EquipmentChangeKeys;
-    /** <base> Equipment overrides */
-    overrides: Teriock.Parameters.Actor.EquipmentChangeKeys;
-  };
   /** <schema> Hacks */
   hacks: HackDataCollection;
   /** <base> Registered pseudo-hook macros to fire */

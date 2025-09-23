@@ -1,6 +1,6 @@
 import type TeriockAbilityModel from "../ability-data.mjs";
 import type TeriockActor from "../../../../documents/actor.mjs";
-import type TeriockBaseChatMessageSchema from "../../../message-data/base-message-data/_types";
+import type { TeriockBaseMessageModel } from "../../../message-data/_module.mjs";
 import type TeriockRoll from "../../../../dice/roll.mjs";
 
 export type AbilityUseData = {
@@ -48,7 +48,7 @@ export type AbilityChatData = {
   /** Rolls to pass into the chat message. */
   rolls: TeriockRoll[];
   /** Chat Message Data */
-  system: Partial<TeriockBaseChatMessageSchema>;
+  system: Partial<TeriockBaseMessageModel>;
 };
 
 export interface AbilityRollConfig {

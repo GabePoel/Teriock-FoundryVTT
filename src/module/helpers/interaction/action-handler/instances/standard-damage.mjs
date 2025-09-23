@@ -42,9 +42,9 @@ export class StandardDamageHandler extends ActionHandler {
     if (this.dataset.attacker) {
       attacker = await foundry.utils.fromUuid(pureUuid(this.dataset.attacker));
     }
-    let formula = attacker.system.derivedDamage;
+    let formula = attacker.system.damage.base.value;
     if (this.event.ctrlKey) {
-      formula = attacker.system.derivedTwoHandedDamage;
+      formula = attacker.system.damage.twoHanded.value;
     }
     return formula;
   }

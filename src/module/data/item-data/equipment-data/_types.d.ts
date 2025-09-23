@@ -20,6 +20,13 @@ declare module "./equipment-data.mjs" {
       /** <schema> Additional damage types to be added to all the base damage */
       types: Set<string>;
     };
+    /** <base> Piercing */
+    piercing: {
+      /** <base> <special> If the equipment is AV0 */
+      av0: boolean;
+      /** <base> If the equipment is UB */
+      ub: boolean;
+    };
     /** <schema> Is the equipment dampened? */
     dampened: boolean;
     /** <schema> Equipment Classes */
@@ -63,6 +70,8 @@ declare module "./equipment-data.mjs" {
     specialRules: string;
     /** <schema> Presence Tier */
     tier: Teriock.Fields.ModifiableDeterministic;
+    /** <base> Warded */
+    warded: boolean;
     /** <schema> Weight (lb) */
     weight: Teriock.Fields.ModifiableNumber;
 

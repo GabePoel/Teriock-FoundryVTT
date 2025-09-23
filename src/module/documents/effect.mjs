@@ -136,6 +136,12 @@ export default class TeriockEffect extends ChildDocumentMixin(CommonDocumentMixi
   itemChanges = [];
 
   /**
+   * Changes that apply only to certain {@link TeriockChild} documents.
+   * @type {Teriock.Fields.SpecialChange[]}
+   */
+  specialChanges = [];
+
+  /**
    * Changes that apply to {@link TeriockItem}s.
    * @type {EffectChangeData[]}
    */
@@ -455,18 +461,40 @@ export default class TeriockEffect extends ChildDocumentMixin(CommonDocumentMixi
     const actorChanges = [];
     const itemChanges = [];
     const tokenChanges = [];
+    const rawSpecialChanges = [];
     for (const change of this.changes) {
       if (change.key.startsWith("item")) {
         itemChanges.push(modifyChangePrefix(change, "item.", ""));
       } else if (change.key.startsWith("token")) {
         tokenChanges.push(modifyChangePrefix(change, "token.", ""));
+      } else if (change.key.startsWith("!") && change.key.split("__").length >= 4) {
+        rawSpecialChanges.push(modifyChangePrefix(change, "!", ""));
       } else {
         actorChanges.push(change);
       }
     }
+    const specialChanges = [];
+    for (const change of rawSpecialChanges) {
+      const changeParts = change.key.split("__");
+      /** @type {Teriock.Fields.SpecialChange} */
+      const specialChange = {
+        key: changeParts.at(-1),
+        mode: change.mode,
+        priority: change.priority,
+        reference: {
+          key: changeParts[1],
+          check: changeParts[2],
+          type: changeParts[0],
+          value: changeParts.slice(3, -1).join(""),
+        },
+        value: change.value,
+      };
+      specialChanges.push(specialChange);
+    }
     this.changes = actorChanges;
     this.itemChanges = itemChanges;
     this.tokenChanges = tokenChanges;
+    this.specialChanges = specialChanges;
   }
 
   /** @inheritDoc */

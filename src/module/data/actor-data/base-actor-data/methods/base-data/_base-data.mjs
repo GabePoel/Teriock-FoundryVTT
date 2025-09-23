@@ -26,13 +26,6 @@ export function _baseData(actorData) {
     img: null,
   };
   actorData.abilityFlags = {};
-  actorData.damage = {
-    standard: "",
-  };
-  actorData.equipmentChanges = {
-    overrides: equipmentChangeKeyField(),
-    upgrades: equipmentChangeKeyField(),
-  };
   actorData.trackers = {
     lightedTo: [],
     goadedTo: [],
@@ -63,18 +56,5 @@ function hackField(max) {
     max: max,
     min: 0,
     value: 0,
-  };
-}
-
-/**
- * @returns {Teriock.Parameters.Actor.EquipmentChangeKeys}
- */
-function equipmentChangeKeyField() {
-  return {
-    classes: /** @type {Teriock.Parameters.Actor.EquipmentChangeClassesKeys} */ {},
-    ids: /** @type {Teriock.Parameters.Actor.EquipmentChangeIdsKeys} */ {},
-    names: /** @type {Teriock.Parameters.Actor.EquipmentChangeNamesKeys} */ {},
-    properties: /** @type {Teriock.Parameters.Actor.EquipmentChangePropertiesKeys} */ {},
-    types: /** @type {Teriock.Parameters.Actor.EquipmentChangeTypesKeys} */ {},
   };
 }

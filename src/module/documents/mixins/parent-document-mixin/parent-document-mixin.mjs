@@ -156,5 +156,13 @@ export default (Base) => {
       this.effectTypes = effectTypes;
       this.effectKeys = effectKeys;
     }
+
+    /** @inheritDoc */
+    prepareSpecialData() {
+      super.prepareSpecialData();
+      this.effects.forEach((e) => {
+        e.prepareSpecialData();
+      });
+    }
   });
 };

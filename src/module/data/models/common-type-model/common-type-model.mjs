@@ -36,4 +36,10 @@ export default class CommonTypeModel extends TypeDataModel {
   get parent() {
     return /** @type {TeriockCommon} */ super.parent;
   }
+
+  /**
+   * Apply transformations of derivations to the values of the source data object. Compute data fields whose values are
+   * not stored to the database. This happens after the actor has completed all operations.
+   */
+  prepareSpecialData() {}
 }

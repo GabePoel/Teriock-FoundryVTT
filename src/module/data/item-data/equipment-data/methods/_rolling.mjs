@@ -24,26 +24,28 @@ export async function _roll(equipmentData, options) {
  */
 async function use(equipmentData, options) {
   let message = await equipmentData.parent.buildMessage();
-  if (equipmentData.derivedDamage) {
-    let rollFormula = equipmentData.derivedDamage || "";
+  if (equipmentData.damage.base.value) {
+    let rollFormula = equipmentData.damage.base.value || "";
     if (options.formula) {
       rollFormula = options.formula;
     }
     rollFormula = rollFormula.trim();
 
-    let damageTypes = equipmentData.damage.types;
+    let rawDamageTypes = equipmentData.damage.types;
     if (equipmentData.powerLevel === "magic") {
-      damageTypes.add("magic");
+      rawDamageTypes.add("magic");
     }
     // Ensure all damage types are lower case
-    damageTypes = [ ...new Set([ ...damageTypes ]) ].map((dt) => dt && typeof dt === "string" ? dt.toLowerCase() : dt);
+    const damageTypes = Array.from([ ...new Set([ ...rawDamageTypes ]) ].map((dt) => dt && typeof dt === "string"
+      ? dt.toLowerCase()
+      : dt));
     // Sort the damage types
     if (damageTypes.length > 0 && rollFormula.length > 0 && rollFormula !== "0") {
       damageTypes.sort((a, b) => a.localeCompare(b));
       rollFormula += "[" + damageTypes.join(" ") + "]";
     }
-    if (options?.twoHanded && equipmentData.derivedTwoHandedDamage) {
-      rollFormula = equipmentData.derivedTwoHandedDamage || rollFormula;
+    if (options?.twoHanded && equipmentData.damage.twoHanded.value) {
+      rollFormula = equipmentData.damage.twoHanded.value || rollFormula;
     }
     if (options?.bonusDamage) {
       rollFormula = rollFormula + " + " + options.bonusDamage;
@@ -79,9 +81,9 @@ async function use(equipmentData, options) {
       const updates = [];
       for (const ability of equipmentData.parent.abilities) {
         const update = {};
-        if (ability.system.maxQuantity.derived) {
+        if (ability.system.maxQuantity.value) {
           update["_id"] = ability.id;
-          update["system.quantity"] = ability.system.maxQuantity.derived;
+          update["system.quantity"] = ability.system.maxQuantity.value;
           updates.push(update);
         }
       }

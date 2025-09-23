@@ -1,11 +1,11 @@
 import { buildMessage } from "../../../helpers/messages-builder/message-builder.mjs";
 import { systemPath } from "../../../helpers/path.mjs";
+import { applyCertainChanges } from "../shared/_module.mjs";
 
 const { ux } = foundry.applications;
 
 /**
  * Mixin for common functions used across document classes embedded in actorsUuids.
- *
  * @param {ClientDocument} Base
  * @mixin
  */
@@ -15,6 +15,9 @@ export default (Base) => {
    * @extends ClientDocument
    */
   class ChildDocumentMixin extends Base {
+    //noinspection ES6ClassMemberInitializationOrder
+    overrides = this.overrides ?? {};
+
     /** @inheritDoc */
     get isFluent() {
       let fluent = false;
@@ -47,6 +50,70 @@ export default (Base) => {
         });
       }
       return super._preCreate(data, options, user);
+    }
+
+    * allSpecialEffects() {
+      if (this.actor) {
+        for (const effect of this.actor.specialEffects) {
+          let shouldYield = false;
+          for (const change of effect.specialChanges) {
+            if (change.reference.type === this.type) {
+              shouldYield = true;
+            }
+          }
+          if (shouldYield) {
+            yield effect;
+          }
+        }
+      }
+    }
+
+    applySpecialEffects() {
+      const overrides = foundry.utils.deepClone(this.overrides ?? {});
+
+      const changes = [];
+      for (const effect of this.allSpecialEffects()) {
+        if (!effect.active) {
+          continue;
+        }
+        const candidateChanges = effect.specialChanges;
+        for (const change of candidateChanges) {
+          const reference = change.reference;
+          const property = foundry.utils.getProperty(this, change.reference.key);
+          let shouldInclude = false;
+          if (reference.check === "eq") {
+            shouldInclude = reference.value === property;
+          } else if (reference.check === "ne") {
+            shouldInclude = reference.value !== property;
+          } else if (reference.check === "gt") {
+            shouldInclude = Number(reference.value) > Number(property);
+          } else if (reference.check === "lt") {
+            shouldInclude = Number(reference.value) < Number(property);
+          } else if (reference.check === "gte") {
+            shouldInclude = Number(reference.value) >= Number(property);
+          } else if (reference.check === "lte") {
+            shouldInclude = Number(reference.value) <= Number(property);
+          } else if (reference.check === "has") {
+            const checkSet = new Set(property);
+            shouldInclude = checkSet.has(reference.value);
+          } else if (reference.check === "includes") {
+            const checkArray = Array.from(property);
+            shouldInclude = checkArray.includes(reference.value);
+          } else if (reference.check === "exists") {
+            shouldInclude = property.length > 0 && property !== "0" && property !== 0;
+          }
+          if (shouldInclude) {
+            const fullChange = foundry.utils.deepClone(change);
+            fullChange.effect = effect;
+            fullChange.property ??= fullChange.mode * 10;
+            changes.push(fullChange);
+          }
+        }
+      }
+      applyCertainChanges(this, changes, overrides);
+      if (this._sheet) {
+        this.sheet.render();
+      }
     }
 
     /** @inheritDoc */
@@ -111,6 +178,12 @@ export default (Base) => {
       const copyDocument = await this.parent.createEmbeddedDocuments(this.documentName, [ data.copy ]);
       await this.parent.forceUpdate();
       return copyDocument[0];
+    }
+
+    /** @inheritDoc */
+    prepareSpecialData() {
+      this.applySpecialEffects();
+      super.prepareSpecialData();
     }
 
     /** @inheritDoc */

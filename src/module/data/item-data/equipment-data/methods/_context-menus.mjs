@@ -12,9 +12,9 @@ export function _entries(equipmentData) {
   return [
     {
       name: "Use in Two Hands",
-      icon: makeIcon(getRollIcon(equipmentData.derivedTwoHandedDamage), "contextMenu"),
+      icon: makeIcon(getRollIcon(equipmentData.damage.twoHanded.value), "contextMenu"),
       callback: equipmentData.roll.bind(equipmentData, { twoHanded: true }),
-      condition: equipmentData.derivedTwoHandedDamage !== equipmentData.derivedDamage,
+      condition: equipmentData.damage.twoHanded.value !== equipmentData.damage.base.value,
       group: "usage",
     },
     {

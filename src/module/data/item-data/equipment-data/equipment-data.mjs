@@ -8,7 +8,6 @@ import TeriockBaseItemModel from "../base-item-data/base-item-data.mjs";
 import * as attunement from "./methods/_attunement.mjs";
 import * as contextMenus from "./methods/_context-menus.mjs";
 import * as deriving from "./methods/_data-deriving.mjs";
-import * as overrides from "./methods/_derived-overrides.mjs";
 import * as identifying from "./methods/_identifying.mjs";
 import * as messages from "./methods/_messages.mjs";
 import * as migrate from "./methods/_migrate-data.mjs";
@@ -92,61 +91,6 @@ export default class TeriockEquipmentModel extends ConsumableDataMixin(WikiDataM
   }
 
   /**
-   * Derived armor value.
-   * @returns {number}
-   */
-  get derivedAv() {
-    return overrides._derivedAv(this);
-  }
-
-  /**
-   * Derived AV0 value.
-   * @returns {boolean}
-   */
-  get derivedAv0() {
-    return overrides._derivedAv0(this);
-  }
-
-  /**
-   * Derived block value.
-   * @returns {number}
-   */
-  get derivedBv() {
-    return overrides._derivedBv(this);
-  }
-
-  /**
-   * Derived damage dice.
-   * @returns {string}
-   */
-  get derivedDamage() {
-    return overrides._derivedDamage(this);
-  }
-
-  /**
-   * Derived two-handed damage dice.
-   */
-  get derivedTwoHandedDamage() {
-    return overrides._derivedTwoHandedDamage(this);
-  }
-
-  /**
-   * Derived UB value.
-   * @returns {boolean}
-   */
-  get derivedUb() {
-    return overrides._derivedUb(this);
-  }
-
-  /**
-   * Derived warded value.
-   * @returns {boolean}
-   */
-  get derivedWarded() {
-    return overrides._derivedWarded(this);
-  }
-
-  /**
    * Checks if the equipment is currently attuned.
    * @returns {boolean} True if the equipment is attuned, false otherwise.
    */
@@ -182,7 +126,7 @@ export default class TeriockEquipmentModel extends ConsumableDataMixin(WikiDataM
 
   /** @inheritDoc */
   get useIcon() {
-    return getRollIcon(this.derivedDamage);
+    return getRollIcon(this.damage.base.value);
   }
 
   /**
@@ -274,6 +218,17 @@ export default class TeriockEquipmentModel extends ConsumableDataMixin(WikiDataM
     prepareModifiableBase(this.damage.twoHanded);
     prepareModifiableBase(this.range.long);
     prepareModifiableBase(this.range.short);
+    if (this.damage.base.saved.trim() === "0") {
+      this.damage.base.raw = "";
+    }
+    //if (this.damage.twoHanded.saved.trim() === "0") {
+    //  this.damage.twoHanded.raw = "";
+    //}
+    this.piercing = {
+      av0: false,
+      ub: false,
+    };
+    this.warded = false;
     this.hookedMacros = /** @type {Teriock.Parameters.Equipment.HookedEquipmentMacros} */ {};
     for (const pseudoHook of Object.keys(propertyPseudoHooks)) {
       this.hookedMacros[pseudoHook] = [];
@@ -283,6 +238,11 @@ export default class TeriockEquipmentModel extends ConsumableDataMixin(WikiDataM
   /** @inheritDoc */
   prepareDerivedData() {
     super.prepareDerivedData();
+    deriving._prepareDerivedData(this);
+  }
+
+  /** @inheritDoc */
+  prepareSpecialData() {
     deriveModifiableNumber(this.weight, { min: 0 });
     deriveModifiableNumber(this.av, {
       floor: true,
@@ -298,7 +258,9 @@ export default class TeriockEquipmentModel extends ConsumableDataMixin(WikiDataM
     deriveModifiableIndeterministic(this.damage.twoHanded);
     deriveModifiableDeterministic(this.range.long, this.actor);
     deriveModifiableDeterministic(this.range.short, this.actor);
-    deriving._prepareDerivedData(this);
+    if (this.piercing.ub) {
+      this.piercing.av0 = true;
+    }
   }
 
   /**
