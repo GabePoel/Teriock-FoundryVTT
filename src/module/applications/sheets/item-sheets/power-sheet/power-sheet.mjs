@@ -14,7 +14,7 @@ export default class TeriockPowerSheet extends TeriockBaseItemSheet {
    * @type {Partial<ApplicationConfiguration>}
    */
   static DEFAULT_OPTIONS = {
-    classes: [ "power" ],
+    classes: ["power"],
     actions: {
       toggleProficient: this._toggleProficient,
     },
@@ -26,12 +26,9 @@ export default class TeriockPowerSheet extends TeriockBaseItemSheet {
   /** @inheritDoc */
   static PARTS = {
     all: {
-      template: "systems/teriock/src/templates/document-templates/item-templates/power-template/power-template.hbs",
-      scrollable: [
-        ".window-content",
-        ".tsheet-page",
-        ".ab-sheet-everything",
-      ],
+      template:
+        "systems/teriock/src/templates/document-templates/item-templates/power-template/power-template.hbs",
+      scrollable: [".window-content", ".tsheet-page", ".ab-sheet-everything"],
     },
   };
 

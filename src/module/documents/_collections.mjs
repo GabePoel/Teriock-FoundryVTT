@@ -1,7 +1,5 @@
-const {
-  CompendiumCollection,
-  CompendiumFolderCollection,
-} = foundry.documents.collections;
+const { CompendiumCollection, CompendiumFolderCollection } =
+  foundry.documents.collections;
 
 /**
  * @property {(name: string, options?: { strict?: boolean }) => TeriockFolder} getName

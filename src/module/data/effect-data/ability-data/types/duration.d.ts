@@ -1,4 +1,5 @@
-export type NormalDurationUnit = keyof typeof TERIOCK.options.ability.duration.unit;
+export type NormalDurationUnit =
+  keyof typeof TERIOCK.options.ability.duration.unit;
 
 export type Duration = {
   unit: NormalDurationUnit;

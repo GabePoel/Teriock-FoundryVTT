@@ -118,10 +118,15 @@ export default class ChildTypeModel extends CommonTypeModel {
         name: "Delete",
         icon: makeIcon("trash", "contextMenu"),
         callback: async () => {
-          await this.parent.parent.deleteEmbeddedDocuments(this.parent.documentName, [ this.parent.id ]);
+          await this.parent.parent.deleteEmbeddedDocuments(
+            this.parent.documentName,
+            [this.parent.id],
+          );
         },
-        condition: () => (this.parent.parent.sheet?.editable || this.parent.source?.sheet?.editable)
-          && this.parent.isOwner,
+        condition: () =>
+          (this.parent.parent.sheet?.editable ||
+            this.parent.source?.sheet?.editable) &&
+          this.parent.isOwner,
         group: "document",
       },
       {
@@ -130,7 +135,8 @@ export default class ChildTypeModel extends CommonTypeModel {
         callback: async () => {
           await this.parent.duplicate();
         },
-        condition: () => this.parent.parent.sheet?.editable && this.parent.isOwner,
+        condition: () =>
+          this.parent.parent.sheet?.editable && this.parent.isOwner,
         group: "document",
       },
     ];
@@ -167,7 +173,8 @@ export default class ChildTypeModel extends CommonTypeModel {
   get secretMessageParts() {
     return {
       image: systemPath("icons/documents/uncertainty.svg"),
-      name: this.parent.type.charAt(0).toUpperCase() + this.parent.type.slice(1),
+      name:
+        this.parent.type.charAt(0).toUpperCase() + this.parent.type.slice(1),
       bars: [],
       blocks: [],
       font: null,
@@ -220,8 +227,10 @@ export default class ChildTypeModel extends CommonTypeModel {
     await this.parent.hookCall("use", data);
     if (!data.cancel) {
       Hooks.callAll(
-        "teriock.use" + this.parent.type.charAt(0).toUpperCase() + this.parent.type.slice(1),
-        [ this.parent ],
+        "teriock.use" +
+          this.parent.type.charAt(0).toUpperCase() +
+          this.parent.type.slice(1),
+        [this.parent],
       );
       await this.roll(options);
     }

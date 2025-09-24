@@ -1,5 +1,9 @@
 import { TeriockRoll } from "../../../../../dice/_module.mjs";
-import { tokenActor, tokenImage, tokenName } from "../../../../../helpers/utils.mjs";
+import {
+  tokenActor,
+  tokenImage,
+  tokenName,
+} from "../../../../../helpers/utils.mjs";
 
 /**
  * Pay the costs necessary for using an ability.
@@ -24,10 +28,16 @@ export async function _generateRolls(rollConfig) {
         rollContext.diceClass = "ub";
         rollContext.diceTooltip = "Unblockable";
       }
-      rolls.push(new TeriockRoll(rollConfig.useData.formula, rollConfig.useData.rollData, {
-        context: rollContext,
-        flavor,
-      }));
+      rolls.push(
+        new TeriockRoll(
+          rollConfig.useData.formula,
+          rollConfig.useData.rollData,
+          {
+            context: rollContext,
+            flavor,
+          },
+        ),
+      );
     }
     if (rollConfig.useData.targets.size === 0) {
       const rollContext = {};
@@ -35,10 +45,16 @@ export async function _generateRolls(rollConfig) {
         rollContext.diceClass = "ub";
         rollContext.diceTooltip = "Unblockable";
       }
-      rolls.push(new TeriockRoll(rollConfig.useData.formula, rollConfig.useData.rollData, {
-        context: rollContext,
-        flavor,
-      }));
+      rolls.push(
+        new TeriockRoll(
+          rollConfig.useData.formula,
+          rollConfig.useData.rollData,
+          {
+            context: rollContext,
+            flavor,
+          },
+        ),
+      );
     }
   } else if (rollConfig.abilityData.interaction === "feat") {
     const flavor = "Feat Save DC";
@@ -55,10 +71,12 @@ export async function _generateRolls(rollConfig) {
       diceClass: "feat",
       totalClass: "feat",
     };
-    rolls.push(new TeriockRoll(rollConfig.useData.formula, rollConfig.useData.rollData, {
-      context: rollContext,
-      flavor,
-    }));
+    rolls.push(
+      new TeriockRoll(rollConfig.useData.formula, rollConfig.useData.rollData, {
+        context: rollContext,
+        flavor,
+      }),
+    );
   } else {
     for (const target of rollConfig.useData.targets) {
       const rollContext = {

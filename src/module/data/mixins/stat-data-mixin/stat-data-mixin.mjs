@@ -9,204 +9,224 @@ const { fields } = foundry.data;
  */
 export default (Base) => {
   // noinspection JSClosureCompilerSyntax
-  return (/**
-   * @implements {StatDataMixinInterface}
-   * @extends ChildTypeModel
-   */
-  class StatDataMixin extends Base {
-    /** @inheritDoc */
-    static metadata = mergeFreeze(super.metadata, {
-      stats: true,
-    });
-
-    /** @inheritDoc */
-    static defineSchema() {
-      const schema = super.defineSchema();
-      Object.assign(schema, {
-        hpDice: this.defineStatDieField("hp"),
-        mpDice: this.defineStatDieField("mp"),
-        hpDiceBase: this.defineStatDieBaseField(),
-        mpDiceBase: this.defineStatDieBaseField(),
-        applyHp: new fields.BooleanField({
-          hint: "Add HP to the parent actor.",
-          initial: true,
-          label: "Apply HP",
-        }),
-        applyMp: new fields.BooleanField({
-          hint: "Add MP to the parent actor.",
-          initial: true,
-          label: "Apply MP",
-        }),
-      });
-      return schema;
-    }
-
+  return (
     /**
-     * @param {object} [options]
-     * @param {Teriock.RollOptions.PolyhedralDieFaces} [options.faces]
-     * @param {number} [options.number]
-     * @returns {fields.SchemaField}
+     * @implements {StatDataMixinInterface}
+     * @extends ChildTypeModel
      */
-    static defineStatDieBaseField(options = {}) {
-      const {
-        faces = 8,
-        number = 1,
-      } = options;
-      return new fields.SchemaField({
-        faces: new fields.NumberField({ initial: faces }),
-        number: new fields.NumberField({ initial: number }),
+    class StatDataMixin extends Base {
+      /** @inheritDoc */
+      static metadata = mergeFreeze(super.metadata, {
+        stats: true,
       });
-    }
 
-    /**
-     * @param {Teriock.Parameters.Shared.DieStat} stat
-     * @param {object} [options]
-     * @param {Teriock.RollOptions.PolyhedralDieFaces} [options.faces]
-     * @param {number} [options.value]
-     * @returns {fields.TypedObjectField}
-     */
-    static defineStatDieField(stat, options = {}) {
-      const id = foundry.utils.randomID();
-      const {
-        faces = 8,
-        value = 5,
-      } = options;
-      return new fields.TypedObjectField(new fields.EmbeddedDataField(StatDieModel), {
-        initial: {
-          [id]: {
-            _id: id,
-            stat: stat,
-            faces: faces,
-            spent: false,
-            value: value,
+      /** @inheritDoc */
+      static defineSchema() {
+        const schema = super.defineSchema();
+        Object.assign(schema, {
+          hpDice: this.defineStatDieField("hp"),
+          mpDice: this.defineStatDieField("mp"),
+          hpDiceBase: this.defineStatDieBaseField(),
+          mpDiceBase: this.defineStatDieBaseField(),
+          applyHp: new fields.BooleanField({
+            hint: "Add HP to the parent actor.",
+            initial: true,
+            label: "Apply HP",
+          }),
+          applyMp: new fields.BooleanField({
+            hint: "Add MP to the parent actor.",
+            initial: true,
+            label: "Apply MP",
+          }),
+        });
+        return schema;
+      }
+
+      /**
+       * @param {object} [options]
+       * @param {Teriock.RollOptions.PolyhedralDieFaces} [options.faces]
+       * @param {number} [options.number]
+       * @returns {fields.SchemaField}
+       */
+      static defineStatDieBaseField(options = {}) {
+        const { faces = 8, number = 1 } = options;
+        return new fields.SchemaField({
+          faces: new fields.NumberField({ initial: faces }),
+          number: new fields.NumberField({ initial: number }),
+        });
+      }
+
+      /**
+       * @param {Teriock.Parameters.Shared.DieStat} stat
+       * @param {object} [options]
+       * @param {Teriock.RollOptions.PolyhedralDieFaces} [options.faces]
+       * @param {number} [options.value]
+       * @returns {fields.TypedObjectField}
+       */
+      static defineStatDieField(stat, options = {}) {
+        const id = foundry.utils.randomID();
+        const { faces = 8, value = 5 } = options;
+        return new fields.TypedObjectField(
+          new fields.EmbeddedDataField(StatDieModel),
+          {
+            initial: {
+              [id]: {
+                _id: id,
+                stat: stat,
+                faces: faces,
+                spent: false,
+                value: value,
+              },
+            },
           },
-        },
-      });
-    }
-
-    /** @inheritDoc */
-    get hpDiceBaseFormula() {
-      return `${this.hpDiceBase.number}d${this.hpDiceBase.faces}`;
-    }
-
-    /** @inheritDoc */
-    get hpDiceFaces() {
-      return Object.values(this.hpDice)[0].faces;
-    }
-
-    /** @inheritDoc */
-    get hpDiceFormula() {
-      return `${this.hpDiceNumber}d${this.hpDiceFaces}`;
-    }
-
-    /** @inheritDoc */
-    get hpDiceNumber() {
-      return Object.keys(this.hpDice).length;
-    }
-
-    /** @inheritDoc */
-    get mpDiceBaseFormula() {
-      return `${this.mpDiceBase.number}d${this.mpDiceBase.faces}`;
-    }
-
-    /** @inheritDoc */
-    get mpDiceFaces() {
-      return Object.values(this.mpDice)[0].faces;
-    }
-
-    /** @inheritDoc */
-    get mpDiceFormula() {
-      return `${this.mpDiceNumber}d${this.mpDiceFaces}`;
-    }
-
-    /** @inheritDoc */
-    get mpDiceNumber() {
-      return Object.keys(this.mpDice).length;
-    }
-
-    /** @inheritDoc */
-    get renderedHitDice() {
-      let out = "";
-      Object.values(this.hpDice).forEach((die) => {
-        out += die.rendered;
-      });
-      return out;
-    }
-
-    /** @inheritDoc */
-    get renderedManaDice() {
-      let out = "";
-      Object.values(this.mpDice).forEach((die) => {
-        out += die.rendered;
-      });
-      return out;
-    }
-
-    /** @inheritDoc */
-    get totalHp() {
-      let total = 0;
-      Object.values(this.hpDice).forEach((hpDie) => {
-        total += hpDie.value;
-      });
-      return total;
-    }
-
-    /** @inheritDoc */
-    get totalMp() {
-      let total = 0;
-      Object.values(this.mpDice).forEach((mpDie) => {
-        total += mpDie.value;
-      });
-      return total;
-    }
-
-    /** @inheritDoc */
-    async _preUpdate(changes, options, user) {
-      if ((await super._preUpdate(changes, options, user)) === false) {
-        return false;
+        );
       }
-      for (const stat of Object.keys(TERIOCK.options.die.stats)) {
-        if (foundry.utils.getProperty(changes, `system.${stat}DiceBase`)) {
-          const number = foundry.utils.getProperty(changes, `system.${stat}DiceBase.number`)
-            || this[`${stat}DiceBase`].number;
-          const faces = foundry.utils.getProperty(changes, `system.${stat}DiceBase.faces`)
-            || this[`${stat}DiceBase`].faces;
-          this._setDice(changes, stat, number, faces);
+
+      /** @inheritDoc */
+      get hpDiceBaseFormula() {
+        return `${this.hpDiceBase.number}d${this.hpDiceBase.faces}`;
+      }
+
+      /** @inheritDoc */
+      get hpDiceFaces() {
+        return Object.values(this.hpDice)[0].faces;
+      }
+
+      /** @inheritDoc */
+      get hpDiceFormula() {
+        return `${this.hpDiceNumber}d${this.hpDiceFaces}`;
+      }
+
+      /** @inheritDoc */
+      get hpDiceNumber() {
+        return Object.keys(this.hpDice).length;
+      }
+
+      /** @inheritDoc */
+      get mpDiceBaseFormula() {
+        return `${this.mpDiceBase.number}d${this.mpDiceBase.faces}`;
+      }
+
+      /** @inheritDoc */
+      get mpDiceFaces() {
+        return Object.values(this.mpDice)[0].faces;
+      }
+
+      /** @inheritDoc */
+      get mpDiceFormula() {
+        return `${this.mpDiceNumber}d${this.mpDiceFaces}`;
+      }
+
+      /** @inheritDoc */
+      get mpDiceNumber() {
+        return Object.keys(this.mpDice).length;
+      }
+
+      /** @inheritDoc */
+      get renderedHitDice() {
+        let out = "";
+        Object.values(this.hpDice).forEach((die) => {
+          out += die.rendered;
+        });
+        return out;
+      }
+
+      /** @inheritDoc */
+      get renderedManaDice() {
+        let out = "";
+        Object.values(this.mpDice).forEach((die) => {
+          out += die.rendered;
+        });
+        return out;
+      }
+
+      /** @inheritDoc */
+      get totalHp() {
+        let total = 0;
+        Object.values(this.hpDice).forEach((hpDie) => {
+          total += hpDie.value;
+        });
+        return total;
+      }
+
+      /** @inheritDoc */
+      get totalMp() {
+        let total = 0;
+        Object.values(this.mpDice).forEach((mpDie) => {
+          total += mpDie.value;
+        });
+        return total;
+      }
+
+      /** @inheritDoc */
+      async _preUpdate(changes, options, user) {
+        if ((await super._preUpdate(changes, options, user)) === false) {
+          return false;
+        }
+        for (const stat of Object.keys(TERIOCK.options.die.stats)) {
+          if (foundry.utils.getProperty(changes, `system.${stat}DiceBase`)) {
+            const number =
+              foundry.utils.getProperty(
+                changes,
+                `system.${stat}DiceBase.number`,
+              ) || this[`${stat}DiceBase`].number;
+            const faces =
+              foundry.utils.getProperty(
+                changes,
+                `system.${stat}DiceBase.faces`,
+              ) || this[`${stat}DiceBase`].faces;
+            this._setDice(changes, stat, number, faces);
+          }
         }
       }
-    }
 
-    /** @inheritDoc */
-    _setDice(changeData, stat, number, faces) {
-      const currentQuantity = Object.keys(this[`${stat}Dice`]).length;
-      const keys = Object.keys(this[`${stat}Dice`]);
-      for (let i = 0; i < Math.max(number, currentQuantity); i++) {
-        if (i < currentQuantity && i < number) {
-          foundry.utils.setProperty(changeData, `system.${stat}Dice.${keys[i]}.faces`, faces);
-          foundry.utils.setProperty(changeData, `system.${stat}Dice.${keys[i]}.value`, Math.ceil((faces + 1) / 2));
-        } else if (i < currentQuantity && i >= number) {
-          foundry.utils.setProperty(changeData, `system.${stat}Dice.-=${keys[i]}`, null);
-        } else if (i >= currentQuantity && i < number) {
-          const id = foundry.utils.randomID();
-          foundry.utils.setProperty(changeData, `system.${stat}Dice.${id}`, {
-            _id: id,
-            stat: stat,
-            faces: faces,
-            spent: false,
-            value: Math.ceil((faces + 1) / 2),
-          });
+      /** @inheritDoc */
+      _setDice(changeData, stat, number, faces) {
+        const currentQuantity = Object.keys(this[`${stat}Dice`]).length;
+        const keys = Object.keys(this[`${stat}Dice`]);
+        for (let i = 0; i < Math.max(number, currentQuantity); i++) {
+          if (i < currentQuantity && i < number) {
+            foundry.utils.setProperty(
+              changeData,
+              `system.${stat}Dice.${keys[i]}.faces`,
+              faces,
+            );
+            foundry.utils.setProperty(
+              changeData,
+              `system.${stat}Dice.${keys[i]}.value`,
+              Math.ceil((faces + 1) / 2),
+            );
+          } else if (i < currentQuantity && i >= number) {
+            foundry.utils.setProperty(
+              changeData,
+              `system.${stat}Dice.-=${keys[i]}`,
+              null,
+            );
+          } else if (i >= currentQuantity && i < number) {
+            const id = foundry.utils.randomID();
+            foundry.utils.setProperty(changeData, `system.${stat}Dice.${id}`, {
+              _id: id,
+              stat: stat,
+              faces: faces,
+              spent: false,
+              value: Math.ceil((faces + 1) / 2),
+            });
+          }
         }
       }
-    }
 
-    /** @inheritDoc */
-    async setDice(stat, number, faces) {
-      if (this[`${stat}Dice`].number === number && this[`${stat}Dice`].faces === faces) {
-        return;
+      /** @inheritDoc */
+      async setDice(stat, number, faces) {
+        if (
+          this[`${stat}Dice`].number === number &&
+          this[`${stat}Dice`].faces === faces
+        ) {
+          return;
+        }
+        const updateData = {};
+        this._setDice(updateData, stat, number, faces);
+        await this.parent.update(updateData);
       }
-      const updateData = {};
-      this._setDice(updateData, stat, number, faces);
-      await this.parent.update(updateData);
     }
-  });
+  );
 };

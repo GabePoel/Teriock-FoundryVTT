@@ -39,15 +39,21 @@ export async function _buildButtons(rollConfig) {
         action: "apply-effect",
         normal: normalEffectJSON || critEffectJSON,
         crit: critEffectJSON || normalEffectJSON,
-        sustaining: rollConfig.abilityData.sustained ? safeUuid(rollConfig.abilityData.parent.uuid) : "null",
+        sustaining: rollConfig.abilityData.sustained
+          ? safeUuid(rollConfig.abilityData.parent.uuid)
+          : "null",
       },
     });
   }
 
   // Standard Damage Button
-  if (abilityData.applies.base.common.has("standardDamage") || (rollConfig.useData.proficient
-    && abilityData.applies.proficient.common.has("standardDamage")) || (rollConfig.useData.fluent
-    && abilityData.applies.fluent.common.has("standardDamage"))) {
+  if (
+    abilityData.applies.base.common.has("standardDamage") ||
+    (rollConfig.useData.proficient &&
+      abilityData.applies.proficient.common.has("standardDamage")) ||
+    (rollConfig.useData.fluent &&
+      abilityData.applies.fluent.common.has("standardDamage"))
+  ) {
     const buttonData = {
       label: "Standard Roll",
       icon: "fas fa-hammer-crash",
@@ -56,12 +62,16 @@ export async function _buildButtons(rollConfig) {
       },
     };
     if (rollConfig.useData.actor.system.primaryAttacker) {
-      buttonData.dataset.attacker = rollConfig.useData.actor.system.primaryAttacker.uuid;
+      buttonData.dataset.attacker =
+        rollConfig.useData.actor.system.primaryAttacker.uuid;
     }
     buttons.push(buttonData);
   }
 
-  const effects = /** @type {Set<Teriock.Parameters.Ability.EffectTag>} */ new Set(abilityData.effectTypes || []);
+  const effects =
+    /** @type {Set<Teriock.Parameters.Ability.EffectTag>} */ new Set(
+      abilityData.effectTypes || [],
+    );
 
   // Resistance Button
   if (effects.has("resistance")) {
@@ -129,9 +139,11 @@ export async function _buildButtons(rollConfig) {
   const takeData = _generateTakes(rollConfig);
 
   // Rollable Take Buttons
-  Object.entries(takeData.rolls).forEach(([ rollType, formula ]) => {
+  Object.entries(takeData.rolls).forEach(([rollType, formula]) => {
     if (formula && ROLL_BUTTON_CONFIGS[rollType]) {
-      const buttonConfig = foundry.utils.deepClone(ROLL_BUTTON_CONFIGS[rollType]);
+      const buttonConfig = foundry.utils.deepClone(
+        ROLL_BUTTON_CONFIGS[rollType],
+      );
       buttonConfig.icon = `fas fa-${getRollIcon(formula)}`;
       buttonConfig.dataset = {
         action: "roll-rollable-take",

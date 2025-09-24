@@ -7,6 +7,10 @@
  */
 export function _migrateData(data) {
   if (foundry.utils.getProperty(data, "propertyType")) {
-    foundry.utils.setProperty(data, "form", foundry.utils.getProperty(data, "propertyType"));
+    foundry.utils.setProperty(
+      data,
+      "form",
+      foundry.utils.getProperty(data, "propertyType"),
+    );
   }
 }

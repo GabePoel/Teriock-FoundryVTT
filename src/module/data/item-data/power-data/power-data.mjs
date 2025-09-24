@@ -34,7 +34,10 @@ export default class TeriockPowerModel extends TeriockBaseItemModel {
 
   /** @inheritDoc */
   static migrateData(data) {
-    if (foundry.utils.hasProperty(data, "type") && foundry.utils.getProperty(data, "type") === "species") {
+    if (
+      foundry.utils.hasProperty(data, "type") &&
+      foundry.utils.getProperty(data, "type") === "species"
+    ) {
       foundry.utils.setProperty(data, "type", "other");
     }
   }
@@ -42,7 +45,8 @@ export default class TeriockPowerModel extends TeriockBaseItemModel {
   /** @inheritDoc */
   get messageParts() {
     return {
-      ...super.messageParts, ..._messageParts(this),
+      ...super.messageParts,
+      ..._messageParts(this),
     };
   }
 }

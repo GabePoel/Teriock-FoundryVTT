@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+/* eslint-disable @typescript-eslint/no-require-imports */
 const express = require("express");
 const fs = require("fs").promises;
 const path = require("path");
@@ -27,7 +29,7 @@ app.get("/api/assignments", async (_req, res) => {
     // Check if the file exists
     try {
       await fs.access(ASSIGNMENTS_PATH);
-    } catch (error) {
+    } catch {
       // File doesn't exist, return an empty object
       return res.json({});
     }
@@ -76,8 +78,8 @@ app.get("/api/categories", async (_req, res) => {
   try {
     const files = await fs.readdir(CATEGORIES_PATH);
     const categories = files
-      .filter(file => file.endsWith(".json"))
-      .map(file => file.replace(".json", ""))
+      .filter((file) => file.endsWith(".json"))
+      .map((file) => file.replace(".json", ""))
       .sort();
 
     res.json({ categories });
@@ -99,9 +101,11 @@ app.get("/api/categories/:category", async (req, res) => {
     try {
       await fs.access(categoryPath);
       console.log(`File exists: ${categoryPath}`);
-    } catch (error) {
+    } catch {
       console.log(`File not found: ${categoryPath}`);
-      return res.status(404).json({ error: `Category ${category} not found at ${categoryPath}` });
+      return res
+        .status(404)
+        .json({ error: `Category ${category} not found at ${categoryPath}` });
     }
 
     const data = await fs.readFile(categoryPath, "utf8");
@@ -110,10 +114,15 @@ app.get("/api/categories/:category", async (req, res) => {
 
     try {
       const categoryData = JSON.parse(data);
-      console.log(`Successfully parsed JSON for ${category}, found ${Object.keys(categoryData).length} items`);
+      console.log(
+        `Successfully parsed JSON for ${category}, found ${Object.keys(categoryData).length} items`,
+      );
       res.json(categoryData);
     } catch (parseError) {
-      console.error(`JSON parse error in ${category}.json:`, parseError.message);
+      console.error(
+        `JSON parse error in ${category}.json:`,
+        parseError.message,
+      );
       console.error(`Full content:`, JSON.stringify(data));
       res.status(500).json({
         error: `Invalid JSON in ${category}.json: ${parseError.message}`,
@@ -122,7 +131,9 @@ app.get("/api/categories/:category", async (req, res) => {
     }
   } catch (error) {
     console.error(`Error reading category ${req.params.category}:`, error);
-    res.status(500).json({ error: `Failed to read category ${req.params.category}` });
+    res
+      .status(500)
+      .json({ error: `Failed to read category ${req.params.category}` });
   }
 });
 
@@ -130,12 +141,15 @@ app.get("/api/categories/:category", async (req, res) => {
 app.post("/api/backup-assignments", async (req, res) => {
   try {
     const timestamp = new Date().toISOString().replace(/[:.]/g, "-");
-    const backupPath = path.join(BACKUPS_PATH, `assignments-backup-${timestamp}.json`);
+    const backupPath = path.join(
+      BACKUPS_PATH,
+      `assignments-backup-${timestamp}.json`,
+    );
 
     // Ensure backup directory exists
     try {
       await fs.access(BACKUPS_PATH);
-    } catch (error) {
+    } catch {
       await fs.mkdir(BACKUPS_PATH, { recursive: true });
     }
 
@@ -191,7 +205,9 @@ app.use((error, _req, res, _next) => {
 
 // Start server
 app.listen(PORT, () => {
-  console.log(`Teriock Icon Assignment Manager running on http://localhost:${PORT}`);
+  console.log(
+    `Teriock Icon Assignment Manager running on http://localhost:${PORT}`,
+  );
   console.log(`Serving tool from: ${TOOL_DIR}`);
   console.log(`Reading categories from: ${CATEGORIES_PATH}`);
   console.log(`Assignments will be saved to: ${ASSIGNMENTS_PATH}`);

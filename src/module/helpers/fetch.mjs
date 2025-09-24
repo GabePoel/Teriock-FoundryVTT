@@ -10,7 +10,8 @@ export async function getItem(name, pack, options = {}) {
   if (!pack.includes(".")) {
     pack = `teriock.${pack}`;
   }
-  const packs = /** @type {Collection<string, TeriockCompendiumCollection>} */ game.packs;
+  const packs =
+    /** @type {Collection<string, TeriockCompendiumCollection>} */ game.packs;
   const compendium = packs.get(pack);
   const uuid = compendium.index.getName(name).uuid;
   const item = await foundry.utils.fromUuid(uuid);
@@ -65,8 +66,9 @@ export async function copyAbility(name) {
  */
 export async function importAbility(document, name) {
   const ability = await copyAbility(name);
-  const abilities = /** @type {TeriockAbility[]} */
-    await document.createEmbeddedDocuments("ActiveEffect", [ ability ]);
+  const abilities =
+    /** @type {TeriockAbility[]} */
+    await document.createEmbeddedDocuments("ActiveEffect", [ability]);
   await document.forceUpdate();
   return abilities[0];
 }
@@ -106,8 +108,9 @@ export async function copyProperty(name) {
  */
 export async function importProperty(document, name) {
   const property = await copyProperty(name);
-  const properties = /** @type {TeriockProperty[]} */
-    await document.createEmbeddedDocuments("ActiveEffect", [ property ]);
+  const properties =
+    /** @type {TeriockProperty[]} */
+    await document.createEmbeddedDocuments("ActiveEffect", [property]);
   await document.forceUpdate();
   return properties[0];
 }
@@ -121,7 +124,11 @@ export async function importProperty(document, name) {
  * @returns {Promise<TeriockRank|null>}
  */
 export async function getRank(classKey, number, options = {}) {
-  if (number > 5 || number < 1 || !Object.keys(TERIOCK.index.classes).includes(classKey)) {
+  if (
+    number > 5 ||
+    number < 1 ||
+    !Object.keys(TERIOCK.index.classes).includes(classKey)
+  ) {
     return null;
   }
   const name = `Rank ${number} ${TERIOCK.index.classes[classKey]}`;

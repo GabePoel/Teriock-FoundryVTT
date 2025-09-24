@@ -8,7 +8,9 @@ export type SizeAbilityStep = {
 };
 
 declare module "./species-data.mjs" {
-  export default interface TeriockSpeciesModel extends TeriockBaseItemModel, StatDataMixinInterface {
+  export default interface TeriockSpeciesModel
+    extends TeriockBaseItemModel,
+      StatDataMixinInterface {
     /** <schema> Age of maturity */
     adult: number;
     /** <schema> Appearance */

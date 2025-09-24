@@ -28,17 +28,21 @@ export default function registerChatManagementHooks() {
 
     // Open tags
     /** TODO: Move to {@link TeriockBaseMessageModel} */
-    addClickHandler(html.querySelectorAll("[data-action=\"open\"]"), async (event) => {
-      event.preventDefault();
-      const uuid = event.currentTarget.getAttribute("data-uuid");
-      if (!uuid) {
-        return;
-      }
-      const doc = /** @type{ClientDocument} */ await foundry.utils.fromUuid(uuid);
-      if (doc && typeof doc.sheet?.render === "function") {
-        await doc.sheet.render(true);
-      }
-    });
+    addClickHandler(
+      html.querySelectorAll('[data-action="open"]'),
+      async (event) => {
+        event.preventDefault();
+        const uuid = event.currentTarget.getAttribute("data-uuid");
+        if (!uuid) {
+          return;
+        }
+        const doc =
+          /** @type{ClientDocument} */ await foundry.utils.fromUuid(uuid);
+        if (doc && typeof doc.sheet?.render === "function") {
+          await doc.sheet.render(true);
+        }
+      },
+    );
 
     /** TODO: Move to {@link TeriockBaseMessageModel} */
     html.querySelectorAll(".teriock-target-container").forEach((container) => {
@@ -85,7 +89,12 @@ export default function registerChatManagementHooks() {
         }
 
         const doc = await foundry.utils.fromUuid(uuid);
-        if (doc && doc.sheet && doc.isOwner && typeof doc.sheet.render === "function") {
+        if (
+          doc &&
+          doc.sheet &&
+          doc.isOwner &&
+          typeof doc.sheet.render === "function"
+        ) {
           await doc.sheet.render(true);
         }
       });

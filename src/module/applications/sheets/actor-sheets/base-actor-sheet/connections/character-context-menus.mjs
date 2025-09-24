@@ -8,7 +8,7 @@ export function piercingContextMenu(actor) {
   return [
     {
       name: "None",
-      icon: "<i class=\"fa-solid fa-xmark\"></i>",
+      icon: '<i class="fa-solid fa-xmark"></i>',
       callback: async () => {
         await actor.update({
           "system.offense.piercing": "none",
@@ -17,7 +17,7 @@ export function piercingContextMenu(actor) {
     },
     {
       name: "AV0",
-      icon: "<i class=\"fa-solid fa-a\"></i>",
+      icon: '<i class="fa-solid fa-a"></i>',
       callback: async () => {
         await actor.update({
           "system.offense.piercing": "av0",
@@ -26,7 +26,7 @@ export function piercingContextMenu(actor) {
     },
     {
       name: "UB",
-      icon: "<i class=\"fa-solid fa-u\"></i>",
+      icon: '<i class="fa-solid fa-u"></i>',
       callback: async () => {
         await actor.update({
           "system.offense.piercing": "ub",

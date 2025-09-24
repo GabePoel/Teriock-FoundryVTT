@@ -20,10 +20,11 @@ export default class DetectionModeLightPerception extends BaseDetectionMode {
    * @param {TeriockTokenDocument} target.document
    */
   _canDetect(visionSource, target) {
-    return !(target
-      instanceof Token
-      || visionSource.object.document.hasStatusEffect("ethereal")
-      || visionSource.object.document.hasStatusEffect("blind"));
+    return !(
+      target instanceof Token ||
+      visionSource.object.document.hasStatusEffect("ethereal") ||
+      visionSource.object.document.hasStatusEffect("blind")
+    );
   }
 
   /** @inheritDoc */
@@ -31,6 +32,6 @@ export default class DetectionModeLightPerception extends BaseDetectionMode {
     if (!super._testPoint(visionSource, mode, target, test)) {
       return false;
     }
-    return canvas.effects.testInsideLight(test.point);
+    return game.canvas.effects.testInsideLight(test.point);
   }
 }

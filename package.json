@@ -8,12 +8,16 @@
     "build:templates": "node scripts/build-templates.mjs",
     "compendium:pack": "node scripts/compendium-pack.mjs",
     "compendium:unpack": "node scripts/compendium-unpack.mjs",
-    "icons:start-server": "node scripts/icon-assignment/server.js",
-    "icons:server-status": "curl -s http://localhost:3000/api/health || echo 'Icon tool not running'",
+    "format:check": "prettier . --check",
+    "format:fix": "prettier . --write",
     "icons:assign": "cd scripts/icon-assignment && node assign-icons.mjs",
     "icons:colorize": "cd scripts/icon-builder && node colorize.mjs",
     "icons:make-use-manifest": "node scripts/icon-assignment/manifest-icons.mjs",
-    "icons:ranks": "cd scripts/icon-builder && node ranks-numbers.mjs"
+    "icons:ranks": "cd scripts/icon-builder && node ranks-numbers.mjs",
+    "icons:server-status": "curl -s http://localhost:3000/api/health || echo 'Icon tool not running'",
+    "icons:start-server": "node scripts/icon-assignment/server.js",
+    "lint:check": "eslint src/module/teriock.mjs src/module/**/*",
+    "lint:fix": "eslint --fix src/module/teriock.mjs src/module/**/*"
   },
   "browserslist": [
     "last 3 versions"
@@ -22,19 +26,21 @@
   "license": "MIT",
   "private": true,
   "devDependencies": {
+    "@eslint/js": "^9.36.0",
     "@foundryvtt/foundryvtt-cli": "^1.1.0",
+    "cors": "^2.8.5",
+    "eslint": "^9.36.0",
+    "express": "^4.18.2",
+    "globals": "^16.4.0",
     "handlebars": "^4.7.8",
     "js-yaml": "^4.1.0",
     "jsdom": "^26.1.0",
+    "magickwand.js": "^2.1.0",
     "nodemon": "^3.0.1",
+    "prettier": "3.6.2",
+    "process": "^0.11.10",
     "sass": "^1.89.1",
     "typescript": "^5.8.3",
-    "typescript-eslint": "^8.32.1",
-    "cors": "^2.8.5",
-    "express": "^4.18.2",
-    "magickwand.js": "^2.1.0",
-    "process": "^0.11.10"
-  },
-  "dependencies": {
+    "typescript-eslint": "^8.44.1"
   }
 }

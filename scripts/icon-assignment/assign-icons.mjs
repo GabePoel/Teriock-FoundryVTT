@@ -1,4 +1,12 @@
-import { access, copyFile, lstat, mkdir, readFile, rm, symlink } from "fs/promises";
+import {
+  access,
+  copyFile,
+  lstat,
+  mkdir,
+  readFile,
+  rm,
+  symlink,
+} from "fs/promises";
 import { basename, dirname, extname, join, relative, resolve } from "path";
 import { argv, cwd, exit, platform } from "process";
 import { toKebabCase } from "../../src/module/helpers/string.mjs";
@@ -23,9 +31,7 @@ for (let i = 0; i < args.length; i++) {
   }
 }
 
-const SKIP_DIRS = [
-  "death-bag-stones",
-];
+const SKIP_DIRS = ["death-bag-stones"];
 
 const isWindows = platform === "win32";
 const fileExists = async (p) => {
@@ -100,8 +106,8 @@ const keyOf = (cat, name) => `${cat}||${name}`;
   let categories = {};
   if (data && typeof data === "object") {
     const objectSections = Object.entries(data)
-      .filter(([ , v ]) => v && typeof v === "object" && !Array.isArray(v))
-      .map(([ k ]) => k);
+      .filter(([, v]) => v && typeof v === "object" && !Array.isArray(v))
+      .map(([k]) => k);
     if (objectSections.length > 0) {
       // unified: keep all object sections (don’t hardcode list so it’s future-proof)
       for (const k of objectSections) {
@@ -127,8 +133,8 @@ const keyOf = (cat, name) => `${cat}||${name}`;
   const directPath = new Map();
   const linkMap = new Map();
   const allItems = []; // [{category, name}]
-  for (const [ cat, section ] of Object.entries(categories)) {
-    for (const [ name, val ] of Object.entries(section)) {
+  for (const [cat, section] of Object.entries(categories)) {
+    for (const [name, val] of Object.entries(section)) {
       allItems.push({
         category: cat,
         name,
@@ -147,7 +153,8 @@ const keyOf = (cat, name) => `${cat}||${name}`;
   // Resolve the first ancestor that has a direct image (cross-category allowed)
   const resolveRootKey = (startCat, startName) => {
     const seen = new Set();
-    let curCat = startCat, curName = startName;
+    let curCat = startCat,
+      curName = startName;
     while (curCat && curName && !directPath.has(keyOf(curCat, curName))) {
       const k = keyOf(curCat, curName);
       if (seen.has(k)) {
@@ -170,10 +177,7 @@ const keyOf = (cat, name) => `${cat}||${name}`;
   const rootExt = new Map(); // Map<rootKey, ".png"|".webp"|...>
   // New: precompute roots that point to Foundry images
   const foundryRoots = new Set();
-  for (const {
-    category,
-    name
-  } of allItems) {
+  for (const { category, name } of allItems) {
     const rKey = resolveRootKey(category, name);
     rootOf.set(keyOf(category, name), rKey);
     if (rKey) {
@@ -205,13 +209,13 @@ const keyOf = (cat, name) => `${cat}||${name}`;
 
   // Allocate filenames for each root (copy destination lives in its OWN category)
   const destNameForRoot = new Map(); // Map<rootKey, filename>
-  for (const rKey of new Set([ ...rootOf.values() ].filter(Boolean))) {
+  for (const rKey of new Set([...rootOf.values()].filter(Boolean))) {
     // New: skip Foundry roots
     if (foundryRoots.has(rKey)) {
       continue;
     }
 
-    const [ rCat, rName ] = rKey.split("||");
+    const [rCat, rName] = rKey.split("||");
     const ext = rootExt.get(rKey) || "";
     const base = toKebabCase(rName);
     const used = usedNamesByCat.get(rCat);
@@ -220,8 +224,8 @@ const keyOf = (cat, name) => `${cat}||${name}`;
   }
 
   // COPY each root image to its category folder
-  for (const [ rKey, outName ] of destNameForRoot.entries()) {
-    const [ rCat, rName ] = rKey.split("||");
+  for (const [rKey, outName] of destNameForRoot.entries()) {
+    const [rCat, rName] = rKey.split("||");
     const srcRel = directPath.get(rKey);
     const srcAbs = resolve(opts.imagesRoot, srcRel);
 
@@ -255,10 +259,7 @@ const keyOf = (cat, name) => `${cat}||${name}`;
   // For every item:
   // - If direct: already copied as a root (or allocate now if somehow missing)
   // - If link: create a symlink in the ITEM's category pointing to the ROOT's copied file
-  for (const {
-    category: cat,
-    name
-  } of allItems) {
+  for (const { category: cat, name } of allItems) {
     const v = categories[cat][name];
     const rKey = rootOf.get(keyOf(cat, name));
 
@@ -308,10 +309,12 @@ const keyOf = (cat, name) => `${cat}||${name}`;
         continue;
       }
 
-      const [ rootCat, rootName ] = rKey.split("||");
+      const [rootCat, rootName] = rKey.split("||");
       const rootOutName = destNameForRoot.get(rKey);
       if (!rootOutName) {
-        console.warn(`ℹRoot output for "${cat}:${name}" (${rootCat}:${rootName}) not created. Skipping link.`);
+        console.warn(
+          `ℹRoot output for "${cat}:${name}" (${rootCat}:${rootName}) not created. Skipping link.`,
+        );
         continue;
       }
 
@@ -324,7 +327,8 @@ const keyOf = (cat, name) => `${cat}||${name}`;
       const linkDir = resolve(opts.out, cat);
       const rootPath = resolve(opts.out, rootCat, rootOutName);
       const linkPath = resolve(linkDir, linkName);
-      const targetRel = relative(dirname(linkPath), rootPath) || basename(rootPath);
+      const targetRel =
+        relative(dirname(linkPath), rootPath) || basename(rootPath);
 
       if (opts.dryRun) {
         console.log(`[dry] SYMLINK ${join(cat, linkName)} -> ${targetRel}`);
@@ -339,15 +343,14 @@ const keyOf = (cat, name) => `${cat}||${name}`;
           }
           console.log(`SYMLINK ${join(cat, linkName)} -> ${targetRel}`);
         } catch (err) {
-          const canFallback = isWindows && [
-            "EPERM",
-            "EACCES",
-            "ENOTSUP",
-            "UNKNOWN",
-          ].includes(err.code || "");
+          const canFallback =
+            isWindows &&
+            ["EPERM", "EACCES", "ENOTSUP", "UNKNOWN"].includes(err.code || "");
           if (canFallback) {
             await copyFile(rootPath, linkPath);
-            console.warn(`Symlink failed (${err.code}). Fallback COPY -> ${join(cat, linkName)}`);
+            console.warn(
+              `Symlink failed (${err.code}). Fallback COPY -> ${join(cat, linkName)}`,
+            );
           } else {
             throw err;
           }

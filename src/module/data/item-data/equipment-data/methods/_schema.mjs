@@ -1,5 +1,8 @@
 import { TextField } from "../../../shared/fields/_module.mjs";
-import { modifiableFormula, modifiableNumber } from "../../../shared/fields/modifiable.mjs";
+import {
+  modifiableFormula,
+  modifiableNumber,
+} from "../../../shared/fields/modifiable.mjs";
 
 const { fields } = foundry.data;
 
@@ -53,9 +56,11 @@ export function _defineSchema() {
         label: "Ranged",
       }),
     }),
-    equipmentClasses: new fields.SetField(new fields.StringField({
-      choices: TERIOCK.index.equipmentClasses,
-    })),
+    equipmentClasses: new fields.SetField(
+      new fields.StringField({
+        choices: TERIOCK.index.equipmentClasses,
+      }),
+    ),
     minStr: modifiableNumber({
       min: -3,
       initial: -3,

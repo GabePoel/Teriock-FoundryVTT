@@ -7,7 +7,7 @@
 const equipmentMap = {
   Torch: {
     damage: "1",
-    damageTypes: [ "Fire" ],
+    damageTypes: ["Fire"],
   },
   Boulder: {
     consumable: true,
@@ -25,7 +25,7 @@ const equipmentMap = {
 export function _override(equipmentData, parameters) {
   if (equipmentMap[equipmentData.equipmentType]) {
     const map = equipmentMap[equipmentData.equipmentType];
-    for (const [ key, value ] of Object.entries(map)) {
+    for (const [key, value] of Object.entries(map)) {
       if (parameters[key] !== undefined) {
         parameters[key] = value;
       }

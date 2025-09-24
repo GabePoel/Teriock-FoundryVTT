@@ -20,20 +20,23 @@ export default class TeriockCombat extends Combat {
    * @returns {Promise<void>}
    * @private
    */
-  async _confirmEffectExpiration(effect, trigger, time, actorUuid, updates = []) {
-    if (effect.system.expirations.combat.what.type
-      !== "none"
-      && effect.system.expirations.combat.when.trigger
-      === trigger
-      && effect.system.expirations.combat.when.time
-      === time
-      && (effect.system.expirations.combat.who.type === "everyone" || (effect.system.expirations.combat.who.type
-        === "executor"
-        && actorUuid
-        === effect.system.expirations.combat.who.source) || (effect.system.expirations.combat.who.type
-        === "target"
-        && actorUuid
-        === effect.actor.uuid))) {
+  async _confirmEffectExpiration(
+    effect,
+    trigger,
+    time,
+    actorUuid,
+    updates = [],
+  ) {
+    if (
+      effect.system.expirations.combat.what.type !== "none" &&
+      effect.system.expirations.combat.when.trigger === trigger &&
+      effect.system.expirations.combat.when.time === time &&
+      (effect.system.expirations.combat.who.type === "everyone" ||
+        (effect.system.expirations.combat.who.type === "executor" &&
+          actorUuid === effect.system.expirations.combat.who.source) ||
+        (effect.system.expirations.combat.who.type === "target" &&
+          actorUuid === effect.actor.uuid))
+    ) {
       const user = selectUser(effect.actor);
       if (effect.system.expirations.combat.when.skip <= 0 && user) {
         try {
@@ -49,7 +52,8 @@ export default class TeriockCombat extends Combat {
       } else if (effect.system.expirations.combat.when.skip > 0) {
         updates.push({
           _id: effect.id,
-          "system.expirations.combat.when.skip": effect.system.expirations.combat.when.skip - 1,
+          "system.expirations.combat.when.skip":
+            effect.system.expirations.combat.when.skip - 1,
         });
       }
     }
@@ -66,7 +70,13 @@ export default class TeriockCombat extends Combat {
   async _tryAllEffectExpirations(effectActor, timeActor, trigger, time) {
     const updates = [];
     for (const effect of effectActor.consequences) {
-      await this._confirmEffectExpiration(effect, trigger, time, timeActor?.uuid, updates);
+      await this._confirmEffectExpiration(
+        effect,
+        trigger,
+        time,
+        timeActor?.uuid,
+        updates,
+      );
     }
     if (updates.length > 0) {
       const activeGm = /** @type {TeriockUser} */ game.users.activeGM;
@@ -81,7 +91,9 @@ export default class TeriockCombat extends Combat {
   /** @inheritDoc */
   async endCombat() {
     let out = await super.endCombat();
-    for (const actor of this.combatants.map((combatant) => /** @type {TeriockActor} */ combatant.actor)) {
+    for (const actor of this.combatants.map(
+      (combatant) => /** @type {TeriockActor} */ combatant.actor,
+    )) {
       await this._tryAllEffectExpirations(actor, actor, "combat", "end");
     }
     return out;
@@ -105,7 +117,9 @@ export default class TeriockCombat extends Combat {
     // waiting for effect expirations.
     /** @type {TeriockActor} */
     const previousActor = this.combatant?.actor;
-    for (const actor of this.combatants.map((combatant) => /** @type {TeriockActor} */ combatant.actor)) {
+    for (const actor of this.combatants.map(
+      (combatant) => /** @type {TeriockActor} */ combatant.actor,
+    )) {
       await this._tryAllEffectExpirations(actor, previousActor, "turn", "end");
     }
     const activeGm = /** @type {TeriockUser} */ game.users.activeGM;
@@ -123,7 +137,9 @@ export default class TeriockCombat extends Combat {
     // Start of turn
     /** @type {TeriockActor} */
     const newActor = this.combatant?.actor;
-    for (const actor of this.combatants.map((combatant) => /** @type {TeriockActor} */ combatant.actor)) {
+    for (const actor of this.combatants.map(
+      (combatant) => /** @type {TeriockActor} */ combatant.actor,
+    )) {
       await this._tryAllEffectExpirations(actor, newActor, "action", "start");
       await this._tryAllEffectExpirations(actor, newActor, "turn", "start");
     }
@@ -155,7 +171,9 @@ export default class TeriockCombat extends Combat {
   /** @inheritDoc */
   async startCombat() {
     let out = await super.startCombat();
-    for (const actor of this.combatants.map((combatant) => /** @type {TeriockActor} */ combatant.actor)) {
+    for (const actor of this.combatants.map(
+      (combatant) => /** @type {TeriockActor} */ combatant.actor,
+    )) {
       await this._tryAllEffectExpirations(actor, actor, "combat", "start");
     }
     return out;

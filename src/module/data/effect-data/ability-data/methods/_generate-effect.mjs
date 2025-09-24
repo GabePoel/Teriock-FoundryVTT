@@ -15,11 +15,17 @@ export async function _generateEffect(rollConfig, crit = false) {
   const abilityData = rollConfig.abilityData;
   const heightenAmount = rollConfig.useData.modifiers.heightened;
   let changes = abilityData.changes;
-  let statuses = foundry.utils.deepClone(abilityData.applies.base.statuses) || new Set();
-  let combatExpirations = foundry.utils.deepClone(abilityData.applies.base.expiration.normal.combat);
+  let statuses =
+    foundry.utils.deepClone(abilityData.applies.base.statuses) || new Set();
+  let combatExpirations = foundry.utils.deepClone(
+    abilityData.applies.base.expiration.normal.combat,
+  );
   combatExpirations.who.source = rollConfig.useData.actor.uuid;
   if (crit && abilityData.applies.base.expiration.changeOnCrit) {
-    combatExpirations = foundry.utils.mergeObject(combatExpirations, abilityData.applies.base.expiration.crit.combat);
+    combatExpirations = foundry.utils.mergeObject(
+      combatExpirations,
+      abilityData.applies.base.expiration.crit.combat,
+    );
   }
 
   // TODO: Switch parsing to unit based.
@@ -27,7 +33,9 @@ export async function _generateEffect(rollConfig, crit = false) {
 
   if (rollConfig.useData.proficient) {
     if (abilityData.applies.proficient.statuses.size > 0) {
-      statuses = foundry.utils.deepClone(abilityData.applies.proficient.statuses);
+      statuses = foundry.utils.deepClone(
+        abilityData.applies.proficient.statuses,
+      );
     }
     if (abilityData.applies.proficient.duration > 0) {
       seconds = abilityData.applies.proficient.duration;
@@ -67,19 +75,21 @@ export async function _generateEffect(rollConfig, crit = false) {
   }
   if (heightenAmount > 0) {
     if (abilityData.applies.heightened.changes.length > 0) {
-      const heightenedChanges = foundry.utils.deepClone(abilityData.applies.heightened.changes);
+      const heightenedChanges = foundry.utils.deepClone(
+        abilityData.applies.heightened.changes,
+      );
       for (const change of heightenedChanges) {
-        const heightenEvaluateRoll = new TeriockRoll(change.value, rollConfig.useData.actor.getRollData());
+        const heightenEvaluateRoll = new TeriockRoll(
+          change.value,
+          rollConfig.useData.actor.getRollData(),
+        );
         heightenEvaluateRoll.alter(heightenAmount, 0, {
           multiplyNumeric: true,
         });
         await heightenEvaluateRoll.evaluate();
         change.value = heightenEvaluateRoll.result.toString();
       }
-      changes = [
-        ...changes,
-        ...heightenedChanges,
-      ];
+      changes = [...changes, ...heightenedChanges];
     }
     if (abilityData.applies.heightened.statuses.size > 0) {
       for (const status of abilityData.applies.heightened.statuses) {
@@ -88,7 +98,9 @@ export async function _generateEffect(rollConfig, crit = false) {
     }
     if (abilityData.applies.heightened.duration > 0) {
       seconds += abilityData.applies.heightened.duration * heightenAmount;
-      seconds = Math.round(seconds / abilityData.applies.heightened.duration) * abilityData.applies.heightened.duration;
+      seconds =
+        Math.round(seconds / abilityData.applies.heightened.duration) *
+        abilityData.applies.heightened.duration;
     }
     // Heightening combat expirations is not currently supported
     // TODO: Support heightening combat expirations lol
@@ -140,9 +152,11 @@ export async function _generateEffect(rollConfig, crit = false) {
       seconds: seconds || 0,
     },
   };
-  if ((seconds > 0 || abilityData.duration.description.toLowerCase().trim() !== "instant")
-    && abilityData.maneuver
-    !== "passive") {
+  if (
+    (seconds > 0 ||
+      abilityData.duration.description.toLowerCase().trim() !== "instant") &&
+    abilityData.maneuver !== "passive"
+  ) {
     return effectData;
   }
   return false;
@@ -160,10 +174,15 @@ export function _generateTakes(rollConfig) {
   const heightenAmount = rollConfig.useData.modifiers.heightened;
   const abilityData = rollConfig.abilityData;
   let rolls = foundry.utils.deepClone(abilityData.applies.base.rolls) || {};
-  let hacks = foundry.utils.deepClone(abilityData.applies.base.hacks) || new Set();
-  let checks = foundry.utils.deepClone(abilityData.applies.base.checks) || new Set();
-  let startStatuses = foundry.utils.deepClone(abilityData.applies.base.startStatuses) || new Set();
-  let endStatuses = foundry.utils.deepClone(abilityData.applies.base.endStatuses) || new Set();
+  let hacks =
+    foundry.utils.deepClone(abilityData.applies.base.hacks) || new Set();
+  let checks =
+    foundry.utils.deepClone(abilityData.applies.base.checks) || new Set();
+  let startStatuses =
+    foundry.utils.deepClone(abilityData.applies.base.startStatuses) ||
+    new Set();
+  let endStatuses =
+    foundry.utils.deepClone(abilityData.applies.base.endStatuses) || new Set();
 
   if (rollConfig.useData.proficient) {
     rolls = { ...rolls, ...abilityData.applies.proficient.rolls };
@@ -186,14 +205,8 @@ export function _generateTakes(rollConfig) {
   }
   if (rollConfig.useData.fluent) {
     rolls = { ...rolls, ...abilityData.applies.fluent.rolls };
-    hacks = new Set([
-      ...hacks,
-      ...(abilityData.applies.fluent.hacks || []),
-    ]);
-    checks = new Set([
-      ...checks,
-      ...(abilityData.applies.fluent.checks || []),
-    ]);
+    hacks = new Set([...hacks, ...(abilityData.applies.fluent.hacks || [])]);
+    checks = new Set([...checks, ...(abilityData.applies.fluent.checks || [])]);
     startStatuses = new Set([
       ...startStatuses,
       ...(abilityData.applies.fluent.startStatuses || []),
@@ -204,8 +217,13 @@ export function _generateTakes(rollConfig) {
     ]);
   }
   if (heightenAmount > 0) {
-    for (const [ key, value ] of Object.entries(abilityData.applies.heightened.rolls || {})) {
-      const rollRoll = new TeriockRoll(value, rollConfig.useData.actor.getRollData());
+    for (const [key, value] of Object.entries(
+      abilityData.applies.heightened.rolls || {},
+    )) {
+      const rollRoll = new TeriockRoll(
+        value,
+        rollConfig.useData.actor.getRollData(),
+      );
       rollRoll.alter(heightenAmount, 0, { multiplyNumeric: true });
       rolls[key] = (rolls[key] ? rolls[key] + " + " : "") + rollRoll.formula;
     }
@@ -224,7 +242,8 @@ export function _generateTakes(rollConfig) {
   }
 
   return {
-    rolls: /** @type {Record<Teriock.Parameters.Consequence.RollConsequenceKey, string>} */ rolls,
+    rolls:
+      /** @type {Record<Teriock.Parameters.Consequence.RollConsequenceKey, string>} */ rolls,
     hacks: /** @type {Set<Teriock.Parameters.Actor.HackableBodyPart>} */ hacks,
     checks: /** @type {Set<string>} */ checks,
     startStatuses: /** @type {Set<string>} */ startStatuses,

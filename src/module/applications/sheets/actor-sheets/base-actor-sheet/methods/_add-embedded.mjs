@@ -1,6 +1,9 @@
 import { copyRank, getItem, getRank } from "../../../../../helpers/fetch.mjs";
 import { toTitleCase } from "../../../../../helpers/string.mjs";
-import { selectClassDialog, selectEquipmentTypeDialog } from "../../../../dialogs/select-dialog.mjs";
+import {
+  selectClassDialog,
+  selectEquipmentTypeDialog,
+} from "../../../../dialogs/select-dialog.mjs";
 import { selectDocumentDialog } from "../../../../dialogs/select-document-dialog.mjs";
 
 /**
@@ -101,23 +104,31 @@ export async function _addRank(sheet) {
   const rankNumber = referenceRank.system.classRank;
   let rank = await copyRank(rankClass, rankNumber);
   if (rankNumber <= 2) {
-    await sheet.document.createEmbeddedDocuments("Item", [ rank ]);
+    await sheet.document.createEmbeddedDocuments("Item", [rank]);
     return;
   }
-  const existingRanks = sheet.document.ranks.filter((r) => r.system.className === rankClass);
-  const combatAbilityNames = new Set(referenceRank.abilities
-    .filter((a) => !a.sup)
-    .map((a) => a.name)
-    .slice(0, 3));
+  const existingRanks = sheet.document.ranks.filter(
+    (r) => r.system.className === rankClass,
+  );
+  const combatAbilityNames = new Set(
+    referenceRank.abilities
+      .filter((a) => !a.sup)
+      .map((a) => a.name)
+      .slice(0, 3),
+  );
   const availableCombatAbilityNames = new Set(combatAbilityNames);
-  const supportAbilityNames = new Set(referenceRank.abilities
-    .filter((a) => !a.sup)
-    .map((a) => a.name)
-    .slice(3));
+  const supportAbilityNames = new Set(
+    referenceRank.abilities
+      .filter((a) => !a.sup)
+      .map((a) => a.name)
+      .slice(3),
+  );
   const availableSupportAbilityNames = new Set(supportAbilityNames);
   for (const existingRank of existingRanks) {
     for (const ability of existingRank.abilities) {
-      const existingAbility = rank.abilities.find((a) => a.name === ability.name);
+      const existingAbility = rank.abilities.find(
+        (a) => a.name === ability.name,
+      );
       if (existingAbility) {
         availableCombatAbilityNames.delete(existingAbility.name);
         availableSupportAbilityNames.delete(existingAbility.name);
@@ -126,7 +137,9 @@ export async function _addRank(sheet) {
   }
   const chosenAbilityNames = [];
   if (availableCombatAbilityNames.size > 1) {
-    const availableCombatAbilities = referenceRank.abilities.filter((a) => availableCombatAbilityNames.has(a.name));
+    const availableCombatAbilities = referenceRank.abilities.filter((a) =>
+      availableCombatAbilityNames.has(a.name),
+    );
     const chosenCombatAbility = await selectDocumentDialog(
       availableCombatAbilities,
       { title: "Select Combat Ability" },
@@ -137,7 +150,9 @@ export async function _addRank(sheet) {
     chosenAbilityNames.push(...availableCombatAbilityNames);
   }
   if (availableSupportAbilityNames.size > 1) {
-    const availableSupportAbilities = referenceRank.abilities.filter((a) => availableSupportAbilityNames.has(a.name));
+    const availableSupportAbilities = referenceRank.abilities.filter((a) =>
+      availableSupportAbilityNames.has(a.name),
+    );
     const chosenSupportAbility = await selectDocumentDialog(
       availableSupportAbilities,
       { title: "Select Support Ability" },
@@ -160,7 +175,7 @@ export async function _addRank(sheet) {
       abilities.delete(ability.id);
     }
   }
-  await sheet.document.createEmbeddedDocuments("Item", [ rank ]);
+  await sheet.document.createEmbeddedDocuments("Item", [rank]);
 }
 
 /**
@@ -173,8 +188,11 @@ export async function _addRank(sheet) {
 export async function _addEquipment(sheet) {
   let equipmentType = await selectEquipmentTypeDialog();
   if (Object.keys(TERIOCK.index.equipment).includes(equipmentType)) {
-    const equipment = await getItem(TERIOCK.index.equipment[equipmentType], "equipment");
-    await sheet.document.createEmbeddedDocuments("Item", [ equipment ]);
+    const equipment = await getItem(
+      TERIOCK.index.equipment[equipmentType],
+      "equipment",
+    );
+    await sheet.document.createEmbeddedDocuments("Item", [equipment]);
   } else {
     equipmentType = toTitleCase(equipmentType);
     await sheet.document.createEmbeddedDocuments("Item", [

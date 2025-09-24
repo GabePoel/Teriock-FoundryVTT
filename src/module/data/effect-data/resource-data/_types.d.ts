@@ -4,9 +4,10 @@ import type { ConsumableDataMixinInterface } from "../../mixins/consumable-data-
 import type { ExecutableDataMixinInterface } from "../../mixins/executable-data-mixin/_types";
 
 declare module "./resource-data.mjs" {
-  export default interface TeriockResourceModel extends TeriockBaseEffectModel,
-    ConsumableDataMixinInterface,
-    ExecutableDataMixinInterface {
+  export default interface TeriockResourceModel
+    extends TeriockBaseEffectModel,
+      ConsumableDataMixinInterface,
+      ExecutableDataMixinInterface {
     get parent(): TeriockResource;
   }
 }

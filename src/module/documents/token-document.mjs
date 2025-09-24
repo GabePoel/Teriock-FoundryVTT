@@ -14,7 +14,9 @@ const { TokenDocument } = foundry.documents;
  * @property {Token} token
  * @property {boolean} isOwner
  */
-export default class TeriockTokenDocument extends ChangeableDocumentMixin(TokenDocument) {
+export default class TeriockTokenDocument extends ChangeableDocumentMixin(
+  TokenDocument,
+) {
   /** @inheritDoc */
   changesField = "tokenChanges";
 
@@ -31,7 +33,7 @@ export default class TeriockTokenDocument extends ChangeableDocumentMixin(TokenD
     this.deriveVision();
     this.deriveTint();
     super._onRelatedUpdate(update, operation);
-    canvas.perception.initialize();
+    game.canvas.perception.initialize();
   }
 
   /** @inheritDoc */
@@ -55,24 +57,28 @@ export default class TeriockTokenDocument extends ChangeableDocumentMixin(TokenD
       "blindFighting",
       "darkVision",
     ];
-    this.detectionModes.push(...enabledIds
-      .filter((id) => !this.detectionModes.find((mode) => mode.id === id))
-      .map((id) => {
-        return {
-          id: id,
-          enabled: true,
-          range: Infinity,
-        };
-      }));
-    this.detectionModes.push(...disabledIds
-      .filter((id) => !this.detectionModes.find((mode) => mode.id === id))
-      .map((id) => {
-        return {
-          id: id,
-          enabled: false,
-          range: 0,
-        };
-      }));
+    this.detectionModes.push(
+      ...enabledIds
+        .filter((id) => !this.detectionModes.find((mode) => mode.id === id))
+        .map((id) => {
+          return {
+            id: id,
+            enabled: true,
+            range: Infinity,
+          };
+        }),
+    );
+    this.detectionModes.push(
+      ...disabledIds
+        .filter((id) => !this.detectionModes.find((mode) => mode.id === id))
+        .map((id) => {
+          return {
+            id: id,
+            enabled: false,
+            range: 0,
+          };
+        }),
+    );
   }
 
   /**
@@ -83,7 +89,7 @@ export default class TeriockTokenDocument extends ChangeableDocumentMixin(TokenD
       this.light.dim = 0;
       this.light.bright = 0;
     } else if (this.actor) {
-      for (const [ key, value ] of Object.entries(this.actor.system.light)) {
+      for (const [key, value] of Object.entries(this.actor.system.light)) {
         foundry.utils.setProperty(this.light, key, value);
       }
     }
@@ -112,13 +118,19 @@ export default class TeriockTokenDocument extends ChangeableDocumentMixin(TokenD
       if (this.actor?.system.senses.dark > 0) {
         visionMode = "darkvision";
       }
-      if (this.actor?.system.senses.night > 0 && this.actor?.system.senses.night >= this.actor?.system.senses.dark) {
+      if (
+        this.actor?.system.senses.night > 0 &&
+        this.actor?.system.senses.night >= this.actor?.system.senses.dark
+      ) {
         visionMode = "lightAmplification";
       }
       if (this.actor?.statuses?.has("ethereal")) {
         visionMode = "ethereal";
       }
-      if (this.actor?.statuses?.has("ethereal") && this.actor?.statuses?.has("invisible")) {
+      if (
+        this.actor?.statuses?.has("ethereal") &&
+        this.actor?.statuses?.has("invisible")
+      ) {
         visionMode = "invisibleEthereal";
       }
 
@@ -137,11 +149,7 @@ export default class TeriockTokenDocument extends ChangeableDocumentMixin(TokenD
       );
 
       this.sight.visionMode = visionMode;
-      if (![
-        "down",
-        "dead",
-        "invisibleEthereal",
-      ].includes(visionMode)) {
+      if (!["down", "dead", "invisibleEthereal"].includes(visionMode)) {
         this.sight.color = "";
       }
     }
@@ -156,10 +164,16 @@ export default class TeriockTokenDocument extends ChangeableDocumentMixin(TokenD
    */
   derivedDetectionModes() {
     if (this.actor) {
-      for (const [ sense, id ] of Object.entries(TERIOCK.options.character.senseMap)) {
+      for (const [sense, id] of Object.entries(
+        TERIOCK.options.character.senseMap,
+      )) {
         const mode = this.detectionModes.find((m) => m.id === id);
         if (mode) {
-          mode.range = convertUnits(this.actor.system.senses[sense], "ft", this.parent?.grid.units || "");
+          mode.range = convertUnits(
+            this.actor.system.senses[sense],
+            "ft",
+            this.parent?.grid.units || "",
+          );
           mode.enabled = this.actor.system.senses[sense] > 0;
         }
       }

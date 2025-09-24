@@ -24,12 +24,7 @@ export function cleanValue(value) {
  * @returns {string} The cleaned feet measurement string.
  */
 export function cleanFeet(feet) {
-  const synonyms = [
-    "foot",
-    "feet",
-    "ft",
-    "ft.",
-  ];
+  const synonyms = ["foot", "feet", "ft", "ft."];
   synonyms.forEach((synonym) => {
     const regex = new RegExp(synonym, "gi");
     feet = feet.replace(regex, "");

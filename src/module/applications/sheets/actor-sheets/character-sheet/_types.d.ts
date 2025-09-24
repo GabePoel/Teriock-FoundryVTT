@@ -2,7 +2,8 @@ import TeriockBaseActorSheet from "../base-actor-sheet/base-actor-sheet.mjs";
 import type { TeriockCharacter } from "../../../../documents/_documents.mjs";
 
 declare module "./base-character-sheet.mjs" {
-  export default interface TeriockBaseCharacterSheet extends TeriockBaseActorSheet {
+  export default interface TeriockBaseCharacterSheet
+    extends TeriockBaseActorSheet {
     get actor(): TeriockCharacter;
 
     get document(): TeriockCharacter;

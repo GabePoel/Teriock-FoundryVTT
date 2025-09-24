@@ -1,22 +1,20 @@
 {{#if (exists system.adult)}}
   <div class="ab-bar">
     {{formBox
-      (formInput
-        systemFields.adult
-        value=system.adult
-        disabled=(not editable)
-      )
+      (formInput systemFields.adult value=system.adult disabled=(not editable))
       unselected=(concat "Adult at " system.adult " Years")
       icon="person"
       tooltip="Age of Maturity"
     }}
     {{formBox
       (formInput
-        systemFields.lifespan
-        value=system.lifespan
-        disabled=(not editable)
+        systemFields.lifespan value=system.lifespan disabled=(not editable)
       )
-      unselected=(ifThen (exists system.lifespan) (concat "Lives to " system.lifespan " Years") "Infinite Lifespan")
+      unselected=(ifThen
+        (exists system.lifespan)
+        (concat "Lives to " system.lifespan " Years")
+        "Infinite Lifespan"
+      )
       icon="tombstone-blank"
       tooltip="Maximum Lifespan"
     }}

@@ -1,4 +1,8 @@
-import type { TeriockActor, TeriockEffect, TeriockItem } from "../../_module.mjs";
+import type {
+  TeriockActor,
+  TeriockEffect,
+  TeriockItem,
+} from "../../_module.mjs";
 import type { TeriockAbility, TeriockProperty } from "../../_documents.mjs";
 
 export interface CommonDocumentMixinInterface {

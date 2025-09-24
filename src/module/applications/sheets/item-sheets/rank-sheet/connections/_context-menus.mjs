@@ -77,7 +77,9 @@ export function classContextMenu(rank) {
           });
         },
         condition: () => {
-          return (foundry.utils.getProperty(rank.system, "archetype") === archetype);
+          return (
+            foundry.utils.getProperty(rank.system, "archetype") === archetype
+          );
         },
       };
       options.push(option);
@@ -114,7 +116,7 @@ export function rankContextMenu(rank) {
 function dieContextMenu(rank, stat = "hp") {
   const iconStyle = TERIOCK.display.iconStyles.contextMenu;
   const out = [];
-  for (const [ key, value ] of Object.entries(TERIOCK.options.die.faces)) {
+  for (const [key, value] of Object.entries(TERIOCK.options.die.faces)) {
     out.push({
       name: `${value} ${toTitleCase(TERIOCK.options.die.stats[stat])} Die`,
       icon: makeIcon(getRollIcon(value), iconStyle),

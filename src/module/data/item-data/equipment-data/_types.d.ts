@@ -4,9 +4,10 @@ import type { ExecutableDataMixinInterface } from "../../mixins/executable-data-
 import type { ConsumableDataMixinInterface } from "../../mixins/consumable-data-mixin/_types";
 
 declare module "./equipment-data.mjs" {
-  export default interface TeriockEquipmentModel extends TeriockBaseItemModel,
-    ConsumableDataMixinInterface,
-    ExecutableDataMixinInterface {
+  export default interface TeriockEquipmentModel
+    extends TeriockBaseItemModel,
+      ConsumableDataMixinInterface,
+      ExecutableDataMixinInterface {
     /** <schema> Armor Value */
     av: Teriock.Fields.ModifiableNumber;
     /** <schema> Block Value */
@@ -19,13 +20,6 @@ declare module "./equipment-data.mjs" {
       twoHanded: Teriock.Fields.ModifiableIndeterministic;
       /** <schema> Additional damage types to be added to all the base damage */
       types: Set<string>;
-    };
-    /** <base> Piercing */
-    piercing: {
-      /** <base> <special> If the equipment is AV0 */
-      av0: boolean;
-      /** <base> If the equipment is UB */
-      ub: boolean;
     };
     /** <schema> Is the equipment dampened? */
     dampened: boolean;
@@ -49,6 +43,13 @@ declare module "./equipment-data.mjs" {
     minStr: Teriock.Fields.ModifiableNumber;
     /** <schema> Notes */
     notes: string;
+    /** <base> Piercing */
+    piercing: {
+      /** <base> <special> If the equipment is AV0 */
+      av0: boolean;
+      /** <base> If the equipment is UB */
+      ub: boolean;
+    };
     /** <schema> Power Level */
     powerLevel: string;
     /** <schema> Price */

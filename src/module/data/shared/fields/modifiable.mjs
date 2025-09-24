@@ -1,10 +1,7 @@
 import { evaluateSync } from "../../../helpers/utils.mjs";
 import FormulaField from "./formula-field.mjs";
 
-const {
-  SchemaField,
-  NumberField,
-} = foundry.data.fields;
+const { SchemaField, NumberField } = foundry.data.fields;
 
 /**
  * Make modifiable formula fields.

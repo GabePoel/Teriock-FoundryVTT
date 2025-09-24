@@ -7,7 +7,7 @@ declare global {
       data: object;
       classes?: Set<string>;
       color?: string;
-    }
+    };
   }
 }
 export {};

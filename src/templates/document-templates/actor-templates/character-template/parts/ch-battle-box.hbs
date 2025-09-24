@@ -23,7 +23,11 @@
       </div>
     </div>
 
-    <div class="character-primary-blocker" style="width: 100%;" data-action="selectBlocker">
+    <div
+      class="character-primary-blocker"
+      style="width: 100%;"
+      data-action="selectBlocker"
+    >
       <div class="tsubtle little-title">
         <div class="title-left">Blocking With</div>
         <div class="title-right">
@@ -59,9 +63,16 @@
     </div>
   </div>
 
-  <div class="reaction-box defense-box" style="align-items: center; flex-direction: row;" data-action="toggleReaction">
+  <div
+    class="reaction-box defense-box"
+    style="align-items: center; flex-direction: row;"
+    data-action="toggleReaction"
+  >
     <div class="title-left tsubtle">Has Reaction</div>
-    <div class="right-container" style="display: flex; align-items: center; justify-content: end; flex: 1;">
+    <div
+      class="right-container"
+      style="display: flex; align-items: center; justify-content: end; flex: 1;"
+    >
       <div class="character-smallbox-value" data-tooltip="Toggle Reaction">
         {{#if system.combat.hasReaction}}
           <i class="fa-solid fa-check thover"></i>
@@ -76,11 +87,24 @@
     <div class="attack-box-main">
       <div class="character-shortbox character-piercing-box">
         <div class="tsubtle tcenter" data-action="piercingChange">Piercing</div>
-        <div class="character-smallbox-value thover" data-tooltip="Override Piercing">
-          {{#if (or (eq system.offense.piercing "ub") system.primaryAttacker.system.piercing.ub)}}
+        <div
+          class="character-smallbox-value thover"
+          data-tooltip="Override Piercing"
+        >
+          {{#if
+            (or
+              (eq system.offense.piercing "ub")
+              system.primaryAttacker.system.piercing.ub
+            )
+          }}
             UB{{#if (eq system.offense.piercing "ub")}}*{{/if}}
           {{else}}
-            {{#if (or (eq system.offense.piercing "av0") system.primaryAttacker.system.piercing.av0)}}
+            {{#if
+              (or
+                (eq system.offense.piercing "av0")
+                system.primaryAttacker.system.piercing.av0
+              )
+            }}
               AV0{{#if (eq system.offense.piercing "av0")}}*{{/if}}
             {{else}}
               <i class="fa-solid fa-xmark thover"></i>
@@ -111,7 +135,11 @@
       </div>
     </div>
 
-    <div class="character-primary-attacker" style="width: 100%;" data-action="selectAttacker">
+    <div
+      class="character-primary-attacker"
+      style="width: 100%;"
+      data-action="selectAttacker"
+    >
       <div class="tsubtle little-title">
         <div class="title-left">Attacking With</div>
         <div class="title-right">
@@ -153,7 +181,8 @@
           {{path
             TERIOCK.index.weaponFightingStyles
             system.primaryAttacker.system.fightingStyle
-          }} Fighting Style
+          }}
+          Fighting Style
         </div>
         <div>
           {{editor enrichedSpecialRules button=false editable=false}}

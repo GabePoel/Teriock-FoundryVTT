@@ -16,15 +16,21 @@ export default function registerFieldHelpers() {
       dataset = {},
     } = options.hash;
     let content = input;
-    const hasSecondaryContent = includeSecondary && (secondary.toString() ? secondary.toString().length > 0 : false);
+    const hasSecondaryContent =
+      includeSecondary &&
+      (secondary.toString() ? secondary.toString().length > 0 : false);
     let unselectedContent = unselected;
-    const hasUnselected = unselected.toString() ? unselected.toString().length > 0 : false;
+    const hasUnselected = unselected.toString()
+      ? unselected.toString().length > 0
+      : false;
     if (hasUnselected) {
       if (hasSecondaryContent) {
         if (after) {
-          unselectedContent = unselected + "&nbsp;/&nbsp;" + unselectedSecondary;
+          unselectedContent =
+            unselected + "&nbsp;/&nbsp;" + unselectedSecondary;
         } else {
-          unselectedContent = unselectedSecondary + "&nbsp;/&nbsp;" + unselected;
+          unselectedContent =
+            unselectedSecondary + "&nbsp;/&nbsp;" + unselected;
         }
       }
       unselectedContent = `<div class="unselected">${unselectedContent}</div>`;
@@ -49,11 +55,14 @@ export default function registerFieldHelpers() {
     if (icon.toString().startsWith("<i")) {
       iconStr = icon;
     }
-    const tooltipStr = tooltip && tooltip.toString().length > 0 ? `data-tooltip="${tooltip}"` : "";
+    const tooltipStr =
+      tooltip && tooltip.toString().length > 0
+        ? `data-tooltip="${tooltip}"`
+        : "";
     const classesStr = classes ? classes : "";
     const actionStr = action ? `data-action="${action}"` : "";
     let datasetStr = "";
-    for (const [ key, value ] of Object.entries(dataset)) {
+    for (const [key, value] of Object.entries(dataset)) {
       datasetStr += `data-${key}="${value}"`;
     }
     if (include) {

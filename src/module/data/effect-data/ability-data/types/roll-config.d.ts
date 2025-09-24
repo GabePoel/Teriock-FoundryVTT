@@ -2,6 +2,7 @@ import type TeriockAbilityModel from "../ability-data.mjs";
 import type TeriockActor from "../../../../documents/actor.mjs";
 import type { TeriockBaseMessageModel } from "../../../message-data/_module.mjs";
 import type TeriockRoll from "../../../../dice/roll.mjs";
+import type { TeriockToken } from "../../../../canvas/placeables/_module.mjs";
 
 export type AbilityUseData = {
   /** Actor using this ability. */
@@ -37,7 +38,7 @@ export type AbilityUseData = {
   /** Data that can be referenced in the roll formula. */
   rollData: object;
   /** Targeted tokens. */
-  targets: Set<any>;
+  targets: Set<TeriockToken>;
 };
 
 export type AbilityChatData = {

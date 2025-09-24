@@ -1,7 +1,4 @@
-const {
-  HandlebarsApplicationMixin,
-  ApplicationV2,
-} = foundry.applications.api;
+const { HandlebarsApplicationMixin, ApplicationV2 } = foundry.applications.api;
 const { SearchFilter } = foundry.applications.ux;
 
 // noinspection JSClosureCompilerSyntax
@@ -9,17 +6,15 @@ const { SearchFilter } = foundry.applications.ux;
  * @extends {ApplicationV2}
  * @mixes HandlebarsApplicationMixin
  */
-export default class TeriockDocumentSelector extends HandlebarsApplicationMixin(ApplicationV2) {
+export default class TeriockDocumentSelector extends HandlebarsApplicationMixin(
+  ApplicationV2,
+) {
   /**
    * @inheritDoc
    * @type {Partial<ApplicationConfiguration>}
    */
   static DEFAULT_OPTIONS = {
-    classes: [
-      "teriock",
-      "dynamic-select",
-      "dialog",
-    ],
+    classes: ["teriock", "dynamic-select", "dialog"],
     actions: {
       ok: this._getSelected,
       cancel: this._cancel,
@@ -37,15 +32,11 @@ export default class TeriockDocumentSelector extends HandlebarsApplicationMixin(
   static PARTS = {
     all: {
       template: "systems/teriock/src/templates/dialog-templates/select.hbs",
-      scrollable: [ ".doc-list-container" ],
+      scrollable: [".doc-list-container"],
     },
   };
 
-  constructor(docs, {
-    multi = true,
-    hint = "",
-    tooltip = true,
-  } = {}, ...args) {
+  constructor(docs, { multi = true, hint = "", tooltip = true } = {}, ...args) {
     super(...args);
     this.docs = docs;
     this.multi = multi;
@@ -78,11 +69,13 @@ export default class TeriockDocumentSelector extends HandlebarsApplicationMixin(
     const root = this.element;
     let ids = [];
     if (this.multi) {
-      ids = Array.from(root.querySelectorAll("input[type=\"checkbox\"]:checked")).map((el) => el.name);
+      ids = Array.from(
+        root.querySelectorAll('input[type="checkbox"]:checked'),
+      ).map((el) => el.name);
     } else {
-      const radio = root.querySelector("input[name=\"choice\"]:checked");
+      const radio = root.querySelector('input[name="choice"]:checked');
       if (radio) {
-        ids = [ radio.value ];
+        ids = [radio.value];
       }
     }
     // noinspection JSUnresolvedReference
@@ -117,11 +110,14 @@ export default class TeriockDocumentSelector extends HandlebarsApplicationMixin(
       contentSelector: ".doc-select",
       initial: "",
       callback: (_e, _q, rgx, container) => {
-        container.querySelectorAll(".doc-select-item").forEach(/** @param {HTMLLIElement} card */(card) => {
-          const title = card.querySelector(".doc-name-container")?.textContent ?? "";
-          const match = rgx ? rgx.test(title) : true;
-          card.style.display = match ? "block" : "none";
-        });
+        container.querySelectorAll(".doc-select-item").forEach(
+          /** @param {HTMLLIElement} card */ (card) => {
+            const title =
+              card.querySelector(".doc-name-container")?.textContent ?? "";
+            const match = rgx ? rgx.test(title) : true;
+            card.style.display = match ? "block" : "none";
+          },
+        );
       },
     });
     searchFilter.bind(root);

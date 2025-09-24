@@ -1,6 +1,9 @@
 import { tidyHTML } from "../../../../helpers/html.mjs";
 import { getIcon } from "../../../../helpers/path.mjs";
-import { cleanHTMLDoc, cleanObject } from "../../../shared/parsing/clean-html-doc.mjs";
+import {
+  cleanHTMLDoc,
+  cleanObject,
+} from "../../../shared/parsing/clean-html-doc.mjs";
 import { extractChangesFromHTML } from "../../../shared/parsing/extract-changes.mjs";
 import { getCategoriesFromHTML } from "../../../shared/parsing/get-categories.mjs";
 import { processSubProperties } from "../../../shared/parsing/process-subs.mjs";
@@ -21,8 +24,9 @@ export async function _parse(propertyData, rawHTML) {
   // await propertyData.parent.deleteSubs();
 
   // Get new subs
-  const subs = Array.from(doc.querySelectorAll(".ability-sub-container"))
-    .filter((el) => !el.closest(".ability-sub-container:not(:scope)"));
+  const subs = Array.from(
+    doc.querySelectorAll(".ability-sub-container"),
+  ).filter((el) => !el.closest(".ability-sub-container:not(:scope)"));
 
   // Remove sub-containers and process dice
   cleanHTMLDoc(doc);
@@ -32,7 +36,7 @@ export async function _parse(propertyData, rawHTML) {
   const name = propertyData.parent.name;
   const categories = getCategoriesFromHTML(rawHTML);
 
-  const referenceProperty = new ActiveEffect({
+  const referenceProperty = new foundry.documents.ActiveEffect.implementation({
     name: "Reference Property",
     type: "property",
   });
@@ -72,11 +76,7 @@ export async function _parse(propertyData, rawHTML) {
   parameters.system.applies.changes = extractChangesFromHTML(rawHTML);
   parameters.system.modifiesActor = extractDocument(doc);
   parameters.img = getIcon("properties", propertyData.parent.name);
-  const toClean = [
-    "description",
-    "limitation",
-    "improvement",
-  ];
+  const toClean = ["description", "limitation", "improvement"];
   cleanObject(parameters.system, toClean);
   return parameters;
 }
@@ -86,8 +86,10 @@ export async function _parse(propertyData, rawHTML) {
  * @returns {boolean} True if the target document is `Actor`.
  */
 function extractDocument(doc) {
-  const documentMetadata = /** @type {HTMLSpanElement|undefined} */ doc.querySelector(
-    "span.metadata[data-type='document']");
+  const documentMetadata =
+    /** @type {HTMLSpanElement|undefined} */ doc.querySelector(
+      "span.metadata[data-type='document']",
+    );
   if (documentMetadata) {
     const targetDocument = documentMetadata.dataset.document;
     if (targetDocument === "actor") {
@@ -102,8 +104,10 @@ function extractDocument(doc) {
  * @returns {string|null} Damage type.
  */
 function extractDamageType(doc) {
-  const documentMetadata = /** @type {HTMLSpanElement|undefined} */ doc.querySelector(
-    "span.metadata[data-type='damage-type']");
+  const documentMetadata =
+    /** @type {HTMLSpanElement|undefined} */ doc.querySelector(
+      "span.metadata[data-type='damage-type']",
+    );
   if (documentMetadata) {
     return documentMetadata.dataset.value || "";
   }

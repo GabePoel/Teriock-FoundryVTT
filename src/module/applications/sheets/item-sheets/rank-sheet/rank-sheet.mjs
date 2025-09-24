@@ -1,7 +1,11 @@
 import { documentOptions } from "../../../../constants/options/document-options.mjs";
 import TeriockBaseItemSheet from "../base-item-sheet/base-item-sheet.mjs";
 import {
-  archetypeContextMenu, classContextMenu, hpDieContextMenu, mpDieContextMenu, rankContextMenu,
+  archetypeContextMenu,
+  classContextMenu,
+  hpDieContextMenu,
+  mpDieContextMenu,
+  rankContextMenu,
 } from "./connections/_context-menus.mjs";
 
 const { DialogV2 } = foundry.applications.api;
@@ -18,7 +22,7 @@ export default class TeriockRankSheet extends TeriockBaseItemSheet {
    * @type {Partial<ApplicationConfiguration>}
    */
   static DEFAULT_OPTIONS = {
-    classes: [ "rank" ],
+    classes: ["rank"],
     window: {
       icon: "fa-solid fa-" + documentOptions.rank.icon,
     },
@@ -27,12 +31,9 @@ export default class TeriockRankSheet extends TeriockBaseItemSheet {
   /** @inheritDoc */
   static PARTS = {
     all: {
-      template: "systems/teriock/src/templates/document-templates/item-templates/rank-template/rank-template.hbs",
-      scrollable: [
-        ".window-content",
-        ".tsheet-page",
-        ".ab-sheet-everything",
-      ],
+      template:
+        "systems/teriock/src/templates/document-templates/item-templates/rank-template/rank-template.hbs",
+      scrollable: [".window-content", ".tsheet-page", ".ab-sheet-everything"],
     },
   };
 
@@ -63,28 +64,23 @@ export default class TeriockRankSheet extends TeriockBaseItemSheet {
         selector: ".mp-die-box",
         menu: mpDieContextMenu,
       },
-    ].forEach(({
-      selector,
-      menu,
-    }) => {
+    ].forEach(({ selector, menu }) => {
       this._connectContextMenu(selector, menu(this.item), "click");
     });
     [
       {
         selector: ".hp-die-box",
-        confirmText: "Are you sure you want to re-roll how much HP you gain from this rank?",
+        confirmText:
+          "Are you sure you want to re-roll how much HP you gain from this rank?",
         dieKey: "hpDie",
       },
       {
         selector: ".mp-die-box",
-        confirmText: "Are you sure you want to re-roll how much mana you gain from this rank?",
+        confirmText:
+          "Are you sure you want to re-roll how much mana you gain from this rank?",
         dieKey: "mpDie",
       },
-    ].forEach(({
-      selector,
-      confirmText,
-      dieKey,
-    }) => {
+    ].forEach(({ selector, confirmText, dieKey }) => {
       const el = this.element.querySelector(selector);
       if (el) {
         el.addEventListener("contextmenu", async () => {

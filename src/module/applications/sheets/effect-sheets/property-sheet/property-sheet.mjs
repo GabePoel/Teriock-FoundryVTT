@@ -11,13 +11,15 @@ import { propertyContextMenu } from "./connections/_context-menus.mjs";
  * @extends {TeriockBaseEffectSheet}
  * @mixes PassiveSheetMixin
  */
-export default class TeriockPropertySheet extends PassiveSheetMixin(TeriockBaseEffectSheet) {
+export default class TeriockPropertySheet extends PassiveSheetMixin(
+  TeriockBaseEffectSheet,
+) {
   /**
    * @inheritDoc
    * @type {Partial<ApplicationConfiguration>}
    */
   static DEFAULT_OPTIONS = {
-    classes: [ "property" ],
+    classes: ["property"],
     window: {
       icon: "fa-solid fa-" + documentOptions.property.icon,
     },
@@ -30,12 +32,9 @@ export default class TeriockPropertySheet extends PassiveSheetMixin(TeriockBaseE
    */
   static PARTS = {
     all: {
-      template: "systems/teriock/src/templates/document-templates/effect-templates/property-template/property-template.hbs",
-      scrollable: [
-        ".window-content",
-        ".tsheet-page",
-        ".ab-sheet-everything",
-      ],
+      template:
+        "systems/teriock/src/templates/document-templates/effect-templates/property-template/property-template.hbs",
+      scrollable: [".window-content", ".tsheet-page", ".ab-sheet-everything"],
     },
   };
 
@@ -46,7 +45,11 @@ export default class TeriockPropertySheet extends PassiveSheetMixin(TeriockBaseE
       return;
     }
     const propertyContextMenuOptions = propertyContextMenu(this.document);
-    this._connectContextMenu(".property-type-box", propertyContextMenuOptions, "click");
+    this._connectContextMenu(
+      ".property-type-box",
+      propertyContextMenuOptions,
+      "click",
+    );
     const buttonMap = {
       ".ab-limitation-button": "system.limitation",
       ".ab-improvement-button": "system.improvement",

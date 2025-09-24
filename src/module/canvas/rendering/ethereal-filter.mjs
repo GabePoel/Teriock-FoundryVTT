@@ -99,9 +99,9 @@ export default class EtherealFilter extends AbstractBaseFilter {
   //noinspection JSUnusedGlobalSymbols
   /** @inheritDoc */
   apply(filterManager, input, output, clear) {
-    if (this.animated && !canvas.photosensitiveMode) {
+    if (this.animated && !game.canvas.photosensitiveMode) {
       //noinspection JSUnresolvedReference
-      this.uniforms.time = canvas.app.ticker.lastTime;
+      this.uniforms.time = game.canvas.app.ticker.lastTime;
     }
     //noinspection JSUnresolvedReference
     filterManager.applyFilter(this, input, output, clear);

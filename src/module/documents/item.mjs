@@ -1,7 +1,10 @@
 import { createAbility } from "../helpers/create-effects.mjs";
 import { fetchCategoryMembers } from "../helpers/wiki/_module.mjs";
 import {
-  ChangeableDocumentMixin, ChildDocumentMixin, CommonDocumentMixin, ParentDocumentMixin,
+  ChangeableDocumentMixin,
+  ChildDocumentMixin,
+  CommonDocumentMixin,
+  ParentDocumentMixin,
 } from "./mixins/_module.mjs";
 
 const { api } = foundry.applications;
@@ -26,8 +29,9 @@ const { Item } = foundry.documents;
  * @property {boolean} isOwner
  * @property {boolean} limited
  */
-export default class TeriockItem extends ChangeableDocumentMixin(ParentDocumentMixin(ChildDocumentMixin(
-  CommonDocumentMixin(Item)))) {
+export default class TeriockItem extends ChangeableDocumentMixin(
+  ParentDocumentMixin(ChildDocumentMixin(CommonDocumentMixin(Item))),
+) {
   /**
    * Modified to prevent {@link TeriockMechanic} and {@link TeriockWrapper} creation.
    * @inheritDoc
@@ -63,7 +67,8 @@ export default class TeriockItem extends ChangeableDocumentMixin(ParentDocumentM
    * @returns {Readonly<Teriock.Documents.ItemModelMetadata>}
    */
   get metadata() {
-    return /** @type {Readonly<Teriock.Documents.ItemModelMetadata>} */ super.metadata;
+    return /** @type {Readonly<Teriock.Documents.ItemModelMetadata>} */ super
+      .metadata;
   }
 
   /**
@@ -99,7 +104,10 @@ export default class TeriockItem extends ChangeableDocumentMixin(ParentDocumentM
     });
     if (pullType === "categories") {
       const pages = await fetchCategoryMembers(toPull);
-      const progress = ui.notifications.info(`Pulling Category:${toPull} from wiki.`, { progress: true });
+      const progress = foundry.ui.notifications.info(
+        `Pulling Category:${toPull} from wiki.`,
+        { progress: true },
+      );
       let pct = 0;
       for (const page of pages) {
         progress.update({
@@ -134,7 +142,7 @@ export default class TeriockItem extends ChangeableDocumentMixin(ParentDocumentM
    * @yields {TeriockEffect}
    * @returns {Generator<TeriockEffect, void, void>}
    */
-  * allApplicableEffects() {
+  *allApplicableEffects() {
     for (const effect of this.effects) {
       yield effect;
     }
@@ -146,12 +154,7 @@ export default class TeriockItem extends ChangeableDocumentMixin(ParentDocumentM
    * @deprecated
    */
   async bulkWikiPull() {
-    if ([
-      "ability",
-      "equipment",
-      "rank",
-      "power",
-    ].includes(this.type)) {
+    if (["ability", "equipment", "rank", "power"].includes(this.type)) {
       //noinspection JSUnusedGlobalSymbols
       const dialog = new api.DialogV2({
         buttons: [

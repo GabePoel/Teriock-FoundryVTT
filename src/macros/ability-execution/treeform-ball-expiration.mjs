@@ -1,5 +1,8 @@
 const data = /** @type {Teriock.HookData.EffectActivity} */ scope.data;
-if (data.doc.name === "Treeform Ball Effect" && actor.itemKeys.species.has("tree")) {
+if (
+  data.doc.name === "Treeform Ball Effect" &&
+  actor.itemKeys.species.has("tree")
+) {
   let hp = actor.getFlag("teriock", "preTransformHp") || 0;
   if (hp) {
     if (actor.system.hp.value < 0) {

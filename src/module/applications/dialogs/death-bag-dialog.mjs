@@ -12,23 +12,31 @@ import { TeriockDialog } from "../api/_module.mjs";
  */
 export default async function deathBagDialog(actor) {
   const contentHTML = document.createElement("div");
-  contentHTML.append(actor.system.schema.fields.deathBag.fields.pull.toFormGroup({}, {
-    name: "pull",
-    value: actor.system.deathBag.pull,
-  }));
+  contentHTML.append(
+    actor.system.schema.fields.deathBag.fields.pull.toFormGroup(
+      {},
+      {
+        name: "pull",
+        value: actor.system.deathBag.pull,
+      },
+    ),
+  );
   const stonesHTML = document.createElement("fieldset");
   const stonesLegendHTML = document.createElement("legend");
   stonesLegendHTML.innerText = "Stones";
   stonesHTML.append(stonesLegendHTML);
-  for (const color of [
-    "black",
-    "red",
-    "white",
-  ]) {
-    stonesHTML.append(actor.system.schema.fields.deathBag.fields.stones.fields[color].toFormGroup({}, {
-      name: color,
-      value: actor.system.deathBag.stones[color],
-    }));
+  for (const color of ["black", "red", "white"]) {
+    stonesHTML.append(
+      actor.system.schema.fields.deathBag.fields.stones.fields[
+        color
+      ].toFormGroup(
+        {},
+        {
+          name: color,
+          value: actor.system.deathBag.stones[color],
+        },
+      ),
+    );
   }
   contentHTML.append(stonesHTML);
   try {
@@ -45,14 +53,15 @@ export default async function deathBagDialog(actor) {
           default: true,
           callback: async (_event, button) => {
             const stonesFormulas = {};
-            for (const color of [
-              "black",
-              "red",
-              "white",
-            ]) {
-              stonesFormulas[color] = button.form.elements.namedItem(color).value;
+            for (const color of ["black", "red", "white"]) {
+              stonesFormulas[color] =
+                button.form.elements.namedItem(color).value;
             }
-            await deathBagPull(button.form.elements.namedItem("pull").value, stonesFormulas, actor);
+            await deathBagPull(
+              button.form.elements.namedItem("pull").value,
+              stonesFormulas,
+              actor,
+            );
           },
         },
       ],
@@ -71,7 +80,9 @@ async function deathBagPull(pullFormula, stonesFormulas, actor) {
   if (actor) {
     rollData = actor.getRollData();
   }
-  const toPullCount = Math.floor(Math.max(await evaluateAsync(pullFormula, rollData), 0));
+  const toPullCount = Math.floor(
+    Math.max(await evaluateAsync(pullFormula, rollData), 0),
+  );
   /** @type {Record<Teriock.Parameters.Actor.DeathBagStoneColor, number>} */
   const startingStones = {};
   /** @type {Record<Teriock.Parameters.Actor.DeathBagStoneColor, number>} */
@@ -80,14 +91,18 @@ async function deathBagPull(pullFormula, stonesFormulas, actor) {
   const bag = [];
   let totalStonesCount = 0;
   const wrappers = [];
-  for (const [ color, formula ] of Object.entries(stonesFormulas)) {
-    startingStones[color] = Math.floor(Math.max(await evaluateAsync(formula, rollData), 0));
+  for (const [color, formula] of Object.entries(stonesFormulas)) {
+    startingStones[color] = Math.floor(
+      Math.max(await evaluateAsync(formula, rollData), 0),
+    );
     totalStonesCount += startingStones[color];
     pulledStones[color] = 0;
     wrappers.push(`${startingStones[color]} ${TERIOCK.index.deathBag[color]}`);
   }
   if (totalStonesCount > 99) {
-    foundry.ui.notifications.error(`Bag has ${totalStonesCount} stones. Maximum of 99 allowed.`);
+    foundry.ui.notifications.error(
+      `Bag has ${totalStonesCount} stones. Maximum of 99 allowed.`,
+    );
   } else {
     for (const color of Object.keys(startingStones)) {
       for (let i = 0; i < startingStones[color]; i++) {
@@ -96,9 +111,10 @@ async function deathBagPull(pullFormula, stonesFormulas, actor) {
     }
     wrappers.push(`${bag.length} total`);
     if (bag.length < toPullCount) {
-      foundry.ui.notifications.error(`Bag has ${bag.length} stones. Cannot pull ${toPullCount} stones from it.`);
+      foundry.ui.notifications.error(
+        `Bag has ${bag.length} stones. Cannot pull ${toPullCount} stones from it.`,
+      );
     } else {
-
       let pulledCount = 0;
       while (pulledCount < toPullCount) {
         pulledCount++;
@@ -127,23 +143,26 @@ async function deathBagPull(pullFormula, stonesFormulas, actor) {
         blocks: [
           {
             title: "Description",
-            text: "You are surrounded by darkness, but aren't alone. Something is reaching out to you. Something?"
-              + " Several things? It's not clear. You reach back, grasp something, and start to pull. It pulls you as"
-              + " well.",
+            text:
+              "You are surrounded by darkness, but aren't alone. Something is reaching out to you. Something?" +
+              " Several things? It's not clear. You reach back, grasp something, and start to pull. It pulls you as" +
+              " well.",
             italic: true,
           },
         ],
       };
       const contentStart = buildMessage(messageParts);
       let content = contentStart.outerHTML;
-      const pullContent = await foundry.applications.handlebars.renderTemplate(systemPath(
-        "templates/message-templates/death-bag.hbs"), context);
+      const pullContent = await foundry.applications.handlebars.renderTemplate(
+        systemPath("templates/message-templates/death-bag.hbs"),
+        context,
+      );
       content = content + pullContent;
       const chatMessageData = {
         speaker: TeriockChatMessage.getSpeaker({ actor: actor }),
         system: {
           extraContent: content,
-          tags: [ `Pulled ${toPullCount} Stones` ],
+          tags: [`Pulled ${toPullCount} Stones`],
         },
       };
       await TeriockChatMessage.create(chatMessageData);

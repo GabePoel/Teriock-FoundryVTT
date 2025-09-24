@@ -3,19 +3,15 @@ import TeriockCommand from "../command.mjs";
 export const settemphp = new TeriockCommand(
   "settemphp",
   "Set temporary HP on targeted tokens. Usage: /settemphp <amount>",
-  async ({
-    args,
-    _chatData,
-    actors,
-  }) => {
+  async ({ args, _chatData, actors }) => {
     if (args.length === 0) {
-      ui.notifications.warn("Usage: /settemphp <amount>");
+      foundry.ui.notifications.warn("Usage: /settemphp <amount>");
       return;
     }
 
     const amount = parseInt(args[0]);
     if (isNaN(amount) || amount < 0) {
-      ui.notifications.warn("Amount must be a non-negative number.");
+      foundry.ui.notifications.warn("Amount must be a non-negative number.");
       return;
     }
 
@@ -23,10 +19,12 @@ export const settemphp = new TeriockCommand(
       await actor.takeSetTempHp(amount);
     }
 
-    ui.notifications.info(`Set ${amount} temporary HP on ${actors.length} target(s).`);
+    foundry.ui.notifications.info(
+      `Set ${amount} temporary HP on ${actors.length} target(s).`,
+    );
   },
   {
-    aliases: [ "sthp" ],
+    aliases: ["sthp"],
     category: "#support",
     requiresTarget: true,
   },

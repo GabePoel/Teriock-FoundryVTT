@@ -10,10 +10,13 @@ const { api } = foundry.applications;
 export async function _setTargets(rollConfig) {
   const user = /** @type {TeriockUser} */ game.user;
   rollConfig.useData.targets = user.targets;
-  if (rollConfig.abilityData.targets.size === 1 && rollConfig.abilityData.targets.has("self")) {
+  if (
+    rollConfig.abilityData.targets.size === 1 &&
+    rollConfig.abilityData.targets.has("self")
+  ) {
     const token = actorToken(rollConfig.useData.actor);
     if (token) {
-      rollConfig.useData.targets = new Set([ token ]);
+      rollConfig.useData.targets = new Set([token]);
     }
   }
   //await auraMeasure(rollConfig);
@@ -25,6 +28,7 @@ export async function _setTargets(rollConfig) {
  * @todo Fix this maybe.
  * @param {AbilityRollConfig} rollConfig
  */
+//eslint-disable-next-line @typescript-eslint/no-unused-vars
 async function auraMeasure(rollConfig) {
   if (rollConfig.abilityData.delivery.base === "aura") {
     const token = actorToken(rollConfig.useData.actor);
@@ -51,7 +55,10 @@ async function auraMeasure(rollConfig) {
             label: "Yes",
             callback: (_event, button) => {
               radius = Number(button.form.elements.namedItem("range").value);
-              const autoTargetCheckbox = /** @type {HTMLInputElement} */ button.form.elements.namedItem("auto");
+              const autoTargetCheckbox =
+                /** @type {HTMLInputElement} */ button.form.elements.namedItem(
+                  "auto",
+                );
               autoTarget = autoTargetCheckbox.checked;
             },
           },
@@ -62,28 +69,35 @@ async function auraMeasure(rollConfig) {
         const y = token.document.y;
         const templateData = {
           t: "circle",
-          x: x + (token.w) / 2,
-          y: y + (token.h) / 2,
+          x: x + token.w / 2,
+          y: y + token.h / 2,
           distance: radius,
         };
         const isEthereal = token.document.hasStatusEffect("ethereal");
         /** @type {MeasuredTemplateDocument} template */
-        const template = await MeasuredTemplateDocument.create(templateData, {
-          parent: canvas.scene,
-        });
+        const template =
+          await foundry.documents.MeasuredTemplateDocument.create(
+            templateData,
+            {
+              parent: game.canvas.scene,
+            },
+          );
         if (autoTarget) {
           let targets = new Set();
-          canvas.scene.tokens.forEach((targetToken) => {
+          game.canvas.scene.tokens.forEach((targetToken) => {
             let targeted = false;
             for (let i = 0; i < targetToken.width; i++) {
               for (let j = 0; j < targetToken.height; j++) {
                 const point = {
-                  x: targetToken.x + canvas.scene.grid.sizeX * (i + 0.5),
-                  y: targetToken.y + canvas.scene.grid.sizeY * (j + 0.5),
+                  x: targetToken.x + game.canvas.scene.grid.sizeX * (i + 0.5),
+                  y: targetToken.y + game.canvas.scene.grid.sizeY * (j + 0.5),
                 };
                 // TODO: Replace manual calculation with more robust template position checking.
-                const dist = Math.sqrt(Math.pow(point.x - templateData.x, 2) + Math.pow(point.y - templateData.y, 2));
-                targeted = dist <= (radius / 5) * canvas.scene.grid.sizeX;
+                const dist = Math.sqrt(
+                  Math.pow(point.x - templateData.x, 2) +
+                    Math.pow(point.y - templateData.y, 2),
+                );
+                targeted = dist <= (radius / 5) * game.canvas.scene.grid.sizeX;
                 if (targetToken === token) {
                   targeted = false;
                 }

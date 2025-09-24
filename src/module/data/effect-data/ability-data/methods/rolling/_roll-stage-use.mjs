@@ -12,9 +12,18 @@ export async function _stageUse(rollConfig) {
   rollConfig.useData.rollData = rollConfig.useData.actor.getRollData();
 
   // Calculate costs
-  rollConfig.useData.costs.hp = await calculateCost(rollConfig.abilityData.costs.hp, rollConfig.useData.rollData);
-  rollConfig.useData.costs.mp = await calculateCost(rollConfig.abilityData.costs.mp, rollConfig.useData.rollData);
-  rollConfig.useData.costs.gp = await calculateCost(rollConfig.abilityData.costs.gp, rollConfig.useData.rollData);
+  rollConfig.useData.costs.hp = await calculateCost(
+    rollConfig.abilityData.costs.hp,
+    rollConfig.useData.rollData,
+  );
+  rollConfig.useData.costs.mp = await calculateCost(
+    rollConfig.abilityData.costs.mp,
+    rollConfig.useData.rollData,
+  );
+  rollConfig.useData.costs.gp = await calculateCost(
+    rollConfig.abilityData.costs.gp,
+    rollConfig.useData.rollData,
+  );
 
   // Check if known to be warded
   if (rollConfig.abilityData.warded) {
@@ -22,11 +31,11 @@ export async function _stageUse(rollConfig) {
     rollConfig.useData.rollData["warded.abi"] = 1;
     rollConfig.useData.rollData["warded"] = 1;
   }
-  if (rollConfig.abilityData.interaction
-    === "attack"
-    && rollConfig.abilityData.delivery.base
-    === "weapon"
-    && rollConfig.useData.rollData["ward.wep"]) {
+  if (
+    rollConfig.abilityData.interaction === "attack" &&
+    rollConfig.abilityData.delivery.base === "weapon" &&
+    rollConfig.useData.rollData["ward.wep"]
+  ) {
     rollConfig.useData.modifiers.warded = true;
     rollConfig.useData.rollData["warded"] = 1;
   }
@@ -37,16 +46,21 @@ export async function _stageUse(rollConfig) {
   // Handle dialogs for variable costs and heightened
   await _handleDialogs(rollConfig);
   if (rollConfig.abilityData.adept.enabled) {
-    rollConfig.useData.costs.mp = rollConfig.useData.costs.mp - rollConfig.abilityData.adept.amount;
+    rollConfig.useData.costs.mp =
+      rollConfig.useData.costs.mp - rollConfig.abilityData.adept.amount;
   }
   if (rollConfig.abilityData.gifted.enabled) {
-    rollConfig.useData.costs.mp = rollConfig.useData.costs.mp + rollConfig.abilityData.gifted.amount;
+    rollConfig.useData.costs.mp =
+      rollConfig.useData.costs.mp + rollConfig.abilityData.gifted.amount;
   }
 
   // Update the roll data
   rollConfig.useData.rollData["h"] = rollConfig.useData.modifiers.heightened;
 
-  if (rollConfig.abilityData.piercing === "av0" || rollConfig.abilityData.piercing === "ub") {
+  if (
+    rollConfig.abilityData.piercing === "av0" ||
+    rollConfig.abilityData.piercing === "ub"
+  ) {
     rollConfig.useData.rollData["av0.abi"] = 2;
     rollConfig.useData.rollData["av0"] = 2;
   }
@@ -56,10 +70,7 @@ export async function _stageUse(rollConfig) {
   }
 
   // Add proficiency modifiers
-  if ([
-    "attack",
-    "feat",
-  ].includes(rollConfig.abilityData.interaction)) {
+  if (["attack", "feat"].includes(rollConfig.abilityData.interaction)) {
     if (rollConfig.useData.fluent) {
       rollConfig.useData.formula += " + @f";
     } else if (rollConfig.useData.proficient) {

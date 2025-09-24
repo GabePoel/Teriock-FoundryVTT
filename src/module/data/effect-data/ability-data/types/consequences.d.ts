@@ -1,7 +1,8 @@
 import type {
-  CombatExpirationMethod, CombatExpirationSourceType, CombatExpirationTiming,
+  CombatExpirationMethod,
+  CombatExpirationSourceType,
+  CombatExpirationTiming,
 } from "../../shared/shared-fields";
-import type { TeriockConsequence } from "../../../../documents/_documents.mjs";
 
 /**
  * Ability-specific expiration data
@@ -12,7 +13,7 @@ type AbilityExpiration = {
     /** <schema> Who triggers effect expiration? */
     who: {
       /** <schema> What is the relationship of the {@link TeriockActor} that triggers expirations? */
-      type: CombatExpirationSourceType
+      type: CombatExpirationSourceType;
     };
     /** <schema> What is the method of this expiration? */
     what: CombatExpirationMethod;
@@ -55,4 +56,3 @@ export interface AbilityImpact {
   /** <schema> Conditions caused by the {@link TeriockConsequence} created by this ability */
   statuses: Set<Teriock.Parameters.Condition.ConditionKey>;
 }
-

@@ -14,45 +14,44 @@ import TeriockVisionMode from "./base-vision-mode.mjs";
  * @returns {VisionMode}
  */
 export default function invisibleEtherealVisionMode() {
-  return new TeriockVisionMode({
-    id: "invisibleEthereal",
-    label: "Invisible Ethereal",
-    canvas: {
-      shader: shaders.ColorAdjustmentsSamplerShader,
-      uniforms: {
-        contrast: 1,
-        saturation: -1.0,
-        brightness: -2,
-        tint: [
-          0,
-          0,
-          0,
-        ],
+  return new TeriockVisionMode(
+    {
+      id: "invisibleEthereal",
+      label: "Invisible Ethereal",
+      canvas: {
+        shader: shaders.ColorAdjustmentsSamplerShader,
+        uniforms: {
+          contrast: 1,
+          saturation: -1.0,
+          brightness: -2,
+          tint: [0, 0, 0],
+        },
+      },
+      lighting: {
+        background: {
+          visibility: TeriockVisionMode.LIGHTING_VISIBILITY.DISABLED,
+        },
+        illumination: {
+          visibility: TeriockVisionMode.LIGHTING_VISIBILITY.DISABLED,
+        },
+        coloration: {
+          visibility: TeriockVisionMode.LIGHTING_VISIBILITY.DISABLED,
+        },
+        darkness: {
+          visibility: TeriockVisionMode.LIGHTING_VISIBILITY.DISABLED,
+        },
+      },
+      vision: {
+        darkness: { adaptive: false },
+        defaults: {
+          attenuation: 0,
+          contrast: 1,
+          saturation: -1.0,
+          brightness: -1,
+          color: "#000000",
+        },
       },
     },
-    lighting: {
-      background: {
-        visibility: TeriockVisionMode.LIGHTING_VISIBILITY.DISABLED,
-      },
-      illumination: {
-        visibility: TeriockVisionMode.LIGHTING_VISIBILITY.DISABLED,
-      },
-      coloration: {
-        visibility: TeriockVisionMode.LIGHTING_VISIBILITY.DISABLED,
-      },
-      darkness: {
-        visibility: TeriockVisionMode.LIGHTING_VISIBILITY.DISABLED,
-      },
-    },
-    vision: {
-      darkness: { adaptive: false },
-      defaults: {
-        attenuation: 0,
-        contrast: 1,
-        saturation: -1.0,
-        brightness: -1,
-        color: "#000000",
-      },
-    },
-  }, { animated: true });
+    { animated: true },
+  );
 }

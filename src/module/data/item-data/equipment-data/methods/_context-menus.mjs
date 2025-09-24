@@ -12,9 +12,14 @@ export function _entries(equipmentData) {
   return [
     {
       name: "Use in Two Hands",
-      icon: makeIcon(getRollIcon(equipmentData.damage.twoHanded.value), "contextMenu"),
+      icon: makeIcon(
+        getRollIcon(equipmentData.damage.twoHanded.value),
+        "contextMenu",
+      ),
       callback: equipmentData.roll.bind(equipmentData, { twoHanded: true }),
-      condition: equipmentData.damage.twoHanded.value !== equipmentData.damage.base.value,
+      condition:
+        equipmentData.damage.twoHanded.value !==
+        equipmentData.damage.base.value,
       group: "usage",
     },
     {
@@ -28,7 +33,10 @@ export function _entries(equipmentData) {
       name: "Read Magic",
       icon: makeIcon("hand", "contextMenu"),
       callback: equipmentData.readMagic.bind(equipmentData),
-      condition: !equipmentData.identified && equipmentData.reference && equipmentData.powerLevel === "unknown",
+      condition:
+        !equipmentData.identified &&
+        equipmentData.reference &&
+        equipmentData.powerLevel === "unknown",
       group: "usage",
     },
     {

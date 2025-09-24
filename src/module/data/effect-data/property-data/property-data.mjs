@@ -2,7 +2,11 @@ import { selectDialog } from "../../../applications/dialogs/select-dialog.mjs";
 import { propertyPseudoHooks } from "../../../constants/system/pseudo-hooks.mjs";
 import { mergeFreeze, pureUuid, safeUuid } from "../../../helpers/utils.mjs";
 import { HierarchyDataMixin, WikiDataMixin } from "../../mixins/_module.mjs";
-import { FormulaField, ListField, TextField } from "../../shared/fields/_module.mjs";
+import {
+  FormulaField,
+  ListField,
+  TextField,
+} from "../../shared/fields/_module.mjs";
 import TeriockBaseEffectModel from "../base-effect-data/base-effect-data.mjs";
 import { changeField } from "../shared/shared-fields.mjs";
 import { _messageParts } from "./methods/_messages.mjs";
@@ -22,13 +26,15 @@ const { fields } = foundry.data;
  * @mixes WikiDataMixin
  * @mixes HierarchyDataMixin
  */
-export default class TeriockPropertyModel extends HierarchyDataMixin(WikiDataMixin(TeriockBaseEffectModel)) {
+export default class TeriockPropertyModel extends HierarchyDataMixin(
+  WikiDataMixin(TeriockBaseEffectModel),
+) {
   /**
    * @inheritDoc
    * @type {Readonly<Teriock.Documents.EffectModelMetadata>}
    */
   static metadata = mergeFreeze(super.metadata, {
-    childEffectTypes: [ "property" ],
+    childEffectTypes: ["property"],
     modifies: "Item",
     namespace: "Property",
     type: "property",
@@ -66,9 +72,11 @@ export default class TeriockPropertyModel extends HierarchyDataMixin(WikiDataMix
           label: "Changes",
           hint: "Changes made to the target equipment as part of the property's ongoing effect.",
         }),
-        macros: new fields.TypedObjectField(new fields.StringField({
-          choices: propertyPseudoHooks,
-        })),
+        macros: new fields.TypedObjectField(
+          new fields.StringField({
+            choices: propertyPseudoHooks,
+          }),
+        ),
       }),
     });
   }
@@ -148,7 +156,7 @@ export default class TeriockPropertyModel extends HierarchyDataMixin(WikiDataMix
     if (this.modifies === "Item") {
       macroPrefix = "item." + macroPrefix;
     }
-    for (const [ safeUuid, pseudoHook ] of Object.entries(this.applies.macros)) {
+    for (const [safeUuid, pseudoHook] of Object.entries(this.applies.macros)) {
       const change = {
         key: `${macroPrefix}${pseudoHook}`,
         value: pureUuid(safeUuid),
@@ -158,11 +166,12 @@ export default class TeriockPropertyModel extends HierarchyDataMixin(WikiDataMix
       changes.push(change);
     }
     this.parent.changes = foundry.utils.deepClone(changes);
-    if (this.damageType
-      && this.damageType.length
-      > 0
-      && this.parent.allSups.filter((p) => p.system.damageType?.trim().length > 0).length
-      === 0) {
+    if (
+      this.damageType &&
+      this.damageType.length > 0 &&
+      this.parent.allSups.filter((p) => p.system.damageType?.trim().length > 0)
+        .length === 0
+    ) {
       this.parent.changes.push({
         key: "item.system.damage.types",
         value: this.damageType.toLowerCase(),

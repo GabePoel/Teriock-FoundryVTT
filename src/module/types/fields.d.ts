@@ -3,7 +3,7 @@ declare global {
     export type _FormulaFieldOptions = {
       /** Is this formula deterministic? */
       deterministic?: boolean;
-    }
+    };
 
     type Modifiable<T, U> = {
       /**
@@ -24,27 +24,36 @@ declare global {
        * deterministic.
        */
       value: U;
-    }
+    };
 
     /**
      * Modifiable field that is always handled as a number.
      */
-    export type ModifiableNumber = Modifiable<number, number>
+    export type ModifiableNumber = Modifiable<number, number>;
 
     /**
      * Modifiable field that is edited as a formula but evaluates to a number.
      */
-    export type ModifiableDeterministic = Modifiable<string, number>
+    export type ModifiableDeterministic = Modifiable<string, number>;
 
     /**
      * Modifiable field that does not need to be evaluated deterministically.
      */
-    export type ModifiableIndeterministic = Modifiable<string, string>
+    export type ModifiableIndeterministic = Modifiable<string, string>;
 
     /**
      * Valid change key comparison operations.
      */
-    export type SpecialChangeCheck = "eq" | "ne" | "has" | "includes" | "gt" | "lt" | "gte" | "lte" | "exists"
+    export type SpecialChangeCheck =
+      | "eq"
+      | "ne"
+      | "has"
+      | "includes"
+      | "gt"
+      | "lt"
+      | "gte"
+      | "lte"
+      | "exists";
 
     /**
      * Original special change keys are of the format: `![type]__[key]__[operation]__[value]__[originalKey]`
@@ -55,8 +64,8 @@ declare global {
         key: string;
         check: Teriock.Fields.SpecialChangeCheck;
         value: string;
-      }
-    }
+      };
+    };
   }
 }
 

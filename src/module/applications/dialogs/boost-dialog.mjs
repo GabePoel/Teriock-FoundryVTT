@@ -12,10 +12,7 @@ const { fields } = foundry.data;
  * @returns {Promise<string>} The roll formula with boost changes applied.
  */
 export default async function boostDialog(rollFormula, options = {}) {
-  const {
-    crit = false,
-    label = "Make Roll",
-  } = options;
+  const { crit = false, label = "Make Roll" } = options;
   let formula = rollFormula;
   const formulaField = new fields.StringField({
     initial: rollFormula,
@@ -55,10 +52,16 @@ export default async function boostDialog(rollFormula, options = {}) {
       ok: {
         label: label,
         callback: (_event, button) => {
-          const updatedFormula = button.form.elements.namedItem("formula").value;
+          const updatedFormula =
+            button.form.elements.namedItem("formula").value;
           const boosts = Number(button.form.elements.namedItem("boosts").value);
-          const deboosts = Number(button.form.elements.namedItem("deboosts").value);
-          const critButton = /** @type {HTMLInputElement} */ button.form.elements.namedItem("crit");
+          const deboosts = Number(
+            button.form.elements.namedItem("deboosts").value,
+          );
+          const critButton =
+            /** @type {HTMLInputElement} */ button.form.elements.namedItem(
+              "crit",
+            );
           const crit = critButton.checked;
           const roll = new TeriockRoll(updatedFormula, {});
           roll.setBoost(boosts - deboosts);

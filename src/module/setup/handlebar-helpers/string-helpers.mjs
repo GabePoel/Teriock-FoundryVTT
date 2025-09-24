@@ -1,7 +1,11 @@
 export default function registerStringHelpers() {
-  Handlebars.registerHelper("lc", (str) => typeof str === "string" ? str.toLowerCase() : "");
+  Handlebars.registerHelper("lc", (str) =>
+    typeof str === "string" ? str.toLowerCase() : "",
+  );
 
-  Handlebars.registerHelper("uc", (str) => typeof str === "string" ? str.toUpperCase() : "");
+  Handlebars.registerHelper("uc", (str) =>
+    typeof str === "string" ? str.toUpperCase() : "",
+  );
 
   Handlebars.registerHelper("ucFirst", (str) => {
     if (typeof str !== "string") {
@@ -10,7 +14,9 @@ export default function registerStringHelpers() {
     return str.charAt(0).toUpperCase() + str.slice(1);
   });
 
-  Handlebars.registerHelper("length", (str) => typeof str === "string" ? str.length : 0);
+  Handlebars.registerHelper("length", (str) =>
+    typeof str === "string" ? str.length : 0,
+  );
 
   Handlebars.registerHelper("prefix", (str, prefix) => {
     if (str && str !== "0" && str !== "+0") {
@@ -57,9 +63,11 @@ export default function registerStringHelpers() {
     if (html == null) {
       return "";
     }
-    return new Handlebars.SafeString(String(html)
-      .replace(/&/g, "&amp;")
-      .replace(/"/g, "&quot;")
-      .replace(/'/g, "&#39;"));
+    return new Handlebars.SafeString(
+      String(html)
+        .replace(/&/g, "&amp;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;"),
+    );
   });
 }

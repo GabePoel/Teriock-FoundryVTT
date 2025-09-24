@@ -1,3 +1,5 @@
+//noinspection JSUnresolvedReference
+
 /**
  * Migrates equipment data from older versions to the current format.
  * Converts numeric tier and maxQuantity values to the new schema format with raw and derived fields.
@@ -44,10 +46,16 @@ export function _migrateData(data) {
   if (foundry.utils.hasProperty(data, "sb")) {
     data.fightingStyle = data.sb;
   }
-  if (foundry.utils.hasProperty(data, "damage") && foundry.utils.getType(data.damage) === "string") {
+  if (
+    foundry.utils.hasProperty(data, "damage") &&
+    foundry.utils.getType(data.damage) === "string"
+  ) {
     data.damage = { base: { saved: data.damage } };
   }
-  if (foundry.utils.hasProperty(data, "twoHandedDamage") && foundry.utils.getType(data.twoHandedDamage) === "string") {
+  if (
+    foundry.utils.hasProperty(data, "twoHandedDamage") &&
+    foundry.utils.getType(data.twoHandedDamage) === "string"
+  ) {
     if (typeof data.damage !== "object") {
       data.damage = {};
     }
@@ -63,15 +71,18 @@ export function _migrateData(data) {
   if (typeof data.range === "string" || typeof data.range === "number") {
     data.range = { long: { saved: data.range } };
   }
-  if (typeof data.shortRange === "string" || typeof data.shortRange === "number") {
-    if (!typeof data.range !== "object") {
+  if (
+    typeof data.shortRange === "string" ||
+    typeof data.shortRange === "number"
+  ) {
+    if (typeof data.range !== "object") {
       data.range = {};
     }
     data.range.short = { saved: data.shortRange };
     foundry.utils.deleteProperty(data, "shortRange");
   }
   if (typeof data.ranged === "boolean") {
-    if (!typeof data.range !== "object") {
+    if (typeof data.range !== "object") {
       data.range = {};
     }
     data.range.ranged = data.ranged;

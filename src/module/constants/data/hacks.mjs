@@ -6,7 +6,7 @@ export const hacksData = {
     id: "armHack1",
     img: getIcon("hacks", "1st Arm Hack"),
     name: "1st Arm Hack",
-    statuses: [ "hacked" ],
+    statuses: ["hacked"],
     hud: false,
     changes: [
       {
@@ -22,7 +22,7 @@ export const hacksData = {
     id: "armHack2",
     img: getIcon("hacks", "2nd Arm Hack"),
     name: "2nd Arm Hack",
-    statuses: [ "hacked" ],
+    statuses: ["hacked"],
     hud: false,
     changes: [
       {
@@ -38,10 +38,7 @@ export const hacksData = {
     id: "bodyHack",
     img: getIcon("hacks", "Body Hack"),
     name: "Body Hack",
-    statuses: [
-      "hacked",
-      "immobilized",
-    ],
+    statuses: ["hacked", "immobilized"],
     hud: false,
     changes: [
       {
@@ -57,10 +54,7 @@ export const hacksData = {
     id: "earHack",
     img: getIcon("hacks", "Ear Hack"),
     name: "Ear Hack",
-    statuses: [
-      "deaf",
-      "hacked",
-    ],
+    statuses: ["deaf", "hacked"],
     hud: false,
     changes: [
       {
@@ -76,10 +70,7 @@ export const hacksData = {
     id: "eyeHack",
     img: getIcon("hacks", "Eye Hack"),
     name: "Eye Hack",
-    statuses: [
-      "blind",
-      "hacked",
-    ],
+    statuses: ["blind", "hacked"],
     hud: false,
     changes: [
       {
@@ -95,10 +86,7 @@ export const hacksData = {
     id: "legHack1",
     img: getIcon("hacks", "1st Leg Hack"),
     name: "1st Leg Hack",
-    statuses: [
-      "hacked",
-      "slowed",
-    ],
+    statuses: ["hacked", "slowed"],
     hud: false,
     changes: [
       {
@@ -114,10 +102,7 @@ export const hacksData = {
     id: "legHack2",
     img: getIcon("hacks", "2nd Leg Hack"),
     name: "2nd Leg Hack",
-    statuses: [
-      "hacked",
-      "immobilized",
-    ],
+    statuses: ["hacked", "immobilized"],
     hud: false,
     changes: [
       {
@@ -133,10 +118,7 @@ export const hacksData = {
     id: "mouthHack",
     img: getIcon("hacks", "Mouth Hack"),
     name: "Mouth Hack",
-    statuses: [
-      "hacked",
-      "mute",
-    ],
+    statuses: ["hacked", "mute"],
     hud: false,
     changes: [
       {
@@ -152,10 +134,7 @@ export const hacksData = {
     id: "noseHack",
     img: getIcon("hacks", "Nose Hack"),
     name: "Nose Hack",
-    statuses: [
-      "hacked",
-      "anosmatic",
-    ],
+    statuses: ["hacked", "anosmatic"],
     hud: false,
     changes: [
       {

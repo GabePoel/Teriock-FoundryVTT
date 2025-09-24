@@ -36,10 +36,12 @@ const ARCHETYPE_FACES = {
  */
 function extractAbilityNames(metaData, attr) {
   const val = metaData.getAttribute(attr);
-  return val ? val
-    .split(",")
-    .map((a) => a.trim())
-    .filter(Boolean) : [];
+  return val
+    ? val
+        .split(",")
+        .map((a) => a.trim())
+        .filter(Boolean)
+    : [];
 }
 
 /**
@@ -51,11 +53,7 @@ function extractAbilityNames(metaData, attr) {
  * @private
  */
 export async function _parse(rankData, rawHTML) {
-  const {
-    className,
-    classRank,
-    archetype,
-  } = rankData;
+  const { className, classRank, archetype } = rankData;
   const classValue = TERIOCK.options.rank[archetype].classes[className].name;
   // const toDelete = rankData.parent.abilities.map((a) => a.id);
   // await rankData.parent.deleteEmbeddedDocuments("ActiveEffect", toDelete);
@@ -75,11 +73,7 @@ export async function _parse(rankData, rawHTML) {
   const toCreate = [];
 
   // Create abilities
-  for (const rank of [
-    0,
-    1,
-    2,
-  ]) {
+  for (const rank of [0, 1, 2]) {
     if (classRank === rank) {
       for (const name of rankNames[rank]) {
         toCreate.push(name);
@@ -95,7 +89,7 @@ export async function _parse(rankData, rawHTML) {
     }
   }
 
-  const progress = ui.notifications.info(`Pulling Rank from wiki.`, {
+  const progress = foundry.ui.notifications.info(`Pulling Rank from wiki.`, {
     progress: true,
   });
 
@@ -105,7 +99,9 @@ export async function _parse(rankData, rawHTML) {
    * @returns {Promise<Object>} Promise that resolves with ability creation result
    */
   async function createSingleAbility(abilityName) {
-    let ability = rankData.parent.getAbilities().find((a) => a.name === abilityName);
+    let ability = rankData.parent
+      .getAbilities()
+      .find((a) => a.name === abilityName);
     if (ability) {
       await ability.system.wikiPull({ notify: false });
     } else {
@@ -118,7 +114,9 @@ export async function _parse(rankData, rawHTML) {
   }
 
   // Create an array of promises for parallel processing
-  const abilityPromises = toCreate.map((abilityName) => createSingleAbility(abilityName));
+  const abilityPromises = toCreate.map((abilityName) =>
+    createSingleAbility(abilityName),
+  );
 
   // Update progress to show processing has started
   progress.update({
@@ -130,7 +128,10 @@ export async function _parse(rankData, rawHTML) {
   try {
     const results = await Promise.all(abilityPromises);
 
-    const toDelete = rankData.parent.getAbilities().filter((a) => !toCreate.includes(a.name)).map((a) => a.id);
+    const toDelete = rankData.parent
+      .getAbilities()
+      .filter((a) => !toCreate.includes(a.name))
+      .map((a) => a.id);
     await rankData.parent.deleteEmbeddedDocuments("ActiveEffect", toDelete);
 
     // Update progress to completion
@@ -139,7 +140,10 @@ export async function _parse(rankData, rawHTML) {
       message: `Successfully created ${results.length} abilities.`,
     });
 
-    console.log(`Created abilities for rank:`, results.map((r) => r.abilityName));
+    console.log(
+      `Created abilities for rank:`,
+      results.map((r) => r.abilityName),
+    );
   } catch (error) {
     progress.update({
       pct: 0.9,
@@ -174,10 +178,7 @@ export async function _parse(rankData, rawHTML) {
 
   progress.update({ pct: 1 });
 
-  cleanObject(parameters, [
-    "description",
-    "flaws",
-  ]);
+  cleanObject(parameters, ["description", "flaws"]);
 
   return {
     system: parameters,

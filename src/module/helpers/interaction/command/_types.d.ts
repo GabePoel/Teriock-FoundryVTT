@@ -23,7 +23,7 @@ declare global {
       /** Raw arguments from the chat message */
       args: string[];
       /** Original chat message data */
-      chatData: Object;
+      chatData: object;
       /** Targeted actorsUuids */
       actors: TeriockActor[];
     };
@@ -50,7 +50,9 @@ declare global {
     /**
      * Function signature for command callbacks
      */
-    export type Callback = (context: Teriock.Command.CallbackContext) => Promise<void>;
+    export type Callback = (
+      context: Teriock.Command.CallbackContext,
+    ) => Promise<void>;
 
     /**
      * Valid command categories.

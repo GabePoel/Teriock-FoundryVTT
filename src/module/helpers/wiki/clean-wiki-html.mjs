@@ -23,17 +23,11 @@ export default async function cleanWikiHTML(html, options = {}) {
     return "";
   }
 
-  const toRemove = [
-    "img",
-    "figcaption",
-    "figure",
-  ];
+  const toRemove = ["img", "figcaption", "figure"];
   if (noSubs) {
-    toRemove.push(...[
-      ".expandable-container",
-      ".ability-sub-container",
-      ".metadata",
-    ]);
+    toRemove.push(
+      ...[".expandable-container", ".ability-sub-container", ".metadata"],
+    );
   }
   for (const el of toRemove) {
     doc.querySelectorAll(el).forEach((el) => el.remove());

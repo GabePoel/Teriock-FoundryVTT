@@ -2,10 +2,7 @@ import ImageMagick from "magickwand.js";
 import fs from "node:fs/promises";
 import path from "node:path";
 
-const {
-  Magick,
-  MagickCore,
-} = await ImageMagick;
+const { Magick, MagickCore } = await ImageMagick;
 
 const ROOT = process.cwd();
 const REF_PATH = path.join(ROOT, "ref.json");
@@ -38,43 +35,52 @@ async function ensureLayout() {
 async function loadAllGroups() {
   const raw = JSON.parse(await fs.readFile(REF_PATH, "utf8"));
   if (!raw || typeof raw !== "object" || Array.isArray(raw)) {
-    throw new Error("Error: ref.json must be a JSON object with top-level groups.");
+    throw new Error(
+      "Error: ref.json must be a JSON object with top-level groups.",
+    );
   }
 
   /** @type {Record<string, {outRel: string, variants: Record<string, {dark:string, mid:string, light:string}>}>} */
   const groups = {};
   console.log("Loading color schemes from ref.json...");
 
-  for (const [ groupToken, spec ] of Object.entries(raw)) {
+  for (const [groupToken, spec] of Object.entries(raw)) {
     if (!spec || typeof spec !== "object" || Array.isArray(spec)) {
       console.warn(`  Skipping group "${groupToken}" (must be an object).`);
       continue;
     }
-    const outRel = typeof spec.out === "string" && spec.out.trim() ? spec.out.trim() : groupToken.toLowerCase();
+    const outRel =
+      typeof spec.out === "string" && spec.out.trim()
+        ? spec.out.trim()
+        : groupToken.toLowerCase();
     const colors = spec.colors;
 
     if (!colors || typeof colors !== "object" || Array.isArray(colors)) {
-      console.warn(`  Skipping group "${groupToken}" (missing "colors" object).`);
+      console.warn(
+        `  Skipping group "${groupToken}" (missing "colors" object).`,
+      );
       continue;
     }
 
     const validated = {};
     console.log(`- Group "${groupToken}" → out: "${outRel}" variants:`);
-    for (const [ name, defs ] of Object.entries(colors)) {
-      if (!defs
-        || typeof defs
-        !== "object"
-        || typeof defs.dark
-        !== "string"
-        || typeof defs.mid
-        !== "string"
-        || typeof defs.light
-        !== "string") {
-        console.warn(`    • Skipping "${name}" (needs {dark, mid, light} hex strings).`);
+    for (const [name, defs] of Object.entries(colors)) {
+      if (
+        !defs ||
+        typeof defs !== "object" ||
+        typeof defs.dark !== "string" ||
+        typeof defs.mid !== "string" ||
+        typeof defs.light !== "string"
+      ) {
+        console.warn(
+          `    • Skipping "${name}" (needs {dark, mid, light} hex strings).`,
+        );
         continue;
       }
       validated[name] = defs;
-      console.log(`    • ${name}: Dark=${defs.dark}, Mid=${defs.mid}, Light=${defs.light}`);
+      console.log(
+        `    • ${name}: Dark=${defs.dark}, Mid=${defs.mid}, Light=${defs.light}`,
+      );
     }
 
     if (Object.keys(validated).length) {
@@ -134,7 +140,9 @@ function hexToRgb16(hex) {
   if (!m) {
     throw new Error(`Invalid hex color: ${hex}`);
   }
-  const r8 = parseInt(m[1], 16), g8 = parseInt(m[2], 16), b8 = parseInt(m[3], 16);
+  const r8 = parseInt(m[1], 16),
+    g8 = parseInt(m[2], 16),
+    b8 = parseInt(m[3], 16);
   const r = Math.round((r8 / 255) * Q);
   const g = Math.round((g8 / 255) * Q);
   const b = Math.round((b8 / 255) * Q);
@@ -156,12 +164,9 @@ function linearInterpolation(a, b, t) {
  * @returns {Promise<Magick.Image>}
  */
 async function makeThreeStopGradient(colorHex) {
-  const {
-    r: cr,
-    g: cg,
-    b: cb,
-  } = hexToRgb16(colorHex);
-  const w = 256, h = 1;
+  const { r: cr, g: cg, b: cb } = hexToRgb16(colorHex);
+  const w = 256,
+    h = 1;
   const buf = new Uint16Array(w * h * 4);
 
   for (let x = 0; x < 128; x++) {
@@ -256,7 +261,8 @@ async function makeMidMaskFromGray(grayImg, alpha) {
  */
 async function blendWithMask(imgA, imgB, maskGray) {
   const size = await imgA.sizeAsync();
-  const w = size.width(), h = size.height();
+  const w = size.width(),
+    h = size.height();
   const a = new Uint16Array(w * h * 4);
   const b = new Uint16Array(w * h * 4);
   const m = new Uint16Array(w * h * 4);
@@ -286,7 +292,8 @@ async function blendWithMask(imgA, imgB, maskGray) {
  */
 async function extractAlphaBuffer(img) {
   const size = await img.sizeAsync();
-  const w = size.width(), h = size.height();
+  const w = size.width(),
+    h = size.height();
   const rgba = new Uint16Array(w * h * 4);
   await img.writeAsync(0, 0, w, h, "RGBA", rgba);
   const alpha = new Uint16Array(w * h);
@@ -329,26 +336,20 @@ async function processOneTemplate(file, groupToken, groupSpec) {
   const outAbs = path.join(OUT_BASE, groupSpec.outRel);
   await fs.mkdir(outAbs, { recursive: true });
 
-  console.log(`Processing template: ${filename} (group="${groupToken}" → out="${groupSpec.outRel}")`);
+  console.log(
+    `Processing template: ${filename} (group="${groupToken}" → out="${groupSpec.outRel}")`,
+  );
 
   const tpl = new Magick.Image();
   await tpl.readAsync(file);
-  const {
-    alpha: tplAlpha,
-    w,
-    h,
-  } = await extractAlphaBuffer(tpl);
+  const { alpha: tplAlpha, w, h } = await extractAlphaBuffer(tpl);
 
   const tplGray = await toGray(tpl);
   const midMask = await makeMidMaskFromGray(tplGray, tplAlpha);
 
-  for (const [
-    variantName, {
-      dark,
-      mid,
-      light
-    }
-  ] of Object.entries(groupSpec.variants)) {
+  for (const [variantName, { dark, mid, light }] of Object.entries(
+    groupSpec.variants,
+  )) {
     const nameBase = base.replace(groupToken, variantName);
 
     const darkOutName = `${nameBase.replace(variantName, `${variantName}_dark`)}.${ext}`;
@@ -401,7 +402,7 @@ async function processOneTemplate(file, groupToken, groupSpec) {
     const templatesByGroup = await findTemplatesByGroup(groupTokens);
 
     let processedAny = false;
-    for (const [ groupToken, variants ] of Object.entries(groups)) {
+    for (const [groupToken, variants] of Object.entries(groups)) {
       const templates = templatesByGroup[groupToken] || [];
       if (templates.length === 0) {
         console.warn(`Skipping group "${groupToken}" (no matching templates).`);

@@ -42,9 +42,13 @@ const createButton = (className, content, dataset = {}) => {
 export default class ListField extends ArrayField {
   /** @inheritDoc */
   _toInput(config) {
-    const btn = createButton("teriock-array-field-add", "<i class=\"fa-solid fa-plus\"></i> Add Item", {
-      path: this.fieldPath,
-    });
+    const btn = createButton(
+      "teriock-array-field-add",
+      '<i class="fa-solid fa-plus"></i> Add Item',
+      {
+        path: this.fieldPath,
+      },
+    );
     if (config.name) {
       btn.setAttribute("name", config.name);
     }

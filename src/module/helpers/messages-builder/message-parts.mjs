@@ -72,7 +72,14 @@ export function messageWrapper(parent, content) {
  * @param {string|null} elements - Additional elements for special formatting.
  * @returns {HTMLDivElement|null} The created block element, or null if no text provided.
  */
-export function messageBlock(parent, title, text, italic = false, special = null, elements = null) {
+export function messageBlock(
+  parent,
+  title,
+  text,
+  italic = false,
+  special = null,
+  elements = null,
+) {
   if (!text) {
     return null;
   }
@@ -80,7 +87,8 @@ export function messageBlock(parent, title, text, italic = false, special = null
   const block = createElement("div", { className: "abm-block" });
   const titleElement = createElement("div", {
     className: "abm-block-title",
-    innerHTML: special === "ES" ? `With the Elder Sorcery of ${elements}...` : title,
+    innerHTML:
+      special === "ES" ? `With the Elder Sorcery of ${elements}...` : title,
   });
   const textElement = createElement("div", {
     className: "abm-block-text",
@@ -117,9 +125,13 @@ export function messageHeader(parent, image, text, fontClass = "tfont") {
     className: "tmessage-header-image",
     src: image,
   });
-  const imageContainer = createElement("div", {
-    className: "tmessage-header-image-container timage",
-  }, headerImage);
+  const imageContainer = createElement(
+    "div",
+    {
+      className: "tmessage-header-image-container timage",
+    },
+    headerImage,
+  );
   imageContainer.setAttribute("data-tooltip", "Open Image");
   imageContainer.setAttribute("data-src", image);
   const headerText = createElement("div", {
@@ -127,7 +139,12 @@ export function messageHeader(parent, image, text, fontClass = "tfont") {
     innerHTML: text,
   });
 
-  const header = createElement("div", { className: "tmessage-header" }, imageContainer, headerText);
+  const header = createElement(
+    "div",
+    { className: "tmessage-header" },
+    imageContainer,
+    headerText,
+  );
   parent.appendChild(header);
   return header;
 }
@@ -146,14 +163,22 @@ function barIcon(parent, iconClass, label, first = true) {
     style: "font-size: 1em;",
   });
 
-  const wrapper = createElement("div", { className: "abm-icon-wrapper tsubtle" }, icon);
+  const wrapper = createElement(
+    "div",
+    { className: "abm-icon-wrapper tsubtle" },
+    icon,
+  );
   if (label) {
     wrapper.setAttribute("data-tooltip", label);
     wrapper.setAttribute("data-tooltip-direction", "LEFT");
   }
   const iconParent = parent.querySelector(".abm-bar-icon") || parent;
 
-  first ? iconParent.prepend(wrapper) : iconParent.appendChild(wrapper);
+  if (first) {
+    iconParent.prepend(wrapper);
+  } else {
+    iconParent.appendChild(wrapper);
+  }
   return wrapper;
 }
 
@@ -165,7 +190,13 @@ function barIcon(parent, iconClass, label, first = true) {
  * @param {string} typeKey - The type key to filter entities by.
  * @param {string} iconFallback - Fallback icon class if no specific icon is found.
  */
-function addEmbeddedBlock(entities, blocks, name, typeKey, iconFallback = "hashtag") {
+function addEmbeddedBlock(
+  entities,
+  blocks,
+  name,
+  typeKey,
+  iconFallback = "hashtag",
+) {
   const config = TERIOCK.options.ability.form;
   const typeOrder = Object.keys(config);
 
@@ -189,20 +220,15 @@ function addEmbeddedBlock(entities, blocks, name, typeKey, iconFallback = "hasht
 
   const listItems = filtered
     .map((e) => {
-      const {
-        name,
-        uuid,
-        system,
-      } = e;
-      const {
-        color = "",
-        icon = iconFallback,
-      } = config[system["form"]] || {};
-      const quantity = system.quantity, maxQuantity = system.maxQuantity?.derived;
+      const { name, uuid, system } = e;
+      const { color = "", icon = iconFallback } = config[system["form"]] || {};
+      const quantity = system.quantity,
+        maxQuantity = system.maxQuantity?.derived;
 
-      const suffix = typeKey === "resource" && quantity !== undefined ? `&nbsp;(${quantity}${maxQuantity
-        ? `/${maxQuantity}`
-        : ""})` : "";
+      const suffix =
+        typeKey === "resource" && quantity !== undefined
+          ? `&nbsp;(${quantity}${maxQuantity ? `/${maxQuantity}` : ""})`
+          : "";
 
       return `
         <li class="tmessage-embedded-li" data-tooltip-direction="LEFT">

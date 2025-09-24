@@ -42,4 +42,4 @@ export type CostAdjustment = {
   enabled: boolean;
   /** <schema> Mow much the MP cost is changed */
   amount: number;
-}
+};

@@ -1,4 +1,8 @@
-import { deathBagDialog, healDialog, revitalizeDialog } from "../../../applications/dialogs/_module.mjs";
+import {
+  deathBagDialog,
+  healDialog,
+  revitalizeDialog,
+} from "../../../applications/dialogs/_module.mjs";
 import { freeze } from "../../../helpers/utils.mjs";
 import { CommonTypeModel } from "../../models/_module.mjs";
 import { _migrateData } from "./methods/_migrate-data.mjs";
@@ -32,13 +36,7 @@ export default class TeriockBaseActorModel extends CommonTypeModel {
       "fluency",
       "resource",
     ],
-    childItemTypes: [
-      "equipment",
-      "mechanic",
-      "power",
-      "rank",
-      "species",
-    ],
+    childItemTypes: ["equipment", "mechanic", "power", "rank", "species"],
     childMacroTypes: [],
   });
 
@@ -59,7 +57,9 @@ export default class TeriockBaseActorModel extends CommonTypeModel {
    */
   get primaryAttacker() {
     if (this.wielding.attacker) {
-      const item = /** @type {TeriockEquipment} */ this.parent.items.get(this.wielding.attacker);
+      const item = /** @type {TeriockEquipment} */ this.parent.items.get(
+        this.wielding.attacker,
+      );
       if (item?.system.isEquipped) {
         return item;
       }
@@ -73,7 +73,9 @@ export default class TeriockBaseActorModel extends CommonTypeModel {
    */
   get primaryBlocker() {
     if (this.wielding.blocker) {
-      const item = /** @type {TeriockEquipment} */ this.parent.items.get(this.wielding.blocker);
+      const item = /** @type {TeriockEquipment} */ this.parent.items.get(
+        this.wielding.blocker,
+      );
       if (item?.system.isEquipped) {
         return item;
       }

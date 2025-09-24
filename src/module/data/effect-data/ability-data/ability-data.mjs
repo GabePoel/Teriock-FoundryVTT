@@ -2,7 +2,11 @@ import { selectDialog } from "../../../applications/dialogs/select-dialog.mjs";
 import { pseudoHooks } from "../../../constants/system/pseudo-hooks.mjs";
 import { insertElderSorceryMask } from "../../../helpers/html.mjs";
 import { mergeFreeze, safeUuid } from "../../../helpers/utils.mjs";
-import { ConsumableDataMixin, HierarchyDataMixin, WikiDataMixin } from "../../mixins/_module.mjs";
+import {
+  ConsumableDataMixin,
+  HierarchyDataMixin,
+  WikiDataMixin,
+} from "../../mixins/_module.mjs";
 import TeriockBaseEffectModel from "../base-effect-data/base-effect-data.mjs";
 import { _generateChanges } from "./methods/_generate-changes.mjs";
 import { _messageParts } from "./methods/_messages.mjs";
@@ -24,14 +28,15 @@ import { _defineSchema } from "./methods/schema/_schema.mjs";
  * @mixes HierarchyDataMixin
  * @mixes WikiDataMixin
  */
-export default class TeriockAbilityModel extends HierarchyDataMixin(ConsumableDataMixin(WikiDataMixin(
-  TeriockBaseEffectModel))) {
+export default class TeriockAbilityModel extends HierarchyDataMixin(
+  ConsumableDataMixin(WikiDataMixin(TeriockBaseEffectModel)),
+) {
   /**
    * @inheritDoc
    * @type {Readonly<Teriock.Documents.EffectModelMetadata>}
    */
   static metadata = mergeFreeze(super.metadata, {
-    childEffectTypes: [ "ability" ],
+    childEffectTypes: ["ability"],
     hierarchy: true,
     namespace: "Ability",
     type: "ability",
@@ -81,7 +86,8 @@ export default class TeriockAbilityModel extends HierarchyDataMixin(ConsumableDa
     if (this.improvements.featSaveImprovement.attribute) {
       const att = this.improvements.featSaveImprovement.attribute;
       const amount = this.improvements.featSaveImprovement.amount;
-      const amountVal = TERIOCK.options.ability.featSaveImprovementAmount[amount];
+      const amountVal =
+        TERIOCK.options.ability.featSaveImprovementAmount[amount];
       return `This ability gives you @L[Core:${amountVal} Bonus]{${amount}} in @L[Core:${att.toUpperCase()}] @L[Core:Feat Interaction]{feat saves}.`;
     }
     return "";
@@ -101,7 +107,8 @@ export default class TeriockAbilityModel extends HierarchyDataMixin(ConsumableDa
   /** @inheritDoc */
   get messageParts() {
     return {
-      ...super.messageParts, ..._messageParts(this),
+      ...super.messageParts,
+      ..._messageParts(this),
     };
   }
 
@@ -137,6 +144,7 @@ export default class TeriockAbilityModel extends HierarchyDataMixin(ConsumableDa
     return suppressed;
   }
 
+  //noinspection JSUnusedGlobalSymbols
   /**
    * String that represents all the valid targets.
    * @returns {string}

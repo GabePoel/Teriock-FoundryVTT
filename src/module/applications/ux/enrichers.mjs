@@ -15,42 +15,40 @@ const enricherIcons = {
   Tradecraft: documentOptions.fluency.icon,
 };
 
-const rulesEnrichers = Object.keys(enricherIcons)
-  .map((type) => ({
-    pattern: new RegExp(`@${type}\\[(.+?)\\](?:\\{(.+?)\\})?`, "g"),
-    enricher: async (match, _options) => {
-      const fileName = match[1];
-      const title = match[2];
+const rulesEnrichers = Object.keys(enricherIcons).map((type) => ({
+  pattern: new RegExp(`@${type}\\[(.+?)\\](?:\\{(.+?)\\})?`, "g"),
+  enricher: async (match, _options) => {
+    const fileName = match[1];
+    const title = match[2];
 
-      const compendiumIndex = game.teriock.packs.rules().index.getName(type);
-      if (!compendiumIndex) {
-        return null;
-      }
+    const compendiumIndex = game.teriock.packs.rules().index.getName(type);
+    if (!compendiumIndex) {
+      return null;
+    }
 
-      const compendium = await foundry.utils.fromUuid(compendiumIndex.uuid);
-      if (!compendium) {
-        return null;
-      }
+    const compendium = await foundry.utils.fromUuid(compendiumIndex.uuid);
+    if (!compendium) {
+      return null;
+    }
 
-      const page = compendium.pages.getName(fileName);
-      if (!page) {
-        return null;
-      }
+    const page = compendium.pages.getName(fileName);
+    if (!page) {
+      return null;
+    }
 
-      const uuid = page.uuid;
-      if (!uuid) {
-        return null;
-      }
+    const uuid = page.uuid;
+    if (!uuid) {
+      return null;
+    }
 
-      const wrapper = document.createElement("div");
-      wrapper.innerHTML
-        = `<a class="content-link" draggable="true" data-link="" data-uuid="${uuid}" data-id="${uuid.slice(-16)}" data-tooltip="${fileName}">
+    const wrapper = document.createElement("div");
+    wrapper.innerHTML = `<a class="content-link" draggable="true" data-link="" data-uuid="${uuid}" data-id="${uuid.slice(-16)}" data-tooltip="${fileName}">
       <i class="fa-solid fa-${enricherIcons[type]}"></i>${title || fileName}</a>`;
 
-      return wrapper.firstElementChild;
-    },
-    replaceParent: false,
-  }));
+    return wrapper.firstElementChild;
+  },
+  replaceParent: false,
+}));
 
 const abilityEnricher = {
   pattern: /@Ability\[(.+?)\](?:\{(.+?)\})?/g,
@@ -138,10 +136,7 @@ const escapeRx = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
  */
 export const makeRollEnricher = (BUTTONS) => {
   const keys = Object.keys(BUTTONS);
-  const lookup = Object.fromEntries(keys.map((k) => [
-    k.toLowerCase(),
-    k,
-  ]));
+  const lookup = Object.fromEntries(keys.map((k) => [k.toLowerCase(), k]));
   const keyAlt = keys.map(escapeRx).join("|");
   const any = "([^]*)";
   const source = String.raw`\[\[\s*\/(${keyAlt})\s+${any}?\s*\]\]`;
@@ -154,10 +149,7 @@ export const makeRollEnricher = (BUTTONS) => {
         return null;
       }
       const formula = (match[2] ?? "").trim();
-      const {
-        label,
-        icon,
-      } = BUTTONS[typeKey];
+      const { label, icon } = BUTTONS[typeKey];
       const a = document.createElement("a");
       a.className = "content-link";
       a.draggable = false;

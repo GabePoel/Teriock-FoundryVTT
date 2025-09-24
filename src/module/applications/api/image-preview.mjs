@@ -1,9 +1,6 @@
 import { imageContextMenuOptions } from "../shared/_module.mjs";
 
-const {
-  ux,
-  api,
-} = foundry.applications;
+const { ux, api } = foundry.applications;
 
 // noinspection JSClosureCompilerSyntax
 /**
@@ -11,17 +8,16 @@ const {
  * Provides image display functionality with context menus for image interactions.
  * @extends {ApplicationV2}
  */
-export default class TeriockImagePreviewer extends api.HandlebarsApplicationMixin(api.ApplicationV2) {
+export default class TeriockImagePreviewer extends api.HandlebarsApplicationMixin(
+  api.ApplicationV2,
+) {
   /**
    * Default options for the image sheet.
    * @type {object}
    * @static
    */
   static DEFAULT_OPTIONS = {
-    classes: [
-      "teriock",
-      "image-preview",
-    ],
+    classes: ["teriock", "image-preview"],
     window: {
       icon: "fa-solid fa-image",
       title: "Image Preview",
@@ -40,8 +36,9 @@ export default class TeriockImagePreviewer extends api.HandlebarsApplicationMixi
    */
   static PARTS = {
     image: {
-      template: "systems/teriock/src/templates/document-templates/shared/image.hbs",
-      scrollable: [ "" ],
+      template:
+        "systems/teriock/src/templates/document-templates/shared/image.hbs",
+      scrollable: [""],
     },
   };
 

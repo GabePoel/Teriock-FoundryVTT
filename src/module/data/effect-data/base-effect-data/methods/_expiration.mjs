@@ -12,7 +12,11 @@ export function _shouldExpire(effectData) {
   }
   const duration = effect.duration;
   const currentTime = game.time.worldTime;
-  if (!duration || duration.startTime === undefined || duration.seconds === undefined) {
+  if (
+    !duration ||
+    duration.startTime === undefined ||
+    duration.seconds === undefined
+  ) {
     return false;
   }
   const expirationTime = duration.startTime + duration.seconds;

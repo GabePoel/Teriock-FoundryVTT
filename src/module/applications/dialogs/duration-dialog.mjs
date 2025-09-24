@@ -8,30 +8,60 @@ import { TeriockDialog } from "../api/_module.mjs";
  */
 export default async function durationDialog(ability) {
   const contentHtml = document.createElement("div");
-  contentHtml.append(ability.system.schema.fields.duration.fields.unit.toFormGroup({}, {
-    name: "unit",
-    value: ability.system.duration.unit,
-  }));
-  contentHtml.append(ability.system.schema.fields.duration.fields.quantity.toFormGroup({}, {
-    name: "quantity",
-    value: ability.system.duration.quantity,
-  }));
-  contentHtml.append(ability.system.schema.fields.duration.fields.conditions.fields.present.toFormGroup({}, {
-    name: "present",
-    value: ability.system.duration.conditions.present,
-  }));
-  contentHtml.append(ability.system.schema.fields.duration.fields.conditions.fields.absent.toFormGroup({}, {
-    name: "absent",
-    value: ability.system.duration.conditions.absent,
-  }));
-  contentHtml.append(ability.system.schema.fields.duration.fields.stationary.toFormGroup({}, {
-    name: "stationary",
-    value: ability.system.duration.stationary,
-  }));
-  contentHtml.append(ability.system.schema.fields.duration.fields.description.toFormGroup({}, {
-    name: "description",
-    value: ability.system.duration.description,
-  }));
+  contentHtml.append(
+    ability.system.schema.fields.duration.fields.unit.toFormGroup(
+      {},
+      {
+        name: "unit",
+        value: ability.system.duration.unit,
+      },
+    ),
+  );
+  contentHtml.append(
+    ability.system.schema.fields.duration.fields.quantity.toFormGroup(
+      {},
+      {
+        name: "quantity",
+        value: ability.system.duration.quantity,
+      },
+    ),
+  );
+  contentHtml.append(
+    ability.system.schema.fields.duration.fields.conditions.fields.present.toFormGroup(
+      {},
+      {
+        name: "present",
+        value: ability.system.duration.conditions.present,
+      },
+    ),
+  );
+  contentHtml.append(
+    ability.system.schema.fields.duration.fields.conditions.fields.absent.toFormGroup(
+      {},
+      {
+        name: "absent",
+        value: ability.system.duration.conditions.absent,
+      },
+    ),
+  );
+  contentHtml.append(
+    ability.system.schema.fields.duration.fields.stationary.toFormGroup(
+      {},
+      {
+        name: "stationary",
+        value: ability.system.duration.stationary,
+      },
+    ),
+  );
+  contentHtml.append(
+    ability.system.schema.fields.duration.fields.description.toFormGroup(
+      {},
+      {
+        name: "description",
+        value: ability.system.duration.description,
+      },
+    ),
+  );
   try {
     await TeriockDialog.prompt({
       window: { title: `Set ${ability.system.nameString} Duration` },
@@ -40,26 +70,31 @@ export default async function durationDialog(ability) {
       ok: {
         label: "Apply",
         callback: async (_event, button) => {
-          let description = button.form.elements.namedItem("description").value.trim() || "";
+          let description =
+            button.form.elements.namedItem("description").value.trim() || "";
           const quantity = button.form.elements.namedItem("quantity").value;
           const unit = button.form.elements.namedItem("unit").value;
-          const present = /** @type {Teriock.Parameters.Condition.ConditionKey[]} */ button.form.elements.namedItem(
-            "present").value;
-          const absent = /** @type {Teriock.Parameters.Condition.ConditionKey[]} */ button.form.elements.namedItem(
-            "absent").value;
-          const stationaryElement = /** @type {HTMLInputElement} */ button.form.elements.namedItem("stationary");
+          const present =
+            /** @type {Teriock.Parameters.Condition.ConditionKey[]} */ button.form.elements.namedItem(
+              "present",
+            ).value;
+          const absent =
+            /** @type {Teriock.Parameters.Condition.ConditionKey[]} */ button.form.elements.namedItem(
+              "absent",
+            ).value;
+          const stationaryElement =
+            /** @type {HTMLInputElement} */ button.form.elements.namedItem(
+              "stationary",
+            );
           const stationary = stationaryElement.checked;
           if (description.length === 0) {
-            description = `${TERIOCK.options.ability.duration.unit[unit]}${quantity !== 1 && ![
-              "instant",
-              "noLimit",
-              "untilDawn",
-            ].includes(unit) ? "s" : ""}`;
-            if (![
-              "instant",
-              "noLimit",
-              "untilDawn",
-            ].includes(unit)) {
+            description = `${TERIOCK.options.ability.duration.unit[unit]}${
+              quantity !== 1 &&
+              !["instant", "noLimit", "untilDawn"].includes(unit)
+                ? "s"
+                : ""
+            }`;
+            if (!["instant", "noLimit", "untilDawn"].includes(unit)) {
               description = `${quantity} ${description}`;
             }
             let conditionTerms = [

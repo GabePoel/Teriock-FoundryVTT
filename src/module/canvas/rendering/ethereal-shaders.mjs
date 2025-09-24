@@ -1,7 +1,5 @@
-const {
-  BackgroundVisionShader,
-  ColorationVisionShader,
-} = foundry.canvas.rendering.shaders;
+const { BackgroundVisionShader, ColorationVisionShader } =
+  foundry.canvas.rendering.shaders;
 
 /**
  * Simple spooky background vision shader
@@ -10,11 +8,7 @@ export class EtherealBackgroundVisionShader extends BackgroundVisionShader {
   /** @inheritdoc */
   static defaultUniforms = {
     ...super.defaultUniforms,
-    colorTint: [
-      0.5,
-      0.6,
-      0.8,
-    ], // Spooky blue tint
+    colorTint: [0.5, 0.6, 0.8], // Spooky blue tint
   };
 
   /** @inheritdoc */
@@ -65,11 +59,7 @@ export class EtherealColorationVisionShader extends ColorationVisionShader {
   /** @inheritdoc */
   static defaultUniforms = {
     ...super.defaultUniforms,
-    colorEffect: [
-      0.4,
-      0.5,
-      0.8,
-    ], // Ghostly blue
+    colorEffect: [0.4, 0.5, 0.8], // Ghostly blue
   };
 
   /** @inheritdoc */

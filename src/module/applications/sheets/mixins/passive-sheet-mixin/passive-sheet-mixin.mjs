@@ -6,72 +6,80 @@ import { pureUuid, safeUuid } from "../../../../helpers/utils.mjs";
  */
 export default (Base) => {
   //noinspection JSClosureCompilerSyntax
-  return (/**
-   * @extends {TeriockBaseEffectSheet}
-   * @mixes CommonSheetMixin
-   */
-  class PassiveSheetMixin extends Base {
+  return (
     /**
-     * @inheritDoc
-     * Default sheet options.
-     * @type {Partial<ApplicationConfiguration>}
+     * @extends {TeriockBaseEffectSheet}
+     * @mixes CommonSheetMixin
      */
-    static DEFAULT_OPTIONS = {
-      actions: {
-        unlinkMacro: this._unlinkMacro,
-        changeMacroRunHook: this._changeMacroRunHook,
-      },
-    };
-
-    /**
-     * Change the run pseudo-hook for a given macro
-     * @param {Event} _event - The event object.
-     * @param {HTMLElement} target - The target element.
-     * @returns {Promise<void>}
-     * @private
-     */
-    static async _changeMacroRunHook(_event, target) {
-      if (this.editable) {
-        const uuid = target.dataset.parentId;
-        await this.document.system.changeMacroRunHook(uuid);
-      } else {
-        foundry.ui.notifications.warn("Sheet must be editable to change when a macro runs.");
-      }
-    }
-
-    /** @inheritDoc */
-    static async _unlinkMacro(_event, target) {
-      if (this.editable) {
-        const uuid = target.dataset.parentId;
-        await this.document.system.unlinkMacro(uuid);
-      } else {
-        foundry.ui.notifications.warn("Sheet must be editable to unlink macro.");
-      }
-    }
-
-    //noinspection JSUnusedGlobalSymbols
-    /** @inheritDoc */
-    async _onDropMacro(_event, data) {
-      const updateData = {
-        [`system.applies.macros.${safeUuid(data?.uuid)}`]: "use",
+    class PassiveSheetMixin extends Base {
+      /**
+       * @inheritDoc
+       * Default sheet options.
+       * @type {Partial<ApplicationConfiguration>}
+       */
+      static DEFAULT_OPTIONS = {
+        actions: {
+          unlinkMacro: this._unlinkMacro,
+          changeMacroRunHook: this._changeMacroRunHook,
+        },
       };
-      await this.document.update(updateData);
-    }
 
-    //noinspection JSUnusedGlobalSymbols
-    /** @inheritDoc */
-    async _prepareMacroContext(context) {
-      context.macros = [];
-      for (const [ safeUuid, pseudoHook ] of Object.entries(this.document.system.applies.macros)) {
-        const macro = await foundry.utils.fromUuid(pureUuid(safeUuid));
-        if (macro) {
-          context.macros.push({
-            safeUuid: safeUuid,
-            macro: macro,
-            pseudoHook: pseudoHook,
-          });
+      /**
+       * Change the run pseudo-hook for a given macro
+       * @param {Event} _event - The event object.
+       * @param {HTMLElement} target - The target element.
+       * @returns {Promise<void>}
+       * @private
+       */
+      static async _changeMacroRunHook(_event, target) {
+        if (this.editable) {
+          const uuid = target.dataset.parentId;
+          await this.document.system.changeMacroRunHook(uuid);
+        } else {
+          foundry.ui.notifications.warn(
+            "Sheet must be editable to change when a macro runs.",
+          );
+        }
+      }
+
+      /** @inheritDoc */
+      static async _unlinkMacro(_event, target) {
+        if (this.editable) {
+          const uuid = target.dataset.parentId;
+          await this.document.system.unlinkMacro(uuid);
+        } else {
+          foundry.ui.notifications.warn(
+            "Sheet must be editable to unlink macro.",
+          );
+        }
+      }
+
+      //noinspection JSUnusedGlobalSymbols
+      /** @inheritDoc */
+      async _onDropMacro(_event, data) {
+        const updateData = {
+          [`system.applies.macros.${safeUuid(data?.uuid)}`]: "use",
+        };
+        await this.document.update(updateData);
+      }
+
+      //noinspection JSUnusedGlobalSymbols
+      /** @inheritDoc */
+      async _prepareMacroContext(context) {
+        context.macros = [];
+        for (const [safeUuid, pseudoHook] of Object.entries(
+          this.document.system.applies.macros,
+        )) {
+          const macro = await foundry.utils.fromUuid(pureUuid(safeUuid));
+          if (macro) {
+            context.macros.push({
+              safeUuid: safeUuid,
+              macro: macro,
+              pseudoHook: pseudoHook,
+            });
+          }
         }
       }
     }
-  });
-}
+  );
+};

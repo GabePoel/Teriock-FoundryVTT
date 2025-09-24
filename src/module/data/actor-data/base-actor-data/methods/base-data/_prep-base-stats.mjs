@@ -50,18 +50,20 @@ export function _prepareHpMp(actorData) {
       Object.assign(actorData.mpDice, species.system.mpDice);
     }
   });
-  docSort(actorData.parent.ranks).slice(0, diceLimit).forEach((rank) => {
-    if (rank.system.applyHp) {
-      actorData.hp.base += rank.system.totalHp;
-      hpDieBox += rank.system.renderedHitDice;
-      Object.assign(actorData.hpDice, rank.system.hpDice);
-    }
-    if (rank.system.applyMp) {
-      actorData.mp.base += rank.system.totalMp;
-      mpDieBox += rank.system.renderedManaDice;
-      Object.assign(actorData.mpDice, rank.system.mpDice);
-    }
-  });
+  docSort(actorData.parent.ranks)
+    .slice(0, diceLimit)
+    .forEach((rank) => {
+      if (rank.system.applyHp) {
+        actorData.hp.base += rank.system.totalHp;
+        hpDieBox += rank.system.renderedHitDice;
+        Object.assign(actorData.hpDice, rank.system.hpDice);
+      }
+      if (rank.system.applyMp) {
+        actorData.mp.base += rank.system.totalMp;
+        mpDieBox += rank.system.renderedManaDice;
+        Object.assign(actorData.mpDice, rank.system.mpDice);
+      }
+    });
   let hpMax = Math.max(1, actorData.hp.base);
   let mpMax = Math.max(1, actorData.mp.base);
   actorData.hp.max = hpMax;

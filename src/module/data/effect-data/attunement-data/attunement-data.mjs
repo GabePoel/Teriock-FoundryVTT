@@ -50,12 +50,13 @@ export default class TeriockAttunementModel extends TeriockBaseEffectModel {
   /** @inheritDoc */
   get messageParts() {
     return {
-      ...super.messageParts, ...(this.targetDocument?.system?.messageParts || {
+      ...super.messageParts,
+      ...(this.targetDocument?.system?.messageParts || {
         bars: [
           {
             icon: "fa-weight-hanging",
             label: "Tier",
-            wrappers: [ `Tier ${this.tier}` ],
+            wrappers: [`Tier ${this.tier}`],
           },
         ],
       }),

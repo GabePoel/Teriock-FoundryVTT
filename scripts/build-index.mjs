@@ -3,11 +3,21 @@ import { JSDOM } from "jsdom";
 import path from "path";
 import { fileURLToPath } from "url";
 import {
-  classes, conditions, damageTypes, drainTypes, keywords, tradecrafts, weaponFightingStyles,
+  classes,
+  conditions,
+  damageTypes,
+  drainTypes,
+  keywords,
+  tradecrafts,
+  weaponFightingStyles,
 } from "../src/module/constants/index/_module.mjs";
 import { getIcon } from "../src/module/helpers/path.mjs";
 import { toCamelCase, toKebabCase } from "../src/module/helpers/string.mjs";
-import { fetchCategoryMembers, fetchPageCategories, fetchWikiPageHTML } from "../src/module/helpers/wiki/_module.mjs";
+import {
+  fetchCategoryMembers,
+  fetchPageCategories,
+  fetchWikiPageHTML,
+} from "../src/module/helpers/wiki/_module.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -123,8 +133,14 @@ async function quickSaveCategoryMembers(category, name, options) {
 
 const createSimpleCategoriesAndNames = async () => {
   for (const category of SIMPLE_CATEGORIES) {
-    const CATEGORY_OUTPUT_JSON = path.resolve(__dirname, `../src/index/categories/${toKebabCase(category)}.json`);
-    const NAME_OUTPUT_JSON = path.resolve(__dirname, `../src/index/names/${toKebabCase(category)}.json`);
+    const CATEGORY_OUTPUT_JSON = path.resolve(
+      __dirname,
+      `../src/index/categories/${toKebabCase(category)}.json`,
+    );
+    const NAME_OUTPUT_JSON = path.resolve(
+      __dirname,
+      `../src/index/names/${toKebabCase(category)}.json`,
+    );
     let pages = await fetchCategoryMembers(category);
     pages = pages.filter((page) => !page.title.includes("Category:"));
     const namespace = pages[0].title.split(":")[0];
@@ -136,17 +152,23 @@ const createSimpleCategoriesAndNames = async () => {
     for (let i = 0; i < titles.length; i += BATCH_SIZE) {
       const batch = titles.slice(i, i + BATCH_SIZE);
 
-      console.log(`Batch ${Math.floor(i / BATCH_SIZE) + 1} of ${Math.ceil(titles.length / BATCH_SIZE)}`);
+      console.log(
+        `Batch ${Math.floor(i / BATCH_SIZE) + 1} of ${Math.ceil(titles.length / BATCH_SIZE)}`,
+      );
 
-      const batchResults = await Promise.all(batch.map(async (title) => {
-        const pageName = `${namespace}:${title}`;
-        const categoryPages = await fetchPageCategories(pageName);
-        const categoryTitles = categoryPages.map((page) => page.title.split("Category:")[1]);
-        return {
-          title: title,
-          categories: categoryTitles,
-        };
-      }));
+      const batchResults = await Promise.all(
+        batch.map(async (title) => {
+          const pageName = `${namespace}:${title}`;
+          const categoryPages = await fetchPageCategories(pageName);
+          const categoryTitles = categoryPages.map(
+            (page) => page.title.split("Category:")[1],
+          );
+          return {
+            title: title,
+            categories: categoryTitles,
+          };
+        }),
+      );
 
       // Merge batch results into the final object
       for (const result of batchResults) {
@@ -158,7 +180,9 @@ const createSimpleCategoriesAndNames = async () => {
     // Write JSON
     await saveObject(categories, CATEGORY_OUTPUT_JSON);
     await saveObject(names, NAME_OUTPUT_JSON);
-    console.log(`JSONs saved to ${CATEGORY_OUTPUT_JSON} and ${NAME_OUTPUT_JSON}`);
+    console.log(
+      `JSONs saved to ${CATEGORY_OUTPUT_JSON} and ${NAME_OUTPUT_JSON}`,
+    );
   }
 };
 
@@ -178,7 +202,8 @@ const createCustomNames = async () => {
     includePages: false,
     includeCategories: true,
     filterTitle: (title) => title.includes("powered abilities"),
-    processTitle: (title) => title.replace("ly", "").replace(" powered abilities", ""),
+    processTitle: (title) =>
+      title.replace("ly", "").replace(" powered abilities", ""),
   });
   await quickSaveCategoryMembers("Effects", "effect-types", {
     includePages: false,
@@ -209,11 +234,15 @@ const createCustomNames = async () => {
     includePages: true,
     includeCategories: false,
   });
-  await quickSaveCategoryMembers("Weapon fighting styles", "weapon-fighting-styles", {
-    includePages: true,
-    includeCategories: false,
-    processTitle: (title) => title.replace(" Fighting Style", ""),
-  });
+  await quickSaveCategoryMembers(
+    "Weapon fighting styles",
+    "weapon-fighting-styles",
+    {
+      includePages: true,
+      includeCategories: false,
+      processTitle: (title) => title.replace(" Fighting Style", ""),
+    },
+  );
   await quickSaveCategoryMembers("Material properties", "material-properties", {
     includePages: true,
     includeCategories: false,
@@ -226,7 +255,7 @@ const createCustomNames = async () => {
 
 const createCustomData = async () => {
   const obj = {};
-  for (const [ key, value ] of Object.entries(conditions)) {
+  for (const [key, value] of Object.entries(conditions)) {
     const pageTitle = `Condition:${value}`;
     const html = await fetchWikiPageHTML(pageTitle, {
       noSubs: true,
@@ -237,11 +266,13 @@ const createCustomData = async () => {
     });
     const dom = new JSDOM(html);
     const document = dom.window.document;
-    const statuses = document.querySelector(".condition-box")
-      ?.getAttribute("data-children")
-      .split(",")
-      .map((s) => s.trim())
-      .filter(Boolean) || [];
+    const statuses =
+      document
+        .querySelector(".condition-box")
+        ?.getAttribute("data-children")
+        .split(",")
+        .map((s) => s.trim())
+        .filter(Boolean) || [];
     obj[key] = {
       _id: (key + "000000000000000").slice(0, 16),
       description: cleanHtml,
@@ -266,10 +297,13 @@ async function quickSaveContent(choices, namespace, name, suffix = "") {
   const pageNames = Object.values(choices);
   const obj = {};
   for (const pageName of pageNames) {
-    obj[toCamelCase(pageName)] = await fetchWikiPageHTML(`${namespace}:${pageName}${suffix}`, {
-      noSubs: true,
-      cleanSpans: true,
-    });
+    obj[toCamelCase(pageName)] = await fetchWikiPageHTML(
+      `${namespace}:${pageName}${suffix}`,
+      {
+        noSubs: true,
+        cleanSpans: true,
+      },
+    );
   }
   await saveObject(obj, relPath(`index/content/${name}`));
 }
@@ -280,7 +314,12 @@ const createCustomContent = async () => {
   await quickSaveContent(damageTypes, "Damage", "damage-types");
   await quickSaveContent(drainTypes, "Drain", "drain-types");
   await quickSaveContent(keywords, "Keyword", "keywords");
-  await quickSaveContent(weaponFightingStyles, "Property", "weapon-fighting-styles", " Fighting Style");
+  await quickSaveContent(
+    weaponFightingStyles,
+    "Property",
+    "weapon-fighting-styles",
+    " Fighting Style",
+  );
   await quickSaveContent(conditions, "Condition", "conditions");
 };
 

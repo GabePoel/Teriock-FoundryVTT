@@ -1,12 +1,12 @@
 .ab-sheet-sidebar {
+  backdrop-filter: blur(4px);
+  background-color: rgba(255, 255, 255, 0.3);
   display: none;
+  height: 100%;
+  left: 0;
   position: absolute;
   top: 0;
-  left: 0;
   width: 100%;
-  height: 100%;
-  background-color: rgba(255, 255, 255, 0.3);
-  backdrop-filter: blur(4px);
 }
 
 .ab-sheet-top {
@@ -15,9 +15,9 @@
 }
 
 .ab-header {
+  align-items: center;
   display: flex;
   flex-direction: row;
-  align-items: center;
   position: relative;
 
   &.shattered {
@@ -27,61 +27,61 @@
   }
 
   .ab-profile-img {
-    top: 0;
-    left: 0;
     display: block;
-    height: 4em;
-    width: 4em;
-    // padding: 1em;
-    position: relative;
     flex: 0 0 auto;
+    height: 4em;
+    left: 0;
+    position: relative;
+    // padding: 1em;
+    top: 0;
+    width: 4em;
 
     img {
       border: none;
+      cursor: pointer;
+      filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.4));
+      height: inherit;
       max-width: 100%;
       object-fit: cover;
       object-position: 50% 50%;
-      height: inherit;
       width: inherit;
-      cursor: pointer;
-      filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.4));
     }
 
     &::after {
+      background-color: var(--color-border);
       content: "";
       display: block;
-      top: 0.5em;
-      right: 0;
       height: calc(100% - 1em);
-      width: 1px;
-      position: absolute;
-      background-color: var(--color-border);
       opacity: 0.5;
+      position: absolute;
+      right: 0;
+      top: 0.5em;
       transform: translateX(50%);
+      width: 1px;
     }
   }
 
   .ab-title {
     // height: clamp(3em, 6vw, 6em);
-    padding-inline: 0.5em;
     flex: 1 1 auto;
     min-width: 0;
+    padding-inline: 0.5em;
 
     input,
     .ab-title-text {
       //   font-size: clamp(1.25rem, 4vw, var(--font-size-48));
-      font-size: clamp(1rem, 4vw, 2rem);
-      padding: 0;
-      height: 100%;
-      border: none;
       background: none;
-      text-align: center;
+      border: none;
+      box-shadow: none;
+      font-size: clamp(1rem, 4vw, 2rem);
       font-weight: lighter;
+      height: 100%;
+      margin: 0 0 0 14px;
       overflow: hidden;
+      padding: 0;
+      text-align: center;
       text-overflow: ellipsis;
       white-space: nowrap;
-      box-shadow: none;
-      margin: 0 0 0 14px;
       width: calc(100% - 28px);
 
       &.tfont,
@@ -93,36 +93,36 @@
     input {
       &:hover {
         background-color: color-mix(
-                        in srgb,
-                        var(--color-text-primary),
-                        transparent 90%
+          in srgb,
+          var(--color-text-primary),
+          transparent 90%
         );
       }
 
       &:active {
         background-color: color-mix(
-                        in srgb,
-                        var(--color-text-primary),
-                        transparent 80%
+          in srgb,
+          var(--color-text-primary),
+          transparent 80%
         );
       }
     }
   }
 
   .ab-top-buttons-container {
+    flex: 0 0 auto;
     height: 4em;
     width: 4em;
-    flex: 0 0 auto;
 
     .ab-top-buttons {
+      align-items: center;
       display: flex;
       flex-direction: row;
       flex-wrap: wrap;
-      align-items: center;
       margin: 0.5em;
-      width: 4.5em;
       position: absolute;
       right: 0;
+      width: 4.5em;
     }
   }
 }
@@ -131,51 +131,51 @@
   border-bottom: 1px solid var(--color-border);
 
   .ab-bar {
+    border-top: 1px solid var(--color-border);
     display: flex;
     flex-direction: row;
     justify-content: center;
-    border-top: 1px solid var(--color-border);
 
     .ab-box-container {
-      position: relative;
       flex: 1;
+      position: relative;
 
       &:not(:last-child)::after {
+        background-color: var(--color-border);
         content: "";
         display: block;
-        top: 0.5em;
-        right: 0;
         height: calc(100% - 1em);
-        width: 1px;
-        position: absolute;
-        background-color: var(--color-border);
         opacity: 0.5;
+        position: absolute;
+        right: 0;
+        top: 0.5em;
         transform: translateX(50%);
+        width: 1px;
       }
 
       //   border-left: 1px solid var(--color-border);
       .ab-box {
-        display: flex;
-        flex-direction: row;
-        justify-content: left;
         align-items: center;
-        padding: 0.25em;
-        margin: 0.25em;
         border: 1px solid transparent;
         border-radius: 3px;
+        display: flex;
+        flex-direction: row;
         height: calc(100% - 0.5em);
+        justify-content: left;
+        margin: 0.25em;
+        padding: 0.25em;
         position: relative;
 
         .ab-box-icon {
-          width: 1em;
-          height: 1em;
-          margin-right: 0.25em;
-          position: absolute;
           display: block;
-          top: calc(50% - 0.5em);
+          height: 1em;
           left: 0.25em;
-          text-align: center;
+          margin-right: 0.25em;
           opacity: 0.5;
+          position: absolute;
+          text-align: center;
+          top: calc(50% - 0.5em);
+          width: 1em;
 
           i {
             font-size: 1em;
@@ -183,19 +183,19 @@
         }
 
         .ab-box-label {
+          color: var(--color-text-subtle);
+          height: 1em;
           position: absolute;
           right: 0.25em;
-          height: 1em;
-          color: var(--color-text-subtle);
           text-transform: uppercase;
           top: calc(50% - 0.625em);
         }
 
         &:hover {
           background-color: color-mix(
-                          in srgb,
-                          var(--color-text-primary),
-                          transparent 90%
+            in srgb,
+            var(--color-text-primary),
+            transparent 90%
           );
 
           .ab-box-icon {
@@ -205,9 +205,9 @@
 
         &:active {
           background-color: color-mix(
-                          in srgb,
-                          var(--color-text-primary),
-                          transparent 80%
+            in srgb,
+            var(--color-text-primary),
+            transparent 80%
           );
 
           .ab-box-icon {
@@ -221,15 +221,15 @@
         }
 
         .ab-box-content {
-          justify-content: center;
-          text-align: center;
           align-items: center;
-          width: 100%;
-          padding-inline: 1.5em;
+          cursor: pointer;
           display: flex;
           flex-direction: row;
+          justify-content: center;
+          padding-inline: 1.5em;
+          text-align: center;
           text-wrap-mode: nowrap;
-          cursor: pointer;
+          width: 100%;
         }
 
         .ab-split-input {
@@ -245,80 +245,80 @@
     }
 
     input {
-      margin: 0;
-      padding: 0;
-      border: none;
       background: none;
-      height: fit-content;
+      border: none;
       box-shadow: none;
-      text-overflow: ellipsis;
-      outline: none;
-      line-height: unset;
-      text-align: center;
       color: var(--color-text-primary);
+      height: fit-content;
+      line-height: unset;
+      margin: 0;
+      outline: none;
+      padding: 0;
+      text-align: center;
+      text-overflow: ellipsis;
     }
   }
 }
 
 .ab-menu {
-  max-height: 0;
-  top: 0;
-  left: 0;
-  width: 100%;
-  transition: max-height 0.2s ease-in-out;
-  overflow: hidden;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  // align-items: flex-end;
   flex-wrap: wrap;
+  justify-content: flex-end;
+  left: 0;
+  max-height: 0;
+  overflow: hidden;
+  top: 0;
+  transition: max-height 0.2s ease-in-out;
+  // align-items: flex-end;
+  width: 100%;
 
   &.no-transition {
     transition: none;
   }
 
   &.ab-menu-open {
-    max-height: 1000px;
     border-bottom: 1px dashed var(--color-border);
+    max-height: 1000px;
   }
 
   .ab-menu-header {
+    align-items: center;
     display: flex;
     flex-direction: row;
     justify-content: center;
-    align-items: center;
-    width: 100%;
-    padding: 0.5em;
     margin-bottom: 0.5em;
+    padding: 0.5em;
+    width: 100%;
 
     .ab-menu-title {
       flex: 1;
-      text-align: center;
       font-size: larger;
       font-weight: bold;
+      text-align: center;
     }
   }
 
   .ab-menu-content {
+    align-items: center;
     display: flex;
     flex-direction: column;
+    gap: 0.5em;
     justify-content: center;
-    align-items: center;
-    width: 100%;
+    margin-bottom: 0.5em;
     padding-left: 0.5em;
     padding-right: 0.5em;
     padding-top: 0.5em;
-    gap: 0.5em;
-    margin-bottom: 0.5em;
+    width: 100%;
 
     .ab-menu-bar {
-      flex-wrap: wrap;
+      align-items: center;
       display: flex;
       flex-direction: row;
-      justify-content: start;
-      align-items: center;
-      width: 100%;
+      flex-wrap: wrap;
       gap: 0.5em;
+      justify-content: start;
+      width: 100%;
 
       select {
         width: 100%;
@@ -331,23 +331,23 @@
       }
 
       .ab-menu-item {
+        align-items: center;
         display: flex;
         flex-direction: row;
         justify-content: center;
-        align-items: center;
 
         input {
-          margin-top: 0;
           margin-bottom: 0;
+          margin-top: 0;
         }
 
         .ab-menu-button {
-          line-height: unset;
-          text-align: center;
           align-content: center;
-          height: 2em;
-          margin: 0;
           font-size: unset;
+          height: 2em;
+          line-height: unset;
+          margin: 0;
+          text-align: center;
         }
       }
 
@@ -363,53 +363,53 @@
 }
 
 .ab-main {
-  display: flex;
-  flex-direction: column;
-  width: calc(100% - 2em);
-  padding: 0.5em;
   background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--color-border);
   border-radius: 6px;
   box-shadow: 0 0 6px rgba(0, 0, 0, 0.4);
+  display: flex;
+  flex-direction: column;
   gap: 0.5em;
   margin: 1em auto;
-  border: 1px solid var(--color-border);
+  padding: 0.5em;
+  width: calc(100% - 2em);
 
   .ab-tags-all {
-    gap: 0.25em;
     display: grid;
+    gap: 0.25em;
 
     .ab-tags-container {
+      align-items: flex-start;
       display: flex;
       flex-direction: row;
-      align-items: flex-start;
 
       .ab-tags {
         align-items: center;
         display: flex;
+        flex: content;
         flex-direction: row;
         flex-grow: 1;
         flex-wrap: wrap;
-        flex: content;
         gap: 0.25em;
         justify-content: start;
-        width: 100%;
         min-height: 1.5em;
+        width: 100%;
 
         .ab-tag {
+          background-color: rgba(255, 255, 255, 0.05);
+          border: 1px dotted var(--color-text-subtle);
           border-radius: 3px;
+          cursor: pointer;
+          height: 1.5em;
           margin: 0;
           padding-block: 0.125em;
           padding-inline: 0.25em;
-          border: 1px dotted var(--color-text-subtle);
-          background-color: rgba(255, 255, 255, 0.05);
-          height: 1.5em;
           text-align: center;
-          cursor: pointer;
 
           &:hover {
-            text-decoration: line-through;
             background-color: rgba(0, 0, 0, 0.1);
             color: var(--color-text-subtle);
+            text-decoration: line-through;
           }
 
           // &.flag-tag-basic {
@@ -419,10 +419,10 @@
       }
 
       .ab-menu-toggle {
-        top: 0;
-        right: 0;
         border: none;
         cursor: pointer;
+        right: 0;
+        top: 0;
 
         .ab-menu-closed-container {
           display: flex;
@@ -444,17 +444,17 @@
 
         &:hover {
           background-color: color-mix(
-                          in srgb,
-                          var(--color-text-primary),
-                          transparent 90%
+            in srgb,
+            var(--color-text-primary),
+            transparent 90%
           );
         }
 
         &:active {
           background-color: color-mix(
-                          in srgb,
-                          var(--color-text-primary),
-                          transparent 80%
+            in srgb,
+            var(--color-text-primary),
+            transparent 80%
           );
         }
 
@@ -480,17 +480,17 @@
     }
 
     .ab-section {
-      display: flex;
       align-items: center;
+      display: flex;
+      margin-bottom: 0.25em;
       text-align: center;
       width: 100%;
-      margin-bottom: 0.25em;
     }
 
     .ab-section::before,
     .ab-section::after {
-      content: "";
       border-bottom: 1px solid var(--color-text-subtle);
+      content: "";
     }
 
     .ab-section::before {
@@ -502,11 +502,11 @@
     }
 
     .ab-section-title {
-      margin-inline: 0.5em;
       color: var(--color-text-subtle);
-      text-transform: uppercase;
       font-size: smaller;
+      margin-inline: 0.5em;
       text-align: left;
+      text-transform: uppercase;
     }
 
     :first-child {
@@ -528,12 +528,12 @@
 }
 
 .ab-icon {
-  display: grid;
-  place-items: center;
-  width: 1.5em;
-  height: 1.5em;
   border-radius: 6px;
   cursor: pointer;
+  display: grid;
+  height: 1.5em;
+  place-items: center;
+  width: 1.5em;
 
   i {
     font-size: 1em;
@@ -542,9 +542,9 @@
 
   &:hover {
     background-color: color-mix(
-                    in srgb,
-                    var(--color-text-primary),
-                    transparent 90%
+      in srgb,
+      var(--color-text-primary),
+      transparent 90%
     );
 
     i {
@@ -554,9 +554,9 @@
 
   &:active {
     background-color: color-mix(
-                    in srgb,
-                    var(--color-text-primary),
-                    transparent 80%
+      in srgb,
+      var(--color-text-primary),
+      transparent 80%
     );
 
     i {
@@ -655,16 +655,16 @@
 // ---------
 
 .ability-bar {
-  position: relative;
   display: flex;
   flex-direction: row;
-  // align-items: center;
   padding: 3px;
+  // align-items: center;
+  position: relative;
 
   .ability-bar-label {
-    margin-right: 0.5em;
-    font-weight: bold;
     flex: 0 0 auto;
+    font-weight: bold;
+    margin-right: 0.5em;
 
     .ability-bar-label-text {
       display: flex;
@@ -680,9 +680,9 @@
     gap: 0.25rem;
 
     .ability-bar-select-container {
+      align-items: center;
       display: flex;
       flex-direction: row;
-      align-items: center;
       justify-content: center;
       // margin-left: 0.5em;
       // margin-right: 0.5em;
@@ -700,17 +700,17 @@
     }
 
     .ability-bar-select {
-      width: 18px;
       height: 18px;
       margin: 0;
       padding: 0;
+      width: 18px;
     }
 
     .ability-bar-select-measure {
-      font-size: var(--font-size-12);
-      padding: 1px 0.25rem;
       border: 1px solid var(--color-border);
       border-radius: 4px;
+      font-size: var(--font-size-12);
+      padding: 1px 0.25rem;
       // display: flex;
     }
 
@@ -731,15 +731,15 @@
       min-height: 1em;
 
       .editor {
+        margin: 0;
         min-height: 1em;
         padding: 0;
-        margin: 0;
 
         .editor-content {
-          padding: 0;
           margin: 0;
-          min-width: 16px;
           max-width: max-content;
+          min-width: 16px;
+          padding: 0;
         }
       }
     }
@@ -757,8 +757,8 @@
 }
 
 .editor {
-  overflow: unset;
   min-height: 1em;
+  overflow: unset;
   position: relative;
 
   &:not(:hover) {
@@ -770,14 +770,14 @@
 
 .prosemirror .editor-container {
   flex: unset;
-  position: unset;
   margin: 0;
+  position: unset;
 }
 
 .prosemirror .editor-container .editor-content {
-  position: unset;
-  padding-right: 0;
   overflow: visible;
+  padding-right: 0;
+  position: unset;
 }
 
 .prosemirror menu {
@@ -788,10 +788,10 @@
 }
 
 .editor-edit {
-  top: 0;
-  right: 0;
   font-size: 0.75em;
   position: absolute;
+  right: 0;
+  top: 0;
 }
 
 // .prosemirror {
@@ -799,8 +799,8 @@
 // }
 
 .ab-sheet-everything {
-  max-height: 100%;
   height: 100%;
-  width: 100%;
+  max-height: 100%;
   overflow: auto;
+  width: 100%;
 }

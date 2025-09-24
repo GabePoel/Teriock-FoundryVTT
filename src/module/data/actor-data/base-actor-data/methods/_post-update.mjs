@@ -21,18 +21,31 @@ export async function _postUpdate(actorData, skipFunctions = {}) {
   }
   if (!skipFunctions.prepareTokens) {
     for (const token of /** @type {TeriockTokenDocument[]} */ actorData.parent.getDependentTokens()) {
-      const {
-        visionMode,
-        range,
-      } = token.deriveVision();
-      const tokenUpdateData = {
-        light: actorData.light,
-        "sight.range": range,
-        "width": actorData.size.length,
-        "height": actorData.size.length,
-      };
-      await token.update(tokenUpdateData);
-      await token.updateVisionMode(visionMode);
+      const { visionMode, range } = token.deriveVision();
+      const tokenLight = token.light;
+      const newTokenLight = foundry.utils.mergeObject(
+        tokenLight,
+        actorData.light,
+      );
+      const tokenUpdateData = {};
+      if (!foundry.utils.objectsEqual(tokenLight, newTokenLight)) {
+        tokenUpdateData["light"] = actorData.light;
+      }
+      if (token.sight.range !== range) {
+        tokenUpdateData["range"] = range;
+      }
+      if (token.width !== actorData.size.length) {
+        tokenUpdateData["width"] = actorData.size.length;
+      }
+      if (token.height !== actorData.size.length) {
+        tokenUpdateData["height"] = actorData.size.length;
+      }
+      if (Object.keys(tokenUpdateData).length > 0) {
+        await token.update(tokenUpdateData);
+      }
+      if (token.sight.visionMode !== visionMode) {
+        await token.updateVisionMode(visionMode);
+      }
     }
   }
 }
@@ -51,18 +64,26 @@ export async function _postUpdate(actorData, skipFunctions = {}) {
 async function checkDown(actorData) {
   // Handle financial damage
   if (actorData.parent.statuses.has("down") && actorData.money.debt > 0) {
-    if (!(actorData.protections.resistances.statuses.has("hollied")
-      || actorData.protections.immunities.statuses.has("hollied")
-      || actorData.protections.hexproofs.statuses.has("hollied")
-      || actorData.protections.hexseals.statuses.has("hollied"))) {
+    if (
+      !(
+        actorData.protections.resistances.statuses.has("hollied") ||
+        actorData.protections.immunities.statuses.has("hollied") ||
+        actorData.protections.hexproofs.statuses.has("hollied") ||
+        actorData.protections.hexseals.statuses.has("hollied")
+      )
+    ) {
       try {
         await actorData.parent.toggleStatusEffect("hollied", { active: true });
       } catch {}
     }
-    if (!(actorData.protections.resistances.statuses.has("terrored")
-      || actorData.protections.immunities.statuses.has("terrored")
-      || actorData.protections.hexproofs.statuses.has("terrored")
-      || actorData.protections.hexseals.statuses.has("terrored"))) {
+    if (
+      !(
+        actorData.protections.resistances.statuses.has("terrored") ||
+        actorData.protections.immunities.statuses.has("terrored") ||
+        actorData.protections.hexproofs.statuses.has("terrored") ||
+        actorData.protections.hexseals.statuses.has("terrored")
+      )
+    ) {
       try {
         await actorData.parent.toggleStatusEffect("terrored", { active: true });
       } catch {}

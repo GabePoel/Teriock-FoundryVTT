@@ -18,9 +18,10 @@ export async function _parse(equipmentData, rawHTML) {
   const q = (s) => doc.querySelector(s);
   const getValue = (s) => q(s)?.getAttribute("data-val");
   const getText = (s) => q(s)?.textContent.trim();
-  const getTextAll = (s) => Array.from(doc.querySelectorAll(s), (el) => el.textContent.trim());
+  const getTextAll = (s) =>
+    Array.from(doc.querySelectorAll(s), (el) => el.textContent.trim());
 
-  const referenceEquipment = new Item({
+  const referenceEquipment = new foundry.documents.Item.implementation({
     name: "Reference Equipment",
     type: "equipment",
   });
@@ -72,14 +73,19 @@ export async function _parse(equipmentData, rawHTML) {
   }
 
   // Parse sb, av, bv
-  parameters.fightingStyle = toCamelCase(getValue(".sb") || "") ?? parameters.fightingStyle;
+  parameters.fightingStyle =
+    toCamelCase(getValue(".sb") || "") ?? parameters.fightingStyle;
   parameters.av = { saved: toInt(cleanValue(getValue(".av"))) || 0 };
   parameters.bv = { saved: toInt(cleanValue(getValue(".bv"))) || 0 };
 
   // Sort and filter properties and equipment classes
-  parameters.equipmentClasses = new Set(Array.from(equipmentClasses).map((s) => toCamelCase(s)));
+  parameters.equipmentClasses = new Set(
+    Array.from(equipmentClasses).map((s) => toCamelCase(s)),
+  );
   const toCreate = Array.from(properties);
-  const filteredProperties = toCreate.filter((p) => Object.values(allValidProperties).includes(p));
+  const filteredProperties = toCreate.filter((p) =>
+    Object.values(allValidProperties).includes(p),
+  );
   toCreate.length = 0;
   toCreate.push(...filteredProperties);
 
@@ -89,11 +95,15 @@ export async function _parse(equipmentData, rawHTML) {
    * @returns {Promise<Object>} Promise that resolves with property creation result
    */
   async function createSingleProperty(propertyName) {
-    let property = equipmentData.parent.getProperties().find((a) => a.name === propertyName);
+    let property = equipmentData.parent
+      .getProperties()
+      .find((a) => a.name === propertyName);
     if (property) {
       await property.system.wikiPull({ notify: false });
     } else {
-      await createProperty(equipmentData.parent, propertyName, { notify: false });
+      await createProperty(equipmentData.parent, propertyName, {
+        notify: false,
+      });
     }
     return {
       propertyName: propertyName,
@@ -101,18 +111,16 @@ export async function _parse(equipmentData, rawHTML) {
     };
   }
 
-  const propertyPromises = toCreate.map((propertyName) => createSingleProperty(propertyName));
+  const propertyPromises = toCreate.map((propertyName) =>
+    createSingleProperty(propertyName),
+  );
   try {
     await Promise.all(propertyPromises);
     // Optional property deletion.
     // const toDelete = equipmentData.parent.getProperties().filter((p) => !toCreate.includes(p.name)).map((p) => p.id);
     // await equipmentData.parent.deleteEmbeddedDocuments("ActiveEffect", toDelete);
   } catch (error) {
-    progress.update({
-      pct: 0.9,
-      message: `Error occurred during property creation: ${error.message}`,
-    });
-    console.error("Error creating properties:", error);
+    foundry.ui.notifications.error(`Error creating properties: ${error}`);
     throw error;
   }
 
@@ -122,13 +130,14 @@ export async function _parse(equipmentData, rawHTML) {
 
   _override(equipmentData, parameters);
 
-
   const oldImg = equipmentData.parent.img;
   let newImg = oldImg;
-  if (oldImg?.startsWith("systems/teriock/assets")
-    || oldImg?.startsWith("systems/teriock/src/icons/documents")
-    || oldImg?.startsWith("systems/teriock/src/icons/equipment")
-    || oldImg?.startsWith("icons/svg")) {
+  if (
+    oldImg?.startsWith("systems/teriock/assets") ||
+    oldImg?.startsWith("systems/teriock/src/icons/documents") ||
+    oldImg?.startsWith("systems/teriock/src/icons/equipment") ||
+    oldImg?.startsWith("icons/svg")
+  ) {
     newImg = getIcon("equipment", equipmentData.equipmentType);
     newImg = newImg.replace("ō", "o");
   }

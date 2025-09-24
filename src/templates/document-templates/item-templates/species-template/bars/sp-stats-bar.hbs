@@ -1,12 +1,26 @@
 <div class="ab-bar">
   {{formBox
-    (concat system.hpDiceFormula " Hit Di" (ifThen (gt system.hpDiceNumber 1) "c" "") "e (" system.totalHp " HP)")
+    (concat
+      system.hpDiceFormula
+      " Hit Di"
+      (ifThen (gt system.hpDiceNumber 1) "c" "")
+      "e ("
+      system.totalHp
+      " HP)"
+    )
     action="setHpDice"
     icon=(firstDie system.hpDiceFormula)
     tooltip="Hit Dice"
   }}
   {{formBox
-    (concat system.mpDiceFormula " Mana Di" (ifThen (gt system.mpDiceNumber 1) "c" "") "e (" system.totalMp " MP)")
+    (concat
+      system.mpDiceFormula
+      " Mana Di"
+      (ifThen (gt system.mpDiceNumber 1) "c" "")
+      "e ("
+      system.totalMp
+      " MP)"
+    )
     action="setMpDice"
     icon=(firstDie system.mpDiceFormula)
     tooltip="Mana Dice"

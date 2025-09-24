@@ -1,10 +1,5 @@
 export default function registerComparisonHelpers() {
-  [
-    "leq",
-    "geq",
-    "lt",
-    "gt",
-  ].forEach((op) => {
+  ["leq", "geq", "lt", "gt"].forEach((op) => {
     Handlebars.registerHelper(op, (a, b) => {
       if (typeof a !== "number" || typeof b !== "number") {
         return false;

@@ -11,7 +11,9 @@ import { toTitleCase } from "../../../helpers/string.mjs";
  * @private
  */
 export function getBarText(htmlElement, selector, clean = false) {
-  const el = htmlElement.querySelector(`.ability-bar-${selector} .ability-bar-content`);
+  const el = htmlElement.querySelector(
+    `.ability-bar-${selector} .ability-bar-content`,
+  );
   el?.querySelectorAll(".ability-bar").forEach((el2) => el2.remove());
   let text = el?.innerHTML || null;
   if (text && clean) {
@@ -20,10 +22,7 @@ export function getBarText(htmlElement, selector, clean = false) {
     tempDiv
       .querySelectorAll("span")
       .forEach((span) => span.replaceWith(document.createTextNode(" ")));
-    text = tempDiv.innerHTML
-      .trim()
-      .replace(/\.$/, "")
-      .replace(/\./g, ",");
+    text = tempDiv.innerHTML.trim().replace(/\.$/, "").replace(/\./g, ",");
     text = toTitleCase(text);
     text = cleanFeet(text).trim();
   }

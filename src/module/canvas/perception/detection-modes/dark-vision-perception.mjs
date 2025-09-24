@@ -5,7 +5,7 @@ import BaseDetectionMode from "./base-detection-mode.mjs";
  * Material creatures seeing Material creatures in the dark.
  */
 export default class DetectionModeDarkVision extends BaseDetectionMode {
-  static BLOCKING_SRC_STATUS_EFFECTS = [ "blind" ];
+  static BLOCKING_SRC_STATUS_EFFECTS = ["blind"];
 
   /** @inheritDoc */
   _canDetect(visionSource, target) {
@@ -15,7 +15,9 @@ export default class DetectionModeDarkVision extends BaseDetectionMode {
     const src = visionSource.object.document;
     if (target instanceof Token) {
       const tgt = target.document;
-      if (!(!src.hasStatusEffect("ethereal") && !tgt.hasStatusEffect("ethereal"))) {
+      if (
+        !(!src.hasStatusEffect("ethereal") && !tgt.hasStatusEffect("ethereal"))
+      ) {
         return false;
       }
     }

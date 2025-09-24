@@ -1,5 +1,8 @@
 import {
-  addAbilitiesBlock, addFluenciesBlock, addPropertiesBlock, addResourcesBlock,
+  addAbilitiesBlock,
+  addFluenciesBlock,
+  addPropertiesBlock,
+  addResourcesBlock,
 } from "../../../../helpers/messages-builder/message-parts.mjs";
 
 /**
@@ -12,11 +15,12 @@ export function _messageParts(equipmentData) {
   const ref = TERIOCK.options.equipment;
   const src = equipmentData;
   let damageString = "";
+  let twoHandedDamageString = "";
   if (src.damage.base.value) {
     damageString += src.damage.base.value;
-    if (src.damage.twoHanded.raw !== "0" && src.damage.twoHanded.value !== src.damage.base.value) {
-      damageString += " / " + src.damage.twoHanded.value;
-    }
+  }
+  if (src.hasTwoHandedAttack) {
+    twoHandedDamageString = src.damage.twoHanded.value;
   }
   let rangeString = "";
   if (src.range.long.raw) {
@@ -41,6 +45,7 @@ export function _messageParts(equipmentData) {
       label: "Attack",
       wrappers: [
         damageString,
+        twoHandedDamageString,
         rangeString,
         TERIOCK.index.weaponFightingStyles[src.fightingStyle],
       ],
@@ -65,7 +70,7 @@ export function _messageParts(equipmentData) {
     {
       icon: "fa-flag",
       label: "Equipment Classes",
-      wrappers: [ ...src.equipmentClasses.map((ec) => ref.equipmentClasses[ec]) ],
+      wrappers: [...src.equipmentClasses.map((ec) => ref.equipmentClasses[ec])],
     },
   ];
   const blocks = [
@@ -84,12 +89,20 @@ export function _messageParts(equipmentData) {
   ];
   if (equipmentData.fightingStyle && equipmentData.fightingStyle.length > 0) {
     blocks.push({
-      title: TERIOCK.index.weaponFightingStyles[equipmentData.fightingStyle] + " Fighting Style",
+      title:
+        TERIOCK.index.weaponFightingStyles[equipmentData.fightingStyle] +
+        " Fighting Style",
       text: equipmentData.specialRules,
     });
   }
-  addPropertiesBlock(equipmentData.parent.transferredEffects.filter((e) => !e.sup), blocks);
-  addAbilitiesBlock(equipmentData.parent.transferredEffects.filter((e) => !e.sup), blocks);
+  addPropertiesBlock(
+    equipmentData.parent.transferredEffects.filter((e) => !e.sup),
+    blocks,
+  );
+  addAbilitiesBlock(
+    equipmentData.parent.transferredEffects.filter((e) => !e.sup),
+    blocks,
+  );
   addResourcesBlock(equipmentData.parent.transferredEffects, blocks);
   addFluenciesBlock(equipmentData.parent.transferredEffects, blocks);
   return {

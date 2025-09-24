@@ -5,7 +5,9 @@
       (lookup TERIOCK.options.ability.executionTime.active system.executionTime)
       (ifThen
         (eq system.maneuver "reactive")
-        (lookup TERIOCK.options.ability.executionTime.reactive system.executionTime)
+        (lookup
+          TERIOCK.options.ability.executionTime.reactive system.executionTime
+        )
         (ifThen
           (eq system.maneuver "passive")
           "Passive"
@@ -19,7 +21,9 @@
     )
     icon=(lookup TERIOCK.display.icons "execution")
     tooltip="Execution Time"
-    dataset=(object maneuver=(lookup TERIOCK.options.ability.maneuver system.maneuver))
+    dataset=(object
+      maneuver=(lookup TERIOCK.options.ability.maneuver system.maneuver)
+    )
     classes=(ifThen editable "execution-box" "")
   }}
   {{formBox
@@ -36,13 +40,20 @@
     (concat
       (ifThen
         (eq system.interaction "feat")
-        (concat (lookup TERIOCK.options.ability.featSaveAttribute system.featSaveAttribute) " ")
+        (concat
+          (lookup
+            TERIOCK.options.ability.featSaveAttribute system.featSaveAttribute
+          )
+          " "
+        )
         ""
       )
       (lookup TERIOCK.options.ability.interaction system.interaction)
     )
     icon=(lookup TERIOCK.display.icons "interaction")
-    classes=(ifThen editable (concat "interaction-box interaction-box-" system.interaction) "")
+    classes=(ifThen
+      editable (concat "interaction-box interaction-box-" system.interaction) ""
+    )
     tooltip="Interaction"
   }}
 </div>

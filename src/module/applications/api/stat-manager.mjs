@@ -1,9 +1,6 @@
 import { HackStatMixin } from "../shared/mixins/_module.mjs";
 
-const {
-  HandlebarsApplicationMixin,
-  ApplicationV2,
-} = foundry.applications.api;
+const { HandlebarsApplicationMixin, ApplicationV2 } = foundry.applications.api;
 
 // noinspection JSClosureCompilerSyntax
 /**
@@ -13,16 +10,15 @@ const {
  * @property {TeriockActor} actor
  * @property {TeriockActor} document
  */
-export default class TeriockStatManager extends HackStatMixin(HandlebarsApplicationMixin(ApplicationV2)) {
+export default class TeriockStatManager extends HackStatMixin(
+  HandlebarsApplicationMixin(ApplicationV2),
+) {
   /**
    * @inheritDoc
    * @type {Partial<ApplicationConfiguration>}
    */
   static DEFAULT_OPTIONS = {
-    classes: [
-      "teriock",
-      "dialog",
-    ],
+    classes: ["teriock", "dialog"],
     actions: {
       ok: this._done,
     },
@@ -38,11 +34,7 @@ export default class TeriockStatManager extends HackStatMixin(HandlebarsApplicat
    * @param {object} [applicationOptions]
    */
   constructor(actor, options, applicationOptions = {}) {
-    const {
-      forHarm = false,
-      consumeStatDice = true,
-      title = "",
-    } = options;
+    const { forHarm = false, consumeStatDice = true, title = "" } = options;
     if (title.length > 0) {
       applicationOptions.title = title;
     }
@@ -82,16 +74,22 @@ export default class TeriockStatManager extends HackStatMixin(HandlebarsApplicat
   /** @inheritDoc */
   async _onFirstRender(context, options) {
     await super._onFirstRender(context, options);
-    this._actorHook = foundry.helpers.Hooks.on("updateActor", async (document) => {
-      if (document.uuid === this.actor.uuid) {
-        await this.render();
-      }
-    });
-    this._itemHook = foundry.helpers.Hooks.on("updateItem", async (document) => {
-      if (document.actor && document.actor.uuid === this.actor.uuid) {
-        await this.render();
-      }
-    });
+    this._actorHook = foundry.helpers.Hooks.on(
+      "updateActor",
+      async (document) => {
+        if (document.uuid === this.actor.uuid) {
+          await this.render();
+        }
+      },
+    );
+    this._itemHook = foundry.helpers.Hooks.on(
+      "updateItem",
+      async (document) => {
+        if (document.actor && document.actor.uuid === this.actor.uuid) {
+          await this.render();
+        }
+      },
+    );
   }
 
   /** @inheritDoc */
@@ -105,7 +103,9 @@ export default class TeriockStatManager extends HackStatMixin(HandlebarsApplicat
       });
     }
     /** @type {HTMLInputElement} */
-    const consumeDiceCheckbox = this.element.querySelector("[name='consume-dice']");
+    const consumeDiceCheckbox = this.element.querySelector(
+      "[name='consume-dice']",
+    );
     if (consumeDiceCheckbox) {
       consumeDiceCheckbox.addEventListener("change", () => {
         this._consumeStatDice = consumeDiceCheckbox.checked;

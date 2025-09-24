@@ -78,11 +78,7 @@
             value=system.costs.hp.value.formula
             disabled=(not editable)
           )
-          (ifThen
-            (eq system.costs.hp.type "hack")
-            "Hack"
-            "Variable"
-          )
+          (ifThen (eq system.costs.hp.type "hack") "Hack" "Variable")
         )
       )
       tooltip=(ifThen
@@ -92,9 +88,7 @@
           (eq system.costs.hp.type "formula")
           "Formula Hit Cost"
           (ifThen
-            (eq system.costs.hp.type "hack")
-            "Hack Hit Cost"
-            "Variable Hit Cost"
+            (eq system.costs.hp.type "hack") "Hack Hit Cost" "Variable Hit Cost"
           )
         )
       )

@@ -13,7 +13,8 @@ const { Roll } = foundry.dice;
  */
 export default class TeriockRoll extends Roll {
   /** @inheritDoc */
-  static CHAT_TEMPLATE = "systems/teriock/src/templates/message-templates/roll.hbs";
+  static CHAT_TEMPLATE =
+    "systems/teriock/src/templates/message-templates/roll.hbs";
 
   /**
    * Creates a new TeriockRoll instance with enforced parsing and enrichment options.
@@ -51,7 +52,10 @@ export default class TeriockRoll extends Roll {
       // Return the modified formula
       return tempRoll.formula;
     } catch (error) {
-      console.warn(`Failed to evaluate ${isBoost ? "boost" : "deboost"} function:`, error);
+      console.warn(
+        `Failed to evaluate ${isBoost ? "boost" : "deboost"} function:`,
+        error,
+      );
       return innerFormula; // Return original formula if evaluation fails
     }
   }
@@ -68,7 +72,9 @@ export default class TeriockRoll extends Roll {
       // Parse the parameters: "formula, number"
       const commaIndex = innerFormula.lastIndexOf(",");
       if (commaIndex === -1) {
-        foundry.ui.notifications.error(`Invalid setboost function: missing comma separator`);
+        foundry.ui.notifications.error(
+          `Invalid setboost function: missing comma separator`,
+        );
         return innerFormula;
       }
 
@@ -78,7 +84,9 @@ export default class TeriockRoll extends Roll {
       // Parse the number
       const boostNumber = parseInt(numberPart, 10);
       if (isNaN(boostNumber)) {
-        foundry.ui.notifications.error(`Invalid setboost function: invalid number parameter "${numberPart}"`);
+        foundry.ui.notifications.error(
+          `Invalid setboost function: invalid number parameter "${numberPart}"`,
+        );
         return innerFormula;
       }
 
@@ -114,7 +122,9 @@ export default class TeriockRoll extends Roll {
   static #extractFunctionContent(functionCall) {
     const openParenIndex = functionCall.indexOf("(");
     if (openParenIndex === -1) {
-      foundry.ui.notifications.error(`Invalid function call: missing opening parenthesis`);
+      foundry.ui.notifications.error(
+        `Invalid function call: missing opening parenthesis`,
+      );
     }
 
     let parenCount = 0;
@@ -132,7 +142,9 @@ export default class TeriockRoll extends Roll {
       }
     }
 
-    foundry.ui.notifications.error(`Invalid function call: missing closing parenthesis`);
+    foundry.ui.notifications.error(
+      `Invalid function call: missing closing parenthesis`,
+    );
   }
 
   /**
@@ -195,7 +207,11 @@ export default class TeriockRoll extends Roll {
     const boostIndex = boostMatch ? boostMatch.index : Infinity;
     const deboostIndex = deboostMatch ? deboostMatch.index : Infinity;
     const setboostIndex = setboostMatch ? setboostMatch.index : Infinity;
-    const firstFunctionIndex = Math.min(boostIndex, deboostIndex, setboostIndex);
+    const firstFunctionIndex = Math.min(
+      boostIndex,
+      deboostIndex,
+      setboostIndex,
+    );
 
     // Split the formula into parts
     const beforeFunction = formula.substring(0, firstFunctionIndex);
@@ -203,8 +219,12 @@ export default class TeriockRoll extends Roll {
 
     // Find the matching closing parenthesis
     const innerFormula = TeriockRoll.#extractFunctionContent(functionStart);
-    const functionName = functionStart.match(/^(boost|b|deboost|db|setboost|sb)\s*\(/)[1];
-    const afterFunction = functionStart.substring(functionStart.indexOf(innerFormula) + innerFormula.length + 1);
+    const functionName = functionStart.match(
+      /^(boost|b|deboost|db|setboost|sb)\s*\(/,
+    )[1];
+    const afterFunction = functionStart.substring(
+      functionStart.indexOf(innerFormula) + innerFormula.length + 1,
+    );
 
     // Recursively parse the inner formula
     const parsedInnerFormula = TeriockRoll.#parseFormulaRecursive(innerFormula);
@@ -212,15 +232,23 @@ export default class TeriockRoll extends Roll {
     // Evaluate the function (map aliases to full names)
     let evaluatedFormula;
     if (functionName === "boost" || functionName === "b") {
-      evaluatedFormula = TeriockRoll.#evaluateBoostFunction(parsedInnerFormula, true);
+      evaluatedFormula = TeriockRoll.#evaluateBoostFunction(
+        parsedInnerFormula,
+        true,
+      );
     } else if (functionName === "deboost" || functionName === "db") {
-      evaluatedFormula = TeriockRoll.#evaluateBoostFunction(parsedInnerFormula, false);
+      evaluatedFormula = TeriockRoll.#evaluateBoostFunction(
+        parsedInnerFormula,
+        false,
+      );
     } else if (functionName === "setboost" || functionName === "sb") {
-      evaluatedFormula = TeriockRoll.#evaluateSetboostFunction(parsedInnerFormula);
+      evaluatedFormula =
+        TeriockRoll.#evaluateSetboostFunction(parsedInnerFormula);
     }
 
     // Recursively parse the rest of the formula
-    const parsedAfterFunction = TeriockRoll.#parseFormulaRecursive(afterFunction);
+    const parsedAfterFunction =
+      TeriockRoll.#parseFormulaRecursive(afterFunction);
 
     return beforeFunction + evaluatedFormula + parsedAfterFunction;
   }

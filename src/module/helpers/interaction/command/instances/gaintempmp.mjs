@@ -3,19 +3,15 @@ import TeriockCommand from "../command.mjs";
 export const gaintempmp = new TeriockCommand(
   "gaintempmp",
   "Gain temporary MP on targeted tokens. Usage: /gaintempmp <amount>",
-  async ({
-    args,
-    _chatData,
-    actors,
-  }) => {
+  async ({ args, _chatData, actors }) => {
     if (args.length === 0) {
-      ui.notifications.warn("Usage: /gaintempmp <amount>");
+      foundry.ui.notifications.warn("Usage: /gaintempmp <amount>");
       return;
     }
 
     const amount = parseInt(args[0]);
     if (isNaN(amount) || amount < 0) {
-      ui.notifications.warn("Amount must be a non-negative number.");
+      foundry.ui.notifications.warn("Amount must be a non-negative number.");
       return;
     }
 
@@ -23,10 +19,12 @@ export const gaintempmp = new TeriockCommand(
       await actor.takeGainTempMp(amount);
     }
 
-    ui.notifications.info(`Gained ${amount} temporary MP on ${actors.length} target(s).`);
+    foundry.ui.notifications.info(
+      `Gained ${amount} temporary MP on ${actors.length} target(s).`,
+    );
   },
   {
-    aliases: [ "gtmp" ],
+    aliases: ["gtmp"],
     category: "#support",
     requiresTarget: true,
   },

@@ -4,12 +4,7 @@ import TeriockCommand from "../command.mjs";
 export const revitalize = new TeriockCommand(
   "revitalize",
   "Roll revitalization and apply it to targeted tokens.",
-  async ({
-    args,
-    options,
-    chatData,
-    actors,
-  }) => {
+  async ({ args, options, chatData, actors }) => {
     const formula = args.join(" ");
     const roll = new TeriockRoll(formula, {
       speaker: chatData.speaker,

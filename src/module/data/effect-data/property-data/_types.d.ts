@@ -3,7 +3,9 @@ import type { TeriockProperty } from "../../../documents/_documents.mjs";
 import type { HierarchyDataMixinInterface } from "../../mixins/hierarchy-data-mixin/_types";
 
 declare module "./property-data.mjs" {
-  export default interface TeriockPropertyModel extends TeriockBaseEffectModel, HierarchyDataMixinInterface {
+  export default interface TeriockPropertyModel
+    extends TeriockBaseEffectModel,
+      HierarchyDataMixinInterface {
     /** <schema> Applies */
     applies: {
       /** <schema> Changes made to the parent {@link TeriockEquipment} and {@link TeriockActor}). */

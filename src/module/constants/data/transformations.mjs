@@ -7,7 +7,7 @@ export const transformationsData = {
     id: "fullTransformed",
     img: getIcon("conditions", "Transformed"),
     name: "Full Transformed",
-    statuses: [ "transformed" ],
+    statuses: ["transformed"],
     type: "base",
   },
   greaterTransformed: {
@@ -16,7 +16,7 @@ export const transformationsData = {
     id: "greaterTransformed",
     img: getIcon("conditions", "Transformed"),
     name: "Greater Transformed",
-    statuses: [ "transformed" ],
+    statuses: ["transformed"],
     type: "base",
   },
   minorTransformed: {
@@ -25,7 +25,7 @@ export const transformationsData = {
     id: "minorTransformed",
     img: getIcon("conditions", "Transformed"),
     name: "Minor Transformed",
-    statuses: [ "transformed" ],
+    statuses: ["transformed"],
     type: "base",
   },
   polymorphed: {
@@ -34,10 +34,7 @@ export const transformationsData = {
     id: "polymorphed",
     img: getIcon("abilities", "Polymorph"),
     name: "Polymorphed",
-    statuses: [
-      "fullTransformed",
-      "transformed",
-    ],
+    statuses: ["fullTransformed", "transformed"],
     type: "base",
   },
   treeformed: {
@@ -54,10 +51,7 @@ export const transformationsData = {
     id: "treeformed",
     img: getIcon("abilities", "Treeform Ball"),
     name: "Treeformed",
-    statuses: [
-      "minorTransformed",
-      "transformed",
-    ],
+    statuses: ["minorTransformed", "transformed"],
     type: "base",
   },
 };

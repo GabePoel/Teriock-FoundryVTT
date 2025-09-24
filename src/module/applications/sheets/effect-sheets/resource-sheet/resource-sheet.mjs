@@ -13,7 +13,7 @@ export default class TeriockResourceSheet extends TeriockBaseEffectSheet {
    * @type {Partial<ApplicationConfiguration>}
    */
   static DEFAULT_OPTIONS = {
-    classes: [ "resource" ],
+    classes: ["resource"],
     window: {
       icon: "fa-solid fa-" + documentOptions.resource.icon,
     },
@@ -22,12 +22,9 @@ export default class TeriockResourceSheet extends TeriockBaseEffectSheet {
   /** @inheritDoc */
   static PARTS = {
     all: {
-      template: "systems/teriock/src/templates/document-templates/effect-templates/resource-template/resource-template.hbs",
-      scrollable: [
-        ".window-content",
-        ".tsheet-page",
-        ".ab-sheet-everything",
-      ],
+      template:
+        "systems/teriock/src/templates/document-templates/effect-templates/resource-template/resource-template.hbs",
+      scrollable: [".window-content", ".tsheet-page", ".ab-sheet-everything"],
     },
   };
 }

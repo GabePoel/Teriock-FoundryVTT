@@ -1,28 +1,38 @@
 .tcard-container {
-  width: 100%;
-  gap: 8px;
-  --tcard-height: 56px;
-  --tcard-outer-border-radius: 4px;
-  --tcard-inner-border-width: 1px;
-  --tcard-outer-border-width: 1px;
-  --tcard-title-font-size: 1em;
-  --tcard-subtitle-font-size: 0.8em;
-  --tcard-image-padding: 8px;
-  --tcard-image-hide-width: 249px;
-  --tcard-titles-padding-left: 0;
-  --tcard-titles-flex-direction: column;
-  --tcard-titles-align-items: flex-start;
-  --tcard-titles-gap: 0;
+  --tcard-border-color: var(--color-border);
+  --tcard-border-radius: var(--tcard-outer-border-radius);
+  border-radius: var(--tcard-outer-border-radius);
+  --tcard-box-shadow: 0 0 6px rgba(0, 0, 0, 0.4);
+  box-shadow: var(--tcard-container-box-shadow);
+  --tcard-container-box-shadow: none;
+  --tcard-content-align-items: end;
+  --tcard-content-flex-direction: column;
+  --tcard-content-font-size: 0.8em;
+  --tcard-content-gap: 0;
   --tcard-content-padding: 10px;
   --tcard-content-right-padding: 10px;
-  --tcard-content-flex-direction: column;
-  --tcard-content-align-items: end;
-  --tcard-content-gap: 0;
-  --tcard-content-font-size: 0.8em;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  --tcard-height: 56px;
   --tcard-icons-gap: 4px;
-  --tcard-box-shadow: 0 0 6px rgba(0, 0, 0, 0.4);
-  --tcard-container-box-shadow: none;
-  --tcard-border-color: var(--color-border);
+  --tcard-image-hide-width: 249px;
+  --tcard-image-padding: 8px;
+  --tcard-inner-border-width: 1px;
+  --tcard-outer-border-radius: 4px;
+  --tcard-outer-border-width: 1px;
+  --tcard-subtitle-font-size: 0.8em;
+  --tcard-title-font-size: 1em;
+
+  --tcard-titles-align-items: flex-start;
+
+  --tcard-titles-flex-direction: column;
+
+  --tcard-titles-gap: 0;
+
+  --tcard-titles-padding-left: 0;
+
+  width: 100%;
 
   &:not(.large):not(.small):not(.tiny),
   &.medium {
@@ -71,12 +81,12 @@
   }
 
   &.large {
-    --tcard-height: 84px;
-    --tcard-title-font-size: 1.5em;
-    --tcard-subtitle-font-size: 1em;
+    --tcard-content-font-size: 0.9em;
     --tcard-content-padding: 14px;
     --tcard-content-right-padding: 14px;
-    --tcard-content-font-size: 0.9em;
+    --tcard-height: 84px;
+    --tcard-subtitle-font-size: 1em;
+    --tcard-title-font-size: 1.5em;
 
     @container (max-width: 299px) {
       .tcard-image {
@@ -123,18 +133,18 @@
   }
 
   &.small {
-    --tcard-height: 42px;
-    --tcard-image-padding: 6px;
-    --tcard-titles-padding-left: 2px;
-    --tcard-titles-flex-direction: row;
-    --tcard-titles-align-items: center;
-    --tcard-titles-gap: 8px;
+    --tcard-content-align-items: center;
+    --tcard-content-flex-direction: row;
+    --tcard-content-gap: 8px;
     --tcard-content-padding: 8px;
     --tcard-content-right-padding: 8px;
-    --tcard-content-flex-direction: row;
-    --tcard-content-align-items: center;
-    --tcard-content-gap: 8px;
+    --tcard-height: 42px;
     --tcard-icons-gap: 6px;
+    --tcard-image-padding: 6px;
+    --tcard-titles-align-items: center;
+    --tcard-titles-flex-direction: row;
+    --tcard-titles-gap: 8px;
+    --tcard-titles-padding-left: 2px;
 
     // Progressive collapsing for small size
     @container (max-width: 400px) {
@@ -171,18 +181,18 @@
   }
 
   &.tiny {
-    --tcard-height: 28px;
-    --tcard-image-padding: 4px;
-    --tcard-titles-padding-left: 2px;
-    --tcard-titles-flex-direction: row;
-    --tcard-titles-align-items: center;
-    --tcard-titles-gap: 8px;
+    --tcard-content-align-items: center;
+    --tcard-content-flex-direction: row;
+    --tcard-content-gap: 8px;
     --tcard-content-padding: 0;
     --tcard-content-right-padding: 8px;
-    --tcard-content-flex-direction: row;
-    --tcard-content-align-items: center;
-    --tcard-content-gap: 8px;
+    --tcard-height: 28px;
     --tcard-icons-gap: 6px;
+    --tcard-image-padding: 4px;
+    --tcard-titles-align-items: center;
+    --tcard-titles-flex-direction: row;
+    --tcard-titles-gap: 8px;
+    --tcard-titles-padding-left: 2px;
 
     // Progressive collapsing for tiny size
     @container (max-width: 350px) {
@@ -218,46 +228,42 @@
     }
   }
 
-  --tcard-border-radius: var(--tcard-outer-border-radius);
-
   &.gapless {
     --tcard-border-radius: 0;
-    --tcard-container-box-shadow: 0 0 6px rgba(0, 0, 0, 0.4);
-    --tcard-outer-border-width: 0;
     --tcard-box-shadow: 0 0 0 rgba(0, 0, 0, 0);
-    overflow: hidden;
+    box-shadow:
+      var(--tcard-container-box-shadow),
+      inset 0 0 0 1px var(--color-border);
+    --tcard-container-box-shadow: 0 0 6px rgba(0, 0, 0, 0.4);
     gap: 0;
-    box-shadow: var(--tcard-container-box-shadow), inset 0 0 0 1px var(--color-border)
+    --tcard-outer-border-width: 0;
+    overflow: hidden;
   }
 
-  display: flex;
-  flex-direction: column;
-  box-shadow: var(--tcard-container-box-shadow);
-  border-radius: var(--tcard-outer-border-radius);
-
   .tcard {
-    --tcard-opacity: 1;
+    align-items: center;
     background-color: rgba(255, 255, 255, 0.1);
 
-    &.inactive {
-      --tcard-opacity: 0.5;
-      background-color: rgba(255, 255, 255, 0.05);
-    }
+    border: var(--tcard-outer-border-width) solid var(--color-border);
 
-    height: var(--tcard-height);
+    border-radius: var(--tcard-border-radius);
+    border-top-width: var(--tcard-inner-border-width);
+    box-shadow: var(--tcard-box-shadow);
+    cursor: default;
     display: flex;
     flex-direction: row;
-    align-items: center;
+    height: var(--tcard-height);
     justify-content: flex-start;
-    width: 100%;
-    border: var(--tcard-outer-border-width) solid var(--color-border);
-    border-top-width: var(--tcard-inner-border-width);
-    border-radius: var(--tcard-border-radius);
-    transition: all 0.15s ease-in-out;
-    position: relative;
-    box-shadow: var(--tcard-box-shadow);
+    --tcard-opacity: 1;
     overflow: hidden;
-    cursor: default;
+    position: relative;
+    transition: all 0.15s ease-in-out;
+    width: 100%;
+
+    &.inactive {
+      background-color: rgba(255, 255, 255, 0.05);
+      --tcard-opacity: 0.5;
+    }
 
     &.visible-first,
     &:first-child {
@@ -273,13 +279,13 @@
 
     .tcard-background {
       background-size: cover;
-      opacity: var(--tcard-opacity);
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
       bottom: 0;
+      left: 0;
+      opacity: var(--tcard-opacity);
       pointer-events: none;
+      position: absolute;
+      right: 0;
+      top: 0;
     }
 
     &.shattered {
@@ -303,47 +309,47 @@
       }
 
       &::after {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
         bottom: 0;
         box-shadow: inset 0 0 8px var(--color-shadow-primary);
+        content: "";
+        left: 0;
         pointer-events: none;
+        position: absolute;
+        right: 0;
+        top: 0;
       }
     }
 
     .tcard-marker {
-      width: 0;
       height: 100%;
       opacity: var(--tcard-opacity);
+      width: 0;
       z-index: -1;
     }
 
     .tcard-image {
-      width: var(--tcard-height);
       height: var(--tcard-height);
-      min-width: var(--tcard-height);
       margin-right: var(--tcard-image-padding);
-      overflow: hidden;
+      min-width: var(--tcard-height);
       opacity: var(--tcard-opacity);
+      overflow: hidden;
+      width: var(--tcard-height);
 
       &.usable {
         cursor: pointer;
       }
 
       img {
-        max-width: 100%;
-        max-height: 100%;
-        width: 100%;
+        border: none;
+        filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.4));
         height: 100%;
+        max-height: 100%;
+        max-width: 100%;
         object-fit: cover;
         object-position: center;
-        border: none;
         transition: filter 0.15s ease-in-out;
         -webkit-user-drag: none;
-        filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.4));
+        width: 100%;
 
         &:hover {
           filter: drop-shadow(0 0 2px rgba(125, 0, 0, 0.4));
@@ -356,38 +362,38 @@
     }
 
     .tcard-body {
+      align-items: center;
       display: flex;
-      flex-direction: row;
       flex: 1;
+      flex-direction: row;
       height: 100%;
       justify-content: space-between;
-      align-items: center;
-      opacity: var(--tcard-opacity);
       min-width: 0; // Allow proper shrinking of child elements
+      opacity: var(--tcard-opacity);
 
       .tcard-titles {
+        align-items: var(--tcard-titles-align-items);
         display: flex;
         flex-direction: var(--tcard-titles-flex-direction);
-        align-items: var(--tcard-titles-align-items);
-        gap: var(--tcard-titles-gap);
         flex-shrink: 0; // Keep rigid to prevent wrapping and overlapping
-        padding-left: var(--tcard-titles-padding-left);
+        gap: var(--tcard-titles-gap);
         max-width: 60%; // Prevent titles from taking up too much space
+        padding-left: var(--tcard-titles-padding-left);
 
         .tcard-title {
-          font-size: var(--tcard-title-font-size);
           color: var(--color-text);
+          font-size: var(--tcard-title-font-size);
           overflow: hidden;
           text-overflow: ellipsis;
           white-space: nowrap;
         }
 
         .tcard-subtitle {
-          font-size: var(--tcard-subtitle-font-size);
           color: var(--color-text-subtle);
-          text-transform: uppercase;
+          font-size: var(--tcard-subtitle-font-size);
           overflow: hidden;
           text-overflow: ellipsis;
+          text-transform: uppercase;
           white-space: nowrap;
 
           &.tcard-clickable {
@@ -405,38 +411,38 @@
       }
 
       .tcard-content {
+        align-items: var(--tcard-content-align-items);
         display: flex;
         flex-direction: var(--tcard-content-flex-direction);
-        justify-content: space-between;
-        align-items: var(--tcard-content-align-items);
+        flex-shrink: 1; // Allow content to shrink when needed
+        gap: var(--tcard-content-gap);
         height: 100%;
+        justify-content: space-between;
+        min-width: 0; // Allow shrinking below content size
+        overflow: hidden;
         padding: var(--tcard-content-padding);
         padding-right: var(--tcard-content-right-padding);
-        gap: var(--tcard-content-gap);
-        overflow: hidden;
-        flex-shrink: 1; // Allow content to shrink when needed
-        min-width: 0; // Allow shrinking below content size
 
         .tcard-text {
-          font-size: 0.8em;
           color: var(--color-text-subtle);
-          text-transform: uppercase;
-          text-align: right;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          white-space: nowrap;
           flex-shrink: 1; // Allow text to shrink
+          font-size: 0.8em;
           margin-left: var(--tcard-content-gap);
+          overflow: hidden;
+          text-align: right;
+          text-overflow: ellipsis;
+          text-transform: uppercase;
+          white-space: nowrap;
         }
 
         .tcard-icons {
-          font-size: 0.8em;
           color: var(--color-text-subtle);
-          text-transform: uppercase;
           display: flex;
           flex-direction: row;
-          gap: var(--tcard-icons-gap);
           flex-shrink: 0; // Icons never shrink - highest priority
+          font-size: 0.8em;
+          gap: var(--tcard-icons-gap);
+          text-transform: uppercase;
 
           i {
             &:hover {
@@ -457,17 +463,17 @@
   }
 
   .no-results {
-    display: none;
-    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    width: 100%;
     background-color: rgba(255, 255, 255, 0.075);
+    border: var(--tcard-inner-border-width) solid var(--color-border);
     border-radius: var(--tcard-border-radius);
     box-shadow: var(--tcard-box-shadow);
+    display: none;
+    flex-direction: column;
     height: var(--tcard-height);
-    border: var(--tcard-inner-border-width) solid var(--color-border);
+    justify-content: center;
     opacity: 0.5;
+    width: 100%;
   }
 
   .tcard-container-start + .no-results {

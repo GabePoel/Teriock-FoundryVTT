@@ -2,10 +2,7 @@ import ImageMagick from "magickwand.js";
 import fs from "node:fs/promises";
 import path from "node:path";
 
-const {
-  Magick,
-  MagickCore,
-} = await ImageMagick;
+const { Magick, MagickCore } = await ImageMagick;
 
 const CLASSES_DIR = "../../src/icons/classes";
 const NUMBERS_DIR = "./numbers";
@@ -32,7 +29,9 @@ async function ensureDir(dir) {
 function parseGeometry(geom) {
   const m = geom.match(/^([+-]\d+)([+-]\d+)$/);
   if (!m) {
-    throw new Error(`Invalid GEOMETRY "${geom}". Expected like "+0+0" or "-5+12".`);
+    throw new Error(
+      `Invalid GEOMETRY "${geom}". Expected like "+0+0" or "-5+12".`,
+    );
   }
   return {
     dx: parseInt(m[1], 10),
@@ -49,7 +48,8 @@ function parseGeometry(geom) {
  * @returns {{x: number, y: number}}
  */
 function gravityAnchor(baseW, baseH, overW, overH, gravity) {
-  let x = 0, y = 0;
+  let x = 0,
+    y = 0;
   switch (gravity.toLowerCase()) {
     case "center":
       x = Math.round((baseW - overW) / 2);
@@ -127,8 +127,8 @@ async function listWebp(dir) {
   const abs = path.resolve(dir);
   const entries = await fs.readdir(abs);
   return entries
-    .filter(n => n.toLowerCase().endsWith(".webp"))
-    .map(n => path.join(abs, n));
+    .filter((n) => n.toLowerCase().endsWith(".webp"))
+    .map((n) => path.join(abs, n));
 }
 
 (async function main() {
@@ -140,17 +140,16 @@ async function listWebp(dir) {
 
     if (classFiles.length === 0) {
       console.error(`No .webp files found in ${CLASSES_DIR}`);
+      //eslint-disable-next-line no-undef
       process.exit(1);
     }
     if (numberFiles.length === 0) {
       console.error(`No .webp files found in ${NUMBERS_DIR}`);
+      //eslint-disable-next-line no-undef
       process.exit(1);
     }
 
-    const {
-      dx,
-      dy,
-    } = parseGeometry(GEOMETRY);
+    const { dx, dy } = parseGeometry(GEOMETRY);
 
     for (const classPath of classFiles) {
       const classBase = path.basename(classPath, ".webp"); // e.g., "warrior"
@@ -167,10 +166,13 @@ async function listWebp(dir) {
         const overH = numSize.height();
 
         // gravity anchor + geometry offsets
-        const {
-          x: gx,
-          y: gy,
-        } = gravityAnchor(baseW, baseH, overW, overH, GRAVITY);
+        const { x: gx, y: gy } = gravityAnchor(
+          baseW,
+          baseH,
+          overW,
+          overH,
+          GRAVITY,
+        );
         const x = gx + dx;
         const y = gy + dy;
 
@@ -184,6 +186,7 @@ async function listWebp(dir) {
     }
   } catch (err) {
     console.error(err.message || err);
+    //eslint-disable-next-line no-undef
     process.exit(1);
   }
 })();

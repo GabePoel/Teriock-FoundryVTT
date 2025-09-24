@@ -1,5 +1,7 @@
 import {
-  addAbilitiesBlock, addPropertiesBlock, addResourcesBlock,
+  addAbilitiesBlock,
+  addPropertiesBlock,
+  addResourcesBlock,
 } from "../../../../helpers/messages-builder/message-parts.mjs";
 
 /**
@@ -16,7 +18,7 @@ export function _messageParts(powerData) {
     {
       icon: "fa-" + ref[src.type].icon,
       label: "Power Type",
-      wrappers: [ ref[src.type].name ],
+      wrappers: [ref[src.type].name],
     },
   ];
   if (powerData.type === "species") {
@@ -26,7 +28,9 @@ export function _messageParts(powerData) {
       wrappers: [
         powerData.size ? "Size " + powerData.size : "",
         powerData.adult ? "Adult at " + powerData.adult : "",
-        powerData.lifespan ? powerData.lifespan + " Year Lifespan" : "Infinite Lifespan",
+        powerData.lifespan
+          ? powerData.lifespan + " Year Lifespan"
+          : "Infinite Lifespan",
       ],
     });
   }
@@ -41,7 +45,10 @@ export function _messageParts(powerData) {
     },
   ];
   addPropertiesBlock(powerData.parent.transferredEffects, blocks);
-  addAbilitiesBlock(powerData.parent.transferredEffects.filter((e) => !e.sup), blocks);
+  addAbilitiesBlock(
+    powerData.parent.transferredEffects.filter((e) => !e.sup),
+    blocks,
+  );
   addResourcesBlock(powerData.parent.transferredEffects, blocks);
   return {
     bars: bars,

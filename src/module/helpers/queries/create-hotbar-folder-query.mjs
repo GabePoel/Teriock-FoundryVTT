@@ -7,10 +7,12 @@ import { TeriockFolder } from "../../documents/_module.mjs";
  * @param timeout
  * @returns {Promise<void>}
  */
-export default async function createHotbarFolderQuery(queryData, { timeout }) {
+export default async function createHotbarFolderQuery(queryData, { _timeout }) {
   const name = queryData.name;
   const folders = /** @type {Collection<string, TeriockFolder>} */ game.folders;
-  let macroFolder = folders.find((f) => f.name === "Player Macros" && f.type === "Macro");
+  let macroFolder = folders.find(
+    (f) => f.name === "Player Macros" && f.type === "Macro",
+  );
   if (!macroFolder) {
     macroFolder = await TeriockFolder.create({
       name: "Player Macros",

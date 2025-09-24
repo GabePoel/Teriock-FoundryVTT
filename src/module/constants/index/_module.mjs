@@ -35,6 +35,4 @@ export { default as tradecrafts } from "../../../index/names/tradecrafts.json" w
 export { default as traits } from "../../../index/names/traits.json" with { type: "json" };
 export { default as undead } from "../../../index/names/undead.json" with { type: "json" };
 export { default as weaponClasses } from "../../../index/names/weapon-classes.json" with { type: "json" };
-export {
-  default as weaponFightingStyles,
-} from "../../../index/names/weapon-fighting-styles.json" with { type: "json" };
+export { default as weaponFightingStyles } from "../../../index/names/weapon-fighting-styles.json" with { type: "json" };

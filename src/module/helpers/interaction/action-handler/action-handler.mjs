@@ -21,10 +21,17 @@ export default class ActionHandler {
     const tokenLayer = /** @type {TokenLayer} */ game.canvas.tokens;
     const user = /** @type {TeriockUser} */ game.user;
 
-    this.selectedTokens = /** @type {TeriockTokenDocument[]} */ tokenLayer.controlled;
-    this.selectedActors = /** @type {TeriockActor[]} */ this.selectedTokens.map((t) => t.actor);
-    this.targetedTokens = /** @type {TeriockTokenDocument[]} */ Array.from(user.targets);
-    this.targetedActors = /** @type {TeriockActor[]} */ this.targetedTokens.map((t) => t.actor);
+    this.selectedTokens =
+      /** @type {TeriockTokenDocument[]} */ tokenLayer.controlled;
+    this.selectedActors = /** @type {TeriockActor[]} */ this.selectedTokens.map(
+      (t) => t.actor,
+    );
+    this.targetedTokens = /** @type {TeriockTokenDocument[]} */ Array.from(
+      user.targets,
+    );
+    this.targetedActors = /** @type {TeriockActor[]} */ this.targetedTokens.map(
+      (t) => t.actor,
+    );
     this.tokens = this.selectedTokens;
     this.actors = this.selectedActors;
     if (event.ctrlKey) {

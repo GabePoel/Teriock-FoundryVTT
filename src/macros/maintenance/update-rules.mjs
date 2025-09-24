@@ -10,20 +10,29 @@ const namespaceCategoryMap = {
   Tradecraft: "Tradecrafts",
 };
 
-for (const [ namespace, category ] of Object.entries(namespaceCategoryMap)) {
+for (const [namespace, category] of Object.entries(namespaceCategoryMap)) {
   console.log(`Processing namespace: ${namespace} (category: ${category})`);
 
   // Fetch all pages in the category
   let allRulesPages = await teriock.helpers.wiki.fetchCategoryMembers(category);
-  allRulesPages = allRulesPages.filter((page) => page.title.startsWith(`${namespace}:`));
+  allRulesPages = allRulesPages.filter((page) =>
+    page.title.startsWith(`${namespace}:`),
+  );
 
   // Attempt to load the journal from the pack
-  let rulesJournal = await foundry.utils.fromUuid(coreRulesPack.index.getName(namespace)?.uuid ?? "");
+  let rulesJournal = await foundry.utils.fromUuid(
+    coreRulesPack.index.getName(namespace)?.uuid ?? "",
+  );
 
   // Create the journal if it's missing
   if (!rulesJournal) {
-    console.warn(`Journal for namespace '${namespace}' not found. Creating it...`);
-    rulesJournal = await JournalEntry.implementation.create({ name: namespace }, { pack: "teriock.rules" });
+    console.warn(
+      `Journal for namespace '${namespace}' not found. Creating it...`,
+    );
+    rulesJournal = await JournalEntry.implementation.create(
+      { name: namespace },
+      { pack: "teriock.rules" },
+    );
   }
 
   for (const rulesPage of allRulesPages) {

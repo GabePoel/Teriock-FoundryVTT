@@ -1,4 +1,5 @@
 import { TeriockRoll } from "../../../dice/_module.mjs";
+import { TeriockChatMessage } from "../../../documents/_module.mjs";
 import { toTitleCase } from "../../../helpers/string.mjs";
 import { dedent, getRollIcon } from "../../../helpers/utils.mjs";
 
@@ -12,7 +13,7 @@ export default class StatDieModel extends DataModel {
   /** @inheritDoc */
   static defineSchema() {
     const dieChoices = {};
-    for (const [ key, value ] of Object.entries(TERIOCK.options.die.stats)) {
+    for (const [key, value] of Object.entries(TERIOCK.options.die.stats)) {
       dieChoices[key] = toTitleCase(value) + " Die";
     }
     return {
@@ -125,7 +126,7 @@ export default class StatDieModel extends DataModel {
     const roll = new TeriockRoll(`1d${this.faces}`, {});
     await roll.evaluate();
     await roll.toMessage({
-      speaker: ChatMessage.getSpeaker({ actor: actor }),
+      speaker: TeriockChatMessage.getSpeaker({ actor: actor }),
       flavor: `Rolling ${this.name}`,
     });
     if (this.stat === "hp") {
@@ -148,7 +149,7 @@ export default class StatDieModel extends DataModel {
     const roll = new TeriockRoll(`1d${this.faces}`, {});
     await roll.evaluate();
     await roll.toMessage({
-      speaker: ChatMessage.getSpeaker({ actor: actor }),
+      speaker: TeriockChatMessage.getSpeaker({ actor: actor }),
       flavor: `Rolling ${this.stat.toUpperCase()}`,
     });
     await this.parent.parent.update({ [`${this.path}.value`]: roll.total });

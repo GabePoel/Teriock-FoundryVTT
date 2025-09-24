@@ -16,4 +16,4 @@ export type ProtectionData = {
   powerSources: Set<Teriock.Parameters.Ability.PowerSource>;
   /** Statuses */
   statuses: Set<Teriock.Parameters.Condition.ConditionKey>;
-}
+};

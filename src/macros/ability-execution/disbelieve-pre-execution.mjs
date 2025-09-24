@@ -23,10 +23,9 @@ if (chosenIllusionLevel === "full") {
 if (chosenIllusionLevel === "greater") {
   dc = 18;
 }
-const buttons = data.rollConfig.chatData.system.buttons.filter((b) => b.dataset?.action
-  === "feat-save"
-  && b.dataset?.attribute
-  === "int");
+const buttons = data.rollConfig.chatData.system.buttons.filter(
+  (b) => b.dataset?.action === "feat-save" && b.dataset?.attribute === "int",
+);
 if (typeof dc === "number") {
   for (const b of buttons) {
     b.dataset.dc = `${dc - 2 * data.rollConfig.useData.modifiers.heightened}`;
@@ -36,13 +35,17 @@ for (let i = 0; i < data.rollConfig.chatData.rolls.length; i++) {
   const r = data.rollConfig.chatData.rolls[i];
   if (r.context?.diceClass === "feat") {
     if (typeof dc === "number") {
-      const newRoll = new game.teriock.Roll(`${dc} - 2 * @h`, data.rollConfig.useData.rollData, {
-        flavor: illusionLevels[chosenIllusionLevel] + " DC",
-        context: {
-          diceClass: "feat",
-          totalClass: "feat",
+      const newRoll = new game.teriock.Roll(
+        `${dc} - 2 * @h`,
+        data.rollConfig.useData.rollData,
+        {
+          flavor: illusionLevels[chosenIllusionLevel] + " DC",
+          context: {
+            diceClass: "feat",
+            totalClass: "feat",
+          },
         },
-      });
+      );
       await newRoll.evaluate();
       data.rollConfig.chatData.rolls[i] = newRoll;
     } else {

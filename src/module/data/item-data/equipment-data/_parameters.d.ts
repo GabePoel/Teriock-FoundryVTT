@@ -22,6 +22,9 @@ declare global {
     export type PropertyKey = keyof typeof index.properties;
 
     /** Hooked equipment macros */
-    export type HookedEquipmentMacros = Record<Teriock.Parameters.Shared.PropertyPseudoHook, Teriock.UUID<TeriockMacro>[]>;
+    export type HookedEquipmentMacros = Record<
+      Teriock.Parameters.Shared.PropertyPseudoHook,
+      Teriock.UUID<TeriockMacro>[]
+    >;
   }
 }

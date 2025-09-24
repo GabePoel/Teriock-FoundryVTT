@@ -7,10 +7,7 @@ import * as documents from "./documents/_module.mjs";
 import * as helpers from "./helpers/_module.mjs";
 import * as setup from "./setup/_module.mjs";
 
-const {
-  ActorSheet,
-  ItemSheet,
-} = foundry.appv1.sheets;
+const { ActorSheet, ItemSheet } = foundry.appv1.sheets;
 const { DocumentSheetConfig } = foundry.applications.apps;
 
 /** Global Teriock config */
@@ -95,20 +92,19 @@ foundry.helpers.Hooks.once("init", function () {
 
   // noinspection JSValidateTypes
   CONFIG.Canvas.visionModes = {
-    ...CONFIG.Canvas.visionModes, ...canvas.perception.visionModes,
+    ...CONFIG.Canvas.visionModes,
+    ...canvas.perception.visionModes,
   };
   for (const key of Object.keys(CONFIG.Canvas.detectionModes)) {
     const id = CONFIG.Canvas.detectionModes[key].id;
-    if (![
-      "basicSight",
-      "lightPerception",
-    ].includes(id)) {
+    if (!["basicSight", "lightPerception"].includes(id)) {
       delete CONFIG.Canvas.detectionModes[key];
     }
   }
   // noinspection JSValidateTypes
   CONFIG.Canvas.detectionModes = {
-    ...CONFIG.Canvas.detectionModes, ...canvas.perception.detectionModes,
+    ...CONFIG.Canvas.detectionModes,
+    ...canvas.perception.detectionModes,
   };
 
   // Register custom core placeables
@@ -156,8 +152,16 @@ foundry.helpers.Hooks.once("init", function () {
   CONFIG.ux.TooltipManager = helpers.interaction.TeriockTooltipManager;
 
   // Unregister V1 sheets
-  DocumentSheetConfig.unregisterSheet(documents.TeriockActor, "teriock", ActorSheet);
-  DocumentSheetConfig.unregisterSheet(documents.TeriockItem, "teriock", ItemSheet);
+  DocumentSheetConfig.unregisterSheet(
+    documents.TeriockActor,
+    "teriock",
+    ActorSheet,
+  );
+  DocumentSheetConfig.unregisterSheet(
+    documents.TeriockItem,
+    "teriock",
+    ItemSheet,
+  );
 
   // Register custom sheets
   const sheetMap = [
@@ -166,89 +170,85 @@ foundry.helpers.Hooks.once("init", function () {
       cls: applications.sheets.actor.CharacterSheet,
       doc: documents.TeriockActor,
       label: "Character",
-      types: [ "character" ],
+      types: ["character"],
     },
     // Items
     {
       cls: applications.sheets.item.EquipmentSheet,
       doc: documents.TeriockItem,
       label: "Equipment",
-      types: [ "equipment" ],
+      types: ["equipment"],
     },
     {
       cls: applications.sheets.item.RankSheet,
       doc: documents.TeriockItem,
       label: "Rank",
-      types: [ "rank" ],
+      types: ["rank"],
     },
     {
       cls: applications.sheets.item.PowerSheet,
       doc: documents.TeriockItem,
       label: "Power",
-      types: [ "power" ],
+      types: ["power"],
     },
     {
       cls: applications.sheets.item.MechanicSheet,
       doc: documents.TeriockItem,
       label: "Mechanic",
-      types: [ "mechanic" ],
+      types: ["mechanic"],
     },
     {
       cls: applications.sheets.item.SpeciesSheet,
       doc: documents.TeriockItem,
       label: "Species",
-      types: [ "species" ],
+      types: ["species"],
     },
     {
       cls: applications.sheets.item.WrapperSheet,
       doc: documents.TeriockItem,
       label: "Wrapper",
-      types: [ "wrapper" ],
+      types: ["wrapper"],
     },
     // Effects
     {
       cls: applications.sheets.effect.AbilitySheet,
       doc: documents.TeriockEffect,
       label: "Ability",
-      types: [ "ability" ],
+      types: ["ability"],
     },
     {
       cls: applications.sheets.effect.FluencySheet,
       doc: documents.TeriockEffect,
       label: "Fluency",
-      types: [ "fluency" ],
+      types: ["fluency"],
     },
     {
       cls: applications.sheets.effect.ResourceSheet,
       doc: documents.TeriockEffect,
       label: "Resource",
-      types: [ "resource" ],
+      types: ["resource"],
     },
     {
       cls: applications.sheets.effect.PropertySheet,
       doc: documents.TeriockEffect,
       label: "Property",
-      types: [ "property" ],
+      types: ["property"],
     },
     {
       cls: applications.sheets.effect.ConsequenceSheet,
       doc: documents.TeriockEffect,
       label: "Consequence",
       makeDefault: false,
-      types: [ "consequence" ],
+      types: ["consequence"],
     },
   ];
-  sheetMap.forEach(({
-    cls,
-    label,
-    types,
-    doc,
-    makeDefault = true,
-  }) => DocumentSheetConfig.registerSheet(doc, "teriock", cls, {
-    label,
-    makeDefault,
-    types,
-  }));
+  sheetMap.forEach(({ cls, label, types, doc, makeDefault = true }) =>
+    DocumentSheetConfig.registerSheet(doc, "teriock", cls, {
+      label,
+      makeDefault,
+      types,
+    }),
+  );
 
   // Registering custom dice rolls and functions
   CONFIG.Dice.rolls.length = 0;
@@ -271,10 +271,12 @@ foundry.helpers.Hooks.once("init", function () {
     "teriock.sustainedExpiration": helpers.queries.sustainedExpirationQuery,
     "teriock.timeAdvance": helpers.queries.timeAdvanceQuery,
     "teriock.update": helpers.queries.updateQuery,
-    "teriock.updateEmbeddedDocuments": helpers.queries.updateEmbeddedDocumentsQuery,
+    "teriock.updateEmbeddedDocuments":
+      helpers.queries.updateEmbeddedDocumentsQuery,
   });
 
-  const packs = /** @type {Collection<string,CompendiumCollection>} */ game.packs;
+  const packs =
+    /** @type {Collection<string,CompendiumCollection>} */ game.packs;
 
   // noinspection JSUndefinedPropertyAssignment
   game.teriock = {
@@ -291,27 +293,38 @@ foundry.helpers.Hooks.once("init", function () {
     Roll: dice.TeriockRoll,
     data: data,
     packs: {
-      abilities: () => /** @type {TeriockWrapperCompendium} */
+      abilities: () =>
+        /** @type {TeriockWrapperCompendium} */
         packs.get("teriock.abilities"),
-      classes: () => /** @type {TeriockRankCompendium} */
+      classes: () =>
+        /** @type {TeriockRankCompendium} */
         packs.get("teriock.classes"),
-      creatures: () => /** @type {TeriockCharacterCompendium} */
+      creatures: () =>
+        /** @type {TeriockCharacterCompendium} */
         packs.get("teriock.creatures"),
-      equipment: () => /** @type {TeriockEquipmentCompendium} */
+      equipment: () =>
+        /** @type {TeriockEquipmentCompendium} */
         packs.get("teriock.equipment"),
-      essentials: () => /** @type {TeriockPowerCompendium} */
+      essentials: () =>
+        /** @type {TeriockPowerCompendium} */
         packs.get("teriock.essentials"),
-      execution: () => /** @type {TeriockMacroCompendium} */
+      execution: () =>
+        /** @type {TeriockMacroCompendium} */
         packs.get("teriock.execution"),
-      maintenance: () => /** @type {TeriockMacroCompendium} */
+      maintenance: () =>
+        /** @type {TeriockMacroCompendium} */
         packs.get("teriock.maintenance"),
-      powers: () => /** @type {TeriockPowerCompendium} */
+      powers: () =>
+        /** @type {TeriockPowerCompendium} */
         packs.get("teriock.powers"),
-      properties: () => /** @type {TeriockWrapperCompendium} */
+      properties: () =>
+        /** @type {TeriockWrapperCompendium} */
         packs.get("teriock.properties"),
-      rules: () => /** @type {TeriockJournalCompendium} */
+      rules: () =>
+        /** @type {TeriockJournalCompendium} */
         packs.get("teriock.rules"),
-      species: () => /** @type {TeriockPowerCompendium} */
+      species: () =>
+        /** @type {TeriockPowerCompendium} */
         packs.get("teriock.species"),
     },
   };

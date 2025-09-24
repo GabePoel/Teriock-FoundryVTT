@@ -8,18 +8,27 @@
 export function _suppressed(propertyData) {
   let suppressed = false;
   if (!suppressed && propertyData.parent.parent.type === "equipment") {
-    if (!suppressed && !propertyData.parent.parent.system.equipped && propertyData.modifies === "Actor") {
+    if (
+      !suppressed &&
+      !propertyData.parent.parent.system.equipped &&
+      propertyData.modifies === "Actor"
+    ) {
       suppressed = true;
     }
-    if (!suppressed
-      && propertyData.parent.parent.system.dampened
-      && propertyData.form
-      !== "intrinsic"
-      && !propertyData.applyIfDampened) {
+    if (
+      !suppressed &&
+      propertyData.parent.parent.system.dampened &&
+      propertyData.form !== "intrinsic" &&
+      !propertyData.applyIfDampened
+    ) {
       suppressed = true;
     }
   }
-  if (!suppressed && propertyData.parent.parent.system.shattered && !propertyData.applyIfShattered) {
+  if (
+    !suppressed &&
+    propertyData.parent.parent.system.shattered &&
+    !propertyData.applyIfShattered
+  ) {
     suppressed = true;
   }
   if (!suppressed && propertyData.actor && propertyData.parent.sup) {

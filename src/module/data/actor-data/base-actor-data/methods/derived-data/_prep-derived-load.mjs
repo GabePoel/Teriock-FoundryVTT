@@ -21,7 +21,10 @@ export function _prepDerivedEncumbrance(actorData) {
   if (actorData.weight.carried >= actorData.carryingCapacity.max) {
     newEncumbranceLevel = 3;
   }
-  newEncumbranceLevel = Math.min(actorData.encumbranceLevel + newEncumbranceLevel, 3);
+  newEncumbranceLevel = Math.min(
+    actorData.encumbranceLevel + newEncumbranceLevel,
+    3,
+  );
   actorData.encumbranceLevel = newEncumbranceLevel;
 }
 
@@ -64,6 +67,9 @@ export function _prepDerivedWeightCarried(actorData) {
     }
     return sum + newWeight;
   }, 0);
-  actorData.weight.carried = Math.ceil(actorData.weight.equipment + actorData.weight.money);
-  actorData.weight.value = actorData.weight.equipment + actorData.weight.money + actorData.weight.self;
+  actorData.weight.carried = Math.ceil(
+    actorData.weight.equipment + actorData.weight.money,
+  );
+  actorData.weight.value =
+    actorData.weight.equipment + actorData.weight.money + actorData.weight.self;
 }

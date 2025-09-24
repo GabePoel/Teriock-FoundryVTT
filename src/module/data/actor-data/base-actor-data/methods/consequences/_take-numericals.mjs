@@ -177,9 +177,15 @@ export async function _takePay(actorData, amount, mode = "greedy") {
   const currentMoney = { ...actorData.money };
 
   // Calculate total available wealth in gold value
-  const totalWealth = Object.keys(TERIOCK.options.currency).reduce((total, currency) => {
-    return (total + (currentMoney[currency] || 0) * TERIOCK.options.currency[currency].value);
-  }, 0);
+  const totalWealth = Object.keys(TERIOCK.options.currency).reduce(
+    (total, currency) => {
+      return (
+        total +
+        (currentMoney[currency] || 0) * TERIOCK.options.currency[currency].value
+      );
+    },
+    0,
+  );
 
   // If not enough money, add to debt and exit
   if (totalWealth < amount) {
@@ -192,9 +198,10 @@ export async function _takePay(actorData, amount, mode = "greedy") {
 
   // Create array of currencies sorted by value (highest first)
   const currencies = Object.entries(TERIOCK.options.currency)
-    .sort(([ , a ], [ , b ]) => b.value - a.value)
-    .map(([ key, config ]) => ({
-      key, ...config,
+    .sort(([, a], [, b]) => b.value - a.value)
+    .map(([key, config]) => ({
+      key,
+      ...config,
       current: currentMoney[key] || 0,
     }));
 
@@ -207,7 +214,10 @@ export async function _takePay(actorData, amount, mode = "greedy") {
       break;
     }
 
-    const canTake = Math.min(currency.current, Math.floor(remainingAmount / currency.value));
+    const canTake = Math.min(
+      currency.current,
+      Math.floor(remainingAmount / currency.value),
+    );
     if (canTake > 0) {
       toDeduct[currency.key] = canTake;
       remainingAmount -= canTake * currency.value;
@@ -239,8 +249,9 @@ export async function _takePay(actorData, amount, mode = "greedy") {
   const updateData = {};
 
   // Deduct the currencies we're spending
-  for (const [ currencyKey, amountToDeduct ] of Object.entries(toDeduct)) {
-    updateData[`system.money.${currencyKey}`] = currentMoney[currencyKey] - amountToDeduct;
+  for (const [currencyKey, amountToDeduct] of Object.entries(toDeduct)) {
+    updateData[`system.money.${currencyKey}`] =
+      currentMoney[currencyKey] - amountToDeduct;
   }
 
   // Handle change for exact mode
@@ -255,11 +266,13 @@ export async function _takePay(actorData, amount, mode = "greedy") {
 
       const changeAmount = Math.floor(changeRemaining / currency.value);
       if (changeAmount > 0) {
-        const currentAmount = updateData[`system.money.${currency.key}`] !== undefined
-          ? updateData[`system.money.${currency.key}`]
-          : currentMoney[currency.key];
+        const currentAmount =
+          updateData[`system.money.${currency.key}`] !== undefined
+            ? updateData[`system.money.${currency.key}`]
+            : currentMoney[currency.key];
 
-        updateData[`system.money.${currency.key}`] = currentAmount + changeAmount;
+        updateData[`system.money.${currency.key}`] =
+          currentAmount + changeAmount;
         changeRemaining -= changeAmount * currency.value;
       }
     }

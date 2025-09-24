@@ -1,6 +1,9 @@
 import { documentOptions } from "../../../../constants/options/document-options.mjs";
 import TeriockBaseEffectSheet from "../base-effect-sheet/base-effect-sheet.mjs";
-import { fieldContextMenu, tradecraftContextMenu } from "./connections/_context-menus.mjs";
+import {
+  fieldContextMenu,
+  tradecraftContextMenu,
+} from "./connections/_context-menus.mjs";
 
 /**
  * Fluency sheet for Teriock system fluencies.
@@ -14,7 +17,7 @@ export default class TeriockFluencySheet extends TeriockBaseEffectSheet {
    * @type {Partial<ApplicationConfiguration>}
    */
   static DEFAULT_OPTIONS = {
-    classes: [ "fluency" ],
+    classes: ["fluency"],
     window: {
       icon: "fa-solid fa-" + documentOptions.fluency.icon,
     },
@@ -23,12 +26,9 @@ export default class TeriockFluencySheet extends TeriockBaseEffectSheet {
   /** @inheritDoc */
   static PARTS = {
     all: {
-      template: "systems/teriock/src/templates/document-templates/effect-templates/fluency-template/fluency-template.hbs",
-      scrollable: [
-        ".window-content",
-        ".tsheet-page",
-        ".ab-sheet-everything",
-      ],
+      template:
+        "systems/teriock/src/templates/document-templates/effect-templates/fluency-template/fluency-template.hbs",
+      scrollable: [".window-content", ".tsheet-page", ".ab-sheet-everything"],
     },
   };
 
@@ -44,10 +44,7 @@ export default class TeriockFluencySheet extends TeriockBaseEffectSheet {
         selector: ".tradecraft-box",
         menu: tradecraftContextMenu,
       },
-    ].forEach(({
-      selector,
-      menu,
-    }) => {
+    ].forEach(({ selector, menu }) => {
       this._connectContextMenu(selector, menu(this.document), "click");
     });
   }

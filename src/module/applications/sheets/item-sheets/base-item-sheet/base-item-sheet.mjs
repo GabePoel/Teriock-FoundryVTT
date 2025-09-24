@@ -11,13 +11,15 @@ const { ItemSheetV2 } = foundry.applications.sheets;
  * @property {TeriockItem} document
  * @property {TeriockItem} item
  */
-export default class TeriockBaseItemSheet extends CommonSheetMixin(ItemSheetV2) {
+export default class TeriockBaseItemSheet extends CommonSheetMixin(
+  ItemSheetV2,
+) {
   /**
    * @inheritDoc
    * @type {Partial<ApplicationConfiguration>}
    */
   static DEFAULT_OPTIONS = {
-    classes: [ "teriock" ],
+    classes: ["teriock"],
     actions: {
       toggleOnUseDoc: this._toggleOnUseDoc,
       refreshThis: this._refreshThis,
@@ -39,10 +41,7 @@ export default class TeriockBaseItemSheet extends CommonSheetMixin(ItemSheetV2) 
    * @private
    */
   static async _refreshThis() {
-    const toRefresh = [
-      ...this.document.abilities,
-      ...this.document.properties,
-    ];
+    const toRefresh = [...this.document.abilities, ...this.document.properties];
     await refreshDocuments(toRefresh);
   }
 
@@ -73,7 +72,7 @@ export default class TeriockBaseItemSheet extends CommonSheetMixin(ItemSheetV2) 
       ".range-input": cleanFeet,
     };
 
-    for (const [ selector, cleaner ] of Object.entries(cleanMap)) {
+    for (const [selector, cleaner] of Object.entries(cleanMap)) {
       this.element.querySelectorAll(selector).forEach((el) => {
         this._connectInput(el, el.getAttribute("name"), cleaner);
       });
@@ -137,9 +136,13 @@ export default class TeriockBaseItemSheet extends CommonSheetMixin(ItemSheetV2) 
       return (a.name || "").localeCompare(b.name || "");
     });
 
-    const fluencies = this.item.fluencies.sort((a, b) => (a.name || "").localeCompare(b.name || ""));
+    const fluencies = this.item.fluencies.sort((a, b) =>
+      (a.name || "").localeCompare(b.name || ""),
+    );
 
-    const resources = this.item.resources.sort((a, b) => (a.name || "").localeCompare(b.name || ""));
+    const resources = this.item.resources.sort((a, b) =>
+      (a.name || "").localeCompare(b.name || ""),
+    );
 
     const context = await super._prepareContext(options);
     context.item = this.item;

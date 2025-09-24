@@ -1,5 +1,8 @@
 import { mergeFreeze } from "../../../helpers/utils.mjs";
-import { ConsumableDataMixin, ExecutableDataMixin } from "../../mixins/_module.mjs";
+import {
+  ConsumableDataMixin,
+  ExecutableDataMixin,
+} from "../../mixins/_module.mjs";
 import TeriockBaseEffectModel from "../base-effect-data/base-effect-data.mjs";
 import { _messageParts } from "./methods/_messages.mjs";
 import { _migrateData } from "./methods/_migrate-data.mjs";
@@ -9,7 +12,9 @@ import { _migrateData } from "./methods/_migrate-data.mjs";
  * @extends {TeriockBaseEffectModel}
  * @mixes ExecutableDataMixin
  */
-export default class TeriockResourceModel extends ConsumableDataMixin(ExecutableDataMixin(TeriockBaseEffectModel)) {
+export default class TeriockResourceModel extends ConsumableDataMixin(
+  ExecutableDataMixin(TeriockBaseEffectModel),
+) {
   /**
    * @inheritDoc
    * @type {Readonly<Teriock.Documents.EffectModelMetadata>}

@@ -132,7 +132,9 @@ export default async function fetchWikiPageHTML(title, options = {}) {
 
       if (!titleAttr) {
         if (isWikiLink && enrichText) {
-          const pageName = decodeURIComponent(href.split("/index.php/")[1] || "").replace(/_/g, " ");
+          const pageName = decodeURIComponent(
+            href.split("/index.php/")[1] || "",
+          ).replace(/_/g, " ");
           const display = textContent || pageName;
           const enricherTag = `@Wiki[${pageName}]{${display}}`;
           if (isNode) {
@@ -144,7 +146,7 @@ export default async function fetchWikiPageHTML(title, options = {}) {
         continue;
       }
 
-      const [ type, ...rest ] = titleAttr.split(":");
+      const [type, ...rest] = titleAttr.split(":");
       const fileName = rest.join(":").trim();
 
       if (!type || !fileName) {
@@ -176,13 +178,17 @@ export default async function fetchWikiPageHTML(title, options = {}) {
         }
 
         if (!enriched && isWikiLink) {
-          const pageName = decodeURIComponent(href.split("/index.php/")[1] || "").replace(/_/g, " ");
+          const pageName = decodeURIComponent(
+            href.split("/index.php/")[1] || "",
+          ).replace(/_/g, " ");
           const display = textContent || pageName;
           const enricherTag = `@Wiki[${pageName}]{${display}}`;
           link.replaceWith(document.createTextNode(enricherTag));
         }
       } else if (isWikiLink && enrichText) {
-        const pageName = decodeURIComponent(href.split("/index.php/")[1] || "").replace(/_/g, " ");
+        const pageName = decodeURIComponent(
+          href.split("/index.php/")[1] || "",
+        ).replace(/_/g, " ");
         const display = textContent || pageName;
         const enricherTag = `@Wiki[${pageName}]{${display}}`;
         link.replaceWith(document.createTextNode(enricherTag));
@@ -190,7 +196,7 @@ export default async function fetchWikiPageHTML(title, options = {}) {
     }
 
     if (cleanSpans) {
-      [ ...doc.querySelectorAll("span") ]
+      [...doc.querySelectorAll("span")]
         .reverse()
         .forEach((s) => s.replaceWith(s.textContent));
     }

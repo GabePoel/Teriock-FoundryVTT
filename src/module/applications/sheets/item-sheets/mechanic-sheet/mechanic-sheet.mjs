@@ -13,7 +13,7 @@ export default class TeriockMechanicSheet extends TeriockBaseItemSheet {
    * @type {Partial<ApplicationConfiguration>}
    */
   static DEFAULT_OPTIONS = {
-    classes: [ "mechanic" ],
+    classes: ["mechanic"],
     window: {
       icon: "fa-solid fa-" + documentOptions.mechanic.icon,
     },
@@ -22,12 +22,9 @@ export default class TeriockMechanicSheet extends TeriockBaseItemSheet {
   /** @inheritDoc */
   static PARTS = {
     all: {
-      template: "systems/teriock/src/templates/document-templates/item-templates/mechanic-template/mechanic-template.hbs",
-      scrollable: [
-        ".window-content",
-        ".tsheet-page",
-        ".ab-sheet-everything",
-      ],
+      template:
+        "systems/teriock/src/templates/document-templates/item-templates/mechanic-template/mechanic-template.hbs",
+      scrollable: [".window-content", ".tsheet-page", ".ab-sheet-everything"],
     },
   };
 

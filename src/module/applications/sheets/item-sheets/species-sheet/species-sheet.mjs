@@ -13,7 +13,7 @@ export default class TeriockSpeciesSheet extends TeriockBaseItemSheet {
    * @type {Partial<ApplicationConfiguration>}
    */
   static DEFAULT_OPTIONS = {
-    classes: [ "species" ],
+    classes: ["species"],
     window: {
       icon: "fa-solid fa-" + documentOptions.species.icon,
     },
@@ -26,12 +26,9 @@ export default class TeriockSpeciesSheet extends TeriockBaseItemSheet {
   /** @inheritDoc */
   static PARTS = {
     all: {
-      template: "systems/teriock/src/templates/document-templates/item-templates/species-template/species-template.hbs",
-      scrollable: [
-        ".window-content",
-        ".tsheet-page",
-        ".ab-sheet-everything",
-      ],
+      template:
+        "systems/teriock/src/templates/document-templates/item-templates/species-template/species-template.hbs",
+      scrollable: [".window-content", ".tsheet-page", ".ab-sheet-everything"],
     },
   };
 
@@ -64,7 +61,7 @@ export default class TeriockSpeciesSheet extends TeriockBaseItemSheet {
       ".trait-tag": "traits",
     };
 
-    for (const [ selector, path ] of Object.entries(traitTags)) {
+    for (const [selector, path] of Object.entries(traitTags)) {
       root.querySelectorAll(selector).forEach((el) => {
         el.addEventListener("click", async () => {
           const val = el.getAttribute("value");
@@ -85,7 +82,7 @@ export default class TeriockSpeciesSheet extends TeriockBaseItemSheet {
       },
     };
 
-    for (const [ selector, update ] of Object.entries(buttonUpdates)) {
+    for (const [selector, update] of Object.entries(buttonUpdates)) {
       root.querySelectorAll(selector).forEach((el) => {
         el.addEventListener("click", () => doc.update(update));
       });

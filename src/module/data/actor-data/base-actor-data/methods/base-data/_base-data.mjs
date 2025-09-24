@@ -31,7 +31,8 @@ export function _baseData(actorData) {
     goadedTo: [],
   };
   actorData.encumbranceLevel = 0;
-  actorData.hookedMacros = /** @type {Teriock.Parameters.Actor.HookedActorMacros} */ {};
+  actorData.hookedMacros =
+    /** @type {Teriock.Parameters.Actor.HookedActorMacros} */ {};
   for (const pseudoHook of Object.keys(pseudoHooks)) {
     actorData.hookedMacros[pseudoHook] = [];
   }

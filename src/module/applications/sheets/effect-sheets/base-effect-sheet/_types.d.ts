@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-empty-object-type */
 import { CommonSheetMixin } from "../../mixins/_module.mjs";
 
 type SheetMixinType = typeof CommonSheetMixin;

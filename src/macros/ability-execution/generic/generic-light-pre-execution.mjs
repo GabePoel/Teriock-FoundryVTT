@@ -1,6 +1,8 @@
 const data = /** @type {Teriock.HookData.UseAbility} */ scope.data;
 const lightedToUuids = await tm.dialogs.lightedToDialog();
-const button = data.rollConfig.chatData.system.buttons.find((b) => b.dataset.action === "apply-effect");
+const button = data.rollConfig.chatData.system.buttons.find(
+  (b) => b.dataset.action === "apply-effect",
+);
 
 async function modifyData(data) {
   const effectObject = JSON.parse(data);

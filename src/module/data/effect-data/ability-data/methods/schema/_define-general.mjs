@@ -177,17 +177,25 @@ export function _defineGeneral(schema) {
         initial: 1,
         min: 0,
         label: "Quantity",
-        hint: "How many of the aforementioned unit should this unit be active for? Irrelevant for \"Instant\" and \"No Limit\" units.",
+        hint:
+          'How many of the aforementioned unit should this unit be active for? Irrelevant for "Instant" and "No ' +
+          'Limit" units.',
       }),
       conditions: new fields.SchemaField({
-        present: new fields.SetField(new fields.StringField({ choices: TERIOCK.index.conditions }), {
-          label: "Present Conditions",
-          hint: "What conditions must be present in order for this ability to be active?",
-        }),
-        absent: new fields.SetField(new fields.StringField({ choices: TERIOCK.index.conditions }), {
-          label: "Absent Conditions",
-          hint: "What conditions must be absent in order for this ability to be active?",
-        }),
+        present: new fields.SetField(
+          new fields.StringField({ choices: TERIOCK.index.conditions }),
+          {
+            label: "Present Conditions",
+            hint: "What conditions must be present in order for this ability to be active?",
+          },
+        ),
+        absent: new fields.SetField(
+          new fields.StringField({ choices: TERIOCK.index.conditions }),
+          {
+            label: "Absent Conditions",
+            hint: "What conditions must be absent in order for this ability to be active?",
+          },
+        ),
       }),
       stationary: new fields.BooleanField({
         label: "Stationary",
@@ -199,17 +207,21 @@ export function _defineGeneral(schema) {
         initial: "1 Minute",
       }),
     }),
-    effectTypes: new fields.SetField(new fields.StringField({
-      choices: TERIOCK.index.effectTypes,
-    })),
+    effectTypes: new fields.SetField(
+      new fields.StringField({
+        choices: TERIOCK.index.effectTypes,
+      }),
+    ),
     elderSorcery: new fields.BooleanField({
       initial: false,
       label: "Elder Sorcery",
     }),
     elderSorceryIncant: new fields.HTMLField({ initial: "" }),
-    elements: new fields.SetField(new fields.StringField({
-      choices: TERIOCK.index.elements,
-    })),
+    elements: new fields.SetField(
+      new fields.StringField({
+        choices: TERIOCK.index.elements,
+      }),
+    ),
     endCondition: new TextField({
       initial: "",
       label: "End Condition",
@@ -301,9 +313,11 @@ export function _defineGeneral(schema) {
       initial: "normal",
       choices: TERIOCK.options.ability.piercing,
     }),
-    powerSources: new fields.SetField(new fields.StringField({
-      choices: TERIOCK.index.powerSources,
-    })),
+    powerSources: new fields.SetField(
+      new fields.StringField({
+        choices: TERIOCK.index.powerSources,
+      }),
+    ),
     prepared: new fields.BooleanField({
       initial: true,
       label: "Prepared",
@@ -378,11 +392,14 @@ export function _defineGeneral(schema) {
       initial: false,
       label: "Sustained",
     }),
-    targets: new fields.SetField(new fields.StringField({
-      choices: TERIOCK.options.ability.targets,
-    }), {
-      initial: [ "creature" ],
-    }),
+    targets: new fields.SetField(
+      new fields.StringField({
+        choices: TERIOCK.options.ability.targets,
+      }),
+      {
+        initial: ["creature"],
+      },
+    ),
     trigger: new TextField({
       initial: "",
       label: "Trigger",

@@ -53,8 +53,8 @@ function presenceData(actorData, data) {
     pres: actorData.presence.max,
     "pres.used": actorData.presence.value,
     "pres.unused": actorData.attributes.unp.value,
-    "unp": actorData.attributes.unp.value,
-    "usp": actorData.presence.value,
+    unp: actorData.attributes.unp.value,
+    usp: actorData.presence.value,
   });
 }
 
@@ -127,14 +127,7 @@ function ageData(_actorData, data) {
  */
 function attributeData(actorData, data) {
   const attr = actorData.attributes;
-  const attrKeys = [
-    "int",
-    "mov",
-    "per",
-    "snk",
-    "str",
-    "unp",
-  ];
+  const attrKeys = ["int", "mov", "per", "snk", "str", "unp"];
 
   for (const key of attrKeys) {
     const attribute = attr[key];
@@ -218,15 +211,7 @@ function witherData(actorData, data) {
  * @param {object} data - The roll data object to populate.
  */
 function hackData(actorData, data) {
-  const hackKeys = [
-    "arm",
-    "bod",
-    "ear",
-    "eye",
-    "leg",
-    "mou",
-    "nos",
-  ];
+  const hackKeys = ["arm", "bod", "ear", "eye", "leg", "mou", "nos"];
   for (const key of hackKeys) {
     const hack = actorData.hacks[key];
     if (hack) {
@@ -340,13 +325,20 @@ function defenseData(actorData, data) {
  * @param {object} data - The roll data object to populate.
  */
 function offenseData(actorData, data) {
-  const weaponAv0 = actorData.primaryAttacker ? actorData.primaryAttacker.system.piercing.av0 : false;
-  const naturalAv0 = actorData.offense.piercing === "av0" || actorData.offense.piercing === "ub";
+  const weaponAv0 = actorData.primaryAttacker
+    ? actorData.primaryAttacker.system.piercing.av0
+    : false;
+  const naturalAv0 =
+    actorData.offense.piercing === "av0" || actorData.offense.piercing === "ub";
   const hasAv0 = weaponAv0 || naturalAv0;
-  const weaponUb = actorData.primaryAttacker ? actorData.primaryAttacker.system.piercing.ub : false;
+  const weaponUb = actorData.primaryAttacker
+    ? actorData.primaryAttacker.system.piercing.ub
+    : false;
   const naturalUb = actorData.offense.piercing === "ub";
   const hasUb = weaponUb || naturalUb;
-  const weaponWarded = actorData.primaryAttacker ? actorData.primaryAttacker.system.warded : false;
+  const weaponWarded = actorData.primaryAttacker
+    ? actorData.primaryAttacker.system.warded
+    : false;
   Object.assign(data, {
     sb: actorData.offense.sb ? 1 : 0,
     av0: hasAv0 ? 2 : 0,
@@ -410,35 +402,41 @@ function moneyData(actorData, data) {
   }
 
   // Combined currency values
-  data["money.all.num"] = Object.values(actorData.money)
-    .reduce((sum, val) => sum + (val || 0), 0) - actorData.money.total;
+  data["money.all.num"] =
+    Object.values(actorData.money).reduce((sum, val) => sum + (val || 0), 0) -
+    actorData.money.total;
   data["money.all.val"] = actorData.money.total || 0;
   data["money.all.weight"] = actorData.weight.money || 0;
 
   // Coins only
-  const coinKeys = [
-    "cop",
-    "sil",
-    "gol",
-  ];
-  data["money.coi.num"] = coinKeys.reduce((sum, key) => sum + (data[`money.${key}.num`] || 0), 0);
-  data["money.coi.val"] = coinKeys.reduce((sum, key) => sum + (data[`money.${key}.val`] || 0), 0);
-  data["money.coi.weight"] = coinKeys.reduce((sum, key) => sum + (data[`money.${key}.weight`] || 0), 0);
+  const coinKeys = ["cop", "sil", "gol"];
+  data["money.coi.num"] = coinKeys.reduce(
+    (sum, key) => sum + (data[`money.${key}.num`] || 0),
+    0,
+  );
+  data["money.coi.val"] = coinKeys.reduce(
+    (sum, key) => sum + (data[`money.${key}.val`] || 0),
+    0,
+  );
+  data["money.coi.weight"] = coinKeys.reduce(
+    (sum, key) => sum + (data[`money.${key}.weight`] || 0),
+    0,
+  );
 
   // Gemstones only
-  const gemKeys = [
-    "ent",
-    "fir",
-    "pix",
-    "sno",
-    "dra",
-    "moo",
-    "mag",
-    "hea",
-  ];
-  data["money.gem.num"] = gemKeys.reduce((sum, key) => sum + (data[`money.${key}.num`] || 0), 0);
-  data["money.gem.val"] = gemKeys.reduce((sum, key) => sum + (data[`money.${key}.val`] || 0), 0);
-  data["money.gem.weight"] = gemKeys.reduce((sum, key) => sum + (data[`money.${key}.weight`] || 0), 0);
+  const gemKeys = ["ent", "fir", "pix", "sno", "dra", "moo", "mag", "hea"];
+  data["money.gem.num"] = gemKeys.reduce(
+    (sum, key) => sum + (data[`money.${key}.num`] || 0),
+    0,
+  );
+  data["money.gem.val"] = gemKeys.reduce(
+    (sum, key) => sum + (data[`money.${key}.val`] || 0),
+    0,
+  );
+  data["money.gem.weight"] = gemKeys.reduce(
+    (sum, key) => sum + (data[`money.${key}.weight`] || 0),
+    0,
+  );
 }
 
 /**

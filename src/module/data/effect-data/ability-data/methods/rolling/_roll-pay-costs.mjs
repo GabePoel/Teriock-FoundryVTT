@@ -11,16 +11,26 @@ export async function _payCosts(rollConfig) {
   const actor = rollConfig.useData.actor;
   const updates = {};
   if (rollConfig.abilityData.interaction === "attack") {
-    updates["system.combat.attackPenalty"] = actor.system.combat.attackPenalty - 3;
+    updates["system.combat.attackPenalty"] =
+      actor.system.combat.attackPenalty - 3;
   }
-  if (rollConfig.abilityData.maneuver === "reactive" && rollConfig.abilityData.executionTime === "r1") {
+  if (
+    rollConfig.abilityData.maneuver === "reactive" &&
+    rollConfig.abilityData.executionTime === "r1"
+  ) {
     updates["system.combat.hasReaction"] = false;
   }
   if (mpSpent > 0) {
-    updates["system.mp.value"] = Math.max(actor.system.mp.value - mpSpent, actor.system.mp.min ?? 0);
+    updates["system.mp.value"] = Math.max(
+      actor.system.mp.value - mpSpent,
+      actor.system.mp.min ?? 0,
+    );
   }
   if (hpSpent > 0) {
-    updates["system.hp.value"] = Math.max(actor.system.hp.value - hpSpent, actor.system.hp.min ?? 0);
+    updates["system.hp.value"] = Math.max(
+      actor.system.hp.value - hpSpent,
+      actor.system.hp.min ?? 0,
+    );
   }
   if (gpSpent > 0) {
     await actor.takePay(gpSpent);

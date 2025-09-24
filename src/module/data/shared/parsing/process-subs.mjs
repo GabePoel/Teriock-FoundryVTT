@@ -1,4 +1,7 @@
-import { createAbility, createProperty } from "../../../helpers/create-effects.mjs";
+import {
+  createAbility,
+  createProperty,
+} from "../../../helpers/create-effects.mjs";
 
 /**
  * Generic function to process sub effects from the document.
@@ -24,7 +27,7 @@ async function processSubEffects(subs, doc, config) {
   } = config;
 
   /** @type {() => TeriockEffect[]} */
-    // const getFunction = doc[getMethod];
+  // const getFunction = doc[getMethod];
   const existingSubs = doc[getMethod]();
   /** @type {Set<string>} */
   const newSubNames = new Set();
@@ -36,7 +39,10 @@ async function processSubEffects(subs, doc, config) {
     if (el.className.includes("expandable-container")) {
       subNameEl = el;
     }
-    if (subNameEl?.dataset.namespace === skipNamespace || subNameEl?.dataset.namespace !== includeNamespace) {
+    if (
+      subNameEl?.dataset.namespace === skipNamespace ||
+      subNameEl?.dataset.namespace !== includeNamespace
+    ) {
       return;
     }
 
@@ -59,7 +65,8 @@ async function processSubEffects(subs, doc, config) {
     let improvementText = "";
 
     if (improvement) {
-      const improvementSpans = improvement.querySelectorAll(".improvement-text");
+      const improvementSpans =
+        improvement.querySelectorAll(".improvement-text");
       if (improvementSpans) {
         const improvementSpan = improvementSpans[0];
         if (improvementSpan) {

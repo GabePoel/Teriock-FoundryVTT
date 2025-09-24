@@ -5,6 +5,6 @@
  * @param {{timeout?: number}} timeout
  * @returns {Promise<void>}
  */
-export default async function timeAdvanceQuery(queryData, { timeout }) {
+export default async function timeAdvanceQuery(queryData, { _timeout }) {
   await game.time.advance(queryData.delta);
 }

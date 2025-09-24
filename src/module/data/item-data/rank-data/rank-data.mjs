@@ -17,7 +17,9 @@ const { fields } = foundry.data;
  * @mixes StatDataMixin
  * @mixes WikiDataMixin
  */
-export default class TeriockRankModel extends StatDataMixin(WikiDataMixin(TeriockBaseItemModel)) {
+export default class TeriockRankModel extends StatDataMixin(
+  WikiDataMixin(TeriockBaseItemModel),
+) {
   /**
    * @inheritDoc
    * @type {Readonly<Teriock.Documents.ItemModelMetadata>}
@@ -33,7 +35,8 @@ export default class TeriockRankModel extends StatDataMixin(WikiDataMixin(Terioc
     const schema = super.defineSchema();
     Object.assign(schema, {
       description: new TextField({
-        initial: "<p>Every adventurer is a journeyman before they join their first class.</p>",
+        initial:
+          "<p>Every adventurer is a journeyman before they join their first class.</p>",
         label: "Description",
       }),
       flaws: new TextField({
@@ -139,10 +142,13 @@ export default class TeriockRankModel extends StatDataMixin(WikiDataMixin(Terioc
   /** @inheritDoc */
   get wikiPage() {
     const prefix = this.constructor.metadata.namespace;
-    const pageName = TERIOCK.index.classes[foundry.utils.getProperty(
-      this.parent,
-      this.constructor.metadata.pageNameKey,
-    )];
+    const pageName =
+      TERIOCK.index.classes[
+        foundry.utils.getProperty(
+          this.parent,
+          this.constructor.metadata.pageNameKey,
+        )
+      ];
     return `${prefix}:${pageName}`;
   }
 

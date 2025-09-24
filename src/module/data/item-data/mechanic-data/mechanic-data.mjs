@@ -17,7 +17,10 @@ export default class TeriockMechanicModel extends TeriockBaseItemModel {
       if (this.actor.system.encumbranceLevel > 0) {
         this.actor.statuses.add("encumbered");
       }
-      if (this.actor.statuses.has("ethereal") && this.actor.statuses.has("unconscious")) {
+      if (
+        this.actor.statuses.has("ethereal") &&
+        this.actor.statuses.has("unconscious")
+      ) {
         this.actor.statuses.delete("unconscious");
         this.actor.statuses.delete("asleep");
         this.actor.statuses.add("dead");
@@ -33,30 +36,44 @@ export default class TeriockMechanicModel extends TeriockBaseItemModel {
     }
     if (this.actor) {
       const hpUnconscious = this.actor.system.hp.value < 1;
-      const hpCriticallyWounded = this.actor.system.hp.value === (this.actor.system.hp.min < 0
-        ? this.actor.system.hp.min + 1
-        : 0);
+      const hpCriticallyWounded =
+        this.actor.system.hp.value ===
+        (this.actor.system.hp.min < 0 ? this.actor.system.hp.min + 1 : 0);
       const hpDead = this.actor.system.hp.value === this.actor.system.hp.min;
       const mpUnconscious = this.actor.system.mp.value < 1;
-      const mpCriticallyWounded = this.actor.system.mp.value === (this.actor.system.mp.min < 0
-        ? this.actor.system.mp.min + 1
-        : 0);
+      const mpCriticallyWounded =
+        this.actor.system.mp.value ===
+        (this.actor.system.mp.min < 0 ? this.actor.system.mp.min + 1 : 0);
       const mpDead = this.actor.system.mp.value === this.actor.system.mp.min;
-      const unconsciousProtected = conditionProtected(this.actor, "unconscious");
-      const criticallyWoundedProtected = conditionProtected(this.actor, "criticallyWounded");
+      const unconsciousProtected = conditionProtected(
+        this.actor,
+        "unconscious",
+      );
+      const criticallyWoundedProtected = conditionProtected(
+        this.actor,
+        "criticallyWounded",
+      );
       const deadProtected = conditionProtected(this.actor, "dead");
       const downProtected = conditionProtected(this.actor, "down");
       if (effect.name === "Zero HP/MP") {
-        return !((hpUnconscious || mpUnconscious) && !(hpCriticallyWounded
-          || mpCriticallyWounded
-          || this.actor.statuses.has("criticallyWounded")
-          || hpDead
-          || mpDead
-          || this.actor.statuses.has("dead")) && !(unconsciousProtected || downProtected));
+        return !(
+          (hpUnconscious || mpUnconscious) &&
+          !(
+            hpCriticallyWounded ||
+            mpCriticallyWounded ||
+            this.actor.statuses.has("criticallyWounded") ||
+            hpDead ||
+            mpDead ||
+            this.actor.statuses.has("dead")
+          ) &&
+          !(unconsciousProtected || downProtected)
+        );
       } else if (effect.name === "Critical HP/MP") {
-        return !((hpCriticallyWounded || mpCriticallyWounded)
-          && !(hpDead || mpDead || this.actor.statuses.has("dead"))
-          && !(criticallyWoundedProtected || downProtected));
+        return !(
+          (hpCriticallyWounded || mpCriticallyWounded) &&
+          !(hpDead || mpDead || this.actor.statuses.has("dead")) &&
+          !(criticallyWoundedProtected || downProtected)
+        );
       } else if (effect.name === "Negative HP/MP") {
         return !((hpDead || mpDead) && !(deadProtected || downProtected));
       } else if (effect.name === "Lightly Encumbered") {
@@ -66,7 +83,9 @@ export default class TeriockMechanicModel extends TeriockBaseItemModel {
       } else if (effect.name === "Overburdened") {
         return this.actor.system.encumbranceLevel !== 3;
       } else if (effect.name === "Down and Ethereal") {
-        return !(this.actor.statuses.has("down") && this.actor.statuses.has("ethereal"));
+        return !(
+          this.actor.statuses.has("down") && this.actor.statuses.has("ethereal")
+        );
       }
     }
     return false;

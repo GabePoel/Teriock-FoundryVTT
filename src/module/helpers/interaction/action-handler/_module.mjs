@@ -1,12 +1,26 @@
 import { ApplyEffectHandler } from "./instances/apply-effect-handlers.mjs";
 import { DeathBagHandler } from "./instances/death-bag-handlers.mjs";
 import { FeatSaveHandler } from "./instances/feat-save-handlers.mjs";
-import { TakeHackHandler, TakeUnhackHandler } from "./instances/hack-handlers.mjs";
-import { AwakenHandler, HealHandler, RevitalizeHandler, ReviveHandler } from "./instances/one-off-handlers.mjs";
+import {
+  TakeHackHandler,
+  TakeUnhackHandler,
+} from "./instances/hack-handlers.mjs";
+import {
+  AwakenHandler,
+  HealHandler,
+  RevitalizeHandler,
+  ReviveHandler,
+} from "./instances/one-off-handlers.mjs";
 import { ResistHandler } from "./instances/resistance-handlers.mjs";
-import { RollRollableTakeHandler, TakeRollableTakeHandler } from "./instances/rollable-takes-handlers.mjs";
+import {
+  RollRollableTakeHandler,
+  TakeRollableTakeHandler,
+} from "./instances/rollable-takes-handlers.mjs";
 import { StandardDamageHandler } from "./instances/standard-damage.mjs";
-import { ApplyStatusHandler, RemoveStatusHandler } from "./instances/status-handlers.mjs";
+import {
+  ApplyStatusHandler,
+  RemoveStatusHandler,
+} from "./instances/status-handlers.mjs";
 import { TradecraftCheckHandler } from "./instances/tradecraft-check-handlers.mjs";
 import { UseAbilityHandler } from "./instances/use-ability-handlers.mjs";
 

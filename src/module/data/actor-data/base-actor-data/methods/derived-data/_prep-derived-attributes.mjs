@@ -51,10 +51,14 @@ const SIZE_DEFINITIONS = [
  * @returns {{ max: number, length: number, category: string, reach: number }}
  * @private
  */
-export function _getSizeDefinition(value) {
-  const lessThanEqualSizes = SIZE_DEFINITIONS.map((d) => d.max).filter((m) => m <= value);
+export function _sizeDefinition(value) {
+  const lessThanEqualSizes = SIZE_DEFINITIONS.map((d) => d.max).filter(
+    (m) => m <= value,
+  );
   const sizeDefinitionMax = Math.max(...lessThanEqualSizes);
-  return foundry.utils.deepClone(SIZE_DEFINITIONS.find((d) => d.max === sizeDefinitionMax));
+  return foundry.utils.deepClone(
+    SIZE_DEFINITIONS.find((d) => d.max === sizeDefinitionMax),
+  );
 }
 
 /**
@@ -66,28 +70,35 @@ export function _getSizeDefinition(value) {
  */
 export function _prepDerivedAttributes(actorData) {
   _preparePresence(actorData);
-  const {
-    attributes,
-    scaling,
-  } = actorData;
+  const { attributes, scaling } = actorData;
   Object.values(attributes).forEach((attr) => {
-    const bonus = attr.saveFluent ? scaling.f : attr.saveProficient ? scaling.p : 0;
+    const bonus = attr.saveFluent
+      ? scaling.f
+      : attr.saveProficient
+        ? scaling.p
+        : 0;
     attr.saveBonus = attr.value * 2 + bonus;
   });
   deriveModifiableNumber(actorData.size.number, {
     min: 0,
     max: 30,
   });
-  const sizeDefinition = _getSizeDefinition(actorData.size.number.value);
+  const sizeDefinition = _sizeDefinition(actorData.size.number.value);
   actorData.size.category = sizeDefinition.category;
   // Convert from feet to tiles
   actorData.size.length = sizeDefinition.length / 5;
   actorData.size.reach = sizeDefinition.reach;
   const mov = attributes.mov.value;
   const str = attributes.str.value;
-  const strFactor = actorData.size.number.value < 5 ? str : str + Math.pow(actorData.size.number.value - 5, 2);
+  const strFactor =
+    actorData.size.number.value < 5
+      ? str
+      : str + Math.pow(actorData.size.number.value - 5, 2);
   const base = 65 + 20 * strFactor;
-  actorData.movementSpeed.value = Math.max(30 + 10 * mov + actorData.movementSpeed.base, 0);
+  actorData.movementSpeed.value = Math.max(
+    30 + 10 * mov + actorData.movementSpeed.base,
+    0,
+  );
   actorData.carryingCapacity = {
     light: base,
     heavy: base * 2,
@@ -103,7 +114,12 @@ export function _prepDerivedAttributes(actorData) {
  * @private
  */
 export function _preparePresence(actorData) {
-  actorData.presence.overflow = actorData.presence.value > actorData.presence.max;
-  actorData.presence.value = Math.min(actorData.presence.value, actorData.presence.max);
-  actorData.attributes.unp.value = actorData.presence.max - actorData.presence.value;
+  actorData.presence.overflow =
+    actorData.presence.value > actorData.presence.max;
+  actorData.presence.value = Math.min(
+    actorData.presence.value,
+    actorData.presence.max,
+  );
+  actorData.attributes.unp.value =
+    actorData.presence.max - actorData.presence.value;
 }

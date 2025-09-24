@@ -1,8 +1,15 @@
 import { propertyPseudoHooks } from "../../../constants/system/pseudo-hooks.mjs";
 import { getRollIcon, mergeFreeze } from "../../../helpers/utils.mjs";
-import { ConsumableDataMixin, ExecutableDataMixin, WikiDataMixin } from "../../mixins/_module.mjs";
 import {
-  deriveModifiableDeterministic, deriveModifiableIndeterministic, deriveModifiableNumber, prepareModifiableBase,
+  ConsumableDataMixin,
+  ExecutableDataMixin,
+  WikiDataMixin,
+} from "../../mixins/_module.mjs";
+import {
+  deriveModifiableDeterministic,
+  deriveModifiableIndeterministic,
+  deriveModifiableNumber,
+  prepareModifiableBase,
 } from "../../shared/fields/modifiable.mjs";
 import TeriockBaseItemModel from "../base-item-data/base-item-data.mjs";
 import * as attunement from "./methods/_attunement.mjs";
@@ -26,8 +33,9 @@ import * as schema from "./methods/_schema.mjs";
  * @mixes ExecutableDataMixin
  * @mixes WikiDataMixin
  */
-export default class TeriockEquipmentModel extends ConsumableDataMixin(WikiDataMixin(ExecutableDataMixin(
-  TeriockBaseItemModel))) {
+export default class TeriockEquipmentModel extends ConsumableDataMixin(
+  WikiDataMixin(ExecutableDataMixin(TeriockBaseItemModel)),
+) {
   /**
    * @inheritDoc
    * @type {Readonly<Teriock.Documents.ItemModelMetadata>}
@@ -37,12 +45,7 @@ export default class TeriockEquipmentModel extends ConsumableDataMixin(WikiDataM
     pageNameKey: "system.equipmentType",
     type: "equipment",
     usable: true,
-    childEffectTypes: [
-      "ability",
-      "fluency",
-      "property",
-      "resource",
-    ],
+    childEffectTypes: ["ability", "fluency", "property", "resource"],
   });
 
   /** @inheritDoc */
@@ -71,7 +74,10 @@ export default class TeriockEquipmentModel extends ConsumableDataMixin(WikiDataM
    * @returns {boolean}
    */
   get canEquip() {
-    return (((this.consumable && this.quantity >= 1) || !this.consumable) && !this.isEquipped);
+    return (
+      ((this.consumable && this.quantity >= 1) || !this.consumable) &&
+      !this.isEquipped
+    );
   }
 
   /**
@@ -79,15 +85,26 @@ export default class TeriockEquipmentModel extends ConsumableDataMixin(WikiDataM
    * @returns {boolean}
    */
   get canUnequip() {
-    return (((this.consumable && this.quantity >= 1) || !this.consumable) && this.isEquipped);
+    return (
+      ((this.consumable && this.quantity >= 1) || !this.consumable) &&
+      this.isEquipped
+    );
   }
 
   /** @inheritDoc */
   get cardContextMenuEntries() {
-    return [
-      ...super.cardContextMenuEntries,
-      ...contextMenus._entries(this),
-    ];
+    return [...super.cardContextMenuEntries, ...contextMenus._entries(this)];
+  }
+
+  /**
+   * If this has a two-handed damage attack.
+   * @returns {boolean}
+   */
+  get hasTwoHandedAttack() {
+    return (
+      this.damage.twoHanded.saved.trim().length > 0 &&
+      this.damage.twoHanded.saved.trim() !== "0"
+    );
   }
 
   /**
@@ -113,14 +130,16 @@ export default class TeriockEquipmentModel extends ConsumableDataMixin(WikiDataM
   /** @inheritDoc */
   get messageParts() {
     return {
-      ...super.messageParts, ...messages._messageParts(this),
+      ...super.messageParts,
+      ...messages._messageParts(this),
     };
   }
 
   /** @inheritDoc */
   get secretMessageParts() {
     return {
-      ...super.secretMessageParts, ...messages._secretMessageParts(this),
+      ...super.secretMessageParts,
+      ...messages._secretMessageParts(this),
     };
   }
 
@@ -229,7 +248,8 @@ export default class TeriockEquipmentModel extends ConsumableDataMixin(WikiDataM
       ub: false,
     };
     this.warded = false;
-    this.hookedMacros = /** @type {Teriock.Parameters.Equipment.HookedEquipmentMacros} */ {};
+    this.hookedMacros =
+      /** @type {Teriock.Parameters.Equipment.HookedEquipmentMacros} */ {};
     for (const pseudoHook of Object.keys(propertyPseudoHooks)) {
       this.hookedMacros[pseudoHook] = [];
     }
@@ -261,6 +281,9 @@ export default class TeriockEquipmentModel extends ConsumableDataMixin(WikiDataM
     if (this.piercing.ub) {
       this.piercing.av0 = true;
     }
+    if (!this.hasTwoHandedAttack) {
+      this.damage.twoHanded.value = this.damage.base.value;
+    }
   }
 
   /**
@@ -289,6 +312,12 @@ export default class TeriockEquipmentModel extends ConsumableDataMixin(WikiDataM
 
   /** @inheritDoc */
   async roll(options) {
+    if (game.settings.get("teriock", "rollAttackOnEquipmentUse")) {
+      await this.actor?.useAbility("Basic Attack", options);
+      options.advantage = false;
+      options.disadvantage = false;
+      options.crit = false;
+    }
     await rolling._roll(this, options);
   }
 

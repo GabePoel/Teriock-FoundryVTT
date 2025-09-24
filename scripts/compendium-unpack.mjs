@@ -4,6 +4,7 @@ import path from "path";
 import { dieOptions } from "../src/module/constants/options/die-options.mjs";
 import { toKebabCase } from "../src/module/helpers/string.mjs";
 
+//eslint-disable-next-line no-undef
 const MODULE_ID = process.cwd();
 const yaml = true;
 const expandAdventures = true;
@@ -32,14 +33,18 @@ for (const pack of packs) {
       console.log(error);
     }
   }
-  await extractPack(`${MODULE_ID}/packs/${pack}`, `${MODULE_ID}/src/packs/${pack}`, {
-    yaml,
-    transformName,
-    transformFolderName,
-    transformEntry,
-    expandAdventures,
-    folders,
-  });
+  await extractPack(
+    `${MODULE_ID}/packs/${pack}`,
+    `${MODULE_ID}/src/packs/${pack}`,
+    {
+      yaml,
+      transformName,
+      transformFolderName,
+      transformEntry,
+      expandAdventures,
+      folders,
+    },
+  );
 }
 
 /**
@@ -152,7 +157,7 @@ function cleanEntry(doc) {
       for (const stat of Object.keys(dieOptions.stats)) {
         const statDice = doc.system[`${stat}Dice`];
         if (statDice) {
-          for (const [ id, die ] of Object.entries(statDice)) {
+          for (const [id, die] of Object.entries(statDice)) {
             die._id = id;
             die.stat = stat;
           }

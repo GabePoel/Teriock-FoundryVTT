@@ -5,7 +5,7 @@
  * @param {{timeout?: number}} timeout
  * @returns {Promise<void>}
  */
-export default async function inCombatExpirationQuery(queryData, { timeout }) {
+export default async function inCombatExpirationQuery(queryData, { _timeout }) {
   const effectUuid = queryData.effectUuid;
   const effect = await foundry.utils.fromUuid(effectUuid);
   await effect.system.inCombatExpiration();

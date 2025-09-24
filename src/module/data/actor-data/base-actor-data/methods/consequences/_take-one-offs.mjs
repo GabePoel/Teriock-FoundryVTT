@@ -6,7 +6,10 @@
  * @returns {Promise<void>}
  */
 export async function _takeAwaken(actorData) {
-  if (actorData.parent.statuses.has("unconscious") && !actorData.parent.statuses.has("dead")) {
+  if (
+    actorData.parent.statuses.has("unconscious") &&
+    !actorData.parent.statuses.has("dead")
+  ) {
     if (actorData.hp.value <= 0) {
       await actorData.parent.update({ "system.hp.value": 1 });
     }
@@ -38,7 +41,8 @@ export async function _takeRevive(actorData) {
     }
     await actorData.parent.toggleStatusEffect("dead", { active: false });
     const toRemove = actorData.parent.consequences
-      .filter((c) => c.statuses.has("dead")).map((c) => c.id);
+      .filter((c) => c.statuses.has("dead"))
+      .map((c) => c.id);
     await actorData.parent.deleteEmbeddedDocuments("ActiveEffect", toRemove);
   }
 }

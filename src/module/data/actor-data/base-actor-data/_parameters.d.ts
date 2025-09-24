@@ -3,7 +3,14 @@ import type { TeriockMacro } from "../../../documents/_module.mjs";
 declare global {
   namespace Teriock.Parameters.Actor {
     /** Valid hackable body parts */
-    export type HackableBodyPart = | "arm" | "leg" | "body" | "ear" | "eye" | "mouth" | "nose";
+    export type HackableBodyPart =
+      | "arm"
+      | "leg"
+      | "body"
+      | "ear"
+      | "eye"
+      | "mouth"
+      | "nose";
 
     /** Valid stat attributes */
     export type StatAttribute = keyof typeof TERIOCK.options.ability.attribute;
@@ -52,11 +59,15 @@ declare global {
       | "flame"
       | "vortex";
 
-    export type HookedActorMacros = Record<Teriock.Parameters.Shared.PseudoHook, Teriock.UUID<TeriockMacro>[]>
+    export type HookedActorMacros = Record<
+      Teriock.Parameters.Shared.PseudoHook,
+      Teriock.UUID<TeriockMacro>[]
+    >;
 
     export type PayMode = "exact" | "greedy";
 
-    export type DeathBagStoneColor = keyof typeof TERIOCK.options.die.deathBagStoneColor;
+    export type DeathBagStoneColor =
+      keyof typeof TERIOCK.options.die.deathBagStoneColor;
   }
 }
 

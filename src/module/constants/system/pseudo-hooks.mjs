@@ -49,8 +49,13 @@ export const propertyPseudoHooks = {
   use: "Using Parent",
 };
 
-export const unsortedPseudoHooks = foundry.utils.mergeObject(abilityPseudoHooks, propertyPseudoHooks);
+export const unsortedPseudoHooks = foundry.utils.mergeObject(
+  abilityPseudoHooks,
+  propertyPseudoHooks,
+);
 
-export const pseudoHooks = Object.fromEntries(Object.entries(unsortedPseudoHooks)
-  .sort(([ , a ], [ , b ]) => a.localeCompare(b)));
-
+export const pseudoHooks = Object.fromEntries(
+  Object.entries(unsortedPseudoHooks).sort(([, a], [, b]) =>
+    a.localeCompare(b),
+  ),
+);

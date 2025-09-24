@@ -1,26 +1,26 @@
-@use '../colors' as *;
+@use "../colors" as *;
 
 .character-status-box {
+  align-items: center;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
 
   .character-status-bars {
-    width: 100%;
     display: flex;
     flex-direction: column;
     gap: 1em;
+    width: 100%;
 
     .character-bar-container {
-      position: relative;
       box-shadow: 0 0 6px rgba(0, 0, 0, 0.4);
+      position: relative;
 
       .character-bar {
-        height: 3em;
+        border-radius: 6px;
         display: flex;
         flex-direction: row;
-        border-radius: 6px;
+        height: 3em;
         overflow: hidden;
 
         &.character-hit-bar {
@@ -32,11 +32,11 @@
 
           .character-bar-temp {
             background-image: repeating-linear-gradient(
-                            135deg,
-                            $hp-red 0px,
-                            $hp-red 2px,
-                            $hp-red-dark 2px,
-                            $hp-red-dark 8px /* gap between lines: 2px line + 6px gap */
+              135deg,
+              $hp-red 0px,
+              $hp-red 2px,
+              $hp-red-dark 2px,
+              $hp-red-dark 8px /* gap between lines: 2px line + 6px gap */
             );
             border-right: 2px solid $hp-red;
           }
@@ -55,11 +55,11 @@
 
           .character-bar-temp {
             background-image: repeating-linear-gradient(
-                            135deg,
-                            $mp-blue 0px,
-                            $mp-blue 2px,
-                            $mp-blue-dark 2px,
-                            $mp-blue-dark 8px /* gap between lines: 2px line + 6px gap */
+              135deg,
+              $mp-blue 0px,
+              $mp-blue 2px,
+              $mp-blue-dark 2px,
+              $mp-blue-dark 8px /* gap between lines: 2px line + 6px gap */
             );
             border-right: 2px solid $mp-blue;
           }
@@ -78,11 +78,11 @@
 
           .character-bar-temp {
             background-image: repeating-linear-gradient(
-                            135deg,
-                            $mp-grey 0px,
-                            $mp-grey 2px,
-                            $mp-grey-dark 2px,
-                            $mp-grey-dark 8px /* gap between lines: 2px line + 6px gap */
+              135deg,
+              $mp-grey 0px,
+              $mp-grey 2px,
+              $mp-grey-dark 2px,
+              $mp-grey-dark 8px /* gap between lines: 2px line + 6px gap */
             );
             // border-left: 2px solid $mp-grey;
             border-right: 2px solid $mp-grey;
@@ -94,59 +94,59 @@
         }
 
         .character-bar-left {
-          height: 3em;
           flex: none;
+          height: 3em;
         }
 
         .character-bar-temp {
-          height: 3em;
           flex: none;
+          height: 3em;
         }
 
         .character-bar-lost {
-          height: 3em;
           flex: none;
+          height: 3em;
         }
       }
 
       .character-bar-overlay {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
         align-content: center;
+        bottom: 0;
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
 
         .character-bar-overlay-row {
+          align-items: center;
           display: flex;
           flex-direction: row;
           justify-content: start;
-          align-items: center;
 
           input {
+            border: none;
             margin-inline: 2px;
             padding-inline: 2px;
-            border: none;
           }
 
           .character-bar-overlay-label {
-            height: var(--input-height);
-            display: flex;
             align-items: center;
             background-color: transparent;
-            font-size: 1.5em;
+            display: flex;
             flex: none;
+            font-size: 1.5em;
+            height: var(--input-height);
           }
 
           .character-bar-overlay-left {
-            width: 2em;
-            text-align: right;
             margin-left: 0.25em;
+            text-align: right;
+            width: 2em;
           }
 
           .character-bar-overlay-temp {
-            width: 2em;
             text-align: left;
+            width: 2em;
           }
         }
       }

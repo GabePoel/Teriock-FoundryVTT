@@ -7,16 +7,21 @@ declare global {
     export type Interaction = keyof typeof TERIOCK.options.ability.interaction;
 
     /** Valid execution times for active maneuvers */
-    export type ActiveExecutionTime = keyof typeof TERIOCK.options.ability.executionTime.active;
+    export type ActiveExecutionTime =
+      keyof typeof TERIOCK.options.ability.executionTime.active;
 
     /** Valid execution times for reactive maneuvers */
-    export type ReactiveExecutionTime = keyof typeof TERIOCK.options.ability.executionTime.reactive;
+    export type ReactiveExecutionTime =
+      keyof typeof TERIOCK.options.ability.executionTime.reactive;
 
     /** Valid execution times for passive maneuvers */
-    export type PassiveExecutionTime = keyof typeof TERIOCK.options.ability.executionTime.passive;
+    export type PassiveExecutionTime =
+      keyof typeof TERIOCK.options.ability.executionTime.passive;
 
     /** Valid execution times for slow maneuvers */
-    export type SlowExecutionTime = | keyof typeof TERIOCK.options.ability.executionTime.slow | string;
+    export type SlowExecutionTime =
+      | keyof typeof TERIOCK.options.ability.executionTime.slow
+      | string;
 
     /** Valid execution times */
     export type ExecutionTime =

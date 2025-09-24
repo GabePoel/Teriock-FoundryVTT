@@ -1,6 +1,4 @@
-import {
-  RollRollableTakeHandler,
-} from "../../helpers/interaction/action-handler/instances/rollable-takes-handlers.mjs";
+import { RollRollableTakeHandler } from "../../helpers/interaction/action-handler/instances/rollable-takes-handlers.mjs";
 import TeriockStatManager from "./stat-manager.mjs";
 
 const { fields } = foundry.data;
@@ -25,7 +23,7 @@ export default class TeriockHealManager extends TeriockStatManager {
   static PARTS = {
     all: {
       template: "systems/teriock/src/templates/dialog-templates/heal.hbs",
-      scrollable: [ "" ],
+      scrollable: [""],
     },
   };
 
@@ -37,9 +35,7 @@ export default class TeriockHealManager extends TeriockStatManager {
    */
   constructor(actor, options, ...args) {
     super(actor, options, ...args);
-    const {
-      noStatDice = false,
-    } = options;
+    const { noStatDice = false } = options;
     this._noDice = noStatDice;
     this._forHarmField = new fields.BooleanField({
       initial: false,
@@ -59,9 +55,7 @@ export default class TeriockHealManager extends TeriockStatManager {
     const parentId = target.dataset.parentId;
     const stat = target.dataset.stat;
     /** @type {StatDieModel} */
-    const statDie = this.actor.items
-      .get(parentId)
-      ["system"][`${stat}Dice`][id];
+    const statDie = this.actor.items.get(parentId)["system"][`${stat}Dice`][id];
     //noinspection JSUnresolvedReference
     if (this._forHarm) {
       const takeHandler = new RollRollableTakeHandler(event, target);
@@ -90,7 +84,9 @@ export default class TeriockHealManager extends TeriockStatManager {
         if (!(el instanceof HTMLElement)) {
           return;
         }
-        const part = /** @type {Teriock.Parameters.Actor.HackableBodyPart} */ el.dataset.part;
+        const part =
+          /** @type {Teriock.Parameters.Actor.HackableBodyPart} */ el.dataset
+            .part;
         await this.actor.takeHack(part);
         e.stopPropagation();
       });

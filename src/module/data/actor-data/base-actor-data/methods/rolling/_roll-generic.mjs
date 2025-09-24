@@ -30,9 +30,11 @@ export async function _rollFeatSave(actorData, attribute, options = {}) {
   }
   const roll = new TeriockRoll(rollFormula, actor.getRollData(), { context });
   await roll.toMessage({
-    speaker: ChatMessage.getSpeaker({ actor: actor }),
-    flavor: (typeof options.threshold === "number" ? `DC ${options.threshold} ` : "")
-      + `${attribute.toUpperCase()} Feat Save`,
+    speaker: TeriockChatMessage.getSpeaker({ actor: actor }),
+    flavor:
+      (typeof options.threshold === "number"
+        ? `DC ${options.threshold} `
+        : "") + `${attribute.toUpperCase()} Feat Save`,
   });
 }
 
@@ -67,7 +69,7 @@ export async function _rollResistance(actorData, options = {}) {
   await roll.evaluate();
   TeriockChatMessage.create({
     speaker: TeriockChatMessage.getSpeaker({ actor: actor }),
-    rolls: [ roll ],
+    rolls: [roll],
     system: {
       extraContent: options.message,
     },
@@ -105,10 +107,7 @@ export async function _rollImmunity(actorData, _options = {}) {
  */
 export async function _rollTradecraft(actorData, tradecraft, options = {}) {
   const actor = actorData.parent;
-  const {
-    proficient,
-    extra,
-  } = actorData.tradecrafts[tradecraft] || {};
+  const { proficient, extra } = actorData.tradecrafts[tradecraft] || {};
   let rollFormula = "1d20";
   if (options.advantage && !options.disadvantage) {
     rollFormula = "2d20kh1";
@@ -132,7 +131,7 @@ export async function _rollTradecraft(actorData, tradecraft, options = {}) {
   await roll.evaluate();
   TeriockChatMessage.create({
     speaker: TeriockChatMessage.getSpeaker({ actor: actorData.parent }),
-    rolls: [ roll ],
+    rolls: [roll],
     system: {
       extraContent: await tradecraftMessage(tradecraft),
     },

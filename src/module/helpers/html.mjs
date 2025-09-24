@@ -20,7 +20,7 @@ export function buildHTMLButton(config) {
   } = config;
   const button = document.createElement("button");
   button.type = type;
-  for (const [ key, value ] of Object.entries(dataset)) {
+  for (const [key, value] of Object.entries(dataset)) {
     button.dataset[key] = value;
   }
   button.classList.add(...classes);
@@ -51,7 +51,9 @@ export function elementClass(elements) {
   if (!Array.isArray(elements)) {
     return "es-multi";
   }
-  const validElements = elements.filter((el) => Object.prototype.hasOwnProperty.call(colorMap, el));
+  const validElements = elements.filter((el) =>
+    Object.prototype.hasOwnProperty.call(colorMap, el),
+  );
   if (validElements.length !== 1) {
     return "es-multi";
   }
@@ -136,15 +138,12 @@ export function addClickHandler(elements, handler) {
  */
 export function makeDamageTypeButtons(roll) {
   const damage = {
-    fire: [ "burned" ],
-    holy: [ "hollied" ],
-    ice: [ "frozen" ],
-    terror: [ "terrored" ],
-    vine: [ "snared" ],
-    financial: [
-      "hollied",
-      "terrored",
-    ],
+    fire: ["burned"],
+    holy: ["hollied"],
+    ice: ["frozen"],
+    terror: ["terrored"],
+    vine: ["snared"],
+    financial: ["hollied", "terrored"],
   };
   const buttons = [];
   const statuses = new Set();
@@ -276,7 +275,7 @@ export function tidyHTML(html) {
  */
 export async function tradecraftMessage(tradecraft) {
   let field;
-  for (const [ key, value ] of Object.entries(TERIOCK.options.tradecraft)) {
+  for (const [key, value] of Object.entries(TERIOCK.options.tradecraft)) {
     if (Object.keys(value.tradecrafts).includes(tradecraft)) {
       field = key;
     }
@@ -288,7 +287,7 @@ export async function tradecraftMessage(tradecraft) {
       {
         icon: "fa-" + TERIOCK.options.tradecraft[field].icon,
         label: "Field",
-        wrappers: [ TERIOCK.options.tradecraft[field].name ],
+        wrappers: [TERIOCK.options.tradecraft[field].name],
       },
     ],
     blocks: [
@@ -312,7 +311,7 @@ export async function tradecraftMessage(tradecraft) {
  */
 export async function classMessage(className) {
   let archetype;
-  for (const [ key, value ] of Object.entries(TERIOCK.options.rank)) {
+  for (const [key, value] of Object.entries(TERIOCK.options.rank)) {
     if (Object.keys(value.classes).includes(className)) {
       archetype = key;
     }
@@ -324,7 +323,7 @@ export async function classMessage(className) {
       {
         icon: "fa-" + TERIOCK.options.rank[archetype].icon,
         label: "Archetype",
-        wrappers: [ TERIOCK.options.rank[archetype].name ],
+        wrappers: [TERIOCK.options.rank[archetype].name],
       },
     ],
     blocks: [

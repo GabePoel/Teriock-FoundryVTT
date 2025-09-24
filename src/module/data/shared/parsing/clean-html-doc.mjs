@@ -11,11 +11,9 @@ export function cleanHTMLDoc(doc) {
     .querySelectorAll(".ability-sub-container, .expandable-container")
     .forEach((el) => el.remove());
 
-  const TYPE_LUT = Object.fromEntries(Object.keys(ROLL_BUTTON_CONFIGS)
-    .map((k) => [
-      k.toLowerCase(),
-      k,
-    ]));
+  const TYPE_LUT = Object.fromEntries(
+    Object.keys(ROLL_BUTTON_CONFIGS).map((k) => [k.toLowerCase(), k]),
+  );
 
   doc.querySelectorAll(".dice").forEach((el) => {
     const fullRoll = el.getAttribute("data-full-roll");
@@ -66,7 +64,7 @@ export function cleanHTML(html) {
     }
   }
 
-  [ ...doc.querySelectorAll("span") ]
+  [...doc.querySelectorAll("span")]
     .reverse()
     .forEach((s) => s.replaceWith(s.textContent));
   return cleanDoubleLineBreaks(doc.innerHTML);
@@ -79,7 +77,11 @@ export function cleanHTML(html) {
 export function cleanObject(obj, keys) {
   for (const key of keys) {
     if (foundry.utils.getProperty(obj, key)) {
-      foundry.utils.setProperty(obj, key, cleanHTML(foundry.utils.getProperty(obj, key)));
+      foundry.utils.setProperty(
+        obj,
+        key,
+        cleanHTML(foundry.utils.getProperty(obj, key)),
+      );
     }
   }
 }

@@ -33,11 +33,7 @@ function setupUpdateHandlers(sheet) {
     },
   ];
 
-  handlers.forEach(({
-    selector,
-    event,
-    getValue,
-  }) => {
+  handlers.forEach(({ selector, event, getValue }) => {
     sheet.element.querySelectorAll(selector).forEach((el) => {
       const name = el.getAttribute("name");
       if (!name) {
@@ -50,7 +46,9 @@ function setupUpdateHandlers(sheet) {
         }
         const target = /** @type {HTMLFormElement} */ e.currentTarget;
 
-        const value = getValue ? getValue(target) : (target.value ?? target.getAttribute("data-value"));
+        const value = getValue
+          ? getValue(target)
+          : (target.value ?? target.getAttribute("data-value"));
 
         await sheet.document.update({ [name]: value });
       });
@@ -88,7 +86,11 @@ function setupRecordFieldHandlers(sheet) {
           const target = /** @type {HTMLElement} */ e.currentTarget;
           const closest = /** @type {HTMLElement} */ target.closest(".tag");
           const key = closest.dataset.key;
-          await cleanRecordField(sheet, name, allowedKeys.filter((k) => k !== key));
+          await cleanRecordField(
+            sheet,
+            name,
+            allowedKeys.filter((k) => k !== key),
+          );
         });
       });
     });
@@ -107,7 +109,10 @@ function setupSetFieldHandlers(sheet) {
     }
 
     const name = container.getAttribute("name");
-    const getValues = () => Array.from(select.parentElement.querySelectorAll(".tag")).map((tag) => tag.dataset.key);
+    const getValues = () =>
+      Array.from(select.parentElement.querySelectorAll(".tag")).map(
+        (tag) => tag.dataset.key,
+      );
 
     select.addEventListener("input", async () => {
       const values = getValues();
@@ -138,13 +143,18 @@ function setupSetFieldHandlers(sheet) {
  * @param {DocumentSheetV2} sheet
  */
 function setupArrayFieldHandlers(sheet) {
-  sheet.element.querySelectorAll(".teriock-array-field-add")
-    .forEach(/** @param {HTMLButtonElement} button */(button) => {
+  sheet.element.querySelectorAll(".teriock-array-field-add").forEach(
+    /** @param {HTMLButtonElement} button */ (button) => {
       button.addEventListener("click", async (e) => {
         e.preventDefault();
-        await addToArrayField(sheet, button.getAttribute("name"), button.dataset.path);
+        await addToArrayField(
+          sheet,
+          button.getAttribute("name"),
+          button.dataset.path,
+        );
       });
-    });
+    },
+  );
 }
 
 /**
@@ -154,27 +164,26 @@ function setupArrayFieldHandlers(sheet) {
  */
 function setupChangeHandlers(sheet) {
   // Change inputs
-  sheet.element.querySelectorAll(".teriock-change-input").forEach(/** @param {HTMLElement} el */(el) => {
-    const { name } = el.attributes;
-    const {
-      index,
-      part,
-    } = el.dataset;
-    if (!name?.value) {
-      return;
-    }
+  sheet.element.querySelectorAll(".teriock-change-input").forEach(
+    /** @param {HTMLElement} el */ (el) => {
+      const { name } = el.attributes;
+      const { index, part } = el.dataset;
+      if (!name?.value) {
+        return;
+      }
 
-    el.addEventListener("change", async (e) => {
-      const existing = foundry.utils.getProperty(sheet.document, name.value);
-      const copy = foundry.utils.deepClone(existing) || [];
-      copy[index][part] = e.currentTarget.value;
-      await sheet.document.update({ [name.value]: copy });
-    });
-  });
+      el.addEventListener("change", async (e) => {
+        const existing = foundry.utils.getProperty(sheet.document, name.value);
+        const copy = foundry.utils.deepClone(existing) || [];
+        copy[index][part] = e.currentTarget.value;
+        await sheet.document.update({ [name.value]: copy });
+      });
+    },
+  );
 
   // Remove change buttons
-  sheet.element.querySelectorAll(".teriock-remove-change-button")
-    .forEach(/** @param {HTMLButtonElement} button */(button) => {
+  sheet.element.querySelectorAll(".teriock-remove-change-button").forEach(
+    /** @param {HTMLButtonElement} button */ (button) => {
       const { name } = button.attributes;
       const { index } = button.dataset;
 
@@ -184,7 +193,8 @@ function setupChangeHandlers(sheet) {
         copy.splice(index, 1);
         await sheet.document.update({ [name.value]: copy });
       });
-    });
+    },
+  );
 }
 
 /**
@@ -240,8 +250,12 @@ async function cleanRecordField(sheet, name, allowedKeys = []) {
  * @returns {Promise<void>} Promise that resolves when the item is added.
  */
 async function addToArrayField(sheet, name, fieldPath) {
-  const cleanFieldPath = fieldPath.startsWith("system.") ? fieldPath.slice(7) : fieldPath;
-  const copy = foundry.utils.deepClone(foundry.utils.getProperty(sheet.document, name)) || [];
+  const cleanFieldPath = fieldPath.startsWith("system.")
+    ? fieldPath.slice(7)
+    : fieldPath;
+  const copy =
+    foundry.utils.deepClone(foundry.utils.getProperty(sheet.document, name)) ||
+    [];
   const field = sheet.document.system.schema.getField(cleanFieldPath).element;
   const initial = field.getInitialValue();
 

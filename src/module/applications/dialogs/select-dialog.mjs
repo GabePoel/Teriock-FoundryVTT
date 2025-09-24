@@ -67,7 +67,8 @@ export async function selectDialog(choices, options = {}) {
       modal: true,
       content: selectContentHtml,
       ok: {
-        callback: (_event, button) => button.form.elements.namedItem("selected").value,
+        callback: (_event, button) =>
+          button.form.elements.namedItem("selected").value,
       },
     });
   }
@@ -77,7 +78,9 @@ export async function selectDialog(choices, options = {}) {
     label,
     hint,
   });
-  otherContentHtml.append(otherField.toFormGroup({ units: "other" }, { name: "other" }));
+  otherContentHtml.append(
+    otherField.toFormGroup({ units: "other" }, { name: "other" }),
+  );
 
   return await TeriockDialog.prompt({
     window: {
@@ -88,7 +91,8 @@ export async function selectDialog(choices, options = {}) {
     content: selectContentHtml,
     ok: {
       default: true,
-      callback: (_event, button) => button.form.elements.namedItem("selected").value,
+      callback: (_event, button) =>
+        button.form.elements.namedItem("selected").value,
     },
     buttons: [
       {
@@ -108,7 +112,8 @@ export async function selectDialog(choices, options = {}) {
             modal: true,
             content: otherContentHtml,
             ok: {
-              callback: (_event, button) => button.form.elements.namedItem("other").value,
+              callback: (_event, button) =>
+                button.form.elements.namedItem("other").value,
             },
           });
         },
@@ -162,7 +167,9 @@ export async function selectPropertyDialog() {
   if (game.settings.get("teriock", "quickIndexProperties")) {
     choices = game.teriock.packs.properties().index.contents;
   } else {
-    choices = await Promise.all(Object.values(TERIOCK.index.properties).map((name) => getProperty(name)));
+    choices = await Promise.all(
+      Object.values(TERIOCK.index.properties).map((name) => getProperty(name)),
+    );
   }
   const chosen = await selectDocumentDialog(choices, {
     hint: "Please select a property.",
@@ -180,14 +187,16 @@ export async function selectPropertyDialog() {
  * @returns {Promise<Teriock.Parameters.Fluency.Tradecraft|null>}
  */
 export async function selectTradecraftDialog() {
-  const choices = await Promise.all(Object.keys(TERIOCK.index.tradecrafts).map(async (tc) => {
-    return {
-      name: TERIOCK.index.tradecrafts[tc],
-      uuid: tc,
-      img: getIcon("tradecrafts", TERIOCK.index.tradecrafts[tc]),
-      tooltip: await tradecraftMessage(tc),
-    };
-  }));
+  const choices = await Promise.all(
+    Object.keys(TERIOCK.index.tradecrafts).map(async (tc) => {
+      return {
+        name: TERIOCK.index.tradecrafts[tc],
+        uuid: tc,
+        img: getIcon("tradecrafts", TERIOCK.index.tradecrafts[tc]),
+        tooltip: await tradecraftMessage(tc),
+      };
+    }),
+  );
   const chosen = await selectDocumentDialog(choices, {
     hint: "Please select a tradecraft.",
     title: "Select Tradecraft",
@@ -209,7 +218,9 @@ export async function selectAbilityDialog() {
   if (game.settings.get("teriock", "quickIndexAbilities")) {
     choices = game.teriock.packs.abilities().index.contents;
   } else {
-    choices = await Promise.all(Object.values(TERIOCK.index.abilities).map((name) => getAbility(name)));
+    choices = await Promise.all(
+      Object.values(TERIOCK.index.abilities).map((name) => getAbility(name)),
+    );
   }
   const chosen = await selectDocumentDialog(choices, {
     hint: "Please select an ability.",
@@ -232,14 +243,18 @@ export async function selectEquipmentTypeDialog() {
     const equipmentPack = game.teriock.packs.equipment();
     choices = equipmentPack.index.contents;
   } else {
-    choices = await Promise.all(Object.values(TERIOCK.index.equipment).map((name) => getItem(name, "equipment")));
+    choices = await Promise.all(
+      Object.values(TERIOCK.index.equipment).map((name) =>
+        getItem(name, "equipment"),
+      ),
+    );
   }
   let chosen = await selectDocumentDialog(choices, {
     hint: "Please select an equipment type",
     title: "Select Equipment Type",
   });
   if (chosen) {
-    chosen = await fromUuid(chosen.uuid);
+    chosen = await foundry.utils.fromUuid(chosen.uuid);
     return toCamelCase(chosen.system.equipmentType);
   } else {
     return null;
@@ -251,18 +266,20 @@ export async function selectEquipmentTypeDialog() {
  * @returns {Promise<string|null>}
  */
 export async function selectClassDialog() {
-  const choices = await Promise.all([
-    ...Object.keys(TERIOCK.options.rank.mage.classes),
-    ...Object.keys(TERIOCK.options.rank.semi.classes),
-    ...Object.keys(TERIOCK.options.rank.warrior.classes),
-  ].map(async (c) => {
-    return {
-      name: TERIOCK.index.classes[c],
-      uuid: c,
-      img: getIcon("classes", TERIOCK.index.classes[c]),
-      tooltip: await classMessage(c),
-    };
-  }));
+  const choices = await Promise.all(
+    [
+      ...Object.keys(TERIOCK.options.rank.mage.classes),
+      ...Object.keys(TERIOCK.options.rank.semi.classes),
+      ...Object.keys(TERIOCK.options.rank.warrior.classes),
+    ].map(async (c) => {
+      return {
+        name: TERIOCK.index.classes[c],
+        uuid: c,
+        img: getIcon("classes", TERIOCK.index.classes[c]),
+        tooltip: await classMessage(c),
+      };
+    }),
+  );
   const chosen = await selectDocumentDialog(choices, {
     hint: "Please select a class.",
     title: "Select Class",

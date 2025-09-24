@@ -1,4 +1,5 @@
 import { TeriockRoll } from "../../dice/_module.mjs";
+import { TeriockChatMessage } from "../../documents/_module.mjs";
 import { TeriockDialog } from "../api/_module.mjs";
 
 const TextEditor = foundry.applications.ux.TextEditor.implementation;
@@ -9,7 +10,10 @@ const TextEditor = foundry.applications.ux.TextEditor.implementation;
  * @param {boolean} [forceDialog] - Force a dialog to show up.
  * @returns {Promise<void>}
  */
-export default async function inCombatExpirationDialog(effect, forceDialog = false) {
+export default async function inCombatExpirationDialog(
+  effect,
+  forceDialog = false,
+) {
   if (effect.system.expirations.combat.what.type === "none" && !forceDialog) {
     return;
   }
@@ -27,30 +31,42 @@ export default async function inCombatExpirationDialog(effect, forceDialog = fal
     if (expire) {
       await effect.system.expire();
     }
-  } else if (effect.system.expirations.combat.what.type === "rolled" || forceDialog) {
+  } else if (
+    effect.system.expirations.combat.what.type === "rolled" ||
+    forceDialog
+  ) {
     const contentHtml = document.createElement("div");
     if (effect.system.expirations.description) {
       const descriptionElement = document.createElement("fieldset");
       const descriptionLegend = document.createElement("legend");
       descriptionLegend.innerText = "End Condition";
       descriptionElement.append(descriptionLegend);
-      const descriptionText = await TextEditor.enrichHTML(effect.system.expirations.description);
+      const descriptionText = await TextEditor.enrichHTML(
+        effect.system.expirations.description,
+      );
       const descriptionDiv = document.createElement("div");
       descriptionDiv.innerHTML = descriptionText;
       descriptionElement.append(descriptionDiv);
       contentHtml.append(descriptionElement);
     }
-    contentHtml.append(effect.system.schema.fields.expirations.fields.combat.fields.what.fields.roll.toFormGroup({}, {
-      name: "roll",
-      value: effect.system.expirations.combat.what.roll,
-    }));
-    contentHtml.append(effect.system.schema.fields.expirations.fields.combat.fields.what.fields.threshold.toFormGroup(
-      {},
-      {
-        name: "threshold",
-        value: effect.system.expirations.combat.what.threshold,
-      },
-    ));
+    contentHtml.append(
+      effect.system.schema.fields.expirations.fields.combat.fields.what.fields.roll.toFormGroup(
+        {},
+        {
+          name: "roll",
+          value: effect.system.expirations.combat.what.roll,
+        },
+      ),
+    );
+    contentHtml.append(
+      effect.system.schema.fields.expirations.fields.combat.fields.what.fields.threshold.toFormGroup(
+        {},
+        {
+          name: "threshold",
+          value: effect.system.expirations.combat.what.threshold,
+        },
+      ),
+    );
     try {
       await new TeriockDialog({
         window: {
@@ -70,15 +86,20 @@ export default async function inCombatExpirationDialog(effect, forceDialog = fal
                 {
                   context: {
                     diceClass: "condition",
-                    threshold: Number(button.form.elements.namedItem("threshold").value),
+                    threshold: Number(
+                      button.form.elements.namedItem("threshold").value,
+                    ),
                   },
                 },
               );
               await expirationRoll.toMessage({
-                speaker: ChatMessage.getSpeaker({ actor: effect.actor }),
+                speaker: TeriockChatMessage.getSpeaker({ actor: effect.actor }),
                 flavor: `${effect.name} Ending Roll`,
               });
-              if (expirationRoll.total >= Number(button.form.elements.namedItem("threshold").value)) {
+              if (
+                expirationRoll.total >=
+                Number(button.form.elements.namedItem("threshold").value)
+              ) {
                 await effect.system.expire();
               }
             },

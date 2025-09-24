@@ -14,11 +14,14 @@ export default class TeriockBaseEffectModel extends ChildTypeModel {
    * @inheritDoc
    * @type {Teriock.Documents.EffectModelMetadata}
    */
-  static metadata = mergeFreeze(/** @type {Teriock.Documents.EffectModelMetadata} */
-    (super.metadata), {
+  static metadata = mergeFreeze(
+    /** @type {Teriock.Documents.EffectModelMetadata} */
+    (super.metadata),
+    {
       hierarchy: false,
       modifies: "Actor",
-    });
+    },
+  );
 
   /** @inheritDoc */
   static defineSchema() {
@@ -33,12 +36,16 @@ export default class TeriockBaseEffectModel extends ChildTypeModel {
       }),
       suppression: new fields.SchemaField({
         statuses: new fields.SchemaField({
-          active: new fields.SetField(new fields.StringField({
-            choices: TERIOCK.index.conditions,
-          })),
-          inactive: new fields.SetField(new fields.StringField({
-            choices: TERIOCK.index.conditions,
-          })),
+          active: new fields.SetField(
+            new fields.StringField({
+              choices: TERIOCK.index.conditions,
+            }),
+          ),
+          inactive: new fields.SetField(
+            new fields.StringField({
+              choices: TERIOCK.index.conditions,
+            }),
+          ),
         }),
       }),
     });
@@ -88,10 +95,16 @@ export default class TeriockBaseEffectModel extends ChildTypeModel {
    * @returns {boolean} True if the effect is suppressed, false otherwise.
    */
   get suppressed() {
-    if (this.parent.parent?.documentName === "Item" && this.parent.parent.system.shouldSuppress(this.parent.id)) {
+    if (
+      this.parent.parent?.documentName === "Item" &&
+      this.parent.parent.system.shouldSuppress(this.parent.id)
+    ) {
       return true;
     }
-    return !!(this.parent.parent?.documentName === "Item" && this.parent.parent?.system.disabled);
+    return !!(
+      this.parent.parent?.documentName === "Item" &&
+      this.parent.parent?.system.disabled
+    );
   }
 
   /** @inheritDoc */

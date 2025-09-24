@@ -53,10 +53,12 @@ export class StandardDamageHandler extends ActionHandler {
   async primaryAction() {
     for (const actor of this.selectedActors) {
       if (!(actor.system.primaryAttacker || this.dataset.attacker)) {
-        ui.notifications.error(`${actor.name} doesn't have a default attack weapon.`);
+        foundry.ui.notifications.error(
+          `${actor.name} doesn't have a default attack weapon.`,
+        );
         continue;
       }
-      const [ formula ] = await Promise.all([ this._prepFormula(actor) ]);
+      const [formula] = await Promise.all([this._prepFormula(actor)]);
       await this._makeRoll(actor, formula, {
         twoHanded: this.event.ctrlKey,
         crit: this.event.altKey,
@@ -68,10 +70,12 @@ export class StandardDamageHandler extends ActionHandler {
   async secondaryAction() {
     for (const actor of this.selectedActors) {
       if (!(actor.system.primaryAttacker || this.dataset.attacker)) {
-        ui.notifications.error(`${actor.name} doesn't have a default attack weapon.`);
+        foundry.ui.notifications.error(
+          `${actor.name} doesn't have a default attack weapon.`,
+        );
         continue;
       }
-      let [ formula ] = await Promise.all([ this._prepFormula(actor) ]);
+      let [formula] = await Promise.all([this._prepFormula(actor)]);
       formula = await boostDialog(formula, {
         crit: this.event.altKey,
       });

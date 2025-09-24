@@ -137,9 +137,12 @@ export function pureUuid(safeUuid) {
  */
 export async function refreshDocuments(docs, options = { skipSubs: true }) {
   const skipSubs = options?.skipSubs;
-  const progress = ui.notifications.info(`Refreshing documents from wiki.`, {
-    progress: true,
-  });
+  const progress = foundry.ui.notifications.info(
+    `Refreshing documents from wiki.`,
+    {
+      progress: true,
+    },
+  );
   let pct = 0;
   for (const doc of docs) {
     progress.update({
@@ -171,26 +174,32 @@ export function selectUser(actor) {
   /** @type {TeriockUser|null} */
   let selectedUser = null;
   // See if any user has the actor as a character
-  users.forEach(/** @param {TeriockUser} user */(user) => {
-    if (user.character?.uuid === actor.uuid && user.isActive) {
-      selectedUser = user;
-    }
-  });
-  // See if any players have control over the actor
-  if (!selectedUser) {
-    users.forEach(/** @param {TeriockUser} user */(user) => {
-      if (!user.isActiveGM && actor.canUserModify(user, "update")) {
+  users.forEach(
+    /** @param {TeriockUser} user */ (user) => {
+      if (user.character?.uuid === actor.uuid && user.isActive) {
         selectedUser = user;
       }
-    });
+    },
+  );
+  // See if any players have control over the actor
+  if (!selectedUser) {
+    users.forEach(
+      /** @param {TeriockUser} user */ (user) => {
+        if (!user.isActiveGM && actor.canUserModify(user, "update")) {
+          selectedUser = user;
+        }
+      },
+    );
   }
   // See if anyone has control over the actor
   if (!selectedUser) {
-    users.forEach(/** @param {TeriockUser} user */(user) => {
-      if (actor.canUserModify(user, "update")) {
-        selectedUser = user;
-      }
-    });
+    users.forEach(
+      /** @param {TeriockUser} user */ (user) => {
+        if (actor.canUserModify(user, "update")) {
+          selectedUser = user;
+        }
+      },
+    );
   }
   return selectedUser;
 }
@@ -203,16 +212,18 @@ export function selectUser(actor) {
 export function tokenImage(token) {
   const tokenDoc = tokenDocument(token);
   //noinspection JSUnresolvedReference
-  return (tokenDoc?.texture?.src
-    || tokenDoc?.actor.token?.texture?.src
-    || tokenDoc?.actor.getActiveTokens()[0]?.texture?.src
-    || tokenDoc?.actor.prototypeToken?.texture?.src
-    || tokenDoc?.actor.img
-    || token?.texture?.src
-    || token?.actor.token?.texture?.src
-    || token?.actor.getActiveTokens()[0]?.texture?.src
-    || token?.actor.prototypeToken?.texture?.src
-    || token.actor.img);
+  return (
+    tokenDoc?.texture?.src ||
+    tokenDoc?.actor.token?.texture?.src ||
+    tokenDoc?.actor.getActiveTokens()[0]?.texture?.src ||
+    tokenDoc?.actor.prototypeToken?.texture?.src ||
+    tokenDoc?.actor.img ||
+    token?.texture?.src ||
+    token?.actor.token?.texture?.src ||
+    token?.actor.getActiveTokens()[0]?.texture?.src ||
+    token?.actor.prototypeToken?.texture?.src ||
+    token.actor.img
+  );
 }
 
 /**
@@ -222,14 +233,16 @@ export function tokenImage(token) {
  */
 export function tokenName(token) {
   const tokenDoc = tokenDocument(token);
-  return (tokenDoc?.name
-    || tokenDoc?.actor.token?.name
-    || tokenDoc?.actor.prototypeToken?.name
-    || tokenDoc?.actor.name
-    || token?.name
-    || token?.actor.token?.name
-    || token?.actor.prototypeToken?.name
-    || token.actor.name);
+  return (
+    tokenDoc?.name ||
+    tokenDoc?.actor.token?.name ||
+    tokenDoc?.actor.prototypeToken?.name ||
+    tokenDoc?.actor.name ||
+    token?.name ||
+    token?.actor.token?.name ||
+    token?.actor.prototypeToken?.name ||
+    token.actor.name
+  );
 }
 
 /**
@@ -254,7 +267,12 @@ export function modifyChangePrefix(change, searchValue, replaceValue) {
  * @returns {TeriockToken|null}
  */
 export function actorToken(actor) {
-  return (actor.token?.object || actor.getActiveTokens?.()?.[0] || actor.prototypeToken || null);
+  return (
+    actor.token?.object ||
+    actor.getActiveTokens?.()?.[0] ||
+    actor.prototypeToken ||
+    null
+  );
 }
 
 /**
@@ -293,14 +311,7 @@ export function makeIcon(icon, ...styles) {
  * @returns {string} The Font Awesome class for the appropriate dice icon.
  */
 export function getRollIcon(rollFormula) {
-  const polyhedralDice = [
-    4,
-    6,
-    8,
-    10,
-    12,
-    20,
-  ];
+  const polyhedralDice = [4, 6, 8, 10, 12, 20];
   const roll = new TeriockRoll(rollFormula, {});
   const dice = roll.dice;
   dice.sort((a, b) => b.faces - a.faces);
@@ -472,51 +483,19 @@ export function parseTimeString(timeString) {
   const value = parseFloat(match[1]);
   const unit = match[2];
   const units = {
-    1: [
-      "s",
-      "sec",
-      "secs",
-      "second",
-      "seconds",
-    ],
-    60: [
-      "m",
-      "min",
-      "mins",
-      "minute",
-      "minutes",
-    ],
-    3600: [
-      "h",
-      "hr",
-      "hrs",
-      "hour",
-      "hours",
-    ],
-    86400: [
-      "d",
-      "day",
-      "days",
-    ],
-    604800: [
-      "w",
-      "week",
-      "weeks",
-    ],
-    31557600: [
-      "y",
-      "yr",
-      "yrs",
-      "year",
-      "years",
-    ],
+    1: ["s", "sec", "secs", "second", "seconds"],
+    60: ["m", "min", "mins", "minute", "minutes"],
+    3600: ["h", "hr", "hrs", "hour", "hours"],
+    86400: ["d", "day", "days"],
+    604800: ["w", "week", "weeks"],
+    31557600: ["y", "yr", "yrs", "year", "years"],
   };
 
-  const conversions = Object.fromEntries(Object.entries(units)
-    .flatMap(([ seconds, aliases ]) => aliases.map((alias) => [
-      alias,
-      parseInt(seconds),
-    ])));
+  const conversions = Object.fromEntries(
+    Object.entries(units).flatMap(([seconds, aliases]) =>
+      aliases.map((alias) => [alias, parseInt(seconds)]),
+    ),
+  );
   if (!(unit in conversions)) {
     return null;
   }
@@ -579,10 +558,12 @@ export function secondsToReadable(totalSeconds) {
  * @returns Readonly<T>
  */
 export function mergeFreeze(original, other) {
-  return foundry.utils.deepFreeze(foundry.utils.mergeObject(
-    foundry.utils.deepClone(original),
-    foundry.utils.deepClone(other),
-  ));
+  return foundry.utils.deepFreeze(
+    foundry.utils.mergeObject(
+      foundry.utils.deepClone(original),
+      foundry.utils.deepClone(other),
+    ),
+  );
 }
 
 /**

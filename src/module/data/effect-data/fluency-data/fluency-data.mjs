@@ -18,7 +18,9 @@ const { fields } = foundry.data;
  * @mixes ExecutableDataMixin
  * @mixes WikiDataMixin
  */
-export default class TeriockFluencyModel extends WikiDataMixin(ExecutableDataMixin(TeriockBaseEffectModel)) {
+export default class TeriockFluencyModel extends WikiDataMixin(
+  ExecutableDataMixin(TeriockBaseEffectModel),
+) {
   /**
    * @inheritDoc
    * @type {Readonly<Teriock.Documents.EffectModelMetadata>}
@@ -68,11 +70,17 @@ export default class TeriockFluencyModel extends WikiDataMixin(ExecutableDataMix
 
   /** @inheritDoc */
   get wikiPage() {
-    return `${this.constructor.metadata.namespace}:${TERIOCK.options.tradecraft[this.field].tradecrafts[this.tradecraft].name}`;
+    const namespace = this.constructor.metadata.namespace;
+    const pageName =
+      TERIOCK.options.tradecraft[this.field].tradecrafts[this.tradecraft].name;
+    return `${namespace}:${pageName}`;
   }
 
   /** @inheritDoc */
   async _preCreate(data, options, user) {
+    if ((await super._preCreate(data, options, user)) === false) {
+      return false;
+    }
     if (!foundry.utils.hasProperty(data, "img")) {
       this.parent.updateSource({
         img: getIcon("tradecrafts", "Artist"),
@@ -85,15 +93,19 @@ export default class TeriockFluencyModel extends WikiDataMixin(ExecutableDataMix
     if ((await super._preUpdate(changes, options, user)) === false) {
       return false;
     }
-    if (Object.values(iconManifest.tradecrafts).includes(this.parent.img) && !foundry.utils.hasProperty(
-      changes,
-      "img",
-    )) {
+    if (
+      Object.values(iconManifest.tradecrafts).includes(this.parent.img) &&
+      !foundry.utils.hasProperty(changes, "img")
+    ) {
       let tradecraft = this.tradecraft;
       if (foundry.utils.hasProperty(changes, "system.tradecraft")) {
         tradecraft = foundry.utils.getProperty(changes, "system.tradecraft");
       }
-      foundry.utils.setProperty(changes, "img", getIcon("tradecrafts", TERIOCK.index.tradecrafts[tradecraft]));
+      foundry.utils.setProperty(
+        changes,
+        "img",
+        getIcon("tradecrafts", TERIOCK.index.tradecrafts[tradecraft]),
+      );
     }
   }
 

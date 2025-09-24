@@ -6,7 +6,13 @@ export type Expansion = "cascade" | "detonate" | "fork" | "ripple" | null;
 /**
  * Valid delivery packages
  */
-export type DeliveryPackage = | "ball" | "ray" | "ritual" | "strike" | "touch" | null;
+export type DeliveryPackage =
+  | "ball"
+  | "ray"
+  | "ritual"
+  | "strike"
+  | "touch"
+  | null;
 
 /**
  * Valid delivery parents

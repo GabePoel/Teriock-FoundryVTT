@@ -65,7 +65,10 @@ const app = {
           this.CATEGORIES.push(category);
           this.items[category] = items;
 
-          console.log(`Loaded ${items.length} items from ${category}:`, items.slice(0, 3).map((i) => i.name));
+          console.log(
+            `Loaded ${items.length} items from ${category}:`,
+            items.slice(0, 3).map((i) => i.name),
+          );
         } else {
           console.log(`Skipping ${category}.json (${response.status})`);
         }
@@ -210,8 +213,7 @@ const app = {
     }
     try {
       p = decodeURI(p);
-    } catch {
-    }
+    } catch {}
     p = p.replace(/^https?:\/\/[^/]+\/?/i, "");
     return p
       .replace(/\\/g, "/")
@@ -275,7 +277,9 @@ const app = {
             const subList = li.querySelector("ul");
             if (subList) {
               subList.classList.toggle("hidden");
-              toggle.textContent = subList.classList.contains("hidden") ? "►" : "▼";
+              toggle.textContent = subList.classList.contains("hidden")
+                ? "►"
+                : "▼";
             }
           };
         } else {
@@ -331,7 +335,11 @@ const app = {
     }
     const link = this.linkedItems[category] && this.linkedItems[category][name];
     if (link && link.name) {
-      return this.getItemImageSource(link.category || category, link.name, visited);
+      return this.getItemImageSource(
+        link.category || category,
+        link.name,
+        visited,
+      );
     }
     return null;
   },
@@ -347,11 +355,10 @@ const app = {
           if (!index.has(p)) {
             index.set(p, []);
           }
-          index.get(p)
-            .push({
-              category: cat,
-              name: it.name,
-            });
+          index.get(p).push({
+            category: cat,
+            name: it.name,
+          });
         }
       });
     }
@@ -368,23 +375,33 @@ const app = {
       li.style.padding = "20px";
       li.style.textAlign = "center";
       li.style.color = "#8E9297";
-      li.textContent = this.CATEGORIES.length === 0
-        ? "No categories found. Make sure category files exist in src/index/categories/"
-        : "Please select a category";
+      li.textContent =
+        this.CATEGORIES.length === 0
+          ? "No categories found. Make sure category files exist in src/index/categories/"
+          : "Please select a category";
       list.appendChild(li);
       return;
     }
 
-    document.getElementById("left-title").textContent
-      = `Items — ${this.currentCategory[0].toUpperCase()}${this.currentCategory.slice(1)}`;
+    document.getElementById("left-title").textContent =
+      `Items — ${this.currentCategory[0].toUpperCase()}${this.currentCategory.slice(1)}`;
 
-    const searchValue = (document.getElementById("ability-search").value || "").toLowerCase();
-    const unassignedOnly = document.getElementById("abilities-unassigned-only-toggle")?.checked || false;
+    const searchValue = (
+      document.getElementById("ability-search").value || ""
+    ).toLowerCase();
+    const unassignedOnly =
+      document.getElementById("abilities-unassigned-only-toggle")?.checked ||
+      false;
 
     const filtered = (this.items[this.currentCategory] || []).filter((item) => {
       const nameMatch = item.name.toLowerCase().includes(searchValue);
-      const tagsMatch = (item.tags || []).some((tag) => (tag || "").toLowerCase().includes(searchValue));
-      const hasIcon = !!this.getItemImageSource(this.currentCategory, item.name);
+      const tagsMatch = (item.tags || []).some((tag) =>
+        (tag || "").toLowerCase().includes(searchValue),
+      );
+      const hasIcon = !!this.getItemImageSource(
+        this.currentCategory,
+        item.name,
+      );
       return (nameMatch || tagsMatch) && (!unassignedOnly || !hasIcon);
     });
 
@@ -393,7 +410,9 @@ const app = {
       li.style.padding = "20px";
       li.style.textAlign = "center";
       li.style.color = "#8E9297";
-      li.textContent = searchValue ? "No items match your search" : `No items found in ${this.currentCategory}`;
+      li.textContent = searchValue
+        ? "No items match your search"
+        : `No items found in ${this.currentCategory}`;
       list.appendChild(li);
       return;
     }
@@ -406,7 +425,9 @@ const app = {
       const imageSrc = this.getItemImageSource(this.currentCategory, item.name);
       const placeholder = document.createElement("div");
       placeholder.className = "image-placeholder";
-      placeholder.addEventListener("click", () => this.unassignFromItem(this.currentCategory, item.name));
+      placeholder.addEventListener("click", () =>
+        this.unassignFromItem(this.currentCategory, item.name),
+      );
 
       if (imageSrc) {
         placeholder.classList.add("assigned");
@@ -418,7 +439,8 @@ const app = {
         if (link) {
           const inheritedText = document.createElement("div");
           inheritedText.className = "inherited-from";
-          const catPrefix = link.category !== this.currentCategory ? `${link.category}:` : "";
+          const catPrefix =
+            link.category !== this.currentCategory ? `${link.category}:` : "";
           inheritedText.textContent = `@${catPrefix}${link.name}`;
           placeholder.appendChild(inheritedText);
         }
@@ -446,7 +468,9 @@ const app = {
       linkBtn.className = "inherit-button";
       linkBtn.textContent = "Link";
       linkBtn.addEventListener("click", () => {
-        const sourceSpec = prompt(`Link icon from which item?\nUse "Name" for same section or "category:Name" for cross-section.`);
+        const sourceSpec = prompt(
+          `Link icon from which item?\nUse "Name" for same section or "category:Name" for cross-section.`,
+        );
         if (sourceSpec) {
           this.linkItems(this.currentCategory, item.name, sourceSpec);
         }
@@ -476,17 +500,23 @@ const app = {
     }
 
     const unusedOnly = document.getElementById("unused-only-toggle").checked;
-    const searchValue = (document.getElementById("image-search").value || "").toLowerCase();
+    const searchValue = (
+      document.getElementById("image-search").value || ""
+    ).toLowerCase();
 
     const usageIndex = this.buildUsageIndex();
     // per-section usage for "unused" filter and assigned state
-    const usedInSelected = new Set((this.items[this.currentCategory] || [])
-      .map((it) => this.getItemImageSource(this.currentCategory, it.name))
-      .filter(Boolean)
-      .map((p) => this.normalizePath(p)));
+    const usedInSelected = new Set(
+      (this.items[this.currentCategory] || [])
+        .map((it) => this.getItemImageSource(this.currentCategory, it.name))
+        .filter(Boolean)
+        .map((p) => this.normalizePath(p)),
+    );
 
     const filteredImages = this.images.filter((img) => {
-      const inDir = this.currentDirectory ? img.path.startsWith(this.currentDirectory) : true;
+      const inDir = this.currentDirectory
+        ? img.path.startsWith(this.currentDirectory)
+        : true;
       const nameMatch = img.path.toLowerCase().includes(searchValue);
       const isUsedHere = usedInSelected.has(this.normalizePath(img.path));
       return inDir && nameMatch && (!unusedOnly || !isUsedHere);
@@ -542,7 +572,7 @@ const app = {
 
     // Enforce global uniqueness: unassign anywhere this image is in use
     for (const cat of this.CATEGORIES) {
-      for (const [ name, pathVal ] of Object.entries(this.assignedImages[cat])) {
+      for (const [name, pathVal] of Object.entries(this.assignedImages[cat])) {
         if (this.pathsEqualOrSuffix(pathVal, normalized)) {
           delete this.assignedImages[cat][name];
         }
@@ -570,7 +600,9 @@ const app = {
     }
 
     // Validate existence in source category
-    const exists = (this.items[link.category] || []).some((i) => i.name === link.name);
+    const exists = (this.items[link.category] || []).some(
+      (i) => i.name === link.name,
+    );
     if (!exists) {
       alert(`Error: "${link.name}" not found in ${link.category}.`);
       return;
@@ -581,8 +613,9 @@ const app = {
     }
 
     // Cycle guard across categories
-    const seen = new Set([ `${category}||${targetName}` ]);
-    let curCat = link.category, curName = link.name;
+    const seen = new Set([`${category}||${targetName}`]);
+    let curCat = link.category,
+      curName = link.name;
     while (curCat && curName) {
       const key = `${curCat}||${curName}`;
       if (seen.has(key)) {
@@ -619,11 +652,13 @@ const app = {
       for (const cat of this.CATEGORIES) {
         const section = {};
         // links
-        for (const [ name, link ] of Object.entries(this.linkedItems[cat])) {
+        for (const [name, link] of Object.entries(this.linkedItems[cat])) {
           section[name] = this.formatLink(link, cat);
         }
         // direct paths
-        for (const [ name, pathVal ] of Object.entries(this.assignedImages[cat])) {
+        for (const [name, pathVal] of Object.entries(
+          this.assignedImages[cat],
+        )) {
           section[name] = pathVal;
         }
         if (Object.keys(section).length > 0) {
@@ -689,11 +724,13 @@ const app = {
       for (const cat of this.CATEGORIES) {
         const section = {};
         // links
-        for (const [ name, link ] of Object.entries(this.linkedItems[cat])) {
+        for (const [name, link] of Object.entries(this.linkedItems[cat])) {
           section[name] = this.formatLink(link, cat);
         }
         // direct paths
-        for (const [ name, pathVal ] of Object.entries(this.assignedImages[cat])) {
+        for (const [name, pathVal] of Object.entries(
+          this.assignedImages[cat],
+        )) {
           section[name] = pathVal;
         }
         if (Object.keys(section).length > 0) {
@@ -766,7 +803,9 @@ const app = {
       abilitySearch.addEventListener("input", () => this.renderItems());
     }
 
-    const unassignedToggle = document.getElementById("abilities-unassigned-only-toggle");
+    const unassignedToggle = document.getElementById(
+      "abilities-unassigned-only-toggle",
+    );
     if (unassignedToggle) {
       unassignedToggle.addEventListener("change", () => this.renderItems());
     }

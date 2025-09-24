@@ -18,20 +18,12 @@ export default class DetectionModeScentPerception extends BaseDetectionMode {
     "ethereal",
   ];
 
-  static BLOCKING_TGT_STATUS_EFFECTS = [
-    "odorless",
-    "ethereal",
-  ];
+  static BLOCKING_TGT_STATUS_EFFECTS = ["odorless", "ethereal"];
 
   /** @inheritDoc */
   static getDetectionFilter() {
     return (this._detectionFilter ??= OutlineOverlayFilter.create({
-      outlineColor: [
-        0.5,
-        0.5,
-        0,
-        1,
-      ],
+      outlineColor: [0.5, 0.5, 0, 1],
       knockout: true,
       wave: true,
     }));

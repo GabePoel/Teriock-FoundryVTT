@@ -15,20 +15,12 @@ export default class DetectionModeBlindFighting extends BaseDetectionMode {
     "ethereal",
   ];
 
-  static BLOCKING_TGT_STATUS_EFFECTS = [
-    "ethereal",
-    "hidden",
-  ];
+  static BLOCKING_TGT_STATUS_EFFECTS = ["ethereal", "hidden"];
 
   /** @inheritDoc */
   static getDetectionFilter() {
     return (this._detectionFilter ??= OutlineOverlayFilter.create({
-      outlineColor: [
-        1,
-        0,
-        1,
-        1,
-      ],
+      outlineColor: [1, 0, 1, 1],
       knockout: true,
       wave: true,
     }));

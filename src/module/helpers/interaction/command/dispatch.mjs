@@ -51,15 +51,17 @@ export default function dispatch(message, chatData, sender) {
     .map((t) => t.actor)
     .filter(Boolean);
 
-  const [ rawCommand, ...args ] = message.slice(1).trim().split(/\s+/);
+  const [rawCommand, ...args] = message.slice(1).trim().split(/\s+/);
   const command = commandMap[rawCommand.toLowerCase()];
 
   if (command) {
-    command.execute({
-      args,
-      chatData,
-      actors,
-    }).catch(console.error);
+    command
+      .execute({
+        args,
+        chatData,
+        actors,
+      })
+      .catch(console.error);
     return false;
   }
 }

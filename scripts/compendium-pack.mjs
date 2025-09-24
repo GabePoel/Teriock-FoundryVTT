@@ -1,6 +1,7 @@
 import { compilePack } from "@foundryvtt/foundryvtt-cli";
 import { promises as fs } from "fs";
 
+//eslint-disable-next-line no-undef
 const MODULE_ID = process.cwd();
 const yaml = true;
 const folders = true;
@@ -12,8 +13,12 @@ for (const pack of packs) {
     continue;
   }
   console.log("Packing " + pack);
-  await compilePack(`${MODULE_ID}/src/packs/${pack}`, `${MODULE_ID}/packs/${pack}`, {
-    yaml,
-    recursive: folders,
-  });
+  await compilePack(
+    `${MODULE_ID}/src/packs/${pack}`,
+    `${MODULE_ID}/packs/${pack}`,
+    {
+      yaml,
+      recursive: folders,
+    },
+  );
 }

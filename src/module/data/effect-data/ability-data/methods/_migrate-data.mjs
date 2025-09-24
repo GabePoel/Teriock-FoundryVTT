@@ -11,17 +11,18 @@ import { migrateHierarchy } from "../../../shared/migrations/migrate-hierarchy.m
 export function _migrateData(data) {
   // Effect key migration
   if (data.effects?.includes("truth")) {
-    data.effects = data.effects.map((effect) => effect === "truth" ? "truthDetecting" : effect);
+    data.effects = data.effects.map((effect) =>
+      effect === "truth" ? "truthDetecting" : effect,
+    );
   }
   if (data.effects?.includes("duelMod")) {
-    data.effects = data.effects.map((effect) => effect === "duelMod" ? "duelModifying" : effect);
+    data.effects = data.effects.map((effect) =>
+      effect === "duelMod" ? "duelModifying" : effect,
+    );
   }
 
   // HP and MP cost migration
-  for (const pointCost of [
-    "mp",
-    "hp",
-  ]) {
+  for (const pointCost of ["mp", "hp"]) {
     if (data.costs) {
       if (data.costs[pointCost] === null) {
         data.costs[pointCost] = {
@@ -34,7 +35,9 @@ export function _migrateData(data) {
         };
       }
       if (typeof data.costs[pointCost] == "string") {
-        const variableCost = String(pointCost === "mp" ? "manaCost" : "hitCost");
+        const variableCost = String(
+          pointCost === "mp" ? "manaCost" : "hitCost",
+        );
         data.costs[pointCost] = {
           type: "variable",
           value: {
@@ -87,7 +90,11 @@ export function _migrateData(data) {
 
   // Form migration
   if (foundry.utils.getProperty(data, "abilityType")) {
-    foundry.utils.setProperty(data, "form", foundry.utils.getProperty(data, "abilityType"));
+    foundry.utils.setProperty(
+      data,
+      "form",
+      foundry.utils.getProperty(data, "abilityType"),
+    );
   }
 
   if (data.effects) {
@@ -103,24 +110,34 @@ export function _migrateData(data) {
  * @param {EffectChangeData} change
  */
 function migrateProtection(change) {
-  change.key = change.key.replace("system.resistances", "system.protections.resistances");
-  change.key = change.key.replace("system.immunities", "system.protections.immunities");
-  change.key = change.key.replace("system.hexproofs", "system.protections.hexproofs");
-  change.key = change.key.replace("system.hexseals", "system.protections.hexseals");
+  change.key = change.key.replace(
+    "system.resistances",
+    "system.protections.resistances",
+  );
+  change.key = change.key.replace(
+    "system.immunities",
+    "system.protections.immunities",
+  );
+  change.key = change.key.replace(
+    "system.hexproofs",
+    "system.protections.hexproofs",
+  );
+  change.key = change.key.replace(
+    "system.hexseals",
+    "system.protections.hexseals",
+  );
 }
 
 /**
  * @param {TeriockAbilityModel} data
  */
 function migrateProtections(data) {
-  for (const application of [
-    "base",
-    "proficient",
-    "fluent",
-    "heightened",
-  ]) {
+  for (const application of ["base", "proficient", "fluent", "heightened"]) {
     if (foundry.utils.hasProperty(data, `applies.${application}.changes`)) {
-      const changes = foundry.utils.getProperty(data, `applies.${application}.changes`);
+      const changes = foundry.utils.getProperty(
+        data,
+        `applies.${application}.changes`,
+      );
       for (const change of changes) {
         migrateProtection(change);
       }

@@ -13,7 +13,9 @@ const { fields } = foundry.data;
  * @extends TeriockBaseEffectModel
  * @mixes HierarchyDataMixin
  */
-export default class TeriockConsequenceModel extends HierarchyDataMixin(TeriockBaseEffectModel) {
+export default class TeriockConsequenceModel extends HierarchyDataMixin(
+  TeriockBaseEffectModel,
+) {
   /**
    * @inheritDoc
    * @type {Readonly<Teriock.Documents.EffectModelMetadata>}
@@ -32,18 +34,24 @@ export default class TeriockConsequenceModel extends HierarchyDataMixin(TeriockB
       }),
       expirations: new fields.SchemaField({
         conditions: new fields.SchemaField({
-          present: new fields.SetField(new fields.StringField({
-            choices: TERIOCK.index.conditions,
-          }), {
-            label: "Present Conditions",
-            hint: "What conditions must be present in order for this ability to be active?",
-          }),
-          absent: new fields.SetField(new fields.StringField({
-            choices: TERIOCK.index.conditions,
-          }), {
-            label: "Absent Conditions",
-            hint: "What conditions must be absent in order for this ability to be active?",
-          }),
+          present: new fields.SetField(
+            new fields.StringField({
+              choices: TERIOCK.index.conditions,
+            }),
+            {
+              label: "Present Conditions",
+              hint: "What conditions must be present in order for this ability to be active?",
+            },
+          ),
+          absent: new fields.SetField(
+            new fields.StringField({
+              choices: TERIOCK.index.conditions,
+            }),
+            {
+              label: "Absent Conditions",
+              hint: "What conditions must be absent in order for this ability to be active?",
+            },
+          ),
         }),
         movement: new fields.BooleanField({
           initial: false,
@@ -93,7 +101,11 @@ export default class TeriockConsequenceModel extends HierarchyDataMixin(TeriockB
    * @returns {boolean} True if the effect expires based on a condition, false otherwise.
    */
   get conditionExpiration() {
-    return (this.expirations.conditions.present.size + this.expirations.conditions.absent.size > 0);
+    return (
+      this.expirations.conditions.present.size +
+        this.expirations.conditions.absent.size >
+      0
+    );
   }
 
   /**
@@ -116,7 +128,8 @@ export default class TeriockConsequenceModel extends HierarchyDataMixin(TeriockB
   /** @inheritDoc */
   get messageParts() {
     return {
-      ...super.messageParts, ..._messageParts(this),
+      ...super.messageParts,
+      ..._messageParts(this),
     };
   }
 
@@ -142,7 +155,7 @@ export default class TeriockConsequenceModel extends HierarchyDataMixin(TeriockB
     }
     if (this.sustainedExpiration) {
       /** @type {TeriockEffect} */
-      const source = fromUuidSync(this.source);
+      const source = foundry.utils.fromUuidSync(this.source);
       should = should || !source || source.disabled;
     }
     return should;

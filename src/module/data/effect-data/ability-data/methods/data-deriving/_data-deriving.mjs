@@ -25,7 +25,10 @@ export function _prepareDerivedData(abilityData) {
 
   // Effect match power sources
   for (const ps of abilityData.powerSources) {
-    if (Object.keys(TERIOCK.index.effectTypes).includes(ps) && !abilityData.effectTypes.has(ps)) {
+    if (
+      Object.keys(TERIOCK.index.effectTypes).includes(ps) &&
+      !abilityData.effectTypes.has(ps)
+    ) {
       abilityData.effectTypes.add(ps);
     }
   }

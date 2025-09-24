@@ -35,8 +35,8 @@ export class ApplyEffectHandler extends ActionHandler {
   _toObj(jsonData) {
     try {
       return JSON.parse(jsonData);
-    } catch (e) {
-      ui.notifications.error("Failed to parse effect data.");
+    } catch {
+      foundry.ui.notifications.error("Failed to parse effect data.");
       return null;
     }
   }
@@ -50,9 +50,12 @@ export class ApplyEffectHandler extends ActionHandler {
     /** @type {TeriockConsequence[]} */
     const createdConsequences = [];
     for (const actor of this.actors) {
-      const newConsequences = await actor.createEmbeddedDocuments("ActiveEffect", [ effectObj ]);
+      const newConsequences = await actor.createEmbeddedDocuments(
+        "ActiveEffect",
+        [effectObj],
+      );
       createdConsequences.push(...newConsequences);
-      ui.notifications.info(`Applied ${effectObj.name}`);
+      foundry.ui.notifications.info(`Applied ${effectObj.name}`);
     }
     await this._addToSustaining(createdConsequences);
   }
@@ -66,16 +69,18 @@ export class ApplyEffectHandler extends ActionHandler {
     /** @type {TeriockConsequence[]} */
     const createdConsequences = [];
     for (const actor of this.actors) {
-      const foundEffects = actor.effects.filter((effect) => effect.name === effectObj.name);
+      const foundEffects = actor.effects.filter(
+        (effect) => effect.name === effectObj.name,
+      );
       for (const effect of foundEffects) {
         await effect.delete();
       }
       const foundIds = foundEffects.map((effect) => effect.id);
       if (foundIds.length > 0) {
         // await actor.deleteEmbeddedDocuments("ActiveEffect", foundIds);
-        ui.notifications.info(`Removed ${effectObj.name}`);
+        foundry.ui.notifications.info(`Removed ${effectObj.name}`);
       } else {
-        ui.notifications.warn(`${effectObj.name} not found`);
+        foundry.ui.notifications.warn(`${effectObj.name} not found`);
       }
     }
     await this._addToSustaining(createdConsequences);

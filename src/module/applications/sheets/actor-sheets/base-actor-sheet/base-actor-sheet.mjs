@@ -2,12 +2,19 @@ import { documentOptions } from "../../../../constants/options/document-options.
 import { tradecraftMessage } from "../../../../helpers/html.mjs";
 import { buildMessage } from "../../../../helpers/messages-builder/message-builder.mjs";
 import { docSort } from "../../../../helpers/utils.mjs";
-import { changeSizeDialog, selectDocumentDialog } from "../../../dialogs/_module.mjs";
+import {
+  changeSizeDialog,
+  selectDocumentDialog,
+} from "../../../dialogs/_module.mjs";
 import { HackStatMixin } from "../../../shared/mixins/_module.mjs";
 import { CommonSheetMixin } from "../../mixins/_module.mjs";
 import _embeddedFromCard from "../../mixins/common-sheet-mixin/methods/_embedded-from-card.mjs";
 import { piercingContextMenu } from "./connections/character-context-menus.mjs";
-import { _addEmbedded, _addEquipment, _addRank } from "./methods/_add-embedded.mjs";
+import {
+  _addEmbedded,
+  _addEquipment,
+  _addRank,
+} from "./methods/_add-embedded.mjs";
 import { _filterAbilities, _filterEquipment } from "./methods/_filters.mjs";
 import { _initSearchFilters } from "./methods/_search.mjs";
 import { _defaultSheetSettings } from "./methods/_settings.mjs";
@@ -27,16 +34,15 @@ const TextEditor = foundry.applications.ux.TextEditor.implementation;
  * @property {TeriockActor} actor
  * @property {TeriockActor} document
  */
-export default class TeriockBaseActorSheet extends HackStatMixin(CommonSheetMixin(ActorSheetV2)) {
+export default class TeriockBaseActorSheet extends HackStatMixin(
+  CommonSheetMixin(ActorSheetV2),
+) {
   /**
    * @inheritDoc
    * @type {Partial<ApplicationConfiguration>}
    */
   static DEFAULT_OPTIONS = {
-    classes: [
-      "teriock",
-      "character",
-    ],
+    classes: ["teriock", "character"],
     actions: {
       addEmbedded: this._addEmbedded,
       addEquipment: this._addEquipment,
@@ -90,11 +96,9 @@ export default class TeriockBaseActorSheet extends HackStatMixin(CommonSheetMixi
   /** @inheritDoc */
   static PARTS = {
     all: {
-      template: "systems/teriock/src/templates/document-templates/actor-templates/character-template/character-template.hbs",
-      scrollable: [
-        ".character-sidebar",
-        ".character-tab-content",
-      ],
+      template:
+        "systems/teriock/src/templates/document-templates/actor-templates/character-template/character-template.hbs",
+      scrollable: [".character-sidebar", ".character-tab-content"],
     },
   };
 
@@ -255,7 +259,9 @@ export default class TeriockBaseActorSheet extends HackStatMixin(CommonSheetMixi
         },
       ];
       const content = buildMessage(messageParts).outerHTML;
-      message = await TextEditor.enrichHTML(`<div class="teriock">${content}</div>`);
+      message = await TextEditor.enrichHTML(
+        `<div class="teriock">${content}</div>`,
+      );
     }
     /** @type {Teriock.RollOptions.CommonRoll} */
     const options = {
@@ -382,7 +388,9 @@ export default class TeriockBaseActorSheet extends HackStatMixin(CommonSheetMixi
         },
       ];
       const content = buildMessage(messageParts).outerHTML;
-      message = await TextEditor.enrichHTML(`<div class="teriock">${content}</div>`);
+      message = await TextEditor.enrichHTML(
+        `<div class="teriock">${content}</div>`,
+      );
     }
     const options = {
       advantage: event.altKey,
@@ -417,10 +425,13 @@ export default class TeriockBaseActorSheet extends HackStatMixin(CommonSheetMixi
    * @private
    */
   static async _selectAttacker() {
-    const attacker = await selectDocumentDialog(this.document.equipment.filter((e) => e.system.isEquipped), {
-      hint: "Select the default equipment you attack with.",
-      label: "Select Primary Attacker",
-    });
+    const attacker = await selectDocumentDialog(
+      this.document.equipment.filter((e) => e.system.isEquipped),
+      {
+        hint: "Select the default equipment you attack with.",
+        label: "Select Primary Attacker",
+      },
+    );
     if (attacker) {
       await this.document.update({
         "system.wielding.attacker": attacker.id,
@@ -434,10 +445,13 @@ export default class TeriockBaseActorSheet extends HackStatMixin(CommonSheetMixi
    * @private
    */
   static async _selectBlocker() {
-    const attacker = await selectDocumentDialog(this.document.equipment.filter((e) => e.system.isEquipped), {
-      hint: "Select the default equipment you block with.",
-      label: "Select Primary Blocker",
-    });
+    const attacker = await selectDocumentDialog(
+      this.document.equipment.filter((e) => e.system.isEquipped),
+      {
+        hint: "Select the default equipment you block with.",
+        label: "Select Primary Blocker",
+      },
+    );
     if (attacker) {
       await this.document.update({
         "system.wielding.blocker": attacker.id,
@@ -455,7 +469,8 @@ export default class TeriockBaseActorSheet extends HackStatMixin(CommonSheetMixi
     event.stopPropagation();
     await DialogV2.prompt({
       window: { title: "Take Damage" },
-      content: "<input type=\"number\" name=\"damage\" placeholder=\"Damage Amount\">",
+      content:
+        '<input type="number" name="damage" placeholder="Damage Amount">',
       ok: {
         label: "Confirm",
         callback: (_event, button) => {
@@ -478,7 +493,7 @@ export default class TeriockBaseActorSheet extends HackStatMixin(CommonSheetMixi
     event.stopPropagation();
     await DialogV2.prompt({
       window: { title: "Take Drain" },
-      content: "<input type=\"number\" name=\"drain\" placeholder=\"Drain Amount\">",
+      content: '<input type="number" name="drain" placeholder="Drain Amount">',
       ok: {
         label: "Confirm",
         callback: (_event, button) => {
@@ -501,7 +516,8 @@ export default class TeriockBaseActorSheet extends HackStatMixin(CommonSheetMixi
     event.stopPropagation();
     await DialogV2.prompt({
       window: { title: "Take Wither" },
-      content: "<input type=\"number\" name=\"wither\" placeholder=\"Wither Amount\">",
+      content:
+        '<input type="number" name="wither" placeholder="Wither Amount">',
       ok: {
         label: "Confirm",
         callback: (_event, button) => {
@@ -522,7 +538,8 @@ export default class TeriockBaseActorSheet extends HackStatMixin(CommonSheetMixi
    * @static
    */
   static async _toggleAttunedDoc(_event, target) {
-    const embedded = /** @type {TeriockEquipment|null} */
+    const embedded =
+      /** @type {TeriockEquipment|null} */
       await _embeddedFromCard(this, target);
     if (embedded.system.isAttuned) {
       await embedded.system.deattune();
@@ -533,9 +550,15 @@ export default class TeriockBaseActorSheet extends HackStatMixin(CommonSheetMixi
 
   static async _toggleConditionExpansion(_event, target) {
     const condition = target.dataset.condition;
-    this.settings.conditionExpansions[condition] = !this.settings.conditionExpansions[condition];
-    const conditionBodyEl = this.element.querySelector(`.condition-body.${condition}`);
-    conditionBodyEl.classList.toggle("expanded", this.settings.conditionExpansions[condition]);
+    this.settings.conditionExpansions[condition] =
+      !this.settings.conditionExpansions[condition];
+    const conditionBodyEl = this.element.querySelector(
+      `.condition-body.${condition}`,
+    );
+    conditionBodyEl.classList.toggle(
+      "expanded",
+      this.settings.conditionExpansions[condition],
+    );
   }
 
   /**
@@ -546,7 +569,8 @@ export default class TeriockBaseActorSheet extends HackStatMixin(CommonSheetMixi
    * @static
    */
   static async _toggleDampenedDoc(_event, target) {
-    const embedded = /** @type {TeriockEquipment|null} */
+    const embedded =
+      /** @type {TeriockEquipment|null} */
       await _embeddedFromCard(this, target);
     if (embedded.system.dampened) {
       await embedded.system.undampen();
@@ -575,7 +599,8 @@ export default class TeriockBaseActorSheet extends HackStatMixin(CommonSheetMixi
    * @static
    */
   static async _toggleEquippedDoc(_event, target) {
-    const embedded = /** @type {TeriockEquipment|null} */
+    const embedded =
+      /** @type {TeriockEquipment|null} */
       await _embeddedFromCard(this, target);
     if (embedded.system.equipped) {
       await embedded.system.unequip();
@@ -592,7 +617,8 @@ export default class TeriockBaseActorSheet extends HackStatMixin(CommonSheetMixi
    * @static
    */
   static async _toggleGluedDoc(_event, target) {
-    const embedded = /** @type {TeriockEquipment|null} */
+    const embedded =
+      /** @type {TeriockEquipment|null} */
       await _embeddedFromCard(this, target);
     if (embedded.system.glued) {
       await embedded.system.unglue();
@@ -618,7 +644,9 @@ export default class TeriockBaseActorSheet extends HackStatMixin(CommonSheetMixi
    * @static
    */
   static async _toggleSb() {
-    await this.document.update({ "system.offense.sb": !this.document.system.offense.sb });
+    await this.document.update({
+      "system.offense.sb": !this.document.system.offense.sb,
+    });
   }
 
   /**
@@ -629,7 +657,8 @@ export default class TeriockBaseActorSheet extends HackStatMixin(CommonSheetMixi
    * @static
    */
   static async _toggleShatteredDoc(_event, target) {
-    const embedded = /** @type {TeriockEquipment|null} */
+    const embedded =
+      /** @type {TeriockEquipment|null} */
       await _embeddedFromCard(this, target);
     if (embedded.system.shattered) {
       await embedded.system.repair();
@@ -694,7 +723,11 @@ export default class TeriockBaseActorSheet extends HackStatMixin(CommonSheetMixi
    * @returns {Array} Filtered abilities array.
    */
   _getFilteredAbilities(abilities = []) {
-    return _filterAbilities(this.actor, abilities, this.settings.abilityFilters);
+    return _filterAbilities(
+      this.actor,
+      abilities,
+      this.settings.abilityFilters,
+    );
   }
 
   /**
@@ -703,7 +736,11 @@ export default class TeriockBaseActorSheet extends HackStatMixin(CommonSheetMixi
    * @returns {Array} Filtered equipment array.
    */
   _getFilteredEquipment(equipment = []) {
-    return _filterEquipment(this.actor, equipment, this.settings.equipmentFilters);
+    return _filterEquipment(
+      this.actor,
+      equipment,
+      this.settings.equipmentFilters,
+    );
   }
 
   /** @inheritDoc */
@@ -718,7 +755,9 @@ export default class TeriockBaseActorSheet extends HackStatMixin(CommonSheetMixi
   async _onFirstRender(context, options) {
     await super._onFirstRender(context, options);
     if (this.document.species.length === 0) {
-      foundry.ui.notifications.warn(`${this.document.name} has no species. Add one from the "Species" compendium.`);
+      foundry.ui.notifications.warn(
+        `${this.document.name} has no species. Add one from the "Species" compendium.`,
+      );
     }
   }
 
@@ -729,7 +768,9 @@ export default class TeriockBaseActorSheet extends HackStatMixin(CommonSheetMixi
     /** @type {HTMLDivElement} */
     const sidebar = this.element.querySelector(".character-sidebar");
     /** @type {HTMLDivElement} */
-    const tabber = this.element.querySelector(".character-sidebar-tabber-container");
+    const tabber = this.element.querySelector(
+      ".character-sidebar-tabber-container",
+    );
     /** @type {HTMLDivElement} */
     const hpDrawer = this.element.querySelector(".hp-die-drawer");
     /** @type {HTMLDivElement} */
@@ -745,9 +786,13 @@ export default class TeriockBaseActorSheet extends HackStatMixin(CommonSheetMixi
     hpDrawer.classList.toggle("closed", !this._hpDrawerOpen);
     mpDrawer.classList.toggle("closed", !this._mpDrawerOpen);
 
+    //eslint-disable-next-line @typescript-eslint/no-unused-expressions
     sidebar.offsetHeight;
+    //eslint-disable-next-line @typescript-eslint/no-unused-expressions
     tabber.offsetHeight;
+    //eslint-disable-next-line @typescript-eslint/no-unused-expressions
     hpDrawer.offsetHeight;
+    //eslint-disable-next-line @typescript-eslint/no-unused-expressions
     mpDrawer.offsetHeight;
 
     sidebar.classList.remove("no-transition");
@@ -824,7 +869,9 @@ export default class TeriockBaseActorSheet extends HackStatMixin(CommonSheetMixi
         if (!(el instanceof HTMLElement)) {
           return;
         }
-        const part = /** @type {Teriock.Parameters.Actor.HackableBodyPart} */ el.dataset.part;
+        const part =
+          /** @type {Teriock.Parameters.Actor.HackableBodyPart} */ el.dataset
+            .part;
         await this.actor.takeUnhack(part);
         e.stopPropagation();
       });
@@ -838,13 +885,18 @@ export default class TeriockBaseActorSheet extends HackStatMixin(CommonSheetMixi
         e.stopPropagation();
       });
 
-    this._connectContextMenu(".character-piercing-box", piercingContextMenu(this.actor), "click");
+    this._connectContextMenu(
+      ".character-piercing-box",
+      piercingContextMenu(this.actor),
+      "click",
+    );
 
     _initSearchFilters(this);
 
     /** @type {NodeListOf<HTMLSelectElement>} */
     const filterSelects = this.element.querySelectorAll(
-      "select[name^=\"settings.abilityFilters\"], select[name^=\"settings.equipmentFilters\"]");
+      'select[name^="settings.abilityFilters"], select[name^="settings.equipmentFilters"]',
+    );
     filterSelects.forEach((el) => {
       el.addEventListener("change", async (e) => {
         /** @type {HTMLSelectElement} */
@@ -864,7 +916,9 @@ export default class TeriockBaseActorSheet extends HackStatMixin(CommonSheetMixi
     });
 
     /** @type {NodeListOf<HTMLButtonElement>} */
-    const toggleSwitches = this.element.querySelectorAll("button[data-action=\"toggleSwitch\"]");
+    const toggleSwitches = this.element.querySelectorAll(
+      'button[data-action="toggleSwitch"]',
+    );
     toggleSwitches.forEach((el) => {
       // Left click: forward cycle
       el.addEventListener("click", async () => {
@@ -891,11 +945,14 @@ export default class TeriockBaseActorSheet extends HackStatMixin(CommonSheetMixi
     // const basicAbilitiesPower = await getItem("Basic Abilities", "essentials");
     // const basicAbilities = basicAbilitiesPower.abilities;
     this._embeds.effectTypes = {
-      ability: tab === "abilities" ? [
-        ...this.actor.abilities,
-        // Uncomment when bugs with virtual abilities are all resolved.
-        // ...basicAbilities
-      ] : [],
+      ability:
+        tab === "abilities"
+          ? [
+              ...this.actor.abilities,
+              // Uncomment when bugs with virtual abilities are all resolved.
+              // ...basicAbilities
+            ]
+          : [],
       attunement: tab === "conditions" ? this.actor.attunements : [],
       consequence: tab === "conditions" ? this.actor.consequences : [],
       fluency: tab === "tradecrafts" ? this.actor.fluencies : [],
@@ -906,8 +963,9 @@ export default class TeriockBaseActorSheet extends HackStatMixin(CommonSheetMixi
       power: tab === "powers" ? this.actor.powers : [],
       rank: tab === "classes" ? this.actor.ranks : [],
     };
-    let conditions = Array.from(this.actor.statuses || [])
-      .filter((c) => Object.keys(TERIOCK.index.conditions).includes(c));
+    let conditions = Array.from(this.actor.statuses || []).filter((c) =>
+      Object.keys(TERIOCK.index.conditions).includes(c),
+    );
     // Sort: 'down' first, 'dead' second, rest alphabetical
     conditions.sort((a, b) => {
       if (a === "dead") {
@@ -940,17 +998,27 @@ export default class TeriockBaseActorSheet extends HackStatMixin(CommonSheetMixi
     const context = await super._prepareContext(options);
     context.activeTab = this._activeTab;
     context.conditions = conditions;
-    context.removableConditions = conditions.filter((c) => this.actor.effectKeys.condition.has(c));
+    context.removableConditions = conditions.filter((c) =>
+      this.actor.effectKeys.condition.has(c),
+    );
     context.editable = this.isEditable;
     context.actor = this.actor;
-    context.abilities = this._getFilteredAbilities(_sortAbilities(this.actor, this._embeds.effectTypes.ability) || []);
+    context.abilities = this._getFilteredAbilities(
+      _sortAbilities(this.actor, this._embeds.effectTypes.ability) || [],
+    );
     context.resources = docSort(this.actor.resources, { alphabetical: true });
-    context.equipment = this._getFilteredEquipment(_sortEquipment(this.actor, this._embeds.itemTypes.equipment) || []);
+    context.equipment = this._getFilteredEquipment(
+      _sortEquipment(this.actor, this._embeds.itemTypes.equipment) || [],
+    );
     context.powers = docSort(this.actor.powers);
     context.species = docSort(this.actor.species);
     context.fluencies = docSort(this.actor.fluencies);
-    context.consequences = docSort(this.actor.consequences, { alphabetical: true });
-    context.attunements = docSort(this.actor.attunements, { alphabetical: true });
+    context.consequences = docSort(this.actor.consequences, {
+      alphabetical: true,
+    });
+    context.attunements = docSort(this.actor.attunements, {
+      alphabetical: true,
+    });
     context.ranks = docSort(this.actor.ranks);
     context.sidebarOpen = this._sidebarOpen;
     context.tabs = {
@@ -963,8 +1031,12 @@ export default class TeriockBaseActorSheet extends HackStatMixin(CommonSheetMixi
       },
     };
     context.searchStrings = foundry.utils.deepClone(this._searchStrings);
-    context.enrichedNotes = await this._enrich(this.document.system.sheet.notes);
-    context.enrichedSpecialRules = await this._enrich(this.document.system.primaryAttacker?.system?.specialRules);
+    context.enrichedNotes = await this._enrich(
+      this.document.system.sheet.notes,
+    );
+    context.enrichedSpecialRules = await this._enrich(
+      this.document.system.primaryAttacker?.system?.specialRules,
+    );
     context.settings = this.settings;
 
     context.conditionProviders = {};
@@ -987,12 +1059,18 @@ export default class TeriockBaseActorSheet extends HackStatMixin(CommonSheetMixi
               context.conditionProviders[condition].delete("1st Leg Hack");
             }
             if (e.name === "Heavily Encumbered") {
-              context.conditionProviders[condition].delete("Lightly Encumbered");
+              context.conditionProviders[condition].delete(
+                "Lightly Encumbered",
+              );
             }
           }
         }
         for (const c of this.document.conditions) {
-          if (!c.id.includes(condition) && c.statuses.has(condition) && c.active) {
+          if (
+            !c.id.includes(condition) &&
+            c.statuses.has(condition) &&
+            c.active
+          ) {
             context.conditionProviders[condition].add(c.name);
           }
         }
@@ -1001,7 +1079,9 @@ export default class TeriockBaseActorSheet extends HackStatMixin(CommonSheetMixi
             context.conditionProviders[condition].add(c.name);
           }
         }
-        context.conditionProviders[condition] = Array.from(context.conditionProviders[condition]);
+        context.conditionProviders[condition] = Array.from(
+          context.conditionProviders[condition],
+        );
       }
     }
 

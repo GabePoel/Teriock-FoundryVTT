@@ -27,37 +27,40 @@ export function _filterAbilities(actor, abilities, filters = {}) {
   if (!abilities || !Array.isArray(abilities) || abilities.length === 0) {
     return [];
   }
-  abilities = abilities.filter((a) => !a.isReference
-    && binaryFilter(filters.basic, a.system.basic)
-    && binaryFilter(
-      filters.standard,
-      a.system.standard,
-    )
-    && binaryFilter(filters.skill, a.system.skill)
-    && binaryFilter(filters.spell, a.system.spell)
-    && binaryFilter(filters.ritual, a.system.ritual)
-    && binaryFilter(
-      filters.rotator,
-      a.system.rotator,
-    )
-    && binaryFilter(filters.sustained, a.system.sustained)
-    && binaryFilter(filters.heightened, a.system.heightened)
-    && binaryFilter(filters.expansion, a.system.expansion)
-    && binaryFilter(filters.verbal, a.system.costs.verbal)
-    && binaryFilter(filters.somatic, a.system.costs.somatic)
-    && binaryFilter(filters.material, a.system.costs.material)
-    && binaryFilter(filters.invoked, a.system.invoked)
-    && binaryFilter(filters.hp, a.system.costs.hp.type !== "none")
-    && binaryFilter(filters.mp, a.system.costs.mp.type !== "none")
-    && binaryFilter(filters.broken, a.system.break)
-    && (!filters.maneuver || a.system.maneuver === filters.maneuver)
-    && (!filters.interaction || a.system.interaction === filters.interaction)
-    && (!filters.delivery || a.system.delivery.base === filters.delivery)
-    && (!filters.piercing || a.system.piercing === filters.piercing)
-    && (!filters.target || (a.system.targets || new Set()).has(filters.target))
-    && (!filters.powerSource || (a.system.powerSources || new Set()).has(filters.powerSource))
-    && (!filters.element || (a.system.elements || new Set()).has(filters.element))
-    && (!filters.effectTypes || (a.system.effectTypes || new Set()).some((e) => filters.effectTypes.includes(e))));
+  abilities = abilities.filter(
+    (a) =>
+      !a.isReference &&
+      binaryFilter(filters.basic, a.system.basic) &&
+      binaryFilter(filters.standard, a.system.standard) &&
+      binaryFilter(filters.skill, a.system.skill) &&
+      binaryFilter(filters.spell, a.system.spell) &&
+      binaryFilter(filters.ritual, a.system.ritual) &&
+      binaryFilter(filters.rotator, a.system.rotator) &&
+      binaryFilter(filters.sustained, a.system.sustained) &&
+      binaryFilter(filters.heightened, a.system.heightened) &&
+      binaryFilter(filters.expansion, a.system.expansion) &&
+      binaryFilter(filters.verbal, a.system.costs.verbal) &&
+      binaryFilter(filters.somatic, a.system.costs.somatic) &&
+      binaryFilter(filters.material, a.system.costs.material) &&
+      binaryFilter(filters.invoked, a.system.invoked) &&
+      binaryFilter(filters.hp, a.system.costs.hp.type !== "none") &&
+      binaryFilter(filters.mp, a.system.costs.mp.type !== "none") &&
+      binaryFilter(filters.broken, a.system.break) &&
+      (!filters.maneuver || a.system.maneuver === filters.maneuver) &&
+      (!filters.interaction || a.system.interaction === filters.interaction) &&
+      (!filters.delivery || a.system.delivery.base === filters.delivery) &&
+      (!filters.piercing || a.system.piercing === filters.piercing) &&
+      (!filters.target ||
+        (a.system.targets || new Set()).has(filters.target)) &&
+      (!filters.powerSource ||
+        (a.system.powerSources || new Set()).has(filters.powerSource)) &&
+      (!filters.element ||
+        (a.system.elements || new Set()).has(filters.element)) &&
+      (!filters.effectTypes ||
+        (a.system.effectTypes || new Set()).some((e) =>
+          filters.effectTypes.includes(e),
+        )),
+  );
   return abilities;
 }
 
@@ -73,15 +76,24 @@ export function _filterEquipment(actor, equipment, filters = {}) {
   if (!equipment || !Array.isArray(equipment) || equipment.length === 0) {
     return [];
   }
-  equipment = equipment.filter((e) => (!filters.properties || e.effectKeys.property.has(filters.properties))
-    && (!filters.materialProperties || e.effectKeys.property.has(filters.materialProperties))
-    && (!filters.magicalProperties || e.effectKeys.property.has(filters.magicalProperties))
-    && binaryFilter(filters.equipped, e.system.equipped)
-    && binaryFilter(filters.shattered, e.system.shattered)
-    && binaryFilter(filters.identified, e.system.identified)
-    && binaryFilter(filters.consumable, e.system.consumable)
-    && (!filters.powerLevel || e.system.powerLevel === filters.powerLevel)
-    && (!filters.equipmentClasses || (e.system.equipmentClasses || new Set()).has(filters.equipmentClasses))
-    && (!filters.weaponFightingStyles || e.system.fightingStyle === filters.weaponFightingStyles));
+  equipment = equipment.filter(
+    (e) =>
+      (!filters.properties || e.effectKeys.property.has(filters.properties)) &&
+      (!filters.materialProperties ||
+        e.effectKeys.property.has(filters.materialProperties)) &&
+      (!filters.magicalProperties ||
+        e.effectKeys.property.has(filters.magicalProperties)) &&
+      binaryFilter(filters.equipped, e.system.equipped) &&
+      binaryFilter(filters.shattered, e.system.shattered) &&
+      binaryFilter(filters.identified, e.system.identified) &&
+      binaryFilter(filters.consumable, e.system.consumable) &&
+      (!filters.powerLevel || e.system.powerLevel === filters.powerLevel) &&
+      (!filters.equipmentClasses ||
+        (e.system.equipmentClasses || new Set()).has(
+          filters.equipmentClasses,
+        )) &&
+      (!filters.weaponFightingStyles ||
+        e.system.fightingStyle === filters.weaponFightingStyles),
+  );
   return equipment;
 }

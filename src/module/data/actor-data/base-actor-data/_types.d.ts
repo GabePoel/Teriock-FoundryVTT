@@ -1,5 +1,12 @@
-import type { TeriockActor, TeriockTokenDocument } from "../../../documents/_module.mjs";
-import type { ActorAttributeData, BarData, HackDataCollection } from "./types/stats";
+import type {
+  TeriockActor,
+  TeriockTokenDocument,
+} from "../../../documents/_module.mjs";
+import type {
+  ActorAttributeData,
+  BarData,
+  HackDataCollection,
+} from "./types/stats";
 import type { TeriockEquipment } from "../../../documents/_documents.mjs";
 import type { ProtectionData } from "./types/protections";
 import type { SheetData } from "./types/sheet";
@@ -54,7 +61,7 @@ export interface TeriockBaseActorData {
       red: string;
       /** <schema> White */
       white: string;
-    }
+    };
   };
   /** <base> Defense */
   defense: {
@@ -73,13 +80,6 @@ export interface TeriockBaseActorData {
     bv: number;
     /** <derived> Combat class (ac + bv) */
     cc: number;
-  };
-  /** <schema> Offense */
-  offense: {
-    /** <schema> Style bonus */
-    sb: boolean;
-    /** <schema> Piercing type */
-    piercing: "av0" | "ub" | "none";
   };
   /** <base> <derived> The calculated encumbrance level (0-3) based on carried weight vs capacity */
   encumbranceLevel: number;
@@ -161,6 +161,13 @@ export interface TeriockBaseActorData {
   };
   /** MP Dice */
   mpDice: Record<Teriock.ID<StatDieModel>, StatDieModel>;
+  /** <schema> Offense */
+  offense: {
+    /** <schema> Style bonus */
+    sb: boolean;
+    /** <schema> Piercing type */
+    piercing: "av0" | "ub" | "none";
+  };
   /** <base> Presence */
   presence: {
     /** <base> Maximum presence tier */
@@ -291,17 +298,16 @@ export interface TeriockBaseActorData {
   /** <schema> Wielding */
   wielding: {
     /** <schema> Primary attacker ID */
-    attacker: Teriock.ID<TeriockEquipment> | null
+    attacker: Teriock.ID<TeriockEquipment> | null;
     /** <schema> Primary blocker ID */
-    blocker: Teriock.ID<TeriockEquipment> | null
+    blocker: Teriock.ID<TeriockEquipment> | null;
   };
   /** <schema> Wither */
   wither: BarData;
 }
 
 declare module "./base-actor-data.mjs" {
-  export default // @ts-ignore
-  interface TeriockBaseActorModel extends TeriockBaseActorData {
+  export default interface TeriockBaseActorModel extends TeriockBaseActorData {
     get parent(): TeriockActor;
   }
 }

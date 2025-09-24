@@ -4,12 +4,20 @@
       (concat
         (ifThen
           (or (eq system.expansion "detonate") (eq system.expansion "ripple"))
-          (concat (lookup TERIOCK.options.ability.featSaveAttribute system.expansionSaveAttribute) " ")
+          (concat
+            (lookup
+              TERIOCK.options.ability.featSaveAttribute
+              system.expansionSaveAttribute
+            )
+            " "
+          )
           ""
         )
         (lookup TERIOCK.options.ability.expansion system.expansion)
       )
-      classes=(ifThen editable (concat "expansion-box expansion-box-" system.expansion) "")
+      classes=(ifThen
+        editable (concat "expansion-box expansion-box-" system.expansion) ""
+      )
       tooltip="Expansion Delivery"
       icon=(lookup TERIOCK.display.icons "expansion")
     }}

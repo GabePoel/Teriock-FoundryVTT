@@ -14,23 +14,20 @@ export const encumbranceData = {
     id: "lightlyEncumbered",
     img: getIcon("conditions", "Encumbered"),
     name: "Lightly Encumbered",
-    statuses: [ "encumbered" ],
+    statuses: ["encumbered"],
   },
   level2: {
     _id: "encumbranceL2000",
     id: "heavilyEncumbered",
     img: getIcon("conditions", "Encumbered"),
     name: "Heavily Encumbered",
-    statuses: [
-      "encumbered",
-      "slowed",
-    ],
+    statuses: ["encumbered", "slowed"],
   },
   level3: {
     _id: "encumbranceL3000",
     id: "cannotCarryMore",
     img: getIcon("conditions", "Encumbered"),
     name: "Overburdened",
-    statuses: [ "immobilized" ],
+    statuses: ["immobilized"],
   },
 };

@@ -12,13 +12,15 @@ const { ActiveEffectConfig } = foundry.applications.sheets;
  * @extends ActiveEffectConfig
  * @property {TeriockEffect} document
  */
-export default class TeriockBaseEffectSheet extends CommonSheetMixin(ActiveEffectConfig) {
+export default class TeriockBaseEffectSheet extends CommonSheetMixin(
+  ActiveEffectConfig,
+) {
   /**
    * @inheritDoc
    * @type {Partial<ApplicationConfiguration>}
    */
   static DEFAULT_OPTIONS = {
-    classes: [ "effect" ],
+    classes: ["effect"],
     window: {
       icon: `fa-solid fa-${documentOptions.effect.icon}`,
     },
@@ -79,7 +81,10 @@ export default class TeriockBaseEffectSheet extends CommonSheetMixin(ActiveEffec
     let abilityName = "New Ability";
     if (abilityKey && abilityKey !== "other") {
       abilityName = TERIOCK.index.abilities[abilityKey];
-      const ability = await tm.fetch.importAbility(this.document.parent, abilityName);
+      const ability = await tm.fetch.importAbility(
+        this.document.parent,
+        abilityName,
+      );
       await this.document.addSub(ability);
     } else {
       await createEffects.createAbility(this.document, abilityName);

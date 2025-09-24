@@ -49,8 +49,8 @@ const linkMap = new Map();
 const allItems = [];
 const categories = assignments;
 
-for (const [ cat, section ] of Object.entries(categories)) {
-  for (const [ name, val ] of Object.entries(section)) {
+for (const [cat, section] of Object.entries(categories)) {
+  for (const [name, val] of Object.entries(section)) {
     allItems.push({
       category: cat,
       name,
@@ -69,7 +69,8 @@ for (const [ cat, section ] of Object.entries(categories)) {
 // Resolve the first ancestor that has a direct image (cross-category allowed)
 const resolveRootKey = (startCat, startName) => {
   const seen = new Set();
-  let curCat = startCat, curName = startName;
+  let curCat = startCat,
+    curName = startName;
   while (curCat && curName && !directPath.has(keyOf(curCat, curName))) {
     const k = keyOf(curCat, curName);
     if (seen.has(k)) {
@@ -94,7 +95,7 @@ for (const dirKey of dirKeys) {
   /** @type {Record<string,string>} */
   const dirObj = assignments[dirKey];
   iconManifest[dirKey] = {};
-  for (const [ key, value ] of Object.entries(dirObj)) {
+  for (const [key, value] of Object.entries(dirObj)) {
     let finalPath;
 
     if (isLink(value)) {
@@ -126,4 +127,7 @@ for (const dirKey of dirKeys) {
   }
 }
 
-await saveObject(iconManifest, path.resolve(__dirname, "../../src/icons/icon-manifest.json"));
+await saveObject(
+  iconManifest,
+  path.resolve(__dirname, "../../src/icons/icon-manifest.json"),
+);

@@ -31,19 +31,6 @@ async function use(equipmentData, options) {
     }
     rollFormula = rollFormula.trim();
 
-    let rawDamageTypes = equipmentData.damage.types;
-    if (equipmentData.powerLevel === "magic") {
-      rawDamageTypes.add("magic");
-    }
-    // Ensure all damage types are lower case
-    const damageTypes = Array.from([ ...new Set([ ...rawDamageTypes ]) ].map((dt) => dt && typeof dt === "string"
-      ? dt.toLowerCase()
-      : dt));
-    // Sort the damage types
-    if (damageTypes.length > 0 && rollFormula.length > 0 && rollFormula !== "0") {
-      damageTypes.sort((a, b) => a.localeCompare(b));
-      rollFormula += "[" + damageTypes.join(" ") + "]";
-    }
     if (options?.twoHanded && equipmentData.damage.twoHanded.value) {
       rollFormula = equipmentData.damage.twoHanded.value || rollFormula;
     }
@@ -81,13 +68,19 @@ async function use(equipmentData, options) {
       const updates = [];
       for (const ability of equipmentData.parent.abilities) {
         const update = {};
-        if (ability.system.maxQuantity.value) {
+        if (
+          ability.system.maxQuantity.value &&
+          ability.system.maxQuantity.value !== Infinity
+        ) {
           update["_id"] = ability.id;
           update["system.quantity"] = ability.system.maxQuantity.value;
           updates.push(update);
         }
       }
-      await equipmentData.parent.updateEmbeddedDocuments("ActiveEffect", updates);
+      await equipmentData.parent.updateEmbeddedDocuments(
+        "ActiveEffect",
+        updates,
+      );
     }
   }
 }
