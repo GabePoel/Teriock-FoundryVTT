@@ -232,7 +232,6 @@ export default class TeriockEquipmentModel extends ConsumableDataMixin(
     prepareModifiableBase(this.av);
     prepareModifiableBase(this.bv);
     prepareModifiableBase(this.minStr);
-    prepareModifiableBase(this.tier);
     prepareModifiableBase(this.damage.base);
     prepareModifiableBase(this.damage.twoHanded);
     prepareModifiableBase(this.range.long);
@@ -258,6 +257,7 @@ export default class TeriockEquipmentModel extends ConsumableDataMixin(
   /** @inheritDoc */
   prepareDerivedData() {
     super.prepareDerivedData();
+    prepareModifiableBase(this.tier);
     deriving._prepareDerivedData(this);
   }
 

@@ -14,26 +14,8 @@ const { fields } = foundry.data;
  */
 export function _defineSchema() {
   return {
-    description: new TextField({
-      initial: "",
-      label: "Description",
-    }),
-    equipped: new fields.BooleanField({
-      initial: true,
-      label: "Equipped",
-    }),
-    glued: new fields.BooleanField({
-      initial: false,
-      label: "Glued",
-    }),
-    shattered: new fields.BooleanField({
-      initial: false,
-      label: "Shattered",
-    }),
-    dampened: new fields.BooleanField({
-      initial: false,
-      label: "Dampened",
-    }),
+    av: modifiableNumber(),
+    bv: modifiableNumber(),
     consumable: new fields.BooleanField({
       initial: false,
       label: "Consumable",
@@ -47,7 +29,62 @@ export function _defineSchema() {
       }),
       types: new fields.SetField(new fields.StringField()),
     }),
-    weight: modifiableNumber(),
+    dampened: new fields.BooleanField({
+      initial: false,
+      label: "Dampened",
+    }),
+    description: new TextField({
+      initial: "",
+      label: "Description",
+    }),
+    equipmentClasses: new fields.SetField(
+      new fields.StringField({
+        choices: TERIOCK.index.equipmentClasses,
+      }),
+    ),
+    equipmentType: new fields.StringField({
+      initial: "Equipment Type",
+      label: "Equipment Type",
+    }),
+    equipped: new fields.BooleanField({
+      initial: true,
+      label: "Equipped",
+    }),
+    fightingStyle: new fields.StringField({
+      initial: null,
+      label: "Style Bonus",
+      nullable: true,
+      choices: TERIOCK.index.weaponFightingStyles,
+    }),
+    flaws: new TextField({
+      initial: "",
+      label: "Flaws",
+    }),
+    glued: new fields.BooleanField({
+      initial: false,
+      label: "Glued",
+    }),
+    identified: new fields.BooleanField({
+      initial: true,
+      label: "Identified",
+    }),
+    minStr: modifiableNumber({
+      min: -3,
+      initial: -3,
+    }),
+    notes: new TextField({
+      initial: "",
+      label: "Notes",
+    }),
+    powerLevel: new fields.StringField({
+      choices: TERIOCK.options.equipment.powerLevelShort,
+      initial: "mundane",
+      label: "Power Level",
+    }),
+    price: new fields.NumberField({
+      initial: 0,
+      label: "Price",
+    }),
     range: new fields.SchemaField({
       short: modifiableFormula(),
       long: modifiableFormula(),
@@ -56,52 +93,21 @@ export function _defineSchema() {
         label: "Ranged",
       }),
     }),
-    equipmentClasses: new fields.SetField(
-      new fields.StringField({
-        choices: TERIOCK.index.equipmentClasses,
-      }),
-    ),
-    minStr: modifiableNumber({
-      min: -3,
-      initial: -3,
-    }),
-    fightingStyle: new fields.StringField({
-      initial: null,
-      label: "Style Bonus",
-      nullable: true,
-      choices: TERIOCK.index.weaponFightingStyles,
-    }),
-    av: modifiableNumber(),
-    bv: modifiableNumber(),
-    equipmentType: new fields.StringField({
-      initial: "Equipment Type",
-      label: "Equipment Type",
-    }),
-    price: new fields.NumberField({
-      initial: 0,
-      label: "Price",
-    }),
-    powerLevel: new fields.StringField({
-      choices: TERIOCK.options.equipment.powerLevelShort,
-      initial: "mundane",
-      label: "Power Level",
-    }),
-    flaws: new TextField({
-      initial: "",
-      label: "Flaws",
-    }),
-    notes: new TextField({
-      initial: "",
-      label: "Notes",
-    }),
-    tier: modifiableFormula(),
-    identified: new fields.BooleanField({
-      initial: true,
-      label: "Identified",
-    }),
     reference: new fields.DocumentUUIDField({
       initial: null,
       nullable: true,
     }),
+    shattered: new fields.BooleanField({
+      initial: false,
+      label: "Shattered",
+    }),
+    spellTurning: new fields.BooleanField({
+      initial: false,
+      label: "Spell Turning",
+      nullable: false,
+    }),
+    tier: modifiableFormula(),
+    virtualProperties: new fields.SetField(new fields.StringField()),
+    weight: modifiableNumber(),
   };
 }

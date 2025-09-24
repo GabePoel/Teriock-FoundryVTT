@@ -69,8 +69,12 @@ declare module "./equipment-data.mjs" {
     shattered: boolean;
     /** <derived> Special Rules (Weapon Fighting Style) */
     specialRules: string;
+    /** <schema> Spell Turning */
+    spellTurning: boolean;
     /** <schema> Presence Tier */
     tier: Teriock.Fields.ModifiableDeterministic;
+    /** <schema> <special> Virtual Properties */
+    virtualProperties: Set<string>;
     /** <base> Warded */
     warded: boolean;
     /** <schema> Weight (lb) */

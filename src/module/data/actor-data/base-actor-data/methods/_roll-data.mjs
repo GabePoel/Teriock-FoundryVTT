@@ -92,8 +92,8 @@ function rankData(actorData, data) {
   }
   // Count ranks from actor's rank items
   for (const rank of actor.itemTypes.rank) {
-    const classKey = rank.system.className?.slice(0, 3).toLowerCase();
-    const archetypeKey = rank.system.archetype?.slice(0, 3).toLowerCase();
+    const classKey = rank.system.className.slice(0, 3).toLowerCase();
+    const archetypeKey = rank.system.archetype.slice(0, 3).toLowerCase();
     if (classKey && rankKeys.includes(classKey)) {
       data[`rank.${classKey}`]++;
     }
@@ -101,7 +101,7 @@ function rankData(actorData, data) {
       data[`rank.${archetypeKey}`]++;
     }
   }
-  data.rank = actorData.rank;
+  data.rank = actorData.scaling.rank;
 }
 
 /**

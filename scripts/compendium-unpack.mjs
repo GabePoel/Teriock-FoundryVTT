@@ -140,11 +140,7 @@ function cleanEntry(doc) {
       delete doc.system.identified;
       delete doc.system.reference;
       // Deleted until we have non-mundane equipment
-      delete doc.system.flaws;
-      delete doc.system.notes;
-      delete doc.system.tier;
       delete doc.system.description;
-      delete doc.system.onUse;
       delete doc.system.shortRange;
       delete doc.system.damageTypes;
       delete doc.system.ranged;

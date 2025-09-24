@@ -1,5 +1,5 @@
 import { attunementOptions } from "../../../constants/options/attunement-options.mjs";
-import { mergeFreeze } from "../../../helpers/utils.mjs";
+import { evaluateSync, mergeFreeze } from "../../../helpers/utils.mjs";
 import TeriockBaseEffectModel from "../base-effect-data/base-effect-data.mjs";
 
 const { fields } = foundry.data;
@@ -93,7 +93,10 @@ export default class TeriockAttunementModel extends TeriockBaseEffectModel {
   /** @inheritDoc */
   prepareDerivedData() {
     if (this.inheritTier && this.targetDocument) {
-      this.tier = this.targetDocument.system.tier.value;
+      this.tier = evaluateSync(
+        this.targetDocument.system.tier.saved,
+        this.actor?.getRollData() || {},
+      );
     }
     this.parent.changes = [
       {

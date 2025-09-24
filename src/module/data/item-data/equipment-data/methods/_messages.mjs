@@ -70,7 +70,10 @@ export function _messageParts(equipmentData) {
     {
       icon: "fa-flag",
       label: "Equipment Classes",
-      wrappers: [...src.equipmentClasses.map((ec) => ref.equipmentClasses[ec])],
+      wrappers: [
+        ...src.equipmentClasses.map((ec) => ref.equipmentClasses[ec]),
+        src.spellTurning ? "Spell Turning" : "",
+      ],
     },
   ];
   const blocks = [

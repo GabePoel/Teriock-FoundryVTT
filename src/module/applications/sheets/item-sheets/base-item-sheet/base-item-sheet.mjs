@@ -54,13 +54,13 @@ export default class TeriockBaseItemSheet extends CommonSheetMixin(
    */
   static async _toggleOnUseDoc(_event, target) {
     const id = target.dataset.id;
-    const onUseSet = this.document.system.onUse;
+    const onUseSet = new Set(this.document.system.onUse);
     if (onUseSet.has(id)) {
       onUseSet.delete(id);
     } else {
       onUseSet.add(id);
     }
-    await this.document.update({ "system.onUse": onUseSet });
+    await this.document.update({ "system.onUse": Array.from(onUseSet) });
   }
 
   /**
