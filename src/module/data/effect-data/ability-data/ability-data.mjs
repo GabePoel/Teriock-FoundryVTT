@@ -88,7 +88,10 @@ export default class TeriockAbilityModel extends HierarchyDataMixin(
       const amount = this.improvements.featSaveImprovement.amount;
       const amountVal =
         TERIOCK.options.ability.featSaveImprovementAmount[amount];
-      return `This ability gives you @L[Core:${amountVal} Bonus]{${amount}} in @L[Core:${att.toUpperCase()}] @L[Core:Feat Interaction]{feat saves}.`;
+      return (
+        `This ability gives you @L[Core:${amountVal} Bonus]{${amount}} in @L[Core:${att.toUpperCase()}] ` +
+        "@L[Core:Feat Interaction]{feat saves}."
+      );
     }
     return "";
   }

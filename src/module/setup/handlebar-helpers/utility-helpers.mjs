@@ -239,9 +239,13 @@ export default function registerUiHelpers() {
           <div class="tgrid g4">
             <div class="tgrid-item">
               <label for="${tab}-ascending">Ascending</label>
-              <input type="checkbox" data-action="sheetToggle" data-bool="${ascendingValue}" data-path="${ascendingPath}" id="${tab}-ascending" ${checked(
-                ascendingValue,
-              )}>
+              <input
+                type="checkbox" 
+                data-action="sheetToggle" 
+                data-bool="${ascendingValue}" 
+                data-path="${ascendingPath}" 
+                id="${tab}-ascending" ${checked(ascendingValue)}
+              >
             </div>
             <div class="tgrid-item gi3">
               <select data-action="sheetSelect" data-path="settings.${tab}SortOption" id="${tab}-sort">
@@ -291,9 +295,14 @@ export default function registerUiHelpers() {
     const parentIdAttr = parentId ? `data-parent-id="${parentId}"` : "";
     const typeAttr = type ? `data-type="${type}"` : "";
     const subtitleDiv = consumable
-      ? `<div class="tcard-subtitle tcard-clickable" data-action="useOneDoc" data-tooltip-direction="DOWN" data-tooltip-class="teriock" data-tooltip="Consume One">${amount}${
-          max ? ` / ${max}` : " remaining"
-        }</div>`
+      ? `
+        <div
+          class="tcard-subtitle tcard-clickable" 
+          data-action="useOneDoc" 
+          data-tooltip-direction="DOWN" 
+          data-tooltip-class="teriock" 
+          data-tooltip="Consume One">${amount}${max ? ` / ${max}` : " remaining"}
+        </div>`
       : `<div class="tcard-subtitle">${subtitle}</div>`;
 
     return new Handlebars.SafeString(`
@@ -304,7 +313,10 @@ export default function registerUiHelpers() {
         data-action="${openable ? "openDoc" : ""}"
         data-img="${img}"
       >
-        <div class="tcard-marker" style="${marker ? `background-color: ${marker}; width: 4px; min-width: 4px;` : ""}"></div>
+        <div 
+          class="tcard-marker" 
+          style="${marker ? `background-color: ${marker}; width: 4px; min-width: 4px;` : ""}"
+        ></div>
         <div 
           class="tcard-image ${usable ? "usable" : ""}"
           data-action="${action}" ${tooltipAttr}
@@ -466,9 +478,10 @@ export default function registerUiHelpers() {
         })
         .join("\n");
 
-      return new Handlebars.SafeString(
-        `<div class="${containerClass}">${renderedCards}<div class="no-results ${sizeClass}"><p>${noResults}</p></div></div>`,
-      );
+      return new Handlebars.SafeString(`
+        <div class="${containerClass}">
+          ${renderedCards}<div class="no-results ${sizeClass}"><p>${noResults}</p></div>
+        </div>`);
     },
   );
 }

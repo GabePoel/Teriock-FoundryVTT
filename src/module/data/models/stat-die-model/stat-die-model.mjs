@@ -106,7 +106,9 @@ export default class StatDieModel extends DataModel {
         data-parent-id="${this.parent.parent.id}"
         data-stat="${this.stat}"
         data-action="rollStatDie"
-        data-tooltip-html="<div style='display: flex; flex-direction: column; align-items: center;'><div>d${this.faces} ${this.name}</div><div>(${this.parent.parent.name})</div></div>"
+        data-tooltip-html="<div style='display: flex; flex-direction: column; align-items: center;'>
+          <div>d${this.faces} ${this.name}</div><div>(${this.parent.parent.name})</div>
+        </div>"
         data-tooltip-direction="DOWN"
       >
         <i class="${iconClass}"></i>

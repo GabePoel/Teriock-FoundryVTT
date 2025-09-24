@@ -18,6 +18,7 @@ export default defineConfig([
         TERIOCK: "readonly",
         foundry: "readonly",
         game: "readonly",
+        scope: "readonly",
         tm: "readonly",
       },
     },

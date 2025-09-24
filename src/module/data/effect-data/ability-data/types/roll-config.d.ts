@@ -49,7 +49,7 @@ export type AbilityChatData = {
   /** Rolls to pass into the chat message. */
   rolls: TeriockRoll[];
   /** Chat Message Data */
-  system: Partial<TeriockBaseMessageModel>;
+  system: TeriockBaseMessageModel;
 };
 
 export interface AbilityRollConfig {

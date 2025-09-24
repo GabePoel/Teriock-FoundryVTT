@@ -106,7 +106,9 @@ function consequenceField() {
       }),
       {
         label: "Conditions",
-        hint: "Conditions applied as part of the ability's ongoing effect. These are not applied as separate conditions, but merged into an ongoing effect.",
+        hint:
+          "Conditions applied as part of the ability's ongoing effect. These are not applied as separate conditions, " +
+          "but merged into an ongoing effect.",
       },
     ),
     startStatuses: new fields.SetField(
@@ -115,7 +117,9 @@ function consequenceField() {
       }),
       {
         label: "Apply Conditions",
-        hint: "Conditions that may be immediately applied when the ability is used. They exist independently of the ability.",
+        hint:
+          "Conditions that may be immediately applied when the ability is used. They exist independently of the " +
+          "ability.",
       },
     ),
     endStatuses: new fields.SetField(
@@ -124,7 +128,9 @@ function consequenceField() {
       }),
       {
         label: "Remove Conditions",
-        hint: "Conditions that may be immediately removed when the ability is used This only works on conditions that exist independently of the ability.",
+        hint:
+          "Conditions that may be immediately removed when the ability is used This only works on conditions that " +
+          "exist independently of the ability.",
       },
     ),
     rolls: consequenceRollsField(),
@@ -155,7 +161,9 @@ function consequenceField() {
       },
     ),
     duration: new fields.NumberField({
-      hint: "Increase in the duration (in seconds) of an effect made as part of the ability. If this is nonzero, it overrides the default duration.",
+      hint:
+        "Increase in the duration (in seconds) of an effect made as part of the ability. If this is nonzero, it " +
+        "overrides the default duration.",
       initial: 0,
       label: "Duration",
     }),

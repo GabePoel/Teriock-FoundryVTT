@@ -53,7 +53,7 @@ const COST_TEMPLATES = Object.freeze({
 /**
  * Creates the default consequence structure for ability effects.
  * Provides empty rolls, statuses, start/end statuses, hacks, checks, and duration.
- * @returns {AbilityConsequence} The default consequence structure.
+ * @returns {AbilityImpact} The default consequence structure.
  * @private
  */
 function defaultConsequence() {
