@@ -54,4 +54,12 @@ export const transformationsData = {
     statuses: ["minorTransformed", "transformed"],
     type: "base",
   },
+  illusionTransformed: {
+    _id: "illusionTransfor",
+    hud: false,
+    img: getIcon("abilities", "Illusionary Arts"),
+    id: "illusionTransformed",
+    name: "Illusion Transformed",
+    type: "base",
+  },
 };

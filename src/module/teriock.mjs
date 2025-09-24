@@ -86,9 +86,10 @@ foundry.helpers.Hooks.once("init", function () {
     }
     return a.id.localeCompare(b.id);
   });
-  CONFIG.specialStatusEffects["ETHEREAL"] = "ethereal";
-  CONFIG.specialStatusEffects["TRANSFORMED"] = "transformed";
   CONFIG.specialStatusEffects["DEFEATED"] = "down";
+  CONFIG.specialStatusEffects["ETHEREAL"] = "ethereal";
+  CONFIG.specialStatusEffects["ILLUSION_TRANSFORMED"] = "illusionTransformed";
+  CONFIG.specialStatusEffects["TRANSFORMED"] = "transformed";
 
   // noinspection JSValidateTypes
   CONFIG.Canvas.visionModes = {

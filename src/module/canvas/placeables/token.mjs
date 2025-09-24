@@ -4,7 +4,10 @@ export default class TeriockToken extends Token {
   /** @inheritDoc */
   async _draw(options) {
     if (
-      this.document.hasStatusEffect(CONFIG.specialStatusEffects.TRANSFORMED) &&
+      (this.document.hasStatusEffect(CONFIG.specialStatusEffects.TRANSFORMED) ||
+        this.document.hasStatusEffect(
+          CONFIG.specialStatusEffects.ILLUSION_TRANSFORMED,
+        )) &&
       this.document?.actor.system.transformation.img
     ) {
       this.document.texture.raw = this.document.texture.src;
@@ -22,6 +25,7 @@ export default class TeriockToken extends Token {
     if (
       [
         CONFIG.specialStatusEffects.TRANSFORMED,
+        CONFIG.specialStatusEffects.ILLUSION_TRANSFORMED,
         CONFIG.specialStatusEffects.DEFEATED,
       ].includes(statusId)
     ) {
