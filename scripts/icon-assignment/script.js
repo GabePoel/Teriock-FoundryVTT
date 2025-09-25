@@ -52,16 +52,13 @@ const app = {
 
     for (const category of categoryFiles) {
       try {
-        // Try to fetch the file directly from the categories path
         const response = await fetch(`/src/index/categories/${category}.json`);
-
         if (response.ok) {
           const data = await response.json();
           const items = Object.keys(data).map((name) => ({
             name,
             tags: data[name] || [],
           }));
-
           this.CATEGORIES.push(category);
           this.items[category] = items;
 
@@ -79,15 +76,8 @@ const app = {
 
     console.log("Total categories loaded:", this.CATEGORIES.length);
 
-    // Set first available category as current
-    if (this.CATEGORIES.length > 0) {
-      this.currentCategory = this.CATEGORIES[0];
-      console.log(`Set current category to: ${this.currentCategory}`);
-    } else {
-      console.warn("No categories loaded!");
-    }
+    this.currentCategory = null;
 
-    // Update the category dropdown
     this.updateCategoryDropdown();
   },
 
@@ -95,25 +85,23 @@ const app = {
     const select = document.getElementById("category-select");
     select.innerHTML = "";
 
-    if (this.CATEGORIES.length === 0) {
-      const option = document.createElement("option");
-      option.value = "";
-      option.textContent = "No categories found";
-      option.disabled = true;
-      select.appendChild(option);
-      return;
-    }
+    const placeholder = document.createElement("option");
+    placeholder.value = "";
+    placeholder.textContent =
+      this.CATEGORIES.length === 0
+        ? "No categories found"
+        : "Select a category…";
+    placeholder.disabled = this.CATEGORIES.length === 0 ? true : false;
+    placeholder.selected = true;
+    select.appendChild(placeholder);
 
+    // Populate actual categories
     this.CATEGORIES.forEach((cat) => {
       const option = document.createElement("option");
       option.value = cat;
       option.textContent = cat.charAt(0).toUpperCase() + cat.slice(1);
       select.appendChild(option);
     });
-
-    if (this.currentCategory) {
-      select.value = this.currentCategory;
-    }
   },
 
   initDataStructures() {

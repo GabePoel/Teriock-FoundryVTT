@@ -1,14 +1,12 @@
 import { TeriockRoll } from "../../../../dice/_module.mjs";
-import {
-  cleanHTMLDoc,
-  cleanObject,
-} from "../../../shared/parsing/clean-html-doc.mjs";
+import { getIcon } from "../../../../helpers/path.mjs";
+import { cleanHTMLDoc, cleanObject } from "../../../shared/parsing/clean-html-doc.mjs";
 import { getBarText, getText } from "../../../shared/parsing/get-text.mjs";
 import { processSubAbilities } from "../../../shared/parsing/process-subs.mjs";
 import { buildTagTree } from "../../../shared/parsing/tag-tree.mjs";
 
 /**
- * @param {TeriockSpeciesData} speciesData
+ * @param {TeriockSpeciesModel} speciesData
  * @param {string} rawHTML
  * @returns {Promise<object>}
  * @private
@@ -150,5 +148,12 @@ export async function _parse(speciesData, rawHTML) {
     "hpIncrease",
     "innateRanks",
   ]);
-  return { system: parameters };
+  let icon = getIcon("creatures", speciesData.parent.name);
+  const outData = {
+    system: parameters,
+  };
+  if (icon) {
+    outData.img = icon;
+  }
+  return outData;
 }
