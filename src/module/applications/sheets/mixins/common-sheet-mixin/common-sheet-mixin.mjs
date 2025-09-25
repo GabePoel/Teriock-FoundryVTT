@@ -820,13 +820,13 @@ export default (Base) => {
             if (embedded?.id === "lighted") {
               uuidPromises.push(
                 Promise.all(
-                  this.document.system.trackers.lightedTo.map((uuid) =>
+                  this.document.system.trackers.lighted.map((uuid) =>
                     foundry.utils.fromUuid(uuid),
                   ),
                 ).then((tokens) => {
                   let lightedToText = "<ul>";
                   tokens.forEach((token, idx) => {
-                    const uuid = this.document.system.trackers.lightedTo[idx];
+                    const uuid = this.document.system.trackers.lighted[idx];
                     lightedToText += `<li>@UUID[${uuid}]{${token?.name}}</li>`;
                   });
                   lightedToText += "</ul>";
@@ -841,19 +841,40 @@ export default (Base) => {
             if (embedded?.id === "goaded") {
               uuidPromises.push(
                 Promise.all(
-                  this.document.system.goadedTo.map((uuid) =>
+                  this.document.system.trackers.goaded.map((uuid) =>
                     foundry.utils.fromUuid(uuid),
                   ),
                 ).then((tokens) => {
                   let goadedToText = "<ul>";
                   tokens.forEach((token, idx) => {
-                    const uuid = this.document.system.goadedTo[idx];
+                    const uuid = this.document.system.trackers.lighted[idx];
                     goadedToText += `<li>@UUID[${uuid}]{${token?.name}}</li>`;
                   });
                   goadedToText += "</ul>";
                   messageParts.blocks.push({
                     text: goadedToText,
                     title: "Goaded to",
+                  });
+                }),
+              );
+            }
+
+            if (embedded?.id === "frightened") {
+              uuidPromises.push(
+                Promise.all(
+                  this.document.system.trackers.frightened.map((uuid) =>
+                    foundry.utils.fromUuid(uuid),
+                  ),
+                ).then((tokens) => {
+                  let frightenedOfText = "<ul>";
+                  tokens.forEach((token, idx) => {
+                    const uuid = this.document.system.trackers.frightened[idx];
+                    frightenedOfText += `<li>@UUID[${uuid}]{${token?.name}}</li>`;
+                  });
+                  frightenedOfText += "</ul>";
+                  messageParts.blocks.push({
+                    text: frightenedOfText,
+                    title: "Frightened of",
                   });
                 }),
               );

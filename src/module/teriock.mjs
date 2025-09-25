@@ -32,6 +32,7 @@ globalThis.tm = {
   },
   dialogs: applications.dialogs,
   fetch: helpers.fetch,
+  html: helpers.html,
   path: helpers.path,
   string: helpers.string,
   utils: helpers.utils,

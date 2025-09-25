@@ -27,8 +27,9 @@ export function _baseData(actorData) {
   };
   actorData.abilityFlags = {};
   actorData.trackers = {
-    lightedTo: [],
-    goadedTo: [],
+    lighted: [],
+    goaded: [],
+    frightened: [],
   };
   actorData.encumbranceLevel = 0;
   actorData.hookedMacros =

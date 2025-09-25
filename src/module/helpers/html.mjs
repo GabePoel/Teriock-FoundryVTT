@@ -1,5 +1,6 @@
 import { buildMessage } from "./messages-builder/message-builder.mjs";
 import { getIcon } from "./path.mjs";
+import { toTitleCase } from "./string.mjs";
 
 const TextEditor = foundry.applications.ux.TextEditor.implementation;
 
@@ -352,4 +353,51 @@ export function safeParseHTML(htmlString) {
     htmlElement.innerHTML = htmlString;
   }
   return htmlElement;
+}
+
+/**
+ * Add trackers to the roll config.
+ * @param {AbilityRollConfig} rollConfig
+ * @param {string} tracker
+ * @param {Teriock.UUID<TeriockTokenDocument|TeriockActor>[]} uuids
+ * @returns {Promise<void>}
+ */
+export async function addTrackersToRollConfig(rollConfig, tracker, uuids) {
+  let titleString = toTitleCase(tracker) + " to";
+  if (tracker === "frightened") {
+    titleString = "Frightened of";
+  }
+  const buttons = rollConfig.chatData.system.buttons;
+  const button = buttons.find((b) => b.dataset.action === "apply-effect");
+  if (button) {
+    for (const useType of ["normal", "crit"]) {
+      if (button.dataset[useType]) {
+        const effectObject = JSON.parse(button.dataset[useType]);
+        effectObject.description = "<ul>";
+        for (const uuid of uuids) {
+          effectObject.changes.push({
+            key: "system.trackers." + tracker,
+            value: uuid,
+            mode: 2,
+            priority: 10,
+          });
+          const doc = await foundry.utils.fromUuid(uuid);
+          effectObject.description += `<li>${titleString} @UUID[${uuid}]{${doc.name}}</li>`;
+        }
+        effectObject.description += "</ul>";
+        button.dataset[useType] = JSON.stringify(effectObject);
+      }
+    }
+  }
+}
+
+/**
+ * Add tracker to roll config.
+ * @param {AbilityRollConfig} rollConfig
+ * @param {string} tracker
+ * @param {Teriock.UUID<TeriockTokenDocument|TeriockActor>} uuid
+ * @returns {Promise<void>}
+ */
+export async function addTrackerToRollConfig(rollConfig, tracker, uuid) {
+  await addTrackersToRollConfig(rollConfig, tracker, [uuid]);
 }

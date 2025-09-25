@@ -269,9 +269,11 @@ export interface TeriockBaseActorData {
   /** <base> Trackers */
   trackers: {
     /** <base> Lighted to */
-    lightedTo: Teriock.UUID<TeriockTokenDocument>[];
+    lighted: Teriock.UUID<TeriockTokenDocument>[];
     /** <derived> Goaded to */
-    goadedTo: Teriock.UUID<TeriockTokenDocument>[];
+    goaded: Teriock.UUID<TeriockTokenDocument>[];
+    /** <derived> Frightened of */
+    frightened: Teriock.UUID<TeriockTokenDocument>[];
   };
   /** <schema> Tradecrafts */
   tradecrafts: Record<Teriock.Parameters.Fluency.Tradecraft, TradecraftData>;
