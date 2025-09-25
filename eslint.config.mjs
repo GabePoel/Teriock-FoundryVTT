@@ -11,6 +11,7 @@ export default defineConfig([
     languageOptions: {
       globals: {
         ...globals.browser,
+        actor: "readonly",
         CONFIG: "readonly",
         Handlebars: "readonly",
         Hooks: "readonly",

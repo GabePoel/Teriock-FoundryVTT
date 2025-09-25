@@ -2,7 +2,6 @@ import { selectDocumentsDialog } from "./select-document-dialog.mjs";
 
 /**
  * Select some number of visible tokens.
- *
  * @param {object} options
  * @param {string} options.[title] - Title for dialog.
  * @param {string} options.[hint] - Text for dialog.
@@ -35,7 +34,6 @@ export async function selectTokensDialog(options = {}) {
 
 /**
  * Select some number of visible tokens for target to be lighted to.
- *
  * @returns {Promise<Teriock.UUID<TeriockTokenDocument>[]>}
  */
 export async function lightedToDialog() {
@@ -47,12 +45,22 @@ export async function lightedToDialog() {
 
 /**
  * Select some number of visible tokens for target to be goaded to.
- *
  * @returns {Promise<Teriock.UUID<TeriockTokenDocument>[]>}
  */
 export async function goadedToDialog() {
   return await selectTokensDialog({
     title: "Select Creatures",
     hint: "Select what creatures this effect makes its targets goaded to.",
+  });
+}
+
+/**
+ * Select some number of visible tokens for target to be frightened of.
+ * @returns {Promise<Teriock.UUID<TeriockTokenDocument>[]>}
+ */
+export async function frightenedOfDialog() {
+  return await selectTokensDialog({
+    title: "Select Creatures",
+    hint: "Select what creatures this effect makes its targets frightened of.",
   });
 }

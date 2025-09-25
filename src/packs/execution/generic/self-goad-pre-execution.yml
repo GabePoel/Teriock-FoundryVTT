@@ -1,20 +1,20 @@
-name: Generic Light - Pre-execution
+folder: T1HL9IwE6uoaEeOZ
+name: Self Goad - Pre-execution
 type: script
-_id: BJdPDE0aULbyEKrB
+_id: x6TaqBBvKeeqc1xj
 author: teriockBuilder00
 img: icons/svg/dice-target.svg
 scope: global
 command: |-
   const data = /** @type {Teriock.HookData.UseAbility} */ scope.data;
-  const uuids = await tm.dialogs.lightedToDialog();
-  await tm.html.addTrackersToRollConfig(data.rollConfig, "lighted", uuids);
-folder: T1HL9IwE6uoaEeOZ
+  const uuid = data.rollConfig.useData.actor.token.uuid;
+  await tm.html.addTrackerToRollConfig(data.rollConfig, "goaded", uuid);
 ownership:
   default: 0
 flags: {}
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.1.0
+  systemVersion: 0.9.1
   lastModifiedBy: teriockBuilder00
-_key: '!macros!BJdPDE0aULbyEKrB'
+_key: '!macros!x6TaqBBvKeeqc1xj'
