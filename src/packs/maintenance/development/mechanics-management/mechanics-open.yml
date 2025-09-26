@@ -1,0 +1,26 @@
+name: Mechanics Open
+type: script
+_id: 5feDJNvo7idpH9V0
+author: teriockBuilder00
+img: icons/svg/clockwork.svg
+scope: global
+command: |-
+  const essentialsPack = game.teriock.packs.essentials();
+
+  let actorMechanics = essentialsPack.index.find(
+    (m) => m.name === "Actor Mechanics",
+  );
+
+  actorMechanics = await foundry.utils.fromUuid(actorMechanics.uuid);
+
+  await actorMechanics.sheet.render(true);
+folder: KCHkqgyvUv6imeu7
+ownership:
+  default: 0
+flags: {}
+_stats:
+  coreVersion: '13'
+  systemId: teriock
+  systemVersion: 0.1.0
+  lastModifiedBy: teriockBuilder00
+_key: '!macros!5feDJNvo7idpH9V0'
