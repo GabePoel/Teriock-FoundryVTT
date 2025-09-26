@@ -1,5 +1,9 @@
 const { Token } = foundry.canvas.placeables;
 
+/**
+ * @param {TeriockTokenDocument} document
+ * @param {Scene} scene
+ */
 export default class TeriockToken extends Token {
   /** @inheritDoc */
   async _draw(options) {

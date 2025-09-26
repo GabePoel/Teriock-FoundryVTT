@@ -370,32 +370,6 @@ export function evaluateSync(formula, data = {}, options = {}) {
 }
 
 /**
- * Evaluates a die roll formula synchronously and returns the total result.
- * Avoids having to generate roll data if it's unnecessary.
- * @param {string} formula - The dice roll formula to evaluate.
- * @param {TeriockActor|TeriockItem|TeriockEffect} document - The document to get roll data from.
- * @param {object} options - Options that get passed to the roll.
- * @returns {number} The total result of the evaluated roll.
- */
-export function smartEvaluateSync(formula, document, options = { fail: 0 }) {
-  const fail = options?.fail || 0;
-  if (!formula) {
-    return fail;
-  }
-  if (typeof formula !== "string") {
-    return fail;
-  }
-  if (!isNaN(Number(formula))) {
-    return Number(formula);
-  }
-  if (document?.actor) {
-    return evaluateSync(formula, document.actor, options);
-  } else {
-    return evaluateSync(formula, {}, options);
-  }
-}
-
-/**
  * Evaluates a die roll formula asynchronously and returns the total result.
  * @param {string} formula - The dice roll formula to evaluate.
  * @param {object} data - The roll data to use for the evaluation.

@@ -111,6 +111,8 @@ foundry.helpers.Hooks.once("init", function () {
 
   // Register custom core placeables
   CONFIG.Token.objectClass = canvas.placeables.TeriockToken;
+  CONFIG.MeasuredTemplate.objectClass =
+    canvas.placeables.TeriockMeasuredTemplate;
 
   // Register custom core documents
   CONFIG.ActiveEffect.documentClass = documents.TeriockEffect;

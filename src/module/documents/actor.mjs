@@ -28,6 +28,7 @@ const { Actor } = foundry.documents;
  * @property {TeriockEffect[]} temporaryEffects
  * @property {boolean} isOwner
  * @property {boolean} limited
+ * @property {TeriockTokenDocument} token
  */
 export default class TeriockActor extends ParentDocumentMixin(
   CommonDocumentMixin(Actor),

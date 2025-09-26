@@ -158,6 +158,7 @@ declare global {
   // Placeables
   // ==========
 
+  const TeriockMeasuredTemplate: placeables.TeriockMeasuredTemplate;
   const TeriockToken: placeables.TeriockToken;
 
   namespace Teriock {
