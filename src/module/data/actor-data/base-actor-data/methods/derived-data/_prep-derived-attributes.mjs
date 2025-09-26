@@ -1,65 +1,5 @@
+import { TeriockActor } from "../../../../../documents/_module.mjs";
 import { deriveModifiableNumber } from "../../../../shared/fields/modifiable.mjs";
-
-const SIZE_DEFINITIONS = [
-  {
-    max: 0.5,
-    length: 2.5,
-    category: "tiny",
-    reach: 5,
-  },
-  {
-    max: 2,
-    length: 5,
-    category: "small",
-    reach: 5,
-  },
-  {
-    max: 4,
-    length: 5,
-    category: "medium",
-    reach: 5,
-  },
-  {
-    max: 9,
-    length: 10,
-    category: "large",
-    reach: 10,
-  },
-  {
-    max: 14,
-    length: 15,
-    category: "huge",
-    reach: 15,
-  },
-  {
-    max: 20,
-    length: 20,
-    category: "gargantuan",
-    reach: 20,
-  },
-  {
-    max: Infinity,
-    length: 30,
-    category: "colossal",
-    reach: 30,
-  },
-];
-
-/**
- * Get the definition of several fields for a given numerical size value.
- * @param {number} value
- * @returns {{ max: number, length: number, category: string, reach: number }}
- * @private
- */
-export function _sizeDefinition(value) {
-  const lessThanEqualSizes = SIZE_DEFINITIONS.map((d) => d.max).filter(
-    (m) => m <= value,
-  );
-  const sizeDefinitionMax = Math.max(...lessThanEqualSizes);
-  return foundry.utils.deepClone(
-    SIZE_DEFINITIONS.find((d) => d.max === sizeDefinitionMax),
-  );
-}
 
 /**
  * Prepares attribute saves and movement-related derived data.
@@ -83,7 +23,9 @@ export function _prepDerivedAttributes(actorData) {
     min: 0,
     max: 30,
   });
-  const sizeDefinition = _sizeDefinition(actorData.size.number.value);
+  const sizeDefinition = TeriockActor.sizeDefinition(
+    actorData.size.number.value,
+  );
   actorData.size.category = sizeDefinition.category;
   // Convert from feet to tiles
   actorData.size.length = sizeDefinition.length / 5;

@@ -1,4 +1,3 @@
-import { _sizeDefinition } from "../data/actor-data/base-actor-data/methods/derived-data/_prep-derived-attributes.mjs";
 import { TeriockRoll } from "../dice/_module.mjs";
 import { copyItem } from "../helpers/fetch.mjs";
 import { toCamelCase } from "../helpers/string.mjs";
@@ -33,6 +32,21 @@ const { Actor } = foundry.documents;
 export default class TeriockActor extends ParentDocumentMixin(
   CommonDocumentMixin(Actor),
 ) {
+  /**
+   * Get the definition of several fields for a given numerical size value.
+   * @param {number} value
+   * @returns {{ max: number, length: number, category: string, reach: number }}
+   */
+  static sizeDefinition(value) {
+    const greaterThanEqualSizes = SIZE_DEFINITIONS.map((d) => d.max).filter(
+      (m) => m >= value,
+    );
+    const sizeDefinitionMax = Math.min(...greaterThanEqualSizes);
+    return foundry.utils.deepClone(
+      SIZE_DEFINITIONS.find((d) => d.max === sizeDefinitionMax),
+    );
+  }
+
   /**
    * The {@link TeriockEffect}s that have special changes.
    * @type {TeriockEffect[]}
@@ -160,18 +174,47 @@ export default class TeriockActor extends ParentDocumentMixin(
   async _preCreate(data, options, user) {
     super._preCreate(data, options, user);
 
+    // Ensure default items
+    const defaultItems = [
+      {
+        name: "Created Elder Sorceries",
+        pack: "essentials",
+      },
+      {
+        name: "Learned Elder Sorceries",
+        pack: "essentials",
+      },
+      {
+        name: "Journeyman",
+        pack: "essentials",
+      },
+      {
+        name: "Foot",
+        pack: "equipment",
+      },
+      {
+        name: "Hand",
+        pack: "equipment",
+      },
+      {
+        name: "Mouth",
+        pack: "equipment",
+      },
+      {
+        name: "Actor Mechanics",
+        pack: "essentials",
+      },
+    ];
+    const items = [];
+    for (const item of defaultItems) {
+      if (!this.items.find((i) => i.name === item.name)) {
+        items.push((await copyItem(item.name, item.pack)).toObject());
+      }
+    }
+
     // Add Essential Items
     this.updateSource({
-      items: [
-        (await copyItem("Basic Abilities", "essentials")).toObject(),
-        (await copyItem("Created Elder Sorceries", "essentials")).toObject(),
-        (await copyItem("Learned Elder Sorceries", "essentials")).toObject(),
-        (await copyItem("Journeyman", "classes")).toObject(),
-        (await copyItem("Foot", "equipment")).toObject(),
-        (await copyItem("Hand", "equipment")).toObject(),
-        (await copyItem("Mouth", "equipment")).toObject(),
-        (await copyItem("Actor Mechanics", "essentials")).toObject(),
-      ],
+      items: items,
     });
 
     // Update Prototype Token
@@ -204,7 +247,9 @@ export default class TeriockActor extends ParentDocumentMixin(
       return false;
     }
     if (foundry.utils.hasProperty(changed, "system.size.saved")) {
-      const tokenSize = _sizeDefinition(changed.size.saved).length;
+      const tokenSize = this.constructor.sizeDefinition(
+        changed.size.saved,
+      ).length;
       if (!foundry.utils.hasProperty(changed, "prototypeToken.width")) {
         changed.prototypeToken ||= {};
         changed.prototypeToken.height = tokenSize;
@@ -809,3 +854,48 @@ export default class TeriockActor extends ParentDocumentMixin(
     }
   }
 }
+
+const SIZE_DEFINITIONS = [
+  {
+    max: 0.5,
+    length: 2.5,
+    category: "tiny",
+    reach: 5,
+  },
+  {
+    max: 2,
+    length: 5,
+    category: "small",
+    reach: 5,
+  },
+  {
+    max: 4,
+    length: 5,
+    category: "medium",
+    reach: 5,
+  },
+  {
+    max: 9,
+    length: 10,
+    category: "large",
+    reach: 10,
+  },
+  {
+    max: 14,
+    length: 15,
+    category: "huge",
+    reach: 15,
+  },
+  {
+    max: 20,
+    length: 20,
+    category: "gargantuan",
+    reach: 20,
+  },
+  {
+    max: Infinity,
+    length: 30,
+    category: "colossal",
+    reach: 30,
+  },
+];
