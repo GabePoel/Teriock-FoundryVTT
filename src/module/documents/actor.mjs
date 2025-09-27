@@ -202,6 +202,10 @@ export default class TeriockActor extends ParentDocumentMixin(
         pack: "equipment",
       },
       {
+        name: "Basic Abilities",
+        pack: "essentials",
+      },
+      {
         name: "Actor Mechanics",
         pack: "essentials",
       },

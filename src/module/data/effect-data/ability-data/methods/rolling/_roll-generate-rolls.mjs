@@ -62,7 +62,7 @@ export async function _generateRolls(rollConfig) {
       const rollContext = {
         targetImg: tokenImage(target),
         targetName: tokenName(target),
-        targetUuid: tokenActor(target).uuid,
+        targetUuid: tokenActor(target)?.uuid,
         noDice: true,
       };
       rolls.push(new TeriockRoll("10", {}, { context: rollContext }));
@@ -82,7 +82,7 @@ export async function _generateRolls(rollConfig) {
       const rollContext = {
         targetImg: tokenImage(target),
         targetName: tokenName(target),
-        targetUuid: tokenActor(target).uuid,
+        targetUuid: tokenActor(target)?.uuid,
         noDice: true,
       };
       rolls.push(new TeriockRoll("10", {}, { context: rollContext }));
