@@ -7,7 +7,6 @@ import {
 
 /**
  * Pay the costs necessary for using an ability.
- *
  * @param {AbilityRollConfig} rollConfig - Configurations for this ability usage.
  * @returns {Promise<void>}
  */
