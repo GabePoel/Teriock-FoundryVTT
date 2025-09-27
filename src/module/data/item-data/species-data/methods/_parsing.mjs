@@ -50,7 +50,6 @@ export async function _parse(speciesData, rawHTML) {
     );
 
   const tagTree = buildTagTree(doc);
-  console.log(tagTree);
   const hpDiceFormula = tagTree["hp-dice"][0];
   const mpDiceFormula = tagTree["mp-dice"][0];
   const hpRoll = new TeriockRoll(hpDiceFormula, {});
@@ -95,7 +94,6 @@ export async function _parse(speciesData, rawHTML) {
   const sizeString = tagTree["size"][0].split("size")[1];
   if (sizeString.includes("-")) {
     const sizeParts = sizeString.split("-");
-    console.log(sizeParts);
     parameters.size = {
       min: Number(sizeParts[0]),
       value: Number(sizeParts[0]),

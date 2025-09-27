@@ -187,7 +187,7 @@ export default class TeriockActor extends ParentDocumentMixin(
       },
       {
         name: "Journeyman",
-        pack: "essentials",
+        pack: "classes",
       },
       {
         name: "Foot",

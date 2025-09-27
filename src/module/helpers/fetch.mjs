@@ -13,12 +13,16 @@ export async function getItem(name, pack, options = {}) {
   const packs =
     /** @type {Collection<string, TeriockCompendiumCollection>} */ game.packs;
   const compendium = packs.get(pack);
-  const uuid = compendium.index.getName(name).uuid;
-  const item = await foundry.utils.fromUuid(uuid);
-  if (item && options.clone) {
-    return item.clone();
+  try {
+    const uuid = compendium.index.getName(name).uuid;
+    const item = await foundry.utils.fromUuid(uuid);
+    if (item && options.clone) {
+      return item.clone();
+    }
+    return item;
+  } catch (error) {
+    console.error(name, pack, error);
   }
-  return item;
 }
 
 /**

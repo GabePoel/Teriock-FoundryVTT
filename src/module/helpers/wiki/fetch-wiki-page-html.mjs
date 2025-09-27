@@ -79,7 +79,7 @@ export default async function fetchWikiPageHTML(title, options = {}) {
     const data = await response.json();
 
     if (!data.parse?.text) {
-      console.error("No parsed HTML found:", data);
+      console.error("No parsed HTML found:", title, data);
       return null;
     }
 
@@ -203,7 +203,7 @@ export default async function fetchWikiPageHTML(title, options = {}) {
 
     return cleanWikiHTML(doc.body.innerHTML, { noSubs });
   } catch (error) {
-    console.error("Error fetching HTML:", error);
+    console.error("Error fetching HTML:", title, error);
     return null;
   }
 }
