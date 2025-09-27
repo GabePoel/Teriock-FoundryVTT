@@ -21,19 +21,20 @@ export function _prepareDerivedData(equipmentData) {
       foundry.utils.getProperty(equipmentData, key),
     );
     damageRoll.terms.forEach((term) => {
-      const flavorParts = new Set(
-        term.flavor
+      const flavorParts = new Set([
+        ...term.flavor
           .toLowerCase()
           .split(" ")
           .map((p) => p.trim()),
-      );
+        ...equipmentData.damage.types.map((t) => t.toLowerCase().trim()),
+      ]);
       flavorParts.delete("");
       if (equipmentData.powerLevel === "magic") {
         flavorParts.add("magic");
       }
       const flavorArray = Array.from(flavorParts);
       flavorArray.sort((a, b) => a.localeCompare(b));
-      if (!term.isDeterministic) {
+      if (!term.isDeterministic || !isNaN(Number(term.expression))) {
         term.options.flavor = flavorArray.join(" ");
       }
     });
