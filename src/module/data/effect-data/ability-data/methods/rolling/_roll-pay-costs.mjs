@@ -33,7 +33,7 @@ export async function _payCosts(rollConfig) {
     );
   }
   if (gpSpent > 0) {
-    await actor.takePay(gpSpent);
+    await actor.system.takePay(gpSpent);
   }
   await actor.update(updates);
 }

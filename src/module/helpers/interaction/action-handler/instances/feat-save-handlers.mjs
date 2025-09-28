@@ -13,7 +13,10 @@ export class FeatSaveHandler extends ActionHandler {
       this.commonRollOptions.threshold = Number(this.dataset.dc);
     }
     for (const actor of this.actors) {
-      await actor.rollFeatSave(this.dataset.attribute, this.commonRollOptions);
+      await actor.system.rollFeatSave(
+        this.dataset.attribute,
+        this.commonRollOptions,
+      );
     }
   }
 }

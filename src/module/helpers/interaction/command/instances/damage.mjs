@@ -19,7 +19,7 @@ export const damage = new TeriockCommand(
     });
 
     for (const actor of actors) {
-      await actor.takeDamage(roll.total);
+      await actor.system.takeDamage(roll.total);
     }
   },
   {

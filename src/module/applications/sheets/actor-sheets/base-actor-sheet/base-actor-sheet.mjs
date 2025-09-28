@@ -269,7 +269,7 @@ export default class TeriockBaseActorSheet extends HackStatMixin(
       disadvantage: event.shiftKey,
       message: message,
     };
-    await this.actor.rollImmunity(options);
+    await this.actor.system.rollImmunity(options);
   }
 
   /**
@@ -351,7 +351,7 @@ export default class TeriockBaseActorSheet extends HackStatMixin(
     if (event.shiftKey) {
       options.disadvantage = true;
     }
-    await this.actor.rollFeatSave(attribute, options);
+    await this.actor.system.rollFeatSave(attribute, options);
   }
 
   /**
@@ -397,7 +397,7 @@ export default class TeriockBaseActorSheet extends HackStatMixin(
       disadvantage: event.shiftKey,
       message: message,
     };
-    await this.actor.rollResistance(options);
+    await this.actor.system.rollResistance(options);
   }
 
   /**
@@ -416,7 +416,7 @@ export default class TeriockBaseActorSheet extends HackStatMixin(
     if (event.shiftKey) {
       options.disadvantage = true;
     }
-    await this.actor.rollTradecraft(tradecraft, options);
+    await this.actor.system.rollTradecraft(tradecraft, options);
   }
 
   /**
@@ -476,7 +476,7 @@ export default class TeriockBaseActorSheet extends HackStatMixin(
         callback: (_event, button) => {
           let input = button.form.elements.namedItem("damage").value;
           if (input) {
-            this.document.takeDamage(Number(input));
+            this.document.system.takeDamage(Number(input));
           }
         },
       },
@@ -499,7 +499,7 @@ export default class TeriockBaseActorSheet extends HackStatMixin(
         callback: (_event, button) => {
           let input = button.form.elements.namedItem("drain").value;
           if (input) {
-            this.document.takeDrain(Number(input));
+            this.document.system.takeDrain(Number(input));
           }
         },
       },
@@ -523,7 +523,7 @@ export default class TeriockBaseActorSheet extends HackStatMixin(
         callback: (_event, button) => {
           let input = button.form.elements.namedItem("wither").value;
           if (input) {
-            this.document.takeWither(Number(input));
+            this.document.system.takeWither(Number(input));
           }
         },
       },
@@ -872,7 +872,7 @@ export default class TeriockBaseActorSheet extends HackStatMixin(
         const part =
           /** @type {Teriock.Parameters.Actor.HackableBodyPart} */ el.dataset
             .part;
-        await this.actor.takeUnhack(part);
+        await this.actor.system.takeUnhack(part);
         e.stopPropagation();
       });
     });

@@ -130,61 +130,61 @@ export const ROLL_TYPES = {
   damage: {
     label: "Apply Damage",
     icon: "heart-crack",
-    callback: async (actor, amt) => await actor.takeDamage(amt),
+    callback: async (actor, amt) => await actor.system.takeDamage(amt),
   },
   drain: {
     label: "Apply Drain",
     icon: "droplet-slash",
-    callback: async (actor, amt) => await actor.takeDrain(amt),
+    callback: async (actor, amt) => await actor.system.takeDrain(amt),
   },
   wither: {
     label: "Apply Wither",
     icon: "hourglass-half",
-    callback: async (actor, amt) => await actor.takeWither(amt),
+    callback: async (actor, amt) => await actor.system.takeWither(amt),
   },
   heal: {
     label: "Apply Healing",
     icon: "heart",
-    callback: async (actor, amt) => await actor.takeHeal(amt),
+    callback: async (actor, amt) => await actor.system.takeHeal(amt),
   },
   revitalize: {
     label: "Apply Revitalization",
     icon: "droplet",
-    callback: async (actor, amt) => await actor.takeRevitalize(amt),
+    callback: async (actor, amt) => await actor.system.takeRevitalize(amt),
   },
   setTempHp: {
     label: "Set Temp HP",
     icon: "heart",
-    callback: async (actor, amt) => await actor.takeSetTempHp(amt),
+    callback: async (actor, amt) => await actor.system.takeSetTempHp(amt),
   },
   gainTempHp: {
     label: "Gain Temp HP",
     icon: "heart",
-    callback: async (actor, amt) => await actor.takeGainTempHp(amt),
+    callback: async (actor, amt) => await actor.system.takeGainTempHp(amt),
   },
   setTempMp: {
     label: "Set Temp MP",
     icon: "droplet",
-    callback: async (actor, amt) => await actor.takeSetTempMp(amt),
+    callback: async (actor, amt) => await actor.system.takeSetTempMp(amt),
   },
   gainTempMp: {
     label: "Gain Temp MP",
     icon: "droplet",
-    callback: async (actor, amt) => await actor.takeGainTempMp(amt),
+    callback: async (actor, amt) => await actor.system.takeGainTempMp(amt),
   },
   sleep: {
     label: "Check Sleep",
     icon: "bed",
-    callback: async (actor, amt) => await actor.takeSleep(amt),
+    callback: async (actor, amt) => await actor.system.takeSleep(amt),
   },
   kill: {
     label: "Check Kill",
     icon: "skull",
-    callback: async (actor, amt) => await actor.takeKill(amt),
+    callback: async (actor, amt) => await actor.system.takeKill(amt),
   },
   pay: {
     label: "Pay Gold",
     icon: "coin",
-    callback: async (actor, amt) => await actor.takePay(amt),
+    callback: async (actor, amt) => await actor.system.takePay(amt),
   },
 };

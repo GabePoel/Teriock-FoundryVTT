@@ -19,7 +19,7 @@ export const heal = new TeriockCommand(
     });
 
     for (const actor of actors) {
-      await actor.takeHeal(roll.total);
+      await actor.system.takeHeal(roll.total);
     }
   },
   {

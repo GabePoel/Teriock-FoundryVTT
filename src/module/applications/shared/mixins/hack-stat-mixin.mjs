@@ -39,7 +39,7 @@ export default (Base) => {
         const part =
           /** @type {Teriock.Parameters.Actor.HackableBodyPart} */ target
             .dataset.part;
-        await this.actor.takeHack(part);
+        await this.actor.system.takeHack(part);
       }
 
       /**
@@ -54,7 +54,7 @@ export default (Base) => {
         const part =
           /** @type {Teriock.Parameters.Actor.HackableBodyPart} */ target
             .dataset.part;
-        await this.actor.takeUnhack(part);
+        await this.actor.system.takeUnhack(part);
       }
 
       /** @inheritDoc */

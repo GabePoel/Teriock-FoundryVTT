@@ -10,14 +10,14 @@ export class TakeHackHandler extends ActionHandler {
   /** @inheritDoc */
   async primaryAction() {
     for (const actor of this.actors) {
-      await actor.takeHack(this.dataset.part);
+      await actor.system.takeHack(this.dataset.part);
     }
   }
 
   /** @inheritDoc */
   async secondaryAction() {
     for (const actor of this.actors) {
-      await actor.takeUnhack(this.dataset.part);
+      await actor.system.takeUnhack(this.dataset.part);
     }
   }
 }
@@ -32,14 +32,14 @@ export class TakeUnhackHandler extends ActionHandler {
   /** @inheritDoc */
   async primaryAction() {
     for (const actor of this.actors) {
-      await actor.takeUnhack(this.dataset.part);
+      await actor.system.takeUnhack(this.dataset.part);
     }
   }
 
   /** @inheritDoc */
   async secondaryAction() {
     for (const actor of this.actors) {
-      await actor.takeHack(this.dataset.part);
+      await actor.system.takeHack(this.dataset.part);
     }
   }
 }

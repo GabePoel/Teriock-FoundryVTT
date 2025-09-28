@@ -10,7 +10,7 @@ export class AwakenHandler extends ActionHandler {
   /** @inheritDoc */
   async primaryAction() {
     for (const actor of this.actors) {
-      await actor.takeAwaken();
+      await actor.system.takeAwaken();
     }
   }
 }
@@ -24,7 +24,7 @@ export class ReviveHandler extends ActionHandler {
   /** @inheritDoc */
   async primaryAction() {
     for (const actor of this.actors) {
-      await actor.takeRevive();
+      await actor.system.takeRevive();
     }
   }
 }

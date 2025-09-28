@@ -28,4 +28,4 @@ await roll.toMessage({
   create: true,
 });
 
-await actor.takeSetTempHp(roll.total);
+await actor.system.takeSetTempHp(roll.total);

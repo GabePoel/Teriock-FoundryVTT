@@ -16,7 +16,7 @@ export const gaintemphp = new TeriockCommand(
     }
 
     for (const actor of actors) {
-      await actor.takeGainTempHp(amount);
+      await actor.system.takeGainTempHp(amount);
     }
 
     foundry.ui.notifications.info(

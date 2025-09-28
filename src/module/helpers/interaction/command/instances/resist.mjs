@@ -5,7 +5,7 @@ export const resist = new TeriockCommand(
   "Make all targeted actorsUuids roll to resist. Supports [advantage, disadvantage].",
   async ({ options, actors }) => {
     for (const actor of actors) {
-      await actor.rollResistance({
+      await actor.system.rollResistance({
         advantage: options.advantage,
         disadvantage: options.disadvantage,
       });

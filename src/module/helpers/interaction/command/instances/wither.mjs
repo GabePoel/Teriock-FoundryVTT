@@ -19,7 +19,7 @@ export const wither = new TeriockCommand(
     });
 
     for (const actor of actors) {
-      await actor.takeWither(roll.total);
+      await actor.system.takeWither(roll.total);
     }
   },
   {

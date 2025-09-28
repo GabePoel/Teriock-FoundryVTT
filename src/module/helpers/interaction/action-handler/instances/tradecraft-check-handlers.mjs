@@ -13,7 +13,7 @@ export class TradecraftCheckHandler extends ActionHandler {
       this.commonRollOptions.threshold = Number(this.dataset.dc);
     }
     for (const actor of this.actors) {
-      await actor.rollTradecraft(
+      await actor.system.rollTradecraft(
         this.dataset.tradecraft,
         this.commonRollOptions,
       );

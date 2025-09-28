@@ -9,6 +9,6 @@ if (data.amount >= actor.system.hp.value + actor.system.hp.temp) {
       await c.system.expire();
     }
     data.amount = 0;
-    await actor.takeDamage(carry);
+    await actor.system.takeDamage(carry);
   }
 }

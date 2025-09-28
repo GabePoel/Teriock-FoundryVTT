@@ -10,7 +10,7 @@ export class ResistHandler extends ActionHandler {
   /** @inheritDoc */
   async primaryAction() {
     for (const actor of this.actors) {
-      await actor.rollResistance(this.commonRollOptions);
+      await actor.system.rollResistance(this.commonRollOptions);
     }
   }
 }

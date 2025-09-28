@@ -87,7 +87,7 @@ export default class TeriockHealManager extends TeriockStatManager {
         const part =
           /** @type {Teriock.Parameters.Actor.HackableBodyPart} */ el.dataset
             .part;
-        await this.actor.takeHack(part);
+        await this.actor.system.takeHack(part);
         e.stopPropagation();
       });
     });

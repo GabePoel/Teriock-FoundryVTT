@@ -34,7 +34,7 @@ export const pay = new TeriockCommand(
     });
 
     for (const actor of actors) {
-      await actor.takePay(roll.total, mode);
+      await actor.system.takePay(roll.total, mode);
     }
   },
   {

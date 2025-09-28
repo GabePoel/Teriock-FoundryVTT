@@ -19,7 +19,7 @@ export const drain = new TeriockCommand(
     });
 
     for (const actor of actors) {
-      await actor.takeDrain(roll.total);
+      await actor.system.takeDrain(roll.total);
     }
   },
   {

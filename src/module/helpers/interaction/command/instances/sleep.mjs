@@ -18,7 +18,7 @@ export const sleep = new TeriockCommand(
     }
 
     for (const actor of actors) {
-      await actor.takeSleep(damageAmount);
+      await actor.system.takeSleep(damageAmount);
     }
 
     foundry.ui.notifications.info(

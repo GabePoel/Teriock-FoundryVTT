@@ -16,7 +16,7 @@ export const gaintempmp = new TeriockCommand(
     }
 
     for (const actor of actors) {
-      await actor.takeGainTempMp(amount);
+      await actor.system.takeGainTempMp(amount);
     }
 
     foundry.ui.notifications.info(

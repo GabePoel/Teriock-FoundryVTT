@@ -33,7 +33,7 @@ export const hack = new TeriockCommand(
     const amount = args.length > 1 ? parseInt(args[1]) || 1 : 1;
     for (const actor of actors) {
       for (let i = 0; i < amount; i++) {
-        await actor.takeHack(bodyPart);
+        await actor.system.takeHack(bodyPart);
       }
     }
 
@@ -64,7 +64,7 @@ export const unhack = new TeriockCommand(
     const amount = args.length > 1 ? parseInt(args[1]) || 1 : 1;
     for (const actor of actors) {
       for (let i = 0; i < amount; i++) {
-        await actor.takeUnhack(bodyPart);
+        await actor.system.takeUnhack(bodyPart);
       }
     }
 

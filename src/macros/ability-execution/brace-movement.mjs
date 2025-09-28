@@ -1,5 +1,5 @@
 const toRemove = [];
-await actor.takeSetTempHp(0);
+await actor.system.takeSetTempHp(0);
 actor.consequences.map((c) => {
   if (c.name === "Brace Effect") {
     toRemove.push(c.id);

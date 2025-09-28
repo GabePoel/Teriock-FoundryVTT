@@ -16,7 +16,7 @@ export const settempmp = new TeriockCommand(
     }
 
     for (const actor of actors) {
-      await actor.takeSetTempMp(amount);
+      await actor.system.takeSetTempMp(amount);
     }
 
     foundry.ui.notifications.info(

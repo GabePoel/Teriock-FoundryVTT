@@ -132,10 +132,10 @@ export default class StatDieModel extends DataModel {
       flavor: `Rolling ${this.name}`,
     });
     if (this.stat === "hp") {
-      await actor.takeHeal(roll.total);
+      await actor.system.takeHeal(roll.total);
     }
     if (this.stat === "mp") {
-      await actor.takeRevitalize(roll.total);
+      await actor.system.takeRevitalize(roll.total);
     }
     if (spend) {
       await this.parent.parent.update({ [`${this.path}.spent`]: true });
