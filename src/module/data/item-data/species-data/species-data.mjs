@@ -38,11 +38,6 @@ export default class TeriockSpeciesModel extends StatDataMixin(
     Object.assign(schema, {
       adult: new fields.NumberField({ initial: 20 }),
       appearance: new TextField({ label: "Appearance" }),
-      applySize: new fields.BooleanField({
-        hint: "Apply this species' size to its parent actor.",
-        initial: true,
-        label: "Apply Size",
-      }),
       attributeIncrease: new TextField({ label: "Attribute increase" }),
       br: new fields.NumberField({
         initial: 1,
@@ -57,6 +52,11 @@ export default class TeriockSpeciesModel extends StatDataMixin(
         label: "Proficient",
       }),
       size: new fields.SchemaField({
+        enabled: new fields.BooleanField({
+          hint: "Whether or not this species has a size associated with it.",
+          initial: true,
+          label: "Size",
+        }),
         max: new fields.NumberField(),
         min: new fields.NumberField(),
         value: new fields.NumberField({

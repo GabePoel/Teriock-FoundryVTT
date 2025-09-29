@@ -223,11 +223,12 @@ export default (Base) => {
 
       /**
        * Opens image picker for editing document images.
-       * @param {PointerEvent} _event - The event object.
+       * @param {PointerEvent} event - The event object.
        * @param {HTMLElement} target - The target element.
        * @returns {Promise<void>} Promise that resolves when image picker is opened.
        */
-      static async _editImage(_event, target) {
+      static async _editImage(event, target) {
+        event.stopPropagation();
         const attr = target.dataset.edit;
         const current = foundry.utils.getProperty(this.document, attr);
         const defaultImg = this.document.constructor.getDefaultArtwork?.(

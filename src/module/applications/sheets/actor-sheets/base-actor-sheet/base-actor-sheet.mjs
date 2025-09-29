@@ -743,12 +743,16 @@ export default class TeriockBaseActorSheet extends HackStatMixin(
     );
   }
 
-  /** @inheritDoc */
+  /**
+   * @inheritDoc
+   * @returns {Promise<TeriockItem|boolean>} Promise that resolves to true if the drop was successful.
+   */
   async _onDropItem(event, data) {
     const item = await super._onDropItem(event, data);
-    if (item?.type === "species") {
+    if (item?.type === "species" && item.system.size.enabled) {
       await changeSizeDialog(this.actor, item);
     }
+    return item;
   }
 
   /** @inheritDoc */

@@ -14,7 +14,7 @@ import type { TradecraftData } from "./types/tradecrafts";
 import type { StatDieModel } from "../../models/_module.mjs";
 
 declare global {
-  export interface TeriockBaseActorData {
+  interface TeriockBaseActorData {
     /** <base> Ability flags */
     abilityFlags: Record<string, string>;
     /** <schema> Attributes */
@@ -169,6 +169,8 @@ declare global {
       /** <schema> Piercing type */
       piercing: "av0" | "ub" | "none";
     };
+    /** <schema> Parent */
+    parent: Readonly<TeriockActor>;
     /** <base> Presence */
     presence: {
       /** <base> Maximum presence tier */
@@ -269,12 +271,16 @@ declare global {
     };
     /** <base> Trackers */
     trackers: {
+      /** <base> Allured to */
+      allured: Teriock.UUID<TeriockTokenDocument>[];
+      /** <base> <derived> Bound to */
+      bound: Teriock.UUID<TeriockTokenDocument>[];
+      /** <base> Frightened of */
+      frightened: Teriock.UUID<TeriockTokenDocument>[];
+      /** <base> Goaded to */
+      goaded: Teriock.UUID<TeriockTokenDocument>[];
       /** <base> Lighted to */
       lighted: Teriock.UUID<TeriockTokenDocument>[];
-      /** <derived> Goaded to */
-      goaded: Teriock.UUID<TeriockTokenDocument>[];
-      /** <derived> Frightened of */
-      frightened: Teriock.UUID<TeriockTokenDocument>[];
     };
     /** <schema> Tradecrafts */
     tradecrafts: Record<Teriock.Parameters.Fluency.Tradecraft, TradecraftData>;
@@ -307,8 +313,6 @@ declare global {
     };
     /** <schema> Wither */
     wither: BarData;
-
-    get parent(): TeriockActor;
   }
 }
 

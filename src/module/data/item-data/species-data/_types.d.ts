@@ -15,8 +15,6 @@ declare module "./species-data.mjs" {
     adult: number;
     /** <schema> Appearance */
     appearance: string;
-    /** <schema> Apply this size to parent {@link TeriockActor}. */
-    applySize: boolean;
     /** <schema> Attribute increase */
     attributeIncrease: string;
     /** <schema> Battle rating */
@@ -29,6 +27,8 @@ declare module "./species-data.mjs" {
     lifespan: number | null;
     /** <schema> Size constraints */
     size: {
+      /** <schema> Enabled */
+      enabled: boolean;
       /** <schema> Maximum size */
       max: number;
       /** <schema> Minimum size */

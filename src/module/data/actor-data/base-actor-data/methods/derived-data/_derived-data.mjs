@@ -1,12 +1,9 @@
 import { _prepDerivedAttributes } from "./_prep-derived-attributes.mjs";
 import { _prepDerivedDefense } from "./_prep-derived-defense.mjs";
 import { _prepDerivedHpMp } from "./_prep-derived-hp-mp.mjs";
-import {
-  _prepDerivedEncumbrance,
-  _prepDerivedMoney,
-  _prepDerivedWeightCarried,
-} from "./_prep-derived-load.mjs";
+import { _prepDerivedEncumbrance, _prepDerivedMoney, _prepDerivedWeightCarried } from "./_prep-derived-load.mjs";
 import { _prepDerivedSpeed } from "./_prep-derived-speed.mjs";
+import { _prepDerivedTrackers } from "./_prep-derived-trackers.mjs";
 import { _prepDerivedTradecrafts } from "./_prep-derived-tradecrafts.mjs";
 
 /**
@@ -36,4 +33,5 @@ export function _prepareDerivedData(actorData) {
   _prepDerivedEncumbrance(actorData);
   _prepDerivedSpeed(actorData);
   _prepDerivedHpMp(actorData);
+  _prepDerivedTrackers(actorData);
 }

@@ -27,6 +27,8 @@ export function _baseData(actorData) {
   };
   actorData.abilityFlags = {};
   actorData.trackers = {
+    allured: [],
+    bound: [],
     lighted: [],
     goaded: [],
     frightened: [],
