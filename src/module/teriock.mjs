@@ -129,6 +129,7 @@ foundry.helpers.Hooks.once("init", function () {
   // Data models
   Object.assign(CONFIG.Actor.dataModels, {
     character: data.actor.TeriockCharacterModel,
+    creature: data.actor.TeriockCreatureModel,
   });
   Object.assign(CONFIG.Item.dataModels, {
     equipment: data.item.TeriockEquipmentModel,
@@ -175,6 +176,12 @@ foundry.helpers.Hooks.once("init", function () {
       doc: documents.TeriockActor,
       label: "Character",
       types: ["character"],
+    },
+    {
+      cls: applications.sheets.actor.CreatureSheet,
+      doc: documents.TeriockActor,
+      label: "Creature",
+      types: ["creature"],
     },
     // Items
     {
@@ -328,7 +335,7 @@ foundry.helpers.Hooks.once("init", function () {
         /** @type {TeriockJournalCompendium} */
         packs.get("teriock.rules"),
       species: () =>
-        /** @type {TeriockPowerCompendium} */
+        /** @type {TeriockSpeciesCompendium} */
         packs.get("teriock.species"),
     },
   };

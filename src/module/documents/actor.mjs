@@ -34,7 +34,31 @@ export default class TeriockActor extends ParentDocumentMixin(
   CommonDocumentMixin(Actor),
 ) {
   /**
+   * The default weight for a given size.
+   *
+   * Relevant wiki pages:
+   * - [Weight](https://wiki.teriock.com/index.php/Core:Weight)
+   *
+   * @param {number} size
+   * @param {"min"|"typical"|"max"} [amount]
+   * @returns {number}
+   */
+  static defaultWeight(size, amount = "typical") {
+    if (amount === "min") {
+      size -= 0.5;
+    }
+    if (amount === "max") {
+      size += 0.5;
+    }
+    return Math.max(0.001, Math.pow(3 + size, 3));
+  }
+
+  /**
    * Get the definition of several fields for a given numerical size value.
+   *
+   * Relevant wiki pages:
+   * - [Size](https://wiki.teriock.com/index.php/Core:Size)
+   *
    * @param {number} value
    * @returns {{ max: number, length: number, category: string, reach: number }}
    */
@@ -173,55 +197,9 @@ export default class TeriockActor extends ParentDocumentMixin(
    * @returns {Promise<boolean|void>}
    */
   async _preCreate(data, options, user) {
-    super._preCreate(data, options, user);
-
-    // Ensure default items
-    const defaultItems = [
-      {
-        name: "Created Elder Sorceries",
-        pack: "essentials",
-      },
-      {
-        name: "Learned Elder Sorceries",
-        pack: "essentials",
-      },
-      {
-        name: "Journeyman",
-        pack: "classes",
-      },
-      {
-        name: "Foot",
-        pack: "equipment",
-      },
-      {
-        name: "Hand",
-        pack: "equipment",
-      },
-      {
-        name: "Mouth",
-        pack: "equipment",
-      },
-      {
-        name: "Basic Abilities",
-        pack: "essentials",
-      },
-      {
-        name: "Actor Mechanics",
-        pack: "essentials",
-      },
-    ];
-    const items = [];
-    for (const item of defaultItems) {
-      if (!this.items.find((i) => i.name === item.name)) {
-        items.push((await copyItem(item.name, item.pack)).toObject());
-      }
+    if ((await super._preCreate(data, options, user)) === false) {
+      return false;
     }
-
-    // Add Essential Items
-    this.updateSource({
-      items: items,
-    });
-
     // Update Prototype Token
     const prototypeToken = {};
     const size = this.system.size.length;

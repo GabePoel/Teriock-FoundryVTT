@@ -1,3 +1,5 @@
+import { systemPath } from "../../../helpers/path.mjs";
+
 /**
  * Mixin for common functions used across document classes.
  * @param {ClientDocument} Base
@@ -24,6 +26,16 @@ export default (Base) => {
       /** @inheritDoc */
       get uuid() {
         return super.uuid;
+      }
+
+      /** @inheritDoc */
+      async _preCreate(data, options, user) {
+        if (!data.img) {
+          this.updateSource({
+            img: systemPath(`icons/documents/${data.type}.svg`),
+          });
+        }
+        return super._preCreate(data, options, user);
       }
 
       /** @inheritDoc */

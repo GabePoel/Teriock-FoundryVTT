@@ -4,7 +4,6 @@ const { fields } = foundry.data;
 
 /**
  * Creates a schema field definition for an attribute with save proficiency and bonus values.
- *
  * @param {string} name - The name of the attribute (e.g., "STR", "INT", "MOV")
  * @returns {SchemaField} A schema field containing:
  *   - saveProficient: Boolean indicating if proficient in saves for this attribute
@@ -41,11 +40,18 @@ function attributeField(name) {
  * @returns {object} The modified schema object with basic actor fields added
  */
 export function _defineAttributes(schema) {
-  schema.lvl = new fields.NumberField({
-    initial: 1,
-    integer: true,
-    label: "Level",
-    min: 1,
+  schema.scaling = new fields.SchemaField({
+    lvl: new fields.NumberField({
+      initial: 1,
+      integer: true,
+      label: "Level",
+      min: 1,
+    }),
+    brScale: new fields.BooleanField({
+      initial: false,
+      label: "Scale off BR",
+      hint: "Scale bonuses off BR instead of LVL.",
+    }),
   });
   schema.size = new fields.SchemaField({
     number: modifiableNumber({

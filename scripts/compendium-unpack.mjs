@@ -100,6 +100,25 @@ function cleanEntry(doc) {
     delete doc.system.disabled;
     delete doc.tint;
     delete doc.sort;
+    if (doc.type === "creature") {
+      delete doc.system.attributes;
+      delete doc.system.abilityFlags;
+      delete doc.system.movementSpeed;
+      delete doc.system.carryingCapacity;
+      delete doc.system.attunements;
+      delete doc.system.offense;
+      delete doc.system.deathBag;
+      delete doc.system.money;
+      delete doc.system.interestRate;
+      delete doc.system.protections;
+      delete doc.system.senses;
+      delete doc.system.sheet;
+      delete doc.system.speedAdjustments;
+      delete doc.system.hp;
+      delete doc.system.mp;
+      delete doc.system.wither;
+      delete doc.system.tradecrafts;
+    }
     if (doc.type === "power") {
       delete doc.system.size;
       delete doc.system.lifespan;

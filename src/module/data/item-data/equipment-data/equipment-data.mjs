@@ -258,12 +258,16 @@ export default class TeriockEquipmentModel extends ConsumableDataMixin(
   prepareDerivedData() {
     super.prepareDerivedData();
     prepareModifiableBase(this.tier);
+    deriveModifiableNumber(this.weight, { min: 0 });
+    this.weight.total = this.weight.value;
+    if (this.consumable) {
+      this.weight.total = this.weight.value * this.quantity;
+    }
     deriving._prepareDerivedData(this);
   }
 
   /** @inheritDoc */
   prepareSpecialData() {
-    deriveModifiableNumber(this.weight, { min: 0 });
     deriveModifiableNumber(this.av, {
       floor: true,
       min: 0,

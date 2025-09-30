@@ -39,6 +39,12 @@ export class TeriockPowerCompendium extends TeriockCompendiumCollection {}
 export class TeriockRankCompendium extends TeriockCompendiumCollection {}
 
 /**
+ * @property {(name: string, options?: { strict?: boolean }) => TeriockSpecies} getName
+ * @property {Collection<string,TeriockSpecies>} index
+ */
+export class TeriockSpeciesCompendium extends TeriockCompendiumCollection {}
+
+/**
  * @property {(name: string, options?: { strict?: boolean }) => TeriockWrapper} getName
  * @property {Collection<string,TeriockWrapper>} index
  */

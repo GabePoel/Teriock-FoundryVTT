@@ -1,5 +1,4 @@
 import { buildMessage } from "../../../helpers/messages-builder/message-builder.mjs";
-import { systemPath } from "../../../helpers/path.mjs";
 import TeriockChatMessage from "../../chat-message.mjs";
 import { applyCertainChanges } from "../shared/_module.mjs";
 
@@ -42,16 +41,6 @@ export default (Base) => {
           proficient = true;
         }
         return proficient;
-      }
-
-      /** @inheritDoc */
-      async _preCreate(data, options, user) {
-        if (!data.img) {
-          this.updateSource({
-            img: systemPath(`icons/documents/${data.type}.svg`),
-          });
-        }
-        return super._preCreate(data, options, user);
       }
 
       /** @inheritDoc */

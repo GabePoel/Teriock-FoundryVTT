@@ -6,7 +6,7 @@
  * - [Carrying Capacity](https://wiki.teriock.com/index.php/Core:Carrying_Capacity)
  * - [Encumbered](https://wiki.teriock.com/index.php/Condition:Encumbered)
  *
- * @param {TeriockBaseActorModel} actorData - The actor's base data system object.
+ * @param {TeriockBaseActorData} actorData - The actor's base data system object.
  * @returns {void} Modifies the system object in place.
  * @private
  */
@@ -60,16 +60,16 @@ export function _prepDerivedMoney(actorData) {
  */
 export function _prepDerivedWeightCarried(actorData) {
   const actor = actorData.parent;
-  actorData.weight.equipment = actor.itemTypes.equipment.reduce((sum, i) => {
-    let newWeight = i.system.weight.value || 0;
-    if (i.system.consumable) {
-      newWeight = newWeight * i.system.quantity;
-    }
-    return sum + newWeight;
-  }, 0);
+  let equipmentWeight = 0;
+  for (const e of actor.equipment) {
+    equipmentWeight += e.system.weight.total;
+  }
+  actorData.weight.equipment = equipmentWeight;
   actorData.weight.carried = Math.ceil(
     actorData.weight.equipment + actorData.weight.money,
   );
   actorData.weight.value =
-    actorData.weight.equipment + actorData.weight.money + actorData.weight.self;
+    actorData.weight.equipment +
+    actorData.weight.money +
+    actorData.weight.self.value;
 }

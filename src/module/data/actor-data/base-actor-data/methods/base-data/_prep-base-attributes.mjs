@@ -7,4 +7,5 @@ import { prepareModifiableBase } from "../../../../shared/fields/modifiable.mjs"
  */
 export function _prepBaseAttributes(actorData) {
   prepareModifiableBase(actorData.size.number);
+  prepareModifiableBase(actorData.weight.self);
 }

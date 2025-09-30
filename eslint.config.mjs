@@ -11,15 +11,16 @@ export default defineConfig([
     languageOptions: {
       globals: {
         ...globals.browser,
-        actor: "readonly",
         CONFIG: "readonly",
         Handlebars: "readonly",
         Hooks: "readonly",
         PIXI: "readonly",
         TERIOCK: "readonly",
+        actor: "readonly",
         foundry: "readonly",
         game: "readonly",
         scope: "readonly",
+        teriock: "readonly",
         tm: "readonly",
       },
     },

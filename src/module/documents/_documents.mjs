@@ -19,6 +19,22 @@ import TeriockItem from "./item.mjs";
 export class TeriockCharacter extends TeriockActor {}
 
 /**
+ * Creature-specific {@link TeriockActor} class.
+ *
+ * Relevant wiki pages:
+ * - [Attributes](https://wiki.teriock.com/index.php/Core:Attributes)
+ * - [Leveling Up](https://wiki.teriock.com/index.php/Core:Leveling_Up)
+ * - [Size](https://wiki.teriock.com/index.php/Core:Size)
+ *
+ * @property {TeriockCreatureModel} system
+ * @property {TeriockCreatureSheet} sheet
+ * @property {"actor"} type
+ * @property {Teriock.UUID<TeriockCreature>} uuid
+ * @property {Teriock.ID<TeriockCreature>} id
+ */
+export class TeriockCreature extends TeriockActor {}
+
+/**
  * Equipment-specific {@link TeriockItem} class.
  *
  * Relevant wiki pages:

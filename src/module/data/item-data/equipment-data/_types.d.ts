@@ -78,7 +78,10 @@ declare module "./equipment-data.mjs" {
     /** <base> Warded */
     warded: boolean;
     /** <schema> Weight (lb) */
-    weight: Teriock.Fields.ModifiableNumber;
+    weight: Teriock.Fields.ModifiableNumber & {
+      /** <special> Weight times quantity */
+      total: number;
+    };
 
     get parent(): TeriockEquipment;
   }

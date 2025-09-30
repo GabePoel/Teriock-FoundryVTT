@@ -107,8 +107,6 @@ declare global {
     hpDice: Record<Teriock.ID<StatDieModel>, StatDieModel>;
     /** <base> Light */
     light: object;
-    /** <schema> Level */
-    lvl: number;
     /** <schema> Money */
     money: {
       /** <schema> Copper coins */
@@ -170,7 +168,7 @@ declare global {
       piercing: "av0" | "ub" | "none";
     };
     /** <schema> Parent */
-    parent: Readonly<TeriockActor>;
+    parent: TeriockActor;
     /** <base> Presence */
     presence: {
       /** <base> Maximum presence tier */
@@ -195,12 +193,20 @@ declare global {
     };
     /** <base> Scaling bonuses */
     scaling: {
+      /** <base> Battle rating */
+      br: number;
+      /** <schema> Scale off BR instead of LVL */
+      brScale: boolean;
+      /** <base> Fluency bonus derived from level */
+      f: number;
+      /** <schema> Level */
+      lvl: number;
       /** <base> Proficiency bonus derived from level */
       p: number;
-      /** <derived> Fluency bonus derived from level */
-      f: number;
       /** <base> Total rank derived from level */
       rank: number;
+      /** <base> Scaling term, either LVL or BR */
+      scale: number;
     };
     /** <schema> Senses */
     senses: {
@@ -236,7 +242,7 @@ declare global {
     /** <schema> Size */
     size: {
       /** <schema> Numbered size */
-      number: Teriock.Fields.ModifiableDeterministic;
+      number: Teriock.Fields.ModifiableNumber;
       /** <derived> Named size category */
       category: string;
       /** <derived> */
@@ -300,7 +306,7 @@ declare global {
       /** <derived> Weight of the actor's money */
       money: number;
       /** <schema> Weight of the actor */
-      self: number;
+      self: Teriock.Fields.ModifiableDeterministic;
       /** <derived> Total weight of the actor and everything they carry (self + carried) */
       value: number;
     };

@@ -1,13 +1,10 @@
 const abilitiesPack = game.teriock.packs.abilities();
 
-const progress = ui.notifications.info(`Pulling all abilities from wiki.`, {
-  progress: true,
-});
-
-let allAbilityPages =
-  await teriock.helpers.wiki.fetchCategoryMembers("Abilities");
-allAbilityPages = allAbilityPages.filter((page) =>
-  page.title.includes("Ability:"),
+const progress = foundry.ui.notifications.info(
+  `Pulling all abilities from wiki.`,
+  {
+    progress: true,
+  },
 );
 
 async function processAbility(abilityName, _index, _total) {

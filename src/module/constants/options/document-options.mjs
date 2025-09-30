@@ -7,6 +7,10 @@ export const documentOptions = {
     name: "Character",
     icon: "user",
   },
+  creature: {
+    name: "Creature",
+    icon: "octopus",
+  },
   equipment: {
     name: "Equipment",
     icon: "treasure-chest",
@@ -49,6 +53,6 @@ export const documentOptions = {
   },
   species: {
     name: "Species",
-    icon: "octopus",
+    icon: "skull-cow",
   },
 };

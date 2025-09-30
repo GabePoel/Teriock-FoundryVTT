@@ -1,3 +1,5 @@
+import { modifiableFormula } from "../../../../shared/fields/modifiable.mjs";
+
 const { fields } = foundry.data;
 
 /**
@@ -42,11 +44,8 @@ export function _defineCapacities(schema) {
     }),
   });
   schema.weight = new fields.SchemaField({
-    self: new fields.NumberField({
-      initial: 216,
-      integer: true,
-      label: "Weight",
-      min: 0,
+    self: modifiableFormula({
+      initial: "pow(3 + @size, 3)",
     }),
   });
   schema.attunements = new fields.SetField(new fields.DocumentIdField(), {

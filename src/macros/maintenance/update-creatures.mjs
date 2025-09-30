@@ -36,7 +36,7 @@ allSpecies.forEach(async (speciesEntry) => {
       {
         name: species.name,
         img: species.img,
-        type: "character",
+        type: "creature",
         folder: creatureFolder.id,
       },
       { pack: "teriock.creatures" },
@@ -67,6 +67,12 @@ allSpecies.forEach(async (speciesEntry) => {
         game.teriock.Actor.sizeDefinition(species.system.size.value).length / 5,
     },
     system: {
+      hp: {
+        value: creature.system.hp.max,
+      },
+      mp: {
+        value: creature.system.mp.max,
+      },
       size: {
         number: {
           saved: species.system.size.value,

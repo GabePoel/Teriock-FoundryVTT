@@ -35,10 +35,10 @@ export function _getRollData(actorData) {
 function basicData(actorData, data) {
   Object.assign(data, {
     f: actorData.scaling.f,
-    lvl: actorData.lvl,
+    lvl: actorData.scaling.lvl,
     p: actorData.scaling.p,
-    size: actorData.size,
-    weight: actorData.weight,
+    size: actorData.size.number.value,
+    weight: actorData.weight.self.value,
   });
 }
 

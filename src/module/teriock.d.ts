@@ -78,13 +78,14 @@ declare global {
   // Compendium collections
   // ----------------------
 
-  const TeriockCompendiumCollection: collections.TeriockCompendiumCollection;
   const TeriockCharacterCompendium: collections.TeriockCharacterCompendium;
+  const TeriockCompendiumCollection: collections.TeriockCompendiumCollection;
   const TeriockEquipmentCompendium: collections.TeriockEquipmentCompendium;
-  const TeriockPowerCompendium: collections.TeriockPowerCompendium;
-  const TeriockWrapperCompendium: collections.TeriockWrapperCompendium;
-  const TeriockRankCompendium: collections.TeriockRankCompendium;
   const TeriockMacroCompendium: collections.TeriockMacroCompendium;
+  const TeriockPowerCompendium: collections.TeriockPowerCompendium;
+  const TeriockRankCompendium: collections.TeriockRankCompendium;
+  const TeriockSpeciesCompendium: collections.TeriockSpeciesCompendium;
+  const TeriockWrapperCompendium: collections.TeriockWrapperCompendium;
 
   // Data Models
   // ===========

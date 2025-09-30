@@ -73,7 +73,7 @@ async function processSpecies(speciesName, _index, _total) {
     folder = undeadSpeciesFolder;
   }
   if (!speciesItem) {
-    speciesItem = await game.teriock.Item.create(
+    speciesItem = /** @type {TeriockSpecies} */ await Item.create(
       {
         name: speciesName,
         type: "species",
@@ -82,10 +82,21 @@ async function processSpecies(speciesName, _index, _total) {
       { pack: "teriock.species" },
     );
   } else {
-    speciesItem = await foundry.utils.fromUuid(speciesItem.uuid);
+    speciesItem = /** @type {TeriockSpecies} */ await foundry.utils.fromUuid(
+      speciesItem.uuid,
+    );
   }
 
   await speciesItem.system.wikiPull({ notify: false });
+  const knownAbilities = [];
+  const supAbilities = speciesItem.abilities.filter((a) => !a.sup);
+  for (const a of supAbilities) {
+    if (knownAbilities.includes(a.name)) {
+      await a.delete();
+    } else {
+      knownAbilities.push(a.name);
+    }
+  }
 
   return {
     speciesName,
