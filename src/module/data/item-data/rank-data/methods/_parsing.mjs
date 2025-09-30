@@ -127,6 +127,18 @@ export async function _parse(rankData, rawHTML) {
   // Execute all ability creation in parallel
   try {
     const results = await Promise.all(abilityPromises);
+    const a3c = rankData.parent.abilities.filter((a) =>
+      rankNames["3c"].includes(a.name),
+    );
+    const a3s = rankData.parent.abilities.filter((a) =>
+      rankNames["3s"].includes(a.name),
+    );
+    await Promise.all(
+      a3c.map((a) => a.setFlag("teriock", "category", "combat")),
+    );
+    await Promise.all(
+      a3s.map((a) => a.setFlag("teriock", "category", "support")),
+    );
 
     const toDelete = rankData.parent
       .getAbilities()

@@ -112,16 +112,14 @@ export async function _addRank(sheet) {
   );
   const combatAbilityNames = new Set(
     referenceRank.abilities
-      .filter((a) => !a.sup)
-      .map((a) => a.name)
-      .slice(0, 3),
+      .filter((a) => a.getFlag("teriock", "category") === "combat")
+      .map((a) => a.name),
   );
   const availableCombatAbilityNames = new Set(combatAbilityNames);
   const supportAbilityNames = new Set(
     referenceRank.abilities
-      .filter((a) => !a.sup)
-      .map((a) => a.name)
-      .slice(3),
+      .filter((a) => a.getFlag("teriock", "category") === "support")
+      .map((a) => a.name),
   );
   const availableSupportAbilityNames = new Set(supportAbilityNames);
   for (const existingRank of existingRanks) {

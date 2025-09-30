@@ -28,9 +28,7 @@ allSpecies.forEach(async (speciesEntry) => {
   /** @type {TeriockActor} */
   let creature;
   const speciesFolder = speciesFolders.get(speciesEntry.folder);
-  console.log(speciesFolder);
   const creatureFolder = creaturesFolders.getName(speciesFolder.name);
-  console.log(creatureFolder);
   if (!creatureEntry) {
     creature = await Actor.create(
       {
@@ -44,12 +42,25 @@ allSpecies.forEach(async (speciesEntry) => {
   } else {
     creature = await foundry.utils.fromUuid(creatureEntry.uuid);
   }
-  const existingSpecies = creature.species.find((s) => s.name === species.name);
+  await creature.delete();
+  let existingSpecies = creature.species.find((s) => s.name === species.name);
   if (!existingSpecies) {
-    await creature.createEmbeddedDocuments("Item", [species.toObject()]);
+    existingSpecies = /** @type {TeriockSpecies} */ (
+      await creature.createEmbeddedDocuments("Item", [species.toObject()])
+    )[0];
   } else {
-    await existingSpecies.update(species.toObject());
+    await existingSpecies.deleteEmbeddedDocuments(
+      "ActiveEffect",
+      species.effects.contents.map((e) => e.id),
+    );
+    //await existingSpecies.update(species.toObject());
   }
+  await creature.deleteEmbeddedDocuments(
+    "Item",
+    creature.ranks.map((r) => r.id),
+  );
+  console.log(existingSpecies.toObject());
+  await existingSpecies.system.imports.importDeterministic();
   await creature.update({
     folder: creatureFolder.id,
     img: species.img,

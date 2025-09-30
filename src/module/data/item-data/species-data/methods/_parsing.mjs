@@ -1,5 +1,6 @@
 import { TeriockRoll } from "../../../../dice/_module.mjs";
 import { getIcon } from "../../../../helpers/path.mjs";
+import { toCamelCase } from "../../../../helpers/string.mjs";
 import {
   cleanHTMLDoc,
   cleanObject,
@@ -51,6 +52,27 @@ export async function _parse(speciesData, rawHTML) {
         };
       },
     );
+
+  parameters.imports = {
+    ranks: {
+      classes: {},
+      archetypes: {},
+      general: 0,
+    },
+  };
+  doc.querySelectorAll("span.metadata[data-type='import']").forEach(
+    /** @param {HTMLSpanElement} el */ (el) => {
+      const parameterKey = el.dataset.key;
+      const number = Number(el.dataset.number);
+      if (parameterKey !== "ranks.general") {
+        const nameKey = toCamelCase(el.dataset.name);
+        const key = parameterKey + "." + nameKey;
+        foundry.utils.setProperty(parameters.imports, key, number);
+      } else {
+        parameters.imports.ranks.general = number;
+      }
+    },
+  );
 
   const tagTree = buildTagTree(doc);
   console.log(tagTree);

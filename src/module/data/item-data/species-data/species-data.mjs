@@ -3,6 +3,7 @@ import { copyAbility } from "../../../helpers/fetch.mjs";
 import { toTitleCase } from "../../../helpers/string.mjs";
 import { mergeFreeze } from "../../../helpers/utils.mjs";
 import { StatDataMixin, WikiDataMixin } from "../../mixins/_module.mjs";
+import { ImportsModel } from "../../models/_module.mjs";
 import { TextField } from "../../shared/fields/_module.mjs";
 import TeriockBaseItemModel from "../base-item-data/base-item-data.mjs";
 import { _messageParts } from "./methods/_messages.mjs";
@@ -45,6 +46,7 @@ export default class TeriockSpeciesModel extends StatDataMixin(
       }),
       description: new TextField({ label: "Description" }),
       hpIncrease: new TextField({ label: "Hit increase" }),
+      imports: new fields.EmbeddedDataField(ImportsModel),
       innateRanks: new TextField({ label: "Innate ranks" }),
       lifespan: new fields.NumberField({ initial: 100 }),
       proficient: new fields.BooleanField({

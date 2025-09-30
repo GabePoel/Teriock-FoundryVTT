@@ -1,5 +1,5 @@
 import { mergeFreeze } from "../../../helpers/utils.mjs";
-import StatDieModel from "../../models/stat-die-model/stat-die-model.mjs";
+import { StatDieModel } from "../../models/_module.mjs";
 
 const { fields } = foundry.data;
 
