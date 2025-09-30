@@ -3,7 +3,7 @@ name: Update Creatures
 type: script
 _id: qhpeHJ0ZJGDfUOPo
 author: teriockBuilder00
-img: icons/svg/angel.svg
+img: systems/teriock/src/icons/documents/creature.svg
 scope: global
 command: |-
   const speciesCompendium = game.teriock.packs.species();
@@ -44,7 +44,7 @@ command: |-
         {
           name: species.name,
           img: species.img,
-          type: "character",
+          type: "creature",
           folder: creatureFolder.id,
         },
         { pack: "teriock.creatures" },
@@ -75,6 +75,12 @@ command: |-
           game.teriock.Actor.sizeDefinition(species.system.size.value).length / 5,
       },
       system: {
+        hp: {
+          value: creature.system.hp.max,
+        },
+        mp: {
+          value: creature.system.mp.max,
+        },
         size: {
           number: {
             saved: species.system.size.value,
