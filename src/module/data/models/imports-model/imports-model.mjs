@@ -1,4 +1,5 @@
-import { copyRank } from "../../../helpers/fetch.mjs";
+import { copyItem, copyRank } from "../../../helpers/fetch.mjs";
+import { toCamelCase } from "../../../helpers/string.mjs";
 
 const { fields } = foundry.data;
 const { DataModel } = foundry.abstract;
@@ -20,6 +21,7 @@ export default class ImportsModel extends DataModel {
         general: new fields.NumberField({
           initial: 0,
         }),
+        bodyParts: new fields.SetField(new fields.StringField()),
       }),
     };
   }
@@ -29,7 +31,31 @@ export default class ImportsModel extends DataModel {
    * @returns {Promise<void>}
    */
   async importDeterministic() {
+    await this.importDeterministicBodyParts();
     await this.importDeterministicRanks();
+  }
+
+  /**
+   * Imports the body parts.
+   * @returns {Promise<void>}
+   */
+  async importDeterministicBodyParts() {
+    const parent = /** @type {TeriockCommon} */ this.parent;
+    /** @type {TeriockActor} */
+    const actor = parent.actor;
+    const existingBodyPartKeys = new Set(
+      actor.bodyParts.map((b) => toCamelCase(b.name)),
+    );
+    const toImport = [];
+    for (const key of this.bodyParts) {
+      if (!existingBodyPartKeys.has(key)) {
+        const name = TERIOCK.index.bodyParts[key];
+        toImport.push((await copyItem(name, "bodyParts")).toObject());
+      }
+    }
+    if (toImport.length > 0) {
+      await actor.createEmbeddedDocuments("Item", toImport);
+    }
   }
 
   /**

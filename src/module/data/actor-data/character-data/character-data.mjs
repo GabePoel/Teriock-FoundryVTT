@@ -30,6 +30,18 @@ export default class TeriockCharacterModel extends TeriockBaseActorModel {
     // Ensure default items
     const defaultItems = [
       {
+        name: "Foot",
+        pack: "bodyParts",
+      },
+      {
+        name: "Hand",
+        pack: "bodyParts",
+      },
+      {
+        name: "Mouth",
+        pack: "bodyParts",
+      },
+      {
         name: "Created Elder Sorceries",
         pack: "essentials",
       },

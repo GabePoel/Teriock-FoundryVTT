@@ -38,6 +38,20 @@ export class TeriockCreature extends TeriockActor {}
  * Equipment-specific {@link TeriockItem} class.
  *
  * Relevant wiki pages:
+ * - [Body Parts](https://wiki.teriock.com/index.php/Category:Body_parts)
+ *
+ * @property {TeriockBodyModel} system
+ * @property {TeriockBodySheet} sheet
+ * @property {"body"} type
+ * @property {Teriock.UUID<TeriockBody>} uuid
+ * @property {Teriock.ID<TeriockBody>} id
+ */
+export class TeriockBody extends TeriockItem {}
+
+/**
+ * Equipment-specific {@link TeriockItem} class.
+ *
+ * Relevant wiki pages:
  * - [Equipment](https://wiki.teriock.com/index.php/Category:Equipment)
  *
  * @property {TeriockEquipmentModel} system

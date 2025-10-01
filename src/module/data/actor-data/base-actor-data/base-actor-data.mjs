@@ -43,7 +43,14 @@ export default class TeriockBaseActorModel extends ActorRollableTakesPart(
       "fluency",
       "resource",
     ],
-    childItemTypes: ["equipment", "mechanic", "power", "rank", "species"],
+    childItemTypes: [
+      "body",
+      "equipment",
+      "mechanic",
+      "power",
+      "rank",
+      "species",
+    ],
     childMacroTypes: [],
   });
 
@@ -67,7 +74,7 @@ export default class TeriockBaseActorModel extends ActorRollableTakesPart(
       const item = /** @type {TeriockEquipment} */ this.parent.items.get(
         this.wielding.attacker,
       );
-      if (item?.system.isEquipped) {
+      if (item?.type === "body" || item?.system.isEquipped) {
         return item;
       }
     }
@@ -83,7 +90,7 @@ export default class TeriockBaseActorModel extends ActorRollableTakesPart(
       const item = /** @type {TeriockEquipment} */ this.parent.items.get(
         this.wielding.blocker,
       );
-      if (item?.system.isEquipped) {
+      if (item?.type === "body" || item?.system.isEquipped) {
         return item;
       }
     }
@@ -98,18 +105,6 @@ export default class TeriockBaseActorModel extends ActorRollableTakesPart(
 
     // Ensure default items
     const defaultItems = [
-      {
-        name: "Foot",
-        pack: "equipment",
-      },
-      {
-        name: "Hand",
-        pack: "equipment",
-      },
-      {
-        name: "Mouth",
-        pack: "equipment",
-      },
       {
         name: "Basic Abilities",
         pack: "essentials",

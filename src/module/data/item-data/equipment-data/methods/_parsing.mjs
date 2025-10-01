@@ -29,6 +29,9 @@ export async function _parse(equipmentData, rawHTML) {
   const parameters = foundry.utils
     .deepClone(referenceEquipment.system)
     .toObject();
+  delete parameters.proficient;
+  delete parameters.fluent;
+  delete parameters.flaws;
   delete parameters.consumable;
   delete parameters.notes;
   delete parameters.description;

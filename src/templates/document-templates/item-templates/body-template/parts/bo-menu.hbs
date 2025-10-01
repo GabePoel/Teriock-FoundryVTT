@@ -1,0 +1,122 @@
+<div class="ab-menu">
+  <div class="ab-menu-content">
+    <div class="ab-menu-bar">
+      <div class="tgrid g3 ab-check-grid">
+        {{formGroup
+          systemFields.proficient
+          value=system.proficient
+          disabled=(not editable)
+          classes="tgrid-item"
+          rootId=uuid
+        }}
+        {{formGroup
+          systemFields.fluent
+          value=system.fluent
+          disabled=(not editable)
+          classes="tgrid-item"
+          rootId=uuid
+        }}
+        {{formGroup
+          systemFields.disabled
+          value=system.disabled
+          disabled=(not editable)
+          classes="tgrid-item"
+          rootId=uuid
+        }}
+      </div>
+    </div>
+    <div class="ab-menu-bar">
+      <div class="tgrid g1">
+        <div class="tgrid-item">
+          <div class="ab-multi-select-label">
+            <label class="tsubtle">Fighting Style</label>
+            {{formInput
+              systemFields.fightingStyle
+              value=system.fightingStyle
+              disabled=(not editable)
+              classes="teriock-full-width"
+              rootId=uuid
+            }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ab-menu-bar">
+      <div class="tgrid g3">
+        {{#if (not (exists system.damage.base.saved))}}
+          <div class="tgrid-item">
+            <button
+              class="ab-menu-button ab-damage-button"
+              {{#if (not editable)}}
+              disabled="disabled"
+              {{/if}}
+            >
+              {{{TERIOCK.display.icons.add}}}
+              Damage
+            </button>
+          </div>
+        {{/if}}
+        {{#if (not (exists system.av.saved))}}
+          <div class="tgrid-item">
+            <button class="ab-menu-button ab-av-button"
+              {{#if (not editable)}}
+                    disabled="disabled"
+              {{/if}}
+            >
+              {{{TERIOCK.display.icons.add}}}
+              AV
+            </button>
+          </div>
+        {{/if}}
+        {{#if (not (exists system.bv.saved))}}
+          <div class="tgrid-item">
+            <button class="ab-menu-button ab-bv-button"
+              {{#if (not editable)}}
+                    disabled="disabled"
+              {{/if}}
+            >
+              {{{TERIOCK.display.icons.add}}}
+              BV
+            </button>
+          </div>
+        {{/if}}
+        {{#if (not (exists system.description))}}
+          <div class="tgrid-item">
+            <button class="ab-menu-button ab-description-button"
+              {{#if (not editable)}}
+                    disabled="disabled"
+              {{/if}}
+            >
+              {{{TERIOCK.display.icons.add}}}
+              Description
+            </button>
+          </div>
+        {{/if}}
+        {{#if (not (exists system.notes))}}
+          <div class="tgrid-item">
+            <button class="ab-menu-button ab-notes-button"
+              {{#if (not editable)}}
+                    disabled="disabled"
+              {{/if}}
+            >
+              {{{TERIOCK.display.icons.add}}}
+              Notes
+            </button>
+          </div>
+        {{/if}}
+        {{#if (not (exists system.flaws))}}
+          <div class="tgrid-item">
+            <button class="ab-menu-button ab-flaws-button"
+              {{#if (not editable)}}
+                    disabled="disabled"
+              {{/if}}
+            >
+              {{{TERIOCK.display.icons.add}}}
+              Flaws
+            </button>
+          </div>
+        {{/if}}
+      </div>
+    </div>
+  </div>
+</div>

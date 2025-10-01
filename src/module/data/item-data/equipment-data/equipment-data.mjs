@@ -1,15 +1,7 @@
-import { propertyPseudoHooks } from "../../../constants/system/pseudo-hooks.mjs";
-import { getRollIcon, mergeFreeze } from "../../../helpers/utils.mjs";
+import { mergeFreeze } from "../../../helpers/utils.mjs";
+import { ConsumableDataMixin, ExecutableDataMixin, WieldedDataMixin, WikiDataMixin } from "../../mixins/_module.mjs";
 import {
-  ConsumableDataMixin,
-  ExecutableDataMixin,
-  WikiDataMixin,
-} from "../../mixins/_module.mjs";
-import {
-  deriveModifiableDeterministic,
-  deriveModifiableIndeterministic,
-  deriveModifiableNumber,
-  prepareModifiableBase,
+  deriveModifiableDeterministic, deriveModifiableIndeterministic, deriveModifiableNumber, prepareModifiableBase
 } from "../../shared/fields/modifiable.mjs";
 import TeriockBaseItemModel from "../base-item-data/base-item-data.mjs";
 import * as attunement from "./methods/_attunement.mjs";
@@ -33,8 +25,8 @@ import * as schema from "./methods/_schema.mjs";
  * @mixes ExecutableDataMixin
  * @mixes WikiDataMixin
  */
-export default class TeriockEquipmentModel extends ConsumableDataMixin(
-  WikiDataMixin(ExecutableDataMixin(TeriockBaseItemModel)),
+export default class TeriockEquipmentModel extends WieldedDataMixin(
+  ConsumableDataMixin(WikiDataMixin(ExecutableDataMixin(TeriockBaseItemModel))),
 ) {
   /**
    * @inheritDoc
@@ -50,9 +42,13 @@ export default class TeriockEquipmentModel extends ConsumableDataMixin(
 
   /** @inheritDoc */
   static defineSchema() {
-    return foundry.utils.mergeObject(super.defineSchema(), {
-      ...schema._defineSchema(),
-    });
+    const s = super.defineSchema();
+    Object.assign(s, schema._defineSchema());
+    return s;
+    //return foundry.utils.mergeObject(
+    //  super.defineSchema(),
+    //  schema._defineSchema(),
+    //);
   }
 
   /** @inheritDoc */
@@ -143,11 +139,6 @@ export default class TeriockEquipmentModel extends ConsumableDataMixin(
     };
   }
 
-  /** @inheritDoc */
-  get useIcon() {
-    return getRollIcon(this.damage.base.value);
-  }
-
   /**
    * Attunes the equipment to the current character.
    * @returns {Promise<TeriockEffect | null>} Promise that resolves to the attunement effect or null.
@@ -229,29 +220,13 @@ export default class TeriockEquipmentModel extends ConsumableDataMixin(
   prepareBaseData() {
     super.prepareBaseData();
     prepareModifiableBase(this.weight);
-    prepareModifiableBase(this.av);
-    prepareModifiableBase(this.bv);
     prepareModifiableBase(this.minStr);
-    prepareModifiableBase(this.damage.base);
     prepareModifiableBase(this.damage.twoHanded);
     prepareModifiableBase(this.range.long);
     prepareModifiableBase(this.range.short);
-    if (this.damage.base.saved.trim() === "0") {
-      this.damage.base.raw = "";
-    }
     //if (this.damage.twoHanded.saved.trim() === "0") {
     //  this.damage.twoHanded.raw = "";
     //}
-    this.piercing = {
-      av0: false,
-      ub: false,
-    };
-    this.warded = false;
-    this.hookedMacros =
-      /** @type {Teriock.Parameters.Equipment.HookedEquipmentMacros} */ {};
-    for (const pseudoHook of Object.keys(propertyPseudoHooks)) {
-      this.hookedMacros[pseudoHook] = [];
-    }
   }
 
   /** @inheritDoc */
@@ -268,23 +243,12 @@ export default class TeriockEquipmentModel extends ConsumableDataMixin(
 
   /** @inheritDoc */
   prepareSpecialData() {
-    deriveModifiableNumber(this.av, {
-      floor: true,
-      min: 0,
-    });
-    deriveModifiableNumber(this.bv, {
-      floor: true,
-      min: 0,
-    });
+    super.prepareSpecialData();
     deriveModifiableNumber(this.minStr, { min: -3 });
     deriveModifiableDeterministic(this.tier, this.actor);
-    deriveModifiableIndeterministic(this.damage.base);
     deriveModifiableIndeterministic(this.damage.twoHanded);
     deriveModifiableDeterministic(this.range.long, this.actor);
     deriveModifiableDeterministic(this.range.short, this.actor);
-    if (this.piercing.ub) {
-      this.piercing.av0 = true;
-    }
     if (!this.hasTwoHandedAttack) {
       this.damage.twoHanded.value = this.damage.base.value;
     }

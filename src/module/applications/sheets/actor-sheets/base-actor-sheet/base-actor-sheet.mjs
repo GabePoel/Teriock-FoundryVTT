@@ -426,7 +426,10 @@ export default class TeriockBaseActorSheet extends HackStatMixin(
    */
   static async _selectAttacker() {
     const attacker = await selectDocumentDialog(
-      this.document.equipment.filter((e) => e.system.isEquipped),
+      [
+        ...this.document.equipment.filter((e) => e.system.isEquipped),
+        ...this.document.bodyParts,
+      ],
       {
         hint: "Select the default equipment you attack with.",
         label: "Select Primary Attacker",
@@ -446,7 +449,10 @@ export default class TeriockBaseActorSheet extends HackStatMixin(
    */
   static async _selectBlocker() {
     const attacker = await selectDocumentDialog(
-      this.document.equipment.filter((e) => e.system.isEquipped),
+      [
+        ...this.document.equipment.filter((e) => e.system.isEquipped),
+        ...this.document.bodyParts,
+      ],
       {
         hint: "Select the default equipment you block with.",
         label: "Select Primary Blocker",
@@ -962,6 +968,7 @@ export default class TeriockBaseActorSheet extends HackStatMixin(
     };
     this._embeds.itemTypes = {
       equipment: tab === "inventory" ? this.actor.equipment : [],
+      bodyParts: tab === "inventory" ? this.actor.bodyParts : [],
       power: tab === "powers" ? this.actor.powers : [],
       rank: tab === "classes" ? this.actor.ranks : [],
     };
@@ -1021,6 +1028,7 @@ export default class TeriockBaseActorSheet extends HackStatMixin(
     context.attunements = docSort(this.actor.attunements, {
       alphabetical: true,
     });
+    context.bodyParts = docSort(this.actor.bodyParts);
     context.ranks = docSort(this.actor.ranks);
     context.sidebarOpen = this._sidebarOpen;
     context.tabs = {

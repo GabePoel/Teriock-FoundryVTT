@@ -86,6 +86,11 @@ export default class TeriockActor extends ParentDocumentMixin(
     return this;
   }
 
+  /** @returns {TeriockBody[]} */
+  get bodyParts() {
+    return this.itemTypes?.body || [];
+  }
+
   /**
    * Gets effects that expire based on conditions.
    * @returns {TeriockConsequence[]} Array of condition expiration effects.

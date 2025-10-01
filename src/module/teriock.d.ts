@@ -78,6 +78,7 @@ declare global {
   // Compendium collections
   // ----------------------
 
+  const TeriockBodyCompendium: collections.TeriockBodyCompendium;
   const TeriockCharacterCompendium: collections.TeriockCharacterCompendium;
   const TeriockCompendiumCollection: collections.TeriockCompendiumCollection;
   const TeriockEquipmentCompendium: collections.TeriockEquipmentCompendium;

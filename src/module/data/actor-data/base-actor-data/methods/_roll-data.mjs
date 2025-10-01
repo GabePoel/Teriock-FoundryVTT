@@ -461,19 +461,19 @@ function equipmentData(actorData, data) {
  */
 function addEquipmentData(data, slot, equipment) {
   const equipmentData = equipment.system;
-  data[`${slot}.dmg`] = equipmentData.damage.base.value || "0";
-  data[`${slot}.dmg.2h`] = equipmentData.damage.twoHanded.value || "0";
-  data[`${slot}.range`] = equipmentData.range.long.value || 0;
-  data[`${slot}.range.short`] = equipmentData.range.short.value || 0;
-  data[`${slot}.weight`] = equipmentData.weight.value || 0;
-  data[`${slot}.tier`] = equipmentData.tier.value || 0;
-  data[`${slot}.av`] = equipmentData.av.value || 0;
-  data[`${slot}.bv`] = equipmentData.bv.value || 0;
-  data[`${slot}.str`] = equipmentData.minStr.value || -3;
-  data[`${slot}.shattered`] = equipmentData.shattered ? 1 : 0;
-  data[`${slot}.dampened`] = equipmentData.dampened ? 1 : 0;
-  data[`${slot}.consumable`] = equipmentData.consumable ? 1 : 0;
-  data[`${slot}.quantity`] = equipmentData.quantity || 1;
+  data[`${slot}.dmg`] = equipmentData?.damage?.base?.value || "0";
+  data[`${slot}.dmg.2h`] = equipmentData?.damage?.twoHanded?.value || "0";
+  data[`${slot}.range`] = equipmentData?.range?.long?.value || 0;
+  data[`${slot}.range.short`] = equipmentData?.range?.short?.value || 0;
+  data[`${slot}.weight`] = equipmentData?.weight?.value || 0;
+  data[`${slot}.tier`] = equipmentData?.tier?.value || 0;
+  data[`${slot}.av`] = equipmentData?.av?.value || 0;
+  data[`${slot}.bv`] = equipmentData?.bv?.value || 0;
+  data[`${slot}.str`] = equipmentData?.minStr?.value || -3;
+  data[`${slot}.shattered`] = equipmentData?.shattered ? 1 : 0;
+  data[`${slot}.dampened`] = equipmentData?.dampened ? 1 : 0;
+  data[`${slot}.consumable`] = equipmentData?.consumable ? 1 : 0;
+  data[`${slot}.quantity`] = equipmentData?.quantity || 1;
   if (equipment?.effectKeys?.property) {
     for (const p of equipment.effectKeys.property) {
       data[`${slot}.prop.${p}`] = 1;

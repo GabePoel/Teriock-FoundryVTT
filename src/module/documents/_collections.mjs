@@ -20,6 +20,13 @@ export class TeriockCompendiumCollection extends CompendiumCollection {}
 export class TeriockCharacterCompendium extends TeriockCompendiumCollection {}
 
 /**
+ * @property {(name: string, options?: { strict?: boolean }) => TeriockBody} getName
+ * @property {Collection<string,TeriockBody>} index
+ * @property {CompendiumFolderCollection}
+ */
+export class TeriockBodyCompendium extends TeriockCompendiumCollection {}
+
+/**
  * @property {(name: string, options?: { strict?: boolean }) => TeriockEquipment} getName
  * @property {Collection<string,TeriockEquipment>} index
  * @property {CompendiumFolderCollection}

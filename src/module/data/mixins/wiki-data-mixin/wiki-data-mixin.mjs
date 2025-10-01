@@ -1,8 +1,5 @@
 import { mergeFreeze } from "../../../helpers/utils.mjs";
-import {
-  fetchWikiPageHTML,
-  openWikiPage,
-} from "../../../helpers/wiki/_module.mjs";
+import { fetchWikiPageHTML, openWikiPage } from "../../../helpers/wiki/_module.mjs";
 
 /**
  * Mixin that provides wiki integration functionality for document data models.
@@ -13,7 +10,7 @@ export default (Base) => {
   return (
     /**
      * @implements {WikiDataMixinInterface}
-     * @extends ChildTypeModel
+     * @extends {ChildTypeModel}
      */
     class WikiDataMixin extends Base {
       /** @inheritDoc */

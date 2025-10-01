@@ -32,6 +32,7 @@ const SIMPLE_CATEGORIES = [
   "Damage types",
   "Drain types",
   "Equipment",
+  "Body parts",
   "Keywords",
   "Properties",
   "Tradecrafts",

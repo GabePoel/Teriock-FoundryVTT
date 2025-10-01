@@ -14,8 +14,6 @@ const { fields } = foundry.data;
  */
 export function _defineSchema() {
   return {
-    av: modifiableNumber(),
-    bv: modifiableNumber(),
     consumable: new fields.BooleanField({
       initial: false,
       label: "Consumable",
@@ -50,16 +48,6 @@ export function _defineSchema() {
       initial: true,
       label: "Equipped",
     }),
-    fightingStyle: new fields.StringField({
-      initial: null,
-      label: "Style Bonus",
-      nullable: true,
-      choices: TERIOCK.index.weaponFightingStyles,
-    }),
-    flaws: new TextField({
-      initial: "",
-      label: "Flaws",
-    }),
     glued: new fields.BooleanField({
       initial: false,
       label: "Glued",
@@ -71,10 +59,6 @@ export function _defineSchema() {
     minStr: modifiableNumber({
       min: -3,
       initial: -3,
-    }),
-    notes: new TextField({
-      initial: "",
-      label: "Notes",
     }),
     powerLevel: new fields.StringField({
       choices: TERIOCK.options.equipment.powerLevelShort,
@@ -101,13 +85,7 @@ export function _defineSchema() {
       initial: false,
       label: "Shattered",
     }),
-    spellTurning: new fields.BooleanField({
-      initial: false,
-      label: "Spell Turning",
-      nullable: false,
-    }),
     tier: modifiableFormula(),
-    virtualProperties: new fields.SetField(new fields.StringField()),
     weight: modifiableNumber(),
   };
 }

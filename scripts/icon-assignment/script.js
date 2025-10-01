@@ -31,6 +31,7 @@ const app = {
       "consumables",
       "classes",
       "abilities",
+      "body-parts",
       "archetypes",
       "conditions",
       "creatures",

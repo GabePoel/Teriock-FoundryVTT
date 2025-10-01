@@ -132,6 +132,7 @@ foundry.helpers.Hooks.once("init", function () {
     creature: data.actor.TeriockCreatureModel,
   });
   Object.assign(CONFIG.Item.dataModels, {
+    body: data.item.TeriockBodyModel,
     equipment: data.item.TeriockEquipmentModel,
     mechanic: data.item.TeriockMechanicModel,
     power: data.item.TeriockPowerModel,
@@ -184,6 +185,12 @@ foundry.helpers.Hooks.once("init", function () {
       types: ["creature"],
     },
     // Items
+    {
+      cls: applications.sheets.item.BodySheet,
+      doc: documents.TeriockItem,
+      label: "Body Part",
+      types: ["body"],
+    },
     {
       cls: applications.sheets.item.EquipmentSheet,
       doc: documents.TeriockItem,
@@ -307,6 +314,9 @@ foundry.helpers.Hooks.once("init", function () {
       abilities: () =>
         /** @type {TeriockWrapperCompendium} */
         packs.get("teriock.abilities"),
+      bodyParts: () =>
+        /** @type {TeriockBodyCompendium} */
+        packs.get("teriock.bodyParts"),
       classes: () =>
         /** @type {TeriockRankCompendium} */
         packs.get("teriock.classes"),

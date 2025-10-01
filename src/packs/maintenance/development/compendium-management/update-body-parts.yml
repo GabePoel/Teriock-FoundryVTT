@@ -1,0 +1,43 @@
+folder: EjZWrvZOxrEdrJfe
+name: Update Body Parts
+type: script
+_id: af6Mf4F89zE5GzkU
+author: teriockBuilder00
+img: systems/teriock/src/icons/documents/body.svg
+scope: global
+command: |-
+  const bodyPack = game.teriock.packs.bodyParts();
+
+  foundry.ui.notifications.info("Pulling all body parts from wiki.");
+
+  async function processBody(bodyName) {
+    let bodyItem = bodyPack.index.find((e) => e.name === bodyName);
+    if (!bodyItem) {
+      bodyItem = await game.teriock.Item.create(
+        {
+          name: bodyName,
+          type: "body",
+        },
+        { pack: "teriock.bodyParts" },
+      );
+    } else {
+      bodyItem = await foundry.utils.fromUuid(bodyItem.uuid);
+    }
+    await bodyItem.system.wikiPull({ notify: false });
+  }
+
+  const bodyPromises = Object.values(TERIOCK.index.bodyParts).map((bodyName) =>
+    processBody(bodyName),
+  );
+
+  await Promise.all(bodyPromises);
+  foundry.ui.notifications.success("Done.");
+ownership:
+  default: 0
+flags: {}
+_stats:
+  coreVersion: '13'
+  systemId: teriock
+  systemVersion: 0.9.1
+  lastModifiedBy: teriockBuilder00
+_key: '!macros!af6Mf4F89zE5GzkU'

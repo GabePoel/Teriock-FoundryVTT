@@ -1,6 +1,7 @@
 export const documentTypes = {
   items: {
     base: "Items",
+    body: "Body",
     equipment: "Equipment",
     rank: "Ranks",
     power: "Powers",
