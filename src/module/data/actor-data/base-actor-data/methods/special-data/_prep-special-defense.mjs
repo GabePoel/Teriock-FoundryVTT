@@ -3,7 +3,7 @@
  * @param {TeriockBaseActorModel} actorData
  * @private
  */
-export function _prepDerivedDefense(actorData) {
+export function _prepSpecialDefense(actorData) {
   const armor = actorData.parent.equipment.filter(
     (e) => e.system.isEquipped && e.system.equipmentClasses.has("armor"),
   );

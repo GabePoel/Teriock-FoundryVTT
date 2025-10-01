@@ -7,7 +7,7 @@ import {
 /**
  * Prepares attribute saves and movement-related derived data.
  * Calculates save bonuses based on proficiency and fluency, movement speed, and carrying capacity.
- * @param {TeriockBaseActorModel} actorData - The actor's base data system object.
+ * @param {TeriockBaseActorData} actorData - The actor's base data system object.
  * @returns {void} Modifies the system object in place.
  * @private
  */
@@ -57,7 +57,7 @@ export function _prepDerivedAttributes(actorData) {
 /**
  * Prepares presence-related derived data.
  * Calculates presence overflow, maximum presence, and used/unused presence points.
- * @param {TeriockBaseActorModel} actorData - The actor's base data system object.
+ * @param {TeriockBaseActorData} actorData - The actor's base data system object.
  * @returns {void} Modifies the system object in place.
  * @private
  */

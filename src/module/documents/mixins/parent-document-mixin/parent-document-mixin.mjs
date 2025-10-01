@@ -165,10 +165,10 @@ export default (Base) => {
 
       /** @inheritDoc */
       prepareSpecialData() {
-        super.prepareSpecialData();
         this.effects.forEach((e) => {
           e.prepareSpecialData();
         });
+        super.prepareSpecialData();
       }
     }
   );

@@ -85,7 +85,7 @@ export function deriveModifiableDeterministic(field, doc, options = {}) {
   if (typeof options.blank === "number" && !field.raw) {
     rawValue = options.blank;
   } else {
-    rawValue = evaluateSync(field.raw, doc?.actor?.getRollData());
+    rawValue = evaluateSync(field.raw, doc?.actor?.getRollData() || {});
   }
   rawValue = clamp(rawValue, options);
   field.value = rawValue;

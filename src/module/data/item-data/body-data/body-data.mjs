@@ -1,6 +1,10 @@
 import { TeriockRoll } from "../../../dice/_module.mjs";
 import { mergeFreeze } from "../../../helpers/utils.mjs";
-import { ExecutableDataMixin, WieldedDataMixin, WikiDataMixin } from "../../mixins/_module.mjs";
+import {
+  ExecutableDataMixin,
+  WieldedDataMixin,
+  WikiDataMixin,
+} from "../../mixins/_module.mjs";
 import TeriockBaseItemModel from "../base-item-data/base-item-data.mjs";
 import { _messageParts } from "./methods/_messages.mjs";
 import { _parse } from "./methods/_parsing.mjs";
@@ -46,8 +50,7 @@ export default class TeriockBodyModel extends WieldedDataMixin(
   }
 
   /** @inheritDoc */
-  prepareDerivedData() {
-    super.prepareDerivedData();
+  prepareSpecialData() {
     for (const damageOption of ["base"]) {
       const key = `damage.${damageOption}.raw`;
       const damageRoll = new TeriockRoll(foundry.utils.getProperty(this, key));
@@ -68,6 +71,7 @@ export default class TeriockBodyModel extends WieldedDataMixin(
       });
       foundry.utils.setProperty(this, key, damageRoll.formula);
     }
+    super.prepareSpecialData();
   }
 
   /** @inheritDoc */

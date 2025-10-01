@@ -7,6 +7,7 @@ import { _getRollData } from "./methods/_roll-data.mjs";
 import { _baseData } from "./methods/base-data/_base-data.mjs";
 import { _prepareDerivedData } from "./methods/derived-data/_derived-data.mjs";
 import { _defineSchema } from "./methods/schema/_schema.mjs";
+import { _prepareSpecialData } from "./methods/special-data/_special-data.mjs";
 import ActorGenericRollsPart from "./parts/actor-generic-rolls-part.mjs";
 import ActorHacksPart from "./parts/actor-hacks-part.mjs";
 import ActorOneOffsPart from "./parts/actor-one-offs-part.mjs";
@@ -151,11 +152,19 @@ export default class TeriockBaseActorModel extends ActorRollableTakesPart(
 
   /** @inheritDoc */
   prepareBaseData() {
+    super.prepareBaseData();
     _baseData(this);
   }
 
   /** @inheritDoc */
   prepareDerivedData() {
+    super.prepareDerivedData();
     _prepareDerivedData(this);
+  }
+
+  /** @inheritDoc */
+  prepareSpecialData() {
+    super.prepareSpecialData();
+    _prepareSpecialData(this);
   }
 }

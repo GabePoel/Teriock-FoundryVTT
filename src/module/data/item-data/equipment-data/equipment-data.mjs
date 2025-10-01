@@ -1,7 +1,15 @@
 import { mergeFreeze } from "../../../helpers/utils.mjs";
-import { ConsumableDataMixin, ExecutableDataMixin, WieldedDataMixin, WikiDataMixin } from "../../mixins/_module.mjs";
 import {
-  deriveModifiableDeterministic, deriveModifiableIndeterministic, deriveModifiableNumber, prepareModifiableBase
+  ConsumableDataMixin,
+  ExecutableDataMixin,
+  WieldedDataMixin,
+  WikiDataMixin,
+} from "../../mixins/_module.mjs";
+import {
+  deriveModifiableDeterministic,
+  deriveModifiableIndeterministic,
+  deriveModifiableNumber,
+  prepareModifiableBase,
 } from "../../shared/fields/modifiable.mjs";
 import TeriockBaseItemModel from "../base-item-data/base-item-data.mjs";
 import * as attunement from "./methods/_attunement.mjs";
@@ -224,20 +232,12 @@ export default class TeriockEquipmentModel extends WieldedDataMixin(
     prepareModifiableBase(this.damage.twoHanded);
     prepareModifiableBase(this.range.long);
     prepareModifiableBase(this.range.short);
-    //if (this.damage.twoHanded.saved.trim() === "0") {
-    //  this.damage.twoHanded.raw = "";
-    //}
   }
 
   /** @inheritDoc */
   prepareDerivedData() {
     super.prepareDerivedData();
     prepareModifiableBase(this.tier);
-    deriveModifiableNumber(this.weight, { min: 0 });
-    this.weight.total = this.weight.value;
-    if (this.consumable) {
-      this.weight.total = this.weight.value * this.quantity;
-    }
     deriving._prepareDerivedData(this);
   }
 
@@ -249,6 +249,11 @@ export default class TeriockEquipmentModel extends WieldedDataMixin(
     deriveModifiableIndeterministic(this.damage.twoHanded);
     deriveModifiableDeterministic(this.range.long, this.actor);
     deriveModifiableDeterministic(this.range.short, this.actor);
+    deriveModifiableNumber(this.weight, { min: 0 });
+    this.weight.total = this.weight.value;
+    if (this.consumable) {
+      this.weight.total = this.weight.value * this.quantity;
+    }
     if (!this.hasTwoHandedAttack) {
       this.damage.twoHanded.value = this.damage.base.value;
     }

@@ -1,5 +1,8 @@
 import { mergeFreeze } from "../../../helpers/utils.mjs";
-import { fetchWikiPageHTML, openWikiPage } from "../../../helpers/wiki/_module.mjs";
+import {
+  fetchWikiPageHTML,
+  openWikiPage,
+} from "../../../helpers/wiki/_module.mjs";
 
 /**
  * Mixin that provides wiki integration functionality for document data models.

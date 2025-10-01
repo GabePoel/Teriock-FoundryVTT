@@ -1,11 +1,6 @@
 import { _prepDerivedAttributes } from "./_prep-derived-attributes.mjs";
-import { _prepDerivedDefense } from "./_prep-derived-defense.mjs";
 import { _prepDerivedHpMp } from "./_prep-derived-hp-mp.mjs";
-import {
-  _prepDerivedEncumbrance,
-  _prepDerivedMoney,
-  _prepDerivedWeightCarried,
-} from "./_prep-derived-load.mjs";
+import { _prepDerivedMoney } from "./_prep-derived-load.mjs";
 import { _prepDerivedSpeed } from "./_prep-derived-speed.mjs";
 import { _prepDerivedTrackers } from "./_prep-derived-trackers.mjs";
 import { _prepDerivedTradecrafts } from "./_prep-derived-tradecrafts.mjs";
@@ -26,15 +21,12 @@ import { _prepDerivedTradecrafts } from "./_prep-derived-tradecrafts.mjs";
  * - Speed adjustments
  *
  * @param {TeriockBaseActorModel} actorData - The actor's base data system object
- * @returns {void} Modifies the system object in place with derived data
+ * @private
  */
 export function _prepareDerivedData(actorData) {
   _prepDerivedAttributes(actorData);
   _prepDerivedTradecrafts(actorData);
   _prepDerivedMoney(actorData);
-  _prepDerivedWeightCarried(actorData);
-  _prepDerivedDefense(actorData);
-  _prepDerivedEncumbrance(actorData);
   _prepDerivedSpeed(actorData);
   _prepDerivedHpMp(actorData);
   _prepDerivedTrackers(actorData);

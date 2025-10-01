@@ -472,10 +472,10 @@ export default class TeriockActor extends ParentDocumentMixin(
     this.specialEffects = /** @type {TeriockEffect[]} */ Array.from(
       this.allSpecialEffects(),
     );
-    super.prepareSpecialData();
     this.items.forEach((i) => {
       i.prepareSpecialData();
     });
+    super.prepareSpecialData();
   }
 
   /**
