@@ -22,29 +22,11 @@ effects:
           checks: []
           duration: 0
           changes:
-            - key: >-
-                !equipment__system.equipmentType__eq__Hand__system.damage.base.raw
-              mode: 5
-              value: 1d8
-              priority: 20
-            - key: '!equipment__system.equipmentType__eq__Hand__system.piercing.av0'
+            - key: '!ability__name__eq__Martial Arts__system.fluent'
               mode: 5
               value: 'true'
               priority: 10
-            - key: '!equipment__system.equipmentType__eq__Foot__system.piercing.av0'
-              mode: 5
-              value: 'true'
-              priority: 10
-            - key: >-
-                !equipment__system.equipmentType__eq__Foot__system.damage.base.raw
-              mode: 5
-              value: 1d8
-              priority: 20
-            - key: '!ability__name__eq__Hand__system.fluent'
-              mode: 5
-              value: 'true'
-              priority: 10
-            - key: '!ability__name__eq__Foot__system.fluent'
+            - key: '!ability__name__eq__Hind Claws__system.fluent'
               mode: 5
               value: 'true'
               priority: 10
@@ -325,9 +307,8 @@ effects:
           checks: []
           duration: 0
           changes:
-            - key: >-
-                !equipment__system.equipmentType__eq__Hand__system.damage.base.raw
-              mode: 5
+            - key: '!body__effectKeys.property__has__handy__system.damage.base.raw'
+              mode: 4
               value: 1d4
               priority: 10
           common: []
@@ -368,11 +349,10 @@ effects:
           checks: []
           duration: 0
           changes:
-            - key: >-
-                !equipment__system.equipmentType__eq__Hand__system.damage.base.raw
-              mode: 5
+            - key: '!body__effectKeys.property__has__handy__system.damage.base.raw'
+              mode: 4
               value: 1d6
-              priority: 15
+              priority: 10
           common: []
           expiration:
             normal:
@@ -411,11 +391,10 @@ effects:
           checks: []
           duration: 0
           changes:
-            - key: >-
-                !equipment__system.equipmentType__eq__Hand__system.damage.base.raw
-              mode: 5
+            - key: '!body__effectKeys.property__has__handy__system.damage.base.raw'
+              mode: 4
               value: 1d8
-              priority: 20
+              priority: 10
           common: []
           expiration:
             normal:
@@ -509,9 +488,11 @@ effects:
       range: Self.
       overview:
         base: >-
-          Your @L[Equipment:Hand]{hands} count as @L[Category:Weapons]{weapons}
-          for the purposes of abilities that target or are delivered by
-          (although they cannot be @L[Property:Shattered]{shattered} or
+          Your @L[Body:Hand]{hands} and other @L[Category:Handy equipment]{handy
+          items} count as @L[Category:Weapons]{weapons} for the purposes of
+          @L[Category:Weapon target abilities]{abilities that target} or are
+          @L[Category:Weapon delivery abilities]{delivered by} them (although
+          they cannot be @L[Property:Shattered]{shattered} or
           @L[Property:Destroyed]{destroyed}). You may @L[Core:Attack
           Interaction]{attack} with them and their damage die is now [[/damage
           1d4]].

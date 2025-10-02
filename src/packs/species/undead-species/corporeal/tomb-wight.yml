@@ -53,6 +53,11 @@ system:
   sizeStepMp: null
   traits:
     - undead
+  imports:
+    bodyParts:
+      - Compendium.teriock.bodyParts.Item.VVrRvIh7oNQ1BqBR
+      - Compendium.teriock.bodyParts.Item.XGoAHfPERlTuLn0V
+      - Compendium.teriock.bodyParts.Item.Ys3C2zN9c2rU1wHq
 effects:
   - name: Entombed Durability
     type: ability
@@ -4058,9 +4063,8 @@ effects:
           checks: []
           duration: 0
           changes:
-            - key: >-
-                !equipment__system.equipmentType__eq__Hand__system.damage.base.raw
-              mode: 5
+            - key: '!body__effectKeys.property__has__handy__system.damage.base.raw'
+              mode: 4
               value: 1d4
               priority: 10
           common: []
@@ -4101,11 +4105,10 @@ effects:
           checks: []
           duration: 0
           changes:
-            - key: >-
-                !equipment__system.equipmentType__eq__Hand__system.damage.base.raw
-              mode: 5
+            - key: '!body__effectKeys.property__has__handy__system.damage.base.raw'
+              mode: 4
               value: 1d6
-              priority: 15
+              priority: 10
           common: []
           expiration:
             normal:
@@ -4144,11 +4147,10 @@ effects:
           checks: []
           duration: 0
           changes:
-            - key: >-
-                !equipment__system.equipmentType__eq__Hand__system.damage.base.raw
-              mode: 5
+            - key: '!body__effectKeys.property__has__handy__system.damage.base.raw'
+              mode: 4
               value: 1d8
-              priority: 20
+              priority: 10
           common: []
           expiration:
             normal:
@@ -4285,9 +4287,11 @@ effects:
       maneuver: passive
       overview:
         base: >-
-          Your @L[Equipment:Hand]{hands} count as @L[Category:Weapons]{weapons}
-          for the purposes of abilities that target or are delivered by
-          (although they cannot be @L[Property:Shattered]{shattered} or
+          Your @L[Body:Hand]{hands} and other @L[Category:Handy equipment]{handy
+          items} count as @L[Category:Weapons]{weapons} for the purposes of
+          @L[Category:Weapon target abilities]{abilities that target} or are
+          @L[Category:Weapon delivery abilities]{delivered by} them (although
+          they cannot be @L[Property:Shattered]{shattered} or
           @L[Property:Destroyed]{destroyed}). You may @L[Core:Attack
           Interaction]{attack} with them and their damage die is now [[/damage
           1d4]].
@@ -4357,7 +4361,11 @@ effects:
           hacks: []
           checks: []
           duration: 0
-          changes: []
+          changes:
+            - key: '!body__effectKeys.property__has__handy__system.bv.raw'
+              mode: 4
+              value: '1'
+              priority: 10
           common: []
           expiration:
             normal:
@@ -4394,7 +4402,11 @@ effects:
           hacks: []
           checks: []
           duration: 0
-          changes: []
+          changes:
+            - key: '!body__effectKeys.property__has__handy__system.bv.raw'
+              mode: 4
+              value: '2'
+              priority: 10
           common: []
           expiration:
             normal:
@@ -4431,7 +4443,11 @@ effects:
           hacks: []
           checks: []
           duration: 0
-          changes: []
+          changes:
+            - key: '!body__effectKeys.property__has__handy__system.bv.raw'
+              mode: 4
+              value: '3'
+              priority: 10
           common: []
           expiration:
             normal:
@@ -4568,15 +4584,16 @@ effects:
       maneuver: passive
       overview:
         base: >-
-          Your @L[Equipment:Hand]{hands} count as @L[Category:Shields]{shields}
-          for the purposes of abilities that target them (although they cannot
-          be @L[Property:Shattered]{shattered} or
+          Your @L[Body:Hand]{hands} and other @L[Category:Handy equipment]{handy
+          body parts} count as @L[Category:Shields]{shields} for the purposes of
+          @L[Category:Weapon target abilities]{abilities that target them}
+          (although they cannot be @L[Property:Shattered]{shattered} or
           @L[Property:Destroyed]{destroyed}). You may @L[Core:Block
           Interaction]{block} with them and their @L[Core:Block Value]{BV} is
           +1.<div class="note"><b>Note:</b> This does not make your hands
           @L[Property:Blocking]{blocking}.</div>
-        proficient: ''
-        fluent: ''
+        proficient: The @L[Core:Block Interaction]{BV} is now +2.
+        fluent: The @L[Core:Block Interaction]{BV} is now +3.
       piercing: normal
       powerSources:
         - martial

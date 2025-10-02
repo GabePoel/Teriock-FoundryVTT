@@ -42,8 +42,12 @@ allSpecies.forEach(async (speciesEntry) => {
   } else {
     creature = await foundry.utils.fromUuid(creatureEntry.uuid);
   }
-  await creature.delete();
+  //await creature.delete();
   let existingSpecies = creature.species.find((s) => s.name === species.name);
+  if (existingSpecies) {
+    await existingSpecies.delete();
+    existingSpecies = undefined;
+  }
   if (!existingSpecies) {
     existingSpecies = /** @type {TeriockSpecies} */ (
       await creature.createEmbeddedDocuments("Item", [species.toObject()])
@@ -55,11 +59,10 @@ allSpecies.forEach(async (speciesEntry) => {
     );
     //await existingSpecies.update(species.toObject());
   }
-  await creature.deleteEmbeddedDocuments(
-    "Item",
-    creature.ranks.map((r) => r.id),
-  );
-  console.log(existingSpecies.toObject());
+  await creature.deleteEmbeddedDocuments("Item", [
+    ...creature.ranks.map((r) => r.id),
+    ...creature.equipment.map((e) => e.id),
+  ]);
   await existingSpecies.system.imports.importDeterministic();
   await creature.update({
     folder: creatureFolder.id,

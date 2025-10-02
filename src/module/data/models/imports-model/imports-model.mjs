@@ -1,4 +1,4 @@
-import { copyItem, copyRank } from "../../../helpers/fetch.mjs";
+import { copyRank } from "../../../helpers/fetch.mjs";
 import { toCamelCase } from "../../../helpers/string.mjs";
 
 const { fields } = foundry.data;
@@ -21,8 +21,17 @@ export default class ImportsModel extends DataModel {
         general: new fields.NumberField({
           initial: 0,
         }),
-        bodyParts: new fields.SetField(new fields.StringField()),
       }),
+      bodyParts: new fields.SetField(
+        new fields.DocumentUUIDField({
+          type: "Item",
+        }),
+      ),
+      equipment: new fields.SetField(
+        new fields.DocumentUUIDField({
+          type: "Item",
+        }),
+      ),
     };
   }
 
@@ -32,6 +41,7 @@ export default class ImportsModel extends DataModel {
    */
   async importDeterministic() {
     await this.importDeterministicBodyParts();
+    await this.importDeterministicEquipment();
     await this.importDeterministicRanks();
   }
 
@@ -43,18 +53,55 @@ export default class ImportsModel extends DataModel {
     const parent = /** @type {TeriockCommon} */ this.parent;
     /** @type {TeriockActor} */
     const actor = parent.actor;
+    const toImport = [];
     const existingBodyPartKeys = new Set(
       actor.bodyParts.map((b) => toCamelCase(b.name)),
     );
-    const toImport = [];
-    for (const key of this.bodyParts) {
+    const possibleBodyParts = /** @type {TeriockBody[]} */ await Promise.all(
+      Array.from(this.bodyParts).map((b) => foundry.utils.fromUuid(b)),
+    );
+    for (const b of possibleBodyParts) {
+      const key = toCamelCase(b.name);
       if (!existingBodyPartKeys.has(key)) {
-        const name = TERIOCK.index.bodyParts[key];
-        toImport.push((await copyItem(name, "bodyParts")).toObject());
+        toImport.push(b.toObject());
       }
     }
     if (toImport.length > 0) {
       await actor.createEmbeddedDocuments("Item", toImport);
+    }
+  }
+
+  /**
+   * Imports the equipment.
+   * @returns {Promise<void>}
+   */
+  async importDeterministicEquipment() {
+    const parent = /** @type {TeriockCommon} */ this.parent;
+    /** @type {TeriockActor} */
+    const actor = parent.actor;
+    const toImport = [];
+    const existingEquipmentKeys = new Set(
+      actor.bodyParts.map((e) => toCamelCase(e.name)),
+    );
+    const possibleEquipment =
+      /** @type {TeriockEquipment[]} */ await Promise.all(
+        Array.from(this.equipment).map((e) => foundry.utils.fromUuid(e)),
+      );
+    for (const e of possibleEquipment) {
+      const key = toCamelCase(e.name);
+      if (!existingEquipmentKeys.has(key)) {
+        toImport.push(e.toObject());
+      }
+    }
+    if (toImport.length > 0) {
+      const equipment =
+        /** @type {TeriockEquipment[]} */ await actor.createEmbeddedDocuments(
+          "Item",
+          toImport,
+        );
+      for (const e of equipment) {
+        await e.system.equip();
+      }
     }
   }
 

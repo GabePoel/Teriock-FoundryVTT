@@ -754,8 +754,11 @@ export default class TeriockBaseActorSheet extends HackStatMixin(
    */
   async _onDropItem(event, data) {
     const item = await super._onDropItem(event, data);
-    if (item?.type === "species" && item?.system?.size?.enabled) {
-      await changeSizeDialog(this.actor, item);
+    if (item?.type === "species") {
+      await item?.system?.imports.importDeterministic();
+      if (item?.system?.size?.enabled) {
+        await changeSizeDialog(this.actor, item);
+      }
     }
   }
 

@@ -1,7 +1,4 @@
-import {
-  createAbility,
-  createProperty,
-} from "../../../helpers/create-effects.mjs";
+import { createAbility, createProperty } from "../../../helpers/create-effects.mjs";
 
 /**
  * Generic function to process sub effects from the document.
@@ -43,7 +40,7 @@ async function processSubEffects(subs, doc, config) {
       subNameEl?.dataset.namespace === skipNamespace ||
       subNameEl?.dataset.namespace !== includeNamespace
     ) {
-      return;
+      break;
     }
 
     const subName = subNameEl.getAttribute("data-name");

@@ -1,10 +1,7 @@
 import { TeriockRoll } from "../../../../dice/_module.mjs";
 import { getIcon } from "../../../../helpers/path.mjs";
 import { toCamelCase } from "../../../../helpers/string.mjs";
-import {
-  cleanHTMLDoc,
-  cleanObject,
-} from "../../../shared/parsing/clean-html-doc.mjs";
+import { cleanHTMLDoc, cleanObject } from "../../../shared/parsing/clean-html-doc.mjs";
 import { getBarText, getText } from "../../../shared/parsing/get-text.mjs";
 import { processSubAbilities } from "../../../shared/parsing/process-subs.mjs";
 import { buildTagTree } from "../../../shared/parsing/tag-tree.mjs";
@@ -24,6 +21,23 @@ export async function _parse(speciesData, rawHTML) {
   doc
     .querySelectorAll(".ability-bar-familiar-abilities")
     .forEach((el) => el.remove());
+
+  const importedBodyPartNames = [];
+  const importedEquipmentNames = [];
+
+  doc
+    .querySelectorAll(".expandable-container[data-namespace='Body']")
+    .forEach(
+      /** @param {HTMLDivElement} e */ (e) =>
+        importedBodyPartNames.push(e.dataset.name),
+    );
+
+  doc
+    .querySelectorAll(".expandable-container[data-namespace='Equipment']")
+    .forEach(
+      /** @param {HTMLDivElement} e */ (e) =>
+        importedEquipmentNames.push(e.dataset.name),
+    );
 
   const subs = Array.from(doc.querySelectorAll(".expandable-container")).filter(
     (el) => !el.closest(".expandable-container:not(:scope)"),
@@ -53,12 +67,22 @@ export async function _parse(speciesData, rawHTML) {
       },
     );
 
+  const bodyPartsPack = game.teriock.packs.bodyParts();
+  const equipmentPack = game.teriock.packs.equipment();
+  const importedBodyPartUUIDs = importedBodyPartNames
+    .map((n) => bodyPartsPack.index.getName(n)?.uuid)
+    .filter((b) => b);
+  const importedEquipmentUUIDs = importedEquipmentNames
+    .map((n) => equipmentPack.index.getName(n)?.uuid)
+    .filter((e) => e);
   parameters.imports = {
     ranks: {
       classes: {},
       archetypes: {},
       general: 0,
     },
+    bodyParts: importedBodyPartUUIDs,
+    equipment: importedEquipmentUUIDs,
   };
   doc.querySelectorAll("span.metadata[data-type='import']").forEach(
     /** @param {HTMLSpanElement} el */ (el) => {

@@ -11,9 +11,12 @@ export default defineConfig([
     languageOptions: {
       globals: {
         ...globals.browser,
+        Actor: "readonly",
         CONFIG: "readonly",
+        Folder: "readonly",
         Handlebars: "readonly",
         Hooks: "readonly",
+        Item: "readonly",
         PIXI: "readonly",
         TERIOCK: "readonly",
         actor: "readonly",

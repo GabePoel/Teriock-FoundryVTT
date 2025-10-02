@@ -27,7 +27,11 @@ export function _messageParts(bodyData) {
     {
       icon: "fa-flag",
       label: "Equipment Classes",
-      wrappers: ["Body parts", bodyData.spellTurning ? "Spell Turning" : ""],
+      wrappers: [
+        "Body parts",
+        bodyData.av.value ? "Armor" : "",
+        bodyData.spellTurning ? "Spell Turning" : "",
+      ],
     },
   ];
   const blocks = [

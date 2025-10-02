@@ -38,11 +38,13 @@ export default class FormulaField extends StringField {
     if (!value) {
       return delta;
     }
-    const terms = new TeriockRoll(value, {}).terms;
-    if (terms.length === 1 && terms[0]?.fn === "min") {
-      return value.replace(/\)$/, `, ${delta})`);
+    const valueTotal = TeriockRoll.maxValue(value);
+    const deltaTotal = TeriockRoll.maxValue(delta);
+    if (deltaTotal < valueTotal) {
+      return delta;
+    } else {
+      return value;
     }
-    return `min(${value}, ${delta})`;
   }
 
   /** @inheritDoc */
@@ -62,11 +64,13 @@ export default class FormulaField extends StringField {
     if (!value) {
       return delta;
     }
-    const terms = new TeriockRoll(value, {}).terms;
-    if (terms.length === 1 && terms[0]?.fn === "max") {
-      return value.replace(/\)$/, `, ${delta})`);
+    const valueTotal = TeriockRoll.maxValue(value);
+    const deltaTotal = TeriockRoll.maxValue(delta);
+    if (deltaTotal > valueTotal) {
+      return delta;
+    } else {
+      return value;
     }
-    return `max(${value}, ${delta})`;
   }
 
   /** @inheritDoc */
