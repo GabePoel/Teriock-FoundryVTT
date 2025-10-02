@@ -1,7 +1,10 @@
 import { TeriockRoll } from "../../../../dice/_module.mjs";
 import { getIcon } from "../../../../helpers/path.mjs";
 import { toCamelCase } from "../../../../helpers/string.mjs";
-import { cleanHTMLDoc, cleanObject } from "../../../shared/parsing/clean-html-doc.mjs";
+import {
+  cleanHTMLDoc,
+  cleanObject,
+} from "../../../shared/parsing/clean-html-doc.mjs";
 import { getBarText, getText } from "../../../shared/parsing/get-text.mjs";
 import { processSubAbilities } from "../../../shared/parsing/process-subs.mjs";
 import { buildTagTree } from "../../../shared/parsing/tag-tree.mjs";

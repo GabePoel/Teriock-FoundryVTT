@@ -38,8 +38,8 @@ export default class FormulaField extends StringField {
     if (!value) {
       return delta;
     }
-    const valueTotal = TeriockRoll.maxValue(value);
-    const deltaTotal = TeriockRoll.maxValue(delta);
+    const valueTotal = TeriockRoll.meanValue(value);
+    const deltaTotal = TeriockRoll.meanValue(delta);
     if (deltaTotal < valueTotal) {
       return delta;
     } else {
@@ -64,8 +64,8 @@ export default class FormulaField extends StringField {
     if (!value) {
       return delta;
     }
-    const valueTotal = TeriockRoll.maxValue(value);
-    const deltaTotal = TeriockRoll.maxValue(delta);
+    const valueTotal = TeriockRoll.meanValue(value);
+    const deltaTotal = TeriockRoll.meanValue(delta);
     if (deltaTotal > valueTotal) {
       return delta;
     } else {

@@ -1,4 +1,7 @@
-import { createAbility, createProperty } from "../../../helpers/create-effects.mjs";
+import {
+  createAbility,
+  createProperty,
+} from "../../../helpers/create-effects.mjs";
 
 /**
  * Generic function to process sub effects from the document.
