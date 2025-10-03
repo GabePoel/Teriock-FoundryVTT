@@ -1,0 +1,83 @@
+// Compendium background/icon/header map
+$compendiums: (
+  abilities: (
+    bg: "../src/icons/abilities/necromancy-elder-sorcery.webp",
+    icon: "\e05d",
+    name: "Abilities",
+  ),
+  bodyParts: (
+    bg: "../src/icons/body-parts/tentacle.webp",
+    icon: "\f782",
+    name: "Body Parts",
+  ),
+  classes: (
+    bg: "../src/icons/classes/thief.webp",
+    icon: "\e5d2",
+    name: "Classes",
+  ),
+  creatures: (
+    bg: "../src/icons/creatures/tomb-wight.webp",
+    icon: "\e688",
+    name: "Creatures",
+  ),
+  equipment: (
+    bg: "../src/icons/equipment/net.webp",
+    icon: "\f723",
+    name: "Equipment",
+  ),
+  magicItems: (
+    bg: "../src/icons/consumables/illusion-vial.webp",
+    icon: "\f6e1",
+    name: "Magic Items",
+  ),
+  powers: (
+    bg: "../src/icons/abilities/divine-gift.webp",
+    icon: "\e54d",
+    name: "Powers",
+  ),
+  properties: (
+    bg: "../src/icons/properties/legendary.webp",
+    icon: "\f5d3",
+    name: "Properties",
+  ),
+  species: (
+    bg: "../src/icons/creatures/cobben.webp",
+    icon: "\f8de",
+    name: "Species",
+  ),
+);
+
+// Compendium header banners
+.header-banner {
+  @each $key, $data in $compendiums {
+    $bg: map-get($data, bg);
+    $icon: map-get($data, icon);
+    $name: map-get($data, name);
+
+    img[alt="#{$name}"] {
+      content: url(#{$bg});
+
+      + .compendium-name i::before {
+        content: $icon;
+      }
+    }
+  }
+}
+
+// Compendium sidebar entries
+.directory-item.entry.compendium {
+  @each $key, $data in $compendiums {
+    $bg: map-get($data, bg);
+    $icon: map-get($data, icon);
+
+    &[data-pack="teriock.#{$key}"] {
+      img {
+        content: url(#{$bg});
+      }
+
+      .entry-name i::before {
+        content: $icon;
+      }
+    }
+  }
+}

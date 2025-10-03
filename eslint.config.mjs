@@ -4,6 +4,80 @@ import globals from "globals";
 //noinspection SpellCheckingInspection
 import tseslint from "typescript-eslint";
 
+const globalDocuments = {
+  ActiveEffect: "readonly",
+  Actor: "readonly",
+  ActorDelta: "readonly",
+  Adventure: "readonly",
+  AmbientLightDocument: "readonly",
+  AmbientSoundDocument: "readonly",
+  Card: "readonly",
+  Cards: "readonly",
+  ChatMessage: "readonly",
+  Combat: "readonly",
+  Combatant: "readonly",
+  CombatantGroup: "readonly",
+  DrawingDocument: "readonly",
+  FogExploration: "readonly",
+  Folder: "readonly",
+  Item: "readonly",
+  JournalEntry: "readonly",
+  JournalEntryCategory: "readonly",
+  JournalEntryPage: "readonly",
+  Macro: "readonly",
+  MeasuredTemplateDocument: "readonly",
+  NoteDocument: "readonly",
+  Playlist: "readonly",
+  PlaylistSound: "readonly",
+  RegionBehavior: "readonly",
+  RegionDocument: "readonly",
+  RollTable: "readonly",
+  Scene: "readonly",
+  Setting: "readonly",
+  TableResult: "readonly",
+  TileDocument: "readonly",
+  TokenDocument: "readonly",
+  User: "readonly",
+  WallDocument: "readonly",
+};
+
+const globalHelpers = {
+  Color: "readonly",
+  Collection: "readonly",
+  fromUuid: "readonly",
+  fromUuidSync: "readonly",
+  getDocumentClass: "readonly",
+  Hooks: "readonly",
+  ProseMirror: "readonly",
+  Roll: "readonly",
+  TextEditor: "readonly",
+};
+
+const globalClient = {
+  CONFIG: "writable",
+  CONST: "writable",
+  Handlebars: "readonly",
+  PIXI: "readonly",
+  ProseMirror: "readonly",
+  foundry: "readonly",
+  getDocumentClass: "readonly",
+  io: "readonly",
+  ui: "readonly",
+  canvas: "readonly",
+  game: "readonly",
+};
+
+const globalMacro = {
+  actor: "readonly",
+  scope: "readonly",
+};
+
+const globalTeriock = {
+  TERIOCK: "readonly",
+  teriock: "readonly",
+  tm: "readonly",
+};
+
 export default defineConfig([
   {
     extends: ["js/recommended"],
@@ -11,20 +85,10 @@ export default defineConfig([
     languageOptions: {
       globals: {
         ...globals.browser,
-        Actor: "readonly",
-        CONFIG: "readonly",
-        Folder: "readonly",
-        Handlebars: "readonly",
-        Hooks: "readonly",
-        Item: "readonly",
-        PIXI: "readonly",
-        TERIOCK: "readonly",
-        actor: "readonly",
-        foundry: "readonly",
-        game: "readonly",
-        scope: "readonly",
-        teriock: "readonly",
-        tm: "readonly",
+        ...globalDocuments,
+        ...globalHelpers,
+        ...globalClient,
+        ...globalTeriock,
       },
     },
     plugins: { js },
@@ -44,6 +108,14 @@ export default defineConfig([
           varsIgnorePattern: "^_",
         },
       ],
+    },
+  },
+  {
+    files: ["src/macros/**/*.{js,mjs}"],
+    languageOptions: {
+      globals: {
+        ...globalMacro,
+      },
     },
   },
   tseslint.configs.recommended,

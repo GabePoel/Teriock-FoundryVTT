@@ -8,7 +8,7 @@ export default class TeriockBodySheet extends TeriockBaseItemSheet {
   static DEFAULT_OPTIONS = {
     classes: ["body"],
     window: {
-      icon: `fa-solid fa-hand`,
+      icon: `fa-solid fa-boot`,
     },
   };
 

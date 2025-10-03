@@ -3,6 +3,10 @@ export const documentOptions = {
     name: "Ability",
     icon: "hand-sparkles",
   },
+  body: {
+    name: "Body Part",
+    icon: "boot",
+  },
   character: {
     name: "Character",
     icon: "user",
