@@ -3,6 +3,30 @@ const bodyMap = {
     "damage.base.saved": "1d4",
     "damage.types": ["toxic"],
   },
+  Vine: {
+    "damage.base.saved": "1",
+    "damage.types": ["vine"],
+  },
+  "Thorny Vine": {
+    "damage.base.saved": "1d4",
+    "damage.types": ["vine"],
+  },
+  "Grasping Vine": {
+    "damage.base.saved": "1d6",
+    "damage.types": ["vine"],
+  },
+  "Thrashing Vine": {
+    "damage.base.saved": "1d8",
+    "damage.types": ["vine"],
+  },
+  "Crushing Vine": {
+    "damage.base.saved": "1d10",
+    "damage.types": ["vine"],
+  },
+  "Enormous Vine": {
+    "damage.base.saved": "1d12",
+    "damage.types": ["vine"],
+  },
 };
 
 /**
