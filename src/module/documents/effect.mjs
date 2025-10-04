@@ -435,6 +435,33 @@ export default class TeriockEffect extends ChildDocumentMixin(
   }
 
   /**
+   * Add multiple sub-effects to this one.
+   * @param {TeriockEffect[]} subs
+   * @returns {Promise<void>}
+   */
+  async addSubs(subs) {
+    subs = subs.filter((s) => s.metadata.hierarchy);
+    if (this.metadata.hierarchy) {
+      const newSubIds = this.subIds;
+      for (const s of subs) {
+        newSubIds.add(s.id);
+      }
+      await this.parent.updateEmbeddedDocuments(this.documentName, [
+        {
+          _id: this.id,
+          "system.hierarchy.subIds": newSubIds,
+        },
+        ...subs.map((s) => {
+          return {
+            _id: s.id,
+            "system.hierarchy.supId": this.id,
+          };
+        }),
+      ]);
+    }
+  }
+
+  /**
    * Deletes all sub-effects and clears the sub IDs from this effect.
    * @returns {Promise<void>} Promise that resolves when all subs are deleted.
    */

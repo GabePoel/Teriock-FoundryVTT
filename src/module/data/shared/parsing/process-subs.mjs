@@ -50,7 +50,7 @@ async function processSubEffects(subs, doc, config) {
     newSubNames.add(subName);
     let subEffect = existingSubs.find((s) => s.name === subName);
     if (subEffect) {
-      await subEffect.system.wikiPull({ notify: false });
+      await subEffect.system.hardRefreshFromIndex();
     } else {
       subEffect = await createFn(doc, subName, {
         notify: false,

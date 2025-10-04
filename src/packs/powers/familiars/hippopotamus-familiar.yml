@@ -36,6 +36,11 @@ effects:
   - name: Swimming
     type: ability
     system:
+      consumable: false
+      maxQuantity:
+        saved: ''
+        raw: ''
+      quantity: 1
       hierarchy:
         rootUuid: Compendium.teriock.powers.Item.VASlyGhe2DzrGfrF
         subIds: []
@@ -194,59 +199,10 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
-      elderSorcery: false
-      elderSorceryIncant: ''
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-        parent: null
-        package: null
-      targets:
-        - self
-      elements: []
-      duration:
-        unit: noLimit
-        quantity: 0
-        conditions:
-          present: []
-          absent: []
-        stationary: false
-        description: Always Active
-      sustained: false
-      range: Self.
-      overview:
-        base: You swim at @L[Core:Movement Speed]{full speed}.
-        proficient: ''
-        fluent: ''
-      results:
-        hit: ''
-        critHit: ''
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
-      skill: true
-      spell: false
-      standard: true
-      ritual: false
-      class: corsair
-      rotator: false
-      invoked: false
+      adept:
+        enabled: false
+        amount: 1
+      basic: false
       costs:
         verbal: false
         somatic: false
@@ -271,30 +227,78 @@ effects:
             variable: ''
         break: ''
         materialCost: ''
-      heightened: ''
+      delivery:
+        base: self
+        parent: null
+        package: null
+      duration:
+        unit: noLimit
+        quantity: 0
+        conditions:
+          present: []
+          absent: []
+        stationary: false
+        description: Always Active
+      effectTypes: []
+      elderSorcery: false
+      elderSorceryIncant: ''
+      elements: []
       endCondition: ''
-      requirements: ''
-      effects: []
+      executionTime: passive
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
-      trigger: ''
-      basic: false
+      featSaveAttribute: mov
       form: normal
-      limitation: ''
-      improvement: ''
-      prepared: true
-      warded: false
-      secret: false
       gifted:
         enabled: false
         amount: 1
-      consumable: false
-      quantity: 1
-      maxQuantity:
-        raw: ''
-        derived: 0
-    _id: gmz7IVrsa5cq505w
+      grantOnly: false
+      heightened: ''
+      improvement: ''
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+      interaction: manifest
+      invoked: false
+      limitation: ''
+      maneuver: passive
+      overview:
+        base: You swim at @L[Core:Movement Speed]{full speed}.
+        proficient: ''
+        fluent: ''
+      piercing: normal
+      powerSources:
+        - martial
+      prepared: true
+      range: Self.
+      requirements: ''
+      results:
+        hit: ''
+        critHit: ''
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      ritual: false
+      rotator: false
+      secret: false
+      skill: true
+      spell: false
+      standard: true
+      sustained: false
+      targets:
+        - self
+      trigger: ''
+      warded: false
+      class: corsair
+    _id: 01Nax6rGAlAZuVSH
     img: systems/teriock/src/icons/abilities/swimming.webp
     changes: []
     disabled: false
@@ -308,12 +312,17 @@ effects:
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.0
+      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!VASlyGhe2DzrGfrF.gmz7IVrsa5cq505w'
+    _key: '!items.effects!VASlyGhe2DzrGfrF.01Nax6rGAlAZuVSH'
   - name: Threat
     type: ability
     system:
+      consumable: false
+      maxQuantity:
+        saved: ''
+        raw: ''
+      quantity: 1
       hierarchy:
         rootUuid: Compendium.teriock.powers.Item.VASlyGhe2DzrGfrF
         subIds: []
@@ -471,59 +480,10 @@ effects:
             doesExpire: false
         macros:
           Compendium_teriock_execution_Macro_tNkUejVshZd2Etms: preExecution
-      elderSorcery: false
-      elderSorceryIncant: ''
-      powerSources:
-        - martial
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: weapon
-        parent: null
-        package: strike
-      targets:
-        - vitals
-      elements: []
-      duration:
-        unit: minute
-        quantity: 1
-        conditions:
-          present: []
-          absent: []
-        stationary: false
-        description: 1 Minute
-      sustained: false
-      range: Your Weapon's Range
-      overview:
-        base: ''
-        proficient: ''
-        fluent: ''
-      results:
-        hit: Targeted creature is @L[Condition:Frightened]{frightened}.
-        critHit: The target automatically fails the first [[/roll 2d4]] roll.
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
-      skill: true
-      spell: false
-      standard: true
-      ritual: false
-      class: berserker
-      rotator: false
-      invoked: false
+      adept:
+        enabled: false
+        amount: 1
+      basic: false
       costs:
         verbal: false
         somatic: false
@@ -548,32 +508,80 @@ effects:
             variable: ''
         break: ''
         materialCost: ''
-      heightened: ''
+      delivery:
+        base: weapon
+        parent: null
+        package: strike
+      duration:
+        unit: minute
+        quantity: 1
+        conditions:
+          present: []
+          absent: []
+        stationary: false
+        description: 1 Minute
+      effectTypes: []
+      elderSorcery: false
+      elderSorceryIncant: ''
+      elements: []
       endCondition: >-
         At the start of each of the target's @L[Core:Turn]{turns}, they roll
         [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.
-      requirements: ''
-      effects: []
+      executionTime: a1
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
-      trigger: ''
-      basic: false
+      featSaveAttribute: mov
       form: normal
-      limitation: ''
-      improvement: ''
-      prepared: true
-      warded: false
-      secret: false
       gifted:
         enabled: false
         amount: 1
-      consumable: false
-      quantity: 1
-      maxQuantity:
-        raw: ''
-        derived: 0
-    _id: qwnGzEK3x9R7HGPS
+      grantOnly: false
+      heightened: ''
+      improvement: ''
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+      interaction: attack
+      invoked: false
+      limitation: ''
+      maneuver: active
+      overview:
+        base: ''
+        proficient: ''
+        fluent: ''
+      piercing: normal
+      powerSources:
+        - martial
+      prepared: true
+      range: Your Weapon's Range
+      requirements: ''
+      results:
+        hit: Targeted creature is @L[Condition:Frightened]{frightened}.
+        critHit: The target automatically fails the first [[/roll 2d4]] roll.
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      ritual: false
+      rotator: false
+      secret: false
+      skill: true
+      spell: false
+      standard: true
+      sustained: false
+      targets:
+        - vitals
+      trigger: ''
+      warded: false
+      class: berserker
+    _id: HQTn1g68Z73u1vDU
     img: systems/teriock/src/icons/abilities/threat.webp
     changes: []
     disabled: false
@@ -589,13 +597,13 @@ effects:
       systemId: teriock
       systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!VASlyGhe2DzrGfrF.qwnGzEK3x9R7HGPS'
+    _key: '!items.effects!VASlyGhe2DzrGfrF.HQTn1g68Z73u1vDU'
 ownership:
   default: 0
 flags: {}
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.0
+  systemVersion: 0.9.1
   lastModifiedBy: teriockBuilder00
 _key: '!items!VASlyGhe2DzrGfrF'

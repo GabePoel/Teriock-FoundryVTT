@@ -1,5 +1,6 @@
 import { selectDialog } from "../../../applications/dialogs/select-dialog.mjs";
 import { pseudoHooks } from "../../../constants/system/pseudo-hooks.mjs";
+import { copyAbility } from "../../../helpers/fetch.mjs";
 import { insertElderSorceryMask } from "../../../helpers/html.mjs";
 import { mergeFreeze, safeUuid } from "../../../helpers/utils.mjs";
 import {
@@ -42,6 +43,21 @@ export default class TeriockAbilityModel extends HierarchyDataMixin(
     type: "ability",
     usable: true,
     passive: true,
+    indexCategoryKey: "abilities",
+    indexCompendiumKey: "abilities",
+    preservedProperties: [
+      "system.adept",
+      "system.consumable",
+      "system.fluent",
+      "system.gifted",
+      "system.grantOnly",
+      "system.hierarchy",
+      "system.improved",
+      "system.limited",
+      "system.maxQuantity",
+      "system.proficient",
+      "system.quantity",
+    ],
   });
 
   /** @inheritDoc */
@@ -218,6 +234,11 @@ export default class TeriockAbilityModel extends HierarchyDataMixin(
         await this.parent.update({ "system.sustaining": new Set() });
       } catch {}
     }
+  }
+
+  /** @inheritDoc */
+  async getIndexReference() {
+    return await copyAbility(this.parent.name);
   }
 
   /**

@@ -1,5 +1,6 @@
 import { selectDialog } from "../../../applications/dialogs/select-dialog.mjs";
 import { propertyPseudoHooks } from "../../../constants/system/pseudo-hooks.mjs";
+import { copyProperty } from "../../../helpers/fetch.mjs";
 import { mergeFreeze, pureUuid, safeUuid } from "../../../helpers/utils.mjs";
 import { HierarchyDataMixin, WikiDataMixin } from "../../mixins/_module.mjs";
 import {
@@ -39,6 +40,15 @@ export default class TeriockPropertyModel extends HierarchyDataMixin(
     namespace: "Property",
     type: "property",
     passive: true,
+    indexCategoryKey: "properties",
+    indexCompendiumKey: "properties",
+    preservedProperties: [
+      "system.fluent",
+      "system.hierarchy",
+      "system.improvement",
+      "system.limitation",
+      "system.proficient",
+    ],
   });
 
   /** @inheritDoc */
@@ -141,6 +151,11 @@ export default class TeriockPropertyModel extends HierarchyDataMixin(
     const updateData = {};
     updateData[`system.applies.macros.${safeUuid(uuid)}`] = pseudoHook;
     await this.parent.update(updateData);
+  }
+
+  /** @inheritDoc */
+  async getIndexReference() {
+    return await copyProperty(this.parent.name);
   }
 
   /** @inheritDoc */

@@ -55,15 +55,15 @@ effects:
           checks: []
           duration: 0
           changes:
-            - key: system.resistances.statuses
+            - key: system.protections.resistances.statuses
               mode: 2
               value: snared
               priority: 10
-            - key: system.resistances.statuses
+            - key: system.protections.resistances.statuses
               mode: 2
               value: immobilized
               priority: 10
-            - key: system.resistances.damageTypes
+            - key: system.protections.resistances.damageTypes
               mode: 2
               value: hack
               priority: 10
@@ -311,7 +311,7 @@ effects:
         - self
       trigger: ''
       warded: false
-    _id: DJLRg0MpJDIE54E8
+    _id: 5UAs05Kt5iceRJAc
     img: systems/teriock/src/icons/abilities/evasive-shimmering.webp
     changes: []
     disabled: false
@@ -327,7 +327,7 @@ effects:
       systemId: teriock
       systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!n16LfxiQjDocbvnW.DJLRg0MpJDIE54E8'
+    _key: '!items.effects!n16LfxiQjDocbvnW.5UAs05Kt5iceRJAc'
   - name: Reflexes
     type: ability
     system:
@@ -339,7 +339,7 @@ effects:
       hierarchy:
         rootUuid: Compendium.teriock.powers.Item.n16LfxiQjDocbvnW
         subIds:
-          - QqujKT9h1xwZRXoS
+          - uheikpd2vG8Ms63g
         supId: null
       applies:
         base:
@@ -351,7 +351,7 @@ effects:
           checks: []
           duration: 0
           changes:
-            - key: system.resistances.abilities
+            - key: system.protections.resistances.abilities
               mode: 2
               value: Disarm
               priority: 10
@@ -599,7 +599,7 @@ effects:
       trigger: ''
       warded: false
       class: archer
-    _id: PEdKsvL8ou9x7hWI
+    _id: D3IF16DqZfaoVImx
     img: systems/teriock/src/icons/abilities/reflexes.webp
     changes: []
     disabled: false
@@ -615,19 +615,15 @@ effects:
       systemId: teriock
       systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!n16LfxiQjDocbvnW.PEdKsvL8ou9x7hWI'
+    _key: '!items.effects!n16LfxiQjDocbvnW.D3IF16DqZfaoVImx'
   - name: Missile Reflexes
     type: ability
+    img: systems/teriock/src/icons/abilities/missile-reflexes.webp
     system:
       hierarchy:
-        supId: PEdKsvL8ou9x7hWI
         rootUuid: Compendium.teriock.powers.Item.n16LfxiQjDocbvnW
         subIds: []
-      consumable: false
-      maxQuantity:
-        saved: ''
-        raw: ''
-      quantity: 1
+        supId: D3IF16DqZfaoVImx
       applies:
         base:
           statuses: []
@@ -778,10 +774,62 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
-      adept:
-        enabled: false
-        amount: 1
-      basic: false
+      elderSorcery: false
+      elderSorceryIncant: ''
+      powerSources:
+        - martial
+      interaction: block
+      featSaveAttribute: mov
+      maneuver: reactive
+      executionTime: r1
+      delivery:
+        base: hand
+        parent: null
+        package: null
+      targets:
+        - attack
+        - item
+      elements: []
+      duration:
+        unit: instant
+        quantity: 0
+        conditions:
+          present: []
+          absent: []
+        description: Instant
+        stationary: false
+      sustained: false
+      range: null
+      overview:
+        base: >-
+          You @L[Keyword:Resistance]{resist} the @L[Core:Attack
+          Interaction]{attack}.
+        proficient: ''
+        fluent: ''
+      results:
+        hit: ''
+        critHit: ''
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      piercing: normal
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+      skill: true
+      spell: false
+      standard: true
+      ritual: false
+      class: archer
+      rotator: false
+      invoked: false
       costs:
         verbal: false
         somatic: false
@@ -806,86 +854,38 @@ effects:
             variable: ''
         break: ''
         materialCost: ''
-      delivery:
-        base: hand
-        parent: null
-        package: null
-      duration:
-        unit: instant
-        quantity: 0
-        conditions:
-          present: []
-          absent: []
-        stationary: false
-        description: Instant
-      effectTypes:
-        - resistance
-      elderSorcery: false
-      elderSorceryIncant: ''
-      elements: []
+      heightened: ''
       endCondition: ''
-      executionTime: r1
+      requirements: ''
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
-      featSaveAttribute: mov
-      form: normal
-      gifted:
-        enabled: false
-        amount: 1
-      grantOnly: false
-      heightened: ''
-      improvement: ''
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
-      interaction: block
-      invoked: false
-      limitation: ''
-      maneuver: reactive
-      overview:
-        base: >-
-          You @L[Keyword:Resistance]{resist} the @L[Core:Attack
-          Interaction]{attack}.
-        proficient: ''
-        fluent: ''
-      piercing: normal
-      powerSources:
-        - martial
-      prepared: true
-      range: null
-      requirements: ''
-      results:
-        hit: ''
-        critHit: ''
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
-      ritual: false
-      rotator: false
-      secret: false
-      skill: true
-      spell: false
-      standard: true
-      sustained: false
-      targets:
-        - attack
-        - item
       trigger: >-
         You would be hit by a @L[Property:Ranged]{ranged weapon} or
         @L[Category:Missile delivery abilities]{missile delivery} @L[Core:Attack
         Interaction]{attack}.
+      basic: false
+      form: normal
+      limitation: ''
+      improvement: ''
+      prepared: true
       warded: false
-      class: archer
-    _id: QqujKT9h1xwZRXoS
-    img: systems/teriock/src/icons/abilities/missile-reflexes.webp
+      secret: false
+      consumable: false
+      quantity: 1
+      maxQuantity:
+        raw: ''
+        saved: ''
+      effectTypes:
+        - resistance
+      adept:
+        enabled: false
+        amount: 1
+      gifted:
+        enabled: false
+        amount: 1
+      grantOnly: false
+    _id: uheikpd2vG8Ms63g
     changes: []
     disabled: false
     duration:
@@ -900,7 +900,7 @@ effects:
       systemId: teriock
       systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!n16LfxiQjDocbvnW.QqujKT9h1xwZRXoS'
+    _key: '!items.effects!n16LfxiQjDocbvnW.uheikpd2vG8Ms63g'
 ownership:
   default: 0
 flags: {}

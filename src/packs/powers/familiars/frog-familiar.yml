@@ -36,6 +36,11 @@ effects:
   - name: Earthbind Touch
     type: ability
     system:
+      consumable: false
+      maxQuantity:
+        saved: ''
+        raw: ''
+      quantity: 1
       hierarchy:
         rootUuid: Compendium.teriock.powers.Item.ZrZqFmSDsw4f7KMv
         subIds: []
@@ -194,62 +199,10 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
-      elderSorcery: false
-      elderSorceryIncant: ''
-      powerSources:
-        - magical
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: hand
-        parent: null
-        package: touch
-      targets:
-        - creature
-      elements:
-        - nature
-      duration:
-        unit: minute
-        quantity: 1
-        conditions:
-          present: []
-          absent: []
-        stationary: false
-        description: 1 Minute
-      sustained: false
-      range: Your Hand's Range
-      overview:
-        base: ''
-        proficient: ''
-        fluent: ''
-      results:
-        hit: >-
-          Target is @L[Condition:Grounded]{grounded} and
-          @L[Condition:Immobile]{immobilized}.
-        critHit: The target automatically fails the first [[/roll 2d4]] roll.
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
-      piercing: ub
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
-      skill: false
-      spell: true
-      standard: true
-      ritual: false
-      class: natureMage
-      rotator: false
-      invoked: false
+      adept:
+        enabled: false
+        amount: 1
+      basic: false
       costs:
         verbal: false
         somatic: false
@@ -274,32 +227,83 @@ effects:
             variable: ''
         break: ''
         materialCost: ''
-      heightened: "For each additional @L[Core:MP]{MP} spent, deal an additional [[/damage 1d4[magic vine]]] @L[Core:Damage]{damage}\_as well."
+      delivery:
+        base: hand
+        parent: null
+        package: touch
+      duration:
+        unit: minute
+        quantity: 1
+        conditions:
+          present: []
+          absent: []
+        stationary: false
+        description: 1 Minute
+      effectTypes: []
+      elderSorcery: false
+      elderSorceryIncant: ''
+      elements:
+        - nature
       endCondition: >-
         At the start of each of the target's @L[Core:Turn]{turns}, they roll
         [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.
-      requirements: ''
-      effects: []
+      executionTime: a1
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
-      trigger: ''
-      basic: false
+      featSaveAttribute: mov
       form: normal
-      limitation: ''
-      improvement: ''
-      prepared: true
-      warded: false
-      secret: false
       gifted:
         enabled: false
         amount: 1
-      consumable: false
-      quantity: 1
-      maxQuantity:
-        raw: ''
-        derived: 0
-    _id: xZNjfW4c6D7WpIKC
+      grantOnly: false
+      heightened: "For each additional @L[Core:MP]{MP} spent, deal an additional [[/damage 1d4[magic vine]]] @L[Core:Damage]{damage}\_as well."
+      improvement: ''
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+      interaction: attack
+      invoked: false
+      limitation: ''
+      maneuver: active
+      overview:
+        base: ''
+        proficient: ''
+        fluent: ''
+      piercing: ub
+      powerSources:
+        - magical
+      prepared: true
+      range: Your Hand's Range
+      requirements: ''
+      results:
+        hit: >-
+          Target is @L[Condition:Grounded]{grounded} and
+          @L[Condition:Immobile]{immobilized}.
+        critHit: The target automatically fails the first [[/roll 2d4]] roll.
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      ritual: false
+      rotator: false
+      secret: false
+      skill: false
+      spell: true
+      standard: true
+      sustained: false
+      targets:
+        - creature
+      trigger: ''
+      warded: false
+      class: natureMage
+    _id: To7iYQSMViXTIo3W
     img: systems/teriock/src/icons/abilities/earthbind-touch.webp
     changes: []
     disabled: false
@@ -315,10 +319,15 @@ effects:
       systemId: teriock
       systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!ZrZqFmSDsw4f7KMv.xZNjfW4c6D7WpIKC'
+    _key: '!items.effects!ZrZqFmSDsw4f7KMv.To7iYQSMViXTIo3W'
   - name: Leaping
     type: ability
     system:
+      consumable: false
+      maxQuantity:
+        saved: ''
+        raw: ''
+      quantity: 1
       hierarchy:
         rootUuid: Compendium.teriock.powers.Item.ZrZqFmSDsw4f7KMv
         subIds: []
@@ -489,63 +498,10 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
-      elderSorcery: false
-      elderSorceryIncant: ''
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-        parent: null
-        package: null
-      targets:
-        - self
-      elements: []
-      duration:
-        unit: noLimit
-        quantity: 0
-        conditions:
-          present: []
-          absent: []
-        stationary: false
-        description: Always Active
-      sustained: false
-      range: Self.
-      overview:
-        base: >-
-          You vertically leap at @L[Core:Movement Speed]{quarter speed} and
-          horizontally leap at @L[Core:Movement Speed]{half speed}.
-        proficient: >-
-          You instead vertically leap at @L[Core:Movement Speed]{half speed} and
-          horizontally leap at @L[Core:Movement Speed]{full speed}.
-        fluent: ''
-      results:
-        hit: ''
-        critHit: ''
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
-      skill: true
-      spell: false
-      standard: true
-      ritual: false
-      class: assassin
-      rotator: false
-      invoked: false
+      adept:
+        enabled: false
+        amount: 1
+      basic: false
       costs:
         verbal: false
         somatic: false
@@ -570,31 +526,83 @@ effects:
             variable: ''
         break: ''
         materialCost: ''
-      heightened: ''
+      delivery:
+        base: self
+        parent: null
+        package: null
+      duration:
+        unit: noLimit
+        quantity: 0
+        conditions:
+          present: []
+          absent: []
+        stationary: false
+        description: Always Active
+      effectTypes:
+        - movement
+      elderSorcery: false
+      elderSorceryIncant: ''
+      elements: []
       endCondition: ''
-      requirements: ''
+      executionTime: passive
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
-      trigger: ''
-      basic: false
+      featSaveAttribute: mov
       form: normal
-      limitation: ''
-      improvement: ''
-      prepared: true
-      warded: false
-      secret: false
       gifted:
         enabled: false
         amount: 1
-      consumable: false
-      quantity: 1
-      maxQuantity:
-        raw: ''
-        derived: 0
-      effectTypes:
-        - movement
-    _id: ttcaQdpVsKJx2Un3
+      grantOnly: false
+      heightened: ''
+      improvement: ''
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+      interaction: manifest
+      invoked: false
+      limitation: ''
+      maneuver: passive
+      overview:
+        base: >-
+          You vertically leap at @L[Core:Movement Speed]{quarter speed} and
+          horizontally leap at @L[Core:Movement Speed]{half speed}.
+        proficient: >-
+          You instead vertically leap at @L[Core:Movement Speed]{half speed} and
+          horizontally leap at @L[Core:Movement Speed]{full speed}.
+        fluent: ''
+      piercing: normal
+      powerSources:
+        - martial
+      prepared: true
+      range: Self.
+      requirements: ''
+      results:
+        hit: ''
+        critHit: ''
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      ritual: false
+      rotator: false
+      secret: false
+      skill: true
+      spell: false
+      standard: true
+      sustained: false
+      targets:
+        - self
+      trigger: ''
+      warded: false
+      class: assassin
+    _id: 4ii8bJAQOrguK6K9
     img: systems/teriock/src/icons/abilities/leaping.webp
     changes: []
     disabled: false
@@ -610,13 +618,13 @@ effects:
       systemId: teriock
       systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!ZrZqFmSDsw4f7KMv.ttcaQdpVsKJx2Un3'
+    _key: '!items.effects!ZrZqFmSDsw4f7KMv.4ii8bJAQOrguK6K9'
 ownership:
   default: 0
 flags: {}
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.0
+  systemVersion: 0.9.1
   lastModifiedBy: teriockBuilder00
 _key: '!items!ZrZqFmSDsw4f7KMv'

@@ -24,15 +24,6 @@ export default class TeriockBaseItemSheet extends CommonSheetMixin(
       toggleOnUseDoc: this._toggleOnUseDoc,
       refreshThis: this._refreshThis,
     },
-    window: {
-      controls: [
-        {
-          icon: "fa-solid fa-rotate-right",
-          label: "Refresh",
-          action: "refreshThis",
-        },
-      ],
-    },
   };
 
   /**

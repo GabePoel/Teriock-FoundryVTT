@@ -36,6 +36,11 @@ effects:
   - name: Brace
     type: ability
     system:
+      consumable: false
+      maxQuantity:
+        saved: ''
+        raw: ''
+      quantity: 1
       hierarchy:
         rootUuid: Compendium.teriock.powers.Item.8QV55QAkUDdyXt0n
         subIds: []
@@ -192,66 +197,10 @@ effects:
         macros:
           Compendium_teriock_execution_Macro_0Gb7QPmgAotusvVQ: effectApplication
           Compendium_teriock_execution_Macro_RCqX2d4YKWXd6o1i: movement
-      elderSorcery: false
-      elderSorceryIncant: ''
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: self
-        parent: null
-        package: null
-      targets:
-        - self
-      elements: []
-      duration:
-        unit: noLimit
-        quantity: 0
-        conditions:
-          present: []
-          absent: []
-        stationary: true
-        description: While Stationary
-      sustained: true
-      range: Self.
-      overview:
-        base: >-
-          Lose all @L[Core:Temporary Hit Points]{temporary HP} and gain [[/roll
-          1d6]] @L[Core:Temporary Hit Points]{temporary HP} as long as you
-          remain stationary.
-        proficient: >-
-          Instead gain [[/roll 1d6 + (@p)d6]] @L[Core:Temporary Hit
-          Points]{temporary HP}.
-        fluent: >-
-          Instead gain [[/roll 1d6 + (@f)d6]] @L[Core:Temporary Hit
-          Points]{temporary HP}.
-      results:
-        hit: ''
-        critHit: ''
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
-      skill: true
-      spell: false
-      standard: true
-      ritual: false
-      class: veteran
-      rotator: false
-      invoked: false
+      adept:
+        enabled: false
+        amount: 1
+      basic: false
       costs:
         verbal: false
         somatic: false
@@ -276,30 +225,85 @@ effects:
             variable: ''
         break: ''
         materialCost: ''
-      heightened: ''
+      delivery:
+        base: self
+        parent: null
+        package: null
+      duration:
+        unit: noLimit
+        quantity: 0
+        conditions:
+          present: []
+          absent: []
+        stationary: true
+        description: While Stationary
+      effectTypes: []
+      elderSorcery: false
+      elderSorceryIncant: ''
+      elements: []
       endCondition: ''
-      requirements: ''
-      effects: []
+      executionTime: a1
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
-      trigger: ''
-      basic: false
+      featSaveAttribute: mov
       form: normal
-      limitation: ''
-      improvement: ''
-      prepared: true
-      warded: false
-      secret: false
       gifted:
         enabled: false
         amount: 1
-      consumable: false
-      quantity: 1
-      maxQuantity:
-        raw: ''
-        derived: 0
-    _id: plSIjsTHf0WzZGLy
+      grantOnly: false
+      heightened: ''
+      improvement: ''
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+      interaction: manifest
+      invoked: false
+      limitation: ''
+      maneuver: active
+      overview:
+        base: >-
+          Lose all @L[Core:Temporary Hit Points]{temporary HP} and gain [[/roll
+          1d6]] @L[Core:Temporary Hit Points]{temporary HP} as long as you
+          remain stationary.
+        proficient: >-
+          Instead gain [[/roll 1d6 + (@p)d6]] @L[Core:Temporary Hit
+          Points]{temporary HP}.
+        fluent: >-
+          Instead gain [[/roll 1d6 + (@f)d6]] @L[Core:Temporary Hit
+          Points]{temporary HP}.
+      piercing: normal
+      powerSources:
+        - martial
+      prepared: true
+      range: Self.
+      requirements: ''
+      results:
+        hit: ''
+        critHit: ''
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      ritual: false
+      rotator: false
+      secret: false
+      skill: true
+      spell: false
+      standard: true
+      sustained: true
+      targets:
+        - self
+      trigger: ''
+      warded: false
+      class: veteran
+    _id: C3IcbhupgYXMQBEd
     img: systems/teriock/src/icons/abilities/brace.webp
     changes: []
     disabled: false
@@ -313,12 +317,17 @@ effects:
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.0
+      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!8QV55QAkUDdyXt0n.plSIjsTHf0WzZGLy'
+    _key: '!items.effects!8QV55QAkUDdyXt0n.C3IcbhupgYXMQBEd'
   - name: Earthbind Touch
     type: ability
     system:
+      consumable: false
+      maxQuantity:
+        saved: ''
+        raw: ''
+      quantity: 1
       hierarchy:
         rootUuid: Compendium.teriock.powers.Item.8QV55QAkUDdyXt0n
         subIds: []
@@ -477,62 +486,10 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
-      elderSorcery: false
-      elderSorceryIncant: ''
-      powerSources:
-        - magical
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: hand
-        parent: null
-        package: touch
-      targets:
-        - creature
-      elements:
-        - nature
-      duration:
-        unit: minute
-        quantity: 1
-        conditions:
-          present: []
-          absent: []
-        stationary: false
-        description: 1 Minute
-      sustained: false
-      range: Your Hand's Range
-      overview:
-        base: ''
-        proficient: ''
-        fluent: ''
-      results:
-        hit: >-
-          Target is @L[Condition:Grounded]{grounded} and
-          @L[Condition:Immobile]{immobilized}.
-        critHit: The target automatically fails the first [[/roll 2d4]] roll.
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
-      piercing: ub
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
-      skill: false
-      spell: true
-      standard: true
-      ritual: false
-      class: natureMage
-      rotator: false
-      invoked: false
+      adept:
+        enabled: false
+        amount: 1
+      basic: false
       costs:
         verbal: false
         somatic: false
@@ -557,32 +514,83 @@ effects:
             variable: ''
         break: ''
         materialCost: ''
-      heightened: "For each additional @L[Core:MP]{MP} spent, deal an additional [[/damage 1d4[magic vine]]] @L[Core:Damage]{damage}\_as well."
+      delivery:
+        base: hand
+        parent: null
+        package: touch
+      duration:
+        unit: minute
+        quantity: 1
+        conditions:
+          present: []
+          absent: []
+        stationary: false
+        description: 1 Minute
+      effectTypes: []
+      elderSorcery: false
+      elderSorceryIncant: ''
+      elements:
+        - nature
       endCondition: >-
         At the start of each of the target's @L[Core:Turn]{turns}, they roll
         [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.
-      requirements: ''
-      effects: []
+      executionTime: a1
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
-      trigger: ''
-      basic: false
+      featSaveAttribute: mov
       form: normal
-      limitation: ''
-      improvement: ''
-      prepared: true
-      warded: false
-      secret: false
       gifted:
         enabled: false
         amount: 1
-      consumable: false
-      quantity: 1
-      maxQuantity:
-        raw: ''
-        derived: 0
-    _id: ofxlMpBwqlz3woNY
+      grantOnly: false
+      heightened: "For each additional @L[Core:MP]{MP} spent, deal an additional [[/damage 1d4[magic vine]]] @L[Core:Damage]{damage}\_as well."
+      improvement: ''
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+      interaction: attack
+      invoked: false
+      limitation: ''
+      maneuver: active
+      overview:
+        base: ''
+        proficient: ''
+        fluent: ''
+      piercing: ub
+      powerSources:
+        - magical
+      prepared: true
+      range: Your Hand's Range
+      requirements: ''
+      results:
+        hit: >-
+          Target is @L[Condition:Grounded]{grounded} and
+          @L[Condition:Immobile]{immobilized}.
+        critHit: The target automatically fails the first [[/roll 2d4]] roll.
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      ritual: false
+      rotator: false
+      secret: false
+      skill: false
+      spell: true
+      standard: true
+      sustained: false
+      targets:
+        - creature
+      trigger: ''
+      warded: false
+      class: natureMage
+    _id: 21wqSTWxbi0NWxZY
     img: systems/teriock/src/icons/abilities/earthbind-touch.webp
     changes: []
     disabled: false
@@ -598,13 +606,13 @@ effects:
       systemId: teriock
       systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!8QV55QAkUDdyXt0n.ofxlMpBwqlz3woNY'
+    _key: '!items.effects!8QV55QAkUDdyXt0n.21wqSTWxbi0NWxZY'
 ownership:
   default: 0
 flags: {}
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.0
+  systemVersion: 0.9.1
   lastModifiedBy: teriockBuilder00
 _key: '!items!8QV55QAkUDdyXt0n'

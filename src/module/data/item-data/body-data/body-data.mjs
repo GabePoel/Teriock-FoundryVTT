@@ -34,6 +34,8 @@ export default class TeriockBodyModel extends WieldedDataMixin(
     type: "body",
     usable: true,
     childEffectTypes: ["property"],
+    indexCategoryKey: "bodyParts",
+    indexCompendiumKey: "bodyParts",
   });
 
   /** @inheritDoc */

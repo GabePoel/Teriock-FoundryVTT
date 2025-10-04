@@ -3,6 +3,19 @@ import type { documentTypes } from "../constants/system/document-types.mjs";
 
 declare global {
   namespace Teriock.Documents {
+    export type IndexCategoryKey = keyof typeof TERIOCK.index;
+
+    export type IndexCompendiumKey =
+      | "abilities"
+      | "classes"
+      | "creatures"
+      | "equipment"
+      | "bodyParts"
+      | "magicItems"
+      | "powers"
+      | "properties"
+      | "species";
+
     export type ActorType = keyof typeof documentTypes.actors;
 
     export type ItemType = keyof typeof documentTypes.items;
@@ -16,6 +29,9 @@ declare global {
       childEffectTypes: Teriock.Documents.EffectType[];
       childItemTypes: Teriock.Documents.ItemType[];
       childMacroTypes: Teriock.Documents.MacroType[];
+      indexCategoryKey?: Teriock.Documents.IndexCategoryKey;
+      indexCompendiumKey?: Teriock.Documents.IndexCompendiumKey;
+      preservedProperties: string[];
     };
 
     export type ChildModelMetadata = Teriock.Documents.ModelMetadata & {

@@ -36,10 +36,15 @@ effects:
   - name: Reflexes
     type: ability
     system:
+      consumable: false
+      maxQuantity:
+        saved: ''
+        raw: ''
+      quantity: 1
       hierarchy:
         rootUuid: Compendium.teriock.powers.Item.I2jXw9mYp9fE8Hv9
         subIds:
-          - y7SNu4739S6ikDlB
+          - JAZtvsENi3KoLh1d
         supId: null
       applies:
         base:
@@ -51,7 +56,7 @@ effects:
           checks: []
           duration: 0
           changes:
-            - key: system.resistances.abilities
+            - key: system.protections.resistances.abilities
               mode: 2
               value: Disarm
               priority: 10
@@ -195,63 +200,10 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
-      elderSorcery: false
-      elderSorceryIncant: ''
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-        parent: null
-        package: null
-      targets:
-        - self
-      elements: []
-      duration:
-        unit: noLimit
-        quantity: 0
-        conditions:
-          present: []
-          absent: []
-        stationary: false
-        description: Always Active
-      sustained: false
-      range: Self.
-      overview:
-        base: >-
-          You @L[Keyword:Resistance]{resist} @L[Ability:Disarm]{Disarm}, have
-          @L[Core:Advantage]{advantage} on the roll made for @L[Ability:Catch
-          Item]{Catch Item}, and gain @L[Ability:Missile Reflexes]{Missile
-          Reflexes}.
-        proficient: ''
-        fluent: ''
-      results:
-        hit: ''
-        critHit: ''
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: mov
-          amount: proficiency
-      skill: true
-      spell: false
-      standard: true
-      ritual: false
-      class: archer
-      rotator: false
-      invoked: false
+      adept:
+        enabled: false
+        amount: 1
+      basic: false
       costs:
         verbal: false
         somatic: false
@@ -276,33 +228,85 @@ effects:
             variable: ''
         break: ''
         materialCost: ''
-      heightened: ''
+      delivery:
+        base: self
+        parent: null
+        package: null
+      duration:
+        unit: noLimit
+        quantity: 0
+        conditions:
+          present: []
+          absent: []
+        stationary: false
+        description: Always Active
+      effectTypes:
+        - resistance
+      elderSorcery: false
+      elderSorceryIncant: ''
+      elements: []
       endCondition: ''
-      requirements: ''
+      executionTime: passive
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
-      trigger: ''
-      basic: false
+      featSaveAttribute: mov
       form: normal
-      limitation: >-
-        You @L[Keyword:Resistance]{resist} @L[Ability:Disarm]{Disarm}, but gain
-        no other benefits from this.
-      improvement: ''
-      prepared: true
-      warded: false
-      secret: false
       gifted:
         enabled: false
         amount: 1
-      consumable: false
-      quantity: 1
-      maxQuantity:
-        raw: ''
-        derived: 0
-      effectTypes:
-        - resistance
-    _id: rjIu2eOSGXelKg2J
+      grantOnly: false
+      heightened: ''
+      improvement: ''
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+        featSaveImprovement:
+          attribute: mov
+          amount: proficiency
+      interaction: manifest
+      invoked: false
+      limitation: >-
+        You @L[Keyword:Resistance]{resist} @L[Ability:Disarm]{Disarm}, but gain
+        no other benefits from this.
+      maneuver: passive
+      overview:
+        base: >-
+          You @L[Keyword:Resistance]{resist} @L[Ability:Disarm]{Disarm}, have
+          @L[Core:Advantage]{advantage} on the roll made for @L[Ability:Catch
+          Item]{Catch Item}, and gain @L[Ability:Missile Reflexes]{Missile
+          Reflexes}.
+        proficient: ''
+        fluent: ''
+      piercing: normal
+      powerSources:
+        - martial
+      prepared: true
+      range: Self.
+      requirements: ''
+      results:
+        hit: ''
+        critHit: ''
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      ritual: false
+      rotator: false
+      secret: false
+      skill: true
+      spell: false
+      standard: true
+      sustained: false
+      targets:
+        - self
+      trigger: ''
+      warded: false
+      class: archer
+    _id: fFvcEes8PD7cvnS8
     img: systems/teriock/src/icons/abilities/reflexes.webp
     changes: []
     disabled: false
@@ -318,14 +322,15 @@ effects:
       systemId: teriock
       systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!I2jXw9mYp9fE8Hv9.rjIu2eOSGXelKg2J'
+    _key: '!items.effects!I2jXw9mYp9fE8Hv9.fFvcEes8PD7cvnS8'
   - name: Missile Reflexes
     type: ability
+    img: systems/teriock/src/icons/abilities/missile-reflexes.webp
     system:
       hierarchy:
-        supId: rjIu2eOSGXelKg2J
         rootUuid: Compendium.teriock.powers.Item.I2jXw9mYp9fE8Hv9
         subIds: []
+        supId: fFvcEes8PD7cvnS8
       applies:
         base:
           statuses: []
@@ -498,8 +503,8 @@ effects:
         conditions:
           present: []
           absent: []
-        stationary: false
         description: Instant
+        stationary: false
       sustained: false
       range: null
       overview:
@@ -573,18 +578,21 @@ effects:
       prepared: true
       warded: false
       secret: false
-      gifted:
-        enabled: false
-        amount: 1
       consumable: false
       quantity: 1
       maxQuantity:
         raw: ''
-        derived: 0
+        saved: ''
       effectTypes:
         - resistance
-    _id: y7SNu4739S6ikDlB
-    img: systems/teriock/src/icons/abilities/missile-reflexes.webp
+      adept:
+        enabled: false
+        amount: 1
+      gifted:
+        enabled: false
+        amount: 1
+      grantOnly: false
+    _id: JAZtvsENi3KoLh1d
     changes: []
     disabled: false
     duration:
@@ -599,10 +607,15 @@ effects:
       systemId: teriock
       systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!I2jXw9mYp9fE8Hv9.y7SNu4739S6ikDlB'
+    _key: '!items.effects!I2jXw9mYp9fE8Hv9.JAZtvsENi3KoLh1d'
   - name: Unglue
     type: ability
     system:
+      consumable: false
+      maxQuantity:
+        saved: ''
+        raw: ''
+      quantity: 1
       hierarchy:
         rootUuid: Compendium.teriock.powers.Item.I2jXw9mYp9fE8Hv9
         subIds: []
@@ -757,59 +770,10 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
-      elderSorcery: false
-      elderSorceryIncant: ''
-      powerSources:
-        - spiritual
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: hand
-        parent: null
-        package: null
-      targets:
-        - item
-      elements: []
-      duration:
-        unit: instant
-        quantity: 0
-        conditions:
-          present: []
-          absent: []
-        stationary: false
-        description: Instant
-      sustained: false
-      range: Your Hand's Range
-      overview:
-        base: Target is no longer @L[Property:Glued]{glued} and you take it.
-        proficient: ''
-        fluent: ''
-      results:
-        hit: ''
-        critHit: ''
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
-      skill: true
-      spell: false
-      standard: true
-      ritual: false
-      class: thief
-      rotator: false
-      invoked: false
+      adept:
+        enabled: false
+        amount: 1
+      basic: false
       costs:
         verbal: false
         somatic: false
@@ -834,33 +798,81 @@ effects:
             variable: ''
         break: ''
         materialCost: ''
-      heightened: ''
+      delivery:
+        base: hand
+        parent: null
+        package: null
+      duration:
+        unit: instant
+        quantity: 0
+        conditions:
+          present: []
+          absent: []
+        stationary: false
+        description: Instant
+      effectTypes:
+        - stealing
+      elderSorcery: false
+      elderSorceryIncant: ''
+      elements: []
       endCondition: ''
-      requirements: >-
-        Target's bearer is @L[Condition:Down]{down} or target it
-        @L[Property:Searchable]{searchable}.
+      executionTime: a1
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
-      trigger: ''
-      basic: false
+      featSaveAttribute: mov
       form: normal
-      limitation: ''
-      improvement: ''
-      prepared: true
-      warded: false
-      secret: false
       gifted:
         enabled: false
         amount: 1
-      consumable: false
-      quantity: 1
-      maxQuantity:
-        raw: ''
-        derived: 0
-      effectTypes:
-        - stealing
-    _id: 4WmLbreQp2r8NMz1
+      grantOnly: false
+      heightened: ''
+      improvement: ''
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+      interaction: manifest
+      invoked: false
+      limitation: ''
+      maneuver: active
+      overview:
+        base: Target is no longer @L[Property:Glued]{glued} and you take it.
+        proficient: ''
+        fluent: ''
+      piercing: normal
+      powerSources:
+        - spiritual
+      prepared: true
+      range: Your Hand's Range
+      requirements: >-
+        Target's bearer is @L[Condition:Down]{down} or target it
+        @L[Property:Searchable]{searchable}.
+      results:
+        hit: ''
+        critHit: ''
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      ritual: false
+      rotator: false
+      secret: false
+      skill: true
+      spell: false
+      standard: true
+      sustained: false
+      targets:
+        - item
+      trigger: ''
+      warded: false
+      class: thief
+    _id: oZ92lFTru21x7UWU
     img: systems/teriock/src/icons/abilities/unglue.webp
     changes: []
     disabled: false
@@ -876,13 +888,13 @@ effects:
       systemId: teriock
       systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!I2jXw9mYp9fE8Hv9.4WmLbreQp2r8NMz1'
+    _key: '!items.effects!I2jXw9mYp9fE8Hv9.oZ92lFTru21x7UWU'
 ownership:
   default: 0
 flags: {}
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.0
+  systemVersion: 0.9.1
   lastModifiedBy: teriockBuilder00
 _key: '!items!I2jXw9mYp9fE8Hv9'

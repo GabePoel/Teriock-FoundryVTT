@@ -36,6 +36,11 @@ effects:
   - name: Might Strike
     type: ability
     system:
+      consumable: false
+      maxQuantity:
+        saved: ''
+        raw: ''
+      quantity: 1
       hierarchy:
         rootUuid: Compendium.teriock.powers.Item.bUs0ygx5F34nGljz
         subIds: []
@@ -196,76 +201,10 @@ effects:
             doesExpire: false
         macros:
           Compendium_teriock_execution_Macro_0nUlKerGkkdmEuVW: preExecution
-      elderSorcery: false
-      elderSorceryIncant: ''
-      powerSources:
-        - divine
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: slow
-      executionTime: 10 Minutes
-      delivery:
-        base: self
-        parent: null
-        package: ritual
-      targets:
-        - self
-      elements: []
-      duration:
-        unit: untilDawn
-        quantity: 0
-        conditions:
-          present: []
-          absent: []
-        stationary: false
-        description: Until Dawn
-      sustained: true
-      range: Self.
-      overview:
-        base: >-
-          Choose a @L[Category:Weapon classes]{class of weapons}. All
-          @L[Category:Weapons]{weapons} you use of the chosen @L[Category:Weapon
-          classes]{class} deal either an additional [[/damage 1d4[holy]]]
-          @L[Core:Damage]{damage} or [[/damage 1d4]] @L[Core:Damage]{damage} of
-          a type corresponding to the <a
-          href="/index.php?title=Core:Domains&amp;action=edit&amp;redlink=1"
-          class="new" title="Core:Domains (page does not exist)">domain</a> of
-          your deity. You may decide which of these benefits a
-          @L[Category:Weapons]{weapon} gets every time you attempt an
-          @L[Category:Attack abilities]{attack} with it. In addition, all
-          @L[Core:Damage]{damage} dealt by a single chosen
-          @L[Category:Weapons]{weapon} of that @L[Category:Weapon
-          classes]{class} is @L[Damage:Magic]{magic damage} as long as you are
-          @L[Core:Presence]{attuned} to it.<table class="wikitable
-          sortable"><caption>Damage Type by
-          Domain</caption><tbody><tr><th>Domain</th><th>Damage
-          Type</th></tr><tr><td>Celestial</td><td>@L[Damage:Silver]{Silver}</td></tr><tr><td>Crafting</td><td>@L[Damage:Fire]{Fire}</td></tr><tr><td>Death</td><td>@L[Damage:Terror]{Terror}</td></tr><tr><td>Destruction</td><td>@L[Damage:Fire]{Fire}</td></tr><tr><td>Fortune</td><td>@L[Damage:Ice]{Ice}</td></tr><tr><td>Healing</td><td>@L[Damage:Terror]{Terror}</td></tr><tr><td>Hearth</td><td>@L[Damage:Fire]{Fire}</td></tr><tr><td>Knowledge</td><td>@L[Damage:Psychic]{Psychic}</td></tr><tr><td>Nature</td><td>@L[Damage:Vine]{Vine}</td></tr><tr><td>Spirit</td><td>@L[Damage:Spiritual]{Spiritual}</td></tr><tr><td>Trickster</td><td>@L[Damage:Vine]{Vine}</td></tr><tr><td>Value</td><td>@L[Damage:Financial]{Financial}</td></tr><tr><td>Weather</td><td>@L[Damage:Ice]{Ice}</td></tr></tbody></table>
-        proficient: ''
-        fluent: ''
-      results:
-        hit: ''
-        critHit: ''
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
-      skill: true
-      spell: false
-      standard: true
-      ritual: true
-      class: paladin
-      rotator: false
-      invoked: false
+      adept:
+        enabled: false
+        amount: 1
+      basic: false
       costs:
         verbal: true
         somatic: true
@@ -290,32 +229,97 @@ effects:
             variable: ''
         break: ''
         materialCost: Something symbolic of your deity.
-      heightened: ''
+      delivery:
+        base: self
+        parent: null
+        package: ritual
+      duration:
+        unit: untilDawn
+        quantity: 0
+        conditions:
+          present: []
+          absent: []
+        stationary: false
+        description: Until Dawn
+      effectTypes: []
+      elderSorcery: false
+      elderSorceryIncant: ''
+      elements: []
       endCondition: ''
-      requirements: >-
-        You not already @L[Category:Sustained abilities]{sustaining} Might
-        Strike.
-      effects: []
+      executionTime: 10 Minutes
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
-      trigger: ''
-      basic: false
+      featSaveAttribute: mov
       form: normal
-      limitation: ''
-      improvement: ''
-      prepared: true
-      warded: false
-      secret: false
       gifted:
         enabled: false
         amount: 1
-      consumable: false
-      quantity: 1
-      maxQuantity:
-        raw: ''
-        derived: 0
-    _id: H6blYO51WXuw2jFl
+      grantOnly: false
+      heightened: ''
+      improvement: ''
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+      interaction: manifest
+      invoked: false
+      limitation: ''
+      maneuver: slow
+      overview:
+        base: >-
+          Choose a @L[Category:Weapon classes]{class of weapons}. All
+          @L[Category:Weapons]{weapons} you use of the chosen @L[Category:Weapon
+          classes]{class} deal either an additional [[/damage 1d4[holy]]]
+          @L[Core:Damage]{damage} or [[/damage 1d4]] @L[Core:Damage]{damage} of
+          a type corresponding to the <a
+          href="/index.php?title=Core:Domains&amp;action=edit&amp;redlink=1"
+          class="new" title="Core:Domains (page does not exist)">domain</a> of
+          your deity. You may decide which of these benefits a
+          @L[Category:Weapons]{weapon} gets every time you attempt an
+          @L[Category:Attack abilities]{attack} with it. In addition, all
+          @L[Core:Damage]{damage} dealt by a single chosen
+          @L[Category:Weapons]{weapon} of that @L[Category:Weapon
+          classes]{class} is @L[Damage:Magic]{magic damage} as long as you are
+          @L[Core:Presence]{attuned} to it.<table class="wikitable
+          sortable"><caption>Damage Type by
+          Domain</caption><tbody><tr><th>Domain</th><th>Damage
+          Type</th></tr><tr><td>Celestial</td><td>@L[Damage:Silver]{Silver}</td></tr><tr><td>Crafting</td><td>@L[Damage:Fire]{Fire}</td></tr><tr><td>Death</td><td>@L[Damage:Terror]{Terror}</td></tr><tr><td>Destruction</td><td>@L[Damage:Fire]{Fire}</td></tr><tr><td>Fortune</td><td>@L[Damage:Ice]{Ice}</td></tr><tr><td>Healing</td><td>@L[Damage:Terror]{Terror}</td></tr><tr><td>Hearth</td><td>@L[Damage:Fire]{Fire}</td></tr><tr><td>Knowledge</td><td>@L[Damage:Psychic]{Psychic}</td></tr><tr><td>Nature</td><td>@L[Damage:Vine]{Vine}</td></tr><tr><td>Spirit</td><td>@L[Damage:Spiritual]{Spiritual}</td></tr><tr><td>Trickster</td><td>@L[Damage:Vine]{Vine}</td></tr><tr><td>Value</td><td>@L[Damage:Financial]{Financial}</td></tr><tr><td>Weather</td><td>@L[Damage:Ice]{Ice}</td></tr></tbody></table>
+        proficient: ''
+        fluent: ''
+      piercing: normal
+      powerSources:
+        - divine
+      prepared: true
+      range: Self.
+      requirements: >-
+        You not already @L[Category:Sustained abilities]{sustaining} Might
+        Strike.
+      results:
+        hit: ''
+        critHit: ''
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      ritual: true
+      rotator: false
+      secret: false
+      skill: true
+      spell: false
+      standard: true
+      sustained: true
+      targets:
+        - self
+      trigger: ''
+      warded: false
+      class: paladin
+    _id: J9zo3XAA2jGyBAOF
     img: systems/teriock/src/icons/abilities/might-strike.webp
     changes: []
     disabled: false
@@ -329,12 +333,17 @@ effects:
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.0
+      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!bUs0ygx5F34nGljz.H6blYO51WXuw2jFl'
+    _key: '!items.effects!bUs0ygx5F34nGljz.J9zo3XAA2jGyBAOF'
   - name: Spell Turning Shields
     type: ability
     system:
+      consumable: false
+      maxQuantity:
+        saved: ''
+        raw: ''
+      quantity: 1
       hierarchy:
         rootUuid: Compendium.teriock.powers.Item.bUs0ygx5F34nGljz
         subIds: []
@@ -494,61 +503,10 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
-      elderSorcery: false
-      elderSorceryIncant: ''
-      powerSources:
-        - divine
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-        parent: null
-        package: null
-      targets:
-        - self
-      elements: []
-      duration:
-        unit: noLimit
-        quantity: 0
-        conditions:
-          present: []
-          absent: []
-        stationary: false
-        description: Always Active
-      sustained: false
-      range: Self.
-      overview:
-        base: >-
-          @L[Category:Shields]{Shields} you use are @L[Property:Spell
-          Turning]{spell turning}.
-        proficient: ''
-        fluent: ''
-      results:
-        hit: ''
-        critHit: ''
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
-      skill: true
-      spell: false
-      standard: true
-      ritual: false
-      class: paladin
-      rotator: false
-      invoked: false
+      adept:
+        enabled: false
+        amount: 1
+      basic: false
       costs:
         verbal: false
         somatic: false
@@ -573,31 +531,81 @@ effects:
             variable: ''
         break: ''
         materialCost: ''
-      heightened: ''
+      delivery:
+        base: self
+        parent: null
+        package: null
+      duration:
+        unit: noLimit
+        quantity: 0
+        conditions:
+          present: []
+          absent: []
+        stationary: false
+        description: Always Active
+      effectTypes:
+        - resistance
+      elderSorcery: false
+      elderSorceryIncant: ''
+      elements: []
       endCondition: ''
-      requirements: ''
+      executionTime: passive
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
-      trigger: ''
-      basic: false
+      featSaveAttribute: mov
       form: normal
-      limitation: ''
-      improvement: ''
-      prepared: true
-      warded: false
-      secret: false
       gifted:
         enabled: false
         amount: 1
-      consumable: false
-      quantity: 1
-      maxQuantity:
-        raw: ''
-        derived: 0
-      effectTypes:
-        - resistance
-    _id: JmhgKDJ8iAJJQV7K
+      grantOnly: false
+      heightened: ''
+      improvement: ''
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+      interaction: manifest
+      invoked: false
+      limitation: ''
+      maneuver: passive
+      overview:
+        base: >-
+          @L[Category:Shields]{Shields} you use are @L[Property:Spell
+          Turning]{spell turning}.
+        proficient: ''
+        fluent: ''
+      piercing: normal
+      powerSources:
+        - divine
+      prepared: true
+      range: Self.
+      requirements: ''
+      results:
+        hit: ''
+        critHit: ''
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      ritual: false
+      rotator: false
+      secret: false
+      skill: true
+      spell: false
+      standard: true
+      sustained: false
+      targets:
+        - self
+      trigger: ''
+      warded: false
+      class: paladin
+    _id: DpI3viKX3NZSMKwr
     img: systems/teriock/src/icons/abilities/spell-turning-shields.webp
     changes: []
     disabled: false
@@ -613,13 +621,13 @@ effects:
       systemId: teriock
       systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!bUs0ygx5F34nGljz.JmhgKDJ8iAJJQV7K'
+    _key: '!items.effects!bUs0ygx5F34nGljz.DpI3viKX3NZSMKwr'
 ownership:
   default: 0
 flags: {}
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.0
+  systemVersion: 0.9.1
   lastModifiedBy: teriockBuilder00
 _key: '!items!bUs0ygx5F34nGljz'

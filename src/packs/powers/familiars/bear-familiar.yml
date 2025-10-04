@@ -36,11 +36,16 @@ effects:
   - name: Battle Cry
     type: ability
     system:
+      consumable: false
+      maxQuantity:
+        saved: ''
+        raw: ''
+      quantity: 1
       hierarchy:
         rootUuid: Compendium.teriock.powers.Item.wjGT39C9YGy8FJ9U
         subIds:
-          - HYi73eFvdsvf5w1v
-          - NDcnDhfC7WNBq6oq
+          - BpEl79h0qYZ6noiW
+          - BGWAKvTMu1nxZFQ9
         supId: null
       applies:
         base:
@@ -192,61 +197,10 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
-      elderSorcery: false
-      elderSorceryIncant: ''
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-        parent: null
-        package: null
-      targets:
-        - self
-      elements: []
-      duration:
-        unit: noLimit
-        quantity: 0
-        conditions:
-          present: []
-          absent: []
-        stationary: false
-        description: Always Active
-      sustained: false
-      range: Self.
-      overview:
-        base: >-
-          You gain @L[Ability:Battle Cry Aura]{Battle Cry Aura} and
-          @L[Ability:Battle Cry Resistance]{Battle Cry Resistance}.
-        proficient: ''
-        fluent: ''
-      results:
-        hit: ''
-        critHit: ''
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
-      skill: true
-      spell: false
-      standard: true
-      ritual: false
-      class: berserker
-      rotator: false
-      invoked: false
+      adept:
+        enabled: false
+        amount: 1
+      basic: false
       costs:
         verbal: false
         somatic: false
@@ -271,30 +225,80 @@ effects:
             variable: ''
         break: ''
         materialCost: ''
-      heightened: ''
+      delivery:
+        base: self
+        parent: null
+        package: null
+      duration:
+        unit: noLimit
+        quantity: 0
+        conditions:
+          present: []
+          absent: []
+        stationary: false
+        description: Always Active
+      effectTypes: []
+      elderSorcery: false
+      elderSorceryIncant: ''
+      elements: []
       endCondition: ''
-      requirements: ''
-      effects: []
+      executionTime: passive
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
-      trigger: ''
-      basic: false
+      featSaveAttribute: mov
       form: normal
-      limitation: ''
-      improvement: ''
-      prepared: true
-      warded: false
-      secret: false
       gifted:
         enabled: false
         amount: 1
-      consumable: false
-      quantity: 1
-      maxQuantity:
-        raw: ''
-        derived: 0
-    _id: c6yksSUcmbbZiVqo
+      grantOnly: false
+      heightened: ''
+      improvement: ''
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+      interaction: manifest
+      invoked: false
+      limitation: ''
+      maneuver: passive
+      overview:
+        base: >-
+          You gain @L[Ability:Battle Cry Aura]{Battle Cry Aura} and
+          @L[Ability:Battle Cry Resistance]{Battle Cry Resistance}.
+        proficient: ''
+        fluent: ''
+      piercing: normal
+      powerSources:
+        - martial
+      prepared: true
+      range: Self.
+      requirements: ''
+      results:
+        hit: ''
+        critHit: ''
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      ritual: false
+      rotator: false
+      secret: false
+      skill: true
+      spell: false
+      standard: true
+      sustained: false
+      targets:
+        - self
+      trigger: ''
+      warded: false
+      class: berserker
+    _id: mptGm4kyhXk1nEki
     img: systems/teriock/src/icons/abilities/battle-cry.webp
     changes: []
     disabled: false
@@ -308,16 +312,17 @@ effects:
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.0
+      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!wjGT39C9YGy8FJ9U.c6yksSUcmbbZiVqo'
+    _key: '!items.effects!wjGT39C9YGy8FJ9U.mptGm4kyhXk1nEki'
   - name: Battle Cry Aura
     type: ability
+    img: systems/teriock/src/icons/abilities/battle-cry-aura.webp
     system:
       hierarchy:
-        supId: c6yksSUcmbbZiVqo
         rootUuid: Compendium.teriock.powers.Item.wjGT39C9YGy8FJ9U
         subIds: []
+        supId: mptGm4kyhXk1nEki
       applies:
         base:
           statuses:
@@ -492,8 +497,8 @@ effects:
         conditions:
           present: []
           absent: []
-        stationary: false
         description: 1 Minute
+        stationary: false
       sustained: false
       range: '10'
       overview:
@@ -564,18 +569,21 @@ effects:
       prepared: true
       warded: false
       secret: false
-      gifted:
-        enabled: false
-        amount: 1
       consumable: false
       quantity: 1
       maxQuantity:
         raw: ''
-        derived: 0
+        saved: ''
       effectTypes:
         - loud
-    _id: HYi73eFvdsvf5w1v
-    img: systems/teriock/src/icons/abilities/battle-cry-aura.webp
+      adept:
+        enabled: false
+        amount: 1
+      gifted:
+        enabled: false
+        amount: 1
+      grantOnly: false
+    _id: BpEl79h0qYZ6noiW
     changes: []
     disabled: false
     duration:
@@ -590,14 +598,15 @@ effects:
       systemId: teriock
       systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!wjGT39C9YGy8FJ9U.HYi73eFvdsvf5w1v'
+    _key: '!items.effects!wjGT39C9YGy8FJ9U.BpEl79h0qYZ6noiW'
   - name: Battle Cry Resistance
     type: ability
+    img: systems/teriock/src/icons/abilities/battle-cry-resistance.webp
     system:
       hierarchy:
-        supId: c6yksSUcmbbZiVqo
         rootUuid: Compendium.teriock.powers.Item.wjGT39C9YGy8FJ9U
         subIds: []
+        supId: mptGm4kyhXk1nEki
       applies:
         base:
           statuses: []
@@ -608,7 +617,7 @@ effects:
           checks: []
           duration: 0
           changes:
-            - key: system.resistances.statuses
+            - key: system.protections.resistances.statuses
               mode: 2
               value: frightened
               priority: 10
@@ -773,8 +782,8 @@ effects:
         conditions:
           present: []
           absent: []
-        stationary: false
         description: 5 Minutes
+        stationary: false
       sustained: false
       range: Self.
       overview:
@@ -845,18 +854,21 @@ effects:
       prepared: true
       warded: false
       secret: false
-      gifted:
-        enabled: false
-        amount: 1
       consumable: false
       quantity: 1
       maxQuantity:
         raw: ''
-        derived: 0
+        saved: ''
       effectTypes:
         - resistance
-    _id: NDcnDhfC7WNBq6oq
-    img: systems/teriock/src/icons/abilities/battle-cry-resistance.webp
+      adept:
+        enabled: false
+        amount: 1
+      gifted:
+        enabled: false
+        amount: 1
+      grantOnly: false
+    _id: BGWAKvTMu1nxZFQ9
     changes: []
     disabled: false
     duration:
@@ -871,10 +883,15 @@ effects:
       systemId: teriock
       systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!wjGT39C9YGy8FJ9U.NDcnDhfC7WNBq6oq'
+    _key: '!items.effects!wjGT39C9YGy8FJ9U.BGWAKvTMu1nxZFQ9'
   - name: Endure
     type: ability
     system:
+      consumable: false
+      maxQuantity:
+        saved: ''
+        raw: ''
+      quantity: 1
       hierarchy:
         rootUuid: Compendium.teriock.powers.Item.wjGT39C9YGy8FJ9U
         subIds: []
@@ -1031,65 +1048,10 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
-      elderSorcery: false
-      elderSorceryIncant: ''
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: reactive
-      executionTime: r1
-      delivery:
-        base: self
-        parent: null
-        package: null
-      targets:
-        - self
-      elements: []
-      duration:
-        unit: instant
-        quantity: 0
-        conditions:
-          present: []
-          absent: []
-        stationary: false
-        description: Instant
-      sustained: false
-      range: Self.
-      overview:
-        base: >-
-          You take the triggering @L[Core:Damage]{damage} as a
-          @L[Damage:Hack]{limb hack} instead. All @L[Category:Damage
-          types]{damage types} still apply. If the hit was critical, you instead
-          take it as <i>two</i> @L[Damage:Hack]{limb hacks}. If the
-          @L[Core:Damage]{damage} was dealt by a creature, they choose which
-          limb is affected. If not, it is random.
-        proficient: ''
-        fluent: ''
-      results:
-        hit: ''
-        critHit: ''
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
-      skill: true
-      spell: false
-      standard: true
-      ritual: false
-      class: ranger
-      rotator: false
-      invoked: false
+      adept:
+        enabled: false
+        amount: 1
+      basic: false
       costs:
         verbal: false
         somatic: false
@@ -1114,33 +1076,93 @@ effects:
             variable: ''
         break: ''
         materialCost: ''
-      heightened: ''
+      delivery:
+        base: self
+        parent: null
+        package: null
+      duration:
+        unit: instant
+        quantity: 0
+        conditions:
+          present: []
+          absent: []
+        stationary: false
+        description: Instant
+      effectTypes:
+        - damaging
+      elderSorcery: false
+      elderSorceryIncant: ''
+      elements: []
       endCondition: ''
-      requirements: ''
+      executionTime: r1
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
-      trigger: >-
-        You are hit by an @L[Category:Attack abilities]{attack} that would
-        @L[Core:Damage]{damage} you.
-      basic: false
+      featSaveAttribute: mov
       form: normal
-      limitation: ''
-      improvement: ''
-      prepared: true
-      warded: false
-      secret: false
       gifted:
         enabled: false
         amount: 1
-      consumable: false
-      quantity: 1
-      maxQuantity:
-        raw: ''
-        derived: 0
-      effectTypes:
-        - damaging
-    _id: sftkLu7S24Ffobr6
+      grantOnly: false
+      heightened: ''
+      improvement: ''
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+      interaction: manifest
+      invoked: false
+      limitation: ''
+      maneuver: reactive
+      overview:
+        base: >-
+          You take the triggering @L[Core:Damage]{damage} as a
+          @L[Damage:Hack]{limb hack} instead. All @L[Category:Damage
+          types]{damage types} still apply. If the hit was critical, you instead
+          take it as <i>two</i> @L[Damage:Hack]{limb hacks}. If you attempted to
+          @L[Core:Block Interaction]{block} the triggering @L[Category:Attack
+          abilities]{attack}, then a limb that @L[Keyword:Using]{used} whatever
+          @L[Category:Items]{item} you @L[Core:Block Interaction]{blocked} with
+          is the one that's @L[Damage:Hack]{hacked}. Otherwise, if the
+          @L[Core:Damage]{damage} was dealt by a creature, they choose which
+          limb is affected. If not, it is random. Only an
+          un-@L[Damage:Hack]{hacked} limb can be used for this. If that's not
+          possible, you take the @L[Core:Damage]{damage} normally.
+        proficient: ''
+        fluent: ''
+      piercing: normal
+      powerSources:
+        - martial
+      prepared: true
+      range: Self.
+      requirements: ''
+      results:
+        hit: ''
+        critHit: ''
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      ritual: false
+      rotator: false
+      secret: false
+      skill: true
+      spell: false
+      standard: true
+      sustained: false
+      targets:
+        - self
+      trigger: >-
+        You are hit by an @L[Category:Attack abilities]{attack} that would
+        @L[Core:Damage]{damage} you.
+      warded: false
+      class: ranger
+    _id: aofCho9DufnyhQnD
     img: systems/teriock/src/icons/abilities/endure.webp
     changes: []
     disabled: false
@@ -1156,13 +1178,13 @@ effects:
       systemId: teriock
       systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!wjGT39C9YGy8FJ9U.sftkLu7S24Ffobr6'
+    _key: '!items.effects!wjGT39C9YGy8FJ9U.aofCho9DufnyhQnD'
 ownership:
   default: 0
 flags: {}
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.0
+  systemVersion: 0.9.1
   lastModifiedBy: teriockBuilder00
 _key: '!items!wjGT39C9YGy8FJ9U'

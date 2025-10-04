@@ -36,6 +36,11 @@ effects:
   - name: Bite
     type: ability
     system:
+      consumable: false
+      maxQuantity:
+        saved: ''
+        raw: ''
+      quantity: 1
       hierarchy:
         rootUuid: Compendium.teriock.powers.Item.Q8v9ejeyJjZbxKrg
         subIds: []
@@ -51,9 +56,8 @@ effects:
           checks: []
           duration: 0
           changes:
-            - key: >-
-                !equipment__system.equipmentType__eq__Mouth__system.damage.base.raw
-              mode: 5
+            - key: '!body__effectKeys.property__has__biting__system.damage.base.raw'
+              mode: 4
               value: 1d4
               priority: 10
           common: []
@@ -94,9 +98,8 @@ effects:
           checks: []
           duration: 0
           changes:
-            - key: >-
-                !equipment__system.equipmentType__eq__Mouth__system.damage.base.raw
-              mode: 5
+            - key: '!body__effectKeys.property__has__biting__system.damage.base.raw'
+              mode: 4
               value: 1d6
               priority: 10
           common: []
@@ -137,9 +140,8 @@ effects:
           checks: []
           duration: 0
           changes:
-            - key: >-
-                !equipment__system.equipmentType__eq__Mouth__system.damage.base.raw
-              mode: 5
+            - key: '!body__effectKeys.property__has__biting__system.damage.base.raw'
+              mode: 4
               value: 1d8
               priority: 10
           common: []
@@ -208,66 +210,10 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
-      elderSorcery: false
-      elderSorceryIncant: ''
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-        parent: null
-        package: null
-      targets:
-        - self
-      elements: []
-      duration:
-        unit: noLimit
-        quantity: 0
-        conditions:
-          present: []
-          absent: []
-        stationary: false
-        description: Always Active
-      sustained: false
-      range: Self.
-      overview:
-        base: >-
-          Your @L[Equipment:Mouth]{mouth} counts as a
-          @L[Category:Weapons]{weapon} for the purposes of abilities that target
-          or are delivered by it (although it cannot be
-          @L[Property:Shattered]{shattered} or
-          @L[Property:Destroyed]{destroyed}). You may @L[Core:Attack
-          Interaction]{attack} with it and its damage die is now [[/damage
-          1d4]].
-        proficient: The damage die is instead [[/damage 1d6]].
-        fluent: The damage die is instead [[/damage 1d8]].
-      results:
-        hit: ''
-        critHit: ''
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
-      skill: false
-      spell: false
-      standard: false
-      ritual: false
-      class: ''
-      rotator: false
-      invoked: false
+      adept:
+        enabled: false
+        amount: 1
+      basic: false
       costs:
         verbal: false
         somatic: false
@@ -292,30 +238,84 @@ effects:
             variable: ''
         break: ''
         materialCost: ''
-      heightened: ''
+      delivery:
+        base: self
+        parent: null
+        package: null
+      duration:
+        unit: noLimit
+        quantity: 0
+        conditions:
+          present: []
+          absent: []
+        stationary: false
+        description: Always Active
+      effectTypes: []
+      elderSorcery: false
+      elderSorceryIncant: ''
+      elements: []
       endCondition: ''
-      requirements: ''
-      effects: []
+      executionTime: passive
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
-      trigger: ''
-      basic: false
+      featSaveAttribute: mov
       form: normal
-      limitation: ''
-      improvement: ''
-      prepared: true
-      warded: false
-      secret: false
       gifted:
         enabled: false
         amount: 1
-      consumable: false
-      quantity: 1
-      maxQuantity:
-        raw: ''
-        derived: 0
-    _id: x6829QxcrFaHoc9Z
+      grantOnly: false
+      heightened: ''
+      improvement: ''
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+      interaction: manifest
+      invoked: false
+      limitation: ''
+      maneuver: passive
+      overview:
+        base: >-
+          Your @L[Body:Mouth]{mouth} and other @L[Category:Biting
+          equipment]{biting items} count as a @L[Category:Weapons]{weapon} for
+          the purposes of abilities that target or are delivered by it (although
+          it cannot be @L[Property:Shattered]{shattered} or
+          @L[Property:Destroyed]{destroyed}). You may @L[Core:Attack
+          Interaction]{attack} with it and its damage die is now [[/damage
+          1d4]].
+        proficient: The damage die is instead [[/damage 1d6]].
+        fluent: The damage die is instead [[/damage 1d8]].
+      piercing: normal
+      powerSources:
+        - martial
+      prepared: true
+      range: Self.
+      requirements: ''
+      results:
+        hit: ''
+        critHit: ''
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      ritual: false
+      rotator: false
+      secret: false
+      skill: false
+      spell: false
+      standard: false
+      sustained: false
+      targets:
+        - self
+      trigger: ''
+      warded: false
+    _id: k1E04GOwB0U7sQHr
     img: systems/teriock/src/icons/abilities/bite.webp
     changes: []
     disabled: false
@@ -331,10 +331,15 @@ effects:
       systemId: teriock
       systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!Q8v9ejeyJjZbxKrg.x6829QxcrFaHoc9Z'
+    _key: '!items.effects!Q8v9ejeyJjZbxKrg.k1E04GOwB0U7sQHr'
   - name: Fear Touch
     type: ability
     system:
+      consumable: false
+      maxQuantity:
+        saved: ''
+        raw: ''
+      quantity: 1
       hierarchy:
         rootUuid: Compendium.teriock.powers.Item.Q8v9ejeyJjZbxKrg
         subIds: []
@@ -493,60 +498,10 @@ effects:
             doesExpire: false
         macros:
           Compendium_teriock_execution_Macro_tNkUejVshZd2Etms: preExecution
-      elderSorcery: false
-      elderSorceryIncant: ''
-      powerSources:
-        - magical
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: hand
-        parent: null
-        package: touch
-      targets:
-        - creature
-      elements:
-        - necromancy
-      duration:
-        unit: minute
-        quantity: 1
-        conditions:
-          present: []
-          absent: []
-        stationary: false
-        description: 1 Minute
-      sustained: false
-      range: Your Hand's Range
-      overview:
-        base: ''
-        proficient: ''
-        fluent: ''
-      results:
-        hit: Target is @L[Condition:Frightened]{frightened}.
-        critHit: The target automatically fails the first [[/roll 2d4]] roll.
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
-      piercing: ub
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
-      skill: false
-      spell: true
-      standard: true
-      ritual: false
-      class: necromancer
-      rotator: false
-      invoked: false
+      adept:
+        enabled: false
+        amount: 1
+      basic: false
       costs:
         verbal: false
         somatic: false
@@ -571,33 +526,82 @@ effects:
             variable: ''
         break: ''
         materialCost: ''
-      heightened: "For each additional @L[Core:MP]{MP} spent, deal an additional [[/damage 1d4[magic terror]]] @L[Core:Damage]{damage}\_as well."
+      delivery:
+        base: hand
+        parent: null
+        package: touch
+      duration:
+        unit: minute
+        quantity: 1
+        conditions:
+          present: []
+          absent: []
+        stationary: false
+        description: 1 Minute
+      effectTypes:
+        - mental
+      elderSorcery: false
+      elderSorceryIncant: ''
+      elements:
+        - necromancy
       endCondition: >-
         At the end of each of the target's @L[Core:Turn]{turns}, they roll
         [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.
-      requirements: ''
+      executionTime: a1
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
-      trigger: ''
-      basic: false
+      featSaveAttribute: mov
       form: normal
-      limitation: ''
-      improvement: ''
-      prepared: true
-      warded: false
-      secret: false
       gifted:
         enabled: false
         amount: 1
-      consumable: false
-      quantity: 1
-      maxQuantity:
-        raw: ''
-        derived: 0
-      effectTypes:
-        - mental
-    _id: 9xExlLtnMJVfOkp5
+      grantOnly: false
+      heightened: "For each additional @L[Core:MP]{MP} spent, deal an additional [[/damage 1d4[magic terror]]] @L[Core:Damage]{damage}\_as well."
+      improvement: ''
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+      interaction: attack
+      invoked: false
+      limitation: ''
+      maneuver: active
+      overview:
+        base: ''
+        proficient: ''
+        fluent: ''
+      piercing: ub
+      powerSources:
+        - magical
+      prepared: true
+      range: Your Hand's Range
+      requirements: ''
+      results:
+        hit: Target is @L[Condition:Frightened]{frightened}.
+        critHit: The target automatically fails the first [[/roll 2d4]] roll.
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      ritual: false
+      rotator: false
+      secret: false
+      skill: false
+      spell: true
+      standard: true
+      sustained: false
+      targets:
+        - creature
+      trigger: ''
+      warded: false
+      class: necromancer
+    _id: N4K7SsQ5hIco3qD7
     img: systems/teriock/src/icons/abilities/fear-touch.webp
     changes: []
     disabled: false
@@ -613,13 +617,13 @@ effects:
       systemId: teriock
       systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!Q8v9ejeyJjZbxKrg.9xExlLtnMJVfOkp5'
+    _key: '!items.effects!Q8v9ejeyJjZbxKrg.N4K7SsQ5hIco3qD7'
 ownership:
   default: 0
 flags: {}
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.0
+  systemVersion: 0.9.1
   lastModifiedBy: teriockBuilder00
 _key: '!items!Q8v9ejeyJjZbxKrg'

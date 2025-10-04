@@ -36,6 +36,11 @@ effects:
   - name: Accuracy
     type: ability
     system:
+      consumable: false
+      maxQuantity:
+        saved: ''
+        raw: ''
+      quantity: 1
       hierarchy:
         rootUuid: Compendium.teriock.powers.Item.j3WsxIfpFdJQ1N0C
         subIds: []
@@ -190,20 +195,38 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
-      elderSorcery: false
-      elderSorceryIncant: ''
-      powerSources: []
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a2
+      adept:
+        enabled: false
+        amount: 1
+      basic: false
+      costs:
+        verbal: false
+        somatic: false
+        material: false
+        mp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        hp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        gp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        break: ''
+        materialCost: ''
       delivery:
         base: self
         parent: null
         package: null
-      targets:
-        - self
-      elements: []
       duration:
         unit: noLimit
         quantity: 0
@@ -212,8 +235,34 @@ effects:
           absent: []
         stationary: true
         description: While Stationary
-      sustained: true
-      range: Self.
+      effectTypes: []
+      elderSorcery: false
+      elderSorceryIncant: ''
+      elements: []
+      endCondition: You move or are moved.
+      executionTime: a2
+      expansion: null
+      expansionRange: null
+      expansionSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      gifted:
+        enabled: true
+        amount: 1
+      grantOnly: false
+      heightened: ''
+      improvement: ''
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+      interaction: manifest
+      invoked: false
+      limitation: ''
+      maneuver: active
       overview:
         base: >-
           You aim your weapon with deadly precision, causing @L[Category:Weapon
@@ -227,6 +276,13 @@ effects:
           If the @L[Category:Weapon delivery abilities]{weapon attack} is a
           @L[Category:Ranged equipment]{ranged attack}, then its range is
           instead tripled.
+      piercing: normal
+      powerSources: []
+      prepared: true
+      range: Self.
+      requirements: >-
+        You must remain stationary until you make the
+        @L[Keyword:Boosted]{boosted} @L[Category:Attack abilities]{attack}.
       results:
         hit: ''
         critHit: ''
@@ -236,71 +292,19 @@ effects:
         critSave: ''
         fail: ''
         critFail: ''
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
+      ritual: false
+      rotator: false
+      secret: false
       skill: true
       spell: false
       standard: true
-      ritual: false
-      class: archer
-      rotator: false
-      invoked: false
-      costs:
-        verbal: false
-        somatic: false
-        material: false
-        mp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        hp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        gp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        break: ''
-        materialCost: ''
-      heightened: ''
-      endCondition: You move or are moved.
-      requirements: >-
-        You must remain stationary until you make the
-        @L[Keyword:Boosted]{boosted} @L[Category:Attack abilities]{attack}.
-      effects: []
-      expansion: null
-      expansionRange: null
-      expansionSaveAttribute: mov
+      sustained: true
+      targets:
+        - self
       trigger: ''
-      basic: false
-      form: normal
-      limitation: ''
-      improvement: ''
-      prepared: true
       warded: false
-      secret: false
-      gifted:
-        enabled: true
-        amount: 1
-      consumable: false
-      quantity: 1
-      maxQuantity:
-        raw: ''
-        derived: 0
-    _id: bAYOpi2lnQNxGRAt
+      class: archer
+    _id: fiGPnrBzrZLA7idH
     img: systems/teriock/src/icons/abilities/accuracy.webp
     changes: []
     disabled: false
@@ -314,12 +318,17 @@ effects:
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.0
+      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!j3WsxIfpFdJQ1N0C.bAYOpi2lnQNxGRAt'
+    _key: '!items.effects!j3WsxIfpFdJQ1N0C.fiGPnrBzrZLA7idH'
   - name: Scouting
     type: ability
     system:
+      consumable: false
+      maxQuantity:
+        saved: ''
+        raw: ''
+      quantity: 1
       hierarchy:
         rootUuid: Compendium.teriock.powers.Item.j3WsxIfpFdJQ1N0C
         subIds: []
@@ -474,61 +483,10 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
-      elderSorcery: false
-      elderSorceryIncant: ''
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-        parent: null
-        package: null
-      targets:
-        - self
-      elements: []
-      duration:
-        unit: noLimit
-        quantity: 0
-        conditions:
-          present: []
-          absent: []
-        stationary: false
-        description: Always Active
-      sustained: false
-      range: Self.
-      overview:
-        base: >-
-          You have @L[Core:Advantage]{advantage} on checks made with
-          @L[Ability:Perceive]{Perceive}.
-        proficient: ''
-        fluent: ''
-      results:
-        hit: ''
-        critHit: ''
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          attribute: per
-          minVal: 2
-        featSaveImprovement:
-          attribute: per
-          amount: proficiency
-      skill: true
-      spell: false
-      standard: true
-      ritual: false
-      class: ranger
-      rotator: false
-      invoked: false
+      adept:
+        enabled: false
+        amount: 1
+      basic: false
       costs:
         verbal: false
         somatic: false
@@ -553,31 +511,81 @@ effects:
             variable: ''
         break: ''
         materialCost: ''
-      heightened: ''
+      delivery:
+        base: self
+        parent: null
+        package: null
+      duration:
+        unit: noLimit
+        quantity: 0
+        conditions:
+          present: []
+          absent: []
+        stationary: false
+        description: Always Active
+      effectTypes:
+        - sensory
+      elderSorcery: false
+      elderSorceryIncant: ''
+      elements: []
       endCondition: ''
-      requirements: ''
+      executionTime: passive
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
-      trigger: ''
-      basic: false
+      featSaveAttribute: mov
       form: normal
-      limitation: ''
-      improvement: ''
-      prepared: true
-      warded: false
-      secret: false
       gifted:
         enabled: false
         amount: 1
-      consumable: false
-      quantity: 1
-      maxQuantity:
-        raw: ''
-        derived: 0
-      effectTypes:
-        - sensory
-    _id: sZIIB6n6wvXSIGM8
+      grantOnly: false
+      heightened: ''
+      improvement: ''
+      improvements:
+        attributeImprovement:
+          attribute: per
+          minVal: 2
+        featSaveImprovement:
+          attribute: per
+          amount: proficiency
+      interaction: manifest
+      invoked: false
+      limitation: ''
+      maneuver: passive
+      overview:
+        base: >-
+          You have @L[Core:Advantage]{advantage} on checks made with
+          @L[Ability:Perceive]{Perceive}.
+        proficient: ''
+        fluent: ''
+      piercing: normal
+      powerSources:
+        - martial
+      prepared: true
+      range: Self.
+      requirements: ''
+      results:
+        hit: ''
+        critHit: ''
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      ritual: false
+      rotator: false
+      secret: false
+      skill: true
+      spell: false
+      standard: true
+      sustained: false
+      targets:
+        - self
+      trigger: ''
+      warded: false
+      class: ranger
+    _id: uDk0aUCSB8ivKSEj
     img: systems/teriock/src/icons/abilities/scouting.webp
     changes: []
     disabled: false
@@ -593,13 +601,13 @@ effects:
       systemId: teriock
       systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!j3WsxIfpFdJQ1N0C.sZIIB6n6wvXSIGM8'
+    _key: '!items.effects!j3WsxIfpFdJQ1N0C.uDk0aUCSB8ivKSEj'
 ownership:
   default: 0
 flags: {}
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.0
+  systemVersion: 0.9.1
   lastModifiedBy: teriockBuilder00
 _key: '!items!j3WsxIfpFdJQ1N0C'

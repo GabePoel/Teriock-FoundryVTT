@@ -56,10 +56,14 @@ export default (Base) => {
       }
 
       /** @inheritDoc */
-      getAbilities() {}
+      getAbilities() {
+        return [];
+      }
 
       /** @inheritDoc */
-      getProperties() {}
+      getProperties() {
+        return [];
+      }
 
       /**
        * @inheritDoc

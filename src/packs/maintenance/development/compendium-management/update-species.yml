@@ -5,97 +5,68 @@ _id: U0WfGPoPSLSystNU
 author: teriockBuilder00
 img: systems/teriock/src/icons/documents/species.svg
 scope: global
-command: >-
+command: |-
   const speciesPack = game.teriock.packs.species();
-
   const speciesFolders = speciesPack.folders;
 
+  // Folder configuration
+  const folderConfigs = [
+    {
+      name: "Monster Species",
+      variable: "allSpeciesFolder",
+    },
+    {
+      name: "Character Species",
+      variable: "characterSpeciesFolder",
+    },
+    {
+      name: "Common Animal Species",
+      variable: "commonAnimalSpeciesFolder",
+    },
+    {
+      name: "Undead Species",
+      variable: "undeadSpeciesFolder",
+    },
+  ];
 
-  const allSpeciesFolderName = "Monster Species";
-
-  const characterSpeciesFolderName = "Character Species";
-
-  const commonAnimalSpeciesFolderName = "Common Animal Species";
-
-  const undeadSpeciesFolderName = "Undead Species";
-
-  let allSpeciesFolder = speciesFolders.getName(allSpeciesFolderName);
-
-  let characterSpeciesFolder =
-  speciesFolders.getName(characterSpeciesFolderName);
-
-  let commonAnimalSpeciesFolder = speciesFolders.getName(
-    commonAnimalSpeciesFolderName,
-  );
-
-  let undeadSpeciesFolder = speciesFolders.getName(undeadSpeciesFolderName);
-
-  if (!allSpeciesFolder) {
-    await Folder.create(
-      {
-        name: allSpeciesFolderName,
-        type: "Item",
-      },
-      {
-        pack: "teriock.species",
-      },
-    );
+  // Create missing folders
+  const folders = {};
+  for (const config of folderConfigs) {
+    let folder = speciesFolders.getName(config.name);
+    if (!folder) {
+      folder = await Folder.create(
+        {
+          name: config.name,
+          type: "Item",
+        },
+        {
+          pack: "teriock.species",
+        },
+      );
+    }
+    folders[config.variable] = folder;
   }
-
-  if (!characterSpeciesFolder) {
-    await Folder.create(
-      {
-        name: characterSpeciesFolderName,
-        type: "Item",
-      },
-      {
-        pack: "teriock.species",
-      },
-    );
-  }
-
-  if (!commonAnimalSpeciesFolder) {
-    await Folder.create(
-      {
-        name: commonAnimalSpeciesFolderName,
-        type: "Item",
-      },
-      {
-        pack: "teriock.species",
-      },
-    );
-  }
-
-  if (!undeadSpeciesFolder) {
-    await Folder.create(
-      {
-        name: undeadSpeciesFolderName,
-        type: "Item",
-      },
-      {
-        pack: "teriock.species",
-      },
-    );
-  }
-
 
   const progress = ui.notifications.info("Pulling all creatures from wiki.", {
+    pct: 0.01,
     progress: true,
   });
 
-
-  async function processSpecies(speciesName, _index, _total) {
+  // Process a single species
+  async function processSpecies(speciesName) {
     let speciesItem = speciesPack.index.find((e) => e.name === speciesName);
-    let folder = allSpeciesFolder;
+
+    // Determine folder based on species type
+    let folder = folders.allSpeciesFolder;
     if (Object.values(TERIOCK.index.humanoids).includes(speciesName)) {
-      folder = characterSpeciesFolder;
+      folder = folders.characterSpeciesFolder;
+    } else if (Object.values(TERIOCK.index.commonAnimals).includes(speciesName)) {
+      folder = folders.commonAnimalSpeciesFolder;
+    } else if (Object.values(TERIOCK.index.undead).includes(speciesName)) {
+      folder = folders.undeadSpeciesFolder;
     }
-    if (Object.values(TERIOCK.index.commonAnimals).includes(speciesName)) {
-      folder = commonAnimalSpeciesFolder;
-    }
-    if (Object.values(TERIOCK.index.undead).includes(speciesName)) {
-      folder = undeadSpeciesFolder;
-    }
+
+    // Create or fetch species item
     if (!speciesItem) {
       speciesItem = /** @type {TeriockSpecies} */ await Item.create(
         {
@@ -112,15 +83,6 @@ command: >-
     }
 
     await speciesItem.system.wikiPull({ notify: false });
-    const knownAbilities = [];
-    const supAbilities = speciesItem.abilities.filter((a) => !a.sup);
-    for (const a of supAbilities) {
-      if (knownAbilities.includes(a.name)) {
-        await a.delete();
-      } else {
-        knownAbilities.push(a.name);
-      }
-    }
 
     return {
       speciesName,
@@ -128,29 +90,33 @@ command: >-
     };
   }
 
-
-  const speciesPromises = Object.values(TERIOCK.index.creatures).map(
-    (speciesName, index) =>
-      processSpecies(
-        speciesName,
-        index,
-        Object.values(TERIOCK.index.creatures).length,
-      ),
-  );
-
-
-  progress.update({
-    pct: 0.1,
-    message: `Processing ${Object.values(TERIOCK.index.creatures).length} species in parallel...`,
-  });
-
+  // Process in batches of 25
+  const allSpecies = Object.values(TERIOCK.index.creatures);
+  const batchSize = 25;
+  const results = [];
+  let processedCount = 0;
 
   try {
-    const results = await Promise.all(speciesPromises);
+    for (let i = 0; i < allSpecies.length; i += batchSize) {
+      const batch = allSpecies.slice(i, i + batchSize);
+
+      const batchResults = await Promise.all(
+        batch.map((speciesName) => processSpecies(speciesName)),
+      );
+
+      results.push(...batchResults);
+      processedCount += batch.length;
+
+      const pct = Math.min(processedCount / allSpecies.length, 0.99);
+      progress.update({
+        pct: pct,
+        message: `Processed ${processedCount} of ${allSpecies.length} species...`,
+      });
+    }
 
     progress.update({
-      pct: 1,
       message: `Successfully processed ${results.length} species.`,
+      pct: 1,
     });
 
     console.log(
@@ -159,8 +125,8 @@ command: >-
     );
   } catch (error) {
     progress.update({
-      pct: 1,
       message: `Error occurred during processing: ${error.message}`,
+      pct: 1,
     });
     console.error("Error processing species:", error);
   }

@@ -36,11 +36,16 @@ effects:
   - name: Partner Awaken
     type: ability
     system:
+      consumable: false
+      maxQuantity:
+        saved: ''
+        raw: ''
+      quantity: 1
       hierarchy:
         rootUuid: Compendium.teriock.powers.Item.KMyNbLGoSggCLsVh
         subIds:
-          - TCEXC5YKhWZcZv0L
-          - rlhJNVgNItyxGL3c
+          - BPcQS1drujNJrfbx
+          - o84PntpRYVP9C2Vl
         supId: null
       applies:
         base:
@@ -192,64 +197,10 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
-      elderSorcery: false
-      elderSorceryIncant: ''
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: sight
-        parent: null
-        package: null
-      targets:
-        - creature
-      elements: []
-      duration:
-        unit: hour
-        quantity: 1
-        conditions:
-          present: []
-          absent: []
-        stationary: false
-        description: 1 Hour
-      sustained: false
-      range: '30'
-      overview:
-        base: >-
-          You and the target gain @L[Keyword:Limited]{Limited}
-          @L[Ability:Instant Awaken]{Instant Awaken} and
-          @L[Keyword:Limited]{Limited} @L[Ability:Reactive Awaken]{Reactive
-          Awaken} (only usable on each other). You may only have this active on
-          one creature at a time.
-        proficient: ''
-        fluent: ''
-      results:
-        hit: ''
-        critHit: ''
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
-      skill: true
-      spell: false
-      standard: true
-      ritual: false
-      class: veteran
-      rotator: false
-      invoked: false
+      adept:
+        enabled: false
+        amount: 1
+      basic: false
       costs:
         verbal: false
         somatic: false
@@ -274,30 +225,83 @@ effects:
             variable: ''
         break: ''
         materialCost: ''
-      heightened: ''
+      delivery:
+        base: sight
+        parent: null
+        package: null
+      duration:
+        unit: hour
+        quantity: 1
+        conditions:
+          present: []
+          absent: []
+        stationary: false
+        description: 1 Hour
+      effectTypes: []
+      elderSorcery: false
+      elderSorceryIncant: ''
+      elements: []
       endCondition: You use Partner Awaken again.
-      requirements: ''
-      effects: []
+      executionTime: a1
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
-      trigger: ''
-      basic: false
+      featSaveAttribute: mov
       form: normal
-      limitation: ''
-      improvement: ''
-      prepared: true
-      warded: false
-      secret: false
       gifted:
         enabled: false
         amount: 1
-      consumable: false
-      quantity: 1
-      maxQuantity:
-        raw: ''
-        derived: 0
-    _id: je6JllgrnYvVj9Zt
+      grantOnly: false
+      heightened: ''
+      improvement: ''
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+      interaction: manifest
+      invoked: false
+      limitation: ''
+      maneuver: active
+      overview:
+        base: >-
+          You and the target gain @L[Keyword:Limited]{Limited}
+          @L[Ability:Instant Awaken]{Instant Awaken} and
+          @L[Keyword:Limited]{Limited} @L[Ability:Reactive Awaken]{Reactive
+          Awaken} (only usable on each other). You may only have this active on
+          one creature at a time.
+        proficient: ''
+        fluent: ''
+      piercing: normal
+      powerSources:
+        - martial
+      prepared: true
+      range: '30'
+      requirements: ''
+      results:
+        hit: ''
+        critHit: ''
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      ritual: false
+      rotator: false
+      secret: false
+      skill: true
+      spell: false
+      standard: true
+      sustained: false
+      targets:
+        - creature
+      trigger: ''
+      warded: false
+      class: veteran
+    _id: z86tNBWzhSikXgd7
     img: systems/teriock/src/icons/abilities/partner-awaken.webp
     changes: []
     disabled: false
@@ -311,16 +315,17 @@ effects:
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.0
+      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!KMyNbLGoSggCLsVh.je6JllgrnYvVj9Zt'
+    _key: '!items.effects!KMyNbLGoSggCLsVh.z86tNBWzhSikXgd7'
   - name: Instant Awaken
     type: ability
+    img: systems/teriock/src/icons/abilities/instant-awaken.webp
     system:
       hierarchy:
-        supId: je6JllgrnYvVj9Zt
         rootUuid: Compendium.teriock.powers.Item.KMyNbLGoSggCLsVh
         subIds: []
+        supId: z86tNBWzhSikXgd7
       applies:
         base:
           statuses: []
@@ -492,8 +497,8 @@ effects:
         conditions:
           present: []
           absent: []
-        stationary: false
         description: Instant
+        stationary: false
       sustained: false
       range: Your Hand's Range
       overview:
@@ -521,7 +526,6 @@ effects:
       spell: false
       standard: true
       ritual: false
-      class: ''
       rotator: false
       invoked: false
       costs:
@@ -557,23 +561,26 @@ effects:
       trigger: ''
       basic: false
       form: normal
-      limitation: Only usable on the other participant in the Partner Awaken.
+      limitation: ''
       improvement: ''
       prepared: true
       warded: false
       secret: false
-      gifted:
-        enabled: false
-        amount: 1
       consumable: false
       quantity: 1
       maxQuantity:
         raw: ''
-        derived: 0
+        saved: ''
       effectTypes:
         - awakening
-    _id: TCEXC5YKhWZcZv0L
-    img: systems/teriock/src/icons/abilities/instant-awaken.webp
+      adept:
+        enabled: false
+        amount: 1
+      gifted:
+        enabled: false
+        amount: 1
+      grantOnly: false
+    _id: BPcQS1drujNJrfbx
     changes: []
     disabled: false
     duration:
@@ -588,14 +595,15 @@ effects:
       systemId: teriock
       systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!KMyNbLGoSggCLsVh.TCEXC5YKhWZcZv0L'
+    _key: '!items.effects!KMyNbLGoSggCLsVh.BPcQS1drujNJrfbx'
   - name: Reactive Awaken
     type: ability
+    img: systems/teriock/src/icons/abilities/reactive-awaken.webp
     system:
       hierarchy:
-        supId: je6JllgrnYvVj9Zt
         rootUuid: Compendium.teriock.powers.Item.KMyNbLGoSggCLsVh
         subIds: []
+        supId: z86tNBWzhSikXgd7
       applies:
         base:
           statuses: []
@@ -767,8 +775,8 @@ effects:
         conditions:
           present: []
           absent: []
-        stationary: false
         description: Instant
+        stationary: false
       sustained: false
       range: Your Hand's Range
       overview:
@@ -796,7 +804,6 @@ effects:
       spell: false
       standard: true
       ritual: false
-      class: ''
       rotator: false
       invoked: false
       costs:
@@ -832,23 +839,26 @@ effects:
       trigger: ''
       basic: false
       form: normal
-      limitation: Only usable on the other participant in the Partner Awaken.
+      limitation: ''
       improvement: ''
       prepared: true
       warded: false
       secret: false
-      gifted:
-        enabled: false
-        amount: 1
       consumable: false
       quantity: 1
       maxQuantity:
         raw: ''
-        derived: 0
+        saved: ''
       effectTypes:
         - awakening
-    _id: rlhJNVgNItyxGL3c
-    img: systems/teriock/src/icons/abilities/reactive-awaken.webp
+      adept:
+        enabled: false
+        amount: 1
+      gifted:
+        enabled: false
+        amount: 1
+      grantOnly: false
+    _id: o84PntpRYVP9C2Vl
     changes: []
     disabled: false
     duration:
@@ -863,10 +873,15 @@ effects:
       systemId: teriock
       systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!KMyNbLGoSggCLsVh.rlhJNVgNItyxGL3c'
+    _key: '!items.effects!KMyNbLGoSggCLsVh.o84PntpRYVP9C2Vl'
   - name: Skill Share
     type: ability
     system:
+      consumable: false
+      maxQuantity:
+        saved: ''
+        raw: ''
+      quantity: 1
       hierarchy:
         rootUuid: Compendium.teriock.powers.Item.KMyNbLGoSggCLsVh
         subIds: []
@@ -1022,63 +1037,10 @@ effects:
             doesExpire: false
         macros:
           Compendium_teriock_execution_Macro_xERvcMl0jyZHu960: preExecution
-      elderSorcery: false
-      elderSorceryIncant: ''
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: sight
-        parent: null
-        package: null
-      targets:
-        - creature
-      elements: []
-      duration:
-        unit: hour
-        quantity: 1
-        conditions:
-          present: []
-          absent: []
-        stationary: false
-        description: 1 Hour
-      sustained: true
-      range: '30'
-      overview:
-        base: >-
-          Target gains one @L[Category:Standard abilities]{standard ability} you
-          have, aren't @L[Keyword:Incapable]{incapable} of, and are
-          @L[Core:Proficiency Bonus]{proficient} in. You may only have this
-          active on one creature at a time.
-        proficient: ''
-        fluent: ''
-      results:
-        hit: ''
-        critHit: ''
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
-      skill: true
-      spell: false
-      standard: true
-      ritual: false
-      class: corsair
-      rotator: false
-      invoked: false
+      adept:
+        enabled: false
+        amount: 1
+      basic: false
       costs:
         verbal: false
         somatic: false
@@ -1103,30 +1065,82 @@ effects:
             variable: ''
         break: ''
         materialCost: ''
-      heightened: ''
+      delivery:
+        base: sight
+        parent: null
+        package: null
+      duration:
+        unit: hour
+        quantity: 1
+        conditions:
+          present: []
+          absent: []
+        stationary: false
+        description: 1 Hour
+      effectTypes: []
+      elderSorcery: false
+      elderSorceryIncant: ''
+      elements: []
       endCondition: You use Skill Share again.
-      requirements: ''
-      effects: []
+      executionTime: a1
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
-      trigger: ''
-      basic: false
+      featSaveAttribute: mov
       form: normal
-      limitation: ''
-      improvement: ''
-      prepared: true
-      warded: false
-      secret: false
       gifted:
         enabled: false
         amount: 1
-      consumable: false
-      quantity: 1
-      maxQuantity:
-        raw: ''
-        derived: 0
-    _id: cD7YIkNISCG4sZnR
+      grantOnly: false
+      heightened: ''
+      improvement: ''
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+      interaction: manifest
+      invoked: false
+      limitation: ''
+      maneuver: active
+      overview:
+        base: >-
+          Target gains one @L[Category:Standard abilities]{standard ability} you
+          have, aren't @L[Keyword:Incapable]{incapable} of, and are
+          @L[Core:Proficiency Bonus]{proficient} in. You may only have this
+          active on one creature at a time.
+        proficient: ''
+        fluent: ''
+      piercing: normal
+      powerSources:
+        - magical
+      prepared: true
+      range: '30'
+      requirements: ''
+      results:
+        hit: ''
+        critHit: ''
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      ritual: false
+      rotator: false
+      secret: false
+      skill: true
+      spell: false
+      standard: true
+      sustained: true
+      targets:
+        - creature
+      trigger: ''
+      warded: false
+      class: corsair
+    _id: GjXqU6TyYu8OI0h7
     img: systems/teriock/src/icons/abilities/skill-share.webp
     changes: []
     disabled: false
@@ -1140,15 +1154,15 @@ effects:
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.0
+      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!KMyNbLGoSggCLsVh.cD7YIkNISCG4sZnR'
+    _key: '!items.effects!KMyNbLGoSggCLsVh.GjXqU6TyYu8OI0h7'
 ownership:
   default: 0
 flags: {}
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.0
+  systemVersion: 0.9.1
   lastModifiedBy: teriockBuilder00
 _key: '!items!KMyNbLGoSggCLsVh'

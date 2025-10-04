@@ -1,28 +1,63 @@
 /** @type {Record<string,TeriockMacro>} */
 const toRun = {
-  updateAbilities: await fromUuid(
+  abilities: await fromUuid(
     "Compendium.teriock.maintenance.Macro.tdghrSTQaqPfwEQZ",
   ),
-  updateBasicAbilities: await fromUuid(
+  "basic abilities": await fromUuid(
     "Compendium.teriock.maintenance.Macro.AEHBs2Fh23ulcqyb",
   ),
-  updateClasses: await fromUuid(
+  classes: await fromUuid(
     "Compendium.teriock.maintenance.Macro.XZc2aJXX8vYFmW64",
   ),
-  updateFamilies: await fromUuid(
+  familiars: await fromUuid(
     "Compendium.teriock.maintenance.Macro.5LY0aaXJj1QY11Bf",
   ),
-  updateProperties: await fromUuid(
+  properties: await fromUuid(
     "Compendium.teriock.maintenance.Macro.lM9iJK0o7R8cVvL9",
   ),
-  updateSpecies: await fromUuid(
+  species: await fromUuid(
     "Compendium.teriock.maintenance.Macro.U0WfGPoPSLSystNU",
-  ), // Equipment is last because
-  // it's the buggiest
-  updateEquipment: await fromUuid(
+  ),
+  creatures: await fromUuid(
+    "Compendium.teriock.maintenance.Macro.qhpeHJ0ZJGDfUOPo",
+  ),
+  equipment: await fromUuid(
     "Compendium.teriock.maintenance.Macro.NccvZMMNyFS0braS",
   ),
+  "magic items": await fromUuid(
+    "Compendium.teriock.maintenance.Macro.PW6nyzkzO59fogTh",
+  ),
 };
-for (const macro of Object.values(toRun)) {
+
+const macroEntries = Object.entries(toRun);
+const totalMacros = macroEntries.length;
+
+const progress = foundry.ui.notifications.info(
+  "Running maintenance macros...",
+  {
+    progress: true,
+    pct: 0.01,
+  },
+);
+
+let completedCount = 0;
+
+for (const [macroName, macro] of macroEntries) {
+  progress.update({
+    pct: completedCount / totalMacros,
+    message: `Updating ${macroName}... (${completedCount + 1}/${totalMacros})`,
+  });
+
   await macro.execute();
+
+  completedCount++;
 }
+
+progress.update({
+  pct: 1,
+  message: "All maintenance macros completed.",
+});
+
+foundry.ui.notifications.success(
+  `Successfully executed ${totalMacros} maintenance macros.`,
+);

@@ -36,10 +36,15 @@ effects:
   - name: Advanced Smell
     type: ability
     system:
+      consumable: false
+      maxQuantity:
+        saved: ''
+        raw: ''
+      quantity: 1
       hierarchy:
         rootUuid: Compendium.teriock.powers.Item.XjmH0pU2kvIZRsCH
         subIds:
-          - 3OfpFkuDrE0FLdip
+          - ygEnOXJDNGblunwB
         supId: null
       applies:
         base:
@@ -191,64 +196,10 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
-      elderSorcery: false
-      elderSorceryIncant: ''
-      powerSources: []
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-        parent: null
-        package: null
-      targets:
-        - self
-      elements: []
-      duration:
-        unit: noLimit
-        quantity: 0
-        conditions:
-          present: []
-          absent:
-            - down
-        stationary: false
-        description: While Up
-      sustained: false
-      range: Self.
-      overview:
-        base: >-
-          You can passively smell the types of all living creatures within 30
-          feet. You can detect dead and undead creatures as well, but you cannot
-          distinguish within or between them. They all smell like death. You
-          also gain @L[Ability:Scent Seeing]{Scent Seeing}. You can not detect
-          @L[Condition:Odorless]{odorless} creatures in this way.
-        proficient: ''
-        fluent: ''
-      results:
-        hit: ''
-        critHit: ''
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          attribute: per
-          minVal: 2
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
-      skill: true
-      spell: false
-      standard: true
-      ritual: false
-      class: berserker
-      rotator: false
-      invoked: false
+      adept:
+        enabled: false
+        amount: 1
+      basic: false
       costs:
         verbal: false
         somatic: false
@@ -273,31 +224,84 @@ effects:
             variable: ''
         break: ''
         materialCost: ''
-      heightened: ''
+      delivery:
+        base: self
+        parent: null
+        package: null
+      duration:
+        unit: noLimit
+        quantity: 0
+        conditions:
+          present: []
+          absent:
+            - down
+        stationary: false
+        description: While Up
+      effectTypes:
+        - sensory
+      elderSorcery: false
+      elderSorceryIncant: ''
+      elements: []
       endCondition: ''
-      requirements: You are not @L[Condition:Anosmatic]{anosmatic}.
+      executionTime: passive
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
-      trigger: ''
-      basic: false
+      featSaveAttribute: mov
       form: normal
-      limitation: ''
-      improvement: ''
-      prepared: true
-      warded: false
-      secret: false
       gifted:
         enabled: false
         amount: 1
-      consumable: false
-      quantity: 1
-      maxQuantity:
-        raw: ''
-        derived: 0
-      effectTypes:
-        - sensory
-    _id: VE2BrEPH7XS9CqSg
+      grantOnly: false
+      heightened: ''
+      improvement: ''
+      improvements:
+        attributeImprovement:
+          attribute: per
+          minVal: 2
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+      interaction: manifest
+      invoked: false
+      limitation: ''
+      maneuver: passive
+      overview:
+        base: >-
+          You can passively smell the types of all living creatures within 30
+          feet. You can detect dead and undead creatures as well, but you cannot
+          distinguish within or between them. They all smell like death. You
+          also gain @L[Ability:Scent Seeing]{Scent Seeing}. You can not detect
+          @L[Condition:Odorless]{odorless} creatures in this way.
+        proficient: ''
+        fluent: ''
+      piercing: normal
+      powerSources: []
+      prepared: true
+      range: Self.
+      requirements: You are not @L[Condition:Anosmatic]{anosmatic}.
+      results:
+        hit: ''
+        critHit: ''
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      ritual: false
+      rotator: false
+      secret: false
+      skill: true
+      spell: false
+      standard: true
+      sustained: false
+      targets:
+        - self
+      trigger: ''
+      warded: false
+      class: berserker
+    _id: IVrcKlB3EMEpZ1By
     img: systems/teriock/src/icons/abilities/advanced-smell.webp
     changes: []
     disabled: false
@@ -313,14 +317,15 @@ effects:
       systemId: teriock
       systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!XjmH0pU2kvIZRsCH.VE2BrEPH7XS9CqSg'
+    _key: '!items.effects!XjmH0pU2kvIZRsCH.IVrcKlB3EMEpZ1By'
   - name: Scent Seeing
     type: ability
+    img: systems/teriock/src/icons/abilities/scent-seeing.webp
     system:
       hierarchy:
-        supId: VE2BrEPH7XS9CqSg
         rootUuid: Compendium.teriock.powers.Item.XjmH0pU2kvIZRsCH
         subIds: []
+        supId: IVrcKlB3EMEpZ1By
       applies:
         base:
           statuses: []
@@ -495,8 +500,8 @@ effects:
         conditions:
           present: []
           absent: []
-        stationary: false
         description: While Target Remains In Range
+        stationary: false
       sustained: false
       range: '10'
       overview:
@@ -571,18 +576,21 @@ effects:
       prepared: true
       warded: false
       secret: false
-      gifted:
-        enabled: false
-        amount: 1
       consumable: false
       quantity: 1
       maxQuantity:
         raw: ''
-        derived: 0
+        saved: ''
       effectTypes:
         - sensory
-    _id: 3OfpFkuDrE0FLdip
-    img: systems/teriock/src/icons/abilities/scent-seeing.webp
+      adept:
+        enabled: false
+        amount: 1
+      gifted:
+        enabled: false
+        amount: 1
+      grantOnly: false
+    _id: ygEnOXJDNGblunwB
     changes: []
     disabled: false
     duration:
@@ -597,10 +605,15 @@ effects:
       systemId: teriock
       systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!XjmH0pU2kvIZRsCH.3OfpFkuDrE0FLdip'
+    _key: '!items.effects!XjmH0pU2kvIZRsCH.ygEnOXJDNGblunwB'
   - name: Fearless
     type: ability
     system:
+      consumable: false
+      maxQuantity:
+        saved: ''
+        raw: ''
+      quantity: 1
       hierarchy:
         rootUuid: Compendium.teriock.powers.Item.XjmH0pU2kvIZRsCH
         subIds: []
@@ -755,61 +768,10 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
-      elderSorcery: false
-      elderSorceryIncant: ''
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-        parent: null
-        package: null
-      targets:
-        - self
-      elements: []
-      duration:
-        unit: noLimit
-        quantity: 0
-        conditions:
-          present: []
-          absent: []
-        stationary: false
-        description: Always Active
-      sustained: false
-      range: Self.
-      overview:
-        base: >-
-          You are @L[Keyword:Immunity]{immune} to being
-          @L[Condition:Frightened]{frightened}.
-        proficient: ''
-        fluent: ''
-      results:
-        hit: ''
-        critHit: ''
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
-      skill: false
-      spell: false
-      standard: false
-      ritual: false
-      class: ''
-      rotator: false
-      invoked: false
+      adept:
+        enabled: false
+        amount: 1
+      basic: false
       costs:
         verbal: false
         somatic: false
@@ -834,30 +796,79 @@ effects:
             variable: ''
         break: ''
         materialCost: ''
-      heightened: ''
+      delivery:
+        base: self
+        parent: null
+        package: null
+      duration:
+        unit: noLimit
+        quantity: 0
+        conditions:
+          present: []
+          absent: []
+        stationary: false
+        description: Always Active
+      effectTypes: []
+      elderSorcery: false
+      elderSorceryIncant: ''
+      elements: []
       endCondition: ''
-      requirements: ''
-      effects: []
+      executionTime: passive
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
-      trigger: ''
-      basic: false
+      featSaveAttribute: mov
       form: normal
-      limitation: ''
-      improvement: ''
-      prepared: true
-      warded: false
-      secret: false
       gifted:
         enabled: false
         amount: 1
-      consumable: false
-      quantity: 1
-      maxQuantity:
-        raw: ''
-        derived: 0
-    _id: cCf66ZpgXYzNqoKk
+      grantOnly: false
+      heightened: ''
+      improvement: ''
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+      interaction: manifest
+      invoked: false
+      limitation: ''
+      maneuver: passive
+      overview:
+        base: >-
+          You are @L[Keyword:Immunity]{immune} to being
+          @L[Condition:Frightened]{frightened}.
+        proficient: ''
+        fluent: ''
+      piercing: normal
+      powerSources:
+        - martial
+      prepared: true
+      range: Self.
+      requirements: ''
+      results:
+        hit: ''
+        critHit: ''
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      ritual: false
+      rotator: false
+      secret: false
+      skill: false
+      spell: false
+      standard: false
+      sustained: false
+      targets:
+        - self
+      trigger: ''
+      warded: false
+    _id: DV2LRcPB4gFtSXhu
     img: systems/teriock/src/icons/abilities/fearless.webp
     changes: []
     disabled: false
@@ -871,15 +882,15 @@ effects:
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.0
+      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!XjmH0pU2kvIZRsCH.cCf66ZpgXYzNqoKk'
+    _key: '!items.effects!XjmH0pU2kvIZRsCH.DV2LRcPB4gFtSXhu'
 ownership:
   default: 0
 flags: {}
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.0
+  systemVersion: 0.9.1
   lastModifiedBy: teriockBuilder00
 _key: '!items!XjmH0pU2kvIZRsCH'

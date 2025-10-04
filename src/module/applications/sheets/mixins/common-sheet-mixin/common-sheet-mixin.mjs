@@ -1,5 +1,6 @@
 import * as createEffects from "../../../../helpers/create-effects.mjs";
 import { buildMessage } from "../../../../helpers/messages-builder/message-builder.mjs";
+import { TeriockDialog } from "../../../api/_module.mjs";
 import {
   selectAbilityDialog,
   selectPropertyDialog,
@@ -55,6 +56,8 @@ export default (Base) => {
           editImage: this._editImage,
           openDoc: this._openDoc,
           quickToggle: this._quickToggle,
+          refreshIndexThisHard: this._refreshIndexThisHard,
+          refreshIndexThisSoft: this._refreshIndexThisSoft,
           reloadThis: this._reloadThis,
           rollDoc: this._rollDoc,
           rollThis: this._rollThis,
@@ -82,7 +85,21 @@ export default (Base) => {
           height: 600,
           width: 560,
         },
-        window: { resizable: true },
+        window: {
+          resizable: true,
+          controls: [
+            {
+              icon: "fa-solid fa-arrows-rotate",
+              label: "Soft Index Refresh",
+              action: "refreshIndexThisSoft",
+            },
+            {
+              icon: "fa-solid fa-arrows-rotate",
+              label: "Hard Index Refresh",
+              action: "refreshIndexThisHard",
+            },
+          ],
+        },
       };
 
       /**
@@ -266,6 +283,54 @@ export default (Base) => {
         const { path } = target.dataset;
         const current = target.dataset.bool === "true";
         await this.document.update({ [path]: !current });
+      }
+
+      /**
+       * Refresh this document from the index.
+       * @returns {Promise<void>}
+       */
+      static async _refreshIndexThisHard() {
+        if (this.editable) {
+          const proceed = await TeriockDialog.confirm({
+            content:
+              "Are you sure you would like to refresh this? It will alter its content and may delete important" +
+              " information.",
+            modal: true,
+            window: { title: "Confirm Hard Refresh" },
+          });
+          if (proceed) {
+            await this.document.system.hardRefreshFromIndex();
+          }
+          foundry.ui.notifications.success(`Refreshed ${this.document.name}.`);
+        } else {
+          foundry.ui.notifications.warn(
+            `Cannot refresh ${this.document.name}. Sheet is not editable.`,
+          );
+        }
+      }
+
+      /**
+       * Refresh this document from the index.
+       * @returns {Promise<void>}
+       */
+      static async _refreshIndexThisSoft() {
+        if (this.editable) {
+          const proceed = await TeriockDialog.confirm({
+            content:
+              "Are you sure you would like to refresh this? It will alter its content and may delete important" +
+              " information.",
+            modal: true,
+            window: { title: "Confirm Soft Refresh" },
+          });
+          if (proceed) {
+            await this.document.system.refreshFromIndex();
+          }
+          foundry.ui.notifications.success(`Refreshed ${this.document.name}.`);
+        } else {
+          foundry.ui.notifications.warn(
+            `Cannot refresh ${this.document.name}. Sheet is not editable.`,
+          );
+        }
       }
 
       /**

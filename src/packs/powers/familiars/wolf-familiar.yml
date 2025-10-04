@@ -36,6 +36,11 @@ effects:
   - name: Cure Illness
     type: ability
     system:
+      consumable: false
+      maxQuantity:
+        saved: ''
+        raw: ''
+      quantity: 1
       hierarchy:
         rootUuid: Compendium.teriock.powers.Item.SGLRJGBLKtb9KGvN
         subIds: []
@@ -190,75 +195,10 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
-      elderSorcery: false
-      elderSorceryIncant: ''
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: slow
-      executionTime: 10 Minutes
-      delivery:
-        base: sight
-        parent: null
-        package: ritual
-      targets:
-        - creature
-      elements:
-        - life
-      duration:
-        unit: hour
-        quantity: 1
-        conditions:
-          present: []
-          absent: []
-        stationary: false
-        description: 1 Hour
-      sustained: false
-      range: '5'
-      overview:
-        base: >-
-          Make an @L[Tradecraft:Herbalist]{herbalist} check. The @L[Core:GM]{GM}
-          determines the difficulty based on the severity of the illness. The
-          @L[Core:GM]{GM} may also require you to have access to specific
-          ingredients or tools or put other conditions in place. If the illness
-          is mental in nature, then Cure Illness acts as a @L[Category:Mental
-          effects]{mental effect}.
-        proficient: >-
-          You are @L[Keyword:Adept]{adept} at Cure Illness. Before you make the
-          check, you may spend 1 additional @L[Core:MP]{MP} to know the DC if it
-          is less than your total level. You may also add your
-          @L[Core:Proficiency Bonus]{proficiency bonus} to the
-          @L[Tradecraft:Herbalist]{herbalist} check regardless of whether or not
-          you are proficient in @L[Tradecraft:Herbalist]{herbalist}.
-        fluent: ''
-      results:
-        hit: ''
-        critHit: ''
-        miss: ''
-        critMiss: ''
-        save: The target is cured of the illness.
-        critSave: ''
-        fail: >-
-          The target is not cured, but the illness does not worsen for the
-          duration of Healing Touch. You may cast Cure Illness again to keep the
-          disease from progressing, but you may not attempt the check again.
-        critFail: ''
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
-      skill: false
-      spell: true
-      standard: true
-      ritual: true
-      class: lifeMage
-      rotator: false
-      invoked: false
+      adept:
+        enabled: false
+        amount: 1
+      basic: false
       costs:
         verbal: true
         somatic: true
@@ -283,33 +223,97 @@ effects:
             variable: ''
         break: ''
         materialCost: ''
-      heightened: >-
-        For each additional @L[Core:MP]{MP} spent, The DC of the check is
-        reduced by 1.
+      delivery:
+        base: sight
+        parent: null
+        package: ritual
+      duration:
+        unit: hour
+        quantity: 1
+        conditions:
+          present: []
+          absent: []
+        stationary: false
+        description: 1 Hour
+      effectTypes:
+        - healing
+      elderSorcery: false
+      elderSorceryIncant: ''
+      elements:
+        - life
       endCondition: ''
-      requirements: ''
+      executionTime: 10 Minutes
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
-      trigger: ''
-      basic: false
+      featSaveAttribute: mov
       form: normal
-      limitation: Mental only.
-      improvement: ''
-      prepared: true
-      warded: false
-      secret: false
       gifted:
         enabled: false
         amount: 1
-      consumable: false
-      quantity: 1
-      maxQuantity:
-        raw: ''
-        derived: 0
-      effectTypes:
-        - healing
-    _id: 9GKy8nLqjk61Trwx
+      grantOnly: false
+      heightened: >-
+        For each additional @L[Core:MP]{MP} spent, The DC of the check is
+        reduced by 1.
+      improvement: ''
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+      interaction: manifest
+      invoked: false
+      limitation: Mental only.
+      maneuver: slow
+      overview:
+        base: >-
+          Make an @L[Tradecraft:Herbalist]{herbalist} check. The @L[Core:GM]{GM}
+          determines the difficulty based on the severity of the illness. The
+          @L[Core:GM]{GM} may also require you to have access to specific
+          ingredients or tools or put other conditions in place. If the illness
+          is mental in nature, then Cure Illness acts as a @L[Category:Mental
+          effects]{mental effect}.
+        proficient: >-
+          You are @L[Keyword:Adept]{adept} at Cure Illness. Before you make the
+          check, you may spend 1 additional @L[Core:MP]{MP} to know the DC if it
+          is less than your total level. You may also add your
+          @L[Core:Proficiency Bonus]{proficiency bonus} to the
+          @L[Tradecraft:Herbalist]{herbalist} check regardless of whether or not
+          you are proficient in @L[Tradecraft:Herbalist]{herbalist}.
+        fluent: ''
+      piercing: normal
+      powerSources:
+        - magical
+      prepared: true
+      range: '5'
+      requirements: ''
+      results:
+        hit: ''
+        critHit: ''
+        miss: ''
+        critMiss: ''
+        save: The target is cured of the illness.
+        critSave: ''
+        fail: >-
+          The target is not cured, but the illness does not worsen for the
+          duration of Healing Touch. You may cast Cure Illness again to keep the
+          disease from progressing, but you may not attempt the check again.
+        critFail: ''
+      ritual: true
+      rotator: false
+      secret: false
+      skill: false
+      spell: true
+      standard: true
+      sustained: false
+      targets:
+        - creature
+      trigger: ''
+      warded: false
+      class: lifeMage
+    _id: R5QxhgxbCQmGkKwn
     img: systems/teriock/src/icons/abilities/cure-illness.webp
     changes: []
     disabled: false
@@ -325,10 +329,15 @@ effects:
       systemId: teriock
       systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!SGLRJGBLKtb9KGvN.9GKy8nLqjk61Trwx'
+    _key: '!items.effects!SGLRJGBLKtb9KGvN.R5QxhgxbCQmGkKwn'
   - name: Talented Tracker
     type: ability
     system:
+      consumable: false
+      maxQuantity:
+        saved: ''
+        raw: ''
+      quantity: 1
       hierarchy:
         rootUuid: Compendium.teriock.powers.Item.SGLRJGBLKtb9KGvN
         subIds: []
@@ -487,61 +496,10 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
-      elderSorcery: false
-      elderSorceryIncant: ''
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-        parent: null
-        package: null
-      targets:
-        - self
-      elements: []
-      duration:
-        unit: noLimit
-        quantity: 0
-        conditions:
-          present: []
-          absent: []
-        stationary: false
-        description: Always Active
-      sustained: false
-      range: Self.
-      overview:
-        base: >-
-          You are a @L[Keyword:Talented]{talented}
-          @L[Tradecraft:Tracker]{tracker}.
-        proficient: ''
-        fluent: ''
-      results:
-        hit: ''
-        critHit: ''
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
-      skill: false
-      spell: false
-      standard: false
-      ritual: false
-      class: ''
-      rotator: false
-      invoked: false
+      adept:
+        enabled: false
+        amount: 1
+      basic: false
       costs:
         verbal: false
         somatic: false
@@ -566,30 +524,79 @@ effects:
             variable: ''
         break: ''
         materialCost: ''
-      heightened: ''
+      delivery:
+        base: self
+        parent: null
+        package: null
+      duration:
+        unit: noLimit
+        quantity: 0
+        conditions:
+          present: []
+          absent: []
+        stationary: false
+        description: Always Active
+      effectTypes: []
+      elderSorcery: false
+      elderSorceryIncant: ''
+      elements: []
       endCondition: ''
-      requirements: ''
-      effects: []
+      executionTime: passive
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
-      trigger: ''
-      basic: false
+      featSaveAttribute: mov
       form: normal
-      limitation: ''
-      improvement: ''
-      prepared: true
-      warded: false
-      secret: false
       gifted:
         enabled: false
         amount: 1
-      consumable: false
-      quantity: 1
-      maxQuantity:
-        raw: ''
-        derived: 0
-    _id: SiRqrxOIxoAFCc1o
+      grantOnly: false
+      heightened: ''
+      improvement: ''
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+      interaction: manifest
+      invoked: false
+      limitation: ''
+      maneuver: passive
+      overview:
+        base: >-
+          You are a @L[Keyword:Talented]{talented}
+          @L[Tradecraft:Tracker]{tracker}.
+        proficient: ''
+        fluent: ''
+      piercing: normal
+      powerSources:
+        - martial
+      prepared: true
+      range: Self.
+      requirements: ''
+      results:
+        hit: ''
+        critHit: ''
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      ritual: false
+      rotator: false
+      secret: false
+      skill: false
+      spell: false
+      standard: false
+      sustained: false
+      targets:
+        - self
+      trigger: ''
+      warded: false
+    _id: l6ijpxUZPfdnCEST
     img: icons/creatures/abilities/paw-print-tan.webp
     changes: []
     disabled: false
@@ -603,15 +610,15 @@ effects:
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.0
+      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!SGLRJGBLKtb9KGvN.SiRqrxOIxoAFCc1o'
+    _key: '!items.effects!SGLRJGBLKtb9KGvN.l6ijpxUZPfdnCEST'
 ownership:
   default: 0
 flags: {}
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.0
+  systemVersion: 0.9.1
   lastModifiedBy: teriockBuilder00
 _key: '!items!SGLRJGBLKtb9KGvN'

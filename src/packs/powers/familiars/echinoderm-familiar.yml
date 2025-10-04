@@ -36,6 +36,11 @@ effects:
   - name: Brace
     type: ability
     system:
+      consumable: false
+      maxQuantity:
+        saved: ''
+        raw: ''
+      quantity: 1
       hierarchy:
         rootUuid: Compendium.teriock.powers.Item.0EIQ1saVDbLFh89h
         subIds: []
@@ -192,66 +197,10 @@ effects:
         macros:
           Compendium_teriock_execution_Macro_0Gb7QPmgAotusvVQ: effectApplication
           Compendium_teriock_execution_Macro_RCqX2d4YKWXd6o1i: movement
-      elderSorcery: false
-      elderSorceryIncant: ''
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: self
-        parent: null
-        package: null
-      targets:
-        - self
-      elements: []
-      duration:
-        unit: noLimit
-        quantity: 0
-        conditions:
-          present: []
-          absent: []
-        stationary: true
-        description: While Stationary
-      sustained: true
-      range: Self.
-      overview:
-        base: >-
-          Lose all @L[Core:Temporary Hit Points]{temporary HP} and gain [[/roll
-          1d6]] @L[Core:Temporary Hit Points]{temporary HP} as long as you
-          remain stationary.
-        proficient: >-
-          Instead gain [[/roll 1d6 + (@p)d6]] @L[Core:Temporary Hit
-          Points]{temporary HP}.
-        fluent: >-
-          Instead gain [[/roll 1d6 + (@f)d6]] @L[Core:Temporary Hit
-          Points]{temporary HP}.
-      results:
-        hit: ''
-        critHit: ''
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
-      skill: true
-      spell: false
-      standard: true
-      ritual: false
-      class: veteran
-      rotator: false
-      invoked: false
+      adept:
+        enabled: false
+        amount: 1
+      basic: false
       costs:
         verbal: false
         somatic: false
@@ -276,30 +225,85 @@ effects:
             variable: ''
         break: ''
         materialCost: ''
-      heightened: ''
+      delivery:
+        base: self
+        parent: null
+        package: null
+      duration:
+        unit: noLimit
+        quantity: 0
+        conditions:
+          present: []
+          absent: []
+        stationary: true
+        description: While Stationary
+      effectTypes: []
+      elderSorcery: false
+      elderSorceryIncant: ''
+      elements: []
       endCondition: ''
-      requirements: ''
-      effects: []
+      executionTime: a1
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
-      trigger: ''
-      basic: false
+      featSaveAttribute: mov
       form: normal
-      limitation: ''
-      improvement: ''
-      prepared: true
-      warded: false
-      secret: false
       gifted:
         enabled: false
         amount: 1
-      consumable: false
-      quantity: 1
-      maxQuantity:
-        raw: ''
-        derived: 0
-    _id: UhSAqJ7L5JS4a9yn
+      grantOnly: false
+      heightened: ''
+      improvement: ''
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+      interaction: manifest
+      invoked: false
+      limitation: ''
+      maneuver: active
+      overview:
+        base: >-
+          Lose all @L[Core:Temporary Hit Points]{temporary HP} and gain [[/roll
+          1d6]] @L[Core:Temporary Hit Points]{temporary HP} as long as you
+          remain stationary.
+        proficient: >-
+          Instead gain [[/roll 1d6 + (@p)d6]] @L[Core:Temporary Hit
+          Points]{temporary HP}.
+        fluent: >-
+          Instead gain [[/roll 1d6 + (@f)d6]] @L[Core:Temporary Hit
+          Points]{temporary HP}.
+      piercing: normal
+      powerSources:
+        - martial
+      prepared: true
+      range: Self.
+      requirements: ''
+      results:
+        hit: ''
+        critHit: ''
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      ritual: false
+      rotator: false
+      secret: false
+      skill: true
+      spell: false
+      standard: true
+      sustained: true
+      targets:
+        - self
+      trigger: ''
+      warded: false
+      class: veteran
+    _id: jex1lotHdAZlYHRU
     img: systems/teriock/src/icons/abilities/brace.webp
     changes: []
     disabled: false
@@ -313,12 +317,17 @@ effects:
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.0
+      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!0EIQ1saVDbLFh89h.UhSAqJ7L5JS4a9yn'
+    _key: '!items.effects!0EIQ1saVDbLFh89h.jex1lotHdAZlYHRU'
   - name: Resist Effects
     type: ability
     system:
+      consumable: false
+      maxQuantity:
+        saved: ''
+        raw: ''
+      quantity: 1
       hierarchy:
         rootUuid: Compendium.teriock.powers.Item.0EIQ1saVDbLFh89h
         subIds: []
@@ -474,22 +483,38 @@ effects:
             doesExpire: false
         macros:
           Compendium_teriock_execution_Macro_5AsyrTgmr9NrD3XS: preExecution
-      elderSorcery: false
-      elderSorceryIncant: ''
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
+      adept:
+        enabled: false
+        amount: 1
+      basic: false
+      costs:
+        verbal: false
+        somatic: false
+        material: false
+        mp:
+          type: static
+          value:
+            static: 1
+            formula: ''
+            variable: ''
+        hp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        gp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        break: ''
+        materialCost: ''
       delivery:
         base: self
         parent: null
         package: null
-      targets:
-        - self
-      elements:
-        - storm
       duration:
         unit: hour
         quantity: 1
@@ -498,8 +523,36 @@ effects:
           absent: []
         stationary: false
         description: 1 Hour
-      sustained: true
-      range: Self.
+      effectTypes:
+        - resistance
+      elderSorcery: false
+      elderSorceryIncant: ''
+      elements:
+        - storm
+      endCondition: ''
+      executionTime: a1
+      expansion: null
+      expansionRange: null
+      expansionSaveAttribute: mov
+      featSaveAttribute: mov
+      form: special
+      gifted:
+        enabled: true
+        amount: 1
+      grantOnly: false
+      heightened: ''
+      improvement: ''
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+      interaction: manifest
+      invoked: false
+      limitation: ''
+      maneuver: active
       overview:
         base: >-
           Pick one of the following @L[Category:Effects]{effect types}. You
@@ -527,6 +580,12 @@ effects:
           effects}</li></ol>
         proficient: ''
         fluent: ''
+      piercing: normal
+      powerSources:
+        - magical
+      prepared: true
+      range: Self.
+      requirements: ''
       results:
         hit: ''
         critHit: ''
@@ -536,70 +595,19 @@ effects:
         critSave: ''
         fail: ''
         critFail: ''
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
+      ritual: false
+      rotator: true
+      secret: false
       skill: false
       spell: true
       standard: true
-      ritual: false
-      class: stormMage
-      rotator: true
-      invoked: false
-      costs:
-        verbal: false
-        somatic: false
-        material: false
-        mp:
-          type: static
-          value:
-            static: 1
-            formula: ''
-            variable: ''
-        hp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        gp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        break: ''
-        materialCost: ''
-      heightened: ''
-      endCondition: ''
-      requirements: ''
-      expansion: null
-      expansionRange: null
-      expansionSaveAttribute: mov
+      sustained: true
+      targets:
+        - self
       trigger: ''
-      basic: false
-      form: special
-      limitation: ''
-      improvement: ''
-      prepared: true
       warded: false
-      secret: false
-      gifted:
-        enabled: true
-        amount: 1
-      consumable: false
-      quantity: 1
-      maxQuantity:
-        raw: ''
-        derived: 0
-      effectTypes:
-        - resistance
-    _id: abc1SC2WrHdm0Qk3
+      class: stormMage
+    _id: J5xgTSjk0Zi4Gzzg
     img: systems/teriock/src/icons/abilities/resist-effects.webp
     changes: []
     disabled: false
@@ -615,13 +623,13 @@ effects:
       systemId: teriock
       systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!0EIQ1saVDbLFh89h.abc1SC2WrHdm0Qk3'
+    _key: '!items.effects!0EIQ1saVDbLFh89h.J5xgTSjk0Zi4Gzzg'
 ownership:
   default: 0
 flags: {}
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.0
+  systemVersion: 0.9.1
   lastModifiedBy: teriockBuilder00
 _key: '!items!0EIQ1saVDbLFh89h'

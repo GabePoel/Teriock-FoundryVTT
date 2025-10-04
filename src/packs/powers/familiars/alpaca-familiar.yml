@@ -36,6 +36,11 @@ effects:
   - name: Disable Ray
     type: ability
     system:
+      consumable: false
+      maxQuantity:
+        saved: ''
+        raw: ''
+      quantity: 1
       hierarchy:
         rootUuid: Compendium.teriock.powers.Item.ia6dVCJEov3alFfE
         subIds: []
@@ -191,63 +196,10 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
-      elderSorcery: false
-      elderSorceryIncant: ''
-      powerSources:
-        - spiritual
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: reactive
-      executionTime: r1
-      delivery:
-        base: missile
-        parent: null
-        package: ray
-      targets:
-        - creature
-      elements: []
-      duration:
-        unit: minute
-        quantity: 1
-        conditions:
-          present: []
-          absent: []
-        stationary: false
-        description: 1 Minute
-      sustained: false
-      range: '60'
-      overview:
-        base: ''
-        proficient: >-
-          This also makes the effect of that @L[Category:Abilities]{ability}
-          @L[Core:Fizzles]{fizzle}.
-        fluent: ''
-      results:
-        hit: >-
-          Target becomes @L[Keyword:Incapable]{incapable} of the
-          @L[Category:Abilities]{ability} they were using.
-        critHit: ''
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
-      piercing: av0
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
-      skill: true
-      spell: false
-      standard: true
-      ritual: false
-      class: thief
-      rotator: false
-      invoked: false
+      adept:
+        enabled: false
+        amount: 1
+      basic: false
       costs:
         verbal: false
         somatic: false
@@ -276,37 +228,89 @@ effects:
             variable: ''
         break: ''
         materialCost: ''
-      heightened: ''
+      delivery:
+        base: missile
+        parent: null
+        package: ray
+      duration:
+        unit: minute
+        quantity: 1
+        conditions:
+          present: []
+          absent: []
+        stationary: false
+        description: 1 Minute
+      effectTypes: []
+      elderSorcery: false
+      elderSorceryIncant: ''
+      elements: []
       endCondition: >-
         At the end of each of the target's @L[Core:Turn]{turns}, they roll
         [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.
-      requirements: You may only target the triggering creature.
-      effects: []
+      executionTime: r1
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      gifted:
+        enabled: false
+        amount: 1
+      grantOnly: false
+      heightened: ''
+      improvement: ''
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+      interaction: attack
+      invoked: false
+      limitation: ''
+      maneuver: reactive
+      overview:
+        base: ''
+        proficient: >-
+          This also makes the effect of that @L[Category:Abilities]{ability}
+          @L[Core:Fizzles]{fizzle}.
+        fluent: ''
+      piercing: av0
+      powerSources:
+        - spiritual
+      prepared: true
+      range: '60'
+      requirements: You may only target the triggering creature.
+      results:
+        hit: >-
+          Target becomes @L[Keyword:Incapable]{incapable} of the
+          @L[Category:Abilities]{ability} they were using.
+        critHit: ''
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      ritual: false
+      rotator: false
+      secret: false
+      skill: true
+      spell: false
+      standard: true
+      sustained: false
+      targets:
+        - creature
       trigger: >-
         Another creature uses a non-@L[Category:Basic abilities]{basic}
         @L[Category:Active abilities]{active} or @L[Category:Reactive
         abilities]{reactive ability} that isn't a @L[Category:Spells]{spell}
         against a different creature or some @L[Category:Equipment]{equipment}
         that different creature @L[Keyword:Bearing]{bares}.
-      basic: false
-      form: normal
-      limitation: ''
-      improvement: ''
-      prepared: true
       warded: false
-      secret: false
-      gifted:
-        enabled: false
-        amount: 1
-      consumable: false
-      quantity: 1
-      maxQuantity:
-        raw: ''
-        derived: 0
-    _id: udRqwSuPPLxaim1H
+      class: thief
+    _id: t8ngkXOUlMU7DEo1
     img: systems/teriock/src/icons/abilities/disable-ray.webp
     changes: []
     disabled: false
@@ -320,12 +324,17 @@ effects:
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.0
+      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!ia6dVCJEov3alFfE.udRqwSuPPLxaim1H'
+    _key: '!items.effects!ia6dVCJEov3alFfE.t8ngkXOUlMU7DEo1'
   - name: Endure
     type: ability
     system:
+      consumable: false
+      maxQuantity:
+        saved: ''
+        raw: ''
+      quantity: 1
       hierarchy:
         rootUuid: Compendium.teriock.powers.Item.ia6dVCJEov3alFfE
         subIds: []
@@ -482,65 +491,10 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
-      elderSorcery: false
-      elderSorceryIncant: ''
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: reactive
-      executionTime: r1
-      delivery:
-        base: self
-        parent: null
-        package: null
-      targets:
-        - self
-      elements: []
-      duration:
-        unit: instant
-        quantity: 0
-        conditions:
-          present: []
-          absent: []
-        stationary: false
-        description: Instant
-      sustained: false
-      range: Self.
-      overview:
-        base: >-
-          You take the triggering @L[Core:Damage]{damage} as a
-          @L[Damage:Hack]{limb hack} instead. All @L[Category:Damage
-          types]{damage types} still apply. If the hit was critical, you instead
-          take it as <i>two</i> @L[Damage:Hack]{limb hacks}. If the
-          @L[Core:Damage]{damage} was dealt by a creature, they choose which
-          limb is affected. If not, it is random.
-        proficient: ''
-        fluent: ''
-      results:
-        hit: ''
-        critHit: ''
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
-      skill: true
-      spell: false
-      standard: true
-      ritual: false
-      class: ranger
-      rotator: false
-      invoked: false
+      adept:
+        enabled: false
+        amount: 1
+      basic: false
       costs:
         verbal: false
         somatic: false
@@ -565,33 +519,93 @@ effects:
             variable: ''
         break: ''
         materialCost: ''
-      heightened: ''
+      delivery:
+        base: self
+        parent: null
+        package: null
+      duration:
+        unit: instant
+        quantity: 0
+        conditions:
+          present: []
+          absent: []
+        stationary: false
+        description: Instant
+      effectTypes:
+        - damaging
+      elderSorcery: false
+      elderSorceryIncant: ''
+      elements: []
       endCondition: ''
-      requirements: ''
+      executionTime: r1
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
-      trigger: >-
-        You are hit by an @L[Category:Attack abilities]{attack} that would
-        @L[Core:Damage]{damage} you.
-      basic: false
+      featSaveAttribute: mov
       form: normal
-      limitation: ''
-      improvement: ''
-      prepared: true
-      warded: false
-      secret: false
       gifted:
         enabled: false
         amount: 1
-      consumable: false
-      quantity: 1
-      maxQuantity:
-        raw: ''
-        derived: 0
-      effectTypes:
-        - damaging
-    _id: YMQFZNRHIgOQX44t
+      grantOnly: false
+      heightened: ''
+      improvement: ''
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+      interaction: manifest
+      invoked: false
+      limitation: ''
+      maneuver: reactive
+      overview:
+        base: >-
+          You take the triggering @L[Core:Damage]{damage} as a
+          @L[Damage:Hack]{limb hack} instead. All @L[Category:Damage
+          types]{damage types} still apply. If the hit was critical, you instead
+          take it as <i>two</i> @L[Damage:Hack]{limb hacks}. If you attempted to
+          @L[Core:Block Interaction]{block} the triggering @L[Category:Attack
+          abilities]{attack}, then a limb that @L[Keyword:Using]{used} whatever
+          @L[Category:Items]{item} you @L[Core:Block Interaction]{blocked} with
+          is the one that's @L[Damage:Hack]{hacked}. Otherwise, if the
+          @L[Core:Damage]{damage} was dealt by a creature, they choose which
+          limb is affected. If not, it is random. Only an
+          un-@L[Damage:Hack]{hacked} limb can be used for this. If that's not
+          possible, you take the @L[Core:Damage]{damage} normally.
+        proficient: ''
+        fluent: ''
+      piercing: normal
+      powerSources:
+        - martial
+      prepared: true
+      range: Self.
+      requirements: ''
+      results:
+        hit: ''
+        critHit: ''
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      ritual: false
+      rotator: false
+      secret: false
+      skill: true
+      spell: false
+      standard: true
+      sustained: false
+      targets:
+        - self
+      trigger: >-
+        You are hit by an @L[Category:Attack abilities]{attack} that would
+        @L[Core:Damage]{damage} you.
+      warded: false
+      class: ranger
+    _id: dIr9qazWuNuDw8DC
     img: systems/teriock/src/icons/abilities/endure.webp
     changes: []
     disabled: false
@@ -607,13 +621,311 @@ effects:
       systemId: teriock
       systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!ia6dVCJEov3alFfE.YMQFZNRHIgOQX44t'
+    _key: '!items.effects!ia6dVCJEov3alFfE.dIr9qazWuNuDw8DC'
+  - name: Hide
+    type: ability
+    system:
+      consumable: false
+      maxQuantity:
+        saved: ''
+        raw: ''
+      quantity: 1
+      hierarchy:
+        rootUuid: Compendium.teriock.powers.Item.ia6dVCJEov3alFfE
+        subIds: []
+        supId: null
+      applies:
+        base:
+          statuses: []
+          startStatuses:
+            - hidden
+          endStatuses: []
+          rolls:
+            hide: 10 + @snk
+          hacks: []
+          checks: []
+          duration: 0
+          changes: []
+          common: []
+          expiration:
+            normal:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            crit:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            changeOnCrit: false
+            doesExpire: false
+        proficient:
+          statuses: []
+          startStatuses: []
+          endStatuses: []
+          rolls:
+            hide: 1d20 + @snk + @p
+          hacks: []
+          checks: []
+          duration: 0
+          changes: []
+          common: []
+          expiration:
+            normal:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            crit:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            changeOnCrit: false
+            doesExpire: false
+        fluent:
+          statuses: []
+          startStatuses: []
+          endStatuses: []
+          rolls:
+            hide: 1d20 + @snk + @f
+          hacks: []
+          checks: []
+          duration: 0
+          changes: []
+          common: []
+          expiration:
+            normal:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            crit:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            changeOnCrit: false
+            doesExpire: false
+        heightened:
+          statuses: []
+          startStatuses: []
+          endStatuses: []
+          rolls: {}
+          hacks: []
+          checks: []
+          duration: 0
+          changes: []
+          common: []
+          expiration:
+            normal:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            crit:
+              combat:
+                who:
+                  type: target
+                what:
+                  type: none
+                  roll: 2d4kh1
+                  threshold: 4
+                when:
+                  time: start
+                  trigger: turn
+                  skip: 0
+            changeOnCrit: false
+            doesExpire: false
+        macros: {}
+      adept:
+        enabled: false
+        amount: 1
+      basic: false
+      costs:
+        verbal: false
+        somatic: false
+        material: false
+        mp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        hp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        gp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        break: ''
+        materialCost: ''
+      delivery:
+        base: self
+        parent: null
+        package: null
+      duration:
+        unit: instant
+        quantity: 0
+        conditions:
+          present: []
+          absent: []
+        stationary: false
+        description: Instant
+      effectTypes: []
+      elderSorcery: false
+      elderSorceryIncant: ''
+      elements: []
+      endCondition: ''
+      executionTime: a1
+      expansion: null
+      expansionRange: null
+      expansionSaveAttribute: mov
+      featSaveAttribute: mov
+      form: normal
+      gifted:
+        enabled: false
+        amount: 1
+      grantOnly: false
+      heightened: ''
+      improvement: ''
+      improvements:
+        attributeImprovement:
+          attribute: snk
+          minVal: 2
+        featSaveImprovement:
+          attribute: snk
+          amount: proficiency
+      interaction: manifest
+      invoked: false
+      limitation: ''
+      maneuver: active
+      overview:
+        base: >-
+          You become @L[Condition:Hidden]{hidden}. As you do this, you may roll
+          [[/roll 1d20 + @snk]]. If this is greater than your @L[Core:Passive
+          Attributes]{passive} @L[Core:Sneak]{sneak} ([[/roll 10 + @snk]]), then
+          you use it as your hidden DC. If not, use your @L[Core:Passive
+          Attributes]{passive} @L[Core:Sneak]{sneak}.
+        proficient: >-
+          Instead roll [[/roll 1d20 + @snk + @p]] for your hidden DC (if it's
+          greater than your @L[Core:Passive Attributes]{passive}
+          @L[Core:Sneak]{sneak}).
+        fluent: >-
+          Instead roll [[/roll 1d20 + @snk + @f]] for your hidden DC (if it's
+          greater than your @L[Core:Passive Attributes]{passive}
+          @L[Core:Sneak]{sneak}).
+      piercing: normal
+      powerSources:
+        - martial
+      prepared: true
+      range: Self.
+      requirements: >-
+        You are in a location with shadows, dim light,
+        @L[Core:Cover]{three-quarters cover}, or some other feature which the
+        @L[Core:GM]{GM} determines is appropriate for being
+        @L[Condition:Hidden]{hidden}. You must remain in areas that maintain
+        these conditions to stay @L[Condition:Hidden]{hidden}.
+      results:
+        hit: ''
+        critHit: ''
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      ritual: false
+      rotator: false
+      secret: false
+      skill: true
+      spell: false
+      standard: true
+      sustained: false
+      targets:
+        - self
+      trigger: ''
+      warded: false
+      class: thief
+    _id: wYVUqac9aftIDSX3
+    img: systems/teriock/src/icons/abilities/hide.webp
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+    origin: null
+    transfer: true
+    statuses: []
+    flags: {}
+    _stats:
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.1
+      lastModifiedBy: teriockBuilder00
+    _key: '!items.effects!ia6dVCJEov3alFfE.wYVUqac9aftIDSX3'
 ownership:
   default: 0
 flags: {}
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.0
+  systemVersion: 0.9.1
   lastModifiedBy: teriockBuilder00
 _key: '!items!ia6dVCJEov3alFfE'

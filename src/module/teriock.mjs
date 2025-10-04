@@ -332,6 +332,9 @@ foundry.helpers.Hooks.once("init", function () {
       execution: () =>
         /** @type {TeriockMacroCompendium} */
         packs.get("teriock.execution"),
+      magicItems: () =>
+        /** @type {TeriockEquipmentCompendium} */
+        packs.get("teriock.magicItems"),
       maintenance: () =>
         /** @type {TeriockMacroCompendium} */
         packs.get("teriock.maintenance"),

@@ -1,3 +1,4 @@
+import { getItem } from "../../../helpers/fetch.mjs";
 import { mergeFreeze } from "../../../helpers/utils.mjs";
 import {
   ConsumableDataMixin,
@@ -46,6 +47,21 @@ export default class TeriockEquipmentModel extends WieldedDataMixin(
     type: "equipment",
     usable: true,
     childEffectTypes: ["ability", "fluency", "property", "resource"],
+    indexCategoryKey: "equipment",
+    indexCompendiumKey: "equipment",
+    preservedProperties: [
+      "name",
+      "img",
+      "system.consumable",
+      "system.description",
+      "system.flaws",
+      "system.fluent",
+      "system.maxQuantity",
+      "system.notes",
+      "system.powerLevel",
+      "system.proficient",
+      "system.quantity",
+    ],
   });
 
   /** @inheritDoc */
@@ -53,10 +69,6 @@ export default class TeriockEquipmentModel extends WieldedDataMixin(
     const s = super.defineSchema();
     Object.assign(s, schema._defineSchema());
     return s;
-    //return foundry.utils.mergeObject(
-    //  super.defineSchema(),
-    //  schema._defineSchema(),
-    //);
   }
 
   /** @inheritDoc */
@@ -193,6 +205,11 @@ export default class TeriockEquipmentModel extends WieldedDataMixin(
     if (!data.cancel) {
       await this.parent.update({ "system.equipped": true });
     }
+  }
+
+  /** @inheritDoc */
+  async getIndexReference() {
+    return await getItem(this.equipmentType, "equipment");
   }
 
   /**

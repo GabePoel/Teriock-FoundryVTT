@@ -1,6 +1,12 @@
 const equipmentPack = game.teriock.packs.equipment();
 
-foundry.ui.notifications.info("Pulling all equipment from wiki.");
+const progress = foundry.ui.notifications.info(
+  "Pulling all equipment from wiki.",
+  {
+    pct: 0.01,
+    progress: true,
+  },
+);
 
 async function processEquipment(equipmentName) {
   let equipmentItem = equipmentPack.index.find((e) => e.name === equipmentName);
@@ -19,11 +25,45 @@ async function processEquipment(equipmentName) {
     equipmentItem = await foundry.utils.fromUuid(equipmentItem.uuid);
   }
   await equipmentItem.system.wikiPull({ notify: false });
+  return {
+    equipmentName,
+    success: true,
+  };
 }
 
-const equipmentPromises = Object.values(TERIOCK.index.equipment).map(
-  (equipmentName) => processEquipment(equipmentName),
-);
+// Process in batches of 50
+const allEquipment = Object.values(TERIOCK.index.equipment);
+const batchSize = 50;
+let processedCount = 0;
 
-await Promise.all(equipmentPromises);
-foundry.ui.notifications.success("Done.");
+try {
+  for (let i = 0; i < allEquipment.length; i += batchSize) {
+    const batch = allEquipment.slice(i, i + batchSize);
+
+    await Promise.all(
+      batch.map((equipmentName) => processEquipment(equipmentName)),
+    );
+
+    processedCount += batch.length;
+
+    const pct = Math.min(processedCount / allEquipment.length, 0.99);
+    progress.update({
+      pct: pct,
+      message: `Processed ${processedCount} of ${allEquipment.length} equipment items...`,
+    });
+  }
+
+  progress.update({
+    pct: 1,
+    message: "Done.",
+  });
+
+  foundry.ui.notifications.success(
+    `Successfully processed ${allEquipment.length} equipment items.`,
+  );
+} catch (error) {
+  progress.update({
+    pct: 1,
+    message: `Error: ${error.message}`,
+  });
+}

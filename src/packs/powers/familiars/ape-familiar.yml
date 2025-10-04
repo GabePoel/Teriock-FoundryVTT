@@ -36,11 +36,16 @@ effects:
   - name: Acrobatics
     type: ability
     system:
+      consumable: false
+      maxQuantity:
+        saved: ''
+        raw: ''
+      quantity: 1
       hierarchy:
         rootUuid: Compendium.teriock.powers.Item.DSlWNGyadTYboYkv
         subIds:
-          - 47Q85q9172Uw0ZB2
-          - xn6U1iOg0QC9knq0
+          - 4ctFgGlfgmaigzek
+          - NOqJ4U2EZYE9U9lE
         supId: null
       applies:
         base:
@@ -192,61 +197,10 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
-      elderSorcery: false
-      elderSorceryIncant: ''
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
-      delivery:
-        base: self
-        parent: null
-        package: null
-      targets:
-        - self
-      elements: []
-      duration:
-        unit: noLimit
-        quantity: 0
-        conditions:
-          present: []
-          absent: []
-        stationary: false
-        description: Always Active
-      sustained: false
-      range: Self.
-      overview:
-        base: >-
-          You gain @L[Ability:Climbing]{Climbing} and
-          @L[Ability:Leaping]{Leaping}.
-        proficient: ''
-        fluent: ''
-      results:
-        hit: ''
-        critHit: ''
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: mov
-          amount: proficiency
-      skill: true
-      spell: false
-      standard: true
-      ritual: false
-      class: assassin
-      rotator: false
-      invoked: false
+      adept:
+        enabled: false
+        amount: 1
+      basic: false
       costs:
         verbal: false
         somatic: false
@@ -271,31 +225,81 @@ effects:
             variable: ''
         break: ''
         materialCost: ''
-      heightened: ''
+      delivery:
+        base: self
+        parent: null
+        package: null
+      duration:
+        unit: noLimit
+        quantity: 0
+        conditions:
+          present: []
+          absent: []
+        stationary: false
+        description: Always Active
+      effectTypes:
+        - movement
+      elderSorcery: false
+      elderSorceryIncant: ''
+      elements: []
       endCondition: ''
-      requirements: ''
+      executionTime: passive
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
-      trigger: ''
-      basic: false
+      featSaveAttribute: mov
       form: normal
-      limitation: ''
-      improvement: ''
-      prepared: true
-      warded: false
-      secret: false
       gifted:
         enabled: false
         amount: 1
-      consumable: false
-      quantity: 1
-      maxQuantity:
-        raw: ''
-        derived: 0
-      effectTypes:
-        - movement
-    _id: ZjhkHbSWRam3OYCG
+      grantOnly: false
+      heightened: ''
+      improvement: ''
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+        featSaveImprovement:
+          attribute: mov
+          amount: proficiency
+      interaction: manifest
+      invoked: false
+      limitation: ''
+      maneuver: passive
+      overview:
+        base: >-
+          You gain @L[Ability:Climbing]{Climbing} and
+          @L[Ability:Leaping]{Leaping}.
+        proficient: ''
+        fluent: ''
+      piercing: normal
+      powerSources:
+        - martial
+      prepared: true
+      range: Self.
+      requirements: ''
+      results:
+        hit: ''
+        critHit: ''
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      ritual: false
+      rotator: false
+      secret: false
+      skill: true
+      spell: false
+      standard: true
+      sustained: false
+      targets:
+        - self
+      trigger: ''
+      warded: false
+      class: assassin
+    _id: cwkBk9L3xs5fjauR
     img: systems/teriock/src/icons/abilities/acrobatics.webp
     changes: []
     disabled: false
@@ -311,14 +315,15 @@ effects:
       systemId: teriock
       systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!DSlWNGyadTYboYkv.ZjhkHbSWRam3OYCG'
+    _key: '!items.effects!DSlWNGyadTYboYkv.cwkBk9L3xs5fjauR'
   - name: Climbing
     type: ability
+    img: systems/teriock/src/icons/abilities/climbing.webp
     system:
       hierarchy:
-        supId: ZjhkHbSWRam3OYCG
         rootUuid: Compendium.teriock.powers.Item.DSlWNGyadTYboYkv
         subIds: []
+        supId: cwkBk9L3xs5fjauR
       applies:
         base:
           statuses: []
@@ -498,8 +503,8 @@ effects:
         conditions:
           present: []
           absent: []
-        stationary: false
         description: Always Active
+        stationary: false
       sustained: false
       range: Self.
       overview:
@@ -527,7 +532,6 @@ effects:
       spell: false
       standard: false
       ritual: false
-      class: ''
       rotator: false
       invoked: false
       costs:
@@ -568,18 +572,21 @@ effects:
       prepared: true
       warded: false
       secret: false
-      gifted:
-        enabled: false
-        amount: 1
       consumable: false
       quantity: 1
       maxQuantity:
         raw: ''
-        derived: 0
+        saved: ''
       effectTypes:
         - movement
-    _id: 47Q85q9172Uw0ZB2
-    img: systems/teriock/src/icons/abilities/climbing.webp
+      adept:
+        enabled: false
+        amount: 1
+      gifted:
+        enabled: false
+        amount: 1
+      grantOnly: false
+    _id: 4ctFgGlfgmaigzek
     changes: []
     disabled: false
     duration:
@@ -594,14 +601,15 @@ effects:
       systemId: teriock
       systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!DSlWNGyadTYboYkv.47Q85q9172Uw0ZB2'
+    _key: '!items.effects!DSlWNGyadTYboYkv.4ctFgGlfgmaigzek'
   - name: Leaping
     type: ability
+    img: systems/teriock/src/icons/abilities/leaping.webp
     system:
       hierarchy:
-        supId: ZjhkHbSWRam3OYCG
         rootUuid: Compendium.teriock.powers.Item.DSlWNGyadTYboYkv
         subIds: []
+        supId: cwkBk9L3xs5fjauR
       applies:
         base:
           statuses: []
@@ -789,8 +797,8 @@ effects:
         conditions:
           present: []
           absent: []
-        stationary: false
         description: Always Active
+        stationary: false
       sustained: false
       range: Self.
       overview:
@@ -863,18 +871,21 @@ effects:
       prepared: true
       warded: false
       secret: false
-      gifted:
-        enabled: false
-        amount: 1
       consumable: false
       quantity: 1
       maxQuantity:
         raw: ''
-        derived: 0
+        saved: ''
       effectTypes:
         - movement
-    _id: xn6U1iOg0QC9knq0
-    img: systems/teriock/src/icons/abilities/leaping.webp
+      adept:
+        enabled: false
+        amount: 1
+      gifted:
+        enabled: false
+        amount: 1
+      grantOnly: false
+    _id: NOqJ4U2EZYE9U9lE
     changes: []
     disabled: false
     duration:
@@ -889,10 +900,15 @@ effects:
       systemId: teriock
       systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!DSlWNGyadTYboYkv.xn6U1iOg0QC9knq0'
+    _key: '!items.effects!DSlWNGyadTYboYkv.NOqJ4U2EZYE9U9lE'
   - name: Improvised Weapons
     type: ability
     system:
+      consumable: false
+      maxQuantity:
+        saved: ''
+        raw: ''
+      quantity: 1
       hierarchy:
         rootUuid: Compendium.teriock.powers.Item.DSlWNGyadTYboYkv
         subIds: []
@@ -1047,65 +1063,10 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
-      elderSorcery: false
-      elderSorceryIncant: ''
-      powerSources:
-        - martial
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: slow
-      executionTime: Short Rest
-      delivery:
-        base: self
-        parent: null
-        package: null
-      targets:
-        - other
-      elements: []
-      duration:
-        unit: hour
-        quantity: 8
-        conditions:
-          present: []
-          absent: []
-        stationary: false
-        description: 8 Hours
-      sustained: false
-      range: Self.
-      overview:
-        base: >-
-          During a @L[Core:Short Rest]{short rest}, you may scavenge materials
-          and make 1 melee @L[Category:Weapons]{weapon}. Only common
-          @L[Damage:Mundane]{mundane} items can typically be made in this way,
-          but the @L[Core:GM]{GM} may specify if other options are available to
-          you. These items exist for 8 hours before they are no longer
-          functional.
-        proficient: You can instead make up to @L[Core:Proficiency Bonus]{P} weapons.
-        fluent: You can instead make up to @L[Core:Fluency Bonus]{F} weapons.
-      results:
-        hit: ''
-        critHit: ''
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
-      skill: true
-      spell: false
-      standard: true
-      ritual: false
-      class: knight
-      rotator: false
-      invoked: false
+      adept:
+        enabled: false
+        amount: 1
+      basic: false
       costs:
         verbal: false
         somatic: false
@@ -1130,30 +1091,84 @@ effects:
             variable: ''
         break: ''
         materialCost: ''
-      heightened: ''
+      delivery:
+        base: self
+        parent: null
+        package: null
+      duration:
+        unit: hour
+        quantity: 8
+        conditions:
+          present: []
+          absent: []
+        stationary: false
+        description: 8 Hours
+      effectTypes: []
+      elderSorcery: false
+      elderSorceryIncant: ''
+      elements: []
       endCondition: ''
-      requirements: ''
-      effects: []
+      executionTime: Short Rest
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
-      trigger: ''
-      basic: false
+      featSaveAttribute: mov
       form: normal
-      limitation: ''
-      improvement: ''
-      prepared: true
-      warded: false
-      secret: false
       gifted:
         enabled: false
         amount: 1
-      consumable: false
-      quantity: 1
-      maxQuantity:
-        raw: ''
-        derived: 0
-    _id: YExboNN9gmaVpGd5
+      grantOnly: false
+      heightened: ''
+      improvement: ''
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+      interaction: manifest
+      invoked: false
+      limitation: ''
+      maneuver: slow
+      overview:
+        base: >-
+          During a @L[Core:Short Rest]{short rest}, you may scavenge materials
+          and make 1 melee @L[Category:Weapons]{weapon}. Only common
+          @L[Damage:Mundane]{mundane} items can typically be made in this way,
+          but the @L[Core:GM]{GM} may specify if other options are available to
+          you. These items exist for 8 hours before they are no longer
+          functional.
+        proficient: You can instead make up to @L[Core:Proficiency Bonus]{P} weapons.
+        fluent: You can instead make up to @L[Core:Fluency Bonus]{F} weapons.
+      piercing: normal
+      powerSources:
+        - martial
+      prepared: true
+      range: Self.
+      requirements: ''
+      results:
+        hit: ''
+        critHit: ''
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      ritual: false
+      rotator: false
+      secret: false
+      skill: true
+      spell: false
+      standard: true
+      sustained: false
+      targets:
+        - other
+      trigger: ''
+      warded: false
+      class: knight
+    _id: ZQrXB6gCRomdaMpf
     img: systems/teriock/src/icons/abilities/improvised-weapons.webp
     changes: []
     disabled: false
@@ -1167,15 +1182,15 @@ effects:
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.0
+      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!DSlWNGyadTYboYkv.YExboNN9gmaVpGd5'
+    _key: '!items.effects!DSlWNGyadTYboYkv.ZQrXB6gCRomdaMpf'
 ownership:
   default: 0
 flags: {}
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.0
+  systemVersion: 0.9.1
   lastModifiedBy: teriockBuilder00
 _key: '!items!DSlWNGyadTYboYkv'

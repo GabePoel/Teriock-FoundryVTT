@@ -216,6 +216,22 @@ export default (Base) => {
       }
 
       /** @inheritDoc */
+      async refreshFromIndex() {
+        await super.refreshFromIndex();
+        const reference = await this.getIndexReference();
+        await this.setDice(
+          "hp",
+          reference.system.hpDiceBase.number,
+          reference.system.hpDiceBase.faces,
+        );
+        await this.setDice(
+          "mp",
+          reference.system.mpDiceBase.number,
+          reference.system.mpDiceBase.faces,
+        );
+      }
+
+      /** @inheritDoc */
       async setDice(stat, number, faces) {
         if (
           this[`${stat}Dice`].number === number &&

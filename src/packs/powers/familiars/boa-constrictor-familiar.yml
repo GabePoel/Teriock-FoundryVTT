@@ -302,7 +302,7 @@ effects:
       trigger: ''
       warded: false
       class: archer
-    _id: 5ezlCSyhQv6zUuns
+    _id: 5orQT1FAOSAbCB6K
     img: systems/teriock/src/icons/abilities/crit-elite.webp
     changes: []
     disabled: false
@@ -318,7 +318,7 @@ effects:
       systemId: teriock
       systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!JA97P63JjCnwvdKX.5ezlCSyhQv6zUuns'
+    _key: '!items.effects!JA97P63JjCnwvdKX.5orQT1FAOSAbCB6K'
   - name: Improved Strength
     type: ability
     system:
@@ -330,8 +330,8 @@ effects:
       hierarchy:
         rootUuid: Compendium.teriock.powers.Item.JA97P63JjCnwvdKX
         subIds:
-          - gbYZF9S2PoVqIbgw
-          - gwwiOrAkbed97zGM
+          - Savnalc9ntfw6H8F
+          - M8DSNdlxlHEzJB7L
         supId: null
       applies:
         base:
@@ -584,7 +584,7 @@ effects:
       trigger: ''
       warded: false
       class: knight
-    _id: DpfU5RKDjYVwzxMH
+    _id: 9yVLKX2HjixU01Er
     img: systems/teriock/src/icons/abilities/improved-strength.webp
     changes: []
     disabled: false
@@ -600,19 +600,15 @@ effects:
       systemId: teriock
       systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!JA97P63JjCnwvdKX.DpfU5RKDjYVwzxMH'
+    _key: '!items.effects!JA97P63JjCnwvdKX.9yVLKX2HjixU01Er'
   - name: Beastly Strength
     type: ability
+    img: systems/teriock/src/icons/abilities/beastly-strength.webp
     system:
       hierarchy:
-        supId: DpfU5RKDjYVwzxMH
         rootUuid: Compendium.teriock.powers.Item.JA97P63JjCnwvdKX
         subIds: []
-      consumable: false
-      maxQuantity:
-        saved: ''
-        raw: ''
-      quantity: 1
+        supId: 9yVLKX2HjixU01Er
       applies:
         base:
           statuses: []
@@ -763,74 +759,31 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
-      adept:
-        enabled: false
-        amount: 1
-      basic: false
-      costs:
-        verbal: false
-        somatic: false
-        material: false
-        mp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        hp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        gp:
-          type: none
-          value:
-            static: 0
-            formula: ''
-            variable: ''
-        break: ''
-        materialCost: ''
+      elderSorcery: false
+      elderSorceryIncant: ''
+      powerSources:
+        - martial
+      interaction: manifest
+      featSaveAttribute: mov
+      maneuver: passive
+      executionTime: passive
       delivery:
         base: self
         parent: null
         package: null
+      targets:
+        - self
+      elements: []
       duration:
         unit: noLimit
         quantity: 0
         conditions:
           present: []
           absent: []
-        stationary: false
         description: Always Active
-      effectTypes: []
-      elderSorcery: false
-      elderSorceryIncant: ''
-      elements: []
-      endCondition: ''
-      executionTime: passive
-      expansion: null
-      expansionRange: null
-      expansionSaveAttribute: mov
-      featSaveAttribute: mov
-      form: normal
-      gifted:
-        enabled: false
-        amount: 1
-      grantOnly: false
-      heightened: ''
-      improvement: ''
-      improvements:
-        attributeImprovement:
-          attribute: str
-          minVal: 1
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
-      interaction: manifest
-      invoked: false
-      limitation: ''
-      maneuver: passive
+        stationary: false
+      sustained: false
+      range: Self.
       overview:
         base: >-
           Can wield @L[Property:Two-Handed]{two-handed} weapons in one hand.<div
@@ -838,12 +791,6 @@ effects:
           wielded in two hands to be @L[Property:AV0]{AV0}.</div>
         proficient: ''
         fluent: ''
-      piercing: normal
-      powerSources:
-        - martial
-      prepared: true
-      range: Self.
-      requirements: ''
       results:
         hit: ''
         critHit: ''
@@ -853,20 +800,73 @@ effects:
         critSave: ''
         fail: ''
         critFail: ''
-      ritual: false
-      rotator: false
-      secret: false
+      piercing: normal
+      improvements:
+        attributeImprovement:
+          attribute: str
+          minVal: 1
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
       skill: true
       spell: false
       standard: true
-      sustained: false
-      targets:
-        - self
-      trigger: ''
-      warded: false
+      ritual: false
       class: knight
-    _id: gbYZF9S2PoVqIbgw
-    img: systems/teriock/src/icons/abilities/beastly-strength.webp
+      rotator: false
+      invoked: false
+      costs:
+        verbal: false
+        somatic: false
+        material: false
+        mp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        hp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        gp:
+          type: none
+          value:
+            static: 0
+            formula: ''
+            variable: ''
+        break: ''
+        materialCost: ''
+      heightened: ''
+      endCondition: ''
+      requirements: ''
+      expansion: null
+      expansionRange: null
+      expansionSaveAttribute: mov
+      trigger: ''
+      basic: false
+      form: normal
+      limitation: ''
+      improvement: ''
+      prepared: true
+      warded: false
+      secret: false
+      consumable: false
+      quantity: 1
+      maxQuantity:
+        raw: ''
+        saved: ''
+      adept:
+        enabled: false
+        amount: 1
+      effectTypes: []
+      gifted:
+        enabled: false
+        amount: 1
+      grantOnly: false
+    _id: Savnalc9ntfw6H8F
     changes: []
     disabled: false
     duration:
@@ -881,19 +881,15 @@ effects:
       systemId: teriock
       systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!JA97P63JjCnwvdKX.gbYZF9S2PoVqIbgw'
+    _key: '!items.effects!JA97P63JjCnwvdKX.Savnalc9ntfw6H8F'
   - name: Improved Armor Piercing
     type: ability
+    img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
     system:
       hierarchy:
-        supId: DpfU5RKDjYVwzxMH
         rootUuid: Compendium.teriock.powers.Item.JA97P63JjCnwvdKX
         subIds: []
-      consumable: false
-      maxQuantity:
-        saved: ''
-        raw: ''
-      quantity: 1
+        supId: 9yVLKX2HjixU01Er
       applies:
         base:
           statuses: []
@@ -1044,10 +1040,59 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
-      adept:
-        enabled: false
-        amount: 1
-      basic: false
+      elderSorcery: false
+      elderSorceryIncant: ''
+      powerSources:
+        - martial
+      interaction: manifest
+      featSaveAttribute: mov
+      maneuver: passive
+      executionTime: passive
+      delivery:
+        base: self
+        parent: null
+        package: null
+      targets:
+        - self
+      elements: []
+      duration:
+        unit: noLimit
+        quantity: 0
+        conditions:
+          present: []
+          absent: []
+        description: Always Active
+        stationary: false
+      sustained: false
+      range: Self.
+      overview:
+        base: Melee weapons you use are @L[Property:Armor Piercing]{armor piercing}.
+        proficient: ''
+        fluent: ''
+      results:
+        hit: ''
+        critHit: ''
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      piercing: normal
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+      skill: true
+      spell: false
+      standard: true
+      ritual: false
+      class: knight
+      rotator: false
+      invoked: false
       costs:
         verbal: false
         somatic: false
@@ -1072,79 +1117,34 @@ effects:
             variable: ''
         break: ''
         materialCost: ''
-      delivery:
-        base: self
-        parent: null
-        package: null
-      duration:
-        unit: noLimit
-        quantity: 0
-        conditions:
-          present: []
-          absent: []
-        stationary: false
-        description: Always Active
-      effectTypes: []
-      elderSorcery: false
-      elderSorceryIncant: ''
-      elements: []
+      heightened: ''
       endCondition: ''
-      executionTime: passive
+      requirements: ''
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
-      featSaveAttribute: mov
+      trigger: ''
+      basic: false
       form: normal
+      limitation: ''
+      improvement: ''
+      prepared: true
+      warded: false
+      secret: false
+      consumable: false
+      quantity: 1
+      maxQuantity:
+        raw: ''
+        saved: ''
+      adept:
+        enabled: false
+        amount: 1
+      effectTypes: []
       gifted:
         enabled: false
         amount: 1
       grantOnly: false
-      heightened: ''
-      improvement: ''
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
-      interaction: manifest
-      invoked: false
-      limitation: ''
-      maneuver: passive
-      overview:
-        base: Melee weapons you use are @L[Property:Armor Piercing]{armor piercing}.
-        proficient: ''
-        fluent: ''
-      piercing: normal
-      powerSources:
-        - martial
-      prepared: true
-      range: Self.
-      requirements: ''
-      results:
-        hit: ''
-        critHit: ''
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
-      ritual: false
-      rotator: false
-      secret: false
-      skill: true
-      spell: false
-      standard: true
-      sustained: false
-      targets:
-        - self
-      trigger: ''
-      warded: false
-      class: knight
-    _id: gwwiOrAkbed97zGM
-    img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
+    _id: M8DSNdlxlHEzJB7L
     changes: []
     disabled: false
     duration:
@@ -1159,7 +1159,7 @@ effects:
       systemId: teriock
       systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!JA97P63JjCnwvdKX.gwwiOrAkbed97zGM'
+    _key: '!items.effects!JA97P63JjCnwvdKX.M8DSNdlxlHEzJB7L'
 ownership:
   default: 0
 flags: {}

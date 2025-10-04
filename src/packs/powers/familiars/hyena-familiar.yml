@@ -36,6 +36,11 @@ effects:
   - name: Spirit Bury
     type: ability
     system:
+      consumable: false
+      maxQuantity:
+        saved: ''
+        raw: ''
+      quantity: 1
       hierarchy:
         rootUuid: Compendium.teriock.powers.Item.xOmva8z1wXxsRG0E
         subIds: []
@@ -190,60 +195,10 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
-      elderSorcery: false
-      elderSorceryIncant: ''
-      powerSources:
-        - magical
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: hand
-        parent: null
-        package: null
-      targets:
-        - creature
-      elements:
-        - necromancy
-      duration:
-        unit: minute
-        quantity: 1
-        conditions:
-          present: []
-          absent: []
-        stationary: false
-        description: 1 Minute
-      sustained: false
-      range: null
-      overview:
-        base: ''
-        proficient: This effect lasts 10 minutes instead of 1.
-        fluent: ''
-      results:
-        hit: Target cannot become @L[Condition:Wisping]{wisping}.
-        critHit: ''
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
-      skill: false
-      spell: true
-      standard: true
-      ritual: false
-      class: necromancer
-      rotator: true
-      invoked: false
+      adept:
+        enabled: false
+        amount: 1
+      basic: false
       costs:
         verbal: true
         somatic: true
@@ -268,33 +223,82 @@ effects:
             variable: ''
         break: ''
         materialCost: ''
+      delivery:
+        base: hand
+        parent: null
+        package: null
+      duration:
+        unit: minute
+        quantity: 1
+        conditions:
+          present: []
+          absent: []
+        stationary: false
+        description: 1 Minute
+      effectTypes: []
+      elderSorcery: false
+      elderSorceryIncant: ''
+      elements:
+        - necromancy
+      endCondition: ''
+      executionTime: a1
+      expansion: null
+      expansionRange: null
+      expansionSaveAttribute: mov
+      featSaveAttribute: mov
+      form: special
+      gifted:
+        enabled: false
+        amount: 1
+      grantOnly: false
       heightened: >-
         For each additional @L[Core:MP]{MP} spent, the duration of this effect
         increases by 1 hour. The overall duration is rounded to the nearest
         hour.
-      endCondition: ''
-      requirements: Target is @L[Condition:Dead]{dead}.
-      effects: []
-      expansion: null
-      expansionRange: null
-      expansionSaveAttribute: mov
-      trigger: ''
-      basic: false
-      form: special
-      limitation: ''
       improvement: ''
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+      interaction: attack
+      invoked: false
+      limitation: ''
+      maneuver: active
+      overview:
+        base: ''
+        proficient: This effect lasts 10 minutes instead of 1.
+        fluent: ''
+      piercing: normal
+      powerSources:
+        - magical
       prepared: true
-      warded: false
+      range: null
+      requirements: Target is @L[Condition:Dead]{dead}.
+      results:
+        hit: Target cannot become @L[Condition:Wisping]{wisping}.
+        critHit: ''
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      ritual: false
+      rotator: true
       secret: false
-      gifted:
-        enabled: false
-        amount: 1
-      consumable: false
-      quantity: 1
-      maxQuantity:
-        raw: ''
-        derived: 0
-    _id: 7G6fJTXDIE4E44bZ
+      skill: false
+      spell: true
+      standard: true
+      sustained: false
+      targets:
+        - creature
+      trigger: ''
+      warded: false
+      class: necromancer
+    _id: EpziHfizWx9WiL3o
     img: systems/teriock/src/icons/abilities/spirit-bury.webp
     changes: []
     disabled: false
@@ -308,12 +312,17 @@ effects:
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.0
+      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!xOmva8z1wXxsRG0E.7G6fJTXDIE4E44bZ'
+    _key: '!items.effects!xOmva8z1wXxsRG0E.EpziHfizWx9WiL3o'
   - name: Spirit Guide
     type: ability
     system:
+      consumable: false
+      maxQuantity:
+        saved: ''
+        raw: ''
+      quantity: 1
       hierarchy:
         rootUuid: Compendium.teriock.powers.Item.xOmva8z1wXxsRG0E
         subIds: []
@@ -472,70 +481,10 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros: {}
-      elderSorcery: false
-      elderSorceryIncant: ''
-      powerSources:
-        - magical
-      interaction: manifest
-      featSaveAttribute: mov
-      maneuver: slow
-      executionTime: 10 Minutes
-      delivery:
-        base: sight
-        parent: null
-        package: ritual
-      targets:
-        - creature
-      elements:
-        - necromancy
-      duration:
-        unit: hour
-        quantity: 24
-        conditions:
-          present: []
-          absent: []
-        stationary: false
-        description: 24 Hours
-      sustained: true
-      range: '5'
-      overview:
-        base: >-
-          You can see, hear, and speak to spirits and
-          @L[Condition:Ethereal]{Ethereal} creatures within 120 feet.
-        proficient: >-
-          You can target @L[Condition:Ethereal]{Ethereal} creatures with
-          @L[Category:Necromancy element abilities]{necromancy}
-          @L[Category:Ritual delivery spells]{ritual spells} such as
-          @L[Ability:Summon the Dead]{Summon the Dead}.
-        fluent: >-
-          You can target @L[Condition:Ethereal]{Ethereal} creatures with
-          @L[Category:Spiritually powered abilities]{spiritual}
-          @L[Category:Ritual delivery spells]{ritual spells} such as
-          @L[Ability:Tea Ceremony]{Tea Ceremony}.
-      results:
-        hit: ''
-        critHit: ''
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
-      piercing: normal
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
-      skill: false
-      spell: true
-      standard: true
-      ritual: true
-      class: necromancer
-      rotator: false
-      invoked: false
+      adept:
+        enabled: false
+        amount: 1
+      basic: false
       costs:
         verbal: true
         somatic: true
@@ -560,35 +509,94 @@ effects:
             variable: ''
         break: ''
         materialCost: ''
-      heightened: >-
-        For each additional @L[Core:MP]{MP} spent, you may target an additional
-        creature.
+      delivery:
+        base: sight
+        parent: null
+        package: ritual
+      duration:
+        unit: hour
+        quantity: 24
+        conditions:
+          present: []
+          absent: []
+        stationary: false
+        description: 24 Hours
+      effectTypes:
+        - sensory
+      elderSorcery: false
+      elderSorceryIncant: ''
+      elements:
+        - necromancy
       endCondition: ''
-      requirements: >-
-        Unless @L[Core:Proficiency Bonus]{proficient}, you may only target
-        yourself.
+      executionTime: 10 Minutes
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
-      trigger: ''
-      basic: false
+      featSaveAttribute: mov
       form: normal
-      limitation: ''
-      improvement: ''
-      prepared: true
-      warded: false
-      secret: false
       gifted:
         enabled: false
         amount: 1
-      consumable: false
-      quantity: 1
-      maxQuantity:
-        raw: ''
-        derived: 0
-      effectTypes:
-        - sensory
-    _id: zsbyzeVZalLoZwkk
+      grantOnly: false
+      heightened: >-
+        For each additional @L[Core:MP]{MP} spent, you may target an additional
+        creature.
+      improvement: ''
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+      interaction: manifest
+      invoked: false
+      limitation: ''
+      maneuver: slow
+      overview:
+        base: >-
+          You can see, hear, and speak to spirits and
+          @L[Condition:Ethereal]{Ethereal} creatures within 120 feet.
+        proficient: >-
+          You can target @L[Condition:Ethereal]{Ethereal} creatures with
+          @L[Category:Necromancy element abilities]{necromancy}
+          @L[Category:Ritual delivery spells]{ritual spells} such as
+          @L[Ability:Summon the Dead]{Summon the Dead}.
+        fluent: >-
+          You can target @L[Condition:Ethereal]{Ethereal} creatures with
+          @L[Category:Spiritually powered abilities]{spiritual}
+          @L[Category:Ritual delivery spells]{ritual spells} such as
+          @L[Ability:Tea Ceremony]{Tea Ceremony}.
+      piercing: normal
+      powerSources:
+        - magical
+      prepared: true
+      range: '5'
+      requirements: >-
+        Unless @L[Core:Proficiency Bonus]{proficient}, you may only target
+        yourself.
+      results:
+        hit: ''
+        critHit: ''
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      ritual: true
+      rotator: false
+      secret: false
+      skill: false
+      spell: true
+      standard: true
+      sustained: true
+      targets:
+        - creature
+      trigger: ''
+      warded: false
+      class: necromancer
+    _id: bKt5jZossf4M6kna
     img: systems/teriock/src/icons/abilities/spirit-guide.webp
     changes: []
     disabled: false
@@ -604,13 +612,13 @@ effects:
       systemId: teriock
       systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!xOmva8z1wXxsRG0E.zsbyzeVZalLoZwkk'
+    _key: '!items.effects!xOmva8z1wXxsRG0E.bKt5jZossf4M6kna'
 ownership:
   default: 0
 flags: {}
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.0
+  systemVersion: 0.9.1
   lastModifiedBy: teriockBuilder00
 _key: '!items!xOmva8z1wXxsRG0E'

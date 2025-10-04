@@ -9,6 +9,12 @@ import { getIcon } from "./path.mjs";
  * @returns {Promise<TeriockAbility>} The created ability effect.
  */
 export async function createAbility(document, name = null, options = {}) {
+  options = foundry.utils.mergeObject(
+    {
+      fromWiki: false,
+    },
+    options,
+  );
   const abilityData = {
     name: "New Ability",
     type: "ability",
@@ -33,7 +39,11 @@ export async function createAbility(document, name = null, options = {}) {
     );
   const ability = abilities[0];
   if (ability.name !== "New Ability") {
-    await ability.system.wikiPull(options);
+    if (options.fromWiki) {
+      await ability.system.wikiPull(options);
+    } else {
+      await ability.system.refreshFromIndex();
+    }
   }
   if (sup) {
     const updateData = [
@@ -87,9 +97,10 @@ export async function createResource(document) {
  * Creates a new property effect with optional predefined content.
  * @param {TeriockItem|TeriockEffect} document - The document to create the property in.
  * @param {string|null} name - The name for the new property. If not provided, defaults to "New Property".
+ * @param {object} options
  * @returns {Promise<TeriockProperty>} The created property effect.
  */
-export async function createProperty(document, name = null) {
+export async function createProperty(document, name = null, options = {}) {
   const propertyData = {
     name: "New Property",
     type: "property",
@@ -116,7 +127,11 @@ export async function createProperty(document, name = null) {
       ])
     )[0];
   if (propertyData.name !== "New Property") {
-    await property.system.wikiPull({ notify: false });
+    if (options.fromWiki) {
+      await property.system.wikiPull(options);
+    } else {
+      await property.system.refreshFromIndex();
+    }
   }
   if (sup) {
     const updateData = [

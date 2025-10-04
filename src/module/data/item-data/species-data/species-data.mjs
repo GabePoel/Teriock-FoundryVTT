@@ -31,6 +31,8 @@ export default class TeriockSpeciesModel extends StatDataMixin(
   static metadata = mergeFreeze(super.metadata, {
     namespace: "Creature",
     type: "species",
+    indexCategoryKey: "creatures",
+    indexCompendiumKey: "species",
   });
 
   /** @inheritDoc */
@@ -201,6 +203,16 @@ export default class TeriockSpeciesModel extends StatDataMixin(
   /** @inheritDoc */
   async parse(rawHTML) {
     return await _parse(this, rawHTML);
+  }
+
+  /** @inheritDoc */
+  async refreshFromIndex() {
+    const updateData = {};
+    for (const key of Object.keys(this.sizeStepAbilities)) {
+      updateData[`system.sizeStepAbilities.-=${key}`] = null;
+    }
+    await this.parent.update(updateData);
+    await super.refreshFromIndex();
   }
 
   /**

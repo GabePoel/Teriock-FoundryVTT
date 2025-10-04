@@ -1,3 +1,4 @@
+import { getRank } from "../../../helpers/fetch.mjs";
 import { getRollIcon, makeIcon, mergeFreeze } from "../../../helpers/utils.mjs";
 import { StatDataMixin, WikiDataMixin } from "../../mixins/_module.mjs";
 import { TextField } from "../../shared/fields/_module.mjs";
@@ -28,6 +29,8 @@ export default class TeriockRankModel extends StatDataMixin(
     namespace: "Class",
     pageNameKey: "system.className",
     type: "rank",
+    indexCategoryKey: "classes",
+    indexCompendiumKey: "classes",
   });
 
   /** @inheritDoc */
@@ -153,7 +156,36 @@ export default class TeriockRankModel extends StatDataMixin(
   }
 
   /** @inheritDoc */
+  async getIndexReference() {
+    return await getRank(this.system.className, this.system.classRank);
+  }
+
+  /** @inheritDoc */
+  async hardRefreshFromIndex() {
+    await this.refreshFromIndex();
+    const reference = await this.getIndexReference();
+    const toDelete = this.parent
+      .getAbilities()
+      .filter(
+        (a) =>
+          !reference.parent
+            .getAbilities()
+            .map((a) => a.name)
+            .includes(a.name),
+      )
+      .map((a) => a.id);
+    await this.parent.deleteEmbeddedDocuments("ActiveEffect", toDelete);
+  }
+
+  /** @inheritDoc */
   async parse(rawHTML) {
     return await _parse(this, rawHTML);
+  }
+
+  /** @inheritDoc */
+  async refreshFromIndex() {
+    for (const a of this.parent.abilities) {
+      await a.system.refreshFromIndex();
+    }
   }
 }

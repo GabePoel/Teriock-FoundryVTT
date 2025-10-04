@@ -1,4 +1,5 @@
 import { buildMessage } from "../../../helpers/messages-builder/message-builder.mjs";
+import { toCamelCase } from "../../../helpers/string.mjs";
 import TeriockChatMessage from "../../chat-message.mjs";
 import { applyCertainChanges } from "../shared/_module.mjs";
 
@@ -41,6 +42,22 @@ export default (Base) => {
           proficient = true;
         }
         return proficient;
+      }
+
+      /**
+       * Get the key that defines this in the index, if appropriate.
+       * @returns {string}
+       */
+      get key() {
+        const pageName = foundry.utils.getProperty(
+          this,
+          this.metadata.pageNameKey,
+        );
+        if (pageName) {
+          return toCamelCase(pageName);
+        } else {
+          return toCamelCase(this.name);
+        }
       }
 
       /** @inheritDoc */

@@ -8,11 +8,24 @@ commonAnimalPages = commonAnimalPages.filter((page) =>
   page.title.includes("Creature:"),
 );
 
+const progress = foundry.ui.notifications.info("Refreshing all familiars.", {
+  pct: 0.01,
+  progress: true,
+});
+
+let pct = 0;
+
 for (const page of commonAnimalPages) {
+  pct += 1 / commonAnimalPages.length;
+  progress.update({
+    pct: pct,
+    message: `Refreshing ${page.title.split("Creature:")[1]} Familiar...`,
+  });
   const animal = page.title.split("Creature:")[1];
   const html = await teriock.helpers.wiki.fetchWikiPageHTML(page.title);
   const doc = new DOMParser().parseFromString(html, "text/html");
-  doc.querySelector(".expandable-table").remove();
+  doc.querySelector(".ability-bar-abilities")?.remove();
+  doc.querySelector(".ability-bar-body-parts")?.remove();
   const subs = Array.from(doc.querySelectorAll(".expandable-container")).filter(
     (el) => !el.closest(".expandable-container:not(:scope)"),
   );
@@ -51,10 +64,6 @@ for (const page of commonAnimalPages) {
       system: familiarItemSystem,
     });
   }
-  // await familiarItem.deleteEmbeddedDocuments(
-  //   "ActiveEffect",
-  //   familiarItem.abilities.map((a) => a.id),
-  // );
   let fluency = familiarItem.fluencies.find(
     (f) => f.name === animal + " Tamer",
   );
@@ -67,3 +76,10 @@ for (const page of commonAnimalPages) {
   }
   await teriock.data.shared.parsing.processSubAbilities(subs, familiarItem);
 }
+progress.update({
+  pct: 1,
+  message: "Done.",
+});
+foundry.ui.notifications.success(
+  `Successfully refreshed ${commonAnimalPages.length} familiar powers.`,
+);

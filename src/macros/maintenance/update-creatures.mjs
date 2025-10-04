@@ -6,7 +6,7 @@ const speciesFolders = speciesCompendium.folders;
 const allCreatures = creatureCompendium.index.contents;
 const creaturesFolders = creatureCompendium.folders;
 
-speciesFolders.forEach(async (folderEntry) => {
+for (const folderEntry of speciesFolders.values()) {
   if (!creaturesFolders.getName(folderEntry.name)) {
     await Folder.create(
       {
@@ -18,9 +18,36 @@ speciesFolders.forEach(async (folderEntry) => {
       },
     );
   }
+}
+
+for (const folderEntry of speciesFolders.values()) {
+  const speciesFolder = /** @type {TeriockFolder} */ await fromUuid(
+    folderEntry.uuid,
+  );
+  if (speciesFolder.folder) {
+    const parentFolderName = speciesFolder.folder.name;
+    const parentFolderId = creaturesFolders.getName(parentFolderName).id;
+    const creatureFolder = await fromUuid(
+      creaturesFolders.getName(speciesFolder.name).uuid,
+    );
+    await creatureFolder.update({
+      folder: parentFolderId,
+    });
+  }
+}
+
+const progress = foundry.ui.notifications.info(`Synchronizing all creatures.`, {
+  pct: 0.01,
+  progress: true,
 });
 
-allSpecies.forEach(async (speciesEntry) => {
+// Helper function to process a single species
+async function processSpecies(
+  speciesEntry,
+  allCreatures,
+  speciesFolders,
+  creaturesFolders,
+) {
   const species = /** @type {TeriockSpecies} */ await foundry.utils.fromUuid(
     speciesEntry.uuid,
   );
@@ -42,56 +69,38 @@ allSpecies.forEach(async (speciesEntry) => {
   } else {
     creature = await foundry.utils.fromUuid(creatureEntry.uuid);
   }
-  //await creature.delete();
-  let existingSpecies = creature.species.find((s) => s.name === species.name);
-  if (existingSpecies) {
-    await existingSpecies.delete();
-    existingSpecies = undefined;
-  }
-  if (!existingSpecies) {
-    existingSpecies = /** @type {TeriockSpecies} */ (
-      await creature.createEmbeddedDocuments("Item", [species.toObject()])
-    )[0];
-  } else {
-    await existingSpecies.deleteEmbeddedDocuments(
-      "ActiveEffect",
-      species.effects.contents.map((e) => e.id),
-    );
-    //await existingSpecies.update(species.toObject());
-  }
-  await creature.deleteEmbeddedDocuments("Item", [
-    ...creature.ranks.map((r) => r.id),
-    ...creature.equipment.map((e) => e.id),
-  ]);
-  await existingSpecies.system.imports.importDeterministic();
+  await creature.system.hardRefreshFromIndex();
   await creature.update({
     folder: creatureFolder.id,
-    img: species.img,
-    prototypeToken: {
-      name: species.name,
-      ring: {
-        enabled: true,
-      },
-      texture: {
-        src: species.img.replace("icons/creatures", "icons/tokens"),
-      },
-      width:
-        game.teriock.Actor.sizeDefinition(species.system.size.value).length / 5,
-      height:
-        game.teriock.Actor.sizeDefinition(species.system.size.value).length / 5,
-    },
-    system: {
-      hp: {
-        value: creature.system.hp.max,
-      },
-      mp: {
-        value: creature.system.mp.max,
-      },
-      size: {
-        number: {
-          saved: species.system.size.value,
-        },
-      },
-    },
   });
+}
+
+const batchSize = 10;
+let processedCount = 0;
+
+for (let i = 0; i < allSpecies.length; i += batchSize) {
+  const batch = allSpecies.slice(i, i + batchSize);
+
+  await Promise.all(
+    batch.map((speciesEntry) =>
+      processSpecies(
+        speciesEntry,
+        allCreatures,
+        speciesFolders,
+        creaturesFolders,
+      ),
+    ),
+  );
+
+  processedCount += batch.length;
+  const pct = processedCount / allSpecies.length;
+  progress.update({
+    pct: pct,
+    message: `Synchronized ${processedCount} of ${allSpecies.length} creatures.`,
+  });
+}
+
+progress.update({
+  pct: 1,
+  message: "Synchronization complete.",
 });
