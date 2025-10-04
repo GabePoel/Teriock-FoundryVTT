@@ -17318,7 +17318,7 @@ items:
     folder: null
     system:
       equipmentType: Full Plate
-      equipped: false
+      equipped: true
       consumable: false
       quantity: 1
       maxQuantity:
@@ -18527,7 +18527,7 @@ items:
           trigger: ''
           basic: false
           form: normal
-          limitation: Only usable on the other participant in the Partner Awaken.
+          limitation: ''
           improvement: ''
           prepared: true
           warded: false
@@ -18806,7 +18806,7 @@ items:
           trigger: ''
           basic: false
           form: normal
-          limitation: Only usable on the other participant in the Partner Awaken.
+          limitation: ''
           improvement: ''
           prepared: true
           warded: false
@@ -19049,8 +19049,8 @@ items:
           range: Self.
           overview:
             base: >-
-              <p>While wearing @L[Category:Armor]{armor}, you gain
-              @L[Ability:Defensive Martial Arts]{Defensive Martial Arts}.</p>
+              While wearing @L[Category:Armor]{armor}, you gain
+              @L[Ability:Defensive Martial Arts]{Defensive Martial Arts}.
             proficient: ''
             fluent: ''
           results:
@@ -19160,7 +19160,11 @@ items:
               hacks: []
               checks: []
               duration: 0
-              changes: []
+              changes:
+                - key: '!body__effectKeys.property__has__handy__system.bv.raw'
+                  mode: 4
+                  value: '1'
+                  priority: 10
               common: []
               expiration:
                 normal:
@@ -19197,7 +19201,11 @@ items:
               hacks: []
               checks: []
               duration: 0
-              changes: []
+              changes:
+                - key: '!body__effectKeys.property__has__handy__system.bv.raw'
+                  mode: 4
+                  value: '2'
+                  priority: 10
               common: []
               expiration:
                 normal:
@@ -19234,7 +19242,11 @@ items:
               hacks: []
               checks: []
               duration: 0
-              changes: []
+              changes:
+                - key: '!body__effectKeys.property__has__handy__system.bv.raw'
+                  mode: 4
+                  value: '3'
+                  priority: 10
               common: []
               expiration:
                 normal:
@@ -19328,18 +19340,17 @@ items:
           range: Self.
           overview:
             base: >-
-              Your @L[Equipment:Hand]{hands} count as
-              @L[Category:Shields]{shields} for the purposes of abilities that
-              target them (although they cannot be
-              @L[Property:Shattered]{shattered} or
+              Your @L[Body:Hand]{hands} and other @L[Category:Handy
+              equipment]{handy body parts} count as
+              @L[Category:Shields]{shields} for the purposes of
+              @L[Category:Weapon target abilities]{abilities that target them}
+              (although they cannot be @L[Property:Shattered]{shattered} or
               @L[Property:Destroyed]{destroyed}). You may @L[Core:Block
               Interaction]{block} with them and their @L[Core:Block Value]{BV}
-              is +1.
-
-              <div class="note"><b>Note:</b> This does not make your hands
+              is +1.<div class="note"><b>Note:</b> This does not make your hands
               @L[Property:Blocking]{blocking}.</div>
-            proficient: ''
-            fluent: ''
+            proficient: The @L[Core:Block Interaction]{BV} is now +2.
+            fluent: The @L[Core:Block Interaction]{BV} is now +3.
           results:
             hit: ''
             critHit: ''
@@ -20903,8 +20914,8 @@ items:
           results:
             hit: Deal [[/damage 1d6[magic]]] @L[Core:Damage]{damage} to target.
             critHit: >-
-              <p>Double the @L[Core:Damage]{damage dice} dealt by this
-              @L[Category:Abilities]{ability}.</p>
+              Double the @L[Core:Damage]{damage dice} dealt by this
+              @L[Category:Abilities]{ability}.
             miss: ''
             critMiss: ''
             save: ''
@@ -20950,8 +20961,8 @@ items:
             break: ''
             materialCost: ''
           heightened: >-
-            <p>For each additional @L[Core:MP]{MP} spent, deal an additional
-            [[/damage 1d6[magic]]] @L[Core:Damage]{damage}.</p>
+            For each additional @L[Core:MP]{MP} spent, deal an additional
+            [[/damage 1d6[magic]]] @L[Core:Damage]{damage}.
           endCondition: ''
           requirements: ''
           expansion: null
@@ -20972,7 +20983,8 @@ items:
           adept:
             enabled: false
             amount: 1
-          effectTypes: []
+          effectTypes:
+            - damaging
           form: normal
           gifted:
             enabled: false
@@ -21181,8 +21193,10 @@ items:
           overview:
             base: >-
               You may use your @L[Property:Magelore]{magelore} items as though
-              they were your hand. You are not @L[Core:Proficiency
-              Bonus]{proficient} nor @L[Core:Fluency Bonus]{fluent} with
+              they were your @L[Body:Hand]{hand}. This makes them
+              @L[Property:Handy]{handy} and @L[Property:Prehensile]{prehensile}.
+              You are not @L[Core:Proficiency Bonus]{proficient} nor
+              @L[Core:Fluency Bonus]{fluent} with
               @L[Category:Abilities]{abilities} you use through your
               @L[Property:Magelore]{magelore} items.
             proficient: >-
@@ -21299,6 +21313,72 @@ items:
       lastModifiedBy: teriockBuilder00
     _id: BaCts74gOBGHBDo1
     _key: '!actors.items!WRdcAA9alyCy78ug.BaCts74gOBGHBDo1'
+  - name: Full Plate
+    type: equipment
+    folder: null
+    system:
+      equipmentType: Full Plate
+      equipped: false
+      consumable: false
+      quantity: 1
+      maxQuantity:
+        raw: ''
+        saved: ''
+      damage:
+        base:
+          saved: '0'
+          raw: ''
+        twoHanded:
+          saved: ''
+          raw: ''
+        types: []
+      weight:
+        saved: 65
+        raw: 0
+      range:
+        long:
+          saved: ''
+          raw: ''
+        short:
+          saved: ''
+          raw: ''
+        ranged: false
+      equipmentClasses:
+        - armor
+      minStr:
+        saved: -1
+        raw: -3
+      av:
+        saved: 4
+        raw: 0
+      bv:
+        saved: 0
+        raw: 0
+      price: 0
+      powerLevel: mundane
+      tier:
+        saved: ''
+        raw: ''
+      fightingStyle: null
+      description: ''
+      onUse: []
+      macros: []
+      flaws: ''
+      notes: ''
+      spellTurning: false
+      virtualProperties: []
+    _id: Fv2NVoPfqm7AyyoS
+    img: systems/teriock/src/icons/equipment/full-plate.webp
+    effects: []
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      coreVersion: '13'
+      systemId: teriock
+      systemVersion: 0.9.1
+      lastModifiedBy: teriockBuilder00
+    _key: '!actors.items!WRdcAA9alyCy78ug.Fv2NVoPfqm7AyyoS'
 effects: []
 ownership:
   default: 0
