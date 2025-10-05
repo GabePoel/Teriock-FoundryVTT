@@ -89,12 +89,17 @@ export default (Base) => {
           resizable: true,
           controls: [
             {
-              icon: "fa-solid fa-arrows-rotate",
+              icon: "fa-solid fa-rotate-right",
+              label: "Reload Sheet",
+              action: "reloadThis",
+            },
+            {
+              icon: "fa-solid fa-book-atlas",
               label: "Soft Index Refresh",
               action: "refreshIndexThisSoft",
             },
             {
-              icon: "fa-solid fa-arrows-rotate",
+              icon: "fa-solid fa-book-copy",
               label: "Hard Index Refresh",
               action: "refreshIndexThisHard",
             },
@@ -483,7 +488,20 @@ export default (Base) => {
        */
       static async _wikiPullThis(_event, _target) {
         if (this.editable) {
-          this.document.system.wikiPull();
+          const proceed = await TeriockDialog.confirm({
+            content:
+              "Are you sure you would like to pull this from the wiki? It will alter its content and may delete" +
+              " important information.",
+            modal: true,
+            window: { title: "Confirm Wiki Pull" },
+          });
+          if (proceed) {
+            this.document.system.wikiPull();
+          }
+        } else {
+          foundry.ui.notifications.warn(
+            `Cannot pull ${this.document.name} from wiki. Sheet is not editable.`,
+          );
         }
       }
 
@@ -836,6 +854,20 @@ export default (Base) => {
       async _onRender(context, options) {
         await super._onRender(context, options);
 
+        const toggleButton = this.window.header.querySelector(
+          "[data-action='toggleLockThis']",
+        );
+        if (toggleButton) {
+          toggleButton.classList.remove(...["fa-lock-open", "fa-lock"]);
+          toggleButton.classList.add(
+            ...[this.editable ? "fa-lock-open" : "fa-lock"],
+          );
+          toggleButton.setAttribute(
+            "data-tooltip",
+            this.editable ? "Unlocked" : "Locked",
+          );
+        }
+
         this.editable = this.isEditable && !this._locked;
         _connectEmbedded(this.document, this.element, this.editable);
         new ContextMenu(this.element, ".timage", imageContextMenuOptions, {
@@ -1029,6 +1061,32 @@ export default (Base) => {
         } else {
           context.macros = [];
         }
+      }
+
+      /** @inheritDoc */
+      async _renderFrame(options) {
+        const frame = await super._renderFrame(options);
+        if (
+          this.document.documentName === "Item" ||
+          this.document.documentName === "ActiveEffect"
+        ) {
+          const toggleButton = document.createElement("button");
+          toggleButton.classList.add(
+            ...[
+              "header-control",
+              "icon",
+              "fa-solid",
+              this.editable ? "fa-lock-open" : "fa-lock",
+            ],
+          );
+          toggleButton.setAttribute("data-action", "toggleLockThis");
+          toggleButton.setAttribute(
+            "data-tooltip",
+            this.editable ? "Unlocked" : "Locked",
+          );
+          this.window.controls.after(toggleButton);
+        }
+        return frame;
       }
 
       /**

@@ -1,18 +1,20 @@
+@use "../mixins";
+
 .doc-list-container {
   --fade: 6px;
   -webkit-mask-image: linear-gradient(
-    to bottom,
-    transparent 0,
-    #000000 var(--fade),
-    #000000 calc(100% - var(--fade)),
-    transparent 100%
+      to bottom,
+      transparent 0,
+      #000000 var(--fade),
+      #000000 calc(100% - var(--fade)),
+      transparent 100%
   );
   mask-image: linear-gradient(
-    to bottom,
-    transparent 0,
-    #000000 var(--fade),
-    #000000 calc(100% - var(--fade)),
-    transparent 100%
+      to bottom,
+      transparent 0,
+      #000000 var(--fade),
+      #000000 calc(100% - var(--fade)),
+      transparent 100%
   );
   max-height: 600px;
   overflow: auto;
@@ -29,7 +31,7 @@
     cursor: pointer;
     display: flex;
     flex-direction: row;
-    gap: 7px;
+    gap: 11px;
     height: 14px;
 
     .doc-checkbox-container {
@@ -38,11 +40,11 @@
       flex-direction: column;
       height: 28px;
       justify-content: center;
-      margin-left: 7px;
+      margin-left: 10px;
       margin-top: 4px;
 
       * {
-        margin-block: 0;
+        margin: 0;
       }
     }
 
@@ -53,6 +55,8 @@
       height: 28px;
       justify-content: center;
       width: 28px;
+      @include mixins.warm-image-container-background;
+      @include mixins.image-border(6px, 0.6);
 
       img {
         filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.4));
@@ -63,6 +67,8 @@
       align-items: center;
       display: flex;
       flex-direction: row;
+      font-family: var(--font-h1), serif;
+      font-size: large;
       height: 28px;
     }
   }

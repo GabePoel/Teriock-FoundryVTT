@@ -14,14 +14,16 @@ export default function bindCommonActions(rootElement) {
     jQuery: false,
     fixed: true,
   });
-  rootElement.querySelectorAll(".timage").forEach((element) => {
-    element.addEventListener("click", async function (ev) {
-      const el = ev.currentTarget;
-      const img = el.getAttribute("data-src");
-      const image = new TeriockImagePreviewer(img);
-      await image.render(true);
+  rootElement
+    .querySelectorAll(".tmessage-header-image-container")
+    .forEach((element) => {
+      element.addEventListener("click", async function (ev) {
+        const el = ev.currentTarget;
+        const img = el.getAttribute("data-src");
+        const image = new TeriockImagePreviewer(img);
+        await image.render(true);
+      });
     });
-  });
   const actionElements = rootElement.querySelectorAll("[data-action]");
   for (const /** @type {HTMLElement} */ element of actionElements) {
     const action = element.dataset.action;

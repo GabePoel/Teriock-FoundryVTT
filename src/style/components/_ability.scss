@@ -1,3 +1,5 @@
+@use "../mixins";
+
 .ab-sheet-sidebar {
   backdrop-filter: blur(4px);
   background-color: rgba(255, 255, 255, 0.3);
@@ -31,19 +33,21 @@
     flex: 0 0 auto;
     height: 4em;
     left: 0;
+    margin: 0.75em;
+    overflow: hidden;
     position: relative;
-    // padding: 1em;
     top: 0;
     width: 4em;
+    @include mixins.warm-image-container-background;
+    @include mixins.image-border(12px, 0.5);
 
     img {
+      @include mixins.warm-drop-shadow;
+      @include mixins.image-position;
       border: none;
       cursor: pointer;
-      filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.4));
       height: inherit;
       max-width: 100%;
-      object-fit: cover;
-      object-position: 50% 50%;
       width: inherit;
     }
 
@@ -76,13 +80,15 @@
       font-size: clamp(1rem, 4vw, 2rem);
       font-weight: lighter;
       height: 100%;
-      margin: 0 0 0 14px;
+      //margin: 0 0 0 14px;
       overflow: hidden;
-      padding: 0;
+      //padding: 0;
+      padding-right: 2em;
       text-align: center;
+      //padding-left: 1em;
       text-overflow: ellipsis;
       white-space: nowrap;
-      width: calc(100% - 28px);
+      width: calc(100% - 14px);
 
       &.tfont,
       &.tfont- {
@@ -93,23 +99,24 @@
     input {
       &:hover {
         background-color: color-mix(
-          in srgb,
-          var(--color-text-primary),
-          transparent 90%
+            in srgb,
+            var(--color-text-primary),
+            transparent 90%
         );
       }
 
       &:active {
         background-color: color-mix(
-          in srgb,
-          var(--color-text-primary),
-          transparent 80%
+            in srgb,
+            var(--color-text-primary),
+            transparent 80%
         );
       }
     }
   }
 
   .ab-top-buttons-container {
+    display: none;
     flex: 0 0 auto;
     height: 4em;
     width: 4em;
@@ -193,9 +200,9 @@
 
         &:hover {
           background-color: color-mix(
-            in srgb,
-            var(--color-text-primary),
-            transparent 90%
+              in srgb,
+              var(--color-text-primary),
+              transparent 90%
           );
 
           .ab-box-icon {
@@ -205,9 +212,9 @@
 
         &:active {
           background-color: color-mix(
-            in srgb,
-            var(--color-text-primary),
-            transparent 80%
+              in srgb,
+              var(--color-text-primary),
+              transparent 80%
           );
 
           .ab-box-icon {
@@ -444,17 +451,17 @@
 
         &:hover {
           background-color: color-mix(
-            in srgb,
-            var(--color-text-primary),
-            transparent 90%
+              in srgb,
+              var(--color-text-primary),
+              transparent 90%
           );
         }
 
         &:active {
           background-color: color-mix(
-            in srgb,
-            var(--color-text-primary),
-            transparent 80%
+              in srgb,
+              var(--color-text-primary),
+              transparent 80%
           );
         }
 
@@ -542,9 +549,9 @@
 
   &:hover {
     background-color: color-mix(
-      in srgb,
-      var(--color-text-primary),
-      transparent 90%
+        in srgb,
+        var(--color-text-primary),
+        transparent 90%
     );
 
     i {
@@ -554,9 +561,9 @@
 
   &:active {
     background-color: color-mix(
-      in srgb,
-      var(--color-text-primary),
-      transparent 80%
+        in srgb,
+        var(--color-text-primary),
+        transparent 80%
     );
 
     i {
@@ -586,6 +593,8 @@
   .ab-header {
     .ab-profile-img {
       display: none;
+      //height: 2em;
+      //width: 2em;
     }
 
     .ab-title {
@@ -594,6 +603,10 @@
 
       .ab-title-text,
       input {
+        padding-right: unset;
+        padding-left: unset;
+        width: 100%;
+        text-align: center;
         font-size: 1em;
         font-weight: bold;
       }

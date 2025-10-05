@@ -1,9 +1,11 @@
 import { documentOptions } from "../../../../constants/options/document-options.mjs";
 import { cleanCapitalization } from "../../../../helpers/clean.mjs";
+import { UseButtonSheetMixin } from "../../mixins/_module.mjs";
+import WikiButtonSheetMixin from "../../mixins/button-mixins/wiki-button-sheet-mixin.mjs";
 import TeriockBaseItemSheet from "../base-item-sheet/base-item-sheet.mjs";
 import {
   fontContextMenu,
-  powerLevelContextMenu,
+  powerLevelContextMenu
 } from "./connections/_context-menus.mjs";
 
 /**
@@ -12,7 +14,9 @@ import {
  * @property {TeriockEquipment} document
  * @property {TeriockEquipment} item
  */
-export default class TeriockEquipmentSheet extends TeriockBaseItemSheet {
+export default class TeriockEquipmentSheet extends WikiButtonSheetMixin(
+  UseButtonSheetMixin(TeriockBaseItemSheet),
+) {
   /**
    * @inheritDoc
    * @type {Partial<ApplicationConfiguration>}

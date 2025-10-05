@@ -53,6 +53,14 @@
   content: "\f8de";
 }
 
+.slot.full img {
+  background: radial-gradient(circle, var(--color-warm-3), var(--color-dark-1));
+}
+
+.directory-item.entry img {
+  background: radial-gradient(circle, var(--color-warm-3), var(--color-dark-1));
+}
+
 .directory-item.entry.compendium[data-pack="teriock.abilities"] img {
   content: url(../src/icons/abilities/necromancy-elder-sorcery.webp);
 }
@@ -143,7 +151,7 @@
   cursor: pointer;
   display: flex;
   flex-direction: row;
-  gap: 7px;
+  gap: 11px;
   height: 14px;
 }
 .teriock .doc-select .doc-select-row .doc-checkbox-container {
@@ -152,11 +160,11 @@
   flex-direction: column;
   height: 28px;
   justify-content: center;
-  margin-left: 7px;
+  margin-left: 10px;
   margin-top: 4px;
 }
 .teriock .doc-select .doc-select-row .doc-checkbox-container * {
-  margin-block: 0;
+  margin: 0;
 }
 .teriock .doc-select .doc-select-row .doc-image-container {
   align-items: center;
@@ -165,6 +173,22 @@
   height: 28px;
   justify-content: center;
   width: 28px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.6);
+  border: 1px solid color-mix(in srgb, var(--color-light-5), transparent 75%);
+  border-radius: 100%;
+  outline: 1px solid var(--color-light-6);
+  overflow: hidden;
+}
+.teriock .doc-select .doc-select-row .doc-image-container::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  content: "";
+  background: radial-gradient(circle, var(--color-warm-3), var(--color-dark-1));
 }
 .teriock .doc-select .doc-select-row .doc-image-container img {
   filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.4));
@@ -173,6 +197,8 @@
   align-items: center;
   display: flex;
   flex-direction: row;
+  font-family: var(--font-h1), serif;
+  font-size: large;
   height: 28px;
 }
 @font-face {
@@ -526,19 +552,33 @@
   min-width: var(--tcard-height);
   opacity: var(--tcard-opacity);
   overflow: hidden;
+  position: relative;
   width: var(--tcard-height);
+  position: relative;
+  overflow: hidden;
+  border-right: 1px solid var(--color-border);
+  left: 1px solid var(--color-border);
+}
+.teriock .tcard-container .tcard .tcard-image::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  content: "";
+  background: radial-gradient(circle, var(--color-warm-3), var(--color-dark-1));
 }
 .teriock .tcard-container .tcard .tcard-image.usable {
   cursor: pointer;
 }
 .teriock .tcard-container .tcard .tcard-image img {
+  filter: drop-shadow(0 0 3px color-mix(in srgb, var(--color-warm-1), transparent 60%));
+  object-fit: cover;
+  object-position: 50% 0;
   border: none;
-  filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.4));
   height: 100%;
   max-height: 100%;
   max-width: 100%;
-  object-fit: cover;
-  object-position: center;
   transition: filter 0.15s ease-in-out;
   -webkit-user-drag: none;
   width: 100%;
@@ -990,18 +1030,36 @@
   flex: 0 0 auto;
   height: 4em;
   left: 0;
+  margin: 0.75em;
+  overflow: hidden;
   position: relative;
   top: 0;
   width: 4em;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+  border: 1px solid color-mix(in srgb, var(--color-light-5), transparent 75%);
+  border-radius: 100%;
+  outline: 1px solid var(--color-light-6);
+  overflow: hidden;
+}
+.teriock .ab-header .ab-profile-img::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  content: "";
+  background: radial-gradient(circle, var(--color-warm-3), var(--color-dark-1));
 }
 .teriock .ab-header .ab-profile-img img {
+  filter: drop-shadow(0 0 3px color-mix(in srgb, var(--color-warm-1), transparent 60%));
+  object-fit: cover;
+  object-position: 50% 0;
   border: none;
   cursor: pointer;
-  filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.4));
   height: inherit;
   max-width: 100%;
-  object-fit: cover;
-  object-position: 50% 50%;
   width: inherit;
 }
 .teriock .ab-header .ab-profile-img::after {
@@ -1029,13 +1087,12 @@
   font-size: clamp(1rem, 4vw, 2rem);
   font-weight: lighter;
   height: 100%;
-  margin: 0 0 0 14px;
   overflow: hidden;
-  padding: 0;
+  padding-right: 2em;
   text-align: center;
   text-overflow: ellipsis;
   white-space: nowrap;
-  width: calc(100% - 28px);
+  width: calc(100% - 14px);
 }
 .teriock .ab-header .ab-title input.tfont, .teriock .ab-header .ab-title input.tfont-,
 .teriock .ab-header .ab-title .ab-title-text.tfont,
@@ -1049,6 +1106,7 @@
   background-color: color-mix(in srgb, var(--color-text-primary), transparent 80%);
 }
 .teriock .ab-header .ab-top-buttons-container {
+  display: none;
   flex: 0 0 auto;
   height: 4em;
   width: 4em;
@@ -1421,6 +1479,10 @@
   }
   .teriock .ab-header .ab-title .ab-title-text,
   .teriock .ab-header .ab-title input {
+    padding-right: unset;
+    padding-left: unset;
+    width: 100%;
+    text-align: center;
     font-size: 1em;
     font-weight: bold;
   }
@@ -1635,18 +1697,20 @@
   justify-content: center;
 }
 .teriock .character-intro-box .character-avatar {
+  border: 1px solid color-mix(in srgb, var(--color-dark-2), transparent 75%);
   border-radius: 6px;
+  cursor: pointer;
   height: calc(250px - 3em);
   outline: 1px solid var(--color-border);
   overflow: hidden;
   width: calc(250px - 3em);
 }
 .teriock .character-intro-box .character-avatar img {
+  object-fit: cover;
+  object-position: 50% 0;
   border: none;
   height: inherit;
   max-width: 100%;
-  object-fit: cover;
-  object-position: 50% 0;
   width: inherit;
 }
 .teriock .character-intro-box .character-name {
@@ -1764,6 +1828,7 @@
 .teriock .character-status-box .character-status-bars .character-bar-container .character-bar-overlay .character-bar-overlay-row .character-bar-overlay-label {
   align-items: center;
   background-color: transparent;
+  box-shadow: none;
   display: flex;
   flex: none;
   font-size: 1.5em;
@@ -2619,6 +2684,7 @@
   align-items: center;
   display: flex;
   flex-direction: row;
+  min-height: 2.5em;
   width: 100%;
 }
 .teriock .tmessage .tmes-header-box .tmessage-header-image-container {
@@ -2629,11 +2695,29 @@
   height: 2em;
   justify-content: center;
   width: 2em;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+  border: 1px solid color-mix(in srgb, var(--color-light-5), transparent 75%);
+  border-radius: 100%;
+  outline: 1px solid var(--color-light-6);
+  overflow: hidden;
+  position: relative;
+  overflow: hidden;
+}
+.teriock .tmessage .tmes-header-box .tmessage-header-image-container::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  content: "";
+  background: radial-gradient(circle, var(--color-warm-3), var(--color-dark-1));
 }
 .teriock .tmessage .tmes-header-box .tmessage-header-image-container img {
-  height: 100%;
+  filter: drop-shadow(0 0 3px color-mix(in srgb, var(--color-warm-1), transparent 60%));
   object-fit: cover;
-  object-position: center;
+  object-position: 50% 0;
+  height: 100%;
+  position: relative;
   width: 100%;
 }
 .teriock .tmessage .tmes-header-box .tmessage-header-text {

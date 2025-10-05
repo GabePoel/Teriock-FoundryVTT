@@ -10,6 +10,7 @@ export default function registerFormattingHelpers() {
   });
 
   Handlebars.registerHelper("elements", (elements) => {
+    elements = Array.from(elements);
     let out = "Celestial";
     if (elements && elements.length > 0) {
       out = elements

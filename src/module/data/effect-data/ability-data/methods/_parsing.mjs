@@ -1,11 +1,17 @@
 import { getIcon } from "../../../../helpers/path.mjs";
-import { parseDurationString, safeUuid } from "../../../../helpers/utils.mjs";
+import {
+  parseDurationString,
+  safeUuid
+} from "../../../../helpers/utils.mjs";
 import {
   cleanHTMLDoc,
-  cleanObject,
+  cleanObject
 } from "../../../shared/parsing/clean-html-doc.mjs";
 import { extractChangesFromHTML } from "../../../shared/parsing/extract-changes.mjs";
-import { getBarText, getText } from "../../../shared/parsing/get-text.mjs";
+import {
+  getBarText,
+  getText
+} from "../../../shared/parsing/get-text.mjs";
 import { processSubAbilities } from "../../../shared/parsing/process-subs.mjs";
 import { buildTagTree } from "../../../shared/parsing/tag-tree.mjs";
 
@@ -153,6 +159,12 @@ export async function _parse(abilityData, rawHTML) {
   // Set remaining parameters
   setRemainingParameters(parameters, tagTree, doc);
 
+  const wording = doc.querySelector(".es-wording");
+  if (wording) {
+    wording.querySelectorAll("span").forEach((el) => el.remove());
+    parameters.elderSorceryIncant = wording.textContent;
+  }
+
   // Clean parameters
   delete parameters.improvement;
   delete parameters.limitation;
@@ -221,6 +233,11 @@ export async function _parse(abilityData, rawHTML) {
  * @private
  */
 function processTags(parameters, tagTree, doc) {
+  if (tagTree.elderSorcery) {
+    parameters.elderSorcery = true;
+    parameters.form = "special";
+  }
+
   // Power sources
   if (tagTree.power) {
     parameters.powerSources = tagTree.power;

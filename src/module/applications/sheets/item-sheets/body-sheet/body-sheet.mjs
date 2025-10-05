@@ -1,6 +1,10 @@
+import { UseButtonSheetMixin } from "../../mixins/_module.mjs";
+import WikiButtonSheetMixin from "../../mixins/button-mixins/wiki-button-sheet-mixin.mjs";
 import TeriockBaseItemSheet from "../base-item-sheet/base-item-sheet.mjs";
 
-export default class TeriockBodySheet extends TeriockBaseItemSheet {
+export default class TeriockBodySheet extends WikiButtonSheetMixin(
+  UseButtonSheetMixin(TeriockBaseItemSheet),
+) {
   /**
    * @inheritDoc
    * @type {Partial<ApplicationConfiguration>}

@@ -204,6 +204,18 @@
         {{/if}}
 
         {{! Before Overview }}
+        {{#if (not (exists system.elderSorceryIncant))}}
+          <div class="tgrid-item">
+            <button class="ab-menu-button ab-es-incant-button"
+              {{#if (not editable)}}
+                    disabled="disabled"
+              {{/if}}
+            >
+              {{{TERIOCK.display.icons.add}}}
+              Elder Sorcery Incant
+            </button>
+          </div>
+        {{/if}}
         {{#if (eq system.costs.mp.type "none")}}
           <div class="tgrid-item">
             <button class="ab-menu-button ab-mana-cost-button"

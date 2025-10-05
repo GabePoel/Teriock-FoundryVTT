@@ -38,7 +38,7 @@ export function buildHTMLButton(config) {
 /**
  * Make a CSS class for a given array of elements.
  *
- * @param {string[]} elements
+ * @param {Set<Teriock.Parameters.Ability.Element>} elements
  * @returns {string}
  */
 export function elementClass(elements) {
@@ -49,16 +49,11 @@ export function elementClass(elements) {
     flame: "es-flame",
     nature: "es-nature",
   };
-  if (!Array.isArray(elements)) {
+  if (elements.size !== 1) {
     return "es-multi";
+  } else {
+    return colorMap[Array.from(elements)[0]];
   }
-  const validElements = elements.filter((el) =>
-    Object.prototype.hasOwnProperty.call(colorMap, el),
-  );
-  if (validElements.length !== 1) {
-    return "es-multi";
-  }
-  return colorMap[validElements[0]] || "es-multi";
 }
 
 /**

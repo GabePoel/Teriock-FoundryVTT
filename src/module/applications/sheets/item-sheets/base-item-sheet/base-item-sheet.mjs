@@ -1,6 +1,9 @@
 import { cleanFeet } from "../../../../helpers/clean.mjs";
 import { refreshDocuments } from "../../../../helpers/utils.mjs";
-import { CommonSheetMixin } from "../../mixins/_module.mjs";
+import {
+  ChatButtonSheetMixin,
+  CommonSheetMixin,
+} from "../../mixins/_module.mjs";
 
 const { ItemSheetV2 } = foundry.applications.sheets;
 
@@ -11,8 +14,8 @@ const { ItemSheetV2 } = foundry.applications.sheets;
  * @property {TeriockItem} document
  * @property {TeriockItem} item
  */
-export default class TeriockBaseItemSheet extends CommonSheetMixin(
-  ItemSheetV2,
+export default class TeriockBaseItemSheet extends ChatButtonSheetMixin(
+  CommonSheetMixin(ItemSheetV2),
 ) {
   /**
    * @inheritDoc

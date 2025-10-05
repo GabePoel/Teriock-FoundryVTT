@@ -1,4 +1,5 @@
 import { documentOptions } from "../../../../constants/options/document-options.mjs";
+import WikiButtonSheetMixin from "../../mixins/button-mixins/wiki-button-sheet-mixin.mjs";
 import TeriockBaseItemSheet from "../base-item-sheet/base-item-sheet.mjs";
 import {
   archetypeContextMenu,
@@ -16,7 +17,9 @@ const { DialogV2 } = foundry.applications.api;
  * @property {TeriockRank} document
  * @property {TeriockRank} item
  */
-export default class TeriockRankSheet extends TeriockBaseItemSheet {
+export default class TeriockRankSheet extends WikiButtonSheetMixin(
+  TeriockBaseItemSheet,
+) {
   /**
    * @inheritDoc
    * @type {Partial<ApplicationConfiguration>}

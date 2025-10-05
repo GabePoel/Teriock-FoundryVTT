@@ -1,4 +1,5 @@
 import { documentOptions } from "../../../../constants/options/document-options.mjs";
+import { UseButtonSheetMixin } from "../../mixins/_module.mjs";
 import TeriockBaseEffectSheet from "../base-effect-sheet/base-effect-sheet.mjs";
 
 /**
@@ -7,7 +8,9 @@ import TeriockBaseEffectSheet from "../base-effect-sheet/base-effect-sheet.mjs";
  *
  * @property {TeriockResource} document
  */
-export default class TeriockResourceSheet extends TeriockBaseEffectSheet {
+export default class TeriockResourceSheet extends UseButtonSheetMixin(
+  TeriockBaseEffectSheet,
+) {
   /**
    * @inheritDoc
    * @type {Partial<ApplicationConfiguration>}

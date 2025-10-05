@@ -1,5 +1,6 @@
 import { documentOptions } from "../../../../constants/options/document-options.mjs";
 import { PassiveSheetMixin } from "../../mixins/_module.mjs";
+import WikiButtonSheetMixin from "../../mixins/button-mixins/wiki-button-sheet-mixin.mjs";
 import TeriockBaseEffectSheet from "../base-effect-sheet/base-effect-sheet.mjs";
 import { propertyContextMenu } from "./connections/_context-menus.mjs";
 
@@ -11,8 +12,8 @@ import { propertyContextMenu } from "./connections/_context-menus.mjs";
  * @extends {TeriockBaseEffectSheet}
  * @mixes PassiveSheetMixin
  */
-export default class TeriockPropertySheet extends PassiveSheetMixin(
-  TeriockBaseEffectSheet,
+export default class TeriockPropertySheet extends WikiButtonSheetMixin(
+  PassiveSheetMixin(TeriockBaseEffectSheet),
 ) {
   /**
    * @inheritDoc

@@ -1,7 +1,10 @@
 import { documentOptions } from "../../../../constants/options/document-options.mjs";
 import * as createEffects from "../../../../helpers/create-effects.mjs";
 import { selectAbilityDialog } from "../../../dialogs/select-dialog.mjs";
-import { CommonSheetMixin } from "../../mixins/_module.mjs";
+import {
+  ChatButtonSheetMixin,
+  CommonSheetMixin,
+} from "../../mixins/_module.mjs";
 
 const { ActiveEffectConfig } = foundry.applications.sheets;
 
@@ -12,8 +15,8 @@ const { ActiveEffectConfig } = foundry.applications.sheets;
  * @extends ActiveEffectConfig
  * @property {TeriockEffect} document
  */
-export default class TeriockBaseEffectSheet extends CommonSheetMixin(
-  ActiveEffectConfig,
+export default class TeriockBaseEffectSheet extends ChatButtonSheetMixin(
+  CommonSheetMixin(ActiveEffectConfig),
 ) {
   /**
    * @inheritDoc

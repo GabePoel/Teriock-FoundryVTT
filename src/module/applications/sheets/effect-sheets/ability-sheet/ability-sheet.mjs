@@ -1,6 +1,10 @@
 import { documentOptions } from "../../../../constants/options/document-options.mjs";
 import { durationDialog } from "../../../dialogs/_module.mjs";
-import { PassiveSheetMixin } from "../../mixins/_module.mjs";
+import {
+  PassiveSheetMixin,
+  UseButtonSheetMixin
+} from "../../mixins/_module.mjs";
+import WikiButtonSheetMixin from "../../mixins/button-mixins/wiki-button-sheet-mixin.mjs";
 import TeriockBaseEffectSheet from "../base-effect-sheet/base-effect-sheet.mjs";
 import { contextMenus } from "./connections/_context-menus.mjs";
 
@@ -12,8 +16,8 @@ import { contextMenus } from "./connections/_context-menus.mjs";
  * @extends {TeriockBaseEffectSheet}
  * @mixes PassiveSheetMixin
  */
-export default class TeriockAbilitySheet extends PassiveSheetMixin(
-  TeriockBaseEffectSheet,
+export default class TeriockAbilitySheet extends WikiButtonSheetMixin(
+  UseButtonSheetMixin(PassiveSheetMixin(TeriockBaseEffectSheet)),
 ) {
   /**
    * @inheritDoc
@@ -150,6 +154,10 @@ export default class TeriockAbilitySheet extends PassiveSheetMixin(
     }
 
     const staticUpdates = {
+      ".ab-es-incant-button": {
+        "system.elderSorceryIncant": "Incant.",
+        "system.elderSorcery": true,
+      },
       ".ab-expansion-button": {
         "system.expansion": "detonate",
       },

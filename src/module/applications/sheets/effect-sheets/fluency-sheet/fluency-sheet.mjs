@@ -1,8 +1,9 @@
 import { documentOptions } from "../../../../constants/options/document-options.mjs";
+import { UseButtonSheetMixin } from "../../mixins/_module.mjs";
 import TeriockBaseEffectSheet from "../base-effect-sheet/base-effect-sheet.mjs";
 import {
   fieldContextMenu,
-  tradecraftContextMenu,
+  tradecraftContextMenu
 } from "./connections/_context-menus.mjs";
 
 /**
@@ -11,7 +12,9 @@ import {
  *
  * @property {TeriockFluency} document
  */
-export default class TeriockFluencySheet extends TeriockBaseEffectSheet {
+export default class TeriockFluencySheet extends UseButtonSheetMixin(
+  TeriockBaseEffectSheet,
+) {
   /**
    * @inheritDoc
    * @type {Partial<ApplicationConfiguration>}
