@@ -64,16 +64,24 @@ export class RollRollableTakeHandler extends ActionHandler {
     if (damageDrainTypeMessage.length > 0) {
       let image;
       let name;
+      let icon;
+      let label;
       if (this.dataset.type === "damage") {
         image = getIcon("effect-types", "Damaging");
         name = "Damage";
+        icon = "heart-crack";
+        label = "Damage";
       } else if (this.dataset.type === "drain") {
         image = getIcon("abilities", "Mana Drain Touch");
         name = "Drain";
+        icon = "droplet-slash";
+        label = "Drain";
       }
       const messageStartRaw = buildMessage({
         image: image,
         name: name,
+        icon: icon,
+        label: label,
       });
       messageStart = `<div class="teriock">${messageStartRaw.outerHTML}</div>`;
     }

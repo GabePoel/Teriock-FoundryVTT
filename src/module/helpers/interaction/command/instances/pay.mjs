@@ -27,11 +27,16 @@ export const pay = new TeriockCommand(
       mode = "greedy";
     }
 
-    await roll.toMessage({
-      user: chatData.user,
-      speaker: chatData.speaker,
-      flavor: "Payment Roll",
-    });
+    await roll.toMessage(
+      {
+        user: chatData.user,
+        speaker: chatData.speaker,
+        flavor: "Payment Roll",
+      },
+      {
+        rollMode: game.settings.get("core", "rollMode"),
+      },
+    );
 
     for (const actor of actors) {
       await actor.system.takePay(roll.total, mode);

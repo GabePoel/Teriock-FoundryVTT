@@ -1,3 +1,4 @@
+import { documentOptions } from "../../../../constants/options/document-options.mjs";
 import { addAbilitiesBlock } from "../../../../helpers/messages-builder/message-parts.mjs";
 
 /**
@@ -246,5 +247,7 @@ export function _messageParts(abilityData) {
   return {
     bars: bars,
     blocks: blocks,
+    icon: documentOptions.ability.icon,
+    label: documentOptions.ability.name,
   };
 }

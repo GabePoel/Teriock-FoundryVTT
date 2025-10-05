@@ -2,7 +2,7 @@ import { documentOptions } from "../../../../constants/options/document-options.
 import { durationDialog } from "../../../dialogs/_module.mjs";
 import {
   PassiveSheetMixin,
-  UseButtonSheetMixin
+  UseButtonSheetMixin,
 } from "../../mixins/_module.mjs";
 import WikiButtonSheetMixin from "../../mixins/button-mixins/wiki-button-sheet-mixin.mjs";
 import TeriockBaseEffectSheet from "../base-effect-sheet/base-effect-sheet.mjs";

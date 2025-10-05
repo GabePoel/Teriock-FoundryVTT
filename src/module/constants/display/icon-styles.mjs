@@ -10,4 +10,5 @@ export const iconStyles = {
   duotone: "duotone",
   sharp: "sharp",
   sharpDuotone: "sharp-duotone",
+  fullWidth: "fw",
 };

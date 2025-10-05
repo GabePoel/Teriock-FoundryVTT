@@ -7,8 +7,7 @@ import CommonTypeModel from "../common-type-model/common-type-model.mjs";
 const { fields } = foundry.data;
 
 /**
- * Mixin that provides child document functionality for embedded documents.
- * Adds proficiency tracking, font customization, and message generation capabilities.
+ * Data model shared by items and effects.
  * @implements {ChildTypeModelInterface}
  * @property {TeriockChild} parent
  * @property {string} description
@@ -32,6 +31,7 @@ export default class ChildTypeModel extends CommonTypeModel {
     childItemTypes: [],
     childMacroTypes: [],
     passive: false,
+    preservedProperties: [],
   });
 
   /**

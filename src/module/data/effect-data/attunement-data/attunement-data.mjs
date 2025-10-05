@@ -1,4 +1,5 @@
 import { attunementOptions } from "../../../constants/options/attunement-options.mjs";
+import { documentOptions } from "../../../constants/options/document-options.mjs";
 import { evaluateSync, mergeFreeze } from "../../../helpers/utils.mjs";
 import TeriockBaseEffectModel from "../base-effect-data/base-effect-data.mjs";
 
@@ -62,6 +63,8 @@ export default class TeriockAttunementModel extends TeriockBaseEffectModel {
       }),
       name: this.parent.name,
       image: this.parent.img,
+      icon: documentOptions.attunement.icon,
+      label: documentOptions.attunement.name,
     };
   }
 

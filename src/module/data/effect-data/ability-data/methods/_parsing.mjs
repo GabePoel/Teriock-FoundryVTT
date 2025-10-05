@@ -1,17 +1,11 @@
 import { getIcon } from "../../../../helpers/path.mjs";
-import {
-  parseDurationString,
-  safeUuid
-} from "../../../../helpers/utils.mjs";
+import { parseDurationString, safeUuid } from "../../../../helpers/utils.mjs";
 import {
   cleanHTMLDoc,
-  cleanObject
+  cleanObject,
 } from "../../../shared/parsing/clean-html-doc.mjs";
 import { extractChangesFromHTML } from "../../../shared/parsing/extract-changes.mjs";
-import {
-  getBarText,
-  getText
-} from "../../../shared/parsing/get-text.mjs";
+import { getBarText, getText } from "../../../shared/parsing/get-text.mjs";
 import { processSubAbilities } from "../../../shared/parsing/process-subs.mjs";
 import { buildTagTree } from "../../../shared/parsing/tag-tree.mjs";
 

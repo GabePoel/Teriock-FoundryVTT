@@ -47,7 +47,7 @@ export async function harmRoll(formula, rollData = {}, message = "") {
   const damageTypeButtons = makeDamageTypeButtons(roll);
   buttons.push(...damageTypeButtons);
   const damageDrainTypeMessage = await makeDamageDrainTypeMessage(roll);
-  return await TeriockChatMessage.create({
+  const chatData = {
     speaker: TeriockChatMessage.speaker,
     rolls: [roll],
     system: {
@@ -55,5 +55,7 @@ export async function harmRoll(formula, rollData = {}, message = "") {
       columns: damageTypeButtons.length > 0 ? 2 : 3,
       extraContent: message + damageDrainTypeMessage,
     },
-  });
+  };
+  TeriockChatMessage.applyRollMode(chatData);
+  return TeriockChatMessage.create(chatData);
 }

@@ -45,7 +45,7 @@ export function _defineSchema() {
       label: "Equipment Type",
     }),
     equipped: new fields.BooleanField({
-      initial: true,
+      initial: false,
       label: "Equipped",
     }),
     glued: new fields.BooleanField({

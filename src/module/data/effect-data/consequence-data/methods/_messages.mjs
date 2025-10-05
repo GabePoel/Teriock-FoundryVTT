@@ -1,3 +1,4 @@
+import { documentOptions } from "../../../../constants/options/document-options.mjs";
 import { addAbilitiesBlock } from "../../../../helpers/messages-builder/message-parts.mjs";
 import { secondsToReadable } from "../../../../helpers/utils.mjs";
 
@@ -49,5 +50,7 @@ export function _messageParts(consequenceData) {
   return {
     bars: bars,
     blocks: blocks,
+    icon: documentOptions.consequence.icon,
+    label: documentOptions.consequence.name,
   };
 }

@@ -12,11 +12,16 @@ export const revitalize = new TeriockCommand(
       disadvantage: options.disadvantage,
     });
 
-    await roll.toMessage({
-      user: chatData.user,
-      speaker: chatData.speaker,
-      flavor: "Revitalize Roll",
-    });
+    await roll.toMessage(
+      {
+        user: chatData.user,
+        speaker: chatData.speaker,
+        flavor: "Revitalize Roll",
+      },
+      {
+        rollMode: game.settings.get("core", "rollMode"),
+      },
+    );
 
     for (const actor of actors) {
       await actor.system.takeRevitalize(roll.total);

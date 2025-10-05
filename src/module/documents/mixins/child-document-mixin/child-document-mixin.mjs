@@ -79,7 +79,6 @@ export default (Base) => {
 
       applySpecialEffects() {
         const overrides = foundry.utils.deepClone(this.overrides ?? {});
-
         const changes = [];
         for (const effect of this.allSpecialEffects()) {
           if (!effect.active) {
@@ -157,10 +156,15 @@ export default (Base) => {
         }
         let content = await this.buildMessage();
         content = `<div class="teriock">${content}</div>`;
-        await TeriockChatMessage.create({
+        const messageData = {
           content: content,
           speaker: TeriockChatMessage.getSpeaker({ actor: this.actor }),
-        });
+        };
+        TeriockChatMessage.applyRollMode(
+          messageData,
+          game.settings.get("core", "rollMode"),
+        );
+        await TeriockChatMessage.create(messageData);
       }
 
       /** @inheritDoc */

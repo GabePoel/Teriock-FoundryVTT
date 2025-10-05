@@ -1,3 +1,4 @@
+import { documentOptions } from "../../../../constants/options/document-options.mjs";
 import {
   addAbilitiesBlock,
   addPropertiesBlock,
@@ -53,5 +54,7 @@ export function _messageParts(rankData) {
   return {
     bars: bars,
     blocks: blocks,
+    icon: documentOptions.rank.icon,
+    label: documentOptions.rank.name,
   };
 }

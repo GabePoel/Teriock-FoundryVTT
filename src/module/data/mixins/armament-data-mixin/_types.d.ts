@@ -1,4 +1,4 @@
-export interface WieldedDataMixinInterface {
+export interface ArmamentDataMixinInterface {
   /** <schema> Armor Value */
   av: Teriock.Fields.ModifiableNumber;
   /** <schema> Block Value */

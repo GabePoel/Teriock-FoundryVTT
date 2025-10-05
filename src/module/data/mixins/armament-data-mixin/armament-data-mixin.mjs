@@ -18,10 +18,10 @@ export default (Base) => {
   //noinspection JSClosureCompilerSyntax
   return (
     /**
-     * @implements {WieldedDataMixinInterface}
+     * @implements {ArmamentDataMixinInterface}
      * @extends {ChildTypeModel}
      */
-    class WieldedDataMixin extends Base {
+    class ArmamentDataMixin extends Base {
       /**
        * @inheritDoc
        * @returns {Record<string, DataField>}

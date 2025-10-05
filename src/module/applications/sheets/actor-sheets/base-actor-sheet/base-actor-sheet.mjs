@@ -258,6 +258,8 @@ export default class TeriockBaseActorSheet extends HackStatMixin(
           text: TERIOCK.content.keywords.immunity,
         },
       ];
+      messageParts.icon = "shield-halved";
+      messageParts.label = "Protection";
       const content = buildMessage(messageParts).outerHTML;
       message = await TextEditor.enrichHTML(
         `<div class="teriock">${content}</div>`,
@@ -387,6 +389,8 @@ export default class TeriockBaseActorSheet extends HackStatMixin(
           text: TERIOCK.content.keywords.resistance,
         },
       ];
+      messageParts.icon = "shield-halved";
+      messageParts.label = "Protection";
       const content = buildMessage(messageParts).outerHTML;
       message = await TextEditor.enrichHTML(
         `<div class="teriock">${content}</div>`,

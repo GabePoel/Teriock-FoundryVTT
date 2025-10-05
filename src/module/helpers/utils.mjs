@@ -300,9 +300,23 @@ export function tokenDocument(token) {
  * @returns {string} The HTML string for the icon element.
  */
 export function makeIcon(icon, ...styles) {
+  const classString = makeIconClass(icon, ...styles);
+  return `<i class="${classString}"></i>`;
+}
+
+/**
+ * Creates the class for an HTML icon element using Font Awesome classes.
+ * @param {string} icon - The icon name to use.
+ * @param {...Teriock.UI.IconStyle} styles - One or more Font Awesome style names (e.g., "solid", "duotone").
+ * @returns {string} The HTML string for the icon element.
+ */
+export function makeIconClass(icon, ...styles) {
   const styleClasses = styles.map((s) => TERIOCK.display.iconStyles[s] || s);
   const classString = styleClasses.map((s) => `fa-${s}`).join(" ");
-  return `<i class="${classString} fa-${icon}"></i>`;
+  if (!icon.startsWith("fa-")) {
+    icon = `fa-${icon}`;
+  }
+  return `${classString} ${icon}`;
 }
 
 /**

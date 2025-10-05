@@ -3,7 +3,7 @@ import { UseButtonSheetMixin } from "../../mixins/_module.mjs";
 import TeriockBaseEffectSheet from "../base-effect-sheet/base-effect-sheet.mjs";
 import {
   fieldContextMenu,
-  tradecraftContextMenu
+  tradecraftContextMenu,
 } from "./connections/_context-menus.mjs";
 
 /**

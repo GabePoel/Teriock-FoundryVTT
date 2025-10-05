@@ -24,6 +24,14 @@ declare global {
       italic?: boolean;
     };
 
+    /** Pieces of a group of associations within a chat message. */
+    export type MessageAssociations = {
+      /** The title of the message association. */
+      title: string;
+      /** Documents this message is associated with. */
+      uuids: Teriock.UUID<TeriockCommon>;
+    };
+
     /** Represents the individual rules-parts that make up a message. */
     export type MessageParts = {
       /** The URL or path to the image associated with the message. */
@@ -32,8 +40,13 @@ declare global {
       name?: string;
       bars?: Teriock.MessageData.MessageBar[];
       blocks?: Teriock.MessageData.MessageBlock[];
-      /** Font used for a message, or `null` for default font. */
+      /** Font used for a message. Message uses font if nothing is specified. */
       font?: Teriock.Parameters.Shared.Font;
+      associations?: Teriock.MessageData.MessageAssociations[];
+      /** Font Awesome icons */
+      icon?: string;
+      /** Label that gets displayed upon hovering over icon. */
+      label?: string;
     };
 
     /** Options for automatically configuring a message. */

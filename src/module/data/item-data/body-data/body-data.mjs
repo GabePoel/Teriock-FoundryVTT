@@ -1,8 +1,8 @@
 import { TeriockRoll } from "../../../dice/_module.mjs";
 import { mergeFreeze } from "../../../helpers/utils.mjs";
 import {
+  ArmamentDataMixin,
   ExecutableDataMixin,
-  WieldedDataMixin,
   WikiDataMixin,
 } from "../../mixins/_module.mjs";
 import TeriockBaseItemModel from "../base-item-data/base-item-data.mjs";
@@ -21,22 +21,26 @@ import { _roll } from "./methods/_rolling.mjs";
  * @mixes ExecutableDataMixin
  * @mixes WikiDataMixin
  */
-export default class TeriockBodyModel extends WieldedDataMixin(
+export default class TeriockBodyModel extends ArmamentDataMixin(
   WikiDataMixin(ExecutableDataMixin(TeriockBaseItemModel)),
 ) {
   /**
    * @inheritDoc
    * @type {Readonly<Teriock.Documents.ItemModelMetadata>}
    */
-  static metadata = mergeFreeze(super.metadata, {
-    namespace: "Body",
-    pageNameKey: "name",
-    type: "body",
-    usable: true,
-    childEffectTypes: ["property"],
-    indexCategoryKey: "bodyParts",
-    indexCompendiumKey: "bodyParts",
-  });
+  static metadata =
+    /** @type {Readonly<Teriock.Documents.ItemModelMetadata>} */ mergeFreeze(
+      super.metadata,
+      {
+        namespace: "Body",
+        pageNameKey: "name",
+        type: "body",
+        usable: true,
+        childEffectTypes: ["property"],
+        indexCategoryKey: "bodyParts",
+        indexCompendiumKey: "bodyParts",
+      },
+    );
 
   /** @inheritDoc */
   get messageParts() {

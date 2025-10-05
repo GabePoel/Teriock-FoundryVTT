@@ -1,3 +1,5 @@
+import { documentOptions } from "../../../../constants/options/document-options.mjs";
+
 /**
  * Generates message parts for a fluency effect, including bars and blocks for display.
  * Creates formatted display elements for tradecraft information and description.
@@ -33,5 +35,7 @@ export function _messageParts(fluencyData) {
   return {
     bars: bars,
     blocks: blocks,
+    icon: documentOptions.fluency.icon,
+    label: documentOptions.fluency.name,
   };
 }

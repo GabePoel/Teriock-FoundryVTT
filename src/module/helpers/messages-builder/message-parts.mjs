@@ -1,3 +1,5 @@
+import { makeIconClass } from "../utils.mjs";
+
 /**
  * Creates a DOM element with specified properties and children.
  * @param {string} tag - The HTML tag name for the element.
@@ -117,10 +119,19 @@ export function messageBlock(
  * @param {HTMLElement} parent - The parent element to append the header to.
  * @param {string} image - The image URL for the header.
  * @param {string} text - The text content for the header.
+ * @param {string} icon - Font Awesome icon.
+ * @param {string} label - Label displayed when hovering over icon.
  * @param {string} fontClass - CSS class for font styling. Defaults to "tfont".
  * @returns {HTMLDivElement} The created header element.
  */
-export function messageHeader(parent, image, text, fontClass = "tfont") {
+export function messageHeader(
+  parent,
+  image,
+  text,
+  icon,
+  label,
+  fontClass = "tfont",
+) {
   const headerImage = createElement("img", {
     className: "tmessage-header-image",
     src: image,
@@ -145,6 +156,24 @@ export function messageHeader(parent, image, text, fontClass = "tfont") {
     imageContainer,
     headerText,
   );
+
+  if (icon) {
+    const headerIcon = createElement("i", {
+      className: makeIconClass(icon, "thin", "fullWidth"),
+    });
+    const iconContainer = createElement(
+      "div",
+      {
+        className: "tmessage-header-icon",
+      },
+      headerIcon,
+    );
+    if (label) {
+      iconContainer.setAttribute("data-tooltip", label);
+      iconContainer.setAttribute("data-tooltip-direction", "LEFT");
+    }
+    header.appendChild(iconContainer);
+  }
   parent.appendChild(header);
   return header;
 }

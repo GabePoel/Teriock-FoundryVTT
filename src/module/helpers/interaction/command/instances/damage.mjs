@@ -12,11 +12,16 @@ export const damage = new TeriockCommand(
       disadvantage: options.disadvantage,
     });
 
-    await roll.toMessage({
-      user: chatData.user,
-      speaker: chatData.speaker,
-      flavor: "Damage Roll",
-    });
+    await roll.toMessage(
+      {
+        user: chatData.user,
+        speaker: chatData.speaker,
+        flavor: "Damage Roll",
+      },
+      {
+        rollMode: game.settings.get("core", "rollMode"),
+      },
+    );
 
     for (const actor of actors) {
       await actor.system.takeDamage(roll.total);

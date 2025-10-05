@@ -42,11 +42,11 @@ export default function registerDocumentManagementHooks() {
 
   foundry.helpers.Hooks.on("createItem", async (document, _options, userId) => {
     if (isOwnerAndCurrentUser(document, userId)) {
-      if (document.type === "equipment") {
-        if (document.actor) {
-          await document.update({ "system.equipped": false });
-        }
-      }
+      //if (document.type === "equipment") {
+      //  if (document.actor) {
+      //    await document.update({ "system.equipped": false });
+      //  }
+      //}
       document.actor?.buildEffectTypes();
       await document.actor?.postUpdate();
     }

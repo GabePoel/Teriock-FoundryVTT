@@ -15,7 +15,15 @@ import {
  * @returns {HTMLDivElement} The complete message element.
  */
 export function buildMessage(messageParts) {
-  const { image, name, bars = [], blocks = [], font } = messageParts;
+  const {
+    image,
+    name,
+    bars = [],
+    blocks = [],
+    font,
+    icon,
+    label,
+  } = messageParts;
   let fontClass = "tfont";
   if (font) {
     fontClass = "tfont-" + font;
@@ -28,7 +36,7 @@ export function buildMessage(messageParts) {
   const headerBox = messageBox();
   headerBox.classList.add("tmes-header-box");
   if (name) {
-    messageHeader(headerBox, image, name, fontClass);
+    messageHeader(headerBox, image, name, icon, label, fontClass);
   }
 
   // Bars

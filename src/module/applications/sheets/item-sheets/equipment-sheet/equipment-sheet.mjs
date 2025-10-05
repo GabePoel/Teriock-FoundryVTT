@@ -5,7 +5,7 @@ import WikiButtonSheetMixin from "../../mixins/button-mixins/wiki-button-sheet-m
 import TeriockBaseItemSheet from "../base-item-sheet/base-item-sheet.mjs";
 import {
   fontContextMenu,
-  powerLevelContextMenu
+  powerLevelContextMenu,
 } from "./connections/_context-menus.mjs";
 
 /**

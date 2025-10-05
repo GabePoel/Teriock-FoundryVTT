@@ -2,14 +2,14 @@ import type TeriockBaseItemModel from "../base-item-data/base-item-data.mjs";
 import type { TeriockEquipment } from "../../../documents/_documents.mjs";
 import type { ExecutableDataMixinInterface } from "../../mixins/executable-data-mixin/_types";
 import type { ConsumableDataMixinInterface } from "../../mixins/consumable-data-mixin/_types";
-import type { WieldedDataMixinInterface } from "../../mixins/wielded-data-mixin/_types";
+import type { ArmamentDataMixinInterface } from "../../mixins/armament-data-mixin/_types";
 
-declare module "./equipment-data.mjs" {
-  export default interface TeriockEquipmentModel
+declare global {
+  interface TeriockEquipmentData
     extends TeriockBaseItemModel,
       ConsumableDataMixinInterface,
       ExecutableDataMixinInterface,
-      WieldedDataMixinInterface {
+      ArmamentDataMixinInterface {
     /** <schema> Damage Dice */
     damage: {
       /** <schema> Damage this always deals */
@@ -27,7 +27,7 @@ declare module "./equipment-data.mjs" {
     equipmentType: string;
     /** <schema> Is the equipment equipped? */
     equipped: boolean;
-    /** <schema> Is the equipment glued? */
+    /** <base> Is the equipment glued? */
     glued: boolean;
     /** <base> Registered pseudo-hook macros to fire */
     hookedMacros: Teriock.Parameters.Equipment.HookedEquipmentMacros;
@@ -63,7 +63,12 @@ declare module "./equipment-data.mjs" {
       /** <special> Weight times quantity */
       total: number;
     };
+    get parent(): TeriockEquipment;
+  }
+}
 
+declare module "./equipment-data.mjs" {
+  export default interface TeriockEquipmentModel extends TeriockEquipmentData {
     get parent(): TeriockEquipment;
   }
 }

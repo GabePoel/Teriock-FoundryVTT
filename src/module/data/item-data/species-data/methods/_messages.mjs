@@ -1,3 +1,4 @@
+import { documentOptions } from "../../../../constants/options/document-options.mjs";
 import {
   addAbilitiesBlock,
   addFluenciesBlock,
@@ -82,5 +83,7 @@ export function _messageParts(speciesData) {
   return {
     bars: bars,
     blocks: blocks,
+    icon: documentOptions.species.icon,
+    label: documentOptions.species.name,
   };
 }

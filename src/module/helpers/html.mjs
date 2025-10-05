@@ -1,3 +1,4 @@
+import { documentOptions } from "../constants/options/document-options.mjs";
 import { buildMessage } from "./messages-builder/message-builder.mjs";
 import { getIcon } from "./path.mjs";
 import { toTitleCase } from "./string.mjs";
@@ -292,6 +293,8 @@ export async function tradecraftMessage(tradecraft) {
         text: TERIOCK.content.tradecrafts[tradecraft],
       },
     ],
+    icon: documentOptions.fluency.icon,
+    label: "Tradecraft",
   });
   const message = document.createElement("div");
   message.append(messageContent);
@@ -328,6 +331,8 @@ export async function classMessage(className) {
         text: TERIOCK.content.classes[className],
       },
     ],
+    icon: documentOptions.rank.icon,
+    label: "Class",
   });
   const message = document.createElement("div");
   message.append(messageContent);

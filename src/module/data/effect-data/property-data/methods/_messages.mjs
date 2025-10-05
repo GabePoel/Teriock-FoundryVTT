@@ -1,3 +1,4 @@
+import { documentOptions } from "../../../../constants/options/document-options.mjs";
 import { addPropertiesBlock } from "../../../../helpers/messages-builder/message-parts.mjs";
 
 /**
@@ -27,5 +28,7 @@ export function _messageParts(propertyData) {
       },
     ],
     blocks: blocks,
+    icon: documentOptions.property.icon,
+    label: documentOptions.property.name,
   };
 }

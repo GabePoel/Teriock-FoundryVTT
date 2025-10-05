@@ -1,3 +1,4 @@
+import { documentOptions } from "../../../../constants/options/document-options.mjs";
 import {
   addAbilitiesBlock,
   addFluenciesBlock,
@@ -111,6 +112,8 @@ export function _messageParts(equipmentData) {
   return {
     bars: bars,
     blocks: blocks,
+    icon: documentOptions.equipment.icon,
+    label: documentOptions.equipment.name,
   };
 }
 
@@ -133,5 +136,7 @@ export function _secretMessageParts(equipmentData) {
     name: equipmentData.equipmentType,
     bars: bars,
     blocks: blocks,
+    icon: documentOptions.equipment.icon,
+    label: documentOptions.equipment.name,
   };
 }

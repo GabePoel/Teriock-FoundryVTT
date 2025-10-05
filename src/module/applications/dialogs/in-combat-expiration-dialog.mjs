@@ -92,10 +92,17 @@ export default async function inCombatExpirationDialog(
                   },
                 },
               );
-              await expirationRoll.toMessage({
-                speaker: TeriockChatMessage.getSpeaker({ actor: effect.actor }),
-                flavor: `${effect.name} Ending Roll`,
-              });
+              await expirationRoll.toMessage(
+                {
+                  speaker: TeriockChatMessage.getSpeaker({
+                    actor: effect.actor,
+                  }),
+                  flavor: `${effect.name} Ending Roll`,
+                },
+                {
+                  rollMode: game.settings.get("core", "rollMode"),
+                },
+              );
               if (
                 expirationRoll.total >=
                 Number(button.form.elements.namedItem("threshold").value)

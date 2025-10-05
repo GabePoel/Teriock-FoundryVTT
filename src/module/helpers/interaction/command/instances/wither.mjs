@@ -12,11 +12,16 @@ export const wither = new TeriockCommand(
       disadvantage: options.disadvantage,
     });
 
-    await roll.toMessage({
-      user: chatData.user,
-      speaker: chatData.speaker,
-      flavor: "Wither Roll",
-    });
+    await roll.toMessage(
+      {
+        user: chatData.user,
+        speaker: chatData.speaker,
+        flavor: "Wither Roll",
+      },
+      {
+        rollMode: game.settings.get("core", "rollMode"),
+      },
+    );
 
     for (const actor of actors) {
       await actor.system.takeWither(roll.total);

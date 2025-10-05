@@ -127,10 +127,15 @@ export default class StatDieModel extends DataModel {
     }
     const roll = new TeriockRoll(`1d${this.faces}`, {});
     await roll.evaluate();
-    await roll.toMessage({
-      speaker: TeriockChatMessage.getSpeaker({ actor: actor }),
-      flavor: `Rolling ${this.name}`,
-    });
+    await roll.toMessage(
+      {
+        speaker: TeriockChatMessage.getSpeaker({ actor: actor }),
+        flavor: `Rolling ${this.name}`,
+      },
+      {
+        rollMode: game.settings.get("core", "rollMode"),
+      },
+    );
     if (this.stat === "hp") {
       await actor.system.takeHeal(roll.total);
     }
@@ -150,10 +155,15 @@ export default class StatDieModel extends DataModel {
     const actor = this.parent.parent.actor;
     const roll = new TeriockRoll(`1d${this.faces}`, {});
     await roll.evaluate();
-    await roll.toMessage({
-      speaker: TeriockChatMessage.getSpeaker({ actor: actor }),
-      flavor: `Rolling ${this.stat.toUpperCase()}`,
-    });
+    await roll.toMessage(
+      {
+        speaker: TeriockChatMessage.getSpeaker({ actor: actor }),
+        flavor: `Rolling ${this.stat.toUpperCase()}`,
+      },
+      {
+        rollMode: game.settings.get("core", "rollMode"),
+      },
+    );
     await this.parent.parent.update({ [`${this.path}.value`]: roll.total });
   }
 

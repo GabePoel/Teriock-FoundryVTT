@@ -12,11 +12,16 @@ export const drain = new TeriockCommand(
       disadvantage: options.disadvantage,
     });
 
-    await roll.toMessage({
-      user: chatData.user,
-      speaker: chatData.speaker,
-      flavor: "Drain Roll",
-    });
+    await roll.toMessage(
+      {
+        user: chatData.user,
+        speaker: chatData.speaker,
+        flavor: "Drain Roll",
+      },
+      {
+        rollMode: game.settings.get("core", "rollMode"),
+      },
+    );
 
     for (const actor of actors) {
       await actor.system.takeDrain(roll.total);

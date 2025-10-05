@@ -1,3 +1,5 @@
+import { documentOptions } from "../../../../constants/options/document-options.mjs";
+
 /**
  * Generates message parts for a resource effect, including blocks for display.
  * Creates formatted display elements for resource description.
@@ -15,5 +17,7 @@ export function _messageParts(resourceData) {
   return {
     bars: [],
     blocks: blocks,
+    icon: documentOptions.resource.icon,
+    label: documentOptions.resource.name,
   };
 }

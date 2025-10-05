@@ -399,10 +399,15 @@ export default class TeriockActor extends ParentDocumentMixin(
       },
       message: message,
     });
-    await roll.toMessage({
-      flavor: "Condition Ending Roll",
-      speaker: TeriockChatMessage.getSpeaker({ actor: this }),
-    });
+    await roll.toMessage(
+      {
+        flavor: "Condition Ending Roll",
+        speaker: TeriockChatMessage.getSpeaker({ actor: this }),
+      },
+      {
+        rollMode: game.settings.get("core", "rollMode"),
+      },
+    );
   }
 
   /**

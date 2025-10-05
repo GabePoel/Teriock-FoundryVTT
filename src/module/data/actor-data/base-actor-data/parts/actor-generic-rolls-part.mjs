@@ -49,13 +49,18 @@ export default (Base) => {
         const roll = new TeriockRoll(rollFormula, this.parent.getRollData(), {
           context,
         });
-        await roll.toMessage({
-          speaker: TeriockChatMessage.getSpeaker({ actor: this.parent }),
-          flavor:
-            (typeof options.threshold === "number"
-              ? `DC ${options.threshold} `
-              : "") + `${attribute.toUpperCase()} Feat Save`,
-        });
+        await roll.toMessage(
+          {
+            speaker: TeriockChatMessage.getSpeaker({ actor: this.parent }),
+            flavor:
+              (typeof options.threshold === "number"
+                ? `DC ${options.threshold} `
+                : "") + `${attribute.toUpperCase()} Feat Save`,
+          },
+          {
+            rollMode: game.settings.get("core", "rollMode"),
+          },
+        );
       }
 
       /**
@@ -74,11 +79,16 @@ export default (Base) => {
           return;
         }
         options = data.options;
-        await TeriockChatMessage.create({
+        const chatData = {
           speaker: TeriockChatMessage.getSpeaker({ actor: this.parent }),
           title: "Immune",
           content: options.message || "No effect.",
-        });
+        };
+        TeriockChatMessage.applyRollMode(
+          chatData,
+          game.settings.get("core", "rollMode"),
+        );
+        await TeriockChatMessage.create(chatData);
       }
 
       /**
@@ -112,13 +122,18 @@ export default (Base) => {
           },
         });
         await roll.evaluate();
-        TeriockChatMessage.create({
-          speaker: TeriockChatMessage.getSpeaker({ actor: this.parent }),
-          rolls: [roll],
-          system: {
-            extraContent: options.message,
+        TeriockChatMessage.create(
+          {
+            speaker: TeriockChatMessage.getSpeaker({ actor: this.parent }),
+            rolls: [roll],
+            system: {
+              extraContent: options.message,
+            },
           },
-        });
+          {
+            rollMode: game.settings.get("core", "rollMode"),
+          },
+        );
       }
 
       /**
@@ -164,13 +179,18 @@ export default (Base) => {
           context,
         });
         await roll.evaluate();
-        TeriockChatMessage.create({
-          speaker: TeriockChatMessage.getSpeaker({ actor: this.parent }),
-          rolls: [roll],
-          system: {
-            extraContent: await tradecraftMessage(tradecraft),
+        TeriockChatMessage.create(
+          {
+            speaker: TeriockChatMessage.getSpeaker({ actor: this.parent }),
+            rolls: [roll],
+            system: {
+              extraContent: await tradecraftMessage(tradecraft),
+            },
           },
-        });
+          {
+            rollMode: game.settings.get("core", "rollMode"),
+          },
+        );
       }
     }
   );

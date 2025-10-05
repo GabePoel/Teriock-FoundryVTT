@@ -71,6 +71,10 @@ export async function _parse(propertyData, rawHTML) {
     parameters.system.damageType = extractedDamageType;
   }
 
+  if (["Shattered", "Runic"].includes(propertyData.parent.name)) {
+    parameters.system.applyIfShattered = true;
+  }
+
   parameters.system.applies = {};
   parameters.system.description = tidyHTML(rawHTML);
   parameters.system.applies.changes = extractChangesFromHTML(rawHTML);

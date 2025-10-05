@@ -150,6 +150,8 @@ async function deathBagPull(pullFormula, stonesFormulas, actor) {
             italic: true,
           },
         ],
+        icon: "sack",
+        label: "Death Bag",
       };
       const contentStart = buildMessage(messageParts);
       let content = contentStart.outerHTML;
