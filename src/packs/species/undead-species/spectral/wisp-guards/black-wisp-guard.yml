@@ -368,7 +368,11 @@ effects:
           hacks: []
           checks: []
           duration: 0
-          changes: []
+          changes:
+            - key: system.protections.resistances.other
+              mode: 2
+              value: Non-critical Attacks
+              priority: 10
           common: []
           expiration:
             normal:
@@ -560,7 +564,7 @@ effects:
       expansionRange: null
       expansionSaveAttribute: mov
       featSaveAttribute: mov
-      form: normal
+      form: special
       gifted:
         enabled: false
         amount: 1
@@ -576,12 +580,12 @@ effects:
           amount: proficient
       interaction: manifest
       invoked: false
-      limitation: Non-critical hits only.
+      limitation: ''
       maneuver: passive
       overview:
         base: >-
-          You are @L[Keyword:Resistance]{resistant} to being @L[Core:Attack
-          Interaction]{attacked}.
+          You are @L[Keyword:Resistance]{resistant} to being non-critical
+          @L[Category:Attack abilities]{attacks}.
         proficient: ''
         fluent: ''
       piercing: normal
@@ -1401,8 +1405,8 @@ effects:
       piercing: normal
       improvements:
         attributeImprovement:
-          attribute: per
-          minVal: 1
+          attribute: null
+          minVal: 0
         featSaveImprovement:
           attribute: null
           amount: proficient

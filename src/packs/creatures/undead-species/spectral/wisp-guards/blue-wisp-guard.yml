@@ -12728,7 +12728,11 @@ items:
               hacks: []
               checks: []
               duration: 0
-              changes: []
+              changes:
+                - key: system.protections.resistances.other
+                  mode: 2
+                  value: Non-critical Attacks
+                  priority: 10
               common: []
               expiration:
                 normal:
@@ -12920,7 +12924,7 @@ items:
           expansionRange: null
           expansionSaveAttribute: mov
           featSaveAttribute: mov
-          form: normal
+          form: special
           gifted:
             enabled: false
             amount: 1
@@ -12940,8 +12944,8 @@ items:
           maneuver: passive
           overview:
             base: >-
-              You are @L[Keyword:Resistance]{resistant} to being @L[Core:Attack
-              Interaction]{attacked}.
+              You are @L[Keyword:Resistance]{resistant} to being non-critical
+              @L[Category:Attack abilities]{attacks}.
             proficient: ''
             fluent: ''
           piercing: normal
@@ -13764,8 +13768,8 @@ items:
           piercing: normal
           improvements:
             attributeImprovement:
-              attribute: per
-              minVal: 1
+              attribute: null
+              minVal: 0
             featSaveImprovement:
               attribute: null
               amount: proficient
@@ -19243,8 +19247,8 @@ items:
           results:
             hit: Deal [[/damage 1d6[magic]]] @L[Core:Damage]{damage} to target.
             critHit: >-
-              <p>Double the @L[Core:Damage]{damage dice} dealt by this
-              @L[Category:Abilities]{ability}.</p>
+              Double the @L[Core:Damage]{damage dice} dealt by this
+              @L[Category:Abilities]{ability}.
             miss: ''
             critMiss: ''
             save: ''
@@ -19290,8 +19294,8 @@ items:
             break: ''
             materialCost: ''
           heightened: >-
-            <p>For each additional @L[Core:MP]{MP} spent, deal an additional
-            [[/damage 1d6[magic]]] @L[Core:Damage]{damage}.</p>
+            For each additional @L[Core:MP]{MP} spent, deal an additional
+            [[/damage 1d6[magic]]] @L[Core:Damage]{damage}.
           endCondition: ''
           requirements: ''
           expansion: null
@@ -19312,7 +19316,8 @@ items:
           adept:
             enabled: false
             amount: 1
-          effectTypes: []
+          effectTypes:
+            - damaging
           form: normal
           gifted:
             enabled: false
@@ -19521,8 +19526,10 @@ items:
           overview:
             base: >-
               You may use your @L[Property:Magelore]{magelore} items as though
-              they were your hand. You are not @L[Core:Proficiency
-              Bonus]{proficient} nor @L[Core:Fluency Bonus]{fluent} with
+              they were your @L[Body:Hand]{hand}. This makes them
+              @L[Property:Handy]{handy} and @L[Property:Prehensile]{prehensile}.
+              You are not @L[Core:Proficiency Bonus]{proficient} nor
+              @L[Core:Fluency Bonus]{fluent} with
               @L[Category:Abilities]{abilities} you use through your
               @L[Property:Magelore]{magelore} items.
             proficient: >-

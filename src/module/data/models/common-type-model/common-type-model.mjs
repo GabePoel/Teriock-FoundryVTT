@@ -173,10 +173,10 @@ export default class CommonTypeModel extends TypeDataModel {
       }
     }
     for (const a of this.parent.getAbilities()) {
-      await a.system.refreshFromIndex();
+      await a.system.hardRefreshFromIndex();
     }
     for (const p of this.parent.getProperties()) {
-      await p.system.refreshFromIndex();
+      await p.system.hardRefreshFromIndex();
     }
     if (this.parent.documentName === "Actor") {
       for (const item of this.parent.items.values()) {
