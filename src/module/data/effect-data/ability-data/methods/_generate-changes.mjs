@@ -27,7 +27,7 @@ export function _generateChanges(abilityData) {
   }
   if (abilityData.improvements.attributeImprovement.attribute) {
     const attributeImprovementChange = {
-      key: `system.attributes.${abilityData.improvements.attributeImprovement.attribute}.value`,
+      key: `system.attributes.${abilityData.improvements.attributeImprovement.attribute}.score.raw`,
       value: abilityData.improvements.attributeImprovement.minVal,
       mode: 4,
       priority: 20,

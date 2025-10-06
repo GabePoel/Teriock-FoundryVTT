@@ -1,4 +1,7 @@
-import { modifiableNumber } from "../../../../shared/fields/modifiable.mjs";
+import {
+  modifiableFormula,
+  modifiableNumber,
+} from "../../../../shared/fields/modifiable.mjs";
 
 const { fields } = foundry.data;
 
@@ -20,10 +23,10 @@ function attributeField(name) {
       initial: false,
       label: `Proficient in ${name} Saves`,
     }),
-    value: new fields.NumberField({
-      initial: -3,
-      integer: true,
+    score: modifiableFormula({
+      initial: "-3",
       label: `${name} Save Bonus`,
+      deterministic: true,
     }),
   });
 }

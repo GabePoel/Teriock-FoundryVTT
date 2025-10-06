@@ -30,11 +30,14 @@
            data-attribute="{{name}}" data-tooltip="Roll {{uc (name)}} Save" data-tooltip-direction="LEFT">
         {{name}}
       </div>
-      <div class="tcenter">
+      <div class="tcenter affix">
+        <div class="unselected">
+          <span class="ch-attribute-input tcolored tcenter ttransparent">{{{attribute.score.value}}}</span>
+        </div>
         {{formInput
-          (path ../systemFields "attributes.fields" name "fields.value")
-          value=attribute.value
-          classes="ch-attribute-input tcolored tcenter ttransparent"
+          (path ../systemFields "attributes.fields" name "fields.score.fields.saved")
+          value=attribute.score.saved
+          classes="ch-attribute-input tcolored tcenter ttransparent selected"
           disabled=(eq name "unp")
         }}
       </div>

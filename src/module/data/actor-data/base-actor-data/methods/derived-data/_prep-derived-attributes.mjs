@@ -12,6 +12,17 @@ import {
  * @private
  */
 export function _prepDerivedAttributes(actorData) {
+  for (const att of Object.keys(TERIOCK.index.attributes)) {
+    deriveModifiableDeterministic(
+      actorData.attributes[att].score,
+      actorData.parent,
+      {
+        floor: true,
+        min: -3,
+        max: 5,
+      },
+    );
+  }
   _preparePresence(actorData);
   const { attributes, scaling } = actorData;
   Object.values(attributes).forEach((attr) => {
@@ -20,7 +31,7 @@ export function _prepDerivedAttributes(actorData) {
       : attr.saveProficient
         ? scaling.p
         : 0;
-    attr.saveBonus = attr.value * 2 + bonus;
+    attr.saveBonus = attr.score.value * 2 + bonus;
   });
   deriveModifiableNumber(actorData.size.number, {
     min: 0,
@@ -36,8 +47,8 @@ export function _prepDerivedAttributes(actorData) {
   // Convert from feet to tiles
   actorData.size.length = sizeDefinition.length / 5;
   actorData.size.reach = sizeDefinition.reach;
-  const mov = attributes.mov.value;
-  const str = attributes.str.value;
+  const mov = attributes.mov.score.value;
+  const str = attributes.str.score.value;
   const strFactor =
     actorData.size.number.value < 5
       ? str
@@ -68,6 +79,6 @@ export function _preparePresence(actorData) {
     actorData.presence.value,
     actorData.presence.max,
   );
-  actorData.attributes.unp.value =
+  actorData.attributes.unp.score.value =
     actorData.presence.max - actorData.presence.value;
 }

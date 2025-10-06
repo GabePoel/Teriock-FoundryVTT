@@ -52,8 +52,8 @@ function presenceData(actorData, data) {
   Object.assign(data, {
     pres: actorData.presence.max,
     "pres.used": actorData.presence.value,
-    "pres.unused": actorData.attributes.unp.value,
-    unp: actorData.attributes.unp.value,
+    "pres.unused": actorData.attributes.unp.score.value,
+    unp: actorData.attributes.unp.score.value,
     usp: actorData.presence.value,
   });
 }
@@ -131,7 +131,7 @@ function attributeData(actorData, data) {
 
   for (const key of attrKeys) {
     const attribute = attr[key];
-    data[`att.${key}`] = attribute.value;
+    data[`att.${key}`] = attribute.score.value;
     data[`att.${key}.pro`] = attribute.saveProficient ? 1 : 0;
     data[`att.${key}.flu`] = attribute.saveFluent ? 1 : 0;
     data[`att.${key}.save`] = attribute.saveBonus;

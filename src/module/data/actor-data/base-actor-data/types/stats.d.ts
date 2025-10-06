@@ -17,7 +17,7 @@ export interface ActorAttributeData {
   /** (schema) Are you proficient in saves made with this attribute? */
   saveProficient: boolean;
   /** (schema) Value */
-  value: number;
+  score: Teriock.Fields.ModifiableDeterministic;
 }
 
 /** Hack data */

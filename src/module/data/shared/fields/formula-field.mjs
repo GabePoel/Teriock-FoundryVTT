@@ -30,6 +30,7 @@ export default class FormulaField extends StringField {
     }
     const operator = delta.startsWith("-") ? "-" : "+";
     delta = delta.replace(/^[+-]/, "").trim();
+    console.log(`${value} ${operator} ${delta}`);
     return `${value} ${operator} ${delta}`;
   }
 
@@ -38,9 +39,16 @@ export default class FormulaField extends StringField {
     if (!value) {
       return delta;
     }
+    if (this.deterministic) {
+      const terms = new TeriockRoll(value, {}).terms;
+      if (terms.length === 1 && terms[0]?.fn === "min") {
+        return value.replace(/\)$/, `, ${delta})`);
+      }
+      return `min(${value}, ${delta})`;
+    }
     const valueTotal = TeriockRoll.meanValue(value);
     const deltaTotal = TeriockRoll.meanValue(delta);
-    if (deltaTotal < valueTotal) {
+    if (deltaTotal <= valueTotal) {
       return delta;
     } else {
       return value;
@@ -64,9 +72,16 @@ export default class FormulaField extends StringField {
     if (!value) {
       return delta;
     }
+    if (this.deterministic) {
+      const terms = new TeriockRoll(value, {}).terms;
+      if (terms.length === 1 && terms[0]?.fn === "max") {
+        return value.replace(/\)$/, `, ${delta})`);
+      }
+      return `max(${value}, ${delta})`;
+    }
     const valueTotal = TeriockRoll.meanValue(value);
     const deltaTotal = TeriockRoll.meanValue(delta);
-    if (deltaTotal > valueTotal) {
+    if (deltaTotal >= valueTotal) {
       return delta;
     } else {
       return value;
