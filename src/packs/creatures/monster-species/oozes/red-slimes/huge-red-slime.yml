@@ -16045,6 +16045,14 @@ items:
                   priority: 10
                 - key: system.protections.immunities.statuses
                   mode: 2
+                  value: goaded
+                  priority: 10
+                - key: system.protections.immunities.statuses
+                  mode: 2
+                  value: frenzied
+                  priority: 10
+                - key: system.protections.immunities.statuses
+                  mode: 2
                   value: charmed
                   priority: 10
               common: []
@@ -16260,9 +16268,8 @@ items:
             base: >-
               You are @L[Keyword:Immunity]{immune} to being
               @L[Condition:Frightened]{frightened},
-              @L[Condition:Goaded]{goaded}, @L[Condition:Frenzied]{frenzied}, or
-              @L[Condition:Allured]{allured}. The effects of Ooze Mind are
-              maintained even if @L[Condition:Transformed]{transformed}.
+              @L[Condition:Goaded]{goaded}, @L[Condition:Frenzied]{frenzied},
+              and @L[Condition:Allured]{allured}.
             proficient: ''
             fluent: ''
           piercing: normal
@@ -18393,8 +18400,8 @@ items:
           results:
             hit: Deal [[/damage 1d6[magic]]] @L[Core:Damage]{damage} to target.
             critHit: >-
-              <p>Double the @L[Core:Damage]{damage dice} dealt by this
-              @L[Category:Abilities]{ability}.</p>
+              Double the @L[Core:Damage]{damage dice} dealt by this
+              @L[Category:Abilities]{ability}.
             miss: ''
             critMiss: ''
             save: ''
@@ -18440,8 +18447,8 @@ items:
             break: ''
             materialCost: ''
           heightened: >-
-            <p>For each additional @L[Core:MP]{MP} spent, deal an additional
-            [[/damage 1d6[magic]]] @L[Core:Damage]{damage}.</p>
+            For each additional @L[Core:MP]{MP} spent, deal an additional
+            [[/damage 1d6[magic]]] @L[Core:Damage]{damage}.
           endCondition: ''
           requirements: ''
           expansion: null
@@ -18462,7 +18469,8 @@ items:
           adept:
             enabled: false
             amount: 1
-          effectTypes: []
+          effectTypes:
+            - damaging
           form: normal
           gifted:
             enabled: false
@@ -18671,8 +18679,10 @@ items:
           overview:
             base: >-
               You may use your @L[Property:Magelore]{magelore} items as though
-              they were your hand. You are not @L[Core:Proficiency
-              Bonus]{proficient} nor @L[Core:Fluency Bonus]{fluent} with
+              they were your @L[Body:Hand]{hand}. This makes them
+              @L[Property:Handy]{handy} and @L[Property:Prehensile]{prehensile}.
+              You are not @L[Core:Proficiency Bonus]{proficient} nor
+              @L[Core:Fluency Bonus]{fluent} with
               @L[Category:Abilities]{abilities} you use through your
               @L[Property:Magelore]{magelore} items.
             proficient: >-
@@ -24875,6 +24885,7 @@ items:
         flags:
           teriock:
             category: support
+            dontConsume: false
         _stats:
           coreVersion: '13'
           systemId: teriock
@@ -25759,7 +25770,7 @@ items:
             effect has successfully applied.
           basic: false
           form: normal
-          limitation: Only usable with Flame Ray and Fire Ball.
+          limitation: ''
           improvement: ''
           prepared: true
           warded: false

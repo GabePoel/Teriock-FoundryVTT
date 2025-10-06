@@ -56,6 +56,9 @@ export async function harmRoll(formula, rollData = {}, message = "") {
       extraContent: message + damageDrainTypeMessage,
     },
   };
-  TeriockChatMessage.applyRollMode(chatData);
+  TeriockChatMessage.applyRollMode(
+    chatData,
+    game.settings.get("core", "rollMode"),
+  );
   return TeriockChatMessage.create(chatData);
 }

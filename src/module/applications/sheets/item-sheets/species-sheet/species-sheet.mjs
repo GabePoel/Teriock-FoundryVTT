@@ -1,4 +1,5 @@
 import { documentOptions } from "../../../../constants/options/document-options.mjs";
+import WikiButtonSheetMixin from "../../mixins/button-mixins/wiki-button-sheet-mixin.mjs";
 import TeriockBaseItemSheet from "../base-item-sheet/base-item-sheet.mjs";
 
 /**
@@ -7,7 +8,9 @@ import TeriockBaseItemSheet from "../base-item-sheet/base-item-sheet.mjs";
  * @property {TeriockSpecies} document
  * @property {TeriockSpecies} item
  */
-export default class TeriockSpeciesSheet extends TeriockBaseItemSheet {
+export default class TeriockSpeciesSheet extends WikiButtonSheetMixin(
+  TeriockBaseItemSheet,
+) {
   /**
    * @inheritDoc
    * @type {Partial<ApplicationConfiguration>}
