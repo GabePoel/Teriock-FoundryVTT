@@ -11,6 +11,15 @@ const { Combat } = foundry.documents;
  */
 export default class TeriockCombat extends Combat {
   /**
+   * The actors in this combat.
+   * @returns {TeriockActor[]}
+   */
+  get actors() {
+    const actors = this.combatants.map((c) => c.actor);
+    return actors.filter((a) => a);
+  }
+
+  /**
    * Check if the effect might expire and send a dialog to some {@link TeriockUser}.
    * @param {TeriockConsequence} effect - Effect to check expiration for.
    * @param {"turn"|"combat"|"action"} trigger - What might trigger this effect to expire.
@@ -69,7 +78,7 @@ export default class TeriockCombat extends Combat {
    */
   async _tryAllEffectExpirations(effectActor, timeActor, trigger, time) {
     const updates = [];
-    for (const effect of effectActor.consequences) {
+    for (const effect of effectActor?.consequences || []) {
       await this._confirmEffectExpiration(
         effect,
         trigger,
@@ -91,9 +100,7 @@ export default class TeriockCombat extends Combat {
   /** @inheritDoc */
   async endCombat() {
     let out = await super.endCombat();
-    for (const actor of this.combatants.map(
-      (combatant) => /** @type {TeriockActor} */ combatant.actor,
-    )) {
+    for (const actor of this.actors) {
       await this._tryAllEffectExpirations(actor, actor, "combat", "end");
     }
     return out;
@@ -117,29 +124,34 @@ export default class TeriockCombat extends Combat {
     // waiting for effect expirations.
     /** @type {TeriockActor} */
     const previousActor = this.combatant?.actor;
-    for (const actor of this.combatants.map(
-      (combatant) => /** @type {TeriockActor} */ combatant.actor,
-    )) {
-      await this._tryAllEffectExpirations(actor, previousActor, "turn", "end");
+    if (previousActor) {
+      for (const actor of this.actors) {
+        await this._tryAllEffectExpirations(
+          actor,
+          previousActor,
+          "turn",
+          "end",
+        );
+      }
     }
     const activeGm = /** @type {TeriockUser} */ game.users.activeGM;
     await activeGm.query("teriock.resetAttackPenalties", {
-      actorUuids: this.combatants.map((c) => c.actor.uuid),
+      actorUuids: this.actors.map((a) => a.uuid),
     });
     this.updateCombatantActors();
-    const previousUser = selectUser(previousActor);
-    await previousUser.query("teriock.callPseudoHook", {
-      uuid: previousActor.uuid,
-      pseudoHook: "turnEnd",
-      data: {},
-    });
+    if (previousActor) {
+      const previousUser = selectUser(previousActor);
+      await previousUser.query("teriock.callPseudoHook", {
+        uuid: previousActor.uuid,
+        pseudoHook: "turnEnd",
+        data: {},
+      });
+    }
 
     // Start of turn
     /** @type {TeriockActor} */
     const newActor = this.combatant?.actor;
-    for (const actor of this.combatants.map(
-      (combatant) => /** @type {TeriockActor} */ combatant.actor,
-    )) {
+    for (const actor of this.actors) {
       await this._tryAllEffectExpirations(actor, newActor, "action", "start");
       await this._tryAllEffectExpirations(actor, newActor, "turn", "start");
     }
@@ -147,12 +159,14 @@ export default class TeriockCombat extends Combat {
       uuid: newActor.uuid,
       data: { "system.combat.hasReaction": true },
     });
-    const newUser = selectUser(newActor);
-    await newUser.query("teriock.callPseudoHook", {
-      uuid: newActor.uuid,
-      pseudoHook: "turnStart",
-      data: {},
-    });
+    if (newActor) {
+      const newUser = selectUser(newActor);
+      await newUser.query("teriock.callPseudoHook", {
+        uuid: newActor.uuid,
+        pseudoHook: "turnStart",
+        data: {},
+      });
+    }
 
     // Finish
     return out;

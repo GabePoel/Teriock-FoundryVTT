@@ -6,6 +6,7 @@ const { User } = foundry.documents;
  * @extends {JournalEntry}
  * @mixes ClientDocumentMixin
  * @property {"User"} documentName
+ * @property {Set<TeriockToken>} targets
  */
 export default class TeriockUser extends User {
   /**

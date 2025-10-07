@@ -20,6 +20,29 @@ export default class TeriockTokenDocument extends ChangeableDocumentMixin(
   /** @inheritDoc */
   changesField = "tokenChanges";
 
+  /**
+   * Center of this token.
+   * @returns {Point}
+   */
+  get center() {
+    return {
+      x: this.x + this.sizeX / 2,
+      y: this.y + this.sizeY / 2,
+    };
+  }
+
+  /**
+   * A radius for this token in grid units.
+   * @returns {number}
+   */
+  get radius() {
+    return convertUnits(
+      Math.sqrt(Math.pow(this.width / 2, 2) + Math.pow(this.height / 2, 2)) * 5,
+      "ft",
+      this.parent?.grid.units || "",
+    );
+  }
+
   /** @inheritDoc */
   _checkPreparation() {
     return this.actor;

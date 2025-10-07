@@ -13,6 +13,7 @@ import type {
   TeriockTokenDocument,
   TeriockUser,
 } from "./documents/_module.mjs";
+import PixiJS from "pixi.js";
 import * as sheets from "./applications/sheets/_module.mjs";
 import * as documents from "./documents/_documents.mjs";
 import * as data from "./data/_module.mjs";
@@ -27,6 +28,8 @@ import type TeriockBaseItemModel from "./data/item-data/base-item-data/base-item
 import type TeriockBaseMessageModel from "./data/message-data/base-message-data/base-message-data.mjs";
 
 declare global {
+  export import PIXI = PixiJS;
+
   const TERIOCK: typeof import("./constants/_module.mjs");
 
   // Base document classes
@@ -160,7 +163,6 @@ declare global {
   // Placeables
   // ==========
 
-  const TeriockMeasuredTemplate: placeables.TeriockMeasuredTemplate;
   const TeriockToken: placeables.TeriockToken;
 
   namespace Teriock {

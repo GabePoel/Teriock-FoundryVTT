@@ -3,6 +3,7 @@ export { attunementOptions as attunement } from "./attunement-options.mjs";
 export { characterOptions as character } from "./character-options.mjs";
 export { consequenceOptions as consequence } from "./consequence-options.mjs";
 export { currencyOptions as currency } from "./currency-options.mjs";
+export { deliveryOptions as delivery } from "./delivery-options.mjs";
 export { dieOptions as die } from "./die-options.mjs";
 export { displayOptions as display } from "./display-options.mjs";
 export { documentOptions as document } from "./document-options.mjs";

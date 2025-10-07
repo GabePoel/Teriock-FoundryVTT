@@ -267,12 +267,7 @@ export function modifyChangePrefix(change, searchValue, replaceValue) {
  * @returns {TeriockToken|null}
  */
 export function actorToken(actor) {
-  return (
-    actor.token?.object ||
-    actor.getActiveTokens?.()?.[0] ||
-    actor.prototypeToken ||
-    null
-  );
+  return actor.token?.object || actor.getActiveTokens?.()?.[0] || null;
 }
 
 /**

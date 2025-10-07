@@ -3,6 +3,14 @@ import { toTitleCase } from "../helpers/string.mjs";
 export function registerSettings() {
   /** @type {Record<string, Partial<SettingConfig>>} */
   const settings = {
+    placeTemplateOnAbilityUse: {
+      config: true,
+      default: true,
+      hint: "In enabled, using abilities with an area of effect will automatically place a measured template.",
+      name: "Place Template on Ability Use",
+      scope: "user",
+      type: Boolean,
+    },
     rollAttackOnEquipmentUse: {
       config: true,
       default: false,

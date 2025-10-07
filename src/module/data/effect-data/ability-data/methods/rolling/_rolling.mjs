@@ -20,8 +20,8 @@ export async function _roll(abilityData, options = {}) {
   if (rollConfig.useData.dontUse) {
     return;
   }
-  await _setTargets(rollConfig);
   await _stageUse(rollConfig);
+  await _setTargets(rollConfig);
   await _payCosts(rollConfig);
   await _generateRolls(rollConfig);
   await _buildButtons(rollConfig);

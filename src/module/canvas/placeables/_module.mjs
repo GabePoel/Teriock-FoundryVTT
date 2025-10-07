@@ -1,2 +1,2 @@
 export { default as TeriockToken } from "./token.mjs";
-export { default as TeriockMeasuredTemplate } from "./measured-template.mjs";
+export { default as TeriockAbilityTemplate } from "./ability-template.mjs";
