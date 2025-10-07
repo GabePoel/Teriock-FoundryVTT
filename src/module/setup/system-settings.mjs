@@ -3,10 +3,39 @@ import { toTitleCase } from "../helpers/string.mjs";
 export function registerSettings() {
   /** @type {Record<string, Partial<SettingConfig>>} */
   const settings = {
+    automaticallyPayAbilityCosts: {
+      config: true,
+      default: true,
+      hint: "If enabled, HP, MP, and GP costs of abilities will be paid automatically upon use.",
+      name: "Automatically Pay Ability Costs",
+      scope: "user",
+      type: Boolean,
+    },
+    defaultPanelCollapseState: {
+      config: true,
+      default: "auto",
+      hint: "Default state for chat message panels.",
+      name: "Default Panel Collapse State",
+      scope: "user",
+      type: String,
+      choices: {
+        auto: "Automatic",
+        closed: "Closed",
+        open: "Open",
+      },
+    },
+    automaticPanelCollapseTime: {
+      config: true,
+      default: 5,
+      hint: "Automatically collapse chat message panels older than this many minutes.",
+      name: "Automatic Panel Collapse Time",
+      scope: "user",
+      type: Number,
+    },
     placeTemplateOnAbilityUse: {
       config: true,
       default: true,
-      hint: "In enabled, using abilities with an area of effect will automatically place a measured template.",
+      hint: "If enabled, using abilities with an area of effect will automatically place a measured template.",
       name: "Place Template on Ability Use",
       scope: "user",
       type: Boolean,

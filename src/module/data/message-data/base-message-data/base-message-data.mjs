@@ -195,7 +195,23 @@ export default class TeriockBaseMessageModel extends TypeDataModel {
   async alterMessageHTML(html) {
     html.classList.add("teriock");
 
-    const autoCollapse = this.parent.timestamp < Date.now() - 5 * 60 * 1000;
+    let autoCollapse;
+    const defaultCollapse = game.settings.get(
+      "teriock",
+      "defaultPanelCollapseState",
+    );
+    if (defaultCollapse === "closed") {
+      autoCollapse = true;
+    } else if (defaultCollapse === "open") {
+      autoCollapse = false;
+    } else {
+      autoCollapse =
+        this.parent.timestamp <
+        Date.now() -
+          game.settings.get("teriock", "automaticPanelCollapseTime") *
+            60 *
+            1000;
+    }
     if (autoCollapse) {
       html.querySelectorAll(".collapsable").forEach((el) => {
         el.classList.toggle("collapsed", true);

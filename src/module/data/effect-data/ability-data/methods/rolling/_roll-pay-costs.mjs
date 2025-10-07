@@ -32,8 +32,10 @@ export async function _payCosts(rollConfig) {
       actor.system.hp.min ?? 0,
     );
   }
-  if (gpSpent > 0) {
-    await actor.system.takePay(gpSpent);
+  if (game.settings.get("teriock", "automaticallyPayAbilityCosts")) {
+    if (gpSpent > 0) {
+      await actor.system.takePay(gpSpent);
+    }
+    await actor.update(updates);
   }
-  await actor.update(updates);
 }
