@@ -9,11 +9,10 @@ import { elderSorceryMask } from "../../../../../helpers/html.mjs";
  * @private
  */
 export async function _buildChatMessage(rollConfig) {
-  let content = await rollConfig.abilityData.parent.buildMessage();
-  const element = document.createElement("div");
-  element.innerHTML = content;
   if (rollConfig.useData.formula) {
-    rollConfig.chatData.system.extraContent = element.outerHTML;
+    rollConfig.chatData.system.panels = [
+      await rollConfig.abilityData.parent.toPanel(),
+    ];
   }
   rollConfig.chatData.speaker = TeriockChatMessage.getSpeaker({
     actor: rollConfig.useData.actor,

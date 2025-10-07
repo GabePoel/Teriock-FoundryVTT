@@ -1,6 +1,6 @@
 import { TeriockRoll } from "../../../../dice/_module.mjs";
 import { TeriockChatMessage } from "../../../../documents/_module.mjs";
-import { tradecraftMessage } from "../../../../helpers/html.mjs";
+import { tradecraftPanel } from "../../../../helpers/html.mjs";
 
 /**
  * Actor data model mixin that handles common generic rolls.
@@ -82,7 +82,9 @@ export default (Base) => {
         const chatData = {
           speaker: TeriockChatMessage.getSpeaker({ actor: this.parent }),
           title: "Immune",
-          content: options.message || "No effect.",
+          system: {
+            panels: options.panels,
+          },
         };
         TeriockChatMessage.applyRollMode(
           chatData,
@@ -127,7 +129,7 @@ export default (Base) => {
             speaker: TeriockChatMessage.getSpeaker({ actor: this.parent }),
             rolls: [roll],
             system: {
-              extraContent: options.message,
+              panels: options.panels,
             },
           },
           {
@@ -184,7 +186,7 @@ export default (Base) => {
             speaker: TeriockChatMessage.getSpeaker({ actor: this.parent }),
             rolls: [roll],
             system: {
-              extraContent: await tradecraftMessage(tradecraft),
+              panels: [await tradecraftPanel(tradecraft)],
             },
           },
           {

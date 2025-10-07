@@ -1,0 +1,317 @@
+@use "../mixins";
+
+.teriock-panels {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+[role="tooltip"] {
+  --panel-padding: 4px;
+
+  .teriock-panel {
+    background: none;
+    border: none;
+    width: 300px;
+
+    .teriock-panel-header {
+      background: none;
+      padding: var(--panel-padding) var(--panel-padding) 8px;
+
+      &:hover {
+        background: none;
+
+        .teriock-panel-header-icon {
+          opacity: 1;
+        }
+      }
+    }
+
+    .teriock-panel-body {
+      max-height: unset;
+      padding: 8px var(--panel-padding) var(--panel-padding);
+    }
+
+    .teriock-panel-header-expander,
+    .teriock-panel-association-expander {
+      display: none;
+    }
+  }
+}
+
+.teriock-chat-message-content {
+  --panel-padding: 8px;
+
+  .teriock-panel-image {
+    border-radius: 2px !important;
+  }
+
+  .teriock-panel-association {
+    background: rgba(0 0 0 / 5%) !important;
+    border: 1px solid var(--color-panel-edge) !important;
+    border-radius: 2px !important;
+  }
+}
+
+.teriock-panel-body {
+  @include mixins.gapped;
+  margin: 0;
+  max-height: 2000px;
+  opacity: 1;
+  overflow: hidden;
+  padding: 8px;
+  transition: 250ms ease-in-out all;
+}
+
+.teriock-panel {
+  @include mixins.inverse-roll-style;
+  overflow: hidden;
+  width: 100%;
+
+  &.collapsed {
+    .teriock-panel-body {
+      border-top: 0;
+      margin-top: 0;
+      max-height: 0;
+      opacity: 0;
+      padding-bottom: 0;
+      padding-top: 0;
+    }
+
+    .teriock-panel-header-expander {
+      transform: rotate(-90deg);
+    }
+  }
+
+  .teriock-panel-header {
+    align-items: center;
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    padding: 8px;
+    position: relative;
+    user-select: none;
+    width: 100%;
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.25);
+
+      .teriock-panel-header-icon {
+        opacity: 0;
+      }
+
+      .teriock-panel-header-expander {
+        opacity: 1;
+      }
+    }
+
+    &::before {
+      background: transparent;
+      border-bottom: 1px var(--panel-divider-style) var(--color-panel-divider);
+      border-radius: 4px;
+      content: "";
+      left: var(--panel-padding);
+      position: absolute;
+      right: var(--panel-padding);
+      top: 100%;
+    }
+
+    .teriock-panel-image {
+      align-items: center;
+      cursor: pointer;
+      display: flex;
+      height: 2em;
+      width: 2em;
+      @include mixins.image-border;
+      @include mixins.warm-image-container-background;
+
+      img {
+        @include mixins.warm-drop-shadow;
+        @include mixins.image-position;
+        height: 100%;
+        position: relative;
+        width: 100%;
+      }
+    }
+
+    .teriock-panel-header-name {
+      flex: 1 1 auto;
+      font-family: var(--font-h1), serif;
+      font-size: 1.3em;
+      line-height: 1em;
+      margin-left: 0.5em;
+      max-width: calc(100% - 4em);
+      text-align: left;
+    }
+
+    .teriock-panel-header-icon,
+    .teriock-panel-header-expander {
+      align-items: center;
+      color: var(--color-panel-edge);
+      display: flex;
+      font-size: medium;
+      height: 2em;
+      justify-content: center;
+      position: absolute;
+      right: 8px;
+      transition: 100ms;
+      width: 2em;
+    }
+
+    .teriock-panel-header-icon {
+      opacity: 1;
+    }
+
+    .teriock-panel-header-expander {
+      opacity: 0;
+    }
+  }
+
+  .teriock-panel-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    user-select: none;
+
+    .teriock-panel-bar {
+      align-items: center;
+      display: flex;
+      flex-direction: row;
+      gap: 6px;
+      width: 100%;
+
+      .teriock-panel-bar-icon {
+        align-items: center;
+        color: var(--color-text-subtle);
+        display: flex;
+        font-size: smaller;
+        height: 1em;
+        justify-content: center;
+        width: 1em;
+      }
+
+      .teriock-panel-bar-wrappers {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 3px;
+
+        .teriock-panel-bar-wrapper {
+          @include mixins.tag-style;
+        }
+      }
+    }
+  }
+
+  .teriock-panel-block {
+    .teriock-panel-block-title {
+      @include mixins.text-subtle;
+      text-align: left;
+      user-select: none;
+    }
+
+    .teriock-panel-block-text {
+      text-align: left;
+
+      *:first-child {
+        margin-top: 0;
+      }
+
+      *:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  .teriock-panel-association {
+    @include mixins.roll-style;
+    border-radius: 0.25em;
+    max-height: 1800px;
+    overflow: hidden;
+    transition: 100ms ease-in-out all;
+    user-select: none;
+
+    &.collapsed {
+      max-height: 1.75em;
+
+      .teriock-panel-association-expander {
+        transform: rotate(-90deg);
+      }
+    }
+
+    .teriock-panel-association-row {
+      align-items: center;
+      display: flex;
+      flex-direction: row;
+      gap: 2px;
+      height: 2em;
+      @include mixins.text-subtle;
+
+      &:not(:last-child) {
+        border-bottom: 1px dotted var(--color-panel-associations-border);
+      }
+
+      .teriock-panel-association-row-image {
+        @include mixins.image-border;
+        height: 1.5em;
+        margin: 0.25em;
+        width: 1.5em;
+      }
+    }
+
+    .teriock-panel-association-card {
+      transition: 100ms;
+
+      &:hover {
+        background-color: var(--color-panel-associations-background-hover);
+
+        .teriock-panel-association-card-name,
+        .teriock-panel-association-row-image {
+          filter: drop-shadow(0 0 0 var(--color-shadow-primary));
+        }
+      }
+
+      &:active {
+        background-color: var(--color-panel-associations-background-active);
+      }
+    }
+
+    .teriock-panel-association-title {
+      cursor: pointer;
+      justify-content: center;
+      position: relative;
+      transition: 100ms;
+
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.05);
+      }
+
+      &:active {
+        background-color: rgba(0, 0, 0, 0.1);
+      }
+
+      .teriock-panel-association-icon {
+        align-items: center;
+        display: flex;
+        height: 2em;
+        justify-content: center;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 2em;
+      }
+
+      .teriock-panel-association-expander {
+        align-items: center;
+        display: flex;
+        height: 2em;
+        justify-content: center;
+        position: absolute;
+        right: 0;
+        top: 0;
+        transition: 100ms;
+        width: 2em;
+      }
+    }
+  }
+}

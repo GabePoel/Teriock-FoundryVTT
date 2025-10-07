@@ -1,5 +1,4 @@
 import { documentOptions } from "../../../../constants/options/document-options.mjs";
-import { addPropertiesBlock } from "../../../../helpers/messages-builder/message-parts.mjs";
 
 /**
  * Generates message parts for a body part.
@@ -53,10 +52,6 @@ export function _messageParts(bodyData) {
       text: bodyData.specialRules,
     });
   }
-  addPropertiesBlock(
-    bodyData.parent.transferredEffects.filter((e) => !e.sup),
-    blocks,
-  );
   return {
     bars: bars,
     blocks: blocks,

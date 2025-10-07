@@ -1,15 +1,21 @@
 import { TeriockRoll } from "../dice/_module.mjs";
 import { TeriockChatMessage } from "../documents/_module.mjs";
-import { makeDamageDrainTypeMessage, makeDamageTypeButtons } from "./html.mjs";
+import { makeDamageDrainTypePanels, makeDamageTypeButtons } from "./html.mjs";
 
 /**
  * Roll with harm buttons.
  * @param {string} formula
  * @param {object} rollData
  * @param {string} message
+ * @param {Teriock.MessageData.MessageParts[]} panels
  * @returns {Promise<TeriockChatMessage>}
  */
-export async function harmRoll(formula, rollData = {}, message = "") {
+export async function harmRoll(
+  formula,
+  rollData = {},
+  message = "",
+  panels = [],
+) {
   const roll = new TeriockRoll(formula, rollData, { flavor: "Harm Roll" });
   await roll.evaluate();
   const buttons = /** @type {Teriock.UI.HTMLButtonConfig[]} */ [
@@ -46,14 +52,16 @@ export async function harmRoll(formula, rollData = {}, message = "") {
   ];
   const damageTypeButtons = makeDamageTypeButtons(roll);
   buttons.push(...damageTypeButtons);
-  const damageDrainTypeMessage = await makeDamageDrainTypeMessage(roll);
+  const damageDrainPanels = await makeDamageDrainTypePanels(roll);
+  panels.push(...damageDrainPanels);
   const chatData = {
     speaker: TeriockChatMessage.speaker,
     rolls: [roll],
     system: {
       buttons: buttons,
       columns: damageTypeButtons.length > 0 ? 2 : 3,
-      extraContent: message + damageDrainTypeMessage,
+      extraContent: message,
+      panels: panels,
     },
   };
   TeriockChatMessage.applyRollMode(

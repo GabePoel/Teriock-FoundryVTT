@@ -1,5 +1,4 @@
 import { documentOptions } from "../../../../constants/options/document-options.mjs";
-import { addPropertiesBlock } from "../../../../helpers/messages-builder/message-parts.mjs";
 
 /**
  * Generates message parts for a property effect, including bars and blocks for display.
@@ -16,9 +15,6 @@ export function _messageParts(propertyData) {
       text: propertyData.description,
     },
   ];
-  if (!propertyData.parent.inCompendium) {
-    addPropertiesBlock(propertyData.parent.subs, blocks);
-  }
   return {
     bars: [
       {

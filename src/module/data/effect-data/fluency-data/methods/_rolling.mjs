@@ -23,7 +23,6 @@ export async function _roll(fluencyData, options) {
  * @private
  */
 async function use(fluencyData, options) {
-  let message = await fluencyData.parent.buildMessage();
   let rollFormula = "1d20";
   if (options?.advantage) {
     rollFormula = "2d20kh1";
@@ -39,7 +38,7 @@ async function use(fluencyData, options) {
     speaker: TeriockChatMessage.getSpeaker({ actor: fluencyData.actor }),
     rolls: [roll],
     system: {
-      extraContent: message,
+      panels: [await fluencyData.parent.toPanel()],
     },
   });
 }

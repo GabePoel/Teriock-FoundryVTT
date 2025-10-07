@@ -48,7 +48,7 @@ export async function selectDocumentsDialog(documents, options = {}) {
     await Promise.all(
       documents.map(async (doc) => {
         const id = foundry.utils.getProperty(doc, options.idKey);
-        context.documents[id].tooltip = await doc.buildMessage?.();
+        context.documents[id].tooltip = await doc.toTooltip?.();
       }),
     );
   }

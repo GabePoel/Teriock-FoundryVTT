@@ -1,12 +1,12 @@
 import { documentOptions } from "../../../../constants/options/document-options.mjs";
-import { tradecraftMessage } from "../../../../helpers/html.mjs";
-import { buildMessage } from "../../../../helpers/messages-builder/message-builder.mjs";
+import { tradecraftPanel } from "../../../../helpers/html.mjs";
 import { docSort } from "../../../../helpers/utils.mjs";
 import {
   changeSizeDialog,
   selectDocumentDialog,
 } from "../../../dialogs/_module.mjs";
 import { HackStatMixin } from "../../../shared/mixins/_module.mjs";
+import { TeriockTextEditor } from "../../../ux/_module.mjs";
 import { CommonSheetMixin } from "../../mixins/_module.mjs";
 import _embeddedFromCard from "../../mixins/common-sheet-mixin/methods/_embedded-from-card.mjs";
 import { piercingContextMenu } from "./connections/character-context-menus.mjs";
@@ -22,7 +22,6 @@ import { _sortAbilities, _sortEquipment } from "./methods/_sort.mjs";
 
 const { DialogV2 } = foundry.applications.api;
 const { ActorSheetV2 } = foundry.applications.sheets;
-const TextEditor = foundry.applications.ux.TextEditor.implementation;
 
 /**
  * Base actor sheet for actorsUuids.
@@ -235,11 +234,11 @@ export default class TeriockBaseActorSheet extends HackStatMixin(
    */
   static async _immune(event, target) {
     event.stopPropagation();
-    let message = null;
+    let messageParts;
     if (target.classList.contains("tcard-image")) {
-      const messageParts = {};
       const tcard = target.closest(".tcard");
       const img = target.querySelector("img");
+      messageParts = {};
       messageParts.image = img.src;
       messageParts.name = "Immunity";
       messageParts.bars = [
@@ -260,16 +259,15 @@ export default class TeriockBaseActorSheet extends HackStatMixin(
       ];
       messageParts.icon = "shield-halved";
       messageParts.label = "Protection";
-      const content = buildMessage(messageParts).outerHTML;
-      message = await TextEditor.enrichHTML(
-        `<div class="teriock">${content}</div>`,
-      );
     }
+    const panels = messageParts
+      ? [await TeriockTextEditor.enrichPanel(messageParts)]
+      : [];
     /** @type {Teriock.RollOptions.CommonRoll} */
     const options = {
       advantage: event.altKey,
       disadvantage: event.shiftKey,
-      message: message,
+      panels: panels,
     };
     await this.actor.system.rollImmunity(options);
   }
@@ -365,12 +363,12 @@ export default class TeriockBaseActorSheet extends HackStatMixin(
    */
   static async _rollResistance(event, target) {
     event.stopPropagation();
-    let message = null;
+    let messageParts;
     /** @type {Teriock.MessageData.MessageParts} */
     if (target.classList.contains("tcard-image")) {
-      const messageParts = {};
       const tcard = target.closest(".tcard");
       const img = target.querySelector("img");
+      messageParts = {};
       messageParts.image = img.src;
       messageParts.name = "Resistance";
       messageParts.bars = [
@@ -391,15 +389,14 @@ export default class TeriockBaseActorSheet extends HackStatMixin(
       ];
       messageParts.icon = "shield-halved";
       messageParts.label = "Protection";
-      const content = buildMessage(messageParts).outerHTML;
-      message = await TextEditor.enrichHTML(
-        `<div class="teriock">${content}</div>`,
-      );
     }
+    const panels = messageParts
+      ? [await TeriockTextEditor.enrichPanel(messageParts)]
+      : [];
     const options = {
       advantage: event.altKey,
       disadvantage: event.shiftKey,
-      message: message,
+      panels: panels,
     };
     await this.actor.system.rollResistance(options);
   }
@@ -1060,7 +1057,9 @@ export default class TeriockBaseActorSheet extends HackStatMixin(
 
     context.tradecraftTooltips = {};
     for (const tc of Object.keys(TERIOCK.index.tradecrafts)) {
-      context.tradecraftTooltips[tc] = await tradecraftMessage(tc);
+      context.tradecraftTooltips[tc] = await TeriockTextEditor.makeTooltip(
+        await tradecraftPanel(tc),
+      );
     }
 
     if (tab === "conditions") {

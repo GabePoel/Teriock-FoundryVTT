@@ -1,5 +1,3 @@
-import type { TeriockChatMessage } from "../../../documents/_module.mjs";
-
 declare module "./base-message-data.mjs" {
   export default interface TeriockBaseMessageModel {
     /** <schema> Buttons to display below the content of the message */
@@ -10,11 +8,13 @@ declare module "./base-message-data.mjs" {
     extraContent: string;
     /** <schema> Elder Sorcery spell circle overlay */
     overlay: string;
+    /** <schema> Panels to render */
+    panels: Teriock.MessageData.MessageParts[];
     /** <schema> Document that the message is sourced from */
     source: Teriock.UUID<TeriockCommon>;
     /** <schema> Strings to be wrapped as tags at the bottom of the message */
     tags: string[];
-
-    get parent(): TeriockChatMessage;
   }
 }
+
+export {};

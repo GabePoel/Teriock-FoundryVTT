@@ -1,5 +1,4 @@
 import { documentOptions } from "../../../../constants/options/document-options.mjs";
-import { addAbilitiesBlock } from "../../../../helpers/messages-builder/message-parts.mjs";
 
 /**
  * Generates message parts for an ability, including bars and blocks for display.
@@ -241,9 +240,6 @@ export function _messageParts(abilityData) {
       italic: true,
     },
   ];
-  if (!abilityData.parent.inCompendium) {
-    addAbilitiesBlock(abilityData.parent.subs, blocks);
-  }
   return {
     bars: bars,
     blocks: blocks,

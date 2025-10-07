@@ -29,12 +29,6 @@ export interface ChildDocumentMixinInterface {
   buildRawMessage(options?: Teriock.MessageData.MessageOptions): HTMLDivElement;
 
   /**
-   * Sends a chat message with the document's content.
-   * @returns Promise that resolves when the chat message is sent
-   */
-  chat(): Promise<void>;
-
-  /**
    * Sends a chat message with the document's image.
    * @returns Promise that resolves when the image message is sent
    */
@@ -64,6 +58,24 @@ export interface ChildDocumentMixinInterface {
    * @returns Promise that resolves when the roll is complete
    */
   roll(_options: object): Promise<void>;
+
+  /**
+   * Sends a chat message with the document's content.
+   * @returns Promise that resolves when the chat message is sent
+   */
+  toMessage(): Promise<void>;
+
+  /**
+   * Gives a panel representing the document's content.
+   * @returns Promise that resolves to the panel.
+   */
+  toPanel(): Promise<Teriock.MessageData.MessageParts>;
+
+  /**
+   * Gives an HTML string representing the document's content.
+   * @returns Promise that resolves to the HTML string.
+   */
+  toTooltip(): Promise<string>;
 
   /**
    * Uses the document, calling hooks and delegating to the system's use method.

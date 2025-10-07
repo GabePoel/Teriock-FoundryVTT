@@ -148,7 +148,7 @@ export default (Base) => {
        */
       static async _chatDoc(_event, target) {
         const embedded = await _embeddedFromCard(this, target);
-        await embedded?.chat();
+        await embedded?.toMessage();
       }
 
       /**
@@ -158,7 +158,7 @@ export default (Base) => {
        * @returns {Promise<void>} Promise that resolves when chat is sent.
        */
       static async _chatThis(_event, _target) {
-        this.document.chat();
+        this.document.toMessage();
       }
 
       /**
@@ -985,9 +985,8 @@ export default (Base) => {
               rawMessage.outerHTML,
             );
             element.dataset.tooltipClass = "teriock teriock-rich-tooltip";
-          } else if (typeof embedded?.buildMessage === "function") {
-            element.dataset.tooltipHtml = await embedded?.buildMessage();
-            element.dataset.tooltipClass = "teriock teriock-rich-tooltip";
+          } else if (typeof embedded?.toTooltip === "function") {
+            element.dataset.tooltipHtml = await embedded?.toTooltip();
           }
         });
 

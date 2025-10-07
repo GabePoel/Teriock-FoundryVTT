@@ -9,7 +9,6 @@ import { harmRoll } from "../../../../helpers/quick-rolls.mjs";
  * @private
  */
 export async function _roll(bodyData, options) {
-  let message = await bodyData.parent.buildMessage();
   if (bodyData.damage.base.value) {
     let rollFormula = bodyData.damage.base.value || "";
     if (options.formula) {
@@ -26,9 +25,11 @@ export async function _roll(bodyData, options) {
       }).formula;
     }
     const rollData = bodyData.actor?.getRollData() || {};
-    await harmRoll(rollFormula, rollData, message);
+    await harmRoll(rollFormula, rollData, "", [
+      await bodyData.parent.toPanel(),
+    ]);
   } else {
-    await bodyData.parent.chat();
+    await bodyData.parent.toMessage();
   }
   const onUseId = await onUseDialog(bodyData.parent);
   if (onUseId) {

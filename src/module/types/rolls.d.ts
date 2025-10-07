@@ -21,6 +21,8 @@ declare global {
       message?: string;
       /** Success Threshold */
       threshold?: number;
+      /** Chat message panels */
+      panels?: Teriock.MessageData.MessageParts[];
     };
 
     export type AbilityRoll = Teriock.RollOptions.CommonRoll & {

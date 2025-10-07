@@ -24,12 +24,29 @@ declare global {
       italic?: boolean;
     };
 
+    /** Definition for an association card. */
+    export type MessageAssociationCard = {
+      name: string;
+      uuid?: Teriock.UUID<TeriockCommon>;
+      tooltip?: string;
+      img: string;
+      color?: string;
+      icon?: string;
+      id?: Teriock.ID<TeriockCommon>;
+      type:
+        | Teriock.Documents.ActorType
+        | Teriock.Documents.ItemType
+        | Teriock.Documents.EffectType;
+    };
+
     /** Pieces of a group of associations within a chat message. */
     export type MessageAssociations = {
       /** The title of the message association. */
       title: string;
+      /** Icon for this association. */
+      icon?: string;
       /** Documents this message is associated with. */
-      uuids: Teriock.UUID<TeriockCommon>;
+      cards: Teriock.MessageData.MessageAssociationCard[];
     };
 
     /** Represents the individual rules-parts that make up a message. */

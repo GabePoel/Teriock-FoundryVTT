@@ -2,11 +2,9 @@ import { boostDialog } from "../../../../applications/dialogs/_module.mjs";
 import { TeriockRoll } from "../../../../dice/_module.mjs";
 import { TeriockChatMessage } from "../../../../documents/_module.mjs";
 import {
-  makeDamageDrainTypeMessage,
+  makeDamageDrainTypePanels,
   makeDamageTypeButtons,
 } from "../../../html.mjs";
-import { buildMessage } from "../../../messages-builder/message-builder.mjs";
-import { getIcon } from "../../../path.mjs";
 import ActionHandler from "../action-handler.mjs";
 
 /**
@@ -58,38 +56,13 @@ export class RollRollableTakeHandler extends ActionHandler {
       },
     ];
     const damageTypeButtons = makeDamageTypeButtons(roll);
-    const damageDrainTypeMessage = await makeDamageDrainTypeMessage(roll);
+    const damageDrainPanels = await makeDamageDrainTypePanels(roll);
     buttons.push(...damageTypeButtons);
-    let messageStart = "";
-    if (damageDrainTypeMessage.length > 0) {
-      let image;
-      let name;
-      let icon;
-      let label;
-      if (this.dataset.type === "damage") {
-        image = getIcon("effect-types", "Damaging");
-        name = "Damage";
-        icon = "heart-crack";
-        label = "Damage";
-      } else if (this.dataset.type === "drain") {
-        image = getIcon("abilities", "Mana Drain Touch");
-        name = "Drain";
-        icon = "droplet-slash";
-        label = "Drain";
-      }
-      const messageStartRaw = buildMessage({
-        image: image,
-        name: name,
-        icon: icon,
-        label: label,
-      });
-      messageStart = `<div class="teriock">${messageStartRaw.outerHTML}</div>`;
-    }
     const messageData = {
       rolls: [roll],
       system: {
         buttons: buttons,
-        extraContent: messageStart + damageDrainTypeMessage,
+        panels: damageDrainPanels,
       },
     };
     await TeriockChatMessage.create(messageData);

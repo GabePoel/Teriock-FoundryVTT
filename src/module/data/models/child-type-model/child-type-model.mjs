@@ -111,7 +111,7 @@ export default class ChildTypeModel extends CommonTypeModel {
       {
         name: "Share Writeup",
         icon: makeIcon("comment-lines", "contextMenu"),
-        callback: this.parent.chat.bind(this.parent),
+        callback: this.parent.toMessage.bind(this.parent),
         group: "share",
       },
       {
@@ -148,13 +148,45 @@ export default class ChildTypeModel extends CommonTypeModel {
    * @returns {Teriock.MessageData.MessageParts} Object containing message display components.
    */
   get messageParts() {
-    return {
+    const parts = {
       image: this.parent.img,
       name: this.parent.nameString,
       bars: [],
       blocks: [],
       font: this.font,
+      associations: [],
     };
+    if (this.parent.getProperties().length > 0) {
+      parts.associations.push({
+        title: "Properties",
+        icon: TERIOCK.options.document.property.icon,
+        cards: this.parent.getProperties().map((p) => {
+          return {
+            id: p.id,
+            img: p.img,
+            name: p.name,
+            type: p.documentName,
+            uuid: p.uuid,
+          };
+        }),
+      });
+    }
+    if (this.parent.getAbilities().length > 0) {
+      parts.associations.push({
+        title: "Abilities",
+        icon: TERIOCK.options.document.ability.icon,
+        cards: this.parent.getAbilities().map((a) => {
+          return {
+            id: a.id,
+            img: a.img,
+            name: a.name,
+            type: a.documentName,
+            uuid: a.uuid,
+          };
+        }),
+      });
+    }
+    return parts;
   }
 
   /**
@@ -213,7 +245,7 @@ export default class ChildTypeModel extends CommonTypeModel {
    * @returns {Promise<void>} Promise that resolves when the roll is complete.
    */
   async roll(options) {
-    await this.parent.chat(options);
+    await this.parent.toMessage(options);
   }
 
   /**

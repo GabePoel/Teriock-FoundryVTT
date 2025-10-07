@@ -1,9 +1,7 @@
+import { TeriockTextEditor } from "../applications/ux/_module.mjs";
 import { documentOptions } from "../constants/options/document-options.mjs";
-import { buildMessage } from "./messages-builder/message-builder.mjs";
 import { getIcon } from "./path.mjs";
 import { toTitleCase } from "./string.mjs";
-
-const TextEditor = foundry.applications.ux.TextEditor.implementation;
 
 /**
  * A helper method for constructing an HTML button based on given parameters.
@@ -167,11 +165,53 @@ export function makeDamageTypeButtons(roll) {
 }
 
 /**
- * Make text for damage and drain types done by some roll.
- * @param roll
- * @returns {Promise<string>}
+ * Make a panel for a given damage type.
+ * @param damageType
+ * @returns {Teriock.MessageData.MessageParts|null}
  */
-export async function makeDamageDrainTypeMessage(roll) {
+export function makeDamageTypePanel(damageType) {
+  if (Object.keys(TERIOCK.index.damageTypes).includes(damageType)) {
+    return {
+      name: TERIOCK.index.damageTypes[damageType] + " Damage",
+      image: getIcon("damage-types", TERIOCK.index.damageTypes[damageType]),
+      icon: "heart-crack",
+      blocks: [
+        {
+          title: "Description",
+          text: TERIOCK.content.damageTypes[damageType],
+        },
+      ],
+    };
+  }
+}
+
+/**
+ * Make a panel for a given drain type.
+ * @param drainType
+ * @returns {Teriock.MessageData.MessageParts|null}
+ */
+export function makeDrainTypePanel(drainType) {
+  if (Object.keys(TERIOCK.index.drainTypes).includes(drainType)) {
+    return {
+      name: TERIOCK.index.drainTypes[drainType] + " Damage",
+      image: getIcon("damage-types", TERIOCK.index.drainTypes[drainType]),
+      icon: "droplet-slash",
+      blocks: [
+        {
+          title: "Description",
+          text: TERIOCK.content.drainTypes[drainType],
+        },
+      ],
+    };
+  }
+}
+
+/**
+ * Make panels for damage and drain types done by some roll.
+ * @param {TeriockRoll} roll
+ * @returns {Promise<Teriock.MessageData.MessageParts[]>}
+ */
+export async function makeDamageDrainTypePanels(roll) {
   const damageTypes = new Set();
   const drainTypes = new Set();
   for (const term of roll.terms) {
@@ -189,27 +229,21 @@ export async function makeDamageDrainTypeMessage(roll) {
   if (damageTypes.has("lethal")) {
     drainTypes.delete("lethal");
   }
-  const blocks = [];
+  /** @type {Teriock.MessageData.MessageParts[]} */
+  const panels = [];
   for (const damageType of damageTypes) {
-    blocks.push({
-      title: TERIOCK.index.damageTypes[damageType] + " Damage",
-      text: TERIOCK.content.damageTypes[damageType],
-      italic: true,
-    });
+    const panel = makeDamageTypePanel(damageType);
+    if (panel) {
+      panels.push(await TeriockTextEditor.enrichPanel(panel));
+    }
   }
   for (const drainType of drainTypes) {
-    blocks.push({
-      title: TERIOCK.index.drainTypes[drainType] + " Drain",
-      text: TERIOCK.content.drainTypes[drainType],
-      italic: true,
-    });
+    const panel = makeDrainTypePanel(drainType);
+    if (panel) {
+      panels.push(await TeriockTextEditor.enrichPanel(panel));
+    }
   }
-  const messageParts = {
-    blocks: blocks,
-  };
-  const content = buildMessage(messageParts);
-  const messageRaw = `<div class="teriock">${content.outerHTML}</div>`;
-  return await TextEditor.enrichHTML(messageRaw);
+  return panels;
 }
 
 /**
@@ -266,18 +300,18 @@ export function tidyHTML(html) {
 }
 
 /**
- * Get the message for a tradecraft.
+ * Get the panel for a tradecraft.
  * @param {Teriock.Parameters.Fluency.Tradecraft} tradecraft
- * @returns {Promise<string>}
+ * @returns {Promise<Teriock.MessageData.MessageParts>}
  */
-export async function tradecraftMessage(tradecraft) {
+export async function tradecraftPanel(tradecraft) {
   let field;
   for (const [key, value] of Object.entries(TERIOCK.options.tradecraft)) {
     if (Object.keys(value.tradecrafts).includes(tradecraft)) {
       field = key;
     }
   }
-  const messageContent = buildMessage({
+  return TeriockTextEditor.enrichPanel({
     image: getIcon("tradecrafts", TERIOCK.index.tradecrafts[tradecraft]),
     name: TERIOCK.index.tradecrafts[tradecraft],
     bars: [
@@ -296,26 +330,21 @@ export async function tradecraftMessage(tradecraft) {
     icon: documentOptions.fluency.icon,
     label: "Tradecraft",
   });
-  const message = document.createElement("div");
-  message.append(messageContent);
-  message.classList.add("teriock");
-
-  return await TextEditor.enrichHTML(message.innerHTML);
 }
 
 /**
- * Get the message for a class.
+ * Get the panel for a class.
  * @param {Teriock.Parameters.Rank.RankClass} className
- * @returns {Promise<string>}
+ * @returns {Promise<Teriock.MessageData.MessageParts>}
  */
-export async function classMessage(className) {
+export async function classPanel(className) {
   let archetype;
   for (const [key, value] of Object.entries(TERIOCK.options.rank)) {
     if (Object.keys(value.classes).includes(className)) {
       archetype = key;
     }
   }
-  const messageContent = buildMessage({
+  return await TeriockTextEditor.enrichPanel({
     image: getIcon("classes", TERIOCK.index.classes[className]),
     name: TERIOCK.index.classes[className],
     bars: [
@@ -334,10 +363,6 @@ export async function classMessage(className) {
     icon: documentOptions.rank.icon,
     label: "Class",
   });
-  const message = document.createElement("div");
-  message.append(messageContent);
-  message.classList.add("teriock");
-  return await TextEditor.enrichHTML(message.innerHTML);
 }
 
 /**

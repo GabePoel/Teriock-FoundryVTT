@@ -1,4 +1,35 @@
+.theme-light {
+  --panel-divider-style: solid;
+  --color-panel-associations-background: rgba(0 0 0 / 10%);
+  --color-panel-associations-background-active: rgba(255, 255, 255, 0.2);
+  --color-panel-associations-background-hover: rgba(255, 255, 255, 0.1);
+  --color-panel-associations-border: var(--color-panel-edge);
+  --color-panel-associations-shadow-color: #ffffff;
+  --color-panel-divider: var(--color-panel-edge);
+  --color-panel-edge: #bbb19f;
+}
+
+.theme-dark {
+  --panel-divider-style: dotted;
+  --color-panel-associations-background: rgba(255 255 255 / 5%);
+  --color-panel-associations-background-active: rgba(255, 255, 255, 0.1);
+  --color-panel-associations-background-hover: rgba(255, 255, 255, 0.05);
+  --color-panel-associations-border: color-mix(
+    in srgb,
+    var(--color-panel-edge),
+    transparent 75%
+  );
+  --color-panel-associations-shadow-color: transparent;
+  --color-panel-divider: color-mix(
+    in srgb,
+    var(--color-panel-edge),
+    transparent 50%
+  );
+  --color-panel-edge: var(--color-text-subtle);
+}
+
 @import "components/compendium";
+@import "messages/panel";
 
 .teriock {
   @import "dialogs/heal-dialog";
@@ -13,6 +44,10 @@
   @import "components/chat";
   @import "components/changes";
   @import "components/death-bag";
+}
+
+[role="tooltip"] {
+  padding: 0.5em !important;
 }
 
 .chat-message .message-content {

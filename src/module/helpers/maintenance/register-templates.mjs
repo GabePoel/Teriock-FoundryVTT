@@ -84,7 +84,9 @@ export default async function registerTemplates() {
     "systems/teriock/src/templates/document-templates/shared/header.hbs",
     "systems/teriock/src/templates/document-templates/shared/image.hbs",
     "systems/teriock/src/templates/document-templates/shared/macros.hbs",
+    "systems/teriock/src/templates/message-templates/chat-message.hbs",
     "systems/teriock/src/templates/message-templates/death-bag.hbs",
+    "systems/teriock/src/templates/message-templates/panel.hbs",
     "systems/teriock/src/templates/message-templates/roll.hbs",
   ]);
 }

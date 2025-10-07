@@ -1,9 +1,4 @@
 import { documentOptions } from "../../../../constants/options/document-options.mjs";
-import {
-  addAbilitiesBlock,
-  addPropertiesBlock,
-  addResourcesBlock,
-} from "../../../../helpers/messages-builder/message-parts.mjs";
 
 /**
  * Generates message parts for a rank item, including bars and blocks for display.
@@ -45,12 +40,6 @@ export function _messageParts(rankData) {
       text: src.flaws,
     },
   ];
-  addPropertiesBlock(rankData.parent.transferredEffects, blocks);
-  addAbilitiesBlock(
-    rankData.parent.transferredEffects.filter((e) => !e.sup),
-    blocks,
-  );
-  addResourcesBlock(rankData.parent.transferredEffects, blocks);
   return {
     bars: bars,
     blocks: blocks,

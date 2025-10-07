@@ -1,10 +1,4 @@
 import { documentOptions } from "../../../../constants/options/document-options.mjs";
-import {
-  addAbilitiesBlock,
-  addFluenciesBlock,
-  addPropertiesBlock,
-  addResourcesBlock,
-} from "../../../../helpers/messages-builder/message-parts.mjs";
 
 /**
  * Generates message parts for a piece of equipment.
@@ -99,16 +93,6 @@ export function _messageParts(equipmentData) {
       text: equipmentData.specialRules,
     });
   }
-  addPropertiesBlock(
-    equipmentData.parent.transferredEffects.filter((e) => !e.sup),
-    blocks,
-  );
-  addAbilitiesBlock(
-    equipmentData.parent.transferredEffects.filter((e) => !e.sup),
-    blocks,
-  );
-  addResourcesBlock(equipmentData.parent.transferredEffects, blocks);
-  addFluenciesBlock(equipmentData.parent.transferredEffects, blocks);
   return {
     bars: bars,
     blocks: blocks,

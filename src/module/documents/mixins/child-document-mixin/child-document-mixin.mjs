@@ -1,3 +1,4 @@
+import { TeriockTextEditor } from "../../../applications/ux/_module.mjs";
 import { buildMessage } from "../../../helpers/messages-builder/message-builder.mjs";
 import { toCamelCase } from "../../../helpers/string.mjs";
 import TeriockChatMessage from "../../chat-message.mjs";
@@ -148,26 +149,6 @@ export default (Base) => {
       }
 
       /** @inheritDoc */
-      async chat() {
-        const data = { doc: this.parent };
-        await this.hookCall("documentChat", data);
-        if (data.cancel) {
-          return;
-        }
-        let content = await this.buildMessage();
-        content = `<div class="teriock">${content}</div>`;
-        const messageData = {
-          content: content,
-          speaker: TeriockChatMessage.getSpeaker({ actor: this.actor }),
-        };
-        TeriockChatMessage.applyRollMode(
-          messageData,
-          game.settings.get("core", "rollMode"),
-        );
-        await TeriockChatMessage.create(messageData);
-      }
-
-      /** @inheritDoc */
       async chatImage() {
         const img = this.img;
         if (img) {
@@ -208,7 +189,38 @@ export default (Base) => {
 
       /** @inheritDoc */
       async roll(_options) {
-        await this.chat();
+        await this.toMessage();
+      }
+
+      /** @inheritDoc */
+      async toMessage() {
+        const data = { doc: this.parent };
+        await this.hookCall("documentChat", data);
+        if (data.cancel) {
+          return;
+        }
+        const panel = await this.toPanel();
+        const messageData = {
+          speaker: TeriockChatMessage.getSpeaker({ actor: this.actor }),
+          system: {
+            panels: [panel],
+          },
+        };
+        TeriockChatMessage.applyRollMode(
+          messageData,
+          game.settings.get("core", "rollMode"),
+        );
+        await TeriockChatMessage.create(messageData);
+      }
+
+      /** @inheritDoc */
+      async toPanel() {
+        return await TeriockTextEditor.enrichPanel(this.system.messageParts);
+      }
+
+      /** @inheritDoc */
+      async toTooltip() {
+        return await TeriockTextEditor.makeTooltip(this.system.messageParts);
       }
 
       /** @inheritDoc */

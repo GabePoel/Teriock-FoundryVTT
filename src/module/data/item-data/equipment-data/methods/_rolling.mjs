@@ -23,7 +23,7 @@ export async function _roll(equipmentData, options) {
  * @private
  */
 async function use(equipmentData, options) {
-  let message = await equipmentData.parent.buildMessage();
+  //let message = await equipmentData.parent.buildMessage();
   if (equipmentData.damage.base.value) {
     let rollFormula = equipmentData.damage.base.value || "";
     if (options.formula) {
@@ -42,15 +42,16 @@ async function use(equipmentData, options) {
         multiplyNumeric: false,
       }).formula;
     }
-    if (options?.secret) {
-      message = await equipmentData.parent.buildMessage({ secret: true });
-    } else {
-      message = await equipmentData.parent.buildMessage({ secret: false });
-    }
+    //if (options?.secret) {
+    //  message = await equipmentData.parent.buildMessage({ secret: true });
+    //} else {
+    //  message = await equipmentData.parent.buildMessage({ secret: false });
+    //}
     const rollData = equipmentData.actor?.getRollData() || {};
-    await harmRoll(rollFormula, rollData, message);
+    const panels = [await equipmentData.parent.toPanel()];
+    await harmRoll(rollFormula, rollData, "", panels);
   } else {
-    await equipmentData.parent.chat();
+    await equipmentData.parent.toMessage();
   }
   const onUseId = await onUseDialog(equipmentData.parent);
   if (onUseId) {

@@ -4,6 +4,9 @@ import { buildHTMLButton } from "../../../helpers/html.mjs";
 const { fields } = foundry.data;
 const { TypeDataModel } = foundry.abstract;
 
+/**
+ * @property {TeriockChatMessage} parent;
+ */
 export default class TeriockBaseMessageModel extends TypeDataModel {
   /**
    * @inheritDoc
@@ -16,6 +19,47 @@ export default class TeriockBaseMessageModel extends TypeDataModel {
       nullable: true,
       initial: null,
     });
+    schema.panels = new fields.ArrayField(
+      new fields.SchemaField({
+        image: new fields.StringField({ nullable: true }),
+        name: new fields.StringField({ nullable: true }),
+        bars: new fields.ArrayField(
+          new fields.SchemaField({
+            icon: new fields.StringField(),
+            label: new fields.StringField({ nullable: true }),
+            wrappers: new fields.ArrayField(new fields.StringField()),
+          }),
+        ),
+        blocks: new fields.ArrayField(
+          new fields.SchemaField({
+            title: new fields.StringField(),
+            text: new fields.StringField({ nullable: true }),
+            special: new fields.StringField({ nullable: true }),
+            elements: new fields.StringField({ nullable: true }),
+            italic: new fields.BooleanField({ initial: false }),
+          }),
+        ),
+        font: new fields.StringField({ nullable: true }),
+        associations: new fields.ArrayField(
+          new fields.SchemaField({
+            title: new fields.StringField({ initial: "Associations" }),
+            icon: new fields.StringField({ nullable: true }),
+            cards: new fields.ArrayField(
+              new fields.SchemaField({
+                name: new fields.StringField(),
+                img: new fields.StringField(),
+                color: new fields.StringField({ nullable: true }),
+                uuid: new fields.DocumentUUIDField(),
+                id: new fields.DocumentIdField(),
+                type: new fields.StringField(),
+              }),
+            ),
+          }),
+        ),
+        icon: new fields.StringField({ nullable: true }),
+        label: new fields.StringField({ nullable: true }),
+      }),
+    );
     schema.buttons = new fields.ArrayField(
       new fields.SchemaField({
         label: new fields.StringField(),
@@ -32,6 +76,14 @@ export default class TeriockBaseMessageModel extends TypeDataModel {
     schema.extraContent = new fields.HTMLField();
     schema.source = new fields.DocumentUUIDField({ nullable: true });
     return schema;
+  }
+
+  /**
+   * @inheritDoc
+   * @returns {TeriockChatMessage}
+   */
+  get parent() {
+    return super.parent;
   }
 
   /**
@@ -161,6 +213,23 @@ export default class TeriockBaseMessageModel extends TypeDataModel {
    */
   async alterMessageHTML(html) {
     html.classList.add("teriock");
+
+    const autoCollapse = this.parent.timestamp < Date.now() - 5 * 60 * 1000;
+    if (autoCollapse) {
+      html.querySelectorAll(".collapsable").forEach((el) => {
+        el.classList.toggle("collapsed", true);
+      });
+    }
+
+    html.querySelectorAll("[data-action='toggle-collapse']").forEach((el) => {
+      el.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const target = /** @type {HTMLElement} */ e.target;
+        const collapsable =
+          /** @type {HTMLElement} */ target.closest(".collapsable");
+        collapsable.classList.toggle("collapsed");
+      });
+    });
 
     // Add extra content div at the start of message-content if it exists
     if (this.extraContent) {

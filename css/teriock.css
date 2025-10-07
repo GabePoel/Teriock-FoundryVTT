@@ -1,3 +1,33 @@
+.theme-light {
+  --panel-divider-style: solid;
+  --color-panel-associations-background: rgba(0 0 0 / 10%);
+  --color-panel-associations-background-active: rgba(255, 255, 255, 0.2);
+  --color-panel-associations-background-hover: rgba(255, 255, 255, 0.1);
+  --color-panel-associations-border: var(--color-panel-edge);
+  --color-panel-associations-shadow-color: #ffffff;
+  --color-panel-divider: var(--color-panel-edge);
+  --color-panel-edge: #bbb19f;
+}
+
+.theme-dark {
+  --panel-divider-style: dotted;
+  --color-panel-associations-background: rgba(255 255 255 / 5%);
+  --color-panel-associations-background-active: rgba(255, 255, 255, 0.1);
+  --color-panel-associations-background-hover: rgba(255, 255, 255, 0.05);
+  --color-panel-associations-border: color-mix(
+    in srgb,
+    var(--color-panel-edge),
+    transparent 75%
+  );
+  --color-panel-associations-shadow-color: transparent;
+  --color-panel-divider: color-mix(
+    in srgb,
+    var(--color-panel-edge),
+    transparent 50%
+  );
+  --color-panel-edge: var(--color-text-subtle);
+}
+
 .header-banner img[alt=Abilities] {
   content: url(../src/icons/abilities/necromancy-elder-sorcery.webp);
 }
@@ -116,6 +146,330 @@
   content: "\f8de";
 }
 
+.teriock-panels {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+[role=tooltip] {
+  --panel-padding: 4px;
+}
+[role=tooltip] .teriock-panel {
+  background: none;
+  border: none;
+  width: 300px;
+}
+[role=tooltip] .teriock-panel .teriock-panel-header {
+  background: none;
+  padding: var(--panel-padding) var(--panel-padding) 8px;
+}
+[role=tooltip] .teriock-panel .teriock-panel-header:hover {
+  background: none;
+}
+[role=tooltip] .teriock-panel .teriock-panel-header:hover .teriock-panel-header-icon {
+  opacity: 1;
+}
+[role=tooltip] .teriock-panel .teriock-panel-body {
+  max-height: unset;
+  padding: 8px var(--panel-padding) var(--panel-padding);
+}
+[role=tooltip] .teriock-panel .teriock-panel-header-expander,
+[role=tooltip] .teriock-panel .teriock-panel-association-expander {
+  display: none;
+}
+
+.teriock-chat-message-content {
+  --panel-padding: 8px;
+}
+.teriock-chat-message-content .teriock-panel-image {
+  border-radius: 2px !important;
+}
+.teriock-chat-message-content .teriock-panel-association {
+  background: rgba(0, 0, 0, 0.05) !important;
+  border: 1px solid var(--color-panel-edge) !important;
+  border-radius: 2px !important;
+}
+
+.teriock-panel-body {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 0;
+  max-height: 2000px;
+  opacity: 1;
+  overflow: hidden;
+  padding: 8px;
+  transition: 250ms ease-in-out all;
+}
+.teriock-panel-body > * {
+  position: relative;
+}
+.teriock-panel-body > * + *::before {
+  content: "";
+  position: absolute;
+  top: -8px;
+  left: 0;
+  right: 0;
+  border-top: 1px var(--panel-divider-style) var(--color-panel-divider);
+}
+
+.teriock-panel {
+  border: 1px solid var(--color-panel-associations-border);
+  box-shadow: 0 0 2px var(--color-panel-associations-shadow-color) inset;
+  background: var(--color-panel-associations-background);
+  border-radius: 4px;
+  box-shadow: none;
+  background: color-mix(in srgb, #f8f4f1, transparent 50%);
+  border-color: var(--color-panel-edge);
+  overflow: hidden;
+  width: 100%;
+}
+.teriock-panel.collapsed .teriock-panel-body {
+  border-top: 0;
+  margin-top: 0;
+  max-height: 0;
+  opacity: 0;
+  padding-bottom: 0;
+  padding-top: 0;
+}
+.teriock-panel.collapsed .teriock-panel-header-expander {
+  transform: rotate(-90deg);
+}
+.teriock-panel .teriock-panel-header {
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  padding: 8px;
+  position: relative;
+  user-select: none;
+  width: 100%;
+}
+.teriock-panel .teriock-panel-header:hover {
+  background-color: rgba(255, 255, 255, 0.25);
+}
+.teriock-panel .teriock-panel-header:hover .teriock-panel-header-icon {
+  opacity: 0;
+}
+.teriock-panel .teriock-panel-header:hover .teriock-panel-header-expander {
+  opacity: 1;
+}
+.teriock-panel .teriock-panel-header::before {
+  background: transparent;
+  border-bottom: 1px var(--panel-divider-style) var(--color-panel-divider);
+  border-radius: 4px;
+  content: "";
+  left: var(--panel-padding);
+  position: absolute;
+  right: var(--panel-padding);
+  top: 100%;
+}
+.teriock-panel .teriock-panel-header .teriock-panel-image {
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+  height: 2em;
+  width: 2em;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+  border: 1px solid color-mix(in srgb, var(--color-light-5), transparent 75%);
+  border-radius: 100%;
+  outline: 1px solid var(--color-light-6);
+  overflow: hidden;
+  position: relative;
+  overflow: hidden;
+}
+.teriock-panel .teriock-panel-header .teriock-panel-image::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  content: "";
+  background: radial-gradient(circle, var(--color-warm-3), var(--color-dark-1));
+}
+.teriock-panel .teriock-panel-header .teriock-panel-image img {
+  filter: drop-shadow(0 0 3px color-mix(in srgb, var(--color-warm-1), transparent 60%));
+  object-fit: cover;
+  object-position: 50% 0;
+  height: 100%;
+  position: relative;
+  width: 100%;
+}
+.teriock-panel .teriock-panel-header .teriock-panel-header-name {
+  flex: 1 1 auto;
+  font-family: var(--font-h1), serif;
+  font-size: 1.3em;
+  line-height: 1em;
+  margin-left: 0.5em;
+  max-width: calc(100% - 4em);
+  text-align: left;
+}
+.teriock-panel .teriock-panel-header .teriock-panel-header-icon,
+.teriock-panel .teriock-panel-header .teriock-panel-header-expander {
+  align-items: center;
+  color: var(--color-panel-edge);
+  display: flex;
+  font-size: medium;
+  height: 2em;
+  justify-content: center;
+  position: absolute;
+  right: 8px;
+  transition: 100ms;
+  width: 2em;
+}
+.teriock-panel .teriock-panel-header .teriock-panel-header-icon {
+  opacity: 1;
+}
+.teriock-panel .teriock-panel-header .teriock-panel-header-expander {
+  opacity: 0;
+}
+.teriock-panel .teriock-panel-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  user-select: none;
+}
+.teriock-panel .teriock-panel-bars .teriock-panel-bar {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  gap: 6px;
+  width: 100%;
+}
+.teriock-panel .teriock-panel-bars .teriock-panel-bar .teriock-panel-bar-icon {
+  align-items: center;
+  color: var(--color-text-subtle);
+  display: flex;
+  font-size: smaller;
+  height: 1em;
+  justify-content: center;
+  width: 1em;
+}
+.teriock-panel .teriock-panel-bars .teriock-panel-bar .teriock-panel-bar-wrappers {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 3px;
+}
+.teriock-panel .teriock-panel-bars .teriock-panel-bar .teriock-panel-bar-wrappers .teriock-panel-bar-wrapper {
+  border: 1px dotted var(--color-text-subtle);
+  border-radius: 0.25em;
+  max-width: fit-content;
+  padding-left: 0.25em;
+  padding-right: 0.25em;
+  white-space: nowrap;
+  display: inline-flex;
+  color: var(--color-text-subtle);
+  text-transform: uppercase;
+  font-size: smaller;
+}
+.teriock-panel .teriock-panel-block .teriock-panel-block-title {
+  color: var(--color-text-subtle);
+  text-transform: uppercase;
+  font-size: smaller;
+  text-align: left;
+  user-select: none;
+}
+.teriock-panel .teriock-panel-block .teriock-panel-block-text {
+  text-align: left;
+}
+.teriock-panel .teriock-panel-block .teriock-panel-block-text *:first-child {
+  margin-top: 0;
+}
+.teriock-panel .teriock-panel-block .teriock-panel-block-text *:last-child {
+  margin-bottom: 0;
+}
+.teriock-panel .teriock-panel-association {
+  border: 1px solid var(--color-panel-associations-border);
+  box-shadow: 0 0 2px var(--color-panel-associations-shadow-color) inset;
+  background: var(--color-panel-associations-background);
+  border-radius: 4px;
+  border-radius: 0.25em;
+  max-height: 1800px;
+  overflow: hidden;
+  transition: 100ms ease-in-out all;
+  user-select: none;
+}
+.teriock-panel .teriock-panel-association.collapsed {
+  max-height: 1.75em;
+}
+.teriock-panel .teriock-panel-association.collapsed .teriock-panel-association-expander {
+  transform: rotate(-90deg);
+}
+.teriock-panel .teriock-panel-association .teriock-panel-association-row {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  gap: 2px;
+  height: 2em;
+  color: var(--color-text-subtle);
+  text-transform: uppercase;
+  font-size: smaller;
+}
+.teriock-panel .teriock-panel-association .teriock-panel-association-row:not(:last-child) {
+  border-bottom: 1px dotted var(--color-panel-associations-border);
+}
+.teriock-panel .teriock-panel-association .teriock-panel-association-row .teriock-panel-association-row-image {
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+  border: 1px solid color-mix(in srgb, var(--color-light-5), transparent 75%);
+  border-radius: 100%;
+  outline: 1px solid var(--color-light-6);
+  overflow: hidden;
+  height: 1.5em;
+  margin: 0.25em;
+  width: 1.5em;
+}
+.teriock-panel .teriock-panel-association .teriock-panel-association-card {
+  transition: 100ms;
+}
+.teriock-panel .teriock-panel-association .teriock-panel-association-card:hover {
+  background-color: var(--color-panel-associations-background-hover);
+}
+.teriock-panel .teriock-panel-association .teriock-panel-association-card:hover .teriock-panel-association-card-name,
+.teriock-panel .teriock-panel-association .teriock-panel-association-card:hover .teriock-panel-association-row-image {
+  filter: drop-shadow(0 0 0 var(--color-shadow-primary));
+}
+.teriock-panel .teriock-panel-association .teriock-panel-association-card:active {
+  background-color: var(--color-panel-associations-background-active);
+}
+.teriock-panel .teriock-panel-association .teriock-panel-association-title {
+  cursor: pointer;
+  justify-content: center;
+  position: relative;
+  transition: 100ms;
+}
+.teriock-panel .teriock-panel-association .teriock-panel-association-title:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+.teriock-panel .teriock-panel-association .teriock-panel-association-title:active {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.teriock-panel .teriock-panel-association .teriock-panel-association-title .teriock-panel-association-icon {
+  align-items: center;
+  display: flex;
+  height: 2em;
+  justify-content: center;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 2em;
+}
+.teriock-panel .teriock-panel-association .teriock-panel-association-title .teriock-panel-association-expander {
+  align-items: center;
+  display: flex;
+  height: 2em;
+  justify-content: center;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transition: 100ms;
+  width: 2em;
+}
+
+.teriock {
+  @import url("https://fonts.googleapis.com/css2?family=Bonheur+Royale&family=Cinzel:wght@400..900&family=Great+Vibes&family=Quintessential&family=Tagesschrift&display=swap");
+}
 .teriock .heal-dialog .heal-dialog-hacks .hack-marker-box {
   align-items: center;
   display: flex;
@@ -172,6 +526,13 @@
   width: 28px;
   position: relative;
   overflow: hidden;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.6);
+  border: 1px solid color-mix(in srgb, var(--color-light-5), transparent 75%);
+  border-radius: 100%;
+  outline: 1px solid var(--color-light-6);
+  overflow: hidden;
+  object-fit: cover;
+  object-position: 50% 0;
 }
 .teriock .doc-select .doc-select-row .doc-image-container::before {
   position: absolute;
@@ -181,15 +542,6 @@
   height: 100%;
   content: "";
   background: radial-gradient(circle, var(--color-warm-3), var(--color-dark-1));
-}
-.teriock .doc-select .doc-select-row .doc-image-container {
-  box-shadow: 0 0 6px rgba(0, 0, 0, 0.6);
-  border: 1px solid color-mix(in srgb, var(--color-light-5), transparent 75%);
-  border-radius: 100%;
-  outline: 1px solid var(--color-light-6);
-  overflow: hidden;
-  object-fit: cover;
-  object-position: 50% 0;
 }
 .teriock .doc-select .doc-select-row .doc-image-container img {
   filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.4));
@@ -201,9 +553,6 @@
   font-family: var(--font-h1), serif;
   font-size: large;
   height: 28px;
-}
-.teriock {
-  @import url("https://fonts.googleapis.com/css2?family=Bonheur+Royale&family=Cinzel:wght@400..900&family=Great+Vibes&family=Quintessential&family=Tagesschrift&display=swap");
 }
 @font-face {
   font-family: "XMasterpieceSwashes";
@@ -560,6 +909,8 @@
   width: var(--tcard-height);
   position: relative;
   overflow: hidden;
+  border-right: 1px solid var(--color-border);
+  left: 1px solid var(--color-border);
 }
 .teriock .tcard-container .tcard .tcard-image::before {
   position: absolute;
@@ -569,10 +920,6 @@
   height: 100%;
   content: "";
   background: radial-gradient(circle, var(--color-warm-3), var(--color-dark-1));
-}
-.teriock .tcard-container .tcard .tcard-image {
-  border-right: 1px solid var(--color-border);
-  left: 1px solid var(--color-border);
 }
 .teriock .tcard-container .tcard .tcard-image.usable {
   cursor: pointer;
@@ -1043,6 +1390,11 @@
   width: 4em;
   position: relative;
   overflow: hidden;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+  border: 1px solid color-mix(in srgb, var(--color-light-5), transparent 75%);
+  border-radius: 100%;
+  outline: 1px solid var(--color-light-6);
+  overflow: hidden;
 }
 .teriock .ab-header .ab-profile-img::before {
   position: absolute;
@@ -1052,13 +1404,6 @@
   height: 100%;
   content: "";
   background: radial-gradient(circle, var(--color-warm-3), var(--color-dark-1));
-}
-.teriock .ab-header .ab-profile-img {
-  box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
-  border: 1px solid color-mix(in srgb, var(--color-light-5), transparent 75%);
-  border-radius: 100%;
-  outline: 1px solid var(--color-light-6);
-  overflow: hidden;
 }
 .teriock .ab-header .ab-profile-img img {
   filter: drop-shadow(0 0 3px color-mix(in srgb, var(--color-warm-1), transparent 60%));
@@ -2630,6 +2975,13 @@
   overflow: hidden;
   position: relative;
   user-select: none;
+  border: 1px solid var(--color-panel-associations-border);
+  box-shadow: 0 0 2px var(--color-panel-associations-shadow-color) inset;
+  background: var(--color-panel-associations-background);
+  border-radius: 4px;
+  box-shadow: none;
+  background: color-mix(in srgb, #f8f4f1, transparent 50%);
+  border-color: var(--color-panel-edge);
 }
 .teriock .teriock-target-container .teriock-target-img {
   filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.4));
@@ -2646,11 +2998,29 @@
   margin: 0;
   margin-block: 2px;
 }
+.teriock .teriock-dice-formula {
+  border: 1px solid var(--color-panel-associations-border);
+  box-shadow: 0 0 2px var(--color-panel-associations-shadow-color) inset;
+  background: var(--color-panel-associations-background);
+  border-radius: 4px;
+  box-shadow: none;
+  background: color-mix(in srgb, #f8f4f1, transparent 50%);
+  border-color: var(--color-panel-edge);
+}
 .teriock .teriock-dice-formula.ub {
   background-color: color-mix(in srgb, #c64600, transparent 90%);
 }
 .teriock .teriock-dice-formula.feat {
   background-color: color-mix(in srgb, #f6d32d, transparent 90%);
+}
+.teriock .teriock-dice-total {
+  border: 1px solid var(--color-panel-associations-border);
+  box-shadow: 0 0 2px var(--color-panel-associations-shadow-color) inset;
+  background: var(--color-panel-associations-background);
+  border-radius: 4px;
+  box-shadow: none;
+  background: color-mix(in srgb, #f8f4f1, transparent 50%);
+  border-color: var(--color-panel-edge);
 }
 .teriock .teriock-dice-total.success {
   background-color: color-mix(in srgb, #26a269, transparent 90%);
@@ -2855,8 +3225,8 @@
 .teriock .teriock-chat-button.full-row {
   grid-column: 1/-1;
 }
-.teriock .extra-content + .teriock.dice-roll {
-  margin-top: 3px;
+.teriock .teriock-panels + .teriock.dice-roll {
+  margin-top: 4px;
 }
 .teriock .teriock-message-footer {
   display: flex;
@@ -2900,6 +3270,10 @@
 }
 .teriock .death-bag-pull .death-bag-stones .death-bag-stone {
   filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.4));
+}
+
+[role=tooltip] {
+  padding: 0.5em !important;
 }
 
 .chat-message .message-content {

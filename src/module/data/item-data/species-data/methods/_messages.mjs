@@ -1,13 +1,8 @@
 import { documentOptions } from "../../../../constants/options/document-options.mjs";
-import {
-  addAbilitiesBlock,
-  addFluenciesBlock,
-  addResourcesBlock,
-} from "../../../../helpers/messages-builder/message-parts.mjs";
 
 /**
  * Generates message parts for a species.
- * @param {TeriockSpeciesData} speciesData
+ * @param {TeriockSpeciesModel} speciesData
  * @returns {Partial<Teriock.MessageData.MessageParts>}
  * @private
  */
@@ -74,12 +69,6 @@ export function _messageParts(speciesData) {
       text: speciesData.description,
     },
   ];
-  addAbilitiesBlock(
-    speciesData.parent.transferredEffects.filter((e) => !e.sup),
-    blocks,
-  );
-  addResourcesBlock(speciesData.parent.transferredEffects, blocks);
-  addFluenciesBlock(speciesData.parent.transferredEffects, blocks);
   return {
     bars: bars,
     blocks: blocks,

@@ -1,8 +1,9 @@
 import { getAbility, getItem, getProperty } from "../../helpers/fetch.mjs";
-import { classMessage, tradecraftMessage } from "../../helpers/html.mjs";
+import { classPanel, tradecraftPanel } from "../../helpers/html.mjs";
 import { getIcon } from "../../helpers/path.mjs";
 import { toCamelCase } from "../../helpers/string.mjs";
 import { TeriockDialog } from "../api/_module.mjs";
+import { TeriockTextEditor } from "../ux/_module.mjs";
 import { selectDocumentDialog } from "./select-document-dialog.mjs";
 
 const { fields } = foundry.data;
@@ -193,7 +194,7 @@ export async function selectTradecraftDialog() {
         name: TERIOCK.index.tradecrafts[tc],
         uuid: tc,
         img: getIcon("tradecrafts", TERIOCK.index.tradecrafts[tc]),
-        tooltip: await tradecraftMessage(tc),
+        tooltip: await TeriockTextEditor.makeTooltip(await tradecraftPanel(tc)),
       };
     }),
   );
@@ -276,7 +277,7 @@ export async function selectClassDialog() {
         name: TERIOCK.index.classes[c],
         uuid: c,
         img: getIcon("classes", TERIOCK.index.classes[c]),
-        tooltip: await classMessage(c),
+        tooltip: await TeriockTextEditor.makeTooltip(await classPanel(c)),
       };
     }),
   );

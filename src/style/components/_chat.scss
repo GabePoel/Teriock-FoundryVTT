@@ -39,6 +39,7 @@
   overflow: hidden;
   position: relative;
   user-select: none;
+  @include mixins.inverse-roll-style;
 
   .teriock-target-img {
     filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.4));
@@ -60,6 +61,8 @@
 }
 
 .teriock-dice-formula {
+  @include mixins.inverse-roll-style;
+
   &.ub {
     background-color: color-mix(in srgb, #c64600, transparent 90%);
   }
@@ -70,6 +73,8 @@
 }
 
 .teriock-dice-total {
+  @include mixins.inverse-roll-style;
+
   &.success {
     background-color: color-mix(in srgb, #26a269, transparent 90%);
   }
@@ -300,8 +305,8 @@
   grid-column: 1 / -1;
 }
 
-.extra-content + .teriock.dice-roll {
-  margin-top: 3px;
+.teriock-panels + .teriock.dice-roll {
+  margin-top: 4px;
 }
 
 .teriock-message-footer {

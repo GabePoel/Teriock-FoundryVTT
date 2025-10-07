@@ -44,6 +44,44 @@ export default class TeriockBaseItemModel extends ChildTypeModel {
     return /** @type {TeriockActor} */ this.parent.actor;
   }
 
+  /** @inheritDoc */
+  get messageParts() {
+    const parts = super.messageParts;
+    const fluencies = this.parent.fluencies;
+    const resources = this.parent.resources;
+    if (fluencies.length > 0) {
+      parts.associations.push({
+        title: "Fluencies",
+        icon: TERIOCK.options.document.fluency.icon,
+        cards: fluencies.map((f) => {
+          return {
+            id: f.id,
+            img: f.img,
+            name: f.name,
+            type: f.type,
+            uuid: f.uuid,
+          };
+        }),
+      });
+    }
+    if (resources.length > 0) {
+      parts.associations.push({
+        title: "Resources",
+        icon: TERIOCK.options.document.resource.icon,
+        cards: resources.map((r) => {
+          return {
+            id: r.id,
+            img: r.img,
+            name: r.name,
+            type: r.type,
+            uuid: r.uuid,
+          };
+        }),
+      });
+    }
+    return parts;
+  }
+
   /**
    * Should an effect embedded in this be forcibly suppressed?
    * @param {Teriock.ID<TeriockEffect>} _id
