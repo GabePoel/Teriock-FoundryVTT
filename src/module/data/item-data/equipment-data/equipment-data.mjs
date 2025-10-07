@@ -95,16 +95,6 @@ export default class TeriockEquipmentModel extends EquipmentUnderstandingPart(
     return [...super.cardContextMenuEntries, ...contextMenus._entries(this)];
   }
 
-  /** @inheritDoc */
-  async _preCreate(data, options, user) {
-    if ((await super._preCreate(data, options, user)) === false) {
-      return false;
-    }
-    if (this.parent.isEmbedded) {
-      this.updateSource({ equipped: false });
-    }
-  }
-
   /**
    * If this has a two-handed damage attack.
    * @returns {boolean}
@@ -125,11 +115,13 @@ export default class TeriockEquipmentModel extends EquipmentUnderstandingPart(
   }
 
   /** @inheritDoc */
-  get secretMessageParts() {
-    return {
-      ...super.secretMessageParts,
-      ...messages._secretMessageParts(this),
-    };
+  async _preCreate(data, options, user) {
+    if ((await super._preCreate(data, options, user)) === false) {
+      return false;
+    }
+    if (this.parent.isEmbedded) {
+      this.updateSource({ equipped: false });
+    }
   }
 
   /** @inheritDoc */

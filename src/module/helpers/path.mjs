@@ -17,7 +17,10 @@ export function systemPath(path) {
  * @returns {string}
  */
 export function getIcon(category, name) {
-  return iconManifest[toKebabCase(category)][name];
+  return (
+    iconManifest[toKebabCase(category)][name] ||
+    systemPath("icons/documents/uncertainty.svg")
+  );
 }
 
 /**

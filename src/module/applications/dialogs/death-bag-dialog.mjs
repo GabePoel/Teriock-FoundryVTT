@@ -1,9 +1,9 @@
 import { TeriockRoll } from "../../dice/_module.mjs";
 import { TeriockChatMessage } from "../../documents/_module.mjs";
-import { buildMessage } from "../../helpers/messages-builder/message-builder.mjs";
 import { getIcon, systemPath } from "../../helpers/path.mjs";
 import { evaluateAsync } from "../../helpers/utils.mjs";
 import { TeriockDialog } from "../api/_module.mjs";
+import { TeriockTextEditor } from "../ux/_module.mjs";
 
 /**
  * Dialog that asks the {@link TeriockUser} to pull from the Death Bag.
@@ -153,17 +153,16 @@ async function deathBagPull(pullFormula, stonesFormulas, actor) {
         icon: "sack",
         label: "Death Bag",
       };
-      const contentStart = buildMessage(messageParts);
-      let content = contentStart.outerHTML;
       const pullContent = await foundry.applications.handlebars.renderTemplate(
         systemPath("templates/message-templates/death-bag.hbs"),
         context,
       );
-      content = content + pullContent;
+      const panel = await TeriockTextEditor.enrichPanel(messageParts);
       const chatMessageData = {
         speaker: TeriockChatMessage.getSpeaker({ actor: actor }),
+        content: pullContent,
         system: {
-          extraContent: content,
+          panels: [panel],
           tags: [`Pulled ${toPullCount} Stones`],
         },
       };

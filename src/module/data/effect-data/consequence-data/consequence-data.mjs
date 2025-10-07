@@ -4,6 +4,7 @@ import { HierarchyDataMixin } from "../../mixins/_module.mjs";
 import { migrateHierarchy } from "../../shared/migrations/migrate-hierarchy.mjs";
 import TeriockBaseEffectModel from "../base-effect-data/base-effect-data.mjs";
 import * as sharedFields from "../shared/shared-fields.mjs";
+import { associationsField, blocksField } from "../shared/shared-fields.mjs";
 import { _messageParts } from "./methods/_messages.mjs";
 
 const { fields } = foundry.data;
@@ -28,6 +29,9 @@ export default class TeriockConsequenceModel extends HierarchyDataMixin(
   /** @inheritDoc */
   static defineSchema() {
     return foundry.utils.mergeObject(super.defineSchema(), {
+      associations: associationsField(),
+      blocks: blocksField(),
+      critical: new fields.BooleanField({ initial: false }),
       source: new fields.StringField({
         initial: "",
         nullable: true,
@@ -87,6 +91,7 @@ export default class TeriockConsequenceModel extends HierarchyDataMixin(
         }),
       }),
       sourceDescription: new fields.HTMLField(),
+      heightened: new fields.NumberField(),
     });
   }
 
@@ -139,6 +144,15 @@ export default class TeriockConsequenceModel extends HierarchyDataMixin(
    */
   get movementExpiration() {
     return this.expirations.movement;
+  }
+
+  /** @inheritDoc */
+  get nameString() {
+    let ns = super.nameString;
+    if (this.critical) {
+      ns += " (Critical)";
+    }
+    return ns;
   }
 
   /** @inheritDoc */

@@ -15,6 +15,12 @@ declare module "./consequence-data.mjs" {
   export default interface TeriockConsequenceModel
     extends TeriockBaseEffectModel,
       HierarchyDataMixinInterface {
+    /** <schema> Associations */
+    associations: Teriock.MessageData.MessageAssociations[];
+    /** <schema> Blocks representing the source */
+    blocks: Teriock.MessageData.MessageBlock[];
+    /** <schema> If this was the result of an effect that went critical */
+    critical: boolean;
     /** <schema> Circumstances in which this effect is active or expires */
     expirations: {
       /** <schema> Conditions that affect if this effect is active or expired */
@@ -47,6 +53,8 @@ declare module "./consequence-data.mjs" {
       /** <schema> Description of the circumstances under which this effect expires */
       description: string;
     };
+    /** <schema> How much the source was heightened */
+    heightened: number;
     movementExpiration: boolean;
     /** <schema> {@link TeriockEffect} that's the source of this consequence */
     source: Teriock.UUID<TeriockEffect>;

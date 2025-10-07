@@ -1,10 +1,7 @@
 import { TeriockTextEditor } from "../../../applications/ux/_module.mjs";
-import { buildMessage } from "../../../helpers/messages-builder/message-builder.mjs";
 import { toCamelCase } from "../../../helpers/string.mjs";
 import TeriockChatMessage from "../../chat-message.mjs";
 import { applyCertainChanges } from "../shared/_module.mjs";
-
-const { ux } = foundry.applications;
 
 /**
  * Mixin for common functions used across document classes embedded in actorsUuids.
@@ -127,25 +124,6 @@ export default (Base) => {
         if (this._sheet) {
           this.sheet.render();
         }
-      }
-
-      /** @inheritDoc */
-      async buildMessage(options = {}) {
-        let rawMessage = this.buildRawMessage(options);
-        rawMessage = this.system.adjustMessage(rawMessage);
-        return await ux.TextEditor.enrichHTML(rawMessage.outerHTML);
-      }
-
-      /** @inheritDoc */
-      buildRawMessage(options = {}) {
-        let messageParts;
-        const secret = options.secret || false;
-        if (secret) {
-          messageParts = this.system.secretMessageParts;
-        } else {
-          messageParts = this.system.messageParts;
-        }
-        return buildMessage(messageParts);
       }
 
       /** @inheritDoc */

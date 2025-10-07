@@ -28,26 +28,25 @@ export function _messageParts(consequenceData) {
       icon: "fa-disease",
       label: "Conditions",
       /** @type string[] */
-      wrappers: Array.from(
-        consequenceData.parent.statuses.map(
-          (status) => TERIOCK.index.conditions[status],
+      wrappers: [
+        ...Array.from(
+          consequenceData.parent.statuses.map(
+            (status) => TERIOCK.index.conditions[status],
+          ),
         ),
-      ),
-    },
-  ];
-  const blocks = [
-    {
-      title: "Description",
-      text: consequenceData.parent.description,
-    },
-    {
-      title: "Source Description",
-      text: consequenceData.sourceDescription,
+        consequenceData.critical ? "Critical" : "",
+        consequenceData.heightened
+          ? `Heightened ${consequenceData.heightened} Time${
+              consequenceData.heightened === 1 ? "" : "s"
+            }`
+          : "",
+      ],
     },
   ];
   return {
+    associations: consequenceData.associations,
     bars: bars,
-    blocks: blocks,
+    blocks: consequenceData.blocks,
     icon: documentOptions.consequence.icon,
     label: documentOptions.consequence.name,
   };

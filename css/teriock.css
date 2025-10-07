@@ -15,15 +15,15 @@
   --color-panel-associations-background-active: rgba(255, 255, 255, 0.1);
   --color-panel-associations-background-hover: rgba(255, 255, 255, 0.05);
   --color-panel-associations-border: color-mix(
-    in srgb,
-    var(--color-panel-edge),
-    transparent 75%
+      in srgb,
+      var(--color-panel-edge),
+      transparent 75%
   );
   --color-panel-associations-shadow-color: transparent;
   --color-panel-divider: color-mix(
-    in srgb,
-    var(--color-panel-edge),
-    transparent 50%
+      in srgb,
+      var(--color-panel-edge),
+      transparent 50%
   );
   --color-panel-edge: var(--color-text-subtle);
 }
@@ -420,6 +420,9 @@
   margin: 0.25em;
   width: 1.5em;
 }
+.teriock-panel .teriock-panel-association .teriock-panel-association-row .teriock-panel-association-row-image img {
+  background: radial-gradient(circle, var(--color-warm-3), var(--color-dark-1));
+}
 .teriock-panel .teriock-panel-association .teriock-panel-association-card {
   transition: 100ms;
 }
@@ -465,6 +468,15 @@
   top: 0;
   transition: 100ms;
   width: 2em;
+}
+
+img.rescale {
+  scale: 1.67;
+}
+
+.tooltip-image {
+  max-height: 1000px;
+  max-width: 200px;
 }
 
 .teriock {
@@ -3241,6 +3253,16 @@
   border-radius: 100%;
   outline: 1px solid var(--color-light-6);
   overflow: hidden;
+  background: radial-gradient(circle, var(--color-warm-3), var(--color-dark-1));
+}
+.teriock .message-result {
+  border: 1px solid var(--color-panel-associations-border);
+  box-shadow: 0 0 2px var(--color-panel-associations-shadow-color) inset;
+  background: var(--color-panel-associations-background);
+  border-radius: 4px;
+  box-shadow: none;
+  background: color-mix(in srgb, #f8f4f1, transparent 50%);
+  border-color: var(--color-panel-edge);
 }
 .teriock .generic-changes {
   overflow-y: hidden;
@@ -3274,6 +3296,13 @@
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
   justify-content: start;
   padding: 6px;
+  border: 1px solid var(--color-panel-associations-border);
+  box-shadow: 0 0 2px var(--color-panel-associations-shadow-color) inset;
+  background: var(--color-panel-associations-background);
+  border-radius: 4px;
+  box-shadow: none;
+  background: color-mix(in srgb, #f8f4f1, transparent 50%);
+  border-color: var(--color-panel-edge);
 }
 .teriock .death-bag-pull .death-bag-stones .death-bag-stone {
   filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.4));
@@ -3461,6 +3490,7 @@ dl:not(:first-child) {
   border-radius: 100%;
   outline: 1px solid var(--color-light-6);
   overflow: hidden;
+  background: radial-gradient(circle, var(--color-warm-3), var(--color-dark-1));
 }
 
 .dice-roll {

@@ -15,20 +15,6 @@ export interface ChildDocumentMixinInterface {
   applySpecialEffects(): void;
 
   /**
-   * Builds an enriched message from the document's message parts.
-   * @param options - Options for building the message
-   * @returns Promise that resolves to the enriched message HTML
-   */
-  buildMessage(options?: Teriock.MessageData.MessageOptions): Promise<string>;
-
-  /**
-   * Builds a raw message string from the document's message parts.
-   * @param options - Options for building the message
-   * @returns The raw message HTML
-   */
-  buildRawMessage(options?: Teriock.MessageData.MessageOptions): HTMLDivElement;
-
-  /**
    * Sends a chat message with the document's image.
    * @returns Promise that resolves when the image message is sent
    */

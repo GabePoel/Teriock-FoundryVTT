@@ -117,3 +117,43 @@ export function changeField() {
     priority: new fields.NumberField({ initial: 20 }),
   });
 }
+
+/**
+ * Field that represents panel associations.
+ * @returns {ArrayField}
+ */
+export function associationsField() {
+  return new fields.ArrayField(
+    new fields.SchemaField({
+      title: new fields.StringField({ initial: "Associations" }),
+      icon: new fields.StringField({ nullable: true }),
+      cards: new fields.ArrayField(
+        new fields.SchemaField({
+          name: new fields.StringField(),
+          img: new fields.StringField(),
+          color: new fields.StringField({ nullable: true }),
+          uuid: new fields.DocumentUUIDField(),
+          id: new fields.DocumentIdField(),
+          type: new fields.StringField(),
+          rescale: new fields.BooleanField({ initial: false }),
+        }),
+      ),
+    }),
+  );
+}
+
+/**
+ * Field that represents panel blocks.
+ * @returns {ArrayField}
+ */
+export function blocksField() {
+  return new fields.ArrayField(
+    new fields.SchemaField({
+      title: new fields.StringField(),
+      text: new fields.StringField({ nullable: true }),
+      special: new fields.StringField({ nullable: true }),
+      elements: new fields.StringField({ nullable: true }),
+      italic: new fields.BooleanField({ initial: false }),
+    }),
+  );
+}

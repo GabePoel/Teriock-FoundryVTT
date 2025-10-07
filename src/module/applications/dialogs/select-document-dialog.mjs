@@ -35,6 +35,7 @@ export async function selectDocumentsDialog(documents, options = {}) {
     context.documents[id] = {
       name: foundry.utils.getProperty(doc, options.nameKey),
       img: foundry.utils.getProperty(doc, options.imgKey),
+      rescale: doc.rescale || false,
     };
     if (options.tooltipKey && options.tooltip) {
       context.documents[id].tooltip = foundry.utils.getProperty(

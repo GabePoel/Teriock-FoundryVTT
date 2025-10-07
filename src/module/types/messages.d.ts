@@ -26,6 +26,7 @@ declare global {
 
     /** Definition for an association card. */
     export type MessageAssociationCard = {
+      rescale?: boolean;
       name: string;
       uuid?: Teriock.UUID<TeriockCommon>;
       tooltip?: string;

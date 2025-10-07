@@ -1,5 +1,9 @@
 import { bindCommonActions } from "../../../applications/shared/_module.mjs";
 import { buildHTMLButton } from "../../../helpers/html.mjs";
+import {
+  associationsField,
+  blocksField,
+} from "../../effect-data/shared/shared-fields.mjs";
 
 const { fields } = foundry.data;
 const { TypeDataModel } = foundry.abstract;
@@ -30,32 +34,9 @@ export default class TeriockBaseMessageModel extends TypeDataModel {
             wrappers: new fields.ArrayField(new fields.StringField()),
           }),
         ),
-        blocks: new fields.ArrayField(
-          new fields.SchemaField({
-            title: new fields.StringField(),
-            text: new fields.StringField({ nullable: true }),
-            special: new fields.StringField({ nullable: true }),
-            elements: new fields.StringField({ nullable: true }),
-            italic: new fields.BooleanField({ initial: false }),
-          }),
-        ),
+        blocks: blocksField(),
         font: new fields.StringField({ nullable: true }),
-        associations: new fields.ArrayField(
-          new fields.SchemaField({
-            title: new fields.StringField({ initial: "Associations" }),
-            icon: new fields.StringField({ nullable: true }),
-            cards: new fields.ArrayField(
-              new fields.SchemaField({
-                name: new fields.StringField(),
-                img: new fields.StringField(),
-                color: new fields.StringField({ nullable: true }),
-                uuid: new fields.DocumentUUIDField(),
-                id: new fields.DocumentIdField(),
-                type: new fields.StringField(),
-              }),
-            ),
-          }),
-        ),
+        associations: associationsField(),
         icon: new fields.StringField({ nullable: true }),
         label: new fields.StringField({ nullable: true }),
       }),

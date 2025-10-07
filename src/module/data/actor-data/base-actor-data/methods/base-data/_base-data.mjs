@@ -13,7 +13,7 @@ import { _prepareBonuses, _prepareHpMp } from "./_prep-base-stats.mjs";
  * - [Bite](https://wiki.teriock.com/index.php/Ability:Bite)
  * - [Shield Bash](https://wiki.teriock.com/index.php/Ability:Shield_Bash)
  *
- * @param {TeriockBaseActorModel} actorData
+ * @param {TeriockBaseActorData} actorData
  * @private
  */
 export function _baseData(actorData) {
@@ -26,13 +26,12 @@ export function _baseData(actorData) {
     img: null,
   };
   actorData.abilityFlags = {};
-  actorData.trackers = {
-    allured: [],
-    bound: [],
-    lighted: [],
-    goaded: [],
-    frightened: [],
-  };
+  actorData.trackers =
+    /** @type {Record<Teriock.Parameters.Condition.ConditionKey, Teriock.UUID<TeriockTokenDocument>[]>} */ {};
+  for (const key of Object.keys(TERIOCK.index.conditions)) {
+    actorData.trackers[key] = [];
+  }
+
   actorData.encumbranceLevel = 0;
   actorData.hookedMacros =
     /** @type {Teriock.Parameters.Actor.HookedActorMacros} */ {};

@@ -1,5 +1,4 @@
 import { handlers } from "../../helpers/interaction/_module.mjs";
-import { TeriockImagePreviewer } from "../api/_module.mjs";
 import { imageContextMenuOptions } from "./_module.mjs";
 
 const { ContextMenu } = foundry.applications.ux;
@@ -9,21 +8,11 @@ const { ContextMenu } = foundry.applications.ux;
  * @param {HTMLElement} rootElement
  */
 export default function bindCommonActions(rootElement) {
-  new ContextMenu(rootElement, ".timage", imageContextMenuOptions, {
+  new ContextMenu(rootElement, "img", imageContextMenuOptions, {
     eventName: "contextmenu",
     jQuery: false,
     fixed: true,
   });
-  rootElement
-    .querySelectorAll(".tmessage-header-image-container")
-    .forEach((element) => {
-      element.addEventListener("click", async function (ev) {
-        const el = ev.currentTarget;
-        const img = el.getAttribute("data-src");
-        const image = new TeriockImagePreviewer(img);
-        await image.render(true);
-      });
-    });
   const actionElements = rootElement.querySelectorAll("[data-action]");
   for (const /** @type {HTMLElement} */ element of actionElements) {
     const action = element.dataset.action;

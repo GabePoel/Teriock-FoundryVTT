@@ -1,5 +1,4 @@
 import { TeriockImagePreviewer } from "../../../applications/api/_module.mjs";
-import { systemPath } from "../../../helpers/path.mjs";
 import { freeze, makeIcon } from "../../../helpers/utils.mjs";
 import { TextField } from "../../shared/fields/_module.mjs";
 import CommonTypeModel from "../common-type-model/common-type-model.mjs";
@@ -195,22 +194,6 @@ export default class ChildTypeModel extends CommonTypeModel {
    */
   get parent() {
     return /** @type {TeriockChild} */ super.parent;
-  }
-
-  /**
-   * Gets the secret message rules-parts for displaying hidden child documents.
-   * Uses generic uncertainty image and type-based name for privacy.
-   * @returns {Teriock.MessageData.MessageParts} Object containing secret message display components.
-   */
-  get secretMessageParts() {
-    return {
-      image: systemPath("icons/documents/uncertainty.svg"),
-      name:
-        this.parent.type.charAt(0).toUpperCase() + this.parent.type.slice(1),
-      bars: [],
-      blocks: [],
-      font: null,
-    };
   }
 
   /**

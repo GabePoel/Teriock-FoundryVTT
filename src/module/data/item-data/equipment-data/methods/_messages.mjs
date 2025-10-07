@@ -100,27 +100,3 @@ export function _messageParts(equipmentData) {
     label: documentOptions.equipment.name,
   };
 }
-
-/**
- * Generates secret message parts for an equipment item, showing only noticeable properties.
- * Used when equipment is not fully identified.
- * @param {TeriockEquipmentModel} equipmentData - The equipment data to generate secret message parts for.
- * @returns {Partial<Teriock.MessageData.MessageParts>} Object containing bars and blocks for the secret equipment
- *   message.
- * @private
- */
-export function _secretMessageParts(equipmentData) {
-  const bars = [];
-  const blocks = [
-    {
-      title: "Noticeable properties",
-    },
-  ];
-  return {
-    name: equipmentData.equipmentType,
-    bars: bars,
-    blocks: blocks,
-    icon: documentOptions.equipment.icon,
-    label: documentOptions.equipment.name,
-  };
-}

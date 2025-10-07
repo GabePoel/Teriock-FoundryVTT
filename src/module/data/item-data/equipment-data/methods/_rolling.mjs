@@ -1,5 +1,6 @@
 import { onUseDialog } from "../../../../applications/dialogs/on-use-dialog.mjs";
 import { TeriockRoll } from "../../../../dice/_module.mjs";
+import { getIcon } from "../../../../helpers/path.mjs";
 import { harmRoll } from "../../../../helpers/quick-rolls.mjs";
 
 /**
@@ -23,7 +24,6 @@ export async function _roll(equipmentData, options) {
  * @private
  */
 async function use(equipmentData, options) {
-  //let message = await equipmentData.parent.buildMessage();
   if (equipmentData.damage.base.value) {
     let rollFormula = equipmentData.damage.base.value || "";
     if (options.formula) {
@@ -42,13 +42,22 @@ async function use(equipmentData, options) {
         multiplyNumeric: false,
       }).formula;
     }
-    //if (options?.secret) {
-    //  message = await equipmentData.parent.buildMessage({ secret: true });
-    //} else {
-    //  message = await equipmentData.parent.buildMessage({ secret: false });
-    //}
     const rollData = equipmentData.actor?.getRollData() || {};
     const panels = [await equipmentData.parent.toPanel()];
+    if (options?.secret) {
+      panels.length = 0;
+      panels.push({
+        icon: TERIOCK.options.document.equipment.icon,
+        name: "Unknown " + equipmentData.equipmentType,
+        blocks: [
+          {
+            title: "Description",
+            text: "Item is used.",
+          },
+        ],
+        image: getIcon("equipment", equipmentData.equipmentType),
+      });
+    }
     await harmRoll(rollFormula, rollData, "", panels);
   } else {
     await equipmentData.parent.toMessage();

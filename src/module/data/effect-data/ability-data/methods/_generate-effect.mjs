@@ -106,32 +106,19 @@ export async function _generateEffect(rollConfig, crit = false) {
     // TODO: Support heightening combat expirations lol
   }
 
-  let description = await abilityData.parent.buildMessage();
-  const tempDiv = document.createElement("div");
-  tempDiv.innerHTML = description;
-
-  // Remove .tmes-header-box and .tmes-bar-box elements
-  const headerBoxes = tempDiv.querySelectorAll(".tmes-header-box");
-  const barBoxes = tempDiv.querySelectorAll(".tmes-bar-box");
-  const embeddedBlocks = tempDiv.querySelectorAll(".abm-embedded-block");
-
-  headerBoxes.forEach((element) => element.remove());
-  barBoxes.forEach((element) => element.remove());
-  embeddedBlocks.forEach((element) => element.remove());
-
-  description = tempDiv.innerHTML;
-
   /** @type {Partial<TeriockConsequenceModel>} */
   const effectData = {
-    name: `${abilityData.parent?.name} Effect${crit ? " (Crit)" : ""}`,
+    name: `${abilityData.parent?.name} Effect`,
     type: "consequence",
     img: abilityData.parent.img,
     changes: changes,
-    statuses: Array.from(statuses), // description: description,
+    statuses: Array.from(statuses),
     system: {
+      associations: [],
+      blocks: abilityData.messageParts.blocks,
+      critical: crit,
       source: abilityData.parent.uuid,
       deleteOnExpire: true,
-      sourceDescription: description,
       expirations: {
         combat: combatExpirations,
         conditions: {
@@ -143,6 +130,7 @@ export async function _generateEffect(rollConfig, crit = false) {
         sustained: abilityData.sustained,
         description: abilityData.endCondition,
       },
+      heightened: heightenAmount,
       hierarchy: {
         subIds: Array.from(abilityData.hierarchy.subIds || new Set()),
         rootUuid: abilityData.parent.parent.uuid,

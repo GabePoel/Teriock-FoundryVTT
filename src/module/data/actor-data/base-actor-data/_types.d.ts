@@ -276,18 +276,10 @@ declare global {
       walk: number;
     };
     /** <base> Trackers */
-    trackers: {
-      /** <base> Allured to */
-      allured: Teriock.UUID<TeriockTokenDocument>[];
-      /** <base> <derived> Bound to */
-      bound: Teriock.UUID<TeriockTokenDocument>[];
-      /** <base> Frightened of */
-      frightened: Teriock.UUID<TeriockTokenDocument>[];
-      /** <base> Goaded to */
-      goaded: Teriock.UUID<TeriockTokenDocument>[];
-      /** <base> Lighted to */
-      lighted: Teriock.UUID<TeriockTokenDocument>[];
-    };
+    trackers: Record<
+      Teriock.Parameters.Condition.ConditionKey,
+      Teriock.UUID<TeriockTokenDocument>[]
+    >;
     /** <schema> Tradecrafts */
     tradecrafts: Record<Teriock.Parameters.Fluency.Tradecraft, TradecraftData>;
     /** <base> Transformation */

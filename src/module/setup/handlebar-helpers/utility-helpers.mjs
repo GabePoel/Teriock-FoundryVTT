@@ -322,6 +322,8 @@ export default function registerUiHelpers() {
           data-action="${action}" ${tooltipAttr}
           data-tooltip-direction="LEFT"
           data-tooltip-class="teriock"
+          data-openable="true"
+          data-shareable="true"
         ><img src="${img}" alt="${title}" /></div>
         <div class="tcard-body">
           <div class="tcard-titles">

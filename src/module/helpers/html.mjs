@@ -388,17 +388,26 @@ export function safeParseHTML(htmlString) {
  * @returns {Promise<void>}
  */
 export async function addTrackersToRollConfig(rollConfig, tracker, uuids) {
-  let titleString = toTitleCase(tracker) + " to";
+  let titleString = toTitleCase(tracker) + " To";
   if (tracker === "frightened") {
-    titleString = "Frightened of";
+    titleString = "Frightened Of";
+  }
+  if (tracker === "dueling") {
+    titleString = "Dueling With";
   }
   const buttons = rollConfig.chatData.system.buttons;
   const button = buttons.find((b) => b.dataset.action === "apply-effect");
   if (button) {
     for (const useType of ["normal", "crit"]) {
       if (button.dataset[useType]) {
+        /** @type {TeriockConsequence} */
         const effectObject = JSON.parse(button.dataset[useType]);
-        effectObject.description = "<ul>";
+        /** @type {Teriock.MessageData.MessageAssociations} */
+        const association = {
+          title: titleString,
+          icon: TERIOCK.options.document.creature.icon,
+          cards: [],
+        };
         for (const uuid of uuids) {
           effectObject.changes.push({
             key: "system.trackers." + tracker,
@@ -406,10 +415,17 @@ export async function addTrackersToRollConfig(rollConfig, tracker, uuids) {
             mode: 2,
             priority: 10,
           });
-          const doc = await foundry.utils.fromUuid(uuid);
-          effectObject.description += `<li>${titleString} @UUID[${uuid}]{${doc.name}}</li>`;
+          const doc = /** @type {TeriockTokenDocument} */ fromUuidSync(uuid);
+          association.cards.push({
+            name: doc.name,
+            img: doc.texture?.src,
+            uuid: uuid,
+            rescale: doc.rescale,
+            id: doc.id,
+            type: "base",
+          });
         }
-        effectObject.description += "</ul>";
+        effectObject.system.associations.push(association);
         button.dataset[useType] = JSON.stringify(effectObject);
       }
     }

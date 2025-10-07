@@ -1,15 +1,12 @@
 import * as createEffects from "../../../../helpers/create-effects.mjs";
-import { buildMessage } from "../../../../helpers/messages-builder/message-builder.mjs";
 import { TeriockDialog } from "../../../api/_module.mjs";
 import {
   selectAbilityDialog,
   selectPropertyDialog,
   selectTradecraftDialog,
 } from "../../../dialogs/select-dialog.mjs";
-import {
-  bindCommonActions,
-  imageContextMenuOptions,
-} from "../../../shared/_module.mjs";
+import { bindCommonActions } from "../../../shared/_module.mjs";
+import { TeriockTextEditor } from "../../../ux/_module.mjs";
 import _connectEmbedded from "./methods/_connect-embedded.mjs";
 import _embeddedFromCard from "./methods/_embedded-from-card.mjs";
 import _setupEventListeners from "./methods/_setup-handlers.mjs";
@@ -870,11 +867,6 @@ export default (Base) => {
 
         this.editable = this.isEditable && !this._locked;
         _connectEmbedded(this.document, this.element, this.editable);
-        new ContextMenu(this.element, ".timage", imageContextMenuOptions, {
-          eventName: "contextmenu",
-          jQuery: false,
-          fixed: true,
-        });
         this._connect(".chat-button", "contextmenu", (e) => {
           CommonSheetMixin._debug.call(this, e, e.currentTarget);
         });
@@ -901,6 +893,7 @@ export default (Base) => {
           }
 
           if (embedded?.type === "condition") {
+            /** @type {Teriock.MessageData.MessageParts} */
             const messageParts = {
               bars: [],
               blocks: [
@@ -911,79 +904,37 @@ export default (Base) => {
               ],
               image: embedded?.img,
               name: embedded?.name,
+              associations: [],
+              icon: TERIOCK.options.document.condition.icon,
             };
 
-            const uuidPromises = [];
-
-            if (embedded?.id === "lighted") {
-              uuidPromises.push(
-                Promise.all(
-                  this.document.system.trackers.lighted.map((uuid) =>
-                    foundry.utils.fromUuid(uuid),
-                  ),
-                ).then((tokens) => {
-                  let lightedToText = "<ul>";
-                  tokens.forEach((token, idx) => {
-                    const uuid = this.document.system.trackers.lighted[idx];
-                    lightedToText += `<li>@UUID[${uuid}]{${token?.name}}</li>`;
+            if (embedded?.id) {
+              /** @type {TeriockTokenDocument[]} */
+              const tokenDocs = (
+                this.document.system.trackers[embedded.id] || []
+              ).map((uuid) => fromUuidSync(uuid));
+              if (tokenDocs.length > 0) {
+                /** @type {Teriock.MessageData.MessageAssociations} */
+                const association = {
+                  title: "Associated Creatures",
+                  icon: TERIOCK.options.document.creature.icon,
+                  cards: [],
+                };
+                for (const tokenDoc of tokenDocs) {
+                  association.cards.push({
+                    name: tokenDoc.name,
+                    uuid: tokenDoc.uuid,
+                    img: tokenDoc.texture.src,
+                    id: tokenDoc.id,
+                    type: "base",
+                    rescale: tokenDoc.rescale,
                   });
-                  lightedToText += "</ul>";
-                  messageParts.blocks.push({
-                    text: lightedToText,
-                    title: "Lighted to",
-                  });
-                }),
-              );
+                }
+                messageParts.associations.push(association);
+              }
             }
-
-            if (embedded?.id === "goaded") {
-              uuidPromises.push(
-                Promise.all(
-                  this.document.system.trackers.goaded.map((uuid) =>
-                    foundry.utils.fromUuid(uuid),
-                  ),
-                ).then((tokens) => {
-                  let goadedToText = "<ul>";
-                  tokens.forEach((token, idx) => {
-                    const uuid = this.document.system.trackers.lighted[idx];
-                    goadedToText += `<li>@UUID[${uuid}]{${token?.name}}</li>`;
-                  });
-                  goadedToText += "</ul>";
-                  messageParts.blocks.push({
-                    text: goadedToText,
-                    title: "Goaded to",
-                  });
-                }),
-              );
-            }
-
-            if (embedded?.id === "frightened") {
-              uuidPromises.push(
-                Promise.all(
-                  this.document.system.trackers.frightened.map((uuid) =>
-                    foundry.utils.fromUuid(uuid),
-                  ),
-                ).then((tokens) => {
-                  let frightenedOfText = "<ul>";
-                  tokens.forEach((token, idx) => {
-                    const uuid = this.document.system.trackers.frightened[idx];
-                    frightenedOfText += `<li>@UUID[${uuid}]{${token?.name}}</li>`;
-                  });
-                  frightenedOfText += "</ul>";
-                  messageParts.blocks.push({
-                    text: frightenedOfText,
-                    title: "Frightened of",
-                  });
-                }),
-              );
-            }
-
-            // Wait for all UUID resolutions, then enrich HTML
-            await Promise.all(uuidPromises);
-            const rawMessage = buildMessage(messageParts);
-            element.dataset.tooltipHtml = await TextEditor.enrichHTML(
-              rawMessage.outerHTML,
-            );
+            element.dataset.tooltipHtml =
+              await TeriockTextEditor.makeTooltip(messageParts);
             element.dataset.tooltipClass = "teriock teriock-rich-tooltip";
           } else if (typeof embedded?.toTooltip === "function") {
             element.dataset.tooltipHtml = await embedded?.toTooltip();

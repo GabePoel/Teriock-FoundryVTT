@@ -43,6 +43,14 @@ export default class TeriockTokenDocument extends ChangeableDocumentMixin(
     );
   }
 
+  /**
+   * Rescale the src if this has a token ring.
+   * @returns {number}
+   */
+  get rescale() {
+    return this.ring.enabled;
+  }
+
   /** @inheritDoc */
   _checkPreparation() {
     return this.actor;

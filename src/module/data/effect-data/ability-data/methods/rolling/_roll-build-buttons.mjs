@@ -12,6 +12,12 @@ export async function _buildButtons(rollConfig) {
   const abilityData = rollConfig.abilityData;
   const buttons = [];
 
+  for (const roll of rollConfig.chatData.rolls) {
+    if (roll.isDeterministic && !roll._evaluated) {
+      await roll.evaluate();
+    }
+  }
+
   // Feat Save Button
   if (abilityData.interaction === "feat") {
     const attribute = abilityData.featSaveAttribute;
@@ -21,7 +27,9 @@ export async function _buildButtons(rollConfig) {
       dataset: {
         action: "feat-save",
         attribute: attribute,
-        dc: rollConfig.chatData.rolls[0].total,
+        dc: rollConfig.chatData.rolls.find(
+          (r) => r?.context?.diceClass === "feat",
+        ).total,
       },
     });
   }

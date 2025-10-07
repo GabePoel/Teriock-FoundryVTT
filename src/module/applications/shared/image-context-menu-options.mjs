@@ -11,21 +11,23 @@ const imageContextMenuOptions = [
     name: "Open Image",
     icon: '<i class="fa-solid fa-image"></i>',
     callback: async (target) => {
-      const img = target.getAttribute("data-src");
-      const image = new TeriockImagePreviewer(img);
+      const image = new TeriockImagePreviewer(target.getAttribute("src"));
       await image.render(true);
     },
     condition: (target) => {
-      const img = target.getAttribute("data-src");
-      return img && img.length > 0;
+      const src = target.getAttribute("src");
+      return src && src.length > 0 && target.getAttribute("data-openable");
     },
   },
   {
     name: "Share Image",
     icon: '<i class="fa-solid fa-share"></i>',
     callback: async (target) => {
-      const img = target.getAttribute("data-src");
-      await chatImage(img);
+      await chatImage(target.getAttribute("src"));
+    },
+    condition: (target) => {
+      const src = target.getAttribute("src");
+      return src && src.length > 0 && target.getAttribute("data-shareable");
     },
   },
 ];
