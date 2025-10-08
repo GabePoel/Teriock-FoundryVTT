@@ -65,6 +65,8 @@ declare global {
       icon?: string;
       /** Label that gets displayed upon hovering over icon. */
       label?: string;
+      /** Color to assign to the image border. */
+      color?: string;
     };
 
     /** Options for automatically configuring a message. */

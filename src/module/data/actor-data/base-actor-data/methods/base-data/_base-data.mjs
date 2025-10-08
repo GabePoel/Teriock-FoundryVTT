@@ -47,6 +47,14 @@ export function _baseData(actorData) {
     mouth: hackField(1),
     nose: hackField(1),
   };
+  //noinspection JSValidateTypes
+  actorData.conditionInformation = {};
+  for (const key of Object.keys(TERIOCK.index.conditions)) {
+    actorData.conditionInformation[key] = {
+      locked: false,
+      reasons: new Set(),
+    };
+  }
 }
 
 /**

@@ -36,7 +36,7 @@ declare global {
     /** <schema> Minimum STR */
     minStr: Teriock.Fields.ModifiableNumber;
     /** <schema> Power Level */
-    powerLevel: string;
+    powerLevel: Teriock.Parameters.Equipment.EquipmentPowerLevel;
     /** <schema> Price */
     price: number;
     /** <schema> Range (ft) (if ranged) */
@@ -63,6 +63,7 @@ declare global {
       /** <special> Weight times quantity */
       total: number;
     };
+
     get parent(): TeriockEquipment;
   }
 }

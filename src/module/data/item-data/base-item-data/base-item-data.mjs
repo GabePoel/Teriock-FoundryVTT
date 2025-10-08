@@ -1,4 +1,4 @@
-import { mergeFreeze } from "../../../helpers/utils.mjs";
+import { docSort, mergeFreeze } from "../../../helpers/utils.mjs";
 import { ChildTypeModel } from "../../models/_module.mjs";
 
 const { fields } = foundry.data;
@@ -47,8 +47,8 @@ export default class TeriockBaseItemModel extends ChildTypeModel {
   /** @inheritDoc */
   get messageParts() {
     const parts = super.messageParts;
-    const fluencies = this.parent.fluencies;
-    const resources = this.parent.resources;
+    const fluencies = docSort(this.parent.fluencies);
+    const resources = docSort(this.parent.resources);
     if (fluencies.length > 0) {
       parts.associations.push({
         title: "Fluencies",
@@ -57,7 +57,7 @@ export default class TeriockBaseItemModel extends ChildTypeModel {
           return {
             id: f.id,
             img: f.img,
-            name: f.name,
+            name: f.system.nameString,
             type: f.type,
             uuid: f.uuid,
           };
@@ -72,7 +72,7 @@ export default class TeriockBaseItemModel extends ChildTypeModel {
           return {
             id: r.id,
             img: r.img,
-            name: r.name,
+            name: r.system.nameString,
             type: r.type,
             uuid: r.uuid,
           };

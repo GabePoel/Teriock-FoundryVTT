@@ -95,12 +95,6 @@ export default class TeriockBaseEffectModel extends ChildTypeModel {
    * @returns {boolean} True if the effect is suppressed, false otherwise.
    */
   get suppressed() {
-    if (
-      this.parent.parent?.documentName === "Item" &&
-      this.parent.parent.system.shouldSuppress(this.parent.id)
-    ) {
-      return true;
-    }
     return !!(
       this.parent.parent?.documentName === "Item" &&
       this.parent.parent?.system.disabled

@@ -17,3 +17,18 @@ export type ProtectionData = {
   /** Statuses */
   statuses: Set<Teriock.Parameters.Condition.ConditionKey>;
 };
+
+/**
+ * Protection Data Key
+ */
+export type ProtectionDataKey = keyof ProtectionData;
+
+/**
+ * Protection Data Value
+ */
+export type ProtectionDataValue =
+  | Teriock.Parameters.Ability.EffectTag
+  | Teriock.Parameters.Ability.Element
+  | Teriock.Parameters.Ability.PowerSource
+  | Teriock.Parameters.Condition.ConditionKey
+  | string;

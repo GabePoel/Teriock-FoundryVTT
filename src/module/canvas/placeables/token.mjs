@@ -1,3 +1,5 @@
+import { getIcon } from "../../helpers/path.mjs";
+
 const { Token } = foundry.canvas.placeables;
 
 /**
@@ -22,6 +24,33 @@ export default class TeriockToken extends Token {
       }
     }
     await super._draw(options);
+  }
+
+  /** @inheritDoc */
+  async _drawEffects() {
+    await super._drawEffects();
+    if (
+      this.document.hasStatusEffect("encumbered") &&
+      this.document?.actor.system.encumbranceLevel > 0
+    ) {
+      await this._drawEffect(getIcon("conditions", "Encumbered"));
+    }
+    let overlayImg;
+    if (
+      this.document.hasStatusEffect("down") ||
+      this.document.hasStatusEffect("unconscious")
+    ) {
+      overlayImg = "icons/svg/unconscious.svg";
+    }
+    if (this.document.hasStatusEffect("criticallyWounded")) {
+      overlayImg = "icons/svg/blood.svg";
+    }
+    if (this.document.hasStatusEffect("dead")) {
+      overlayImg = "icons/svg/skull.svg";
+    }
+    if (overlayImg) {
+      await this._drawOverlay(overlayImg);
+    }
   }
 
   /** @inheritDoc */

@@ -314,16 +314,13 @@ export default function registerUiHelpers() {
         data-img="${img}"
       >
         <div 
-          class="tcard-marker" 
-          style="${marker ? `background-color: ${marker}; width: 4px; min-width: 4px;` : ""}"
-        ></div>
-        <div 
           class="tcard-image ${usable ? "usable" : ""}"
           data-action="${action}" ${tooltipAttr}
           data-tooltip-direction="LEFT"
           data-tooltip-class="teriock"
           data-openable="true"
           data-shareable="true"
+          ${marker ? `style="border-color: ${marker};"` : ""}
         ><img src="${img}" alt="${title}" /></div>
         <div class="tcard-body">
           <div class="tcard-titles">

@@ -69,6 +69,14 @@ async function processSpecies(
   } else {
     creature = await foundry.utils.fromUuid(creatureEntry.uuid);
   }
+  const mechanics = creature.items.filter((i) => i.type === "mechanic");
+  if (mechanics.size > 0) {
+    const ids = [];
+    for (const mechanic of mechanics) {
+      ids.push(mechanic.id);
+    }
+    await creature.deleteEmbeddedDocuments("Item", ids);
+  }
   await creature.system.hardRefreshFromIndex();
   await creature.update({
     folder: creatureFolder.id,

@@ -24,6 +24,14 @@ export default class CommonTypeModel extends TypeDataModel {
   }
 
   /**
+   * The color that this should be displayed with.
+   * @returns {string|null}
+   */
+  get color() {
+    return null;
+  }
+
+  /**
    * Type-specific changes to the name string.
    * @returns {string}
    */

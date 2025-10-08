@@ -1,5 +1,10 @@
 import { TeriockImagePreviewer } from "../../../applications/api/_module.mjs";
-import { freeze, makeIcon } from "../../../helpers/utils.mjs";
+import {
+  abilitySort,
+  freeze,
+  makeIcon,
+  propertySort,
+} from "../../../helpers/utils.mjs";
 import { TextField } from "../../shared/fields/_module.mjs";
 import CommonTypeModel from "../common-type-model/common-type-model.mjs";
 
@@ -154,33 +159,38 @@ export default class ChildTypeModel extends CommonTypeModel {
       blocks: [],
       font: this.font,
       associations: [],
+      color: this.color,
     };
-    if (this.parent.getProperties().length > 0) {
+    const properties = propertySort(this.parent.getProperties());
+    if (properties.length > 0) {
       parts.associations.push({
         title: "Properties",
         icon: TERIOCK.options.document.property.icon,
-        cards: this.parent.getProperties().map((p) => {
+        cards: properties.map((p) => {
           return {
             id: p.id,
             img: p.img,
-            name: p.name,
+            name: p.system.nameString,
             type: p.documentName,
             uuid: p.uuid,
+            color: p.system.color,
           };
         }),
       });
     }
-    if (this.parent.getAbilities().length > 0) {
+    const abilities = abilitySort(this.parent.getAbilities());
+    if (abilities.length > 0) {
       parts.associations.push({
         title: "Abilities",
         icon: TERIOCK.options.document.ability.icon,
-        cards: this.parent.getAbilities().map((a) => {
+        cards: abilities.map((a) => {
           return {
             id: a.id,
             img: a.img,
-            name: a.name,
+            name: a.system.nameString,
             type: a.documentName,
             uuid: a.uuid,
+            color: a.system.color,
           };
         }),
       });

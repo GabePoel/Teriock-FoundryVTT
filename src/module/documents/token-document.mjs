@@ -62,7 +62,7 @@ export default class TeriockTokenDocument extends ChangeableDocumentMixin(
   _onRelatedUpdate(update = {}, operation = {}) {
     this.derivedDetectionModes();
     this.deriveVision();
-    this.deriveTint();
+    this.deriveLighting();
     super._onRelatedUpdate(update, operation);
     game.canvas.perception.initialize();
   }
@@ -127,17 +127,6 @@ export default class TeriockTokenDocument extends ChangeableDocumentMixin(
   }
 
   /**
-   * Change token tint if down or dead.
-   */
-  deriveTint() {
-    if (this.hasStatusEffect("down")) {
-      this.texture.tint = "#ff0000";
-    } else {
-      this.texture.tint = "#ffffff";
-    }
-  }
-
-  /**
    * Derive vision from the {@link TeriockActor}.
    * @returns {{visionMode: string, range: null|number}}
    */
@@ -155,20 +144,20 @@ export default class TeriockTokenDocument extends ChangeableDocumentMixin(
       ) {
         visionMode = "lightAmplification";
       }
-      if (this.actor?.statuses?.has("ethereal")) {
+      if (this.hasStatusEffect("ethereal")) {
         visionMode = "ethereal";
       }
       if (
-        this.actor?.statuses?.has("ethereal") &&
-        this.actor?.statuses?.has("invisible")
+        this.hasStatusEffect("ethereal") &&
+        this.hasStatusEffect("invisible")
       ) {
         visionMode = "invisibleEthereal";
       }
 
-      if (this.actor?.statuses?.has("down")) {
+      if (this.hasStatusEffect("down")) {
         visionMode = "down";
       }
-      if (this.actor?.statuses?.has("dead")) {
+      if (this.hasStatusEffect("dead")) {
         visionMode = "dead";
       }
 
@@ -179,7 +168,6 @@ export default class TeriockTokenDocument extends ChangeableDocumentMixin(
         this.actor?.system.senses.hearing,
       );
 
-      this.sight.visionMode = visionMode;
       if (!["down", "dead", "invisibleEthereal"].includes(visionMode)) {
         this.sight.color = "";
       }
@@ -212,15 +200,50 @@ export default class TeriockTokenDocument extends ChangeableDocumentMixin(
   }
 
   /**
+   * Perform all updates needed to synchronize this with {@link TeriockActor} data.
+   * @returns {Promise<void>}
+   */
+  async postActorUpdate() {
+    const updateData = {};
+    const tint = this.hasStatusEffect("down") ? "#ff0000" : "#ffffff";
+    if (this.texture.tint.css !== tint) {
+      updateData["texture.tint"] = tint;
+    }
+    const { visionMode, range } = this.deriveVision();
+    if (this.sight.range !== range) {
+      updateData["sight.range"] = range;
+    }
+    if (this.actor) {
+      const tokenLight = this.light.toObject();
+      const actorLight = foundry.utils.deepClone(this.actor.system.light);
+      const mergedLight = foundry.utils.mergeObject(tokenLight, actorLight);
+      if (!foundry.utils.objectsEqual(tokenLight, mergedLight)) {
+        updateData["light"] = mergedLight;
+      }
+      if (this.width !== this.actor.system.size.length) {
+        updateData["width"] = this.actor.system.size.length;
+      }
+      if (this.height !== this.actor.system.size.length) {
+        updateData["height"] = this.actor.system.size.length;
+      }
+    }
+    if (Object.keys(updateData).length > 0) {
+      await this.update(updateData);
+    }
+    if (visionMode !== this.sight.visionMode) {
+      await this.updateVisionMode(visionMode);
+    }
+  }
+
+  /**
    * Ensures that vision is correctly set when the token is first created.
    * Configures vision modes and detection ranges based on the {@link TeriockActor}'s senses.
    * @inheritdoc
    */
   prepareDerivedData() {
     super.prepareDerivedData();
+    this.deriveLighting();
     this.derivedDetectionModes();
     this.deriveVision();
-    this.deriveLighting();
-    this.deriveTint();
   }
 }

@@ -50,6 +50,14 @@ declare global {
       /** <schema> Whether {@link TeriockActor} still has reaction */
       hasReaction: boolean;
     };
+    /** <base> Information explaining conditions in place. */
+    conditionInformation: Record<
+      Teriock.Parameters.Condition.ConditionKey,
+      {
+        locked: boolean;
+        reasons: Set<string>;
+      }
+    >;
     /** <schema> Death Bag */
     deathBag: {
       /** <schema> How many stones to pull from the Death Bag */

@@ -95,6 +95,11 @@ export default class TeriockEquipmentModel extends EquipmentUnderstandingPart(
     return [...super.cardContextMenuEntries, ...contextMenus._entries(this)];
   }
 
+  /** @inheritDoc */
+  get color() {
+    return TERIOCK.options.equipment.powerLevel[this.powerLevel].color;
+  }
+
   /**
    * If this has a two-handed damage attack.
    * @returns {boolean}

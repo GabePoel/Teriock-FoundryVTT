@@ -51,7 +51,6 @@ export default class TeriockBaseActorSheet extends HackStatMixin(
       deattuneDoc: this._deattuneDoc,
       endCondition: this._endCondition,
       immune: this._immune,
-      openMechanics: this._openMechanics,
       openPrimaryAttacker: this._openPrimaryAttacker,
       openPrimaryBlocker: this._openPrimaryBlocker,
       quickUse: this._quickUse,
@@ -82,13 +81,6 @@ export default class TeriockBaseActorSheet extends HackStatMixin(
     },
     window: {
       icon: `fa-solid fa-${documentOptions.character.icon}`,
-      controls: [
-        {
-          icon: "fa-solid fa-gears",
-          label: "Mechanics",
-          action: "openMechanics",
-        },
-      ],
     },
   };
 
@@ -270,19 +262,6 @@ export default class TeriockBaseActorSheet extends HackStatMixin(
       panels: panels,
     };
     await this.actor.system.rollImmunity(options);
-  }
-
-  /**
-   * Opens the mechanics sheet.
-   * @returns {Promise<void>}
-   * @private
-   */
-  static async _openMechanics() {
-    const mechanics = this.document.itemTypes?.mechanic || [];
-    if (mechanics.length > 0) {
-      const mechanic = mechanics[0];
-      await mechanic.sheet.render(true);
-    }
   }
 
   /**
@@ -1064,39 +1043,8 @@ export default class TeriockBaseActorSheet extends HackStatMixin(
 
     if (tab === "conditions") {
       for (const condition of Object.keys(TERIOCK.index.conditions)) {
-        context.conditionProviders[condition] = new Set();
-        for (const e of this.document.effectTypes?.base || []) {
-          if (e.statuses.has(condition) && e.active) {
-            context.conditionProviders[condition].add(e.name);
-            if (e.name === "2nd Arm Hack") {
-              context.conditionProviders[condition].delete("1st Arm Hack");
-            }
-            if (e.name === "2nd Leg Hack") {
-              context.conditionProviders[condition].delete("1st Leg Hack");
-            }
-            if (e.name === "Heavily Encumbered") {
-              context.conditionProviders[condition].delete(
-                "Lightly Encumbered",
-              );
-            }
-          }
-        }
-        for (const c of this.document.conditions) {
-          if (
-            !c.id.includes(condition) &&
-            c.statuses.has(condition) &&
-            c.active
-          ) {
-            context.conditionProviders[condition].add(c.name);
-          }
-        }
-        for (const c of this.document.consequences) {
-          if (c.statuses.has(condition) && c.active) {
-            context.conditionProviders[condition].add(c.name);
-          }
-        }
         context.conditionProviders[condition] = Array.from(
-          context.conditionProviders[condition],
+          this.document.system.conditionInformation[condition].reasons,
         );
       }
     }

@@ -98,6 +98,11 @@ export default class TeriockPropertyModel extends HierarchyDataMixin(
   }
 
   /** @inheritDoc */
+  get color() {
+    return TERIOCK.options.ability.form[this.form].color;
+  }
+
+  /** @inheritDoc */
   get messageParts() {
     return { ...super.messageParts, ..._messageParts(this) };
   }

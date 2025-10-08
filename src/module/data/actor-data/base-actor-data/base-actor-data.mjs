@@ -1,3 +1,4 @@
+import { TeriockEffect } from "../../../documents/_module.mjs";
 import { copyItem } from "../../../helpers/fetch.mjs";
 import { freeze } from "../../../helpers/utils.mjs";
 import { CommonTypeModel } from "../../models/_module.mjs";
@@ -110,12 +111,17 @@ export default class TeriockBaseActorModel extends ActorRollableTakesPart(
         name: "Basic Abilities",
         pack: "essentials",
       },
-      {
-        name: "Actor Mechanics",
-        pack: "essentials",
-      },
+      //{
+      //  name: "Actor Mechanics",
+      //  pack: "essentials",
+      //},
     ];
     const items = [];
+    const defaultStatusIds = ["zeroHpMp", "criticalHpMp", "negativeHpMp"];
+    const defaultStatusEffects = await Promise.all(
+      defaultStatusIds.map((id) => TeriockEffect.fromStatusEffect(id)),
+    );
+    console.log(defaultStatusEffects);
     for (const item of defaultItems) {
       if (!this.parent.items.find((i) => i.name === item.name)) {
         items.push((await copyItem(item.name, item.pack)).toObject());
@@ -125,6 +131,7 @@ export default class TeriockBaseActorModel extends ActorRollableTakesPart(
     // Add Essential Items
     this.parent.updateSource({
       items: items,
+      //effects: defaultStatusEffects.map((e) => e.toObject()),
       prototypeToken: {
         ring: {
           enabled: true,
@@ -139,6 +146,22 @@ export default class TeriockBaseActorModel extends ActorRollableTakesPart(
    */
   getRollData() {
     return _getRollData(this);
+  }
+
+  /**
+   * Checks if there's a protection against something
+   * @param {ProtectionDataKey} key - Category of protection
+   * @param {ProtectionDataValue} value - Specific protection
+   * @returns {boolean} Whether or not there's a protection against the specified key and value
+   */
+  isProtected(key, value) {
+    let hasProtection = false;
+    for (const protectionData of Object.values(this.protections)) {
+      if (protectionData[key].has(value)) {
+        hasProtection = true;
+      }
+    }
+    return hasProtection;
   }
 
   /**

@@ -94,6 +94,11 @@ export default class TeriockAbilityModel extends HierarchyDataMixin(
     return _generateChanges(this);
   }
 
+  /** @inheritDoc */
+  get color() {
+    return TERIOCK.options.ability.form[this.form].color;
+  }
+
   /**
    * Gets this ability's feat save improvement text.
    * @returns {string}

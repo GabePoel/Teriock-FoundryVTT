@@ -20,42 +20,28 @@ export default function registerDocumentManagementHooks() {
         for (const ability of document.abilities) {
           await ability.system.expireSustainedConsequences();
         }
-        await document.actor?.postUpdate();
       }
     },
   );
 
   foundry.helpers.Hooks.on(
-    "updateActor",
-    async (document, changed, _options, userId) => {
-      if (isOwnerAndCurrentUser(document, userId)) {
-        const doCheckDown =
-          typeof changed.system?.hp?.value === "number" ||
-          typeof changed.system?.mp?.value === "number" ||
-          typeof changed.system?.money?.debt === "number";
-        await document.postUpdate({
-          checkDown: !doCheckDown,
-        });
+    "teriock.actorPostUpdate",
+    async (/** @param {TeriockActor} */ actor, userId) => {
+      if (isOwnerAndCurrentUser(actor, userId)) {
+        await actor.postUpdate();
       }
     },
   );
 
   foundry.helpers.Hooks.on("createItem", async (document, _options, userId) => {
     if (isOwnerAndCurrentUser(document, userId)) {
-      //if (document.type === "equipment") {
-      //  if (document.actor) {
-      //    await document.update({ "system.equipped": false });
-      //  }
-      //}
       document.actor?.buildEffectTypes();
-      await document.actor?.postUpdate();
     }
   });
 
   foundry.helpers.Hooks.on("deleteItem", async (document, _options, userId) => {
     if (isOwnerAndCurrentUser(document, userId)) {
       document.actor?.buildEffectTypes();
-      await document.actor?.postUpdate();
     }
   });
 
@@ -67,7 +53,6 @@ export default function registerDocumentManagementHooks() {
           await document.sup.sheet.render();
         }
         document.actor?.buildEffectTypes();
-        await document.actor?.postUpdate({ checkDown: true });
       }
     },
   );
@@ -83,7 +68,6 @@ export default function registerDocumentManagementHooks() {
           await document.sup.sheet.render();
         }
         document.actor?.buildEffectTypes();
-        await document.actor?.postUpdate({ checkDown: true });
       }
     },
   );
@@ -97,9 +81,6 @@ export default function registerDocumentManagementHooks() {
      * @returns {Promise<void>}
      */,
     async (document, _updateData, _options, userId) => {
-      if (isOwnerAndCurrentUser(document, userId)) {
-        await document.actor?.postUpdate();
-      }
       if (document.documentName === "ActiveEffect") {
         if (document.sup && document.sup.sheet.rendered) {
           await document.sup.sheet.render();

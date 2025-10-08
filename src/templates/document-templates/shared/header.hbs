@@ -1,5 +1,9 @@
 <div class="ab-header {{#if (eq item.type "equipment")}}{{#if system.shattered}}shattered{{/if}}{{/if}}">
-  <div class="ab-profile-img {{#if (not editable)}}timage{{/if}}" data-src="{{img}}">
+  <div
+    class="ab-profile-img {{#if (not editable)}}timage{{/if}}"
+    data-src="{{img}}"
+    {{#if (exists system.color)}}style="border-color: {{{system.color}}};"{{/if}}
+  >
     <img
       class="profile-img"
       src="{{img}}"

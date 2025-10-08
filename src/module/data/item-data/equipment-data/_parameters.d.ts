@@ -3,6 +3,9 @@ import type { TeriockMacro } from "../../../documents/_module.mjs";
 
 declare global {
   namespace Teriock.Parameters.Equipment {
+    /** Equipment power level */
+    export type EquipmentPowerLevel =
+      keyof typeof TERIOCK.options.equipment.powerLevel;
     /** Equipment classes */
     export type EquipmentClass = keyof typeof index.equipmentClasses;
 

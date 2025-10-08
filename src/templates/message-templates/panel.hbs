@@ -3,7 +3,10 @@
     class="teriock-panel-header"
     data-action="toggle-collapse"
   >
-    <div class="teriock-panel-image">
+    <div
+      class="teriock-panel-image"
+      {{#if (exists color)}}style="border-color: {{{color}}};"{{/if}}
+    >
       <img
         data-openable="true"
         src="{{{image}}}"
@@ -82,7 +85,10 @@
                 data-tooltip-direction="LEFT"
                 {{#if (exists tooltip)}}data-tooltip="{{{tooltip}}}" {{/if}}
               >
-                <div class="teriock-panel-association-row-image">
+                <div
+                  class="teriock-panel-association-row-image"
+                  {{#if (exists color)}}style="border-color: {{{color}}};"{{/if}}
+                >
                   <img src="{{{img}}}" alt="" class="{{#if rescale}}rescale{{/if}}" data-openable="true">
                 </div>
                 <div class="teriock-panel-association-card-name">{{{name}}}</div>

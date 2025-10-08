@@ -21,7 +21,7 @@
   --tcard-image-hide-width: 249px;
   --tcard-image-padding: 8px;
   --tcard-inner-border-width: 1px;
-  --tcard-outer-border-radius: 4px;
+  --tcard-outer-border-radius: 6px;
   --tcard-outer-border-width: 1px;
   --tcard-subtitle-font-size: 0.8em;
   --tcard-title-font-size: 1em;
@@ -306,7 +306,7 @@
       }
     }
 
-    &:hover {
+    &:hover:not(:has(.tcard-image:hover)) {
       background-color: rgba(255, 255, 255, 0.15);
 
       &.inactive {
@@ -333,18 +333,34 @@
     }
 
     .tcard-image {
-      height: var(--tcard-height);
-      margin-right: var(--tcard-image-padding);
-      min-width: var(--tcard-height);
-      opacity: var(--tcard-opacity);
-      overflow: hidden;
-      position: relative;
-      width: var(--tcard-height);
       @include mixins.warm-image-container-background;
-      @include mixins.image-right-border;
+      @include mixins.image-border;
+      border-radius: 3px;
+      //height: var(--tcard-height);
+      height: calc(var(--tcard-height) - 12px);
+      margin-left: 5px;
+      margin-right: var(--tcard-image-padding);
+      opacity: var(--tcard-opacity);
+      //min-width: var(--tcard-height);
+      overflow: hidden;
+      //@include mixins.image-right-border;
+      position: relative;
+      width: calc(var(--tcard-height) - 12px);
+      //width: var(--tcard-height);
 
       &.usable {
         cursor: pointer;
+        transition: 250ms;
+
+        &:hover {
+          border-color: var(--color-warm-2) !important;
+          box-shadow: 0 0 10px var(--color-warm-3);
+        }
+
+        &:active {
+          border-color: var(--color-warm-1) !important;
+          box-shadow: none;
+        }
       }
 
       img {

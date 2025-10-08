@@ -1,5 +1,10 @@
 import { cleanFeet } from "../../../../helpers/clean.mjs";
-import { refreshDocuments } from "../../../../helpers/utils.mjs";
+import {
+  abilitySort,
+  docSort,
+  propertySort,
+  refreshDocuments,
+} from "../../../../helpers/utils.mjs";
 import {
   ChatButtonSheetMixin,
   CommonSheetMixin,
@@ -98,54 +103,20 @@ export default class TeriockBaseItemSheet extends ChatButtonSheetMixin(
     if (!this.editable) {
       return;
     }
-
     this._bindStaticEvents();
     this._bindCleanInputs();
   }
 
   /** @inheritDoc */
   async _prepareContext(options) {
-    const abilityFormOrder = Object.keys(TERIOCK.options.ability.form || {});
     this.item.buildEffectTypes();
-    const abilities = this.item.abilities.sort((a, b) => {
-      const typeA = a.system?.form || "";
-      const typeB = b.system?.form || "";
-      const indexA = abilityFormOrder.indexOf(typeA);
-      const indexB = abilityFormOrder.indexOf(typeB);
-      if (indexA !== indexB) {
-        return indexA - indexB;
-      }
-      return (a.name || "").localeCompare(b.name || "");
-    });
-
-    const propertyFormOrder = Object.keys(TERIOCK.options.ability.form || {});
-    const properties = this.item.properties.sort((a, b) => {
-      const typeA = a.system?.form || "";
-      const typeB = b.system?.form || "";
-      const indexA = propertyFormOrder.indexOf(typeA);
-      const indexB = propertyFormOrder.indexOf(typeB);
-      if (indexA !== indexB) {
-        return indexA - indexB;
-      }
-      return (a.name || "").localeCompare(b.name || "");
-    });
-
-    const fluencies = this.item.fluencies.sort((a, b) =>
-      (a.name || "").localeCompare(b.name || ""),
-    );
-
-    const resources = this.item.resources.sort((a, b) =>
-      (a.name || "").localeCompare(b.name || ""),
-    );
-
     const context = await super._prepareContext(options);
     context.item = this.item;
-    context.properties = properties;
-    context.abilities = abilities;
-    context.fluencies = fluencies;
-    context.resources = resources;
+    context.properties = propertySort(this.document.properties);
+    context.abilities = abilitySort(this.document.abilities);
+    context.fluencies = docSort(this.document.fluencies);
+    context.resources = docSort(this.document.resources);
     context.baseEffects = this.document.effectTypes?.base || [];
-
     return context;
   }
 }

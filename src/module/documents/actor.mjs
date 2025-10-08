@@ -1,7 +1,7 @@
 import { TeriockRoll } from "../dice/_module.mjs";
 import { copyItem } from "../helpers/fetch.mjs";
 import { toCamelCase } from "../helpers/string.mjs";
-import { pureUuid } from "../helpers/utils.mjs";
+import { pureUuid, selectUser } from "../helpers/utils.mjs";
 import TeriockChatMessage from "./chat-message.mjs";
 import { CommonDocumentMixin, ParentDocumentMixin } from "./mixins/_module.mjs";
 
@@ -266,7 +266,9 @@ export default class TeriockActor extends ParentDocumentMixin(
    */
   *allApplicableEffects() {
     for (const effect of super.allApplicableEffects()) {
+      //if (!effect.getFlag("teriock", "notApplicable")) {
       yield effect;
+      //}
     }
   }
 
@@ -436,7 +438,12 @@ export default class TeriockActor extends ParentDocumentMixin(
   prepareData() {
     super.prepareData();
     this.prepareSpecialData();
-    this.prepareMechanicalDocuments();
+    this.prepareVirtualEffects();
+    foundry.helpers.Hooks.callAll(
+      `teriock.actorPostUpdate`,
+      this,
+      selectUser(this).id,
+    );
   }
 
   /** @inheritDoc */
@@ -463,15 +470,6 @@ export default class TeriockActor extends ParentDocumentMixin(
     delete this._embeddedPreparation;
   }
 
-  /**
-   * Prepare all embedded {@link TeriockMechanicSheet} instances which within this primary {@link TeriockActor}.
-   */
-  prepareMechanicalDocuments() {
-    for (const mechanic of this.itemTypes?.mechanic || []) {
-      mechanic.prepareData();
-    }
-  }
-
   /** @inheritDoc */
   prepareSpecialData() {
     this.specialEffects = /** @type {TeriockEffect[]} */ Array.from(
@@ -481,6 +479,194 @@ export default class TeriockActor extends ParentDocumentMixin(
       i.prepareSpecialData();
     });
     super.prepareSpecialData();
+  }
+
+  /**
+   * Prepare condition information now that all virtual statuses have been applied.
+   */
+  prepareVirtualConditionInformation() {
+    for (const e of this.appliedEffects) {
+      for (const s of e.statuses) {
+        this.system.conditionInformation[s]?.reasons.add(e.name);
+      }
+    }
+    if (this.system.conditionInformation.hacked.reasons.has("2nd Arm Hack")) {
+      this.system.conditionInformation.hacked.reasons.delete("1st Arm Hack");
+    }
+    if (this.system.conditionInformation.hacked.reasons.has("2nd Leg Hack")) {
+      this.system.conditionInformation.hacked.reasons.delete("1st Leg Hack");
+    }
+    for (const info of Object.values(this.system.conditionInformation)) {
+      if (info.reasons.size > 0) {
+        info.locked = true;
+      }
+    }
+  }
+
+  /**
+   * Add statuses and explanations for "virtual effects". These are things that would otherwise be represented with
+   * {@link TeriockEffect}s, but that we want to be able to add synchronously during the update cycle. Any of these
+   * effects that should be shown on the token need to be manually added to {@link TeriockToken._drawEffects} as well.
+   */
+  prepareVirtualEffects() {
+    this.prepareVirtualEncumbrance();
+    this.prepareVirtualWounds();
+    this.prepareVirtualMovement();
+    this.prepareVirtualConditionInformation();
+  }
+
+  /**
+   * Add statuses and explanations for being encumbered.
+   */
+  prepareVirtualEncumbrance() {
+    if (
+      this.system.encumbranceLevel > 0 &&
+      !this.system.isProtected("statuses", "encumbered")
+    ) {
+      this.statuses.add("encumbered");
+      if (this.system.encumbranceLevel === 1) {
+        this.system.conditionInformation.encumbered.reasons.add(
+          "Lightly Encumbered",
+        );
+        this.system.movementSpeed.value = Math.max(
+          this.system.movementSpeed.value - 10,
+          0,
+        );
+      } else if (this.system.encumbranceLevel === 2) {
+        this.system.conditionInformation.encumbered.reasons.add(
+          "Heavily Encumbered",
+        );
+        this.system.conditionInformation.slowed.reasons.add(
+          "Heavily Encumbered",
+        );
+        this.statuses.add("slowed");
+      } else if (this.system.encumbranceLevel === 3) {
+        this.system.conditionInformation.encumbered.reasons.add(
+          "Cannot Carry More",
+        );
+        this.statuses.add("slowed");
+      }
+    }
+  }
+
+  /**
+   * Apply the effects of being slowed if applicable.
+   */
+  prepareVirtualMovement() {
+    if (this.statuses.has("slowed")) {
+      for (const [type, value] of Object.entries(
+        this.system.speedAdjustments,
+      )) {
+        this.system.speedAdjustments[type] = Math.max(value - 1, 0);
+      }
+    }
+  }
+
+  /**
+   * Add statuses and explanations for being wounded.
+   */
+  prepareVirtualWounds() {
+    // Check what states are triggered in normal circumstances
+    const hpUncn = this.system.hp.value < 1;
+    const hpCrit =
+      this.system.hp.value ===
+      (this.system.hp.min < 0 ? this.system.hp.min + 1 : 0);
+    const hpDead = this.system.hp.value === this.system.hp.min;
+    const mpUncn = this.system.mp.value < 1;
+    const mpCrit =
+      this.system.mp.value ===
+      (this.system.mp.min < 0 ? this.system.mp.min + 1 : 0);
+    const mpDead = this.system.mp.value === this.system.mp.min;
+
+    // Merge HP and MP
+    const statDead = hpDead || mpDead;
+    const statCrit = hpCrit || mpCrit;
+
+    // Check what states are at least partially passively protected against
+    const protUncn = this.system.isProtected("statuses", "unconscious");
+    const protCrit = this.system.isProtected("statuses", "criticallyWounded");
+    const protDead = this.system.isProtected("statuses", "dead");
+    const protDown = this.system.isProtected("statuses", "down");
+
+    // What wounds that supersede other wounds would apply automatically
+    const autoDead = statDead && !protDead && !protDown;
+    const autoCrit = statCrit && !protCrit && !protDown && !autoDead;
+
+    // Factoring in protections and overriding states, which states would automatically trigger
+    if (hpDead && !protDead && !protDown) {
+      this.system.conditionInformation.dead.reasons.add(
+        "Negative Half Maximum HP",
+      );
+      this.system.conditionInformation.down.reasons.add(
+        "Negative Half Maximum HP",
+      );
+      this.statuses.add("dead");
+      this.statuses.add("down");
+    }
+    if (mpDead && !protDead && !protDown) {
+      this.system.conditionInformation.dead.reasons.add(
+        "Negative Half Maximum MP",
+      );
+      this.system.conditionInformation.down.reasons.add(
+        "Negative Half Maximum MP",
+      );
+      this.statuses.add("dead");
+      this.statuses.add("down");
+    }
+    if (hpCrit && !protCrit && !protDown && !autoDead) {
+      this.system.conditionInformation.criticallyWounded.reasons.add(
+        "Critically Negative HP",
+      );
+      this.system.conditionInformation.down.reasons.add(
+        "Critically Negative HP",
+      );
+      this.statuses.add("criticallyWounded");
+      this.statuses.add("down");
+    }
+    if (mpCrit && !protCrit && !protDown && !autoDead) {
+      this.system.conditionInformation.criticallyWounded.reasons.add(
+        "Critically Negative MP",
+      );
+      this.system.conditionInformation.down.reasons.add(
+        "Critically Negative MP",
+      );
+      this.statuses.add("criticallyWounded");
+      this.statuses.add("down");
+    }
+    if (hpUncn && !protUncn && !autoCrit && !autoDead && !protDown) {
+      if (this.system.hp.value === 0) {
+        this.system.conditionInformation.unconscious.reasons.add("Zero HP");
+        this.system.conditionInformation.down.reasons.add("Zero HP");
+        this.statuses.add("unconscious");
+        this.statuses.add("down");
+      } else {
+        this.system.conditionInformation.unconscious.reasons.add("Negative HP");
+        this.system.conditionInformation.down.reasons.add("Negative HP");
+        this.statuses.add("unconscious");
+        this.statuses.add("down");
+      }
+    }
+    if (mpUncn && !protUncn && !autoCrit && !autoDead && !protDown) {
+      if (this.system.mp.value === 0) {
+        this.system.conditionInformation.unconscious.reasons.add("Zero MP");
+        this.system.conditionInformation.down.reasons.add("Zero MP");
+        this.statuses.add("unconscious");
+        this.statuses.add("down");
+      } else {
+        this.system.conditionInformation.unconscious.reasons.add("Negative MP");
+        this.system.conditionInformation.down.reasons.add("Negative MP");
+        this.statuses.add("unconscious");
+        this.statuses.add("down");
+      }
+    }
+
+    if (this.statuses.has("dead")) {
+      this.statuses.delete("unconscious");
+      this.statuses.delete("criticallyWounded");
+    }
+    if (this.statuses.has("criticallyWounded")) {
+      this.statuses.delete("unconscious");
+    }
   }
 
   /**

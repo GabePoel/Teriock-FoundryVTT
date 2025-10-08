@@ -499,13 +499,21 @@ export default class TeriockEffect extends ChildDocumentMixin(
     await this.update({ disabled: false });
   }
 
-  /** @inheritDoc */
+  /**
+   * @inheritDoc
+   * @returns {TeriockAbility[]}
+   */
   getAbilities() {
+    //noinspection JSValidateTypes
     return this.subs.filter((s) => s.type === "ability");
   }
 
-  /** @inheritDoc */
+  /**
+   * @inheritDoc
+   * @returns {TeriockProperty[]}
+   */
   getProperties() {
+    //noinspection JSValidateTypes
     return this.subs.filter((s) => s.type === "property");
   }
 

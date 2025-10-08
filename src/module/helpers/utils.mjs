@@ -93,6 +93,44 @@ export function docSort(docs, options = {}) {
 }
 
 /**
+ * Sort abilities.
+ * @param {TeriockAbility[]} abilities
+ * @returns {TeriockAbility[]}
+ */
+export function abilitySort(abilities) {
+  const abilityFormOrder = Object.keys(TERIOCK.options.ability.form || {});
+  return abilities.sort((a, b) => {
+    const typeA = a.system?.form || "";
+    const typeB = b.system?.form || "";
+    const indexA = abilityFormOrder.indexOf(typeA);
+    const indexB = abilityFormOrder.indexOf(typeB);
+    if (indexA !== indexB) {
+      return indexA - indexB;
+    }
+    return (a.name || "").localeCompare(b.name || "");
+  });
+}
+
+/**
+ * Sort properties.
+ * @param {TeriockProperty[]} properties
+ * @returns {TeriockProperty[]}
+ */
+export function propertySort(properties) {
+  const propertyFormOrder = Object.keys(TERIOCK.options.ability.form || {});
+  return properties.sort((a, b) => {
+    const typeA = a.system?.form || "";
+    const typeB = b.system?.form || "";
+    const indexA = propertyFormOrder.indexOf(typeA);
+    const indexB = propertyFormOrder.indexOf(typeB);
+    if (indexA !== indexB) {
+      return indexA - indexB;
+    }
+    return (a.name || "").localeCompare(b.name || "");
+  });
+}
+
+/**
  * Remove indentation from code block.
  * @param {string} str
  * @returns {string}

@@ -25,6 +25,7 @@ export default class TeriockBaseMessageModel extends TypeDataModel {
     });
     schema.panels = new fields.ArrayField(
       new fields.SchemaField({
+        color: new fields.StringField({ nullable: true }),
         image: new fields.StringField({ nullable: true }),
         name: new fields.StringField({ nullable: true }),
         bars: new fields.ArrayField(
