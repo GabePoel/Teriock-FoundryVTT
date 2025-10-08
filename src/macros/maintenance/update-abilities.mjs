@@ -25,6 +25,7 @@ async function processAbility(abilityName, _index, _total) {
   if (!abilityEffect) {
     abilityEffect = await tm.create.ability(abilityItem, abilityName, {
       notify: false,
+      fromWiki: true,
     });
   } else {
     await abilityEffect.system.wikiPull({ notify: false });

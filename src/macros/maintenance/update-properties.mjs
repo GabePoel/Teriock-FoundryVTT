@@ -24,6 +24,7 @@ async function processProperty(propertyName, _index, _total) {
   if (!propertyEffect) {
     propertyEffect = await tm.create.property(propertyItem, propertyName, {
       notify: false,
+      fromWiki: true,
     });
   } else {
     await propertyEffect.system.wikiPull({ notify: false });

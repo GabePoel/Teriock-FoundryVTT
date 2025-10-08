@@ -45,6 +45,7 @@ export default class TeriockCharacterModel extends TeriockBaseActorModel {
     const species = this.parent.species.find(
       (s) => s.name === this.parent.name,
     );
+    await species.system.hardRefreshFromIndex();
     await super.hardRefreshFromIndex();
     const bodyPartNames = new Set();
     const equipmentNames = new Set();
@@ -67,6 +68,12 @@ export default class TeriockCharacterModel extends TeriockBaseActorModel {
         .filter((b) => !bodyPartNames.has(b.name))
         .map((b) => b.id),
     ];
+    for (const b of this.parent.bodyParts) {
+      await b.system.hardRefreshFromIndex();
+    }
+    for (const e of this.parent.equipment) {
+      await e.system.hardRefreshFromIndex();
+    }
     await this.parent.deleteEmbeddedDocuments("Item", toDelete);
     await this.parent.update({
       img: species.img,

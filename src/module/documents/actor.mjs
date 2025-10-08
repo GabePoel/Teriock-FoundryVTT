@@ -194,6 +194,12 @@ export default class TeriockActor extends ParentDocumentMixin(
     return Array.from(this.allApplicableEffects());
   }
 
+  /** @inheritDoc */
+  _onUpdate(changed, options, userId) {
+    console.log(changed, options, userId);
+    super._onUpdate(changed, options, userId);
+  }
+
   /**
    * @inheritDoc
    * @param {ActorData} data

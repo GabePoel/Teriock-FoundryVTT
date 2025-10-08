@@ -1,4 +1,3 @@
-import { TeriockEffect } from "../../../documents/_module.mjs";
 import { copyItem } from "../../../helpers/fetch.mjs";
 import { freeze } from "../../../helpers/utils.mjs";
 import { CommonTypeModel } from "../../models/_module.mjs";
@@ -30,6 +29,7 @@ export default class TeriockBaseActorModel extends ActorRollableTakesPart(
     ActorOneOffsPart(ActorHacksPart(ActorGenericRollsPart(CommonTypeModel))),
   ),
 ) {
+  //noinspection JSValidateTypes
   /**
    * Metadata for this actor.
    * @type {Readonly<Teriock.Documents.ActorModelMetadata>}
@@ -100,6 +100,23 @@ export default class TeriockBaseActorModel extends ActorRollableTakesPart(
   }
 
   /** @inheritDoc */
+  _onUpdate(changed, options, userId) {
+    super._onUpdate(changed, options, userId);
+    if (options.teriock.mpChange !== 0) {
+      const color = options.teriock.mpChange > 0 ? "#99C1F1" : "#1A5FB4";
+      this.animateStatChangeEffect(options.teriock.mpChange, color).then();
+    }
+    if (options.teriock.hpChange !== 0) {
+      const color = options.teriock.hpChange > 0 ? "#F66151" : "#A51D2D";
+      this.animateStatChangeEffect(options.teriock.hpChange, color).then();
+    }
+    if (options.teriock.witherChange !== 0) {
+      const color = this.teriock.witherChange > 0 ? "#241F31" : "#5E5C64";
+      this.animateStatChangeEffect(options.teriock.witherChange, color).then();
+    }
+  }
+
+  /** @inheritDoc */
   async _preCreate(data, options, user) {
     if ((await super._preCreate(data, options, user)) === false) {
       return false;
@@ -111,17 +128,8 @@ export default class TeriockBaseActorModel extends ActorRollableTakesPart(
         name: "Basic Abilities",
         pack: "essentials",
       },
-      //{
-      //  name: "Actor Mechanics",
-      //  pack: "essentials",
-      //},
     ];
     const items = [];
-    const defaultStatusIds = ["zeroHpMp", "criticalHpMp", "negativeHpMp"];
-    const defaultStatusEffects = await Promise.all(
-      defaultStatusIds.map((id) => TeriockEffect.fromStatusEffect(id)),
-    );
-    console.log(defaultStatusEffects);
     for (const item of defaultItems) {
       if (!this.parent.items.find((i) => i.name === item.name)) {
         items.push((await copyItem(item.name, item.pack)).toObject());
@@ -131,12 +139,68 @@ export default class TeriockBaseActorModel extends ActorRollableTakesPart(
     // Add Essential Items
     this.parent.updateSource({
       items: items,
-      //effects: defaultStatusEffects.map((e) => e.toObject()),
       prototypeToken: {
         ring: {
           enabled: true,
         },
       },
+    });
+  }
+
+  /** @inheritDoc */
+  async _preUpdate(changes, options, user) {
+    if ((await super._preUpdate(changes, options, user)) === false) {
+      return false;
+    }
+    options.teriock ??= {};
+    const newHp = foundry.utils.mergeObject(
+      foundry.utils.deepClone(this.hp),
+      foundry.utils.getProperty(changes, "system.hp") || {},
+    );
+    const newMp = foundry.utils.mergeObject(
+      foundry.utils.deepClone(this.mp),
+      foundry.utils.getProperty(changes, "system.mp") || {},
+    );
+    const newWither = foundry.utils.mergeObject(
+      foundry.utils.deepClone(this.wither),
+      foundry.utils.getProperty(changes, "system.wither") || {},
+    );
+    const realHpChange = newHp.value - this.hp.value;
+    const tempHpChange = newHp.temp - this.hp.temp;
+    const realMpChange = newMp.value - this.mp.value;
+    const tempMpChange = newMp.temp - this.mp.temp;
+    Object.assign(options.teriock, {
+      hpChange: realHpChange + tempHpChange,
+      mpChange: realMpChange + tempMpChange,
+      witherChange: newWither.value - this.wither.value,
+    });
+  }
+
+  /**
+   * Display an animated state change on active tokens.
+   * @param {number} diff
+   * @param {string} color
+   * @returns {Promise<void>}
+   */
+  async animateStatChangeEffect(diff, color = "white") {
+    if (!diff || !canvas.scene) {
+      return;
+    }
+    const tokens = /** @type {TeriockToken[]} */ this.parent.getActiveTokens();
+    const displayedDiff = diff.signedString();
+    const displayArgs = {
+      fill: color,
+      fontSize: 32,
+      stroke: 0x000000,
+      strokeThickness: 4,
+      direction: diff > 0 ? 2 : 1,
+    };
+    tokens.forEach((token) => {
+      if (!token.visible || token.document.isSecret) {
+        return;
+      }
+      const scrollingTextArgs = [token.center, displayedDiff, displayArgs];
+      canvas.interface.createScrollingText(...scrollingTextArgs);
     });
   }
 
