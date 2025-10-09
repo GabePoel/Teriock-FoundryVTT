@@ -196,7 +196,6 @@ export default class TeriockActor extends ParentDocumentMixin(
 
   /** @inheritDoc */
   _onUpdate(changed, options, userId) {
-    console.log(changed, options, userId);
     super._onUpdate(changed, options, userId);
   }
 
@@ -272,9 +271,7 @@ export default class TeriockActor extends ParentDocumentMixin(
    */
   *allApplicableEffects() {
     for (const effect of super.allApplicableEffects()) {
-      //if (!effect.getFlag("teriock", "notApplicable")) {
       yield effect;
-      //}
     }
   }
 

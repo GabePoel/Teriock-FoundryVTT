@@ -1,8 +1,5 @@
 import { TeriockActor } from "../../../../../documents/_module.mjs";
-import {
-  deriveModifiableDeterministic,
-  deriveModifiableNumber,
-} from "../../../../shared/fields/modifiable.mjs";
+import { deriveModifiableDeterministic } from "../../../../shared/fields/modifiable.mjs";
 
 /**
  * Prepares attribute saves and movement-related derived data.
@@ -33,7 +30,7 @@ export function _prepDerivedAttributes(actorData) {
         : 0;
     attr.saveBonus = attr.score.value * 2 + bonus;
   });
-  deriveModifiableNumber(actorData.size.number, {
+  deriveModifiableDeterministic(actorData.size.number, {
     min: 0,
     max: 30,
   });

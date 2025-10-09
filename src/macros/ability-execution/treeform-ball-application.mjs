@@ -5,7 +5,7 @@ if (!actor.effectKeys.consequence.has("treeformBallEffect")) {
       clone: true,
     });
     const created = await actor.createEmbeddedDocuments("Item", [treeSpecies]);
-    const createdTree = created[0];
+    const createdTree = /** @type {TeriockSpecies} */ created[0];
     await createdTree.update({
       "system.size.value": actor.system.size.number.value,
       "system.applyMp": false,

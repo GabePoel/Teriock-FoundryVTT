@@ -230,7 +230,10 @@ export default class TeriockTokenDocument extends ChangeableDocumentMixin(
     if (Object.keys(updateData).length > 0) {
       await this.update(updateData);
     }
-    if (visionMode !== this.sight.visionMode) {
+    if (
+      visionMode !== this.sight.visionMode &&
+      game.settings.get("teriock", "automaticallyChangeVisionModes")
+    ) {
       await this.updateVisionMode(visionMode);
     }
   }

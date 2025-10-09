@@ -111,7 +111,7 @@ export default class TeriockBaseActorModel extends ActorRollableTakesPart(
       this.animateStatChangeEffect(options.teriock.hpChange, color).then();
     }
     if (options.teriock.witherChange !== 0) {
-      const color = this.teriock.witherChange > 0 ? "#241F31" : "#5E5C64";
+      const color = options.teriock.witherChange > 0 ? "#241F31" : "#5E5C64";
       this.animateStatChangeEffect(options.teriock.witherChange, color).then();
     }
   }

@@ -8,7 +8,7 @@ if (data.amount >= actor.system.hp.value + actor.system.hp.temp) {
     for (const c of treeformConsequences) {
       await c.system.expire();
     }
-    data.amount = 0;
+    data.cancel = true;
     await actor.system.takeDamage(carry);
   }
 }

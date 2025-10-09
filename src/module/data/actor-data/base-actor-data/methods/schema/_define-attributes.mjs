@@ -1,7 +1,4 @@
-import {
-  modifiableFormula,
-  modifiableNumber,
-} from "../../../../shared/fields/modifiable.mjs";
+import { modifiableFormula } from "../../../../shared/fields/modifiable.mjs";
 
 const { fields } = foundry.data;
 
@@ -57,11 +54,12 @@ export function _defineAttributes(schema) {
     }),
   });
   schema.size = new fields.SchemaField({
-    number: modifiableNumber({
-      initial: 3,
+    number: modifiableFormula({
+      initial: "3",
       label: "Size",
       min: 0,
       max: 30,
+      deterministic: true,
     }),
   });
   schema.attributes = new fields.SchemaField({

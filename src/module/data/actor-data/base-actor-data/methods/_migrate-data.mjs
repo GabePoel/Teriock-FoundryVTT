@@ -44,5 +44,16 @@ export function _migrateData(data) {
   ) {
     foundry.utils.setProperty(data, "wielding.blocker", null);
   }
+  if (
+    foundry.utils.getType(
+      foundry.utils.getProperty(data, "size.number.saved"),
+    ) === "number"
+  ) {
+    foundry.utils.setProperty(
+      data,
+      "size.number.saved",
+      data.size.number.saved.toString(),
+    );
+  }
   return data;
 }

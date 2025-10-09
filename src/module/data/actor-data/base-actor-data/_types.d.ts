@@ -250,7 +250,7 @@ declare global {
     /** <schema> Size */
     size: {
       /** <schema> Numbered size */
-      number: Teriock.Fields.ModifiableNumber;
+      number: Teriock.Fields.ModifiableDeterministic;
       /** <derived> Named size category */
       category: string;
       /** <derived> */

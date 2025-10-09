@@ -11,6 +11,14 @@ export function registerSettings() {
       scope: "user",
       type: Boolean,
     },
+    automaticallyChangeVisionModes: {
+      config: true,
+      default: true,
+      hint: "If enabled, vision modes will automatically be changed based on abilities and down state.",
+      name: "Automatically Change Vision Modes",
+      scope: "user",
+      type: Boolean,
+    },
     defaultPanelCollapseState: {
       config: true,
       default: "auto",
