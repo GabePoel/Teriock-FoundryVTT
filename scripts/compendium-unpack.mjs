@@ -81,6 +81,12 @@ function cleanEntry(doc) {
   if (doc.author) {
     doc.author = BUILDER_NAME;
   }
+  if (doc.showIcon) {
+    delete doc.showIcon;
+  }
+  if (!doc.folder) {
+    delete doc.folder;
+  }
   if (doc._stats) {
     delete doc._stats.createdTime;
     delete doc._stats.modifiedTime;
@@ -89,6 +95,7 @@ function cleanEntry(doc) {
     delete doc._stats.exportSource;
     if (doc._stats.coreVersion) {
       doc._stats.coreVersion = doc._stats.coreVersion.split(".")[0];
+      doc._stats.coreVersion = "13";
     }
     doc._stats.lastModifiedBy = BUILDER_NAME;
   }
