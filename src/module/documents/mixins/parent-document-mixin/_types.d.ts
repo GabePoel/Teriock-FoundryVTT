@@ -6,7 +6,6 @@ import type {
   TeriockConsequence,
   TeriockEquipment,
   TeriockFluency,
-  TeriockMechanic,
   TeriockPower,
   TeriockProperty,
   TeriockRank,
@@ -30,7 +29,6 @@ declare global {
       equipment?: TeriockEquipment[];
       power?: TeriockPower[];
       rank?: TeriockRank[];
-      mechanic?: TeriockMechanic[];
       species?: TeriockSpecies[];
       body?: TeriockBody[];
     };

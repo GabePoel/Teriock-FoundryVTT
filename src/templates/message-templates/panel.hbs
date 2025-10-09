@@ -1,6 +1,6 @@
 <div class="teriock-panel collapsable">
   <header
-    class="teriock-panel-header"
+    class="teriock-panel-header {{#if (exists classes)}}{{{classes}}}{{/if}}"
     data-action="toggle-collapse"
   >
     <div
@@ -44,7 +44,7 @@
     {{/if}}
     {{#each blocks}}
       {{#if (exists text)}}
-        <div class="teriock-panel-block">
+        <div class="teriock-panel-block {{#if (exists classes)}}{{{classes}}}{{/if}}">
           <div class="teriock-panel-block-title">
             {{{title}}}
           </div>

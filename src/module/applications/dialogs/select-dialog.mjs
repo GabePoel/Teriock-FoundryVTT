@@ -1,3 +1,5 @@
+//noinspection JSUnusedGlobalSymbols
+
 import { getAbility, getItem, getProperty } from "../../helpers/fetch.mjs";
 import { classPanel, tradecraftPanel } from "../../helpers/html.mjs";
 import { getIcon } from "../../helpers/path.mjs";
@@ -165,16 +167,19 @@ export async function selectConditionDialog() {
  */
 export async function selectPropertyDialog() {
   let choices;
+  let tooltipAsync = true;
   if (game.settings.get("teriock", "quickIndexProperties")) {
     choices = game.teriock.packs.properties().index.contents;
   } else {
     choices = await Promise.all(
       Object.values(TERIOCK.index.properties).map((name) => getProperty(name)),
     );
+    tooltipAsync = false;
   }
   const chosen = await selectDocumentDialog(choices, {
     hint: "Please select a property.",
     title: "Select Property",
+    tooltipAsync: tooltipAsync,
   });
   if (chosen) {
     return toCamelCase(chosen.name);
@@ -216,16 +221,19 @@ export async function selectTradecraftDialog() {
  */
 export async function selectAbilityDialog() {
   let choices;
+  let tooltipAsync = true;
   if (game.settings.get("teriock", "quickIndexAbilities")) {
     choices = game.teriock.packs.abilities().index.contents;
   } else {
     choices = await Promise.all(
       Object.values(TERIOCK.index.abilities).map((name) => getAbility(name)),
     );
+    tooltipAsync = false;
   }
   const chosen = await selectDocumentDialog(choices, {
     hint: "Please select an ability.",
     title: "Select Ability",
+    tooltipAsync: tooltipAsync,
   });
   if (chosen) {
     return toCamelCase(chosen.name);
@@ -240,6 +248,7 @@ export async function selectAbilityDialog() {
  */
 export async function selectEquipmentTypeDialog() {
   let choices;
+  let tooltipAsync = true;
   if (game.settings.get("teriock", "quickIndexEquipment")) {
     const equipmentPack = game.teriock.packs.equipment();
     choices = equipmentPack.index.contents;
@@ -249,10 +258,12 @@ export async function selectEquipmentTypeDialog() {
         getItem(name, "equipment"),
       ),
     );
+    tooltipAsync = false;
   }
   let chosen = await selectDocumentDialog(choices, {
     hint: "Please select an equipment type",
     title: "Select Equipment Type",
+    tooltipAsync: tooltipAsync,
   });
   if (chosen) {
     chosen = await foundry.utils.fromUuid(chosen.uuid);

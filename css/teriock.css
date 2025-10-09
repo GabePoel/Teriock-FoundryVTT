@@ -19,16 +19,16 @@
   --color-panel-associations-background-active: rgba(255, 255, 255, 0.1);
   --color-panel-associations-background-hover: rgba(255, 255, 255, 0.05);
   --color-panel-associations-border: color-mix(
-    in srgb,
-    var(--color-panel-edge),
-    transparent 75%
+      in srgb,
+      var(--color-panel-edge),
+      transparent 75%
   );
   --color-panel-associations-shadow-color: transparent;
   --color-panel-background: transparent;
   --color-panel-divider: color-mix(
-    in srgb,
-    var(--color-panel-edge),
-    transparent 50%
+      in srgb,
+      var(--color-panel-edge),
+      transparent 50%
   );
   --color-panel-edge: var(--color-text-subtle);
 }
@@ -488,6 +488,23 @@ img.rescale {
   max-width: 200px;
 }
 
+.tooltip-loading {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+.tooltip-loading .tooltip-loading-text,
+.tooltip-loading .tooltip-loading-spinner {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.teriock-rich-tooltip:not(:has(.tooltip-loading)) {
+  max-height: calc(100% - 12px);
+  max-width: 320px;
+}
+
 .teriock {
   @import url("https://fonts.googleapis.com/css2?family=Bonheur+Royale&family=Cinzel:wght@400..900&family=Great+Vibes&family=Quintessential&family=Tagesschrift&display=swap");
 }
@@ -533,7 +550,15 @@ img.rescale {
   height: 28px;
   justify-content: center;
   margin-left: 10px;
-  margin-top: 4px;
+  margin-top: 0;
+  width: 20px;
+}
+.teriock .doc-select .doc-select-row .doc-checkbox-container input {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
 }
 .teriock .doc-select .doc-select-row .doc-checkbox-container * {
   margin: 0;
@@ -3352,11 +3377,6 @@ dl:not(:last-child) {
 
 dl:not(:first-child) {
   margin-top: 0.5em;
-}
-
-.teriock-rich-tooltip {
-  max-height: calc(100% - 12px);
-  width: 320px;
 }
 
 .force-hidden {

@@ -5,7 +5,7 @@ import {
   selectPropertyDialog,
   selectTradecraftDialog,
 } from "../../../dialogs/select-dialog.mjs";
-import { bindCommonActions } from "../../../shared/_module.mjs";
+import { RichApplicationMixin } from "../../../shared/mixins/_module.mjs";
 import { TeriockTextEditor } from "../../../ux/_module.mjs";
 import _connectEmbedded from "./methods/_connect-embedded.mjs";
 import _embeddedFromCard from "./methods/_embedded-from-card.mjs";
@@ -15,7 +15,6 @@ const { ContextMenu, DragDrop } = foundry.applications.ux;
 const {
   //eslint-disable-next-line @typescript-eslint/no-unused-vars
   DocumentSheetV2,
-  HandlebarsApplicationMixin,
 } = foundry.applications.api;
 const TextEditor = foundry.applications.ux.TextEditor.implementation;
 
@@ -33,7 +32,7 @@ export default (Base) => {
      * @extends {DocumentSheetV2}
      * @param {TeriockActor|TeriockItem|TeriockEffect} document
      */
-    class CommonSheetMixin extends HandlebarsApplicationMixin(Base) {
+    class CommonSheetMixin extends RichApplicationMixin(Base) {
       //noinspection JSValidateTypes
       /**
        * Default sheet options.
@@ -893,7 +892,7 @@ export default (Base) => {
           }
 
           if (embedded?.type === "condition") {
-            /** @type {Teriock.MessageData.MessageParts} */
+            /** @type {Teriock.MessageData.MessagePanel} */
             const messageParts = {
               bars: [],
               blocks: [
@@ -914,7 +913,7 @@ export default (Base) => {
                 this.document.system.trackers[embedded.id] || []
               ).map((uuid) => fromUuidSync(uuid));
               if (tokenDocs.length > 0) {
-                /** @type {Teriock.MessageData.MessageAssociations} */
+                /** @type {Teriock.MessageData.MessageAssociation} */
                 const association = {
                   title: "Associated Creatures",
                   icon: TERIOCK.options.document.creature.icon,
@@ -947,12 +946,10 @@ export default (Base) => {
           element.addEventListener(
             "pointerenter",
             async function () {
-              await this._richTooltipContainer(element);
+              await this._initRichTooltipOrientation(element);
             }.bind(this),
           );
         });
-
-        bindCommonActions(this.element);
       }
 
       /**
@@ -1037,25 +1034,6 @@ export default (Base) => {
           this.window.controls.after(toggleButton);
         }
         return frame;
-      }
-
-      /**
-       * Assigns overall rules to tooltips of tcard containers.
-       * @param {HTMLElement} target
-       * @returns {Promise<void>}
-       */
-      async _richTooltipContainer(target) {
-        const rect = target.getBoundingClientRect();
-        const leftSpace = rect.left;
-        const rightSpace = window.innerWidth - rect.right;
-
-        // Determine tooltip direction
-        if (rightSpace >= 350) {
-          target.dataset.tooltipDirection = "RIGHT";
-        } else {
-          target.dataset.tooltipDirection =
-            leftSpace > rightSpace ? "LEFT" : "RIGHT";
-        }
       }
     }
   );

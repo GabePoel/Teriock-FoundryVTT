@@ -16,7 +16,7 @@ declare module "./consequence-data.mjs" {
     extends TeriockBaseEffectModel,
       HierarchyDataMixinInterface {
     /** <schema> Associations */
-    associations: Teriock.MessageData.MessageAssociations[];
+    associations: Teriock.MessageData.MessageAssociation[];
     /** <schema> Blocks representing the source */
     blocks: Teriock.MessageData.MessageBlock[];
     /** <schema> If this was the result of an effect that went critical */

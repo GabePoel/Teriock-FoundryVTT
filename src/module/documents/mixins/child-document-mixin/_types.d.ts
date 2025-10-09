@@ -55,7 +55,7 @@ export interface ChildDocumentMixinInterface {
    * Gives a panel representing the document's content.
    * @returns Promise that resolves to the panel.
    */
-  toPanel(): Promise<Teriock.MessageData.MessageParts>;
+  toPanel(): Promise<Teriock.MessageData.MessagePanel>;
 
   /**
    * Gives an HTML string representing the document's content.

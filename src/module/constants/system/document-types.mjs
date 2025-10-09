@@ -5,7 +5,6 @@ export const documentTypes = {
     equipment: "Equipment",
     rank: "Ranks",
     power: "Powers",
-    mechanic: "Mechanics",
     species: "Species",
     wrapper: "Wrappers",
   },

@@ -3,7 +3,7 @@ import { documentOptions } from "../../../../constants/options/document-options.
 /**
  * Generates message parts for a species.
  * @param {TeriockSpeciesModel} speciesData
- * @returns {Partial<Teriock.MessageData.MessageParts>}
+ * @returns {Partial<Teriock.MessageData.MessagePanel>}
  * @private
  */
 export function _messageParts(speciesData) {

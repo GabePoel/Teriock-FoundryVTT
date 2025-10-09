@@ -22,6 +22,8 @@ declare global {
       elements?: string;
       /** Make this block italic. */
       italic?: boolean;
+      /** Additional CSS classes to add */
+      classes?: string;
     };
 
     /** Definition for an association card. */
@@ -41,7 +43,7 @@ declare global {
     };
 
     /** Pieces of a group of associations within a chat message. */
-    export type MessageAssociations = {
+    export type MessageAssociation = {
       /** The title of the message association. */
       title: string;
       /** Icon for this association. */
@@ -51,7 +53,7 @@ declare global {
     };
 
     /** Represents the individual rules-parts that make up a message. */
-    export type MessageParts = {
+    export type MessagePanel = {
       /** The URL or path to the image associated with the message. */
       image?: string;
       /** The name or title to display in the message. */
@@ -60,19 +62,15 @@ declare global {
       blocks?: Teriock.MessageData.MessageBlock[];
       /** Font used for a message. Message uses font if nothing is specified. */
       font?: Teriock.Parameters.Shared.Font;
-      associations?: Teriock.MessageData.MessageAssociations[];
+      associations?: Teriock.MessageData.MessageAssociation[];
       /** Font Awesome icons */
       icon?: string;
       /** Label that gets displayed upon hovering over icon. */
       label?: string;
       /** Color to assign to the image border. */
       color?: string;
-    };
-
-    /** Options for automatically configuring a message. */
-    export type MessageOptions = {
-      /** If true, the content of the message is obfuscated. */
-      secret?: boolean;
+      /** Additional CSS classes to add */
+      classes?: string;
     };
   }
 }

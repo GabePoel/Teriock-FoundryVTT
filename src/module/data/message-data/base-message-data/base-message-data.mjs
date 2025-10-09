@@ -62,10 +62,27 @@ export default class TeriockBaseMessageModel extends TypeDataModel {
           },
         ),
         blocks: blocksField(),
-        font: new fields.StringField({ nullable: true }),
+        font: new fields.StringField({
+          nullable: true,
+          initial: null,
+          required: false,
+        }),
         associations: associationsField(),
-        icon: new fields.StringField({ nullable: true }),
-        label: new fields.StringField({ nullable: true }),
+        icon: new fields.StringField({
+          nullable: true,
+          initial: null,
+          required: false,
+        }),
+        label: new fields.StringField({
+          nullable: true,
+          initial: null,
+          required: false,
+        }),
+        classes: new fields.StringField({
+          nullable: true,
+          initial: null,
+          required: false,
+        }),
       }),
       {
         initial: [],

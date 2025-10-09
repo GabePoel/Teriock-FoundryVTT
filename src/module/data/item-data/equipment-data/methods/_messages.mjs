@@ -3,7 +3,7 @@ import { documentOptions } from "../../../../constants/options/document-options.
 /**
  * Generates message parts for a piece of equipment.
  * @param {TeriockEquipmentModel} equipmentData - The equipment data to generate message parts for.
- * @returns {Partial<Teriock.MessageData.MessageParts>} Object containing bars and blocks for the equipment message.
+ * @returns {Partial<Teriock.MessageData.MessagePanel>} Object containing bars and blocks for the equipment message.
  * @private
  */
 export function _messageParts(equipmentData) {

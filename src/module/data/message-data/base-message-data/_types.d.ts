@@ -9,7 +9,7 @@ declare module "./base-message-data.mjs" {
     /** <schema> Elder Sorcery spell circle overlay */
     overlay: string;
     /** <schema> Panels to render */
-    panels: Teriock.MessageData.MessageParts[];
+    panels: Teriock.MessageData.MessagePanel[];
     /** <schema> Document that the message is sourced from */
     source: Teriock.UUID<TeriockCommon>;
     /** <schema> Strings to be wrapped as tags at the bottom of the message */

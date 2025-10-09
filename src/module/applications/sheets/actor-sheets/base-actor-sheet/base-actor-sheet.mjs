@@ -343,7 +343,7 @@ export default class TeriockBaseActorSheet extends HackStatMixin(
   static async _rollResistance(event, target) {
     event.stopPropagation();
     let messageParts;
-    /** @type {Teriock.MessageData.MessageParts} */
+    /** @type {Teriock.MessageData.MessagePanel} */
     if (target.classList.contains("tcard-image")) {
       const tcard = target.closest(".tcard");
       const img = target.querySelector("img");

@@ -32,17 +32,6 @@ const { Item } = foundry.documents;
 export default class TeriockItem extends ChangeableDocumentMixin(
   ParentDocumentMixin(ChildDocumentMixin(CommonDocumentMixin(Item))),
 ) {
-  /**
-   * Modified to prevent {@link TeriockMechanic} and {@link TeriockWrapper} creation.
-   * @inheritDoc
-   * @todo Make a less destructive way to accomplish this.
-   */
-  static get TYPES() {
-    /** @type {string[]} */
-    const types = super.TYPES;
-    return types.filter((t) => t !== "mechanic");
-  }
-
   /** @inheritDoc */
   changesField = "itemChanges";
 

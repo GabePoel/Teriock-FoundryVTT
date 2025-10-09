@@ -14,12 +14,35 @@ declare global {
       /** Whether a tooltip should be displayed for each document option */
       tooltip?: boolean;
       /** Path to HTML to use for the tooltip for each document */
-      tooltipKey?: string;
+      tooltipKey?: string | null;
+      /** Whether a tooltip should be asynchronously fetched for each document */
+      tooltipAsync?: boolean;
+      /** Path to a UUID used for fetching the tooltip */
+      tooltipUUID?: string;
     };
 
     export type DocumentsSelect = Teriock.SelectOptions.DocumentSelect & {
       /** Whether multiple documents can be selected */
       multi?: boolean;
+    };
+
+    export type SelectDocument = {
+      /** Name to display */
+      name: string;
+      /** Image path */
+      img: string;
+      /** HTML to include in tooltip */
+      tooltip?: string;
+      /** UUID used only for fetching tooltips */
+      uuid?: string;
+      /** Size the image up for dynamic rings */
+      rescale?: boolean;
+    };
+
+    export type DocumentSelectContext = {
+      documents: Record<string, Teriock.SelectOptions.SelectDocument>;
+      hint: string;
+      tooltip: boolean;
     };
   }
 }

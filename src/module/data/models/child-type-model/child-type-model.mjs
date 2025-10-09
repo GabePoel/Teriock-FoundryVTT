@@ -149,7 +149,7 @@ export default class ChildTypeModel extends CommonTypeModel {
   /**
    * Gets the message rules-parts for displaying the child document in chat.
    * Includes image, name, and font information from the parent document.
-   * @returns {Teriock.MessageData.MessageParts} Object containing message display components.
+   * @returns {Teriock.MessageData.MessagePanel} Object containing message display components.
    */
   get messageParts() {
     const parts = {

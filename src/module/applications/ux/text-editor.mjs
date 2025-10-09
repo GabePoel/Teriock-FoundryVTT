@@ -6,8 +6,8 @@ const { TextEditor } = foundry.applications.ux;
 export default class TeriockTextEditor extends TextEditor {
   /**
    * Enrich all the blocks within a panel.
-   * @param {Teriock.MessageData.MessageParts} parts
-   * @returns {Promise<Teriock.MessageData.MessageParts>}
+   * @param {Teriock.MessageData.MessagePanel} parts
+   * @returns {Promise<Teriock.MessageData.MessagePanel>}
    */
   static async enrichPanel(parts) {
     for (const block of parts.blocks || []) {
@@ -18,7 +18,7 @@ export default class TeriockTextEditor extends TextEditor {
 
   /**
    * Convert the panel to an HTML string.
-   * @param {Teriock.MessageData.MessageParts} parts
+   * @param {Teriock.MessageData.MessagePanel} parts
    * @returns {Promise<string>}
    */
   static async makeTooltip(parts) {

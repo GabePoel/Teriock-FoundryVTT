@@ -16,6 +16,7 @@ export default function bindCommonActions(rootElement) {
   const actionElements = rootElement.querySelectorAll("[data-action]");
   for (const /** @type {HTMLElement} */ element of actionElements) {
     const action = element.dataset.action;
+    //noinspection JSUnresolvedReference
     const HandlerClass = Object.values(handlers).find(
       (cls) => cls.ACTION === action,
     );

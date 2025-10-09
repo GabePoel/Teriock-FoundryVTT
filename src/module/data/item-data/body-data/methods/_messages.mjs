@@ -3,7 +3,7 @@ import { documentOptions } from "../../../../constants/options/document-options.
 /**
  * Generates message parts for a body part.
  * @param {TeriockBodyModel} bodyData
- * @returns {Partial<Teriock.MessageData.MessageParts>} Object containing bars and blocks for the body part message.
+ * @returns {Partial<Teriock.MessageData.MessagePanel>} Object containing bars and blocks for the body part message.
  * @private
  */
 export function _messageParts(bodyData) {

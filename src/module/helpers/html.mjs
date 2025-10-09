@@ -167,7 +167,7 @@ export function makeDamageTypeButtons(roll) {
 /**
  * Make a panel for a given damage type.
  * @param damageType
- * @returns {Teriock.MessageData.MessageParts|null}
+ * @returns {Teriock.MessageData.MessagePanel|null}
  */
 export function makeDamageTypePanel(damageType) {
   if (Object.keys(TERIOCK.index.damageTypes).includes(damageType)) {
@@ -188,7 +188,7 @@ export function makeDamageTypePanel(damageType) {
 /**
  * Make a panel for a given drain type.
  * @param drainType
- * @returns {Teriock.MessageData.MessageParts|null}
+ * @returns {Teriock.MessageData.MessagePanel|null}
  */
 export function makeDrainTypePanel(drainType) {
   if (Object.keys(TERIOCK.index.drainTypes).includes(drainType)) {
@@ -209,7 +209,7 @@ export function makeDrainTypePanel(drainType) {
 /**
  * Make panels for damage and drain types done by some roll.
  * @param {TeriockRoll} roll
- * @returns {Promise<Teriock.MessageData.MessageParts[]>}
+ * @returns {Promise<Teriock.MessageData.MessagePanel[]>}
  */
 export async function makeDamageDrainTypePanels(roll) {
   const damageTypes = new Set();
@@ -229,7 +229,7 @@ export async function makeDamageDrainTypePanels(roll) {
   if (damageTypes.has("lethal")) {
     drainTypes.delete("lethal");
   }
-  /** @type {Teriock.MessageData.MessageParts[]} */
+  /** @type {Teriock.MessageData.MessagePanel[]} */
   const panels = [];
   for (const damageType of damageTypes) {
     const panel = makeDamageTypePanel(damageType);
@@ -302,7 +302,7 @@ export function tidyHTML(html) {
 /**
  * Get the panel for a tradecraft.
  * @param {Teriock.Parameters.Fluency.Tradecraft} tradecraft
- * @returns {Promise<Teriock.MessageData.MessageParts>}
+ * @returns {Promise<Teriock.MessageData.MessagePanel>}
  */
 export async function tradecraftPanel(tradecraft) {
   let field;
@@ -335,7 +335,7 @@ export async function tradecraftPanel(tradecraft) {
 /**
  * Get the panel for a class.
  * @param {Teriock.Parameters.Rank.RankClass} className
- * @returns {Promise<Teriock.MessageData.MessageParts>}
+ * @returns {Promise<Teriock.MessageData.MessagePanel>}
  */
 export async function classPanel(className) {
   let archetype;
@@ -402,7 +402,7 @@ export async function addTrackersToRollConfig(rollConfig, tracker, uuids) {
       if (button.dataset[useType]) {
         /** @type {TeriockConsequence} */
         const effectObject = JSON.parse(button.dataset[useType]);
-        /** @type {Teriock.MessageData.MessageAssociations} */
+        /** @type {Teriock.MessageData.MessageAssociation} */
         const association = {
           title: titleString,
           icon: TERIOCK.options.document.creature.icon,
