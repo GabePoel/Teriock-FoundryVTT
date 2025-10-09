@@ -69,8 +69,8 @@ export function registerSettings() {
   };
   const quickIndexDefaults = {
     abilities: true,
-    equipment: false,
-    properties: false,
+    equipment: true,
+    properties: true,
     species: true,
   };
   for (const [title, initial] of Object.entries(quickIndexDefaults)) {
