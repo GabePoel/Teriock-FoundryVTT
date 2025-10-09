@@ -153,13 +153,14 @@ export default class ChildTypeModel extends CommonTypeModel {
    */
   get messageParts() {
     const parts = {
-      image: this.parent.img,
-      name: this.parent.nameString,
+      associations: [],
       bars: [],
       blocks: [],
-      font: this.font,
-      associations: [],
+      buttons: [],
       color: this.color,
+      font: this.font,
+      image: this.parent.img,
+      name: this.parent.nameString,
     };
     const properties = propertySort(this.parent.getProperties());
     if (properties.length > 0) {
@@ -168,12 +169,13 @@ export default class ChildTypeModel extends CommonTypeModel {
         icon: TERIOCK.options.document.property.icon,
         cards: properties.map((p) => {
           return {
+            color: p.system.color,
             id: p.id,
             img: p.img,
             name: p.system.nameString,
+            rescale: false,
             type: p.documentName,
             uuid: p.uuid,
-            color: p.system.color,
           };
         }),
       });
@@ -185,12 +187,13 @@ export default class ChildTypeModel extends CommonTypeModel {
         icon: TERIOCK.options.document.ability.icon,
         cards: abilities.map((a) => {
           return {
+            color: a.system.color,
             id: a.id,
             img: a.img,
             name: a.system.nameString,
+            rescale: false,
             type: a.documentName,
             uuid: a.uuid,
-            color: a.system.color,
           };
         }),
       });

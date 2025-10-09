@@ -20,20 +20,46 @@ export default class TeriockBaseMessageModel extends TypeDataModel {
     const schema = {};
     schema.columns = new fields.NumberField({ initial: 2 });
     schema.overlay = new fields.HTMLField({
-      nullable: true,
       initial: null,
+      nullable: true,
+      required: false,
     });
     schema.panels = new fields.ArrayField(
       new fields.SchemaField({
-        color: new fields.StringField({ nullable: true }),
-        image: new fields.StringField({ nullable: true }),
-        name: new fields.StringField({ nullable: true }),
+        color: new fields.StringField({
+          initial: null,
+          nullable: true,
+          required: false,
+        }),
+        image: new fields.StringField({
+          initial: null,
+          nullable: true,
+          required: false,
+        }),
+        name: new fields.StringField({
+          initial: null,
+          nullable: true,
+          required: false,
+        }),
         bars: new fields.ArrayField(
           new fields.SchemaField({
-            icon: new fields.StringField(),
-            label: new fields.StringField({ nullable: true }),
-            wrappers: new fields.ArrayField(new fields.StringField()),
+            icon: new fields.StringField({
+              initial: "",
+              required: false,
+            }),
+            label: new fields.StringField({
+              nullable: true,
+              required: false,
+            }),
+            wrappers: new fields.ArrayField(new fields.StringField(), {
+              initial: [],
+              required: false,
+            }),
           }),
+          {
+            initial: [],
+            required: false,
+          },
         ),
         blocks: blocksField(),
         font: new fields.StringField({ nullable: true }),
@@ -41,22 +67,52 @@ export default class TeriockBaseMessageModel extends TypeDataModel {
         icon: new fields.StringField({ nullable: true }),
         label: new fields.StringField({ nullable: true }),
       }),
+      {
+        initial: [],
+        required: false,
+      },
     );
     schema.buttons = new fields.ArrayField(
       new fields.SchemaField({
         label: new fields.StringField(),
-        dataset: new fields.TypedObjectField(new fields.StringField()),
+        dataset: new fields.TypedObjectField(
+          new fields.StringField({
+            initial: "",
+            required: false,
+          }),
+        ),
         classes: new fields.SetField(new fields.StringField(), {
           initial: ["teriock-chat-button"],
+          required: false,
         }),
-        icon: new fields.StringField(),
-        type: new fields.StringField(),
-        disabled: new fields.BooleanField(),
+        icon: new fields.StringField({
+          initial: "",
+          required: false,
+        }),
+        type: new fields.StringField({
+          initial: "",
+          required: false,
+        }),
+        disabled: new fields.BooleanField({ required: false }),
       }),
+      {
+        initial: [],
+        required: false,
+      },
     );
-    schema.tags = new fields.ArrayField(new fields.StringField());
-    schema.extraContent = new fields.HTMLField();
-    schema.source = new fields.DocumentUUIDField({ nullable: true });
+    schema.tags = new fields.ArrayField(new fields.StringField(), {
+      initial: [],
+      required: false,
+    });
+    schema.extraContent = new fields.HTMLField({
+      initial: "",
+      required: false,
+    });
+    schema.source = new fields.DocumentUUIDField({
+      nullable: true,
+      initial: null,
+      required: false,
+    });
     return schema;
   }
 

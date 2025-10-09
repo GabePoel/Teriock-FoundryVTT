@@ -181,7 +181,13 @@ export default (Base) => {
         const messageData = {
           speaker: TeriockChatMessage.getSpeaker({ actor: this.actor }),
           system: {
+            bars: [],
+            blocks: [],
+            buttons: [],
+            extraContent: "",
             panels: [panel],
+            source: null,
+            tags: [],
           },
         };
         TeriockChatMessage.applyRollMode(

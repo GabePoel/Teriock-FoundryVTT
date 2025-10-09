@@ -125,20 +125,44 @@ export function changeField() {
 export function associationsField() {
   return new fields.ArrayField(
     new fields.SchemaField({
-      title: new fields.StringField({ initial: "Associations" }),
-      icon: new fields.StringField({ nullable: true }),
+      title: new fields.StringField({
+        initial: "Associations",
+        required: false,
+      }),
+      icon: new fields.StringField({
+        nullable: true,
+        required: false,
+        initial: null,
+      }),
       cards: new fields.ArrayField(
         new fields.SchemaField({
           name: new fields.StringField(),
           img: new fields.StringField(),
-          color: new fields.StringField({ nullable: true }),
+          color: new fields.StringField({
+            nullable: true,
+            required: false,
+          }),
           uuid: new fields.DocumentUUIDField(),
           id: new fields.DocumentIdField(),
-          type: new fields.StringField(),
-          rescale: new fields.BooleanField({ initial: false }),
+          type: new fields.StringField({
+            initial: "base",
+            required: false,
+          }),
+          rescale: new fields.BooleanField({
+            initial: false,
+            required: false,
+          }),
         }),
+        {
+          initial: [],
+          required: false,
+        },
       ),
     }),
+    {
+      initial: [],
+      required: false,
+    },
   );
 }
 
@@ -153,7 +177,10 @@ export function blocksField() {
       text: new fields.StringField({ nullable: true }),
       special: new fields.StringField({ nullable: true }),
       elements: new fields.StringField({ nullable: true }),
-      italic: new fields.BooleanField({ initial: false }),
+      italic: new fields.BooleanField({
+        required: false,
+        initial: false,
+      }),
     }),
   );
 }

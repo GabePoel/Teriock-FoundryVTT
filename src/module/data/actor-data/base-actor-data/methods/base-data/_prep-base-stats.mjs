@@ -10,7 +10,7 @@ import { docSort } from "../../../../../helpers/utils.mjs";
 export function _prepareBonuses(actorData) {
   const lvl = actorData.scaling.lvl;
   actorData.scaling.br = Math.max(
-    actorData.parent.species.map((s) => s.system.br),
+    ...actorData.parent.species.map((s) => s.system.br),
   );
   let scale = lvl;
   if (actorData.scaling.brScale) {

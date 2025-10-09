@@ -41,13 +41,13 @@ export function _messageParts(abilityData) {
       icon: "fa-arrows-turn-right",
       label: "Execution",
       wrappers: [
-        ref.executionTime[src.maneuver][src.executionTime],
-        ref.piercing[src.piercing],
-        ref.delivery[src.delivery.base],
+        ref.executionTime[src.maneuver][src.executionTime] || "",
+        ref.piercing[src.piercing] || "",
+        ref.delivery[src.delivery.base] || "",
         src.interaction === "feat"
           ? ref.featSaveAttribute[src.featSaveAttribute]
           : "",
-        ref.interaction[src.interaction],
+        ref.interaction[src.interaction] || "",
       ],
     },
     {
@@ -58,7 +58,7 @@ export function _messageParts(abilityData) {
           ? src.range + " ft"
           : "",
         Array.from(src.targets.map((target) => ref.targets[target])).join(", "),
-        src.duration.description,
+        src.duration.description || "",
       ],
     },
     {
@@ -68,23 +68,23 @@ export function _messageParts(abilityData) {
         ["detonate", "ripple"].includes(src.expansion)
           ? ref.attribute[src.expansionSaveAttribute]
           : "",
-        ref.expansion[src.expansion],
+        ref.expansion[src.expansion] || "",
         src.expansionRange?.includes(",")
           ? src.expansionRange.split(",")[0]
-          : [src.expansionRange],
+          : src.expansionRange || "",
         src.expansionRange?.includes(",")
           ? src.expansionRange.split(",")[1]
-          : [src.expansionRange],
+          : src.expansionRange || "",
       ],
     },
     {
       icon: "fa-coins",
       label: "Costs",
       wrappers: [
-        mpCost,
-        hpCost,
-        gpCost,
-        ref.breakCost[src.costs.break],
+        mpCost || "",
+        hpCost || "",
+        gpCost || "",
+        ref.breakCost[src.costs.break] || "",
         src.costs.verbal ? "Verbal" : "",
         src.costs.somatic ? "Somatic" : "",
         src.costs.material ? "Material" : "",
@@ -111,7 +111,7 @@ export function _messageParts(abilityData) {
       icon: "fa-" + ref.form[src.form].icon,
       label: "Ability Type",
       wrappers: [
-        ref.form[src.form].name,
+        ref.form[src.form].name || "",
         src.elderSorcery ? "Elder Sorcery" : "",
         ...src.effectTypes
           .filter((e) => !src.powerSources.has(e))

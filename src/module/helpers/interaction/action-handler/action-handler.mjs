@@ -14,6 +14,7 @@ export default class ActionHandler {
    * @param {HTMLElement} element
    */
   constructor(event, element) {
+    event.stopPropagation();
     this.event = event;
     this.element = element;
     this.dataset = this.element.dataset;

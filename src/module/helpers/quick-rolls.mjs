@@ -26,7 +26,7 @@ export async function harmRoll(
       dataset: {
         action: "take-rollable-take",
         type: "damage",
-        amount: roll.total,
+        amount: roll.total.toString(),
       },
     },
     {
@@ -36,7 +36,7 @@ export async function harmRoll(
       dataset: {
         action: "take-rollable-take",
         type: "drain",
-        amount: roll.total,
+        amount: roll.total.toString(),
       },
     },
     {
@@ -46,7 +46,7 @@ export async function harmRoll(
       dataset: {
         action: "take-rollable-take",
         type: "wither",
-        amount: roll.total,
+        amount: roll.total.toString(),
       },
     },
   ];

@@ -193,8 +193,8 @@ export function makeDamageTypePanel(damageType) {
 export function makeDrainTypePanel(drainType) {
   if (Object.keys(TERIOCK.index.drainTypes).includes(drainType)) {
     return {
-      name: TERIOCK.index.drainTypes[drainType] + " Damage",
-      image: getIcon("damage-types", TERIOCK.index.drainTypes[drainType]),
+      name: TERIOCK.index.drainTypes[drainType] + " Drain",
+      image: getIcon("drain-types", TERIOCK.index.drainTypes[drainType]),
       icon: "droplet-slash",
       blocks: [
         {

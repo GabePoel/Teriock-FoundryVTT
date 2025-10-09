@@ -27,9 +27,9 @@ export async function _buildButtons(rollConfig) {
       dataset: {
         action: "feat-save",
         attribute: attribute,
-        dc: rollConfig.chatData.rolls.find(
-          (r) => r?.context?.diceClass === "feat",
-        ).total,
+        dc: rollConfig.chatData.rolls
+          .find((r) => r?.context?.diceClass === "feat")
+          .total.toString(),
       },
     });
   }

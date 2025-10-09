@@ -331,25 +331,25 @@ function processTags(parameters, tagTree, doc) {
   parameters.results["endCondition"] = "";
 
   const resultBars = [
-    "hit",
-    "critHit",
-    "miss",
-    "critMiss",
-    "save",
     "critSave",
-    "fail",
     "critFail",
+    "critMiss",
+    "critHit",
+    "hit",
+    "miss",
+    "save",
+    "fail",
     "endCondition",
   ];
   const resultsBars = {
-    hit: ["on-hit"],
-    critHit: ["on-critical-hit"],
-    miss: ["on-miss"],
-    critMiss: ["on-critical-miss"],
-    save: ["on-save", "on-success"],
-    critSave: ["on-critical-save"],
-    fail: ["on-fail"],
     critFail: ["on-critical-fail"],
+    critSave: ["on-critical-save"],
+    critMiss: ["on-critical-miss"],
+    critHit: ["on-critical-hit"],
+    hit: ["on-hit"],
+    miss: ["on-miss"],
+    save: ["on-save", "on-success"],
+    fail: ["on-fail"],
     endCondition: ["end-condition"],
   };
   resultBars.forEach((bar) => {
@@ -916,15 +916,15 @@ function processDiceAndEffectExtraction(parameters) {
 
   // Process all result types for tradecraft checks and other metadata
   const resultTypes = [
-    "hit",
-    "critHit",
-    "miss",
-    "critMiss",
-    "save",
-    "critSave",
-    "fail",
-    "critFail",
     "endCondition",
+    "critSave",
+    "critMiss",
+    "critFail",
+    "critHit",
+    "save",
+    "miss",
+    "fail",
+    "hit",
   ];
   resultTypes.forEach((resultType) => {
     if (parameters.results[resultType]) {

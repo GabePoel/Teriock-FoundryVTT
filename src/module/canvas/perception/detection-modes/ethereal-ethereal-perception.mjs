@@ -26,11 +26,20 @@ export default class DetectionModeEtherealEthereal extends BaseDetectionMode {
     return true;
   }
 
-  /** @inheritDoc */
+  /**
+   * Target must be illuminated with light from the material world or be within 15 feet of the source.
+   * @inheritDoc
+   */
   _testPoint(visionSource, mode, target, test) {
     if (!super._testPoint(visionSource, mode, target, test)) {
       return false;
     }
-    return game.canvas.effects.testInsideLight(test.point);
+    const inLight = game.canvas.effects.testInsideLight(test.point);
+    const point = test.point;
+    const { x, y } = visionSource.data;
+    const radius = visionSource.object.getLightRadius(15);
+    const dx = point.x - x;
+    const dy = point.y - y;
+    return inLight || dx * dx + dy * dy <= radius * radius;
   }
 }
