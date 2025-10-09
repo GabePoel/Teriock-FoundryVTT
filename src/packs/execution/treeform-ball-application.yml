@@ -8,17 +8,14 @@ command: |-
   if (!actor.effectKeys.consequence.has("treeformBallEffect")) {
     const hp = actor.system.hp.value;
     if (!actor.itemKeys.species.has("tree")) {
-      const treeSpecies = await tm.fetch.getItem(
-        "Tree",
-        "species",
-        {
-          clone: true,
-        },
-      );
+      const treeSpecies = await tm.fetch.getItem("Tree", "species", {
+        clone: true,
+      });
       const created = await actor.createEmbeddedDocuments("Item", [treeSpecies]);
-      const createdTree = created[0];
+      const createdTree = /** @type {TeriockSpecies} */ created[0];
+      console.log(actor.system.size.number.value);
       await createdTree.update({
-        "system.size.value": actor.system.size,
+        "system.size.value": actor.system.size.number.value,
         "system.applyMp": false,
       });
     }

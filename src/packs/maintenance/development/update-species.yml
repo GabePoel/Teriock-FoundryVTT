@@ -1,0 +1,141 @@
+folder: L08qIbjJoCwEaiEi
+name: Update Species
+type: script
+_id: U0WfGPoPSLSystNU
+author: teriockBuilder00
+img: systems/teriock/src/icons/documents/species.svg
+scope: global
+command: |-
+  const speciesPack = game.teriock.packs.species();
+  const speciesFolders = speciesPack.folders;
+
+  // Folder configuration
+  const folderConfigs = [
+    {
+      name: "Monster Species",
+      variable: "allSpeciesFolder",
+    },
+    {
+      name: "Character Species",
+      variable: "characterSpeciesFolder",
+    },
+    {
+      name: "Common Animal Species",
+      variable: "commonAnimalSpeciesFolder",
+    },
+    {
+      name: "Undead Species",
+      variable: "undeadSpeciesFolder",
+    },
+  ];
+
+  // Create missing folders
+  const folders = {};
+  for (const config of folderConfigs) {
+    let folder = speciesFolders.getName(config.name);
+    if (!folder) {
+      folder = await Folder.create(
+        {
+          name: config.name,
+          type: "Item",
+        },
+        {
+          pack: "teriock.species",
+        },
+      );
+    }
+    folders[config.variable] = folder;
+  }
+
+  const progress = ui.notifications.info("Pulling all creatures from wiki.", {
+    pct: 0.01,
+    progress: true,
+  });
+
+  // Process a single species
+  async function processSpecies(speciesName) {
+    let speciesItem = speciesPack.index.find((e) => e.name === speciesName);
+
+    // Determine folder based on species type
+    let folder = folders.allSpeciesFolder;
+    if (Object.values(TERIOCK.index.humanoids).includes(speciesName)) {
+      folder = folders.characterSpeciesFolder;
+    } else if (Object.values(TERIOCK.index.commonAnimals).includes(speciesName)) {
+      folder = folders.commonAnimalSpeciesFolder;
+    } else if (Object.values(TERIOCK.index.undead).includes(speciesName)) {
+      folder = folders.undeadSpeciesFolder;
+    }
+
+    // Create or fetch species item
+    if (!speciesItem) {
+      speciesItem = /** @type {TeriockSpecies} */ await Item.create(
+        {
+          name: speciesName,
+          type: "species",
+          folder: folder.id,
+        },
+        { pack: "teriock.species" },
+      );
+    } else {
+      speciesItem = /** @type {TeriockSpecies} */ await foundry.utils.fromUuid(
+        speciesItem.uuid,
+      );
+    }
+
+    await speciesItem.system.wikiPull({ notify: false });
+
+    return {
+      speciesName,
+      success: true,
+    };
+  }
+
+  // Process in batches of 25
+  const allSpecies = Object.values(TERIOCK.index.creatures);
+  const batchSize = 25;
+  const results = [];
+  let processedCount = 0;
+
+  try {
+    for (let i = 0; i < allSpecies.length; i += batchSize) {
+      const batch = allSpecies.slice(i, i + batchSize);
+
+      const batchResults = await Promise.all(
+        batch.map((speciesName) => processSpecies(speciesName)),
+      );
+
+      results.push(...batchResults);
+      processedCount += batch.length;
+
+      const pct = Math.min(processedCount / allSpecies.length, 0.99);
+      progress.update({
+        pct: pct,
+        message: `Processed ${processedCount} of ${allSpecies.length} species...`,
+      });
+    }
+
+    progress.update({
+      message: `Successfully processed ${results.length} species.`,
+      pct: 1,
+    });
+
+    console.log(
+      `Completed processing ${results.length} species:`,
+      results.map((r) => r.speciesName),
+    );
+  } catch (error) {
+    progress.update({
+      message: `Error occurred during processing: ${error.message}`,
+      pct: 1,
+    });
+    console.error("Error processing species:", error);
+  }
+ownership:
+  default: 0
+flags: {}
+_stats:
+  coreVersion: '13'
+  systemId: teriock
+  systemVersion: 0.1.0
+  lastModifiedBy: teriockBuilder00
+_key: '!macros!U0WfGPoPSLSystNU'

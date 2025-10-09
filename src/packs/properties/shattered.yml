@@ -8,32 +8,19 @@ effects:
     img: systems/teriock/src/icons/properties/shattered.webp
     system:
       description: >-
-        <p>An item that is <b>shattered</b> does not function. It cannot be used
-        to <a href="https://wiki.teriock.com/index.php/Core:Attack_Interaction"
-        title="Core:Attack Interaction" target="_blank">attack</a> nor <a
-        href="https://wiki.teriock.com/index.php/Core:Block_Interaction"
-        title="Core:Block Interaction" target="_blank">block</a>, provides no <a
-        href="https://wiki.teriock.com/index.php/Core:Armor_Class"
-        title="Core:Armor Class" target="_blank">AV</a>, does not have any <a
-        href="https://wiki.teriock.com/index.php/Category:Properties"
-        title="Category:Properties" target="_blank">properties</a> (other than
-        <a href="https://wiki.teriock.com/index.php/Property:Runic"
-        title="Property:Runic" target="_blank">runic</a>), and has no magical
-        effects nor <a
-        href="https://wiki.teriock.com/index.php/Category:Abilities"
-        title="Category:Abilities" target="_blank">abilities</a>. The item
-        continues to <a
-        href="https://wiki.teriock.com/index.php/Core:Carrying_Capacity"
-        title="Core:Carrying Capacity" target="_blank">weigh</a> the same
-        amount. It may sometimes be possible to repair items that are shattered,
-        if your <a href="https://wiki.teriock.com/index.php/Core:GM"
-        title="Core:GM" target="_blank">GM</a> allows it.
-
-        </p>
+        An item that is <b>shattered</b> does not function. It cannot be used to
+        @L[Core:Attack Interaction]{attack} nor @L[Core:Block
+        Interaction]{block}, provides no @L[Core:Armor Class]{AV}, does not have
+        any @L[Category:Properties]{properties} (other than
+        @L[Property:Runic]{runic}), and has no magical effects nor
+        @L[Category:Abilities]{abilities}. The item continues to
+        @L[Core:Carrying Capacity]{weigh} the same amount. It may sometimes be
+        possible to repair items that are shattered, if your @L[Core:GM]{GM}
+        allows it.
       form: intrinsic
       damageType: ''
       extraDamage: ''
-      applyIfShattered: false
+      applyIfShattered: true
       applyIfDampened: false
       modifiesActor: false
       changes: []
@@ -41,6 +28,12 @@ effects:
         rootUuid: Compendium.teriock.properties.Item.AsPstgwxpuGj9taq
         subIds: []
         supId: null
+      applies:
+        changes:
+          - key: item.system.shattered
+            mode: 5
+            value: 'true'
+            priority: 10
     _id: xBT7kaKaWv22qnOo
     changes: []
     disabled: false
@@ -54,7 +47,7 @@ effects:
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.1.0
+      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
     _key: '!items.effects!AsPstgwxpuGj9taq.xBT7kaKaWv22qnOo'
 folder: null
