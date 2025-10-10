@@ -62,10 +62,13 @@ declare global {
   // Item
   // ----
 
+  const TeriockBody: documents.TeriockBody;
   const TeriockEquipment: documents.TeriockEquipment;
+  const TeriockMount: documents.TeriockMount;
   const TeriockPower: documents.TeriockPower;
   const TeriockRank: documents.TeriockRank;
   const TeriockSpecies: documents.TeriockSpecies;
+  const TeriockWrapper: documents.TeriockWrapper;
 
   // Effect
   // ------
@@ -110,10 +113,13 @@ declare global {
   // Item
   // ----
 
+  const TeriockBodyModel: data.item.TeriockBodyModel;
   const TeriockEquipmentModel: data.item.TeriockEquipmentModel;
-  const TeriockMechanicModel: data.item.TeriockMechanicModel;
+  const TeriockMountModel: data.item.TeriockMountModel;
   const TeriockPowerModel: data.item.TeriockPowerModel;
   const TeriockRankModel: data.item.TeriockRankModel;
+  const TeriockSpeciesModel: data.item.TeriockSpeciesModel;
+  const TeriockWrapperModel: data.item.TeriockWrapperModel;
 
   // Effect
   // ------
@@ -145,7 +151,7 @@ declare global {
   // ----
 
   const TeriockEquipmentSheet: sheets.item.EquipmentSheet;
-  const TeriockMechanicSheet: sheets.item.MechanicSheet;
+  const TeriockMountSheet: sheets.item.MountSheet;
   const TeriockPowerSheet: sheets.item.PowerSheet;
   const TeriockRankSheet: sheets.item.RankSheet;
 

@@ -54,7 +54,7 @@ export function _messageParts(equipmentData) {
       ],
     },
     {
-      icon: "fa-weight-hanging",
+      icon: "fa-trophy",
       label: "Load",
       wrappers: [
         src.weight.value + " lb",

@@ -138,6 +138,7 @@ foundry.helpers.Hooks.once("init", function () {
   Object.assign(CONFIG.Item.dataModels, {
     body: data.item.TeriockBodyModel,
     equipment: data.item.TeriockEquipmentModel,
+    mount: data.item.TeriockMountModel,
     power: data.item.TeriockPowerModel,
     rank: data.item.TeriockRankModel,
     species: data.item.TeriockSpeciesModel,
@@ -200,6 +201,12 @@ foundry.helpers.Hooks.once("init", function () {
       doc: documents.TeriockItem,
       label: "Equipment",
       types: ["equipment"],
+    },
+    {
+      cls: applications.sheets.item.MountSheet,
+      doc: documents.TeriockItem,
+      label: "Mount",
+      types: ["mount"],
     },
     {
       cls: applications.sheets.item.RankSheet,

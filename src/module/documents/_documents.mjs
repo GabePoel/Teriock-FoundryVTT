@@ -102,6 +102,16 @@ export class TeriockRank extends TeriockItem {}
 export class TeriockSpecies extends TeriockItem {}
 
 /**
+ * Mount-specific {@link TeriockItem} class.
+ * @property {TeriockMountModel} system
+ * @property {TeriockMountSheet} sheet
+ * @property {"mount"} type
+ * @property {Teriock.UUID<TeriockMount>} uuid
+ * @property {Teriock.ID<TeriockMount>} id
+ */
+export class TeriockMount extends TeriockItem {}
+
+/**
  * Mechanic-specific {@link TeriockItem} class.
  * @property {"rank"} type
  * @property {Teriock.ID<TeriockMechanic>} id

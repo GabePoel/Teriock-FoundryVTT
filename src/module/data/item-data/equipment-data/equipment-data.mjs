@@ -2,6 +2,7 @@ import { getItem } from "../../../helpers/fetch.mjs";
 import { mergeFreeze } from "../../../helpers/utils.mjs";
 import {
   ArmamentDataMixin,
+  AttunableDataMixin,
   ConsumableDataMixin,
   ExecutableDataMixin,
   WikiDataMixin,
@@ -32,6 +33,7 @@ import EquipmentWieldingPart from "./parts/equipment-wielding-part.mjs";
  *
  * @extends {TeriockBaseItemModel}
  * @mixes ArmamentDataMixin
+ * @mixes AttunableDataMixin
  * @mixes ConsumableDataMixin
  * @mixes EquipmentSuppressionPart
  * @mixes EquipmentUnderstandingPart
@@ -43,8 +45,10 @@ export default class TeriockEquipmentModel extends EquipmentUnderstandingPart(
   EquipmentSuppressionPart(
     EquipmentWieldingPart(
       ArmamentDataMixin(
-        ConsumableDataMixin(
-          WikiDataMixin(ExecutableDataMixin(TeriockBaseItemModel)),
+        AttunableDataMixin(
+          ConsumableDataMixin(
+            WikiDataMixin(ExecutableDataMixin(TeriockBaseItemModel)),
+          ),
         ),
       ),
     ),
@@ -152,7 +156,6 @@ export default class TeriockEquipmentModel extends EquipmentUnderstandingPart(
   /** @inheritDoc */
   prepareDerivedData() {
     super.prepareDerivedData();
-    prepareModifiableBase(this.tier);
     deriving._prepareDerivedData(this);
   }
 
@@ -160,7 +163,6 @@ export default class TeriockEquipmentModel extends EquipmentUnderstandingPart(
   prepareSpecialData() {
     super.prepareSpecialData();
     deriveModifiableNumber(this.minStr, { min: -3 });
-    deriveModifiableDeterministic(this.tier, this.actor);
     deriveModifiableIndeterministic(this.damage.twoHanded);
     deriveModifiableDeterministic(this.range.long, this.actor);
     deriveModifiableDeterministic(this.range.short, this.actor);

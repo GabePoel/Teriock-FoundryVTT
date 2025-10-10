@@ -1,3 +1,4 @@
+import { setStatDiceDialog } from "../../../applications/dialogs/_module.mjs";
 import { mergeFreeze } from "../../../helpers/utils.mjs";
 import { StatDieModel } from "../../models/_module.mjs";
 
@@ -61,23 +62,26 @@ export default (Base) => {
        * @param {object} [options]
        * @param {Teriock.RollOptions.PolyhedralDieFaces} [options.faces]
        * @param {number} [options.value]
+       * @param {number} [options.number]
        * @returns {fields.TypedObjectField}
        */
       static defineStatDieField(stat, options = {}) {
-        const id = foundry.utils.randomID();
-        const { faces = 8, value = 5 } = options;
+        const { faces = 8, value = 5, number = 1 } = options;
+        const initial = {};
+        for (let i = 0; i < number; i++) {
+          const id = foundry.utils.randomID();
+          initial[id] = {
+            _id: id,
+            stat: stat,
+            faces: faces,
+            spent: false,
+            value: value,
+          };
+        }
         return new fields.TypedObjectField(
           new fields.EmbeddedDataField(StatDieModel),
           {
-            initial: {
-              [id]: {
-                _id: id,
-                stat: stat,
-                faces: faces,
-                spent: false,
-                value: value,
-              },
-            },
+            initial: initial,
           },
         );
       }
@@ -89,7 +93,7 @@ export default (Base) => {
 
       /** @inheritDoc */
       get hpDiceFaces() {
-        return Object.values(this.hpDice)[0].faces;
+        return Object.values(this.hpDice)[0]?.faces || this.hpDiceBase.faces;
       }
 
       /** @inheritDoc */
@@ -109,7 +113,7 @@ export default (Base) => {
 
       /** @inheritDoc */
       get mpDiceFaces() {
-        return Object.values(this.mpDice)[0].faces;
+        return Object.values(this.mpDice)[0]?.faces || this.mpDiceBase.faces;
       }
 
       /** @inheritDoc */
@@ -242,6 +246,32 @@ export default (Base) => {
         const updateData = {};
         this._setDice(updateData, stat, number, faces);
         await this.parent.update(updateData);
+      }
+
+      /**
+       * Set an HP dice formula.
+       * @returns {Promise<void>}
+       */
+      async setHpDice() {
+        await setStatDiceDialog(
+          this.parent,
+          "hp",
+          this.hpDiceNumber,
+          this.hpDiceFaces,
+        );
+      }
+
+      /**
+       * Set an MP dice formula.
+       * @returns {Promise<void>}
+       */
+      async setMpDice() {
+        await setStatDiceDialog(
+          this.parent,
+          "mp",
+          this.mpDiceNumber,
+          this.mpDiceFaces,
+        );
       }
     }
   );

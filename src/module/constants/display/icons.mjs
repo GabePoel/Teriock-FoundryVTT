@@ -86,4 +86,5 @@ export const icons = {
   locked: '<i class="fa-fw fa-solid fa-lock"></i>',
   unlocked: '<i class="fa-fw fa-solid fa-lock-open"></i>',
   formula: '<i class="fa-fw fa-solid fa-function"></i>',
+  species: '<i class="fa-fw fa-light fa-octopus"></i>',
 };

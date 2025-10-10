@@ -2,9 +2,11 @@ export const documentTypes = {
   items: {
     base: "Items",
     body: "Body",
+    curse: "Curse",
     equipment: "Equipment",
-    rank: "Ranks",
+    mount: "Mount",
     power: "Powers",
+    rank: "Ranks",
     species: "Species",
     wrapper: "Wrappers",
   },

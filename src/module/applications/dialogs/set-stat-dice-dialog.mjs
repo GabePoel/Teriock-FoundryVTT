@@ -19,7 +19,7 @@ export default async function setStatDiceDialog(
   const content = document.createElement("div");
   const numberField = new fields.NumberField({
     initial: initialNumber,
-    min: 1,
+    min: 0,
     integer: true,
     label: "Number",
     hint: `Number of ${TERIOCK.options.die.stats[stat]} dice.`,
@@ -43,12 +43,12 @@ export default async function setStatDiceDialog(
       callback: async (_event, button) => {
         const number = Math.max(
           Math.floor(Number(button.form.elements.namedItem("number").value)),
-          1,
+          0,
         );
         const faces = Number(button.form.elements.namedItem("faces").value);
         await statItem.update({
           [`system.${stat}DiceBase.number`]: Math.max(
-            1,
+            0,
             number -
               (statItem.system.size.value - (statItem.system.size.min || 0)),
           ),

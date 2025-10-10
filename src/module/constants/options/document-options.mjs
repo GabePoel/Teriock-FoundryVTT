@@ -39,6 +39,10 @@ export const documentOptions = {
     name: "Fluency",
     icon: "compass-drafting",
   },
+  mount: {
+    name: "Mount",
+    icon: "horse",
+  },
   power: {
     name: "Power",
     icon: "person-rays",

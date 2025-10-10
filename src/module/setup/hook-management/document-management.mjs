@@ -6,7 +6,6 @@ export default function registerDocumentManagementHooks() {
     async (document, updateData, _options, userId) => {
       if (isOwnerAndCurrentUser(document, userId)) {
         if (
-          document.type === "equipment" &&
           document.system.isAttuned &&
           foundry.utils.hasProperty(updateData, "system.tier")
         ) {

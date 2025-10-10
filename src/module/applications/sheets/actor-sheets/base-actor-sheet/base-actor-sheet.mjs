@@ -69,6 +69,7 @@ export default class TeriockBaseActorSheet extends HackStatMixin(
       toggleDampenedDoc: this._toggleDampenedDoc,
       toggleDisabledDoc: this._toggleDisabledDoc,
       toggleEquippedDoc: this._toggleEquippedDoc,
+      toggleMountedDoc: this._toggleMountedDoc,
       toggleGluedDoc: this._toggleGluedDoc,
       toggleReaction: this._toggleReaction,
       toggleSb: this._toggleSb,
@@ -616,6 +617,24 @@ export default class TeriockBaseActorSheet extends HackStatMixin(
   }
 
   /**
+   * Toggles the mounted state of an embedded document.
+   * @param {MouseEvent} _event - The event object.
+   * @param {HTMLElement} target - The target element.
+   * @returns {Promise<void>} Promise that resolves when toggle is complete.
+   * @static
+   */
+  static async _toggleMountedDoc(_event, target) {
+    const embedded =
+      /** @type {TeriockMount|null} */
+      await _embeddedFromCard(this, target);
+    if (embedded.system.mounted) {
+      await embedded.system.unmount();
+    } else {
+      await embedded.system.mount();
+    }
+  }
+
+  /**
    * Toggles if the character still has a reaction.
    * @returns {Promise<void>} Promise that resolves when sb is toggled.
    * @static
@@ -954,6 +973,7 @@ export default class TeriockBaseActorSheet extends HackStatMixin(
     this._embeds.itemTypes = {
       equipment: tab === "inventory" ? this.actor.equipment : [],
       bodyParts: tab === "inventory" ? this.actor.bodyParts : [],
+      mounts: tab === "powers" ? this.actor.mounts : [],
       power: tab === "powers" ? this.actor.powers : [],
       rank: tab === "classes" ? this.actor.ranks : [],
     };
@@ -1006,6 +1026,7 @@ export default class TeriockBaseActorSheet extends HackStatMixin(
     );
     context.powers = docSort(this.actor.powers);
     context.species = docSort(this.actor.species);
+    context.mounts = docSort(this.actor.mounts);
     context.fluencies = docSort(this.actor.fluencies);
     context.consequences = docSort(this.actor.consequences, {
       alphabetical: true,

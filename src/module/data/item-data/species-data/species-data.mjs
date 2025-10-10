@@ -1,4 +1,3 @@
-import { setStatDiceDialog } from "../../../applications/dialogs/_module.mjs";
 import { copyAbility } from "../../../helpers/fetch.mjs";
 import { toTitleCase } from "../../../helpers/string.mjs";
 import { mergeFreeze } from "../../../helpers/utils.mjs";
@@ -213,31 +212,5 @@ export default class TeriockSpeciesModel extends StatDataMixin(
     }
     await this.parent.update(updateData);
     await super.refreshFromIndex();
-  }
-
-  /**
-   * Set an HP dice formula.
-   * @returns {Promise<void>}
-   */
-  async setHpDice() {
-    await setStatDiceDialog(
-      this.parent,
-      "hp",
-      this.hpDiceNumber,
-      this.hpDiceFaces,
-    );
-  }
-
-  /**
-   * Set an MP dice formula.
-   * @returns {Promise<void>}
-   */
-  async setMpDice() {
-    await setStatDiceDialog(
-      this.parent,
-      "mp",
-      this.mpDiceNumber,
-      this.mpDiceFaces,
-    );
   }
 }

@@ -68,6 +68,20 @@ export function _prepareHpMp(actorData) {
         Object.assign(actorData.mpDice, rank.system.mpDice);
       }
     });
+  docSort(actorData.parent.mounts)
+    .slice(0, diceLimit)
+    .forEach((mount) => {
+      if (mount.system.applyHp) {
+        actorData.hp.base += mount.system.totalHp;
+        hpDieBox += mount.system.renderedHitDice;
+        Object.assign(actorData.hpDice, mount.system.hpDice);
+      }
+      if (mount.system.applyMp) {
+        actorData.mp.base += mount.system.totalMp;
+        mpDieBox += mount.system.renderedManaDice;
+        Object.assign(actorData.mpDice, mount.system.mpDice);
+      }
+    });
   let hpMax = Math.max(1, actorData.hp.base);
   let mpMax = Math.max(1, actorData.mp.base);
   actorData.hp.max = hpMax;

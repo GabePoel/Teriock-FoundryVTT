@@ -70,7 +70,7 @@ export default class TeriockAttunementModel extends TeriockBaseEffectModel {
 
   /**
    * Gets the target document for this attunement.
-   * @returns {TeriockEquipment|null} The target document or null if not found.
+   * @returns {TeriockEquipment|TeriockMount|null} The target document or null if not found.
    */
   get targetDocument() {
     return this.actor?.items.get(this.target);
@@ -78,15 +78,24 @@ export default class TeriockAttunementModel extends TeriockBaseEffectModel {
 
   /**
    * Gets the usage status of the attunement target.
-   * @returns {string} The usage status ("Equipped", "Unequipped", or "Not on Character").
-   * @override
+   * @returns {string} The usage status.
    */
   get usage() {
     if (this.targetDocument) {
-      if (this.targetDocument.system.equipped) {
-        return "Equipped";
+      if (this.targetDocument.type === "equipment") {
+        if (this.targetDocument.system.equipped) {
+          return "Equipped";
+        } else {
+          return "Unequipped";
+        }
+      } else if (this.targetDocument.type === "mount") {
+        if (this.targetDocument.system.mounted) {
+          return "Mounted";
+        } else {
+          return "Unmounted";
+        }
       } else {
-        return "Unequipped";
+        return "Attuned";
       }
     } else {
       return "Not on Character";

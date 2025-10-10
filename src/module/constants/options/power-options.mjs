@@ -19,10 +19,6 @@ export const powerOptions = {
     name: "Innate",
     icon: "person",
   },
-  mount: {
-    name: "Mount",
-    icon: "horse",
-  },
   pact: {
     name: "Pact",
     icon: "signature",

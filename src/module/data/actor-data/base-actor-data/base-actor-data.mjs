@@ -45,7 +45,7 @@ export default class TeriockBaseActorModel extends ActorRollableTakesPart(
       "fluency",
       "resource",
     ],
-    childItemTypes: ["body", "equipment", "power", "rank", "species"],
+    childItemTypes: ["body", "equipment", "power", "rank", "species", "mount"],
     childMacroTypes: [],
   });
 

@@ -160,6 +160,11 @@ export default class TeriockActor extends ParentDocumentMixin(
       .metadata;
   }
 
+  /** @returns {TeriockMount[]} */
+  get mounts() {
+    return this.itemTypes?.mount || [];
+  }
+
   /**
    * Gets effects that expire based on movement.
    * @returns {TeriockConsequence[]} Array of movement expiration effects.

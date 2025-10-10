@@ -75,6 +75,9 @@ async function processSpecies(
   await creature.system.hardRefreshFromIndex();
   await creature.update({
     folder: creatureFolder.id,
+    "system.hp.value": creature.system.hp.max,
+    "system.mp.value": creature.system.mp.max,
+    "system.wither.value": 20,
   });
 }
 
