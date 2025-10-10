@@ -788,29 +788,29 @@ export default class TeriockBaseActorSheet extends HackStatMixin(
     /** @type {HTMLDivElement} */
     const mpDrawer = this.element.querySelector(".mp-die-drawer");
 
-    sidebar.classList.add("no-transition");
-    tabber.classList.add("no-transition");
-    hpDrawer.classList.add("no-transition");
-    mpDrawer.classList.add("no-transition");
+    sidebar?.classList.add("no-transition");
+    tabber?.classList.add("no-transition");
+    hpDrawer?.classList.add("no-transition");
+    mpDrawer?.classList.add("no-transition");
 
-    sidebar.classList.toggle("collapsed", !this._sidebarOpen);
-    tabber.classList.toggle("collapsed", !this._sidebarOpen);
-    hpDrawer.classList.toggle("closed", !this._hpDrawerOpen);
-    mpDrawer.classList.toggle("closed", !this._mpDrawerOpen);
+    sidebar?.classList.toggle("collapsed", !this._sidebarOpen);
+    tabber?.classList.toggle("collapsed", !this._sidebarOpen);
+    hpDrawer?.classList.toggle("closed", !this._hpDrawerOpen);
+    mpDrawer?.classList.toggle("closed", !this._mpDrawerOpen);
 
     //eslint-disable-next-line @typescript-eslint/no-unused-expressions
-    sidebar.offsetHeight;
+    sidebar?.offsetHeight;
     //eslint-disable-next-line @typescript-eslint/no-unused-expressions
-    tabber.offsetHeight;
+    tabber?.offsetHeight;
     //eslint-disable-next-line @typescript-eslint/no-unused-expressions
-    hpDrawer.offsetHeight;
+    hpDrawer?.offsetHeight;
     //eslint-disable-next-line @typescript-eslint/no-unused-expressions
-    mpDrawer.offsetHeight;
+    mpDrawer?.offsetHeight;
 
-    sidebar.classList.remove("no-transition");
-    tabber.classList.remove("no-transition");
-    hpDrawer.classList.remove("no-transition");
-    mpDrawer.classList.remove("no-transition");
+    sidebar?.classList.remove("no-transition");
+    tabber?.classList.remove("no-transition");
+    hpDrawer?.classList.remove("no-transition");
+    mpDrawer?.classList.remove("no-transition");
 
     this.element.querySelectorAll(".character-tabber").forEach((el) => {
       el.addEventListener("click", async (e) => {
@@ -869,7 +869,7 @@ export default class TeriockBaseActorSheet extends HackStatMixin(
 
     this.element
       .querySelector(".character-penalty-box")
-      .addEventListener("contextmenu", async (e) => {
+      ?.addEventListener("contextmenu", async (e) => {
         e.preventDefault();
         await this.document.update({ "system.combat.attackPenalty": 0 });
         e.stopPropagation();

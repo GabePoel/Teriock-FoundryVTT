@@ -192,6 +192,13 @@ foundry.helpers.Hooks.once("init", function () {
       label: "Creature",
       types: ["creature"],
     },
+    {
+      cls: applications.sheets.actor.InventorySheet,
+      doc: documents.TeriockActor,
+      label: "Inventory",
+      types: ["character", "creature"],
+      makeDefault: false,
+    },
     // Items
     {
       cls: applications.sheets.item.BodySheet,

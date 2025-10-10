@@ -1,0 +1,67 @@
+<div class="{{cssClass}} character-window">
+  <div class="character-page">
+    <div class="character-tab-content">
+      {{> "systems/teriock/src/templates/document-templates/shared/header.hbs"}}
+      <div class="character-tab inventory" style="padding-top: 0.25em;">
+        <div class="character-tab-page">
+          <div class="tcard-display">
+            <div class="money-panels tgrid g3">
+              {{#each TERIOCK.options.currency as |currency id|}}
+                <div class="money-panel tgrid g4">
+                  {{formInput
+                    (path ../systemFields.money "fields" id)
+                    value=(path ../system.money id)
+                    classes="tgrid-item gi1 money-panel-input tgrid-item tcenter"
+                  }}
+                  <div class="money-info tsubtle tcenter tgrid-item gi3">
+                    <div class="money-name">
+                      {{currency.name}}
+                    </div>
+                    <div class="money-value">
+                      ({{currency.value}} ₲, {{currency.weight}} lb)
+                    </div>
+                  </div>
+                </div>
+              {{/each}}
+              <div class="money-panel tgrid g4">
+                {{formInput
+                  systemFields.money.fields.debt
+                  value=system.money.debt
+                  classes="tgrid-item gi1 money-panel-input tgrid-item tcenter"
+                }}
+                <div class="money-info tsubtle tcenter tgrid-item gi3">
+                  <div class="money-name">
+                    Debt
+                  </div>
+                  <div class="money-value">
+                    (-1 ₲, {{system.interestRate}}% daily)
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="money-total {{#if (lt system.money.total 0)}}tred{{/if}}">
+              {{system.money.total}} ₲&nbsp;&nbsp;&nbsp;&nbsp;{{system.weight.money}} lb
+            </div>
+          </div>
+
+          <div class="tcard-display">
+            <div class="tcard-options">
+              {{tcardOptions settings.menus.equipmentOptions settings.menus.equipmentFilters
+                             settings.menus.equipmentSort
+                             settings.equipmentFilters.search "equipment"
+                             sortOptions=TERIOCK.options.display.equipmentSortOrders
+                             sortValue=settings.equipmentSortOption
+                             addAction="addEquipment" key="equipment"}}
+              {{#if settings.menus.equipmentFilters}}
+                <div class="tcard-options-content">
+                  {{> 'systems/teriock/src/templates/document-templates/actor-templates/character-template/filters/ch-equipment-filter.hbs'}}
+                </div>
+              {{/if}}
+            </div>
+            {{> 'systems/teriock/src/templates/document-templates/actor-templates/character-template/results/ch-equipment-results.hbs'}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
