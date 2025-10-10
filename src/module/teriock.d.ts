@@ -150,10 +150,13 @@ declare global {
   // Item
   // ----
 
+  const TeriockBodySheet: sheets.item.BodySheet;
   const TeriockEquipmentSheet: sheets.item.EquipmentSheet;
   const TeriockMountSheet: sheets.item.MountSheet;
   const TeriockPowerSheet: sheets.item.PowerSheet;
   const TeriockRankSheet: sheets.item.RankSheet;
+  const TeriockSpeciesSheet: sheets.item.SpeciesSheet;
+  const TeriockWrapperSheet: sheets.item.WrapperSheet;
 
   // Effect
   // ------

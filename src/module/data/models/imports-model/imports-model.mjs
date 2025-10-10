@@ -81,7 +81,7 @@ export default class ImportsModel extends DataModel {
     const actor = parent.actor;
     const toImport = [];
     const existingEquipmentKeys = new Set(
-      actor.bodyParts.map((e) => toCamelCase(e.name)),
+      actor.equipment.map((e) => toCamelCase(e.name)),
     );
     const possibleEquipment =
       /** @type {TeriockEquipment[]} */ await Promise.all(

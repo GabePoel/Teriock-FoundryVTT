@@ -16,6 +16,7 @@ async function processBody(bodyName) {
     bodyItem = await foundry.utils.fromUuid(bodyItem.uuid);
   }
   await bodyItem.system.wikiPull({ notify: false });
+  await bodyItem.update({ "system.description": "" });
 }
 
 const bodyPromises = Object.values(TERIOCK.index.bodyParts).map((bodyName) =>

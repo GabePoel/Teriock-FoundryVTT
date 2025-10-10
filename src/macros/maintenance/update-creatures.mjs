@@ -71,7 +71,18 @@ async function processSpecies(
   }
   const mechanics = creature.items.filter((i) => i.type === "mechanic");
   const mechanicIds = mechanics.map((m) => m.id);
-  await creature.deleteEmbeddedDocuments("Item", mechanicIds);
+  const equipmentNames = new Set(creature.equipment.map((e) => e.name));
+  const firstEquipment = [];
+  for (const name of equipmentNames) {
+    firstEquipment.push(creature.equipment.find((e) => e.name === name));
+  }
+  const otherEquipment = creature.equipment.filter(
+    (e) => !firstEquipment.map((e) => e.uuid).includes(e.uuid),
+  );
+  await creature.deleteEmbeddedDocuments("Item", [
+    ...mechanicIds,
+    ...otherEquipment.map((e) => e.id),
+  ]);
   await creature.system.hardRefreshFromIndex();
   await creature.update({
     folder: creatureFolder.id,
@@ -79,6 +90,20 @@ async function processSpecies(
     "system.mp.value": creature.system.mp.max,
     "system.wither.value": 20,
   });
+  await creature.updateEmbeddedDocuments("Item", [
+    ...creature.equipment.map((e) => {
+      return {
+        _id: e.id,
+        "system.description": "",
+      };
+    }),
+    ...creature.bodyParts.map((b) => {
+      return {
+        _id: b.id,
+        "system.description": "",
+      };
+    }),
+  ]);
 }
 
 const batchSize = 10;

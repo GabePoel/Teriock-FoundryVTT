@@ -25,6 +25,7 @@ async function processEquipment(equipmentName) {
     equipmentItem = await foundry.utils.fromUuid(equipmentItem.uuid);
   }
   await equipmentItem.system.wikiPull({ notify: false });
+  await equipmentItem.update({ "system.description": "" });
   return {
     equipmentName,
     success: true,
