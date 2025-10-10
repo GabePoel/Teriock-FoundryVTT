@@ -50,6 +50,7 @@ export default class TeriockDocumentSelector extends RichApplicationMixin(
       hint = "",
       tooltip = true,
       tooltipAsync = false,
+      openable = false,
     } = options;
     super(...args);
     this.docs = docs;
@@ -57,6 +58,7 @@ export default class TeriockDocumentSelector extends RichApplicationMixin(
     this.hint = hint;
     this.tooltip = tooltip;
     this.tooltipAsync = tooltipAsync;
+    this.openable = openable;
 
     this._resolve = null;
     this._result = new Promise((resolve) => (this._resolve = resolve));
@@ -143,9 +145,17 @@ export default class TeriockDocumentSelector extends RichApplicationMixin(
    * @private
    */
   _initTooltipLoader() {
-    if (this.tooltipAsync) {
-      this.element.querySelectorAll("[data-tooltip-async='true']").forEach(
-        /** @param {HTMLElement} el */ (el) => {
+    this.element.querySelectorAll("[data-uuid]").forEach(
+      /** @param {HTMLElement} el */ (el) => {
+        if (this.openable) {
+          el.addEventListener("dblclick", async (ev) => {
+            const target = /** @type {HTMLElement} */ ev.currentTarget;
+            const uuid = target.dataset.uuid;
+            const doc = /** @type {TeriockChild} */ await fromUuid(uuid);
+            await doc.sheet.render(true);
+          });
+        }
+        if (this.tooltipAsync) {
           el.addEventListener("mouseover", async (ev) => {
             const target = /** @type {HTMLElement} */ ev.currentTarget;
             const uuid = target.dataset.uuid;
@@ -162,15 +172,14 @@ export default class TeriockDocumentSelector extends RichApplicationMixin(
                   tooltipManager.tooltip.getAttribute("data-linked-uuid") ===
                   uuid
                 ) {
-                  //tooltipManager.tooltip.innerHTML = tooltip;
                   tooltipManager.activate(target);
                 }
               }
             }
           });
-        },
-      );
-    }
+        }
+      },
+    );
   }
 
   /** @inheritDoc */
@@ -194,6 +203,7 @@ export default class TeriockDocumentSelector extends RichApplicationMixin(
       multi: this.multi,
       hint: this.hint,
       tooltip: this.tooltip,
+      tooltipAsync: this.tooltipAsync,
     });
     return context;
   }

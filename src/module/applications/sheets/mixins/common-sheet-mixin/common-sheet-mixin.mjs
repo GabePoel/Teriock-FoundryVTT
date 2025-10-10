@@ -409,6 +409,12 @@ export default (Base) => {
        * @returns {Promise<void>} Promise that resolves when toggle is complete.
        */
       static async _toggleDisabledDoc(_event, target) {
+        if (!this.editable) {
+          foundry.ui.notifications.warn(
+            `Cannot toggle disabled. Sheet is not editable.`,
+          );
+          return;
+        }
         const embedded = await _embeddedFromCard(this, target);
         await embedded?.toggleDisabled();
       }
@@ -1013,6 +1019,10 @@ export default (Base) => {
       /** @inheritDoc */
       async _renderFrame(options) {
         const frame = await super._renderFrame(options);
+        if (this.document.inCompendium) {
+          this.window.header.style.backgroundColor =
+            "var(--compendium-sheet-header-background-color)";
+        }
         if (
           this.document.documentName === "Item" ||
           this.document.documentName === "ActiveEffect"
@@ -1031,6 +1041,12 @@ export default (Base) => {
             "data-tooltip",
             this.editable ? "Unlocked" : "Locked",
           );
+          if (
+            !this.document.isOwner ||
+            (this.document.inCompendium && this.document.compendium.locked)
+          ) {
+            toggleButton.setAttribute("disabled", "disabled");
+          }
           this.window.controls.after(toggleButton);
         }
         return frame;

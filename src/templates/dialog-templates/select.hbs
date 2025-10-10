@@ -25,10 +25,12 @@
           <li class="doc-select-item">
             <label class="doc-select-row tcard"
               {{#if (exists doc.uuid)}}
-                   data-tooltip-async="true"
                    data-uuid="{{{doc.uuid}}}"
+                     {{#if ../tooltipAsync}}
+                   data-tooltip-async="true"
                    data-tooltip-fetched="false"
                    data-tooltip-html="{{doc.tooltip}}"
+                     {{/if}}
               {{/if}}
               {{#if ../tooltip}}
                    data-tooltip-html="{{doc.tooltip}}"

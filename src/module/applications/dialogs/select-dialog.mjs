@@ -180,6 +180,7 @@ export async function selectPropertyDialog() {
     hint: "Please select a property.",
     title: "Select Property",
     tooltipAsync: tooltipAsync,
+    openable: true,
   });
   if (chosen) {
     return toCamelCase(chosen.name);
@@ -207,6 +208,7 @@ export async function selectTradecraftDialog() {
     hint: "Please select a tradecraft.",
     title: "Select Tradecraft",
     tooltipKey: "tooltip",
+    openable: true,
   });
   if (chosen) {
     return chosen.uuid;
@@ -234,6 +236,7 @@ export async function selectAbilityDialog() {
     hint: "Please select an ability.",
     title: "Select Ability",
     tooltipAsync: tooltipAsync,
+    openable: true,
   });
   if (chosen) {
     return toCamelCase(chosen.name);
@@ -264,6 +267,7 @@ export async function selectEquipmentTypeDialog() {
     hint: "Please select an equipment type",
     title: "Select Equipment Type",
     tooltipAsync: tooltipAsync,
+    openable: true,
   });
   if (chosen) {
     chosen = await foundry.utils.fromUuid(chosen.uuid);

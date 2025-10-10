@@ -15,6 +15,7 @@ export async function selectDocumentsDialog(documents, options = {}) {
       imgKey: "img",
       multi: true,
       nameKey: "name",
+      openable: false,
       title: "Select Documents",
       tooltip: true,
       tooltipAsync: false,
@@ -41,9 +42,10 @@ export async function selectDocumentsDialog(documents, options = {}) {
       name: foundry.utils.getProperty(doc, options.nameKey),
       img: foundry.utils.getProperty(doc, options.imgKey),
       rescale: doc.rescale || false,
-      uuid: options.tooltipAsync
-        ? foundry.utils.getProperty(doc, options.tooltipUUID)
-        : undefined,
+      uuid:
+        options.tooltipAsync || options.openable
+          ? foundry.utils.getProperty(doc, options.tooltipUUID)
+          : undefined,
       tooltip: options.tooltipAsync ? TERIOCK.display.panel.loading : undefined,
     };
     if (options.tooltipKey && options.tooltip && !options.tooltipAsync) {
@@ -69,6 +71,7 @@ export async function selectDocumentsDialog(documents, options = {}) {
     tooltip: options.tooltip,
     title: options.title,
     tooltipAsync: options.tooltipAsync,
+    openable: options.openable,
   });
 
   const selected = await sheet.select();

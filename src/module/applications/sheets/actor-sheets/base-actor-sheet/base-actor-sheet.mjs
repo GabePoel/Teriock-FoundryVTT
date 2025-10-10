@@ -413,6 +413,7 @@ export default class TeriockBaseActorSheet extends HackStatMixin(
       {
         hint: "Select the default equipment you attack with.",
         label: "Select Primary Attacker",
+        openable: true,
       },
     );
     if (attacker) {
@@ -436,6 +437,7 @@ export default class TeriockBaseActorSheet extends HackStatMixin(
       {
         hint: "Select the default equipment you block with.",
         label: "Select Primary Blocker",
+        openable: true,
       },
     );
     if (attacker) {

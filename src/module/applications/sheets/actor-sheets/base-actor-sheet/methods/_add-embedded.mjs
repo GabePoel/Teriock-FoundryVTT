@@ -100,6 +100,7 @@ export async function _addRank(sheet) {
   ]);
   const referenceRank = await selectDocumentDialog(possibleRanks, {
     title: "Select Rank",
+    openable: true,
   });
   const rankNumber = referenceRank.system.classRank;
   let rank = await copyRank(rankClass, rankNumber);
@@ -140,7 +141,10 @@ export async function _addRank(sheet) {
     );
     const chosenCombatAbility = await selectDocumentDialog(
       availableCombatAbilities,
-      { title: "Select Combat Ability" },
+      {
+        title: "Select Combat Ability",
+        openable: true,
+      },
     );
     const chosenCombatAbilityName = chosenCombatAbility.name;
     chosenAbilityNames.push(chosenCombatAbilityName);
@@ -153,7 +157,10 @@ export async function _addRank(sheet) {
     );
     const chosenSupportAbility = await selectDocumentDialog(
       availableSupportAbilities,
-      { title: "Select Support Ability" },
+      {
+        title: "Select Support Ability",
+        openable: true,
+      },
     );
     const supportAbilityName = chosenSupportAbility.name;
     chosenAbilityNames.push(supportAbilityName);

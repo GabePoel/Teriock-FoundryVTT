@@ -19,6 +19,8 @@ declare global {
       tooltipAsync?: boolean;
       /** Path to a UUID used for fetching the tooltip */
       tooltipUUID?: string;
+      /** Whether document sheets can be opened on double click */
+      openable?: boolean;
     };
 
     export type DocumentsSelect = Teriock.SelectOptions.DocumentSelect & {
@@ -33,7 +35,7 @@ declare global {
       img: string;
       /** HTML to include in tooltip */
       tooltip?: string;
-      /** UUID used only for fetching tooltips */
+      /** UUID used for opening document sheets and fetching tooltips */
       uuid?: string;
       /** Size the image up for dynamic rings */
       rescale?: boolean;

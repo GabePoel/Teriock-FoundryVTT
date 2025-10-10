@@ -1,9 +1,6 @@
 import { TeriockRoll } from "../dice/_module.mjs";
 import { TeriockChatMessage } from "../documents/_module.mjs";
-import {
-  makeDamageDrainTypePanels,
-  makeDamageTypeButtons
-} from "./html.mjs";
+import { makeDamageDrainTypePanels, makeDamageTypeButtons } from "./html.mjs";
 
 /**
  * Roll with harm buttons.
