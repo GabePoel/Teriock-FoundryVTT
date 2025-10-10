@@ -37,9 +37,9 @@ async function processRank(archetype, className, classObj, rank, classFolder) {
   };
 
   try {
-    const TeriockItem = CONFIG.Item.documentClass;
+    const ItemClass = CONFIG.Item.documentClass;
     if (!rankItem) {
-      rankItem = /** @type {TeriockRank} */ await TeriockItem.create(itemData, {
+      rankItem = /** @type {TeriockRank} */ await ItemClass.create(itemData, {
         pack: "teriock.classes",
       });
     }

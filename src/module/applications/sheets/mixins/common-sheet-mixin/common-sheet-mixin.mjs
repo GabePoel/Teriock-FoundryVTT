@@ -65,6 +65,7 @@ export default (Base) => {
           useOneDoc: this._useOneDoc,
           wikiOpenThis: this._wikiOpenThis,
           wikiPullThis: this._wikiPullThis,
+          gmNotesOpen: this._gmNotesOpen,
         },
         classes: ["teriock", "ability"],
         dragDrop: [
@@ -261,6 +262,15 @@ export default (Base) => {
           left: this.position.left + 10,
         };
         await new foundry.applications.apps.FilePicker(options).browse();
+      }
+
+      /**
+       * Opens the notes page and makes one if one doesn't already exist.
+       * @returns {Promise<void>}
+       * @private
+       */
+      static async _gmNotesOpen() {
+        await this.document.system.gmNotesOpen();
       }
 
       /**
@@ -732,12 +742,15 @@ export default (Base) => {
        */
       async _onDrop(event) {
         const document = await TextEditor.getDragEventData(event);
+        console.log(document);
         if (document.type === "ActiveEffect") {
           await this._onDropActiveEffect(event, document);
         } else if (document.type === "Item") {
           await this._onDropItem(event, document);
         } else if (document.type === "Macro") {
           await this._onDropMacro(event, document);
+        } else if (document.type === "JournalEntryPage") {
+          await this._onDropJournalEntryPage(event, document);
         }
         return true;
       }
@@ -830,6 +843,24 @@ export default (Base) => {
             },
           );
         return newItems[0];
+      }
+
+      /**
+       * Handles dropping of a journal entry page on this document.
+       * @param {DragEvent} _event - The drop event.
+       * @param {object} data - The macro data.
+       * @returns {Promise<TeriockJournalEntryPage|void>} Promise that resolves to the dropped journal entry page if
+       *   successful.
+       * @private
+       */
+      async _onDropJournalEntryPage(_event, data) {
+        if (game.user.isGM) {
+          const updateData = {
+            "system.gmNotes": data.uuid,
+          };
+          await this.document.update(updateData);
+          return fromUuidSync(data.uuid);
+        }
       }
 
       /**
@@ -1048,6 +1079,20 @@ export default (Base) => {
             toggleButton.setAttribute("disabled", "disabled");
           }
           this.window.controls.after(toggleButton);
+        }
+        if (game.user.isGM) {
+          const notesButton = document.createElement("button");
+          notesButton.classList.add(
+            ...[
+              "header-control",
+              "icon",
+              "fa-solid",
+              this.editable ? "fa-lock-open" : "fa-notes",
+            ],
+          );
+          notesButton.setAttribute("data-action", "gmNotesOpen");
+          notesButton.setAttribute("data-tooltip", "Open GM Notes");
+          this.window.controls.after(notesButton);
         }
         return frame;
       }

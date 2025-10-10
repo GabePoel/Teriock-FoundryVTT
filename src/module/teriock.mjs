@@ -120,6 +120,9 @@ foundry.helpers.Hooks.once("init", function () {
   CONFIG.Combat.documentClass = documents.TeriockCombat;
   CONFIG.Item.documentClass = documents.TeriockItem;
   CONFIG.JournalEntry.documentClass = documents.TeriockJournalEntry;
+  CONFIG.JournalEntryCategory.documentClass =
+    documents.TeriockJournalEntryCategory;
+  CONFIG.JournalEntryPage.documentClass = documents.TeriockJournalEntryPage;
   CONFIG.Macro.documentClass = documents.TeriockMacro;
   CONFIG.Scene.documentClass = documents.TeriockScene;
   CONFIG.Token.documentClass = documents.TeriockTokenDocument;
@@ -313,6 +316,8 @@ foundry.helpers.Hooks.once("init", function () {
     Token: documents.TeriockTokenDocument,
     User: documents.TeriockUser,
     JournalEntry: documents.TeriockJournalEntry,
+    JournalEntryPage: documents.TeriockJournalEntryPage,
+    JournalEntryCategory: documents.TeriockJournalEntryCategory,
     Roll: dice.TeriockRoll,
     data: data,
     packs: {

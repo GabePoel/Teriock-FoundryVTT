@@ -20,7 +20,7 @@ const { Item } = foundry.documents;
  * @mixes CommonDocumentMixin
  * @mixes ParentDocumentMixin
  * @property {"Item"} documentName
- * @property {EmbeddedCollection<string, TeriockEffect>} effects
+ * @property {EmbeddedCollection<Teriock.ID<TeriockEffect>, TeriockEffect>} effects
  * @property {Readonly<TeriockEffect[]>} transferredEffects
  * @property {Teriock.Documents.ItemType} type
  * @property {Teriock.UUID<TeriockItem>} uuid

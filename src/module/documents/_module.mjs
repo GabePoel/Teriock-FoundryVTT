@@ -1,12 +1,14 @@
 export * as mixins from "./mixins/_module.mjs";
 export { default as TeriockActor } from "./actor.mjs";
+export { default as TeriockChatMessage } from "./chat-message.mjs";
 export { default as TeriockCombat } from "./combat.mjs";
 export { default as TeriockEffect } from "./effect.mjs";
 export { default as TeriockFolder } from "./folder.mjs";
 export { default as TeriockItem } from "./item.mjs";
+export { default as TeriockJournalEntry } from "./journal-entry.mjs";
+export { default as TeriockJournalEntryCategory } from "./journal-entry-category.mjs";
+export { default as TeriockJournalEntryPage } from "./journal-entry-page.mjs";
 export { default as TeriockMacro } from "./macro.mjs";
-export { default as TeriockChatMessage } from "./chat-message.mjs";
 export { default as TeriockScene } from "./scene.mjs";
 export { default as TeriockTokenDocument } from "./token-document.mjs";
 export { default as TeriockUser } from "./user.mjs";
-export { default as TeriockJournalEntry } from "./journal-entry.mjs";

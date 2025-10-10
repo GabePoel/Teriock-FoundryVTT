@@ -51,7 +51,8 @@ export default class TeriockBaseActorModel extends ActorRollableTakesPart(
 
   /** @inheritDoc */
   static defineSchema() {
-    return _defineSchema();
+    const schema = super.defineSchema();
+    return _defineSchema(schema);
   }
 
   /** @inheritDoc */

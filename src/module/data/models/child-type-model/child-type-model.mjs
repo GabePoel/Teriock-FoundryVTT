@@ -43,7 +43,7 @@ export default class ChildTypeModel extends CommonTypeModel {
    * @returns {Record<string, DataField>}
    */
   static defineSchema() {
-    const schema = {};
+    const schema = super.defineSchema();
     Object.assign(schema, {
       proficient: new fields.BooleanField({
         initial: false,
@@ -97,6 +97,15 @@ export default class ChildTypeModel extends CommonTypeModel {
         callback: this.parent.disable.bind(this.parent),
         condition: !this.parent.disabled && this.parent.type !== "equipment",
         group: "control",
+      },
+      {
+        name: "Open GM Notes",
+        icon: makeIcon("notes", "contextMenu"),
+        callback: async () => {
+          await this.gmNotesOpen();
+        },
+        condition: game.user.isGM,
+        group: "open",
       },
       {
         name: "Open Image",

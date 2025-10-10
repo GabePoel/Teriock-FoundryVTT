@@ -5,9 +5,13 @@ import "./documents/_types";
 import type {
   TeriockActor,
   TeriockChatMessage,
+  TeriockCombat,
   TeriockEffect,
   TeriockFolder,
   TeriockItem,
+  TeriockJournalEntry,
+  TeriockJournalEntryCategory,
+  TeriockJournalEntryPage,
   TeriockMacro,
   TeriockScene,
   TeriockTokenDocument,
@@ -37,9 +41,13 @@ declare global {
 
   const TeriockActor: TeriockActor;
   const TeriockChatMessage: TeriockChatMessage;
+  const TeriockCombat: TeriockCombat;
   const TeriockEffect: TeriockEffect;
   const TeriockFolder: TeriockFolder;
   const TeriockItem: TeriockItem;
+  const TeriockJournalEntry: TeriockJournalEntry;
+  const TeriockJournalEntryCategory: TeriockJournalEntryCategory;
+  const TeriockJournalEntryPage: TeriockJournalEntryPage;
   const TeriockMacro: TeriockMacro;
   const TeriockScene: TeriockScene;
   const TeriockTokenDocument: TeriockTokenDocument;

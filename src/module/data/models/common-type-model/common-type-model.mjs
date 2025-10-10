@@ -1,7 +1,9 @@
+import { TeriockJournalEntry } from "../../../documents/_module.mjs";
 import { copyItem, getAbility, getProperty } from "../../../helpers/fetch.mjs";
 import { freeze } from "../../../helpers/utils.mjs";
 
 const { TypeDataModel } = foundry.abstract;
+const { fields } = foundry.data;
 
 export default class CommonTypeModel extends TypeDataModel {
   /**
@@ -15,6 +17,18 @@ export default class CommonTypeModel extends TypeDataModel {
     childMacroTypes: [],
     preservedProperties: [],
   });
+
+  /** @inheritDoc */
+  static defineSchema() {
+    return {
+      gmNotes: new fields.DocumentUUIDField({
+        required: false,
+        nullable: true,
+        initial: null,
+        gmOnly: true,
+      }),
+    };
+  }
 
   /**
    * @returns {TeriockActor|null}
@@ -94,6 +108,80 @@ export default class CommonTypeModel extends TypeDataModel {
         this.parent.name,
         this.constructor.metadata.indexCompendiumKey,
       );
+    }
+  }
+
+  /**
+   * Open the GM notes or make them if they don't exist.
+   * @returns {Promise<void>}
+   */
+  async gmNotesOpen() {
+    let notesPage;
+    if (this.gmNotes) {
+      notesPage = /** @type {TeriockJournalEntryPage} */ await fromUuid(
+        this.gmNotes,
+      );
+    }
+    if (notesPage) {
+      const notesJournal = notesPage.parent;
+      await notesJournal.sheet.render(true);
+      notesJournal.sheet.goToPage(notesPage.id);
+    } else {
+      const journalEntryName = game.settings.get(
+        "teriock",
+        "gmDocumentNotesJournalName",
+      );
+      //noinspection JSUnresolvedReference
+      let notesJournal = game.journal.getName(journalEntryName);
+      if (!notesJournal) {
+        notesJournal = await TeriockJournalEntry.create({
+          name: journalEntryName,
+        });
+      }
+      if (notesJournal) {
+        const notesCategoryName =
+          TERIOCK.options.document[this.parent.type]?.name || "Other";
+        notesPage = notesJournal.pages.find(
+          (p) =>
+            p.name === this.parent.name &&
+            notesJournal.categories.get(p.category)?.name === notesCategoryName,
+        );
+        if (!notesPage) {
+          let notesCategory =
+            notesJournal.categories.getName(notesCategoryName);
+          if (!notesCategory) {
+            const categories = await notesJournal.createEmbeddedDocuments(
+              "JournalEntryCategory",
+              [
+                {
+                  name: notesCategoryName,
+                },
+              ],
+            );
+            notesCategory = categories[0];
+          }
+          const pages = await notesJournal.createEmbeddedDocuments(
+            "JournalEntryPage",
+            [
+              {
+                name: this.parent.name,
+                type: "text",
+                category: notesCategory.id,
+              },
+            ],
+          );
+          notesPage = pages[0];
+        }
+        if (notesPage) {
+          await notesJournal.sheet.render(true);
+          notesJournal.sheet.goToPage(notesPage.id);
+          if (!this.parent.inCompendium) {
+            await this.parent.update({
+              "system.gmNotes": notesPage.uuid,
+            });
+          }
+        }
+      }
     }
   }
 

@@ -1,6 +1,7 @@
 import { toTitleCase } from "../helpers/string.mjs";
 
 export function registerSettings() {
+  //noinspection JSValidateJSDoc
   /** @type {Record<string, Partial<SettingConfig>>} */
   const settings = {
     automaticallyPayAbilityCosts: {
@@ -65,6 +66,14 @@ export function registerSettings() {
       name: "Developer Mode",
       scope: "world",
       type: Boolean,
+    },
+    gmDocumentNotesJournalName: {
+      config: true,
+      default: "GM Document Notes",
+      hint: "Name of the journal entry that linked document notes will automatically be added to.",
+      name: "GM Document Notes Journal Name",
+      scope: "world",
+      type: String,
     },
   };
   const quickIndexDefaults = {

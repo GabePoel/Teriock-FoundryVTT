@@ -10,6 +10,7 @@ const { TokenDocument } = foundry.documents;
  * @mixes ChangeableDocumentMixin
  * @mixes ClientDocumentMixin
  * @property {"TokenDocument"} documentName
+ * @property {Readonly<TeriockCombat>} combat
  * @property {TeriockActor} actor
  * @property {TeriockToken} object
  * @property {boolean} isOwner

@@ -121,8 +121,6 @@ function cleanEntry(doc) {
       delete doc.system.senses;
       delete doc.system.sheet;
       delete doc.system.speedAdjustments;
-      delete doc.system.hp;
-      delete doc.system.mp;
       delete doc.system.wither;
       delete doc.system.tradecrafts;
     }
