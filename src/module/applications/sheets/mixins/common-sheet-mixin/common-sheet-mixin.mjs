@@ -1077,7 +1077,7 @@ export default (Base) => {
           ) {
             toggleButton.setAttribute("disabled", "disabled");
           }
-          this.window.controls.after(toggleButton);
+          this.window.controls.before(toggleButton);
         }
         if (game.user.isGM) {
           const notesButton = document.createElement("button");
@@ -1086,7 +1086,7 @@ export default (Base) => {
           );
           notesButton.setAttribute("data-action", "gmNotesOpen");
           notesButton.setAttribute("data-tooltip", "Open GM Notes");
-          this.window.controls.after(notesButton);
+          this.window.controls.before(notesButton);
         }
         return frame;
       }
