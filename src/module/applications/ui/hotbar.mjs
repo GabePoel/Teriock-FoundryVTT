@@ -43,6 +43,7 @@ export default class TeriockHotbar extends Hotbar {
           const options = {
             advantage: event?.altKey,
             disadvantage: event?.shiftKey,
+            secret: event?.shiftKey,
             twoHanded: event?.ctrlKey,
           };
           await item.use(options);`;

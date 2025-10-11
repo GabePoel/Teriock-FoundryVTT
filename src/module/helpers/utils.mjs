@@ -74,6 +74,41 @@ export function convertUnits(range, fromUnits, toUnits) {
 }
 
 /**
+ * Sort conditions.
+ * @param {Teriock.Parameters.Condition.ConditionKey[]} conditions
+ */
+export function conditionSort(conditions) {
+  conditions.sort((a, b) => {
+    if (a === "dead") {
+      return -1;
+    }
+    if (b === "dead") {
+      return 1;
+    }
+    if (a === "unconscious") {
+      return b === "dead" ? 1 : -1;
+    }
+    if (b === "unconscious") {
+      return a === "dead" ? -1 : 1;
+    }
+    if (a === "down") {
+      if (b === "dead" || b === "unconscious") {
+        return 1;
+      }
+      return -1;
+    }
+    if (b === "down") {
+      if (a === "dead" || a === "unconscious") {
+        return -1;
+      }
+      return 1;
+    }
+    return a.localeCompare(b);
+  });
+  return conditions;
+}
+
+/**
  * Sort documents.
  * @template T
  * @param {T[]} docs

@@ -4,7 +4,7 @@ const threeToggleInitial = 0;
 /**
  * @type {BaseActorSheetSettings}
  */
-export const _defaultSheetSettings = {
+export const defaultSheetSettings = {
   abilityFilters: {
     basic: threeToggleInitial,
     broken: threeToggleInitial,

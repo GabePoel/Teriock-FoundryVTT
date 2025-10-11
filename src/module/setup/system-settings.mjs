@@ -57,21 +57,19 @@ export function registerSettings() {
       scope: "user",
       type: Boolean,
     },
-    developerMode: {
-      config: true,
-      default: false,
-      hint:
-        "Check this if you are a developer of the Teriock system and need additional features. Do not check this " +
-        "otherwise. It is likely to break your game. Even module developers shouldn't check this.",
-      name: "Developer Mode",
-      scope: "world",
-      type: Boolean,
-    },
     gmDocumentNotesJournalName: {
       config: true,
       default: "GM Document Notes",
       hint: "Name of the journal entry that linked document notes will automatically be added to.",
       name: "GM Document Notes Journal Name",
+      scope: "world",
+      type: String,
+    },
+    playerMacrosFolderName: {
+      config: true,
+      default: "Player Macros",
+      hint: "Name of the folder for macros players create with hotbar drops.",
+      name: "Player Macros Folder Name",
       scope: "world",
       type: String,
     },
@@ -92,6 +90,16 @@ export function registerSettings() {
       default: initial,
     };
   }
+  settings.developerMode = {
+    config: true,
+    default: false,
+    hint:
+      "Check this if you are a developer of the Teriock system and need additional features. Do not check this " +
+      "otherwise. It is likely to break your game. Even module developers shouldn't check this.",
+    name: "Developer Mode",
+    scope: "world",
+    type: Boolean,
+  };
   for (const [key, data] of Object.entries(settings)) {
     game.settings.register("teriock", key, data);
   }

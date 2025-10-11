@@ -18,12 +18,11 @@ function binaryFilter(filterVal, actualVal) {
 /**
  * Filters abilities based on various criteria including type, costs, and properties.
  * Applies multiple filters to narrow down the ability list.
- * @param {TeriockActor} actor - The actor whose abilities to filter.
  * @param {TeriockAbility[]} abilities - Array of abilities to filter.
  * @param {Partial<AbilityFilters>} filters - Object containing filter criteria.
  * @returns {Array} Filtered array of abilities.
  */
-export function _filterAbilities(actor, abilities, filters = {}) {
+export function filterAbilities(abilities, filters = {}) {
   if (!abilities || !Array.isArray(abilities) || abilities.length === 0) {
     return [];
   }
@@ -67,12 +66,11 @@ export function _filterAbilities(actor, abilities, filters = {}) {
 /**
  * Filters equipment based on various criteria including properties, state, and class.
  * Applies multiple filters to narrow down the equipment list.
- * @param {TeriockActor} actor - The actor whose equipment to filter.
  * @param {TeriockEquipment[]} equipment - Array of equipment to filter.
  * @param {Partial<EquipmentFilters>} filters - Object containing filter criteria.
  * @returns {Array} Filtered array of equipment.
  */
-export function _filterEquipment(actor, equipment, filters = {}) {
+export function filterEquipment(equipment, filters = {}) {
   if (!equipment || !Array.isArray(equipment) || equipment.length === 0) {
     return [];
   }

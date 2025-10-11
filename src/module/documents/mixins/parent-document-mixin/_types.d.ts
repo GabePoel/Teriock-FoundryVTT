@@ -6,6 +6,7 @@ import type {
   TeriockConsequence,
   TeriockEquipment,
   TeriockFluency,
+  TeriockMount,
   TeriockPower,
   TeriockProperty,
   TeriockRank,
@@ -31,6 +32,7 @@ declare global {
       rank?: TeriockRank[];
       species?: TeriockSpecies[];
       body?: TeriockBody[];
+      mount?: TeriockMount[];
     };
 
     /** The names of each {@link TeriockEffect} this contains, in camel case, keyed by type. */

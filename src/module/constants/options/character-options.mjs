@@ -17,7 +17,7 @@ export const characterOptions = {
   },
   protectionMap: {
     immunities: {
-      action: "immune",
+      action: "rollImmunity",
       text: "Immunity",
     },
     resistances: {
@@ -29,7 +29,7 @@ export const characterOptions = {
       text: "Hexproof",
     },
     hexseals: {
-      action: "immune",
+      action: "rollImmunity",
       text: "Hexseal",
     },
   },

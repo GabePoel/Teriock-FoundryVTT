@@ -900,7 +900,6 @@ export default (Base) => {
             this.editable ? "Unlocked" : "Locked",
           );
         }
-
         this.editable = this.isEditable && !this._locked;
         _connectEmbedded(this.document, this.element, this.editable);
         this._connect(".chat-button", "contextmenu", (e) => {
@@ -1083,12 +1082,7 @@ export default (Base) => {
         if (game.user.isGM) {
           const notesButton = document.createElement("button");
           notesButton.classList.add(
-            ...[
-              "header-control",
-              "icon",
-              "fa-solid",
-              this.editable ? "fa-lock-open" : "fa-notes",
-            ],
+            ...["header-control", "icon", "fa-solid", "fa-notes"],
           );
           notesButton.setAttribute("data-action", "gmNotesOpen");
           notesButton.setAttribute("data-tooltip", "Open GM Notes");

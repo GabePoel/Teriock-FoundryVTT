@@ -1,10 +1,11 @@
 import { documentOptions } from "../../../../constants/options/document-options.mjs";
-import TeriockBaseActorSheet from "../base-actor-sheet/base-actor-sheet.mjs";
+import TeriockPlayableActorSheet from "../base-actor-sheet/playable-actor-sheet.mjs";
 
 /**
  * Sheet for a {@link TeriockCharacter}.
  */
-export default class TeriockCharacterSheet extends TeriockBaseActorSheet {
+export default class TeriockCharacterSheet extends TeriockPlayableActorSheet {
+  //noinspection JSValidateTypes
   /**
    * @inheritDoc
    * @type {Partial<ApplicationConfiguration>}

@@ -7,7 +7,7 @@
  * @param {Record<string, *>} sortMap - Map of sort keys to accessor functions.
  * @returns {TeriockAbility[]|TeriockEquipment[]} A sorted array of items.
  */
-export function _sortEmbedded(items, sortKey, ascending, sortMap = {}) {
+function sortEmbedded(items, sortKey, ascending, sortMap = {}) {
   if (!items || !Array.isArray(items) || items.length === 0) {
     return [];
   }
@@ -18,7 +18,7 @@ export function _sortEmbedded(items, sortKey, ascending, sortMap = {}) {
     const bVal = accessor(b) ?? "";
     return typeof aVal === "number" ? aVal - bVal : aVal.localeCompare(bVal);
   });
-  return ascending ? sorted : sorted.reverse();
+  return ascending ? sorted : sorted.reverse() || [];
 }
 
 /**
@@ -28,7 +28,7 @@ export function _sortEmbedded(items, sortKey, ascending, sortMap = {}) {
  * @param {TeriockAbility[]} abilities
  * @returns {TeriockAbility[]} A sorted array of abilities.
  */
-export function _sortAbilities(actor, abilities) {
+export function sortAbilities(actor, abilities) {
   /** @type {TeriockBaseActorSheet} */
   const sheet = actor.sheet;
   const sortKey = sheet.settings.abilitySortOption;
@@ -46,7 +46,7 @@ export function _sortAbilities(actor, abilities) {
     /** @param {TeriockAbility} a */
     type: (a) => a.system.form ?? "",
   };
-  return _sortEmbedded(abilities, sortKey, ascending, sortMap);
+  return sortEmbedded(abilities, sortKey, ascending, sortMap) || [];
 }
 
 /**
@@ -56,7 +56,7 @@ export function _sortAbilities(actor, abilities) {
  * @param {TeriockEquipment[]} equipment
  * @returns {TeriockEquipment[]} Sorted array of equipment.
  */
-export function _sortEquipment(actor, equipment) {
+export function sortEquipment(actor, equipment) {
   /** @type {TeriockBaseActorSheet} */
   const sheet = actor.sheet;
   const sortKey = sheet.settings.equipmentSortOption;
@@ -90,5 +90,5 @@ export function _sortEquipment(actor, equipment) {
     /** @param {TeriockEquipment} e */
     weight: (e) => e.system.weight.value ?? 0,
   };
-  return _sortEmbedded(equipment, sortKey, ascending, sortMap);
+  return sortEmbedded(equipment, sortKey, ascending, sortMap);
 }
