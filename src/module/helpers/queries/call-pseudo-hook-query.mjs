@@ -1,7 +1,7 @@
 /**
  * Query that calls a pseudo-hook.
  * @param {Teriock.QueryData.CallPseudoHook} queryData
- * @param {{timeout?: number}} timeout
+ * @param {{_timeout?: number}} timeout
  * @returns {Promise<void>}
  */
 export default async function callPseudoHookQuery(queryData, { _timeout }) {

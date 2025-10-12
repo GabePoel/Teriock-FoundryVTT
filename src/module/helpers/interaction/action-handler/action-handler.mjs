@@ -1,8 +1,12 @@
+//noinspection JSUnusedGlobalSymbols
+
+import InteractionHandler from "../interaction-handler.mjs";
+
 /**
  * Handler for calling actions when clicking on buttons in chat messages.
  * @template {DOMStringMap} [TDataset=DOMStringMap]
  */
-export default class ActionHandler {
+export default class ActionHandler extends InteractionHandler {
   /**
    * Name of action to connect to listeners.
    * @type {string}
@@ -14,39 +18,19 @@ export default class ActionHandler {
    * @param {HTMLElement} element
    */
   constructor(event, element) {
+    super();
     event.stopPropagation();
     this.event = event;
     this.element = element;
     this.dataset = this.element.dataset;
-
-    const tokenLayer = /** @type {TokenLayer} */ game.canvas.tokens;
-    const user = /** @type {TeriockUser} */ game.user;
-
-    this.selectedTokens =
-      /** @type {TeriockTokenDocument[]} */ tokenLayer.controlled.filter(
-        (t) => t,
-      );
-    this.selectedActors = /** @type {TeriockActor[]} */ this.selectedTokens
-      .map((t) => t.actor)
-      .filter((a) => a);
-    this.targetedTokens = /** @type {TeriockTokenDocument[]} */ Array.from(
-      user.targets,
-    ).filter((t) => t);
-    this.targetedActors = /** @type {TeriockActor[]} */ this.targetedTokens
-      .map((t) => t.actor)
-      .filter((a) => a);
-    this.tokens = this.selectedTokens;
-    this.actors = this.selectedActors;
     if (event.ctrlKey) {
       this.tokens = this.targetedTokens;
       this.actors = this.targetedActors;
     }
-
     this.commonRollOptions = {
       advantage: event.altKey,
       disadvantage: event.shiftKey,
     };
-
     this.critRollOptions = {
       crit: event.altKey,
     };
@@ -55,12 +39,14 @@ export default class ActionHandler {
   /**
    * Left-click action.
    * @returns {Promise<void>}
+   * @abstract
    */
   async primaryAction() {}
 
   /**
    * Right-click action.
    * @returns {Promise<void>}
+   * @abstract
    */
   async secondaryAction() {}
 }

@@ -2,7 +2,7 @@ import { TeriockRoll } from "../../../../../dice/_module.mjs";
 import {
   tokenActor,
   tokenImage,
-  tokenName
+  tokenName,
 } from "../../../../../helpers/utils.mjs";
 
 /**

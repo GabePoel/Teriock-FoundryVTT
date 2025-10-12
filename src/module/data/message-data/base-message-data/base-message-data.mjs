@@ -327,6 +327,59 @@ export default class TeriockBaseMessageModel extends TypeDataModel {
       html.style.position = "relative";
     }
 
+    html.querySelectorAll(".teriock-target-container").forEach(
+      /** @param {HTMLElement} container */ (container) => {
+        let clickTimeout = null;
+
+        container.addEventListener("click", async (event) => {
+          event.stopPropagation();
+          const uuid = container.getAttribute("data-uuid");
+          if (!uuid) {
+            return;
+          }
+          if (clickTimeout) {
+            clearTimeout(clickTimeout);
+            clickTimeout = null;
+            return;
+          }
+          clickTimeout = setTimeout(async () => {
+            const doc =
+              /** @type {TeriockActor} */ await foundry.utils.fromUuid(uuid);
+            if (doc.isOwner) {
+              if (doc.token?.object) {
+                doc.token.object.control();
+              } else {
+                doc.getActiveTokens()[0]?.control();
+              }
+            }
+            clickTimeout = null;
+          }, 200);
+        });
+
+        container.addEventListener("dblclick", async (event) => {
+          event.stopPropagation();
+          const uuid = container.getAttribute("data-uuid");
+          if (!uuid) {
+            return;
+          }
+          if (clickTimeout) {
+            clearTimeout(clickTimeout);
+            clickTimeout = null;
+          }
+          const doc =
+            /** @type {TeriockActor} */ await foundry.utils.fromUuid(uuid);
+          if (
+            doc &&
+            doc.sheet &&
+            doc.isOwner &&
+            typeof doc.sheet.render === "function"
+          ) {
+            await doc.sheet.render(true);
+          }
+        });
+      },
+    );
+
     bindCommonActions(html);
   }
 }

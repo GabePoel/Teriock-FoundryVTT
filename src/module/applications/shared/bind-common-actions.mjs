@@ -1,4 +1,4 @@
-import { handlers } from "../../helpers/interaction/_module.mjs";
+import { actionHandlers } from "../../helpers/interaction/_module.mjs";
 import { imageContextMenuOptions } from "./_module.mjs";
 
 const { ContextMenu } = foundry.applications.ux;
@@ -17,7 +17,7 @@ export default function bindCommonActions(rootElement) {
   for (const /** @type {HTMLElement} */ element of actionElements) {
     const action = element.dataset.action;
     //noinspection JSUnresolvedReference
-    const HandlerClass = Object.values(handlers).find(
+    const HandlerClass = Object.values(actionHandlers).find(
       (cls) => cls.ACTION === action,
     );
     if (!HandlerClass) {

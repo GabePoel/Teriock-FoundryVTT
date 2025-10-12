@@ -24,25 +24,31 @@ import {
 import { TradecraftCheckHandler } from "./instances/tradecraft-check-handlers.mjs";
 import { UseAbilityHandler } from "./instances/use-ability-handlers.mjs";
 
-/** @type {Record<string, ActionHandler>} */
-const handlers = {
-  [ApplyEffectHandler.ACTION]: ApplyEffectHandler,
-  [ApplyStatusHandler.ACTION]: ApplyStatusHandler,
-  [AwakenHandler.ACTION]: AwakenHandler,
-  [DeathBagHandler.ACTION]: DeathBagHandler,
-  [FeatSaveHandler.ACTION]: FeatSaveHandler,
-  [HealHandler.ACTION]: HealHandler,
-  [RemoveStatusHandler.ACTION]: RemoveStatusHandler,
-  [ResistHandler.ACTION]: ResistHandler,
-  [RevitalizeHandler.ACTION]: RevitalizeHandler,
-  [ReviveHandler.ACTION]: ReviveHandler,
-  [RollRollableTakeHandler.ACTION]: RollRollableTakeHandler,
-  [StandardDamageHandler.ACTION]: StandardDamageHandler,
-  [TakeHackHandler.ACTION]: TakeHackHandler,
-  [TakeRollableTakeHandler.ACTION]: TakeRollableTakeHandler,
-  [TakeUnhackHandler.ACTION]: TakeUnhackHandler,
-  [TradecraftCheckHandler.ACTION]: TradecraftCheckHandler,
-  [UseAbilityHandler.ACTION]: UseAbilityHandler,
-};
+/** @type {typeof ActionHandler[]} */
+const handlerArray = [
+  ApplyEffectHandler,
+  ApplyStatusHandler,
+  AwakenHandler,
+  DeathBagHandler,
+  FeatSaveHandler,
+  HealHandler,
+  RemoveStatusHandler,
+  ResistHandler,
+  RevitalizeHandler,
+  ReviveHandler,
+  RollRollableTakeHandler,
+  StandardDamageHandler,
+  TakeHackHandler,
+  TakeRollableTakeHandler,
+  TakeUnhackHandler,
+  TradecraftCheckHandler,
+  UseAbilityHandler,
+];
+
+/** @type {Record<string, typeof ActionHandler>} */
+const handlers = {};
+for (const handler of handlerArray) {
+  handlers[handler.ACTION] = handler;
+}
 
 export default handlers;

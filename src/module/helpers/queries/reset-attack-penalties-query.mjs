@@ -3,7 +3,7 @@ const { Actor } = foundry.documents;
 /**
  * Query that gets the {@link TeriockUser} to reset attack penalties and templates.
  * @param {Teriock.QueryData.ResetAttackPenalties} queryData
- * @param {{timeout?: number}} timeout
+ * @param {{_timeout?: number}} timeout
  * @returns {Promise<void>}
  */
 export default async function resetAttackPenaltiesQuery(

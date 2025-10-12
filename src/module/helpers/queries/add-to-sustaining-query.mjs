@@ -1,7 +1,7 @@
 /**
  * Query that asks a {@link TeriockAbility} to sustain a {@link TeriockConsequence}.
  * @param {Teriock.QueryData.AddToSustaining} queryData
- * @param {{timeout?: number}} timeout
+ * @param {{_timeout?: number}} timeout
  * @returns {Promise<void>}
  */
 export default async function addToSustainingQuery(queryData, { _timeout }) {

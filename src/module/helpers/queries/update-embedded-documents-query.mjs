@@ -1,8 +1,7 @@
 /**
  * Query that updates embedded documents.
- *
  * @param {Teriock.QueryData.UpdateEmbeddedDocuments} queryData
- * @param {{timeout?: number}} timeout
+ * @param {{_timeout?: number}} timeout
  * @returns {Promise<void>}
  */
 export default async function updateEmbeddedDocumentsQuery(

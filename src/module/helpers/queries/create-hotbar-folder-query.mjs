@@ -4,7 +4,7 @@ import { TeriockFolder } from "../../documents/_module.mjs";
  * Query that asks the GM {@link TeriockUser} to create a macro folder for another player. This is used so that the
  * macros they drop in the hotbar have a place to go.
  * @param {Teriock.QueryData.CreateHotbarFolder} queryData
- * @param timeout
+ * @param {{_timeout?: number}} timeout
  * @returns {Promise<void>}
  */
 export default async function createHotbarFolderQuery(queryData, { _timeout }) {
