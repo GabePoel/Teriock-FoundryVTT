@@ -2,7 +2,7 @@ import { TeriockRoll } from "../../../../../dice/_module.mjs";
 import {
   tokenActor,
   tokenImage,
-  tokenName,
+  tokenName
 } from "../../../../../helpers/utils.mjs";
 
 /**
@@ -20,10 +20,10 @@ export async function _generateRolls(rollConfig) {
         targetImg: tokenImage(target),
         targetName: tokenName(target),
         targetUuid: tokenActor(target).uuid,
-        threshold: tokenActor(target).system.cc,
+        threshold: tokenActor(target).system.defense.cc,
       };
       if (rollConfig.useData.rollData["ub"]) {
-        rollContext.threshold = tokenActor(target).system.ac;
+        rollContext.threshold = tokenActor(target)?.system.defense.ac;
         rollContext.diceClass = "ub";
         rollContext.diceTooltip = "Unblockable";
       }
