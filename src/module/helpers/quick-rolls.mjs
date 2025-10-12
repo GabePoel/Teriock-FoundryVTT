@@ -8,6 +8,7 @@ import { makeDamageDrainTypePanels, makeDamageTypeButtons } from "./html.mjs";
  * @param {object} rollData
  * @param {string} message
  * @param {Teriock.MessageData.MessagePanel[]} panels
+ * @param {TeriockActor} [actor]
  * @returns {Promise<TeriockChatMessage>}
  */
 export async function harmRoll(
@@ -15,6 +16,7 @@ export async function harmRoll(
   rollData = {},
   message = "",
   panels = [],
+  actor = null,
 ) {
   const roll = new TeriockRoll(formula, rollData, { flavor: "Harm Roll" });
   await roll.evaluate();
@@ -55,7 +57,9 @@ export async function harmRoll(
   const damageDrainPanels = await makeDamageDrainTypePanels(roll);
   panels.push(...damageDrainPanels);
   const chatData = {
-    speaker: TeriockChatMessage.speaker,
+    speaker: actor
+      ? TeriockChatMessage.getSpeaker({ actor: actor })
+      : TeriockChatMessage.getSpeaker(),
     rolls: [roll],
     system: {
       buttons: buttons,

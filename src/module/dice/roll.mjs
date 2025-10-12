@@ -7,13 +7,6 @@ export default class TeriockRoll extends Roll {
   /** @inheritDoc */
   static CHAT_TEMPLATE = systemPath("templates/message-templates/roll.hbs");
 
-  /**
-   * Creates a new TeriockRoll instance with enforced parsing and enrichment options.
-   * @override
-   * @param {string} formula - The roll formula to parse.
-   * @param {object} data - Data to use for the roll.
-   * @param {object} options - Options for the roll, including enrichment settings.
-   */
   constructor(formula, data, options = {}) {
     super(formula, data, options);
     this.context = options.context || {};

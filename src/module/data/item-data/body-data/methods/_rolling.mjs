@@ -25,9 +25,13 @@ export async function _roll(bodyData, options) {
       }).formula;
     }
     const rollData = bodyData.actor?.getRollData() || {};
-    await harmRoll(rollFormula, rollData, "", [
-      await bodyData.parent.toPanel(),
-    ]);
+    await harmRoll(
+      rollFormula,
+      rollData,
+      "",
+      [await bodyData.parent.toPanel()],
+      bodyData.parent.actor,
+    );
   } else {
     await bodyData.parent.toMessage();
   }

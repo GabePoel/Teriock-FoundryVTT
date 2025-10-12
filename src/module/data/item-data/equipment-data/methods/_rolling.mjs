@@ -58,7 +58,13 @@ async function use(equipmentData, options) {
         image: getIcon("equipment", equipmentData.equipmentType),
       });
     }
-    await harmRoll(rollFormula, rollData, "", panels);
+    await harmRoll(
+      rollFormula,
+      rollData,
+      "",
+      panels,
+      equipmentData.parent.actor,
+    );
   } else {
     await equipmentData.parent.toMessage();
   }

@@ -16,28 +16,19 @@ export default function bindCommonActions(rootElement) {
   const actionElements = rootElement.querySelectorAll("[data-action]");
   for (const /** @type {HTMLElement} */ element of actionElements) {
     const action = element.dataset.action;
-    //noinspection JSUnresolvedReference
     const HandlerClass = Object.values(actionHandlers).find(
-      (cls) => cls.ACTION === action,
+      (Handler) => Handler.ACTION === action,
     );
     if (!HandlerClass) {
       continue;
     }
     element.addEventListener("click", async (event) => {
-      // noinspection JSValidateTypes
-      const handler = /** @type {ActionHandler} */ new HandlerClass(
-        event,
-        element,
-      );
+      const handler = new HandlerClass(event, element);
       await handler.primaryAction();
     });
     element.addEventListener("contextmenu", async (event) => {
       event.preventDefault();
-      // noinspection JSValidateTypes
-      const handler = /** @type {ActionHandler} */ new HandlerClass(
-        event,
-        element,
-      );
+      const handler = new HandlerClass(event, element);
       await handler.secondaryAction();
     });
   }

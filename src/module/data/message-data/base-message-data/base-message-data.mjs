@@ -264,10 +264,10 @@ export default class TeriockBaseMessageModel extends TypeDataModel {
 
   /**
    * Perform subtype-specific alterations to the final chat message html
-   * @param {HTMLLIElement} html The pending HTML
+   * @param {HTMLLIElement} htmlElement The pending HTML
    */
-  async alterMessageHTML(html) {
-    html.classList.add("teriock");
+  async alterMessageHTML(htmlElement) {
+    htmlElement.classList.add("teriock");
 
     let autoCollapse;
     const defaultCollapse = game.settings.get(
@@ -287,24 +287,26 @@ export default class TeriockBaseMessageModel extends TypeDataModel {
             1000;
     }
     if (autoCollapse) {
-      html.querySelectorAll(".collapsable").forEach((el) => {
+      htmlElement.querySelectorAll(".collapsable").forEach((el) => {
         el.classList.toggle("collapsed", true);
       });
     }
 
-    html.querySelectorAll("[data-action='toggle-collapse']").forEach((el) => {
-      el.addEventListener("click", (e) => {
-        e.stopPropagation();
-        const target = /** @type {HTMLElement} */ e.target;
-        const collapsable =
-          /** @type {HTMLElement} */ target.closest(".collapsable");
-        collapsable.classList.toggle("collapsed");
+    htmlElement
+      .querySelectorAll("[data-action='toggle-collapse']")
+      .forEach((el) => {
+        el.addEventListener("click", (e) => {
+          e.stopPropagation();
+          const target = /** @type {HTMLElement} */ e.target;
+          const collapsable =
+            /** @type {HTMLElement} */ target.closest(".collapsable");
+          collapsable.classList.toggle("collapsed");
+        });
       });
-    });
 
     // Add extra content div at the start of message-content if it exists
     if (this.extraContent) {
-      const messageContent = html.querySelector(".message-content");
+      const messageContent = htmlElement.querySelector(".message-content");
       if (messageContent) {
         const extraContentDiv = document.createElement("div");
         extraContentDiv.classList.add("extra-content");
@@ -317,17 +319,20 @@ export default class TeriockBaseMessageModel extends TypeDataModel {
       (this.tags && this.tags.length > 0) || this.buttons.length > 0;
     if (hasContent) {
       const footer = this._constructFooter();
-      html.insertAdjacentElement("beforeend", footer);
+      htmlElement.insertAdjacentElement("beforeend", footer);
     }
 
     if (this.overlay) {
       const overlay = document.createElement("div");
       overlay.innerHTML = this.overlay;
-      html.insertAdjacentElement("afterbegin", overlay.firstElementChild);
-      html.style.position = "relative";
+      htmlElement.insertAdjacentElement(
+        "afterbegin",
+        overlay.firstElementChild,
+      );
+      htmlElement.style.position = "relative";
     }
 
-    html.querySelectorAll(".teriock-target-container").forEach(
+    htmlElement.querySelectorAll(".teriock-target-container").forEach(
       /** @param {HTMLElement} container */ (container) => {
         let clickTimeout = null;
 
@@ -380,6 +385,6 @@ export default class TeriockBaseMessageModel extends TypeDataModel {
       },
     );
 
-    bindCommonActions(html);
+    bindCommonActions(htmlElement);
   }
 }
