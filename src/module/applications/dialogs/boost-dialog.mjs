@@ -52,8 +52,7 @@ export default async function boostDialog(rollFormula, options = {}) {
       ok: {
         label: label,
         callback: (_event, button) => {
-          const updatedFormula =
-            button.form.elements.namedItem("formula").value;
+          let updatedFormula = button.form.elements.namedItem("formula").value;
           const boosts = Number(button.form.elements.namedItem("boosts").value);
           const deboosts = Number(
             button.form.elements.namedItem("deboosts").value,
@@ -64,11 +63,14 @@ export default async function boostDialog(rollFormula, options = {}) {
             );
           const crit = critButton.checked;
           const roll = new TeriockRoll(updatedFormula, {});
-          roll.setBoost(boosts - deboosts);
           if (crit) {
             roll.alter(2, 0, { multiplyNumeric: false });
           }
           formula = roll.formula;
+          const setboostNumber = (boosts - deboosts) * (crit ? 2 : 1);
+          if (setboostNumber !== 0) {
+            formula = `sb(${formula}, ${setboostNumber})`;
+          }
         },
       },
     });

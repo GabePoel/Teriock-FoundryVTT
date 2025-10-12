@@ -5,7 +5,6 @@ import * as data from "./data/_module.mjs";
 import * as dice from "./dice/_module.mjs";
 import * as documents from "./documents/_module.mjs";
 import * as helpers from "./helpers/_module.mjs";
-import { systemPath } from "./helpers/path.mjs";
 import * as setup from "./setup/_module.mjs";
 
 const { ActorSheet, ItemSheet } = foundry.appv1.sheets;
@@ -129,7 +128,7 @@ foundry.helpers.Hooks.once("init", function () {
   CONFIG.User.documentClass = documents.TeriockUser;
 
   // Register template classes
-  CONFIG.ChatMessage.template = systemPath(
+  CONFIG.ChatMessage.template = helpers.path.systemPath(
     "templates/message-templates/chat-message.hbs",
   );
 
@@ -286,6 +285,7 @@ foundry.helpers.Hooks.once("init", function () {
   // Registering custom dice rolls and functions
   CONFIG.Dice.rolls.length = 0;
   CONFIG.Dice.rolls.push(dice.TeriockRoll);
+  CONFIG.Dice.termTypes.FunctionTerm = dice.FunctionTerm;
 
   // Modifying index fields
   CONFIG.ActiveEffect.IndexFields = [
