@@ -6,39 +6,11 @@ img: systems/teriock/src/icons/creatures/small-blue-slime.webp
 system:
   description: Slimes are a conglomeration of semi-sentient ooze.
   onUse: []
-  hpDice:
-    VrA3DrssAEMaxWWb:
-      _id: VrA3DrssAEMaxWWb
-      stat: hp
-      faces: 6
-      spent: false
-      value: 4
-    TsO9FC96pt8xsQMx:
-      _id: TsO9FC96pt8xsQMx
-      stat: hp
-      faces: 6
-      spent: false
-      value: 4
-  mpDice:
-    8y7b8HT99tK9FYpq:
-      _id: 8y7b8HT99tK9FYpq
-      stat: mp
-      faces: 6
-      spent: false
-      value: 4
-  hpDiceBase:
-    faces: 6
-    number: 2
-  mpDiceBase:
-    faces: 6
-    number: 1
-  applyHp: true
-  applyMp: true
   adult: null
   appearance: A pool of thick opaque blue liquid.
   attributeIncrease: ''
   br: 7
-  hpIncrease: Gain another hit die for every 1 additional size.
+  hpIncrease: Gain another 2 hit dice for every 1 additional size.
   imports:
     ranks:
       archetypes: {}
@@ -60,6 +32,16 @@ system:
   sizeStepMp: null
   traits:
     - ooze
+  statDice:
+    hp:
+      number:
+        saved: 2 * @size
+      faces: 6
+    mp:
+      number:
+        saved: '@size'
+      faces: 6
+  mpIncrease: Gain another mana die for every 1 additional size.
 effects:
   - name: Acidic Blood
     type: ability

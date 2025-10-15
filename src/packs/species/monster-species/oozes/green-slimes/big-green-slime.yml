@@ -6,111 +6,11 @@ img: systems/teriock/src/icons/creatures/big-green-slime.webp
 system:
   description: Slimes are a conglomeration of semi-sentient ooze.
   onUse: []
-  hpDice:
-    VrA3DrssAEMaxWWb:
-      _id: VrA3DrssAEMaxWWb
-      stat: hp
-      faces: 6
-      spent: false
-      value: 4
-    RFXUeMRNwwcwlh6H:
-      _id: RFXUeMRNwwcwlh6H
-      stat: hp
-      faces: 6
-      spent: false
-      value: 4
-    5wgWixiwfXxS7w6O:
-      _id: 5wgWixiwfXxS7w6O
-      stat: hp
-      faces: 6
-      spent: false
-      value: 4
-    AW0Zu2k1vpausKFQ:
-      _id: AW0Zu2k1vpausKFQ
-      stat: hp
-      faces: 6
-      spent: false
-      value: 4
-    QvK7dZ9q5u8gmP2Q:
-      _id: QvK7dZ9q5u8gmP2Q
-      stat: hp
-      faces: 6
-      spent: false
-      value: 4
-    5FwelAv1LCeTwm3Z:
-      _id: 5FwelAv1LCeTwm3Z
-      stat: hp
-      faces: 6
-      spent: false
-      value: 4
-    4rlj3zfS30TbQkbm:
-      _id: 4rlj3zfS30TbQkbm
-      stat: hp
-      faces: 6
-      spent: false
-      value: 4
-    UVlMkNTNjlxYtlMD:
-      _id: UVlMkNTNjlxYtlMD
-      stat: hp
-      faces: 6
-      spent: false
-      value: 4
-    ttsi2WtHkgrKgggN:
-      _id: ttsi2WtHkgrKgggN
-      stat: hp
-      faces: 6
-      spent: false
-      value: 4
-    wCg5JTnX4ZLREl4J:
-      _id: wCg5JTnX4ZLREl4J
-      stat: hp
-      faces: 6
-      spent: false
-      value: 4
-  mpDice:
-    8y7b8HT99tK9FYpq:
-      _id: 8y7b8HT99tK9FYpq
-      stat: mp
-      faces: 6
-      spent: false
-      value: 4
-    MRcBL4BYPG1lIqzP:
-      _id: MRcBL4BYPG1lIqzP
-      stat: mp
-      faces: 6
-      spent: false
-      value: 4
-    eqvsqwmSs7kHH8HV:
-      _id: eqvsqwmSs7kHH8HV
-      stat: mp
-      faces: 6
-      spent: false
-      value: 4
-    reMbZERRiPG5pUgx:
-      _id: reMbZERRiPG5pUgx
-      stat: mp
-      faces: 6
-      spent: false
-      value: 4
-    pACAKsaFL7gxsHBk:
-      _id: pACAKsaFL7gxsHBk
-      stat: mp
-      faces: 6
-      spent: false
-      value: 4
-  hpDiceBase:
-    faces: 6
-    number: 10
-  mpDiceBase:
-    faces: 6
-    number: 5
-  applyHp: true
-  applyMp: true
   adult: null
   appearance: A pool of thick opaque green liquid.
   attributeIncrease: ''
   br: 15
-  hpIncrease: Gain another hit die for every 1 additional size.
+  hpIncrease: Gain another 2 hit dice for every 1 additional size.
   imports:
     ranks:
       archetypes: {}
@@ -132,6 +32,16 @@ system:
   sizeStepMp: null
   traits:
     - ooze
+  statDice:
+    hp:
+      number:
+        saved: 2 * @size
+      faces: 6
+    mp:
+      number:
+        saved: '@size'
+      faces: 6
+  mpIncrease: Gain another mana die for every 1 additional size.
 effects:
   - name: Acidic Blood
     type: ability

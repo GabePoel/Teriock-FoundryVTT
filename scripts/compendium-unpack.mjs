@@ -107,6 +107,12 @@ function cleanEntry(doc) {
     delete doc.system.disabled;
     delete doc.tint;
     delete doc.sort;
+    delete doc.system.hpDice;
+    delete doc.system.mpDice;
+    delete doc.system.hpDiceBase;
+    delete doc.system.mpDiceBase;
+    delete doc.system.applyHp;
+    delete doc.system.applyMp;
     if (doc.type === "creature") {
       delete doc.system.attributes;
       delete doc.system.abilityFlags;

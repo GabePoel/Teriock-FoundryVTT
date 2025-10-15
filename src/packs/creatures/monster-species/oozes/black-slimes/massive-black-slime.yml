@@ -12088,183 +12088,11 @@ items:
     system:
       description: Slimes are a conglomeration of semi-sentient ooze.
       onUse: []
-      hpDice:
-        VrA3DrssAEMaxWWb:
-          _id: VrA3DrssAEMaxWWb
-          stat: hp
-          faces: 6
-          spent: false
-          value: 4
-        C6i5xqqlKoD1eR0u:
-          _id: C6i5xqqlKoD1eR0u
-          stat: hp
-          faces: 6
-          spent: false
-          value: 4
-        1ZxPXQtYhozFhnMz:
-          _id: 1ZxPXQtYhozFhnMz
-          stat: hp
-          faces: 6
-          spent: false
-          value: 4
-        TxBAOl6ZAY0faXC3:
-          _id: TxBAOl6ZAY0faXC3
-          stat: hp
-          faces: 6
-          spent: false
-          value: 4
-        eBrk4pyBdX5pjePs:
-          _id: eBrk4pyBdX5pjePs
-          stat: hp
-          faces: 6
-          spent: false
-          value: 4
-        6R0ScyXIQqaHW1I3:
-          _id: 6R0ScyXIQqaHW1I3
-          stat: hp
-          faces: 6
-          spent: false
-          value: 4
-        wrEnggYmRtRhk1eI:
-          _id: wrEnggYmRtRhk1eI
-          stat: hp
-          faces: 6
-          spent: false
-          value: 4
-        LAcEzTtLPKBlEU38:
-          _id: LAcEzTtLPKBlEU38
-          stat: hp
-          faces: 6
-          spent: false
-          value: 4
-        059CvaQKnl6btZSb:
-          _id: 059CvaQKnl6btZSb
-          stat: hp
-          faces: 6
-          spent: false
-          value: 4
-        XjkTR85tPELnniMH:
-          _id: XjkTR85tPELnniMH
-          stat: hp
-          faces: 6
-          spent: false
-          value: 4
-        aibt4CdD9Ze4tzex:
-          _id: aibt4CdD9Ze4tzex
-          stat: hp
-          faces: 6
-          spent: false
-          value: 4
-        04rBwCbIASR4brGb:
-          _id: 04rBwCbIASR4brGb
-          stat: hp
-          faces: 6
-          spent: false
-          value: 4
-        N8SIrASA8iOrT6wP:
-          _id: N8SIrASA8iOrT6wP
-          stat: hp
-          faces: 6
-          spent: false
-          value: 4
-        ssEDHc7Vxptotr2i:
-          _id: ssEDHc7Vxptotr2i
-          stat: hp
-          faces: 6
-          spent: false
-          value: 4
-        cXUV5ixrAsoFHuQ9:
-          _id: cXUV5ixrAsoFHuQ9
-          stat: hp
-          faces: 6
-          spent: false
-          value: 4
-        cSdo0EkChzvZBgc6:
-          _id: cSdo0EkChzvZBgc6
-          stat: hp
-          faces: 6
-          spent: false
-          value: 4
-        xz1B5O2vF9uK4n6z:
-          _id: xz1B5O2vF9uK4n6z
-          stat: hp
-          faces: 6
-          spent: false
-          value: 4
-        9ReMtEfAsewXrHDe:
-          _id: 9ReMtEfAsewXrHDe
-          stat: hp
-          faces: 6
-          spent: false
-          value: 4
-      mpDice:
-        8y7b8HT99tK9FYpq:
-          _id: 8y7b8HT99tK9FYpq
-          stat: mp
-          faces: 6
-          spent: false
-          value: 4
-        tpkEDcgKWNqdwG5G:
-          _id: tpkEDcgKWNqdwG5G
-          stat: mp
-          faces: 6
-          spent: false
-          value: 4
-        T60Y2v6AEZ23S9Ok:
-          _id: T60Y2v6AEZ23S9Ok
-          stat: mp
-          faces: 6
-          spent: false
-          value: 4
-        Ci5d2TDXKOY1YTAA:
-          _id: Ci5d2TDXKOY1YTAA
-          stat: mp
-          faces: 6
-          spent: false
-          value: 4
-        en2IGLsDitYzW2hQ:
-          _id: en2IGLsDitYzW2hQ
-          stat: mp
-          faces: 6
-          spent: false
-          value: 4
-        19FDVRvCSzyuZbl0:
-          _id: 19FDVRvCSzyuZbl0
-          stat: mp
-          faces: 6
-          spent: false
-          value: 4
-        hjB1POP3gOIqLwNj:
-          _id: hjB1POP3gOIqLwNj
-          stat: mp
-          faces: 6
-          spent: false
-          value: 4
-        FSe1WeBFkCSPQ9pk:
-          _id: FSe1WeBFkCSPQ9pk
-          stat: mp
-          faces: 6
-          spent: false
-          value: 4
-        NLQgeT7PK20MfgqC:
-          _id: NLQgeT7PK20MfgqC
-          stat: mp
-          faces: 6
-          spent: false
-          value: 4
-      hpDiceBase:
-        faces: 6
-        number: 18
-      mpDiceBase:
-        faces: 6
-        number: 9
-      applyHp: true
-      applyMp: true
       adult: null
       appearance: A pool of thick opaque black liquid.
       attributeIncrease: ''
       br: 23
-      hpIncrease: Gain another hit die for every 1 additional size.
+      hpIncrease: Gain another 2 hit dice for every 1 additional size.
       imports:
         ranks:
           archetypes: {}
@@ -12286,6 +12114,16 @@ items:
       sizeStepMp: null
       traits:
         - ooze
+      statDice:
+        hp:
+          faces: 6
+          number:
+            saved: 2 * @size
+        mp:
+          faces: 6
+          number:
+            saved: '@size'
+      mpIncrease: Gain another mana die for every 1 additional size.
     effects:
       - name: Acidic Blood
         type: ability
@@ -17041,30 +16879,8 @@ items:
         bodies, close to death yourself, almost in another world.
       flaws: None.
       maxAv: 0
-      mpDiceBase:
-        faces: 12
-        number: 1
-      hpDice:
-        E4TZW3dgg3AXR82o:
-          faces: 8
-          value: 5
-          _id: E4TZW3dgg3AXR82o
-          stat: hp
-          spent: false
-      mpDice:
-        s2866jVjnsoip9cu:
-          faces: 12
-          value: 7
-          _id: s2866jVjnsoip9cu
-          stat: mp
-          spent: false
       onUse: []
-      hpDiceBase:
-        faces: 8
-        number: 1
-      applyHp: true
-      applyMp: true
-      innate: false
+      innate: true
     img: systems/teriock/src/icons/ranks/rank-1-necromancer.webp
     effects:
       - name: Death Ray
@@ -18872,30 +18688,8 @@ items:
         bodies, close to death yourself, almost in another world.
       flaws: None.
       maxAv: 0
-      mpDiceBase:
-        faces: 12
-        number: 1
-      hpDice:
-        OSSkBwsZ4fAOIWqy:
-          faces: 8
-          value: 5
-          _id: OSSkBwsZ4fAOIWqy
-          stat: hp
-          spent: false
-      mpDice:
-        RnqOONppvtqb1irL:
-          faces: 12
-          value: 7
-          _id: RnqOONppvtqb1irL
-          stat: mp
-          spent: false
       onUse: []
-      hpDiceBase:
-        faces: 8
-        number: 1
-      applyHp: true
-      applyMp: true
-      innate: false
+      innate: true
     img: systems/teriock/src/icons/ranks/rank-2-necromancer.webp
     effects:
       - name: Necromancy Rotators
@@ -23092,30 +22886,8 @@ items:
         bodies, close to death yourself, almost in another world.
       flaws: None.
       maxAv: 0
-      mpDiceBase:
-        faces: 12
-        number: 1
-      hpDice:
-        E4TZW3dgg3AXR82o:
-          faces: 8
-          value: 5
-          _id: E4TZW3dgg3AXR82o
-          stat: hp
-          spent: false
-      mpDice:
-        s2866jVjnsoip9cu:
-          faces: 12
-          value: 7
-          _id: s2866jVjnsoip9cu
-          stat: mp
-          spent: false
       onUse: []
-      hpDiceBase:
-        faces: 8
-        number: 1
-      applyHp: true
-      applyMp: true
-      innate: false
+      innate: true
     img: systems/teriock/src/icons/ranks/rank-3-necromancer.webp
     effects:
       - name: Necromancy Rotator Fluency
@@ -23742,30 +23514,8 @@ items:
         bodies, close to death yourself, almost in another world.
       flaws: None.
       maxAv: 0
-      mpDiceBase:
-        faces: 12
-        number: 1
-      hpDice:
-        E4TZW3dgg3AXR82o:
-          faces: 8
-          value: 5
-          _id: E4TZW3dgg3AXR82o
-          stat: hp
-          spent: false
-      mpDice:
-        s2866jVjnsoip9cu:
-          faces: 12
-          value: 7
-          _id: s2866jVjnsoip9cu
-          stat: mp
-          spent: false
       onUse: []
-      hpDiceBase:
-        faces: 8
-        number: 1
-      applyHp: true
-      applyMp: true
-      innate: false
+      innate: true
     img: systems/teriock/src/icons/ranks/rank-4-necromancer.webp
     effects:
       - name: Amplify Necromancy Spells
@@ -24656,30 +24406,8 @@ items:
         bodies, close to death yourself, almost in another world.
       flaws: None.
       maxAv: 0
-      mpDiceBase:
-        faces: 12
-        number: 1
-      hpDice:
-        E4TZW3dgg3AXR82o:
-          faces: 8
-          value: 5
-          _id: E4TZW3dgg3AXR82o
-          stat: hp
-          spent: false
-      mpDice:
-        s2866jVjnsoip9cu:
-          faces: 12
-          value: 7
-          _id: s2866jVjnsoip9cu
-          stat: mp
-          spent: false
       onUse: []
-      hpDiceBase:
-        faces: 8
-        number: 1
-      applyHp: true
-      applyMp: true
-      innate: false
+      innate: true
     img: systems/teriock/src/icons/ranks/rank-5-necromancer.webp
     effects:
       - name: Additional Necromancy Rotators

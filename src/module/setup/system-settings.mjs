@@ -81,6 +81,14 @@ export function registerSettings() {
       scope: "world",
       type: String,
     },
+    synchronizeSpeciesSizeWithActor: {
+      config: true,
+      default: false,
+      hint: "Sizes for relevant species change to match actor.",
+      name: "Synchronize Species Size with Actor",
+      scope: "user",
+      type: Boolean,
+    },
   };
   const quickIndexDefaults = {
     abilities: true,

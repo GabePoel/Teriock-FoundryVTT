@@ -6,75 +6,11 @@ img: systems/teriock/src/icons/creatures/medium-blue-slime.webp
 system:
   description: Slimes are a conglomeration of semi-sentient ooze.
   onUse: []
-  hpDice:
-    VrA3DrssAEMaxWWb:
-      _id: VrA3DrssAEMaxWWb
-      stat: hp
-      faces: 6
-      spent: false
-      value: 4
-    qsyJCXZh1hzrA50J:
-      _id: qsyJCXZh1hzrA50J
-      stat: hp
-      faces: 6
-      spent: false
-      value: 4
-    dpsc4oDlEOhCsb3h:
-      _id: dpsc4oDlEOhCsb3h
-      stat: hp
-      faces: 6
-      spent: false
-      value: 4
-    lL5TLqGMyAfX7RdP:
-      _id: lL5TLqGMyAfX7RdP
-      stat: hp
-      faces: 6
-      spent: false
-      value: 4
-    jIeb6zQozWlLRXiW:
-      _id: jIeb6zQozWlLRXiW
-      stat: hp
-      faces: 6
-      spent: false
-      value: 4
-    ljQMHypxGwEOZE6T:
-      _id: ljQMHypxGwEOZE6T
-      stat: hp
-      faces: 6
-      spent: false
-      value: 4
-  mpDice:
-    8y7b8HT99tK9FYpq:
-      _id: 8y7b8HT99tK9FYpq
-      stat: mp
-      faces: 6
-      spent: false
-      value: 4
-    stWAMEbc1fm503mv:
-      _id: stWAMEbc1fm503mv
-      stat: mp
-      faces: 6
-      spent: false
-      value: 4
-    tjeypc8TSyLC0h0I:
-      _id: tjeypc8TSyLC0h0I
-      stat: mp
-      faces: 6
-      spent: false
-      value: 4
-  hpDiceBase:
-    faces: 6
-    number: 6
-  mpDiceBase:
-    faces: 6
-    number: 3
-  applyHp: true
-  applyMp: true
   adult: null
   appearance: A pool of thick opaque blue liquid.
   attributeIncrease: ''
   br: 11
-  hpIncrease: Gain another hit die for every 1 additional size.
+  hpIncrease: Gain another 2 hit dice for every 1 additional size.
   imports:
     ranks:
       archetypes: {}
@@ -96,6 +32,16 @@ system:
   sizeStepMp: null
   traits:
     - ooze
+  statDice:
+    hp:
+      number:
+        saved: 2 * @size
+      faces: 6
+    mp:
+      number:
+        saved: '@size'
+      faces: 6
+  mpIncrease: Gain another mana die for every 1 additional size.
 effects:
   - name: Acidic Blood
     type: ability

@@ -6,147 +6,11 @@ img: systems/teriock/src/icons/creatures/large-white-slime.webp
 system:
   description: Slimes are a conglomeration of semi-sentient ooze.
   onUse: []
-  hpDice:
-    VrA3DrssAEMaxWWb:
-      _id: VrA3DrssAEMaxWWb
-      stat: hp
-      faces: 6
-      spent: false
-      value: 4
-    TX6b90wy6uc31JbN:
-      _id: TX6b90wy6uc31JbN
-      stat: hp
-      faces: 6
-      spent: false
-      value: 4
-    tdEdIjZkZ9ApVavI:
-      _id: tdEdIjZkZ9ApVavI
-      stat: hp
-      faces: 6
-      spent: false
-      value: 4
-    ZfXFDxgd5M4Thibn:
-      _id: ZfXFDxgd5M4Thibn
-      stat: hp
-      faces: 6
-      spent: false
-      value: 4
-    VOF8TZB8H2gX7I86:
-      _id: VOF8TZB8H2gX7I86
-      stat: hp
-      faces: 6
-      spent: false
-      value: 4
-    raQo4A8pfwjeyRtQ:
-      _id: raQo4A8pfwjeyRtQ
-      stat: hp
-      faces: 6
-      spent: false
-      value: 4
-    u0KjRQhBBqi08iIn:
-      _id: u0KjRQhBBqi08iIn
-      stat: hp
-      faces: 6
-      spent: false
-      value: 4
-    rAp4tkdMOqffC1Tg:
-      _id: rAp4tkdMOqffC1Tg
-      stat: hp
-      faces: 6
-      spent: false
-      value: 4
-    Clyek3T3AFjPRT6A:
-      _id: Clyek3T3AFjPRT6A
-      stat: hp
-      faces: 6
-      spent: false
-      value: 4
-    eMazeFotEPBKqNNO:
-      _id: eMazeFotEPBKqNNO
-      stat: hp
-      faces: 6
-      spent: false
-      value: 4
-    ZuHgomHr8pFfcQNL:
-      _id: ZuHgomHr8pFfcQNL
-      stat: hp
-      faces: 6
-      spent: false
-      value: 4
-    Ovyu0S83Go2kabgX:
-      _id: Ovyu0S83Go2kabgX
-      stat: hp
-      faces: 6
-      spent: false
-      value: 4
-    P5w27sm6q5BYVg8U:
-      _id: P5w27sm6q5BYVg8U
-      stat: hp
-      faces: 6
-      spent: false
-      value: 4
-    wuOOHMRtoVcvQbYe:
-      _id: wuOOHMRtoVcvQbYe
-      stat: hp
-      faces: 6
-      spent: false
-      value: 4
-  mpDice:
-    8y7b8HT99tK9FYpq:
-      _id: 8y7b8HT99tK9FYpq
-      stat: mp
-      faces: 6
-      spent: false
-      value: 4
-    rcxA50Hb4AfIaoSm:
-      _id: rcxA50Hb4AfIaoSm
-      stat: mp
-      faces: 6
-      spent: false
-      value: 4
-    F94F3J8o4vTFmBjT:
-      _id: F94F3J8o4vTFmBjT
-      stat: mp
-      faces: 6
-      spent: false
-      value: 4
-    LMLwqXZw6nzfdEYD:
-      _id: LMLwqXZw6nzfdEYD
-      stat: mp
-      faces: 6
-      spent: false
-      value: 4
-    Yqm6xCBksFXgV0Bk:
-      _id: Yqm6xCBksFXgV0Bk
-      stat: mp
-      faces: 6
-      spent: false
-      value: 4
-    PEMHCzQqNnCO15kG:
-      _id: PEMHCzQqNnCO15kG
-      stat: mp
-      faces: 6
-      spent: false
-      value: 4
-    xClK9Sqeba2NZSql:
-      _id: xClK9Sqeba2NZSql
-      stat: mp
-      faces: 6
-      spent: false
-      value: 4
-  hpDiceBase:
-    faces: 6
-    number: 14
-  mpDiceBase:
-    faces: 6
-    number: 7
-  applyHp: true
-  applyMp: true
   adult: null
   appearance: A pool of thick opaque white liquid.
   attributeIncrease: ''
   br: 19
-  hpIncrease: Gain another hit die for every 1 additional size.
+  hpIncrease: Gain another 2 hit dice for every 1 additional size.
   imports:
     ranks:
       archetypes: {}
@@ -168,6 +32,16 @@ system:
   sizeStepMp: null
   traits:
     - ooze
+  statDice:
+    hp:
+      number:
+        saved: 2 * @size
+      faces: 6
+    mp:
+      number:
+        saved: '@size'
+      faces: 6
+  mpIncrease: Gain another mana die for every 1 additional size.
 effects:
   - name: Acidic Blood
     type: ability

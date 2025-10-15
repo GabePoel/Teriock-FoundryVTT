@@ -12088,183 +12088,11 @@ items:
     system:
       description: Slimes are a conglomeration of semi-sentient ooze.
       onUse: []
-      hpDice:
-        VrA3DrssAEMaxWWb:
-          _id: VrA3DrssAEMaxWWb
-          stat: hp
-          faces: 6
-          spent: false
-          value: 4
-        qTFRE7c4Jg4s9BS0:
-          _id: qTFRE7c4Jg4s9BS0
-          stat: hp
-          faces: 6
-          spent: false
-          value: 4
-        Ej2GH1VehQIGchrH:
-          _id: Ej2GH1VehQIGchrH
-          stat: hp
-          faces: 6
-          spent: false
-          value: 4
-        rSQ8GOAy315F6YXT:
-          _id: rSQ8GOAy315F6YXT
-          stat: hp
-          faces: 6
-          spent: false
-          value: 4
-        aiZB7suKeoDhALbX:
-          _id: aiZB7suKeoDhALbX
-          stat: hp
-          faces: 6
-          spent: false
-          value: 4
-        WtLuaJg2QzImVSKf:
-          _id: WtLuaJg2QzImVSKf
-          stat: hp
-          faces: 6
-          spent: false
-          value: 4
-        Cjvm2NtziLqrFVYP:
-          _id: Cjvm2NtziLqrFVYP
-          stat: hp
-          faces: 6
-          spent: false
-          value: 4
-        ADodD0wvR7VNTeco:
-          _id: ADodD0wvR7VNTeco
-          stat: hp
-          faces: 6
-          spent: false
-          value: 4
-        TjXOmcIEmvtheix6:
-          _id: TjXOmcIEmvtheix6
-          stat: hp
-          faces: 6
-          spent: false
-          value: 4
-        OnJP40sOAIcGF3CT:
-          _id: OnJP40sOAIcGF3CT
-          stat: hp
-          faces: 6
-          spent: false
-          value: 4
-        NxXQCYmLCX0SmP5Y:
-          _id: NxXQCYmLCX0SmP5Y
-          stat: hp
-          faces: 6
-          spent: false
-          value: 4
-        Yz2pcktKw0p9BAhp:
-          _id: Yz2pcktKw0p9BAhp
-          stat: hp
-          faces: 6
-          spent: false
-          value: 4
-        KEOAvBmOGBeEIDA6:
-          _id: KEOAvBmOGBeEIDA6
-          stat: hp
-          faces: 6
-          spent: false
-          value: 4
-        n64LVk5IaTGlPWQJ:
-          _id: n64LVk5IaTGlPWQJ
-          stat: hp
-          faces: 6
-          spent: false
-          value: 4
-        2OuSBh65A2ASpbMw:
-          _id: 2OuSBh65A2ASpbMw
-          stat: hp
-          faces: 6
-          spent: false
-          value: 4
-        S8aiM31JaiGfHAMC:
-          _id: S8aiM31JaiGfHAMC
-          stat: hp
-          faces: 6
-          spent: false
-          value: 4
-        rCOt0UdMzjCV82SI:
-          _id: rCOt0UdMzjCV82SI
-          stat: hp
-          faces: 6
-          spent: false
-          value: 4
-        ZlJryfFZof0GJqT6:
-          _id: ZlJryfFZof0GJqT6
-          stat: hp
-          faces: 6
-          spent: false
-          value: 4
-      mpDice:
-        8y7b8HT99tK9FYpq:
-          _id: 8y7b8HT99tK9FYpq
-          stat: mp
-          faces: 6
-          spent: false
-          value: 4
-        yYagV1OFhjZD699l:
-          _id: yYagV1OFhjZD699l
-          stat: mp
-          faces: 6
-          spent: false
-          value: 4
-        KHIBKrrR18Ba2Hey:
-          _id: KHIBKrrR18Ba2Hey
-          stat: mp
-          faces: 6
-          spent: false
-          value: 4
-        zjDCUZm55GRSRTxV:
-          _id: zjDCUZm55GRSRTxV
-          stat: mp
-          faces: 6
-          spent: false
-          value: 4
-        4C67DQbMtlm0J3q4:
-          _id: 4C67DQbMtlm0J3q4
-          stat: mp
-          faces: 6
-          spent: false
-          value: 4
-        n32DZe29X5yCbQcZ:
-          _id: n32DZe29X5yCbQcZ
-          stat: mp
-          faces: 6
-          spent: false
-          value: 4
-        8XC4DpDxjC0N6Q0m:
-          _id: 8XC4DpDxjC0N6Q0m
-          stat: mp
-          faces: 6
-          spent: false
-          value: 4
-        n0sr9ohcEGvPoNMA:
-          _id: n0sr9ohcEGvPoNMA
-          stat: mp
-          faces: 6
-          spent: false
-          value: 4
-        XnFPTatCrBtG5jOU:
-          _id: XnFPTatCrBtG5jOU
-          stat: mp
-          faces: 6
-          spent: false
-          value: 4
-      hpDiceBase:
-        faces: 6
-        number: 18
-      mpDiceBase:
-        faces: 6
-        number: 9
-      applyHp: true
-      applyMp: true
       adult: null
       appearance: A pool of thick opaque white liquid.
       attributeIncrease: ''
       br: 23
-      hpIncrease: Gain another hit die for every 1 additional size.
+      hpIncrease: Gain another 2 hit dice for every 1 additional size.
       imports:
         ranks:
           archetypes: {}
@@ -12286,6 +12114,16 @@ items:
       sizeStepMp: null
       traits:
         - ooze
+      statDice:
+        hp:
+          faces: 6
+          number:
+            saved: 2 * @size
+        mp:
+          faces: 6
+          number:
+            saved: '@size'
+      mpIncrease: Gain another mana die for every 1 additional size.
     effects:
       - name: Acidic Blood
         type: ability
@@ -17042,30 +16880,8 @@ items:
         protective but committed to saving lives and fighting death.
       flaws: None.
       maxAv: 0
-      mpDiceBase:
-        faces: 12
-        number: 1
-      hpDice:
-        E4TZW3dgg3AXR82o:
-          faces: 8
-          value: 5
-          _id: E4TZW3dgg3AXR82o
-          stat: hp
-          spent: false
-      mpDice:
-        s2866jVjnsoip9cu:
-          faces: 12
-          value: 7
-          _id: s2866jVjnsoip9cu
-          stat: mp
-          spent: false
       onUse: []
-      hpDiceBase:
-        faces: 8
-        number: 1
-      applyHp: true
-      applyMp: true
-      innate: false
+      innate: true
     img: systems/teriock/src/icons/ranks/rank-1-life-mage.webp
     effects:
       - name: Light Ray
@@ -19136,30 +18952,8 @@ items:
         protective but committed to saving lives and fighting death.
       flaws: None.
       maxAv: 0
-      mpDiceBase:
-        faces: 12
-        number: 1
-      hpDice:
-        HeVtYWPmqbUNtyNI:
-          faces: 8
-          value: 5
-          _id: HeVtYWPmqbUNtyNI
-          stat: hp
-          spent: false
-      mpDice:
-        GzNBbQUVfp1g5EuW:
-          faces: 12
-          value: 7
-          _id: GzNBbQUVfp1g5EuW
-          stat: mp
-          spent: false
       onUse: []
-      hpDiceBase:
-        faces: 8
-        number: 1
-      applyHp: true
-      applyMp: true
-      innate: false
+      innate: true
     img: systems/teriock/src/icons/ranks/rank-2-life-mage.webp
     effects:
       - name: Life Rotators
@@ -23401,30 +23195,8 @@ items:
         protective but committed to saving lives and fighting death.
       flaws: None.
       maxAv: 0
-      mpDiceBase:
-        faces: 12
-        number: 1
-      hpDice:
-        E4TZW3dgg3AXR82o:
-          faces: 8
-          value: 5
-          _id: E4TZW3dgg3AXR82o
-          stat: hp
-          spent: false
-      mpDice:
-        s2866jVjnsoip9cu:
-          faces: 12
-          value: 7
-          _id: s2866jVjnsoip9cu
-          stat: mp
-          spent: false
       onUse: []
-      hpDiceBase:
-        faces: 8
-        number: 1
-      applyHp: true
-      applyMp: true
-      innate: false
+      innate: true
     img: systems/teriock/src/icons/ranks/rank-3-life-mage.webp
     effects:
       - name: Life Rotator Fluency
@@ -24049,30 +23821,8 @@ items:
         protective but committed to saving lives and fighting death.
       flaws: None.
       maxAv: 0
-      mpDiceBase:
-        faces: 12
-        number: 1
-      hpDice:
-        E4TZW3dgg3AXR82o:
-          faces: 8
-          value: 5
-          _id: E4TZW3dgg3AXR82o
-          stat: hp
-          spent: false
-      mpDice:
-        s2866jVjnsoip9cu:
-          faces: 12
-          value: 7
-          _id: s2866jVjnsoip9cu
-          stat: mp
-          spent: false
       onUse: []
-      hpDiceBase:
-        faces: 8
-        number: 1
-      applyHp: true
-      applyMp: true
-      innate: false
+      innate: true
     img: systems/teriock/src/icons/ranks/rank-4-life-mage.webp
     effects:
       - name: Amplify Life Spells
@@ -24964,30 +24714,8 @@ items:
         protective but committed to saving lives and fighting death.
       flaws: None.
       maxAv: 0
-      mpDiceBase:
-        faces: 12
-        number: 1
-      hpDice:
-        E4TZW3dgg3AXR82o:
-          faces: 8
-          value: 5
-          _id: E4TZW3dgg3AXR82o
-          stat: hp
-          spent: false
-      mpDice:
-        s2866jVjnsoip9cu:
-          faces: 12
-          value: 7
-          _id: s2866jVjnsoip9cu
-          stat: mp
-          spent: false
       onUse: []
-      hpDiceBase:
-        faces: 8
-        number: 1
-      applyHp: true
-      applyMp: true
-      innate: false
+      innate: true
     img: systems/teriock/src/icons/ranks/rank-5-life-mage.webp
     effects:
       - name: Additional Life Rotators

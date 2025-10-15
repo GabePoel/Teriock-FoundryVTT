@@ -158,7 +158,9 @@ export default class TeriockSpeciesModel extends StatGiverDataMixin(
           .map((a) => a.id);
         toDelete.push(...ids);
       }
-      await this.parent.deleteEmbeddedDocuments("ActiveEffect", toDelete);
+      if (toDelete.length > 0) {
+        await this.parent.deleteEmbeddedDocuments("ActiveEffect", toDelete);
+      }
       const newAbilities = [];
       for (const abilityName of gainAbilities) {
         if (
@@ -169,7 +171,9 @@ export default class TeriockSpeciesModel extends StatGiverDataMixin(
           newAbilities.push(abilityObject);
         }
       }
-      await this.parent.createEmbeddedDocuments("ActiveEffect", newAbilities);
+      if (newAbilities.length > 0) {
+        await this.parent.createEmbeddedDocuments("ActiveEffect", newAbilities);
+      }
     }
   }
 

@@ -6,183 +6,11 @@ img: systems/teriock/src/icons/creatures/massive-blue-slime.webp
 system:
   description: Slimes are a conglomeration of semi-sentient ooze.
   onUse: []
-  hpDice:
-    VrA3DrssAEMaxWWb:
-      _id: VrA3DrssAEMaxWWb
-      stat: hp
-      faces: 6
-      spent: false
-      value: 4
-    oGFGd7WrwZejaYTn:
-      _id: oGFGd7WrwZejaYTn
-      stat: hp
-      faces: 6
-      spent: false
-      value: 4
-    quhMJeawh51P9ifd:
-      _id: quhMJeawh51P9ifd
-      stat: hp
-      faces: 6
-      spent: false
-      value: 4
-    xH3SazNxxvXZ53R2:
-      _id: xH3SazNxxvXZ53R2
-      stat: hp
-      faces: 6
-      spent: false
-      value: 4
-    c0D7E07ZCX8g9Ejx:
-      _id: c0D7E07ZCX8g9Ejx
-      stat: hp
-      faces: 6
-      spent: false
-      value: 4
-    GJxuONTpHWGGGh6x:
-      _id: GJxuONTpHWGGGh6x
-      stat: hp
-      faces: 6
-      spent: false
-      value: 4
-    PJBokoC8K0129z63:
-      _id: PJBokoC8K0129z63
-      stat: hp
-      faces: 6
-      spent: false
-      value: 4
-    1GPyC55Pf0macNMe:
-      _id: 1GPyC55Pf0macNMe
-      stat: hp
-      faces: 6
-      spent: false
-      value: 4
-    YjduHLgO61JCBZQf:
-      _id: YjduHLgO61JCBZQf
-      stat: hp
-      faces: 6
-      spent: false
-      value: 4
-    ffXc01YbUsMrtXkB:
-      _id: ffXc01YbUsMrtXkB
-      stat: hp
-      faces: 6
-      spent: false
-      value: 4
-    EDd87XIyTHbLtwjv:
-      _id: EDd87XIyTHbLtwjv
-      stat: hp
-      faces: 6
-      spent: false
-      value: 4
-    BdkqBsAHvKL9kjvE:
-      _id: BdkqBsAHvKL9kjvE
-      stat: hp
-      faces: 6
-      spent: false
-      value: 4
-    LWu3ffyz4xvF20Ms:
-      _id: LWu3ffyz4xvF20Ms
-      stat: hp
-      faces: 6
-      spent: false
-      value: 4
-    bJEyJqvV4PbT9I4Z:
-      _id: bJEyJqvV4PbT9I4Z
-      stat: hp
-      faces: 6
-      spent: false
-      value: 4
-    ApDX7lmfoW0kwhko:
-      _id: ApDX7lmfoW0kwhko
-      stat: hp
-      faces: 6
-      spent: false
-      value: 4
-    RcA1aD33xKkL3IPI:
-      _id: RcA1aD33xKkL3IPI
-      stat: hp
-      faces: 6
-      spent: false
-      value: 4
-    m99dgufYh014U0Go:
-      _id: m99dgufYh014U0Go
-      stat: hp
-      faces: 6
-      spent: false
-      value: 4
-    XM8OfTkF8udMGckR:
-      _id: XM8OfTkF8udMGckR
-      stat: hp
-      faces: 6
-      spent: false
-      value: 4
-  mpDice:
-    8y7b8HT99tK9FYpq:
-      _id: 8y7b8HT99tK9FYpq
-      stat: mp
-      faces: 6
-      spent: false
-      value: 4
-    JsYC2KixZ6QkZu7z:
-      _id: JsYC2KixZ6QkZu7z
-      stat: mp
-      faces: 6
-      spent: false
-      value: 4
-    oyi9IU6Oa0TaWoUs:
-      _id: oyi9IU6Oa0TaWoUs
-      stat: mp
-      faces: 6
-      spent: false
-      value: 4
-    yAi3SEuNvLIZi6AA:
-      _id: yAi3SEuNvLIZi6AA
-      stat: mp
-      faces: 6
-      spent: false
-      value: 4
-    TFDeEXMqdGtoNi0s:
-      _id: TFDeEXMqdGtoNi0s
-      stat: mp
-      faces: 6
-      spent: false
-      value: 4
-    Xmy0TXAbTvAg8XNL:
-      _id: Xmy0TXAbTvAg8XNL
-      stat: mp
-      faces: 6
-      spent: false
-      value: 4
-    1bVXddYPZuDttnle:
-      _id: 1bVXddYPZuDttnle
-      stat: mp
-      faces: 6
-      spent: false
-      value: 4
-    sBpZhOv0ll1PU7Zn:
-      _id: sBpZhOv0ll1PU7Zn
-      stat: mp
-      faces: 6
-      spent: false
-      value: 4
-    JwSptd8o4VjM7Zep:
-      _id: JwSptd8o4VjM7Zep
-      stat: mp
-      faces: 6
-      spent: false
-      value: 4
-  hpDiceBase:
-    faces: 6
-    number: 18
-  mpDiceBase:
-    faces: 6
-    number: 9
-  applyHp: true
-  applyMp: true
   adult: null
   appearance: A pool of thick opaque blue liquid.
   attributeIncrease: ''
   br: 23
-  hpIncrease: Gain another hit die for every 1 additional size.
+  hpIncrease: Gain another 2 hit dice for every 1 additional size.
   imports:
     ranks:
       archetypes: {}
@@ -204,6 +32,16 @@ system:
   sizeStepMp: null
   traits:
     - ooze
+  statDice:
+    hp:
+      number:
+        saved: 2 * @size
+      faces: 6
+    mp:
+      number:
+        saved: '@size'
+      faces: 6
+  mpIncrease: Gain another mana die for every 1 additional size.
 effects:
   - name: Acidic Blood
     type: ability

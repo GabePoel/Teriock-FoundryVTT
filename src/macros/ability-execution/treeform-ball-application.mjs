@@ -8,7 +8,7 @@ if (!actor.effectKeys.consequence.has("treeformBallEffect")) {
     const createdTree = /** @type {TeriockSpecies} */ created[0];
     await createdTree.update({
       "system.size.value": actor.system.size.number.value,
-      "system.applyMp": false,
+      "system.statDice.mp.disabled": true,
     });
   }
   const notTree = actor.species.filter((s) => s.name !== "Tree");

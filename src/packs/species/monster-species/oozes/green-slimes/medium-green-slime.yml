@@ -6,75 +6,11 @@ img: systems/teriock/src/icons/creatures/medium-green-slime.webp
 system:
   description: Slimes are a conglomeration of semi-sentient ooze.
   onUse: []
-  hpDice:
-    VrA3DrssAEMaxWWb:
-      _id: VrA3DrssAEMaxWWb
-      stat: hp
-      faces: 6
-      spent: false
-      value: 4
-    H3uaHYynr7893VEU:
-      _id: H3uaHYynr7893VEU
-      stat: hp
-      faces: 6
-      spent: false
-      value: 4
-    U9H5ZamvHHdndcfB:
-      _id: U9H5ZamvHHdndcfB
-      stat: hp
-      faces: 6
-      spent: false
-      value: 4
-    PEGVeMuy9mWyIWeJ:
-      _id: PEGVeMuy9mWyIWeJ
-      stat: hp
-      faces: 6
-      spent: false
-      value: 4
-    EWjjOADNaG7bgFou:
-      _id: EWjjOADNaG7bgFou
-      stat: hp
-      faces: 6
-      spent: false
-      value: 4
-    PHA3ICVuFHLZPR37:
-      _id: PHA3ICVuFHLZPR37
-      stat: hp
-      faces: 6
-      spent: false
-      value: 4
-  mpDice:
-    8y7b8HT99tK9FYpq:
-      _id: 8y7b8HT99tK9FYpq
-      stat: mp
-      faces: 6
-      spent: false
-      value: 4
-    99eUsSpuk0adIxQZ:
-      _id: 99eUsSpuk0adIxQZ
-      stat: mp
-      faces: 6
-      spent: false
-      value: 4
-    drkr6qGeex1KEjFE:
-      _id: drkr6qGeex1KEjFE
-      stat: mp
-      faces: 6
-      spent: false
-      value: 4
-  hpDiceBase:
-    faces: 6
-    number: 6
-  mpDiceBase:
-    faces: 6
-    number: 3
-  applyHp: true
-  applyMp: true
   adult: null
   appearance: A pool of thick opaque green liquid.
   attributeIncrease: ''
   br: 11
-  hpIncrease: Gain another hit die for every 1 additional size.
+  hpIncrease: Gain another 2 hit dice for every 1 additional size.
   imports:
     ranks:
       archetypes: {}
@@ -96,6 +32,16 @@ system:
   sizeStepMp: null
   traits:
     - ooze
+  statDice:
+    hp:
+      number:
+        saved: 2 * @size
+      faces: 6
+    mp:
+      number:
+        saved: '@size'
+      faces: 6
+  mpIncrease: Gain another mana die for every 1 additional size.
 effects:
   - name: Acidic Blood
     type: ability

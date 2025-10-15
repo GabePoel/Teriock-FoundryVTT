@@ -23,14 +23,20 @@ command: |-
     const speciesUpdates = actor.species.map((s) => {
       return {
         _id: s.id,
-        "system.applyHp": s.getFlag("teriock", "preTreeformApplyHp"),
+        "system.statDice.hp.disabled": !s.getFlag(
+          "teriock",
+          "preTreeformApplyHp",
+        ),
         "system.disabled": s.getFlag("teriock", "preTreeformDisabled"),
       };
     });
     const rankUpdates = actor.ranks.map((r) => {
       return {
         _id: r.id,
-        "system.applyHp": r.getFlag("teriock", "preTreeformApplyHp"),
+        "system.statDice.hp.disabled": !r.getFlag(
+          "teriock",
+          "preTreeformApplyHp",
+        ),
         "system.disabled": r.getFlag("teriock", "preTreeformDisabled"),
       };
     });

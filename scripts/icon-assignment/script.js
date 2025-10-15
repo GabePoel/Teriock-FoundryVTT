@@ -93,7 +93,7 @@ const app = {
       this.CATEGORIES.length === 0
         ? "No categories found"
         : "Select a category…";
-    placeholder.disabled = this.CATEGORIES.length === 0 ? true : false;
+    placeholder.disabled = this.CATEGORIES.length === 0;
     placeholder.selected = true;
     select.appendChild(placeholder);
 

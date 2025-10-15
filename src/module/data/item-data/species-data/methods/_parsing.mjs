@@ -113,12 +113,12 @@ export async function _parse(speciesData, rawHTML) {
     },
     mp: {
       "number.saved": "1",
-      faces: 1,
+      faces: 10,
       disabled: false,
     },
   };
   if (hpDiceFormula === "x") {
-    parameters.hp.disabled = true;
+    parameters.statDice.hp.disabled = true;
   } else {
     const hpRoll = new TeriockRoll(hpDiceFormula, {});
     if (hpRoll.dice.length > 0) {
@@ -129,7 +129,7 @@ export async function _parse(speciesData, rawHTML) {
     }
   }
   if (mpDiceFormula === "x") {
-    parameters.mp.disabled = true;
+    parameters.statDice.mp.disabled = true;
   } else {
     const mpRoll = new TeriockRoll(mpDiceFormula, {});
     if (mpRoll.dice.length > 0) {
@@ -207,7 +207,7 @@ export async function _parse(speciesData, rawHTML) {
     baseHpDieNumber -= diceStep * (parameters.size.value / sizeStep);
     hpDieNumberFormula = `${diceStep > 1 ? `${diceStep} * ` : ""}${
       sizeStep > 1 ? `(@size) / ${sizeStep})` : `@size`
-    }${baseHpDieNumber !== 0 ? ` - ${hpDieNumberFormula}` : ""}`;
+    }${baseHpDieNumber !== 0 ? ` ${baseHpDieNumber < 0 ? "-" : "+"} ${Math.abs(baseHpDieNumber)}` : ""}`;
     parameters.statDice.hp["number.saved"] = hpDieNumberFormula;
   }
   const sizeStepMpText = getBarText(doc, "mp-increase");
@@ -215,7 +215,7 @@ export async function _parse(speciesData, rawHTML) {
     let diceStep = 0;
     if (sizeStepMpText.includes("dice")) {
       diceStep = Number(
-        sizeStepMpText.split("another")[1].split("mana")[0].trim(),
+        sizeStepMpText.split("another")[1].split("hit")[0].trim(),
       );
     } else if (sizeStepMpText.includes("die")) {
       diceStep = 1;
@@ -228,7 +228,7 @@ export async function _parse(speciesData, rawHTML) {
     baseMpDieNumber -= diceStep * (parameters.size.value / sizeStep);
     mpDieNumberFormula = `${diceStep > 1 ? `${diceStep} * ` : ""}${
       sizeStep > 1 ? `(@size) / ${sizeStep})` : `@size`
-    }${baseMpDieNumber !== 0 ? ` - ${mpDieNumberFormula}` : ""}`;
+    }${baseMpDieNumber !== 0 ? ` ${baseMpDieNumber < 0 ? "-" : "+"} ${Math.abs(baseMpDieNumber)}` : ""}`;
     parameters.statDice.mp["number.saved"] = mpDieNumberFormula;
   }
   cleanObject(parameters, [
