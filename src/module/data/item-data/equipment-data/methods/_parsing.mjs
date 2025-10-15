@@ -64,6 +64,12 @@ export async function _parse(equipmentData, rawHTML) {
   parameters.range.long = { saved: cleanValue(getText(".normal-range")) };
   parameters.range.long = { saved: cleanValue(getText(".long-range")) };
   parameters.minStr = { saved: cleanValue(getValue(".min-str")) };
+  const consumableElement = doc.querySelector(
+    ".metadata[data-type='consumable']",
+  );
+  if (consumableElement) {
+    parameters.consumable = true;
+  }
 
   // Parse arrays
   let equipmentClasses = new Set(getTextAll(".equipment-class"));

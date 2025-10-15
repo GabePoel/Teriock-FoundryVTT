@@ -136,7 +136,13 @@ export default class StatDieModel extends DataModel {
     if (proceed) {
       const panels = this.parent.panels;
       await TeriockTextEditor.enrichPanels(panels);
-      const roll = new TeriockRoll(this.formula, {});
+      const roll = new TeriockRoll(
+        this.formula,
+        {},
+        {
+          flavor: this.parent.dieName.replace("Dice", "Die") + " Roll",
+        },
+      );
       await roll.evaluate();
       const callback = this.parent.callback;
       await callback(roll.total);
