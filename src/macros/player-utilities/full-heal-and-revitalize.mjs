@@ -3,8 +3,8 @@ if (actor) {
   await actor.update({
     "system.hp.value": actor.system.hp.max,
     "system.mp.value": actor.system.mp.max,
-    "system.attackPenalty": 0,
-    "system.hasReaction": true,
+    "system.combat.attackPenalty": 0,
+    "system.combat.hasReaction": true,
   });
   // Remove all hacks.
   for (const [part, value] of Object.entries(actor.system.hacks)) {
@@ -18,22 +18,19 @@ if (actor) {
   }
   // Restore all hit dice and mana dice
   const toUpdate = [];
-  for (const rank of actor.ranks) {
-    toUpdate.push({
-      _id: rank.id,
-      [rank.system.hpDie.path + ".spent"]: false,
-      [rank.system.mpDie.path + ".spent"]: false,
-    });
-  }
-  for (const species of actor.species) {
-    const speciesUpdates = { _id: species.id };
-    for (const hpDie of Object.values(species.system.hpDice)) {
-      speciesUpdates[hpDie.path + ".spent"] = false;
+  for (const item of [...actor.ranks, ...actor.species, ...actor.mounts]) {
+    const itemUpdates = { _id: item.id };
+    const hpDice = item.system.statDice.hp.dice.map((d) => d.toObject());
+    for (const d of hpDice) {
+      d.spent = false;
     }
-    for (const mpDie of Object.values(species.system.mpDice)) {
-      speciesUpdates[mpDie.path + ".spent"] = false;
+    const mpDice = item.system.statDice.mp.dice.map((d) => d.toObject());
+    for (const d of mpDice) {
+      d.spent = false;
     }
-    toUpdate.push(speciesUpdates);
+    itemUpdates["system.statDice.hp.dice"] = hpDice;
+    itemUpdates["system.statDice.mp.dice"] = mpDice;
+    toUpdate.push(itemUpdates);
   }
   await actor.updateEmbeddedDocuments("Item", toUpdate);
   ui.notifications.success(`Fully healed ${actor.name}.`);

@@ -1,61 +1,71 @@
-import { toTitleCase } from "../../helpers/string.mjs";
 import { TeriockDialog } from "../api/_module.mjs";
-
-const { fields } = foundry.data;
 
 /**
  * Dialog that sets {@link StatDieModel} values.
- * @param {TeriockSpecies} statItem
- * @param {Teriock.Parameters.Shared.DieStat} stat
- * @param {number} initialNumber
- * @param {Teriock.RollOptions.PolyhedralDieFaces} initialFaces
+ * @param {StatPoolModel} pool
  */
-export default async function setStatDiceDialog(
-  statItem,
-  stat,
-  initialNumber,
-  initialFaces,
-) {
-  const content = document.createElement("div");
-  const numberField = new fields.NumberField({
-    initial: initialNumber,
-    min: 0,
-    integer: true,
-    label: "Number",
-    hint: `Number of ${TERIOCK.options.die.stats[stat]} dice.`,
-  });
-  const facesField = new fields.NumberField({
-    initial: initialFaces,
-    label: "Faces",
-    hint: `How many faces the ${TERIOCK.options.die.stats[stat]} dice have.`,
-    choices: TERIOCK.options.die.faces,
-  });
-  content.append(numberField.toFormGroup({}, { name: "number" }));
-  content.append(facesField.toFormGroup({}, { name: "faces" }));
-  await TeriockDialog.prompt({
-    window: {
-      title: `Set ${toTitleCase(TERIOCK.options.die.stats[stat])} Dice`,
+export default async function setStatDiceDialog(pool) {
+  const numberForm = pool.schema.fields.number.fields.saved.toFormGroup(
+    {},
+    {
+      name: "number",
+      value: pool.number.saved,
     },
+  );
+  const facesForm = pool.schema.fields.faces.toFormGroup(
+    {},
+    {
+      name: "faces",
+      value: pool.faces,
+    },
+  );
+  const disabledForm = pool.schema.fields.disabled.toFormGroup(
+    {},
+    {
+      name: "disabled",
+      value: pool.disabled,
+    },
+  );
+  const contentElement = document.createElement("div");
+  contentElement.append(...[numberForm, facesForm, disabledForm]);
+  await TeriockDialog.prompt({
+    content: contentElement,
     modal: true,
-    content: content,
     ok: {
-      label: "Apply",
       callback: async (_event, button) => {
-        const number = Math.max(
-          Math.floor(Number(button.form.elements.namedItem("number").value)),
-          0,
-        );
-        const faces = Number(button.form.elements.namedItem("faces").value);
-        await statItem.update({
-          [`system.${stat}DiceBase.number`]: Math.max(
-            0,
-            number -
-              (statItem.system.size.value - (statItem.system.size.min || 0)),
-          ),
-          [`system.${stat}DiceBase.faces`]: faces,
-        });
-        await statItem.system.setDice(stat, number, faces);
+        const numberInput =
+          /** @type {HTMLInputElement} */ button.form.elements.namedItem(
+            "number",
+          );
+        const facesInput =
+          /** @type {HTMLInputElement} */ button.form.elements.namedItem(
+            "faces",
+          );
+        const disabledInput =
+          /** @type {HTMLInputElement} */ button.form.elements.namedItem(
+            "disabled",
+          );
+        const number = numberInput.value;
+        const faces = Number(facesInput.value);
+        const disabled = disabledInput.checked;
+        if (
+          number !== pool.number.saved ||
+          faces !== pool.faces ||
+          disabled === pool.disabled
+        ) {
+          await pool.update({
+            "number.saved": number,
+            faces: faces,
+            disabled: disabled,
+          });
+        }
       },
+      icon: "fas fa-check",
+      label: "Confirm",
+    },
+    window: {
+      icon: "fas fa-dice",
+      title: `Set ${pool.dieName}`,
     },
   });
 }

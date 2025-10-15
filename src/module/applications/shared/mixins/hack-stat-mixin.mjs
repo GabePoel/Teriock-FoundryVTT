@@ -18,13 +18,19 @@ export default (Base) => {
        * @static
        */
       static async _rollStatDie(_event, target) {
-        const id = target.dataset.id;
-        const parentId = target.dataset.parentId;
+        const id = target.dataset.document;
+        const collection = target.dataset.collection;
         const stat = target.dataset.stat;
-        /** @type {StatDieModel} */
+        const index = target.dataset.index;
+        const item =
+          /** @type {TeriockChild & {system: StatGiverMixinInterface}} */
+          this.actor[collection].get(id);
         const statDie =
-          this.actor.items.get(parentId)["system"][`${stat}Dice`][id];
-        await statDie.rollStatDie();
+          /** @type {StatDieModel} */ item.system.statDice[stat].dice[
+            Number(index)
+          ];
+        //noinspection JSUnresolvedReference
+        await statDie.use(this._consumeStatDie);
       }
 
       /**
@@ -80,11 +86,18 @@ export default (Base) => {
        * @static
        */
       async _unrollStatDie(_event, target) {
-        const id = target.dataset.id;
-        const parentId = target.dataset.parentId;
+        const id = target.dataset.document;
+        const collection = target.dataset.collection;
         const stat = target.dataset.stat;
-        const item = this.actor.items.get(parentId);
-        await item.system[`${stat}Dice`][id].unrollStatDie();
+        const index = target.dataset.index;
+        const item =
+          /** @type {TeriockChild & {system: StatGiverMixinInterface}} */
+          this.actor[collection].get(id);
+        const statDie =
+          /** @type {StatDieModel} */ item.system.statDice[stat].dice[
+            Number(index)
+          ];
+        await statDie.toggle(false);
       }
     }
   );

@@ -13,7 +13,7 @@ export function _messageParts(rankData) {
   const bars = [
     {
       icon: "fa-" + ref[src.archetype].classes[src.className].icon,
-      label: "Archetype",
+      label: "Class",
       wrappers: [
         ref[src.archetype].name,
         ref[src.archetype].classes[src.className].name,
@@ -24,9 +24,16 @@ export function _messageParts(rankData) {
       icon: "fa-dice",
       label: "Stat Dice",
       wrappers: [
-        src.hpDie.polyhedral + " Hit Die",
-        src.mpDie.polyhedral + " Mana Die",
-        src.maxAv + " Max AV",
+        rankData.statDice.hp.formula + " Hit Dice",
+        rankData.statDice.mp.formula + " Mana Dice",
+      ],
+    },
+    {
+      icon: "fa-helmet-battle",
+      label: "Details",
+      wrappers: [
+        rankData.maxAv === 0 ? "No Armor" : rankData.maxAv + " Max AV",
+        rankData.innate ? "Innate" : "Learned",
       ],
     },
   ];

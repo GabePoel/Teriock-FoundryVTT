@@ -4,8 +4,6 @@ import TeriockBaseItemSheet from "../base-item-sheet/base-item-sheet.mjs";
 import {
   archetypeContextMenu,
   classContextMenu,
-  hpDieContextMenu,
-  mpDieContextMenu,
   rankContextMenu,
 } from "./connections/_context-menus.mjs";
 
@@ -29,6 +27,9 @@ export default class TeriockRankSheet extends WikiButtonSheetMixin(
     window: {
       icon: "fa-solid fa-" + documentOptions.rank.icon,
     },
+    actions: {
+      toggleInnate: this._toggleInnate,
+    },
   };
 
   /** @inheritDoc */
@@ -39,6 +40,17 @@ export default class TeriockRankSheet extends WikiButtonSheetMixin(
       scrollable: [".window-content", ".tsheet-page", ".ab-sheet-everything"],
     },
   };
+
+  /**
+   * Toggle whether this is innate.
+   * @returns {Promise<void>}
+   * @private
+   */
+  static async _toggleInnate() {
+    await this.document.update({
+      "system.innate": !this.document.system.innate,
+    });
+  }
 
   /** @inheritDoc */
   async _onRender(context, options) {
@@ -58,14 +70,6 @@ export default class TeriockRankSheet extends WikiButtonSheetMixin(
       {
         selector: ".archetype-box",
         menu: archetypeContextMenu,
-      },
-      {
-        selector: ".hp-die-box",
-        menu: hpDieContextMenu,
-      },
-      {
-        selector: ".mp-die-box",
-        menu: mpDieContextMenu,
       },
     ].forEach(({ selector, menu }) => {
       this._connectContextMenu(selector, menu(this.item), "click");

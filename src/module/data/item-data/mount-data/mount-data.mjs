@@ -1,5 +1,8 @@
 import { mergeFreeze } from "../../../helpers/utils.mjs";
-import { AttunableDataMixin, StatDataMixin } from "../../mixins/_module.mjs";
+import {
+  AttunableDataMixin,
+  StatGiverDataMixin,
+} from "../../mixins/_module.mjs";
 import TeriockBaseItemModel from "../base-item-data/base-item-data.mjs";
 import { _messageParts } from "./methods/_messages.mjs";
 
@@ -9,9 +12,9 @@ const { fields } = foundry.data;
  * Mount-specific item data model.
  * @extends {TeriockBaseItemModel}
  * @mixes AttunableDataMixin
- * @mixes StatDataMixin
+ * @mixes StatGiverDataMixin
  */
-export default class TeriockMountModel extends StatDataMixin(
+export default class TeriockMountModel extends StatGiverDataMixin(
   AttunableDataMixin(TeriockBaseItemModel),
 ) {
   /** @inheritDoc */
@@ -32,10 +35,6 @@ export default class TeriockMountModel extends StatDataMixin(
         initial: false,
         required: false,
       }),
-      hpDiceBase: this.defineStatDieBaseField({ number: 0 }),
-      mpDiceBase: this.defineStatDieBaseField({ number: 0 }),
-      hpDice: this.defineStatDieField("hp", { number: 0 }),
-      mpDice: this.defineStatDieField("mp", { number: 0 }),
     });
     return schema;
   }

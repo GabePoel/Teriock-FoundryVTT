@@ -111,8 +111,6 @@ declare global {
       /** <schema> Current HP */
       value: number;
     };
-    /** HP Dice */
-    hpDice: Record<Teriock.ID<StatDieModel>, StatDieModel>;
     /** <base> Light */
     light: object;
     /** <schema> Money */
@@ -166,8 +164,6 @@ declare global {
       /** <schema> Current MP */
       value: number;
     };
-    /** MP Dice */
-    mpDice: Record<Teriock.ID<StatDieModel>, StatDieModel>;
     /** <schema> Offense */
     offense: {
       /** <schema> Style bonus */
@@ -238,15 +234,7 @@ declare global {
       truth: number;
     };
     /** <base> HTML strings that get displayed on the sheet */
-    sheet: SheetData & {
-      /** <base> Die box display for hit and mana dice */
-      dieBox: {
-        /** <base> Hit dice box */
-        hpDice: string;
-        /** <base> Mana dice box */
-        mpDice: string;
-      };
-    };
+    sheet: SheetData;
     /** <schema> Size */
     size: {
       /** <schema> Numbered size */
@@ -282,6 +270,16 @@ declare global {
       swim: number;
       /** <base> Walk speed */
       walk: number;
+    };
+    statDice: {
+      hp: {
+        dice: StatDieModel[];
+        html: string;
+      };
+      mp: {
+        dice: StatDieModel[];
+        html: string;
+      };
     };
     /** <base> Trackers */
     trackers: Record<

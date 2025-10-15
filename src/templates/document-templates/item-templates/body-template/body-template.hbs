@@ -1,112 +1,114 @@
 <div class="{{cssClass}} tsheet-page">
-  <div class="ab-sheet-top">
-    {{> "systems/teriock/src/templates/document-templates/shared/header.hbs"}}
-    <div class="ab-bars">
-      {{#if
-        (or
-          (exists system.av.saved)
-          (exists system.bv.saved)
-          (exists system.damage.base.saved)
-        )
-      }}
-        <div class="ab-bar">
-          {{formBox
-            (formInput
-              systemFields.damage.fields.base.fields.saved
-              dataset=(object tooltip="Damage")
-              disabled=(not editable)
-              value=system.damage.base.saved
-            )
-            icon=(firstDie system.damage.base.saved)
-            include=(exists system.damage.base.saved)
-            label="DMG"
-          }}
-          {{formBox
-            (formInput
-              systemFields.av.fields.saved
-              dataset=(object tooltip="Armor Value")
-              disabled=(not editable)
-              value=system.av.saved
-            )
-            icon=(path TERIOCK.display.icons "av")
-            include=(exists system.av.saved)
-            label="AV"
-            unselected=system.av.value
-          }}
-          {{formBox
-            (formInput
-              systemFields.bv.fields.saved
-              dataset=(object tooltip="Block Value")
-              disabled=(not editable)
-              value=system.bv.saved
-            )
-            icon=(path TERIOCK.display.icons "bv")
-            include=(exists system.bv.saved)
-            label="BV"
-            unselected=system.bv.value
-          }}
-        </div>
-      {{/if}}
-    </div>
-    {{> "systems/teriock/src/templates/document-templates/item-templates/body-template/parts/bo-menu.hbs"}}
-  </div>
-  <div class="ab-main">
-    <div class="ab-tags-all">
-      <div class="ab-tags-container">
-        <div class="ab-tags">
-          <span class="ab-tag tsubtle trait-tag">Body parts</span>
-        </div>
-        <div class="ab-icon ab-menu-toggle">
-          <div class="ab-menu-closed-container" data-tooltip="Open Menu">
-            {{{TERIOCK.display.icons.menuOpen}}}
+  <div class="ab-sheet-everything">
+    <div class="ab-sheet-top">
+      {{> "systems/teriock/src/templates/document-templates/shared/header.hbs"}}
+      <div class="ab-bars">
+        {{#if
+          (or
+            (exists system.av.saved)
+            (exists system.bv.saved)
+            (exists system.damage.base.saved)
+          )
+        }}
+          <div class="ab-bar">
+            {{formBox
+              (formInput
+                systemFields.damage.fields.base.fields.saved
+                dataset=(object tooltip="Damage")
+                disabled=(not editable)
+                value=system.damage.base.saved
+              )
+              icon=(firstDie system.damage.base.saved)
+              include=(exists system.damage.base.saved)
+              label="DMG"
+            }}
+            {{formBox
+              (formInput
+                systemFields.av.fields.saved
+                dataset=(object tooltip="Armor Value")
+                disabled=(not editable)
+                value=system.av.saved
+              )
+              icon=(path TERIOCK.display.icons "av")
+              include=(exists system.av.saved)
+              label="AV"
+              unselected=system.av.value
+            }}
+            {{formBox
+              (formInput
+                systemFields.bv.fields.saved
+                dataset=(object tooltip="Block Value")
+                disabled=(not editable)
+                value=system.bv.saved
+              )
+              icon=(path TERIOCK.display.icons "bv")
+              include=(exists system.bv.saved)
+              label="BV"
+              unselected=system.bv.value
+            }}
           </div>
-          <div class="ab-menu-open-container" data-tooltip="Close Menu">
-            {{{TERIOCK.display.icons.menuClose}}}
+        {{/if}}
+      </div>
+      {{> "systems/teriock/src/templates/document-templates/item-templates/body-template/parts/bo-menu.hbs"}}
+    </div>
+    <div class="ab-main">
+      <div class="ab-tags-all">
+        <div class="ab-tags-container">
+          <div class="ab-tags">
+            <span class="ab-tag tsubtle trait-tag">Body parts</span>
+          </div>
+          <div class="ab-icon ab-menu-toggle">
+            <div class="ab-menu-closed-container" data-tooltip="Open Menu">
+              {{{TERIOCK.display.icons.menuOpen}}}
+            </div>
+            <div class="ab-menu-open-container" data-tooltip="Close Menu">
+              {{{TERIOCK.display.icons.menuClose}}}
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    {{formGroup
-      systemFields.description
-      value=system.description
-      enriched=enriched.description
-      disabled=(not editable)
-      hidden=(not (exists system.description))
-    }}
-    {{formGroup
-      systemFields.notes
-      value=system.notes
-      enriched=enriched.notes
-      disabled=(not editable)
-      hidden=(not (exists system.notes))
-    }}
-    {{formGroup
-      systemFields.flaws
-      value=system.flaws
-      enriched=enriched.flaws
-      disabled=(not editable)
-      hidden=(not (exists system.flaws))
-    }}
-    {{#if (exists system.fightingStyle)}}
-      <div class="ab-section-container">
-        <div class="ab-section">
+      {{formGroup
+        systemFields.description
+        value=system.description
+        enriched=enriched.description
+        disabled=(not editable)
+        hidden=(not (exists system.description))
+      }}
+      {{formGroup
+        systemFields.notes
+        value=system.notes
+        enriched=enriched.notes
+        disabled=(not editable)
+        hidden=(not (exists system.notes))
+      }}
+      {{formGroup
+        systemFields.flaws
+        value=system.flaws
+        enriched=enriched.flaws
+        disabled=(not editable)
+        hidden=(not (exists system.flaws))
+      }}
+      {{#if (exists system.fightingStyle)}}
+        <div class="ab-section-container">
+          <div class="ab-section">
             <span class="ab-section-title ab-section-title-dynamic">{{path
               TERIOCK.index.weaponFightingStyles
               system.fightingStyle}}
               Fighting Style</span>
+          </div>
+          <div class="ab-improvement-bar ab-fighting-style">
+            {{{enriched.specialRules}}}
+          </div>
         </div>
-        <div class="ab-improvement-bar ab-fighting-style">
-          {{{enriched.specialRules}}}
-        </div>
+      {{/if}}
+    </div>
+    {{#if (or editable (exists properties))}}
+      <div class="ab-main">
+        {{#if editable}}
+          <button class="createProperty" data-action="createProperty">Add Property</button>{{/if}}
+        {{abilityCards properties system skipDescendants=true}}
       </div>
     {{/if}}
+    {{> "systems/teriock/src/templates/document-templates/shared/macros.hbs"}}
   </div>
-  {{#if (or editable (exists properties))}}
-    <div class="ab-main">
-      {{#if editable}}
-        <button class="createProperty" data-action="createProperty">Add Property</button>{{/if}}
-      {{abilityCards properties system skipDescendants=true}}
-    </div>
-  {{/if}}
-  {{> "systems/teriock/src/templates/document-templates/shared/macros.hbs"}}
 </div>

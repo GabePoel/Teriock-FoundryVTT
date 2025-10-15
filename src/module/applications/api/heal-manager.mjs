@@ -51,11 +51,17 @@ export default class TeriockHealManager extends TeriockStatManager {
 
   /** @inheritDoc */
   static async _rollStatDie(event, target) {
-    const id = target.dataset.id;
-    const parentId = target.dataset.parentId;
+    const id = target.dataset.document;
+    const collection = target.dataset.collection;
     const stat = target.dataset.stat;
-    /** @type {StatDieModel} */
-    const statDie = this.actor.items.get(parentId)["system"][`${stat}Dice`][id];
+    const index = target.dataset.index;
+    const item =
+      /** @type {TeriockChild & {system: StatGiverMixinInterface}} */
+      this.actor[collection].get(id);
+    const statDie =
+      /** @type {StatDieModel} */ item.system.statDice[stat].dice[
+        Number(index)
+      ];
     //noinspection JSUnresolvedReference
     if (this._forHarm) {
       const takeHandler = new RollRollableTakeHandler(event, target);
@@ -65,12 +71,8 @@ export default class TeriockHealManager extends TeriockStatManager {
       };
       await takeHandler.secondaryAction();
     } else {
-      let criticallyWounded = this.actor.statuses.has("criticallyWounded");
       //noinspection JSUnresolvedReference
-      await statDie.rollStatDie(this._consumeStatDice);
-      if (!criticallyWounded) {
-        await this.actor.system.takeAwaken();
-      }
+      await statDie.use(this._consumeStatDice);
     }
   }
 

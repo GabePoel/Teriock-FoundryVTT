@@ -1,14 +1,30 @@
 <div class="ab-bar">
   {{formBox
-    (concat system.hpDie.polyhedral " (Hit Die " system.totalHp " HP)")
-    icon=(firstDie system.hpDie.polyhedral)
-    tooltip="Hit Die"
-    classes=(ifThen editable "hp-die-box" "")
+    (concat
+      system.statDice.hp.formula
+      " Hit Di"
+      (ifThen (gt system.statDice.hp.number.value 1) "c" "")
+      "e ("
+      system.statDice.hp.value
+      " HP)"
+    )
+    action="setStatDice"
+    dataset=(object stat="hp")
+    icon=(firstDie system.statDice.hp.formula)
+    tooltip="Hit Dice"
   }}
   {{formBox
-    (concat system.hpDie.polyhedral " (Mana Die " system.totalMp " MP)")
-    icon=(firstDie system.mpDie.polyhedral)
-    tooltip="Mana Die"
-    classes=(ifThen editable "mp-die-box" "")
+    (concat
+      system.statDice.mp.formula
+      " Mana Di"
+      (ifThen (gt system.statDice.mp.number.value 1) "c" "")
+      "e ("
+      system.statDice.mp.value
+      " MP)"
+    )
+    action="setStatDice"
+    dataset=(object stat="mp")
+    icon=(firstDie system.statDice.mp.formula)
+    tooltip="Mana Dice"
   }}
 </div>

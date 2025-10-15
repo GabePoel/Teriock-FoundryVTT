@@ -164,8 +164,8 @@ export default class TeriockEquipmentModel extends EquipmentUnderstandingPart(
     super.prepareSpecialData();
     deriveModifiableNumber(this.minStr, { min: -3 });
     deriveModifiableIndeterministic(this.damage.twoHanded);
-    deriveModifiableDeterministic(this.range.long, this.actor);
-    deriveModifiableDeterministic(this.range.short, this.actor);
+    deriveModifiableDeterministic(this.range.long, this.parent);
+    deriveModifiableDeterministic(this.range.short, this.parent);
     deriveModifiableNumber(this.weight, { min: 0 });
     this.weight.total = this.weight.value;
     if (this.consumable) {

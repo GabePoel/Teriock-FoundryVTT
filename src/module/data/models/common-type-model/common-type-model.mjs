@@ -11,11 +11,12 @@ export default class CommonTypeModel extends TypeDataModel {
    * @type {Readonly<Teriock.Documents.ModelMetadata>}
    */
   static metadata = freeze({
-    type: "base",
     childEffectTypes: [],
     childItemTypes: [],
     childMacroTypes: [],
+    collection: "",
     preservedProperties: [],
+    type: "base",
   });
 
   /** @inheritDoc */
@@ -43,6 +44,14 @@ export default class CommonTypeModel extends TypeDataModel {
    */
   get color() {
     return null;
+  }
+
+  /**
+   * Metadata.
+   * @returns {Readonly<Teriock.Documents.ModelMetadata>}
+   */
+  get metadata() {
+    return this.constructor.metadata;
   }
 
   /**

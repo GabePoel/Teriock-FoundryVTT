@@ -103,6 +103,12 @@ async function processSpecies(
         "system.description": "",
       };
     }),
+    ...creature.ranks.map((r) => {
+      return {
+        _id: r.id,
+        "system.innate": true,
+      };
+    }),
   ]);
 }
 

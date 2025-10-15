@@ -13,20 +13,24 @@ if (!actor.effectKeys.consequence.has("treeformBallEffect")) {
   }
   const notTree = actor.species.filter((s) => s.name !== "Tree");
   for (const i of [...notTree, ...actor.ranks]) {
-    await i.setFlag("teriock", "preTreeformApplyHp", i.system.applyHp);
+    await i.setFlag(
+      "teriock",
+      "preTreeformApplyHp",
+      !i.system.statDice.hp.disabled,
+    );
     await i.setFlag("teriock", "preTreeformDisabled", i.disabled);
   }
   const disabledSpeciesArray = notTree.map((s) => {
     return {
       _id: s.id,
-      "system.applyHp": false,
+      "system.statDice.hp.disabled": true,
       "system.disabled": true,
     };
   });
   const disabledRanksArray = actor.ranks.map((r) => {
     return {
       _id: r.id,
-      "system.applyHp": false,
+      "system.statDice.hp.disabled": true,
       "system.disabled": true,
     };
   });

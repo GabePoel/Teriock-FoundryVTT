@@ -43,14 +43,9 @@ export default async function boostDialog(rollFormula, options = {}) {
   contentHtml.append(critField.toFormGroup({}, { name: "crit" }));
   try {
     await TeriockDialog.prompt({
-      window: {
-        icon: "fa-solid fa-dice",
-        title: "Modify Roll Formula",
-      },
-      modal: true,
       content: contentHtml,
+      modal: true,
       ok: {
-        label: label,
         callback: (_event, button) => {
           let updatedFormula = button.form.elements.namedItem("formula").value;
           const boosts = Number(button.form.elements.namedItem("boosts").value);
@@ -72,6 +67,12 @@ export default async function boostDialog(rollFormula, options = {}) {
             formula = `sb(${formula}, ${setboostNumber})`;
           }
         },
+        icon: "fas fa-dice",
+        label: label,
+      },
+      window: {
+        icon: "fas fa-dice",
+        title: "Modify Roll Formula",
       },
     });
   } catch {

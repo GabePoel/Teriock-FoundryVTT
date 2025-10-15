@@ -1,3 +1,5 @@
+import type { comparisons } from "../dice/functions/_module.mjs";
+
 declare global {
   namespace Teriock.Fields {
     export type _FormulaFieldOptions = {
@@ -42,17 +44,17 @@ declare global {
     export type ModifiableIndeterministic = Modifiable<string, string>;
 
     /**
+     * Valid comparison operations.
+     */
+    export type ComparisonCheck = keyof typeof comparisons;
+
+    /**
      * Valid change key comparison operations.
      */
     export type SpecialChangeCheck =
-      | "eq"
-      | "ne"
+      | ComparisonCheck
       | "has"
       | "includes"
-      | "gt"
-      | "lt"
-      | "gte"
-      | "lte"
       | "exists";
 
     /**

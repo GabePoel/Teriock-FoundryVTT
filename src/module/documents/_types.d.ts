@@ -25,13 +25,14 @@ declare global {
     export type MacroType = keyof typeof documentTypes.macros;
 
     export type ModelMetadata = {
-      type: string;
       childEffectTypes: Teriock.Documents.EffectType[];
       childItemTypes: Teriock.Documents.ItemType[];
       childMacroTypes: Teriock.Documents.MacroType[];
+      collection: string;
       indexCategoryKey?: Teriock.Documents.IndexCategoryKey;
       indexCompendiumKey?: Teriock.Documents.IndexCompendiumKey;
       preservedProperties: string[];
+      type: string;
     };
 
     export type ChildModelMetadata = Teriock.Documents.ModelMetadata & {

@@ -47,6 +47,7 @@ const app = {
       "properties",
       "resources",
       "tradecrafts",
+      "misc",
     ];
 
     console.log("🔄 Loading categories directly from files...");

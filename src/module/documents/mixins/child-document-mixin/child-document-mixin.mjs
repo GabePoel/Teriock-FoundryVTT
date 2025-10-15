@@ -90,18 +90,9 @@ export default (Base) => {
               change.reference.key,
             );
             let shouldInclude = false;
-            if (reference.check === "eq") {
-              shouldInclude = reference.value === property;
-            } else if (reference.check === "ne") {
-              shouldInclude = reference.value !== property;
-            } else if (reference.check === "gt") {
-              shouldInclude = Number(reference.value) > Number(property);
-            } else if (reference.check === "lt") {
-              shouldInclude = Number(reference.value) < Number(property);
-            } else if (reference.check === "gte") {
-              shouldInclude = Number(reference.value) >= Number(property);
-            } else if (reference.check === "lte") {
-              shouldInclude = Number(reference.value) <= Number(property);
+            if (Object.keys(CONFIG.Dice.functions).includes(reference.check)) {
+              const inclusionFunction = CONFIG.Dice.functions[reference.check];
+              shouldInclude = inclusionFunction(reference.value, property);
             } else if (reference.check === "has") {
               const checkSet = new Set(property);
               shouldInclude = checkSet.has(reference.value);
@@ -157,6 +148,22 @@ export default (Base) => {
         );
         await this.parent.forceUpdate();
         return copyDocument[0];
+      }
+
+      /**
+       * Roll data.
+       * @returns {object}
+       */
+      getRollData() {
+        return this.system.getRollData();
+      }
+
+      /** @inheritDoc */
+      prepareData() {
+        super.prepareData();
+        if (!this.isEmbedded) {
+          this.prepareSpecialData();
+        }
       }
 
       /** @inheritDoc */

@@ -21,7 +21,6 @@ function displayField(size = "medium", gapless = false) {
  */
 export function _defineSheet(schema) {
   schema.sheet = new fields.SchemaField({
-    dieBox: new fields.HTMLField({ initial: "" }),
     display: new fields.SchemaField({
       ability: displayField("small", true),
       consequence: displayField("small", true),

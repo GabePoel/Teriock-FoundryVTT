@@ -155,7 +155,7 @@ export default (Base) => {
       /** @inheritDoc */
       prepareSpecialData() {
         super.prepareSpecialData();
-        deriveModifiableDeterministic(this.tier, this.actor);
+        deriveModifiableDeterministic(this.tier, this.parent);
       }
     }
   );

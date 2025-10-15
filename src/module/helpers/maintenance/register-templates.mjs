@@ -71,6 +71,7 @@ export default async function registerTemplates() {
     "systems/teriock/src/templates/document-templates/item-templates/power-template/bars/pw-status-bar.hbs",
     "systems/teriock/src/templates/document-templates/item-templates/power-template/power-template.hbs",
     "systems/teriock/src/templates/document-templates/item-templates/rank-template/bars/rk-bar-class.hbs",
+    "systems/teriock/src/templates/document-templates/item-templates/rank-template/bars/rk-bar-details.hbs",
     "systems/teriock/src/templates/document-templates/item-templates/rank-template/bars/rk-bar-stats.hbs",
     "systems/teriock/src/templates/document-templates/item-templates/rank-template/rank-template.hbs",
     "systems/teriock/src/templates/document-templates/item-templates/species-template/bars/sp-lifespan-bar.hbs",

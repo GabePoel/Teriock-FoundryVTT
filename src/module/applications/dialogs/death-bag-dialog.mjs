@@ -131,7 +131,7 @@ async function deathBagPull(pullFormula, stonesFormulas, actor) {
       };
       /** @type {Teriock.MessageData.MessagePanel} */
       const messageParts = {
-        image: getIcon("conditions", "Dead"),
+        image: getIcon("misc", "Death Bag"),
         name: "Death Bag",
         bars: [
           {

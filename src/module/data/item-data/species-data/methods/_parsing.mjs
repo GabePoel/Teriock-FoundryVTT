@@ -105,41 +105,39 @@ export async function _parse(speciesData, rawHTML) {
   console.log(tagTree);
   const hpDiceFormula = tagTree["hp-dice"][0];
   const mpDiceFormula = tagTree["mp-dice"][0];
+  parameters.statDice = {
+    hp: {
+      "number.saved": "1",
+      faces: 10,
+      disabled: false,
+    },
+    mp: {
+      "number.saved": "1",
+      faces: 1,
+      disabled: false,
+    },
+  };
   if (hpDiceFormula === "x") {
-    parameters.applyHp = false;
+    parameters.hp.disabled = true;
   } else {
     const hpRoll = new TeriockRoll(hpDiceFormula, {});
     if (hpRoll.dice.length > 0) {
       const number = hpRoll.dice[0].number;
       const faces = hpRoll.dice[0].faces;
-      parameters.hpDiceBase = {
-        number: number,
-        faces: faces,
-      };
+      parameters.statDice.hp["number.saved"] = number.toString();
+      parameters.statDice.hp.faces = faces;
     }
-    await speciesData.setDice(
-      "hp",
-      parameters.hpDiceBase.number,
-      parameters.hpDiceBase.faces,
-    );
   }
   if (mpDiceFormula === "x") {
-    parameters.applyMp = false;
+    parameters.mp.disabled = true;
   } else {
     const mpRoll = new TeriockRoll(mpDiceFormula, {});
     if (mpRoll.dice.length > 0) {
       const number = mpRoll.dice[0].number;
       const faces = mpRoll.dice[0].faces;
-      parameters.mpDiceBase = {
-        number: number,
-        faces: faces,
-      };
+      parameters.statDice.mp["number.saved"] = number.toString();
+      parameters.statDice.mp.faces = faces;
     }
-    await speciesData.setDice(
-      "mp",
-      parameters.mpDiceBase.number,
-      parameters.mpDiceBase.faces,
-    );
   }
   if (tagTree["traits"]) {
     parameters.traits = tagTree["traits"];
@@ -150,6 +148,7 @@ export async function _parse(speciesData, rawHTML) {
   parameters.appearance = getBarText(doc, "looks");
   parameters.description = getText(doc, "creature-description");
   parameters.hpIncrease = getBarText(doc, "hp-increase");
+  parameters.mpIncrease = getBarText(doc, "mp-increase");
   parameters.attributeIncrease = getBarText(doc, "attribute-increase");
   parameters.innateRanks = getBarText(doc, "innate-ranks");
   const sizeString = tagTree["size"][0].split("size")[1];
@@ -192,25 +191,52 @@ export async function _parse(speciesData, rawHTML) {
   }
   const sizeStepHpText = getBarText(doc, "hp-increase");
   if (sizeStepHpText) {
-    parameters.sizeStepHp = Number(
+    let diceStep = 0;
+    if (sizeStepHpText.includes("dice")) {
+      diceStep = Number(
+        sizeStepHpText.split("another")[1].split("hit")[0].trim(),
+      );
+    } else if (sizeStepHpText.includes("die")) {
+      diceStep = 1;
+    }
+    const sizeStep = Number(
       sizeStepHpText.split("every ")[1].split(" additional")[0],
     );
-  } else {
-    parameters.sizeStepHp = null;
+    let hpDieNumberFormula = parameters.statDice.hp["number.saved"];
+    let baseHpDieNumber = Number(hpDieNumberFormula);
+    baseHpDieNumber -= diceStep * (parameters.size.value / sizeStep);
+    hpDieNumberFormula = `${diceStep > 1 ? `${diceStep} * ` : ""}${
+      sizeStep > 1 ? `(@size) / ${sizeStep})` : `@size`
+    }${baseHpDieNumber !== 0 ? ` - ${hpDieNumberFormula}` : ""}`;
+    parameters.statDice.hp["number.saved"] = hpDieNumberFormula;
   }
   const sizeStepMpText = getBarText(doc, "mp-increase");
   if (sizeStepMpText) {
-    parameters.sizeStepMpText = Number(
+    let diceStep = 0;
+    if (sizeStepMpText.includes("dice")) {
+      diceStep = Number(
+        sizeStepMpText.split("another")[1].split("mana")[0].trim(),
+      );
+    } else if (sizeStepMpText.includes("die")) {
+      diceStep = 1;
+    }
+    const sizeStep = Number(
       sizeStepMpText.split("every ")[1].split(" additional")[0],
     );
-  } else {
-    parameters.sizeStepMp = null;
+    let mpDieNumberFormula = parameters.statDice.mp["number.saved"];
+    let baseMpDieNumber = Number(mpDieNumberFormula);
+    baseMpDieNumber -= diceStep * (parameters.size.value / sizeStep);
+    mpDieNumberFormula = `${diceStep > 1 ? `${diceStep} * ` : ""}${
+      sizeStep > 1 ? `(@size) / ${sizeStep})` : `@size`
+    }${baseMpDieNumber !== 0 ? ` - ${mpDieNumberFormula}` : ""}`;
+    parameters.statDice.mp["number.saved"] = mpDieNumberFormula;
   }
   cleanObject(parameters, [
     "appearance",
     "attributeIncrease",
     "description",
     "hpIncrease",
+    "mpIncrease",
     "innateRanks",
   ]);
   let icon = getIcon("creatures", speciesData.parent.name);

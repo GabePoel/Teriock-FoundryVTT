@@ -50,6 +50,7 @@ export default (Base) => {
           createResource: this._createResource,
           debug: this._debug,
           editImage: this._editImage,
+          gmNotesOpen: this._gmNotesOpen,
           openDoc: this._openDoc,
           quickToggle: this._quickToggle,
           refreshIndexThisHard: this._refreshIndexThisHard,
@@ -57,6 +58,7 @@ export default (Base) => {
           reloadThis: this._reloadThis,
           rollDoc: this._rollDoc,
           rollThis: this._rollThis,
+          setStatDice: this._setStatDice,
           sheetToggle: this._sheetToggle,
           toggleDisabledDoc: this._toggleDisabledDoc,
           toggleImpacts: this._toggleImpacts,
@@ -65,7 +67,6 @@ export default (Base) => {
           useOneDoc: this._useOneDoc,
           wikiOpenThis: this._wikiOpenThis,
           wikiPullThis: this._wikiPullThis,
-          gmNotesOpen: this._gmNotesOpen,
         },
         classes: ["teriock", "ability"],
         dragDrop: [
@@ -397,6 +398,23 @@ export default (Base) => {
             ? { disadvantage: true }
             : {};
         this.document.use(options);
+      }
+
+      /**
+       * Modify a specified stat pool.
+       * @param {PointerEvent} _event
+       * @param {HTMLElement} target
+       * @returns {Promise<void>}
+       * @private
+       */
+      static async _setStatDice(_event, target) {
+        if (!this.editable) {
+          return;
+        }
+        const stat = target.dataset.stat;
+        const pool =
+          /** @type {StatPoolModel} */ this.document.system.statDice[stat];
+        await pool.setStatDice();
       }
 
       /**

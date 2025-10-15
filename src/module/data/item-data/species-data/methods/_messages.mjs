@@ -12,8 +12,8 @@ export function _messageParts(speciesData) {
       icon: "fa-dice",
       label: "Stat Dice",
       wrappers: [
-        speciesData.hpDiceFormula + " Hit Dice",
-        speciesData.mpDiceFormula + " Mana Dice",
+        speciesData.statDice.hp.formula + " Hit Dice",
+        speciesData.statDice.mp.formula + " Mana Dice",
       ],
     },
     {

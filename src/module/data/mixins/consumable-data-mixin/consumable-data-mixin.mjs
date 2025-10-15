@@ -63,7 +63,7 @@ export default (Base) => {
       /** @inheritDoc */
       prepareDerivedData() {
         super.prepareDerivedData();
-        deriveModifiableDeterministic(this.maxQuantity, this.actor, {
+        deriveModifiableDeterministic(this.maxQuantity, this.parent, {
           blank: Infinity,
           floor: true,
           min: 0,

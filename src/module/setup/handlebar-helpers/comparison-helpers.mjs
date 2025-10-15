@@ -1,17 +1,9 @@
+import { comparisons } from "../../dice/functions/_module.mjs";
+
 export default function registerComparisonHelpers() {
-  ["leq", "geq", "lt", "gt"].forEach((op) => {
-    Handlebars.registerHelper(op, (a, b) => {
-      if (typeof a !== "number" || typeof b !== "number") {
-        return false;
-      }
-      return {
-        leq: a <= b,
-        geq: a >= b,
-        lt: a < b,
-        gt: a > b,
-      }[op];
-    });
-  });
+  for (const [k, v] of Object.entries(comparisons)) {
+    Handlebars.registerHelper(k, v);
+  }
 
   Handlebars.registerHelper("includes", (list, item) => {
     if (!Array.isArray(list)) {

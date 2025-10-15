@@ -1,7 +1,6 @@
 import { copyAbility } from "../../../helpers/fetch.mjs";
-import { toTitleCase } from "../../../helpers/string.mjs";
 import { mergeFreeze } from "../../../helpers/utils.mjs";
-import { StatDataMixin, WikiDataMixin } from "../../mixins/_module.mjs";
+import { StatGiverDataMixin, WikiDataMixin } from "../../mixins/_module.mjs";
 import { ImportsModel } from "../../models/_module.mjs";
 import { TextField } from "../../shared/fields/_module.mjs";
 import TeriockBaseItemModel from "../base-item-data/base-item-data.mjs";
@@ -17,10 +16,10 @@ const { fields } = foundry.data;
  * - [Creatures](https://wiki.teriock.com/index.php/Category:Creatures)
  *
  * @extends {TeriockBaseItemModel}
- * @mixes StatDataMixin
+ * @mixes StatGiverDataMixin
  * @mixes WikiDataMixin
  */
-export default class TeriockSpeciesModel extends StatDataMixin(
+export default class TeriockSpeciesModel extends StatGiverDataMixin(
   WikiDataMixin(TeriockBaseItemModel),
 ) {
   /**
@@ -50,6 +49,7 @@ export default class TeriockSpeciesModel extends StatDataMixin(
       imports: new fields.EmbeddedDataField(ImportsModel),
       innateRanks: new TextField({ label: "Innate ranks" }),
       lifespan: new fields.NumberField({ initial: 100 }),
+      mpIncrease: new TextField({ label: "Mana increase" }),
       proficient: new fields.BooleanField({
         initial: true,
         label: "Proficient",
@@ -171,32 +171,15 @@ export default class TeriockSpeciesModel extends StatDataMixin(
       }
       await this.parent.createEmbeddedDocuments("ActiveEffect", newAbilities);
     }
+  }
 
-    // Handle variable size stat dice
-    for (const stat of Object.keys(TERIOCK.options.die.stats)) {
-      const sizeStepKey = `sizeStep${toTitleCase(stat)}`;
-      const sizeStep =
-        foundry.utils.getProperty(changes, `system.${sizeStepKey}`) ||
-        this[sizeStepKey];
-      if (sizeStep) {
-        const minSize =
-          foundry.utils.getProperty(changes, "system.size.min") ||
-          this.size.min;
-        const numberBase =
-          foundry.utils.getProperty(changes, `system.${stat}DiceBase.number`) ||
-          this[`${stat}DiceBase`].number;
-        const faces =
-          foundry.utils.getProperty(changes, `system.${stat}DiceBase.faces`) ||
-          this[`${stat}DiceBase`].faces;
-        let number = numberBase;
-        const sizeDelta = size - minSize;
-        const numSteps = Math.floor(sizeDelta / sizeStep);
-        if (numSteps && numSteps > 0) {
-          number += numSteps;
-        }
-        this._setDice(changes, stat, number, faces);
-      }
+  /** @inheritDoc */
+  getRollData() {
+    const rollData = super.getRollData();
+    if (typeof rollData.size === "undefined") {
+      rollData.size = this.size.value;
     }
+    return rollData;
   }
 
   /** @inheritDoc */

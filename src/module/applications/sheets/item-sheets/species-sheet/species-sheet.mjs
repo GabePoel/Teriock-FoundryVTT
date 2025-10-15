@@ -1,5 +1,6 @@
 import { documentOptions } from "../../../../constants/options/document-options.mjs";
-import WikiButtonSheetMixin from "../../mixins/button-mixins/wiki-button-sheet-mixin.mjs";
+import { setStatDiceDialog } from "../../../dialogs/_module.mjs";
+import { WikiButtonSheetMixin } from "../../mixins/_module.mjs";
 import TeriockBaseItemSheet from "../base-item-sheet/base-item-sheet.mjs";
 
 /**
@@ -41,7 +42,12 @@ export default class TeriockSpeciesSheet extends WikiButtonSheetMixin(
    * @private
    */
   static async _setHpDice() {
-    await this.document.system.setHpDice();
+    await setStatDiceDialog(
+      this.document,
+      "hp",
+      this.document.system.statDice.hp.number.saved,
+      this.document.system.statDice.hp.faces,
+    );
   }
 
   /**
@@ -50,7 +56,12 @@ export default class TeriockSpeciesSheet extends WikiButtonSheetMixin(
    * @private
    */
   static async _setMpDice() {
-    await this.document.system.setMpDice();
+    await setStatDiceDialog(
+      this.document,
+      "mp",
+      this.document.system.statDice.mp.number.saved,
+      this.document.system.statDice.mp.faces,
+    );
   }
 
   /**
@@ -104,6 +115,7 @@ export default class TeriockSpeciesSheet extends WikiButtonSheetMixin(
       ".ab-appearance-button": "system.appearance",
       ".ab-attribute-increase-button": "system.attributeIncrease",
       ".ab-hp-increase-button": "system.hpIncrease",
+      ".ab-mp-increase-button": "system.mpIncrease",
       ".ab-innate-ranks-button": "system.innateRanks",
     };
     this._connectButtonMap(buttonMap);

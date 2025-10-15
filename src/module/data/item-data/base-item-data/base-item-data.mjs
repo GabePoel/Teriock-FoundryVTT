@@ -17,6 +17,7 @@ export default class TeriockBaseItemModel extends ChildTypeModel {
     (super.metadata),
     {
       childEffectTypes: ["ability", "fluency", "resource"],
+      collection: "items",
       stats: false,
     },
   );

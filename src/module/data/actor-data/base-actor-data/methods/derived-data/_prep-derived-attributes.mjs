@@ -30,7 +30,7 @@ export function _prepDerivedAttributes(actorData) {
         : 0;
     attr.saveBonus = attr.score.value * 2 + bonus;
   });
-  deriveModifiableDeterministic(actorData.size.number, {
+  deriveModifiableDeterministic(actorData.size.number, actorData.parent, {
     min: 0,
     max: 30,
   });

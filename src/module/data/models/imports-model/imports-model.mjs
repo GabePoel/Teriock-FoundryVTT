@@ -36,6 +36,13 @@ export default class ImportsModel extends DataModel {
   }
 
   /**
+   * @returns {TeriockCommon}
+   */
+  get parent() {
+    return /** @type {TeriockCommon} */ super.parent;
+  }
+
+  /**
    * Imports that can be done without making any decisions.
    * @returns {Promise<void>}
    */
@@ -50,8 +57,7 @@ export default class ImportsModel extends DataModel {
    * @returns {Promise<void>}
    */
   async importDeterministicBodyParts() {
-    const parent = /** @type {TeriockCommon} */ this.parent;
-    /** @type {TeriockActor} */
+    const parent = this.parent;
     const actor = parent.actor;
     const toImport = [];
     const existingBodyPartKeys = new Set(

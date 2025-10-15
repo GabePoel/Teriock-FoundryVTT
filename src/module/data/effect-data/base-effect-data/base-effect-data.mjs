@@ -18,6 +18,7 @@ export default class TeriockBaseEffectModel extends ChildTypeModel {
     /** @type {Teriock.Documents.EffectModelMetadata} */
     (super.metadata),
     {
+      collection: "effects",
       hierarchy: false,
       modifies: "Actor",
     },

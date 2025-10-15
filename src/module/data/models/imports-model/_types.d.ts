@@ -15,8 +15,6 @@ declare module "./imports-model.mjs" {
       /** <schema> Ranks of any class */
       general: number;
     };
-
-    get parent(): TeriockCommon;
   }
 }
 

@@ -1,24 +1,10 @@
 <div class="ab-menu">
   <div class="ab-menu-content">
     <div class="ab-menu-bar">
-      <div class="tgrid ap-check-grid g3">
+      <div class="tgrid ap-check-grid g2">
         {{formGroup
           systemFields.size.fields.enabled
           value=system.size.enabled
-          disabled=(not editable)
-          classes="tgrid-item"
-          rootId=uuid
-        }}
-        {{formGroup
-          systemFields.applyHp
-          value=system.applyHp
-          disabled=(not editable)
-          classes="tgrid-item"
-          rootId=uuid
-        }}
-        {{formGroup
-          systemFields.applyMp
-          value=system.applyMp
           disabled=(not editable)
           classes="tgrid-item"
           rootId=uuid
@@ -107,6 +93,19 @@
             >
               {{{TERIOCK.display.icons.add}}}
               Hit Increase
+            </button>
+          </div>
+        {{/if}}
+        {{#if (not (exists system.mpIncrease))}}
+          <div class="tgrid-item">
+            <button
+              class="ab-menu-button ab-mp-increase-button"
+              {{#if (not editable)}}
+              disabled="disabled"
+              {{/if}}
+            >
+              {{{TERIOCK.display.icons.add}}}
+              Mana Increase
             </button>
           </div>
         {{/if}}

@@ -128,6 +128,20 @@ export function docSort(docs, options = {}) {
 }
 
 /**
+ * Sort ranks.
+ * @param {TeriockRank[]} ranks
+ * @returns {TeriockRank[]}
+ */
+export function rankSort(ranks) {
+  return ranks.sort((a, b) => {
+    if (a.system.innate !== b.system.innate) {
+      return a.system.innate ? -1 : 1;
+    }
+    return a.sort - b.sort;
+  });
+}
+
+/**
  * Sort abilities.
  * @param {TeriockAbility[]} abilities
  * @returns {TeriockAbility[]}

@@ -244,6 +244,21 @@ export default class ChildTypeModel extends CommonTypeModel {
   }
 
   /**
+   * Roll data.
+   * @returns {object}
+   */
+  getRollData() {
+    let rollData = {};
+    if (this.parent.actor) {
+      rollData = this.parent.actor.getRollData();
+    }
+    rollData[this.parent.documentName] = this.toObject();
+    rollData[this.parent.documentName]["name"] = this.parent.name;
+    rollData[this.parent.type] = rollData[this.parent.documentName];
+    return rollData;
+  }
+
+  /**
    * Initiates a roll for the child document.
    * Delegates to the parent document's chat functionality.
    * @param {object} options - Options for the roll operation.

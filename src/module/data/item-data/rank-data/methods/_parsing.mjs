@@ -173,13 +173,15 @@ export async function _parse(rankData, rawHTML) {
     archetype: metaData.getAttribute("data-archetype"),
     flaws: getHTML(".class-flaws") || "None.",
     description: getHTML(".class-description") || "",
-    hpDiceBase: {
-      number: 1,
-      faces: ARCHETYPE_FACES[archetype]["hp"],
-    },
-    mpDiceBase: {
-      number: 1,
-      faces: ARCHETYPE_FACES[archetype]["mp"],
+    statDice: {
+      hp: {
+        "number.saved": "1",
+        faces: ARCHETYPE_FACES[archetype]["hp"],
+      },
+      mp: {
+        "number.saved": "1",
+        faces: ARCHETYPE_FACES[archetype]["mp"],
+      },
     },
   };
 

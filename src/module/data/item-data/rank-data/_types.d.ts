@@ -1,12 +1,12 @@
 import type TeriockBaseItemModel from "../base-item-data/base-item-data.mjs";
 import type { TeriockRank } from "../../../documents/_documents.mjs";
-import type { StatDataMixinInterface } from "../../mixins/stat-data-mixin/_types";
 import type { WikiDataMixinInterface } from "../../mixins/wiki-data-mixin/_types";
+import type { StatGiverMixinInterface } from "../../mixins/stat-giver-data-mixin/_types";
 
 declare module "./rank-data.mjs" {
   export default interface TeriockRankModel
     extends TeriockBaseItemModel,
-      StatDataMixinInterface,
+      StatGiverMixinInterface,
       WikiDataMixinInterface {
     /** <schema> Rank Class Archetype */
     archetype: Teriock.Parameters.Rank.RankArchetype;

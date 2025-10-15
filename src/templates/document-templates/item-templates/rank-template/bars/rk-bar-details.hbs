@@ -1,0 +1,18 @@
+<div class="ab-bar">
+  {{formBox
+    (formInput
+      systemFields.maxAv
+      value=system.maxAv
+      disabled=(not editable)
+      dataset=(object tooltip="Maximum Worn AV")
+    )
+    icon=(path TERIOCK.display.icons "av")
+    unselected=(ifThen (eq system.maxAv 0) "No Armor" (concat system.maxAv " Max Worn AV"))
+  }}
+  {{formBox
+    (ifThen system.innate "Innate" "Learned")
+    action=(ifThen editable "toggleInnate" "")
+    tooltip="Origin"
+    icon=(ifThen system.innate "person-rays" "book")
+  }}
+</div>

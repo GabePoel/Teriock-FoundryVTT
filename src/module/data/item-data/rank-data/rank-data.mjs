@@ -1,6 +1,6 @@
 import { getRank } from "../../../helpers/fetch.mjs";
 import { getRollIcon, makeIcon, mergeFreeze } from "../../../helpers/utils.mjs";
-import { StatDataMixin, WikiDataMixin } from "../../mixins/_module.mjs";
+import { StatGiverDataMixin, WikiDataMixin } from "../../mixins/_module.mjs";
 import { TextField } from "../../shared/fields/_module.mjs";
 import TeriockBaseItemModel from "../base-item-data/base-item-data.mjs";
 import { _messageParts } from "./methods/_messages.mjs";
@@ -15,10 +15,10 @@ const { fields } = foundry.data;
  * - [Classes](https://wiki.teriock.com/index.php/Category:Classes)
  *
  * @extends {TeriockBaseItemModel}
- * @mixes StatDataMixin
+ * @mixes StatGiverDataMixin
  * @mixes WikiDataMixin
  */
-export default class TeriockRankModel extends StatDataMixin(
+export default class TeriockRankModel extends StatGiverDataMixin(
   WikiDataMixin(TeriockBaseItemModel),
 ) {
   /**
@@ -60,17 +60,9 @@ export default class TeriockRankModel extends StatDataMixin(
         label: "Class Rank",
         min: 0,
       }),
-      hpDice: this.defineStatDieField("hp", {
-        faces: 10,
-        value: 6,
-      }),
       innate: new fields.BooleanField({
         initial: false,
         label: "Innate",
-      }),
-      mpDice: this.defineStatDieField("mp", {
-        faces: 10,
-        value: 6,
       }),
       maxAv: new fields.NumberField({
         initial: 2,
@@ -93,32 +85,41 @@ export default class TeriockRankModel extends StatDataMixin(
       {
         name: "Roll Hit Die",
         icon: makeIcon(getRollIcon(this.hpDie.polyhedral), "contextMenu"),
-        callback: async () => await this.hpDie.rollStatDie(),
+        callback: async () => await this.hpDie.use(),
         condition: !this.hpDie.spent,
         group: "usage",
       },
       {
         name: "Recover Hit Die",
         icon: makeIcon("rotate-left", "contextMenu"),
-        callback: async () => await this.hpDie.unrollStatDie(),
+        callback: async () => await this.hpDie.unuse(),
         condition: this.hpDie.spent,
         group: "usage",
       },
       {
         name: "Roll Mana Die",
         icon: makeIcon(getRollIcon(this.mpDie.polyhedral), "contextMenu"),
-        callback: async () => await this.mpDie.rollStatDie(),
+        callback: async () => await this.mpDie.use(),
         condition: !this.mpDie.spent,
         group: "usage",
       },
       {
         name: "Recover Mana Die",
         icon: makeIcon("rotate-left", "contextMenu"),
-        callback: async () => await this.mpDie.unrollStatDie(),
+        callback: async () => await this.mpDie.unuse(),
         condition: this.mpDie.spent,
         group: "usage",
       },
     ];
+  }
+
+  /** @inheritDoc */
+  get color() {
+    if (this.innate) {
+      return "#9141AC";
+    } else {
+      return "#77767b";
+    }
   }
 
   /**
@@ -126,7 +127,7 @@ export default class TeriockRankModel extends StatDataMixin(
    * @returns {StatDieModel}
    */
   get hpDie() {
-    return Object.values(this.hpDice)[0];
+    return this.statDice.hp.dice[0];
   }
 
   /** @inheritDoc */
@@ -139,7 +140,7 @@ export default class TeriockRankModel extends StatDataMixin(
    * @returns {StatDieModel}
    */
   get mpDie() {
-    return Object.values(this.mpDice)[0];
+    return this.statDice.mp.dice[0];
   }
 
   /** @inheritDoc */
@@ -180,6 +181,15 @@ export default class TeriockRankModel extends StatDataMixin(
   /** @inheritDoc */
   async parse(rawHTML) {
     return await _parse(this, rawHTML);
+  }
+
+  /** @inheritDoc */
+  prepareDerivedData() {
+    for (const pool of Object.values(this.statDice)) {
+      if (this.innate) {
+        pool.disabled = true;
+      }
+    }
   }
 
   /** @inheritDoc */

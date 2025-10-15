@@ -286,6 +286,11 @@ foundry.helpers.Hooks.once("init", function () {
   CONFIG.Dice.rolls.length = 0;
   CONFIG.Dice.rolls.push(dice.TeriockRoll);
   CONFIG.Dice.termTypes.FunctionTerm = dice.FunctionTerm;
+  for (const category of Object.values(dice.functions)) {
+    for (const [k, v] of Object.entries(category)) {
+      CONFIG.Dice.functions[k] = v;
+    }
+  }
 
   // Modifying index fields
   CONFIG.ActiveEffect.IndexFields = [

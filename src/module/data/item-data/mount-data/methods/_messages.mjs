@@ -11,8 +11,8 @@ export function _messageParts(mountData) {
       icon: "fa-dice",
       label: "Stat Dice",
       wrappers: [
-        mountData.hpDiceFormula + " Hit Dice",
-        mountData.mpDiceFormula + " Mana Dice",
+        mountData.statDice.hp.formula + " Hit Dice",
+        mountData.statDice.mp.formula + " Mana Dice",
       ],
     },
     {

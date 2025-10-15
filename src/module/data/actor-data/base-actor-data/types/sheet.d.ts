@@ -16,8 +16,8 @@ interface SheetDisplay {
 
 export interface SheetData {
   dieBox: {
-    hpDice: string;
-    mpDice: string;
+    hp: string;
+    mp: string;
   };
   display: SheetDisplay;
   notes: string;

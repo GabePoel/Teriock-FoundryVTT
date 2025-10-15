@@ -35,7 +35,6 @@ export default class TeriockBaseActorModel extends ActorRollableTakesPart(
    * @type {Readonly<Teriock.Documents.ActorModelMetadata>}
    */
   static metadata = freeze({
-    type: "base",
     childEffectTypes: [
       "ability",
       "attunement",
@@ -47,6 +46,8 @@ export default class TeriockBaseActorModel extends ActorRollableTakesPart(
     ],
     childItemTypes: ["body", "equipment", "power", "rank", "species", "mount"],
     childMacroTypes: [],
+    collection: "actors",
+    type: "base",
   });
 
   /** @inheritDoc */

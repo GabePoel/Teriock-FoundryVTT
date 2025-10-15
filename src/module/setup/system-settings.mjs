@@ -4,6 +4,14 @@ export function registerSettings() {
   //noinspection JSValidateJSDoc
   /** @type {Record<string, Partial<SettingConfig>>} */
   const settings = {
+    confirmStatDiceRerolls: {
+      config: true,
+      default: true,
+      hint: "If enabled, spent stat dice will require confirmation before rerolling.",
+      name: "Confirm Stat Dice Rerolls",
+      scope: "user",
+      type: Boolean,
+    },
     automaticallyPayAbilityCosts: {
       config: true,
       default: true,

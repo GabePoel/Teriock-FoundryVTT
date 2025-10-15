@@ -115,9 +115,6 @@ export default (Base) => {
       /** @inheritDoc */
       prepareData() {
         super.prepareData();
-        if (!this.parent) {
-          this.prepareSpecialData();
-        }
       }
 
       /** @inheritDoc */

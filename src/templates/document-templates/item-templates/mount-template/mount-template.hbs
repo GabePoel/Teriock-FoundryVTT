@@ -6,28 +6,30 @@
         <div class="ab-bar">
           {{formBox
             (concat
-              system.hpDiceFormula
+              system.statDice.hp.formula
               " Hit Di"
-              (ifThen (gt system.hpDiceNumber 1) "c" "")
+              (ifThen (gt system.statDice.hp.number.value 1) "c" "")
               "e ("
-              system.totalHp
+              system.statDice.hp.value
               " HP)"
             )
-            action="setHpDice"
-            icon=(firstDie system.hpDiceFormula)
+            action="setStatDice"
+            dataset=(object stat="hp")
+            icon=(firstDie system.statDice.hp.formula)
             tooltip="Hit Dice"
           }}
           {{formBox
             (concat
-              system.mpDiceFormula
+              system.statDice.mp.formula
               " Mana Di"
-              (ifThen (gt system.mpDiceNumber 1) "c" "")
+              (ifThen (gt system.statDice.mp.number.value 1) "c" "")
               "e ("
-              system.totalMp
+              system.statDice.mp.value
               " MP)"
             )
-            action="setMpDice"
-            icon=(firstDie system.mpDiceFormula)
+            action="setStatDice"
+            dataset=(object stat="mp")
+            icon=(firstDie system.statDice.mp.formula)
             tooltip="Mana Dice"
           }}
         </div>

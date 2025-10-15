@@ -1,5 +1,9 @@
 import { documentOptions } from "../../../../constants/options/document-options.mjs";
-import { conditionSort, docSort } from "../../../../helpers/utils.mjs";
+import {
+  conditionSort,
+  docSort,
+  rankSort,
+} from "../../../../helpers/utils.mjs";
 import { CommonSheetMixin } from "../../mixins/_module.mjs";
 import DocumentCreationActorSheetPart from "./parts/document-creation-actor-sheet-part.mjs";
 import DocumentTogglingActorSheetPart from "./parts/document-toggling-actor-sheet-part.mjs";
@@ -223,7 +227,7 @@ export default class TeriockBaseActorSheet extends SearchingActorSheetPart(
         alphabetical: true,
       }),
       bodyParts: docSort(this.actor.bodyParts),
-      ranks: docSort(this.actor.ranks),
+      ranks: rankSort(this.actor.ranks),
     });
   }
 }
