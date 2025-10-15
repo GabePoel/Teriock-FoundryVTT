@@ -244,6 +244,16 @@ export default class TeriockActor extends ParentDocumentMixin(
     if ((await super._preUpdate(changed, options, user)) === false) {
       return false;
     }
+    if (
+      foundry.utils.hasProperty(changed, "img") &&
+      !foundry.utils.hasProperty(changed, "prototypeToken.texture.src")
+    ) {
+      foundry.utils.setProperty(
+        changed,
+        "prototypeToken.texture.src",
+        foundry.utils.getProperty(changed, "img"),
+      );
+    }
     if (foundry.utils.hasProperty(changed, "system.size.saved")) {
       const tokenSize = this.constructor.sizeDefinition(
         changed.size.saved,

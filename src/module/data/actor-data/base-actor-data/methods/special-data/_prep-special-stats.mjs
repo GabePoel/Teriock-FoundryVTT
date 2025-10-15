@@ -7,7 +7,6 @@ import { docSort } from "../../../../../helpers/utils.mjs";
  */
 export function _prepSpecialStats(actorData) {
   const diceLimit = Math.floor(actorData.scaling.lvl / 5);
-  let numRanks = 0;
   const diceStats = ["hp", "mp"];
   actorData.sheet.dieBox = {};
   const statItems = [
@@ -16,6 +15,7 @@ export function _prepSpecialStats(actorData) {
     ...docSort(actorData.parent.mounts),
   ];
   for (const stat of diceStats) {
+    let numRanks = 0;
     actorData[stat].base = 0;
     actorData.sheet.dieBox[stat] = "";
     for (const item of statItems) {

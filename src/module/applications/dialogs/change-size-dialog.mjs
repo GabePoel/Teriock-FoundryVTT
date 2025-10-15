@@ -9,7 +9,7 @@ const TextEditor = foundry.applications.ux.TextEditor.implementation;
  * @returns {Promise<void>}
  */
 export default async function changeSizeDialog(actor, species) {
-  if (actor.system.size.number.saved !== species.system.size.value) {
+  if (Number(actor.system.size.number.saved) !== species.system.size.value) {
     let content =
       `<p>@UUID[${actor.uuid}] is size ${actor.system.size.number.saved} and @UUID[${species.uuid}] is size` +
       ` ${species.system.size.value} by default. Would you like to update the actor's size?</p>`;

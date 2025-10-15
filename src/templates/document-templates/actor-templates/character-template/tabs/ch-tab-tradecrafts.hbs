@@ -31,12 +31,17 @@
 
                     <div class="tradecraft-panel-symbol ch-tradecraft-pro-box" data-action="quickToggle"
                          data-path="system.tradecrafts.{{name}}.proficient"
-                         data-bool="{{path ../../system.tradecrafts name 'proficient'}}">
-                      {{{ifThen (path ../../system.tradecrafts name 'proficient') '<i class="thover fa-regular fa-circle-dot" data-tooltip="Proficient"></i>
-              ' '<i class="thover fa-regular fa-circle" data-tooltip="None"></i>'}}}
+                         data-bool="{{path ../../system.tradecrafts name 'proficient'}}"
+                         data-tooltip-direction="LEFT"
+                    >
+                      {{{ifThen
+                        (path ../../system.tradecrafts name 'proficient')
+                        '<i class="thover fa-regular fa-circle-dot" data-tooltip="Proficient"></i>'
+                        '<i class="thover fa-regular fa-circle" data-tooltip="None"></i>'
+                      }}}
                     </div>
                     <div class="tradecraft-panel-symbol thover" data-action="tradecraftExtra"
-                         data-tradecraft="{{name}}">
+                         data-tradecraft="{{name}}" data-tooltip-direction="LEFT">
                       {{#if (eq (path ../../system.tradecrafts name 'extra') 0)}}
                         <i class="thover fa-fw fa-regular fa-xmark" data-tooltip="None"></i>
                       {{/if}}
