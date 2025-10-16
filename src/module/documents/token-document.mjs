@@ -1,3 +1,4 @@
+import { getIcon } from "../helpers/path.mjs";
 import { convertUnits } from "../helpers/utils.mjs";
 import { ChangeableDocumentMixin } from "./mixins/_module.mjs";
 
@@ -33,6 +34,14 @@ export default class TeriockTokenDocument extends ChangeableDocumentMixin(
   }
 
   /**
+   * Whether the token is transformed.
+   * @returns {boolean}
+   */
+  get isTransformed() {
+    return this.hasStatusEffect("transformed");
+  }
+
+  /**
    * A radius for this token in grid units.
    * @returns {number}
    */
@@ -52,20 +61,50 @@ export default class TeriockTokenDocument extends ChangeableDocumentMixin(
     return this.ring.enabled;
   }
 
+  /**
+   * Transformation image.
+   * @returns {string}
+   */
+  get transformationTexture() {
+    if (this.isTransformed) {
+      if (this.actor) {
+        const out = this.actor.system.transformation.img;
+        if (out) {
+          return out;
+        } else {
+          return getIcon("conditions", "Transformed");
+        }
+      } else {
+        return getIcon("conditions", "Transformed");
+      }
+    } else {
+      return this._source.texture.src;
+    }
+  }
+
   /** @inheritDoc */
   _checkPreparation() {
     return this.actor;
+  }
+
+  /** @inheritDoc */
+  _inferRingSubjectTexture() {
+    let out = super._inferRingSubjectTexture();
+    if (this.isTransformed && this.actor) {
+      out = this.transformationTexture;
+    }
+    return out;
   }
 
   /**
    * @inheritDoc
    */
   _onRelatedUpdate(update = {}, operation = {}) {
-    this.derivedDetectionModes();
     this.deriveVision();
     this.deriveLighting();
+    this.deriveDetectionModes();
     super._onRelatedUpdate(update, operation);
-    game.canvas.perception.initialize();
+    this.object.initializeSources();
   }
 
   /** @inheritDoc */
@@ -114,75 +153,9 @@ export default class TeriockTokenDocument extends ChangeableDocumentMixin(
   }
 
   /**
-   * Do not emit light if Ethereal.
-   */
-  deriveLighting() {
-    if (this.hasStatusEffect("ethereal")) {
-      this.light.dim = 0;
-      this.light.bright = 0;
-    } else if (this.actor) {
-      for (const [key, value] of Object.entries(this.actor.system.light)) {
-        foundry.utils.setProperty(this.light, key, value);
-      }
-    }
-  }
-
-  /**
-   * Derive vision from the {@link TeriockActor}.
-   * @returns {{visionMode: string, range: null|number}}
-   */
-  deriveVision() {
-    let visionMode = "basic";
-    let range = 0;
-
-    if (this.sight?.enabled) {
-      if (this.actor?.system.senses.dark > 0) {
-        visionMode = "darkvision";
-      }
-      if (
-        this.actor?.system.senses.night > 0 &&
-        this.actor?.system.senses.night >= this.actor?.system.senses.dark
-      ) {
-        visionMode = "lightAmplification";
-      }
-      if (this.hasStatusEffect("ethereal")) {
-        visionMode = "ethereal";
-      }
-      if (
-        this.hasStatusEffect("ethereal") &&
-        this.hasStatusEffect("invisible")
-      ) {
-        visionMode = "invisibleEthereal";
-      }
-
-      if (this.hasStatusEffect("down")) {
-        visionMode = "down";
-      }
-      if (this.hasStatusEffect("dead")) {
-        visionMode = "dead";
-      }
-
-      range = Math.max(
-        this.actor?.system.senses.dark,
-        this.actor?.system.senses.night,
-        this.actor?.system.senses.blind,
-        this.actor?.system.senses.hearing,
-      );
-
-      if (!["down", "dead", "invisibleEthereal"].includes(visionMode)) {
-        this.sight.color = "";
-      }
-    }
-    return {
-      visionMode,
-      range,
-    };
-  }
-
-  /**
    * Derive the detection modes from the {@link TeriockActor}.
    */
-  derivedDetectionModes() {
+  deriveDetectionModes() {
     if (this.actor) {
       for (const [sense, id] of Object.entries(
         TERIOCK.options.character.senseMap,
@@ -201,6 +174,84 @@ export default class TeriockTokenDocument extends ChangeableDocumentMixin(
   }
 
   /**
+   * Do not emit light if Ethereal.
+   */
+  deriveLighting() {
+    if (this.hasStatusEffect("ethereal")) {
+      this.light.dim = 0;
+      this.light.bright = 0;
+    } else if (this.actor) {
+      for (const [key, value] of Object.entries(this.actor.system.light)) {
+        foundry.utils.setProperty(this.light, key, value);
+      }
+    }
+  }
+
+  /**
+   * Override the texture if transformed.
+   */
+  deriveTexture() {
+    if (this.isTransformed && this.actor) {
+      this.texture.src = this.transformationTexture;
+      this.ring.subject.texture = this.transformationTexture;
+    } else {
+      this.texture.src = this._source.texture.src;
+      this.ring.subject.texture = this._source.texture.src;
+    }
+  }
+
+  /**
+   * Derive vision from the {@link TeriockActor}.
+   * @returns {{visionMode: string, range: null|number}}
+   */
+  deriveVision() {
+    let visionMode = "basic";
+    let range = 0;
+    if (
+      this.sight?.enabled &&
+      game.settings.get("teriock", "automaticallyChangeVisionModes")
+    ) {
+      if (this.actor?.system.senses.dark > 0) {
+        visionMode = "darkvision";
+      }
+      if (
+        this.actor?.system.senses.night > 0 &&
+        this.actor?.system.senses.night >= this.actor?.system.senses.dark
+      ) {
+        visionMode = "lightAmplification";
+      }
+      if (this.hasStatusEffect("ethereal")) {
+        visionMode = "ethereal";
+      }
+      if (
+        this.hasStatusEffect("ethereal") &&
+        this.hasStatusEffect("invisible")
+      ) {
+        visionMode = "invisibleEthereal";
+      }
+      if (this.hasStatusEffect("down")) {
+        visionMode = "down";
+      }
+      if (this.hasStatusEffect("dead")) {
+        visionMode = "dead";
+      }
+      range = Math.max(
+        this.actor?.system.senses.dark,
+        this.actor?.system.senses.night,
+        this.actor?.system.senses.blind,
+        this.actor?.system.senses.hearing,
+      );
+      if (!["down", "dead", "invisibleEthereal"].includes(visionMode)) {
+        this.sight.color = "";
+      }
+    }
+    return {
+      visionMode,
+      range,
+    };
+  }
+
+  /**
    * Perform all updates needed to synchronize this with {@link TeriockActor} data.
    * @returns {Promise<void>}
    */
@@ -215,12 +266,6 @@ export default class TeriockTokenDocument extends ChangeableDocumentMixin(
       updateData["sight.range"] = range;
     }
     if (this.actor) {
-      const tokenLight = this.light.toObject();
-      const actorLight = foundry.utils.deepClone(this.actor.system.light);
-      const mergedLight = foundry.utils.mergeObject(tokenLight, actorLight);
-      if (!foundry.utils.objectsEqual(tokenLight, mergedLight)) {
-        updateData["light"] = mergedLight;
-      }
       if (this.width !== this.actor.system.size.length) {
         updateData["width"] = this.actor.system.size.length;
       }
@@ -246,8 +291,8 @@ export default class TeriockTokenDocument extends ChangeableDocumentMixin(
    */
   prepareDerivedData() {
     super.prepareDerivedData();
-    this.deriveLighting();
-    this.derivedDetectionModes();
     this.deriveVision();
+    this.deriveLighting();
+    this.deriveDetectionModes();
   }
 }

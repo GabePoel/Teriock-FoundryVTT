@@ -9,20 +9,7 @@ const { Token } = foundry.canvas.placeables;
 export default class TeriockToken extends Token {
   /** @inheritDoc */
   async _draw(options) {
-    if (
-      (this.document.hasStatusEffect(CONFIG.specialStatusEffects.TRANSFORMED) ||
-        this.document.hasStatusEffect(
-          CONFIG.specialStatusEffects.ILLUSION_TRANSFORMED,
-        )) &&
-      this.document?.actor.system.transformation.img
-    ) {
-      this.document.texture.raw = this.document.texture.src;
-      this.document.texture.src = this.document.actor.system.transformation.img;
-    } else {
-      if (this.document.texture?.raw) {
-        this.document.texture.src = this.document.texture.raw;
-      }
-    }
+    this.document.deriveTexture();
     await super._draw(options);
   }
 
@@ -59,7 +46,6 @@ export default class TeriockToken extends Token {
       [
         CONFIG.specialStatusEffects.TRANSFORMED,
         CONFIG.specialStatusEffects.ILLUSION_TRANSFORMED,
-        CONFIG.specialStatusEffects.DEFEATED,
       ].includes(statusId)
     ) {
       this.renderFlags.set({ redraw: true });
