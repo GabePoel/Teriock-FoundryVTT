@@ -1,6 +1,7 @@
 @use "mixins";
 
 .theme-light {
+  --color-bar-border: var(--color-tcard-container-border);
   --panel-divider-style: solid;
   --content-link-background: rgba(255, 255, 255, 0.5);
   --content-link-border-color: var(--color-panel-edge);
@@ -13,10 +14,27 @@
   --color-panel-background: color-mix(in srgb, #f8f4f1, transparent 50%);
   --color-panel-divider: var(--color-panel-edge);
   --color-panel-edge: #bbb19f;
+  --color-sheet-header-background: var(--color-panel-background);
   --compendium-sheet-header-background-color: var(--color-cool-4);
+  --color-sheet-header-shadow: rgba(0, 0, 0, 0.2);
+  --color-tcard-active-inset: color-mix(
+    in srgb,
+    var(--color-warm-3),
+    transparent 50%
+  );
+  --color-tcard-container-border: var(--color-tcard-display-border);
+  --color-tcard-display-background: var(--color-panel-background);
+  --color-tcard-display-border: var(--color-panel-edge);
+  --color-tcard-hover-inset: color-mix(
+    in srgb,
+    var(--color-warm-2),
+    transparent 50%
+  );
+  --color-tcard-shadow: rgba(0, 0, 0, 0.15);
 }
 
 .theme-dark {
+  --color-bar-border: var(--color-tcard-container-border);
   --panel-divider-style: dotted;
   --color-panel-associations-background: rgba(255 255 255 / 5%);
   --color-panel-associations-background-active: rgba(255, 255, 255, 0.1);
@@ -34,11 +52,31 @@
     transparent 50%
   );
   --color-panel-edge: var(--color-text-subtle);
+  --color-sheet-header-background: rgba(255, 255, 255, 0.03);
   --compendium-sheet-header-background-color: color-mix(
     in srgb,
     var(--color-level-error-bg),
     black 75%
   );
+  --color-sheet-header-shadow: rgba(0, 0, 0, 0.6);
+  --color-tcard-active-inset: color-mix(
+    in srgb,
+    var(--color-warm-3),
+    transparent 50%
+  );
+  --color-tcard-container-border: color-mix(
+    in srgb,
+    var(--color-text-subtle),
+    transparent 90%
+  );
+  --color-tcard-display-background: rgba(255, 255, 255, 0.1);
+  --color-tcard-display-border: var(--color-border);
+  --color-tcard-hover-inset: color-mix(
+    in srgb,
+    var(--color-warm-2),
+    transparent 50%
+  );
+  --color-tcard-shadow: rgba(0, 0, 0, 0.4);
 }
 
 @import "components/compendium";

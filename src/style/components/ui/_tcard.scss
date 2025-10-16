@@ -1,10 +1,10 @@
 @use "../../mixins";
 
 .tcard-container {
-  --tcard-border-color: var(--color-border);
+  --tcard-border-color: var(--color-tcard-container-border);
   --tcard-border-radius: var(--tcard-outer-border-radius);
   border-radius: var(--tcard-outer-border-radius);
-  --tcard-box-shadow: 0 0 6px rgba(0, 0, 0, 0.4);
+  --tcard-box-shadow: 0 0 6px var(--color-tcard-shadow);
   box-shadow: var(--tcard-container-box-shadow);
   --tcard-container-box-shadow: none;
   --tcard-content-align-items: end;
@@ -19,19 +19,16 @@
   --tcard-height: 56px;
   --tcard-icons-gap: 4px;
   --tcard-image-hide-width: 249px;
+  --tcard-image-margin-left: 5px;
   --tcard-image-padding: 8px;
   --tcard-inner-border-width: 1px;
   --tcard-outer-border-radius: 6px;
   --tcard-outer-border-width: 1px;
   --tcard-subtitle-font-size: 0.8em;
   --tcard-title-font-size: 1em;
-
   --tcard-titles-align-items: flex-start;
-
   --tcard-titles-flex-direction: column;
-
   --tcard-titles-gap: 0;
-
   --tcard-titles-padding-left: 0;
 
   width: 100%;
@@ -231,15 +228,15 @@
   }
 
   &.gapless {
-    border: 1px solid var(--tcard-border-color);
     --tcard-border-radius: 0;
     border-top-width: 0;
-    //box-shadow:
-    //  var(--tcard-container-box-shadow),
-    //  inset 0 0 0 1px var(--color-border);
     --tcard-box-shadow: 0 0 0 rgba(0, 0, 0, 0);
-    --tcard-container-box-shadow: 0 0 6px rgba(0, 0, 0, 0.4);
+    box-shadow:
+      var(--tcard-container-box-shadow),
+      inset 0 0 0 1px var(--color-tcard-container-border);
+    --tcard-container-box-shadow: 0 0 6px var(--color-tcard-shadow);
     gap: 0;
+    --tcard-image-margin-left: 6px;
     --tcard-outer-border-width: 0;
     overflow: hidden;
   }
@@ -247,9 +244,8 @@
   .tcard {
     align-items: center;
     background-color: rgba(255, 255, 255, 0.1);
-
-    border: var(--tcard-outer-border-width) solid var(--color-border);
-
+    border: var(--tcard-outer-border-width) solid
+      var(--color-tcard-container-border);
     border-radius: var(--tcard-border-radius);
     border-top-width: var(--tcard-inner-border-width);
     box-shadow: var(--tcard-box-shadow);
@@ -315,7 +311,7 @@
 
       &::after {
         bottom: 0;
-        box-shadow: inset 0 0 8px var(--color-shadow-primary);
+        box-shadow: inset 0 0 8px var(--color-tcard-hover-inset);
         content: "";
         left: 0;
         pointer-events: none;
@@ -333,7 +329,7 @@
       }
 
       &::after {
-        box-shadow: inset 0 0 8px var(--color-warm-3);
+        box-shadow: inset 0 0 8px var(--color-tcard-active-inset);
       }
     }
 
@@ -348,17 +344,13 @@
       @include mixins.warm-image-container-background;
       @include mixins.image-border;
       border-radius: 3px;
-      //height: var(--tcard-height);
       height: calc(var(--tcard-height) - 12px);
-      margin-left: 5px;
+      margin-left: var(--tcard-image-margin-left);
       margin-right: var(--tcard-image-padding);
       opacity: var(--tcard-opacity);
-      //min-width: var(--tcard-height);
       overflow: hidden;
-      //@include mixins.image-right-border;
       position: relative;
       width: calc(var(--tcard-height) - 12px);
-      //width: var(--tcard-height);
 
       &.usable {
         cursor: pointer;
@@ -435,7 +427,7 @@
             cursor: pointer;
 
             &:hover {
-              color: var(--color-warm-2);
+              color: var(--color-tcard-hover-inset);
             }
 
             &:active {
@@ -481,7 +473,7 @@
 
           i {
             &:hover {
-              color: var(--color-warm-2);
+              color: var(--color-tcard-hover-inset);
             }
 
             &:active {
@@ -499,7 +491,8 @@
     .no-results {
       align-items: center;
       background-color: rgba(255, 255, 255, 0.075);
-      border: var(--tcard-outer-border-width) solid var(--color-border);
+      border: var(--tcard-outer-border-width) solid
+        var(--color-tcard-container-border);
       border-radius: var(--tcard-outer-border-radius);
       border-top-width: var(--tcard-inner-border-width);
       box-shadow: var(--tcard-box-shadow);
@@ -509,7 +502,8 @@
   .no-results {
     align-items: center;
     background-color: rgba(255, 255, 255, 0.075);
-    border: var(--tcard-outer-border-width) solid var(--color-border);
+    border: var(--tcard-outer-border-width) solid
+      var(--color-tcard-container-border);
     border-radius: var(--tcard-outer-border-radius);
     border-top-width: var(--tcard-inner-border-width);
     box-shadow: var(--tcard-box-shadow);

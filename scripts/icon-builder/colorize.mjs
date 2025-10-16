@@ -6,7 +6,10 @@ const { Magick, MagickCore } = await ImageMagick;
 
 const ROOT = process.cwd();
 const REF_PATH = path.join(ROOT, "ref.json");
-const TEMPLATES_DIR = path.join(ROOT, "templates");
+const TEMPLATES_DIR = path.join(
+  ROOT,
+  "../../../Teriock-FoundryVTT-Icons/Licensed Webp Icons/templates",
+);
 const OUT_TEMP = path.resolve(ROOT, "./temp");
 const OUT_BASE = path.resolve(ROOT, "../icon-assignment/images");
 const OUT = path.resolve(ROOT, "../icon-assignment/images/general");
