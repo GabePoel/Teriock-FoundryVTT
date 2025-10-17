@@ -1,0 +1,20 @@
+folder: T1HL9IwE6uoaEeOZ
+name: Self Allure - Pre-execution
+type: script
+_id: fe9UfpoKyx32BmaC
+author: teriockBuilder00
+img: icons/svg/dice-target.svg
+scope: global
+command: |-
+  const data = /** @type {Teriock.HookData.UseAbility} */ scope.data;
+  const uuid = data.rollConfig.useData.actor.token.uuid;
+  await tm.html.addTrackerToRollConfig(data.rollConfig, "allured", uuid);
+ownership:
+  default: 0
+flags: {}
+_stats:
+  coreVersion: '13'
+  systemId: teriock
+  systemVersion: 0.9.1
+  lastModifiedBy: teriockBuilder00
+_key: '!macros!fe9UfpoKyx32BmaC'
