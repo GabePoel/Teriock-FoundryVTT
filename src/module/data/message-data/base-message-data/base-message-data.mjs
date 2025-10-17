@@ -18,6 +18,11 @@ export default class TeriockBaseMessageModel extends TypeDataModel {
    */
   static defineSchema() {
     const schema = {};
+    schema.avatar = new fields.StringField({
+      initial: null,
+      nullable: true,
+      required: false,
+    });
     schema.columns = new fields.NumberField({ initial: 2 });
     schema.overlay = new fields.HTMLField({
       initial: null,

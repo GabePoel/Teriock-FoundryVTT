@@ -9,6 +9,7 @@ import { TeriockFolder } from "../../documents/_module.mjs";
  */
 export default async function createHotbarFolderQuery(queryData, { _timeout }) {
   const name = queryData.name;
+  const id = queryData.id;
   const folders = /** @type {Collection<string, TeriockFolder>} */ game.folders;
   let macroFolder = folders.find(
     (f) =>
@@ -21,12 +22,26 @@ export default async function createHotbarFolderQuery(queryData, { _timeout }) {
       type: "Macro",
     });
   }
-  let macroSubFolder = folders.find((f) => f.name === `${name}'s Macros`);
+  let macroSubFolder = folders.find(
+    (f) =>
+      f.getFlag("teriock", "user") === id &&
+      f.getFlag("teriock", "hotbarFolder") &&
+      f.type === "Macro",
+  );
+  const folderName = name.endsWith("s")
+    ? `${name}' Macros`
+    : `${name}'s Macros`;
   if (!macroSubFolder) {
     await TeriockFolder.create({
-      name: `${name}'s Macros`,
+      name: folderName,
       type: "Macro",
       folder: macroFolder,
+      flags: {
+        teriock: {
+          user: id,
+          hotbarFolder: true,
+        },
+      },
     });
   }
 }

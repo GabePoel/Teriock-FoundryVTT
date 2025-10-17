@@ -14,7 +14,7 @@ export async function _handleDialogs(rollConfig) {
   const abilityData = rollConfig.abilityData;
   const useData = rollConfig.useData;
   const dialogs = [];
-  const actor = abilityData.actor;
+  const actor = rollConfig.useData.actor;
 
   // Variable MP cost dialog
   if (abilityData.costs.mp?.type === "variable") {

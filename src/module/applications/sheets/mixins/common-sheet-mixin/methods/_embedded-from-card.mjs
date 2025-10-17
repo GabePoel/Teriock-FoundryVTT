@@ -7,8 +7,11 @@
  */
 export default async function _embeddedFromCard(sheet, target) {
   /** @type {HTMLElement} */
-  const card = target.closest(".tcard");
-  const { id, type, parentId } = card?.dataset ?? {};
+  let card = target;
+  if (!target.classList.contains(".tcard")) {
+    card = target.closest(".tcard");
+  }
+  const { id, type, parentId, uuid } = card?.dataset ?? {};
   if (type === "noneMacro") {
     foundry.ui.notifications.warn("Drag a macro onto sheet to assign it.", {
       console: false,
@@ -22,7 +25,12 @@ export default async function _embeddedFromCard(sheet, target) {
       sheet.document.documentName === "Actor" &&
       sheet.document._id !== parentId
     ) {
-      return sheet.document?.items.get(parentId)?.effects.get(id);
+      let embedded = sheet.document?.items.get(parentId)?.effects.get(id);
+      if (embedded) {
+        return embedded;
+      } else {
+        return await fromUuid(uuid);
+      }
     }
     if (sheet.document.documentName === "ActiveEffect") {
       return sheet.document.parent?.effects.get(id);

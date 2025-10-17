@@ -1,6 +1,6 @@
 const data = /** @type {Teriock.HookData.UseAbility} */ scope.data;
 data.rollConfig.chatData.system.buttons = [];
-const actor = data.rollConfig.abilityData.actor;
+const actor = data.rollConfig.useData.actor;
 const equipment = actor.equipment
   .filter((e) => e.system.isAttuned)
   .sort((a, b) => a.name.localeCompare(b.name));

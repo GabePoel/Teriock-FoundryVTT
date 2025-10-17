@@ -17,12 +17,15 @@ declare global {
       | "species";
 
     export type ActorType = keyof typeof documentTypes.actors;
-
     export type ItemType = keyof typeof documentTypes.items;
-
     export type EffectType = keyof typeof documentTypes.effects;
-
     export type MacroType = keyof typeof documentTypes.macros;
+    export type ChildType =
+      | Teriock.Documents.ItemType
+      | Teriock.Documents.EffectType;
+    export type CommonType =
+      | Teriock.Documents.ChildType
+      | Teriock.Documents.ActorType;
 
     export type ModelMetadata = {
       childEffectTypes: Teriock.Documents.EffectType[];
@@ -32,16 +35,17 @@ declare global {
       indexCategoryKey?: Teriock.Documents.IndexCategoryKey;
       indexCompendiumKey?: Teriock.Documents.IndexCompendiumKey;
       preservedProperties: string[];
-      type: string;
+      type: Teriock.Documents.CommonType;
     };
 
     export type ChildModelMetadata = Teriock.Documents.ModelMetadata & {
-      usable: boolean;
       consumable: boolean;
-      wiki: boolean;
       namespace: string;
       pageNameKey: string;
       passive: boolean;
+      type: Teriock.Documents.ChildType;
+      usable: boolean;
+      wiki: boolean;
     };
 
     export type ActorModelMetadata = Teriock.Documents.ModelMetadata & {

@@ -176,7 +176,7 @@ export default class TeriockBaseActorSheet extends SearchingActorSheetPart(
   async _prepareContext(options) {
     const context = await super._prepareContext(options);
     this._prepareDisplayContext(context);
-    this._prepareDocumentContext(context);
+    await this._prepareDocumentContext(context);
     this._prepareConditionContext(context);
     context.enrichedNotes = await this._enrich(
       this.document.system.sheet.notes,
@@ -205,10 +205,11 @@ export default class TeriockBaseActorSheet extends SearchingActorSheetPart(
    * @param {object} context
    * @private
    */
-  _prepareDocumentContext(context) {
+  async _prepareDocumentContext(context) {
+    const abilities = await this.actor.allAbilities();
     Object.assign(context, {
       abilities: this._getFilteredAbilities(
-        sortAbilities(this.actor, this.actor.abilities),
+        sortAbilities(this.actor, abilities),
       ),
       resources: docSort(this.actor.resources, {
         alphabetical: true,

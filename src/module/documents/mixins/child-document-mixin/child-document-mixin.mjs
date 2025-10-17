@@ -173,21 +173,25 @@ export default (Base) => {
       }
 
       /** @inheritDoc */
-      async roll(_options) {
-        await this.toMessage();
+      async roll(options) {
+        await this.toMessage(options);
       }
 
       /** @inheritDoc */
-      async toMessage() {
+      async toMessage(options) {
         const data = { doc: this.parent };
         await this.hookCall("documentChat", data);
         if (data.cancel) {
           return;
         }
         const panel = await this.toPanel();
+        const actor = options?.actor || this.actor;
         const messageData = {
-          speaker: TeriockChatMessage.getSpeaker({ actor: this.actor }),
+          speaker: TeriockChatMessage.getSpeaker({
+            actor: actor,
+          }),
           system: {
+            avatar: actor.img,
             bars: [],
             blocks: [],
             buttons: [],
@@ -197,6 +201,7 @@ export default (Base) => {
             tags: [],
           },
         };
+        console.log(messageData);
         TeriockChatMessage.applyRollMode(
           messageData,
           game.settings.get("core", "rollMode"),

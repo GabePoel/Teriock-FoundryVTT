@@ -1,5 +1,5 @@
 <div class="tcard-container {{#if
-  system.sheet.display.power.gapless}}gapless{{/if}} {{system.sheet.display.power.size}}">
+  system.sheet.display.equipment.gapless}}gapless{{/if}} {{system.sheet.display.equipment.size}}">
   {{#each mounts as |item|}}
     {{tcard
       img=item.img
@@ -9,7 +9,7 @@
       active=item.mounted
       text=(concat 'Tier ' item.system.tier.value)
       tooltip="Share to Chat"
-      hidden=(rgx ../searchStrings.powers item.name)
+      hidden=(rgx ../searchStrings.equipment item.name)
       icons=(concat
         (ticonToggle "handshake-simple" "handshake-simple-slash" item.system.isAttuned action="toggleAttunedDoc"
           id=item._id parentId=item.parent._id tooltipTrue="Attuned" tooltipFalse="Deattuned")
@@ -19,7 +19,7 @@
       )
     }}
   {{/each}}
-  <div class="no-results {{{system.sheet.display.power.size}}}">
+  <div class="no-results {{{system.sheet.display.equipment.size}}}">
     <p>No mounts found.</p>
   </div>
 </div>

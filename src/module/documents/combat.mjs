@@ -107,14 +107,6 @@ export default class TeriockCombat extends Combat {
   }
 
   /** @inheritDoc */
-  async nextRound() {
-    let out = await super.nextRound();
-    const activeGm = /** @type {TeriockUser} */ game.users.activeGM;
-    await activeGm.query("teriock.timeAdvance", { delta: 5 });
-    return out;
-  }
-
-  /** @inheritDoc */
   async nextTurn() {
     // Turn change
     const out = await super.nextTurn();
@@ -169,16 +161,6 @@ export default class TeriockCombat extends Combat {
     }
 
     // Finish
-    return out;
-  }
-
-  /** @inheritDoc */
-  async previousRound() {
-    let out = await super.previousRound();
-    const activeGm = /** @type {TeriockUser} */ game.users.activeGM;
-    await activeGm.query("teriock.timeAdvance", {
-      delta: -5,
-    });
     return out;
   }
 

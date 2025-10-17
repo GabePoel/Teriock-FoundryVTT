@@ -146,7 +146,9 @@ export default (Base) => {
        */
       static async _chatDoc(_event, target) {
         const embedded = await _embeddedFromCard(this, target);
-        await embedded?.toMessage();
+        await embedded?.toMessage({
+          actor: this.actor,
+        });
       }
 
       /**
@@ -156,7 +158,9 @@ export default (Base) => {
        * @returns {Promise<void>} Promise that resolves when chat is sent.
        */
       static async _chatThis(_event, _target) {
-        this.document.toMessage();
+        this.document.toMessage({
+          actor: this.actor,
+        });
       }
 
       /**
@@ -760,7 +764,6 @@ export default (Base) => {
        */
       async _onDrop(event) {
         const document = await TextEditor.getDragEventData(event);
-        console.log(document);
         if (document.type === "ActiveEffect") {
           await this._onDropActiveEffect(event, document);
         } else if (document.type === "Item") {
@@ -919,7 +922,7 @@ export default (Base) => {
           );
         }
         this.editable = this.isEditable && !this._locked;
-        _connectEmbedded(this.document, this.element, this.editable);
+        await _connectEmbedded(this.document, this.element, this.editable);
         this._connect(".chat-button", "contextmenu", (e) => {
           CommonSheetMixin._debug.call(this, e, e.currentTarget);
         });

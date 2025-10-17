@@ -129,6 +129,21 @@ export default class TeriockAbilityModel extends HierarchyDataMixin(
   }
 
   /** @inheritDoc */
+  get isUsable() {
+    return super.usable && !this.isVirtual;
+  }
+
+  /**
+   * Whether this is a virtual ability.
+   * @returns {boolean}
+   */
+  get isVirtual() {
+    return (
+      this.parent.inCompendium && this.parent.parent.name === "Basic Abilities"
+    );
+  }
+
+  /** @inheritDoc */
   get messageParts() {
     return {
       ...super.messageParts,

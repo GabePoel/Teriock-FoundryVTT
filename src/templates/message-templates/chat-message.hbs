@@ -1,18 +1,30 @@
-<li class="chat-message message flexcol {{cssClass}}" data-message-id="{{message._id}}"
+<li class="teriock chat-message message flexcol {{cssClass}}" data-message-id="{{message._id}}"
     {{#if borderColor}}style="border-color:{{borderColor}}"{{/if}}>
   <header class="message-header flexrow">
-    <h4 class="message-sender">{{alias}}</h4>
+    <div class="messenger">
+      <div class="message-avatar">
+        <img class="{{#if message.rescale}}rescale{{/if}}" src="{{message.img}}" alt="">
+      </div>
+      <div class="message-author">
+        <h4 class="message-sender">{{alias}}</h4>
+        {{#if message.writer}}
+          <div class="message-writer">
+            {{message.writer}}
+          </div>
+        {{/if}}
+      </div>
+    </div>
     <span class="message-metadata">
             <time class="message-timestamp">{{timeSince message.timestamp}}</time>
       {{#if canDelete}}
         <a aria-label="{{localize 'Delete'}}" class="message-delete" data-action="deleteMessage">
-                <i class="fa-solid fa-trash" inert></i>
-            </a>
+          <i class="fa-solid fa-trash" inert></i>
+        </a>
       {{/if}}
       {{#if canClose}}
         <a aria-label="{{ localize "CHAT.Dismiss" }}" class="message-dismiss" data-action="dismissMessage">
-                <i class="fa-solid fa-xmark" inert></i>
-            </a>
+          <i class="fa-solid fa-xmark" inert></i>
+        </a>
       {{/if}}
         </span>
 

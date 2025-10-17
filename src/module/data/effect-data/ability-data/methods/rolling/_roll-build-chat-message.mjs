@@ -30,5 +30,6 @@ export async function _buildChatMessage(rollConfig) {
     rollConfig.abilityData.parent,
   )?.outerHTML;
   rollConfig.chatData.system.source = rollConfig.abilityData.parent.uuid;
+  rollConfig.chatData.system.avatar = rollConfig.useData.actor.img;
   await TeriockChatMessage.create(rollConfig.chatData);
 }

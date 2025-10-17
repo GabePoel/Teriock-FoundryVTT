@@ -84,6 +84,7 @@ export default async function inCombatExpirationDialog(
                 button.form.elements.namedItem("roll").value,
                 effect.actor.getRollData(),
                 {
+                  flavor: `${effect.name} Ending Roll`,
                   context: {
                     diceClass: "condition",
                     threshold: Number(
@@ -97,7 +98,6 @@ export default async function inCombatExpirationDialog(
                   speaker: TeriockChatMessage.getSpeaker({
                     actor: effect.actor,
                   }),
-                  flavor: `${effect.name} Ending Roll`,
                 },
                 {
                   rollMode: game.settings.get("core", "rollMode"),

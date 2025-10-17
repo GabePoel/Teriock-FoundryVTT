@@ -20,6 +20,7 @@ import type {
 import PixiJS from "pixi.js";
 import * as sheets from "./applications/sheets/_module.mjs";
 import * as documents from "./documents/_documents.mjs";
+import { TeriockBody, TeriockEquipment } from "./documents/_documents.mjs";
 import * as data from "./data/_module.mjs";
 import * as placeables from "./canvas/placeables/_module.mjs";
 import * as collections from "./documents/_collections.mjs";
@@ -58,6 +59,7 @@ declare global {
   export type TeriockParent = TeriockActor | TeriockItem;
   export type TeriockChild = TeriockItem | TeriockEffect;
   export type TeriockCommon = TeriockActor | TeriockItem | TeriockEffect;
+  export type TeriockArmament = TeriockEquipment | TeriockBody;
 
   // Virtual document classes
   // ========================

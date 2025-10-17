@@ -272,7 +272,11 @@ export function selectUser(actor) {
   if (!selectedUser) {
     users.forEach(
       /** @param {TeriockUser} user */ (user) => {
-        if (!user.isActiveGM && actor.canUserModify(user, "update")) {
+        if (
+          !user.isActiveGM &&
+          actor.canUserModify(user, "update") &&
+          user.isActive
+        ) {
           selectedUser = user;
         }
       },
@@ -282,7 +286,7 @@ export function selectUser(actor) {
   if (!selectedUser) {
     users.forEach(
       /** @param {TeriockUser} user */ (user) => {
-        if (actor.canUserModify(user, "update")) {
+        if (actor.canUserModify(user, "update") && user.isActive) {
           selectedUser = user;
         }
       },
@@ -654,4 +658,17 @@ export function freeze(obj) {
  */
 export function isOwnerAndCurrentUser(document, userId) {
   return game.user.id === userId && document.isOwner;
+}
+
+/**
+ * Get the best current actor.
+ * @returns {TeriockActor|null}
+ */
+export function getActor() {
+  const speaker = foundry.documents.ChatMessage.implementation.getSpeaker();
+  const character = game.user.character;
+  const token =
+    (canvas.ready ? canvas.tokens.get(speaker.token) : null) || null;
+  //noinspection JSUnresolvedReference
+  return token?.actor || game.actors.get(speaker.actor) || character || null;
 }

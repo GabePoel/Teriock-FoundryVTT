@@ -38,6 +38,7 @@ async function use(fluencyData, options) {
     speaker: TeriockChatMessage.getSpeaker({ actor: fluencyData.actor }),
     rolls: [roll],
     system: {
+      avatar: fluencyData.actor.img,
       panels: [await fluencyData.parent.toPanel()],
     },
   });

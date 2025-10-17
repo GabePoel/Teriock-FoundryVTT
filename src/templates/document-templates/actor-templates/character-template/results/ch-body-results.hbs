@@ -1,28 +1,34 @@
-<div id="equipment-results" class="tcard-results" data-search-key="equipment">
-  <div class="tcard-container {{#if
-    system.sheet.display.equipment.gapless}}gapless{{/if}} {{system.sheet.display.equipment.size}}">
-    {{#each bodyParts as |item|}}
-      {{tcard
-        active=(not item.disabled)
-        hidden=(rgx ../searchStrings.equipment item.name)
-        icons=(concat
-          (ticon "comment" action="chatDoc" id=item._id tooltip="Send to Chat")
-          (ticonToggle "circle-check" "circle" (not item.disabled) action="toggleDisabledDoc" id=item._id tooltipTrue="Enabled" tooltipFalse="Disabled")
+<div class="tcard-container {{#if
+  system.sheet.display.equipment.gapless}}gapless{{/if}} {{system.sheet.display.equipment.size}}">
+  {{#each bodyParts as |item|}}
+    {{tcard
+      active=(not item.disabled)
+      hidden=(rgx ../searchStrings.equipment item.name)
+      icons=(concat
+        (ticon "comment" action="chatDoc" id=item._id tooltip="Send to Chat")
+        (ticonToggle
+          "circle-check"
+          "circle"
+          (not item.disabled)
+          action="toggleDisabledDoc"
+          id=item._id
+          tooltipTrue="Enabled"
+          tooltipFalse="Disabled"
         )
-        id=item._id
-        img=item.img
-        struck=item.system.disabled
-        subtitle="Body part"
-        text=(dotJoin
-          (suffix item.system.damage.base.value 'Damage')
-          (suffix item.system.bv.value 'BV')
-          (suffix item.system.av.value 'AV')
-        )
-        title=item.name
-      }}
-    {{/each}}
-    <div class="no-results {{{system.sheet.display.equipment.size}}}">
-      <p>No body parts found.</p>
-    </div>
+      )
+      id=item._id
+      img=item.img
+      struck=item.system.disabled
+      subtitle="Body part"
+      text=(dotJoin
+        (suffix item.system.damage.base.value 'Damage')
+        (suffix item.system.bv.value 'BV')
+        (suffix item.system.av.value 'AV')
+      )
+      title=item.name
+    }}
+  {{/each}}
+  <div class="no-results {{{system.sheet.display.equipment.size}}}">
+    <p>No body parts found.</p>
   </div>
 </div>

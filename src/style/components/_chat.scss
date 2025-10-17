@@ -167,3 +167,41 @@
   margin-top: 0 !important;
   padding-top: 6px !important;
 }
+
+.messenger {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  gap: 7px;
+  margin-bottom: 8px;
+
+  .message-avatar {
+    @include mixins.image-border;
+    height: 30px;
+    max-height: 30px;
+    max-width: 30px;
+    outline-color: var(--color-dark-6);
+    width: 30px;
+
+    img {
+      @include mixins.warm-image-background;
+    }
+  }
+
+  .message-author {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    .message-sender {
+      font-family: "CreteRound", serif;
+      font-size: larger;
+      line-height: 18px;
+    }
+
+    .message-writer {
+      @include mixins.text-subtle;
+      line-height: 10px;
+    }
+  }
+}

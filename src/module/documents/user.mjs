@@ -14,6 +14,9 @@ export default class TeriockUser extends User {
    * @returns {boolean}
    */
   get isActive() {
-    return this.lastActivityTime - game.time.serverTime < 120;
+    return (
+      this.active &&
+      (this.lastActivityTime === 0 || Date.now() - this.lastActivityTime < 120)
+    );
   }
 }

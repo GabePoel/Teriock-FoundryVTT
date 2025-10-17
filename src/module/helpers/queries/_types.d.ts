@@ -6,6 +6,7 @@ import type {
   TeriockActor,
   TeriockEffect,
   TeriockItem,
+  TeriockUser,
 } from "../../documents/_module.mjs";
 
 declare global {
@@ -39,6 +40,7 @@ declare global {
 
     export type CreateHotbarFolder = {
       name: string;
+      id: Teriock.ID<TeriockUser>;
     };
 
     export type UpdateEmbeddedDocuments = {

@@ -1,22 +1,22 @@
 const data = /** @type {Teriock.HookData.UseAbility} */ scope.data;
 const options = foundry.utils.deepClone(data.rollConfig.useData.rollOptions);
-const actor = data.rollConfig.abilityData.actor;
-const equipment = actor.equipment.filter(
+const actor = data.rollConfig.useData.actor;
+const equipment = actor.activeArmaments.filter(
   (e) =>
-    e.system.equipped &&
     e.system.damage.base.value &&
     e.system.damage.base.value !== "0" &&
     actor.system.primaryAttacker !== e.id,
 );
 const selectedEquipment = await tm.dialogs.selectDocumentDialog(equipment, {
-  title: "Select Equipment",
-  hint: "Select equipment to attack with.",
+  title: "Select Armament",
+  hint: "Select armament to attack with.",
 });
 const oldEquipmentId = actor.system.primaryAttacker.id;
 await actor.update({
   "system.wielding.attacker": selectedEquipment.id,
 });
-const abilities = actor.abilities
+let abilities = await actor.allAbilities();
+abilities = abilities
   .filter(
     (a) =>
       a.system.interaction === "attack" &&

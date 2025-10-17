@@ -71,6 +71,10 @@ async function processSpecies(
   }
   const mechanics = creature.items.filter((i) => i.type === "mechanic");
   const mechanicIds = mechanics.map((m) => m.id);
+  const basicAbilitiesItems = creature.items.filter(
+    (i) => i.name === "Basic Abilities" && i.type === "power",
+  );
+  const basicAbilitiesIds = basicAbilitiesItems.map((p) => p.id);
   const equipmentNames = new Set(creature.equipment.map((e) => e.name));
   const firstEquipment = [];
   for (const name of equipmentNames) {
@@ -81,6 +85,7 @@ async function processSpecies(
   );
   await creature.deleteEmbeddedDocuments("Item", [
     ...mechanicIds,
+    ...basicAbilitiesIds,
     ...otherEquipment.map((e) => e.id),
   ]);
   await creature.system.hardRefreshFromIndex();

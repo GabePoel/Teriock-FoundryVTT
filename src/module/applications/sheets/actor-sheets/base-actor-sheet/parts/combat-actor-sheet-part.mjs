@@ -83,10 +83,7 @@ export default (Base) =>
      */
     static async _selectBlocker() {
       const attacker = await selectDocumentDialog(
-        [
-          ...this.document.equipment.filter((e) => e.system.isEquipped),
-          ...this.document.bodyParts,
-        ],
+        this.document.activeArmaments,
         {
           hint: "Select the default equipment you block with.",
           label: "Select Primary Blocker",

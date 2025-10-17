@@ -1,3 +1,5 @@
+import { getActor } from "../../../../../helpers/utils.mjs";
+
 /** @type {AbilityUseData} */
 const DEFAULT_USE_DATA = {
   actor: null,
@@ -54,6 +56,9 @@ export function _defaultConfig(abilityData, options = {}) {
     rollConfig.useData.actor = options.actor;
   } else {
     rollConfig.useData.actor = abilityData.actor;
+  }
+  if (!rollConfig.useData.actor) {
+    rollConfig.useData.actor = getActor();
   }
   // An ability must have an actor to be used
   if (!rollConfig.useData.actor) {

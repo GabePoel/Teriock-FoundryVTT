@@ -1,4 +1,5 @@
 @use "colors" as colors;
+@use "../mixins" as mixins;
 @use "sidebar/hack-box";
 @use "sidebar/intro-box";
 @use "sidebar/status-box";
@@ -416,6 +417,12 @@
   padding: 0.5em;
   width: 100%;
 
+  .tcard-display-divider {
+    border-top: 1px dotted var(--color-text-subtle);
+    margin: 0.5em;
+    width: 100%;
+  }
+
   .tcard-options {
     border-bottom: 1px dashed var(--color-form-hint);
     display: flex;
@@ -770,5 +777,19 @@
     &:hover {
       filter: drop-shadow(0 0 2px rgba(125, 0, 0, 0.4));
     }
+  }
+}
+
+.currency-image {
+  align-items: center;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  width: 100%;
+
+  img {
+    @include mixins.image-border;
+    height: 24px;
+    width: 24px;
   }
 }

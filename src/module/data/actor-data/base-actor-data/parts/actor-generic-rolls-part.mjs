@@ -52,6 +52,9 @@ export default (Base) => {
         await roll.toMessage(
           {
             speaker: TeriockChatMessage.getSpeaker({ actor: this.parent }),
+            system: {
+              avatar: this.parent.img,
+            },
             flavor:
               (typeof options.threshold === "number"
                 ? `DC ${options.threshold} `
@@ -83,6 +86,7 @@ export default (Base) => {
           speaker: TeriockChatMessage.getSpeaker({ actor: this.parent }),
           title: "Immune",
           system: {
+            avatar: this.parent.img,
             panels: options.panels,
           },
         };
@@ -129,6 +133,7 @@ export default (Base) => {
             speaker: TeriockChatMessage.getSpeaker({ actor: this.parent }),
             rolls: [roll],
             system: {
+              avatar: this.parent.img,
               panels: options.panels,
             },
           },
@@ -186,6 +191,7 @@ export default (Base) => {
             speaker: TeriockChatMessage.getSpeaker({ actor: this.parent }),
             rolls: [roll],
             system: {
+              avatar: this.parent.img,
               panels: [await tradecraftPanel(tradecraft)],
             },
           },

@@ -47,9 +47,11 @@ export interface ChildDocumentMixinInterface {
 
   /**
    * Sends a chat message with the document's content.
+   * @param {object} [options]
+   * @param {TeriockActor} [options.actor]
    * @returns Promise that resolves when the chat message is sent
    */
-  toMessage(): Promise<void>;
+  toMessage(options: object): Promise<void>;
 
   /**
    * Gives a panel representing the document's content.

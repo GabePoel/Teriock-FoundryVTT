@@ -1,4 +1,3 @@
-import { copyItem } from "../../../helpers/fetch.mjs";
 import { freeze } from "../../../helpers/utils.mjs";
 import { CommonTypeModel } from "../../models/_module.mjs";
 import { _migrateData } from "./methods/_migrate-data.mjs";
@@ -116,24 +115,7 @@ export default class TeriockBaseActorModel extends ActorRollableTakesPart(
     if ((await super._preCreate(data, options, user)) === false) {
       return false;
     }
-
-    // Ensure default items
-    const defaultItems = [
-      {
-        name: "Basic Abilities",
-        pack: "essentials",
-      },
-    ];
-    const items = [];
-    for (const item of defaultItems) {
-      if (!this.parent.items.find((i) => i.name === item.name)) {
-        items.push((await copyItem(item.name, item.pack)).toObject());
-      }
-    }
-
-    // Add Essential Items
     this.parent.updateSource({
-      items: items,
       prototypeToken: {
         ring: {
           enabled: true,

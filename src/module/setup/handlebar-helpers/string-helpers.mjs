@@ -1,3 +1,5 @@
+import { toCamelCase, toKebabCase } from "../../helpers/string.mjs";
+
 export default function registerStringHelpers() {
   Handlebars.registerHelper("lc", (str) =>
     typeof str === "string" ? str.toLowerCase() : "",
@@ -81,4 +83,8 @@ export default function registerStringHelpers() {
         .replace(/'/g, "&#39;"),
     );
   });
+
+  Handlebars.registerHelper("toCamelCase", (str) => toCamelCase(str));
+
+  Handlebars.registerHelper("toKebabCase", (str) => toKebabCase(str));
 }

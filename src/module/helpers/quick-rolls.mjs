@@ -62,6 +62,7 @@ export async function harmRoll(
       : TeriockChatMessage.getSpeaker(),
     rolls: [roll],
     system: {
+      avatar: actor.img,
       buttons: buttons,
       columns: damageTypeButtons.length > 0 ? 2 : 3,
       extraContent: message,

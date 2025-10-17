@@ -79,10 +79,12 @@ export default (Base) => {
       /** @inheritDoc */
       async use(options) {
         await super.use(options);
-        if (!this.parent.getFlag("teriock", "dontConsume")) {
-          await this.useOne();
+        if (this.parent.isOwner) {
+          if (!this.parent.getFlag("teriock", "dontConsume")) {
+            await this.useOne();
+          }
+          await this.parent.setFlag("teriock", "dontConsume", false);
         }
-        await this.parent.setFlag("teriock", "dontConsume", false);
       }
 
       /** @inheritDoc */

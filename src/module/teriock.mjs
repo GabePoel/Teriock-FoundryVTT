@@ -50,6 +50,8 @@ foundry.helpers.Hooks.once("init", function () {
     formula: "1d20 + @mov",
   };
 
+  CONFIG.time.roundTime = 5;
+
   CONFIG.statusEffects.length = 0;
   for (const condition of Object.values(TERIOCK.data.conditions)) {
     CONFIG.statusEffects.push(condition);

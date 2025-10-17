@@ -147,7 +147,11 @@ export default class StatDieModel extends DataModel {
       const callback = this.parent.callback;
       await callback(roll.total);
       await TeriockChatMessage.create({
+        speaker: TeriockChatMessage.getSpeaker({
+          actor: this.parent.parent.parent.actor,
+        }),
         system: {
+          avatar: this.parent.parent.parent.actor.img,
           panels: panels,
         },
         rolls: [roll],

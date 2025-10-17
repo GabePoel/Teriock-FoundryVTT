@@ -30,7 +30,6 @@ export default class FormulaField extends StringField {
     }
     const operator = delta.startsWith("-") ? "-" : "+";
     delta = delta.replace(/^[+-]/, "").trim();
-    console.log(`${value} ${operator} ${delta}`);
     return `${value} ${operator} ${delta}`;
   }
 

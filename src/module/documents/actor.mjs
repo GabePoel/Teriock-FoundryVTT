@@ -1,5 +1,5 @@
 import { TeriockRoll } from "../dice/_module.mjs";
-import { copyItem } from "../helpers/fetch.mjs";
+import { copyItem, getItem } from "../helpers/fetch.mjs";
 import { toCamelCase } from "../helpers/string.mjs";
 import { pureUuid, selectUser } from "../helpers/utils.mjs";
 import TeriockChatMessage from "./chat-message.mjs";
@@ -79,11 +79,30 @@ export default class TeriockActor extends ParentDocumentMixin(
   specialEffects = [];
 
   /**
+   * Enabled body parts and equipped equipment.
+   * @returns {TeriockArmament[]}
+   */
+  get activeArmaments() {
+    return [
+      ...this.equipment.filter((e) => e.system.isEquipped),
+      ...this.bodyParts.filter((b) => !b.disabled),
+    ];
+  }
+
+  /**
    * @inheritDoc
    * @returns {TeriockActor}
    */
   get actor() {
     return this;
+  }
+
+  /**
+   * Body parts and equipment.
+   * @returns {TeriockArmament[]}
+   */
+  get armaments() {
+    return [...this.equipment, ...this.bodyParts];
   }
 
   /** @returns {TeriockBody[]} */
@@ -277,6 +296,15 @@ export default class TeriockActor extends ParentDocumentMixin(
         }
       }
     }
+  }
+
+  /**
+   * All abilities, including virtual ones.
+   * @returns {Promise<TeriockAbility[]>}
+   */
+  async allAbilities() {
+    const basicAbilitiesItem = await getItem("Basic Abilities", "essentials");
+    return [...basicAbilitiesItem.abilities, ...this.actor.abilities];
   }
 
   /**

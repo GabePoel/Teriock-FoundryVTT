@@ -16,17 +16,17 @@
   --compendium-sheet-header-background-color: var(--color-cool-4);
   --color-sheet-header-shadow: rgba(0, 0, 0, 0.2);
   --color-tcard-active-inset: color-mix(
-    in srgb,
-    var(--color-warm-3),
-    transparent 50%
+      in srgb,
+      var(--color-warm-3),
+      transparent 50%
   );
   --color-tcard-container-border: var(--color-tcard-display-border);
   --color-tcard-display-background: var(--color-panel-background);
   --color-tcard-display-border: var(--color-panel-edge);
   --color-tcard-hover-inset: color-mix(
-    in srgb,
-    var(--color-warm-2),
-    transparent 50%
+      in srgb,
+      var(--color-warm-2),
+      transparent 50%
   );
   --color-tcard-shadow: rgba(0, 0, 0, 0.15);
 }
@@ -38,41 +38,41 @@
   --color-panel-associations-background-active: rgba(255, 255, 255, 0.1);
   --color-panel-associations-background-hover: rgba(255, 255, 255, 0.05);
   --color-panel-associations-border: color-mix(
-    in srgb,
-    var(--color-panel-edge),
-    transparent 75%
+      in srgb,
+      var(--color-panel-edge),
+      transparent 75%
   );
   --color-panel-associations-shadow-color: transparent;
   --color-panel-background: transparent;
   --color-panel-divider: color-mix(
-    in srgb,
-    var(--color-panel-edge),
-    transparent 50%
+      in srgb,
+      var(--color-panel-edge),
+      transparent 50%
   );
   --color-panel-edge: var(--color-text-subtle);
   --color-sheet-header-background: rgba(255, 255, 255, 0.03);
   --compendium-sheet-header-background-color: color-mix(
-    in srgb,
-    var(--color-level-error-bg),
-    black 75%
+      in srgb,
+      var(--color-level-error-bg),
+      black 75%
   );
   --color-sheet-header-shadow: rgba(0, 0, 0, 0.6);
   --color-tcard-active-inset: color-mix(
-    in srgb,
-    var(--color-warm-3),
-    transparent 50%
+      in srgb,
+      var(--color-warm-3),
+      transparent 50%
   );
   --color-tcard-container-border: color-mix(
-    in srgb,
-    var(--color-text-subtle),
-    transparent 90%
+      in srgb,
+      var(--color-text-subtle),
+      transparent 90%
   );
   --color-tcard-display-background: rgba(255, 255, 255, 0.1);
   --color-tcard-display-border: var(--color-border);
   --color-tcard-hover-inset: color-mix(
-    in srgb,
-    var(--color-warm-2),
-    transparent 50%
+      in srgb,
+      var(--color-warm-2),
+      transparent 50%
   );
   --color-tcard-shadow: rgba(0, 0, 0, 0.4);
 }
@@ -564,6 +564,7 @@ img.rescale {
 
 .teriock {
   @import url("https://fonts.googleapis.com/css2?family=Bonheur+Royale&family=Cinzel:wght@400..900&family=Great+Vibes&family=Quintessential&family=Tagesschrift&display=swap");
+  @import url("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap");
 }
 .teriock .heal-dialog .heal-dialog-hacks .hack-marker-box {
   align-items: center;
@@ -661,6 +662,10 @@ img.rescale {
 @font-face {
   font-family: "XMasterpieceSwashes";
   src: url("../src/assets/fonts/xmasterpieceswashes.ttf");
+}
+@font-face {
+  font-family: "CreteRound";
+  src: url("../src/assets/fonts/crete-round-regular.ttf");
 }
 .teriock .tfont,
 .teriock .tfont {
@@ -2681,6 +2686,11 @@ img.rescale {
   padding: 0.5em;
   width: 100%;
 }
+.teriock .tcard-display .tcard-display-divider {
+  border-top: 1px dotted var(--color-text-subtle);
+  margin: 0.5em;
+  width: 100%;
+}
 .teriock .tcard-display .tcard-options {
   border-bottom: 1px dashed var(--color-form-hint);
   display: flex;
@@ -2959,6 +2969,22 @@ img.rescale {
 }
 .teriock .condition-header h4:hover {
   filter: drop-shadow(0 0 2px rgba(125, 0, 0, 0.4));
+}
+.teriock .currency-image {
+  align-items: center;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  width: 100%;
+}
+.teriock .currency-image img {
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+  border: 1px solid color-mix(in srgb, var(--color-light-5), transparent 75%);
+  border-radius: 100%;
+  outline: 1px solid var(--color-light-6);
+  overflow: hidden;
+  height: 24px;
+  width: 24px;
 }
 @keyframes spin {
   to {
@@ -3255,6 +3281,44 @@ img.rescale {
   margin-top: 0 !important;
   padding-top: 6px !important;
 }
+.teriock .messenger {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  gap: 7px;
+  margin-bottom: 8px;
+}
+.teriock .messenger .message-avatar {
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+  border: 1px solid color-mix(in srgb, var(--color-light-5), transparent 75%);
+  border-radius: 100%;
+  outline: 1px solid var(--color-light-6);
+  overflow: hidden;
+  height: 30px;
+  max-height: 30px;
+  max-width: 30px;
+  outline-color: var(--color-dark-6);
+  width: 30px;
+}
+.teriock .messenger .message-avatar img {
+  background: radial-gradient(circle, var(--color-cool-3), var(--color-dark-1));
+}
+.teriock .messenger .message-author {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.teriock .messenger .message-author .message-sender {
+  font-family: "CreteRound", serif;
+  font-size: larger;
+  line-height: 18px;
+}
+.teriock .messenger .message-author .message-writer {
+  color: var(--color-text-subtle);
+  text-transform: uppercase;
+  font-size: smaller;
+  line-height: 10px;
+}
 .teriock .generic-changes {
   overflow-y: hidden;
 }
@@ -3395,6 +3459,10 @@ img.rescale {
 .tsheet-page .editor {
   overflow: visible;
 }
+.character-window .character-notes-content prose-mirror,
+.tsheet-page .character-notes-content prose-mirror {
+  padding: 0.5em;
+}
 .character-window .character-notes-content .prosemirror button.toggle,
 .character-window .character-notes-content prose-mirror button.toggle,
 .tsheet-page .character-notes-content .prosemirror button.toggle,
@@ -3479,7 +3547,8 @@ dl:not(:first-child) {
   background: radial-gradient(circle, var(--color-cool-3), var(--color-dark-1));
 }
 
-.dice-roll {
+.teriock-panels + .dice-roll,
+.dice-roll + .dice-roll {
   margin-top: 6px;
 }
 

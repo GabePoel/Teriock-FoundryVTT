@@ -81,7 +81,7 @@ export default class ChildTypeModel extends CommonTypeModel {
         name: this.useText,
         icon: makeIcon(this.useIcon, "contextMenu"),
         callback: this.use.bind(this),
-        condition: this.constructor.metadata.usable,
+        condition: this.isUsable,
         group: "usage",
       },
       {
@@ -95,7 +95,11 @@ export default class ChildTypeModel extends CommonTypeModel {
         name: "Disable",
         icon: makeIcon("xmark-large", "contextMenu"),
         callback: this.parent.disable.bind(this.parent),
-        condition: !this.parent.disabled && this.parent.type !== "equipment",
+        condition:
+          !this.parent.disabled &&
+          this.parent.type !== "equipment" &&
+          this.parent.type !== "mount" &&
+          !(this.parent.type === "ability" && this.isVirtual),
         group: "control",
       },
       {
@@ -153,6 +157,14 @@ export default class ChildTypeModel extends CommonTypeModel {
         group: "document",
       },
     ];
+  }
+
+  /**
+   * Whether this can be used.
+   * @returns {boolean}
+   */
+  get isUsable() {
+    return this.constructor.metadata.usable;
   }
 
   /**

@@ -1,5 +1,7 @@
 declare module "./base-message-data.mjs" {
   export default interface TeriockBaseMessageModel {
+    /** <schema> Fallback avatar image to use. */
+    avatar: string;
     /** <schema> Buttons to display below the content of the message */
     buttons: Teriock.UI.HTMLButtonConfig[];
     /** <schema> Custom number of columns */
