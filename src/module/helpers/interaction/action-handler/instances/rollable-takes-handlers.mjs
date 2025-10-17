@@ -5,6 +5,7 @@ import {
   makeDamageDrainTypePanels,
   makeDamageTypeButtons,
 } from "../../../html.mjs";
+import { getActor } from "../../../utils.mjs";
 import ActionHandler from "../action-handler.mjs";
 
 /**
@@ -32,13 +33,10 @@ export class RollRollableTakeHandler extends ActionHandler {
    */
   async _makeRoll(formula) {
     const flavor = this._makeFlavor();
-    const roll = new TeriockRoll(
-      formula,
-      {},
-      {
-        flavor: flavor,
-      },
-    );
+    const actor = getActor();
+    const roll = new TeriockRoll(formula, actor?.getRollData() || {}, {
+      flavor: flavor,
+    });
     if (this.critRollOptions.crit) {
       roll.alter(2, 0, { multiplyNumeric: false });
     }
@@ -59,8 +57,10 @@ export class RollRollableTakeHandler extends ActionHandler {
     const damageDrainPanels = await makeDamageDrainTypePanels(roll);
     buttons.push(...damageTypeButtons);
     const messageData = {
+      speaker: TeriockChatMessage.getSpeaker({ actor: actor }),
       rolls: [roll],
       system: {
+        avatar: actor.img,
         buttons: buttons,
         panels: damageDrainPanels,
       },

@@ -66,6 +66,9 @@ export default class TeriockChatMessage extends ChatMessage {
     if (this.author?.name !== this.alias) {
       obj.writer = this.author?.name;
     }
+    if (!this.isContentVisible) {
+      obj.system.panels.length = 0;
+    }
     return obj;
   }
 }

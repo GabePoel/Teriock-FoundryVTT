@@ -73,5 +73,7 @@ export async function harmRoll(
     chatData,
     game.settings.get("core", "rollMode"),
   );
-  return TeriockChatMessage.create(chatData);
+  return TeriockChatMessage.create(chatData, {
+    rollMode: game.settings.get("core", "rollMode"),
+  });
 }

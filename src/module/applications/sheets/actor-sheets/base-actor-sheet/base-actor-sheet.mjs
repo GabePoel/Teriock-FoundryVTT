@@ -49,7 +49,7 @@ export default class TeriockBaseActorSheet extends SearchingActorSheetPart(
     all: {
       template:
         "systems/teriock/src/templates/document-templates/actor-templates/character-template/character-template.hbs",
-      scrollable: [".character-sidebar", ".character-tab-content"],
+      scrollable: [".character-sidebar-container", ".character-tab-content"],
     },
   };
 

@@ -43,9 +43,11 @@
 
   .teriock-target-img {
     filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.4));
-    height: 100%;
+    height: calc(100% - 6px);
     left: 0;
+    margin: 3px;
     position: absolute;
+    @include mixins.image-border;
     top: 0;
 
     img {
@@ -168,9 +170,15 @@
   padding-top: 6px !important;
 }
 
+.message-timestamp {
+  height: 1.5em;
+  overflow: hidden;
+}
+
 .messenger {
   align-items: center;
   display: flex;
+  flex: auto;
   flex-direction: row;
   gap: 7px;
   margin-bottom: 8px;
@@ -194,14 +202,19 @@
     justify-content: center;
 
     .message-sender {
-      font-family: "CreteRound", serif;
+      font-family: "Alegreya SC Medium", serif;
       font-size: larger;
-      line-height: 18px;
+      line-height: 14px;
+      margin-block: 2px;
+      max-width: 190px;
+      text-wrap: auto;
     }
 
     .message-writer {
       @include mixins.text-subtle;
+      font-size: x-small;
       line-height: 10px;
+      margin-bottom: 1px;
     }
   }
 }

@@ -34,12 +34,17 @@ async function use(fluencyData, options) {
     flavor: `${TERIOCK.index.tradecrafts[fluencyData.tradecraft]} Check`,
   });
   await roll.evaluate();
-  TeriockChatMessage.create({
-    speaker: TeriockChatMessage.getSpeaker({ actor: fluencyData.actor }),
-    rolls: [roll],
-    system: {
-      avatar: fluencyData.actor.img,
-      panels: [await fluencyData.parent.toPanel()],
+  TeriockChatMessage.create(
+    {
+      speaker: TeriockChatMessage.getSpeaker({ actor: fluencyData.actor }),
+      rolls: [roll],
+      system: {
+        avatar: fluencyData.actor.img,
+        panels: [await fluencyData.parent.toPanel()],
+      },
     },
-  });
+    {
+      rollMode: game.settings.get("core", "rollMode"),
+    },
+  );
 }

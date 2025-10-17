@@ -1,6 +1,5 @@
 import { getIcon } from "../helpers/path.mjs";
 import { convertUnits } from "../helpers/utils.mjs";
-import { ChangeableDocumentMixin } from "./mixins/_module.mjs";
 
 const { TokenDocument } = foundry.documents;
 
@@ -16,12 +15,7 @@ const { TokenDocument } = foundry.documents;
  * @property {TeriockToken} object
  * @property {boolean} isOwner
  */
-export default class TeriockTokenDocument extends ChangeableDocumentMixin(
-  TokenDocument,
-) {
-  /** @inheritDoc */
-  changesField = "tokenChanges";
-
+export default class TeriockTokenDocument extends TokenDocument {
   /**
    * Center of this token.
    * @returns {Point}

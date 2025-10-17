@@ -305,7 +305,6 @@ export function tokenImage(token) {
   //noinspection JSUnresolvedReference
   return (
     tokenDoc?.texture?.src ||
-    tokenDoc?.actor.token?.texture?.src ||
     tokenDoc?.actor.getActiveTokens()[0]?.texture?.src ||
     tokenDoc?.actor.prototypeToken?.texture?.src ||
     tokenDoc?.actor.img ||

@@ -17,6 +17,7 @@ export async function _generateRolls(rollConfig) {
     const flavor = "Attack Roll";
     for (const target of rollConfig.useData.targets) {
       const rollContext = {
+        rescale: target.document?.ring.enabled,
         targetImg: tokenImage(target),
         targetName: tokenName(target),
         targetUuid: tokenActor(target).uuid,
@@ -59,10 +60,11 @@ export async function _generateRolls(rollConfig) {
     const flavor = "Feat Save DC";
     for (const target of rollConfig.useData.targets) {
       const rollContext = {
+        noDice: true,
+        rescale: target.document?.ring.enabled,
         targetImg: tokenImage(target),
         targetName: tokenName(target),
         targetUuid: tokenActor(target)?.uuid,
-        noDice: true,
       };
       rolls.push(new TeriockRoll("10", {}, { context: rollContext }));
     }
@@ -79,10 +81,11 @@ export async function _generateRolls(rollConfig) {
   } else {
     for (const target of rollConfig.useData.targets) {
       const rollContext = {
+        noDice: true,
+        rescale: target.document?.ring.enabled,
         targetImg: tokenImage(target),
         targetName: tokenName(target),
         targetUuid: tokenActor(target)?.uuid,
-        noDice: true,
       };
       rolls.push(new TeriockRoll("10", {}, { context: rollContext }));
     }

@@ -80,6 +80,22 @@
   border-color: var(--color-panel-edge);
 }
 
+@mixin collapsible() {
+  display: grid;
+  overflow: hidden;
+  transition: 250ms;
+}
+
+@mixin collapsible-open() {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+@mixin collapsible-closed() {
+  grid-template-rows: 0fr;
+  opacity: 0;
+}
+
 @mixin gapped(
   $gap: 16px,
   $divider-color: var(--color-panel-divider),

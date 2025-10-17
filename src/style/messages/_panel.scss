@@ -29,7 +29,6 @@
 
     .teriock-panel-body {
       max-height: unset;
-      padding: 8px var(--panel-padding) var(--panel-padding);
     }
 
     .teriock-panel-header-expander,
@@ -64,12 +63,9 @@
 
 .teriock-panel-body {
   @include mixins.gapped;
-  margin: 0;
-  max-height: 2000px;
+  margin: 8px var(--panel-padding) var(--panel-padding);
   opacity: 1;
   overflow: hidden;
-  padding: 8px;
-  transition: 250ms ease-in-out all;
 }
 
 .teriock-panel {
@@ -77,14 +73,18 @@
   overflow: hidden;
   width: 100%;
 
+  .teriock-panel-content {
+    @include mixins.collapsible;
+    @include mixins.collapsible-open;
+
+    .teriock-panel-spacer {
+      overflow: hidden;
+    }
+  }
+
   &.collapsed {
-    .teriock-panel-body {
-      border-top: 0;
-      margin-top: 0;
-      max-height: 0;
-      opacity: 0;
-      padding-bottom: 0;
-      padding-top: 0;
+    .teriock-panel-content {
+      @include mixins.collapsible-closed;
     }
 
     .teriock-panel-header-expander {
@@ -98,7 +98,6 @@
     display: flex;
     flex-direction: row;
     padding: 8px;
-    position: relative;
     position: relative;
     user-select: none;
 
@@ -237,13 +236,22 @@
   .teriock-panel-association {
     @include mixins.roll-style;
     border-radius: 0.25em;
-    max-height: 1800px;
     overflow: hidden;
-    transition: 250ms ease-in-out all;
     user-select: none;
 
+    .teriock-panel-association-card-container {
+      @include mixins.collapsible;
+      @include mixins.collapsible-open;
+
+      .teriock-panel-association-card-spacer {
+        overflow: hidden;
+      }
+    }
+
     &.collapsed {
-      max-height: 1.75em;
+      .teriock-panel-association-card-container {
+        @include mixins.collapsible-closed;
+      }
 
       .teriock-panel-association-expander {
         transform: rotate(-90deg);
@@ -324,17 +332,11 @@
         position: absolute;
         right: 0;
         top: 0;
-        transition: 100ms;
+        transition: 250ms;
         width: 2em;
       }
     }
   }
-
-  //.content-link {
-  //  background: rgba(255, 255, 255, 0.5);
-  //  border: 1px solid var(--color-panel-edge);
-  //  color: var(--color-emote-border);
-  //}
 }
 
 img.rescale {
