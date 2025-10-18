@@ -60,14 +60,18 @@ function statField(name, options = {}) {
  */
 export function _defineStats(schema) {
   schema.hp = new fields.SchemaField({
-    value: new fields.NumberField({ initial: 1 }),
+    max: new fields.NumberField({ initial: 1 }),
+    min: new fields.NumberField({ initial: 0 }),
     morganti: new fields.NumberField({ initial: 0 }),
     temp: new fields.NumberField({ initial: 0 }),
+    value: new fields.NumberField({ initial: 1 }),
   });
   schema.mp = new fields.SchemaField({
-    value: new fields.NumberField({ initial: 1 }),
+    max: new fields.NumberField({ initial: 1 }),
+    min: new fields.NumberField({ initial: 0 }),
     morganti: new fields.NumberField({ initial: 0 }),
     temp: new fields.NumberField({ initial: 0 }),
+    value: new fields.NumberField({ initial: 1 }),
   });
   schema.wither = statField("Wither", {
     max: 100,

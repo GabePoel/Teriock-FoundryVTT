@@ -1,15 +1,15 @@
-import { evaluateAsync } from "../../../../../helpers/utils.mjs";
+import { evaluateAsync, getToken } from "../../../../../helpers/utils.mjs";
 import { _handleDialogs } from "./_roll-dialogs.mjs";
 
 /**
  * Stages the use of an ability, calculating costs and handling dialogs.
  * Prepares use data including costs, modifiers, and roll formula.
- *
  * @param {AbilityRollConfig} rollConfig - Configurations for this ability usage.
  * @returns {Promise<void>}
  */
 export async function _stageUse(rollConfig) {
   rollConfig.useData.rollData = rollConfig.useData.actor.getRollData();
+  rollConfig.useData.executor = getToken(rollConfig.useData.actor);
 
   // Calculate costs
   rollConfig.useData.costs.hp = await calculateCost(
@@ -85,7 +85,6 @@ export async function _stageUse(rollConfig) {
 /**
  * Calculates cost based on cost configuration type.
  * Handles static, formula, and variable cost types.
- *
  * @param {NumberCost} costConfig - The cost configuration to calculate.
  * @param {object} rollData - The roll data for formula evaluation.
  * @returns {Promise<number>} Promise that resolves to the calculated cost.
@@ -107,7 +106,6 @@ async function calculateCost(costConfig, rollData) {
 
 /**
  * Builds the roll formula based on interaction type and advantage/disadvantage.
- *
  * @param {AbilityRollConfig} rollConfig - Configurations for this ability usage.
  * @returns {string} The initial roll formula.
  */

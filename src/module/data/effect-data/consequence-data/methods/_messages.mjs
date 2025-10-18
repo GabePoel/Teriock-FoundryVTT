@@ -15,13 +15,10 @@ export function _messageParts(consequenceData) {
       label: "Duration",
       /** @type string[] */
       wrappers: [
-        !consequenceData.parent.isTemporary
+        !consequenceData.parent.isTemporary ||
+        consequenceData.parent.remaining === null
           ? "No Time Limit"
-          : secondsToReadable(
-              consequenceData.parent.duration.startTime +
-                consequenceData.parent.duration.seconds -
-                consequenceData.parent.duration._worldTime,
-            ) + " Remaining",
+          : secondsToReadable(consequenceData.parent.remaining) + " Remaining",
       ],
     },
     {

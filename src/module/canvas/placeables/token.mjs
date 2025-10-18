@@ -16,11 +16,12 @@ export default class TeriockToken extends Token {
   /** @inheritDoc */
   async _drawEffects() {
     await super._drawEffects();
+    const promises = [];
     if (
       this.document.hasStatusEffect("encumbered") &&
       this.document?.actor.system.encumbranceLevel > 0
     ) {
-      await this._drawEffect(getIcon("conditions", "Encumbered"));
+      promises.push(this._drawEffect(getIcon("conditions", "Encumbered")));
     }
     let overlayImg;
     if (
@@ -36,8 +37,12 @@ export default class TeriockToken extends Token {
       overlayImg = "icons/svg/skull.svg";
     }
     if (overlayImg) {
-      await this._drawOverlay(overlayImg);
+      promises.push(this._drawOverlay(overlayImg));
     }
+    await Promise.allSettled(promises);
+    this.effects.sortChildren();
+    this.effects.renderable = true;
+    this.renderFlags.set({ refreshEffects: true });
   }
 
   /** @inheritDoc */

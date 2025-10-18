@@ -1,3 +1,5 @@
+//noinspection JSUnresolvedReference
+
 import { isOwnerAndCurrentUser } from "../../helpers/utils.mjs";
 
 export default function registerTokenManagementHooks() {
@@ -22,4 +24,25 @@ export default function registerTokenManagementHooks() {
       actor.prepareDerivedData();
     }
   });
+
+  foundry.helpers.Hooks.on(
+    "applyTokenStatusEffect",
+    async (token, statusId, active) => {
+      if (
+        game.modules.get("tokenmagic")?.active &&
+        game.settings.get("teriock", "automaticTokenMagicConditionEffects")
+      ) {
+        if (Object.keys(TERIOCK.display.tokenMagic).includes(statusId)) {
+          const params = TERIOCK.display.tokenMagic[statusId];
+          if (active) {
+            //eslint-disable-next-line no-undef
+            await TokenMagic.addFilters(token, [params]);
+          } else {
+            //eslint-disable-next-line no-undef
+            await TokenMagic.deleteFilters(token, params.filterId);
+          }
+        }
+      }
+    },
+  );
 }

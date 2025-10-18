@@ -49,6 +49,16 @@ export function registerSettings() {
       scope: "user",
       type: Number,
     },
+    automaticTokenMagicConditionEffects: {
+      config: true,
+      default: true,
+      hint:
+        "Automatically add visual effects to tokens based on their current conditions. Requires the Token Magic" +
+        " FX module.",
+      name: "Automatic Token Magic Condition Effects",
+      scope: "world",
+      type: Boolean,
+    },
     placeTemplateOnAbilityUse: {
       config: true,
       default: true,

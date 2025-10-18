@@ -117,6 +117,14 @@ export default class TeriockBaseActorModel extends ActorRollableTakesPart(
     }
     this.parent.updateSource({
       prototypeToken: {
+        bar1: {
+          attribute: "hp",
+        },
+        bar2: {
+          attribute: "mp",
+        },
+        displayBars: 20,
+        disposition: -2,
         ring: {
           enabled: true,
         },

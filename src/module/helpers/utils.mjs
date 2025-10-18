@@ -671,3 +671,26 @@ export function getActor() {
   //noinspection JSUnresolvedReference
   return token?.actor || game.actors.get(speaker.actor) || character || null;
 }
+
+/**
+ * Get the best token for a given actor.
+ * @param {TeriockActor} actor
+ * @returns {TeriockToken | null}
+ */
+export function getToken(actor) {
+  if (actor.token) {
+    return actor.token.object;
+  }
+  const candidates =
+    /** @type {TeriockTokenDocument[]} */ actor.getDependentTokens();
+  //noinspection JSUnresolvedReference
+  /** @type {TeriockToken[]} */
+  const selected = game.canvas.tokens.controlled;
+  const uuids = selected.map((t) => t.document.uuid);
+  for (const candidate of candidates) {
+    if (uuids.includes(candidate.uuid)) {
+      return candidate.object;
+    }
+  }
+  return null;
+}
