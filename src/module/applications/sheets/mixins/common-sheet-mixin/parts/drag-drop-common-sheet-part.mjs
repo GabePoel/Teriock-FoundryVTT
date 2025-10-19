@@ -7,7 +7,7 @@ export default (Base) => {
     /**
      * @implements {DragDropCommonSheetPartInterface}
      * @extends {DocumentSheetV2}
-     * @property {TeriockActor|TeriockItem|TeriockEffect} document
+     * @property {TeriockCommon} document
      */
     class DragDropCommonSheetPart extends Base {
       static DEFAULT_OPTIONS = {

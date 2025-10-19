@@ -7,6 +7,7 @@ import { _baseData } from "./methods/base-data/_base-data.mjs";
 import { _prepareDerivedData } from "./methods/derived-data/_derived-data.mjs";
 import { _defineSchema } from "./methods/schema/_schema.mjs";
 import { _prepareSpecialData } from "./methods/special-data/_special-data.mjs";
+import ActorConditionTogglingPart from "./parts/actor-condition-toggling-part.mjs";
 import ActorGenericRollsPart from "./parts/actor-generic-rolls-part.mjs";
 import ActorHacksPart from "./parts/actor-hacks-part.mjs";
 import ActorOneOffsPart from "./parts/actor-one-offs-part.mjs";
@@ -17,15 +18,18 @@ import ActorRollableTakesPart from "./parts/actor-rollable-takes-part.mjs";
  * Base actor data model for the Teriock system.
  * Handles all core actor functionality including damage, healing, rolling, and data management.
  * @extends CommonTypeModel
+ * @mixes ActorConditionTogglingPart
  * @mixes ActorGenericRollsPart
  * @mixes ActorHacksPart
  * @mixes ActorOneOffsPart
  * @mixes ActorPayPart
  * @mixes ActorRollableTakesPart
  */
-export default class TeriockBaseActorModel extends ActorRollableTakesPart(
-  ActorPayPart(
-    ActorOneOffsPart(ActorHacksPart(ActorGenericRollsPart(CommonTypeModel))),
+export default class TeriockBaseActorModel extends ActorConditionTogglingPart(
+  ActorRollableTakesPart(
+    ActorPayPart(
+      ActorOneOffsPart(ActorHacksPart(ActorGenericRollsPart(CommonTypeModel))),
+    ),
   ),
 ) {
   //noinspection JSValidateTypes
@@ -162,17 +166,6 @@ export default class TeriockBaseActorModel extends ActorRollableTakesPart(
   }
 
   /**
-   * Add the condition if no consequence provides it.
-   * @param status
-   * @returns {Promise<void>}
-   */
-  async addCondition(status) {
-    if (!this.parent.statuses.has(status)) {
-      await this.parent.toggleStatusEffect(status, { active: true });
-    }
-  }
-
-  /**
    * Display an animated state change on active tokens.
    * @param {number} diff
    * @param {string} color
@@ -249,32 +242,5 @@ export default class TeriockBaseActorModel extends ActorRollableTakesPart(
   prepareSpecialData() {
     super.prepareSpecialData();
     _prepareSpecialData(this);
-  }
-
-  /**
-   * Remove the condition and all consequences that provide it.
-   * @param {Teriock.Parameters.Condition.ConditionKey} status
-   * @returns {Promise<void>}
-   */
-  async removeCondition(status) {
-    await this.parent.toggleStatusEffect(status, { active: false });
-    const toRemove = this.parent.consequences
-      .filter((c) => c.statuses.has(status))
-      .map((c) => c.id);
-    await this.parent.deleteEmbeddedDocuments("ActiveEffect", toRemove);
-  }
-
-  /**
-   * Toggle the condition.
-   * @param {Teriock.Parameters.Condition.ConditionKey} status
-   * @param {boolean} [active]
-   * @returns {Promise<void>}
-   */
-  async toggleCondition(status, active) {
-    if (active || !this.parent.statuses.has(status)) {
-      await this.addCondition(status);
-    } else {
-      await this.removeCondition(status);
-    }
   }
 }

@@ -1,11 +1,14 @@
-import { TeriockDialog } from "../../../api/_module.mjs";
 import { RichApplicationMixin } from "../../../shared/mixins/_module.mjs";
 import { TeriockTextEditor } from "../../../ux/_module.mjs";
+import { IndexButtonSheetMixin } from "../_module.mjs";
 import _connectEmbedded from "./methods/_connect-embedded.mjs";
 import _embeddedFromCard from "./methods/_embedded-from-card.mjs";
 import _setupEventListeners from "./methods/_setup-handlers.mjs";
 import DocumentCreationCommonSheetPart from "./parts/document-creation-common-sheet-part.mjs";
+import DocumentInteractionCommonSheetPart from "./parts/document-interaction-common-sheet-part.mjs";
 import DragDropCommonSheetPart from "./parts/drag-drop-common-sheet-part.mjs";
+import LockingCommonSheetPart from "./parts/locking-common-sheet-part.mjs";
+import SelfInteractionCommonSheetPart from "./parts/self-interaction-common-sheet-part.mjs";
 
 const { ContextMenu } = foundry.applications.ux;
 
@@ -23,8 +26,16 @@ export default (Base) => {
      * @extends {DocumentSheetV2}
      * @property {TeriockCommon} document
      */
-    class CommonSheetMixin extends DocumentCreationCommonSheetPart(
-      DragDropCommonSheetPart(RichApplicationMixin(Base)),
+    class CommonSheetMixin extends IndexButtonSheetMixin(
+      LockingCommonSheetPart(
+        SelfInteractionCommonSheetPart(
+          DocumentInteractionCommonSheetPart(
+            DocumentCreationCommonSheetPart(
+              DragDropCommonSheetPart(RichApplicationMixin(Base)),
+            ),
+          ),
+        ),
+      ),
     ) {
       //noinspection JSValidateTypes
       /**
@@ -34,25 +45,14 @@ export default (Base) => {
       static DEFAULT_OPTIONS = {
         actions: {
           changeImpactTab: this._changeImpactTab,
-          chatDoc: this._chatDoc,
-          chatThis: this._chatThis,
           debug: this._debug,
           editImage: this._editImage,
           gmNotesOpen: this._gmNotesOpen,
-          openDoc: this._openDoc,
           quickToggle: this._quickToggle,
-          refreshIndexThisHard: this._refreshIndexThisHard,
-          refreshIndexThisSoft: this._refreshIndexThisSoft,
-          reloadThis: this._reloadThis,
-          rollDoc: this._rollDoc,
-          rollThis: this._rollThis,
           setStatDice: this._setStatDice,
           sheetToggle: this._sheetToggle,
-          toggleDisabledDoc: this._toggleDisabledDoc,
           toggleImpacts: this._toggleImpacts,
-          toggleLockThis: this._toggleLockThis,
           unlinkMacro: this._unlinkMacro,
-          useOneDoc: this._useOneDoc,
         },
         classes: ["teriock", "ability"],
         form: {
@@ -70,16 +70,6 @@ export default (Base) => {
               icon: "fa-solid fa-rotate-right",
               label: "Reload Sheet",
               action: "reloadThis",
-            },
-            {
-              icon: "fa-solid fa-book-atlas",
-              label: "Soft Index Refresh",
-              action: "refreshIndexThisSoft",
-            },
-            {
-              icon: "fa-solid fa-book-copy",
-              label: "Hard Index Refresh",
-              action: "refreshIndexThisHard",
             },
           ],
         },
@@ -99,7 +89,6 @@ export default (Base) => {
       constructor(...args) {
         super(...args);
         this._impactTab = "base";
-        this._locked = true;
         this._menuOpen = false;
         this._tab = "overview";
         this.settings = {};
@@ -115,31 +104,6 @@ export default (Base) => {
       static async _changeImpactTab(_event, target) {
         this._impactTab = target.dataset.tab;
         this.render();
-      }
-
-      /**
-       * Sends an embedded document to chat.
-       * @param {PointerEvent} _event - The event object.
-       * @param {HTMLElement} target - The target element.
-       * @returns {Promise<void>} Promise that resolves when chat is sent.
-       */
-      static async _chatDoc(_event, target) {
-        const embedded = await _embeddedFromCard(this, target);
-        await embedded?.toMessage({
-          actor: this.actor,
-        });
-      }
-
-      /**
-       * Sends the current document to chat.
-       * @param {PointerEvent} _event - The event object.
-       * @param {HTMLElement} _target - The target element.
-       * @returns {Promise<void>} Promise that resolves when chat is sent.
-       */
-      static async _chatThis(_event, _target) {
-        await this.document.toMessage({
-          actor: this.actor,
-        });
       }
 
       /**
@@ -187,17 +151,6 @@ export default (Base) => {
       }
 
       /**
-       * Opens the sheet for an embedded document.
-       * @param {PointerEvent} _event - The event object.
-       * @param {HTMLElement} target - The target element.
-       * @returns {Promise<void>} Promise that resolves when the sheet is opened.
-       */
-      static async _openDoc(_event, target) {
-        const embedded = await _embeddedFromCard(this, target);
-        await embedded?.sheet.render(true);
-      }
-
-      /**
        * Toggles a boolean field on the current document.
        * @param {PointerEvent} _event - The event object.
        * @param {HTMLElement} target - The target element.
@@ -207,109 +160,6 @@ export default (Base) => {
         const { path } = target.dataset;
         const current = target.dataset.bool === "true";
         await this.document.update({ [path]: !current });
-      }
-
-      /**
-       * Refresh this document from the index.
-       * @returns {Promise<void>}
-       */
-      static async _refreshIndexThisHard() {
-        if (this.editable) {
-          const proceed = await TeriockDialog.confirm({
-            content:
-              "Are you sure you would like to refresh this? It will alter its content and may delete important" +
-              " information.",
-            modal: true,
-            window: { title: "Confirm Hard Refresh" },
-          });
-          if (proceed) {
-            await this.document.system.hardRefreshFromIndex();
-          }
-          foundry.ui.notifications.success(`Refreshed ${this.document.name}.`);
-        } else {
-          foundry.ui.notifications.warn(
-            `Cannot refresh ${this.document.name}. Sheet is not editable.`,
-          );
-        }
-      }
-
-      /**
-       * Refresh this document from the index.
-       * @returns {Promise<void>}
-       */
-      static async _refreshIndexThisSoft() {
-        if (this.editable) {
-          const proceed = await TeriockDialog.confirm({
-            content:
-              "Are you sure you would like to refresh this? It will alter its content and may delete important" +
-              " information.",
-            modal: true,
-            window: { title: "Confirm Soft Refresh" },
-          });
-          if (proceed) {
-            await this.document.system.refreshFromIndex();
-          }
-          foundry.ui.notifications.success(`Refreshed ${this.document.name}.`);
-        } else {
-          foundry.ui.notifications.warn(
-            `Cannot refresh ${this.document.name}. Sheet is not editable.`,
-          );
-        }
-      }
-
-      /**
-       * Reloads the current document and re-renders the sheet.
-       * @param {PointerEvent} _event - The event object.
-       * @param {HTMLElement} _target - The target element.
-       * @returns {Promise<void>} Promise that resolves when reload is complete.
-       */
-      static async _reloadThis(_event, _target) {
-        await this.document.update({});
-        await this.document.sheet.render();
-      }
-
-      /**
-       * Rolls an embedded document with optional advantage/disadvantage.
-       * @param {PointerEvent} event - The event object.
-       * @param {HTMLElement} target - The target element.
-       * @returns {Promise<void>} Promise that resolves when roll is complete.
-       */
-      static async _rollDoc(event, target) {
-        const options = event?.altKey
-          ? { advantage: true }
-          : event?.shiftKey
-            ? { disadvantage: true }
-            : {};
-        if (this.document.documentName === "Actor") {
-          options.actor = this.document;
-        } else if (this.document.actor) {
-          options.actor = this.document.actor;
-        }
-        const embedded = await _embeddedFromCard(this, target);
-        if (embedded?.type === "equipment") {
-          if (event?.shiftKey) {
-            options.secret = true;
-          }
-          if (event?.ctrlKey) {
-            options.twoHanded = true;
-          }
-        }
-        await embedded?.use(options);
-      }
-
-      /**
-       * Rolls the current document with optional advantage/disadvantage.
-       * @param {PointerEvent} event - The event object.
-       * @param {HTMLElement} _target - The target element.
-       * @returns {Promise<void>} Promise that resolves when roll is complete.
-       */
-      static async _rollThis(event, _target) {
-        const options = event?.altKey
-          ? { advantage: true }
-          : event?.shiftKey
-            ? { disadvantage: true }
-            : {};
-        await this.document.use(options);
       }
 
       /**
@@ -343,41 +193,12 @@ export default (Base) => {
       }
 
       /**
-       * Toggles the disabled state of an embedded document.
-       * @param {PointerEvent} _event - The event object.
-       * @param {HTMLElement} target - The target element.
-       * @returns {Promise<void>} Promise that resolves when toggle is complete.
-       */
-      static async _toggleDisabledDoc(_event, target) {
-        if (!this.editable) {
-          foundry.ui.notifications.warn(
-            `Cannot toggle disabled. Sheet is not editable.`,
-          );
-          return;
-        }
-        const embedded = await _embeddedFromCard(this, target);
-        await embedded?.toggleDisabled();
-      }
-
-      /**
        * Toggles between overview and impacts tabs.
        * @returns {Promise<void>} Promise that resolves when tab is toggled.
        * @static
        */
       static async _toggleImpacts() {
         this._tab = this._tab === "impacts" ? "overview" : "impacts";
-        this.render();
-      }
-
-      /**
-       * Toggles the lock state of the current sheet.
-       * @param {PointerEvent} _event - The event object.
-       * @param {HTMLElement} _target - The target element.
-       * @returns {Promise<void>} Promise that resolves when lock is toggled.
-       */
-      static async _toggleLockThis(_event, _target) {
-        this._locked = !this._locked;
-        this.editable = this.isEditable && !this._locked;
         this.render();
       }
 
@@ -399,17 +220,6 @@ export default (Base) => {
             );
           }
         }
-      }
-
-      /**
-       * Uses one unit of an embedded consumable document.
-       * @param {PointerEvent} _event - The event object.
-       * @param {HTMLElement} target - The target element.
-       * @returns {Promise<void>} Promise that resolves when use is complete.
-       */
-      static async _useOneDoc(_event, target) {
-        const embedded = await _embeddedFromCard(this, target);
-        await embedded?.system.useOne();
       }
 
       /**
@@ -540,21 +350,9 @@ export default (Base) => {
       /** @inheritDoc */
       async _onRender(context, options) {
         await super._onRender(context, options);
-
-        const toggleButton = this.window.header.querySelector(
-          "[data-action='toggleLockThis']",
-        );
-        if (toggleButton) {
-          toggleButton.classList.remove(...["fa-lock-open", "fa-lock"]);
-          toggleButton.classList.add(
-            ...[this.editable ? "fa-lock-open" : "fa-lock"],
-          );
-          toggleButton.setAttribute(
-            "data-tooltip",
-            this.editable ? "Unlocked" : "Locked",
-          );
+        if (typeof this.editable !== "boolean") {
+          this.editable = this.isEditable;
         }
-        this.editable = this.isEditable && !this._locked;
         await _connectEmbedded(this.document, this.element, this.editable);
         this._connect(".chat-button", "contextmenu", (e) => {
           CommonSheetMixin._debug.call(this, e, e.currentTarget);
@@ -705,32 +503,6 @@ export default (Base) => {
         if (this.document.inCompendium) {
           this.window.header.style.backgroundColor =
             "var(--compendium-sheet-header-background-color)";
-        }
-        if (
-          this.document.documentName === "Item" ||
-          this.document.documentName === "ActiveEffect"
-        ) {
-          const toggleButton = document.createElement("button");
-          toggleButton.classList.add(
-            ...[
-              "header-control",
-              "icon",
-              "fa-solid",
-              this.editable ? "fa-lock-open" : "fa-lock",
-            ],
-          );
-          toggleButton.setAttribute("data-action", "toggleLockThis");
-          toggleButton.setAttribute(
-            "data-tooltip",
-            this.editable ? "Unlocked" : "Locked",
-          );
-          if (
-            !this.document.isOwner ||
-            (this.document.inCompendium && this.document.compendium.locked)
-          ) {
-            toggleButton.setAttribute("disabled", "disabled");
-          }
-          this.window.controls.before(toggleButton);
         }
         if (game.user.isGM) {
           const notesButton = document.createElement("button");
