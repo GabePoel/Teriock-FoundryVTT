@@ -97,6 +97,7 @@ export default class TeriockActor extends ParentDocumentMixin(
     return this;
   }
 
+  //noinspection JSUnusedGlobalSymbols
   /**
    * Body parts and equipment.
    * @returns {TeriockArmament[]}
@@ -722,7 +723,7 @@ export default class TeriockActor extends ParentDocumentMixin(
    * @returns {Promise<void>}
    */
   async useAbility(abilityName, options = {}) {
-    const abilities = Array.from(this.allApplicableEffects()).filter(
+    const abilities = Array.from(await this.allAbilities()).filter(
       (i) => i.type === "ability",
     );
     /** @type TeriockAbility */

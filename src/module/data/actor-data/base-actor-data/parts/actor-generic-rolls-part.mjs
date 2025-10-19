@@ -1,6 +1,6 @@
 import { TeriockRoll } from "../../../../dice/_module.mjs";
 import { TeriockChatMessage } from "../../../../documents/_module.mjs";
-import { tradecraftPanel } from "../../../../helpers/html.mjs";
+import { attributePanel, tradecraftPanel } from "../../../../helpers/html.mjs";
 
 /**
  * Actor data model mixin that handles common generic rolls.
@@ -48,17 +48,18 @@ export default (Base) => {
         }
         const roll = new TeriockRoll(rollFormula, this.parent.getRollData(), {
           context,
+          flavor:
+            (typeof options.threshold === "number"
+              ? `DC ${options.threshold} `
+              : "") + `${attribute.toUpperCase()} Feat Save`,
         });
         await roll.toMessage(
           {
             speaker: TeriockChatMessage.getSpeaker({ actor: this.parent }),
             system: {
               avatar: this.parent.img,
+              panels: [await attributePanel(attribute)],
             },
-            flavor:
-              (typeof options.threshold === "number"
-                ? `DC ${options.threshold} `
-                : "") + `${attribute.toUpperCase()} Feat Save`,
           },
           {
             rollMode: game.settings.get("core", "rollMode"),

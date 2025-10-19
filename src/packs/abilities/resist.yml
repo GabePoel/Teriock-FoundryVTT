@@ -1,18 +1,21 @@
-name: Shake Glow Bulb
+name: Resist
 type: wrapper
-_id: kImRJY2L1ibB39Cz
-img: systems/teriock/src/icons/abilities/shake-glow-bulb.webp
+_id: jzRUvxItzZhaWrIp
+img: icons/magic/defensive/shield-barrier-glowing-triangle-blue-yellow.webp
 effects:
-  - name: Shake Glow Bulb
+  - name: Resist
     type: ability
+    _id: bG5J7V9OWg7KZSCZ
+    img: icons/magic/defensive/shield-barrier-glowing-triangle-blue-yellow.webp
     system:
+      gmNotes: null
       consumable: false
       maxQuantity:
         saved: ''
         raw: ''
       quantity: 1
       hierarchy:
-        rootUuid: Compendium.teriock.abilities.Item.kImRJY2L1ibB39Cz
+        rootUuid: Compendium.teriock.abilities.Item.jzRUvxItzZhaWrIp
         subIds: []
         supId: null
       applies:
@@ -24,11 +27,7 @@ effects:
           hacks: []
           checks: []
           duration: 0
-          changes:
-            - key: system.light.dim
-              mode: 4
-              value: '30'
-              priority: 5
+          changes: []
           common: []
           expiration:
             normal:
@@ -172,15 +171,15 @@ effects:
       adept:
         enabled: false
         amount: 1
-      basic: false
+      basic: true
       costs:
         verbal: false
         somatic: false
-        material: true
+        material: false
         mp:
-          type: none
+          type: static
           value:
-            static: 0
+            static: 1
             formula: ''
             variable: ''
         hp:
@@ -196,32 +195,30 @@ effects:
             formula: ''
             variable: ''
         break: ''
-        materialCost: >-
-          Using this ability consumes the @L[Category:Equipment]{equipment} that
-          provides it.
+        materialCost: ''
       delivery:
-        base: item
+        base: self
         parent: null
         package: null
       duration:
-        unit: minute
-        quantity: 10
+        unit: instant
+        quantity: 0
         conditions:
           present: []
           absent: []
         stationary: false
-        description: 10 Minutes
+        description: Instant
       effectTypes: []
       elderSorcery: false
       elderSorceryIncant: ''
       elements: []
       endCondition: ''
-      executionTime: a1
+      executionTime: r1
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
       featSaveAttribute: mov
-      form: normal
+      form: intrinsic
       gifted:
         enabled: false
         amount: 1
@@ -238,24 +235,17 @@ effects:
       interaction: manifest
       invoked: false
       limitation: ''
-      maneuver: active
+      maneuver: reactive
       overview:
-        base: >-
-          The source of this ability starts @L[Property:Glowing]{glowing} (30
-          feet). This doesn't @L[Property:Destroyed]{destroy} the item, but
-          renders it inert.
+        base: You succeed the triggering @L[Keyword:Resistance]{resistance save}.
         proficient: ''
         fluent: ''
       piercing: normal
       powerSources:
-        - alchemical
+        - spiritual
       prepared: true
-      range: null
-      requirements: >-
-        Use this ability by interacting with the
-        @L[Category:Equipment]{equipment} that provides it. That counts as the
-        @L[Core:Maneuvers]{maneuver} and @L[Core:Abilities]{execution time} for
-        the ability.
+      range: Self.
+      requirements: ''
       results:
         hit: ''
         critHit: ''
@@ -273,11 +263,9 @@ effects:
       standard: false
       sustained: false
       targets:
-        - item
-      trigger: ''
+        - self
+      trigger: You fail a @L[Keyword:Resistance]{resistance save}.
       warded: false
-    _id: ISrHaIW4Qxv8aw7Y
-    img: systems/teriock/src/icons/abilities/shake-glow-bulb.webp
     changes: []
     disabled: false
     duration:
@@ -292,13 +280,13 @@ effects:
       systemId: teriock
       systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!kImRJY2L1ibB39Cz.ISrHaIW4Qxv8aw7Y'
+    _key: '!items.effects!jzRUvxItzZhaWrIp.bG5J7V9OWg7KZSCZ'
 ownership:
   default: 0
 flags: {}
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.0
+  systemVersion: 0.9.1
   lastModifiedBy: teriockBuilder00
-_key: '!items!kImRJY2L1ibB39Cz'
+_key: '!items!jzRUvxItzZhaWrIp'

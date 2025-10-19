@@ -10,6 +10,7 @@ delete allProperties.destroyed;
 
 export { default as abilities } from "../../../index/names/abilities.json" with { type: "json" };
 export { default as attributes } from "../../../index/names/attributes.json" with { type: "json" };
+export { default as attributesFull } from "../../../index/names/attributes-full.json" with { type: "json" };
 export { default as bodyParts } from "../../../index/names/body-parts.json" with { type: "json" };
 export { default as classes } from "../../../index/names/classes.json" with { type: "json" };
 export { default as commonAnimals } from "../../../index/names/common-animals.json" with { type: "json" };

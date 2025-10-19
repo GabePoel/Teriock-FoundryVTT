@@ -300,6 +300,26 @@ export function tidyHTML(html) {
 }
 
 /**
+ * Get the panel for an attribute.
+ * @param {Teriock.Parameters.Actor.Attribute} attribute
+ * @returns {Promise<Teriock.MessageData.MessagePanel>}
+ */
+export async function attributePanel(attribute) {
+  return TeriockTextEditor.enrichPanel({
+    image: getIcon("attributes", TERIOCK.index.attributesFull[attribute]),
+    name: TERIOCK.index.attributesFull[attribute],
+    blocks: [
+      {
+        title: "Description",
+        text: TERIOCK.data.attributes[attribute],
+      },
+    ],
+    icon: "star",
+    label: "Attribute",
+  });
+}
+
+/**
  * Get the panel for a tradecraft.
  * @param {Teriock.Parameters.Fluency.Tradecraft} tradecraft
  * @returns {Promise<Teriock.MessageData.MessagePanel>}

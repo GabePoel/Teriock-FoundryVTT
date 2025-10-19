@@ -31,8 +31,9 @@ const app = {
       "consumables",
       "classes",
       "abilities",
-      "body-parts",
       "archetypes",
+      "attributes",
+      "body-parts",
       "conditions",
       "creatures",
       "currency",
@@ -43,11 +44,11 @@ const app = {
       "elements",
       "equipment",
       "hacks",
+      "misc",
       "powers",
       "properties",
       "resources",
       "tradecrafts",
-      "misc",
     ];
 
     console.log("🔄 Loading categories directly from files...");

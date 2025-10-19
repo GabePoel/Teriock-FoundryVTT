@@ -1,34 +1,32 @@
-name: Shake Glow Bulb
+name: Elder Mind Control
 type: wrapper
-_id: kImRJY2L1ibB39Cz
-img: systems/teriock/src/icons/abilities/shake-glow-bulb.webp
+_id: de9pmyI2pxk73O9f
+img: systems/teriock/src/icons/abilities/elder-mind-control.webp
 effects:
-  - name: Shake Glow Bulb
+  - name: Elder Mind Control
     type: ability
     system:
+      gmNotes: null
       consumable: false
       maxQuantity:
         saved: ''
         raw: ''
       quantity: 1
       hierarchy:
-        rootUuid: Compendium.teriock.abilities.Item.kImRJY2L1ibB39Cz
+        rootUuid: Compendium.teriock.abilities.Item.de9pmyI2pxk73O9f
         subIds: []
         supId: null
       applies:
         base:
-          statuses: []
+          statuses:
+            - charmed
           startStatuses: []
           endStatuses: []
           rolls: {}
           hacks: []
           checks: []
           duration: 0
-          changes:
-            - key: system.light.dim
-              mode: 4
-              value: '30'
-              priority: 5
+          changes: []
           common: []
           expiration:
             normal:
@@ -174,13 +172,13 @@ effects:
         amount: 1
       basic: false
       costs:
-        verbal: false
+        verbal: true
         somatic: false
-        material: true
+        material: false
         mp:
-          type: none
+          type: static
           value:
-            static: 0
+            static: 1
             formula: ''
             variable: ''
         hp:
@@ -196,37 +194,40 @@ effects:
             formula: ''
             variable: ''
         break: ''
-        materialCost: >-
-          Using this ability consumes the @L[Category:Equipment]{equipment} that
-          provides it.
+        materialCost: ''
       delivery:
-        base: item
+        base: sight
         parent: null
         package: null
       duration:
         unit: minute
-        quantity: 10
+        quantity: 1
         conditions:
           present: []
           absent: []
         stationary: false
-        description: 10 Minutes
-      effectTypes: []
-      elderSorcery: false
-      elderSorceryIncant: ''
-      elements: []
+        description: 1 Minute
+      effectTypes:
+        - mental
+        - control
+      elderSorcery: true
+      elderSorceryIncant: I control your mind.
+      elements:
+        - storm
       endCondition: ''
       executionTime: a1
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
-      featSaveAttribute: mov
-      form: normal
+      featSaveAttribute: unp
+      form: special
       gifted:
         enabled: false
         amount: 1
       grantOnly: false
-      heightened: ''
+      heightened: >-
+        For each additional @L[Core:MP]{MP} spent, the maximum length of the
+        command can be increased by 1 word.
       improvement: ''
       improvements:
         attributeImprovement:
@@ -235,27 +236,20 @@ effects:
         featSaveImprovement:
           attribute: null
           amount: proficient
-      interaction: manifest
+      interaction: feat
       invoked: false
       limitation: ''
       maneuver: active
       overview:
-        base: >-
-          The source of this ability starts @L[Property:Glowing]{glowing} (30
-          feet). This doesn't @L[Property:Destroyed]{destroy} the item, but
-          renders it inert.
+        base: ''
         proficient: ''
         fluent: ''
       piercing: normal
       powerSources:
-        - alchemical
+        - magical
       prepared: true
-      range: null
-      requirements: >-
-        Use this ability by interacting with the
-        @L[Category:Equipment]{equipment} that provides it. That counts as the
-        @L[Core:Maneuvers]{maneuver} and @L[Core:Abilities]{execution time} for
-        the ability.
+      range: '60'
+      requirements: ''
       results:
         hit: ''
         critHit: ''
@@ -263,21 +257,26 @@ effects:
         critMiss: ''
         save: ''
         critSave: ''
-        fail: ''
+        fail: >-
+          Target is @L[Condition:Charmed]{charmed}. In addition, you may provide
+          a 1 word command that the target must follow for the duration of this
+          spell. If the command is directly harmful to the target, this spell
+          @L[Core:Fizzles]{fizzles} and they do not need to follow it. The
+          target must understand the language that the command was given in.
         critFail: ''
       ritual: false
       rotator: false
       secret: false
       skill: false
-      spell: false
+      spell: true
       standard: false
       sustained: false
       targets:
-        - item
+        - creature
       trigger: ''
       warded: false
-    _id: ISrHaIW4Qxv8aw7Y
-    img: systems/teriock/src/icons/abilities/shake-glow-bulb.webp
+    _id: XO6j4r4bZgDxFdpO
+    img: systems/teriock/src/icons/abilities/elder-mind-control.webp
     changes: []
     disabled: false
     duration:
@@ -286,19 +285,21 @@ effects:
     origin: null
     transfer: true
     statuses: []
-    flags: {}
+    flags:
+      teriock:
+        dontConsume: false
     _stats:
       coreVersion: '13'
       systemId: teriock
       systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!kImRJY2L1ibB39Cz.ISrHaIW4Qxv8aw7Y'
+    _key: '!items.effects!de9pmyI2pxk73O9f.XO6j4r4bZgDxFdpO'
 ownership:
   default: 0
 flags: {}
 _stats:
   coreVersion: '13'
   systemId: teriock
-  systemVersion: 0.9.0
+  systemVersion: 0.9.1
   lastModifiedBy: teriockBuilder00
-_key: '!items!kImRJY2L1ibB39Cz'
+_key: '!items!de9pmyI2pxk73O9f'

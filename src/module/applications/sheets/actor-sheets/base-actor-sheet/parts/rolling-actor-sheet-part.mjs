@@ -1,3 +1,5 @@
+import { attributePanel } from "../../../../../helpers/html.mjs";
+import { getIcon } from "../../../../../helpers/path.mjs";
 import { TeriockTextEditor } from "../../../../ux/_module.mjs";
 
 export default (Base) =>
@@ -92,15 +94,15 @@ export default (Base) =>
         const tcard = target.closest(".tcard");
         const img = target.querySelector("img");
         messageParts = {};
-        messageParts.image = img.src;
+        messageParts.image = img.src || getIcon("effect-types", "Resistance");
         messageParts.name = "Resistance";
         messageParts.bars = [
           {
             icon: "fa-shield",
             label: "Resistance",
             wrappers: [
-              tcard.querySelector(".tcard-title").textContent,
-              tcard.querySelector(".tcard-subtitle").textContent,
+              tcard.querySelector(".tcard-title").textContent || "",
+              tcard.querySelector(".tcard-subtitle").textContent || "",
             ],
           },
         ];
@@ -122,5 +124,15 @@ export default (Base) =>
         panels: panels,
       };
       await this.actor.system.rollResistance(options);
+    }
+
+    async _prepareContext(options) {
+      const context = await super._prepareContext(options);
+      context.attributeTooltips = {};
+      for (const attribute of Object.keys(TERIOCK.index.attributes)) {
+        context.attributeTooltips[attribute] =
+          await TeriockTextEditor.makeTooltip(await attributePanel(attribute));
+      }
+      return context;
     }
   };
