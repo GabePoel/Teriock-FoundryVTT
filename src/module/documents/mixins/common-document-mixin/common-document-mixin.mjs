@@ -123,6 +123,13 @@ export default (Base) => {
       }
 
       /** @inheritDoc */
+      toDragData() {
+        const dragData = super.toDragData();
+        dragData.systemType = this.type;
+        return dragData;
+      }
+
+      /** @inheritDoc */
       async toggleDisabled() {
         await this.update({ "system.disabled": !this.system.disabled });
       }

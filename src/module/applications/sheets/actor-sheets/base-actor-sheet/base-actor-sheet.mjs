@@ -56,6 +56,7 @@ export default class TeriockBaseActorSheet extends SearchingActorSheetPart(
   constructor(...args) {
     super(...args);
     this._locked = false;
+    /** @type {ActorTab} */
     this._activeTab = "tradecrafts";
     this.settings = defaultSheetSettings;
   }

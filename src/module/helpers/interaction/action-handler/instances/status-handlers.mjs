@@ -16,7 +16,9 @@ export class ApplyStatusHandler extends ActionHandler {
 
   /** @inheritDoc */
   async secondaryAction() {
-    await removeStatus(this.actors, this.dataset.status);
+    for (const actor of this.actors) {
+      await actor.system.toggleCondition(this.dataset.status, false);
+    }
   }
 }
 
@@ -29,7 +31,9 @@ export class RemoveStatusHandler extends ActionHandler {
 
   /** @inheritDoc */
   async primaryAction() {
-    await removeStatus(this.actors, this.dataset.status);
+    for (const actor of this.actors) {
+      await actor.system.toggleCondition(this.dataset.status, false);
+    }
   }
 
   /** @inheritDoc */
@@ -37,21 +41,5 @@ export class RemoveStatusHandler extends ActionHandler {
     for (const actor of this.actors) {
       await actor.toggleStatusEffect(this.dataset.status, { active: true });
     }
-  }
-}
-
-/**
- * Remove the condition and all consequences that provide it.
- * @param {TeriockActor[]} actors
- * @param {Teriock.Parameters.Condition.ConditionKey} status
- * @returns {Promise<void>}
- */
-async function removeStatus(actors, status) {
-  for (const actor of actors) {
-    await actor.toggleStatusEffect(status, { active: false });
-    const toRemove = actor.consequences
-      .filter((c) => c.statuses.has(status))
-      .map((c) => c.id);
-    await actor.deleteEmbeddedDocuments("ActiveEffect", toRemove);
   }
 }

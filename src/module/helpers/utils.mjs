@@ -694,3 +694,18 @@ export function getToken(actor) {
   }
   return null;
 }
+
+/**
+ * Make common roll options.
+ * @param {MouseEvent} event
+ * @returns {Teriock.RollOptions.CommonRoll | Teriock.RollOptions.EquipmentRoll}
+ */
+export function makeCommonRollOptions(event) {
+  return {
+    advantage: event.altKey,
+    disadvantage: event.shiftKey,
+    crit: event.altKey,
+    secret: event.shiftKey,
+    twoHanded: event.ctrlKey,
+  };
+}

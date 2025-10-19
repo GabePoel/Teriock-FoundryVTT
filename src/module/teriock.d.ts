@@ -60,6 +60,20 @@ declare global {
   export type TeriockChild = TeriockItem | TeriockEffect;
   export type TeriockCommon = TeriockActor | TeriockItem | TeriockEffect;
   export type TeriockArmament = TeriockEquipment | TeriockBody;
+  export type TeriockDocument =
+    | TeriockActor
+    | TeriockChatMessage
+    | TeriockCombat
+    | TeriockEffect
+    | TeriockFolder
+    | TeriockItem
+    | TeriockJournalEntry
+    | TeriockJournalEntryCategory
+    | TeriockJournalEntryPage
+    | TeriockMacro
+    | TeriockScene
+    | TeriockTokenDocument
+    | TeriockUser;
 
   // Virtual document classes
   // ========================

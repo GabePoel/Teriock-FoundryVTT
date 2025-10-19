@@ -1,6 +1,5 @@
 /**
  * Extracts an embedded document from a card element.
- *
  * @param {DocumentSheetV2} sheet
  * @param {HTMLElement} target - The target element to extract from.
  * @returns {Promise<TeriockItem|TeriockEffect|TeriockMacro|null>} The embedded document or null if not found.

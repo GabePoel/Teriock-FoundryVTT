@@ -1,22 +1,13 @@
-import * as createEffects from "../../../../helpers/create-effects.mjs";
 import { TeriockDialog } from "../../../api/_module.mjs";
-import {
-  selectAbilityDialog,
-  selectPropertyDialog,
-  selectTradecraftDialog,
-} from "../../../dialogs/select-dialog.mjs";
 import { RichApplicationMixin } from "../../../shared/mixins/_module.mjs";
 import { TeriockTextEditor } from "../../../ux/_module.mjs";
 import _connectEmbedded from "./methods/_connect-embedded.mjs";
 import _embeddedFromCard from "./methods/_embedded-from-card.mjs";
 import _setupEventListeners from "./methods/_setup-handlers.mjs";
+import DocumentCreationCommonSheetPart from "./parts/document-creation-common-sheet-part.mjs";
+import DragDropCommonSheetPart from "./parts/drag-drop-common-sheet-part.mjs";
 
-const { ContextMenu, DragDrop } = foundry.applications.ux;
-const {
-  //eslint-disable-next-line @typescript-eslint/no-unused-vars
-  DocumentSheetV2,
-} = foundry.applications.api;
-const TextEditor = foundry.applications.ux.TextEditor.implementation;
+const { ContextMenu } = foundry.applications.ux;
 
 /**
  * Base sheet mixin for Teriock system applications.
@@ -30,9 +21,11 @@ export default (Base) => {
     /**
      * @implements {CommonSheetMixinInterface}
      * @extends {DocumentSheetV2}
-     * @param {TeriockActor|TeriockItem|TeriockEffect} document
+     * @property {TeriockCommon} document
      */
-    class CommonSheetMixin extends RichApplicationMixin(Base) {
+    class CommonSheetMixin extends DocumentCreationCommonSheetPart(
+      DragDropCommonSheetPart(RichApplicationMixin(Base)),
+    ) {
       //noinspection JSValidateTypes
       /**
        * Default sheet options.
@@ -43,11 +36,6 @@ export default (Base) => {
           changeImpactTab: this._changeImpactTab,
           chatDoc: this._chatDoc,
           chatThis: this._chatThis,
-          createAbility: this._createAbility,
-          createBaseEffect: this._createBaseEffect,
-          createFluency: this._createFluency,
-          createProperty: this._createProperty,
-          createResource: this._createResource,
           debug: this._debug,
           editImage: this._editImage,
           gmNotesOpen: this._gmNotesOpen,
@@ -65,16 +53,8 @@ export default (Base) => {
           toggleLockThis: this._toggleLockThis,
           unlinkMacro: this._unlinkMacro,
           useOneDoc: this._useOneDoc,
-          wikiOpenThis: this._wikiOpenThis,
-          wikiPullThis: this._wikiPullThis,
         },
         classes: ["teriock", "ability"],
-        dragDrop: [
-          {
-            dragSelector: ".draggable",
-            dropSelector: null,
-          },
-        ],
         form: {
           closeOnSubmit: false,
           submitOnChange: true,
@@ -118,7 +98,6 @@ export default (Base) => {
        */
       constructor(...args) {
         super(...args);
-        this.#dragDrop = this.#createDragDropHandlers();
         this._impactTab = "base";
         this._locked = true;
         this._menuOpen = false;
@@ -158,81 +137,9 @@ export default (Base) => {
        * @returns {Promise<void>} Promise that resolves when chat is sent.
        */
       static async _chatThis(_event, _target) {
-        this.document.toMessage({
+        await this.document.toMessage({
           actor: this.actor,
         });
-      }
-
-      /**
-       * Creates a new ability for the current document.
-       * @param {PointerEvent} _event - The event object.
-       * @param {HTMLElement} _target - The target element.
-       * @returns {Promise<void>} Promise that resolves to the created ability.
-       */
-      static async _createAbility(_event, _target) {
-        const abilityKey = await selectAbilityDialog();
-        let abilityName = "New Ability";
-        if (abilityKey) {
-          if (abilityKey !== "other") {
-            abilityName = TERIOCK.index.abilities[abilityKey];
-            await tm.fetch.importAbility(this.document, abilityName);
-          } else {
-            await createEffects.createAbility(this.document, abilityName);
-          }
-        }
-      }
-
-      /**
-       * Creates a new base effect for the current document.
-       * @param {PointerEvent} _event - The event object.
-       * @param {HTMLElement} _target - The target element.
-       * @returns {Promise<void>} Promise that resolves to the created fluency.
-       */
-      static async _createBaseEffect(_event, _target) {
-        await createEffects.createBaseEffect(this.document);
-      }
-
-      /**
-       * Creates new fluency for the current document.
-       * @param {PointerEvent} _event - The event object.
-       * @param {HTMLElement} _target - The target element.
-       * @returns {Promise<void>} Promise that resolves to the created fluency.
-       */
-      static async _createFluency(_event, _target) {
-        const tradecraft = await selectTradecraftDialog();
-        if (tradecraft) {
-          await createEffects.createFluency(this.document, tradecraft);
-        }
-      }
-
-      /**
-       * Creates a new property for the current document.
-       * Shows a dialog to select a property type or create a new one.
-       * @param {PointerEvent} _event - The event object.
-       * @param {HTMLElement} _target - The target element.
-       * @returns {Promise<void>} Promise that resolves to the created property.
-       */
-      static async _createProperty(_event, _target) {
-        const propertyKey = await selectPropertyDialog();
-        let propertyName = "New Property";
-        if (propertyKey) {
-          if (propertyKey !== "other") {
-            propertyName = TERIOCK.index.properties[propertyKey];
-            await tm.fetch.importProperty(this.document, propertyName);
-          } else {
-            await createEffects.createProperty(this.document, propertyName);
-          }
-        }
-      }
-
-      /**
-       * Creates a new resource for the current document.
-       * @param {PointerEvent} _event - The event object.
-       * @param {HTMLElement} _target - The target element.
-       * @returns {Promise<void>} Promise that resolves to the created resource.
-       */
-      static async _createResource(_event, _target) {
-        await createEffects.createResource(this.document);
       }
 
       /**
@@ -255,6 +162,7 @@ export default (Base) => {
         event.stopPropagation();
         const attr = target.dataset.edit;
         const current = foundry.utils.getProperty(this.document, attr);
+        //noinspection JSUnresolvedReference
         const defaultImg = this.document.constructor.getDefaultArtwork?.(
           this.document.toObject(),
         )?.img;
@@ -401,7 +309,7 @@ export default (Base) => {
           : event?.shiftKey
             ? { disadvantage: true }
             : {};
-        this.document.use(options);
+        await this.document.use(options);
       }
 
       /**
@@ -505,74 +413,6 @@ export default (Base) => {
       }
 
       /**
-       * Opens the wiki page for the current document.
-       * @param {PointerEvent} _event - The event object.
-       * @param {HTMLElement} _target - The target element.
-       * @returns {Promise<void>} Promise that resolves when wiki page is opened.
-       */
-      static async _wikiOpenThis(_event, _target) {
-        this.document.system.wikiOpen();
-      }
-
-      /**
-       * Pulls data from wiki for the current document.
-       * @param {PointerEvent} _event - The event object.
-       * @param {HTMLElement} _target - The target element.
-       * @returns {Promise<void>} Promise that resolves when wiki pull is complete.
-       */
-      static async _wikiPullThis(_event, _target) {
-        if (this.editable) {
-          const proceed = await TeriockDialog.confirm({
-            content:
-              "Are you sure you would like to pull this from the wiki? It will alter its content and may delete" +
-              " important information.",
-            modal: true,
-            window: { title: "Confirm Wiki Pull" },
-          });
-          if (proceed) {
-            this.document.system.wikiPull();
-          }
-        } else {
-          foundry.ui.notifications.warn(
-            `Cannot pull ${this.document.name} from wiki. Sheet is not editable.`,
-          );
-        }
-      }
-
-      /** @type {DragDrop[]} */
-      #dragDrop;
-
-      //noinspection JSUnusedGlobalSymbols
-      /**
-       * Gets the drag and drop handlers for this sheet.
-       * @returns {DragDrop[]} Array of drag and drop handlers.
-       */
-      get dragDrop() {
-        return this.#dragDrop;
-      }
-
-      /**
-       * Creates drag and drop handlers for the sheet.
-       * @returns {DragDrop[]} Array of configured drag and drop handlers.
-       * @private
-       */
-      #createDragDropHandlers() {
-        //noinspection JSUnresolvedReference
-        return this.options.dragDrop.map((config) => {
-          config.permissions = {
-            dragstart: this._canDragStart.bind(this),
-            drop: this._canDragDrop.bind(this),
-          };
-          config.callbacks = {
-            dragstart: this._onDragStart.bind(this),
-            dragover: this._onDragOver.bind(this),
-            drop: this._onDrop.bind(this),
-          };
-          return new DragDrop(config);
-        });
-      }
-
-      /**
        * Activates the sheet menu functionality.
        * Sets up menu toggle behavior and initial state.
        */
@@ -595,43 +435,6 @@ export default (Base) => {
           menu.classList.toggle("ab-menu-open", this._menuOpen);
           toggle.classList.toggle("ab-menu-toggle-open", this._menuOpen);
         });
-      }
-
-      /**
-       * Checks if drag and drop is allowed.
-       * @returns {boolean} True if drag and drop is allowed.
-       */
-      _canDragDrop() {
-        return this.editable;
-      }
-
-      /**
-       * Checks if drag start is allowed.
-       * @returns {boolean} True if drag start is allowed.
-       */
-      _canDragStart() {
-        return this.editable;
-      }
-
-      /**
-       * Checks if some other document can be dropped on this document.
-       * @param {TeriockItem|TeriockEffect|TeriockMacro} doc - The document to check.
-       * @returns {boolean} True if the document can be dropped.
-       * @private
-       */
-      _canDrop(doc) {
-        const childTypes = new Set([
-          ...this.document.metadata.childEffectTypes,
-          ...this.document.metadata.childItemTypes,
-          ...this.document.metadata.childMacroTypes,
-        ]);
-        return (
-          this.document.isOwner &&
-          doc &&
-          doc.parent !== this.document &&
-          doc !== this.document &&
-          childTypes.has(doc.type)
-        );
       }
 
       /**
@@ -714,7 +517,7 @@ export default (Base) => {
        */
       async _enrich(parameter) {
         return parameter?.length
-          ? await TextEditor.enrichHTML(parameter, {
+          ? await TeriockTextEditor.enrichHTML(parameter, {
               relativeTo: this.document,
             })
           : undefined;
@@ -730,176 +533,6 @@ export default (Base) => {
         if (Object.keys(context).includes("enriched")) {
           for (const [key, value] of Object.entries(obj)) {
             context.enriched[key] = await this._enrich(value);
-          }
-        }
-      }
-
-      /**
-       * Handles drag over events.
-       * @param {DragEvent} _event - The drag over event.
-       * @private
-       */
-      _onDragOver(_event) {
-        // TODO: Provide visual feedback.
-      }
-
-      /**
-       * Handles drag start events for embedded documents.
-       * @param {DragEvent} event - The drag start event.
-       * @private
-       */
-      async _onDragStart(event) {
-        const embedded = await _embeddedFromCard(this, event.currentTarget);
-        const dragData = embedded?.toDragData();
-        if (dragData) {
-          event.dataTransfer.setData("text/plain", JSON.stringify(dragData));
-        }
-      }
-
-      /**
-       * Handles drop events for documents.
-       * @param {DragEvent} event - The drop event.
-       * @returns {Promise<boolean>} Promise that resolves to true if the drop was handled.
-       * @private
-       */
-      async _onDrop(event) {
-        const document = await TextEditor.getDragEventData(event);
-        if (document.type === "ActiveEffect") {
-          await this._onDropActiveEffect(event, document);
-        } else if (document.type === "Item") {
-          await this._onDropItem(event, document);
-        } else if (document.type === "Macro") {
-          await this._onDropMacro(event, document);
-        } else if (document.type === "JournalEntryPage") {
-          await this._onDropJournalEntryPage(event, document);
-        }
-        return true;
-      }
-
-      /**
-       * Handles dropping of active effects.
-       * @param {DragEvent} _event - The drop event.
-       * @param {object} data - The effect data.
-       * @returns {Promise<TeriockEffect|boolean>} Promise that resolves to true if the drop was successful.
-       * @private
-       */
-      async _onDropActiveEffect(_event, data) {
-        /** @type {typeof ClientDocument} */
-        const EffectClass =
-          await foundry.utils.getDocumentClass("ActiveEffect");
-        const effect =
-          /** @type {TeriockEffect} */ await EffectClass.fromDropData(data);
-        if (!this._canDrop(effect)) {
-          return false;
-        }
-
-        if (this.document.documentName === "ActiveEffect") {
-          effect.updateSource({ "system.hierarchy.supId": this.document.id });
-        }
-        const target =
-          this.document.documentName === "ActiveEffect"
-            ? this.document.parent
-            : this.document;
-        const newEffects =
-          /** @type {TeriockEffect[]} */ await target.createEmbeddedDocuments(
-            "ActiveEffect",
-            [effect],
-          );
-        const newEffect = newEffects[0];
-        if (this.document.documentName === "ActiveEffect") {
-          await this.document.addSub(newEffect);
-        }
-        return newEffect;
-      }
-
-      /**
-       * Handles dropping of items.
-       * @param {DragEvent} _event - The drop event.
-       * @param {object} data - The item data.
-       * @returns {Promise<TeriockItem|boolean>} Promise that resolves to true if the drop was successful.
-       * @private
-       */
-      async _onDropItem(_event, data) {
-        /** @type {typeof ClientDocument} */
-        const ItemClass = await foundry.utils.getDocumentClass("Item");
-        const item =
-          /** @type {TeriockItem} */ await ItemClass.fromDropData(data);
-        if (item.type === "wrapper") {
-          /** @type {ClientDocument} */
-          const effect = item.system.effect;
-          await this._onDropActiveEffect(_event, effect.toDragData());
-          return false;
-        }
-        if (!this._canDrop(item)) {
-          return false;
-        }
-
-        const source = await foundry.utils.fromUuid(data.uuid);
-        if (
-          item.parent?.documentName === "Actor" &&
-          item.type === "equipment"
-        ) {
-          if (item.parent?.documentName === "Actor" && item.system.consumable) {
-            const targetItem = this.document.items.getName(item.name);
-            if (targetItem && targetItem.system.consumable) {
-              targetItem.update({
-                "system.quantity":
-                  targetItem.system.quantity + item.system.quantity,
-              });
-              await source.delete();
-              return targetItem;
-            }
-          }
-          if (source) {
-            await source.delete();
-          }
-        }
-        const newItems =
-          /** @type {TeriockItem[]} */ await this.document.createEmbeddedDocuments(
-            "Item",
-            [item],
-            {
-              keepId: true,
-              keepEmbeddedIds: true,
-            },
-          );
-        return newItems[0];
-      }
-
-      /**
-       * Handles dropping of a journal entry page on this document.
-       * @param {DragEvent} _event - The drop event.
-       * @param {object} data - The macro data.
-       * @returns {Promise<TeriockJournalEntryPage|void>} Promise that resolves to the dropped journal entry page if
-       *   successful.
-       * @private
-       */
-      async _onDropJournalEntryPage(_event, data) {
-        if (game.user.isGM) {
-          const updateData = {
-            "system.gmNotes": data.uuid,
-          };
-          await this.document.update(updateData);
-          return fromUuidSync(data.uuid);
-        }
-      }
-
-      /**
-       * Handles dropping of a macro on this document.
-       * @param {DragEvent} _event - The drop event.
-       * @param {object} data - The macro data.
-       * @returns {Promise<TeriockMacro|void>} Promise that resolves to the dropped macro if successful.
-       * @private
-       */
-      async _onDropMacro(_event, data) {
-        if (this.document.system.macros) {
-          const macroUuids = Array.from(this.document.system.macros);
-          if (data.uuid) {
-            macroUuids.push(data.uuid);
-            const updateData = {
-              "system.macros": macroUuids,
-            };
-            await this.document.update(updateData);
           }
         }
       }
@@ -926,7 +559,6 @@ export default (Base) => {
         this._connect(".chat-button", "contextmenu", (e) => {
           CommonSheetMixin._debug.call(this, e, e.currentTarget);
         });
-        this.#dragDrop.forEach((d) => d.bind(this.element));
         this._activateMenu();
         this._connect('[data-action="sheetSelect"]', "change", (e) => {
           const { path } = e.currentTarget.dataset;

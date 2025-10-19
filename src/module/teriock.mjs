@@ -180,6 +180,7 @@ foundry.helpers.Hooks.once("init", function () {
   // UX
   CONFIG.ux.TooltipManager = helpers.interaction.TeriockTooltipManager;
   CONFIG.ux.TextEditor = applications.ux.TeriockTextEditor;
+  CONFIG.ux.DragDrop = applications.ux.TeriockDragDrop;
 
   // Unregister V1 sheets
   DocumentSheetConfig.unregisterSheet(

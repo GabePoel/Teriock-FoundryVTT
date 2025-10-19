@@ -1,5 +1,6 @@
 import { attributePanel } from "../../../../../helpers/html.mjs";
 import { getIcon } from "../../../../../helpers/path.mjs";
+import { makeCommonRollOptions } from "../../../../../helpers/utils.mjs";
 import { TeriockTextEditor } from "../../../../ux/_module.mjs";
 
 export default (Base) =>
@@ -22,13 +23,7 @@ export default (Base) =>
      */
     static async _rollFeatSave(event, target) {
       const attribute = target.dataset.attribute;
-      const options = {};
-      if (event.altKey) {
-        options.advantage = true;
-      }
-      if (event.shiftKey) {
-        options.disadvantage = true;
-      }
+      const options = makeCommonRollOptions(event);
       await this.actor.system.rollFeatSave(attribute, options);
     }
 

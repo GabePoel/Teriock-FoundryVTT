@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-expressions */
+import { TeriockTextEditor } from "../../../ux/_module.mjs";
 import TeriockBaseActorSheet from "./base-actor-sheet.mjs";
 import CombatActorSheetPart from "./parts/combat-actor-sheet-part.mjs";
 import MechanicalActorSheetPart from "./parts/mechanical-actor-sheet-part.mjs";
@@ -24,6 +25,35 @@ export default class TeriockPlayableActorSheet extends TradecraftsActorSheetPart
     this._sidebarOpen = true;
     this._hpDrawerOpen = true;
     this._mpDrawerOpen = true;
+  }
+
+  /** @inheritDoc */
+  async _onDrop(event) {
+    const dropData = TeriockTextEditor.getDragEventData(event);
+    const out = await super._onDrop(event);
+    if (out) {
+      if (["equipment", "body", "mount"].includes(dropData.systemType)) {
+        this._activeTab = "inventory";
+        await this.render();
+      } else if (dropData.systemType === "fluency") {
+        this._activeTab = "tradecrafts";
+        await this.render();
+      } else if (dropData.systemType === "rank") {
+        this._activeTab = "classes";
+        await this.render();
+      } else if (["species", "power"].includes(dropData.systemType)) {
+        this._activeTab = "powers";
+        await this.render();
+      } else if (dropData.systemType === "resource") {
+        this._activeTab = "resources";
+      } else if (
+        ["attunement", "consequence", "condition", "base"].includes(
+          dropData.systemType,
+        )
+      ) {
+        this._activeTab = "conditions";
+      }
+    }
   }
 
   /** @inheritDoc */

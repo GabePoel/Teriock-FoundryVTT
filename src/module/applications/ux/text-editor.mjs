@@ -2,7 +2,6 @@ import { systemPath } from "../../helpers/path.mjs";
 
 const { TextEditor } = foundry.applications.ux;
 
-/** @inheritDoc */
 export default class TeriockTextEditor extends TextEditor {
   /**
    * Enrich all the blocks within a panel.

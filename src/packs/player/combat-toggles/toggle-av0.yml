@@ -1,0 +1,35 @@
+name: Toggle AV0
+type: script
+_id: qhacpRs2p5TCMVTb
+author: teriockBuilder00
+img: systems/teriock/src/icons/properties/av0.webp
+scope: global
+command: |-
+  if (actor) {
+    if (actor.system.offense.piercing === "av0") {
+      await actor.update({
+        "system.offense.piercing": "none",
+      });
+    } else {
+      await actor.update({
+        "system.offense.piercing": "av0",
+      });
+    }
+    if (actor.system.offense.piercing === "av0") {
+      ui.notifications.success(`AV0 piercing enabled for ${actor.name}.`);
+    } else {
+      ui.notifications.info(`AV0 piercing disabled for ${actor.name}.`);
+    }
+  } else {
+    ui.notifications.warn("No actor selected.");
+  }
+ownership:
+  default: 0
+flags: {}
+_stats:
+  coreVersion: '13'
+  systemId: teriock
+  systemVersion: 0.9.0
+  lastModifiedBy: teriockBuilder00
+folder: X4L6z0GymT4kGE6f
+_key: '!macros!qhacpRs2p5TCMVTb'
