@@ -1,15 +1,16 @@
 if (!actor.effectKeys.consequence.has("treeformBallEffect")) {
   const hp = actor.system.hp.value;
   if (!actor.itemKeys.species.has("tree")) {
-    const treeSpecies = await tm.fetch.getItem("Tree", "species", {
-      clone: true,
-    });
-    const created = await actor.createEmbeddedDocuments("Item", [treeSpecies]);
-    const createdTree = /** @type {TeriockSpecies} */ created[0];
-    await createdTree.update({
-      "system.size.value": actor.system.size.number.value,
-      "system.statDice.mp.disabled": true,
-    });
+    const data = /** @type {Teriock.HookData.EffectApplication} */ scope.data;
+    const uuid = data.docData.system.transformation.uuid;
+    const treeSpecies = await fromUuid(uuid);
+    const treeData = /** @type {TeriockSpecies} */ foundry.utils.deepClone(
+      treeSpecies.toObject(),
+    );
+    treeData.system.transformationLevel =
+      data.docData.system.transformation.level;
+    treeData.system.size.value = actor.system.size.number.value;
+    await actor.createEmbeddedDocuments("Item", [treeData]);
   }
   const notTree = actor.species.filter((s) => s.name !== "Tree");
   for (const i of [...notTree, ...actor.ranks]) {

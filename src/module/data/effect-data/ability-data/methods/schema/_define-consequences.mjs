@@ -9,6 +9,7 @@ import {
   combatExpirationMethodField,
   combatExpirationSourceTypeField,
   combatExpirationTimingField,
+  transformationField,
 } from "../../../shared/shared-fields.mjs";
 
 const { fields } = foundry.data;
@@ -98,7 +99,7 @@ function abilityExpirationField() {
  * // Create applies field
  * const appliesField = appliesField();
  */
-function consequenceField() {
+function impactField() {
   return new fields.SchemaField({
     statuses: new fields.SetField(
       new fields.StringField({
@@ -191,6 +192,7 @@ function consequenceField() {
         hint: "Should custom expiration timing be applied?",
       }),
     }),
+    transformation: transformationField(),
   });
 }
 
@@ -217,10 +219,10 @@ function consequenceField() {
  */
 export function _defineConsequences(schema) {
   schema.applies = new fields.SchemaField({
-    base: consequenceField(),
-    proficient: consequenceField(),
-    fluent: consequenceField(),
-    heightened: consequenceField(),
+    base: impactField(),
+    proficient: impactField(),
+    fluent: impactField(),
+    heightened: impactField(),
     macros: new fields.TypedObjectField(
       new fields.StringField({
         choices: pseudoHooks,

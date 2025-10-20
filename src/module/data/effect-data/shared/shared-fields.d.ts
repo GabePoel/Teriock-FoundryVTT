@@ -1,4 +1,5 @@
 import { TeriockEffect } from "../../../documents/_module.mjs";
+import type { TeriockSpecies } from "../../../documents/_documents.mjs";
 
 /** <schema> {@link TeriockEffect} hierarchy */
 export type HierarchyField = {
@@ -11,6 +12,29 @@ export type HierarchyField = {
   subIds: Set<Teriock.ID<TeriockEffect>>;
   /** <schema> The ID of the {@link TeriockEffect} that this is descended from, if there is one. */
   supId: Teriock.ID<TeriockEffect> | null;
+};
+
+/** <schema> Transformation configuration */
+export type TransformationField = {
+  /** <schema> Whether transformation is enabled */
+  enabled: boolean;
+  /** <schema> Overriding image to apply */
+  image: string;
+  /** <schema> Level of transformation */
+  level: "minor" | "full" | "greater";
+  /** <schema> Documents to suppress */
+  suppression: {
+    /** <schema> Whether to suppress body parts */
+    bodyParts: boolean;
+    /** <schema> Whether to suppress equipment */
+    equipment: boolean;
+    /** <schema> Whether to suppress fluencies */
+    fluencies: boolean;
+    /** <schema> Whether to suppress ranks */
+    ranks: boolean;
+  };
+  /** <schema> UUID of specific species to transform into */
+  uuid: Teriock.UUID<TeriockSpecies>;
 };
 
 /** <schema> What is the relationship of the {@link TeriockActor} that triggers expirations? */

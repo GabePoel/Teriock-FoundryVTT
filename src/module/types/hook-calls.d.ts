@@ -1,6 +1,9 @@
 import type { TeriockEffect, TeriockItem } from "../documents/_module.mjs";
 import type { AbilityRollConfig } from "../data/effect-data/ability-data/types/roll-config";
-import type { TeriockEquipment } from "../documents/_documents.mjs";
+import type {
+  TeriockConsequence,
+  TeriockEquipment,
+} from "../documents/_documents.mjs";
 
 declare global {
   namespace Teriock.HookData {
@@ -61,7 +64,7 @@ declare global {
     };
 
     export type EffectApplication = Teriock.HookData.BaseHookData & {
-      docData: object;
+      docData: TeriockConsequence;
     };
   }
 }

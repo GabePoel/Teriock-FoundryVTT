@@ -7,18 +7,18 @@ const { fields } = foundry.data;
 export function hierarchyField() {
   return new fields.SchemaField({
     rootUuid: new fields.DocumentUUIDField({
-      label: "Root UUID",
       hint: "The UUID of the document this ability is embedded in.",
+      label: "Root UUID",
     }),
     subIds: new fields.SetField(new fields.DocumentIdField(), {
-      label: "Sub IDs",
       hint: "The IDs of the abilities that this ability provides, if there are any.",
+      label: "Sub IDs",
     }),
     supId: new fields.DocumentIdField({
-      initial: null,
-      nullable: true,
-      label: "Super Ability ID",
       hint: "The ID of the ability or effect that provides this ability, if there is one.",
+      initial: null,
+      label: "Super Ability ID",
+      nullable: true,
     }),
   });
 }
@@ -34,9 +34,84 @@ export function combatExpirationSourceTypeField() {
       executor: "Executor",
       everyone: "Everyone",
     },
-    label: "Who",
     hint: "Whose turn should this effect attempt to expire on?",
     initial: "target",
+    label: "Who",
+  });
+}
+
+/**
+ * Field for a transformation.
+ * @returns {SchemaField}
+ */
+export function transformationField() {
+  return new fields.SchemaField({
+    enabled: new fields.BooleanField({
+      hint: "Whether this ability causes a transformation.",
+      initial: false,
+      label: "Causes Transformation",
+      nullable: false,
+      required: false,
+    }),
+    image: new fields.FilePathField({
+      categories: ["IMAGE"],
+      hint: "Optional overriding art to apply to the target.",
+      initial: null,
+      label: "Token Art",
+      nullable: true,
+      required: false,
+      trim: true,
+    }),
+    level: new fields.StringField({
+      choices: {
+        minor: "Minor Transformation",
+        full: "Full Transformation",
+        greater: "Greater Transformation",
+      },
+      hint: "How strong of a transformation this is.",
+      initial: "minor",
+      label: "Transformation Level",
+      nullable: false,
+      required: false,
+    }),
+    suppression: new fields.SchemaField({
+      bodyParts: new fields.BooleanField({
+        hint: "Whether this should suppress body parts not provided by the transformation.",
+        initial: true,
+        label: "Suppress Body Parts",
+        nullable: false,
+        required: false,
+      }),
+      equipment: new fields.BooleanField({
+        hint: "Whether this should suppress equipment not provided by the transformation.",
+        initial: true,
+        label: "Suppress Equipment",
+        nullable: false,
+        required: false,
+      }),
+      fluencies: new fields.BooleanField({
+        hint: "Whether this should suppress fluencies not provided by the transformation.",
+        initial: true,
+        label: "Suppress Fluencies",
+        nullable: false,
+        required: false,
+      }),
+      ranks: new fields.BooleanField({
+        hint: "Whether this should suppress ranks not provided by the transformation.",
+        initial: true,
+        label: "Suppress Ranks",
+        nullable: false,
+        required: false,
+      }),
+    }),
+    uuid: new fields.DocumentUUIDField({
+      hint: "A specific species this transforms the target into.",
+      initial: null,
+      label: "Species",
+      nullable: true,
+      required: false,
+      type: "Item",
+    }),
   });
 }
 
@@ -46,25 +121,25 @@ export function combatExpirationSourceTypeField() {
  */
 export function combatExpirationMethodField() {
   return new fields.SchemaField({
+    roll: new fields.StringField({
+      hint: "If this expires on a roll, what is the roll that needs to be made?",
+      initial: "2d4kh1",
+      label: "Roll",
+    }),
+    threshold: new fields.NumberField({
+      hint: "What is the minimum value that needs to be rolled in order for this to expire?",
+      initial: 4,
+      label: "Threshold",
+    }),
     type: new fields.StringField({
       choices: {
         forced: "Expires Automatically",
         rolled: "Expires on Roll",
         none: "Does not Expire on Turn",
       },
-      label: "What",
       hint: "What is the type of thing that causes this to expire?",
       initial: "none",
-    }),
-    roll: new fields.StringField({
-      initial: "2d4kh1",
-      label: "Roll",
-      hint: "If this expires on a roll, what is the roll that needs to be made?",
-    }),
-    threshold: new fields.NumberField({
-      initial: 4,
-      label: "Threshold",
-      hint: "What is the minimum value that needs to be rolled in order for this to expire?",
+      label: "What",
     }),
   });
 }
@@ -75,14 +150,19 @@ export function combatExpirationMethodField() {
  */
 export function combatExpirationTimingField() {
   return new fields.SchemaField({
+    skip: new fields.NumberField({
+      hint: "A number of instances of the trigger firing to skip before this effect expires.",
+      initial: 0,
+      label: "Skip",
+    }),
     time: new fields.StringField({
       choices: {
         start: "Start",
         end: "End",
       },
+      hint: "What is the timing for the trigger of this effect expiring?",
       initial: "start",
       label: "When",
-      hint: "What is the timing for the trigger of this effect expiring?",
     }),
     trigger: new fields.StringField({
       choices: {
@@ -90,14 +170,9 @@ export function combatExpirationTimingField() {
         combat: "Combat",
         action: "Action",
       },
+      hint: "What is the trigger for this effect expiring?",
       initial: "turn",
       label: "Trigger",
-      hint: "What is the trigger for this effect expiring?",
-    }),
-    skip: new fields.NumberField({
-      initial: 0,
-      label: "Skip",
-      hint: "A number of instances of the trigger firing to skip before this effect expires.",
     }),
   });
 }
@@ -110,11 +185,11 @@ export function changeField() {
   return new fields.SchemaField({
     key: new fields.StringField({ initial: "" }),
     mode: new fields.NumberField({
-      initial: 4,
       choices: TERIOCK.options.effect.changeMode,
+      initial: 4,
     }),
-    value: new fields.StringField({ initial: "" }),
     priority: new fields.NumberField({ initial: 20 }),
+    value: new fields.StringField({ initial: "" }),
   });
 }
 
@@ -125,39 +200,39 @@ export function changeField() {
 export function associationsField() {
   return new fields.ArrayField(
     new fields.SchemaField({
-      title: new fields.StringField({
-        initial: "Associations",
-        required: false,
-      }),
-      icon: new fields.StringField({
-        nullable: true,
-        required: false,
-        initial: null,
-      }),
       cards: new fields.ArrayField(
         new fields.SchemaField({
-          name: new fields.StringField(),
-          img: new fields.StringField(),
           color: new fields.StringField({
             nullable: true,
             required: false,
           }),
-          uuid: new fields.DocumentUUIDField(),
           id: new fields.DocumentIdField(),
-          type: new fields.StringField({
-            initial: "base",
-            required: false,
-          }),
+          img: new fields.StringField(),
+          name: new fields.StringField(),
           rescale: new fields.BooleanField({
             initial: false,
             required: false,
           }),
+          type: new fields.StringField({
+            initial: "base",
+            required: false,
+          }),
+          uuid: new fields.DocumentUUIDField(),
         }),
         {
           initial: [],
           required: false,
         },
       ),
+      icon: new fields.StringField({
+        nullable: true,
+        required: false,
+        initial: null,
+      }),
+      title: new fields.StringField({
+        initial: "Associations",
+        required: false,
+      }),
     }),
     {
       initial: [],
@@ -173,14 +248,14 @@ export function associationsField() {
 export function blocksField() {
   return new fields.ArrayField(
     new fields.SchemaField({
-      title: new fields.StringField(),
-      text: new fields.StringField({ nullable: true }),
-      special: new fields.StringField({ nullable: true }),
       elements: new fields.StringField({ nullable: true }),
       italic: new fields.BooleanField({
-        required: false,
         initial: false,
+        required: false,
       }),
+      special: new fields.StringField({ nullable: true }),
+      text: new fields.StringField({ nullable: true }),
+      title: new fields.StringField(),
     }),
   );
 }

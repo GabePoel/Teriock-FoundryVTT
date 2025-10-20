@@ -2,6 +2,7 @@ import type {
   CombatExpirationMethod,
   CombatExpirationSourceType,
   CombatExpirationTiming,
+  TransformationField,
 } from "../../shared/shared-fields";
 
 /**
@@ -55,4 +56,6 @@ export interface AbilityImpact {
   startStatuses: Set<Teriock.Parameters.Condition.ConditionKey>;
   /** <schema> Conditions caused by the {@link TeriockConsequence} created by this ability */
   statuses: Set<Teriock.Parameters.Condition.ConditionKey>;
+  /** <schema> Transformation configuration */
+  transformation: TransformationField;
 }

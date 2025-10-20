@@ -102,4 +102,65 @@
       }}
     </fieldset>
   {{/if}}
+  {{formGroup
+    (path systemFields "applies.fields" typeKey "fields.transformation.fields.enabled")
+    value=(path system "applies" typeKey "transformation.enabled")
+    disabled=(not editable)
+    classes="teriock-full-width"
+    rootId=uuid
+  }}
+  {{#if (path system "applies" typeKey "transformation.enabled")}}
+    <fieldset class="teriock-full-width" style="margin-top: 6px;">
+      <legend>Transformation</legend>
+      {{formGroup
+        (path systemFields "applies.fields" typeKey "fields.transformation.fields.level")
+        value=(path system "applies" typeKey "transformation.level")
+        disabled=(not editable)
+        classes="teriock-full-width"
+        rootId=uuid
+      }}
+      {{formGroup
+        (path systemFields "applies.fields" typeKey "fields.transformation.fields.uuid")
+        value=(path system "applies" typeKey "transformation.uuid")
+        disabled=(not editable)
+        classes="teriock-full-width"
+        rootId=uuid
+      }}
+      {{formGroup
+        (path systemFields "applies.fields" typeKey "fields.transformation.fields.image")
+        value=(path system "applies" typeKey "transformation.image")
+        disabled=(not editable)
+        classes="teriock-full-width"
+        rootId=uuid
+      }}
+      {{formGroup
+        (path systemFields "applies.fields" typeKey "fields.transformation.fields.suppression.fields.bodyParts")
+        value=(path system "applies" typeKey "transformation.suppression.bodyParts")
+        disabled=(not editable)
+        classes="teriock-full-width"
+        rootId=uuid
+      }}
+      {{formGroup
+        (path systemFields "applies.fields" typeKey "fields.transformation.fields.suppression.fields.equipment")
+        value=(path system "applies" typeKey "transformation.suppression.equipment")
+        disabled=(not editable)
+        classes="teriock-full-width"
+        rootId=uuid
+      }}
+      {{formGroup
+        (path systemFields "applies.fields" typeKey "fields.transformation.fields.suppression.fields.fluencies")
+        value=(path system "applies" typeKey "transformation.suppression.fluencies")
+        disabled=(not editable)
+        classes="teriock-full-width"
+        rootId=uuid
+      }}
+      {{formGroup
+        (path systemFields "applies.fields" typeKey "fields.transformation.fields.suppression.fields.ranks")
+        value=(path system "applies" typeKey "transformation.suppression.ranks")
+        disabled=(not editable)
+        classes="teriock-full-width"
+        rootId=uuid
+      }}
+    </fieldset>
+  {{/if}}
 </div>

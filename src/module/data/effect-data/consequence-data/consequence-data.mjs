@@ -4,7 +4,11 @@ import { HierarchyDataMixin } from "../../mixins/_module.mjs";
 import { migrateHierarchy } from "../../shared/migrations/migrate-hierarchy.mjs";
 import TeriockBaseEffectModel from "../base-effect-data/base-effect-data.mjs";
 import * as sharedFields from "../shared/shared-fields.mjs";
-import { associationsField, blocksField } from "../shared/shared-fields.mjs";
+import {
+  associationsField,
+  blocksField,
+  transformationField,
+} from "../shared/shared-fields.mjs";
 import { _messageParts } from "./methods/_messages.mjs";
 
 const { fields } = foundry.data;
@@ -92,6 +96,7 @@ export default class TeriockConsequenceModel extends HierarchyDataMixin(
       }),
       sourceDescription: new fields.HTMLField(),
       heightened: new fields.NumberField(),
+      transformation: transformationField(),
     });
   }
 
@@ -200,6 +205,25 @@ export default class TeriockConsequenceModel extends HierarchyDataMixin(
    */
   async inCombatExpiration(forceDialog = false) {
     await inCombatExpirationDialog(this.parent, forceDialog);
+  }
+
+  /** @inheritDoc */
+  prepareBaseData() {
+    super.prepareBaseData();
+    if (this.transformation.enabled && this.transformation.image) {
+      let priority = 40;
+      if (this.transformation.level === "full") {
+        priority = 50;
+      } else if (this.transformation.level === "greater") {
+        priority = 60;
+      }
+      this.parent.changes.push({
+        key: "system.transformation.img",
+        mode: 5,
+        priority: priority,
+        value: this.transformation.image,
+      });
+    }
   }
 
   /** @inheritDoc */

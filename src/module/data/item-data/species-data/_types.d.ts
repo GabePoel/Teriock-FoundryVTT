@@ -44,6 +44,8 @@ export interface TeriockSpeciesData {
   sizeStepMp: number | null;
   /** <schema> Traits */
   traits: Set<Teriock.Parameters.Species.Trait>;
+  /** <schema> Level of transformation this species is */
+  transformationLevel: "minor" | "full" | "greater";
 }
 
 declare module "./species-data.mjs" {

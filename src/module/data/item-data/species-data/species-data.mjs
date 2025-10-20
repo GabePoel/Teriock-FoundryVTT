@@ -91,8 +91,31 @@ export default class TeriockSpeciesModel extends StatGiverDataMixin(
           label: "Traits",
         },
       ),
+      transformationLevel: new fields.StringField({
+        choices: {
+          minor: "Minor Transformation",
+          full: "Full Transformation",
+          greater: "Greater Transformation",
+        },
+        initial: null,
+        nullable: true,
+        required: false,
+      }),
     });
     return schema;
+  }
+
+  /** @inheritDoc */
+  get color() {
+    if (this.transformationLevel === "minor") {
+      return "#3584E4";
+    } else if (this.transformationLevel === "full") {
+      return "#33D17A";
+    } else if (this.transformationLevel === "greater") {
+      return "#9141AC";
+    } else {
+      return super.color;
+    }
   }
 
   /** @inheritDoc */
@@ -189,6 +212,16 @@ export default class TeriockSpeciesModel extends StatGiverDataMixin(
   /** @inheritDoc */
   async parse(rawHTML) {
     return await _parse(this, rawHTML);
+  }
+
+  prepareSpecialData() {
+    if (
+      this.transformationLevel === "minor" ||
+      this.transformationLevel === "full"
+    ) {
+      this.statDice.mp.disabled = true;
+    }
+    super.prepareSpecialData();
   }
 
   /** @inheritDoc */

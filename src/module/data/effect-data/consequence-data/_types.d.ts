@@ -4,6 +4,7 @@ import type {
   CombatExpirationMethod,
   CombatExpirationSourceType,
   CombatExpirationTiming,
+  TransformationField,
 } from "../shared/shared-fields";
 import type {
   TeriockActor,
@@ -62,6 +63,8 @@ declare module "./consequence-data.mjs" {
     sourceDescription: string;
     /** <schema> If this expires when its source is inactive */
     sustainedExpiration: boolean;
+    /** <schema> Transformation configuration */
+    transformation: TransformationField;
 
     get parent(): TeriockConsequence;
   }

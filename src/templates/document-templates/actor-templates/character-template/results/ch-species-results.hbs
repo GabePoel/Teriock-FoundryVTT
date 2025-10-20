@@ -7,9 +7,11 @@
       subtitle=(concat "Size " item.system.size.value)
       id=item._id
       active=(not item.disabled)
-      text=""
+      text=(ifThen (exists item.system.transformationLevel) (concat (ucFirst item.system.transformationLevel) "
+      Transformation") "")
       tooltip="Share to Chat"
       hidden=(rgx ../searchStrings.powers item.name)
+      marker=item.system.color
       icons=(concat
         (ticon "comment" action="chatDoc" id=rank._id tooltip="Send to Chat")
         (ticonToggle "circle-check" "circle" (not item.disabled) action="toggleDisabledDoc" id=item._id tooltipTrue="Enabled" tooltipFalse="Disabled")

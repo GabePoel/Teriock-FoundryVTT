@@ -20,6 +20,9 @@ export async function _generateEffect(rollConfig, crit = false) {
   let combatExpirations = foundry.utils.deepClone(
     abilityData.applies.base.expiration.normal.combat,
   );
+  let transformation = foundry.utils.deepClone(
+    abilityData.applies.base.transformation,
+  );
   combatExpirations.who.source = rollConfig.useData.actor.uuid;
   if (crit && abilityData.applies.base.expiration.changeOnCrit) {
     combatExpirations = foundry.utils.mergeObject(
@@ -52,6 +55,24 @@ export async function _generateEffect(rollConfig, crit = false) {
         );
       }
     }
+    if (abilityData.applies.proficient.transformation.enabled) {
+      transformation.enabled = true;
+      transformation.image =
+        abilityData.applies.proficient.transformation.image ||
+        transformation.image;
+      transformation.uuid =
+        abilityData.applies.proficient.transformation.uuid ||
+        transformation.uuid;
+      transformation.level = upgradeTransformation(
+        transformation.level,
+        abilityData.applies.proficient.transformation.level,
+      );
+      for (const field of Object.keys(transformation.suppression)) {
+        transformation.suppression[field] =
+          abilityData.applies.proficient.transformation.suppression[field] ||
+          transformation.suppression[field];
+      }
+    }
   }
   if (rollConfig.useData.fluent) {
     if (abilityData.applies.fluent.statuses.size > 0) {
@@ -70,6 +91,22 @@ export async function _generateEffect(rollConfig, crit = false) {
           combatExpirations,
           abilityData.applies.fluent.expiration.crit.combat,
         );
+      }
+    }
+    if (abilityData.applies.fluent.transformation.enabled) {
+      transformation.enabled = true;
+      transformation.image =
+        abilityData.applies.fluent.transformation.image || transformation.image;
+      transformation.uuid =
+        abilityData.applies.fluent.transformation.uuid || transformation.uuid;
+      transformation.level = upgradeTransformation(
+        transformation.level,
+        abilityData.applies.fluent.transformation.level,
+      );
+      for (const field of Object.keys(transformation.suppression)) {
+        transformation.suppression[field] =
+          abilityData.applies.fluent.transformation.suppression[field] ||
+          transformation.suppression[field];
       }
     }
   }
@@ -102,6 +139,24 @@ export async function _generateEffect(rollConfig, crit = false) {
         Math.round(seconds / abilityData.applies.heightened.duration) *
         abilityData.applies.heightened.duration;
     }
+    if (abilityData.applies.heightened.transformation.enabled) {
+      transformation.enabled = true;
+      transformation.image =
+        abilityData.applies.heightened.transformation.image ||
+        transformation.image;
+      transformation.uuid =
+        abilityData.applies.heightened.transformation.uuid ||
+        transformation.uuid;
+      transformation.level = upgradeTransformation(
+        transformation.level,
+        abilityData.applies.heightened.transformation.level,
+      );
+      for (const field of Object.keys(transformation.suppression)) {
+        transformation.suppression[field] =
+          abilityData.applies.heightened.transformation.suppression[field] ||
+          transformation.suppression[field];
+      }
+    }
     // Heightening combat expirations is not currently supported
     // TODO: Support heightening combat expirations lol
   }
@@ -117,7 +172,6 @@ export async function _generateEffect(rollConfig, crit = false) {
       associations: [],
       blocks: abilityData.messageParts.blocks,
       critical: crit,
-      source: abilityData.parent.uuid,
       deleteOnExpire: true,
       expirations: {
         combat: combatExpirations,
@@ -135,6 +189,8 @@ export async function _generateEffect(rollConfig, crit = false) {
         subIds: Array.from(abilityData.hierarchy.subIds || new Set()),
         rootUuid: abilityData.parent.parent.uuid,
       },
+      source: abilityData.parent.uuid,
+      transformation: transformation,
     },
     duration: {
       seconds: seconds || 0,
@@ -148,6 +204,23 @@ export async function _generateEffect(rollConfig, crit = false) {
     return effectData;
   }
   return false;
+}
+
+/**
+ * Maximum of two transformation levels.
+ * @param {"minor"|"full"|"greater"} level1
+ * @param {"minor"|"full"|"greater"} level2
+ * @returns {"minor"|"full"|"greater"}
+ */
+function upgradeTransformation(level1, level2) {
+  if (level1 === "minor") {
+    return level2;
+  } else if (level1 === "full") {
+    if (level2 === "greater") {
+      return level2;
+    }
+  }
+  return level1;
 }
 
 /**
