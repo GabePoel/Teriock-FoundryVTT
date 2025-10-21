@@ -26,7 +26,7 @@ export default (Base) => {
         super.prepareDerivedData();
         if (
           this.parent.parent?.uuid &&
-          this.parent.parent.effects.has(this.parent.id)
+          this.parent.parent[this.metadata.collection].has(this.parent.id)
         ) {
           this.hierarchy.rootUuid = this.parent.parent.uuid;
         }

@@ -55,7 +55,7 @@ export default class TeriockItem extends ChangeableDocumentMixin(
    * Checks if the item is suppressed.
    * @returns {boolean} True if the item is suppressed, false otherwise.
    */
-  get suppressed() {
+  get isSuppressed() {
     return this.system.suppressed;
   }
 
@@ -187,6 +187,21 @@ export default class TeriockItem extends ChangeableDocumentMixin(
   async createEmbeddedDocuments(embeddedName, data = [], operation = {}) {
     this._filterDocumentCreationData(embeddedName, data);
     return await super.createEmbeddedDocuments(embeddedName, data, operation);
+  }
+
+  /** @inheritDoc */
+  getBodyParts() {
+    return this.subs.filter((s) => s.type === "body");
+  }
+
+  /** @inheritDoc */
+  getEquipment() {
+    return this.subs.filter((s) => s.type === "equipment");
+  }
+
+  /** @inheritDoc */
+  getRanks() {
+    return this.subs.filter((s) => s.type === "rank");
   }
 
   /** @inheritDoc */

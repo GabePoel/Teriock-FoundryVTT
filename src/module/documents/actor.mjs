@@ -106,14 +106,6 @@ export default class TeriockActor extends ParentDocumentMixin(
     return [...this.equipment, ...this.bodyParts];
   }
 
-  /**
-   * Transformations.
-   * @returns {TeriockConsequence[]}
-   */
-  get transformations() {
-    return this.consequences.filter((c) => c.system.isTransformation);
-  }
-
   /** @returns {TeriockBody[]} */
   get bodyParts() {
     return this.itemTypes?.body || [];
@@ -217,6 +209,14 @@ export default class TeriockActor extends ParentDocumentMixin(
   /** @returns {TeriockSpecies[]} */
   get species() {
     return this.itemTypes?.species || [];
+  }
+
+  /**
+   * Transformations.
+   * @returns {TeriockConsequence[]}
+   */
+  get transformations() {
+    return this.consequences.filter((c) => c.system.isTransformation);
   }
 
   /**
@@ -465,6 +465,21 @@ export default class TeriockActor extends ParentDocumentMixin(
         rollMode: game.settings.get("core", "rollMode"),
       },
     );
+  }
+
+  /** @inheritDoc */
+  getBodyParts() {
+    return this.bodyParts.filter((b) => !b.sup);
+  }
+
+  /** @inheritDoc */
+  getEquipment() {
+    return this.equipment.filter((e) => !e.sup);
+  }
+
+  /** @inheritDoc */
+  getRanks() {
+    return this.ranks.filter((r) => !r.sup);
   }
 
   /**

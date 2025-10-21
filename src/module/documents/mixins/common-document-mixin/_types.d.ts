@@ -3,7 +3,10 @@ import type {
   TeriockEffect,
   TeriockItem,
 } from "../../_module.mjs";
-import type { TeriockAbility, TeriockProperty } from "../../_documents.mjs";
+import {
+  type TeriockAbility,
+  type TeriockProperty,
+} from "../../_documents.mjs";
 
 export interface CommonDocumentMixinInterface {
   /** The actor associated with this document if there is one */

@@ -2,6 +2,7 @@ import { TeriockTextEditor } from "../../../applications/ux/_module.mjs";
 import { toCamelCase } from "../../../helpers/string.mjs";
 import TeriockChatMessage from "../../chat-message.mjs";
 import { applyCertainChanges } from "../shared/_module.mjs";
+import ChildDocumentHierarchyPart from "./parts/child-document-hierarchy-part.mjs";
 
 /**
  * Mixin for common functions used across document classes embedded in actorsUuids.
@@ -13,8 +14,9 @@ export default (Base) => {
     /**
      * @implements {ChildDocumentMixinInterface}
      * @extends ClientDocument
+     * @extends ChildDocumentHierarchyPart
      */
-    class ChildDocumentMixin extends Base {
+    class ChildDocumentMixin extends ChildDocumentHierarchyPart(Base) {
       //noinspection ES6ClassMemberInitializationOrder
       overrides = this.overrides ?? {};
 

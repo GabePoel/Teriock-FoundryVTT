@@ -111,6 +111,24 @@ export interface ParentDocumentMixinInterface {
   get fluencies(): TeriockFluency[];
 
   /**
+   * Get the body parts that are directly descendent from this.
+   * @returns {TeriockBody[]}
+   */
+  getBodyParts(): TeriockBody[];
+
+  /**
+   * Get the equipment that are directly descendent from this.
+   * @returns {TeriockEquipment[]}
+   */
+  getEquipment(): TeriockEquipment[];
+
+  /**
+   * Get the ranks that are directly descendent from this.
+   * @returns {TeriockRank[]}
+   */
+  getRanks(): TeriockRank[];
+
+  /**
    * Prepares derived data including effect types and keys.
    */
   prepareDerivedData(): void;

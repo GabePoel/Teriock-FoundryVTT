@@ -103,6 +103,29 @@ export default class TeriockSpeciesModel extends StatGiverDataMixin(
   }
 
   /** @inheritDoc */
+  get cardContextMenuEntries() {
+    return [
+      ...super.cardContextMenuEntries,
+      {
+        name: "Set Primary Transformation",
+        icon: makeIcon("tree", "contextMenu"),
+        callback: this.setPrimaryTransformation.bind(this),
+        condition:
+          this.isTransformation &&
+          !this.isPrimaryTransformation &&
+          Boolean(this.transformationEffect),
+        group: "control",
+      },
+      {
+        name: "Import Related Items",
+        icon: makeIcon("down-to-line", "contextMenu"),
+        callback: this.imports.importDeterministic.bind(this.imports),
+        group: "control",
+      },
+    ];
+  }
+
+  /** @inheritDoc */
   get color() {
     if (this.transformationLevel === "minor") {
       return TERIOCK.display.colors.blue;
@@ -115,26 +138,6 @@ export default class TeriockSpeciesModel extends StatGiverDataMixin(
     }
   }
 
-  /** @inheritDoc */
-  get suppressed() {
-    let suppressed = super.suppressed;
-    if (this.isTransformation && this.parent.actor) {
-      suppressed =
-        suppressed ||
-        !this.isPrimaryTransformation ||
-        this.transformationEffect?.suppressed ||
-        this.transformationEffect?.disabled;
-    }
-    if (
-      this.parent.actor &&
-      this.parent.actor.system.isTransformed &&
-      !this.isTransformation
-    ) {
-      return true;
-    }
-    return suppressed;
-  }
-
   /**
    * Whether this is a primary transformation species.
    * @returns {boolean}
@@ -145,6 +148,39 @@ export default class TeriockSpeciesModel extends StatGiverDataMixin(
     } else {
       return false;
     }
+  }
+
+  /**
+   * Whether this is part of a transformation.
+   * @returns {boolean}
+   */
+  get isTransformation() {
+    return Boolean(this.transformationLevel);
+  }
+
+  /** @inheritDoc */
+  get messageParts() {
+    return { ...super.messageParts, ..._messageParts(this) };
+  }
+
+  /** @inheritDoc */
+  get suppressed() {
+    let suppressed = super.suppressed;
+    if (this.isTransformation && this.parent.actor) {
+      suppressed =
+        suppressed ||
+        !this.isPrimaryTransformation ||
+        this.transformationEffect?.isSuppressed ||
+        this.transformationEffect?.disabled;
+    }
+    if (
+      this.parent.actor &&
+      this.parent.actor.system.isTransformed &&
+      !this.isTransformation
+    ) {
+      return true;
+    }
+    return suppressed;
   }
 
   /**
@@ -161,34 +197,6 @@ export default class TeriockSpeciesModel extends StatGiverDataMixin(
       }
     }
     return null;
-  }
-
-  /** @inheritDoc */
-  get messageParts() {
-    return { ...super.messageParts, ..._messageParts(this) };
-  }
-
-  /** @inheritDoc */
-  async deleteThis() {
-    if (this.transformationEffect) {
-      const proceed = await TeriockDialog.confirm({
-        window: {
-          title: "Delete Consequence?",
-          icon: `fas fa-${TERIOCK.options.document.consequence.icon}`,
-        },
-        content:
-          "This species is provided by a transformation consequence. Would you like to delete that as well?",
-        modal: true,
-        rejectClose: false,
-      });
-      if (proceed) {
-        await this.transformationEffect.delete();
-      } else {
-        await super.deleteThis();
-      }
-    } else {
-      await super.deleteThis();
-    }
   }
 
   /** @inheritDoc */
@@ -272,54 +280,35 @@ export default class TeriockSpeciesModel extends StatGiverDataMixin(
   }
 
   /** @inheritDoc */
+  async deleteThis() {
+    if (this.transformationEffect) {
+      const proceed = await TeriockDialog.confirm({
+        window: {
+          title: "Delete Consequence?",
+          icon: `fas fa-${TERIOCK.options.document.consequence.icon}`,
+        },
+        content:
+          "This species is provided by a transformation consequence. Would you like to delete that as well?",
+        modal: true,
+        rejectClose: false,
+      });
+      if (proceed) {
+        await this.transformationEffect.delete();
+      } else {
+        await super.deleteThis();
+      }
+    } else {
+      await super.deleteThis();
+    }
+  }
+
+  /** @inheritDoc */
   getRollData() {
     const rollData = super.getRollData();
     if (typeof rollData.size === "undefined") {
       rollData.size = this.size.value;
     }
     return rollData;
-  }
-
-  /**
-   * Set the effect controlling this transformation as the primary transformation.
-   * @returns {Promise<void>}
-   */
-  async setPrimaryTransformation() {
-    const transformationEffect = this.transformationEffect;
-    if (transformationEffect) {
-      await transformationEffect.system.setPrimaryTransformation();
-    }
-  }
-
-  /** @inheritDoc */
-  get cardContextMenuEntries() {
-    return [
-      ...super.cardContextMenuEntries,
-      {
-        name: "Set Primary Transformation",
-        icon: makeIcon("tree", "contextMenu"),
-        callback: this.setPrimaryTransformation.bind(this),
-        condition:
-          this.isTransformation &&
-          !this.isPrimaryTransformation &&
-          Boolean(this.transformationEffect),
-        group: "control",
-      },
-      {
-        name: "Import Related Items",
-        icon: makeIcon("down-to-line", "contextMenu"),
-        callback: this.imports.importDeterministic.bind(this.imports),
-        group: "control",
-      },
-    ];
-  }
-
-  /**
-   * Whether this is part of a transformation.
-   * @returns {boolean}
-   */
-  get isTransformation() {
-    return Boolean(this.transformationLevel);
   }
 
   /** @inheritDoc */
@@ -363,5 +352,16 @@ export default class TeriockSpeciesModel extends StatGiverDataMixin(
     }
     await this.parent.update(updateData);
     await super.refreshFromIndex();
+  }
+
+  /**
+   * Set the effect controlling this transformation as the primary transformation.
+   * @returns {Promise<void>}
+   */
+  async setPrimaryTransformation() {
+    const transformationEffect = this.transformationEffect;
+    if (transformationEffect) {
+      await transformationEffect.system.setPrimaryTransformation();
+    }
   }
 }

@@ -151,8 +151,23 @@ export default (Base) => {
       }
 
       /** @inheritDoc */
+      getBodyParts() {
+        return [];
+      }
+
+      /** @inheritDoc */
+      getEquipment() {
+        return [];
+      }
+
+      /** @inheritDoc */
       getProperties() {
         return this.properties.filter((p) => !p.sup);
+      }
+
+      /** @inheritDoc */
+      getRanks() {
+        return [];
       }
 
       /** @inheritDoc */

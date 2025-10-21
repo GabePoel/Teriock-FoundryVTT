@@ -6,14 +6,21 @@
       title=item.name
       subtitle=(concat "Size " item.system.size.value)
       id=item._id
-      active=(not item.suppressed)
+      active=(not item.isSuppressed)
       text=(ifThen (exists item.system.transformationEffect) item.system.transformationEffect.system.nameString "")
       tooltip="Share to Chat"
       hidden=(rgx ../searchStrings.powers item.name)
       marker=item.system.color
       icons=(concat
         (ticon "comment" action="chatDoc" id=rank._id tooltip="Send to Chat")
-        (ticonToggle "circle-check" "circle" (not item.disabled) action="toggleDisabledDoc" id=item._id tooltipTrue="Enabled" tooltipFalse="Disabled")
+        (ticonToggle
+          "circle-check"
+          "circle"
+          (not item.disabled)
+          action="toggleDisabledDoc"
+          id=item._id tooltipTrue="Enabled"
+          tooltipFalse="Disabled"
+        )
       )
     }}
   {{/each}}

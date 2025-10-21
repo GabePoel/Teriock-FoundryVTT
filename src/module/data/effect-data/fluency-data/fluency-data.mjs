@@ -62,7 +62,7 @@ export default class TeriockFluencyModel extends WikiDataMixin(
   /** @inheritDoc */
   get suppressed() {
     let suppressed = super.suppressed;
-    if (!suppressed && this.parent?.parent?.type === "equipment") {
+    if (!suppressed && this.parent.parent?.type === "equipment") {
       suppressed = !this.parent.parent.system.isAttuned;
     }
     return suppressed;
