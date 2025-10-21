@@ -98,7 +98,7 @@ export default class TeriockBaseEffectModel extends ChildTypeModel {
   get suppressed() {
     return !!(
       this.parent.parent?.documentName === "Item" &&
-      this.parent.parent?.system.disabled
+      this.parent.parent?.system.suppressed
     );
   }
 

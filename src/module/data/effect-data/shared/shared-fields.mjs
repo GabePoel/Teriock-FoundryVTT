@@ -43,9 +43,10 @@ export function combatExpirationSourceTypeField() {
 /**
  * Field for a transformation.
  * @returns {SchemaField}
+ * @param {boolean} [expanded]
  */
-export function transformationField() {
-  return new fields.SchemaField({
+export function transformationField(expanded = false) {
+  const schema = {
     enabled: new fields.BooleanField({
       hint: "Whether this ability causes a transformation.",
       initial: false,
@@ -63,11 +64,7 @@ export function transformationField() {
       trim: true,
     }),
     level: new fields.StringField({
-      choices: {
-        minor: "Minor Transformation",
-        full: "Full Transformation",
-        greater: "Greater Transformation",
-      },
+      choices: TERIOCK.options.effect.transformationLevel,
       hint: "How strong of a transformation this is.",
       initial: "minor",
       label: "Transformation Level",
@@ -104,15 +101,39 @@ export function transformationField() {
         required: false,
       }),
     }),
-    uuid: new fields.DocumentUUIDField({
-      hint: "A specific species this transforms the target into.",
-      initial: null,
-      label: "Species",
-      nullable: true,
+    uuids: new fields.SetField(
+      new fields.DocumentUUIDField({
+        hint: "A specific species this transforms the target into.",
+        nullable: false,
+        type: "Item",
+      }),
+      {
+        hint: "The species this transforms thr target into.",
+        initial: [],
+        label: "Species",
+        nullable: false,
+        required: false,
+      },
+    ),
+    resetHp: new fields.BooleanField({
+      hint: "Reset HP upon transformation.",
+      label: "Reset HP",
+      initial: true,
       required: false,
-      type: "Item",
+      nullable: false,
     }),
-  });
+    resetMp: new fields.BooleanField({
+      hint: "Reset MP upon transformation.",
+      label: "Reset MP",
+      initial: false,
+      required: false,
+      nullable: false,
+    }),
+  };
+  if (expanded) {
+    schema.species = new fields.ArrayField(new fields.DocumentIdField());
+  }
+  return new fields.SchemaField(schema);
 }
 
 /**

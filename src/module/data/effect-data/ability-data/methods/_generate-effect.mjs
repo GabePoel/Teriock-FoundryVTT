@@ -60,9 +60,9 @@ export async function _generateEffect(rollConfig, crit = false) {
       transformation.image =
         abilityData.applies.proficient.transformation.image ||
         transformation.image;
-      transformation.uuid =
-        abilityData.applies.proficient.transformation.uuid ||
-        transformation.uuid;
+      transformation.uuids =
+        abilityData.applies.proficient.transformation.uuids ||
+        transformation.uuids;
       transformation.level = upgradeTransformation(
         transformation.level,
         abilityData.applies.proficient.transformation.level,
@@ -97,8 +97,8 @@ export async function _generateEffect(rollConfig, crit = false) {
       transformation.enabled = true;
       transformation.image =
         abilityData.applies.fluent.transformation.image || transformation.image;
-      transformation.uuid =
-        abilityData.applies.fluent.transformation.uuid || transformation.uuid;
+      transformation.uuids =
+        abilityData.applies.fluent.transformation.uuids || transformation.uuids;
       transformation.level = upgradeTransformation(
         transformation.level,
         abilityData.applies.fluent.transformation.level,
@@ -144,9 +144,9 @@ export async function _generateEffect(rollConfig, crit = false) {
       transformation.image =
         abilityData.applies.heightened.transformation.image ||
         transformation.image;
-      transformation.uuid =
-        abilityData.applies.heightened.transformation.uuid ||
-        transformation.uuid;
+      transformation.uuids =
+        abilityData.applies.heightened.transformation.uuids ||
+        transformation.uuids;
       transformation.level = upgradeTransformation(
         transformation.level,
         abilityData.applies.heightened.transformation.level,
@@ -160,6 +160,8 @@ export async function _generateEffect(rollConfig, crit = false) {
     // Heightening combat expirations is not currently supported
     // TODO: Support heightening combat expirations lol
   }
+  //noinspection JSValidateTypes
+  transformation.uuids = Array.from(transformation.uuids);
 
   /** @type {Partial<TeriockConsequenceModel>} */
   const effectData = {
@@ -208,9 +210,9 @@ export async function _generateEffect(rollConfig, crit = false) {
 
 /**
  * Maximum of two transformation levels.
- * @param {"minor"|"full"|"greater"} level1
- * @param {"minor"|"full"|"greater"} level2
- * @returns {"minor"|"full"|"greater"}
+ * @param {Teriock.Parameters.Shared.TransformationLevel} level1
+ * @param {Teriock.Parameters.Shared.TransformationLevel} level2
+ * @returns {Teriock.Parameters.Shared.TransformationLevel}
  */
 function upgradeTransformation(level1, level2) {
   if (level1 === "minor") {

@@ -1,9 +1,5 @@
 const data = /** @type {Teriock.HookData.UseAbility} */ scope.data;
-const transformationLevels = {
-  minor: "Minor Transformation",
-  full: "Full Transformation",
-  greater: "Greater Transformation",
-};
+const transformationLevels = TERIOCK.options.effect.transformationLevel;
 const chosenTransformationLevel = await tm.dialogs.selectDialog(
   transformationLevels,
   {

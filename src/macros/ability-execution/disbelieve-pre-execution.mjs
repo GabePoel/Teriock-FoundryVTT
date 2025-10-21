@@ -1,9 +1,5 @@
 const data = /** @type {Teriock.HookData.UseAbility} */ scope.data;
-const illusionLevels = {
-  minor: "Minor Illusion",
-  full: "Full Illusion",
-  greater: "Greater Illusion",
-};
+const illusionLevels = TERIOCK.options.effect.illusionLevel;
 const chosenIllusionLevel = await tm.dialogs.selectDialog(illusionLevels, {
   label: "Level",
   hint: "If known, select the level of illusion you are attempting to disbelieve.",

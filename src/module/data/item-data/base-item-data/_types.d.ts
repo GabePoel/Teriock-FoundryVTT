@@ -11,6 +11,8 @@ declare module "./base-item-data.mjs" {
     onUse: Set<Teriock.ID<TeriockEffect>>;
     /** <schema> Update counter - used to force an update when adding/removing effects */
     updateCounter: boolean;
+    /** <schema> Whether this is disabled */
+    disabled: boolean;
 
     get parent(): TeriockItem;
   }

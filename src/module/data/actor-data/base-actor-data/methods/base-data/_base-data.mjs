@@ -3,6 +3,7 @@ import { _prepBaseAttributes } from "./_prep-base-attributes.mjs";
 import { _prepBaseDefense } from "./_prep-base-defense.mjs";
 import { _prepBaseLighting } from "./_prep-base-lighting.mjs";
 import { _prepareBonuses } from "./_prep-base-stats.mjs";
+import { _prepBaseTransformation } from "./_prep-base-transformation.mjs";
 
 /**
  * Prepare all data that needs to be initialized but exists to be set with effects.
@@ -21,9 +22,7 @@ export function _baseData(actorData) {
   _prepareBonuses(actorData);
   _prepBaseLighting(actorData);
   _prepBaseDefense(actorData);
-  actorData.transformation = {
-    img: null,
-  };
+  _prepBaseTransformation(actorData);
   actorData.abilityFlags = {};
   actorData.trackers =
     /** @type {Record<Teriock.Parameters.Condition.ConditionKey, Teriock.UUID<TeriockTokenDocument>[]>} */ {};

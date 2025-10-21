@@ -116,9 +116,9 @@ export default class TeriockRankModel extends StatGiverDataMixin(
   /** @inheritDoc */
   get color() {
     if (this.innate) {
-      return "#9141AC";
+      return TERIOCK.display.colors.purple;
     } else {
-      return "#77767b";
+      return TERIOCK.display.colors.grey;
     }
   }
 
@@ -176,6 +176,19 @@ export default class TeriockRankModel extends StatGiverDataMixin(
       )
       .map((a) => a.id);
     await this.parent.deleteEmbeddedDocuments("ActiveEffect", toDelete);
+  }
+
+  /** @inheritDoc */
+  prepareSpecialData() {
+    if (this.parent.actor && this.parent.actor.system.isTransformed) {
+      if (this.parent.actor.system.transformation.suppression.ranks) {
+        this.statDice.hp.disabled = true;
+        if (this.parent.actor.system.transformation.level === "greater") {
+          this.statDice.mp.disabled = true;
+        }
+      }
+    }
+    super.prepareSpecialData();
   }
 
   /** @inheritDoc */

@@ -21,7 +21,7 @@ export type TransformationField = {
   /** <schema> Overriding image to apply */
   image: string;
   /** <schema> Level of transformation */
-  level: "minor" | "full" | "greater";
+  level: Teriock.Parameters.Shared.TransformationLevel;
   /** <schema> Documents to suppress */
   suppression: {
     /** <schema> Whether to suppress body parts */
@@ -33,8 +33,12 @@ export type TransformationField = {
     /** <schema> Whether to suppress ranks */
     ranks: boolean;
   };
+  /** <schema> Reset HP upon applying transformation */
+  resetHp: boolean;
+  /** <schema> Reset MP upon applying transformation */
+  resetMp: boolean;
   /** <schema> UUID of specific species to transform into */
-  uuid: Teriock.UUID<TeriockSpecies>;
+  uuids: Set<Teriock.UUID<TeriockSpecies>>;
 };
 
 /** <schema> What is the relationship of the {@link TeriockActor} that triggers expirations? */

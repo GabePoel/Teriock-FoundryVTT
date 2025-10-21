@@ -45,6 +45,14 @@ export default class TeriockBaseItemModel extends ChildTypeModel {
     return /** @type {TeriockActor} */ this.parent.actor;
   }
 
+  /**
+   * Whether this item is suppressed.
+   * @returns {boolean}
+   */
+  get suppressed() {
+    return this.disabled;
+  }
+
   /** @inheritDoc */
   get messageParts() {
     const parts = super.messageParts;
@@ -81,14 +89,5 @@ export default class TeriockBaseItemModel extends ChildTypeModel {
       });
     }
     return parts;
-  }
-
-  /**
-   * Should an effect embedded in this be forcibly suppressed?
-   * @param {Teriock.ID<TeriockEffect>} _id
-   * @returns {boolean}
-   */
-  shouldSuppress(_id) {
-    return false;
   }
 }

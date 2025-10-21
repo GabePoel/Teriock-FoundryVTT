@@ -135,10 +135,7 @@ export default class ChildTypeModel extends CommonTypeModel {
         name: "Delete",
         icon: makeIcon("trash", "contextMenu"),
         callback: async () => {
-          await this.parent.parent.deleteEmbeddedDocuments(
-            this.parent.documentName,
-            [this.parent.id],
-          );
+          await this.deleteThis();
         },
         condition: () =>
           (this.parent.parent.sheet?.editable ||
@@ -157,6 +154,16 @@ export default class ChildTypeModel extends CommonTypeModel {
         group: "document",
       },
     ];
+  }
+
+  /**
+   * Delete this document from its parent.
+   * @returns {Promise<void>}
+   */
+  async deleteThis() {
+    await this.parent.parent.deleteEmbeddedDocuments(this.parent.documentName, [
+      this.parent.id,
+    ]);
   }
 
   /**

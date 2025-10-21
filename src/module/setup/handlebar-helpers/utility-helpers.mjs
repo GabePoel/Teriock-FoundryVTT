@@ -320,7 +320,7 @@ export default function registerUiHelpers() {
           data-tooltip-class="teriock"
           data-openable="true"
           data-shareable="true"
-          ${marker ? `style="border-color: ${marker};"` : ""}
+          ${marker ? `style="outline-color: ${marker};"` : ""}
         ><img src="${img}" alt="${title}" /></div>
         <div class="tcard-body">
           <div class="tcard-titles">

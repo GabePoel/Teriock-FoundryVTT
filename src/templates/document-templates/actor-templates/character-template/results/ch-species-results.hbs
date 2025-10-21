@@ -6,9 +6,8 @@
       title=item.name
       subtitle=(concat "Size " item.system.size.value)
       id=item._id
-      active=(not item.disabled)
-      text=(ifThen (exists item.system.transformationLevel) (concat (ucFirst item.system.transformationLevel) "
-      Transformation") "")
+      active=(not item.suppressed)
+      text=(ifThen (exists item.system.transformationEffect) item.system.transformationEffect.system.nameString "")
       tooltip="Share to Chat"
       hidden=(rgx ../searchStrings.powers item.name)
       marker=item.system.color

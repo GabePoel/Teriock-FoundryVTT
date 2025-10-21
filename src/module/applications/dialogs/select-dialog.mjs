@@ -246,6 +246,30 @@ export async function selectAbilityDialog() {
 }
 
 /**
+ * Select common animal dialog.
+ * @param [maxBr]
+ * @returns {Promise<TeriockSpecies|null>}
+ */
+export async function selectCommonAnimalDialog(maxBr = null) {
+  const folderId = game.teriock.packs
+    .species()
+    .folders.find((f) => f.name === "Common Animal Species")?.id;
+  let choices = await game.teriock.packs
+    .species()
+    .getIndex({ fields: ["system.br"] });
+  choices = choices.filter((c) => c.folder === folderId);
+  if (maxBr !== null) {
+    choices = choices.filter((c) => c.system.br <= maxBr);
+  }
+  return selectDocumentDialog(choices, {
+    hint: "Please select an animal.",
+    title: "Select Common Animal",
+    tooltipAsync: true,
+    openable: true,
+  });
+}
+
+/**
  * Select equipment dialog.
  * @returns {Promise<string|null>}
  */
@@ -264,7 +288,7 @@ export async function selectEquipmentTypeDialog() {
     tooltipAsync = false;
   }
   let chosen = await selectDocumentDialog(choices, {
-    hint: "Please select an equipment type",
+    hint: "Please select an equipment type.",
     title: "Select Equipment Type",
     tooltipAsync: tooltipAsync,
     openable: true,

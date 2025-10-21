@@ -41,7 +41,7 @@ export const transformationsData = {
     _id: "treeformed000000",
     changes: [
       {
-        key: "system.transformation.img",
+        key: "system.transformation.image",
         value: "icons/environment/wilderness/tree-ash.webp",
         mode: 5,
         priority: 20,

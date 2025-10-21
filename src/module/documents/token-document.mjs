@@ -62,7 +62,7 @@ export default class TeriockTokenDocument extends TokenDocument {
   get transformationTexture() {
     if (this.isTransformed) {
       if (this.actor) {
-        const out = this.actor.system.transformation.img;
+        const out = this.actor.system.transformation.image;
         if (out) {
           return out;
         } else {

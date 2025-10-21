@@ -7,7 +7,11 @@ import type {
   BarData,
   HackDataCollection,
 } from "./types/stats";
-import type { TeriockEquipment } from "../../../documents/_documents.mjs";
+import type {
+  TeriockConsequence,
+  TeriockEquipment,
+  TeriockSpecies,
+} from "../../../documents/_documents.mjs";
 import type { ProtectionData } from "./types/protections";
 import type { SheetData } from "./types/sheet";
 import type { TradecraftData } from "./types/tradecrafts";
@@ -291,7 +295,26 @@ declare global {
     /** <base> Transformation */
     transformation: {
       /** <base> Transformed token art */
-      img: string | null;
+      image: string | null;
+      /** <schema> */
+      primary: Teriock.ID<TeriockConsequence> | null;
+      /** <base> */
+      effect: TeriockConsequence | null;
+      /** <base> */
+      species: TeriockSpecies[];
+      /** <base> */
+      level: Teriock.Parameters.Shared.TransformationLevel;
+      /** <base> */
+      suppression: {
+        /** <base> Whether to suppress body parts */
+        bodyParts: boolean;
+        /** <base> Whether to suppress equipment */
+        equipment: boolean;
+        /** <base> Whether to suppress fluencies */
+        fluencies: boolean;
+        /** <base> Whether to suppress ranks */
+        ranks: boolean;
+      };
     };
     /** <schema> Update counter - used to force an update when adding/removing effects */
     updateCounter: boolean;

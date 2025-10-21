@@ -14,6 +14,7 @@ export function _messageParts(speciesData) {
       wrappers: [
         speciesData.statDice.hp.formula + " Hit Dice",
         speciesData.statDice.mp.formula + " Mana Dice",
+        `BR ${speciesData.br}`,
       ],
     },
     {

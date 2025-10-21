@@ -106,6 +106,14 @@ export default class TeriockActor extends ParentDocumentMixin(
     return [...this.equipment, ...this.bodyParts];
   }
 
+  /**
+   * Transformations.
+   * @returns {TeriockConsequence[]}
+   */
+  get transformations() {
+    return this.consequences.filter((c) => c.system.isTransformation);
+  }
+
   /** @returns {TeriockBody[]} */
   get bodyParts() {
     return this.itemTypes?.body || [];

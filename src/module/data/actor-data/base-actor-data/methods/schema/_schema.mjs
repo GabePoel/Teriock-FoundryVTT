@@ -9,6 +9,7 @@ import { _defineSheet } from "./_define-sheet.mjs";
 import { _defineSpeed } from "./_define-speed.mjs";
 import { _defineStats } from "./_define-stats.mjs";
 import { _defineTradecrafts } from "./_define-tradecrafts.mjs";
+import { _defineTransformation } from "./_define-transformation.mjs";
 
 /**
  * Defines the complete base actor schema by combining all individual schema components.
@@ -29,5 +30,6 @@ export function _defineSchema(schema) {
   schema = _defineSpeed(schema);
   schema = _defineStats(schema);
   schema = _defineTradecrafts(schema);
+  schema = _defineTransformation(schema);
   return schema;
 }

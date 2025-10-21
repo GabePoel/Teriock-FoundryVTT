@@ -1,3 +1,4 @@
+import { colors } from "../display/_module.mjs";
 import * as index from "../index/_module.mjs";
 
 export const abilityOptions = {
@@ -133,32 +134,32 @@ export const abilityOptions = {
     special: {
       name: "Special",
       icon: "star",
-      color: "#9141ac",
+      color: colors.purple,
     },
     normal: {
       name: "Normal",
       icon: "diamond",
-      color: "#33d17a",
+      color: colors.green,
     },
     gifted: {
       name: "Gifted",
       icon: "plus",
-      color: "#3584e4",
+      color: colors.blue,
     },
     echo: {
       name: "Echo",
       icon: "circles-overlap",
-      color: "#ff7800",
+      color: colors.orange,
     },
     intrinsic: {
       name: "Intrinsic",
       icon: "cube",
-      color: "#77767b",
+      color: colors.grey,
     },
     flaw: {
       name: "Flaw",
       icon: "ban",
-      color: "#e01b24",
+      color: colors.red,
     },
   },
 };

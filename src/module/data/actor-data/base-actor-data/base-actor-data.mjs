@@ -97,18 +97,32 @@ export default class TeriockBaseActorModel extends ActorConditionTogglingPart(
     return null;
   }
 
+  /**
+   * Whether this actor is transformed.
+   * @returns {boolean}
+   */
+  get isTransformed() {
+    return Boolean(
+      this.transformation.effect && this.transformation.effect.active,
+    );
+  }
+
   /** @inheritDoc */
   _onUpdate(changed, options, userId) {
     super._onUpdate(changed, options, userId);
-    if (options.teriock.mpChange !== 0) {
+    // The 999999 catch is used to keep from rendering the stat change upon applying transformations
+    if (options.teriock.mpChange !== 0 && options.teriock.mpChange < 999999) {
       const color = options.teriock.mpChange > 0 ? "#99C1F1" : "#1A5FB4";
       this.animateStatChangeEffect(options.teriock.mpChange, color).then();
     }
-    if (options.teriock.hpChange !== 0) {
+    if (options.teriock.hpChange !== 0 && options.teriock.hpChange < 999999) {
       const color = options.teriock.hpChange > 0 ? "#F66151" : "#A51D2D";
       this.animateStatChangeEffect(options.teriock.hpChange, color).then();
     }
-    if (options.teriock.witherChange !== 0) {
+    if (
+      options.teriock.witherChange !== 0 &&
+      options.teriock.witherChange < 999999
+    ) {
       const color = options.teriock.witherChange > 0 ? "#241F31" : "#5E5C64";
       this.animateStatChangeEffect(options.teriock.witherChange, color).then();
     }

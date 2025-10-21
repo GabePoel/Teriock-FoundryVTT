@@ -52,6 +52,14 @@ export default class TeriockItem extends ChangeableDocumentMixin(
   }
 
   /**
+   * Checks if the item is suppressed.
+   * @returns {boolean} True if the item is suppressed, false otherwise.
+   */
+  get suppressed() {
+    return this.system.suppressed;
+  }
+
+  /**
    * @inheritDoc
    * @returns {Readonly<Teriock.Documents.ItemModelMetadata>}
    */

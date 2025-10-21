@@ -7,4 +7,14 @@ export const effectOptions = {
     4: "Upgrade",
     5: "Override",
   },
+  transformationLevel: {
+    minor: "Minor Transformation",
+    full: "Full Transformation",
+    greater: "Greater Transformation",
+  },
+  illusionLevel: {
+    minor: "Minor Illusion",
+    full: "Full Illusion",
+    greater: "Greater Illusion",
+  },
 };

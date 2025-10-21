@@ -1,5 +1,8 @@
 import type TeriockBaseEffectModel from "../base-effect-data/base-effect-data.mjs";
-import type { TeriockConsequence } from "../../../documents/_documents.mjs";
+import type {
+  TeriockConsequence,
+  TeriockSpecies,
+} from "../../../documents/_documents.mjs";
 import type {
   CombatExpirationMethod,
   CombatExpirationSourceType,
@@ -64,7 +67,10 @@ declare module "./consequence-data.mjs" {
     /** <schema> If this expires when its source is inactive */
     sustainedExpiration: boolean;
     /** <schema> Transformation configuration */
-    transformation: TransformationField;
+    transformation: TransformationField & {
+      /** <schema> The actual species items this is associated with on the actor */
+      species: Teriock.ID<TeriockSpecies>[];
+    };
 
     get parent(): TeriockConsequence;
   }

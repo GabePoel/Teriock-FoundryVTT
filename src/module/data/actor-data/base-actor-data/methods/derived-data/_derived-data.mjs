@@ -3,6 +3,7 @@ import { _prepDerivedMoney } from "./_prep-derived-load.mjs";
 import { _prepDerivedSpeed } from "./_prep-derived-speed.mjs";
 import { _prepDerivedTrackers } from "./_prep-derived-trackers.mjs";
 import { _prepDerivedTradecrafts } from "./_prep-derived-tradecrafts.mjs";
+import { _prepDerivedTransformation } from "./_prep-derived-transformation.mjs";
 
 /**
  * Prepares all derived system data from other data.
@@ -28,4 +29,5 @@ export function _prepareDerivedData(actorData) {
   _prepDerivedMoney(actorData);
   _prepDerivedSpeed(actorData);
   _prepDerivedTrackers(actorData);
+  _prepDerivedTransformation(actorData);
 }

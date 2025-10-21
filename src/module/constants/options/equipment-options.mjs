@@ -1,3 +1,4 @@
+import { colors } from "../display/_module.mjs";
 import * as index from "../index/_module.mjs";
 
 export const equipmentOptions = {
@@ -5,22 +6,22 @@ export const equipmentOptions = {
     mundane: {
       name: "Mundane",
       icon: "wand",
-      color: "#986a44",
+      color: colors.brown,
     },
     enchanted: {
       name: "Enchanted",
       icon: "wand-sparkles",
-      color: "#3584e4",
+      color: colors.blue,
     },
     magic: {
       name: "Magic",
       icon: "sparkles",
-      color: "#9141ac",
+      color: colors.purple,
     },
     unknown: {
       name: "Unknown",
       icon: "question",
-      color: "#77767b",
+      color: colors.grey,
     },
   },
   powerLevelShort: {

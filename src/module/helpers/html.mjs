@@ -1,3 +1,4 @@
+import { selectCommonAnimalDialog } from "../applications/dialogs/select-dialog.mjs";
 import { TeriockTextEditor } from "../applications/ux/_module.mjs";
 import { documentOptions } from "../constants/options/document-options.mjs";
 import { getIcon } from "./path.mjs";
@@ -401,6 +402,39 @@ export function safeParseHTML(htmlString) {
 }
 
 /**
+ * Unpack the consequence of the apply effect button.
+ * @param {AbilityRollConfig} rollConfig
+ * @param {object} [options]
+ * @param {"normal"|"crit"} [options.useType]
+ * @returns {TeriockConsequence | null}
+ */
+export function unpackEffectButton(rollConfig, options = {}) {
+  const { useType = "normal" } = options;
+  const button = rollConfig.chatData.system.buttons.find((b) => b.dataset);
+  if (button) {
+    return JSON.parse(button.dataset[useType]);
+  }
+  return null;
+}
+
+/**
+ * Pack the consequence of the apply effect button.
+ * @param {AbilityRollConfig} rollConfig
+ * @param {TeriockConsequence} consequence
+ * @param {object} [options]
+ * @param {string[]} [options.useTypes]
+ */
+export function packEffectButton(rollConfig, consequence, options = {}) {
+  const { useTypes = ["normal", "crit"] } = options;
+  const button = rollConfig.chatData.system.buttons.find((b) => b.dataset);
+  if (button) {
+    for (const useType of useTypes) {
+      button.dataset[useType] = JSON.stringify(consequence);
+    }
+  }
+}
+
+/**
  * Add trackers to the roll config.
  * @param {AbilityRollConfig} rollConfig
  * @param {string} tracker
@@ -448,6 +482,38 @@ export async function addTrackersToRollConfig(rollConfig, tracker, uuids) {
         effectObject.system.associations.push(association);
         button.dataset[useType] = JSON.stringify(effectObject);
       }
+    }
+  }
+}
+
+/**
+ * Add common animal transformation to the roll config.
+ * @param {AbilityRollConfig} rollConfig
+ * @param {number} multiplier
+ * @returns {Promise<void>}
+ */
+export async function addCommonAnimalToRollConfig(rollConfig, multiplier) {
+  let maxBr = multiplier;
+  if (rollConfig.useData.proficient) {
+    maxBr = multiplier * rollConfig.useData.actor.system.scaling.p;
+  }
+  if (rollConfig.useData.fluent) {
+    maxBr = multiplier * rollConfig.useData.actor.system.scaling.f;
+  }
+  if (rollConfig.useData.modifiers.heightened) {
+    maxBr += multiplier * rollConfig.useData.modifiers.heightened;
+  }
+  const species = await selectCommonAnimalDialog(maxBr);
+  if (species) {
+    const consequence = unpackEffectButton(rollConfig);
+    if (consequence) {
+      //noinspection JSValidateTypes
+      consequence.system.transformation.uuids = [species.uuid];
+      consequence.system.transformation.image = species.img.replace(
+        "icons/creatures/",
+        "icons/tokens/",
+      );
+      packEffectButton(rollConfig, consequence);
     }
   }
 }

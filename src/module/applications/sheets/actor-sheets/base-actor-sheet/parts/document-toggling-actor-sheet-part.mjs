@@ -5,6 +5,7 @@ export default (Base) =>
     static DEFAULT_OPTIONS = {
       actions: {
         deattuneDoc: this._deattuneDoc,
+        setPrimaryTransformation: this._setPrimaryTransformation,
         toggleAttunedDoc: this._toggleAttunedDoc,
         toggleDampenedDoc: this._toggleDampenedDoc,
         toggleDisabledDoc: this._toggleDisabledDoc,
@@ -14,6 +15,25 @@ export default (Base) =>
         toggleShatteredDoc: this._toggleShatteredDoc,
       },
     };
+
+    /**
+     * Sets the primary transformation.
+     * @param {MouseEvent} event - The event object.
+     * @param {HTMLElement} target - The target element.
+     * @returns {Promise<void>} Promise that resolves when primary transformation is set.
+     * @private
+     */
+    static async _setPrimaryTransformation(event, target) {
+      event.stopPropagation();
+      let transformation = this.actor.effects.get(target.dataset.id);
+      if (!transformation) {
+        transformation = this.items.get(target.dataset.id).system
+          .transformationEffect;
+      }
+      if (transformation) {
+        await transformation.system.setPrimaryTransformation();
+      }
+    }
 
     /**
      * Deattunes an attunement effect.
