@@ -13,19 +13,14 @@ effects:
         supId: null
       applies:
         base:
-          statuses:
-            - transformed
+          statuses: []
           startStatuses: []
           endStatuses: []
           rolls: {}
           hacks: []
           checks: []
           duration: 0
-          changes:
-            - key: system.transformation.img
-              mode: 5
-              value: icons/environment/wilderness/tree-ash.webp
-              priority: 40
+          changes: []
           common: []
           expiration:
             normal:
@@ -54,6 +49,11 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          transformation:
+            enabled: true
+            uuids:
+              - Compendium.teriock.species.Item.PrzXpEkEwPGaegFw
+            image: icons/environment/wilderness/tree-ash.webp
         proficient:
           statuses: []
           startStatuses: []
@@ -166,8 +166,6 @@ effects:
             changeOnCrit: false
             doesExpire: false
         macros:
-          Compendium_teriock_execution_Macro_S0lpUCEi8F1xp6h4: effectApplication
-          Compendium_teriock_execution_Macro_j5Jp2JxJu7C9TUIL: effectExpiration
           Compendium_teriock_execution_Macro_h08D6cBKJ37Rz8UD: takeDamage
       wikiNamespace: Ability
       elderSorcery: false
@@ -203,7 +201,11 @@ effects:
         hit: >-
           Target is @L[Condition:Transformed]{minorly transformed} into a
           @L[Creature:Tree]{tree} or revert a @L[Condition:Transformed]{minor
-          transformation}.
+          transformation}. The @L[Core:Size]{size} of the tree is equal to the
+          target's @L[Core:Size]{SIZE} prior to being
+          @L[Condition:Transformed]{transformed}. If a treeformed creature is
+          reduced to 0 @L[Core:HP]{HP}, then they revert and any remaining
+          @L[Core:Damage]{damage} carries over to their reverted state.
         critHit: >-
           If you want, the target must spend 1 @L[Core:MP]{MP} to be able to
           @L[Ability:Self Revert]{Self Revert}.

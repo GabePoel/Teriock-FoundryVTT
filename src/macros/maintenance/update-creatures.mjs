@@ -83,23 +83,30 @@ async function processSpecies(
   const otherEquipment = creature.equipment.filter(
     (e) => !firstEquipment.map((e) => e.uuid).includes(e.uuid),
   );
-  await creature.deleteEmbeddedDocuments("Item", [
-    ...mechanicIds,
-    ...basicAbilitiesIds,
-    ...otherEquipment.map((e) => e.id),
-  ]);
+  let toDelete = Array.from(
+    new Set([
+      ...mechanicIds,
+      ...basicAbilitiesIds,
+      ...otherEquipment.map((e) => e.id),
+      ...creature.equipment
+        .filter((e) => !e.getFlag("teriock", "importedBy"))
+        .map((e) => e.id),
+      ...creature.ranks
+        .filter((r) => !r.getFlag("teriock", "importedBy"))
+        .map((r) => r.id),
+      ...creature.bodyParts
+        .filter((b) => !b.getFlag("teriock", "importedBy"))
+        .map((b) => b.id),
+    ]),
+  );
+  await creature.deleteEmbeddedDocuments("Item", toDelete);
   await creature.system.hardRefreshFromIndex();
-  await creature.update({
-    folder: creatureFolder.id,
-    "system.hp.value": creature.system.hp.max,
-    "system.mp.value": creature.system.mp.max,
-    "system.wither.value": 20,
-  });
   await creature.updateEmbeddedDocuments("Item", [
     ...creature.equipment.map((e) => {
       return {
         _id: e.id,
         "system.description": "",
+        "system.equipped": true,
       };
     }),
     ...creature.bodyParts.map((b) => {
@@ -115,6 +122,30 @@ async function processSpecies(
       };
     }),
   ]);
+  let maxDamage = 0;
+  let maxDamageArmament;
+  let maxBv = 0;
+  let maxBvArmament;
+  for (const a of creature.activeArmaments) {
+    const damage = game.teriock.Roll.meanValue(a.system.damage.base.value, {});
+    const bv = a.system.bv.value;
+    if (damage >= maxDamage) {
+      maxDamageArmament = a;
+      maxDamage = damage;
+    }
+    if (bv >= maxBv) {
+      maxBvArmament = a;
+      maxBv = bv;
+    }
+  }
+  await creature.update({
+    folder: creatureFolder.id,
+    "system.hp.value": creature.system.hp.max,
+    "system.mp.value": creature.system.mp.max,
+    "system.wither.value": 20,
+    "system.wielding.attacker": maxDamageArmament?.id,
+    "system.wielding.blocker": maxBvArmament?.id,
+  });
 }
 
 const batchSize = 10;

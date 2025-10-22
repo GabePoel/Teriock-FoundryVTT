@@ -19,7 +19,7 @@ export default class TeriockRoll extends Roll {
    * @returns {number}
    */
   static maxValue(formula, data = {}) {
-    const maxRoll = new TeriockRoll(formula, data);
+    const maxRoll = new TeriockRoll(formula + " + 0", data);
     return maxRoll.evaluateSync({ maximize: true }).total;
   }
 
@@ -42,7 +42,7 @@ export default class TeriockRoll extends Roll {
    * @returns {number}
    */
   static minValue(formula, data = {}) {
-    const minRoll = new TeriockRoll(formula, data);
+    const minRoll = new TeriockRoll(formula + " + 0", data);
     return minRoll.evaluateSync({ minimize: true }).total;
   }
 

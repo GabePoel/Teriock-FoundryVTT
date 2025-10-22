@@ -26,13 +26,12 @@ system:
       archetypes: {}
       classes: {}
       general: 0
-    bodyParts:
+    items:
       - Compendium.teriock.bodyParts.Item.VVrRvIh7oNQ1BqBR
       - Compendium.teriock.bodyParts.Item.OrCvr9S4DvEEvC4P
       - Compendium.teriock.bodyParts.Item.XGoAHfPERlTuLn0V
       - Compendium.teriock.bodyParts.Item.7iDhwsYXcb2HAZ3f
       - Compendium.teriock.bodyParts.Item.bQroN1tmIy4QaNop
-    equipment: []
   innateRanks: ''
   lifespan: null
   size:
@@ -2891,19 +2890,14 @@ effects:
         supId: null
       applies:
         base:
-          statuses:
-            - transformed
+          statuses: []
           startStatuses: []
           endStatuses: []
           rolls: {}
           hacks: []
           checks: []
           duration: 0
-          changes:
-            - key: system.transformation.img
-              mode: 5
-              value: icons/environment/wilderness/tree-ash.webp
-              priority: 40
+          changes: []
           common: []
           expiration:
             normal:
@@ -2932,6 +2926,11 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          transformation:
+            enabled: true
+            image: icons/environment/wilderness/tree-ash.webp
+            uuids:
+              - Compendium.teriock.species.Item.PrzXpEkEwPGaegFw
         proficient:
           statuses: []
           startStatuses: []
@@ -3134,7 +3133,11 @@ effects:
         hit: >-
           Target is @L[Condition:Transformed]{minorly transformed} into a
           @L[Creature:Tree]{tree} or revert a @L[Condition:Transformed]{minor
-          transformation}.
+          transformation}. The @L[Core:Size]{size} of the tree is equal to the
+          target's @L[Core:Size]{SIZE} prior to being
+          @L[Condition:Transformed]{transformed}. If a treeformed creature is
+          reduced to 0 @L[Core:HP]{HP}, then they revert and any remaining
+          @L[Core:Damage]{damage} carries over to their reverted state.
         critHit: >-
           If you want, the target must spend 1 @L[Core:MP]{MP} to be able to
           @L[Ability:Self Revert]{Self Revert}.

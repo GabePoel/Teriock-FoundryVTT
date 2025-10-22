@@ -205,20 +205,24 @@ export default (Base) => {
        * @returns {Promise<void>}
        */
       async importDeterministic() {
-        let toCreate = [];
-        toCreate.push(...(await this._fetchDeterministicItemData()));
-        toCreate.push(...(await this._fetchDeterministicRankData()));
-        const existing = this.actor.items
-          .filter((i) => i.getFlag("teriock", "importedBy") === this.parent.id)
-          .map((i) => i.getFlag("teriock", "importReference"));
-        toCreate = toCreate.filter(
-          (i) => !existing.includes(i.flags.teriock.importReference),
-        );
-        const created = await this.actor.createEmbeddedDocuments(
-          "Item",
-          toCreate,
-        );
-        await this.parent.addSubs(created);
+        if (this.actor) {
+          let toCreate = [];
+          toCreate.push(...(await this._fetchDeterministicItemData()));
+          toCreate.push(...(await this._fetchDeterministicRankData()));
+          const existing = this.actor.items
+            .filter(
+              (i) => i.getFlag("teriock", "importedBy") === this.parent.id,
+            )
+            .map((i) => i.getFlag("teriock", "importReference"));
+          toCreate = toCreate.filter(
+            (i) => !existing.includes(i.flags.teriock.importReference),
+          );
+          const created = await this.actor.createEmbeddedDocuments(
+            "Item",
+            toCreate,
+          );
+          await this.parent.addSubs(created);
+        }
       }
 
       /**
@@ -236,12 +240,14 @@ export default (Base) => {
        * @returns {Promise<void>}
        */
       async deleteImported() {
-        await this.actor.deleteEmbeddedDocuments(
-          "Item",
-          this.imported
-            .filter((i) => i.documentName === "Item")
-            .map((i) => i.id),
-        );
+        if (this.actor) {
+          await this.actor.deleteEmbeddedDocuments(
+            "Item",
+            this.imported
+              .filter((i) => i.documentName === "Item")
+              .map((i) => i.id),
+          );
+        }
       }
     }
   );

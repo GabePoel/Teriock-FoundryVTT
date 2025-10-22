@@ -50,13 +50,14 @@ export default class TeriockCharacterModel extends TeriockBaseActorModel {
     const bodyPartNames = new Set();
     const equipmentNames = new Set();
     for (const s of this.parent.species) {
+      const items = /** @type {TeriockItem[]} */ await Promise.all(
+        s.system.imports.items.map((i) => fromUuid(i)),
+      );
       await s.system.importDeterministic();
-      for (const uuid of s.system.imports.bodyParts) {
-        const b = await fromUuid(uuid);
+      for (const b of items.filter((i) => i.type === "body")) {
         bodyPartNames.add(b.name);
       }
-      for (const uuid of s.system.imports.equipment) {
-        const e = await fromUuid(uuid);
+      for (const e of items.filter((i) => i.type === "equipment")) {
         equipmentNames.add(e.name);
       }
     }

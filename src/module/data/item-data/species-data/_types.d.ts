@@ -1,7 +1,7 @@
 import type TeriockBaseItemModel from "../base-item-data/base-item-data.mjs";
-import type { TeriockSpecies } from "../../../documents/_documents.mjs";
-import type { ImportsModel } from "../../models/_module.mjs";
+import type { ImporterDataMixinInterface } from "../../mixins/importer-data-mixin/_types";
 import type { StatGiverMixinInterface } from "../../mixins/stat-giver-data-mixin/_types";
+import type { TeriockSpecies } from "../../../documents/_documents.mjs";
 
 export type SizeAbilityStep = {
   gain: Set<string>;
@@ -19,8 +19,6 @@ export interface TeriockSpeciesData {
   br: number;
   /** <schema> HP increase */
   hpIncrease: string;
-  /** <schema> Imports */
-  imports: ImportsModel;
   /** <schema> Innate ranks */
   innateRanks: string;
   /** <schema> Maximum lifespan */
@@ -52,6 +50,7 @@ declare module "./species-data.mjs" {
   export default interface TeriockSpeciesModel
     extends TeriockBaseItemModel,
       StatGiverMixinInterface,
+      ImporterDataMixinInterface,
       TeriockSpeciesData {
     get parent(): TeriockSpecies;
   }

@@ -214,7 +214,7 @@ export default (Base) => {
         if (
           this.metadata.hierarchy &&
           this.system.hierarchy.subIds.size > 0 &&
-          this.actor
+          this.parent
         ) {
           const root = this.parent;
           return this.system.hierarchy.subIds.filter((id) =>
@@ -261,10 +261,7 @@ export default (Base) => {
           this.metadata.hierarchy &&
           this.system.hierarchy.supId &&
           this.parent &&
-          this.parent[this.metadata.collection].has(
-            this.system.hierarchy.supId,
-          ) &&
-          this.actor
+          this.parent[this.metadata.collection].has(this.system.hierarchy.supId)
         ) {
           return this.system.hierarchy.supId;
         }

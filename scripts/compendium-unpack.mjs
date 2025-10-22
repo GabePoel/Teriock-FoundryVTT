@@ -113,6 +113,10 @@ function cleanEntry(doc) {
     delete doc.system.mpDiceBase;
     delete doc.system.applyHp;
     delete doc.system.applyMp;
+    if (doc.system.imports) {
+      delete doc.system.imports.bodyParts;
+      delete doc.system.imports.equipment;
+    }
     if (doc.type === "creature") {
       delete doc.system.attributes;
       delete doc.system.abilityFlags;

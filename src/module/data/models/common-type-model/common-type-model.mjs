@@ -84,7 +84,9 @@ export default class CommonTypeModel extends TypeDataModel {
         "disabled",
         "duration",
         "effects",
+        "flags",
         "folder",
+        "hierarchy",
         "items",
         "origin",
         "sort",
@@ -236,6 +238,8 @@ export default class CommonTypeModel extends TypeDataModel {
   async refreshFromIndex() {
     const indexObject = await this.getIndexObject();
     if (Object.keys(indexObject).length > 0) {
+      delete indexObject.flags;
+      delete indexObject.system.hierarchy;
       await this.parent.update(indexObject);
     }
     const reference = await this.getIndexReference();
