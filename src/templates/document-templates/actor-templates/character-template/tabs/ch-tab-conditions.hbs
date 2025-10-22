@@ -12,5 +12,28 @@
       <div class="tcard-display-divider"></div>
       {{> 'systems/teriock/src/templates/document-templates/actor-templates/character-template/results/ch-condition-results.hbs'}}
     </div>
+    <div class="tcard-display">
+      <div class="tgrid g4 condition-toggle-container">
+        {{#each TERIOCK.data.conditions as |condition key|}}
+          {{#if (not (eq key "conscious"))}}
+            <div class="condition-toggle {{#if (not (includes ../removableConditions key))}}inactive{{/if}}"
+                 data-action="toggleCondition"
+                 data-condition="{{{key}}}"
+                 data-tooltip="Toggle {{condition.name}} {{#if (includes ../removableConditions key)
+                 }}Off{{else}}On{{/if}}"
+            >
+              <div class="condition-image-container">
+                <div class="condition-image">
+                  <img src={{getIconKey "conditions" key}} alt="{{condition.name}}">
+                </div>
+              </div>
+              <div class="condition-label tsubtle">
+                {{condition.name}}
+              </div>
+            </div>
+          {{/if}}
+        {{/each}}
+      </div>
+    </div>
   </div>
 </div>

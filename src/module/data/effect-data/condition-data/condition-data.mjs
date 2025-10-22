@@ -1,4 +1,5 @@
 import { inCombatExpirationDialog } from "../../../applications/dialogs/_module.mjs";
+import { toCamelCase } from "../../../helpers/string.mjs";
 import { makeIcon, mergeFreeze } from "../../../helpers/utils.mjs";
 import { WikiDataMixin } from "../../mixins/_module.mjs";
 import { combatExpirationMethodField } from "../../shared/fields/helpers/field-builders.mjs";
@@ -67,6 +68,24 @@ export default class TeriockConditionModel extends WikiDataMixin(
     ];
   }
 
+  /**
+   * A key corresponding to this condition.
+   * @returns {string}
+   */
+  get conditionKey() {
+    if (
+      Object.values(TERIOCK.data.conditions)
+        .map((c) => c._id)
+        .includes(this.parent.id)
+    ) {
+      return Object.values(TERIOCK.data.conditions).find(
+        (c) => c._id === this.parent.id,
+      ).id;
+    } else {
+      return toCamelCase(this.parent.name);
+    }
+  }
+
   /** @inheritDoc */
   get messageParts() {
     return {
@@ -88,6 +107,17 @@ export default class TeriockConditionModel extends WikiDataMixin(
   /** @inheritDoc */
   get useText() {
     return `Roll to Remove ${this.parent.name}`;
+  }
+
+  async expire() {
+    if (
+      Object.values(TERIOCK.index.conditions).includes(this.conditionKey) &&
+      this.actor
+    ) {
+      await this.actor.system.removeCondition(this.conditionKey);
+    } else {
+      await super.expire();
+    }
   }
 
   /**

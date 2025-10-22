@@ -256,6 +256,9 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
+  margin: 8px var(--panel-padding) var(--panel-padding);
+  opacity: 1;
+  overflow: hidden;
 }
 .teriock-panel-body > * {
   position: relative;
@@ -267,11 +270,6 @@
   left: 0;
   right: 0;
   border-top: 1px var(--panel-divider-style) var(--color-panel-divider);
-}
-.teriock-panel-body {
-  margin: 8px var(--panel-padding) var(--panel-padding);
-  opacity: 1;
-  overflow: hidden;
 }
 
 .teriock-panel {
@@ -639,6 +637,13 @@ img.rescale {
   width: 28px;
   position: relative;
   overflow: hidden;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.6);
+  border: 1px solid color-mix(in srgb, var(--color-dark-5), transparent 25%);
+  border-radius: 100%;
+  outline: 1px solid var(--color-light-6);
+  overflow: hidden;
+  object-fit: cover;
+  object-position: 50% 0;
 }
 .teriock .doc-select .doc-select-row .doc-image-container::before {
   position: absolute;
@@ -648,15 +653,6 @@ img.rescale {
   height: 100%;
   content: "";
   background: radial-gradient(circle, var(--color-cool-3), var(--color-dark-1));
-}
-.teriock .doc-select .doc-select-row .doc-image-container {
-  box-shadow: 0 0 6px rgba(0, 0, 0, 0.6);
-  border: 1px solid color-mix(in srgb, var(--color-dark-5), transparent 25%);
-  border-radius: 100%;
-  outline: 1px solid var(--color-light-6);
-  overflow: hidden;
-  object-fit: cover;
-  object-position: 50% 0;
 }
 .teriock .doc-select .doc-select-row .doc-image-container img {
   filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.4));
@@ -1040,17 +1036,6 @@ img.rescale {
 .teriock .tcard-container .tcard .tcard-image {
   position: relative;
   overflow: hidden;
-}
-.teriock .tcard-container .tcard .tcard-image::before {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  content: "";
-  background: radial-gradient(circle, var(--color-cool-3), var(--color-dark-1));
-}
-.teriock .tcard-container .tcard .tcard-image {
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
   border: 1px solid color-mix(in srgb, var(--color-dark-5), transparent 25%);
   border-radius: 100%;
@@ -1064,6 +1049,15 @@ img.rescale {
   overflow: hidden;
   position: relative;
   width: calc(var(--tcard-height) - 12px);
+}
+.teriock .tcard-container .tcard .tcard-image::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  content: "";
+  background: radial-gradient(circle, var(--color-cool-3), var(--color-dark-1));
 }
 .teriock .tcard-container .tcard .tcard-image.usable {
   cursor: pointer;
@@ -1545,6 +1539,11 @@ img.rescale {
   width: 4em;
   position: relative;
   overflow: hidden;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+  border: 1px solid color-mix(in srgb, var(--color-dark-5), transparent 25%);
+  border-radius: 100%;
+  outline: 1px solid var(--color-light-6);
+  overflow: hidden;
 }
 .teriock .ab-header .ab-profile-img::before {
   position: absolute;
@@ -1554,13 +1553,6 @@ img.rescale {
   height: 100%;
   content: "";
   background: radial-gradient(circle, var(--color-cool-3), var(--color-dark-1));
-}
-.teriock .ab-header .ab-profile-img {
-  box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
-  border: 1px solid color-mix(in srgb, var(--color-dark-5), transparent 25%);
-  border-radius: 100%;
-  outline: 1px solid var(--color-light-6);
-  overflow: hidden;
 }
 .teriock .ab-header .ab-profile-img img {
   filter: drop-shadow(0 0 3px color-mix(in srgb, var(--color-cool-4), transparent 60%));
@@ -3317,6 +3309,122 @@ img.rescale {
 }
 .teriock .death-bag-pull .death-bag-stones .death-bag-stone {
   filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.4));
+}
+.teriock .carrying-display {
+  padding-inline: 6px;
+  padding-top: 6px;
+  width: 100%;
+}
+.teriock .carrying-bar {
+  width: 100%;
+}
+.teriock .carrying-grid {
+  border: 1px solid transparent;
+  border-right-color: var(--color-form-hint);
+  border-right-width: 0;
+  border-top-width: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  overflow: hidden;
+  width: 100%;
+}
+.teriock .carrying-grid.carrying-progress {
+  border-color: var(--color-form-hint);
+  border-radius: 6px 6px 0 6px;
+  border-top-width: 1px;
+}
+.teriock .carrying-grid.carrying-labels {
+  border-top-width: 0;
+}
+.teriock .carrying-cell {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  height: 24px;
+  justify-content: right;
+  position: relative;
+}
+.teriock .carrying-cell:after {
+  border-bottom: 1px solid var(--color-form-hint);
+  border-bottom-right-radius: 6px;
+  border-right: 1px solid var(--color-form-hint);
+  content: "";
+  display: block;
+  height: 50%;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 10px;
+}
+.teriock .carrying-progress .carrying-cell:after {
+  border-bottom: 0;
+  border-bottom-right-radius: 0;
+  height: 100%;
+}
+.teriock .carrying-label {
+  padding-right: 12px;
+}
+.teriock .condition-toggle-container {
+  gap: 6px;
+}
+.teriock .condition-toggle {
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--color-tcard-container-border);
+  border-radius: 6px;
+  box-shadow: 0 0 6px var(--color-tcard-shadow);
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  height: 32px;
+  justify-content: left;
+  overflow: hidden;
+  padding: 3px;
+  position: relative;
+  width: 100%;
+}
+.teriock .condition-toggle.inactive {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+.teriock .condition-toggle.inactive * {
+  opacity: 50%;
+}
+.teriock .condition-toggle:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+.teriock .condition-toggle:hover.inactive {
+  background-color: rgba(255, 255, 255, 0.075);
+}
+.teriock .condition-toggle:hover::after {
+  bottom: 0;
+  box-shadow: inset 0 0 8px var(--color-tcard-hover-inset);
+  content: "";
+  left: 0;
+  pointer-events: none;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+.teriock .condition-toggle:active {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+.teriock .condition-toggle:active.inactive {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+.teriock .condition-toggle:active::after {
+  box-shadow: inset 0 0 8px var(--color-tcard-active-inset);
+}
+.teriock .condition-image {
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+  border: 1px solid color-mix(in srgb, var(--color-dark-5), transparent 25%);
+  border-radius: 100%;
+  outline: 1px solid var(--color-light-6);
+  overflow: hidden;
+  height: 24px;
+  margin-right: 6px;
+  max-height: 24px;
+  max-width: 24px;
+  width: 24px;
 }
 
 [role=tooltip] {

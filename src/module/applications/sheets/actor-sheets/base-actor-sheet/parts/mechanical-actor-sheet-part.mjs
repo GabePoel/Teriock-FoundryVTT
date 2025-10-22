@@ -3,8 +3,8 @@ export default (Base) =>
     static DEFAULT_OPTIONS = {
       actions: {
         deathBagPull: this._deathBagPull,
-        endCondition: this._endCondition,
         quickUse: this._quickUse,
+        toggleCondition: this._toggleCondition,
       },
     };
 
@@ -15,30 +15,6 @@ export default (Base) =>
      */
     static async _deathBagPull() {
       await this.actor.system.deathBagPull();
-    }
-
-    /**
-     * Ends a condition with optional advantage/disadvantage.
-     * @param {MouseEvent} event - The event object.
-     * @param {HTMLElement} target - The target element.
-     * @returns {Promise<void>} Promise that resolves when condition is ended.
-     * @static
-     */
-    static async _endCondition(event, target) {
-      event.stopPropagation();
-      let message = null;
-      if (target.classList.contains("tcard-image")) {
-        const img = target.querySelector("img");
-        if (img) {
-          message = img.alt;
-        }
-      }
-      const options = {
-        advantage: event.altKey,
-        disadvantage: event.shiftKey,
-        message: message,
-      };
-      await this.actor.endCondition(options);
     }
 
     /**
@@ -67,5 +43,18 @@ export default (Base) =>
         }
         await item.use(options);
       }
+    }
+
+    /**
+     * Toggles a condition.
+     * @param {MouseEvent} event - The event object.
+     * @param {HTMLElement} target - The target element.
+     * @returns {Promise<void>} Promise that resolves when condition is toggled.
+     * @static
+     */
+    static async _toggleCondition(event, target) {
+      event.stopPropagation();
+      const conditionKey = target.dataset.condition;
+      await this.document.toggleStatusEffect(conditionKey);
     }
   };

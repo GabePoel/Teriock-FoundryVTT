@@ -1,8 +1,6 @@
-import { TeriockRoll } from "../dice/_module.mjs";
 import { copyItem, getItem } from "../helpers/fetch.mjs";
 import { toCamelCase } from "../helpers/string.mjs";
 import { pureUuid, selectUser } from "../helpers/utils.mjs";
-import TeriockChatMessage from "./chat-message.mjs";
 import { CommonDocumentMixin, ParentDocumentMixin } from "./mixins/_module.mjs";
 
 const { Actor } = foundry.documents;
@@ -428,43 +426,6 @@ export default class TeriockActor extends ParentDocumentMixin(
       }
     }
     return await super.deleteEmbeddedDocuments(embeddedName, ids, operation);
-  }
-
-  /**
-   * Ends a condition with an optional roll.
-   * @todo Convert to using `ConditionRollOptions` type.
-   * @param {Teriock.RollOptions.CommonRoll} options - Options for ending the condition.
-   * @returns {Promise<void>}
-   */
-  async endCondition(options = {}) {
-    let message = null;
-    if (options.message) {
-      message = options.message;
-    }
-    let rollFormula = "2d4";
-    if (options.advantage) {
-      rollFormula = "3d4";
-    } else if (options.disadvantage) {
-      rollFormula = "1d4";
-    }
-    rollFormula += "kh1";
-    const rollData = this.getRollData();
-    const roll = new TeriockRoll(rollFormula, rollData, {
-      context: {
-        diceClass: "condition",
-        threshold: 4,
-      },
-      message: message,
-    });
-    await roll.toMessage(
-      {
-        flavor: "Condition Ending Roll",
-        speaker: TeriockChatMessage.getSpeaker({ actor: this }),
-      },
-      {
-        rollMode: game.settings.get("core", "rollMode"),
-      },
-    );
   }
 
   /** @inheritDoc */
