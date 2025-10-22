@@ -50,7 +50,9 @@ export function combatExpirationSourceTypeField() {
 export function transformationField(expanded = false) {
   const schema = {
     enabled: new fields.BooleanField({
-      hint: "Whether this ability causes a transformation.",
+      hint:
+        'Whether this ability causes a transformation. Note that this isn\'t just for "transformation effect",' +
+        " but for any case in which another species' stats should be applied (such as animating as an undead).",
       initial: false,
       label: "Causes Transformation",
       nullable: false,

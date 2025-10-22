@@ -341,19 +341,14 @@ effects:
         supId: null
       applies:
         base:
-          statuses:
-            - transformed
+          statuses: []
           startStatuses: []
           endStatuses: []
           rolls: {}
           hacks: []
           checks: []
           duration: 0
-          changes:
-            - key: system.transformation.img
-              mode: 5
-              value: icons/environment/wilderness/tree-ash.webp
-              priority: 40
+          changes: []
           common: []
           expiration:
             normal:
@@ -531,7 +526,11 @@ effects:
         hit: >-
           Target is @L[Condition:Transformed]{minorly transformed} into a
           @L[Creature:Tree]{tree} or revert a @L[Condition:Transformed]{minor
-          transformation}.
+          transformation}. The @L[Core:Size]{size} of the tree is equal to the
+          target's @L[Core:Size]{SIZE} prior to being
+          @L[Condition:Transformed]{transformed}. If a treeformed creature is
+          reduced to 0 @L[Core:HP]{HP}, then they revert and any remaining
+          @L[Core:Damage]{damage} carries over to their reverted state.
         critHit: >-
           If you want, the target must spend 1 @L[Core:MP]{MP} to be able to
           @L[Ability:Self Revert]{Self Revert}.

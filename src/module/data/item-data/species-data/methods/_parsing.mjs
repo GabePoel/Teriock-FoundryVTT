@@ -135,7 +135,7 @@ export async function _parse(speciesData, rawHTML) {
     }
   }
   if (tagTree["traits"]) {
-    parameters.traits = tagTree["traits"];
+    parameters.traits = tagTree["traits"].map((t) => toCamelCase(t));
   }
   parameters.traits = parameters.traits.filter((t) =>
     Object.keys(TERIOCK.index.traits).includes(t),
