@@ -276,7 +276,7 @@ export async function selectCommonAnimalDialog(maxBr = null) {
 export async function selectEquipmentTypeDialog() {
   let choices;
   let tooltipAsync = true;
-  if (game.settings.get("teriock", "quickIndexEquipment")) {
+  if (game.settings.get("teriock", "quickIndexArmaments")) {
     const equipmentPack = game.teriock.packs.equipment();
     choices = equipmentPack.index.contents;
   } else {
@@ -296,6 +296,38 @@ export async function selectEquipmentTypeDialog() {
   if (chosen) {
     chosen = await foundry.utils.fromUuid(chosen.uuid);
     return toCamelCase(chosen.system.equipmentType);
+  } else {
+    return null;
+  }
+}
+
+/**
+ * Select body part dialog.
+ * @returns {Promise<string|null>}
+ */
+export async function selectBodyPartDialog() {
+  let choices;
+  let tooltipAsync = true;
+  if (game.settings.get("teriock", "quickIndexArmaments")) {
+    const bodyPartsPack = game.teriock.packs.bodyParts();
+    choices = bodyPartsPack.index.contents;
+  } else {
+    choices = await Promise.all(
+      Object.values(TERIOCK.index.equipment).map((name) =>
+        getItem(name, "bodyParts"),
+      ),
+    );
+    tooltipAsync = false;
+  }
+  let chosen = await selectDocumentDialog(choices, {
+    hint: "Please select a body part.",
+    title: "Select Body Part",
+    tooltipAsync: tooltipAsync,
+    openable: true,
+  });
+  if (chosen) {
+    chosen = await foundry.utils.fromUuid(chosen.uuid);
+    return toCamelCase(chosen.name);
   } else {
     return null;
   }

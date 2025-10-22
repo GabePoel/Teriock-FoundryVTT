@@ -8,7 +8,7 @@ import type {
   CombatExpirationSourceType,
   CombatExpirationTiming,
   TransformationField,
-} from "../shared/shared-fields";
+} from "../../shared/fields/helpers/_types";
 import type {
   TeriockActor,
   TeriockEffect,

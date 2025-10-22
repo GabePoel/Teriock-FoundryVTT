@@ -118,11 +118,14 @@ export default class TeriockBaseItemSheet extends ChatButtonSheetMixin(
     this.item.buildEffectTypes();
     const context = await super._prepareContext(options);
     context.item = this.item;
-    context.properties = propertySort(this.document.properties);
     context.abilities = abilitySort(this.document.abilities);
-    context.fluencies = docSort(this.document.fluencies);
-    context.resources = docSort(this.document.resources);
     context.baseEffects = this.document.effectTypes?.base || [];
+    context.bodyParts = docSort(this.document.getBodyParts());
+    context.equipment = docSort(this.document.getEquipment());
+    context.fluencies = docSort(this.document.fluencies);
+    context.properties = propertySort(this.document.properties);
+    context.ranks = docSort(this.document.getRanks());
+    context.resources = docSort(this.document.resources);
     return context;
   }
 }

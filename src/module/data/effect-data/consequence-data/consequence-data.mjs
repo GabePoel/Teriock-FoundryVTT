@@ -1,14 +1,9 @@
 import { inCombatExpirationDialog } from "../../../applications/dialogs/_module.mjs";
 import { getRollIcon, makeIcon, mergeFreeze } from "../../../helpers/utils.mjs";
 import { HierarchyDataMixin } from "../../mixins/_module.mjs";
+import { fieldBuilders } from "../../shared/fields/helpers/_module.mjs";
 import { migrateHierarchy } from "../../shared/migrations/migrate-hierarchy.mjs";
 import TeriockBaseEffectModel from "../base-effect-data/base-effect-data.mjs";
-import * as sharedFields from "../shared/shared-fields.mjs";
-import {
-  associationsField,
-  blocksField,
-  transformationField,
-} from "../shared/shared-fields.mjs";
 import { _messageParts } from "./methods/_messages.mjs";
 
 const { fields } = foundry.data;
@@ -33,8 +28,8 @@ export default class TeriockConsequenceModel extends HierarchyDataMixin(
   /** @inheritDoc */
   static defineSchema() {
     return foundry.utils.mergeObject(super.defineSchema(), {
-      associations: associationsField(),
-      blocks: blocksField(),
+      associations: fieldBuilders.associationsField(),
+      blocks: fieldBuilders.blocksField(),
       critical: new fields.BooleanField({ initial: false }),
       source: new fields.StringField({
         initial: "",
@@ -82,7 +77,7 @@ export default class TeriockConsequenceModel extends HierarchyDataMixin(
         }),
         combat: new fields.SchemaField({
           who: new fields.SchemaField({
-            type: sharedFields.combatExpirationSourceTypeField(),
+            type: fieldBuilders.combatExpirationSourceTypeField(),
             source: new fields.DocumentUUIDField({
               type: "Actor",
               nullable: true,
@@ -90,13 +85,13 @@ export default class TeriockConsequenceModel extends HierarchyDataMixin(
               hint: "UUID of actor whose turn or other information is used to trigger an expiration?",
             }),
           }),
-          what: sharedFields.combatExpirationMethodField(),
-          when: sharedFields.combatExpirationTimingField(),
+          what: fieldBuilders.combatExpirationMethodField(),
+          when: fieldBuilders.combatExpirationTimingField(),
         }),
       }),
       sourceDescription: new fields.HTMLField(),
       heightened: new fields.NumberField(),
-      transformation: transformationField(true),
+      transformation: fieldBuilders.transformationField(true),
     });
   }
 
@@ -273,7 +268,7 @@ export default class TeriockConsequenceModel extends HierarchyDataMixin(
             speciesData,
           );
         for (const species of created) {
-          await species.system.imports.importDeterministic();
+          await species.system.importDeterministic();
         }
         this.parent.updateSource({
           "system.transformation.species": created.map((s) => s.id),

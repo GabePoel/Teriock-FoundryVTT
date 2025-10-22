@@ -104,6 +104,20 @@ export default class TeriockEquipmentModel extends EquipmentUnderstandingPart(
     return TERIOCK.options.equipment.powerLevel[this.powerLevel].color;
   }
 
+  /** @inheritDoc */
+  get suppressed() {
+    let suppressed = super.suppressed || !this.isEquipped;
+    if (this.actor && this.actor.system.isTransformed) {
+      if (
+        this.parent.source.documentName === "Actor" &&
+        this.actor.system.transformation.suppression.equipment
+      ) {
+        suppressed = true;
+      }
+    }
+    return suppressed;
+  }
+
   /**
    * If this has a two-handed damage attack.
    * @returns {boolean}

@@ -45,7 +45,14 @@ export function _messageParts(speciesData) {
     {
       icon: "fa-flag",
       label: "Traits",
-      wrappers: [...speciesData.traits.map((t) => TERIOCK.index.traits[t])],
+      wrappers: [
+        ...speciesData.traits.map((t) => TERIOCK.index.traits[t]),
+        speciesData.isTransformation
+          ? TERIOCK.options.effect.transformationLevel[
+              speciesData.transformationLevel
+            ]
+          : "",
+      ],
     },
   ];
   const blocks = [

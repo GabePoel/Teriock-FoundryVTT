@@ -65,6 +65,14 @@ export default class TeriockFluencyModel extends WikiDataMixin(
     if (!suppressed && this.parent.parent?.type === "equipment") {
       suppressed = !this.parent.parent.system.isAttuned;
     }
+    if (this.actor && this.actor.system.isTransformed) {
+      if (
+        this.parent.source.documentName === "Actor" &&
+        this.actor.system.transformation.suppression.ranks
+      ) {
+        suppressed = true;
+      }
+    }
     return suppressed;
   }
 

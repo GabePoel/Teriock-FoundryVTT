@@ -1,3 +1,5 @@
+import { arrayTypeValidator, typeValidator } from "./field-validators.mjs";
+
 const { fields } = foundry.data;
 
 /**
@@ -106,13 +108,16 @@ export function transformationField(expanded = false) {
         hint: "A specific species this transforms the target into.",
         nullable: false,
         type: "Item",
+        validate: (uuid) => typeValidator(uuid, ["species"]),
       }),
       {
-        hint: "The species this transforms thr target into.",
+        hint: "The species this transforms the target into.",
         initial: [],
         label: "Species",
         nullable: false,
         required: false,
+        validate: (uuids) => arrayTypeValidator(uuids, ["species"]),
+        validationError: "Only species can be transformed into.",
       },
     ),
     resetHp: new fields.BooleanField({

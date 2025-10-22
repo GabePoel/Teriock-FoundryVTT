@@ -1,4 +1,5 @@
 import { TeriockImagePreviewer } from "../../../applications/api/_module.mjs";
+import { quickAddAssociation } from "../../../helpers/html.mjs";
 import {
   abilitySort,
   freeze,
@@ -25,17 +26,18 @@ export default class ChildTypeModel extends CommonTypeModel {
    * @type {Readonly<Teriock.Documents.ChildModelMetadata>}
    */
   static metadata = freeze({
-    usable: false,
-    consumable: false,
-    wiki: false,
-    namespace: "",
-    pageNameKey: "name",
-    type: "base",
     childEffectTypes: [],
     childItemTypes: [],
     childMacroTypes: [],
+    consumable: false,
+    hierarchy: false,
+    namespace: "",
+    pageNameKey: "name",
     passive: false,
     preservedProperties: [],
+    type: "base",
+    usable: false,
+    wiki: false,
   });
 
   /**
@@ -120,6 +122,13 @@ export default class ChildTypeModel extends CommonTypeModel {
         group: "open",
       },
       {
+        name: "Open Source",
+        icon: makeIcon("arrow-up-right-from-square", "contextMenu"),
+        callback: async () => await this.parent.source.sheet.render(true),
+        condition: this.parent.source.documentName !== "Actor",
+        group: "open",
+      },
+      {
         name: "Share Image",
         icon: makeIcon("comment-image", "contextMenu"),
         callback: this.parent.chatImage.bind(this.parent),
@@ -191,41 +200,19 @@ export default class ChildTypeModel extends CommonTypeModel {
       name: this.parent.nameString,
     };
     const properties = propertySort(this.parent.getProperties());
-    if (properties.length > 0) {
-      parts.associations.push({
-        title: "Properties",
-        icon: TERIOCK.options.document.property.icon,
-        cards: properties.map((p) => {
-          return {
-            color: p.system.color,
-            id: p.id,
-            img: p.img,
-            name: p.system.nameString,
-            rescale: false,
-            type: p.documentName,
-            uuid: p.uuid,
-          };
-        }),
-      });
-    }
     const abilities = abilitySort(this.parent.getAbilities());
-    if (abilities.length > 0) {
-      parts.associations.push({
-        title: "Abilities",
-        icon: TERIOCK.options.document.ability.icon,
-        cards: abilities.map((a) => {
-          return {
-            color: a.system.color,
-            id: a.id,
-            img: a.img,
-            name: a.system.nameString,
-            rescale: false,
-            type: a.documentName,
-            uuid: a.uuid,
-          };
-        }),
-      });
-    }
+    quickAddAssociation(
+      properties,
+      "Properties",
+      TERIOCK.options.document.property.icon,
+      parts.associations,
+    );
+    quickAddAssociation(
+      abilities,
+      "Abilities",
+      TERIOCK.options.document.ability.icon,
+      parts.associations,
+    );
     return parts;
   }
 
@@ -235,6 +222,17 @@ export default class ChildTypeModel extends CommonTypeModel {
    */
   get parent() {
     return /** @type {TeriockChild} */ super.parent;
+  }
+
+  /**
+   * Checks if the child is suppressed.
+   * Children are suppressed if their parents are suppressed.
+   * @returns {boolean} True if the effect is suppressed, false otherwise.
+   */
+  get suppressed() {
+    return !!(
+      this.parent.source?.documentName === "Item" && !this.parent.source?.active
+    );
   }
 
   /**

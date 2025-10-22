@@ -1,61 +1,105 @@
 <div class="{{cssClass}} tsheet-page">
-  <div class="ab-sheet-everything">
-    <div class="ab-sheet-top">
-      {{> "systems/teriock/src/templates/document-templates/shared/header.hbs"}}
-      <div class="ab-bars">
-        {{> "systems/teriock/src/templates/document-templates/item-templates/species-template/bars/sp-stats-bar.hbs"}}
-        {{> "systems/teriock/src/templates/document-templates/item-templates/species-template/bars/sp-lifespan-bar.hbs"}}
-        {{> "systems/teriock/src/templates/document-templates/item-templates/species-template/bars/sp-size-bar.hbs"}}
+  {{#if (eq tab "overview")}}
+    <div class="ab-sheet-everything">
+      <div class="ab-sheet-top">
+        {{> "systems/teriock/src/templates/document-templates/shared/header.hbs"}}
+        <div class="ab-bars">
+          {{> "systems/teriock/src/templates/document-templates/item-templates/species-template/bars/sp-stats-bar.hbs"}}
+          {{> "systems/teriock/src/templates/document-templates/item-templates/species-template/bars/sp-lifespan-bar.hbs"}}
+          {{> "systems/teriock/src/templates/document-templates/item-templates/species-template/bars/sp-size-bar.hbs"}}
+        </div>
       </div>
-    </div>
-    {{> "systems/teriock/src/templates/document-templates/item-templates/species-template/parts/sp-menu.hbs"}}
-    <div class="ab-main">
-      <div class="ab-tags-all">
-        {{> "systems/teriock/src/templates/document-templates/item-templates/species-template/tags/sp-traits-tags.hbs"}}
+      {{> "systems/teriock/src/templates/document-templates/item-templates/species-template/parts/sp-menu.hbs"}}
+      <div class="ab-main">
+        <div class="ab-tags-all">
+          {{> "systems/teriock/src/templates/document-templates/item-templates/species-template/tags/sp-traits-tags.hbs"}}
+        </div>
+        {{formGroup
+          systemFields.hpIncrease
+          value=system.hpIncrease
+          enriched=enriched.hpIncrease
+          disabled=(not editable)
+          hidden=(not (exists system.hpIncrease))
+        }}
+        {{formGroup
+          systemFields.mpIncrease
+          value=system.mpIncrease
+          enriched=enriched.mpIncrease
+          disabled=(not editable)
+          hidden=(not (exists system.mpIncrease))
+        }}
+        {{formGroup
+          systemFields.attributeIncrease
+          value=system.attributeIncrease
+          enriched=enriched.attributeIncrease
+          disabled=(not editable)
+          hidden=(not (exists system.attributeIncrease))
+        }}
+        {{formGroup
+          systemFields.innateRanks
+          value=system.innateRanks
+          enriched=enriched.innateRanks
+          disabled=(not editable)
+          hidden=(not (exists system.innateRanks))
+        }}
+        {{formGroup
+          systemFields.appearance
+          value=system.appearance
+          enriched=enriched.appearance
+          disabled=(not editable)
+          hidden=(not (exists system.appearance))
+        }}
+        {{formGroup
+          systemFields.description
+          value=system.description
+          enriched=enriched.description
+          disabled=(not editable)
+          hidden=(not (exists system.description))
+        }}
       </div>
-      {{formGroup
-        systemFields.hpIncrease
-        value=system.hpIncrease
-        enriched=enriched.hpIncrease
-        disabled=(not editable)
-        hidden=(not (exists system.hpIncrease))
-      }}
-      {{formGroup
-        systemFields.mpIncrease
-        value=system.mpIncrease
-        enriched=enriched.mpIncrease
-        disabled=(not editable)
-        hidden=(not (exists system.mpIncrease))
-      }}
-      {{formGroup
-        systemFields.attributeIncrease
-        value=system.attributeIncrease
-        enriched=enriched.attributeIncrease
-        disabled=(not editable)
-        hidden=(not (exists system.attributeIncrease))
-      }}
-      {{formGroup
-        systemFields.innateRanks
-        value=system.innateRanks
-        enriched=enriched.innateRanks
-        disabled=(not editable)
-        hidden=(not (exists system.innateRanks))
-      }}
-      {{formGroup
-        systemFields.appearance
-        value=system.appearance
-        enriched=enriched.appearance
-        disabled=(not editable)
-        hidden=(not (exists system.appearance))
-      }}
-      {{formGroup
-        systemFields.description
-        value=system.description
-        enriched=enriched.description
-        disabled=(not editable)
-        hidden=(not (exists system.description))
-      }}
+      {{> "systems/teriock/src/templates/document-templates/shared/effects.hbs"}}
+      {{#if (and (or editable (exists bodyParts)) (exists document.actor))}}
+        <div class="ab-main">
+          {{#if editable}}
+            <button class="createBodyPart" data-action="createBodyPart">Add Body Part
+            </button>{{/if}}
+          <div class="tcard-container">
+            {{> "systems/teriock/src/templates/document-templates/shared/body-parts.hbs"}}
+            <div class="no-results">
+              <p>No results found.</p>
+            </div>
+          </div>
+        </div>
+      {{/if}}
+      {{#if (and (or editable (exists equipment)) (exists document.actor))}}
+        <div class="ab-main">
+          {{#if editable}}
+            <button class="createEquipment" data-action="createEquipment">Add Equipment
+            </button>{{/if}}
+          <div class="tcard-container">
+            {{> "systems/teriock/src/templates/document-templates/shared/equipment.hbs"}}
+            <div class="no-results">
+              <p>No results found.</p>
+            </div>
+          </div>
+        </div>
+      {{/if}}
+      {{#if (and (or editable (exists ranks)) (exists document.actor))}}
+        <div class="ab-main">
+          {{#if editable}}
+            <button class="createRank" data-action="createRank">Add Rank
+            </button>{{/if}}
+          <div class="tcard-container">
+            {{> "systems/teriock/src/templates/document-templates/shared/ranks.hbs"}}
+            <div class="no-results">
+              <p>No results found.</p>
+            </div>
+          </div>
+        </div>
+      {{/if}}
     </div>
-    {{> "systems/teriock/src/templates/document-templates/shared/effects.hbs"}}
-  </div>
+  {{/if}}
+  {{#if (eq tab "impacts")}}
+    {{> "systems/teriock/src/templates/document-templates/item-templates/species-template/parts/sp-impacts.hbs"}}
+  {{/if}}
 </div>

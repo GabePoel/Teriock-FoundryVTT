@@ -81,6 +81,20 @@ export default class TeriockBodyModel extends ArmamentDataMixin(
   }
 
   /** @inheritDoc */
+  get suppressed() {
+    let suppressed = super.suppressed;
+    if (this.actor && this.actor.system.isTransformed) {
+      if (
+        this.parent.source.documentName === "Actor" &&
+        this.actor.system.transformation.suppression.bodyParts
+      ) {
+        suppressed = true;
+      }
+    }
+    return suppressed;
+  }
+
+  /** @inheritDoc */
   async roll(options) {
     if (game.settings.get("teriock", "rollAttackOnEquipmentUse")) {
       await this.actor?.useAbility("Basic Attack", options);

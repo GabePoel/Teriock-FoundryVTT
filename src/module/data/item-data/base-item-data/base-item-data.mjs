@@ -1,4 +1,6 @@
+import { quickAddAssociation } from "../../../helpers/html.mjs";
 import { docSort, mergeFreeze } from "../../../helpers/utils.mjs";
+import { HierarchyDataMixin } from "../../mixins/_module.mjs";
 import { ChildTypeModel } from "../../models/_module.mjs";
 
 const { fields } = foundry.data;
@@ -7,7 +9,9 @@ const { fields } = foundry.data;
  * Base item data model for all Teriock items.
  * Provides common functionality for disabled state and update tracking.
  */
-export default class TeriockBaseItemModel extends ChildTypeModel {
+export default class TeriockBaseItemModel extends HierarchyDataMixin(
+  ChildTypeModel,
+) {
   /**
    * @inheritDoc
    * @type {Readonly<Teriock.Documents.ItemModelMetadata>}
@@ -45,49 +49,44 @@ export default class TeriockBaseItemModel extends ChildTypeModel {
     return /** @type {TeriockActor} */ this.parent.actor;
   }
 
-  /**
-   * Whether this item is suppressed.
-   * @returns {boolean}
-   */
-  get suppressed() {
-    return this.disabled;
-  }
-
   /** @inheritDoc */
   get messageParts() {
     const parts = super.messageParts;
     const fluencies = docSort(this.parent.fluencies);
     const resources = docSort(this.parent.resources);
-    if (fluencies.length > 0) {
-      parts.associations.push({
-        title: "Fluencies",
-        icon: TERIOCK.options.document.fluency.icon,
-        cards: fluencies.map((f) => {
-          return {
-            id: f.id,
-            img: f.img,
-            name: f.system.nameString,
-            type: f.type,
-            uuid: f.uuid,
-          };
-        }),
-      });
-    }
-    if (resources.length > 0) {
-      parts.associations.push({
-        title: "Resources",
-        icon: TERIOCK.options.document.resource.icon,
-        cards: resources.map((r) => {
-          return {
-            id: r.id,
-            img: r.img,
-            name: r.system.nameString,
-            type: r.type,
-            uuid: r.uuid,
-          };
-        }),
-      });
-    }
+    const bodyParts = docSort(this.parent.getBodyParts());
+    const equipment = docSort(this.parent.getEquipment());
+    const ranks = docSort(this.parent.getRanks());
+    quickAddAssociation(
+      fluencies,
+      "Fluencies",
+      TERIOCK.options.document.fluency.icon,
+      parts.associations,
+    );
+    quickAddAssociation(
+      resources,
+      "Resources",
+      TERIOCK.options.document.resource.icon,
+      parts.associations,
+    );
+    quickAddAssociation(
+      bodyParts,
+      "Body Parts",
+      TERIOCK.options.document.body.icon,
+      parts.associations,
+    );
+    quickAddAssociation(
+      equipment,
+      "Equipment",
+      TERIOCK.options.document.equipment.icon,
+      parts.associations,
+    );
+    quickAddAssociation(
+      ranks,
+      "Ranks",
+      TERIOCK.options.document.rank.icon,
+      parts.associations,
+    );
     return parts;
   }
 }

@@ -102,7 +102,7 @@ export function registerSettings() {
   };
   const quickIndexDefaults = {
     abilities: true,
-    equipment: true,
+    armaments: true,
     properties: true,
     species: true,
   };

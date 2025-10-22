@@ -55,40 +55,42 @@ export default (Base) => {
       static async _preCreateOperation(documents, operation, user) {
         await super._preCreateOperation(documents, operation, user);
         /** @type {TeriockChild[]} */
-        const toCreate = [];
-        for (const supChildren of documents) {
-          const newSupId = foundry.utils.randomID();
-          toCreate.push(supChildren);
-          if (supChildren?.metadata.hierarchy) {
-            supChildren.updateSource({ _id: newSupId });
-            if (supChildren.rootSubIds.size > 0) {
-              const oldSupId = supChildren.rootSubs[0].system.hierarchy.supId;
-              const subChildren = supChildren.rootAllSubs;
-              const idMap = {};
-              for (const id of subChildren.map((sub) => sub.id)) {
-                idMap[id] = foundry.utils.randomID();
+        if (operation.parent) {
+          const toCreate = [];
+          for (const supChildren of documents) {
+            const newSupId = foundry.utils.randomID();
+            toCreate.push(supChildren);
+            if (supChildren?.metadata.hierarchy) {
+              supChildren.updateSource({ _id: newSupId });
+              if (supChildren.rootSubIds.size > 0) {
+                const oldSupId = supChildren.rootSubs[0].system.hierarchy.supId;
+                const subChildren = supChildren.rootAllSubs;
+                const idMap = {};
+                for (const id of subChildren.map((sub) => sub.id)) {
+                  idMap[id] = foundry.utils.randomID();
+                }
+                idMap[oldSupId] = newSupId;
+                const newSubs = this._changeChildIds(
+                  subChildren,
+                  idMap,
+                  operation.parent.uuid,
+                );
+                supChildren.updateSource({
+                  "system.hierarchy.subIds": supChildren.rootSubIds.map(
+                    (oldId) => idMap[oldId],
+                  ),
+                });
+                toCreate.push(...newSubs);
               }
-              idMap[oldSupId] = newSupId;
-              const newSubs = this._changeChildIds(
-                subChildren,
-                idMap,
-                operation.parent.uuid,
-              );
               supChildren.updateSource({
-                "system.hierarchy.subIds": supChildren.rootSubIds.map(
-                  (oldId) => idMap[oldId],
-                ),
+                "system.hierarchy.rootUuid": operation.parent.uuid,
               });
-              toCreate.push(...newSubs);
+              operation.keepId = true;
             }
-            supChildren.updateSource({
-              "system.hierarchy.rootUuid": operation.parent.uuid,
-            });
-            operation.keepId = true;
           }
+          documents.length = 0;
+          documents.push(...toCreate);
         }
-        documents.length = 0;
-        documents.push(...toCreate);
       }
 
       //noinspection JSUnusedGlobalSymbols
@@ -106,11 +108,13 @@ export default (Base) => {
        */
       static async _preDeleteOperation(documents, operation, user) {
         await super._preDeleteOperation(documents, operation, user);
-        for (const supChild of documents) {
-          if (supChild?.metadata.hierarchy) {
-            operation.ids.push(
-              ...Array.from(supChild.allSubs.map((e) => e.id)),
-            );
+        if (operation.parent) {
+          for (const supChild of documents) {
+            if (supChild?.metadata.hierarchy) {
+              operation.ids.push(
+                ...Array.from(supChild.allSubs.map((e) => e.id)),
+              );
+            }
           }
         }
       }
@@ -207,7 +211,11 @@ export default (Base) => {
        * @returns {Set<Teriock.ID<TeriockChild>>}
        */
       get subIds() {
-        if (this.metadata.hierarchy && this.system.hierarchy.subIds.size > 0) {
+        if (
+          this.metadata.hierarchy &&
+          this.system.hierarchy.subIds.size > 0 &&
+          this.actor
+        ) {
           const root = this.parent;
           return this.system.hierarchy.subIds.filter((id) =>
             root[this.metadata.collection].has(id),
@@ -252,7 +260,11 @@ export default (Base) => {
         if (
           this.metadata.hierarchy &&
           this.system.hierarchy.supId &&
-          this.parent[this.metadata.collection].has(this.system.hierarchy.supId)
+          this.parent &&
+          this.parent[this.metadata.collection].has(
+            this.system.hierarchy.supId,
+          ) &&
+          this.actor
         ) {
           return this.system.hierarchy.supId;
         }

@@ -528,3 +528,31 @@ export async function addCommonAnimalToRollConfig(rollConfig, multiplier) {
 export async function addTrackerToRollConfig(rollConfig, tracker, uuid) {
   await addTrackersToRollConfig(rollConfig, tracker, [uuid]);
 }
+
+/**
+ * Quickly turn a {@link TeriockDocument} array into an association.
+ * @param {TeriockDocument[]} docs
+ * @param {string} title
+ * @param {string} icon
+ * @param {Array} associations
+ */
+export function quickAddAssociation(docs, title, icon, associations) {
+  if (docs.length > 0) {
+    const association = {
+      title: title,
+      icon: icon,
+      cards: docs.map((d) => {
+        return {
+          color: d.system.color,
+          id: d._id,
+          img: d.img,
+          name: d.system.nameString,
+          rescale: false,
+          type: d.documentName,
+          uuid: d.uuid,
+        };
+      }),
+    };
+    associations.push(association);
+  }
+}

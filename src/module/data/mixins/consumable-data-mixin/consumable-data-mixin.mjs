@@ -79,7 +79,11 @@ export default (Base) => {
       /** @inheritDoc */
       async use(options) {
         await super.use(options);
-        if (this.parent.isOwner) {
+        if (
+          this.parent.isOwner &&
+          this.consumable &&
+          !this.parent.inCompendium
+        ) {
           if (!this.parent.getFlag("teriock", "dontConsume")) {
             await this.useOne();
           }

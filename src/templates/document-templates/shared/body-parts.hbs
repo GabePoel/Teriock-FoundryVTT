@@ -1,0 +1,29 @@
+{{#each bodyParts as |item|}}
+  {{tcard
+    active=item.active
+    parent=item.parent._id
+    icons=(concat
+      (ticon "comment" action="chatDoc" id=item._id tooltip="Send to Chat")
+      (ticonToggle
+        "circle-check"
+        "circle"
+        (not item.disabled)
+        action="toggleDisabledDoc"
+        id=item._id
+        tooltipTrue="Enabled"
+        tooltipFalse="Disabled"
+      )
+    )
+    id=item._id
+    img=item.img
+    struck=item.disabled
+    subtitle="Body part"
+    text=(dotJoin
+      (suffix item.system.damage.base.value 'Damage')
+      (suffix item.system.bv.value 'BV')
+      (suffix item.system.av.value 'AV')
+      (ifThen (exists item.sup) item.sup.system.nameString "")
+    )
+    title=item.name
+  }}
+{{/each}}

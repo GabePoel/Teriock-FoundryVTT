@@ -2,9 +2,24 @@
   <div class="ab-tags">
     {{#each system.traits as |key index|}}<span
       class="ab-tag tsubtle trait-tag"
-      value="{{key}}"
+      data-value="{{key}}"
       data-tooltip="Remove Tag"
     >{{lookup ../TERIOCK.index.traits key}}</span>{{/each}}
+    {{#if (exists system.transformationLevel)}}
+      <span class="ab-tag tsubtle">
+        {{lookup
+          TERIOCK.options.effect.transformationLevel
+          system.transformationLevel
+        }}</span>{{/if}}
+  </div>
+  <div class="ab-icon ab-impacts-toggle">
+    <div
+      class="ab-menu-impacts-container"
+      data-tooltip="Imports"
+      data-action="toggleImpacts"
+    >
+      {{{TERIOCK.display.icons.impacts}}}
+    </div>
   </div>
   <div class="ab-icon ab-menu-toggle">
     <div class="ab-menu-closed-container" data-tooltip="Open Menu">

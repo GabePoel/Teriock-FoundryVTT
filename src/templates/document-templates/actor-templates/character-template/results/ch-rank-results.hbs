@@ -1,24 +1,7 @@
 <div id="rank-results" class="tcard-results" data-search-key="ranks">
   <div
     class="tcard-container {{#if system.sheet.display.rank.gapless}}gapless{{/if}} {{system.sheet.display.rank.size}}">
-    {{#each ranks as |item|}}
-      {{tcard
-        img=item.img
-        title=(className item.system.archetype item.system.className)
-        subtitle=(concat "Rank " item.system.classRank)
-        text=(classArchetype item.system.archetype)
-        id=item._id
-        active=(not item.disabled)
-        struck=item.system.disabled
-        tooltip="Share to Chat"
-        hidden=(rgx ../searchStrings.ranks (className item.system.archetype item.system.className))
-        marker=item.system.color
-        icons=(concat
-          (ticon "comment" action="chatDoc" id=item._id tooltip="Send to Chat")
-          (ticonToggle "circle-check" "circle" (not item.disabled) action="toggleDisabledDoc" id=item._id tooltipTrue="Enabled" tooltipFalse="Disabled")
-        )
-      }}
-    {{/each}}
+    {{> "systems/teriock/src/templates/document-templates/shared/ranks.hbs"}}
     <div class="no-results {{{system.sheet.display.rank.size}}}">
       <p>No ranks found.</p>
     </div>

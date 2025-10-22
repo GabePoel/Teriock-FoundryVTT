@@ -192,6 +192,20 @@ export default class TeriockRankModel extends StatGiverDataMixin(
   }
 
   /** @inheritDoc */
+  get suppressed() {
+    let suppressed = super.suppressed;
+    if (this.actor && this.actor.system.isTransformed) {
+      if (
+        this.parent.source.documentName === "Actor" &&
+        this.actor.system.transformation.suppression.ranks
+      ) {
+        suppressed = true;
+      }
+    }
+    return suppressed;
+  }
+
+  /** @inheritDoc */
   async parse(rawHTML) {
     return await _parse(this, rawHTML);
   }

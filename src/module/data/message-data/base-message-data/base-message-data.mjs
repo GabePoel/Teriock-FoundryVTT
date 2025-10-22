@@ -3,7 +3,7 @@ import { buildHTMLButton } from "../../../helpers/html.mjs";
 import {
   associationsField,
   blocksField,
-} from "../../effect-data/shared/shared-fields.mjs";
+} from "../../shared/fields/helpers/field-builders.mjs";
 
 const { fields } = foundry.data;
 const { TypeDataModel } = foundry.abstract;

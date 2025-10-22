@@ -6,7 +6,10 @@
         img=effect.img
         title=effect.name
         subtitle=(tradecraft effect.system.field effect.system.tradecraft)
-        text=(field effect.system.field)
+        text=(dotJoin
+          (field effect.system.field)
+          (ifThen (not (eq effect.source.documentName "Actor")) effect.source.nameString "")
+        )
         id=effect._id
         parentId=effect.parent._id
         active=(and (not effect.disabled) (not effect.isSuppressed))

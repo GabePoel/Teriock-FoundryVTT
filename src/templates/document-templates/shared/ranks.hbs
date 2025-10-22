@@ -1,0 +1,28 @@
+{{#each ranks as |item|}}
+  {{tcard
+    img=item.img
+    title=(className item.system.archetype item.system.className)
+    subtitle=(concat "Rank " item.system.classRank)
+    text=(dotJoin
+      (classArchetype item.system.archetype)
+      (ifThen (exists item.sup) item.sup.system.nameString "")
+    )
+    id=item._id
+    active=item.active
+    struck=item.disabled
+    tooltip="Share to Chat"
+    hidden=(rgx ../searchStrings.ranks (className item.system.archetype item.system.className))
+    marker=item.system.color
+    icons=(concat
+      (ticon "comment" action="chatDoc" id=item._id tooltip="Send to Chat")
+      (ticonToggle
+        "circle-check"
+        "circle"
+        (not item.disabled)
+        action="toggleDisabledDoc"
+        id=item._id tooltipTrue="Enabled"
+        tooltipFalse="Disabled"
+      )
+    )
+  }}
+{{/each}}

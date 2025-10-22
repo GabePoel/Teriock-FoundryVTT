@@ -1,8 +1,12 @@
 import { TeriockDialog } from "../../../applications/api/_module.mjs";
 import { copyAbility } from "../../../helpers/fetch.mjs";
 import { makeIcon, mergeFreeze } from "../../../helpers/utils.mjs";
-import { StatGiverDataMixin, WikiDataMixin } from "../../mixins/_module.mjs";
-import { ImportsModel } from "../../models/_module.mjs";
+import {
+  HierarchyDataMixin,
+  ImporterDataMixin,
+  StatGiverDataMixin,
+  WikiDataMixin,
+} from "../../mixins/_module.mjs";
 import { TextField } from "../../shared/fields/_module.mjs";
 import TeriockBaseItemModel from "../base-item-data/base-item-data.mjs";
 import { _messageParts } from "./methods/_messages.mjs";
@@ -19,9 +23,10 @@ const { fields } = foundry.data;
  * @extends {TeriockBaseItemModel}
  * @mixes StatGiverDataMixin
  * @mixes WikiDataMixin
+ * @mixes ImporterDataMixin
  */
-export default class TeriockSpeciesModel extends StatGiverDataMixin(
-  WikiDataMixin(TeriockBaseItemModel),
+export default class TeriockSpeciesModel extends ImporterDataMixin(
+  StatGiverDataMixin(WikiDataMixin(HierarchyDataMixin(TeriockBaseItemModel))),
 ) {
   /**
    * @inheritDoc
@@ -32,6 +37,7 @@ export default class TeriockSpeciesModel extends StatGiverDataMixin(
     type: "species",
     indexCategoryKey: "creatures",
     indexCompendiumKey: "species",
+    childItemTypes: ["body", "equipment", "rank"],
   });
 
   /** @inheritDoc */
@@ -47,7 +53,6 @@ export default class TeriockSpeciesModel extends StatGiverDataMixin(
       }),
       description: new TextField({ label: "Description" }),
       hpIncrease: new TextField({ label: "Hit increase" }),
-      imports: new fields.EmbeddedDataField(ImportsModel),
       innateRanks: new TextField({ label: "Innate ranks" }),
       lifespan: new fields.NumberField({ initial: 100 }),
       mpIncrease: new TextField({ label: "Mana increase" }),
@@ -114,12 +119,6 @@ export default class TeriockSpeciesModel extends StatGiverDataMixin(
           this.isTransformation &&
           !this.isPrimaryTransformation &&
           Boolean(this.transformationEffect),
-        group: "control",
-      },
-      {
-        name: "Import Related Items",
-        icon: makeIcon("down-to-line", "contextMenu"),
-        callback: this.imports.importDeterministic.bind(this.imports),
         group: "control",
       },
     ];

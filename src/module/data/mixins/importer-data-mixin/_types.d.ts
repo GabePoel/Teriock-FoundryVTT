@@ -1,12 +1,8 @@
-import type {
-  TeriockBody,
-  TeriockEquipment,
-} from "../../../documents/_documents.mjs";
-
-declare module "./imports-model.mjs" {
-  export default interface ImportsModel {
-    bodyParts: Set<Teriock.UUID<TeriockBody>>;
-    equipment: Set<Teriock.UUID<TeriockEquipment>>;
+export interface ImporterDataMixinInterface {
+  imports: {
+    /** <schema> Specific items to import */
+    items: Set<Teriock.UUID<TeriockChild>>;
+    /** <schema> Categories of ranks to import */
     ranks: {
       /** <schema> General archetype ranks */
       archetypes: Record<Teriock.Parameters.Rank.RankArchetype, number>;
@@ -15,7 +11,5 @@ declare module "./imports-model.mjs" {
       /** <schema> Ranks of any class */
       general: number;
     };
-  }
+  };
 }
-
-export {};

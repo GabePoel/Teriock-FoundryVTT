@@ -1,5 +1,5 @@
-import { TeriockEffect } from "../../../documents/_module.mjs";
-import type { TeriockSpecies } from "../../../documents/_documents.mjs";
+import type { TeriockEffect } from "../../../../documents/_module.mjs";
+import type { TeriockSpecies } from "../../../../documents/_documents.mjs";
 
 /** <schema> {@link TeriockEffect} hierarchy */
 export type HierarchyField = {

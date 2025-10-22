@@ -8,8 +8,8 @@ import {
   ListField,
   TextField,
 } from "../../shared/fields/_module.mjs";
+import { changeField } from "../../shared/fields/helpers/field-builders.mjs";
 import TeriockBaseEffectModel from "../base-effect-data/base-effect-data.mjs";
-import { changeField } from "../shared/shared-fields.mjs";
 import { _messageParts } from "./methods/_messages.mjs";
 import { _migrateData } from "./methods/_migrate-data.mjs";
 import * as parsing from "./methods/_parsing.mjs";

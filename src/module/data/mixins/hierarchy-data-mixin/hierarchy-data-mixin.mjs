@@ -1,5 +1,5 @@
 import { mergeFreeze } from "../../../helpers/utils.mjs";
-import { hierarchyField } from "../../effect-data/shared/shared-fields.mjs";
+import { hierarchyField } from "../../shared/fields/helpers/field-builders.mjs";
 
 export default (Base) => {
   // noinspection JSClosureCompilerSyntax
@@ -16,9 +16,9 @@ export default (Base) => {
 
       /** @inheritDoc */
       static defineSchema() {
-        return foundry.utils.mergeObject(super.defineSchema(), {
-          hierarchy: hierarchyField(),
-        });
+        const schema = super.defineSchema();
+        schema.hierarchy = hierarchyField();
+        return schema;
       }
 
       /** @inheritDoc */

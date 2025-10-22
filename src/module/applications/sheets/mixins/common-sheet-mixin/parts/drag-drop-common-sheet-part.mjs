@@ -80,6 +80,7 @@ export default (Base) => {
       async _onDragStart(event) {
         const embedded = await _embeddedFromCard(this, event.currentTarget);
         const dragData = embedded?.toDragData();
+        dragData.startSheet = this.id;
         if (dragData) {
           event.dataTransfer.setData("text/plain", JSON.stringify(dragData));
         }
@@ -87,6 +88,9 @@ export default (Base) => {
 
       async _onDrop(event) {
         const dropData = TeriockTextEditor.getDragEventData(event);
+        if (dropData.startSheet === this.id) {
+          return false;
+        }
         let out;
         if (dropData.type === "ActiveEffect") {
           out = await this._onDropActiveEffect(event, dropData);
@@ -162,7 +166,7 @@ export default (Base) => {
           }
         }
         const newItems =
-          /** @type {TeriockItem[]} */ await this.document.createEmbeddedDocuments(
+          /** @type {TeriockItem[]} */ await this.document.actor.createEmbeddedDocuments(
             "Item",
             [item],
             {
@@ -170,6 +174,9 @@ export default (Base) => {
               keepEmbeddedIds: true,
             },
           );
+        if (this.document.documentName !== "Actor") {
+          await this.document.addSubs(newItems);
+        }
         return newItems[0];
       }
 

@@ -1,8 +1,8 @@
 import { inCombatExpirationDialog } from "../../../applications/dialogs/_module.mjs";
 import { makeIcon, mergeFreeze } from "../../../helpers/utils.mjs";
 import { WikiDataMixin } from "../../mixins/_module.mjs";
+import { combatExpirationMethodField } from "../../shared/fields/helpers/field-builders.mjs";
 import TeriockBaseEffectModel from "../base-effect-data/base-effect-data.mjs";
-import { combatExpirationMethodField } from "../shared/shared-fields.mjs";
 
 const { fields } = foundry.data;
 

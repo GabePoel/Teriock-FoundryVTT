@@ -1,4 +1,4 @@
-import { makeIcon, mergeFreeze } from "../../../helpers/utils.mjs";
+import { mergeFreeze } from "../../../helpers/utils.mjs";
 import { ChildTypeModel } from "../../models/_module.mjs";
 import { _expire, _shouldExpire } from "./methods/_expiration.mjs";
 
@@ -19,7 +19,6 @@ export default class TeriockBaseEffectModel extends ChildTypeModel {
     (super.metadata),
     {
       collection: "effects",
-      hierarchy: false,
       modifies: "Actor",
     },
   );
@@ -60,20 +59,6 @@ export default class TeriockBaseEffectModel extends ChildTypeModel {
     return /** @type {TeriockActor} */ this.parent.actor;
   }
 
-  /** @inheritDoc */
-  get cardContextMenuEntries() {
-    return [
-      ...super.cardContextMenuEntries,
-      {
-        name: "Open Source",
-        icon: makeIcon("arrow-up-right-from-square", "contextMenu"),
-        callback: async () => await this.parent.source.sheet.render(true),
-        condition: this.parent.source.documentName !== "Actor",
-        group: "open",
-      },
-    ];
-  }
-
   /**
    * What this modifies.
    * @returns {"Actor" | "Item"}
@@ -88,18 +73,6 @@ export default class TeriockBaseEffectModel extends ChildTypeModel {
    */
   get shouldExpire() {
     return _shouldExpire(this);
-  }
-
-  /**
-   * Checks if the effect is suppressed.
-   * Effects are suppressed if their parent item is disabled.
-   * @returns {boolean} True if the effect is suppressed, false otherwise.
-   */
-  get suppressed() {
-    return !!(
-      this.parent.parent?.documentName === "Item" &&
-      this.parent.parent?.system.suppressed
-    );
   }
 
   /** @inheritDoc */

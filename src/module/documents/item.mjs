@@ -60,6 +60,14 @@ export default class TeriockItem extends ChangeableDocumentMixin(
   }
 
   /**
+   * Checks if the item is active.
+   * @returns {boolean}
+   */
+  get active() {
+    return !this.isSuppressed && !this.disabled;
+  }
+
+  /**
    * @inheritDoc
    * @returns {Readonly<Teriock.Documents.ItemModelMetadata>}
    */

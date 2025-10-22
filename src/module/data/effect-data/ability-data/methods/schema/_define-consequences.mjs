@@ -4,13 +4,7 @@ import {
   ListField,
   RecordField,
 } from "../../../../shared/fields/_module.mjs";
-import {
-  changeField,
-  combatExpirationMethodField,
-  combatExpirationSourceTypeField,
-  combatExpirationTimingField,
-  transformationField,
-} from "../../../shared/shared-fields.mjs";
+import { fieldBuilders } from "../../../../shared/fields/helpers/_module.mjs";
 
 const { fields } = foundry.data;
 
@@ -61,7 +55,7 @@ export function consequenceRollsField() {
  * const changesField = consequenceChangesField();
  */
 export function consequenceChangesField() {
-  return new ListField(changeField(), {
+  return new ListField(fieldBuilders.changeField(), {
     label: "Changes",
     hint: "Changes made to the target actor as part of the ability's ongoing effect.",
   });
@@ -76,10 +70,10 @@ function abilityExpirationField() {
   return new fields.SchemaField({
     combat: new fields.SchemaField({
       who: new fields.SchemaField({
-        type: combatExpirationSourceTypeField(),
+        type: fieldBuilders.combatExpirationSourceTypeField(),
       }),
-      what: combatExpirationMethodField(),
-      when: combatExpirationTimingField(),
+      what: fieldBuilders.combatExpirationMethodField(),
+      when: fieldBuilders.combatExpirationTimingField(),
     }),
   });
 }
@@ -192,7 +186,7 @@ function impactField() {
         hint: "Should custom expiration timing be applied?",
       }),
     }),
-    transformation: transformationField(),
+    transformation: fieldBuilders.transformationField(),
   });
 }
 

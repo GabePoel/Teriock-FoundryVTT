@@ -1,0 +1,77 @@
+{{#each equipment as |item|}}
+  {{tcard
+    active=item.active
+    amount=item.system.quantity
+    consumable=item.system.consumable
+    hidden=(rgx ../searchStrings.equipment item.name)
+    icons=(concat
+      (ticonToggle
+        "handshake-simple"
+        "handshake-simple-slash"
+        item.system.isAttuned
+        action="toggleAttunedDoc"
+        id=item._id
+        parentId=item.parent._id
+        tooltipTrue="Attuned"
+        tooltipFalse="Deattuned"
+      )
+      (ticonToggle
+        "link"
+        "link-slash"
+        item.system.glued
+        action="toggleGluedDoc"
+        id=item._id
+        parentId=item.parent._id
+        tooltipTrue="Glued"
+        tooltipFalse="Unglued"
+      )
+      (ticonToggle
+        "bell"
+        "bell-slash"
+        item.system.dampened
+        action="toggleDampenedDoc"
+        id=item._id
+        parentId=item.parent._id
+        tooltipTrue="Dampened"
+        tooltipFalse="Undampened"
+      )
+      (ticonToggle
+        "wine-glass"
+        "wine-glass-crack"
+        item.system.shattered
+        action="toggleShatteredDoc"
+        id=item._id
+        parentId=item.parent._id
+        tooltipTrue="Shattered"
+        tooltipFalse="Repaired"
+      )
+      (ticon "comment" action="chatDoc" id=item._id tooltip="Send to Chat")
+      (ticonToggle
+        "circle-check"
+        "circle"
+        item.system.equipped
+        action="toggleEquippedDoc"
+        id=item._id
+        parentId=item.parent._id
+        tooltipTrue="Equipped"
+        tooltipFalse="Unequipped"
+      )
+    )
+    id=item._id
+    img=item.img
+    marker=(equipmentMarker item)
+    max=item.system.maxQuantity.value
+    shattered=item.system.shattered
+    struck=(not item.system.isEquipped)
+    subtitle=item.system.equipmentType
+    text=(dotJoin
+      (suffix item.system.damage.base.value 'Damage')
+      (suffix item.system.bv.value 'BV')
+      (suffix item.system.av.value 'AV')
+      (prefix item.system.tier.value 'Tier')
+      (suffix item.system.weight.value 'lb')
+      (ifThen (exists item.sup) item.sup.system.nameString "")
+    )
+    title=item.name
+  }}
+{{/each}}
