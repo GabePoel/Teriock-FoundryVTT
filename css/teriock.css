@@ -256,9 +256,6 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
-  margin: 8px var(--panel-padding) var(--panel-padding);
-  opacity: 1;
-  overflow: hidden;
 }
 .teriock-panel-body > * {
   position: relative;
@@ -270,6 +267,11 @@
   left: 0;
   right: 0;
   border-top: 1px var(--panel-divider-style) var(--color-panel-divider);
+}
+.teriock-panel-body {
+  margin: 8px var(--panel-padding) var(--panel-padding);
+  opacity: 1;
+  overflow: hidden;
 }
 
 .teriock-panel {
@@ -637,13 +639,6 @@ img.rescale {
   width: 28px;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 0 6px rgba(0, 0, 0, 0.6);
-  border: 1px solid color-mix(in srgb, var(--color-dark-5), transparent 25%);
-  border-radius: 100%;
-  outline: 1px solid var(--color-light-6);
-  overflow: hidden;
-  object-fit: cover;
-  object-position: 50% 0;
 }
 .teriock .doc-select .doc-select-row .doc-image-container::before {
   position: absolute;
@@ -653,6 +648,15 @@ img.rescale {
   height: 100%;
   content: "";
   background: radial-gradient(circle, var(--color-cool-3), var(--color-dark-1));
+}
+.teriock .doc-select .doc-select-row .doc-image-container {
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.6);
+  border: 1px solid color-mix(in srgb, var(--color-dark-5), transparent 25%);
+  border-radius: 100%;
+  outline: 1px solid var(--color-light-6);
+  overflow: hidden;
+  object-fit: cover;
+  object-position: 50% 0;
 }
 .teriock .doc-select .doc-select-row .doc-image-container img {
   filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.4));
@@ -1036,6 +1040,17 @@ img.rescale {
 .teriock .tcard-container .tcard .tcard-image {
   position: relative;
   overflow: hidden;
+}
+.teriock .tcard-container .tcard .tcard-image::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  content: "";
+  background: radial-gradient(circle, var(--color-cool-3), var(--color-dark-1));
+}
+.teriock .tcard-container .tcard .tcard-image {
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
   border: 1px solid color-mix(in srgb, var(--color-dark-5), transparent 25%);
   border-radius: 100%;
@@ -1049,15 +1064,6 @@ img.rescale {
   overflow: hidden;
   position: relative;
   width: calc(var(--tcard-height) - 12px);
-}
-.teriock .tcard-container .tcard .tcard-image::before {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  content: "";
-  background: radial-gradient(circle, var(--color-cool-3), var(--color-dark-1));
 }
 .teriock .tcard-container .tcard .tcard-image.usable {
   cursor: pointer;
@@ -1203,6 +1209,12 @@ img.rescale {
 }
 .teriock .tcard-container > :nth-child(1 of :not(.hidden)) {
   display: flex;
+}
+.teriock .hide-inactive .tcard-container > :nth-child(1 of :not(.hidden):not(.inactive)) {
+  display: flex;
+}
+.teriock .hide-inactive .tcard.inactive {
+  display: none;
 }
 .teriock .tcard-results {
   width: 100%;
@@ -1539,11 +1551,6 @@ img.rescale {
   width: 4em;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
-  border: 1px solid color-mix(in srgb, var(--color-dark-5), transparent 25%);
-  border-radius: 100%;
-  outline: 1px solid var(--color-light-6);
-  overflow: hidden;
 }
 .teriock .ab-header .ab-profile-img::before {
   position: absolute;
@@ -1553,6 +1560,13 @@ img.rescale {
   height: 100%;
   content: "";
   background: radial-gradient(circle, var(--color-cool-3), var(--color-dark-1));
+}
+.teriock .ab-header .ab-profile-img {
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+  border: 1px solid color-mix(in srgb, var(--color-dark-5), transparent 25%);
+  border-radius: 100%;
+  outline: 1px solid var(--color-light-6);
+  overflow: hidden;
 }
 .teriock .ab-header .ab-profile-img img {
   filter: drop-shadow(0 0 3px color-mix(in srgb, var(--color-cool-4), transparent 60%));

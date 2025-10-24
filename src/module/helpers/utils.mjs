@@ -652,7 +652,7 @@ export function freeze(obj) {
 /**
  * Check if the {@link TeriockUser} owns and uses the given document.
  * @param {ClientDocument} document
- * @param {string} userId
+ * @param {Teriock.ID<TeriockUser>} userId
  * @returns {boolean}
  */
 export function isOwnerAndCurrentUser(document, userId) {

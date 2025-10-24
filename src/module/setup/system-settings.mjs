@@ -12,6 +12,22 @@ export function registerSettings() {
       scope: "user",
       type: Boolean,
     },
+    hideBasicAbilitiesByDefault: {
+      config: true,
+      default: false,
+      hint: "If enabled, basic abilities will be hidden by default on all actor sheets.",
+      name: "Hide Basic Abilities by Default",
+      scope: "user",
+      type: Boolean,
+    },
+    hideInactiveDocumentsByDefault: {
+      config: true,
+      default: false,
+      hint: "If enabled, inactive documents will be hidden by default on all actor sheets.",
+      name: "Hide Inactive Documents by Default",
+      scope: "user",
+      type: Boolean,
+    },
     automaticallyPayAbilityCosts: {
       config: true,
       default: true,

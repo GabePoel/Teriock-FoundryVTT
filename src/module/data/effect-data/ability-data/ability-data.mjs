@@ -243,7 +243,7 @@ export default class TeriockAbilityModel extends HierarchyDataMixin(
    * @param {boolean} force - Force consequences to expire even if this isn't suppressed.
    */
   async expireSustainedConsequences(force = false) {
-    if (this.parent.isSuppressed || this.parent.disabled || force) {
+    if (!this.parent.active || force) {
       const activeGm = /** @type {TeriockUser} */ game.users.activeGM;
       for (const uuid of this.sustaining) {
         await activeGm.query("teriock.sustainedExpiration", {

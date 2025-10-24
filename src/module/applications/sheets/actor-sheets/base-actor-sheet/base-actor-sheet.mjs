@@ -7,6 +7,7 @@ import {
 import { CommonSheetMixin } from "../../mixins/_module.mjs";
 import DocumentCreationActorSheetPart from "./parts/document-creation-actor-sheet-part.mjs";
 import DocumentTogglingActorSheetPart from "./parts/document-toggling-actor-sheet-part.mjs";
+import HidingCommonSheetPart from "./parts/hiding-common-sheet-part.mjs";
 import SearchingActorSheetPart from "./parts/searching-actor-sheet-part.mjs";
 import { filterAbilities, filterEquipment } from "./tools/filters.mjs";
 import { defaultSheetSettings } from "./tools/settings.mjs";
@@ -24,9 +25,11 @@ const { ActorSheetV2 } = foundry.applications.sheets;
  * @property {TeriockActor} actor
  * @property {TeriockActor} document
  */
-export default class TeriockBaseActorSheet extends SearchingActorSheetPart(
-  DocumentCreationActorSheetPart(
-    DocumentTogglingActorSheetPart(CommonSheetMixin(ActorSheetV2)),
+export default class TeriockBaseActorSheet extends HidingCommonSheetPart(
+  SearchingActorSheetPart(
+    DocumentCreationActorSheetPart(
+      DocumentTogglingActorSheetPart(CommonSheetMixin(ActorSheetV2)),
+    ),
   ),
 ) {
   /**
@@ -58,7 +61,7 @@ export default class TeriockBaseActorSheet extends SearchingActorSheetPart(
     this._locked = false;
     /** @type {ActorTab} */
     this._activeTab = "tradecrafts";
-    this.settings = defaultSheetSettings;
+    this.settings = defaultSheetSettings();
   }
 
   /**
