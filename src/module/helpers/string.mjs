@@ -34,6 +34,19 @@ export function toKebabCase(str) {
 }
 
 /**
+ * Convert a string to kebab-case format. Handles camel case and acronyms.
+ * @param {string} str - The string to convert.
+ * @returns {string} The kebab-case version of the string.
+ */
+export function toKebabCaseFull(str) {
+  return str
+    .replace(/[\s_]+/g, "-")
+    .replace(/([a-z\d])([A-Z])/g, "$1-$2")
+    .replace(/([A-Z]+)([A-Z][a-z])/g, "$1-$2")
+    .toLowerCase();
+}
+
+/**
  * Converts a string to an integer.
  * @param {string} str
  * @returns {number}

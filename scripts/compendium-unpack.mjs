@@ -2,7 +2,7 @@ import { extractPack } from "@foundryvtt/foundryvtt-cli";
 import { promises as fs } from "fs";
 import path from "path";
 import { dieOptions } from "../src/module/constants/options/die-options.mjs";
-import { toKebabCase } from "../src/module/helpers/string.mjs";
+import { toKebabCase, toKebabCaseFull } from "../src/module/helpers/string.mjs";
 
 //eslint-disable-next-line no-undef
 const MODULE_ID = process.cwd();
@@ -14,8 +14,8 @@ const BUILDER_NAME = "teriockBuilder00";
 // noinspection JSVoidFunctionReturnValueUsed
 const packs = /** @type {string[]} */ await fs.readdir("./packs");
 for (const pack of packs) {
-  console.log("Unpacking " + pack);
-  const directory = `./src/packs/${pack}`;
+  const directory = `./src/packs/${toKebabCaseFull(pack)}`;
+  console.log("Unpacking " + pack + " to " + directory);
   try {
     // noinspection JSVoidFunctionReturnValueUsed
     for (const file of /** @type {string[]} */ await fs.readdir(directory)) {
@@ -35,7 +35,7 @@ for (const pack of packs) {
   }
   await extractPack(
     `${MODULE_ID}/packs/${pack}`,
-    `${MODULE_ID}/src/packs/${pack}`,
+    `${MODULE_ID}/src/packs/${toKebabCaseFull(pack)}`,
     {
       yaml,
       transformName,
