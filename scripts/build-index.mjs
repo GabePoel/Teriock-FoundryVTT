@@ -283,6 +283,17 @@ const createCustomData = async () => {
       statuses: statuses,
       type: "condition",
     };
+    if (key === "wisping") {
+      obj[key].system = {
+        transformation: {
+          enabled: true,
+          level: "greater",
+          resetHp: true,
+          resetMp: true,
+          uuids: ["Compendium.teriock.species.Item.TBRiyDnXSUMRdZzQ"],
+        },
+      };
+    }
   }
   await saveObject(obj, relPath("index/data/conditions"));
 };

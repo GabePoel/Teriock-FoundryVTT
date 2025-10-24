@@ -214,7 +214,8 @@ export default class TeriockActor extends ParentDocumentMixin(
    * @returns {TeriockConsequence[]}
    */
   get transformations() {
-    return this.consequences.filter((c) => c.system.isTransformation);
+    const possibleEffects = [...this.consequences, ...this.conditions];
+    return possibleEffects.filter((c) => c.system.isTransformation);
   }
 
   /**

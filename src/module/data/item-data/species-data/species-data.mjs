@@ -184,7 +184,7 @@ export default class TeriockSpeciesModel extends ImporterDataMixin(
 
   /**
    * Name of the transformation that provides this.
-   * @returns {TeriockConsequence|null}
+   * @returns {TeriockConsequence|TeriockCondition|null}
    */
   get transformationEffect() {
     const transformations = this.parent.actor.transformations;
@@ -283,11 +283,11 @@ export default class TeriockSpeciesModel extends ImporterDataMixin(
     if (this.transformationEffect) {
       const proceed = await TeriockDialog.confirm({
         window: {
-          title: "Delete Consequence?",
+          title: "Delete Effect?",
           icon: `fas fa-${TERIOCK.options.document.consequence.icon}`,
         },
         content:
-          "This species is provided by a transformation consequence. Would you like to delete that as well?",
+          "This species is provided by a transformation effect. Would you like to delete that as well?",
         modal: true,
         rejectClose: false,
       });

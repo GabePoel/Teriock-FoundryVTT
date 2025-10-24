@@ -1,24 +1,22 @@
 import type TeriockBaseEffectModel from "../base-effect-data/base-effect-data.mjs";
-import type {
-  TeriockConsequence,
-  TeriockSpecies,
-} from "../../../documents/_documents.mjs";
+import type { TeriockConsequence } from "../../../documents/_documents.mjs";
 import type {
   CombatExpirationMethod,
   CombatExpirationSourceType,
   CombatExpirationTiming,
-  TransformationField,
 } from "../../shared/fields/helpers/_types";
 import type {
   TeriockActor,
   TeriockEffect,
 } from "../../../documents/_module.mjs";
 import type { HierarchyDataMixinInterface } from "../../mixins/hierarchy-data-mixin/_types";
+import type { TransformationMixinInterface } from "../../mixins/transformation-data-mixin/_types";
 
 declare module "./consequence-data.mjs" {
   export default interface TeriockConsequenceModel
     extends TeriockBaseEffectModel,
-      HierarchyDataMixinInterface {
+      HierarchyDataMixinInterface,
+      TransformationMixinInterface {
     /** <schema> Associations */
     associations: Teriock.MessageData.MessageAssociation[];
     /** <schema> Blocks representing the source */
@@ -66,11 +64,6 @@ declare module "./consequence-data.mjs" {
     sourceDescription: string;
     /** <schema> If this expires when its source is inactive */
     sustainedExpiration: boolean;
-    /** <schema> Transformation configuration */
-    transformation: TransformationField & {
-      /** <schema> The actual species items this is associated with on the actor */
-      species: Teriock.ID<TeriockSpecies>[];
-    };
 
     get parent(): TeriockConsequence;
   }

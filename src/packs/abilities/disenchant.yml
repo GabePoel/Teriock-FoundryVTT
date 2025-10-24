@@ -18,7 +18,8 @@ effects:
           endStatuses: []
           rolls: {}
           hacks: []
-          checks: []
+          checks:
+            - priest
           duration: 0
           changes: []
           common: []
@@ -188,33 +189,25 @@ effects:
       range: '5'
       overview:
         base: >-
-          When this ritual is completed, make a @L[Tradecraft:Priest]{priest} <a
-          href="/index.php?title=Core:Tradecraft_Check&amp;action=edit&amp;redlink=1"
-          class="new" title="Core:Tradecraft Check (page does not
-          exist)">check</a> to see if the targeted item is disenchanted. The
-          check's DC is entirely up to @L[Core:GM]{GM} discretion, but the
-          following can be used as a benchmark.<ul><li>Non-passively magic
-          items: 4</li><li>Common passively magic items: 8</li><li>Uncommon
-          passively magic items: 12</li><li>Rare passively magic items:
-          16</li><li>Mythic passively magic items: 20</li><li>Legendary
-          passively magic items: 50+</li></ul>These benchmarks are for reference
-          only and the @L[Core:GM]{GM} may adjust them as they see fit. Item
-          rarity may or may not correspond to how challenging it is to
-          disenchant.
+          When this ritual is completed, make a @L[Tradecraft:Priest]{priest}
+          @L[Core:Tradecrafts]{check} to see if the targeted item is
+          disenchanted. The check's DC is entirely up to @L[Core:GM]{GM}
+          discretion, but the following can be used as a
+          benchmark.<ul><li>Non-passively magic items: 4</li><li>Common
+          passively magic items: 8</li><li>Uncommon passively magic items:
+          12</li><li>Rare passively magic items: 16</li><li>Mythic passively
+          magic items: 20</li><li>Legendary passively magic items:
+          50+</li></ul>These benchmarks are for reference only and the
+          @L[Core:GM]{GM} may adjust them as they see fit. Item rarity may or
+          may not correspond to how challenging it is to disenchant.
         proficient: >-
           You may add @L[Core:Proficiency Bonus]{P} to the
-          @L[Tradecraft:Priest]{priest} <a
-          href="/index.php?title=Core:Tradecraft_Check&amp;action=edit&amp;redlink=1"
-          class="new" title="Core:Tradecraft Check (page does not
-          exist)">check</a> regardless of whether or not you are proficient in
-          @L[Tradecraft:Priest]{priest}.
+          @L[Tradecraft:Priest]{priest} @L[Core:Tradecrafts]{check} regardless
+          of whether or not you are proficient in @L[Tradecraft:Priest]{priest}.
         fluent: >-
           You may add @L[Core:Fluency Bonus]{F} to the
-          @L[Tradecraft:Priest]{priest} <a
-          href="/index.php?title=Core:Tradecraft_Check&amp;action=edit&amp;redlink=1"
-          class="new" title="Core:Tradecraft Check (page does not
-          exist)">check</a> regardless of whether or not you are fluent in
-          @L[Tradecraft:Priest]{priest}.
+          @L[Tradecraft:Priest]{priest} @L[Core:Tradecrafts]{check} regardless
+          of whether or not you are fluent in @L[Tradecraft:Priest]{priest}.
       results:
         hit: ''
         critHit: ''
@@ -223,18 +216,13 @@ effects:
         save: >-
           The item is @L[Property:Destroyed]{destroyed} and any
           @L[Category:Magical properties]{magical properties} of it are removed.
-          An number of @L[Core:MP]{MP} equal to 20 times the
-          @L[Tradecraft:Priest]{priest} <a
-          href="/index.php?title=Core:Tradecraft_Check&amp;action=edit&amp;redlink=1"
-          class="new" title="Core:Tradecraft Check (page does not
-          exist)">check's</a> DC is released (although you do not gain it).
+          An amount of @L[Core:MP]{MP} equal to 20 times the
+          @L[Tradecraft:Priest]{priest} @L[Core:Tradecrafts]{check's} DC is
+          released (although you do not gain it).
         critSave: ''
         fail: >-
           You pay an amount of @L[Core:MP]{MP} and @L[Core:HP]{HP} equal to the
-          @L[Tradecraft:Priest]{priest} <a
-          href="/index.php?title=Core:Tradecraft_Check&amp;action=edit&amp;redlink=1"
-          class="new" title="Core:Tradecraft Check (page does not
-          exist)">check's</a> DC.
+          @L[Tradecraft:Priest]{priest} @L[Core:Tradecrafts]{check's} DC.
         critFail: ''
       piercing: normal
       improvements:
@@ -262,10 +250,8 @@ effects:
             formula: ''
             variable: >-
               An amount of @L[Core:MP]{MP} equal to the
-              @L[Tradecraft:Priest]{priest} <a
-              href="/index.php?title=Core:Tradecraft_Check&amp;action=edit&amp;redlink=1"
-              class="new" title="Core:Tradecraft Check (page does not
-              exist)">check's</a> DC. Paid only on failure.
+              @L[Tradecraft:Priest]{priest} @L[Core:Tradecrafts]{check's} DC.
+              Paid only on failure.
         hp:
           type: variable
           value:
@@ -273,10 +259,8 @@ effects:
             formula: ''
             variable: >-
               An amount of @L[Core:HP]{HP} equal to the
-              @L[Tradecraft:Priest]{priest} <a
-              href="/index.php?title=Core:Tradecraft_Check&amp;action=edit&amp;redlink=1"
-              class="new" title="Core:Tradecraft Check (page does not
-              exist)">check's</a> DC. Paid only on failure.
+              @L[Tradecraft:Priest]{priest} @L[Core:Tradecrafts]{check's} DC.
+              Paid only on failure.
         gp:
           type: none
           value:
@@ -288,7 +272,6 @@ effects:
       heightened: ''
       endCondition: ''
       requirements: ''
-      effects: []
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
@@ -305,6 +288,8 @@ effects:
       maxQuantity:
         raw: ''
         derived: 0
+      effectTypes:
+        - destruction
     _id: FqsYa2NeQt1Pf36u
     changes: []
     disabled: false
@@ -318,7 +303,7 @@ effects:
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.0
+      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
     _key: '!items.effects!48lnkoWNg1RhyU3U.FqsYa2NeQt1Pf36u'
 ownership:
