@@ -27,4 +27,9 @@ export function _prepBaseTransformation(actorData) {
       effect.system.transformation.suppression,
     );
   }
+  if (actorData.transformation.species.length > 0) {
+    actorData.size.number.raw =
+      actorData.transformation.species[0].system.size.value?.toString() ||
+      actorData.size.number.raw;
+  }
 }

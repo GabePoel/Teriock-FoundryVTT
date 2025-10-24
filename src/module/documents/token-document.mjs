@@ -1,5 +1,4 @@
-import { getIcon } from "../helpers/path.mjs";
-import { convertUnits } from "../helpers/utils.mjs";
+import { convertUnits, ringImage } from "../helpers/utils.mjs";
 
 const { TokenDocument } = foundry.documents;
 
@@ -32,7 +31,11 @@ export default class TeriockTokenDocument extends TokenDocument {
    * @returns {boolean}
    */
   get isTransformed() {
-    return this.hasStatusEffect("transformed");
+    if (this.actor) {
+      return this.actor.system.isTransformed;
+    } else {
+      return false;
+    }
   }
 
   /**
@@ -56,24 +59,23 @@ export default class TeriockTokenDocument extends TokenDocument {
   }
 
   /**
-   * Transformation image.
+   * The image that should represent this token if it is transformed.
    * @returns {string}
    */
-  get transformationTexture() {
-    if (this.isTransformed) {
-      if (this.actor) {
-        const out = this.actor.system.transformation.image;
-        if (out) {
-          return out;
-        } else {
-          return getIcon("conditions", "Transformed");
-        }
-      } else {
-        return getIcon("conditions", "Transformed");
-      }
-    } else {
-      return this._source.texture.src;
+  get imageTransformed() {
+    let path = this.actor?.system.transformation.image || this.texture.src;
+    if (this.ring.enabled) {
+      return ringImage(path);
     }
+    return path;
+  }
+
+  /**
+   * The image that should represent this token if its not transformed.
+   * @returns {string}
+   */
+  get imageRaw() {
+    return this.getFlag("teriock", "imageRaw") || this.texture.src;
   }
 
   /** @inheritDoc */
@@ -85,7 +87,7 @@ export default class TeriockTokenDocument extends TokenDocument {
   _inferRingSubjectTexture() {
     let out = super._inferRingSubjectTexture();
     if (this.isTransformed && this.actor) {
-      out = this.transformationTexture;
+      out = this.imageTransformed;
     }
     return out;
   }
@@ -98,7 +100,7 @@ export default class TeriockTokenDocument extends TokenDocument {
     this.deriveLighting();
     this.deriveDetectionModes();
     super._onRelatedUpdate(update, operation);
-    this.object.initializeSources();
+    this.object?.initializeSources();
   }
 
   /** @inheritDoc */
@@ -182,15 +184,14 @@ export default class TeriockTokenDocument extends TokenDocument {
   }
 
   /**
-   * Override the texture if transformed.
+   * The image that should be used to represent this token.
+   * @returns {string}
    */
-  deriveTexture() {
-    if (this.isTransformed && this.actor) {
-      this.texture.src = this.transformationTexture;
-      this.ring.subject.texture = this.transformationTexture;
+  get imageLive() {
+    if (this.isTransformed) {
+      return this.imageTransformed;
     } else {
-      this.texture.src = this._source.texture.src;
-      this.ring.subject.texture = this._source.texture.src;
+      return this.imageRaw;
     }
   }
 
@@ -245,6 +246,41 @@ export default class TeriockTokenDocument extends TokenDocument {
     };
   }
 
+  /** @inheritDoc */
+  async _preCreate(data, options, user) {
+    if ((await super._preCreate(data, options, user)) === false) {
+      return false;
+    }
+    if (foundry.utils.hasProperty(data, "texture.src")) {
+      this.updateSource({
+        flags: {
+          teriock: {
+            imageRaw: foundry.utils.getProperty(data, "texture.src"),
+          },
+        },
+      });
+    }
+  }
+
+  /** @inheritDoc */
+  async _preUpdate(changes, options, user) {
+    if ((await super._preUpdate(changes, options, user)) === false) {
+      return false;
+    }
+    if (foundry.utils.hasProperty(changes, "texture.src")) {
+      if (foundry.utils.hasProperty(changes, "flags.teriock.isTransformed")) {
+        foundry.utils.deleteProperty(changes, "flags.teriock.isTransformed");
+      } else {
+        foundry.utils.setProperty(
+          changes,
+          "flags.teriock.texture",
+          foundry.utils.getProperty(changes, "texture.src"),
+        );
+      }
+    }
+    foundry.utils.deleteProperty(changes, "flags.teriock.isTransformed");
+  }
+
   /**
    * Perform all updates needed to synchronize this with {@link TeriockActor} data.
    * @returns {Promise<void>}
@@ -266,13 +302,20 @@ export default class TeriockTokenDocument extends TokenDocument {
       if (this.height !== this.actor.system.size.length) {
         updateData["height"] = this.actor.system.size.length;
       }
+      if (this.imageLive !== this.texture.src) {
+        updateData["texture.src"] = this.imageLive;
+        if (this.isTransformed) {
+          updateData["flags.teriock.isTransformed"] = true;
+        }
+      }
     }
-    if (Object.keys(updateData).length > 0) {
+    if (Object.keys(updateData).length > 0 && this.id) {
       await this.update(updateData);
     }
     if (
       visionMode !== this.sight.visionMode &&
-      game.settings.get("teriock", "automaticallyChangeVisionModes")
+      game.settings.get("teriock", "automaticallyChangeVisionModes") &&
+      this.id
     ) {
       await this.updateVisionMode(visionMode);
     }

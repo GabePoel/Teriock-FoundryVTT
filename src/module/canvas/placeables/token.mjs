@@ -8,12 +8,6 @@ const { Token } = foundry.canvas.placeables;
  */
 export default class TeriockToken extends Token {
   /** @inheritDoc */
-  async _draw(options) {
-    this.document.deriveTexture();
-    await super._draw(options);
-  }
-
-  /** @inheritDoc */
   async _drawEffects() {
     await super._drawEffects();
     const promises = [];
@@ -43,18 +37,5 @@ export default class TeriockToken extends Token {
     this.effects.sortChildren();
     this.effects.renderable = true;
     this.renderFlags.set({ refreshEffects: true });
-  }
-
-  /** @inheritDoc */
-  _onApplyStatusEffect(statusId, active) {
-    if (
-      [
-        CONFIG.specialStatusEffects.TRANSFORMED,
-        CONFIG.specialStatusEffects.ILLUSION_TRANSFORMED,
-      ].includes(statusId)
-    ) {
-      this.renderFlags.set({ redraw: true });
-    }
-    super._onApplyStatusEffect(statusId, active);
   }
 }

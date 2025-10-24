@@ -1,4 +1,5 @@
 import { TeriockRoll } from "../dice/_module.mjs";
+import { systemPath } from "./path.mjs";
 
 /**
  * Convert the given unit to feet.
@@ -708,4 +709,19 @@ export function makeCommonRollOptions(event) {
     secret: event.shiftKey,
     twoHanded: event.ctrlKey,
   };
+}
+
+/**
+ * Convert the image path to one intended for token rings if possible.
+ * @param {string} path
+ * @returns {string}
+ */
+export function ringImage(path) {
+  if (path.startsWith(systemPath("icons/creatures"))) {
+    return path.replace(
+      systemPath("icons/creatures"),
+      systemPath("icons/tokens"),
+    );
+  }
+  return path;
 }
