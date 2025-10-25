@@ -28,6 +28,7 @@ export function toTitleCase(str) {
  */
 export function toKebabCase(str) {
   return str
+    .replaceAll(",", "")
     .replace(/\s+/g, "-")
     .replace(/([a-z])([A-Z])/g, "$1-$2")
     .toLowerCase();
