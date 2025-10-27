@@ -55,7 +55,9 @@ declare global {
       | ComparisonCheck
       | "has"
       | "includes"
-      | "exists";
+      | "exists"
+      | "is"
+      | "isNot";
 
     /**
      * Original special change keys are of the format: `![type]__[key]__[operation]__[value]__[originalKey]`

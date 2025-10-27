@@ -1,5 +1,5 @@
 import { TeriockDialog } from "../../../applications/api/_module.mjs";
-import { copyAbility } from "../../../helpers/fetch.mjs";
+import { copyAbility, getItem } from "../../../helpers/fetch.mjs";
 import { makeIcon, mergeFreeze } from "../../../helpers/utils.mjs";
 import {
   HierarchyDataMixin,
@@ -350,6 +350,26 @@ export default class TeriockSpeciesModel extends ImporterDataMixin(
       updateData[`system.sizeStepAbilities.-=${key}`] = null;
     }
     await this.parent.update(updateData);
+    const referenceSpecies = await getItem(this.parent.name, "species");
+    if (referenceSpecies) {
+      const toUpdate = [];
+      for (const ability of this.parent.getAbilities()) {
+        const referenceAbility = referenceSpecies
+          .getAbilities()
+          .find((a) => a.name === ability.name);
+        if (referenceAbility) {
+          const referenceData = referenceAbility.toObject();
+          foundry.utils.deleteProperty(referenceData, "_id");
+          foundry.utils.deleteProperty(referenceData, "effects");
+          foundry.utils.deleteProperty(referenceData, "system.hierarchy");
+          toUpdate.push({
+            _id: ability.id,
+            ...referenceData,
+          });
+        }
+      }
+      await this.parent.updateEmbeddedDocuments("ActiveEffect", toUpdate);
+    }
     await super.refreshFromIndex();
   }
 

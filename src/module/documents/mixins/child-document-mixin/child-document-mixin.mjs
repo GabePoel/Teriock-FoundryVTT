@@ -104,6 +104,10 @@ export default (Base) => {
             } else if (reference.check === "exists") {
               shouldInclude =
                 property.length > 0 && property !== "0" && property !== 0;
+            } else if (reference.check === "is") {
+              shouldInclude = property;
+            } else if (reference.check === "isNot") {
+              shouldInclude = !property;
             }
             if (shouldInclude) {
               const fullChange = foundry.utils.deepClone(change);
