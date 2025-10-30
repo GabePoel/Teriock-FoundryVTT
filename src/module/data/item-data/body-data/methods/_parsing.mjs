@@ -1,7 +1,10 @@
 import { cleanValue } from "../../../../helpers/clean.mjs";
 import { createProperty } from "../../../../helpers/create-effects.mjs";
 import { getIcon } from "../../../../helpers/path.mjs";
-import { toCamelCase, toInt } from "../../../../helpers/string.mjs";
+import {
+  toCamelCase,
+  toInt
+} from "../../../../helpers/string.mjs";
 import { _override } from "./_overrides.mjs";
 
 /**
@@ -32,11 +35,15 @@ export async function _parse(bodyData, rawHTML) {
   delete parameters.description;
 
   // Parse damage
-  const damageText = getText(".damage");
+  let damageText = getText(".damage");
+  console.log(damageText);
   parameters.damage = {
     base: {},
   };
   if (damageText) {
+    if (damageText.includes(" ")) {
+      damageText = damageText.split(" ")[0];
+    }
     const match = damageText.match(/^([^(]+)\s*\(([^)]+)\)/);
     parameters.damage.base.saved = match ? match[1].trim() : damageText;
   }
