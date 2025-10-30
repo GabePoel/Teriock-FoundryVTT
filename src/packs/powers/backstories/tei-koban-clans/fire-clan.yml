@@ -1,20 +1,32 @@
-name: Mithril Being
-type: wrapper
-_id: cnOXmbAcAFgc4DPI
-img: systems/teriock/src/icons/abilities/mithril-being.webp
+folder: 1lFMAV0Fky7fm76P
+name: Fire Clan
+type: power
+img: icons/magic/fire/flame-burning-yellow-orange.webp
+system:
+  gmNotes: null
+  description: >-
+    <p>A group of @L[Creature:Cobben]{cobbens} from a group of islands connected
+    to the Blue Reefs that practice ancestor worship and have a complex set of
+    cultural traditions and dances that imbue their @L[Ability:Spirit
+    Item]{spirit items} with powers mastered by their ancestors. They have
+    complex facial tattoos that represent which of the eight clans they are
+    from.</p><p>Dancing is an integral part of Tei Koban culture. The dances
+    prepare young @L[Creature:Cobben]{cobbens} for obtaining their
+    @L[Ability:Spirit Item]{spirit items} and helps their ancestral connection
+    and training.</p>
+  hierarchy:
+    rootUuid: null
+    subIds: []
+    supId: null
+  type: backstory
 effects:
-  - name: Mithril Being
+  - name: Cannot Swim
     type: ability
+    img: systems/teriock/src/icons/abilities/cannot-swim.webp
     system:
-      consumable: false
-      maxQuantity:
-        saved: ''
-        raw: ''
-      quantity: 1
       hierarchy:
-        rootUuid: Compendium.teriock.abilities.Item.cnOXmbAcAFgc4DPI
-        subIds:
-          - PpUnUsq82prkqpWf
+        rootUuid: Item.BRPLXZ2FQ4WkYoqj
+        subIds: []
         supId: null
       applies:
         base:
@@ -26,10 +38,10 @@ effects:
           checks: []
           duration: 0
           changes:
-            - key: system.weight.self.raw
-              mode: 1
-              value: '0.5'
-              priority: 10
+            - key: system.speedAdjustments.swim
+              mode: 5
+              value: '0'
+              priority: 20
           common: []
           expiration:
             normal:
@@ -58,6 +70,18 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            resetHp: true
+            resetMp: false
         proficient:
           statuses: []
           startStatuses: []
@@ -95,6 +119,18 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            resetHp: true
+            resetMp: false
         fluent:
           statuses: []
           startStatuses: []
@@ -132,6 +168,18 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            resetHp: true
+            resetMp: false
         heightened:
           statuses: []
           startStatuses: []
@@ -169,11 +217,73 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            resetHp: true
+            resetMp: false
         macros: {}
-      adept:
-        enabled: false
-        amount: 1
-      basic: false
+      elderSorcery: false
+      elderSorceryIncant: ''
+      powerSources:
+        - martial
+      interaction: manifest
+      featSaveAttribute: mov
+      maneuver: passive
+      executionTime: passive
+      delivery:
+        base: self
+        parent: null
+        package: null
+      targets:
+        - self
+      elements: []
+      duration:
+        unit: noLimit
+        quantity: 0
+        conditions:
+          present: []
+          absent: []
+        description: Always Active
+        stationary: false
+      sustained: false
+      range: Self.
+      overview:
+        base: >-
+          You have no @L[Core:Movement Speed]{swim speed}. This overrides
+          abilities such as @L[Ability:Swimming]{Swimming}.
+        proficient: ''
+        fluent: ''
+      results:
+        hit: ''
+        critHit: ''
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      piercing: normal
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+      skill: false
+      spell: false
+      standard: false
+      ritual: false
+      rotator: false
+      invoked: false
       costs:
         verbal: false
         somatic: false
@@ -198,81 +308,35 @@ effects:
             variable: ''
         break: ''
         materialCost: ''
-      delivery:
-        base: self
-        parent: null
-        package: null
-      duration:
-        unit: noLimit
-        quantity: 0
-        conditions:
-          present: []
-          absent: []
-        stationary: false
-        description: Always Active
-      effectTypes:
-        - immunity
-      elderSorcery: false
-      elderSorceryIncant: ''
-      elements: []
+      heightened: ''
       endCondition: ''
-      executionTime: passive
+      requirements: ''
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
-      featSaveAttribute: mov
-      form: normal
+      trigger: ''
+      basic: false
+      form: flaw
+      limitation: ''
+      improvement: ''
+      prepared: true
+      warded: false
+      secret: false
+      consumable: false
+      quantity: 1
+      maxQuantity:
+        raw: ''
+        saved: ''
+      gmNotes: null
+      adept:
+        enabled: false
+        amount: 1
+      effectTypes: []
       gifted:
         enabled: false
         amount: 1
       grantOnly: false
-      heightened: ''
-      improvement: ''
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
-      interaction: manifest
-      invoked: false
-      limitation: ''
-      maneuver: passive
-      overview:
-        base: >-
-          You gain @L[Ability:Natural Unbreachability]{Natural Unbreachability}
-          and weight half as much as you would otherwise.
-        proficient: ''
-        fluent: ''
-      piercing: normal
-      powerSources:
-        - martial
-      prepared: true
-      range: Self.
-      requirements: ''
-      results:
-        hit: ''
-        critHit: ''
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
-      ritual: false
-      rotator: false
-      secret: false
-      skill: false
-      spell: false
-      standard: false
-      sustained: false
-      targets:
-        - self
-      trigger: ''
-      warded: false
-    _id: NDJ6bRHKK7MpRqVb
-    img: systems/teriock/src/icons/abilities/mithril-being.webp
+    _id: 2H75N4zuZ4n1quED
     changes: []
     disabled: false
     duration:
@@ -287,19 +351,15 @@ effects:
       systemId: teriock
       systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!cnOXmbAcAFgc4DPI.NDJ6bRHKK7MpRqVb'
-  - name: Natural Unbreachability
+    _key: '!items.effects!kZW3ZYbSJJ5gqfOX.2H75N4zuZ4n1quED'
+  - name: Fire Damage Resistance
     type: ability
+    img: systems/teriock/src/icons/abilities/fire-damage-resistance.webp
     system:
       hierarchy:
-        supId: NDJ6bRHKK7MpRqVb
-        rootUuid: Compendium.teriock.abilities.Item.cnOXmbAcAFgc4DPI
+        rootUuid: Item.BRPLXZ2FQ4WkYoqj
         subIds: []
-      consumable: false
-      maxQuantity:
-        saved: ''
-        raw: ''
-      quantity: 1
+        supId: null
       applies:
         base:
           statuses: []
@@ -310,9 +370,9 @@ effects:
           checks: []
           duration: 0
           changes:
-            - key: '!body__system.av.saved__neq__0__system.av.raw'
+            - key: system.protections.resistances.damageTypes
               mode: 2
-              value: '1'
+              value: fire
               priority: 10
           common: []
           expiration:
@@ -342,6 +402,18 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            resetHp: true
+            resetMp: false
         proficient:
           statuses: []
           startStatuses: []
@@ -379,6 +451,18 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            resetHp: true
+            resetMp: false
         fluent:
           statuses: []
           startStatuses: []
@@ -416,6 +500,18 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            resetHp: true
+            resetMp: false
         heightened:
           statuses: []
           startStatuses: []
@@ -453,11 +549,71 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            resetHp: true
+            resetMp: false
         macros: {}
-      adept:
-        enabled: false
-        amount: 1
-      basic: false
+      elderSorcery: false
+      elderSorceryIncant: ''
+      powerSources:
+        - magical
+      interaction: manifest
+      featSaveAttribute: mov
+      maneuver: passive
+      executionTime: passive
+      delivery:
+        base: self
+        parent: null
+        package: null
+      targets:
+        - self
+      elements: []
+      duration:
+        unit: noLimit
+        quantity: 0
+        conditions:
+          present: []
+          absent: []
+        description: Always Active
+        stationary: false
+      sustained: false
+      range: Self.
+      overview:
+        base: You @L[Keyword:Resistance]{resist} @L[Damage:Fire]{fire damage}.
+        proficient: ''
+        fluent: ''
+      results:
+        hit: ''
+        critHit: ''
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      piercing: normal
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+      skill: false
+      spell: false
+      standard: false
+      ritual: false
+      rotator: false
+      invoked: false
       costs:
         verbal: false
         somatic: false
@@ -482,81 +638,36 @@ effects:
             variable: ''
         break: ''
         materialCost: ''
-      delivery:
-        base: self
-        parent: null
-        package: null
-      duration:
-        unit: noLimit
-        quantity: 0
-        conditions:
-          present: []
-          absent: []
-        stationary: false
-        description: Always Active
-      effectTypes: []
-      elderSorcery: false
-      elderSorceryIncant: ''
-      elements: []
+      heightened: ''
       endCondition: ''
-      executionTime: passive
+      requirements: ''
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
-      featSaveAttribute: mov
+      trigger: ''
+      basic: false
       form: normal
+      limitation: ''
+      improvement: ''
+      prepared: true
+      warded: false
+      secret: false
+      consumable: false
+      quantity: 1
+      maxQuantity:
+        raw: ''
+        saved: ''
+      effectTypes:
+        - resistance
+      gmNotes: null
+      adept:
+        enabled: false
+        amount: 1
       gifted:
         enabled: false
         amount: 1
       grantOnly: false
-      heightened: ''
-      improvement: ''
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
-      interaction: manifest
-      invoked: false
-      limitation: ''
-      maneuver: passive
-      overview:
-        base: >-
-          Your @L[Category:Body parts]{natural} @L[Category:Armor]{armor} is
-          @L[Property:Unbreachable]{unbreachable}.
-        proficient: ''
-        fluent: ''
-      piercing: normal
-      powerSources:
-        - martial
-      prepared: true
-      range: Self.
-      requirements: ''
-      results:
-        hit: ''
-        critHit: ''
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
-      ritual: false
-      rotator: false
-      secret: false
-      skill: true
-      spell: false
-      standard: true
-      sustained: false
-      targets:
-        - self
-      trigger: ''
-      warded: false
-      class: veteran
-    _id: PpUnUsq82prkqpWf
-    img: systems/teriock/src/icons/abilities/natural-unbreachability.webp
+    _id: ejcum5I8FTIrn8iI
     changes: []
     disabled: false
     duration:
@@ -571,7 +682,7 @@ effects:
       systemId: teriock
       systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!cnOXmbAcAFgc4DPI.PpUnUsq82prkqpWf'
+    _key: '!items.effects!kZW3ZYbSJJ5gqfOX.ejcum5I8FTIrn8iI'
 ownership:
   default: 0
 flags: {}
@@ -580,4 +691,5 @@ _stats:
   systemId: teriock
   systemVersion: 0.9.1
   lastModifiedBy: teriockBuilder00
-_key: '!items!cnOXmbAcAFgc4DPI'
+_id: kZW3ZYbSJJ5gqfOX
+_key: '!items!kZW3ZYbSJJ5gqfOX'

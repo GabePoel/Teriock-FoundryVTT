@@ -1,20 +1,32 @@
-name: Mithril Being
-type: wrapper
-_id: cnOXmbAcAFgc4DPI
-img: systems/teriock/src/icons/abilities/mithril-being.webp
+folder: 1lFMAV0Fky7fm76P
+name: Air Clan
+type: power
+img: icons/magic/air/weather-wind-gust.webp
+system:
+  gmNotes: null
+  description: >-
+    <p>A group of @L[Creature:Cobben]{cobbens} from a group of islands connected
+    to the Blue Reefs that practice ancestor worship and have a complex set of
+    cultural traditions and dances that imbue their @L[Ability:Spirit
+    Item]{spirit items} with powers mastered by their ancestors. They have
+    complex facial tattoos that represent which of the eight clans they are
+    from.</p><p>Dancing is an integral part of Tei Koban culture. The dances
+    prepare young @L[Creature:Cobben]{cobbens} for obtaining their
+    @L[Ability:Spirit Item]{spirit items} and helps their ancestral connection
+    and training.</p>
+  hierarchy:
+    rootUuid: null
+    subIds: []
+    supId: null
+  type: backstory
 effects:
-  - name: Mithril Being
+  - name: Leaping
     type: ability
+    img: systems/teriock/src/icons/abilities/leaping.webp
     system:
-      consumable: false
-      maxQuantity:
-        saved: ''
-        raw: ''
-      quantity: 1
       hierarchy:
-        rootUuid: Compendium.teriock.abilities.Item.cnOXmbAcAFgc4DPI
-        subIds:
-          - PpUnUsq82prkqpWf
+        rootUuid: Item.9CRN5XOtXhIXFKBr
+        subIds: []
         supId: null
       applies:
         base:
@@ -26,9 +38,13 @@ effects:
           checks: []
           duration: 0
           changes:
-            - key: system.weight.self.raw
-              mode: 1
-              value: '0.5'
+            - key: system.speedAdjustments.leapVertical
+              mode: 4
+              value: '1'
+              priority: 10
+            - key: system.speedAdjustments.leapHorizontal
+              mode: 4
+              value: '2'
               priority: 10
           common: []
           expiration:
@@ -58,6 +74,18 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            resetHp: true
+            resetMp: false
         proficient:
           statuses: []
           startStatuses: []
@@ -66,7 +94,15 @@ effects:
           hacks: []
           checks: []
           duration: 0
-          changes: []
+          changes:
+            - key: system.speedAdjustments.leapVertical
+              mode: 4
+              value: '2'
+              priority: 10
+            - key: system.speedAdjustments.leapHorizontal
+              mode: 4
+              value: '3'
+              priority: 10
           common: []
           expiration:
             normal:
@@ -95,6 +131,18 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            resetHp: true
+            resetMp: false
         fluent:
           statuses: []
           startStatuses: []
@@ -132,6 +180,18 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            resetHp: true
+            resetMp: false
         heightened:
           statuses: []
           startStatuses: []
@@ -169,11 +229,76 @@ effects:
                   skip: 0
             changeOnCrit: false
             doesExpire: false
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            resetHp: true
+            resetMp: false
         macros: {}
-      adept:
-        enabled: false
-        amount: 1
-      basic: false
+      elderSorcery: false
+      elderSorceryIncant: ''
+      powerSources:
+        - martial
+      interaction: manifest
+      featSaveAttribute: mov
+      maneuver: passive
+      executionTime: passive
+      delivery:
+        base: self
+        parent: null
+        package: null
+      targets:
+        - self
+      elements: []
+      duration:
+        unit: noLimit
+        quantity: 0
+        conditions:
+          present: []
+          absent: []
+        description: Always Active
+        stationary: false
+      sustained: false
+      range: Self.
+      overview:
+        base: >-
+          You vertically leap at @L[Core:Movement Speed]{quarter speed} and
+          horizontally leap at @L[Core:Movement Speed]{half speed}.
+        proficient: >-
+          You instead vertically leap at @L[Core:Movement Speed]{half speed} and
+          horizontally leap at @L[Core:Movement Speed]{full speed}.
+        fluent: ''
+      results:
+        hit: ''
+        critHit: ''
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      piercing: normal
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+      skill: true
+      spell: false
+      standard: true
+      ritual: false
+      class: assassin
+      rotator: false
+      invoked: false
       costs:
         verbal: false
         somatic: false
@@ -198,81 +323,36 @@ effects:
             variable: ''
         break: ''
         materialCost: ''
-      delivery:
-        base: self
-        parent: null
-        package: null
-      duration:
-        unit: noLimit
-        quantity: 0
-        conditions:
-          present: []
-          absent: []
-        stationary: false
-        description: Always Active
-      effectTypes:
-        - immunity
-      elderSorcery: false
-      elderSorceryIncant: ''
-      elements: []
+      heightened: ''
       endCondition: ''
-      executionTime: passive
+      requirements: ''
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
-      featSaveAttribute: mov
+      trigger: ''
+      basic: false
       form: normal
+      limitation: ''
+      improvement: ''
+      prepared: true
+      warded: false
+      secret: false
+      consumable: false
+      quantity: 1
+      maxQuantity:
+        raw: ''
+        saved: ''
+      effectTypes:
+        - movement
+      gmNotes: null
+      adept:
+        enabled: false
+        amount: 1
       gifted:
         enabled: false
         amount: 1
       grantOnly: false
-      heightened: ''
-      improvement: ''
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
-      interaction: manifest
-      invoked: false
-      limitation: ''
-      maneuver: passive
-      overview:
-        base: >-
-          You gain @L[Ability:Natural Unbreachability]{Natural Unbreachability}
-          and weight half as much as you would otherwise.
-        proficient: ''
-        fluent: ''
-      piercing: normal
-      powerSources:
-        - martial
-      prepared: true
-      range: Self.
-      requirements: ''
-      results:
-        hit: ''
-        critHit: ''
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
-      ritual: false
-      rotator: false
-      secret: false
-      skill: false
-      spell: false
-      standard: false
-      sustained: false
-      targets:
-        - self
-      trigger: ''
-      warded: false
-    _id: NDJ6bRHKK7MpRqVb
-    img: systems/teriock/src/icons/abilities/mithril-being.webp
+    _id: VwKOn8e99fmfSXV4
     changes: []
     disabled: false
     duration:
@@ -287,19 +367,22 @@ effects:
       systemId: teriock
       systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!cnOXmbAcAFgc4DPI.NDJ6bRHKK7MpRqVb'
-  - name: Natural Unbreachability
+    _key: '!items.effects!7Qb4eJH1KYtI2GtC.VwKOn8e99fmfSXV4'
+  - name: Cannot Climb
     type: ability
+    _id: CPc5MjhB7WFWYUiR
+    img: systems/teriock/src/icons/abilities/cannot-climb.webp
     system:
-      hierarchy:
-        supId: NDJ6bRHKK7MpRqVb
-        rootUuid: Compendium.teriock.abilities.Item.cnOXmbAcAFgc4DPI
-        subIds: []
+      gmNotes: null
       consumable: false
       maxQuantity:
         saved: ''
         raw: ''
       quantity: 1
+      hierarchy:
+        rootUuid: Item.9CRN5XOtXhIXFKBr
+        subIds: []
+        supId: null
       applies:
         base:
           statuses: []
@@ -310,10 +393,10 @@ effects:
           checks: []
           duration: 0
           changes:
-            - key: '!body__system.av.saved__neq__0__system.av.raw'
-              mode: 2
-              value: '1'
-              priority: 10
+            - key: system.speedAdjustments.climb
+              mode: 5
+              value: '0'
+              priority: 20
           common: []
           expiration:
             normal:
@@ -321,27 +404,39 @@ effects:
                 who:
                   type: target
                 what:
-                  type: none
                   roll: 2d4kh1
                   threshold: 4
+                  type: none
                 when:
+                  skip: 0
                   time: start
                   trigger: turn
-                  skip: 0
             crit:
               combat:
                 who:
                   type: target
                 what:
-                  type: none
                   roll: 2d4kh1
                   threshold: 4
+                  type: none
                 when:
+                  skip: 0
                   time: start
                   trigger: turn
-                  skip: 0
             changeOnCrit: false
             doesExpire: false
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            resetHp: true
+            resetMp: false
         proficient:
           statuses: []
           startStatuses: []
@@ -358,27 +453,39 @@ effects:
                 who:
                   type: target
                 what:
-                  type: none
                   roll: 2d4kh1
                   threshold: 4
+                  type: none
                 when:
+                  skip: 0
                   time: start
                   trigger: turn
-                  skip: 0
             crit:
               combat:
                 who:
                   type: target
                 what:
-                  type: none
                   roll: 2d4kh1
                   threshold: 4
+                  type: none
                 when:
+                  skip: 0
                   time: start
                   trigger: turn
-                  skip: 0
             changeOnCrit: false
             doesExpire: false
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            resetHp: true
+            resetMp: false
         fluent:
           statuses: []
           startStatuses: []
@@ -395,27 +502,39 @@ effects:
                 who:
                   type: target
                 what:
-                  type: none
                   roll: 2d4kh1
                   threshold: 4
+                  type: none
                 when:
+                  skip: 0
                   time: start
                   trigger: turn
-                  skip: 0
             crit:
               combat:
                 who:
                   type: target
                 what:
-                  type: none
                   roll: 2d4kh1
                   threshold: 4
+                  type: none
                 when:
+                  skip: 0
                   time: start
                   trigger: turn
-                  skip: 0
             changeOnCrit: false
             doesExpire: false
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            resetHp: true
+            resetMp: false
         heightened:
           statuses: []
           startStatuses: []
@@ -432,27 +551,39 @@ effects:
                 who:
                   type: target
                 what:
-                  type: none
                   roll: 2d4kh1
                   threshold: 4
+                  type: none
                 when:
+                  skip: 0
                   time: start
                   trigger: turn
-                  skip: 0
             crit:
               combat:
                 who:
                   type: target
                 what:
-                  type: none
                   roll: 2d4kh1
                   threshold: 4
+                  type: none
                 when:
+                  skip: 0
                   time: start
                   trigger: turn
-                  skip: 0
             changeOnCrit: false
             doesExpire: false
+          transformation:
+            enabled: false
+            image: null
+            level: minor
+            suppression:
+              bodyParts: true
+              equipment: true
+              fluencies: true
+              ranks: true
+            uuids: []
+            resetHp: true
+            resetMp: false
         macros: {}
       adept:
         enabled: false
@@ -504,7 +635,7 @@ effects:
       expansionRange: null
       expansionSaveAttribute: mov
       featSaveAttribute: mov
-      form: normal
+      form: flaw
       gifted:
         enabled: false
         amount: 1
@@ -524,8 +655,8 @@ effects:
       maneuver: passive
       overview:
         base: >-
-          Your @L[Category:Body parts]{natural} @L[Category:Armor]{armor} is
-          @L[Property:Unbreachable]{unbreachable}.
+          You have no @L[Core:Movement Speed]{climb speed}. This overrides
+          abilities such as @L[Ability:Climbing]{Climbing}.
         proficient: ''
         fluent: ''
       piercing: normal
@@ -546,17 +677,14 @@ effects:
       ritual: false
       rotator: false
       secret: false
-      skill: true
+      skill: false
       spell: false
-      standard: true
+      standard: false
       sustained: false
       targets:
         - self
       trigger: ''
       warded: false
-      class: veteran
-    _id: PpUnUsq82prkqpWf
-    img: systems/teriock/src/icons/abilities/natural-unbreachability.webp
     changes: []
     disabled: false
     duration:
@@ -571,7 +699,7 @@ effects:
       systemId: teriock
       systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!cnOXmbAcAFgc4DPI.PpUnUsq82prkqpWf'
+    _key: '!items.effects!7Qb4eJH1KYtI2GtC.CPc5MjhB7WFWYUiR'
 ownership:
   default: 0
 flags: {}
@@ -580,4 +708,5 @@ _stats:
   systemId: teriock
   systemVersion: 0.9.1
   lastModifiedBy: teriockBuilder00
-_key: '!items!cnOXmbAcAFgc4DPI'
+_id: 7Qb4eJH1KYtI2GtC
+_key: '!items!7Qb4eJH1KYtI2GtC'

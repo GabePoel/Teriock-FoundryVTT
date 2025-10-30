@@ -1,36 +1,27 @@
-folder: MwRSCixW3oPgC6LW
-name: Sand Clan
-type: power
-_id: geBhiyescCdAlSgs
-img: icons/environment/wilderness/cave-entrance-rocky.webp
-system:
-  gmNotes: null
-  description: >-
-    <p>Each of the eight @L[Creature:Desert Saurage]{desert saurage} clans has a
-    different distinct @L[Category:Abilities]{ability}, piece of jewelry, and
-    color.</p>
-  hierarchy:
-    rootUuid: null
-    subIds: []
-    supId: null
-  type: backstory
+name: Web Capture
+type: wrapper
+_id: EqXaqUIQHaXwAKBi
+img: icons/creatures/webs/web-spider-glowing-purple.webp
 effects:
-  - name: Sand Blind Packet
+  - name: Web Capture
     type: ability
-    img: systems/teriock/src/icons/abilities/sand-blind-packet.webp
     system:
+      gmNotes: null
+      consumable: false
+      maxQuantity:
+        saved: ''
+        raw: ''
+      quantity: 1
       hierarchy:
-        rootUuid: Compendium.teriock.powers.Item.geBhiyescCdAlSgs
+        rootUuid: Compendium.teriock.abilities.Item.EqXaqUIQHaXwAKBi
         subIds: []
         supId: null
       applies:
         base:
-          statuses:
-            - blind
+          statuses: []
           startStatuses: []
           endStatuses: []
-          rolls:
-            endCon: 2d4
+          rolls: {}
           hacks: []
           checks: []
           duration: 0
@@ -42,27 +33,27 @@ effects:
                 who:
                   type: target
                 what:
-                  type: rolled
                   roll: 2d4kh1
                   threshold: 4
+                  type: none
                 when:
-                  time: end
-                  trigger: turn
                   skip: 0
+                  time: start
+                  trigger: turn
             crit:
               combat:
                 who:
                   type: target
                 what:
-                  type: none
                   roll: 2d4kh1
                   threshold: 4
+                  type: none
                 when:
+                  skip: 0
                   time: start
                   trigger: turn
-                  skip: 0
             changeOnCrit: false
-            doesExpire: true
+            doesExpire: false
           transformation:
             enabled: false
             image: null
@@ -91,25 +82,25 @@ effects:
                 who:
                   type: target
                 what:
-                  type: none
                   roll: 2d4kh1
                   threshold: 4
+                  type: none
                 when:
+                  skip: 0
                   time: start
                   trigger: turn
-                  skip: 0
             crit:
               combat:
                 who:
                   type: target
                 what:
-                  type: none
                   roll: 2d4kh1
                   threshold: 4
+                  type: none
                 when:
+                  skip: 0
                   time: start
                   trigger: turn
-                  skip: 0
             changeOnCrit: false
             doesExpire: false
           transformation:
@@ -140,25 +131,25 @@ effects:
                 who:
                   type: target
                 what:
-                  type: none
                   roll: 2d4kh1
                   threshold: 4
+                  type: none
                 when:
+                  skip: 0
                   time: start
                   trigger: turn
-                  skip: 0
             crit:
               combat:
                 who:
                   type: target
                 what:
-                  type: none
                   roll: 2d4kh1
                   threshold: 4
+                  type: none
                 when:
+                  skip: 0
                   time: start
                   trigger: turn
-                  skip: 0
             changeOnCrit: false
             doesExpire: false
           transformation:
@@ -189,25 +180,25 @@ effects:
                 who:
                   type: target
                 what:
-                  type: none
                   roll: 2d4kh1
                   threshold: 4
+                  type: none
                 when:
+                  skip: 0
                   time: start
                   trigger: turn
-                  skip: 0
             crit:
               combat:
                 who:
                   type: target
                 what:
-                  type: none
                   roll: 2d4kh1
                   threshold: 4
+                  type: none
                 when:
+                  skip: 0
                   time: start
                   trigger: turn
-                  skip: 0
             changeOnCrit: false
             doesExpire: false
           transformation:
@@ -223,58 +214,10 @@ effects:
             resetHp: true
             resetMp: false
         macros: {}
-      elderSorcery: false
-      elderSorceryIncant: ''
-      powerSources:
-        - martial
-      interaction: attack
-      featSaveAttribute: mov
-      maneuver: active
-      executionTime: a1
-      delivery:
-        base: missile
-        parent: null
-        package: ray
-      targets:
-        - creature
-      elements: []
-      duration:
-        unit: noLimit
-        quantity: 0
-        conditions:
-          present: []
-          absent: []
-        description: No Limit
-        stationary: false
-      sustained: false
-      range: '10'
-      overview:
-        base: Target is @L[Condition:Blind]{blind}.
-        proficient: ''
-        fluent: ''
-      results:
-        hit: ''
-        critHit: ''
-        miss: ''
-        critMiss: ''
-        save: ''
-        critSave: ''
-        fail: ''
-        critFail: ''
-      piercing: av0
-      improvements:
-        attributeImprovement:
-          attribute: null
-          minVal: 0
-        featSaveImprovement:
-          attribute: null
-          amount: proficient
-      skill: false
-      spell: false
-      standard: false
-      ritual: false
-      rotator: false
-      invoked: false
+      adept:
+        enabled: false
+        amount: 1
+      basic: false
       costs:
         verbal: false
         somatic: false
@@ -299,37 +242,81 @@ effects:
             variable: ''
         break: ''
         materialCost: ''
-      heightened: ''
-      endCondition: >-
-        At the end of each of the target's @L[Core:Turn]{turns}, they roll
-        [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.
-      requirements: ''
+      delivery:
+        base: hand
+        parent: null
+        package: null
+      duration:
+        unit: noLimit
+        quantity: 0
+        conditions:
+          present:
+            - down
+          absent: []
+        stationary: false
+        description: While Down
+      effectTypes: []
+      elderSorcery: false
+      elderSorceryIncant: ''
+      elements: []
+      endCondition: ''
+      executionTime: a2
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
-      trigger: ''
-      basic: false
+      featSaveAttribute: mov
       form: normal
-      limitation: ''
-      improvement: ''
-      prepared: true
-      warded: false
-      secret: false
-      consumable: false
-      quantity: 1
-      maxQuantity:
-        raw: ''
-        saved: ''
-      gmNotes: null
-      adept:
-        enabled: false
-        amount: 1
-      effectTypes: []
       gifted:
         enabled: false
         amount: 1
       grantOnly: false
-    _id: f7vL7fOtxzTIoRD2
+      heightened: ''
+      improvement: ''
+      improvements:
+        attributeImprovement:
+          attribute: null
+          minVal: 0
+        featSaveImprovement:
+          attribute: null
+          amount: proficient
+      interaction: manifest
+      invoked: false
+      limitation: ''
+      maneuver: active
+      overview:
+        base: ''
+        proficient: ''
+        fluent: ''
+      piercing: normal
+      powerSources:
+        - martial
+      prepared: true
+      range: null
+      requirements: ''
+      results:
+        hit: >-
+          Target is @L[Condition:Snared]{snared} and
+          @L[Condition:Terrored]{terrored}.
+        critHit: ''
+        miss: ''
+        critMiss: ''
+        save: ''
+        critSave: ''
+        fail: ''
+        critFail: ''
+      ritual: false
+      rotator: false
+      secret: false
+      skill: false
+      spell: false
+      standard: false
+      sustained: false
+      targets:
+        - creature
+      trigger: ''
+      warded: false
+    _id: sPaXgnCnhR4iZOrp
+    img: icons/creatures/webs/web-spider-glowing-purple.webp
     changes: []
     disabled: false
     duration:
@@ -344,7 +331,7 @@ effects:
       systemId: teriock
       systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!geBhiyescCdAlSgs.f7vL7fOtxzTIoRD2'
+    _key: '!items.effects!EqXaqUIQHaXwAKBi.sPaXgnCnhR4iZOrp'
 ownership:
   default: 0
 flags: {}
@@ -353,4 +340,4 @@ _stats:
   systemId: teriock
   systemVersion: 0.9.1
   lastModifiedBy: teriockBuilder00
-_key: '!items!geBhiyescCdAlSgs'
+_key: '!items!EqXaqUIQHaXwAKBi'

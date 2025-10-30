@@ -1,28 +1,36 @@
-folder: TpMHpBRNJJ598Myh
-name: Damaged by [THING]
-type: wrapper
-img: icons/skills/wounds/blood-spurt-spray-red.webp
+folder: MwRSCixW3oPgC6LW
+name: Sand Clan
+type: power
+_id: geBhiyescCdAlSgs
+img: icons/magic/earth/projectiles-stone-salvo.webp
+system:
+  gmNotes: null
+  description: >-
+    <p>Each of the eight @L[Creature:Desert Saurage]{desert saurage} clans has a
+    different distinct @L[Category:Abilities]{ability}, piece of jewelry, and
+    color.</p>
+  hierarchy:
+    rootUuid: null
+    subIds: []
+    supId: null
+  type: backstory
 effects:
-  - name: Damaged by [THING]
+  - name: Sand Blind Packet
     type: ability
-    _id: vxzxFv72MHGaOyEg
-    img: icons/skills/wounds/blood-spurt-spray-red.webp
+    img: systems/teriock/src/icons/abilities/sand-blind-packet.webp
     system:
-      consumable: false
-      maxQuantity:
-        raw: ''
-        saved: ''
-      quantity: 1
       hierarchy:
-        rootUuid: Compendium.teriock.essentials.Item.b9fxzroEUZFnvOJs
+        rootUuid: Compendium.teriock.powers.Item.geBhiyescCdAlSgs
         subIds: []
         supId: null
       applies:
         base:
-          statuses: []
+          statuses:
+            - blind
           startStatuses: []
           endStatuses: []
-          rolls: {}
+          rolls:
+            endCon: 2d4
           hacks: []
           checks: []
           duration: 0
@@ -34,11 +42,11 @@ effects:
                 who:
                   type: target
                 what:
-                  type: none
+                  type: rolled
                   roll: 2d4kh1
                   threshold: 4
                 when:
-                  time: start
+                  time: end
                   trigger: turn
                   skip: 0
             crit:
@@ -54,7 +62,7 @@ effects:
                   trigger: turn
                   skip: 0
             changeOnCrit: false
-            doesExpire: false
+            doesExpire: true
           transformation:
             enabled: false
             image: null
@@ -218,32 +226,30 @@ effects:
       elderSorcery: false
       elderSorceryIncant: ''
       powerSources:
-        - magical
-      interaction: manifest
+        - martial
+      interaction: attack
       featSaveAttribute: mov
-      maneuver: passive
-      executionTime: passive
+      maneuver: active
+      executionTime: a1
       delivery:
-        base: self
+        base: missile
         parent: null
-        package: null
+        package: ray
       targets:
-        - self
+        - creature
       elements: []
       duration:
         unit: noLimit
-        quantity: 1
+        quantity: 0
         conditions:
           present: []
           absent: []
+        description: No Limit
         stationary: false
-        description: Always Active
       sustained: false
-      range: null
+      range: '10'
       overview:
-        base: >-
-          <p>[THING] deals you an additional [[/damage 1d10]]
-          @L[Core:Damage]{damage}.</p>
+        base: Target is @L[Condition:Blind]{blind}.
         proficient: ''
         fluent: ''
       results:
@@ -255,7 +261,7 @@ effects:
         critSave: ''
         fail: ''
         critFail: ''
-      piercing: normal
+      piercing: av0
       improvements:
         attributeImprovement:
           attribute: null
@@ -294,29 +300,36 @@ effects:
         break: ''
         materialCost: ''
       heightened: ''
-      endCondition: ''
+      endCondition: >-
+        At the end of each of the target's @L[Core:Turn]{turns}, they roll
+        [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.
       requirements: ''
-      effectTypes:
-        - magical
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
       trigger: ''
       basic: false
-      form: flaw
+      form: normal
       limitation: ''
       improvement: ''
       prepared: true
       warded: false
       secret: false
-      gifted:
-        enabled: false
-        amount: 1
+      consumable: false
+      quantity: 1
+      maxQuantity:
+        raw: ''
+        saved: ''
+      gmNotes: null
       adept:
         enabled: false
         amount: 1
-      gmNotes: null
+      effectTypes: []
+      gifted:
+        enabled: false
+        amount: 1
       grantOnly: false
+    _id: f7vL7fOtxzTIoRD2
     changes: []
     disabled: false
     duration:
@@ -331,7 +344,7 @@ effects:
       systemId: teriock
       systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
-    _key: '!items.effects!2DNwNOYEFYFQi1cD.vxzxFv72MHGaOyEg'
+    _key: '!items.effects!geBhiyescCdAlSgs.f7vL7fOtxzTIoRD2'
 ownership:
   default: 0
 flags: {}
@@ -340,5 +353,4 @@ _stats:
   systemId: teriock
   systemVersion: 0.9.1
   lastModifiedBy: teriockBuilder00
-_id: 2DNwNOYEFYFQi1cD
-_key: '!items!2DNwNOYEFYFQi1cD'
+_key: '!items!geBhiyescCdAlSgs'
