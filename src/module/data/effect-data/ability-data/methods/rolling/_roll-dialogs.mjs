@@ -65,7 +65,7 @@ export async function _handleDialogs(rollConfig) {
 
   // Heightened dialog
   if (
-    abilityData.parent.isProficient &&
+    rollConfig.useData.proficient &&
     abilityData.heightened &&
     !rollConfig.useData.modifiers.noHeighten
   ) {
