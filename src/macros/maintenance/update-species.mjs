@@ -39,7 +39,7 @@ for (const config of folderConfigs) {
   folders[config.variable] = folder;
 }
 
-const progress = ui.notifications.info("Pulling all creatures from wiki.", {
+const progress = ui.notifications.info("Pulling all species from wiki.", {
   pct: 0.01,
   progress: true,
 });

@@ -1,10 +1,7 @@
 import { cleanValue } from "../../../../helpers/clean.mjs";
 import { createProperty } from "../../../../helpers/create-effects.mjs";
 import { getIcon } from "../../../../helpers/path.mjs";
-import {
-  toCamelCase,
-  toInt
-} from "../../../../helpers/string.mjs";
+import { toCamelCase, toInt } from "../../../../helpers/string.mjs";
 import { _override } from "./_overrides.mjs";
 
 /**
