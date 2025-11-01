@@ -3338,7 +3338,11 @@ effects:
           hacks: []
           checks: []
           duration: 0
-          changes: []
+          changes:
+            - key: '!ability__name__eq__Rotators__system.fluent'
+              mode: 5
+              value: 'true'
+              priority: 10
           common: []
           expiration:
             normal:
@@ -3507,23 +3511,23 @@ effects:
         break: ''
         materialCost: ''
       delivery:
-        base: weapon
+        base: self
         parent: null
         package: null
       duration:
-        unit: minute
-        quantity: 1
+        unit: noLimit
+        quantity: 0
         conditions:
           present: []
           absent: []
         stationary: false
-        description: 1 Minute
+        description: Always Active
       effectTypes: []
       elderSorcery: false
       elderSorceryIncant: ''
       elements: []
       endCondition: ''
-      executionTime: a1
+      executionTime: passive
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
@@ -3542,18 +3546,26 @@ effects:
         featSaveImprovement:
           attribute: null
           amount: proficient
-      interaction: attack
+      interaction: manifest
       invoked: false
       limitation: ''
-      maneuver: active
+      maneuver: passive
       overview:
-        base: ''
-        proficient: ''
+        base: >-
+          You may rotate between rotator @L[Category:Spells]{spells} during a
+          @L[Core:Short Rest]{short rest} instead of a @L[Core:Long Rest]{long
+          rest}.
+        proficient: >-
+          You are @L[Core:Fluency Bonus]{fluent} in
+          @L[Ability:Rotators]{Rotators}. (This does not make you
+          @L[Core:Fluency Bonus]{fluent} in the @L[Category:Spells]{spells}
+          themselves.)
         fluent: ''
       piercing: normal
-      powerSources: []
+      powerSources:
+        - martial
       prepared: true
-      range: null
+      range: Self.
       requirements: ''
       results:
         hit: ''
@@ -3567,16 +3579,16 @@ effects:
       ritual: false
       rotator: false
       secret: false
-      skill: false
+      skill: true
       spell: false
-      standard: false
+      standard: true
       sustained: false
       targets:
-        - creature
+        - self
       trigger: ''
       warded: false
     _id: KJpVhJoDjTbbvF0Y
-    img: systems/teriock/src/icons/documents/ability.svg
+    img: systems/teriock/src/icons/abilities/rotator-fluency.webp
     changes: []
     disabled: false
     duration:
@@ -3832,23 +3844,23 @@ effects:
         break: ''
         materialCost: ''
       delivery:
-        base: weapon
+        base: self
         parent: null
         package: null
       duration:
-        unit: minute
-        quantity: 1
+        unit: noLimit
+        quantity: 0
         conditions:
           present: []
           absent: []
         stationary: false
-        description: 1 Minute
+        description: Always Active
       effectTypes: []
       elderSorcery: false
       elderSorceryIncant: ''
       elements: []
       endCondition: ''
-      executionTime: a1
+      executionTime: passive
       expansion: null
       expansionRange: null
       expansionSaveAttribute: mov
@@ -3867,18 +3879,36 @@ effects:
         featSaveImprovement:
           attribute: null
           amount: proficient
-      interaction: attack
+      interaction: manifest
       invoked: false
       limitation: ''
-      maneuver: active
+      maneuver: passive
       overview:
-        base: ''
-        proficient: ''
-        fluent: ''
+        base: >-
+          Having mastered the basic techniques of magic, you are able to cast
+          more advanced @L[Category:Spells]{spells}. If you create any
+          @L[Core:Elder Sorcery]{Elder Sorcery} @L[Category:Spells]{spells} of
+          your own, they get added to this list. However, just because you
+          "know" how to cast these spells, doesn't mean you are always prepared
+          to. Although all @L[Category:Mage classes]{mage classes} grant their
+          own elder sorcery and rotator spells, you may only have a maximum of
+          @L[Category:Mage classes]{MR} - 1 of these spells rotated into your
+          spell list at any given time across <i>all</i> classes.
+          @L[Category:Mage classes]{MR} refers to the number of @L[Core:Leveling
+          Up]{ranks} you have in @L[Category:Mage classes]{mage classes}. During
+          a @L[Core:Long Rest]{long rest}, you can "rotate" which spells you
+          have prepared.
+        proficient: >-
+          You may instead prepare 2 × (MR - 1) of these
+          @L[Category:Spells]{spells}.
+        fluent: >-
+          You may instead prepare 2 × (MR - 1) + @L[Core:Proficiency Bonus]{P}
+          of these @L[Category:Spells]{spells}.
       piercing: normal
-      powerSources: []
+      powerSources:
+        - martial
       prepared: true
-      range: null
+      range: Self.
       requirements: ''
       results:
         hit: ''
@@ -3892,16 +3922,16 @@ effects:
       ritual: false
       rotator: false
       secret: false
-      skill: false
+      skill: true
       spell: false
       standard: false
       sustained: false
       targets:
-        - creature
+        - self
       trigger: ''
       warded: false
     _id: 9Bum08FvPWAkmS20
-    img: systems/teriock/src/icons/documents/ability.svg
+    img: systems/teriock/src/icons/abilities/rotators.webp
     changes: []
     disabled: false
     duration:
