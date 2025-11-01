@@ -364,10 +364,13 @@ effects:
       quantity: 1
       applies:
         base:
-          statuses: []
+          statuses:
+            - lighted
+            - frozen
           startStatuses: []
           endStatuses: []
-          rolls: {}
+          rolls:
+            endCon: 2d4
           hacks: []
           checks: []
           duration: 0
@@ -381,11 +384,11 @@ effects:
                 what:
                   roll: 2d4kh1
                   threshold: 4
-                  type: none
+                  type: rolled
                 when:
                   skip: 0
-                  time: start
-                  trigger: turn
+                  time: end
+                  trigger: action
             crit:
               combat:
                 who:
@@ -393,13 +396,13 @@ effects:
                 what:
                   roll: 2d4kh1
                   threshold: 4
-                  type: none
+                  type: rolled
                 when:
-                  skip: 0
-                  time: start
-                  trigger: turn
-            changeOnCrit: false
-            doesExpire: false
+                  skip: 1
+                  time: end
+                  trigger: action
+            changeOnCrit: true
+            doesExpire: true
           transformation:
             enabled: false
             image: null
@@ -514,7 +517,8 @@ effects:
           statuses: []
           startStatuses: []
           endStatuses: []
-          rolls: {}
+          rolls:
+            damage: 1d4[magic fire]
           hacks: []
           checks: []
           duration: 0
@@ -565,8 +569,8 @@ effects:
         amount: 1
       basic: false
       costs:
-        verbal: false
-        somatic: false
+        verbal: true
+        somatic: true
         material: false
         mp:
           type: none
@@ -589,9 +593,9 @@ effects:
         break: ''
         materialCost: ''
       delivery:
-        base: weapon
+        base: hand
         parent: null
-        package: null
+        package: touch
       duration:
         unit: minute
         quantity: 1
@@ -600,11 +604,17 @@ effects:
           absent: []
         stationary: false
         description: 1 Minute
-      effectTypes: []
+      effectTypes:
+        - temporal
       elderSorcery: false
       elderSorceryIncant: ''
-      elements: []
-      endCondition: ''
+      elements:
+        - life
+        - storm
+        - flame
+      endCondition: >-
+        At the end of each of the target's actions, they roll [[/roll 2d4]]. If
+        either of these dice roll a 4, this effect ends.
       executionTime: a1
       expansion: null
       expansionRange: null
@@ -615,7 +625,7 @@ effects:
         enabled: false
         amount: 1
       grantOnly: false
-      heightened: ''
+      heightened: "For each additional @L[Core:MP]{MP} spent, deal an additional [[/damage 1d4[magic fire]]] @L[Core:Damage]{damage}\_as well."
       improvement: ''
       improvements:
         attributeImprovement:
@@ -632,14 +642,17 @@ effects:
         base: ''
         proficient: ''
         fluent: ''
-      piercing: normal
-      powerSources: []
+      piercing: ub
+      powerSources:
+        - magical
       prepared: true
-      range: null
+      range: Your Hand's Range
       requirements: ''
       results:
-        hit: ''
-        critHit: ''
+        hit: >-
+          Target is @L[Condition:Lighted]{lighted} and
+          @L[Condition:Frozen]{frozen}.
+        critHit: The target automatically fails the first [[/roll 2d4]] roll.
         miss: ''
         critMiss: ''
         save: ''
@@ -650,15 +663,15 @@ effects:
       rotator: false
       secret: false
       skill: false
-      spell: false
-      standard: false
+      spell: true
+      standard: true
       sustained: false
       targets:
         - creature
       trigger: ''
       warded: false
     _id: 7FoJ9152qdcNRQ2a
-    img: systems/teriock/src/icons/documents/ability.svg
+    img: systems/teriock/src/icons/abilities/null-touch.webp
     changes: []
     disabled: false
     duration:
@@ -689,10 +702,13 @@ effects:
       quantity: 1
       applies:
         base:
-          statuses: []
+          statuses:
+            - lighted
+            - frozen
           startStatuses: []
           endStatuses: []
-          rolls: {}
+          rolls:
+            endCon: 2d4
           hacks: []
           checks: []
           duration: 0
@@ -706,11 +722,11 @@ effects:
                 what:
                   roll: 2d4kh1
                   threshold: 4
-                  type: none
+                  type: rolled
                 when:
                   skip: 0
                   time: start
-                  trigger: turn
+                  trigger: action
             crit:
               combat:
                 who:
@@ -724,7 +740,7 @@ effects:
                   time: start
                   trigger: turn
             changeOnCrit: false
-            doesExpire: false
+            doesExpire: true
           transformation:
             enabled: false
             image: null
@@ -839,7 +855,8 @@ effects:
           statuses: []
           startStatuses: []
           endStatuses: []
-          rolls: {}
+          rolls:
+            damage: 1d4[magic fire]
           hacks: []
           checks: []
           duration: 0
@@ -890,13 +907,13 @@ effects:
         amount: 1
       basic: false
       costs:
-        verbal: false
-        somatic: false
+        verbal: true
+        somatic: true
         material: false
         mp:
-          type: none
+          type: static
           value:
-            static: 0
+            static: 1
             formula: ''
             variable: ''
         hp:
@@ -914,7 +931,7 @@ effects:
         break: ''
         materialCost: ''
       delivery:
-        base: weapon
+        base: aura
         parent: null
         package: null
       duration:
@@ -925,11 +942,17 @@ effects:
           absent: []
         stationary: false
         description: 1 Minute
-      effectTypes: []
+      effectTypes:
+        - temporal
       elderSorcery: false
       elderSorceryIncant: ''
-      elements: []
-      endCondition: ''
+      elements:
+        - life
+        - storm
+        - flame
+      endCondition: >-
+        At the start of each of the target's actions, they roll [[/roll 2d4]].
+        If either of these dice roll a 4, this effect ends.
       executionTime: a1
       expansion: null
       expansionRange: null
@@ -940,7 +963,7 @@ effects:
         enabled: false
         amount: 1
       grantOnly: false
-      heightened: ''
+      heightened: "For each additional @L[Core:MP]{MP} spent, deal an additional [[/damage 1d4[magic fire]]] @L[Core:Damage]{damage}\_as well."
       improvement: ''
       improvements:
         attributeImprovement:
@@ -949,7 +972,7 @@ effects:
         featSaveImprovement:
           attribute: null
           amount: proficient
-      interaction: attack
+      interaction: feat
       invoked: false
       limitation: ''
       maneuver: active
@@ -958,9 +981,10 @@ effects:
         proficient: ''
         fluent: ''
       piercing: normal
-      powerSources: []
+      powerSources:
+        - magical
       prepared: true
-      range: null
+      range: '10'
       requirements: ''
       results:
         hit: ''
@@ -969,21 +993,23 @@ effects:
         critMiss: ''
         save: ''
         critSave: ''
-        fail: ''
+        fail: >-
+          Target is @L[Condition:Lighted]{lighted} and
+          @L[Condition:Frozen]{frozen}.
         critFail: ''
       ritual: false
       rotator: false
       secret: false
       skill: false
-      spell: false
-      standard: false
+      spell: true
+      standard: true
       sustained: false
       targets:
         - creature
       trigger: ''
       warded: false
     _id: 360UEMOM3Q9O86JN
-    img: systems/teriock/src/icons/documents/ability.svg
+    img: systems/teriock/src/icons/abilities/null-aura.webp
     changes: []
     disabled: false
     duration:
