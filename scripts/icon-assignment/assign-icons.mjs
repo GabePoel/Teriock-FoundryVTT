@@ -9,7 +9,6 @@ import {
 } from "fs/promises";
 import { basename, dirname, extname, join, relative, resolve } from "path";
 import { argv, cwd, exit, platform } from "process";
-import sharp from "sharp"; // ✨ NEW
 import { toKebabCase } from "../../src/module/helpers/string.mjs";
 
 const args = argv.slice(2);
@@ -96,79 +95,26 @@ const parseLink = (raw, defaultCategory) => {
 
 const keyOf = (cat, name) => `${cat}||${name}`;
 
-const isRasterExt = (ext) =>
-  [".png", ".webp", ".jpg", ".jpeg", ".gif", ".avif", ".tiff", ".bmp"].includes(
-    ext.toLowerCase(),
-  );
-
-async function writeSquare(srcAbs, destAbs) {
-  const ext = extname(srcAbs).toLowerCase();
-
-  // Vector or unknown → copy as-is
-  if (ext === ".svg" || !isRasterExt(ext)) {
-    await copyFile(srcAbs, destAbs);
-    return;
-  }
-
-  // Respect EXIF orientation with rotate()
-  const base = sharp(srcAbs, { limitInputPixels: false }).rotate();
-  const meta = await base.metadata();
-  const w = meta.width || 0;
-  const h = meta.height || 0;
-
-  if (!w || !h) {
-    await copyFile(srcAbs, destAbs);
-    return;
-  }
-
-  // Center-crop the largest possible square without scaling
-  const size = Math.min(w, h);
-  const left = Math.floor((w - size) / 2);
-  const top = Math.floor((h - size) / 2);
-
-  let pipeline = base.extract({
-    left,
-    top,
-    width: size,
-    height: size,
-  });
-
-  // Preserve original format
-  const fmt = ext.replace(".", "");
-  if (fmt === "jpg") {
-    pipeline = pipeline.jpeg();
-  } else if (fmt === "png") {
-    pipeline = pipeline.png();
-  } else if (fmt === "webp") {
-    pipeline = pipeline.webp();
-  } else if (fmt === "avif") {
-    pipeline = pipeline.avif();
-  } else if (fmt === "tiff") {
-    pipeline = pipeline.tiff();
-  } else if (fmt === "gif") {
-    pipeline = pipeline.gif();
-  } else if (fmt === "bmp") {
-    pipeline = pipeline.bmp();
-  }
-
-  await pipeline.toFile(destAbs);
-}
-
+/* ---------------- Main ---------------- */
 (async () => {
   const raw = await readFile(opts.assignments, "utf8");
   const data = JSON.parse(raw);
 
   // Accept both unified and legacy (flat abilities) formats.
+  // Unified: { abilities: {...}, classes: {...}, ... }
+  // Legacy : { "Fire Ball": "icons/1.webp", ... }  -> treat as abilities
   let categories = {};
   if (data && typeof data === "object") {
     const objectSections = Object.entries(data)
       .filter(([, v]) => v && typeof v === "object" && !Array.isArray(v))
       .map(([k]) => k);
     if (objectSections.length > 0) {
+      // unified: keep all object sections (don’t hardcode list so it’s future-proof)
       for (const k of objectSections) {
         categories[k] = data[k];
       }
     } else {
+      // legacy: assume the entire file is abilities
       console.log("Legacy format detected; treating as { abilities: ... }");
       categories.abilities = data;
     }
@@ -176,13 +122,17 @@ async function writeSquare(srcAbs, destAbs) {
     throw new Error("assignments.json is not an object.");
   }
 
+  // Ensure base out dir
   if (!opts.dryRun) {
     await mkdir(opts.out, { recursive: true });
   }
 
+  // Build global maps:
+  // directPath: Map<cat||name, normalized image path>
+  // linkMap: Map<cat||name, {category, name}>
   const directPath = new Map();
   const linkMap = new Map();
-  const allItems = [];
+  const allItems = []; // [{category, name}]
   for (const [cat, section] of Object.entries(categories)) {
     for (const [name, val] of Object.entries(section)) {
       allItems.push({
@@ -200,6 +150,7 @@ async function writeSquare(srcAbs, destAbs) {
     }
   }
 
+  // Resolve the first ancestor that has a direct image (cross-category allowed)
   const resolveRootKey = (startCat, startName) => {
     const seen = new Set();
     let curCat = startCat,
@@ -213,15 +164,18 @@ async function writeSquare(srcAbs, destAbs) {
       const link = linkMap.get(k);
       if (!link) {
         return null;
-      }
+      } // chain ended without a direct image
+      // follow
       curCat = link.category || curCat;
       curName = link.name;
     }
     return curCat && curName ? keyOf(curCat, curName) : null;
   };
 
-  const rootOf = new Map();
-  const rootExt = new Map();
+  // Precompute roots & ext per root
+  const rootOf = new Map(); // Map<cat||name, rootKey|null>
+  const rootExt = new Map(); // Map<rootKey, ".png"|".webp"|...>
+  // Precompute roots that point to Foundry images
   const foundryRoots = new Set();
   for (const { category, name } of allItems) {
     const rKey = resolveRootKey(category, name);
@@ -237,7 +191,8 @@ async function writeSquare(srcAbs, destAbs) {
     }
   }
 
-  const usedNamesByCat = new Map();
+  // Prepare per-category output dirs and name registries
+  const usedNamesByCat = new Map(); // Map<category, Set<filename>>
   const ensureCatDir = async (cat) => {
     const dir = resolve(opts.out, cat);
     if (!opts.dryRun) {
@@ -252,11 +207,14 @@ async function writeSquare(srcAbs, destAbs) {
     await ensureCatDir(cat);
   }
 
-  const destNameForRoot = new Map();
+  // Allocate filenames for each root (copy destination lives in its OWN category)
+  const destNameForRoot = new Map(); // Map<rootKey, filename>
   for (const rKey of new Set([...rootOf.values()].filter(Boolean))) {
+    // Skip Foundry roots
     if (foundryRoots.has(rKey)) {
       continue;
     }
+
     const [rCat, rName] = rKey.split("||");
     const ext = rootExt.get(rKey) || "";
     const base = toKebabCase(rName);
@@ -265,11 +223,15 @@ async function writeSquare(srcAbs, destAbs) {
     destNameForRoot.set(rKey, name);
   }
 
-  // COPY (now: square-pad) each root image
+  // COPY each root image to its category folder
   for (const [rKey, outName] of destNameForRoot.entries()) {
     const [rCat, rName] = rKey.split("||");
     const srcRel = directPath.get(rKey);
     const srcAbs = resolve(opts.imagesRoot, srcRel);
+
+    // The check for 'Foundry' is now done before allocating,
+    // so we don't need a check here anymore.
+    // if (srcRel.startsWith("images/Foundry/")) continue;
 
     const outDir = resolve(opts.out, rCat);
     const destAbs = resolve(outDir, outName);
@@ -286,25 +248,29 @@ async function writeSquare(srcAbs, destAbs) {
         continue;
       }
       if (opts.dryRun) {
-        console.log(`[dry] COPY+SQUARE ${srcRel} -> ${join(rCat, outName)}`);
+        console.log(`[dry] COPY ${srcRel} -> ${join(rCat, outName)}`);
       } else {
-        await writeSquare(srcAbs, destAbs); // ✨ changed
-        console.log(`COPY+SQUARE ${srcRel} -> ${join(rCat, outName)}`);
+        await copyFile(srcAbs, destAbs);
+        console.log(`COPY ${srcRel} -> ${join(rCat, outName)}`);
       }
     }
   }
 
-  // Links
+  // For every item:
+  // - If direct: already copied as a root (or allocate now if somehow missing)
+  // - If link: create a symlink in the ITEM's category pointing to the ROOT's copied file
   for (const { category: cat, name } of allItems) {
     const v = categories[cat][name];
     const rKey = rootOf.get(keyOf(cat, name));
 
+    // Skip items that resolve to a Foundry icon
     if (rKey && foundryRoots.has(rKey)) {
       console.warn(`Skipping "${cat}:${name}" as it links to a Foundry icon.`);
       continue;
     }
 
     if (isDirect(v)) {
+      // Directs should be covered above as roots. In rare cases, ensure it exists:
       if (!rKey || !destNameForRoot.get(rKey)) {
         const srcRel = normalizePath(v);
         const ext = extname(srcRel) || ".png";
@@ -312,6 +278,7 @@ async function writeSquare(srcAbs, destAbs) {
         const used = usedNamesByCat.get(cat);
         const outName = uniqueName(base, ext, used);
         const outDir = resolve(opts.out, cat);
+        console.log(srcRel, ext, base, used, outName, outDir);
 
         let toSkip = false;
         for (const d of SKIP_DIRS) {
@@ -321,18 +288,14 @@ async function writeSquare(srcAbs, destAbs) {
         }
         if (!toSkip) {
           if (opts.dryRun) {
-            console.log(
-              `[dry] COPY+SQUARE ${srcRel} -> ${join(cat, outName)} (late)`,
-            );
+            console.log(`[dry] COPY ${srcRel} -> ${join(cat, outName)} (late)`);
           } else {
             const srcAbs = resolve(opts.imagesRoot, srcRel);
             if (!(await fileExists(srcAbs))) {
               console.warn(`Missing file for "${cat}:${name}": ${srcRel}`);
             } else {
-              await writeSquare(srcAbs, resolve(outDir, outName)); // ✨ changed
-              console.log(
-                `COPY+SQUARE ${srcRel} -> ${join(cat, outName)} (late)`,
-              );
+              await copyFile(srcAbs, resolve(outDir, outName));
+              console.log(`COPY ${srcRel} -> ${join(cat, outName)} (late)`);
             }
           }
         }
@@ -355,6 +318,7 @@ async function writeSquare(srcAbs, destAbs) {
         continue;
       }
 
+      // The linked item's filename lives in ITS OWN category, with same ext as root file
       const ext = extname(rootOutName) || "";
       const base = toKebabCase(name);
       const used = usedNamesByCat.get(cat);
