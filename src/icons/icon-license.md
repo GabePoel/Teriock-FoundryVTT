@@ -1,5 +1,5 @@
 The webp icons in this directory and its subdirectories are licensed from [CraftPix](https://craftpix.net/),
-[Wenrexa](https://www.wenrexa.com/), 
+[Wenrexa](https://www.wenrexa.com/),
 [Poneti](https://poneti.artstation.com/), and Rexard.
 
 The icons in [`./documents`]() are from [game-icons.net]() ([License](https://creativecommons.org/licenses/by/3.0/)).

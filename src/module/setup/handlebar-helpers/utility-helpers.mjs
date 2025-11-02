@@ -362,15 +362,19 @@ export default function registerUiHelpers() {
       const rgx = new RegExp(searchString, "i");
       const renderedCards = effects
         .map((effect) => {
-          let subtitle =
-            effect.type === "ability"
-              ? Handlebars.helpers.executionTime(
-                  effect.system?.maneuver,
-                  effect.system?.executionTime,
-                )
-              : effect.type === "property"
-                ? effect.system?.form
-                : "";
+          let subtitle = "";
+          if (effect.type === "ability") {
+            subtitle =
+              TERIOCK.options.ability.executionTime[effect.system?.maneuver]?.[
+                effect.system?.executionTime
+              ] ?? effect.system.executionTime;
+            if (effect.system?.effectTypes?.has("automatic")) {
+              subtitle += " · Automatic";
+            }
+          }
+          if (effect.type === "property") {
+            subtitle = effect.system?.form || subtitle;
+          }
           if (effect.hasDuration) {
             subtitle = effect.remainingString;
           }

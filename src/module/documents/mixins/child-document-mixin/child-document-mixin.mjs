@@ -103,7 +103,9 @@ export default (Base) => {
               shouldInclude = checkArray.includes(reference.value);
             } else if (reference.check === "exists") {
               shouldInclude =
-                property.length > 0 && property !== "0" && property !== 0;
+                (property?.length || "") > 0 &&
+                property !== "0" &&
+                property !== 0;
             } else if (reference.check === "is") {
               shouldInclude = property;
             } else if (reference.check === "isNot") {
