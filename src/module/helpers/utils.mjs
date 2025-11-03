@@ -264,7 +264,7 @@ export function selectUser(actor) {
   // See if any user has the actor as a character
   users.forEach(
     /** @param {TeriockUser} user */ (user) => {
-      if (user.character?.uuid === actor.uuid && user.isActive) {
+      if (user.character?.uuid === actor.uuid && user.active) {
         selectedUser = user;
       }
     },
@@ -276,7 +276,7 @@ export function selectUser(actor) {
         if (
           !user.isActiveGM &&
           actor.canUserModify(user, "update") &&
-          user.isActive
+          user.active
         ) {
           selectedUser = user;
         }
@@ -287,11 +287,14 @@ export function selectUser(actor) {
   if (!selectedUser) {
     users.forEach(
       /** @param {TeriockUser} user */ (user) => {
-        if (actor.canUserModify(user, "update") && user.isActive) {
+        if (actor.canUserModify(user, "update") && user.active) {
           selectedUser = user;
         }
       },
     );
+  }
+  if (!selectedUser) {
+    selectedUser = game.users.activeGM;
   }
   return selectedUser;
 }

@@ -9,6 +9,7 @@ const { User } = foundry.documents;
  * @property {Set<TeriockToken>} targets
  */
 export default class TeriockUser extends User {
+  //noinspection JSUnusedGlobalSymbols
   /**
    * Is this user currently active?
    * @returns {boolean}
@@ -16,7 +17,8 @@ export default class TeriockUser extends User {
   get isActive() {
     return (
       this.active &&
-      (this.lastActivityTime === 0 || Date.now() - this.lastActivityTime < 120)
+      (this.lastActivityTime === 0 ||
+        (Date.now() - this.lastActivityTime) / 1000 < 120)
     );
   }
 }

@@ -158,26 +158,6 @@ export default class TeriockConsequenceModel extends TransformationDataMixin(
     return ns;
   }
 
-  /** @inheritDoc */
-  get shouldExpire() {
-    let should = super.shouldExpire;
-    if (this.conditionExpiration && this.actor) {
-      const conditions = this.actor.statuses;
-      for (const condition of this.expirations.conditions.present) {
-        should = should || !conditions.has(condition);
-      }
-      for (const condition of this.expirations.conditions.absent) {
-        should = should || conditions.has(condition);
-      }
-    }
-    if (this.sustainedExpiration) {
-      /** @type {TeriockEffect} */
-      const source = foundry.utils.fromUuidSync(this.source);
-      should = should || !source || source.disabled;
-    }
-    return should;
-  }
-
   /**
    * Checks if the effect expires when its source is deleted or disabled.
    * @returns {boolean} True if the effect expires when sustained, false otherwise.
@@ -208,5 +188,25 @@ export default class TeriockConsequenceModel extends TransformationDataMixin(
   /** @inheritDoc */
   async roll(_options) {
     await this.inCombatExpiration(true);
+  }
+
+  /** @inheritDoc */
+  async shouldExpire() {
+    let should = await super.shouldExpire();
+    if (this.conditionExpiration && this.actor) {
+      const conditions = this.actor.statuses;
+      for (const condition of this.expirations.conditions.present) {
+        should = should || !conditions.has(condition);
+      }
+      for (const condition of this.expirations.conditions.absent) {
+        should = should || conditions.has(condition);
+      }
+    }
+    if (this.sustainedExpiration) {
+      /** @type {TeriockEffect} */
+      const source = await foundry.utils.fromUuid(this.source);
+      should = should || !source || !source.active;
+    }
+    return should;
   }
 }

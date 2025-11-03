@@ -1,6 +1,5 @@
 import { mergeFreeze } from "../../../helpers/utils.mjs";
 import { ChildTypeModel } from "../../models/_module.mjs";
-import { _expire, _shouldExpire } from "./methods/_expiration.mjs";
 
 const { fields } = foundry.data;
 
@@ -67,14 +66,6 @@ export default class TeriockBaseEffectModel extends ChildTypeModel {
     return this.constructor.metadata.modifies;
   }
 
-  /**
-   * Checks if the effect should expire based on its current state.
-   * @returns {boolean} True if the effect should expire, false otherwise.
-   */
-  get shouldExpire() {
-    return _shouldExpire(this);
-  }
-
   /** @inheritDoc */
   async _preDelete(options, user) {
     const data = { doc: this.parent };
@@ -90,7 +81,7 @@ export default class TeriockBaseEffectModel extends ChildTypeModel {
    * @returns {Promise<void>} Promise that resolves when the expiration check is complete.
    */
   async checkExpiration() {
-    if (this.shouldExpire) {
+    if (await this.shouldExpire()) {
       await this.expire();
     }
   }
@@ -107,6 +98,21 @@ export default class TeriockBaseEffectModel extends ChildTypeModel {
         return;
       }
     }
-    return await _expire(this);
+    if (this.deleteOnExpire) {
+      await this.parent.delete();
+    } else {
+      await this.parent.update({ disabled: true });
+    }
+  }
+
+  /**
+   * Checks if the effect should expire based on its current state.
+   * @returns {Promise<boolean>} True if the effect should expire, false otherwise.
+   */
+  async shouldExpire() {
+    if (!this.parent.isTemporary) {
+      return false;
+    }
+    return this.parent.duration.remaining < 0;
   }
 }

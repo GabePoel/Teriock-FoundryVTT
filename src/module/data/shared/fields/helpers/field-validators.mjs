@@ -1,5 +1,5 @@
 /**
- * Validate the type of the provided UUID.
+ * Validate the type from the provided UUID.
  * @param {Teriock.UUID<TeriockCommon>} uuid
  * @param {Teriock.Documents.CommonType[]} types
  * @returns {boolean}
@@ -12,7 +12,7 @@ export function typeValidator(uuid, types = []) {
 }
 
 /**
- * Validates the types of the provided array of UUIDS.
+ * Validates the types from the provided array of UUIDS.
  * @param {Teriock.UUID<TeriockCommon>[]} uuids
  * @param {Teriock.Documents.CommonType[]} types
  * @returns {boolean}
