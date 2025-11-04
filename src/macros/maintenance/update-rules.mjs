@@ -90,5 +90,17 @@ for (const [namespace, category] of Object.entries(namespaceCategoryMap)) {
       });
       console.log(`Updated: ${namespace}:${rulesName}`);
     }
+    let pages = 0;
+    const toUpdate = [];
+    for (const page of rulesJournal.pages.contents.sort((a, b) =>
+      a.name.localeCompare(b.name),
+    )) {
+      toUpdate.push({
+        _id: page.id,
+        sort: pages * 1000,
+      });
+      pages++;
+    }
+    await rulesJournal.updateEmbeddedDocuments("JournalEntryPage", toUpdate);
   }
 }

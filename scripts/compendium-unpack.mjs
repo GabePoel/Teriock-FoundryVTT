@@ -77,7 +77,9 @@ function transformFolderName(doc) {
  * @param {object} doc - The document to clean.
  */
 function cleanEntry(doc) {
-  delete doc.sort;
+  if (doc.type !== "text") {
+    delete doc.sort;
+  }
   if (doc.author) {
     doc.author = BUILDER_NAME;
   }

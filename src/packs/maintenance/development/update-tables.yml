@@ -1,0 +1,25 @@
+folder: L08qIbjJoCwEaiEi
+name: Update Tables
+type: script
+_id: VkrPX4l5eSfrHVKA
+author: teriockBuilder00
+img: icons/svg/d20.svg
+scope: global
+command: |-
+  //noinspection JSUnresolvedReference
+  const tablesPack = game.packs.get("teriock.tables");
+  const tables = await tablesPack.getDocuments({ name__ne: null });
+  for (const table of tables) {
+    if (!table.formula || table.formula.length === 0) {
+      await table.normalize();
+    }
+  }
+ownership:
+  default: 0
+flags: {}
+_stats:
+  coreVersion: '13'
+  systemId: teriock
+  systemVersion: 0.9.1
+  lastModifiedBy: teriockBuilder00
+_key: '!macros!VkrPX4l5eSfrHVKA'
