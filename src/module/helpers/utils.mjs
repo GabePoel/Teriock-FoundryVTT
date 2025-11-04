@@ -668,6 +668,7 @@ export function isOwnerAndCurrentUser(document, userId) {
  * @returns {TeriockActor|null}
  */
 export function getActor() {
+  //noinspection JSUnresolvedReference
   const speaker = foundry.documents.ChatMessage.implementation.getSpeaker();
   const character = game.user.character;
   const token =

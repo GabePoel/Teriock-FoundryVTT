@@ -1,0 +1,35 @@
+@use "./colors";
+@use "../mixins";
+
+.palette.status-effects {
+  border-radius: 8px;
+  gap: 4px;
+
+  .effect-control {
+    @include mixins.image-border;
+    @include mixins.warm-image-background;
+    border-color: transparent;
+    border-radius: 4px;
+
+    &.active {
+      outline-color: var(--color-warm-2);
+    }
+  }
+}
+
+.attribute {
+  &[data-attribute="hp"] input {
+    background-color: transparentize(colors.$hp-red-drawer, 0.25);
+    border-color: colors.$hp-red;
+  }
+
+  &[data-attribute="mp"] input {
+    background-color: transparentize(colors.$mp-blue-drawer, 0.25);
+    border-color: colors.$mp-blue;
+  }
+
+  &[data-attribute="wither"] input {
+    background-color: transparentize(black, 0.25);
+    border-color: colors.$wp-grey;
+  }
+}

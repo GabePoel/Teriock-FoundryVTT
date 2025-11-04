@@ -83,6 +83,36 @@ export default (Base) => {
       }
 
       /**
+       * Items this has imported.
+       * @returns {TeriockItem[]}
+       */
+      get imported() {
+        return /** @type {TeriockItem[]} */ this.actor.items.filter(
+          (i) => i.getFlag("teriock", "importedBy") === this.parent.id,
+        );
+      }
+
+      /**
+       * @returns {Promise<TeriockItem[]>}
+       * @private
+       */
+      async _fetchDeterministicItemData() {
+        const items = /** @type {TeriockItem[]} */ await Promise.all(
+          Array.from(this.imports.items).map((i) => foundry.utils.fromUuid(i)),
+        );
+        return items.map((i) => {
+          const obj = i.toObject();
+          obj.flags = foundry.utils.mergeObject(obj.flags || {}, {
+            teriock: {
+              importReference: i.uuid,
+              importedBy: this.parent.id,
+            },
+          });
+          return obj;
+        });
+      }
+
+      /**
        * @returns {Promise<TeriockRank[]>}
        * @private
        */
@@ -181,23 +211,18 @@ export default (Base) => {
       }
 
       /**
-       * @returns {Promise<TeriockItem[]>}
-       * @private
+       * Delete the items this has imported.
+       * @returns {Promise<void>}
        */
-      async _fetchDeterministicItemData() {
-        const items = /** @type {TeriockItem[]} */ await Promise.all(
-          Array.from(this.imports.items).map((i) => foundry.utils.fromUuid(i)),
-        );
-        return items.map((i) => {
-          const obj = i.toObject();
-          obj.flags = foundry.utils.mergeObject(obj.flags || {}, {
-            teriock: {
-              importReference: i.uuid,
-              importedBy: this.parent.id,
-            },
-          });
-          return obj;
-        });
+      async deleteImported() {
+        if (this.actor) {
+          await this.actor.deleteEmbeddedDocuments(
+            "Item",
+            this.imported
+              .filter((i) => i.documentName === "Item")
+              .map((i) => i.id),
+          );
+        }
       }
 
       /**
@@ -222,31 +247,6 @@ export default (Base) => {
             toCreate,
           );
           await this.parent.addSubs(created);
-        }
-      }
-
-      /**
-       * Items this has imported.
-       * @returns {TeriockItem[]}
-       */
-      get imported() {
-        return /** @type {TeriockItem[]} */ this.actor.items.filter(
-          (i) => i.getFlag("teriock", "importedBy") === this.parent.id,
-        );
-      }
-
-      /**
-       * Delete the items this has imported.
-       * @returns {Promise<void>}
-       */
-      async deleteImported() {
-        if (this.actor) {
-          await this.actor.deleteEmbeddedDocuments(
-            "Item",
-            this.imported
-              .filter((i) => i.documentName === "Item")
-              .map((i) => i.id),
-          );
         }
       }
     }

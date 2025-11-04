@@ -91,6 +91,7 @@ export default async function registerTemplates() {
     "systems/teriock/src/templates/document-templates/shared/image.hbs",
     "systems/teriock/src/templates/document-templates/shared/macros.hbs",
     "systems/teriock/src/templates/document-templates/shared/ranks.hbs",
+    "systems/teriock/src/templates/hud/token-hud.hbs",
     "systems/teriock/src/templates/message-templates/chat-message.hbs",
     "systems/teriock/src/templates/message-templates/death-bag.hbs",
     "systems/teriock/src/templates/message-templates/panel.hbs",

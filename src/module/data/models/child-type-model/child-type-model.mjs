@@ -166,16 +166,6 @@ export default class ChildTypeModel extends CommonTypeModel {
   }
 
   /**
-   * Delete this document from its parent.
-   * @returns {Promise<void>}
-   */
-  async deleteThis() {
-    await this.parent.parent.deleteEmbeddedDocuments(this.parent.documentName, [
-      this.parent.id,
-    ]);
-  }
-
-  /**
    * Whether this can be used.
    * @returns {boolean}
    */
@@ -258,6 +248,16 @@ export default class ChildTypeModel extends CommonTypeModel {
    */
   adjustMessage(messageElement) {
     return messageElement;
+  }
+
+  /**
+   * Delete this document from its parent.
+   * @returns {Promise<void>}
+   */
+  async deleteThis() {
+    await this.parent.parent.deleteEmbeddedDocuments(this.parent.documentName, [
+      this.parent.id,
+    ]);
   }
 
   /**

@@ -1,4 +1,4 @@
-@use "../colors" as *;
+@use "../colors" as colors;
 
 .character-status-box {
   align-items: center;
@@ -24,79 +24,85 @@
         overflow: hidden;
 
         &.character-hit-bar {
-          border: 2px solid $hp-red;
+          border: 2px solid colors.$hp-red;
 
           .character-bar-left {
-            background-color: $hp-red;
+            background-color: colors.$hp-red;
           }
 
           .character-bar-temp {
             background-image: repeating-linear-gradient(
               135deg,
-              $hp-red 0px,
-              $hp-red 2px,
-              $hp-red-dark 2px,
-              $hp-red-dark 8px /* gap between lines: 2px line + 6px gap */
+              colors.$hp-red 0px,
+              colors.$hp-red 2px,
+              colors.$hp-red-dark 2px,
+              colors.$hp-red-dark 8px
+                /* gap between lines: 2px line + 6px gap */
             );
-            border-right: 2px solid $hp-red;
-          }
-
-          .character-bar-lost {
-            background: linear-gradient(90deg, $hp-red-faint, $hp-red-darkest);
-          }
-        }
-
-        &.character-mana-bar {
-          border: 2px solid $mp-blue;
-
-          .character-bar-left {
-            background-color: $mp-blue;
-          }
-
-          .character-bar-temp {
-            background-image: repeating-linear-gradient(
-              135deg,
-              $mp-blue 0px,
-              $mp-blue 2px,
-              $mp-blue-dark 2px,
-              $mp-blue-dark 8px /* gap between lines: 2px line + 6px gap */
-            );
-            border-right: 2px solid $mp-blue;
+            border-right: 2px solid colors.$hp-red;
           }
 
           .character-bar-lost {
             background: linear-gradient(
               90deg,
-              $mp-blue-faint,
-              $mp-blue-darkest
+              colors.$hp-red-faint,
+              colors.$hp-red-darkest
+            );
+          }
+        }
+
+        &.character-mana-bar {
+          border: 2px solid colors.$mp-blue;
+
+          .character-bar-left {
+            background-color: colors.$mp-blue;
+          }
+
+          .character-bar-temp {
+            background-image: repeating-linear-gradient(
+              135deg,
+              colors.$mp-blue 0px,
+              colors.$mp-blue 2px,
+              colors.$mp-blue-dark 2px,
+              colors.$mp-blue-dark 8px
+                /* gap between lines: 2px line + 6px gap */
+            );
+            border-right: 2px solid colors.$mp-blue;
+          }
+
+          .character-bar-lost {
+            background: linear-gradient(
+              90deg,
+              colors.$mp-blue-faint,
+              colors.$mp-blue-darkest
             );
           }
         }
 
         &.character-wither-bar {
-          border: 2px solid $mp-grey;
+          border: 2px solid colors.$wp-grey;
 
           .character-bar-left {
-            background-color: $mp-grey;
+            background-color: colors.$wp-grey;
           }
 
           .character-bar-temp {
             background-image: repeating-linear-gradient(
               135deg,
-              $mp-grey 0px,
-              $mp-grey 2px,
-              $mp-grey-dark 2px,
-              $mp-grey-dark 8px /* gap between lines: 2px line + 6px gap */
+              colors.$wp-grey 0px,
+              colors.$wp-grey 2px,
+              colors.$wp-grey-dark 2px,
+              colors.$wp-grey-dark 8px
+                /* gap between lines: 2px line + 6px gap */
             );
-            // border-left: 2px solid $mp-grey;
-            border-right: 2px solid $mp-grey;
+            border-right: 2px solid colors.$wp-grey;
           }
 
           .character-bar-lost {
             background: linear-gradient(
               90deg,
-              $mp-grey-faint,
-              $mp-grey-darkest
+              colors.$wp-grey-faint,
+              colors.$wp-grey-darkest
             );
           }
         }

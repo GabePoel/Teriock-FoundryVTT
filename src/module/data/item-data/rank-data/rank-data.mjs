@@ -144,6 +144,20 @@ export default class TeriockRankModel extends StatGiverDataMixin(
   }
 
   /** @inheritDoc */
+  get suppressed() {
+    let suppressed = super.suppressed;
+    if (this.actor && this.actor.system.isTransformed) {
+      if (
+        this.parent.source.documentName === "Actor" &&
+        this.actor.system.transformation.suppression.ranks
+      ) {
+        suppressed = true;
+      }
+    }
+    return suppressed;
+  }
+
+  /** @inheritDoc */
   get wikiPage() {
     const prefix = this.constructor.metadata.namespace;
     const pageName =
@@ -179,33 +193,6 @@ export default class TeriockRankModel extends StatGiverDataMixin(
   }
 
   /** @inheritDoc */
-  prepareSpecialData() {
-    if (this.parent.actor && this.parent.actor.system.isTransformed) {
-      if (this.parent.actor.system.transformation.suppression.ranks) {
-        this.statDice.hp.disabled = true;
-        if (this.parent.actor.system.transformation.level === "greater") {
-          this.statDice.mp.disabled = true;
-        }
-      }
-    }
-    super.prepareSpecialData();
-  }
-
-  /** @inheritDoc */
-  get suppressed() {
-    let suppressed = super.suppressed;
-    if (this.actor && this.actor.system.isTransformed) {
-      if (
-        this.parent.source.documentName === "Actor" &&
-        this.actor.system.transformation.suppression.ranks
-      ) {
-        suppressed = true;
-      }
-    }
-    return suppressed;
-  }
-
-  /** @inheritDoc */
   async parse(rawHTML) {
     return await _parse(this, rawHTML);
   }
@@ -217,6 +204,19 @@ export default class TeriockRankModel extends StatGiverDataMixin(
         pool.disabled = true;
       }
     }
+  }
+
+  /** @inheritDoc */
+  prepareSpecialData() {
+    if (this.parent.actor && this.parent.actor.system.isTransformed) {
+      if (this.parent.actor.system.transformation.suppression.ranks) {
+        this.statDice.hp.disabled = true;
+        if (this.parent.actor.system.transformation.level === "greater") {
+          this.statDice.mp.disabled = true;
+        }
+      }
+    }
+    super.prepareSpecialData();
   }
 
   /** @inheritDoc */

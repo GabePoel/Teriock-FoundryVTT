@@ -48,6 +48,13 @@ export default (Base) => {
       }
 
       /** @inheritDoc */
+      async _prepareContext(options) {
+        const context = await super._prepareContext(options);
+        context.hideInactive = this._hideInactive;
+        return context;
+      }
+
+      /** @inheritDoc */
       async _renderFrame(options) {
         const frame = await super._renderFrame(options);
         const toggleButton = document.createElement("button");
@@ -66,13 +73,6 @@ export default (Base) => {
         );
         this.window.controls.before(toggleButton);
         return frame;
-      }
-
-      /** @inheritDoc */
-      async _prepareContext(options) {
-        const context = await super._prepareContext(options);
-        context.hideInactive = this._hideInactive;
-        return context;
       }
     }
   );

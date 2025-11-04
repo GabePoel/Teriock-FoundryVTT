@@ -17,6 +17,21 @@ export default (Base) =>
     };
 
     /**
+     * Deattunes an attunement effect.
+     * @param {MouseEvent} event - The event object.
+     * @param {HTMLElement} target - The target element.
+     * @returns {Promise<void>} Promise that resolves when attunement is removed.
+     * @static
+     */
+    static async _deattuneDoc(event, target) {
+      event.stopPropagation();
+      const attunement = this.actor.effects.get(target.dataset.id);
+      if (attunement) {
+        await attunement.delete();
+      }
+    }
+
+    /**
      * Sets the primary transformation.
      * @param {MouseEvent} event - The event object.
      * @param {HTMLElement} target - The target element.
@@ -32,21 +47,6 @@ export default (Base) =>
       }
       if (transformation) {
         await transformation.system.setPrimaryTransformation();
-      }
-    }
-
-    /**
-     * Deattunes an attunement effect.
-     * @param {MouseEvent} event - The event object.
-     * @param {HTMLElement} target - The target element.
-     * @returns {Promise<void>} Promise that resolves when attunement is removed.
-     * @static
-     */
-    static async _deattuneDoc(event, target) {
-      event.stopPropagation();
-      const attunement = this.actor.effects.get(target.dataset.id);
-      if (attunement) {
-        await attunement.delete();
       }
     }
 

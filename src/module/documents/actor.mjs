@@ -1,6 +1,7 @@
 import { copyItem, getItem } from "../helpers/fetch.mjs";
+import { systemPath } from "../helpers/path.mjs";
 import { toCamelCase } from "../helpers/string.mjs";
-import { pureUuid, selectUser } from "../helpers/utils.mjs";
+import { pureUuid, ringImage, selectUser } from "../helpers/utils.mjs";
 import { CommonDocumentMixin, ParentDocumentMixin } from "./mixins/_module.mjs";
 
 const { Actor } = foundry.documents;
@@ -27,6 +28,7 @@ const { Actor } = foundry.documents;
  * @property {boolean} isOwner
  * @property {boolean} limited
  * @property {TeriockTokenDocument} token
+ * @property {() => TeriockTokenDocument[]} getDependentTokens
  */
 export default class TeriockActor extends ParentDocumentMixin(
   CommonDocumentMixin(Actor),
@@ -273,12 +275,15 @@ export default class TeriockActor extends ParentDocumentMixin(
     }
     if (
       foundry.utils.hasProperty(changed, "img") &&
-      !foundry.utils.hasProperty(changed, "prototypeToken.texture.src")
+      !foundry.utils.hasProperty(changed, "prototypeToken.texture.src") &&
+      foundry.utils
+        .getProperty(changed, "img")
+        .startsWith(systemPath("icons/creatures"))
     ) {
       foundry.utils.setProperty(
         changed,
         "prototypeToken.texture.src",
-        foundry.utils.getProperty(changed, "img"),
+        ringImage(foundry.utils.getProperty(changed, "img")),
       );
     }
     const tokenUpdates =
@@ -291,7 +296,7 @@ export default class TeriockActor extends ParentDocumentMixin(
         tokenUpdates["prototypeToken.width"] = tokenSize;
         tokenUpdates["prototypeToken.height"] = tokenSize;
       }
-      for (const token of /** @type {TeriockTokenDocument[]} */ this.getDependentTokens()) {
+      for (const token of this.getDependentTokens()) {
         if (token.parent?.grid?.type === 0) {
           await token.resize({
             width: tokenSize,
@@ -301,7 +306,7 @@ export default class TeriockActor extends ParentDocumentMixin(
       }
     }
     if (Object.keys(tokenUpdates).length > 0) {
-      for (const token of /** @type {TeriockTokenDocument[]} */ this.getDependentTokens()) {
+      for (const token of this.getDependentTokens()) {
         if (token.id) {
           await token.update(tokenUpdates);
         }

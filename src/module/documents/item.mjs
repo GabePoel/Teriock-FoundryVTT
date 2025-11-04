@@ -36,6 +36,14 @@ export default class TeriockItem extends ChangeableDocumentMixin(
   changesField = "itemChanges";
 
   /**
+   * Checks if the item is active.
+   * @returns {boolean}
+   */
+  get active() {
+    return !this.isSuppressed && !this.disabled;
+  }
+
+  /**
    * @inheritDoc
    * @returns {TeriockActor|null}
    */
@@ -57,14 +65,6 @@ export default class TeriockItem extends ChangeableDocumentMixin(
    */
   get isSuppressed() {
     return this.system.suppressed;
-  }
-
-  /**
-   * Checks if the item is active.
-   * @returns {boolean}
-   */
-  get active() {
-    return !this.isSuppressed && !this.disabled;
   }
 
   /**

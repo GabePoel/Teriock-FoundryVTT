@@ -34,6 +34,64 @@ export default (Base) => {
       };
 
       /**
+       * Creates a new ability for the current document.
+       * @param {PointerEvent} _event - The event object.
+       * @param {HTMLElement} _target - The target element.
+       * @returns {Promise<void>} Promise that resolves to the created ability.
+       */
+      static async _createAbility(_event, _target) {
+        const abilityKey = await selectAbilityDialog();
+        let abilityName = "New Ability";
+        if (abilityKey) {
+          if (abilityKey !== "other") {
+            abilityName = TERIOCK.index.abilities[abilityKey];
+            await tm.fetch.importAbility(this.document, abilityName);
+          } else {
+            await createEffects.createAbility(this.document, abilityName);
+          }
+        }
+      }
+
+      /**
+       * Creates a new base effect for the current document.
+       * @param {PointerEvent} _event - The event object.
+       * @param {HTMLElement} _target - The target element.
+       * @returns {Promise<void>} Promise that resolves to the created fluency.
+       */
+      static async _createBaseEffect(_event, _target) {
+        await createEffects.createBaseEffect(this.document);
+      }
+
+      /**
+       * Adds a {@link TeriockBody} to the {@link TeriockDocument}.
+       * @returns {Promise<void>}
+       * @private
+       */
+      static async _createBodyPart() {
+        let bodyPartKey = await selectBodyPartDialog();
+        let created;
+        if (Object.keys(TERIOCK.index.bodyParts).includes(bodyPartKey)) {
+          const bodyPart = await getItem(
+            TERIOCK.index.bodyParts[bodyPartKey],
+            "bodyParts",
+          );
+          created = await this.document.actor.createEmbeddedDocuments("Item", [
+            bodyPart,
+          ]);
+        } else {
+          created = await this.document.actor.createEmbeddedDocuments("Item", [
+            {
+              name: toTitleCase(bodyPartKey),
+              type: "body",
+            },
+          ]);
+        }
+        if (this.document.documentName !== "Actor") {
+          await this.document.addSubs(created);
+        }
+      }
+
+      /**
        * Adds a new embedded {@link TeriockChild} to the current {@link TeriockDocument}.
        * Creates documents based on the specified tab type.
        * @param {MouseEvent} _event - The event object.
@@ -143,31 +201,35 @@ export default (Base) => {
       }
 
       /**
-       * Adds a {@link TeriockBody} to the {@link TeriockDocument}.
-       * @returns {Promise<void>}
-       * @private
+       * Creates new fluency for the current document.
+       * @param {PointerEvent} _event - The event object.
+       * @param {HTMLElement} _target - The target element.
+       * @returns {Promise<void>} Promise that resolves to the created fluency.
        */
-      static async _createBodyPart() {
-        let bodyPartKey = await selectBodyPartDialog();
-        let created;
-        if (Object.keys(TERIOCK.index.bodyParts).includes(bodyPartKey)) {
-          const bodyPart = await getItem(
-            TERIOCK.index.bodyParts[bodyPartKey],
-            "bodyParts",
-          );
-          created = await this.document.actor.createEmbeddedDocuments("Item", [
-            bodyPart,
-          ]);
-        } else {
-          created = await this.document.actor.createEmbeddedDocuments("Item", [
-            {
-              name: toTitleCase(bodyPartKey),
-              type: "body",
-            },
-          ]);
+      static async _createFluency(_event, _target) {
+        const tradecraft = await selectTradecraftDialog();
+        if (tradecraft) {
+          await createEffects.createFluency(this.document, tradecraft);
         }
-        if (this.document.documentName !== "Actor") {
-          await this.document.addSubs(created);
+      }
+
+      /**
+       * Creates a new property for the current document.
+       * Shows a dialog to select a property type or create a new one.
+       * @param {PointerEvent} _event - The event object.
+       * @param {HTMLElement} _target - The target element.
+       * @returns {Promise<void>} Promise that resolves to the created property.
+       */
+      static async _createProperty(_event, _target) {
+        const propertyKey = await selectPropertyDialog();
+        let propertyName = "New Property";
+        if (propertyKey) {
+          if (propertyKey !== "other") {
+            propertyName = TERIOCK.index.properties[propertyKey];
+            await tm.fetch.importProperty(this.document, propertyName);
+          } else {
+            await createEffects.createProperty(this.document, propertyName);
+          }
         }
       }
 
@@ -293,68 +355,6 @@ export default (Base) => {
         );
         if (this.document.documentName !== "Actor") {
           await this.document.addSubs(created);
-        }
-      }
-
-      /**
-       * Creates a new ability for the current document.
-       * @param {PointerEvent} _event - The event object.
-       * @param {HTMLElement} _target - The target element.
-       * @returns {Promise<void>} Promise that resolves to the created ability.
-       */
-      static async _createAbility(_event, _target) {
-        const abilityKey = await selectAbilityDialog();
-        let abilityName = "New Ability";
-        if (abilityKey) {
-          if (abilityKey !== "other") {
-            abilityName = TERIOCK.index.abilities[abilityKey];
-            await tm.fetch.importAbility(this.document, abilityName);
-          } else {
-            await createEffects.createAbility(this.document, abilityName);
-          }
-        }
-      }
-
-      /**
-       * Creates a new base effect for the current document.
-       * @param {PointerEvent} _event - The event object.
-       * @param {HTMLElement} _target - The target element.
-       * @returns {Promise<void>} Promise that resolves to the created fluency.
-       */
-      static async _createBaseEffect(_event, _target) {
-        await createEffects.createBaseEffect(this.document);
-      }
-
-      /**
-       * Creates new fluency for the current document.
-       * @param {PointerEvent} _event - The event object.
-       * @param {HTMLElement} _target - The target element.
-       * @returns {Promise<void>} Promise that resolves to the created fluency.
-       */
-      static async _createFluency(_event, _target) {
-        const tradecraft = await selectTradecraftDialog();
-        if (tradecraft) {
-          await createEffects.createFluency(this.document, tradecraft);
-        }
-      }
-
-      /**
-       * Creates a new property for the current document.
-       * Shows a dialog to select a property type or create a new one.
-       * @param {PointerEvent} _event - The event object.
-       * @param {HTMLElement} _target - The target element.
-       * @returns {Promise<void>} Promise that resolves to the created property.
-       */
-      static async _createProperty(_event, _target) {
-        const propertyKey = await selectPropertyDialog();
-        let propertyName = "New Property";
-        if (propertyKey) {
-          if (propertyKey !== "other") {
-            propertyName = TERIOCK.index.properties[propertyKey];
-            await tm.fetch.importProperty(this.document, propertyName);
-          } else {
-            await createEffects.createProperty(this.document, propertyName);
-          }
         }
       }
 

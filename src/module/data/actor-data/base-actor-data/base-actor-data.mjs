@@ -66,6 +66,16 @@ export default class TeriockBaseActorModel extends ActorConditionTogglingPart(
   }
 
   /**
+   * Whether this actor is transformed.
+   * @returns {boolean}
+   */
+  get isTransformed() {
+    return Boolean(
+      this.transformation.effect && this.transformation.effect.active,
+    );
+  }
+
+  /**
    * Primary attacking item.
    * @returns {TeriockEquipment|null}
    */
@@ -95,16 +105,6 @@ export default class TeriockBaseActorModel extends ActorConditionTogglingPart(
       }
     }
     return null;
-  }
-
-  /**
-   * Whether this actor is transformed.
-   * @returns {boolean}
-   */
-  get isTransformed() {
-    return Boolean(
-      this.transformation.effect && this.transformation.effect.active,
-    );
   }
 
   /** @inheritDoc */

@@ -182,6 +182,9 @@ foundry.helpers.Hooks.once("init", function () {
   CONFIG.ux.TextEditor = applications.ux.TeriockTextEditor;
   CONFIG.ux.DragDrop = applications.ux.TeriockDragDrop;
 
+  // HUD
+  CONFIG.Token.hudClass = applications.hud.TeriockTokenHUD;
+
   // Unregister V1 sheets
   DocumentSheetConfig.unregisterSheet(
     documents.TeriockActor,
@@ -307,6 +310,13 @@ foundry.helpers.Hooks.once("init", function () {
   for (const category of Object.values(dice.functions)) {
     for (const [k, v] of Object.entries(category)) {
       CONFIG.Dice.functions[k] = v;
+    }
+  }
+
+  // Type icons
+  for (const [k, v] of Object.entries(constants.options.document)) {
+    if (v.doc) {
+      CONFIG[v.doc].typeIcons[k] = `fa-${v.icon}`;
     }
   }
 
