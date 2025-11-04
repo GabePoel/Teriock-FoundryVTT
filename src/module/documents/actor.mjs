@@ -281,14 +281,15 @@ export default class TeriockActor extends ParentDocumentMixin(
         foundry.utils.getProperty(changed, "img"),
       );
     }
+    const tokenUpdates =
+      foundry.utils.getProperty(changed, "prototypeToken") || {};
     if (foundry.utils.hasProperty(changed, "system.size.saved")) {
       const tokenSize = this.constructor.sizeDefinition(
         changed.size.saved,
       ).length;
       if (!foundry.utils.hasProperty(changed, "prototypeToken.width")) {
-        changed.prototypeToken ||= {};
-        changed.prototypeToken.height = tokenSize;
-        changed.prototypeToken.width = tokenSize;
+        tokenUpdates["prototypeToken.width"] = tokenSize;
+        tokenUpdates["prototypeToken.height"] = tokenSize;
       }
       for (const token of /** @type {TeriockTokenDocument[]} */ this.getDependentTokens()) {
         if (token.parent?.grid?.type === 0) {
@@ -296,11 +297,13 @@ export default class TeriockActor extends ParentDocumentMixin(
             width: tokenSize,
             height: tokenSize,
           });
-        } else {
-          await token.update({
-            width: tokenSize,
-            height: tokenSize,
-          });
+        }
+      }
+    }
+    if (Object.keys(tokenUpdates).length > 0) {
+      for (const token of /** @type {TeriockTokenDocument[]} */ this.getDependentTokens()) {
+        if (token.id) {
+          await token.update(tokenUpdates);
         }
       }
     }

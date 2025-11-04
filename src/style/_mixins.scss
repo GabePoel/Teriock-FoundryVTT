@@ -55,13 +55,17 @@
 }
 
 @mixin tag-style() {
-  border: 1px dotted var(--color-text-subtle);
-  border-radius: 0.25em;
-  max-width: fit-content;
-  padding-left: 0.25em;
-  padding-right: 0.25em;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid
+    color-mix(in srgb, var(--color-text-subtle), transparent 75%);
   white-space: nowrap;
-  display: inline-flex;
+  border-radius: 3px;
+  cursor: pointer;
+  height: 1.5em;
+  margin: 0;
+  padding-inline: 0.3em;
+  text-align: center;
+  align-content: center;
 
   @include text-subtle;
 }

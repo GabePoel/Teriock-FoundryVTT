@@ -27,6 +27,38 @@ export default class TeriockTokenDocument extends TokenDocument {
   }
 
   /**
+   * The image that should be used to represent this token.
+   * @returns {string}
+   */
+  get imageLive() {
+    if (this.isTransformed) {
+      return this.imageTransformed;
+    } else {
+      return this.imageRaw;
+    }
+  }
+
+  /**
+   * The image that should represent this token if it's not transformed.
+   * @returns {string}
+   */
+  get imageRaw() {
+    return this.getFlag("teriock", "imageRaw") || this.texture.src;
+  }
+
+  /**
+   * The image that should represent this token if it is transformed.
+   * @returns {string}
+   */
+  get imageTransformed() {
+    let path = this.actor?.system.transformation.image || this.texture.src;
+    if (this.ring.enabled) {
+      return ringImage(path);
+    }
+    return path;
+  }
+
+  /**
    * Whether the token is transformed.
    * @returns {boolean}
    */
@@ -58,26 +90,6 @@ export default class TeriockTokenDocument extends TokenDocument {
     return this.ring.enabled;
   }
 
-  /**
-   * The image that should represent this token if it is transformed.
-   * @returns {string}
-   */
-  get imageTransformed() {
-    let path = this.actor?.system.transformation.image || this.texture.src;
-    if (this.ring.enabled) {
-      return ringImage(path);
-    }
-    return path;
-  }
-
-  /**
-   * The image that should represent this token if its not transformed.
-   * @returns {string}
-   */
-  get imageRaw() {
-    return this.getFlag("teriock", "imageRaw") || this.texture.src;
-  }
-
   /** @inheritDoc */
   _checkPreparation() {
     return this.actor;
@@ -101,6 +113,39 @@ export default class TeriockTokenDocument extends TokenDocument {
     this.deriveDetectionModes();
     super._onRelatedUpdate(update, operation);
     this.object?.initializeSources();
+  }
+
+  /** @inheritDoc */
+  async _preCreate(data, options, user) {
+    if ((await super._preCreate(data, options, user)) === false) {
+      return false;
+    }
+    if (foundry.utils.hasProperty(data, "texture.src")) {
+      this.updateSource({
+        flags: {
+          teriock: {
+            imageRaw: foundry.utils.getProperty(data, "texture.src"),
+          },
+        },
+      });
+    }
+  }
+
+  /** @inheritDoc */
+  async _preUpdate(changes, options, user) {
+    if ((await super._preUpdate(changes, options, user)) === false) {
+      return false;
+    }
+    if (foundry.utils.hasProperty(changes, "texture.src")) {
+      if (!options.transformationUpdate) {
+        foundry.utils.setProperty(
+          changes,
+          "flags.teriock.imageRaw",
+          foundry.utils.getProperty(changes, "texture.src"),
+        );
+      }
+    }
+    foundry.utils.deleteProperty(changes, "flags.teriock.isTransformed");
   }
 
   /** @inheritDoc */
@@ -184,18 +229,6 @@ export default class TeriockTokenDocument extends TokenDocument {
   }
 
   /**
-   * The image that should be used to represent this token.
-   * @returns {string}
-   */
-  get imageLive() {
-    if (this.isTransformed) {
-      return this.imageTransformed;
-    } else {
-      return this.imageRaw;
-    }
-  }
-
-  /**
    * Derive vision from the {@link TeriockActor}.
    * @returns {{visionMode: string, range: null|number}}
    */
@@ -246,47 +279,13 @@ export default class TeriockTokenDocument extends TokenDocument {
     };
   }
 
-  /** @inheritDoc */
-  async _preCreate(data, options, user) {
-    if ((await super._preCreate(data, options, user)) === false) {
-      return false;
-    }
-    if (foundry.utils.hasProperty(data, "texture.src")) {
-      this.updateSource({
-        flags: {
-          teriock: {
-            imageRaw: foundry.utils.getProperty(data, "texture.src"),
-          },
-        },
-      });
-    }
-  }
-
-  /** @inheritDoc */
-  async _preUpdate(changes, options, user) {
-    if ((await super._preUpdate(changes, options, user)) === false) {
-      return false;
-    }
-    if (foundry.utils.hasProperty(changes, "texture.src")) {
-      if (foundry.utils.hasProperty(changes, "flags.teriock.isTransformed")) {
-        foundry.utils.deleteProperty(changes, "flags.teriock.isTransformed");
-      } else {
-        foundry.utils.setProperty(
-          changes,
-          "flags.teriock.texture",
-          foundry.utils.getProperty(changes, "texture.src"),
-        );
-      }
-    }
-    foundry.utils.deleteProperty(changes, "flags.teriock.isTransformed");
-  }
-
   /**
    * Perform all updates needed to synchronize this with {@link TeriockActor} data.
    * @returns {Promise<void>}
    */
   async postActorUpdate() {
     const updateData = {};
+    const updateOptions = {};
     const tint = this.hasStatusEffect("down") ? "#ff0000" : "#ffffff";
     if (this.texture.tint.css !== tint) {
       updateData["texture.tint"] = tint;
@@ -302,15 +301,15 @@ export default class TeriockTokenDocument extends TokenDocument {
       if (this.height !== this.actor.system.size.length) {
         updateData["height"] = this.actor.system.size.length;
       }
+      if (this.isTransformed) {
+        updateOptions["transformationUpdate"] = true;
+      }
       if (this.imageLive !== this.texture.src) {
         updateData["texture.src"] = this.imageLive;
-        if (this.isTransformed) {
-          updateData["flags.teriock.isTransformed"] = true;
-        }
       }
     }
     if (Object.keys(updateData).length > 0 && this.id) {
-      await this.update(updateData);
+      await this.update(updateData, updateOptions);
     }
     if (
       visionMode !== this.sight.visionMode &&
