@@ -1,11 +1,9 @@
 export { default as BlindFightingPerception } from "./blind-fighting-perception.mjs";
-export { default as DarkVisionPerception } from "./dark-vision-perception.mjs";
-export { default as EtherealEtherealPerception } from "./ethereal-ethereal-perception.mjs";
-export { default as EtherealMaterialPerception } from "./ethereal-material-perception.mjs";
 export { default as InvisiblePerception } from "./invisible-perception.mjs";
 export { default as LightPerception } from "./light-perception.mjs";
-export { default as MaterialEtherealPerception } from "./material-ethereal-perception.mjs";
-export { default as MaterialMaterialPerception } from "./material-material-perception.mjs";
+export { default as EtherealPerception } from "./ethereal-perception.mjs";
 export { default as ScentPerception } from "./scent-perception.mjs";
 export { default as SoundPerception } from "./sound-perception.mjs";
 export { default as TrueSightPerception } from "./true-sight-perception.mjs";
+export { default as BasePerception } from "./base-detection-mode.mjs";
+export { default as EtherealLightPerception } from "./ethereal-light-perception.mjs";

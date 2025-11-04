@@ -19,6 +19,11 @@ export function _prepDerivedAttributes(actorData) {
         max: 5,
       },
     );
+    deriveModifiableDeterministic(
+      actorData.attributes[att].passive,
+      actorData.parent,
+      { floor: true },
+    );
   }
   _preparePresence(actorData);
   const { attributes, scaling } = actorData;

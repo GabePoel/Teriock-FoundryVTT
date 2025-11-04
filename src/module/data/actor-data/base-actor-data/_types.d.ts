@@ -94,6 +94,13 @@ declare global {
       /** <derived> Combat class (ac + bv) */
       cc: number;
     };
+    /** <schema> Detection parameters */
+    detection: {
+      /** <schema> Hiding based on sneak */
+      hiding: Teriock.Fields.ModifiableDeterministic;
+      /** <schema> Perceiving based on perception */
+      perceiving: Teriock.Fields.ModifiableDeterministic;
+    };
     /** <base> <derived> The calculated encumbrance level (0-3) based on carried weight vs capacity */
     encumbranceLevel: number;
     /** <schema> Hacks */
@@ -236,6 +243,8 @@ declare global {
       smell: number;
       /** <schema> True sight */
       truth: number;
+      /** <schema> Ethereal light */
+      etherealLight: number;
     };
     /** <base> HTML strings that get displayed on the sheet */
     sheet: SheetData;

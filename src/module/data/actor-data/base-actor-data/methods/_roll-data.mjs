@@ -126,15 +126,15 @@ function ageData(_actorData, data) {
  * @param {object} data - The roll data object to populate.
  */
 function attributeData(actorData, data) {
-  const attr = actorData.attributes;
-  const attrKeys = ["int", "mov", "per", "snk", "str", "unp"];
-
-  for (const key of attrKeys) {
-    const attribute = attr[key];
-    data[`att.${key}`] = attribute.score.value;
-    data[`att.${key}.pro`] = attribute.saveProficient ? 1 : 0;
-    data[`att.${key}.flu`] = attribute.saveFluent ? 1 : 0;
-    data[`att.${key}.save`] = attribute.saveBonus;
+  for (const [key, attr] of Object.entries(actorData.attributes)) {
+    for (const ak of [key, `att.${key}`]) {
+      data[`${ak}`] = attr.score.value;
+      data[`${ak}.pro`] = attr.saveProficient ? 1 : 0;
+      data[`${ak}.flu`] = attr.saveFluent ? 1 : 0;
+      data[`${ak}.save`] = attr.saveBonus;
+      data[`${ak}.passive`] = attr.passive.value;
+      data[`${ak}.pas`] = attr.passive.value;
+    }
   }
 }
 

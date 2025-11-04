@@ -1,4 +1,5 @@
 import { _prepDerivedAttributes } from "./_prep-derived-attributes.mjs";
+import { _prepDerivedDetection } from "./_prep-derived-detection.mjs";
 import { _prepDerivedMoney } from "./_prep-derived-load.mjs";
 import { _prepDerivedSpeed } from "./_prep-derived-speed.mjs";
 import { _prepDerivedTrackers } from "./_prep-derived-trackers.mjs";
@@ -30,4 +31,5 @@ export function _prepareDerivedData(actorData) {
   _prepDerivedSpeed(actorData);
   _prepDerivedTrackers(actorData);
   _prepDerivedTransformation(actorData);
+  _prepDerivedDetection(actorData);
 }

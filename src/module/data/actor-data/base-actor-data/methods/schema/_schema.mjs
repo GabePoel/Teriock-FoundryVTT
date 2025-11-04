@@ -2,6 +2,7 @@ import { _defineAttributes } from "./_define-attributes.mjs";
 import { _defineCapacities } from "./_define-capacities.mjs";
 import { _defineCombat } from "./_define-combat.mjs";
 import { _defineDeathBag } from "./_define-death-bag.mjs";
+import { _defineDetection } from "./_define-detection.mjs";
 import { _defineMoney } from "./_define-money.mjs";
 import { _defineProtections } from "./_define-protections.mjs";
 import { _defineSenses } from "./_define-senses.mjs";
@@ -31,5 +32,6 @@ export function _defineSchema(schema) {
   schema = _defineStats(schema);
   schema = _defineTradecrafts(schema);
   schema = _defineTransformation(schema);
+  schema = _defineDetection(schema);
   return schema;
 }

@@ -38,4 +38,17 @@ export default class TeriockToken extends Token {
     this.effects.renderable = true;
     this.renderFlags.set({ refreshEffects: true });
   }
+
+  /** @inheritDoc */
+  _onApplyStatusEffect(statusId, active) {
+    switch (statusId) {
+      case CONFIG.specialStatusEffects.ETHEREAL:
+        canvas.perception.update({ refreshVision: true });
+        break;
+      case CONFIG.specialStatusEffects.HIDDEN:
+        canvas.perception.update({ refreshVision: true });
+        break;
+    }
+    super._onApplyStatusEffect(statusId, active);
+  }
 }

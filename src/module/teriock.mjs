@@ -89,22 +89,23 @@ foundry.helpers.Hooks.once("init", function () {
     }
     return a.id.localeCompare(b.id);
   });
+  CONFIG.specialStatusEffects["BURNED"] = "burned";
+  CONFIG.specialStatusEffects["CHARMED"] = "charmed";
   CONFIG.specialStatusEffects["DEFEATED"] = "down";
   CONFIG.specialStatusEffects["ETHEREAL"] = "ethereal";
-  CONFIG.specialStatusEffects["ILLUSION_TRANSFORMED"] = "illusionTransformed";
-  CONFIG.specialStatusEffects["TRANSFORMED"] = "transformed";
-  CONFIG.specialStatusEffects["BURNED"] = "burned";
+  CONFIG.specialStatusEffects["FRENZIED"] = "frenzied";
   CONFIG.specialStatusEffects["FROZEN"] = "frozen";
+  CONFIG.specialStatusEffects["HIDDEN"] = "hidden";
   CONFIG.specialStatusEffects["HOLLIED"] = "hollied";
-  CONFIG.specialStatusEffects["TERRORED"] = "terrored";
+  CONFIG.specialStatusEffects["ILLUSION_TRANSFORMED"] = "illusionTransformed";
   CONFIG.specialStatusEffects["LIGHTED"] = "lighted";
-  CONFIG.specialStatusEffects["RUINED"] = "ruined";
-  CONFIG.specialStatusEffects["SNARED"] = "snared";
   CONFIG.specialStatusEffects["MELEE_DODGING"] = "meleeDodging";
   CONFIG.specialStatusEffects["MISSILE_DODGING"] = "missileDodging";
-  CONFIG.specialStatusEffects["FRENZIED"] = "frenzied";
-  CONFIG.specialStatusEffects["CHARMED"] = "charmed";
   CONFIG.specialStatusEffects["POISONED"] = "poisoned";
+  CONFIG.specialStatusEffects["RUINED"] = "ruined";
+  CONFIG.specialStatusEffects["SNARED"] = "snared";
+  CONFIG.specialStatusEffects["TERRORED"] = "terrored";
+  CONFIG.specialStatusEffects["TRANSFORMED"] = "transformed";
   for (const hack of Object.values(TERIOCK.data.hacks)) {
     CONFIG.specialStatusEffects[hack.id.toUpperCase()] = hack.id;
   }

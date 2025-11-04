@@ -1,29 +1,15 @@
-import BaseDetectionMode from "./base-detection-mode.mjs";
-
-const { Token } = foundry.canvas.placeables;
+import LightPerception from "./light-perception.mjs";
 
 /**
  * Relevant wiki pages:
  * - [See Invisible](https://wiki.teriock.com/index.php/Ability:See_Invisible)
  */
-export default class DetectionModeInvisiblePerception extends BaseDetectionMode {
-  static BLOCKING_TGT_STATUS_EFFECTS = ["hidden"];
-
+export default class DetectionModeInvisiblePerception extends LightPerception {
   /** @inheritDoc */
-  _canDetect(visionSource, target) {
-    if (!super._canDetect(visionSource, target)) {
-      return false;
-    }
-    const src = visionSource.object.document;
-    if (target instanceof Token) {
-      const tgt = target.document;
-      if (
-        !src.hasStatusEffect("ethereal") &&
-        tgt.hasStatusEffect("invisible")
-      ) {
-        return true;
-      }
-    }
-    return false;
-  }
+  static BLOCKING_STATUSES = {
+    sight: {
+      src: ["blind"],
+      tgt: [],
+    },
+  };
 }

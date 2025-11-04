@@ -1,87 +1,11 @@
 @use "mixins";
 
-.theme-light {
-  --color-bar-border: var(--color-tcard-container-border);
-  --panel-divider-style: solid;
-  --content-link-background: rgba(255, 255, 255, 0.5);
-  --content-link-border-color: var(--color-panel-edge);
-  --content-link-text-color: var(--color-text-subtle);
-  --color-panel-associations-background: rgba(0 0 0 / 10%);
-  --color-panel-associations-background-active: rgba(255, 255, 255, 0.2);
-  --color-panel-associations-background-hover: rgba(255, 255, 255, 0.1);
-  --color-panel-associations-border: var(--color-panel-edge);
-  --color-panel-associations-shadow-color: #ffffff;
-  --color-panel-background: color-mix(in srgb, #f8f4f1, transparent 50%);
-  --color-panel-divider: var(--color-panel-edge);
-  --color-panel-edge: #bbb19f;
-  --color-sheet-header-background: var(--color-panel-background);
-  --compendium-sheet-header-background-color: var(--color-cool-4);
-  --color-sheet-header-shadow: rgba(0, 0, 0, 0.2);
-  --color-tcard-active-inset: color-mix(
-    in srgb,
-    var(--color-warm-3),
-    transparent 50%
-  );
-  --color-tcard-container-border: var(--color-tcard-display-border);
-  --color-tcard-display-background: var(--color-panel-background);
-  --color-tcard-display-border: var(--color-panel-edge);
-  --color-tcard-hover-inset: color-mix(
-    in srgb,
-    var(--color-warm-2),
-    transparent 50%
-  );
-  --color-tcard-shadow: rgba(0, 0, 0, 0.15);
-}
-
-.theme-dark {
-  --color-bar-border: var(--color-tcard-container-border);
-  --panel-divider-style: dotted;
-  --color-panel-associations-background: rgba(255 255 255 / 5%);
-  --color-panel-associations-background-active: rgba(255, 255, 255, 0.1);
-  --color-panel-associations-background-hover: rgba(255, 255, 255, 0.05);
-  --color-panel-associations-border: color-mix(
-    in srgb,
-    var(--color-panel-edge),
-    transparent 75%
-  );
-  --color-panel-associations-shadow-color: transparent;
-  --color-panel-background: transparent;
-  --color-panel-divider: color-mix(
-    in srgb,
-    var(--color-panel-edge),
-    transparent 50%
-  );
-  --color-panel-edge: var(--color-text-subtle);
-  --color-sheet-header-background: rgba(255, 255, 255, 0.03);
-  --compendium-sheet-header-background-color: color-mix(
-    in srgb,
-    var(--color-level-error-bg),
-    black 75%
-  );
-  --color-sheet-header-shadow: rgba(0, 0, 0, 0.6);
-  --color-tcard-active-inset: color-mix(
-    in srgb,
-    var(--color-warm-3),
-    transparent 50%
-  );
-  --color-tcard-container-border: color-mix(
-    in srgb,
-    var(--color-text-subtle),
-    transparent 90%
-  );
-  --color-tcard-display-background: rgba(255, 255, 255, 0.1);
-  --color-tcard-display-border: var(--color-border);
-  --color-tcard-hover-inset: color-mix(
-    in srgb,
-    var(--color-warm-2),
-    transparent 50%
-  );
-  --color-tcard-shadow: rgba(0, 0, 0, 0.4);
-}
-
-@import "components/compendium";
+@import "themes";
+@import "page-sizing";
 @import "messages/panel";
 @import "messages/tooltip";
+@import "components/compendium";
+@import "components/ui/editor";
 
 .teriock {
   @import "dialogs/heal-dialog";
@@ -107,120 +31,6 @@
 
 .chat-message .message-content {
   overflow: unset !important;
-}
-
-.tsheet,
-.tsheet-page {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  width: 100%;
-}
-
-.application.sheet.teriock:not(.minimized) {
-  min-width: 250px;
-
-  .window-header {
-    border-top-left-radius: 4px;
-    border-top-right-radius: 4px;
-  }
-
-  .window-content {
-    container-type: inline-size;
-    gap: 0 !important;
-    overflow: auto;
-    padding: 0 !important;
-  }
-}
-
-.application.sheet.teriock.character:not(.minimized) {
-  backdrop-filter: blur(4px);
-  min-height: 425px;
-  min-width: 525px;
-  overflow: unset;
-
-  .window-content {
-    display: contents;
-    overflow: unset;
-  }
-}
-
-.character-window,
-.tsheet-page {
-  .text-preview {
-    //overflow: auto !important;
-    overflow-x: auto;
-    padding-block: 0.125em;
-  }
-
-  .prosemirror {
-    display: block;
-    min-height: unset;
-    //overflow: auto !important;
-  }
-
-  .prosemirror.inactive .editor-content {
-    display: contents;
-  }
-
-  .prosemirror.active .editor-content {
-    display: block;
-  }
-
-  .editor .editor-content {
-    :first-child {
-      margin-top: 0;
-    }
-
-    :last-child {
-      margin-bottom: 0;
-    }
-  }
-
-  .ab-section-container:not(:hover) .prosemirror button.toggle,
-  .ab-section-container:not(:hover) prose-mirror button.toggle,
-  .es-wording-container:not(:hover) .prosemirror button.toggle,
-  .es-wording-container:not(:hover) prose-mirror button.toggle {
-    display: none;
-  }
-
-  .prosemirror button.toggle,
-  prose-mirror button.toggle {
-    font-size: xx-small;
-    height: unset;
-    min-height: unset;
-    min-width: unset;
-    padding: 0.5em;
-    width: unset;
-  }
-
-  .prosemirror {
-    width: 100%;
-  }
-
-  .editor {
-    overflow: visible;
-  }
-
-  .character-notes-content {
-    prose-mirror {
-      padding: 0.5em;
-    }
-
-    .prosemirror button.toggle,
-    prose-mirror button.toggle {
-      font-size: medium;
-      height: var(--input-height);
-      padding: 0.5em;
-      right: 0;
-      top: 0;
-      width: var(--input-height);
-    }
-
-    .editor {
-      min-height: 2.3em;
-    }
-  }
 }
 
 .thover {
@@ -269,10 +79,6 @@ dl:not(:first-child) {
 
 .force-hidden {
   display: none;
-}
-
-#token-hud .status-effects .effect-control {
-  filter: none;
 }
 
 .combat-sidebar .combat-tracker .token-effect {

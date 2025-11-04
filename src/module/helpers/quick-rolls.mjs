@@ -56,13 +56,21 @@ export async function harmRoll(
   buttons.push(...damageTypeButtons);
   const damageDrainPanels = await makeDamageDrainTypePanels(roll);
   panels.push(...damageDrainPanels);
+  let speaker;
+  if (actor) {
+    speaker = TeriockChatMessage.getSpeaker({ actor: actor });
+  } else {
+    speaker = TeriockChatMessage.getSpeaker();
+    if (actor) {
+      //noinspection JSUnresolvedReference
+      actor = game.actors.get(speaker.actor);
+    }
+  }
   const chatData = {
-    speaker: actor
-      ? TeriockChatMessage.getSpeaker({ actor: actor })
-      : TeriockChatMessage.getSpeaker(),
+    speaker: speaker,
     rolls: [roll],
     system: {
-      avatar: actor.img,
+      avatar: actor?.img,
       buttons: buttons,
       columns: damageTypeButtons.length > 0 ? 2 : 3,
       extraContent: message,

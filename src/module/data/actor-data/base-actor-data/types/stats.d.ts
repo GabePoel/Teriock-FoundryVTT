@@ -10,13 +10,15 @@ export interface BarData {
 
 /** Attribute data */
 export interface ActorAttributeData {
-  /** (derived) Total bonus to saves made with this attribute */
+  /** <derived> Passive attribute value */
+  passive: Teriock.Fields.ModifiableDeterministic;
+  /** <derived> Total bonus to saves made with this attribute */
   saveBonus: number;
-  /** (schema) Are you fluent in saves made with this attribute? */
+  /** <schema> Are you fluent in saves made with this attribute? */
   saveFluent: boolean;
-  /** (schema) Are you proficient in saves made with this attribute? */
+  /** <schema> Are you proficient in saves made with this attribute? */
   saveProficient: boolean;
-  /** (schema) Value */
+  /** <schema> Value */
   score: Teriock.Fields.ModifiableDeterministic;
 }
 

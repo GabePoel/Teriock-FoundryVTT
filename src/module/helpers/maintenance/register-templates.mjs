@@ -12,6 +12,7 @@ export default async function registerTemplates() {
     "systems/teriock/src/templates/document-templates/actor-templates/character-template/parts/ch-attribute-box.hbs",
     "systems/teriock/src/templates/document-templates/actor-templates/character-template/parts/ch-battle-box.hbs",
     "systems/teriock/src/templates/document-templates/actor-templates/character-template/parts/ch-carrying-box.hbs",
+    "systems/teriock/src/templates/document-templates/actor-templates/character-template/parts/ch-detection-box.hbs",
     "systems/teriock/src/templates/document-templates/actor-templates/character-template/parts/ch-hack-box.hbs",
     "systems/teriock/src/templates/document-templates/actor-templates/character-template/parts/ch-movement-box.hbs",
     "systems/teriock/src/templates/document-templates/actor-templates/character-template/parts/ch-sidebar.hbs",

@@ -24,6 +24,7 @@ import ActorRollableTakesPart from "./parts/actor-rollable-takes-part.mjs";
  * @mixes ActorOneOffsPart
  * @mixes ActorPayPart
  * @mixes ActorRollableTakesPart
+ * @property {Partial<LightData>} light
  */
 export default class TeriockBaseActorModel extends ActorConditionTogglingPart(
   ActorRollableTakesPart(

@@ -155,19 +155,17 @@ export default class TeriockTokenDocument extends TokenDocument {
     if (basicMode) {
       basicMode.enabled = false;
     }
-    const enabledIds = [
-      "materialMaterial",
-      "etherealMaterial",
-      "etherealEthereal",
-    ];
+    const enabledIds = ["lightPerception"];
     const disabledIds = [
-      "materialEthereal",
-      "scentPerception",
-      "soundPerception",
-      "trueSight",
-      "seeInvisible",
       "blindFighting",
       "darkVision",
+      "etherealLight",
+      "nightVision",
+      "scentPerception",
+      "seeEthereal",
+      "seeInvisible",
+      "soundPerception",
+      "trueSight",
     ];
     this.detectionModes.push(
       ...enabledIds
@@ -230,11 +228,12 @@ export default class TeriockTokenDocument extends TokenDocument {
 
   /**
    * Derive vision from the {@link TeriockActor}.
-   * @returns {{visionMode: string, range: null|number}}
+   * @returns {{visionMode: string, range: null|number, angle: number}}
    */
   deriveVision() {
     let visionMode = "basic";
     let range = 0;
+    let angle = 360;
     if (
       this.sight?.enabled &&
       game.settings.get("teriock", "automaticallyChangeVisionModes")
@@ -250,6 +249,7 @@ export default class TeriockTokenDocument extends TokenDocument {
       }
       if (this.hasStatusEffect("ethereal")) {
         visionMode = "ethereal";
+        angle = this.actor?.system.light.angle || angle;
       }
       if (
         this.hasStatusEffect("ethereal") &&
@@ -268,6 +268,7 @@ export default class TeriockTokenDocument extends TokenDocument {
         this.actor?.system.senses.night,
         this.actor?.system.senses.blind,
         this.actor?.system.senses.hearing,
+        this.actor?.system.senses.etherealLight,
       );
       if (!["down", "dead", "invisibleEthereal"].includes(visionMode)) {
         this.sight.color = "";
@@ -276,6 +277,7 @@ export default class TeriockTokenDocument extends TokenDocument {
     return {
       visionMode,
       range,
+      angle,
     };
   }
 
@@ -290,9 +292,12 @@ export default class TeriockTokenDocument extends TokenDocument {
     if (this.texture.tint.css !== tint) {
       updateData["texture.tint"] = tint;
     }
-    const { visionMode, range } = this.deriveVision();
+    const { visionMode, range, angle } = this.deriveVision();
     if (this.sight.range !== range) {
       updateData["sight.range"] = range;
+    }
+    if (this.sight.angle !== angle) {
+      updateData["sight.angle"] = angle;
     }
     if (this.actor) {
       if (this.width !== this.actor.system.size.length) {

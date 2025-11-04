@@ -12,6 +12,11 @@ const { fields } = foundry.data;
  */
 function attributeField(name) {
   return new fields.SchemaField({
+    passive: modifiableFormula({
+      deterministic: true,
+      initial: `@att.${name.toLowerCase()} * 2 + 10`,
+      label: `Passive ${name} Value`,
+    }),
     saveFluent: new fields.BooleanField({
       initial: false,
       label: `Fluent in ${name} Saves`,
@@ -21,9 +26,9 @@ function attributeField(name) {
       label: `Proficient in ${name} Saves`,
     }),
     score: modifiableFormula({
+      deterministic: true,
       initial: "-3",
       label: `${name} Save Bonus`,
-      deterministic: true,
     }),
   });
 }

@@ -8,76 +8,80 @@ import * as vision from "./vision-modes/_module.mjs";
  * @type {Record<string, BaseDetectionMode>}
  */
 export const detectionModes = {
-  /** Light perception detection mode */
-  lightPerception: new detection.LightPerception({
-    id: "lightPerception",
-    label: "Light Perception",
-    type: BaseDetectionMode.DETECTION_TYPES.SIGHT,
-  }),
-  /** True sight detection mode */
-  trueSight: new detection.TrueSightPerception({
-    id: "trueSight",
-    label: "True Sight",
-    type: BaseDetectionMode.DETECTION_TYPES.SIGHT,
-  }),
-  /** Invisible perception detection mode */
-  seeInvisible: new detection.InvisiblePerception({
-    id: "seeInvisible",
-    label: "See Invisible",
-    type: BaseDetectionMode.DETECTION_TYPES.SIGHT,
-  }),
-  /** Scent perception detection mode */
-  scentPerception: new detection.ScentPerception({
-    id: "scentPerception",
-    label: "Scent Perception",
-    type: BaseDetectionMode.DETECTION_TYPES.OTHER,
-  }),
-  /** Sound perception detection mode */
-  soundPerception: new detection.SoundPerception({
-    id: "soundPerception",
-    label: "Sound Perception",
-    type: BaseDetectionMode.DETECTION_TYPES.SOUND,
-  }),
   /** Blind fighting detection mode */
   blindFighting: new detection.BlindFightingPerception({
+    angle: false,
     id: "blindFighting",
     label: "Blind Fighting",
     type: BaseDetectionMode.DETECTION_TYPES.MOVE,
   }),
-  /** In Material, seeing Material detection mode */
-  materialMaterial: new detection.MaterialMaterialPerception({
-    id: "materialMaterial",
-    label: "In Material, See Material",
-    type: BaseDetectionMode.DETECTION_TYPES.SIGHT,
-  }),
-  /** In Material, seeing Ethereal detection mode */
-  materialEthereal: new detection.MaterialEtherealPerception({
-    id: "materialEthereal",
-    label: "In Material, See Ethereal",
-    type: BaseDetectionMode.DETECTION_TYPES.SIGHT,
-  }),
-  /** In Ethereal, seeing Material detection mode */
-  etherealMaterial: new detection.EtherealMaterialPerception({
-    id: "etherealMaterial",
-    label: "In Ethereal, See Material",
-    type: BaseDetectionMode.DETECTION_TYPES.SIGHT,
-  }),
-  /** In Ethereal, seeing Ethereal detection mode */
-  etherealEthereal: new detection.EtherealEtherealPerception({
-    id: "etherealEthereal",
-    label: "In Ethereal, See Ethereal",
-    type: BaseDetectionMode.DETECTION_TYPES.SIGHT,
-  }),
   /** Dark vision detection mode */
-  darkVision: new detection.DarkVisionPerception({
+  darkVision: new detection.BasePerception({
+    angle: false,
     id: "darkVision",
     label: "Dark Vision",
     type: BaseDetectionMode.DETECTION_TYPES.SIGHT,
   }),
+  /** Ethereal light detection mode */
+  etherealLight: new detection.EtherealLightPerception({
+    angle: true,
+    ethereal: true,
+    id: "etherealLight",
+    label: "Ethereal Light",
+    type: BaseDetectionMode.DETECTION_TYPES.SIGHT,
+  }),
+  /** Light perception detection mode */
+  lightPerception: new detection.LightPerception({
+    angle: false,
+    id: "lightPerception",
+    label: "Light Perception",
+    type: BaseDetectionMode.DETECTION_TYPES.SIGHT,
+  }),
   /** Night vision detection mode */
-  nightVision: new detection.DarkVisionPerception({
+  nightVision: new detection.BasePerception({
+    angle: false,
     id: "nightVision",
     label: "Night Vision",
+    type: BaseDetectionMode.DETECTION_TYPES.SIGHT,
+    walls: false,
+  }),
+  /** Scent perception detection mode */
+  scentPerception: new detection.ScentPerception({
+    angle: false,
+    id: "scentPerception",
+    label: "Scent Perception",
+    material: false,
+    type: BaseDetectionMode.DETECTION_TYPES.OTHER,
+  }),
+  /** Ethereal detection mode */
+  seeEthereal: new detection.EtherealPerception({
+    angle: false,
+    ethereal: true,
+    id: "seeEthereal",
+    label: "See Ethereal",
+    type: BaseDetectionMode.DETECTION_TYPES.SIGHT,
+  }),
+  /** Invisible perception detection mode */
+  seeInvisible: new detection.InvisiblePerception({
+    angle: false,
+    id: "seeInvisible",
+    label: "See Invisible",
+    type: BaseDetectionMode.DETECTION_TYPES.SIGHT,
+  }),
+  /** Sound perception detection mode */
+  soundPerception: new detection.SoundPerception({
+    angle: false,
+    id: "soundPerception",
+    label: "Sound Perception",
+    material: false,
+    type: BaseDetectionMode.DETECTION_TYPES.SOUND,
+  }),
+  /** True sight detection mode */
+  trueSight: new detection.TrueSightPerception({
+    angle: false,
+    ethereal: true,
+    id: "trueSight",
+    label: "True Sight",
     type: BaseDetectionMode.DETECTION_TYPES.SIGHT,
   }),
 };

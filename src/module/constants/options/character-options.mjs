@@ -7,13 +7,14 @@ export const characterOptions = {
     4: "Double",
   },
   senseMap: {
-    ethereal: "materialEthereal",
-    smell: "scentPerception",
-    hearing: "soundPerception",
     blind: "blindFighting",
-    truth: "trueSight",
-    invisible: "seeInvisible",
     dark: "darkVision",
+    ethereal: "seeEthereal",
+    etherealLight: "etherealLight",
+    hearing: "soundPerception",
+    invisible: "seeInvisible",
+    smell: "scentPerception",
+    truth: "trueSight",
   },
   protectionMap: {
     immunities: {
