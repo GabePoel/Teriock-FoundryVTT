@@ -884,7 +884,7 @@ effects:
             - hidden
           endStatuses: []
           rolls:
-            hide: 1d20 + @snk
+            hide: 1d20 + (2 * @snk)
             perceive: 10 + @per
           hacks: []
           checks: []
@@ -918,7 +918,7 @@ effects:
           startStatuses: []
           endStatuses: []
           rolls:
-            hide: 1d20 + @snk + @p
+            hide: 1d20 + (2 * @snk) + @p
           hacks: []
           checks: []
           duration: 0
@@ -951,7 +951,7 @@ effects:
           startStatuses: []
           endStatuses: []
           rolls:
-            hide: 1d20 + @snk + @f
+            hide: 1d20 + (2 * @snk) + @f
           hacks: []
           checks: []
           duration: 0
@@ -1040,12 +1040,13 @@ effects:
       overview:
         base: >-
           You attempt to become @L[Condition:Hidden]{hidden}. As you do this,
-          you roll [[/roll 1d20 + @snk]]. If this is greater than the
-          @L[Core:Perception]{passive perception} ([[/roll 10 + @per]]) of any
-          creatures that could see you, you become @L[Condition:Hidden]{hidden}
-          from them. The value you rolled is your hidden DC.
-        proficient: Instead roll [[/roll 1d20 + @snk + @p]] for your hidden DC.
-        fluent: Instead roll [[/roll 1d20 + @snk + @f]] for your hidden DC.
+          you roll [[/roll 1d20 + (2 * @snk)]]. If this is greater than the
+          @L[Core:Perception]{passive perception} (10 + 2 ×
+          @L[Core:Perception]{PER}) of any creatures that could see you, you
+          become @L[Condition:Hidden]{hidden} from them. The value you rolled is
+          your hidden DC.
+        proficient: Instead roll [[/roll 1d20 + (2 * @snk) + @p]] for your hidden DC.
+        fluent: Instead roll [[/roll 1d20 + (2 * @snk) + @f]] for your hidden DC.
       results:
         hit: ''
         critHit: ''
@@ -8128,7 +8129,7 @@ effects:
           startStatuses: []
           endStatuses: []
           rolls:
-            perceive: 1d20 + @per
+            perceive: 1d20 + (2 * @per)
           hacks: []
           checks: []
           duration: 0
@@ -8280,8 +8281,9 @@ effects:
       range: Self.
       overview:
         base: >-
-          Roll [[/roll 1d20 + @per]]. You see any @L[Condition:Hidden]{hidden}
-          creatures with a "Hidden DC" less than or equal to your roll.
+          Roll [[/roll 1d20 + (2 * @per)]]. You see any
+          @L[Condition:Hidden]{hidden} creatures with a "Hidden DC" less than or
+          equal to your roll.
         proficient: ''
         fluent: ''
       results:

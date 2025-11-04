@@ -111,7 +111,7 @@ export default class TeriockBaseActorModel extends ActorConditionTogglingPart(
   /** @inheritDoc */
   _onUpdate(changed, options, userId) {
     super._onUpdate(changed, options, userId);
-    // The 999999 catch is used to keep from rendering the stat change upon applying transformations
+    // The large number catch is used to keep from rendering the stat change upon applying transformations
     if (options.teriock.mpChange !== 0 && options.teriock.mpChange < 999999) {
       const color = options.teriock.mpChange > 0 ? "#99C1F1" : "#1A5FB4";
       this.animateStatChangeEffect(options.teriock.mpChange, color).then();
@@ -217,10 +217,10 @@ export default class TeriockBaseActorModel extends ActorConditionTogglingPart(
   }
 
   /**
-   * Checks if there's a protection against something
+   * Checks if there's some protection against something
    * @param {ProtectionDataKey} key - Category of protection
    * @param {ProtectionDataValue} value - Specific protection
-   * @returns {boolean} Whether or not there's a protection against the specified key and value
+   * @returns {boolean} Whether or not there's some protection against the specified key and value
    */
   isProtected(key, value) {
     let hasProtection = false;

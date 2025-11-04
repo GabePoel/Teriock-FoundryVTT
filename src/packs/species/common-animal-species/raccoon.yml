@@ -322,7 +322,7 @@ effects:
             - hidden
           endStatuses: []
           rolls:
-            hide: 10 + @snk
+            hide: 1d20 + (2 * @snk)
           hacks: []
           checks: []
           duration: 0
@@ -360,7 +360,7 @@ effects:
           startStatuses: []
           endStatuses: []
           rolls:
-            hide: 1d20 + @snk + @p
+            hide: 1d20 + (2 * @snk) + @p
           hacks: []
           checks: []
           duration: 0
@@ -398,7 +398,7 @@ effects:
           startStatuses: []
           endStatuses: []
           rolls:
-            hide: 1d20 + @snk + @f
+            hide: 1d20 + (2 * @snk) + @f
           hacks: []
           checks: []
           duration: 0
@@ -497,17 +497,17 @@ effects:
       overview:
         base: >-
           You become @L[Condition:Hidden]{hidden}. As you do this, you may roll
-          [[/roll 1d20 + @snk]]. If this is greater than your @L[Core:Passive
-          Attributes]{passive} @L[Core:Sneak]{sneak} ([[/roll 10 + @snk]]), then
-          you use it as your hidden DC. If not, use your @L[Core:Passive
-          Attributes]{passive} @L[Core:Sneak]{sneak}.
+          [[/roll 1d20 + (2 * @snk)]]. If this is greater than your
+          @L[Core:Passive Attributes]{passive} @L[Core:Sneak]{sneak} (10 + 2 ×
+          @L[Core:Sneak]{SNK}), then you use it as your hidden DC. If not, use
+          your @L[Core:Passive Attributes]{passive} @L[Core:Sneak]{sneak}.
         proficient: >-
-          Instead roll [[/roll 1d20 + @snk + @p]] for your hidden DC (if it's
-          greater than your @L[Core:Passive Attributes]{passive}
+          Instead roll [[/roll 1d20 + (2 * @snk) + @p]] for your hidden DC (if
+          it's greater than your @L[Core:Passive Attributes]{passive}
           @L[Core:Sneak]{sneak}).
         fluent: >-
-          Instead roll [[/roll 1d20 + @snk + @f]] for your hidden DC (if it's
-          greater than your @L[Core:Passive Attributes]{passive}
+          Instead roll [[/roll 1d20 + (2 * @snk) + @f]] for your hidden DC (if
+          it's greater than your @L[Core:Passive Attributes]{passive}
           @L[Core:Sneak]{sneak}).
       results:
         hit: ''
@@ -599,7 +599,7 @@ effects:
     _stats:
       coreVersion: '13'
       systemId: teriock
-      systemVersion: 0.9.0
+      systemVersion: 0.9.1
       lastModifiedBy: teriockBuilder00
     _key: '!items.effects!YXK9Lyph7PnnybL1.wwFzGPTIIKR6xWdV'
   - name: Low Strength
@@ -893,9 +893,9 @@ effects:
           checks: []
           duration: 0
           changes:
-            - key: system.senses.night
+            - key: system.senses.dark
               mode: 4
-              value: '60'
+              value: '120'
               priority: 10
           common: []
           expiration:
@@ -1063,7 +1063,9 @@ effects:
       sustained: false
       range: Self.
       overview:
-        base: You can see in the dark up to 60 feet.<p></p>
+        base: >-
+          You can see in the dark up to 60 feet as though it is bright light and
+          up to 120 feet as though it is dim light.<p></p>
         proficient: ''
         fluent: ''
       results:

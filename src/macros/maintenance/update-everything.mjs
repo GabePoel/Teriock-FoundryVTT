@@ -27,6 +27,9 @@ const toRun = {
   "magic items": await fromUuid(
     "Compendium.teriock.maintenance.Macro.PW6nyzkzO59fogTh",
   ),
+  rules: await fromUuid(
+    "Compendium.teriock.maintenance.Macro.BZNsJineLpkDJYYA",
+  ),
 };
 
 const macroEntries = Object.entries(toRun);
@@ -45,7 +48,7 @@ let completedCount = 0;
 for (const [macroName, macro] of macroEntries) {
   progress.update({
     pct: completedCount / totalMacros,
-    message: `Updating ${macroName}... (${completedCount + 1}/${totalMacros})`,
+    message: `Running ${macroName}... (${completedCount + 1}/${totalMacros})`,
   });
 
   await macro.execute();
