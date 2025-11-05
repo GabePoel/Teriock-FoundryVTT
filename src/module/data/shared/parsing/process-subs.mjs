@@ -1,7 +1,4 @@
-import {
-  createAbility,
-  createProperty,
-} from "../../../helpers/create-effects.mjs";
+import { copyAbility, copyProperty } from "../../../helpers/fetch.mjs";
 
 /**
  * Generic function to process sub effects from the document.
@@ -25,9 +22,7 @@ async function processSubEffects(subs, doc, config) {
     includeNamespace = "Ability",
     getMethod = "getAbilities",
   } = config;
-
-  /** @type {() => TeriockEffect[]} */
-  // const getFunction = doc[getMethod];
+  /** @type {TeriockEffect[]} */
   const existingSubs = doc[getMethod]();
   /** @type {Set<string>} */
   const newSubNames = new Set();
@@ -52,9 +47,19 @@ async function processSubEffects(subs, doc, config) {
     if (subEffect) {
       await subEffect.system.hardRefreshFromIndex();
     } else {
-      subEffect = await createFn(doc, subName, {
-        notify: false,
-      });
+      subEffect = await createFn(subName);
+      let parentDocument = doc;
+      if (doc.documentName === "ActiveEffect") {
+        parentDocument = doc.parent;
+      }
+      const newEffects = await parentDocument.createEmbeddedDocuments(
+        "ActiveEffect",
+        [subEffect],
+      );
+      const newEffect = newEffects[0];
+      if (doc.documentName === "ActiveEffect") {
+        await doc.addSub(newEffect);
+      }
     }
 
     const limitation = el.querySelector(".limited-modifier");
@@ -125,7 +130,7 @@ async function processSubEffects(subs, doc, config) {
  */
 export async function processSubAbilities(subs, doc) {
   return processSubEffects(subs, doc, {
-    createFn: createAbility,
+    createFn: copyAbility,
     nameSelector: ".ability-sub-name",
     skipNamespace: "Condition",
     includeNamespace: "Ability",
@@ -143,7 +148,7 @@ export async function processSubAbilities(subs, doc) {
  */
 export async function processSubProperties(subs, doc) {
   return processSubEffects(subs, doc, {
-    createFn: createProperty,
+    createFn: copyProperty,
     nameSelector: ".ability-sub-name",
     skipNamespace: "Condition",
     includeNamespace: "Property",

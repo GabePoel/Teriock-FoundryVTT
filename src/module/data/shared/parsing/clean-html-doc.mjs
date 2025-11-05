@@ -8,7 +8,9 @@ import { ROLL_BUTTON_CONFIGS } from "../../effect-data/ability-data/methods/roll
  */
 export function cleanHTMLDoc(doc) {
   doc
-    .querySelectorAll(".ability-sub-container, .expandable-container")
+    .querySelectorAll(
+      ".ability-sub-container, .expandable-container, .expandable-table",
+    )
     .forEach((el) => el.remove());
 
   const TYPE_LUT = Object.fromEntries(

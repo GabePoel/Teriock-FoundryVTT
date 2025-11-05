@@ -109,13 +109,9 @@ export async function _parse(abilityData, rawHTML) {
   // await abilityData.parent.deleteSubs();
 
   // Get new subs
-  const subs = Array.from(
-    doc.querySelectorAll(".ability-sub-container"),
-  ).filter((el) => !el.closest(".ability-sub-container:not(:scope)"));
-  const expandableSubs = Array.from(
-    doc.querySelectorAll(".expandable-container"),
-  ).filter((el) => !el.closest(".expandable-container:not(:scope)"));
-  subs.push(...expandableSubs);
+  const subs = Array.from(doc.querySelectorAll(".subber")).filter((element) => {
+    return !element.parentElement?.closest(".subber");
+  });
 
   // Remove sub-containers and process dice
   cleanHTMLDoc(doc);
