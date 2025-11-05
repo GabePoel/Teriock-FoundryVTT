@@ -118,11 +118,8 @@ export async function _generateEffect(rollConfig, crit = false) {
       for (const change of heightenedChanges) {
         const heightenEvaluateRoll = new TeriockRoll(
           change.value,
-          rollConfig.useData.actor.getRollData(),
+          rollConfig.useData.rollData,
         );
-        heightenEvaluateRoll.alter(heightenAmount, 0, {
-          multiplyNumeric: true,
-        });
         await heightenEvaluateRoll.evaluate();
         change.value = heightenEvaluateRoll.result.toString();
       }

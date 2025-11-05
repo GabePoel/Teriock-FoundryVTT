@@ -22,7 +22,7 @@ export function _prepSpecialDefense(actorData) {
     actorData.defense.av.natural,
     actorData.defense.av.worn,
   );
-  actorData.defense.ac = 10 + actorData.defense.av.value;
+  actorData.defense.ac += actorData.defense.av.value;
   actorData.defense.bv = actorData.primaryBlocker?.system.bv.value || 0;
   actorData.defense.cc = actorData.defense.ac + actorData.defense.bv;
 }
