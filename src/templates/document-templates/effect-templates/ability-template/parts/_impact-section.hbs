@@ -1,4 +1,13 @@
 <div class="form-group" style="flex-direction: column;">
+  {{#if system.isAoe}}
+    {{formGroup
+      (path systemFields "applies.fields" typeKey "fields.noTemplate")
+      value=(path system "applies" typeKey "noTemplate")
+      classes="teriock-full-width"
+      disabled=(not editable)
+      rootId=uuid
+    }}
+  {{/if}}
   {{formGroup
     (path systemFields "applies.fields" typeKey "fields.common")
     value=(path system "applies" typeKey "common")
@@ -43,6 +52,13 @@
   {{formGroup
     (path systemFields "applies.fields" typeKey "fields.checks")
     value=(path system "applies" typeKey "checks")
+    choices=TERIOCK.index.tradecrafts
+    classes="teriock-full-width"
+    disabled=(not editable)
+  }}
+  {{formGroup
+    (path systemFields "applies.fields" typeKey "fields.macroButtonUuids")
+    value=(path system "applies" typeKey "macroButtonUuids")
     choices=TERIOCK.index.tradecrafts
     classes="teriock-full-width"
     disabled=(not editable)
@@ -120,12 +136,45 @@
         rootId=uuid
       }}
       {{formGroup
-        (path systemFields "applies.fields" typeKey "fields.transformation.fields.uuids")
-        value=(path system "applies" typeKey "transformation.uuids")
+        (path systemFields "applies.fields" typeKey "fields.transformation.fields.useFolder")
+        value=(path system "applies" typeKey "transformation.useFolder")
         disabled=(not editable)
         classes="teriock-full-width"
         rootId=uuid
       }}
+      {{#if (path system "applies" typeKey "transformation.useFolder")}}
+        {{formGroup
+          (path systemFields "applies.fields" typeKey "fields.transformation.fields.uuid")
+          value=(path system "applies" typeKey "transformation.uuid")
+          disabled=(not editable)
+          classes="teriock-full-width"
+          rootId=uuid
+        }}
+      {{else}}
+        {{formGroup
+          (path systemFields "applies.fields" typeKey "fields.transformation.fields.uuids")
+          value=(path system "applies" typeKey "transformation.uuids")
+          disabled=(not editable)
+          classes="teriock-full-width"
+          rootId=uuid
+        }}
+      {{/if}}
+      {{formGroup
+        (path systemFields "applies.fields" typeKey "fields.transformation.fields.select")
+        value=(path system "applies" typeKey "transformation.select")
+        disabled=(not editable)
+        classes="teriock-full-width"
+        rootId=uuid
+      }}
+      {{#if (path system "applies" typeKey "transformation.select")}}
+        {{formGroup
+          (path systemFields "applies.fields" typeKey "fields.transformation.fields.multiple")
+          value=(path system "applies" typeKey "transformation.multiple")
+          disabled=(not editable)
+          classes="teriock-full-width"
+          rootId=uuid
+        }}
+      {{/if}}
       {{formGroup
         (path systemFields "applies.fields" typeKey "fields.transformation.fields.image")
         value=(path system "applies" typeKey "transformation.image")

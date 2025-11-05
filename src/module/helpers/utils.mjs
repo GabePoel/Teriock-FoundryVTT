@@ -729,3 +729,34 @@ export function ringImage(path) {
   }
   return path;
 }
+
+/**
+ * Get the contents of a folder from its UUID.
+ * @param {Teriock.UUID<TeriockFolder>|TeriockFolder} folder
+ * @param {object} [options]
+ * @param {Teriock.Documents.CommonType[]} [options.types] - Subset of types to filter for.
+ * @param {boolean} [options.uuids] - Get the UUIDs instead of the documents.
+ * @returns {Promise<Teriock.UUID<TeriockDocument>[]|TeriockDocument[]>}
+ */
+export async function folderContents(folder, options = {}) {
+  const { types, uuids = true } = options;
+  if (typeof folder === "string") {
+    folder =
+      /** @type {TeriockFolder|null} */ await foundry.utils.fromUuid(folder);
+  }
+  console.log(folder);
+  let out = [];
+  if (folder) {
+    out = folder.allContents;
+    console.log(out);
+    if (types) {
+      out = out.filter((d) => types.includes(d.type));
+    }
+    if (uuids) {
+      out = out.map((d) => d.uuid);
+    } else if (folder.inCompendium) {
+      out = Promise.all(out.map((d) => foundry.utils.fromUuid(d.uuid)));
+    }
+  }
+  return out;
+}

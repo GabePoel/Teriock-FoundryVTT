@@ -1,12 +1,8 @@
-import type { TransformationField } from "../../shared/fields/helpers/_types";
-import type { TeriockSpecies } from "../../../documents/_documents.mjs";
+import type { TransformationImplementationField } from "../../shared/fields/helpers/_types";
 
 export interface TransformationMixinInterface {
   /** <schema> Transformation configuration */
-  transformation: TransformationField & {
-    /** <schema> The actual species items this is associated with on the actor */
-    species: Teriock.ID<TeriockSpecies>[];
-  };
+  transformation: TransformationImplementationField;
 
   get parent(): TeriockChild;
 }

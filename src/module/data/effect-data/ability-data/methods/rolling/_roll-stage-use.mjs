@@ -10,6 +10,8 @@ import { _handleDialogs } from "./_roll-dialogs.mjs";
 export async function _stageUse(rollConfig) {
   rollConfig.useData.rollData = rollConfig.useData.actor.getRollData();
   rollConfig.useData.executor = getToken(rollConfig.useData.actor);
+  rollConfig.useData.noTemplate =
+    rollConfig.abilityData.applies.base.noTemplate;
 
   // Calculate costs
   rollConfig.useData.costs.hp = await calculateCost(
@@ -73,11 +75,20 @@ export async function _stageUse(rollConfig) {
   if (["attack", "feat"].includes(rollConfig.abilityData.interaction)) {
     if (rollConfig.useData.fluent) {
       rollConfig.useData.formula += " + @f";
+      rollConfig.useData.noTemplate =
+        rollConfig.useData.noTemplate ||
+        rollConfig.abilityData.applies.fluent.noTemplate;
     } else if (rollConfig.useData.proficient) {
       rollConfig.useData.formula += " + @p";
+      rollConfig.useData.noTemplate =
+        rollConfig.useData.noTemplate ||
+        rollConfig.abilityData.applies.proficient.noTemplate;
     }
     if (rollConfig.useData.modifiers.heightened > 0) {
       rollConfig.useData.formula += " + @h";
+      rollConfig.useData.noTemplate =
+        rollConfig.useData.noTemplate ||
+        rollConfig.abilityData.applies.heightened.noTemplate;
     }
   }
 }

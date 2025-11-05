@@ -45,9 +45,12 @@ export function combatExpirationSourceTypeField() {
 /**
  * Field for a transformation.
  * @returns {SchemaField}
- * @param {boolean} [expanded]
+ * @param {object} [options]
+ * @param {boolean} [options.implementation] - Make this into an implementation.
+ * @param {boolean} [options.configuration] - Make this into a configuration.
  */
-export function transformationField(expanded = false) {
+export function transformationField(options = {}) {
+  const { implementation = false, configuration = false } = options;
   const schema = {
     enabled: new fields.BooleanField({
       hint:
@@ -122,6 +125,13 @@ export function transformationField(expanded = false) {
         validationError: "Only species can be transformed into.",
       },
     ),
+    multiple: new fields.BooleanField({
+      hint: "Allow selection of multiple species to transform into at the same time.",
+      initial: false,
+      label: "Multiple Selection",
+      nullable: false,
+      required: false,
+    }),
     resetHp: new fields.BooleanField({
       hint: "Reset HP upon transformation.",
       label: "Reset HP",
@@ -137,8 +147,33 @@ export function transformationField(expanded = false) {
       nullable: false,
     }),
   };
-  if (expanded) {
+  if (implementation) {
     schema.species = new fields.ArrayField(new fields.DocumentIdField());
+  }
+  if (configuration) {
+    Object.assign(schema, {
+      select: new fields.BooleanField({
+        hint: "Select a subset of the species to turn into instead of all of them.",
+        label: "Select",
+        nullable: false,
+        required: false,
+        initial: false,
+      }),
+      useFolder: new fields.BooleanField({
+        hint: "Use a folder of species instead of defining each individually.",
+        label: "Use Folder",
+        nullable: false,
+        required: false,
+        initial: false,
+      }),
+      uuid: new fields.DocumentUUIDField({
+        hint: "The folder of candidate species to transform into.",
+        label: "Folder",
+        nullable: true,
+        required: false,
+        type: "Folder",
+      }),
+    });
   }
   return new fields.SchemaField(schema);
 }

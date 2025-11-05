@@ -7,14 +7,6 @@ import type { TeriockToken } from "../../../../canvas/placeables/_module.mjs";
 export type AbilityUseData = {
   /** Actor using this ability */
   actor: TeriockActor | null;
-  /** Don't use this ability */
-  dontUse: boolean;
-  /** If this is proficient */
-  proficient: boolean;
-  /** If this is fluent */
-  fluent: boolean;
-  /** Options for the ability roll */
-  rollOptions: Teriock.RollOptions.AbilityRoll;
   /** Costs spent on this use of the ability */
   costs: {
     /** The total amount of HP spent on this ability */
@@ -24,6 +16,14 @@ export type AbilityUseData = {
     /** The total amount of GP spend on this ability */
     gp: number;
   };
+  /** Don't use this ability */
+  dontUse: boolean;
+  /** Executing token */
+  executor?: TeriockToken;
+  /** If this is fluent */
+  fluent: boolean;
+  /** Formula used for this ability's dice roll */
+  formula: string;
   /** Modifiers that change what the ability does */
   modifiers: {
     /** The number of times this ability is heightened */
@@ -33,14 +33,16 @@ export type AbilityUseData = {
     /** If this is warded */
     warded: boolean;
   };
-  /** Formula used for this ability's dice roll */
-  formula: string;
+  /** <schema> Don't place a template */
+  noTemplate: boolean;
+  /** If this is proficient */
+  proficient: boolean;
   /** Data that can be referenced in the roll formula */
   rollData: object;
+  /** Options for the ability roll */
+  rollOptions: Teriock.RollOptions.AbilityRoll;
   /** Targeted tokens */
   targets: Set<TeriockToken>;
-  /** Executing token */
-  executor?: TeriockToken;
 };
 
 export type AbilityChatData = {

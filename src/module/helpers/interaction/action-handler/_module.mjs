@@ -1,5 +1,6 @@
 import { ApplyEffectHandler } from "./instances/apply-effect-handlers.mjs";
 import { DeathBagHandler } from "./instances/death-bag-handlers.mjs";
+import { ExecuteMacroHandler } from "./instances/execute-macro-handlers.mjs";
 import { FeatSaveHandler } from "./instances/feat-save-handlers.mjs";
 import {
   TakeHackHandler,
@@ -30,6 +31,7 @@ const handlerArray = [
   ApplyStatusHandler,
   AwakenHandler,
   DeathBagHandler,
+  ExecuteMacroHandler,
   FeatSaveHandler,
   HealHandler,
   RemoveStatusHandler,

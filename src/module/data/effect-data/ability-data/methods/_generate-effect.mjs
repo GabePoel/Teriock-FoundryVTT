@@ -1,5 +1,9 @@
+import {
+  selectDocumentDialog,
+  selectDocumentsDialog,
+} from "../../../../applications/dialogs/select-document-dialog.mjs";
 import { TeriockRoll } from "../../../../dice/_module.mjs";
-import { parseTimeString } from "../../../../helpers/utils.mjs";
+import { folderContents, parseTimeString } from "../../../../helpers/utils.mjs";
 
 /**
  * Generates an effect from ability data based on proficiency level and heightened amount.
@@ -23,6 +27,24 @@ export async function _generateEffect(rollConfig, crit = false) {
   let transformation = foundry.utils.deepClone(
     abilityData.applies.base.transformation,
   );
+  transformation.uuids = new Set();
+  let newUuids;
+  if (
+    abilityData.applies.base.transformation.useFolder &&
+    abilityData.applies.base.transformation.uuid
+  ) {
+    newUuids = await folderContents(
+      abilityData.applies.base.transformation.uuid,
+      {
+        types: ["species"],
+      },
+    );
+  } else {
+    newUuids = abilityData.applies.base.transformation.uuids;
+  }
+  for (const uuid of newUuids) {
+    transformation.uuids.add(uuid);
+  }
   combatExpirations.who.source = rollConfig.useData.actor.uuid;
   if (crit && abilityData.applies.base.expiration.changeOnCrit) {
     combatExpirations = foundry.utils.mergeObject(
@@ -60,9 +82,29 @@ export async function _generateEffect(rollConfig, crit = false) {
       transformation.image =
         abilityData.applies.proficient.transformation.image ||
         transformation.image;
-      transformation.uuids =
-        abilityData.applies.proficient.transformation.uuids ||
-        transformation.uuids;
+      let newUuids;
+      if (
+        abilityData.applies.proficient.transformation.useFolder &&
+        abilityData.applies.proficient.transformation.uuid
+      ) {
+        newUuids = await folderContents(
+          abilityData.applies.proficient.transformation.uuid,
+          {
+            types: ["species"],
+          },
+        );
+      } else {
+        newUuids = abilityData.applies.proficient.transformation.uuids;
+      }
+      for (const uuid of newUuids) {
+        transformation.uuids.add(uuid);
+      }
+      transformation.select =
+        transformation.select ||
+        abilityData.applies.proficient.transformation.select;
+      transformation.multiple =
+        transformation.multiple ||
+        abilityData.applies.proficient.transformation.multiple;
       transformation.level = upgradeTransformation(
         transformation.level,
         abilityData.applies.proficient.transformation.level,
@@ -97,8 +139,29 @@ export async function _generateEffect(rollConfig, crit = false) {
       transformation.enabled = true;
       transformation.image =
         abilityData.applies.fluent.transformation.image || transformation.image;
-      transformation.uuids =
-        abilityData.applies.fluent.transformation.uuids || transformation.uuids;
+      let newUuids;
+      if (
+        abilityData.applies.fluent.transformation.useFolder &&
+        abilityData.applies.fluent.transformation.uuid
+      ) {
+        newUuids = await folderContents(
+          abilityData.applies.fluent.transformation.uuid,
+          {
+            types: ["species"],
+          },
+        );
+      } else {
+        newUuids = abilityData.applies.fluent.transformation.uuids;
+      }
+      for (const uuid of newUuids) {
+        transformation.uuids.add(uuid);
+      }
+      transformation.select =
+        transformation.select ||
+        abilityData.applies.fluent.transformation.select;
+      transformation.multiple =
+        transformation.multiple ||
+        abilityData.applies.fluent.transformation.multiple;
       transformation.level = upgradeTransformation(
         transformation.level,
         abilityData.applies.fluent.transformation.level,
@@ -141,9 +204,29 @@ export async function _generateEffect(rollConfig, crit = false) {
       transformation.image =
         abilityData.applies.heightened.transformation.image ||
         transformation.image;
-      transformation.uuids =
-        abilityData.applies.heightened.transformation.uuids ||
-        transformation.uuids;
+      let newUuids;
+      if (
+        abilityData.applies.heightened.transformation.useFolder &&
+        abilityData.applies.heightened.transformation.uuid
+      ) {
+        newUuids = await folderContents(
+          abilityData.applies.heightened.transformation.uuid,
+          {
+            types: ["species"],
+          },
+        );
+      } else {
+        newUuids = abilityData.applies.heightened.transformation.uuids;
+      }
+      for (const uuid of newUuids) {
+        transformation.uuids.add(uuid);
+      }
+      transformation.select =
+        transformation.select ||
+        abilityData.applies.heightened.transformation.select;
+      transformation.multiple =
+        transformation.multiple ||
+        abilityData.applies.heightened.transformation.multiple;
       transformation.level = upgradeTransformation(
         transformation.level,
         abilityData.applies.heightened.transformation.level,
@@ -159,6 +242,33 @@ export async function _generateEffect(rollConfig, crit = false) {
   }
   //noinspection JSValidateTypes
   transformation.uuids = Array.from(transformation.uuids);
+  if (!crit) {
+    const choices = transformation.uuids.map((uuid) => fromUuidSync(uuid));
+    if (transformation.select) {
+      let chosen;
+      if (transformation.multiple) {
+        chosen = await selectDocumentsDialog(choices, {
+          hint: "Please one or more select species to transform into.",
+          title: "Select Species",
+          tooltipAsync: true,
+          openable: true,
+        });
+      } else {
+        chosen = [
+          await selectDocumentDialog(choices, {
+            hint: "Please select a species to transform into.",
+            title: "Select Species",
+            tooltipAsync: true,
+            openable: true,
+          }),
+        ];
+      }
+      if (chosen) {
+        //noinspection JSValidateTypes
+        transformation.uuids = chosen.map((s) => s.uuid);
+      }
+    }
+  }
 
   /** @type {Partial<TeriockConsequenceModel>} */
   const effectData = {

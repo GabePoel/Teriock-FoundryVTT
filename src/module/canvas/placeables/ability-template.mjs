@@ -23,10 +23,7 @@ export default class TeriockAbilityTemplate extends MeasuredTemplate {
       rollConfig.abilityData.range,
       rollConfig.useData.rollData,
     );
-    if (
-      source &&
-      ["cone", "aura"].includes(rollConfig.abilityData.delivery.base)
-    ) {
+    if (source && rollConfig.abilityData.isAoe) {
       distance += source.document.radius;
     }
     const templateData = foundry.utils.mergeObject(
@@ -193,7 +190,7 @@ export default class TeriockAbilityTemplate extends MeasuredTemplate {
         reject,
         rotate: this._onRotatePlacement.bind(this),
       };
-      if (this.rollConfig.abilityData.delivery.base === "detonate") {
+      if (this.rollConfig.abilityData.expansion === "detonate") {
         this.#events.move = this._onMovePlacement.bind(this);
         canvas.stage.on("mousemove", this.#events.move);
       }

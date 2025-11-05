@@ -1,4 +1,7 @@
-import type { TeriockEffect } from "../../../../documents/_module.mjs";
+import type {
+  TeriockEffect,
+  TeriockFolder,
+} from "../../../../documents/_module.mjs";
 import type { TeriockSpecies } from "../../../../documents/_documents.mjs";
 
 /** <schema> {@link TeriockEffect} hierarchy */
@@ -22,7 +25,11 @@ export type TransformationField = {
   image: string;
   /** <schema> Level of transformation */
   level: Teriock.Parameters.Shared.TransformationLevel;
-  /** <schema> Documents to suppress */
+  /** <schema> Reset HP upon applying transformation */
+  resetHp: boolean;
+  /** <schema> Reset MP upon applying transformation */
+  resetMp: boolean;
+  /** <schema> Select a species to transform into instead of getting all options. */
   suppression: {
     /** <schema> Whether to suppress body parts */
     bodyParts: boolean;
@@ -33,12 +40,23 @@ export type TransformationField = {
     /** <schema> Whether to suppress ranks */
     ranks: boolean;
   };
-  /** <schema> Reset HP upon applying transformation */
-  resetHp: boolean;
-  /** <schema> Reset MP upon applying transformation */
-  resetMp: boolean;
   /** <schema> UUID of specific species to transform into */
   uuids: Set<Teriock.UUID<TeriockSpecies>>;
+};
+
+export type TransformationConfigurationField = TransformationField & {
+  select: boolean;
+  /** <schema> Use a folder instead of a set of species UUIDS. */
+  useFolder: boolean /** <schema> Documents to suppress */;
+  /** <schema> UUID of folder to use. */
+  uuid: Teriock.UUID<TeriockFolder>;
+  /** <schema> Allow selection of multiple species. */
+  multiple: boolean;
+};
+
+export type TransformationImplementationField = TransformationField & {
+  /** <schema> The actual species items this is associated with on the actor */
+  species: Teriock.ID<TeriockSpecies>[];
 };
 
 /** <schema> What is the relationship of the {@link TeriockActor} that triggers expirations? */

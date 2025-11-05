@@ -118,7 +118,7 @@ export default class TeriockAbilityModel extends HierarchyDataMixin(
   }
 
   /**
-   * Gets the grant only text.
+   * Gets the granting text.
    * @returns {string}
    */
   get grantOnlyText() {
@@ -126,6 +126,18 @@ export default class TeriockAbilityModel extends HierarchyDataMixin(
       return `This ability can only be used with @UUID[${this.parent.parent.uuid}].`;
     }
     return "";
+  }
+
+  /**
+   * Whether this has an area of effect.
+   * @returns {boolean}
+   */
+  get isAoe() {
+    return (
+      this.delivery.base === "aura" ||
+      this.delivery.base === "cone" ||
+      this.expansion === "detonate"
+    );
   }
 
   /** @inheritDoc */

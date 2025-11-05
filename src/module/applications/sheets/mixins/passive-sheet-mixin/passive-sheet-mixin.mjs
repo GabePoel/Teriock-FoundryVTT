@@ -57,26 +57,30 @@ export default (Base) => {
       //noinspection JSUnusedGlobalSymbols
       /** @inheritDoc */
       async _onDropMacro(_event, data) {
-        const updateData = {
-          [`system.applies.macros.${safeUuid(data?.uuid)}`]: "use",
-        };
-        await this.document.update(updateData);
+        if (this._impactTab === "custom") {
+          const updateData = {
+            [`system.applies.macros.${safeUuid(data?.uuid)}`]: "use",
+          };
+          await this.document.update(updateData);
+        }
       }
 
       //noinspection JSUnusedGlobalSymbols
       /** @inheritDoc */
       async _prepareMacroContext(context) {
-        context.macros = [];
-        for (const [safeUuid, pseudoHook] of Object.entries(
-          this.document.system.applies.macros,
-        )) {
-          const macro = await foundry.utils.fromUuid(pureUuid(safeUuid));
-          if (macro) {
-            context.macros.push({
-              safeUuid: safeUuid,
-              macro: macro,
-              pseudoHook: pseudoHook,
-            });
+        if (this._impactTab === "custom") {
+          context.macros = [];
+          for (const [safeUuid, pseudoHook] of Object.entries(
+            this.document.system.applies.macros,
+          )) {
+            const macro = await foundry.utils.fromUuid(pureUuid(safeUuid));
+            if (macro) {
+              context.macros.push({
+                safeUuid: safeUuid,
+                macro: macro,
+                pseudoHook: pseudoHook,
+              });
+            }
           }
         }
       }

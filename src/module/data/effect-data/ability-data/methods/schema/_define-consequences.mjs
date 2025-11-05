@@ -95,28 +95,32 @@ function abilityExpirationField() {
  */
 function impactField() {
   return new fields.SchemaField({
-    statuses: new fields.SetField(
+    changes: consequenceChangesField(),
+    checks: new fields.SetField(
       new fields.StringField({
-        choices: TERIOCK.index.conditions,
+        choices: TERIOCK.index.tradecrafts,
       }),
       {
-        label: "Conditions",
-        hint:
-          "Conditions applied as part of the ability's ongoing effect. These are not applied as separate conditions, " +
-          "but merged into an ongoing effect.",
+        label: "Tradecraft Checks",
+        hint: "Tradecraft checks that may be made as part of the ability.",
       },
     ),
-    startStatuses: new fields.SetField(
+    common: new fields.SetField(
       new fields.StringField({
-        choices: TERIOCK.index.conditions,
+        choices: TERIOCK.options.consequence.common,
       }),
       {
-        label: "Apply Conditions",
-        hint:
-          "Conditions that may be immediately applied when the ability is used. They exist independently of the " +
-          "ability.",
+        label: "Common Consequences",
+        hint: "Common consequences shared by lots of abilities.",
       },
     ),
+    duration: new fields.NumberField({
+      hint:
+        "Increase in the duration (in seconds) of an effect made as part of the ability. If this is nonzero, it " +
+        "overrides the default duration.",
+      initial: 0,
+      label: "Duration",
+    }),
     endStatuses: new fields.SetField(
       new fields.StringField({
         choices: TERIOCK.index.conditions,
@@ -128,7 +132,20 @@ function impactField() {
           "exist independently of the ability.",
       },
     ),
-    rolls: consequenceRollsField(),
+    expiration: new fields.SchemaField({
+      normal: abilityExpirationField(),
+      crit: abilityExpirationField(),
+      changeOnCrit: new fields.BooleanField({
+        initial: false,
+        label: "Special Crit Expiration",
+        hint: "Should the combat timing expiration change on a crit?",
+      }),
+      doesExpire: new fields.BooleanField({
+        initial: false,
+        label: "Override Expiration",
+        hint: "Should custom expiration timing be applied?",
+      }),
+    }),
     hacks: new fields.SetField(
       new fields.StringField({
         choices: {
@@ -146,47 +163,54 @@ function impactField() {
         hint: "Types of hack damage that may be applied by the ability.",
       },
     ),
-    checks: new fields.SetField(
-      new fields.StringField({
-        choices: TERIOCK.index.tradecrafts,
+    macroButtonUuids: new fields.SetField(
+      new fields.DocumentUUIDField({
+        type: "Macro",
       }),
       {
-        label: "Tradecraft Checks",
-        hint: "Tradecraft checks that may be made as part of the ability.",
+        initial: [],
+        nullable: false,
+        required: false,
+        label: "Macro Execution Buttons",
+        hint:
+          "Macros to turn into buttons that are displayed in the chat message rather than automatically executed." +
+          " These macros do not have the full roll config in their scope. They are missing ability data, chat data," +
+          " and some parameters the use data.",
       },
     ),
-    duration: new fields.NumberField({
-      hint:
-        "Increase in the duration (in seconds) of an effect made as part of the ability. If this is nonzero, it " +
-        "overrides the default duration.",
-      initial: 0,
-      label: "Duration",
+    noTemplate: new fields.BooleanField({
+      hint: "Do not place a template when using this ability even if it has an area of effect.",
+      initial: false,
+      label: "No Template",
+      nullable: false,
+      required: false,
     }),
-    changes: consequenceChangesField(),
-    common: new fields.SetField(
+    rolls: consequenceRollsField(),
+    startStatuses: new fields.SetField(
       new fields.StringField({
-        choices: TERIOCK.options.consequence.common,
+        choices: TERIOCK.index.conditions,
       }),
       {
-        label: "Common Consequences",
-        hint: "Common consequences shared by lots of abilities.",
+        label: "Apply Conditions",
+        hint:
+          "Conditions that may be immediately applied when the ability is used. They exist independently of the " +
+          "ability.",
       },
     ),
-    expiration: new fields.SchemaField({
-      normal: abilityExpirationField(),
-      crit: abilityExpirationField(),
-      changeOnCrit: new fields.BooleanField({
-        initial: false,
-        label: "Special Crit Expiration",
-        hint: "Should the combat timing expiration change on a crit?",
+    statuses: new fields.SetField(
+      new fields.StringField({
+        choices: TERIOCK.index.conditions,
       }),
-      doesExpire: new fields.BooleanField({
-        initial: false,
-        label: "Override Expiration",
-        hint: "Should custom expiration timing be applied?",
-      }),
+      {
+        label: "Conditions",
+        hint:
+          "Conditions applied as part of the ability's ongoing effect. These are not applied as separate conditions, " +
+          "but merged into an ongoing effect.",
+      },
+    ),
+    transformation: fieldBuilders.transformationField({
+      configuration: true,
     }),
-    transformation: fieldBuilders.transformationField(),
   });
 }
 

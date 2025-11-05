@@ -19,7 +19,8 @@ export async function _setTargets(rollConfig) {
     }
   }
   if (
-    ["cone", "aura"].includes(rollConfig.abilityData.delivery.base) &&
+    rollConfig.abilityData.isAoe &&
+    !rollConfig.useData.noTemplate &&
     game.settings.get("teriock", "placeTemplateOnAbilityUse")
   ) {
     let placeTemplate;

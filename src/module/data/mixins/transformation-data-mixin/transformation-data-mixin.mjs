@@ -11,7 +11,9 @@ export default (Base) => {
     class TransformationDataMixin extends Base {
       static defineSchema() {
         const schema = super.defineSchema();
-        schema.transformation = transformationField(true);
+        schema.transformation = transformationField({
+          implementation: true,
+        });
         return schema;
       }
 

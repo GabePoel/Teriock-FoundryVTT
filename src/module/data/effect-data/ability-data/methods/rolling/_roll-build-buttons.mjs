@@ -53,6 +53,33 @@ export async function _buildButtons(rollConfig) {
       },
     });
   }
+  for (const impact of [
+    abilityData.applies.base,
+    abilityData.applies.proficient,
+    abilityData.applies.fluent,
+    abilityData.applies.heightened,
+  ]) {
+    for (const uuid of impact.macroButtonUuids) {
+      const macroData = fromUuidSync(uuid);
+      const useSubset = foundry.utils.deepClone(rollConfig.useData);
+      delete useSubset.targets;
+      delete useSubset.executor;
+      delete useSubset.actor;
+      delete useSubset.rollOptions;
+      delete useSubset.rollData;
+      const useDataset = JSON.stringify(useSubset);
+      const buttonData = {
+        label: macroData.name,
+        icon: "fas fa-code",
+        dataset: {
+          uuid: macroData.uuid,
+          action: "execute-macro",
+          use: useDataset,
+        },
+      };
+      buttons.push(buttonData);
+    }
+  }
 
   // Standard Damage Button
   if (

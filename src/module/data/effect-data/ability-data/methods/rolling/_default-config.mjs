@@ -12,6 +12,7 @@ const DEFAULT_USE_DATA = {
     mp: 0,
     gp: 0,
   },
+  noTemplate: false,
   modifiers: {
     heightened: 0,
     noHeighten: false,

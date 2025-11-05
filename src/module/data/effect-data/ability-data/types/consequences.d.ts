@@ -2,8 +2,9 @@ import type {
   CombatExpirationMethod,
   CombatExpirationSourceType,
   CombatExpirationTiming,
-  TransformationField,
+  TransformationConfigurationField,
 } from "../../../shared/fields/helpers/_types";
+import type { TeriockMacro } from "../../../../documents/_module.mjs";
 
 /**
  * Ability-specific expiration data
@@ -50,6 +51,10 @@ export interface AbilityImpact {
   };
   /** <schema> Hacks that could be caused by this ability */
   hacks: Set<Teriock.Parameters.Actor.HackableBodyPart>;
+  /** <schema> Macro buttons */
+  macroButtonUuids: Teriock.UUID<TeriockMacro>;
+  /** <schema> Don't place a template */
+  noTemplate: boolean;
   /** <schema> Rolls that could be caused by this ability */
   rolls: Record<Teriock.Parameters.Consequence.RollConsequenceKey, string>;
   /** <schema> Conditions that this ability could start */
@@ -57,5 +62,5 @@ export interface AbilityImpact {
   /** <schema> Conditions caused by the {@link TeriockConsequence} created by this ability */
   statuses: Set<Teriock.Parameters.Condition.ConditionKey>;
   /** <schema> Transformation configuration */
-  transformation: TransformationField;
+  transformation: TransformationConfigurationField;
 }
