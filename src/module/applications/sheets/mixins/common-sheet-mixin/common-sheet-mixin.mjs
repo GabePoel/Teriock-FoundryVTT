@@ -461,7 +461,9 @@ export default (Base) => {
           owner: this.document.isOwner,
           settings: this.settings,
           system: this.document.system,
+          source: this.document._source,
           systemFields: this.document.system.schema.fields,
+          systemSource: this.document.system._source,
           tab: this._tab,
           uuid: this.document.uuid,
         });

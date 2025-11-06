@@ -6102,7 +6102,11 @@ items:
               hacks: []
               checks: []
               duration: 0
-              changes: []
+              changes:
+                - key: system.magic.maxRotators.raw
+                  mode: 4
+                  value: '@rank.mag - 1'
+                  priority: 10
               common: []
               expiration:
                 normal:
@@ -6151,7 +6155,11 @@ items:
               hacks: []
               checks: []
               duration: 0
-              changes: []
+              changes:
+                - key: system.magic.maxRotators.raw
+                  mode: 4
+                  value: 2 * (@rank.mag - 1)
+                  priority: 10
               common: []
               expiration:
                 normal:
@@ -6200,7 +6208,11 @@ items:
               hacks: []
               checks: []
               duration: 0
-              changes: []
+              changes:
+                - key: system.magic.maxRotators.raw
+                  mode: 4
+                  value: 2 * (@rank.mag - 1) + @p
+                  priority: 10
               common: []
               expiration:
                 normal:
@@ -6331,7 +6343,7 @@ items:
               @L[Category:Mage classes]{MR} refers to the number of
               @L[Core:Leveling Up]{ranks} you have in @L[Category:Mage
               classes]{mage classes}. During a @L[Core:Long Rest]{long rest},
-              you can "rotate" which spells you have prepared.The
+              you can "rotate" which spells you have prepared. The
               @L[Category:Rotator spells]{rotator spells} automatically
               available to you are @L[Ability:Crown of Fear]{Crown of Fear},
               @L[Ability:Death Rattle]{Death Rattle}, @L[Ability:Ethereal
@@ -11087,6 +11099,10 @@ items:
                 - key: '!ability__name__eq__Necromancy Rotators__system.fluent'
                   mode: 5
                   value: 'true'
+                  priority: 10
+                - key: system.magic.maxRotators.raw
+                  mode: 4
+                  value: 2 * (@rank.mag - 1) + @p
                   priority: 10
               common: []
               expiration:

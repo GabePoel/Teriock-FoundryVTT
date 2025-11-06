@@ -3,6 +3,7 @@ import { _defineCapacities } from "./_define-capacities.mjs";
 import { _defineCombat } from "./_define-combat.mjs";
 import { _defineDeathBag } from "./_define-death-bag.mjs";
 import { _defineDetection } from "./_define-detection.mjs";
+import { _defineMagic } from "./_define-magic.mjs";
 import { _defineMoney } from "./_define-money.mjs";
 import { _defineProtections } from "./_define-protections.mjs";
 import { _defineSenses } from "./_define-senses.mjs";
@@ -33,5 +34,6 @@ export function _defineSchema(schema) {
   schema = _defineTradecrafts(schema);
   schema = _defineTransformation(schema);
   schema = _defineDetection(schema);
+  schema = _defineMagic(schema);
   return schema;
 }

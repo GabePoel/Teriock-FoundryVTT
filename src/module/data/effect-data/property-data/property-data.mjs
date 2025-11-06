@@ -136,9 +136,7 @@ export default class TeriockPropertyModel extends HierarchyDataMixin(
 
   /** @inheritDoc */
   get suppressed() {
-    let suppressed = super.suppressed;
-    suppressed = suppressed || _suppressed(this);
-    return suppressed;
+    return _suppressed(this);
   }
 
   /**

@@ -1,7 +1,9 @@
 import { _prepDerivedAttributes } from "./_prep-derived-attributes.mjs";
 import { _prepDerivedDetection } from "./_prep-derived-detection.mjs";
 import { _prepDerivedMoney } from "./_prep-derived-load.mjs";
+import { _prepDerivedMagic } from "./_prep-derived-magic.mjs";
 import { _prepDerivedSpeed } from "./_prep-derived-speed.mjs";
+import { _prepDerivedStats } from "./_prep-derived-stats.mjs";
 import { _prepDerivedTrackers } from "./_prep-derived-trackers.mjs";
 import { _prepDerivedTradecrafts } from "./_prep-derived-tradecrafts.mjs";
 import { _prepDerivedTransformation } from "./_prep-derived-transformation.mjs";
@@ -32,4 +34,6 @@ export function _prepareDerivedData(actorData) {
   _prepDerivedTrackers(actorData);
   _prepDerivedTransformation(actorData);
   _prepDerivedDetection(actorData);
+  _prepDerivedStats(actorData);
+  _prepDerivedMagic(actorData);
 }

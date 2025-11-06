@@ -12,7 +12,8 @@ export function _messageParts(bodyData) {
       icon: "fa-crosshairs-simple",
       label: "Attack",
       wrappers: [
-        bodyData.damage.base.value,
+        bodyData.damage.base.value +
+          (bodyData.damage.base.value ? " damage" : ""),
         TERIOCK.index.weaponFightingStyles[bodyData.fightingStyle],
       ],
     },

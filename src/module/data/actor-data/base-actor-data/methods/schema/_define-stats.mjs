@@ -73,9 +73,19 @@ export function _defineStats(schema) {
     temp: new fields.NumberField({ initial: 0 }),
     value: new fields.NumberField({ initial: 1 }),
   });
-  schema.wither = statField("Wither", {
-    max: 100,
-    value: 20,
+  Object.assign(schema, {
+    curses: statField("Curses", {
+      max: 3,
+      value: 0,
+    }),
+    presence: statField("Presence", {
+      max: 1,
+      value: 0,
+    }),
+    wither: statField("Wither", {
+      max: 100,
+      value: 20,
+    }),
   });
   return schema;
 }

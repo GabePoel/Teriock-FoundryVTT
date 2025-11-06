@@ -14,8 +14,14 @@ export function _messageParts(equipmentData) {
   if (src.damage.base.value) {
     damageString += src.damage.base.value;
   }
+  if (damageString) {
+    damageString += " damage";
+  }
   if (src.hasTwoHandedAttack) {
     twoHandedDamageString = src.damage.twoHanded.value;
+  }
+  if (twoHandedDamageString) {
+    twoHandedDamageString += " damage";
   }
   let rangeString = "";
   if (src.range.long.raw) {

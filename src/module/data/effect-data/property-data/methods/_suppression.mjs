@@ -7,6 +7,12 @@
  */
 export function _suppressed(propertyData) {
   let suppressed = false;
+  if (propertyData.parent.source?.type !== "equipment") {
+    suppressed = !!(
+      propertyData.parent.source?.documentName === "Item" &&
+      !propertyData.parent.source?.active
+    );
+  }
   if (!suppressed && propertyData.parent.parent.type === "equipment") {
     if (
       !suppressed &&
