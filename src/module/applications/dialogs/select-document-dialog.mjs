@@ -35,6 +35,12 @@ export async function selectDocumentsDialog(documents, options = {}) {
     tooltip: options.tooltip,
   };
 
+  documents.sort((a, b) =>
+    foundry.utils
+      .getProperty(a, options.nameKey)
+      .localeCompare(foundry.utils.getProperty(b, options.nameKey)),
+  );
+
   for (const doc of documents) {
     const id = foundry.utils.getProperty(doc, options.idKey);
     idToDoc.set(id, doc);
