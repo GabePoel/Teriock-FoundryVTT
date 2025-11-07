@@ -59,6 +59,18 @@ export default (Base) => {
             label: "Spell Turning",
             nullable: false,
           }),
+          piercing: new fields.SchemaField({
+            av0: new fields.BooleanField({
+              initial: false,
+              nullable: false,
+              required: false,
+            }),
+            ub: new fields.BooleanField({
+              initial: false,
+              nullable: false,
+              required: false,
+            }),
+          }),
           virtualProperties: new fields.SetField(new fields.StringField()),
         });
       }

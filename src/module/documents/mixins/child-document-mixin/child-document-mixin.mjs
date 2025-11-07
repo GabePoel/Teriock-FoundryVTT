@@ -120,7 +120,7 @@ export default (Base) => {
           }
         }
         applyCertainChanges(this, changes, overrides);
-        if (this._sheet) {
+        if (this._sheet && this.isOwner) {
           this.sheet.render();
         }
       }

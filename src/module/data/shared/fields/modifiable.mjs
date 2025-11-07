@@ -12,8 +12,9 @@ export function modifiableFormula(options = {}) {
   /** @type {StringFieldOptions & Teriock.Fields._FormulaFieldOptions} */
   const defaultOptions = {
     deterministic: true,
-    nullable: false,
     initial: "",
+    nullable: false,
+    required: false,
   };
   options = foundry.utils.mergeObject(defaultOptions, options);
   return new SchemaField({
@@ -32,6 +33,7 @@ export function modifiableNumber(options = {}) {
   const defaultOptions = {
     initial: 0,
     nullable: false,
+    required: false,
   };
   options = foundry.utils.mergeObject(defaultOptions, options);
   return new SchemaField({

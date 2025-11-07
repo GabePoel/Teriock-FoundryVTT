@@ -11,11 +11,13 @@ export function _prepSpecialDefense(actorData) {
     (a) => !a.disabled && a.system.av.value > 0,
   );
   if (armor.length > 0) {
-    actorData.defense.av.worn = Math.max(armor.map((a) => a.system.av.value));
+    actorData.defense.av.worn = Math.max(
+      ...armor.map((a) => a.system.av.value),
+    );
   }
   if (naturalArmor.length > 0) {
     actorData.defense.av.natural = Math.max(
-      naturalArmor.map((a) => a.system.av.value),
+      ...naturalArmor.map((a) => a.system.av.value),
     );
   }
   actorData.defense.av.value = Math.max(
