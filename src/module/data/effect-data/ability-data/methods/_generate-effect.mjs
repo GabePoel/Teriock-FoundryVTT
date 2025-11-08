@@ -20,36 +20,36 @@ export async function _generateEffect(rollConfig, crit = false) {
   const heightenAmount = rollConfig.useData.modifiers.heightened;
   let changes = abilityData.changes;
   let statuses =
-    foundry.utils.deepClone(abilityData.applies.base.statuses) || new Set();
+    foundry.utils.deepClone(abilityData.impacts.base.statuses) || new Set();
   let combatExpirations = foundry.utils.deepClone(
-    abilityData.applies.base.expiration.normal.combat,
+    abilityData.impacts.base.expiration.normal.combat,
   );
   let transformation = foundry.utils.deepClone(
-    abilityData.applies.base.transformation,
+    abilityData.impacts.base.transformation,
   );
   transformation.uuids = new Set();
   let newUuids;
   if (
-    abilityData.applies.base.transformation.useFolder &&
-    abilityData.applies.base.transformation.uuid
+    abilityData.impacts.base.transformation.useFolder &&
+    abilityData.impacts.base.transformation.uuid
   ) {
     newUuids = await folderContents(
-      abilityData.applies.base.transformation.uuid,
+      abilityData.impacts.base.transformation.uuid,
       {
         types: ["species"],
       },
     );
   } else {
-    newUuids = abilityData.applies.base.transformation.uuids;
+    newUuids = abilityData.impacts.base.transformation.uuids;
   }
   for (const uuid of newUuids) {
     transformation.uuids.add(uuid);
   }
   combatExpirations.who.source = rollConfig.useData.actor.uuid;
-  if (crit && abilityData.applies.base.expiration.changeOnCrit) {
+  if (crit && abilityData.impacts.base.expiration.changeOnCrit) {
     combatExpirations = foundry.utils.mergeObject(
       combatExpirations,
-      abilityData.applies.base.expiration.crit.combat,
+      abilityData.impacts.base.expiration.crit.combat,
     );
   }
 
@@ -57,126 +57,126 @@ export async function _generateEffect(rollConfig, crit = false) {
   let seconds = parseTimeString(abilityData.duration.description);
 
   if (rollConfig.useData.proficient) {
-    if (abilityData.applies.proficient.statuses.size > 0) {
+    if (abilityData.impacts.proficient.statuses.size > 0) {
       statuses = foundry.utils.deepClone(
-        abilityData.applies.proficient.statuses,
+        abilityData.impacts.proficient.statuses,
       );
     }
-    if (abilityData.applies.proficient.duration > 0) {
-      seconds = abilityData.applies.proficient.duration;
+    if (abilityData.impacts.proficient.duration > 0) {
+      seconds = abilityData.impacts.proficient.duration;
     }
-    if (abilityData.applies.proficient.expiration.doesExpire) {
+    if (abilityData.impacts.proficient.expiration.doesExpire) {
       combatExpirations = foundry.utils.mergeObject(
         combatExpirations,
-        abilityData.applies.proficient.expiration.normal.combat,
+        abilityData.impacts.proficient.expiration.normal.combat,
       );
-      if (crit && abilityData.applies.proficient.expiration.changeOnCrit) {
+      if (crit && abilityData.impacts.proficient.expiration.changeOnCrit) {
         combatExpirations = foundry.utils.mergeObject(
           combatExpirations,
-          abilityData.applies.proficient.expiration.crit.combat,
+          abilityData.impacts.proficient.expiration.crit.combat,
         );
       }
     }
-    if (abilityData.applies.proficient.transformation.enabled) {
+    if (abilityData.impacts.proficient.transformation.enabled) {
       transformation.enabled = true;
       transformation.image =
-        abilityData.applies.proficient.transformation.image ||
+        abilityData.impacts.proficient.transformation.image ||
         transformation.image;
       let newUuids;
       if (
-        abilityData.applies.proficient.transformation.useFolder &&
-        abilityData.applies.proficient.transformation.uuid
+        abilityData.impacts.proficient.transformation.useFolder &&
+        abilityData.impacts.proficient.transformation.uuid
       ) {
         newUuids = await folderContents(
-          abilityData.applies.proficient.transformation.uuid,
+          abilityData.impacts.proficient.transformation.uuid,
           {
             types: ["species"],
           },
         );
       } else {
-        newUuids = abilityData.applies.proficient.transformation.uuids;
+        newUuids = abilityData.impacts.proficient.transformation.uuids;
       }
       for (const uuid of newUuids) {
         transformation.uuids.add(uuid);
       }
       transformation.select =
         transformation.select ||
-        abilityData.applies.proficient.transformation.select;
+        abilityData.impacts.proficient.transformation.select;
       transformation.multiple =
         transformation.multiple ||
-        abilityData.applies.proficient.transformation.multiple;
+        abilityData.impacts.proficient.transformation.multiple;
       transformation.level = upgradeTransformation(
         transformation.level,
-        abilityData.applies.proficient.transformation.level,
+        abilityData.impacts.proficient.transformation.level,
       );
       for (const field of Object.keys(transformation.suppression)) {
         transformation.suppression[field] =
-          abilityData.applies.proficient.transformation.suppression[field] ||
+          abilityData.impacts.proficient.transformation.suppression[field] ||
           transformation.suppression[field];
       }
     }
   }
   if (rollConfig.useData.fluent) {
-    if (abilityData.applies.fluent.statuses.size > 0) {
-      statuses = foundry.utils.deepClone(abilityData.applies.fluent.statuses);
+    if (abilityData.impacts.fluent.statuses.size > 0) {
+      statuses = foundry.utils.deepClone(abilityData.impacts.fluent.statuses);
     }
-    if (abilityData.applies.fluent.duration > 0) {
-      seconds = abilityData.applies.fluent.duration;
+    if (abilityData.impacts.fluent.duration > 0) {
+      seconds = abilityData.impacts.fluent.duration;
     }
-    if (abilityData.applies.fluent.expiration.doesExpire) {
+    if (abilityData.impacts.fluent.expiration.doesExpire) {
       combatExpirations = foundry.utils.mergeObject(
         combatExpirations,
-        abilityData.applies.fluent.expiration.normal.combat,
+        abilityData.impacts.fluent.expiration.normal.combat,
       );
-      if (crit && abilityData.applies.fluent.expiration.changeOnCrit) {
+      if (crit && abilityData.impacts.fluent.expiration.changeOnCrit) {
         combatExpirations = foundry.utils.mergeObject(
           combatExpirations,
-          abilityData.applies.fluent.expiration.crit.combat,
+          abilityData.impacts.fluent.expiration.crit.combat,
         );
       }
     }
-    if (abilityData.applies.fluent.transformation.enabled) {
+    if (abilityData.impacts.fluent.transformation.enabled) {
       transformation.enabled = true;
       transformation.image =
-        abilityData.applies.fluent.transformation.image || transformation.image;
+        abilityData.impacts.fluent.transformation.image || transformation.image;
       let newUuids;
       if (
-        abilityData.applies.fluent.transformation.useFolder &&
-        abilityData.applies.fluent.transformation.uuid
+        abilityData.impacts.fluent.transformation.useFolder &&
+        abilityData.impacts.fluent.transformation.uuid
       ) {
         newUuids = await folderContents(
-          abilityData.applies.fluent.transformation.uuid,
+          abilityData.impacts.fluent.transformation.uuid,
           {
             types: ["species"],
           },
         );
       } else {
-        newUuids = abilityData.applies.fluent.transformation.uuids;
+        newUuids = abilityData.impacts.fluent.transformation.uuids;
       }
       for (const uuid of newUuids) {
         transformation.uuids.add(uuid);
       }
       transformation.select =
         transformation.select ||
-        abilityData.applies.fluent.transformation.select;
+        abilityData.impacts.fluent.transformation.select;
       transformation.multiple =
         transformation.multiple ||
-        abilityData.applies.fluent.transformation.multiple;
+        abilityData.impacts.fluent.transformation.multiple;
       transformation.level = upgradeTransformation(
         transformation.level,
-        abilityData.applies.fluent.transformation.level,
+        abilityData.impacts.fluent.transformation.level,
       );
       for (const field of Object.keys(transformation.suppression)) {
         transformation.suppression[field] =
-          abilityData.applies.fluent.transformation.suppression[field] ||
+          abilityData.impacts.fluent.transformation.suppression[field] ||
           transformation.suppression[field];
       }
     }
   }
   if (heightenAmount > 0) {
-    if (abilityData.applies.heightened.changes.length > 0) {
+    if (abilityData.impacts.heightened.changes.length > 0) {
       const heightenedChanges = foundry.utils.deepClone(
-        abilityData.applies.heightened.changes,
+        abilityData.impacts.heightened.changes,
       );
       for (const change of heightenedChanges) {
         const heightenEvaluateRoll = new TeriockRoll(
@@ -188,52 +188,52 @@ export async function _generateEffect(rollConfig, crit = false) {
       }
       changes = [...changes, ...heightenedChanges];
     }
-    if (abilityData.applies.heightened.statuses.size > 0) {
-      for (const status of abilityData.applies.heightened.statuses) {
+    if (abilityData.impacts.heightened.statuses.size > 0) {
+      for (const status of abilityData.impacts.heightened.statuses) {
         statuses.add(status);
       }
     }
-    if (abilityData.applies.heightened.duration > 0) {
-      seconds += abilityData.applies.heightened.duration * heightenAmount;
+    if (abilityData.impacts.heightened.duration > 0) {
+      seconds += abilityData.impacts.heightened.duration * heightenAmount;
       seconds =
-        Math.round(seconds / abilityData.applies.heightened.duration) *
-        abilityData.applies.heightened.duration;
+        Math.round(seconds / abilityData.impacts.heightened.duration) *
+        abilityData.impacts.heightened.duration;
     }
-    if (abilityData.applies.heightened.transformation.enabled) {
+    if (abilityData.impacts.heightened.transformation.enabled) {
       transformation.enabled = true;
       transformation.image =
-        abilityData.applies.heightened.transformation.image ||
+        abilityData.impacts.heightened.transformation.image ||
         transformation.image;
       let newUuids;
       if (
-        abilityData.applies.heightened.transformation.useFolder &&
-        abilityData.applies.heightened.transformation.uuid
+        abilityData.impacts.heightened.transformation.useFolder &&
+        abilityData.impacts.heightened.transformation.uuid
       ) {
         newUuids = await folderContents(
-          abilityData.applies.heightened.transformation.uuid,
+          abilityData.impacts.heightened.transformation.uuid,
           {
             types: ["species"],
           },
         );
       } else {
-        newUuids = abilityData.applies.heightened.transformation.uuids;
+        newUuids = abilityData.impacts.heightened.transformation.uuids;
       }
       for (const uuid of newUuids) {
         transformation.uuids.add(uuid);
       }
       transformation.select =
         transformation.select ||
-        abilityData.applies.heightened.transformation.select;
+        abilityData.impacts.heightened.transformation.select;
       transformation.multiple =
         transformation.multiple ||
-        abilityData.applies.heightened.transformation.multiple;
+        abilityData.impacts.heightened.transformation.multiple;
       transformation.level = upgradeTransformation(
         transformation.level,
-        abilityData.applies.heightened.transformation.level,
+        abilityData.impacts.heightened.transformation.level,
       );
       for (const field of Object.keys(transformation.suppression)) {
         transformation.suppression[field] =
-          abilityData.applies.heightened.transformation.suppression[field] ||
+          abilityData.impacts.heightened.transformation.suppression[field] ||
           transformation.suppression[field];
       }
     }
@@ -343,52 +343,52 @@ function upgradeTransformation(level1, level2) {
 export function _generateTakes(rollConfig) {
   const heightenAmount = rollConfig.useData.modifiers.heightened;
   const abilityData = rollConfig.abilityData;
-  let rolls = foundry.utils.deepClone(abilityData.applies.base.rolls) || {};
+  let rolls = foundry.utils.deepClone(abilityData.impacts.base.rolls) || {};
   let hacks =
-    foundry.utils.deepClone(abilityData.applies.base.hacks) || new Set();
+    foundry.utils.deepClone(abilityData.impacts.base.hacks) || new Set();
   let checks =
-    foundry.utils.deepClone(abilityData.applies.base.checks) || new Set();
+    foundry.utils.deepClone(abilityData.impacts.base.checks) || new Set();
   let startStatuses =
-    foundry.utils.deepClone(abilityData.applies.base.startStatuses) ||
+    foundry.utils.deepClone(abilityData.impacts.base.startStatuses) ||
     new Set();
   let endStatuses =
-    foundry.utils.deepClone(abilityData.applies.base.endStatuses) || new Set();
+    foundry.utils.deepClone(abilityData.impacts.base.endStatuses) || new Set();
 
   if (rollConfig.useData.proficient) {
-    rolls = { ...rolls, ...abilityData.applies.proficient.rolls };
+    rolls = { ...rolls, ...abilityData.impacts.proficient.rolls };
     hacks = new Set([
       ...hacks,
-      ...(abilityData.applies.proficient.hacks || []),
+      ...(abilityData.impacts.proficient.hacks || []),
     ]);
     checks = new Set([
       ...checks,
-      ...(abilityData.applies.proficient.checks || []),
+      ...(abilityData.impacts.proficient.checks || []),
     ]);
     startStatuses = new Set([
       ...startStatuses,
-      ...(abilityData.applies.proficient.startStatuses || []),
+      ...(abilityData.impacts.proficient.startStatuses || []),
     ]);
     endStatuses = new Set([
       ...endStatuses,
-      ...(abilityData.applies.proficient.endStatuses || []),
+      ...(abilityData.impacts.proficient.endStatuses || []),
     ]);
   }
   if (rollConfig.useData.fluent) {
-    rolls = { ...rolls, ...abilityData.applies.fluent.rolls };
-    hacks = new Set([...hacks, ...(abilityData.applies.fluent.hacks || [])]);
-    checks = new Set([...checks, ...(abilityData.applies.fluent.checks || [])]);
+    rolls = { ...rolls, ...abilityData.impacts.fluent.rolls };
+    hacks = new Set([...hacks, ...(abilityData.impacts.fluent.hacks || [])]);
+    checks = new Set([...checks, ...(abilityData.impacts.fluent.checks || [])]);
     startStatuses = new Set([
       ...startStatuses,
-      ...(abilityData.applies.fluent.startStatuses || []),
+      ...(abilityData.impacts.fluent.startStatuses || []),
     ]);
     endStatuses = new Set([
       ...endStatuses,
-      ...(abilityData.applies.fluent.endStatuses || []),
+      ...(abilityData.impacts.fluent.endStatuses || []),
     ]);
   }
   if (heightenAmount > 0) {
     for (const [key, value] of Object.entries(
-      abilityData.applies.heightened.rolls || {},
+      abilityData.impacts.heightened.rolls || {},
     )) {
       const rollRoll = new TeriockRoll(
         value,
@@ -397,16 +397,16 @@ export function _generateTakes(rollConfig) {
       rollRoll.alter(heightenAmount, 0, { multiplyNumeric: true });
       rolls[key] = (rolls[key] ? rolls[key] + " + " : "") + rollRoll.formula;
     }
-    for (const hack of abilityData.applies.heightened.hacks || []) {
+    for (const hack of abilityData.impacts.heightened.hacks || []) {
       hacks.add(hack);
     }
-    for (const check of abilityData.applies.heightened.checks || []) {
+    for (const check of abilityData.impacts.heightened.checks || []) {
       checks.add(check);
     }
-    for (const status of abilityData.applies.heightened.startStatuses || []) {
+    for (const status of abilityData.impacts.heightened.startStatuses || []) {
       startStatuses.add(status);
     }
-    for (const status of abilityData.applies.heightened.endStatuses || []) {
+    for (const status of abilityData.impacts.heightened.endStatuses || []) {
       endStatuses.add(status);
     }
   }

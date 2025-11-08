@@ -1,71 +1,71 @@
 <div class="form-group" style="flex-direction: column;">
   {{#if system.isAoe}}
     {{formGroup
-      (path systemFields "applies.fields" typeKey "fields.noTemplate")
-      value=(path system "applies" typeKey "noTemplate")
+      (path systemFields "impacts.fields" typeKey "fields.noTemplate")
+      value=(path system "impacts" typeKey "noTemplate")
       classes="teriock-full-width"
       disabled=(not editable)
       rootId=uuid
     }}
   {{/if}}
   {{formGroup
-    (path systemFields "applies.fields" typeKey "fields.common")
-    value=(path system "applies" typeKey "common")
+    (path systemFields "impacts.fields" typeKey "fields.common")
+    value=(path system "impacts" typeKey "common")
     classes="teriock-full-width"
     disabled=(not editable)
     rootId=uuid
   }}
   {{formGroup
-    (path systemFields "applies.fields" typeKey "fields.rolls")
-    value=(path system "applies" typeKey "rolls")
+    (path systemFields "impacts.fields" typeKey "fields.rolls")
+    value=(path system "impacts" typeKey "rolls")
     choices=TERIOCK.options.consequence.rolls
     disabled=(not editable)
   }}
   {{formGroup
-    (path systemFields "applies.fields" typeKey "fields.statuses")
-    value=(path system "applies" typeKey "statuses")
+    (path systemFields "impacts.fields" typeKey "fields.statuses")
+    value=(path system "impacts" typeKey "statuses")
     choices=TERIOCK.index.conditions
     classes="teriock-full-width"
     disabled=(not editable)
   }}
   {{formGroup
-    (path systemFields "applies.fields" typeKey "fields.startStatuses")
-    value=(path system "applies" typeKey "startStatuses")
+    (path systemFields "impacts.fields" typeKey "fields.startStatuses")
+    value=(path system "impacts" typeKey "startStatuses")
     choices=TERIOCK.index.conditions
     classes="teriock-full-width"
     disabled=(not editable)
   }}
   {{formGroup
-    (path systemFields "applies.fields" typeKey "fields.endStatuses")
-    value=(path system "applies" typeKey "endStatuses")
+    (path systemFields "impacts.fields" typeKey "fields.endStatuses")
+    value=(path system "impacts" typeKey "endStatuses")
     choices=TERIOCK.index.conditions
     classes="teriock-full-width"
     disabled=(not editable)
   }}
   {{formGroup
-    (path systemFields "applies.fields" typeKey "fields.hacks")
-    value=(path system "applies" typeKey "hacks")
+    (path systemFields "impacts.fields" typeKey "fields.hacks")
+    value=(path system "impacts" typeKey "hacks")
     choices=TERIOCK.options.consequence.hacks
     classes="teriock-full-width"
     disabled=(not editable)
   }}
   {{formGroup
-    (path systemFields "applies.fields" typeKey "fields.checks")
-    value=(path system "applies" typeKey "checks")
+    (path systemFields "impacts.fields" typeKey "fields.checks")
+    value=(path system "impacts" typeKey "checks")
     choices=TERIOCK.index.tradecrafts
     classes="teriock-full-width"
     disabled=(not editable)
   }}
   {{formGroup
-    (path systemFields "applies.fields" typeKey "fields.macroButtonUuids")
-    value=(path system "applies" typeKey "macroButtonUuids")
+    (path systemFields "impacts.fields" typeKey "fields.macroButtonUuids")
+    value=(path system "impacts" typeKey "macroButtonUuids")
     choices=TERIOCK.index.tradecrafts
     classes="teriock-full-width"
     disabled=(not editable)
   }}
   {{formGroup
-    (path systemFields "applies.fields" typeKey "fields.duration")
-    value=(path system "applies" typeKey "duration")
+    (path systemFields "impacts.fields" typeKey "fields.duration")
+    value=(path system "impacts" typeKey "duration")
     classes="teriock-full-width"
     disabled=(not editable)
   }}
@@ -73,21 +73,21 @@
   <fieldset class="teriock-full-width">
     <legend>Changes</legend>
     {{> "systems/teriock/src/templates/document-templates/shared/changes.hbs"
-      changesPath=(concat "system.applies." typeKey ".changes")
-      changesData=(path system "applies" typeKey "changes")
-      fieldDefs=(path systemFields "applies.fields" typeKey "fields.changes.element.fields")
+      changesPath=(concat "system.impacts." typeKey ".changes")
+      changesData=(path system "impacts" typeKey "changes")
+      fieldDefs=(path systemFields "impacts.fields" typeKey "fields.changes.element.fields")
       additionalAttrs=(hash application=typeKey)
     }}
   </fieldset>
   <!-- Expiration UI -->
   {{formGroup
-    (path systemFields "applies.fields" typeKey "fields.expiration.fields.doesExpire")
-    value=(path system "applies" typeKey "expiration.doesExpire")
+    (path systemFields "impacts.fields" typeKey "fields.expiration.fields.doesExpire")
+    value=(path system "impacts" typeKey "expiration.doesExpire")
     disabled=(not editable)
     classes="teriock-full-width"
     rootId=uuid
   }}
-  {{#if (path system "applies" typeKey "expiration.doesExpire")}}
+  {{#if (path system "impacts" typeKey "expiration.doesExpire")}}
     <fieldset class="teriock-full-width" style="margin-top: 6px;">
       <legend>Normal Combat Expiration</legend>
       {{> "systems/teriock/src/templates/document-templates/effect-templates/ability-template/parts/_impact-expiration.hbs"
@@ -99,14 +99,14 @@
       }}
     </fieldset>
     {{formGroup
-      (path systemFields "applies.fields" typeKey "fields.expiration.fields.changeOnCrit")
-      value=(path system "applies" typeKey "expiration.changeOnCrit")
+      (path systemFields "impacts.fields" typeKey "fields.expiration.fields.changeOnCrit")
+      value=(path system "impacts" typeKey "expiration.changeOnCrit")
       disabled=(not editable)
       classes="teriock-full-width"
       rootId=uuid
     }}
   {{/if}}
-  {{#if (path system "applies" typeKey "expiration.changeOnCrit")}}
+  {{#if (path system "impacts" typeKey "expiration.changeOnCrit")}}
     <fieldset class="teriock-full-width" style="margin-top: 6px;">
       <legend>Crit Combat Expiration</legend>
       {{> "systems/teriock/src/templates/document-templates/effect-templates/ability-template/parts/_impact-expiration.hbs"
@@ -119,107 +119,107 @@
     </fieldset>
   {{/if}}
   {{formGroup
-    (path systemFields "applies.fields" typeKey "fields.transformation.fields.enabled")
-    value=(path system "applies" typeKey "transformation.enabled")
+    (path systemFields "impacts.fields" typeKey "fields.transformation.fields.enabled")
+    value=(path system "impacts" typeKey "transformation.enabled")
     disabled=(not editable)
     classes="teriock-full-width"
     rootId=uuid
   }}
-  {{#if (path system "applies" typeKey "transformation.enabled")}}
+  {{#if (path system "impacts" typeKey "transformation.enabled")}}
     <fieldset class="teriock-full-width" style="margin-top: 6px;">
       <legend>Transformation</legend>
       {{formGroup
-        (path systemFields "applies.fields" typeKey "fields.transformation.fields.level")
-        value=(path system "applies" typeKey "transformation.level")
+        (path systemFields "impacts.fields" typeKey "fields.transformation.fields.level")
+        value=(path system "impacts" typeKey "transformation.level")
         disabled=(not editable)
         classes="teriock-full-width"
         rootId=uuid
       }}
       {{formGroup
-        (path systemFields "applies.fields" typeKey "fields.transformation.fields.useFolder")
-        value=(path system "applies" typeKey "transformation.useFolder")
+        (path systemFields "impacts.fields" typeKey "fields.transformation.fields.useFolder")
+        value=(path system "impacts" typeKey "transformation.useFolder")
         disabled=(not editable)
         classes="teriock-full-width"
         rootId=uuid
       }}
-      {{#if (path system "applies" typeKey "transformation.useFolder")}}
+      {{#if (path system "impacts" typeKey "transformation.useFolder")}}
         {{formGroup
-          (path systemFields "applies.fields" typeKey "fields.transformation.fields.uuid")
-          value=(path system "applies" typeKey "transformation.uuid")
+          (path systemFields "impacts.fields" typeKey "fields.transformation.fields.uuid")
+          value=(path system "impacts" typeKey "transformation.uuid")
           disabled=(not editable)
           classes="teriock-full-width"
           rootId=uuid
         }}
       {{else}}
         {{formGroup
-          (path systemFields "applies.fields" typeKey "fields.transformation.fields.uuids")
-          value=(path system "applies" typeKey "transformation.uuids")
+          (path systemFields "impacts.fields" typeKey "fields.transformation.fields.uuids")
+          value=(path system "impacts" typeKey "transformation.uuids")
           disabled=(not editable)
           classes="teriock-full-width"
           rootId=uuid
         }}
       {{/if}}
       {{formGroup
-        (path systemFields "applies.fields" typeKey "fields.transformation.fields.select")
-        value=(path system "applies" typeKey "transformation.select")
+        (path systemFields "impacts.fields" typeKey "fields.transformation.fields.select")
+        value=(path system "impacts" typeKey "transformation.select")
         disabled=(not editable)
         classes="teriock-full-width"
         rootId=uuid
       }}
-      {{#if (path system "applies" typeKey "transformation.select")}}
+      {{#if (path system "impacts" typeKey "transformation.select")}}
         {{formGroup
-          (path systemFields "applies.fields" typeKey "fields.transformation.fields.multiple")
-          value=(path system "applies" typeKey "transformation.multiple")
+          (path systemFields "impacts.fields" typeKey "fields.transformation.fields.multiple")
+          value=(path system "impacts" typeKey "transformation.multiple")
           disabled=(not editable)
           classes="teriock-full-width"
           rootId=uuid
         }}
       {{/if}}
       {{formGroup
-        (path systemFields "applies.fields" typeKey "fields.transformation.fields.image")
-        value=(path system "applies" typeKey "transformation.image")
+        (path systemFields "impacts.fields" typeKey "fields.transformation.fields.image")
+        value=(path system "impacts" typeKey "transformation.image")
         disabled=(not editable)
         classes="teriock-full-width"
         rootId=uuid
       }}
       {{formGroup
-        (path systemFields "applies.fields" typeKey "fields.transformation.fields.resetHp")
-        value=(path system "applies" typeKey "transformation.suppression.resetHp")
+        (path systemFields "impacts.fields" typeKey "fields.transformation.fields.resetHp")
+        value=(path system "impacts" typeKey "transformation.suppression.resetHp")
         disabled=(not editable)
         classes="teriock-full-width"
         rootId=uuid
       }}
       {{formGroup
-        (path systemFields "applies.fields" typeKey "fields.transformation.fields.resetMp")
-        value=(path system "applies" typeKey "transformation.suppression.resetMp")
+        (path systemFields "impacts.fields" typeKey "fields.transformation.fields.resetMp")
+        value=(path system "impacts" typeKey "transformation.suppression.resetMp")
         disabled=(not editable)
         classes="teriock-full-width"
         rootId=uuid
       }}
       {{formGroup
-        (path systemFields "applies.fields" typeKey "fields.transformation.fields.suppression.fields.bodyParts")
-        value=(path system "applies" typeKey "transformation.suppression.bodyParts")
+        (path systemFields "impacts.fields" typeKey "fields.transformation.fields.suppression.fields.bodyParts")
+        value=(path system "impacts" typeKey "transformation.suppression.bodyParts")
         disabled=(not editable)
         classes="teriock-full-width"
         rootId=uuid
       }}
       {{formGroup
-        (path systemFields "applies.fields" typeKey "fields.transformation.fields.suppression.fields.equipment")
-        value=(path system "applies" typeKey "transformation.suppression.equipment")
+        (path systemFields "impacts.fields" typeKey "fields.transformation.fields.suppression.fields.equipment")
+        value=(path system "impacts" typeKey "transformation.suppression.equipment")
         disabled=(not editable)
         classes="teriock-full-width"
         rootId=uuid
       }}
       {{formGroup
-        (path systemFields "applies.fields" typeKey "fields.transformation.fields.suppression.fields.fluencies")
-        value=(path system "applies" typeKey "transformation.suppression.fluencies")
+        (path systemFields "impacts.fields" typeKey "fields.transformation.fields.suppression.fields.fluencies")
+        value=(path system "impacts" typeKey "transformation.suppression.fluencies")
         disabled=(not editable)
         classes="teriock-full-width"
         rootId=uuid
       }}
       {{formGroup
-        (path systemFields "applies.fields" typeKey "fields.transformation.fields.suppression.fields.ranks")
-        value=(path system "applies" typeKey "transformation.suppression.ranks")
+        (path systemFields "impacts.fields" typeKey "fields.transformation.fields.suppression.fields.ranks")
+        value=(path system "impacts" typeKey "transformation.suppression.ranks")
         disabled=(not editable)
         classes="teriock-full-width"
         rootId=uuid

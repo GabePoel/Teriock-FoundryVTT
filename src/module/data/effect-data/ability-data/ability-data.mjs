@@ -243,10 +243,10 @@ export default class TeriockAbilityModel extends HierarchyDataMixin(
       label: "Event",
       hint: "Please select an event that triggers this macro to run.",
       title: "Select Event",
-      initial: this.applies.macros[safeUuid(uuid)],
+      initial: this.impacts.macros[safeUuid(uuid)],
     });
     const updateData = {};
-    updateData[`system.applies.macros.${safeUuid(uuid)}`] = pseudoHook;
+    updateData[`system.impacts.macros.${safeUuid(uuid)}`] = pseudoHook;
     await this.parent.update(updateData);
   }
 
@@ -302,7 +302,7 @@ export default class TeriockAbilityModel extends HierarchyDataMixin(
    */
   async unlinkMacro(uuid) {
     const updateData = {};
-    updateData[`system.applies.macros.-=${safeUuid(uuid)}`] = null;
+    updateData[`system.impacts.macros.-=${safeUuid(uuid)}`] = null;
     await this.parent.update(updateData);
   }
 }

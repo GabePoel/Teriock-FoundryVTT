@@ -35,13 +35,10 @@ const toRun = {
 const macroEntries = Object.entries(toRun);
 const totalMacros = macroEntries.length;
 
-const progress = foundry.ui.notifications.info(
-  "Running maintenance macros...",
-  {
-    progress: true,
-    pct: 0.01,
-  },
-);
+const progress = ui.notifications.info("Running maintenance macros...", {
+  progress: true,
+  pct: 0.01,
+});
 
 let completedCount = 0;
 
@@ -61,6 +58,6 @@ progress.update({
   message: "All maintenance macros completed.",
 });
 
-foundry.ui.notifications.success(
+ui.notifications.success(
   `Successfully executed ${totalMacros} maintenance macros.`,
 );

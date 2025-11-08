@@ -77,7 +77,7 @@ export default class TeriockPropertyModel extends HierarchyDataMixin(
         initial: "",
         label: "Improvement",
       }),
-      applies: new fields.SchemaField({
+      impacts: new fields.SchemaField({
         changes: new ListField(changeField(), {
           label: "Changes",
           hint: "Changes made to the target equipment as part of the property's ongoing effect.",
@@ -149,10 +149,10 @@ export default class TeriockPropertyModel extends HierarchyDataMixin(
       label: "Event",
       hint: "Please select an event that triggers this macro to run.",
       title: "Select Event",
-      initial: this.applies.macros[safeUuid(uuid)],
+      initial: this.impacts.macros[safeUuid(uuid)],
     });
     const updateData = {};
-    updateData[`system.applies.macros.${safeUuid(uuid)}`] = pseudoHook;
+    updateData[`system.impacts.macros.${safeUuid(uuid)}`] = pseudoHook;
     await this.parent.update(updateData);
   }
 
@@ -169,12 +169,12 @@ export default class TeriockPropertyModel extends HierarchyDataMixin(
   /** @inheritDoc */
   prepareDerivedData() {
     super.prepareDerivedData();
-    const changes = foundry.utils.deepClone(this.applies.changes);
+    const changes = foundry.utils.deepClone(this.impacts.changes);
     let macroPrefix = "system.hookedMacros.";
     if (this.modifies === "Item") {
       macroPrefix = "item." + macroPrefix;
     }
-    for (const [safeUuid, pseudoHook] of Object.entries(this.applies.macros)) {
+    for (const [safeUuid, pseudoHook] of Object.entries(this.impacts.macros)) {
       const change = {
         key: `${macroPrefix}${pseudoHook}`,
         value: pureUuid(safeUuid),
@@ -206,7 +206,7 @@ export default class TeriockPropertyModel extends HierarchyDataMixin(
    */
   async unlinkMacro(uuid) {
     const updateData = {};
-    updateData[`system.applies.macros.-=${safeUuid(uuid)}`] = null;
+    updateData[`system.impacts.macros.-=${safeUuid(uuid)}`] = null;
     await this.parent.update(updateData);
   }
 }

@@ -6,7 +6,7 @@
  */
 export default async function callPseudoHookQuery(queryData, { _timeout }) {
   const doc =
-    /** @type {TeriockActor|TeriockItem|TeriockEffect} */ await foundry.utils.fromUuid(
+    /** @type {TeriockActor|TeriockItem|TeriockEffect} */ await fromUuid(
       queryData.uuid,
     );
   if (doc) {

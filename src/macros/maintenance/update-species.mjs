@@ -69,7 +69,7 @@ async function processSpecies(speciesName) {
       { pack: "teriock.species" },
     );
   } else {
-    speciesItem = /** @type {TeriockSpecies} */ await foundry.utils.fromUuid(
+    speciesItem = /** @type {TeriockSpecies} */ await fromUuid(
       speciesItem.uuid,
     );
   }

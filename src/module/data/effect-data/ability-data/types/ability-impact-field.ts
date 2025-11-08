@@ -55,6 +55,8 @@ export interface AbilityImpact {
   macroButtonUuids: Teriock.UUID<TeriockMacro>;
   /** <schema> Don't place a template */
   noTemplate: boolean;
+  /** <schema> Range */
+  range: string;
   /** <schema> Rolls that could be caused by this ability */
   rolls: Record<Teriock.Parameters.Consequence.RollConsequenceKey, string>;
   /** <schema> Conditions that this ability could start */

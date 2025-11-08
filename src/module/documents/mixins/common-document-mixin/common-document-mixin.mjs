@@ -96,7 +96,7 @@ export default (Base) => {
             }
             for (const macroUuid of macroUuids) {
               /** @type {TeriockMacro} */
-              const macro = await foundry.utils.fromUuid(macroUuid);
+              const macro = await fromUuid(macroUuid);
               if (macro) {
                 await macro.execute({
                   actor: this,

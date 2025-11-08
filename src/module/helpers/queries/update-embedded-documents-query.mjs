@@ -8,7 +8,7 @@ export default async function updateEmbeddedDocumentsQuery(
   queryData,
   { _timeout },
 ) {
-  const doc = await foundry.utils.fromUuid(queryData.uuid);
+  const doc = await fromUuid(queryData.uuid);
   if (doc) {
     await doc.updateEmbeddedDocuments(
       queryData.embeddedName,

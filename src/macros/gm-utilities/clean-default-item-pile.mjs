@@ -1,4 +1,3 @@
-/** @type {TeriockActor} */
 const defaultItemPile = game.actors.getName("Default Item Pile");
 if (defaultItemPile) {
   await defaultItemPile.deleteEmbeddedDocuments(

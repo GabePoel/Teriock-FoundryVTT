@@ -35,7 +35,7 @@ export default (Base) => {
       async use(options) {
         await super.use(options);
         const macroPromises = Array.from(
-          this.macros.map((uuid) => foundry.utils.fromUuid(uuid)),
+          this.macros.map((uuid) => fromUuid(uuid)),
         );
         const macros =
           /** @type {TeriockMacro[]} */ await Promise.all(macroPromises);

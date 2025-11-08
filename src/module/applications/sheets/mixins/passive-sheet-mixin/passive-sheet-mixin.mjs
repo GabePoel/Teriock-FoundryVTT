@@ -59,7 +59,7 @@ export default (Base) => {
       async _onDropMacro(_event, data) {
         if (this._impactTab === "custom") {
           const updateData = {
-            [`system.applies.macros.${safeUuid(data?.uuid)}`]: "use",
+            [`system.impacts.macros.${safeUuid(data?.uuid)}`]: "use",
           };
           await this.document.update(updateData);
         }
@@ -71,9 +71,9 @@ export default (Base) => {
         if (this._impactTab === "custom") {
           context.macros = [];
           for (const [safeUuid, pseudoHook] of Object.entries(
-            this.document.system.applies.macros,
+            this.document.system.impacts.macros,
           )) {
-            const macro = await foundry.utils.fromUuid(pureUuid(safeUuid));
+            const macro = await fromUuid(pureUuid(safeUuid));
             if (macro) {
               context.macros.push({
                 safeUuid: safeUuid,

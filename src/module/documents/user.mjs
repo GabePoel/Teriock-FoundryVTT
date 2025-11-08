@@ -21,4 +21,9 @@ export default class TeriockUser extends User {
         (Date.now() - this.lastActivityTime) / 1000 < 120)
     );
   }
+
+  /** @returns {TeriockActor} */
+  get character() {
+    return super.character;
+  }
 }

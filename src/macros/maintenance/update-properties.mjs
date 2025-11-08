@@ -15,7 +15,7 @@ async function processProperty(propertyName, _index, _total) {
       { pack: "teriock.properties" },
     );
   } else {
-    propertyItem = await foundry.utils.fromUuid(propertyItem.uuid);
+    propertyItem = await fromUuid(propertyItem.uuid);
   }
   let propertyEffect = propertyItem.properties.find(
     (a) => a.name === propertyName,

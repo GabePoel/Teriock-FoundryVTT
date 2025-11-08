@@ -145,7 +145,7 @@ export default (Base) => {
         if (!this._canDrop(item)) {
           return;
         }
-        const source = await foundry.utils.fromUuid(data.uuid);
+        const source = await fromUuid(data.uuid);
         if (
           item.parent?.documentName === "Actor" &&
           item.type === "equipment"

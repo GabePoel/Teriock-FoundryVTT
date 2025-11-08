@@ -48,7 +48,7 @@ async function processSpecies(
   speciesFolders,
   creaturesFolders,
 ) {
-  const species = /** @type {TeriockSpecies} */ await foundry.utils.fromUuid(
+  const species = /** @type {TeriockSpecies} */ await fromUuid(
     speciesEntry.uuid,
   );
   const creatureEntry = allCreatures.find((c) => c.name === speciesEntry.name);
@@ -67,7 +67,7 @@ async function processSpecies(
       { pack: "teriock.creatures" },
     );
   } else {
-    creature = await foundry.utils.fromUuid(creatureEntry.uuid);
+    creature = await fromUuid(creatureEntry.uuid);
   }
   const mechanics = creature.items.filter((i) => i.type === "mechanic");
   const mechanicIds = mechanics.map((m) => m.id);

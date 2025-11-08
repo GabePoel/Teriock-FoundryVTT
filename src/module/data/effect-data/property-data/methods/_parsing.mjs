@@ -75,9 +75,9 @@ export async function _parse(propertyData, rawHTML) {
     parameters.system.applyIfShattered = true;
   }
 
-  parameters.system.applies = {};
+  parameters.system.impacts = {};
   parameters.system.description = tidyHTML(rawHTML);
-  parameters.system.applies.changes = extractChangesFromHTML(rawHTML);
+  parameters.system.impacts.changes = extractChangesFromHTML(rawHTML);
   parameters.system.modifiesActor = extractDocument(doc);
   parameters.img = getIcon("properties", propertyData.parent.name);
   const toClean = ["description", "limitation", "improvement"];

@@ -353,8 +353,7 @@ export default class TeriockBaseMessageModel extends TypeDataModel {
             return;
           }
           clickTimeout = setTimeout(async () => {
-            const doc =
-              /** @type {TeriockActor} */ await foundry.utils.fromUuid(uuid);
+            const doc = /** @type {TeriockActor} */ await fromUuid(uuid);
             if (doc.isOwner) {
               if (doc.token?.object) {
                 doc.token.object.control();
@@ -376,8 +375,7 @@ export default class TeriockBaseMessageModel extends TypeDataModel {
             clearTimeout(clickTimeout);
             clickTimeout = null;
           }
-          const doc =
-            /** @type {TeriockActor} */ await foundry.utils.fromUuid(uuid);
+          const doc = /** @type {TeriockActor} */ await fromUuid(uuid);
           if (
             doc &&
             doc.sheet &&

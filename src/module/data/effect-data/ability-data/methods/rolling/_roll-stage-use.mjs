@@ -11,7 +11,7 @@ export async function _stageUse(rollConfig) {
   rollConfig.useData.rollData = rollConfig.useData.actor.getRollData();
   rollConfig.useData.executor = getToken(rollConfig.useData.actor);
   rollConfig.useData.noTemplate =
-    rollConfig.abilityData.applies.base.noTemplate;
+    rollConfig.abilityData.impacts.base.noTemplate;
 
   // Calculate costs
   rollConfig.useData.costs.hp = await calculateCost(
@@ -77,18 +77,18 @@ export async function _stageUse(rollConfig) {
       rollConfig.useData.formula += " + @f";
       rollConfig.useData.noTemplate =
         rollConfig.useData.noTemplate ||
-        rollConfig.abilityData.applies.fluent.noTemplate;
+        rollConfig.abilityData.impacts.fluent.noTemplate;
     } else if (rollConfig.useData.proficient) {
       rollConfig.useData.formula += " + @p";
       rollConfig.useData.noTemplate =
         rollConfig.useData.noTemplate ||
-        rollConfig.abilityData.applies.proficient.noTemplate;
+        rollConfig.abilityData.impacts.proficient.noTemplate;
     }
     if (rollConfig.useData.modifiers.heightened > 0) {
       rollConfig.useData.formula += " + @h";
       rollConfig.useData.noTemplate =
         rollConfig.useData.noTemplate ||
-        rollConfig.abilityData.applies.heightened.noTemplate;
+        rollConfig.abilityData.impacts.heightened.noTemplate;
     }
   }
 }

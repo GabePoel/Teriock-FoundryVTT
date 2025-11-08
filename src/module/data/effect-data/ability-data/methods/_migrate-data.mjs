@@ -97,12 +97,19 @@ export function _migrateData(data) {
     );
   }
 
+  // Effect types migration
   if (data.effects) {
     data.effectTypes = data.effects;
     delete data.effects;
   }
 
   migrateProtections(data);
+
+  // Impact migration
+  if (foundry.utils.hasProperty(data, "applies")) {
+    data.impacts = foundry.utils.getProperty(data, "applies");
+    foundry.utils.deleteProperty(data, "applies");
+  }
   return data;
 }
 
@@ -129,6 +136,7 @@ function migrateProtection(change) {
 }
 
 /**
+ * Migrate protection data. Maintain the old `applies` field.
  * @param {TeriockAbilityModel} data
  */
 function migrateProtections(data) {

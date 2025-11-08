@@ -4,7 +4,8 @@ declare global {
      * Describes the origin of a {@link TeriockChatMessage}.
      */
     export type ChatSpeakerData = {
-      /** The `_id` of the {@link TeriockActor} who generated this message */
+      /** The `_id` of the {@link TeriockActor
+       * } who generated this message */
       actor?: string;
       /** An overridden alias name used instead of the {@link TeriockActor} or {@link TeriockTokenDocument} name */
       alias?: string;

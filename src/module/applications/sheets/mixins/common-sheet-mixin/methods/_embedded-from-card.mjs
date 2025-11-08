@@ -16,7 +16,7 @@ export default async function _embeddedFromCard(sheet, target) {
       console: false,
     });
   } else if (type === "macro") {
-    return foundry.utils.fromUuid(id);
+    return fromUuid(id);
   } else if (type === "item") {
     return sheet.document?.actor.items.get(id);
   } else if (["effect", "conditionUnlocked"].includes(type)) {

@@ -10,5 +10,5 @@ const changes = [
   },
 ];
 await ability.update({
-  "system.applies.base.changes": changes,
+  "system.impacts.base.changes": changes,
 });

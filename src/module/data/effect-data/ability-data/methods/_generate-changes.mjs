@@ -10,20 +10,20 @@ import { pureUuid } from "../../../../helpers/utils.mjs";
 export function _generateChanges(abilityData) {
   /** @type {EffectChangeData[]} */
   const changes = [];
-  if (abilityData.applies.base.changes.length > 0) {
-    changes.push(...abilityData.applies.base.changes);
+  if (abilityData.impacts.base.changes.length > 0) {
+    changes.push(...abilityData.impacts.base.changes);
   }
   if (
     abilityData.parent.isProficient &&
-    abilityData.applies.proficient.changes.length > 0
+    abilityData.impacts.proficient.changes.length > 0
   ) {
-    changes.push(...abilityData.applies.proficient.changes);
+    changes.push(...abilityData.impacts.proficient.changes);
   }
   if (
     abilityData.parent.isFluent &&
-    abilityData.applies.fluent.changes.length > 0
+    abilityData.impacts.fluent.changes.length > 0
   ) {
-    changes.push(...abilityData.applies.fluent.changes);
+    changes.push(...abilityData.impacts.fluent.changes);
   }
   if (abilityData.improvements.attributeImprovement.attribute) {
     const attributeImprovementChange = {
@@ -46,7 +46,7 @@ export function _generateChanges(abilityData) {
     changes.push(featSaveImprovementChange);
   }
   for (const [safeUuid, pseudoHook] of Object.entries(
-    abilityData.applies.macros,
+    abilityData.impacts.macros,
   )) {
     const change = {
       key: `system.hookedMacros.${pseudoHook}`,

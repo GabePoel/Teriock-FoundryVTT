@@ -13,7 +13,7 @@ async function processBody(bodyName) {
       { pack: "teriock.bodyParts" },
     );
   } else {
-    bodyItem = await foundry.utils.fromUuid(bodyItem.uuid);
+    bodyItem = await fromUuid(bodyItem.uuid);
   }
   await bodyItem.system.wikiPull({ notify: false });
   await bodyItem.update({ "system.description": "" });

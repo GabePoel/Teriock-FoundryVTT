@@ -204,7 +204,7 @@ export default class TeriockConsequenceModel extends TransformationDataMixin(
     }
     if (this.sustainedExpiration) {
       /** @type {TeriockEffect} */
-      const source = await foundry.utils.fromUuid(this.source);
+      const source = await fromUuid(this.source);
       should = should || !source || !source.active;
     }
     return should;

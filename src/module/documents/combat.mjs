@@ -127,17 +127,25 @@ export default class TeriockCombat extends Combat {
       }
     }
     const activeGm = /** @type {TeriockUser} */ game.users.activeGM;
-    await activeGm.query("teriock.resetAttackPenalties", {
-      actorUuids: this.actors.map((a) => a.uuid),
-    });
+    const actors = /** @type {TeriockActor[]} */ [
+      ...Object.values(game.actors.tokens),
+      ...this.actors,
+    ];
+    if (activeGm) {
+      await activeGm.query("teriock.resetAttackPenalties", {
+        actorUuids: Array.from(new Set(actors.map((a) => a.uuid))),
+      });
+    }
     this.updateCombatantActors();
     if (previousActor) {
       const previousUser = selectUser(previousActor);
-      await previousUser.query("teriock.callPseudoHook", {
-        uuid: previousActor.uuid,
-        pseudoHook: "turnEnd",
-        data: {},
-      });
+      if (previousUser) {
+        await previousUser.query("teriock.callPseudoHook", {
+          uuid: previousActor.uuid,
+          pseudoHook: "turnEnd",
+          data: {},
+        });
+      }
     }
 
     // Start of turn
@@ -147,17 +155,21 @@ export default class TeriockCombat extends Combat {
       await this._tryAllEffectExpirations(actor, newActor, "action", "start");
       await this._tryAllEffectExpirations(actor, newActor, "turn", "start");
     }
-    await activeGm.query("teriock.update", {
-      uuid: newActor.uuid,
-      data: { "system.combat.hasReaction": true },
-    });
+    if (activeGm) {
+      await activeGm.query("teriock.update", {
+        uuid: newActor.uuid,
+        data: { "system.combat.hasReaction": true },
+      });
+    }
     if (newActor) {
       const newUser = selectUser(newActor);
-      await newUser.query("teriock.callPseudoHook", {
-        uuid: newActor.uuid,
-        pseudoHook: "turnStart",
-        data: {},
-      });
+      if (newUser) {
+        await newUser.query("teriock.callPseudoHook", {
+          uuid: newActor.uuid,
+          pseudoHook: "turnStart",
+          data: {},
+        });
+      }
     }
 
     // Finish

@@ -64,3 +64,9 @@ declare global {
     };
   }
 }
+
+declare module "./chat-message.mjs" {
+  export default interface TeriockChatMessage {
+    get implementation(): typeof TeriockChatMessage;
+  }
+}

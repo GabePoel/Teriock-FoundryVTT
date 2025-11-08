@@ -384,7 +384,7 @@ export default class TeriockActor extends ParentDocumentMixin(
             if (change.key === "system.hookedMacros.effectApplication") {
               const uuid = pureUuid(change.value);
               /** @type {TeriockMacro|null} */
-              const macro = await foundry.utils.fromUuid(uuid);
+              const macro = await fromUuid(uuid);
               if (macro) {
                 await macro.execute({
                   actor: this,

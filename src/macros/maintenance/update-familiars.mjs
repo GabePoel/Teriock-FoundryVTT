@@ -59,7 +59,7 @@ for (const page of commonAnimalPages) {
       { pack: "teriock.powers" },
     );
   } else {
-    familiarItem = await foundry.utils.fromUuid(familiarItem.uuid);
+    familiarItem = await fromUuid(familiarItem.uuid);
     await familiarItem.update({
       system: familiarItemSystem,
     });

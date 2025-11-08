@@ -26,7 +26,7 @@ const rulesEnrichers = Object.keys(enricherIcons).map((type) => ({
       return null;
     }
 
-    const compendium = await foundry.utils.fromUuid(compendiumIndex.uuid);
+    const compendium = await fromUuid(compendiumIndex.uuid);
     if (!compendium) {
       return null;
     }

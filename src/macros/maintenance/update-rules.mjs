@@ -20,7 +20,7 @@ for (const [namespace, category] of Object.entries(namespaceCategoryMap)) {
   );
 
   // Attempt to load the journal from the pack
-  let rulesJournal = await foundry.utils.fromUuid(
+  let rulesJournal = await fromUuid(
     coreRulesPack.index.getName(namespace)?.uuid ?? "",
   );
 

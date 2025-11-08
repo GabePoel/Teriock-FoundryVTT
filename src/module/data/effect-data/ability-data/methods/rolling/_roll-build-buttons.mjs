@@ -54,10 +54,10 @@ export async function _buildButtons(rollConfig) {
     });
   }
   for (const impact of [
-    abilityData.applies.base,
-    abilityData.applies.proficient,
-    abilityData.applies.fluent,
-    abilityData.applies.heightened,
+    abilityData.impacts.base,
+    abilityData.impacts.proficient,
+    abilityData.impacts.fluent,
+    abilityData.impacts.heightened,
   ]) {
     for (const uuid of impact.macroButtonUuids) {
       const macroData = fromUuidSync(uuid);
@@ -83,11 +83,11 @@ export async function _buildButtons(rollConfig) {
 
   // Standard Damage Button
   if (
-    abilityData.applies.base.common.has("standardDamage") ||
+    abilityData.impacts.base.common.has("standardDamage") ||
     (rollConfig.useData.proficient &&
-      abilityData.applies.proficient.common.has("standardDamage")) ||
+      abilityData.impacts.proficient.common.has("standardDamage")) ||
     (rollConfig.useData.fluent &&
-      abilityData.applies.fluent.common.has("standardDamage"))
+      abilityData.impacts.fluent.common.has("standardDamage"))
   ) {
     const buttonData = {
       label: "Standard Roll",

@@ -132,6 +132,7 @@ foundry.helpers.Hooks.once("init", function () {
 
   // Register custom core documents
   CONFIG.ActiveEffect.documentClass = documents.TeriockEffect;
+  CONFIG.Actor.collection = documents.collections.TeriockActors;
   CONFIG.Actor.documentClass = documents.TeriockActor;
   CONFIG.ChatMessage.documentClass = documents.TeriockChatMessage;
   CONFIG.Combat.documentClass = documents.TeriockCombat;
@@ -144,6 +145,7 @@ foundry.helpers.Hooks.once("init", function () {
   CONFIG.Macro.documentClass = documents.TeriockMacro;
   CONFIG.Scene.documentClass = documents.TeriockScene;
   CONFIG.Token.documentClass = documents.TeriockTokenDocument;
+  CONFIG.User.collection = documents.collections.TeriockUsers;
   CONFIG.User.documentClass = documents.TeriockUser;
 
   // Register template classes
@@ -342,7 +344,6 @@ foundry.helpers.Hooks.once("init", function () {
     "teriock.updateEmbeddedDocuments":
       helpers.queries.updateEmbeddedDocumentsQuery,
   });
-
   const packs =
     /** @type {Collection<string,CompendiumCollection>} */ game.packs;
 

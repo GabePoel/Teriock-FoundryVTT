@@ -76,8 +76,9 @@ export function _defaultConfig(abilityData, options = {}) {
   if (options.proficient !== undefined) {
     rollConfig.useData.proficient = options.proficient;
   } else if (
-    abilityData.actor &&
-    abilityData.actor.uuid === rollConfig.useData.actor.uuid
+    (abilityData.actor &&
+      abilityData.actor.uuid === rollConfig.useData.actor.uuid) ||
+    abilityData.basic
   ) {
     rollConfig.useData.proficient = abilityData.parent.isProficient;
   }

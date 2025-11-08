@@ -19,7 +19,7 @@ export class StandardDamageHandler extends ActionHandler {
   async _makeRoll(actor, formula, options = { crit: false }) {
     let attacker = actor.system.primaryAttacker;
     if (this.dataset.attacker) {
-      attacker = await foundry.utils.fromUuid(pureUuid(this.dataset.attacker));
+      attacker = await fromUuid(pureUuid(this.dataset.attacker));
     }
     options.secret = true;
     options.formula = formula;
@@ -40,7 +40,7 @@ export class StandardDamageHandler extends ActionHandler {
   async _prepFormula(actor) {
     let attacker = actor.system.primaryAttacker;
     if (this.dataset.attacker) {
-      attacker = await foundry.utils.fromUuid(pureUuid(this.dataset.attacker));
+      attacker = await fromUuid(pureUuid(this.dataset.attacker));
     }
     let formula = attacker.system.damage.base.value;
     if (this.event.ctrlKey) {

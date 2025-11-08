@@ -98,7 +98,7 @@ export default (Base) => {
        */
       async _fetchDeterministicItemData() {
         const items = /** @type {TeriockItem[]} */ await Promise.all(
-          Array.from(this.imports.items).map((i) => foundry.utils.fromUuid(i)),
+          Array.from(this.imports.items).map((i) => fromUuid(i)),
         );
         return items.map((i) => {
           const obj = i.toObject();

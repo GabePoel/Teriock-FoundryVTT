@@ -78,12 +78,12 @@ function defaultConsequence() {
 }
 
 /**
- * Creates the default applies structure for ability effects.
+ * Creates the default impacts structure for ability effects.
  * Provides base, proficient, fluent, and heightened consequence fields.
- * @returns {object} The default applies structure with empty consequence fields.
+ * @returns {object} The default impacts structure with empty consequence fields.
  * @private
  */
-function defaultApplies() {
+function defaultImpacts() {
   return {
     base: defaultConsequence(),
     proficient: defaultConsequence(),
@@ -130,7 +130,7 @@ export async function _parse(abilityData, rawHTML) {
     .deepClone(referenceAbility.system)
     .toObject();
   const changes = [];
-  delete parameters.applies;
+  delete parameters.impacts;
   delete parameters.executionTime;
   delete parameters.maneuver;
   delete parameters.hierarchy.rootUuid;
@@ -168,7 +168,7 @@ export async function _parse(abilityData, rawHTML) {
   processDiceAndEffectExtraction(parameters);
 
   // Add macro if appropriate
-  parameters.applies.macros = extractMacroFromHTML(doc);
+  parameters.impacts.macros = extractMacroFromHTML(doc);
 
   // Process sub-abilities
   await processSubAbilities(subs, abilityData.parent);
@@ -809,28 +809,28 @@ function extractCombatExpirationFromHTML(html) {
  * @private
  */
 function processDiceAndEffectExtraction(parameters) {
-  // Initialize applies if needed
-  if (!parameters.applies) {
-    parameters.applies = defaultApplies();
+  // Initialize impacts if needed
+  if (!parameters.impacts) {
+    parameters.impacts = defaultImpacts();
   }
 
   // Extract dice and effects from overviews
   const overviewSources = [
     {
       source: parameters.overview.base,
-      target: parameters.applies.base,
+      target: parameters.impacts.base,
     },
     {
       source: parameters.overview.proficient,
-      target: parameters.applies.proficient,
+      target: parameters.impacts.proficient,
     },
     {
       source: parameters.overview.fluent,
-      target: parameters.applies.fluent,
+      target: parameters.impacts.fluent,
     },
     {
       source: parameters.heightened,
-      target: parameters.applies.heightened,
+      target: parameters.impacts.heightened,
     },
   ];
 
@@ -987,65 +987,65 @@ function processDiceAndEffectExtraction(parameters) {
   });
 
   if (Object.keys(resultDice).length) {
-    Object.assign(parameters.applies.base.rolls, resultDice);
+    Object.assign(parameters.impacts.base.rolls, resultDice);
   }
 
   if (resultHacks.size > 0) {
-    parameters.applies.base.hacks = new Set([
-      ...(parameters.applies.base.hacks || []),
+    parameters.impacts.base.hacks = new Set([
+      ...(parameters.impacts.base.hacks || []),
       ...resultHacks,
     ]);
   }
 
   if (resultConditions.size > 0) {
-    parameters.applies.base.statuses = new Set([
-      ...(parameters.applies.base.statuses || []),
+    parameters.impacts.base.statuses = new Set([
+      ...(parameters.impacts.base.statuses || []),
       ...resultConditions,
     ]);
   }
 
   if (resultStartConditions.size > 0) {
-    parameters.applies.base.startStatuses = new Set([
-      ...(parameters.applies.base.startStatuses || []),
+    parameters.impacts.base.startStatuses = new Set([
+      ...(parameters.impacts.base.startStatuses || []),
       ...resultStartConditions,
     ]);
   }
 
   if (resultEndConditions.size > 0) {
-    parameters.applies.base.endStatuses = new Set([
-      ...(parameters.applies.base.endStatuses || []),
+    parameters.impacts.base.endStatuses = new Set([
+      ...(parameters.impacts.base.endStatuses || []),
       ...resultEndConditions,
     ]);
   }
 
   if (resultTradecraftChecks.size > 0) {
-    parameters.applies.base.checks = new Set([
-      ...(parameters.applies.base.checks || []),
+    parameters.impacts.base.checks = new Set([
+      ...(parameters.impacts.base.checks || []),
       ...resultTradecraftChecks,
     ]);
   }
 
   if (resultChanges.length > 0) {
-    parameters.applies.base.changes = [
-      ...(parameters.applies.base.changes || []),
+    parameters.impacts.base.changes = [
+      ...(parameters.impacts.base.changes || []),
       ...resultChanges,
     ];
   }
 
   if (resultStandardDamage) {
-    parameters.applies.base.common.add("standardDamage");
+    parameters.impacts.base.common.add("standardDamage");
   }
 
   // Apply combat expiration results
   if (normalExpiration || critExpiration) {
     if (normalExpiration) {
-      parameters.applies.base.expiration.normal = normalExpiration;
-      parameters.applies.base.expiration.doesExpire = true;
+      parameters.impacts.base.expiration.normal = normalExpiration;
+      parameters.impacts.base.expiration.doesExpire = true;
     }
     if (critExpiration) {
-      parameters.applies.base.expiration.crit = critExpiration;
-      parameters.applies.base.expiration.changeOnCrit = true;
-      parameters.applies.base.expiration.doesExpire = true;
+      parameters.impacts.base.expiration.crit = critExpiration;
+      parameters.impacts.base.expiration.changeOnCrit = true;
+      parameters.impacts.base.expiration.doesExpire = true;
     }
   }
 }

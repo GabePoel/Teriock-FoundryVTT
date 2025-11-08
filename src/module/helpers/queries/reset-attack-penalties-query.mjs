@@ -14,10 +14,10 @@ export default async function resetAttackPenaltiesQuery(
     "MeasuredTemplate",
     canvas.scene.templates.contents
       .filter(
-        /** @param {MeasuredTemplateDocument} */ (t) =>
+        /** @param {MeasuredTemplateDocument} t */ (t) =>
           t.getFlag("teriock", "deleteOnTurnChange"),
       )
-      .map(/** @param {MeasuredTemplateDocument} */ (t) => t.id),
+      .map(/** @param {MeasuredTemplateDocument} t */ (t) => t.id),
   );
   const actorIds = queryData.actorUuids.filter((uuid) =>
     uuid.startsWith("Actor"),

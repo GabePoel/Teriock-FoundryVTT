@@ -1,5 +1,5 @@
 import type TeriockBaseEffectModel from "../base-effect-data/base-effect-data.mjs";
-import type { AbilityImpact } from "./types/consequences";
+import type { AbilityImpact } from "./types/ability-impact-field.ts";
 import type {
   TeriockAbility,
   TeriockConsequence,
@@ -21,19 +21,6 @@ declare module "./ability-data.mjs" {
       HierarchyDataMixinInterface {
     /** <schema> If this ability is adept and how much it costs if so */
     adept: CostAdjustment;
-    /** <schema> Impacts of using this ability */
-    applies: {
-      /** <schema> Base impact of using this ability */
-      base: AbilityImpact;
-      /** <schema> How the impacts change if fluent in this ability */
-      fluent: AbilityImpact;
-      /** <schema> How the impacts change if this ability is heightened */
-      heightened: AbilityImpact;
-      /** <schema> {@link TeriockMacro}s hooked to the parent {@link TeriockActor} */
-      macros: Teriock.Parameters.Shared.MacroHookRecord;
-      /** <schema> How the impacts change if proficient in this ability */
-      proficient: AbilityImpact;
-    };
     /** <schema> If this is a basic ability */
     basic: boolean;
     /** <schema> What class this ability is associated with */
@@ -75,6 +62,19 @@ declare module "./ability-data.mjs" {
     grantOnly: boolean;
     /** <schema> Description of how this ability changes if heightened */
     heightened: string;
+    /** <schema> Impacts of using this ability */
+    impacts: {
+      /** <schema> Base impact of using this ability */
+      base: AbilityImpact;
+      /** <schema> How the impacts change if fluent in this ability */
+      fluent: AbilityImpact;
+      /** <schema> How the impacts change if this ability is heightened */
+      heightened: AbilityImpact;
+      /** <schema> {@link TeriockMacro}s hooked to the parent {@link TeriockActor} */
+      macros: Teriock.Parameters.Shared.MacroHookRecord;
+      /** <schema> How the impacts change if proficient in this ability */
+      proficient: AbilityImpact;
+    };
     /**
      * <schema> Description of any improvement that makes this ability better than it would otherwise be
      * (not to be confused with {@link TeriockAbilityModel.improvements})

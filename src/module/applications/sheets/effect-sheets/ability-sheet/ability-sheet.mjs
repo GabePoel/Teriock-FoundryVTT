@@ -249,7 +249,7 @@ export default class TeriockAbilitySheet extends WikiButtonSheetMixin(
         const index = parseInt(entry.dataset.index, 10);
         const key = entry.dataset.key;
         const application = entry.dataset.application;
-        const updateString = `system.applies.${application}.changes`;
+        const updateString = `system.impacts.${application}.changes`;
         let value = entry.value;
         if (!isNaN(Number(value)) && value !== "") {
           const intValue = parseInt(value, 10);
@@ -264,7 +264,7 @@ export default class TeriockAbilitySheet extends WikiButtonSheetMixin(
         ) {
           value = Number(value);
         }
-        const changes = this.document.system.applies[application].changes;
+        const changes = this.document.system.impacts[application].changes;
         if (index >= 0 && index < changes.length) {
           changes[index][key] = value;
           await this.document.update({ [updateString]: changes });

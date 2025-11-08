@@ -1,11 +1,8 @@
 const abilitiesPack = game.teriock.packs.abilities();
 
-const progress = foundry.ui.notifications.info(
-  `Pulling all abilities from wiki.`,
-  {
-    progress: true,
-  },
-);
+const progress = ui.notifications.info(`Pulling all abilities from wiki.`, {
+  progress: true,
+});
 
 async function processAbility(abilityName, _index, _total) {
   let abilityItem = abilitiesPack.index.find((e) => e.name === abilityName);
@@ -18,7 +15,7 @@ async function processAbility(abilityName, _index, _total) {
       { pack: "teriock.abilities" },
     );
   } else {
-    abilityItem = await foundry.utils.fromUuid(abilityItem.uuid);
+    abilityItem = await fromUuid(abilityItem.uuid);
   }
   let abilityEffect = abilityItem.abilities.find((a) => a.name === abilityName);
 

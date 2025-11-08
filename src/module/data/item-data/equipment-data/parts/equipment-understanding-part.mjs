@@ -1,3 +1,5 @@
+import { TeriockDialog } from "../../../../applications/api/_module.mjs";
+
 const { api, ux } = foundry.applications;
 
 /**
@@ -20,19 +22,16 @@ export default (Base) => {
         if (!data.cancel) {
           if (this.reference && !this.identified) {
             const activeGm = game.users.activeGM;
-            const ref =
-              /** @type {TeriockEquipment} */ await foundry.utils.fromUuid(
-                this.reference,
-              );
+            const ref = await fromUuid(this.reference);
             const referenceName = ref ? ref.name : "Unknown";
             const referenceUuid = ref ? ref.uuid : "Unknown";
             foundry.ui.notifications.info(
               `Asking GMs to approve identification of ${this.parent.name}.`,
             );
-            const content = await ux.TextEditor.enrichHTML(
+            const content = await ux.TextEditor.implementation.enrichHTML(
               `<p>Should ${game.user.name} identify @UUID[${referenceUuid}]{${referenceName}}?</p>`,
             );
-            const doIdentify = await api.DialogV2.query(activeGm, "confirm", {
+            const doIdentify = await TeriockDialog.query(activeGm, "confirm", {
               content: content,
               modal: false,
               window: {
@@ -64,11 +63,11 @@ export default (Base) => {
                   system: refSystem,
                 });
               }
-              foundry.ui.notifications.success(
+              ui.notifications.success(
                 `${this.parent.name} was successfully identified.`,
               );
             } else {
-              foundry.ui.notifications.error(
+              ui.notifications.error(
                 `${this.parent.name} was not successfully identified.`,
               );
             }
@@ -86,7 +85,7 @@ export default (Base) => {
         if (!data.cancel) {
           if (this.reference && !this.identified) {
             const activeGm = game.users.activeGM;
-            const ref = await foundry.utils.fromUuid(this.reference);
+            const ref = await fromUuid(this.reference);
             const referenceName = ref ? ref.name : "Unknown";
             const referenceUuid = ref ? ref.uuid : "Unknown";
             foundry.ui.notifications.info(

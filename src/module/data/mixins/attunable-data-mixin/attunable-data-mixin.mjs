@@ -84,7 +84,7 @@ export default (Base) => {
           };
           if (this.parent.actor && (await this.canAttune())) {
             if (this.reference && !this.identified) {
-              const ref = await foundry.utils.fromUuid(this.reference);
+              const ref = await fromUuid(this.reference);
               if (ref) {
                 await this.parent.update({
                   "system.tier.saved": ref.system.tier.saved,
@@ -117,7 +117,7 @@ export default (Base) => {
           let tierDerived = this.tier.value;
           if (this.reference && !this.identified) {
             const ref =
-              /** @type {TeriockItem & {system: AttunableDataMixin}} */ await foundry.utils.fromUuid(
+              /** @type {TeriockItem & {system: AttunableDataMixin}} */ await fromUuid(
                 this.reference,
               );
             tierDerived = ref.system.tier.value;

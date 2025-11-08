@@ -6,6 +6,7 @@
  * @private
  */
 export function _migrateData(data) {
+  // Form migration
   if (foundry.utils.getProperty(data, "propertyType")) {
     foundry.utils.setProperty(
       data,
@@ -13,4 +14,11 @@ export function _migrateData(data) {
       foundry.utils.getProperty(data, "propertyType"),
     );
   }
+
+  // Impact migration
+  if (foundry.utils.hasProperty(data, "applies")) {
+    data.impacts = foundry.utils.getProperty(data, "applies");
+    foundry.utils.deleteProperty(data, "applies");
+  }
+  return data;
 }

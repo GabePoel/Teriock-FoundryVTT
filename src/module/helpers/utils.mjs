@@ -258,40 +258,33 @@ export async function refreshDocuments(docs, options = { skipSubs: true }) {
  * @returns {TeriockUser|null}
  */
 export function selectUser(actor) {
-  const users = /** @type {WorldCollection<TeriockUser>} */ game.users;
   /** @type {TeriockUser|null} */
   let selectedUser = null;
   // See if any user has the actor as a character
-  users.forEach(
-    /** @param {TeriockUser} user */ (user) => {
-      if (user.character?.uuid === actor.uuid && user.active) {
-        selectedUser = user;
-      }
-    },
-  );
+  game.users.forEach((user) => {
+    if (user.character?.uuid === actor.uuid && user.active) {
+      selectedUser = user;
+    }
+  });
   // See if any players have control over the actor
   if (!selectedUser) {
-    users.forEach(
-      /** @param {TeriockUser} user */ (user) => {
-        if (
-          !user.isActiveGM &&
-          actor.canUserModify(user, "update") &&
-          user.active
-        ) {
-          selectedUser = user;
-        }
-      },
-    );
+    game.users.forEach((user) => {
+      if (
+        !user.isActiveGM &&
+        actor.canUserModify(user, "update") &&
+        user.active
+      ) {
+        selectedUser = user;
+      }
+    });
   }
   // See if anyone has control over the actor
   if (!selectedUser) {
-    users.forEach(
-      /** @param {TeriockUser} user */ (user) => {
-        if (actor.canUserModify(user, "update") && user.active) {
-          selectedUser = user;
-        }
-      },
-    );
+    game.users.forEach((user) => {
+      if (actor.canUserModify(user, "update") && user.active) {
+        selectedUser = user;
+      }
+    });
   }
   if (!selectedUser) {
     selectedUser = game.users.activeGM;
@@ -741,8 +734,7 @@ export function ringImage(path) {
 export async function folderContents(folder, options = {}) {
   const { types, uuids = true } = options;
   if (typeof folder === "string") {
-    folder =
-      /** @type {TeriockFolder|null} */ await foundry.utils.fromUuid(folder);
+    folder = /** @type {TeriockFolder|null} */ await fromUuid(folder);
   }
   console.log(folder);
   let out = [];
@@ -755,7 +747,7 @@ export async function folderContents(folder, options = {}) {
     if (uuids) {
       out = out.map((d) => d.uuid);
     } else if (folder.inCompendium) {
-      out = Promise.all(out.map((d) => foundry.utils.fromUuid(d.uuid)));
+      out = Promise.all(out.map((d) => fromUuid(d.uuid)));
     }
   }
   return out;

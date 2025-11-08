@@ -5,7 +5,7 @@
  * @returns {boolean}
  */
 export function typeValidator(uuid, types = []) {
-  const item = foundry.utils.fromUuidSync(uuid);
+  const item = fromUuidSync(uuid);
   if (item) {
     return types.includes(item.type);
   }

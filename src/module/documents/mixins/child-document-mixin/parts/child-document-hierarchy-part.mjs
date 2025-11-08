@@ -167,7 +167,7 @@ export default (Base) => {
        */
       get rootSubIds() {
         if (this.metadata.hierarchy && this.system.hierarchy.subIds.size > 0) {
-          const root = /** @type {TeriockParent} */ foundry.utils.fromUuidSync(
+          const root = /** @type {TeriockParent} */ fromUuidSync(
             this.system.hierarchy.rootUuid,
           );
           return this.system.hierarchy.subIds.filter((id) =>
@@ -185,7 +185,7 @@ export default (Base) => {
         /** @type {TeriockChild[]} */
         const subChildren = [];
         for (const id of this.rootSubIds) {
-          const root = /** @type {TeriockParent} */ foundry.utils.fromUuidSync(
+          const root = /** @type {TeriockParent} */ fromUuidSync(
             this.system.hierarchy.rootUuid,
           );
           subChildren.push(root[this.metadata.collection].get(id));

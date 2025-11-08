@@ -294,7 +294,7 @@ export async function selectEquipmentTypeDialog() {
     openable: true,
   });
   if (chosen) {
-    chosen = await foundry.utils.fromUuid(chosen.uuid);
+    chosen = await fromUuid(chosen.uuid);
     return toCamelCase(chosen.system.equipmentType);
   } else {
     return null;
@@ -326,7 +326,7 @@ export async function selectBodyPartDialog() {
     openable: true,
   });
   if (chosen) {
-    chosen = await foundry.utils.fromUuid(chosen.uuid);
+    chosen = await fromUuid(chosen.uuid);
     return toCamelCase(chosen.name);
   } else {
     return null;

@@ -21,7 +21,7 @@ async function processRank(archetype, className, classObj, rank, classFolder) {
   let rankItem = classPack.index.find((e) => e.name === name);
 
   if (rankItem) {
-    rankItem = await foundry.utils.fromUuid(rankItem.uuid);
+    rankItem = await fromUuid(rankItem.uuid);
   }
 
   // Create new item

@@ -482,7 +482,7 @@ export default (Base) => {
           context.macros = await Promise.all(
             Array.from(
               this.document.system.macros.map(async (uuid) => {
-                let macro = await foundry.utils.fromUuid(uuid);
+                let macro = await fromUuid(uuid);
                 if (!macro) {
                   macro = {
                     name: "Broken Macro",

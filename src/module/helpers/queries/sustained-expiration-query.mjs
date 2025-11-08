@@ -8,9 +8,7 @@ export default async function sustainedExpirationQuery(
   queryData,
   { _timeout },
 ) {
-  const sustainedConsequence = await foundry.utils.fromUuid(
-    queryData.sustainedUuid,
-  );
+  const sustainedConsequence = await fromUuid(queryData.sustainedUuid);
   if (sustainedConsequence) {
     await sustainedConsequence.system.expire();
   }

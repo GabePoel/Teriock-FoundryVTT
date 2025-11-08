@@ -107,7 +107,7 @@ export default (Base) => {
           });
           const uuids = this.transformation.uuids;
           let species = /** @type {TeriockSpecies[]} */ await Promise.all(
-            uuids.map((uuid) => foundry.utils.fromUuid(uuid)),
+            uuids.map((uuid) => fromUuid(uuid)),
           );
           species = species.filter((s) => s);
           if (species) {

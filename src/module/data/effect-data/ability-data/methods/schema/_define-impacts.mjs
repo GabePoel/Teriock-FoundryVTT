@@ -28,7 +28,7 @@ const { fields } = foundry.data;
  * // Create roll fields
  * const rollsField = consequenceRollsField();
  */
-export function consequenceRollsField() {
+export function impactRollsField() {
   return new RecordField(
     new FormulaField({
       nullable: true,
@@ -54,7 +54,7 @@ export function consequenceRollsField() {
  * // Create changes field
  * const changesField = consequenceChangesField();
  */
-export function consequenceChangesField() {
+export function impactChangesField() {
   return new ListField(fieldBuilders.changeField(), {
     label: "Changes",
     hint: "Changes made to the target actor as part of the ability's ongoing effect.",
@@ -66,7 +66,7 @@ export function consequenceChangesField() {
  *
  * @returns {SchemaField}
  */
-function abilityExpirationField() {
+function impactExpirationField() {
   return new fields.SchemaField({
     combat: new fields.SchemaField({
       who: new fields.SchemaField({
@@ -87,15 +87,15 @@ function abilityExpirationField() {
  * - **Drain**: Drain formulas effects
  * - **Changes**: Effect changes to target properties
  *
- * @returns {SchemaField} Field for configuring applies data
+ * @returns {SchemaField} Field for configuring impacts data
  *
  * @example
- * // Create applies field
- * const appliesField = appliesField();
+ * // Create impacts field
+ * const impactsField = impactsField();
  */
-function impactField() {
+function abilityImpactField() {
   return new fields.SchemaField({
-    changes: consequenceChangesField(),
+    changes: impactChangesField(),
     checks: new fields.SetField(
       new fields.StringField({
         choices: TERIOCK.index.tradecrafts,
@@ -133,8 +133,8 @@ function impactField() {
       },
     ),
     expiration: new fields.SchemaField({
-      normal: abilityExpirationField(),
-      crit: abilityExpirationField(),
+      normal: impactExpirationField(),
+      crit: impactExpirationField(),
       changeOnCrit: new fields.BooleanField({
         initial: false,
         label: "Special Crit Expiration",
@@ -185,7 +185,10 @@ function impactField() {
       nullable: false,
       required: false,
     }),
-    rolls: consequenceRollsField(),
+    range: FormulaField({
+      deterministic: true,
+    }),
+    rolls: impactRollsField(),
     startStatuses: new fields.SetField(
       new fields.StringField({
         choices: TERIOCK.index.conditions,
@@ -235,12 +238,12 @@ function impactField() {
  * // Add consequence fields to a schema.
  * const schema = _defineConsequences(schema);
  */
-export function _defineConsequences(schema) {
-  schema.applies = new fields.SchemaField({
-    base: impactField(),
-    proficient: impactField(),
-    fluent: impactField(),
-    heightened: impactField(),
+export function _defineImpacts(schema) {
+  schema.impacts = new fields.SchemaField({
+    base: abilityImpactField(),
+    proficient: abilityImpactField(),
+    fluent: abilityImpactField(),
+    heightened: abilityImpactField(),
     macros: new fields.TypedObjectField(
       new fields.StringField({
         choices: pseudoHooks,

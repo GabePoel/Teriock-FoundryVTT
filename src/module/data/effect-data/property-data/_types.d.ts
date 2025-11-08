@@ -6,8 +6,8 @@ declare module "./property-data.mjs" {
   export default interface TeriockPropertyModel
     extends TeriockBaseEffectModel,
       HierarchyDataMixinInterface {
-    /** <schema> Applies */
-    applies: {
+    /** <schema> Impacts */
+    impacts: {
       /** <schema> Changes made to the parent {@link TeriockEquipment} and {@link TeriockActor}). */
       changes: Teriock.Foundry.EffectChangeData[];
       /**

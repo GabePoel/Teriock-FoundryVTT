@@ -22,7 +22,7 @@ async function processEquipment(equipmentName) {
       { pack: "teriock.equipment" },
     );
   } else {
-    equipmentItem = await foundry.utils.fromUuid(equipmentItem.uuid);
+    equipmentItem = await fromUuid(equipmentItem.uuid);
   }
   await equipmentItem.system.wikiPull({ notify: false });
   await equipmentItem.update({ "system.description": "" });

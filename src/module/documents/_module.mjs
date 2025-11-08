@@ -1,3 +1,4 @@
+export * as collections from "./collections/_module.mjs";
 export * as mixins from "./mixins/_module.mjs";
 export { default as TeriockActor } from "./actor.mjs";
 export { default as TeriockChatMessage } from "./chat-message.mjs";

@@ -5,9 +5,7 @@
  * @returns {Promise<void>}
  */
 export default async function addToSustainingQuery(queryData, { _timeout }) {
-  const sustainingAbility = await foundry.utils.fromUuid(
-    queryData.sustainingUuid,
-  );
+  const sustainingAbility = await fromUuid(queryData.sustainingUuid);
   if (sustainingAbility) {
     const sustainedUuids = sustainingAbility.system.sustaining;
     for (const uuid of queryData.sustainedUuids) {
