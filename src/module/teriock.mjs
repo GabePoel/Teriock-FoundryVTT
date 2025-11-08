@@ -186,6 +186,7 @@ foundry.helpers.Hooks.once("init", function () {
   CONFIG.ux.TooltipManager = helpers.interaction.TeriockTooltipManager;
   CONFIG.ux.TextEditor = applications.ux.TeriockTextEditor;
   CONFIG.ux.DragDrop = applications.ux.TeriockDragDrop;
+  CONFIG.ux.ContextMenu = applications.ux.TeriockContextMenu;
 
   // HUD
   CONFIG.Token.hudClass = applications.hud.TeriockTokenHUD;

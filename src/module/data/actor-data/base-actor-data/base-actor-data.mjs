@@ -143,7 +143,6 @@ export default class TeriockBaseActorModel extends ActorConditionTogglingPart(
           attribute: "mp",
         },
         displayBars: 20,
-        disposition: -2,
         ring: {
           enabled: true,
         },

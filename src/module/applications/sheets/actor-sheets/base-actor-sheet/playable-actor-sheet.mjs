@@ -6,7 +6,10 @@ import MechanicalActorSheetPart from "./parts/mechanical-actor-sheet-part.mjs";
 import RollingActorSheetPart from "./parts/rolling-actor-sheet-part.mjs";
 import TakingActorSheetPart from "./parts/taking-actor-sheet-part.mjs";
 import TradecraftsActorSheetPart from "./parts/tradecrafts-actor-sheet-part.mjs";
-import { piercingContextMenu } from "./tools/character-context-menus.mjs";
+import {
+  piercingContextMenu,
+  scalingContextMenu,
+} from "./tools/character-context-menus.mjs";
 
 //noinspection JSUnresolvedReference,JSClosureCompilerSyntax
 /**
@@ -197,6 +200,12 @@ export default class TeriockPlayableActorSheet extends TradecraftsActorSheetPart
       ".character-piercing-box",
       piercingContextMenu(this.actor),
       "click",
+    );
+    this._connectContextMenu(
+      ".character-basics",
+      scalingContextMenu(this.actor),
+      "contextmenu",
+      "down",
     );
   }
 }

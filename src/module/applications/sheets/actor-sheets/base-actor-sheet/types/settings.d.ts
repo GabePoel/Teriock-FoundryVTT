@@ -6,6 +6,11 @@ export type BaseActorSheetSettings = {
   abilitySortAscending: boolean;
   /** Key used to determine how abilities are sorted */
   abilitySortOption: string;
+  /** Path used for avatar image */
+  avatarImagePath: string;
+  avatar: {
+    imagePath: string;
+  };
   /** Whether the rules text for a given condition is expanded or collapsed */
   conditionExpansions: Record<
     Teriock.Parameters.Condition.ConditionKey,

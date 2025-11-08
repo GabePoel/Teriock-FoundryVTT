@@ -67,6 +67,7 @@ export default (Base) =>
           hint: "Select the default equipment you attack with.",
           label: "Select Primary Attacker",
           openable: true,
+          textKey: "system.summarizedAttack",
         },
       );
       if (attacker) {
@@ -88,6 +89,7 @@ export default (Base) =>
           hint: "Select the default equipment you block with.",
           label: "Select Primary Blocker",
           openable: true,
+          textKey: "system.summarizedBlock",
         },
       );
       if (attacker) {

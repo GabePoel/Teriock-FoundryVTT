@@ -15,7 +15,7 @@ const { fields } = foundry.data;
  * @param {typeof ChildTypeModel} Base
  */
 export default (Base) => {
-  //noinspection JSClosureCompilerSyntax
+  //noinspection JSClosureCompilerSyntax,JSUnusedGlobalSymbols
   return (
     /**
      * @implements {ArmamentDataMixinInterface}
@@ -73,6 +73,22 @@ export default (Base) => {
           }),
           virtualProperties: new fields.SetField(new fields.StringField()),
         });
+      }
+
+      /**
+       * Summary of attack stats.
+       * @returns {string}
+       */
+      get summarizedAttack() {
+        return `${this.damage.base.value || 0} damage`;
+      }
+
+      /**
+       * Summary of block stats.
+       * @returns {string}
+       */
+      get summarizedBlock() {
+        return `${this.bv.value} BV`;
       }
 
       /** @inheritDoc */

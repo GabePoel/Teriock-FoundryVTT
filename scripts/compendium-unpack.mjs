@@ -101,6 +101,9 @@ function cleanEntry(doc) {
     }
     doc._stats.lastModifiedBy = BUILDER_NAME;
   }
+  if (doc.prototypeToken) {
+    delete doc.prototypeToken.disposition;
+  }
   if (doc.system) {
     delete doc.system.font;
     delete doc.system.updateCounter;

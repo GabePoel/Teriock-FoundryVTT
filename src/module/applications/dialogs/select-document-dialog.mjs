@@ -16,6 +16,7 @@ export async function selectDocumentsDialog(documents, options = {}) {
       multi: true,
       nameKey: "name",
       openable: false,
+      textKey: null,
       title: "Select Documents",
       tooltip: true,
       tooltipAsync: false,
@@ -45,15 +46,20 @@ export async function selectDocumentsDialog(documents, options = {}) {
     const id = foundry.utils.getProperty(doc, options.idKey);
     idToDoc.set(id, doc);
     context.documents[id] = {
-      name: foundry.utils.getProperty(doc, options.nameKey),
       img: foundry.utils.getProperty(doc, options.imgKey),
+      name: foundry.utils.getProperty(doc, options.nameKey),
       rescale: doc.rescale || false,
+      text: "",
+      tooltip: options.tooltipAsync ? TERIOCK.display.panel.loading : undefined,
       uuid:
         options.tooltipAsync || options.openable
           ? foundry.utils.getProperty(doc, options.tooltipUUID)
           : undefined,
-      tooltip: options.tooltipAsync ? TERIOCK.display.panel.loading : undefined,
     };
+    if (options.textKey) {
+      context.documents[id].text =
+        foundry.utils.getProperty(doc, options.textKey) || "";
+    }
     if (options.tooltipKey && options.tooltip && !options.tooltipAsync) {
       context.documents[id].tooltip = foundry.utils.getProperty(
         doc,

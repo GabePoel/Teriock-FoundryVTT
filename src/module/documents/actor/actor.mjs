@@ -477,11 +477,10 @@ export default class TeriockActor extends ParentDocumentMixin(
     super.prepareData();
     this.prepareSpecialData();
     this.prepareVirtualEffects();
-    foundry.helpers.Hooks.callAll(
-      `teriock.actorPostUpdate`,
-      this,
-      selectUser(this).id,
-    );
+    const user = selectUser(this);
+    if (user?.id) {
+      foundry.helpers.Hooks.callAll(`teriock.actorPostUpdate`, this, user.id);
+    }
   }
 
   /** @inheritDoc */

@@ -37,6 +37,7 @@ export function defaultSheetSettings() {
     },
     abilitySortAscending: true,
     abilitySortOption: "name",
+    avatarImagePath: "img",
     conditionExpansions:
       /** @type {Record<Teriock.Parameters.Condition.ConditionKey, boolean>} */ {},
     equipmentFilters: {

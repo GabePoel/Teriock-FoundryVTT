@@ -5,6 +5,7 @@ import {
   rankSort,
 } from "../../../../helpers/utils.mjs";
 import { CommonSheetMixin } from "../../mixins/_module.mjs";
+import AvatarImageActorSeetPart from "./parts/avatar-image-actor-seet-part.mjs";
 import DocumentCreationActorSheetPart from "./parts/document-creation-actor-sheet-part.mjs";
 import DocumentTogglingActorSheetPart from "./parts/document-toggling-actor-sheet-part.mjs";
 import HidingCommonSheetPart from "./parts/hiding-common-sheet-part.mjs";
@@ -25,10 +26,12 @@ const { ActorSheetV2 } = foundry.applications.sheets;
  * @property {TeriockActor} actor
  * @property {TeriockActor} document
  */
-export default class TeriockBaseActorSheet extends HidingCommonSheetPart(
-  SearchingActorSheetPart(
-    DocumentCreationActorSheetPart(
-      DocumentTogglingActorSheetPart(CommonSheetMixin(ActorSheetV2)),
+export default class TeriockBaseActorSheet extends AvatarImageActorSeetPart(
+  HidingCommonSheetPart(
+    SearchingActorSheetPart(
+      DocumentCreationActorSheetPart(
+        DocumentTogglingActorSheetPart(CommonSheetMixin(ActorSheetV2)),
+      ),
     ),
   ),
 ) {

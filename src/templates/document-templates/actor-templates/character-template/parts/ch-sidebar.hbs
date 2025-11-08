@@ -2,16 +2,26 @@
   <div class="character-sidebar-container">
     <div class="character-intro-box">
       <div class="character-avatar timage" data-src="{{img}}">
+        <div class="character-avatar-shadow">
+          <div class="take-harm-button thover" data-tooltip="{{avatarTooltip}}" data-action="switchImage">
+            <i class="fa-fw {{avatarIcon}} fa-light"></i>
+          </div>
+        </div>
         <img
           class="character-avatar-img"
-          src="{{img}}"
-          data-edit="img"
+          src="{{path document avatarImagePath}}"
+          data-edit="{{avatarImagePath}}"
           data-action="editImage"
           data-openable="true"
           data-shareable="true"
-          title="{{name}}"
           alt="{{name}}"
         >
+        <div class="character-avatar-background">
+          {{#if (eq avatarImagePath "prototypeToken.texture.src")}}
+            <div class="character-avatar-token-circle inner"></div>
+            <div class="character-avatar-token-circle outer"></div>
+          {{/if}}
+        </div>
       </div>
       <div class="character-name">
         {{formInput
@@ -29,7 +39,8 @@
           }}
           <div class="character-level-label character-shortbox-label">LVL</div>
         </div>
-        <div class="character-shortbox character-rank-box">
+        <div class="character-shortbox character-rank-box"
+             data-tooltip="Scales off LVL">
           {{numberInput
             system.scaling.rank
             class="character-fluency-input character-shortbox-value"
@@ -37,7 +48,9 @@
           }}
           <div class="character-class-label character-shortbox-label">RANK</div>
         </div>
-        <div class="character-shortbox character-proficiency-box">
+        <div class="character-shortbox character-proficiency-box"
+             data-tooltip="{{#if system.scaling.brScale}}Scales
+             off BR ({{system.scaling.br}}){{else}}Scales off LVL{{/if}}">
           {{numberInput
             system.scaling.p
             class="character-fluency-input character-shortbox-value"
@@ -45,7 +58,9 @@
           }}
           <div class="character-level-label character-shortbox-label">PRO</div>
         </div>
-        <div class="character-shortbox character-fluency-box">
+        <div class="character-shortbox character-fluency-box"
+             data-tooltip="{{#if system.scaling.brScale}}Scales
+             off BR ({{system.scaling.br}}){{else}}Scales off LVL{{/if}}">
           {{numberInput
             system.scaling.f
             class="character-fluency-input character-shortbox-value"

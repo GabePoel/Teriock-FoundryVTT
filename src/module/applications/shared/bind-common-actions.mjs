@@ -1,14 +1,13 @@
 import { actionHandlers } from "../../helpers/interaction/_module.mjs";
+import { TeriockContextMenu } from "../ux/_module.mjs";
 import { imageContextMenuOptions } from "./_module.mjs";
-
-const { ContextMenu } = foundry.applications.ux;
 
 /**
  * Bind common actions to some element.
  * @param {HTMLElement} rootElement
  */
 export default function bindCommonActions(rootElement) {
-  new ContextMenu(rootElement, "img", imageContextMenuOptions, {
+  new TeriockContextMenu(rootElement, "img", imageContextMenuOptions, {
     eventName: "contextmenu",
     jQuery: false,
     fixed: true,

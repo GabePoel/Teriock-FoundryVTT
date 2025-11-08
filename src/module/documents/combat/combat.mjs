@@ -127,7 +127,13 @@ export default class TeriockCombat extends BlankMixin(Combat) {
       }
     }
     const activeGM = game.users.activeGM;
-    const actors = [...Object.values(game.actors.tokens), ...this.actors];
+    const actors = [
+      ...Object.values(game.actors.tokens),
+      ...this.actors,
+      ...game.scenes.active.tokens.contents
+        .map((t) => t.actor)
+        .filter((a) => a),
+    ];
     if (activeGM) {
       await activeGM.query("teriock.resetAttackPenalties", {
         actorUuids: Array.from(new Set(actors.map((a) => a.uuid))),
@@ -151,13 +157,13 @@ export default class TeriockCombat extends BlankMixin(Combat) {
       await this._tryAllEffectExpirations(actor, newActor, "action", "start");
       await this._tryAllEffectExpirations(actor, newActor, "turn", "start");
     }
-    if (activeGM) {
-      await activeGM.query("teriock.update", {
-        uuid: newActor.uuid,
-        data: { "system.combat.hasReaction": true },
-      });
-    }
     if (newActor) {
+      if (activeGM) {
+        await activeGM.query("teriock.update", {
+          uuid: newActor.uuid,
+          data: { "system.combat.hasReaction": true },
+        });
+      }
       const newUser = selectUser(newActor);
       if (newUser) {
         await newUser.query("teriock.callPseudoHook", {

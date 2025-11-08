@@ -858,6 +858,13 @@ img.rescale {
   font-size: large;
   height: 28px;
 }
+.teriock .doc-select .doc-select-row .doc-text-container {
+  color: var(--color-text-subtle);
+  text-transform: uppercase;
+  font-size: smaller;
+  margin-left: auto;
+  margin-right: 14px;
+}
 @font-face {
   font-family: "XMasterpieceSwashes";
   src: url("../src/assets/fonts/xmasterpieceswashes.ttf");
@@ -2386,7 +2393,9 @@ img.rescale {
   align-items: center;
   display: flex;
   flex-direction: column;
+  --shadow-icon-width: 72px;
   justify-content: center;
+  position: relative;
 }
 .teriock .character-intro-box .character-avatar {
   border: 1px solid color-mix(in srgb, var(--color-dark-2), transparent 75%);
@@ -2395,16 +2404,64 @@ img.rescale {
   height: 220px;
   outline: 1px solid var(--color-border);
   overflow: hidden;
+  position: relative;
   width: 220px;
 }
 .teriock .character-intro-box .character-avatar img {
   object-fit: cover;
   object-position: 50% 0;
-  background: radial-gradient(circle, var(--color-cool-3), var(--color-dark-1));
   border: none;
   height: inherit;
   max-width: 100%;
   width: inherit;
+}
+.teriock .character-intro-box .character-avatar .character-avatar-background {
+  background: radial-gradient(circle, var(--color-cool-3), var(--color-dark-1));
+  align-items: center;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: -1;
+}
+.teriock .character-intro-box .character-avatar .character-avatar-background .character-avatar-token-circle {
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+  margin-top: 3px;
+  position: absolute;
+}
+.teriock .character-intro-box .character-avatar .character-avatar-background .character-avatar-token-circle.inner {
+  height: calc(66.7% + 5px);
+  width: calc(66.7% + 5px);
+}
+.teriock .character-intro-box .character-avatar .character-avatar-background .character-avatar-token-circle.outer {
+  height: calc(66.7% + 12px);
+  width: calc(66.7% + 12px);
+}
+.teriock .character-intro-box .character-avatar .character-avatar-shadow {
+  border-top-right-radius: 6px;
+  display: flex;
+  height: var(--shadow-icon-width);
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transition: opacity 150ms ease-in-out;
+  width: var(--shadow-icon-width);
+}
+.teriock .character-intro-box .character-avatar .character-avatar-shadow::before {
+  background: radial-gradient(circle at calc(100% - 1.25em) 1em, rgba(0, 0, 0, 0.75), transparent calc(var(--shadow-icon-width) - 1.25em));
+  border-top-right-radius: 6px;
+  content: "";
+  inset: 0;
+  position: absolute;
+}
+.teriock .character-intro-box .character-avatar:hover .character-avatar-shadow {
+  opacity: 1;
 }
 .teriock .character-intro-box .character-name {
   margin-top: 1px;

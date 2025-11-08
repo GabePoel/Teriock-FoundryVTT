@@ -36,6 +36,8 @@ export default async function resetAttackPenaltiesQuery(
   );
   const actors = actorUuids.map((uuid) => fromUuidSync(uuid));
   await Promise.all(
-    actors.map(async (a) => a.update({ "system.combat.attackPenalty": 0 })),
+    actors.map(
+      async (a) => await a.update({ "system.combat.attackPenalty": 0 }),
+    ),
   );
 }

@@ -1,9 +1,0 @@
-- [ ] Move pseudo-hooks into `_preUpdate()` if possible.
-- [ ] Simplify rollable effect/takes proficiency, fluency, and heightening scaling/merging.
-- [ ] Basic abilities causing compendium updates
-- [ ] Change key construction fields
-  - [ ] What the change applies to
-  - [ ] Change checking conditions
-- [x] Non-combatant token attack penalty resetting
-- [ ] Query timeouts
-- [ ] Turn ability roll config into a data model
