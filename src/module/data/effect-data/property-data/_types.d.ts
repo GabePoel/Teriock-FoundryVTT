@@ -6,16 +6,6 @@ declare module "./property-data.mjs" {
   export default interface TeriockPropertyModel
     extends TeriockBaseEffectModel,
       HierarchyDataMixinInterface {
-    /** <schema> Impacts */
-    impacts: {
-      /** <schema> Changes made to the parent {@link TeriockEquipment} and {@link TeriockActor}). */
-      changes: Teriock.Foundry.EffectChangeData[];
-      /**
-       * <schema> {@link TeriockMacro}s hooked to the parent {@link TeriockEquipment} or {@link TeriockActor} if
-       * {@link modifiesActor} is set to `true`.
-       */
-      macros: Teriock.Parameters.Shared.MacroHookRecord;
-    };
     /** <schema> Applies even if the parent {@link TeriockEquipment} is dampened */
     applyIfDampened: boolean;
     /** <schema> Applies even if the parent {@link TeriockEquipment} is shattered */
@@ -26,6 +16,16 @@ declare module "./property-data.mjs" {
     extraDamage: string;
     /** <schema> Property form */
     form: Teriock.Parameters.Shared.Form;
+    /** <schema> Impacts */
+    impacts: {
+      /** <schema> Changes made to the parent {@link TeriockEquipment} and {@link TeriockActor}). */
+      changes: Teriock.Foundry.EffectChangeData[];
+      /**
+       * <schema> {@link TeriockMacro}s hooked to the parent {@link TeriockEquipment} or {@link TeriockActor} if
+       * {@link modifiesActor} is set to `true`.
+       */
+      macros: Teriock.Parameters.Shared.MacroHookRecord;
+    };
     /** <schema> Improvement description */
     improvement: string;
     /** <schema> Limitation description */

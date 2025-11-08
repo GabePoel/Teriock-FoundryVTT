@@ -185,7 +185,7 @@ function abilityImpactField() {
       nullable: false,
       required: false,
     }),
-    range: FormulaField({
+    range: new FormulaField({
       deterministic: true,
     }),
     rolls: impactRollsField(),

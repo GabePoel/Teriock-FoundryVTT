@@ -1,4 +1,4 @@
-import TeriockChatMessage from "../../../../../documents/chat-message.mjs";
+import TeriockChatMessage from "../../../../../documents/chat-message/chat-message.mjs";
 import { elderSorceryMask } from "../../../../../helpers/html.mjs";
 
 /**

@@ -7,7 +7,7 @@ import { actorToken } from "../../../../../helpers/utils.mjs";
  * @param {AbilityRollConfig} rollConfig
  */
 export async function _setTargets(rollConfig) {
-  const user = /** @type {TeriockUser} */ game.user;
+  const user = game.user;
   rollConfig.useData.targets = user.targets;
   if (
     rollConfig.abilityData.targets.size === 1 &&

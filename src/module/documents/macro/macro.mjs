@@ -1,5 +1,6 @@
-import { getItem } from "../helpers/fetch.mjs";
-import { dedent } from "../helpers/utils.mjs";
+import { getItem } from "../../helpers/fetch.mjs";
+import { dedent } from "../../helpers/utils.mjs";
+import { BlankMixin } from "../mixins/_module.mjs";
 
 const { Macro } = foundry.documents;
 
@@ -8,10 +9,8 @@ const { Macro } = foundry.documents;
  * The Teriock {@link Macro} implementation.
  * @extends {Macro}
  * @mixes ClientDocumentMixin
- * @property {"Macro"} documentName
- * @property {boolean} isOwner
  */
-export default class TeriockMacro extends Macro {
+export default class TeriockMacro extends BlankMixin(Macro) {
   /**
    * Get a document from an actor.
    * @param {TeriockActor} actor - The actor to get the document from.
@@ -47,8 +46,8 @@ export default class TeriockMacro extends Macro {
    * @returns {Promise<TeriockMacro>}
    */
   static async getUseMacro(doc) {
-    const activeGm = /** @type {TeriockUser} */ game.users.activeGM;
-    await activeGm.query("teriock.createHotbarFolder", {
+    const activeGM = game.users.activeGM;
+    await activeGM.query("teriock.createHotbarFolder", {
       name: game.user.name,
       id: game.user.id,
     });

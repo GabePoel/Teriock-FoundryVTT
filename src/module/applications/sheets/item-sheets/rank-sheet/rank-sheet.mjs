@@ -7,8 +7,6 @@ import {
   rankContextMenu,
 } from "./connections/_context-menus.mjs";
 
-const { DialogV2 } = foundry.applications.api;
-
 /**
  * Sheet for a {@link TeriockRank}.
  *
@@ -73,36 +71,6 @@ export default class TeriockRankSheet extends WikiButtonSheetMixin(
       },
     ].forEach(({ selector, menu }) => {
       this._connectContextMenu(selector, menu(this.item), "click");
-    });
-    [
-      {
-        selector: ".hp-die-box",
-        confirmText:
-          "Are you sure you want to re-roll how much HP you gain from this rank?",
-        dieKey: "hpDie",
-      },
-      {
-        selector: ".mp-die-box",
-        confirmText:
-          "Are you sure you want to re-roll how much mana you gain from this rank?",
-        dieKey: "mpDie",
-      },
-    ].forEach(({ selector, confirmText, dieKey }) => {
-      const el = this.element.querySelector(selector);
-      if (el) {
-        el.addEventListener("contextmenu", async () => {
-          const proceed = await DialogV2.confirm({
-            content: confirmText,
-            rejectClose: false,
-            modal: true,
-          });
-          if (proceed) {
-            /** @type {StatDieModel} */
-            const die = this.item.system[dieKey];
-            await die.rollStatDieValue();
-          }
-        });
-      }
     });
   }
 

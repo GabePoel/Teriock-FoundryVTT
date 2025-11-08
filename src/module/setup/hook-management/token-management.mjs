@@ -30,7 +30,7 @@ export default function registerTokenManagementHooks() {
     async (token, statusId, active) => {
       const activeGM = game.users.activeGM;
       let tokenEditor;
-      const user = /** @type {TeriockUser} */ game.user;
+      const user = game.user;
       if (activeGM) {
         tokenEditor = Boolean(user.isActiveGM);
       } else {

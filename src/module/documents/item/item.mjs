@@ -1,13 +1,14 @@
-import { createAbility } from "../helpers/create-effects.mjs";
-import { fetchCategoryMembers } from "../helpers/wiki/_module.mjs";
+import { TeriockDialog } from "../../applications/api/_module.mjs";
+import { createAbility } from "../../helpers/create-effects.mjs";
+import { fetchCategoryMembers } from "../../helpers/wiki/_module.mjs";
 import {
+  BlankMixin,
   ChangeableDocumentMixin,
   ChildDocumentMixin,
   CommonDocumentMixin,
   ParentDocumentMixin,
-} from "./mixins/_module.mjs";
+} from "../mixins/_module.mjs";
 
-const { api } = foundry.applications;
 const { Item } = foundry.documents;
 
 // noinspection JSClosureCompilerSyntax
@@ -19,18 +20,12 @@ const { Item } = foundry.documents;
  * @mixes ClientDocumentMixin
  * @mixes CommonDocumentMixin
  * @mixes ParentDocumentMixin
- * @property {"Item"} documentName
  * @property {EmbeddedCollection<Teriock.ID<TeriockEffect>, TeriockEffect>} effects
- * @property {Readonly<TeriockEffect[]>} transferredEffects
- * @property {Teriock.Documents.ItemType} type
- * @property {Teriock.UUID<TeriockItem>} uuid
- * @property {TeriockBaseItemModel} system
- * @property {TeriockBaseItemSheet} sheet
- * @property {boolean} isOwner
- * @property {boolean} limited
  */
 export default class TeriockItem extends ChangeableDocumentMixin(
-  ParentDocumentMixin(ChildDocumentMixin(CommonDocumentMixin(Item))),
+  ParentDocumentMixin(
+    ChildDocumentMixin(CommonDocumentMixin(BlankMixin(Item))),
+  ),
 ) {
   /** @inheritDoc */
   changesField = "itemChanges";
@@ -81,7 +76,7 @@ export default class TeriockItem extends ChangeableDocumentMixin(
    * @returns {TeriockEffect[]}
    */
   get validEffects() {
-    return this.transferredEffects;
+    return this.effects.contents;
   }
 
   /**
@@ -93,7 +88,7 @@ export default class TeriockItem extends ChangeableDocumentMixin(
   async _bulkWikiPullHelper(pullType) {
     const pullTypeName = pullType === "pages" ? "Ability" : "Category";
     let toPull;
-    await api.DialogV2.prompt({
+    await TeriockDialog.prompt({
       content: `<input type="text" name="pullInput" placeholder="${pullTypeName} Name" />`,
       ok: {
         callback: (_event, button) => {
@@ -161,7 +156,7 @@ export default class TeriockItem extends ChangeableDocumentMixin(
   async bulkWikiPull() {
     if (["ability", "equipment", "rank", "power"].includes(this.type)) {
       //noinspection JSUnusedGlobalSymbols
-      const dialog = new api.DialogV2({
+      const dialog = new TeriockDialog({
         buttons: [
           {
             action: "pages",

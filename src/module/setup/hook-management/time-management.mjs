@@ -12,7 +12,7 @@ export default function registerTimeManagementHooks() {
   foundry.helpers.Hooks.on(
     "updateWorldTime",
     async (_worldTime, dt, _options, userId) => {
-      const user = /** @type {TeriockUser} */ game.user;
+      const user = game.user;
       if (user.id === userId && user.isActiveGM) {
         for (const actor of getActors()) {
           const num = actor.durationExpirationEffects.length;
@@ -40,7 +40,7 @@ export default function registerTimeManagementHooks() {
   );
 
   foundry.helpers.Hooks.on("teriock.dawn", async () => {
-    const user = /** @type {TeriockUser} */ game.user;
+    const user = game.user;
     if (user.isActiveGM) {
       for (const actor of getActors()) {
         for (const effect of actor.dawnExpirationEffects) {

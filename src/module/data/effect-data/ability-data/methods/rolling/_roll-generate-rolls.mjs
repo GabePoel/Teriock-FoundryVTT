@@ -1,9 +1,4 @@
 import { TeriockRoll } from "../../../../../dice/_module.mjs";
-import {
-  tokenActor,
-  tokenImage,
-  tokenName,
-} from "../../../../../helpers/utils.mjs";
 
 /**
  * Pay the costs necessary for using an ability.
@@ -18,13 +13,13 @@ export async function _generateRolls(rollConfig) {
     for (const target of rollConfig.useData.targets) {
       const rollContext = {
         rescale: target.document?.ring.enabled,
-        targetImg: tokenImage(target),
-        targetName: tokenName(target),
-        targetUuid: tokenActor(target).uuid,
-        threshold: tokenActor(target).system.defense.cc,
+        targetImg: target.document.imageLive,
+        targetName: target.document.name,
+        targetUuid: target.actor?.uuid,
+        threshold: target.actor?.system.defense.cc,
       };
       if (rollConfig.useData.rollData["ub"]) {
-        rollContext.threshold = tokenActor(target)?.system.defense.ac;
+        rollContext.threshold = target.actor?.system.defense.ac;
         rollContext.diceClass = "ub";
         rollContext.diceTooltip = "Unblockable";
       }
@@ -62,9 +57,9 @@ export async function _generateRolls(rollConfig) {
       const rollContext = {
         noDice: true,
         rescale: target.document?.ring.enabled,
-        targetImg: tokenImage(target),
-        targetName: tokenName(target),
-        targetUuid: tokenActor(target)?.uuid,
+        targetImg: target.document.imageLive,
+        targetName: target.document.name,
+        targetUuid: target.actor?.uuid,
       };
       rolls.push(new TeriockRoll("10", {}, { context: rollContext }));
     }
@@ -83,9 +78,9 @@ export async function _generateRolls(rollConfig) {
       const rollContext = {
         noDice: true,
         rescale: target.document?.ring.enabled,
-        targetImg: tokenImage(target),
-        targetName: tokenName(target),
-        targetUuid: tokenActor(target)?.uuid,
+        targetImg: target.document.imageLive,
+        targetName: target.document.name,
+        targetUuid: target.actor?.uuid,
       };
       rolls.push(new TeriockRoll("10", {}, { context: rollContext }));
     }

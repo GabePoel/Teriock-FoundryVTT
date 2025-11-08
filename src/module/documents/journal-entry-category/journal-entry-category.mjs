@@ -1,3 +1,5 @@
+import { BlankMixin } from "../mixins/_module.mjs";
+
 const { JournalEntryCategory } = foundry.documents;
 
 // noinspection JSClosureCompilerSyntax
@@ -5,7 +7,7 @@ const { JournalEntryCategory } = foundry.documents;
  * The Teriock {@link JournalEntryCategory} implementation.
  * @extends {JournalEntryCategory}
  * @mixes ClientDocumentMixin
- * @property {"JournalEntryCategory"} documentName
- * @property {boolean} isOwner
  */
-export default class TeriockJournalEntryCategory extends JournalEntryCategory {}
+export default class TeriockJournalEntryCategory extends BlankMixin(
+  JournalEntryCategory,
+) {}

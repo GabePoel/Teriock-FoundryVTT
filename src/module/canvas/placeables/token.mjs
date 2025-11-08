@@ -1,12 +1,15 @@
+import { BlankMixin } from "../../documents/mixins/_module.mjs";
 import { getIcon } from "../../helpers/path.mjs";
 
 const { Token } = foundry.canvas.placeables;
 
 /**
+ * @extends {Token}
  * @property {TeriockTokenDocument} document
+ * @property {TeriockActor|null} actor
  * @property {Scene} scene
  */
-export default class TeriockToken extends Token {
+export default class TeriockToken extends BlankMixin(Token) {
   /** @inheritDoc */
   async _drawEffects() {
     await super._drawEffects();

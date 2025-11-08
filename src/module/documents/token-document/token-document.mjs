@@ -1,4 +1,5 @@
-import { convertUnits, ringImage } from "../helpers/utils.mjs";
+import { convertUnits, ringImage } from "../../helpers/utils.mjs";
+import { BlankMixin } from "../mixins/_module.mjs";
 
 const { TokenDocument } = foundry.documents;
 
@@ -8,13 +9,8 @@ const { TokenDocument } = foundry.documents;
  * @extends {TokenDocument}
  * @mixes ChangeableDocumentMixin
  * @mixes ClientDocumentMixin
- * @property {"TokenDocument"} documentName
- * @property {Readonly<TeriockCombat>} combat
- * @property {TeriockActor} actor
- * @property {TeriockToken} object
- * @property {boolean} isOwner
  */
-export default class TeriockTokenDocument extends TokenDocument {
+export default class TeriockTokenDocument extends BlankMixin(TokenDocument) {
   /**
    * Center of this token.
    * @returns {Point}

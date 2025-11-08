@@ -16,9 +16,9 @@ export class ApplyEffectHandler extends ActionHandler {
    */
   async _addToSustaining(createdConsequences) {
     if (this.dataset.sustaining !== "null") {
-      const activeGm = /** @type {TeriockUser} */ game.users.activeGM;
-      if (activeGm) {
-        await activeGm.query("teriock.addToSustaining", {
+      const activeGM = game.users.activeGM;
+      if (activeGM) {
+        await activeGM.query("teriock.addToSustaining", {
           sustainingUuid: pureUuid(this.dataset.sustaining),
           sustainedUuids: createdConsequences.map((c) => c.uuid),
         });
@@ -75,7 +75,7 @@ export class ApplyEffectHandler extends ActionHandler {
       for (const effect of foundEffects) {
         await effect.delete();
       }
-      const foundIds = foundEffects.map((effect) => effect.id);
+      const foundIds = Array.from(foundEffects.map((effect) => effect.id));
       if (foundIds.length > 0) {
         // await actor.deleteEmbeddedDocuments("ActiveEffect", foundIds);
         foundry.ui.notifications.info(`Removed ${effectObj.name}`);

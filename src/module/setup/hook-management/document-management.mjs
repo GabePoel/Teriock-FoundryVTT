@@ -45,36 +45,6 @@ export default function registerDocumentManagementHooks() {
   );
 
   foundry.helpers.Hooks.on(
-    "createItem",
-    /**
-     * @param {TeriockItem} item
-     * @param {object} _options
-     * @param {Teriock.ID<TeriockUser>} userId
-     * @returns {Promise<void>}
-     */
-    async (item, _options, userId) => {
-      if (isOwnerAndCurrentUser(item, userId)) {
-        item.actor?.buildEffectTypes();
-      }
-    },
-  );
-
-  foundry.helpers.Hooks.on(
-    "deleteItem",
-    /**
-     * @param {TeriockItem} item
-     * @param {object} _options
-     * @param {Teriock.ID<TeriockUser>} userId
-     * @returns {Promise<void>}
-     */
-    async (item, _options, userId) => {
-      if (isOwnerAndCurrentUser(item, userId)) {
-        item.actor?.buildEffectTypes();
-      }
-    },
-  );
-
-  foundry.helpers.Hooks.on(
     "createActiveEffect",
     /**
      * @param {TeriockEffect} effect
@@ -87,7 +57,6 @@ export default function registerDocumentManagementHooks() {
         if (effect.sup && effect.sup.sheet.rendered) {
           await effect.sup.sheet.render();
         }
-        effect.actor?.buildEffectTypes();
       }
     },
   );
@@ -108,7 +77,6 @@ export default function registerDocumentManagementHooks() {
         if (effect.sup && effect.sup.sheet.rendered) {
           await effect.sup.sheet.render();
         }
-        effect.actor?.buildEffectTypes();
       }
     },
   );

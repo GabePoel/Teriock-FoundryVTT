@@ -1,7 +1,4 @@
-import type {
-  TeriockEffect,
-  TeriockFolder,
-} from "../../../../documents/_module.mjs";
+import type { TeriockFolder } from "../../../../documents/_module.mjs";
 import type { TeriockSpecies } from "../../../../documents/_documents.mjs";
 
 /** <schema> {@link TeriockEffect} hierarchy */
@@ -12,9 +9,9 @@ export type HierarchyField = {
    */
   rootUuid: Teriock.UUID<TeriockParent>;
   /** <schema> The IDs for each {@link TeriockEffect} that could be descended from this. */
-  subIds: Set<Teriock.ID<TeriockEffect>>;
+  subIds: Set<Teriock.ID<TeriockChild>>;
   /** <schema> The ID of the {@link TeriockEffect} that this is descended from, if there is one. */
-  supId: Teriock.ID<TeriockEffect> | null;
+  supId: Teriock.ID<TeriockChild> | null;
 };
 
 /** <schema> Transformation configuration */

@@ -8,6 +8,8 @@ const { fields } = foundry.data;
 /**
  * Base item data model for all Teriock items.
  * Provides common functionality for disabled state and update tracking.
+ * @extends ChildTypeModel
+ * @mixes HierarchyDataMixin
  */
 export default class TeriockBaseItemModel extends HierarchyDataMixin(
   ChildTypeModel,
@@ -43,10 +45,10 @@ export default class TeriockBaseItemModel extends HierarchyDataMixin(
 
   /**
    * Get the actor associated with this item data.
-   * @returns {TeriockActor}
+   * @returns {TeriockActor|null}
    */
   get actor() {
-    return /** @type {TeriockActor} */ this.parent.actor;
+    return this.parent.actor;
   }
 
   /** @inheritDoc */

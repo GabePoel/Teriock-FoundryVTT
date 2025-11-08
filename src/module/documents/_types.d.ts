@@ -1,8 +1,43 @@
 import "./mixins/_types";
 import type { documentTypes } from "../constants/system/document-types.mjs";
+import type * as models from "../data/_module.mjs";
 
 declare global {
   namespace Teriock.Documents {
+    type NullDocument = {
+      readonly documentName: "";
+    };
+
+    interface Interface<
+      Embed extends {
+        documentName?: string;
+      },
+    > {
+      isOwner: boolean;
+      limited: boolean;
+      name: string;
+
+      createEmbeddedDocuments(
+        embeddedName: Embed["documentName"],
+        data: object[],
+        operation: object,
+      ): Promise<Embed[]>;
+
+      deleteEmbeddedDocuments(
+        embeddedName: Embed["documentName"],
+        ids: Teriock.ID<Embed>[],
+        operation: object,
+      ): Promise<Embed[]>;
+
+      prepareEmbeddedDocuments(): void;
+
+      updateEmbeddedDocuments(
+        embeddedName: Embed["documentName"],
+        updates: object[],
+        operation: object,
+      ): Promise<Embed[]>;
+    }
+
     export type IndexCategoryKey = keyof typeof TERIOCK.index;
 
     export type IndexCompendiumKey =
@@ -60,12 +95,17 @@ declare global {
 
     export type EffectModelMetadata = Teriock.Documents.ChildModelMetadata & {
       type: Teriock.Documents.EffectType;
-      modifies: "Actor" | "Item";
+      modifies: TeriockParent;
     };
+
+    export type ActorModel = (typeof models.actor)[keyof typeof models.actor];
+    export type ItemModel = (typeof models.item)[keyof typeof models.item];
+    export type EffectModel =
+      (typeof models.effect)[keyof typeof models.effect];
   }
 }
 
-declare module "./chat-message.mjs" {
+declare module "./chat-message/chat-message.mjs" {
   export default interface TeriockChatMessage {
     get implementation(): typeof TeriockChatMessage;
   }

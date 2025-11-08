@@ -1,15 +1,15 @@
-import { systemPath } from "../helpers/path.mjs";
+import { systemPath } from "../../helpers/path.mjs";
+import { BlankMixin } from "../mixins/_module.mjs";
 
 const { ChatMessage } = foundry.documents;
 
 // noinspection JSClosureCompilerSyntax
 /**
  * The Teriock {@link ChatMessage} implementation.
- * @mixes ClientDocumentMixin
  * @extends {ChatMessage}
- * @property {"ChatMessage"} documentName
+ * @mixes ClientDocumentMixin
  */
-export default class TeriockChatMessage extends ChatMessage {
+export default class TeriockChatMessage extends BlankMixin(ChatMessage) {
   /**
    * Whether the avatar image should be rescaled.
    * @returns {boolean}

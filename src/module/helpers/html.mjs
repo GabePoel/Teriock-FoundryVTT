@@ -469,7 +469,7 @@ export async function addTrackersToRollConfig(rollConfig, tracker, uuids) {
             mode: 2,
             priority: 10,
           });
-          const doc = /** @type {TeriockTokenDocument} */ fromUuidSync(uuid);
+          const doc = fromUuidSync(uuid);
           association.cards.push({
             name: doc.name,
             img: doc.texture?.src,

@@ -1,4 +1,4 @@
-import TeriockChatMessage from "../../../../../documents/chat-message.mjs";
+import TeriockChatMessage from "../../../../../documents/chat-message/chat-message.mjs";
 import { pureUuid } from "../../../../../helpers/utils.mjs";
 
 /**
@@ -16,9 +16,7 @@ export async function _executeMacros(rollConfig, pseudoHook) {
 
   for (const [safeUuid, macroPseudoHook] of macroEntries) {
     if (macroPseudoHook === pseudoHook) {
-      const macro = /** @type {TeriockMacro} */ await fromUuid(
-        pureUuid(safeUuid),
-      );
+      const macro = await fromUuid(pureUuid(safeUuid));
       if (macro) {
         try {
           await macro.execute({

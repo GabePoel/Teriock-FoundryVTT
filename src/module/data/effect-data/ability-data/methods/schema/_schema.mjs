@@ -1,6 +1,6 @@
-import { _defineImpacts } from "./_define-impacts.mjs";
 import { _defineConsumable } from "./_define-consumable.mjs";
 import { _defineGeneral } from "./_define-general.mjs";
+import { _defineImpacts } from "./_define-impacts.mjs";
 
 /**
  * Defines the complete schema for Teriock ability data.

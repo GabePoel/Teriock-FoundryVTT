@@ -107,7 +107,7 @@ export default class CommonTypeModel extends TypeDataModel {
   }
 
   /**
-   * Get a copy of the index reference that this document is based off of, if it exists.
+   * Get a copy of the index reference that this document is based off of if it exists.
    * @returns {Promise<TeriockCommon|null>}
    */
   async getIndexReference() {
@@ -129,14 +129,12 @@ export default class CommonTypeModel extends TypeDataModel {
   async gmNotesOpen() {
     let notesPage;
     if (this.gmNotes) {
-      notesPage = /** @type {TeriockJournalEntryPage} */ await fromUuid(
-        this.gmNotes,
-      );
+      notesPage = await fromUuid(this.gmNotes);
     }
     if (notesPage) {
       const notesJournal = notesPage.parent;
-      await notesJournal.sheet.render(true);
-      notesJournal.sheet.goToPage(notesPage.id);
+      await notesJournal?.sheet.render(true);
+      notesJournal?.sheet.goToPage(notesPage.id);
     } else {
       const journalEntryName = game.settings.get(
         "teriock",

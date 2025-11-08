@@ -1,14 +1,14 @@
+import { BlankMixin } from "../mixins/_module.mjs";
+
 const { User } = foundry.documents;
 
 // noinspection JSClosureCompilerSyntax
 /**
  * The Teriock {@link User} implementation.
- * @extends {JournalEntry}
+ * @extends User
  * @mixes ClientDocumentMixin
- * @property {"User"} documentName
- * @property {Set<TeriockToken>} targets
  */
-export default class TeriockUser extends User {
+export default class TeriockUser extends BlankMixin(User) {
   //noinspection JSUnusedGlobalSymbols
   /**
    * Is this user currently active?
@@ -20,10 +20,5 @@ export default class TeriockUser extends User {
       (this.lastActivityTime === 0 ||
         (Date.now() - this.lastActivityTime) / 1000 < 120)
     );
-  }
-
-  /** @returns {TeriockActor} */
-  get character() {
-    return super.character;
   }
 }

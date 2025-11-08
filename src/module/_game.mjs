@@ -1,3 +1,5 @@
-const { Game } = foundry;
-
-export default class TeriockGame extends Game {}
+/**
+ * @extends {Game}
+ * @property {object} teriock
+ */
+export default class TeriockGame {}

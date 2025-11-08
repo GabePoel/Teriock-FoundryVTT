@@ -1,6 +1,6 @@
 import { TeriockDialog } from "../../../../applications/api/_module.mjs";
 
-const { api, ux } = foundry.applications;
+const { ux } = foundry.applications;
 
 /**
  * Equipment data model mixin that handles identifying and reading magic.
@@ -21,7 +21,7 @@ export default (Base) => {
         await this.parent.hookCall("equipmentIdentify", data);
         if (!data.cancel) {
           if (this.reference && !this.identified) {
-            const activeGm = game.users.activeGM;
+            const activeGM = game.users.activeGM;
             const ref = await fromUuid(this.reference);
             const referenceName = ref ? ref.name : "Unknown";
             const referenceUuid = ref ? ref.uuid : "Unknown";
@@ -31,7 +31,7 @@ export default (Base) => {
             const content = await ux.TextEditor.implementation.enrichHTML(
               `<p>Should ${game.user.name} identify @UUID[${referenceUuid}]{${referenceName}}?</p>`,
             );
-            const doIdentify = await TeriockDialog.query(activeGm, "confirm", {
+            const doIdentify = await TeriockDialog.query(activeGM, "confirm", {
               content: content,
               modal: false,
               window: {
@@ -84,7 +84,7 @@ export default (Base) => {
         await this.parent.hookCall("equipmentReadMagic", data);
         if (!data.cancel) {
           if (this.reference && !this.identified) {
-            const activeGm = game.users.activeGM;
+            const activeGM = game.users.activeGM;
             const ref = await fromUuid(this.reference);
             const referenceName = ref ? ref.name : "Unknown";
             const referenceUuid = ref ? ref.uuid : "Unknown";
@@ -94,7 +94,7 @@ export default (Base) => {
             const content = await ux.TextEditor.enrichHTML(
               `<p>Should ${game.user.name} read magic on @UUID[${referenceUuid}]{${referenceName}}?</p>`,
             );
-            const doReadMagic = await api.DialogV2.query(activeGm, "confirm", {
+            const doReadMagic = await TeriockDialog.query(activeGM, "confirm", {
               content: content,
               modal: false,
               window: {

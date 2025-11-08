@@ -5,7 +5,7 @@ export default class InteractionHandler {
   constructor() {
     //noinspection JSUnresolvedReference
     const tokenLayer = /** @type {TokenLayer} */ game.canvas.tokens;
-    const user = /** @type {TeriockUser} */ game.user;
+    const user = game.user;
     this.selectedTokens =
       /** @type {TeriockTokenDocument[]} */ tokenLayer.controlled.filter(
         (t) => t,

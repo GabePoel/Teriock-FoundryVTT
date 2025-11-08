@@ -1,3 +1,5 @@
+// noinspection JSUnusedGlobalSymbols
+
 import "./helpers/commands/_types";
 import "./data/_types";
 import "./applications/_types";
@@ -56,8 +58,11 @@ declare global {
 
   // General document types
   // ======================
+
   export type TeriockParent = TeriockActor | TeriockItem;
+  export type TeriockParentName = "Actor" | "Item";
   export type TeriockChild = TeriockItem | TeriockEffect;
+  export type TeriockChildName = "Item" | "ActiveEffect";
   export type TeriockCommon = TeriockActor | TeriockItem | TeriockEffect;
   export type TeriockArmament = TeriockEquipment | TeriockBody;
   export type TeriockDocument =
@@ -170,6 +175,7 @@ declare global {
   // -----
 
   const TeriockCharacterSheet: sheets.actor.CharacterSheet;
+  const TeriockCreatureSheet: sheets.actor.CreatureSheet;
 
   // Item
   // ----

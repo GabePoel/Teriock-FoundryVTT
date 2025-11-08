@@ -1,22 +1,23 @@
-import { selectUser } from "../helpers/utils.mjs";
+import { selectUser } from "../../helpers/utils.mjs";
+import { BlankMixin } from "../mixins/_module.mjs";
 
 const { Combat } = foundry.documents;
 
 // noinspection JSClosureCompilerSyntax
 /**
  * The Teriock {@link Combat} implementation.
- * @mixes ClientDocumentMixin
  * @extends {Combat}
- * @property {"Combat"} documentName
+ * @mixes ClientDocumentMixin
+ * @property {Collection<Teriock.UUID<TeriockCombatant>, TeriockCombatant>} combatants
  */
-export default class TeriockCombat extends Combat {
+export default class TeriockCombat extends BlankMixin(Combat) {
   /**
    * The actors in this combat.
    * @returns {TeriockActor[]}
    */
   get actors() {
     const actors = this.combatants.map((c) => c.actor);
-    return actors.filter((a) => a);
+    return Array.from(actors.filter((a) => a));
   }
 
   /**
@@ -53,8 +54,8 @@ export default class TeriockCombat extends Combat {
             effectUuid: effect.uuid,
           });
         } catch {
-          const activeGm = /** @type {TeriockUser} */ game.users.activeGM;
-          await activeGm.query("teriock.inCombatExpiration", {
+          const activeGM = game.users.activeGM;
+          await activeGM.query("teriock.inCombatExpiration", {
             effectUuid: effect.uuid,
           });
         }
@@ -88,8 +89,8 @@ export default class TeriockCombat extends Combat {
       );
     }
     if (updates.length > 0) {
-      const activeGm = /** @type {TeriockUser} */ game.users.activeGM;
-      await activeGm.query("teriock.updateEmbeddedDocuments", {
+      const activeGM = game.users.activeGM;
+      await activeGM.query("teriock.updateEmbeddedDocuments", {
         uuid: effectActor.uuid,
         embeddedName: "ActiveEffect",
         updates: updates,
@@ -114,7 +115,6 @@ export default class TeriockCombat extends Combat {
     // End of turn
     // This happens after turn change so that the turn change doesn't get stuck
     // waiting for effect expirations.
-    /** @type {TeriockActor} */
     const previousActor = this.combatant?.actor;
     if (previousActor) {
       for (const actor of this.actors) {
@@ -126,13 +126,10 @@ export default class TeriockCombat extends Combat {
         );
       }
     }
-    const activeGm = /** @type {TeriockUser} */ game.users.activeGM;
-    const actors = /** @type {TeriockActor[]} */ [
-      ...Object.values(game.actors.tokens),
-      ...this.actors,
-    ];
-    if (activeGm) {
-      await activeGm.query("teriock.resetAttackPenalties", {
+    const activeGM = game.users.activeGM;
+    const actors = [...Object.values(game.actors.tokens), ...this.actors];
+    if (activeGM) {
+      await activeGM.query("teriock.resetAttackPenalties", {
         actorUuids: Array.from(new Set(actors.map((a) => a.uuid))),
       });
     }
@@ -149,14 +146,13 @@ export default class TeriockCombat extends Combat {
     }
 
     // Start of turn
-    /** @type {TeriockActor} */
     const newActor = this.combatant?.actor;
     for (const actor of this.actors) {
       await this._tryAllEffectExpirations(actor, newActor, "action", "start");
       await this._tryAllEffectExpirations(actor, newActor, "turn", "start");
     }
-    if (activeGm) {
-      await activeGm.query("teriock.update", {
+    if (activeGM) {
+      await activeGM.query("teriock.update", {
         uuid: newActor.uuid,
         data: { "system.combat.hasReaction": true },
       });

@@ -142,7 +142,7 @@ export default (Base) => {
       }
 
       /**
-       * Opens the notes page and makes one if one doesn't already exist.
+       * Opens the GM notes page or makes one if one doesn't already exist.
        * @returns {Promise<void>}
        * @private
        */

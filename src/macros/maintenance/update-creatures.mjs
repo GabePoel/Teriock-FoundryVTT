@@ -21,9 +21,7 @@ for (const folderEntry of speciesFolders.values()) {
 }
 
 for (const folderEntry of speciesFolders.values()) {
-  const speciesFolder = /** @type {TeriockFolder} */ await fromUuid(
-    folderEntry.uuid,
-  );
+  const speciesFolder = await fromUuid(folderEntry.uuid);
   if (speciesFolder.folder) {
     const parentFolderName = speciesFolder.folder.name;
     const parentFolderId = creaturesFolders.getName(parentFolderName).id;

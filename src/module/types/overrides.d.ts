@@ -7,7 +7,6 @@ import {
   TeriockActors,
   TeriockUsers,
 } from "../documents/collections/_module.mjs";
-import { TeriockTextEditor } from "../applications/ux/_module.mjs";
 import type TeriockGame from "../_game.mjs";
 
 declare global {
@@ -19,10 +18,6 @@ declare global {
     actors: TeriockActors;
     users: TeriockUsers;
     user: TeriockUser;
-  };
-
-  const Actor: typeof TeriockActor & {
-    implementation: typeof TeriockActor;
   };
 
   const ChatMessage: typeof TeriockChatMessage;

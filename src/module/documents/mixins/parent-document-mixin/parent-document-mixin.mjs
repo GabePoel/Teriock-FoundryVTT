@@ -1,35 +1,3 @@
-import { documentTypes } from "../../../constants/system/document-types.mjs";
-
-import { toCamelCase } from "../../../helpers/string.mjs";
-
-/**
- * Builds effect types and keys from a document's valid effects.
- *
- * @param {ParentDocumentMixin} document - The document to build effect types for.
- * @returns {Teriock.Parent.BuiltEffectTypes} Each {@link TeriockEffect} this contains, keyed by type, in multiple
- *   formats.
- */
-function _buildEffectTypes(document) {
-  /** @type ParentEffectTypes */
-  const effectTypes = {};
-  /** @type ParentEffectKeys */
-  const effectKeys = {};
-  const effects = document.validEffects;
-  for (const key of Object.keys(documentTypes.effects)) {
-    effectKeys[key] = new Set();
-    effectTypes[key] = [];
-  }
-  for (const effect of effects) {
-    const type = effect.type;
-    effectTypes[type].push(effect);
-    effectKeys[type].add(toCamelCase(effect.name));
-  }
-  return {
-    effectTypes,
-    effectKeys,
-  };
-}
-
 /**
  * Mixin for common functions used across document classes that embed children.
  *
@@ -76,6 +44,35 @@ export default (Base) => {
       }
 
       /**
+       * Effect keys by type.
+       * @returns {Teriock.Parent.ParentEffectKeys}
+       */
+      get effectKeys() {
+        const out = {};
+        const effectTypes = this.effectTypes;
+        for (const key of Object.keys(TERIOCK.system.documentTypes.effects)) {
+          out[key] = new Set(effectTypes[key] || []);
+        }
+        return out;
+      }
+
+      /**
+       * Effects by type.
+       * @returns {Teriock.Parent.ParentEffectTypes}
+       */
+      get effectTypes() {
+        const effectTypes = {};
+        for (const effect of this.validEffects) {
+          if (Object.keys(effectTypes).includes(effect.type)) {
+            effectTypes[effect.type].push(effect);
+          } else {
+            effectTypes[effect.type] = [effect];
+          }
+        }
+        return effectTypes;
+      }
+
+      /**
        * @inheritDoc
        * @returns {TeriockFluency[]}
        */
@@ -109,7 +106,7 @@ export default (Base) => {
 
       /**
        * Remove documents that aren't valid child types from creation data.
-       * @param {"Item"|"ActiveEffect"} embeddedName
+       * @param {TeriockChildName} embeddedName
        * @param {object[]} data
        */
       _filterDocumentCreationData(embeddedName, data) {
@@ -141,11 +138,6 @@ export default (Base) => {
       }
 
       /** @inheritDoc */
-      buildEffectTypes() {
-        return _buildEffectTypes(this);
-      }
-
-      /** @inheritDoc */
       getAbilities() {
         return this.abilities.filter((a) => !a.sup);
       }
@@ -168,14 +160,6 @@ export default (Base) => {
       /** @inheritDoc */
       getRanks() {
         return [];
-      }
-
-      /** @inheritDoc */
-      prepareDerivedData() {
-        super.prepareDerivedData();
-        const { effectTypes, effectKeys } = this.buildEffectTypes();
-        this.effectTypes = effectTypes;
-        this.effectKeys = effectKeys;
       }
 
       /** @inheritDoc */

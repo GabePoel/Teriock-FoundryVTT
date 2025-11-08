@@ -1,4 +1,4 @@
-import TeriockEffect from "../documents/effect.mjs";
+import TeriockEffect from "../documents/effect/effect.mjs";
 import { getIcon } from "./path.mjs";
 
 /**

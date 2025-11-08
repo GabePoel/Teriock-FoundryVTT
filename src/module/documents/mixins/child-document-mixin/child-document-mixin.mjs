@@ -1,6 +1,6 @@
 import { TeriockTextEditor } from "../../../applications/ux/_module.mjs";
 import { toCamelCase } from "../../../helpers/string.mjs";
-import TeriockChatMessage from "../../chat-message.mjs";
+import TeriockChatMessage from "../../chat-message/chat-message.mjs";
 import { applyCertainChanges } from "../shared/_module.mjs";
 import ChildDocumentHierarchyPart from "./parts/child-document-hierarchy-part.mjs";
 
@@ -10,6 +10,7 @@ import ChildDocumentHierarchyPart from "./parts/child-document-hierarchy-part.mj
  * @mixin
  */
 export default (Base) => {
+  //noinspection JSClosureCompilerSyntax
   return (
     /**
      * @implements {ChildDocumentMixinInterface}

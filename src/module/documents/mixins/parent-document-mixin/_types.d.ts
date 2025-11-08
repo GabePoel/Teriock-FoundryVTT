@@ -18,12 +18,10 @@ import type { TeriockEffect } from "../../_module.mjs";
 declare global {
   namespace Teriock.Parent {
     /** The names of each {@link TeriockItem} this contains, in camel case, keyed by type. */
-    export type ParentItemKeys = {
-      equipment?: Set<string>;
-      power?: Set<string>;
-      rank?: Set<string>;
-      species?: Set<string>;
-    };
+    export type ParentItemKeys = Record<
+      Teriock.Documents.ItemType,
+      Set<string>
+    >;
 
     /** Each {@link TeriockItem} this contains, keyed by type. */
     export type ParentItemTypes = {
@@ -36,16 +34,10 @@ declare global {
     };
 
     /** The names of each {@link TeriockEffect} this contains, in camel case, keyed by type. */
-    export type ParentEffectKeys = {
-      ability?: Set<string>;
-      attunement?: Set<string>;
-      base?: Set<string>;
-      condition?: Set<string>;
-      consequence?: Set<string>;
-      fluency?: Set<string>;
-      property?: Set<string>;
-      resource?: Set<string>;
-    };
+    export type ParentEffectKeys = Record<
+      Teriock.Documents.EffectType,
+      Set<string>
+    >;
 
     /** Each {@link TeriockEffect} this contains, keyed by type. */
     export type ParentEffectTypes = {
@@ -58,21 +50,10 @@ declare global {
       property?: TeriockProperty[];
       resource?: TeriockResource[];
     };
-
-    /** Each {@link TeriockEffect} this contains, keyed by type, in multiple formats. */
-    export type BuiltEffectTypes = {
-      effectTypes: ParentEffectTypes;
-      effectKeys: ParentEffectKeys;
-    };
   }
 }
 
 export interface ParentDocumentMixinInterface {
-  /** Effect keys organized by type */
-  effectKeys: Teriock.Parent.ParentEffectKeys;
-  /** Effect types organized by type */
-  effectTypes: Teriock.Parent.ParentEffectTypes;
-
   /**
    * Gets all ability effects.
    * @returns Array of ability effects
@@ -84,13 +65,6 @@ export interface ParentDocumentMixinInterface {
    * @returns Array of attunement effects
    */
   get attunements(): TeriockAttunement[];
-
-  /**
-   * Gets the list of all TeriockEffect documents that apply to this document.
-   * This includes those that are not currently active.
-   * @returns Built effect types and keys
-   */
-  buildEffectTypes(): Teriock.Parent.BuiltEffectTypes;
 
   /**
    * Gets all condition effects.
@@ -127,11 +101,6 @@ export interface ParentDocumentMixinInterface {
    * @returns {TeriockRank[]}
    */
   getRanks(): TeriockRank[];
-
-  /**
-   * Prepares derived data including effect types and keys.
-   */
-  prepareDerivedData(): void;
 
   /**
    * Gets all property effects.

@@ -240,7 +240,7 @@ export async function refreshDocuments(docs, options = { skipSubs: true }) {
     if (skipSubs && doc.documentName === "ActiveEffect" && doc.sup) {
       continue;
     }
-    if (doc.system.constructor.metadata.wiki) {
+    if (doc.metadata.wiki) {
       await doc.system.wikiPull({ notify: false });
     }
     pct += 1 / docs.length;
@@ -258,7 +258,6 @@ export async function refreshDocuments(docs, options = { skipSubs: true }) {
  * @returns {TeriockUser|null}
  */
 export function selectUser(actor) {
-  /** @type {TeriockUser|null} */
   let selectedUser = null;
   // See if any user has the actor as a character
   game.users.forEach((user) => {
@@ -293,46 +292,6 @@ export function selectUser(actor) {
 }
 
 /**
- * Get the image for a {@link Token}.
- * @param {Token} token
- * @returns {string}
- */
-export function tokenImage(token) {
-  const tokenDoc = tokenDocument(token);
-  //noinspection JSUnresolvedReference
-  return (
-    tokenDoc?.texture?.src ||
-    tokenDoc?.actor.getActiveTokens()[0]?.texture?.src ||
-    tokenDoc?.actor.prototypeToken?.texture?.src ||
-    tokenDoc?.actor.img ||
-    token?.texture?.src ||
-    token?.actor.token?.texture?.src ||
-    token?.actor.getActiveTokens()[0]?.texture?.src ||
-    token?.actor.prototypeToken?.texture?.src ||
-    token.actor.img
-  );
-}
-
-/**
- * Get the name for a {@link Token}.
- * @param {Token} token
- * @returns {string}
- */
-export function tokenName(token) {
-  const tokenDoc = tokenDocument(token);
-  return (
-    tokenDoc?.name ||
-    tokenDoc?.actor.token?.name ||
-    tokenDoc?.actor.prototypeToken?.name ||
-    tokenDoc?.actor.name ||
-    token?.name ||
-    token?.actor.token?.name ||
-    token?.actor.prototypeToken?.name ||
-    token.actor.name
-  );
-}
-
-/**
  * Modify a change's prefix.
  * @param {EffectChangeData} change
  * @param {string} searchValue
@@ -355,24 +314,6 @@ export function modifyChangePrefix(change, searchValue, replaceValue) {
  */
 export function actorToken(actor) {
   return actor.token?.object || actor.getActiveTokens?.()?.[0] || null;
-}
-
-/**
- * Get the actor for a {@link Token}.
- * @param {Token} token
- * @returns {TeriockActor}
- */
-export function tokenActor(token) {
-  return token.actor;
-}
-
-/**
- * Get the document for a {@link Token}.
- * @param {Token} token
- * @returns {TeriockTokenDocument}
- */
-export function tokenDocument(token) {
-  return /** @type {TeriockTokenDocument} */ token.document;
 }
 
 /**
@@ -661,12 +602,10 @@ export function isOwnerAndCurrentUser(document, userId) {
  * @returns {TeriockActor|null}
  */
 export function getActor() {
-  //noinspection JSUnresolvedReference
-  const speaker = foundry.documents.ChatMessage.implementation.getSpeaker();
+  const speaker = ChatMessage.implementation.getSpeaker();
   const character = game.user.character;
   const token =
     (canvas.ready ? canvas.tokens.get(speaker.token) : null) || null;
-  //noinspection JSUnresolvedReference
   return token?.actor || game.actors.get(speaker.actor) || character || null;
 }
 
@@ -679,10 +618,7 @@ export function getToken(actor) {
   if (actor.token) {
     return actor.token.object;
   }
-  const candidates =
-    /** @type {TeriockTokenDocument[]} */ actor.getDependentTokens();
-  //noinspection JSUnresolvedReference
-  /** @type {TeriockToken[]} */
+  const candidates = actor.getDependentTokens();
   const selected = game.canvas.tokens.controlled;
   const uuids = selected.map((t) => t.document.uuid);
   for (const candidate of candidates) {
@@ -734,13 +670,11 @@ export function ringImage(path) {
 export async function folderContents(folder, options = {}) {
   const { types, uuids = true } = options;
   if (typeof folder === "string") {
-    folder = /** @type {TeriockFolder|null} */ await fromUuid(folder);
+    folder = await fromUuid(folder);
   }
-  console.log(folder);
   let out = [];
   if (folder) {
     out = folder.allContents;
-    console.log(out);
     if (types) {
       out = out.filter((d) => types.includes(d.type));
     }

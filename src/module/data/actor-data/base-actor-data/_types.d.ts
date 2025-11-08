@@ -132,7 +132,9 @@ declare global {
       value: number;
     };
     /** <base> Light */
-    light: object;
+    light: object & {
+      angle?: number;
+    };
     /** <schema> Magic */
     magic: {
       /** <schema> Maximum number of rotators */

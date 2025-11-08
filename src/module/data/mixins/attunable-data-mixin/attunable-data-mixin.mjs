@@ -116,10 +116,7 @@ export default (Base) => {
         if (this.parent.actor) {
           let tierDerived = this.tier.value;
           if (this.reference && !this.identified) {
-            const ref =
-              /** @type {TeriockItem & {system: AttunableDataMixin}} */ await fromUuid(
-                this.reference,
-              );
+            const ref = await fromUuid(this.reference);
             tierDerived = ref.system.tier.value;
           }
           const unp =

@@ -136,6 +136,7 @@ foundry.helpers.Hooks.once("init", function () {
   CONFIG.Actor.documentClass = documents.TeriockActor;
   CONFIG.ChatMessage.documentClass = documents.TeriockChatMessage;
   CONFIG.Combat.documentClass = documents.TeriockCombat;
+  CONFIG.Combatant.documentClass = documents.TeriockCombatant;
   CONFIG.Folder.documentClass = documents.TeriockFolder;
   CONFIG.Item.documentClass = documents.TeriockItem;
   CONFIG.JournalEntry.documentClass = documents.TeriockJournalEntry;

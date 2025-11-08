@@ -1,5 +1,5 @@
 import type TeriockAbilityModel from "../ability-data.mjs";
-import type TeriockActor from "../../../../documents/actor.mjs";
+import type TeriockActor from "../../../../documents/actor/actor.mjs";
 import type { TeriockBaseMessageModel } from "../../../message-data/_module.mjs";
 import type TeriockRoll from "../../../../dice/roll.mjs";
 import type { TeriockToken } from "../../../../canvas/placeables/_module.mjs";

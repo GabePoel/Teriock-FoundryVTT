@@ -1,8 +1,11 @@
-import { copyItem, getItem } from "../helpers/fetch.mjs";
-import { systemPath } from "../helpers/path.mjs";
-import { toCamelCase } from "../helpers/string.mjs";
-import { pureUuid, ringImage, selectUser } from "../helpers/utils.mjs";
-import { CommonDocumentMixin, ParentDocumentMixin } from "./mixins/_module.mjs";
+import { copyItem, getItem } from "../../helpers/fetch.mjs";
+import { systemPath } from "../../helpers/path.mjs";
+import { pureUuid, ringImage, selectUser } from "../../helpers/utils.mjs";
+import {
+  BlankMixin,
+  CommonDocumentMixin,
+  ParentDocumentMixin,
+} from "../mixins/_module.mjs";
 
 const { Actor } = foundry.documents;
 
@@ -10,28 +13,15 @@ const { Actor } = foundry.documents;
 /**
  * The Teriock {@link Actor} implementation.
  * @extends {Actor}
+ * @extends {ClientDocument}
  * @mixes ClientDocumentMixin
  * @mixes CommonDocumentMixin
  * @mixes ParentDocumentMixin
- * @property {"Actor"} documentName
  * @property {Collection<Teriock.UUID<TeriockEffect>, TeriockEffect>} effects
  * @property {Collection<Teriock.UUID<TeriockItem>, TeriockItem>} items
- * @property {ParentItemKeys} itemKeys
- * @property {ParentItemTypes} itemTypes
- * @property {Set<Teriock.Parameters.Condition.ConditionKey>} statuses
- * @property {Teriock.Documents.ActorType} type
- * @property {Teriock.UUID<TeriockActor>} uuid
- * @property {TeriockBaseActorModel} system
- * @property {TeriockBaseActorSheet} sheet
- * @property {TeriockEffect[]} appliedEffects
- * @property {TeriockEffect[]} temporaryEffects
- * @property {boolean} isOwner
- * @property {boolean} limited
- * @property {TeriockTokenDocument} token
- * @property {() => TeriockTokenDocument[]} getDependentTokens
  */
 export default class TeriockActor extends ParentDocumentMixin(
-  CommonDocumentMixin(Actor),
+  CommonDocumentMixin(BlankMixin(Actor)),
 ) {
   /**
    * The default weight for a given size.
@@ -169,6 +159,19 @@ export default class TeriockActor extends ParentDocumentMixin(
    */
   get isDrained() {
     return this.system.mp.value < this.system.mp.max;
+  }
+
+  /**
+   * Item keys by type.
+   * @returns {Teriock.Parent.ParentItemKeys}
+   */
+  get itemKeys() {
+    const out = {};
+    const effectTypes = this.itemTypes;
+    for (const key of Object.keys(TERIOCK.system.documentTypes.items)) {
+      out[key] = new Set(effectTypes[key] || []);
+    }
+    return out;
   }
 
   /**
@@ -349,7 +352,7 @@ export default class TeriockActor extends ParentDocumentMixin(
 
   /**
    * @inheritDoc
-   * @param {"Item"|"ActiveEffect"} embeddedName
+   * @param {TeriockChildName} embeddedName
    * @param {object[]} data
    * @param {DatabaseCreateOperation} [operation={}]
    * @returns {Promise<TeriockChild[]>}
@@ -405,11 +408,6 @@ export default class TeriockActor extends ParentDocumentMixin(
   /**
    * Overridden with special handling to allow for archetype abilities.
    * @inheritDoc
-   * @template T
-   * @param {"Item"|"ActiveEffect"} embeddedName - The name of the embedded Document type
-   * @param {Teriock.ID<T>[]} ids - An array of string ids for each Document to be deleted
-   * @param {DatabaseDeleteOperation} [operation={}] - Parameters of the database deletion workflow
-   * @returns {Promise<T[]>} - An array of deleted Document instances
    */
   async deleteEmbeddedDocuments(embeddedName, ids = [], operation = {}) {
     if (embeddedName === "Item") {
@@ -484,23 +482,6 @@ export default class TeriockActor extends ParentDocumentMixin(
       this,
       selectUser(this).id,
     );
-  }
-
-  /** @inheritDoc */
-  prepareDerivedData() {
-    super.prepareDerivedData();
-    this.itemKeys = {
-      equipment: new Set(
-        this.itemTypes?.equipment.map((e) => toCamelCase(e.name)) || [],
-      ),
-      power: new Set(
-        this.itemTypes?.power.map((e) => toCamelCase(e.name)) || [],
-      ),
-      rank: new Set(this.itemTypes?.rank.map((e) => toCamelCase(e.name)) || []),
-      species: new Set(
-        this.itemTypes?.species.map((e) => toCamelCase(e.name)) || [],
-      ),
-    };
   }
 
   /** @inheritDoc */
@@ -716,10 +697,7 @@ export default class TeriockActor extends ParentDocumentMixin(
    * @returns {Promise<void>}
    */
   async useAbility(abilityName, options = {}) {
-    const abilities = Array.from(await this.allAbilities()).filter(
-      (i) => i.type === "ability",
-    );
-    /** @type TeriockAbility */
+    const abilities = await this.allAbilities();
     const ability = abilities.find((i) => i.name === abilityName);
     if (ability) {
       await ability.use(options);

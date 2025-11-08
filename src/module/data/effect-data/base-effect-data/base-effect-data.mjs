@@ -60,7 +60,7 @@ export default class TeriockBaseEffectModel extends ChildTypeModel {
 
   /**
    * What this modifies.
-   * @returns {"Actor" | "Item"}
+   * @returns {TeriockParent}
    */
   get modifies() {
     return this.constructor.metadata.modifies;

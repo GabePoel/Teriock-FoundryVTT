@@ -6,7 +6,7 @@ import {
 import TeriockVisionMode from "./base-vision-mode.mjs";
 
 /**
- * Everything is in black and white and there's an odd emanating haze.
+ * Everything is in black and white, and there's an odd emanating haze.
  *
  * Relevant wiki pages:
  * - [Ethereal](https://wiki.teriock.com/index.php/Condition:Ethereal)

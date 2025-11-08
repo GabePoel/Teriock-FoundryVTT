@@ -1,7 +1,9 @@
 export default (Base) => {
+  //noinspection JSClosureCompilerSyntax
   return (
     /**
      * @extends ClientDocument
+     * @implements {HierarchyDocumentInterface}
      */
     class ChildDocumentHierarchyPart extends Base {
       /**
@@ -121,7 +123,6 @@ export default (Base) => {
 
       /**
        * Gets all sub-children descendants from this child recursively.
-       * @returns {TeriockChild[]} Array of all descendant children.
        */
       get allSubs() {
         const allSubChildren = [];
@@ -135,7 +136,6 @@ export default (Base) => {
 
       /**
        * Gets all children that this child is a sub-child of.
-       * @returns {TeriockChild[]} Array of super-children, ordered from immediate sup to top level.
        */
       get allSups() {
         const supChildren = [];
@@ -149,7 +149,6 @@ export default (Base) => {
 
       /**
        * Gets all sub-child descendants from this child recursively via its root.
-       * @returns {TeriockChild[]} Array of all descendant children.
        */
       get rootAllSubs() {
         const allSubChildren = [];
@@ -163,13 +162,10 @@ export default (Base) => {
 
       /**
        * Safely gets the IDS of all sub-children that are derived from this child via its root.
-       * @returns {Set<Teriock.ID<TeriockChild>>}
        */
       get rootSubIds() {
         if (this.metadata.hierarchy && this.system.hierarchy.subIds.size > 0) {
-          const root = /** @type {TeriockParent} */ fromUuidSync(
-            this.system.hierarchy.rootUuid,
-          );
+          const root = fromUuidSync(this.system.hierarchy.rootUuid);
           return this.system.hierarchy.subIds.filter((id) =>
             root.effects.has(id),
           );
@@ -179,15 +175,11 @@ export default (Base) => {
 
       /**
        * Gets all sub-children that are derived from this child via it's root.
-       * @returns {TeriockChild[]}
        */
       get rootSubs() {
-        /** @type {TeriockChild[]} */
         const subChildren = [];
         for (const id of this.rootSubIds) {
-          const root = /** @type {TeriockParent} */ fromUuidSync(
-            this.system.hierarchy.rootUuid,
-          );
+          const root = fromUuidSync(this.system.hierarchy.rootUuid);
           subChildren.push(root[this.metadata.collection].get(id));
         }
         return subChildren;
@@ -196,7 +188,6 @@ export default (Base) => {
       /**
        * Gets the document that most directly applies this child. If it's a child, return that.
        * Otherwise, gets what Foundry considers to be the parent.
-       * @returns {TeriockCommon} The source document that applies this child.
        */
       get source() {
         let source = this.sup;
@@ -208,7 +199,6 @@ export default (Base) => {
 
       /**
        * Safely gets the IDS of all sub-children that are derived from this child.
-       * @returns {Set<Teriock.ID<TeriockChild>>}
        */
       get subIds() {
         if (
@@ -226,10 +216,8 @@ export default (Base) => {
 
       /**
        * Gets all sub-children that are derived from this child.
-       * @returns {TeriockChild[]}
        */
       get subs() {
-        /** @type {TeriockChild[]} */
         const subChildren = [];
         for (const id of this.subIds) {
           const root = this.parent;
@@ -240,21 +228,16 @@ export default (Base) => {
 
       /**
        * Gets the child that provides this child if there is one.
-       * @returns {TeriockChild|null}
        */
       get sup() {
         if (this.supId) {
-          return /** @type {TeriockChild} */ this.parent.getEmbeddedDocument(
-            this.documentName,
-            this.supId,
-          );
+          return this.parent.getEmbeddedDocument(this.documentName, this.supId);
         }
         return null;
       }
 
       /**
        * Safely gets the ID of the child that provides this child if there is one.
-       * @returns {Teriock.ID<TeriockChild>}
        */
       get supId() {
         if (
@@ -271,7 +254,6 @@ export default (Base) => {
       /**
        * Add a sub-child to this one.
        * @param {TeriockChild} sub
-       * @returns {Promise<void>}
        */
       async addSub(sub) {
         if (this.metadata.hierarchy && sub.metadata.hierarchy) {
@@ -292,8 +274,6 @@ export default (Base) => {
 
       /**
        * Add multiple sub-children to this one.
-       * @param {TeriockChild[]} subs
-       * @returns {Promise<void>}
        */
       async addSubs(subs) {
         subs = subs.filter((s) => s.metadata.hierarchy);
@@ -319,7 +299,6 @@ export default (Base) => {
 
       /**
        * Deletes all sub-children and clears the sub IDs from this child.
-       * @returns {Promise<void>} Promise that resolves when all subs are deleted.
        */
       async deleteSubs() {
         if (this.subIds.size > 0) {

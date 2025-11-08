@@ -256,9 +256,9 @@ export default class TeriockAbilityModel extends HierarchyDataMixin(
    */
   async expireSustainedConsequences(force = false) {
     if (!this.parent.active || force) {
-      const activeGm = /** @type {TeriockUser} */ game.users.activeGM;
+      const activeGM = game.users.activeGM;
       for (const uuid of this.sustaining) {
-        await activeGm.query("teriock.sustainedExpiration", {
+        await activeGM.query("teriock.sustainedExpiration", {
           sustainedUuid: uuid,
         });
       }
