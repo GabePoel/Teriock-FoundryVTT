@@ -53,6 +53,7 @@ export default class TeriockCharacterModel extends TeriockBaseActorModel {
     this.parent.updateSource({
       prototypeToken: {
         actorLink: true,
+        disposition: 0,
         sight: {
           enabled: true,
         },
